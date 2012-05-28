@@ -6,7 +6,7 @@
 ServerModel = require( 'ServerModel' ).ServerModel;
 
 callbacks = function() {
-  this.ServerModel = new ServerModel();
+	this.ServerModel = new ServerModel();
 };
 
 /**
@@ -38,5 +38,5 @@ callbacks.prototype.saveDocument = function( transaction ) {
 
 };
 if ( typeof module == 'object' ) {
-  module.exports.callbacks = callbacks;
+	module.exports.callbacks = callbacks;
 }

@@ -3,14 +3,17 @@
  * Involves client data and VE's data models.
 **/
 
-ve = require( 'collab.ve' ).ve;
+$ = require( 'jquery' );
+ve = require( './collab.ve.js' ).ve;
 
 /**
  * ServerModel object to bind everything in this module.
  * Should be used as a module export in the top level modules.
 **/
-ServerModel = function() {
-
+ServerModel = function( html ) {
+	var data = ve.dm.HTMLConverter.getLinearModel( $( html )[0] );
+	var doc = new ve.dm.Document( data );
+	this.dmSurface = new ve.dm.Surface( doc );
 };
 
 /**
@@ -29,5 +32,5 @@ ServerModel.prototype.purgeDocument = function() {
 };
 
 if ( typeof module == 'object' ) {
-  module.exports.ServerModel = ServerModel;
+	module.exports.ServerModel = ServerModel;
 }
