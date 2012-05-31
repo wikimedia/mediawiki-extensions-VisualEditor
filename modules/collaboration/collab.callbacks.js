@@ -3,17 +3,26 @@
  * Binds all the callback methods to a `callbacks` object which can be used as a module import
 **/
 
-ServerModel = require( 'ServerModel' ).ServerModel;
+Session = require( './collab.Session' ).Session;
+Document = require( './collab.Document' ).Document;
 
-callbacks = function() {
-	this.ServerModel = new ServerModel();
+callbacks = function( server ) {
+	this.server = server;
 };
 
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-callbacks.prototype.clientConnection = function( user ) {
-
+callbacks.prototype.clientConnection = function( data ) {
+	var userID = data.user;
+	var docTitle = data.title;
+	/**
+	* TODO: look for a session if there exists one for the requested document
+	* if exists, reference the document in a new session object
+	* if not create a new document object and reference it in the session object
+	**/
+	this.session = new Session( docTitle, userID );
+	this.server.push( { 'ssid': this.session.getID(), 'session': this.session } );
 };
 
 /**
@@ -37,6 +46,7 @@ callbacks.prototype.newTransaction = function( trasaction ) {
 callbacks.prototype.saveDocument = function( transaction ) {
 
 };
+
 if ( typeof module == 'object' ) {
 	module.exports.callbacks = callbacks;
 }

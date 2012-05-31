@@ -18,6 +18,10 @@ Session.prototype.generateID = function() {
 
 };
 
+Session.prototype.getID = function() {
+	return this.sessionID;
+};
+
 if( typeof module == 'object' ) { 
 	module.exports.Session = Session;
 }

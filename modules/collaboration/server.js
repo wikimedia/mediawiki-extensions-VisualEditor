@@ -16,10 +16,13 @@ callbacks = require( './collab.callbacks' ).callbacks;
 
 CollaborationServer = function ( port ) {
 	var io_service = io.listen( port );
+	_this = this;
 	io_service.on( 'connection', function( socket ) {
-		socket.set( 'callbacks', new callbacks() );
+		var socket_callbacks = new callbacks( _this );
+		socket.set( 'callbacks', socket_callbacks );
 		this.bindEvents( socket );
 	});
+	this.sessions = [];
 };
 
 /**
