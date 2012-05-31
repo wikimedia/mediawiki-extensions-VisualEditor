@@ -1,13 +1,12 @@
 /**
  * This is the collaboration server for VisualEditor
  * 
- * Responsible for powering the collaborative editing feature
  * Uses Socket.IO to establish connections with clients
  * This module implements all the Socket.IO events and calls the respective callback functions
 **/
 
 io = require( 'socket.io' );
-callbacks = require( 'collab.callbacks' ).callbacks;
+callbacks = require( './collab.callbacks' ).callbacks;
 
 /**
  * CollaborationServer binds all the functionality of the server and
