@@ -3,6 +3,8 @@
  * Binds all the callback methods to a `callbacks` object which can be used as a module import
 **/
 
+http = require( 'http' );
+
 Session = require( './collab.Session' ).Session;
 Document = require( './collab.Document' ).Document;
 
@@ -16,20 +18,41 @@ callbacks = function( server ) {
 callbacks.prototype.clientConnection = function( data ) {
 	var userID = data.user;
 	var docTitle = data.title;
-	/**
-	* TODO: look for a session if there exists one for the requested document
-	* if exists, reference the document in a new session object
-	* if not create a new document object and reference it in the session object
-	**/
+	var sessions = this.server.sessions;
+	var remoteSSID = data.ssid;
+	var session_doc = null;
+	docHTML = '';
+	options = {
+		host: 'http://parsoid.wmflabs.org',
+		path: '/' + docTitle,
+		port: 80
+	};
+	http.get( options, function( res ) {
+		res.on( 'data', function( chunk ) {
+			docHTML = '' + chunk;
+		});
+	});
+
+	for( session in sessions ) {
+		var ssid = sessions[ session ].ssid;
+		if( ssid = remoteSSID ) {
+			session_doc = session[ session ].Document;
+			break;
+		}
+	}
+	if( session_doc == null ) {
+		session_doc = new Document( docHTML );
+	}
 	this.session = new Session( docTitle, userID );
-	this.server.push( { 'ssid': this.session.getID(), 'session': this.session } );
+	this.sessionIndex = sessions.length - 1;
+	sessions.push( { 'ssid': this.session.getID(), 'session': this.session } );
 };
 
 /**
  * Callback method to be invoked when a client closes its session
 **/
-callbacks.prototype.clientDisconnection = function( user ) {
-
+callbacks.prototype.clientDisconnection = function( data ) {
+	this.server.sessions.pop( this.sessionIndex );
 };
 
 /**
