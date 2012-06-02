@@ -3,10 +3,9 @@
  * Binds all the callback methods to a `callbacks` object which can be used as a module import
 **/
 
-http = require( 'http' );
-
 Session = require( './collab.Session' ).Session;
 Document = require( './collab.Document' ).Document;
+parse = require.( './collab.parse.js' ).parse;
 
 callbacks = function( server ) {
 	this.server = server;
@@ -22,16 +21,9 @@ callbacks.prototype.clientConnection = function( data ) {
 	var remoteSSID = data.ssid;
 	var session_doc = null;
 	docHTML = '';
-	options = {
-		host: 'http://parsoid.wmflabs.org',
-		path: '/' + docTitle,
-		port: 80
-	};
-	http.get( options, function( res ) {
-		res.on( 'data', function( chunk ) {
-			docHTML = '' + chunk;
-		});
-	});
+	
+	// Parse the page by its title using the parser
+	docHTML = parse( docTitle );
 
 	for( session in sessions ) {
 		var ssid = sessions[ session ].ssid;
