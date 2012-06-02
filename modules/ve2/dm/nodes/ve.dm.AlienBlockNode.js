@@ -29,9 +29,12 @@ ve.dm.AlienBlock.rules = {
 	'parentNodeTypes': null
 };
 
+// This is a special node, no converter registration is required
+ve.dm.AlienBlock.converters = null;
+
 /* Registration */
 
-ve.dm.factory.register( 'alienBlock', ve.dm.AlienBlock );
+ve.dm.nodeFactory.register( 'alienBlock', ve.dm.AlienBlock );
 
 /* Inheritance */
 

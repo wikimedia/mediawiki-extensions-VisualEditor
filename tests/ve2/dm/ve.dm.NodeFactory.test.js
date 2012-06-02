@@ -15,12 +15,16 @@ ve.dm.NodeFactoryNodeStub.rules = {
 	'parentNodeTypes': null
 };
 
+ve.dm.NodeFactoryNodeStub.converters = null;
+
+ve.dm.NodeFactoryNodeStub.converters = null;
+
 /* Tests */
 
 test( 'getChildNodeTypes', 2, function() {
 	var factory = new ve.dm.NodeFactory();
 	raises( function() {
-			factory.create( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
+			factory.getChildNodeTypes( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
 		},
 		/^Unknown node type: node-factory-node-stub$/,
 		'throws an exception when getting allowed child nodes of a node of an unregistered type'
@@ -36,7 +40,7 @@ test( 'getChildNodeTypes', 2, function() {
 test( 'getParentNodeTypes', 2, function() {
 	var factory = new ve.dm.NodeFactory();
 	raises( function() {
-			factory.create( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
+			factory.getParentNodeTypes( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
 		},
 		/^Unknown node type: node-factory-node-stub$/,
 		'throws an exception when getting allowed parent nodes of a node of an unregistered type'
@@ -52,7 +56,7 @@ test( 'getParentNodeTypes', 2, function() {
 test( 'canNodeHaveChildren', 2, function() {
 	var factory = new ve.dm.NodeFactory();
 	raises( function() {
-			factory.create( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
+			factory.canNodeHaveChildren( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
 		},
 		/^Unknown node type: node-factory-node-stub$/,
 		'throws an exception when checking if a node of an unregistered type can have children'
@@ -68,7 +72,7 @@ test( 'canNodeHaveChildren', 2, function() {
 test( 'canNodeHaveGrandchildren', 2, function() {
 	var factory = new ve.dm.NodeFactory();
 	raises( function() {
-			factory.create( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
+			factory.canNodeHaveGrandchildren( 'node-factory-node-stub', 23, { 'bar': 'baz' } );
 		},
 		/^Unknown node type: node-factory-node-stub$/,
 		'throws an exception when checking if a node of an unregistered type can have grandchildren'
@@ -82,5 +86,5 @@ test( 'canNodeHaveGrandchildren', 2, function() {
 } );
 
 test( 'initialization', 1, function() {
-	ok( ve.dm.factory instanceof ve.dm.NodeFactory, 'factory is initialized at ve.dm.factory' );
+	ok( ve.dm.nodeFactory instanceof ve.dm.NodeFactory, 'factory is initialized at ve.dm.nodeFactory' );
 } );

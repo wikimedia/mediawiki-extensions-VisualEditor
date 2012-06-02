@@ -1,33 +1,4 @@
 /**
- #     #                      #######
- ##    #  ####  #####  ######    #    #   # #####  ######  ####
- # #   # #    # #    # #         #     # #  #    # #      #
- #  #  # #    # #    # #####     #      #   #    # #####   ####
- #   # # #    # #    # #         #      #   #####  #           #
- #    ## #    # #    # #         #      #   #      #      #    #
- #     #  ####  #####  ######    #      #   #      ######  ####
-
-
-   #               ####### #       ####### #     # ####### #     # #######         #     # ####### ######  ####### 
-  ##               #       #       #       ##   ## #       ##    #    #            ##    # #     # #     # #       
- # #               #       #       #       # # # # #       # #   #    #            # #   # #     # #     # #       
-   #      #####    #####   #       #####   #  #  # #####   #  #  #    #            #  #  # #     # #     # #####   
-   #               #       #       #       #     # #       #   # #    #            #   # # #     # #     # #       
-   #               #       #       #       #     # #       #    ##    #            #    ## #     # #     # #       
- #####             ####### ####### ####### #     # ####### #     #    #            #     # ####### ######  ####### 
-                                                                           #######                                 
-
-  #####              ####### ####### #     # #######         #     # ####### ######  ####### 
- #     #                #    #        #   #     #            ##    # #     # #     # #       
-       #                #    #         # #      #            # #   # #     # #     # #       
-  #####     #####       #    #####      #       #            #  #  # #     # #     # #####   
-       #                #    #         # #      #            #   # # #     # #     # #       
- #     #                #    #        #   #     #            #    ## #     # #     # #       
-  #####                 #    ####### #     #    #            #     # ####### ######  ####### 
-                                                     #######
-*/
-
-/**
  * ContentEditable surface.
  *
  * @class
@@ -53,7 +24,7 @@ ve.ce.Surface = function( $container, model ) {
 		'mouseup': this.proxy( this.onMouseUp ),
 		'mousemove': this.proxy( this.onMouseMove ),
 		'cut copy': this.proxy( this.onCutCopy ),
-		'beforepaste paste': this.proxy( this.onPaste ),
+		'beforepaste paste': this.proxy( this.onPaste )
 	} );
 
 	// Initialization
@@ -80,12 +51,19 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 	var offset = this.getOffset( rangySel.anchorNode, rangySel.anchorOffset );
 	console.log( 'onKeyDown', 'offset', offset );
 
+	var relativeContentOffset,
+		relativeStructuralOffset,
+		relativeStructuralOffsetNode,
+		hasSlug;
+
 	switch ( e.which ) {
 		case 37: // left arrow key
-			var relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, -1 );
-			var relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset - 1, -1, true );
-			var relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
-			var hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
+			relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, -1 );
+			relativeStructuralOffset =
+				this.documentView.model.getRelativeStructuralOffset( offset - 1, -1, true );
+			relativeStructuralOffsetNode =
+				this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
+			hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
 			if ( hasSlug ) {
 				if ( relativeContentOffset > offset ) {
 					this.showCursor( relativeStructuralOffset );
@@ -96,12 +74,13 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 				this.showCursor( relativeContentOffset );
 			}
 			return false;
-			break;
 		case 39: // right arrow key
-			var relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, 1 );
-			var relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset + 1, 1, true );
-			var relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
-			var hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
+			relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, 1 );
+			relativeStructuralOffset =
+				this.documentView.model.getRelativeStructuralOffset( offset + 1, 1, true );
+			relativeStructuralOffsetNode =
+				this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
+			hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
 			if ( hasSlug ) {
 				if ( relativeContentOffset < offset ) {
 					this.showCursor( relativeStructuralOffset );
@@ -112,7 +91,6 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 				this.showCursor( relativeContentOffset );
 			}
 			return false;
-			break;
 	}
 };
 
@@ -137,13 +115,16 @@ ve.ce.Surface.prototype.onMouseDown = function( e ) {
 		var closestLeafOffset = closestLeafModel.getRoot().getOffsetFromNode( closestLeafModel );
 		console.log( 'onMouseDown', 'closestLeafOffset', closestLeafOffset );
 
-		var nearestContentOffset = this.documentView.model.getNearestContentOffset( closestLeafOffset, -1 );
+		var nearestContentOffset =
+			this.documentView.model.getNearestContentOffset( closestLeafOffset, -1 );
 		console.log( 'onMouseDown', 'nearestContentOffset', nearestContentOffset );
 
-		var nearestStructuralOffset = this.documentView.model.getNearestStructuralOffset( closestLeafOffset, 0, true );
+		var nearestStructuralOffset =
+			this.documentView.model.getNearestStructuralOffset( closestLeafOffset, 0, true );
 		console.log( 'onMouseDown', 'nearestStructuralOffset', nearestStructuralOffset );
 
-		var nearestStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( nearestStructuralOffset );
+		var nearestStructuralOffsetNode =
+			this.documentView.documentNode.getNodeFromOffset( nearestStructuralOffset );
 		console.log( 'onMouseDown', 'nearestStructuralOffsetNode', nearestStructuralOffsetNode );
 
 		var hasSlug = nearestStructuralOffsetNode.hasSlugAtOffset( nearestStructuralOffset );
@@ -179,29 +160,36 @@ ve.ce.Surface.prototype.onMouseMove = function( e ) {
 ve.ce.Surface.prototype.onCutCopy = function( e ) {
 	var _this = this,
 		sel = rangy.getSelection(),
-		key = sel.getRangeAt(0).toString().replace( /\s/gm, '' );
+		$frag = null,
+		key = '';
 
+	// Create key from text and element names
+	$frag = $(sel.getRangeAt(0).cloneContents());
+	$frag.contents().each(function() {
+		key += this.textContent || this.nodeName;
+	});
+	key = key.replace( /\s/gm, '' );
+
+	// Set surface clipboard
 	this.clipboard[key] = ve.copyArray(
 		this.documentView.model.getData( this.getSelectionRange() )
 	);
 
 	if ( e.type == 'cut' ) {
 		setTimeout( function() {
-			// we don't like how browsers cut, so let's undo it and do it ourselves.
+			var	selection = null,
+				tx = null;
+		
+			// We don't like how browsers cut, so let's undo it and do it ourselves.
 			document.execCommand('undo', false, false);
 			
-			var selection = _this.getSelectionRange();
+			selection = _this.getSelectionRange();
 			
-			// transact
-			var tx = _this.model.getDocument().prepareRemoval( selection );
-			
-			_this.autoRender = true;
-			_this.model.transact( tx );
-			_this.autoRender = false;
-			
-			_this.clearPollData();
+			// Transact
+			tx = ve.dm.Transaction.newFromRemoval( _this.documentView.model, selection );
+			ve.dm.TransactionProcessor.commit( _this.documentView.model, tx );
 
-			// place cursor
+			// Place cursor
 			_this.showCursor( selection.start );
 		}, 1 );
 	}
@@ -212,79 +200,86 @@ ve.ce.Surface.prototype.onCutCopy = function( e ) {
  */
 ve.ce.Surface.prototype.onPaste = function( e ) {
 	var	_this = this,
-		insertionPoint = _this.getSelectionRange().start;
+		selection = this.getSelectionRange(),
+		tx = null;
 	
-	$('#paste')
-		.html('')
-		.show()
-		.css( 'top', $(window).scrollTop() )
-		.css( 'left', $(window).scrollLeft() )
-		.focus();
+	// Pasting into a range? Remove first.	
+	if (!rangy.getSelection().isCollapsed) {
+		tx = ve.dm.Transaction.newFromRemoval( _this.documentView.model, selection );
+		ve.dm.TransactionProcessor.commit( _this.documentView.model, tx );
+	}
+	
+	$('#paste').html('').show().focus();
 
 	setTimeout( function() {
-		var pasteString = $('#paste').hide().text(),
-			key = pasteString.replace( /\s/gm, '' ),
-			pasteData = ( _this.clipboard[key] ) ? _this.clipboard[key] : pasteString.split('');
+		var	key = '',
+			pasteData = null,
+			tx = null;
+		
+		// Create key from text and element names
+		$('#paste').hide().contents().each(function() {
+			key += this.textContent || this.nodeName;
+		});
+		key = key.replace( /\s/gm, '' );
 
-		// transact
-		var tx = ve.dm.Transaction.newFromInsertion( _this.documentView.model, insertionPoint, pasteData );
+		// Get linear model from surface clipboard or create array from unknown pasted content
+		pasteData = ( _this.clipboard[key] ) ? _this.clipboard[key] : $('#paste').text().split('');
+
+		// Transact
+		tx = ve.dm.Transaction.newFromInsertion(
+			_this.documentView.model, selection.start, pasteData
+		);
 		ve.dm.TransactionProcessor.commit( _this.documentView.model, tx );
 
-		// place cursor
-		_this.showCursor( insertionPoint + pasteData.length );
+		// Place cursor
+		_this.showCursor( selection.start + pasteData.length );
 		_this.documentView.documentNode.$.focus();
 	}, 1 );
 };
 
-
 /**
+ * Gets the linear offset based on a given DOM node (DOMnode) and offset (DOMoffset)
+ *
  * @method
  * @param DOMnode {DOM Element} DOM Element
  * @param DOMoffset {Integer} DOM offset within the DOM Element
  * @returns {Integer} Linear model offset
  */
 ve.ce.Surface.prototype.getOffset = function( DOMnode, DOMoffset ) {
-	if ( DOMnode.nodeType === 3 /* TEXT_NODE */ ) {
-		var $branch = $( DOMnode ).closest( '.ve-ce-branchNode' );
-		var	current = [$branch.contents(), 0],
+	if ( DOMnode.nodeType === Node.TEXT_NODE ) {
+		var $branch = $( DOMnode ).closest( '.ve-ce-branchNode' ),
+			current = [$branch.contents(), 0],
 			stack = [current],
-			offset = 0;
+			offset = 0,
+			item,
+			$item;
+
 		while ( stack.length > 0 ) {
 			if ( current[1] >= current[0].length ) {
-				var popped = stack.pop();
-				if (popped[2] === true) {
-					offset += 1;
-				}
+				stack.pop();
 				current = stack[ stack.length - 1 ];
 				continue;
 			}
-			var item = current[0][current[1]];
-			var $item = current[0].eq( current[1] );
-
-			if ( item.nodeType === 3 ) {
+			item = current[0][current[1]];
+			if ( item.nodeType === Node.TEXT_NODE ) {
 				if ( item === DOMnode ) {
 					offset += DOMoffset;
 					break;
 				} else {
 					offset += item.textContent.length;
 				}
-			} else if ( item.nodeType === 1 ) {
+			} else if ( item.nodeType === Node.ELEMENT_NODE ) {
+				$item = current[0].eq( current[1] );
 				if ( $item.hasClass( 've-ce-slug' ) ) {
 					if ( $item.contents()[0] === DOMnode ) {
 						break;
 					}
 				} else if ( $item.hasClass( 've-ce-leafNode' ) ) {
 					offset += 2;
+				} else if ( $item.hasClass( 've-ce-branchNode' ) ) {
+					offset += $item.data( 'node' ).getOuterLength();
 				} else {
-					if ( item === DOMnode ) {
-						offset += DOMoffset;
-						break;
-					}				
-					if ( $item.is('.ve-ce-leafNode, .ve-ce-branchNode') && !$item.hasClass('ve-ce-documentNode') ) {
-						console.log("adding", $item);
-						offset += 1;
-					}
-					stack.push( [$item.contents(), 0, $item.is('.ve-ce-leafNode, .ve-ce-branchNode') && !$item.hasClass('ve-ce-documentNode') ] );
+					stack.push( [$item.contents(), 0 ] );
 					current[1]++;
 					current = stack[stack.length-1];
 					continue;
@@ -292,45 +287,42 @@ ve.ce.Surface.prototype.getOffset = function( DOMnode, DOMoffset ) {
 			}
 			current[1]++;
 		}
-		var branchModel = $branch.data( 'node' ).getModel();
-		var branchOffset = branchModel.getRoot().getOffsetFromNode( branchModel );
-		return offset + ((branchModel.isWrapped()) ? 1 : 0) + branchOffset;
-	} else if ( DOMnode.nodeType === 1 /* ELEMENT_NODE */ ) {
+		var	branchModel = $branch.data( 'node' ).getModel(),
+			branchOffset = branchModel.getRoot().getOffsetFromNode( branchModel );
+		return offset + branchOffset + ( ( branchModel.isWrapped() ) ? 1 : 0 );
+	} else if ( DOMnode.nodeType === Node.ELEMENT_NODE ) {
 		if ( DOMoffset === 0 ) {
-			throw new "Not implemented";
+			throw "Not implemented";
 		} else {
-			var $node = $( DOMnode ).contents().eq( DOMoffset - 1 );
-			var nodeModel = $node.data( 'node' ).getModel();
-			var nodeOffset = nodeModel.getRoot().getOffsetFromNode( nodeModel );
+			var	$node = $( DOMnode ).contents().eq( DOMoffset - 1 ),
+				nodeModel = $node.data( 'node' ).getModel(),
+				nodeOffset = nodeModel.getRoot().getOffsetFromNode( nodeModel );
 			return nodeOffset + nodeModel.getOuterLength();
 		}
-	} else {
-		throw new "Not implemented";
 	}
-};
-
-/**
- * @method
- * @param elem {DOM Element} DOM Element
- * @returns {jQuery} jQuery element
- */
-ve.ce.Surface.getBranchNode = function( elem ) {
-	var $branch = $( elem ).closest( '.ve-ce-branchNode' );
-	return $branch.length ? $branch : null;
+	throw "Not implemented";
 };
 
 
-
 /**
+ * Based on a given offset returns DOM node and offset that can be used to place a cursor.
+ *
+ * The results of this function are meant to be used with rangy.
+ *
  * @method
  * @param offset {Integer} Linear model offset
+ * @returns {Object} Object containing a node and offset property where node is an HTML element and
+ * offset is the position within the element
  */
-ve.ce.Surface.prototype.getDOMNodeAndOffset = function( offset ) {
-	var	$node = this.documentView.documentNode.getNodeFromOffset( offset ).$.closest( '.ve-ce-branchNode' );
-	var node = $node.data( 'node' );
-	var	startOffset = this.documentView.documentNode.getOffsetFromNode( $node.data( 'node' ) ) + ((node.isWrapped()) ? 1 : 0),
-		current = [$node.contents(), 0],
-		stack = [current];
+ve.ce.Surface.prototype.getNodeAndOffset = function( offset ) {
+	var	node = this.documentView.getNodeFromOffset( offset ),
+		startOffset = this.documentView.getDocumentNode().getOffsetFromNode( node ) +
+			( ( node.isWrapped() ) ? 1 : 0 ),
+		current = [node.$.contents(), 0],
+		stack = [current],
+		item,
+		$item,
+		length;
 
 	while ( stack.length > 0 ) {
 		if ( current[1] >= current[0].length ) {
@@ -338,24 +330,28 @@ ve.ce.Surface.prototype.getDOMNodeAndOffset = function( offset ) {
 			current = stack[ stack.length - 1 ];
 			continue;
 		}
-
-		var	item = current[0][current[1]],
-			$item = current[0].eq( current[1] );
-
-		if ( item.nodeType === 3 ) {
-			var length = item.textContent.length;
+		item = current[0][current[1]];
+		if ( item.nodeType === Node.TEXT_NODE ) {
+			length = item.textContent.length;
 			if ( offset >= startOffset && offset <= startOffset + length ) {
-				return { node: item, offset: offset - startOffset };
+				return {
+					node: item,
+					offset: offset - startOffset
+				};
 			} else {
 				startOffset += length;
 			}
-		} else if ( item.nodeType === 1 ) {
+		} else if ( item.nodeType === Node.ELEMENT_NODE ) {
+			$item = current[0].eq( current[1] );
 			if ( $item.hasClass('ve-ce-slug') ) {
 				if ( offset === startOffset ) {
-					return { node: $item[0], offset: 1 };
+					return {
+						node: $item[0],
+						offset: 1
+					};
 				}
 			} else if ( $item.is( '.ve-ce-branchNode, .ve-ce-leafNode' ) ) {
-				var length = $item.data( 'node' ).model.getOuterLength();
+				length = $item.data( 'node' ).model.getOuterLength();
 				if ( offset >= startOffset && offset < startOffset + length ) {
 					stack.push( [$item.contents(), 0] );
 					current[1]++;
@@ -374,7 +370,19 @@ ve.ce.Surface.prototype.getDOMNodeAndOffset = function( offset ) {
 		}
 		current[1]++;
 	}
-	throw new 'Shouldn\'t happen';
+	throw "Not implemented";
+};
+
+/**
+ * Gets closest BranchNode (.ve-ce-branchNode) based on a given DOM node
+ *
+ * @method
+ * @param elem {DOM Element} DOM Element
+ * @returns {jQuery} jQuery element
+ */
+ve.ce.Surface.getBranchNode = function( elem ) {
+	var $branch = $( elem ).closest( '.ve-ce-branchNode' );
+	return $branch.length ? $branch : null;
 };
 
 /**
@@ -388,8 +396,8 @@ ve.ce.Surface.prototype.showCursor = function( offset ) {
  * @method
  */
 ve.ce.Surface.prototype.showSelection = function( range ) {
-	var	start = this.getDOMNodeAndOffset( range.start ),
-		stop = this.getDOMNodeAndOffset( range.end ),
+	var	start = this.getNodeAndOffset( range.start ),
+		stop = this.getNodeAndOffset( range.end ),
 		rangySel = rangy.getSelection(),
 		rangyRange = rangy.createRange();
 

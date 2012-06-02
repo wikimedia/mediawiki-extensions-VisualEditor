@@ -84,7 +84,17 @@ $wgResourceModules += array(
 			'core/ve.Core.js',
 		),
 		'messages' => array(
-			'',
+			'minoredit',
+			'savearticle',
+			'watchthis',
+			'summary',
+			'tooltip-save',
+			'copyrightwarning',
+			'copyrightpage',
+			'edit',
+			'accesskey-ca-edit',
+			'tooltip-ca-edit'
+
 		),
 		'styles' => 'core/ve.Core.css',
 		'dependencies' => array(
@@ -97,10 +107,10 @@ $wgResourceModules += array(
 			// ve
 			'jquery/jquery.json.js',
 			've2/ve.js',
-			've2/ve.NodeFactory.js',
+			've2/ve.EventEmitter.js',
+			've2/ve.Factory.js',
 			've2/ve.Position.js',
 			've2/ve.Range.js',
-			've2/ve.EventEmitter.js',
 			've2/ve.Node.js',
 			've2/ve.BranchNode.js',
 			've2/ve.LeafNode.js',
@@ -110,13 +120,17 @@ $wgResourceModules += array(
 			// dm
 			've2/dm/ve.dm.js',
 			've2/dm/ve.dm.NodeFactory.js',
+			've2/dm/ve.dm.AnnotationFactory.js',
 			've2/dm/ve.dm.Node.js',
 			've2/dm/ve.dm.BranchNode.js',
 			've2/dm/ve.dm.LeafNode.js',
+			've2/dm/ve.dm.Annotation.js',
 			've2/dm/ve.dm.TransactionProcessor.js',
 			've2/dm/ve.dm.Transaction.js',
 			've2/dm/ve.dm.Surface.js',
 			've2/dm/ve.dm.Document.js',
+			've2/dm/ve.dm.DocumentSynchronizer.js',
+			've2/dm/ve.dm.Converter.js',
 			've2/dm/ve.dm.HTMLConverter.js',
 
 			've2/dm/nodes/ve.dm.AlienInlineNode.js',
@@ -134,6 +148,9 @@ $wgResourceModules += array(
 			've2/dm/nodes/ve.dm.TableNode.js',
 			've2/dm/nodes/ve.dm.TableRowNode.js',
 			've2/dm/nodes/ve.dm.TextNode.js',
+
+			've2/dm/annotations/ve.dm.LinkAnnotation.js',
+			've2/dm/annotations/ve.dm.TextStyleAnnotation.js',
 
 			've/dm/serializers/ve.dm.AnnotationSerializer.js',
 			've/dm/serializers/ve.dm.HtmlSerializer.js',
@@ -227,6 +244,10 @@ $wgExtraNamespaces[NS_VISUALEDITOR_TALK] = "VisualEditor_talk";
 $wgContentNamespaces[] = NS_VISUALEDITOR;
 $wgContentNamespaces[] = NS_VISUALEDITOR_TALK;
 
+// VE Namespace protection
+$wgNamespaceProtection[NS_VISUALEDITOR] = array('ve-edit');
+$wgGroupPermissions['sysop']['ve-edit'] = true;
+
 // Parsoid Wrapper API
 $wgAutoloadClasses['ApiVisualEditor'] = $dir . 'ApiVisualEditor.php';
 $wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
@@ -234,6 +255,8 @@ $wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
 // Integration Hooks
 $wgAutoloadClasses['VisualEditorHooks'] = $dir . 'VisualEditor.hooks.php';
 $wgHooks['BeforePageDisplay'][] = 'VisualEditorHooks::onPageDisplay';
+$wgHooks['userCan'][] = 'VisualEditorHooks::namespaceProtection';
+$wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::makeGlobalScriptVariables';
 
 // API for retrieving wikidom parse results
 $wgAutoloadClasses['ApiQueryParseTree'] = $dir . 'api/ApiQueryParseTree.php';

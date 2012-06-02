@@ -34,6 +34,7 @@ ve.ce.BranchNode = function( type, model, $element ) {
 /* Static Members */
 
 ve.ce.BranchNode.$slugTemplate = $( '<span class="ve-ce-slug">&#xFEFF;</span>' );
+//ve.ce.BranchNode.$slugTemplate = $( '<span class="ve-ce-slug">OJEJ</span>' );
 
 /* Static Methods */
 
@@ -56,7 +57,7 @@ ve.ce.BranchNode.getDomWrapperType = function( model, key ) {
 	if ( value === undefined ) {
 		throw 'Undefined attribute: ' + key;
 	}
-	var types = ve.ce.factory.lookup( model.getType() ).domWrapperElementTypes;
+	var types = ve.ce.nodeFactory.lookup( model.getType() ).domWrapperElementTypes;
 	if ( types[value] === undefined ) {
 		throw 'Invalid attribute value: ' + value;
 	}
@@ -131,7 +132,7 @@ ve.ce.BranchNode.prototype.onSplice = function( index, howmany ) {
 	// Convert models to views and attach them to this node
 	if ( args.length >= 3 ) {
 		for ( i = 2, length = args.length; i < length; i++ ) {
-			args[i] = ve.ce.factory.create( args[i].getType(), args[i] );
+			args[i] = ve.ce.nodeFactory.create( args[i].getType(), args[i] );
 		}
 	}
 	var removals = this.children.splice.apply( this.children, args );
@@ -159,13 +160,21 @@ ve.ce.BranchNode.prototype.onSplice = function( index, howmany ) {
 	// Remove all slugs in this branch
 	this.$slugs.remove();
 
+	var $slug = ve.ce.BranchNode.$slugTemplate.clone();
+
+	if ( this.canHaveGrandchildren() ) {
+		$slug.css( 'display', 'block');
+	} else {
+		$slug.css( { display: 'inline-block', width: '1px' } );
+	}
+
 	// Iterate over all children of this branch and add slugs in appropriate places
 	for ( i = 0; i < this.children.length; i++ ) {
 		if ( this.children[i].canHaveSlug() ) {
 			if ( i === 0 ) {
 				// First sluggable child (left side)
 				this.$slugs = this.$slugs.add(
-					ve.ce.BranchNode.$slugTemplate.clone().insertBefore( this.children[i].$ )
+					$slug.clone().insertBefore( this.children[i].$ )
 				);
 			}
 			if (
@@ -175,7 +184,7 @@ ve.ce.BranchNode.prototype.onSplice = function( index, howmany ) {
 				( this.children[i + 1] && this.children[i + 1].canHaveSlug() )
 			) {
 				this.$slugs = this.$slugs.add(
-					ve.ce.BranchNode.$slugTemplate.clone().insertAfter( this.children[i].$ )
+					$slug.clone().insertAfter( this.children[i].$ )
 				);
 			}
 		}

@@ -28,9 +28,12 @@ ve.dm.TextNode.rules = {
 	'parentNodeTypes': null
 };
 
+// This is a special node, no converter registration is required
+ve.dm.TextNode.converters = null;
+
 /* Registration */
 
-ve.dm.factory.register( 'text', ve.dm.TextNode );
+ve.dm.nodeFactory.register( 'text', ve.dm.TextNode );
 
 /* Inheritance */
 

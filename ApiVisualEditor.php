@@ -36,28 +36,36 @@ class ApiVisualEditor extends ApiBase {
 			curl_close($c);
 
 			if ( $wikitext ) {
-				// Prepare api request to save the page
-				$apiParams = array(
-					'action' => 'edit',
-					'title' => $page,
-					'text' => $wikitext,
-					'token' => $wgUser->editToken(),
-					'summary' => $params['summary'],
-					'notminor' => true
-				);
 
-				$api = new ApiMain(
-					new DerivativeRequest(
-						$wgRequest,
-						$apiParams,
-						false // was posted?
-					),
-					true // enable write?
-				);
-				//save
-				$api->execute();
+				/* Save Page */
+				$flags = $params['minor'] === 'true' ? EDIT_MINOR : EDIT_UPDATE;
 
-				// Prepare api request to get new content
+				$wikiPage = WikiPage::factory( $page );
+				$status = $wikiPage->doEdit( 
+					$wikitext, 
+					$params['summary'],
+					$flags
+				);
+				
+				// Check status ?
+				// $status->ok === true ?
+
+				// Add / Remove from watch list.
+				if( $params['watch'] === 'true' ) {
+					if ( $wgUser->isWatched( $page ) === false ) {
+						$wgUser->addWatch( $page );	
+					}
+				} else {
+					// Remove from watchlist? 
+					if ( $wgUser->isWatched( $page ) === true ) {
+						$wgUser->removeWatch( $page );	
+					}
+				}
+
+				/* Get page content */
+				// NOTE: possibly return content from revision object vs current rev ?
+				// $revisionObj = $status->value['revision'];
+				
 				$apiParams = array(
 					'action' => 'parse',
 					'page' => $page
@@ -70,6 +78,7 @@ class ApiVisualEditor extends ApiBase {
 					),
 					true // enable write?
 				);
+
 				$api->execute();
 				$result = $api->getResultData();
 		
@@ -96,6 +105,12 @@ class ApiVisualEditor extends ApiBase {
 			'paction' => array(
 				ApiBase::PARAM_REQUIRED => true,
 			),
+			'minor' => array(
+				ApiBase::PARAM_REQUIRED => false,
+			),
+			'watch' => array(
+				ApiBase::PARAM_REQUIRED => false,
+			),
 			'html' => array(
 				ApiBase::PARAM_REQUIRED => false,
 			),
@@ -113,8 +128,9 @@ class ApiVisualEditor extends ApiBase {
 
 	public function getParamDescription() {
 		return array(
-			'page' => 'The page to get content for',
-			'paction' => 'Parsoid action.  Only parse or save',
+			'page' => 'The page to perform actions on.',
+			'paction' => 'Which action? parse or save.',
+			'minor' => 'Flag for minor edit.',
 			'html' => 'HTML to send to parsoid in exchange for wikitext'
 		);
 	}

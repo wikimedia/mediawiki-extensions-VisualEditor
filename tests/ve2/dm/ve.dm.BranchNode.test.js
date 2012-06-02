@@ -14,9 +14,11 @@ ve.dm.BranchNodeStub.rules = {
 	'childNodeTypes': null
 };
 
+ve.dm.BranchNodeStub.converters = null;
+
 ve.extendClass( ve.dm.BranchNodeStub, ve.dm.BranchNode );
 
-ve.dm.factory.register( 'branch-stub', ve.dm.BranchNodeStub );
+ve.dm.nodeFactory.register( 'branch-stub', ve.dm.BranchNodeStub );
 
 /* Tests */
 

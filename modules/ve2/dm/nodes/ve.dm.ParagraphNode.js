@@ -29,9 +29,26 @@ ve.dm.ParagraphNode.rules = {
 	'parentNodeTypes': null
 };
 
+/**
+ * Node converters.
+ *
+ * @see {ve.dm.Converter}
+ * @static
+ * @member
+ */
+ve.dm.ParagraphNode.converters = {
+	'tags': 'p',
+	'toHtml': function( type, element ) {
+		return ve.dm.createHtmlElement( 'p' );
+	},
+	'toData': function( tag, element ) {
+		return { 'type': 'paragraph' };
+	}
+};
+
 /* Registration */
 
-ve.dm.factory.register( 'paragraph', ve.dm.ParagraphNode );
+ve.dm.nodeFactory.register( 'paragraph', ve.dm.ParagraphNode );
 
 /* Inheritance */
 
