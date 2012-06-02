@@ -183,6 +183,9 @@ $wgResourceModules += array(
 			've2/ui/tools/ve.ui.IndentationButtonTool.js',
 			've2/ui/tools/ve.ui.DropdownTool.js',
 			've2/ui/tools/ve.ui.FormatDropdownTool.js'
+
+			// collab
+			'collaboration/client.js',
 		),
 		'styles' => array(
 			// ce

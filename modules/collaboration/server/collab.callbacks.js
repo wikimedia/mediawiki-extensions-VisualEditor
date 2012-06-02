@@ -9,6 +9,7 @@ parse = require.( './collab.parse.js' ).parse;
 
 callbacks = function( server ) {
 	this.server = server;
+	this.sessionIndex = -1;
 };
 
 /**
@@ -36,8 +37,8 @@ callbacks.prototype.clientConnection = function( data ) {
 		session_doc = new Document( docHTML );
 	}
 	this.session = new Session( docTitle, userID );
-	this.sessionIndex = sessions.length - 1;
 	sessions.push( { 'ssid': this.session.getID(), 'session': this.session } );
+	this.sessionIndex++;
 };
 
 /**
@@ -45,6 +46,7 @@ callbacks.prototype.clientConnection = function( data ) {
 **/
 callbacks.prototype.clientDisconnection = function( data ) {
 	this.server.sessions.pop( this.sessionIndex );
+	this.sessionIndex--;
 };
 
 /**
