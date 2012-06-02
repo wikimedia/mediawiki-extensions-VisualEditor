@@ -5,7 +5,7 @@
 
 Session = require( './collab.Session' ).Session;
 Document = require( './collab.Document' ).Document;
-parse = require.( './collab.parse.js' ).parse;
+parse = require( './collab.parse.js' ).parse;
 
 callbacks = function( server ) {
 	this.server = server;

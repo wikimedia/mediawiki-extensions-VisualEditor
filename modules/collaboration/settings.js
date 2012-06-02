@@ -1,4 +1,4 @@
-settings = {
+collab.settings = {
 	host: '',
 	port: 8000,
 };	

@@ -20,7 +20,7 @@ CollaborationServer = function ( port ) {
 	io_service.on( 'connection', function( socket ) {
 		var socket_callbacks = new callbacks( _this );
 		socket.set( 'callbacks', socket_callbacks );
-		this.bindEvents( socket );
+		_this.bindEvents( socket );
 	});
 	this.sessions = [];
 };
@@ -46,3 +46,5 @@ CollaborationServer.prototype.bindEvents = function( io_socket ) {
 		socket_callbacks.saveDocument( data );
 	});
 };
+
+CollaborationServer( 8000 );
