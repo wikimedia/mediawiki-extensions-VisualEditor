@@ -9,7 +9,6 @@ parse = require( './collab.parse.js' ).parse;
 
 callbacks = function( server ) {
 	this.server = server;
-	this.sessionIndex = -1;
 };
 
 /**
@@ -21,24 +20,24 @@ callbacks.prototype.clientConnection = function( data ) {
 	var sessions = this.server.sessions;
 	var remoteSSID = data.ssid;
 	var session_doc = null;
+	_this = this;
 	docHTML = '';
-	
 	// Parse the page by its title using the parser
-	docHTML = parse( docTitle );
-
-	for( session in sessions ) {
-		var ssid = sessions[ session ].ssid;
-		if( ssid = remoteSSID ) {
-			session_doc = session[ session ].Document;
-			break;
+	parse( docTitle, function( docHTML ) {
+		for( session in sessions ) {
+			var ssid = sessions[ session ].ssid;
+			if( ssid = remoteSSID ) {
+				session_doc = session[ session ].Document;
+				break;
+			}
 		}
-	}
-	if( session_doc == null ) {
-		session_doc = new Document( docHTML );
-	}
-	this.session = new Session( docTitle, userID );
-	sessions.push( { 'ssid': this.session.getID(), 'session': this.session } );
-	this.sessionIndex++;
+		if( session_doc == null ) {
+			session_doc = new Document( docHTML );
+		}
+		_this.session = new Session( docTitle, userID );
+		sessions.push( { 'ssid': _this.session.getID(), 'session': _this.session } );
+		_this.server.sessionIndex++;
+	});
 };
 
 /**
@@ -46,7 +45,7 @@ callbacks.prototype.clientConnection = function( data ) {
 **/
 callbacks.prototype.clientDisconnection = function( data ) {
 	this.server.sessions.pop( this.sessionIndex );
-	this.sessionIndex--;
+	this.server.sessionIndex--;
 };
 
 /**

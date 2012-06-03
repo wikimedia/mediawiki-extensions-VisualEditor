@@ -7,8 +7,7 @@ var ParserPipelineFactory = require(mp + 'mediawiki.parser.js').ParserPipelineFa
 	ParserEnv = require(mp + 'mediawiki.parser.environment.js').MWParserEnvironment,
 WikitextSerializer = require(mp + 'mediawiki.WikitextSerializer.js').WikitextSerializer;
 
-parse = function( title ) {
-	output = '';
+parse = function( title, callback ) {
 	var env = new ParserEnv( { 
 		// fetch templates from enwiki for now..
 		wgScript: 'http://en.wikipedia.org/w',
@@ -28,9 +27,10 @@ parse = function( title ) {
 
 	var parser = parserPipelineFactory.makePipeline( 'text/x-mediawiki/full' );
 	parser.on('document', function ( document ) {
-		output = document.body.innerHTML;
+		this.outHTML = document.body.innerHTML;
+		callback( this.outHTML );
 	});
-	return output;
+	parser.process( '{{:' + title + '}}' );
 };
 
 if( typeof module == 'object' ) {
