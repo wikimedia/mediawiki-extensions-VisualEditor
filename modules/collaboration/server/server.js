@@ -7,6 +7,7 @@
 
 io = require( 'socket.io' );
 callbacks = require( './collab.callbacks' ).callbacks;
+settings = require( '../settings.js' ).settings;
 
 /**
  * CollaborationServer binds all the functionality of the server and
@@ -14,23 +15,26 @@ callbacks = require( './collab.callbacks' ).callbacks;
  * Accepts a port number to run on, 
 **/
 
-CollaborationServer = function ( port ) {
-	var io_service = io.listen( port );
+CollaborationServer = function () {
+	var io_service = io.listen( settings.port );
+	this.sessionIndex = -1;
+	this.sessions = [];
 	_this = this;
 	io_service.on( 'connection', function( socket ) {
-		var socket_callbacks = new callbacks( _this );
-		socket.set( 'callbacks', socket_callbacks );
-		_this.bindEvents( socket );
+		socket.emit( 'connection', {} );
+		var socket_callbacks = new callbacks( collab );
+		socket.callbacks = socket_callbacks;
+		collab.bindEvents( socket );
 	});
-	this.sessions = [];
 };
 
 /**
  * Binds all socket events to the corresponding callback functions
 **/
 CollaborationServer.prototype.bindEvents = function( io_socket ) {
-	var socket_callbacks = io_socket.get( 'callbacks' );
+	var socket_callbacks = io_socket.callbacks;
 	io_socket.on( 'client_connect', function( data ) {
+		console.log(data);
 		socket_callbacks.clientConnection( data );
 	});
 
@@ -47,4 +51,4 @@ CollaborationServer.prototype.bindEvents = function( io_socket ) {
 	});
 };
 
-CollaborationServer( 8000 );
+collab = new CollaborationServer();
