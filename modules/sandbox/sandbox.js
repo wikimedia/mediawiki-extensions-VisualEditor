@@ -647,7 +647,8 @@ $(document).ready( function() {
 		surfaceModel = sandboxEditor.getSurfaceModel(),
 		documentModel = sandboxEditor.getDocumentModel(),
 		parent = sandboxEditor.getParent();
-
+	
+	var cb = new collab.client();
 
 	/* Sandbox Warning Message */
 	$( '#es-docs' ).css( { 'visibility': 'visible' } );

@@ -1,8 +1,9 @@
+collab = {};
 collab.settings = {
-	host: '',
+	host: 'http://localhost',
 	port: 8000,
 };	
 
 if( typeof module == 'object' ) {
-	module.exports.settings = settings;
+	module.exports.settings = collab.settings;
 }

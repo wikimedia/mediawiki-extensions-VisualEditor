@@ -184,7 +184,13 @@ include( '../../modules/sandbox/base.php' );
 		<script src="../../modules/ve2/ui/tools/ve.ui.IndentationButtonTool.js"></script>
 		<script src="../../modules/ve2/ui/tools/ve.ui.DropdownTool.js"></script>
 		<script src="../../modules/ve2/ui/tools/ve.ui.FormatDropdownTool.js"></script>
-	
+		
+		<!-- collab -->
+		<script src="../../modules/collaboration/settings.js"></script>
+		<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+		<script src="../../modules/collaboration/client/collab.callbacks.js"></script>
+		<script src="../../modules/collaboration/client/client.js"></script>
+
 		<!-- sandbox -->
 		<script src="../../modules/sandbox/sandbox.js"></script>
 	</body>
