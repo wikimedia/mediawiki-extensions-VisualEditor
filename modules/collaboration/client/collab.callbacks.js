@@ -2,7 +2,7 @@
  * This contains all the callbacks used for handling the client's Socket.IO events
 **/
 
-collab.callbacks = function( server ) {
+collab.callbacks = function( client ) {
 	this.client = client;
 };
 
@@ -14,7 +14,7 @@ collab.callbacks.prototype.userConnect = function( data ) {
 };
 
 /**
- * Callback method to be invoked when a client disconnects from the server
+ * Callback method to be invoked when a client disconnects from the editing session
 **/
 collab.callbacks.prototype.clientDisconnection = function( data ) {
 	// do something on the front-end
@@ -23,6 +23,6 @@ collab.callbacks.prototype.clientDisconnection = function( data ) {
 /**
  * Callback method to be invoked when a new transaction arrives at the client
 **/
-callbacks.prototype.newTransaction = function( trasaction ) {
+collab.callbacks.prototype.newTransaction = function( trasaction ) {
 	//apply the transaction through the transaction processor
 };
