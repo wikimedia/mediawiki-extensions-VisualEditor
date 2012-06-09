@@ -3,15 +3,14 @@
 class ApiVisualEditor extends ApiBase {
 
 	public function execute() {
-		global $wgRequest, $wgUser;
+		global $wgRequest, $wgUser, $wgVisualEditorParsoidURL;
 		
-		$parsoid = "http://parsoid.wmflabs.org/";
+		$parsoid = $wgVisualEditorParsoidURL;
 		$params = $this->extractRequestParams();
 		$page = Title::newFromText( $params['page'] );
 
 		if ($params['paction'] === 'parse') {
-			// Not reliable for long request.
-			$parsed = file_get_contents(
+			$parsed = Http::get(
 				$parsoid.$page
 			);
 
@@ -28,12 +27,7 @@ class ApiVisualEditor extends ApiBase {
 		} elseif ($params['paction'] === 'save') {
 			// API Posts HTML to Parsoid Service, receives Wikitext,
 			// API Saves Wikitext to page.
-			$c = curl_init( $parsoid.$page );
-			curl_setopt($c, CURLOPT_POST, 1);
-			curl_setopt($c, CURLOPT_POSTFIELDS, 'content='.$params['html']);
-			curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-			$wikitext = curl_exec($c);
-			curl_close($c);
+			$wikitext = Http::post( $parsoid.$page, array( 'postData' => 'content='.$params['html'] ) );
 
 			if ( $wikitext ) {
 

@@ -37,12 +37,18 @@ ve.dm.TableCellNode.rules = {
  * @member
  */
 ve.dm.TableCellNode.converters = {
-	'tags': 'td',
-	'toHtml': function( type, element ) {
-		return ve.dm.createHtmlElement( 'td' );
+	'domElementTypes': ['td', 'th'],
+	'toDomElement': function( type, element ) {
+		return element.attributes && ( {
+			'data': document.createElement( 'td' ),
+			'header': document.createElement( 'th' )
+		} )[element.attributes['style']];
 	},
-	'toData': function( tag, element ) {
-		return { 'type': 'tableCell' };
+	'toDataElement': function( tag, element ) {
+		return ( {
+			'td': { 'type': 'tableCell', 'attributes': { 'style': 'data' } },
+			'th': { 'type': 'tableCell', 'attributes': { 'style': 'header' } }
+		} )[tag];
 	}
 };
 

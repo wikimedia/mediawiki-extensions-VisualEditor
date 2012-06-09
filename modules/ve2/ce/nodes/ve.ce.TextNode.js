@@ -42,8 +42,8 @@ ve.ce.TextNode.htmlCharacters = {
 	'>': '&gt;',
 	'\'': '&#039;',
 	'"': '&quot;',
-	'\n': '<span class="ve-ce-content-whitespace">&#182;</span>',
-	'\t': '<span class="ve-ce-content-whitespace">&#8702;</span>'
+	'\n': '<span class="ve-ce-textNode-whitespace">&#182;</span>',
+	'\t': '<span class="ve-ce-textNode-whitespace">&#8702;</span>'
 };
 
 /**
@@ -69,40 +69,46 @@ ve.ce.TextNode.annotationRenderers = {
 		'close': '</u>'
 	},
 	'textStyle/strong': {
-		'open': '<span class="ve-ce-content-format-textStyle-strong">',
-		'close': '</span>'
+		'open': '<strong>',
+		'close': '</strong>'
 	},
 	'textStyle/emphasize': {
-		'open': '<span class="ve-ce-content-format-textStyle-emphasize">',
-		'close': '</span>'
+		'open': '<em>',
+		'close': '<em>'
 	},
 	'textStyle/big': {
-		'open': '<span class="ve-ce-content-format-textStyle-big">',
-		'close': '</span>'
+		'open': '<big>',
+		'close': '</big>'
 	},
 	'textStyle/small': {
-		'open': '<span class="ve-ce-content-format-textStyle-small">',
-		'close': '</span>'
+		'open': '<small>',
+		'close': '</small>'
 	},
 	'textStyle/superScript': {
-		'open': '<span class="ve-ce-content-format-textStyle-superScript">',
-		'close': '</span>'
+		'open': '<sup>',
+		'close': '</sup>'
 	},
 	'textStyle/subScript': {
-		'open': '<span class="ve-ce-content-format-textStyle-subScript">',
-		'close': '</span>'
+		'open': '<sub>',
+		'close': '</sub>'
 	},
 	'link/external': {
 		'open': function( data ) {
-			return '<span class="ve-ce-content-format-link" data-href="' + data.href + '">';
+			return '<a href="' + data.href + '">';
 		},
-		'close': '</span>'
+		'close': '</a>'
 	},
 	'link/internal': {
 		'open': function( data ) {
-			return '<span class="ve-ce-content-format-link" data-title="wiki/' + data.title + '">';
+			return '<a href="' + data.href + '">';
 		},
-		'close': '</span>'
+		'close': '</a>'
+	},
+	'link/unknown': {
+		'open': function( data ) {
+			return '<a href="#">';
+		},
+		'close': '</a>'
 	}
 };
 
@@ -117,6 +123,9 @@ ve.ce.TextNode.annotationRenderers = {
  */
 ve.ce.TextNode.prototype.onUpdate = function() {
 	var $new = $( $( '<span>' + this.getHtml() + '</span>' ).contents() );
+	if ( $new.length === 0 ) {
+		$new = $new.add( document.createTextNode( '' ) );
+	}
 	this.$.replaceWith( $new );
 	this.$ = $new;
 };
@@ -151,6 +160,9 @@ ve.ce.TextNode.prototype.getHtml = function() {
 
 		for ( var hash in annotations ) {
 			annotation = annotations[hash];
+			if ( renderers[annotation.type] === undefined ) {
+				debugger;
+			}
 			out += typeof renderers[annotation.type].open === 'function' ?
 				renderers[annotation.type].open( annotation.data ) :
 				renderers[annotation.type].open;
@@ -251,6 +263,9 @@ ve.ce.TextNode.prototype.getHtml = function() {
 		close[hashStack[j]] = annotationStack[hashStack[j]];
 	}
 	out += closeAnnotations( close );
+
+	// Mulitple spaces should alternate spaces and &nbsp;
+	out = out.replace(/  /g, ' &nbsp;');
 
 	return out;
 };

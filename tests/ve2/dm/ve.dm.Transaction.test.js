@@ -36,19 +36,7 @@ ve.dm.Transaction.runConstructorTests = function( constructor, cases ) {
 test( 'newFromInsertion', function() {
 	var doc = new ve.dm.Document( ve.dm.example.data ),
 		cases = {
-		'content in first element': {
-			'args': [doc, 1, ['1', '2', '3']],
-			'ops': [
-				{ 'type': 'retain', 'length': 1 },
-				{
-					'type': 'replace',
-					'remove': [],
-					'insert': ['1', '2', '3']
-				},
-				{ 'type': 'retain', 'length': 58 }
-			]
-		},
-		'before first element': {
+		'paragraph before first element': {
 			'args': [doc, 0, [{ 'type': 'paragraph' }, '1', { 'type': '/paragraph' }]],
 			'ops': [
 				{
@@ -56,13 +44,13 @@ test( 'newFromInsertion', function() {
 					'remove': [],
 					'insert': [{ 'type': 'paragraph' }, '1', { 'type': '/paragraph' }]
 				},
-				{ 'type': 'retain', 'length': 59 }
+				{ 'type': 'retain', 'length': 61 }
 			]
 		},
-		'after last element': {
-			'args': [doc, 59, [{ 'type': 'paragraph' }, '1', { 'type': '/paragraph' }]],
+		'paragraph after last element': {
+			'args': [doc, 61, [{ 'type': 'paragraph' }, '1', { 'type': '/paragraph' }]],
 			'ops': [
-				{ 'type': 'retain', 'length': 59 },
+				{ 'type': 'retain', 'length': 61 },
 				{
 					'type': 'replace',
 					'remove': [],
@@ -71,23 +59,124 @@ test( 'newFromInsertion', function() {
 			]
 		},
 		'split paragraph': {
-			'args': [doc, 9, ['1', { 'type': '/paragraph' }, { 'type': 'paragraph' }]],
+			'args': [doc, 10, ['1', { 'type': '/paragraph' }, { 'type': 'paragraph' }]],
 			'ops': [
-				{ 'type': 'retain', 'length': 9 },
+				{ 'type': 'retain', 'length': 10 },
 				{
 					'type': 'replace',
 					'remove': [],
 					'insert': ['1', { 'type': '/paragraph' }, { 'type': 'paragraph' }]
 				},
-				{ 'type': 'retain', 'length': 50 }
+				{ 'type': 'retain', 'length': 51 }
+			]
+		},
+		'paragraph inside a heading closes and reopens heading': {
+			'args': [doc, 2, [{ 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }]],
+			'ops': [
+				{ 'type': 'retain', 'length': 2 },
+				{
+					'type': 'replace',
+					'remove': [],
+					'insert': [{'type': '/heading' }, { 'type': 'paragraph' } , 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': 'heading', 'attributes': { 'level': 1 } }]
+				},
+				{ 'type': 'retain', 'length': 59 }
+			]
+		},
+		'paragraph inside a list closes and reopens list': {
+			'args': [doc, 13, [{ 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }]],
+			'ops': [
+				{ 'type': 'retain', 'length': 13 },
+				{
+					'type': 'replace',
+					'remove': [],
+					'insert': [{'type': '/list' }, { 'type': 'paragraph' } , 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': 'list', 'attributes': { 'style': 'bullet' } }]
+				},
+				{ 'type': 'retain', 'length': 48 }
+			]
+		},
+		'tableCell inside the document is wrapped in a table, tableSection and tableRow': {
+			'args': [doc, 43, [{ 'type': 'tableCell', 'attributes': { 'style': 'data' } }, { 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': '/tableCell' }]],
+			'ops': [
+				{ 'type': 'retain', 'length': 43 },
+				{
+					'type': 'replace',
+					'remove': [],
+					// FIXME tableSection should have type=body
+					'insert': [{ 'type': 'table' }, { 'type': 'tableSection' }, { 'type': 'tableRow' }, { 'type': 'tableCell', 'attributes': { 'style': 'data' } }, { 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': '/tableCell' }, { 'type': '/tableRow' }, { 'type': '/tableSection' }, { 'type': '/table' }]
+				},
+				{ 'type': 'retain', 'length': 18 }
+			]
+		},
+		'tableCell inside a paragraph is wrapped in a table, tableSection and tableRow and closes and reopens the paragraph': {
+			'args': [doc, 52, [{ 'type': 'tableCell', 'attributes': { 'style': 'data' } }, { 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': '/tableCell' }]],
+			'ops': [
+				{ 'type': 'retain', 'length': 52 },
+				{
+					'type': 'replace',
+					'remove': [],
+					// FIXME tableSection should have type=body
+					'insert': [{ 'type': '/paragraph' }, { 'type': 'table' }, { 'type': 'tableSection' }, { 'type': 'tableRow' }, { 'type': 'tableCell', 'attributes': { 'style': 'data' } }, { 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': '/tableCell' }, { 'type': '/tableRow' }, { 'type': '/tableSection' }, { 'type': '/table' }, { 'type': 'paragraph' }]
+				},
+				{ 'type': 'retain', 'length': 9 }
+			]
+		},
+		'text at a structural location in the document is wrapped in a paragraph': {
+			'args': [doc, 0, ['F', 'O', 'O']],
+			'ops': [
+				{
+					'type': 'replace',
+					'remove': [],
+					'insert': [{ 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }]
+				},
+				{ 'type': 'retain', 'length': 61 }
+			]
+		},
+		'text inside a paragraph is not wrapped in a paragraph': {
+			'args': [doc, 16, ['F', 'O', 'O']],
+			'ops': [
+				{ 'type': 'retain', 'length': 16 },
+				{
+					'type': 'replace',
+					'remove': [],
+					'insert': ['F', 'O', 'O']
+				},
+				{ 'type': 'retain', 'length': 45 }
+			]
+		},
+		'text inside a heading is not wrapped in a paragraph': {
+			'args': [doc, 2, ['F', 'O', 'O']],
+			'ops': [
+				{ 'type': 'retain', 'length': 2 },
+				{
+					'type': 'replace',
+					'remove': [],
+					'insert': ['F', 'O', 'O']
+				},
+				{ 'type': 'retain', 'length': 59 }
+			]
+		},
+		'text inside a tableSection is wrapped in a paragraph and closes and reopens the tableSection, tableRow and table': {
+			'args': [doc, 34, ['F', 'O', 'O']],
+			'ops': [
+				{ 'type': 'retain', 'length': 34 },
+				{
+					'type': 'replace',
+					'remove': [],
+					'insert': [{ 'type': '/tableRow' }, { 'type': '/tableSection' }, { 'type': '/table' }, { 'type': 'paragraph' }, 'F', 'O', 'O', { 'type': '/paragraph' }, { 'type': 'table' }, { 'type': 'tableSection', 'attributes': { 'style': 'body' } }, { 'type': 'tableRow' } ]
+				},
+				{ 'type': 'retain', 'length': 27 }
 			]
 		}
+		// TODO test cases for unclosed openings
+		// TODO test cases for (currently failing) unopened closings use case
+		// TODO analyze other possible cases (substrings of linmod data)
 	};
 	ve.dm.Transaction.runConstructorTests( ve.dm.Transaction.newFromInsertion, cases );
 } );
 
 test( 'newFromRemoval', function() {
-	var doc = new ve.dm.Document( ve.dm.example.data ),
+	var alienDoc = new ve.dm.Document( ve.dm.example.alienData ),
+		doc = new ve.dm.Document( ve.dm.example.data ),
 		cases = {
 		'content in first element': {
 			'args': [doc, new ve.Range( 1, 3 )],
@@ -101,13 +190,13 @@ test( 'newFromRemoval', function() {
 					],
 					'insert': []
 				},
-				{ 'type': 'retain', 'length': 56 }
+				{ 'type': 'retain', 'length': 58 }
 			]
 		},
 		'content in last element': {
-			'args': [doc, new ve.Range( 57, 58 )],
+			'args': [doc, new ve.Range( 59, 60 )],
 			'ops': [
-				{ 'type': 'retain', 'length': 57 },
+				{ 'type': 'retain', 'length': 59 },
 				{
 					'type': 'replace',
 					'remove': ['m'],
@@ -130,13 +219,13 @@ test( 'newFromRemoval', function() {
 					],
 					'insert': []
 				},
-				{ 'type': 'retain', 'length': 54 }
+				{ 'type': 'retain', 'length': 56 }
 			]
 		},
 		'middle element with image': {
-			'args': [doc, new ve.Range( 36, 40 )],
+			'args': [doc, new ve.Range( 38, 42 )],
 			'ops': [
-				{ 'type': 'retain', 'length': 36 },
+				{ 'type': 'retain', 'length': 38 },
 				{
 					'type': 'replace',
 					'remove': [
@@ -164,13 +253,13 @@ test( 'newFromRemoval', function() {
 					],
 					'insert': []
 				},
-				{ 'type': 'retain', 'length': 54 }
+				{ 'type': 'retain', 'length': 56 }
 			]
 		},
 		'last element': {
-			'args': [doc, new ve.Range( 56, 59 )],
+			'args': [doc, new ve.Range( 58, 61 )],
 			'ops': [
-				{ 'type': 'retain', 'length': 56 },
+				{ 'type': 'retain', 'length': 58 },
 				{
 					'type': 'replace',
 					'remove': [{ 'type': 'paragraph' }, 'm', { 'type': '/paragraph' }],
@@ -179,9 +268,9 @@ test( 'newFromRemoval', function() {
 			]
 		},
 		'extra closings': {
-			'args': [doc, new ve.Range( 30, 37 )],
+			'args': [doc, new ve.Range( 31, 39 )],
 			'ops': [
-				{ 'type': 'retain', 'length': 36 },
+				{ 'type': 'retain', 'length': 38 },
 				{
 					'type': 'replace',
 					'remove': ['h'],
@@ -191,9 +280,9 @@ test( 'newFromRemoval', function() {
 			]
 		},
 		'merge last two elements': {
-			'args': [doc, new ve.Range( 55, 57 )],
+			'args': [doc, new ve.Range( 57, 59 )],
 			'ops': [
-				{ 'type': 'retain', 'length': 55 },
+				{ 'type': 'retain', 'length': 57 },
 				{
 					'type': 'replace',
 					'remove': [{ 'type': '/paragraph' }, { 'type': 'paragraph' }],
@@ -203,9 +292,9 @@ test( 'newFromRemoval', function() {
 			]
 		},
 		'strip out of paragraph in tableCell and paragraph in listItem': {
-			'args': [doc, new ve.Range( 9, 15 )],
+			'args': [doc, new ve.Range( 10, 16 )],
 			'ops': [
-				{ 'type': 'retain', 'length': 9 },
+				{ 'type': 'retain', 'length': 10 },
 				{
 					'type': 'replace',
 					'remove': ['d'],
@@ -217,7 +306,101 @@ test( 'newFromRemoval', function() {
 					'remove': ['e'],
 					'insert': []
 				},
-				{ 'type': 'retain', 'length': 44 }
+				{ 'type': 'retain', 'length': 45 }
+			]
+		},
+		'over first alien into paragraph': {
+			'args': [alienDoc, new ve.Range( 0, 4 )],
+			'ops': [
+				{
+					'type': 'replace',
+					'remove': [{ 'type': 'alienBlock' }, { 'type': '/alienBlock' }],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 1 },
+				{
+					'type': 'replace',
+					'remove': ['a'],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 6 }
+			]
+		},
+		'out of paragraph over last alien': {
+			'args': [alienDoc, new ve.Range( 6, 10 )],
+			'ops': [
+				{ 'type': 'retain', 'length': 6 },
+				{
+					'type': 'replace',
+					'remove': ['b'],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 1 },
+				{
+					'type': 'replace',
+					'remove': [{ 'type': 'alienBlock' }, { 'type': '/alienBlock' }],
+					'insert': []
+				}
+			]
+		},
+		'merging two paragraphs inside definitionListItems': {
+			'args': [doc, new ve.Range( 47, 51 )],
+			'ops': [
+				{ 'type': 'retain', 'length': 47 },
+				{
+					'type': 'replace',
+					'remove': [{ 'type': '/paragraph' }, { 'type': '/definitionListItem' }, { 'type': 'definitionListItem', 'attributes': { 'style': 'definition' } }, { 'type': 'paragraph' }],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 10 }
+			]
+		},
+		'merging two paragraphs while also deleting some content': {
+			'args': [doc, new ve.Range( 56, 59 )],
+			'ops': [
+				{ 'type': 'retain', 'length': 56 },
+				{
+					'type': 'replace',
+					'remove': ['l', { 'type': '/paragraph' }, { 'type': 'paragraph' } ],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 2 }
+			]
+		},
+		'removing from a heading into a paragraph': {
+			'args': [doc, new ve.Range( 2, 57 )],
+			'ops': [
+				{ 'type': 'retain', 'length': 2 },
+				{
+					'type': 'replace',
+					'remove': doc.getData().slice( 2, 4 ),
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 1 },
+				{
+					'type': 'replace',
+					'remove': doc.getData().slice( 5, 55 ),
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 1 },
+				{
+					'type': 'replace',
+					'remove': ['l'],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 4 }
+			]
+		},
+		'removing content from a paragraph in the middle': {
+			'args': [doc, new ve.Range( 56, 57 )],
+			'ops': [
+				{ 'type': 'retain', 'length': 56 },
+				{
+					'type': 'replace',
+					'remove': ['l'],
+					'insert': []
+				},
+				{ 'type': 'retain', 'length': 4 }
 			]
 		}
 	};
@@ -236,20 +419,20 @@ test( 'newFromAttributeChange', function() {
 					'from': 1,
 					'to': 2
 				},
-				{ 'type': 'retain', 'length': 59 }
+				{ 'type': 'retain', 'length': 61 }
 			]
 		},
 		'middle element': {
-			'args': [doc, 16, 'style', 'number'],
+			'args': [doc, 17, 'style', 'number'],
 			'ops': [
-				{ 'type': 'retain', 'length': 16 },
+				{ 'type': 'retain', 'length': 17 },
 				{
 					'type': 'attribute',
 					'key': 'style',
 					'from': 'bullet',
 					'to': 'number'
 				},
-				{ 'type': 'retain', 'length': 43 }
+				{ 'type': 'retain', 'length': 44 }
 			]
 		},
 		'non-element': {
@@ -284,7 +467,7 @@ test( 'newFromAnnotation', function() {
 					'bias': 'stop',
 					'annotation': { 'type': 'textStyle/bold' }
 				},
-				{ 'type': 'retain', 'length': 57 }
+				{ 'type': 'retain', 'length': 59 }
 			]
 		},
 		'over annotated text': {
@@ -318,17 +501,17 @@ test( 'newFromAnnotation', function() {
 					'bias': 'stop',
 					'annotation': { 'type': 'textStyle/bold' }
 				},
-				{ 'type': 'retain', 'length': 55 }
+				{ 'type': 'retain', 'length': 57 }
 			]
 		},
 		'over elements': {
 			'args': [doc, new ve.Range( 4, 9 ), 'set', { 'type': 'textStyle/bold' }],
 			'ops': [
-				{ 'type': 'retain', 'length': 59 }
+				{ 'type': 'retain', 'length': 61 }
 			]
 		},
 		'over elements and content': {
-			'args': [doc, new ve.Range( 3, 10 ), 'set', { 'type': 'textStyle/bold' }],
+			'args': [doc, new ve.Range( 3, 11 ), 'set', { 'type': 'textStyle/bold' }],
 			'ops': [
 				{ 'type': 'retain', 'length': 3 },
 				{
@@ -344,7 +527,7 @@ test( 'newFromAnnotation', function() {
 					'bias': 'stop',
 					'annotation': { 'type': 'textStyle/bold' }
 				},
-				{ 'type': 'retain', 'length': 5 },
+				{ 'type': 'retain', 'length': 6 },
 				{
 					'type': 'annotate',
 					'method': 'set',
@@ -358,7 +541,7 @@ test( 'newFromAnnotation', function() {
 					'bias': 'stop',
 					'annotation': { 'type': 'textStyle/bold' }
 				},
-				{ 'type': 'retain', 'length': 49 }
+				{ 'type': 'retain', 'length': 50 }
 			]
 		}
 	};

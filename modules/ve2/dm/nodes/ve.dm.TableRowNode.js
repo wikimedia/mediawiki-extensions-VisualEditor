@@ -26,7 +26,7 @@ ve.dm.TableRowNode.rules = {
 	'isContent': false,
 	'canContainContent': false,
 	'childNodeTypes': ['tableCell'],
-	'parentNodeTypes': ['table']
+	'parentNodeTypes': ['tableSection']
 };
 
 /**
@@ -37,11 +37,11 @@ ve.dm.TableRowNode.rules = {
  * @member
  */
 ve.dm.TableRowNode.converters = {
-	'tags': 'tr',
-	'toHtml': function( type, element ) {
-		return ve.dm.createHtmlElement( 'tr' );
+	'domElementTypes': ['tr'],
+	'toDomElement': function( type, element ) {
+		return document.createElement( 'tr' );
 	},
-	'toData': function( tag, element ) {
+	'toDataElement': function( tag, element ) {
 		return { 'type': 'tableRow' };
 	}
 };

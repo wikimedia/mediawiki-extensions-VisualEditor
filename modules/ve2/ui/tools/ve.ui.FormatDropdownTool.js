@@ -65,7 +65,7 @@ ve.FormatDropdownTool = function( toolbar, name, title ) {
 ve.FormatDropdownTool.prototype.onSelect = function( item ) {
 	var selection = this.toolbar.surfaceView.model.getSelection();
 	
-	this.toolbar.surfaceView.stopPolling();
+	//this.toolbar.surfaceView.stopPolling();
 	var txs = this.toolbar.surfaceView.model.getDocument().prepareLeafConversion(
 		selection,
 		item.type,
@@ -75,20 +75,20 @@ ve.FormatDropdownTool.prototype.onSelect = function( item ) {
 		this.toolbar.surfaceView.model.transact( txs[i] );
 	}
 	this.toolbar.surfaceView.showSelection( selection );
-	this.toolbar.surfaceView.startPolling();
+	//this.toolbar.surfaceView.startPolling();
 };
 
 ve.FormatDropdownTool.prototype.updateState = function( annotations, nodes ) {
 	// Get type and attributes of the first node
 	var i,
 		format = {
-			'type': nodes[0].getElementType(),
-			'attributes': nodes[0].getElement().attributes
+			'type': nodes[0].type,
+			'attributes': nodes[0].attributes
 		};
 	// Look for mismatches, in which case format should be null
 	for ( i = 1; i < nodes.length; i++ ) {
-		if ( format.type != nodes[i].getElementType() ||
-			!ve.compareObjects( format.attributes, nodes[i].element.attributes ) ) {
+		if ( format.type != nodes[i].getType() ||
+			!ve.compareObjects( format.attributes, nodes[i].attributes ) ) {
 			format = null;
 			break;
 		}

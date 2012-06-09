@@ -15,6 +15,12 @@
  * @version 0.1.0
  */
 
+/* Configuration */
+
+// URL to the parsoid instance
+$wgVisualEditorParsoidURL = 'http://parsoid.wmflabs.org/';
+
+
 /* Setup */
 
 $wgExtensionCredits['other'][] = array(
@@ -93,7 +99,8 @@ $wgResourceModules += array(
 			'copyrightpage',
 			'edit',
 			'accesskey-ca-edit',
-			'tooltip-ca-edit'
+			'tooltip-ca-edit',
+			'viewsource'
 
 		),
 		'styles' => 'core/ve.Core.css',
@@ -131,7 +138,6 @@ $wgResourceModules += array(
 			've2/dm/ve.dm.Document.js',
 			've2/dm/ve.dm.DocumentSynchronizer.js',
 			've2/dm/ve.dm.Converter.js',
-			've2/dm/ve.dm.HTMLConverter.js',
 
 			've2/dm/nodes/ve.dm.AlienInlineNode.js',
 			've2/dm/nodes/ve.dm.AlienBlockNode.js',
@@ -147,6 +153,7 @@ $wgResourceModules += array(
 			've2/dm/nodes/ve.dm.TableCellNode.js',
 			've2/dm/nodes/ve.dm.TableNode.js',
 			've2/dm/nodes/ve.dm.TableRowNode.js',
+			've2/dm/nodes/ve.dm.TableSectionNode.js',
 			've2/dm/nodes/ve.dm.TextNode.js',
 
 			've2/dm/annotations/ve.dm.LinkAnnotation.js',
@@ -180,6 +187,7 @@ $wgResourceModules += array(
 			've2/ce/nodes/ve.ce.TableCellNode.js',
 			've2/ce/nodes/ve.ce.TableNode.js',
 			've2/ce/nodes/ve.ce.TableRowNode.js',
+			've2/ce/nodes/ve.ce.TableSectionNode.js',
 			've2/ce/nodes/ve.ce.TextNode.js',
 
 			// ui
@@ -206,15 +214,15 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			// ce
-			've2/ce/styles/ve.ce.Surface.css',
-			've2/ce/styles/ve.ce.Content.css',
 			've2/ce/styles/ve.ce.Document.css',
+			've2/ce/styles/ve.ce.Node.css',
+			've2/ce/styles/ve.ce.Surface.css',
 			// ui
-			've2/ui/styles/ve.ui.Surface.css',
 			've2/ui/styles/ve.ui.Context.css',
 			've2/ui/styles/ve.ui.Inspector.css',
-			've2/ui/styles/ve.ui.Toolbar.css',
 			've2/ui/styles/ve.ui.Menu.css',
+			've2/ui/styles/ve.ui.Surface.css',
+			've2/ui/styles/ve.ui.Toolbar.css',
 		),
 		'dependencies' => array(
 			'jquery',
@@ -256,14 +264,4 @@ $wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
 $wgAutoloadClasses['VisualEditorHooks'] = $dir . 'VisualEditor.hooks.php';
 $wgHooks['BeforePageDisplay'][] = 'VisualEditorHooks::onPageDisplay';
 $wgHooks['userCan'][] = 'VisualEditorHooks::namespaceProtection';
-$wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::makeGlobalScriptVariables';
-
-// API for retrieving wikidom parse results
-$wgAutoloadClasses['ApiQueryParseTree'] = $dir . 'api/ApiQueryParseTree.php';
-$wgAPIPropModules['parsetree'] = 'ApiQueryParseTree';
-
-// external cmd, accepts wikitext and returns parse tree in JSON. Also set environment variables needed by script here.
-putenv('NODE_PATH=/usr/local/bin/node_modules' );
-$wgVisualEditorParserCmd = '/usr/local/bin/node ' . $dir . 'modules/parser/parse.js';
-
-
+$wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::makeGlobalVariablesScript';

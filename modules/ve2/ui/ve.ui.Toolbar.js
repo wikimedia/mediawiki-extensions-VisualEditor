@@ -16,22 +16,29 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
 	this.$groups = $( '<div class="es-toolbarGroups"></div>' ).prependTo( this.$ );
 	this.tools = [];
 
+	// Listen to the model for selection event
+	this.surfaceView.model.on( 'select', function( e ){
 
-	this.surfaceView.on( 'rangeChange', function( e ) {
-		if ( e.new !== null ) {
-			var	annotations = _this.surfaceView.getAnnotations(),
-				nodes = [],
-				model = _this.surfaceView.documentView.model;
+		var model = _this.surfaceView.getModel(),
+			doc = model.getDocument(),
+			annotations,
+			nodes = [],
+			startNode,
+			endNode;
+		console.log ('event');
 
-			if ( e.new.from === e.new.to ) {
-				nodes.push( model.getNodeFromOffset( e.new.from ) );
+		if(	e !== null ) {
+			if ( e.from === e.to ){
+				nodes.push( doc.getNodeFromOffset( e.from ) );
 			} else {
-				var	startNode = model.getNodeFromOffset( e.new.start ),
-					endNode = model.getNodeFromOffset( e.new.end );
+				startNode = doc.getNodeFromOffset( e.from );
+				endNode = doc.getNodeFromOffset ( e.end );
+				// These should be different, alas just in case.
 				if ( startNode === endNode ) {
 					nodes.push( startNode );
+
 				} else {
-					model.traverseLeafNodes( function( node ) {
+					model.getDocument().getDocumentNode().traverseLeafNodes( function( node ) {
 						nodes.push( node );
 						if( node === endNode ) {
 							return false;
@@ -39,16 +46,25 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
 					}, startNode );
 				}
 			}
+			// Update Context
+			if ( e.getLength() > 0 ) {
+				_this.surfaceView.contextView.set();
+			} else {
+				_this.surfaceView.contextView.clear();
+			}
 
+			annotations = doc.getAnnotationsFromRange( e );
+			// Update state
 			for ( i = 0; i < _this.tools.length; i++ ) {
 				_this.tools[i].updateState( annotations, nodes );
 			}
 		} else {
+			// Clear state
 			for ( i = 0; i < _this.tools.length; i++ ) {
 				_this.tools[i].clearState();
 			}
 		}
-	} );
+	});
 
 	this.config = config || [
 		{ 'name': 'history', 'items' : ['undo', 'redo'] },
@@ -57,6 +73,7 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
 		{ 'name': 'list', 'items' : ['number', 'bullet', 'outdent', 'indent'] }
 	];
 	this.setup();
+
 };
 
 /* Methods */
@@ -89,6 +106,7 @@ ve.ui.Toolbar.prototype.setup = function() {
 
 		this.$groups.append( $group );
 	}
+
 };
 
 ve.extendClass( ve.ui.Toolbar, ve.EventEmitter );

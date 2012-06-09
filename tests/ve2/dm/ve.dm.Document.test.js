@@ -2,7 +2,7 @@ module( 've.dm.Document' );
 
 /* Tests */
 
-test( 'constructor', 3, function() {
+test( 'constructor', 4, function() {
 	var doc = new ve.dm.Document( ve.dm.example.data );
 	deepEqual(
 		ve.example.getNodeTreeSummary( doc.getDocumentNode() ),
@@ -27,6 +27,13 @@ test( 'constructor', 3, function() {
 		ve.example.getNodeTreeSummary( new ve.dm.DocumentNode( [ new ve.dm.TextNode( 4 ) ] ) ),
 		'plain text input is handled correctly'
 	);
+
+	doc = new ve.dm.Document( [ { 'type': 'paragraph' }, { 'type': '/paragraph' } ] );
+	deepEqual(
+		ve.example.getNodeTreeSummary( doc.getDocumentNode() ),
+		ve.example.getNodeTreeSummary( new ve.dm.DocumentNode( [ new ve.dm.ParagraphNode( [ new ve.dm.TextNode( 0 ) ] ) ] ) ),
+		'empty paragraph gets a zero-length text node'
+	);
 } );
 
 test( 'getData', 1, function() {
@@ -34,17 +41,18 @@ test( 'getData', 1, function() {
 	deepEqual( doc.getData(), ve.dm.example.data );
 } );
 
-test( 'getOffsetMap', 61, function() {
+test( 'getOffsetMap', function() {
 	var doc = new ve.dm.Document( ve.dm.example.data ),
 		actual = doc.getOffsetMap(),
 		expected = ve.dm.example.getOffsetMap( doc.getDocumentNode() );
+	expect( actual.length + 1 );
 	ok( actual.length === expected.length, 'offset map lengths match' );
 	for ( var i = 0; i < actual.length; i++ ) {
 		ok( actual[i] === expected[i], 'reference at offset ' + i );
 	}
 } );
 
-test( 'getNodeFromOffset', 60, function() {
+test( 'getNodeFromOffset', function() {
 	var doc = new ve.dm.Document( ve.dm.example.data ),
 		root = doc.getDocumentNode().getRoot(),
 		node,
@@ -56,33 +64,35 @@ test( 'getNodeFromOffset', 60, function() {
 		[0], // 4 - heading
 		[], // 5 - document
 		[1], // 6 - table
-		[1, 0], // 7 - tableRow
-		[1, 0, 0], // 8 - tableCell
-		[1, 0, 0, 0], // 9 - paragraph
-		[1, 0, 0, 0], // 10 - paragraph
-		[1, 0, 0], // 11 - tableCell
-		[1, 0, 0, 1], // 12 - list
-		[1, 0, 0, 1, 0], // 13 - listItem
-		[1, 0, 0, 1, 0, 0], // 14 - paragraph
-		[1, 0, 0, 1, 0, 0], // 15 - paragraph
-		[1, 0, 0, 1, 0], // 16 - listItem
-		[1, 0, 0, 1, 0, 1], // 17 - list
-		[1, 0, 0, 1, 0, 1, 0], // 18 - listItem
-		[1, 0, 0, 1, 0, 1, 0, 0], // 19 - paragraph
-		[1, 0, 0, 1, 0, 1, 0, 0], // 20 - paragraph
-		[1, 0, 0, 1, 0, 1, 0], // 21 - listItem
-		[1, 0, 0, 1, 0, 1], // 22 - list
-		[1, 0, 0, 1, 0], // 23 - listItem
-		[1, 0, 0, 1], // 24 - list
-		[1, 0, 0], // 25 - tableCell
-		[1, 0, 0, 2], // 26 - list
-		[1, 0, 0, 2, 0], // 27 - listItem
-		[1, 0, 0, 2, 0, 0], // 28 - paragraph
-		[1, 0, 0, 2, 0, 0], // 29 - paragraph
-		[1, 0, 0, 2, 0], // 30 - listItem
-		[1, 0, 0, 2], // 31 - list
-		[1, 0, 0], // 32 - tableCell
-		[1, 0], // 33 - tableRow
+		[1, 0], // 7 - tableSection
+		[1, 0, 0], // 7 - tableRow
+		[1, 0, 0, 0], // 8 - tableCell
+		[1, 0, 0, 0, 0], // 9 - paragraph
+		[1, 0, 0, 0, 0], // 10 - paragraph
+		[1, 0, 0, 0], // 11 - tableCell
+		[1, 0, 0, 0, 1], // 12 - list
+		[1, 0, 0, 0, 1, 0], // 13 - listItem
+		[1, 0, 0, 0, 1, 0, 0], // 14 - paragraph
+		[1, 0, 0, 0, 1, 0, 0], // 15 - paragraph
+		[1, 0, 0, 0, 1, 0], // 16 - listItem
+		[1, 0, 0, 0, 1, 0, 1], // 17 - list
+		[1, 0, 0, 0, 1, 0, 1, 0], // 18 - listItem
+		[1, 0, 0, 0, 1, 0, 1, 0, 0], // 19 - paragraph
+		[1, 0, 0, 0, 1, 0, 1, 0, 0], // 20 - paragraph
+		[1, 0, 0, 0, 1, 0, 1, 0], // 21 - listItem
+		[1, 0, 0, 0, 1, 0, 1], // 22 - list
+		[1, 0, 0, 0, 1, 0], // 23 - listItem
+		[1, 0, 0, 0, 1], // 24 - list
+		[1, 0, 0, 0], // 25 - tableCell
+		[1, 0, 0, 0, 2], // 26 - list
+		[1, 0, 0, 0, 2, 0], // 27 - listItem
+		[1, 0, 0, 0, 2, 0, 0], // 28 - paragraph
+		[1, 0, 0, 0, 2, 0, 0], // 29 - paragraph
+		[1, 0, 0, 0, 2, 0], // 30 - listItem
+		[1, 0, 0, 0, 2], // 31 - list
+		[1, 0, 0, 0], // 32 - tableCell
+		[1, 0, 0], // 33 - tableRow
+		[1, 0], // 33 - tableSection
 		[1], // 34 - table
 		[], // 35- document
 		[2], // 36 - preformatted
@@ -110,6 +120,7 @@ test( 'getNodeFromOffset', 60, function() {
 		[5], // 58 - paragraph
 		[] // 59 - document
 	];
+	expect( expected.length );
 	for ( var i = 0; i < expected.length; i++ ) {
 		node = root;
 		for ( var j = 0; j < expected[i].length; j++ ) {
@@ -128,7 +139,7 @@ test( 'getDataFromNode', 3, function() {
 	);
 	deepEqual(
 		doc.getDataFromNode( doc.getDocumentNode().getChildren()[1] ),
-		ve.dm.example.data.slice( 6, 34 ),
+		ve.dm.example.data.slice( 6, 36 ),
 		'branch with branch children'
 	);
 	deepEqual(
@@ -461,7 +472,7 @@ test( 'getAnnotatedRangeFromOffset', 1,  function(){
 	}
 } );
 
-test( 'getMatchingAnnotations', 1, function() {
+test( 'getMatchingAnnotationsFromOffset', 1, function() {
 	var cases = {
 		'finds two out of three': {
 			'pattern': /textStyle\/.*/,
@@ -513,7 +524,7 @@ test( 'getMatchingAnnotations', 1, function() {
 	for ( var msg in cases ) {
 		deepEqual(
 			( new ve.dm.Document( [cases[msg].character] ) )
-				.getMatchingAnnotations( 0, cases[msg].pattern ),
+				.getMatchingAnnotationsFromOffset( 0, cases[msg].pattern ),
 			cases[msg].expected,
 			msg
 		);
@@ -793,8 +804,8 @@ test( 'isContentData', 1, function() {
 test( 'rebuildNodes', function() {
 	var doc = new ve.dm.Document( ve.dm.example.data.slice( 0 ) ),
 		documentNode = doc.getDocumentNode();
-	// Rebuild without changes
-	doc.rebuildNodes( documentNode, 1, 1, 5, 30 );
+	// Rebuild table without changes
+	doc.rebuildNodes( documentNode, 1, 1, 5, 32 );
 	deepEqual(
 		ve.example.getNodeTreeSummary( documentNode ),
 		ve.example.getNodeTreeSummary( ve.dm.example.tree ),
@@ -804,8 +815,7 @@ test( 'rebuildNodes', function() {
 	// XXX: Create a new document node tree from the old one
 	var tree = new ve.dm.DocumentNode( ve.dm.example.tree.getChildren() );
 	// Replace table with paragraph
-	doc.data.splice( 5, 30, { 'type': 'paragraph' }, 'a', 'b', 'c', { 'type': '/paragraph' } );
-	// Remove table from tree model
+	doc.data.splice( 5, 32, { 'type': 'paragraph' }, 'a', 'b', 'c', { 'type': '/paragraph' } );
 	tree.splice( 1, 1, new ve.dm.ParagraphNode( [new ve.dm.TextNode( 3 )] ) );
 	// Rebuild with changes
 	doc.rebuildNodes( documentNode, 1, 1, 5, 5 );
@@ -868,9 +878,9 @@ test( 'getRelativeContentOffset', function() {
 		},
 		{
 			'msg': 'invalid starting offset with zero distance gets corrected',
-			'offset': 59,
+			'offset': 61,
 			'distance': 0,
-			'expected': 58
+			'expected': 60
 		},
 		{
 			'msg': 'valid offset with zero distance returns same offset',
@@ -886,9 +896,9 @@ test( 'getRelativeContentOffset', function() {
 		},
 		{
 			'msg': 'invalid starting offset gets corrected',
-			'offset': 59,
+			'offset': 61,
 			'distance': 1,
-			'expected': 58
+			'expected': 60
 		},
 		{
 			'msg': 'first content offset is farthest left',
@@ -898,9 +908,9 @@ test( 'getRelativeContentOffset', function() {
 		},
 		{
 			'msg': 'last content offset is farthest right',
-			'offset': 57,
+			'offset': 59,
 			'distance': 2,
-			'expected': 58
+			'expected': 60
 		},
 		{
 			'msg': '1 right within text',
@@ -930,23 +940,23 @@ test( 'getRelativeContentOffset', function() {
 			'msg': '1 right over elements',
 			'offset': 4,
 			'distance': 1,
-			'expected': 9
+			'expected': 10
 		},
 		{
 			'msg': '2 right over elements',
 			'offset': 4,
 			'distance': 2,
-			'expected': 10
+			'expected': 11
 		},
 		{
 			'msg': '1 left over elements',
-			'offset': 9,
+			'offset': 10,
 			'distance': -1,
 			'expected': 4
 		},
 		{
 			'msg': '2 left over elements',
-			'offset': 9,
+			'offset': 10,
 			'distance': -2,
 			'expected': 3
 		}
@@ -980,7 +990,7 @@ test( 'getNearestContentOffset', function() {
 			'msg': 'positive direction results in next valid offset to the right',
 			'offset': 5,
 			'direction': 1,
-			'expected': 9
+			'expected': 10
 		},
 		{
 			'msg': 'negative direction results in next valid offset to the left',
@@ -1027,9 +1037,9 @@ test( 'getRelativeStructuralOffset', function() {
 		},
 		{
 			'msg': 'invalid starting offset with zero distance gets corrected',
-			'offset': 58,
+			'offset': 60,
 			'distance': 0,
-			'expected': 59
+			'expected': 61
 		},
 		{
 			'msg': 'valid offset with zero distance returns same offset',
@@ -1045,9 +1055,9 @@ test( 'getRelativeStructuralOffset', function() {
 		},
 		{
 			'msg': 'invalid starting offset gets corrected',
-			'offset': 57,
+			'offset': 59,
 			'distance': 1,
-			'expected': 59
+			'expected': 61
 		},
 		{
 			'msg': 'first structural offset is farthest left',
@@ -1057,9 +1067,9 @@ test( 'getRelativeStructuralOffset', function() {
 		},
 		{
 			'msg': 'last structural offset is farthest right',
-			'offset': 56,
+			'offset': 58,
 			'distance': 2,
-			'expected': 59
+			'expected': 61
 		},
 		{
 			'msg': '1 right',
@@ -1072,7 +1082,7 @@ test( 'getRelativeStructuralOffset', function() {
 			'offset': 5,
 			'distance': 1,
 			'unrestricted': true,
-			'expected': 8
+			'expected': 9
 		},
 		{
 			'msg': '2 right',
@@ -1085,30 +1095,30 @@ test( 'getRelativeStructuralOffset', function() {
 			'offset': 0,
 			'distance': 2,
 			'unrestricted': true,
-			'expected': 8
+			'expected': 9
 		},
 		{
 			'msg': '1 left',
-			'offset': 59,
+			'offset': 61,
 			'distance': -1,
-			'expected': 56
+			'expected': 58
 		},
 		{
 			'msg': '1 left, unrestricted',
-			'offset': 8,
+			'offset': 9,
 			'distance': -1,
 			'unrestricted': true,
 			'expected': 5
 		},
 		{
 			'msg': '2 left',
-			'offset': 59,
+			'offset': 61,
 			'distance': -2,
-			'expected': 53
+			'expected': 55
 		},
 		{
 			'msg': '2 left, unrestricted',
-			'offset': 8,
+			'offset': 9,
 			'distance': -2,
 			'unrestricted': true,
 			'expected': 0
@@ -1143,10 +1153,10 @@ test( 'getNearestStructuralOffset', function() {
 		},
 		{
 			'msg': 'unspecified direction results in shortest distance, unrestricted',
-			'offset': 7,
+			'offset': 8,
 			'direction': 0,
 			'unrestricted': true,
-			'expected': 8
+			'expected': 9
 		},
 		{
 			'msg': 'unspecified direction results in shortest distance, unrestricted',
@@ -1169,10 +1179,10 @@ test( 'getNearestStructuralOffset', function() {
 		},
 		{
 			'msg': 'positive direction results in next valid offset to the right, unrestricted',
-			'offset': 6,
+			'offset': 7,
 			'direction': 1,
 			'unrestricted': true,
-			'expected': 8
+			'expected': 9
 		},
 		{
 			'msg': 'negative direction results in next valid offset to the left',
@@ -1188,7 +1198,7 @@ test( 'getNearestStructuralOffset', function() {
 		},
 		{
 			'msg': 'negative direction results in next valid offset to the left, unrestricted',
-			'offset': 7,
+			'offset': 6,
 			'direction': -1,
 			'unrestricted': true,
 			'expected': 5
@@ -1250,6 +1260,128 @@ test( 'selectNodes', function() {
 		deepEqual(
 			ve.example.getNodeSelectionSummary( cases[i].actual ),
 			ve.example.getNodeSelectionSummary( cases[i].expected ),
+			cases[i].msg
+		);
+	}
+} );
+
+test( 'getBalancedData', function() {
+	var doc = new ve.dm.Document( ve.dm.example.data ),
+		cases = [
+		{
+			'msg': 'empty range',
+			'range': new ve.Range( 2, 2 ),
+			'expected': []
+		},
+		{
+			'msg': 'range with one character',
+			'range': new ve.Range( 2, 3 ),
+			'expected': [
+				['b', { '{"type":"textStyle/bold"}': { 'type': 'textStyle/bold' } }]
+			]
+		},
+		{
+			'msg': 'range with two characters',
+			'range': new ve.Range( 2, 4 ),
+			'expected': [
+				['b', { '{"type":"textStyle/bold"}': { 'type': 'textStyle/bold' } }],
+				['c', { '{"type":"textStyle/italic"}': { 'type': 'textStyle/italic' } }]
+			]
+		},
+		{
+			'msg': 'range with two characters and a header closing',
+			'range': new ve.Range( 2, 5 ),
+			'expected': [
+				{ 'type': 'heading', 'attributes': { 'level': 1 } },
+				['b', { '{"type":"textStyle/bold"}': { 'type': 'textStyle/bold' } }],
+				['c', { '{"type":"textStyle/italic"}': { 'type': 'textStyle/italic' } }],
+				{ 'type': '/heading' }
+			]
+		},
+		{
+			'msg': 'range with one character, a header closing and a table opening',
+			'range': new ve.Range( 3, 6 ),
+			'expected': [
+				{ 'type': 'heading', 'attributes': { 'level': 1 } },
+				['c', { '{"type":"textStyle/italic"}': { 'type': 'textStyle/italic' } }],
+				{ 'type': '/heading' },
+				{ 'type': 'table' },
+				{ 'type': '/table' }
+			]
+		},
+		{
+			'msg': 'range from a paragraph into a list',
+			'range': new ve.Range( 15, 21 ),
+			'expected': [
+				{ 'type': 'paragraph' },
+				'e',
+				{ 'type': '/paragraph' },
+				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+				{ 'type': 'listItem'  },
+				{ 'type': 'paragraph' },
+				'f',
+				{ 'type': '/paragraph' },
+				{ 'type': '/listItem' },
+				{ 'type': '/list' }
+			]
+		},
+		{
+			'msg': 'range from a paragraph inside a nested list into the next list',
+			'range': new ve.Range( 20, 27 ),
+			'expected': [
+				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+				{ 'type': 'listItem' },
+				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+				{ 'type': 'listItem' },
+				{ 'type': 'paragraph' },
+				'f',
+				{ 'type': '/paragraph' },
+				{ 'type': '/listItem' },
+				{ 'type': '/list' },
+				{ 'type': '/listItem' },
+				{ 'type': '/list' },
+				{ 'type': 'list', 'attributes': { 'style': 'number' } },
+				{ 'type': '/list' }
+			]
+		},
+		{
+			'msg': 'range from a paragraph inside a nested list out of both lists',
+			'range': new ve.Range( 20, 26 ),
+			'expected': [
+				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+				{ 'type': 'listItem' },
+				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+				{ 'type': 'listItem' },
+				{ 'type': 'paragraph' },
+				'f',
+				{ 'type': '/paragraph' },
+				{ 'type': '/listItem' },
+				{ 'type': '/list' },
+				{ 'type': '/listItem' },
+				{ 'type': '/list' }
+			]
+		},
+		{
+			'msg': 'range from a paragraph inside a nested list out of the outer listItem',
+			'range': new ve.Range( 20, 25 ),
+			'expected': [
+				{ 'type': 'listItem' },
+				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+				{ 'type': 'listItem' },
+				{ 'type': 'paragraph' },
+				'f',
+				{ 'type': '/paragraph' },
+				{ 'type': '/listItem' },
+				{ 'type': '/list' },
+				{ 'type': '/listItem' }
+			]
+		}
+	];
+	expect( cases.length );
+	for ( var i = 0; i < cases.length; i++ ) {
+		deepEqual(
+			doc.getBalancedData( cases[i].range ),
+			cases[i].expected,
 			cases[i].msg
 		);
 	}

@@ -12,6 +12,33 @@ ve.dm.Surface = function( doc ) {
 	// Properties
 	this.documentModel = doc;
 	this.selection = null;
+	
+
+	this.smallStack = [];
+	this.bigStack = [];
+	this.undoIndex = 0;
+
+	var _this = this;
+	setInterval( function () {
+		_this.breakpoint();
+	}, 750 );
+};
+
+/* Methods */
+
+ve.dm.Surface.prototype.purgeHistory = function() {
+	this.selection = null;
+	this.smallStack = [];
+	this.bigStack = [];
+	this.undoIndex = 0;
+};
+
+ve.dm.Surface.prototype.getHistory = function() {
+	if ( this.smallStack.length > 0 ) {
+		return this.bigStack.slice( 0 ).concat( [{ 'stack': this.smallStack.slice(0) }] );
+	} else {
+		return this.bigStack.slice( 0 );
+	}
 };
 
 /**
@@ -49,8 +76,8 @@ ve.dm.Surface.prototype.setSelection = function( selection ) {
 		)
 	{
 		this.selection = selection;
-		this.emit ('select', this.selection.clone() );
 	}
+	this.emit ('select', this.selection.clone() );
 };
 
 /**
@@ -60,9 +87,88 @@ ve.dm.Surface.prototype.setSelection = function( selection ) {
  * @param {ve.dm.Transaction} transactions Tranasction to apply to the document
  */
 ve.dm.Surface.prototype.transact = function( transaction ) {
-	ve.dm.TransactionProcessor.commit( this.documentModel, transaction );
+	this.bigStack = this.bigStack.slice( 0, this.bigStack.length - this.undoIndex );
+	this.undoIndex = 0;
+	this.smallStack.push( transaction );
+	ve.dm.TransactionProcessor.commit( this.getDocument(), transaction );
 	this.emit( 'transact', transaction );
 };
+
+/**
+ * Applies an annotation to the current selection
+ *
+ * @method
+ * @param {String} annotation action: toggle, clear, set
+ * @param {Object} annotation object to apply.
+ */
+ve.dm.Surface.prototype.annotate = function( method, annotation ) {
+	var selection = this.getSelection();
+
+	if ( method === 'toggle' ) {
+		var annotations = this.getDocument().getAnnotationsFromRange( selection );
+		if ( annotation in annotations ) {
+			method = 'clear';
+		} else {
+			method = 'set';
+		}
+	}
+	if ( this.selection.getLength() ) {
+		var tx = ve.dm.Transaction.newFromAnnotation(
+			this.getDocument(), selection, method, annotation
+		);
+		this.transact( tx );
+	}
+};
+
+ve.dm.Surface.prototype.breakpoint = function( selection ) {
+	if( this.smallStack.length > 0 ) {
+		this.bigStack.push( {
+			stack: this.smallStack,
+			selection: selection || this.selection.clone()
+		} );
+		this.smallStack = [];
+		this.emit ( 'history' );
+	}
+};
+
+ve.dm.Surface.prototype.undo = function() {
+	this.breakpoint();
+	this.undoIndex++;
+	if ( this.bigStack[this.bigStack.length - this.undoIndex] ) {
+		var diff = 0;
+		var item = this.bigStack[this.bigStack.length - this.undoIndex];
+		for( var i = item.stack.length - 1; i >= 0; i-- ) {
+			this.documentModel.rollback( item.stack[i] );
+			diff += item.stack[i].lengthDifference;
+		}
+		var selection = item.selection;
+		selection.end -= diff;
+		this.emit ( 'history' );
+		return selection;
+	}
+	return null;
+};
+
+ve.dm.Surface.prototype.redo = function() {
+	this.breakpoint();
+	if ( this.undoIndex > 0 ) {
+		if ( this.bigStack[this.bigStack.length - this.undoIndex] ) {
+			var diff = 0;
+			var item = this.bigStack[this.bigStack.length - this.undoIndex];
+			for( var i = 0; i < item.stack.length; i++ ) {
+				this.documentModel.commit( item.stack[i] );
+				diff += item.stack[i].lengthDifference;
+			}
+			var selection = item.selection;
+			selection.end += diff;
+		}
+		this.undoIndex--;
+		this.emit ( 'history' );
+		return selection;
+	}
+	return null;
+};
+
 
 /* Inheritance */
 
