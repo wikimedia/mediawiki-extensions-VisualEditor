@@ -3,8 +3,8 @@
  * Binds all the callback methods to a `callbacks` object which can be used as a module import
 **/
 
-Session = require( './collab.Session' ).Session;
-Document = require( './collab.Document' ).Document;
+Session = require( './collab.Session.js' ).Session;
+Document = require( './collab.Document.js' ).Document;
 parse = require( './collab.parse.js' ).parse;
 
 callbacks = function( server ) {
@@ -14,7 +14,7 @@ callbacks = function( server ) {
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-callbacks.prototype.clientConnection = function( data ) {
+callbacks.prototype.clientConnection = function( data, callback ) {
 	var userID = data.user;
 	var docTitle = data.title;
 	var sessions = this.server.sessions;
@@ -26,10 +26,10 @@ callbacks.prototype.clientConnection = function( data ) {
 	parse( docTitle, function( docHTML ) {
 		for( session in sessions ) {
 			var ssid = sessions[ session ].ssid;
-			if( ssid = remoteSSID ) {
+			/*if( ssid == remoteSSID ) {
 				session_doc = session[ session ].Document;
 				break;
-			}
+			}*/
 		}
 		if( session_doc == null ) {
 			session_doc = new Document( docHTML );
@@ -37,6 +37,7 @@ callbacks.prototype.clientConnection = function( data ) {
 		_this.session = new Session( docTitle, userID );
 		sessions.push( { 'ssid': _this.session.getID(), 'session': _this.session } );
 		_this.server.sessionIndex++;
+		callback( docHTML );
 	});
 };
 
