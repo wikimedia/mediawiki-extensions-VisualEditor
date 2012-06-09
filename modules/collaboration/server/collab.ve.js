@@ -24,6 +24,7 @@ ve = function () {
 	require('../../ve2/ve.LeafNode.js');
 	require('../../ve2/ve.Surface.js');
 	require('../../ve2/ve.Document.js');
+	Node = ve.Node;
 
 	// dm
 	require('../../ve2/dm/ve.dm.js');
