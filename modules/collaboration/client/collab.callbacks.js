@@ -26,3 +26,11 @@ collab.callbacks.prototype.clientDisconnection = function( data ) {
 collab.callbacks.prototype.newTransaction = function( trasaction ) {
 	//apply the transaction through the transaction processor
 };
+
+collab.callbacks.prototype.docTransfer = function( data ) {
+//	var linearData = ve.dm.HTMLConverter.getLinearModel( $( data.html)[0] );
+	var html = $('<div>' + data.html + '</div>' );
+	console.log( html[0] );
+	init_doc( html[0] );
+	// load data
+};

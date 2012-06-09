@@ -2,7 +2,7 @@
  * Module for establishing/maintaining socket connection with server
 **/
 
-collab.client = function() {
+collab.client = function( ) {
 	var settings = collab.settings;
 	var options = {
 	};
@@ -11,7 +11,7 @@ collab.client = function() {
 	socket.on( 'connection', function() {
 		socket.callbacks = new collab.callbacks( _this );
 		_this.bindEvents( socket )
-		socket.emit( 'client_connect', { user: 'Dash1291', title: 'Main_page' } );
+		socket.emit( 'client_connect', { user: 'Dash1291', title: 'Ellipse' } );
 	});
 };
 
@@ -21,11 +21,14 @@ collab.client.prototype.bindEvents = function( io_socket ) {
 		socket_callbacks.newTransaction( data );
 	});
 	
-	io_socket.on( 'user_connect', function( data ) {
+	io_socket.on( 'client_connect', function( data ) {
 		socket_callbacks.userConnect( data );
 	});
 
-	io_socket.on( 'user_disconnect', function( data ) {
+	io_socket.on( 'client_disconnect', function( data ) {
 		socket_callbacks.userDisconnect( data );
+	});
+	io_socket.on( 'document_transfer', function( data ) {
+		socket_callbacks.docTransfer( data );
 	});
 };
