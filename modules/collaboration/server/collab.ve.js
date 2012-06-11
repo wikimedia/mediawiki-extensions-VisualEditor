@@ -30,13 +30,15 @@ ve = function () {
 	require('../../ve2/dm/ve.dm.js');
 	require('../../ve2/dm/ve.dm.NodeFactory.js');
 	require('../../ve2/dm/ve.dm.Node.js');
+	require('../../ve2/dm/ve.dm.AnnotationFactory.js');
+	require('../../ve2/dm/ve.dm.Annotation.js');
 	require('../../ve2/dm/ve.dm.BranchNode.js');
 	require('../../ve2/dm/ve.dm.LeafNode.js');
 	require('../../ve2/dm/ve.dm.TransactionProcessor.js');
 	require('../../ve2/dm/ve.dm.Transaction.js');
 	require('../../ve2/dm/ve.dm.Surface.js');
 	require('../../ve2/dm/ve.dm.Document.js');
-	require('../../ve2/dm/ve.dm.HTMLConverter.js');
+	require('../../ve2/dm/ve.dm.Converter.js');
 
 	require('../../ve2/dm/nodes/ve.dm.AlienInlineNode.js');
 	require('../../ve2/dm/nodes/ve.dm.AlienBlockNode.js');

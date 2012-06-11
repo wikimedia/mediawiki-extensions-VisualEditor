@@ -6,7 +6,7 @@
 **/
 
 io = require( 'socket.io' );
-callbacks = require( './collab.callbacks' ).callbacks;
+callbacks = require( './collab.callbacks.js' ).callbacks;
 settings = require( '../settings.js' ).settings;
 
 /**

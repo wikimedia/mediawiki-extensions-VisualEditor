@@ -650,6 +650,11 @@ $(document).ready( function() {
 		'</div>' );
 
 
+	cb = new collab.client();
+} );
+
+function init_doc( html ) {
+
 	/* Sandbox config object. */
 	var options = {
 		toolbars: {
@@ -659,19 +664,18 @@ $(document).ready( function() {
 			}
 		}
 	};
-
 	/*
 		Create Sandbox instance of VE
 		Attach to #content element
 	*/
-	var sandboxEditor = new ve.Surface( '#content', HTML[0], options ),
+	var sandboxEditor = new ve.Surface( '#content', html, options ),
 		surfaceModel = sandboxEditor.getSurfaceModel(),
 		documentModel = sandboxEditor.getDocumentModel(),
 		parent = sandboxEditor.getParent(),
 		view = sandboxEditor.view;
 	
 	window.sandboxEditor = sandboxEditor;
-
+	
 		/* Rob's test selection stuff */
 		//surfaceModel.setSelection( new ve.Range(0, documentModel.getData().length ) );
 		//surfaceModel.setSelection( new ve.Range( 178, 185 ) );
@@ -687,4 +691,4 @@ $(document).ready( function() {
 		return false;
 	} );
 	//$( '.es-mode-wikitext' ).click();
-} );
+}
