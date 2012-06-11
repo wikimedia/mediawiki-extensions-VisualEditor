@@ -92,13 +92,13 @@ ve.ce.TextNode.annotationRenderers = {
 		'open': '<sub>',
 		'close': '</sub>'
 	},
-	'link/external': {
+	'link/extLink': {
 		'open': function( data ) {
 			return '<a href="' + data.href + '">';
 		},
 		'close': '</a>'
 	},
-	'link/internal': {
+	'link/wikiLink': {
 		'open': function( data ) {
 			return '<a href="' + data.href + '">';
 		},
@@ -160,9 +160,6 @@ ve.ce.TextNode.prototype.getHtml = function() {
 
 		for ( var hash in annotations ) {
 			annotation = annotations[hash];
-			if ( renderers[annotation.type] === undefined ) {
-				debugger;
-			}
 			out += typeof renderers[annotation.type].open === 'function' ?
 				renderers[annotation.type].open( annotation.data ) :
 				renderers[annotation.type].open;
