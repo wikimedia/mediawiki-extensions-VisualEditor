@@ -47,6 +47,7 @@ ve.Document.prototype.getDocumentNode = function() {
  * @throws 'Invalid end offset' if range.end is out of range
  */
 ve.Document.prototype.selectNodes = function( range, mode ) {
+	range.normalize();
 	var	doc = this.documentNode,
 		retval = [],
 		start = range.start,
@@ -98,7 +99,6 @@ ve.Document.prototype.selectNodes = function( range, mode ) {
 			'nodeOuterRange': nodeRange
 		} ];
 	}
-	// TODO maybe we could find the start more efficiently using the offset map
 	left = doc.children[0].isWrapped() ? 1 : 0;
 
 	do {

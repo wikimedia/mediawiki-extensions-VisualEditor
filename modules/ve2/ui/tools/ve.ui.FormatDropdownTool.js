@@ -63,19 +63,19 @@ ve.FormatDropdownTool = function( toolbar, name, title ) {
 /* Methods */
 
 ve.FormatDropdownTool.prototype.onSelect = function( item ) {
-	var selection = this.toolbar.surfaceView.model.getSelection();
-	
-	//this.toolbar.surfaceView.stopPolling();
-	var txs = this.toolbar.surfaceView.model.getDocument().prepareLeafConversion(
+	var		surfaceView = this.toolbar.surfaceView,
+			model = surfaceView.getModel();
+			selection = model.getSelection(),
+			doc = model.getDocument();
+
+	var txs = ve.dm.Transaction.newFromContentBranchConversion(
+		doc,
 		selection,
 		item.type,
 		item.attributes
 	);
-	for ( var i = 0; i < txs.length; i++ ) {
-		this.toolbar.surfaceView.model.transact( txs[i] );
-	}
-	this.toolbar.surfaceView.showSelection( selection );
-	//this.toolbar.surfaceView.startPolling();
+	model.transact ( txs );
+	surfaceView.showSelection( selection );
 };
 
 ve.FormatDropdownTool.prototype.updateState = function( annotations, nodes ) {
@@ -88,7 +88,7 @@ ve.FormatDropdownTool.prototype.updateState = function( annotations, nodes ) {
 	// Look for mismatches, in which case format should be null
 	for ( i = 1; i < nodes.length; i++ ) {
 		if ( format.type != nodes[i].getType() ||
-			!ve.compareObjects( format.attributes, nodes[i].attributes ) ) {
+			!ve.compareObjects( format.attributes || {}, nodes[i].attributes || {} ) ) {
 			format = null;
 			break;
 		}
@@ -101,7 +101,7 @@ ve.FormatDropdownTool.prototype.updateState = function( annotations, nodes ) {
 		for ( i = 0; i < items.length; i++ ) {
 			if (
 				format.type === items[i].type &&
-				ve.compareObjects( format.attributes, items[i].attributes )
+				ve.compareObjects( format.attributes || {}, items[i].attributes || {} )
 			) {
 				this.$label.text( items[i].label );
 				break;

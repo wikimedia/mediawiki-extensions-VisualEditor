@@ -15,17 +15,20 @@ ve.dm.example.html =
 				'<p>d</p>' +
 				'<ul>' +
 					'<li>' +
-						'<p>e</p>' +
+						'e' + // Not wrapped in a <p> due to Parsoid behavior
+						"\n" + // Workaround for Parsoid bug
 						'<ul>' +
 							'<li>' +
-								'<p>f</p>' +
+								'f' + // Not wrapped in a <p> due to Parsoid behavior
+								"\n" + // Workaround for Parsoid bug
 							'</li>' +
 						'</ul>' +
 					'</li>' +
 				'</ul>' +
 				'<ol>' +
 					'<li>' +
-						'<p>g</p>' +
+						'g' + // Not wrapped in a <p> due to Parsoid behavior
+						"\n" + // Workaround for Parsoid bug
 					'</li>' +
 				'</ol>' +
 			'</td>' +
@@ -283,145 +286,6 @@ ve.dm.example.tree = new ve.dm.DocumentNode( [
 	new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] )
 ] );
 
-/* Methods */
-
-/**
- * Creates an offset map that references a node tree.
- *
- * This is part of what a ve.dm.DocumentFragment generates when given linear data.
- *
- * @method
- * @param {ve.dm.DocumentNode} root Document node to reference
- */
-ve.dm.example.getOffsetMap = function( root ) {
-	var lookup = ve.example.lookupNode;
-	return [
-		lookup( root ), // 0 - document
-		// <h1>
-		lookup( root, 0 ), // 1 - heading
-		// a
-		lookup( root, 0 ), // 2 - heading
-		// b (bold)
-		lookup( root, 0 ), // 3 - heading
-		// c (italic)
-		lookup( root, 0 ), // 4 - heading
-		// </h1>
-		lookup( root ), // 5 - document
-		// <table>
-		lookup( root, 1 ), // 6 - table
-		// <tbody>
-		lookup( root, 1, 0 ), // 7 - tableSection
-		// <tr>
-		lookup( root, 1, 0, 0 ), // 7 - tableRow
-		// <td>
-		lookup( root, 1, 0, 0, 0 ), // 8 - tableCell
-		// <p>
-		lookup( root, 1, 0, 0, 0, 0 ), // 9 - paragraph
-		// d
-		lookup( root, 1, 0, 0, 0, 0 ), // 10 - paragraph
-		// </p>
-		lookup( root, 1, 0, 0, 0 ), // 11 - tableCell
-		// <ul>
-		lookup( root, 1, 0, 0, 0, 1 ), // 12 - list
-		// <li>
-		lookup( root, 1, 0, 0, 0, 1, 0 ), // 13 - listItem
-		// <p>
-		lookup( root, 1, 0, 0, 0, 1, 0, 0 ), // 14 - paragraph
-		// e
-		lookup( root, 1, 0, 0, 0, 1, 0, 0 ), // 15 - paragraph
-		// </p>
-		lookup( root, 1, 0, 0, 0, 1, 0 ), // 16 - listItem
-		// <ul>
-		lookup( root, 1, 0, 0, 0, 1, 0, 1 ), // 17 - list
-		// <li>
-		lookup( root, 1, 0, 0, 0, 1, 0, 1, 0 ), // 18 - listItem
-		// <p>
-		lookup( root, 1, 0, 0, 0, 1, 0, 1, 0, 0 ), // 19 - paragraph
-		// f
-		lookup( root, 1, 0, 0, 0, 1, 0, 1, 0, 0 ), // 20 - paragraph
-		// </p>
-		lookup( root, 1, 0, 0, 0, 1, 0, 1, 0 ), // 21 - listItem
-		// </li>
-		lookup( root, 1, 0, 0, 0, 1, 0, 1 ), // 22 - list
-		// </ul>
-		lookup( root, 1, 0, 0, 0, 1, 0 ), // 23 - listItem
-		// </li>
-		lookup( root, 1, 0, 0, 0, 1 ), // 24 - list
-		// </ul>
-		lookup( root, 1, 0, 0, 0 ), // 25 - tableCell
-		// <ul>
-		lookup( root, 1, 0, 0, 0, 2 ), // 26 - list
-		// <li>
-		lookup( root, 1, 0, 0, 0, 2, 0 ), // 27 - listItem
-		// <p>
-		lookup( root, 1, 0, 0, 0, 2, 0, 0 ), // 28 - paragraph
-		// g
-		lookup( root, 1, 0, 0, 0, 2, 0, 0 ), // 29 - paragraph
-		// </p>
-		lookup( root, 1, 0, 0, 0, 2, 0 ), // 30 - listItem
-		// </li>
-		lookup( root, 1, 0, 0, 0, 2 ), // 31 - list
-		// </ul>
-		lookup( root, 1, 0, 0, 0 ), // 32 - tableCell
-		// </td>
-		lookup( root, 1, 0, 0 ), // 33 - tableRow
-		// </tr>
-		lookup( root, 1, 0 ), // 33 - tableSection
-		// </tbody>
-		lookup( root, 1 ), // 34 - table
-		// </table>
-		lookup( root ), // 35- document
-		// <pre>
-		lookup( root, 2 ), // 36 - preformatted
-		// h
-		lookup( root, 2 ), // 37 - preformatted
-		// <img>
-		lookup( root, 2 ), // 38 - preformatted
-		// </img>
-		lookup( root, 2 ), // 39 - preformatted
-		// i
-		lookup( root, 2 ), // 40 - preformatted
-		// </pre>
-		lookup( root ), // 41 - document
-		// <dl>
-		lookup( root, 3 ), // 42 - definitionList
-		// <dt>
-		lookup( root, 3, 0 ), // 43 - definitionListItem
-		// <p>
-		lookup( root, 3, 0, 0 ), // 44 - paragraph
-		// j
-		lookup( root, 3, 0, 0 ), // 45 - paragraph
-		// </p>
-		lookup( root, 3, 0 ), // 46 - definitionListItem
-		// </dt>
-		lookup( root, 3 ), // 47 - definitionList
-		// <dd>
-		lookup( root, 3, 1 ), // 48 - definitionListItem
-		// <p>
-		lookup( root, 3, 1, 0 ), // 49 - paragraph
-		// k
-		lookup( root, 3, 1, 0 ), // 50 - paragraph
-		// </p>
-		lookup( root, 3, 1 ), // 51 - definitionListItem
-		// </dd>
-		lookup( root, 3 ), // 52 - definitionList
-		// </dl>
-		lookup( root ), // 53 - document
-		// <p>
-		lookup( root, 4 ), // 54 - paragraph
-		// f
-		lookup( root, 4 ), // 55 - paragraph
-		// </p>
-		lookup( root ), // 56 - document
-		// <p>
-		lookup( root, 5 ), // 57 - paragraph
-		// f
-		lookup( root, 5 ), // 58 - paragraph
-		// </p>
-		lookup( root ) // 59 - document
-	];
-};
-
 ve.dm.example.conversions = {
 	'definitionListItem term': {
 		'domElement': ve.example.createDomElement( 'dt' ),
@@ -569,7 +433,10 @@ ve.dm.example.domToDataCases = {
 			'data': ve.dm.example.data
 		},
 		'list item with space followed by link': {
-			'html': '<ul><li><p> <a data-type="unknown" href="foo">bar</a></p></li></ul>',
+			// This HTML is weird because of workarounds for Parsoid bugs:
+			// * newline before </li>
+			// * first paragraph in an <li> not wrapped in <p>
+			'html': '<ul><li> <a rel="mw:extLink" href="foo">bar</a>\n</li></ul>',
 			'data': [
 				{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
 				{ 'type': 'listItem' },
@@ -578,22 +445,22 @@ ve.dm.example.domToDataCases = {
 				[
 					'b',
 					{
-						'{"type":"link/unknown","data":{"href":"foo"}}':
-							{ 'type': 'link/unknown', 'data': { 'href': 'foo' }
+						'{"type":"link/extLink","data":{"href":"foo"}}':
+							{ 'type': 'link/extLink', 'data': { 'href': 'foo' }
 					}
 				}],
 				[
 					'a',
 					{
-						'{"type":"link/unknown","data":{"href":"foo"}}':
-							{ 'type': 'link/unknown', 'data': { 'href': 'foo' }
+						'{"type":"link/extLink","data":{"href":"foo"}}':
+							{ 'type': 'link/extLink', 'data': { 'href': 'foo' }
 					}
 				}],
 				[
 					'r',
 					{
-						'{"type":"link/unknown","data":{"href":"foo"}}':
-							{ 'type': 'link/unknown', 'data': { 'href': 'foo' }
+						'{"type":"link/extLink","data":{"href":"foo"}}':
+							{ 'type': 'link/extLink', 'data': { 'href': 'foo' }
 					}
 				}],
 				{ 'type': '/paragraph' },
