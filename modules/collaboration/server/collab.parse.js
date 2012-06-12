@@ -10,7 +10,7 @@ WikitextSerializer = require(mp + 'mediawiki.WikitextSerializer.js').WikitextSer
 parse = function( title, callback ) {
 	var env = new ParserEnv( { 
 		// fetch templates from enwiki for now..
-		wgScript: 'http://en.wikipedia.org/w',
+		wgScript: 'http://localhost/mediawiki/',
 		// stay within the 'proxied' content, so that we can click around
 		wgScriptPath: '', //http://en.wikipedia.org/wiki', 
 		wgScriptExtension: '.php',

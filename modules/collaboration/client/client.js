@@ -11,7 +11,7 @@ collab.client = function( ) {
 	socket.on( 'connection', function() {
 		socket.callbacks = new collab.callbacks( _this );
 		_this.bindEvents( socket )
-		socket.emit( 'client_connect', { user: 'Dash1291', title: 'Ellipse' } );
+		socket.emit( 'client_connect', { user: 'Dash1291', title: 'Main_Page' } );
 	});
 };
 
