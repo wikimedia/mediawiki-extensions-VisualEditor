@@ -11,7 +11,8 @@ ve = require( './collab.ve.js' ).ve;
  * Should be referenced in the instances of collab.Session.
 **/
 Document = function( html ) {
-	var data = ve.dm.converter.getDataFromDom( $( html )[0] );
+	var dom = $('<div>' + html + '</div>');
+	var data = ve.dm.converter.getDataFromDom( dom[0] );
 	var doc = new ve.dm.Document( data );
 	this.dmSurface = new ve.dm.Surface( doc );
 }
