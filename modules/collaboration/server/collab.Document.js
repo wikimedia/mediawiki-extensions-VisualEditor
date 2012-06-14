@@ -36,13 +36,20 @@ Document.prototype.purgeDocument = function() {
 
 };
 
-Document.prototype.applyTransaction = function( transactionData ) {
+Document.prototype.applyTransaction = function( session, transactionData ) {
+	// Abort if the session cannot publish
+	if( session.publisher == false ) {
+		return false;
+	}
+
 	var transaction = new ve.dm.Transaction();
 	transaction.operations = transactionData.operations;
 	transaction.lengthDifference = transactionData.lengthDifference;
 	this.dmSurface.transact( transaction );
 	// TODO: document state hash should also be pushed into the history
 	this.history.push( transaction );
+
+	return true;
 };
 
 if ( typeof module == 'object' ) {

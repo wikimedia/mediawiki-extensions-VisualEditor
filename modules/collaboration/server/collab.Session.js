@@ -8,6 +8,7 @@ Session = function( document, user ) {
 	this.Document = document;
 	this.user = user
 	this.sessionID = this.generateID();
+	this.publisher = false;
 };
 
 /**
@@ -16,6 +17,13 @@ Session = function( document, user ) {
 **/
 Session.prototype.generateID = function() {
 
+};
+
+/**
+ * Set publishing rights for the current user/session
+**/
+Session.prototype.allowPublish = function() {
+	this.publisher = true;
 };
 
 Session.prototype.getID = function() {
