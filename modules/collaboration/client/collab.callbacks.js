@@ -2,8 +2,9 @@
  * This contains all the callbacks used for handling the client's Socket.IO events
 **/
 
-collab.callbacks = function( client ) {
+collab.callbacks = function( client, socket ) {
 	this.client = client;
+	this.socket = socket;
 };
 
 /**
@@ -28,9 +29,15 @@ collab.callbacks.prototype.newTransaction = function( trasaction ) {
 };
 
 collab.callbacks.prototype.docTransfer = function( data ) {
-//	var linearData = ve.dm.HTMLConverter.getLinearModel( $( data.html)[0] );
 	var html = $('<div>' + data.html + '</div>' );
-	console.log( html[0] );
+	// FIXME: this needs to be rewritten in the server's code
+	// rather than calling the one defined in sandbox.js
 	init_doc( html[0] );
-	// load data
+	
+	var editorSurface = window.sandboxEditor,
+		surfaceModel = editorSurface.getSurfaceModel();
+	
+	surfaceModel.on( 'transact', function( transaction ) {
+		socket.emit( 'new_transaction', transaction );
+	});
 };

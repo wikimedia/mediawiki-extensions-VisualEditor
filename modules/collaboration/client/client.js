@@ -9,7 +9,7 @@ collab.client = function( ) {
 	_this = this;
 	var socket = io.connect( settings.host + ':' + settings.port );
 	socket.on( 'connection', function() {
-		socket.callbacks = new collab.callbacks( _this );
+		socket.callbacks = new collab.callbacks( _this, socket );
 		_this.bindEvents( socket )
 		socket.emit( 'client_connect', { user: 'Dash1291', title: 'Main_Page' } );
 	});
