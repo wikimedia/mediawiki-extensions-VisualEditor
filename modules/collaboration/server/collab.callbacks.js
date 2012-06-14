@@ -25,14 +25,14 @@ callbacks.prototype.clientConnection = function( data, callback ) {
 	// Parse the page by its title using the parser
 	parse( docTitle, function( docHTML ) {
 		for( session in sessions ) {
-			var docID = sessions[ session ].Document.getID();
+			//var docID = sessions[ session ].Document.getID();
 			/*if( docID == remotedocID ) {
 				session_doc = session[ session ].Document;
 				break;
 			}*/
 		}
 		if( session_doc == null ) {
-			session_doc = new Document( docHTML );
+			session_doc = new Document( docTitle, docHTML );
 		}
 		_this.session = new Session( session_doc, userID );
 		sessions.push( { 'ssid': _this.session.getID(), 'session': _this.session } );
@@ -52,8 +52,10 @@ callbacks.prototype.clientDisconnection = function( data ) {
 /**
  * Callback method to be invoked when a new transaction arrives at the server
 **/
-callbacks.prototype.newTransaction = function( data ) {
+callbacks.prototype.newTransaction = function( transaction ) {
+	console.log( transaction);
 	var doc = this.session.Document;
+	doc.applyTransaction( transaction );
 };
 
 /**

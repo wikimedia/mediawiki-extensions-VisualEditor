@@ -43,8 +43,8 @@ CollaborationServer.prototype.bindEvents = function( io_socket ) {
 		socket_callbacks.clientDisconnection( data );
 	});
 	
-	io_socket.on( 'new_trasaction', function( data ) {
-		socket_callbacks.newTrasaction( data );
+	io_socket.on( 'new_transaction', function( data ) {
+		socket_callbacks.newTransaction( data );
 	});
 
 	io_socket.on( 'document_save', function( data ) {

@@ -33,10 +33,9 @@ collab.callbacks.prototype.docTransfer = function( data ) {
 	// FIXME: this needs to be rewritten in the server's code
 	// rather than calling the one defined in sandbox.js
 	init_doc( html[0] );
-	
+	var socket = this.socket;	
 	var editorSurface = window.sandboxEditor,
 		surfaceModel = editorSurface.getSurfaceModel();
-	
 	surfaceModel.on( 'transact', function( transaction ) {
 		socket.emit( 'new_transaction', transaction );
 	});

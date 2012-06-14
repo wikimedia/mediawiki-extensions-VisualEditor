@@ -52,6 +52,7 @@ ve = function () {
 	require('../../ve2/dm/ve.dm.Transaction.js');
 	require('../../ve2/dm/ve.dm.Surface.js');
 	require('../../ve2/dm/ve.dm.Document.js');
+	require('../../ve2/dm/ve.dm.DocumentSynchronizer.js');
 	require('../../ve2/dm/ve.dm.Converter.js');
 
 	require('../../ve2/dm/nodes/ve.dm.AlienInlineNode.js');
