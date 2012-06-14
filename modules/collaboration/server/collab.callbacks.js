@@ -25,8 +25,8 @@ callbacks.prototype.clientConnection = function( data, callback ) {
 	// Parse the page by its title using the parser
 	parse( docTitle, function( docHTML ) {
 		for( session in sessions ) {
-			var ssid = sessions[ session ].ssid;
-			/*if( ssid == remoteSSID ) {
+			var docID = sessions[ session ].Document.getID();
+			/*if( docID == remotedocID ) {
 				session_doc = session[ session ].Document;
 				break;
 			}*/
@@ -34,7 +34,7 @@ callbacks.prototype.clientConnection = function( data, callback ) {
 		if( session_doc == null ) {
 			session_doc = new Document( docHTML );
 		}
-		_this.session = new Session( docTitle, userID );
+		_this.session = new Session( session_doc, userID );
 		sessions.push( { 'ssid': _this.session.getID(), 'session': _this.session } );
 		_this.server.sessionIndex++;
 		callback( docHTML );
@@ -52,8 +52,8 @@ callbacks.prototype.clientDisconnection = function( data ) {
 /**
  * Callback method to be invoked when a new transaction arrives at the server
 **/
-callbacks.prototype.newTransaction = function( trasaction ) {
-
+callbacks.prototype.newTransaction = function( data ) {
+	var doc = this.session.Document;
 };
 
 /**
