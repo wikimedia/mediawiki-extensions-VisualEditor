@@ -14,7 +14,7 @@ callbacks = function( server ) {
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-callbacks.prototype.clientConnection = function( data, callback ) {
+callbacks.prototype.clientConnection = function( data ) {
 	console.log('new connection');
 	console.log(data);
 	var userID = data.user,
@@ -50,9 +50,9 @@ callbacks.prototype.clientConnection = function( data, callback ) {
 			};
 			docRoutes.push( sessionRoute );
 		}
-
+		_this.sessionRoute = sessionRoute;
 		_this.session = new Session( sessionDoc, userID );
-		callback( docHTML );
+		_this.socket.emit( 'document_transfer', { html: docHTML } );
 	});
 };
 
@@ -70,6 +70,12 @@ callbacks.prototype.clientDisconnection = function( data ) {
 callbacks.prototype.newTransaction = function( transaction ) {
 	var doc = this.session.Document;
 	doc.applyTransaction( this.session, transaction );
+	
+	var routeCallbacks = this.sessionRoute.callbacks;
+	for( cb in routeCallbacks ) {
+		var socket = routeCallbacks[ cb ].socket;
+		socket.emit( 'new_transaction', transaction );
+	}
 };
 
 /**

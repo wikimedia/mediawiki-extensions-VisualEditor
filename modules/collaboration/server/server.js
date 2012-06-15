@@ -36,9 +36,7 @@ CollaborationServer = function () {
 CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 	var io_socket = callbacksObj.socket;
 	io_socket.on( 'client_connect', function( data ) {
-		callbacksObj.clientConnection( data, function( docHTML ) {
-			io_socket.emit( 'document_transfer', { html: docHTML } );
-		});
+		callbacksObj.clientConnection( data );
 	});
 
 	io_socket.on( 'client_disconnect', function( data ) {
