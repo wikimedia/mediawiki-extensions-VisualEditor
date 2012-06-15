@@ -10,8 +10,10 @@ collab.client = function( ) {
 	var socket = io.connect( settings.host + ':' + settings.port );
 	socket.on( 'connection', function() {
 		socket.callbacks = new collab.callbacks( _this, socket );
-		_this.bindEvents( socket )
-		socket.emit( 'client_connect', { user: 'Dash1291', title: 'Main_Page' } );
+		_this.bindEvents( socket );
+		// TODO: User has to be handled using the MW auth
+		var user = prompt( 'enter username' );
+		socket.emit( 'client_connect', { user: user, title: 'Main_Page' } );
 	});
 };
 

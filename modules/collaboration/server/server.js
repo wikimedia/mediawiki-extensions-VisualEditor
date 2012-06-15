@@ -17,8 +17,9 @@ settings = require( '../settings.js' ).settings;
 
 CollaborationServer = function () {
 	var io_service = io.listen( settings.port );
-	this.sessionIndex = -1;
-	this.sessions = [];
+
+	// Document-wise closures of callback instances
+	this.docRoutes = [];
 	_this = this;
 	io_service.on( 'connection', function( socket ) {
 		socket.emit( 'connection', {} );

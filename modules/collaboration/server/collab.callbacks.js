@@ -15,28 +15,43 @@ callbacks = function( server ) {
  * Callback method to be invoked when a new client initiates its session
 **/
 callbacks.prototype.clientConnection = function( data, callback ) {
-	var userID = data.user;
-	var docTitle = data.title;
-	var sessions = this.server.sessions;
-	var remoteSSID = data.ssid;
-	var session_doc = null;
-	_this = this;
-	docHTML = '';
+	console.log('new connection');
+	console.log(data);
+	var userID = data.user,
+		docTitle = data.title,
+		docRoutes = this.server.docRoutes,
+		remoteSSID = data.ssid,
+		sessionRoute = null,
+		_this = this,
+		docHTML = '';
+
 	// Parse the page by its title using the parser
 	parse( docTitle, function( docHTML ) {
-		for( session in sessions ) {
-			//var docID = sessions[ session ].Document.getID();
-			/*if( docID == remotedocID ) {
-				session_doc = session[ session ].Document;
+		for( route in docRoutes ) {
+			console.log( docRoutes );
+			var docID = docRoutes[ route ].document.getID();
+			if( docID == Document.generateID( docTitle ) ) {
+				sessionRoute = docRoutes[ route ];
+				var sessionDoc = sessionRoute.document;
+				sessionRoute.callbacks.push( _this );
 				break;
-			}*/
+			}
 		}
-		if( session_doc == null ) {
-			session_doc = new Document( docTitle, docHTML );
+
+		/** 
+		 * Proceed with creating a new route with a new document,
+		 * if no existing document route was found.
+		**/
+		if( sessionRoute == null ) {
+			var sessionDoc = new Document( docTitle, docHTML );
+			sessionRoute = {
+				document: sessionDoc,
+				callbacks: [ _this ]
+			};
+			docRoutes.push( sessionRoute );
 		}
-		_this.session = new Session( session_doc, userID );
-		sessions.push( { 'ssid': _this.session.getID(), 'session': _this.session } );
-		_this.server.sessionIndex++;
+
+		_this.session = new Session( sessionDoc, userID );
 		callback( docHTML );
 	});
 };

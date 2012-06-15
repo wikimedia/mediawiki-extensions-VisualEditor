@@ -17,12 +17,14 @@ Document = function( title, html ) {
 	var surfaceModel = this.dmSurface = new ve.dm.Surface( doc );
 	surfaceModel.setSelection( new ve.Range( 1, 1 ) );
 	this.history = [];
-	this.generateID( title );
+	this.id = Document.generateID( title );
+	this.title = title;
 }
 
 // Generate unique ID based on the title of the document
-Document.prototype.generateID = function( title ) {
-// this.id = id;
+Document.generateID = function( title ) {
+// FIXME: title is used as ID ONLY for testing
+	return title;
 };
 
 Document.prototype.getID = function() {
@@ -33,12 +35,13 @@ Document.prototype.getID = function() {
  * Reset the current document state
 **/
 Document.prototype.purgeDocument = function() {
-
+	this.dmSurface = null;
+	this.history = [];
 };
 
 Document.prototype.applyTransaction = function( session, transactionData ) {
 	// Abort if the session cannot publish
-	if( session.publisher == false ) {
+	if( session.isPublisher == false ) {
 		return false;
 	}
 

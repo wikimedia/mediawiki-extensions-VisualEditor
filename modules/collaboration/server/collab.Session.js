@@ -7,27 +7,27 @@
 Session = function( document, user ) {
 	this.Document = document;
 	this.user = user
-	this.sessionID = this.generateID();
-	this.publisher = false;
+	this.isPublisher = false;
+	this.id = Session.generateID( document.title, user );
 };
 
 /**
  * Generates a unique session id for this session.
  * Should use document's title and user to generate the unique id.
 **/
-Session.prototype.generateID = function() {
-
+Session.generateID = function( docTitle, user ) {
+	return docTitle + '' + user;
 };
 
 /**
  * Set publishing rights for the current user/session
 **/
 Session.prototype.allowPublish = function() {
-	this.publisher = true;
+	this.isPublisher = true;
 };
 
 Session.prototype.getID = function() {
-	return this.sessionID;
+	return this.id;
 };
 
 if( typeof module == 'object' ) { 
