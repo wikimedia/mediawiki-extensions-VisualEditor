@@ -21,35 +21,36 @@ CollaborationServer = function () {
 	// Document-wise closures of callback instances
 	this.docRoutes = [];
 	_this = this;
+
 	io_service.on( 'connection', function( socket ) {
 		socket.emit( 'connection', {} );
 		var socket_callbacks = new callbacks( collab );
-		socket.callbacks = socket_callbacks;
-		collab.bindEvents( socket );
+		socket_callbacks.socket = socket;
+		collab.bindEvents( socket_callbacks );
 	});
-};
+};	
 
 /**
  * Binds all socket events to the corresponding callback functions
 **/
-CollaborationServer.prototype.bindEvents = function( io_socket ) {
-	var socket_callbacks = io_socket.callbacks;
+CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
+	var io_socket = callbacksObj.socket;
 	io_socket.on( 'client_connect', function( data ) {
-		socket_callbacks.clientConnection( data, function( docHTML ) {
+		callbacksObj.clientConnection( data, function( docHTML ) {
 			io_socket.emit( 'document_transfer', { html: docHTML } );
 		});
 	});
 
 	io_socket.on( 'client_disconnect', function( data ) {
-		socket_callbacks.clientDisconnection( data );
+		callbacksObj.clientDisconnection( data );
 	});
 	
 	io_socket.on( 'new_transaction', function( data ) {
-		socket_callbacks.newTransaction( data );
+		callbacksObj.newTransaction( data );
 	});
 
 	io_socket.on( 'document_save', function( data ) {
-		socket_callbacks.saveDocument( data );
+		callbacksObj.saveDocument( data );
 	});
 };
 
