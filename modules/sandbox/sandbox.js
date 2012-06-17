@@ -633,7 +633,7 @@ $(document).ready( function() {
 	// HTML without images and aliens
 	HTML = $(
 		'<div>' +
-			'<p><b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>' +
+			'<p><b>Lorem Ipsum</b> is simpply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>' +
 			'<h2><b>What</b> is <i>Lorem Ipsum?</i></h2>' +
 			'<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>' +
 			'<h3><b>Look</b> at <i>this headline</i></h3>' +
@@ -650,11 +650,6 @@ $(document).ready( function() {
 		'</div>' );
 
 
-	window.cb = new collab.client();
-} );
-
-function init_doc( html ) {
-
 	/* Sandbox config object. */
 	var options = {
 		toolbars: {
@@ -664,18 +659,19 @@ function init_doc( html ) {
 			}
 		}
 	};
+
 	/*
 		Create Sandbox instance of VE
 		Attach to #content element
 	*/
-	var sandboxEditor = new ve.Surface( '#content', html, options ),
-		surfaceModel = sandboxEditor.getSurfaceModel(),
+	var sandboxEditor = new ve.Surface( '#content', HTML[0], options ),
+		surfaceModel = sandboxEditor.getModel(),
 		documentModel = sandboxEditor.getDocumentModel(),
 		parent = sandboxEditor.getParent(),
 		view = sandboxEditor.view;
 	
 	window.sandboxEditor = sandboxEditor;
-	window.cb.surfaceModel = surfaceModel;
+
 		/* Rob's test selection stuff */
 		//surfaceModel.setSelection( new ve.Range(0, documentModel.getData().length ) );
 		//surfaceModel.setSelection( new ve.Range( 178, 185 ) );
@@ -691,4 +687,4 @@ function init_doc( html ) {
 		return false;
 	} );
 	//$( '.es-mode-wikitext' ).click();
-}
+} );
