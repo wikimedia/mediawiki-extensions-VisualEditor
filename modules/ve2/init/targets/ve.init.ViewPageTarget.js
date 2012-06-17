@@ -12,12 +12,18 @@ ve.init.ViewPageTarget = function() {
 
 	// Properties
 	this.$content = $( '#content' );
-	this.$view = this.$content.find( '#mw-content-text, #bodyContent' );
+	this.$page = $( '#mw-content-text' );
+	this.$view = $( '#bodyContent' );
+	this.$toc = $( '#toc' );
 	this.$heading = $( '#firstHeading' );
 	this.$surface = $( '<div class="ve-surface"></div>' );
 	this.$toolbar = null;
 	this.surface = null;
 	this.active = false;
+	this.edited = false;
+	this.activating = false;
+	this.deactivating = false;
+	this.proxiedOnSurfaceModelTransact = ve.proxy( this.onSurfaceModelTransact, this );
 	this.surfaceOptions = {
 		'toolbars': {
 			'top': {
@@ -76,14 +82,39 @@ ve.init.ViewPageTarget.saveDialogTemplate = '\
  *
  * @method
  */
-ve.init.ViewPageTarget.prototype.onEditTabClick = function( e ) {
+ve.init.ViewPageTarget.prototype.onEditTabClick = function( e, section ) {
 	// Ignore multiple clicks while editor is active
-	if ( !this.active ) {
+	if ( !this.active && !this.activating ) {
+		this.activating = true;
 		// UI updates
 		this.setSelectedTab( 'ca-edit' );
 		this.showSpinner();
+		this.$toc.addClass( 've-init-viewPageTarget-pageToc' ).slideUp( 'fast' );
+		// Remember scroll position
+		var scrollTop = $( window ).scrollTop();
 		// Asynchronous initialization - load ve modules at the same time as the content
-		this.load( ve.proxy( this.onLoad, this ) );
+		this.load( ve.proxy( function( error, dom ) {
+			this.onLoad( error, dom );
+			if ( section !== undefined ) {
+				// HACK: All of this code is fragile, be careful and suspicious
+				var $heading = this.$surface
+					.find( '.ve-ce-documentNode' )
+						.find( 'h1, h2, h3, h4, h5, h6' )
+							.eq( section );
+					surfaceView = this.surface.getView(),
+					surfaceModel = surfaceView.getModel(),
+					doc = surfaceModel.getDocument();
+				if ( $heading.length ) {
+					var offset = doc.getNearestContentOffset(
+						$heading.data( 'node' ).getModel().getOffset()
+					);
+					surfaceModel.setSelection( new ve.Range( offset, offset ) );
+					surfaceView.showSelection( surfaceModel.getSelection() );
+					// Restore scroll position
+					$( window ).scrollTop( scrollTop );
+				}
+			}
+		}, this ) );
 	}
 	// Prevent the edit tab's normal behavior
 	e.preventDefault();
@@ -95,10 +126,37 @@ ve.init.ViewPageTarget.prototype.onEditTabClick = function( e ) {
  *
  * @method
  */
+ve.init.ViewPageTarget.prototype.onEditSectionLinkClick = function( e ) {
+	var heading = $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' )[0],
+		tocHeading = this.$page.find( '#toc h2' )[0];
+		section = 0;
+	this.$page.find( 'h1, h2, h3, h4, h5, h6' ).each( function() {
+		if ( this === heading ) {
+			return false;
+		}
+		if ( this !== tocHeading ) {
+			section++;
+		}
+	} );
+	return this.onEditTabClick( e, section );
+};
+
+/**
+ * ...
+ *
+ * @method
+ */
 ve.init.ViewPageTarget.prototype.onViewTabClick = function( e ) {
 	// Don't do anything special unless we are in editing mode
-	if ( this.active ) {
-		this.tearDownSurface();
+	if ( this.active && !this.deactivating ) {
+		this.deactivating = true;
+		if (
+			!this.surface.getModel().getHistory().length ||
+			confirm( 'Are you sure you want to go back to view mode without saving first?' )
+		) {
+			this.tearDownSurface();
+			this.deactivating = false;
+		}
 		// Prevent the edit tab's normal behavior
 		e.preventDefault();
 		return false;
@@ -129,10 +187,48 @@ ve.init.ViewPageTarget.prototype.onSaveDialogSaveButtonClick = function( e ) {
  *
  * @method
  */
+ve.init.ViewPageTarget.prototype.onSurfaceModelTransact = function() {
+	if ( !this.edited ) {
+		this.edited = true;
+		this.$toolbar.find( '.ve-init-viewPageTarget-saveButton ' )
+			.removeClass( 've-init-viewPageTarget-button-disabled' );
+		this.surface.getModel().removeListener( 'transact', this.proxiedOnSurfaceModelTransact );
+	}
+};
+
+/**
+ * ...
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.onSaveButtonClick = function( e ) {
+	if ( this.edited ) {
+		this.$dialog.fadeIn( 'fast' );
+		this.$dialog.find( 'input:first' ).focus();
+	}
+};
+
+/**
+ * ...
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.onSaveDialogCloseButtonClick = function( e ) {
+	this.$dialog.fadeOut( 'fast' );
+	this.$surface.find( '.ve-ce-documentNode' ).focus();
+};
+
+/**
+ * ...
+ *
+ * @method
+ */
 ve.init.ViewPageTarget.prototype.onLoad = function( error, dom ) {
+	this.activating = false;
 	if ( error ) {
 		// TODO: Error handling in the UI
 	} else {
+		this.edited = false;
 		this.setUpSurface( dom );
 		this.$surface.find( '.ve-ce-documentNode' ).focus();
 	}
@@ -165,12 +261,14 @@ ve.init.ViewPageTarget.prototype.setUpSurface = function( dom ) {
 	// Initialize surface
 	this.$surface.appendTo( this.$content );
 	this.surface = new ve.Surface( this.$surface, dom, this.surfaceOptions );
+	this.surface.getModel().on( 'transact', this.proxiedOnSurfaceModelTransact );
 	// Transplant the toolbar
 	this.$toolbar = this.$surface.find( '.es-toolbar-wrapper' );
+	this.$toolbar.find( '.es-toolbar' ).slideDown( 'fast' );
 	this.$heading
 		.before( this.$toolbar )
 		.addClass( 've-init-viewPageTarget-pageTitle' )
-		.css( { 'margin-top': this.$toolbar.outerHeight(), 'opacity': 0.5 } );
+		.fadeTo( 'fast', 0.5 );
 	// Update UI
 	this.$view.hide();
 	this.$spinner.remove();
@@ -180,13 +278,21 @@ ve.init.ViewPageTarget.prototype.setUpSurface = function( dom ) {
 		.find( '.es-modes' )
 			.append(
 				$( '<div></div>' )
-					.addClass( 've-init-viewPageTarget-button ve-init-viewPageTarget-saveButton' )
+					.addClass(
+						've-init-viewPageTarget-button ' +
+						've-init-viewPageTarget-button-disabled ' +
+						've-init-viewPageTarget-saveButton'
+					)
 					.append(
 						$( '<span class="ve-init-viewPageTarget-saveButton-label"></span>' )
 							.text( mw.msg( 'savearticle' ) )
 					)
 					.append( $( '<span class="ve-init-viewPageTarget-saveButton-icon"></span>' ) )
-					.click( ve.proxy( function() { $(this).fadeIn( 'fast' ); }, this.$dialog ) )
+					.mousedown( function( e ) {
+						e.preventDefault();
+						return false;
+					} )
+					.click( ve.proxy( this.onSaveButtonClick, this ) )
 			);
 	// Set up save dialog
 	this.$dialog
@@ -194,7 +300,7 @@ ve.init.ViewPageTarget.prototype.setUpSurface = function( dom ) {
 			.text( mw.msg( 'tooltip-save' ) )
 			.end()
 		.find( '.ve-init-viewPageTarget-saveDialog-closeButton' )
-			.click( ve.proxy( function() { $(this).fadeOut( 'fast' ); }, this.$dialog ) )
+			.click( ve.proxy( this.onSaveDialogCloseButtonClick, this ) )
 			.end()
 		.find( '.ve-init-viewPageTarget-saveDialog-editSummary-label' )
 			.text( mw.msg( 'summary' ) )
@@ -235,13 +341,19 @@ ve.init.ViewPageTarget.prototype.tearDownSurface = function( content ) {
 	this.setSelectedTab( 'ca-view' );
 	// Update UI
 	this.$surface.empty().detach();
-	this.$toolbar.remove();
+	this.$toolbar.find( '.es-toolbar' ).slideUp( 'fast', function() {
+		$(this).parent().remove();
+	} );
 	this.$spinner.remove();
+	$( '.es-contextView' ).remove();
 	this.$view.show().fadeTo( 'fast', 1 );
-	this.$heading.css( { 'margin-top': 'auto', 'opacity': 1 } );
+	this.$heading.fadeTo( 'fast', 1 );
 	setTimeout( ve.proxy( function() {
 		$(this).removeClass( 've-init-viewPageTarget-pageTitle' );
 	}, this.$heading ), 1000 );
+	this.$toc.slideDown( 'fast', function() {
+		$(this).removeClass( 've-init-viewPageTarget-pageToc' );
+	} );
 	// Destroy editor
 	this.surface = null;
 	this.active = false;
@@ -282,8 +394,9 @@ ve.init.ViewPageTarget.prototype.setupTabs = function(){
 			'ca-editsource'
 		);
 	}
-	$( '#ca-edit > span > a' ).click( ve.proxy( this.onEditTabClick, this ) );
-	$( '#ca-view > span > a' ).click( ve.proxy( this.onViewTabClick, this ) );
+	$( '#ca-edit a' ).click( ve.proxy( this.onEditTabClick, this ) );
+	$( '#mw-content-text .editsection a' ).click( ve.proxy( this.onEditSectionLinkClick, this ) );
+	$( '#ca-view a' ).click( ve.proxy( this.onViewTabClick, this ) );
 };
 
 /**

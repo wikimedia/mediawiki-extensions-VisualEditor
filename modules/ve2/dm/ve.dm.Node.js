@@ -119,6 +119,9 @@ ve.dm.Node.prototype.getOuterLength = function() {
  */
 ve.dm.Node.prototype.getRange = function() {
 	var offset = this.getOffset();
+	if ( this.isWrapped() ) {
+		offset++;
+	}
 	return new ve.Range( offset, offset + this.length );
 };
 

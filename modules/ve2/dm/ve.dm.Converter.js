@@ -162,7 +162,7 @@ ve.dm.Converter.prototype.getDataElementFromDomElement = function( domElement ) 
 	var dataElement = this.elements.toDataElement[domElementType]( domElementType, domElement ),
 		domElementAttributes = domElement.attributes;
 	if ( domElementAttributes.length ) {
-		var dataElementAttributes = dataElement.attributes = {};
+		var dataElementAttributes = dataElement.attributes = dataElement.attributes || {};
 		// Inlcude all attributes and prepend 'html/' to each attribute name
 		for ( var i = 0; i < domElementAttributes.length; i++ ) {
 			var domElementAttribute = domElementAttributes[i];
@@ -222,11 +222,25 @@ ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function( dataAnnota
  * @returns {Array} Linear model data
  */
 ve.dm.Converter.prototype.getDataFromDom = function( domElement, annotations, dataElement, path, alreadyWrapped ) {
+	function createAlien( domElement, isInline ) {
+		var type = isInline ? 'alienInline' : 'alienBlock';
+		return [
+			{
+				'type': type,
+				'attributes': {
+					'html': $( '<div>' ).append( $( domElement ).clone() ).html()
+				}
+			},
+			{ 'type': '/' + type }
+		];
+	}
+
 	// Fallback to defaults
 	annotations = annotations || [];
 	path = path || ['document'];
 	var data = [],
 		branchType = path[path.length - 1],
+		branchIsContent = ve.dm.nodeFactory.canNodeContainContent( branchType ),
 		wrapping = false;
 	// Open element
 	if ( dataElement ) {
@@ -237,30 +251,16 @@ ve.dm.Converter.prototype.getDataFromDom = function( domElement, annotations, da
 		var childDomElement = domElement.childNodes[i];
 		switch ( childDomElement.nodeType ) {
 			case Node.ELEMENT_NODE:
-				// Detect and handle inline alien nodes
-				if (
-					// Generated content
-					childDomElement.hasAttribute( 'data-mw-gc' ) &&
-					// Inside a content branch
-					ve.dm.nodeFactory.canNodeContainContent( branchType )
-				) {
-					// Fallback to alien inline
-					data = data.concat( [
-						{
-							'type': 'alienInline',
-							'attributes': {
-								'html': $( '<div>' ).append( $( childDomElement ).clone() ).html()
-							}
-						},
-						{ 'type': '/alienInline' }
-					] );
+				// Detect generated content and wrap it in an alien node
+				if ( childDomElement.hasAttribute( 'data-mw-gc' ) ) {
+					data = data.concat( createAlien( childDomElement, branchIsContent ) );
 					break;
 				}
 				// Detect and handle annotated content
 				var annotation = this.getDataAnnotationFromDomElement( childDomElement );
 				if ( annotation ) {
 					// Start auto-wrapping of bare content
-					if ( !wrapping && !alreadyWrapped && !ve.dm.nodeFactory.canNodeContainContent( branchType ) ) {
+					if ( !wrapping && !alreadyWrapped && !branchIsContent ) {
 						data.push( { 'type': 'paragraph' } );
 						wrapping = true;
 					}
@@ -291,16 +291,8 @@ ve.dm.Converter.prototype.getDataFromDom = function( domElement, annotations, da
 					);
 					break;
 				}
-				// Fallback to alien block
-				data = data.concat( [
-					{
-						'type': 'alienBlock',
-						'attributes': {
-							'html': $( '<div>' ).append( $( childDomElement ).clone() ).html()
-						}
-					},
-					{ 'type': '/alienBlock' }
-				] );
+				// We don't know what this is, fall back to alien
+				data = data.concat( createAlien( childDomElement, branchIsContent ) );
 				break;
 			case Node.TEXT_NODE:
 				// HACK: strip trailing newlines in <li> tags. Workaround for a Parsoid bug
@@ -309,11 +301,56 @@ ve.dm.Converter.prototype.getDataFromDom = function( domElement, annotations, da
 					text = text.replace( /\n+$/, '' );
 				}
 				if ( text === '' ) {
+					// Don't produce an empty text node or an empty paragraph
 					break;
+				}
+				// HACK: strip implied leading and trailing newlines in <p> tags
+				// Workaround for a Parsoid bug
+				/*
+				 * Leading newlines:
+				 * If the previous sibling is a paragraph, do not strip leading newlines
+				 * If there is no previous sibling, do not strip leading newlines
+				 * Otherwise, strip 1 leading newline
+				 *
+				 * Trailing newlines:
+				 * If the next sibling is a paragraph, strip 2 trailing newlines
+				 * If there is no next sibling, do not strip trailing newlines
+				 * Otherwise, strip 1 trailing newline
+				 */
+				var contentNode = childDomElement.parentNode;
+				if ( contentNode.nodeName.toLowerCase() === 'p' ) {
+					if (
+						contentNode.previousSibling &&
+						contentNode.previousSibling.nodeName.toLowerCase() !== 'p' &&
+						text.charAt( 0 ) === '\n'
+					) {
+						text = text.substr( 1 );
+					}
+					if ( contentNode.nextSibling ) {
+						// Strip one trailing newline
+						if ( text.charAt( text.length - 1 ) === "\n" ) {
+							text = text.substr( 0, text.length - 1 );
+						}
+						if ( contentNode.nextSibling.nodeName.toLowerCase() === 'p' ) {
+							// Strip another one
+							if ( text.charAt( text.length - 1 ) === "\n" ) {
+								text = text.substr( 0, text.length - 1 );
+							}
+						}
+					}
+				}
+
+				if ( !branchIsContent ) {
+					// If it's bare content, strip leading and trailing newlines
+					text = text.replace( /^\n+/, '' ).replace( /\n+$/, '' );
+					if ( text === '' ) {
+						// Don't produce an empty text node
+						break;
+					}
 				}
 
 				// Start auto-wrapping of bare content
-				if ( !wrapping && !alreadyWrapped && !ve.dm.nodeFactory.canNodeContainContent( branchType ) ) {
+				if ( !wrapping && !alreadyWrapped && !branchIsContent ) {
 					data.push( { 'type': 'paragraph' } );
 					wrapping = true;
 				}
@@ -347,6 +384,38 @@ ve.dm.Converter.prototype.getDataFromDom = function( domElement, annotations, da
  * @returns {HTMLElement} Wrapper div containing the resulting HTML
  */
 ve.dm.Converter.prototype.getDomFromData = function( data ) {
+	function fixupText( text, node ) {
+		// HACK reintroduce newlines needed to make Parsoid not freak out
+		// This reverses the newline stripping done in getDataFromDom()
+		/*
+		 * Leading newlines:
+		 * If the previous sibling is a heading, add 1 leading newline
+		 * Otherwise, do not add any leading newlines
+		 *
+		 * Trailing newlines:
+		 * If the next sibling is a paragraph, add 2 trailing newlines
+		 * If there is no next sibling, do not add any trailing newlines
+		 * Otherwise, add 1 trailing newline
+		 */
+		if ( node.nodeName.toLowerCase() === 'p' ) {
+			if (
+				node.previousSibling &&
+				node.previousSibling.nodeName.toLowerCase().match( /h\d/ )
+			) {
+				text = "\n" + text;
+			}
+			if ( node.nextSibling ) {
+				// Add one trailing newline
+				text += "\n";
+				if ( node.nextSibling.nodeName.toLowerCase() === 'p' ) {
+					// Add another one
+					text += "\n";
+				}
+			}
+		}
+		return text;
+	}
+
 	var container = document.createElement( 'div' ),
 		domElement = container,
 		text;
@@ -484,8 +553,8 @@ ve.dm.Converter.prototype.getDomFromData = function( data ) {
 
 	// HACK: do postprocessing on the data to work around bugs in Parsoid concerning paragraphs
 	// inside list items
-	$( container ).find( 'li' ).each( function() {
-		var $sublists = $(this).children( 'ul, ol' ),
+	$( container ).find( 'li, dd, dt' ).each( function() {
+		var $sublists = $(this).children( 'ul, ol, dl' ),
 			$firstChild = $(this.firstChild);
 		if ( $firstChild.is( 'p' ) ) {
 			// Unwrap the first paragraph, unless it has stx=html
@@ -511,6 +580,31 @@ ve.dm.Converter.prototype.getDomFromData = function( data ) {
 			}
 		});
 	});
+
+	// HACK more postprocessing, this time to add newlines to paragraphs so Parsoid doesn't freak out
+	$( container )
+		// Get all text nodes
+		.find( '*' )
+		.contents()
+		.filter( function() {
+			return this.nodeType == 3;
+		} )
+		.each( function() {
+			this.data = fixupText( this.data, this.parentNode );
+		} );
+	// And add newlines after headings too
+	$( container ).find( 'h1, h2, h3, h4, h5, h6' ).each( function() {
+		// If there is no next sibling, we don't need to add a newline
+		// If the next sibling is a paragraph, fixupText() has taken care of it
+		// Otherwise, add a newline after the heading
+		if ( this.nextSibling && this.nextSibling.nodeName.toLowerCase() !== 'p' ) {
+			this.parentNode.insertBefore( document.createTextNode( "\n" ), this.nextSibling );
+		}
+		// If the previous sibling exists and is a pre, we need to add a newline before
+		if ( this.previousSibling && this.previousSibling.nodeName.toLowerCase() === 'pre' ) {
+			this.parentNode.insertBefore( document.createTextNode( "\n" ), this );
+		}
+	} );
 	return container;
 };
 

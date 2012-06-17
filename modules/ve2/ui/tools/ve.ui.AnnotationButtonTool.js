@@ -1,6 +1,6 @@
 /**
  * Creates an ve.ui.AnnotationButtonTool object.
- * 
+ *
  * @class
  * @constructor
  * @extends {ve.ui.ButtonTool}
@@ -46,13 +46,16 @@ ve.ui.AnnotationButtonTool.prototype.onClick = function() {
 };
 
 ve.ui.AnnotationButtonTool.prototype.updateState = function( annotations, nodes ) {
-	if ( ve.dm.Document.annotationsContainAnnotation(annotations, this.annotation) ) {
-			this.$.addClass( 'es-toolbarButtonTool-down' );
-			this.active = true;
-			return;
+	var matches = ve.dm.Document.getMatchingAnnotations(
+		annotations, new RegExp( '^' + this.annotation.type + '$' )
+	);
+	if ( ve.isEmptyObject( matches ) ) {
+		this.$.removeClass( 'es-toolbarButtonTool-down' );
+		this.active = false;
+	} else {
+		this.$.addClass( 'es-toolbarButtonTool-down' );
+		this.active = true;
 	}
-	this.$.removeClass( 'es-toolbarButtonTool-down' );
-	this.active = false;
 };
 
 /* Registration */
@@ -80,7 +83,7 @@ ve.ui.Tool.tools.link = {
 	'name': 'link',
 	'title': 'Link (ctrl/cmd + K)',
 	'data': {
-		'annotation': { 'type': 'link/internal', 'data': { 'title': '' } },
+		'annotation': { 'type': 'link/wikiLink', 'data': { 'title': '' } },
 		'inspector': 'link'
 	}
 };

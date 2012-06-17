@@ -12,19 +12,21 @@ ve.dm.Surface = function( doc ) {
 	// Properties
 	this.documentModel = doc;
 	this.selection = null;
-	
-
 	this.smallStack = [];
 	this.bigStack = [];
 	this.undoIndex = 0;
-
-	var _this = this;
-	setInterval( function () {
-		_this.breakpoint();
-	}, 750 );
+	this.historyTrackingInterval = null;
 };
 
 /* Methods */
+
+ve.dm.Surface.prototype.startHistoryTracking = function() {
+	this.historyTrackingInterval = setInterval( ve.proxy( this.breakpoint, this ), 750 );
+};
+
+ve.dm.Surface.prototype.stopHistoryTracking = function() {
+	clearInterval( this.historyTrackingInterval );
+};
 
 ve.dm.Surface.prototype.purgeHistory = function() {
 	this.selection = null;
@@ -103,15 +105,6 @@ ve.dm.Surface.prototype.transact = function( transaction ) {
  */
 ve.dm.Surface.prototype.annotate = function( method, annotation ) {
 	var selection = this.getSelection();
-
-	if ( method === 'toggle' ) {
-		var annotations = this.getDocument().getAnnotationsFromRange( selection );
-		if ( annotation in annotations ) {
-			method = 'clear';
-		} else {
-			method = 'set';
-		}
-	}
 	if ( this.selection.getLength() ) {
 		var tx = ve.dm.Transaction.newFromAnnotation(
 			this.getDocument(), selection, method, annotation

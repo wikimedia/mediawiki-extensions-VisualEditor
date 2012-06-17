@@ -122,29 +122,20 @@ ve.dm.Document = function( data, parentDocument ) {
 
 /**
  * Applies annotations to content data.
- * 
+ *
  * This method modifies data in place.
- * 
+ *
  * @method
  * @param {Array} data Data to remove annotations from
  * @param {Array} annotations Annotations to apply
  */
 ve.dm.Document.addAnnotationsToData = function( data, annotations ) {
-	if ( !annotations || annotations.length === 0 ) {
-		return;
-	}
-	var	annotationMap = {},
-		i;
-	// Build annotation map
-	for ( i = 0; i < annotations.length; i++ ) {
-		annotationMap[ve.getHash( annotations[i] )] = annotations[i];
-	}
 	// Apply annotations to data
 	for ( i = 0; i < data.length; i++ ) {
 		if ( !ve.isArray( data[i] ) ) {
 			data[i] = [data[i]];
 		}
-		data[i][1] = ve.extendObject( data[i][1], annotationMap );
+		data[i][1] = ve.extendObject( data[i][1], annotations );
 	}
 };
 
@@ -392,7 +383,7 @@ ve.dm.Document.isContentData = function( data ) {
 
 /**
  * Reverses a transaction's effects on the content data.
- * 
+ *
  * @method
  * @param {ve.dm.Transaction}
  */
@@ -402,7 +393,7 @@ ve.dm.Document.prototype.rollback = function( transaction ) {
 
 /**
  * Commits a transaction's effects on the content data.
- * 
+ *
  * @method
  * @param {ve.dm.Transaction}
  */
@@ -467,7 +458,7 @@ ve.dm.Document.prototype.getDataFromNode = function( node ) {
  *
  * @method
  * @param {Integer} offset Offset to get annotations for
- * @returns {Object[]} A copy of all annotation objects offset is covered by
+ * @returns {Object} A copy of all annotation objects offset is covered by
  */
 ve.dm.Document.prototype.getAnnotationsFromOffset = function( offset ) {
 	var annotations;
@@ -488,9 +479,10 @@ ve.dm.Document.prototype.getAnnotationsFromOffset = function( offset ) {
 		this.data[offset][1] : this.data[offset].annotations;
 
 	if ( ve.isPlainObject( annotations ) ) {
-		return ve.getObjectValues( annotations );
+		//return ve.getObjectValues( annotations );
+		return ve.extendObject( {}, annotations );
 	}
-	return [];
+	return {};
 };
 
 /**
@@ -503,7 +495,7 @@ ve.dm.Document.prototype.getAnnotationsFromOffset = function( offset ) {
  */
 ve.dm.Document.prototype.offsetContainsAnnotation = function ( offset, annotation ) {
 	var annotations = this.getAnnotationsFromOffset( offset );
-	for ( var a=0; a<annotations.length; a++ ) {
+	for (var a in annotations) {
 		if ( ve.compareObjects( annotations[a], annotation ) ){
 			return true;
 		}
@@ -603,7 +595,7 @@ ve.dm.Document.getMatchingAnnotations = function( annotations, pattern ) {
 	if ( !( pattern instanceof RegExp ) ) {
 		throw 'Invalid Pattern. Pattern not instance of RegExp';
 	}
-	var matches = null;
+	var matches = {};
 	if ( ve.isPlainObject( annotations ) ) {
 		for ( var hash in annotations ) {
 			if ( pattern.test( annotations[hash].type ) ){
@@ -615,98 +607,58 @@ ve.dm.Document.getMatchingAnnotations = function( annotations, pattern ) {
 };
 
 /**
- * Returns an annotation from annotations that match a regular expression.
- *
- * @static
- * @method
- * @param {Array} annotations Annotations to search through
- * @param {RegExp} pattern Regular expression pattern to match with
- * @returns {Object} Annotation object
- */
-ve.dm.Document.getMatchingAnnotation = function( annotations, pattern ) {
-	if ( !( pattern instanceof RegExp ) ) {
-		throw 'Invalid Pattern. Pattern not instance of RegExp';
-	}
-	if ( ve.isPlainObject( annotations ) ) {
-		for ( var hash in annotations ) {
-			if ( pattern.test( annotations[hash].type ) ){
-				return annotations[hash];
-			}
-		}
-	}
-	return;
-};
-
-/**
- * Quick check for annotation inside annotations object
- *
- * @static
- * @method
- * @param {Object} annotations Annotations to search through
- * @param {Object} pattern Regular expression pattern to match with
- * @returns {Boolean} if annotation in annotations object
- */
-ve.dm.Document.annotationsContainAnnotation = function( annotations, annotation ) {
-	var contains = false;
-	$.each(annotations, function(i, val){
-		if ( ve.compareObjects(val, annotation) ) {
-			contains = true;
-		}
-	});
-	return contains;
-};
-
-/**
  * Gets an array of common annnotations across a range.
  *
  * @method
  * @param {Integer} offset Offset to get annotations for
- * @returns {Object[]} A copy of all annotation objects offset is covered by
+ * @param {Boolean} [all] Get all annotations found within the range, not just those that cover it
+ * @returns {Object} A copy of all annotation objects offset is covered by
  */
-ve.dm.Document.prototype.getAnnotationsFromRange = function( range ) {
-	var	currentChar = {},
-		annotations = [],
-		charCount = 0,
-		map = {};
-		
+ve.dm.Document.prototype.getAnnotationsFromRange = function( range, all ) {
 	range.normalize();
-	
+	var	annotations = {},
+		count = 0,
+		left,
+		right,
+		hash;
+	// Shorcut for zero-length ranges
 	if ( range.getLength() === 0 ) {
-		return this.getAnnotationsFromOffset( range.to );
+		return {};
 	}
-
-	for ( var i = range.start; i < range.end; i++ ) {
-		// skip non characters
+	// There's at least one character, get it's annotations
+	left = this.getAnnotationsFromOffset( range.start );
+	// Shorcut for single character ranges
+	if ( range.getLength() === 1 ) {
+		return left;
+	}
+	// Iterator over the range, looking for annotations, starting at the 2nd character
+	for ( var i = range.start + 1; i < range.end; i++ ) {
+		// Skip non character data
 		if ( ve.dm.Document.isElementData( this.data, i ) ) {
 			continue;
 		}
-		//current character annotations
-		currentChar = this.data[i][1];
-		// if a non annotated character, no commonality.
-		if ( currentChar === undefined ) {
-			return [];
-		}
-		charCount++;
-		// if current char annotations are not the same as previous char.
-		if ( ve.compareObjects( map, currentChar ) === false) {
-			//retain common annotations
-			if ( charCount > 1 ) {
-				// look for annotation in map
-				for ( var a in currentChar ) {
-					if( map[a] === undefined ) {
-						delete currentChar[a];
-					}
+		// Current character annotations
+		right = this.getAnnotationsFromOffset( i );
+		if ( all && right !== undefined ) {
+			ve.extendObject( left, right );
+		} else if ( !all ) {
+			// A non annotated character indicates there's no full coverage
+			if ( right === undefined ) {
+				return {};
+			}
+			// Exclude annotations that are in left but not right
+			for ( hash in left ) {
+				if ( right[hash] === undefined ) {
+					delete left[hash];
 				}
 			}
+			// If we've reduced left down to nothing, just stop looking
+			if ( ve.isEmptyObject( left ) ) {
+				break;
+			}
 		}
-		//save map
-		map = currentChar;
 	}
-	// build array of annotations
-	for ( var key in map ) {
-		annotations.push( map[key] );
-	}
-	return annotations;
+	return left;
 };
 
 /**
