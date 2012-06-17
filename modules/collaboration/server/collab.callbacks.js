@@ -67,14 +67,15 @@ callbacks.prototype.clientDisconnection = function( data ) {
 /**
  * Callback method to be invoked when a new transaction arrives at the server
 **/
-callbacks.prototype.newTransaction = function( transaction ) {
+callbacks.prototype.newTransaction = function( transactionData ) {
 	var doc = this.session.Document;
-	doc.applyTransaction( this.session, transaction );
+	var transaction = transactionData;
+	doc.applyTransaction( this.session, transactionData );
 	
 	var routeCallbacks = this.sessionRoute.callbacks;
 	for( cb in routeCallbacks ) {
 		var socket = routeCallbacks[ cb ].socket;
-		socket.emit( 'new_transaction', transaction );
+		socket.emit( 'new_transaction', transactionData );
 	}
 };
 

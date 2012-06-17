@@ -2,8 +2,9 @@
  * Module for establishing/maintaining socket connection with server
 **/
 
-collab.client = function( ) {
+collab.client = function( surfaceModel ) {
 	var settings = collab.settings;
+	this.surfaceModel = surfaceModel;
 	var options = {
 	};
 	_this = this;
@@ -13,6 +14,7 @@ collab.client = function( ) {
 		_this.bindEvents( socket );
 		// TODO: User has to be handled using the MW auth
 		var user = prompt( 'enter username' );
+		_this.userID = user;
 		socket.emit( 'client_connect', { user: user, title: 'Main_Page' } );
 	});
 };

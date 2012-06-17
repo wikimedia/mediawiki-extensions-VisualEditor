@@ -45,9 +45,10 @@ Document.prototype.applyTransaction = function( session, transactionData ) {
 		return false;
 	}
 
-	var transaction = new ve.dm.Transaction();
-	transaction.operations = transactionData.operations;
-	transaction.lengthDifference = transactionData.lengthDifference;
+	var transactionObj = new ve.dm.Transaction();
+	var transaction = transactionData.transaction;
+	transaction.operations = transaction.operations;
+	transaction.lengthDifference = transaction.lengthDifference;
 	this.dmSurface.transact( transaction );
 	// TODO: document state hash should also be pushed into the history
 	this.history.push( transaction );

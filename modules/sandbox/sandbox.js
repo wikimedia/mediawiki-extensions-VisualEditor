@@ -650,7 +650,7 @@ $(document).ready( function() {
 		'</div>' );
 
 
-	cb = new collab.client();
+	window.cb = new collab.client();
 } );
 
 function init_doc( html ) {
@@ -675,7 +675,7 @@ function init_doc( html ) {
 		view = sandboxEditor.view;
 	
 	window.sandboxEditor = sandboxEditor;
-	
+	window.cb.surfaceModel = surfaceModel;
 		/* Rob's test selection stuff */
 		//surfaceModel.setSelection( new ve.Range(0, documentModel.getData().length ) );
 		//surfaceModel.setSelection( new ve.Range( 178, 185 ) );
