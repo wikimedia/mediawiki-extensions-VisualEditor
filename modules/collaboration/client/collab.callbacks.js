@@ -25,7 +25,7 @@ collab.callbacks.prototype.clientDisconnection = function( data ) {
  * Callback method to be invoked when a new transaction arrives at the client
 **/
 collab.callbacks.prototype.newTransaction = function( transactionData ) {
-	var surfaceModel = this.client.surfaceModel;
+	var surfaceModel = this.client.editor.getModel();
 
 	var transactionObj = new ve.dm.Transaction();
 	var transaction = transactionData.transaction;
@@ -36,9 +36,11 @@ collab.callbacks.prototype.newTransaction = function( transactionData ) {
 	if( args.publisherID != this.client.userID ) {
 		transactionObj.isBroadcasted = true;
 		var selection = surfaceModel.getSelection();
-		console.log(selection);
+		if( !selection ) {
+			selection = new ve.Range( 1, 1 );
+			surfaceModel.setSelection( selection );
+		}
 		surfaceModel.transact( transactionObj );
-		surfaceModel.setSelection( selection );
 	}
 	//apply the transaction through the transaction processor
 };
@@ -50,18 +52,29 @@ collab.callbacks.prototype.docTransfer = function( data ) {
 	init_doc( html[0] );
 	var socket = this.socket;
 	var client = this.client;
-	var surfaceModel = client.surfaceModel;
-	surfaceModel.on( 'transact', function( transaction ) {
-		if( !transaction.isBroadcasted ) {
-			// Inject transaction arguments before sending transaction data
-			var transactionData = {
-				args: {
-					publisherID: client.userID
-				},
-				transaction: transaction
-			};
-			console.log(transactionData);
-			socket.emit( 'new_transaction', transactionData );
-		}
-	});
+	var surfaceModel = client.editor.getModel();
+
+	// Bind with surfaceModel's transact event
+	if( data.allowPublish == true ) {
+		surfaceModel.on( 'transact', function( transaction ) {
+			if( !transaction.isBroadcasted ) {
+				// Inject transaction arguments before sending transaction data
+				var transactionData = {
+					args: {
+						publisherID: client.userID
+					},
+					transaction: transaction
+				};
+				console.log(transactionData);
+				socket.emit( 'new_transaction', transactionData );
+			}
+		});
+	}
+	else {
+		// Disable editing entirely
+		var view = client.editor.view;
+		var documentNode = view.documentView.documentNode;
+		documentNode.$.attr( 'contenteditable', false );
+	}
+
 };

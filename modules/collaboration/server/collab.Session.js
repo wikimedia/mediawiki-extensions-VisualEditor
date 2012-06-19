@@ -4,7 +4,11 @@
  * Also stores information of the user who initiated the editing session.
 **/
 
+ve = require( './collab.ve.js' ).ve;
+
 Session = function( document, user ) {
+	ve.EventEmitter.call( this );
+
 	this.Document = document;
 	this.user = user
 	this.isPublisher = false;
@@ -22,13 +26,17 @@ Session.generateID = function( docTitle, user ) {
 /**
  * Set publishing rights for the current user/session
 **/
-Session.prototype.allowPublish = function() {
-	this.isPublisher = true;
+Session.prototype.allowPublish = function( key ) {
+	// key is either true for having atleast one publisher or false for no publisher
+	this.Document.hasPublisher = key;
+	this.emit( 'allowPublish', key );
 };
 
 Session.prototype.getID = function() {
 	return this.id;
 };
+
+ve.extendClass( Session, ve.EventEmitter );
 
 if( typeof module == 'object' ) { 
 	module.exports.Session = Session;

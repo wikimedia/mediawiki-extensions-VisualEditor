@@ -27,18 +27,13 @@ callbacks.prototype.clientConnection = function( data ) {
 
 	// Parse the page by its title using the parser
 	parse( docTitle, function( docHTML ) {
-		for( route in docRoutes ) {
-			console.log( docRoutes );
-			var docID = docRoutes[ route ].document.getID();
-			if( docID == Document.generateID( docTitle ) ) {
-				sessionRoute = docRoutes[ route ];
-				var sessionDoc = sessionRoute.document;
-				sessionRoute.callbacks.push( _this );
-				break;
-			}
+		var sessionRoute = _this.server.lookupRoutes( docTitle );
+		if( sessionRoute ) {
+			sessionDoc = sessionRoute.document;
+			sessionRoute.callbacks.push( _this );
+			var argAllowPublish = false;
 		}
-
-		/** 
+  	/** 
 		 * Proceed with creating a new route with a new document,
 		 * if no existing document route was found.
 		**/
@@ -48,12 +43,31 @@ callbacks.prototype.clientConnection = function( data ) {
 				document: sessionDoc,
 				callbacks: [ _this ]
 			};
+			var argAllowPublish = true;
 			docRoutes.push( sessionRoute );
 		}
 		_this.sessionRoute = sessionRoute;
 		_this.session = new Session( sessionDoc, userID );
-		_this.socket.emit( 'document_transfer', { html: docHTML } );
-	});
+		_this.session.allowPublish( argAllowPublish );
+		_this.socket.emit( 'document_transfer', { html: docHTML, allowPublish: argAllowPublish } );
+
+		// Bind some session events here
+		_this.session.on( 'allowPublish', function( e ) {
+			var routeCallbacks = sessionRoute.callbacks;
+			sessionRoute.document.hasPublisher = false;
+			if( !e ) {
+				for( cb in routeCallbacks ) {
+					var callback = routeCallbacks[ cb ];
+					if( callback.session.isPublisher == true ) {
+						sessionRoute.document.hasPublisher = true;
+						break;
+					}
+				}
+			}
+		} );
+
+	} );
+
 };
 
 /**

@@ -7,6 +7,7 @@
 
 io = require( 'socket.io' );
 callbacks = require( './collab.callbacks.js' ).callbacks;
+Document = require( './collab.Document.js' ).Document;
 settings = require( '../settings.js' ).settings;
 
 /**
@@ -34,6 +35,7 @@ CollaborationServer = function () {
  * Binds all socket events to the corresponding callback functions
 **/
 CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
+	// Socket events are registered here
 	var io_socket = callbacksObj.socket;
 	io_socket.on( 'client_connect', function( data ) {
 		callbacksObj.clientConnection( data );
@@ -50,6 +52,23 @@ CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 	io_socket.on( 'document_save', function( data ) {
 		callbacksObj.saveDocument( data );
 	});
+
 };
+
+/**
+ * Lookup a route with matching docTitle in the docRoutes
+**/
+CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
+	var lookupRoute = null;
+	var docRoutes = this.docRoutes;
+	for( route in docRoutes ) {
+		var docID = docRoutes[ route ].document.getID();
+		if( docID == Document.generateID( docTitle ) ) {
+			lookupRoute = docRoutes[ route ];
+			break;
+		}
+	}
+	return lookupRoute;
+}
 
 collab = new CollaborationServer();
