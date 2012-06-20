@@ -25,8 +25,7 @@ CollaborationServer = function () {
 
 	io_service.on( 'connection', function( socket ) {
 		socket.emit( 'connection', {} );
-		var socket_callbacks = new callbacks( collab );
-		socket_callbacks.socket = socket;
+		var socket_callbacks = new callbacks( collab, socket );
 		collab.bindEvents( socket_callbacks );
 	});
 };	
@@ -39,6 +38,10 @@ CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 	var io_socket = callbacksObj.socket;
 	io_socket.on( 'client_connect', function( data ) {
 		callbacksObj.clientConnection( data );
+	});
+	
+	io_socket.on( 'disconnect', function( data ) {
+		callbacksObj.clientDisconnection( data );
 	});
 
 	io_socket.on( 'client_disconnect', function( data ) {

@@ -6,13 +6,14 @@
 
 ve = require( './collab.ve.js' ).ve;
 
-Session = function( document, user ) {
+Session = function( document, user, sessionIndex ) {
 	ve.EventEmitter.call( this );
 
 	this.Document = document;
 	this.user = user
 	this.isPublisher = false;
 	this.id = Session.generateID( document.title, user );
+	this.sessionIndex = sessionIndex;
 };
 
 /**

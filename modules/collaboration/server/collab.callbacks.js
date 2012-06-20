@@ -7,9 +7,18 @@ Session = require( './collab.Session.js' ).Session;
 Document = require( './collab.Document.js' ).Document;
 parse = require( './collab.parse.js' ).parse;
 
-callbacks = function( server ) {
+callbacks = function( server, socket ) {
 	this.server = server;
+	this.socket = socket;
 };
+
+callbacks.prototype.broadcaste = function( event, args ) {
+	var routeCallbacks = this.sessionRoute.callbacks;
+	for( cb in routeCallbacks ) {
+		var socket = routeCallbacks[ cb ].socket;
+		socket.emit( event, args );
+	}
+}
 
 /**
  * Callback method to be invoked when a new client initiates its session
@@ -47,7 +56,7 @@ callbacks.prototype.clientConnection = function( data ) {
 			docRoutes.push( sessionRoute );
 		}
 		_this.sessionRoute = sessionRoute;
-		_this.session = new Session( sessionDoc, userID );
+		_this.session = new Session( sessionDoc, userID, sessionRoute.callbacks.length - 1 );
 		_this.session.allowPublish( argAllowPublish );
 		_this.socket.emit( 'document_transfer', { html: docHTML, allowPublish: argAllowPublish } );
 
@@ -65,6 +74,8 @@ callbacks.prototype.clientConnection = function( data ) {
 				}
 			}
 		} );
+		
+		_this.broadcaste( 'client_connect', userID );
 
 	} );
 
@@ -74,8 +85,9 @@ callbacks.prototype.clientConnection = function( data ) {
  * Callback method to be invoked when a client closes its session
 **/
 callbacks.prototype.clientDisconnection = function( data ) {
-	this.server.sessions.pop( this.sessionIndex );
-	this.server.sessionIndex--;
+	var sessionIndex = this.session.sessionIndex;
+	this.sessionRoute.callbacks.pop( sessionIndex );
+	this.broadcaste( 'client_disconnect', this.session.user );
 };
 
 /**
@@ -85,12 +97,7 @@ callbacks.prototype.newTransaction = function( transactionData ) {
 	var doc = this.session.Document;
 	var transaction = transactionData;
 	doc.applyTransaction( this.session, transactionData );
-	
-	var routeCallbacks = this.sessionRoute.callbacks;
-	for( cb in routeCallbacks ) {
-		var socket = routeCallbacks[ cb ].socket;
-		socket.emit( 'new_transaction', transactionData );
-	}
+	this.broadcaste( 'new_transaction', transactionData );
 };
 
 /**

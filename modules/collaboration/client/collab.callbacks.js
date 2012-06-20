@@ -10,14 +10,14 @@ collab.callbacks = function( client, socket ) {
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-collab.callbacks.prototype.userConnect = function( data ) {
+collab.callbacks.prototype.userConnect = function( userID ) {
 	// do something on the front-end
 };
 
 /**
  * Callback method to be invoked when a client disconnects from the editing session
 **/
-collab.callbacks.prototype.clientDisconnection = function( data ) {
+collab.callbacks.prototype.userDisconnect = function( userID ) {
 	// do something on the front-end
 };
 
@@ -45,17 +45,31 @@ collab.callbacks.prototype.newTransaction = function( transactionData ) {
 	//apply the transaction through the transaction processor
 };
 
-collab.callbacks.prototype.docTransfer = function( data ) {
-	var html = $('<div>' + data.html + '</div>' );
+collab.callbacks.prototype.docTransfer = function( docData ) {
+	var html = $('<div>' + docData.html + '</div>' );
+	var socket = this.socket,
+		client = this.client,
+		editor = client.editor,
+		surfaceModel = editor.getModel(),
+		documentModel = editor.getDocumentModel(),
+		documentNode = documentModel.documentNode;
 	// FIXME: this needs to be rewritten in the server's code
 	// rather than calling the one defined in sandbox.js
-	init_doc( html[0] );
-	var socket = this.socket;
-	var client = this.client;
-	var surfaceModel = client.editor.getModel();
-
+	
+	// Load the document data recieved into the editor instance
+	var data = ve.dm.converter.getDataFromDom( html[0] );
+	var newDocumentModel = new ve.dm.Document( data );
+	documentModel.data.splice( 0, documentModel.data.length );
+	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
+	surfaceModel.setSelection( new ve.Range( 1, 1 ) );
+	documentNode.splice.apply(
+		documentNode,
+		[0, documentNode.getChildren().length]
+		.concat( newDocumentModel.documentNode.getChildren() )
+	);
+	surfaceModel.purgeHistory();
 	// Bind with surfaceModel's transact event
-	if( data.allowPublish == true ) {
+	if( docData.allowPublish == true ) {
 		surfaceModel.on( 'transact', function( transaction ) {
 			if( !transaction.isBroadcasted ) {
 				// Inject transaction arguments before sending transaction data
@@ -72,7 +86,7 @@ collab.callbacks.prototype.docTransfer = function( data ) {
 	}
 	else {
 		// Disable editing entirely
-		var view = client.editor.view;
+		var view = editor.view;
 		var documentNode = view.documentView.documentNode;
 		documentNode.$.attr( 'contenteditable', false );
 	}

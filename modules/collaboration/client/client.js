@@ -2,9 +2,9 @@
  * Module for establishing/maintaining socket connection with server
 **/
 
-collab.client = function( surfaceModel ) {
+collab.client = function( editorSurface ) {
 	var settings = collab.settings;
-	this.surfaceModel = surfaceModel;
+	this.editor = editorSurface;
 	var options = {
 	};
 	_this = this;
