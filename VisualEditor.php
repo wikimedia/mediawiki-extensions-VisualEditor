@@ -96,7 +96,8 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'ext.visualEditor.init',
-			'mediawiki.util'
+			'mediawiki.util',
+			'mediawiki.Uri'
 		),
 		'messages' => array(
 			'minoredit',
@@ -107,9 +108,11 @@ $wgResourceModules += array(
 			'copyrightwarning',
 			'copyrightpage',
 			'edit',
+			'create',
 			'accesskey-ca-edit',
 			'tooltip-ca-edit',
-			'viewsource'
+			'viewsource',
+			'visualeditor-ca-editsource'
 		),
 	),
 	'ext.visualEditor.init' => $wgVisualEditorResourceTemplate + array(
@@ -126,12 +129,15 @@ $wgResourceModules += array(
 			// ve
 			'jquery/jquery.json.js',
 			've2/ve.js',
-		)
+			've2/ve.EventEmitter.js',
+		),
+		'debugScripts' => array(
+			've2/ve.debug.js',
+		),
 	),
 	'ext.visualEditor.core' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			// ve
-			've2/ve.EventEmitter.js',
 			've2/ve.Factory.js',
 			've2/ve.Position.js',
 			've2/ve.Range.js',
@@ -254,6 +260,29 @@ $wgResourceModules += array(
 			'visualeditor-tooltip-history',
 			'visualeditor-tooltip-help',
 			'visualeditor',
+			'visualeditor-linkinspector-title',
+			'visualeditor-linkinspector-tooltip',
+			'visualeditor-linkinspector-label-pagetitle',
+			'visualeditor-formatdropdown-tooltip',
+			'visualeditor-formatdropdown-format-paragraph',
+			'visualeditor-formatdropdown-format-heading1',
+			'visualeditor-formatdropdown-format-heading2',
+			'visualeditor-formatdropdown-format-heading3',
+			'visualeditor-formatdropdown-format-heading4',
+			'visualeditor-formatdropdown-format-heading5',
+			'visualeditor-formatdropdown-format-heading6',
+			'visualeditor-formatdropdown-format-preformatted',
+			'visualeditor-annotationbutton-bold-tooltip',
+			'visualeditor-annotationbutton-italic-tooltip',
+			'visualeditor-annotationbutton-link-tooltip',
+			'visualeditor-indentationbutton-indent-tooltip',
+			'visualeditor-indentationbutton-outdent-tooltip',
+			'visualeditor-listbutton-number-tooltip',
+			'visualeditor-listbutton-bullet-tooltip',
+			'visualeditor-clearbutton-tooltip',
+			'visualeditor-historybutton-undo-tooltip',
+			'visualeditor-historybutton-redo-tooltip',
+			'visualeditor-viewpage-savewarning',
 		),
 	)
 );
@@ -265,7 +294,7 @@ $wgResourceModules += array(
  * @see http://www.mediawiki.org/wiki/Extension_default_namespaces
 */
 define( 'NS_VISUALEDITOR', 2500 );
-define( 'NS_VISUALEDITOR_TALK', 2501 );	
+define( 'NS_VISUALEDITOR_TALK', 2501 );
 $wgExtraNamespaces[NS_VISUALEDITOR] = 'VisualEditor';
 $wgExtraNamespaces[NS_VISUALEDITOR_TALK] = 'VisualEditor_talk';
 $wgContentNamespaces[] = NS_VISUALEDITOR;
@@ -282,5 +311,4 @@ $wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
 // Integration Hooks
 $wgAutoloadClasses['VisualEditorHooks'] = $dir . 'VisualEditor.hooks.php';
 $wgHooks['BeforePageDisplay'][] = 'VisualEditorHooks::onBeforePageDisplay';
-$wgHooks['userCan'][] = 'VisualEditorHooks::onUserCan';
 $wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::onMakeGlobalVariablesScript';

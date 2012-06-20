@@ -14,8 +14,12 @@ class VisualEditorHooks {
 		if (
 			// Vector skin supported for now.
 			$skin->getSkinName() === 'vector' &&
-			// Be sure current page is VisualEditor:Something
-			$wgTitle->getNamespace() === NS_VISUALEDITOR
+			(
+				// Article in the VisualEditor namespace
+				$wgTitle->getNamespace() === NS_VISUALEDITOR ||
+				// Special page action for an article in the VisualEditor namespace
+				$skin->getRelevantTitle()->getNamespace() === NS_VISUALEDITOR
+			)
 		) {
 			$output->addModules( array( 'ext.visualEditor.editPageInit' ) );
 		}
@@ -32,28 +36,6 @@ class VisualEditorHooks {
 		$vars['wgVisualEditor'] = array(
 			'isPageWatched' => $wgUser->isWatched( $wgTitle )
 		);
-		return true;
-	}
-
-	/**
-	 * Prevents editing in the VisualEditor namespace by non-sysop users.
-	 *
-	 * This is attached to the MediaWiki 'userCan' hook.
-	 */
-	public static function onUserCan( &$title, &$user, $action, &$result ) {
-		global $wgUser, $wgNamespaceProtection;
-
-		if ( array_key_exists( $title->mNamespace, $wgNamespaceProtection ) ) {
-			$nsProt = $wgNamespaceProtection[$title->mNamespace];
-			if ( !is_array( $nsProt ) ) {
-				$nsProt = array( $nsProt );
-			}
-			foreach( $nsProt as $right ) {
-				if ( $right != '' && !$user->isAllowed( $right ) ) {
-					$result = false;
-				}
-			}
-		}
 		return true;
 	}
 }

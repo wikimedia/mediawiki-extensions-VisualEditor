@@ -27,25 +27,28 @@ test( 'getSelection', 1, function() {
 	strictEqual( surface.getSelection(), surface.selection );
 } );
 
-test( 'setSelection', 1, function() {
-	var surface = new ve.dm.SurfaceStub();
-	surface.on( 'select', function() {
-		ok( true, 'select was emitted' );
-	} );
-	surface.setSelection( new ve.Range( 1, 1 ) );
-} );
-
-test( 'transact', 1, function() {
-	var surface = new ve.dm.SurfaceStub();
-	var tx = new ve.dm.Transaction();
+test( 'change', 3, function() {
+	var surface = new ve.dm.SurfaceStub(),
+		tx = new ve.dm.Transaction(),
+		events = { 'transact': 0, 'select': 0, 'change': 0 };
 	surface.on( 'transact', function() {
-		ok( true, 'transact was emitted' );
+		events.transact++;
 	} );
-	surface.transact( tx );
+	surface.on( 'select', function() {
+		events.select++;
+	} );
+	surface.on( 'change', function() {
+		events.change++;
+	} );
+	surface.change( tx );
+	deepEqual( events, { 'transact': 1, 'select': 0, 'change': 1 } );
+	surface.change( null, new ve.Range( 1, 1 ) );
+	deepEqual( events, { 'transact': 1, 'select': 1, 'change': 2 } );
+	surface.change( tx, new ve.Range( 2, 2 ) );
+	deepEqual( events, { 'transact': 2, 'select': 2, 'change': 3 } );
 } );
 
-
-test('annotate', 1, function(){
+test( 'annotate', 1, function() {
 	var surface,
 		cases = [
 		{
@@ -98,11 +101,9 @@ test('annotate', 1, function(){
 	expect( cases.length );
 	for ( var i = 0; i < cases.length; i++ ) {
 		surface = new ve.dm.SurfaceStub( cases[i].data );
-		surface.setSelection(new ve.Range( 0, surface.getDocument().getData().length ));
-		surface.annotate( cases[i].annotate['method'], cases[i].annotate['annotation']);
-		deepEqual(
-			surface.getDocument().getData(), cases[i].expected, cases[i].msg
-		);
+		surface.change( null, new ve.Range( 0, surface.getDocument().getData().length ) );
+		surface.annotate( cases[i].annotate['method'], cases[i].annotate['annotation'] );
+		deepEqual( surface.getDocument().getData(), cases[i].expected, cases[i].msg );
 
 	}
-});
+} );
