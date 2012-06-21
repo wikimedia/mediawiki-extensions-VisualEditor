@@ -14,16 +14,16 @@ ve = function () {
 	ve.dm = {};
 	// ve
 	require('../../jquery/jquery.json.js');
-	require('../../ve2/ve.js');
-	require('../../ve2/ve.EventEmitter.js');
-	require('../../ve2/ve.Factory.js');
-	require('../../ve2/ve.Position.js');
-	require('../../ve2/ve.Range.js');
-	require('../../ve2/ve.Node.js');
-	require('../../ve2/ve.BranchNode.js');
-	require('../../ve2/ve.LeafNode.js');
-	require('../../ve2/ve.Surface.js');
-	require('../../ve2/ve.Document.js');
+	require('../../ve/ve.js');
+	require('../../ve/ve.EventEmitter.js');
+	require('../../ve/ve.Factory.js');
+	require('../../ve/ve.Position.js');
+	require('../../ve/ve.Range.js');
+	require('../../ve/ve.Node.js');
+	require('../../ve/ve.BranchNode.js');
+	require('../../ve/ve.LeafNode.js');
+	require('../../ve/ve.Surface.js');
+	require('../../ve/ve.Document.js');
 	Node = {
 	  ELEMENT_NODE: 1,
 		ATTRIBUTE_NODE: 2,
@@ -41,40 +41,36 @@ ve = function () {
 
 
 	// dm
-	require('../../ve2/dm/ve.dm.js');
-	require('../../ve2/dm/ve.dm.NodeFactory.js');
-	require('../../ve2/dm/ve.dm.Node.js');
-	require('../../ve2/dm/ve.dm.AnnotationFactory.js');
-	require('../../ve2/dm/ve.dm.Annotation.js');
-	require('../../ve2/dm/ve.dm.BranchNode.js');
-	require('../../ve2/dm/ve.dm.LeafNode.js');
-	require('../../ve2/dm/ve.dm.TransactionProcessor.js');
-	require('../../ve2/dm/ve.dm.Transaction.js');
-	require('../../ve2/dm/ve.dm.Surface.js');
-	require('../../ve2/dm/ve.dm.Document.js');
-	require('../../ve2/dm/ve.dm.DocumentSynchronizer.js');
-	require('../../ve2/dm/ve.dm.Converter.js');
+	require('../../ve/dm/ve.dm.js');
+	require('../../ve/dm/ve.dm.NodeFactory.js');
+	require('../../ve/dm/ve.dm.Node.js');
+	require('../../ve/dm/ve.dm.AnnotationFactory.js');
+	require('../../ve/dm/ve.dm.Annotation.js');
+	require('../../ve/dm/ve.dm.BranchNode.js');
+	require('../../ve/dm/ve.dm.LeafNode.js');
+	require('../../ve/dm/ve.dm.TransactionProcessor.js');
+	require('../../ve/dm/ve.dm.Transaction.js');
+	require('../../ve/dm/ve.dm.Surface.js');
+	require('../../ve/dm/ve.dm.Document.js');
+	require('../../ve/dm/ve.dm.DocumentSynchronizer.js');
+	require('../../ve/dm/ve.dm.Converter.js');
 
-	require('../../ve2/dm/nodes/ve.dm.AlienInlineNode.js');
-	require('../../ve2/dm/nodes/ve.dm.AlienBlockNode.js');
-	require('../../ve2/dm/nodes/ve.dm.DefinitionListItemNode.js');
-	require('../../ve2/dm/nodes/ve.dm.DefinitionListNode.js');
-	require('../../ve2/dm/nodes/ve.dm.DocumentNode.js');
-	require('../../ve2/dm/nodes/ve.dm.HeadingNode.js');
-	require('../../ve2/dm/nodes/ve.dm.ImageNode.js');
-	require('../../ve2/dm/nodes/ve.dm.ListItemNode.js');
-	require('../../ve2/dm/nodes/ve.dm.ListNode.js');
-	require('../../ve2/dm/nodes/ve.dm.ParagraphNode.js');
-	require('../../ve2/dm/nodes/ve.dm.PreformattedNode.js');
-	require('../../ve2/dm/nodes/ve.dm.TableCellNode.js');
-	require('../../ve2/dm/nodes/ve.dm.TableNode.js');
-	require('../../ve2/dm/nodes/ve.dm.TableRowNode.js');
-	require('../../ve2/dm/nodes/ve.dm.TextNode.js');
+	require('../../ve/dm/nodes/ve.dm.AlienInlineNode.js');
+	require('../../ve/dm/nodes/ve.dm.AlienBlockNode.js');
+	require('../../ve/dm/nodes/ve.dm.DefinitionListItemNode.js');
+	require('../../ve/dm/nodes/ve.dm.DefinitionListNode.js');
+	require('../../ve/dm/nodes/ve.dm.DocumentNode.js');
+	require('../../ve/dm/nodes/ve.dm.HeadingNode.js');
+	require('../../ve/dm/nodes/ve.dm.ImageNode.js');
+	require('../../ve/dm/nodes/ve.dm.ListItemNode.js');
+	require('../../ve/dm/nodes/ve.dm.ListNode.js');
+	require('../../ve/dm/nodes/ve.dm.ParagraphNode.js');
+	require('../../ve/dm/nodes/ve.dm.PreformattedNode.js');
+	require('../../ve/dm/nodes/ve.dm.TableCellNode.js');
+	require('../../ve/dm/nodes/ve.dm.TableNode.js');
+	require('../../ve/dm/nodes/ve.dm.TableRowNode.js');
+	require('../../ve/dm/nodes/ve.dm.TextNode.js');
 
-	require('../../ve/dm/serializers/ve.dm.AnnotationSerializer.js');
-	require('../../ve/dm/serializers/ve.dm.HtmlSerializer.js');
-	require('../../ve/dm/serializers/ve.dm.JsonSerializer.js');
-	require('../../ve/dm/serializers/ve.dm.WikitextSerializer.js');
 	return ve;
 };
 

@@ -15,7 +15,7 @@ Document = function( title, html ) {
 	var data = ve.dm.converter.getDataFromDom( dom[0] );
 	var doc = new ve.dm.Document( data );
 	var surfaceModel = this.dmSurface = new ve.dm.Surface( doc );
-	surfaceModel.setSelection( new ve.Range( 1, 1 ) );
+	//surfaceModel.setSelection( new ve.Range( 1, 1 ) );
 	this.history = [];
 	this.id = Document.generateID( title );
 	this.title = title;
@@ -49,7 +49,7 @@ Document.prototype.applyTransaction = function( session, transactionData ) {
 	var transaction = transactionData.transaction;
 	transaction.operations = transaction.operations;
 	transaction.lengthDifference = transaction.lengthDifference;
-	this.dmSurface.transact( transaction );
+	this.dmSurface.change( transaction, this.dmsurface.getSelection() );
 	// TODO: document state hash should also be pushed into the history
 	this.history.push( transaction );
 
