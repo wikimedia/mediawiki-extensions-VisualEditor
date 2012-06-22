@@ -26,13 +26,14 @@ collab.callbacks.prototype.userDisconnect = function( userID ) {
 **/
 collab.callbacks.prototype.newTransaction = function( transactionData ) {
 	var surfaceModel = this.client.editor.getModel();
-
+	
 	var transactionObj = new ve.dm.Transaction();
 	var transaction = transactionData.transaction;
 	var args = transactionData.args;
 	transactionObj.operations = transaction.operations;
 	transactionObj.lengthDifference = transaction.lengthDifference;
 	transactionObj.isBroadcasted = true;
+	console.log(transactionData.args);
 	if( args.publisherID != this.client.userID ) {
 		transactionObj.isBroadcasted = true;
 		var selection = surfaceModel.getSelection();
@@ -40,7 +41,9 @@ collab.callbacks.prototype.newTransaction = function( transactionData ) {
 			selection = new ve.Range( 1, 1 );
 			//surfaceModel.setSelection( selection );
 		}
+		console.log('here');
 		surfaceModel.change( transactionObj, selection );
+		console.log('gs');
 	}
 	//apply the transaction through the transaction processor
 };

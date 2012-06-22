@@ -61,8 +61,9 @@ collab.ui.prototype.setupPanel = function( veContainer ) {
 	$( '#collab-panel' ).hide();
 
 	$( '#collab-connect' ).click( function() {
+		var username = $( '#collab-username' ).val();
 		$( '#collab-panel' ).html( '<p>Connecting...</p>' );
-		_this.client.connect( 'jj', function( res ) {
+		_this.client.connect( username, function( res ) {
 			if( res.success ) {
 				$( '#collab-panel' ).html( '<p>Connected.</p>' );
 			}
