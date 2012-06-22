@@ -8,17 +8,30 @@ collab.client = function( editorSurface ) {
 	};
 }
 
-collab.client.prototype.connect = function() {
+collab.client.prototype.connect = function( username, responseCallback ) {
 	var _this = this;
 	var settings = collab.settings;
-	var socket = io.connect( settings.host + ':' + settings.port );
+	try {
+		var socket = io.connect( settings.host + ':' + settings.port );
+	}
+	catch( e ) {
+		responseCallback( {
+			success: false,
+			message: 'Could not connect to server.'
+		} );
+		return
+	}
+
 	socket.on( 'connection', function() {
 		socket.callbacks = new collab.callbacks( _this, socket );
 		_this.bindEvents( socket );
 		// TODO: User has to be handled using the MW auth
-		var user = prompt( 'enter username' );
-		_this.userID = user;
-		socket.emit( 'client_connect', { user: user, title: 'Main_Page' } );
+		_this.userID = username;
+		socket.emit( 'client_connect', { user: username, title: 'Main_Page' } );
+		responseCallback( {
+			success: true,
+			message: 'Connected.'
+		} );
 	});
 };
 

@@ -1,0 +1,26 @@
+#collab-panel {
+	border: solid 1px #CCC;
+	float: right;
+	width: 20%;
+	margin-right: 2em;
+	-webkit-box-shadow: 0 0.25em 1.5em 0 #dddddd;
+	-moz-box-shadow: 0 0.25em 1.5em 0 #dddddd;
+	box-shadow: 0 0.25em 1.5em 0 #dddddd;
+	-webkit-border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	-o-border-radius: 0.5em;
+	border-radius: 0.5em;
+	text-align: center;
+}
+
+.es-base-collapsed {
+	float: left;
+	width: 74%;
+	margin-right: 0em !important;
+}
+
+.collab-text-box {
+	border: solid 1px #ccc;
+	padding: 0.25em;
+	font-size: 0.8em;
+}

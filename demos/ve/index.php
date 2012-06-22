@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="../../modules/ve/ui/styles/ve.ui.Menu.css">
 		<link rel="stylesheet" href="../../modules/ve/ui/styles/ve.ui.Surface.css">
 		<link rel="stylesheet" href="../../modules/ve/ui/styles/ve.ui.Toolbar.css">
+		<!-- collab -->
+		<link rel="stylesheet" href="../../modules/collaboration/client/styles/main.css">
 		<!-- sandbox -->
 		<link rel="stylesheet" href="../../modules/sandbox/sandbox.css">
 		<style>

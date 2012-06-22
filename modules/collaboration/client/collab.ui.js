@@ -11,18 +11,20 @@ collab.ui = function( client ) {
 
 collab.ui.elementNodes = {
 	toolbar: '.es-toolbar',
-	base: '.es-base'
+	panel: '#content'
 };
 
 collab.ui.markup = {
 	panel:
 		'<div id="collab-panel">' +
+			'<p><span>Your username</span></p>' +
+			'<p><input id="collab-username" type="text" class="collab-text-box" size="10"></input></p>'+
+			'<p><button id="collab-connect">Connect</button></p>' +
 			'<div id="collab-users-list"></div>' +
 		'</div>',
 	toolbarButtons:
-		'<div id="collab-buttons">' +
+		'<div id="collab-buttons" class="es-toolbarGroup">' +
 			'<button id="collab-switch">Turn-on collaborative editing</button>' +
-			'<button id="collab-users-list-btn">Show connected users</button>' +
 		'</div>'
 };
 
@@ -30,20 +32,22 @@ collab.ui.markup = {
  * Append collab options to the VE toolbar
 **/
 collab.ui.prototype.setupToolbar = function( veToolbarNode ) {
-	console.log( veToolbarNode );
 	veToolbarNode.append( collab.ui.markup.toolbarButtons );
 	_this = this;
 	// Display the panel
 	$( '#collab-switch' ).click( function() {
 		if( _this.state.panel == false ) {
-			$( '#collab-panel' ).show();
+			$( '.es-base' ).addClass( 'es-base-collapsed' );
+			$( '#collab-panel' ).show('fast');
 			_this.state.panel = true;
 		}
 		else {
-			$( '#collab-panel' ).hide();
-			_this.state.panel = false;
+		// Some pretty-ness
+			$( '#collab-panel' ).hide('fast', function() {			
+				$( '.es-base' ).removeClass( 'es-base-collapsed' );
+				_this.state.panel = false;
+			});
 		}
-		_this.client.connect();
 	});
 };
 
@@ -51,6 +55,20 @@ collab.ui.prototype.setupToolbar = function( veToolbarNode ) {
  * Setup collab panel and attach it to the editor's div
 **/
 collab.ui.prototype.setupPanel = function( veContainer ) {
+	var _this = this;
 	veContainer.append( collab.ui.markup.panel );
+	veContainer.append( '<div class="clearfix" style="clear: both"></div>' );
+	$( '#collab-panel' ).hide();
 
+	$( '#collab-connect' ).click( function() {
+		$( '#collab-panel' ).html( '<p>Connecting...</p>' );
+		_this.client.connect( 'jj', function( res ) {
+			if( res.success ) {
+				$( '#collab-panel' ).html( '<p>Connected.</p>' );
+			}
+			else {
+				$( '#collab-panel' ).html( '<p>' + res.message + '</p>' );
+			}
+		});
+	});
 };

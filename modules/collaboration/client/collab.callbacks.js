@@ -61,7 +61,7 @@ collab.callbacks.prototype.docTransfer = function( docData ) {
 	var newDocumentModel = new ve.dm.Document( data );
 	documentModel.data.splice( 0, documentModel.data.length );
 	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
-	//surfaceModel.setSelection( new ve.Range( 1, 1 ) );
+	surfaceModel.selection = new ve.Range( 1, 1 );
 	documentNode.splice.apply(
 		documentNode,
 		[0, documentNode.getChildren().length]
