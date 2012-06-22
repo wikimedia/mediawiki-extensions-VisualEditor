@@ -3,11 +3,14 @@
 **/
 
 collab.client = function( editorSurface ) {
-	var settings = collab.settings;
 	this.editor = editorSurface;
 	var options = {
 	};
-	_this = this;
+}
+
+collab.client.prototype.connect = function() {
+	var _this = this;
+	var settings = collab.settings;
 	var socket = io.connect( settings.host + ':' + settings.port );
 	socket.on( 'connection', function() {
 		socket.callbacks = new collab.callbacks( _this, socket );

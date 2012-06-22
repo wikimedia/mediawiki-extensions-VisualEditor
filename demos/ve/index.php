@@ -200,6 +200,7 @@ include( '../../modules/sandbox/base.php' );
 		<script src="../../modules/collaboration/settings.js"></script>
 		<script src="http://localhost:8000/socket.io/socket.io.js"></script>
 		<script src="../../modules/collaboration/client/collab.callbacks.js"></script>
+		<script src="../../modules/collaboration/client/collab.ui.js"></script>
 		<script src="../../modules/collaboration/client/client.js"></script>
 
 		<!-- sandbox -->
