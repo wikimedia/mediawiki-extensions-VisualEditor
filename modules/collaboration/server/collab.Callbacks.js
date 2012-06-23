@@ -3,16 +3,16 @@
  * Binds all the callback methods to a `callbacks` object which can be used as a module import
 **/
 
-Session = require( './collab.Session.js' ).Session;
-Document = require( './collab.Document.js' ).Document;
-parse = require( './collab.parse.js' ).parse;
+var Session = require( './collab.Session.js' ).Session,
+	Document = require( './collab.Document.js' ).Document,
+	parse = require( './collab.parse.js' ).parse;
 
-callbacks = function( server, socket ) {
+Callbacks = function( server, socket ) {
 	this.server = server;
 	this.socket = socket;
 };
 
-callbacks.prototype.broadcaste = function( event, args ) {
+Callbacks.prototype.broadcast = function( event, args ) {
 	var routeCallbacks = this.sessionRoute.callbacks;
 	for( cb in routeCallbacks ) {
 		var socket = routeCallbacks[ cb ].socket;
@@ -23,7 +23,7 @@ callbacks.prototype.broadcaste = function( event, args ) {
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-callbacks.prototype.clientConnection = function( data ) {
+Callbacks.prototype.clientConnection = function( data ) {
 	console.log('new connection');
 	console.log(data);
 	var userID = data.user,
@@ -38,7 +38,7 @@ callbacks.prototype.clientConnection = function( data ) {
 	parse( docTitle, function( docHTML ) {
 		var sessionRoute = _this.server.lookupRoutes( docTitle );
 		if( sessionRoute ) {
-			sessionDoc = sessionRoute.document;
+			var sessionDoc = sessionRoute.document;
 			sessionRoute.callbacks.push( _this );
 			var argAllowPublish = false;
 		}
@@ -75,7 +75,7 @@ callbacks.prototype.clientConnection = function( data ) {
 			}
 		} );
 		
-		_this.broadcaste( 'client_connect', userID );
+		_this.broadcast( 'client_connect', userID );
 
 	} );
 
@@ -84,30 +84,30 @@ callbacks.prototype.clientConnection = function( data ) {
 /**
  * Callback method to be invoked when a client closes its session
 **/
-callbacks.prototype.clientDisconnection = function( data ) {
+Callbacks.prototype.clientDisconnection = function( data ) {
 	var sessionIndex = this.session.sessionIndex;
 	this.sessionRoute.callbacks.pop( sessionIndex );
-	this.broadcaste( 'client_disconnect', this.session.user );
+	this.broadcast( 'client_disconnect', this.session.user );
 };
 
 /**
  * Callback method to be invoked when a new transaction arrives at the server
 **/
-callbacks.prototype.newTransaction = function( transactionData ) {
+Callbacks.prototype.newTransaction = function( transactionData ) {
 	var doc = this.session.Document;
 	var transaction = transactionData;
 	doc.applyTransaction( this.session, transactionData );
-	this.broadcaste( 'new_transaction', transactionData );
+	this.broadcast( 'new_transaction', transactionData );
 };
 
 /**
  * Callback method to be invoked when a save document command is received from the client
  * This passes control to the parser's page Save pipeline
 **/
-callbacks.prototype.saveDocument = function( transaction ) {
+Callbacks.prototype.saveDocument = function( transaction ) {
 
 };
 
 if ( typeof module == 'object' ) {
-	module.exports.callbacks = callbacks;
+	module.exports.Callbacks = Callbacks;
 }

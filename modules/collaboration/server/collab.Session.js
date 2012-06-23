@@ -4,7 +4,7 @@
  * Also stores information of the user who initiated the editing session.
 **/
 
-ve = require( './collab.ve.js' ).ve;
+var ve = require( './collab.ve.js' ).ve;
 
 Session = function( document, user, sessionIndex ) {
 	ve.EventEmitter.call( this );

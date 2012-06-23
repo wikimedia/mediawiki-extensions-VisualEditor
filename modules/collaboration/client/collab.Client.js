@@ -2,13 +2,13 @@
  * Module for establishing/maintaining socket connection with server
 **/
 
-collab.client = function( editorSurface ) {
+collab.Client = function( editorSurface ) {
 	this.editor = editorSurface;
 	var options = {
 	};
 }
 
-collab.client.prototype.connect = function( username, responseCallback ) {
+collab.Client.prototype.connect = function( username, responseCallback ) {
 	var _this = this;
 	var settings = collab.settings;
 	try {
@@ -23,7 +23,7 @@ collab.client.prototype.connect = function( username, responseCallback ) {
 	}
 
 	socket.on( 'connection', function() {
-		socket.callbacks = new collab.callbacks( _this, socket );
+		socket.callbacks = new collab.Callbacks( _this, socket );
 		_this.bindEvents( socket );
 		// TODO: User has to be handled using the MW auth
 		_this.userID = username;
@@ -35,7 +35,7 @@ collab.client.prototype.connect = function( username, responseCallback ) {
 	});
 };
 
-collab.client.prototype.bindEvents = function( io_socket ) {
+collab.Client.prototype.bindEvents = function( io_socket ) {
 	var socket_callbacks = io_socket.callbacks;
 	io_socket.on( 'new_transaction', function( data ) {
 		socket_callbacks.newTransaction( data );

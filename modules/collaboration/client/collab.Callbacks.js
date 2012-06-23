@@ -2,7 +2,7 @@
  * This contains all the callbacks used for handling the client's Socket.IO events
 **/
 
-collab.callbacks = function( client, socket ) {
+collab.Callbacks = function( client, socket ) {
 	this.client = client;
 	this.socket = socket;
 };
@@ -10,21 +10,21 @@ collab.callbacks = function( client, socket ) {
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-collab.callbacks.prototype.userConnect = function( userID ) {
+collab.Callbacks.prototype.userConnect = function( userID ) {
 	// do something on the front-end
 };
 
 /**
  * Callback method to be invoked when a client disconnects from the editing session
 **/
-collab.callbacks.prototype.userDisconnect = function( userID ) {
+collab.Callbacks.prototype.userDisconnect = function( userID ) {
 	// do something on the front-end
 };
 
 /**
  * Callback method to be invoked when a new transaction arrives at the client
 **/
-collab.callbacks.prototype.newTransaction = function( transactionData ) {
+collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	var surfaceModel = this.client.editor.getModel();
 	
 	var transactionObj = new ve.dm.Transaction();
@@ -41,14 +41,12 @@ collab.callbacks.prototype.newTransaction = function( transactionData ) {
 			selection = new ve.Range( 1, 1 );
 			//surfaceModel.setSelection( selection );
 		}
-		console.log('here');
 		surfaceModel.change( transactionObj, selection );
-		console.log('gs');
 	}
 	//apply the transaction through the transaction processor
 };
 
-collab.callbacks.prototype.docTransfer = function( docData ) {
+collab.Callbacks.prototype.docTransfer = function( docData ) {
 	var html = $('<div>' + docData.html + '</div>' );
 	var socket = this.socket,
 		client = this.client,

@@ -1,6 +1,6 @@
-collab.ui = function( client ) {
+collab.UI = function( client ) {
 	this.client = client;
-	var elementNodes = collab.ui.elementNodes;
+	var elementNodes = collab.UI.elementNodes;
 	this.setupToolbar( $( elementNodes.toolbar) );
 	this.setupPanel( $( elementNodes.panel ) );
 	
@@ -9,12 +9,12 @@ collab.ui = function( client ) {
 	};
 };
 
-collab.ui.elementNodes = {
+collab.UI.elementNodes = {
 	toolbar: '.es-toolbar',
 	panel: '#content'
 };
 
-collab.ui.markup = {
+collab.UI.markup = {
 	panel:
 		'<div id="collab-panel">' +
 			'<p><span>Your username</span></p>' +
@@ -31,9 +31,9 @@ collab.ui.markup = {
 /**
  * Append collab options to the VE toolbar
 **/
-collab.ui.prototype.setupToolbar = function( veToolbarNode ) {
-	veToolbarNode.append( collab.ui.markup.toolbarButtons );
-	_this = this;
+collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
+	veToolbarNode.append( collab.UI.markup.toolbarButtons );
+	var _this = this;
 	// Display the panel
 	$( '#collab-switch' ).click( function() {
 		if( _this.state.panel == false ) {
@@ -54,9 +54,9 @@ collab.ui.prototype.setupToolbar = function( veToolbarNode ) {
 /**
  * Setup collab panel and attach it to the editor's div
 **/
-collab.ui.prototype.setupPanel = function( veContainer ) {
+collab.UI.prototype.setupPanel = function( veContainer ) {
 	var _this = this;
-	veContainer.append( collab.ui.markup.panel );
+	veContainer.append( collab.UI.markup.panel );
 	veContainer.append( '<div class="clearfix" style="clear: both"></div>' );
 	$( '#collab-panel' ).hide();
 

@@ -5,10 +5,10 @@
  * This module implements all the Socket.IO events and calls the respective callback functions
 **/
 
-io = require( 'socket.io' );
-callbacks = require( './collab.callbacks.js' ).callbacks;
-Document = require( './collab.Document.js' ).Document;
-settings = require( '../settings.js' ).settings;
+var io = require( 'socket.io' ),
+	Callbacks = require( './collab.Callbacks.js' ).Callbacks,
+	Document = require( './collab.Document.js' ).Document,
+	settings = require( '../settings.js' ).settings;
 
 /**
  * CollaborationServer binds all the functionality of the server and
@@ -21,11 +21,11 @@ CollaborationServer = function () {
 
 	// Document-wise closures of callback instances
 	this.docRoutes = [];
-	_this = this;
+	var _this = this;
 
 	io_service.on( 'connection', function( socket ) {
 		socket.emit( 'connection', {} );
-		var socket_callbacks = new callbacks( collab, socket );
+		var socket_callbacks = new Callbacks( collab, socket );
 		collab.bindEvents( socket_callbacks );
 	});
 };	

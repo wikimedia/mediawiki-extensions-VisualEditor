@@ -201,9 +201,9 @@ include( '../../modules/sandbox/base.php' );
 		<!-- collab -->
 		<script src="../../modules/collaboration/settings.js"></script>
 		<script src="http://localhost:8000/socket.io/socket.io.js"></script>
-		<script src="../../modules/collaboration/client/collab.callbacks.js"></script>
-		<script src="../../modules/collaboration/client/collab.ui.js"></script>
-		<script src="../../modules/collaboration/client/client.js"></script>
+		<script src="../../modules/collaboration/client/collab.Callbacks.js"></script>
+		<script src="../../modules/collaboration/client/collab.UI.js"></script>
+		<script src="../../modules/collaboration/client/collab.Client.js"></script>
 
 		<!-- sandbox -->
 		<script src="../../modules/sandbox/sandbox.js"></script>
