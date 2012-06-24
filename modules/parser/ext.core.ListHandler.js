@@ -3,7 +3,7 @@
  */
 
 function ListHandler ( manager ) {
-	this.manager = manager
+	this.manager = manager;
 	this.reset();
 	this.manager.addTransform( this.onListItem.bind(this), 
 			this.listRank, 'tag', 'listItem' );
@@ -18,7 +18,7 @@ ListHandler.prototype.bulletCharsMap = {
 	'*': { list: 'ul', item: 'li' },
 	'#': { list: 'ol', item: 'li' },
 	';': { list: 'dl', item: 'dt' },
-	':': { list: 'dl', item: 'dd' },
+	':': { list: 'dl', item: 'dd' }
 };
 
 ListHandler.prototype.reset = function() {
@@ -66,7 +66,7 @@ ListHandler.prototype.onListItem = function ( token, frame, prevToken ) {
 	this.newline = false;
 	if (token.constructor === TagTk){
 		// convert listItem to list and list item tokens
-		return { tokens: this.doListItem( this.bstack, token.bullets ) };
+		return { tokens: this.doListItem( this.bstack, token.bullets, token ) };
 	}
 	return { token: token };
 };
@@ -100,12 +100,12 @@ ListHandler.prototype.popTags = function ( n ) {
 	return tokens;
 };
 
-ListHandler.prototype.isDlDd = function (a, b) {
+ListHandler.prototype.isDtDd = function (a, b) {
 	var ab = [a,b].sort();
 	return (ab[0] === ':' && ab[1] === ';');
 };
 
-ListHandler.prototype.doListItem = function ( bs, bn ) {
+ListHandler.prototype.doListItem = function ( bs, bn, token ) {
 	var prefixLen = this.commonPrefixLength (bs, bn),
 		changeLen = Math.max(bs.length, bn.length) - prefixLen,
 		prefix = bn.slice(0, prefixLen);
@@ -116,38 +116,43 @@ ListHandler.prototype.doListItem = function ( bs, bn ) {
 		this.manager.addTransform( this.onAny.bind(this),
 				this.anyRank, 'any' );
 	}
+	
+	var itemToken;
+
 	// emit close tag tokens for closed lists
 	if (changeLen === 0)
 	{
-		var itemToken = this.endtags.pop();
+		itemToken = this.endtags.pop();
 		this.endtags.push(new EndTagTk( itemToken.name ));
 		return [
 			itemToken,
-			new TagTk( itemToken.name )
+			new TagTk( itemToken.name, [], token.dataAttribs )
 		];
-	}
-	else if ( bs.length == bn.length
-			&& changeLen == 1
-			&& this.isDlDd( bs[prefixLen], bn[prefixLen] ) )
-	{
-		// handle dd/dt transitions
-		var newName = this.bulletCharsMap[bn[prefixLen]].item;
-		this.endtags.push(new EndTagTk( newName ));
-		return [
-			this.endtags.pop(),
-			new TagTk( newName )
-		];
-	}
-	else
-	{
-		var tokens = this.popTags(bs.length - prefixLen);
-
-		if (prefixLen > 0 && bn.length == prefixLen ) {
-			var itemToken = this.endtags.pop();
-			tokens.push(itemToken);
-			tokens.push(new TagTk( itemToken.name ));
-			this.endtags.push(new EndTagTk( itemToken.name ));
+	} else {
+		var tokens = [];
+		if ( bs.length > prefixLen && 
+			 bn.length > prefixLen && 
+			this.isDtDd( bs[prefixLen], bn[prefixLen] ) )
+		{
+			tokens = this.popTags(bs.length - prefixLen - 1);
+			// handle dd/dt transitions
+			var newName = this.bulletCharsMap[bn[prefixLen]].item;
+			var endTag = this.endtags.pop();
+			this.endtags.push(new EndTagTk( newName ));
+			// TODO: review dataAttribs forwarding here and below in
+			// doListItem, in particular re accuracy of tsr!
+			tokens = tokens.concat([ endTag, new TagTk( newName, [], token.dataAttribs  ) ]);
+			prefixLen++;
+		} else {
+			tokens = tokens.concat( this.popTags(bs.length - prefixLen) );
+			if (prefixLen > 0 && bn.length == prefixLen ) {
+				itemToken = this.endtags.pop();
+				tokens.push(itemToken);
+				tokens.push(new TagTk( itemToken.name, [], token.dataAttribs  ));
+				this.endtags.push(new EndTagTk( itemToken.name ));
+			}
 		}
+
 
 		for(var i = prefixLen; i < bn.length; i++) {
 			if (!this.bulletCharsMap[bn[i]])

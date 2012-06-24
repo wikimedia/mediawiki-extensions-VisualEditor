@@ -76,23 +76,49 @@ ve.ui.LinkInspector.prototype.getAnnotationFromSelection = function() {
 	return null;
 };
 
+// TODO: This should probably be somewhere else but I needed this here for now.
+ve.ui.LinkInspector.prototype.getSelectionText = function() {
+	var surfaceView = this.context.getSurfaceView(),
+		surfaceModel = surfaceView.getModel(),
+		documentModel = surfaceModel.getDocument(),
+		data = documentModel.getData( surfaceModel.getSelection() ),
+		str = '',
+		max = Math.min( data.length, 255 );
+	for ( var i = 0; i < max; i++ ) {
+		if ( ve.isArray( data[i] ) ) {
+			str += data[i][0];
+		} else if( typeof data[i] === 'string' ) {
+			str += data[i];
+		}
+	}
+	return str;
+};
+
 ve.ui.LinkInspector.prototype.onOpen = function() {
 	var annotation = this.getAnnotationFromSelection();
+	var initialValue = '';
 	if ( annotation === null ) {
-		this.$locationInput.val( '' );
+		this.$locationInput.val( this.getSelectionText() );
 		this.$clearButton.addClass( 'es-inspector-button-disabled' );
 	} else if ( annotation.type === 'link/wikiLink' ) {
 		// Internal link
-		this.$locationInput.val( annotation.data.title || '' );
+		initialValue = annotation.data.title || '';
+		this.$locationInput.val( initialValue );
 		this.$clearButton.removeClass( 'es-inspector-button-disabled' );
 	} else {
 		// External link
-		this.$locationInput.val( annotation.data.href || '' );
+		initialValue = annotation.data.href || '';
+		this.$locationInput.val( initialValue );
 		this.$clearButton.removeClass( 'es-inspector-button-disabled' );
 	}
 
-	this.$acceptButton.addClass( 'es-inspector-button-disabled' );
-	this.initialValue = this.$locationInput.val();
+	this.initialValue = initialValue;
+	if ( this.$locationInput.val().length === 0 ) {
+		this.$acceptButton.addClass( 'es-inspector-button-disabled' );
+	} else {
+		this.$acceptButton.removeClass( 'es-inspector-button-disabled' );
+	}
+	
 	var _this = this;
 	setTimeout( function() {
 		_this.$locationInput.focus().select();
@@ -100,12 +126,13 @@ ve.ui.LinkInspector.prototype.onOpen = function() {
 };
 
 ve.ui.LinkInspector.prototype.onClose = function( accept ) {
+	var surfaceView = this.context.getSurfaceView();
 	if ( accept ) {
 		var target = this.$locationInput.val();
 		if ( target === this.initialValue || !target ) {
 			return;
 		}
-		var surfaceModel = this.context.getSurfaceView().getModel(),
+		var surfaceModel = surfaceView.getModel(),
 			annotations = this.getSelectedLinkAnnotations();
 
 		// Clear link annotation if it exists
@@ -116,7 +143,7 @@ ve.ui.LinkInspector.prototype.onClose = function( accept ) {
 		var annotation;
 		// Figure out if this is an internal or external link
 		// TODO better logic
-		if ( target.match( /^https?:\/\// ) ) {
+		if ( target.match( /^(https?:)?\/\// ) ) {
 			// External link
 			annotation = {
 				'type': 'link/extLink',
@@ -131,6 +158,8 @@ ve.ui.LinkInspector.prototype.onClose = function( accept ) {
 		}
 		surfaceModel.annotate( 'set', annotation );
 	}
+	// Restore focus
+	surfaceView.getDocument().getDocumentNode().$.focus();
 };
 
 /* Inheritance */

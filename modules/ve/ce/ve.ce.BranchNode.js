@@ -33,7 +33,11 @@ ve.ce.BranchNode = function( type, model, $element ) {
 
 /* Static Members */
 
-ve.ce.BranchNode.$slugTemplate = $( '<span class="ve-ce-slug">&#xFEFF;</span>' );
+if ( $.browser.msie ) {
+	ve.ce.BranchNode.$slugTemplate = $( '<span class="ve-ce-slug">&nbsp;</span>' );
+} else {
+	ve.ce.BranchNode.$slugTemplate = $( '<span class="ve-ce-slug">&#xFEFF;</span>' );
+}
 
 /* Static Methods */
 
@@ -80,6 +84,45 @@ ve.ce.BranchNode.getDomWrapper = function( model, key ) {
 
 /* Methods */
 
+ve.ce.BranchNode.prototype.doSlugs = function() {
+	// Remove all slugs in this branch
+	this.$slugs.remove();
+
+	var $slug = ve.ce.BranchNode.$slugTemplate.clone();
+
+	if ( this.canHaveGrandchildren() ) {
+		$slug.css( 'display', 'block');
+	}
+
+	// Iterate over all children of this branch and add slugs in appropriate places
+	if ( this.getLength() === 0 ) {
+		this.$.empty();
+		this.$slugs = this.$slugs.add(
+			$slug.clone().appendTo( this.$ )
+		);
+	}
+	for ( var i = 0; i < this.children.length; i++ ) {
+		if ( this.children[i].canHaveSlug() ) {
+			if ( i === 0 ) {
+				// First sluggable child (left side)
+				this.$slugs = this.$slugs.add(
+					$slug.clone().insertBefore( this.children[i].$ )
+				);
+			}
+			if (
+				// Last sluggable child (right side)
+				i === this.children.length - 1 ||
+				// Sluggable child followed by another sluggable child (in between)
+				( this.children[i + 1] && this.children[i + 1].canHaveSlug() )
+			) {
+				this.$slugs = this.$slugs.add(
+					$slug.clone().insertAfter( this.children[i].$ )
+				);
+			}
+		}
+	}
+};
+
 /**
  * Updates the DOM wrapper of this node if needed.
  *
@@ -110,6 +153,8 @@ ve.ce.BranchNode.prototype.updateDomWrapper = function( key ) {
 		this.$.replaceWith( $element );
 		// Use new element from now on
 		this.$ = $element;
+		// Remember which type we are using now
+		this.domWrapperElementType = type;
 	}
 };
 
@@ -117,7 +162,7 @@ ve.ce.BranchNode.prototype.updateDomWrapper = function( key ) {
  * Responds to splice events on a ve.dm.BranchNode.
  *
  * ve.ce.Node objects are generated from the inserted ve.dm.Node objects, producing a view that's a
- * mirror of it's model.
+ * mirror of its model.
  *
  * @method
  * @param {Integer} index Index to remove and or insert nodes at
@@ -156,39 +201,13 @@ ve.ce.BranchNode.prototype.onSplice = function( index, howmany ) {
 		}
 	}
 
-	// Remove all slugs in this branch
-	this.$slugs.remove();
-
-	var $slug = ve.ce.BranchNode.$slugTemplate.clone();
-
-	if ( this.canHaveGrandchildren() ) {
-		$slug.css( 'display', 'block');
-	}
-
-	// Iterate over all children of this branch and add slugs in appropriate places
-	for ( i = 0; i < this.children.length; i++ ) {
-		if ( this.children[i].canHaveSlug() ) {
-			if ( i === 0 ) {
-				// First sluggable child (left side)
-				this.$slugs = this.$slugs.add(
-					$slug.clone().insertBefore( this.children[i].$ )
-				);
-			}
-			if (
-				// Last sluggable child (right side)
-				i === this.children.length - 1 ||
-				// Sluggable child followed by another sluggable child (in between)
-				( this.children[i + 1] && this.children[i + 1].canHaveSlug() )
-			) {
-				this.$slugs = this.$slugs.add(
-					$slug.clone().insertAfter( this.children[i].$ )
-				);
-			}
-		}
-	}
+	this.doSlugs();
 };
 
 ve.ce.BranchNode.prototype.hasSlugAtOffset = function( offset ) {
+	if ( this.getLength() === 0 ) {
+		return true;
+	}
 	for ( var i = 0; i < this.children.length; i++ ) {
 		if ( this.children[i].canHaveSlug() ) {
 			var nodeOffset = this.children[i].model.getRoot().getOffsetFromNode( this.children[i].model );
@@ -213,6 +232,7 @@ ve.ce.BranchNode.prototype.clean = function() {
 	for ( var i = 0; i < this.children.length; i++ ) {
 		this.$.append( this.children[i].$ );
 	}
+	this.doSlugs();
 };
 
 /* Inheritance */

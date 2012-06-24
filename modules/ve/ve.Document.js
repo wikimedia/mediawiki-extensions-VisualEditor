@@ -290,7 +290,7 @@ ve.Document.prototype.selectNodes = function( range, mode ) {
 				} );
 				return retval;
 			}
-		} else if ( startFound ) {
+		} else if ( startFound && end > right ) {
 			// Neither the start nor the end is inside node, but we found the start earlier,
 			// so node must be between the start and the end
 			// Add the entire node, so no range property
@@ -358,4 +358,48 @@ ve.Document.prototype.selectNodes = function( range, mode ) {
 		}
 	} while ( end >= left - 1 );
 	return retval;
+};
+
+ve.Document.prototype.getCoveredSiblingGroups = function( selection ) {
+	var leaves = this.selectNodes( selection, 'leaves' ),
+		firstCoveredSibling,
+		lastCoveredSibling,
+		node,
+		parentNode,
+		siblingNode,
+		groups = [];
+	// Iterate through covered leaf nodes and process either a conversion or wrapping for groups of
+	// consecutive covered siblings - for conversion, the entire list will be changed
+	for ( var i = 0; i < leaves.length; i++ ) {
+		node = leaves[i].node;
+		// Traverse up to a content branch from content elements
+		if ( node.isContent() ) {
+			node = node.getParent();
+		}
+		parentNode = node.getParent();
+		// Group this with its covered siblings
+		groups.push( {
+			'parent': parentNode,
+			'grandparent': parentNode.getParent(),
+			'nodes': []
+		} );
+		firstCoveredSibling = node;
+		// Seek forward to the last covered sibling
+		siblingNode = firstCoveredSibling;
+		do {
+			// Add this to its sibling's group
+			groups[groups.length - 1].nodes.push( siblingNode );
+			lastCoveredSibling = siblingNode;
+			i++;
+			if ( leaves[i] === undefined ) {
+				break;
+			}
+			// Traverse up to a content branch from content elements
+			siblingNode = leaves[i].node;
+			if ( siblingNode.isContent() ) {
+				siblingNode = siblingNode.getParent();
+			}
+		} while ( siblingNode.getParent() === parentNode );
+	}
+	return groups;
 };

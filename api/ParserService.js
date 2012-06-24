@@ -1,5 +1,15 @@
 /**
  * A very basic parser / serializer web service.
+ *
+ * Local configuration:
+ *
+ * To configure locally, add localsettings.js to this directory and export a setup function.
+ *
+ * @example
+ *    exports.setup = function( config, env ) {
+ *        config.defaultInterwiki = 'localhost';
+ *        env.addInterwiki( 'localhost', 'http://localhost/mediawiki' );
+ *    };
  */
 
 /**
@@ -8,12 +18,10 @@
  * Could move this to a separate file later.
  */
 
-// default to en.wikipedia.org
-var defaultInterwiki = 'en';
-// alternative: default to www.mediawiki.org
-//var defaultInterwiki = 'mw';
-// for development: default to localhost
-//var defaultInterwiki = 'localhost';
+var config = {
+	// MediaWiki.org
+	'defaultInterwiki': 'mw'
+};
 
 /**
  * End config section
@@ -22,10 +30,17 @@ var defaultInterwiki = 'en';
 // global includes
 var express = require('express'),
 	jsDiff = require('diff'),
-	html5 = require('html5');
+	html5 = require('html5'),
+	path = require('path'),
+	cluster = require('cluster');
 
 // local includes
-var mp = '../modules/parser/';
+var mp = '../modules/parser/',
+	lsp = __dirname + '/localsettings.js';
+
+var instanceName = cluster.isWorker ? 'worker(' + process.pid + ')' : 'master';
+
+console.log( ' - ' + instanceName + ' loading...' );
 
 var ParserPipelineFactory = require(mp + 'mediawiki.parser.js').ParserPipelineFactory,
 	ParserEnv = require(mp + 'mediawiki.parser.environment.js').MWParserEnvironment,
@@ -47,12 +62,11 @@ var env = new ParserEnv( {
 
 // add mediawiki.org
 env.addInterwiki( 'mw', 'http://www.mediawiki.org/w' );
-// For development:
-//env.addInterwiki( 'localhost', 'http://localhost/w' );
 
-// add localhost and make it the default
-env.addInterwiki( 'localhost', 'http://localhost/mediawiki' );
-defaultInterwiki = 'localhost';
+// Apply local settings
+if (path.existsSync(lsp)) {
+	require('./localsettings').setup( config, env );
+}
 
 var parserPipelineFactory = new ParserPipelineFactory( env );
 //var parser = parserPipelineFactory.makePipeline( 'text/x-mediawiki/full' );
@@ -65,11 +79,11 @@ app.get('/', function(req, res){
 	res.write('<body><h3>Welcome to the alpha test web service for the ' +
 		'<a href="http://www.mediawiki.org/wiki/Parsoid">Parsoid project<a>.</h3>');
 	res.write( '<p>Usage: <ul><li>GET /title for the DOM. ' +
-		'Example: <strong><a href="/Main_Page">Main Page</a></strong>');
+		'Example: <strong><a href="/en:Main_Page">Main Page</a></strong>');
 	res.write('<li>POST a DOM as parameter "content" to /title for the wikitext</ul>');
 	res.write('<p>There are also some tools for experiments:<ul>');
 	res.write('<li>Round-trip test pages from the English Wikipedia: ' +
-		'<strong><a href="/_rt/Help:Magic">/_rt/Help:Magic</a></strong></li>');
+		'<strong><a href="/_rt/en:Help:Magic">/_rt/Help:Magic</a></strong></li>');
 	res.write('<li><strong><a href="/_rtform/">WikiText -&gt; HTML DOM -&gt; WikiText round-trip form</a></strong></li>');
 	res.write('<li><strong><a href="/_wikitext/">WikiText -&gt; HTML DOM form</a></strong></li>' +
 			'<li><strong><a href="/_html/">HTML DOM -&gt; WikiText form</a></strong></li>');
@@ -256,8 +270,8 @@ var roundTripDiff = function ( req, res, src, document ) {
 	src = src.replace(/\n(?=\n)/g, '\n ');
 	out = out.replace(/\n(?=\n)/g, '\n ');
 	//console.log(JSON.stringify( jsDiff.diffLines( out, src ) ));
-	//patch = jsDiff.convertChangesToXML( jsDiff.diffLines( src, out ) );
-	patch = jsDiff.convertChangesToXML( refineDiff( jsDiff.diffLines( src, out ) ) );
+	patch = jsDiff.convertChangesToXML( jsDiff.diffLines( src, out ) );
+	//patch = jsDiff.convertChangesToXML( refineDiff( jsDiff.diffLines( src, out ) ) );
 	res.write( '<pre>' + patch);
 	// Add a 'report issue' link
 	res.end('<hr><h2>'+
@@ -292,7 +306,7 @@ app.get( new RegExp('/_rt/(?:(?:(?:' + env.interwikiRegexp + '):+)?(' + env.inte
 		env.wgScript = env.interwikiMap[req.params[0]];
 	} else {
 		env.wgScriptPath = '/_rt/';
-		env.wgScript = env.interwikiMap[defaultInterwiki];
+		env.wgScript = env.interwikiMap[config.defaultInterwiki];
 	}
 
 	if ( env.pageName === 'favicon.ico' ) {
@@ -318,7 +332,7 @@ app.get( new RegExp('/_rtve/(?:(?:(?:' + env.interwikiRegexp + '):+)?(' + env.in
 		env.wgScript = env.interwikiMap[req.params[0]];
 	} else {
 		env.wgScriptPath = '/_rtve/';
-		env.wgScript = env.interwikiMap[defaultInterwiki];
+		env.wgScript = env.interwikiMap[config.defaultInterwiki];
 	}
 
 	if ( env.pageName === 'favicon.ico' ) {
@@ -332,7 +346,7 @@ app.get( new RegExp('/_rtve/(?:(?:(?:' + env.interwikiRegexp + '):+)?(' + env.in
 	var tpr = new TemplateRequest( env, target ),
 		cb = function ( req, res, src, document ) {
 			// strip newlines from the html
-			var html = document.innerHTML.replace(/>[\r\n]+/g, '>'),
+			var html = document.innerHTML.replace(/[\r\n]/g, ''),
 				p = new html5.Parser();
 			p.parse( html );
 			var newDocument = p.tree.document;
@@ -371,7 +385,7 @@ app.get(new RegExp( '/(?:(?:(?:' + env.interwikiRegexp + '):+)?(' + env.interwik
 		env.wgScript = env.interwikiMap[req.params[0]];
 	} else {
 		env.wgScriptPath = '/';
-		env.wgScript = env.interwikiMap[defaultInterwiki];
+		env.wgScript = env.interwikiMap[config.defaultInterwiki];
 	}
 	if ( env.pageName === 'favicon.ico' ) {
 		res.end( 'no favicon yet..');
@@ -400,5 +414,7 @@ app.post(/\/(.*)/, function(req, res){
 		res.write.bind( res ) );
 	res.end('');
 });
+
+console.log( ' - ' + instanceName + ' ready' );
 
 module.exports = app;

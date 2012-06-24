@@ -97,11 +97,11 @@ ve.dm.Surface.prototype.change = function( transaction, selection ) {
  */
 ve.dm.Surface.prototype.annotate = function( method, annotation ) {
 	var selection = this.getSelection();
-	if ( this.selection.getLength() ) {
+	if ( selection.getLength() ) {
 		var tx = ve.dm.Transaction.newFromAnnotation(
 			this.getDocument(), selection, method, annotation
 		);
-		this.change( tx );
+		this.change( tx, selection );
 	}
 };
 

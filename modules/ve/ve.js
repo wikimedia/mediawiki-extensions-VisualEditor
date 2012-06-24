@@ -64,7 +64,7 @@ ve.proxy = $.proxy;
 ve.inArray = $.inArray;
 
 /**
- * Generates a hash of an object based on it's name and data.
+ * Generates a hash of an object based on its name and data.
  *
  * This is actually an alias for jQuery.json, which falls back to window.JSON if present.
  *
@@ -345,7 +345,7 @@ ve.debounce = function( func, wait, immediate ) {
 ve.msg = typeof mw === 'object' ? mw.msg : function( key ) {
 	if ( key in ve.msg.messages ) {
 		// Simple message parser, does $N replacement and nothing else.
-		var parameters = Array.prototype.slice.call( arguments, 0 );
+		var parameters = Array.prototype.slice.call( arguments, 1 );
 		return ve.msg.messages[key].replace( /\$(\d+)/g, function ( str, match ) {
 			var index = parseInt( match, 10 ) - 1;
 			return parameters[index] !== undefined ? parameters[index] : '$' + match;
@@ -361,3 +361,12 @@ ve.msg = typeof mw === 'object' ? mw.msg : function( key ) {
  * @member
  */
 ve.msg.messages = {};
+
+/**
+ * Map of message keys and values for special messages loaded from VisualEditorMessagesModule.php
+ * The values are HTML.
+ *
+ * @static
+ * @member
+ */
+ve.specialMessages = {};

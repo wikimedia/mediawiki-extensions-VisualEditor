@@ -40,6 +40,8 @@ $messages['en'] = array(
 	'visualeditor-historybutton-undo-tooltip' => 'Undo',
 	'visualeditor-historybutton-redo-tooltip' => 'Redo',
 	'visualeditor-viewpage-savewarning' => 'Are you sure you want to go back to view mode without saving first?',
+	'visualeditor-loadwarning' => 'Error loading data from server: $1. Would you like to retry?',
+	'visualeditor-saveerror' => 'Error saving data to server: $1.',
 );
 
 /** Message documentation (Message documentation)
@@ -57,7 +59,6 @@ $messages['qqq'] = array(
 	'visualeditor-ca-editsource' => 'Text for the edit source link in the tab dropdown',
 	'visualeditor-linkinspector-title' => 'Title of the link inspector dialog',
 	'visualeditor-linkinspector-label-pagetitle' => 'Label for the text field that holds the link target in the link inspector',
-	'visualeditor-formatdropdown-tooltip' => 'Tooltip for the formatting dropdown',
 	'visualeditor-formatdropdown-format-paragraph' => 'Item in the formatting dropdown for paragraphs (normal text)',
 	'visualeditor-formatdropdown-format-heading1' => 'Item in the formatting dropdown for a level 1 heading',
 	'visualeditor-formatdropdown-format-heading2' => 'Item in the formatting dropdown for a level 2 heading',
@@ -77,6 +78,8 @@ $messages['qqq'] = array(
 	'visualeditor-historybutton-undo-tooltip' => 'Tooltip for the undo button',
 	'visualeditor-historybutton-redo-tooltip' => 'Tooltip for the redo button',
 	'visualeditor-viewpage-savewarning' => 'Text shown when the user tries to leave the editor without saving their changes',
+	'visualeditor-loadwarning' => 'Text shown when the editor fails to load properly. $1 is the error message from the server, in English.',
+	'visualeditor-saveerror' => 'Text shown when the editor fails to save properly.',
 );
 
 /** Asturian (asturianu)
@@ -142,6 +145,38 @@ $messages['de'] = array(
 	'visualeditor-tooltip-help' => 'Hilfen ein- und ausblenden',
 	'visualeditor-feedback-prompt' => 'Rückmeldung geben',
 	'visualeditor-feedback-dialog-title' => 'Rückmeldung zur Spielwiese für den WYSIWYG-Editor geben',
+	'visualeditor-ca-editsource' => 'Quelltext bearbeiten',
+	'visualeditor-linkinspector-title' => 'Link bearbeiten',
+	'visualeditor-linkinspector-label-pagetitle' => 'Seitenname',
+	'visualeditor-formatdropdown-title' => 'Format ändern',
+	'visualeditor-formatdropdown-format-paragraph' => 'Absatz',
+	'visualeditor-formatdropdown-format-heading1' => 'Überschrift 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Überschrift 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Überschrift 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Überschrift 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Überschrift 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Überschrift 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Vorformatiert',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Fett',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Kursiv',
+	'visualeditor-annotationbutton-link-tooltip' => 'Link',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Einzug vergrößern',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Einzug verkleinern',
+	'visualeditor-listbutton-number-tooltip' => 'Nummerierte Liste',
+	'visualeditor-listbutton-bullet-tooltip' => 'Aufgezählte Liste',
+	'visualeditor-clearbutton-tooltip' => 'Formatierungen entfernen',
+	'visualeditor-historybutton-undo-tooltip' => 'Rückgängig machen',
+	'visualeditor-historybutton-redo-tooltip' => 'Wiederholen',
+	'visualeditor-viewpage-savewarning' => 'Bist du sicher, dass du zum Ansichtsmodus wechseln möchtest, ohne vorher zu speichern?',
+	'visualeditor-loadwarning' => 'Fehler beim Laden der Daten vom Server: $1. Soll der Vorgang erneut durchgeführt werden?',
+	'visualeditor-saveerror' => 'Fehler beim Speichern der Daten auf dem Server: $1.',
+);
+
+/** German (formal address) (‪Deutsch (Sie-Form)‬)
+ * @author Kghbln
+ */
+$messages['de-formal'] = array(
+	'visualeditor-viewpage-savewarning' => 'Sind Sie sicher, dass Sie zum Ansichtsmodus wechseln möchten, ohne vorher zu speichern?',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -179,6 +214,31 @@ $messages['es'] = array(
 	'visualeditor-tooltip-help' => 'Conmutar a vista de ayuda',
 	'visualeditor-feedback-prompt' => 'Comentar',
 	'visualeditor-feedback-dialog-title' => "Comentar sobre la zona segura (''sandbox'') del Editor Visual",
+	'visualeditor-ca-editsource' => 'Editar fuente',
+	'visualeditor-linkinspector-title' => 'Editar enlace',
+	'visualeditor-linkinspector-label-pagetitle' => 'Título de la página',
+	'visualeditor-formatdropdown-title' => 'Cambiar formato',
+	'visualeditor-formatdropdown-format-paragraph' => 'Párrafo',
+	'visualeditor-formatdropdown-format-heading1' => 'Encabezado 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Encabezado 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Encabezado 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Encabezado 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Encabezado 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Encabezado 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Preformateado',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Negrita',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Cursiva',
+	'visualeditor-annotationbutton-link-tooltip' => 'Enlace',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Aumentar sangría',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Disminuir sangría',
+	'visualeditor-listbutton-number-tooltip' => 'Lista numerada',
+	'visualeditor-listbutton-bullet-tooltip' => 'Lista con viñetas',
+	'visualeditor-clearbutton-tooltip' => 'Borrar formato',
+	'visualeditor-historybutton-undo-tooltip' => 'Deshacer',
+	'visualeditor-historybutton-redo-tooltip' => 'Rehacer',
+	'visualeditor-viewpage-savewarning' => '¿Estás seguro que quieres volver al modo de visualización sin guardar primero?',
+	'visualeditor-loadwarning' => 'Error al cargar los datos del servidor: $1. ¿Le gustaría volver a intentarlo?',
+	'visualeditor-saveerror' => 'Error al guardar datos en el servidor: $1.',
 );
 
 /** Finnish (suomi)
@@ -217,6 +277,12 @@ $messages['fr'] = array(
 	'visualeditor-tooltip-help' => "Basculer la vue d'aide",
 	'visualeditor-feedback-prompt' => 'Laisser un commentaire',
 	'visualeditor-feedback-dialog-title' => "Laissez un commentaire sur le bac à sable de l'éditeur visuel",
+	'visualeditor-formatdropdown-format-paragraph' => 'Paragraphe',
+	'visualeditor-formatdropdown-format-preformatted' => 'Préformaté',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Gras',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Italique',
+	'visualeditor-listbutton-number-tooltip' => 'Liste numérotée',
+	'visualeditor-listbutton-bullet-tooltip' => 'Liste à puces',
 );
 
 /** Franco-Provençal (arpetan)
@@ -237,7 +303,7 @@ $messages['frp'] = array(
 	'visualeditor-feedback-dialog-title' => 'Balyér voutron avis sur la bouèta de sabla de l’èditor visuâl',
 );
 
-/** Galician (Galego)
+/** Galician (galego)
  * @author Toliño
  */
 $messages['gl'] = array(
@@ -253,6 +319,31 @@ $messages['gl'] = array(
 	'visualeditor-tooltip-help' => 'Alternar a vista de axuda',
 	'visualeditor-feedback-prompt' => 'Deixe un comentario',
 	'visualeditor-feedback-dialog-title' => 'Deixe un comentario sobre a zona de probas do editor visual',
+	'visualeditor-ca-editsource' => 'Editar a fonte',
+	'visualeditor-linkinspector-title' => 'Ligazón de edición',
+	'visualeditor-linkinspector-label-pagetitle' => 'Título da páxina',
+	'visualeditor-formatdropdown-title' => 'Cambiar o formato',
+	'visualeditor-formatdropdown-format-paragraph' => 'Parágrafo',
+	'visualeditor-formatdropdown-format-heading1' => 'Cabeceira 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Cabeceira 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Cabeceira 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Cabeceira 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Cabeceira 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Cabeceira 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Con formato previo',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Negra',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Cursiva',
+	'visualeditor-annotationbutton-link-tooltip' => 'Ligazón',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Aumentar a sangría',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Diminuír a sangría',
+	'visualeditor-listbutton-number-tooltip' => 'Lista numerada',
+	'visualeditor-listbutton-bullet-tooltip' => 'Lista con asteriscos',
+	'visualeditor-clearbutton-tooltip' => 'Borrar o formato',
+	'visualeditor-historybutton-undo-tooltip' => 'Desfacer',
+	'visualeditor-historybutton-redo-tooltip' => 'Refacer',
+	'visualeditor-viewpage-savewarning' => 'Está seguro de querer volver ao modo de lectura sen gardar primeiro?',
+	'visualeditor-loadwarning' => 'Erro ao cargar os datos desde o servidor: $1. Quéreo intentar de novo?',
+	'visualeditor-saveerror' => 'Erro ao gardar os datos no servidor: $1.',
 );
 
 /** Hebrew (עברית)
@@ -280,7 +371,7 @@ $messages['hi'] = array(
 	'visualeditor-feedback-prompt' => 'प्रतिक्रिया छोड़ें',
 );
 
-/** Upper Sorbian (Hornjoserbsce)
+/** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
@@ -296,6 +387,31 @@ $messages['hsb'] = array(
 	'visualeditor-tooltip-help' => 'Pomoc pokazać a schować',
 	'visualeditor-feedback-prompt' => 'Komentar zawostajić',
 	'visualeditor-feedback-dialog-title' => 'Zawostaj komentar wo hrajkanišću VisualEditora',
+	'visualeditor-ca-editsource' => 'Žórłowy tekst wobdźěłać',
+	'visualeditor-linkinspector-title' => 'Wotkaz wobdźěłać',
+	'visualeditor-linkinspector-label-pagetitle' => 'Titul strony',
+	'visualeditor-formatdropdown-title' => 'Format změnić',
+	'visualeditor-formatdropdown-format-paragraph' => 'Wotstawk',
+	'visualeditor-formatdropdown-format-heading1' => 'Nadpis 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Nadpis 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Nadpis 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Nadpis 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Nadpis 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Nadpis 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Předformatowany',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Tučny',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Kursiwny',
+	'visualeditor-annotationbutton-link-tooltip' => 'Wotkaz',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Zasunjenje powjetšić',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Zasunjenje pomjeńšić',
+	'visualeditor-listbutton-number-tooltip' => 'Čisłowana lisćina',
+	'visualeditor-listbutton-bullet-tooltip' => 'Nalicenje',
+	'visualeditor-clearbutton-tooltip' => 'Formatowanje wotstronić',
+	'visualeditor-historybutton-undo-tooltip' => 'Cofnyć',
+	'visualeditor-historybutton-redo-tooltip' => 'Wospjetować',
+	'visualeditor-viewpage-savewarning' => 'Chceš so woprawdźe k napohladowemu modusej wróćić, bjeztoho zo by prjedy składował?',
+	'visualeditor-loadwarning' => 'Zmylk při začitowanju datow ze serwera: $1. Chceš znowa spytać?',
+	'visualeditor-saveerror' => 'Zmylk při składowanju datow na serwerje: $1.',
 );
 
 /** Hungarian (magyar)
@@ -332,6 +448,31 @@ $messages['ia'] = array(
 	'visualeditor-tooltip-help' => 'Alternar adjuta',
 	'visualeditor-feedback-prompt' => 'Lassar commentario',
 	'visualeditor-feedback-dialog-title' => 'Lassar commentario super le cassa a sablo del editor visual',
+	'visualeditor-ca-editsource' => 'Modificar fonte',
+	'visualeditor-linkinspector-title' => 'Modificar ligamine',
+	'visualeditor-linkinspector-label-pagetitle' => 'Titulo del pagina',
+	'visualeditor-formatdropdown-title' => 'Cambiar formato',
+	'visualeditor-formatdropdown-format-paragraph' => 'Paragrapho',
+	'visualeditor-formatdropdown-format-heading1' => 'Titulo 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Titulo 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Titulo 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Titulo 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Titulo 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Titulo 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Preformatate',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Grasse',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Italic',
+	'visualeditor-annotationbutton-link-tooltip' => 'Ligamine',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Augmentar indentation',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Reducer indentation',
+	'visualeditor-listbutton-number-tooltip' => 'Lista numerate',
+	'visualeditor-listbutton-bullet-tooltip' => 'Lista a punctos',
+	'visualeditor-clearbutton-tooltip' => 'Rader formatation',
+	'visualeditor-historybutton-undo-tooltip' => 'Disfacer',
+	'visualeditor-historybutton-redo-tooltip' => 'Refacer',
+	'visualeditor-viewpage-savewarning' => 'Es tu secur de voler retornar al modo de lectura sin salveguardar primo?',
+	'visualeditor-loadwarning' => 'Error durante le cargamento del datos ab le servitor: $1. Vole tu reprobar?',
+	'visualeditor-saveerror' => 'Error durante le salveguarda del datos in le servitor: $1.',
 );
 
 /** Italian (italiano)
@@ -351,6 +492,31 @@ $messages['it'] = array(
 	'visualeditor-tooltip-help' => 'Mostra/nascondi aiuto',
 	'visualeditor-feedback-prompt' => 'Lascia un commento',
 	'visualeditor-feedback-dialog-title' => "Lascia un commento sulla pagina delle prove per l'editor visivo",
+	'visualeditor-ca-editsource' => 'Modifica sorgente',
+	'visualeditor-linkinspector-title' => 'Modifica collegamento',
+	'visualeditor-linkinspector-label-pagetitle' => 'Titolo della pagina',
+	'visualeditor-formatdropdown-title' => 'Cambia formato',
+	'visualeditor-formatdropdown-format-paragraph' => 'Paragrafo',
+	'visualeditor-formatdropdown-format-heading1' => 'Titolo 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Titolo 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Titolo 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Titolo 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Titolo 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Titolo 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Preformattato',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Grassetto',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Corsivo',
+	'visualeditor-annotationbutton-link-tooltip' => 'Collegamento',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Aumenta indentazione',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Riduci indentazione',
+	'visualeditor-listbutton-number-tooltip' => 'Elenco numerato',
+	'visualeditor-listbutton-bullet-tooltip' => 'Elenco puntato',
+	'visualeditor-clearbutton-tooltip' => 'Pulisci formattazione',
+	'visualeditor-historybutton-undo-tooltip' => 'Annulla',
+	'visualeditor-historybutton-redo-tooltip' => 'Rifai',
+	'visualeditor-viewpage-savewarning' => 'Sei sicuro di voler tornare alla modalità in visualizzazione senza salvare prima?',
+	'visualeditor-loadwarning' => 'Errore durante il caricamento dei dati dal server: $1. Vuoi riprovare?',
+	'visualeditor-saveerror' => 'Errore durante il salvataggio dei dati sul server: $1.',
 );
 
 /** Japanese (日本語)
@@ -421,6 +587,53 @@ $messages['mk'] = array(
 	'visualeditor-tooltip-help' => 'Поглед на помош',
 	'visualeditor-feedback-prompt' => 'Дајте мислење',
 	'visualeditor-feedback-dialog-title' => 'Дајте мислење за Песочникот на ВизуеленУредник',
+	'visualeditor-ca-editsource' => 'Уреди извор',
+	'visualeditor-linkinspector-title' => 'Уреди врска',
+	'visualeditor-linkinspector-label-pagetitle' => 'Наслов на страницата',
+	'visualeditor-formatdropdown-title' => 'Смени формат',
+	'visualeditor-formatdropdown-format-paragraph' => 'Пасус',
+	'visualeditor-formatdropdown-format-heading1' => 'Наслов 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Наслов 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Наслов 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Наслов 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Наслов 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Наслов 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Претформатирано',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Задебелено',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Закосено',
+	'visualeditor-annotationbutton-link-tooltip' => 'Врска',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Вовлекување',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Извлекување',
+	'visualeditor-listbutton-number-tooltip' => 'Список со редни броеви',
+	'visualeditor-listbutton-bullet-tooltip' => 'Список со потточки',
+	'visualeditor-clearbutton-tooltip' => 'Исчисти форматирање',
+	'visualeditor-historybutton-undo-tooltip' => 'Врати',
+	'visualeditor-historybutton-redo-tooltip' => 'Повтори',
+	'visualeditor-viewpage-savewarning' => 'Дали сте сигурни дека сакате да се вратите на прегледниот режим без прво да ги ачувате измените?',
+	'visualeditor-loadwarning' => 'Грешка при вчитување на податоците од опслужувачот: $1. Дали сакате да пробате одново?',
+	'visualeditor-saveerror' => 'Грешка при зачувување на податоците во опслужувачот: $1.',
+);
+
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'visualeditor-ca-editsource' => 'മൂലരൂപം തിരുത്തുക',
+	'visualeditor-linkinspector-title' => 'കണ്ണി തിരുത്തുക',
+	'visualeditor-linkinspector-label-pagetitle' => 'താളിന്റെ തലക്കെട്ട്',
+	'visualeditor-formatdropdown-title' => 'തരം മാറ്റുക',
+	'visualeditor-formatdropdown-format-paragraph' => 'ഖണ്ഡിക',
+	'visualeditor-formatdropdown-format-heading1' => 'തലക്കെട്ട് 1',
+	'visualeditor-formatdropdown-format-heading2' => 'തലക്കെട്ട് 2',
+	'visualeditor-formatdropdown-format-heading3' => 'തലക്കെട്ട് 3',
+	'visualeditor-formatdropdown-format-heading4' => 'തലക്കെട്ട് 4',
+	'visualeditor-formatdropdown-format-heading5' => 'തലക്കെട്ട് 5',
+	'visualeditor-formatdropdown-format-heading6' => 'തലക്കെട്ട് 6',
+	'visualeditor-annotationbutton-bold-tooltip' => 'കടുപ്പിക്കുക',
+	'visualeditor-annotationbutton-italic-tooltip' => 'ചെരിച്ച്',
+	'visualeditor-annotationbutton-link-tooltip' => 'കണ്ണി',
+	'visualeditor-historybutton-undo-tooltip' => 'തിരസ്കരിക്കുക',
+	'visualeditor-historybutton-redo-tooltip' => 'വീണ്ടും വരുത്തുക',
 );
 
 /** Malay (Bahasa Melayu)
@@ -477,6 +690,29 @@ $messages['nl'] = array(
 	'visualeditor-tooltip-help' => 'Hulp weergeven of verbergen',
 	'visualeditor-feedback-prompt' => 'Terugkoppeling achterlaten',
 	'visualeditor-feedback-dialog-title' => 'Terugkoppeling geven over de visuele tekstverwerker',
+	'visualeditor-ca-editsource' => 'Bron bewerken',
+	'visualeditor-linkinspector-title' => 'Bewerken',
+	'visualeditor-linkinspector-label-pagetitle' => 'Paginanaam',
+	'visualeditor-formatdropdown-title' => 'Opmaak wijzigen',
+	'visualeditor-formatdropdown-format-paragraph' => 'Paragraaf',
+	'visualeditor-formatdropdown-format-heading1' => 'Kop 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Kop 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Kop 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Kop 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Kop 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Kop 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Vooraf opgemaakt',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Vet',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Cursief',
+	'visualeditor-annotationbutton-link-tooltip' => 'Verwijzing',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Inspringing vergroten',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Inspringing verkleinen',
+	'visualeditor-listbutton-number-tooltip' => 'Genummerde lijst',
+	'visualeditor-listbutton-bullet-tooltip' => 'Ongenummerde lijst',
+	'visualeditor-clearbutton-tooltip' => 'Opmaak wissen',
+	'visualeditor-historybutton-undo-tooltip' => 'Ongedaan maken',
+	'visualeditor-historybutton-redo-tooltip' => 'Opnieuw uitvoeren',
+	'visualeditor-viewpage-savewarning' => 'Weet u zeker dat u wilt teruggaan naar de modus bekijken zonder eerst op te slaan?',
 );
 
 /** Polish (polski)
@@ -585,6 +821,31 @@ $messages['vi'] = array(
 	'visualeditor-tooltip-help' => 'Bật/tắt trợ giúp',
 	'visualeditor-feedback-prompt' => 'Gửi phản hồi',
 	'visualeditor-feedback-dialog-title' => 'Gửi phản hồi về chỗ thử Trình soạn thị giác',
+	'visualeditor-ca-editsource' => 'Sửa đổi mã nguồn',
+	'visualeditor-linkinspector-title' => 'Sửa đổi liên kết',
+	'visualeditor-linkinspector-label-pagetitle' => 'Tên trang',
+	'visualeditor-formatdropdown-title' => 'Thay đổi định dạng',
+	'visualeditor-formatdropdown-format-paragraph' => 'Đoạn văn',
+	'visualeditor-formatdropdown-format-heading1' => 'Đề mục cấp 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Đề mục cấp 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Đề mục cấp 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Đề mục cấp 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Đề mục cấp 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Đề mục cấp 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Định dạng sẵn',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Đậm',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Xiên',
+	'visualeditor-annotationbutton-link-tooltip' => 'Liên kết',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Tăng lề',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Thụt lề',
+	'visualeditor-listbutton-number-tooltip' => 'Danh sách đánh số',
+	'visualeditor-listbutton-bullet-tooltip' => 'Danh sách không đánh số',
+	'visualeditor-clearbutton-tooltip' => 'Xóa định dạng',
+	'visualeditor-historybutton-undo-tooltip' => 'Hoàn tác',
+	'visualeditor-historybutton-redo-tooltip' => 'Làm lại',
+	'visualeditor-viewpage-savewarning' => 'Bạn có chắc chắn muốn quay trở về chế độ xem mà không lưu giữ trước tiên?',
+	'visualeditor-loadwarning' => 'Lỗi tải dữ liệu từ máy chủ: $1. Bạn có muốn thử lại không?',
+	'visualeditor-saveerror' => 'Lỗi lưu dữ liệu trên máy chủ: $1.',
 );
 
 /** Simplified Chinese (‪中文（简体）‬)

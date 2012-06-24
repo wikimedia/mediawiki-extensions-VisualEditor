@@ -16,13 +16,42 @@ var PegTokenizer = require('./mediawiki.tokenizer.peg.js').PegTokenizer;
 
 var WSP = WikitextSerializer.prototype;
 
-WSP.defaultOptions = {
-	onNewline: true, // actually following start of file or a real newline
-	onStartOfLine : true, // in start-of-line context, not necessarily after newline
+/* *********************************************************************
+ * Here is what the state attributes mean:
+ *
+ * listStack
+ *    Stack of list contexts to let us emit wikitext for nested lists.
+ *    Each context keeps track of 3 values:
+ *    - itemBullet: the wikitext bullet char for this list
+ *    - itemCount : # of list items encountered so far for the list 
+ *    - bullets   : cumulative bullet prefix based on all the lists
+ *                  that enclose the current list
+ *
+ * onNewline
+ *    true on start of file or after a new line has been emitted.
+ *
+ * onStartOfLine
+ *    true when onNewline is true, and also in other start-of-line contexts
+ *    Ex: after a comment has been emitted, or after include/noinclude tokens.
+ *
+ * singleLineMode
+ *    - if (> 0), we cannot emit any newlines.
+ *    - this value changes as we entire/exit dom subtrees that require
+ *      single-line wikitext output. WSP._tagHandlers specify single-line
+ *      mode for individual tags.
+ *
+ * availableNewlineCount
+ *    # of newlines that have been encountered so far but not emitted yet.
+ *    Newlines are buffered till they need to be output.  This lets us
+ *    swallow newlines in contexts where they shouldn't be emitted for
+ *    ensuring equivalent wikitext output. (ex dom: ..</li>\n\n</li>..)
+ * ********************************************************************* */
+WSP.initialState = {
 	listStack: [],
-	lastHandler: null,
-	availableNewlineCount: 0, // collected (and stripped) newlines from the input
-	singleLineMode: 0 // single-line syntactical context: list items, headings etc
+	onNewline: true,
+	onStartOfLine : true,
+	availableNewlineCount: 0,
+	singleLineMode: 0
 };
 
 WSP.escapeWikiText = function ( state, text ) {
@@ -38,19 +67,33 @@ WSP.escapeWikiText = function ( state, text ) {
 	});
 	// this is synchronous for now, will still need sync version later, or
 	// alternatively make text processing in the serializer async
-	if ( ! state.onNewline ) {
+	var prefixedText = text;
+	var inNewlineContext = WSP._inNewLineContext( state );
+	if ( ! inNewlineContext ) {
 		// Prefix '_' so that no start-of-line wiki syntax matches. Strip it from
 		// the result.
-		p.process( '_' + text );
+		prefixedText = '_' + text;
+	}
+
+	if ( state.inIndentPre ) {
+		prefixedText = prefixedText.replace(/(\r?\n)/g, '$1_');
+	}
+
+	// FIXME: parse using 
+	p.process( prefixedText );
+
+
+	if ( ! inNewlineContext ) {
 		// now strip the leading underscore.
 		if ( tokens[0] === '_' ) {
 			tokens.shift();
 		} else {
 			tokens[0] = tokens[0].substr(1);
 		}
-	} else {
-		p.process( text );
 	}
+
+	// state.inIndentPre is handled on the complete output
+
 	//
 	// wrap any run of non-text tokens into <nowiki> tags using the source
 	// offsets of top-level productions
@@ -70,7 +113,7 @@ WSP.escapeWikiText = function ( state, text ) {
 				rangeStart = cursor;
 			} else {
 				rangeStart = startRange[0];
-				if ( ! state.onNewline ) {
+				if ( ! inNewlineContext ) {
 					// compensate for underscore.
 					rangeStart--;
 				}
@@ -88,7 +131,7 @@ WSP.escapeWikiText = function ( state, text ) {
 				rangeEnd = text.length;
 			} else {
 				rangeEnd = endRange[1];
-				if ( ! state.onNewline ) {
+				if ( ! inNewlineContext ) {
 					// compensate for underscore.
 					rangeEnd--;
 				}
@@ -112,7 +155,12 @@ WSP.escapeWikiText = function ( state, text ) {
 			switch ( token.constructor ) {
 				case String:
 					wrapNonTextTokens();
-					outTexts.push( token );
+					outTexts.push(
+						// Entity-escape only dangerous chars for now
+						// FIXME: don't decode entities in the tokenizer when
+						// parsing text content for escaping!
+						token.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+					);
 					cursor += token.length;
 					break;
 				case NlTk:
@@ -133,7 +181,12 @@ WSP.escapeWikiText = function ( state, text ) {
 		console.warn( e );
 	}
 	//console.warn( 'escaped wikiText: ' + outTexts.join('') );
-	return outTexts.join('');
+	var res = outTexts.join('');
+	if ( state.inIndentPre ) {
+		return res.replace(/\n_/g, '\n');
+	} else {
+		return res;
+	}
 };
 
 var id = function(v) { 
@@ -142,12 +195,27 @@ var id = function(v) {
 	}; 
 };
 
-WSP._listHandler = function( bullet, state, token ) {
+WSP._inStartOfLineContext = function(state) {
+	return	state.onStartOfLine || 
+		state.emitNewlineOnNextToken ||
+		(state.availableNewlineCount > 0);
+};
+
+WSP._inNewLineContext = function(state) {
+	return	state.onNewline || 
+		state.emitNewlineOnNextToken ||
+		(state.availableNewlineCount > 0);
+};
+
+WSP._listHandler = function( handler, bullet, state, token ) {
 	function isListItem(token) {
 		if (token.constructor !== TagTk) return false;
 
 		var tokenName = token.name;
 		return (tokenName === 'li' || tokenName === 'dt' || tokenName === 'dd');
+	}
+	if ( state.singleLineMode ) {
+		state.singleLineMode--;
 	}
 
 	var bullets, res;
@@ -155,21 +223,29 @@ WSP._listHandler = function( bullet, state, token ) {
 	if (stack.length === 0) {
 		bullets = bullet;
 		res     = bullets;
+		handler.startsNewline = true;
 	} else {
-		var curList = stack[stack.length - 1];
-		bullets = curList.bullets + bullet;
+		var curList = stack.last();
+		//console.warn(JSON.stringify( stack ));
+		bullets = curList.bullets + curList.itemBullet + bullet;
 		curList.itemCount++;
 		if (	// deeply nested list
-				curList.itemCount > 2 ||
+				//( curList.itemCount > 1 &&
+				//	token.name === 'dd' &&
+				//	state.prevTagToken.constructor === EndTagTk &&
+				//	state.prevTagToken.name === 'dt' &&
+				//	! state.onStartOfLine ) ||
 				// A nested list, not directly after a list item
-				(curList.itemCount > 1 && !isListItem(state.prevToken))) {
+				curList.itemCount > 1 && !isListItem(state.prevToken)) {
 			res = bullets;
+			handler.startsNewline = true;
 		} else {
-			if (bullet !== '') token.startsNewline = false;
 			res = bullet;
+			handler.startsNewline = false;
 		}
 	}
-	stack.push({ itemCount: 0, bullets: bullets});
+	stack.push({ itemCount: 0, bullets: bullets, itemBullet: ''});
+	state.env.dp('lh res', bullets, res, handler );
 	return res;
 };
 
@@ -178,11 +254,58 @@ WSP._listEndHandler = function( state, token ) {
 	return '';
 };
 
-WSP._listItemHandler = function ( bullet, state, token ) { 
+WSP._listItemHandler = function ( handler, bullet, state, token ) { 
+
+	function isRepeatToken(state, token) {
+		return	state.prevToken.constructor === EndTagTk && 
+				state.prevToken.name === token.name;
+	}
+
+	function isMultiLineDtDdPair(state, token) {
+		return	token.name === 'dd' && 
+				token.dataAttribs.stx !== 'row' &&
+				state.prevTagToken.constructor === EndTagTk &&
+				state.prevTagToken.name === 'dt';
+	}
+
 	var stack   = state.listStack;
 	var curList = stack[stack.length - 1];
 	curList.itemCount++;
-	return ((curList.itemCount > 1 ) ? curList.bullets + bullet : bullet);
+	curList.itemBullet = bullet;
+
+	// Output bullet prefix only if:
+	// - this is not the first list item
+	// - we are either in:
+	//    * a new line context, 
+	//    * seeing an identical token as the last one (..</li><li>...)
+	//      (since we are in this handler on encountering a list item token,
+	//       this means we are the 2nd or later item in the list, BUT without
+	//       any intervening new lines or other tokens in between)
+	//    * on the dd part of a multi-line dt-dd pair
+	//      (The dd on a single-line dt-dd pair sticks to the dt.
+	//       which means it won't get the bullets that the dt already got).
+	//
+	// SSS FIXME: This condition could be rephrased as:
+	//
+	// if (isRepeatToken(state, token) ||
+	//     (curList.itemCount > 1 && (inStartOfLineContext(state) || isMultiLineDtDdPair(state, token))))
+	//
+	var res;
+	if (curList.itemCount > 1 && 
+		(	WSP._inStartOfLineContext(state) ||
+			isRepeatToken(state, token) ||
+			isMultiLineDtDdPair(state, token)
+		)
+	)
+	{
+		handler.startsNewline = true;
+		res = curList.bullets + bullet;
+	} else {
+		handler.startsNewline = false;
+		res = bullet;
+	}
+	state.env.dp( 'lih', token, res, handler );
+	return res;
 };
 
 WSP._serializeTableTag = function ( symbol, optionEndSymbol, state, token ) {
@@ -201,6 +324,11 @@ WSP._serializeHTMLTag = function ( state, token ) {
 		close = '/';
 	}
 
+	if ( token.name === 'pre' ) {
+		// html-syntax pre is very similar to nowiki
+		state.inHTMLPre = true;
+	}
+
 	// Swallow required newline from previous token on encountering a HTML tag
 	//state.emitNewlineOnNextToken = false;
 
@@ -213,6 +341,9 @@ WSP._serializeHTMLTag = function ( state, token ) {
 };
 
 WSP._serializeHTMLEndTag = function ( state, token ) {
+	if ( token.name === 'pre' ) {
+		state.inHTMLPre = false;
+	}
 	if ( ! WSP._emptyTags[ token.name ] ) {
 		return '</' + token.name + '>';
 	} else {
@@ -307,6 +438,33 @@ WSP._linkEndHandler = function( state, token ) {
 	}
 };
 
+/* *********************************************************************
+ * startsNewline
+ *     if true, the wikitext for the dom subtree rooted
+ *     at this html tag requires a new line context.
+ *
+ * endsLine
+ *     if true, the wikitext for the dom subtree rooted
+ *     at this html tag ends the line.
+ *
+ * pairsSepNlCount
+ *     # of new lines required between wikitext for dom siblings
+ *     of the same tag type (..</p><p>.., etc.)
+ *
+ * newlineTransparent
+ *     if true, this token does not change the newline status
+ *     after it is emitted.
+ *
+ * singleLine
+ *     if 1, the wikitext for the dom subtree rooted at this html tag
+ *     requires all content to be emitted on the same line without 
+ *     any line breaks. +1 sets the single-line mode (on descending
+ *     the dom subtree), -1 clears the single-line mod (on exiting
+ *     the dom subtree).
+ *
+ * ignore
+ *     if true, the serializer pretends as if it never saw this token.
+ * ********************************************************************* */
 WSP.tagHandlers = {
 	body: {
 		start: {
@@ -320,7 +478,9 @@ WSP.tagHandlers = {
 	ul: { 
 		start: {
 			startsNewline : true,
-			handle: WSP._listHandler.bind( null, '*' ),
+			handle: function ( state, token ) {
+					return WSP._listHandler( this, '*', state, token );
+			},
 			pairSepNLCount: 2,
 			newlineTransparent: true
 		},
@@ -332,7 +492,9 @@ WSP.tagHandlers = {
 	ol: { 
 		start: {
 			startsNewline : true,
-			handle: WSP._listHandler.bind( null, '#' ),
+			handle: function ( state, token ) {
+					return WSP._listHandler( this, '#', state, token );
+			},
 			pairSepNLCount: 2,
 			newlineTransparent: true
 		},
@@ -344,9 +506,10 @@ WSP.tagHandlers = {
 	dl: { 
 		start: {
 			startsNewline : true,
-			handle: WSP._listHandler.bind( null, ''), 
-			pairSepNLCount: 2,
-			newlineTransparent: true
+			handle: function ( state, token ) {
+					return WSP._listHandler( this, '', state, token );
+			},
+			pairSepNLCount: 2
 		},
 		end: {
 			endsLine: true,
@@ -355,7 +518,9 @@ WSP.tagHandlers = {
 	},
 	li: { 
 		start: {
-			handle: WSP._listItemHandler.bind( null, '' ),
+			handle: function ( state, token ) {
+				return WSP._listItemHandler( this, '', state, token );
+			},
 			singleLine: 1,
 			pairSepNLCount: 1
 		},
@@ -366,9 +531,12 @@ WSP.tagHandlers = {
 	// XXX: handle single-line vs. multi-line dls etc
 	dt: { 
 		start: {
-			startsNewline: true,
 			singleLine: 1,
-			handle: WSP._listItemHandler.bind( null, ';' )
+			handle: function ( state, token ) {
+				return WSP._listItemHandler( this, ';', state, token );
+			},
+			pairSepNLCount: 1,
+			newlineTransparent: true
 		},
 		end: {
 			singleLine: -1
@@ -377,7 +545,11 @@ WSP.tagHandlers = {
 	dd: { 
 		start: {
 			singleLine: 1,
-			handle: WSP._listItemHandler.bind( null, ":" )
+			handle: function ( state, token ) {
+				return WSP._listItemHandler( this, ':', state, token );
+			},
+			pairSepNLCount: 1,
+			newlineTransparent: true
 		},
 		end: {
 			endsLine: true,
@@ -467,6 +639,7 @@ WSP.tagHandlers = {
 		start: {
 			startsNewline: true,
 			handle: function( state, token ) {
+				state.inIndentPre = true;
 				state.textHandler = function( t ) { 
 					return t.replace(/\n/g, '\n ' ); 
 				};
@@ -475,7 +648,11 @@ WSP.tagHandlers = {
 		},
 		end: {
 			endsLine: true,
-			handle: function( state, token) { state.textHandler = null; return ''; }
+			handle: function( state, token) { 
+				state.inIndentPre = false;
+				state.textHandler = null; 
+				return ''; 
+			}
 		}
 	},
 	meta: { 
@@ -489,6 +666,8 @@ WSP.tagHandlers = {
 						state.inNoWiki = true;
 					} else if ( argDict.content === '/nowiki' ) {
 						state.inNoWiki = false;
+					} else {
+						console.warn( JSON.stringify( argDict ) );
 					}
 					return '<' + argDict.content + '>';
 				} else {
@@ -499,8 +678,11 @@ WSP.tagHandlers = {
 		}
 	},
 	hr: { 
-		start: { startsNewline: true, handle: id("----") },
-		end: { endsLine: true }
+		start: { 
+			startsNewline: true, 
+			endsLine: true,
+			handle: id("----") 
+		}
 	},
 	h1: { 
 		start: { startsNewline: true, handle: id("=") },
@@ -527,8 +709,11 @@ WSP.tagHandlers = {
 		end: { endsLine: true, handle: id("======") }
 	},
 	br: { 
-		start: { startsNewline: true, handle: id("") },
-		end: { endsLine: true }
+		start: { 
+			startsNewline: true,
+			endsLine: true,
+			handle: id("") 
+		}
 	},
 	b:  { 
 		start: { handle: id("'''") },
@@ -569,7 +754,7 @@ WSP._serializeAttributes = function ( attribs ) {
  * Serialize a chunk of tokens
  */
 WSP.serializeTokens = function( tokens, chunkCB ) {
-	var state = $.extend({}, this.defaultOptions, this.options),
+	var state = $.extend({}, this.initialState, this.options),
 		i, l;
 	if ( chunkCB === undefined ) {
 		var out = [];
@@ -640,14 +825,15 @@ WSP._serializeToken = function ( state, token ) {
 			if ( ! handler.ignore ) {
 				state.prevTagToken = state.currTagToken;
 				state.currTagToken = token;
-				if ( handler.singleLine < 0 ) {
+				if ( handler.singleLine < 0 && state.singleLineMode ) {
 					state.singleLineMode--;
 				}
 				res = handler.handle ? handler.handle( state, token ) : '';
 			}
 			break;
 		case String:
-			res = state.inNoWiki? token : this.escapeWikiText( state, token );
+			res = ( state.inNoWiki || state.inHTMLPre ) ? token 
+				: this.escapeWikiText( state, token );
 			res = state.textHandler ? state.textHandler( res ) : res;
 			break;
 		case CommentTk:
@@ -674,11 +860,12 @@ WSP._serializeToken = function ( state, token ) {
 			break;
 	}
 
+
 	if (! dropContent || ! state.dropContent ) {
 
-		var requiredNLCount = state.availableNewlineCount;
+		var newNLCount = 0;
 		if (res !== '') {
-			// Deal with leading or trailing new lines
+			// Strip leading or trailing newlines from the returned string
 			var match = res.match( /^((?:\r?\n)*)((?:.*?|[\r\n]+[^\r\n])*?)((?:\r?\n)*)$/ ),
 				leadingNLs = match[1],
 				trailingNLs = match[3];
@@ -688,11 +875,10 @@ WSP._serializeToken = function ( state, token ) {
 				state.availableNewlineCount += leadingNLs.replace(/\r\n/g, '\n').length;
 				res = "";
 			} else {
-				state.availableNewlineCount = trailingNLs.replace(/\r\n/g, '\n').length;
+				newNLCount = trailingNLs.replace(/\r\n/g, '\n').length;
 				if ( leadingNLs !== '' ) {
-					requiredNLCount += leadingNLs.replace(/\r\n/g, '\n').length;
+					state.availableNewlineCount += leadingNLs.replace(/\r\n/g, '\n').length;
 				}
-
 				// strip newlines
 				res = match[2];
 			}
@@ -702,23 +888,20 @@ WSP._serializeToken = function ( state, token ) {
 		// that have to be separated by extra newlines and add those in.
 		if (handler.pairSepNLCount && state.prevTagToken && 
 				state.prevTagToken.constructor === EndTagTk && 
-				state.prevTagToken.name == token.name ) {
-					if ( requiredNLCount < handler.pairSepNLCount) {
-						requiredNLCount = handler.pairSepNLCount;
-					}
-				} /*else if (state.singleLineMode) {
-		// Swallow newlines
-		// XXX: also swallow newlines in the middle of text content
-		requiredNLCount = 0;
-		state.availableNewlineCount = 0;
-		}*/
+				state.prevTagToken.name === token.name ) 
+		{
+			if ( state.availableNewlineCount < handler.pairSepNLCount) {
+				state.availableNewlineCount = handler.pairSepNLCount;
+			}
+		}
 
 		if ( state.env.debug ) {
-			console.warn("tok: " + token + ", res: <" + res + ">" + 
-					", onnl: " + state.onNewline + ", # nls: " + 
-					state.availableNewlineCount + ', reqNLs: ' + requiredNLCount);
+			console.warn(token + " -> " + JSON.stringify( res ) + 
+					"\n   onnl: " + state.onNewline + 
+					", #nl: is" + state.availableNewlineCount + '/new' + newNLCount +
+					', emitOnNext:' + state.emitNewlineOnNextToken);
 		}
-		if (res !== '') {
+		if (res !== '' ) {
 			var out = '';
 			// Prev token's new line token
 			if ( !state.singleLineMode &&
@@ -726,25 +909,23 @@ WSP._serializeToken = function ( state, token ) {
 					( handler.startsNewline && !state.onStartOfLine ) ) ) 
 			{
 				// Emit new line, if necessary
-				if ( ! requiredNLCount ) {
-					requiredNLCount++;
+				if ( ! state.availableNewlineCount ) {
+					state.availableNewlineCount++;
 				}
 				state.emitNewlineOnNextToken = false;
 			}
 
-			// Add required # of new lines in the beginning
-			for (i = 0; i < requiredNLCount; i++) {
-				out += '\n';
-			}
-			if ( state.availableNewlineCount > requiredNLCount ) {
-				// availableNewlineCount was not reset, and requiredNLCount
-				// can only be incremented.
-				state.availableNewlineCount -= requiredNLCount;
-			}
-			if ( requiredNLCount ) {
+			if ( state.availableNewlineCount ) {
 				state.onNewline = true;
 				state.onStartOfLine = true;
 			}
+
+			// Add required # of new lines in the beginning
+			for (; state.availableNewlineCount; state.availableNewlineCount--) {
+				out += '\n';
+			}
+
+			state.availableNewlineCount = newNLCount;
 
 			// FIXME: This might modify not just the last content token in a
 			// link, which would be wrong. We'll likely have to collect tokens
@@ -763,9 +944,13 @@ WSP._serializeToken = function ( state, token ) {
 					state.onStartOfLine = false;
 				}
 			}
+			state.env.dp(' =>', out);
 			state.chunkCB( out );
-		} else if ( requiredNLCount > state.availableNewlineCount ) {
-			state.availableNewlineCount = requiredNLCount;
+		} else {
+			state.availableNewlineCount += newNLCount;
+			if ( handler.startsNewline && ! state.onStartOfLine ) {
+				state.emitNewlineOnNextToken = true;
+			}
 		}
 		/* else {
 			console.warn("SILENT: tok: " + token + ", res: <" + res + ">" + ", onnl: " + state.onNewline + ", # nls: " + state.availableNewlineCount);
@@ -786,18 +971,22 @@ WSP._serializeToken = function ( state, token ) {
  * Serialize an HTML DOM document.
  */
 WSP.serializeDOM = function( node, chunkCB ) {
-	var state = $.extend({}, this.defaultOptions, this.options);
-	//console.warn( node.innerHTML );
-	if ( ! chunkCB ) {
-		var out = [];
-		state.chunkCB = out.push.bind( out );
-		this._serializeDOM( node, state );
-		this._serializeToken( state, new EOFTk() );
-		return out.join('');
-	} else {
-		state.chunkCB = chunkCB;
-		this._serializeDOM( node, state );
-		this._serializeToken( state, new EOFTk() );
+	try {
+		var state = $.extend({}, this.initialState, this.options);
+		//console.warn( node.innerHTML );
+		if ( ! chunkCB ) {
+			var out = [];
+			state.chunkCB = out.push.bind( out );
+			this._serializeDOM( node, state );
+			this._serializeToken( state, new EOFTk() );
+			return out.join('');
+		} else {
+			state.chunkCB = chunkCB;
+			this._serializeDOM( node, state );
+			this._serializeToken( state, new EOFTk() );
+		}
+	} catch (e) {
+		console.warn(e.stack);
 	}
 };
 

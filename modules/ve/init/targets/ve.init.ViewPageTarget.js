@@ -17,6 +17,8 @@ ve.init.ViewPageTarget = function() {
 	this.$toolbarSaveButton = $( '<div class="ve-init-viewPageTarget-toolbar-saveButton"></div>' );
 	this.$saveDialog = $( '<div class="es-inspector ve-init-viewPageTarget-saveDialog"></div>' );
 	this.$saveDialogSaveButton = null;
+	this.onBeforeUnloadFallback = null;
+	this.proxiedOnBeforeUnload = null;
 	this.surface = null;
 	this.active = false;
 	this.edited = false;
@@ -108,6 +110,7 @@ ve.init.ViewPageTarget.prototype.activate = function() {
 		this.activating = true;
 		// User interface changes
 		this.transformSkinTabs();
+		this.hideSiteNotice();
 		this.showSpinner();
 		this.hideTableOfContents();
 		this.mutePageContent();
@@ -132,6 +135,7 @@ ve.init.ViewPageTarget.prototype.deactivate = function( override ) {
 			this.deactivating = true;
 			// User interface changes
 			this.restoreSkinTabs();
+			this.restoreSiteNotice();
 			this.hideSpinner();
 			this.detachToolbarSaveButton();
 			this.detachSaveDialog();
@@ -155,6 +159,7 @@ ve.init.ViewPageTarget.prototype.onLoad = function( dom ) {
 	this.attachSaveDialog();
 	this.restoreScrollPosition();
 	this.restoreEditSection();
+	this.setupBeforeUnloadHandler();
 	this.$document.focus();
 	this.activating = false;
 };
@@ -168,7 +173,7 @@ ve.init.ViewPageTarget.prototype.onLoad = function( dom ) {
  * @param {Mixed} error Thrown exception or HTTP error string
  */
 ve.init.ViewPageTarget.prototype.onLoadError = function( response, status, error ) {
-	if ( confirm( 'Error loading data from server: ' + status + '. Would you like to retry?' ) ) {
+	if ( confirm( ve.msg( 'visualeditor-loadwarning', status ) ) ) {
 		this.load();
 	} else {
 		this.activating = false;
@@ -187,10 +192,28 @@ ve.init.ViewPageTarget.prototype.onLoadError = function( response, status, error
  * @param {HTMLElement} html Rendered HTML from server
  */
 ve.init.ViewPageTarget.prototype.onSave = function( html ) {
-	this.hideSaveDialog();
-	this.resetSaveDialog();
-	this.replacePageContent( html );
-	this.deactivate( true );
+	if ( Number( mw.config.get( 'wgArticleId', 0 ) ) === 0 ) {
+		// This is a page creation, refresh the page
+		this.teardownBeforeUnloadHandler();
+		window.location.href = this.viewUri;
+	} else {
+		// Update watch link to match 'watch checkbox' in save dialog.
+		// User logged in if module loaded.
+		if ( mw.page.hasOwnProperty( 'watch' ) ) {
+			var watchPage = this.$saveDialog
+				.find( '#ve-init-viewPageTarget-saveDialog-watchList')
+				.prop( 'checked' );
+			mw.page.watch.updateWatchLink(
+				$('#ca-watch a, #ca-unwatch a'),
+				watchPage === true ? 'unwatch': 'watch'
+			);
+		}
+		this.hideSaveDialog();
+		this.resetSaveDialog();
+		this.replacePageContent( html );
+		this.teardownBeforeUnloadHandler();
+		this.deactivate( true );
+	}
 };
 
 /**
@@ -202,7 +225,7 @@ ve.init.ViewPageTarget.prototype.onSave = function( html ) {
  * @param {Mixed} error Thrown exception or HTTP error string
  */
 ve.init.ViewPageTarget.prototype.onSaveError = function( response, status, error ) {
-	alert( 'Error saving data to server: ' + status );
+	alert( ve.msg( 'visualeditor-saveerror', status ) );
 };
 
 /**
@@ -491,6 +514,7 @@ ve.init.ViewPageTarget.prototype.setupSaveDialog = function() {
 			.click( ve.proxy( this.onSaveDialogCloseButtonClick, this ) )
 			.end()
 		.find( '.ve-init-viewPageTarget-saveDialog-editSummary-label' )
+			// This will be updated to use ve.specialMessages.summary later
 			.text( ve.msg( 'summary' ) )
 			.end()
 		.find( '.ve-init-viewPageTarget-saveDialog-minorEdit-label' )
@@ -530,6 +554,18 @@ ve.init.ViewPageTarget.prototype.setupSaveDialog = function() {
 			);
 	this.$saveDialogSaveButton = this.$saveDialog
 		.find( '.ve-init-viewPageTarget-saveDialog-saveButton' );
+
+	// Hook onto the 'watch' event on by mediawiki.page.watch.ajax.js
+	// Triggered when mw.page.watch.updateWatchLink(link, action) is called
+	$( '#ca-watch, #ca-unwatch' )
+		.on(
+			'watchpage.mw',
+			ve.proxy( function( e, action ){
+				this.$saveDialog
+					.find( '#ve-init-viewPageTarget-saveDialog-watchList')
+					.prop( 'checked', ( action === 'watch') );
+			}, this )
+		);
 };
 
 /**
@@ -538,6 +574,9 @@ ve.init.ViewPageTarget.prototype.setupSaveDialog = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.attachSaveDialog = function() {
+	// Update the summary message from ve.specialMessages
+	this.$saveDialog.find( '.ve-init-viewPageTarget-saveDialog-editSummary-label' )
+		.html( ve.specialMessages.summary );
 	this.$saveDialog.insertAfter( this.$toolbarSaveButton );
 };
 
@@ -789,6 +828,27 @@ ve.init.ViewPageTarget.prototype.restoreSkinTabs = function() {
 };
 
 /**
+ * Hides site notice on page if present.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.hideSiteNotice = function(){
+	$( '#siteNotice:visible' )
+		.addClass( 've-hide' )
+		.slideUp( 'fast' );
+};
+
+/**
+ * Show site notice on page if present.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.restoreSiteNotice = function(){
+	$(' #siteNotice.ve-hide' )
+		.slideDown( 'fast' );
+};
+
+/**
  * Replaces the page content with new HTML.
  *
  * @method
@@ -866,6 +926,80 @@ ve.init.ViewPageTarget.prototype.restoreEditSection = function() {
 			}
 		} );
 		this.section = null;
+	}
+};
+
+/**
+ * Adds onbeforunload handler.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.setupBeforeUnloadHandler = function() {
+	// Remember any already set on before unload handler
+	this.onBeforeUnloadFallback = window.onbeforeunload;
+	// Attach before unload handler
+	window.onbeforeunload = this.proxiedOnBeforeUnload = ve.proxy( this.onBeforeUnload, this );
+	// Attach page show handlers
+	if ( window.addEventListener ) {
+		window.addEventListener( 'pageshow', ve.proxy( this.onPageShow, this ), false );
+	} else if ( window.attachEvent ) {
+		window.attachEvent( 'pageshow', ve.proxy( this.onPageShow, this ) );
+	}
+};
+
+/**
+ * Removes onbeforunload handler.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.teardownBeforeUnloadHandler = function() {
+	// Restore whatever previous onbeforeload hook existed
+	window.onbeforeunload = this.onBeforeUnloadFallback;
+};
+
+/**
+ * Responds to page show event.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.onPageShow = function() {
+	// Re-add onbeforeunload handler
+	window.onbeforeunload = this.proxiedOnBeforeUnload;
+};
+
+/**
+ * Responds to before unload event.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.onBeforeUnload = function() {
+	var fallbackResult,
+		message,
+		proxiedOnBeforeUnload = this.proxiedOnBeforeUnload;
+	// Check if someone already set on onbeforeunload hook
+	if ( this.onBeforeUnloadFallback ) {
+		// Get the result of their onbeforeunload hook
+		fallbackResult = this.onBeforeUnloadFallback();
+	}
+	// Check if their onbeforeunload hook returned something
+	if ( fallbackResult !== undefined ) {
+		// Exit here, returning their message
+		message = fallbackResult;
+	} else {
+		// Check if there's been an edit
+		if ( this.surface.getModel().getHistory().length ) {
+			// Return our message
+			message = ve.msg( 'visualeditor-viewpage-savewarning' );
+		}
+	}
+	// Unset the onbeforeunload handler so we don't break page caching in Firefox
+	window.onbeforeunload = null;
+	if ( message !== undefined ) {
+		// ...but if the user chooses not to leave the page, we need to rebind it
+		setTimeout( function() {
+			window.onbeforeunload = proxiedOnBeforeUnload;
+		} );
+		return message;
 	}
 };
 

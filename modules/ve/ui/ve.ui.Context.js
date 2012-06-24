@@ -45,13 +45,24 @@ ve.ui.Context = function( surfaceView, $overlay ) {
 		'mousedown': ve.proxy( this.onMouseDown, this ),
 		'mouseup': ve.proxy( this.onMouseUp, this )
 	} );
-	$( window ).bind( 'resize scroll', ve.proxy( this.set, this ) );
+	this.surfaceView.getDocument().getDocumentNode().$.on( {
+		'focus': ve.proxy( this.onDocumentFocus, this ),
+		'blur': ve.proxy( this.onDocumentBlur, this )
+	} );
 
 	// Intitialization
 	this.addInspector( 'link', new ve.ui.LinkInspector( this.toolbarView, this ) );
 };
 
 /* Methods */
+
+ve.ui.Context.prototype.onDocumentFocus = function( event ) {
+	$( window ).bind( 'resize.ve-ui-context scroll.ve-ui-context', ve.proxy( this.set, this ) );
+};
+
+ve.ui.Context.prototype.onDocumentBlur = function( event ) {
+	$( window ).unbind( 'resize.ve-ui-context scroll.ve-ui-context' );
+};
 
 ve.ui.Context.prototype.onMouseDown = function( event ) {
 	this.clicking = true;
@@ -168,15 +179,15 @@ ve.ui.Context.prototype.openInspector = function( name ) {
 		throw 'Missing inspector error. Can not open nonexistent inspector: ' + name;
 	}
 	this.inspectors[name].open();
+	this.resizeInspectorFrame( this.inspectors[name] );
 	this.positionOverlay( this.$inspectors );
-	this.$inspectors.show();
 	this.inspector = name;
 };
 
 ve.ui.Context.prototype.closeInspector = function( accept ) {
 	if ( this.inspector ) {
 		this.inspectors[this.inspector].close( accept );
-		this.$inspectors.hide();
+		this.hideInspectorFrame();
 		this.inspector = null;
 	}
 };
@@ -193,15 +204,17 @@ ve.ui.Context.prototype.addInspector = function( name, inspector ) {
 	if ( name in this.inspectors ) {
 		throw 'Duplicate inspector error. Previous registration with the same name: ' + name;
 	}
+	inspector.$.hide();
 	this.inspectors[name] = inspector;
-	//create link to stylesheet
+	// Iframe build code below.
+	// TODO: Rework this to allow multiple inspectors
 	$styleLink =
 		$('<link />')
 			.attr({
 				'rel': 'stylesheet',
 				'type': 'text/css',
 				'href': ve.ui.getStylesheetPath() + 've.ui.Inspector.css'
-			}).on( 'load', tweakIframeDimensions );
+			});
 
 	var inspectorDoc = this.$inspectors.prop( 'contentWindow' ).document;
 	var inspectorContent = '<div id="ve-inspector-wrapper"></div>';
@@ -209,22 +222,28 @@ ve.ui.Context.prototype.addInspector = function( name, inspector ) {
 	inspectorDoc.write( inspectorContent );
 	inspectorDoc.close();
 
-	$( 'head', inspectorDoc).append( $styleLink );
+	$( 'head', inspectorDoc ).append( $styleLink );
 	$( '#ve-inspector-wrapper', inspectorDoc ).append( inspector.$ );
   
 	$( 'body', inspectorDoc ).css( {
 		'padding': '0px 5px 10px 5px',
 		'margin': 0
 	} );
+	this.hideInspectorFrame();
+};
 
-	// apply the dimensions of the inspector to the iframe, may need to be moved to open inspector
-	function tweakIframeDimensions() {
-		_this.$inspectors.css( {
-			'width': inspector.$.outerWidth( true ) + 10,
-			'height': inspector.$.outerHeight( true ) + 10
-		} ).hide();
-	}
+ve.ui.Context.prototype.hideInspectorFrame = function ( inspector ) {
+	this.$inspectors.css({
+		'width': 0,
+		'height': 0
+	});
+};
 
+ve.ui.Context.prototype.resizeInspectorFrame = function( inspector ){
+	this.$inspectors.css( {
+		'width': inspector.$.outerWidth( true ) + 10,
+		'height': inspector.$.outerHeight( true ) + 10
+	} );
 };
 
 ve.ui.Context.prototype.removeInspector = function( name ) {

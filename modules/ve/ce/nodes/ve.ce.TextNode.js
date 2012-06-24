@@ -56,17 +56,34 @@ ve.ce.TextNode.htmlCharacters = {
  * @member
  */
 ve.ce.TextNode.annotationRenderers = {
-	'textStyle/bold': {
-		'open': '<b>',
-		'close': '</b>'
-	},
 	'textStyle/italic': {
 		'open': '<i>',
 		'close': '</i>'
 	},
+	'textStyle/bold': {
+		'open': '<b>',
+		'close': '</b>'
+	},
 	'textStyle/underline': {
 		'open': '<u>',
 		'close': '</u>'
+	},
+	'textStyle/strike': {
+		'open': '<s>',
+		'close': '</s>'
+	},
+	'textStyle/small': {
+		'open': '<small>',
+		'close': '</small>'
+	},
+	'textStyle/big': {
+		'open': '<big>',
+		'close': '</big>'
+	},
+	'textStyle/span': {
+		// TODO recognize attributes
+		'open': '<span>',
+		'close': '</span>'
 	},
 	'textStyle/strong': {
 		'open': '<strong>',
@@ -75,14 +92,6 @@ ve.ce.TextNode.annotationRenderers = {
 	'textStyle/emphasize': {
 		'open': '<em>',
 		'close': '<em>'
-	},
-	'textStyle/big': {
-		'open': '<big>',
-		'close': '</big>'
-	},
-	'textStyle/small': {
-		'open': '<small>',
-		'close': '</small>'
 	},
 	'textStyle/superScript': {
 		'open': '<sup>',
@@ -94,13 +103,13 @@ ve.ce.TextNode.annotationRenderers = {
 	},
 	'link/extLink': {
 		'open': function( data ) {
-			return '<a href="' + data.href + '">';
+			return '<a href="#">';
 		},
 		'close': '</a>'
 	},
 	'link/wikiLink': {
 		'open': function( data ) {
-			return '<a href="' + data.href + '">';
+			return '<a href="#">';
 		},
 		'close': '</a>'
 	},
@@ -122,7 +131,10 @@ ve.ce.TextNode.annotationRenderers = {
  * @method
  */
 ve.ce.TextNode.prototype.onUpdate = function( force ) {
-	if ( force === true || this.getSurface().render === true ) {
+	if ( !force && !this.root.getSurface ) {
+		throw 'Can not update a text node that is not attached to a document';
+	}
+	if ( force === true || this.root.getSurface().render === true ) {
 		var $new = $( $( '<span>' + this.getHtml() + '</span>' ).contents() );
 		if ( $new.length === 0 ) {
 			$new = $new.add( document.createTextNode( '' ) );
@@ -157,6 +169,8 @@ ve.ce.TextNode.prototype.getHtml = function() {
 		hash,
 		left = '',
 		right,
+		character,
+		nextCharacter,
 		open,
 		close,
 		index,
@@ -165,26 +179,34 @@ ve.ce.TextNode.prototype.getHtml = function() {
 		hashStack = [],
 		annotationStack = {};
 
-	// TODO: Special handling for spaces in <pre> may be required
-	if ( data.length >= 2 ) {
-		for( i = 0; i < data.length - 1; i++ ) {
-			if ( 
-				( i === 0 && data[i][0][0] === ' ' && data[i + 1][0][0] !== ' ' ) ||
-				( i === data.length - 1 && data[i][0][0] === ' ' )
-			){
-				// Replace last space and first space (if not followed by another space) with &nbsp;
-				if ( ve.isArray( data[i] ) ) {
-					data[i][0] = '&nbsp;';
-				} else {
-					data[i] = '&nbsp;';
-				}
-			} else if ( data[i][0][0] === ' ' && data[i + 1][0] === ' ' ) {
-				// Mulitple spaces should alternate spaces and &nbsp;
-				if ( ve.isArray( data[i + 1] ) ) {
-					data[i + 1][0] = '&nbsp;';
-				} else {
-					data[i + 1] = '&nbsp;';
-				}
+	var replaceWithNonBreakingSpace = function( index, data ) {
+		if ( ve.isArray( data[index] ) ) {
+			data[index][0] = '&nbsp;';
+		} else {
+			data[index] = '&nbsp;';
+		}
+	};
+	if ( data.length > 0 ) {
+		character = data[0];
+		if ( ve.isArray( character ) ? character[0] === ' ' : character === ' ' ) {
+			replaceWithNonBreakingSpace( 0, data );
+		}
+	}
+	if ( data.length > 1 ) {
+		character = data[data.length - 1];
+		if ( ve.isArray( character ) ? character[0] === ' ' : character === ' ' ) {
+			replaceWithNonBreakingSpace( data.length - 1, data );
+		}
+	}
+	if ( data.length > 2 ) {
+		for ( i = 1; i < data.length - 1; i++ ) {
+			character = data[i];
+			nextCharacter = data[i + 1];
+			if (
+				( ve.isArray( character ) ? character[0] === ' ' : character === ' ' ) &&
+				( ve.isArray( nextCharacter ) ? nextCharacter[0] === ' ' : nextCharacter === ' ' )
+			) {
+				replaceWithNonBreakingSpace( i + 1, data );
 				i++;
 			}
 		}
@@ -193,7 +215,6 @@ ve.ce.TextNode.prototype.getHtml = function() {
 	var openAnnotations = function( annotations ) {
 		var out = '',
 			annotation;
-
 		for ( var hash in annotations ) {
 			annotation = annotations[hash];
 			out += typeof renderers[annotation.type].open === 'function' ?
@@ -208,26 +229,13 @@ ve.ce.TextNode.prototype.getHtml = function() {
 	var closeAnnotations = function( annotations ) {
 		var out = '',
 			annotation;
-
 		for ( var hash in annotations ) {
 			annotation = annotations[hash];
 			out += typeof renderers[annotation.type].close === 'function' ?
 				renderers[annotation.type].close( annotation.data ) :
 				renderers[annotation.type].close;
-
-			// new version
 			hashStack.pop();
 			delete annotationStack[hash];
-
-			// old version
-			/*
-			var depth = hashStack.indexOf( hash );
-			if ( depth !== -1 ) {
-				ve.log(depth, hashStack.length);
-				hashStack.splice( depth, 1 );
-				delete annotationStack[hash];
-			}
-			*/
 		}
 		return out;
 	};
@@ -296,16 +304,7 @@ ve.ce.TextNode.prototype.getHtml = function() {
 		close[hashStack[j]] = annotationStack[hashStack[j]];
 	}
 	out += closeAnnotations( close );
-
 	return out;
-};
-
-ve.ce.TextNode.prototype.getSurface = function() {
-	var view = this;
-	while( !view.surface ) {
-		view = view.parent;
-	}
-	return view.surface;
 };
 
 /* Registration */

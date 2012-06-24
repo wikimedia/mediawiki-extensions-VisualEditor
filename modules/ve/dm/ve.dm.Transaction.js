@@ -150,7 +150,7 @@ ve.dm.Transaction.newFromRemoval = function( doc, range ) {
  * @param {ve.dm.Document} doc Document to create transaction for
  * @param {Integer} offset Offset of element
  * @param {String} key Attribute name
- * @param {Mixed} value New value
+ * @param {Mixed} value New value, or undefined to remove the attribute
  * @returns {ve.dm.Transaction} Transcation that changes an element
  * @throws 'Can not set attributes to non-element data'
  * @throws 'Can not set attributes on closing element'
@@ -457,6 +457,58 @@ ve.dm.Transaction.prototype.getLengthDifference = function() {
 };
 
 /**
+ * Translate an offset based on a transaction.
+ *
+ * This is useful when you want to anticipate what an offset will be after a transaction is
+ * processed.
+ *
+ * @method
+ * @param {Number} offset Offset in the linear model before the transaction has been processed
+ * @returns {Number} Translated offset, as it will be after processing transaction
+ */
+ve.dm.Transaction.prototype.translateOffset = function( offset ) {
+	var i, cursor = 0, adjustment = 0, op, opLength;
+	if ( offset === 0 ) {
+		return 0;
+	}
+	for ( i = 0; i < this.operations.length; i++ ) {
+		op = this.operations[i];
+		if ( op.type === 'replace' ) {
+			adjustment += op.insert.length - op.remove.length;
+			if ( offset === cursor + op.remove.length ) {
+				// Offset points to right after the removal, translate it
+				return offset + adjustment;
+			} else if ( offset > cursor && offset < cursor + op.remove.length ) {
+				// The offset points inside of the removal
+				return cursor + op.remove.length + adjustment;
+			}
+			cursor += op.remove.length;
+		} else if ( op.type === 'retain' ) {
+			if ( offset > cursor && offset <= cursor + op.length ) {
+				return offset + adjustment;
+			}
+			cursor += op.length;
+		}
+	}
+	return offset + adjustment;
+};
+
+/**
+ * Translate a range based on a transaction.
+ *
+ * This is useful when you want to anticipate what a selection will be after a transaction is
+ * processed.
+ *
+ * @method
+ * @see {translateOffset}
+ * @param {ve.Range} range Range in the linear model before the transaction has been processed
+ * @returns {ve.Range} Translated range, as it will be after processing transaction
+ */
+ve.dm.Transaction.prototype.translateRange = function( range ) {
+	return new ve.Range( this.translateOffset( range.from ), this.translateOffset( range.to ) );
+};
+
+/**
  * Adds a retain operation.
  *
  * @method
@@ -505,8 +557,8 @@ ve.dm.Transaction.prototype.pushReplace = function( remove, insert ) {
  *
  * @method
  * @param {String} key Name of attribute to change
- * @param {Mixed} from Value change attribute from
- * @param {Mixed} to Value to change attribute to
+ * @param {Mixed} from Value change attribute from, or undefined if not previously set
+ * @param {Mixed} to Value to change attribute to, or undefined to remove
  */
 ve.dm.Transaction.prototype.pushReplaceElementAttribute = function( key, from, to ) {
 	this.operations.push( {

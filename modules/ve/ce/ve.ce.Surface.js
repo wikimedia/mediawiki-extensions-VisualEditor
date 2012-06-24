@@ -18,6 +18,7 @@ ve.ce.Surface = function( $container, model ) {
 	this.$document = $( document );
 	this.clipboard = {};
 	this.render = true; // Used in ve.ce.TextNode
+	this.sluggable = true;
 
 	this.poll = {
 		text: null,
@@ -67,7 +68,7 @@ ve.ce.Surface = function( $container, model ) {
 	// DocumentNode Events
 	this.documentView.getDocumentNode().$.on( {
 		'focus': ve.proxy( this.documentOnFocus, this ),
-		'blur': ve.proxy( this.documentOnBlur, this ),
+		'blur': ve.proxy( this.documentOnBlur, this )
 	} );
 };
 
@@ -81,7 +82,7 @@ ve.ce.Surface.prototype.documentOnFocus = function() {
 		'keydown.ve-ce-Surface': ve.proxy( this.onKeyDown, this ),
 		'keypress.ve-ce-Surface': ve.proxy( this.onKeyPress, this ),
 		// mouse down
-		'mousedown.ve-ce-Surface': ve.proxy( this.onMouseDown, this ),
+		'mousedown.ve-ce-Surface': ve.proxy( this.onMouseDown, this )
 	} );
 	this.startPolling( true );
 };
@@ -113,11 +114,70 @@ ve.ce.Surface.prototype.onMouseDown = function( e ) {
 
 ve.ce.Surface.prototype.onKeyDown = function( e ) {
 	switch ( e.keyCode ) {
+		// Indenting list items doesn't work yet, so disable tab handling for now
+		/*
+		// Tab Key
+		case 9:
+			e.preventDefault();
+			// FIXME check if indentation is even possible here, insert literal tab otherwise
+			ve.ui.IndentationButtonTool.changeListLevel( this.model , 'in' );
+			break;
+		// Shift + Tab Key
+		case 16:
+			e.preventDefault();
+			// FIXME check if indentation is even possible here
+			ve.ui.IndentationButtonTool.changeListLevel( this.model , 'out' );
+			break;
+		*/
 		// Left arrow
 		case 37:
+			if ( !e.metaKey && !e.altKey && !e.shiftKey && this.model.getSelection().getLength() === 0 ) {
+				var offset = this.model.getSelection().start;
+				var relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, -1 );
+				var relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset - 1, -1, true );
+				var relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
+				var hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
+				var newOffset;
+				if ( hasSlug ) {
+					if ( relativeContentOffset > offset ) {
+						newOffset = relativeStructuralOffset;
+					} else {
+						newOffset = Math.max( relativeContentOffset, relativeStructuralOffset );
+					}
+				} else {
+					newOffset = Math.min( offset, relativeContentOffset );
+				}
+				this.model.change(
+					null,
+					new ve.Range( newOffset )
+				);
+				e.preventDefault();
+			}
 			break;
 		// Right arrow
 		case 39:
+			if ( !e.metaKey && !e.altKey && !e.shiftKey && this.model.getSelection().getLength() === 0 ) {
+				var offset = this.model.getSelection().start;
+				var relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, 1 );
+				var relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset + 1, 1, true );
+				var relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
+				var hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
+				var newOffset;
+				if ( hasSlug ) {
+					if ( relativeContentOffset < offset ) {
+						newOffset = relativeStructuralOffset;
+					} else {
+						newOffset = Math.min( relativeContentOffset, relativeStructuralOffset );
+					}
+				} else {
+					newOffset = Math.max( offset, relativeContentOffset );
+				}
+				this.model.change(
+					null,
+					new ve.Range( newOffset )
+				);
+				e.preventDefault();
+			}
 			break;
 		// Enter
 		case 13:
@@ -133,6 +193,48 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 		case 46:
 			this.handleDelete( false );
 			e.preventDefault();
+			break;
+		// B
+		case 66:
+			if ( ve.ce.Surface.isShortcutKey( e ) ) {
+				// Ctrl+B / Cmd+B, annotate with bold
+				e.preventDefault();
+				var annotations = this.documentView.model.getAnnotationsFromRange( this.model.getSelection() ),
+					annotation = {"type":"textStyle/bold"};
+
+				this.model.annotate( annotations[ve.getHash(annotation)] ? 'clear' : 'set', annotation );
+			}
+			break;
+		// I
+		case 73:
+			if ( ve.ce.Surface.isShortcutKey( e ) ) {
+				// Ctrl+I / Cmd+I, annotate with italic
+				e.preventDefault();
+				var annotations = this.documentView.model.getAnnotationsFromRange( this.model.getSelection() ),
+					annotation = {"type":"textStyle/italic"};
+
+				this.model.annotate( annotations[ve.getHash(annotation)] ? 'clear' : 'set', annotation );
+			}
+			break;
+		// Z
+		case 90:
+			if ( ve.ce.Surface.isShortcutKey( e ) ) {
+				if ( e.shiftKey ) {
+					// Ctrl+Shift+Z / Cmd+Shift+Z, redo
+					e.preventDefault();
+					this.stopPolling();
+					this.showSelection( this.model.redo() );
+					this.clearPollData();
+					this.startPolling();
+				} else {
+					// Ctrl+Z / Cmd+Z, undo
+					e.preventDefault();
+					this.stopPolling();
+					this.showSelection( this.model.undo() );
+					this.clearPollData();
+					this.startPolling();
+				}
+			}
 			break;
 		default:
 			if ( this.poll.polling === false ) {
@@ -229,27 +331,42 @@ ve.ce.Surface.prototype.onPaste = function( e ) {
 
 ve.ce.Surface.prototype.onKeyPress = function( e ) {
 	ve.log('onKeyPress');
+	
+	if ( ve.ce.Surface.isShortcutKey( e ) || e.which === 13 ) {
+		return;
+	}
 
 	var selection = this.model.getSelection();
 
-	if ( selection.getLength() === 0 ) {
-		if ( this.hasSlugAtOffset( selection.start ) ) {
+	if (
+		selection.getLength() === 0 &&
+		this.sluggable === true &&
+		this.hasSlugAtOffset( selection.start )
+	) {
+		var	node;
+		this.sluggable = false;
+		this.stopPolling();
+		if ( this.documentView.getNodeFromOffset( selection.start ).getLength() !== 0 ) {
 			var data = [ { 'type' : 'paragraph' }, { 'type' : '/paragraph' } ];
-			this.stopPolling();
-			this.model.change( 
+			this.model.change(
 				ve.dm.Transaction.newFromInsertion(
 					this.documentView.model,
 					selection.start,
 					data
 				),
-				new ve.Range ( selection.start + 1 )
+				new ve.Range( selection.start + 1 )
 			);
-			this.clearPollData();
-			this.startPolling();
+			node = this.documentView.getNodeFromOffset( selection.start + 1 );
+		} else {
+			node = this.documentView.getNodeFromOffset( selection.start );
 		}
+		node.$.empty();
+		node.$.append( document.createTextNode('') );
+		this.clearPollData();
+		this.startPolling();
 	}
 
-	if ( selection.getLength() > 0 ) {
+	if ( selection.getLength() > 0 && e.which !== 0 ) {
 		this.stopPolling();
 		this.model.change(
 			ve.dm.Transaction.newFromRemoval(
@@ -296,7 +413,9 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 			if ( this.poll.timeout !== null ) {
 				clearTimeout( this.poll.timeout );
 			}
-			this.poll.timeout = setTimeout( ve.proxy( this.pollChanges, this ), async ? 0 : this.poll.frequency );
+			this.poll.timeout = setTimeout(
+				ve.proxy( this.pollChanges, this ), async ? 0 : this.poll.frequency
+			);
 		}
 	}, this );
 
@@ -326,7 +445,7 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 			$focusNode = $( rangySelection.focusNode ).closest( '.ve-ce-branchNode' );
 
 		if ( $anchorNode[0] === $focusNode[0] ) {
-			node = $anchorNode[0]
+			node = $anchorNode[0];
 		} else {
 			node = null;
 		}
@@ -359,12 +478,12 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 					'old': {
 						'text': this.poll.text,
 						'hash': this.poll.hash,
-						'range': this.poll.range,
+						'range': this.poll.range
 					},
 					'new': {
 						'text': text,
 						'hash': hash,
-						'range': range					
+						'range': range
 					}
 				} );
 				this.poll.text = text;
@@ -459,6 +578,7 @@ ve.ce.Surface.prototype.onContentChange = function( e ) {
 			e.new.range
 		);
 	}
+	this.sluggable = true;
 };
 
 ve.ce.Surface.prototype.onChange = function( transaction, selection ) {
@@ -486,48 +606,105 @@ ve.ce.Surface.prototype.onChange = function( transaction, selection ) {
 };
 
 ve.ce.Surface.prototype.handleEnter = function() {
+	var selection = this.model.getSelection(),
+		documentModel = this.model.getDocument(),
+		emptyParagraph = [{ 'type': 'paragraph' }, { 'type': '/paragraph' }],
+		tx,
+		advanceCursor = true;
+	// Stop polling while we work
 	this.stopPolling();
-
-	var selection = this.model.getSelection();
-
+	// Handle removal first
 	if ( selection.from !== selection.to ) {
-		this.model.change(
-			ve.dm.Transaction.newFromRemoval( this.documentView.model, selection )
-		);
+		tx = ve.dm.Transaction.newFromRemoval( documentModel, selection );
+		selection = tx.translateRange( selection );
+		this.model.change( tx, selection );
 	}
-	
-	var	node = this.documentView.getNodeFromOffset( selection.to ),
-		nodeOffset = this.documentView.getDocumentNode().getOffsetFromNode( node ),
-		stack = [];
-	
-	// Build stack
-	ve.Node.traverseUpstream( node, function( node ) {
-		var elementType = node.type;
-		if ( !node.canBeSplit() ) {
-			return false;
+	// Handle insertion
+	var	node = this.documentView.getNodeFromOffset( selection.from ),
+		nodeModel = node.getModel(),
+		cursor = selection.from,
+		nodeOffset = nodeModel.getOffset(),
+		contentBranchModel = nodeModel.isContent() ? nodeModel.getParent() : nodeModel,
+		contentBranchModelRange = contentBranchModel.getRange();
+
+	if (
+		contentBranchModel.getType() !== 'paragraph' &&
+		(
+			cursor === contentBranchModelRange.from ||
+			cursor === contentBranchModelRange.to
+		)
+	) {
+		// If we're at the start/end of something that's not a paragraph, insert a paragraph
+		// before/after
+		if ( cursor === contentBranchModelRange.from ) {
+			tx = ve.dm.Transaction.newFromInsertion(
+				documentModel, contentBranchModel.getOuterRange().from, emptyParagraph
+			);
+		} else if ( cursor === contentBranchModelRange.to ) {
+			tx = ve.dm.Transaction.newFromInsertion(
+				documentModel, contentBranchModel.getOuterRange().to, emptyParagraph
+			);
 		}
-		stack.splice(
-			stack.length / 2,
-			0,
-			{ 'type': '/' + elementType },
-			{
-				'type': elementType,
-				'attributes': ve.copyObject( node.model.attributes )
+	} else {
+		// Split
+		var	stack = [],
+			outermostNode = null;
+
+		ve.Node.traverseUpstream( node, function( node ) {
+			if ( !node.canBeSplit() ) {
+				return false;
 			}
+			stack.splice(
+				stack.length / 2,
+				0,
+				{ 'type': '/' + node.type },
+				node.model.getClonedElement()
+			);
+			outermostNode = node;
+			return true;
+		} );
+		
+		var	outerParent = outermostNode.getModel().getParent(),
+			outerChildrenCount = outerParent.getChildren().length
+		
+		if ( 
+			outermostNode.type == 'listItem' && // this is a list item
+			outerParent.getChildren()[outerChildrenCount - 1] == outermostNode.getModel() && // this is the last list item
+			outermostNode.children.length == 1 && // there is one child
+			node.model.length == 0 // the child is empty
+		) {
+			// Enter was pressed in an empty list item.
+			var list =  outermostNode.getModel().getParent();
+			// Remove the list item
+			tx = ve.dm.Transaction.newFromRemoval( documentModel, outermostNode.getModel().getOuterRange() );
+			this.model.change( tx );
+			// Insert a paragraph
+			tx = ve.dm.Transaction.newFromInsertion( documentModel, list.getOuterRange().to, emptyParagraph );
+			
+			advanceCursor = false;				
+		} else {		
+			// We must process the transaction first because getRelativeContentOffset can't help us yet
+			tx = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, stack );
+		}
+	}
+	this.model.change( tx );
+
+	// Now we can move the cursor forward
+	if ( advanceCursor ) {
+		this.model.change(
+			null, new ve.Range( documentModel.getRelativeContentOffset( selection.from, 1 ) )
 		);
-		return true;
-	} );
-
-	this.model.change( ve.dm.Transaction.newFromInsertion( this.documentView.model, selection.from, stack ) );
-	this.model.change( null, new ve.Range(
-		this.model.getDocument().getRelativeContentOffset( selection.from, 1 )
-	) );
-
+	} else {
+		this.model.change(
+			null, new ve.Range( documentModel.getNearestContentOffset( selection.from ) )
+		);		
+	}
+	// Reset and resume polling
 	this.clearPollData();
 	this.startPolling();
 };
 
-ve.ce.Surface.prototype.handleDelete = function( backspace ) {	
+ve.ce.Surface.prototype.handleDelete = function( backspace ) {
 	this.stopPolling();
 
 	var selection = this.model.getSelection(),
@@ -540,8 +717,8 @@ ve.ce.Surface.prototype.handleDelete = function( backspace ) {
 
 	if ( selection.from === selection.to ) {
 		if ( backspace ) {
-			sourceOffset = selection.to; 
-			targetOffset = this.model.getDocument().getRelativeContentOffset( sourceOffset, -1 );
+			sourceOffset = selection.to;
+			targetOffset = this.getNearestCorrectOffset( sourceOffset - 1, -1 );
 			//this.model.setSelection( new ve.Range( targetOffset, targetOffset ) );
 		} else {
 			sourceOffset = this.model.getDocument().getRelativeContentOffset( selection.to, 1 );
@@ -560,37 +737,27 @@ ve.ce.Surface.prototype.handleDelete = function( backspace ) {
 		cursorAt = targetOffset;
 
 
-		if ( sourceNode === targetNode ||
-			( typeof sourceSplitableNode !== 'undefined' &&
-			sourceSplitableNode.getParent()  === targetSplitableNode.getParent() ) ) {
-			// Source and target are the same node or have the same parent (list items)
-			
-			// Transact
-			tx = ve.dm.Transaction.newFromRemoval( this.documentView.model, new ve.Range( targetOffset, sourceOffset ) );
-			this.model.change( tx, new ve.Range( cursorAt ) );
-		} else {
-			// Source and target are different nodes and do not share a parent. Perform tricky merge.
-
-			// !!!This portion still in development
-			return;
-			
-			// Transact
-			/*
-			tx = ve.dm.Transaction.newFromInsertion(
-				this.documentView.model, targetOffset, sourceNode.model.getContentData()
+		if (
+			// Source and target are the same node
+			sourceNode === targetNode ||
+			(
+				// Source and target have the same parent (list items)
+				sourceSplitableNode !== undefined &&
+				sourceSplitableNode.getParent() === targetSplitableNode.getParent()
+			)
+		) {
+			// Simple removal
+			tx = ve.dm.Transaction.newFromRemoval(
+				this.documentView.model, new ve.Range( targetOffset, sourceOffset )
 			);
-			*/
-	
-			ve.log('sourceNode', sourceNode);
-			ve.log('sourceOffset', sourceOffset);
-			ve.log('targetNode', targetNode);
-			ve.log('targetOffset', targetOffset);
-return;
-			ve.log('length: ', sourceNode.model.getLength());
-			ve.log('outerlength: ', sourceNode.model.getOuterLength());
-			ve.log('offset', this.documentView.getDocumentNode().getOffsetFromNode( sourceNode ));
-			ve.log('some data: ', this.documentView.model.getData( this.model.getSelection() ) )
-			
+			this.model.change( tx, new ve.Range( cursorAt ) );
+		} else if ( sourceNode.getType() === 'document' ) {
+			// Source is a slug - move the cursor somewhere useful
+			this.model.change( null, new ve.Range( cursorAt ) );
+		} else {
+			// Source and target are different nodes and do not share a parent, perform tricky merge
+			// Get the data for the source node
+			var sourceData = this.documentView.model.getData( sourceNode.model.getRange() );
 			// Find the node that should be completely removed
 			var nodeToDelete = sourceNode;
 			ve.Node.traverseUpstream( nodeToDelete, function( node ) {
@@ -601,24 +768,24 @@ return;
 					return false;
 				}
 			} );
-			
-			// Create range surrounding the entire sourceNode and remove
-			/*var range = new ve.Range();
-			range.from = this.documentView.getDocumentNode().getOffsetFromNode( sourceNode )
-			range.to = range.from + sourceNode.model.getOuterLength();*/
-			// Just setting .from and .to produces an invalid range with .start and .end unset --Roan
-			var from = this.documentView.getDocumentNode().getOffsetFromNode( sourceNode ),
-				range = new ve.Range(
-					from,
-					from + sourceNode.model.getOuterLength()
-				);
-			tx = ve.dm.Transaction.newFromRemoval( this.documentView.model, range );
-			this.model.change( tx );
+			// Remove source node or source node ancestor
+			this.model.change( ve.dm.Transaction.newFromRemoval(
+				this.documentView.model, nodeToDelete.getModel().getOuterRange()
+			) );
+			// Append source data to target
+			this.model.change(
+				ve.dm.Transaction.newFromInsertion(
+					this.documentView.model, targetOffset, sourceData
+				),
+				new ve.Range( cursorAt )
+			);
 		}
 	} else {
-		// selection removal
-		tx = ve.dm.Transaction.newFromRemoval( this.documentView.model, selection );
-		this.model.change( tx, new ve.Range( selection.start ) );
+		// Selection removal
+		this.model.change(
+			ve.dm.Transaction.newFromRemoval( this.documentView.model, selection ),
+			new ve.Range( selection.start )
+		);
 	}
 
 	this.clearPollData();
@@ -637,13 +804,46 @@ ve.ce.Surface.prototype.showSelection = function( range ) {
 
 	if ( range.start !== range.end ) {
 		start = this.getNodeAndOffset( range.start );
-		end = this.getNodeAndOffset( range.end ),
+		end = this.getNodeAndOffset( range.end );
+
+		if ( $.browser.msie ) {
+			if ( range.start === range.from ) {
+				if (
+					start.node === this.poll.rangySelection.anchorNode &&
+					start.offset === this.poll.rangySelection.anchorOffset &&
+					end.node === this.poll.rangySelection.focusNode &&
+					end.offset === this.poll.rangySelection.focusOffset
+				) {
+					return;
+				}
+			} else {
+				if (
+					end.node === this.poll.rangySelection.anchorNode &&
+					end.offset === this.poll.rangySelection.anchorOffset &&
+					start.node === this.poll.rangySelection.focusNode &&
+					start.offset === this.poll.rangySelection.focusOffset
+				) {
+					return;
+				}
+			}
+		}
+
 		rangyRange.setStart( start.node, start.offset );
 		rangyRange.setEnd( end.node, end.offset );
 		rangySel.removeAllRanges();
 		rangySel.addRange( rangyRange, range.start !== range.from );
 	} else {
 		start = end = this.getNodeAndOffset( range.start );
+
+		if ( $.browser.msie ) {
+			if (
+				start.node === this.poll.rangySelection.anchorNode &&
+				start.offset === this.poll.rangySelection.anchorOffset
+			) {
+				return;
+			}
+		}
+
 		rangyRange.setStart( start.node, start.offset );
 		rangySel.setSingleRange( rangyRange );
 	}
@@ -686,7 +886,7 @@ ve.ce.Surface.prototype.getNearestCorrectOffset = function( offset, direction ) 
 // TODO: Find a better name and a better place for this method - probably in a document view?
 ve.ce.Surface.prototype.hasSlugAtOffset = function( offset ) {
 	var node = this.documentView.documentNode.getNodeFromOffset( offset );
-	if ( node.canHaveChildren() ) {
+	if ( node && node.canHaveChildren() ) {
 		return node.hasSlugAtOffset( offset );
 	} else {
 		return false;
@@ -888,8 +1088,20 @@ ve.ce.Surface.prototype.getSelectionRect = function() {
 	};
 };
 
+/* Tests if the modifier key for keyboard shortcuts is pressed. */
+ve.ce.Surface.isShortcutKey = function( e ) {
+	if ( e.ctrlKey || e.metaKey ) {
+		return true;
+	}
+	return false;
+};
+
 ve.ce.Surface.prototype.getModel = function() {
 	return this.model;
+};
+
+ve.ce.Surface.prototype.getDocument = function() {
+	return this.documentView;
 };
 
 /* Inheritance */
