@@ -85,9 +85,11 @@ Callbacks.prototype.clientConnection = function( data ) {
  * Callback method to be invoked when a client closes its session
 **/
 Callbacks.prototype.clientDisconnection = function( data ) {
-	var sessionIndex = this.session.sessionIndex;
-	this.sessionRoute.callbacks.pop( sessionIndex );
-	this.broadcast( 'client_disconnect', this.session.user );
+	if( this.session ) {
+		var sessionIndex = this.session.sessionIndex;
+		this.sessionRoute.callbacks.splice( sessionIndex, 1 );
+		this.broadcast( 'client_disconnect', this.session.user );
+	}
 };
 
 /**
