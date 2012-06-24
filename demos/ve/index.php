@@ -14,8 +14,6 @@
 		<link rel="stylesheet" href="../../modules/ve/ui/styles/ve.ui.Menu.css">
 		<link rel="stylesheet" href="../../modules/ve/ui/styles/ve.ui.Surface.css">
 		<link rel="stylesheet" href="../../modules/ve/ui/styles/ve.ui.Toolbar.css">
-		<!-- collab -->
-		<link rel="stylesheet" href="../../modules/collaboration/client/styles/main.css">
 		<!-- sandbox -->
 		<link rel="stylesheet" href="../../modules/sandbox/sandbox.css">
 		<style>
@@ -145,10 +143,12 @@ include( '../../modules/sandbox/base.php' );
 		<script src="../../modules/ve/dm/annotations/ve.dm.LinkAnnotation.js"></script>
 		<script src="../../modules/ve/dm/annotations/ve.dm.TextStyleAnnotation.js"></script>
 
+		<!--
 		<script src="../../modules/ve/dm/serializers/ve.dm.AnnotationSerializer.js"></script>
 		<script src="../../modules/ve/dm/serializers/ve.dm.HtmlSerializer.js"></script>
 		<script src="../../modules/ve/dm/serializers/ve.dm.JsonSerializer.js"></script>
 		<script src="../../modules/ve/dm/serializers/ve.dm.WikitextSerializer.js"></script>
+		-->
 
 		<!-- ce -->
 		<script src="../../modules/ve/ce/ve.ce.js"></script>
@@ -197,14 +197,7 @@ include( '../../modules/sandbox/base.php' );
 		<script src="../../modules/ve/ui/tools/ve.ui.IndentationButtonTool.js"></script>
 		<script src="../../modules/ve/ui/tools/ve.ui.DropdownTool.js"></script>
 		<script src="../../modules/ve/ui/tools/ve.ui.FormatDropdownTool.js"></script>
-		
-		<!-- collab -->
-		<script src="../../modules/collaboration/settings.js"></script>
-		<script src="http://localhost:8000/socket.io/socket.io.js"></script>
-		<script src="../../modules/collaboration/client/collab.Callbacks.js"></script>
-		<script src="../../modules/collaboration/client/collab.UI.js"></script>
-		<script src="../../modules/collaboration/client/collab.Client.js"></script>
-
+	
 		<!-- sandbox -->
 		<script src="../../modules/sandbox/sandbox.js"></script>
 	</body>
