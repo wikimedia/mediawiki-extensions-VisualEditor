@@ -40,6 +40,10 @@ CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 		callbacksObj.clientConnection( data );
 	});
 	
+	io_socket.on( 'client_auth', function( data ) {
+		callbacksObj.authenticate( data );
+	});
+
 	io_socket.on( 'disconnect', function( data ) {
 		callbacksObj.clientDisconnection( data );
 	});

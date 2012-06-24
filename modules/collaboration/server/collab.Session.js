@@ -6,13 +6,14 @@
 
 var ve = require( './collab.ve.js' ).ve;
 
-Session = function( document, user, sessionIndex ) {
+Session = function( document, username, sessionIndex ) {
 	ve.EventEmitter.call( this );
 
 	this.Document = document;
-	this.user = user
+	this.userName = user
 	this.isPublisher = false;
-	this.id = Session.generateID( document.title, user );
+	// Un-authenticated session
+	this.sessionID = null;
 	this.sessionIndex = sessionIndex;
 };
 
@@ -20,8 +21,14 @@ Session = function( document, user, sessionIndex ) {
  * Generates a unique session id for this session.
  * Should use document's title and user to generate the unique id.
 **/
-Session.generateID = function( docTitle, user ) {
-	return docTitle + '' + user;
+Session.generateID = function( params ) {
+	// Generate unique key for the client and send it
+	// Could use the information of other documents in the server,
+	var hasher = crypto.createHash( 'sha1' );
+	var hashInput = params.join('');
+	hasher.update( hashInput );
+	var hashOut = hasher.digest( 'hex' );
+	return hashOut;
 };
 
 /**

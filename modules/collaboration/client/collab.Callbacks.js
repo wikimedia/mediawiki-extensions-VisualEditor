@@ -8,6 +8,17 @@ collab.Callbacks = function( client, socket ) {
 };
 
 /**
+ * Initiate authentication with the server using current logged in user's info
+**/
+collab.Callbacks.prototype.authenticate = function() {
+	var user = mw.config.get( 'wgUserName' );
+	if( user ) {
+		// Logged in; Proceed with authentication with server
+		socket.emit( 'client_auth', { username: user } );
+	}
+};
+
+/**
  * Callback method to be invoked when a new client initiates its session
 **/
 collab.Callbacks.prototype.userConnect = function( userID ) {
@@ -54,8 +65,6 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 		surfaceModel = editor.getModel(),
 		documentModel = editor.getDocumentModel(),
 		documentNode = documentModel.documentNode;
-	// FIXME: this needs to be rewritten in the server's code
-	// rather than calling the one defined in sandbox.js
 	
 	// Load the document data recieved into the editor instance
 	var data = ve.dm.converter.getDataFromDom( html[0] );
@@ -91,5 +100,4 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 		var documentNode = view.documentView.documentNode;
 		documentNode.$.attr( 'contenteditable', false );
 	}
-
 };

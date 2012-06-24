@@ -23,8 +23,9 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 	}
 
 	socket.on( 'connection', function() {
-		socket.callbacks = new collab.Callbacks( _this, socket );
-		_this.bindEvents( socket );
+		var callbacks = new collab.Callbacks( _this, socket );
+		callbacks.authenticate();
+		_this.bindEvents( callbacks );
 		// TODO: User has to be handled using the MW auth
 		_this.userID = username;
 		socket.emit( 'client_connect', { user: username, title: 'Main_Page' } );
@@ -35,8 +36,8 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 	});
 };
 
-collab.Client.prototype.bindEvents = function( io_socket ) {
-	var socket_callbacks = io_socket.callbacks;
+collab.Client.prototype.bindEvents = function( callbackObj ) {
+	var io_socket = callbacksObj.socket;
 	io_socket.on( 'new_transaction', function( data ) {
 		socket_callbacks.newTransaction( data );
 	});

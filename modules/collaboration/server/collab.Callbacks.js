@@ -5,7 +5,8 @@
 
 var Session = require( './collab.Session.js' ).Session,
 	Document = require( './collab.Document.js' ).Document,
-	parse = require( './collab.parse.js' ).parse;
+	parse = require( './collab.parse.js' ).parse,
+	crypto = require( 'crypto' );
 
 Callbacks = function( server, socket ) {
 	this.server = server;
@@ -18,7 +19,13 @@ Callbacks.prototype.broadcast = function( event, args ) {
 		var socket = routeCallbacks[ cb ].socket;
 		socket.emit( event, args );
 	}
-}
+};
+
+Callbacks.prototype.authenticate = function( authData ) {
+	var ssID = this.session.sessionID = Session.generateID( [ authData.user,
+			this.session.Document.title, this.server.docRoutes.length ]);
+	this.socket.emit( 'auth', { sessionID: ssID } );
+};
 
 /**
  * Callback method to be invoked when a new client initiates its session
