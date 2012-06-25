@@ -10,11 +10,25 @@ collab.Callbacks = function( client, socket ) {
 /**
  * Initiate authentication with the server using current logged in user's info
 **/
-collab.Callbacks.prototype.authenticate = function() {
-	var user = mw.config.get( 'wgUserName' );
-	if( user ) {
-		// Logged in; Proceed with authentication with server
-		socket.emit( 'client_auth', { username: user } );
+collab.Callbacks.prototype.authenticate = function( direction, authData ) {
+	var socket = this.socket;
+	if( direction == 'upstream' ) {
+		// Upstream mode for sending auth info to the server
+		var user = mw.config.get( 'wgUserName' );
+		var docTitle = mw.config.get( 'wgPageName' );
+		if( user ) {
+			this.userName = user;
+			// Logged in; Proceed with authentication with server
+			socket.emit( 'client_auth', { userName: user, docTitle: docTitle } );
+		}
+		else {
+			// For non-logged in users
+		}
+	else {
+		// Downstream mode for recieving auth info from the server
+		var sessionID = authData.sessionID;
+		socket.emit( 'client_connect', { userName: user, docTitle: docTitle,
+			sessionID: sessionID } );
 	}
 };
 

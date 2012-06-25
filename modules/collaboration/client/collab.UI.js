@@ -1,3 +1,9 @@
+/**
+ * Constructs a client UI binding
+ * @class
+ * @constructor
+ * @param {collab.Client} client
+**/
 collab.UI = function( client ) {
 	this.client = client;
 	var elementNodes = collab.UI.elementNodes;

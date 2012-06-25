@@ -24,7 +24,7 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 
 	socket.on( 'connection', function() {
 		var callbacks = new collab.Callbacks( _this, socket );
-		callbacks.authenticate();
+		// callbacks.authenticate( 'upstream' ); Deferred
 		_this.bindEvents( callbacks );
 		// TODO: User has to be handled using the MW auth
 		_this.userID = username;
@@ -41,7 +41,11 @@ collab.Client.prototype.bindEvents = function( callbackObj ) {
 	io_socket.on( 'new_transaction', function( data ) {
 		socket_callbacks.newTransaction( data );
 	});
-	
+
+	io_socket.on( 'client_auth', function( data ) {
+		socket_callbacks.authenticate( 'downstream', data );
+	});
+
 	io_socket.on( 'client_connect', function( data ) {
 		socket_callbacks.userConnect( data );
 	});

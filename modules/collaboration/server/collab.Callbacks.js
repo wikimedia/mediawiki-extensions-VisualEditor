@@ -22,9 +22,9 @@ Callbacks.prototype.broadcast = function( event, args ) {
 };
 
 Callbacks.prototype.authenticate = function( authData ) {
-	var ssID = this.session.sessionID = Session.generateID( [ authData.user,
-			this.session.Document.title, this.server.docRoutes.length ]);
-	this.socket.emit( 'auth', { sessionID: ssID } );
+	var ssID = Session.generateID( [ authData.userName,
+			authData.docTitle, this.server.docRoutes.length ]);
+	this.socket.emit( 'client_auth', { sessionID: ssID } );
 };
 
 /**
