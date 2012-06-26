@@ -24,6 +24,7 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 		else {
 			// For non-logged in users
 		}
+	}
 	else {
 		// Downstream mode for recieving auth info from the server
 		var sessionID = authData.sessionID;

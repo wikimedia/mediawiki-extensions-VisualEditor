@@ -6,11 +6,11 @@
 
 var ve = require( './collab.ve.js' ).ve;
 
-Session = function( document, username, sessionIndex ) {
+Session = function( document, userName, sessionIndex ) {
 	ve.EventEmitter.call( this );
 
 	this.Document = document;
-	this.userName = user
+	this.userName = userName
 	this.isPublisher = false;
 	// Un-authenticated session
 	this.sessionID = null;
@@ -36,6 +36,7 @@ Session.generateID = function( params ) {
 **/
 Session.prototype.allowPublish = function( key ) {
 	// key is either true for having atleast one publisher or false for no publisher
+	this.isPublisher = true;
 	this.Document.hasPublisher = key;
 	this.emit( 'allowPublish', key );
 };

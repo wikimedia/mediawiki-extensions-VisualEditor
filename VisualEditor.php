@@ -229,13 +229,14 @@ $wgResourceModules += array(
 			've/ui/tools/ve.ui.ListButtonTool.js',
 			've/ui/tools/ve.ui.IndentationButtonTool.js',
 			've/ui/tools/ve.ui.DropdownTool.js',
-			've/ui/tools/ve.ui.FormatDropdownTool.js'
+			've/ui/tools/ve.ui.FormatDropdownTool.js',
 
 			// collab
-			'collaboration/client/settings.js',
+			'collaboration/client/socket.io.js',
+	 		'collaboration/settings.js',
 			'collaboration/client/collab.Client.js',
 			'collaboration/client/collab.Callbacks.js',
-			'collaboration/client/collab.UI.js',
+			'collaboration/client/collab.UI.js'
 		),
 		'styles' => array(
 			// ce
@@ -249,7 +250,7 @@ $wgResourceModules += array(
 			've/ui/styles/ve.ui.Surface.css',
 			've/ui/styles/ve.ui.Toolbar.css',
 			// collab
-			'collaboration/client/styles/main.css',
+			'collaboration/client/styles/main.css'
 		),
 		'dependencies' => array(
 			'jquery',

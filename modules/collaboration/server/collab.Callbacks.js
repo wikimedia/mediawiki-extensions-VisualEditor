@@ -22,8 +22,8 @@ Callbacks.prototype.broadcast = function( event, args ) {
 };
 
 Callbacks.prototype.authenticate = function( authData ) {
-	var ssID = Session.generateID( [ authData.userName,
-			authData.docTitle, this.server.docRoutes.length ]);
+	var ssID = Session.generateID( [ authData.userName, 
+			authData.docTitle, this.server.docRoutes.length ] );
 	this.socket.emit( 'client_auth', { sessionID: ssID } );
 };
 
@@ -39,34 +39,13 @@ Callbacks.prototype.clientConnection = function( data ) {
 		remoteSSID = data.ssid,
 		sessionRoute = null,
 		_this = this,
-		docHTML = '';
+		docHTML = '',
+		sessionDoc = null,
+		argAllowPublish = false;
 
-	// Parse the page by its title using the parser
-	parse( docTitle, function( docHTML ) {
-		var sessionRoute = _this.server.lookupRoutes( docTitle );
-		if( sessionRoute ) {
-			var sessionDoc = sessionRoute.document;
-			sessionRoute.callbacks.push( _this );
-			var argAllowPublish = false;
-		}
-  	/** 
-		 * Proceed with creating a new route with a new document,
-		 * if no existing document route was found.
-		**/
-		if( sessionRoute == null ) {
-			var sessionDoc = new Document( docTitle, docHTML );
-			sessionRoute = {
-				document: sessionDoc,
-				callbacks: [ _this ]
-			};
-			var argAllowPublish = true;
-			docRoutes.push( sessionRoute );
-		}
+	var postDocInit = function() {
 		_this.sessionRoute = sessionRoute;
 		_this.session = new Session( sessionDoc, userID, sessionRoute.callbacks.length - 1 );
-		_this.session.allowPublish( argAllowPublish );
-		_this.socket.emit( 'document_transfer', { html: docHTML, allowPublish: argAllowPublish } );
-
 		// Bind some session events here
 		_this.session.on( 'allowPublish', function( e ) {
 			var routeCallbacks = sessionRoute.callbacks;
@@ -81,11 +60,44 @@ Callbacks.prototype.clientConnection = function( data ) {
 				}
 			}
 		} );
-		
+		_this.session.allowPublish( argAllowPublish );
+		_this.socket.emit( 'document_transfer', { 
+			html: docHTML, 
+			allowPublish: argAllowPublish 
+		} );
+
+
 		_this.broadcast( 'client_connect', userID );
+	};
 
-	} );
+	var sessionRoute = this.server.lookupRoutes( docTitle );
+	if( sessionRoute ) {
+		var sessionDoc = sessionRoute.document;
+		sessionRoute.callbacks.push( this );
+		var argAllowPublish = false;
+		docHTML = sessionDoc.getHTML();
+		console.log(docHTML);
+		postDocInit();
+	}
 
+	if( sessionRoute == null ) {
+		// Parse the page by its title using the parser
+		parse( docTitle, function( html ) {
+			/** 
+			 * Proceed with creating a new route with a new document,
+			 * if no existing document route was found.
+			**/
+			docHTML = html
+			sessionDoc = new Document( docTitle, html );
+			sessionRoute = {
+				document: sessionDoc,
+				callbacks: [ _this ]
+			};
+			argAllowPublish = true;
+			docRoutes.push( sessionRoute );
+			postDocInit();
+		} );
+	}
 };
 
 /**

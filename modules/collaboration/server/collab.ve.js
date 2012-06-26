@@ -9,7 +9,9 @@ ve = function () {
 
 	//import files here
 	jQuery = $ = require('jquery');
+	jsdom = require('jsdom');
 	window = {};
+	document = jsdom.jsdom();
 	ve = {};
 	ve.dm = {};
 	// ve

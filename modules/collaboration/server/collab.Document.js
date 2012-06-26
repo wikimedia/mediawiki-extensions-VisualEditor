@@ -26,6 +26,13 @@ Document.generateID = function( title ) {
 	return title;
 };
 
+Document.prototype.getHTML = function() {
+	var data = this.dmSurface.getDocument().getData();
+	var dom = ve.dm.converter.getDomFromData( data );
+	var html = $( dom ).html();
+	return html;
+};
+
 Document.prototype.getID = function() {
 	return this.id;
 };
@@ -46,9 +53,9 @@ Document.prototype.applyTransaction = function( session, transactionData ) {
 
 	var transactionObj = new ve.dm.Transaction();
 	var transaction = transactionData.transaction;
-	transaction.operations = transaction.operations;
-	transaction.lengthDifference = transaction.lengthDifference;
-	this.dmSurface.change( transaction, this.dmsurface.getSelection() );
+	transactionObj.operations = transaction.operations;
+	transactionObj.lengthDifference = transaction.lengthDifference;
+	this.dmSurface.change( transactionObj, new ve.Range( 1, 1 ) );
 	// TODO: document state hash should also be pushed into the history
 	this.history.push( transaction );
 

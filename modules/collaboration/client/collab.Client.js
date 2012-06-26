@@ -15,6 +15,7 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 		var socket = io.connect( settings.host + ':' + settings.port );
 	}
 	catch( e ) {
+		console.log(e);
 		responseCallback( {
 			success: false,
 			message: 'Could not connect to server.'
@@ -36,24 +37,24 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 	});
 };
 
-collab.Client.prototype.bindEvents = function( callbackObj ) {
+collab.Client.prototype.bindEvents = function( callbacksObj ) {
 	var io_socket = callbacksObj.socket;
 	io_socket.on( 'new_transaction', function( data ) {
-		socket_callbacks.newTransaction( data );
+		callbacksObj.newTransaction( data );
 	});
 
 	io_socket.on( 'client_auth', function( data ) {
-		socket_callbacks.authenticate( 'downstream', data );
+		callbacksObj.authenticate( 'downstream', data );
 	});
 
 	io_socket.on( 'client_connect', function( data ) {
-		socket_callbacks.userConnect( data );
+		callbacksObj.userConnect( data );
 	});
 
 	io_socket.on( 'client_disconnect', function( data ) {
-		socket_callbacks.userDisconnect( data );
+		callbacksObj.userDisconnect( data );
 	});
 	io_socket.on( 'document_transfer', function( data ) {
-		socket_callbacks.docTransfer( data );
+		callbacksObj.docTransfer( data );
 	});
 };
