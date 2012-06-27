@@ -3,8 +3,8 @@
  *
  * @class
  * @constructor
- * @param { collab.Client } client Client adapter that the Callbacks object is to be attached to
- * @param { Socket } socket Socket.IO socket for network I/O
+ * @param {collab.Client} client Client adapter that the Callbacks object is to be attached to
+ * @param {Socket} socket Socket.IO socket for network I/O
 **/
 collab.Callbacks = function( client, socket ) {
 	this.client = client;
@@ -13,6 +13,12 @@ collab.Callbacks = function( client, socket ) {
 
 /**
  * Initiate authentication with the server using current logged in user's info
+ * The method is called in upstream mode to initiate authentication, and
+ * downstream mode when used as a callback for receiving authentication from server.
+ *
+ * @method
+ * @param {String} direction upstream/downstream mode
+ * @param {Object} authData Authentication data received from the server
 **/
 collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 	var socket = this.socket;
@@ -40,15 +46,15 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
-collab.Callbacks.prototype.userConnect = function( userID ) {
-	// do something on the front-end
+collab.Callbacks.prototype.userConnect = function( userName ) {
+	
 };
 
 /**
  * Callback method to be invoked when a client disconnects from the editing session
 **/
-collab.Callbacks.prototype.userDisconnect = function( userID ) {
-	// do something on the front-end
+collab.Callbacks.prototype.userDisconnect = function( userName ) {
+
 };
 
 /**

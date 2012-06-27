@@ -687,7 +687,6 @@ $(document).ready( function() {
 	} );
 	//$( '.es-mode-wikitext' ).click();
 	window.cb = new collab.Client( sandboxEditor );
-	window.cb.ui = new collab.UI( window.cb );
 	//window.cb.connect();
 });
 

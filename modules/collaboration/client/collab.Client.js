@@ -10,6 +10,9 @@ collab.Client = function( editorSurface ) {
 	this.editor = editorSurface;
 	var options = {
 	};
+
+	// Initialize the UI binding object
+	this.ui = new collab.UI( this );
 }
 
 collab.Client.prototype.connect = function( username, responseCallback ) {
@@ -49,6 +52,7 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 **/
 collab.Client.prototype.bindEvents = function( callbacksObj ) {
 	var io_socket = callbacksObj.socket;
+	var ui = this.ui;
 	io_socket.on( 'new_transaction', function( data ) {
 		callbacksObj.newTransaction( data );
 	});
@@ -59,12 +63,16 @@ collab.Client.prototype.bindEvents = function( callbacksObj ) {
 
 	io_socket.on( 'client_connect', function( data ) {
 		callbacksObj.userConnect( data );
+		ui.userConnect( data );
 	});
 
 	io_socket.on( 'client_disconnect', function( data ) {
 		callbacksObj.userDisconnect( data );
+		ui.userDisconnect( data );
 	});
+
 	io_socket.on( 'document_transfer', function( data ) {
 		callbacksObj.docTransfer( data );
+		ui.populateUsersList( data.users );
 	});
 };

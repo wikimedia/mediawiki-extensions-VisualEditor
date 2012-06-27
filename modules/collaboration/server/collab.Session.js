@@ -14,7 +14,6 @@ Session = function( document, userName, sessionIndex ) {
 	this.isPublisher = false;
 	// Un-authenticated session
 	this.sessionID = null;
-	this.sessionIndex = sessionIndex;
 };
 
 /**

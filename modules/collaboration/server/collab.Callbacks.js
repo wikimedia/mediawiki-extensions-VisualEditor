@@ -45,10 +45,10 @@ Callbacks.prototype.clientConnection = function( data ) {
 
 	var postDocInit = function() {
 		_this.sessionRoute = sessionRoute;
-		_this.session = new Session( sessionDoc, userID, sessionRoute.callbacks.length - 1 );
+		_this.session = new Session( sessionDoc, userID );
+		var routeCallbacks = sessionRoute.callbacks;
 		// Bind some session events here
 		_this.session.on( 'allowPublish', function( e ) {
-			var routeCallbacks = sessionRoute.callbacks;
 			sessionRoute.document.hasPublisher = false;
 			if( !e ) {
 				for( cb in routeCallbacks ) {
@@ -62,10 +62,18 @@ Callbacks.prototype.clientConnection = function( data ) {
 		} );
 		_this.session.allowPublish( argAllowPublish );
 		_this.socket.emit( 'document_transfer', { 
-			html: docHTML, 
+			html: docHTML,
+			users: function() {
+				var users = [];
+				for( cb in routeCallbacks ) {
+					if( routeCallbacks[ cb ] != _this ) {
+						users.push( routeCallbacks[ cb ].session.userName );
+					}
+				}
+				return users;
+			}(),
 			allowPublish: argAllowPublish 
 		} );
-
 
 		_this.broadcast( 'client_connect', userID );
 	};
@@ -105,9 +113,9 @@ Callbacks.prototype.clientConnection = function( data ) {
 **/
 Callbacks.prototype.clientDisconnection = function( data ) {
 	if( this.session ) {
-		var sessionIndex = this.session.sessionIndex;
+		var sessionIndex = this.sessionRoute.callbacks.indexOf( this );
 		this.sessionRoute.callbacks.splice( sessionIndex, 1 );
-		this.broadcast( 'client_disconnect', this.session.user );
+		this.broadcast( 'client_disconnect', this.session.userName );
 	}
 };
 

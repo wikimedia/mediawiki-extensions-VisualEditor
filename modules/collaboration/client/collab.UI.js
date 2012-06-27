@@ -23,20 +23,42 @@ collab.UI.elementNodes = {
 };
 
 /**
- * Static markup holder; Helps to keep all the mess at one place
+ * Static markup holder to keep all the mess at one place
 **/
 collab.UI.markup = {
 	panel:
 		'<div id="collab-panel">' +
-			'<p><span>Your username</span></p>' +
-			'<p><input id="collab-username" type="text" class="collab-text-box" size="10"></input></p>'+
-			'<p><button id="collab-connect">Connect</button></p>' +
+			'<div id="collab-status">' +
+				'<p><span>Your username</span></p>' +
+				'<p><input id="collab-username" type="text" class="collab-text-box" size="10"></input></p>' +
+				'<p><button id="collab-connect">Connect</button></p>' +
+			'</div>' +
 			'<div id="collab-users-list"></div>' +
 		'</div>',
 	toolbarButtons:
 		'<div id="collab-buttons" class="es-toolbarGroup">' +
 			'<button id="collab-switch">Turn-on collaborative editing</button>' +
 		'</div>'
+};
+
+/**
+ * Bulk add users to the list; Used at the time of connection init
+**/
+collab.UI.prototype.populateUsersList = function( usersList ) {
+	for( u in usersList ) {
+		var userName = usersList[ u ];
+		$( '#collab-users-list' ).append( '<p id="collab-user-' + userName + 
+				'" class="collab-username">' + userName + '</p>' );
+	}
+};
+
+collab.UI.prototype.userConnect = function( userName ) {
+	$( '#collab-users-list' ).append( '<p id="collab-user-' + userName + 
+			'" class="collab-username">' + userName + '</p>' );
+};
+
+collab.UI.prototype.userDisconnect = function( userName ) {
+	$( '#collab-user-' + userName ).remove();
 };
 
 /**
@@ -73,13 +95,13 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 
 	$( '#collab-connect' ).click( function() {
 		var username = $( '#collab-username' ).val();
-		$( '#collab-panel' ).html( '<p>Connecting...</p>' );
+		$( '#collab-status' ).html( '<p>Connecting...</p>' );
 		_this.client.connect( username, function( res ) {
 			if( res.success ) {
-				$( '#collab-panel' ).html( '<p>Connected.</p>' );
+				$( '#collab-status' ).html( '<p>Connected.</p>' );
 			}
 			else {
-				$( '#collab-panel' ).html( '<p>' + res.message + '</p>' );
+				$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
 			}
 		});
 	});
