@@ -1,8 +1,9 @@
 /**
  * Constructs a client UI binding
+ *
  * @class
  * @constructor
- * @param {collab.Client} client
+ * @param {collab.Client} client Client adapter that the UI is to attached to
 **/
 collab.UI = function( client ) {
 	this.client = client;
@@ -10,6 +11,7 @@ collab.UI = function( client ) {
 	this.setupToolbar( $( elementNodes.toolbar) );
 	this.setupPanel( $( elementNodes.panel ) );
 	
+	// Enabled/Disabled state for UI elements
 	this.state = {
 		panel: false
 	};
@@ -20,6 +22,9 @@ collab.UI.elementNodes = {
 	panel: '#content'
 };
 
+/**
+ * Static markup holder; Helps to keep all the mess at one place
+**/
 collab.UI.markup = {
 	panel:
 		'<div id="collab-panel">' +
@@ -35,7 +40,7 @@ collab.UI.markup = {
 };
 
 /**
- * Append collab options to the VE toolbar
+ * Append collaboration options to the VE toolbar
 **/
 collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 	veToolbarNode.append( collab.UI.markup.toolbarButtons );
@@ -58,7 +63,7 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 };
 
 /**
- * Setup collab panel and attach it to the editor's div
+ * Setup collaboration panel and attach it to the editor's div
 **/
 collab.UI.prototype.setupPanel = function( veContainer ) {
 	var _this = this;

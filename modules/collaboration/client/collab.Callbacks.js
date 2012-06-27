@@ -1,7 +1,11 @@
 /**
  * This contains all the callbacks used for handling the client's Socket.IO events
+ *
+ * @class
+ * @constructor
+ * @param { collab.Client } client Client adapter that the Callbacks object is to be attached to
+ * @param { Socket } socket Socket.IO socket for network I/O
 **/
-
 collab.Callbacks = function( client, socket ) {
 	this.client = client;
 	this.socket = socket;
@@ -52,24 +56,25 @@ collab.Callbacks.prototype.userDisconnect = function( userID ) {
 **/
 collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	var surfaceModel = this.client.editor.getModel();
-	console.log( transactionData);	
-	var transactionObj = new ve.dm.Transaction();
 	var transaction = transactionData.transaction;
 	var args = transactionData.args;
+
+	// Create a new transaction model object
+	var transactionObj = new ve.dm.Transaction();
 	transactionObj.operations = transaction.operations;
 	transactionObj.lengthDifference = transaction.lengthDifference;
 	transactionObj.isBroadcasted = true;
-	console.log(transactionData.args);
 	if( args.publisherID != this.client.userID ) {
 		transactionObj.isBroadcasted = true;
+
 		var selection = surfaceModel.getSelection();
+		// Create a default selection if there is no selection
 		if( !selection ) {
 			selection = new ve.Range( 1, 1 );
-			//surfaceModel.setSelection( selection );
 		}
+
 		surfaceModel.change( transactionObj, selection );
 	}
-	//apply the transaction through the transaction processor
 };
 
 collab.Callbacks.prototype.docTransfer = function( docData ) {
@@ -93,9 +98,11 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 		.concat( newDocumentModel.documentNode.getChildren() )
 	);
 	surfaceModel.purgeHistory();
+
 	// Bind with surfaceModel's transact event
 	if( docData.allowPublish == true ) {
 		surfaceModel.on( 'transact', function( transaction ) {
+			// Send the transaction if it originates locally; Not received from the server
 			if( !transaction.isBroadcasted ) {
 				// Inject transaction arguments before sending transaction data
 				var transactionData = {
@@ -109,6 +116,7 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 			}
 		});
 	}
+
 	else {
 		// Disable editing entirely
 		var view = editor.view;

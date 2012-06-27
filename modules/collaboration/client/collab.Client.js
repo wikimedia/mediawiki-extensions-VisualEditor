@@ -1,5 +1,9 @@
 /**
- * Module for establishing/maintaining socket connection with server
+ * Client adapter for establishing/maintaining socket connection with server
+ *
+ * @class
+ * @constructor
+ * @param { ve.Surface } editorSurface Editor surface to hook the client adapter into
 **/
 
 collab.Client = function( editorSurface ) {
@@ -37,6 +41,12 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 	});
 };
 
+/**
+ * Single method to bind all I/O events with their callbacks
+ *
+ * @method
+ * @param { collab.Callbacks } callbacksObj Callbacks object for the session
+**/
 collab.Client.prototype.bindEvents = function( callbacksObj ) {
 	var io_socket = callbacksObj.socket;
 	io_socket.on( 'new_transaction', function( data ) {
