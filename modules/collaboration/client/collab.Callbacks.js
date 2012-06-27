@@ -52,7 +52,7 @@ collab.Callbacks.prototype.userDisconnect = function( userID ) {
 **/
 collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	var surfaceModel = this.client.editor.getModel();
-	
+	console.log( transactionData);	
 	var transactionObj = new ve.dm.Transaction();
 	var transaction = transactionData.transaction;
 	var args = transactionData.args;

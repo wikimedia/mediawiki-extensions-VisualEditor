@@ -43,36 +43,39 @@ ve = function () {
 
 
 	// dm
-	require('../../ve/dm/ve.dm.js');
-	require('../../ve/dm/ve.dm.NodeFactory.js');
-	require('../../ve/dm/ve.dm.Node.js');
-	require('../../ve/dm/ve.dm.AnnotationFactory.js');
-	require('../../ve/dm/ve.dm.Annotation.js');
-	require('../../ve/dm/ve.dm.BranchNode.js');
-	require('../../ve/dm/ve.dm.LeafNode.js');
-	require('../../ve/dm/ve.dm.TransactionProcessor.js');
-	require('../../ve/dm/ve.dm.Transaction.js');
-	require('../../ve/dm/ve.dm.Surface.js');
-	require('../../ve/dm/ve.dm.Document.js');
-	require('../../ve/dm/ve.dm.DocumentSynchronizer.js');
-	require('../../ve/dm/ve.dm.Converter.js');
+		require('../../ve/dm/ve.dm.js');
+		require('../../ve/dm/ve.dm.NodeFactory.js');
+		require('../../ve/dm/ve.dm.AnnotationFactory.js');
+		require('../../ve/dm/ve.dm.Node.js');
+		require('../../ve/dm/ve.dm.BranchNode.js');
+		require('../../ve/dm/ve.dm.LeafNode.js');
+		require('../../ve/dm/ve.dm.Annotation.js');
+		require('../../ve/dm/ve.dm.TransactionProcessor.js');
+		require('../../ve/dm/ve.dm.Transaction.js');
+		require('../../ve/dm/ve.dm.Surface.js');
+		require('../../ve/dm/ve.dm.Document.js');
+		require('../../ve/dm/ve.dm.DocumentSynchronizer.js');
+		require('../../ve/dm/ve.dm.Converter.js');
 
-	require('../../ve/dm/nodes/ve.dm.AlienInlineNode.js');
-	require('../../ve/dm/nodes/ve.dm.AlienBlockNode.js');
-	require('../../ve/dm/nodes/ve.dm.DefinitionListItemNode.js');
-	require('../../ve/dm/nodes/ve.dm.DefinitionListNode.js');
-	require('../../ve/dm/nodes/ve.dm.DocumentNode.js');
-	require('../../ve/dm/nodes/ve.dm.HeadingNode.js');
-	require('../../ve/dm/nodes/ve.dm.ImageNode.js');
-	require('../../ve/dm/nodes/ve.dm.ListItemNode.js');
-	require('../../ve/dm/nodes/ve.dm.ListNode.js');
-	require('../../ve/dm/nodes/ve.dm.ParagraphNode.js');
-	require('../../ve/dm/nodes/ve.dm.PreformattedNode.js');
-	require('../../ve/dm/nodes/ve.dm.TableCellNode.js');
-	require('../../ve/dm/nodes/ve.dm.TableNode.js');
-	require('../../ve/dm/nodes/ve.dm.TableRowNode.js');
-	require('../../ve/dm/nodes/ve.dm.TextNode.js');
+		require('../../ve/dm/nodes/ve.dm.AlienInlineNode.js');
+		require('../../ve/dm/nodes/ve.dm.AlienBlockNode.js');
+		require('../../ve/dm/nodes/ve.dm.DefinitionListItemNode.js');
+		require('../../ve/dm/nodes/ve.dm.DefinitionListNode.js');
+		require('../../ve/dm/nodes/ve.dm.DocumentNode.js');
+		require('../../ve/dm/nodes/ve.dm.HeadingNode.js');
+		require('../../ve/dm/nodes/ve.dm.ImageNode.js');
+		require('../../ve/dm/nodes/ve.dm.ListItemNode.js');
+		require('../../ve/dm/nodes/ve.dm.ListNode.js');
+		require('../../ve/dm/nodes/ve.dm.ParagraphNode.js');
+		require('../../ve/dm/nodes/ve.dm.PreformattedNode.js');
+		require('../../ve/dm/nodes/ve.dm.TableCellNode.js');
+		require('../../ve/dm/nodes/ve.dm.TableNode.js');
+		require('../../ve/dm/nodes/ve.dm.TableRowNode.js');
+		require('../../ve/dm/nodes/ve.dm.TableSectionNode.js');
+		require('../../ve/dm/nodes/ve.dm.TextNode.js');
 
+		require('../../ve/dm/annotations/ve.dm.LinkAnnotation.js');
+		require('../../ve/dm/annotations/ve.dm.TextStyleAnnotation.js');
 	return ve;
 };
 
