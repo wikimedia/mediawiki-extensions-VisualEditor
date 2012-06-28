@@ -16,7 +16,7 @@ var io = require( 'socket.io' ),
  * Accepts a port number to run on, 
 **/
 
-CollaborationServer = function () {
+CollaborationServer = function( port ) {
 	var io_service = io.listen( settings.port );
 
 	// Document-wise closures of callback instances
@@ -25,8 +25,8 @@ CollaborationServer = function () {
 
 	io_service.on( 'connection', function( socket ) {
 		socket.emit( 'connection', {} );
-		var socket_callbacks = new Callbacks( collab, socket );
-		collab.bindEvents( socket_callbacks );
+		var socket_callbacks = new Callbacks( _this, socket );
+		_this.bindEvents( socket_callbacks );
 	});
 };	
 
@@ -78,4 +78,9 @@ CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
 	return lookupRoute;
 }
 
-collab = new CollaborationServer();
+if( module.parent ) {
+	module.exports.CollaborationServer = CollaborationServer;
+}
+else {
+	collab = new CollaborationServer();
+}

@@ -1,7 +1,7 @@
 collab = {};
 collab.settings = {
 	host: 'http://localhost',
-	port: 8000,
+	port: 8001,
 };	
 
 if( typeof module == 'object' ) {

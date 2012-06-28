@@ -18,7 +18,7 @@
 /* Configuration */
 
 // URL to the parsoid instance
-$wgVisualEditorParsoidURL = 'http://parsoid.wmflabs.org/';
+$wgVisualEditorParsoidURL = 'http://localhost:8000/';
 
 /* Setup */
 
