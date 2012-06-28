@@ -3,7 +3,7 @@
  *
  * @class
  * @constructor
- * @param { ve.Surface } editorSurface Editor surface to hook the client adapter into
+ * @param {ve.Surface} editorSurface Editor surface to hook the client adapter into
 **/
 
 collab.Client = function( editorSurface ) {
@@ -15,9 +15,11 @@ collab.Client = function( editorSurface ) {
 	this.ui = new collab.UI( this );
 }
 
-collab.Client.prototype.connect = function( username, responseCallback ) {
+collab.Client.prototype.connect = function( userName, docTitle, responseCallback ) {
 	var _this = this;
 	var settings = collab.settings;
+	this.userName = userName;
+	this.docTitle = docTitle;
 	try {
 		var socket = io.connect( settings.host + ':' + settings.port );
 	}
@@ -35,8 +37,7 @@ collab.Client.prototype.connect = function( username, responseCallback ) {
 		// callbacks.authenticate( 'upstream' ); Deferred
 		_this.bindEvents( callbacks );
 		// TODO: User has to be handled using the MW auth
-		_this.userID = username;
-		socket.emit( 'client_connect', { user: username, title: 'Main_Page' } );
+		socket.emit( 'client_connect', { user: _this.userName, title: _this.docTitle } );
 		responseCallback( {
 			success: true,
 			message: 'Connected.'

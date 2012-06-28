@@ -10,7 +10,6 @@ collab.UI = function( client ) {
 	var elementNodes = collab.UI.elementNodes;
 	this.setupToolbar( $( elementNodes.toolbar) );
 	this.setupPanel( $( elementNodes.panel ) );
-	
 	// Enabled/Disabled state for UI elements
 	this.state = {
 		panel: false
@@ -29,9 +28,9 @@ collab.UI.markup = {
 	panel:
 		'<div id="collab-panel">' +
 			'<div id="collab-status">' +
-				'<p><span>Your username</span></p>' +
-				'<p><input id="collab-username" type="text" class="collab-text-box" size="10"></input></p>' +
-				'<p><button id="collab-connect">Connect</button></p>' +
+				//'<p><span>Your username</span></p>' +
+				//'<p><input id="collab-username" type="text" class="collab-text-box" size="10"></input></p>' +
+				//'<p><button id="collab-connect">Connect</button></p>' +
 			'</div>' +
 			'<div id="collab-users-list"></div>' +
 		'</div>',
@@ -73,6 +72,9 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 			$( '.es-base' ).addClass( 'es-base-collapsed' );
 			$( '#collab-panel' ).show('fast');
 			_this.state.panel = true;
+			var userName = mw.config.get( 'wgUserName' );
+			var pageName = mw.config.get( 'wgPageName' );
+			_this.connect( userName, pageName );
 		}
 		else {
 		// Some pretty-ness
@@ -94,15 +96,22 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 	$( '#collab-panel' ).hide();
 
 	$( '#collab-connect' ).click( function() {
-		var username = $( '#collab-username' ).val();
-		$( '#collab-status' ).html( '<p>Connecting...</p>' );
-		_this.client.connect( username, function( res ) {
-			if( res.success ) {
-				$( '#collab-status' ).html( '<p>Connected.</p>' );
-			}
-			else {
-				$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
-			}
-		});
+		var userName = $( '#collab-username' ).val();
+		var pageName = 'Main_Page';
+		_this.connect( userName, pageName );
+	});
+}
+
+collab.UI.prototype.connect = function( userName, pageName ) {
+	var _this = this;
+	console.log( _this.client );
+	$( '#collab-status' ).html( '<p>Connecting...</p>' );
+	_this.client.connect( userName, pageName, function( res ) {
+		if( res.success ) {
+			$( '#collab-status' ).html( '<p>Connected.</p>' );
+		}
+		else {
+			$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
+		}
 	});
 };

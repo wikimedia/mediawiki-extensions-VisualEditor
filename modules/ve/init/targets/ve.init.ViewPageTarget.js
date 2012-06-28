@@ -30,7 +30,7 @@ ve.init.ViewPageTarget = function() {
 	this.currentUri = new mw.Uri( window.location.toString() );
 	this.section = this.currentUri.query.vesection || null;
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
-	this.viewUri = new mw.Uri( mw.util.wikiGetlink( this.pageName ) );
+	this.viewUri = new mw.Uri( 'http://' + window.location.hostname + mw.util.wikiGetlink( this.pageName ) );
 	this.editUri = new mw.Uri( this.viewUri.toString() );
 	this.editUri.extend( { 'action': 'edit' } );
 	this.veEditUri = new mw.Uri( this.viewUri.toString() );
@@ -345,6 +345,7 @@ ve.init.ViewPageTarget.prototype.setUpSurface = function( dom ) {
 	this.hideSpinner();
 	this.disableToolbarSaveButton();
 	this.active = true;
+	window.cb = new collab.Client( this.surface );
 };
 
 /**
