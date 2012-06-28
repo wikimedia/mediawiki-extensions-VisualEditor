@@ -122,6 +122,20 @@ $wgResourceModules += array(
 			've/init/ve.init.Target.js',
 		),
 		'dependencies' => array(
+			'ext.visualEditor.base',
+			'ext.visualEditor.collaboration'
+		),
+	),
+	'ext.visualEditor.collaboration' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			// collab
+			'collaboration/client/socket.io.js',
+	 		'collaboration/settings.js',
+			'collaboration/client/collab.Client.js',
+			'collaboration/client/collab.Callbacks.js',
+			'collaboration/client/collab.UI.js'
+		),
+		'dependencies' => array(
 			'ext.visualEditor.base'
 		),
 	),
@@ -231,12 +245,6 @@ $wgResourceModules += array(
 			've/ui/tools/ve.ui.DropdownTool.js',
 			've/ui/tools/ve.ui.FormatDropdownTool.js',
 
-			// collab
-			'collaboration/client/socket.io.js',
-	 		'collaboration/settings.js',
-			'collaboration/client/collab.Client.js',
-			'collaboration/client/collab.Callbacks.js',
-			'collaboration/client/collab.UI.js'
 		),
 		'styles' => array(
 			// ce
