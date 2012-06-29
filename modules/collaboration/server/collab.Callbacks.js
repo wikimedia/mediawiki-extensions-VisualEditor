@@ -113,10 +113,17 @@ Callbacks.prototype.clientConnection = function( data ) {
 **/
 Callbacks.prototype.clientDisconnection = function( data ) {
 	if( this.session ) {
+		// revoke publisher if the session could publish
+		if( this.session.isPublisher ) {
+			this.session.Document.hasPublisher = false;
+		}
+
 		var sessionIndex = this.sessionRoute.callbacks.indexOf( this );
 		this.sessionRoute.callbacks.splice( sessionIndex, 1 );
 		this.broadcast( 'client_disconnect', this.session.userName );
+
 	}
+
 };
 
 /**

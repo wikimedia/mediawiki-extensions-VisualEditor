@@ -43,6 +43,29 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 	}
 };
 
+collab.Callbacks.prototype.loadDoc = function( data ) {
+	var surfaceModel = this.client.editor.getModel(),
+		documentModel = this.client.editor.getDocumentModel(),
+		documentNode = documentModel.documentNode;	
+	var newDocumentModel = new ve.dm.Document( data );
+	documentModel.data.splice( 0, documentModel.data.length );
+	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
+	surfaceModel.selection = new ve.Range( 1, 1 );
+	documentNode.splice.apply(
+		documentNode,
+		[0, documentNode.getChildren().length]
+		.concat( newDocumentModel.documentNode.getChildren() )
+	);
+	surfaceModel.purgeHistory();
+};
+
+collab.Callbacks.prototype.selfDisconnect = function() {
+	this.socket.disconnect();
+	this.loadDoc( this.preservedData );
+	var documentNode = this.client.editor.view.documentView.documentNode;
+	documentNode.$.attr( 'contenteditable', true );
+};
+
 /**
  * Callback method to be invoked when a new client initiates its session
 **/
@@ -91,24 +114,28 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 		editor = client.editor,
 		surfaceModel = editor.getModel(),
 		documentModel = editor.getDocumentModel(),
-		documentNode = documentModel.documentNode;
+		_this = this;
 	
-	// Load the document data recieved into the editor instance
+	this.isPublisher = Boolean(docData.allowPublish);
+
+	// Store the data for recovery before purging
+	this.preservedData = documentModel.getData();
+
+	// Convert HTML into data model and load it
 	var data = ve.dm.converter.getDataFromDom( html[0] );
-	var newDocumentModel = new ve.dm.Document( data );
-	documentModel.data.splice( 0, documentModel.data.length );
-	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
-	surfaceModel.selection = new ve.Range( 1, 1 );
-	documentNode.splice.apply(
-		documentNode,
-		[0, documentNode.getChildren().length]
-		.concat( newDocumentModel.documentNode.getChildren() )
-	);
-	surfaceModel.purgeHistory();
+	this.loadDoc( data );
 
 	// Bind with surfaceModel's transact event
 	if( docData.allowPublish == true ) {
 		surfaceModel.on( 'transact', function( transaction ) {
+			// Don't proceed if the client is not connected
+			// Also, exit if the session cannot publish(in case,
+			// the session could publish earlier when the event listener was issued,
+			// and after reconnection it cannot).
+			if( !_this.client.isConnected || !_this.isPublisher ) {
+				return;
+			}
+
 			// Send the transaction if it originates locally; Not received from the server
 			if( !transaction.isBroadcasted ) {
 				// Inject transaction arguments before sending transaction data

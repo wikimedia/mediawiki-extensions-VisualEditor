@@ -21,7 +21,25 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 	this.userName = userName;
 	this.docTitle = docTitle;
 	try {
-		var socket = io.connect( settings.host + ':' + settings.port );
+		if( !this.socket ) {
+			var socket = io.connect( settings.host + ':' + settings.port );
+			this.socket = socket;
+			var callbacks = new collab.Callbacks( _this, socket );
+			_this.callbacks = callbacks;
+			_this.bindEvents( callbacks );
+			socket.on( 'connection', function() {
+				// callbacks.authenticate( 'upstream' ); Deferred
+				// TODO: User has to be handled using the MW auth
+				socket.emit( 'client_connect', { user: _this.userName, title: _this.docTitle } );
+				responseCallback( {
+					success: true,
+					message: 'Connected.'
+				} );
+			});
+		}
+		else {
+			this.socket.socket.connect( settings.host + ':' + settings.port );
+		}
 	}
 	catch( e ) {
 		console.log(e);
@@ -31,25 +49,17 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 		} );
 		return
 	}
+};
 
-	socket.on( 'connection', function() {
-		var callbacks = new collab.Callbacks( _this, socket );
-		// callbacks.authenticate( 'upstream' ); Deferred
-		_this.bindEvents( callbacks );
-		// TODO: User has to be handled using the MW auth
-		socket.emit( 'client_connect', { user: _this.userName, title: _this.docTitle } );
-		responseCallback( {
-			success: true,
-			message: 'Connected.'
-		} );
-	});
+collab.Client.prototype.disconnect = function() {
+	this.callbacks.selfDisconnect();
 };
 
 /**
  * Single method to bind all I/O events with their callbacks
  *
  * @method
- * @param { collab.Callbacks } callbacksObj Callbacks object for the session
+ * @param {collab.Callbacks} callbacksObj Callbacks object for the session
 **/
 collab.Client.prototype.bindEvents = function( callbacksObj ) {
 	var io_socket = callbacksObj.socket;

@@ -17,7 +17,7 @@ collab.UI = function( client ) {
 };
 
 collab.UI.elementNodes = {
-	toolbar: '.es-toolbar',
+	toolbar: '.es-toolbarGroups',
 	panel: '#content'
 };
 
@@ -36,7 +36,7 @@ collab.UI.markup = {
 		'</div>',
 	toolbarButtons:
 		'<div id="collab-buttons" class="es-toolbarGroup">' +
-			'<button id="collab-switch">Turn-on collaborative editing</button>' +
+			'<button id="collab-switch" class="collab-button">Turn-on collaborative editing</button>' +
 		'</div>'
 };
 
@@ -52,6 +52,7 @@ collab.UI.prototype.populateUsersList = function( usersList ) {
 };
 
 collab.UI.prototype.userConnect = function( userName ) {
+	console.log('here');
 	$( '#collab-users-list' ).append( '<p id="collab-user-' + userName + 
 			'" class="collab-username">' + userName + '</p>' );
 };
@@ -75,6 +76,7 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 			var userName = mw.config.get( 'wgUserName' );
 			var pageName = mw.config.get( 'wgPageName' );
 			_this.connect( userName, pageName );
+			this.innerHTML = 'Turn-off collaborative editing';
 		}
 		else {
 		// Some pretty-ness
@@ -82,6 +84,8 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 				$( '.es-base' ).removeClass( 'es-base-collapsed' );
 				_this.state.panel = false;
 			});
+			_this.disconnect();
+			this.innerHTML = 'Turn-on collaborative editing';
 		}
 	});
 };
@@ -114,4 +118,10 @@ collab.UI.prototype.connect = function( userName, pageName ) {
 			$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
 		}
 	});
+};
+
+collab.UI.prototype.disconnect = function() {
+	$( '#collab-status' ).html('');
+	$( '#collab-users-list' ).html('');
+ 	this.client.disconnect();
 };

@@ -24,3 +24,14 @@
 	padding: 0.25em;
 	font-size: 0.8em;
 }
+
+.collab-button {
+	font-size: 10pt;
+	padding: 5px;
+	border: solid 1px #fff;
+	background-color: #fff;
+	font-weight: bold;
+}
+.collab-button:hover {
+	border: solid 1px #ddd;
+}
