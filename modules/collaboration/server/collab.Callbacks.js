@@ -89,8 +89,8 @@ Callbacks.prototype.clientConnection = function( data ) {
 	}
 
 	if( sessionRoute == null ) {
-		// Parse the page by its title using the parser
-		parse( docTitle, function( html ) {
+		// Parse the page by its title using the external parsoid service
+		parse( true, docTitle, function( html ) {
 			/** 
 			 * Proceed with creating a new route with a new document,
 			 * if no existing document route was found.

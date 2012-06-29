@@ -32,7 +32,6 @@ Document.generateID = function( title ) {
 Document.prototype.getHTML = function() {
 //	var data = this.dmSurface.getDocument().getData();
 	var data = this.dmDoc.getData();
-	console.log( data );
 	var dom = ve.dm.converter.getDomFromData( data );
 	var html = $( dom ).html();
 	return html;
@@ -62,7 +61,6 @@ Document.prototype.applyTransaction = function( session, transactionData ) {
 	transactionObj.lengthDifference = transaction.lengthDifference;
 	var start = transactionObj.operations[ 0 ].length;
 	var end = start + Math.abs( transactionObj.lengthDifference );
-	console.log(this.dmDoc.data);
 	this.dmDoc.commit( transactionObj );
 	//this.dmSurface.change( transactionObj, new ve.Range( start, end ) );
 	// TODO: document state hash should also be pushed into the history

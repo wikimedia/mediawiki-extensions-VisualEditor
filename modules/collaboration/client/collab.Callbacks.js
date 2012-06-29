@@ -61,6 +61,7 @@ collab.Callbacks.prototype.userDisconnect = function( userName ) {
  * Callback method to be invoked when a new transaction arrives at the client
 **/
 collab.Callbacks.prototype.newTransaction = function( transactionData ) {
+	console.log('here');
 	var surfaceModel = this.client.editor.getModel();
 	var transaction = transactionData.transaction;
 	var args = transactionData.args;
@@ -70,7 +71,7 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	transactionObj.operations = transaction.operations;
 	transactionObj.lengthDifference = transaction.lengthDifference;
 	transactionObj.isBroadcasted = true;
-	if( args.publisherID != this.client.userID ) {
+	if( args.publisherID != this.client.userName ) {
 		transactionObj.isBroadcasted = true;
 
 		var selection = surfaceModel.getSelection();
@@ -113,7 +114,7 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 				// Inject transaction arguments before sending transaction data
 				var transactionData = {
 					args: {
-						publisherID: client.userID
+						publisherID: client.userName
 					},
 					transaction: transaction
 				};
