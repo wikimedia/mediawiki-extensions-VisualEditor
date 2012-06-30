@@ -49,8 +49,11 @@ Callbacks.prototype.clientConnection = function( data ) {
 		var routeCallbacks = sessionRoute.callbacks;
 		// Bind some session events here
 		_this.session.on( 'allowPublish', function( e ) {
-			sessionRoute.document.hasPublisher = false;
-			if( !e ) {
+			if( e ) {
+				sessionRoute.document.hasPublisher = true;
+			}			
+			else {
+				sessionRoute.document.hasPublisher = false;
 				for( cb in routeCallbacks ) {
 					var callback = routeCallbacks[ cb ];
 					if( callback.session.isPublisher == true ) {
@@ -67,22 +70,32 @@ Callbacks.prototype.clientConnection = function( data ) {
 				var users = [];
 				for( cb in routeCallbacks ) {
 					if( routeCallbacks[ cb ] != _this ) {
-						users.push( routeCallbacks[ cb ].session.userName );
+						var session = routeCallbacks[ cb ].session;
+						users.push( {
+							userName: session.userName,
+							isPublisher: session.isPublisher
+						} );
 					}
 				}
 				return users;
 			}(),
 			allowPublish: argAllowPublish 
 		} );
-
-		_this.broadcast( 'client_connect', userID );
+		console.log( sessionRoute.callbacks );
+		_this.broadcast( 'client_connect', { userName: userID, isPublisher: argAllowPublish } );
 	};
 
 	var sessionRoute = this.server.lookupRoutes( docTitle );
 	if( sessionRoute ) {
 		var sessionDoc = sessionRoute.document;
 		sessionRoute.callbacks.push( this );
-		var argAllowPublish = false;
+		console.log(sessionDoc );
+		if( sessionDoc.hasPublisher ) {
+			argAllowPublish = false;
+		}
+		else {
+			argAllowPublish = true;
+		}
 		docHTML = sessionDoc.getHTML();
 		console.log(docHTML);
 		postDocInit();

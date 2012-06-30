@@ -2,7 +2,6 @@
 	border: solid 1px #CCC;
 	float: right;
 	width: 20%;
-	margin-right: 2em;
 	-webkit-box-shadow: 0 0.25em 1.5em 0 #dddddd;
 	-moz-box-shadow: 0 0.25em 1.5em 0 #dddddd;
 	box-shadow: 0 0.25em 1.5em 0 #dddddd;
@@ -10,7 +9,6 @@
 	-moz-border-radius: 0.5em;
 	-o-border-radius: 0.5em;
 	border-radius: 0.5em;
-	text-align: center;
 }
 
 .es-base-collapsed {
@@ -34,4 +32,16 @@
 }
 .collab-button:hover {
 	border: solid 1px #ddd;
+}
+
+#collab-status {
+	text-align: center;
+}
+
+.collab-username {
+	margin: 5px;
+}
+
+.collab-publisher {
+	color: #6a6;
 }

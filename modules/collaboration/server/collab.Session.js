@@ -35,7 +35,7 @@ Session.generateID = function( params ) {
 **/
 Session.prototype.allowPublish = function( key ) {
 	// key is either true for having atleast one publisher or false for no publisher
-	this.isPublisher = true;
+	this.isPublisher = key;
 	this.Document.hasPublisher = key;
 	this.emit( 'allowPublish', key );
 };

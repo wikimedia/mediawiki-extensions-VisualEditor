@@ -43,17 +43,21 @@ collab.UI.markup = {
 /**
  * Bulk add users to the list; Used at the time of connection init
 **/
-collab.UI.prototype.populateUsersList = function( usersList ) {
-	for( u in usersList ) {
-		var userName = usersList[ u ];
-		$( '#collab-users-list' ).append( '<p id="collab-user-' + userName + 
-				'" class="collab-username">' + userName + '</p>' );
+collab.UI.prototype.populateUsersList = function( users ) {
+	for( u in users ) {
+		var userData = users[ u ];
+		this.userConnect( userData );
 	}
 };
 
-collab.UI.prototype.userConnect = function( userName ) {
-	$( '#collab-users-list' ).append( '<p id="collab-user-' + userName + 
+collab.UI.prototype.userConnect = function( userData ) {
+	var userName = userData.userName;
+	var element =	$( '<p id="collab-user-' + userName + 
 			'" class="collab-username">' + userName + '</p>' );
+	if( userData.isPublisher === true ) {
+		element.addClass( 'collab-publisher' );
+	}
+	$( '#collab-users-list' ).append( element );
 };
 
 collab.UI.prototype.userDisconnect = function( userName ) {
@@ -107,7 +111,6 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 
 collab.UI.prototype.connect = function( userName, pageName ) {
 	var _this = this;
-	console.log( _this.client );
 	$( '#collab-status' ).html( '<p>Connecting...</p>' );
 	_this.client.connect( userName, pageName, function( res ) {
 		if( res.success ) {
