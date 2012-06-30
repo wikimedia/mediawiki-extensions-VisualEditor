@@ -113,15 +113,22 @@ Callbacks.prototype.clientConnection = function( data ) {
 **/
 Callbacks.prototype.clientDisconnection = function( data ) {
 	if( this.session ) {
-		// revoke publisher if the session could publish
+		// Revoke publisher if the session could publish
 		if( this.session.isPublisher ) {
 			this.session.Document.hasPublisher = false;
 		}
 
 		var sessionIndex = this.sessionRoute.callbacks.indexOf( this );
 		this.sessionRoute.callbacks.splice( sessionIndex, 1 );
-		this.broadcast( 'client_disconnect', this.session.userName );
 
+		// Remove the document route if no session is linked to it.
+		if( this.sessionRoute.callbacks.length === 0 ) {
+			var docRoutes = this.server.docRoutes;
+			var routeIndex = docRoutes.indexOf( this.sessionRoute );
+			docRoutes.splice( routeIndex, 1 );
+		}
+
+		this.broadcast( 'client_disconnect', this.session.userName );
 	}
 
 };

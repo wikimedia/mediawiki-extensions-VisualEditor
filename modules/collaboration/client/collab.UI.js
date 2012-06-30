@@ -52,7 +52,6 @@ collab.UI.prototype.populateUsersList = function( usersList ) {
 };
 
 collab.UI.prototype.userConnect = function( userName ) {
-	console.log('here');
 	$( '#collab-users-list' ).append( '<p id="collab-user-' + userName + 
 			'" class="collab-username">' + userName + '</p>' );
 };

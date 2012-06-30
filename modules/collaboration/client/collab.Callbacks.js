@@ -43,10 +43,17 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 	}
 };
 
+/**
+ * Load data model into VE surface
+ *
+ * @method
+ * @param {Object} data Data model to be loaded into the surface
+**/
 collab.Callbacks.prototype.loadDoc = function( data ) {
 	var surfaceModel = this.client.editor.getModel(),
 		documentModel = this.client.editor.getDocumentModel(),
-		documentNode = documentModel.documentNode;	
+		documentNode = documentModel.documentNode;
+	
 	var newDocumentModel = new ve.dm.Document( data );
 	documentModel.data.splice( 0, documentModel.data.length );
 	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
@@ -84,7 +91,6 @@ collab.Callbacks.prototype.userDisconnect = function( userName ) {
  * Callback method to be invoked when a new transaction arrives at the client
 **/
 collab.Callbacks.prototype.newTransaction = function( transactionData ) {
-	console.log('here');
 	var surfaceModel = this.client.editor.getModel();
 	var transaction = transactionData.transaction;
 	var args = transactionData.args;
@@ -108,6 +114,7 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 };
 
 collab.Callbacks.prototype.docTransfer = function( docData ) {
+	console.log('here');
 	var html = $('<div>' + docData.html + '</div>' );
 	var socket = this.socket,
 		client = this.client,
@@ -116,7 +123,7 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 		documentModel = editor.getDocumentModel(),
 		_this = this;
 	
-	this.isPublisher = Boolean(docData.allowPublish);
+	this.isPublisher = docData.allowPublish;
 
 	// Store the data for recovery before purging
 	this.preservedData = documentModel.getData();
@@ -145,7 +152,6 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 					},
 					transaction: transaction
 				};
-				console.log(transactionData);
 				socket.emit( 'new_transaction', transactionData );
 			}
 		});

@@ -30,6 +30,7 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 			socket.on( 'connection', function() {
 				// callbacks.authenticate( 'upstream' ); Deferred
 				// TODO: User has to be handled using the MW auth
+				_this.isConnected = true;
 				socket.emit( 'client_connect', { user: _this.userName, title: _this.docTitle } );
 				responseCallback( {
 					success: true,
@@ -53,6 +54,7 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 
 collab.Client.prototype.disconnect = function() {
 	this.callbacks.selfDisconnect();
+	this.isConnected = false;
 };
 
 /**
