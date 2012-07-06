@@ -111,15 +111,20 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 
 collab.UI.prototype.connect = function( userName, pageName ) {
 	var _this = this;
-	$( '#collab-status' ).html( '<p>Connecting...</p>' );
-	_this.client.connect( userName, pageName, function( res ) {
-		if( res.success ) {
-			$( '#collab-status' ).html( '<p>Connected.</p>' );
-		}
-		else {
-			$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
-		}
-	});
+	if( userName ) {
+		$( '#collab-status' ).html( '<p>Connecting...</p>' );
+		_this.client.connect( userName, pageName, function( res ) {
+			if( res.success ) {
+				$( '#collab-status' ).html( '<p>Connected.</p>' );
+			}
+			else {
+				$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
+			}
+		});
+	}
+	else {
+		$( '#collab-status' ).html( 'Please login before you can collaborate.' );
+	}
 };
 
 collab.UI.prototype.disconnect = function() {
