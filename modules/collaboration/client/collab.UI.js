@@ -82,11 +82,6 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 			this.innerHTML = 'Turn-off collaborative editing';
 		}
 		else {
-		// Some pretty-ness
-			$( '#collab-panel' ).hide('fast', function() {			
-				$( '.es-base' ).removeClass( 'es-base-collapsed' );
-				_this.state.panel = false;
-			});
 			_this.disconnect();
 			this.innerHTML = 'Turn-on collaborative editing';
 		}
@@ -128,7 +123,13 @@ collab.UI.prototype.connect = function( userName, pageName ) {
 };
 
 collab.UI.prototype.disconnect = function() {
+	var _this = this; 
+	// Some pretty-ness
+	$( '#collab-panel' ).hide('fast', function() {
+		$( '.es-base' ).removeClass( 'es-base-collapsed' );
+		_this.state.panel = false;
+	});
 	$( '#collab-status' ).html('');
 	$( '#collab-users-list' ).html('');
- 	this.client.disconnect();
+	this.client.disconnect();
 };

@@ -345,6 +345,7 @@ ve.init.ViewPageTarget.prototype.setUpSurface = function( dom ) {
 	this.hideSpinner();
 	this.disableToolbarSaveButton();
 	this.active = true;
+	// Create collaboration client instance
 	window.cb = new collab.Client( this.surface );
 };
 
@@ -371,6 +372,9 @@ ve.init.ViewPageTarget.prototype.tearDownSurface = function() {
 	// Destroy editor
 	this.surface = null;
 	this.active = false;
+	// turn-off collaboration
+	window.cb.client.disconnect();
+
 };
 
 /**
