@@ -13,15 +13,16 @@ var io = require( 'socket.io' ),
 /**
  * CollaborationServer binds all the functionality of the server and
  * can be imported as a module.
- * Accepts a port number to run on, 
 **/
 
-CollaborationServer = function( port ) {
-	var io_service = io.listen( settings.port );
-
+CollaborationServer = function() {
 	// Document-wise closures of callback instances
 	this.docRoutes = [];
+};	
+
+CollaborationServer.prototype.listen = function() {
 	var _this = this;
+	var io_service = io.listen( settings.port );
 
 	io_service.on( 'connection', function( socket ) {
 		console.log('here');
@@ -29,7 +30,7 @@ CollaborationServer = function( port ) {
 		var socket_callbacks = new Callbacks( _this, socket );
 		_this.bindEvents( socket_callbacks );
 	});
-};	
+};
 
 /**
  * Binds all socket events to the corresponding callback functions
@@ -69,6 +70,7 @@ CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
 	var lookupRoute = null;
 	var docRoutes = this.docRoutes;
+
 	for( route in docRoutes ) {
 		var docID = docRoutes[ route ].document.getID();
 		if( docID == Document.generateID( docTitle ) ) {
@@ -76,12 +78,14 @@ CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
 			break;
 		}
 	}
+
 	return lookupRoute;
-}
+};
 
 if( module.parent ) {
 	module.exports.CollaborationServer = CollaborationServer;
 }
 else {
-	collab = new CollaborationServer();
+	var collab = new CollaborationServer();
+	collab.listen();
 }

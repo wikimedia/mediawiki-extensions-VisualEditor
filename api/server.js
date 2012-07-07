@@ -14,6 +14,7 @@ var numCPUs = require('os').cpus().length + 3;
 
 if (cluster.isMaster) {
 	var collab = new CollaborationServer();
+	collab.listen();
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
     cluster.fork();
