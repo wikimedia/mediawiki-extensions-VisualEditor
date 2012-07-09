@@ -25,7 +25,6 @@ CollaborationServer.prototype.listen = function() {
 	var io_service = io.listen( settings.port );
 
 	io_service.on( 'connection', function( socket ) {
-		console.log('here');
 		var socket_callbacks = new Callbacks( _this, socket );
 		_this.bindEvents( socket_callbacks );
 		socket.emit( 'connection', {} );

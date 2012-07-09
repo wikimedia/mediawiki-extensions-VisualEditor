@@ -31,8 +31,6 @@ Callbacks.prototype.authenticate = function( authData ) {
  * Callback method to be invoked when a new client initiates its session
 **/
 Callbacks.prototype.clientConnection = function( data ) {
-	console.log('new connection');
-	console.log(data);
 	var userID = data.user,
 		docTitle = data.title,
 		docRoutes = this.server.docRoutes,
@@ -81,7 +79,6 @@ Callbacks.prototype.clientConnection = function( data ) {
 			}(),
 			allowPublish: argAllowPublish 
 		} );
-		console.log( sessionRoute.callbacks );
 		_this.broadcast( 'client_connect', { userName: userID, isPublisher: argAllowPublish } );
 	};
 
@@ -89,7 +86,6 @@ Callbacks.prototype.clientConnection = function( data ) {
 	if( sessionRoute ) {
 		var sessionDoc = sessionRoute.document;
 		sessionRoute.callbacks.push( this );
-		console.log(sessionDoc );
 		if( sessionDoc.hasPublisher ) {
 			argAllowPublish = false;
 		}
@@ -97,7 +93,6 @@ Callbacks.prototype.clientConnection = function( data ) {
 			argAllowPublish = true;
 		}
 		docHTML = sessionDoc.getHTML();
-		console.log(docHTML);
 		postDocInit();
 	}
 
