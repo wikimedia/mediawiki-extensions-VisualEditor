@@ -51,13 +51,13 @@ exports['events'] = {
 			test.done();
 		});
 	},
-
+	
 	'client_connect(two clients)': function( test ) {
 		var client = io.connect( settings.host + ':' + settings.port, options );
-		client.on( 'connection', function() {
+		client.on( 'connection', function( data ) {
 			this.emit( 'client_connect', { user: 'testUser', title: 'testPage' } );
-			var second_client = io.connect( settings.host + ':' + settings.port, options );
-			second_client.on( 'connection', function() {
+			var secondClient = io.connect( settings.host + ':' + settings.port, options );
+			secondClient.on( 'connection', function( data ) {
 				client.on( 'client_connect', function( data ) {
 					test.ok( data.userName === 'testUser2',
 						'Expected username -> testUser2' +
@@ -71,17 +71,43 @@ exports['events'] = {
 				this.emit( 'client_connect', { user: 'testUser2', title: 'testPage' } );
 			});
 				
-			second_client.on( 'document_transfer', function( data ) {
-				console.log(data);
+			secondClient.on( 'document_transfer', function( data ) {
 				test.ok( data.users[0].userName === 'testUser', 'Unexpected users list.' );
 				test.ok( data.users[0].isPublisher === true, 'Unexpected publishing right.' );
 			});
-			second_client.on( 'client_connect', function() {
+			secondClient.on( 'client_connect', function( data ) {
+				client.disconnect();
+				secondClient.disconnect();
 				test.done();
 			});
 		});
-		client.on( 'client_connect', function() {
+		client.on( 'client_connect', function( data ) {
 			// Do nothing now
+		});
+	},
+
+	'new_transaction': function( test ) {
+		var client = io.connect( settings.host + ':' + settings.port, options );
+
+		client.on( 'document_transfer', function() {
+			var dummyTransaction = {
+				lengthDifference: 1,
+				operations: [
+					{ type: 'retain', length: 5 },
+					{ type: 'replace', insert: ['p'], remove: ['P'] },
+					{ type: 'retain', length: 9 }
+				]
+			};
+			client.emit( 'new_transaction', { transaction: dummyTransaction } );
+		});
+		client.on( 'new_transaction', function() {
+			var html = server.docRoutes[0].document.getHTML();
+			test.ok( html === '<p>testpage</p>', 'unexpected document' );
+			test.done();
+		});
+
+		client.on( 'connection', function() {
+			client.emit( 'client_connect', { user: 'testUser', title: 'testPage' } );
 		});
 	},
 };
