@@ -162,7 +162,7 @@ Callbacks.prototype.clientDisconnection = function( data ) {
  * Callback method to be invoked when a new transaction arrives at the server
  *
  * @method
- * @param{Object} transactionData Event data received from the server. 
+ * @param{Object} transactionData Event data received from the client. 
 **/
 Callbacks.prototype.newTransaction = function( transactionData ) {
 	var doc = this.session.Document;

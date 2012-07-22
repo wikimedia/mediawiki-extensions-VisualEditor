@@ -66,6 +66,11 @@ collab.Callbacks.prototype.loadDoc = function( data ) {
 	surfaceModel.purgeHistory();
 };
 
+/**
+ * Initiate disconnection from the collaboration server.
+ *
+ * @method
+**/
 collab.Callbacks.prototype.selfDisconnect = function() {
 	this.socket.disconnect();
 	this.loadDoc( this.preservedData );
@@ -89,6 +94,9 @@ collab.Callbacks.prototype.userDisconnect = function( userName ) {
 
 /**
  * Callback method to be invoked when a new transaction arrives at the client
+ *
+ * @method
+ * @param{Object} transactionData Transaction data received from the server.
 **/
 collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	var surfaceModel = this.client.editor.getModel();
@@ -113,6 +121,12 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	}
 };
 
+/**
+ * Prepare the editor's layer for collaboration.
+ *
+ * @method
+ * @param{Object} docData Document related data received from the server.
+**/
 collab.Callbacks.prototype.docTransfer = function( docData ) {
 	console.log('here');
 	var html = $('<div>' + docData.html + '</div>' );

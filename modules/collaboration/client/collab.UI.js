@@ -42,6 +42,9 @@ collab.UI.markup = {
 
 /**
  * Bulk add users to the list; Used at the time of connection init
+ *
+ * @method
+ * @param{Array} users Array of user objects to add to the users list.
 **/
 collab.UI.prototype.populateUsersList = function( users ) {
 	for( u in users ) {
@@ -50,6 +53,12 @@ collab.UI.prototype.populateUsersList = function( users ) {
 	}
 };
 
+/**
+ * Method invoked when a new user connects to the editing session.
+ *
+ * @method
+ * @param{Object} userData User object for the connecting user.
+**/
 collab.UI.prototype.userConnect = function( userData ) {
 	var userName = userData.userName;
 	var element =	$( '<p id="collab-user-' + userName + 
@@ -66,6 +75,9 @@ collab.UI.prototype.userDisconnect = function( userName ) {
 
 /**
  * Append collaboration options to the VE toolbar
+ *
+ * @method
+ * @param{String} veToolbarNode Identifier of the toolbar's HTML element.
 **/
 collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 	veToolbarNode.append( collab.UI.markup.toolbarButtons );
@@ -90,6 +102,9 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 
 /**
  * Setup collaboration panel and attach it to the editor's div
+ *
+ * @method
+ * @param{String} veContainer Identifier of the VE container's HTML element.
 **/
 collab.UI.prototype.setupPanel = function( veContainer ) {
 	var _this = this;
@@ -104,6 +119,13 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 	});
 }
 
+/**
+ * Initiate connection with the collaboration server from the UI layer.
+ *
+ * @method
+ * @param{String} userName User name to connect as.
+ * @param{String} pageName Title of the page to use for editing.
+**/
 collab.UI.prototype.connect = function( userName, pageName ) {
 	var _this = this;
 	if( userName ) {
@@ -122,6 +144,9 @@ collab.UI.prototype.connect = function( userName, pageName ) {
 	}
 };
 
+/**
+ * Initiate disonnection from the UI layer.
+**/
 collab.UI.prototype.disconnect = function() {
 	var _this = this; 
 	// Some pretty-ness

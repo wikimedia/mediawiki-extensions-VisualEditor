@@ -64,7 +64,7 @@ Document.prototype.purgeDocument = function() {
  *
  * @method
  * @param{collab.Session} session Reference to the session which contains this document.
- * @param{Object} transactionData Transaction data recieved from the server.
+ * @param{Object} transactionData Transaction data recieved from the client.
 **/
 Document.prototype.applyTransaction = function( session, transactionData ) {
 	// Abort if the session cannot publish
