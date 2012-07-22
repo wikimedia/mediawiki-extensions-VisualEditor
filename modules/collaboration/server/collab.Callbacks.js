@@ -13,6 +13,14 @@ Callbacks = function( server, socket ) {
 	this.socket = socket;
 };
 
+/**
+ * Broadcastes an event to all the connected clients.
+ * Iterates over all the callback instances of the routeCallbacks, and emits the event for each.
+ *
+ * @method
+ * @param{String} event Event name to broadcast.
+ * @param{Object} args Associated data to send.
+**/
 Callbacks.prototype.broadcast = function( event, args ) {
 	var routeCallbacks = this.sessionRoute.callbacks;
 	for( cb in routeCallbacks ) {
@@ -28,7 +36,13 @@ Callbacks.prototype.authenticate = function( authData ) {
 };
 
 /**
- * Callback method to be invoked when a new client initiates its session
+ * Callback method to be invoked when a new client initiates its session.
+ * A new Session instance is created, and is associated with a docRoute if
+ * the document requested is already being edited. If the requested document
+ * is not being edited then the document is parsed and new docRoute is created.
+ *
+ * @method
+ * @param{Object} data Event data received from the server.
 **/
 Callbacks.prototype.clientConnection = function( data ) {
 	var userID = data.user,
@@ -118,6 +132,9 @@ Callbacks.prototype.clientConnection = function( data ) {
 
 /**
  * Callback method to be invoked when a client closes its session
+ *
+ * @method
+ * @param{Object} data Event data received from the server.
 **/
 Callbacks.prototype.clientDisconnection = function( data ) {
 	if( this.session ) {
@@ -143,6 +160,9 @@ Callbacks.prototype.clientDisconnection = function( data ) {
 
 /**
  * Callback method to be invoked when a new transaction arrives at the server
+ *
+ * @method
+ * @param{Object} transactionData Event data received from the server. 
 **/
 Callbacks.prototype.newTransaction = function( transactionData ) {
 	var doc = this.session.Document;

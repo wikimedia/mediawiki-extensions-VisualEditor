@@ -1,8 +1,8 @@
 /**
- * This is the collaboration server for VisualEditor
+ * This is the collaboration server for VisualEditor.
  * 
- * Uses Socket.IO to establish connections with clients
- * This module implements all the Socket.IO events and calls the respective callback functions
+ * Uses Socket.IO to establish connections with clients.
+ * This module implements all the Socket.IO events and calls the respective callback functions.
 **/
 
 var io = require( 'socket.io' ),
@@ -11,14 +11,23 @@ var io = require( 'socket.io' ),
 	settings = require( '../settings.js' ).settings;
 
 /**
- * CollaborationServer binds all the functionality of the server and
+ * CollaborationServer binds all the functionality of the server and,
  * can be imported as a module.
+ *
+ * @class
+ * @constructor
 **/
 
 CollaborationServer = function() {
 	// Document-wise closures of callback instances
 	this.docRoutes = [];
 };	
+
+/**
+ * Start listening.
+ *
+ * @method
+**/
 
 CollaborationServer.prototype.listen = function() {
 	var _this = this;
@@ -33,6 +42,9 @@ CollaborationServer.prototype.listen = function() {
 
 /**
  * Binds all socket events to the corresponding callback functions
+ *
+ * @method
+ * @param{collab.Callbacks} callbacksObj Callbacks instance to bind the events with.
 **/
 CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 	// Socket events are registered here
@@ -64,7 +76,10 @@ CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 };
 
 /**
- * Lookup a route with matching docTitle in the docRoutes
+ * Lookup a route with matching docTitle in the docRoutes.
+ *
+ * @method
+ * @param{String} docTitle The title of the document to lookup.
 **/
 CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
 	var lookupRoute = null;
@@ -81,6 +96,7 @@ CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
 	return lookupRoute;
 };
 
+// Run the collaboration server if the module is not imported.
 if( module.parent ) {
 	module.exports.CollaborationServer = CollaborationServer;
 }

@@ -1,5 +1,5 @@
 /**
- * This module creates a parsoid interface for use in the collaboration server
+ * This module creates a basic parsoid interface for use in the collaboration server
 **/
 var mp = '../../parser/';
 
@@ -11,7 +11,12 @@ var request = require( 'request' );
 var parsoidServiceURL = 'http://localhost:8000/';
 
 /**
- * useService = true for Fetch HTML from external parsoid service/ false to parse it internally
+ * Parse and fetch HTML of the required page.
+ *
+ * @method
+ * @param{Boolean} useService True to use external parsoid service, False to parse internally.
+ * @param{String} title Name of the page to parse.
+ * @param{Function} callback Method to call when parsing is done.
 **/
 parse = function( useService, title, callback ) {
 	if( !useService ) {

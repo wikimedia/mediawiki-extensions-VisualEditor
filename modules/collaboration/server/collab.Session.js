@@ -6,7 +6,13 @@
 
 var ve = require( './collab.ve.js' ).ve;
 
-Session = function( document, userName, sessionIndex ) {
+/**
+ * @class
+ * @constructor
+ * @param{collab.Document} document Reference to the document to associate with.
+ * @param{String} userName User name who initiates this session.
+**/
+Session = function( document, userName ) {
 	ve.EventEmitter.call( this );
 
 	this.Document = document;
@@ -32,6 +38,9 @@ Session.generateID = function( params ) {
 
 /**
  * Set publishing rights for the current user/session
+ *
+ * @method
+ * @param{Boolean} key True/False for invoking/revoking publishing right on the session.
 **/
 Session.prototype.allowPublish = function( key ) {
 	// key is either true for having atleast one publisher or false for no publisher

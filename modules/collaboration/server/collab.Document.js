@@ -1,4 +1,4 @@
-/**
+/**:
  * collab.Document object binds the document model and other data
  * of the document that is used in single or multiple editing sessions.
 **/
@@ -10,6 +10,11 @@ var ve = require( './collab.ve.js' ).ve;
 /**
  * collab.Document object to bind everything in this module.
  * Should be referenced in the instances of collab.Session.
+ *
+ * @class
+ * @constructor
+ * @param{String} title Title of the document(pageName).
+ * @param{String} html HTML content of the page.
 **/
 Document = function( title, html ) {
 	var dom = $('<div>' + html + '</div>');
@@ -29,6 +34,11 @@ Document.generateID = function( title ) {
 	return title;
 };
 
+/**
+ * Convert the data model of the document into HTML and return it.
+ *
+ * @method
+**/
 Document.prototype.getHTML = function() {
 //	var data = this.dmSurface.getDocument().getData();
 	var data = this.dmDoc.getData();
@@ -49,6 +59,13 @@ Document.prototype.purgeDocument = function() {
 	this.history = [];
 };
 
+/**
+ * Apply the incoming transaction to the document.
+ *
+ * @method
+ * @param{collab.Session} session Reference to the session which contains this document.
+ * @param{Object} transactionData Transaction data recieved from the server.
+**/
 Document.prototype.applyTransaction = function( session, transactionData ) {
 	// Abort if the session cannot publish
 	if( session.isPublisher == false ) {
