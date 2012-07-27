@@ -6,6 +6,8 @@
  * @param {collab.Client} client Client adapter that the UI is to attached to
 **/
 collab.UI = function( client ) {
+	ve.EventEmitter.call( this );
+
 	this.client = client;
 	var elementNodes = collab.UI.elementNodes;
 	this.setupToolbar( $( elementNodes.toolbar) );
@@ -63,6 +65,7 @@ collab.UI.prototype.userConnect = function( userData ) {
 	var userName = userData.userName;
 	var element =	$( '<p id="collab-user-' + userName + 
 			'" class="collab-username">' + userName + '</p>' );
+
 	if( userData.isPublisher === true ) {
 		element.addClass( 'collab-publisher' );
 	}
@@ -80,8 +83,9 @@ collab.UI.prototype.userDisconnect = function( userName ) {
  * @param{String} veToolbarNode Identifier of the toolbar's HTML element.
 **/
 collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
-	veToolbarNode.append( collab.UI.markup.toolbarButtons );
 	var _this = this;
+	
+	veToolbarNode.append( collab.UI.markup.toolbarButtons );
 	// Display the panel
 	$( '#collab-switch' ).click( function() {
 		if( _this.state.panel == false ) {
@@ -108,6 +112,7 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 **/
 collab.UI.prototype.setupPanel = function( veContainer ) {
 	var _this = this;
+
 	veContainer.append( collab.UI.markup.panel );
 	veContainer.append( '<div class="clearfix" style="clear: both"></div>' );
 	$( '#collab-panel' ).hide();
@@ -117,7 +122,16 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 		var pageName = 'Main_Page';
 		_this.connect( userName, pageName );
 	});
-}
+};
+
+collab.UI.prototype.setResponseStatus = function( response ) {
+	if( response.success ) {
+		$( '#collab-status' ).html( '<p>Connected.</p>' );
+	}
+	else {
+		$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
+	}
+};
 
 /**
  * Initiate connection with the collaboration server from the UI layer.
@@ -128,16 +142,10 @@ collab.UI.prototype.setupPanel = function( veContainer ) {
 **/
 collab.UI.prototype.connect = function( userName, pageName ) {
 	var _this = this;
+
 	if( userName ) {
 		$( '#collab-status' ).html( '<p>Connecting...</p>' );
-		_this.client.connect( userName, pageName, function( res ) {
-			if( res.success ) {
-				$( '#collab-status' ).html( '<p>Connected.</p>' );
-			}
-			else {
-				$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
-			}
-		});
+		_this.emit( 'connect', { userName: userName, pageName: pageName } );
 	}
 	else {
 		$( '#collab-status' ).html( 'Please login before you can collaborate.' );
@@ -149,6 +157,7 @@ collab.UI.prototype.connect = function( userName, pageName ) {
 **/
 collab.UI.prototype.disconnect = function() {
 	var _this = this; 
+	
 	// Some pretty-ness
 	$( '#collab-panel' ).hide('fast', function() {
 		$( '.es-base' ).removeClass( 'es-base-collapsed' );
@@ -156,5 +165,8 @@ collab.UI.prototype.disconnect = function() {
 	});
 	$( '#collab-status' ).html('');
 	$( '#collab-users-list' ).html('');
-	this.client.disconnect();
+
+	this.emit( 'disconnect' );
 };
+
+ve.extendClass( collab.UI, ve.EventEmitter );

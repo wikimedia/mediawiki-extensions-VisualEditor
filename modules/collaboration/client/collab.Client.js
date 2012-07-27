@@ -13,6 +13,13 @@ collab.Client = function( editorSurface ) {
 
 	// Initialize the UI binding object
 	this.ui = new collab.UI( this );
+	var _this = this;
+	this.ui.on( 'connect', function( e ) {
+		_this.connect( e.userName, e.pageName, _this.ui.setResponseStatus );
+	} );
+	this.ui.on( 'disconnect', function( e ) {
+		_this.disconnect();
+	} );
 }
 
 collab.Client.prototype.connect = function( userName, docTitle, responseCallback ) {
@@ -68,24 +75,27 @@ collab.Client.prototype.bindEvents = function( callbacksObj ) {
 	var ui = this.ui;
 	io_socket.on( 'new_transaction', function( data ) {
 		callbacksObj.newTransaction( data );
-	});
+	} );
 
 	io_socket.on( 'client_auth', function( data ) {
 		callbacksObj.authenticate( 'downstream', data );
-	});
+	} );
 
 	io_socket.on( 'client_connect', function( data ) {
 		callbacksObj.userConnect( data );
 		ui.userConnect( data );
-	});
+	} );
 
 	io_socket.on( 'client_disconnect', function( data ) {
 		callbacksObj.userDisconnect( data );
 		ui.userDisconnect( data );
-	});
+	} );
 
 	io_socket.on( 'document_transfer', function( data ) {
+		callbacksObj.on( 'new_transaction', function( transactionData ) {
+			io_socket.emit( 'new_transaction', transactionData );
+		} );
 		callbacksObj.docTransfer( data );
 		ui.populateUsersList( data.users );
-	});
+	} );
 };

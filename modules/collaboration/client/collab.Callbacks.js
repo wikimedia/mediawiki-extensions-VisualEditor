@@ -7,6 +7,8 @@
  * @param {Socket} socket Socket.IO socket for network I/O
 **/
 collab.Callbacks = function( client, socket ) {
+	ve.EventEmitter.call( this );
+
 	this.client = client;
 	this.socket = socket;
 };
@@ -29,7 +31,7 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 		if( user ) {
 			this.userName = user;
 			// Logged in; Proceed with authentication with server
-			socket.emit( 'client_auth', { userName: user, docTitle: docTitle } );
+			this.emit( 'client_auth', { userName: user, docTitle: docTitle } );
 		}
 		else {
 			// For non-logged in users
@@ -38,7 +40,7 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 	else {
 		// Downstream mode for recieving auth info from the server
 		var sessionID = authData.sessionID;
-		socket.emit( 'client_connect', { userName: user, docTitle: docTitle,
+		this.emit( 'client_connect', { userName: user, docTitle: docTitle,
 			sessionID: sessionID } );
 	}
 };
@@ -166,7 +168,7 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 					},
 					transaction: transaction
 				};
-				socket.emit( 'new_transaction', transactionData );
+				_this.emit( 'new_transaction', transactionData );
 			}
 		});
 	}
@@ -178,3 +180,5 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 		documentNode.$.attr( 'contenteditable', false );
 	}
 };
+
+ve.extendClass( collab.Callbacks, ve.EventEmitter );
