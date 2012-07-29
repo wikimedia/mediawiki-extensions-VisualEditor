@@ -90,6 +90,8 @@ exports['events'] = {
 		var client = io.connect( settings.host + ':' + settings.port, options );
 
 		client.on( 'document_transfer', function() {
+
+			// Dummy transaction to transform 'testPage' into 'testpage'
 			var dummyTransaction = {
 				lengthDifference: 1,
 				operations: [
