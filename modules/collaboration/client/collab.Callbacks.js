@@ -10,7 +10,6 @@ collab.Callbacks = function( client, socket ) {
 	ve.EventEmitter.call( this );
 
 	this.client = client;
-	this.socket = socket;
 };
 
 /**
@@ -74,7 +73,6 @@ collab.Callbacks.prototype.loadDoc = function( data ) {
  * @method
 **/
 collab.Callbacks.prototype.selfDisconnect = function() {
-	this.socket.disconnect();
 	this.loadDoc( this.preservedData );
 	var documentNode = this.client.editor.view.documentView.documentNode;
 	documentNode.$.attr( 'contenteditable', true );
@@ -128,8 +126,9 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
  *
  * @method
  * @param{Object} docData Document related data received from the server.
+ * @param{Boolean} firstLoad If docTransfer is happening for the first time.
 **/
-collab.Callbacks.prototype.docTransfer = function( docData ) {
+collab.Callbacks.prototype.docTransfer = function( docData, firstLoad ) {
 	console.log('here');
 	var html = $('<div>' + docData.html + '</div>' );
 	var socket = this.socket,
@@ -150,6 +149,9 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 
 	// Bind with surfaceModel's transact event
 	if( docData.allowPublish == true ) {
+		if( firstLoad == false ) {
+			return;
+		}
 		surfaceModel.on( 'transact', function( transaction ) {
 			// Don't proceed if the client is not connected
 			// Also, exit if the session cannot publish(in case,
@@ -170,14 +172,12 @@ collab.Callbacks.prototype.docTransfer = function( docData ) {
 				};
 				_this.emit( 'new_transaction', transactionData );
 			}
-		});
+		} );
 	}
 
 	else {
 		// Disable editing entirely
-		var view = editor.view;
-		var documentNode = view.documentView.documentNode;
-		documentNode.$.attr( 'contenteditable', false );
+		this.emit( 'disableEditing' );
 	}
 };
 

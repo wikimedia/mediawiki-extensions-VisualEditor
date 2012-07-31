@@ -43,6 +43,17 @@ collab.UI.markup = {
 };
 
 /**
+ * Disable editing by setting contenteditable=false
+ *
+ * @method
+**/
+collab.UI.prototype.disableEditing = function() {
+	var view = this.client.editor.view;
+	var documentNode = view.documentView.documentNode;
+	documentNode.$.attr( 'contenteditable', false );
+};
+
+/**
  * Bulk add users to the list; Used at the time of connection init
  *
  * @method
@@ -129,7 +140,7 @@ collab.UI.prototype.setResponseStatus = function( response ) {
 		$( '#collab-status' ).html( '<p>Connected.</p>' );
 	}
 	else {
-		$( '#collab-status' ).html( '<p>' + res.message + '</p>' );
+		$( '#collab-status' ).html( '<p>' + response.message + '</p>' );
 	}
 };
 
@@ -162,7 +173,7 @@ collab.UI.prototype.disconnect = function() {
 	$( '#collab-panel' ).hide('fast', function() {
 		$( '.es-base' ).removeClass( 'es-base-collapsed' );
 		_this.state.panel = false;
-	});
+	} );
 	$( '#collab-status' ).html('');
 	$( '#collab-users-list' ).html('');
 

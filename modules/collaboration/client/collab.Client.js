@@ -27,28 +27,31 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 	var settings = collab.settings;
 	this.userName = userName;
 	this.docTitle = docTitle;
+
 	try {
 		if( !this.socket ) {
 			var socket = io.connect( settings.host + ':' + settings.port );
 			this.socket = socket;
 			var callbacks = new collab.Callbacks( _this, socket );
 			_this.callbacks = callbacks;
-			_this.bindEvents( callbacks );
+			_this.bindIOEvents( callbacks );
+			_this.bindInternalEvents();
 			socket.on( 'connection', function() {
 				// callbacks.authenticate( 'upstream' ); Deferred
 				// TODO: User has to be handled using the MW auth
-				_this.isConnected = true;
 				socket.emit( 'client_connect', { user: _this.userName, title: _this.docTitle } );
+				_this.isConnected = true;
 				responseCallback( {
 					success: true,
 					message: 'Connected.'
 				} );
-			});
+			} );
 		}
 		else {
 			this.socket.socket.connect( settings.host + ':' + settings.port );
 		}
 	}
+
 	catch( e ) {
 		console.log(e);
 		responseCallback( {
@@ -60,7 +63,7 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 };
 
 collab.Client.prototype.disconnect = function() {
-	this.callbacks.selfDisconnect();
+	this.socket.disconnect();
 	this.isConnected = false;
 };
 
@@ -70,8 +73,8 @@ collab.Client.prototype.disconnect = function() {
  * @method
  * @param {collab.Callbacks} callbacksObj Callbacks object for the session
 **/
-collab.Client.prototype.bindEvents = function( callbacksObj ) {
-	var io_socket = callbacksObj.socket;
+collab.Client.prototype.bindIOEvents = function( callbacksObj ) {
+	var io_socket = this.socket;
 	var ui = this.ui;
 	io_socket.on( 'new_transaction', function( data ) {
 		callbacksObj.newTransaction( data );
@@ -92,10 +95,34 @@ collab.Client.prototype.bindEvents = function( callbacksObj ) {
 	} );
 
 	io_socket.on( 'document_transfer', function( data ) {
-		callbacksObj.on( 'new_transaction', function( transactionData ) {
-			io_socket.emit( 'new_transaction', transactionData );
-		} );
-		callbacksObj.docTransfer( data );
+		var firstLoad = false;
+		if( callbacksObj.listeners( 'new_transaction' ).length == 0 ) {
+			firstLoad = true;
+			callbacksObj.on( 'new_transaction', function( transactionData ) {
+				io_socket.emit( 'new_transaction', transactionData );
+			} );
+		}
+		callbacksObj.docTransfer( data, firstLoad );
 		ui.populateUsersList( data.users );
+	} );
+};
+
+/**
+ * Bind UI and Callbacks events here and build bridges
+ *
+ * @method
+**/
+collab.Client.prototype.bindInternalEvents = function() {
+	var callbacksObj = this.callbacks;
+	var	 ui = this.ui;
+	var _this = this;
+
+	ui.on( 'disconnect', function() {
+		_this.disconnect();
+		callbacksObj.selfDisconnect();
+	} );
+
+	callbacksObj.on( 'disableEditing', function() {
+		ui.disableEditing();
 	} );
 };
