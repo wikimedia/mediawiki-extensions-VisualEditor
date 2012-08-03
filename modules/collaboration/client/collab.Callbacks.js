@@ -74,8 +74,7 @@ collab.Callbacks.prototype.loadDoc = function( data ) {
 **/
 collab.Callbacks.prototype.selfDisconnect = function() {
 	this.loadDoc( this.preservedData );
-	var documentNode = this.client.editor.view.documentView.documentNode;
-	documentNode.$.attr( 'contenteditable', true );
+	this.emit( 'enableEditing' );
 };
 
 /**

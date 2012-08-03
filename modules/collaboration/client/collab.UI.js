@@ -43,6 +43,16 @@ collab.UI.markup = {
 };
 
 /**
+ * Enable editing by settings contentedible=true
+ *
+ * @method
+**/
+collab.UI.prototype.enableEditing = function() {
+	var documentNode = this.client.editor.view.documentView.documentNode;
+	documentNode.$.attr( 'contenteditable', true );
+};
+
+/**
  * Disable editing by setting contenteditable=false
  *
  * @method
@@ -101,7 +111,7 @@ collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 	$( '#collab-switch' ).click( function() {
 		if( _this.state.panel == false ) {
 			$( '.es-base' ).addClass( 'es-base-collapsed' );
-			$( '#collab-panel' ).show('fast');
+			$( '#collab-panel' ).show( 'fast' );
 			_this.state.panel = true;
 			var userName = mw.config.get( 'wgUserName' );
 			var pageName = mw.config.get( 'wgPageName' );
@@ -170,12 +180,12 @@ collab.UI.prototype.disconnect = function() {
 	var _this = this; 
 	
 	// Some pretty-ness
-	$( '#collab-panel' ).hide('fast', function() {
+	$( '#collab-panel' ).hide( 'fast', function() {
 		$( '.es-base' ).removeClass( 'es-base-collapsed' );
 		_this.state.panel = false;
 	} );
-	$( '#collab-status' ).html('');
-	$( '#collab-users-list' ).html('');
+	$( '#collab-status' ).html( '' );
+	$( '#collab-users-list' ).html( '' );
 
 	this.emit( 'disconnect' );
 };

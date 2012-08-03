@@ -20,7 +20,7 @@ collab.Client = function( editorSurface ) {
 	this.ui.on( 'disconnect', function( e ) {
 		_this.disconnect();
 	} );
-}
+};
 
 collab.Client.prototype.connect = function( userName, docTitle, responseCallback ) {
 	var _this = this;
@@ -124,5 +124,9 @@ collab.Client.prototype.bindInternalEvents = function() {
 
 	callbacksObj.on( 'disableEditing', function() {
 		ui.disableEditing();
+	} );
+
+	callbacksObj.on( 'enableEditing', function() {
+		ui.enableEditing();
 	} );
 };
