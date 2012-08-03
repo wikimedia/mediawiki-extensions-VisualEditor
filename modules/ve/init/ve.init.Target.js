@@ -1,3 +1,12 @@
+/*global mw */
+
+/**
+ * VisualEditor initialization Target class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 /**
  * Generic target.
  *
@@ -19,7 +28,7 @@ ve.init.Target = function( pageName ) {
 	this.dom = null;
 	this.isMobileDevice = (
 		'ontouchstart' in window ||
-		( window.DocumentTouch && document instanceof DocumentTouch )
+		( window.DocumentTouch && document instanceof window.DocumentTouch )
 	);
 };
 

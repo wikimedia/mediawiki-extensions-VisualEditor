@@ -1,3 +1,12 @@
+/*global rangy */
+
+/**
+ * VisualEditor content editable Surface class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 /**
  * ContentEditable surface.
  *
@@ -77,6 +86,8 @@ ve.ce.Surface = function( $container, model ) {
 ve.ce.Surface.prototype.documentOnFocus = function() {
 	ve.log( 'documentOnFocus' );
 
+	this.$document.off( '.ve-ce-Surface' );
+
 	this.$document.on( {
 		// key down
 		'keydown.ve-ce-Surface': ve.proxy( this.onKeyDown, this ),
@@ -113,31 +124,37 @@ ve.ce.Surface.prototype.onMouseDown = function( e ) {
 };
 
 ve.ce.Surface.prototype.onKeyDown = function( e ) {
+	var offset,
+		relativeContentOffset,
+		relativeStructuralOffset,
+		relativeStructuralOffsetNode,
+		hasSlug,
+		newOffset,
+		annotations,
+		annotation;
 	switch ( e.keyCode ) {
-		// Indenting list items doesn't work yet, so disable tab handling for now
-		/*
 		// Tab Key
 		case 9:
-			e.preventDefault();
-			// FIXME check if indentation is even possible here, insert literal tab otherwise
-			ve.ui.IndentationButtonTool.changeListLevel( this.model , 'in' );
+			// If possible, trigger a list indent/outdent
+			// FIXME this way of checking whether indenting is possible is extremely hacky
+			// Instead, we should allow toolbar tools to subscribe to and intercept keydowns
+			if ( $( '.es-toolbarButtonTool-indent' ).is( ':not(.es-toolbarButtonTool-disabled)' ) ) {
+				e.preventDefault();
+				if ( e.shiftKey ) {
+					ve.ui.IndentationButtonTool.outdentListItem( this.model );
+				} else {
+					ve.ui.IndentationButtonTool.indentListItem( this.model );
+				}
+			}
 			break;
-		// Shift + Tab Key
-		case 16:
-			e.preventDefault();
-			// FIXME check if indentation is even possible here
-			ve.ui.IndentationButtonTool.changeListLevel( this.model , 'out' );
-			break;
-		*/
 		// Left arrow
 		case 37:
 			if ( !e.metaKey && !e.altKey && !e.shiftKey && this.model.getSelection().getLength() === 0 ) {
-				var offset = this.model.getSelection().start;
-				var relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, -1 );
-				var relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset - 1, -1, true );
-				var relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
-				var hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
-				var newOffset;
+				offset = this.model.getSelection().start;
+				relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, -1 );
+				relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset - 1, -1, true );
+				relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
+				hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
 				if ( hasSlug ) {
 					if ( relativeContentOffset > offset ) {
 						newOffset = relativeStructuralOffset;
@@ -156,13 +173,17 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 			break;
 		// Right arrow
 		case 39:
-			if ( !e.metaKey && !e.altKey && !e.shiftKey && this.model.getSelection().getLength() === 0 ) {
-				var offset = this.model.getSelection().start;
-				var relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, 1 );
-				var relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset + 1, 1, true );
-				var relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
-				var hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
-				var newOffset;
+			if (
+				!e.metaKey &&
+				!e.altKey &&
+				!e.shiftKey &&
+				this.model.getSelection().getLength() === 0
+			) {
+				offset = this.model.getSelection().start;
+				relativeContentOffset = this.documentView.model.getRelativeContentOffset( offset, 1 );
+				relativeStructuralOffset = this.documentView.model.getRelativeStructuralOffset( offset + 1, 1, true );
+				relativeStructuralOffsetNode = this.documentView.documentNode.getNodeFromOffset( relativeStructuralOffset );
+				hasSlug = relativeStructuralOffsetNode.hasSlugAtOffset( relativeStructuralOffset );
 				if ( hasSlug ) {
 					if ( relativeContentOffset < offset ) {
 						newOffset = relativeStructuralOffset;
@@ -182,7 +203,7 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 		// Enter
 		case 13:
 			e.preventDefault();
-			this.handleEnter();
+			this.handleEnter( e );
 			break;
 		// Backspace
 		case 8:
@@ -199,8 +220,8 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 			if ( ve.ce.Surface.isShortcutKey( e ) ) {
 				// Ctrl+B / Cmd+B, annotate with bold
 				e.preventDefault();
-				var annotations = this.documentView.model.getAnnotationsFromRange( this.model.getSelection() ),
-					annotation = {"type":"textStyle/bold"};
+				annotations = this.documentView.model.getAnnotationsFromRange( this.model.getSelection() );
+				annotation = { 'type': 'textStyle/bold' };
 
 				this.model.annotate( annotations[ve.getHash(annotation)] ? 'clear' : 'set', annotation );
 			}
@@ -210,10 +231,19 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 			if ( ve.ce.Surface.isShortcutKey( e ) ) {
 				// Ctrl+I / Cmd+I, annotate with italic
 				e.preventDefault();
-				var annotations = this.documentView.model.getAnnotationsFromRange( this.model.getSelection() ),
-					annotation = {"type":"textStyle/italic"};
+				annotations = this.documentView.model.getAnnotationsFromRange( this.model.getSelection() );
+				annotation = { 'type': 'textStyle/italic' };
 
 				this.model.annotate( annotations[ve.getHash(annotation)] ? 'clear' : 'set', annotation );
+			}
+			break;
+		// K
+		case 75:
+			if ( ve.ce.Surface.isShortcutKey( e ) ) {
+				if ( this.model.getSelection() && this.model.getSelection().getLength() ) {
+					e.preventDefault();
+					this.contextView.openInspector( 'link' );
+				}
 			}
 			break;
 		// Z
@@ -245,7 +275,7 @@ ve.ce.Surface.prototype.onKeyDown = function( e ) {
 };
 
 ve.ce.Surface.prototype.onCutCopy = function( e ) {
-	var _this = this,
+	var view = this,
 		sel = rangy.getSelection(),
 		$frag = null,
 		key = '';
@@ -253,10 +283,10 @@ ve.ce.Surface.prototype.onCutCopy = function( e ) {
 	this.stopPolling();
 
 	// Create key from text and element names
-	$frag = $(sel.getRangeAt(0).cloneContents());
-	$frag.contents().each(function() {
+	$frag = $( sel.getRangeAt(0).cloneContents() );
+	$frag.contents().each( function () {
 		key += this.textContent || this.nodeName;
-	});
+	} );
 	key = key.replace( /\s/gm, '' );
 
 	// Set surface clipboard
@@ -264,50 +294,50 @@ ve.ce.Surface.prototype.onCutCopy = function( e ) {
 		this.documentView.model.getData( this.model.getSelection() )
 	);
 
-	if ( e.type == 'cut' ) {
+	if ( e.type === 'cut' ) {
 		this.stopPolling();
-		
-		setTimeout( function() {
-			var	selection = null,
-				tx = null;
-		
-			// We don't like how browsers cut, so let's undo it and do it ourselves.
-			document.execCommand('undo', false, false);
-			
-			selection = _this.model.getSelection();
-			
-			// Transact
-			_this.autoRender = true;
-			tx = ve.dm.Transaction.newFromRemoval( _this.documentView.model, selection );
-			_this.model.change( tx, new ve.Range( selection.start ) );
-			_this.autoRender = false;
 
-			_this.clearPollData();
-			_this.startPolling();
+		setTimeout( function() {
+			var selection = null,
+				tx = null;
+
+			// We don't like how browsers cut, so let's undo it and do it ourselves.
+			document.execCommand( 'undo', false, false );
+
+			selection = view.model.getSelection();
+
+			// Transact
+			view.autoRender = true;
+			tx = ve.dm.Transaction.newFromRemoval( view.documentView.model, selection );
+			view.model.change( tx, new ve.Range( selection.start ) );
+			view.autoRender = false;
+
+			view.clearPollData();
+			view.startPolling();
 		}, 1 );
 	}
 };
 
 ve.ce.Surface.prototype.onPaste = function( e ) {
-	var	_this = this,
+	var view = this,
 		selection = this.model.getSelection(),
 		tx = null;
-	
+
 	this.stopPolling();
-	
+
 	// Pasting into a range? Remove first.
 	if (!rangy.getSelection().isCollapsed) {
-		tx = ve.dm.Transaction.newFromRemoval( _this.documentView.model, selection );
-		_this.model.change( tx );
+		tx = ve.dm.Transaction.newFromRemoval( view.documentView.model, selection );
+		view.model.change( tx );
 	}
-	
+
 	$('#paste').html('').show().focus();
 
 	setTimeout( function() {
-		var	key = '',
+		var key = '',
 			pasteData = null,
 			tx = null;
-		
+
 		// Create key from text and element names
 		$('#paste').hide().contents().each(function() {
 			key += this.textContent || this.nodeName;
@@ -315,39 +345,40 @@ ve.ce.Surface.prototype.onPaste = function( e ) {
 		key = key.replace( /\s/gm, '' );
 
 		// Get linear model from surface clipboard or create array from unknown pasted content
-		pasteData = ( _this.clipboard[key] ) ? _this.clipboard[key] : $('#paste').text().split('');
+		pasteData = ( view.clipboard[key] ) ? view.clipboard[key] : $('#paste').text().split('');
 
 		// Transact
 		tx = ve.dm.Transaction.newFromInsertion(
-			_this.documentView.model, selection.start, pasteData
+			view.documentView.model, selection.start, pasteData
 		);
-		_this.model.change( tx, new ve.Range( selection.start + pasteData.length ) );
-		_this.documentView.documentNode.$.focus();
-		
-		_this.clearPollData();
-		_this.startPolling();
+		view.model.change( tx, new ve.Range( selection.start + pasteData.length ) );
+		view.documentView.documentNode.$.focus();
+
+		view.clearPollData();
+		view.startPolling();
 	}, 1 );
 };
 
 ve.ce.Surface.prototype.onKeyPress = function( e ) {
+	var node, selection, data;
+
 	ve.log('onKeyPress');
-	
+
 	if ( ve.ce.Surface.isShortcutKey( e ) || e.which === 13 ) {
 		return;
 	}
 
-	var selection = this.model.getSelection();
+	selection = this.model.getSelection();
 
 	if (
 		selection.getLength() === 0 &&
 		this.sluggable === true &&
 		this.hasSlugAtOffset( selection.start )
 	) {
-		var	node;
 		this.sluggable = false;
 		this.stopPolling();
 		if ( this.documentView.getNodeFromOffset( selection.start ).getLength() !== 0 ) {
-			var data = [ { 'type' : 'paragraph' }, { 'type' : '/paragraph' } ];
+			data = [ { 'type' : 'paragraph' }, { 'type' : '/paragraph' } ];
 			this.model.change(
 				ve.dm.Transaction.newFromInsertion(
 					this.documentView.model,
@@ -408,7 +439,11 @@ ve.ce.Surface.prototype.clearPollData = function() {
 };
 
 ve.ce.Surface.prototype.pollChanges = function( async ) {
-	var delay = ve.proxy( function( async ) {
+	var delay, node, range, rangySelection,
+		$anchorNode, $focusNode,
+		text, hash;
+
+	delay = ve.proxy( function( async ) {
 		if ( this.poll.polling ) {
 			if ( this.poll.timeout !== null ) {
 				clearTimeout( this.poll.timeout );
@@ -424,9 +459,9 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 		return;
 	}
 
-	var node = this.poll.node,
-		range = this.poll.range,
-		rangySelection = rangy.getSelection();
+	node = this.poll.node;
+	range = this.poll.range;
+	rangySelection = rangy.getSelection();
 
 	if (
 		rangySelection.anchorNode !== this.poll.rangySelection.anchorNode ||
@@ -441,8 +476,8 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 
 		// TODO: Optimize for the case of collapsed (rangySelection.isCollapsed) range
 
-		var	$anchorNode = $( rangySelection.anchorNode ).closest( '.ve-ce-branchNode' ),
-			$focusNode = $( rangySelection.focusNode ).closest( '.ve-ce-branchNode' );
+		$anchorNode = $( rangySelection.anchorNode ).closest( '.ve-ce-branchNode' );
+		$focusNode = $( rangySelection.focusNode ).closest( '.ve-ce-branchNode' );
 
 		if ( $anchorNode[0] === $focusNode[0] ) {
 			node = $anchorNode[0];
@@ -470,8 +505,8 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 		}
 	} else {
 		if ( node !== null ) {
-			var	text = ve.ce.getDomText( node ),
-				hash = ve.ce.getDomHash( node );
+			text = ve.ce.getDomText( node );
+			hash = ve.ce.getDomHash( node );
 			if ( this.poll.text !== text || this.poll.hash !== hash ) {
 				this.emit( 'contentChange', {
 					'node': node,
@@ -507,25 +542,27 @@ ve.ce.Surface.prototype.pollChanges = function( async ) {
 };
 
 ve.ce.Surface.prototype.onContentChange = function( e ) {
-	var	nodeOffset = $( e.node ).data( 'node' ).model.getOffset(),
+	var nodeOffset = $( e.node ).data( 'node' ).model.getOffset(),
 		offsetDiff = (
 			e.old.range !== null &&
-			e.new.range !== null &&
+			e['new'].range !== null &&
 			e.old.range.getLength() === 0 &&
-			e.new.range.getLength() === 0
-		) ? e.new.range.start - e.old.range.start : null,
-		lengthDiff = e.new.text.length - e.old.text.length;
+			e['new'].range.getLength() === 0
+		) ? e['new'].range.start - e.old.range.start : null,
+		lengthDiff = e['new'].text.length - e.old.text.length,
+		data,
+		annotations;
 
 	if (
 		offsetDiff === lengthDiff &&
 		e.old.text.substring( 0, e.old.range.start - nodeOffset - 1 ) ===
-		e.new.text.substring( 0, e.old.range.start - nodeOffset - 1 )
+		e['new'].text.substring( 0, e.old.range.start - nodeOffset - 1 )
 	) {
-		var	data = e.new.text.substring(
+		data = e['new'].text.substring(
 				e.old.range.start - nodeOffset - 1,
-				e.new.range.start - nodeOffset - 1
-			).split( '' ),
-			annotations = this.model.getDocument().getAnnotationsFromOffset( e.old.range.start - 1 );
+				e['new'].range.start - nodeOffset - 1
+			).split( '' );
+		annotations = this.model.getDocument().getAnnotationsFromOffset( e.old.range.start - 1 );
 
 		if ( !ve.isEmptyObject( annotations ) ) {
 			ve.dm.Document.addAnnotationsToData( data, annotations );
@@ -534,28 +571,28 @@ ve.ce.Surface.prototype.onContentChange = function( e ) {
 		this.render = false;
 		this.model.change(
 			ve.dm.Transaction.newFromInsertion( this.documentView.model, e.old.range.start, data ),
-			e.new.range
+			e['new'].range
 		);
 		this.render = true;
 
 	} else {
-		var	fromLeft = 0,
+		var fromLeft = 0,
 			fromRight = 0,
-			len = Math.min( e.old.text.length, e.new.text.length );
+			len = Math.min( e.old.text.length, e['new'].text.length );
 
-		while ( fromLeft < len && e.old.text[fromLeft] === e.new.text[fromLeft] ) {
+		while ( fromLeft < len && e.old.text[fromLeft] === e['new'].text[fromLeft] ) {
 			++fromLeft;
 		}
 		while (
 			fromRight < len - fromLeft &&
 			e.old.text[e.old.text.length - 1 - fromRight] ===
-			e.new.text[e.new.text.length - 1 - fromRight]
+			e['new'].text[e['new'].text.length - 1 - fromRight]
 		) {
 			++fromRight;
 		}
 
-		var	annotations = this.model.getDocument().getAnnotationsFromOffset( nodeOffset + 1 + fromLeft ),
-			data = e.new.text.substring( fromLeft, e.new.text.length - fromRight ).split( '' );
+		annotations = this.model.getDocument().getAnnotationsFromOffset( nodeOffset + 1 + fromLeft );
+		data = e['new'].text.substring( fromLeft, e['new'].text.length - fromRight ).split( '' );
 
 		if ( !ve.isEmptyObject( annotations ) ) {
 			ve.dm.Document.addAnnotationsToData( data, annotations );
@@ -570,12 +607,12 @@ ve.ce.Surface.prototype.onContentChange = function( e ) {
 					this.documentView.model,
 					new ve.Range( nodeOffset + 1 + fromLeft, nodeOffset + 1 + e.old.text.length - fromRight )
 				),
-				e.new.range
+				e['new'].range
 			);
 		}
 		this.model.change(
 			ve.dm.Transaction.newFromInsertion( this.documentView.model, nodeOffset + 1 + fromLeft, data ),
-			e.new.range
+			e['new'].range
 		);
 	}
 	this.sluggable = true;
@@ -605,14 +642,18 @@ ve.ce.Surface.prototype.onChange = function( transaction, selection ) {
 	}
 };
 
-ve.ce.Surface.prototype.handleEnter = function() {
+ve.ce.Surface.prototype.handleEnter = function( e ) {
 	var selection = this.model.getSelection(),
 		documentModel = this.model.getDocument(),
 		emptyParagraph = [{ 'type': 'paragraph' }, { 'type': '/paragraph' }],
 		tx,
-		advanceCursor = true;
+		advanceCursor = true,
+		outerParent,
+		outerChildrenCount;
+
 	// Stop polling while we work
 	this.stopPolling();
+
 	// Handle removal first
 	if ( selection.from !== selection.to ) {
 		tx = ve.dm.Transaction.newFromRemoval( documentModel, selection );
@@ -620,7 +661,7 @@ ve.ce.Surface.prototype.handleEnter = function() {
 		this.model.change( tx, selection );
 	}
 	// Handle insertion
-	var	node = this.documentView.getNodeFromOffset( selection.from ),
+	var node = this.documentView.getNodeFromOffset( selection.from ),
 		nodeModel = node.getModel(),
 		cursor = selection.from,
 		nodeOffset = nodeModel.getOffset(),
@@ -647,7 +688,7 @@ ve.ce.Surface.prototype.handleEnter = function() {
 		}
 	} else {
 		// Split
-		var	stack = [],
+		var stack = [],
 			outermostNode = null;
 
 		ve.Node.traverseUpstream( node, function( node ) {
@@ -661,33 +702,33 @@ ve.ce.Surface.prototype.handleEnter = function() {
 				node.model.getClonedElement()
 			);
 			outermostNode = node;
-			return true;
+			if ( e.shiftKey ) {
+				return false;
+			} else {
+				return true;
+			}
 		} );
-		
-		var	outerParent = outermostNode.getModel().getParent(),
-			outerChildrenCount = outerParent.getChildren().length
-		
-		if ( 
-			outermostNode.type == 'listItem' && // this is a list item
-			outerParent.getChildren()[outerChildrenCount - 1] == outermostNode.getModel() && // this is the last list item
-			outermostNode.children.length == 1 && // there is one child
-			node.model.length == 0 // the child is empty
+
+		outerParent = outermostNode.getModel().getParent();
+		outerChildrenCount = outerParent.getChildren().length;
+
+		if (
+			outermostNode.type === 'listItem' && // this is a list item
+			outerParent.getChildren()[outerChildrenCount - 1] === outermostNode.getModel() && // this is the last list item
+			outermostNode.children.length === 1 && // there is one child
+			node.model.length === 0 // the child is empty
 		) {
 			// Enter was pressed in an empty list item.
-			var list =  outermostNode.getModel().getParent();
-			// Remove the list item
-			tx = ve.dm.Transaction.newFromRemoval( documentModel, outermostNode.getModel().getOuterRange() );
-			this.model.change( tx );
-			// Insert a paragraph
-			tx = ve.dm.Transaction.newFromInsertion( documentModel, list.getOuterRange().to, emptyParagraph );
-			
-			advanceCursor = false;				
-		} else {		
+			// Outdent the list item, which will turn it into a paragraph if it's not in a nested list
+			// FIXME this is an ugly way to trigger outdent, with a proper API we could do better
+			ve.ui.IndentationButtonTool.outdentListItem( this.model );
+			advanceCursor = false;
+		} else {
 			// We must process the transaction first because getRelativeContentOffset can't help us yet
 			tx = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, stack );
+			this.model.change( tx );
 		}
 	}
-	this.model.change( tx );
 
 	// Now we can move the cursor forward
 	if ( advanceCursor ) {
@@ -697,7 +738,7 @@ ve.ce.Surface.prototype.handleEnter = function() {
 	} else {
 		this.model.change(
 			null, new ve.Range( documentModel.getNearestContentOffset( selection.from ) )
-		);		
+		);
 	}
 	// Reset and resume polling
 	this.clearPollData();
@@ -713,29 +754,30 @@ ve.ce.Surface.prototype.handleDelete = function( backspace ) {
 		sourceSplitableNode,
 		targetSplitableNode,
 		tx,
-		cursorAt;
+		cursorAt,
+		sourceNode,
+		targetNode,
+		sourceData,
+		nodeToDelete;
 
 	if ( selection.from === selection.to ) {
-		if ( backspace ) {
+		if ( backspace || selection.to === this.model.getDocument().data.length - 1) {
 			sourceOffset = selection.to;
 			targetOffset = this.getNearestCorrectOffset( sourceOffset - 1, -1 );
-			//this.model.setSelection( new ve.Range( targetOffset, targetOffset ) );
 		} else {
 			sourceOffset = this.model.getDocument().getRelativeContentOffset( selection.to, 1 );
 			targetOffset = selection.to;
 		}
 
-		var	sourceNode = this.documentView.getNodeFromOffset( sourceOffset, false ),
-			targetNode = this.documentView.getNodeFromOffset( targetOffset, false );
-		
+		sourceNode = this.documentView.getNodeFromOffset( sourceOffset, false );
+		targetNode = this.documentView.getNodeFromOffset( targetOffset, false );
+
 		if ( sourceNode.type === targetNode.type ) {
 			sourceSplitableNode = ve.ce.Node.getSplitableNode( sourceNode );
 			targetSplitableNode = ve.ce.Node.getSplitableNode( targetNode );
 		}
-		//ve.log(sourceSplitableNode, targetSplitableNode);
-		
-		cursorAt = targetOffset;
 
+		cursorAt = targetOffset;
 
 		if (
 			// Source and target are the same node
@@ -757,9 +799,9 @@ ve.ce.Surface.prototype.handleDelete = function( backspace ) {
 		} else {
 			// Source and target are different nodes and do not share a parent, perform tricky merge
 			// Get the data for the source node
-			var sourceData = this.documentView.model.getData( sourceNode.model.getRange() );
+			sourceData = this.documentView.model.getData( sourceNode.model.getRange() );
 			// Find the node that should be completely removed
-			var nodeToDelete = sourceNode;
+			nodeToDelete = sourceNode;
 			ve.Node.traverseUpstream( nodeToDelete, function( node ) {
 				if ( node.getParent().children.length === 1 ) {
 					nodeToDelete = node.getParent();
@@ -860,7 +902,7 @@ ve.ce.Surface.prototype.getNearestCorrectOffset = function( offset, direction ) 
 		return offset;
 	}
 
-	var	contentOffset = this.documentView.model.getNearestContentOffset( offset, direction ),
+	var contentOffset = this.documentView.model.getNearestContentOffset( offset, direction ),
 		structuralOffset =
 			this.documentView.model.getNearestStructuralOffset( offset, direction, true );
 
@@ -904,7 +946,7 @@ ve.ce.Surface.prototype.hasSlugAtOffset = function( offset ) {
  * offset is the position within the element
  */
 ve.ce.Surface.prototype.getNodeAndOffset = function( offset ) {
-	var	node = this.documentView.getNodeFromOffset( offset ),
+	var node = this.documentView.getNodeFromOffset( offset ),
 		startOffset = this.documentView.getDocumentNode().getOffsetFromNode( node ) +
 			( ( node.isWrapped() ) ? 1 : 0 ),
 		current = [node.$.contents(), 0],
@@ -978,18 +1020,21 @@ ve.ce.Surface.prototype.getOffset = function( domNode, domOffset ) {
 };
 
 ve.ce.Surface.prototype.getOffsetFromTextNode = function( domNode, domOffset ) {
-	var	$node = $( domNode ).closest(
-			'.ve-ce-branchNode, .ve-ce-alienBlockNode, .ve-ce-alienInlineNode'
-		),
-		nodeModel = $node.data( 'node' ).getModel();
+	var $node, nodeModel, current, stack, item, offset, $item;
+
+	$node = $( domNode ).closest(
+		'.ve-ce-branchNode, .ve-ce-alienBlockNode, .ve-ce-alienInlineNode'
+	);
+	nodeModel = $node.data( 'node' ).getModel();
+
 	if ( ! $node.hasClass( 've-ce-branchNode' ) ) {
 		return nodeModel.getOffset();
 	}
-	var	current = [$node.contents(), 0],
-		stack = [current],
-		offset = 0,
-		item,
-		$item;
+
+	current = [$node.contents(), 0];
+	stack = [current];
+	offset = 0;
+
 	while ( stack.length > 0 ) {
 		if ( current[1] >= current[0].length ) {
 			stack.pop();
@@ -1027,7 +1072,7 @@ ve.ce.Surface.prototype.getOffsetFromTextNode = function( domNode, domOffset ) {
 };
 
 ve.ce.Surface.prototype.getOffsetFromElementNode = function( domNode, domOffset, addOuterLength ) {
-	var	$domNode = $( domNode ),
+	var $domNode = $( domNode ),
 		nodeModel,
 		node;
 
@@ -1063,20 +1108,6 @@ ve.ce.Surface.prototype.getOffsetFromElementNode = function( domNode, domOffset,
 	} else {
 		return this.getOffsetFromElementNode( node, 0, true );
 	}
-};
-
-ve.ce.Surface.prototype.updateContextIcon = function() {
-	var _this = this,
-		selection = this.model.getSelection();
-	
-		if ( this.contextView ) {
-			if ( selection.getLength() > 0 ) {
-				this.contextView.set();
-			} else {
-				this.contextView.clear();
-			}
-		}
-
 };
 
 /* Supplies the selection anchor coordinates to contextView */

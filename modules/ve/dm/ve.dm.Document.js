@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model Document class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel document.
  *
  * @class
@@ -64,7 +71,7 @@ ve.dm.Document = function( data, parentDocument ) {
 				textLength = 0;
 			}
 			// Element open/close
-			if ( this.data[i].type.charAt( 0 ) != '/' ) {
+			if ( this.data[i].type.charAt( 0 ) !== '/' ) {
 				// Branch or leaf node opening
 				// Create a childless node
 				node = ve.dm.nodeFactory.create( this.data[i].type, [], this.data[i].attributes );
@@ -131,7 +138,7 @@ ve.dm.Document = function( data, parentDocument ) {
  */
 ve.dm.Document.addAnnotationsToData = function( data, annotations ) {
 	// Apply annotations to data
-	for ( i = 0; i < data.length; i++ ) {
+	for ( var i = 0; i < data.length; i++ ) {
 		if ( !ve.isArray( data[i] ) ) {
 			data[i] = [data[i]];
 		}
@@ -616,7 +623,7 @@ ve.dm.Document.getMatchingAnnotations = function( annotations, pattern ) {
  */
 ve.dm.Document.prototype.getAnnotationsFromRange = function( range, all ) {
 	range.normalize();
-	var	annotations = {},
+	var annotations = {},
 		count = 0,
 		left,
 		right,
@@ -659,6 +666,26 @@ ve.dm.Document.prototype.getAnnotationsFromRange = function( range, all ) {
 		}
 	}
 	return left;
+};
+
+/**
+ * Returns ve.Range free of outer whitespace.
+ *
+ * @method
+ * @param {ve.Range} [range] Range of data to get, all data will be given by default
+ * @returns {Object} A new range if modified, otherwise returns passed range.
+ */
+ve.dm.Document.prototype.trimOuterSpaceFromRange = function( range ){
+	range.normalize();
+	var	start = range.start,
+		end = range.end;
+	while ( this.data[start] === ' ' ) {
+		start++;
+	}
+	while ( this.data[end - 1] === ' ' ) {
+		end--;
+	}
+	return range.to < range.end ? new ve.Range( end, start ) : new ve.Range( start, end );
 };
 
 /**
@@ -946,55 +973,55 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
 	 * This function updates parentNode, parentType, openingStack and closingStack.
 	 *
 	 * @param {Object|Array|String} element Linear model element
-	 * @param {Number} index Index in data that this element came from. Used for error reporting only
+	 * @param {Number} index Index in data that this element came from (for error reporting only)
 	 */
 	function writeElement( element, index ) {
 		var expectedType;
-		if ( element.type === undefined ) {
-			// Content, do nothing
-		} else if ( element.type.charAt( 0 ) !== '/' ) {
-			// Opening
-			// Check if this opening balances an earlier closing of a node
-			// that was already in the document. This is only the case if
-			// openingStack is empty (otherwise we still have unclosed nodes from
-			// within data) and if this opening matches the top of closingStack
-			if ( openingStack.length === 0 && closingStack.length > 0 &&
-				closingStack[closingStack.length - 1] === element.type
-			) {
-				// The top of closingStack is now balanced out, so remove it
-				closingStack.pop();
-			} else {
-				// This opens something new, put it on openingStack
-				openingStack.push( element );
-			}
-			parentType = element.type;
-		} else {
-			// Closing
-			// Make sure that this closing matches the currently opened node
-			if ( openingStack.length > 0 ) {
-				// The opening was on openingStack, so we're closing
-				// a node that was opened within data. Don't track
-				// that on closingStack
-				expectedType = openingStack.pop().type;
-			} else {
-				// openingStack is empty, so we're closing a node that
-				// was already in the document. This means we have to
-				// reopen it later, so track this on closingStack
-				expectedType = parentNode.getType();
-				closingStack.push( expectedType );
-				parentNode = parentNode.getParent();
-				if ( !parentNode ) {
-					throw 'Inserted data is trying to close the root node ' +
-						'(at index ' + index + ')';
+		if ( element.type !== undefined ) {
+			if ( element.type.charAt( 0 ) !== '/' ) {
+				// Opening
+				// Check if this opening balances an earlier closing of a node
+				// that was already in the document. This is only the case if
+				// openingStack is empty (otherwise we still have unclosed nodes from
+				// within data) and if this opening matches the top of closingStack
+				if ( openingStack.length === 0 && closingStack.length > 0 &&
+					closingStack[closingStack.length - 1] === element.type
+				) {
+					// The top of closingStack is now balanced out, so remove it
+					closingStack.pop();
+				} else {
+					// This opens something new, put it on openingStack
+					openingStack.push( element );
 				}
-			}
-			parentType = expectedType;
+				parentType = element.type;
+			} else {
+				// Closing
+				// Make sure that this closing matches the currently opened node
+				if ( openingStack.length > 0 ) {
+					// The opening was on openingStack, so we're closing
+					// a node that was opened within data. Don't track
+					// that on closingStack
+					expectedType = openingStack.pop().type;
+				} else {
+					// openingStack is empty, so we're closing a node that
+					// was already in the document. This means we have to
+					// reopen it later, so track this on closingStack
+					expectedType = parentNode.getType();
+					closingStack.push( expectedType );
+					parentNode = parentNode.getParent();
+					if ( !parentNode ) {
+						throw 'Inserted data is trying to close the root node ' +
+							'(at index ' + index + ')';
+					}
+				}
+				parentType = expectedType;
 
-			// Validate
-			// FIXME this breaks certain input, should fix it up, not scream and die
-			if ( element.type !== '/' + expectedType ) {
-				throw 'Type mismatch, expected /' + expectedType +
-					' but got ' + element.type + ' (at index ' + index + ')';
+				// Validate
+				// FIXME this breaks certain input, should fix it up, not scream and die
+				if ( element.type !== '/' + expectedType ) {
+					throw 'Type mismatch, expected /' + expectedType +
+						' but got ' + element.type + ' (at index ' + index + ')';
+				}
 			}
 		}
 		newData.push( element );
@@ -1007,7 +1034,10 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
 		if ( inTextNode && data[i].type !== undefined ) {
 			// We're leaving a text node, process fixupStack if needed
 			// TODO duplicated code
-			if ( fixupStack.length > 0 && fixupStack[fixupStack.length - 1].expectedType == '/text' ) {
+			if (
+				fixupStack.length > 0 &&
+				fixupStack[fixupStack.length - 1].expectedType === '/text'
+			) {
 				popped = fixupStack.pop();
 				// Go through these in reverse!
 				for ( j = popped.openings.length - 1; j >= 0; j-- ) {
@@ -1017,7 +1047,8 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
 					writeElement( popped.reopenElements[j], i );
 				}
 			}
-			parentType = openingStack.length > 0 ? openingStack[openingStack.length - 1] : parentNode.getType();
+			parentType = openingStack.length > 0 ?
+				openingStack[openingStack.length - 1] : parentNode.getType();
 		}
 		if ( data[i].type === undefined ||  data[i].type.charAt( 0 ) !== '/' ) {
 			childType = data[i].type || 'text';
@@ -1111,20 +1142,31 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
 				if ( openings.length > 0 ) {
 					// We wrapped the text node, update parentType
 					parentType = childType;
-					fixupStack.push( { 'expectedType': '/text', 'openings': openings, 'reopenElements': reopenElements } );
+					fixupStack.push( {
+						'expectedType': '/text',
+						'openings': openings,
+						'reopenElements': reopenElements
+					} );
 				}
 				// If we didn't wrap the text node, then the node we're inserting
 				// into can have content, so we couldn't have closed anything
 			} else {
-				fixupStack.push( { 'expectedType': '/' + data[i].type, 'openings': openings, 'reopenElements': reopenElements } );
+				fixupStack.push( {
+					'expectedType': '/' + data[i].type,
+					'openings': openings,
+					'reopenElements': reopenElements
+				} );
 				parentType = data[i].type;
 			}
 		} else {
 			// Closing
 			writeElement( data[i], i );
-			// TODO don't close fixup stuff if the next thing immediately needs to be fixed up as well;
-			// instead, merge the two wrappers
-			if ( fixupStack.length > 0 && fixupStack[fixupStack.length - 1].expectedType == data[i].type ) {
+			// TODO don't close fixup stuff if the next thing immediately needs to be fixed up as
+			// well; instead, merge the two wrappers
+			if (
+				fixupStack.length > 0 &&
+				fixupStack[fixupStack.length - 1].expectedType === data[i].type
+			) {
 				popped = fixupStack.pop();
 				// Go through these in reverse!
 				for ( j = popped.openings.length - 1; j >= 0; j-- ) {
@@ -1134,14 +1176,18 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
 					writeElement( popped.reopenElements[j], i );
 				}
 			}
-			parentType = openingStack.length > 0 ? openingStack[openingStack.length - 1] : parentNode.getType();
+			parentType = openingStack.length > 0 ?
+				openingStack[openingStack.length - 1] : parentNode.getType();
 		}
 	}
 
 	if ( inTextNode ) {
 		// We're leaving a text node, process fixupStack if needed
 		// TODO duplicated code
-		if ( fixupStack.length > 0 && fixupStack[fixupStack.length - 1].expectedType == '/text' ) {
+		if (
+			fixupStack.length > 0 &&
+			fixupStack[fixupStack.length - 1].expectedType === '/text'
+		) {
 			popped = fixupStack.pop();
 			// Go through these in reverse!
 			for ( j = popped.openings.length - 1; j >= 0; j-- ) {
@@ -1151,7 +1197,8 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
 				writeElement( popped.reopenElements[j], i );
 			}
 		}
-		parentType = openingStack.length > 0 ? openingStack[openingStack.length - 1] : parentNode.getType();
+		parentType = openingStack.length > 0 ?
+			openingStack[openingStack.length - 1] : parentNode.getType();
 	}
 
 	// Close unclosed openings
@@ -1179,7 +1226,7 @@ ve.dm.Document.prototype.fixupInsertion = function( data, offset ) {
  * @returns {Array} Balanced snippet of linear model data
  */
 ve.dm.Document.prototype.getBalancedData = function( range ) {
-	var	node = this.getNodeFromOffset( range.start ),
+	var node = this.getNodeFromOffset( range.start ),
 		selection = this.selectNodes( range, 'siblings' ),
 		addOpenings = [],
 		addClosings = [];
@@ -1192,7 +1239,7 @@ ve.dm.Document.prototype.getBalancedData = function( range ) {
 		return this.data.slice( range.start, range.end );
 	}
 
-	var	first = selection[0],
+	var first = selection[0],
 		last = selection[selection.length - 1],
 		firstNode = first.node,
 		lastNode = last.node;

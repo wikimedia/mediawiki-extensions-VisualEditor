@@ -1,4 +1,11 @@
 /**
+ * VisualEditor user interface FormatDropdownTool class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Creates an ve.FormatDropdownTool object.
  *
  * @class
@@ -63,7 +70,7 @@ ve.FormatDropdownTool = function( toolbar, name, title ) {
 /* Methods */
 
 ve.FormatDropdownTool.splitAndUnwrap = function( model, list, firstItem, lastItem, selection ) {
-	var	doc = model.getDocument(),
+	var doc = model.getDocument(),
 		start = firstItem.getOuterRange().start,
 		end = lastItem.getOuterRange().end,
 		tx;
@@ -95,7 +102,7 @@ ve.FormatDropdownTool.splitAndUnwrap = function( model, list, firstItem, lastIte
 };
 
 ve.FormatDropdownTool.prototype.onSelect = function( item ) {
-	var	surfaceView = this.toolbar.getSurfaceView(),
+	var surfaceView = this.toolbar.getSurfaceView(),
 		model = surfaceView.getModel(),
 		selection = model.getSelection(),
 		doc = model.getDocument();
@@ -158,7 +165,7 @@ ve.FormatDropdownTool.prototype.getMatchingMenuItems = function( nodes ) {
 		itemLoop:
 		for ( var j = 0; j < items.length; j++ ) {
 			var item = items[j];
-			if ( item.type == nodeType ) {
+			if ( item.type === nodeType ) {
 				if ( item.attributes && nodeAttributes ) {
 					// Compare attributes
 					for ( var key in item.attributes ) {
@@ -166,7 +173,7 @@ ve.FormatDropdownTool.prototype.getMatchingMenuItems = function( nodes ) {
 							// Node must have all the required attributes
 							!( key in nodeAttributes ) ||
 							// Use weak comparison because numbers sometimes come through as strings
-							item.attributes[key] != nodeAttributes[key]
+							item.attributes[key] !== nodeAttributes[key]
 						) {
 							// Skip to the next menu item
 							continue itemLoop;
@@ -200,7 +207,7 @@ ve.FormatDropdownTool.prototype.updateState = function( annotations, nodes ) {
 ve.ui.Tool.tools.format = {
 	'constructor': ve.FormatDropdownTool,
 	'name': 'format',
-	'title': ve.msg( 'visualeditor-formatdropdown-tooltip' )
+	'title': ve.msg( 'visualeditor-formatdropdown-title' )
 };
 
 /* Inheritance */

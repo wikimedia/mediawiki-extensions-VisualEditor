@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model DefinitionListItemNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node for a definition list item.
  *
  * @class
@@ -42,7 +49,7 @@ ve.dm.DefinitionListItemNode.converters = {
 		return element.attributes && ( {
 			'term': document.createElement( 'dt' ),
 			'definition': document.createElement( 'dd' )
-		} )[element.attributes['style']];
+		} )[element.attributes.style];
 	},
 	'toDataElement': function( tag, element ) {
 		return ( {

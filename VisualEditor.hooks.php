@@ -1,4 +1,12 @@
 <?php
+/**
+ * VisualEditor extension hooks
+ *
+ * @file
+ * @ingroup Extensions
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
 
 class VisualEditorHooks {
 	/**
@@ -21,7 +29,7 @@ class VisualEditorHooks {
 				$skin->getRelevantTitle()->getNamespace() === NS_VISUALEDITOR
 			)
 		) {
-			$output->addModules( array( 'ext.visualEditor.editPageInit' ) );
+			$output->addModules( array( 'ext.visualEditor.viewPageTarget' ) );
 		}
 		return true;
 	}

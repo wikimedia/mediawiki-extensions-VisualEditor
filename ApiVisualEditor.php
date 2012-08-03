@@ -1,10 +1,19 @@
 <?php
-/* Base parsoid API wrapper. */
+/**
+ * Parsoid API wrapper.
+ *
+ * @file
+ * @ingroup Extensions
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 class ApiVisualEditor extends ApiBase {
 
 	public function execute() {
-		global $wgRequest, $wgUser, $wgVisualEditorParsoidURL;
-		
+		global $wgVisualEditorParsoidURL;
+		$user = $this->getUser();
+
 		$parsoid = $wgVisualEditorParsoidURL;
 		$params = $this->extractRequestParams();
 		$page = Title::newFromText( $params['page'] );
@@ -28,7 +37,7 @@ class ApiVisualEditor extends ApiBase {
 			} else {
 				$result = array( 'result' => 'success', 'parsed' => '' );
 			}
-		} elseif ( $params['paction'] === 'save' && $wgUser->isBlocked() ) {
+		} elseif ( $params['paction'] === 'save' && $user->isBlocked() ) {
 			$result = array( 'result' => 'error' );
 		} elseif ( $params['paction'] === 'save' /* means user is not blocked */ ) {
 			// API Posts HTML to Parsoid Service, receives Wikitext,
@@ -54,13 +63,13 @@ class ApiVisualEditor extends ApiBase {
 
 				// Add / Remove from watch list.
 				if( $params['watch'] === 'true' ) {
-					if ( $wgUser->isWatched( $page ) === false ) {
-						$wgUser->addWatch( $page );	
+					if ( $user->isWatched( $page ) === false ) {
+						$user->addWatch( $page );
 					}
 				} else {
 					// Remove from watchlist? 
-					if ( $wgUser->isWatched( $page ) === true ) {
-						$wgUser->removeWatch( $page );	
+					if ( $user->isWatched( $page ) === true ) {
+						$user->removeWatch( $page );
 					}
 				}
 
@@ -74,7 +83,7 @@ class ApiVisualEditor extends ApiBase {
 				);
 				$api = new ApiMain(
 					new DerivativeRequest(
-						$wgRequest,
+						$this->getRequest(),
 						$apiParams,
 						false // was posted?
 					),

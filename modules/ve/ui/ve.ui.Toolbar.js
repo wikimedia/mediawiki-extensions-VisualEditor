@@ -1,4 +1,16 @@
-// ToolbarView
+/**
+ * VisualEditor user interface Toolbar class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
+ * Editing toolbar.
+ *
+ * @class
+ * @constructor
+ */
 ve.ui.Toolbar = function( $container, surfaceView, config ) {
 	// Inheritance TODO: Do we still need it?
 	ve.EventEmitter.call( this );
@@ -7,7 +19,7 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
 	}
 
 	// References for use in closures
-	var	_this = this,
+	var _this = this,
 		$window = $( window );
 
 	// Properties
@@ -26,7 +38,6 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
 		{ 'name': 'list', 'items' : ['number', 'bullet', 'outdent', 'indent'] }
 	];
 	this.setup();
-
 };
 
 /* Methods */
@@ -44,7 +55,8 @@ ve.ui.Toolbar.prototype.updateTools = function() {
 		range = model.getSelection(),
 		startNode,
 		endNode,
-		_this = this;
+		_this = this,
+		i;
 
 	if ( range !== null ) {
 		if ( range.from === range.to ){
@@ -101,7 +113,7 @@ ve.ui.Toolbar.prototype.getSurfaceView = function() {
 
 ve.ui.Toolbar.prototype.setup = function() {
 	for ( var i = 0; i < this.config.length; i++ ) {
-		var	$group = $( '<div>' )
+		var $group = $( '<div>' )
 			.addClass( 'es-toolbarGroup' )
 			.addClass( 'es-toolbarGroup-' + this.config[i].name );
 		if ( this.config[i].label ) {

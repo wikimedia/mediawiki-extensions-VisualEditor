@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model Node class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Generic DataModel node.
  *
  * @class
@@ -218,7 +225,7 @@ ve.dm.Node.prototype.getClonedElement = function() {
 		retval.attributes = ve.copyObject( this.attributes );
 	}
 	return retval;
-}
+};
 
 /**
  * Checks if this node can be merged with another.
@@ -233,7 +240,7 @@ ve.dm.Node.prototype.getClonedElement = function() {
  * @returns {Boolean} Nodes can be merged
  */
 ve.dm.Node.prototype.canBeMergedWith = function( node ) {
-	var	n1 = this,
+	var n1 = this,
 		n2 = node;
 	// Move up from n1 and n2 simultaneously until we find a common ancestor
 	while ( n1 !== n2 ) {

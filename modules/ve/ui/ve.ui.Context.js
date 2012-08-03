@@ -1,4 +1,11 @@
 /**
+ * VisualEditor user interface Context class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Creates an ve.ui.Context object.
  *
  * @class
@@ -19,12 +26,9 @@ ve.ui.Context = function( surfaceView, $overlay ) {
 	this.clicking = false;
 	this.$ = $( '<div class="es-contextView"></div>' ).appendTo( $overlay || $( 'body' ) );
 	this.$toolbar = $( '<div class="es-contextView-toolbar"></div>' );
-	this.$inspectors =
-		$( '<iframe class="es-contextView-inspectors"></iframe>' )
-			.attr({
-				'frameborder': '0'
-			})
-			.appendTo( this.$ );
+
+	// Create iframe which will contain context inspectors.
+	this.setupInspectorFrame();
 
 	this.$icon = $( '<div class="es-contextView-icon"></div>' ).appendTo( this.$ );
 	this.toolbarView = new ve.ui.Toolbar(
@@ -50,11 +54,52 @@ ve.ui.Context = function( surfaceView, $overlay ) {
 		'blur': ve.proxy( this.onDocumentBlur, this )
 	} );
 
-	// Intitialization
+	// Intitialize link inspector
 	this.addInspector( 'link', new ve.ui.LinkInspector( this.toolbarView, this ) );
 };
 
 /* Methods */
+
+ve.ui.Context.prototype.setupInspectorFrame = function() {
+	// Create and append an iframe for inspectors.
+	// Use of iframe is required to retain selection while inspector controls are focused.
+	this.$inspectors =
+		$( '<iframe class="es-contextView-inspectors"></iframe>' )
+			.attr({
+				'frameborder': '0'
+			})
+			.appendTo( this.$ );
+
+	// Stash iframe document reference to properly create & append elements.
+	this.inspectorDoc = this.$inspectors.prop( 'contentWindow' ).document;
+
+	// Cross browser trick to append content to an iframe
+	// Write a containing element to the iframe
+	this.inspectorDoc.write( '<div class="ve-inspector-wrapper"></div>' );
+	this.inspectorDoc.close();
+	this.$inspectorWrapper = $( this.inspectorDoc ).find( '.ve-inspector-wrapper' );
+
+	// Create style element in iframe document scope
+	var $styleLink =
+		$('<link />', this.inspectorDoc )
+			.attr( {
+				'rel': 'stylesheet',
+				'type': 'text/css',
+				'media': 'screen',
+				'href': ve.ui.getStylesheetPath() + 've.ui.Inspector.css'
+			} );
+
+	// Append inspector styles to iframe head
+	$( 'head', this.inspectorDoc ).append( $styleLink );
+
+	// Adjust iframe body styles.
+	$( 'body', this.inspectorDoc ).css( {
+		'padding': '0px 5px 10px 5px',
+		'margin': 0
+	} );
+
+	this.hideInspectorFrame();
+};
 
 ve.ui.Context.prototype.onDocumentFocus = function( event ) {
 	$( window ).bind( 'resize.ve-ui-context scroll.ve-ui-context', ve.proxy( this.set, this ) );
@@ -102,11 +147,13 @@ ve.ui.Context.prototype.isMenuOpen = function() {
 };
 
 ve.ui.Context.prototype.set = function() {
-	this.positionIcon();
-	if ( this.position ) {
-		this.positionOverlay( this.menuView.$ );
-		if ( this.inspector ) {
-			this.positionOverlay ( this.$inspectors );
+	if ( this.surfaceView.getModel().getSelection().getLength() > 0 ) {
+		this.positionIcon();
+		if ( this.position ) {
+			this.positionOverlay( this.menuView.$ );
+			if ( this.inspector ) {
+				this.positionOverlay ( this.$inspectors );
+			}
 		}
 	}
 };
@@ -114,7 +161,7 @@ ve.ui.Context.prototype.set = function() {
 ve.ui.Context.prototype.positionIcon = function() {
 	this.$.removeClass( 'es-contextView-position-start es-contextView-position-end' );
 
-	var	selection = this.surfaceView.model.getSelection(),
+	var selection = this.surfaceView.model.getSelection(),
 		selectionRect = this.surfaceView.getSelectionRect();
 
 	if( selection.to > selection.from ) {
@@ -200,36 +247,12 @@ ve.ui.Context.prototype.getInspector = function( name ) {
 };
 
 ve.ui.Context.prototype.addInspector = function( name, inspector ) {
-	var _this = this;
 	if ( name in this.inspectors ) {
 		throw 'Duplicate inspector error. Previous registration with the same name: ' + name;
 	}
 	inspector.$.hide();
 	this.inspectors[name] = inspector;
-	// Iframe build code below.
-	// TODO: Rework this to allow multiple inspectors
-	$styleLink =
-		$('<link />')
-			.attr({
-				'rel': 'stylesheet',
-				'type': 'text/css',
-				'href': ve.ui.getStylesheetPath() + 've.ui.Inspector.css'
-			});
-
-	var inspectorDoc = this.$inspectors.prop( 'contentWindow' ).document;
-	var inspectorContent = '<div id="ve-inspector-wrapper"></div>';
-
-	inspectorDoc.write( inspectorContent );
-	inspectorDoc.close();
-
-	$( 'head', inspectorDoc ).append( $styleLink );
-	$( '#ve-inspector-wrapper', inspectorDoc ).append( inspector.$ );
-  
-	$( 'body', inspectorDoc ).css( {
-		'padding': '0px 5px 10px 5px',
-		'margin': 0
-	} );
-	this.hideInspectorFrame();
+	this.$inspectorWrapper.append( inspector.$ );
 };
 
 ve.ui.Context.prototype.hideInspectorFrame = function ( inspector ) {

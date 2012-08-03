@@ -3,16 +3,18 @@
  * asynchronous transform.
  *
  * @author Gabriel Wicke <gwicke@wikimedia.org>
- * 
+ *
  * TODO: keep round-trip information in meta tag or the like
  */
 
 var jshashes = require('jshashes'),
-	PegTokenizer = require('./mediawiki.tokenizer.peg.js').PegTokenizer;
+	PegTokenizer = require('./mediawiki.tokenizer.peg.js').PegTokenizer,
+	WikitextConstants = require('./mediawiki.wikitext.constants.js').WikitextConstants,
+	Util = require('./mediawiki.Util.js').Util;
 
 function WikiLinkHandler( manager, isInclude ) {
 	this.manager = manager;
-	this.manager.addTransform( this.onWikiLink.bind( this ), this.rank, 'tag', 'wikilink' );
+	this.manager.addTransform( this.onWikiLink.bind( this ), "WikiLinkHandler:onWikiLink", this.rank, 'tag', 'wikilink' );
 	// create a new peg parser for image options..
 	if ( !this.imageParser ) {
 		// Actually the regular tokenizer, but we'll call it with the
@@ -25,35 +27,37 @@ WikiLinkHandler.prototype.rank = 1.15; // after AttributeExpander
 
 WikiLinkHandler.prototype.onWikiLink = function ( token, frame, cb ) {
 	var env = this.manager.env,
-		href = token.attribs[0].v;
-	var title = this.manager.env.makeTitleFromPrefixedText( 
-					env.tokensToString( href )
-				);
+		href = env.tokensToString( Util.lookupKV( token.attribs, 'href' ).v ),
+		title = env.makeTitleFromPrefixedText(href);
 
 	if ( title.ns.isFile() ) {
-		cb( this.renderFile( token, frame, cb, title ) );
+		cb( this.renderFile( token, frame, cb, href, title ) );
 	} else if ( title.ns.isCategory() ) {
-		// TODO: implement
-		cb( { } );
+		// Simply round-trip category links for now
+		cb( { tokens: [
+				new SelfclosingTagTk( 'meta',
+					[new KV( 'typeof', 'mw:Placeholder' )],
+					token.dataAttribs )
+				]
+		});
 	} else {
 		// Check if page exists
-		// 
+		//
 		//console.warn( 'title: ' + JSON.stringify( title ) );
 		var normalizedHref = title.makeLink(),
-			obj = new TagTk( 'a', 
-					[ 
-						new KV( 'href', normalizedHref ),
-						new KV('rel', 'mw:wikiLink')
-					] 
-					, token.dataAttribs
+			obj = new TagTk( 'a',
+					[
+						new KV( 'href', normalizedHref )
+					], token.dataAttribs
 				),
 			content = token.attribs.slice(2);
 		if ( href !== normalizedHref ) {
-			obj.dataAttribs.sHref = env.tokensToString( href );
+			obj.dataAttribs.sHref = href;
 		}
 		//console.warn('content: ' + JSON.stringify( content, null, 2 ) );
+
 		// XXX: handle trail
-		if ( content.length ) {
+		if ( content.length > 0 ) {
 			var out = [];
 			for ( var i = 0, l = content.length; i < l ; i++ ) {
 				out = out.concat( content[i].v );
@@ -61,13 +65,14 @@ WikiLinkHandler.prototype.onWikiLink = function ( token, frame, cb ) {
 					out.push( '|' );
 				}
 			}
+			obj.attribs.push( new KV('rel', 'mw:WikiLink') );
 			content = out;
 		} else {
-			content = [ env.decodeURI( env.tokensToString( href ) ) ];
-			obj.dataAttribs.gc = 1;
+			content = [ Util.decodeURI(href) ];
+			obj.attribs.push( new KV('rel', 'mw:SimpleWikiLink') );
 		}
 
-		var tail = token.attribs[1].v;
+		var tail = Util.lookupKV( token.attribs, 'tail' ).v;
 		if ( tail ) {
 			obj.dataAttribs.tail = tail;
 			content.push( tail );
@@ -79,47 +84,12 @@ WikiLinkHandler.prototype.onWikiLink = function ( token, frame, cb ) {
 	}
 };
 
-WikiLinkHandler.prototype._simpleImageOptions = {
-	// halign
-	'left': 'halign',
-	'right': 'halign',
-	'center': 'halign',
-	'float': 'halign',
-	'none': 'halign',
-	// valign
-	'baseline': 'valign',
-	'sub': 'valign',
-	'super': 'valign',
-	'top': 'valign',
-	'text-top': 'valign',
-	'middle': 'valign',
-	'bottom': 'valign',
-	'text-bottom': 'valign',
-	// format
-	'border': 'format',
-	'frameless': 'format',
-	'frame': 'format',
-	'thumbnail': 'format',
-	'thumb': 'format'
-};
-
-WikiLinkHandler.prototype._prefixImageOptions = {
-	'link': 'link',
-	'alt': 'alt',
-	'page': 'page',
-	'thumbnail': 'thumb',
-	'thumb': 'thumb',
-	'upright': 'aspect'
-};
-
-WikiLinkHandler.prototype.renderFile = function ( token, frame, cb, title ) {
+WikiLinkHandler.prototype.renderFile = function ( token, frame, cb, fileName, title ) {
 	var env = this.manager.env;
 	// distinguish media types
 	// if image: parse options
 	
-	// Slice off the target and tail
 	var content = token.attribs.slice(2);
-
 
 	var MD5 = new jshashes.MD5(),
 		hash = MD5.hex( title.key ),
@@ -138,11 +108,12 @@ WikiLinkHandler.prototype.renderFile = function ( token, frame, cb, title ) {
 			oText = this.manager.env.tokensToString( oContent.v, true );
 		//console.log( JSON.stringify( oText, null, 2 ) );
 		if ( oText.constructor === String ) {
-			oText = oText.trim();
-			if ( this._simpleImageOptions[ oText.toLowerCase() ] ) {
-				options.push( new KV( this._simpleImageOptions[ oText.toLowerCase() ], 
-							oText ) );
-				oHash[ this._simpleImageOptions[ oText ] ] = oText;
+			var origOText = oText;
+			oText = oText.trim().toLowerCase();
+			var imgOption = WikitextConstants.Image.SimpleOptions[oText];
+			if (imgOption) {
+				options.push( new KV(imgOption, origOText ) );
+				oHash[imgOption] = oText;
 				continue;
 			} else {
 				var maybeSize = oText.match(/^(\d*)(?:x(\d+))?px$/);
@@ -159,10 +130,16 @@ WikiLinkHandler.prototype.renderFile = function ( token, frame, cb, title ) {
 						oHash.height = y;
 					}
 				} else {
-					var bits = oText.split( '=', 2 ),
-						key = this._prefixImageOptions[ bits[0].trim().toLowerCase() ];
+					var bits = origOText.split( '=', 2 );
+					var normalizedBit0 = bits[0].trim().toLowerCase();
+					var key = WikitextConstants.Image.PrefixOptions[normalizedBit0];
 					if ( bits[0] && key) {
 						oHash[key] = bits[1];
+						// Preserve white space
+						// FIXME: But this doesn't work for the 'upright' key
+						if (key === normalizedBit0) {
+							key = bits[0];
+						}
 						options.push( new KV( key, bits[1] ) );
 						//console.warn('handle prefix ' + bits );
 					} else {
@@ -188,10 +165,13 @@ WikiLinkHandler.prototype.renderFile = function ( token, frame, cb, title ) {
 	// XXX: render according to mode (inline, thumb, framed etc)
 	
 	if ( oHash.format && ( oHash.format === 'thumb' || oHash.format === 'thumbnail') ) {
-		return this.renderThumb( token, this.manager, cb, title, path, caption, oHash, options );
+		return this.renderThumb( token, this.manager, cb, title, fileName, path, caption, oHash, options );
 	} else {
 		// TODO: get /wiki from config!
-		var a = new TagTk( 'a', [ new KV( 'href', title.makeLink() ) ] );
+		var a = new TagTk( 'a', [ 
+					new KV( 'href', title.makeLink() ),
+					new KV( 'rel', 'mw:Image' )
+				] );
 		a.dataAttribs = token.dataAttribs;
 
 		var width, height;
@@ -215,12 +195,14 @@ WikiLinkHandler.prototype.renderFile = function ( token, frame, cb, title ) {
 	}
 };
 
-WikiLinkHandler.prototype.renderThumb = function ( token, manager, cb, title, path, caption, oHash, options ) {
+WikiLinkHandler.prototype.renderThumb = function ( token, manager, cb, title, fileName, path, caption, oHash, options ) {
 	// TODO: get /wiki from config!
 	var a = new TagTk( 'a', [ new KV( 'href', title.makeLink() ) ] );
 	a.dataAttribs = token.dataAttribs;
 	a.dataAttribs.optionHash = oHash;
 	a.dataAttribs.optionList = options;
+	// clear src string since we can serialize this
+	a.dataAttribs.src = undefined;
 
 	var width = 165;
 
@@ -261,11 +243,9 @@ WikiLinkHandler.prototype.renderThumb = function ( token, manager, cb, title, pa
 		new TagTk( 
 				'figure', 
 				[
+					new KV('typeof', 'mw:Thumb'),
 					new KV('class', figureclass),
-					new KV('style', figurestyle),
-					new KV('typeof', 'http://mediawiki.org/rdf/Thumb'),
-					// XXX: define this globally?
-					new KV('prefix', "mw: http://mediawiki.org/rdf/terms/")
+					new KV('style', figurestyle)
 				] 
 			),
 		new TagTk( 
@@ -285,7 +265,7 @@ WikiLinkHandler.prototype.renderThumb = function ( token, manager, cb, title, pa
 					new KV('alt', oHash.alt || title.key ),
 					// Add resource as CURIE- needs global default prefix
 					// definition.
-					new KV('resource', '[:' + title.getPrefixedText() + ']')
+					new KV('resource', '[:' + fileName + ']')
 				]
 			),
 		new EndTagTk( 'a' ),
@@ -337,10 +317,10 @@ WikiLinkHandler.prototype.renderThumb = function ( token, manager, cb, title, pa
 
 function ExternalLinkHandler( manager, isInclude ) {
 	this.manager = manager;
-	this.manager.addTransform( this.onUrlLink.bind( this ), this.rank, 'tag', 'urllink' );
-	this.manager.addTransform( this.onExtLink.bind( this ), 
+	this.manager.addTransform( this.onUrlLink.bind( this ), "ExternalLinkHandler:onUrlLink", this.rank, 'tag', 'urllink' );
+	this.manager.addTransform( this.onExtLink.bind( this ), "ExternalLinkHandler:onExtLink",  
 			this.rank - 0.001, 'tag', 'extlink' );
-	this.manager.addTransform( this.onEnd.bind( this ), 
+	this.manager.addTransform( this.onEnd.bind( this ), "ExternalLinkHandler:onEnd",  
 			this.rank, 'end' );
 	// create a new peg parser for image options..
 	if ( !this.imageParser ) {
@@ -365,16 +345,15 @@ ExternalLinkHandler.prototype._imageExtensions = {
 
 ExternalLinkHandler.prototype._isImageLink = function ( href ) {
 	var bits = href.split( '.' );
-	return bits.length > 1 && 
+	return bits.length > 1 &&
 		this._imageExtensions[ bits[bits.length - 1] ] &&
 		href.match( /^https?:\/\// );
 };
 
 ExternalLinkHandler.prototype.onUrlLink = function ( token, frame, cb ) {
 	var env = this.manager.env,
-		href = env.sanitizeURI( 
-				env.tokensToString( env.lookupKV( token.attribs, 'href' ).v )
-			);
+		href = Util.sanitizeURI( 
+				env.tokensToString( Util.lookupKV( token.attribs, 'href' ).v ));
 	if ( this._isImageLink( href ) ) {
 		cb( { tokens: [ new SelfclosingTagTk( 'img', 
 					[ 
@@ -392,9 +371,8 @@ ExternalLinkHandler.prototype.onUrlLink = function ( token, frame, cb ) {
 				new TagTk( 'a', 
 					[ 
 						new KV( 'href', href ),
-						new KV('rel', 'mw:extLink')
-					],
-					{ stx: 'urllink' } ),
+						new KV('rel', 'mw:UrlLink')
+					] ),
 				href,
 				new EndTagTk( 'a' )
 			] 
@@ -406,17 +384,18 @@ ExternalLinkHandler.prototype.onUrlLink = function ( token, frame, cb ) {
 // Bracketed external link
 ExternalLinkHandler.prototype.onExtLink = function ( token, manager, cb ) {
 	var env = this.manager.env,
-		href = env.tokensToString( env.lookupKV( token.attribs, 'href' ).v ),
-		content= env.lookupKV( token.attribs, 'content' ).v;
-	href = env.sanitizeURI( href );
+		href = Util.sanitizeURI(env.tokensToString( Util.lookupKV( token.attribs, 'href' ).v )),
+		content= Util.lookupKV( token.attribs, 'content' ).v,
+		rdfaType = 'mw:ExtLink';
 	//console.warn('extlink href: ' + href );
 	//console.warn( 'content: ' + JSON.stringify( content, null, 2 ) );
 	// validate the href
-	if ( ! content.length ) {
-		content = ['[' + this.linkCount + ']'];
-		this.linkCount++;
-	}
 	if ( this.imageParser.tokenizeURL( href ) ) {
+		if ( ! content.length ) {
+			content = ['[' + this.linkCount + ']'];
+			this.linkCount++;
+			rdfaType = 'mw:NumberedExtLink';
+		}
 		if ( content.length === 1 && 
 				content[0].constructor === String &&
 				this.imageParser.tokenizeURL( content[0] ) &&
@@ -439,15 +418,21 @@ ExternalLinkHandler.prototype.onExtLink = function ( token, manager, cb ) {
 					new TagTk ( 'a', 
 							[ 
 								new KV('href', href),
-								new KV('rel', 'mw:extLink')
+								new KV('rel', rdfaType)
 							], 
 							token.dataAttribs
 					)
 				].concat( content, [ new EndTagTk( 'a' )])
 		} );
 	} else {
+		var tokens = ['[', href ];
+		if ( content.length ) {
+			tokens = tokens.concat( [' '], content );
+		}
+		tokens.push(']');
+
 		cb( {
-			tokens: ['[', href, ' ' ].concat( content, [']'] )
+			tokens: tokens
 		} );
 	}
 };

@@ -1,3 +1,12 @@
+/*global mw,confirm,alert */
+
+/**
+ * VisualEditor initialization ViewPageTarget class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 /**
  * Edit page target.
  *
@@ -15,6 +24,8 @@ ve.init.ViewPageTarget = function() {
 	this.$document = null;
 	this.$spinner = $( '<div class="ve-init-viewPageTarget-loadingSpinner"></div>' );
 	this.$toolbarSaveButton = $( '<div class="ve-init-viewPageTarget-toolbar-saveButton"></div>' );
+	this.$toolbarFeedbackButton =
+		$( '<div class="ve-init-viewPageTarget-toolbar-feedbackButton"><a href="#"></a></div>' );
 	this.$saveDialog = $( '<div class="es-inspector ve-init-viewPageTarget-saveDialog"></div>' );
 	this.$saveDialogSaveButton = null;
 	this.onBeforeUnloadFallback = null;
@@ -59,6 +70,7 @@ ve.init.ViewPageTarget = function() {
 		this.setupSectionEditLinks();
 		if ( this.isViewPage ) {
 			this.setupToolbarSaveButton();
+			this.setupToolbarFeedbackButton();
 			this.setupSaveDialog();
 			if ( this.currentUri.query.veaction === 'edit' ) {
 				this.activate();
@@ -88,10 +100,10 @@ ve.init.ViewPageTarget.saveDialogTemplate = '\
 			<label class="ve-init-viewPageTarget-saveDialog-watchList-label" \
 				for="ve-init-viewPageTarget-saveDialog-watchList"></label>\
 		</div>\
-		<div class="ve-init-viewPageTarget-saveDialog-saveButton">\
+		<button class="ve-init-viewPageTarget-saveDialog-saveButton">\
 			<span class="ve-init-viewPageTarget-saveDialog-saveButton-label"></span>\
 			<div class="ve-init-viewPageTarget-saveDialog-saveButton-icon"></div>\
-		</div>\
+		</button>\
 		<div style="clear:both"></div>\
 	</div>\
 	<div class="ve-init-viewPageTarget-saveDialog-foot">\
@@ -138,6 +150,7 @@ ve.init.ViewPageTarget.prototype.deactivate = function( override ) {
 			this.restoreSiteNotice();
 			this.hideSpinner();
 			this.detachToolbarSaveButton();
+			this.detachToolbarFeedbackButton();
 			this.detachSaveDialog();
 			this.tearDownSurface();
 			this.showTableOfContents();
@@ -156,6 +169,7 @@ ve.init.ViewPageTarget.prototype.onLoad = function( dom ) {
 	this.edited = false;
 	this.setUpSurface( dom );
 	this.attachToolbarSaveButton();
+	this.attachToolbarFeedbackButton();
 	this.attachSaveDialog();
 	this.restoreScrollPosition();
 	this.restoreEditSection();
@@ -579,9 +593,13 @@ ve.init.ViewPageTarget.prototype.setupSaveDialog = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.attachSaveDialog = function() {
-	// Update the summary message from ve.specialMessages
+	// Update the summary and minoredit messages from ve.specialMessages
 	this.$saveDialog.find( '.ve-init-viewPageTarget-saveDialog-editSummary-label' )
 		.html( ve.specialMessages.summary );
+	this.$saveDialog.find( '.ve-init-viewPageTarget-saveDialog-minorEdit-label' )
+		.html( ve.specialMessages.minoredit );
+	this.$saveDialog.find( '.ve-init-viewPageTarget-saveDialog-watchList-label' )
+		.html( ve.specialMessages.watchthis );
 	this.$saveDialog.insertAfter( this.$toolbarSaveButton );
 };
 
@@ -639,7 +657,7 @@ ve.init.ViewPageTarget.prototype.hideSpinner = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.showPageContent = function() {
-	$( '#bodyContent .ve-init-viewPageTarget-content:not(#siteSub)' )
+	$( '#bodyContent >.ve-init-viewPageTarget-content' )
 		.removeClass( 've-init-viewPageTarget-content' )
 		.show()
 		.fadeTo( 0, 1 );
@@ -651,7 +669,7 @@ ve.init.ViewPageTarget.prototype.showPageContent = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.mutePageContent = function() {
-	$( '#bodyContent :visible:not(#siteSub)' )
+	$( '#bodyContent >:visible:not(#siteSub)' )
 		.addClass( 've-init-viewPageTarget-content' )
 		.fadeTo( 'fast', 0.6 );
 };
@@ -662,7 +680,7 @@ ve.init.ViewPageTarget.prototype.mutePageContent = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.hidePageContent = function() {
-	$( '#bodyContent :visible:not(#siteSub)' )
+	$( '#bodyContent >:visible:not(#siteSub)' )
 		.addClass( 've-init-viewPageTarget-content' )
 		.hide();
 };
@@ -797,7 +815,7 @@ ve.init.ViewPageTarget.prototype.transformPageTitle = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.mutePageTitle = function() {
-	$( '#firstHeading, #siteSub' ).fadeTo( 'fast', 0.6 );
+	$( '#firstHeading, #siteSub:visible' ).fadeTo( 'fast', 0.6 );
 };
 
 /**
@@ -806,7 +824,7 @@ ve.init.ViewPageTarget.prototype.mutePageTitle = function() {
  * @method
  */
 ve.init.ViewPageTarget.prototype.restorePageTitle = function() {
-	$( '#firstHeading, #siteSub' ).fadeTo( 'fast', 1 );
+	$( '#firstHeading, #siteSub:visible' ).fadeTo( 'fast', 1 );
 	setTimeout( function() {
 		$( '#firstHeading' ).removeClass( 've-init-viewPageTarget-pageTitle' );
 	}, 1000 );
@@ -1006,6 +1024,48 @@ ve.init.ViewPageTarget.prototype.onBeforeUnload = function() {
 		} );
 		return message;
 	}
+};
+
+/**
+ * Sets up the feedback button.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.setupToolbarFeedbackButton = function() {
+	var feedback = new mw.Feedback( {
+		'title': new mw.Title( 'Visual editor/Feedback' ),
+		'dialogTitleMessageKey': 'visualeditor-feedback-dialog-title',
+		'bugsLink': new mw.Uri(
+			'https://bugzilla.wikimedia.org/enter_bug.cgi?product=VisualEditor'
+		),
+		'bugsListLink': new mw.Uri(
+			'https://bugzilla.wikimedia.org/buglist.cgi?query_format=advanced&resolution=---&' +
+				'resolution=LATER&resolution=DUPLICATE&product=VisualEditor'
+		)
+	} );
+	this.$toolbarFeedbackButton.find( 'a' )
+		.text( ve.msg( 'visualeditor-feedback-prompt' ) )
+		.click( function() {
+			feedback.launch();
+		} );
+};
+
+/**
+ * Adds the feedback button to the user interface.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.attachToolbarFeedbackButton = function() {
+	$( '.es-toolbar .es-modes' ).prepend( this.$toolbarFeedbackButton );
+};
+
+/**
+ * Removes the feedback button from the user interface.
+ *
+ * @method
+ */
+ve.init.ViewPageTarget.prototype.detachToolbarFeedbackButton = function() {
+	this.$toolbarFeedbackButton.detach();
 };
 
 /* Inheritance */

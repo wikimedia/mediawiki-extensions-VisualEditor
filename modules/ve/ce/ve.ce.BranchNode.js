@@ -1,4 +1,11 @@
 /**
+ * VisualEditor content editable BranchNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * ContentEditable node that can have branch or leaf children.
  *
  * @class
@@ -56,11 +63,12 @@ if ( $.browser.msie ) {
  * @throws 'Invalid attribute value' if attribute value is not a key in {domWrapperElementTypes}
  */
 ve.ce.BranchNode.getDomWrapperType = function( model, key ) {
-	var value = model.getAttribute( key );
+	var types,
+		value = model.getAttribute( key );
 	if ( value === undefined ) {
 		throw 'Undefined attribute: ' + key;
 	}
-	var types = ve.ce.nodeFactory.lookup( model.getType() ).domWrapperElementTypes;
+	types = ve.ce.nodeFactory.lookup( model.getType() ).domWrapperElementTypes;
 	if ( types[value] === undefined ) {
 		throw 'Invalid attribute value: ' + value;
 	}
@@ -84,11 +92,13 @@ ve.ce.BranchNode.getDomWrapper = function( model, key ) {
 
 /* Methods */
 
-ve.ce.BranchNode.prototype.doSlugs = function() {
+ve.ce.BranchNode.prototype.addSlugs = function() {
+	var i, $slug;
+
 	// Remove all slugs in this branch
 	this.$slugs.remove();
 
-	var $slug = ve.ce.BranchNode.$slugTemplate.clone();
+	$slug = ve.ce.BranchNode.$slugTemplate.clone();
 
 	if ( this.canHaveGrandchildren() ) {
 		$slug.css( 'display', 'block');
@@ -101,24 +111,26 @@ ve.ce.BranchNode.prototype.doSlugs = function() {
 			$slug.clone().appendTo( this.$ )
 		);
 	}
-	for ( var i = 0; i < this.children.length; i++ ) {
-		if ( this.children[i].canHaveSlug() ) {
-			if ( i === 0 ) {
-				// First sluggable child (left side)
-				this.$slugs = this.$slugs.add(
-					$slug.clone().insertBefore( this.children[i].$ )
-				);
-			}
+	// TODO the before/after logic below is duplicated from hasSlugAtOffset(), refactor this
+	for ( i = 0; i < this.children.length; i++ ) {
+		if ( this.children[i].canHaveSlugAfter() ) {
 			if (
 				// Last sluggable child (right side)
 				i === this.children.length - 1 ||
 				// Sluggable child followed by another sluggable child (in between)
-				( this.children[i + 1] && this.children[i + 1].canHaveSlug() )
+				( this.children[i + 1] && this.children[i + 1].canHaveSlugBefore() )
 			) {
 				this.$slugs = this.$slugs.add(
 					$slug.clone().insertAfter( this.children[i].$ )
 				);
 			}
+		}
+		// First sluggable child (left side)
+		if ( i === 0 && this.children[i].canHaveSlugBefore() ) {
+			this.$slugs = this.$slugs.add(
+				$slug.clone().insertBefore( this.children[i].$ )
+			);
+
 		}
 	}
 };
@@ -138,9 +150,11 @@ ve.ce.BranchNode.prototype.doSlugs = function() {
  * @emits rewrap ($old, $new)
  */
 ve.ce.BranchNode.prototype.updateDomWrapper = function( key ) {
-	var type = ve.ce.BranchNode.getDomWrapperType( this.model, key );
+	var $element,
+		type = ve.ce.BranchNode.getDomWrapperType( this.model, key );
+
 	if ( type !== this.domWrapperElementType ) {
-		var $element = $( '<' + type + '></' + type + '>' );
+		$element = $( '<' + type + '></' + type + '>' );
 		// Copy classes
 		$element.attr( 'class', this.$.attr( 'class' ) );
 		// Copy .data( 'node' )
@@ -172,21 +186,23 @@ ve.ce.BranchNode.prototype.updateDomWrapper = function( key ) {
 ve.ce.BranchNode.prototype.onSplice = function( index, howmany ) {
 	var i,
 		length,
-		args = Array.prototype.slice.call( arguments, 0 );
+		args = Array.prototype.slice.call( arguments, 0 ),
+		$anchor,
+		removals,
+		$target;
 	// Convert models to views and attach them to this node
 	if ( args.length >= 3 ) {
 		for ( i = 2, length = args.length; i < length; i++ ) {
 			args[i] = ve.ce.nodeFactory.create( args[i].getType(), args[i] );
 		}
 	}
-	var removals = this.children.splice.apply( this.children, args );
+	removals = this.children.splice.apply( this.children, args );
 	for ( i = 0, length = removals.length; i < length; i++ ) {
 		removals[i].detach();
 		// Update DOM
 		removals[i].$.detach();
 	}
 	if ( args.length >= 3 ) {
-		var $target;
 		if ( index ) {
 			// Get the element before the insertion point
 			$anchor = this.$.children(':not(.ve-ce-slug)').eq( index - 1 );
@@ -201,26 +217,35 @@ ve.ce.BranchNode.prototype.onSplice = function( index, howmany ) {
 		}
 	}
 
-	this.doSlugs();
+	this.addSlugs();
 };
 
 ve.ce.BranchNode.prototype.hasSlugAtOffset = function( offset ) {
+	var i, nodeOffset, nodeLength;
 	if ( this.getLength() === 0 ) {
 		return true;
 	}
-	for ( var i = 0; i < this.children.length; i++ ) {
-		if ( this.children[i].canHaveSlug() ) {
-			var nodeOffset = this.children[i].model.getRoot().getOffsetFromNode( this.children[i].model );
-			var nodeLength = this.children[i].model.getOuterLength();
-			if ( i === 0 ) {
-				if ( nodeOffset === offset ) {
+	for ( i = 0; i < this.children.length; i++ ) {
+		if ( this.children[i].canHaveSlugAfter() || this.children[i].canHaveSlugBefore() ) {
+			nodeOffset = this.children[i].model.getRoot().getOffsetFromNode( this.children[i].model );
+			if ( this.children[i].canHaveSlugAfter() ) {
+				nodeLength = this.children[i].model.getOuterLength();
+				if (
+					// Offset is after this child
+					offset === nodeOffset + nodeLength &&
+					(
+						// Last sluggable child (right side)
+						i === this.children.length - 1 ||
+						// Sluggable child followed by another sluggable child (in between)
+						( this.children[i + 1] && this.children[i + 1].canHaveSlugBefore() )
+					)
+				) {
 					return true;
 				}
 			}
-			if ( i === this.children.length - 1 || ( this.children[i + 1] && this.children[i + 1].canHaveSlug() ) ) {
-				if ( nodeOffset + nodeLength === offset ) {
-					return true;
-				}
+			// First sluggable child (left side)
+			if ( i === 0 && offset === nodeOffset && this.children[i].canHaveSlugBefore() ) {
+				return true;
 			}
 		}
 	}
@@ -232,10 +257,9 @@ ve.ce.BranchNode.prototype.clean = function() {
 	for ( var i = 0; i < this.children.length; i++ ) {
 		this.$.append( this.children[i].$ );
 	}
-	this.doSlugs();
+	this.addSlugs();
 };
 
 /* Inheritance */
 
-ve.extendClass( ve.ce.BranchNode, ve.BranchNode );
-ve.extendClass( ve.ce.BranchNode, ve.ce.Node );
+ve.extendClass( ve.ce.BranchNode, ve.BranchNode, ve.ce.Node );

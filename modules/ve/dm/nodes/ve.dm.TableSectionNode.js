@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model TableSelectionNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node for a table section.
  *
  * @class
@@ -43,7 +50,7 @@ ve.dm.TableSectionNode.converters = {
 			'header': document.createElement( 'thead' ),
 			'body': document.createElement( 'tbody' ),
 			'footer': document.createElement( 'tfoot' )
-		} )[element.attributes['style']];
+		} )[element.attributes.style];
 	},
 	'toDataElement': function( tag, element ) {
 		return ( {

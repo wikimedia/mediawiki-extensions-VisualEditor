@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model BranchNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node that can have branch or leaf children.
  *
  * @class
@@ -116,5 +123,4 @@ ve.dm.BranchNode.prototype.splice = function( index, howmany ) {
 
 /* Inheritance */
 
-ve.extendClass( ve.dm.BranchNode, ve.BranchNode );
-ve.extendClass( ve.dm.BranchNode, ve.dm.Node );
+ve.extendClass( ve.dm.BranchNode, ve.BranchNode, ve.dm.Node );

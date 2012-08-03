@@ -6,15 +6,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'visualeditor' => 'VisualEditor',
-	'visualeditorsandbox' => 'Visual editor sandbox',
 	'visualeditor-desc' => 'Visual editor for MediaWiki',
-	'visualeditor-sandbox-title' => 'Visual editor sandbox',
-	'visualeditor-tooltip-wikitext' => 'Toggle wikitext view',
-	'visualeditor-tooltip-json' => 'Toggle JSON view',
-	'visualeditor-tooltip-html' => 'Toggle HTML view',
-	'visualeditor-tooltip-render' => 'Toggle preview',
-	'visualeditor-tooltip-history' => 'Toggle transaction history view',
-	'visualeditor-tooltip-help' => 'Toggle help view',
 	'visualeditor-feedback-prompt' => 'Leave feedback',
 	'visualeditor-feedback-dialog-title' => 'Leave feedback about VisualEditor Sandbox',
 	'visualeditor-ca-editsource' => 'Edit source',
@@ -45,20 +37,19 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Amire80
  * @author Erik Moeller
+ * @author Jdforrester
  * @author Nike
  * @author Trevor Parscal
  */
 $messages['qqq'] = array(
-	'visualeditor-tooltip-wikitext' => 'Tooltip for a toolbar button which activates or deactivates a split view, with the visual editor on the left-hand side, and a dynamically updating but read-only wikitext view on the right-hand side.',
-	'visualeditor-tooltip-json' => 'Tooltip for a toolbar button which activates or deactivates a split view, with the visual editor on the left-hand side, and a dynamically updating but read-only JSON representation of the document on the right-hand side. This view is primarily useful for debugging purposes.',
-	'visualeditor-tooltip-html' => 'Tooltip for a toolbar button which activates or deactivates a split view, with the visual editor on the left-hand side, and a dyanmically updating but read-only raw HTML view on the right-hand side. This view is primarily useful for debugging purposes.',
-	'visualeditor-tooltip-render' => 'Tooltip for a toolbar button which activates or deactivates a split view, with the visual editor on the left-hand side, and a dynamically updating preview on the right-hand side. This view is primarily useful for debugging purposes.',
-	'visualeditor-tooltip-history' => "Tooltip for a toolbar button which activates or deactivates a split view, with the visual editor on the left-hand side, and a history of the user's edit transactions on the right-hand side. This view is primarily useful for debugging purposes.",
+	'visualeditor' => 'The name of the VisualEditor extension',
 	'visualeditor-feedback-prompt' => 'A link that opens feedback form in http://www.mediawiki.org/wiki/Special:VisualEditorSandbox',
 	'visualeditor-ca-editsource' => 'Text for the edit source link in the tab dropdown',
 	'visualeditor-linkinspector-title' => 'Title of the link inspector dialog',
 	'visualeditor-linkinspector-label-pagetitle' => 'Label for the text field that holds the link target in the link inspector',
+	'visualeditor-formatdropdown-title' => 'This is a tooltip for the drop-down box for choosing the formatting style of the selected text, such as "Heading 1", "Heading 2" or "Plain text". (This is not related to "file format" or "data format", such as "Wikitext", "HTML", "PDF" etc.)',
 	'visualeditor-formatdropdown-format-paragraph' => 'Item in the formatting dropdown for paragraphs (normal text)',
 	'visualeditor-formatdropdown-format-heading1' => 'Item in the formatting dropdown for a level 1 heading',
 	'visualeditor-formatdropdown-format-heading2' => 'Item in the formatting dropdown for a level 2 heading',
@@ -82,6 +73,23 @@ $messages['qqq'] = array(
 	'visualeditor-saveerror' => 'Text shown when the editor fails to save properly.',
 );
 
+/** Assamese (অসমীয়া)
+ * @author Bishnu Saikia
+ */
+$messages['as'] = array(
+	'visualeditor-formatdropdown-format-paragraph' => 'দফা',
+	'visualeditor-formatdropdown-format-heading1' => 'শিৰোনাম ১',
+	'visualeditor-formatdropdown-format-heading2' => 'শিৰোনাম ২',
+	'visualeditor-formatdropdown-format-heading3' => 'শিৰোনাম ৩',
+	'visualeditor-formatdropdown-format-heading4' => 'শিৰোনাম ৪',
+	'visualeditor-formatdropdown-format-heading5' => 'শিৰোনাম ৫',
+	'visualeditor-formatdropdown-format-heading6' => 'শিৰোনাম ৬',
+	'visualeditor-annotationbutton-bold-tooltip' => 'গাঢ়',
+	'visualeditor-annotationbutton-italic-tooltip' => 'হেলনীয়া',
+	'visualeditor-annotationbutton-link-tooltip' => 'সংযোগ',
+	'visualeditor-historybutton-undo-tooltip' => 'পূৰ্ববত কৰক',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -100,7 +108,7 @@ $messages['ast'] = array(
 	'visualeditor-feedback-dialog-title' => 'Dexar un comentariu tocante a la zona de pruebes del editor visual',
 );
 
-/** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author EugeneZelenko
  * @author Wizardist
  */
@@ -117,6 +125,31 @@ $messages['be-tarask'] = array(
 	'visualeditor-tooltip-help' => 'Паказаць даведку',
 	'visualeditor-feedback-prompt' => 'Пакінуць водгук',
 	'visualeditor-feedback-dialog-title' => 'Пакіньце водгук пра пясочніцу візуальнага рэдактара',
+	'visualeditor-ca-editsource' => 'Рэдагаваць крыніцу',
+	'visualeditor-linkinspector-title' => 'Рэдагаваньне спасылкі',
+	'visualeditor-linkinspector-label-pagetitle' => 'Назва старонкі',
+	'visualeditor-formatdropdown-title' => 'Зьмяніць фарматаваньне',
+	'visualeditor-formatdropdown-format-paragraph' => 'Параграф',
+	'visualeditor-formatdropdown-format-heading1' => 'Загаловак 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Загаловак 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Загаловак 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Загаловак 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Загаловак 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Загаловак 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Аформлены',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Тоўсты',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Курсіў',
+	'visualeditor-annotationbutton-link-tooltip' => 'Спасылка',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Павялічыць водступ',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Паменшыць водступ',
+	'visualeditor-listbutton-number-tooltip' => 'Нумараваны сьпіс',
+	'visualeditor-listbutton-bullet-tooltip' => 'Маркіраваны сьпіс',
+	'visualeditor-clearbutton-tooltip' => 'Прыбраць афармленьне',
+	'visualeditor-historybutton-undo-tooltip' => 'Скасаваць',
+	'visualeditor-historybutton-redo-tooltip' => 'Узнавіць',
+	'visualeditor-viewpage-savewarning' => 'Вы ўпэўненыя, што жадаеце перайсьці ў рэжым прагляду без папярэдняга захаваньня?',
+	'visualeditor-loadwarning' => 'Памылка ў час загрузкі зьвестак з сэрвэру: $1. Жадаеце паўтарыць?',
+	'visualeditor-saveerror' => 'Памылка ў час захаваньня зьвестак на сэрвэры: $1.',
 );
 
 /** Breton (brezhoneg)
@@ -127,6 +160,28 @@ $messages['br'] = array(
 	'visualeditor' => 'VisualEditor',
 	'visualeditor-sandbox-title' => 'Poull-traezh VisualEditor',
 	'visualeditor-feedback-prompt' => 'Lezel un evezhiadenn',
+	'visualeditor-ca-editsource' => 'Kemmañ ar vammenn',
+	'visualeditor-linkinspector-title' => 'Kemmañ al liamm',
+	'visualeditor-linkinspector-label-pagetitle' => 'Anv ar bajenn',
+	'visualeditor-formatdropdown-title' => 'Kemmañ ar furmad',
+	'visualeditor-formatdropdown-format-paragraph' => 'Rannbennad',
+	'visualeditor-formatdropdown-format-heading1' => 'Titl 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Titl 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Titl 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Titl 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Titl 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Titl 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Rakfurmadet',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Tev',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Italek',
+	'visualeditor-annotationbutton-link-tooltip' => 'Liamm',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Kreskiñ an endantadur',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Digreskiñ an endantadur',
+	'visualeditor-listbutton-number-tooltip' => 'Roll niverennet',
+	'visualeditor-listbutton-bullet-tooltip' => 'Roll padelliget',
+	'visualeditor-clearbutton-tooltip' => 'Riñsañ ar furmata',
+	'visualeditor-historybutton-undo-tooltip' => 'Dizober',
+	'visualeditor-historybutton-redo-tooltip' => 'Adober',
 );
 
 /** German (Deutsch)
@@ -179,7 +234,7 @@ $messages['de-formal'] = array(
 	'visualeditor-viewpage-savewarning' => 'Sind Sie sicher, dass Sie zum Ansichtsmodus wechseln möchten, ohne vorher zu speichern?',
 );
 
-/** Lower Sorbian (Dolnoserbski)
+/** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
@@ -195,6 +250,49 @@ $messages['dsb'] = array(
 	'visualeditor-tooltip-help' => 'Pomoc pokazaś a schowaś',
 	'visualeditor-feedback-prompt' => 'Komentar zawóstajiś',
 	'visualeditor-feedback-dialog-title' => 'Komentar wó grajkanišću VisualEditora zawóstajiś',
+);
+
+/** British English (British English)
+ * @author Jdforrester
+ */
+$messages['en-gb'] = array(
+	'visualeditor' => 'VisualEditor',
+	'visualeditorsandbox' => 'VisualEditor Sandbox',
+	'visualeditor-desc' => 'VisualEditor for MediaWiki',
+	'visualeditor-sandbox-title' => 'VisualEditor Sandbox',
+	'visualeditor-tooltip-wikitext' => 'Toggle wikitext view',
+	'visualeditor-tooltip-json' => 'Toggle JSON view',
+	'visualeditor-tooltip-html' => 'Toggle HTML view',
+	'visualeditor-tooltip-render' => 'Toggle preview',
+	'visualeditor-tooltip-history' => 'Toggle transaction history view',
+	'visualeditor-tooltip-help' => 'Toggle help view',
+	'visualeditor-feedback-prompt' => 'Leave feedback',
+	'visualeditor-feedback-dialog-title' => 'Leave feedback about VisualEditor Sandbox',
+	'visualeditor-ca-editsource' => 'Edit source',
+	'visualeditor-linkinspector-title' => 'Edit link',
+	'visualeditor-linkinspector-label-pagetitle' => 'Page title',
+	'visualeditor-formatdropdown-title' => 'Change format',
+	'visualeditor-formatdropdown-format-paragraph' => 'Paragraph',
+	'visualeditor-formatdropdown-format-heading1' => 'Heading 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Heading 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Heading 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Heading 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Heading 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Heading 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Pre-formatted',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Bold',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Italic',
+	'visualeditor-annotationbutton-link-tooltip' => 'Link',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Increase indent',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Decrease indent',
+	'visualeditor-listbutton-number-tooltip' => 'Numbered list',
+	'visualeditor-listbutton-bullet-tooltip' => 'Bullet list',
+	'visualeditor-clearbutton-tooltip' => 'Clear formatting',
+	'visualeditor-historybutton-undo-tooltip' => 'Undo',
+	'visualeditor-historybutton-redo-tooltip' => 'Redo',
+	'visualeditor-viewpage-savewarning' => 'Are you sure you want to go back to view mode without first saving?',
+	'visualeditor-loadwarning' => 'Error loading data from server: $1. Would you like to try again?',
+	'visualeditor-saveerror' => 'Error saving data to server: $1.',
 );
 
 /** Spanish (español)
@@ -277,12 +375,31 @@ $messages['fr'] = array(
 	'visualeditor-tooltip-help' => "Basculer la vue d'aide",
 	'visualeditor-feedback-prompt' => 'Laisser un commentaire',
 	'visualeditor-feedback-dialog-title' => "Laissez un commentaire sur le bac à sable de l'éditeur visuel",
+	'visualeditor-ca-editsource' => 'Modifier la source',
+	'visualeditor-linkinspector-title' => 'Modifier le lien',
+	'visualeditor-linkinspector-label-pagetitle' => 'Titre de la page',
+	'visualeditor-formatdropdown-title' => 'Modifier le format',
 	'visualeditor-formatdropdown-format-paragraph' => 'Paragraphe',
+	'visualeditor-formatdropdown-format-heading1' => 'Titre 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Titre 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Titre 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Titre 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Titre 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Titre 6',
 	'visualeditor-formatdropdown-format-preformatted' => 'Préformaté',
 	'visualeditor-annotationbutton-bold-tooltip' => 'Gras',
 	'visualeditor-annotationbutton-italic-tooltip' => 'Italique',
+	'visualeditor-annotationbutton-link-tooltip' => 'Lien',
+	'visualeditor-indentationbutton-indent-tooltip' => "Augmenter l'indentation",
+	'visualeditor-indentationbutton-outdent-tooltip' => "Diminuer l'indentation",
 	'visualeditor-listbutton-number-tooltip' => 'Liste numérotée',
 	'visualeditor-listbutton-bullet-tooltip' => 'Liste à puces',
+	'visualeditor-clearbutton-tooltip' => 'Effacer la mise en forme',
+	'visualeditor-historybutton-undo-tooltip' => 'Annuler',
+	'visualeditor-historybutton-redo-tooltip' => 'Refaire',
+	'visualeditor-viewpage-savewarning' => "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer d'abord?",
+	'visualeditor-loadwarning' => 'Erreur lors du chargement des données du serveur: $1. Voulez-vous réessayer?',
+	'visualeditor-saveerror' => "Erreur d'enregistrement des données sur le serveur: $1.",
 );
 
 /** Franco-Provençal (arpetan)
@@ -351,17 +468,34 @@ $messages['gl'] = array(
  */
 $messages['he'] = array(
 	'visualeditor' => 'עורך חזותי',
-	'visualeditorsandbox' => 'ארגז חול לבדיקות העורך החזותי',
 	'visualeditor-desc' => 'עורך חזותי למדיה־ויקי',
-	'visualeditor-sandbox-title' => 'ארגז חול לבדיקות העורך החזותי',
-	'visualeditor-tooltip-wikitext' => 'תצוגת קוד ויקי',
-	'visualeditor-tooltip-json' => 'תצוגת JSON',
-	'visualeditor-tooltip-html' => 'תצוגת HTML',
-	'visualeditor-tooltip-render' => 'תצוגה מקדימה',
-	'visualeditor-tooltip-history' => 'תצוגת גרסאות קודמות',
-	'visualeditor-tooltip-help' => 'תצוגת עזרה',
 	'visualeditor-feedback-prompt' => 'שליחת משוב',
 	'visualeditor-feedback-dialog-title' => 'שליחת משוב על ארגז החול של העורך החזותי',
+	'visualeditor-ca-editsource' => 'עריכת קוד מקור',
+	'visualeditor-linkinspector-title' => 'עריכת קישור',
+	'visualeditor-linkinspector-label-pagetitle' => 'כותרת דף',
+	'visualeditor-formatdropdown-title' => 'שינוי סגנון',
+	'visualeditor-formatdropdown-format-paragraph' => 'פסקה',
+	'visualeditor-formatdropdown-format-heading1' => 'כותרת רמה 1',
+	'visualeditor-formatdropdown-format-heading2' => 'כותרת רמה 2',
+	'visualeditor-formatdropdown-format-heading3' => 'כותרת רמה 3',
+	'visualeditor-formatdropdown-format-heading4' => 'כותרת רמה 4',
+	'visualeditor-formatdropdown-format-heading5' => 'כותרת רמה 5',
+	'visualeditor-formatdropdown-format-heading6' => 'כותרת רמה 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'טקסט חלק',
+	'visualeditor-annotationbutton-bold-tooltip' => 'בולט',
+	'visualeditor-annotationbutton-italic-tooltip' => 'נטוי',
+	'visualeditor-annotationbutton-link-tooltip' => 'קישור',
+	'visualeditor-indentationbutton-indent-tooltip' => 'הגדלת הזחה',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'הקטנת הזחה',
+	'visualeditor-listbutton-number-tooltip' => 'רשימה ממוספרת',
+	'visualeditor-listbutton-bullet-tooltip' => 'רשימת תבליטים',
+	'visualeditor-clearbutton-tooltip' => 'ניקוי עיצוב',
+	'visualeditor-historybutton-undo-tooltip' => 'ביטול',
+	'visualeditor-historybutton-redo-tooltip' => 'חזרה על פעולה',
+	'visualeditor-viewpage-savewarning' => 'האם ברצונך לשוב למצב תצוגה ללא שמירה?',
+	'visualeditor-loadwarning' => 'שגיאה בטעינת מידע מהשרת: $1. האם לנסות שוב?',
+	'visualeditor-saveerror' => 'שגיאה בשמירת נתונים לשרת: $1.',
 );
 
 /** Hindi (हिन्दी)
@@ -541,9 +675,9 @@ $messages['ja'] = array(
  */
 $messages['ko'] = array(
 	'visualeditor' => '시각적편집기',
-	'visualeditorsandbox' => '시작적 편집기 실험실',
+	'visualeditorsandbox' => '시각적 편집기 실험실',
 	'visualeditor-desc' => '미디어위키를 위한 시각적 편집기',
-	'visualeditor-sandbox-title' => '시작적 편집기 실험실',
+	'visualeditor-sandbox-title' => '시각적 편집기 실험실',
 	'visualeditor-tooltip-wikitext' => '위키텍스트 보기 전환',
 	'visualeditor-tooltip-json' => 'JSON 보기 전환',
 	'visualeditor-tooltip-html' => 'HTML 보기 전환',
@@ -552,6 +686,57 @@ $messages['ko'] = array(
 	'visualeditor-tooltip-help' => '도움말 보기 전환',
 	'visualeditor-feedback-prompt' => '피드백 남기기',
 	'visualeditor-feedback-dialog-title' => '시각적편집기 실험실에 대한 피드백 남기기',
+	'visualeditor-ca-editsource' => '자료 편집',
+	'visualeditor-linkinspector-title' => '링크 편집',
+	'visualeditor-linkinspector-label-pagetitle' => '문서 제목',
+	'visualeditor-formatdropdown-title' => '서식 바꾸기',
+	'visualeditor-formatdropdown-format-paragraph' => '문단',
+	'visualeditor-formatdropdown-format-heading1' => '1단계 문단 제목',
+	'visualeditor-formatdropdown-format-heading2' => '2단계 문단 제목',
+	'visualeditor-formatdropdown-format-heading3' => '3단계 문단 제목',
+	'visualeditor-formatdropdown-format-heading4' => '4단계 문단 제목',
+	'visualeditor-formatdropdown-format-heading5' => '5단계 문단 제목',
+	'visualeditor-formatdropdown-format-heading6' => '6단계 문단 제목',
+	'visualeditor-formatdropdown-format-preformatted' => '서식 지정',
+	'visualeditor-annotationbutton-bold-tooltip' => '굵은 글씨',
+	'visualeditor-annotationbutton-italic-tooltip' => '기울인 글씨',
+	'visualeditor-annotationbutton-link-tooltip' => '링크',
+	'visualeditor-indentationbutton-indent-tooltip' => '들여쓰기 높이기',
+	'visualeditor-indentationbutton-outdent-tooltip' => '들여쓰기 낮추기',
+	'visualeditor-listbutton-number-tooltip' => '번호가 매겨진 목록',
+	'visualeditor-listbutton-bullet-tooltip' => '글머리 기호 목록',
+	'visualeditor-clearbutton-tooltip' => '서식 지우기',
+	'visualeditor-historybutton-undo-tooltip' => '되돌리기',
+	'visualeditor-historybutton-redo-tooltip' => '다시 실행',
+	'visualeditor-viewpage-savewarning' => '먼저 저장하지 않고 보기 모드로 돌아가겠습니까?',
+	'visualeditor-loadwarning' => '서버에서 데이터를 불러오는 중 오류: $1. 다시 시도하겠습니까?',
+	'visualeditor-saveerror' => '서버에 데이터를 저장하는 중 오류: $1.',
+);
+
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'visualeditor-linkinspector-label-pagetitle' => 'Siggetittel',
+	'visualeditor-formatdropdown-title' => 'De Fommateerong ändere',
+	'visualeditor-formatdropdown-format-paragraph' => 'Afschnett',
+	'visualeditor-formatdropdown-format-heading1' => 'Övverschreff 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Övverschreff 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Övverschreff 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Övverschreff 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Övverschreff 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Övverschreff 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'De Fommateerong es ald doh',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Fätte Schreff',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Scheive Schreff',
+	'visualeditor-annotationbutton-link-tooltip' => 'ene Lengk',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Mieh enjeröck',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Winnijer enjeröck',
+	'visualeditor-listbutton-number-tooltip' => 'En Leß met Nommere',
+	'visualeditor-listbutton-bullet-tooltip' => 'Leß met Pungkte',
+	'visualeditor-clearbutton-tooltip' => 'Fomaateeronge fottnämme',
+	'visualeditor-historybutton-undo-tooltip' => 'Donn de läzde Änderong zeröck nämme',
+	'visualeditor-historybutton-redo-tooltip' => 'Donn dat norr_ens',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -561,7 +746,31 @@ $messages['lb'] = array(
 	'visualeditor' => 'WYSIWYG-Editeur',
 	'visualeditor-desc' => 'WYSIWYG-Editeur fir MediaWiki',
 	'visualeditor-sandbox-title' => 'WYSIWYG-Editeur - Sandkëscht',
+	'visualeditor-tooltip-wikitext' => 'Op de Wikitext-Mode ëmschalten',
+	'visualeditor-tooltip-json' => 'Op den JSON-Mode ëmschalten',
+	'visualeditor-tooltip-html' => 'Op den HTML-Mode ëmschalten',
 	'visualeditor-feedback-prompt' => 'Gitt Äre Feedback',
+	'visualeditor-ca-editsource' => 'Quelltext änneren',
+	'visualeditor-linkinspector-title' => 'Link änneren',
+	'visualeditor-linkinspector-label-pagetitle' => 'Titel vun der Säit',
+	'visualeditor-formatdropdown-title' => 'Format änneren',
+	'visualeditor-formatdropdown-format-paragraph' => 'Abschnitt',
+	'visualeditor-formatdropdown-format-heading1' => 'Iwwerschrëft 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Iwwerschrëft 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Iwwerschrëft 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Iwwerschrëft 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Iwwerschrëft 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Iwwerschrëft 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Virformatéiert',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Fett',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Kursiv',
+	'visualeditor-annotationbutton-link-tooltip' => 'Link',
+	'visualeditor-listbutton-number-tooltip' => 'Numeréiert Lëscht',
+	'visualeditor-listbutton-bullet-tooltip' => 'Lëscht mat Punkten',
+	'visualeditor-clearbutton-tooltip' => 'Format ewechhuelen',
+	'visualeditor-historybutton-undo-tooltip' => 'Zréck setzen',
+	'visualeditor-historybutton-redo-tooltip' => 'Widderhuelen',
+	'visualeditor-saveerror' => 'Feeler beim Späichere vun den Donnéeën op de Server: $1.',
 );
 
 /** Lithuanian (lietuvių)
@@ -618,6 +827,18 @@ $messages['mk'] = array(
  * @author Praveenp
  */
 $messages['ml'] = array(
+	'visualeditor' => 'കണ്ടുതിരുത്തൽ ഉപകരണം',
+	'visualeditorsandbox' => 'കണ്ടുതിരുത്തൽ ഉപകരണ എഴുത്തുകളരി',
+	'visualeditor-desc' => 'മീഡിയവിക്കിയ്ക്കായുള്ള കണ്ടുതിരുത്തൽ ഉപകരണം',
+	'visualeditor-sandbox-title' => 'കണ്ടുതിരുത്തൽ ഉപകരണ എഴുത്തുകളരി',
+	'visualeditor-tooltip-wikitext' => 'വിക്കി എഴുത്തുരൂപം മാറ്റിക്കാണിക്കുക',
+	'visualeditor-tooltip-json' => 'ജെസൺ രൂപം മാറ്റിക്കാണിക്കുക',
+	'visualeditor-tooltip-html' => 'എച്ച്.റ്റി.എം.എൽ. രൂപം മാറ്റിക്കാണിക്കുക',
+	'visualeditor-tooltip-render' => 'എങ്ങനെയുണ്ടെന്ന് കാണിക്കുക / മാറ്റുക',
+	'visualeditor-tooltip-history' => 'ഇടപാട് നാൾവഴി മാറ്റിക്കാണിക്കുക',
+	'visualeditor-tooltip-help' => 'സഹായം പ്രദർശിപ്പിക്കുക / നീക്കംചെയ്യുക',
+	'visualeditor-feedback-prompt' => 'അഭിപ്രായമിടുക',
+	'visualeditor-feedback-dialog-title' => 'കണ്ടുതിരുത്തൽ ഉപകരണ എഴുത്തുകളരിയെപ്പറ്റിയുള്ള അഭിപ്രായം അറിയിക്കുക',
 	'visualeditor-ca-editsource' => 'മൂലരൂപം തിരുത്തുക',
 	'visualeditor-linkinspector-title' => 'കണ്ണി തിരുത്തുക',
 	'visualeditor-linkinspector-label-pagetitle' => 'താളിന്റെ തലക്കെട്ട്',
@@ -629,11 +850,18 @@ $messages['ml'] = array(
 	'visualeditor-formatdropdown-format-heading4' => 'തലക്കെട്ട് 4',
 	'visualeditor-formatdropdown-format-heading5' => 'തലക്കെട്ട് 5',
 	'visualeditor-formatdropdown-format-heading6' => 'തലക്കെട്ട് 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'മുൻപേ ഘടന നിർണ്ണയിച്ചവ',
 	'visualeditor-annotationbutton-bold-tooltip' => 'കടുപ്പിക്കുക',
 	'visualeditor-annotationbutton-italic-tooltip' => 'ചെരിച്ച്',
 	'visualeditor-annotationbutton-link-tooltip' => 'കണ്ണി',
+	'visualeditor-listbutton-number-tooltip' => 'എണ്ണമിട്ട ലിസ്റ്റ്',
+	'visualeditor-listbutton-bullet-tooltip' => 'എണ്ണമിടാത്ത ലിസ്റ്റ്',
+	'visualeditor-clearbutton-tooltip' => 'രൂപഘടന നീക്കംചെയ്യുക',
 	'visualeditor-historybutton-undo-tooltip' => 'തിരസ്കരിക്കുക',
 	'visualeditor-historybutton-redo-tooltip' => 'വീണ്ടും വരുത്തുക',
+	'visualeditor-viewpage-savewarning' => 'സേവ് ചെയ്യാതെ തന്നെ കണ്ടുനോക്കൽ തലത്തിലേയ്ക്ക് തിരിച്ചു പോകണം എന്ന് താങ്കൾക്കുറപ്പാണോ?',
+	'visualeditor-loadwarning' => 'സെർവറിൽ നിന്നും വിവരങ്ങൾ ശേഖരിക്കുന്നതിൽ പിഴവുണ്ടായി: $1. വീണ്ടും ശ്രമിക്കണോ?',
+	'visualeditor-saveerror' => 'സെർവറിൽ വിവരങ്ങൾ ശേഖരിക്കുന്നതിൽ പിഴവുണ്ടായി: $1',
 );
 
 /** Malay (Bahasa Melayu)
@@ -652,6 +880,31 @@ $messages['ms'] = array(
 	'visualeditor-tooltip-help' => 'Togol paparan bantuan',
 	'visualeditor-feedback-prompt' => 'Tinggalkan maklum balas',
 	'visualeditor-feedback-dialog-title' => 'Tinggalkan maklum balas tentang Kotak Pasir VisualEditor',
+	'visualeditor-ca-editsource' => 'Sunting sumber',
+	'visualeditor-linkinspector-title' => 'Sunting pautan',
+	'visualeditor-linkinspector-label-pagetitle' => 'Tajuk halaman',
+	'visualeditor-formatdropdown-title' => 'Tukar format',
+	'visualeditor-formatdropdown-format-paragraph' => 'Perenggan',
+	'visualeditor-formatdropdown-format-heading1' => 'Pengatas 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Pengatas 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Pengatas 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Pengatas 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Pengatas 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Pengatas 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'Praformat',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Tebal',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Condong',
+	'visualeditor-annotationbutton-link-tooltip' => 'Pautan',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Jarakkan engsotan',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Rapatkan engsotan',
+	'visualeditor-listbutton-number-tooltip' => 'Senarai bernombor',
+	'visualeditor-listbutton-bullet-tooltip' => 'Senarai berbulet',
+	'visualeditor-clearbutton-tooltip' => 'Buang pemformatan',
+	'visualeditor-historybutton-undo-tooltip' => 'Batalkan',
+	'visualeditor-historybutton-redo-tooltip' => 'Pulihkan',
+	'visualeditor-viewpage-savewarning' => 'Adakah anda benar-benar ingin kembali ke ragam paparan tanpa menyimpan terlebih dahulu?',
+	'visualeditor-loadwarning' => 'Ralat ketika memuatkan data dari pelayan: $1. Adakah anda hendak mencuba lagi?',
+	'visualeditor-saveerror' => 'Ralat ketika memuatkan data dari pelayan: $1',
 );
 
 /** Nepali (नेपाली)
@@ -713,6 +966,8 @@ $messages['nl'] = array(
 	'visualeditor-historybutton-undo-tooltip' => 'Ongedaan maken',
 	'visualeditor-historybutton-redo-tooltip' => 'Opnieuw uitvoeren',
 	'visualeditor-viewpage-savewarning' => 'Weet u zeker dat u wilt teruggaan naar de modus bekijken zonder eerst op te slaan?',
+	'visualeditor-loadwarning' => 'Fout tijdens het laden van gegevens van de server: $1. Wilt u het opnieuw proberen?',
+	'visualeditor-saveerror' => 'Fout tijdens het opslaan van gegevens naar de server: $1.',
 );
 
 /** Polish (polski)
@@ -795,6 +1050,41 @@ $messages['si'] = array(
  */
 $messages['sv'] = array(
 	'visualeditor-feedback-prompt' => 'Lämna feedback',
+);
+
+/** Tagalog (Tagalog)
+ * @author AnakngAraw
+ */
+$messages['tl'] = array(
+	'visualeditor' => 'Pampatnugot na Pampaningin',
+	'visualeditor-desc' => 'Pampatnugot na pampaningin para sa MediaWiki',
+	'visualeditor-feedback-prompt' => 'Mag-iwan ng tugon',
+	'visualeditor-feedback-dialog-title' => 'Mag-iwan ng tugon hinggil sa Subukan ng Pampatnugot na Pampaningin',
+	'visualeditor-ca-editsource' => 'Baguhin ang pinagmulan',
+	'visualeditor-linkinspector-title' => 'Baguhin ang kawing',
+	'visualeditor-linkinspector-label-pagetitle' => 'Pamagat ng pahina',
+	'visualeditor-formatdropdown-title' => 'Baguhin ang anyo',
+	'visualeditor-formatdropdown-format-paragraph' => 'Talata',
+	'visualeditor-formatdropdown-format-heading1' => 'Pamuhatan 1',
+	'visualeditor-formatdropdown-format-heading2' => 'Pamuhatan 2',
+	'visualeditor-formatdropdown-format-heading3' => 'Pamuhatan 3',
+	'visualeditor-formatdropdown-format-heading4' => 'Pamuhatan 4',
+	'visualeditor-formatdropdown-format-heading5' => 'Pamuhatan 5',
+	'visualeditor-formatdropdown-format-heading6' => 'Pamuhatan 6',
+	'visualeditor-formatdropdown-format-preformatted' => 'May paunang kaanyuan',
+	'visualeditor-annotationbutton-bold-tooltip' => 'Makapal',
+	'visualeditor-annotationbutton-italic-tooltip' => 'Nakapahilis',
+	'visualeditor-annotationbutton-link-tooltip' => 'Kawing',
+	'visualeditor-indentationbutton-indent-tooltip' => 'Dagdagan ang pagkakayupi',
+	'visualeditor-indentationbutton-outdent-tooltip' => 'Bawasan ang pagkakayupi',
+	'visualeditor-listbutton-number-tooltip' => 'Listahang may bilang',
+	'visualeditor-listbutton-bullet-tooltip' => 'Listahang napungluan',
+	'visualeditor-clearbutton-tooltip' => 'Hawiin ang kaanyuan',
+	'visualeditor-historybutton-undo-tooltip' => 'Ibalik sa dati',
+	'visualeditor-historybutton-redo-tooltip' => 'Gawing muli',
+	'visualeditor-viewpage-savewarning' => 'Nakakatiyak ka bang nais mong magbalik sa gawi na nakikita na hindi muna nagsasagip?',
+	'visualeditor-loadwarning' => 'Kamalian sa pagkakarga ng dato mula sa tagapaghain: $1. Nais mo bang subukan ulit?',
+	'visualeditor-saveerror' => 'Kamalian sa pagsagip ng dato sa tagapaghain: $1.',
 );
 
 /** Ukrainian (українська)

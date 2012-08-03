@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model HeadingNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node for a heading.
  *
  * @class
@@ -46,7 +53,7 @@ ve.dm.HeadingNode.converters = {
 			4: document.createElement( 'h4' ),
 			5: document.createElement( 'h5' ),
 			6: document.createElement( 'h6' )
-		} )[element.attributes['level']];
+		} )[element.attributes.level];
 	},
 	'toDataElement': function( tag, element ) {
 		return ( {

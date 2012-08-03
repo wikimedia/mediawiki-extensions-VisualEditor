@@ -337,6 +337,16 @@
 
     var self = this;
 
+    /*
+     * Emit a chunk of tokens to our consumers.  Once this has been done, the
+     * current expression can return an empty list (true).
+     */
+    var emitChunk = function (tokens) {
+        __parseArgs[2](tokens);
+    };
+
+
+
         
 }
 
@@ -347,7 +357,7 @@
 start
   = e:toplevelblock* newline* { 
       // end is passed inline as a token, as well as a separate event for now.
-      __parseArgs[2]( [ new EOFTk( ) ] );
+      emitChunk( [ new EOFTk( ) ] );
       return []; //flatten(e);
   }
 
@@ -380,10 +390,18 @@ toplevelblock
         }
         bs.dataAttribs.bsp = [pos0, pos];
     }
+
+    if (__parseArgs[3].env.trace) {
+        console.warn("---- <chunk:tokenized> ----");
+        for (var i = 0, n = b.length; i < n; i++) {
+            console.warn(b[i].toString());
+        }
+        console.warn("---- </chunk:tokenized> ----");
+    }
     
     // Emit tokens for this toplevelblock. This feeds a chunk to the parser
     // pipeline.
-    __parseArgs[2]( flatten( b ) );
+    emitChunk( flatten( b ) );
 
 
     // We don't return any tokens to the start production to save memory. We
@@ -443,6 +461,13 @@ block_line
       }
   / ! { return stops.counters.nopre } pre_indent
   / pre
+  / "----" d:"-"* { 
+      if (d.length > 0) {
+          return new SelfclosingTagTk( "hr", [], {tsr: [pos0, pos], extra_dashes: d.length} ); 
+      } else {
+          return new SelfclosingTagTk( "hr", [], {tsr: [pos0, pos]} ); 
+      }
+  }
 
 /*
  * A paragraph. We don't emit 'p' tokens to avoid issues with template
@@ -533,6 +558,7 @@ h = & "=" // guard, to make sure '='+ will match.
         var level = Math.min(s.length, e.length);
         // convert surplus equals into text
         if(s.length > level) {
+            s = s.join('');
             var extras = s.substr(0, s.length - level);
             if(c[0].constructor === String) {
                 c[0] = extras + c[0];
@@ -541,6 +567,7 @@ h = & "=" // guard, to make sure '='+ will match.
             }
         }
         if(e.length > level) {
+            e = e.join('');
             var extras = e.substr(0, e.length - level),
                 lastElem = c[c.length - 1];
             if(lastElem.constructor === String) {
@@ -600,7 +627,10 @@ behavior_switch
         new TagTk(
             'behavior-switch',
             [new KV('word', behavior)],
-            { tsr: [pos0, pos] }
+            { 
+                tsr: [pos0, pos],
+                src: input.substr(pos0, pos - pos0)
+            }
         )
     ];
 }
@@ -685,9 +715,9 @@ isbn
 
     return [
         new SelfclosingTagTk( 'wikilink', [
-           new KV('', 'Special:BookSources/' + isbn.replace(/[^\d]/g, '')),
-           new KV('', 'ISBN ' + isbn),
+           new KV('href', 'Special:BookSources/' + isbn.replace(/[^\d]/g, '')),
            new KV('tail', ''),
+           new KV('content', 'ISBN ' + isbn),
         ],
         {tsr: [pos0, pos]})
     ];
@@ -949,10 +979,11 @@ wikilink
   {
       var obj = new SelfclosingTagTk( 'wikilink' ),
           textTokens = [];
-      obj.attribs.push( new KV('', target) );
+      obj.attribs.push( new KV('href', target) );
       obj.dataAttribs = { 
           tsr: [pos0, pos],
-          contentPos: lcontent.pos
+          contentPos: lcontent.pos,
+          src: input.substr(pos0, pos - pos0)
       };
       // XXX: Point to object with path, revision and input information
       //obj.source = input;
@@ -1116,7 +1147,7 @@ pre_indent
   / l:pre_indent_line ls:(sol pre_indent_line)* {
       return [new TagTk( 'pre', [], { tsr: [pos0, pos0 + 1] } )]
                     .concat( [l], ls
-                           , [new EndTagTk( 'pre' )]);
+                           , [new EndTagTk( 'pre', [], {tsr: [pos, pos]} )]);
   }
 
 // An indented pre block that is surrounded with pre tags. The pre tags are
@@ -1146,9 +1177,12 @@ pre_indent_line = space l:inlineline {
 }
 
 /*
- * Pre blocks defined using non-indented HTML tags only parse nowiki tags
- * inside them, and convert other content to verbatim text. Nowiki inside pre
- * is not functionally needed, but supported for backwards compatibility.
+ * Pre blocks defined using non-indented HTML tags only parse nowiki tags and
+ * html entities inside them, and convert other content to verbatim text.
+ * Nowiki inside pre is not functionally needed, but supported for backwards
+ * compatibility.
+ *
+ * TODO: add entity support!
  */
 pre
   = "<pre" 
@@ -1190,17 +1224,15 @@ nowiki
   = "<nowiki>" nc:nowiki_content "</nowiki>" { 
         //console.warn( 'full nowiki return: ' + pp(nc)); 
         return [ 
-            new SelfclosingTagTk( 'meta', 
+            new TagTk( 'span', 
                     [
-                        {k: 'typeof', v: 'mw:tag'}, 
-                        {k: 'content', v: 'nowiki'} 
+                        {k: 'typeof', v: 'mw:Nowiki'}
                     ],
                     { tsr: [pos0, pos0+8] } )
         ].concat( nc, [ 
-                    new SelfclosingTagTk( 'meta', 
+                    new EndTagTk( 'span', 
                     [
-                        {k: 'typeof', v: 'mw:tag'}, 
-                        {k: 'content', v: '/nowiki'} 
+                        {k: 'typeof', v: 'mw:Nowiki'}
                     ],
                     { tsr: [pos - 9, pos] }) 
                 ] ); 
@@ -1409,7 +1441,7 @@ block_tag
 /*********************************************************
  *   Lists 
  *********************************************************/
-lists = (dtdd / li) (sol (dtdd / li))*
+lists = (dtdd / hacky_dl_uses / li) (sol (dtdd / hacky_dl_uses / li))*
 
 li = bullets:list_char+ 
      c:inlineline?
@@ -1421,6 +1453,26 @@ li = bullets:list_char+
     li.bullets = bullets;
     return [ li, c ];
 }
+
+/* 
+ * This production is required to support wikitext of this form
+ *   ::{|border="1"|foo|bar|baz|}
+ * where the leading colons are used to indent the entire table.
+ * This hack was added back in 2006 in commit
+ * a0746946312b0f1eda30a2c793f5f7052e8e5f3a based on a patch by Carl
+ * Fürstenberg.
+ */
+hacky_dl_uses = bullets:":"+
+               c:table_lines
+               &eolf
+{
+    if ( c === '' )
+        c = [];
+    var li = new TagTk( 'listItem', [], { tsr: [pos0, pos0 + bullets.length] }  );
+    li.bullets = bullets;
+    return [ li, c ];
+}
+
 
 dtdd 
   = bullets:(!(";" !list_char) lc:list_char { return lc })*
@@ -1540,7 +1592,9 @@ table_row_tag
 table_data_tags
   = pipe
     td:table_data_tag
+    tagEndPos:({return pos})
     tds:( pipe_pipe tdt:table_data_tag { tdt[0].dataAttribs.stx_v = 'row';  return tdt } )* {
+        td[0].dataAttribs.tsr[0] = pos0;
         return td.concat(tds);
     }
 
@@ -1608,8 +1662,6 @@ table_cell_args
  * content. */
 
 text_char = [^'<~[{\n\r:\]}|!=]
-
-text = t:text_char+ { return t.join(''); }
 
 /* Legend
  * '    quotes (italic/bold)
@@ -1679,7 +1731,15 @@ urltext = ( t:[^'<~[{\n\rIPRfghimnstw_|!:\]} &=]+ { return t.join(''); }
 //       }
 
 htmlentity = "&" c:[#0-9a-zA-Z]+ ";" { 
-    return unentity("&" + c.join('') + ";") 
+    //return "&" + c.join('') + ";";
+    var m = "&" + c.join('') + ";",
+        c = unentity(m);
+    return [
+        new TagTk('span', [new KV('typeof', 'mw:Entity')], { src: m, srcContent: c } ),
+        c,
+        new EndTagTk('span')
+    ];
+    //return unentity("&" + c.join('') + ";") 
 }
 
 spaces
@@ -1819,16 +1879,6 @@ preprocessor_text
   )+ {
       return flatten ( r );
   }
-
-spaceless_preprocessor_text
-  = r:( t:[^'<~[{\n\r|!\]}{\t &=]+ { return t.join(''); }
-  / !inline_breaks (
-      directive
-    / !' ' text_char )
-  )+ {
-      return flatten_string ( r );
-  }
-
 
 wikilink_preprocessor_text 
   = r:( t:[^<~[{\n\r\t|!\]}{ &=]+ { return t.join(''); }

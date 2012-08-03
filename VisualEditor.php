@@ -1,18 +1,11 @@
 <?php
 /**
  * VisualEditor extension
- * 
+ *
  * @file
  * @ingroup Extensions
- * 
- * @author Trevor Parscal <trevor@wikimedia.org>
- * @author Inez Korczyński <inez@wikia-inc.com>
- * @author Roan Kattouw <roan.kattouw@gmail.com>
- * @author Neil Kandalgaonkar <neilk@wikimedia.org>
- * @author Gabriel Wicke <gwicke@wikimedia.org>
- * @author Brion Vibber <brion@wikimedia.org>
- * @license GPL v2 or later
- * @version 0.1.0
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /* Configuration */
@@ -32,6 +25,9 @@ $wgExtensionCredits['other'][] = array(
 		'Neil Kandalgaonkar',
 		'Gabriel Wicke',
 		'Brion Vibber',
+		'Christian Williams',
+		'Rob Moen',
+		'Subramanya Sastry',
 	),
 	'version' => '0.1.0',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:VisualEditor',
@@ -39,10 +35,6 @@ $wgExtensionCredits['other'][] = array(
 );
 $dir = dirname( __FILE__ ) . '/';
 $wgExtensionMessagesFiles['VisualEditor'] = $dir . 'VisualEditor.i18n.php';
-$wgExtensionMessagesFiles['VisualEditorAliases'] = $dir . 'VisualEditor.alias.php';
-$wgAutoloadClasses['SpecialVisualEditorSandbox'] = $dir . 'SpecialVisualEditorSandbox.php';
-$wgSpecialPages['VisualEditorSandbox'] = 'SpecialVisualEditorSandbox';
-$wgSpecialPageGroups['VisualEditorSandbox'] = 'other';
 
 $wgVisualEditorResourceTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/modules',
@@ -57,34 +49,13 @@ $wgResourceModules += array(
 			'rangy/rangy-position.js',
 		),
 	),
-	'ext.visualEditor.special.sandbox' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'sandbox/special.js',
-		),
-		'messages' => array(
-			'visualeditor-feedback-prompt',
-			'visualeditor-feedback-dialog-title',
-			'visualeditor-sandbox-title',
-		),
-		'dependencies' => array( 
-			'ext.visualEditor.sandbox',
-			'mediawiki.feedback',
-			'mediawiki.Uri',
+	// Alias for backwards compat, safe to remove after
+	'ext.visualEditor.editPageInit' => $wgVisualEditorResourceTemplate + array(
+		'dependencies' => array(
+			'ext.visualEditor.viewPageTarget',
 		)
 	),
-	'ext.visualEditor.sandbox' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'sandbox/sandbox.js',
-		),
-		'messages' => array(
-			'visualeditorsandbox',
-		),
-		'styles' => 'sandbox/sandbox.css',
-		'dependencies' => array(
-			'ext.visualEditor.core',
-		),
-	),
-	'ext.visualEditor.editPageInit' => $wgVisualEditorResourceTemplate + array(
+	'ext.visualEditor.viewPageTarget' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			've/init/targets/ve.init.ViewPageTarget.js',
 		),
@@ -97,6 +68,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.init',
 			'mediawiki.util',
+			'mediawiki.feedback',
 			'mediawiki.Uri'
 		),
 		'messages' => array(
@@ -114,6 +86,8 @@ $wgResourceModules += array(
 			'viewsource',
 			'visualeditor-ca-editsource',
 			'visualeditor-loadwarning',
+			'visualeditor-feedback-prompt',
+			'visualeditor-feedback-dialog-title'
 		),
 	),
 	'ext.visualEditor.init' => $wgVisualEditorResourceTemplate + array(
@@ -248,7 +222,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			// ce
-			've/ce/styles/ve.ce.Document.css',
+			've/ce/styles/ve.ce.DocumentNode.css',
 			've/ce/styles/ve.ce.Node.css',
 			've/ce/styles/ve.ce.Surface.css',
 			// ui
@@ -263,20 +237,14 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'jquery',
 			'rangy',
-			'ext.visualEditor.base'
+			'ext.visualEditor.base',
+			'mediawiki.Title',
 		),
 		'messages' => array(
-			'visualeditor-tooltip-wikitext',
-			'visualeditor-tooltip-json',
-			'visualeditor-tooltip-html',
-			'visualeditor-tooltip-render',
-			'visualeditor-tooltip-history',
-			'visualeditor-tooltip-help',
 			'visualeditor',
 			'visualeditor-linkinspector-title',
-			'visualeditor-linkinspector-tooltip',
 			'visualeditor-linkinspector-label-pagetitle',
-			'visualeditor-formatdropdown-tooltip',
+			'visualeditor-formatdropdown-title',
 			'visualeditor-formatdropdown-format-paragraph',
 			'visualeditor-formatdropdown-format-heading1',
 			'visualeditor-formatdropdown-format-heading2',

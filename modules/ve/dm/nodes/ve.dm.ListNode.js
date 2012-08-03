@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model ListNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node for a list.
  *
  * @class
@@ -42,7 +49,7 @@ ve.dm.ListNode.converters = {
 		return element.attributes && ( {
 			'bullet': document.createElement( 'ul' ),
 			'number': document.createElement( 'ol' )
-		} )[element.attributes['style']];
+		} )[element.attributes.style];
 	},
 	'toDataElement': function( tag, element ) {
 		return ( {

@@ -3,7 +3,7 @@
 
 function BehaviorSwitchHandler( manager, isInclude ) {
 	this.manager = manager;
-	this.manager.addTransform( this.onBehaviorSwitch.bind( this ), this.rank, 'tag', 'behavior-switch' );
+	this.manager.addTransform( this.onBehaviorSwitch.bind( this ), "BehaviorSwitchHandler:onBehaviorSwitch", this.rank, 'tag', 'behavior-switch' );
 }
 
 BehaviorSwitchHandler.prototype.rank = 2.14;
@@ -14,7 +14,13 @@ BehaviorSwitchHandler.prototype.onBehaviorSwitch = function ( token, manager, cb
 
 	env.setVariable(magic_word, true);
 
-	return { };
+	return { tokens: 
+		[
+			new SelfclosingTagTk( 'meta', 
+					[ new KV( 'typeof', 'mw:Placeholder' ) ],
+					token.dataAttribs )
+		]
+	};
 };
 
 

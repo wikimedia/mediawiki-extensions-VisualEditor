@@ -1,7 +1,14 @@
+/*global mw */
+
 /**
  * VisualEditor namespace.
  *
- * All classes and functions will be attached to this object to keep the global namespace clean.
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
+ * Namespace for all VisualEditor classes, static methods and static properties.
  */
 window.ve = {
 	// List of instances of visual editors
@@ -32,13 +39,15 @@ window.ve = {
  * @static
  * @method
  * @param {Function} dst Class to extend
- * @param {Function} src Base class to use methods from
+ * @param {Function} [..] List of base classed to use methods from
  */
-ve.extendClass = function( dst, src ) {
-	var base = src.prototype;
-	for ( var method in base ) {
-		if ( typeof base[method] === 'function' && !( method in dst.prototype ) ) {
-			dst.prototype[method] = base[method];
+ve.extendClass = function( dst ) {
+	for ( var i = 1; i < arguments.length; i++ ) {
+		var base = arguments[i].prototype;
+		for ( var method in base ) {
+			if ( typeof base[method] === 'function' && !( method in dst.prototype ) ) {
+				dst.prototype[method] = base[method];
+			}
 		}
 	}
 };

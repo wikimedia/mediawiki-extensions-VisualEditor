@@ -1,3 +1,10 @@
+/**
+ * VisualEditor data model Transaction tests.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 module( 've.dm.Transaction' );
 
 /* Methods */
@@ -8,8 +15,8 @@ ve.dm.Transaction.runBuilderTests = function( cases ) {
 		for ( var i = 0; i < cases[msg].calls.length; i++ ) {
 			tx[cases[msg].calls[i][0]].apply( tx, cases[msg].calls[i].slice( 1 ) );
 		}
-		deepEqual( tx.getOperations(), cases[msg].ops, msg + ': operations match' );
-		deepEqual( tx.getLengthDifference(), cases[msg].diff, msg + ': length differences match' );
+		assert.deepEqual( tx.getOperations(), cases[msg].ops, msg + ': operations match' );
+		assert.deepEqual( tx.getLengthDifference(), cases[msg].diff, msg + ': length differences match' );
 	}
 };
 
@@ -19,10 +26,10 @@ ve.dm.Transaction.runConstructorTests = function( constructor, cases ) {
 			var tx = constructor.apply(
 				ve.dm.Transaction, cases[msg].args
 			);
-			deepEqual( tx.getOperations(), cases[msg].ops, msg + ': operations match' );
+			assert.deepEqual( tx.getOperations(), cases[msg].ops, msg + ': operations match' );
 		} else if ( cases[msg].exception ) {
 			/*jshint loopfunc:true*/
-			raises( function() {
+			assert.throws( function() {
 				var tx = constructor.apply(
 					ve.dm.Transaction, cases[msg].args
 				);
@@ -713,7 +720,7 @@ test( 'translateOffset', function() {
 	};
 	expect( 14 );
 	for ( var offset in mapping ) {
-		strictEqual( tx.translateOffset( Number( offset ) ), mapping[offset] );
+		assert.strictEqual( tx.translateOffset( Number( offset ) ), mapping[offset] );
 	}
 } );
 

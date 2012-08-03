@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model Converter class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Converter between HTML DOM and VisualEditor linear data.
  *
  * @class
@@ -126,7 +133,7 @@ ve.dm.Converter.prototype.getDomElementFromDataElement = function( dataElement )
 	) {
 		return false;
 	}
-	var	domElement = this.elements.toDomElement[dataElementType]( dataElementType, dataElement ),
+	var domElement = this.elements.toDomElement[dataElementType]( dataElementType, dataElement ),
 		dataElementAttributes = dataElement.attributes;
 	if ( dataElementAttributes ) {
 		for ( var key in dataElementAttributes ) {
@@ -182,7 +189,7 @@ ve.dm.Converter.prototype.getDataElementFromDomElement = function( domElement ) 
  * @returns {Object|false} Annotation object, or false if this node is not an annotation
  */
 ve.dm.Converter.prototype.getDataAnnotationFromDomElement = function( domElement ) {
-	var	domElementType = domElement.nodeName.toLowerCase(),
+	var domElementType = domElement.nodeName.toLowerCase(),
 		toDataAnnotation = this.annotations.toDataAnnotation[domElementType];
 	if ( typeof toDataAnnotation === 'function' ) {
 		return toDataAnnotation( domElementType, domElement );
@@ -198,7 +205,7 @@ ve.dm.Converter.prototype.getDataAnnotationFromDomElement = function( domElement
  * @returns {HTMLElement|false} HTML DOM node, or false if this annotation is not known
  */
 ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function( dataAnnotation ) {
-	var	split = dataAnnotation.type.split( '/', 2 ),
+	var split = dataAnnotation.type.split( '/', 2 ),
 		baseType = split[0],
 		subType = split.slice( 1 ).join( '/' ),
 		toDomElement = this.annotations.toDomElement[baseType];
@@ -373,7 +380,7 @@ ve.dm.Converter.prototype.getDataFromDom = function( domElement, annotations, da
 	// If we're closing a node that doesn't have any children, but could contain a paragraph,
 	// add a paragraph. This prevents things like empty list items
 	var childTypes = ve.dm.nodeFactory.getChildNodeTypes( branchType );
-	if ( branchType !== 'paragraph' && dataElement && data[data.length - 1] == dataElement &&
+	if ( branchType !== 'paragraph' && dataElement && data[data.length - 1] === dataElement &&
 		!wrapping && !ve.dm.nodeFactory.canNodeContainContent( branchType ) &&
 		!ve.dm.nodeFactory.isNodeContent( branchType ) &&
 		( childTypes === null || $.inArray( 'paragraph', childTypes ) !== -1 )
@@ -606,7 +613,7 @@ ve.dm.Converter.prototype.getDomFromData = function( data ) {
 		.contents()
 		.filter( function() {
 			// Text nodes only
-			return this.nodeType == 3 &&
+			return this.nodeType === 3 &&
 				// Exclude text nodes within lists
 				$( this.parentNode ).closest( 'li, dd, dt' ).length === 0;
 		} )

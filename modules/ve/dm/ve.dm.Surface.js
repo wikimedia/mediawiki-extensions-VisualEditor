@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model Surface class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel surface.
  *
  * @class
@@ -80,7 +87,7 @@ ve.dm.Surface.prototype.change = function( transaction, selection ) {
 	if ( selection && ( !this.selection || !this.selection.equals ( selection ) ) ) {
 		selection.normalize();
 		this.selection = selection;
-		this.emit ('select', this.selection.clone() );
+		this.emit('select', this.selection.clone() );
 	}
 	if ( transaction ) {
 		this.emit( 'transact', transaction );
@@ -98,6 +105,7 @@ ve.dm.Surface.prototype.change = function( transaction, selection ) {
 ve.dm.Surface.prototype.annotate = function( method, annotation ) {
 	var selection = this.getSelection();
 	if ( selection.getLength() ) {
+		selection = this.getDocument().trimOuterSpaceFromRange( selection );
 		var tx = ve.dm.Transaction.newFromAnnotation(
 			this.getDocument(), selection, method, annotation
 		);
@@ -112,7 +120,7 @@ ve.dm.Surface.prototype.breakpoint = function( selection ) {
 			selection: selection || this.selection.clone()
 		} );
 		this.smallStack = [];
-		this.emit ( 'history' );
+		this.emit( 'history' );
 	}
 };
 
@@ -128,7 +136,7 @@ ve.dm.Surface.prototype.undo = function() {
 		}
 		var selection = item.selection;
 		selection.end -= diff;
-		this.emit ( 'history' );
+		this.emit( 'history' );
 		return selection;
 	}
 	return null;
@@ -136,6 +144,7 @@ ve.dm.Surface.prototype.undo = function() {
 
 ve.dm.Surface.prototype.redo = function() {
 	this.breakpoint();
+	var selection;
 	if ( this.undoIndex > 0 ) {
 		if ( this.bigStack[this.bigStack.length - this.undoIndex] ) {
 			var diff = 0;
@@ -144,11 +153,11 @@ ve.dm.Surface.prototype.redo = function() {
 				this.documentModel.commit( item.stack[i] );
 				diff += item.stack[i].lengthDifference;
 			}
-			var selection = item.selection;
+			selection = item.selection;
 			selection.end += diff;
 		}
 		this.undoIndex--;
-		this.emit ( 'history' );
+		this.emit( 'history' );
 		return selection;
 	}
 	return null;

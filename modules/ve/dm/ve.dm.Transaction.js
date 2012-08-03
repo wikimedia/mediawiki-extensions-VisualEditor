@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model Transaction class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel transaction.
  *
  * @class
@@ -59,7 +66,8 @@ ve.dm.Transaction.newFromInsertion = function( doc, offset, insertion ) {
  */
 ve.dm.Transaction.newFromRemoval = function( doc, range ) {
 	var tx = new ve.dm.Transaction(),
-		data = doc.getData();
+		data = doc.getData(),
+		i;
 	// Normalize and validate range
 	range.normalize();
 	if ( range.start === range.end ) {
@@ -192,8 +200,7 @@ ve.dm.Transaction.newFromAttributeChange = function( doc, offset, key, value ) {
  */
 ve.dm.Transaction.newFromAnnotation = function( doc, range, method, annotation ) {
 	var tx = new ve.dm.Transaction(),
-		data = doc.getData(),
-		hash = ve.getHash( annotation );
+		data = doc.getData();
 	// Iterate over all data in range, annotating where appropriate
 	range.normalize();
 	var i = range.start,
@@ -367,7 +374,7 @@ ve.dm.Transaction.newFromWrap = function( doc, range, unwrapOuter, wrapOuter, un
 	}
 
 	if ( wrapEach.length > 0 || unwrapEach.length > 0 ) {
-		var	closingUnwrapEach = closingArray( unwrapEach ),
+		var closingUnwrapEach = closingArray( unwrapEach ),
 			closingWrapEach = closingArray( wrapEach ),
 			depth = 0,
 			startOffset,
@@ -376,11 +383,9 @@ ve.dm.Transaction.newFromWrap = function( doc, range, unwrapOuter, wrapOuter, un
 		// TODO figure out if we should use the tree/node functions here
 		// rather than iterating over offsets, it may or may not be faster
 		for ( i = range.start; i < range.end; i++ ) {
-			if ( doc.data[i].type === undefined ) {
-				// This is a content offset, skip
-			} else {
+			if ( doc.data[i].type !== undefined ) {
 				// This is a structural offset
-				if ( doc.data[i].type.charAt( 0 ) != '/' ) {
+				if ( doc.data[i].type.charAt( 0 ) !== '/' ) {
 					// This is an opening element
 					if ( depth === 0 ) {
 						// We are at the start of a top-level element
@@ -467,7 +472,7 @@ ve.dm.Transaction.prototype.getLengthDifference = function() {
  * @returns {Number} Translated offset, as it will be after processing transaction
  */
 ve.dm.Transaction.prototype.translateOffset = function( offset ) {
-	var i, cursor = 0, adjustment = 0, op, opLength;
+	var i, cursor = 0, adjustment = 0, op;
 	if ( offset === 0 ) {
 		return 0;
 	}

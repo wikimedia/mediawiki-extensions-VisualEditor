@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model TableCellNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node for a table cell.
  *
  * @class
@@ -42,7 +49,7 @@ ve.dm.TableCellNode.converters = {
 		return element.attributes && ( {
 			'data': document.createElement( 'td' ),
 			'header': document.createElement( 'th' )
-		} )[element.attributes['style']];
+		} )[element.attributes.style];
 	},
 	'toDataElement': function( tag, element ) {
 		return ( {

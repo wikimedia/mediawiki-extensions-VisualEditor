@@ -1,4 +1,11 @@
 /**
+ * VisualEditor user interface Inspector class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Creates an ve.ui.Inspector object.
  *
  * @class
@@ -16,13 +23,14 @@ ve.ui.Inspector = function( toolbar, context ) {
 	// Properties
 	this.toolbar = toolbar;
 	this.context = context;
-	this.$ = $( '<div class="es-inspector"></div>' );
+
+	this.$ = $( '<div class="es-inspector"></div>', context.inspectorDoc );
 	//
-	this.$closeButton = $( '<div class="es-inspector-button es-inspector-closeButton"></div>' )
+	this.$closeButton = $( '<div class="es-inspector-button es-inspector-closeButton"></div>', context.inspectorDoc  )
 		.appendTo( this.$ );
-	this.$acceptButton = $( '<div class="es-inspector-button es-inspector-acceptButton"></div>' )
+	this.$acceptButton = $( '<div class="es-inspector-button es-inspector-acceptButton"></div>', context.inspectorDoc  )
 		.appendTo( this.$ );
-	this.$form = $( '<form></form>' ).appendTo( this.$ );
+	this.$form = $( '<form></form>', context.inspectorDoc ).appendTo( this.$ );
 
 	// Events
 	var _this = this;
@@ -52,8 +60,14 @@ ve.ui.Inspector = function( toolbar, context ) {
 /* Methods */
 
 ve.ui.Inspector.prototype.open = function() {
+	// Prepare to open
+	if ( this.prepareOpen ) {
+		this.prepareOpen();
+	}
+	// Show
 	this.$.show();
 	this.context.closeMenu();
+	// Open
 	if ( this.onOpen ) {
 		this.onOpen();
 	}

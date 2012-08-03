@@ -1,4 +1,11 @@
 /**
+ * VisualEditor BranchNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Mixin for branch nodes.
  *
  * Branch nodes are immutable, which is why there are no methods for adding or removing children.
@@ -54,7 +61,7 @@ ve.BranchNode.prototype.indexOf = function( node ) {
  * @param {ve.Node} root Node to use as root
  */
 ve.BranchNode.prototype.setRoot = function( root ) {
-	if ( root == this.root ) {
+	if ( root === this.root ) {
 		// Nothing to do, don't recurse into all descendants
 		return;
 	}
@@ -72,7 +79,7 @@ ve.BranchNode.prototype.setRoot = function( root ) {
  * @param {ve.Document} root Node to use as root
  */
 ve.BranchNode.prototype.setDocument = function( doc ) {
-	if ( doc == this.doc ) {
+	if ( doc === this.doc ) {
 		// Nothing to do, don't recurse into all descendants
 		return;
 	}
@@ -106,7 +113,7 @@ ve.BranchNode.prototype.getNodeFromOffset = function( offset, shallow ) {
 			childNode;
 		for ( var i = 0, length = this.children.length; i < length; i++ ) {
 			childNode = this.children[i];
-			if ( offset == nodeOffset ) {
+			if ( offset === nodeOffset ) {
 				// The requested offset is right before childNode,
 				// so it's not inside any of this's children, but inside this
 				return this;
@@ -121,7 +128,7 @@ ve.BranchNode.prototype.getNodeFromOffset = function( offset, shallow ) {
 			}
 			nodeOffset += nodeLength;
 		}
-		if ( offset == nodeOffset ) {
+		if ( offset === nodeOffset ) {
 			// The requested offset is right before this.children[i],
 			// so it's not inside any of this's children, but inside this
 			return this;
@@ -175,7 +182,7 @@ ve.BranchNode.prototype.getOffsetFromNode = function( node ) {
  */
 ve.BranchNode.prototype.traverseLeafNodes = function( callback, from, reverse ) {
 		// Stack of indices that lead from this to node
-	var	indexStack = [],
+	var indexStack = [],
 		// Node whose children we're currently traversing
 		node = this,
 		// Index of the child node we're currently visiting

@@ -1,3 +1,10 @@
+/**
+ * VisualEditor user interface Surface styles.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 .es-toolbar {
 	border-bottom: solid 1px #cccccc;
 	position: relative;
@@ -17,6 +24,15 @@
 .es-toolbar-wrapper.float .es-toolbar {
 	top: 0;
 	position: fixed;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+	border-radius: 0;
+	z-index: 100;
+	border-top: none;
+}
+.es-toolbar-wrapper.bottom .es-toolbar {
+	position: absolute;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	-o-border-radius: 0;
@@ -249,32 +265,4 @@
 
 .es-help-key-or {
 	color: #999999;
-}
-
-.es-warning {
-	color: red;
-	text-align: center;
-	margin-bottom: 1em;
-	display: none;
-	border: solid 1px #ffbbbb;
-	padding: 0.5em 0.75em;
-	-webkit-border-radius: 0.25em;
-	-moz-border-radius: 0.25em;
-	-o-border-radius: 0.25em;
-	border-radius: 0.25em;
-}
-
-#es-warning-dismiss {
-	float: right;
-	color: white;
-}
-
-#es-warning-dismiss:hover {
-	text-decoration: none;
-	color: silver;
-}
-
-#es-warning-dismiss:after {
-	content: ' x';
-	color: black;
 }

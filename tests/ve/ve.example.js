@@ -1,3 +1,10 @@
+/**
+ * VisualEditor example data sets and helper functions.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 /* Static Members */
 
 ve.example = {};
@@ -209,6 +216,15 @@ ve.example.getSelectNodesCases = function( doc ) {
 		{
 			'actual': doc.selectNodes( new ve.Range( 32, 39 ), 'leaves' ),
 			'expected': [
+				// table/tableSection/tableRow/tableCell/list
+				{
+					'node': lookup( documentNode, 1, 0, 0, 0, 2 ),
+					'range': new ve.Range( 32, 32 ),
+					'index': 2,
+					'indexInNode': 1,
+					'nodeRange': new ve.Range( 27, 32 ),
+					'nodeOuterRange': new ve.Range( 26, 33 )
+				},
 				// preformatted/text
 				{
 					'node': lookup( documentNode, 2, 0 ),
@@ -278,99 +294,34 @@ ve.example.getSelectNodesCases = function( doc ) {
 					'nodeRange': new ve.Range( 14, 24 ),
 					'nodeOuterRange': new ve.Range( 13, 25 )
 				}
-				],
+			],
 			'msg': 'zero-length range at the beginning of a listItem, in siblings mode'
+		},
+		{
+			'actual': doc.selectNodes( new ve.Range( 25, 27 ), 'covered' ),
+			'expected': [
+				// table/tableSection/tableRow/tableCell/list
+				{
+					'node': lookup( documentNode, 1, 0, 0, 0, 1 ),
+					'range': new ve.Range( 25, 25 ),
+					'index': 1,
+					'indexInNode': 1,
+					'nodeRange': new ve.Range( 13, 25 ),
+					'nodeOuterRange': new ve.Range( 12, 26 )
+				},
+				// table/tableSection/tableRow/tableCell/list
+				{
+					'node': lookup( documentNode, 1, 0, 0, 0, 2 ),
+					'range': new ve.Range( 27, 27 ),
+					'index': 2,
+					'indexInNode': 0,
+					'nodeRange': new ve.Range( 27, 32 ),
+					'nodeOuterRange': new ve.Range( 26, 33 )
+				}
+			],
+			'msg': 'range covering a list closing and a list opening'
 		}
 	];
-};
-
-/**
- * Builds a summary of a node tree.
- *
- * Generated summaries contain node types, lengths, outer lengths, attributes and summaries for
- * each child recusively. It's simple and fast to use deepEqual on this.
- *
- * @method
- * @param {ve.Node} node Node tree to summarize
- * @param {Boolean} [shallow] Do not summarize each child recursively
- * @returns {Object} Summary of node tree
- */
-ve.example.getNodeTreeSummary = function( node, shallow ) {
-	var summary = {
-		'getType': node.getType(),
-		'getLength': node.getLength(),
-		'getOuterLength': node.getOuterLength(),
-		'attributes': node.attributes
-	};
-	if ( node.children !== undefined ) {
-		summary['children.length'] = node.children.length;
-		if ( !shallow ) {
-			summary.children = [];
-			for ( var i = 0; i < node.children.length; i++ ) {
-				summary.children.push( ve.example.getNodeTreeSummary( node.children[i] ) );
-			}
-		}
-	}
-	return summary;
-};
-
-/**
- * Builds a summary of a node selection.
- *
- * Generated summaries contain length of results as well as node summaries, ranges, indexes, indexes
- * within parent and node ranges for each result. It's simple and fast to use deepEqual on this.
- *
- * @method
- * @param {Object[]} selection Selection to summarize
- * @returns {Object} Summary of selection
- */
-ve.example.getNodeSelectionSummary = function( selection ) {
-	var summary = {
-		'length': selection.length
-	};
-	if ( selection.length ) {
-		summary.results = [];
-		for ( var i = 0; i < selection.length; i++ ) {
-			summary.results.push( {
-				'node': ve.example.getNodeTreeSummary( selection[i].node, true ),
-				'range': selection[i].range,
-				'index': selection[i].index,
-				'indexInNode': selection[i].indexInNode,
-				'nodeRange': selection[i].nodeRange,
-				'nodeOuterRange': selection[i].nodeOuterRange
-			} );
-		}
-	}
-	return summary;
-};
-
-/**
- * Builds a summary of an HTML element.
- *
- * Summaries include node name, text, attributes and recursive summaries of children.
- *
- * @method
- * @param {HTMLElement} element Element to summarize
- * @returns {Object} Summary of element
- */
-ve.example.getDomElementSummary = function( element ) {
-	var $element = $( element ),
-		summary = {
-			'type': element.nodeName.toLowerCase(),
-			'text': $element.text(),
-			'attributes': {},
-			'children': []
-		},
-		i;
-	// Gather attributes
-	for ( i = 0; i < element.attributes.length; i++ ) {
-		summary.attributes[element.attributes[i].name] = element.attributes[i].value;
-	}
-	// Summarize children
-	for ( i = 0; i < element.children.length; i++ ) {
-		summary.children.push( ve.example.getDomElementSummary( element.children[i] ) );
-	}
-	return summary;
 };
 
 /**
@@ -382,16 +333,18 @@ ve.example.getDomElementSummary = function( element ) {
  * @param {ve.Node} Node at given path
  */
 ve.example.lookupNode = function( root ) {
-	var node = root;
-	for ( var i = 1; i < arguments.length; i++ ) {
+	var i,
+		node = root;
+	for ( i = 1; i < arguments.length; i++ ) {
 		node = node.children[arguments[i]];
 	}
 	return node;
 };
 
 ve.example.createDomElement = function( type, attributes ) {
-	var element = document.createElement( type );
-	for ( var key in attributes ) {
+	var key,
+		element = document.createElement( type );
+	for ( key in attributes ) {
 		element.setAttribute( key, attributes[key] );
 	}
 	return element;

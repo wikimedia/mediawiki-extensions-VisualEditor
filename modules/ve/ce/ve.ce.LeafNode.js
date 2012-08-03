@@ -1,4 +1,11 @@
 /**
+ * VisualEditor content editable LeafNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * ContentEditable node that can not have any children.
  *
  * @class
@@ -23,5 +30,4 @@ ve.ce.LeafNode = function( type, model, $element ) {
 
 /* Inheritance */
 
-ve.extendClass( ve.ce.LeafNode, ve.LeafNode );
-ve.extendClass( ve.ce.LeafNode, ve.ce.Node );
+ve.extendClass( ve.ce.LeafNode, ve.LeafNode, ve.ce.Node );

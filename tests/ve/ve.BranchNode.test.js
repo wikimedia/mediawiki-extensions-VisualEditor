@@ -1,3 +1,10 @@
+/**
+ * VisualEditor BranchNode tests.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
 module( 've.BranchNode' );
 
 /* Stubs */
@@ -11,29 +18,29 @@ ve.extendClass( ve.BranchNodeStub, ve.BranchNode );
 
 /* Tests */
 
-test( 'getChildren', 2, function() {
+test( 'getChildren', 2, function( assert ) {
 	var node1 = new ve.BranchNodeStub(),
 		node2 = new ve.BranchNodeStub( [node1] );
-	deepEqual( node1.getChildren(), [] );
-	deepEqual( node2.getChildren(), [node1] );
+	assert.deepEqual( node1.getChildren(), [] );
+	assert.deepEqual( node2.getChildren(), [node1] );
 } );
 
-test( 'indexOf', 4, function() {
+test( 'indexOf', 4, function( assert ) {
 	var node1 = new ve.BranchNodeStub(),
 		node2 = new ve.BranchNodeStub(),
 		node3 = new ve.BranchNodeStub(),
 		node4 = new ve.BranchNodeStub( [node1, node2, node3] );
-	strictEqual( node4.indexOf( null ), -1 );
-	strictEqual( node4.indexOf( node1 ), 0 );
-	strictEqual( node4.indexOf( node2 ), 1 );
-	strictEqual( node4.indexOf( node3 ), 2 );
+	assert.strictEqual( node4.indexOf( null ), -1 );
+	assert.strictEqual( node4.indexOf( node1 ), 0 );
+	assert.strictEqual( node4.indexOf( node2 ), 1 );
+	assert.strictEqual( node4.indexOf( node3 ), 2 );
 } );
 
-test( 'traverseLeafNodes', 1, function() {
+test( 'traverseLeafNodes', 1, function( assert ) {
 	var fragment = new ve.dm.Document( ve.dm.example.data ),
 		docNode = fragment.getDocumentNode(),
-		children = docNode.getChildren();
-	var tests = [
+		children = docNode.getChildren(),
+		tests = [
 		// Test 1 & 2
 		{
 			'node': docNode,
@@ -148,15 +155,39 @@ test( 'traverseLeafNodes', 1, function() {
 			'desc': 'Passing a sibling for from results in an exception'
 		}
 	];
-	var count=0;
-	for(var t=0;t<tests.length;t++) {
-		if(tests[t].hasOwnProperty('reverse')) {
+
+	function executeTest( test ) {
+		var realLeaves = [],
+			callback = function( node ) {
+				var retval;
+				realLeaves.push( node );
+				if ( test.callback ) {
+					retval = test.callback( node );
+					if ( retval !== undefined ) {
+						return retval;
+					}
+				}
+			},
+			f = function() {
+				test.node.traverseLeafNodes( callback, test.from, test.isReversed );
+			};
+		if ( test.exception ) {
+			assert.throws( f, test.exception, test.desc );
+		} else {
+			f();
+			assert.ok( ve.compareArrays( realLeaves, test.output ), test.desc );
+		}
+	}
+
+	var count = 0;
+	for ( var t = 0; t < tests.length; t++ ) {
+		if ( tests[t].hasOwnProperty( 'reverse' ) ) {
 			count++;
 		}
 		count++;
 	}
 
-	expect (count);
+	expect( count );
 	for ( var i = 0; i < tests.length; i++ ) {
 		executeTest( tests[i] );
 		if ( tests[i].reverse !== undefined ) {
@@ -174,29 +205,6 @@ test( 'traverseLeafNodes', 1, function() {
 				reversed.output = tests[i].reverse;
 			}
 			executeTest( reversed );
-		}
-	}
-	
-	function executeTest( test ) {
-		var	realLeaves = [],
-			callback = function( node ) {
-				var retval;
-				realLeaves.push( node );
-				if ( test.callback ) {
-					retval = test.callback( node );
-					if ( retval !== undefined ) {
-						return retval;
-					}
-				}
-			},
-			f = function() {
-				test.node.traverseLeafNodes( callback, test.from, test.isReversed );
-			};
-		if ( test.exception ) {
-			raises( f, test.exception, test.desc );
-		} else {
-			f();
-			ok( ve.compareArrays( realLeaves, test.output ), test.desc );
 		}
 	}
 } );

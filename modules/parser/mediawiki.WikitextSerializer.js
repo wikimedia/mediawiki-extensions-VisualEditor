@@ -1,3 +1,8 @@
+require('./core-upgrade.js');
+var PegTokenizer = require('./mediawiki.tokenizer.peg.js').PegTokenizer;
+var WikitextConstants = require('./mediawiki.wikitext.constants.js').WikitextConstants;
+var Util = require('./mediawiki.Util.js').Util;
+
 /**
  * Serializes a chunk of tokens or an HTML DOM to MediaWiki's wikitext flavor.
  * 
@@ -10,9 +15,6 @@ WikitextSerializer = function( options ) {
 		// defaults
 	}, options || {} );
 };
-
-require('./core-upgrade.js');
-var PegTokenizer = require('./mediawiki.tokenizer.peg.js').PegTokenizer;
 
 var WSP = WikitextSerializer.prototype;
 
@@ -46,12 +48,14 @@ var WSP = WikitextSerializer.prototype;
  *    swallow newlines in contexts where they shouldn't be emitted for
  *    ensuring equivalent wikitext output. (ex dom: ..</li>\n\n</li>..)
  * ********************************************************************* */
+
 WSP.initialState = {
 	listStack: [],
 	onNewline: true,
 	onStartOfLine : true,
 	availableNewlineCount: 0,
-	singleLineMode: 0
+	singleLineMode: 0,
+	tokens: []
 };
 
 WSP.escapeWikiText = function ( state, text ) {
@@ -68,7 +72,7 @@ WSP.escapeWikiText = function ( state, text ) {
 	// this is synchronous for now, will still need sync version later, or
 	// alternatively make text processing in the serializer async
 	var prefixedText = text;
-	var inNewlineContext = WSP._inNewLineContext( state );
+	var inNewlineContext = state.onNewLine;
 	if ( ! inNewlineContext ) {
 		// Prefix '_' so that no start-of-line wiki syntax matches. Strip it from
 		// the result.
@@ -81,7 +85,6 @@ WSP.escapeWikiText = function ( state, text ) {
 
 	// FIXME: parse using 
 	p.process( prefixedText );
-
 
 	if ( ! inNewlineContext ) {
 		// now strip the leading underscore.
@@ -149,6 +152,7 @@ WSP.escapeWikiText = function ( state, text ) {
 			nonTextTokenAccum = [];
 		}
 	}
+
 	try {
 		for ( var i = 0, l = tokens.length; i < l; i++ ) {
 			var token = tokens[i];
@@ -156,10 +160,13 @@ WSP.escapeWikiText = function ( state, text ) {
 				case String:
 					wrapNonTextTokens();
 					outTexts.push(
-						// Entity-escape only dangerous chars for now
-						// FIXME: don't decode entities in the tokenizer when
-						// parsing text content for escaping!
-						token.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+						token
+						// Angle brackets forming HTML tags are picked up as
+						// tags and escaped with nowiki. Remaining angle
+						// brackets can remain unescaped in the wikitext. They
+						// are entity-escaped by the HTML5 DOM serializer when
+						// outputting the HTML DOM.
+						//.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 					);
 					cursor += token.length;
 					break;
@@ -170,6 +177,33 @@ WSP.escapeWikiText = function ( state, text ) {
 					break;
 				case EOFTk:
 					wrapNonTextTokens();
+					break;
+				case TagTk:
+				case SelfclosingTagTk:
+					var argDict = state.env.KVtoHash( token.attribs );
+					if ( argDict['typeof'] === 'mw:Placeholder' &&
+							// XXX: move the decision whether to escape or not
+							// into individual handlers!
+							token.dataAttribs.src ) 
+					{
+						wrapNonTextTokens();
+						// push out the original source
+						// XXX: This assumes the content was not
+						// modified for now.
+						outTexts.push( token.dataAttribs.src
+								// escape ampersands in entity text
+								.replace(/&(#?[0-9a-zA-Z]{2,20};)/, '&amp;$1') );
+						// skip generated tokens
+						for ( ; i < l; i ++) {
+							var tk = tokens[i];
+							if ( tk.constructor === EndTagTk &&
+									tk.name === token.name ) {
+										break;
+									}
+						}
+					} else {
+						nonTextTokenAccum.push(token);
+					}
 					break;
 				default:
 					//console.warn('pushing ' + token);
@@ -195,25 +229,59 @@ var id = function(v) {
 	}; 
 };
 
-WSP._inStartOfLineContext = function(state) {
-	return	state.onStartOfLine || 
-		state.emitNewlineOnNextToken ||
-		(state.availableNewlineCount > 0);
+var installCollector = function ( collectorConstructor, cb, handler, state, token ) {
+	state.tokenCollector = new collectorConstructor( token, cb, handler );
+	return '';
 };
 
-WSP._inNewLineContext = function(state) {
-	return	state.onNewline || 
-		state.emitNewlineOnNextToken ||
-		(state.availableNewlineCount > 0);
+
+
+var endTagMatchTokenCollector = function ( tk, cb ) {
+	var tokens = [tk];
+
+	return {
+		cb: cb,
+		collect: function ( state, token ) {
+			tokens.push( token );
+			if ( token.constructor === EndTagTk &&
+					token.name === tk.name ) {
+				// finish collection
+				if ( this.cb ) {
+					// abort further token processing since the cb handled it
+					return this.cb( state, tokens );
+				} else {
+					// let a handler deal with token processing
+					return false;
+				}
+			} else {
+				// continue collection
+				return true;
+			}
+		},
+		tokens: tokens
+	};
 };
+
+var closeHeading = function(v) { 
+	return function(state, token) { 
+		var prevToken = state.prevToken;
+		// Deal with empty headings. Ex: <h1></h1>
+		if (prevToken.constructor === TagTk && prevToken.name === token.name) {
+			return "<nowiki></nowiki>" + v;
+		} else {
+			return v; 
+		}
+	};
+};
+
+function isListItem(token) {
+	if (token.constructor !== TagTk) return false;
+
+	var tokenName = token.name;
+	return (tokenName === 'li' || tokenName === 'dt' || tokenName === 'dd');
+}
 
 WSP._listHandler = function( handler, bullet, state, token ) {
-	function isListItem(token) {
-		if (token.constructor !== TagTk) return false;
-
-		var tokenName = token.name;
-		return (tokenName === 'li' || tokenName === 'dt' || tokenName === 'dd');
-	}
 	if ( state.singleLineMode ) {
 		state.singleLineMode--;
 	}
@@ -229,14 +297,8 @@ WSP._listHandler = function( handler, bullet, state, token ) {
 		//console.warn(JSON.stringify( stack ));
 		bullets = curList.bullets + curList.itemBullet + bullet;
 		curList.itemCount++;
-		if (	// deeply nested list
-				//( curList.itemCount > 1 &&
-				//	token.name === 'dd' &&
-				//	state.prevTagToken.constructor === EndTagTk &&
-				//	state.prevTagToken.name === 'dt' &&
-				//	! state.onStartOfLine ) ||
-				// A nested list, not directly after a list item
-				curList.itemCount > 1 && !isListItem(state.prevToken)) {
+		// A nested list, not directly after a list item
+		if (curList.itemCount > 1 && !isListItem(state.prevToken)) {
 			res = bullets;
 			handler.startsNewline = true;
 		} else {
@@ -269,6 +331,23 @@ WSP._listItemHandler = function ( handler, bullet, state, token ) {
 	}
 
 	var stack   = state.listStack;
+
+	// This check is required to handle cases where the DOM is not well-formed.
+	//
+	// FIXME NOTE: This is required currently to deal with bugs in the parser
+	// as it deals with complex cases.  But, in the future, we could deal with
+	// this in one of the following ways:
+	// (a) The serializer expects a well-formed DOM and all cleanup will be 
+	//     done as part of external tools/passes.
+	// (b) The serializer supports a small set of exceptional cases and bare
+	//     list items could be one of them
+	// (c) The serializer ought to handle any DOM that is thrown at it.
+	//
+	// Yet to be resolved.
+	if (stack.length === 0) {
+		stack.push({ itemCount: 0, bullets: bullet, itemBullet: bullet});
+	}
+
 	var curList = stack[stack.length - 1];
 	curList.itemCount++;
 	curList.itemBullet = bullet;
@@ -292,7 +371,7 @@ WSP._listItemHandler = function ( handler, bullet, state, token ) {
 	//
 	var res;
 	if (curList.itemCount > 1 && 
-		(	WSP._inStartOfLineContext(state) ||
+		(	state.onStartOfLine ||
 			isRepeatToken(state, token) ||
 			isMultiLineDtDdPair(state, token)
 		)
@@ -306,6 +385,92 @@ WSP._listItemHandler = function ( handler, bullet, state, token ) {
 	}
 	state.env.dp( 'lih', token, res, handler );
 	return res;
+};
+
+
+WSP._figureHandler = function ( state, figTokens ) {
+
+	// skip tokens looking for the image tag
+	var img;
+	var i = 1, n = figTokens.length;
+	while (i < n) {
+		if (figTokens[i].name === "img") {
+			img = figTokens[i];
+			break;
+		}
+		i++;
+	}
+
+	// skip tokens looking for the start and end caption tags
+	var fcStartIndex = 0, fcEndIndex = 0;
+	while (i < n) {
+		if (figTokens[i].name === "figcaption") {
+			if (fcStartIndex > 0) {
+				fcEndIndex = i;
+				break;
+			} else {
+				fcStartIndex = i;
+			}
+		}
+		i++;
+	}
+
+	// Call the serializer to build the caption
+	var caption = state.serializer.serializeTokens(figTokens.slice(fcStartIndex+1, fcEndIndex)).join('');
+
+	// Get the image resource name
+	// FIXME: file name has been capitalized -- need some fix in the parser
+	var argDict = state.env.KVtoHash( img.attribs );
+	var imgR = argDict.resource.replace(/(^\[:)|(\]$)/g, '');
+
+	// Now, build the complete wikitext for the figure
+	var outBits  = [imgR];
+	var figToken = figTokens[0];
+	var figAttrs = figToken.dataAttribs.optionList;
+
+	var simpleImgOptions = WikitextConstants.Image.SimpleOptions;
+	var prefixImgOptions = WikitextConstants.Image.PrefixOptions;
+	var sizeOptions      = { "width": 1, "height": 1};
+	var size             = {};
+	for (i = 0, n = figAttrs.length; i < n; i++) {
+		var a = figAttrs[i];
+		var k = a.k, v = a.v;
+		if (sizeOptions[k]) {
+			size[k] = v;
+		} else {
+			// Output size first and clear it
+			var w = size.width;
+			if (w) {
+				outBits.push(w + (size.height ? "x" + size.height : '') + "px");
+				size.width = null;
+			}
+
+			if (k === "aspect") {
+				// SSS: Bad Hack!  Need a better solution
+				// One solution is to search through prefix options hash but seems ugly.
+				// Another is to flip prefix options hash and use it to search.
+				if (v) {
+					outBits.push("upright=" + v);
+				} else {
+					outBits.push("upright");
+				}
+			} else if (simpleImgOptions[v.trim()] === k) {
+				// The values and keys in the parser attributes are a flip
+				// of how they are in the wikitext constants image hash
+				// Hence the indexing by 'v' instead of 'k'
+				outBits.push(v);
+			} else if (prefixImgOptions[k.trim()]) {
+				outBits.push(k + "=" + v);
+			} else {
+				console.warn("Unknown image option encountered: " + JSON.stringify(a));
+			}
+		}
+	}
+	if (caption) {
+		outBits.push(caption);
+	}
+
+	return "[[" + outBits.join('|') + "]]";
 };
 
 WSP._serializeTableTag = function ( symbol, optionEndSymbol, state, token ) {
@@ -329,9 +494,6 @@ WSP._serializeHTMLTag = function ( state, token ) {
 		state.inHTMLPre = true;
 	}
 
-	// Swallow required newline from previous token on encountering a HTML tag
-	//state.emitNewlineOnNextToken = false;
-
 	if ( token.attribs.length ) {
 		return '<' + token.name + ' ' + 
 			WSP._serializeAttributes( token.attribs ) + close + '>';
@@ -351,18 +513,20 @@ WSP._serializeHTMLEndTag = function ( state, token ) {
 	}
 };
 
-WSP._linkHandler =  function( state, token ) {
+WSP._linkHandler =  function( state, tokens ) {
 	//return '[[';
 	// TODO: handle internal/external links etc using RDFa and dataAttribs
-	// Also convert unannotated html links to external wiki links for html
-	// import. Might want to consider converting relative links without path
-	// component and file extension to wiki links.
+	// Also convert unannotated html links without advanced attributes to
+	// external wiki links for html import. Might want to consider converting
+	// relative links without path component and file extension to wiki links.
 	
-	var env = state.env;
+	var env = state.env,
+		token = tokens.shift(),
+		endToken = tokens.pop();
 	var attribDict = env.KVtoHash( token.attribs );
 	if ( attribDict.rel && attribDict.href !== undefined ) {
 		var tokenData = token.dataAttribs;
-		if ( attribDict.rel === 'mw:wikiLink' ) {
+		if ( attribDict.rel === 'mw:WikiLink' || attribDict.rel === 'mw:SimpleWikiLink' ) {
 			var base   = env.wgScriptPath;
 			var href   = attribDict.href;
 			var prefix = href.substr(0, base.length);
@@ -371,9 +535,13 @@ WSP._linkHandler =  function( state, token ) {
 
 			var tail   = tokenData.tail;
 			if ( tail && tail.length ) {
-				state.dropTail = tail;
-				target = tokenData.gc ? tokenData.sHref : target.replace( /_/g, ' ' );
+				if ( attribDict.rel === 'mw:SimpleWikiLink' ) {
+					target = tokenData.sHref;
+				} else {
+					target = target.replace( /_/g, ' ' );
+				}
 			} else {
+				tail = '';
 				var origLinkTgt = tokenData.sHref;
 				if (origLinkTgt) {
 					// Normalize the source target so that we can compare it
@@ -391,27 +559,56 @@ WSP._linkHandler =  function( state, token ) {
 			// FIXME: Properly handle something like [[{{Foo}}]]s
 			target = env.tokensToString( target );
 
-			if ( tokenData.gc ) {
-				state.dropContent = true;
-				return '[[' + target;
+			if ( attribDict.rel === 'mw:SimpleWikiLink' ) {
+				return '[[' + target + ']]' + tail;
 			} else {
-				return '[[' + target + '|';
+				var content = state.serializer.serializeTokens( tokens ).join('');
+				if (tail && content.substr(- tail.length) === tail) {
+					content = content.substr(0, content.length - tail.length);
+				}
+				return '[[' + target + '|' + content + ']]' + tail;
 			}
-		} else if ( attribDict.rel === 'mw:extLink' ) {
-			if ( tokenData.stx === 'urllink' ) {
-				state.dropContent = true;
-				return attribDict.href;
-			} else if ( tokenData.gc ) {
-				state.dropContent = true;
-				return '[' + attribDict.href;
-			} else {
-				return '[' + attribDict.href + ' ';
+		} else if ( attribDict.rel === 'mw:ExtLink' ) {
+			return '[' + attribDict.href + ' ' + 
+				state.serializer.serializeTokens( tokens ).join('') + 
+				']';
+		} else if ( attribDict.rel === 'mw:UrlLink' ) {
+			return attribDict.href;
+		} else if ( attribDict.rel === 'mw:NumberedExtLink' ) {
+			return '[' + attribDict.href + ']';
+		} else if ( attribDict.rel === 'mw:Image' ) {
+			// simple source-based round-tripping for now..
+			// TODO: properly implement!
+			if ( token.dataAttribs.src ) {
+				return token.dataAttribs.src;
 			}
 		} else {
+			// Unknown rel was set
 			return WSP._serializeHTMLTag( state, token );
 		}
 	} else {
-		return WSP._serializeHTMLTag( state, token );
+		// TODO: default to extlink for simple links with unknown rel set
+		// switch to html only when needed to support attributes
+
+		var isComplexLink = function ( attribDict ) {
+			for ( var name in attribDict ) {
+				if ( name && ! ( name in { href: 1 } ) ) {
+					return true;
+				}
+			}
+			return false;
+		};
+
+		if ( true || isComplexLink ( attribDict ) ) {
+			// Complex attributes we can't support in wiki syntax
+			return WSP._serializeHTMLTag( state, token ) +
+				state.serializer.serializeTokens( tokens ) +
+				WSP._serializeHTMLEndTag( state, endToken );
+		} else {
+			// TODO: serialize as external wikilink
+			return '';
+		}
+
 	}
 					
 	//if ( rtinfo.type === 'wikilink' ) {
@@ -420,23 +617,28 @@ WSP._linkHandler =  function( state, token ) {
 	//	// external link
 	//	return '[' + rtinfo.
 };
-WSP._linkEndHandler = function( state, token ) {
-	var attribDict = state.env.KVtoHash( token.attribs );
-	if ( attribDict.rel && attribDict.href !== undefined ) {
-		if ( attribDict.rel === 'mw:wikiLink' ) {
-			state.dropContent = false;
-			state.dropTail    = false;
-			return "]]" + (token.dataAttribs.tail ? token.dataAttribs.tail : "");
-		} else if ( attribDict.rel === 'mw:extLink' ) {
-			state.dropContent = false;
-			return (token.dataAttribs.stx === 'urllink') ? '' : ']';
-		} else {
-			return WSP._serializeHTMLEndTag( state, token );
-		}
+
+WSP.genContentSpanTypes = { 'mw:Nowiki':1, 'mw:Entity': 1 };
+
+/**
+ * Compare the actual content with the previous content and use
+ * dataAttribs.src if it does. Return serialization of modified content
+ * otherwise.
+ */
+WSP.compareSourceHandler = function ( state, tokens ) {
+	var token = tokens.shift(),
+		lastToken = tokens.pop(),
+		content = state.env.tokensToString( tokens, true );
+	if ( content.constructor !== String ) {
+		return state.serializer.serializeTokens( tokens ).join('');
+	} else if ( content === token.dataAttribs.srcContent ) {
+		return token.dataAttribs.src;
 	} else {
-		return WSP._serializeHTMLEndTag( state, token );
+		return content;
 	}
 };
+
+
 
 /* *********************************************************************
  * startsNewline
@@ -467,7 +669,7 @@ WSP._linkEndHandler = function( state, token ) {
  * ********************************************************************* */
 WSP.tagHandlers = {
 	body: {
-		start: {
+		end: {
 			handle: function(state, token) {
 				// swallow trailing new line
 				state.emitNewlineOnNextToken = false;
@@ -592,7 +794,7 @@ WSP.tagHandlers = {
 				if ( state.prevToken.constructor === TagTk && state.prevToken.name === 'tbody' ) {
 					// Omit for first row in a table. XXX: support optional trs
 					// for first line (in source wikitext) too using some flag in
-					// data-mw (stx: 'wikitext' ?)
+					// data-rt (stx: 'wikitext' ?)
 					return '';
 				} else {
 					return WSP._serializeTableTag("|-", '', state, token );
@@ -620,11 +822,24 @@ WSP.tagHandlers = {
 			handle: WSP._serializeTableTag.bind(null, "|+", ' |')
 		}
 	},
-	p: { 
+	p: {
 		make: function(state, token) {
+			// "stx": "html" tags never get here
 			// Special case handling in a list context
-			// VE embeds list content in paragraph tags
-			return state.singleLineMode ? WSP.defaultHTMLTagHandler : this;
+			// VE embeds list content in paragraph tags.
+			//
+			// SSS FIXME: This will *NOT* work if the list item has nested paragraph tags!
+			var prevToken = state.prevToken;
+			if (	token.attribs.length === 0 &&  
+					(	(state.listStack.length > 0 && isListItem(prevToken)) ||  
+						(prevToken.constructor === TagTk && prevToken.name === 'td') ||  
+						(state.ignorePTag && token.constructor === EndTagTk)))
+			{
+				state.ignorePTag = !state.ignorePTag;
+				return { start: { ignore: true }, end: { ignore: true } };
+			} else {
+				return state.singleLineMode ? WSP.defaultHTMLTagHandler : this;
+			}
 		},
 		start: {
 			startsNewline : true,
@@ -638,6 +853,7 @@ WSP.tagHandlers = {
 	pre: { 
 		start: {
 			startsNewline: true,
+			pairSepNLCount: 2,
 			handle: function( state, token ) {
 				state.inIndentPre = true;
 				state.textHandler = function( t ) { 
@@ -670,6 +886,13 @@ WSP.tagHandlers = {
 						console.warn( JSON.stringify( argDict ) );
 					}
 					return '<' + argDict.content + '>';
+				} else if ( argDict['typeof'] === 'mw:noinclude' ) {
+					this.newlineTransparent = true;
+					if ( token.dataAttribs.src === '<noinclude>' ) {
+						return '<noinclude>';
+					} else {
+						return '</noinclude>';
+					}
 				} else {
 					this.newlineTransparent = false;
 					return WSP._serializeHTMLTag( state, token );
@@ -677,36 +900,99 @@ WSP.tagHandlers = {
 			}
 		}
 	},
+	span: {
+		start: {
+			handle: function( state, token ) {
+				var argDict = state.env.KVtoHash( token.attribs );
+				if ( argDict['typeof'] in WSP.genContentSpanTypes ) {
+					if ( argDict['typeof'] === 'mw:Nowiki' ) {
+						state.inNoWiki = true;
+						return '<nowiki>';
+					} else if ( token.dataAttribs.src ) {
+						// FIXME: compare content with original content
+						return installCollector(
+									endTagMatchTokenCollector,
+									WSP.compareSourceHandler,
+									this,
+									state, token
+								);
+					}
+				} else {
+					// Fall back to plain HTML serialization for spans created
+					// by the editor
+					return WSP._serializeHTMLTag( state, token );
+				}
+			}
+		},
+		end: {
+			handle: function ( state, token ) { 
+				var argDict = state.env.KVtoHash( token.attribs );
+				if ( argDict['typeof'] in WSP.genContentSpanTypes ) {
+					if ( argDict['typeof'] === 'mw:Nowiki' ) {
+						state.inNoWiki = false;
+						return '</nowiki>';
+					}
+				} else {
+					// Fall back to plain HTML serialization for spans created
+					// by the editor
+					return WSP._serializeHTMLEndTag( state, token );
+				}
+			}
+		}
+	},
+	figure: {
+		start: {
+			handle: function ( state, token ) { 
+				state.tokenCollector = endTagMatchTokenCollector( token, WSP._figureHandler );
+				// Set the handler- not terribly useful since this one doesn't
+				// have any flags, but still useful for general testing
+				state.tokenCollector.handler = this;
+				return '';
+			}
+		}
+	},
 	hr: { 
 		start: { 
 			startsNewline: true, 
 			endsLine: true,
-			handle: id("----") 
+			handle: function(state, token) {
+				var extra_dashes = token.dataAttribs.extra_dashes;
+				if (extra_dashes && (extra_dashes > 0)) {
+					var buf = ["----"];
+					for (var i = 0; i < extra_dashes; i++) {
+						buf.push("-");
+					}
+					return buf.join('');
+				} else {
+					// num_dashes undefined OR exactly 4
+					return "----";
+				}
+			}
 		}
 	},
 	h1: { 
-		start: { startsNewline: true, handle: id("=") },
-		end: { endsLine: true, handle: id("=") }
+		start: { startsNewline: true, handle: id("="), defaultStartNewlineCount: 2 },
+		end: { endsLine: true, handle: closeHeading("=") }
 	},
 	h2: { 
-		start: { startsNewline: true, handle: id("==") },
-		end: { endsLine: true, handle: id("==") }
+		start: { startsNewline: true, handle: id("=="), defaultStartNewlineCount: 2 },
+		end: { endsLine: true, handle: closeHeading("==") }
 	},
 	h3: { 
-		start: { startsNewline: true, handle: id("===") },
-		end: { endsLine: true, handle: id("===") }
+		start: { startsNewline: true, handle: id("==="), defaultStartNewlineCount: 2 },
+		end: { endsLine: true, handle: closeHeading("===") }
 	},
 	h4: { 
-		start: { startsNewline: true, handle: id("====") },
-		end: { endsLine: true, handle: id("====") }
+		start: { startsNewline: true, handle: id("===="), defaultStartNewlineCount: 2 },
+		end: { endsLine: true, handle: closeHeading("====") }
 	},
 	h5: { 
-		start: { startsNewline: true, handle: id("=====") },
-		end: { endsLine: true, handle: id("=====") }
+		start: { startsNewline: true, handle: id("====="), defaultStartNewlineCount: 2 },
+		end: { endsLine: true, handle: closeHeading("=====") }
 	},
 	h6: { 
-		start: { startsNewline: true, handle: id("======") },
-		end: { endsLine: true, handle: id("======") }
+		start: { startsNewline: true, handle: id("======"), defaultStartNewlineCount: 2 },
+		end: { endsLine: true, handle: closeHeading("======") }
 	},
 	br: { 
 		start: { 
@@ -724,8 +1010,13 @@ WSP.tagHandlers = {
 		end: { handle: id("''") }
 	},
 	a:  { 
-		start: { handle: WSP._linkHandler },
-		end: { handle: WSP._linkEndHandler }
+		start: { 
+			handle: installCollector.bind(null, 
+						endTagMatchTokenCollector, 
+						WSP._linkHandler,
+						this
+					)
+		}
 	}
 };
 
@@ -756,6 +1047,7 @@ WSP._serializeAttributes = function ( attribs ) {
 WSP.serializeTokens = function( tokens, chunkCB ) {
 	var state = $.extend({}, this.initialState, this.options),
 		i, l;
+	state.serializer = this;
 	if ( chunkCB === undefined ) {
 		var out = [];
 		state.chunkCB = out.push.bind(out);
@@ -772,13 +1064,26 @@ WSP.serializeTokens = function( tokens, chunkCB ) {
 };
 
 WSP.defaultHTMLTagHandler = { 
-	start: { handle: WSP._serializeHTMLTag }, 
-	end  : { handle: WSP._serializeHTMLEndTag } 
+	start: { isNewlineEquivalent: true, handle: WSP._serializeHTMLTag }, 
+	end  : { isNewlineEquivalent: true, handle: WSP._serializeHTMLEndTag } 
 };
 
 WSP._getTokenHandler = function(state, token) {
 	var handler;
-	if (token.dataAttribs.stx === 'html') {
+	if ( token.dataAttribs.src !== undefined &&
+		Util.lookup( token.attribs, 'typeof' ) === 'mw:Placeholder' ) {
+			// implement generic src round-tripping: 
+			// return src, and drop the generated content
+			if ( token.constructor === TagTk ) {
+				state.tokenCollector = endTagMatchTokenCollector( token );
+				return { handle: id( token.dataAttribs.src ) };
+			} else if ( token.constructor === SelfclosingTagTk ) {
+				return { handle: id( token.dataAttribs.src ) };
+			} else { // EndTagTk
+				state.tokenCollector = null;
+				return { handle: id('') };
+			}
+	} else if (token.dataAttribs.stx === 'html') {
 		handler = this.defaultHTMLTagHandler;
 	} else {
 		var tname = token.name;
@@ -802,68 +1107,90 @@ WSP._getTokenHandler = function(state, token) {
  * Serialize a token.
  */
 WSP._serializeToken = function ( state, token ) {
-	var handler = {}, 
-		res = '', 
+	var res = '',
+		collectorResult = false,
+		handler = {}, 
 		dropContent = state.dropContent;
 
-	state.prevToken = state.curToken;
-	state.curToken  = token;
-
-
-	switch( token.constructor ) {
-		case TagTk:
-		case SelfclosingTagTk:
-			handler = WSP._getTokenHandler( state, token );
-			if ( ! handler.ignore ) {
-				state.prevTagToken = state.currTagToken;
-				state.currTagToken = token;
-				res = handler.handle ? handler.handle( state, token ) : '';
+	if (state.tokenCollector) {
+		collectorResult = state.tokenCollector.collect( state, token );
+		if ( collectorResult === true ) {
+			// continue collecting
+			return;
+		} else if ( collectorResult !== false ) {
+			res = collectorResult;
+			if ( state.tokenCollector.handler ) {
+				handler = state.tokenCollector.handler;
 			}
-			break;
-		case EndTagTk:
-			handler = WSP._getTokenHandler( state, token );
-			if ( ! handler.ignore ) {
-				state.prevTagToken = state.currTagToken;
-				state.currTagToken = token;
-				if ( handler.singleLine < 0 && state.singleLineMode ) {
-					state.singleLineMode--;
+			state.tokenCollector = null;
+		}
+	} 
+
+	if ( collectorResult === false ) {
+
+
+		state.prevToken = state.curToken;
+		state.curToken  = token;
+
+		// The serializer is logically in a new line context if a new line is pending
+		if (state.emitNewlineOnNextToken || (state.availableNewlineCount > 0)) {
+			state.onNewline = true;
+			state.onStartOfLine = true;
+		}
+
+		switch( token.constructor ) {
+			case TagTk:
+			case SelfclosingTagTk:
+				handler = WSP._getTokenHandler( state, token );
+				if ( ! handler.ignore ) {
+					state.prevTagToken = state.currTagToken;
+					state.currTagToken = token;
+					res = handler.handle ? handler.handle( state, token ) : '';
 				}
-				res = handler.handle ? handler.handle( state, token ) : '';
-			}
-			break;
-		case String:
-			res = ( state.inNoWiki || state.inHTMLPre ) ? token 
-				: this.escapeWikiText( state, token );
-			res = state.textHandler ? state.textHandler( res ) : res;
-			break;
-		case CommentTk:
-			res = '<!--' + token.value + '-->';
-			// don't consider comments for changes of the onStartOfLine status
-			// XXX: convert all non-tag handlers to a similar handler
-			// structure as tags?
-			handler = { newlineTransparent: true }; 
-			break;
-		case NlTk:
-			res = '\n';
-			res = state.textHandler ? state.textHandler( res ) : res;
-			break;
-		case EOFTk:
-			res = '';
-			for ( var i = 0, l = state.availableNewlineCount; i < l; i++ ) {
-				res += '\n';
-			}
-			state.chunkCB(res);
-			break;
-		default:
-			res = '';
-			console.warn( 'Unhandled token type ' + JSON.stringify( token ) );
-			break;
+				break;
+			case EndTagTk:
+				handler = WSP._getTokenHandler( state, token );
+				if ( ! handler.ignore ) {
+					state.prevTagToken = state.currTagToken;
+					state.currTagToken = token;
+					if ( handler.singleLine < 0 && state.singleLineMode ) {
+						state.singleLineMode--;
+					}
+					res = handler.handle ? handler.handle( state, token ) : '';
+				}
+				break;
+			case String:
+				res = ( state.inNoWiki || state.inHTMLPre ) ? token 
+					: this.escapeWikiText( state, token );
+				res = state.textHandler ? state.textHandler( res ) : res;
+				break;
+			case CommentTk:
+				res = '<!--' + token.value + '-->';
+				// don't consider comments for changes of the onStartOfLine status
+				// XXX: convert all non-tag handlers to a similar handler
+				// structure as tags?
+				handler = { newlineTransparent: true }; 
+				break;
+			case NlTk:
+				res = '\n';
+				res = state.textHandler ? state.textHandler( res ) : res;
+				break;
+			case EOFTk:
+				res = '';
+				for ( var i = 0, l = state.availableNewlineCount; i < l; i++ ) {
+					res += '\n';
+				}
+				state.chunkCB(res);
+				break;
+			default:
+				res = '';
+				console.warn( 'Unhandled token type ' + JSON.stringify( token ) );
+				break;
+		}
 	}
 
-
 	if (! dropContent || ! state.dropContent ) {
-
-		var newNLCount = 0;
+		var newTrailingNLCount = 0;
 		if (res !== '') {
 			// Strip leading or trailing newlines from the returned string
 			var match = res.match( /^((?:\r?\n)*)((?:.*?|[\r\n]+[^\r\n])*?)((?:\r?\n)*)$/ ),
@@ -875,7 +1202,7 @@ WSP._serializeToken = function ( state, token ) {
 				state.availableNewlineCount += leadingNLs.replace(/\r\n/g, '\n').length;
 				res = "";
 			} else {
-				newNLCount = trailingNLs.replace(/\r\n/g, '\n').length;
+				newTrailingNLCount = trailingNLs.replace(/\r\n/g, '\n').length;
 				if ( leadingNLs !== '' ) {
 					state.availableNewlineCount += leadingNLs.replace(/\r\n/g, '\n').length;
 				}
@@ -895,67 +1222,66 @@ WSP._serializeToken = function ( state, token ) {
 			}
 		}
 
-		if ( state.env.debug ) {
-			console.warn(token + " -> " + JSON.stringify( res ) + 
-					"\n   onnl: " + state.onNewline + 
-					", #nl: is" + state.availableNewlineCount + '/new' + newNLCount +
-					', emitOnNext:' + state.emitNewlineOnNextToken);
+		if (state.env.debug) {
+			console.warn(token + 
+					", res: " + JSON.stringify( res ) + 
+					", nl: " + state.onNewline + 
+					", sol: " + state.onStartOfLine + 
+					', eon:' + state.emitNewlineOnNextToken +
+					", #nl: " + state.availableNewlineCount + 
+					', #new:' + newTrailingNLCount);
 		}
-		if (res !== '' ) {
-			var out = '';
-			// Prev token's new line token
-			if ( !state.singleLineMode &&
-					( ( !res.match(/^\s*$/) && state.emitNewlineOnNextToken ) ||
-					( handler.startsNewline && !state.onStartOfLine ) ) ) 
-			{
-				// Emit new line, if necessary
-				if ( ! state.availableNewlineCount ) {
-					state.availableNewlineCount++;
-				}
-				state.emitNewlineOnNextToken = false;
-			}
 
-			if ( state.availableNewlineCount ) {
-				state.onNewline = true;
-				state.onStartOfLine = true;
-			}
+		if (res !== '') {
+			var out = '';
+			// If this is not a html tag and the serializer is not in single-line mode,
+			// allocate a newline if 
+			// - prev token needs a single line, 
+			// - handler starts a new line and we aren't on a new line,
+			//
+			// Newline-equivalent tokens (HTML tags for example) don't get
+			// implicit newlines.
+			if (!handler.isNewlineEquivalent &&
+					!state.singleLineMode && 
+					!state.availableNewlineCount && 
+					((!res.match(/^\s*$/) && state.emitNewlineOnNextToken) ||
+					(!state.onStartOfLine && handler.startsNewline)))
+			{
+				state.availableNewlineCount = handler.defaultStartNewlineCount || 1;
+			} 
 
 			// Add required # of new lines in the beginning
 			for (; state.availableNewlineCount; state.availableNewlineCount--) {
 				out += '\n';
 			}
 
-			state.availableNewlineCount = newNLCount;
-
-			// FIXME: This might modify not just the last content token in a
-			// link, which would be wrong. We'll likely have to collect tokens
-			// between a tags instead, and strip only the last content token.
-			if (state.dropTail && res.substr(- state.dropTail.length) === state.dropTail) {
-				res = res.substr(0, res.length - state.dropTail.length);
-			}
-
 			if ( state.singleLineMode ) {
 				res = res.replace(/\n/g, ' ');
 			}
 			out += res;
-			if ( res !== '' ) {
+			state.env.dp(' =>', out);
+			state.chunkCB( out );
+
+			// Update new line state
+			// 1. If this token generated new trailing new lines, we are in a newline state again.
+			//    If not, we are not!  But, handle onStartOfLine specially. 
+			if (newTrailingNLCount > 0) {
+				state.availableNewlineCount = newTrailingNLCount;
+				state.onNewline = true;
+				state.onStartOfLine = true;
+			} else {
+				state.availableNewlineCount = 0;
 				state.onNewline = false;
-				if ( !handler.newlineTransparent ) {
+				if (!handler.newlineTransparent) {
 					state.onStartOfLine = false;
 				}
 			}
-			state.env.dp(' =>', out);
-			state.chunkCB( out );
-		} else {
-			state.availableNewlineCount += newNLCount;
-			if ( handler.startsNewline && ! state.onStartOfLine ) {
-				state.emitNewlineOnNextToken = true;
-			}
+
+			// 2. Previous token nl state is no longer relevant
+			state.emitNewlineOnNextToken = false;
+		} else if ( handler.startsNewline && !state.onStartOfLine ) {
+			state.emitNewlineOnNextToken = true;
 		}
-		/* else {
-			console.warn("SILENT: tok: " + token + ", res: <" + res + ">" + ", onnl: " + state.onNewline + ", # nls: " + state.availableNewlineCount);
-		}
-		*/
 
 		if (handler.endsLine) {
 			// Record end of line
@@ -973,6 +1299,7 @@ WSP._serializeToken = function ( state, token ) {
 WSP.serializeDOM = function( node, chunkCB ) {
 	try {
 		var state = $.extend({}, this.initialState, this.options);
+		state.serializer = this;
 		//console.warn( node.innerHTML );
 		if ( ! chunkCB ) {
 			var out = [];
@@ -1014,6 +1341,7 @@ WSP._serializeDOM = function( node, state ) {
 
 			// then the end token
 			this._serializeToken(state, new EndTagTk(name, tkAttribs, tkRTInfo));
+
 			break;
 		case Node.TEXT_NODE:
 			this._serializeToken( state, node.data );
@@ -1037,7 +1365,7 @@ WSP._getDOMAttribs = function( attribs ) {
 	var out = [];
 	for ( var i = 0, l = attribs.length; i < l; i++ ) {
 		var attrib = attribs.item(i);
-		if ( attrib.name !== 'data-mw' ) {
+		if ( attrib.name !== 'data-rt' ) {
 			out.push( { k: attrib.name, v: attrib.value } );
 		}
 	}
@@ -1045,8 +1373,8 @@ WSP._getDOMAttribs = function( attribs ) {
 };
 
 WSP._getDOMRTInfo = function( attribs ) {
-	if ( attribs['data-mw'] ) {
-		return JSON.parse( attribs['data-mw'].value || '{}' );
+	if ( attribs['data-rt'] ) {
+		return JSON.parse( attribs['data-rt'].value || '{}' );
 	} else {
 		return {};
 	}

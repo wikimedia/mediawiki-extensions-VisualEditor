@@ -1,4 +1,11 @@
 /**
+ * VisualEditor Range class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Range of content.
  *
  * @class
@@ -103,6 +110,20 @@ ve.Range.prototype.normalize = function() {
 		this.start = this.to;
 		this.end = this.from;
 	}
+};
+
+/**
+ * Swaps from and to values, effectively changing the direction.
+ *
+ * The range will also be normalized when this is called.
+ *
+ * @method
+ */
+ve.Range.prototype.flip = function() {
+	var from = this.from;
+	this.from = this.to;
+	this.to = from;
+	this.normalize();
 };
 
 /**

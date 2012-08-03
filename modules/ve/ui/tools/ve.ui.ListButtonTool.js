@@ -1,4 +1,11 @@
 /**
+ * VisualEditor user interface ListButtonTool class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * Creates an ve.ui.ListButtonTool object.
  *
  * @class
@@ -108,7 +115,7 @@ ve.ui.ListButtonTool.prototype.onClick = function() {
 };
 
 ve.ui.ListButtonTool.prototype.updateState = function( annotations, nodes ) {
-	var	surfaceView = this.toolbar.getSurfaceView(),
+	var surfaceView = this.toolbar.getSurfaceView(),
 		surfaceModel = surfaceView.getModel(),
 		doc = surfaceView.getDocument(),
 		selection = surfaceModel.getSelection(),

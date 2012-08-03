@@ -1,9 +1,15 @@
-module( 've.ce.TextNode' );
+/**
+ * VisualEditor content editable TextNode tests.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
 
+module( 've.ce.TextNode' );
 
 /* Tests */
 
-test( 'getHtml', 22, function() {
+test( 'getHtml', 22, function( assert ) {
 	var cases = [
 		{
 			'data': [
@@ -120,7 +126,7 @@ test( 'getHtml', 22, function() {
 				}],
 				'g',
 				'h',
-				'i',				
+				'i',
 				{ 'type': '/paragraph' }
 			],
 			'html': 'abc<b><i><u>def</u></i></b>ghi'
@@ -147,7 +153,7 @@ test( 'getHtml', 22, function() {
 				}],
 				'g',
 				'h',
-				'i',				
+				'i',
 				{ 'type': '/paragraph' }
 			],
 			'html': 'abc<b><i><u>d</u></i></b><i><u>e<b>f</b></u></i>ghi'
@@ -174,7 +180,7 @@ test( 'getHtml', 22, function() {
 				}],
 				'g',
 				'h',
-				'i',				
+				'i',
 				{ 'type': '/paragraph' }
 			],
 			'html': 'abc<i><u><b>d</b>e<b>f</b></u></i>ghi'
@@ -200,7 +206,7 @@ test( 'getHtml', 22, function() {
 				}],
 				'g',
 				'h',
-				'i',				
+				'i',
 				{ 'type': '/paragraph' }
 			],
 			'html': 'abc<i><u><b>d</b></u></i><u><b>ef</b></u>ghi'
@@ -267,7 +273,7 @@ test( 'getHtml', 22, function() {
 		}
 	];
 	for ( var i = 0; i < cases.length; i++ ) {
-		equal(
+		assert.equal(
 			( new ve.ce.TextNode(
 				( new ve.dm.Document( cases[i].data ) )
 					.documentNode.getChildren()[0].getChildren()[0] )

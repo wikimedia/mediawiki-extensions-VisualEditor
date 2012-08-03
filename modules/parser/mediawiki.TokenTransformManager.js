@@ -18,7 +18,8 @@
 
 var events = require('events'),
 	LRU = require("lru-cache"),
-	jshashes = require('jshashes');
+	jshashes = require('jshashes'),
+	Util = require('./mediawiki.Util.js').Util;
 
 /**
  * Base class for token transform managers
@@ -33,20 +34,30 @@ function TokenTransformManager( env, isInclude, pipeFactory, phaseEndRank, attri
 	this._construct();
 }
 
+function tokenTransformersKey(tkType, tagName) {
+	return (tkType === 'tag') ? "tag:" + tagName.toLowerCase() : tkType;
+}
+
+// Map of: token constructor ==> transfomer type
+// Used for returning active transformers for a token 
+TokenTransformManager.tkConstructorToTkTypeMap = {
+	"String" : "text", 
+	"NlTk" : "newline",
+	"CommentTk" : "comment",
+	"EOFTk" : "end",
+	"TagTk" : "tag",
+	"EndTagTk" : "tag",
+	"SelfclosingTagTk" : "tag"
+};
+
 // Inherit from EventEmitter
 TokenTransformManager.prototype = new events.EventEmitter();
 TokenTransformManager.prototype.constructor = TokenTransformManager;
 
 TokenTransformManager.prototype._construct = function () {
-	this.transformers = {
-		tag: {}, // for TagTk, EndTagTk, SelfclosingTagTk, keyed on name
-		text: [],
-		newline: [],
-		comment: [],
-		end: [], // eof
-		martian: [], // none of the above (unknown token type)
-		any: []	// all tokens, before more specific handlers are run
-	};
+	this.defaultTransformers = [];	// any transforms
+	this.tokenTransformers   = {};	// non-any transforms
+	this.cachedTransformers  = {};	// merged any + non-any transforms
 };
 
 /**
@@ -63,37 +74,65 @@ TokenTransformManager.prototype.addListenersOn = function ( tokenEmitter ) {
 	tokenEmitter.addListener('end', this.onEndEvent.bind( this ) );
 };
 
+TokenTransformManager.prototype.setTokensRank = function ( tokens, rank ) {
+	for ( var i = 0, l = tokens.length; i < l; i++ ) {
+		tokens[i] = this.env.setTokenRank( rank, tokens[i] );
+	}
+};
+
+/**
+ * Predicate for sorting transformations by ascending rank.
+ * */
+TokenTransformManager.prototype._cmpTransformations = function ( a, b ) {
+	return a.rank - b.rank;
+};
 
 /**
  * Add a transform registration.
  *
  * @method
  * @param {Function} transform.
+ * @param {String} Debug string to identify the transformer in a trace.
  * @param {Number} rank, [0,3) with [0,1) in-order on input token stream,
  * [1,2) out-of-order and [2,3) in-order on output token stream
  * @param {String} type, one of 'tag', 'text', 'newline', 'comment', 'end',
  * 'martian' (unknown token), 'any' (any token, matched before other matches).
  * @param {String} tag name for tags, omitted for non-tags
  */
-TokenTransformManager.prototype.addTransform = function ( transformation, rank, type, name ) {
-	var transArr,
-		transformer = { 
-			transform: transformation,
-			rank: rank
-		};
-	if ( type === 'tag' ) {
-		name = name.toLowerCase();
-		transArr = this.transformers.tag[name];
-		if ( ! transArr ) {
-			transArr = this.transformers.tag[name] = [];
-		}
+TokenTransformManager.prototype.addTransform = function ( transformation, debug_name, rank, type, name ) {
+	var t = { rank: rank };
+	if (!this.env.trace) {
+		t.transform = transformation;
 	} else {
-		transArr = this.transformers[type];
+		// Trace info
+		var mgr = this;
+		t.transform = function() {
+			var args = arguments;
+			mgr.env.tracer.startPass(debug_name + ":" + rank);
+			var r = transformation.apply(null, args);
+			mgr.env.tracer.endPass(debug_name + ":" + rank);
+			return r;
+		};
 	}
-	transArr.push(transformer);
-	// sort ascending by rank
-	transArr.sort( this._cmpTransformations );
-	//this.env.dp( 'transforms: ', this.transformers );
+
+	if (type === 'any') {
+		// Record the any transformation
+		this.defaultTransformers.push(t);
+
+		// clear cache
+		this.cachedTransformers = {};
+	} else {
+		var key = tokenTransformersKey(type, name);
+		var tArray = this.tokenTransformers[key];
+		if (!tArray) {
+			tArray = this.tokenTransformers[key] = [];
+		}
+		tArray.push(t);
+		tArray.sort(this._cmpTransformations);
+
+		// clear the relevant cache entry
+		this.cachedTransformers[key] = null;
+	}
 };
 
 /**
@@ -108,81 +147,56 @@ TokenTransformManager.prototype.addTransform = function ( transformation, rank, 
  * @param {String} tag name for tags, omitted for non-tags
  */
 TokenTransformManager.prototype.removeTransform = function ( rank, type, name ) {
-	var i = -1,
-		ts;
-
-	function rankUnEqual ( i ) {
-		return i.rank !== rank;
-	}
-
-	if ( type === 'tag' ) {
-		name = name.toLowerCase();
-		var maybeTransArr = this.transformers.tag.name;
-		if ( maybeTransArr ) {
-			this.transformers.tag.name = maybeTransArr.filter( rankUnEqual );
+	function removeMatchingTransform(transformers, rank) {
+		var i = 0, n = transformers.length;
+		while (i < n && rank !== transformers[i].rank) {
+			i++;
 		}
+		transformers.splice(i, 1);
+	}
+
+	if (type === 'any') {
+		// Remove from default transformers
+		removeMatchingTransform(this.defaultTransformers, rank);
+
+		// clear cache
+		this.cachedTransformers = {};
 	} else {
-		this.transformers[type] = this.transformers[type].filter( rankUnEqual ) ;
+		var key = tokenTransformersKey(type, name);
+		var tArray = this.tokenTransformers[key];
+		if (tArray) {
+			removeMatchingTransform(tArray, rank);
+		}
+
+		// clear the relevant cache entry
+		this.cachedTransformers[key] = null;
 	}
-};
-
-
-TokenTransformManager.prototype.setTokensRank = function ( tokens, rank ) {
-	for ( var i = 0, l = tokens.length; i < l; i++ ) {
-		tokens[i] = this.env.setTokenRank( rank, tokens[i] );
-	}
-};
-
-/**
- * Predicate for sorting transformations by ascending rank.
- */
-TokenTransformManager.prototype._cmpTransformations = function ( a, b ) {
-	return a.rank - b.rank;
 };
 
 /**
  * Get all transforms for a given token
  */
 TokenTransformManager.prototype._getTransforms = function ( token, minRank ) {
-	
-	var ts;
-	switch ( token.constructor ) {
-		case String:
-			ts = this.transformers.text;
-			break;
-		case NlTk:
-			ts = this.transformers.newline;
-			break;
-		case CommentTk:
-			ts = this.transformers.comment;
-			break;
-		case EOFTk:
-			ts = this.transformers.end;
-			break;
-		case TagTk:
-		case EndTagTk:
-		case SelfclosingTagTk:
-			ts = this.transformers.tag[token.name.toLowerCase()];
-			if ( ! ts ) {
-				ts = [];
-			}
-			break;
-		default:
-			ts = this.transformers.martian;
-			break;
+	var tkType = TokenTransformManager.tkConstructorToTkTypeMap[token.constructor.name];
+	var key = tokenTransformersKey(tkType, token.name);
+	var tts = this.cachedTransformers[key];
+	if (!tts) {
+		// generate and cache -- dont cache if there are no default transformers
+		tts = this.tokenTransformers[key] || [];
+		if (this.defaultTransformers.length > 0) {
+			tts = tts.concat(this.defaultTransformers);
+			tts.sort(this._cmpTransformations);
+			this.cachedTransformers[key] = tts;
+		}
 	}
-	// XXX: cache this to avoid constant re-sorting?
-	if ( this.transformers.any.length ) {
-		ts = ts.concat( this.transformers.any );
-		ts.sort( this._cmpTransformations );
-	}
+
 	if ( minRank !== undefined ) {
 		// skip transforms <= minRank
 		var i = 0;
-		for ( l = ts.length; i < l && ts[i].rank <= minRank; i++ ) { }
-		return ( i && ts.slice( i ) ) || ts;
+		for ( l = tts.length; i < l && tts[i].rank <= minRank; i++ ) { }
+		return ( i && tts.slice( i ) ) || tts;
 	} else {
-		return ts;
+		return tts;
 	}
 };
 			
@@ -245,8 +259,14 @@ AsyncTokenTransformManager.prototype.setFrame = function ( parentFrame, title, a
 AsyncTokenTransformManager.prototype.emitChunk = function( ret ) {
 	this.env.dp( 'emitChunk', ret );
 	this.emit( 'chunk', ret.tokens );
+
 	if ( ! ret.async ) {
 		this.emit('end');
+		// NOTE: This is a dummy return.  We are entering async mode and
+		// there is no caller waiting to consume this return value.
+		// This is present here for parity with the return on the other branch
+		// and not confuse anyone wondering if there is a missing return here.
+		return;
 	} else {
 		// allow accumulators to go direct
 		return this.emitChunk.bind( this );
@@ -273,6 +293,7 @@ AsyncTokenTransformManager.prototype.process = function ( tokens ) {
  * @param {Array} chunk of tokens
  */
 AsyncTokenTransformManager.prototype.onChunk = function ( tokens ) {
+	this.env.tracer.startPass("onChunk (Async:" + this.attributeType + ")");
 	// Set top-level callback to next transform phase
 	var res = this.transformTokens ( tokens, this.tokenCB );
 	this.env.dp( 'AsyncTokenTransformManager onChunk', res.async? 'async' : 'sync', res.tokens );
@@ -291,6 +312,7 @@ AsyncTokenTransformManager.prototype.onChunk = function ( tokens ) {
 		this.tailAccumulator = res.async;
 		this.tokenCB = res.async.getParentCB ( 'sibling' );
 	}
+	this.env.tracer.endPass("onChunk (Async:" + this.attributeType + ")");
 };
 
 /**
@@ -363,7 +385,7 @@ AsyncTokenTransformManager.prototype.transformTokens = function ( tokens, parent
 		minRank;
 	
 	// make localAccum compatible with getParentCB('sibling')
-	localAccum.getParentCB = function() { return parentCB };
+	localAccum.getParentCB = function() { return parentCB; };
 	var nextAccum = this._makeNextAccum( parentCB, s );
 
 	var i = 0,
@@ -412,6 +434,8 @@ AsyncTokenTransformManager.prototype.transformTokens = function ( tokens, parent
 			}
 		}
 
+		this.env.tracer.processToken(token);
+
 		var ts = this._getTransforms( token, minRank );
 
 		//this.env.dp( 'async token:', s.c, token, minRank, ts );
@@ -449,7 +473,7 @@ AsyncTokenTransformManager.prototype.transformTokens = function ( tokens, parent
 						} else if (
 							resTokens.rank === this.phaseEndRank ||
 							( resTokens[0].constructor === String && 
-								! this.transformers.text.length ) ) 
+								! this.tokenTransformers.text ) ) 
 						{
 							// Fast path for text token, and nothing to do for it
 							// Abort processing, but treat token as done.
@@ -649,7 +673,6 @@ SyncTokenTransformManager.prototype.process = function ( tokens ) {
 		tokens = [tokens];
 	}
 	this.onChunk( tokens );
-	//console.warn( JSON.stringify( this.transformers ) )
 	this.onEndEvent();
 };
 
@@ -662,6 +685,7 @@ SyncTokenTransformManager.prototype.process = function ( tokens ) {
  * @param {Array} Token chunk.
  */
 SyncTokenTransformManager.prototype.onChunk = function ( tokens ) {
+	this.env.tracer.startPass("onChunk (Sync:" + this.attributeType + ")");
 	this.env.dp( 'SyncTokenTransformManager.onChunk, input: ', tokens );
 	var res,
 		localAccum = [],
@@ -688,6 +712,9 @@ SyncTokenTransformManager.prototype.onChunk = function ( tokens ) {
 			token = tokens[i];
 			minRank = tokens.rank || this.phaseEndRank - 1;
 		}
+
+		this.env.tracer.processToken(token);
+
 		res = { token: token };
 		
 		ts = this._getTransforms( token, minRank );
@@ -707,6 +734,7 @@ SyncTokenTransformManager.prototype.onChunk = function ( tokens ) {
 			}
 			token = res.token;
 		}
+
 		//this.env.dp( 'sync res:', res );
 
 		if( res.tokens && res.tokens.length ) {
@@ -726,6 +754,7 @@ SyncTokenTransformManager.prototype.onChunk = function ( tokens ) {
 	localAccum.rank = this.phaseEndRank;
 	localAccum.cache = tokens.cache;
 	this.env.dp( 'SyncTokenTransformManager.onChunk: emitting ', localAccum );
+	this.env.tracer.endPass("onChunk (Sync:" + this.attributeType + ")");
 	this.emit( 'chunk', localAccum );
 };
 
@@ -932,7 +961,7 @@ AttributeTransformManager.prototype.processValues = function ( attributes ) {
 AttributeTransformManager.prototype._returnAttributeValue = function ( ref, tokens ) {
 	this.manager.env.dp( 'check _returnAttributeValue: ', ref,  tokens );
 	this.kvs[ref].v = tokens;
-	this.kvs[ref].v = this.manager.env.stripEOFTkfromTokens( this.kvs[ref].v );
+	this.kvs[ref].v = Util.stripEOFTkfromTokens( this.kvs[ref].v );
 	this.outstanding--;
 	if ( this.outstanding === 0 ) {
 		this.callback( this.kvs );
@@ -945,7 +974,7 @@ AttributeTransformManager.prototype._returnAttributeValue = function ( ref, toke
 AttributeTransformManager.prototype._returnAttributeKey = function ( ref, tokens ) {
 	//console.warn( 'check _returnAttributeKey: ' + JSON.stringify( tokens )  );
 	this.kvs[ref].k = tokens;
-	this.kvs[ref].k = this.manager.env.stripEOFTkfromTokens( this.kvs[ref].k );
+	this.kvs[ref].k = Util.stripEOFTkfromTokens( this.kvs[ref].k );
 	if ( this.kvs[ref].v === '' ) {
 		// FIXME: use tokenizer production to properly parse this
 		var m = this.manager.env.tokensToString( this.kvs[ref].k )
@@ -1259,7 +1288,7 @@ Frame.prototype._eofTkList = [ new EOFTk() ];
  */
 Frame.prototype.onThunkEvent = function ( state, notYetDone, ret ) {
 	if ( notYetDone ) {
-		state.accum = state.accum.concat(this.manager.env.stripEOFTkfromTokens( ret ) );
+		state.accum = state.accum.concat(Util.stripEOFTkfromTokens( ret ) );
 		this.manager.env.dp( 'Frame.onThunkEvent accum:', this._cacheKey, state.accum );
 	} else {
 		this.manager.env.dp( 'Frame.onThunkEvent:', this._cacheKey, state.accum );

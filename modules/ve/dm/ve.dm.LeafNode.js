@@ -1,4 +1,11 @@
 /**
+ * VisualEditor data model LeafNode class.
+ *
+ * @copyright 2011-2012 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
  * DataModel node that can not have children.
  *
  * @class
@@ -20,5 +27,4 @@ ve.dm.LeafNode = function( type, length, attributes ) {
 
 /* Inheritance */
 
-ve.extendClass( ve.dm.LeafNode, ve.LeafNode );
-ve.extendClass( ve.dm.LeafNode, ve.dm.Node );
+ve.extendClass( ve.dm.LeafNode, ve.LeafNode, ve.dm.Node );

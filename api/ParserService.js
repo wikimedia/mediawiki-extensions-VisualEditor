@@ -8,7 +8,7 @@
  * @example
  *    exports.setup = function( config, env ) {
  *        config.defaultInterwiki = 'localhost';
- *        env.addInterwiki( 'localhost', 'http://localhost/mediawiki' );
+ *        env.setInterwiki( 'localhost', 'http://localhost/mediawiki' );
  *    };
  */
 
@@ -61,7 +61,10 @@ var env = new ParserEnv( {
 } );
 
 // add mediawiki.org
-env.addInterwiki( 'mw', 'http://www.mediawiki.org/w' );
+env.setInterwiki( 'mw', 'http://www.mediawiki.org/w' );
+
+// add localhost default
+env.setInterwiki( 'localhost', 'http://localhost/w' );
 
 // Apply local settings
 if (path.existsSync(lsp)) {
@@ -264,6 +267,9 @@ var roundTripDiff = function ( req, res, src, document ) {
 	res.write(document.body.innerHTML + '<hr>');
 	res.write( '<h2>HTML DOM converted back to Wikitext</h2><hr>' );
 	var out = new WikitextSerializer({env: env}).serializeDOM( document.body );
+	if ( out === undefined ) {
+		out = "An error occured in the WikitextSerializer, please check the log for information";
+	}
 	res.write('<pre>' + htmlSpecialChars( out ) + '</pre><hr>\n');
 	res.write( '<h2>Diff between original Wikitext (green) and round-tripped wikitext (red)</h2><hr>\n' );
 	var patch;
@@ -393,10 +399,13 @@ app.get(new RegExp( '/(?:(?:(?:' + env.interwikiRegexp + '):+)?(' + env.interwik
 	}
 	var target = env.resolveTitle( env.normalizeTitle( env.pageName ), '' );
 
+	var st = new Date();
 	console.log('starting parsing of ' + target);
 	var tpr = new TemplateRequest( env, target );
 	tpr.once('src', parse.bind( null, req, res, function ( req, res, src, document ) {
 		res.end(document.body.innerHTML);
+		var et = new Date();
+		console.warn("Request Time (ms): " + (et - st));
 	}));
 });
 

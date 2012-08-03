@@ -4,57 +4,201 @@
  */
 
 var async = require('async');
+var Util = require('./mediawiki.Util.js').Util;
 
-var toString = function() { return JSON.stringify( this ); };
-
+/* -------------------- TagTk -------------------- */
 function TagTk( name, attribs, dataAttribs ) { 
-	//this.type = 'TAG';
 	this.name = name;
 	this.attribs = attribs || [];
 	this.dataAttribs = dataAttribs || {};
 }
+
 TagTk.prototype = {};
+
+TagTk.prototype.constructor = TagTk;
+
 TagTk.prototype.toJSON = function () {
 	return $.extend( { type: 'TagTk' }, this );
 };
-TagTk.prototype.constructor = TagTk;
-TagTk.prototype.toString = toString;
 
+TagTk.prototype.defaultToString = function(t) {
+	return "<" + this.name + ">";
+};
+
+TagTk.prototype.tagToStringFns = {
+	"listItem": function() {
+		return "<li:" + this.bullets.join('') + ">";
+	},
+	"mw-quote": function() {
+		return "<mw-quote:" + this.value + ">";
+	},
+	"urllink": function() {
+		return "<urllink:" + this.attribs[0].v + ">";
+	},
+	"behavior-switch": function() {
+		return "<behavior-switch:" + this.attribs[0].v + ">";
+	}
+};
+
+TagTk.prototype.toString = function() {
+	if (this.dataAttribs.stx && this.dataAttribs.stx === "html") {
+		return "<HTML:" + this.name + ">";
+	} else {
+		var f = this.tagToStringFns[this.name];
+		return f ? f.bind(this)() : this.defaultToString();
+	}
+};
+
+/* -------------------- EndTagTk -------------------- */
 function EndTagTk( name, attribs, dataAttribs ) { 
 	this.name = name;
 	this.attribs = attribs || [];
 	this.dataAttribs = dataAttribs || {};
 }
+
 EndTagTk.prototype = {};
+
+EndTagTk.prototype.constructor = EndTagTk;
+
 EndTagTk.prototype.toJSON = function () {
 	return $.extend( { type: 'EndTagTk' }, this );
 };
-EndTagTk.prototype.constructor = EndTagTk;
-EndTagTk.prototype.toString = toString;
 
+EndTagTk.prototype.toString = function() {
+	if (this.dataAttribs.stx && this.dataAttribs.stx === "html") {
+		return "</HTML:" + this.name + ">";
+	} else {
+		return "</" + this.name + ">";
+	}
+};
+
+/* -------------------- SelfclosingTagTk -------------------- */
 function SelfclosingTagTk( name, attribs, dataAttribs ) { 
-	//this.type = 'SELFCLOSINGTAG';
 	this.name = name;
 	this.attribs = attribs || [];
 	this.dataAttribs = dataAttribs || {};
 }
+
 SelfclosingTagTk.prototype = {};
+
+SelfclosingTagTk.prototype.constructor = SelfclosingTagTk;
+
 SelfclosingTagTk.prototype.toJSON = function () {
 	return $.extend( { type: 'SelfclosingTagTk' }, this );
 };
-SelfclosingTagTk.prototype.constructor = SelfclosingTagTk;
-SelfclosingTagTk.prototype.toString = toString;
 
-function NlTk( ) {
-	//this.type = 'NEWLINE';
-}
-NlTk.prototype = {};
-NlTk.prototype.toJSON = function () {
-	return $.extend( { type: 'NlTk' }, this );
+SelfclosingTagTk.prototype.multiTokenArgToString = function(key, arg, indent, indentIncrement) {
+	var newIndent = indent + indentIncrement;
+	var present = true;
+	var toks    = Util.toStringTokens(arg, newIndent);
+	var str     = toks.join("\n" + newIndent);
+
+	if (toks.length > 1 || str[0] === '<') {
+		str = [key, ":{\n", newIndent, str, "\n", indent, "}"].join('');
+	} else {
+		present = (str !== '');
+	}
+
+	return {present: present, str: str};
+},
+
+SelfclosingTagTk.prototype.attrsToString = function(indent, indentIncrement, startAttrIndex) {
+	var buf = [];
+	for (var i = startAttrIndex, n = this.attribs.length; i < n; i++) {
+		var a = this.attribs[i];
+		var kVal = this.multiTokenArgToString("k", a.k, indent, indentIncrement);
+		var vVal = this.multiTokenArgToString("v", a.v, indent, indentIncrement);
+
+		if (kVal.present && vVal.present) {
+			buf.push([kVal.str, "=", vVal.str].join(''));
+		} else {
+			if (kVal.present) buf.push(kVal.str);
+			if (vVal.present) buf.push(vVal.str);
+		}
+	}
+
+	return buf.join("\n" + indent + "|");
 };
-NlTk.prototype.constructor = NlTk;
-NlTk.prototype.toString = toString;
 
+SelfclosingTagTk.prototype.defaultToString = function(compact, indent) {
+	if (compact) {
+		var buf = "<" + this.name + ">:";
+		var attr0 = this.attribs[0];
+		return attr0 ? buf + Util.toStringTokens(attr0.k, "\n") : buf;
+	} else {
+		if (!indent) indent = "";
+		var origIndent = indent;
+		var indentIncrement = "  ";
+		indent = indent + indentIncrement;
+		return ["<", this.name, ">(\n", indent, this.attrsToString(indent, indentIncrement, 0), "\n", origIndent, ")"].join('');
+	}
+};
+
+SelfclosingTagTk.prototype.tagToStringFns = { 
+	"extlink": function(compact, indent) {
+		var href    = Util.kvTokensToString(Util.lookupKV(this.attribs, 'href').v);
+		if (compact) {
+			return ["<extlink:", href, ">"].join('');
+		} else {
+			if (!indent) indent = "";
+			var origIndent = indent;
+			var indentIncrement = "  ";
+			indent = indent + indentIncrement;
+			var content = Util.lookupKV(this.attribs, 'content').v;
+			content = this.multiTokenArgToString("v", content, indent, indentIncrement).str;
+			return ["<extlink>(\n", indent, 
+					"href=", href, "\n", indent, 
+					"content=", content, "\n", origIndent, 
+					")"].join('');
+		}
+	},
+
+	"wikilink": function(compact, indent) {
+		if (!indent) indent = "";
+		var href = Util.kvTokensToString(Util.lookupKV(this.attribs, 'href').v);
+		if (compact) {
+			return ["<wikilink:", href, ">"].join('');
+		} else {
+			if (!indent) indent = "";
+			var origIndent = indent;
+			var indentIncrement = "  ";
+			indent = indent + indentIncrement;
+			var tail = Util.lookupKV(this.attribs, 'tail').v;
+			var content = this.attrsToString(indent, indentIncrement, 2);
+			return ["<wikilink>(\n", indent, 
+					"href=", href, "\n", indent, 
+					"tail=", tail, "\n", indent,
+					"content=", content, "\n", origIndent, 
+					")"].join('');
+		}
+	}
+};
+
+SelfclosingTagTk.prototype.toString = function(compact, indent) {
+	if (this.dataAttribs.stx && this.dataAttribs.stx === "html") {
+		return "<HTML:" + this.name + " />";
+	} else {
+		var f = this.tagToStringFns[this.name];
+		return f ? f.bind(this)(compact, indent) : this.defaultToString(compact, indent);
+	}
+};
+
+/* -------------------- NlTk -------------------- */
+function NlTk( ) { }
+
+NlTk.prototype = {
+	constructor: NlTk,
+
+	toJSON: function () {
+		return $.extend( { type: 'NlTk' }, this );
+	},
+
+	toString: function() {
+		return "\\n";
+	}
+};
+
+/* -------------------- CommentTk -------------------- */
 function CommentTk( value, dataAttribs ) { 
 	this.value = value;
 	// won't survive in the DOM, but still useful for token serialization
@@ -62,23 +206,35 @@ function CommentTk( value, dataAttribs ) {
 		this.dataAttribs = dataAttribs;
 	}
 }
-CommentTk.prototype = {};
-CommentTk.prototype.toJSON = function () {
-	return $.extend( { type: 'COMMENT' }, this );
-};
-CommentTk.prototype.constructor = CommentTk;
-CommentTk.prototype.toString = toString; 
 
+CommentTk.prototype = {
+	constructor: CommentTk,
+
+	toJSON: function () {
+		return $.extend( { type: 'COMMENT' }, this );
+	},
+
+	toString: function() {
+		return "<!--" + this.value + "-->";
+	}
+};
+
+/* -------------------- EOFTk -------------------- */
 function EOFTk( ) { }
-EOFTk.prototype = {};
-EOFTk.prototype.toJSON = function () {
-	return $.extend( { type: 'EOFTk' }, this );
+EOFTk.prototype = {
+	constructor: EOFTk,
+
+	toJSON: function () {
+		return $.extend( { type: 'EOFTk' }, this );
+	},
+
+	toString: function() {
+		return "";
+	}
 };
-EOFTk.prototype.constructor = EOFTk;
-EOFTk.prototype.toString = toString;
 
 
-
+/* -------------------- KV -------------------- */
 // A key-value pair
 function KV ( k, v ) {
 	this.k = k;
@@ -87,6 +243,7 @@ function KV ( k, v ) {
 
 
 
+/* -------------------- Params -------------------- */
 /**
  * A parameter object wrapper, essentially an array of key/value pairs with a
  * few extra methods.
@@ -102,6 +259,7 @@ function Params ( env, params ) {
 }
 
 Params.prototype = [];
+
 Params.prototype.constructor = Params;
 
 Params.prototype.toString = function () {
@@ -177,8 +335,7 @@ Params.prototype.getSlice = function ( options, start, end ) {
 			});
 };
 
-
-
+/* -------------------- ParserValue -------------------- */
 /**
  * A chunk. Wraps a source chunk of tokens with a reference to a frame for
  * lazy and shared transformations. Do not use directly- use
@@ -196,6 +353,7 @@ function ParserValue ( source, frame ) {
 			{ value: frame, enumerable: false } );
 }
 
+ParserValue.prototype = {};
 
 ParserValue.prototype._defaultTransformOptions = {
 	type: 'text/x-mediawiki/expanded'
@@ -219,11 +377,12 @@ ParserValue.prototype.get = function( options, cb ) {
 	}
 
 	var maybeCached;
-	if ( this.source.constructor === String ) {
-		maybeCached = this.source;
+	var source = this.source;
+	if ( source.constructor === String ) {
+		maybeCached = source;
 	} else {
 		// try the cache
-		maybeCached = this.source.cache && this.source.cache.get( this.frame, options );
+		maybeCached = source.cache && source.cache.get( this.frame, options );
 	}
 	if ( maybeCached !== undefined ) {
 		if ( cb ) {
@@ -238,18 +397,13 @@ ParserValue.prototype.get = function( options, cb ) {
 				JSON.stringify( this, null, 2 );
 		}
 		options.cb = cb;
-		this.frame.expand( this.source, options );
+		this.frame.expand( source, options );
 	}
 };
 
 ParserValue.prototype.length = function () {
 	return this.source.length;
 };
-
-
-//Chunk.prototype.slice = function () {
-//	return this.source.slice.apply( this.source, arguments );
-//};
 
 
 // TODO: don't use globals!
