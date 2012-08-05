@@ -1,0 +1,9 @@
+Nodeunit is used for testing the server-side code.
+
+Install using: npm install nodeunit
+
+Running tests: <nodeunit's path>/bin/nodeunit IOTest.js (For running IO tests.)
+
+== Test Dependencies ==
+
+# socket.io-client

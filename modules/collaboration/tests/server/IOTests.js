@@ -1,8 +1,8 @@
-var collabServer = require( '../server/server.js' ).CollaborationServer,
-		settings = require( '../settings.js' ).settings,
-		collabDocument = require( '../server/collab.Document.js' ).Document,
-		collabSession = require( '../server/collab.Session.js' ).Session,
-		collabCallbacks = require( '../server/collab.Callbacks.js' ).Callbacks,
+var collabServer = require( '../../server/server.js' ).CollaborationServer,
+		settings = require( '../../settings.js' ).settings,
+		collabDocument = require( '../../server/collab.Document.js' ).Document,
+		collabSession = require( '../../server/collab.Session.js' ).Session,
+		collabCallbacks = require( '../../server/collab.Callbacks.js' ).Callbacks,
 		io = require( 'socket.io-client' ),
 		parsoid = require( './fakeParsoid.js' ).app;
 
@@ -24,9 +24,9 @@ exports['events'] = {
 		var client = io.connect( settings.host + ':' + settings.port, options );
 		client.on( 'connection', function() {
 			test.ok( true, 'Connection Failed' );
+			client.disconnect();
 			test.done();
 		});
-		client.disconnect();
 	},
 
 	'client_connect(single client)': function( test ) {
