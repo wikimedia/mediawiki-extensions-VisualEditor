@@ -37,7 +37,7 @@ collab.Callbacks.prototype.authenticate = function( direction, authData ) {
 		}
 	}
 	else {
-		// Downstream mode for recieving auth info from the server
+		// Downstream mode for receiving auth info from the server
 		var sessionID = authData.sessionID;
 		this.emit( 'client_connect', { userName: user, docTitle: docTitle,
 			sessionID: sessionID } );
@@ -55,6 +55,7 @@ collab.Callbacks.prototype.loadDoc = function( data ) {
 		documentModel = this.client.editor.getDocumentModel(),
 		documentNode = documentModel.documentNode;
 	
+	// Create a new document model object and load it into the surface model
 	var newDocumentModel = new ve.dm.Document( data );
 	documentModel.data.splice( 0, documentModel.data.length );
 	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
@@ -102,11 +103,16 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	var transaction = transactionData.transaction;
 	var args = transactionData.args;
 
-	// Create a new transaction model object
+	// Construct a new transaction object from transactionData
 	var transactionObj = new ve.dm.Transaction();
 	transactionObj.operations = transaction.operations;
 	transactionObj.lengthDifference = transaction.lengthDifference;
+	/*
+	 isBroadcasted flag so we know this comes from the server after it is
+	 handed to the surface model.
+	*/
 	transactionObj.isBroadcasted = true;
+
 	if( args.publisherID != this.client.userName ) {
 		transactionObj.isBroadcasted = true;
 
@@ -128,7 +134,6 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
  * @param{Boolean} firstLoad If docTransfer is happening for the first time.
 **/
 collab.Callbacks.prototype.docTransfer = function( docData, firstLoad ) {
-	console.log('here');
 	var html = $('<div>' + docData.html + '</div>' );
 	var socket = this.socket,
 		client = this.client,

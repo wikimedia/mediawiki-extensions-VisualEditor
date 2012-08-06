@@ -30,7 +30,7 @@ Callbacks.prototype.broadcast = function( event, args ) {
 };
 
 Callbacks.prototype.authenticate = function( authData ) {
-	var ssID = Session.generateID( [ authData.userName, 
+	var ssID = Session.generateID( [ authData.userName,
 			authData.docTitle, this.server.docRoutes.length ] );
 	this.socket.emit( 'client_auth', { sessionID: ssID } );
 };
@@ -76,7 +76,7 @@ Callbacks.prototype.clientConnection = function( data ) {
 			}
 		} );
 		_this.session.allowPublish( argAllowPublish );
-		_this.socket.emit( 'document_transfer', { 
+		_this.socket.emit( 'document_transfer', {
 			html: docHTML,
 			users: function() {
 				var users = [];
@@ -91,7 +91,7 @@ Callbacks.prototype.clientConnection = function( data ) {
 				}
 				return users;
 			}(),
-			allowPublish: argAllowPublish 
+			allowPublish: argAllowPublish
 		} );
 		_this.broadcast( 'client_connect', { userName: userID, isPublisher: argAllowPublish } );
 	};
@@ -113,7 +113,7 @@ Callbacks.prototype.clientConnection = function( data ) {
 	if( sessionRoute == null ) {
 		// Parse the page by its title using the external parsoid service
 		parse( true, docTitle, function( html ) {
-			/** 
+			/**
 			 * Proceed with creating a new route with a new document,
 			 * if no existing document route was found.
 			**/
@@ -162,7 +162,7 @@ Callbacks.prototype.clientDisconnection = function( data ) {
  * Callback method to be invoked when a new transaction arrives at the server
  *
  * @method
- * @param{Object} transactionData Event data received from the client. 
+ * @param{Object} transactionData Event data received from the client.
 **/
 Callbacks.prototype.newTransaction = function( transactionData ) {
 	var doc = this.session.Document;

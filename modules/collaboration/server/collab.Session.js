@@ -55,6 +55,6 @@ Session.prototype.getID = function() {
 
 ve.extendClass( Session, ve.EventEmitter );
 
-if( typeof module == 'object' ) { 
+if( typeof module == 'object' ) {
 	module.exports.Session = Session;
 }

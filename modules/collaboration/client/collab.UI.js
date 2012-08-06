@@ -72,6 +72,7 @@ collab.UI.prototype.disableEditing = function() {
 collab.UI.prototype.populateUsersList = function( users ) {
 	for( u in users ) {
 		var userData = users[ u ];
+		// Append one user at a time.
 		this.userConnect( userData );
 	}
 };
@@ -84,9 +85,10 @@ collab.UI.prototype.populateUsersList = function( users ) {
 **/
 collab.UI.prototype.userConnect = function( userData ) {
 	var userName = userData.userName;
-	var element =	$( '<p id="collab-user-' + userName + 
+	var element =	$( '<p id="collab-user-' + userName +
 			'" class="collab-username">' + userName + '</p>' );
 
+	// Differentiate publisher using an extra class.
 	if( userData.isPublisher === true ) {
 		element.addClass( 'collab-publisher' );
 	}
@@ -177,7 +179,7 @@ collab.UI.prototype.connect = function( userName, pageName ) {
  * Initiate disonnection from the UI layer.
 **/
 collab.UI.prototype.disconnect = function() {
-	var _this = this; 
+	var _this = this;
 	
 	// Some pretty-ness
 	$( '#collab-panel' ).hide( 'fast', function() {

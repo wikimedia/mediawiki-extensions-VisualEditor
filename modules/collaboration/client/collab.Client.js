@@ -7,13 +7,15 @@
 **/
 
 collab.Client = function( editorSurface ) {
+	var _this = this;
 	this.editor = editorSurface;
 	var options = {
 	};
 
 	// Initialize the UI binding object
 	this.ui = new collab.UI( this );
-	var _this = this;
+
+	// Bind basic events that are fired by UI
 	this.ui.on( 'connect', function( e ) {
 		_this.connect( e.userName, e.pageName, _this.ui.setResponseStatus );
 	} );
@@ -36,6 +38,7 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 			_this.callbacks = callbacks;
 			_this.bindIOEvents( callbacks );
 			_this.bindInternalEvents();
+
 			socket.on( 'connection', function() {
 				// callbacks.authenticate( 'upstream' ); Deferred
 				// TODO: User has to be handled using the MW auth
@@ -47,6 +50,7 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 				} );
 			} );
 		}
+
 		else {
 			this.socket.socket.connect( settings.host + ':' + settings.port );
 		}

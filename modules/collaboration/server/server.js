@@ -1,6 +1,6 @@
 /**
  * This is the collaboration server for VisualEditor.
- * 
+ *
  * Uses Socket.IO to establish connections with clients.
  * This module implements all the Socket.IO events and calls the respective callback functions.
 **/

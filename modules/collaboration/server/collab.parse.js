@@ -21,16 +21,16 @@ var parsoidServiceURL = 'http://localhost:8000/';
 parse = function( useService, title, callback ) {
 	if( !useService ) {
 		// Do the parsing internally
-		var env = new ParserEnv( { 
+		var env = new ParserEnv( {
 			// fetch templates from enwiki for now..
 			wgScript: 'http://localhost/mediawiki/',
 			// stay within the 'proxied' content, so that we can click around
-			wgScriptPath: '', //http://en.wikipedia.org/wiki', 
+			wgScriptPath: '', //http://en.wikipedia.org/wiki',
 			wgScriptExtension: '.php',
 			// XXX: add options for this!
 			wgUploadPath: 'http://upload.wikimedia.org/wikipedia/commons',
 			fetchTemplates: true,
-			// enable/disable debug output using this switch	
+			// enable/disable debug output using this switch
 			debug: false,
 			trace: false,
 			maxDepth: 40
@@ -44,7 +44,7 @@ parse = function( useService, title, callback ) {
 			callback( this.outHTML );
 		});
 		parser.process( '{{:' + title + '}}' );
-	}		
+	}
 	// Fetch HTML from external parsoid service over HTTP
 	else {
 		request( parsoidServiceURL + title, function( error, response, body ) {

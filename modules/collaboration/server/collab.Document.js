@@ -20,8 +20,6 @@ Document = function( title, html ) {
 	var dom = $('<div>' + html + '</div>');
 	var data = ve.dm.converter.getDataFromDom( dom[0] );
 	var doc = new ve.dm.Document( data );
-	//var surfaceModel = this.dmSurface = new ve.dm.Surface( doc );
-	//surfaceModel.selection = new ve.Range( 1, 1 );
 	this.dmDoc = doc;
 	this.history = [];
 	this.id = Document.generateID( title );
@@ -40,7 +38,6 @@ Document.generateID = function( title ) {
  * @method
 **/
 Document.prototype.getHTML = function() {
-//	var data = this.dmSurface.getDocument().getData();
 	var data = this.dmDoc.getData();
 	var dom = ve.dm.converter.getDomFromData( data );
 	var html = $( dom ).html();
@@ -79,7 +76,6 @@ Document.prototype.applyTransaction = function( session, transactionData ) {
 	var start = transactionObj.operations[ 0 ].length;
 	var end = start + Math.abs( transactionObj.lengthDifference );
 	this.dmDoc.commit( transactionObj );
-	//this.dmSurface.change( transactionObj, new ve.Range( start, end ) );
 	// TODO: document state hash should also be pushed into the history
 	this.history.push( transaction );
 

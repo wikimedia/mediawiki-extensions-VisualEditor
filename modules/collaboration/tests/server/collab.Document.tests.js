@@ -1,5 +1,4 @@
-
-var	ve = require( '../../server/collab.ve.js' ).ve, 
+var ve = require( '../../server/collab.ve.js' ).ve, 
 	Document = require( '../../server/collab.Document.js' ).Document,
 	$ = require( 'jquery' );
 
