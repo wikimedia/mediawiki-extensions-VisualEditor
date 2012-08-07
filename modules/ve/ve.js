@@ -41,10 +41,12 @@ window.ve = {
  * @param {Function} dst Class to extend
  * @param {Function} [..] List of base classed to use methods from
  */
-ve.extendClass = function( dst ) {
-	for ( var i = 1; i < arguments.length; i++ ) {
-		var base = arguments[i].prototype;
-		for ( var method in base ) {
+ve.extendClass = function ( dst ) {
+	var i, method, base,
+		length = arguments.length;
+	for ( i = 1; i < length; i++ ) {
+		base = arguments[i].prototype;
+		for ( method in base ) {
 			if ( typeof base[method] === 'function' && !( method in dst.prototype ) ) {
 				dst.prototype[method] = base[method];
 			}
@@ -98,7 +100,7 @@ ve.getHash = $.toJSON;
  * @param {Object} Object to get properties from
  * @returns {String[]} List of object keys
  */
-ve.getObjectKeys = Object.keys || function( obj ) {
+ve.getObjectKeys = Object.keys || function ( obj ) {
 	var keys = [],
 		key,
 		hop = Object.prototype.hasOwnProperty;
@@ -118,7 +120,7 @@ ve.getObjectKeys = Object.keys || function( obj ) {
  * @param {Object} Object to get values from
  * @returns {Array} List of object values
  */
-ve.getObjectValues = function( obj ) {
+ve.getObjectValues = function ( obj ) {
 	var values = [],
 		key,
 		hop = Object.prototype.hasOwnProperty;
@@ -144,9 +146,8 @@ ve.getObjectValues = function( obj ) {
  * @param {Boolean} [asymmetrical] Whether to check only that b contains values from a
  * @returns {Boolean} If the objects contain the same values as each other
  */
-ve.compareObjects = function( a, b, asymmetrical ) {
-	var aValue, bValue, aType, bType;
-	var k;
+ve.compareObjects = function ( a, b, asymmetrical ) {
+	var aValue, bValue, aType, bType, k;
 	for ( k in a ) {
 		aValue = a[k];
 		bValue = b[k];
@@ -169,10 +170,14 @@ ve.compareObjects = function( a, b, asymmetrical ) {
  * @method
  * @param {Array} a First array to compare
  * @param {Array} b Second array to compare
- * @param {Boolean} [compareObjects] If true, use ve.compareObjects() to compare objects, otherwise use ===
+ * @param {Boolean} [objectsByValue] Use ve.compareObjects() to compare objects instead of ===
  */
-ve.compareArrays = function( a, b, compareObjects ) {
-	var i, aValue, bValue, aType, bType;
+ve.compareArrays = function ( a, b, objectsByValue ) {
+	var i,
+		aValue,
+		bValue,
+		aType,
+		bType;
 	if ( a.length !== b.length ) {
 		return false;
 	}
@@ -181,11 +186,22 @@ ve.compareArrays = function( a, b, compareObjects ) {
 		bValue = b[i];
 		aType = typeof aValue;
 		bType = typeof bValue;
-		if ( aType !== bType || !(
-			( ve.isArray( aValue ) && ve.isArray( bValue ) && ve.compareArrays( aValue, bValue ) ) ||
-			( compareObjects && ve.isPlainObject( aValue ) && ve.compareObjects( aValue, bValue ) ) ||
-			aValue === bValue
-		) ) {
+		if (
+			aType !== bType ||
+			!(
+				(
+					ve.isArray( aValue ) &&
+					ve.isArray( bValue ) &&
+					ve.compareArrays( aValue, bValue )
+				) ||
+				(
+					objectsByValue &&
+					ve.isPlainObject( aValue ) &&
+					ve.compareObjects( aValue, bValue )
+				) ||
+				aValue === bValue
+			)
+		) {
 			return false;
 		}
 	}
@@ -200,11 +216,12 @@ ve.compareArrays = function( a, b, compareObjects ) {
  * @param {Array} source Array to copy
  * @returns {Array} Copy of source array
  */
-ve.copyArray = function( source ) {
-	var destination = [];
-	for ( var i = 0; i < source.length; i++ ) {
-		var sourceValue = source[i],
-			sourceType = typeof sourceValue;
+ve.copyArray = function ( source ) {
+	var i, sourceValue, sourceType,
+		destination = [];
+	for ( i = 0; i < source.length; i++ ) {
+		sourceValue = source[i];
+		sourceType = typeof sourceValue;
 		if ( sourceType === 'string' || sourceType === 'number' ) {
 			destination.push( sourceValue );
 		} else if ( ve.isPlainObject( sourceValue ) ) {
@@ -224,11 +241,12 @@ ve.copyArray = function( source ) {
  * @param {Object} source Object to copy
  * @returns {Object} Copy of source object
  */
-ve.copyObject = function( source ) {
-	var destination = {};
-	for ( var key in source ) {
-		var sourceValue = source[key],
-			sourceType = typeof sourceValue;
+ve.copyObject = function ( source ) {
+	var key, sourceValue, sourceType,
+		destination = {};
+	for ( key in source ) {
+		sourceValue = source[key];
+		sourceType = typeof sourceValue;
 		if ( sourceType === 'string' || sourceType === 'number' ) {
 			destination[key] = sourceValue;
 		} else if ( ve.isPlainObject( sourceValue ) ) {
@@ -241,8 +259,14 @@ ve.copyObject = function( source ) {
 };
 
 /**
- * Splice one array into another. This is the equivalent of arr.splice( offset, remove, d1, d2, d3, ... )
- * except that d1, d2, d3, ... are specified as an array rather than separate parameters.
+ * Splice one array into another.
+ *
+ * This is the equivalent of arr.splice( offset, remove, d1, d2, d3, ... ) except that arguments are
+ * specified as an array rather than separate parameters.
+ *
+ * This method has been proven to be faster than using slice and concat to create a new array, but
+ * performance tests should be conducted on each use of this method to verify this is true for the
+ * particular use. Also, browsers change fast, never assume anything, always test everything.
  *
  * @static
  * @method
@@ -252,7 +276,7 @@ ve.copyObject = function( source ) {
  * @param {Number} remove Number of elements to remove at the offset. May be zero
  * @param {Array} data Array of items to insert at the offset
  */
-ve.batchSplice = function( arr, offset, remove, data ) {
+ve.batchSplice = function ( arr, offset, remove, data ) {
 	// We need to splice insertion in in batches, because of parameter list length limits which vary
 	// cross-browser - 1024 seems to be a safe batch size on all browsers
 	var index = 0, batchSize = 1024, toRemove = remove;
@@ -282,7 +306,7 @@ ve.batchSplice = function( arr, offset, remove, data ) {
  * @method
  * @see ve.batchSplice
  */
-ve.insertIntoArray = function( dst, offset, src ) {
+ve.insertIntoArray = function ( dst, offset, src ) {
 	ve.batchSplice( dst, offset, 0, src );
 };
 
@@ -295,7 +319,7 @@ ve.insertIntoArray = function( dst, offset, src ) {
  * @method
  * @param {Mixed} [...] Data to log
  */
-ve.log = function() {
+ve.log = function () {
 	// don't do anything, this is just a stub
 };
 
@@ -308,7 +332,7 @@ ve.log = function() {
  * @method
  * @param {Object} obj Object to log
  */
-ve.dir = function( obj ) {
+ve.dir = function ( obj ) {
 	// don't do anything, this is just a stub
 };
 
@@ -323,16 +347,17 @@ ve.dir = function( obj ) {
  * @static
  * @method
  */
-ve.debounce = function( func, wait, immediate ) {
+ve.debounce = function ( func, wait, immediate ) {
 	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if ( !immediate ) {
-				func.apply( context, args );
-			}
-		};
+	return function () {
+		var context = this,
+			args = arguments,
+			later = function () {
+				timeout = null;
+				if ( !immediate ) {
+					func.apply( context, args );
+				}
+			};
 		if ( immediate && !timeout ) {
 			func.apply( context, args );
 		}
@@ -344,38 +369,11 @@ ve.debounce = function( func, wait, immediate ) {
 /**
  * Gets a localized message.
  *
- * If mw.msg isn't available, a basic implementation is used instead.
- *
  * @static
  * @method
  * @param {String} key Message key
  * @param {Mixed} [...] Message parameters
  */
-ve.msg = typeof mw === 'object' ? mw.msg : function( key ) {
-	if ( key in ve.msg.messages ) {
-		// Simple message parser, does $N replacement and nothing else.
-		var parameters = Array.prototype.slice.call( arguments, 1 );
-		return ve.msg.messages[key].replace( /\$(\d+)/g, function ( str, match ) {
-			var index = parseInt( match, 10 ) - 1;
-			return parameters[index] !== undefined ? parameters[index] : '$' + match;
-		} );
-	}
-	return '<' + key + '>';
+ve.msg = function () {
+	return ve.init.platform.getMessage.apply( ve.init.platform, arguments );
 };
-
-/**
- * Map of message keys and values used by the mw.msg fallback.
- *
- * @static
- * @member
- */
-ve.msg.messages = {};
-
-/**
- * Map of message keys and values for special messages loaded from VisualEditorMessagesModule.php
- * The values are HTML.
- *
- * @static
- * @member
- */
-ve.specialMessages = {};

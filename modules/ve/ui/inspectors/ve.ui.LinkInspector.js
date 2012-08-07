@@ -1,3 +1,5 @@
+/*global mw*/
+
 /**
  * VisualEditor user interface LinkInspector class.
  *
@@ -12,7 +14,7 @@
  * @constructor
  * @param {ve.ui.Toolbar} toolbar
  */
-ve.ui.LinkInspector = function( toolbar, context ) {
+ve.ui.LinkInspector = function ( toolbar, context ) {
 	// Inheritance
 	ve.ui.Inspector.call( this, toolbar, context );
 
@@ -23,7 +25,7 @@ ve.ui.LinkInspector = function( toolbar, context ) {
 		$( '<div class="es-inspector-title"></div>', context.inspectorDoc )
 			.text( ve.msg( 'visualeditor-linkinspector-title' ) )
 	);
-	this.$locationLabel = $( '<label></label>', context.inspectorDoc )
+	this.$locationLabel = $( '<label>', context.inspectorDoc )
 		.text( ve.msg( 'visualeditor-linkinspector-label-pagetitle' ) )
 		.appendTo( this.$form );
 	this.$locationInput = $( '<input type="text">', context.inspectorDoc ).appendTo( this.$form );
@@ -31,24 +33,24 @@ ve.ui.LinkInspector = function( toolbar, context ) {
 
 	// Events
 	var inspector = this;
-	this.$clearButton.click( function() {
+	this.$clearButton.click( function () {
 		if ( $(this).is( '.es-inspector-button-disabled' ) ) {
 			return;
 		}
 
 		var hash,
 			surfaceModel = inspector.context.getSurfaceView().getModel(),
-			annotations = inspector.getSelectedLinkAnnotations();
-		// If link annotation exists, clear it.
+			annotations = inspector.getAllLinkAnnotationsFromSelection();
+		// Clear all link annotations.
 		for ( hash in annotations ) {
 			surfaceModel.annotate( 'clear', annotations[hash] );
 		}
 		inspector.$locationInput.val( '' );
 		inspector.context.closeInspector();
 	} );
-	this.$locationInput.bind( 'mousedown keydown cut paste', function() {
-		setTimeout( function() {
-			if ( inspector.$locationInput.val() !== inspector.initialValue ) {
+	this.$locationInput.on( 'mousedown keydown cut paste', function () {
+		setTimeout( function () {
+			if ( inspector.$locationInput.val() !== '' ) {
 				inspector.$acceptButton.removeClass( 'es-inspector-button-disabled' );
 			} else {
 				inspector.$acceptButton.addClass( 'es-inspector-button-disabled' );
@@ -59,26 +61,31 @@ ve.ui.LinkInspector = function( toolbar, context ) {
 
 /* Methods */
 
-ve.ui.LinkInspector.prototype.getSelectedLinkAnnotations = function(){
+ve.ui.LinkInspector.prototype.getAllLinkAnnotationsFromSelection = function () {
 	var surfaceView = this.context.getSurfaceView(),
 		surfaceModel = surfaceView.getModel(),
 		documentModel = surfaceModel.getDocument(),
-		data = documentModel.getData( surfaceModel.getSelection() );
+		annotations,
+		linkAnnotations = {};
 
-	if ( data.length ) {
-		if ( ve.isPlainObject( data[0][1] ) ) {
-			return ve.dm.Document.getMatchingAnnotations( data[0][1], /link\/.*/ );
+		annotations = documentModel.getAnnotationsFromRange( surfaceModel.getSelection(), true );
+		// XXX: '.' is not escaped, is the '.*' part redundant?
+		linkAnnotations = ve.dm.Document.getMatchingAnnotations ( annotations,  /^link\//  );
+		if ( !ve.isEmptyObject( linkAnnotations ) ) {
+			return linkAnnotations;
 		}
-	}
-	return {};
+
+	return null;
 };
 
-ve.ui.LinkInspector.prototype.getAnnotationFromSelection = function() {
-	var hash,
-		annotations = this.getSelectedLinkAnnotations();
+ve.ui.LinkInspector.prototype.getFirstLinkAnnotation = function ( annotations ) {
+	var hash;
 	for ( hash in annotations ) {
-		// Use the first one with a recognized type (there should only be one, but this is just in case)
-		if ( annotations[hash].type === 'link/wikiLink' || annotations[hash].type === 'link/extLink' ) {
+		// Use the first one with a recognized type (there should only be one, this is just in case)
+		if (
+			annotations[hash].type === 'link/wikiLink' ||
+			annotations[hash].type === 'link/extLink'
+		) {
 			return annotations[hash];
 		}
 	}
@@ -86,7 +93,7 @@ ve.ui.LinkInspector.prototype.getAnnotationFromSelection = function() {
 };
 
 // TODO: This should probably be somewhere else but I needed this here for now.
-ve.ui.LinkInspector.prototype.getSelectionText = function() {
+ve.ui.LinkInspector.prototype.getSelectionText = function () {
 	var i,
 		surfaceView = this.context.getSurfaceView(),
 		surfaceModel = surfaceView.getModel(),
@@ -109,31 +116,38 @@ ve.ui.LinkInspector.prototype.getSelectionText = function() {
  * selection to contain the complete annotated link range
  * OR unwrap outer whitespace from selection.
  */
-ve.ui.LinkInspector.prototype.prepareOpen = function() {
+ve.ui.LinkInspector.prototype.prepareOpen = function () {
 	var	surfaceView = this.context.getSurfaceView(),
 		surfaceModel = surfaceView.getModel(),
 		doc = surfaceModel.getDocument(),
-		annotation = this.getAnnotationFromSelection(),
+		annotations = this.getAllLinkAnnotationsFromSelection(),
+		annotation = this.getFirstLinkAnnotation( annotations ),
 		selection = surfaceModel.getSelection(),
+		annotatedRange,
 		newSelection;
 
-	if ( annotation !== null ) {
-		// Ensure that the entire annotated range is selected
-		newSelection = doc.getAnnotatedRangeFromOffset( selection.start, annotation );
-		// Apply selection direction to new selection
-		if ( selection.from > selection.start ) {
-			newSelection.flip();
-		}
-	} else {
-		// No annotation, trim outer space from range
-		newSelection = doc.trimOuterSpaceFromRange( selection );
-	}
+	// Trim outer space from range if any.
+	newSelection = doc.trimOuterSpaceFromRange( selection );
 
+	if ( annotation !== null ) {
+		annotatedRange = doc.getAnnotatedRangeFromSelection( newSelection, annotation );
+
+		// Adjust selection if it does not contain the annotated range
+		if ( selection.start > annotatedRange.start ||
+			 selection.end < annotatedRange.end
+		) {
+			newSelection = annotatedRange;
+			// if selected from right to left
+			if ( selection.from > selection.start ) {
+				newSelection.flip();
+			}
+		}
+	}
 	surfaceModel.change( null, newSelection );
 };
 
-ve.ui.LinkInspector.prototype.onOpen = function() {
-	var annotation = this.getAnnotationFromSelection(),
+ve.ui.LinkInspector.prototype.onOpen = function () {
+	var	annotation = this.getFirstLinkAnnotation( this.getAllLinkAnnotationsFromSelection() ),
 		initialValue = '';
 	if ( annotation === null ) {
 		this.$locationInput.val( this.getSelectionText() );
@@ -157,19 +171,19 @@ ve.ui.LinkInspector.prototype.onOpen = function() {
 		this.$acceptButton.removeClass( 'es-inspector-button-disabled' );
 	}
 
-	setTimeout( ve.proxy( function() {
+	setTimeout( ve.proxy( function () {
 		this.$locationInput.focus().select();
 	}, this ), 0 );
 };
 
-ve.ui.LinkInspector.prototype.onClose = function( accept ) {
+ve.ui.LinkInspector.prototype.onClose = function ( accept ) {
 	var surfaceView = this.context.getSurfaceView(),
 		surfaceModel = surfaceView.getModel(),
-		annotations = this.getSelectedLinkAnnotations(),
+		annotations = this.getAllLinkAnnotationsFromSelection(),
 		target = this.$locationInput.val(),
 		hash, annotation;
 	if ( accept ) {
-		if ( target === this.initialValue || !target ) {
+		if ( !target ) {
 			return;
 		}
 		// Clear link annotation if it exists
@@ -177,12 +191,13 @@ ve.ui.LinkInspector.prototype.onClose = function( accept ) {
 			surfaceModel.annotate( 'clear', annotations[hash] );
 		}
 		surfaceModel.annotate( 'set', ve.ui.LinkInspector.getAnnotationForTarget( target ) );
+
 	}
 	// Restore focus
 	surfaceView.getDocument().getDocumentNode().$.focus();
 };
 
-ve.ui.LinkInspector.getAnnotationForTarget = function( target ) {
+ve.ui.LinkInspector.getAnnotationForTarget = function ( target ) {
 	var title;
 	// Figure out if this is an internal or external link
 	if ( target.match( /^(https?:)?\/\// ) ) {
@@ -196,6 +211,7 @@ ve.ui.LinkInspector.getAnnotationForTarget = function( target ) {
 		// TODO in the longer term we'll want to have autocompletion and existence&validity
 		// checks using AJAX
 		try {
+			// FIXME mw dependency
 			title = new mw.Title( target );
 			if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
 				// File: or Category: link

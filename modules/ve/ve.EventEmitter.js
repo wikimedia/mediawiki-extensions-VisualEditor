@@ -13,7 +13,7 @@
  * @constructor
  * @property events {Object}
  */
-ve.EventEmitter = function() {
+ve.EventEmitter = function () {
 	this.events = {};
 };
 
@@ -27,16 +27,18 @@ ve.EventEmitter = function() {
  * @param args {Mixed} First in a list of variadic arguments passed to event handler (optional)
  * @returns {Boolean} If event was handled by at least one listener
  */
-ve.EventEmitter.prototype.emit = function( type ) {
+ve.EventEmitter.prototype.emit = function ( type ) {
 	if ( type === 'error' && !( 'error' in this.events ) ) {
 		throw 'Missing error handler error.';
 	}
 	if ( !( type in this.events ) ) {
 		return false;
 	}
-	var listeners = this.events[type].slice();
-	var args = Array.prototype.slice.call( arguments, 1 );
-	for ( var i = 0; i < listeners.length; i++ ) {
+	var i,
+		listeners = this.events[type].slice(),
+		length = listeners.length,
+		args = Array.prototype.slice.call( arguments, 1 );
+	for ( i = 0; i < length; i++ ) {
 		listeners[i].apply( this, args );
 	}
 	return true;
@@ -51,7 +53,7 @@ ve.EventEmitter.prototype.emit = function( type ) {
  * @returns {ve.EventEmitter} This object
  * @throws "Invalid listener error" if listener argument is not a function
  */
-ve.EventEmitter.prototype.addListener = function( type, listener ) {
+ve.EventEmitter.prototype.addListener = function ( type, listener ) {
 	if ( typeof listener !== 'function' ) {
 		throw 'Invalid listener error. Function expected.';
 	}
@@ -71,7 +73,7 @@ ve.EventEmitter.prototype.addListener = function( type, listener ) {
  * @param listeners {Object} List of event/callback pairs
  * @returns {ve.EventEmitter} This object
  */
-ve.EventEmitter.prototype.addListeners = function( listeners ) {
+ve.EventEmitter.prototype.addListeners = function ( listeners ) {
 	for ( var event in listeners ) {
 		this.addListener( event, listeners[event] );
 	}
@@ -87,8 +89,8 @@ ve.EventEmitter.prototype.addListeners = function( listeners ) {
  * @param method {String} Name of method to call
  * @returns {ve.EventEmitter} This object
  */
-ve.EventEmitter.prototype.addListenerMethod = function( target, event, method ) {
-	return this.addListener( event, function() {
+ve.EventEmitter.prototype.addListenerMethod = function ( target, event, method ) {
+	return this.addListener( event, function () {
 		if ( typeof target[method] === 'function' ) {
 			target[method].apply( target, Array.prototype.slice.call( arguments, 0 ) );
 		} else {
@@ -105,7 +107,7 @@ ve.EventEmitter.prototype.addListenerMethod = function( target, event, method ) 
  * @param methods {Object} List of event/method name pairs
  * @returns {ve.EventEmitter} This object
  */
-ve.EventEmitter.prototype.addListenerMethods = function( target, methods ) {
+ve.EventEmitter.prototype.addListenerMethods = function ( target, methods ) {
 	for ( var event in methods ) {
 		this.addListenerMethod( target, event, methods[event] );
 	}
@@ -127,7 +129,7 @@ ve.EventEmitter.prototype.on = ve.EventEmitter.prototype.addListener;
  * @param listener {Function} Listener to call when event occurs
  * @returns {ve.EventEmitter} This object
  */
-ve.EventEmitter.prototype.once = function( type, listener ) {
+ve.EventEmitter.prototype.once = function ( type, listener ) {
 	var eventEmitter = this;
 	return this.addListener( type, function listenerWrapper() {
 		eventEmitter.removeListener( type, listenerWrapper );
@@ -144,18 +146,19 @@ ve.EventEmitter.prototype.once = function( type, listener ) {
  * @returns {ve.EventEmitter} This object
  * @throws "Invalid listener error" if listener argument is not a function
  */
-ve.EventEmitter.prototype.removeListener = function( type, listener ) {
+ve.EventEmitter.prototype.removeListener = function ( type, listener ) {
 	if ( typeof listener !== 'function' ) {
 		throw 'Invalid listener error. Function expected.';
 	}
 	if ( !( type in this.events ) || !this.events[type].length ) {
 		return this;
 	}
-	var handlers = this.events[type];
+	var i,
+		handlers = this.events[type];
 	if ( handlers.length === 1 && handlers[0] === listener ) {
 		delete this.events[type];
 	} else {
-		var i = ve.inArray( listener, handlers );
+		i = ve.inArray( listener, handlers );
 		if ( i < 0 ) {
 			return this;
 		}
@@ -174,7 +177,7 @@ ve.EventEmitter.prototype.removeListener = function( type, listener ) {
  * @param type {String} Type of event to remove listeners from
  * @returns {ve.EventEmitter} This object
  */
-ve.EventEmitter.prototype.removeAllListeners = function( type ) {
+ve.EventEmitter.prototype.removeAllListeners = function ( type ) {
 	if ( type in this.events ) {
 		delete this.events[type];
 	}
@@ -188,6 +191,6 @@ ve.EventEmitter.prototype.removeAllListeners = function( type ) {
  * @param type {String} Type of event to get listeners for
  * @returns {Array} List of listeners to an event
  */
-ve.EventEmitter.prototype.listeners = function( type ) {
+ve.EventEmitter.prototype.listeners = function ( type ) {
 	return type in this.events ? this.events[type] : [];
 };

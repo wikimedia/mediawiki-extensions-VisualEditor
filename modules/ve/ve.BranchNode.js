@@ -17,7 +17,7 @@
  * @constructor
  * @param {ve.Node[]} children Array of children to add
  */
-ve.BranchNode = function( children ) {
+ve.BranchNode = function ( children ) {
 	this.children = ve.isArray( children ) ? children : [];
 };
 
@@ -28,7 +28,7 @@ ve.BranchNode = function( children ) {
  * @see {ve.Node.prototype.hasChildren}
  * @returns {Boolean} Whether this node has children
  */
-ve.BranchNode.prototype.hasChildren = function() {
+ve.BranchNode.prototype.hasChildren = function () {
 	return true;
 };
 
@@ -38,7 +38,7 @@ ve.BranchNode.prototype.hasChildren = function() {
  * @method
  * @returns {ve.Node[]} List of child nodes
  */
-ve.BranchNode.prototype.getChildren = function() {
+ve.BranchNode.prototype.getChildren = function () {
 	return this.children;
 };
 
@@ -49,7 +49,7 @@ ve.BranchNode.prototype.getChildren = function() {
  * @param {ve.dm.Node} node Child node to find index of
  * @returns {Integer} Index of child node or -1 if node was not found
  */
-ve.BranchNode.prototype.indexOf = function( node ) {
+ve.BranchNode.prototype.indexOf = function ( node ) {
 	return ve.inArray( node, this.children );
 };
 
@@ -60,7 +60,7 @@ ve.BranchNode.prototype.indexOf = function( node ) {
  * @see {ve.Node.prototype.setRoot}
  * @param {ve.Node} root Node to use as root
  */
-ve.BranchNode.prototype.setRoot = function( root ) {
+ve.BranchNode.prototype.setRoot = function ( root ) {
 	if ( root === this.root ) {
 		// Nothing to do, don't recurse into all descendants
 		return;
@@ -78,7 +78,7 @@ ve.BranchNode.prototype.setRoot = function( root ) {
  * @see {ve.Node.prototype.setDocument}
  * @param {ve.Document} root Node to use as root
  */
-ve.BranchNode.prototype.setDocument = function( doc ) {
+ve.BranchNode.prototype.setDocument = function ( doc ) {
 	if ( doc === this.doc ) {
 		// Nothing to do, don't recurse into all descendants
 		return;
@@ -102,16 +102,15 @@ ve.BranchNode.prototype.setDocument = function( doc ) {
  * @param {Boolean} [shallow] Do not iterate into child nodes of child nodes
  * @returns {ve.Node|null} Node at offset, or null if non was found
  */
-ve.BranchNode.prototype.getNodeFromOffset = function( offset, shallow ) {
+ve.BranchNode.prototype.getNodeFromOffset = function ( offset, shallow ) {
 	if ( offset === 0 ) {
 		return this;
 	}
 	// TODO a lot of logic is duplicated in selectNodes(), abstract that into a traverser or something
 	if ( this.children.length ) {
-		var nodeOffset = 0,
-			nodeLength,
-			childNode;
-		for ( var i = 0, length = this.children.length; i < length; i++ ) {
+		var i, length, nodeLength, childNode,
+			nodeOffset = 0;
+		for ( i = 0, length = this.children.length; i < length; i++ ) {
 			childNode = this.children[i];
 			if ( offset === nodeOffset ) {
 				// The requested offset is right before childNode,
@@ -146,20 +145,20 @@ ve.BranchNode.prototype.getNodeFromOffset = function( offset, shallow ) {
  * @param {ve.Node} node Node to get offset of
  * @returns {Integer} Offset of node or -1 of node was not found
  */
-ve.BranchNode.prototype.getOffsetFromNode = function( node ) {
+ve.BranchNode.prototype.getOffsetFromNode = function ( node ) {
 	if ( node === this ) {
 		return 0;
 	}
 	if ( this.children.length ) {
-		var offset = 0,
-			childNode;
-		for ( var i = 0, length = this.children.length; i < length; i++ ) {
+		var i, length, childOffset, childNode,
+			offset = 0;
+		for ( i = 0, length = this.children.length; i < length; i++ ) {
 			childNode = this.children[i];
 			if ( childNode === node ) {
 				return offset;
 			}
 			if ( childNode.canHaveChildren() && childNode.getChildren().length ) {
-				var childOffset = this.getOffsetFromNode.call( childNode, node );
+				childOffset = this.getOffsetFromNode.call( childNode, node );
 				if ( childOffset !== -1 ) {
 					return offset + 1 + childOffset;
 				}
@@ -180,7 +179,7 @@ ve.BranchNode.prototype.getOffsetFromNode = function( node ) {
  * @param {ve.Node} [from] Node to start at. Must be a descendant of this node
  * @param {Boolean} [reverse] Whether to iterate backwards
  */
-ve.BranchNode.prototype.traverseLeafNodes = function( callback, from, reverse ) {
+ve.BranchNode.prototype.traverseLeafNodes = function ( callback, from, reverse ) {
 		// Stack of indices that lead from this to node
 	var indexStack = [],
 		// Node whose children we're currently traversing
@@ -203,13 +202,13 @@ ve.BranchNode.prototype.traverseLeafNodes = function( callback, from, reverse ) 
 			if ( !p ) {
 				// n is a root node and we haven't reached this
 				// That means from isn't a descendant of this
-				throw "from parameter passed to traverseLeafNodes() must be a descendant";
+				throw 'from parameter passed to traverseLeafNodes() must be a descendant';
 			}
 			// Find the index of n in p
 			i = p.indexOf( n );
 			if ( i === -1 ) {
 				// This isn't supposed to be possible
-				throw "Tree corruption detected: node isn't in its parent's children array";
+				throw 'Tree corruption detected: node isn\'t in its parent\'s children array';
 			}
 			indexStack.push( i );
 			// Move up

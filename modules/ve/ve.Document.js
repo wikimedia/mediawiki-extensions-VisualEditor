@@ -12,7 +12,7 @@
  * @constructor
  * @param model {ve.Node} Model to observe
  */
-ve.Document = function( documentNode ) {
+ve.Document = function ( documentNode ) {
 	// Properties
 	this.documentNode = documentNode;
 };
@@ -25,7 +25,7 @@ ve.Document = function( documentNode ) {
  * @method
  * @returns {ve.Node} Root of node tree
  */
-ve.Document.prototype.getDocumentNode = function() {
+ve.Document.prototype.getDocumentNode = function () {
 	return this.documentNode;
 };
 
@@ -53,7 +53,7 @@ ve.Document.prototype.getDocumentNode = function() {
  * @throws 'Invalid start offset' if range.start is out of range
  * @throws 'Invalid end offset' if range.end is out of range
  */
-ve.Document.prototype.selectNodes = function( range, mode ) {
+ve.Document.prototype.selectNodes = function ( range, mode ) {
 	range.normalize();
 	var doc = this.documentNode,
 		retval = [],
@@ -147,7 +147,7 @@ ve.Document.prototype.selectNodes = function( range, mode ) {
 			return retval;
 		}
 
-		if ( start == end && ( startBetween || endBetween ) && node.isWrapped() ) {
+		if ( start === end && ( startBetween || endBetween ) && node.isWrapped() ) {
 			// Empty range in the parent, outside of any child
 			nodeRange = new ve.Range( currentFrame.startOffset,
 				currentFrame.startOffset + currentFrame.node.getLength()
@@ -375,7 +375,7 @@ ve.Document.prototype.selectNodes = function( range, mode ) {
 			while ( !nextNode ) {
 				// Check if the start is right past the end of this node, at the end of
 				// the parent
-				if ( node.isWrapped() && start == left ) {
+				if ( node.isWrapped() && start === left ) {
 					// TODO duplicated code
 					nodeRange = new ve.Range( currentFrame.startOffset,
 						currentFrame.startOffset + currentFrame.node.getLength()
@@ -427,16 +427,12 @@ ve.Document.prototype.selectNodes = function( range, mode ) {
  *     parent: Parent of all of these nodes
  *     grandparent: parent's parent
  */
-ve.Document.prototype.getCoveredSiblingGroups = function( selection ) {
-	var leaves = this.selectNodes( selection, 'leaves' ),
-		firstCoveredSibling,
-		lastCoveredSibling,
-		node,
-		parentNode,
-		siblingNode,
+ve.Document.prototype.getCoveredSiblingGroups = function ( selection ) {
+	var i, firstCoveredSibling, lastCoveredSibling, node, parentNode, siblingNode,
+		leaves = this.selectNodes( selection, 'leaves' ),
 		groups = [],
 		lastEndOffset = 0;
-	for ( var i = 0; i < leaves.length; i++ ) {
+	for ( i = 0; i < leaves.length; i++ ) {
 		if ( leaves[i].nodeOuterRange.end <= lastEndOffset ) {
 			// This range is contained within a range we've already processed
 			continue;
@@ -470,6 +466,7 @@ ve.Document.prototype.getCoveredSiblingGroups = function( selection ) {
 				siblingNode = siblingNode.getParent();
 			}
 		} while ( siblingNode.getParent() === parentNode );
+		i--;
 		lastEndOffset = parentNode.getOuterRange().end;
 	}
 	return groups;

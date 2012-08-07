@@ -10,8 +10,10 @@
 
 /* Configuration */
 
-// URL to the parsoid instance
-$wgVisualEditorParsoidURL = 'http://localhost:8000/';
+// URL to the Parsoid instance
+$wgVisualEditorParsoidURL = 'http://localhost:8000';
+// Interwiki prefix to pass to the Parsoid instance
+$wgVisualEditorParsoidPrefix = 'localhost:';
 
 /* Setup */
 
@@ -28,6 +30,7 @@ $wgExtensionCredits['other'][] = array(
 		'Christian Williams',
 		'Rob Moen',
 		'Subramanya Sastry',
+		'Timo Tijhof',
 	),
 	'version' => '0.1.0',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:VisualEditor',
@@ -57,19 +60,23 @@ $wgResourceModules += array(
 	),
 	'ext.visualEditor.viewPageTarget' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
-			've/init/targets/ve.init.ViewPageTarget.js',
+			've/init/mw/ve.init.mw.js',
+			've/init/mw/ve.init.mw.Platform.js',
+			've/init/mw/ve.init.mw.Target.js',
+			've/init/mw/targets/ve.init.mw.ViewPageTarget.js',
 		),
 		'styles' => array(
-			've/init/styles/ve.init.ViewPageTarget.css',
-			've/init/styles/ve.init.ViewPageTarget-hd.css' => array(
+			've/init/mw/styles/ve.init.mw.ViewPageTarget.css',
+			've/init/mw/styles/ve.init.mw.ViewPageTarget-hd.css' => array(
 				'media' => 'screen and (min-width: 982px)'
 			),
 		),
 		'dependencies' => array(
-			'ext.visualEditor.init',
+			'ext.visualEditor.base',
 			'mediawiki.util',
 			'mediawiki.feedback',
-			'mediawiki.Uri'
+			'mediawiki.Uri',
+			'mediawiki.Title'
 		),
 		'messages' => array(
 			'minoredit',
@@ -90,16 +97,6 @@ $wgResourceModules += array(
 			'visualeditor-feedback-dialog-title'
 		),
 	),
-	'ext.visualEditor.init' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			've/init/ve.init.js',
-			've/init/ve.init.Target.js',
-		),
-		'dependencies' => array(
-			'ext.visualEditor.base',
-			'ext.visualEditor.collaboration'
-		),
-	),
 	'ext.visualEditor.collaboration' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			// collab
@@ -116,9 +113,13 @@ $wgResourceModules += array(
 	'ext.visualEditor.base' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			// ve
-			'jquery/jquery.json.js',
 			've/ve.js',
 			've/ve.EventEmitter.js',
+			've/init/ve.init.js',
+			've/init/ve.init.Platform.js',
+		),
+		'dependencies' => array(
+			'jquery.json',
 		),
 		'debugScripts' => array(
 			've/ve.debug.js',
@@ -271,10 +272,13 @@ $wgResourceModules += array(
 
 /*
  * VisualEditor Namespace
- * Using 2500 and 2501 as per registration on mediawiki.org
+ * Using 2500 and 2501 as per registration on mediawiki.org.
  *
- * @see http://www.mediawiki.org/wiki/Extension_default_namespaces
-*/
+ * @todo FIXME: Move these demonstration settings out of the extension
+ * (or commented out as example).
+ *
+ * @see https://www.mediawiki.org/wiki/Extension_default_namespaces
+ */
 define( 'NS_VISUALEDITOR', 2500 );
 define( 'NS_VISUALEDITOR_TALK', 2501 );
 $wgExtraNamespaces[NS_VISUALEDITOR] = 'VisualEditor';
@@ -286,6 +290,8 @@ $wgContentNamespaces[] = NS_VISUALEDITOR_TALK;
 $wgNamespaceProtection[NS_VISUALEDITOR] = array( 've-edit' );
 $wgGroupPermissions['sysop']['ve-edit'] = true;
 
+
+
 // Parsoid Wrapper API
 $wgAutoloadClasses['ApiVisualEditor'] = $dir . 'ApiVisualEditor.php';
 $wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
@@ -294,5 +300,6 @@ $wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
 $wgAutoloadClasses['VisualEditorHooks'] = $dir . 'VisualEditor.hooks.php';
 $wgHooks['BeforePageDisplay'][] = 'VisualEditorHooks::onBeforePageDisplay';
 $wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::onMakeGlobalVariablesScript';
+$wgHooks['ResourceLoaderTestModules'][] = 'VisualEditorHooks::onResourceLoaderTestModules';
 
 $wgAutoloadClasses['VisualEditorMessagesModule'] = $dir . 'VisualEditorMessagesModule.php';

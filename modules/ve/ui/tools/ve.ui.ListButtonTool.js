@@ -14,7 +14,7 @@
  * @param {ve.ui.Toolbar} toolbar
  * @param {String} name
  */
- ve.ui.ListButtonTool = function( toolbar, name, title, data ) {
+ ve.ui.ListButtonTool = function ( toolbar, name, title, data ) {
 	// Inheritance
 	ve.ui.ButtonTool.call( this, toolbar, name, title );
 
@@ -25,7 +25,7 @@
 
 /* Methods */
 
-ve.ui.ListButtonTool.prototype.list = function( nodes, style ) {
+ve.ui.ListButtonTool.prototype.list = function ( nodes, style ) {
 	var surfaceModel = this.toolbar.getSurfaceView().getModel(),
 		documentModel = surfaceModel.getDocument(),
 		selection = surfaceModel.getSelection(),
@@ -33,8 +33,9 @@ ve.ui.ListButtonTool.prototype.list = function( nodes, style ) {
 		previousList,
 		groupRange,
 		group,
-		tx;
-	for ( var i = 0; i < groups.length; i++ ) {
+		tx, i;
+
+	for ( i = 0; i < groups.length; i++ ) {
 		group = groups[i];
 		if ( group.grandparent && group.grandparent.getType() === 'list' ) {
 			if ( group.grandparent !== previousList ) {
@@ -75,36 +76,94 @@ ve.ui.ListButtonTool.prototype.list = function( nodes, style ) {
 	}
 };
 
-ve.ui.ListButtonTool.prototype.unlist = function( node ) {
+ve.ui.ListButtonTool.prototype.unlist = function ( node ) {
+	/**
+	 * Recursively prepare to unwrap all lists in a given range.
+	 *
+	 * This function will find all lists covered wholly or partially by the given range, as well
+	 * as all lists inside these lists, and return their inner ranges. This means that all sublists
+	 * will be found even if range doesn't cover them.
+	 *
+	 * To actually unwrap the list, feed the returned ranges to ve.dm.Transaction.newFromWrap(),
+	 * in order.
+	 *
+	 * @param {ve.dm.Document} documentModel
+	 * @param {ve.Range} range
+	 * @returns {ve.Range[]} Array of inner ranges of lists
+	 */
+	function getUnlistRanges( documentModel, range ) {
+		var groups = documentModel.getCoveredSiblingGroups( range ),
+			// Collect ranges in an object for deduplication
+			unlistRanges = {},
+			i, j, k, group, previousList, list, listItem,
+			subList, endOffset = 0;
+
+		for ( i = 0; i < groups.length; i++ ) {
+			group = groups[i];
+			list = group.grandparent;
+			if ( list && list.getType() === 'list' && list !== previousList ) {
+				// Unwrap the parent list
+				range = list.getRange();
+				if ( range.end > endOffset ) {
+					unlistRanges[range.start + '-' + range.end] = range;
+					endOffset = range.end;
+				}
+				// Skip this list next time
+				previousList = list;
+				// Recursively unwrap any sublists of the list
+				for ( j = 0; j < list.children.length; j++ ) {
+					listItem = list.children[j];
+					if ( listItem.getType() === 'listItem' ) {
+						for ( k = 0; k < listItem.children.length; k++ ) {
+							subList = listItem.children[k];
+							if ( subList.getType() === 'list' ) {
+								// Recurse
+								unlistRanges = ve.extendObject( unlistRanges, getUnlistRanges(
+									documentModel, subList.getRange()
+								) );
+							}
+						}
+					}
+				}
+			}
+		}
+		return unlistRanges;
+	}
+
 	var surfaceModel = this.toolbar.getSurfaceView().getModel(),
 		documentModel = surfaceModel.getDocument(),
 		selection = surfaceModel.getSelection(),
-		groups = documentModel.getCoveredSiblingGroups( selection ),
-		previousList,
-		group,
-		tx;
-	for ( var i = 0; i < groups.length; i++ ) {
-		group = groups[i];
-		if ( group.grandparent && group.grandparent.getType() === 'list' ) {
-			if ( group.grandparent !== previousList ) {
-				// Unwrap the parent list
-				tx = ve.dm.Transaction.newFromWrap(
-					documentModel,
-					group.grandparent.getRange(),
-					[ { 'type': 'list' } ],
-					[],
-					[ { 'type': 'listItem' } ],
-					[]
-				);
-				surfaceModel.change( tx, tx.translateRange( selection ) );
-				// Skip this one next time
-				previousList = group.grandparent;
-			}
+		unlistRangesObj = getUnlistRanges( documentModel, selection ),
+		unlistRangesArr = [],
+		i, j, tx;
+
+	for ( i in unlistRangesObj ) {
+		unlistRangesArr.push( unlistRangesObj[i] );
+	}
+
+	for ( i = 0; i < unlistRangesArr.length; i++ ) {
+		// Unwrap the range given by unlistRanges[i]
+		tx = ve.dm.Transaction.newFromWrap(
+			documentModel,
+			unlistRangesArr[i],
+			[ { 'type': 'list' } ],
+			[],
+			[ { 'type': 'listItem' } ],
+			[]
+		);
+		selection = tx.translateRange( selection );
+		surfaceModel.change( tx );
+		// Translate all the remaining ranges for this transaction
+		// TODO ideally we'd have a way to merge all these transactions into one and execute that instead
+		for ( j = i + 1; j < unlistRangesArr.length; j++ ) {
+			unlistRangesArr[j] = tx.translateRange( unlistRangesArr[j] );
 		}
 	}
+	// Update the selection
+	surfaceModel.change( null, selection );
 };
 
-ve.ui.ListButtonTool.prototype.onClick = function() {
+ve.ui.ListButtonTool.prototype.onClick = function () {
 	this.toolbar.surfaceView.model.breakpoint();
 	if ( !this.$.hasClass( 'es-toolbarButtonTool-down' ) ) {
 		this.list( this.nodes, this.name );
@@ -114,26 +173,26 @@ ve.ui.ListButtonTool.prototype.onClick = function() {
 	this.toolbar.surfaceView.model.breakpoint();
 };
 
-ve.ui.ListButtonTool.prototype.updateState = function( annotations, nodes ) {
+ve.ui.ListButtonTool.prototype.updateState = function ( annotations, nodes ) {
 	var surfaceView = this.toolbar.getSurfaceView(),
 		surfaceModel = surfaceView.getModel(),
 		doc = surfaceView.getDocument(),
 		selection = surfaceModel.getSelection(),
 		leaves = doc.selectNodes( selection, 'leaves' );
 
-	function areListItemsOfStyle( leaves, style ){
-		var listNode = null;
+	function areListItemsOfStyle( leaves, style ) {
+		var i, listNode;
 
-		for ( var i=0; i < leaves.length; i++ ) {
+		for ( i = 0; i < leaves.length; i++ ) {
 			listNode = leaves[i].node;
 			// Get the list node
-			while( listNode && listNode.getType() !== 'list' ) {
+			while ( listNode && listNode.getType() !== 'list' ) {
 				listNode = listNode.getParent();
 				if ( listNode === null ) {
 					return false;
 				}
 			}
-			if( listNode.getModel().getAttribute('style') !== style ) {
+			if ( listNode.getModel().getAttribute('style') !== style ) {
 				return false;
 			}
 		}

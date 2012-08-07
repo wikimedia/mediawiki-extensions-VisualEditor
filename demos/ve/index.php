@@ -56,12 +56,6 @@ $html = '<div>' . file_get_contents( $page ) . '</div>';
 		<script src="../../modules/jquery/jquery.js"></script>
 		<script src="../../modules/jquery/jquery.json.js"></script>
 		<script src="../../modules/ve/ve.js"></script>
-		<script>
-		<?php
-			include( dirname( dirname( dirname( __FILE__ ) ) ) . '/VisualEditor.i18n.php' );
-			echo 've.msg.messages = ' . json_encode( $messages['en'] );
-		?>
-		</script>
 		<script src="../../modules/ve/ve.debug.js"></script>
 		<script src="../../modules/ve/ve.EventEmitter.js"></script>
 		<script src="../../modules/ve/ve.Factory.js"></script>
@@ -72,6 +66,19 @@ $html = '<div>' . file_get_contents( $page ) . '</div>';
 		<script src="../../modules/ve/ve.LeafNode.js"></script>
 		<script src="../../modules/ve/ve.Surface.js"></script>
 		<script src="../../modules/ve/ve.Document.js"></script>
+
+		<!-- init -->
+		<script src="../../modules/ve/init/ve.init.js"></script>
+		<script src="../../modules/ve/init/ve.init.Platform.js"></script>
+		<script src="../../modules/ve/init/sa/ve.init.sa.js"></script>
+		<script src="../../modules/ve/init/sa/ve.init.sa.Platform.js"></script>
+		<script>
+			<?php
+				include( dirname( dirname( dirname( __FILE__ ) ) ) . '/VisualEditor.i18n.php' );
+				echo 've.init.platform.addMessages( ' . json_encode( $messages['en'] ) . ');';
+			?>
+			ve.init.platform.setModulesUrl( '../../modules' );
+		</script>
 
 		<!-- dm -->
 		<script src="../../modules/ve/dm/ve.dm.js"></script>
@@ -138,9 +145,6 @@ $html = '<div>' . file_get_contents( $page ) . '</div>';
 
 		<!-- ui -->
 		<script src="../../modules/ve/ui/ve.ui.js"></script>
-		<script>
-			ve.ui.stylesheetPath = '../../modules/ve/ui/styles/';
-		</script>
 		<script src="../../modules/ve/ui/ve.ui.Inspector.js"></script>
 		<script src="../../modules/ve/ui/ve.ui.Tool.js"></script>
 		<script src="../../modules/ve/ui/ve.ui.Toolbar.js"></script>
@@ -167,6 +171,37 @@ $html = '<div>' . file_get_contents( $page ) . '</div>';
 				);
 				$( '.ve-ce-documentNode' ).focus();
 			} );
+		</script>
+
+		<div style="margin-left: 2em; margin-right: 2em; margin-bottom: 1em;">
+			<labe>Start</label>
+			<input type="text" style="width: 3em" id="ve-debug-start"/>
+			<labe>End</label>
+			<input type="text" style="width: 3em" id="ve-debug-end"/>
+			<br/>
+			<a href="#" id="ve-get-range">Get range from the editor</a>
+			<br/>
+			<a href="#" id="ve-dump-data">Dump data to the console</a>
+		</div>
+
+		<script>
+		$( function() {
+			$( '#ve-get-range' ).on( "click", function( e ) {
+				var range = ve.instances[0].view.model.getSelection();
+				$( '#ve-debug-start' ).val( range.start );
+				$( '#ve-debug-end' ).val( range.end );
+				e.preventDefault();
+				return false;
+			} );
+			$( '#ve-dump-data' ).on( "click", function( e ) {
+				var	start = $( '#ve-debug-start' ).val(),
+					end = $( '#ve-debug-end' ).val();
+				// TODO: Validate input
+				console.dir( ve.instances[0].view.documentView.model.data.slice( start, end ) );
+				e.preventDefault();
+				return false;
+			} );
+		} );
 		</script>
 	</body>
 </html>

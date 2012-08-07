@@ -11,7 +11,7 @@
  * @class
  * @constructor
  */
-ve.ui.Toolbar = function( $container, surfaceView, config ) {
+ve.ui.Toolbar = function ( $container, surfaceView, config ) {
 	// Inheritance TODO: Do we still need it?
 	ve.EventEmitter.call( this );
 	if ( !surfaceView ) {
@@ -19,8 +19,7 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
 	}
 
 	// References for use in closures
-	var _this = this,
-		$window = $( window );
+	var $window = $( window );
 
 	// Properties
 	this.surfaceView = surfaceView;
@@ -47,7 +46,7 @@ ve.ui.Toolbar = function( $container, surfaceView, config ) {
  *
  * @method
  */
-ve.ui.Toolbar.prototype.updateTools = function() {
+ve.ui.Toolbar.prototype.updateTools = function () {
 	var model = this.surfaceView.getModel(),
 		doc = model.getDocument(),
 		annotations,
@@ -55,11 +54,11 @@ ve.ui.Toolbar.prototype.updateTools = function() {
 		range = model.getSelection(),
 		startNode,
 		endNode,
-		_this = this,
+		tool = this,
 		i;
 
 	if ( range !== null ) {
-		if ( range.from === range.to ){
+		if ( range.from === range.to ) {
 			nodes.push( doc.getNodeFromOffset( range.from ) );
 		} else {
 			startNode = doc.getNodeFromOffset( range.from );
@@ -77,7 +76,7 @@ ve.ui.Toolbar.prototype.updateTools = function() {
 			if ( startNode === endNode ) {
 				nodes.push( startNode );
 			} else {
-				model.getDocument().getDocumentNode().traverseLeafNodes( function( node ) {
+				model.getDocument().getDocumentNode().traverseLeafNodes( function ( node ) {
 					nodes.push( node );
 					if( node === endNode ) {
 						return false;
@@ -90,7 +89,7 @@ ve.ui.Toolbar.prototype.updateTools = function() {
 			annotations = doc.getAnnotationsFromRange( range );
 		} else {
 			// Clear context
-			_this.surfaceView.contextView.clear();
+			tool.surfaceView.contextView.clear();
 			annotations = doc.getAnnotationsFromOffset(
 				doc.getNearestContentOffset( range.start - 1 )
 			);
@@ -107,13 +106,14 @@ ve.ui.Toolbar.prototype.updateTools = function() {
 	}
 };
 
-ve.ui.Toolbar.prototype.getSurfaceView = function() {
+ve.ui.Toolbar.prototype.getSurfaceView = function () {
 	return this.surfaceView;
 };
 
-ve.ui.Toolbar.prototype.setup = function() {
-	for ( var i = 0; i < this.config.length; i++ ) {
-		var $group = $( '<div>' )
+ve.ui.Toolbar.prototype.setup = function () {
+	var i, j, $group, tool, toolDefintion;
+	for ( i = 0; i < this.config.length; i++ ) {
+		$group = $( '<div>' )
 			.addClass( 'es-toolbarGroup' )
 			.addClass( 'es-toolbarGroup-' + this.config[i].name );
 		if ( this.config[i].label ) {
@@ -122,10 +122,10 @@ ve.ui.Toolbar.prototype.setup = function() {
 			);
 		}
 
-		for ( var j = 0; j < this.config[i].items.length; j++ ) {
-			var toolDefintion = ve.ui.Tool.tools[ this.config[i].items[j] ];
+		for ( j = 0; j < this.config[i].items.length; j++ ) {
+			toolDefintion = ve.ui.Tool.tools[ this.config[i].items[j] ];
 			if ( toolDefintion ) {
-				var tool = new toolDefintion.constructor(
+				tool = new toolDefintion.constructor(
 					this, toolDefintion.name, toolDefintion.title, toolDefintion.data
 				);
 				this.tools.push( tool );

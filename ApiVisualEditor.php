@@ -11,7 +11,7 @@
 class ApiVisualEditor extends ApiBase {
 
 	public function execute() {
-		global $wgVisualEditorParsoidURL;
+		global $wgVisualEditorParsoidURL, $wgVisualEditorParsoidPrefix;
 		$user = $this->getUser();
 
 		$parsoid = $wgVisualEditorParsoidURL;
@@ -21,7 +21,11 @@ class ApiVisualEditor extends ApiBase {
 		if ( $params['paction'] === 'parse' ) {
 			if ( $page->exists() ) {
 				$parsed = Http::get(
-					$parsoid . $page->getPrefixedDBkey()
+					// Insert slash since wgVisualEditorParsoidURL may or may not
+					// end in a slash. Double slashes are no problem --catrope
+					$parsoid . '/' . urlencode(
+						$wgVisualEditorParsoidPrefix . $page->getPrefixedDBkey()
+					)
 				);
 
 				if ( $parsed ) {
@@ -35,14 +39,17 @@ class ApiVisualEditor extends ApiBase {
 					);
 				}
 			} else {
-				$result = array( 'result' => 'success', 'parsed' => '' );
+				$result = array(
+					'result' => 'success',
+					'parsed' => ''
+				);
 			}
 		} elseif ( $params['paction'] === 'save' && $user->isBlocked() ) {
 			$result = array( 'result' => 'error' );
 		} elseif ( $params['paction'] === 'save' /* means user is not blocked */ ) {
 			// API Posts HTML to Parsoid Service, receives Wikitext,
 			// API Saves Wikitext to page.
-			$wikitext = Http::post( $parsoid . $page->getPrefixedDBkey(),
+			$wikitext = Http::post( $parsoid . '/' . $page->getPrefixedDBkey(),
 				array( 'postData' => array( 'content' => $params['html'] ) )
 			);
 
