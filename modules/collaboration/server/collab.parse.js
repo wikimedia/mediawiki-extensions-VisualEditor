@@ -1,7 +1,7 @@
 /**
  * This module creates a basic parsoid interface for use in the collaboration server
 **/
-var mp = '../../parser/';
+var mp = '../../../../Parsoid/js/lib/';
 
 var ParserPipelineFactory = require(mp + 'mediawiki.parser.js').ParserPipelineFactory,
 	ParserEnv = require(mp + 'mediawiki.parser.environment.js').MWParserEnvironment,
