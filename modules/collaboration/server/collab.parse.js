@@ -5,11 +5,12 @@ var mp = '../../../../Parsoid/js/lib/';
 
 var ParserPipelineFactory = require(mp + 'mediawiki.parser.js').ParserPipelineFactory,
 	ParserEnv = require(mp + 'mediawiki.parser.environment.js').MWParserEnvironment,
-WikitextSerializer = require(mp + 'mediawiki.WikitextSerializer.js').WikitextSerializer;
+	WikitextSerializer = require(mp + 'mediawiki.WikitextSerializer.js').WikitextSerializer;
 
-var request = require( 'request' );
-var parsoidServiceURL = 'http://localhost:8000/';
+var request = require( 'request' ),
+	settings = require( '../settings.js' ).settings;
 
+var parsoidServiceUrl = settings.parsoidServiceUrl;
 /**
  * Parse and fetch HTML of the required page.
  *
@@ -47,7 +48,7 @@ parse = function( useService, title, callback ) {
 	}
 	// Fetch HTML from external parsoid service over HTTP
 	else {
-		request( parsoidServiceURL + title, function( error, response, body ) {
+		request( parsoidServiceUrl + title, function( error, response, body ) {
 			if( !error ) {
 				this.outHTML = body;
 				callback( this.outHTML );

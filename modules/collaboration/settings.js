@@ -2,6 +2,7 @@ collab = {};
 collab.settings = {
 	host: 'http://localhost',
 	port: 8001,
+	parsoidServiceUrl: 'http://localhost:8000'
 };	
 
 if( typeof module == 'object' ) {

@@ -4,7 +4,9 @@
  * Also stores information of the user who initiated the editing session.
 **/
 
-var ve = require( './collab.ve.js' ).ve;
+var ve = require( './collab.ve.js' ).ve,
+	settings = require( '../settings.js' ).settings,
+	request = require( 'request');
 
 /**
  * @class
@@ -35,6 +37,17 @@ Session.generateID = function( params ) {
 	var hashOut = hasher.digest( 'hex' );
 	return hashOut;
 };
+
+Session.prototype.authenticate = function( userName, validationToken, callback ) {
+	var authUrl = settings.authUrl;
+	var data = '&username=' + userName + '&token=' + validationToken;
+	var r = request( authUrl + data, function( error, response, body ) {
+		if( !error ) {
+			var result = body.TokenValidationResult.matches === 'true' ? true : false;
+			callback( result );
+		}
+	} ); 
+}
 
 /**
  * Set publishing rights for the current user/session
