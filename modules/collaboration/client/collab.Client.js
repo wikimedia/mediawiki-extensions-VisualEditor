@@ -12,6 +12,9 @@ collab.Client = function( editorSurface ) {
 	var options = {
 	};
 
+	// Request and store the validaton token
+	this.validationToken = collab.Client.requestValidationToken();
+
 	// Initialize the UI binding object
 	this.ui = new collab.UI( this );
 
@@ -21,6 +24,19 @@ collab.Client = function( editorSurface ) {
 	} );
 	this.ui.on( 'disconnect', function( e ) {
 		_this.disconnect();
+	} );
+
+
+};
+
+collab.Client.requestValidationToken = function( callback ) {
+	var settings = collab.settings;
+	var tokenUrl = settings.authUrl + '&mode=generate';
+	console.log(callback);
+	$.get( tokenUrl, function( res ) {
+		console.log( res );
+		var token = res.TokenValidationResponse.token;
+		callback( token );
 	} );
 };
 
@@ -42,11 +58,15 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 			socket.on( 'connection', function() {
 				// callbacks.authenticate( 'upstream' ); Deferred
 				// TODO: User has to be handled using the MW auth
-				socket.emit( 'client_connect', { user: _this.userName, title: _this.docTitle } );
 				_this.isConnected = true;
 				responseCallback( {
 					success: true,
 					message: 'Connected.'
+				} );
+
+				// Send an authentication request
+				collab.Client.requestValidationToken( function( token ) {
+					socket.emit( 'client_auth', { userName: _this.userName, validationToken: token } );
 				} );
 			} );
 		}
@@ -80,12 +100,13 @@ collab.Client.prototype.disconnect = function() {
 collab.Client.prototype.bindIOEvents = function( callbacksObj ) {
 	var io_socket = this.socket;
 	var ui = this.ui;
+
 	io_socket.on( 'new_transaction', function( data ) {
 		callbacksObj.newTransaction( data );
 	} );
 
 	io_socket.on( 'client_auth', function( data ) {
-		callbacksObj.authenticate( 'downstream', data );
+		callbacksObj.authenticate( data );
 	} );
 
 	io_socket.on( 'client_connect', function( data ) {
@@ -99,14 +120,7 @@ collab.Client.prototype.bindIOEvents = function( callbacksObj ) {
 	} );
 
 	io_socket.on( 'document_transfer', function( data ) {
-		var firstLoad = false;
-		if( callbacksObj.listeners( 'new_transaction' ).length == 0 ) {
-			firstLoad = true;
-			callbacksObj.on( 'new_transaction', function( transactionData ) {
-				io_socket.emit( 'new_transaction', transactionData );
-			} );
-		}
-		callbacksObj.docTransfer( data, firstLoad );
+		callbacksObj.docTransfer( data );
 		ui.populateUsersList( data.users );
 	} );
 };
@@ -120,7 +134,7 @@ collab.Client.prototype.bindInternalEvents = function() {
 	var callbacksObj = this.callbacks;
 	var	 ui = this.ui;
 	var _this = this;
-
+	var io_socket = this.socket;
 	ui.on( 'disconnect', function() {
 		_this.disconnect();
 		callbacksObj.selfDisconnect();
@@ -132,5 +146,13 @@ collab.Client.prototype.bindInternalEvents = function() {
 
 	callbacksObj.on( 'enableEditing', function() {
 		ui.enableEditing();
+	} );
+
+	callbacksObj.on( 'new_transaction', function( transactionData ) {
+		io_socket.emit( 'new_transaction', transactionData );
+	} );
+
+	callbacksObj.on( 'client_connect', function( clientData ) {
+		io_socket.emit( 'client_connect', clientData );
 	} );
 };

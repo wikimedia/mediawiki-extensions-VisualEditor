@@ -49,29 +49,34 @@ CollaborationServer.prototype.listen = function() {
 CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
 	// Socket events are registered here
 	var io_socket = callbacksObj.socket;
-	io_socket.on( 'client_connect', function( data ) {
-		callbacksObj.clientConnection( data );
-	});
 	
 	io_socket.on( 'client_auth', function( data ) {
 		callbacksObj.authenticate( data );
-	});
+	} );
+
+	io_socket.on( 'client_connect', function( data ) {
+		callbacksObj.clientConnection( data );
+	} );
+
+	io_socket.on( 'document_transfer', function( data ) {
+		callbacksObj.documentTransfer( data );
+	} );
 
 	io_socket.on( 'disconnect', function( data ) {
 		callbacksObj.clientDisconnection( data );
-	});
+	} );
 
 	io_socket.on( 'client_disconnect', function( data ) {
 		callbacksObj.clientDisconnection( data );
-	});
+	} );
 	
 	io_socket.on( 'new_transaction', function( data ) {
 		callbacksObj.newTransaction( data );
-	});
+	} );
 
 	io_socket.on( 'document_save', function( data ) {
 		callbacksObj.saveDocument( data );
-	});
+	} );
 
 };
 

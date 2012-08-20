@@ -6,7 +6,8 @@
 
 var ve = require( './collab.ve.js' ).ve,
 	settings = require( '../settings.js' ).settings,
-	request = require( 'request');
+	request = require( 'request'),
+	crypto = require( 'crypto' );
 
 /**
  * @class
@@ -38,12 +39,13 @@ Session.generateID = function( params ) {
 	return hashOut;
 };
 
-Session.prototype.authenticate = function( userName, validationToken, callback ) {
+Session.authenticate = function( userName, validationToken, callback ) {
 	var authUrl = settings.authUrl;
-	var data = '&username=' + userName + '&token=' + validationToken;
+	var data = '&mode=verify&username=' + userName + '&token=' + validationToken;
 	var r = request( authUrl + data, function( error, response, body ) {
 		if( !error ) {
-			var result = body.TokenValidationResult.matches === 'true' ? true : false;
+			var jsonResponse = JSON.parse( body );
+			var result = jsonResponse.TokenValidationResponse.matches === 'true' ? true : false;
 			callback( result );
 		}
 	} ); 

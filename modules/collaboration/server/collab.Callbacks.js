@@ -1,6 +1,10 @@
 /**
  * This contains all the callbacks used for handling the server's Socket.IO events
  * Binds all the callback methods to a `callbacks` object which can be used as a module import
+ *
+ * The server creates a callback object for each connection.
+ * For each connection, the callback object would be responsible for operations for each IO event.
+ * Also, it emits IO events as and when required to send data to the client.
 **/
 
 var Session = require( './collab.Session.js' ).Session,
@@ -32,7 +36,20 @@ Callbacks.prototype.broadcast = function( event, args ) {
 Callbacks.prototype.authenticate = function( authData ) {
 	var ssID = Session.generateID( [ authData.userName,
 			authData.docTitle, this.server.docRoutes.length ] );
-	this.socket.emit( 'client_auth', { sessionID: ssID } );
+	var _this = this;
+ 	Session.authenticate( authData.userName, authData.validationToken, function( res ) {
+		if( res ) {
+			var authResponse = { sessionId: ssID };
+		}
+		else {
+			var authResponse = { error: 'Cannot Authenticate.' };
+		}
+		_this.socket.emit( 'client_auth', authResponse );
+	} );
+};
+
+Callbacks.prototype.documentTransfer = function( data ) {
+	
 };
 
 /**
@@ -42,30 +59,33 @@ Callbacks.prototype.authenticate = function( authData ) {
  * is not being edited then the document is parsed and new docRoute is created.
  *
  * @method
- * @param{Object} data Event data received from the server.
+ * @param{Object} data Event data received from the client.
 **/
 Callbacks.prototype.clientConnection = function( data ) {
-	var userID = data.user,
-		docTitle = data.title,
+	var userName = data.userName,
+		docTitle = data.docTitle,
 		docRoutes = this.server.docRoutes,
 		remoteSSID = data.ssid,
 		sessionRoute = null,
 		_this = this,
 		docHTML = '',
 		sessionDoc = null,
-		argAllowPublish = false;
+		argAllowPublish = false;	
 
 	var postDocInit = function() {
 		_this.sessionRoute = sessionRoute;
-		_this.session = new Session( sessionDoc, userID );
+		_this.session = new Session( sessionDoc, userName );
 		var routeCallbacks = sessionRoute.callbacks;
-		// Bind some session events here
+
+		// Bind some session events here	
 		_this.session.on( 'allowPublish', function( e ) {
+			// e receives true for allowing publishing and false for not allowing.
 			if( e ) {
 				sessionRoute.document.hasPublisher = true;
-			}			
+			}
 			else {
 				sessionRoute.document.hasPublisher = false;
+
 				for( cb in routeCallbacks ) {
 					var callback = routeCallbacks[ cb ];
 					if( callback.session.isPublisher == true ) {
@@ -93,7 +113,7 @@ Callbacks.prototype.clientConnection = function( data ) {
 			}(),
 			allowPublish: argAllowPublish
 		} );
-		_this.broadcast( 'client_connect', { userName: userID, isPublisher: argAllowPublish } );
+		_this.broadcast( 'client_connect', { userName: userName, isPublisher: argAllowPublish } );
 	};
 
 	var sessionRoute = this.server.lookupRoutes( docTitle );

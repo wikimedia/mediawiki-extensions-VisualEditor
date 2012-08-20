@@ -10,6 +10,31 @@ collab.Callbacks = function( client, socket ) {
 	ve.EventEmitter.call( this );
 
 	this.client = client;
+	var surfaceModel = client.editor.getModel();
+	var _this = this;
+
+	// Bind with surface model's transact event, so we can pick up new transactions
+	surfaceModel.on( 'transact', function( transaction ) {
+		// Don't proceed if the client is not connected
+		// Also, exit if the session cannot publish(in case,
+		// the session could publish earlier when the event listener was issued,
+		// and after reconnection it cannot).
+		if( !_this.client.isConnected || !_this.isPublisher ) {
+			return;
+		}
+
+		// Send the transaction if it originates locally; Not received from the server
+		if( !transaction.isBroadcasted ) {
+			// Inject transaction arguments before sending transaction data
+			var transactionData = {
+				args: {
+					publisherID: client.userName
+				},
+				transaction: transaction
+			};
+			_this.emit( 'new_transaction', transactionData );
+		}
+	} );
 };
 
 /**
@@ -18,29 +43,18 @@ collab.Callbacks = function( client, socket ) {
  * downstream mode when used as a callback for receiving authentication from server.
  *
  * @method
- * @param {String} direction upstream/downstream mode
  * @param {Object} authData Authentication data received from the server
 **/
-collab.Callbacks.prototype.authenticate = function( direction, authData ) {
+collab.Callbacks.prototype.authenticate = function( authData ) {
 	var socket = this.socket;
-	if( direction == 'upstream' ) {
-		// Upstream mode for sending auth info to the server
-		var user = mw.config.get( 'wgUserName' );
-		var docTitle = mw.config.get( 'wgPageName' );
-		if( user ) {
-			this.userName = user;
-			// Logged in; Proceed with authentication with server
-			this.emit( 'client_auth', { userName: user, docTitle: docTitle } );
-		}
-		else {
-			// For non-logged in users
-		}
-	}
-	else {
+	var userName = this.client.userName;
+	var docTitle = this.client.docTitle;
+	if( authData.sessionId ) {
 		// Downstream mode for receiving auth info from the server
-		var sessionID = authData.sessionID;
-		this.emit( 'client_connect', { userName: user, docTitle: docTitle,
-			sessionID: sessionID } );
+		var sessionId = authData.sessionId;
+		this.emit( 'client_connect', { userName: userName, docTitle: docTitle,
+			sessionId: sessionId } );
+		console.log(docTitle + ' sent');
 	}
 };
 
@@ -131,9 +145,8 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
  *
  * @method
  * @param{Object} docData Document related data received from the server.
- * @param{Boolean} firstLoad If docTransfer is happening for the first time.
 **/
-collab.Callbacks.prototype.docTransfer = function( docData, firstLoad ) {
+collab.Callbacks.prototype.docTransfer = function( docData ) {
 	var html = $('<div>' + docData.html + '</div>' );
 	var socket = this.socket,
 		client = this.client,
@@ -152,34 +165,7 @@ collab.Callbacks.prototype.docTransfer = function( docData, firstLoad ) {
 	this.loadDoc( data );
 
 	// Bind with surfaceModel's transact event
-	if( docData.allowPublish == true ) {
-		if( firstLoad == false ) {
-			return;
-		}
-		surfaceModel.on( 'transact', function( transaction ) {
-			// Don't proceed if the client is not connected
-			// Also, exit if the session cannot publish(in case,
-			// the session could publish earlier when the event listener was issued,
-			// and after reconnection it cannot).
-			if( !_this.client.isConnected || !_this.isPublisher ) {
-				return;
-			}
-
-			// Send the transaction if it originates locally; Not received from the server
-			if( !transaction.isBroadcasted ) {
-				// Inject transaction arguments before sending transaction data
-				var transactionData = {
-					args: {
-						publisherID: client.userName
-					},
-					transaction: transaction
-				};
-				_this.emit( 'new_transaction', transactionData );
-			}
-		} );
-	}
-
-	else {
+	if( docData.allowPublish !== true ) {
 		// Disable editing entirely
 		this.emit( 'disableEditing' );
 	}
