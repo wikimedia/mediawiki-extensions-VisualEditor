@@ -6,82 +6,56 @@
  */
 
 /**
- * DataModel annotation for a link.
+ * Generic link annotation.
+ *
+ * Represents <a> tags that don't have a specific type.
  *
  * @class
  * @constructor
  * @extends {ve.dm.Annotation}
+ * @param {HTMLElement} element
  */
-ve.dm.LinkAnnotation = function () {
-	// Inheritance
-	ve.dm.Annotation.call( this );
+ve.dm.LinkAnnotation = function VeDmLinkAnnotation( element ) {
+	// Parent constructor
+	ve.dm.Annotation.call( this, element );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.LinkAnnotation, ve.dm.Annotation );
 
 /* Static Members */
 
+ve.dm.LinkAnnotation.static.name = 'link';
+
+ve.dm.LinkAnnotation.static.matchTagNames = ['a'];
+
+/* Methods */
+
 /**
- * Converters.
+ * Get annotation data, especially the href of the link.
  *
- * @see {ve.dm.Converter}
- * @static
- * @member
+ * @method
+ * @param {HTMLElement} element
+ * @returns {Object} Annotation data, containing href property
  */
-ve.dm.LinkAnnotation.converters = {
-	'domElementTypes': ['a'],
-	'toDomElement': function ( subType, annotation ) {
-		var link = document.createElement( 'a' ), key, attributes;
-		// Restore html/* attributes
-		// TODO this should be done for all annotations, factor this out in the new API
-		attributes = annotation.data.htmlAttributes;
-		for ( key in attributes ) {
-			link.setAttribute( key, attributes[key] );
-		}
+ve.dm.LinkAnnotation.prototype.getAnnotationData = function( element ) {
+	return { 'href': element.getAttribute( 'href' ) };
+};
 
-		link.setAttribute( 'rel', 'mw:' + subType );
-		if ( subType === 'WikiLink' || subType === 'SimpleWikiLink') {
-			// Set href to /title
-			// FIXME article path should be configurable, currently Parsoid always uses '/'
-			// FIXME space -> _ is MW-specific
-			link.setAttribute( 'href', '/' + annotation.data.title.replace( / /g, '_' ) );
-		} else if ( subType === 'ExtLink' || subType === 'NumberedExtLink' || subType === 'UrlLink' ) {
-			// Set href directly
-			link.setAttribute( 'href', annotation.data.href );
-		}
-		return link;
-	},
-	'toDataAnnotation': function ( tag, element ) {
-		var rel = element.getAttribute( 'rel' ) || '',
-			subType = rel.split( ':' )[1] || 'unknown',
-			href = element.getAttribute( 'href' ),
-			retval = {
-				'type': 'link/' + subType,
-				'data': {}
-			},
-			i, attribute;
-		if ( subType === 'WikiLink' || subType === 'SimpleWikiLink' ) {
-			// Get title from href by stripping article path
-			// FIXME article path should be configurable, currently Parsoid always uses '/'
-			// FIXME _ -> space is MW-specific
-			retval.data.title = href.replace( /^\//, '' ).replace( /_/g, ' ' );
-		} else if ( subType === 'ExtLink' || subType === 'NumberedExtLink' || subType === 'UrlLink' ) {
-			retval.data.href = href;
-		}
-
-		// Preserve HTML attributes
-		// TODO this should be done for all annotations, factor this out in the new API
-		retval.data.htmlAttributes = {};
-		for ( i = 0; i < element.attributes.length; i++ ) {
-			attribute = element.attributes[i];
-			retval.data.htmlAttributes[attribute.name] = attribute.value;
-		}
-		return retval;
-	}
+/**
+ * Convert to an object with HTML element information.
+ *
+ * @method
+ * @returns {Object} HTML element information, including tag and attributes properties
+ */
+ve.dm.LinkAnnotation.prototype.toHTML = function () {
+	var parentResult = ve.dm.Annotation.prototype.toHTML.call( this );
+	parentResult.tag = 'a';
+	parentResult.attributes.href = this.data.href;
+	return parentResult;
 };
 
 /* Registration */
 
 ve.dm.annotationFactory.register( 'link', ve.dm.LinkAnnotation );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.LinkAnnotation, ve.dm.Annotation );

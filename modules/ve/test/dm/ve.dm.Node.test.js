@@ -9,10 +9,12 @@ QUnit.module( 've.dm.Node' );
 
 /* Stubs */
 
-ve.dm.NodeStub = function ( length, attributes ) {
-	// Inheritance
+ve.dm.NodeStub = function VeDmNodeStub( length, attributes ) {
+	// Parent constructor
 	ve.dm.Node.call( this, 'stub', length, attributes );
 };
+
+ve.inheritClass( ve.dm.NodeStub, ve.dm.Node );
 
 ve.dm.NodeStub.rules = {
 	'isWrapped': true,
@@ -22,8 +24,6 @@ ve.dm.NodeStub.rules = {
 };
 
 ve.dm.NodeStub.converters = null;
-
-ve.extendClass( ve.dm.NodeStub, ve.dm.Node );
 
 ve.dm.nodeFactory.register( 'stub', ve.dm.NodeStub );
 
@@ -62,7 +62,7 @@ QUnit.test( 'setLength', 2, function ( assert ) {
 			// Length can not be negative
 			node.setLength( -1 );
 		},
-		/^Length cannot be negative$/,
+		Error,
 		'throws exception if length is negative'
 	);
 } );

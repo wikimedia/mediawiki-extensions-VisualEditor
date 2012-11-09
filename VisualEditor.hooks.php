@@ -9,6 +9,9 @@
  */
 
 class VisualEditorHooks {
+	/** List of skins VisualEditor integration supports */
+	protected static $supportedSkins = array( 'vector', 'apex', 'monobook' );
+
 	/**
 	 * Adds VisualEditor JS to the output if in the correct namespace.
 	 *
@@ -18,19 +21,28 @@ class VisualEditorHooks {
 	 * @param $skin Skin
 	 */
 	public static function onBeforePageDisplay( &$output, &$skin ) {
-		global $wgTitle;
+		global $wgVisualEditorNamespaces;
 		if (
-			// Vector skin supported for now.
-			$skin->getSkinName() === 'vector' &&
+			$skin->getUser()->getOption( 'visualeditor-enable' ) &&
+			in_array( $skin->getSkinName(), self::$supportedSkins ) &&
 			(
 				// Article in the VisualEditor namespace
-				$wgTitle->getNamespace() === NS_VISUALEDITOR ||
+				in_array( $skin->getTitle()->getNamespace(), $wgVisualEditorNamespaces ) ||
 				// Special page action for an article in the VisualEditor namespace
-				$skin->getRelevantTitle()->getNamespace() === NS_VISUALEDITOR
+				in_array( $skin->getRelevantTitle()->getNamespace(), $wgVisualEditorNamespaces )
 			)
 		) {
 			$output->addModules( array( 'ext.visualEditor.viewPageTarget' ) );
 		}
+		return true;
+	}
+
+	public static function onGetPreferences( $user, &$preferences ) {
+		$preferences['visualeditor-enable'] = array(
+			'type' => 'toggle',
+			'label-message' => 'visualeditor-preference-enable',
+			'section' => 'editing/beta'
+		);
 		return true;
 	}
 
@@ -53,6 +65,7 @@ class VisualEditorHooks {
 				// QUnit plugin
 				've.qunit.js',
 				// VisualEditor Tests
+				've.test.js',
 				've.example.js',
 				've.Document.test.js',
 				've.Node.test.js',
@@ -72,6 +85,8 @@ class VisualEditorHooks {
 				'dm/ve.dm.Transaction.test.js',
 				'dm/ve.dm.TransactionProcessor.test.js',
 				'dm/ve.dm.Surface.test.js',
+				'dm/ve.dm.SurfaceFragment.test.js',
+				'dm/ve.dm.AnnotationFactory.test.js',
 				// VisualEditor ContentEditable Tests
 				'ce/ve.ce.test.js',
 				'ce/ve.ce.Document.test.js',

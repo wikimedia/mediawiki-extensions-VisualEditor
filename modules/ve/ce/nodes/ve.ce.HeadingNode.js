@@ -11,10 +11,10 @@
  * @class
  * @constructor
  * @extends {ve.ce.BranchNode}
- * @param model {ve.dm.HeadingNode} Model to observe
+ * @param {ve.dm.HeadingNode} model Model to observe
  */
-ve.ce.HeadingNode = function ( model ) {
-	// Inheritance
+ve.ce.HeadingNode = function VeCeHeadingNode( model ) {
+	// Parent constructor
 	ve.ce.BranchNode.call(
 		this, 'heading', model, ve.ce.BranchNode.getDomWrapper( model, 'level' )
 	);
@@ -22,6 +22,10 @@ ve.ce.HeadingNode = function ( model ) {
 	// Events
 	this.model.addListenerMethod( this, 'update', 'onUpdate' );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.HeadingNode, ve.ce.BranchNode );
 
 /* Static Members */
 
@@ -67,7 +71,3 @@ ve.ce.HeadingNode.prototype.onUpdate = function () {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'heading', ve.ce.HeadingNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.HeadingNode, ve.ce.BranchNode );

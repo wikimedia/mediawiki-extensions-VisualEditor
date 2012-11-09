@@ -11,21 +11,28 @@
  * @class
  * @abstract
  * @constructor
- * @extends {ve.BranchNode}
  * @extends {ve.dm.Node}
  * @param {String} type Symbolic name of node type
  * @param {ve.dm.Node[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.BranchNode = function ( type, children, attributes ) {
-	// Inheritance
-	ve.dm.Node.call( this, type, 0, attributes );
+ve.dm.BranchNode = function VeDmBranchNode( type, children, attributes ) {
+	// Mixin constructor
 	ve.BranchNode.call( this );
+
+	// Parent constructor
+	ve.dm.Node.call( this, type, 0, attributes );
 
 	if ( ve.isArray( children ) && children.length ) {
 		this.splice.apply( this, [0, 0].concat( children ) );
 	}
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.BranchNode, ve.dm.Node );
+
+ve.mixinClass( ve.dm.BranchNode, ve.BranchNode );
 
 /* Methods */
 
@@ -34,7 +41,7 @@ ve.dm.BranchNode = function ( type, children, attributes ) {
  *
  * @method
  * @param {ve.dm.BranchNode} childModel Item to add
- * @returns {Integer} New number of children
+ * @returns {Number} New number of children
  * @emits splice (index, 0, [childModel])
  * @emits update
  */
@@ -64,7 +71,7 @@ ve.dm.BranchNode.prototype.pop = function () {
  *
  * @method
  * @param {ve.dm.BranchNode} childModel Item to add
- * @returns {Integer} New number of children
+ * @returns {Number} New number of children
  * @emits splice (0, 0, [childModel])
  * @emits update
  */
@@ -93,13 +100,13 @@ ve.dm.BranchNode.prototype.shift = function () {
  * Adds and removes nodes from this node's children.
  *
  * @method
- * @param {Integer} index Index to remove and or insert nodes at
- * @param {Integer} howmany Number of nodes to remove
+ * @param {Number} index Index to remove and or insert nodes at
+ * @param {Number} howmany Number of nodes to remove
  * @param {ve.dm.BranchNode} [...] Variadic list of nodes to insert
  * @returns {ve.dm.BranchNode[]} Removed nodes
  * @emits splice (index, howmany, [...])
  */
-ve.dm.BranchNode.prototype.splice = function ( index, howmany ) {
+ve.dm.BranchNode.prototype.splice = function () {
 	var i,
 		length,
 		removals,
@@ -124,7 +131,3 @@ ve.dm.BranchNode.prototype.splice = function ( index, howmany ) {
 	this.emit.apply( this, ['splice'].concat( args ) );
 	return removals;
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.BranchNode, ve.BranchNode, ve.dm.Node );

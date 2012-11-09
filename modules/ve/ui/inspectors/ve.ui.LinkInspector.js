@@ -1,4 +1,4 @@
-/*global mw*/
+/*global mw */
 
 /**
  * VisualEditor user interface LinkInspector class.
@@ -12,103 +12,112 @@
  *
  * @class
  * @constructor
- * @param {ve.ui.Toolbar} toolbar
+ * @extends {ve.ui.Inspector}
+ * @param context
  */
-ve.ui.LinkInspector = function ( toolbar, context ) {
-	// Inheritance
-	ve.ui.Inspector.call( this, toolbar, context );
+ve.ui.LinkInspector = function VeUiLinkInspector( context ) {
+	var inspector = this;
+
+	// Parent constructor
+	ve.ui.Inspector.call( this, context );
 
 	// Properties
-	this.$clearButton = $( '<div class="es-inspector-button es-inspector-clearButton"></div>', context.inspectorDoc )
-		.prependTo( this.$ );
-	this.$.prepend(
-		$( '<div class="es-inspector-title"></div>', context.inspectorDoc )
-			.text( ve.msg( 'visualeditor-linkinspector-title' ) )
-	);
-	this.$locationLabel = $( '<label>', context.inspectorDoc )
-		.text( ve.msg( 'visualeditor-linkinspector-label-pagetitle' ) )
-		.appendTo( this.$form );
-	this.$locationInput = $( '<input type="text">', context.inspectorDoc ).appendTo( this.$form );
+	this.context = context;
 	this.initialValue = null;
+	this.$clearButton = $(
+		'<div class="ve-ui-inspector-button ve-ui-inspector-clearButton ve-ui-icon-clear"></div>',
+		context.frameView.doc
+	);
+	this.$title = $( '<div class="ve-ui-inspector-title"></div>', context.frameView.doc )
+		.text( ve.msg( 'visualeditor-linkinspector-title' ) );
+	this.$locationInput = $(
+		'<input type="text" class="ve-ui-linkInspector-location" />',
+		context.frameView.doc
+	);
 
 	// Events
-	var inspector = this;
 	this.$clearButton.click( function () {
-		if ( $(this).is( '.es-inspector-button-disabled' ) ) {
+		if ( $( this ).hasClass( 've-ui-inspector-disabled' ) ) {
+			context.closeInspector( false );
 			return;
 		}
-
-		var hash,
-			surfaceModel = inspector.context.getSurfaceView().getModel(),
+		var i,
+			surfaceModel = inspector.context.getSurface().getModel(),
 			annotations = inspector.getAllLinkAnnotationsFromSelection();
 		// Clear all link annotations.
-		for ( hash in annotations ) {
-			surfaceModel.annotate( 'clear', annotations[hash] );
+		for ( i = 0; i < annotations.length; i++ ) {
+			surfaceModel.annotate( 'clear', annotations[i] );
 		}
 		inspector.$locationInput.val( '' );
 		inspector.context.closeInspector();
 	} );
-	this.$locationInput.on( 'mousedown keydown cut paste', function () {
+	this.$locationInput.on( 'change mousedown keydown cut paste', function () {
+		var $input = $( this );
 		setTimeout( function () {
-			if ( inspector.$locationInput.val() !== '' ) {
-				inspector.$acceptButton.removeClass( 'es-inspector-button-disabled' );
+			// Toggle disabled class
+			if (
+				$input.val() !== '' &&
+				$input.data( 'status' ) !== 'invalid'
+			) {
+				inspector.$.removeClass( 've-ui-inspector-disabled' );
 			} else {
-				inspector.$acceptButton.addClass( 'es-inspector-button-disabled' );
+				inspector.$.addClass( 've-ui-inspector-disabled' );
 			}
+
 		}, 0 );
 	} );
+
+	// DOM Changes
+	this.$.prepend( this.$title, this.$clearButton );
+	this.$form.append( this.$locationInput );
+
+	// FIXME: MediaWiki-specific
+	if ( 'mw' in window ) {
+		this.initMultiSuggest();
+	}
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ui.LinkInspector, ve.ui.Inspector );
+
+/* Static properties */
+
+ve.ui.LinkInspector.static.icon = 'link';
+
+ve.ui.LinkInspector.static.typePattern = /^link\/MW(in|ex)ternal$/;
 
 /* Methods */
 
 ve.ui.LinkInspector.prototype.getAllLinkAnnotationsFromSelection = function () {
-	var surfaceView = this.context.getSurfaceView(),
+	var surfaceView = this.context.getSurface().getView(),
 		surfaceModel = surfaceView.getModel(),
-		documentModel = surfaceModel.getDocument(),
-		annotations,
-		linkAnnotations = {};
-
-		annotations = documentModel.getAnnotationsFromRange( surfaceModel.getSelection(), true );
-		// XXX: '.' is not escaped, is the '.*' part redundant?
-		linkAnnotations = ve.dm.Document.getMatchingAnnotations ( annotations,  /^link\//  );
-		if ( !ve.isEmptyObject( linkAnnotations ) ) {
-			return linkAnnotations;
-		}
-
-	return null;
+		documentModel = surfaceModel.getDocument();
+	return documentModel
+		.getAnnotationsFromRange( surfaceModel.getSelection() )
+		.getAnnotationsByName( this.constructor.static.typePattern )
+		.get();
 };
 
-ve.ui.LinkInspector.prototype.getFirstLinkAnnotation = function ( annotations ) {
-	var hash;
-	for ( hash in annotations ) {
+/**
+ * Gets the first link annotation within the selection.
+ *
+ * @method
+ * @returns {ve.Annotation|null} First link annotation object or null if none is found
+ */
+ve.ui.LinkInspector.prototype.getFirstLinkAnnotation = function () {
+	var i, len,
+		annotations = this.getAllLinkAnnotationsFromSelection();
+	for ( i = 0, len = annotations.length; i < len; i++ ) {
 		// Use the first one with a recognized type (there should only be one, this is just in case)
 		if (
-			annotations[hash].type === 'link/wikiLink' ||
-			annotations[hash].type === 'link/extLink'
+			annotations[i] instanceof ve.dm.MWInternalLinkAnnotation ||
+			annotations[i] instanceof ve.dm.MWExternalLinkAnnotation
 		) {
-			return annotations[hash];
+			return annotations[i];
 		}
 	}
 	return null;
-};
-
-// TODO: This should probably be somewhere else but I needed this here for now.
-ve.ui.LinkInspector.prototype.getSelectionText = function () {
-	var i,
-		surfaceView = this.context.getSurfaceView(),
-		surfaceModel = surfaceView.getModel(),
-		documentModel = surfaceModel.getDocument(),
-		data = documentModel.getData( surfaceModel.getSelection() ),
-		str = '',
-		max = Math.min( data.length, 255 );
-	for ( i = 0; i < max; i++ ) {
-		if ( ve.isArray( data[i] ) ) {
-			str += data[i][0];
-		} else if( typeof data[i] === 'string' ) {
-			str += data[i];
-		}
-	}
-	return str;
 };
 
 /*
@@ -117,11 +126,10 @@ ve.ui.LinkInspector.prototype.getSelectionText = function () {
  * OR unwrap outer whitespace from selection.
  */
 ve.ui.LinkInspector.prototype.prepareOpen = function () {
-	var	surfaceView = this.context.getSurfaceView(),
+	var surfaceView = this.context.getSurface().getView(),
 		surfaceModel = surfaceView.getModel(),
 		doc = surfaceModel.getDocument(),
-		annotations = this.getAllLinkAnnotationsFromSelection(),
-		annotation = this.getFirstLinkAnnotation( annotations ),
+		annotation = this.getFirstLinkAnnotation(),
 		selection = surfaceModel.getSelection(),
 		annotatedRange,
 		newSelection;
@@ -131,7 +139,6 @@ ve.ui.LinkInspector.prototype.prepareOpen = function () {
 
 	if ( annotation !== null ) {
 		annotatedRange = doc.getAnnotatedRangeFromSelection( newSelection, annotation );
-
 		// Adjust selection if it does not contain the annotated range
 		if ( selection.start > annotatedRange.start ||
 			 selection.end < annotatedRange.end
@@ -147,48 +154,51 @@ ve.ui.LinkInspector.prototype.prepareOpen = function () {
 };
 
 ve.ui.LinkInspector.prototype.onOpen = function () {
-	var	annotation = this.getFirstLinkAnnotation( this.getAllLinkAnnotationsFromSelection() ),
-		initialValue = '';
+	var annotation = this.getFirstLinkAnnotation(),
+		surfaceModel = this.context.getSurface().getModel(),
+		documentModel = surfaceModel.getDocument(),
+		selection = surfaceModel.getSelection().truncate( 255 ),
+		initialValue = documentModel.getText( selection );
+
 	if ( annotation === null ) {
-		this.$locationInput.val( this.getSelectionText() );
-		this.$clearButton.addClass( 'es-inspector-button-disabled' );
-	} else if ( annotation.type === 'link/wikiLink' ) {
+		this.$locationInput.val( initialValue );
+		this.$clearButton.addClass( 've-ui-inspector-disabled' );
+	} else if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
 		// Internal link
 		initialValue = annotation.data.title || '';
 		this.$locationInput.val( initialValue );
-		this.$clearButton.removeClass( 'es-inspector-button-disabled' );
+		this.$clearButton.removeClass( 've-ui-inspector-disabled' );
 	} else {
 		// External link
 		initialValue = annotation.data.href || '';
 		this.$locationInput.val( initialValue );
-		this.$clearButton.removeClass( 'es-inspector-button-disabled' );
+		this.$clearButton.removeClass( 've-ui-inspector-disabled' );
 	}
-
 	this.initialValue = initialValue;
 	if ( this.$locationInput.val().length === 0 ) {
-		this.$acceptButton.addClass( 'es-inspector-button-disabled' );
+		this.$.addClass( 've-ui-inspector-disabled' );
 	} else {
-		this.$acceptButton.removeClass( 'es-inspector-button-disabled' );
+		this.$.removeClass( 've-ui-inspector-disabled' );
 	}
 
-	setTimeout( ve.proxy( function () {
+	setTimeout( ve.bind( function () {
 		this.$locationInput.focus().select();
 	}, this ), 0 );
 };
 
 ve.ui.LinkInspector.prototype.onClose = function ( accept ) {
-	var surfaceView = this.context.getSurfaceView(),
+	var surfaceView = this.context.getSurface().getView(),
 		surfaceModel = surfaceView.getModel(),
-		annotations = this.getAllLinkAnnotationsFromSelection(),
+		linkAnnotations = this.getAllLinkAnnotationsFromSelection(),
 		target = this.$locationInput.val(),
-		hash, annotation;
+		i;
 	if ( accept ) {
 		if ( !target ) {
 			return;
 		}
 		// Clear link annotation if it exists
-		for ( hash in annotations ) {
-			surfaceModel.annotate( 'clear', annotations[hash] );
+		for ( i = 0; i < linkAnnotations.length; i++ ) {
+			surfaceModel.annotate( 'clear', linkAnnotations[i] );
 		}
 		surfaceModel.annotate( 'set', ve.ui.LinkInspector.getAnnotationForTarget( target ) );
 
@@ -198,20 +208,18 @@ ve.ui.LinkInspector.prototype.onClose = function ( accept ) {
 };
 
 ve.ui.LinkInspector.getAnnotationForTarget = function ( target ) {
-	var title;
+	var title, annotation;
 	// Figure out if this is an internal or external link
 	if ( target.match( /^(https?:)?\/\// ) ) {
 		// External link
-		return {
-			'type': 'link/extLink',
-			'data': { 'href': target }
-		};
+		annotation = new ve.dm.MWExternalLinkAnnotation();
+		annotation.data.href = target;
 	} else {
 		// Internal link
-		// TODO in the longer term we'll want to have autocompletion and existence&validity
-		// checks using AJAX
+		// TODO: In the longer term we'll want to have autocompletion and existence
+		// and validity checks using AJAX
 		try {
-			// FIXME mw dependency
+			// FIXME: MediaWiki-specific
 			title = new mw.Title( target );
 			if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
 				// File: or Category: link
@@ -221,13 +229,171 @@ ve.ui.LinkInspector.getAnnotationForTarget = function ( target ) {
 			}
 		} catch ( e ) { }
 
-		return {
-			'type': 'link/wikiLink',
-			'data': { 'title': target }
-		};
+		annotation = new ve.dm.MWInternalLinkAnnotation();
+		annotation.data.title = target;
 	}
+	return annotation;
 };
 
-/* Inheritance */
+ve.ui.LinkInspector.prototype.initMultiSuggest = function () {
+	var options,
+		inspector = this,
+		context = inspector.context,
+		$overlay = context.$overlay,
+		suggestionCache = {},
+		pageStatusCache = {},
+		api = new mw.Api();
+	function updateLocationStatus( status ) {
+		if ( status !== 'invalid' ) {
+			inspector.$.removeClass( 've-ui-inspector-disabled' );
+		} else {
+			inspector.$.addClass( 've-ui-inspector-disabled' );
+		}
+		inspector.$locationInput.data( 'status', status );
+	}
 
-ve.extendClass( ve.ui.LinkInspector, ve.ui.Inspector );
+	// Multi Suggest configuration.
+	options = {
+		'parent': $overlay,
+		'prefix': 've-ui',
+		// Disable CSS Ellipsis.
+		// Using MediaWiki jQuery.autoEllipsis() for center ellipsis.
+		'cssEllipsis': false,
+		// Build suggestion groups in order.
+		'suggestions': function ( params ) {
+			var groups = {},
+				results = params.results,
+				query = params.query,
+				modifiedQuery,
+				title,
+				prot;
+
+			// Add existing pages.
+			if ( results.length > 0 ) {
+				groups.existingPage = {
+					'label': ve.msg( 'visualeditor-linkinspector-suggest-existing-page' ),
+					'items': results,
+					'itemClass': 've-ui-suggest-item-existingPage'
+				};
+			}
+			// Run the query through the mw.Title object to handle correct capitalization,
+			// whitespace and and namespace alias/localization resolution.
+			try {
+				title = new mw.Title( query );
+				modifiedQuery = title.getPrefixedText();
+				// If page doesn't exist, add New Page group.
+				if ( ve.indexOf( modifiedQuery, results ) === -1 ) {
+					groups.newPage = {
+						'label': ve.msg( 'visualeditor-linkinspector-suggest-new-page' ),
+						'items': [modifiedQuery],
+						'itemClass': 've-ui-suggest-item-newPage'
+					};
+				}
+			} catch ( e ) {
+				// invalid input
+				ve.log( e );
+			}
+			// Add external
+			groups.externalLink = {
+				'label': ve.msg( 'visualeditor-linkinspector-suggest-external-link' ),
+				'items': [],
+				'itemClass': 've-ui-suggest-item-externalLink'
+			};
+			// Find a protocol and suggest an external link.
+			prot = query.match(
+				ve.init.platform.getExternalLinkUrlProtocolsRegExp()
+			);
+			if ( prot ) {
+				groups.externalLink.items = [query];
+			// No protocol, default to http
+			} else {
+				groups.externalLink.items = ['http://' + query];
+			}
+			return groups;
+		},
+		// Called on succesfull input.
+		'input': function ( callback ) {
+			var $input = $( this ),
+				query = $input.val(),
+				cKey = query.toLowerCase();
+
+			// Query page and set status data on the location input.
+			if ( pageStatusCache[query] !== undefined ) {
+				updateLocationStatus( pageStatusCache[query] );
+			} else {
+				api.get( {
+					'action': 'query',
+					'indexpageids': '',
+					'titles': query,
+					'converttitles': ''
+				} )
+				.done( function ( data ) {
+					var status, page;
+					if ( data.query ) {
+						page = data.query.pages[data.query.pageids[0]];
+						status = 'exists';
+						if ( page.missing !== undefined ) {
+							status = 'notexists';
+						} else if ( page.invalid !== undefined ) {
+							status = 'invalid';
+						}
+					}
+					// Cache the status of the link query.
+					pageStatusCache[query] = status;
+					updateLocationStatus( status );
+				} );
+			}
+
+			// Set overlay position.
+			options.position();
+			// Build from cache.
+			if ( suggestionCache[cKey] !== undefined ) {
+				callback( {
+					'query': query,
+					'results': suggestionCache[cKey]
+				} );
+			} else {
+				// No cache, build fresh api request.
+				api.get( {
+					'action': 'opensearch',
+					'search': query
+				} )
+				.done( function ( data ) {
+					suggestionCache[cKey] = data[1];
+					// Build
+					callback( {
+						'query': query,
+						'results': data[1]
+					} );
+				} );
+			}
+		},
+		// Called when multiSuggest dropdown is updated.
+		'update': function () {
+			// Ellipsis
+			$( '.ve-ui-suggest-item' )
+				.autoEllipsis( {
+					'hasSpan': true,
+					'tooltip': true
+				} );
+		},
+		// Position the iframe overlay below the input.
+		'position': function () {
+			context.setOverlayPosition( {
+				'overlay': $overlay,
+				'el': inspector.$locationInput
+			} );
+		},
+		// Fired when a suggestion is selected.
+		'select': function () {
+			// Assume page suggestion is valid.
+			updateLocationStatus( 'valid' );
+		}
+	};
+	// Setup Multi Suggest
+	this.$locationInput.multiSuggest( options );
+};
+
+/* Registration */
+
+ve.ui.inspectorFactory.register( 'link', ve.ui.LinkInspector );

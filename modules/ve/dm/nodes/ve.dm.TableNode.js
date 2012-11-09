@@ -14,10 +14,14 @@
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.TableNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.TableNode = function VeDmTableNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'table', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.TableNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.TableNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': ['tableSection'],
 	'parentNodeTypes': null
 };
@@ -45,18 +50,16 @@ ve.dm.TableNode.rules = {
  */
 ve.dm.TableNode.converters = {
 	'domElementTypes': ['table'],
-	'toDomElement': function ( type, element ) {
+	'toDomElement': function () {
 		return document.createElement( 'table' );
 	},
-	'toDataElement': function ( tag, element ) {
-		return { 'type': 'table' };
+	'toDataElement': function () {
+		return {
+			'type': 'table'
+		};
 	}
 };
 
 /* Registration */
 
 ve.dm.nodeFactory.register( 'table', ve.dm.TableNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.TableNode, ve.dm.BranchNode );

@@ -8,81 +8,54 @@
 /**
  * Creates an ve.ui.AnnotationButtonTool object.
  *
+ * @abstract
  * @class
  * @constructor
  * @extends {ve.ui.ButtonTool}
  * @param {ve.ui.Toolbar} toolbar
- * @param {String} name
- * @param {Object} annotation
  */
-ve.ui.AnnotationButtonTool = function ( toolbar, name, title, data ) {
-	// Inheritance
-	ve.ui.ButtonTool.call( this, toolbar, name, title );
-
-	// Properties
-	this.annotation = data.annotation;
-	this.inspector = data.inspector;
-	this.active = false;
-};
-
-/* Methods */
-
-ve.ui.AnnotationButtonTool.prototype.onClick = function () {
-	var surfaceView = this.toolbar.getSurfaceView(),
-		surfaceModel = surfaceView.model,
-		selection = surfaceModel.getSelection();
-	if ( this.inspector ) {
-		if ( selection && selection.getLength() ) {
-			surfaceView.contextView.openInspector( this.inspector );
-		}
-	} else {
-		surfaceModel.annotate( this.active ? 'clear' : 'set', this.annotation );
-	}
-};
-
-ve.ui.AnnotationButtonTool.prototype.updateState = function ( annotations, nodes ) {
-	var matches = ve.dm.Document.getMatchingAnnotations(
-		annotations, new RegExp( '^' + this.annotation.type + '$' )
-	);
-	if ( ve.isEmptyObject( matches ) ) {
-		this.$.removeClass( 'es-toolbarButtonTool-down' );
-		this.active = false;
-	} else {
-		this.$.addClass( 'es-toolbarButtonTool-down' );
-		this.active = true;
-	}
-};
-
-/* Registration */
-
-ve.ui.Tool.tools.bold = {
-	'constructor': ve.ui.AnnotationButtonTool,
-	'name': 'bold',
-	'title': ve.msg( 'visualeditor-annotationbutton-bold-tooltip' ),
-	'data': {
-		'annotation': { 'type': 'textStyle/bold' }
-	}
-};
-
-ve.ui.Tool.tools.italic = {
-	'constructor': ve.ui.AnnotationButtonTool,
-	'name': 'italic',
-	'title': ve.msg( 'visualeditor-annotationbutton-italic-tooltip' ),
-	'data': {
-		'annotation': { 'type': 'textStyle/italic' }
-	}
-};
-
-ve.ui.Tool.tools.link = {
-	'constructor': ve.ui.AnnotationButtonTool,
-	'name': 'link',
-	'title': ve.msg( 'visualeditor-annotationbutton-link-tooltip' ),
-	'data': {
-		'annotation': { 'type': 'link/wikiLink', 'data': { 'title': '' } },
-		'inspector': 'link'
-	}
+ve.ui.AnnotationButtonTool = function VeUiAnnotationButtonTool( toolbar ) {
+	// Parent constructor
+	ve.ui.ButtonTool.call( this, toolbar );
 };
 
 /* Inheritance */
 
-ve.extendClass( ve.ui.AnnotationButtonTool, ve.ui.ButtonTool );
+ve.inheritClass( ve.ui.AnnotationButtonTool, ve.ui.ButtonTool );
+
+/* Static Members */
+
+/**
+ * Annotation name and data this button applies.
+ *
+ * @abstract
+ * @static
+ * @member
+ * @type {Object}
+ */
+ve.ui.AnnotationButtonTool.static.annotation = { 'name': '' };
+
+/* Methods */
+
+/**
+ * Responds to the button being clicked.
+ *
+ * @method
+ */
+ve.ui.AnnotationButtonTool.prototype.onClick = function () {
+	this.toolbar.getSurface().execute(
+		'annotation', 'toggle', this.constructor.static.annotation.name
+	);
+};
+
+/**
+ * Responds to the toolbar state being updated.
+ *
+ * @method
+ * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
+ * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
+ * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
+ */
+ve.ui.AnnotationButtonTool.prototype.onUpdateState = function ( nodes, full ) {
+	this.setActive( full.hasAnnotationWithName( this.constructor.static.annotation.name ) );
+};

@@ -11,72 +11,66 @@
  * @class
  * @abstract
  * @constructor
- * @extends {ve.EventEmitter}
+ * @extends {ve.Registry}
  */
-ve.Factory = function () {
-	// Inheritance
-	ve.EventEmitter.call( this );
+ve.Factory = function VeFactory() {
+	// Parent constructor
+	ve.Registry.call( this );
 
 	// Properties
 	this.registry = [];
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.Factory, ve.Registry );
 
 /* Methods */
 
 /**
  * Register a constructor with the factory.
  *
- * Arguments will be passed through directly to the constructor.
- * @see {ve.Factory.prototype.create}
- *
  * @method
- * @param {String} type Object type
+ * @param {String|String[]} name Symbolic name or list of symbolic names
  * @param {Function} constructor Constructor to use when creating object
- * @throws 'Constructor must be a function, cannot be a string'
+ * @throws 'constructor must be a function'
  */
-ve.Factory.prototype.register = function ( type, constructor ) {
+ve.Factory.prototype.register = function ( name, constructor ) {
 	if ( typeof constructor !== 'function' ) {
-		throw 'Constructor must be a function, cannot be a ' + typeof constructor;
+		throw new Error( 'constructor must be a function, cannot be a ' + typeof constructor );
 	}
-	this.registry[type] = constructor;
-	this.emit( 'register', type, constructor );
+	ve.Registry.prototype.register.call( this, name, constructor );
 };
 
 /**
- * Create an object based on a type.
+ * Create an object based on a name.
  *
- * Type is used to look up the constructor to use, while all additional arguments are passed to the
+ * Name is used to look up the constructor to use, while all additional arguments are passed to the
  * constructor directly, so leaving one out will pass an undefined to the constructor.
  *
- * WARNING: JavaScript does not allow using new and .apply together, so we just pass through 2
- * arguments here since we know we only need that many at this time. If we need more in the future
- * we should change this to suit that use case. Because of undefined pass through, there's no harm
- * in adding more.
- *
  * @method
- * @param {String} type Object type
- * @param {Mixed} [...] Up to 2 additional arguments to pass through to the constructor
- * @returns {Object} The new object
- * @throws 'Unknown object type'
+ * @param {string} name Object name.
+ * @param {mixed} [...] Arguments to pass to the constructor.
+ * @returns {Object} The new object.
+ * @throws 'Unknown object name'
  */
-ve.Factory.prototype.create = function ( type, a, b ) {
-	if ( type in this.registry ) {
-		return new this.registry[type]( a, b );
+ve.Factory.prototype.create = function ( name ) {
+	var args, obj,
+		constructor = this.registry[name];
+
+	if ( constructor === undefined ) {
+		throw new Error( 'No class registered by that name: ' + name );
 	}
-	throw 'Unknown object type: ' + type;
+
+	// Convert arguments to array and shift the first argument (name) off
+	args = Array.prototype.slice.call( arguments, 1 );
+
+	// We can't use the "new" operator with .apply directly because apply needs a
+	// context. So instead just do what "new" does: create an object that inherits from
+	// the constructor's prototype (which also makes it an "instanceof" the constructor),
+	// then invoke the constructor with the object as context, and return it (ignoring
+	// the constructor's return value).
+	obj = ve.createObject( constructor.prototype );
+	constructor.apply( obj, args );
+	return obj;
 };
-
-/**
- * Gets a constructor for a given type.
- *
- * @method
- * @param {String} type Object type
- * @returns {Function|undefined} Constructor for type
- */
-ve.Factory.prototype.lookup = function ( type ) {
-	return this.registry[type];
-};
-
-/* Inheritance */
-
-ve.extendClass( ve.Factory, ve.EventEmitter );

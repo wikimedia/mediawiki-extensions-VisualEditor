@@ -14,10 +14,14 @@
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.DefinitionListNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.DefinitionListNode = function VeDmDefinitionListNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'definitionList', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.DefinitionListNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.DefinitionListNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': ['definitionListItem'],
 	'parentNodeTypes': null
 };
@@ -45,18 +50,16 @@ ve.dm.DefinitionListNode.rules = {
  */
 ve.dm.DefinitionListNode.converters = {
 	'domElementTypes': ['dl'],
-	'toDomElement': function ( type, element ) {
+	'toDomElement': function () {
 		return document.createElement( 'dl' );
 	},
-	'toDataElement': function ( tag, element ) {
-		return { 'type': 'definitionList' };
+	'toDataElement': function () {
+		return {
+			'type': 'definitionList'
+		};
 	}
 };
 
 /* Registration */
 
 ve.dm.nodeFactory.register( 'definitionList', ve.dm.DefinitionListNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.DefinitionListNode, ve.dm.BranchNode );

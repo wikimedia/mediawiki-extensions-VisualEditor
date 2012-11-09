@@ -11,10 +11,10 @@
  * @class
  * @constructor
  * @extends {ve.ce.LeafNode}
- * @param model {ve.dm.ImageNode} Model to observe
+ * @param {ve.dm.ImageNode} model Model to observe.
  */
-ve.ce.ImageNode = function ( model ) {
-	// Inheritance
+ve.ce.ImageNode = function VeCeImageNode( model ) {
+	// Parent constructor
 	ve.ce.LeafNode.call( this, 'image', model, $( '<img>' ) );
 
 	// DOM Changes
@@ -26,14 +26,19 @@ ve.ce.ImageNode = function ( model ) {
 	// Events
 	this.model.addListenerMethod( this, 'update', 'onUpdate' );
 	/*
+	TODO: Remove this?
 	this.$.on('mousedown', function () {
 		return false;
 	});
 	*/
 
-	// Intialization
+	// Initialization
 	this.onUpdate();
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.ImageNode, ve.ce.LeafNode );
 
 /* Static Members */
 
@@ -69,7 +74,3 @@ ve.ce.ImageNode.prototype.onUpdate = function () {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'image', ve.ce.ImageNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.ImageNode, ve.ce.LeafNode );

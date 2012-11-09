@@ -11,12 +11,16 @@
  * @class
  * @constructor
  * @extends {ve.ce.BranchNode}
- * @param model {ve.dm.ParagraphNode} Model to observe
+ * @param {ve.dm.ParagraphNode} model Model to observe
  */
-ve.ce.ParagraphNode = function ( model ) {
-	// Inheritance
-	ve.ce.BranchNode.call( this, 'paragraph', model, $( '<p></p>' ) );
+ve.ce.ParagraphNode = function VeCeParagraphNode( model ) {
+	// Parent constructor
+	ve.ce.BranchNode.call( this, 'paragraph', model, $( '<p>' ) );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.ParagraphNode, ve.ce.BranchNode );
 
 /* Static Members */
 
@@ -34,7 +38,3 @@ ve.ce.ParagraphNode.rules = {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'paragraph', ve.ce.ParagraphNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.ParagraphNode, ve.ce.BranchNode );

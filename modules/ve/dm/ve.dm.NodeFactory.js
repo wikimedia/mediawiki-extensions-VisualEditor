@@ -12,10 +12,14 @@
  * @extends {ve.Factory}
  * @constructor
  */
-ve.dm.NodeFactory = function () {
-	// Inheritance
+ve.dm.NodeFactory = function VeDmNodeFactory() {
+	// Parent constructor
 	ve.Factory.call( this );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.NodeFactory, ve.Factory );
 
 /* Methods */
 
@@ -31,7 +35,7 @@ ve.dm.NodeFactory.prototype.getChildNodeTypes = function ( type ) {
 	if ( type in this.registry ) {
 		return this.registry[type].rules.childNodeTypes;
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
 /**
@@ -46,7 +50,7 @@ ve.dm.NodeFactory.prototype.getParentNodeTypes = function ( type ) {
 	if ( type in this.registry ) {
 		return this.registry[type].rules.parentNodeTypes;
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
 /**
@@ -64,7 +68,7 @@ ve.dm.NodeFactory.prototype.canNodeHaveChildren = function ( type ) {
 		var types = this.registry[type].rules.childNodeTypes;
 		return types === null || ( ve.isArray( types ) && types.length > 0 );
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
 /**
@@ -81,7 +85,7 @@ ve.dm.NodeFactory.prototype.canNodeHaveGrandchildren = function ( type ) {
 			!this.registry[type].rules.canContainContent &&
 			!this.registry[type].rules.isContent;
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
 /**
@@ -96,7 +100,7 @@ ve.dm.NodeFactory.prototype.isNodeWrapped = function ( type ) {
 	if ( type in this.registry ) {
 		return this.registry[type].rules.isWrapped;
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
 /**
@@ -111,7 +115,7 @@ ve.dm.NodeFactory.prototype.canNodeContainContent = function ( type ) {
 	if ( type in this.registry ) {
 		return this.registry[type].rules.canContainContent;
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
 /**
@@ -126,12 +130,24 @@ ve.dm.NodeFactory.prototype.isNodeContent = function ( type ) {
 	if ( type in this.registry ) {
 		return this.registry[type].rules.isContent;
 	}
-	throw 'Unknown node type: ' + type;
+	throw new Error( 'Unknown node type: ' + type );
 };
 
-/* Inheritance */
-
-ve.extendClass( ve.dm.NodeFactory, ve.Factory );
+/**
+ * Checks if a given node has significant whitespace. Can only be true if canContainContent is
+ * also true.
+ *
+ * @method
+ * @param {String} type Node type
+ * @returns {Boolean} The node has significant whitespace
+ * @throws 'Unknown node type: {type}'
+ */
+ve.dm.NodeFactory.prototype.doesNodeHaveSignificantWhitespace = function ( type ) {
+	if ( type in this.registry ) {
+		return this.registry[type].rules.hasSignificantWhitespace;
+	}
+	throw new Error( 'Unknown node type: ' + type );
+};
 
 /* Initialization */
 

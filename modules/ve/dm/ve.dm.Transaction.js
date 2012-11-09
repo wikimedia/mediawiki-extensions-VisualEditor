@@ -11,9 +11,11 @@
  * @class
  * @constructor
  */
-ve.dm.Transaction = function () {
+ve.dm.Transaction = function VeDmTransaction() {
 	this.operations = [];
 	this.lengthDifference = 0;
+	this.applied = false;
+	this.changeMarkers = {};
 };
 
 /* Static Methods */
@@ -24,7 +26,7 @@ ve.dm.Transaction = function () {
  * @static
  * @method
  * @param {ve.dm.Document} doc Document to create transaction for
- * @param {Integer} offset Offset to insert at
+ * @param {Number} offset Offset to insert at
  * @param {Array} data Data to insert
  * @returns {ve.dm.Transaction} Transcation that inserts data
  */
@@ -82,7 +84,7 @@ ve.dm.Transaction.newFromRemoval = function ( doc, range ) {
 	selection = doc.selectNodes( range, 'covered' );
 	if ( selection.length === 0 ) {
 		// Empty selection? Something is wrong!
-		throw 'Invalid range, cannot remove from ' + range.start + ' to ' + range.end;
+		throw new Error( 'Invalid range, cannot remove from ' + range.start + ' to ' + range.end );
 	}
 	first = selection[0];
 	last = selection[selection.length - 1];
@@ -157,7 +159,7 @@ ve.dm.Transaction.newFromRemoval = function ( doc, range ) {
  * @static
  * @method
  * @param {ve.dm.Document} doc Document to create transaction for
- * @param {Integer} offset Offset of element
+ * @param {Number} offset Offset of element
  * @param {String} key Attribute name
  * @param {Mixed} value New value, or undefined to remove the attribute
  * @returns {ve.dm.Transaction} Transcation that changes an element
@@ -169,11 +171,11 @@ ve.dm.Transaction.newFromAttributeChange = function ( doc, offset, key, value ) 
 		data = doc.getData();
 	// Verify element exists at offset
 	if ( data[offset].type === undefined ) {
-		throw 'Can not set attributes to non-element data';
+		throw new Error( 'Can not set attributes to non-element data' );
 	}
 	// Verify element is not a closing
 	if ( data[offset].type.charAt( 0 ) === '/' ) {
-		throw 'Can not set attributes on closing element';
+		throw new Error( 'Can not set attributes on closing element' );
 	}
 	// Retain up to element
 	tx.pushRetain( offset );
@@ -197,7 +199,7 @@ ve.dm.Transaction.newFromAttributeChange = function ( doc, offset, key, value ) 
  *     'set': Adds annotation to all content in range
  *     'clear': Removes instances of annotation from content in range
  * @param {Object} annotation Annotation to set or clear
- * @returns {ve.dm.Transaction} Transcation that annotates content
+ * @returns {ve.dm.Transaction} Transaction that annotates content
  */
 ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation ) {
 	var covered,
@@ -220,7 +222,7 @@ ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation 
 		} else {
 			// Content
 			covered = doc.offsetContainsAnnotation( i, annotation );
-			if ( ( covered && method === 'set' ) || ( !covered  && method === 'clear' ) ) {
+			if ( ( covered && method === 'set' ) || ( !covered && method === 'clear' ) ) {
 				// Skip annotated content
 				if ( on ) {
 					tx.pushRetain( span );
@@ -258,7 +260,7 @@ ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation 
  * @param {ve.Range} range Range to convert
  * @param {String} type Symbolic name of element type to convert to
  * @param {Object} attr Attributes to initialize element with
- * @returns {ve.dm.Transaction} Transaction that annotates content
+ * @returns {ve.dm.Transaction} Transaction that converts content branches
  */
 ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, attr ) {
 	var i, selected, branch, branchOuterRange,
@@ -272,12 +274,18 @@ ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, 
 	// Add attributes to opening if needed
 	if ( ve.isPlainObject( attr ) ) {
 		opening.attributes = attr;
+	} else {
+		attr = {};
 	}
 	// Replace the wrappings of each content branch in the range
 	for ( i = 0; i < selection.length; i++ ) {
 		selected = selection[i];
 		if ( selected.node.isContent() ) {
 			branch = selected.node.getParent();
+			// Skip branches that are already of the target type and have identical attributes
+			if ( branch.getType() === type && ve.compareObjects( branch.getAttributes(), attr ) ) {
+				continue;
+			}
 			branchOuterRange = branch.getOuterRange();
 			// Don't convert the same branch twice
 			if ( branch === previousBranch ) {
@@ -362,7 +370,7 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 		// the range, so compensate for that
 		tx.pushRetain( range.start - unwrapOuter.length );
 	} else if ( range.start < unwrapOuter.length ) {
-		throw 'unwrapOuter is longer than the data preceding the range';
+		throw new Error( 'unwrapOuter is longer than the data preceding the range' );
 	}
 
 	// Replace the opening elements for the outer unwrap&wrap
@@ -371,8 +379,8 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 		unwrapOuterData = doc.data.slice( range.start - unwrapOuter.length, range.start );
 		for ( i = 0; i < unwrapOuterData.length; i++ ) {
 			if ( unwrapOuterData[i].type !== unwrapOuter[i].type ) {
-				throw 'Element in unwrapOuter does not match: expected ' +
-					unwrapOuter[i].type + ' but found ' + unwrapOuterData[i].type;
+				throw new Error( 'Element in unwrapOuter does not match: expected ' +
+					unwrapOuter[i].type + ' but found ' + unwrapOuterData[i].type );
 			}
 		}
 		// Instead of putting in unwrapOuter as given, put it in the
@@ -397,9 +405,9 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 						unwrapEachData = doc.data.slice( i, i + unwrapEach.length );
 						for ( j = 0; j < unwrapEachData.length; j++ ) {
 							if ( unwrapEachData[j].type !== unwrapEach[j].type ) {
-								throw 'Element in unwrapEach does not match: expected ' +
+								throw new Error( 'Element in unwrapEach does not match: expected ' +
 									unwrapEach[j].type + ' but found ' +
-									unwrapEachData[j].type;
+									unwrapEachData[j].type );
 							}
 						}
 						// Instead of putting in unwrapEach as given, put it in the
@@ -444,6 +452,22 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 /* Methods */
 
 /**
+ * Checks if transaction would make any actual changes if processed.
+ *
+ * There may be more sophisticated checks that can be done, like looking for things being replaced
+ * with identical content, but such transactions probably should not be created in the first place.
+ *
+ * @method
+ * @returns {Boolean} Transaction is no-op
+ */
+ve.dm.Transaction.prototype.isNoOp = function () {
+	return (
+		this.operations.length === 0 ||
+		( this.operations.length === 1 && this.operations[0].type === 'retain' )
+	);
+};
+
+/**
  * Gets a list of all operations.
  *
  * @method
@@ -457,11 +481,34 @@ ve.dm.Transaction.prototype.getOperations = function () {
  * Gets the difference in content length this transaction will cause if applied.
  *
  * @method
- * @returns {Integer} Difference in content length
+ * @returns {Number} Difference in content length
  */
 ve.dm.Transaction.prototype.getLengthDifference = function () {
 	return this.lengthDifference;
 };
+
+/**
+ * Checks whether this transaction has already been applied.
+ *
+ * A transaction that has been applied can be rolled back, at which point it will no longer be
+ * considered applied. In other words, this function returns false if the transaction can be
+ * committed, and true if the transaction can be rolled back.
+ *
+ * @method
+ * @returns {Boolean}
+ */
+ve.dm.Transaction.prototype.hasBeenApplied = function () {
+	return this.applied;
+};
+
+/**
+ * Toggle the 'applied' state of this transaction. Should only be called after committing or
+ * rolling back the transaction.
+ * @see {ve.dm.Transaction.prototype.hasBeenApplied}
+ */
+ve.dm.Transaction.prototype.toggleApplied = function () {
+	this.applied = !this.applied;
+}
 
 /**
  * Translate an offset based on a transaction.
@@ -473,25 +520,24 @@ ve.dm.Transaction.prototype.getLengthDifference = function () {
  * @param {Number} offset Offset in the linear model before the transaction has been processed
  * @returns {Number} Translated offset, as it will be after processing transaction
  */
-ve.dm.Transaction.prototype.translateOffset = function ( offset ) {
-	var i, cursor = 0, adjustment = 0, op;
-	if ( offset === 0 ) {
-		return 0;
-	}
+ve.dm.Transaction.prototype.translateOffset = function ( offset, reversed ) {
+	var i, cursor = 0, adjustment = 0, op, insertLength, removeLength;
 	for ( i = 0; i < this.operations.length; i++ ) {
 		op = this.operations[i];
 		if ( op.type === 'replace' ) {
-			adjustment += op.insert.length - op.remove.length;
-			if ( offset === cursor + op.remove.length ) {
+			insertLength = reversed ? op.remove.length : op.insert.length;
+			removeLength = reversed ? op.insert.length : op.remove.length;
+			adjustment += insertLength - removeLength;
+			if ( offset === cursor + removeLength ) {
 				// Offset points to right after the removal, translate it
 				return offset + adjustment;
-			} else if ( offset > cursor && offset < cursor + op.remove.length ) {
+			} else if ( offset >= cursor && offset < cursor + removeLength ) {
 				// The offset points inside of the removal
-				return cursor + op.remove.length + adjustment;
+				return cursor + removeLength + adjustment;
 			}
-			cursor += op.remove.length;
+			cursor += removeLength;
 		} else if ( op.type === 'retain' ) {
-			if ( offset > cursor && offset <= cursor + op.length ) {
+			if ( offset >= cursor && offset < cursor + op.length ) {
 				return offset + adjustment;
 			}
 			cursor += op.length;
@@ -511,20 +557,20 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset ) {
  * @param {ve.Range} range Range in the linear model before the transaction has been processed
  * @returns {ve.Range} Translated range, as it will be after processing transaction
  */
-ve.dm.Transaction.prototype.translateRange = function ( range ) {
-	return new ve.Range( this.translateOffset( range.from ), this.translateOffset( range.to ) );
+ve.dm.Transaction.prototype.translateRange = function ( range, reversed ) {
+	return new ve.Range( this.translateOffset( range.from, reversed ), this.translateOffset( range.to, reversed ) );
 };
 
 /**
  * Adds a retain operation.
  *
  * @method
- * @param {Integer} length Length of content data to retain
+ * @param {Number} length Length of content data to retain
  * @throws 'Invalid retain length, can not retain backwards: {length}'
  */
 ve.dm.Transaction.prototype.pushRetain = function ( length ) {
 	if ( length < 0 ) {
-		throw 'Invalid retain length, can not retain backwards:' + length;
+		throw new Error( 'Invalid retain length, can not retain backwards:' + length );
 	}
 	if ( length ) {
 		var end = this.operations.length - 1;
@@ -606,4 +652,69 @@ ve.dm.Transaction.prototype.pushStopAnnotating = function ( method, annotation )
 		'bias': 'stop',
 		'annotation': annotation
 	} );
+};
+
+/**
+ * Get the change markers for this transaction. Change markers are added using setChangeMarker().
+ *
+ * @returns {Object} { offset: { markerType: number } }
+ */
+ve.dm.Transaction.prototype.getChangeMarkers = function () {
+	return this.changeMarkers;
+};
+
+/**
+ * Store a change marker to mark a change made while applying the transaction. Markers are stored
+ * in the .internal.changed property of elements in the linear model, as well as in the Transaction
+ * that effected the changes.
+ *
+ * The purpose of storing change markers in the linear model is so the linmod->HTML converter can
+ * mark what has changed relative to the HTML we originally received. For that reason, change
+ * markers only track what has changed relative to the original state of the document. This means
+ * we avoid reporting changes that cancel each other out, where possible. For instance, if an
+ * element marked 'created' is changed, this doesn't result in an additional change marker.
+ * In particular, rolling back a transaction causes all change marking done by that transaction to
+ * be undone. For that reason, change markers are stored in the Transaction object as well, so it's
+ * easy to undo a transaction's markers when rolling back.
+ *
+ * Marker types:
+ * - 'created': This element was newly created and did not exist in the original document
+ * - 'attributes': This element's attributes have changed
+ * - 'content': This element's content changed (content-containing elements only)
+ * - 'annotations': The annotations within this element changed (content-containing elements only)
+ * - 'rebuilt': This element and its children/contents changed in some way, no details available
+ *
+ * Change markers are numbers, which are incremented when setting a marker and decremented when
+ * unsetting it. This is because the same event can occur multiple times for the same element, and
+ * we want to be able to keep track of whether all the changes have canceled each other out.
+ *
+ * @param {Number} offset Linear model offset (post-transaction) of the element to mark
+ * @param {String} marker Marker type
+ * @param {Number} [increment=1] Number to add to the change marker counter
+ */
+ve.dm.Transaction.prototype.setChangeMarker = function ( offset, marker, increment ) {
+	increment = increment || 1;
+	if ( this.changeMarkers[offset] === undefined ) {
+		this.changeMarkers[offset] = {};
+	}
+	if ( this.changeMarkers[offset].created ) {
+		// Can't set any other markers on a 'created' element
+		return;
+	}
+	if ( marker === 'created' ) {
+		// Clear other markers prior to setting 'created'
+		this.changeMarkers[offset] = {};
+	}
+	if ( this.changeMarkers[offset][marker] === undefined ) {
+		this.changeMarkers[offset][marker] = increment;
+	} else {
+		this.changeMarkers[offset][marker] += increment;
+	}
+};
+
+/**
+ * Clear all change markers.
+ */
+ve.dm.Transaction.prototype.clearChangeMarkers = function () {
+	this.changeMarkers = {};
 };

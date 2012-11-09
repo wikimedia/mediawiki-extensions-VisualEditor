@@ -11,15 +11,16 @@
  * @class
  * @abstract
  * @constructor
- * @extends {ve.LeafNode}
  * @extends {ve.ce.Node}
  * @param {String} type Symbolic name of node type
- * @param model {ve.dm.LeafNode} Model to observe
+ * @param {ve.dm.LeafNode} model Model to observe
  * @param {jQuery} [$element] Element to use as a container
  */
-ve.ce.LeafNode = function ( type, model, $element ) {
-	// Inheritance
+ve.ce.LeafNode = function VeCeLeafNode( type, model, $element ) {
+	// Mixin constructor
 	ve.LeafNode.call( this );
+
+	// Parent constructor
 	ve.ce.Node.call( this, type, model, $element );
 
 	// DOM Changes
@@ -30,4 +31,6 @@ ve.ce.LeafNode = function ( type, model, $element ) {
 
 /* Inheritance */
 
-ve.extendClass( ve.ce.LeafNode, ve.LeafNode, ve.ce.Node );
+ve.inheritClass( ve.ce.LeafNode, ve.ce.Node );
+
+ve.mixinClass( ve.ce.LeafNode, ve.LeafNode );

@@ -12,17 +12,24 @@
  *
  * @class
  * @constructor
+ * @extends {ve.EventEmitter}
  * @param {String} pageName Name of target page
  */
-ve.init.mw.Target = function ( pageName ) {
-	// Inheritance
+ve.init.mw.Target = function VeInitMwTarget( pageName, oldId ) {
+	// Parent constructor
 	ve.EventEmitter.call( this );
 
 	// Properties
 	this.pageName = pageName;
+	this.oldId = oldId;
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.apiUrl = mw.util.wikiScript( 'api' );
-	this.modules = ['ext.visualEditor.core', 'ext.visualEditor.specialMessages'];
+	this.modules = ['ext.visualEditor.core', 'ext.visualEditor.specialMessages']
+		.concat(
+			window.devicePixelRatio > 1 ?
+				['ext.visualEditor.viewPageTarget.icons-vector', 'ext.visualEditor.icons-vector'] :
+				['ext.visualEditor.viewPageTarget.icons-raster', 'ext.visualEditor.icons-raster']
+		);
 	this.loading = false;
 	this.saving = false;
 	this.dom = null;
@@ -31,6 +38,10 @@ ve.init.mw.Target = function ( pageName ) {
 		( window.DocumentTouch && document instanceof window.DocumentTouch )
 	);
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.init.mw.Target, ve.EventEmitter );
 
 /* Static Methods */
 
@@ -47,7 +58,7 @@ ve.init.mw.Target = function ( pageName ) {
  * @param {String} status Text status message
  * @emits loadError (null, message, null)
  */
-ve.init.mw.Target.onLoad = function ( response, status ) {
+ve.init.mw.Target.onLoad = function ( response ) {
 	var data = response['ve-parsoid'];
 	if ( !data ) {
 		this.loading = false;
@@ -61,7 +72,7 @@ ve.init.mw.Target.onLoad = function ( response, status ) {
 	} else {
 		this.dom = $( '<div>' ).html( data.parsed )[0];
 		// Everything worked, the page was loaded, continue as soon as the module is ready
-		mw.loader.using( this.modules, ve.proxy( ve.init.mw.Target.onReady, this ) );
+		mw.loader.using( this.modules, ve.bind( ve.init.mw.Target.onReady, this ) );
 	}
 };
 
@@ -111,7 +122,7 @@ ve.init.mw.Target.onLoadError = function ( response, text, exception ) {
  * @emits save (html)
  * @emits saveError (null, message, null)
  */
-ve.init.mw.Target.onSave = function ( response, status ) {
+ve.init.mw.Target.onSave = function ( response ) {
 	this.saving = false;
 	var data = response['ve-parsoid'];
 	if ( !data ) {
@@ -160,7 +171,7 @@ ve.init.mw.Target.onSaveError = function ( response, status, error ) {
  * @param {Function} callback Function to call when complete, accepts error and dom arguments
  * @returns {Boolean} Loading is now in progress
 */
-ve.init.mw.Target.prototype.load = function ( callback ) {
+ve.init.mw.Target.prototype.load = function () {
 	// Prevent duplicate requests
 	if ( this.loading ) {
 		return false;
@@ -175,6 +186,7 @@ ve.init.mw.Target.prototype.load = function ( callback ) {
 			'action': 've-parsoid',
 			'paction': 'parse',
 			'page': this.pageName,
+			'oldid': this.oldId,
 			'format': 'json'
 		},
 		'dataType': 'json',
@@ -182,8 +194,8 @@ ve.init.mw.Target.prototype.load = function ( callback ) {
 		// Wait up to 10 seconds before giving up
 		'timeout': 10000,
 		'cache': 'false',
-		'success': ve.proxy( ve.init.mw.Target.onLoad, this ),
-		'error': ve.proxy( ve.init.mw.Target.onLoadError, this )
+		'success': ve.bind( ve.init.mw.Target.onLoad, this ),
+		'error': ve.bind( ve.init.mw.Target.onLoadError, this )
 	} );
 	return true;
 };
@@ -205,13 +217,13 @@ ve.init.mw.Target.prototype.load = function ( callback ) {
  * @method
  * @param {HTMLElement} dom DOM to save
  * @param {Object} options Saving options
- * @param {String} options.summary Edit summary
- * @param {Boolean} options.minor Edit is a minor edit
- * @param {Boolean} options.watch Watch this page
+ *  - {String} summary Edit summary
+ *  - {Boolean} minor Edit is a minor edit
+ *  - {Boolean} watch Watch this page
  * @param {Function} callback Function to call when complete, accepts error and html arguments
  * @returns {Boolean} Saving is now in progress
 */
-ve.init.mw.Target.prototype.save = function ( dom, options, callback ) {
+ve.init.mw.Target.prototype.save = function ( dom, options ) {
 	// Prevent duplicate requests
 	if ( this.saving ) {
 		return false;
@@ -225,6 +237,7 @@ ve.init.mw.Target.prototype.save = function ( dom, options, callback ) {
 			'action': 've-parsoid',
 			'paction': 'save',
 			'page': this.pageName,
+			'oldid': this.oldId,
 			'html': $( dom ).html(),
 			'token': this.editToken,
 			'summary': options.summary,
@@ -235,12 +248,8 @@ ve.init.mw.Target.prototype.save = function ( dom, options, callback ) {
 		'type': 'POST',
 		// Wait up to 10 seconds before giving up
 		'timeout': 10000,
-		'success': ve.proxy( ve.init.mw.Target.onSave, this ),
-		'error': ve.proxy( ve.init.mw.Target.onSaveError, this )
+		'success': ve.bind( ve.init.mw.Target.onSave, this ),
+		'error': ve.bind( ve.init.mw.Target.onSaveError, this )
 	} );
 	return true;
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.init.mw.Target, ve.EventEmitter );

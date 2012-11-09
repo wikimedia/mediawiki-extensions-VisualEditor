@@ -11,15 +11,19 @@
  * @class
  * @extends {ve.Document}
  * @constructor
- * @param model {ve.dm.Document} Model to observe
+ * @param {ve.dm.Document} model Model to observe
  */
-ve.ce.Document = function ( model, surface ) {
-	// Inheritance
+ve.ce.Document = function VeCeDocument( model, surface ) {
+	// Parent constructor
 	ve.Document.call( this, new ve.ce.DocumentNode( model.getDocumentNode(), surface ) );
 
 	// Properties
 	this.model = model;
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.Document, ve.Document );
 
 /* Methods */
 
@@ -31,6 +35,7 @@ ve.ce.Document.prototype.getNodeFromOffset = function ( offset ) {
 	return node;
 };
 
-/* Inheritance */
-
-ve.extendClass( ve.ce.Document, ve.Document );
+ve.ce.Document.prototype.getSlugAtOffset = function ( offset ) {
+	var node = this.getNodeFromOffset( offset );
+	return node.getSlugAtOffset( offset );
+};

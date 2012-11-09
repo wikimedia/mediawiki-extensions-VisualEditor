@@ -13,11 +13,11 @@
  * @constructor
  * @extends {ve.Node}
  * @param {String} type Symbolic name of node type
- * @param {Integer} [length] Length of content data in document
+ * @param {Number} [length] Length of content data in document
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.Node = function ( type, length, attributes ) {
-	// Inheritance
+ve.dm.Node = function VeDmNode( type, length, attributes ) {
+	// Parent constructor
 	ve.Node.call( this, type );
 
 	// Properties
@@ -25,6 +25,10 @@ ve.dm.Node = function ( type, length, attributes ) {
 	this.attributes = attributes || {};
 	this.doc = undefined;
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.Node, ve.Node );
 
 /* Methods */
 
@@ -99,10 +103,49 @@ ve.dm.Node.prototype.isContent = function () {
 };
 
 /**
+ * Checks if this node has significant whitespace. Can only be true if canContainContent is
+ * also true.
+ *
+ * @method
+ * @returns {Boolean} Node has significant whitespace
+ */
+ve.dm.Node.prototype.hasSignificantWhitespace = function () {
+	return ve.dm.nodeFactory.doesNodeHaveSignificantWhitespace( this.type );
+};
+
+/**
+ * Checks if this node has an ancestor with given type and attributes.
+ *
+ * @method
+ * @returns {Boolean} Node is content
+ */
+ve.dm.Node.prototype.hasMatchingAncestor = function ( type, attributes ) {
+	var key,
+		node = this;
+	// Traverse up to matching node
+	while ( node && node.getType() !== type ) {
+		node = node.getParent();
+		// Stop at root
+		if ( node === null ) {
+			return false;
+		}
+	}
+	// Check attributes
+	if ( attributes ) {
+		for ( key in attributes ) {
+			if ( node.getAttribute( key ) !== attributes[key] ) {
+				return false;
+			}
+		}
+	}
+	return true;
+};
+
+/**
  * Gets the inner length.
  *
  * @method
- * @returns {Integer} Length of the node's contents
+ * @returns {Number} Length of the node's contents
  */
 ve.dm.Node.prototype.getLength = function () {
 	return this.length;
@@ -112,7 +155,7 @@ ve.dm.Node.prototype.getLength = function () {
  * Gets the outer length, including any opening/closing elements.
  *
  * @method
- * @returns {Integer} Length of the entire node
+ * @returns {Number} Length of the entire node
  */
 ve.dm.Node.prototype.getOuterLength = function () {
 	return this.length + ( this.isWrapped() ? 2 : 0 );
@@ -147,14 +190,14 @@ ve.dm.Node.prototype.getOuterRange = function () {
  * Sets the inner length.
  *
  * @method
- * @param {Integer} length Length of content
+ * @param {Number} length Length of content
  * @throws Invalid content length error if length is less than 0
  * @emits lengthChange (diff)
  * @emits update
  */
 ve.dm.Node.prototype.setLength = function ( length ) {
 	if ( length < 0 ) {
-		throw 'Length cannot be negative';
+		throw new Error( 'Length cannot be negative' );
 	}
 	// Compute length adjustment from old length
 	var diff = length - this.length;
@@ -173,7 +216,7 @@ ve.dm.Node.prototype.setLength = function ( length ) {
  * Adjust the length.
  *
  * @method
- * @param {Integer} adjustment Amount to adjust length by
+ * @param {Number} adjustment Amount to adjust length by
  * @throws Invalid adjustment error if resulting length is less than 0
  * @emits lengthChange (diff)
  * @emits update
@@ -188,7 +231,7 @@ ve.dm.Node.prototype.adjustLength = function ( adjustment ) {
  * If this node has no parent than the result will always be 0.
  *
  * @method
- * @returns {Integer} Offset of node
+ * @returns {Number} Offset of node
  */
 ve.dm.Node.prototype.getOffset = function () {
 	return this.root === this ? 0 : this.root.getOffsetFromNode( this );
@@ -205,13 +248,50 @@ ve.dm.Node.prototype.getAttribute = function ( key ) {
 };
 
 /**
- * Gets a reference to this node's attributes object
+ * Gets a reference to this node's attributes object.
  *
  * @method
  * @returns {Object} Attributes object (by reference)
  */
 ve.dm.Node.prototype.getAttributes = function () {
 	return this.attributes;
+};
+
+/**
+ * Checks if this node has certain attributes.
+ *
+ * If an array of keys is provided only the presence of the attributes will be checked. If an object
+ * with keys and values is provided both the presence of the attributes and their values will be
+ * checked. Comparison of values is done by casting to strings unless the strict argument is used.
+ *
+ * @method
+ * @param {String[]|Object} attributes Array of keys or object of keys and values
+ * @param {Boolean} strict Use strict comparison when checking if values match
+ * @returns {Boolean} Node has attributes
+ */
+ve.dm.Node.prototype.hasAttributes = function ( attributes, strict ) {
+	var key, i, len;
+	if ( ve.isPlainObject( attributes ) ) {
+		// Node must have all the required attributes
+		for ( key in attributes ) {
+			if (
+				!( key in this.attributes ) ||
+				( strict ?
+					attributes[key] !== this.attributes[key] :
+					String( attributes[key] ) !== String( this.attributes[key] )
+				)
+			) {
+				return false;
+			}
+		}
+	} else if ( ve.isArray( attributes ) ) {
+		for ( i = 0, len = attributes.length; i < len; i++ ) {
+			if ( !( attributes[i] in this.attributes ) ) {
+				return false;
+			}
+		}
+	}
+	return true;
 };
 
 /**
@@ -258,7 +338,3 @@ ve.dm.Node.prototype.canBeMergedWith = function ( node ) {
 	}
 	return true;
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.Node, ve.Node );

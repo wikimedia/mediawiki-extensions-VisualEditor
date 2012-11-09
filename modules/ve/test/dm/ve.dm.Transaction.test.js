@@ -32,7 +32,7 @@ function runConstructorTests( assert, constructor, cases ) {
 		} else if ( cases[msg].exception ) {
 			/*jshint loopfunc:true */
 			assert.throws( function () {
-				var tx = constructor.apply(
+				constructor.apply(
 					ve.dm.Transaction, cases[msg].args
 				);
 			}, cases[msg].exception, msg + ': throw exception' );
@@ -42,8 +42,9 @@ function runConstructorTests( assert, constructor, cases ) {
 
 /* Tests */
 
-QUnit.test( 'newFromInsertion', function ( assert ) {
-	var doc = new ve.dm.Document( ve.dm.example.data ),
+QUnit.test( 'newFromInsertion', 13, function ( assert ) {
+	var i, key,
+		doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
 		doc2 = new ve.dm.Document( [ { 'type': 'paragraph' }, { 'type': '/paragraph' } ] ),
 		cases = {
 		'paragraph before first element': {
@@ -205,12 +206,23 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 		// TODO test cases for (currently failing) unopened closings use case
 		// TODO analyze other possible cases (substrings of linmod data)
 	};
+	for ( key in cases ) {
+		for ( i = 0; i < cases[key].ops.length; i++ ) {
+			if ( cases[key].ops[i].remove ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].remove );
+			}
+			if ( cases[key].ops[i].insert ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].insert );
+			}
+		}
+	}
 	runConstructorTests( assert, ve.dm.Transaction.newFromInsertion, cases );
 } );
 
-QUnit.test( 'newFromRemoval', function ( assert ) {
-	var alienDoc = new ve.dm.Document( ve.dm.example.alienData ),
-		doc = new ve.dm.Document( ve.dm.example.data ),
+QUnit.test( 'newFromRemoval', 15, function ( assert ) {
+	var i, key,
+		alienDoc = new ve.dm.Document( ve.copyArray( ve.dm.example.alienData ) ),
+		doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
 		cases = {
 		'content in first element': {
 			'args': [doc, new ve.Range( 1, 3 )],
@@ -220,7 +232,7 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					'type': 'replace',
 					'remove': [
 						'a',
-						['b', { '{"type":"textStyle/bold"}': { 'type': 'textStyle/bold' } }]
+						['b', [ ve.dm.example.bold ]]
 					],
 					'insert': []
 				},
@@ -247,8 +259,8 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					'remove': [
 						{ 'type': 'heading', 'attributes': { 'level': 1 } },
 						'a',
-						['b', { '{"type":"textStyle/bold"}': { 'type': 'textStyle/bold' } }],
-						['c', { '{"type":"textStyle/italic"}': { 'type': 'textStyle/italic' } }],
+						['b', [ ve.dm.example.bold ]],
+						['c', [ ve.dm.example.italic ]],
 						{ 'type': '/heading' }
 					],
 					'insert': []
@@ -281,8 +293,8 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					'remove': [
 						{ 'type': 'heading', 'attributes': { 'level': 1 } },
 						'a',
-						['b', { '{"type":"textStyle/bold"}': { 'type': 'textStyle/bold' } }],
-						['c', { '{"type":"textStyle/italic"}': { 'type': 'textStyle/italic' } }],
+						['b', [ ve.dm.example.bold ]],
+						['c', [ ve.dm.example.italic ]],
 						{ 'type': '/heading' }
 					],
 					'insert': []
@@ -438,11 +450,21 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 			]
 		}
 	};
+	for ( key in cases ) {
+		for ( i = 0; i < cases[key].ops.length; i++ ) {
+			if ( cases[key].ops[i].remove ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].remove );
+			}
+			if ( cases[key].ops[i].insert ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].insert );
+			}
+		}
+	}
 	runConstructorTests( assert, ve.dm.Transaction.newFromRemoval, cases );
 } );
 
-QUnit.test( 'newFromAttributeChange', function ( assert ) {
-	var doc = new ve.dm.Document( ve.dm.example.data ),
+QUnit.test( 'newFromAttributeChange', 4, function ( assert ) {
+	var doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
 		cases = {
 		'first element': {
 			'args': [doc, 0, 'level', 2],
@@ -471,109 +493,110 @@ QUnit.test( 'newFromAttributeChange', function ( assert ) {
 		},
 		'non-element': {
 			'args': [doc, 1, 'level', 2],
-			'exception': /^Can not set attributes to non-element data$/
+			'exception': Error
 		},
 		'closing element': {
 			'args': [doc, 4, 'level', 2],
-			'exception': /^Can not set attributes on closing element$/
+			'exception': Error
 		}
 	};
 	runConstructorTests( assert, ve.dm.Transaction.newFromAttributeChange, cases );
 } );
 
-QUnit.test( 'newFromAnnotation', function ( assert ) {
-	var doc = new ve.dm.Document( ve.dm.example.data ),
+QUnit.test( 'newFromAnnotation', 4, function ( assert ) {
+	var bold = ve.dm.example.createAnnotation( ve.dm.example.bold ),
+		doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
 		cases = {
 		'over plain text': {
-			'args': [doc, new ve.Range( 1, 2 ), 'set', { 'type': 'textStyle/bold' }],
+			'args': [doc, new ve.Range( 1, 2 ), 'set', bold],
 			'ops': [
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'start',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'stop',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 59 }
 			]
 		},
 		'over annotated text': {
-			'args': [doc, new ve.Range( 1, 4 ), 'set', { 'type': 'textStyle/bold' }],
+			'args': [doc, new ve.Range( 1, 4 ), 'set', bold],
 			'ops': [
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'start',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'stop',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'start',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'stop',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 57 }
 			]
 		},
 		'over elements': {
-			'args': [doc, new ve.Range( 4, 9 ), 'set', { 'type': 'textStyle/bold' }],
+			'args': [doc, new ve.Range( 4, 9 ), 'set', bold],
 			'ops': [
 				{ 'type': 'retain', 'length': 61 }
 			]
 		},
 		'over elements and content': {
-			'args': [doc, new ve.Range( 3, 11 ), 'set', { 'type': 'textStyle/bold' }],
+			'args': [doc, new ve.Range( 3, 11 ), 'set', bold],
 			'ops': [
 				{ 'type': 'retain', 'length': 3 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'start',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'stop',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 6 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'start',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 1 },
 				{
 					'type': 'annotate',
 					'method': 'set',
 					'bias': 'stop',
-					'annotation': { 'type': 'textStyle/bold' }
+					'annotation': bold
 				},
 				{ 'type': 'retain', 'length': 50 }
 			]
@@ -582,8 +605,9 @@ QUnit.test( 'newFromAnnotation', function ( assert ) {
 	runConstructorTests( assert, ve.dm.Transaction.newFromAnnotation, cases );
 } );
 
-QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
-	var doc = new ve.dm.Document( ve.dm.example.data ),
+QUnit.test( 'newFromContentBranchConversion', 2, function ( assert ) {
+	var doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
+		i, key,
 		cases = {
 		'range inside a heading, convert to paragraph': {
 			'args': [doc, new ve.Range( 1, 2 ), 'paragraph'],
@@ -633,6 +657,16 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 			]
 		}
 	};
+	for ( key in cases ) {
+		for ( i = 0; i < cases[key].ops.length; i++ ) {
+			if ( cases[key].ops[i].remove ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].remove );
+			}
+			if ( cases[key].ops[i].insert ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].insert );
+			}
+		}
+	}
 	runConstructorTests(
 		assert,
 		ve.dm.Transaction.newFromContentBranchConversion,
@@ -640,11 +674,12 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 	);
 } );
 
-QUnit.test( 'newFromWrap', function ( assert ) {
-	var doc = new ve.dm.Document( ve.dm.example.data ),
+QUnit.test( 'newFromWrap', 8, function ( assert ) {
+	var i, key,
+		doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
 		cases = {
 		'changes a heading to a paragraph': {
-			'args': [doc, new ve.Range( 1, 4 ),  [ { 'type': 'heading', 'attributes': { 'level': 1 } } ], [ { 'type': 'paragraph' } ], [], []],
+			'args': [doc, new ve.Range( 1, 4 ), [ { 'type': 'heading', 'attributes': { 'level': 1 } } ], [ { 'type': 'paragraph' } ], [], []],
 			'ops': [
 				{ 'type': 'replace', 'remove': [ { 'type': 'heading', 'attributes': { 'level': 1 } } ], 'insert': [ { 'type': 'paragraph' } ] },
 				{ 'type': 'retain', 'length': 3 },
@@ -704,17 +739,27 @@ QUnit.test( 'newFromWrap', function ( assert ) {
 		},
 		'checks integrity of unwrapOuter parameter': {
 			'args': [doc, new ve.Range( 13, 32 ), [ { 'type': 'table' } ], [], [], []],
-			'exception': /^Element in unwrapOuter does not match: expected table but found list$/
+			'exception': Error
 		},
 		'checks integrity of unwrapEach parameter': {
 			'args': [doc, new ve.Range( 13, 32 ), [ { 'type': 'list' } ], [], [ { 'type': 'paragraph' } ], []],
-			'exception': /^Element in unwrapEach does not match: expected paragraph but found listItem$/
+			'exception': Error
 		},
 		'checks that unwrapOuter fits before the range': {
 			'args': [doc, new ve.Range( 1, 4 ), [ { 'type': 'listItem' }, { 'type': 'paragraph' } ], [], [], []],
-			'exception': /^unwrapOuter is longer than the data preceding the range$/
+			'exception': Error
 		}
 	};
+	for ( key in cases ) {
+		for ( i = 0; cases[key].ops && i < cases[key].ops.length; i++ ) {
+			if ( cases[key].ops[i].remove ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].remove );
+			}
+			if ( cases[key].ops[i].insert ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].insert );
+			}
+		}
+	}
 	runConstructorTests(
 		assert,
 		ve.dm.Transaction.newFromWrap,
@@ -733,9 +778,11 @@ QUnit.test( 'translateOffset', function ( assert ) {
 	tx.pushStartAnnotating( 'set', { 'type': 'textStyle/bold' } );
 	tx.pushRetain( 1 );
 	tx.pushReplace( ['h'], ['i', 'j', 'k', 'l', 'm'] );
+	tx.pushRetain( 2 );
+	tx.pushReplace( [], ['n', 'o', 'p'] );
 
 	mapping = {
-		0: 0,
+		0: 3,
 		1: 4,
 		2: 5,
 		3: 6,
@@ -747,16 +794,58 @@ QUnit.test( 'translateOffset', function ( assert ) {
 		9: 8,
 		10: 9,
 		11: 10,
-		12: 11,
-		13: 16
+		12: 16,
+		13: 16,
+		14: 17,
+		15: 21,
+		16: 22
 	};
-	QUnit.expect( 14 );
+	QUnit.expect( 17 );
 	for ( offset in mapping ) {
 		assert.strictEqual( tx.translateOffset( Number( offset ) ), mapping[offset] );
 	}
 } );
 
-QUnit.test( 'pushRetain', function ( assert ) {
+QUnit.test( 'translateOffsetReversed', function ( assert ) {
+	var tx, mapping, offset;
+	// Populate a transaction with bogus data
+	tx = new ve.dm.Transaction();
+	tx.pushReplace( [], ['a','b','c'] );
+	tx.pushRetain ( 5 );
+	tx.pushReplace( ['d', 'e', 'f', 'g'], [] );
+	tx.pushRetain( 2 );
+	tx.pushStartAnnotating( 'set', { 'type': 'textStyle/bold' } );
+	tx.pushRetain( 1 );
+	tx.pushReplace( ['h'], ['i', 'j', 'k', 'l', 'm'] );
+	tx.pushRetain( 2 );
+	tx.pushReplace( [], ['n', 'o', 'p'] );
+
+	mapping = {
+		0: 0,
+		1: 0,
+		2: 0,
+		3: 0,
+		4: 1,
+		5: 2,
+		6: 3,
+		7: 4,
+		8: 9,
+		9: 10,
+		10: 11,
+		11: 13,
+		12: 13,
+		13: 13,
+		14: 13,
+		15: 13,
+		16: 13
+	};
+	QUnit.expect( 17 );
+	for ( offset in mapping ) {
+		assert.strictEqual( tx.translateOffset( Number( offset ), true ), mapping[offset] );
+	}
+} );
+
+QUnit.test( 'pushRetain', 4, function ( assert ) {
 	var cases = {
 		'retain': {
 			'calls': [['pushRetain', 5]],
@@ -772,8 +861,8 @@ QUnit.test( 'pushRetain', function ( assert ) {
 	runBuilderTests( assert, cases );
 } );
 
-QUnit.test( 'pushReplace', function ( assert ) {
-	var cases = {
+QUnit.test( 'pushReplace', 16, function ( assert ) {
+	var i, key, cases = {
 		'insert': {
 			'calls': [
 				['pushReplace', [], [{ 'type': 'paragraph' }, 'a', 'b', 'c', { 'type': '/paragraph' }]]
@@ -893,10 +982,26 @@ QUnit.test( 'pushReplace', function ( assert ) {
 			'diff': 0
 		}
 	};
+	for ( key in cases ) {
+		for ( i = 0; i < cases[key].ops.length; i++ ) {
+			if ( cases[key].ops[i].remove ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].remove );
+			}
+			if ( cases[key].ops[i].insert ) {
+				ve.dm.example.preprocessAnnotations( cases[key].ops[i].insert );
+			}
+		}
+		for ( i = 0; i < cases[key].calls.length; i++ ) {
+			if ( cases[key].calls[i][0] === 'pushReplace' ) {
+				ve.dm.example.preprocessAnnotations( cases[key].calls[i][1] );
+				ve.dm.example.preprocessAnnotations( cases[key].calls[i][2] );
+			}
+		}
+	}
 	runBuilderTests( assert, cases );
 } );
 
-QUnit.test( 'pushReplaceElementAttribute', function ( assert ) {
+QUnit.test( 'pushReplaceElementAttribute', 4, function ( assert ) {
 	var cases = {
 		'replace element attribute': {
 			'calls': [
@@ -937,7 +1042,7 @@ QUnit.test( 'pushReplaceElementAttribute', function ( assert ) {
 	runBuilderTests( assert, cases );
 } );
 
-QUnit.test( 'push*Annotating', function ( assert ) {
+QUnit.test( 'push*Annotating', 8, function ( assert ) {
 	var cases = {
 		'start annotating': {
 			'calls': [

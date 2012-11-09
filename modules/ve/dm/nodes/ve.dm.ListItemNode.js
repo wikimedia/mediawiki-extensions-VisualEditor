@@ -14,10 +14,14 @@
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.ListItemNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.ListItemNode = function VeDmListItemNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'listItem', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.ListItemNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.ListItemNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': null,
 	'parentNodeTypes': ['list']
 };
@@ -45,18 +50,16 @@ ve.dm.ListItemNode.rules = {
  */
 ve.dm.ListItemNode.converters = {
 	'domElementTypes': ['li'],
-	'toDomElement': function ( type, element ) {
+	'toDomElement': function () {
 		return document.createElement( 'li' );
 	},
-	'toDataElement': function ( tag, element ) {
-		return { 'type': 'listItem' };
+	'toDataElement': function () {
+		return {
+			'type': 'listItem'
+		};
 	}
 };
 
 /* Registration */
 
 ve.dm.nodeFactory.register( 'listItem', ve.dm.ListItemNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.ListItemNode, ve.dm.BranchNode );

@@ -10,25 +10,27 @@
  *
  * @class
  * @constructor
- * @param from {Integer} Starting offset
- * @param to {Integer} Ending offset
- * @property from {Integer} Starting offset
- * @property to {Integer} Ending offset
- * @property start {Integer} Normalized starting offset
- * @property end {Integer} Normalized ending offset
+ * @param {Number} from Starting offset
+ * @param {Number} [to=from] Ending offset
+ * @property {Number} from Starting offset
+ * @property {Number} to Ending offset
+ * @property {Number} start Normalized starting offset
+ * @property {Number} end Normalized ending offset
  */
-ve.Range = function ( from, to ) {
+ve.Range = function VeRange( from, to ) {
 	this.from = from || 0;
 	this.to = typeof to === 'undefined' ? this.from : to;
 	this.normalize();
 };
+
+/* Static Methods */
 
 /**
  * Creates a new ve.Range object that's a translated version of another.
  *
  * @method
  * @param {ve.Range} range Range to base new range on
- * @param {Integer} distance Distance to move range by
+ * @param {Number} distance Distance to move range by
  * @returns {ve.Range} New translated range
  */
 ve.Range.newFromTranslatedRange = function ( range, distance ) {
@@ -45,7 +47,7 @@ ve.Range.newFromTranslatedRange = function ( range, distance ) {
 ve.Range.newCoveringRange = function ( ranges ) {
 	var minStart, maxEnd, i;
 	if ( !ranges || ranges.length === 0 ) {
-		throw 'newCoveringRange() requires at least one range';
+		throw new Error( 'newCoveringRange() requires at least one range' );
 	}
 	minStart = ranges[0].start;
 	maxEnd = ranges[0].end;
@@ -76,7 +78,7 @@ ve.Range.prototype.clone = function () {
  * Checks if an offset is within this range.
  *
  * @method
- * @param offset {Integer} Offset to check
+ * @param {Number} offset Offset to check
  * @returns {Boolean} If offset is within this range
  */
 ve.Range.prototype.containsOffset = function ( offset ) {
@@ -88,7 +90,7 @@ ve.Range.prototype.containsOffset = function ( offset ) {
  * Gets the length of the range.
  *
  * @method
- * @returns {Integer} Length of range
+ * @returns {Number} Length of range
  */
 ve.Range.prototype.getLength = function () {
 	return Math.abs( this.from - this.to );
@@ -135,4 +137,29 @@ ve.Range.prototype.flip = function () {
  */
 ve.Range.prototype.equals = function ( other ) {
 	return this.from === other.from && this.to === other.to;
+};
+
+/**
+ * Creates a new ve.Range object.
+ *
+ * @method
+ * @param {Number} Length of the new range.
+ * @returns {ve.Range} A new range.
+ */
+ve.Range.prototype.truncate = function ( length ) {
+	var diff = 0;
+	this.normalize();
+	if ( this.getLength() > length ) {
+		diff = this.getLength() - length;
+	}
+	return new ve.Range( this.from, this.to - diff );
+};
+
+/**
+ * Determines if Range is collapsed or not.
+ * @method
+ * @returns {Boolean}
+ */
+ve.Range.prototype.isCollapsed = function () {
+	return this.from === this.to;
 };

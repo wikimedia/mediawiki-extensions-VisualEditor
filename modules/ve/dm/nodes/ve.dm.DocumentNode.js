@@ -12,12 +12,15 @@
  * @constructor
  * @extends {ve.dm.BranchNode}
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
- * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.DocumentNode = function ( children, attributes ) {
-	// Inheritance
-	ve.dm.BranchNode.call( this, 'document', children, attributes );
+ve.dm.DocumentNode = function VeDmDocumentNode( children ) {
+	// Parent constructor
+	ve.dm.BranchNode.call( this, 'document', children );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.DocumentNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +35,7 @@ ve.dm.DocumentNode.rules = {
 	'isWrapped': false,
 	'isContent': false,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': null,
 	'parentNodeTypes': []
 };
@@ -44,7 +48,3 @@ ve.dm.DocumentNode.converters = null;
 ve.dm.nodeFactory.register( 'document', ve.dm.DocumentNode );
 
 // This is a special node, no converter registration is required
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.DocumentNode, ve.dm.BranchNode );

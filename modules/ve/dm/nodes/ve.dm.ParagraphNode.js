@@ -14,10 +14,14 @@
  * @param {ve.dm.LeafNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.ParagraphNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.ParagraphNode = function VeDmParagraphNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'paragraph', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.ParagraphNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.ParagraphNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': true,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': null,
 	'parentNodeTypes': null
 };
@@ -45,18 +50,16 @@ ve.dm.ParagraphNode.rules = {
  */
 ve.dm.ParagraphNode.converters = {
 	'domElementTypes': ['p'],
-	'toDomElement': function ( type, element ) {
+	'toDomElement': function () {
 		return document.createElement( 'p' );
 	},
-	'toDataElement': function ( tag, element ) {
-		return { 'type': 'paragraph' };
+	'toDataElement': function () {
+		return {
+			'type': 'paragraph'
+		};
 	}
 };
 
 /* Registration */
 
 ve.dm.nodeFactory.register( 'paragraph', ve.dm.ParagraphNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.ParagraphNode, ve.dm.BranchNode );

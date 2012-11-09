@@ -9,7 +9,7 @@ QUnit.module( 've.ce.NodeFactory' );
 
 /* Stubs */
 
-ve.ce.NodeFactoryNodeStub = function ( a, b ) {
+ve.ce.NodeFactoryNodeStub = function VeCeNodeFactoryNodeStub( a, b ) {
 	this.a = a;
 	this.b = b;
 };
@@ -26,7 +26,7 @@ QUnit.test( 'canNodeBeSplit', 2, function ( assert ) {
 	assert.throws( function () {
 			factory.canNodeBeSplit( 'node-factory-node-stub' );
 		},
-		/^Unknown node type: node-factory-node-stub$/,
+		Error,
 		'throws an exception when getting split rules for a node of an unregistered type'
 	);
 	factory.register( 'node-factory-node-stub', ve.ce.NodeFactoryNodeStub );

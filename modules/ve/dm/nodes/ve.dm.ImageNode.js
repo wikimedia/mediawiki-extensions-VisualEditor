@@ -11,13 +11,17 @@
  * @class
  * @constructor
  * @extends {ve.dm.LeafNode}
- * @param {Integer} [length] Length of content data in document
+ * @param {Number} [length] Length of content data in document
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.ImageNode = function ( length, attributes ) {
-	// Inheritance
+ve.dm.ImageNode = function VeDmImageNode( length, attributes ) {
+	// Parent constructor
 	ve.dm.LeafNode.call( this, 'image', 0, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.ImageNode, ve.dm.LeafNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.ImageNode.rules = {
 	'isWrapped': true,
 	'isContent': true,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': [],
 	'parentNodeTypes': null
 };
@@ -45,18 +50,16 @@ ve.dm.ImageNode.rules = {
  */
 ve.dm.ImageNode.converters = {
 	'domElementTypes': ['img'],
-	'toDomElement': function ( type, element ) {
+	'toDomElement': function () {
 		return document.createElement( 'img' );
 	},
-	'toDataElement': function ( tag, element ) {
-		return { 'type': 'image' };
+	'toDataElement': function () {
+		return {
+			'type': 'image'
+		};
 	}
 };
 
 /* Registration */
 
 ve.dm.nodeFactory.register( 'image', ve.dm.ImageNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.ImageNode, ve.dm.LeafNode );

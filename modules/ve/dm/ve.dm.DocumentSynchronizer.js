@@ -9,7 +9,7 @@
  * Creates an ve.dm.DocumentSynchronizer object.
  *
  * This object is a utility for collecting actions to be performed on the model tree in multiple
- * steps as the linear model is modified my a transaction processor and then processing those queued
+ * steps as the linear model is modified by a transaction processor and then processing those queued
  * actions when the transaction is done being processed.
  *
  * IMPORTANT NOTE: It is assumed that:
@@ -21,7 +21,7 @@
  * @constructor
  * @param {ve.dm.Document} doc Document to synchronize
  */
-ve.dm.DocumentSynchronizer = function ( doc ) {
+ve.dm.DocumentSynchronizer = function VeDmDocumentSynchronizer( doc ) {
 	// Properties
 	this.document = doc;
 	this.actionQueue = [];
@@ -55,9 +55,12 @@ ve.dm.DocumentSynchronizer.synchronizers = {};
  */
 ve.dm.DocumentSynchronizer.synchronizers.annotation = function ( action ) {
 	// Queue events for all leaf nodes covered by the range
-	// TODO test me
-	var i, selection = this.document.selectNodes( action.range, 'leaves' );
+	var i,
+		adjustedRange = ve.Range.newFromTranslatedRange( action.range, this.adjustment ),
+		selection = this.document.selectNodes( adjustedRange, 'leaves' );
 	for ( i = 0; i < selection.length; i++ ) {
+		// No tree synchronization needed
+		// Queue events
 		this.queueEvent( selection[i].node, 'annotation' );
 		this.queueEvent( selection[i].node, 'update' );
 	}
@@ -73,6 +76,8 @@ ve.dm.DocumentSynchronizer.synchronizers.annotation = function ( action ) {
  * @param {Object} action
  */
 ve.dm.DocumentSynchronizer.synchronizers.attributeChange = function ( action ) {
+	// No tree synchronization needed
+	// Queue events
 	this.queueEvent( action.node, 'attributeChange', action.key, action.from, action.to );
 	this.queueEvent( action.node, 'update' );
 };
@@ -87,9 +92,12 @@ ve.dm.DocumentSynchronizer.synchronizers.attributeChange = function ( action ) {
  * @param {Object} action
  */
 ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action ) {
+	// Apply length change to tree
 	action.node.adjustLength( action.adjustment );
+	// no update event needed, adjustLength causes an update event on its own
+	// FIXME however, any queued update event will still be emitted, resulting in a duplicate
+	// Update adjustment
 	this.adjustment += action.adjustment;
-	// no update needed, adjustLength causes an update event on its own
 };
 
 /**
@@ -107,26 +115,25 @@ ve.dm.DocumentSynchronizer.synchronizers.rebuild = function ( action ) {
 		adjustedOldRange = ve.Range.newFromTranslatedRange( action.oldRange, this.adjustment ),
 		selection = this.document.selectNodes( adjustedOldRange, 'siblings' );
 
-	if ( selection.length === 0 ) {
-		// WTF? Nothing to rebuild, I guess. Whatever.
-		return;
-	}
-	
-	if ( 'indexInNode' in selection[0] ) {
+	// If the document is empty, selection[0].node will be the document (so no parent)
+	// but we won't get indexInNode either. Detect this and use index=0 in that case.
+	if ( 'indexInNode' in selection[0] || !selection[0].node.getParent() ) {
 		// Insertion
 		parent = selection[0].node;
-		index = selection[0].indexInNode;
+		index = selection[0].indexInNode || 0;
 		numNodes = 0;
 	} else {
 		// Rebuild
-		firstNode = selection[0].node,
-		parent = firstNode.getParent(),
+		firstNode = selection[0].node;
+		parent = firstNode.getParent();
 		index = selection[0].index;
 		numNodes = selection.length;
 	}
+	// Perform rebuild in tree
 	this.document.rebuildNodes( parent, index, numNodes, adjustedOldRange.from,
 		action.newRange.getLength()
 	);
+	// Update adjustment
 	this.adjustment += action.newRange.getLength() - adjustedOldRange.getLength();
 };
 
@@ -186,7 +193,7 @@ ve.dm.DocumentSynchronizer.prototype.pushAttributeChange = function ( node, key,
  *
  * @method
  * @param {ve.dm.TextNode} node Node to resize
- * @param {Integer} adjustment Length adjustment to apply to the node
+ * @param {Number} adjustment Length adjustment to apply to the node
  */
 ve.dm.DocumentSynchronizer.prototype.pushResize = function ( node, adjustment ) {
 	this.actionQueue.push( {
@@ -227,11 +234,11 @@ ve.dm.DocumentSynchronizer.prototype.pushRebuild = function ( oldRange, newRange
  * @param {String} event Event name
  * @param {Mixed} [...] Additional arguments to be passed to the event when fired
  */
-ve.dm.DocumentSynchronizer.prototype.queueEvent = function ( node, event ) {
+ve.dm.DocumentSynchronizer.prototype.queueEvent = function ( node ) {
 	// Check if this is already queued
 	var
 		args = Array.prototype.slice.call( arguments, 1 ),
-		hash = $.toJSON( args );
+		hash = ve.getHash( args );
 
 	if ( !node.queuedEventHashes ) {
 		node.queuedEventHashes = {};
@@ -268,7 +275,7 @@ ve.dm.DocumentSynchronizer.prototype.synchronize = function () {
 		if ( action.type in ve.dm.DocumentSynchronizer.synchronizers ) {
 			ve.dm.DocumentSynchronizer.synchronizers[action.type].call( this, action );
 		} else {
-			throw 'Invalid action type ' + action.type;
+			throw new Error( 'Invalid action type ' + action.type );
 		}
 	}
 	// Emit events in the event queue

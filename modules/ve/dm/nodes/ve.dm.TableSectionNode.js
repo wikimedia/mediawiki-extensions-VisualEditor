@@ -14,10 +14,14 @@
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.TableSectionNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.TableSectionNode = function VeDmTableSectionNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'tableSection', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.TableSectionNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.TableSectionNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': ['tableRow'],
 	'parentNodeTypes': ['table']
 };
@@ -52,7 +57,7 @@ ve.dm.TableSectionNode.converters = {
 			'footer': document.createElement( 'tfoot' )
 		} )[element.attributes.style];
 	},
-	'toDataElement': function ( tag, element ) {
+	'toDataElement': function ( tag ) {
 		return ( {
 			'thead': { 'type': 'tableSection', 'attributes': { 'style': 'header' } },
 			'tbody': { 'type': 'tableSection', 'attributes': { 'style': 'body' } },
@@ -64,7 +69,3 @@ ve.dm.TableSectionNode.converters = {
 /* Registration */
 
 ve.dm.nodeFactory.register( 'tableSection', ve.dm.TableSectionNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.TableSectionNode, ve.dm.BranchNode );

@@ -7,20 +7,18 @@
 
 QUnit.module( 've.dm.Surface' );
 
-ve.dm.SurfaceStub = function ( data ) {
-	// Inheritance
-
+ve.dm.SurfaceStub = function VeDmSurfaceStub( data ) {
 	if ( data !== undefined ) {
-		this.dm = new ve.dm.Document ( data );
+		this.dm = new ve.dm.Document( data );
 	} else {
-		this.dm = new ve.dm.Document ( [{ 'type': 'paragraph' }, 'h', 'i', { 'type': '/paragraph' }] );
+		this.dm = new ve.dm.Document( [{ 'type': 'paragraph' }, 'h', 'i', { 'type': '/paragraph' }] );
 	}
+
+	// Inheritance
 	ve.dm.Surface.call( this, this.dm );
 };
 
-// Inheritance
-
-ve.extendClass( ve.dm.SurfaceStub, ve.dm.Surface );
+ve.inheritClass( ve.dm.SurfaceStub, ve.dm.Surface );
 
 // Tests
 
@@ -73,49 +71,44 @@ QUnit.test( 'annotate', 1, function ( assert ) {
 			[
 				[
 					'b',
-						{
-							'{"type":"textStyle/bold"}': {
-								'type': 'textStyle/bold'
-							}
-						}
+						[
+							ve.dm.example.bold
+						]
 				],
 				[
 					'o',
-						{
-							'{"type":"textStyle/bold"}': {
-								'type': 'textStyle/bold'
-							}
-						}
+						[
+							ve.dm.example.bold
+						]
 				],
 				[
 					'l',
-						{
-							'{"type":"textStyle/bold"}': {
-								'type': 'textStyle/bold'
-							}
-						}
+						[
+							ve.dm.example.bold
+						]
 				],
 				[
 					'd',
-						{
-							'{"type":"textStyle/bold"}': {
-								'type': 'textStyle/bold'
-							}
-						}
+						[
+							ve.dm.example.bold
+						]
 				]
 			],
 			'annotate': {
 				'method': 'set',
-				'annotation': { 'type': 'textStyle/bold' }
+				'annotation': ve.dm.example.bold
 			}
 		}
 	];
 
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
+		ve.dm.example.preprocessAnnotations( cases[i].data );
+		ve.dm.example.preprocessAnnotations( cases[i].expected );
 		surface = new ve.dm.SurfaceStub( cases[i].data );
 		surface.change( null, new ve.Range( 0, surface.getDocument().getData().length ) );
-		surface.annotate( cases[i].annotate.method, cases[i].annotate.annotation );
+		surface.annotate( cases[i].annotate.method,
+			ve.dm.example.createAnnotation( cases[i].annotate.annotation ) );
 		assert.deepEqual( surface.getDocument().getData(), cases[i].expected, cases[i].msg );
 	}
 } );

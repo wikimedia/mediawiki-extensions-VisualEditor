@@ -11,10 +11,10 @@
  * @class
  * @constructor
  * @extends {ve.ce.LeafNode}
- * @param model {ve.dm.AlienBlockNode} Model to observe
+ * @param {ve.dm.AlienBlockNode} model Model to observe.
  */
-ve.ce.AlienBlockNode = function ( model ) {
-	// Inheritance
+ve.ce.AlienBlockNode = function VeCeAlienBlockNode( model ) {
+	// Parent constructor
 	ve.ce.LeafNode.call( this, 'alienBlock', model );
 
 	// DOM Changes
@@ -24,9 +24,13 @@ ve.ce.AlienBlockNode = function ( model ) {
 	// Events
 	this.model.addListenerMethod( this, 'update', 'onUpdate' );
 
-	// Intialization
+	// Initialization
 	this.onUpdate();
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.AlienBlockNode, ve.ce.LeafNode );
 
 /* Static Members */
 
@@ -51,7 +55,3 @@ ve.ce.AlienBlockNode.prototype.onUpdate = function () {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'alienBlock', ve.ce.AlienBlockNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.AlienBlockNode, ve.ce.LeafNode );

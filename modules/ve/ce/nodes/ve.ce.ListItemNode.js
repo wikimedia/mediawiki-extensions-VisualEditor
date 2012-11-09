@@ -11,12 +11,16 @@
  * @class
  * @constructor
  * @extends {ve.ce.BranchNode}
- * @param model {ve.dm.ListItemNode} Model to observe
+ * @param {ve.dm.ListItemNode} model Model to observe
  */
-ve.ce.ListItemNode = function ( model ) {
-	// Inheritance
-	ve.ce.BranchNode.call( this, 'listItem', model, $( '<li></li>' ) );
+ve.ce.ListItemNode = function VeCeListItemNode( model ) {
+	// Parent constructor
+	ve.ce.BranchNode.call( this, 'listItem', model, $( '<li>' ) );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.ListItemNode, ve.ce.BranchNode );
 
 /* Static Members */
 
@@ -34,7 +38,3 @@ ve.ce.ListItemNode.rules = {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'listItem', ve.ce.ListItemNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.ListItemNode, ve.ce.BranchNode );

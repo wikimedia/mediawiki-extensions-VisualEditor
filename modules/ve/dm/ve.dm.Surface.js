@@ -13,28 +13,48 @@
  * @extends {ve.EventEmitter}
  * @param {ve.dm.Document} doc Document model to create surface for
  */
-ve.dm.Surface = function ( doc ) {
-	// Inheritance
+ve.dm.Surface = function VeDmSurface( doc ) {
+	// Parent constructor
 	ve.EventEmitter.call( this );
+
 	// Properties
 	this.documentModel = doc;
-	this.selection = null;
+	this.selection = new ve.Range( 0, 0 );
 	this.smallStack = [];
 	this.bigStack = [];
 	this.undoIndex = 0;
 	this.historyTrackingInterval = null;
 };
 
+/* Inheritance */
+
+ve.inheritClass( ve.dm.Surface, ve.EventEmitter );
+
 /* Methods */
 
+/**
+ * Start tracking state changes in history.
+ *
+ * @method
+ */
 ve.dm.Surface.prototype.startHistoryTracking = function () {
-	this.historyTrackingInterval = setInterval( ve.proxy( this.breakpoint, this ), 750 );
+	this.historyTrackingInterval = setInterval( ve.bind( this.breakpoint, this ), 750 );
 };
 
+/**
+ * Stop tracking state changes in history.
+ *
+ * @method
+ */
 ve.dm.Surface.prototype.stopHistoryTracking = function () {
 	clearInterval( this.historyTrackingInterval );
 };
 
+/**
+ * Removes all states from history.
+ *
+ * @method
+ */
 ve.dm.Surface.prototype.purgeHistory = function () {
 	this.selection = null;
 	this.smallStack = [];
@@ -42,12 +62,38 @@ ve.dm.Surface.prototype.purgeHistory = function () {
 	this.undoIndex = 0;
 };
 
+/**
+ * Gets a list of all history states.
+ *
+ * @method
+ * @returns {Array[]} List of transaction stacks
+ */
 ve.dm.Surface.prototype.getHistory = function () {
 	if ( this.smallStack.length > 0 ) {
 		return this.bigStack.slice( 0 ).concat( [{ 'stack': this.smallStack.slice(0) }] );
 	} else {
 		return this.bigStack.slice( 0 );
 	}
+};
+
+/**
+ * Checks if there is a state to redo.
+ *
+ * @method
+ * @returns {Boolean} Has a future state
+ */
+ve.dm.Surface.prototype.hasFutureState = function() {
+	return this.undoIndex > 0;
+};
+
+/**
+ * Checks if there is a state to undo.
+ *
+ * @method
+ * @returns {Boolean} Has a past state
+ */
+ve.dm.Surface.prototype.hasPastState = function() {
+	return this.bigStack.length - this.undoIndex > 0;
 };
 
 /**
@@ -71,28 +117,69 @@ ve.dm.Surface.prototype.getSelection = function () {
 };
 
 /**
+ * Gets a fragment from this document and selection.
+ *
+ * @method
+ * @param {ve.Range} [range] Range within target document, current selection used by default
+ * @param {Boolean} [noAutoSelect] Don't update the surface's selection when making changes
+ */
+ve.dm.Surface.prototype.getFragment = function ( range, noAutoSelect ) {
+	return new ve.dm.SurfaceFragment( this, range || this.selection, noAutoSelect );
+};
+
+/**
  * Applies a series of transactions to the content data and sets the selection.
  *
  * @method
- * @param {ve.dm.Transaction} transaction Transaction to apply to the document
- * @param {ve.Range} selection
+ * @param {ve.dm.Transaction|ve.dm.Transaction[]|null} transactions One or more transactions to
+ *     process, or null to process none
+ * @param {ve.Range|undefined} selection
  */
-ve.dm.Surface.prototype.change = function ( transaction, selection ) {
-	if ( transaction ) {
-		this.bigStack = this.bigStack.slice( 0, this.bigStack.length - this.undoIndex );
-		this.undoIndex = 0;
-		this.smallStack.push( transaction );
-		ve.dm.TransactionProcessor.commit( this.getDocument(), transaction );
+ve.dm.Surface.prototype.change = function ( transactions, selection ) {
+	var i, leftOffset, contentOffset, annotations;
+	if ( transactions ) {
+		if ( transactions instanceof ve.dm.Transaction ) {
+			transactions = [transactions];
+		}
+
+		for ( i = 0; i < transactions.length; i++ ) {
+			if ( !transactions[i].isNoOp() ) {
+				this.bigStack = this.bigStack.slice( 0, this.bigStack.length - this.undoIndex );
+				this.undoIndex = 0;
+				this.smallStack.push( transactions[i] );
+				ve.dm.TransactionProcessor.commit( this.getDocument(), transactions[i] );
+			}
+		}
 	}
 	if ( selection && ( !this.selection || !this.selection.equals ( selection ) ) ) {
 		selection.normalize();
 		this.selection = selection;
 		this.emit('select', this.selection.clone() );
 	}
-	if ( transaction ) {
-		this.emit( 'transact', transaction );
+	if ( transactions ) {
+		this.emit( 'transact', transactions );
 	}
-	this.emit( 'change', transaction, selection );
+
+	// Clear and add annotations to stack if insertingAnnotations isn't happening
+	if ( !this.insertingAnnotations ) {
+		leftOffset = this.getSelection().start - 1;
+		if ( leftOffset === -1 ) {
+			leftOffset = 0;
+		}
+		contentOffset = this.documentModel.getNearestContentOffset( leftOffset, -1 );
+		// contentOffset may be -1 if the document is empty
+		annotations = contentOffset > - 1 ?
+			this.documentModel.getAnnotationsFromOffset( contentOffset ) :
+			new ve.AnnotationSet();
+
+		// Reset insertAnnotations
+		this.documentModel.insertAnnotations = new ve.AnnotationSet();
+		this.documentModel.insertAnnotations.addSet( annotations );
+
+		this.emit( 'annotationChange' );
+	}
+
+	this.emit( 'change', transactions, selection );
 };
 
 /**
@@ -106,14 +193,29 @@ ve.dm.Surface.prototype.annotate = function ( method, annotation ) {
 	var tx,
 		selection = this.getSelection();
 	if ( selection.getLength() ) {
+		// Apply annotation immediately to selection
 		selection = this.getDocument().trimOuterSpaceFromRange( selection );
 		tx = ve.dm.Transaction.newFromAnnotation(
 			this.getDocument(), selection, method, annotation
 		);
 		this.change( tx, selection );
+	} else {
+		// Apply annotation to stack
+		if ( method === 'set' ) {
+			this.documentModel.insertAnnotations.push( annotation );
+		} else if ( method === 'clear' ) {
+			this.documentModel.insertAnnotations.remove( annotation );
+		}
 	}
+	this.emit( 'annotationChange' );
 };
 
+/**
+ * Sets a history state breakpoint.
+ *
+ * @method
+ * @param {ve.Range} selection New selection range
+ */
 ve.dm.Surface.prototype.breakpoint = function ( selection ) {
 	if ( this.smallStack.length > 0 ) {
 		this.bigStack.push( {
@@ -125,46 +227,55 @@ ve.dm.Surface.prototype.breakpoint = function ( selection ) {
 	}
 };
 
+/**
+ * Steps backwards in history.
+ *
+ * @method
+ * @returns {ve.Range} Selection or null if no further state could be reached
+ */
 ve.dm.Surface.prototype.undo = function () {
-	var diff, item, i, selection;
+	var item, i, transaction, selection;
 	this.breakpoint();
 	this.undoIndex++;
+
 	if ( this.bigStack[this.bigStack.length - this.undoIndex] ) {
-		diff = 0;
+		this.emit( 'lock' );
 		item = this.bigStack[this.bigStack.length - this.undoIndex];
-		for ( i = item.stack.length - 1; i >= 0; i-- ) {
-			this.documentModel.rollback( item.stack[i] );
-			diff += item.stack[i].lengthDifference;
-		}
 		selection = item.selection;
-		selection.end -= diff;
+
+		for ( i = item.stack.length - 1; i >= 0; i-- ) {
+			transaction = item.stack[i];
+			selection = transaction.translateRange( selection, true );
+			this.documentModel.rollback( item.stack[i] );
+		}
+		this.emit( 'unlock' );
 		this.emit( 'history' );
 		return selection;
 	}
 	return null;
 };
 
+/**
+ * Steps forwards in history.
+ *
+ * @method
+ * @returns {ve.Range} Selection or null if no further state could be reached
+ */
 ve.dm.Surface.prototype.redo = function () {
-	var selection, diff, item, i;
+	var selection, item, i;
 	this.breakpoint();
-	if ( this.undoIndex > 0 ) {
-		if ( this.bigStack[this.bigStack.length - this.undoIndex] ) {
-			diff = 0;
-			item = this.bigStack[this.bigStack.length - this.undoIndex];
-			for ( i = 0; i < item.stack.length; i++ ) {
-				this.documentModel.commit( item.stack[i] );
-				diff += item.stack[i].lengthDifference;
-			}
-			selection = item.selection;
-			selection.end += diff;
+
+	if ( this.undoIndex > 0 && this.bigStack[this.bigStack.length - this.undoIndex] ) {
+		this.emit( 'lock' );
+		item = this.bigStack[this.bigStack.length - this.undoIndex];
+		selection = item.selection;
+		for ( i = 0; i < item.stack.length; i++ ) {
+			this.documentModel.commit( item.stack[i] );
 		}
 		this.undoIndex--;
+		this.emit( 'unlock' );
 		this.emit( 'history' );
 		return selection;
 	}
 	return null;
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.Surface, ve.EventEmitter );

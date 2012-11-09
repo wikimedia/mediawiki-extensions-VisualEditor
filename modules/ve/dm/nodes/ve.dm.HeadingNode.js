@@ -14,10 +14,14 @@
  * @param {ve.dm.LeafNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.HeadingNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.HeadingNode = function VeDmHeadingNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'heading', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.HeadingNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.HeadingNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': true,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': null,
 	'parentNodeTypes': null
 };
@@ -55,7 +60,7 @@ ve.dm.HeadingNode.converters = {
 			6: document.createElement( 'h6' )
 		} )[element.attributes.level];
 	},
-	'toDataElement': function ( tag, element ) {
+	'toDataElement': function ( tag ) {
 		return ( {
 			'h1': { 'type': 'heading', 'attributes': { 'level': 1 } },
 			'h2': { 'type': 'heading', 'attributes': { 'level': 2 } },
@@ -70,7 +75,3 @@ ve.dm.HeadingNode.converters = {
 /* Registration */
 
 ve.dm.nodeFactory.register( 'heading', ve.dm.HeadingNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.HeadingNode, ve.dm.BranchNode );

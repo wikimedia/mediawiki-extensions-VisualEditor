@@ -11,12 +11,16 @@
  * @class
  * @constructor
  * @extends {ve.ce.BranchNode}
- * @param model {ve.dm.TableRowNode} Model to observe
+ * @param {ve.dm.TableRowNode} model Model to observe
  */
-ve.ce.TableRowNode = function ( model ) {
-	// Inheritance
-	ve.ce.BranchNode.call( this, 'tableRow', model, $( '<tr></tr>' ) );
+ve.ce.TableRowNode = function VeCeTableRowNode( model ) {
+	// Parent constructor
+	ve.ce.BranchNode.call( this, 'tableRow', model, $( '<tr>' ) );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.TableRowNode, ve.ce.BranchNode );
 
 /* Static Members */
 
@@ -34,7 +38,3 @@ ve.ce.TableRowNode.rules = {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'tableRow', ve.ce.TableRowNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.TableRowNode, ve.ce.BranchNode );

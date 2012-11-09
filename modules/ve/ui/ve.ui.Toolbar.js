@@ -10,132 +10,88 @@
  *
  * @class
  * @constructor
+ * @extends {ve.EventEmitter}
+ * @param {jQuery} $container
+ * @param {ve.Surface} surface
+ * @param {Array} config
  */
-ve.ui.Toolbar = function ( $container, surfaceView, config ) {
-	// Inheritance TODO: Do we still need it?
+ve.ui.Toolbar = function VeUiToolbar( $container, surface, config ) {
+	// Parent constructor
 	ve.EventEmitter.call( this );
-	if ( !surfaceView ) {
-		return;
-	}
-
-	// References for use in closures
-	var $window = $( window );
 
 	// Properties
-	this.surfaceView = surfaceView;
+	this.surface = surface;
 	this.$ = $container;
-	this.$groups = $( '<div class="es-toolbarGroups"></div>' ).prependTo( this.$ );
-	this.tools = [];
+	this.$groups = $( '<div class="ve-ui-toolbarGroups"></div>' );
+	this.config = config || {};
 
-	// Update tools on selection and all transactions.
-	this.surfaceView.model.on( 'change', ve.proxy( this.updateTools, this ) );
+	// Events
+	this.surface.getModel().on( 'annotationChange', ve.bind( this.onAnnotationChange, this ) );
 
-	this.config = config || [
-		{ 'name': 'history', 'items' : ['undo', 'redo'] },
-		{ 'name': 'textStyle', 'items' : ['format'] },
-		{ 'name': 'textStyle', 'items' : ['bold', 'italic', 'link', 'clear'] },
-		{ 'name': 'list', 'items' : ['number', 'bullet', 'outdent', 'indent'] }
-	];
+	// Initialization
+	this.$.prepend( this.$groups );
 	this.setup();
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ui.Toolbar, ve.EventEmitter );
 
 /* Methods */
 
 /**
- * Triggers update events on all tools.
+ * Gets the surface the toolbar controls.
+ *
+ * @method
+ * @returns {ve.Surface} Surface being controlled
+ */
+ve.ui.Toolbar.prototype.getSurface = function () {
+	return this.surface;
+};
+
+/**
+ * Responds to annotation changes on the surface.
+ *
+ * @method
+ * @emits "updateState" (nodes, full, partial)
+ * @emits "clearState"
+ */
+ve.ui.Toolbar.prototype.onAnnotationChange = function () {
+	var i, len, leafNodes,
+		fragment = this.surface.getModel().getFragment(),
+		nodes = [];
+
+	leafNodes = fragment.getLeafNodes();
+	for ( i = 0, len = leafNodes.length; i < len; i++ ) {
+		nodes.push( leafNodes[i].node );
+	}
+	this.emit( 'updateState', nodes, fragment.getAnnotations(), fragment.getAnnotations( true ) );
+};
+
+/**
+ * Initializes all tools and groups.
  *
  * @method
  */
-ve.ui.Toolbar.prototype.updateTools = function () {
-	var model = this.surfaceView.getModel(),
-		doc = model.getDocument(),
-		annotations,
-		nodes = [],
-		range = model.getSelection(),
-		startNode,
-		endNode,
-		tool = this,
-		i;
-
-	if ( range !== null ) {
-		if ( range.from === range.to ) {
-			nodes.push( doc.getNodeFromOffset( range.from ) );
-		} else {
-			startNode = doc.getNodeFromOffset( range.from );
-			endNode = doc.getNodeFromOffset ( range.end );
-
-			if(startNode.type === 'document' || endNode.type === 'document') {
-				// Clear state
-				for ( i = 0; i < this.tools.length; i++ ) {
-					this.tools[i].clearState();
-				}
-				return;
-			}
-
-			// These should be different, alas just in case.
-			if ( startNode === endNode ) {
-				nodes.push( startNode );
-			} else {
-				model.getDocument().getDocumentNode().traverseLeafNodes( function ( node ) {
-					nodes.push( node );
-					if( node === endNode ) {
-						return false;
-					}
-				}, startNode );
-			}
-		}
-
-		if ( range.getLength() > 0 ) {
-			annotations = doc.getAnnotationsFromRange( range );
-		} else {
-			// Clear context
-			tool.surfaceView.contextView.clear();
-			annotations = doc.getAnnotationsFromOffset(
-				doc.getNearestContentOffset( range.start - 1 )
-			);
-		}
-		// Update state
-		for ( i = 0; i < this.tools.length; i++ ) {
-			this.tools[i].updateState( annotations, nodes );
-		}
-	} else {
-		// Clear state
-		for ( i = 0; i < this.tools.length; i++ ) {
-			this.tools[i].clearState();
-		}
-	}
-};
-
-ve.ui.Toolbar.prototype.getSurfaceView = function () {
-	return this.surfaceView;
-};
-
 ve.ui.Toolbar.prototype.setup = function () {
-	var i, j, $group, tool, toolDefintion;
+	var i, j, group, $group, tool;
 	for ( i = 0; i < this.config.length; i++ ) {
-		$group = $( '<div>' )
-			.addClass( 'es-toolbarGroup' )
-			.addClass( 'es-toolbarGroup-' + this.config[i].name );
-		if ( this.config[i].label ) {
-			$group.append(
-				$( '<div>' ).addClass( 'es-toolbarLabel' ).html( this.config[i].label )
-			);
+		group = this.config[i];
+		// Create group
+		$group = $( '<div class="ve-ui-toolbarGroup"></div>' )
+			.addClass( 've-ui-toolbarGroup-' + group.name );
+		if ( group.label ) {
+			$group.append( $( '<div class="ve-ui-toolbarLabel"></div>' ).html( group.label ) );
 		}
-
-		for ( j = 0; j < this.config[i].items.length; j++ ) {
-			toolDefintion = ve.ui.Tool.tools[ this.config[i].items[j] ];
-			if ( toolDefintion ) {
-				tool = new toolDefintion.constructor(
-					this, toolDefintion.name, toolDefintion.title, toolDefintion.data
-				);
-				this.tools.push( tool );
-				$group.append( tool.$ );
+		// Add tools
+		for ( j = 0; j < group.items.length; j++ ) {
+			tool = ve.ui.toolFactory.create( group.items[j], this );
+			if ( !tool ) {
+				throw new Error( 'Unknown tool: ' + group.items[j] );
 			}
+			$group.append( tool.$ );
 		}
-
+		// Append group
 		this.$groups.append( $group );
 	}
-
 };
-
-ve.extendClass( ve.ui.Toolbar, ve.EventEmitter );

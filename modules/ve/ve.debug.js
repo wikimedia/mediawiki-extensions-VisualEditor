@@ -1,3 +1,4 @@
+/*global console */
 /**
  * VisualEditor debugging methods.
  *
@@ -5,26 +6,30 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* Static variables */
+
+ve.debug = true;
+
+/* Static Methods */
+
 /**
  * Logs data to the console.
- *
- * This implementation does nothing, to add a real implmementation ve.debug needs to be loaded.
  *
  * @static
  * @method
  * @param {Mixed} [...] Data to log
  */
-ve.log = window.console && window.console.log ?
-	Function.prototype.bind.call( console.log, console ) : ve.log;
+ve.log = function () {
+	Function.prototype.apply.call( console.log, console, arguments );
+};
 
 /**
  * Logs an object to the console.
- *
- * This implementation does nothing, to add a real implmementation ve.debug needs to be loaded.
  *
  * @static
  * @method
  * @param {Object} obj Object to log
  */
-ve.dir = window.console && window.console.dir ?
-	Function.prototype.bind.call( console.dir, console ) : ve.dir;
+ve.dir = function () {
+	Function.prototype.apply.call( console.dir, console, arguments );
+};

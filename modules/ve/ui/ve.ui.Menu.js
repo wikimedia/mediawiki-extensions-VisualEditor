@@ -12,52 +12,61 @@
  * @constructor
  * @param {Object[]} items List of items to append initially
  * @param {Function} callback Function to call if an item doesn't have its own callback
- * @param {jQuery} [$overlay=$( 'body' )] DOM selection to add nodes to
+ * @param {jQuery} [$container] Container to render menu into
+ * @param {jQuery} [$overlay=$( 'body' )] Element to append menu to
  */
-ve.ui.Menu = function ( items, callback, $overlay ) {
-	var i, menu;
-
+ve.ui.Menu = function VeUiMenu( items, callback, $container, $overlay ) {
 	// Properties
-	this.$ = $( '<div class="es-menuView"></div>' ).appendTo( $overlay || $( 'body' ) );
 	this.items = [];
 	this.autoNamedBreaks = 0;
 	this.callback = callback;
-
-	// Items
-	if ( ve.isArray( items ) ) {
-		for ( i = 0; i < items.length; i++ ) {
-			this.addItem( items[i] );
-		}
-	}
+	this.$ = $container || $( '<div class="ve-ui-menu"></div>' );
 
 	// Events
-	menu = this;
-	menu.$.on( {
-		'mousedown': function ( e ) {
-			if ( e.which === 1 ) {
-				e.preventDefault();
-				return false;
-			}
-		},
-		'mouseup': function ( e ) {
-			if ( e.which === 1 ) {
-				var name, i,
-					$item = $( e.target ).closest( '.es-menuView-item' );
-				if ( $item.length ) {
-					name = $item.attr( 'rel' );
-					for ( i = 0; i < menu.items.length; i++ ) {
-						if ( menu.items[i].name === name ) {
-							menu.onSelect( menu.items[i], e );
-							return true;
-						}
-					}
-				}
-			}
-		}
+	this.$.on( {
+		'mousedown': ve.bind( this.onMouseDown, this ),
+		'mouseup': ve.bind( this.onMouseUp, this )
 	} );
+
+	// Initialization
+	this.$.appendTo( $overlay || $( 'body' ) );
+	this.addItems( items );
 };
 
 /* Methods */
+
+ve.ui.Menu.prototype.onMouseDown = function ( e ) {
+	if ( e.which === 1 ) {
+		e.preventDefault();
+		return false;
+	}
+};
+
+ve.ui.Menu.prototype.onMouseUp = function ( e ) {
+	var name, i, len, $item;
+	if ( e.which === 1 ) {
+		$item = $( e.target ).closest( '.ve-ui-menu-item' );
+		if ( $item.length ) {
+			name = $item.attr( 'rel' );
+			for ( i = 0, len = this.items.length; i < len; i++ ) {
+				if ( this.items[i].name === name ) {
+					this.onSelect( this.items[i], e );
+					return true;
+				}
+			}
+		}
+	}
+};
+
+ve.ui.Menu.prototype.addItems = function ( items, before ) {
+	var i, len;
+	if ( !ve.isArray( items ) ) {
+		throw new Error( 'Invalid items, must be array of objects.' );
+	}
+	for ( i = 0, len = items.length; i < len; i++ ) {
+		this.addItem( items[i], before );
+	}
+};
 
 ve.ui.Menu.prototype.addItem = function ( item, before ) {
 	if ( item === '-' ) {
@@ -68,16 +77,16 @@ ve.ui.Menu.prototype.addItem = function ( item, before ) {
 	// Items that don't have custom DOM elements will be auto-created
 	if ( !item.$ ) {
 		if ( !item.name ) {
-			throw 'Invalid menu item error. Items must have a name property.';
+			throw new Error( 'Invalid menu item error. Items must have a name property.' );
 		}
 		if ( item.label ) {
-			item.$ = $( '<div class="es-menuView-item"></div>' )
+			item.$ = $( '<div class="ve-ui-menu-item"></div>' )
 				.attr( 'rel', item.name )
 				// TODO: this should take a labelmsg instead and call ve.msg()
 				.append( $( '<span>' ).text( item.label ) );
 		} else {
 			// No label, must be a break
-			item.$ = $( '<div class="es-menuView-break"></div>' )
+			item.$ = $( '<div class="ve-ui-menu-break"></div>' )
 				.attr( 'rel', item.name );
 		}
 		// TODO: Keyboard shortcut (and icons for them), support for keyboard accelerators, etc.
@@ -127,7 +136,7 @@ ve.ui.Menu.prototype.isOpen = function () {
 	return this.$.is( ':visible' );
 };
 
-ve.ui.Menu.prototype.onSelect = function ( item, event ) {
+ve.ui.Menu.prototype.onSelect = function ( item ) {
 	if ( typeof item.callback === 'function' ) {
 		item.callback( item );
 	} else if ( typeof this.callback === 'function' ) {

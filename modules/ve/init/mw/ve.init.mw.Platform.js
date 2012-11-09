@@ -12,16 +12,20 @@
  *
  * @class
  * @constructor
- * @param {String} pageName Name of target page
+ * @extends {ve.init.Platform}
  */
-ve.init.mw.Platform = function () {
-	// Inheritance
+ve.init.mw.Platform = function VeInitMwPlatform() {
+	// Parent constructor
 	ve.init.Platform.call( this );
 
 	// Properties
 	this.externalLinkUrlProtocolsRegExp = new RegExp( '^' + mw.config.get( 'wgUrlProtocols' ) );
 	this.modulesUrl = mw.config.get( 'wgExtensionAssetsPath' ) + '/VisualEditor/modules';
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.init.mw.Platform, ve.init.Platform );
 
 /* Methods */
 
@@ -71,13 +75,9 @@ ve.init.mw.Platform.prototype.addMessages = function ( messages ) {
  * @param {Mixed} [...] List of arguments which will be injected at $1, $2, etc. in the messaage
  * @returns {String} Localized message
  */
-ve.init.mw.Platform.prototype.getMessage = function ( key ) {
+ve.init.mw.Platform.prototype.getMessage = function () {
 	return mw.msg.apply( mw.msg, arguments );
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.init.mw.Platform, ve.init.Platform );
 
 /* Initialization */
 

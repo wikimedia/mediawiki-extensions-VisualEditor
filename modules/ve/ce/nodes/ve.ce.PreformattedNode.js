@@ -11,12 +11,16 @@
  * @class
  * @constructor
  * @extends {ve.ce.BranchNode}
- * @param model {ve.dm.PreformattedNode} Model to observe
+ * @param {ve.dm.PreformattedNode} model Model to observe
  */
-ve.ce.PreformattedNode = function ( model ) {
-	// Inheritance
-	ve.ce.BranchNode.call( this, 'preformatted', model, $( '<pre></pre>' ) );
+ve.ce.PreformattedNode = function VeCePreformattedNode( model ) {
+	// Parent constructor
+	ve.ce.BranchNode.call( this, 'preformatted', model, $( '<pre>' ) );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.PreformattedNode, ve.ce.BranchNode );
 
 /* Static Members */
 
@@ -34,7 +38,3 @@ ve.ce.PreformattedNode.rules = {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'preformatted', ve.ce.PreformattedNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.PreformattedNode, ve.ce.BranchNode );

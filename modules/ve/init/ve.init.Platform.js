@@ -11,12 +11,16 @@
  * @class
  * @abstract
  * @constructor
- * @param {String} pageName Name of target page
+ * @extends {ve.EventEmitter}
  */
-ve.init.Platform = function () {
-	// Inheritance
+ve.init.Platform = function VeInitPlatform() {
+	// Parent constructor
 	ve.EventEmitter.call( this );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.init.Platform, ve.EventEmitter );
 
 /* Methods */
 
@@ -28,7 +32,7 @@ ve.init.Platform = function () {
  * @returns {RegExp} Regular expression object
  */
 ve.init.Platform.prototype.getExternalLinkUrlProtocolsRegExp = function () {
-	throw 've.init.Platform.getExternalLinkUrlProtocolsRegExp must be overridden in subclass';
+	throw new Error( 've.init.Platform.getExternalLinkUrlProtocolsRegExp must be overridden in subclass' );
 };
 
 /**
@@ -39,7 +43,7 @@ ve.init.Platform.prototype.getExternalLinkUrlProtocolsRegExp = function () {
  * @returns {String} Remote modules URL
  */
 ve.init.Platform.prototype.getModulesUrl = function () {
-	throw 've.init.Platform.getModulesUrl must be overridden in subclass';
+	throw new Error( 've.init.Platform.getModulesUrl must be overridden in subclass' );
 };
 
 /**
@@ -49,8 +53,8 @@ ve.init.Platform.prototype.getModulesUrl = function () {
  * @abstract
  * @param {Object} messages Map of message-key/message-string pairs
  */
-ve.init.Platform.prototype.addMessages = function ( messages ) {
-	throw 've.init.Platform.addMessages must be overridden in subclass';
+ve.init.Platform.prototype.addMessages = function () {
+	throw new Error( 've.init.Platform.addMessages must be overridden in subclass' );
 };
 
 /**
@@ -62,10 +66,6 @@ ve.init.Platform.prototype.addMessages = function ( messages ) {
  * @param {Mixed} [...] List of arguments which will be injected at $1, $2, etc. in the messaage
  * @returns {String} Localized message
  */
-ve.init.Platform.prototype.getMessage = function ( key ) {
-	throw 've.init.Platform.getMessage must be overridden in subclass';
+ve.init.Platform.prototype.getMessage = function () {
+	throw new Error( 've.init.Platform.getMessage must be overridden in subclass' );
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.init.Platform, ve.EventEmitter );

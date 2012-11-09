@@ -14,10 +14,14 @@
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
  * @param {Object} [attributes] Reference to map of attribute key/value pairs
  */
-ve.dm.DefinitionListItemNode = function ( children, attributes ) {
-	// Inheritance
+ve.dm.DefinitionListItemNode = function VeDmDefinitionListItemNode( children, attributes ) {
+	// Parent constructor
 	ve.dm.BranchNode.call( this, 'definitionListItem', children, attributes );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.dm.DefinitionListItemNode, ve.dm.BranchNode );
 
 /* Static Members */
 
@@ -32,6 +36,7 @@ ve.dm.DefinitionListItemNode.rules = {
 	'isWrapped': true,
 	'isContent': false,
 	'canContainContent': false,
+	'hasSignificantWhitespace': false,
 	'childNodeTypes': null,
 	'parentNodeTypes': ['definitionList']
 };
@@ -51,7 +56,7 @@ ve.dm.DefinitionListItemNode.converters = {
 			'definition': document.createElement( 'dd' )
 		} )[element.attributes.style];
 	},
-	'toDataElement': function ( tag, element ) {
+	'toDataElement': function ( tag ) {
 		return ( {
 			'dt': { 'type': 'definitionListItem', 'attributes': { 'style': 'term' } },
 			'dd': { 'type': 'definitionListItem', 'attributes': { 'style': 'definition' } }
@@ -62,7 +67,3 @@ ve.dm.DefinitionListItemNode.converters = {
 /* Registration */
 
 ve.dm.nodeFactory.register( 'definitionListItem', ve.dm.DefinitionListItemNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.dm.DefinitionListItemNode, ve.dm.BranchNode );

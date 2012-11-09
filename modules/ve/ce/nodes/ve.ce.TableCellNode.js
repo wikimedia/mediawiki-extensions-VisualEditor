@@ -11,10 +11,10 @@
  * @class
  * @constructor
  * @extends {ve.ce.BranchNode}
- * @param model {ve.dm.TableCellNode} Model to observe
+ * @param {ve.dm.TableCellNode} model Model to observe
  */
-ve.ce.TableCellNode = function ( model ) {
-	// Inheritance
+ve.ce.TableCellNode = function VeCeTableCellNode( model ) {
+	// Parent constructor
 	ve.ce.BranchNode.call(
 		this, 'tableCell', model, ve.ce.BranchNode.getDomWrapper( model, 'style' )
 	);
@@ -22,6 +22,10 @@ ve.ce.TableCellNode = function ( model ) {
 	// Events
 	this.model.addListenerMethod( this, 'update', 'onUpdate' );
 };
+
+/* Inheritance */
+
+ve.inheritClass( ve.ce.TableCellNode, ve.ce.BranchNode );
 
 /* Static Members */
 
@@ -63,7 +67,3 @@ ve.ce.TableCellNode.prototype.onUpdate = function () {
 /* Registration */
 
 ve.ce.nodeFactory.register( 'tableCell', ve.ce.TableCellNode );
-
-/* Inheritance */
-
-ve.extendClass( ve.ce.TableCellNode, ve.ce.BranchNode );

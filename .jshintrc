@@ -1,30 +1,33 @@
 {
 	"predef": [
 		"ve",
-
 		"QUnit"
 	],
 
 	"bitwise": true,
+	"camelcase": true,
 	"curly": true,
 	"eqeqeq": true,
+	"forin": false,
 	"immed": true,
 	"latedef": true,
 	"newcap": true,
 	"noarg": true,
 	"noempty": true,
 	"nonew": true,
-	"regexp": true,
+	"plusplus": false,
 	"quotmark": "single",
+	"regexp": true,
 	"undef": true,
+	"unused": true,
 	"strict": false,
 	"trailing": true,
 
-	"smarttabs": true,
+	"es5": true,
 	"multistr": true,
+	"smarttabs": true,
 
 	"browser": true,
-	"node": true,
 	"jquery": true,
 
 	"nomen": true,

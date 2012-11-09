@@ -17,9 +17,10 @@
  * @class
  * @constructor
  */
-ve.dm.TransactionProcessor = function ( doc, transaction, reversed ) {
+ve.dm.TransactionProcessor = function VeDmTransactionProcessor( doc, transaction, reversed ) {
 	// Properties
 	this.document = doc;
+	this.transaction = transaction;
 	this.operations = transaction.getOperations();
 	this.synchronizer = new ve.dm.DocumentSynchronizer( doc );
 	this.reversed = reversed;
@@ -29,11 +30,10 @@ ve.dm.TransactionProcessor = function ( doc, transaction, reversed ) {
 	// Adjustment used to convert between linear model offsets in the original linear model and
 	// in the half-updated linear model.
 	this.adjustment = 0;
-	// Set and clear are lists of annotations which should be added or removed to content being
-	// inserted or retained. The format of these objects is { hash: annotationObjectReference }
-	// where hash is the result of ve.getHash( annotationObjectReference ).
-	this.set = {};
-	this.clear = {};
+	// Set and clear are sets of annotations which should be added or removed to content being
+	// inserted or retained.
+	this.set = new ve.AnnotationSet();
+	this.clear = new ve.AnnotationSet();
 };
 
 /* Static Members */
@@ -60,6 +60,9 @@ ve.dm.TransactionProcessor.processors = {};
  * @param {ve.dm.Transaction} transaction Transaction to apply
  */
 ve.dm.TransactionProcessor.commit = function ( doc, transaction ) {
+	if ( transaction.hasBeenApplied() ) {
+		throw new Error( 'Cannot commit a transaction that has already been committed' );
+	}
 	new ve.dm.TransactionProcessor( doc, transaction, false ).process();
 };
 
@@ -72,6 +75,9 @@ ve.dm.TransactionProcessor.commit = function ( doc, transaction ) {
  * @param {ve.dm.Transaction} transaction Transaction to apply
  */
 ve.dm.TransactionProcessor.rollback = function ( doc, transaction ) {
+	if ( !transaction.hasBeenApplied() ) {
+		throw new Error( 'Cannot roll back a transaction that has not been committed' );
+	}
 	new ve.dm.TransactionProcessor( doc, transaction, true ).process();
 };
 
@@ -86,7 +92,7 @@ ve.dm.TransactionProcessor.rollback = function ( doc, transaction ) {
  * @static
  * @method
  * @param {Object} op Operation object:
- * @param {Integer} op.length Number of elements to retain
+ * @param {Number} op.length Number of elements to retain
  */
 ve.dm.TransactionProcessor.processors.retain = function ( op ) {
 	this.applyAnnotations( this.cursor + op.length );
@@ -104,27 +110,24 @@ ve.dm.TransactionProcessor.processors.retain = function ( op ) {
  * @method
  * @param {Object} op Operation object
  * @param {String} op.method Annotation method, either 'set' to add or 'clear' to remove
- * @param {String} op.bias Endpoint of marker, either 'start' to begin or 'stop' to end
+ * @param {String} op.bias End point of marker, either 'start' to begin or 'stop' to end
  * @param {String} op.annotation Annotation object to set or clear from content
  * @throws 'Invalid annotation method'
  */
 ve.dm.TransactionProcessor.processors.annotate = function ( op ) {
-	var target, hash;
+	var target;
 	if ( op.method === 'set' ) {
 		target = this.reversed ? this.clear : this.set;
 	} else if ( op.method === 'clear' ) {
 		target = this.reversed ? this.set : this.clear;
 	} else {
-		throw 'Invalid annotation method ' + op.method;
+		throw new Error( 'Invalid annotation method ' + op.method );
 	}
-	
-	hash = $.toJSON( op.annotation );
 	if ( op.bias === 'start' ) {
-		target[hash] = op.annotation;
+		target.push( op.annotation );
 	} else {
-		delete target[hash];
+		target.remove( op.annotation );
 	}
-	
 	// Tree sync is done by applyAnnotations()
 };
 
@@ -150,7 +153,7 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 		to = this.reversed ? op.from : op.to,
 		from = this.reversed ? op.to : op.from;
 	if ( element.type === undefined ) {
-		throw 'Invalid element error, can not set attributes on non-element data';
+		throw new Error( 'Invalid element error, can not set attributes on non-element data' );
 	}
 	if ( to === undefined ) {
 		// Clear
@@ -171,6 +174,7 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 		op.key,
 		from, to
 	);
+	this.setChangeMarker( this.cursor, 'attributes' );
 };
 
 /**
@@ -193,7 +197,7 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
  * @param {Array} op.insert Linear model data to insert
  */
 ve.dm.TransactionProcessor.processors.replace = function ( op ) {
-	var node, selection, range,
+	var node, selection, range, parentOffset,
 		remove = this.reversed ? op.insert : op.remove,
 		insert = this.reversed ? op.remove : op.insert,
 		removeIsContent = ve.dm.Document.isContentData( remove ),
@@ -218,7 +222,7 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 	if ( removeIsContent && insertIsContent ) {
 		// Content replacement
 		// Update the linear model
-		ve.batchSplice( this.document.data, this.cursor, remove.length, insert );
+		this.document.spliceData( this.cursor, remove.length, insert );
 		this.applyAnnotations( this.cursor + insert.length );
 		// Get the node containing the replaced content
 		selection = this.document.selectNodes(
@@ -228,21 +232,33 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			),
 			'leaves'
 		);
-		if ( removeHasStructure || insertHasStructure ) {
+		node = selection[0].node;
+		if (
+			!removeHasStructure && !insertHasStructure &&
+			selection.length === 1 &&
+			node && node.getType() === 'text'
+		) {
+			// Text-only replacement
+			// Queue a resize for the text node
+			this.synchronizer.pushResize( node, insert.length - remove.length );
+		} else {
 			// Replacement is not exclusively text
 			// Rebuild all covered nodes
 			range = new ve.Range(
-				selection[0].nodeRange.start, selection[selection.length - 1].nodeRange.end
+				selection[0].nodeRange.start,
+				selection[selection.length - 1].nodeRange.end
 			);
 			this.synchronizer.pushRebuild( range,
 				new ve.Range( range.start + this.adjustment,
 					range.end + this.adjustment + insert.length - remove.length )
 			);
-		} else {
-			// Text-only replacement
-			// Queue a resize for this node
-			node = selection[0].node;
-			this.synchronizer.pushResize( node, insert.length - remove.length );
+		}
+		// Set change markers on the parents of the affected nodes
+		for ( i = 0; i < selection.length; i++ ) {
+			this.setChangeMarker(
+				selection[i].parentOuterRange.start + this.adjustment,
+				'content'
+			);
 		}
 		// Advance the cursor
 		this.cursor += insert.length;
@@ -256,10 +272,10 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 		// and queue a single rebuild after the loop finishes.
 		while ( true ) {
 			if ( operation.type === 'replace' ) {
-				opRemove = this.reversed ? operation.insert : operation.remove,
+				opRemove = this.reversed ? operation.insert : operation.remove;
 				opInsert = this.reversed ? operation.remove : operation.insert;
 				// Update the linear model for this insert
-				ve.batchSplice( this.document.data, this.cursor, opRemove.length, opInsert );
+				this.document.spliceData( this.cursor, opRemove.length, opInsert );
 				affectedRanges.push( new ve.Range(
 					this.cursor - this.adjustment,
 					this.cursor - this.adjustment + opRemove.length
@@ -274,15 +290,18 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 						prevCursor + opRemove.length - this.adjustment
 					), 'siblings' );
 					for ( i = 0; i < selection.length; i++ ) {
-						// .nodeRange is the inner range, we need the
-						// outer range (including opening and closing)
-						if ( selection[i].node.isWrapped() ) {
-							affectedRanges.push( new ve.Range(
-								selection[i].nodeRange.start - 1,
-								selection[i].nodeRange.end + 1
-							) );
-						} else {
-							affectedRanges.push( selection[i].nodeRange );
+						affectedRanges.push( selection[i].nodeOuterRange );
+						if (
+							selection[i].nodeOuterRange.start < prevCursor - this.adjustment &&
+							selection[i].node.canContainContent()
+						) {
+							// The opening element survives, so this
+							// node will have some of its content
+							// removed and/or have another node merged
+							// into it. Mark the node.
+							// TODO detect special case where closing is replaced
+							parentOffset = selection[i].nodeOuterRange.start + this.adjustment;
+							this.setChangeMarker( parentOffset, 'content' );
 						}
 					}
 				}
@@ -323,11 +342,18 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 								affectedRanges.push( new ve.Range( scopeStart, scopeEnd ) );
 								// Update scope
 								scope = scope.getParent() || scope;
+								// Set change marker
+								this.transaction.setChangeMarker(
+									scopeStart + this.adjustment,
+									'rebuilt'
+								);
 							}
 
 						} else {
 							// Opening element
 							insertLevel++;
+							// Mark as 'created'
+							this.setChangeMarker( prevCursor + i, 'created' );
 						}
 					}
 				}
@@ -346,7 +372,7 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			// Get the next operation
 			operation = this.nextOperation();
 			if ( !operation ) {
-				throw 'Unbalanced set of replace operations found';
+				throw new Error( 'Unbalanced set of replace operations found' );
 			}
 		}
 		// From all the affected ranges we have gathered, compute a range that covers all
@@ -384,7 +410,7 @@ ve.dm.TransactionProcessor.prototype.executeOperation = function ( op ) {
 	if ( op.type in ve.dm.TransactionProcessor.processors ) {
 		ve.dm.TransactionProcessor.processors[op.type].call( this, op );
 	} else {
-		throw 'Invalid operation error. Operation type is not supported: ' + op.type;
+		throw new Error( 'Invalid operation error. Operation type is not supported: ' + op.type );
 	}
 };
 
@@ -397,6 +423,14 @@ ve.dm.TransactionProcessor.prototype.executeOperation = function ( op ) {
  */
 ve.dm.TransactionProcessor.prototype.process = function () {
 	var op;
+	if ( this.reversed ) {
+		// Undo change markers before rolling back the transaction, because the offsets
+		// are relevant to the post-commit state
+		this.applyChangeMarkers();
+		// Unset the change markers we've just undone
+		this.transaction.clearChangeMarkers();
+	}
+
 	// This loop is factored this way to allow operations to be skipped over or executed
 	// from within other operations
 	this.operationIndex = 0;
@@ -404,6 +438,13 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 		this.executeOperation( op );
 	}
 	this.synchronizer.synchronize();
+
+	if ( !this.reversed ) {
+		// Apply the change markers we've accumulated while processing the transaction
+		this.applyChangeMarkers();
+	}
+	// Mark the transaction as committed or rolled back, as appropriate
+	this.transaction.toggleApplied();
 };
 
 /**
@@ -417,8 +458,8 @@ ve.dm.TransactionProcessor.prototype.process = function () {
  * @throws 'Invalid transaction, annotation to be cleared is not set'
  */
 ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
-	var item, element, annotated, annotations, hash, i;
-	if ( ve.isEmptyObject( this.set ) && ve.isEmptyObject( this.clear ) ) {
+	var item, element, annotated, annotations, i, range, selection, offset;
+	if ( this.set.isEmpty() && this.clear.isEmpty() ) {
 		return;
 	}
 	for ( i = this.cursor; i < to; i++ ) {
@@ -426,36 +467,35 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 		element = item.type !== undefined;
 		if ( element ) {
 			if ( item.type.charAt( 0 ) === '/' ) {
-				throw 'Invalid transaction, cannot annotate a branch closing element';
+				throw new Error( 'Invalid transaction, cannot annotate a branch closing element' );
 			} else if ( ve.dm.nodeFactory.canNodeHaveChildren( item.type ) ) {
-				throw 'Invalid transaction, cannot annotate a branch opening element';
+				throw new Error( 'Invalid transaction, cannot annotate a branch opening element' );
 			}
 		}
 		annotated = element ? 'annotations' in item : ve.isArray( item );
-		annotations = annotated ? ( element ? item.annotations : item[1] ) : {};
+		annotations = annotated ? ( element ? item.annotations : item[1] ) :
+			new ve.AnnotationSet();
 		// Set and clear annotations
-		for ( hash in this.set ) {
-			if ( hash in annotations ) {
-				throw 'Invalid transaction, annotation to be set is already set';
-			}
-			annotations[hash] = this.set[hash];
+		if ( annotations.containsAnyOf( this.set ) ) {
+			throw new Error( 'Invalid transaction, annotation to be set is already set' );
+		} else {
+			annotations.addSet( this.set );
 		}
-		for ( hash in this.clear ) {
-			if ( !( hash in annotations ) ) {
-				throw 'Invalid transaction, annotation to be cleared is not set';
-			}
-			delete annotations[hash];
+		if ( !annotations.containsAllOf( this.clear ) ) {
+			throw new Error( 'Invalid transaction, annotation to be cleared is not set' );
+		} else {
+			annotations.removeSet( this.clear );
 		}
 		// Auto initialize/cleanup
-		if ( !ve.isEmptyObject( annotations ) && !annotated ) {
+		if ( !annotations.isEmpty() && !annotated ) {
 			if ( element ) {
 				// Initialize new element annotation
-				item.annotations = annotations;
+				item.annotations = new ve.AnnotationSet( annotations );
 			} else {
 				// Initialize new character annotation
-				this.document.data[i] = [item, annotations];
+				this.document.data[i] = [item, new ve.AnnotationSet( annotations )];
 			}
-		} else if ( ve.isEmptyObject( annotations ) && annotated ) {
+		} else if ( annotations.isEmpty() && annotated ) {
 			if ( element ) {
 				// Cleanup empty element annotation
 				delete item.annotations;
@@ -465,5 +505,65 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 			}
 		}
 	}
-	this.synchronizer.pushAnnotation( new ve.Range( this.cursor, to ) );
+	if ( this.cursor < to ) {
+		range = new ve.Range( this.cursor, to );
+		selection = this.document.selectNodes(
+			new ve.Range(
+				this.cursor - this.adjustment,
+				to - this.adjustment
+			),
+			'leaves'
+		);
+		for ( i = 0; i < selection.length; i++ ) {
+			offset = selection[i].node.isWrapped() ?
+				selection[i].nodeOuterRange.start :
+				selection[i].parentOuterRange.start;
+			this.setChangeMarker( offset + this.adjustment, 'annotations' );
+		}
+		this.synchronizer.pushAnnotation( new ve.Range( this.cursor, to ) );
+	}
+};
+
+/**
+ * Set a change marker on our transaction, if we are in commit mode. This function is a no-op in
+ * rollback mode.
+ * @see {ve.dm.Transaction.setChangeMarker}
+ */
+ve.dm.TransactionProcessor.prototype.setChangeMarker = function ( offset, type, increment ) {
+	// Refuse to set any new change markers while reversing transactions
+	if ( !this.reversed ) {
+		this.transaction.setChangeMarker( offset, type, increment );
+	}
+}
+
+/**
+ * Apply the change markers on this.transaction to this.document . Change markers are set
+ * (incremented) in commit mode, and unset (decremented) in rollback mode.
+ */
+ve.dm.TransactionProcessor.prototype.applyChangeMarkers = function () {
+	var offset, type, previousValue, newValue, element,
+		markers = this.transaction.getChangeMarkers(),
+		m = this.reversed ? -1 : 1;
+	for ( offset in markers ) {
+		for ( type in markers[offset] ) {
+			offset = Number( offset );
+			element = this.document.data[offset];
+			previousValue = ve.getProp( element, 'internal', 'changed', type );
+			newValue = ( previousValue || 0 ) + m*markers[offset][type];
+			if ( newValue != 0 ) {
+				ve.setProp( element, 'internal', 'changed', type, newValue );
+			} else if ( previousValue !== undefined ) {
+				// Value was set but becomes zero, delete the key
+				delete element.internal.changed[type];
+				// If that made .changed empty, delete it
+				if ( ve.isEmptyObject( element.internal.changed ) ) {
+					delete element.internal.changed;
+				}
+				// If that made .internal empty, delete it
+				if ( ve.isEmptyObject( element.internal ) ) {
+					delete element.internal;
+				}
+			}
+		}
+	}
 };

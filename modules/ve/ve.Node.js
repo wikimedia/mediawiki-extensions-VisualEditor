@@ -14,8 +14,8 @@
  * @extends {ve.EventEmitter}
  * @param {String} type Symbolic name of node type
  */
-ve.Node = function ( type ) {
-	// Inheritance
+ve.Node = function VeNode( type ) {
+	// Parent constructor
 	ve.EventEmitter.call( this );
 
 	// Properties
@@ -32,6 +32,10 @@ ve.Node = function ( type ) {
 	};
 };
 
+/* Inheritance */
+
+ve.inheritClass( ve.Node, ve.EventEmitter );
+
 /* Abstract Methods */
 
 /**
@@ -43,7 +47,7 @@ ve.Node = function ( type ) {
  * @throws {Error} if not overridden
  */
 ve.Node.prototype.canHaveChildren = function () {
-	throw 've.Node.canHaveChildren must be overridden in subclass';
+	throw new Error( 've.Node.canHaveChildren must be overridden in subclass' );
 };
 
 /**
@@ -55,7 +59,7 @@ ve.Node.prototype.canHaveChildren = function () {
  * @throws {Error} if not overridden
  */
 ve.Node.prototype.canHaveGrandchildren = function () {
-	throw 've.Node.canHaveGrandchildren must be overridden in subclass';
+	throw new Error( 've.Node.canHaveGrandchildren must be overridden in subclass' );
 };
 
 /**
@@ -67,7 +71,7 @@ ve.Node.prototype.canHaveGrandchildren = function () {
  * @throws {Error} if not overridden
  */
 ve.Node.prototype.isWrapped = function () {
-	throw 've.Node.isWrapped must be overridden in subclass';
+	throw new Error( 've.Node.isWrapped must be overridden in subclass' );
 };
 
 /**
@@ -75,11 +79,11 @@ ve.Node.prototype.isWrapped = function () {
  *
  * @method
  * @abstract
- * @returns {Integer} Node length
+ * @returns {Number} Node length
  * @throws {Error} if not overridden
  */
 ve.Node.prototype.getLength = function () {
-	throw 've.Node.getLength must be overridden in subclass';
+	throw new Error( 've.Node.getLength must be overridden in subclass' );
 };
 
 /**
@@ -87,11 +91,11 @@ ve.Node.prototype.getLength = function () {
  *
  * @method
  * @abstract
- * @returns {Integer} Node outer length
+ * @returns {Number} Node outer length
  * @throws {Error} if not overridden
  */
 ve.Node.prototype.getOuterLength = function () {
-	throw 've.Node.getOuterLength must be overridden in subclass';
+	throw new Error( 've.Node.getOuterLength must be overridden in subclass' );
 };
 
 /* Methods */
@@ -144,7 +148,7 @@ ve.Node.prototype.setRoot = function ( root ) {
  * @method
  * @returns {ve.Document} Document this node is a part of
  */
-ve.Node.prototype.getDocument = function ( root ) {
+ve.Node.prototype.getDocument = function () {
 	return this.doc;
 };
 
@@ -204,7 +208,3 @@ ve.Node.traverseUpstream = function ( node, callback ) {
 		node = node.getParent();
 	}
 };
-
-/* Inheritance */
-
-ve.extendClass( ve.Node, ve.EventEmitter );

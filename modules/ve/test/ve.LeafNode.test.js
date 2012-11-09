@@ -5,15 +5,15 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-module( 've.LeafNode' );
+QUnit.module( 've.LeafNode' );
 
 /* Stubs */
 
-ve.LeafNodeStub = function () {
-	// Inheritance
+ve.LeafNodeStub = function VeLeafNodeStub() {
+	// Parent constructor
 	ve.LeafNode.call( this );
 };
 
-ve.extendClass( ve.LeafNodeStub, ve.LeafNode );
+ve.inheritClass( ve.LeafNodeStub, ve.LeafNode );
 
 /* Tests */
