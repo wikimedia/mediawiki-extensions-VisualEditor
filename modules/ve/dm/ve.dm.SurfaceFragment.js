@@ -42,6 +42,10 @@ ve.dm.SurfaceFragment = function VeDmSurfaceFragment( surface, range, noAutoSele
 	);
 };
 
+/* Static Members */
+
+ve.dm.SurfaceFragment.static = {};
+
 /* Methods */
 
 /**
@@ -119,6 +123,25 @@ ve.dm.SurfaceFragment.prototype.adjustRange = function ( start, end ) {
 };
 
 /**
+ * Gets a new fragment with a truncated length.
+ *
+ * @method
+ * @param {Number} limit Maximum length of range (negative for left-side truncation)
+ * @returns {ve.dm.SurfaceFragment} Truncated fragment
+ */
+ve.dm.SurfaceFragment.prototype.truncateRange = function ( limit ) {
+	// Handle null fragment
+	if ( !this.surface ) {
+		return this;
+	}
+	return new ve.dm.SurfaceFragment(
+		this.surface,
+		this.range.truncate( limit ),
+		this.noAutoSelect
+	);
+};
+
+/**
  * Gets a new fragment with a zero-length selection at the start offset.
  *
  * @method
@@ -145,6 +168,13 @@ ve.dm.SurfaceFragment.prototype.trimRange = function () {
 	if ( !this.surface ) {
 		return this;
 	}
+	// If range is only whitespace
+	if ( this.document.getText( this.range ).trim().length === 0 ) {
+		// Collapse range
+		return new ve.dm.SurfaceFragment(
+			this.surface, new ve.Range( this.range.start ), this.noAutoSelect
+		);
+	}
 	return new ve.dm.SurfaceFragment(
 		this.surface, this.document.trimOuterSpaceFromRange( this.range ), this.noAutoSelect
 	);
@@ -155,11 +185,13 @@ ve.dm.SurfaceFragment.prototype.trimRange = function () {
  *
  * @method
  * @param {String} [scope=parent] Method of expansion:
+ *     'word': Expands to cover the nearest word by looking for word boundary characters
+ *     'annotation': Expands to cover a given annotation (argument) within the current range
  *     'root': Expands to cover the entire document
  *     'siblings': Expands to cover all sibling nodes
- *     'closest': Expands to cover the closest common ancestor node of a specified type
+ *     'closest': Expands to cover the closest common ancestor node of a give type (argument)
  *     'parent': Expands to cover the closest common parent node
- * @param {String} [type] Node type to use with certain scope methods that require it
+ * @param {Mixed} [type] Parameter to use with scope method if needed
  * @returns {ve.dm.SurfaceFragment} Expanded fragment
  */
 ve.dm.SurfaceFragment.prototype.expandRange = function ( scope, type ) {
@@ -169,6 +201,25 @@ ve.dm.SurfaceFragment.prototype.expandRange = function ( scope, type ) {
 	}
 	var range, node, nodes, parent;
 	switch ( scope || 'parent' ) {
+		case 'word':
+			range = new ve.Range(
+				this.document.getNearestWordBoundary( this.range.start, -1 ),
+				this.document.getNearestWordBoundary( this.range.end, 1 )
+			);
+			break;
+		case 'annotation':
+			range = this.document.getAnnotatedRangeFromSelection( this.range, type );
+			// Adjust selection if it does not contain the annotated range
+			if ( this.range.start > range.start || this.range.end < range.end ) {
+				// Maintain range direction
+				if ( this.range.from > this.range.to ) {
+					range = range.flip();
+				}
+			} else {
+				// Otherwise just keep the range as is
+				range = this.range.clone();
+			}
+			break;
 		case 'root':
 			range = new ve.Range( 0, this.document.getData().length );
 			break;
@@ -278,7 +329,7 @@ ve.dm.SurfaceFragment.prototype.getAnnotations = function ( all ) {
 	if ( this.range.getLength() ) {
 		return this.document.getAnnotationsFromRange( this.range, all );
 	} else {
-		return this.document.getAnnotationsFromOffset( this.range.from );
+		return this.surface.getInsertionAnnotations();
 	}
 };
 
@@ -368,29 +419,43 @@ ve.dm.SurfaceFragment.prototype.select = function () {
  *
  * To avoid problems identified in bug 33108, use the {ve.dm.SurfaceFragment.trimRange} method.
  *
- * TODO: Optionally take an annotation set instead of type and data arguments and set/clear multiple
+ * TODO: Optionally take an annotation set instead of name and data arguments and set/clear multiple
  * annotations in a single transaction.
  *
  * @method
  * @param {String} method Mode of annotation, either 'set' or 'clear'
- * @param {String} type Annotation type, for example: 'textStyle/bold'
- * @param {Object} [data] Additional annotation data
+ * @param {String|ve.dm.Annotation} name Annotation name, for example: 'textStyle/bold' or
+ * Annotation object
+ * @param {Object} [data] Additional annotation data (not used if annotation object is given)
  * @returns {ve.dm.SurfaceFragment} This fragment
  */
-ve.dm.SurfaceFragment.prototype.annotateContent = function ( method, type, data ) {
+ve.dm.SurfaceFragment.prototype.annotateContent = function ( method, name, data ) {
 	// Handle null fragment
 	if ( !this.surface ) {
 		return this;
 	}
+	// Extract annotation information
+	if ( name instanceof ve.dm.Annotation ) {
+		data = name.data;
+		name = name.name;
+	}
 	var tx,
-		annotation = ve.dm.annotationFactory.create( type );
+		annotation = ve.dm.annotationFactory.create( name );
 	// HACK: This seems wrong, the way we create annotations should be refactored
 	if ( data ) {
 		annotation.data = data;
 	}
 	if ( this.range.getLength() ) {
+		// Apply to selection
 		tx = ve.dm.Transaction.newFromAnnotation( this.document, this.range, method, annotation );
 		this.surface.change( tx, !this.noAutoSelect && tx.translateRange( this.range ) );
+	} else {
+		// Apply annotation to stack
+		if ( method === 'set' ) {
+			this.surface.addInsertionAnnotation( annotation );
+		} else if ( method === 'clear' ) {
+			this.surface.removeInsertionAnnotation( annotation );
+		}
 	}
 	return this;
 };
@@ -475,7 +540,8 @@ ve.dm.SurfaceFragment.prototype.convertNodes = function ( type, attr ) {
 	if ( !this.surface ) {
 		return this;
 	}
-	var tx = ve.dm.Transaction.newFromContentBranchConversion( this.document, this.range, type, attr );
+	var tx =
+		ve.dm.Transaction.newFromContentBranchConversion( this.document, this.range, type, attr );
 	this.surface.change( tx, !this.noAutoSelect && tx.translateRange( this.range ) );
 	return this;
 };

@@ -34,7 +34,9 @@ QUnit.test( 'constructor', 7, function ( assert ) {
 	doc = new ve.dm.Document( [ { 'type': 'paragraph' }, { 'type': '/paragraph' } ] );
 	assert.equalNodeTree(
 		doc.getDocumentNode(),
-		new ve.dm.DocumentNode( [ new ve.dm.ParagraphNode( [ new ve.dm.TextNode( 0 ) ] ) ] ),
+		new ve.dm.DocumentNode( [ new ve.dm.ParagraphNode(
+			[ new ve.dm.TextNode( 0 ) ], { 'type': 'paragraph' }
+		) ] ),
 		'empty paragraph gets a zero-length text node'
 	);
 
@@ -47,7 +49,8 @@ QUnit.test( 'constructor', 7, function ( assert ) {
 	);
 	assert.equalNodeTree(
 		doc.getDocumentNode(),
-		new ve.dm.DocumentNode( [ new ve.dm.ParagraphNode( [ new ve.dm.TextNode( 9 ) ] ) ] ),
+		new ve.dm.DocumentNode( [ new ve.dm.ParagraphNode(
+			[ new ve.dm.TextNode( 9 ) ], ve.dm.example.withMetaPlainData[0] ) ] ),
 		'node tree does not contain metadata'
 	);
 } );
@@ -71,7 +74,7 @@ QUnit.test( 'spliceData', 12, function ( assert ) {
 
 	actualResult = doc.spliceData( 2, 0, [ 'X', 'Y' ] );
 	expectedResult = plainData.splice( 2, 0, 'X', 'Y' );
-	fullData.splice( 4, 0, 'X', 'Y' );
+	fullData.splice( 6, 0, 'X', 'Y' );
 	metaData.splice( 2, 0, undefined, undefined );
 	assert.deepEqual( doc.data, plainData, 'adding two elements at offset 2 (plain data)' );
 	assert.deepEqual( doc.metadata, metaData, 'adding two elements at offset 2 (metadata)' );
@@ -79,7 +82,7 @@ QUnit.test( 'spliceData', 12, function ( assert ) {
 
 	actualResult = doc.spliceData( 10, 1 );
 	expectedResult = plainData.splice( 10, 1 );
-	fullData.splice( 16, 1 );
+	fullData.splice( 18, 1 );
 	metaData.splice( 10, 1 );
 	assert.deepEqual( doc.data, plainData, 'removing one element at offset 10 (plain data)' );
 	assert.deepEqual( doc.metadata, metaData, 'removing one element at offset 10 (metadata)' );
@@ -87,8 +90,8 @@ QUnit.test( 'spliceData', 12, function ( assert ) {
 
 	actualResult = doc.spliceData( 5, 2 );
 	expectedResult = plainData.splice( 5, 2 );
-	fullData.splice( 7, 1 );
 	fullData.splice( 9, 1 );
+	fullData.splice( 11, 1 );
 	metaData.splice( 5, 3, metaData[6] );
 	assert.deepEqual( doc.data, plainData, 'removing two elements at offset 5 (plain data)' );
 	assert.deepEqual( doc.metadata, metaData, 'removing two elements at offset 5 (metadata)' );
@@ -96,10 +99,11 @@ QUnit.test( 'spliceData', 12, function ( assert ) {
 
 	actualResult = doc.spliceData( 1, 8 );
 	expectedResult = plainData.splice( 1, 8 );
-	fullData.splice( 3, 4 );
-	fullData.splice( 5, 2 );
+	fullData.splice( 5, 4 );
 	fullData.splice( 7, 2 );
-	metaData.splice( 1, 9, metaData[5].concat( metaData[7] ) );
+	fullData.splice( 9, 1 );
+	fullData.splice( 11, 1 );
+	metaData.splice( 1, 9, metaData[5].concat( metaData[7] ).concat( metaData[8] ) );
 	assert.deepEqual( doc.data, plainData, 'blanking paragraph, removing 8 elements at offset 1 (plain data)' );
 	assert.deepEqual( doc.metadata, metaData, 'blanking paragraph, removing 8 elements at offset 1 (metadata)' );
 	assert.deepEqual( doc.getFullData(), fullData, 'blanking paragraph, removing 8 elements at offset 1 (full data)' );
@@ -922,7 +926,9 @@ QUnit.test( 'rebuildNodes', 2, function ( assert ) {
 	tree = new ve.dm.DocumentNode( ve.dm.example.tree.getChildren() );
 	// Replace table with paragraph
 	doc.spliceData( 5, 32, [ { 'type': 'paragraph' }, 'a', 'b', 'c', { 'type': '/paragraph' } ] );
-	tree.splice( 1, 1, new ve.dm.ParagraphNode( [new ve.dm.TextNode( 3 )] ) );
+	tree.splice( 1, 1, new ve.dm.ParagraphNode(
+		[new ve.dm.TextNode( 3 )], doc.data[5]
+	) );
 	// Rebuild with changes
 	doc.rebuildNodes( documentNode, 1, 1, 5, 5 );
 	assert.equalNodeTree(
@@ -1004,6 +1010,18 @@ QUnit.test( 'getRelativeContentOffset', function ( assert ) {
 		{
 			'msg': 'invalid starting offset gets corrected',
 			'offset': 61,
+			'distance': 1,
+			'expected': 60
+		},
+		{
+			'msg': 'stop at left edge if already valid',
+			'offset': 1,
+			'distance': -1,
+			'expected': 1
+		},
+		{
+			'msg': 'stop at right edge if already valid',
+			'offset': 60,
 			'distance': 1,
 			'expected': 60
 		},
@@ -1373,7 +1391,7 @@ QUnit.test( 'selectNodes', 21, function ( assert ) {
 	}
 } );
 
-QUnit.test( 'getBalancedData', function ( assert ) {
+QUnit.test( 'getSlice', function ( assert ) {
 	var i,
 		doc = new ve.dm.Document( ve.copyArray( ve.dm.example.data ) ),
 		cases = [
@@ -1490,7 +1508,7 @@ QUnit.test( 'getBalancedData', function ( assert ) {
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.dm.example.preprocessAnnotations( cases[i].expected );
 		assert.deepEqual(
-			doc.getBalancedData( cases[i].range ),
+			doc.getSlice( cases[i].range ).getBalancedData(),
 			cases[i].expected,
 			cases[i].msg
 		);

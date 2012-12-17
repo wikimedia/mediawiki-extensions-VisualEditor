@@ -5,17 +5,46 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* Alien styling */
 
+.ve-ce-alienNode,
+.ve-ce-alienNode * {
+	position: relative !important;
+	top: 0 !important;
+	left: 0 !important;
+	bottom: 0 !important;
+	right: 0 !important;
+}
+
+.ve-ce-alienNode {
+	z-index: 0;
+}
+
+/* Alien blocks and their contents are unselectable / unclickable */
 .ve-ce-alienBlockNode,
-.ve-ce-alienInlineNode,
-.ve-ce-metaBlockNode,
-.ve-ce-metaInlineNode,
-.ve-ce-alienBlockNode *,
-.ve-ce-alienInlineNode *,
-.ve-ce-metaBlockNode *,
-.ve-ce-metaInlineNode * {
-	background-color: #FFFFBA !important;
-	position: static !important;
+.ve-ce-alienBlockNode * {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.ve-ce-alienBlockNode::-moz-selection,
+.ve-ce-alienBlockNode *::-moz-selection {
+	background: transparent;
+}
+
+.ve-ce-node-shield {
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: transparent !important;
+	-webkit-user-select: auto;
+	-moz-user-select: element;
+	-ms-user-select: element;
+	user-select: element;
 }
 
 /* Fix weird Chrome native selection involving floated elements */
@@ -24,13 +53,11 @@
 	content: '';
 }
 
-.ve-ce-alienBlockNode,
-.ve-ce-metaBlockNode {
+.ve-ce-alienBlockNode {
 	display: block;
 }
 
-.ve-ce-alienInlineNode,
-.ve-ce-metaInlineNode {
+.ve-ce-alienInlineNode {
 	display: inline;
 }
 

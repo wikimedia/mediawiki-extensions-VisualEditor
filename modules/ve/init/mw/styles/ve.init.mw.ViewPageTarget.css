@@ -14,82 +14,171 @@
 .ve-init-mw-viewPageTarget-pageTitle {
 	-webkit-transition: opacity 200ms ease-out;
 	-moz-transition: opacity 200ms ease-out;
+	-ms-transition: opacity 200ms ease-out;
 	-o-transition: opacity 200ms ease-out;
 	transition: opacity 200ms ease-out;
 	cursor: default;
 }
 
-.ve-init-mw-viewPageTarget-loadingSpinner,
-.ve-init-mw-viewPageTarget-saveDialog-saving {
-	/* @embed */
-	background-image: url(images/loading.gif);
-}
-
-.ve-init-mw-viewPageTarget-loadingSpinner {
+.ve-init-mw-viewPageTarget-loading {
 	width: 128px;
 	height: 15px;
 	float: right;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-feedbackButton {
-	display: inline-block;
-	cursor: pointer;
-	vertical-align: top;
-	padding: 0.25em;
-	height: 1.5em;
-	margin-right: 0.25em;
-	border: solid 1px transparent;
+/* Edit notices */
+
+.ve-init-mw-viewPageTarget-toolbar-editNotices {
+	display: none;
+	position: absolute;
+	right: -0.5em;
+	top: 30px;
+	width: 29em;
+	font-family: sans-serif;
+	border: solid 1px #ccc;
+	padding: 0 0.75em 0 0.75em;
+	border-radius: 0.25em;
+	background-color: #fff;
+	box-shadow: 0 0.15em 0.5em 0 rgba(0, 0, 0, 0.2);
+	z-index: 3;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-feedbackButton a {
+.ve-init-mw-viewPageTarget-toolbar-editNotices-notice {
+	padding: 0.5em 0;
+	font-size: 0.8em;
+	line-height: 1.5em;
+	border-top: solid 1px #ccc;
+	margin-top: -1px;
+}
+
+/* Tools */
+
+.ve-init-mw-viewPageTarget-tool {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	line-height: 2.125em;
+	margin-right: 1em;
+	padding-left: 30px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.ve-init-mw-viewPageTarget-tool-label {
+	font-size: 0.8em;
+	color: #555555;
+}
+
+.ve-init-mw-viewPageTarget-tool:hover .ve-init-mw-viewPageTarget-tool-label {
+	text-decoration: underline;
+}
+
+/* Buttons */
+
+.ve-init-mw-viewPageTarget-button {
+	display: inline-block;
+	height: 1.8em;
+	margin: 0.1em 0.25em;
+	padding: 0 0.75em;
+	border-radius: 0.25em;
+	vertical-align: top;
+	color: #252525;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	text-align: center;
+	font-size: 1em;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	/* Gray */
+	border: 1px #c9c9c9 solid;
+	background-color: #ffffff;
+	filter: progid:DXImageTransform.Microsoft.gradient(
+		GradientType=0,startColorstr=#ffffff, endColorstr=#f0f0f0
+	);
+	background-image: -webkit-gradient(
+		linear, right top, right bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f0f0)
+	);
+	background-image: -webkit-linear-gradient(top, #ffffff 0%, #f0f0f0 100%);
+	background-image: -moz-linear-gradient(top, #ffffff 0%, #f0f0f0 100%);
+	background-image: -ms-linear-gradient(top, #ffffff 0%, #f0f0f0 100%);
+	background-image: -o-linear-gradient(top, #ffffff 0%, #f0f0f0 100%);
+	background-image: linear-gradient(top, #ffffff 0%, #f0f0f0 100%);
+}
+
+.ve-init-mw-viewPageTarget-button-constructive {
+	/* Green */
+	border: solid 1px #c3e59a;
+	background-color: #f0fbe1;
+	filter: progid:DXImageTransform.Microsoft.gradient(
+		GradientType=0,startColorstr=#f0fbe1, endColorstr=#c3e59a
+	);
+	background-image: -webkit-gradient(
+		linear, right top, right bottom, color-stop(0%,#f0fbe1), color-stop(100%,#c3e59a)
+	);
+	background-image: -webkit-linear-gradient(top, #f0fbe1 0%, #c3e59a 100%);
+	background-image: -moz-linear-gradient(top, #f0fbe1 0%, #c3e59a 100%);
+	background-image: -ms-linear-gradient(top, #f0fbe1 0%, #c3e59a 100%);
+	background-image: -o-linear-gradient(top, #f0fbe1 0%, #c3e59a 100%);
+	background-image: linear-gradient(top, #f0fbe1 0%, #c3e59a 100%);
+}
+
+.ve-init-mw-viewPageTarget-button-primary {
+	/* Blue */
+	border: solid 1px #b0d9ee;
+	background-color: #eaf4fa;
+	filter: progid:DXImageTransform.Microsoft.gradient(
+		GradientType=0,startColorstr=#eaf4fa, endColorstr=#b0d9ee
+	);
+	background-image: -webkit-gradient(
+		linear, right top, right bottom, color-stop(0%,#eaf4fa), color-stop(100%,#b0d9ee)
+	);
+	background-image: -webkit-linear-gradient(top, #eaf4fa 0%, #b0d9ee 100%);
+	background-image: -moz-linear-gradient(top, #eaf4fa 0%, #b0d9ee 100%);
+	background-image: -ms-linear-gradient(top, #eaf4fa 0%, #b0d9ee 100%);
+	background-image: -o-linear-gradient(top, #eaf4fa 0%, #b0d9ee 100%);
+	background-image: linear-gradient(top, #eaf4fa 0%, #b0d9ee 100%);
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-actions .ve-init-mw-viewPageTarget-button {
+	float: right;
+	margin: 0 0 0 1em;
+}
+
+.ve-init-mw-viewPageTarget-button:hover {
+	border-color: #aaa;
+}
+
+.ve-init-mw-viewPageTarget-button:active {
+	border-color: #ddd;
+	box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+}
+
+.ve-init-mw-viewPageTarget-button-disabled {
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+	cursor: default;
+}
+
+.ve-init-mw-viewPageTarget-button-disabled:hover {
+	border-color: #ccc;
+	box-shadow: none;
+}
+
+.ve-init-mw-viewPageTarget-button-label {
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: 4px;
-	margin-right: 4px;
+	line-height: 2.3em;
 	font-size: 0.8em;
-	line-height: 1.8em;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-saveButton,
-.ve-init-mw-viewPageTarget-saveDialog-saveButton {
-	display: inline-block;
-	border: solid 1px #c3e59a;
-	-webkit-border-radius: 0.25em;
-	-moz-border-radius: 0.25em;
-	-o-border-radius: 0.25em;
-	border-radius: 0.25em;
-	cursor: pointer;
-	vertical-align: top;
-	font-size: 1em;
-	padding: 0.25em 0.75em;
-	/* Fancy CSS background */
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, #c3e59a),
-		color-stop(1, #f0fbe1)
-	);
-	background-image: -webkit-linear-gradient(bottom, #c3e59a 0%, #f0fbe1 100%);
-	background-image: -moz-linear-gradient(bottom, #c3e59a 0%, #f0fbe1 100%);
-	background-image: -ms-linear-gradient(bottom, #c3e59a 0%, #f0fbe1 100%);
-	background-image: -o-linear-gradient(bottom, #c3e59a 0%, #f0fbe1 100%);
-	background-image: linear-gradient(bottom, #c3e59a 0%, #f0fbe1 100%);
-}
+/* Save dialog styles */
 
-.ve-init-mw-viewPageTarget-toolbar-saveButton {
-	height: 1.5em;
-	margin-right: 0.25em;
-}
-
-.ve-init-mw-viewPageTarget-saveDialog-saveButton {
-	float: right;
-	height: 2em;
-	line-height: 1.25em;
-	margin-right: 0;
-}
-
-.ve-init-mw-viewPageTarget-saveDialog-saving {
+.ve-init-mw-viewPageTarget-saveDialog-working {
 	display: none;
 	float: right;
 	height: 2em;
@@ -99,86 +188,101 @@
 	background-repeat: no-repeat;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-saveButton:before {
-	content: " ";
-	position: absolute;
-	display: block;
-	height: 22px;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-saveButton:hover,
-.ve-init-mw-viewPageTarget-saveDialog-saveButton:hover {
-	border-color: #eee;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-saveButton:active,
-.ve-init-mw-viewPageTarget-toolbar-saveButton-down,
-.ve-init-mw-viewPageTarget-saveDialog-saveButton:active,
-.ve-init-mw-viewPageTarget-saveDialog-saveButton-down {
-	border-color: #ddd;
-	-webkit-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.07);
-	-moz-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.07);
-	box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.07);
-}
-
-.ve-init-mw-viewPageTarget-toolbar-saveButton-disabled,
-.ve-init-mw-viewPageTarget-saveDialog-saveButton-saving {
-	filter: alpha(opacity=50);
-	opacity: 0.5;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-saveButton-label,
-.ve-init-mw-viewPageTarget-saveDialog-saveButton-label {
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 1.8em;
-	font-size: 0.8em;
-}
-
-.ve-init-mw-viewPageTarget-saveDialog-closeButton {
-	position: absolute;
-	top: 0.5em;
+.ve-init-mw-viewPageTarget-saveDialog {
+	display: none;
+	top: 0.25em;
 	right: 0.5em;
+	width: 29em;
+	min-width: 29em;
+	font-family: sans-serif;
+	position: absolute;
+	border: solid 1px #ccc;
+	border-radius: 0.25em;
+	background-color: #fff;
+	box-shadow: 0 0.15em 0.5em 0 rgba(0, 0, 0, 0.2);
+	padding: 2.5em 0.75em 0.75em 0.75em;
+	margin: 0 0 0 0.5em;
+	z-index: 3;
+
+	/* slide-diff can get quite long, handle overflow */
+	/* max-height set from javascript */
+	overflow-x: auto;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-head {
+	position: absolute;
+	top: 0.4em;
+	left: 0.5em;
+	right: 0.5em;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-title {
+	height: 2em;
+	line-height: 2em;
+	color: #333;
+	font-size: 0.9em;
+	float: left;
+	margin: 0 0.5em;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-prevButton {
+	float: left;
+	position: relative;
+	top: 0.1em;
 	width: 1.5em;
 	height: 1.5em;
 	cursor: pointer;
 	filter: alpha(opacity=8);
 	opacity: 0.8;
 	/* @see ve.init.mw.Icons */
-	background-position: center center;
+	background-position: left top;
 	background-repeat: no-repeat;
+	padding-right: 0.5em;
+	border-right: 1px solid #eee;
+	margin-right: 0.5em;
 }
 
-/* Save dialog styles */
-
-.ve-init-mw-viewPageTarget-saveDialog {
-	display: none;
-	top: 0.25em;
-	right: 0.5em;
-	width: 29em;
-	font-family: sans-serif;
-	position: absolute;
-	border: solid 1px #ccc;
-	-webkit-border-radius: 0.25em;
-	-moz-border-radius: 0.25em;
-	-o-border-radius: 0.25em;
-	border-radius: 0.25em;
-	background-color: #fff;
-	-webkit-box-shadow: 0 0.15em 0.5em 0 rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 0.15em 0.5em 0 rgba(0, 0, 0, 0.2);
-	box-shadow: 0 0.15em 0.5em 0 rgba(0, 0, 0, 0.2);
-	padding: 0.75em;
-	padding-top: 2.5em;
-	min-width: 15em;
-	z-index: 3;
+.ve-init-mw-viewPageTarget-saveDialog-closeButton {
+	float: right;
+	position: relative;
+	top: 0.1em;
+	width: 1.5em;
+	height: 1.5em;
+	cursor: pointer;
+	filter: alpha(opacity=8);
+	opacity: 0.8;
+	/* @see ve.init.mw.Icons */
+	background-position: right top;
+	background-repeat: no-repeat;
 }
 
 .ve-init-mw-viewPageTarget-saveDialog-body {
 	border-top: 1px solid #ddd;
-	padding: 1em 0;
+	padding-top: 1em;
 }
 
-.ve-init-mw-viewPageTarget-saveDialog-license {
+.ve-init-mw-viewPageTarget-saveDialog-slide {
+	display: none;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-slide-review .ve-init-mw-viewPageTarget-saveDialog-viewer {
+	margin-bottom: 1em;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-slide-review .ve-init-mw-viewPageTarget-saveDialog-viewer pre {
+	margin: 0;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-slide-review .ve-init-mw-viewPageTarget-saveDialog-viewer .diff {
+	font-size: 0.8em;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-foot {
+	padding-top: 1em;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-license,
+.ve-init-mw-viewPageTarget-saveDialog-report-notice {
 	font-size: 0.7em;
 	line-height: 1.25em;
 	padding: 0;
@@ -186,25 +290,22 @@
 	color: #999;
 }
 
-.ve-init-mw-viewPageTarget-saveDialog-title {
-	position: absolute;
-	top: 0;
-	left: 1em;
-	height: 2.8em;
-	line-height: 2.8em;
-	color: #333;
-	font-size: 0.9em;
-}
-
-.ve-init-mw-viewPageTarget-saveDialog-summary {
+.ve-init-mw-viewPageTarget-saveDialog-summary,
+.ve-init-mw-viewPageTarget-saveDialog-report {
 	background-color: #fff;
 	border: solid 1px #cccccc;
-	border-bottom: none;
 	padding: 0.5em;
-	-webkit-border-radius: 0.25em 0.25em 0 0;
-	-moz-border-radius: 0.25em 0.25em 0 0;
-	-o-border-radius: 0.25em 0.25em 0 0;
 	border-radius: 0.25em 0.25em 0 0;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-report {
+	margin-bottom: 1em;
+	border-radius: 0.25em;
+}
+
+.ve-init-mw-viewPageTarget-saveDialog-summary-focused,
+.ve-init-mw-viewPageTarget-saveDialog-report-focused {
+	border-color: #aaa;
 }
 
 .ve-init-mw-viewPageTarget-saveDialog-options {
@@ -212,10 +313,9 @@
 	background-color: #f7f7f7;
 	margin-bottom: 1em;
 	border: solid 1px #cccccc;
-	-webkit-border-radius: 0 0 0.25em 0.25em;
-	-moz-border-radius: 0 0 0.25em 0.25em;
-	-o-border-radius: 0 0 0.25em 0.25em;
+	border-top: none;
 	border-radius: 0 0 0.25em 0.25em;
+	min-height: 2.25em;
 }
 
 .ve-init-mw-viewPageTarget-saveDialog-body label {
@@ -226,10 +326,6 @@
 .ve-init-mw-viewPageTarget-saveDialog input[type="checkbox"] {
 	margin: 0 0.5em 0 1em;
 	line-height: 3em;
-}
-
-.ve-init-mw-viewPageTarget-saveDialog-editSummary-label {
-	display: none;
 }
 
 .ve-init-mw-viewPageTarget-saveDialog-editSummaryCount {
@@ -243,7 +339,8 @@
 	color: #aaa;
 }
 
-.ve-init-mw-viewPageTarget-saveDialog-editSummary {
+.ve-init-mw-viewPageTarget-saveDialog-editSummary,
+.ve-init-mw-viewPageTarget-saveDialog-problem {
 	border: none;
 	background-color: transparent;
 	margin: 0;
@@ -251,8 +348,18 @@
 	resize: none;
 	font-size: 0.8em;
 	font-family: sans-serif;
+	height: 5em;
 }
 
-.ve-init-mw-viewPageTarget-saveDialog-editSummary:focus {
+.ve-init-mw-viewPageTarget-saveDialog-editSummary:focus,
+.ve-init-mw-viewPageTarget-saveDialog-problem:focus {
 	outline: none;
+}
+
+/* Images */
+
+.ve-init-mw-viewPageTarget-loading,
+.ve-init-mw-viewPageTarget-saveDialog-working {
+	/* @embed */
+	background-image: url(images/loading.gif);
 }

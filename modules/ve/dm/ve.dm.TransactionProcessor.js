@@ -153,7 +153,7 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 		to = this.reversed ? op.from : op.to,
 		from = this.reversed ? op.to : op.from;
 	if ( element.type === undefined ) {
-		throw new Error( 'Invalid element error, can not set attributes on non-element data' );
+		throw new Error( 'Invalid element error, cannot set attributes on non-element data' );
 	}
 	if ( to === undefined ) {
 		// Clear
@@ -245,8 +245,8 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			// Replacement is not exclusively text
 			// Rebuild all covered nodes
 			range = new ve.Range(
-				selection[0].nodeRange.start,
-				selection[selection.length - 1].nodeRange.end
+				selection[0].nodeOuterRange.start,
+				selection[selection.length - 1].nodeOuterRange.end
 			);
 			this.synchronizer.pushRebuild( range,
 				new ve.Range( range.start + this.adjustment,
@@ -255,10 +255,8 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 		}
 		// Set change markers on the parents of the affected nodes
 		for ( i = 0; i < selection.length; i++ ) {
-			this.setChangeMarker(
-				selection[i].parentOuterRange.start + this.adjustment,
-				'content'
-			);
+			parentOffset = ( selection[i].parentOuterRange || selection[i].nodeOuterRange ).start;
+			this.setChangeMarker( parentOffset + this.adjustment, 'content' );
 		}
 		// Advance the cursor
 		this.cursor += insert.length;
@@ -337,7 +335,8 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 								// Lazy-initialize scope
 								scope = scope || this.document.getNodeFromOffset( prevCursor );
 								// Push the full range of the old scope as an affected range
-								scopeStart = this.document.getDocumentNode().getOffsetFromNode( scope );
+								scopeStart =
+									this.document.getDocumentNode().getOffsetFromNode( scope );
 								scopeEnd = scopeStart + scope.getOuterLength();
 								affectedRanges.push( new ve.Range( scopeStart, scopeEnd ) );
 								// Update scope
@@ -453,12 +452,12 @@ ve.dm.TransactionProcessor.prototype.process = function () {
  *
  * @method
  * @param {Number} to Offset to stop annotating at. Annotating starts at this.cursor
- * @throws 'Invalid transaction, can not annotate a branch element'
+ * @throws 'Invalid transaction, cannot annotate a branch element'
  * @throws 'Invalid transaction, annotation to be set is already set'
  * @throws 'Invalid transaction, annotation to be cleared is not set'
  */
 ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
-	var item, element, annotated, annotations, i, range, selection, offset;
+	var item, element, type, annotated, annotations, i, range, selection, offset;
 	if ( this.set.isEmpty() && this.clear.isEmpty() ) {
 		return;
 	}
@@ -466,10 +465,16 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 		item = this.document.data[i];
 		element = item.type !== undefined;
 		if ( element ) {
+			type = item.type;
 			if ( item.type.charAt( 0 ) === '/' ) {
-				throw new Error( 'Invalid transaction, cannot annotate a branch closing element' );
-			} else if ( ve.dm.nodeFactory.canNodeHaveChildren( item.type ) ) {
-				throw new Error( 'Invalid transaction, cannot annotate a branch opening element' );
+				type = type.substr( 1 );
+			}
+			if ( !ve.dm.nodeFactory.isNodeContent( type ) ) {
+				throw new Error( 'Invalid transaction, cannot annotate a non-content element' );
+			}
+			if ( item.type.charAt( 0 ) === '/' ) {
+				// Closing content element, ignore
+				continue;
 			}
 		}
 		annotated = element ? 'annotations' in item : ve.isArray( item );
@@ -515,9 +520,9 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 			'leaves'
 		);
 		for ( i = 0; i < selection.length; i++ ) {
-			offset = selection[i].node.isWrapped() ?
-				selection[i].nodeOuterRange.start :
-				selection[i].parentOuterRange.start;
+			offset = !selection[i].node.isWrapped() && selection[i].parentOuterRange ?
+				selection[i].parentOuterRange.start :
+				selection[i].nodeOuterRange.start;
 			this.setChangeMarker( offset + this.adjustment, 'annotations' );
 		}
 		this.synchronizer.pushAnnotation( new ve.Range( this.cursor, to ) );
@@ -534,7 +539,7 @@ ve.dm.TransactionProcessor.prototype.setChangeMarker = function ( offset, type, 
 	if ( !this.reversed ) {
 		this.transaction.setChangeMarker( offset, type, increment );
 	}
-}
+};
 
 /**
  * Apply the change markers on this.transaction to this.document . Change markers are set
@@ -550,7 +555,7 @@ ve.dm.TransactionProcessor.prototype.applyChangeMarkers = function () {
 			element = this.document.data[offset];
 			previousValue = ve.getProp( element, 'internal', 'changed', type );
 			newValue = ( previousValue || 0 ) + m*markers[offset][type];
-			if ( newValue != 0 ) {
+			if ( newValue !== 0 ) {
 				ve.setProp( element, 'internal', 'changed', type, newValue );
 			} else if ( previousValue !== undefined ) {
 				// Value was set but becomes zero, delete the key

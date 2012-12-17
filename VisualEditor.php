@@ -16,8 +16,12 @@ $wgVisualEditorParsoidURL = 'http://localhost:8000';
 // Interwiki prefix to pass to the Parsoid instance
 // Parsoid will be called as $url/$prefix/$pagename
 $wgVisualEditorParsoidPrefix = 'localhost';
+// Timeout for HTTP requests to Parsoid in seconds
+$wgVisualEditorParsoidTimeout = 100;
 // Namespaces to enable VisualEditor in
 $wgVisualEditorNamespaces = array( NS_MAIN );
+// Whether to use change tagging for VisualEditor edits
+$wgVisualEditorUseChangeTagging = true;
 
 /* Setup */
 
@@ -49,6 +53,10 @@ $wgVisualEditorResourceTemplate = array(
 	'group' => 'ext.visualEditor',
 );
 
+$wgVisualEditorEditNotices = array( 'visualeditor-alphawarning' );
+
+$wgVisualEditorEnableSectionEditLinks = false;
+
 $wgResourceModules += array(
 	'rangy' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
@@ -59,6 +67,11 @@ $wgResourceModules += array(
 	'jquery.multiSuggest' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'jquery/jquery.multiSuggest.js'
+		),
+	),
+	'jquery.visibleText' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'jquery/jquery.visibleText.js'
 		),
 	),
 	// Alias for backwards compat, safe to remove after
@@ -104,34 +117,61 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.base',
 			'ext.visualEditor.collaboration',
-			'mediawiki.util',
-			'mediawiki.feedback',
-			'mediawiki.Uri',
-			'mediawiki.Title',
-			'jquery.placeholder',
-			'jquery.client',
+			'jquery.byteLength',
 			'jquery.byteLimit',
-			'jquery.byteLength'
+			'jquery.client',
+			'jquery.placeholder',
+			'jquery.visibleText',
+			'mediawiki.jqueryMsg',
+			'mediawiki.Title',
+			'mediawiki.Uri',
+			'mediawiki.user',
+			'mediawiki.util',
+			'mediawiki.notify',
+			'mediawiki.feedback',
+			'user.options',
+			'user.tokens',
 		),
 		'messages' => array(
 			'minoredit',
-			'savearticle',
+			'cancel',
 			'watchthis',
-			'tooltip-save',
 			'copyrightwarning',
 			'copyrightpage',
 			'edit',
 			'create',
 			'accesskey-ca-edit',
+			'accesskey-ca-ve-edit',
 			'tooltip-ca-edit',
+			'tooltip-ca-ve-edit',
 			'viewsource',
+			'visualeditor-ca-ve-edit',
+			'visualeditor-ca-ve-create',
 			'visualeditor-notification-saved',
 			'visualeditor-notification-created',
+			'visualeditor-notification-restored',
+			'visualeditor-notification-reported',
 			'visualeditor-ca-editsource',
 			'visualeditor-loadwarning',
-			'visualeditor-feedback-prompt',
-			'visualeditor-feedback-dialog-title',
 			'visualeditor-editsummary',
+			'visualeditor-problem',
+			'visualeditor-editnotices-tool',
+			'visualeditor-feedback-tool',
+			'visualeditor-restore-page',
+			'visualeditor-create-page',
+			'visualeditor-save-title',
+			'visualeditor-report-notice',
+			'visualeditor-toolbar-savedialog',
+			'visualeditor-savedialog-title-review',
+			'visualeditor-savedialog-title-report',
+			'visualeditor-savedialog-title-save',
+			'visualeditor-savedialog-label-review-wrong',
+			'visualeditor-savedialog-label-review-good',
+			'visualeditor-savedialog-label-report',
+			'visualeditor-savedialog-label-create',
+			'visualeditor-savedialog-label-save',
+			'visualeditor-savedialog-label-restore',
+			'visualeditor-savedialog-label-report',
 		),
 	),
 	'ext.visualEditor.collaboration' => $wgVisualEditorResourceTemplate + array(
@@ -157,9 +197,6 @@ $wgResourceModules += array(
 			've/ve.EventEmitter.js',
 			've/init/ve.init.js',
 			've/init/ve.init.Platform.js',
-		),
-		'dependencies' => array(
-			'jquery.json',
 		),
 		'debugScripts' => array(
 			've/ve.debug.js',
@@ -189,6 +226,7 @@ $wgResourceModules += array(
 
 			// actions
 			've/actions/ve.AnnotationAction.js',
+			've/actions/ve.ContentAction.js',
 			've/actions/ve.FormatAction.js',
 			've/actions/ve.HistoryAction.js',
 			've/actions/ve.IndentationAction.js',
@@ -208,6 +246,7 @@ $wgResourceModules += array(
 			've/dm/ve.dm.Surface.js',
 			've/dm/ve.dm.SurfaceFragment.js',
 			've/dm/ve.dm.Document.js',
+			've/dm/ve.dm.DocumentSlice.js',
 			've/dm/ve.dm.DocumentSynchronizer.js',
 			've/dm/ve.dm.Converter.js',
 
@@ -224,6 +263,7 @@ $wgResourceModules += array(
 			've/dm/nodes/ve.dm.ListNode.js',
 			've/dm/nodes/ve.dm.MetaBlockNode.js',
 			've/dm/nodes/ve.dm.MetaInlineNode.js',
+			've/dm/nodes/ve.dm.MWEntityNode.js',
 			've/dm/nodes/ve.dm.ParagraphNode.js',
 			've/dm/nodes/ve.dm.PreformattedNode.js',
 			've/dm/nodes/ve.dm.TableCellNode.js',
@@ -243,10 +283,12 @@ $wgResourceModules += array(
 			've/ce/ve.ce.Document.js',
 			've/ce/ve.ce.Node.js',
 			've/ce/ve.ce.BranchNode.js',
+			've/ce/ve.ce.ContentBranchNode.js',
 			've/ce/ve.ce.LeafNode.js',
 			've/ce/ve.ce.Surface.js',
 			've/ce/ve.ce.SurfaceObserver.js',
 
+			've/ce/nodes/ve.ce.AlienNode.js',
 			've/ce/nodes/ve.ce.AlienInlineNode.js',
 			've/ce/nodes/ve.ce.AlienBlockNode.js',
 			've/ce/nodes/ve.ce.BreakNode.js',
@@ -260,6 +302,7 @@ $wgResourceModules += array(
 			've/ce/nodes/ve.ce.ListNode.js',
 			've/ce/nodes/ve.ce.MetaBlockNode.js',
 			've/ce/nodes/ve.ce.MetaInlineNode.js',
+			've/ce/nodes/ve.ce.MWEntityNode.js',
 			've/ce/nodes/ve.ce.ParagraphNode.js',
 			've/ce/nodes/ve.ce.PreformattedNode.js',
 			've/ce/nodes/ve.ce.TableCellNode.js',
@@ -325,6 +368,7 @@ $wgResourceModules += array(
 		),
 		'messages' => array(
 			'visualeditor',
+			'visualeditor-inspector-title',
 			'visualeditor-linkinspector-title',
 			'visualeditor-linkinspector-label-pagetitle',
 			'visualeditor-linkinspector-suggest-existing-page',
@@ -349,8 +393,13 @@ $wgResourceModules += array(
 			'visualeditor-clearbutton-tooltip',
 			'visualeditor-historybutton-undo-tooltip',
 			'visualeditor-historybutton-redo-tooltip',
+			'visualeditor-inspector-close-tooltip',
+			'visualeditor-inspector-remove-tooltip',
 			'visualeditor-viewpage-savewarning',
+			'visualeditor-differror',
 			'visualeditor-saveerror',
+			'visualeditor-editconflict',
+			'visualeditor-aliennode-tooltip',
 		),
 	),
 	'ext.visualEditor.icons-raster' => $wgVisualEditorResourceTemplate + array(
@@ -367,12 +416,13 @@ $wgResourceModules += array(
 
 // Parsoid Wrapper API
 $wgAutoloadClasses['ApiVisualEditor'] = $dir . 'ApiVisualEditor.php';
-$wgAPIModules['ve-parsoid'] = 'ApiVisualEditor';
+$wgAPIModules['visualeditor'] = 'ApiVisualEditor';
 
 // Integration Hooks
 $wgAutoloadClasses['VisualEditorHooks'] = $dir . 'VisualEditor.hooks.php';
 $wgHooks['BeforePageDisplay'][] = 'VisualEditorHooks::onBeforePageDisplay';
 $wgHooks['GetPreferences'][] = 'VisualEditorHooks::onGetPreferences';
+$wgHooks['ListDefinedTags'][] = 'VisualEditorHooks::onListDefinedTags';
 $wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::onMakeGlobalVariablesScript';
 $wgHooks['ResourceLoaderTestModules'][] = 'VisualEditorHooks::onResourceLoaderTestModules';
 

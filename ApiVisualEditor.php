@@ -9,14 +9,162 @@
  */
 
 class ApiVisualEditor extends ApiBase {
+	protected function getHTML( $title, $parserParams ) {
+		global $wgVisualEditorParsoidURL, $wgVisualEditorParsoidPrefix,
+			$wgVisualEditorParsoidTimeout;
+		if ( $title->exists() ) {
+			if ( !isset( $parserParams['oldid'] ) ) {
+				// Don't allow race condition where the latest revision ID changes while we are waiting
+				// for a response from Parsoid
+				$parserParams['oldid'] = $title->getLatestRevId();
+			}
+			$revision = Revision::newFromId( $parserParams['oldid'] );
+			if ( $revision === null ) {
+				return false;
+			}
+			$parserParams['touched'] = $title->getTouched();
+			$parserParams['cache'] = 1;
+			$content = Http::get(
+				// Insert slash since $wgVisualEditorParsoidURL does not
+				// end in a slash
+				wfAppendQuery(
+					$wgVisualEditorParsoidURL . '/' . $wgVisualEditorParsoidPrefix .
+						'/' . urlencode( $title->getPrefixedDBkey() ),
+					$parserParams
+				),
+				$wgVisualEditorParsoidTimeout
+			);
+			if ( $content === false ) {
+				return false;
+			}
+			$timestamp = $revision->getTimestamp();
+		} else {
+			$content = '';
+			$timestamp = wfTimestampNow();
+		}
+		return array(
+			'content' => $content,
+			'basetimestamp' => $timestamp,
+			'starttimestamp' => wfTimestampNow()
+		);
+	}
+
+	protected function postHTML( $title, $html ) {
+		global $wgVisualEditorParsoidURL, $wgVisualEditorParsoidPrefix,
+			$wgVisualEditorParsoidTimeout;
+		return Http::post(
+			$wgVisualEditorParsoidURL . '/' . $wgVisualEditorParsoidPrefix .
+				'/' . urlencode( $title->getPrefixedDBkey() ),
+			array(
+				'postData' => array( 'content' => $html ),
+				'timeout' => $wgVisualEditorParsoidTimeout
+			)
+		);
+	}
+
+	protected function saveWikitext( $title, $wikitext, $params ) {
+		$apiParams = array(
+			'action' => 'edit',
+			'title' => $title->getPrefixedDBkey(),
+			'text' => $wikitext,
+			'summary' => $params['summary'],
+			'basetimestamp' => $params['basetimestamp'],
+			'starttimestamp' => $params['starttimestamp'],
+			'token' => $params['token'],
+		);
+		if ( $params['minor'] ) {
+			$apiParams['minor'] = true;
+		}
+		// FIXME add some way that the user's preferences can be respected
+		$apiParams['watchlist'] = $params['watch'] ? 'watch' : 'unwatch';
+		$api = new ApiMain(
+			new DerivativeRequest(
+				$this->getRequest(),
+				$apiParams,
+				true // was posted
+			),
+			true // enable write
+		);
+		$api->execute();
+		return $api->getResultData();
+	}
+
+	protected function parseWikitext( $title ) {
+		$apiParams = array(
+			'action' => 'parse',
+			'page' => $title->getPrefixedDBkey()
+		);
+		$api = new ApiMain(
+			new DerivativeRequest(
+				$this->getRequest(),
+				$apiParams,
+				false // was posted?
+			),
+			true // enable write?
+		);
+
+		$api->execute();
+		$result = $api->getResultData();
+		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
+		$revision = Revision::newFromId( $result['parse']['revid'] );
+		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
+
+		if ( $content === false || ( strlen( $content ) && $revision === null ) ) {
+			return false;
+		}
+
+		return array(
+			'content' => $content,
+			'basetimestamp' => $timestamp,
+			'starttimestamp' => wfTimestampNow()
+		);
+	}
+
+	protected function diffWikitext( $title, $wikitext ) {
+		$apiParams = array(
+			'action' => 'query',
+			'prop' => 'revisions',
+			'titles' => $title->getPrefixedDBkey(),
+			'rvdifftotext' => $wikitext
+		);
+		$api = new ApiMain(
+			new DerivativeRequest(
+				$this->getRequest(),
+				$apiParams,
+				false // was posted?
+			),
+			false // enable write?
+		);
+		$api->execute();
+		$result = $api->getResultData();
+		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
+			return false;
+		}
+		$diffRows = $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'];
+
+		$context = new DerivativeContext( $this->getContext() );
+		$context->setTitle( $title );
+		$engine = new DifferenceEngine( $context );
+		return $engine->addHeader(
+			$diffRows,
+			wfMessage( 'currentrev' )->parse(),
+			wfMessage( 'yourtext' )->parse()
+		);
+	}
 
 	public function execute() {
-		global $wgVisualEditorParsoidURL, $wgVisualEditorParsoidPrefix;
+		global $wgVisualEditorNamespaces, $wgVisualEditorUseChangeTagging,
+			$wgVisualEditorEditNotices;
 		$user = $this->getUser();
-
-		$parsoid = $wgVisualEditorParsoidURL;
 		$params = $this->extractRequestParams();
 		$page = Title::newFromText( $params['page'] );
+		if ( !$page ) {
+			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
+		}
+		if ( !in_array( $page->getNamespace(), $wgVisualEditorNamespaces ) ) {
+			$this->dieUsage( "VisualEditor is not enabled in namespace " .
+				$page->getNamespace(), 'novenamespace' );
+		}
 
 		$parserParams = array();
 		if ( is_numeric( $params['oldid'] ) ) {
@@ -24,100 +172,72 @@ class ApiVisualEditor extends ApiBase {
 		}
 
 		if ( $params['paction'] === 'parse' ) {
-			if ( $page->exists() ) {
-				$parsed = Http::get(
-					// Insert slash since wgVisualEditorParsoidURL does not
-					// end in a slash
-					wfAppendQuery(
-						$parsoid . '/' . $wgVisualEditorParsoidPrefix . '/' .
-							urlencode( $page->getPrefixedDBkey() ),
-						$parserParams
-					)
-				);
-
-				if ( $parsed !== false ) {
-					$result = array(
-						'result' => 'success',
-						'parsed' => $parsed
-					);
-				} else {
-					$result = array(
-						'result' => 'error'
-					);
+			$parsed = $this->getHTML( $page, $parserParams );
+			// Dirty hack to provide the correct context for edit notices
+			global $wgTitle; // FIXME NOOOOOOOOES
+			$wgTitle = $page;
+			$notices = $page->getEditNotices();
+			if ( count( $wgVisualEditorEditNotices ) ) {
+				foreach ( $wgVisualEditorEditNotices as $key ) {
+					$notices[] = wfMessage( $key )->parseAsBlock();
 				}
+			}
+			if ( $parsed === false ) {
+				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 			} else {
-				$result = array(
-					'result' => 'success',
-					'parsed' => ''
+				$result = array_merge(
+					array( 'result' => 'success', 'notices' => $notices ), $parsed
 				);
 			}
-		} elseif ( $params['paction'] === 'save' && $user->isBlocked() ) {
-			$result = array( 'result' => 'error' );
-		} elseif ( $params['paction'] === 'save' /* means user is not blocked */ ) {
-			// API Posts HTML to Parsoid Service, receives Wikitext,
-			// API Saves Wikitext to page.
-			$wikitext = Http::post(
-				$parsoid . '/' . $page->getPrefixedDBkey(),
-				array( 'postData' => array( 'content' => $params['html'] ) )
-			);
+		} else if ( $params['paction'] === 'serialize' ) {
+			if ( $params['html'] === null ) {
+				$this->dieUsageMsg( 'missingparam', 'html' );
+			}
+			$serialized = array( 'content' => $this->postHTML( $page, $params['html'] ) );
+			if ( $serialized === false ) {
+				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+			} else {
+				$result = array_merge( array( 'result' => 'success' ), $serialized );
+			}
+		} elseif ( $params['paction'] === 'save' || $params['paction'] === 'diff' ) {
+			$wikitext = $this->postHTML( $page, $params['html'] );
 
-			if ( $wikitext ) {
-
-				/* Save Page */
-				$flags = $params['minor'] === 'true' ? EDIT_MINOR : 0;
-
-				$wikiPage = WikiPage::factory( $page );
-				$status = $wikiPage->doEdit( 
-					$wikitext, 
-					$params['summary'],
-					$flags
-				);
-				
-				// Check status ?
-				// $status->ok === true ?
-
-				// Add / Remove from watch list.
-				if( $params['watch'] === 'true' ) {
-					if ( $user->isWatched( $page ) === false ) {
-						$user->addWatch( $page );
-					}
+			if ( $wikitext === false ) {
+				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+			} else if ( $params['paction'] === 'save' ) {
+				// Save page
+				$editResult = $this->saveWikitext( $page, $wikitext, $params );
+				if (
+					!isset( $editResult['edit']['result'] ) ||
+					$editResult['edit']['result'] !== 'Success'
+				) {
+					$result = array(
+						'result' => 'error',
+						'edit' => $editResult['edit']
+					);
 				} else {
-					// Remove from watchlist? 
-					if ( $user->isWatched( $page ) === true ) {
-						$user->removeWatch( $page );
+					if ( isset ( $editResult['edit']['newrevid'] ) && $wgVisualEditorUseChangeTagging ) {
+						ChangeTags::addTags( 'visualeditor', null,
+							intval( $editResult['edit']['newrevid'] ),
+							null
+						);
 					}
+					$parsed = $this->parseWikitext( $page );
+					if ( $parsed === false ) {
+						$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+					}
+					$result = array_merge( array( 'result' => 'success' ), $parsed );
 				}
-
-				/* Get page content */
-				// NOTE: possibly return content from revision object vs current rev ?
-				// $revisionObj = $status->value['revision'];
-				
-				$apiParams = array(
-					'action' => 'parse',
-					'page' => $page
-				);
-				$api = new ApiMain(
-					new DerivativeRequest(
-						$this->getRequest(),
-						$apiParams,
-						false // was posted?
-					),
-					true // enable write?
-				);
-
-				$api->execute();
-				$result = $api->getResultData();
-		
+			} else if ( $params['paction'] === 'diff' ) {
+				$diff = $this->diffWikitext( $page, $wikitext );
+				if ( $diff === false ) {
+					$this->dieUsage( 'Diff failed', 'difffailed' );
+				}
 				$result = array(
 					'result' => 'success',
-					'content' => $result['parse']['text']['*']
-				);
-			} else {
-				$result = array(
-					'result' => 'error'
+					'diff' => $diff
 				);
 			}
-
 		}
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
@@ -130,25 +250,35 @@ class ApiVisualEditor extends ApiBase {
 			),
 			'paction' => array(
 				ApiBase::PARAM_REQUIRED => true,
+				ApiBase::PARAM_TYPE => array( 'parse', 'serialize', 'save', 'diff' ),
 			),
-			'oldid' => array(
-				ApiBase::PARAM_REQUIRED => false,
+			'token' => array(
+				ApiBase::PARAM_REQUIRED => true,
 			),
-			'minor' => array(
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'watch' => array(
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'html' => array(
-				ApiBase::PARAM_REQUIRED => false,
-			),
+			'basetimestamp' => null,
+			'starttimestamp' => null,
+			'oldid' => null,
+			'minor' => null,
+			'watch' => null,
+			'html' => null,
 			'summary' => null
 		);
 	}
 
 	public function needsToken() {
-		return false;
+		return true;
+	}
+
+	public function getTokenSalt() {
+		return '';
+	}
+
+	public function mustBePosted() {
+		return true;
+	}
+
+	public function isWriteMode() {
+		return true;
 	}
 
 	public function getVersion() {
@@ -158,10 +288,14 @@ class ApiVisualEditor extends ApiBase {
 	public function getParamDescription() {
 		return array(
 			'page' => 'The page to perform actions on.',
-			'paction' => 'Which action? parse or save.',
+			'paction' => 'Action to perform',
 			'oldid' => 'The revision number to use.',
 			'minor' => 'Flag for minor edit.',
-			'html' => 'HTML to send to parsoid in exchange for wikitext'
+			'html' => 'HTML to send to parsoid in exchange for wikitext',
+			'summary' => 'Edit summary',
+			'basetimestamp' => 'When saving, set this to the timestamp of the revision that was edited. Used to detect edit conflicts.',
+			'starttimestamp' => 'When saving, set this to the timestamp of when the page was loaded. Used to detect edit conflicts.',
+			'token' => 'Edit token',
 		);
 	}
 

@@ -26,6 +26,9 @@ ve.ce.BranchNode = function VeCeBranchNode( type, model, $element ) {
 	// Properties
 	this.domWrapperElementType = this.$.get( 0 ).nodeName.toLowerCase();
 	this.slugs = { };
+	this.emitChildUpdate = ve.bind( function () {
+		this.emit( 'childUpdate' );
+	}, this );
 
 	// Events
 	this.model.addListenerMethod( this, 'splice', 'onSplice' );
@@ -160,13 +163,16 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 	if ( args.length >= 3 ) {
 		for ( i = 2, length = args.length; i < length; i++ ) {
 			args[i] = ve.ce.nodeFactory.create( args[i].getType(), args[i] );
+			args[i].model.addListener( 'update', this.emitChildUpdate );
 		}
 	}
 	removals = this.children.splice.apply( this.children, args );
 	for ( i = 0, length = removals.length; i < length; i++ ) {
+		removals[i].model.removeListener( 'update', this.emitChildUpdate );
 		removals[i].detach();
 		// Update DOM
 		removals[i].$.detach();
+		removals[i].setLive( false );
 	}
 	if ( args.length >= 3 ) {
 		if ( index ) {
@@ -179,6 +185,9 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 				$anchor.after( args[i].$ );
 			} else {
 				this.$.prepend( args[i].$ );
+			}
+			if ( this.live !== args[i].isLive() ) {
+				args[i].setLive( this.live );
 			}
 		}
 	}
@@ -208,7 +217,7 @@ ve.ce.BranchNode.prototype.setupSlugs = function () {
 		for ( i = 0; i < this.children.length; i++ ) {
 			// First sluggable child (left side)
 			if ( i === 0 && this.children[i].canHaveSlugBefore() ) {
-				this.slugs[i] = $slug.clone().insertBefore( this.children[i].$ );
+				this.slugs[i] = $slug.clone().insertBefore( this.children[i].$.first() );
 			}
 			if ( this.children[i].canHaveSlugAfter() ) {
 				if (
@@ -217,7 +226,7 @@ ve.ce.BranchNode.prototype.setupSlugs = function () {
 					// Sluggable child followed by another sluggable child (in between)
 					( this.children[i + 1] && this.children[i + 1].canHaveSlugBefore() )
 				) {
-					this.slugs[i + 1] = $slug.clone().insertAfter( this.children[i].$ );
+					this.slugs[i + 1] = $slug.clone().insertAfter( this.children[i].$.last() );
 				}
 			}
 		}
@@ -239,15 +248,13 @@ ve.ce.BranchNode.prototype.getSlugAtOffset = function ( offset ) {
 	}
 };
 
-ve.ce.BranchNode.prototype.clean = function () {
-	// Detach all child nodes from this.$
-	// We can't use this.$.empty() because that destroys .data() and event handlers
-	this.$.contents().each( function () {
-		$(this).detach();
-	} );
-	// Reattach the child nodes we're supposed to have
+/**
+ * @method
+ */
+ve.ce.BranchNode.prototype.setLive = function ( live ) {
+	this.live = live;
+	this.emit( 'live' );
 	for ( var i = 0; i < this.children.length; i++ ) {
-		this.$.append( this.children[i].$ );
+		this.children[i].setLive( live );
 	}
-	this.setupSlugs();
 };

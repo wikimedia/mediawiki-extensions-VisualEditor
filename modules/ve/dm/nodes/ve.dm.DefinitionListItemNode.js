@@ -12,11 +12,11 @@
  * @constructor
  * @extends {ve.dm.BranchNode}
  * @param {ve.dm.BranchNode[]} [children] Child nodes to attach
- * @param {Object} [attributes] Reference to map of attribute key/value pairs
+ * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.DefinitionListItemNode = function VeDmDefinitionListItemNode( children, attributes ) {
+ve.dm.DefinitionListItemNode = function VeDmDefinitionListItemNode( children, element ) {
 	// Parent constructor
-	ve.dm.BranchNode.call( this, 'definitionListItem', children, attributes );
+	ve.dm.BranchNode.call( this, 'definitionListItem', children, element );
 };
 
 /* Inheritance */
@@ -24,6 +24,10 @@ ve.dm.DefinitionListItemNode = function VeDmDefinitionListItemNode( children, at
 ve.inheritClass( ve.dm.DefinitionListItemNode, ve.dm.BranchNode );
 
 /* Static Members */
+
+ve.dm.DefinitionListItemNode.defaultAttributes = {
+	'style': 'term'
+};
 
 /**
  * Node rules.

@@ -26,6 +26,7 @@ ve.Surface = function VeSurface( parent, dom, options ) {
 	this.context = new ve.ui.Context( this );
 	this.toolbars = {};
 	this.commands = {};
+	this.enabled = true;
 
 	// DOM Changes
 	$( parent ).append( this.$ );
@@ -39,10 +40,19 @@ ve.Surface = function VeSurface( parent, dom, options ) {
 	);
 
 	// Initialization
+	// Propagate to each node information that it is live (attached to the live DOM)
+	this.view.getDocument().getDocumentNode().setLive( true );
 	this.setupToolbars();
 	this.setupCommands();
+	this.resetSelection();
 	ve.instances.push( this );
 	this.model.startHistoryTracking();
+
+	// Turn off native object editing. This must be tried after the surface has been added to DOM.
+	try {
+		document.execCommand( 'enableObjectResizing', false, false );
+		document.execCommand( 'enableInlineTableEditing', false, false );
+	} catch ( e ) { /* Silently ignore */ }
 };
 
 /* Static Members */
@@ -106,6 +116,61 @@ ve.Surface.prototype.getContext = function () {
 };
 
 /**
+ * Destroy the surface, releasing all memory and removing all DOM elements.
+ *
+ * @method
+ * @returns {ve.ui.Context} Context user interface
+ */
+ve.Surface.prototype.destroy = function () {
+	ve.instances.splice( ve.instances.indexOf( this ), 1 );
+	this.$.remove();
+	this.view.destroy();
+	this.context.destroy();
+};
+
+/**
+ * Disables editing.
+ *
+ * @method
+ */
+ve.Surface.prototype.disable = function () {
+	this.view.disable();
+	this.model.disable();
+	this.enabled = false;
+};
+
+/**
+ * Enables editing.
+ *
+ * @method
+ */
+ve.Surface.prototype.enable = function () {
+	this.enabled = true;
+	this.view.enable();
+	this.model.enable();
+};
+
+/**
+ * Enables editing.
+ *
+ * @method
+ */
+ve.Surface.prototype.isEnabled = function () {
+	return this.enabled;
+};
+
+/**
+ * Fix up the initial selection.
+ *
+ * Reselect the selection and force a poll. This forces the selection to be something reasonable.
+ * In Firefox, the initial selection is (0,0), which causes problems (bug 42277).
+ */
+ve.Surface.prototype.resetSelection = function () {
+	this.model.getFragment().select();
+	this.view.surfaceObserver.poll();
+};
+
+/**
  * Executes an action or command.
  *
  * @method
@@ -115,6 +180,9 @@ ve.Surface.prototype.getContext = function () {
  * @returns {Boolean} Action or command was executed
  */
 ve.Surface.prototype.execute = function ( action, method ) {
+	if ( !this.enabled ) {
+		return;
+	}
 	var trigger, obj, ret;
 	if ( action instanceof ve.Command ) {
 		trigger = action.toString();

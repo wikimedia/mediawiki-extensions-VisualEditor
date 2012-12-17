@@ -48,7 +48,6 @@ ve.dm.Document = function VeDmDocument( data, parentDocument ) {
 		currentStack = stack[1],
 		parentStack = stack[0],
 		currentNode = this.documentNode;
-	this.insertAnnotations = new ve.AnnotationSet();
 	this.documentNode.setDocument( doc );
 	this.documentNode.setRoot( root );
 	for ( i = 0; i < this.data.length; i++ ) {
@@ -98,7 +97,7 @@ ve.dm.Document = function VeDmDocument( data, parentDocument ) {
 				// Branch or leaf node opening
 				// Create a childless node
 				node = ve.dm.nodeFactory.create( this.data[i].type, [],
-					this.data[i].attributes
+					this.data[i]
 				);
 				// Set the root pointer now, to prevent cascading updates
 				node.setRoot( root );
@@ -157,6 +156,23 @@ ve.inheritClass( ve.dm.Document, ve.Document );
 /* Static methods */
 
 /**
+ * Pattern that matches anything that's not considered part of a word.
+ *
+ * This is a very loose definition, it includes some punctuation that can occur around or inside of
+ * a word. This may need to be added to for some locales and perhaps made to be extendable for
+ * better internationalization support.
+ *
+ * Allowed characters:
+ *     * Numbers and letters: a-z, A-Z, 0-9
+ *     * Underscores and dashes: _, -
+ *     * Brackets and parenthesis: (), []
+ *     * Apostrophes and double quotes: ', "
+ *
+ * This pattern is tested against one character at a time.
+ */
+ve.dm.SurfaceFragment.wordBoundaryPattern = /[^\w'"-\(\)\[\]]+/;
+
+/**
  * Applies annotations to content data.
  *
  * This method modifies data in place.
@@ -166,6 +182,10 @@ ve.inheritClass( ve.dm.Document, ve.Document );
  * @param {ve.AnnotationSet} annotationSet Annotations to apply
  */
 ve.dm.Document.addAnnotationsToData = function ( data, annotationSet ) {
+	if ( annotationSet.isEmpty() ) {
+		// Nothing to do
+		return;
+	}
 	// Apply annotations to data
 	for ( var i = 0; i < data.length; i++ ) {
 		if ( !ve.isArray( data[i] ) ) {
@@ -589,7 +609,7 @@ ve.dm.Document.prototype.getAnnotationsFromOffset = function ( offset ) {
 	}
 	// Since annotations are not stored on a closing leaf node,
 	// rewind offset by 1 to return annotations for that structure
-	var set;
+	var annotations;
 	if (
 		ve.isPlainObject( this.data[offset] ) && // structural offset
 		this.data[offset].hasOwnProperty( 'type' ) && // just in case
@@ -601,8 +621,8 @@ ve.dm.Document.prototype.getAnnotationsFromOffset = function ( offset ) {
 		offset = this.getRelativeContentOffset( offset, -1 );
 	}
 
-	set = this.data[offset].annotations || this.data[offset][1];
-	return set ? set.clone() : new ve.AnnotationSet();
+	annotations = this.data[offset].annotations || this.data[offset][1];
+	return annotations ? annotations.clone() : new ve.AnnotationSet();
 };
 
 /**
@@ -729,10 +749,10 @@ ve.dm.Document.prototype.trimOuterSpaceFromRange = function ( range ) {
 	range.normalize();
 	var start = range.start,
 		end = range.end;
-	while ( this.data[start] === ' ' ) {
+	while ( this.data[start][0] === ' ' ) {
 		start++;
 	}
-	while ( this.data[end - 1] === ' ' ) {
+	while ( this.data[end - 1][0] === ' ' ) {
 		end--;
 	}
 	return range.to < range.end ? new ve.Range( end, start ) : new ve.Range( start, end );
@@ -785,6 +805,8 @@ ve.dm.Document.prototype.rebuildNodes = function ( parent, index, numNodes, offs
  * Gets an offset a given distance from another using a callback to check if offsets are valid.
  *
  * - If {offset} is not already valid, one step will be used to move it to an valid one.
+ * - If {offset} is already valid and cannot be moved in the direction of {distance} and still be
+ *   valid, it will be left where it is
  * - If {distance} is zero the result will either be {offset} if it's already valid or the
  *   nearest valid offset to the right if possible and to the left otherwise.
  * - If {offset} is after the last valid offset and {distance} is >= 1, or if {offset} if
@@ -842,6 +864,11 @@ ve.dm.Document.prototype.getRelativeOffset = function ( offset, distance, callba
 			// Only turn around if we're about to reach the edge
 			( ( direction < 0 && i === 0 ) || ( direction > 0 && i === this.data.length ) )
 		) {
+			// Before we turn around, let's see if we are at a valid position
+			if ( callback.apply( window, [this.data, start].concat( args ) ) ) {
+				// Stay where we are
+				return start;
+			}
 			// Start over going in the opposite direction
 			direction *= -1;
 			i = start;
@@ -956,6 +983,46 @@ ve.dm.Document.prototype.getNearestStructuralOffset = function ( offset, directi
 		return this.getRelativeOffset(
 			offset, direction > 0 ? 1 : -1, ve.dm.Document.isStructuralOffset, unrestricted
 		);
+	}
+};
+
+/**
+ * Gets the nearest word boundary.
+ *
+ * The offset will first be moved to the nearest content offset if it's not at one already. If a
+ * direction was given, the boundary will be found in that direction, otherwise both directions will
+ * be calculated and the one with the lowest distance from offset will be returned. Elements are
+ * always word boundaries. For more information about what is considered to be a word character,
+ * see {ve.dm.SurfaceFragment.wordPattern}.
+ *
+ * @method
+ * @param {Number} offset Offset to start from
+ * @param {Number} [direction] Direction to prefer matching offset in, -1 for left and 1 for right
+ * @returns {Number} Nearest word boundary
+ */
+ve.dm.Document.prototype.getNearestWordBoundary = function ( offset, direction ) {
+	var left, right, i, inc,
+		pattern = ve.dm.SurfaceFragment.wordBoundaryPattern,
+		data = this.data;
+	offset = this.getNearestContentOffset( offset );
+	if ( !direction ) {
+		left = this.getNearestWordBoundary( offset, -1 );
+		right = this.getNearestWordBoundary( offset, +1 );
+		return offset - left < right - offset ? left : right;
+	} else {
+		inc = direction > 0 ? 1 : -1;
+		i = offset + ( inc > 0 ? 0 : -1 );
+		do {
+			if ( data[i].type === undefined ) {
+				// Plain text extraction
+				if ( pattern.test( typeof data[i] === 'string' ? data[i] : data[i][0] ) ) {
+					break;
+				}
+			} else {
+				break;
+			}
+		} while ( data[i += inc] );
+		return i + ( inc > 0 ? 0 : 1 );
 	}
 };
 
@@ -1074,9 +1141,21 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 
 					// Validate
 					// FIXME this breaks certain input, should fix it up, not scream and die
-					if ( element.type !== '/' + expectedType ) {
-						throw new Error( 'Type mismatch, expected /' + expectedType +
-							' but got ' + element.type + ' (at index ' + index + ')' );
+					// For now we fall back to inserting balanced data, but then we miss out on
+					// a lot of the nice content adoption abilities of just fixing up the data in
+					// the context of the insertion point - an example of how this will fail is if
+					// you try to insert "b</p></li></ul><p>c" into "<p>a[cursor]d</p>"
+					if (
+						element.type !== '/' + expectedType &&
+						(
+							// Only throw an error if the content can't be adopted from one content
+							// branch to another
+							!ve.dm.nodeFactory.canNodeContainContent( element.type.substr( 1 ) ) ||
+							!ve.dm.nodeFactory.canNodeContainContent( expectedType )
+						)
+					) {
+						throw new Error( 'Cannot adopt content from ' + element.type +
+							' nodes into ' + expectedType + ' nodes (at index ' + index + ')' );
 					}
 				}
 			}
@@ -1105,7 +1184,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				}
 			}
 			parentType = openingStack.length > 0 ?
-				openingStack[openingStack.length - 1] : parentNode.getType();
+				openingStack[openingStack.length - 1].type : parentNode.getType();
 		}
 		if ( data[i].type === undefined || data[i].type.charAt( 0 ) !== '/' ) {
 			childType = data[i].type || 'text';
@@ -1122,7 +1201,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				!ve.dm.nodeFactory.canNodeContainContent( parentType )
 			) {
 				childType = 'paragraph';
-				openings.unshift ( { 'type': 'paragraph' } );
+				openings.unshift( ve.dm.nodeFactory.getDataElement( childType ) );
 			}
 
 			// Check that this node is allowed to have the containing node as its parent. If not,
@@ -1139,7 +1218,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 					}
 					// Open an allowed node around this node
 					childType = allowedParents[0];
-					openings.unshift( { 'type': childType } );
+					openings.unshift( ve.dm.nodeFactory.getDataElement( childType ) );
 				}
 			} while ( !parentsOK );
 
@@ -1232,7 +1311,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				}
 			}
 			parentType = openingStack.length > 0 ?
-				openingStack[openingStack.length - 1] : parentNode.getType();
+				openingStack[openingStack.length - 1].type : parentNode.getType();
 		}
 	}
 
@@ -1253,7 +1332,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 			}
 		}
 		parentType = openingStack.length > 0 ?
-			openingStack[openingStack.length - 1] : parentNode.getType();
+			openingStack[openingStack.length - 1].type : parentNode.getType();
 	}
 
 	// Close unclosed openings
@@ -1268,7 +1347,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 		popped = closingStack[closingStack.length - 1];
 		// writeElement() will perform the actual pop() that removes
 		// popped from closingStack
-		writeElement( { 'type': popped.getType() }, i );
+		writeElement( popped.getClonedElement(), i );
 	}
 
 	return newData;
@@ -1278,20 +1357,20 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
  * Get the linear model data for the given range, but fix up unopened closings and unclosed openings
  * in the data snippet such that the returned snippet is balanced.
  *
- * @returns {Array} Balanced snippet of linear model data
+ * @returns {ve.dm.DocumentSlice} Balanced snippet of linear model data
  */
-ve.dm.Document.prototype.getBalancedData = function ( range ) {
+ve.dm.Document.prototype.getSlice = function ( range ) {
 	var first, last, firstNode, lastNode,
 		node = this.getNodeFromOffset( range.start ),
 		selection = this.selectNodes( range, 'siblings' ),
 		addOpenings = [],
 		addClosings = [];
 	if ( selection.length === 0 ) {
-		return [];
+		return new ve.dm.DocumentSlice( [] );
 	}
 	if ( selection.length === 1 && selection[0].range.equals( range ) ) {
 		// Nothing to fix up
-		return this.data.slice( range.start, range.end );
+		return new ve.dm.DocumentSlice( this.data.slice( range.start, range.end ) );
 	}
 
 	first = selection[0];
@@ -1332,7 +1411,10 @@ ve.dm.Document.prototype.getBalancedData = function ( range ) {
 		}
 	}
 
-	return addOpenings.reverse()
-		.concat( this.data.slice( range.start, range.end ) )
-		.concat( addClosings );
+	return new ve.dm.DocumentSlice(
+		addOpenings.reverse()
+			.concat( this.data.slice( range.start, range.end ) )
+			.concat( addClosings ),
+		new ve.Range( addOpenings.length, addOpenings.length + range.getLength() )
+	);
 };

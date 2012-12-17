@@ -47,11 +47,21 @@ ve.init.Platform.prototype.getModulesUrl = function () {
 };
 
 /**
+ * Whether to use change markers
+ *
+ * @method
+ * @returns {Boolean}
+ */
+ve.init.Platform.prototype.useChangeMarkers = function () {
+	return true;
+};
+
+/**
  * Adds multiple messages to the localization system.
  *
  * @method
  * @abstract
- * @param {Object} messages Map of message-key/message-string pairs
+ * @param {Object} messages Containing plain message values.
  */
 ve.init.Platform.prototype.addMessages = function () {
 	throw new Error( 've.init.Platform.addMessages must be overridden in subclass' );
@@ -68,4 +78,28 @@ ve.init.Platform.prototype.addMessages = function () {
  */
 ve.init.Platform.prototype.getMessage = function () {
 	throw new Error( 've.init.Platform.getMessage must be overridden in subclass' );
+};
+
+/**
+ * Adds multiple parsed messages to the localization system.
+ *
+ * @method
+ * @abstract
+ * @param {Object} messages Containing parsed html strings
+ */
+ve.init.Platform.prototype.addParsedMessages = function () {
+	throw new Error( 've.init.Platform.addParsedMessages must be overridden in subclass' );
+};
+
+/**
+ * Gets a parsed message as HTML string.
+ * Does not support $# replacements.
+ *
+ * @method
+ * @abstract
+ * @param {String} key Message key
+ * @returns {String} Parsed localized message as HTML string.
+ */
+ve.init.Platform.prototype.getParsedMessage = function () {
+	throw new Error( 've.init.Platform.getParsedMessage must be overridden in subclass' );
 };

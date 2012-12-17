@@ -208,9 +208,9 @@
 	ve.isArray = $.isArray;
 
 	/**
-	 * Create a function calls the given function in a certain context.
+	 * Create a function that calls the given function in a certain context.
 	 * If a function does not have an explicit context, it is determined at
-	 * executin time based on how it is invoked (e.g. object member, call/apply,
+	 * execution time based on how it is invoked (e.g. object member, call/apply,
 	 * global scope, etc.).
 	 * Performance optimization: http://jsperf.com/function-bind-shim-perf
 	 *
@@ -676,6 +676,8 @@
 	 * @param {Mixed} [...] Message parameters
 	 */
 	ve.msg = function () {
+		// Avoid using ve.bind because ve.init.platform doesn't exist yet.
+		// TODO: Fix dependency issues between ve.js and ve.init.platform
 		return ve.init.platform.getMessage.apply( ve.init.platform, arguments );
 	};
 
@@ -757,7 +759,7 @@
 	 * @param {HTMLElement} element
 	 * @returns {Object}
 	 */
-	ve.getDOMAttributes = function ( element ) {
+	ve.getDomAttributes = function ( element ) {
 		var result = {}, i;
 		for ( i = 0; i < element.attributes.length; i++ ) {
 			result[element.attributes[i].name] = element.attributes[i].value;
@@ -767,15 +769,24 @@
 
 	/**
 	 * Set the attributes of a DOM element as an object with key/value pairs
-	 * @param {HTMLElement} element
-	 * @param {Object} attributes
+	 *
+	 * @param {HTMLElement} element DOM element to apply attributes to
+	 * @param {Object} attributes Attributes to apply
+	 * @param {String[]} [whitelist] List of attributes to exclusively allow (all lower case names)
 	 */
-	ve.setDOMAttributes = function ( element, attributes ) {
+	ve.setDomAttributes = function ( element, attributes, whitelist ) {
 		var key;
+		// Duck-typing for attribute setting
+		if ( !element.setAttribute || !element.removeAttribute ) {
+			return;
+		}
 		for ( key in attributes ) {
 			if ( attributes[key] === undefined || attributes[key] === null ) {
 				element.removeAttribute( key );
 			} else {
+				if ( whitelist && whitelist.indexOf( key.toLowerCase() ) === -1 ) {
+					continue;
+				}
 				element.setAttribute( key, attributes[key] );
 			}
 		}
@@ -814,8 +825,7 @@
 		'article', 'aside', 'body', 'nav', 'section', 'footer', 'header', 'figure',
 		'figcaption', 'fieldset', 'details', 'blockquote',
 		// other
-		'br', 'hr', 'button', 'canvas', 'center', 'col', 'colgroup', 'embed',
-		// 'img', // Really?
+		'hr', 'button', 'canvas', 'center', 'col', 'colgroup', 'embed',
 		'map', 'object', 'pre', 'progress', 'video'
 	];
 

@@ -97,7 +97,8 @@
 				}
 			}
 			// Call configured input method and supply the private build method as callback.
-			function onInput() {
+			function onInput( immediate ) {
+				var delay = immediate ? 0 : 250;
 				// Throttle
 				clearTimeout( inputTimer );
 				inputTimer = setTimeout( function () {
@@ -111,6 +112,8 @@
 							options.input.call( $input, function ( params, callback ) {
 								build( params );
 							} );
+						} else if ( !visible && txt === currentInput ) {
+							open();
 						}
 					} else {
 						// No Text, close.
@@ -121,24 +124,13 @@
 					// Set current input.
 					currentInput = txt;
 
-				}, 250 );
+				}, delay );
 			}
 			// Opens the MultiSuggest dropdown.
 			function open() {
 				if ( !visible ) {
-					// Call input method if cached value is stale
-					if (
-						$input.val() !== '' &&
-						$input.val() !== currentInput
-					) {
-						onInput();
-					} else {
-						// Show if there are suggestions.
-						if ( $multiSuggest.children().length > 0 ) {
-							visible = true;
-							$multiSuggest.show();
-						}
-					}
+					$multiSuggest.show();
+					visible = true;
 				}
 			}
 			// Closes the dropdown.
@@ -162,7 +154,7 @@
 			}
 			// When an item is "clicked".
 			// Use of mousedown to prevent blur.
-			function onItemMousedown ( e ) {
+			function onItemMousedown( e ) {
 				e.preventDefault();
 				$multiSuggest
 					.find( '.' + options.prefix + '-suggest-item' )
@@ -170,6 +162,15 @@
 				$( this ).addClass( 'selected' );
 				select.call( this, $( this ).data( 'text' ) );
 			}
+
+			function onItemMouseenter() {
+				$( this ).addClass( 'hover' );
+			}
+
+			function onItemMouseleave() {
+				$( this ).removeClass( 'hover' );
+			}
+
 			// Adds a group to the dropdown.
 			function addGroup( name, group ) {
 				var $groupWrap,
@@ -206,7 +207,12 @@
 					$item = $( '<div>', options.doc )
 						.addClass( options.prefix + '-suggest-item' )
 						.data( 'text', group.items[i] )
-						.on( 'mousedown', onItemMousedown );
+						.on( {
+							'mousedown': onItemMousedown,
+							'mouseenter': onItemMouseenter,
+							'mouseleave': onItemMouseleave
+						} );
+
 					if ( 'itemClass' in group ) {
 						$item.addClass( group.itemClass );
 					}
@@ -216,8 +222,11 @@
 						.css( 'whiteSpace', 'nowrap' )
 						.text( group.items[i] )
 					);
-					// Select this item by default
-					if ( group.items[i].toLowerCase() === $input.val().toLowerCase() ) {
+					// Select the first item by default
+					if (
+						$multiSuggest.find( '.selected' ).length === 0 &&
+						group.items[i].toLowerCase() === $input.val().toLowerCase() )
+					{
 						$item.addClass( 'selected' );
 					}
 					// CSS Ellipsis
@@ -303,13 +312,18 @@
 							}
 							return;
 						}
+					// Escape
+					} else if ( e.which === 27 ) {
+						close();
+						return;
+					// Normal input.
+					} else {
+						onInput();
 					}
-					// Handle normal input.
-					onInput();
 				},
 				'focus': function () {
 					focused = true;
-					open();
+					onInput( true );
 				},
 				'blur': function () {
 					focused = false;

@@ -20,10 +20,13 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	// Properties
 	this.documentModel = doc;
 	this.selection = new ve.Range( 0, 0 );
+	this.selectedNodes = {};
 	this.smallStack = [];
 	this.bigStack = [];
 	this.undoIndex = 0;
 	this.historyTrackingInterval = null;
+	this.insertionAnnotations = new ve.AnnotationSet();
+	this.enabled = true;
 };
 
 /* Inheritance */
@@ -33,11 +36,34 @@ ve.inheritClass( ve.dm.Surface, ve.EventEmitter );
 /* Methods */
 
 /**
+ * Disables changes.
+ *
+ * @method
+ */
+ve.dm.Surface.prototype.disable = function () {
+	this.stopHistoryTracking();
+	this.enabled = false;
+};
+
+/**
+ * Enables changes.
+ *
+ * @method
+ */
+ve.dm.Surface.prototype.enable = function () {
+	this.enabled = true;
+	this.startHistoryTracking();
+};
+
+/**
  * Start tracking state changes in history.
  *
  * @method
  */
 ve.dm.Surface.prototype.startHistoryTracking = function () {
+	if ( !this.enabled ) {
+		return;
+	}
 	this.historyTrackingInterval = setInterval( ve.bind( this.breakpoint, this ), 750 );
 };
 
@@ -47,6 +73,9 @@ ve.dm.Surface.prototype.startHistoryTracking = function () {
  * @method
  */
 ve.dm.Surface.prototype.stopHistoryTracking = function () {
+	if ( !this.enabled ) {
+		return;
+	}
 	clearInterval( this.historyTrackingInterval );
 };
 
@@ -56,6 +85,9 @@ ve.dm.Surface.prototype.stopHistoryTracking = function () {
  * @method
  */
 ve.dm.Surface.prototype.purgeHistory = function () {
+	if ( !this.enabled ) {
+		return;
+	}
 	this.selection = null;
 	this.smallStack = [];
 	this.bigStack = [];
@@ -74,6 +106,61 @@ ve.dm.Surface.prototype.getHistory = function () {
 	} else {
 		return this.bigStack.slice( 0 );
 	}
+};
+
+/**
+ * Gets annotations that will be used upon insertion.
+ *
+ * @method
+ * @returns {ve.AnnotationSet|null} Insertion anotations or null if not being used
+ */
+ve.dm.Surface.prototype.getInsertionAnnotations = function () {
+	return this.insertionAnnotations.clone();
+};
+
+/**
+ * Sets annotations that will be used upon insertion.
+ *
+ * @method
+ * @param {ve.AnnotationSet|null} Insertion anotations to use or null to disable them
+ * @emits 'contextChange'
+ */
+ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
+	if ( !this.enabled ) {
+		return;
+	}
+	this.insertionAnnotations = annotations.clone();
+	this.emit( 'contextChange' );
+};
+
+/**
+ * Adds an annotation to the insertion annotations.
+ *
+ * @method
+ * @param {ve.AnnotationSet} Insertion anotation to add
+ * @emits 'contextChange'
+ */
+ve.dm.Surface.prototype.addInsertionAnnotation = function ( annotation ) {
+	if ( !this.enabled ) {
+		return;
+	}
+	this.insertionAnnotations.push( annotation );
+	this.emit( 'contextChange' );
+};
+
+/**
+ * Removes an annotation from the insertion annotations.
+ *
+ * @method
+ * @param {ve.AnnotationSet} Insertion anotation to remove
+ * @emits 'contextChange'
+ */
+ve.dm.Surface.prototype.removeInsertionAnnotation = function ( annotation ) {
+	if ( !this.enabled ) {
+		return;
+	}
+	this.insertionAnnotations.remove( annotation );
+	this.emit( 'contextChange' );
 };
 
 /**
@@ -136,78 +223,104 @@ ve.dm.Surface.prototype.getFragment = function ( range, noAutoSelect ) {
  * @param {ve.Range|undefined} selection
  */
 ve.dm.Surface.prototype.change = function ( transactions, selection ) {
-	var i, leftOffset, contentOffset, annotations;
+	if ( !this.enabled ) {
+		return;
+	}
+	var i, len, offset, annotations,
+		selectedNodes = {},
+		selectionChange = false,
+		contextChange = false;
+
+	// Stop observation polling, things changing right now are known already
+	this.emit( 'lock' );
+
+	// Process transactions and apply selection changes
 	if ( transactions ) {
 		if ( transactions instanceof ve.dm.Transaction ) {
 			transactions = [transactions];
 		}
-
-		for ( i = 0; i < transactions.length; i++ ) {
+		for ( i = 0, len = transactions.length; i < len; i++ ) {
 			if ( !transactions[i].isNoOp() ) {
 				this.bigStack = this.bigStack.slice( 0, this.bigStack.length - this.undoIndex );
 				this.undoIndex = 0;
 				this.smallStack.push( transactions[i] );
-				ve.dm.TransactionProcessor.commit( this.getDocument(), transactions[i] );
+				ve.dm.TransactionProcessor.commit( this.documentModel, transactions[i] );
 			}
 		}
 	}
-	if ( selection && ( !this.selection || !this.selection.equals ( selection ) ) ) {
-		selection.normalize();
+
+	if ( selection ) {
+		// Detect if selection range changed
+		if ( !this.selection || !this.selection.equals( selection ) ) {
+			selection.normalize();
+			selectionChange = true;
+		}
+		// Detect if selected nodes changed
+		selectedNodes.start = this.documentModel.getNodeFromOffset( selection.start );
+		if ( selection.getLength() ) {
+			selectedNodes.end = this.documentModel.getNodeFromOffset( selection.end );
+		}
+		if (
+			selectedNodes.start !== this.selectedNodes.start ||
+			selectedNodes.end !== this.selectedNodes.end
+		) {
+			contextChange = true;
+		}
+		this.selectedNodes = selectedNodes;
+		if ( selectionChange ) {
+			this.emit( 'select', this.selection.clone() );
+		}
 		this.selection = selection;
-		this.emit('select', this.selection.clone() );
 	}
+
+	// Only emit a transact event if transactions were actually processed
 	if ( transactions ) {
 		this.emit( 'transact', transactions );
+		// Detect context change, if not detected already, when element attributes have changed
+		if ( !contextChange ) {
+			for ( i = 0, len = transactions.length; i < len; i++ ) {
+				if ( transactions[i].hasElementAttributeOperations() ) {
+					contextChange = true;
+					break;
+				}
+			}
+		}
 	}
 
-	// Clear and add annotations to stack if insertingAnnotations isn't happening
-	if ( !this.insertingAnnotations ) {
-		leftOffset = this.getSelection().start - 1;
-		if ( leftOffset === -1 ) {
-			leftOffset = 0;
-		}
-		contentOffset = this.documentModel.getNearestContentOffset( leftOffset, -1 );
-		// contentOffset may be -1 if the document is empty
-		annotations = contentOffset > - 1 ?
-			this.documentModel.getAnnotationsFromOffset( contentOffset ) :
-			new ve.AnnotationSet();
+	// Figure out which offset which we should get insertion annotations from
+	if ( this.selection.isCollapsed() ) {
+		// Get annotations from the left of the cursor
+		offset = this.documentModel.getNearestContentOffset(
+			Math.max( 0, this.selection.start - 1 ), -1
+		);
+	} else {
+		// Get annotations from the first character of the selection
+		offset = this.documentModel.getNearestContentOffset( this.selection.start );
+	}
+	if ( offset === -1 ) {
+		// Document is empty, use empty set
+		annotations = new ve.AnnotationSet();
+	} else {
+		annotations = this.documentModel.getAnnotationsFromOffset( offset );
+	}
+	// Only emit an annotations change event if there's a meaningful difference
+	if (
+		!annotations.containsAllOf( this.insertionAnnotations ) ||
+		!this.insertionAnnotations.containsAllOf( annotations )
+	) {
+		this.insertionAnnotations = annotations;
+		contextChange = true;
+	}
 
-		// Reset insertAnnotations
-		this.documentModel.insertAnnotations = new ve.AnnotationSet();
-		this.documentModel.insertAnnotations.addSet( annotations );
-
-		this.emit( 'annotationChange' );
+	// Only emit one context change event
+	if ( contextChange  ) {
+		this.emit( 'contextChange' );
 	}
 
 	this.emit( 'change', transactions, selection );
-};
 
-/**
- * Applies an annotation to the current selection
- *
- * @method
- * @param {String} annotation action: toggle, clear, set
- * @param {Object} annotation object to apply.
- */
-ve.dm.Surface.prototype.annotate = function ( method, annotation ) {
-	var tx,
-		selection = this.getSelection();
-	if ( selection.getLength() ) {
-		// Apply annotation immediately to selection
-		selection = this.getDocument().trimOuterSpaceFromRange( selection );
-		tx = ve.dm.Transaction.newFromAnnotation(
-			this.getDocument(), selection, method, annotation
-		);
-		this.change( tx, selection );
-	} else {
-		// Apply annotation to stack
-		if ( method === 'set' ) {
-			this.documentModel.insertAnnotations.push( annotation );
-		} else if ( method === 'clear' ) {
-			this.documentModel.insertAnnotations.remove( annotation );
-		}
-	}
-	this.emit( 'annotationChange' );
+	// Continue observation polling, we want to know about things that change from here on out
+	this.emit( 'unlock' );
 };
 
 /**
@@ -217,6 +330,9 @@ ve.dm.Surface.prototype.annotate = function ( method, annotation ) {
  * @param {ve.Range} selection New selection range
  */
 ve.dm.Surface.prototype.breakpoint = function ( selection ) {
+	if ( !this.enabled ) {
+		return;
+	}
 	if ( this.smallStack.length > 0 ) {
 		this.bigStack.push( {
 			stack: this.smallStack,
@@ -234,6 +350,9 @@ ve.dm.Surface.prototype.breakpoint = function ( selection ) {
  * @returns {ve.Range} Selection or null if no further state could be reached
  */
 ve.dm.Surface.prototype.undo = function () {
+	if ( !this.enabled ) {
+		return;
+	}
 	var item, i, transaction, selection;
 	this.breakpoint();
 	this.undoIndex++;
@@ -262,6 +381,9 @@ ve.dm.Surface.prototype.undo = function () {
  * @returns {ve.Range} Selection or null if no further state could be reached
  */
 ve.dm.Surface.prototype.redo = function () {
+	if ( !this.enabled ) {
+		return;
+	}
 	var selection, item, i;
 	this.breakpoint();
 

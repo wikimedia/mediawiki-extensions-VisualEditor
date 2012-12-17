@@ -31,18 +31,12 @@
 	opacity: 1;
 }
 
-.ve-ui-inspector-button.ve-ui-inspector-button-disabled,
-.ve-ui-inspector-button.ve-ui-inspector-button-disabled:hover {
-	filter: alpha(opacity=50);
-	opacity: 0.5;
-}
-
 .ve-ui-inspector-closeButton {
 	left: 0.5em;
 	/* @see ve.ui.Icons */
 }
 
-.ve-ui-inspector-icon {
+.ve-ui-inspector-titleIcon {
 	position: absolute;
 	left: 2.25em;
 	top: 0.5em;
@@ -55,7 +49,7 @@
 	opacity: 0.8;
 }
 
-.ve-ui-inspector-clearButton {
+.ve-ui-inspector-removeButton {
 	right: 0.25em;
 	/* @see ve.ui.Icons */
 }
@@ -73,11 +67,8 @@
 	font-size: 1em;
 	font-family: sans-serif;
 	background-color: #fff;
-	border: solid 1px #cccccc;
+	border: solid 1px #ccc;
 	padding: 0.5em;
-	-webkit-border-radius: 0.25em;
-	-moz-border-radius: 0.25em;
-	-o-border-radius: 0.25em;
 	border-radius: 0.25em;
 }
 .ve-ui-inspector form input:focus {
@@ -89,11 +80,6 @@
 	background-position: 18.75em center;
 	background-repeat: no-repeat;
 	padding-right: 1.5em;
-}
-
-.ve-ui-inspector form label {
-	display: inline-block;
-	width: 6em;
 }
 
 .ve-ui-inspector-title {
@@ -114,21 +100,12 @@
 .ve-ui-suggest-select {
 	position: absolute;
 	background: #FFFFFF;
-	/* @embed */
-	background-image: url(images/gray.png);
-	background-position: 8em top;
-	background-repeat: repeat-y;
 	width: 20em;
 	margin-top: -1px;
 	font-size: 0.8em;
 	z-index: 101;
 	border: solid 1px #ccc;
-	-webkit-border-radius: 0 0 0.25em 0.25em;
-	-moz-border-radius: 0 0 0.25em 0.25em;
-	-o-border-radius: 0 0 0.25em 0.25em;
 	border-radius: 0 0 0.25em 0.25em;
-	-webkit-box-shadow: 0 0.15em 1em 0 rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 0.15em 1em 0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0.15em 1em 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -142,15 +119,8 @@ body.rtl .ve-ui-suggest-select {
 }
 
 .ve-ui-suggest-label {
-	float: left;
-	width: 6.5em;
 	padding: 0.33em 0.75em;
-	text-align: right;
 	color: #888;
-}
-
-.ve-ui-suggest-wrap {
-	float: left;
 }
 
 .ve-ui-suggest-dummy-item {
@@ -159,10 +129,13 @@ body.rtl .ve-ui-suggest-select {
 }
 
 .ve-ui-suggest-item {
-	padding: 0.33em 0.75em;
-	width: 10.5em;
+	padding: 0.33em 1.25em;
 	cursor: pointer;
 	color: #0645AD;
+}
+
+.ve-ui-suggest-item.hover {
+	background: #E5F3FF;
 }
 
 .ve-ui-suggest-item-newPage {

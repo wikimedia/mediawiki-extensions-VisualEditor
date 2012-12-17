@@ -64,7 +64,7 @@ ve.dm.Transaction.newFromInsertion = function ( doc, offset, insertion ) {
  * @param {ve.dm.Document} doc Document to create transaction for
  * @param {ve.Range} range Range of data to remove
  * @returns {ve.dm.Transaction} Transcation that removes data
- * @throws 'Invalid range, can not remove from {range.start} to {range.end}'
+ * @throws 'Invalid range, cannot remove from {range.start} to {range.end}'
  */
 ve.dm.Transaction.newFromRemoval = function ( doc, range ) {
 	var i, selection, first, last, nodeStart, nodeEnd,
@@ -163,19 +163,19 @@ ve.dm.Transaction.newFromRemoval = function ( doc, range ) {
  * @param {String} key Attribute name
  * @param {Mixed} value New value, or undefined to remove the attribute
  * @returns {ve.dm.Transaction} Transcation that changes an element
- * @throws 'Can not set attributes to non-element data'
- * @throws 'Can not set attributes on closing element'
+ * @throws 'Cannot set attributes to non-element data'
+ * @throws 'Cannot set attributes on closing element'
  */
 ve.dm.Transaction.newFromAttributeChange = function ( doc, offset, key, value ) {
 	var tx = new ve.dm.Transaction(),
 		data = doc.getData();
 	// Verify element exists at offset
 	if ( data[offset].type === undefined ) {
-		throw new Error( 'Can not set attributes to non-element data' );
+		throw new Error( 'Cannot set attributes to non-element data' );
 	}
 	// Verify element is not a closing
 	if ( data[offset].type.charAt( 0 ) === '/' ) {
-		throw new Error( 'Can not set attributes on closing element' );
+		throw new Error( 'Cannot set attributes on closing element' );
 	}
 	// Retain up to element
 	tx.pushRetain( offset );
@@ -202,7 +202,7 @@ ve.dm.Transaction.newFromAttributeChange = function ( doc, offset, key, value ) 
  * @returns {ve.dm.Transaction} Transaction that annotates content
  */
 ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation ) {
-	var covered,
+	var covered, type,
 		tx = new ve.dm.Transaction(),
 		data = doc.getData(),
 		i = range.start,
@@ -211,16 +211,20 @@ ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation 
 	// Iterate over all data in range, annotating where appropriate
 	range.normalize();
 	while ( i < range.end ) {
-		if ( data[i].type !== undefined ) {
-			// Element
+		type = data[i].type;
+		if ( type && type.charAt( 0 ) === '/' ) {
+			type = type.substr( 1 );
+		}
+		if ( data[i].type !== undefined && !ve.dm.nodeFactory.isNodeContent( type ) ) {
+			// Structural element opening or closing
 			if ( on ) {
 				tx.pushRetain( span );
 				tx.pushStopAnnotating( method, annotation );
 				span = 0;
 				on = false;
 			}
-		} else {
-			// Content
+		} else if ( data[i].type === undefined || data[i].type.charAt( 0 ) !== '/' ) {
+			// Character or content element opening
 			covered = doc.offsetContainsAnnotation( i, annotation );
 			if ( ( covered && method === 'set' ) || ( !covered && method === 'clear' ) ) {
 				// Skip annotated content
@@ -239,7 +243,7 @@ ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation 
 					on = true;
 				}
 			}
-		}
+		} // otherwise it's a content closing, skip those
 		span++;
 		i++;
 	}
@@ -478,6 +482,52 @@ ve.dm.Transaction.prototype.getOperations = function () {
 };
 
 /**
+ * Checks if this transaction has operations of a given type.
+ *
+ * @method
+ * @returns {Boolean} Has operations of a given type
+ */
+ve.dm.Transaction.prototype.hasOperationWithType = function ( type ) {
+	var i, len;
+	for ( i = 0, len = this.operations.length; i < len; i++ ) {
+		if ( this.operations[i].type  === type ) {
+			return true;
+		}
+	}
+	return false;
+};
+
+/**
+ * Checks if this transaction has content data operations, such as insertion or deletion.
+ *
+ * @method
+ * @returns {Boolean} Has content data operations
+ */
+ve.dm.Transaction.prototype.hasContentDataOperations = function () {
+	return this.hasOperationWithType( 'replace' );
+};
+
+/**
+ * Checks if this transaction has element attribute operations.
+ *
+ * @method
+ * @returns {Boolean} Has element attribute operations
+ */
+ve.dm.Transaction.prototype.hasElementAttributeOperations = function () {
+	return this.hasOperationWithType( 'attribute' );
+};
+
+/**
+ * Checks if this transaction has annotation operations.
+ *
+ * @method
+ * @returns {Boolean} Has annotation operations
+ */
+ve.dm.Transaction.prototype.hasAnnotationOperations = function () {
+	return this.hasOperationWithType( 'annotate' );
+};
+
+/**
  * Gets the difference in content length this transaction will cause if applied.
  *
  * @method
@@ -508,7 +558,7 @@ ve.dm.Transaction.prototype.hasBeenApplied = function () {
  */
 ve.dm.Transaction.prototype.toggleApplied = function () {
 	this.applied = !this.applied;
-}
+};
 
 /**
  * Translate an offset based on a transaction.
@@ -566,11 +616,11 @@ ve.dm.Transaction.prototype.translateRange = function ( range, reversed ) {
  *
  * @method
  * @param {Number} length Length of content data to retain
- * @throws 'Invalid retain length, can not retain backwards: {length}'
+ * @throws 'Invalid retain length, cannot retain backwards: {length}'
  */
 ve.dm.Transaction.prototype.pushRetain = function ( length ) {
 	if ( length < 0 ) {
-		throw new Error( 'Invalid retain length, can not retain backwards:' + length );
+		throw new Error( 'Invalid retain length, cannot retain backwards:' + length );
 	}
 	if ( length ) {
 		var end = this.operations.length - 1;

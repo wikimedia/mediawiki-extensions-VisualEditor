@@ -92,24 +92,38 @@ ve.dm.Converter.prototype.onNodeRegister = function ( dataElementType, construct
  * Get the DOM element for a given linear model element.
  *
  * This invokes the toDomElement function registered for the element type.
- * NOTE: alienBlock and alienInline elements are not supported, if you pass them this function
- * will return false. (Opposite of District 9: no aliens allowed.)
  *
  * @method
  * @param {Object} dataElement Linear model element
  * @returns {HTMLElement|false} DOM element, or false if this element cannot be converted
  */
 ve.dm.Converter.prototype.getDomElementFromDataElement = function ( dataElement ) {
-	var key, domElement, dataElementAttributes,
+	var key, domElement, dataElementAttributes, wrapper,
 		dataElementType = dataElement.type;
-	if (
-		// Aliens
-		dataElementType === 'alienInline' || dataElementType === 'alienBlock' ||
-		// Unsupported elements
-		!( dataElementType in this.elements.toDomElement)
-	) {
+	if ( dataElementType === 'alienInline' || dataElementType === 'alienBlock' ) {
+		// Alien
+		// Create nodes from source
+		wrapper = document.createElement( 'div' );
+		wrapper.innerHTML = dataElement.attributes.html;
+		if ( wrapper.childNodes.length > 1 ) {
+			// Wrap the HTML in a single element, this makes
+			// it much easier to deal with. It'll be unwrapped
+			// at the end of getDomFromData().
+			domElement = document.createElement( 'div' );
+			domElement.setAttribute( 'data-ve-multi-child-alien-wrapper', 'true' );
+			while ( wrapper.firstChild ) {
+				domElement.appendChild( wrapper.firstChild );
+			}
+		} else {
+			domElement = wrapper.firstChild;
+		}
+		return domElement;
+	}
+	if ( !( dataElementType in this.elements.toDomElement ) ) {
+		// Unsupported element
 		return false;
 	}
+
 	domElement = this.elements.toDomElement[dataElementType]( dataElementType, dataElement );
 	dataElementAttributes = dataElement.attributes;
 	if ( dataElementAttributes ) {
@@ -123,7 +137,8 @@ ve.dm.Converter.prototype.getDomElementFromDataElement = function ( dataElement 
 	// Change markers
 	if (
 		dataElement.internal && dataElement.internal.changed &&
-		!ve.isEmptyObject( dataElement.internal.changed )
+		!ve.isEmptyObject( dataElement.internal.changed ) &&
+		ve.init.platform.useChangeMarkers()
 	) {
 		domElement.setAttribute( 'data-ve-changed',
 			JSON.stringify( dataElement.internal.changed )
@@ -139,11 +154,13 @@ ve.dm.Converter.prototype.getDomElementFromDataElement = function ( dataElement 
  *
  * @method
  * @param {HTMLElement} domElement DOM element
+ * @param {Array} annotations Annotations to apply if the node is a content node
  * @returns {Object|false} Linear model element, or false if this node cannot be converted
  */
-ve.dm.Converter.prototype.getDataElementFromDomElement = function ( domElement ) {
+ve.dm.Converter.prototype.getDataElementFromDomElement = function ( domElement, annotations ) {
 	var dataElement, domElementAttributes, dataElementAttributes, domElementAttribute, i,
-		domElementType = domElement.nodeName.toLowerCase();
+		annotationSet, domElementType = domElement.nodeName.toLowerCase();
+	annotations = annotations || [];
 	if (
 		// Unsupported elements
 		!( domElementType in this.elements.toDataElement )
@@ -160,6 +177,14 @@ ve.dm.Converter.prototype.getDataElementFromDomElement = function ( domElement )
 			domElementAttribute = domElementAttributes[i];
 			dataElementAttributes['html/' + domElementAttribute.name] = domElementAttribute.value;
 		}
+	}
+	if ( ve.dm.nodeFactory.isNodeContent( dataElement.type ) && annotations.length > 0 ) {
+		// Build annotation set
+		annotationSet = new ve.AnnotationSet();
+		for ( i = 0; i < annotations.length; i++ ) {
+			annotationSet.push( annotations[i] );
+		}
+		dataElement.annotations = annotationSet;
 	}
 	return dataElement;
 };
@@ -187,7 +212,7 @@ ve.dm.Converter.prototype.getDataAnnotationFromDomElement = function ( domElemen
 ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function ( dataAnnotation ) {
 	var htmlData = dataAnnotation.toHTML(),
 		domElement = document.createElement( htmlData.tag );
-	ve.setDOMAttributes( domElement, htmlData.attributes );
+	ve.setDomAttributes( domElement, htmlData.attributes );
 	return domElement;
 };
 
@@ -206,14 +231,20 @@ ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function ( dataAnnot
  * @returns {Array} Linear model data
  */
 ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, dataElement, path, alreadyWrapped ) {
-	function createAlien( domElement, isInline, isWrapper ) {
-		var type = isInline ? 'alienInline' : 'alienBlock', html;
+	function createAlien( domElement, branchHasContent, isWrapper ) {
+		// If we're in wrapping mode, we don't know if this alien is supposed to be block
+		// or inline, so detect it based on the HTML tag name.
+		var isInline = ( wrapping && wrappingIsOurs ) ?
+				!ve.isBlockElement( domElement ) :
+				( branchHasContent || annotations.length > 0 ),
+			type = isInline ? 'alienInline' : 'alienBlock',
+			html, alien, annotationSet, i;
 		if ( isWrapper ) {
 			html =  $( domElement ).html();
 		} else {
 			html = $( '<div>' ).append( $( domElement ).clone() ).html();
 		}
-		return [
+		alien = [
 			{
 				'type': type,
 				'attributes': {
@@ -222,6 +253,14 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 			},
 			{ 'type': '/' + type }
 		];
+		if ( annotations.length > 0 ) {
+			annotationSet = new ve.AnnotationSet();
+			for ( i = 0; i < annotations.length; i++ ) {
+				annotationSet.push( annotations[i] );
+			}
+			alien[0].annotations = annotationSet;
+		}
+		return alien;
 	}
 	function addWhitespace( element, index, whitespace ) {
 		if ( !element.internal ) {
@@ -246,6 +285,18 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 			addWhitespace( element, 0, nextWhitespace );
 			nextWhitespace = '';
 		}
+	}
+	function stopWrapping() {
+		if ( wrappedWhitespace !== '' ) {
+			// Remove wrappedWhitespace from data
+			data.splice( wrappedWhitespaceIndex, wrappedWhitespace.length );
+			addWhitespace( wrappingParagraph, 3, wrappedWhitespace );
+			nextWhitespace = wrappedWhitespace;
+		}
+		data.push( { 'type': '/paragraph' } );
+		wrappingParagraph = undefined;
+		wrapping = false;
+		wrappingIsOurs = false;
 	}
 
 	/**
@@ -313,9 +364,11 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 		wrappingParagraph, prevElement, alien, rdfaType, isLink,
 		data = [],
 		branchType = path[path.length - 1],
-		branchIsContent = ve.dm.nodeFactory.canNodeContainContent( branchType ),
+		branchHasContent = ve.dm.nodeFactory.canNodeContainContent( branchType ),
+		childIsContent,
 		nextWhitespace = '',
 		wrappedWhitespace = '',
+		wrappedWhitespaceIndex,
 		wrapping = alreadyWrapped,
 		wrappingIsOurs = false;
 	// Open element
@@ -332,7 +385,10 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 			case Node.ELEMENT_NODE:
 				// Alienate about groups
 				if ( childDomElement.hasAttribute( 'data-ve-aboutgroup' ) ) {
-					alien = createAlien( childDomElement, branchIsContent, true );
+					alien = createAlien( childDomElement, branchHasContent, true );
+					if ( wrapping && alien[0].type === 'alienBlock' ) {
+						stopWrapping();
+					}
 					data = data.concat( alien );
 					processNextWhitespace( alien[0] );
 					prevElement = alien[0];
@@ -347,7 +403,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 				) {
 					isLink = childDomElement.nodeName.toLowerCase() === 'link';
 					childDataElement = {
-						'type': branchIsContent ? 'metaInline' : 'metaBlock',
+						'type': branchHasContent ? 'metaInline' : 'metaBlock',
 						'attributes': {
 							'style': isLink ? 'link' : 'meta',
 							'key': childDomElement.getAttribute( isLink ? 'rel' : 'property' )
@@ -371,7 +427,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 						}
 					}
 					data.push( childDataElement );
-					data.push( { 'type': branchIsContent ? '/metaInline' : '/metaBlock' } );
+					data.push( { 'type': branchHasContent ? '/metaInline' : '/metaBlock' } );
 					processNextWhitespace( childDataElement );
 					prevElement = childDataElement;
 					break;
@@ -386,9 +442,13 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 					rdfaType &&
 					rdfaType.match( /^mw:/ ) &&
 					!rdfaType.match( /^mw:WikiLink/ ) &&
-					!rdfaType.match( /^mw:ExtLink/ )
+					!rdfaType.match( /^mw:ExtLink/ ) &&
+					!rdfaType.match( /^mw:Entity/ )
 				) {
-					alien = createAlien( childDomElement, branchIsContent );
+					alien = createAlien( childDomElement, branchHasContent );
+					if ( wrapping && alien[0].type === 'alienBlock' ) {
+						stopWrapping();
+					}
 					data = data.concat( alien );
 					processNextWhitespace( alien[0] );
 					prevElement = alien[0];
@@ -396,10 +456,11 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 				}
 
 				// Detect and handle annotated content
+				// HACK except for mw:Entity. We need a node API rewrite, badly
 				annotation = this.getDataAnnotationFromDomElement( childDomElement );
-				if ( annotation ) {
+				if ( annotation && rdfaType !== 'mw:Entity' ) {
 					// Start auto-wrapping of bare content
-					if ( !wrapping && !branchIsContent ) {
+					if ( !wrapping && !branchHasContent ) {
 						// Mark this paragraph as having been generated by
 						// us, so we can strip it on the way out
 						wrappingParagraph = {
@@ -422,54 +483,52 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 				}
 
 				// Look up child element type
-				childDataElement = this.getDataElementFromDomElement( childDomElement );
-				// End auto-wrapping of bare content from a previously processed node
-				// but only if childDataElement is a non-content element or if
-				// we are about to produce a block alien
-				if (
-					wrapping && (
-						(
-							childDataElement &&
-							!ve.dm.nodeFactory.isNodeContent( childDataElement.type )
-						) || (
-							!childDataElement &&
-							ve.isBlockElement( childDomElement )
-						)
-					)
-				) {
-					if ( wrappedWhitespace !== '' ) {
-						// Remove wrappedWhitespace from data
-						data.splice( -wrappedWhitespace.length, wrappedWhitespace.length );
-						addWhitespace( wrappingParagraph, 3, wrappedWhitespace );
-						nextWhitespace = wrappedWhitespace;
-					}
-					data.push( { 'type': '/paragraph' } );
-					wrappingParagraph = undefined;
-					wrapping = false;
-					wrappingIsOurs = false;
-				}
-				// Append child element data
+				childDataElement = this.getDataElementFromDomElement( childDomElement, annotations );
 				if ( childDataElement ) {
-					data = data.concat(
-						this.getDataFromDom(
-							childDomElement,
-							[],
-							childDataElement,
-							path.concat( childDataElement.type ),
-							wrapping
-						)
-					);
-					processNextWhitespace( childDataElement );
-					prevElement = childDataElement;
-					break;
+					childIsContent = ve.dm.nodeFactory.isNodeContent( childDataElement.type );
+					// Check that something isn't terribly wrong
+					if ( !(
+						// Non-content child in a content container
+						( branchHasContent && !childIsContent ) ||
+						// Non-content child trying to break wrapping at
+						// the wrong level
+						( wrapping && !wrappingIsOurs && !childIsContent )
+					) ) {
+						// End auto-wrapping of bare content from a previously processed node
+						// but only if childDataElement is a non-content element
+						if ( wrapping && wrappingIsOurs && !childIsContent ) {
+							stopWrapping();
+						}
+						if ( ve.dm.nodeFactory.canNodeHaveChildren( childDataElement.type ) ) {
+							// Append child element data
+							data = data.concat(
+								this.getDataFromDom(
+									childDomElement,
+									[],
+									childDataElement,
+									path.concat( childDataElement.type ),
+									wrapping
+								)
+							);
+						} else {
+							// Append empty node
+							data.push( childDataElement );
+							data.push( { 'type': '/' + childDataElement.type } );
+						}
+						processNextWhitespace( childDataElement );
+						prevElement = childDataElement;
+						break;
+					}
+					// If something is wrong, fall through, and the bad child
+					// will be alienated below.
 				}
 				// We don't know what this is, fall back to alien.
-				// If we're in wrapping mode, we don't know if this alien is
-				// supposed to be block or inline, so detect it based on the HTML
-				// tag name.
-				alien = createAlien( childDomElement, wrapping ?
-					!ve.isBlockElement( childDomElement ) : branchIsContent
-				);
+				alien = createAlien( childDomElement, branchHasContent );
+				// End auto-wrapping of bare content from a previously processed node
+				// but only if we produced an alienBlock
+				if ( wrapping && alien[0].type === 'alienBlock' ) {
+					stopWrapping();
+				}
 				data = data.concat( alien );
 				processNextWhitespace( alien[0] );
 				prevElement = alien[0];
@@ -480,7 +539,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 					// Empty text node?!?
 					break;
 				}
-				if ( !branchIsContent ) {
+				if ( !branchHasContent ) {
 					// Strip and store outer whitespace
 					if ( text.match( /^\s+$/ ) ) {
 						// This text node is whitespace only
@@ -489,6 +548,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 							// and store it in wrappedWhitespace (see
 							// comment about wrappedWhitespace below)
 							wrappedWhitespace = text;
+							wrappedWhitespaceIndex = data.length;
 							data = data.concat(
 								ve.dm.Converter.getDataContentFromText( wrappedWhitespace, annotations )
 							);
@@ -567,6 +627,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 						// the last text node. We can't output it later
 						// because we have to apply the correct annotations.
 						wrappedWhitespace = matches[3];
+						wrappedWhitespaceIndex = data.length;
 						data = data.concat(
 							ve.dm.Converter.getDataContentFromText( wrappedWhitespace, annotations )
 						);
@@ -610,23 +671,25 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 				);
 				break;
 			case Node.COMMENT_NODE:
-				// TODO: Preserve comments by inserting them into the linear model too
-				// Could use placeholders for this too, although they'd need to be
-				// inline in certain cases
+				childDataElement = {
+					'type': branchHasContent ? 'metaInline' : 'metaBlock',
+					'attributes': {
+						'style': 'comment',
+						'text': childDomElement.data
+					}
+				};
+				data.push( childDataElement );
+				data.push( { 'type': branchHasContent ? '/metaInline' : '/metaBlock' } );
+				processNextWhitespace( childDataElement );
+				prevElement = childDataElement;
 				break;
 		}
 	}
 	// End auto-wrapping of bare content
 	if ( wrapping && wrappingIsOurs ) {
-		if ( wrappedWhitespace !== '' ) {
-			// Remove wrappedWhitespace from data
-			data.splice( -wrappedWhitespace.length, wrappedWhitespace.length );
-			addWhitespace( wrappingParagraph, 3, wrappedWhitespace );
-			nextWhitespace = wrappedWhitespace;
-		}
-		data.push( { 'type': '/paragraph' } );
+		stopWrapping();
 		// Don't set wrapping = false here because it's checked below
-		wrappingParagraph = undefined;
+		wrapping = true;
 	}
 
 	// If we're closing a node that doesn't have any children, but could contain a paragraph,
@@ -637,7 +700,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 		!ve.dm.nodeFactory.isNodeContent( branchType ) &&
 		( childTypes === null || ve.indexOf( 'paragraph', childTypes ) !== -1 )
 	) {
-		data.push( { 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } } );
+		data.push( { 'type': 'paragraph', 'internal': { 'generated': 'empty' } } );
 		data.push( { 'type': '/paragraph' } );
 	}
 
@@ -653,7 +716,7 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
 	// Don't return an empty document
 	if ( branchType === 'document' && data.length === 0 ) {
 		return [
-			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			{ 'type': 'paragraph', 'internal': { 'generated': 'empty' } },
 			{ 'type': '/paragraph' }
 		];
 	}
@@ -668,12 +731,13 @@ ve.dm.Converter.prototype.getDataFromDom = function ( domElement, annotations, d
  * @returns {HTMLElement} Wrapper div containing the resulting HTML
  */
 ve.dm.Converter.prototype.getDomFromData = function ( data ) {
-	var text, i, j, annotations, annotation, annotationElement, dataElement, arr,
-		wrapper, childDomElement, pre, ours, theirs, parentDomElement, startClosingAt,
-		isContentNode,
+	var text, i, j, k, annotations, annotation, annotationElement, dataElement, arr,
+		childDomElement, pre, ours, theirs, parentDomElement, startClosingAt,
+		isContentNode, changed, parentChanged,
 		container = document.createElement( 'div' ),
 		domElement = container,
 		annotationStack = new ve.AnnotationSet();
+
 	for ( i = 0; i < data.length; i++ ) {
 		if ( typeof data[i] === 'string' ) {
 			// Text
@@ -851,12 +915,42 @@ ve.dm.Converter.prototype.getDomFromData = function ( data ) {
 				// It would be nicer if we could avoid generating in the first
 				// place, but then remembering where we have to skip ascending
 				// to the parent would be tricky.
-				if ( domElement.veInternal && domElement.veInternal.generated === 'wrapper' ) {
+				// We unwrap all nodes with generated=wrapper, as well as nodes that
+				// have generated=empty and are empty.
+				if (
+					domElement.veInternal && (
+						domElement.veInternal.generated === 'wrapper' || (
+							domElement.veInternal.generated === 'empty' &&
+							domElement.childNodes.length === 0
+						)
+					)
+				) {
 					while ( domElement.firstChild ) {
 						parentDomElement.insertBefore(
 							domElement.firstChild,
 							domElement
 						);
+					}
+					// Transfer change markers
+					changed = domElement.getAttribute( 'data-ve-changed' );
+					if ( changed ) {
+						parentChanged = parentDomElement.getAttribute( 'data-ve-changed' );
+						if ( parentChanged ) {
+							changed = $.parseJSON( changed );
+							parentChanged = $.parseJSON( parentChanged );
+							for ( k in changed ) {
+								if ( k in parentChanged ) {
+									parentChanged[k] += changed[k];
+								} else {
+									parentChanged[k] = changed[k];
+								}
+							}
+							parentDomElement.setAttribute( 'data-ve-changed',
+								JSON.stringify( parentChanged ) );
+						} else {
+							parentDomElement.setAttribute( 'data-ve-changed',
+								changed );
+						}
 					}
 					parentDomElement.removeChild( domElement );
 				}
@@ -866,26 +960,8 @@ ve.dm.Converter.prototype.getDomFromData = function ( data ) {
 				// Ascend to parent node
 				domElement = parentDomElement;
 			} else {
-				if ( dataElement.type === 'alienBlock' || dataElement.type === 'alienInline' ) {
-					// Create nodes from source
-					wrapper = document.createElement( 'div' );
-					wrapper.innerHTML = dataElement.attributes.html;
-					if ( wrapper.childNodes.length > 1 ) {
-						// Wrap the HTML in a single element, this makes
-						// it much easier to deal with. It'll be unwrapped
-						// at the end of this function.
-						childDomElement = document.createElement( 'div' );
-						childDomElement.setAttribute( 'data-ve-multi-child-alien-wrapper', 'true' );
-						while ( wrapper.firstChild ) {
-							childDomElement.appendChild( wrapper.firstChild );
-						}
-					} else {
-						childDomElement = wrapper.firstChild;
-					}
-				} else {
-					// Create node from data
-					childDomElement = this.getDomElementFromDataElement( dataElement );
-				}
+				// Create node from data
+				childDomElement = this.getDomElementFromDataElement( dataElement );
 				// Add reference to internal data
 				if ( dataElement.internal ) {
 					childDomElement.veInternal = dataElement.internal;
@@ -952,8 +1028,24 @@ ve.dm.Converter.prototype.getDomFromData = function ( data ) {
 	}
 
 	// Unwrap multi-child alien wrappers
-	$( container ).find( '[data-ve-multi-child-alien-wrapper]' ) .each( function() {
+	$( container ).find( '[data-ve-multi-child-alien-wrapper]' ).each( function() {
 		$( this ).replaceWith( $( this ).contents() );
+	} );
+
+	// Workaround for bug 42469: if a <pre> starts with a newline, that means .innerHTML will
+	// screw up and stringify it with one fewer newline. Work around this by adding a newline.
+	// If we don't see a leading newline, we still don't know if the original HTML was
+	// <pre>Foo</pre> or <pre>\nFoo</pre> , but that's a syntactic difference, not a semantic
+	// one, and handling that is Parsoid's job.
+	$( container ).find( 'pre' ).each( function() {
+		var matches;
+		if ( this.firstChild.nodeType === Node.TEXT_NODE ) {
+			matches = this.firstChild.data.match( /^(\r\n|\r|\n)/ );
+			if ( matches && matches[1] ) {
+				// Prepend a newline exactly like the one we saw
+				this.firstChild.insertData( 0, matches[1] );
+			}
+		}
 	} );
 	return container;
 };

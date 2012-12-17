@@ -24,13 +24,58 @@ ve.ce.Node = function VeCeNode( type, model, $element ) {
 	this.model = model;
 	this.$ = $element || $( '<div>' );
 	this.parent = null;
+	this.live = false;
 
+	// Initialization
 	this.$.data( 'node', this );
+	ve.setDomAttributes(
+		this.$[0],
+		this.model.getAttributes( 'html/' ),
+		this.constructor.static.domAttributeWhitelist
+	);
 };
 
 /* Inheritance */
 
 ve.inheritClass( ve.ce.Node, ve.Node );
+
+/* Static Memebers */
+
+ve.ce.Node.static = {};
+
+/**
+ * Allowed attributes for DOM elements.
+ *
+ * This list includes attributes that are generally safe to include in HTML loaded from a
+ * foreign source and displaying it inside the browser. It doesn't include any event attributes,
+ * for instance, which would allow arbitrary JavaScript execution. This alone is not enough to
+ * make HTML safe to display, but it helps.
+ *
+ * TODO: Rather than use a single global list, set these on a per-node basis to something that makes
+ * sense for that node in particular.
+ */
+ve.ce.Node.static.domAttributeWhitelist = [
+	'abbr', 'about', 'align', 'alt', 'axis', 'bgcolor', 'border', 'cellpadding', 'cellspacing',
+	'char', 'charoff', 'cite', 'class', 'clear', 'color', 'colspan', 'datatype', 'datetime',
+	'dir', 'face', 'frame', 'headers', 'height', 'href', 'id', 'itemid', 'itemprop', 'itemref',
+	'itemscope', 'itemtype', 'lang', 'noshade', 'nowrap', 'property', 'rbspan', 'rel',
+	'resource', 'rev', 'rowspan', 'rules', 'scope', 'size', 'span', 'src', 'start', 'style',
+	'summary', 'title', 'type', 'typeof', 'valign', 'value', 'width'
+];
+
+/**
+ * Template for shield elements.
+ *
+ * Uses data URI to inject a 1x1 transparent PNG image into the DOM.
+ *
+ * @static
+ * @member
+ */
+// Using transparent png instead of gif because IE 10 renders gif as solid red when used as img src.
+ve.ce.Node.static.$shieldTemplate = $(
+	'<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAFElEQVR4XgXAAQ0AAABAMP1L30IDCPwC/o5WcS4AAAAASUVORK5CYII=" ' +
+		'class="ve-ce-node-shield">'
+);
 
 /* Methods */
 
@@ -192,7 +237,7 @@ ve.ce.Node.prototype.getModel = function () {
 
 ve.ce.Node.getSplitableNode = function ( node ) {
 	var splitableNode = null;
-	
+
 	ve.Node.traverseUpstream( node, function ( node ) {
 		if ( node.canBeSplit() ) {
 			splitableNode = node;
@@ -201,6 +246,22 @@ ve.ce.Node.getSplitableNode = function ( node ) {
 			return false;
 		}
 	} );
-	
+
 	return splitableNode;
+};
+
+/**
+ * @method
+ * @returns {Boolean} Node is attached to the live DOM
+ */
+ve.ce.Node.prototype.isLive = function () {
+	return this.live;
+};
+
+/**
+ * @method
+ */
+ve.ce.Node.prototype.setLive = function ( live ) {
+	this.live = live;
+	this.emit( 'live' );
 };

@@ -19,15 +19,22 @@ function getNodeTreeSummary( node, shallow ) {
 			'getType': node.getType(),
 			'getLength': node.getLength(),
 			'getOuterLength': node.getOuterLength(),
-			'attributes': node.attributes
-		};
+			'element': node.element
+		},
+		numChildren;
 
 	if ( node.children !== undefined ) {
-		summary['children.length'] = node.children.length;
+		// Count children manually to exclude zero-length text nodes
+		numChildren = 0;
 		if ( !shallow ) {
 			summary.children = [];
-			for ( i = 0; i < node.children.length; i++ ) {
-				summary.children.push( getNodeTreeSummary( node.children[i] ) );
+		}
+		for ( i = 0; i < node.children.length; i++ ) {
+			if ( node.children[i].getType() !== 'text' || node.children[i].getLength() > 0 ) {
+				numChildren++;
+				if ( !shallow ) {
+					summary.children.push( getNodeTreeSummary( node.children[i] ) );
+				}
 			}
 		}
 	}
@@ -87,12 +94,18 @@ function getDomElementSummary( element ) {
 		};
 
 	// Gather attributes
-	for ( i = 0; i < element.attributes.length; i++ ) {
-		summary.attributes[element.attributes[i].name] = element.attributes[i].value;
+	if ( element.attributes ) {
+		for ( i = 0; i < element.attributes.length; i++ ) {
+			summary.attributes[element.attributes[i].name] = element.attributes[i].value;
+		}
 	}
 	// Summarize children
-	for ( i = 0; i < element.children.length; i++ ) {
-		summary.children.push( getDomElementSummary( element.children[i] ) );
+	if ( element.childNodes ) {
+		for ( i = 0; i < element.childNodes.length; i++ ) {
+			if ( element.childNodes[i].nodeType !== Node.TEXT_NODE ) {
+				summary.children.push( getDomElementSummary( element.childNodes[i] ) );
+			}
+		}
 	}
 	return summary;
 }

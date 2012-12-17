@@ -122,10 +122,7 @@ ve.Range.prototype.normalize = function () {
  * @method
  */
 ve.Range.prototype.flip = function () {
-	var from = this.from;
-	this.from = this.to;
-	this.to = from;
-	this.normalize();
+	return new ve.Range( this.to, this.from );
 };
 
 /**
@@ -139,20 +136,25 @@ ve.Range.prototype.equals = function ( other ) {
 	return this.from === other.from && this.to === other.to;
 };
 
+
 /**
  * Creates a new ve.Range object.
  *
  * @method
- * @param {Number} Length of the new range.
+ * @param {Number} Length of the new range (negative for left-side truncation)
  * @returns {ve.Range} A new range.
  */
 ve.Range.prototype.truncate = function ( length ) {
-	var diff = 0;
 	this.normalize();
-	if ( this.getLength() > length ) {
-		diff = this.getLength() - length;
+	if ( length >= 0 ) {
+		return new ve.Range(
+			this.start, Math.min( this.start + length, this.end )
+		);
+	} else {
+		return new ve.Range(
+			Math.max( this.end + length, this.start ), this.end
+		);
 	}
-	return new ve.Range( this.from, this.to - diff );
 };
 
 /**

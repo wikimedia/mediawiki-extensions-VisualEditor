@@ -40,7 +40,10 @@ ve.HistoryAction.static.methods = ['undo', 'redo'];
  * @method
  */
 ve.HistoryAction.prototype.undo = function () {
-	this.surface.getModel().undo();
+	var range = this.surface.getModel().undo();
+	if ( range ) {
+		this.surface.getView().showSelection( range );
+	}
 };
 
 /**
@@ -49,7 +52,10 @@ ve.HistoryAction.prototype.undo = function () {
  * @method
  */
 ve.HistoryAction.prototype.redo = function () {
-	this.surface.getModel().redo();
+	var range = this.surface.getModel().redo();
+	if ( range ) {
+		this.surface.getView().showSelection( range );
+	}
 };
 
 /* Registration */

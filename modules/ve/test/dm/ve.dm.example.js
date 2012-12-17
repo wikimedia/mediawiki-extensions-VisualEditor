@@ -68,6 +68,7 @@ ve.dm.example.createAnnotationSet = function ( annotations ) {
 ve.dm.example.bold = { 'type': 'textStyle/bold', 'htmlTagName': 'b', 'htmlAttributes': {} };
 ve.dm.example.italic = { 'type': 'textStyle/italic', 'htmlTagName': 'i', 'htmlAttributes': {} };
 ve.dm.example.underline = { 'type': 'textStyle/underline', 'htmlTagName': 'u', 'htmlAttributes': {} };
+ve.dm.example.span = { 'type': 'textStyle/span', 'htmlTagName': 'span', 'htmlAttributes': {} };
 
 /**
  * Serialized HTML.
@@ -284,6 +285,14 @@ ve.dm.example.withMeta = [
 	{
 		'type': 'metaBlock',
 		'attributes': {
+			'style': 'comment',
+			'text': ' No content conversion '
+		}
+	},
+	{ 'type': '/metaBlock' },
+	{
+		'type': 'metaBlock',
+		'attributes': {
 			'style': 'meta',
 			'key': 'mw:PageProp/nocc'
 		}
@@ -316,6 +325,14 @@ ve.dm.example.withMeta = [
 	{ 'type': '/metaInline' },
 	'B',
 	'a',
+	{
+		'type': 'metaInline',
+		'attributes': {
+			'style': 'comment',
+			'text': ' inline '
+		}
+	},
+	{ 'type': '/metaInline' },
 	'z',
 	{ 'type': '/paragraph' },
 	{
@@ -324,6 +341,14 @@ ve.dm.example.withMeta = [
 			'style': 'meta',
 			'key': 'mw:bar',
 			'value': 'baz'
+		}
+	},
+	{ 'type': '/metaBlock' },
+	{
+		'type': 'metaBlock',
+		'attributes': {
+			'style': 'comment',
+			'text': 'barbaz'
 		}
 	},
 	{ 'type': '/metaBlock' },
@@ -367,6 +392,13 @@ ve.dm.example.withMetaMetaData = [
 		{
 			'type': 'metaBlock',
 			'attributes': {
+				'style': 'comment',
+				'text': ' No content conversion '
+			}
+		},
+		{
+			'type': 'metaBlock',
+			'attributes': {
 				'style': 'meta',
 				'key': 'mw:PageProp/nocc'
 			}
@@ -398,7 +430,15 @@ ve.dm.example.withMetaMetaData = [
 		}
 	],
 	undefined,
-	undefined,
+	[
+		{
+			'type': 'metaInline',
+			'attributes': {
+				'style': 'comment',
+				'text': ' inline '
+			}
+		}
+	],
 	undefined,
 	[
 		{
@@ -407,6 +447,13 @@ ve.dm.example.withMetaMetaData = [
 				'style': 'meta',
 				'key': 'mw:bar',
 				'value': 'baz'
+			}
+		},
+		{
+			'type': 'metaBlock',
+			'attributes': {
+				'style': 'comment',
+				'text': 'barbaz'
 			}
 		},
 		{
@@ -452,53 +499,63 @@ ve.dm.example.withMetaMetaData = [
  */
 ve.dm.example.tree = new ve.dm.DocumentNode( [
 	// Heading with "abc"
-	new ve.dm.HeadingNode( [new ve.dm.TextNode( 3 )], ve.dm.example.data[0].attributes ),
+	new ve.dm.HeadingNode( [new ve.dm.TextNode( 3 )], ve.dm.example.data[0] ),
 	new ve.dm.TableNode( [
 		new ve.dm.TableSectionNode( [
 			new ve.dm.TableRowNode( [
 				new ve.dm.TableCellNode( [
 					// Paragraph with "d"
-					new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] ),
+					new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )],
+						ve.dm.example.data[9] ),
 					new ve.dm.ListNode( [
 						// 1st level bullet list item with "e"
 						new ve.dm.ListItemNode( [
-							new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] ),
+							new ve.dm.ParagraphNode(
+								[new ve.dm.TextNode( 1 )],
+								ve.dm.example.data[14]
+							),
 							new ve.dm.ListNode( [
 								// 2nd level bullet list item with "f"
 								new ve.dm.ListItemNode( [
-									new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] )
-								] )
-							], ve.dm.example.data[17].attributes )
-						] )
-					], ve.dm.example.data[12].attributes ),
+									new ve.dm.ParagraphNode(
+										[new ve.dm.TextNode( 1 )],
+										ve.dm.example.data[19]
+									)
+								], ve.dm.example.data[18] )
+							], ve.dm.example.data[17] )
+						], ve.dm.example.data[13] )
+					], ve.dm.example.data[12] ),
 					new ve.dm.ListNode( [
 						// Numbered list item with "g"
 						new ve.dm.ListItemNode( [
-							new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] )
-						] )
-					], ve.dm.example.data[26].attributes )
-				], ve.dm.example.data[8].attributes )
-			] )
-		], ve.dm.example.data[6].attributes )
-	] ),
+							new ve.dm.ParagraphNode(
+								[new ve.dm.TextNode( 1 )],
+								ve.dm.example.data[28]
+							)
+						], ve.dm.example.data[27] )
+					], ve.dm.example.data[26] )
+				], ve.dm.example.data[8] )
+			], ve.dm.example.data[7] )
+		], ve.dm.example.data[6] )
+	], ve.dm.example.data[5] ),
 	// Preformatted with "h[image.png]i"
 	new ve.dm.PreformattedNode( [
 		new ve.dm.TextNode( 1 ),
-		new ve.dm.ImageNode( [], ve.dm.example.data[39].attributes ),
+		new ve.dm.ImageNode( [], ve.dm.example.data[39] ),
 		new ve.dm.TextNode( 1 )
-	] ),
+	], ve.dm.example.data[37] ),
 	new ve.dm.DefinitionListNode( [
 		// Definition list term item with "j"
 		new ve.dm.DefinitionListItemNode( [
-			new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] )
-		], ve.dm.example.data[44].attributes ),
+			new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )], ve.dm.example.data[45] )
+		], ve.dm.example.data[44] ),
 		// Definition list definition item with "k"
 		new ve.dm.DefinitionListItemNode( [
-			new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] )
-		], ve.dm.example.data[49].attributes )
-	] ),
-	new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] ),
-	new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )] )
+			new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )], ve.dm.example.data[50] )
+		], ve.dm.example.data[49] )
+	], ve.dm.example.data[43] ),
+	new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )], ve.dm.example.data[55] ),
+	new ve.dm.ParagraphNode( [new ve.dm.TextNode( 1 )], ve.dm.example.data[58] )
 ] );
 
 ve.dm.example.conversions = {
@@ -643,6 +700,34 @@ ve.dm.example.domToDataCases = {
 			{ 'type': '/paragraph' }
 		]
 	},
+	'annotated inline nodes': {
+		'html': '<p>a<b><tt class="foo">b</tt><i><span typeof="mw:Entity">c</span></i></b>' +
+			'<i><br/>d</i>e</p>',
+		'data': [
+			{ 'type': 'paragraph' },
+			'a',
+			{
+				'type': 'alienInline',
+				'attributes': { 'html': '<tt class="foo">b</tt>' },
+				'annotations': [ ve.dm.example.bold ]
+			},
+			{ 'type': '/alienInline' },
+			{
+				'type': 'MWentity',
+				'attributes': { 'character': 'c', 'html/typeof': 'mw:Entity' },
+				'annotations': [ ve.dm.example.bold, ve.dm.example.italic ]
+			},
+			{ 'type': '/MWentity' },
+			{
+				'type': 'break',
+				'annotations': [ ve.dm.example.italic ]
+			},
+			{ 'type': '/break' },
+			['d', [ ve.dm.example.italic ]],
+			'e',
+			{ 'type': '/paragraph' }
+		]
+	},
 	'wrapping of bare content': {
 		'html': 'abc',
 		'data': [
@@ -694,6 +779,52 @@ ve.dm.example.domToDataCases = {
 			{ 'type': '/paragraph' }
 		]
 	},
+	'wrapping of bare content with mw:unrecognized inline alien': {
+		'html': '1<span typeof="mw:Placeholder">baz</span>2',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'1',
+			{
+				'type': 'alienInline',
+				'attributes': { 'html': '<span typeof="mw:Placeholder">baz</span>' }
+			},
+			{ 'type': '/alienInline' },
+			'2',
+			{ 'type': '/paragraph' }
+		]
+	},
+	'wrapping of bare content with mw:unrecognized block alien': {
+		'html': '1<div typeof="mw:Placeholder">baz</div>2',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'1',
+			{ 'type': '/paragraph' },
+			{
+				'type': 'alienBlock',
+				'attributes': { 'html': '<div typeof="mw:Placeholder">baz</div>' }
+			},
+			{ 'type': '/alienBlock' },
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'2',
+			{ 'type': '/paragraph' }
+		]
+	},
+	'wrapping of bare content with about group': {
+		'html': '1<tt about="#mwt1">foo</tt><tt about="#mwt1">bar</tt>2',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'1',
+			{ 'type': '/paragraph' },
+			{
+				'type': 'alienBlock',
+				'attributes': { 'html': '<tt about="#mwt1">foo</tt><tt about="#mwt1">bar</tt>' }
+			},
+			{ 'type': '/alienBlock' },
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'2',
+			{ 'type': '/paragraph' }
+		]
+	},
 	'wrapping of bare content between structural nodes': {
 		'html': '<table></table>abc<table></table>',
 		'data': [
@@ -725,6 +856,50 @@ ve.dm.example.domToDataCases = {
 			{ 'type': '/paragraph' }
 		]
 	},
+	'wrapping prevents empty list items': {
+		'html': '<ul><li></li></ul>',
+		'data': [
+			{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+			{ 'type': 'listItem' },
+			{ 'type': 'paragraph', 'internal': { 'generated': 'empty' } },
+			{ 'type': '/paragraph' },
+			{ 'type': '/listItem' },
+			{ 'type': '/list' }
+		]
+	},
+	'empty document': {
+		'html': '',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'empty' } },
+			{ 'type': '/paragraph' }
+		]
+	},
+	'empty document with content added by the editor': {
+		'html': null,
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'empty' } },
+			'F',
+			'o',
+			'o',
+			{ 'type': '/paragraph' }
+		],
+		'normalizedHtml': '<p>Foo</p>'
+	},
+	'empty list item with content added by the editor': {
+		'html': null,
+		'data': [
+			{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+			{ 'type': 'listItem' },
+			{ 'type': 'paragraph', 'internal': { 'generated': 'empty' } },
+			'F',
+			'o',
+			'o',
+			{ 'type': '/paragraph' },
+			{ 'type': '/listItem' },
+			{ 'type': '/list' }
+		],
+		'normalizedHtml': '<ul><li><p>Foo</p></li></ul>'
+	},
 	'example document': {
 		'html': ve.dm.example.html,
 		'data': ve.dm.example.data
@@ -741,6 +916,7 @@ ve.dm.example.domToDataCases = {
 					'type': 'link/MWinternal',
 					'data': {
 						'title': 'Foo bar',
+						'origTitle': 'Foo_bar',
 						'hrefPrefix': ''
 					},
 					'htmlTagName': 'a',
@@ -757,6 +933,7 @@ ve.dm.example.domToDataCases = {
 					'type': 'link/MWinternal',
 					'data': {
 						'title': 'Foo bar',
+						'origTitle': 'Foo_bar',
 						'hrefPrefix': ''
 					},
 					'htmlTagName': 'a',
@@ -773,6 +950,7 @@ ve.dm.example.domToDataCases = {
 					'type': 'link/MWinternal',
 					'data': {
 						'title': 'Foo bar',
+						'origTitle': 'Foo_bar',
 						'hrefPrefix': ''
 					},
 					'htmlTagName': 'a',
@@ -799,6 +977,7 @@ ve.dm.example.domToDataCases = {
 					'type': 'link/MWinternal',
 					'data': {
 						'title': 'Foo/Bar',
+						'origTitle': 'Foo/Bar',
 						'hrefPrefix': './../../../'
 					},
 					'htmlTagName': 'a',
@@ -814,6 +993,7 @@ ve.dm.example.domToDataCases = {
 					'type': 'link/MWinternal',
 					'data': {
 						'title': 'Foo/Bar',
+						'origTitle': 'Foo/Bar',
 						'hrefPrefix': './../../../'
 					},
 					'htmlTagName': 'a',
@@ -829,6 +1009,7 @@ ve.dm.example.domToDataCases = {
 					'type': 'link/MWinternal',
 					'data': {
 						'title': 'Foo/Bar',
+						'origTitle': 'Foo/Bar',
 						'hrefPrefix': './../../../'
 					},
 					'htmlTagName': 'a',
@@ -1286,7 +1467,11 @@ ve.dm.example.domToDataCases = {
 			'\n',
 			'\n',
 			{ 'type': '/preformatted' }
-		]
+		],
+		// pre newline hack
+		// TODO we should test this using a better, more .innerHTML-based mechanism for
+		// comparing DOM trees
+		'normalizedHtml': '\n<pre>\n\n\n\nFoo\n\n\nBar\n\n\n\n</pre>\n\n\n\n\n'
 	},
 	'mismatching whitespace data is ignored': {
 		'html': null,
@@ -1316,6 +1501,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1335,6 +1521,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1354,6 +1541,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1379,6 +1567,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1396,6 +1585,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1414,6 +1604,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1433,6 +1624,7 @@ ve.dm.example.domToDataCases = {
 						'type': 'link/MWinternal',
 						'data': {
 							'hrefPrefix': '',
+							'origTitle': 'Foo',
 							'title': 'Foo'
 						},
 						'htmlTagName': 'a',
@@ -1480,10 +1672,10 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'document with meta elements': {
-		'html': '<meta property="mw:PageProp/nocc" /><p>Foo' +
+		'html': '<!-- No content conversion --><meta property="mw:PageProp/nocc" /><p>Foo' +
 			'<link rel="mw:WikiLink/Category" href="./Category:Bar" />Bar' +
-			'<meta property="mw:foo" content="bar" />Baz</p>' +
-			'<meta property="mw:bar" content="baz" />' +
+			'<meta property="mw:foo" content="bar" />Ba<!-- inline -->z</p>' +
+			'<meta property="mw:bar" content="baz" /><!--barbaz-->' +
 			'<link rel="mw:WikiLink/Category" href="./Category:Foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		'data': ve.dm.example.withMeta
@@ -1502,11 +1694,27 @@ ve.dm.example.domToDataCases = {
 			'B',
 			'a',
 			'r',
-			{ 'type': '/paragraph' }
+			{ 'type': '/paragraph' },
+			{ 'type': 'list', 'attributes': { 'style': 'bullet' } },
+			{ 'type': 'listItem' },
+			{
+				'type': 'paragraph',
+				'internal': {
+					'generated': 'wrapper',
+					'changed': { 'content': 1 }
+				}
+			},
+			'B',
+			'a',
+			'z',
+			{ 'type': '/paragraph' },
+			{ 'type': '/listItem' },
+			{ 'type': '/list' }
 		],
 		'normalizedHtml': '<p data-ve-changed="{&quot;content&quot;:1}">' +
 				'Foo<img data-ve-changed="{&quot;attributes&quot;:2}" />' +
-				'</p><p data-ve-changed="{&quot;created&quot;:1}">Bar</p>'
+				'</p><p data-ve-changed="{&quot;created&quot;:1}">Bar</p>' +
+				'<ul><li data-ve-changed="{&quot;content&quot;:1}">Baz</li></ul>'
 	},
 	'about grouping': {
 		'html': '<div typeof="mw:Placeholder" about="#mwt1">Foo</div>' +
@@ -1571,6 +1779,156 @@ ve.dm.example.domToDataCases = {
 				}
 			},
 			{ 'type': '/alienBlock' }
+		]
+	},
+	'mw:Entity': {
+		'html': '<p>a<span typeof="mw:Entity">¢</span>b<span typeof="mw:Entity">¥</span><span typeof="mw:Entity">™</span></p>',
+		'data': [
+			{ 'type': 'paragraph' },
+			'a',
+			{ 'type': 'MWentity', 'attributes': { 'character': '¢', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			'b',
+			{ 'type': 'MWentity', 'attributes': { 'character': '¥', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			{ 'type': 'MWentity', 'attributes': { 'character': '™', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			{ 'type': '/paragraph' }
+		]
+	},
+	'wrapping with mw:Entity': {
+		'html': 'a<span typeof="mw:Entity">¢</span>b<span typeof="mw:Entity">¥</span><span typeof="mw:Entity">™</span>',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'a',
+			{ 'type': 'MWentity', 'attributes': { 'character': '¢', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			'b',
+			{ 'type': 'MWentity', 'attributes': { 'character': '¥', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			{ 'type': 'MWentity', 'attributes': { 'character': '™', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			{ 'type': '/paragraph' }
+		]
+	},
+	'whitespace preservation with mw:Entity': {
+		'html': '<p> a  <span typeof="mw:Entity"> </span>   b    <span typeof="mw:Entity">¥</span>\t<span typeof="mw:Entity">™</span></p>',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'whitespace': [ undefined, ' ' ] } },
+			'a',
+			' ',
+			' ',
+			{ 'type': 'MWentity', 'attributes': { 'character': ' ', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			' ',
+			' ',
+			' ',
+			'b',
+			' ',
+			' ',
+			' ',
+			' ',
+			{ 'type': 'MWentity', 'attributes': { 'character': '¥', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			'\t',
+			{ 'type': 'MWentity', 'attributes': { 'character': '™', 'html/typeof': 'mw:Entity' } },
+			{ 'type': '/MWentity' },
+			{ 'type': '/paragraph' }
+		]
+	},
+	'block node inside annotation node is alienated': {
+		'html': '<span>\n<p>Bar</p></span>',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			[ '\n', [ ve.dm.example.span ] ],
+			{
+				'type': 'alienInline',
+				'attributes': {
+					'html': '<p>Bar</p>'
+				},
+				'annotations': [ ve.dm.example.span ]
+			},
+			{ 'type': '/alienInline' },
+			{ 'type': '/paragraph' }
+		]
+	},
+	'block node inside annotation node surrounded by tables': {
+		'html': '<table></table><span>\n<p>Bar</p></span><table></table>',
+		'data': [
+			{ 'type': 'table' },
+			{ 'type': '/table' },
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			[ '\n', [ ve.dm.example.span ] ],
+			{
+				'type': 'alienInline',
+				'attributes': {
+					'html': '<p>Bar</p>'
+				},
+				'annotations': [ ve.dm.example.span ]
+			},
+			{ 'type': '/alienInline' },
+			{ 'type': '/paragraph' },
+			{ 'type': 'table' },
+			{ 'type': '/table' }
+		]
+	},
+	'block node inside annotation node is alienated and continues wrapping': {
+		'html': 'Foo<span>\n<p>Bar</p></span>Baz',
+		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			'F',
+			'o',
+			'o',
+			[ '\n', [ ve.dm.example.span ] ],
+			{
+				'type': 'alienInline',
+				'attributes': {
+					'html': '<p>Bar</p>'
+				},
+				'annotations': [ ve.dm.example.span ]
+			},
+			{ 'type': '/alienInline' },
+			'B',
+			'a',
+			'z',
+			{ 'type': '/paragraph' }
+		]
+	},
+	'whitespace before meta node in wrapping mode': {
+		'html': '<table><tbody><tr><td>Foo\n<meta property="mw:foo" content="bar" /></td></tr></tbody></table>',
+		'data': [
+			{ 'type': 'table' },
+			{ 'type': 'tableSection', 'attributes': { 'style': 'body' } },
+			{ 'type': 'tableRow' },
+			{
+				'type': 'tableCell',
+				'attributes': { 'style': 'data' },
+				'internal': { 'whitespace': [ undefined, undefined, '\n' ] }
+			},
+			{
+				'type': 'paragraph',
+				'internal': {
+					'generated': 'wrapper',
+					'whitespace': [ undefined, undefined, undefined, '\n' ]
+				}
+			},
+			'F',
+			'o',
+			'o',
+			{
+				'type': 'metaBlock',
+				'attributes': {
+					'style': 'meta',
+					'key': 'mw:foo',
+					'value': 'bar'
+				}
+			},
+			{ 'type': '/metaBlock' },
+			{ 'type': '/paragraph' },
+			{ 'type': '/tableCell' },
+			{ 'type': '/tableRow' },
+			{ 'type': '/tableSection' },
+			{ 'type': '/table' }
 		]
 	}
 };

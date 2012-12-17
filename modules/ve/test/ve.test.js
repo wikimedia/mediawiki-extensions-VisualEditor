@@ -378,28 +378,30 @@ QUnit.test( 'copyObject', 6, function ( assert ) {
 	);
 } );
 
-QUnit.test( 'getDOMAttributes', 1, function ( assert ) {
+QUnit.test( 'getDomAttributes', 1, function ( assert ) {
 	assert.deepEqual(
-		ve.getDOMAttributes( $( '<div foo="bar" baz quux=3></div>').get( 0 ) ),
+		ve.getDomAttributes( $( '<div foo="bar" baz quux=3></div>').get( 0 ) ),
 		{ 'foo': 'bar', 'baz': '', 'quux': '3' },
-		'getDOMAttributes() returns object with correct attributes'
+		'getDomAttributes() returns object with correct attributes'
 	);
 } );
 
-QUnit.test( 'setDOMAttributes', 2, function ( assert ) {
+QUnit.test( 'setDomAttributes', 3, function ( assert ) {
 	var element = document.createElement( 'div' );
-	ve.setDOMAttributes( element, { 'foo': 'bar', 'baz': '', 'quux': 3 } );
+	ve.setDomAttributes( element, { 'foo': 'bar', 'baz': '', 'quux': 3 } );
 	assert.deepEqual(
-		ve.getDOMAttributes( element ),
+		ve.getDomAttributes( element ),
 		{ 'foo': 'bar', 'baz': '', 'quux': '3' },
-		'setDOMAttributes() sets attributes correctly'
+		'setDomAttributes() sets attributes correctly'
 	);
-	ve.setDOMAttributes( element, { 'foo': null, 'bar': 1, 'baz': undefined, 'quux': 5, 'whee': 'yay' } );
+	ve.setDomAttributes( element, { 'foo': null, 'bar': 1, 'baz': undefined, 'quux': 5, 'whee': 'yay' } );
 	assert.deepEqual(
-		ve.getDOMAttributes( element ),
+		ve.getDomAttributes( element ),
 		{ 'bar': '1', 'quux': '5', 'whee': 'yay' },
-		'setDOMAttributes() overwrites attributes, removes attributes, and sets new attributes'
+		'setDomAttributes() overwrites attributes, removes attributes, and sets new attributes'
 	);
+	ve.setDomAttributes( element, { 'onclick': 'alert(1);' }, ['foo', 'bar', 'baz', 'quux', 'whee'] );
+	assert.ok( !element.hasAttribute( 'onclick' ), 'event attributes are blocked when sanitizing' );
 } );
 
 QUnit.test( 'getOpeningHtmlTag', 5, function ( assert ) {
@@ -544,18 +546,18 @@ QUnit.test( 'batchSplice', 8, function ( assert ) {
 
 	actualRet = ve.batchSplice( actual, 1, 1, [] );
 	expectedRet = expected.splice( 1, 1 );
-	deepEqual( expectedRet, actualRet, 'removing 1 element (return value)' );
-	deepEqual( expected, actual, 'removing 1 element (array)' );
+	assert.deepEqual( expectedRet, actualRet, 'removing 1 element (return value)' );
+	assert.deepEqual( expected, actual, 'removing 1 element (array)' );
 
 	actualRet = ve.batchSplice( actual, 3, 2, [ 'w', 'x', 'y', 'z' ] );
 	expectedRet = expected.splice( 3, 2, 'w', 'x', 'y', 'z' );
-	deepEqual( expectedRet, actualRet, 'replacing 2 elements with 4 elements (return value)' );
-	deepEqual( expected, actual, 'replacing 2 elements with 4 elements (array)' );
+	assert.deepEqual( expectedRet, actualRet, 'replacing 2 elements with 4 elements (return value)' );
+	assert.deepEqual( expected, actual, 'replacing 2 elements with 4 elements (array)' );
 
 	actualRet = ve.batchSplice( actual, 0, 0, [ 'f', 'o', 'o' ] );
 	expectedRet = expected.splice( 0, 0, 'f', 'o', 'o' );
-	deepEqual( expectedRet, actualRet, 'inserting 3 elements (return value)' );
-	deepEqual( expected, actual, 'inserting 3 elements (array)' );
+	assert.deepEqual( expectedRet, actualRet, 'inserting 3 elements (return value)' );
+	assert.deepEqual( expected, actual, 'inserting 3 elements (array)' );
 
 	for ( i = 0; i < 2100; i++ ) {
 		bigArr[i] = i;
@@ -563,6 +565,7 @@ QUnit.test( 'batchSplice', 8, function ( assert ) {
 	actualRet = ve.batchSplice( actual, 2, 3, bigArr );
 	expectedRet = expected.splice.apply( expected, [2, 3].concat( bigArr.slice( 0, 1050 ) ) );
 	expected.splice.apply( expected, [1052, 0].concat( bigArr.slice( 1050 ) ) );
-	deepEqual( expectedRet, actualRet, 'replacing 3 elements with 2100 elements (return value)' );
-	deepEqual( expected, actual, 'replacing 3 elements with 2100 elements (array)' );
+	assert.deepEqual( expectedRet, actualRet, 'replacing 3 elements with 2100 elements (return value)' );
+	assert.deepEqual( expected, actual, 'replacing 3 elements with 2100 elements (array)' );
 } );
+

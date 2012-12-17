@@ -23,7 +23,11 @@ class VisualEditorHooks {
 	public static function onBeforePageDisplay( &$output, &$skin ) {
 		global $wgVisualEditorNamespaces;
 		if (
-			$skin->getUser()->getOption( 'visualeditor-enable' ) &&
+			// User has the 'visualeditor-enable' preference set
+			// (bug 42936) ignoring hidden-ness so we can do dark launches
+			$skin->getUser()->getOption( 'visualeditor-enable',
+				/*default=*/ false, /*ignoreHidden=*/true
+			) &&
 			in_array( $skin->getSkinName(), self::$supportedSkins ) &&
 			(
 				// Article in the VisualEditor namespace
@@ -46,16 +50,21 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	public static function onListDefinedTags( &$tags ) {
+		$tags[] = 'visualeditor';
+		return true;
+	}
+
 	/**
 	 * Adds extra variables to the page config.
-	 *
-	 * This is attached to the MediaWiki 'MakeGlobalVariablesScript' hook.
 	 */
-	public static function onMakeGlobalVariablesScript( &$vars ) {
-		global $wgUser, $wgTitle;
+	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
+		global $wgVisualEditorEnableSectionEditLinks;
 		$vars['wgVisualEditor'] = array(
-			'isPageWatched' => $wgUser->isWatched( $wgTitle )
+			'isPageWatched' => $out->getUser()->isWatched( $out->getTitle() ),
+			'enableSectionEditLinks' => $wgVisualEditorEnableSectionEditLinks
 		);
+
 		return true;
 	}
 
@@ -95,6 +104,8 @@ class VisualEditorHooks {
 				'ce/ve.ce.BranchNode.test.js',
 				'ce/ve.ce.LeafNode.test.js',
 				'ce/nodes/ve.ce.TextNode.test.js',
+				// VisualEditor initialization Tests
+				'init/ve.init.Platform.test.js',
 			),
 			'dependencies' => array(
 				'ext.visualEditor.core',

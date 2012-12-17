@@ -16,59 +16,18 @@
  * @param context
  */
 ve.ui.LinkInspector = function VeUiLinkInspector( context ) {
-	var inspector = this;
-
 	// Parent constructor
 	ve.ui.Inspector.call( this, context );
 
 	// Properties
 	this.context = context;
-	this.initialValue = null;
-	this.$clearButton = $(
-		'<div class="ve-ui-inspector-button ve-ui-inspector-clearButton ve-ui-icon-clear"></div>',
-		context.frameView.doc
-	);
-	this.$title = $( '<div class="ve-ui-inspector-title"></div>', context.frameView.doc )
-		.text( ve.msg( 'visualeditor-linkinspector-title' ) );
-	this.$locationInput = $(
-		'<input type="text" class="ve-ui-linkInspector-location" />',
-		context.frameView.doc
+	this.initialTarget = null;
+	this.isNewAnnotation = false;
+	this.$locationInput = this.frame.$$(
+		'<input type="text" class="ve-ui-linkInspector-location ve-ui-icon-down" />'
 	);
 
-	// Events
-	this.$clearButton.click( function () {
-		if ( $( this ).hasClass( 've-ui-inspector-disabled' ) ) {
-			context.closeInspector( false );
-			return;
-		}
-		var i,
-			surfaceModel = inspector.context.getSurface().getModel(),
-			annotations = inspector.getAllLinkAnnotationsFromSelection();
-		// Clear all link annotations.
-		for ( i = 0; i < annotations.length; i++ ) {
-			surfaceModel.annotate( 'clear', annotations[i] );
-		}
-		inspector.$locationInput.val( '' );
-		inspector.context.closeInspector();
-	} );
-	this.$locationInput.on( 'change mousedown keydown cut paste', function () {
-		var $input = $( this );
-		setTimeout( function () {
-			// Toggle disabled class
-			if (
-				$input.val() !== '' &&
-				$input.data( 'status' ) !== 'invalid'
-			) {
-				inspector.$.removeClass( 've-ui-inspector-disabled' );
-			} else {
-				inspector.$.addClass( 've-ui-inspector-disabled' );
-			}
-
-		}, 0 );
-	} );
-
-	// DOM Changes
-	this.$.prepend( this.$title, this.$clearButton );
+	// Initialization
 	this.$form.append( this.$locationInput );
 
 	// FIXME: MediaWiki-specific
@@ -85,156 +44,190 @@ ve.inheritClass( ve.ui.LinkInspector, ve.ui.Inspector );
 
 ve.ui.LinkInspector.static.icon = 'link';
 
-ve.ui.LinkInspector.static.typePattern = /^link\/MW(in|ex)ternal$/;
+ve.ui.LinkInspector.static.titleMessage = 'visualeditor-linkinspector-title';
+
+ve.ui.LinkInspector.static.typePattern = /^link(\/MW(in|ex)ternal)?$/;
 
 /* Methods */
 
-ve.ui.LinkInspector.prototype.getAllLinkAnnotationsFromSelection = function () {
-	var surfaceView = this.context.getSurface().getView(),
-		surfaceModel = surfaceView.getModel(),
-		documentModel = surfaceModel.getDocument();
-	return documentModel
-		.getAnnotationsFromRange( surfaceModel.getSelection() )
-		.getAnnotationsByName( this.constructor.static.typePattern )
-		.get();
+/**
+ * Responds to the inspector being initialized.
+ *
+ * There are 4 scenarios:
+ *     * Zero-length selection not near a word -> no change, text will be inserted on close
+ *     * Zero-length selection inside or adjacent to a word -> expand selection to cover word
+ *     * Selection covering non-link text -> trim selection to remove leading/trailing whitespace
+ *     * Selection covering link text -> expand selection to cover link
+ *
+ * @method
+ */
+ve.ui.LinkInspector.prototype.onInitialize = function () {
+	var fragment = this.context.getSurface().getModel().getFragment( null, true ),
+		annotation = this.getMatchingAnnotations( fragment ).get( 0 );
+	if ( !annotation ) {
+		if ( fragment.getRange().isCollapsed() ) {
+			// Expand to nearest word
+			fragment = fragment.expandRange( 'word' );
+		} else {
+			// Trim whitespace
+			fragment = fragment.trimRange();
+		}
+		if ( !fragment.getRange().isCollapsed() ) {
+			// Create annotation from selection
+			fragment.annotateContent(
+				'set', this.getAnnotationFromTarget( fragment.truncateRange( 255 ).getText() )
+			);
+			this.isNewAnnotation = true;
+		}
+	} else {
+		// Expand range to cover annotation
+		fragment = fragment.expandRange( 'annotation', annotation );
+	}
+	// Update selection
+	fragment.select();
 };
 
 /**
- * Gets the first link annotation within the selection.
+ * Responds to the inspector being opened.
  *
  * @method
- * @returns {ve.Annotation|null} First link annotation object or null if none is found
  */
-ve.ui.LinkInspector.prototype.getFirstLinkAnnotation = function () {
-	var i, len,
-		annotations = this.getAllLinkAnnotationsFromSelection();
-	for ( i = 0, len = annotations.length; i < len; i++ ) {
-		// Use the first one with a recognized type (there should only be one, this is just in case)
-		if (
-			annotations[i] instanceof ve.dm.MWInternalLinkAnnotation ||
-			annotations[i] instanceof ve.dm.MWExternalLinkAnnotation
-		) {
-			return annotations[i];
-		}
-	}
-	return null;
-};
-
-/*
- * Method called prior to opening inspector which fixes up
- * selection to contain the complete annotated link range
- * OR unwrap outer whitespace from selection.
- */
-ve.ui.LinkInspector.prototype.prepareOpen = function () {
-	var surfaceView = this.context.getSurface().getView(),
-		surfaceModel = surfaceView.getModel(),
-		doc = surfaceModel.getDocument(),
-		annotation = this.getFirstLinkAnnotation(),
-		selection = surfaceModel.getSelection(),
-		annotatedRange,
-		newSelection;
-
-	// Trim outer space from range if any.
-	newSelection = doc.trimOuterSpaceFromRange( selection );
-
-	if ( annotation !== null ) {
-		annotatedRange = doc.getAnnotatedRangeFromSelection( newSelection, annotation );
-		// Adjust selection if it does not contain the annotated range
-		if ( selection.start > annotatedRange.start ||
-			 selection.end < annotatedRange.end
-		) {
-			newSelection = annotatedRange;
-			// if selected from right to left
-			if ( selection.from > selection.start ) {
-				newSelection.flip();
-			}
-		}
-	}
-	surfaceModel.change( null, newSelection );
-};
-
 ve.ui.LinkInspector.prototype.onOpen = function () {
-	var annotation = this.getFirstLinkAnnotation(),
-		surfaceModel = this.context.getSurface().getModel(),
-		documentModel = surfaceModel.getDocument(),
-		selection = surfaceModel.getSelection().truncate( 255 ),
-		initialValue = documentModel.getText( selection );
+	var target = '',
+		fragment = this.context.getSurface().getModel().getFragment( null, true ),
+		annotation = this.getMatchingAnnotations( fragment ).get( 0 );
 
-	if ( annotation === null ) {
-		this.$locationInput.val( initialValue );
-		this.$clearButton.addClass( 've-ui-inspector-disabled' );
-	} else if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
-		// Internal link
-		initialValue = annotation.data.title || '';
-		this.$locationInput.val( initialValue );
-		this.$clearButton.removeClass( 've-ui-inspector-disabled' );
-	} else {
-		// External link
-		initialValue = annotation.data.href || '';
-		this.$locationInput.val( initialValue );
-		this.$clearButton.removeClass( 've-ui-inspector-disabled' );
+	if ( annotation ) {
+		if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
+			// Internal link
+			target = annotation.data.title || '';
+		} else {
+			// External link
+			target = annotation.data.href || '';
+		}
 	}
-	this.initialValue = initialValue;
-	if ( this.$locationInput.val().length === 0 ) {
-		this.$.addClass( 've-ui-inspector-disabled' );
-	} else {
-		this.$.removeClass( 've-ui-inspector-disabled' );
-	}
+	this.initialTarget = target;
 
+	// Initialize form
+	this.$locationInput.val( target );
+
+	// Set focus on the location input
 	setTimeout( ve.bind( function () {
 		this.$locationInput.focus().select();
 	}, this ), 0 );
 };
 
-ve.ui.LinkInspector.prototype.onClose = function ( accept ) {
-	var surfaceView = this.context.getSurface().getView(),
-		surfaceModel = surfaceView.getModel(),
-		linkAnnotations = this.getAllLinkAnnotationsFromSelection(),
+/**
+ * Responds to the inspector being opened.
+ *
+ * @method
+ * @param {Boolean} remove Annotation should be removed
+ */
+ve.ui.LinkInspector.prototype.onClose = function ( remove ) {
+	var i, len, annotations,
+		insert = false,
+		undo = false,
+		clear = false,
+		set = false,
 		target = this.$locationInput.val(),
-		i;
-	if ( accept ) {
-		if ( !target ) {
-			return;
-		}
-		// Clear link annotation if it exists
-		for ( i = 0; i < linkAnnotations.length; i++ ) {
-			surfaceModel.annotate( 'clear', linkAnnotations[i] );
-		}
-		surfaceModel.annotate( 'set', ve.ui.LinkInspector.getAnnotationForTarget( target ) );
-
+		surface = this.context.getSurface(),
+		selection = surface.getModel().getSelection(),
+		fragment = surface.getModel().getFragment( this.initialSelection, false );
+	// Empty target is a shortcut for removal
+	if ( target === '' ) {
+		remove = true;
 	}
-	// Restore focus
-	surfaceView.getDocument().getDocumentNode().$.focus();
+	if ( remove ) {
+		clear = true;
+	} else {
+		if ( this.initialSelection.isCollapsed() ) {
+			insert = true;
+		}
+		if ( target !== this.initialTarget ) {
+			if ( this.isNewAnnotation ) {
+				undo = true;
+			} else {
+				clear = true;
+			}
+			set = true;
+		}
+	}
+	if ( insert ) {
+		// Insert default text and select it
+		fragment = fragment.insertContent( target, false );
+		// Move cursor to the end of the inserted content
+		selection = new ve.Range( this.initialSelection.start + target.length );
+	}
+	if ( undo ) {
+		// Go back to before we added an annotation in an onInitialize handler
+		surface.execute( 'history', 'undo' );
+	}
+	if ( clear ) {
+		// Clear all existing annotations
+		annotations = this.getMatchingAnnotations( fragment ).get();
+		for ( i = 0, len = annotations.length; i < len; i++ ) {
+			fragment.annotateContent( 'clear', annotations[i] );
+		}
+	}
+	if ( set ) {
+		// Apply new annotation
+		fragment.annotateContent( 'set', this.getAnnotationFromTarget( target ) );
+	}
+	// Selection changes may have occured in the insertion and annotation hullabaloo - restore it
+	surface.execute( 'content', 'select', selection );
+	// Reset state
+	this.isNewAnnotation = false;
 };
 
-ve.ui.LinkInspector.getAnnotationForTarget = function ( target ) {
+/**
+ * Gets an annotation object from a target.
+ *
+ * The type of link is automatically detected based on some crude heuristics.
+ *
+ * @method
+ * @param {String} target Link target
+ * @returns {ve.dm.Annotation}
+ */
+ve.ui.LinkInspector.prototype.getAnnotationFromTarget = function ( target ) {
 	var title, annotation;
-	// Figure out if this is an internal or external link
-	if ( target.match( /^(https?:)?\/\// ) ) {
-		// External link
-		annotation = new ve.dm.MWExternalLinkAnnotation();
-		annotation.data.href = target;
+	// FIXME: MediaWiki-specific
+	if ( 'mw' in window ) {
+		// Figure out if this is an internal or external link
+		if ( target.match( /^(https?:)?\/\// ) ) {
+			// External link
+			annotation = new ve.dm.MWExternalLinkAnnotation();
+			annotation.data.href = target;
+		} else {
+			// Internal link
+			// TODO: In the longer term we'll want to have autocompletion and existence and validity
+			// checks using AJAX
+			try {
+				title = new mw.Title( target );
+				if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
+					// File: or Category: link
+					// We have to prepend a colon so this is interpreted as a link
+					// rather than an image inclusion or categorization
+					target = ':' + target;
+				}
+			} catch ( e ) { }
+			annotation = new ve.dm.MWInternalLinkAnnotation();
+			annotation.data.title = target;
+		}
 	} else {
-		// Internal link
-		// TODO: In the longer term we'll want to have autocompletion and existence
-		// and validity checks using AJAX
-		try {
-			// FIXME: MediaWiki-specific
-			title = new mw.Title( target );
-			if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
-				// File: or Category: link
-				// We have to prepend a colon so this is interpreted as a link
-				// rather than an image inclusion or categorization
-				target = ':' + target;
-			}
-		} catch ( e ) { }
-
-		annotation = new ve.dm.MWInternalLinkAnnotation();
-		annotation.data.title = target;
+		// Default to generic external link
+		annotation = new ve.dm.LinkAnnotation();
+		annotation.data.href = target;
 	}
 	return annotation;
 };
 
+/**
+ * Initalizes the multi-suggest plugin for the location input.
+ *
+ * TODO: Consider cleaning up and organizing this all a bit.
+ *
+ * @method
+ */
 ve.ui.LinkInspector.prototype.initMultiSuggest = function () {
 	var options,
 		inspector = this,
@@ -244,11 +237,6 @@ ve.ui.LinkInspector.prototype.initMultiSuggest = function () {
 		pageStatusCache = {},
 		api = new mw.Api();
 	function updateLocationStatus( status ) {
-		if ( status !== 'invalid' ) {
-			inspector.$.removeClass( 've-ui-inspector-disabled' );
-		} else {
-			inspector.$.addClass( 've-ui-inspector-disabled' );
-		}
 		inspector.$locationInput.data( 'status', status );
 	}
 
@@ -261,12 +249,10 @@ ve.ui.LinkInspector.prototype.initMultiSuggest = function () {
 		'cssEllipsis': false,
 		// Build suggestion groups in order.
 		'suggestions': function ( params ) {
-			var groups = {},
+			var modifiedQuery, title, prot,
+				groups = {},
 				results = params.results,
-				query = params.query,
-				modifiedQuery,
-				title,
-				prot;
+				query = params.query;
 
 			// Add existing pages.
 			if ( results.length > 0 ) {
@@ -353,7 +339,12 @@ ve.ui.LinkInspector.prototype.initMultiSuggest = function () {
 					'results': suggestionCache[cKey]
 				} );
 			} else {
-				// No cache, build fresh api request.
+				// Load immediate suggestions
+				callback( {
+					'query': query,
+					'results': []
+				} );
+				// Build from fresh api request.
 				api.get( {
 					'action': 'opensearch',
 					'search': query
@@ -379,10 +370,7 @@ ve.ui.LinkInspector.prototype.initMultiSuggest = function () {
 		},
 		// Position the iframe overlay below the input.
 		'position': function () {
-			context.setOverlayPosition( {
-				'overlay': $overlay,
-				'el': inspector.$locationInput
-			} );
+			context.positionOverlayBelow( $overlay, inspector.$locationInput );
 		},
 		// Fired when a suggestion is selected.
 		'select': function () {
