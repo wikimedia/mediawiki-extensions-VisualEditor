@@ -5,7 +5,6 @@
  * @constructor
  * @param {ve.Surface} editorSurface Editor surface to hook the client adapter into
 **/
-
 collab.Client = function( editorSurface ) {
 	var _this = this;
 	this.editor = editorSurface;
@@ -13,7 +12,7 @@ collab.Client = function( editorSurface ) {
 	};
 
 	// Request and store the validaton token
-	this.validationToken = collab.Client.requestValidationToken();
+	//this.validationToken = collab.Client.requestValidationToken();
 
 	// Initialize the UI binding object
 	this.ui = new collab.UI( this );
@@ -32,11 +31,12 @@ collab.Client = function( editorSurface ) {
 collab.Client.requestValidationToken = function( callback ) {
 	var settings = collab.settings;
 	var tokenUrl = settings.authUrl + '&mode=generate';
-	console.log(callback);
 	$.get( tokenUrl, function( res ) {
 		console.log( res );
 		var token = res.TokenValidationResponse.token;
-		callback( token );
+		if( callback ) {
+			callback( token );
+		}
 	} );
 };
 
@@ -55,7 +55,8 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 			_this.bindIOEvents( callbacks );
 			_this.bindInternalEvents();
 
-			socket.on( 'connection', function() {
+			socket.on( 'CONNECTION', function() {
+
 				// callbacks.authenticate( 'upstream' ); Deferred
 				// TODO: User has to be handled using the MW auth
 				_this.isConnected = true;
@@ -63,11 +64,11 @@ collab.Client.prototype.connect = function( userName, docTitle, responseCallback
 					success: true,
 					message: 'Connected.'
 				} );
-
+				_this.socket.emit( 'CLIENT_CONNECT', { userName: _this.userName, docTitle: docTitle } );
 				// Send an authentication request
-				collab.Client.requestValidationToken( function( token ) {
-					socket.emit( 'client_auth', { userName: _this.userName, validationToken: token } );
-				} );
+				//collab.Client.requestValidationToken( function( token ) {
+					//socket.emit( 'client_auth', { userName: _this.userName, validationToken: token } );
+				//} );
 			} );
 		}
 
@@ -101,25 +102,26 @@ collab.Client.prototype.bindIOEvents = function( callbacksObj ) {
 	var io_socket = this.socket;
 	var ui = this.ui;
 
-	io_socket.on( 'new_transaction', function( data ) {
+	io_socket.on( 'NEW_TRANSACTION', function( data ) {
 		callbacksObj.newTransaction( data );
 	} );
 
-	io_socket.on( 'client_auth', function( data ) {
+	io_socket.on( 'CLIENT_AUTH', function( data ) {
 		callbacksObj.authenticate( data );
 	} );
 
-	io_socket.on( 'client_connect', function( data ) {
+	io_socket.on( 'CLIENT_CONNECT', function( data ) {
 		callbacksObj.userConnect( data );
 		ui.userConnect( data );
 	} );
 
-	io_socket.on( 'client_disconnect', function( data ) {
+	io_socket.on( 'CLIENT_DISCONNECT', function( data ) {
 		callbacksObj.userDisconnect( data );
 		ui.userDisconnect( data );
 	} );
 
-	io_socket.on( 'document_transfer', function( data ) {
+	io_socket.on( 'DOCUMENT_TRANSFER', function( data ) {
+		console.log(data.users);
 		callbacksObj.docTransfer( data );
 		ui.populateUsersList( data.users );
 	} );
@@ -149,10 +151,10 @@ collab.Client.prototype.bindInternalEvents = function() {
 	} );
 
 	callbacksObj.on( 'new_transaction', function( transactionData ) {
-		io_socket.emit( 'new_transaction', transactionData );
+		io_socket.emit( 'NEW_TRANSACTION', transactionData );
 	} );
 
 	callbacksObj.on( 'client_connect', function( clientData ) {
-		io_socket.emit( 'client_connect', clientData );
+		io_socket.emit( 'CLIENT_CONNECT', clientData );
 	} );
 };

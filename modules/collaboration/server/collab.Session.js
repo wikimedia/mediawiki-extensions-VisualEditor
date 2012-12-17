@@ -1,8 +1,9 @@
 /**
- * collab.Session global object to create an instance per editing session.
- * References the collab.Document currently being edited in the session.
- * Also stores information of the user who initiated the editing session.
-**/
+ * Session class for storing user and document information of an editing session.
+ *
+ * Contains a reference to the Document object for the document in use.
+ * Also, does some useful stuff like user authentication.
+ */
 
 var ve = require( './collab.ve.js' ).ve,
 	settings = require( '../settings.js' ).settings,
@@ -14,21 +15,24 @@ var ve = require( './collab.ve.js' ).ve,
  * @constructor
  * @param{collab.Document} document Reference to the document to associate with.
  * @param{String} userName User name who initiates this session.
-**/
+ */
 Session = function( document, userName ) {
 	ve.EventEmitter.call( this );
 
-	this.Document = document;
+	this.document = document;
 	this.userName = userName
 	this.isPublisher = false;
+	
 	// Un-authenticated session
 	this.sessionID = null;
 };
 
+ve.inheritClass( Session, ve.EventEmitter );
+
 /**
- * Generates a unique session id for this session.
+ * Generates a unique session ID for this session.
  * Should use document's title and user to generate the unique id.
-**/
+ */
 Session.generateID = function( params ) {
 	// Generate unique key for the client and send it
 	// Could use the information of other documents in the server,
@@ -52,23 +56,21 @@ Session.authenticate = function( userName, validationToken, callback ) {
 }
 
 /**
- * Set publishing rights for the current user/session
+ * Set publishing rights for the current user/session.
  *
  * @method
  * @param{Boolean} key True/False for invoking/revoking publishing right on the session.
-**/
+ */
 Session.prototype.allowPublish = function( key ) {
 	// key is either true for having atleast one publisher or false for no publisher
 	this.isPublisher = key;
-	this.Document.hasPublisher = key;
+	this.document.hasPublisher = key;
 	this.emit( 'allowPublish', key );
 };
 
 Session.prototype.getID = function() {
 	return this.id;
 };
-
-ve.extendClass( Session, ve.EventEmitter );
 
 if( typeof module == 'object' ) {
 	module.exports.Session = Session;

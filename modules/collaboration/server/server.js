@@ -6,7 +6,7 @@
 **/
 
 var io = require( 'socket.io' ),
-	Callbacks = require( './collab.Callbacks.js' ).Callbacks,
+	Connection = require( './collab.Connection.js' ).Connection,
 	Document = require( './collab.Document.js' ).Document,
 	settings = require( '../settings.js' ).settings;
 
@@ -16,68 +16,31 @@ var io = require( 'socket.io' ),
  *
  * @class
  * @constructor
-**/
-
+ */
 CollaborationServer = function() {
-	// Document-wise closures of callback instances
-	this.docRoutes = [];
+	this.sessions = [];
+	this.connections = [];
+
+	// Initialize an empty map of documents and associated connections.
+	this.documents = {};
 };	
 
 /**
  * Start listening.
  *
  * @method
-**/
-
+ */
 CollaborationServer.prototype.listen = function() {
 	var _this = this;
 	var io_service = io.listen( settings.port );
 
 	io_service.on( 'connection', function( socket ) {
-		var socket_callbacks = new Callbacks( _this, socket );
-		_this.bindEvents( socket_callbacks );
-		socket.emit( 'connection', {} );
+		// Create a new Connection instance to handle the new client.
+		var connection = new Connection( _this, socket );
+		socket.on('test', function() {
+			console.log('hi');
+		});
 	});
-};
-
-/**
- * Binds all socket events to the corresponding callback functions
- *
- * @method
- * @param{collab.Callbacks} callbacksObj Callbacks instance to bind the events with.
-**/
-CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
-	// Socket events are registered here
-	var io_socket = callbacksObj.socket;
-	
-	io_socket.on( 'client_auth', function( data ) {
-		callbacksObj.authenticate( data );
-	} );
-
-	io_socket.on( 'client_connect', function( data ) {
-		callbacksObj.clientConnection( data );
-	} );
-
-	io_socket.on( 'document_transfer', function( data ) {
-		callbacksObj.documentTransfer( data );
-	} );
-
-	io_socket.on( 'disconnect', function( data ) {
-		callbacksObj.clientDisconnection( data );
-	} );
-
-	io_socket.on( 'client_disconnect', function( data ) {
-		callbacksObj.clientDisconnection( data );
-	} );
-	
-	io_socket.on( 'new_transaction', function( data ) {
-		callbacksObj.newTransaction( data );
-	} );
-
-	io_socket.on( 'document_save', function( data ) {
-		callbacksObj.saveDocument( data );
-	} );
-
 };
 
 /**
@@ -85,7 +48,7 @@ CollaborationServer.prototype.bindEvents = function( callbacksObj ) {
  *
  * @method
  * @param{String} docTitle The title of the document to lookup.
-**/
+ */
 CollaborationServer.prototype.lookupRoutes = function( docTitle ) {
 	var lookupRoute = null;
 	var docRoutes = this.docRoutes;

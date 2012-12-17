@@ -5,9 +5,10 @@
  * @constructor
  * @param {collab.Client} client Client adapter that the UI is to attached to
 **/
-collab.UI = function( client ) {
-	ve.EventEmitter.call( this );
 
+collab.UI = function( client ) {
+
+	ve.EventEmitter.call( this );
 	this.client = client;
 	var elementNodes = collab.UI.elementNodes;
 	this.setupToolbar( $( elementNodes.toolbar) );
@@ -18,8 +19,10 @@ collab.UI = function( client ) {
 	};
 };
 
+ve.inheritClass( collab.UI, ve.EventEmitter );
+
 collab.UI.elementNodes = {
-	toolbar: '.es-toolbarGroups',
+	toolbar: '.ve-ui-toolbar',
 	panel: '#content'
 };
 
@@ -107,8 +110,9 @@ collab.UI.prototype.userDisconnect = function( userName ) {
 **/
 collab.UI.prototype.setupToolbar = function( veToolbarNode ) {
 	var _this = this;
-	
+
 	veToolbarNode.append( collab.UI.markup.toolbarButtons );
+
 	// Display the panel
 	$( '#collab-switch' ).click( function() {
 		if( _this.state.panel == false ) {
@@ -191,5 +195,3 @@ collab.UI.prototype.disconnect = function() {
 
 	this.emit( 'disconnect' );
 };
-
-ve.extendClass( collab.UI, ve.EventEmitter );
