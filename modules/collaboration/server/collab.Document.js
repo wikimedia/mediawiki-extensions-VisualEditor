@@ -40,8 +40,10 @@ Document.generateID = function( title ) {
  */
 Document.prototype.getHTML = function() {
 	var data = this.dmDoc.getData();
+	console.log(data);
 	var dom = ve.dm.converter.getDomFromData( data );
 	var html = $( dom ).html();
+	console.log(html);
 	return html;
 };
 

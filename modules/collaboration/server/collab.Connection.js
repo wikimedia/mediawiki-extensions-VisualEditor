@@ -20,7 +20,7 @@ Connection = function( server, socket ) {
 		[ 'CLIENT_AUTH', handlers.authenticate ],
 		[ 'CLIENT_CONNECT', handlers.clientConnection ],
 		//[ 'DOCUMENT_TRANSFER', handlers.documentTransfer ],
-		[ 'DISCONNECT', handlers.clientDisconnection ],
+		[ 'disconnect', handlers.clientDisconnection ],
 		[ 'NEW_TRANSACTION', handlers.newTransaction ],
 		//[ 'DOCUMENT_SAVE', handlers.saveDocument ]
 	];

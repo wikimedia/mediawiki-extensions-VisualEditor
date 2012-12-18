@@ -78,6 +78,7 @@ $wgResourceModules += array(
 	'ext.visualEditor.editPageInit' => $wgVisualEditorResourceTemplate + array(
 		'dependencies' => array(
 			'ext.visualEditor.viewPageTarget',
+			'ext.visualEditor.collaboration',
 		)
 	),
 	'ext.visualEditor.viewPageTarget.icons-raster' => $wgVisualEditorResourceTemplate + array(
@@ -127,7 +128,7 @@ $wgResourceModules += array(
 			'mediawiki.Uri',
 			'mediawiki.user',
 			'mediawiki.util',
-			'mediawiki.notify',
+			//'mediawiki.notify',
 			'mediawiki.feedback',
 			'user.options',
 			'user.tokens',
@@ -179,6 +180,7 @@ $wgResourceModules += array(
 			// collab
 			'collaboration/client/socket.io.js',
 	 		'collaboration/settings.js',
+	 		'collaboration/collab.utils.js',
 			'collaboration/client/collab.Client.js',
 			'collaboration/client/collab.Callbacks.js',
 			'collaboration/client/collab.UI.js'

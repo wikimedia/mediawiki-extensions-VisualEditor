@@ -121,7 +121,6 @@ collab.Client.prototype.bindIOEvents = function( callbacksObj ) {
 	} );
 
 	io_socket.on( 'DOCUMENT_TRANSFER', function( data ) {
-		console.log(data.users);
 		callbacksObj.docTransfer( data );
 		ui.populateUsersList( data.users );
 	} );

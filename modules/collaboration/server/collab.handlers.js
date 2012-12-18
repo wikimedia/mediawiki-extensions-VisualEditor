@@ -96,7 +96,7 @@ handlers.clientConnection = function( connection, data ) {
 handlers.clientDisconnection = function( connection, data ) {
 	var session = connection.session;
 	var server = connection.server;
-	var docTitle = session.document.docTitle;
+	var docTitle = session.document.title;
 
 	if( session ) {
 		// Revoke publisher if the session could publish.
@@ -106,14 +106,14 @@ handlers.clientDisconnection = function( connection, data ) {
 
 		var connList = server.documents[ docTitle ];
 		var connIndex = connList.indexOf( connection );
-		connList.splice( sessionIndex, 1 );
+		connList.splice( connIndex, 1 );
 
 		// Remove the document route if no session is linked to it.
 		if( connList.length === 0 ) {
 			delete connList;
 		}
 
-		connection.broadcast( 'CLIENT_DISCONNECT', this.session.userName );
+		connection.broadcast( 'CLIENT_DISCONNECT', connection.session.userName );
 	}
 };
 

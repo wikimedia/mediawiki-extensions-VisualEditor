@@ -1,8 +1,9 @@
 collab = {};
+
 collab.settings = {
 	host: 'http://localhost',
 	port: 8001,
-	parsoidServiceUrl: 'http://localhost:8000/',
+	parsoidServiceUrl: 'http://localhost:8000/localhost/',
 	authUrl: 'http://localhost/mediawiki/api.php?action=validatetoken&format=json'
 };	
 

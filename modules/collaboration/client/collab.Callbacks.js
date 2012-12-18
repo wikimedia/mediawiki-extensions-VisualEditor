@@ -78,13 +78,15 @@ collab.Callbacks.prototype.loadDoc = function( data ) {
 	var newDocumentModel = new ve.dm.Document( data );
 	documentModel.data.splice( 0, documentModel.data.length );
 	ve.insertIntoArray( documentModel.data, 0, newDocumentModel.data );
-	surfaceModel.selection = new ve.Range( 1, 1 );
+	surfaceModel.change( null, new ve.Range( 1, 1 ) );
+
 	documentNode.splice.apply(
 		documentNode,
 		[0, documentNode.getChildren().length]
 		.concat( newDocumentModel.documentNode.getChildren() )
 	);
 	surfaceModel.purgeHistory();
+	surfaceModel.selection = new ve.Range( 1, 1 );
 };
 
 /**
@@ -125,25 +127,13 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 
 	if( args.publisherID == this.client.userName ) { return; }
 
-	var deserializeTransaction = function( transaction ) {
-		var operations = transaction.operations;
-		for( var i=0, j=operations.length; i<j; i++ ) {
-			if( operations[i].type === 'replace' ) {
-				var annotations = operations[i].insert[1];
-				var annotationObj = new ve.dm.Annotation.call( annotations );
-				annotations = annotationObj;
-			}
-		}
-
-		var transactionObj = new ve.dm.Transaction.call( transaction );
-		return transactionObj;
-	};
-
 	if( !(transaction instanceof Array) ) {
 		transaction = [transaction];
 	}
+
 	for( var i=0, j=transaction.length; i<j; i++ ) {
-		var transaction = deserializeTransaction( transaction[i] );
+		var transaction = collab.utils.deserializeTransaction( transaction[i] );
+		transaction.applied = false;
 		doc.commit( transaction );
 	}
 
@@ -151,9 +141,9 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 	 * isBroadcasted flag so we know this comes from the server after it is
 	 * handed over to the surface model.
 	 */
-	transactionObj.isBroadcasted = true;
+	//transactionObj.isBroadcasted = true;
 
-	if( args.publisherID != this.client.userName ) {
+	/*if( args.publisherID != this.client.userName ) {
 		transactionObj.isBroadcasted = true;
 
 
@@ -161,10 +151,10 @@ collab.Callbacks.prototype.newTransaction = function( transactionData ) {
 		// Create a default selection if there is no selection.
 		if( !selection ) {
 			selection = new ve.Range( 1, 1 );
-		}*/
+		}
 
 		surfaceModel.change( transactionObj, selection );
-	}
+	}*/
 };
 
 /**

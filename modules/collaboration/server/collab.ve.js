@@ -42,7 +42,9 @@ ve = function() {
 	require(mp + 've/ve.js');
 	ve = window.ve;
 	require(mp + 've/ve.EventEmitter.js');
-
+	require(mp + 've/init/ve.init.js');
+	require(mp + 've/init/ve.init.Platform.js');
+	ve.init.platform = new ve.init.Platform();
 	require(mp + 've/ve.Registry.js');
 	require(mp + 've/ve.Factory.js');
 	require(mp + 've/ve.Position.js');
@@ -69,20 +71,16 @@ ve = function() {
 
 	// dm
 	require(mp + 've/dm/ve.dm.js');
+
 	require(mp + 've/dm/ve.dm.NodeFactory.js');
 	require(mp + 've/dm/ve.dm.AnnotationFactory.js');
 	require(mp + 've/dm/ve.dm.Node.js');
 	require(mp + 've/dm/ve.dm.BranchNode.js');
 	require(mp + 've/dm/ve.dm.LeafNode.js');
-	require(mp + 've/dm/ve.dm.Annotation.js');
-	require(mp + 've/dm/ve.dm.TransactionProcessor.js');
-	require(mp + 've/dm/ve.dm.Transaction.js');
-	require(mp + 've/dm/ve.dm.Surface.js');
-	require(mp + 've/dm/ve.dm.SurfaceFragment.js');
-	require(mp + 've/dm/ve.dm.Document.js');
-	require(mp + 've/dm/ve.dm.DocumentSynchronizer.js');
 	require(mp + 've/dm/ve.dm.Converter.js');
 
+
+	require(mp + 've/dm/ve.dm.Annotation.js');
 	require(mp + 've/dm/nodes/ve.dm.AlienInlineNode.js');
 	require(mp + 've/dm/nodes/ve.dm.AlienBlockNode.js');
 	require(mp + 've/dm/nodes/ve.dm.BreakNode.js');
@@ -108,6 +106,14 @@ ve = function() {
 	require(mp + 've/dm/annotations/ve.dm.MWExternalLinkAnnotation.js');
 	require(mp + 've/dm/annotations/ve.dm.MWInternalLinkAnnotation.js');
 	require(mp + 've/dm/annotations/ve.dm.TextStyleAnnotation.js');
+
+	require(mp + 've/dm/ve.dm.TransactionProcessor.js');
+	require(mp + 've/dm/ve.dm.Transaction.js');
+	require(mp + 've/dm/ve.dm.Surface.js');
+	require(mp + 've/dm/ve.dm.SurfaceFragment.js');
+	require(mp + 've/dm/ve.dm.Document.js');
+
+	require(mp + 've/dm/ve.dm.DocumentSynchronizer.js');
 
 	return ve;
 };

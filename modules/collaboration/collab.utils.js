@@ -1,12 +1,11 @@
-var ve = require( './server/collab.ve.js' ).ve;
-
 if( !collab ) {
-	var collab = {};
+	collab = {};
 }
 
 collab.utils = {}
 
 collab.utils.deserializeTransaction = function( transaction ) {
+	// Shallow
 	var copyProperties = function( src, target ) {
 		for( prop in src ) {
 			target[prop] = src[prop];
@@ -40,7 +39,6 @@ collab.utils.deserializeTransaction = function( transaction ) {
 		else if( ops[i].type === 'annotate' ) {
 			var annotation = ops[i].annotation;
 			ops[i].annotation = deserializeAnnotation( annotation );
-			console.log(ops[i].annotation.constructor);
 		}
 	}
 	transaction.operations = ops;
