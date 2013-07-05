@@ -993,6 +993,7 @@ $wgVisualEditorBrowserBlacklist = array(
 	'opera' => array( array( '<', 12 ) ),
 	// Blacklist all versions:
 	'blackberry' => null,
+	'silk' => null,
 );
 
 // Whether to use change tagging for VisualEditor edits
