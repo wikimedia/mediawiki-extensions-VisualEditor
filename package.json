@@ -11,11 +11,12 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/VisualEditor.git;a=blob;f=LICENSE.txt;hb=HEAD"
+      "url": "https://git.wikimedia.org/blob/mediawiki%2Fextensions%2FVisualEditor.git/master/LICENSE.txt"
     }
   ],
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
     "grunt-contrib-jshint": "~0.5.4",
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-contrib-qunit": "~0.2.1",
