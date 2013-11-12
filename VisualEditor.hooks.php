@@ -412,14 +412,14 @@ class VisualEditorHooks {
 		if ( !isset( $wgResourceModules['jquery.uls'] ) && !$resourceLoader->getModule( 'jquery.uls' ) ) {
 			$modules['jquery.uls'] = $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
-					'lib/ve/lib/jquery.uls/src/jquery.uls.core.js',
-					'lib/ve/lib/jquery.uls/src/jquery.uls.lcd.js',
-					'lib/ve/lib/jquery.uls/src/jquery.uls.languagefilter.js',
-					'lib/ve/lib/jquery.uls/src/jquery.uls.regionfilter.js',
+					'lib/jquery.uls/src/jquery.uls.core.js',
+					'lib/jquery.uls/src/jquery.uls.lcd.js',
+					'lib/jquery.uls/src/jquery.uls.languagefilter.js',
+					'lib/jquery.uls/src/jquery.uls.regionfilter.js',
 				),
 				'styles' => array(
-					'lib/ve/lib/jquery.uls/css/jquery.uls.css',
-					'lib/ve/lib/jquery.uls/css/jquery.uls.lcd.css',
+					'lib/jquery.uls/css/jquery.uls.css',
+					'lib/jquery.uls/css/jquery.uls.lcd.css',
 				),
 				'dependencies' => array(
 					'jquery.uls.grid',
@@ -435,8 +435,8 @@ class VisualEditorHooks {
 		) {
 			$modules['jquery.uls.data'] = $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
-					'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
-					'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
+					'lib/jquery.uls/src/jquery.uls.data.js',
+					'lib/jquery.uls/src/jquery.uls.data.utils.js',
 				),
 				'position' => 'top',
 			);
@@ -447,7 +447,7 @@ class VisualEditorHooks {
 			!$resourceLoader->getModule( 'jquery.uls.grid' )
 		) {
 			$modules['jquery.uls.grid'] = $wgVisualEditorResourceTemplate + array(
-				'styles' => 'lib/ve/lib/jquery.uls/css/jquery.uls.grid.css',
+				'styles' => 'lib/jquery.uls/css/jquery.uls.grid.css',
 				'position' => 'top',
 			);
 		}
@@ -457,7 +457,7 @@ class VisualEditorHooks {
 			!$resourceLoader->getModule( 'jquery.uls.compact' )
 		) {
 			$modules['jquery.uls.compact'] = $wgVisualEditorResourceTemplate + array(
-				'styles' => 'lib/ve/lib/jquery.uls/css/jquery.uls.compact.css',
+				'styles' => 'lib/jquery.uls/css/jquery.uls.compact.css',
 				'position' => 'top',
 			);
 		}

@@ -780,6 +780,17 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
+	'ext.visualEditor.mwlanguage' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'modules/ve-mw/ui/widgets/ve.ui.MWLanguageInputWidget.js',
+			'modules/ve-mw/ui/inspectors/ve.ui.MWLanguageInspector.js',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.language',
+			'jquery.uls',
+		),
+	),
+
 	'ext.visualEditor.mwalienextension' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'modules/ve-mw/dm/nodes/ve.dm.MWAlienExtensionNode.js',
@@ -873,6 +884,7 @@ $wgResourceModules += array(
 			'ext.visualEditor.mwmath',
 			'ext.visualEditor.mwhiero',
 			'ext.visualEditor.language',
+			'ext.visualEditor.mwlanguage',
 			'ext.visualEditor.mwalienextension',
 			//'ext.visualEditor.mwsyntaxHighlight',
 		),
