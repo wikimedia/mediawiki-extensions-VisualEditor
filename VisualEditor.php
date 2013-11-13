@@ -544,6 +544,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/dm/metaitems/ve.dm.MWLanguageMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWNoEditSectionMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWTransclusionMetaItem.js',
+			'modules/ve-mw/dm/metaitems/ve.dm.MWRedirectMetaItem.js',
+			'modules/ve-mw/dm/metaitems/ve.dm.MWStaticRedirectMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWTOCDisableMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWTOCForceMetaItem.js',
 
@@ -681,6 +683,9 @@ $wgResourceModules += array(
 			'visualeditor-dialog-meta-languages-section',
 			'visualeditor-dialog-meta-settings-label',
 			'visualeditor-dialog-meta-settings-noeditsection-label',
+			'visualeditor-dialog-meta-settings-redirect-label',
+			'visualeditor-dialog-meta-settings-redirect-placeholder',
+			'visualeditor-dialog-meta-settings-redirect-staticlabel',
 			'visualeditor-dialog-meta-settings-section',
 			'visualeditor-dialog-meta-settings-toc-default',
 			'visualeditor-dialog-meta-settings-toc-disable',

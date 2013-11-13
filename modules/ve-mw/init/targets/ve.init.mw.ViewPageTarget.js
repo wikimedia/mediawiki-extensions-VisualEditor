@@ -307,9 +307,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.restoreScrollPosition();
 	this.restoreEditSection();
 	this.setupBeforeUnloadHandler();
-	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
-		this.showBetaWelcome();
-	}
+	this.maybeShowDialogs();
 	ve.track( 'performance.system.activation', { 'duration': ve.now() - this.timings.activationStart } );
 	mw.hook( 've.activationComplete' ).fire();
 };
@@ -1501,6 +1499,20 @@ ve.init.mw.ViewPageTarget.prototype.setupBeforeUnloadHandler = function () {
 ve.init.mw.ViewPageTarget.prototype.tearDownBeforeUnloadHandler = function () {
 	// Restore whatever previous onbeforeload hook existed
 	window.onbeforeunload = this.onBeforeUnloadFallback;
+};
+
+/**
+ * Show dialogs as needed on load.
+ */
+ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
+	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
+		this.showBetaWelcome();
+	}
+
+	// FIXME: This doesn't actually return true even if there is a category.
+	if ( this.surface.getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
+		this.surface.getDialogs().getWindow( 'meta' ).open( { 'page': 'settings' } );
+	}
 };
 
 /**
