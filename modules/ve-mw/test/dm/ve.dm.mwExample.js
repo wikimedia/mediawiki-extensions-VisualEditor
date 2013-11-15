@@ -298,7 +298,7 @@ ve.dm.mwExample.withMeta = [
 	{
 		'type': 'mwAlienMeta',
 		'attributes': {
-			'domElements': $( '<meta property="mw:PageProp/nocc" />' ).toArray()
+			'domElements': $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
 		}
 	},
 	{ 'type': '/mwAlienMeta' },
@@ -424,7 +424,7 @@ ve.dm.mwExample.withMetaMetaData = [
 		{
 			'type': 'mwAlienMeta',
 			'attributes': {
-				'domElements': $( '<meta property="mw:PageProp/nocc" />' ).toArray()
+				'domElements': $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
 			}
 		}
 	],
@@ -1691,7 +1691,7 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},
 	'document with meta elements': {
-		'body': '<!-- No content conversion --><meta property="mw:PageProp/nocc" /><p>Foo' +
+		'body': '<!-- No content conversion --><meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
 			'<meta property="mw:foo" content="bar" />Ba<!-- inline -->z</p>' +
 			'<meta property="mw:bar" content="baz" /><!--barbaz-->' +
