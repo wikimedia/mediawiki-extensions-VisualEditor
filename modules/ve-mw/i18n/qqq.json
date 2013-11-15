@@ -61,6 +61,7 @@
     "visualeditor-dialog-meta-languages-readonlynote": "Text of a note informing users that the language links cannot yet be edited.\n\nSee also:\n* {{msg-mw|Visualeditor-referencelist-missingref}}",
     "visualeditor-dialog-meta-languages-section": "Label for the language links dialog section.\n{{Identical|Language}}",
     "visualeditor-dialog-meta-settings-label": "Title for the page settings dialog section",
+    "visualeditor-dialog-meta-settings-noeditsection-label": "Prompt for the checkbox to let the user disable section edit links on the page.",
     "visualeditor-dialog-meta-settings-section": "Label for the page settings dialog section.",
     "visualeditor-dialog-meta-settings-toc-default": "Label for the default TOC behaviour option.",
     "visualeditor-dialog-meta-settings-toc-disable": "Label for the TOC behaviour option to never show.",

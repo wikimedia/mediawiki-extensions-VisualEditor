@@ -58,6 +58,7 @@
     "visualeditor-dialog-meta-languages-readonlynote": "This is a list of pages in other languages that are linked to this one; for now, it can only be edited in source mode or on Wikidata.",
     "visualeditor-dialog-meta-languages-section": "Languages",
     "visualeditor-dialog-meta-settings-label": "Page settings",
+    "visualeditor-dialog-meta-settings-noeditsection-label": "Disable the edit links next to each heading on this page.",
     "visualeditor-dialog-meta-settings-section": "Page settings",
     "visualeditor-dialog-meta-settings-toc-default": "Show if needed",
     "visualeditor-dialog-meta-settings-toc-disable": "Never show",
