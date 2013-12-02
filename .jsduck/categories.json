@@ -256,9 +256,11 @@
 				"name": "OOjs",
 				"classes": [
 					"OO",
+					"OO.EmitterList",
 					"OO.EventEmitter",
 					"OO.Factory",
-					"OO.Registry"
+					"OO.Registry",
+					"OO.SortedEmitterList"
 				]
 			},
 			{

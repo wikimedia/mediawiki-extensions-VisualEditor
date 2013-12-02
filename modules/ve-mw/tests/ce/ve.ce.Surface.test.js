@@ -11,6 +11,7 @@ QUnit.module( 've.ce.Surface (MW)', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'handleLinearDelete', function ( assert ) {
 	var i,
+		blocklength = ve.dm.mwExample.MWBlockImage.data.length,
 		cases = [
 			// This asserts that getRelativeRange (via getRelativeOffset) doesn't try to
 			// enter a handleOwnChildren node
@@ -18,15 +19,43 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				html:
 					ve.dm.mwExample.MWBlockImage.html +
 					'<ul><li><p>Foo</p></li><li><p>Bar</p></li></ul>',
-				range: new ve.Range( 12 ),
+				range: new ve.Range( blocklength + 3 ),
 				operations: [ 'backspace' ],
-				// TODO: This action should probably unwrap the list item as
-				expectedData: function () {},
+				expectedData: function ( data ) {
+					// remove the first list item, and replace its wrapped paragraph outside
+					// the start of the list
+					data.splice(
+						blocklength, 8,
+						{ type: 'paragraph' },
+						'F', 'o', 'o',
+						{ type: '/paragraph' },
+						{ type: 'list', attributes: { style: 'bullet' } }
+					);
+				},
 				expectedSelection: {
 					type: 'linear',
-					range: new ve.Range( 12 )
+					range: new ve.Range( blocklength + 1 )
 				},
 				msg: 'Backspace in a list next to a block image doesn\'t merge into the caption'
+			},
+			{
+				html:
+					ve.dm.mwExample.MWBlockImage.html +
+					'<ul><li><p></p></li></ul>',
+				range: new ve.Range( blocklength + 3 ),
+				operations: [ 'backspace' ],
+				expectedData: function ( data ) {
+					data.splice(
+						blocklength, 6,
+						{ type: 'paragraph' },
+						{ type: '/paragraph' }
+					);
+				},
+				expectedSelection: {
+					type: 'linear',
+					range: new ve.Range( blocklength + 1 )
+				},
+				msg: 'Backspace in an empty list next to a block image removes the list'
 			}
 		];
 
