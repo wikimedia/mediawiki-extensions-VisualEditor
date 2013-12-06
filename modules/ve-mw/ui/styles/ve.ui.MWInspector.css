@@ -10,3 +10,9 @@
 .ve-ui-mwExtensionInspector-input textarea {
 	height: 8em;
 }
+
+/* ve.ui.MWAlienExtensionInspector */
+
+.ve-ui-mwAlienExtensionInspector-attributes .oo-ui-textInputWidget {
+	width: 100%;
+}

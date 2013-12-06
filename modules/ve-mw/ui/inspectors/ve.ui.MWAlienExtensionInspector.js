@@ -50,7 +50,45 @@ ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWExtensionInspector.prototype.initialize.call( this );
 
-	this.input.$element.addClass( 've-ui-mwAlienExtensionInspector-input' );
+	var key, attributeInput, field,
+		attributes = this.surface.getView().getFocusedNode().model.getAttribute( 'mw' ).attrs;
+
+	this.attributeInputs = {};
+
+	if ( attributes && !ve.isEmptyObject( attributes ) ) {
+		for ( key in attributes ) {
+			attributeInput = new OO.ui.TextInputWidget( {
+				'$': this.$,
+				'value': attributes[key]
+			} );
+			this.attributeInputs[key] = attributeInput;
+			field = new OO.ui.FieldLayout(
+				attributeInput,
+				{
+					'$': this.$,
+					'align': 'left',
+					'label': key
+				}
+			);
+			this.$form.append( field.$element.addClass( 've-ui-mwAlienExtensionInspector-attributes' ) );
+		}
+	}
+};
+
+/** */
+ve.ui.MWAlienExtensionInspector.prototype.updateMwData = function ( mwData ) {
+	// Parent method
+	ve.ui.MWExtensionInspector.prototype.updateMwData.call( this, mwData );
+
+	var key;
+
+	if ( !ve.isEmptyObject( this.attributeInputs ) ) {
+		// Make sure we have an attrs object to populate
+		mwData.attrs = mwData.attrs || {};
+		for ( key in this.attributeInputs ) {
+			mwData.attrs[key] = this.attributeInputs[key].getValue();
+		}
+	}
 };
 
 /* Registration */

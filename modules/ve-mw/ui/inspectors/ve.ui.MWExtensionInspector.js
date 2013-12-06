@@ -128,7 +128,7 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 	if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
 		if ( this.node instanceof this.constructor.static.nodeView ) {
 			mwData = ve.copy( this.node.getModel().getAttribute( 'mw' ) );
-			mwData.body.extsrc = this.input.getValue();
+			this.updateMwData( mwData );
 			surfaceModel.change(
 				ve.dm.Transaction.newFromAttributeChanges(
 					surfaceModel.getDocument(), this.node.getOuterRange().start, { 'mw': mwData }
@@ -138,10 +138,9 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 			mwData = {
 				'name': this.constructor.static.nodeModel.static.extensionName,
 				'attrs': {},
-				'body': {
-					'extsrc': this.input.getValue()
-				}
+				'body': {}
 			};
+			this.updateMwData( mwData );
 			surfaceModel.getFragment().collapseRangeToEnd().insertContent( [
 				{
 					'type': this.constructor.static.nodeModel.static.name,
@@ -156,4 +155,13 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 
 	// Parent method
 	ve.ui.Inspector.prototype.teardown.call( this, data );
+};
+
+/**
+ * Update mwData object with the new values from the inspector
+ *
+ * @param {Object} mwData MediaWiki data object
+ */
+ve.ui.MWExtensionInspector.prototype.updateMwData = function ( mwData ) {
+	mwData.body.extsrc = this.input.getValue();
 };
