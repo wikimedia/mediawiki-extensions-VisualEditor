@@ -239,7 +239,9 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	this.sequence = null;
 	this.params[name] = param;
 	this.spec.fill();
+	param.connect( this, { 'change': [ 'emit', 'change' ] } );
 	this.emit( 'add', param );
+	this.emit( 'change' );
 };
 
 /**
@@ -252,7 +254,9 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
 	if ( param ) {
 		this.sequence = null;
 		delete this.params[param.getName()];
+		param.disconnect( this );
 		this.emit( 'remove', param );
+		this.emit( 'change' );
 	}
 };
 
@@ -297,4 +301,20 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 	}
 
 	return { 'template': template };
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.MWTemplateModel.prototype.getWikitext = function () {
+	var param,
+		wikitext = this.getTarget().wt,
+		params = this.getParameters();
+
+	for ( param in params ) {
+		wikitext += '|' + param + '=' +
+			ve.dm.MWTransclusionNode.static.escapeParameter( params[param].getValue() );
+	}
+
+	return '{{' + wikitext + '}}';
 };

@@ -144,7 +144,9 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 };
 
 /**
- * Escape a template parameter. Helper function for getWikitext().
+ * Escape a template parameter. Helper function for #getWikitext.
+ *
+ * @static
  * @param {string} param Parameter value
  * @returns {string} Escaped parameter value
  */

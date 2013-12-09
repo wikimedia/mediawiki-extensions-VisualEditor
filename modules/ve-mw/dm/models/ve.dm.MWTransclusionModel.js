@@ -42,6 +42,10 @@ OO.mixinClass( ve.dm.MWTransclusionModel, OO.EventEmitter );
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  */
 
+/**
+ * @event change
+ */
+
 /* Methods */
 
 /**
@@ -91,6 +95,7 @@ ve.dm.MWTransclusionModel.prototype.load = function ( data ) {
  * @param {Object[]} queue List of objects containing parts to add and optionally indexes to add
  *  them at, if no index is given parts will be added at the end
  * @fires replace For each item added
+ * @fires change
  */
 ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 	var i, len, item, title, index,
@@ -108,6 +113,7 @@ ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 		index = ve.indexOf( item.add, this.parts );
 		if ( index !== -1 ) {
 			this.parts.splice( index, 1 );
+			item.add.disconnect( this );
 			this.emit( 'replace', item.add, null );
 		}
 		// Add at index, or end if none was given
@@ -123,12 +129,19 @@ ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 			index = this.parts.length;
 		}
 		this.parts.splice( index, remove, item.add );
+		if ( item.add ) {
+			item.add.connect( this, { 'change': [ 'emit', 'change' ] } );
+		}
+		if ( item.remove ) {
+			item.remove.disconnect( this );
+		}
 		this.emit( 'replace', item.remove || null, item.add );
 		// Resolve promises
 		if ( item.deferred ) {
 			item.deferred.resolve();
 		}
 	}
+	this.emit( 'change' );
 };
 
 /** */
@@ -221,8 +234,6 @@ ve.dm.MWTransclusionModel.prototype.fetch = function () {
 
 /**
  * Abort any pending requests.
- *
- * @method
  */
 ve.dm.MWTransclusionModel.prototype.abortRequests = function () {
 	var i, len;
@@ -255,6 +266,22 @@ ve.dm.MWTransclusionModel.prototype.getPlainObject = function () {
 	}
 
 	return obj;
+};
+
+/**
+ * Get the wikitext for this transclusion.
+ *
+ * @returns {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+ */
+ve.dm.MWTransclusionModel.prototype.getWikitext = function () {
+	var i, len,
+		wikitext = '';
+
+	for ( i = 0, len = this.parts.length; i < len; i++ ) {
+		wikitext += this.parts[i].getWikitext();
+	}
+
+	return wikitext;
 };
 
 /**
@@ -330,6 +357,7 @@ ve.dm.MWTransclusionModel.prototype.removePart = function ( part ) {
 	var index = ve.indexOf( part, this.parts );
 	if ( index !== -1 ) {
 		this.parts.splice( index, 1 );
+		part.disconnect( this );
 		this.emit( 'replace', part, null );
 	}
 };
