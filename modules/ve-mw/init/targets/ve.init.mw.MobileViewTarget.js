@@ -53,6 +53,8 @@ ve.init.mw.MobileViewTarget.static.surfaceCommands = [
 	'italic'
 ];
 
+ve.init.mw.MobileViewTarget.static.name = 'mobile';
+
 /* Methods */
 
 /**
