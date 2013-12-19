@@ -6,52 +6,45 @@
 
 /*jshint node:true */
 module.exports = function ( grunt ) {
-	var modules = grunt.file.readJSON( 'build/modules.json' );
+	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' );
 
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
-	grunt.loadNpmTasks( 'grunt-contrib-qunit' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-jscs-checker' );
+	grunt.loadTasks( 'lib/ve/build/tasks' );
 	grunt.loadTasks( 'build/tasks' );
 
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
-		buildloader: {
-			iframe: {
-				src: '.docs/eg-iframe.html.template',
-				dest: '.docs/eg-iframe.html',
-				modules: modules,
-				pathPrefix: '../',
-				indent: '\t\t'
-			},
-			demo: {
-				src: 'demos/ve/index.html.template',
-				dest: 'demos/ve/index.html',
-				modules: modules,
-				pathPrefix: '../../',
-				indent: '\t\t',
-				placeholders: {
-					menu: function ( callback ) {
-						var html = [],
-							files = grunt.file.expand( 'demos/ve/pages/*.html' );
-						files.forEach( function ( file ) {
-							file = file.replace( /^.*(pages\/.+.html)$/, '$1' );
-							var name = file.slice( 6, -5 );
-							html.push(
-								'\t\t\t<li><a href="./#!/src/' + file + '" data-page-src="' + file +
-									'">' + name + '</a></li>'
-							);
-						} );
-						callback( html.join( '\n' ) );
+		jsduckcatconfig: {
+			main: {
+				target: '.docs/categories.json',
+				from: [
+					'.docs/mw-categories.json',
+					{
+						file: 'lib/ve/.docs/categories.json',
+						aggregate: {
+							'VisualEditor (core)': [
+								'General',
+								'Initialization',
+								'DataModel',
+								'ContentEditable',
+								'User Interface',
+								'Tests'
+							]
+						},
+						include: ['UnicodeJS', 'OOJS UI', 'Upstream']
 					}
-				}
-			},
-			test: {
-				src: 'modules/ve/test/index.html.template',
-				dest: 'modules/ve/test/index.html',
+				]
+			}
+		},
+		buildloader: {
+			egiframe: {
+				target: '.docs/eg-iframe.html',
+				template: '.docs/eg-iframe.html.template',
 				modules: modules,
-				pathPrefix: '../../../',
+				pathPrefix: '../lib/ve/',
 				indent: '\t\t'
 			}
 		},
@@ -61,15 +54,14 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'*.js',
-				'{.docs,build,demos}/**/*.js',
+				'{.docs,build}/**/*.js',
 				'modules/**/*.js'
 			]
 		},
 		jscs: {
 			src: [
 				'<%= jshint.all %>',
-				'!modules/syntaxhighlight/**/*.js',
-				'!modules/ve/test/ce/imetests/*.js'
+				'!modules/syntaxhighlight/**/*.js'
 			]
 		},
 		csslint: {
@@ -77,30 +69,22 @@ module.exports = function ( grunt ) {
 				csslintrc: '.csslintrc'
 			},
 			all: [
-				'demos/**/*.css',
 				// TODO: modules/syntaxhighlight should be included, but is failing.
-				'modules/{ve,ve-mw}/**/*.css'
+				'modules/{ve-mw,ve-wmf}/**/*.css'
 			],
-		},
-		qunit: {
-			ve: 'modules/ve/test/index.html',
-			unicodejs: 'modules/unicodejs/index.html'
 		},
 		watch: {
 			files: [
 				'.{jshintrc,jscs.json,jshintignore,csslintrc}',
 				'<%= jshint.all %>',
-				'<%= csslint.all %>',
-				'<%= qunit.ve %>',
-				'<%= qunit.unicodejs %>'
+				'<%= csslint.all %>'
 			],
 			tasks: ['test']
 		}
 	} );
 
 	grunt.registerTask( 'lint', ['jshint', 'jscs', 'csslint'] );
-	grunt.registerTask( 'unit', ['qunit'] );
-	grunt.registerTask( 'test', ['lint', 'unit'] );
-	grunt.registerTask( 'build', ['buildloader'] );
+	grunt.registerTask( 'test', ['lint'] );
+	grunt.registerTask( 'build', ['jsduckcatconfig', 'buildloader'] );
 	grunt.registerTask( 'default', ['build', 'test'] );
 };
