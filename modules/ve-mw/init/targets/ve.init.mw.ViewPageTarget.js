@@ -1019,7 +1019,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarButtons = function () {
 		{
 			'type': 'list',
 			'icon': 'menu',
-			'include': [ 'meta', 'categories', 'languages', 'editModeSource' ] }
+			'include': [ 'meta', 'settings', 'categories', 'languages', 'editModeSource' ] }
 	] );
 
 	$actionTools

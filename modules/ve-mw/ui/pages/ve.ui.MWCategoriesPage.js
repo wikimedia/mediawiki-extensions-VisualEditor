@@ -27,8 +27,7 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.surface = surface;
-	this.metaList = this.surface.getModel().metaList;
+	this.metaList = surface.getModel().metaList;
 	this.defaultSortKeyTouched = false;
 	this.fallbackDefaultSortKey = mw.config.get( 'wgTitle' );
 	this.label = ve.msg( 'visualeditor-dialog-meta-categories-section' );
@@ -148,8 +147,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
  * @returns {string} Default sort key item
  */
 ve.ui.MWCategoriesPage.prototype.getDefaultSortKeyItem = function () {
-	var items = this.metaList.getItemsInGroup( 'mwDefaultSort' );
-	return items.length ? items[0] : null;
+	return this.metaList.getItemsInGroup( 'mwDefaultSort' )[0] || null;
 };
 
 /**

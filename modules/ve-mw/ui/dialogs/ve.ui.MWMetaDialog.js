@@ -30,7 +30,7 @@ ve.ui.MWMetaDialog.static.name = 'meta';
 
 ve.ui.MWMetaDialog.static.titleMessage = 'visualeditor-dialog-meta-title';
 
-ve.ui.MWMetaDialog.static.icon = 'settings';
+ve.ui.MWMetaDialog.static.icon = 'window';
 
 /* Methods */
 
@@ -48,6 +48,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']
 	} );
+	this.settingsPage = new ve.ui.MWSettingsPage( this.surface, 'settings', { '$': this.$ } );
 	this.categoriesPage = new ve.ui.MWCategoriesPage( this.surface, 'categories', {
 		'$': this.$, '$overlay': this.$overlay
 	} );
@@ -59,7 +60,11 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	// Initialization
 	this.$body.append( this.bookletLayout.$element );
 	this.$foot.append( this.applyButton.$element );
-	this.bookletLayout.addPages( [ this.categoriesPage, this.languagesPage ] );
+	this.bookletLayout.addPages( [
+		this.settingsPage,
+		this.categoriesPage,
+		this.languagesPage
+	] );
 };
 
 /**
@@ -82,6 +87,8 @@ ve.ui.MWMetaDialog.prototype.setup = function ( data ) {
 	surfaceModel.breakpoint();
 	surfaceModel.stopHistoryTracking();
 
+	// Let each page set itself up ('languages' page doesn't need this yet)
+	this.settingsPage.setup( data );
 	this.categoriesPage.setup( data );
 };
 
@@ -90,6 +97,7 @@ ve.ui.MWMetaDialog.prototype.setup = function ( data ) {
  */
 ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 	var surfaceModel = this.surface.getModel(),
+		// Place transactions made while dialog was open in a common history state
 		hasTransactions = surfaceModel.breakpoint();
 
 	// Undo everything done in the dialog and prevent redoing those changes
@@ -98,6 +106,8 @@ ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 		surfaceModel.truncateUndoStack();
 	}
 
+	// Let each page tear itself down ('languages' page doesn't need this yet)
+	this.settingsPage.teardown( data );
 	this.categoriesPage.teardown( data );
 
 	// Return to normal tracking behavior

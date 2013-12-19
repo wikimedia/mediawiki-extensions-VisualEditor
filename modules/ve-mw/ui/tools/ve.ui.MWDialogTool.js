@@ -115,7 +115,7 @@ ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode 
 ve.ui.toolFactory.register( ve.ui.MWTransclusionDialogTool );
 
 /**
- * MediaWiki UserInterface categories tool.
+ * MediaWiki UserInterface meta dialog tool.
  *
  * @class
  * @extends ve.ui.DialogTool
@@ -129,11 +129,33 @@ ve.ui.MWMetaDialogTool = function VeUiMWMetaDialogTool( toolbar, config ) {
 OO.inheritClass( ve.ui.MWMetaDialogTool, ve.ui.DialogTool );
 ve.ui.MWMetaDialogTool.static.name = 'meta';
 ve.ui.MWMetaDialogTool.static.group = 'utility';
-ve.ui.MWMetaDialogTool.static.icon = 'settings';
+ve.ui.MWMetaDialogTool.static.icon = 'window';
 ve.ui.MWMetaDialogTool.static.titleMessage = 'visualeditor-meta-tool';
 ve.ui.MWMetaDialogTool.static.dialog = 'meta';
 ve.ui.MWMetaDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWMetaDialogTool );
+
+/**
+ * MediaWiki UserInterface page settings tool.
+ *
+ * @class
+ * @extends ve.ui.DialogTool
+ * @constructor
+ * @param {OO.ui.Toolbar} toolbar
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MWPageSettingsDialogTool = function VeUiMWPageSettingsDialogTool( toolbar, config ) {
+	ve.ui.DialogTool.call( this, toolbar, config );
+};
+OO.inheritClass( ve.ui.MWPageSettingsDialogTool, ve.ui.DialogTool );
+ve.ui.MWPageSettingsDialogTool.static.name = 'settings';
+ve.ui.MWPageSettingsDialogTool.static.group = 'utility';
+ve.ui.MWPageSettingsDialogTool.static.icon = 'settings';
+ve.ui.MWPageSettingsDialogTool.static.titleMessage = 'visualeditor-settings-tool';
+ve.ui.MWPageSettingsDialogTool.static.dialog = 'meta';
+ve.ui.MWPageSettingsDialogTool.static.config = { 'page': 'settings' };
+ve.ui.MWPageSettingsDialogTool.static.autoAdd = false;
+ve.ui.toolFactory.register( ve.ui.MWPageSettingsDialogTool );
 
 /**
  * MediaWiki UserInterface categories tool.
