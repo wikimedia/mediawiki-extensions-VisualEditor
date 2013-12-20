@@ -31,6 +31,8 @@ OO.inheritClass( ve.ce.MWAlienExtensionNode, ve.ce.MWExtensionNode );
 
 ve.ce.MWAlienExtensionNode.static.name = 'mwAlienExtension';
 
+ve.ce.MWAlienExtensionNode.static.primaryCommandName = 'alienExtension';
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWAlienExtensionNode );

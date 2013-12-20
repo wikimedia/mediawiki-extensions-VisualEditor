@@ -21,6 +21,7 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 	// Mixin constructors
 	ve.ce.ProtectedNode.call( this );
 	ve.ce.FocusableNode.call( this );
+	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
 	this.$element
@@ -46,14 +47,16 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 OO.inheritClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.ProtectedNode );
-
 OO.mixinClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.FocusableNode );
+OO.mixinClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.ClickableNode );
 
 /* Static Properties */
 
 ve.ce.MWNumberedExternalLinkNode.static.name = 'link/mwNumberedExternal';
 
 ve.ce.MWNumberedExternalLinkNode.static.tagName = 'span';
+
+ve.ce.MWNumberedExternalLinkNode.static.primaryCommandName = 'link';
 
 /* Methods */
 

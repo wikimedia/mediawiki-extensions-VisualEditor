@@ -35,6 +35,7 @@ ve.ce.MWExtensionNode = function VeCeMWExtensionNode( model, config ) {
 	ve.ce.ProtectedNode.call( this );
 	ve.ce.RelocatableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
+	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwExtensionNode' );
@@ -48,6 +49,7 @@ OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.ProtectedNode );
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.RelocatableNode );
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.ClickableNode );
 
 /* Methods */
 

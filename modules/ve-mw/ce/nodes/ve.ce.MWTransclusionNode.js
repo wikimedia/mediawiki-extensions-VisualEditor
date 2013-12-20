@@ -31,6 +31,7 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 	ve.ce.FocusableNode.call( this );
 	ve.ce.RelocatableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
+	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwTransclusionNode' );
@@ -41,18 +42,18 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.ProtectedNode );
-
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
-
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.RelocatableNode );
-
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.ClickableNode );
 
 /* Static Properties */
 
 ve.ce.MWTransclusionNode.static.name = 'mwTransclusion';
 
 ve.ce.MWTransclusionNode.static.renderHtmlAttributes = false;
+
+ve.ce.MWTransclusionNode.static.primaryCommandName = 'transclusion';
 
 /* Methods */
 

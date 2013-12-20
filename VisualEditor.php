@@ -583,6 +583,7 @@ $wgResourceModules += array(
 
 			// ui
 			'modules/ve-mw/ui/ve.ui.MWDialog.js',
+			'modules/ve-mw/ui/ve.ui.MWCommandRegistry.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWTitleInputWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js',

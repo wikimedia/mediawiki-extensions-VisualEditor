@@ -26,6 +26,7 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 	ve.ce.FocusableNode.call( this );
 	ve.ce.ProtectedNode.call( this );
 	ve.ce.RelocatableNode.call( this );
+	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
 	this.$link = this.$( '<a>' ).attr( 'href', '#' );
@@ -48,12 +49,15 @@ OO.inheritClass( ve.ce.MWReferenceNode, ve.ce.LeafNode );
 OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.ProtectedNode );
 OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.RelocatableNode );
+OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.ClickableNode );
 
 /* Static Properties */
 
 ve.ce.MWReferenceNode.static.name = 'mwReference';
 
 ve.ce.MWReferenceNode.static.tagName = 'sup';
+
+ve.ce.MWReferenceNode.static.primaryCommandName = 'reference';
 
 /* Methods */
 

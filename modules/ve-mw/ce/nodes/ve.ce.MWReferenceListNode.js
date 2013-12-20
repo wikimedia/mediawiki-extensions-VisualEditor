@@ -23,6 +23,7 @@ ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
 	// Mixin constructors
 	ve.ce.ProtectedNode.call( this );
 	ve.ce.FocusableNode.call( this );
+	ve.ce.ClickableNode.call( this );
 
 	// Properties
 	this.internalList = null;
@@ -49,11 +50,15 @@ OO.mixinClass( ve.ce.MWReferenceListNode, ve.ce.ProtectedNode );
 
 OO.mixinClass( ve.ce.MWReferenceListNode, ve.ce.FocusableNode );
 
+OO.mixinClass( ve.ce.MWReferenceListNode, ve.ce.ClickableNode );
+
 /* Static Properties */
 
 ve.ce.MWReferenceListNode.static.name = 'mwReferenceList';
 
 ve.ce.MWReferenceListNode.static.tagName = 'div';
+
+ve.ce.MWReferenceListNode.static.primaryCommandName = 'referenceList';
 
 /* Methods */
 

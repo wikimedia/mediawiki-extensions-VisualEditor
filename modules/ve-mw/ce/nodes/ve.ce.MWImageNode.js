@@ -40,6 +40,7 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	ve.ce.FocusableNode.call( this, this.$figure, config );
 	ve.ce.RelocatableNode.call( this, this.$figure, config );
 	ve.ce.MWResizableNode.call( this, this.$image, config );
+	ve.ce.ClickableNode.call( this );
 
 	// Events
 	this.connect( this, { 'focus': 'onFocus' } );
@@ -50,15 +51,16 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 OO.inheritClass( ve.ce.MWImageNode, ve.ce.GeneratedContentNode );
 
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ProtectedNode );
-
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.FocusableNode );
-
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.RelocatableNode );
-
 // Need to mixin base class as well
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ResizableNode );
-
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.MWResizableNode );
+OO.mixinClass( ve.ce.MWImageNode, ve.ce.ClickableNode );
+
+/* Static Properties */
+
+ve.ce.MWImageNode.static.primaryCommandName = 'mediaEdit';
 
 /* Methods */
 

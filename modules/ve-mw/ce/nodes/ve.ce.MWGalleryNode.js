@@ -30,6 +30,8 @@ ve.ce.MWGalleryNode.static.name = 'mwGallery';
 
 ve.ce.MWGalleryNode.static.tagName = 'div';
 
+ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWGalleryNode );
