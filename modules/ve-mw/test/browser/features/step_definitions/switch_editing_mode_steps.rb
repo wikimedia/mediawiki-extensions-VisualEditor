@@ -33,7 +33,7 @@ Then(/^I should be in Visual Editor editing mode$/) do
       page.text.include? "User:"
     end
   end
-  expected_url = /index\.php\?title=User:Selenium_user&veaction=edit/
+  expected_url = /w\/index\.php\?title=User:(.+)&veaction=edit/
   @browser.url.should match Regexp.new(expected_url)
 end
 
@@ -43,5 +43,6 @@ Then(/^I should be in Visual Editor editing alternate mode$/) do
       page.text.include? "User:"
     end
   end
-  @browser.url.should eql(ENV['MEDIAWIKI_URL'] + "User:" + ENV['MEDIAWIKI_USER'] + "?veaction=edit")
+  expected_url = /wiki\/User:(.+)?veaction=edit/
+  @browser.url.should match Regexp.new(expected_url)
 end
