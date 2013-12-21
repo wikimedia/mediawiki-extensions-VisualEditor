@@ -268,8 +268,16 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 				this.$image.attr( 'src', this.getResolvedAttribute( 'src' ) );
 				break;
 			case 'width':
+				this.updateSize( {
+					'width': to,
+					'height': this.model.getAttribute( 'height' )
+				} );
+				break;
 			case 'height':
-				this.updateSize();
+				this.updateSize( {
+					'width': this.model.getAttribute( 'width' ),
+					'height': to
+				} );
 				break;
 			case 'type':
 				this.$figure
