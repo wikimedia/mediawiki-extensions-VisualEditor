@@ -1,5 +1,5 @@
 When(/^I enter and save the first edit$/) do
-  @first_edit_text = Random.rand.to_s
+  @first_edit_text = "Editing with " + Random.rand.to_s
   step "I insert the text #{@first_edit_text}"
   step "I click Save page"
   step "I click This is a minor edit"
@@ -10,7 +10,7 @@ end
 
 When(/^I enter and save a (.+) edit$/) do |count|
   sleep 2 # Wait for the save confirmation to disappear
-  edit_text = Random.rand.to_s
+  edit_text = "Editing with " + Random.rand.to_s
   instance_variable_set("@#{count}_edit_text", edit_text)
   step "I click Edit for VisualEditor"
   step "I insert the text #{edit_text}"
@@ -27,5 +27,5 @@ When(/^I click Save page another time$/) do
 end
 
 Then(/^the saved page should contain all three edits\.$/) do
-  on(VisualEditorPage).page_text_element.when_present.text.should match(@third_edit_text + @second_edit_text + @first_edit_text)
+  on(VisualEditorPage).page_text_element.when_present.text.should match(@third_edit_text + @second_edit_text + "Editing with " + @random_string + " " + @first_edit_text)
 end
