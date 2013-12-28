@@ -118,6 +118,7 @@ ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.initialize = function () {
+	var altTextFieldset;
 	// Parent method
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
@@ -152,6 +153,21 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'icon': 'parameter'
 	} );
 
+	// Alt text
+	altTextFieldset = new OO.ui.FieldsetLayout( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-media-alttext-section' ),
+		'icon': 'parameter'
+	} );
+
+	this.altTextInput = new OO.ui.TextInputWidget( {
+		'$': this.$
+	} );
+
+	// Build alt text fieldset
+	altTextFieldset.$element
+		.append( this.altTextInput.$element );
+
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
@@ -184,7 +200,10 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
 
 	// Initialization
-	this.generalSettingsPage.$element.append( this.captionFieldset.$element );
+	this.generalSettingsPage.$element.append( [
+		this.captionFieldset.$element,
+		altTextFieldset.$element
+	] );
 	this.advancedSettingsPage.$element.append( this.sizeFieldset.$element );
 
 	this.$body.append( this.bookletLayout.$element );
@@ -243,6 +262,8 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 				dialog.sizeErrorLabel.$element.show();
 			} );
 	}
+	// Set initial alt text
+	this.altTextInput.setValue( this.mediaNode.getAttribute( 'alt' ) || '' );
 
 	// Initialization
 	this.captionFieldset.$element.append( this.captionSurface.$element );
@@ -253,7 +274,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
-	var newDoc, doc, attrs = {},
+	var newDoc, doc, originalAlt, attr, attrs = {},
 		surfaceModel = this.surface.getModel();
 
 	// Data initialization
@@ -281,6 +302,23 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 		// Change attributes only if the values are valid
 		if ( this.sizeWidget.isCurrentDimensionsValid() ) {
 			attrs = this.sizeWidget.getCurrentDimensions();
+		}
+
+		attr = $.trim( this.altTextInput.getValue() );
+		originalAlt = this.mediaNode.getAttribute( 'alt' );
+		// Allow the user to submit an empty alternate text but
+		// not if there was no alternate text originally to avoid
+		// dirty diffing images with empty |alt=
+		if (
+			// If there was no original alternate text but there
+			// is a value now, update
+			( originalAlt === undefined && attr ) ||
+			// If original alternate text was defined, always
+			// update, even if the input is empty to allow the
+			// user to unset it
+			originalAlt !== undefined
+		) {
+			attrs.alt = attr;
 		}
 
 		surfaceModel.change(

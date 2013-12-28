@@ -77,7 +77,12 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 			originalClasses: classes
 		},
 		width = $img.attr( 'width' ),
-		height = $img.attr( 'height' );
+		height = $img.attr( 'height' ),
+		altText = $img.attr( 'alt' );
+
+	if ( altText !== undefined ) {
+		attributes.alt = altText;
+	}
 
 	attributes.width = width !== undefined && width !== '' ? Number( width ) : null;
 	attributes.height = height !== undefined && height !== '' ? Number( height ) : null;
@@ -193,6 +198,9 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	img.setAttribute( 'width', dataElement.attributes.width );
 	img.setAttribute( 'height', dataElement.attributes.height );
 	img.setAttribute( 'resource', dataElement.attributes.resource );
+	if ( dataElement.attributes.alt !== undefined ) {
+		img.setAttribute( 'alt', dataElement.attributes.alt );
+	}
 	figure.appendChild( imgWrapper );
 	imgWrapper.appendChild( img );
 
