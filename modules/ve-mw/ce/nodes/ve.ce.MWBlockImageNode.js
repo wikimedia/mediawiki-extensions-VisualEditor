@@ -121,7 +121,10 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
 	var model, view,
 		type = this.model.getAttribute( 'type' );
 
-	this.captionVisible = type !== 'none' && type !== 'frameless' && this.model.children.length === 1;
+	this.captionVisible = type !== 'none' &&
+		type !== 'frameless' &&
+		type !== 'border' &&
+		this.model.children.length === 1;
 
 	if ( this.captionVisible ) {
 		// Only create a caption if we need it
