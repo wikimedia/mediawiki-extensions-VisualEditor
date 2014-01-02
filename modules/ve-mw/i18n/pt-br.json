@@ -9,7 +9,8 @@
             "Jaideraf",
             "Luckas",
             "OTAVIO1981",
-            555
+            555,
+            "Gloria sah"
         ]
     },
     "tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -99,7 +100,7 @@
     "visualeditor-mwalienextensioninspector-title": "Extensão MediaWiki",
     "visualeditor-mweditmodesource-title": "Trocar para editor de código-fonte",
     "visualeditor-mwhieroinspector-title": "Hieróglifos",
-    "visualeditor-mwmathinspector-title": "LaTeX",
+    "visualeditor-mwmathinspector-title": "Fórmula",
     "visualeditor-notification-created": "A página \"$1\" foi criada.",
     "visualeditor-notification-restored": "A página \"$1\" foi restaurada.",
     "visualeditor-notification-saved": "Suas alterações em \"$1\" foram salvas.",

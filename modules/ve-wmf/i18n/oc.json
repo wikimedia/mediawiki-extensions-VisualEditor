@@ -1,0 +1,15 @@
+{
+    "@metadata": {
+        "authors": [
+            "Jfblanc"
+        ]
+    },
+    "tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+    "tag-visualeditor-description": "Modificacion facha amb [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+    "tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Verificacion]]",
+    "tag-visualeditor-needcheck-description": "Edicion facha amb [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] que lo sistèma a detectat que lo tèxte wiki aviá de modificacions probablament involontàrias.",
+    "visualeditor-feedback-link": "Project:VisualEditor/Feedback",
+    "visualeditor-feedback-tool": "Daissar un comentari",
+    "visualeditor-help-label": "Legir lo manual de l'utilizaire",
+    "visualeditor-help-title": "Manual de l'utilizaire de l'Editor"
+}

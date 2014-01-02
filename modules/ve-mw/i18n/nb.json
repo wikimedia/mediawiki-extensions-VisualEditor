@@ -5,7 +5,8 @@
             "Event",
             "Jeblad",
             "Laaknor",
-            "Njardarlogar"
+            "Njardarlogar",
+            "Gloria sah"
         ]
     },
     "tooltip-ca-createsource": "Opprett kildekoden for denne siden",
@@ -44,6 +45,7 @@
     "visualeditor-dialog-meta-languages-code-label": "Språkkode",
     "visualeditor-dialog-meta-languages-label": "Språk",
     "visualeditor-dialog-meta-languages-link-label": "Lenket side",
+    "visualeditor-dialog-meta-languages-name-label": "Språk",
     "visualeditor-dialog-meta-languages-readonlynote": "Dette er en liste over artikler på andre språk som er koblet til denne artikkelen; foreløpig kan listen kun redigeres i kildemodus.",
     "visualeditor-dialog-meta-languages-section": "Språk",
     "visualeditor-dialog-meta-title": "Sideinnstillinger",
@@ -97,7 +99,7 @@
     "visualeditor-mweditmodesource-title": "Bytt til kilderedigering",
     "visualeditor-mweditmodesource-warning": "Du er i ferd med å bytte til kilderedigering. Endringer du har gjort vil bli beholdt, men du vil ikke kunne bytte tilbake til VisualEditor uten å lagre og gjenoppfriske denne siden. Er du sikker på at du vil fortsette?",
     "visualeditor-mwhieroinspector-title": "Hieroglyfer",
-    "visualeditor-mwmathinspector-title": "LaTeX",
+    "visualeditor-mwmathinspector-title": "Formel",
     "visualeditor-notification-created": "«$1» har blitt opprettet.",
     "visualeditor-notification-restored": "«$1» har blitt gjenopprettet.",
     "visualeditor-notification-saved": "Endringene dine på «$1» har blitt lagret.",

@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Candalua",
-            "GatoSelvadego"
+            "GatoSelvadego",
+            "Gloria sah"
         ]
     },
     "tooltip-ca-createsource": "Crea el còdexe sorxente de sta pàjina",
@@ -40,7 +41,7 @@
     "visualeditor-dialog-meta-languages-code-label": "Còdexe lengua",
     "visualeditor-dialog-meta-languages-label": "Lengue",
     "visualeditor-dialog-meta-languages-link-label": "Pàjina cołegà",
-    "visualeditor-dialog-meta-languages-readonlynote": "Sto cuà el xe un elenco de pàjine in altre lengue che xe ligae a cuesta; par deso, el pol èsar canbià soło che in modałità sorxente.",
+    "visualeditor-dialog-meta-languages-readonlynote": "Sto cuà el xe un elenco de pàjine in altre lengue che xe ligae a cuesta; par deso, el pol èsar canbià soło che in modałità sorxente o in Wikidata.",
     "visualeditor-dialog-meta-languages-section": "Lengue",
     "visualeditor-dialog-meta-title": "Inpostasion pàjina",
     "visualeditor-dialog-reference-insert-button": "Inserisi nòda",

@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Ninonino"
+            "Ninonino",
+            "Gloria sah"
         ]
     },
     "tooltip-ca-createsource": "Créa 'l codes surgent de chèsta pàgina",
@@ -40,6 +41,7 @@
     "visualeditor-dialog-meta-languages-code-label": "Còdes lèngua",
     "visualeditor-dialog-meta-languages-label": "Lèngue",
     "visualeditor-dialog-meta-languages-link-label": "Pàgina culegàda",
+    "visualeditor-dialog-meta-languages-name-label": "Lengua",
     "visualeditor-dialog-meta-languages-readonlynote": "Chèsta l'è 'na lìsta de pàgine de ótre lèngue che i è colegàde a chèsta; per adès el pöl véser mudificàt apéna 'n modalità sorgènt o sö Wikidata",
     "visualeditor-dialog-meta-languages-section": "Lèngue",
     "visualeditor-dialog-meta-title": "Empostasiù de la pàgina",
@@ -93,7 +95,7 @@
     "visualeditor-mweditmodesource-title": "Pàsa a la modalità sorgènt",
     "visualeditor-mweditmodesource-warning": "Te sét dré a pasà a la modalità de mudìfica del còdes sorgènt. Töte le mudìfiche che s'è fat a chèsto docümènt le sarà mantignìde, ma te pödarét piöo turnà 'ndré al VisualEditor sènsa salvà o turnà a cargà la pàgina. Öt nà 'n nacc?",
     "visualeditor-mwhieroinspector-title": "Geruglìfich",
-    "visualeditor-mwmathinspector-title": "LaTeX",
+    "visualeditor-mwmathinspector-title": "Formula",
     "visualeditor-notification-created": "La pàgina $1 l'è stàda creàda.",
     "visualeditor-notification-restored": "La pàgina $1 l'è stàda ripristinàda.",
     "visualeditor-notification-saved": "Le mudìfiche fàde a $1 i è stàde salvàde.",
