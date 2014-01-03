@@ -87,7 +87,7 @@
     "visualeditor-diff-nochanges": "Правки были проигнорированы, потому что вы не внесли никаких изменений в текст.",
     "visualeditor-differror": "Ошибка при загрузке данных с сервера: $1",
     "visualeditor-editconflict": "Ваши изменения не удалось сохранить, потому что произошёл конфликт редактирования. Хотите ли вы разрешить конфликт вручную?",
-    "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сообщение|сообщения|сообщений}}",
+    "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сообщение|сообщений|сообщения}}",
     "visualeditor-editsummary": "Опишите внесённые изменения",
     "visualeditor-formatdropdown-format-mw-heading1": "Заголовок страницы",
     "visualeditor-formatdropdown-format-mw-heading2": "Заголовок",

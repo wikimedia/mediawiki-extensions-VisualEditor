@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Paulu"
+            "Paulu",
+            "Nemo bis"
         ]
     },
     "tooltip-ca-createsource": "Creà u codice fonte di 'ssa pagina",
@@ -44,7 +45,7 @@
     "visualeditor-dialog-reference-title": "Referenza",
     "visualeditor-dialog-reference-useexisting-label": "Fà usu d'una referenza esistente",
     "visualeditor-dialog-referencelist-title": "Lista di referenze",
-    "visualeditor-dialog-syntaxhighlight-title": "Codice surgente SyntaxHighlight)",
+    "visualeditor-dialog-syntaxhighlight-title": "Codice surgente (SyntaxHighlight)",
     "visualeditor-dialog-transclusion-add-content": "Aghjustà u cuntenutu",
     "visualeditor-dialog-transclusion-add-param": "Aghjustà u parametru",
     "visualeditor-dialog-transclusion-add-template": "Aghjustà un mudellu",

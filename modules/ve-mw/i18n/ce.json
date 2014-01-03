@@ -55,7 +55,7 @@
     "visualeditor-dialogbutton-reference-tooltip": "Билгалдаккхар",
     "visualeditor-dialogbutton-referencelist-tooltip": "Билгалдаккхаршан могӀам",
     "visualeditor-dialogbutton-transclusion-tooltip": "Юкъатохар",
-    "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|хаам|хаамаш}}",
+    "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|1=хаам|хаамаш}}",
     "visualeditor-editsummary": "ДӀаязде хьой динарг",
     "visualeditor-formatdropdown-format-mw-heading1": "АгӀона корта",
     "visualeditor-formatdropdown-format-mw-heading2": "Корта",
