@@ -70,7 +70,6 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 			'paction': 'parsefragment',
 			'page': mw.config.get( 'wgRelevantPageName' ),
 			'wikitext': wikitext,
-			'token': mw.user.tokens.get( 'editToken' ),
 			'format': 'json'
 		},
 		'dataType': 'json',
