@@ -34,7 +34,7 @@
     "visualeditor-dialog-meta-languages-link-label": "Вовшахтесна агӀонаш",
     "visualeditor-dialog-meta-languages-readonlynote": "ХӀара кхечу маттахь йолу агӀонашан могӀа бу; дӀайоьду хенахь цунна хийцамаш бан чухулара тадарца бен таро яц.",
     "visualeditor-dialog-meta-languages-section": "Меттанаш",
-    "visualeditor-dialog-meta-title": "АгӀона параметраш",
+    "visualeditor-dialog-meta-settings-label": "АгӀона параметраш",
     "visualeditor-dialog-reference-insert-button": "Чудилла тIетовжар",
     "visualeditor-dialog-reference-options-group-label": "Лелае хӀара тоба",
     "visualeditor-dialog-reference-options-section": "Параметраш",
@@ -85,6 +85,7 @@
     "visualeditor-savedialog-label-save": "Дlайазъé агlо",
     "visualeditor-savedialog-title-nochanges": "Хийцамаш бац хьажа оьшуш",
     "visualeditor-savedialog-title-save": "Ӏалашбе хийцам",
+    "visualeditor-savedialog-warning-dirty": "Хьа хийцамаш нийса ца хила мега — дехар до уьш Ӏалаш бале хьажа.",
     "visualeditor-toolbar-cancel": "Цаоьшу",
     "visualeditor-toolbar-savedialog": "Хьажа/дӀайазъé",
     "visualeditor-viewpage-savewarning": "Ахьа хийцамаш дӀаязбанца тадар дӀакъовлуш ду тидам бе хийцамаш дӀаязлур дац."

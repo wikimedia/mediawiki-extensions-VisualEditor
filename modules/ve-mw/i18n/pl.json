@@ -54,7 +54,7 @@
     "visualeditor-dialog-meta-languages-name-label": "Język",
     "visualeditor-dialog-meta-languages-readonlynote": "Poniżej znajduje się lista stron w innych językach, które są powiązane z tą; na razie można ją zmieniać tylko w trybie edycji kodu źródłowego albo w Wikidanych.",
     "visualeditor-dialog-meta-languages-section": "Języki",
-    "visualeditor-dialog-meta-title": "Ustawienia strony",
+    "visualeditor-dialog-meta-settings-label": "Ustawienia strony",
     "visualeditor-dialog-reference-insert-button": "Wstaw przypis",
     "visualeditor-dialog-reference-insert-title": "Wstawianie przypisu",
     "visualeditor-dialog-reference-options-group-label": "Użyj grupy",

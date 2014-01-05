@@ -52,7 +52,7 @@
     "visualeditor-dialog-meta-languages-name-label": "Jazyk",
     "visualeditor-dialog-meta-languages-readonlynote": "Toto je seznam stránek v jiných jazycích, které jsou propojené s touto stránkou; zatím ho lze editovat jen v režimu zdrojového kódu nebo na Wikidatech.",
     "visualeditor-dialog-meta-languages-section": "Jazyky",
-    "visualeditor-dialog-meta-title": "Nastavení stránky",
+    "visualeditor-dialog-meta-settings-label": "Nastavení stránky",
     "visualeditor-dialog-reference-insert-button": "Vložit referenci",
     "visualeditor-dialog-reference-insert-title": "Vložit referenci",
     "visualeditor-dialog-reference-options-group-label": "Použít tuto skupinu",

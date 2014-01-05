@@ -47,7 +47,7 @@
     "visualeditor-dialog-meta-languages-name-label": "언어",
     "visualeditor-dialog-meta-languages-readonlynote": "이 문서에 링크된 다른 언어의 문서 목록입니다. 지금은 위키데이터 혹은 원본 모드에서만 편집할 수 있습니다.",
     "visualeditor-dialog-meta-languages-section": "언어",
-    "visualeditor-dialog-meta-title": "문서 설정",
+    "visualeditor-dialog-meta-settings-label": "문서 설정",
     "visualeditor-dialog-reference-insert-button": "출처 넣기",
     "visualeditor-dialog-reference-insert-title": "출처 넣기",
     "visualeditor-dialog-reference-options-group-label": "이 그룹 사용",

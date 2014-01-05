@@ -58,7 +58,7 @@
     "visualeditor-dialog-meta-languages-name-label": "Язык",
     "visualeditor-dialog-meta-languages-readonlynote": "Это список связанных страниц на других языках; на данный момент он может быть отредактирован только в режиме исходного текста или в Викиданных.",
     "visualeditor-dialog-meta-languages-section": "Языки",
-    "visualeditor-dialog-meta-title": "Параметры страницы",
+    "visualeditor-dialog-meta-settings-label": "Параметры страницы",
     "visualeditor-dialog-reference-insert-button": "Вставить сноску",
     "visualeditor-dialog-reference-insert-title": "Вставка сноски",
     "visualeditor-dialog-reference-options-group-label": "Использовать эту группу",
