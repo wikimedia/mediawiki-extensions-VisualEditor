@@ -1,6 +1,6 @@
-#ruby=ruby-2.0.0-p247
+#ruby=ruby-2.1.0
 #ruby-gemset=VisualEditor
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'mediawiki-selenium'
+gem "mediawiki-selenium"
