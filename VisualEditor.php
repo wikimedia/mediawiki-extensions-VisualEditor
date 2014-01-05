@@ -31,6 +31,7 @@ $wgExtensionCredits['other'][] = array(
 	'version' => '0.1.0',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:VisualEditor',
 	'descriptionmsg' => 'visualeditor-desc',
+	'license-name' => 'MIT',
 );
 
 $dir = __DIR__ . '/';
