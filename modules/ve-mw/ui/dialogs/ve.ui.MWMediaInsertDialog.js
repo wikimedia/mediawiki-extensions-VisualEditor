@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * Dialog for inserting MediaWiki media objects.
  *
@@ -24,6 +26,7 @@ ve.ui.MWMediaInsertDialog = function VeUiMWMediaInsertDialog( windowSet, config 
 
 	// Properties
 	this.item = null;
+	this.sources = {};
 };
 
 /* Inheritance */
@@ -59,15 +62,21 @@ ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
-	// Properties
-	this.search = new ve.ui.MWMediaSearchWidget( { '$': this.$ } );
+	// Widget
+	this.search = new ve.ui.MWMediaSearchWidget( {
+		'$': this.$
+	} );
+
+	// Initialization
+	this.search.$element.addClass( 've-ui-mwMediaInsertDialog-select' );
 
 	// Events
 	this.search.connect( this, { 'select': 'onSearchSelect' } );
 
-	// Initialization
-	this.search.$element.addClass( 've-ui-mwMediaInsertDialog-select' );
+	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
+	this.$body.append( this.$spinner );
 	this.$body.append( this.search.$element );
+
 };
 
 /**
@@ -77,10 +86,82 @@ ve.ui.MWMediaInsertDialog.prototype.setup = function ( data ) {
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
-	// Initialization
-	this.search.getQuery().$input.focus().select();
-	this.search.getResults().selectItem();
-	this.search.getResults().highlightItem();
+	// Show a spinner while we check for file repos.
+	// this will only be done once per session.
+	//
+	// This is in .setup rather than .initialize so that
+	// the user has visual indication (spinner) during the
+	// ajax request
+	this.$spinner.show();
+	this.search.$element.hide();
+
+	// Get the repos from the API first
+	// The ajax request will only be done once per session
+	this.getFileRepos().done( ve.bind( function ( repos ) {
+		if ( repos ) {
+			this.sources = repos;
+			this.search.setSources( this.sources );
+		}
+		// Done, hide the spinner
+		this.$spinner.hide();
+
+		// Show the search and query the media sources
+		this.search.$element.show();
+		this.search.queryMediaSources();
+
+		// Initialization
+		// This must be done only after there are proper
+		// sources defined
+		this.search.getQuery().$input.focus().select();
+		this.search.getResults().selectItem();
+		this.search.getResults().highlightItem();
+	}, this ) );
+};
+
+/**
+ * Get the object of file repos to use for the media search
+ * @returns {jQuery.Promise}
+ */
+ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
+	var deferred = $.Deferred();
+
+	// We will only ask for the ajax call if this.sources
+	// isn't already set up
+	if ( $.isEmptyObject( this.sources ) ) {
+		// Take sources from api.php?action=query&meta=filerepoinfo&format=jsonfm
+		// The decision whether to take 'url' or 'apiurl' per each repository is made
+		// in the MWMediaSearchWidget depending on whether it is local and has apiurl
+		// defined at all.
+		$.ajax( {
+			'url': mw.util.wikiScript( 'api' ),
+			'data': {
+				'action': 'query',
+				'meta': 'filerepoinfo',
+				'format': 'json'
+			},
+			'dataType': 'json',
+			'type': 'POST',
+			// Wait up to 100 seconds before giving up
+			'timeout': 100000,
+			'cache': false
+		} )
+		.done( function ( resp ) {
+			deferred.resolve( resp.query.repos );
+		} )
+		.fail( function () {
+			deferred.resolve( [ {
+				'url': mw.util.wikiScript( 'api' ),
+				'local': true }
+			] );
+		} );
+	} else {
+		// There was no need to ask for the resources again
+		// return false so we can skip setting the sources
+		deferred.resolve( false );
+	}
+
+	return deferred.promise();
+
 };
 
 /**
