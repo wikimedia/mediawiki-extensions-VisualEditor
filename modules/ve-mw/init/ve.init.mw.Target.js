@@ -31,7 +31,6 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	this.revid = revisionId || mw.config.get( 'wgCurRevisionId' );
 	this.restoring = !!revisionId;
 	this.editToken = mw.user.tokens.get( 'editToken' );
-	this.apiUrl = mw.util.wikiScript( 'api' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
 		.extend( { 'action': 'submit' } );
 
@@ -196,6 +195,28 @@ ve.init.mw.Target.static.toolbarGroups = [
 ];
 
 /* Static Methods */
+
+/**
+ * Send an AJAX request to the MediaWiki API.
+ *
+ * @param {Object} data Query string parameters (for GET requests) or POST data (for POST requests)
+ * @param {Object} [settings] Additional AJAX settings, or overrides of default settings
+ * @returns {jqXHR} Return value of $.ajax()
+ */
+ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
+	data = ve.extendObject( { 'format': 'json' }, data );
+	settings = ve.extendObject( {
+		'url': mw.util.wikiScript( 'api' ),
+		'dataType': 'json',
+		'type': 'GET',
+		// Wait up to 100 seconds
+		'timeout': 100000,
+	}, settings );
+
+	settings.data = data;
+
+	return $.ajax( settings );
+};
 
 /**
  * Handle the RL modules for VE and registered plugin modules being loaded.
@@ -715,8 +736,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	data = {
 		'action': 'visualeditor',
 		'paction': 'parse',
-		'page': this.pageName,
-		'format': 'json'
+		'page': this.pageName
 	};
 
 	// Only request the API to explicitly load the currently visible revision if we're restoring
@@ -730,15 +750,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	// Load DOM
 	start = ve.now();
 
-	this.loading = $.ajax( {
-			'url': this.apiUrl,
-			'data': data,
-			'dataType': 'json',
-			'type': 'POST',
-			// Wait up to 100 seconds before giving up
-			'timeout': 100000,
-			'cache': 'false'
-		} )
+	this.loading = this.constructor.static.apiRequest( data )
 		.then( function ( data, status, jqxhr ) {
 			ve.track( 'performance.system.domLoad', {
 				'bytes': $.byteLength( jqxhr.responseText ),
@@ -799,22 +811,13 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 	this.clearPreparedCacheKey();
 
 	html = this.getHtml( doc );
-	xhr = $.ajax( {
-			'url': this.apiUrl,
-			'data': {
-				'action': 'visualeditor',
-				'paction': 'serializeforcache',
-				'html': html,
-				'page': this.pageName,
-				'oldid': this.revid,
-				'format': 'json'
-			},
-			'dataType': 'json',
-			'type': 'POST',
-			// Wait up to 100 seconds before giving up
-			'timeout': 100000,
-			'cache': 'false'
-		} )
+	xhr = this.constructor.static.apiRequest( {
+		'action': 'visualeditor',
+		'paction': 'serializeforcache',
+		'html': html,
+		'page': this.pageName,
+		'oldid': this.revid
+	}, { 'type': 'POST' } )
 		.done( function ( response ) {
 			var trackData = { 'duration': ve.now() - start };
 			if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
@@ -891,14 +894,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 			// If using the cache key fails, we'll come back here with cachekey still set
 			delete data.cachekey;
 		}
-		return $.ajax( {
-				'url': target.apiUrl,
-				'data': data,
-				'dataType': 'json',
-				'type': 'POST',
-				// Wait up to 100 seconds before giving up
-				'timeout': 100000
-			} )
+		return target.constructor.static.apiRequest( data, { 'type': 'POST' } )
 			.then( function ( response, status, jqxhr ) {
 				var fullEventName, eventData = {
 					'bytes': $.byteLength( jqxhr.responseText ),

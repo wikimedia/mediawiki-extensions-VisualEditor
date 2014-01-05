@@ -172,15 +172,10 @@ ve.dm.MWTransclusionModel.prototype.fetch = function () {
 	}
 
 	// Request template specs from server
-	request = $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'dataType': 'json',
-		'data': {
-			'format': 'json',
-			'action': 'templatedata',
-			'titles': titles.join( '|' ),
-			'lang': mw.config.get( 'wgUserLanguage' )
-		}
+	request = ve.init.mw.Target.static.apiRequest( {
+		'action': 'templatedata',
+		'titles': titles.join( '|' ),
+		'lang': mw.config.get( 'wgUserLanguage' )
 	} )
 		.done( function ( data ) {
 			var i, len, id;

@@ -63,21 +63,12 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 			$( xmlDoc.documentElement ).attr( attrs ).text( extsrc )[0]
 		);
 
-	xhr = $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'action': 'visualeditor',
-			'paction': 'parsefragment',
-			'page': mw.config.get( 'wgRelevantPageName' ),
-			'wikitext': wikitext,
-			'format': 'json'
-		},
-		'dataType': 'json',
-		'type': 'POST',
-		// Wait up to 100 seconds before giving up
-		'timeout': 100000,
-		'cache': 'false'
-	} )
+	xhr = ve.init.mw.Target.static.apiRequest( {
+		'action': 'visualeditor',
+		'paction': 'parsefragment',
+		'page': mw.config.get( 'wgRelevantPageName' ),
+		'wikitext': wikitext,
+	}, { 'type': 'POST' } )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );
 

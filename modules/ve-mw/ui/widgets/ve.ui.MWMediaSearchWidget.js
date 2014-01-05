@@ -122,20 +122,18 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				url = source.apiurl || ( source.scriptDirUrl + '/api.php' );
 			}
 			this.query.pushPending();
-			source.request = $.ajax( {
+			source.request = ve.init.mw.Target.static.apiRequest( {
+				'action': 'query',
+				'generator': 'search',
+				'gsrsearch': value,
+				'gsrnamespace': 6,
+				'gsrlimit': 15,
+				'gsroffset': source.gsroffset,
+				'prop': 'imageinfo',
+				'iiprop': 'dimensions|url',
+				'iiurlheight': this.size
+			}, {
 				'url': url,
-				'data': {
-					'format': 'json',
-					'action': 'query',
-					'generator': 'search',
-					'gsrsearch': value,
-					'gsrnamespace': 6,
-					'gsrlimit': 15,
-					'gsroffset': source.gsroffset,
-					'prop': 'imageinfo',
-					'iiprop': 'dimensions|url',
-					'iiurlheight': this.size
-				},
 				// This request won't be cached since the JSON-P callback is unique. However make sure
 				// to allow jQuery to cache otherwise so it won't e.g. add "&_=(random)" which will
 				// trigger a MediaWiki API error for invalid parameter "_".

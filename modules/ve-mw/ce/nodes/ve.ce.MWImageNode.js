@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 /**
  * ContentEditable MediaWiki image node.
  *
@@ -58,18 +56,13 @@ OO.mixinClass( ve.ce.MWImageNode, ve.ce.MWResizableNode );
 ve.ce.MWImageNode.prototype.generateContents = function () {
 	var xhr, deferred = $.Deferred();
 
-	xhr = $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
+	xhr = ve.init.mw.Target.static.apiRequest( {
 			'action': 'query',
 			'prop': 'imageinfo',
 			'iiprop': 'url',
 			'iiurlwidth': this.model.getAttribute( 'width' ),
 			'iiurlheight': this.model.getAttribute( 'height' ),
-			'titles': this.model.getAttribute( 'resource' ).replace( /^(.+\/)*/, '' ),
-			'format': 'json'
-		},
-		'cache': 'false'
+			'titles': this.model.getAttribute( 'resource' ).replace( /^(.+\/)*/, '' )
 	} )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );
