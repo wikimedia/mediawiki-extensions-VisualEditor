@@ -204,11 +204,16 @@ ve.init.mw.Target.static.toolbarGroups = [
 /**
  * Send an AJAX request to the MediaWiki API.
  *
+ * This method has special behavior for certain options. If the request type is POST, then
+ * contentType will default to multipart/form-data. If the content type is multipart/form-data,
+ * then the necessary emulation will be performed to make this content type actually work.
+ *
  * @param {Object} data Query string parameters (for GET requests) or POST data (for POST requests)
  * @param {Object} [settings] Additional AJAX settings, or overrides of default settings
  * @returns {jqXHR} Return value of $.ajax()
  */
 ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
+	var key, formData;
 	data = ve.extendObject( { 'format': 'json' }, data );
 	settings = ve.extendObject( {
 		'url': mw.util.wikiScript( 'api' ),
@@ -218,7 +223,30 @@ ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
 		'timeout': 100000,
 	}, settings );
 
-	settings.data = data;
+	// If multipart/form-data has been requested and emulation is possible, emulate it
+	if (
+		settings.type === 'POST' && window.FormData && (
+			settings.contentType === undefined ||
+			settings.contentType === 'multipart/form-data'
+		)
+	) {
+		formData = new FormData();
+		for ( key in data ) {
+			formData.append( key, data[key] );
+		}
+		settings.data = formData;
+		// Prevent jQuery from mangling our FormData object
+		settings.processData = false;
+		// Prevent jQuery from overriding the Content-Type header
+		settings.contentType = false;
+	} else {
+		settings.data = data;
+		if ( settings.contentType === 'multipart/form-data' ) {
+			// We were asked to emulate but can't, so drop the Content-Type header, otherwise
+			// it'll be wrong and the server will fail to decode the POST body
+			delete settings.contentType;
+		}
+	}
 
 	return $.ajax( settings );
 };
