@@ -35,13 +35,33 @@ ve.dm.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
 ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = ['mw:WikiLink'];
 
 ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements ) {
-	// Get title from href
+
+	function regexEscape( str ) {
+		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
+	}
+
+	var matches, normalizedTitle,
+		// Protocol relative base
+		relativeBase = new mw.Uri(  mw.config.get( 'wgArticlePath' ) ).toString().replace( /^https?:/, '' ),
+		relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) ),
+		href = domElements[0].getAttribute( 'href' ),
+		// Protocol relative href
+		relativeHref = href.replace( /^https?:/, '' );
+
+	// Check if this matches the server's article path
+	matches = relativeHref.match ( relativeBaseRegex );
+	if ( matches ) {
+		// Take the relative path
+		href = matches[1];
+	}
+
 	// The href is simply the title, unless we're dealing with a page that has slashes in its name
 	// in which case it's preceded by one or more instances of "./" or "../", so strip those
 	/*jshint regexp:false */
-	var matches = domElements[0].getAttribute( 'href' ).match( /^((?:\.\.?\/)*)(.*)$/ ),
-		// Normalize capitalisation and underscores
-		normalizedTitle = ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( matches[2] );
+	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
+	// Normalize capitalisation and underscores
+	normalizedTitle = ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( matches[2] );
+
 	return {
 		'type': 'link/mwInternal',
 		'attributes': {
