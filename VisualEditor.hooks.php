@@ -339,22 +339,17 @@ class VisualEditorHooks {
 			$wgVisualEditorTabMessages,
 			$wgVisualEditorBrowserBlacklist,
 			$wgVisualEditorSupportedSkins,
-			$wgVisualEditorShowBetaWelcome;
+			$wgVisualEditorShowBetaWelcome,
+			$wgVisualEditorPreferenceModules;
 
 		$vars['wgVisualEditorConfig'] = array(
 			'disableForAnons' => $wgVisualEditorDisableForAnons,
-			'enableExperimentalCode' => $wgVisualEditorEnableExperimentalCode,
+			'preferenceModules' => $wgVisualEditorPreferenceModules,
 			'namespaces' => $wgVisualEditorNamespaces,
 			'pluginModules' => $wgVisualEditorPluginModules,
 			'defaultUserOptions' => array(
 				'betatempdisable' => $wgDefaultUserOptions['visualeditor-betatempdisable'],
 				'enable' => $wgDefaultUserOptions['visualeditor-enable'],
-				'enable-experimental' => $wgDefaultUserOptions['visualeditor-enable-experimental'],
-//				'enable-language' => $wgDefaultUserOptions['visualeditor-enable-language'],
-//				'enable-mwalienextension' => $wgDefaultUserOptions['visualeditor-enable-mwalienextension'],
-				'enable-mwmath' => $wgDefaultUserOptions['visualeditor-enable-mwmath'],
-//				'enable-mwhiero' => $wgDefaultUserOptions['visualeditor-enable-mwhiero'],
-//				'enable-mwsyntaxHighlight' => $wgDefaultUserOptions['visualeditor-enable-mwsyntaxHighlight'],
 			),
 			'blacklist' => $wgVisualEditorBrowserBlacklist,
 			'skins' => $wgVisualEditorSupportedSkins,
@@ -362,6 +357,11 @@ class VisualEditorHooks {
 			'tabMessages' => $wgVisualEditorTabMessages,
 			'showBetaWelcome' => $wgVisualEditorShowBetaWelcome,
 		);
+
+		foreach ( $wgVisualEditorPreferenceModules as $pref => $module ) {
+			$vars['wgVisualEditorConfig']['defaultUserOptions'][$pref] =
+				$wgDefaultUserOptions[$pref];
+		}
 
 		return true;
 	}
