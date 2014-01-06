@@ -33,6 +33,10 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 		'label': ve.msg( 'visualeditor-dialog-meta-settings-label' ),
 		'icon': 'settings'
 	} );
+
+	// Initialization
+
+	// Table of Contents items
 	this.tocOptionSelector = new OO.ui.SelectWidget( { '$': this.$ } );
 	this.tocOptionWidgets = {
 		'default': new OO.ui.OptionWidget(
@@ -49,18 +53,20 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 		)
 	};
 	this.tocOptionSelector.addItems( ve.getObjectValues( this.tocOptionWidgets ) );
-
-	// Events
-	this.tocOptionSelector.connect( this, {
-		'select': 'onTOCOptionChange'
-	} );
-
-	// Initialization
 	this.settingsFieldset.$element.append(
 		this.$( '<span>' )
 			.text( ve.msg( 'visualeditor-dialog-meta-settings-toc-label' ) ),
 		this.tocOptionSelector.$element
 	);
+	this.tocOptionSelector.connect( this, { 'select': 'onTOCOptionChange' } );
+
+	// Disable section edit links items
+	this.disableSectionEditLinksInput = new OO.ui.CheckboxWidget( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
+	} );
+	this.settingsFieldset.$element.append( this.disableSectionEditLinksInput.$element );
+
 	this.$element.append( this.settingsFieldset.$element );
 };
 
@@ -89,6 +95,15 @@ ve.ui.MWSettingsPage.prototype.getTOCOptionItem = function () {
 };
 
 /**
+ * Get the section edit link disabling item
+ *
+ * @returns {Object|null} Section edit link disabling meta item, if any
+ */
+ve.ui.MWSettingsPage.prototype.getDisableSectionEditLinksItem = function () {
+	return this.metaList.getItemsInGroup( 'mwNoEditSection' )[0] || null;
+};
+
+/**
  * Setup settings page.
  *
  * @param {Object} [data] Dialog setup data
@@ -97,8 +112,12 @@ ve.ui.MWSettingsPage.prototype.setup = function () {
 	var tocOption = this.getTOCOptionItem(),
 		tocType = tocOption && tocOption.element.type || 'default';
 
+	// Table of Contents items
 	this.tocOptionSelector.selectItem( this.tocOptionWidgets[tocType] );
 	this.tocOptionTouched = false;
+
+	// Disable section edit links items
+	this.disableSectionEditLinksInput.setValue( !!this.getDisableSectionEditLinksItem() );
 };
 
 /**
@@ -110,8 +129,13 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	// Data initialisation
 	data = data || {};
 
-	var currentTOCItem = this.getTOCOptionItem(),
-		newTOCData = this.tocOptionSelector.getSelectedItem();
+	var // Table of Contents items
+		currentTOCItem = this.getTOCOptionItem(),
+		newTOCData = this.tocOptionSelector.getSelectedItem(),
+
+		// Disable section edit links items
+		currentDisableSectionEditLinksItem = this.getDisableSectionEditLinksItem(),
+		newDisableSectionEditState = this.disableSectionEditLinksInput.getValue();
 
 	// Alter the TOC option flag iff it's been touched & is actually different
 	if ( this.tocOptionTouched ) {
@@ -131,5 +155,13 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 				);
 			}
 		}
+	}
+
+	// Disable section edit links items
+	if ( currentDisableSectionEditLinksItem && !newDisableSectionEditState ) {
+		currentDisableSectionEditLinksItem.remove();
+	}
+	if ( !currentDisableSectionEditLinksItem && newDisableSectionEditState ) {
+		this.metaList.insertMeta( { 'type': 'mwNoEditSection' } );
 	}
 };

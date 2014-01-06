@@ -32,7 +32,7 @@ ve.dm.MWTOCForceMetaItem.static.matchTagNames = [ 'meta' ];
 
 ve.dm.MWTOCForceMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/forcetoc' ];
 
-ve.dm.MWTOCForceMetaItem.static.toDataElement = function ( ) {
+ve.dm.MWTOCForceMetaItem.static.toDataElement = function () {
 	return { 'type': this.name };
 };
 
