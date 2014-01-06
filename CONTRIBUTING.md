@@ -173,7 +173,6 @@ Test files:
 Regular files:
 * .docs/categories.json in General->Utilities (or somewhere more specific)
 * VisualEditor.php in ext.visualEditor.core (or somewhere more specific)
-* Run `php maintenance/makeStaticLoader.php --target demo --write-file demos/ve/index.php`
 * Run `php maintenance/makeStaticLoader.php --target test --write-file modules/ve/test/index.php`
 
 makeStaticLoader.php is a maintenance script to automatically generate an HTML document fragment
