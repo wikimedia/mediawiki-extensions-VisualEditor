@@ -103,7 +103,7 @@
     "visualeditor-loadwarning-token": "从服务器加载数据时出现错误：$1。您想要重试吗？",
     "visualeditor-mainnamespacepagelink": "Project:主名字空间",
     "visualeditor-media-input-placeholder": "搜索媒体",
-    "visualeditor-meta-tool": "页面设置",
+    "visualeditor-meta-tool": "选项",
     "visualeditor-mwalienextensioninspector-title": "MediaWiki扩展",
     "visualeditor-mweditmodesource-title": "切换至源代码编辑",
     "visualeditor-mweditmodesource-warning": "您将要切换到代码编辑。\n将保留对此文档所做的任何更改，但您将不能在不保存或重新加载的情况下切换回可视化编辑器。\n您要继续吗？",

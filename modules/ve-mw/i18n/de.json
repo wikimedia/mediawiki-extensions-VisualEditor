@@ -54,6 +54,7 @@
     "visualeditor-dialog-meta-languages-readonlynote": "Dies ist eine Liste der Seiten in anderen Sprachen, die auf diese Seite verlinkt sind. Sie können derzeit nur im Quelltextmodus oder auf Wikidata bearbeitet werden.",
     "visualeditor-dialog-meta-languages-section": "Sprachen",
     "visualeditor-dialog-meta-settings-label": "Seiteneinstellungen",
+    "visualeditor-dialog-meta-settings-noeditsection-label": "Die Bearbeiten-Links neben den Seitenüberschriften ausblenden.",
     "visualeditor-dialog-meta-settings-section": "Seiteneinstellungen",
     "visualeditor-dialog-meta-settings-toc-default": "Anzeigen, falls nötig",
     "visualeditor-dialog-meta-settings-toc-disable": "Niemals anzeigen",
