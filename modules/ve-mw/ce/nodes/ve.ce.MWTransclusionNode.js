@@ -93,7 +93,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 		return this.onParseError.call( this, deferred );
 	}
 
-	contentNodes = this.$( response.visualeditor.content ).get();
+	contentNodes = $.parseHTML( response.visualeditor.content );
 	// HACK: if $content consists of a single paragraph, unwrap it.
 	// We have to do this because the PHP parser wraps everything in <p>s, and inline templates
 	// will render strangely when wrapped in <p>s.
