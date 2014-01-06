@@ -160,11 +160,7 @@ ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 			'page': mw.config.get( 'wgTitle' ),
 			'format': 'json'
 		},
-		'dataType': 'json',
-		'type': 'POST',
-		// Wait up to 100 seconds before giving up
-		'timeout': 100000,
-		'cache': 'false'
+		'dataType': 'json'
 	} )
 		.done( ve.bind( this.onAllLanguageItemsSuccess, this, deferred ) )
 		.fail( ve.bind( this.onAllLanguageItemsError, this, deferred ) );
