@@ -95,7 +95,8 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
  * Handle language items being loaded.
  */
 ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred, response ) {
-	var i, iLen, languages = [], langlinks = response.visualeditor.langlinks;
+	var i, iLen, languages = [],
+		langlinks = response && response.visualeditor && response.visualeditor.langlinks;
 	if ( langlinks ) {
 		for ( i = 0, iLen = langlinks.length; i < iLen; i++ ) {
 			languages.push( {
