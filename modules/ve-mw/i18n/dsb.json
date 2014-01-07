@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Michawiki"
+            "Michawiki",
+            "Derbeth"
         ]
     },
     "tooltip-ca-createsource": "Žrědłowy kode toś togo boka napóraś",
@@ -76,7 +77,7 @@
     "visualeditor-differror": "Zmólka pśi zacytowanju datow ze serwera: $1.",
     "visualeditor-editconflict": "Twóje změny njedaju se wobźěłowańskego konflikta dla składowaś. Coš konflikt manuelnje wótpóraś?",
     "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notica|noticy|noticy|noticow}}",
-    "visualeditor-editsummary": "Wopisaj, což sy změnił",
+    "visualeditor-editsummary": "Wopiš, což sy změnił",
     "visualeditor-formatdropdown-format-mw-heading1": "Bokowy titel",
     "visualeditor-formatdropdown-format-mw-heading2": "Nadpismo",
     "visualeditor-formatdropdown-format-mw-heading3": "Pódnapismo 1",

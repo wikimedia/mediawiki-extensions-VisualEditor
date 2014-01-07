@@ -10,7 +10,8 @@
             "Omidh",
             "Reza1615",
             "Taha",
-            "درفش کاویانی"
+            "درفش کاویانی",
+            "Mcuteangel"
         ]
     },
     "tooltip-ca-createsource": "ساخت کد متن این صفحه.",
@@ -98,7 +99,7 @@
     "visualeditor-loadwarning-token": "خطای بارگیری بهامهر ویرایش از کارساز:  $1. دوباره تلاش می‌کنید؟",
     "visualeditor-mainnamespacepagelink": "Project:فضای نام اصلی",
     "visualeditor-media-input-placeholder": "جستجو برای رسانه‌ها",
-    "visualeditor-meta-tool": "تنظیمات صفحه",
+    "visualeditor-meta-tool": "گزینه‌ها",
     "visualeditor-mwalienextensioninspector-title": "افزونهٔ مدیاویکی",
     "visualeditor-mweditmodesource-title": "پرش به ویرایش کد",
     "visualeditor-mweditmodesource-warning": "شما در حال پرش به ویرایش کد هستید.\nهر تغییر که به این سند اعمال کنید باقی خواهد ماند ولی شما قابلیت بازگشت به ویرایشگر دیداری را بدون ذخیره یا بازآوری صفحه را ندارد.\nآیا می‌خواهید دهید؟",
