@@ -3,7 +3,8 @@
         "authors": [
             "Audriusa",
             "Eitvys200",
-            "Shirayuki"
+            "Shirayuki",
+            "Robotukas11"
         ]
     },
     "tooltip-ca-createsource": "Sukurti šio puslapio išeities kodą.",
@@ -35,6 +36,7 @@
     "visualeditor-dialog-meta-languages-name-label": "Kalba",
     "visualeditor-dialog-meta-languages-section": "Kalbos",
     "visualeditor-dialog-meta-settings-label": "Puslapio nustatymai",
+    "visualeditor-dialog-meta-settings-noeditsection-label": "Išjungti visas šio puslapio redagavimo nuorodas šalia antraščių.",
     "visualeditor-dialog-reference-insert-button": "Įterpti nuorodą",
     "visualeditor-dialog-reference-insert-title": "Įterpti nuorodą",
     "visualeditor-dialog-reference-options-group-label": "Naudokite šią grupę",
