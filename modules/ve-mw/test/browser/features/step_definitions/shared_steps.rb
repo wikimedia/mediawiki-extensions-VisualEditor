@@ -43,7 +43,7 @@ When(/^I edit the page with (.+)$/) do |input_string|
     try.times do
       #This begin/rescue clause dismisses the VE warning message when it exists, and does not fail when it does not exist
       begin
-        sleep 1 #Chrome seems to not honor when_present correctly as of 5 Dec 2013
+        #should not be needed because try.times should handle the beta_warning. sleep 1 #Chrome seems to not honor when_present correctly as of 5 Dec 2013
         page.beta_warning_element.when_present.click
       rescue
       end
