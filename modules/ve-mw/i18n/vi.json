@@ -46,6 +46,7 @@
     "visualeditor-dialog-meta-languages-readonlynote": "Đây là danh sách các trang trong các ngôn ngữ khác được liên kết đến đây. Hiện nay chỉ có thể sửa đổi danh sách này trong chế độ sửa đổi mã nguồn hoặc trên Wikidata.",
     "visualeditor-dialog-meta-languages-section": "Ngôn ngữ",
     "visualeditor-dialog-meta-settings-label": "Tùy chọn trang",
+    "visualeditor-dialog-meta-settings-noeditsection-label": "Ẩn các liên kết sửa đổi bên cạnh các đề mục trên trang này.",
     "visualeditor-dialog-meta-settings-section": "Tùy chọn trang",
     "visualeditor-dialog-meta-settings-toc-default": "Hiển thị nếu cần",
     "visualeditor-dialog-meta-settings-toc-disable": "Không bao giờ hiển thị",
