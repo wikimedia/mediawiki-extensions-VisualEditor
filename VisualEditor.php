@@ -871,6 +871,17 @@ $wgResourceModules += array(
 // loaded. Other extensions that extend VisualEditor should add to this array.
 $wgVisualEditorPluginModules = array();
 
+// Array of modules to load based on a preference. Keys are preference names, values are
+// ResourceLoader module names.
+$wgVisualEditorPreferenceModules = array(
+	'visualeditor-enable-experimental' => 'ext.visualEditor.experimental',
+	//'visualeditor-enable-language' => 'ext.visualEditor.language',
+	//'visualeditor-enable-mwalienextension' => 'ext.visualEditor.mwalienextension',
+	'visualeditor-enable-mwmath' => 'ext.visualEditor.mwmath',
+	//'visualeditor-enable-mwhiero' => 'ext.visualEditor.mwhiero',
+	//'visualeditor-enable-mwsyntaxhighlight' => 'ext.visualEditor.mwsyntaxhighlight'
+);
+
 // URL to the Parsoid instance
 // MUST NOT end in a slash due to Parsoid bug
 $wgVisualEditorParsoidURL = 'http://localhost:8000';

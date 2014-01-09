@@ -16,21 +16,11 @@
  * @constructor
  */
 ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
-	var i,
-		len,
-		prefName,
+	var prefName,
 		prefValue,
 		browserWhitelisted,
 		currentUri = new mw.Uri(),
-		conf = mw.config.get( 'wgVisualEditorConfig' ),
-		// language, mwalienextension and mwhiero are commented out in VisualEditorHooks::onGetBetaPreferences()
-		extraModules = [
-			'experimental',
-			// 'language',
-			// 'mwalienextension',
-			// 'mwhiero',
-			'mwmath'
-		];
+		conf = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Parent constructor
 	ve.init.mw.Target.call(
@@ -74,14 +64,13 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	 */
 	this.sanityCheckPromise = null;
 
-	// Load additional modules
-	for ( i = 0, len = extraModules.length; i < len; i++ ) {
-		prefName = 'visualeditor-enable-' + extraModules[i];
+	// Load preference modules
+	for ( prefName in conf.preferenceModules ) {
 		prefValue = mw.config.get( 'wgUserName' ) === null ?
 			conf.defaultUserOptions[prefName] :
 			mw.user.options.get( prefName, conf.defaultUserOptions[prefName] );
 		if ( prefValue && prefValue !== '0' ) {
-			this.modules.push( 'ext.visualEditor.' + extraModules[i] );
+			this.modules.push( conf.preferenceModules[prefName] );
 		}
 	}
 
