@@ -330,6 +330,7 @@ class ApiVisualEditor extends ApiBase {
 				$article = new Article( $page ); // Deliberately omitting ,0 so oldid comes from request
 				$ep = new EditPage( $article );
 				$req = $this->getRequest();
+				$req->setVal( 'format', 'text/x-wiki' );
 				$ep->importFormData( $req ); // By reference for some reason (bug 52466)
 				$tabindex = 0;
 				$states = array( 'minor' => false, 'watch' => false );
