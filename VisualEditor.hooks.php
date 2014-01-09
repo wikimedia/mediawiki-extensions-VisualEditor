@@ -370,6 +370,7 @@ class VisualEditorHooks {
 			$wgVisualEditorBrowserBlacklist,
 			$wgVisualEditorSupportedSkins,
 			$wgVisualEditorShowBetaWelcome,
+			$wgVisualEditorEnableTocWidget,
 			$wgVisualEditorPreferenceModules;
 
 		$vars['wgVisualEditorConfig'] = array(
@@ -387,6 +388,7 @@ class VisualEditorHooks {
 			'tabPosition' => $wgVisualEditorTabPosition,
 			'tabMessages' => $wgVisualEditorTabMessages,
 			'showBetaWelcome' => $wgVisualEditorShowBetaWelcome,
+			'enableTocWidget' => $wgVisualEditorEnableTocWidget
 		);
 
 		foreach ( $wgVisualEditorPreferenceModules as $pref => $module ) {

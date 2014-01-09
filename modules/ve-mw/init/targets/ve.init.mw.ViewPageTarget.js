@@ -325,6 +325,9 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 		'history': 'updateToolbarSaveButtonState'
 	} );
 	this.surface.setPasteRules( this.constructor.static.pasteRules );
+	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
+		this.surface.mwTocWidget = new ve.ui.MWTocWidget( this.surface );
+	}
 
 	// Update UI
 	this.transformPageTitle();
@@ -1213,7 +1216,7 @@ ve.init.mw.ViewPageTarget.prototype.mutePageContent = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.hidePageContent = function () {
-	$( '#bodyContent > :visible:not(#siteSub)' )
+	$( '#bodyContent > :visible:not(#siteSub,.ve-ui-mwTocWidget)' )
 		.addClass( 've-init-mw-viewPageTarget-content' )
 		.hide();
 };
@@ -1227,7 +1230,7 @@ ve.init.mw.ViewPageTarget.prototype.showTableOfContents = function () {
 	var $toc = $( '#toc' ),
 		$wrap = $toc.parent();
 	if ( $wrap.data( 've.hideTableOfContents' ) ) {
-		$wrap.slideDown( function () {
+		$wrap.show( function () {
 			$toc.unwrap();
 		} );
 	}
@@ -1243,7 +1246,7 @@ ve.init.mw.ViewPageTarget.prototype.hideTableOfContents = function () {
 		.wrap( '<div>' )
 		.parent()
 			.data( 've.hideTableOfContents', true )
-			.slideUp();
+			.hide();
 };
 
 /**

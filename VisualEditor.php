@@ -549,6 +549,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/ve.ui.MWDialog.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWTitleInputWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js',
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWBetaWelcomeDialog.js',
@@ -622,7 +624,7 @@ $wgResourceModules += array(
 			'visualeditor-viewpage-savewarning',
 			'visualeditor-wikitext-warning-title',
 			'visualeditor-window-title',
-
+			'toc',
 			// Only used if FancyCaptcha is installed and triggered on save
 			'captcha-label',
 			'fancycaptcha-edit',
@@ -1126,6 +1128,9 @@ $wgVisualEditorSerializationCacheTimeout = 3600;
 
 // Namespaces to enable VisualEditor in
 $wgVisualEditorNamespaces = $wgContentNamespaces;
+
+// Whether to enable the (experimental for now) TOC widget
+$wgVisualEditorEnableTocWidget = false;
 
 // List of skins VisualEditor integration supports
 $wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva' );
