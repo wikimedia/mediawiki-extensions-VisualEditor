@@ -13,7 +13,8 @@
             "Jduranboger",
             "PoLuX124",
             "Ralgis",
-            "Thehelpfulone"
+            "Thehelpfulone",
+            "Ciencia Al Poder"
         ]
     },
     "tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -100,12 +101,12 @@
     "visualeditor-loadwarning-token": "Error al cargar los datos del servidor: $1. ¿Le gustaría volver a intentarlo?",
     "visualeditor-mainnamespacepagelink": "Project:Espacio principal",
     "visualeditor-media-input-placeholder": "Buscar multimedia",
-    "visualeditor-meta-tool": "Configurar página",
+    "visualeditor-meta-tool": "Opciones",
     "visualeditor-mwalienextensioninspector-title": "Extensión de MediaWiki",
     "visualeditor-mweditmodesource-title": "Cambiar a modo de código",
     "visualeditor-mweditmodesource-warning": "Estás por cambiar a modo de código.\nCualquier cambio que hayas hecho se mantendrá, pero no se podrá volver al editor visual sin guardar o recargar la página.\n¿Estás seguro de querer continuar?",
     "visualeditor-mwhieroinspector-title": "Jeroglíficos",
-    "visualeditor-mwmathinspector-title": "LaTeX",
+    "visualeditor-mwmathinspector-title": "Fórmula",
     "visualeditor-notification-created": "Se ha creado «$1».",
     "visualeditor-notification-restored": "Se ha restaurado «$1».",
     "visualeditor-notification-saved": "Se han guardado los cambios a «$1».",
