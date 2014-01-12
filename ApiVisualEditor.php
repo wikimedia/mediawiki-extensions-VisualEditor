@@ -151,7 +151,8 @@ class ApiVisualEditor extends ApiBase {
 	protected function parseWikitext( $title ) {
 		$apiParams = array(
 			'action' => 'parse',
-			'page' => $title->getPrefixedDBkey()
+			'page' => $title->getPrefixedDBkey(),
+			'prop' => 'text|revid|categorieshtml',
 		);
 		$api = new ApiMain(
 			new DerivativeRequest(
@@ -165,6 +166,8 @@ class ApiVisualEditor extends ApiBase {
 		$api->execute();
 		$result = $api->getResultData();
 		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
+		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
+			$result['parse']['categorieshtml']['*'] : false;
 		$revision = Revision::newFromId( $result['parse']['revid'] );
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
 
@@ -174,6 +177,7 @@ class ApiVisualEditor extends ApiBase {
 
 		return array(
 			'content' => $content,
+			'categorieshtml' => $categorieshtml,
 			'basetimestamp' => $timestamp,
 			'starttimestamp' => wfTimestampNow()
 		);
