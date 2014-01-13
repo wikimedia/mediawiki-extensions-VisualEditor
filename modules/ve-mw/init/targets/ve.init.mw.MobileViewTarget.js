@@ -39,6 +39,7 @@ ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	{ 'include': [ 'undo', 'redo' ] },
 	{
 		'type': 'menu',
+		'indicator': 'down',
 		'include': [ { 'group': 'format' } ],
 		'promote': [ 'paragraph' ],
 		'demote': [ 'preformatted', 'heading1' ]

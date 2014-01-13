@@ -42,6 +42,7 @@ ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 	// No formatting
 	/* {
 		'type': 'menu',
+		'indicator': 'down',
 		'include': [ { 'group': 'format' } ],
 		'promote': [ 'paragraph' ],
 		'demote': [ 'preformatted', 'heading1' ]
@@ -50,6 +51,7 @@ ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 	{
 		'type': 'list',
 		'icon': 'text-style',
+		'indicator': 'down',
 		'include': [ { 'group': 'textStyle' }, 'clear' ],
 		'promote': [ 'bold', 'italic' ],
 		'demote': [ 'strikethrough', 'code',  'underline', 'clear' ]
@@ -63,9 +65,10 @@ ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 	},*/
 	// Insert
 	{
+		'label': 'visualeditor-toolbar-insert',
+		'indicator': 'down',
 		'include': '*',
 		'exclude': [ { 'group': 'format' }, { 'group': 'structure' }, 'referenceList' ],
-		'label': 'visualeditor-toolbar-insert',
 		'demote': [ 'specialcharacter' ]
 	}
 ];
