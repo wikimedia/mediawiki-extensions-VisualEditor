@@ -200,3 +200,24 @@ ve.ui.MWLanguagesDialogTool.static.dialog = 'meta';
 ve.ui.MWLanguagesDialogTool.static.config = { 'page': 'languages' };
 ve.ui.MWLanguagesDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWLanguagesDialogTool );
+
+/**
+ * MediaWiki UserInterface command help tool.
+ *
+ * @class
+ * @extends ve.ui.DialogTool
+ * @constructor
+ * @param {OO.ui.Toolbar} toolbar
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MWCommandHelpDialogTool = function VeUiMWCommandHelpDialogTool( toolbar, config ) {
+	ve.ui.DialogTool.call( this, toolbar, config );
+};
+OO.inheritClass( ve.ui.MWCommandHelpDialogTool, ve.ui.DialogTool );
+ve.ui.MWCommandHelpDialogTool.static.name = 'commandHelp';
+ve.ui.MWCommandHelpDialogTool.static.group = 'utility';
+ve.ui.MWCommandHelpDialogTool.static.icon = 'help';
+ve.ui.MWCommandHelpDialogTool.static.titleMessage = 'visualeditor-dialog-command-help-title';
+ve.ui.MWCommandHelpDialogTool.static.dialog = 'commandHelp';
+ve.ui.MWCommandHelpDialogTool.static.autoAdd = false;
+ve.ui.toolFactory.register( ve.ui.MWCommandHelpDialogTool );
