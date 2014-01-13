@@ -64,7 +64,9 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 
 /**
  * @event save
- * @param {string} html
+ * @param {string} html Rendered page HTML from server
+ * @param {string} categoriesHtml Rendered categories HTML from server
+ * @param {number} [newid] New revision id, undefined if unchanged
  */
 
 /**
@@ -385,7 +387,7 @@ ve.init.mw.Target.onSave = function ( response ) {
 	} else if ( typeof data.content !== 'string' ) {
 		this.onSaveError( null, 'Invalid HTML content in response from server', response );
 	} else {
-		this.emit( 'save', data.content, data.newrevid );
+		this.emit( 'save', data.content, data.categorieshtml, data.newrevid );
 	}
 };
 

@@ -297,10 +297,11 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * Handle successful DOM save event.
  *
  * @method
- * @param {HTMLElement} html Rendered HTML from server
+ * @param {string} html Rendered page HTML from server
+ * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {number} [newid] New revision id, undefined if unchanged
  */
-ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, newid ) {
+ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid ) {
 	ve.track( 'performance.user.saveComplete', { 'duration': ve.now() - this.timings.saveDialogSave } );
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
@@ -336,7 +337,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, newid ) {
 		}
 		this.saveDialog.close();
 		this.saveDialog.reset();
-		this.replacePageContent( html );
+		this.replacePageContent( html, categoriesHtml );
 		this.setupSectionEditLinks();
 		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
@@ -1359,11 +1360,13 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function () {
  * Replace the page content with new HTML.
  *
  * @method
- * @param {HTMLElement} html Rendered HTML from server
+ * @param {string} html Rendered HTML from server
+ * @param {string} categoriesHtml Rendered categories HTML from server
  */
-ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html ) {
+ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml ) {
 	var $content = $( $.parseHTML( html ) );
 	mw.hook( 'wikipage.content' ).fire( $( '#mw-content-text' ).empty().append( $content ) );
+	$( '#catlinks' ).replaceWith( categoriesHtml );
 };
 
 /**
