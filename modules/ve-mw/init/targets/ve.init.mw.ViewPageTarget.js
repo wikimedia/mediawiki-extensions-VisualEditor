@@ -1239,7 +1239,7 @@ ve.init.mw.ViewPageTarget.prototype.mutePageTitle = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.restorePageTitle = function () {
 	var $els = $( '#firstHeading, #siteSub' )
-		.removeClass( 've-init-mw-viewPageTarget-transform-muted ve-init-mw-viewPageTarget-transform-hidden' );
+		.removeClass( 've-init-mw-viewPageTarget-transform-muted' );
 
 	setTimeout( function () {
 		$els.removeClass( 've-init-mw-viewPageTarget-transform' );
