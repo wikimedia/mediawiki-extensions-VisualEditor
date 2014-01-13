@@ -6,7 +6,7 @@
  */
 
 /**
- * MediaWiki UserInterface media edit tool.
+ * MediaWiki UserInterface edit mode tool.
  *
  * @class
  * @abstract
