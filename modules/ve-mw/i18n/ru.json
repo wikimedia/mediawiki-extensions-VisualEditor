@@ -17,7 +17,8 @@
             "Sunpriat",
             "Yury Katkov",
             "Умар",
-            "Agilight"
+            "Agilight",
+            "Alexandr Efremov"
         ]
     },
     "tooltip-ca-createsource": "Создать страницу в редакторе исходного текста",
@@ -28,8 +29,8 @@
     "visualeditor-beta-warning": "VisualEditor находится в статусе бета-версии. Могут возникнуть проблемы с программным обеспечением, и вы не сможете редактировать некоторые части страниц. Нажмите «{{int:visualeditor-ca-editsource}}» для переключения в режим вики-текста. Несохранённые изменения будут утеряны.",
     "visualeditor-browserwarning": "Вы используете браузер, который официально не поддерживается VisualEditor.",
     "visualeditor-ca-createsource": "Создать как исходный текст",
-    "visualeditor-ca-editsource": "Үндезин сөзүглелин эдер",
-    "visualeditor-ca-editsource-section": "Үндезин сөзүглелин эдер",
+    "visualeditor-ca-editsource": "Править исходный текст",
+    "visualeditor-ca-editsource-section": "править исходный текст",
     "visualeditor-ca-ve-create": "Визуальный редактор",
     "visualeditor-ca-ve-edit": "Визуальный редактор",
     "visualeditor-ca-ve-edit-section": "Визуальный редактор",
