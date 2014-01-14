@@ -27,6 +27,17 @@ ve.dm.MWTemplateParameterModel = function VeDmMWTemplateParameterModel( template
 /* Methods */
 
 /**
+ * Check if parameter is required.
+ *
+ * @method
+ * @param {string} name Parameter name
+ * @returns {boolean} Parameter is required
+ */
+ve.dm.MWTemplateParameterModel.prototype.isRequired = function () {
+	return this.template.getSpec().isParameterRequired( this.name );
+};
+
+/**
  * Get template parameter is part of.
  *
  * @method

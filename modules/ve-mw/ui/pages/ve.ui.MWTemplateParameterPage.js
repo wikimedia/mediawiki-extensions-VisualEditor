@@ -18,7 +18,14 @@
  */
 ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, name, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'parameter', 'movable': false, 'level': 1 }, config );
+	config = ve.extendObject(
+		parameter.isRequired() ? {
+			'indicator': 'required',
+			'indicatorLabel': ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
+		} : {},
+		{ 'icon': 'parameter', 'movable': false, 'level': 1 },
+		config
+	);
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );

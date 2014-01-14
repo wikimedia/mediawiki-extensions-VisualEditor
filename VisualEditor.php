@@ -669,6 +669,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-transclusion-remove-content',
 			'visualeditor-dialog-transclusion-remove-param',
 			'visualeditor-dialog-transclusion-remove-template',
+			'visualeditor-dialog-transclusion-required-parameter',
 			'visualeditor-dialog-transclusion-title',
 			'visualeditor-dialog-transclusion-wikitext-label',
 			'visualeditor-dialogbutton-media-tooltip',
