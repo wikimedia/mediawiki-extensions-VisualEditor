@@ -89,7 +89,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var els, currentDom, i, len,
+	var els, currentDom, i, len, wrapper,
 		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
 		originalMw = dataElement.attributes.originalMw;
 
@@ -113,8 +113,14 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			currentDom = converter.getStore().value( index );
 			if ( currentDom ) {
 				currentDom = ve.copyDomElements( currentDom, doc );
-				// i = 0 is the span
+				// i = 0 is the data-mw span
 				for ( i = 1, len = currentDom.length; i < len; i++ ) {
+					// Wrap plain text nodes so we can give them an attribute
+					if ( currentDom[i].nodeType === Node.TEXT_NODE ) {
+						wrapper = doc.createElement( 'span' );
+						wrapper.appendChild( currentDom[i] );
+						currentDom[i] = wrapper;
+					}
 					currentDom[i].setAttribute( 'data-ve-ignore', 'true' );
 					els.push( currentDom[i] );
 				}
