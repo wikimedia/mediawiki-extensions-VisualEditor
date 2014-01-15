@@ -89,7 +89,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var els, currentDom, i, len, wrapper,
+	var els, currentDom, i, len, wrapper, aboutGroup,
 		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
 		originalMw = dataElement.attributes.originalMw;
 
@@ -108,9 +108,11 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			els = [ doc.createElement( dataElement.attributes.originalDomElements[0].nodeName ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
-			// For the clipboard use the current DOM contents but mark is ignored
+			// For the clipboard use the current DOM contents but mark as ignored
 			// for the converter
 			currentDom = converter.getStore().value( index );
+			// About-group elements together
+			aboutGroup = 'g' + Math.random();
 			if ( currentDom ) {
 				currentDom = ve.copyDomElements( currentDom, doc );
 				// i = 0 is the data-mw span
@@ -122,8 +124,10 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 						currentDom[i] = wrapper;
 					}
 					currentDom[i].setAttribute( 'data-ve-ignore', 'true' );
+					currentDom[i].setAttribute( 'about', aboutGroup );
 					els.push( currentDom[i] );
 				}
+				els[0].setAttribute( 'about', aboutGroup );
 			}
 		}
 		// All we need to send back to Parsoid is the original transclusion marker, with a
