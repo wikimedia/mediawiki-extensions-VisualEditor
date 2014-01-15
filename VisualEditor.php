@@ -797,6 +797,22 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
+	'ext.visualEditor.mwgallery' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'modules/ve-mw/dm/nodes/ve.dm.MWGalleryNode.js',
+			'modules/ve-mw/ce/nodes/ve.ce.MWGalleryNode.js',
+			'modules/ve-mw/ui/inspectors/ve.ui.MWGalleryInspector.js',
+			'modules/ve-mw/ui/tools/ve.ui.MWGalleryInspectorTool.js',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.mwcore',
+		),
+		'messages' => array(
+			'visualeditor-mwgalleryinspector-title',
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
 	'ext.visualEditor.mwhiero' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'modules/ve-mw/dm/nodes/ve.dm.MWHieroNode.js',
