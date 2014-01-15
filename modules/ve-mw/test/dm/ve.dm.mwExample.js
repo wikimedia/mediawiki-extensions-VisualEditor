@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * @class
  * @singleton
@@ -153,6 +155,32 @@ ve.dm.mwExample.MWTransclusion.mixedParamsHash = OO.getHash( [ ve.dm.MWTransclus
 ve.dm.mwExample.MWTransclusion.mixedStoreItems = {
 	'hash': ve.dm.mwExample.MWTransclusion.mixedParamsHash,
 	'value': $( ve.dm.mwExample.MWTransclusion.mixed ).toArray()
+};
+
+ve.dm.mwExample.MWInternalLink = {
+	'absoluteHref': new mw.Uri( '/wiki/Foo/Bar' ).toString()
+};
+
+ve.dm.mwExample.MWInternalLink.absoluteOpen = '<a rel="mw:WikiLink" href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">';
+ve.dm.mwExample.MWInternalLink.absoluteData = {
+	'type': 'link/mwInternal',
+	'attributes': {
+		'title': 'Foo/Bar',
+		'origTitle': 'Foo/Bar',
+		'normalizedTitle': 'Foo/Bar',
+		'hrefPrefix': ''
+	},
+	'htmlAttributes': [
+		{
+			'values': {
+				'href': ve.dm.mwExample.MWInternalLink.absoluteHref,
+				'rel': 'mw:WikiLink'
+			},
+			'computed': {
+				'href': ve.dm.mwExample.MWInternalLink.absoluteHref
+			}
+		}
+	]
 };
 
 ve.dm.mwExample.MWBlockImage = {
@@ -1500,6 +1528,31 @@ ve.dm.mwExample.domToDataCases = {
 			{ 'type': 'internalList' },
 			{ 'type': '/internalList' }
 		]
+	},
+	'internal link with absolute path': {
+		'body': '<p>' + ve.dm.mwExample.MWInternalLink.absoluteOpen + 'Foo</a></p>',
+		'data': [
+			{ 'type': 'paragraph' },
+			[
+				'F',
+				[ ve.dm.mwExample.MWInternalLink.absoluteData ]
+			],
+			[
+				'o',
+				[ ve.dm.mwExample.MWInternalLink.absoluteData ]
+			],
+			[
+				'o',
+				[ ve.dm.mwExample.MWInternalLink.absoluteData ]
+			],
+			{ 'type': '/paragraph' },
+			{ 'type': 'internalList' },
+			{ 'type': '/internalList' }
+		],
+		'normalizedBody': '<p><a rel="mw:WikiLink" href="Foo/Bar">Foo</a></p>',
+		'mwConfig': {
+			'wgArticlePath': '/wiki/$1'
+		}
 	},
 	'numbered external link (empty mw:Extlink)': {
 		'body': '<p>Foo<a rel="mw:ExtLink" href="http://www.example.com"></a>Bar</p>',
