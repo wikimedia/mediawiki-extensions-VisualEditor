@@ -149,7 +149,8 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
  * @param {string} [oldAlign] The old alignment, for removing classes
  */
 ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
-	var align = this.model.getAttribute( 'align' ),
+	var alignClass,
+		align = this.model.getAttribute( 'align' ),
 		type = this.model.getAttribute( 'type' );
 
 	if ( oldAlign && oldAlign !== align ) {
@@ -160,15 +161,29 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 	}
 
 	if ( type !== 'none' && type !== 'frameless' ) {
+		alignClass = this.getCssClass( 'default', align );
 		this.$image.addClass( 've-ce-mwBlockImageNode-thumbimage' );
-		this.$figure
-			.addClass( this.getCssClass( 'default', align ) )
-			.addClass( 've-ce-mwBlockImageNode-borderwrap' );
+		this.$figure.addClass( 've-ce-mwBlockImageNode-borderwrap' );
 	} else {
+		alignClass = this.getCssClass( 'none', align );
 		this.$image.removeClass( 've-ce-mwBlockImageNode-thumbimage' );
-		this.$figure
-			.addClass( this.getCssClass( 'none', align ) )
-			.removeClass( 've-ce-mwBlockImageNode-borderwrap' );
+		this.$figure.removeClass( 've-ce-mwBlockImageNode-borderwrap' );
+	}
+	this.$figure.addClass( alignClass );
+
+	switch ( alignClass ) {
+		case 'mw-halign-right':
+			this.showHandles( ['sw'] );
+			break;
+		case 'mw-halign-left':
+			this.showHandles( ['se'] );
+			break;
+		case 'mw-halign-center':
+			this.showHandles( ['sw', 'se'] );
+			break;
+		default:
+			this.showHandles();
+			break;
 	}
 };
 

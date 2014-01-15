@@ -50,6 +50,12 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 		this.$image.css( 'vertical-align', valign );
 	}
 
+	if ( this.$element.css( 'direction' ) === 'rtl' ) {
+		this.showHandles( ['sw'] );
+	} else {
+		this.showHandles( ['se'] );
+	}
+
 	// DOM changes
 	this.$element.addClass( 've-ce-mwInlineImageNode' );
 
