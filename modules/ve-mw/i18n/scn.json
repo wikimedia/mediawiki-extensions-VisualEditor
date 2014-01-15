@@ -4,7 +4,8 @@
             "Gazeb",
             "Gmelfi",
             "HalanTul",
-            "Elitre"
+            "Elitre",
+            "Elitre82"
         ]
     },
     "tooltip-ca-createsource": "Crea lu codici surgenti di sta pàggina",
@@ -140,6 +141,7 @@
     "visualeditor-savedialog-warning-dirty": "Lu canciamentu putissi siri danniggiatu - pi favuri si lu ritaliassi prima di sarbari.",
     "visualeditor-saveerror": "Erruri duranti lu sarbataggio dî dati supra lu server: $1.",
     "visualeditor-serializeerror": "Erruri duranti lu carricamentu dî dati a pàrtiri dû server: $1.",
+    "visualeditor-settings-tool": "Mpustazzioni dâ pàggina",
     "visualeditor-toolbar-cancel": "Annulla",
     "visualeditor-toolbar-savedialog": "Sarba la pàggina",
     "visualeditor-usernamespacepagelink": "Project:Namespace utenti",
