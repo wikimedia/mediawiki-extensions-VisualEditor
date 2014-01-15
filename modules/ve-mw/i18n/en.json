@@ -83,6 +83,7 @@
     "visualeditor-dialog-transclusion-remove-content": "Remove content",
     "visualeditor-dialog-transclusion-remove-param": "Remove parameter",
     "visualeditor-dialog-transclusion-remove-template": "Remove template",
+    "visualeditor-dialog-transclusion-required-parameter": "Required parameter",
     "visualeditor-dialog-transclusion-title": "Transclusion",
     "visualeditor-dialogbutton-media-tooltip": "Media",
     "visualeditor-dialogbutton-meta-tooltip": "Page settings",

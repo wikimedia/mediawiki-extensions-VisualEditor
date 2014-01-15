@@ -88,6 +88,7 @@
     "visualeditor-dialog-transclusion-remove-content": "Label for button that removes content between transclusion parts",
     "visualeditor-dialog-transclusion-remove-param": "Label for button that removes a parameter from a template",
     "visualeditor-dialog-transclusion-remove-template": "Label for button that removes a template from a transclusion.\n{{Identical|Remove template}}",
+    "visualeditor-dialog-transclusion-required-parameter": "Tooltip for required parameter indicator",
     "visualeditor-dialog-transclusion-title": "{{Identical|Transclusion}}",
     "visualeditor-dialogbutton-media-tooltip": "{{Identical|Media}}",
     "visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
