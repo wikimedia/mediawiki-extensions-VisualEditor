@@ -194,7 +194,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'label': 'visualeditor-toolbar-insert',
 		'indicator': 'down',
 		'include': '*',
-		'demote': [ 'specialcharacter' ]
+		'promote': [ 'reference', 'mediaInsert' ],
+		'demote': [ 'language', 'specialcharacter' ]
 	}
 
 ];
