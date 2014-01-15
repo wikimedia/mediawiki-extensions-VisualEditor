@@ -23,6 +23,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	this.template = template;
 	this.description = null;
 	this.params = {};
+	this.paramOrder = [];
 	this.sets = [];
 
 	// Initialization
@@ -41,6 +42,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
  * @method
  * @param {Object} data Template spec data
  * @param {string} [data.description] Template description
+ * @param {string[]} [data.paramOrder] Canonically ordered parameter names
  * @param {Object} [data.params] Template param specs keyed by param name
  * @param {string[][]} [data.sets] Lists of param sets
  */
@@ -49,6 +51,9 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 
 	if ( data.description !== null ) {
 		this.description = data.description;
+	}
+	if ( Array.isArray( data.paramOrder ) ) {
+		this.paramOrder = data.paramOrder.slice();
 	}
 	if ( ve.isPlainObject( data.params ) ) {
 		for ( key in data.params ) {
@@ -147,6 +152,16 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
 	var value = this.description;
 	return ve.isPlainObject( value ) ? OO.ui.getLocalValue( value, lang ) : value;
+};
+
+/**
+ * Get parameter order.
+ *
+ * @method
+ * @returns {string[]} Canonically ordered parameter names
+ */
+ve.dm.MWTemplateSpecModel.prototype.getParameterOrder = function () {
+	return this.paramOrder.slice();
 };
 
 /**

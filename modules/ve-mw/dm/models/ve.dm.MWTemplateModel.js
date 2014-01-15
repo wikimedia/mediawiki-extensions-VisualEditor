@@ -189,8 +189,23 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  * @returns {string[]} List of parameter names
  */
 ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
+	var i, len, index, paramOrder, paramNames;
+
 	if ( !this.sequence ) {
-		this.sequence = ve.getObjectKeys( this.params ).sort( function ( a, b ) {
+		paramOrder = this.spec.getParameterOrder();
+		paramNames = ve.getObjectKeys( this.params );
+
+		this.sequence = [];
+		// Known parameters first
+		for ( i = 0, len = paramOrder.length; i < len; i++ ) {
+			index = paramNames.indexOf( paramOrder[i] );
+			if ( index !== -1 ) {
+				this.sequence.push( paramOrder[i] );
+				paramNames.splice( index, 1 );
+			}
+		}
+		// Unknown parameters in alpha-numeric order second
+		paramNames.sort( function ( a, b ) {
 			var aIsNaN = isNaN( a ),
 				bIsNaN = isNaN( b );
 			if ( aIsNaN && bIsNaN ) {
@@ -208,6 +223,7 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 			// Two numbers
 			return a - b;
 		} );
+		this.sequence.push.apply( this.sequence, paramNames );
 	}
 	return this.sequence;
 };
