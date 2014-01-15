@@ -78,15 +78,10 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 		value = value.substr( 1 );
 	}
 
-	return $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'format': 'json',
-			'action': 'opensearch',
-			'search': value,
-			'suggest': ''
-		},
-		'dataType': 'json'
+	return ve.init.mw.Target.static.apiRequest( {
+		'action': 'opensearch',
+		'search': value,
+		'suggest': ''
 	} );
 };
 

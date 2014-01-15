@@ -153,15 +153,10 @@ ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
 ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 	var deferred = $.Deferred();
 	// TODO: Detect paging token if results exceed limit
-	$.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'action': 'visualeditor',
-			'paction': 'getlanglinks',
-			'page': mw.config.get( 'wgTitle' ),
-			'format': 'json'
-		},
-		'dataType': 'json'
+	ve.init.mw.Target.static.apiRequest( {
+		'action': 'visualeditor',
+		'paction': 'getlanglinks',
+		'page': mw.config.get( 'wgTitle' )
 	} )
 		.done( ve.bind( this.onAllLanguageItemsSuccess, this, deferred ) )
 		.fail( ve.bind( this.onAllLanguageItemsError, this, deferred ) );

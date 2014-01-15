@@ -69,16 +69,11 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemSelect = function ( item
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
-	return $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'format': 'json',
-			'action': 'opensearch',
-			'search': this.value,
-			'namespace': 0,
-			'suggest': ''
-		},
-		'dataType': 'json'
+	return ve.init.mw.Target.static.apiRequest( {
+		'action': 'opensearch',
+		'search': this.value,
+		'namespace': 0,
+		'suggest': ''
 	} );
 };
 

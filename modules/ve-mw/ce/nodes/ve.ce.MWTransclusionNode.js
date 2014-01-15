@@ -59,21 +59,12 @@ ve.ce.MWTransclusionNode.static.renderHtmlAttributes = false;
 /** */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
-	xhr = $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'action': 'visualeditor',
-			'paction': 'parsefragment',
-			'page': mw.config.get( 'wgRelevantPageName' ),
-			'wikitext': ( config && config.wikitext ) || this.model.getWikitext(),
-			'format': 'json'
-		},
-		'dataType': 'json',
-		'type': 'POST',
-		// Wait up to 100 seconds before giving up
-		'timeout': 100000,
-		'cache': 'false'
-	} )
+	xhr = ve.init.mw.Target.static.apiRequest( {
+		'action': 'visualeditor',
+		'paction': 'parsefragment',
+		'page': mw.config.get( 'wgRelevantPageName' ),
+		'wikitext': ( config && config.wikitext ) || this.model.getWikitext()
+	}, { 'type': 'POST' } )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );
 

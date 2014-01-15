@@ -132,18 +132,9 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
 		// The decision whether to take 'url' or 'apiurl' per each repository is made
 		// in the MWMediaSearchWidget depending on whether it is local and has apiurl
 		// defined at all.
-		$.ajax( {
-			'url': mw.util.wikiScript( 'api' ),
-			'data': {
-				'action': 'query',
-				'meta': 'filerepoinfo',
-				'format': 'json'
-			},
-			'dataType': 'json',
-			'type': 'POST',
-			// Wait up to 100 seconds before giving up
-			'timeout': 100000,
-			'cache': false
+		ve.init.mw.Target.static.apiRequest( {
+			'action': 'query',
+			'meta': 'filerepoinfo'
 		} )
 		.done( function ( resp ) {
 			deferred.resolve( resp.query.repos );
@@ -151,8 +142,8 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
 		.fail( function () {
 			deferred.resolve( [ {
 				'url': mw.util.wikiScript( 'api' ),
-				'local': true }
-			] );
+				'local': true
+			} ] );
 		} );
 	} else {
 		// There was no need to ask for the resources again
