@@ -6,7 +6,8 @@
             "Kwj2772",
             "LFM",
             "아라",
-            "Jskang"
+            "Jskang",
+            "Priviet"
         ]
     },
     "tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
@@ -50,6 +51,7 @@
     "visualeditor-dialog-meta-languages-section": "언어",
     "visualeditor-dialog-meta-settings-label": "문서 설정",
     "visualeditor-dialog-meta-settings-noeditsection-label": "페이지 내 각 문단 제목 옆의 '편집' 버튼을 표시하지 않기",
+    "visualeditor-dialog-meta-settings-section": "문서 설정",
     "visualeditor-dialog-reference-insert-button": "출처 넣기",
     "visualeditor-dialog-reference-insert-title": "출처 넣기",
     "visualeditor-dialog-reference-options-group-label": "이 그룹 사용",

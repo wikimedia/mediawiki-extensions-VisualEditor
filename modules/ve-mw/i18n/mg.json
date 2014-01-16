@@ -46,6 +46,7 @@
     "visualeditor-dialog-transclusion-remove-content": "Hanala votoatiny",
     "visualeditor-dialog-transclusion-remove-param": "Hanala parametatra",
     "visualeditor-dialog-transclusion-remove-template": "Hanala endrika",
+    "visualeditor-dialog-transclusion-required-parameter": "Parametatra ilaina",
     "visualeditor-dialogbutton-media-tooltip": "Haino aman-jery",
     "visualeditor-dialogbutton-meta-tooltip": "Parametatry ny pejy",
     "visualeditor-dialogbutton-reference-tooltip": "Tsiahy",
@@ -59,5 +60,6 @@
     "visualeditor-formatdropdown-format-mw-heading6": "Zana-dohateny 4",
     "visualeditor-linkinspector-suggest-external-link": "Rohy ivelany",
     "visualeditor-linkinspector-suggest-matching-page": "Pejy miady aminy",
-    "visualeditor-linkinspector-suggest-new-page": "Pejy vaova"
+    "visualeditor-linkinspector-suggest-new-page": "Pejy vaova",
+    "visualeditor-mwgalleryinspector-title": "Galeria"
 }

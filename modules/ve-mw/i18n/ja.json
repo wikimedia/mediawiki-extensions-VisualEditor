@@ -103,6 +103,7 @@
     "visualeditor-mwalienextensioninspector-title": "MediaWiki の拡張機能",
     "visualeditor-mweditmodesource-title": "ソースの編集に切り替え",
     "visualeditor-mweditmodesource-warning": "ソースの編集に切り替えようとしています。\nこの文書の変更点はすべて維持されますが、またビジュアルエディターに戻すにはページの保存または再読み込みが必要です。\n本当に続行しますか?",
+    "visualeditor-mwgalleryinspector-title": "ギャラリー",
     "visualeditor-mwhieroinspector-title": "象形文字",
     "visualeditor-mwmathinspector-title": "数式",
     "visualeditor-notification-created": "「$1」を作成しました。",

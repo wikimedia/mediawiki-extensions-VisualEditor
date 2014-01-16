@@ -8,7 +8,8 @@
             "Kenrick95",
             "McDutchie",
             "Rv77ax",
-            "William Surya Permana"
+            "William Surya Permana",
+            "Hysocc"
         ]
     },
     "tooltip-ca-createsource": "Buat kode sumber halaman ini",
@@ -99,6 +100,7 @@
     "visualeditor-mwalienextensioninspector-title": "Ekstensi MediaWiki",
     "visualeditor-mweditmodesource-title": "Beralih ke penyuntingan sumber",
     "visualeditor-mweditmodesource-warning": "Anda akan segera beralih ke penyuntingan sumber.\nPerubahan apapun pada dokumen ini yang telah Anda lakukan akan disimpan, \nnamun Anda tidak dapat beralih kembali ke VisualEditor tanpa menyimpan atau memuat ulang halaman.\nApakah Anda ingin melanjutkan?",
+    "visualeditor-mwgalleryinspector-title": "Galeri",
     "visualeditor-mwhieroinspector-title": "Hieroglif",
     "visualeditor-mwmathinspector-title": "LaTeX",
     "visualeditor-notification-created": "\"$1\" telah dibuat.",
