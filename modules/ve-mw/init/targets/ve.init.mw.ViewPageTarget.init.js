@@ -36,6 +36,13 @@
 					var target = new ve.init.mw.ViewPageTarget();
 					ve.init.mw.targets.push( target );
 
+					// Tee tracked events to MediaWiki firehose, if available (1.23+).
+					if ( mw.track ) {
+						ve.trackSubscribeAll( function ( topic, data ) {
+							mw.track.call( null, 've.' + topic, data );
+						} );
+					}
+
 					// Transfer methods
 					ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
 
