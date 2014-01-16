@@ -179,10 +179,8 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
-	// Sanity check
-	this.node = this.surface.getView().getFocusedNode();
-
 	// Properties
+	this.node = this.surface.getView().getFocusedNode();
 	this.transclusion = new ve.dm.MWTransclusionModel();
 	this.loaded = false;
 
