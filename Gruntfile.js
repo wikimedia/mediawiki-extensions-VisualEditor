@@ -44,7 +44,7 @@ module.exports = function ( grunt ) {
 				target: '.docs/eg-iframe.html',
 				template: '.docs/eg-iframe.html.template',
 				modules: modules,
-				pathPrefix: '../lib/ve/',
+				pathPrefix: 'lib/ve/',
 				indent: '\t\t'
 			}
 		},

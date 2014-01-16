@@ -16,6 +16,8 @@ fi
 $JSDUCK --config .docs/config.json $jsduckopt --processes 0 --color --warnings-exit-nonzero
 ec=$?
 
+test ! -L docs/lib && ln -s ../lib docs/lib || echo 'Symlink already exists'
+
 cd - > /dev/null
 
 # Exit with exit code of jsduck command
