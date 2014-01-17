@@ -104,14 +104,18 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	// Properties
 	this.$items = this.$( '<div>' );
 	this.feedback = null;
-	this.helpButton = new OO.ui.IconButtonWidget( {
+	this.helpButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
 		'icon': 'help',
 		'title': ve.msg( 'visualeditor-help-title' ),
 		'href': new mw.Title( ve.msg( 'visualeditor-help-link' ) ).getUrl(),
 		'target': '_blank',
 		'label': ve.msg( 'visualeditor-help-label' )
 	} );
-	this.feedbackButton = new OO.ui.IconButtonWidget( {
+	this.feedbackButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
 		'icon': 'comment',
 		'label': ve.msg( 'visualeditor-feedback-tool' )
 	} );

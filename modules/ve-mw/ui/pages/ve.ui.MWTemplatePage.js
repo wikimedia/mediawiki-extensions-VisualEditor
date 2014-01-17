@@ -29,8 +29,9 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.label = this.spec.getLabel();
 	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, { '$': this.$ } )
 		.connect( this, { 'select': 'onParameterSelect' } );
-	this.removeButton = new OO.ui.IconButtonWidget( {
+	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
+			'frameless': true,
 			'icon': 'remove',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
 			'flags': ['destructive'],

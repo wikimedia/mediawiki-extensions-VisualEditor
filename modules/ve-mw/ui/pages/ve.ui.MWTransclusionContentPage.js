@@ -33,8 +33,9 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContent( content, n
 		} )
 		.setValue( this.content.getValue() )
 		.connect( this, { 'change': 'onTextInputChange' } );
-	this.removeButton = new OO.ui.IconButtonWidget( {
+	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
+			'frameless': true,
 			'icon': 'remove',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-content' ),
 			'flags': [ 'destructive' ],

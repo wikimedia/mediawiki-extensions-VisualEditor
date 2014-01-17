@@ -46,8 +46,9 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 		'input': this.textInput,
 		'label': this.spec.getParameterDescription( this.parameter.getName() ) || ''
 	} );
-	this.removeButton = new OO.ui.IconButtonWidget( {
+	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
+			'frameless': true,
 			'icon': 'remove',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
 			'flags': ['destructive'],

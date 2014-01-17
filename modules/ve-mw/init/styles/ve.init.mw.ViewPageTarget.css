@@ -42,12 +42,12 @@
 	padding: 0.25em;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-utilites > .oo-ui-iconButtonWidget {
+.ve-init-mw-viewPageTarget-toolbar-utilites > .oo-ui-buttonedElement-frameless {
 	margin-right: 0.2em;
 	margin-top: 0.2em;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-actions > .oo-ui-pushButtonWidget {
+.ve-init-mw-viewPageTarget-toolbar-actions > .oo-ui-buttonedElement-framed {
 	margin-left: 0.25em;
 	margin-right: 0.25em;
 	margin-top: 0.2em;
@@ -103,12 +103,12 @@
 	margin-top: 0.8em;
 }
 
-.ve-ui-mwHelpPopupTool-item > .oo-ui-iconButtonWidget {
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonedElement-frameless {
 	display: block;
 	margin: 0.5em 0;
 }
 
-.ve-ui-mwHelpPopupTool-item > .oo-ui-iconButtonWidget:first-child {
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonedElement-frameless:first-child {
 	margin-top: 0;
 }
 

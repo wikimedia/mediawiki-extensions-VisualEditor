@@ -351,7 +351,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	/* Buttons */
 
 	// Save button for "save" panel
-	this.saveButton = new OO.ui.PushButtonWidget( {
+	this.saveButton = new OO.ui.ButtonWidget( {
 		'label': ve.msg(
 			 // visualeditor-savedialog-label-restore, visualeditor-savedialog-label-save
 			'visualeditor-savedialog-label-' + ( this.restoring ? 'restore' : 'save' )
@@ -361,19 +361,19 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.saveButton.connect( this, { 'click': [ 'emit', 'save' ] } );
 
 	// Review button for "save" panel
-	this.reviewButton = new OO.ui.PushButtonWidget( {
+	this.reviewButton = new OO.ui.ButtonWidget( {
 		'label': ve.msg( 'visualeditor-savedialog-label-review' )
 	} );
 	this.reviewButton.connect( this, { 'click': [ 'emit', 'review' ] } );
 
 	// Review good button on "review" panel
-	this.reviewGoodButton = new OO.ui.PushButtonWidget( {
+	this.reviewGoodButton = new OO.ui.ButtonWidget( {
 		'label': ve.msg( 'visualeditor-savedialog-label-review-good' ),
 		'flags': ['constructive']
 	} );
 	this.reviewGoodButton.connect( this, { 'click': [ 'swapPanel', 'save' ] } );
 	// Resolve conflict
-	this.resolveConflictButton = new OO.ui.PushButtonWidget( {
+	this.resolveConflictButton = new OO.ui.ButtonWidget( {
 		'label': ve.msg( 'visualeditor-savedialog-label-resolve-conflict' ),
 		'flags': ['constructive']
 	} );

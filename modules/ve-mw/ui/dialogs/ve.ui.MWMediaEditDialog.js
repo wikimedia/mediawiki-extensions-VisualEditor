@@ -106,7 +106,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-media-content-section' ),
 		'icon': 'parameter'
 	} );
-	this.applyButton = new OO.ui.PushButtonWidget( {
+	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']

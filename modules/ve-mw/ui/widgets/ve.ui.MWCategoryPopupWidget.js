@@ -27,8 +27,11 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget ( config ) {
 	this.removed = false;
 	this.$title = this.$( '<label>' );
 	this.$menu = this.$( '<div>' );
-	this.removeButton = new OO.ui.IconButtonWidget( {
-		'$': this.$, 'icon': 'remove', 'title': ve.msg( 'visualeditor-inspector-remove-tooltip' )
+	this.removeButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
+		'icon': 'remove',
+		'title': ve.msg( 'visualeditor-inspector-remove-tooltip' )
 	} );
 	this.sortKeyInput = new OO.ui.TextInputWidget( { '$': this.$ } );
 	this.sortKeyLabel = new OO.ui.InputLabelWidget(

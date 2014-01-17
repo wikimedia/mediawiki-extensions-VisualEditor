@@ -157,7 +157,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
 	// Properties
-	this.applyButton = new OO.ui.PushButtonWidget( {
+	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']

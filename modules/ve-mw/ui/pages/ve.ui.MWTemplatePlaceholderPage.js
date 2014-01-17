@@ -35,15 +35,16 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholder( placeholde
 			'change': 'onTemplateInputChange',
 			'enter': 'onAddTemplate'
 		} );
-	this.addTemplateButton = new OO.ui.PushButtonWidget( {
+	this.addTemplateButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
 			'label': ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
 			'flags': ['constructive'],
 			'disabled': true
 		} )
 		.connect( this, { 'click': 'onAddTemplate' } );
-	this.removeButton = new OO.ui.IconButtonWidget( {
+	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
+			'frameless': true,
 			'icon': 'remove',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
 			'flags': ['destructive'],

@@ -43,7 +43,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 
 	// Properties
 	this.bookletLayout = new OO.ui.BookletLayout( { '$': this.$, 'outlined': true } );
-	this.applyButton = new OO.ui.PushButtonWidget( {
+	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']

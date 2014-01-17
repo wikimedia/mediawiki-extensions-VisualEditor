@@ -4,7 +4,7 @@ class VisualEditorPage
   include URL
   page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}" + "/#{ENV['BROWSER_LABEL']}")
 
-  div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-pushButtonWidget")
+  div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
   div(:content, class: "ve-ce-documentNode ve-ce-branchNode")
   span(:decrease_indentation, class: "oo-ui-widget oo-ui-tool oo-ui-tool-name-outdent oo-ui-widget-disabled")
   a(:decrease_indentation_on, title: /Decrease indentation/)
@@ -26,7 +26,7 @@ class VisualEditorPage
   span(:paragraph, text: "Paragraph")
   span(:preformatted, text: "Preformatted")
   span(:refs_link, text: "Reference")
-  div(:save_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-pushButtonWidget")
+  div(:save_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
   span(:save_page, class: "oo-ui-labeledElement-label", text: "Save page")
   span(:subheading1, text: "Sub-heading 1")
   span(:subheading2, text: "Sub-heading 2")
