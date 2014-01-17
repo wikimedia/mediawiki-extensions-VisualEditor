@@ -12,7 +12,8 @@
             "Ty221",
             "WTM",
             "Woytecr",
-            "Wpedzich"
+            "Wpedzich",
+            "Vuh"
         ]
     },
     "tooltip-ca-createsource": "Tworzenie kodu źródłowego strony",
@@ -109,6 +110,7 @@
     "visualeditor-meta-tool": "Opcje",
     "visualeditor-mwalienextensioninspector-title": "Rozszerzenia MediaWiki",
     "visualeditor-mweditmodesource-title": "Przełącz do edycji wikitekstu",
+    "visualeditor-mwgalleryinspector-title": "Galeria",
     "visualeditor-mwhieroinspector-title": "Hieroglify",
     "visualeditor-mwmathinspector-title": "Wzór",
     "visualeditor-notification-created": "Strona „$1” została utworzona.",
