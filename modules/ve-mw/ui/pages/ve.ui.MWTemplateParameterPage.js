@@ -21,7 +21,7 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 	config = ve.extendObject(
 		parameter.isRequired() ? {
 			'indicator': 'required',
-			'indicatorLabel': ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
+			'indicatorTitle': ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 		} : {},
 		{ 'icon': 'parameter', 'movable': false, 'level': 1 },
 		config
