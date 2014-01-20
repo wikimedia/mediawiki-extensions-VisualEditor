@@ -12,7 +12,8 @@
             "Shirayuki",
             "Simon Shek",
             "Spring Roll Conan",
-            "Waihorace"
+            "Waihorace",
+            "EagerLin"
         ]
     },
     "tooltip-ca-createsource": "建立此頁面的原始碼",
@@ -72,6 +73,7 @@
     "visualeditor-dialog-transclusion-remove-content": "移除內容",
     "visualeditor-dialog-transclusion-remove-param": "移除參數",
     "visualeditor-dialog-transclusion-remove-template": "移除模板",
+    "visualeditor-dialog-transclusion-required-parameter": "所需的參數",
     "visualeditor-dialog-transclusion-title": "包含",
     "visualeditor-dialogbutton-media-tooltip": "媒體",
     "visualeditor-dialogbutton-meta-tooltip": "頁面設定",
@@ -103,6 +105,7 @@
     "visualeditor-mwalienextensioninspector-title": "MediaWiki 擴充套件",
     "visualeditor-mweditmodesource-title": "切換為代碼編輯",
     "visualeditor-mweditmodesource-warning": "您將要切換到源編輯。\n將保留對此文檔所做的任何更改，但您將不能不保存或重置頁面回到可眎化編輯器。\n您要繼續嗎？",
+    "visualeditor-mwgalleryinspector-title": "圖庫",
     "visualeditor-mwhieroinspector-title": "表意字元",
     "visualeditor-mwmathinspector-title": "LaTeX",
     "visualeditor-notification-created": "「$1」已經建立。",

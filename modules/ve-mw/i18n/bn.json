@@ -6,7 +6,8 @@
             "Jayantanth",
             "Nasir8891",
             "Runab",
-            "Sayak Sarkar"
+            "Sayak Sarkar",
+            "Tauhid16"
         ]
     },
     "tooltip-ca-createsource": "এই পাতার উৎস কোড তৈরি করুন",
@@ -73,6 +74,7 @@
     "visualeditor-dialog-transclusion-remove-content": "বিষয়বস্তু অপসারণ",
     "visualeditor-dialog-transclusion-remove-param": "প্যারামিটার অপসারণ",
     "visualeditor-dialog-transclusion-remove-template": "টেমপ্লেট অপসারণ",
+    "visualeditor-dialog-transclusion-required-parameter": "স্থিতিমাপ আবশ্যক",
     "visualeditor-dialog-transclusion-title": "ট্রান্সক্লুশন",
     "visualeditor-dialogbutton-media-tooltip": "মিডিয়া",
     "visualeditor-dialogbutton-meta-tooltip": "পাতা সেটিং",
@@ -103,6 +105,7 @@
     "visualeditor-meta-tool": "অপশন",
     "visualeditor-mwalienextensioninspector-title": "মিডিয়াউইকি এক্সটেনশন",
     "visualeditor-mweditmodesource-title": "উৎস সম্পাদনায় চলো",
+    "visualeditor-mwgalleryinspector-title": "চিত্রসম্ভার",
     "visualeditor-mwhieroinspector-title": "চিত্রলিপিসমূহ",
     "visualeditor-mwmathinspector-title": "সূত্র",
     "visualeditor-notification-created": "\"$1\" তৈরি করা হয়েছে।",

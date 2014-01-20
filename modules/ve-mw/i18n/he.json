@@ -12,7 +12,8 @@
             "חיים",
             "ערן",
             "פוילישער",
-            "קיפודנחש"
+            "קיפודנחש",
+            "תומר ט"
         ]
     },
     "tooltip-ca-createsource": "יצירת קוד המקור של הדף הזה",
@@ -80,6 +81,7 @@
     "visualeditor-dialog-transclusion-remove-content": "הסרת תוכן",
     "visualeditor-dialog-transclusion-remove-param": "הסרת פרמטר",
     "visualeditor-dialog-transclusion-remove-template": "הסרת תבנית",
+    "visualeditor-dialog-transclusion-required-parameter": "פרמטר חובה",
     "visualeditor-dialog-transclusion-title": "הכללה",
     "visualeditor-dialogbutton-media-tooltip": "מדיה",
     "visualeditor-dialogbutton-meta-tooltip": "הגדרות דף",
@@ -111,6 +113,7 @@
     "visualeditor-mwalienextensioninspector-title": "הרחבות מדיה־ויקי",
     "visualeditor-mweditmodesource-title": "מעבר לעריכת קוד מקור",
     "visualeditor-mweditmodesource-warning": "עומד להתבצע מעבר לעריכת קוד מקור.\nכל השינויים שעשית במסמך הזה יישמרו, אבל לא תתאשפר חזרה לעורך החזותי ללא שמירה או רענון.\nהאם להמשיך?",
+    "visualeditor-mwgalleryinspector-title": "גלריה",
     "visualeditor-mwhieroinspector-title": "היירוגליפים",
     "visualeditor-mwmathinspector-title": "נוסחה",
     "visualeditor-notification-created": "הדף \"$1\" נוצר.",
