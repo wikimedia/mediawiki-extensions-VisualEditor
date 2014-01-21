@@ -119,7 +119,7 @@ ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.initialize = function () {
-	var altTextFieldset, positionFieldset;
+	var altTextFieldset, positionFieldset, positionField;
 	// Parent method
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
@@ -168,11 +168,6 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		.append( this.altTextInput.$element );
 
 	// Position
-	positionFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-position-section' ),
-		'icon': 'parameter'
-	} );
 	this.positionInput =  new OO.ui.ButtonSelectWidget( {
 		'$': this.$
 	} );
@@ -180,10 +175,28 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		new OO.ui.ButtonOptionWidget( 'left', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-left' ) } ),
 		new OO.ui.ButtonOptionWidget( 'center', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-center' ) } ),
 		new OO.ui.ButtonOptionWidget( 'right', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-right' ) } ),
-		new OO.ui.ButtonOptionWidget( 'none', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-none' ) } )
 	], 0 );
+
+	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
+		'$': this.$
+	} );
+	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
+		'$': this.$,
+		'align': 'inline',
+		'label': ve.msg( 'visualeditor-dialog-media-position-checkbox' )
+	} );
+
+	positionFieldset = new OO.ui.FieldsetLayout( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-media-position-section' ),
+		'icon': 'parameter'
+	} );
+
 	// Build position fieldset
-	positionFieldset.$element.append( this.positionInput.$element );
+	positionFieldset.$element.append( [
+		positionField.$element,
+		this.positionInput.$element
+	] );
 
 	// Type
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
@@ -249,6 +262,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 
 	// Events
 	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
+	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 
 	// Initialization
 	this.generalSettingsPage.$element.append( [
@@ -264,6 +278,34 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 
 	this.$body.append( this.bookletLayout.$element );
 	this.$foot.append( this.applyButton.$element );
+};
+
+/**
+ * Handle change event on the positionCheckbox element. If an option
+ * is selected, mark the checkbox
+ */
+ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
+	var checked = this.positionCheckbox.getValue();
+
+	if ( !checked ) {
+		// If unchecked, remove selection
+		this.positionInput.intializeSelection();
+	} else {
+		// If checked, choose default position
+		if ( this.surface.getView().getDir() === 'ltr' ) {
+			// Assume default is 'right'
+			this.positionInput.selectItem(
+				this.positionInput.getItemFromData( 'right' )
+			);
+		} else {
+			// Assume default is 'left'
+			this.positionInput.selectItem(
+				this.positionInput.getItemFromData( 'left' )
+			);
+		}
+	}
+
+	this.positionInput.setDisabled( !checked );
 };
 
 /**
@@ -336,13 +378,38 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.altTextInput.setValue( this.mediaNode.getAttribute( 'alt' ) || '' );
 
 	// Set initial position
-	if ( this.mediaNode.getAttribute( 'align' ) !== undefined ) {
-		this.positionInput.selectItem(
-			this.positionInput.getItemFromData( this.mediaNode.getAttribute( 'align' ) )
-		);
+	if (
+		!this.mediaNode.getAttribute( 'align' ) ||
+		this.mediaNode.getAttribute( 'align' ) === 'none'
+	) {
+		this.positionCheckbox.setValue( false );
+		this.positionInput.setDisabled( true );
+		this.positionInput.intializeSelection();
+	} else {
+		this.positionCheckbox.setValue( true );
+		this.positionInput.setDisabled( false );
+		if ( this.mediaNode.getAttribute( 'align' ) === 'default' ) {
+			// Assume wiki default according to wiki dir
+			if ( this.surface.getView().getDir() === 'ltr' ) {
+				// Assume default is 'right'
+				this.positionInput.selectItem(
+					this.positionInput.getItemFromData( 'right' )
+				);
+			} else {
+				// Assume default is 'left'
+				this.positionInput.selectItem(
+					this.positionInput.getItemFromData( 'left' )
+				);
+			}
+		} else {
+			this.positionInput.selectItem(
+				this.positionInput.getItemFromData( this.mediaNode.getAttribute( 'align' ) )
+			);
+		}
 	}
 
 	// Set image type
+	this.typeInput.intializeSelection();
 	if ( this.mediaNode.getAttribute( 'type' ) !== undefined ) {
 		this.typeInput.selectItem(
 			this.typeInput.getItemFromData( this.mediaNode.getAttribute( 'type' ) )
@@ -414,16 +481,42 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 			attrs.alt = attr;
 		}
 
-		attr = this.positionInput.getSelectedItem();
-		if ( attr ) {
-			attrs.align = attr.getData();
+		if ( !this.positionCheckbox.getValue() ) {
+			// Only change to 'none' if alignment was originally
+			// set to anything else
+			if (
+				this.mediaNode.getAttribute( 'align' ) &&
+				this.mediaNode.getAttribute( 'align' ) !== 'none'
+			) {
+				attrs.align = 'none';
+			}
+		} else {
+			attr = this.positionInput.getSelectedItem().getData();
+			// If alignment was originally default and is still
+			// set to the default position according to the wiki
+			// content direction, do not change it
+			if (
+				(
+					this.mediaNode.getAttribute( 'align' ) === 'default' &&
+					(
+						this.surface.getView().getDir() === 'ltr' &&
+						attr !== 'right'
+					) ||
+					(
+						this.surface.getView().getDir() === 'rtl' &&
+						attr !== 'left'
+					)
+				) ||
+				this.mediaNode.getAttribute( 'align' ) !== 'default'
+			) {
+				attrs.align = attr;
+			}
 		}
 
 		attr = this.typeInput.getSelectedItem();
 		if ( attr ) {
 			attrs.type = attr.getData();
 		}
-
 		surfaceModel.change(
 			ve.dm.Transaction.newFromAttributeChanges( doc, this.mediaNode.getOffset(), attrs )
 		);
