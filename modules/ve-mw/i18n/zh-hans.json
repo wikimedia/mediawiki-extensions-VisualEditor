@@ -23,7 +23,7 @@
     "tooltip-ca-ve-edit": "使用可视化编辑器编辑本页",
     "visualeditor-beta-appendix": "测试版",
     "visualeditor-beta-label": "测试版",
-    "visualeditor-beta-warning": "VisualEditor正处于'测试版'，您可能会遇到软件的问题，且不是任何内容都可编辑。点击“{{int:visualeditor-ca-editsource}}”以切换到维基代码模式 - 未保存的更改将会丢失。",
+    "visualeditor-beta-warning": "可视化编辑器当前是'测试版'。您可能会遭遇软件问题，并且您可能无法编辑本页面的某一部分。点击“{{int:visualeditor-ca-editsource}}”以切换到维基代码模式——未保存的更改将会丢失。",
     "visualeditor-browserwarning": "您的浏览器不支持可视化编辑器。",
     "visualeditor-ca-createsource": "创建源代码",
     "visualeditor-ca-editsource": "编辑源代码",
