@@ -80,11 +80,11 @@ Then(/^nothing is added in front of input string in the diff view$/) do
 end
 
 Then(/^Decrease indentation should be disabled$/) do
-  on(VisualEditorPage).decrease_indentation_element.class_name.should match /disabled/
+  on(VisualEditorPage).decrease_indentation_element.should be_visible
 end
 
 Then(/^Increase indentation should be disabled$/) do
-  on(VisualEditorPage).increase_indentation_element.class_name.should match /disabled/
+  on(VisualEditorPage).increase_indentation_element.should be_visible
 end
 
 
