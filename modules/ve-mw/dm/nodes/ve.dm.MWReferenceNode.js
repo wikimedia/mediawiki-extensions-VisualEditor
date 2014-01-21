@@ -132,7 +132,7 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 
 	if ( setContents && !contentsAlreadySet ) {
 		converter.getDomSubtreeFromData(
-			itemNode.getDocument().getFullData( new ve.Range( itemNodeRange.start, itemNodeRange.end ), true ),
+			itemNode.getDocument().getFullData( itemNodeRange, true ),
 			itemNodeWrapper
 		);
 		itemNodeHtml = $( itemNodeWrapper ).html(); // Returns '' if itemNodeWrapper is empty
