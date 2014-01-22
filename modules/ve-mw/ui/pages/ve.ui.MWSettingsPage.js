@@ -24,6 +24,9 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 	this.metaList = surface.getModel().metaList;
 	this.tocOptionTouched = false;
 	this.redirectOptionsTouched = false;
+	this.tableOfContentsTouched = false;
+	this.label = ve.msg( 'visualeditor-dialog-meta-settings-section' );
+
 	this.settingsFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-meta-settings-label' ),
@@ -33,58 +36,81 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 	// Initialization
 
 	// Table of Contents items
-	this.tocOptionSelector = new OO.ui.SelectWidget( { '$': this.$ } );
-	this.tocOptionWidgets = {
-		'default': new OO.ui.OptionWidget(
-			'default',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-default' ) }
-		),
-		'mwTOCForce': new OO.ui.OptionWidget(
-			'mwTOCForce',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-force' ) }
-		),
-		'mwTOCDisable': new OO.ui.OptionWidget(
-			'mwTOCDisable',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' ) }
-		)
-	};
-	this.tocOptionSelector.addItems( ve.getObjectValues( this.tocOptionWidgets ) );
-	this.settingsFieldset.$element.append(
-		this.$( '<span>' )
-			.text( ve.msg( 'visualeditor-dialog-meta-settings-toc-label' ) ),
-		this.tocOptionSelector.$element
+	this.tableOfContents = new OO.ui.FieldLayout(
+		new OO.ui.ButtonSelectWidget( { '$': this.$ } )
+			.addItems( [
+				new OO.ui.ButtonOptionWidget(
+					'mwTOCForce',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-force' ) }
+				),
+				new OO.ui.ButtonOptionWidget(
+					'default',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-default' ) }
+				),
+				new OO.ui.ButtonOptionWidget(
+					'mwTOCDisable',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' ) }
+				)
+			] )
+			.connect( this, { 'select': 'onTableOfContentsFieldChange' } ),
+		{
+			'$': this.$,
+			'align': 'top',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-label' )
+		}
 	);
-	this.tocOptionSelector.connect( this, { 'select': 'onTOCOptionChange' } );
 
 	// Redirect items
-	this.enableRedirectInput = new OO.ui.CheckboxWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' )
-	} );
+	this.enableRedirectInput = new OO.ui.CheckboxInputWidget( { '$': this.$ } );
+	this.enableRedirectField = new OO.ui.FieldLayout(
+		this.enableRedirectInput,
+		{
+			'$': this.$,
+			'align': 'inline',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' )
+		}
+	);
 	this.redirectTargetInput = new OO.ui.TextInputWidget( {
 		'$': this.$,
 		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ),
 	} );
-	this.enableStaticRedirectInput = new OO.ui.CheckboxWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' )
-	} );
-	this.settingsFieldset.$element.append(
-		this.enableRedirectInput.$element,
-		this.redirectTargetInput.$element,
-		this.enableStaticRedirectInput.$element
+	this.redirectTargetField = new OO.ui.FieldLayout(
+		this.redirectTargetInput,
+		{
+			'$': this.$,
+			'align': 'top'
+		}
+	);
+	this.enableStaticRedirectInput = new OO.ui.CheckboxInputWidget( { '$': this.$ } );
+	this.enableStaticRedirectField = new OO.ui.FieldLayout(
+		this.enableStaticRedirectInput,
+		{
+			'$': this.$,
+			'align': 'inline',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' )
+		}
 	);
 	this.enableRedirectInput.connect( this, { 'change': 'onEnableRedirectChange' } );
 	this.redirectTargetInput.connect( this, { 'change': 'onRedirectTargetChange' } );
 	this.enableStaticRedirectInput.connect( this, { 'change': 'onEnableStaticRedirectChange' } );
 
 	// Disable section edit links items
-	this.disableSectionEditLinksInput = new OO.ui.CheckboxWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
-	} );
-	this.settingsFieldset.$element.append( this.disableSectionEditLinksInput.$element );
+	this.disabledSectionEditLinks = new OO.ui.FieldLayout(
+		new OO.ui.CheckboxInputWidget( { '$': this.$ } ),
+		{
+			'$': this.$,
+			'align': 'inline',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' ),
+		}
+	);
 
+	this.settingsFieldset.addItems( [
+		this.enableRedirectField,
+		this.redirectTargetField,
+		this.enableStaticRedirectField,
+		this.tableOfContents,
+		this.disabledSectionEditLinks
+	] );
 	this.$element.append( this.settingsFieldset.$element );
 };
 
@@ -115,8 +141,8 @@ ve.ui.MWSettingsPage.prototype.setOutlineItem = function ( outlineItem ) {
  *
  * @method
  */
-ve.ui.MWSettingsPage.prototype.onTOCOptionChange = function () {
-	this.tocOptionTouched = true;
+ve.ui.MWSettingsPage.prototype.onTableOfContentsFieldChange = function () {
+	this.tableOfContentsTouched = true;
 };
 
 /**
@@ -124,7 +150,7 @@ ve.ui.MWSettingsPage.prototype.onTOCOptionChange = function () {
  *
  * @returns {ve.dm.MetaItem|null} TOC option, if any
  */
-ve.ui.MWSettingsPage.prototype.getTOCOptionItem = function () {
+ve.ui.MWSettingsPage.prototype.getTableOfContentsMetaItem = function () {
 	return this.metaList.getItemsInGroup( 'mwTOC' )[0] || null;
 };
 
@@ -193,8 +219,10 @@ ve.ui.MWSettingsPage.prototype.getDisableSectionEditLinksItem = function () {
  */
 ve.ui.MWSettingsPage.prototype.setup = function () {
 	var // Table of Contents items
-		tocOption = this.getTOCOptionItem(),
-		tocType = tocOption && tocOption.element.type || 'default',
+		tableOfContentsMetaItem = this.getTableOfContentsMetaItem(),
+		tableOfContentsField = this.tableOfContents.getField(),
+		tableOfContentsMode = tableOfContentsMetaItem &&
+			tableOfContentsMetaItem.getType() || 'default',
 
 		// Redirect items
 		redirectTargetItem = this.getRedirectTargetItem(),
@@ -202,8 +230,8 @@ ve.ui.MWSettingsPage.prototype.setup = function () {
 		redirectStatic = this.getRedirectStaticItem();
 
 	// Table of Contents items
-	this.tocOptionSelector.selectItem( this.tocOptionWidgets[tocType] );
-	this.tocOptionTouched = false;
+	tableOfContentsField.selectItem( tableOfContentsField.getItemFromData( tableOfContentsMode ) );
+	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)
 	this.enableRedirectInput.setValue( !!redirectTargetItem );
@@ -213,7 +241,7 @@ ve.ui.MWSettingsPage.prototype.setup = function () {
 	this.redirectOptionsTouched = false;
 
 	// Disable section edit links items
-	this.disableSectionEditLinksInput.setValue( !!this.getDisableSectionEditLinksItem() );
+	this.disabledSectionEditLinks.getField().setValue( !!this.getDisableSectionEditLinksItem() );
 };
 
 /**
@@ -226,8 +254,9 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	data = data || {};
 
 	var // Table of Contents items
-		currentTOCItem = this.getTOCOptionItem(),
-		newTOCData = this.tocOptionSelector.getSelectedItem(),
+		tableOfContentsMetaItem = this.getTableOfContentsMetaItem(),
+		tableOfContentsSelectedItem = this.tableOfContents.getField().getSelectedItem(),
+		tableOfContentsValue = tableOfContentsSelectedItem && tableOfContentsSelectedItem.getData(),
 
 		// Redirect items
 		currentRedirectTargetItem = this.getRedirectTargetItem(),
@@ -239,22 +268,22 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 		// Disable section edit links items
 		currentDisableSectionEditLinksItem = this.getDisableSectionEditLinksItem(),
-		newDisableSectionEditState = this.disableSectionEditLinksInput.getValue();
+		newDisableSectionEditState = this.disabledSectionEditLinks.getField().getValue();
 
 	// Alter the TOC option flag iff it's been touched & is actually different
-	if ( this.tocOptionTouched ) {
-		if ( newTOCData.data === 'default' ) {
-			if ( currentTOCItem ) {
-				currentTOCItem.remove();
+	if ( this.tableOfContentsTouched ) {
+		if ( tableOfContentsValue === 'default' ) {
+			if ( tableOfContentsMetaItem ) {
+				tableOfContentsMetaItem.remove();
 			}
 		} else {
-			if ( !currentTOCItem ) {
-				this.metaList.insertMeta( { 'type': newTOCData.data } );
-			} else if ( currentTOCItem.getType() !== newTOCData.data ) {
-				currentTOCItem.replaceWith(
+			if ( !tableOfContentsMetaItem ) {
+				this.metaList.insertMeta( { 'type': tableOfContentsValue } );
+			} else if ( tableOfContentsMetaItem.getType() !== tableOfContentsValue ) {
+				tableOfContentsMetaItem.replaceWith(
 					ve.extendObject( true, {},
-						currentTOCItem.getElement(),
-						{ 'type': newTOCData.data }
+						tableOfContentsMetaItem.getElement(),
+						{ 'type': tableOfContentsValue }
 					)
 				);
 			}

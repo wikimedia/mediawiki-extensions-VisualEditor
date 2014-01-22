@@ -238,9 +238,9 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	} );
 	// TODO: Use a drop-down or something, and populate with existing groups instead of free-text
 	this.referenceGroupInput = new OO.ui.TextInputWidget( { '$': this.$ } );
-	this.referenceGroupLabel = new OO.ui.InputLabelWidget( {
+	this.referenceGroupField = new OO.ui.FieldLayout( this.referenceGroupInput, {
 		'$': this.$,
-		'input': this.referenceGroupInput,
+		'align': 'top',
 		'label': ve.msg( 'visualeditor-dialog-reference-options-group-label' )
 	} );
 	this.search = new ve.ui.MWReferenceSearchWidget(
@@ -269,7 +269,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	// Initialization
 	this.panels.addItems( [ this.editPanel, this.searchPanel ] );
 	this.editPanel.$element.append( this.contentFieldset.$element, this.optionsFieldset.$element );
-	this.optionsFieldset.$element.append( this.referenceGroupLabel.$element, this.referenceGroupInput.$element );
+	this.optionsFieldset.addItems( [ this.referenceGroupField ] );
 	this.searchPanel.$element.append( this.search.$element );
 	this.$body.append( this.panels.$element );
 	this.$foot.append(

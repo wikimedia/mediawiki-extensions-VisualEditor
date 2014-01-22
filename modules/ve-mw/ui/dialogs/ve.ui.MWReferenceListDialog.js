@@ -53,9 +53,9 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 	} );
 
 	this.groupInput = new OO.ui.TextInputWidget( { '$': this.$ } );
-	this.groupLabel = new OO.ui.InputLabelWidget( {
+	this.groupField = new OO.ui.FieldLayout( this.groupInput, {
 		'$': this.$,
-		'input': this.groupInput,
+		'align': 'top',
 		'label': ve.msg( 'visualeditor-dialog-reference-options-group-label' )
 	} );
 
@@ -69,7 +69,7 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
 
 	// Initialization
-	this.optionsFieldset.$element.append( this.groupLabel.$element, this.groupInput.$element );
+	this.optionsFieldset.addItems( [ this.groupField ] );
 	this.editPanel.$element.append( this.optionsFieldset.$element );
 	this.$body.append( this.editPanel.$element );
 	this.$foot.append( this.applyButton.$element );

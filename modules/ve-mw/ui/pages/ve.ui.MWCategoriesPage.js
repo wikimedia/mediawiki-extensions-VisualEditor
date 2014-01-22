@@ -46,11 +46,14 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	this.defaultSortInput = new OO.ui.TextInputWidget( {
 		'$': this.$, 'placeholder': this.fallbackDefaultSortKey
 	} );
-	this.defaultSortLabel = new OO.ui.InputLabelWidget( {
-		'$': this.$,
-		'input': this.defaultSortInput,
-		'label': ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-label' )
-	} );
+	this.defaultSort = new OO.ui.FieldLayout(
+		this.defaultSortInput,
+		{
+			'$': this.$,
+			'align': 'top',
+			'label': ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-label' )
+		}
+	);
 
 	// Events
 	this.metaList.connect( this, {
@@ -68,10 +71,7 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	// Initialization
 	this.categoryWidget.addItems( this.getCategoryItems() );
 	this.categoriesFieldset.$element.append( this.categoryWidget.$element );
-	this.categoryOptionsFieldset.$element.append(
-		this.defaultSortLabel.$element,
-		this.defaultSortInput.$element
-	);
+	this.categoryOptionsFieldset.addItems( [ this.defaultSort ] );
 	this.$element.append( this.categoriesFieldset.$element, this.categoryOptionsFieldset.$element );
 };
 

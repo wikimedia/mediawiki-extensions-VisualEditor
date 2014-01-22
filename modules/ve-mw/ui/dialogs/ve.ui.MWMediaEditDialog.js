@@ -224,7 +224,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'icon': 'parameter'
 	} );
 
-	this.sizeErrorLabel = new OO.ui.InputLabelWidget( {
+	this.sizeErrorLabel = new OO.ui.LabelWidget( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
 	} );

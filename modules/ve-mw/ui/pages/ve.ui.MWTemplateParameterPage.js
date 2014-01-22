@@ -25,16 +25,16 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 	// Properties
 	this.parameter = parameter;
 	this.spec = spec;
-	this.textInput = new OO.ui.TextInputWidget( {
+	this.valueInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,
 			'classes': [ 've-ui-mwTransclusionDialog-input' ]
 		} )
 		.setValue( this.parameter.getValue() )
 		.connect( this, { 'change': 'onTextInputChange' } );
-	this.inputLabel = new OO.ui.InputLabelWidget( {
+	this.valueField = new OO.ui.FieldLayout( this.valueInput, {
 		'$': this.$,
-		'input': this.textInput,
+		'align': 'top',
 		'label': this.spec.getParameterDescription( this.parameter.getName() ) || ''
 	} );
 	this.removeButton = new OO.ui.ButtonWidget( {
@@ -50,7 +50,7 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 		'$': this.$,
 		'label': this.spec.getParameterLabel( this.parameter.getName() ),
 		'icon': 'parameter',
-		'$content': this.inputLabel.$element.add( this.textInput.$element )
+		'items': [ this.valueInput ]
 	} );
 
 	// TODO: Use spec.required
@@ -91,7 +91,7 @@ ve.ui.MWTemplateParameterPage.prototype.setOutlineItem = function ( outlineItem 
 };
 
 ve.ui.MWTemplateParameterPage.prototype.onTextInputChange = function () {
-	this.parameter.setValue( this.textInput.getValue() );
+	this.parameter.setValue( this.valueInput.getValue() );
 };
 
 ve.ui.MWTemplateParameterPage.prototype.onRemoveButtonClick = function () {

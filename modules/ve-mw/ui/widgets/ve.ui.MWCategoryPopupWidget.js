@@ -34,11 +34,13 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget ( config ) {
 		'title': ve.msg( 'visualeditor-inspector-remove-tooltip' )
 	} );
 	this.sortKeyInput = new OO.ui.TextInputWidget( { '$': this.$ } );
-	this.sortKeyLabel = new OO.ui.InputLabelWidget(
-		{ '$': this.$, '$input': this.sortKeyInput, 'label': ve.msg ( 'visualeditor-dialog-meta-categories-sortkey-label' ) }
-	);
+	this.sortKeyField = new OO.ui.FieldLayout( this.sortKeyInput, {
+		'$': this.$,
+		'align': 'top',
+		'label': ve.msg ( 'visualeditor-dialog-meta-categories-sortkey-label' )
+	} );
 	this.$sortKeyForm = this.$( '<form>' ).addClass( 've-ui-mwCategoryPopupWidget-sortKeyForm' )
-		.append( this.sortKeyLabel.$element, this.sortKeyInput.$element );
+		.append( this.sortKeyField.$element );
 
 	// Events
 	this.connect( this, { 'hide': 'onHide' } );
