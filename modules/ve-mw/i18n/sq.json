@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Euriditi"
+            "Euriditi",
+            "G1m"
         ]
     },
     "tooltip-ca-createsource": "Krijo tekstin burimor të kësaj faqeje",
@@ -91,6 +92,7 @@
     "visualeditor-mwalienextensioninspector-title": "Shtojcë MediaWiki",
     "visualeditor-mweditmodesource-title": "Kalo në redaktimin e tekstit burimor",
     "visualeditor-mweditmodesource-warning": "Jeni duke kaluar në redaktimin e tekstit burimor.\nÇdo ndryshim që ju keni bërë në këtë dokument do të ruhet, por ju nuk do të mundni të riktheheni prapa në VisualEditor pa kryer ndryshimet apo pa ringarkuar faqen.\nDëshironi të vazhdoni?",
+    "visualeditor-mwgalleryinspector-title": "Galeria",
     "visualeditor-mwhieroinspector-title": "Hieroglife",
     "visualeditor-mwmathinspector-title": "LaTeX",
     "visualeditor-notification-created": "Faqja \"$1\" u krijua.",
