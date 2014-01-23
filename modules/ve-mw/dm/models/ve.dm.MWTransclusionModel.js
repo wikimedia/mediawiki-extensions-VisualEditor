@@ -98,28 +98,25 @@ ve.dm.MWTransclusionModel.prototype.load = function ( data ) {
  * @fires change
  */
 ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
-	var i, len, item, title, index,
-		remove = 0;
+	var i, len, item, title, index, remove;
 
 	for ( i = 0, len = queue.length; i < len; i++ ) {
+		remove = 0;
 		item = queue[i];
+
 		if ( item.add instanceof ve.dm.MWTemplateModel ) {
 			title = item.add.getTitle();
 			if ( hasOwn.call( specCache, title ) && specCache[title] ) {
 				item.add.getSpec().extend( specCache[title] );
 			}
 		}
+
 		// Auto-remove if already existing
-		index = ve.indexOf( item.add, this.parts );
-		if ( index !== -1 ) {
-			this.parts.splice( index, 1 );
-			item.add.disconnect( this );
-			this.emit( 'replace', item.add, null );
-		}
+		this.removePart( item.add );
+
 		// Add at index, or end if none was given
-		if ( item.index !== undefined ) {
-			index = item.index;
-		} else if ( item.remove ) {
+		index = item.index;
+		if ( index !== undefined && item.remove ) {
 			index = ve.indexOf( item.remove, this.parts );
 			if ( index !== -1 ) {
 				remove = 1;
@@ -136,6 +133,7 @@ ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 			item.remove.disconnect( this );
 		}
 		this.emit( 'replace', item.remove || null, item.add );
+
 		// Resolve promises
 		if ( item.deferred ) {
 			item.deferred.resolve();
