@@ -34,15 +34,16 @@ ve.dm.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
 
 ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = ['mw:WikiLink'];
 
-ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements ) {
+ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
 
 	function regexEscape( str ) {
 		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
 	}
 
 	var matches, normalizedTitle,
+		doc = converter.getTargetHtmlDocument(),
 		// Protocol relative base
-		relativeBase = new mw.Uri(  mw.config.get( 'wgArticlePath' ) ).toString().replace( /^https?:/, '' ),
+		relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).toString().replace( /^https?:/, '' ),
 		relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) ),
 		href = domElements[0].getAttribute( 'href' ),
 		// Protocol relative href
