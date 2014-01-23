@@ -27,11 +27,6 @@ ve.dm.MWImageCaptionNode.static.matchTagNames = [];
 
 ve.dm.MWImageCaptionNode.static.parentNodeTypes = [ 'mwBlockImage' ];
 
-ve.dm.MWImageCaptionNode.static.toDataElement = function () {
-	// Probably not needed
-	return { 'type': 'mwImageCaption' };
-};
-
 ve.dm.MWImageCaptionNode.static.toDomElements = function ( dataElement, doc ) {
 	return [ doc.createElement( 'figcaption' ) ];
 };

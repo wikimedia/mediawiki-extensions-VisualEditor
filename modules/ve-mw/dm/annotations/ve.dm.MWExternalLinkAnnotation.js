@@ -37,7 +37,6 @@ ve.dm.MWExternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:ExtLink' ];
 
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements ) {
 	var parentResult = ve.dm.LinkAnnotation.static.toDataElement.apply( this, arguments );
-	parentResult.type = 'link/mwExternal';
 	parentResult.attributes.rel = domElements[0].getAttribute( 'rel' );
 	return parentResult;
 };

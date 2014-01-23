@@ -64,7 +64,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 	normalizedTitle = ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( matches[2] );
 
 	return {
-		'type': 'link/mwInternal',
+		'type': this.name,
 		'attributes': {
 			'hrefPrefix': matches[1],
 			'title': decodeURIComponent( matches[2] ).replace( /_/g, ' ' ),

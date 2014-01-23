@@ -38,7 +38,7 @@ ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements ) {
 		matches = href.match( /^((?:\.\.?\/)*)(.*?)(?:#(.*))?$/ ),
 		rawSortkey = matches[3] || '';
 	return {
-		'type': 'mwCategory',
+		'type': this.name,
 		'attributes': {
 			'hrefPrefix': matches[1],
 			'category': decodeURIComponent( matches[2] ).replace( /_/g, ' ' ),

@@ -29,10 +29,6 @@ ve.dm.MWPreformattedNode.static.name = 'mwPreformatted';
 
 ve.dm.MWPreformattedNode.static.suggestedParentNodeTypes = [ 'document' ];
 
-ve.dm.MWPreformattedNode.static.toDataElement = function () {
-	return { 'type': 'mwPreformatted' };
-};
-
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWPreformattedNode );

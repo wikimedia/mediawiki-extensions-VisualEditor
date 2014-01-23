@@ -32,10 +32,6 @@ ve.dm.MWTOCForceMetaItem.static.matchTagNames = [ 'meta' ];
 
 ve.dm.MWTOCForceMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/forcetoc' ];
 
-ve.dm.MWTOCForceMetaItem.static.toDataElement = function () {
-	return { 'type': this.name };
-};
-
 ve.dm.MWTOCForceMetaItem.static.toDomElements = function ( dataElement, doc ) {
 	var meta = doc.createElement( 'meta' );
 	meta.setAttribute( 'property', 'mw:PageProp/forcetoc' );
