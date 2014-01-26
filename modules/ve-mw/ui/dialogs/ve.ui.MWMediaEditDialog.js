@@ -24,12 +24,8 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( windowSet, config ) {
 	// Properties
 	this.mediaNode = null;
 	this.captionNode = null;
-	// Cache for image original size, if requested
-	this.mediaSize = {};
+	this.store = null;
 	this.filename = null;
-	// GUI properties
-	this.inputs = {};
-	this.fieldsets = {};
 };
 
 /* Inheritance */
@@ -132,14 +128,14 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	// Define fieldsets for image settings
 
 	// Caption
-	this.fieldsets.caption = new OO.ui.FieldsetLayout( {
+	this.captionFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-media-content-section' ),
 		'icon': 'parameter'
 	} );
 
 	// Size
-	this.fieldsets.size = new OO.ui.FieldsetLayout( {
+	this.sizeFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-media-size-section' ),
 		'icon': 'parameter'
@@ -150,12 +146,12 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
 	} );
 
-	this.inputs.size = new ve.ui.MediaSizeWidget( {
+	this.sizeWidget = new ve.ui.MediaSizeWidget( {
 		'$': this.$
 	} );
 
-	this.fieldsets.size.$element.append( [
-		this.inputs.size.$element,
+	this.sizeFieldset.$element.append( [
+		this.sizeWidget.$element,
 		this.sizeErrorLabel.$element,
 		this.$spinner
 	] );
@@ -172,8 +168,8 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
 
 	// Initialization
-	this.generalSettingsPage.$element.append( this.fieldsets.caption.$element );
-	this.advancedSettingsPage.$element.append( this.fieldsets.size.$element );
+	this.generalSettingsPage.$element.append( this.captionFieldset.$element );
+	this.advancedSettingsPage.$element.append( this.sizeFieldset.$element );
 
 	this.$body.append( this.bookletLayout.$element );
 	this.$foot.append( this.applyButton.$element );
@@ -183,16 +179,13 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
  * Get the original size of the media object from the API, if it exists
  * @returns {jQuery.Promise}
  */
-ve.ui.MWMediaEditDialog.prototype.getMediaSize = function () {
-	var rawfilename = this.mediaNode.getAttribute( 'resource' ),
+ve.ui.MWMediaEditDialog.prototype.getOriginalDimensions = function () {
+	var index = this.store.indexOfHash( this.constructor.static.getSizeHash( this.filename ) ),
 		deferred = $.Deferred();
 
-	// Strip the raw filename up to the 'File:' namespage
-	this.filename = rawfilename.substring( rawfilename.indexOf( 'File:' ) );
-
-	if ( this.mediaSize && !$.isEmptyObject( this.mediaSize[this.filename] ) ) {
+	if ( index ) {
 		// The image size is already cached
-		deferred.resolve( this.mediaSize[this.filename] );
+		deferred.resolve( this.store.value( index ) );
 	} else {
 		// Look for the media size through the API
 		$.ajax( {
@@ -232,7 +225,7 @@ ve.ui.MWMediaEditDialog.prototype.getMediaSize = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
-	var attrs, newDoc,
+	var attrs, newDoc, originalSize, resource,
 		dimensions = {},
 		doc = this.surface.getModel().getDocument();
 
@@ -242,6 +235,12 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	// Properties
 	this.mediaNode = this.surface.getView().getFocusedNode().getModel();
 	this.captionNode = this.mediaNode.getCaptionNode();
+	this.store = this.surface.getModel().getDocument().getStore();
+
+	// Strip the raw filename up to the 'File:' namespage
+	resource = this.mediaNode.getAttribute( 'resource' );
+	this.filename = resource.substring( resource.indexOf( 'File:' ) );
+
 	if ( this.captionNode && this.captionNode.getLength() > 0 ) {
 		newDoc = doc.cloneFromRange( this.captionNode.getRange() );
 	} else {
@@ -268,10 +267,10 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.$spinner.show();
 
 	// Save original size for later calculations
-	this.getMediaSize().done( ve.bind( function ( sizeObj ) {
+	this.getOriginalDimensions().done( ve.bind( function ( sizeObj ) {
 		if ( sizeObj && sizeObj.width && sizeObj.height ) {
 			// Set the original dimensions in the widget
-			this.inputs.size.setOriginalDimensions( {
+			this.sizeWidget.setOriginalDimensions( {
 				'width': sizeObj.width,
 				'height': sizeObj.height
 			} );
@@ -279,18 +278,19 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 			// Check if we need to limit the size
 			if ( sizeObj.mediatype === 'BITMAP' ) {
 				// Set the max dimensions
-				this.inputs.size.setMaxDimensions( {
+				this.sizeWidget.setMaxDimensions( {
 					'width': sizeObj.width,
 					'height': sizeObj.height
 				} );
 			}
 
-			// Cache the size and mediatype
-			this.mediaSize[this.filename] = {
+			// Cache the originalSize and mediatype
+			originalSize = {
 				'height': sizeObj.height,
 				'width': sizeObj.width,
 				'mediatype': sizeObj.mediatype
 			};
+			this.store.index( originalSize, this.constructor.static.getSizeHash( this.filename ) );
 		} else {
 			// Original dimensions couldn't be fetched. Display an error message
 			this.sizeErrorLabel.$element.hide();
@@ -304,13 +304,13 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		if ( attrs.width !== undefined && Number( attrs.width ) > 0 ) {
 			dimensions.width = attrs.width;
 		}
-		this.inputs.size.setDimensions( dimensions );
+		this.sizeWidget.setDimensions( dimensions );
 
 		this.$spinner.hide();
 	}, this ) );
 
 	// Initialization
-	this.fieldsets.caption.$element.append( this.captionSurface.$element );
+	this.captionFieldset.$element.append( this.captionSurface.$element );
 	this.captionSurface.initialize();
 };
 
@@ -344,8 +344,8 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 		);
 
 		// Change attributes only if the values are valid
-		if ( this.inputs.size.isValid() ) {
-			attrs = this.inputs.size.getDimensions();
+		if ( this.sizeWidget.isValid() ) {
+			attrs = this.sizeWidget.getDimensions();
 		}
 
 		surfaceModel.change(
@@ -354,7 +354,7 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 	}
 
 	// Clean size values
-	this.inputs.size.clear();
+	this.sizeWidget.clear();
 
 	// Cleanup
 	this.captionSurface.destroy();
@@ -363,6 +363,18 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 
 	// Parent method
 	ve.ui.MWDialog.prototype.teardown.call( this, data );
+};
+
+/* Static methods */
+
+/**
+ * Get the store hash for the original dimensions of a given filename
+ *
+ * @param {string} filename Filename
+ * @returns {string} Store hash
+ */
+ve.ui.MWMediaEditDialog.static.getSizeHash = function ( filename ) {
+	return 'MWOriginalSize:' + filename;
 };
 
 /* Registration */
