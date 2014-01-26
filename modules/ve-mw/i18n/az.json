@@ -3,7 +3,8 @@
         "authors": [
             "Cekli829",
             "Interfase",
-            "Jduranboger"
+            "Jduranboger",
+            "Eminn"
         ]
     },
     "tooltip-ca-createsource": "Cari kod redaktorunda səhifəni yarat",
@@ -83,6 +84,7 @@
     "visualeditor-mainnamespacepagelink": "Layihə:Əsas adlar fəzası",
     "visualeditor-media-input-placeholder": "Media üçün axtarış",
     "visualeditor-meta-tool": "Səhifə parametrləri",
+    "visualeditor-mwgalleryinspector-title": "Qalereya",
     "visualeditor-mwhieroinspector-title": "Heroqlifli yazı",
     "visualeditor-mwmathinspector-title": "LaTeX",
     "visualeditor-notification-created": "$1 yaradıldı.",

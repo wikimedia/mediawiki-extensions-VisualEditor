@@ -14,7 +14,8 @@
             "PoLuX124",
             "Ralgis",
             "Thehelpfulone",
-            "Ciencia Al Poder"
+            "Ciencia Al Poder",
+            "Carlitosag"
         ]
     },
     "tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -39,6 +40,10 @@
     "visualeditor-dialog-media-content-section": "Leyenda",
     "visualeditor-dialog-media-insert-button": "Insertar multimedia",
     "visualeditor-dialog-media-insert-title": "Insertar multimedia",
+    "visualeditor-dialog-media-page-advanced": "Configuraciones avanzadas",
+    "visualeditor-dialog-media-page-general": "Configuraciones generales",
+    "visualeditor-dialog-media-size-originalsize-error": "No se pudo recuperar el tamaño original del archivo.",
+    "visualeditor-dialog-media-size-section": "Tamaño de la imagen",
     "visualeditor-dialog-media-title": "Configurar archivo multimedia",
     "visualeditor-dialog-meta-categories-category": "Categoría",
     "visualeditor-dialog-meta-categories-data-label": "Categorías",

@@ -11,7 +11,8 @@
             "Reza1615",
             "Taha",
             "درفش کاویانی",
-            "Mcuteangel"
+            "Mcuteangel",
+            "Fatemi127"
         ]
     },
     "tooltip-ca-createsource": "ساخت کد متن این صفحه.",
@@ -36,6 +37,9 @@
     "visualeditor-dialog-media-content-section": "برنگاشت",
     "visualeditor-dialog-media-insert-button": "درج رسانه",
     "visualeditor-dialog-media-insert-title": "درج رسانه",
+    "visualeditor-dialog-media-page-advanced": "تنظیمات پیشرفته",
+    "visualeditor-dialog-media-page-general": "تنظیمات عمومی",
+    "visualeditor-dialog-media-size-section": "اندازهٔ تصویر",
     "visualeditor-dialog-media-title": "تنظیمات رسانه",
     "visualeditor-dialog-meta-categories-category": "رده",
     "visualeditor-dialog-meta-categories-data-label": "رده‌ها",
