@@ -196,13 +196,15 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
  */
 ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	var newDoc,
-		doc = this.surface.getModel().getDocument();
+		dialog = this,
+		doc = this.surface.getModel().getDocument(),
+		mediaNodeView = this.surface.getView().getFocusedNode();
 
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
 	// Properties
-	this.mediaNode = this.surface.getView().getFocusedNode().getModel();
+	this.mediaNode = mediaNodeView.getModel();
 	this.captionNode = this.mediaNode.getCaptionNode();
 	this.store = this.surface.getModel().getDocument().getStore();
 
@@ -227,31 +229,20 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		}
 	);
 
-	// Set initial size in inputs
-	this.sizeWidget.setDimensions( {
-		'width': this.mediaNode.getAttribute( 'width' ),
-		'height': this.mediaNode.getAttribute( 'height' ),
-	} );
+	this.sizeWidget.setPropertiesFromScalable( mediaNodeView );
 
-	// Save original size for later calculations
-	this.mediaNode.getImageInfo().done( ve.bind( function ( imageInfo ) {
-		if ( imageInfo && imageInfo.width && imageInfo.height ) {
-			var dimensions = {
-				'width': imageInfo.width,
-				'height': imageInfo.height
-			};
-			// Set the original dimensions in the widget
-			this.sizeWidget.setOriginalDimensions( dimensions );
-
-			// Bitmaps also have a maximum size of originalDimensions
-			if ( imageInfo.mediatype === 'BITMAP' ) {
-				this.sizeWidget.setMaxDimensions( dimensions );
-			}
-		} else {
-			// Original dimensions couldn't be fetched. Display an error message
-			this.sizeErrorLabel.$element.hide();
-		}
-	}, this ) );
+	if ( !mediaNodeView.getOriginalDimensions() ) {
+		mediaNodeView.fetchDimensions()
+			.done( function () {
+				dialog.sizeWidget.setOriginalDimensions( mediaNodeView.getOriginalDimensions() );
+				if ( mediaNodeView.getMaxDimensions() ) {
+					dialog.sizeWidget.setMaxDimensions( mediaNodeView.getMaxDimensions() );
+				}
+			} )
+			.fail( function () {
+				dialog.sizeErrorLabel.$element.show();
+			} );
+	}
 
 	// Initialization
 	this.captionFieldset.$element.append( this.captionSurface.$element );
@@ -288,17 +279,14 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 		);
 
 		// Change attributes only if the values are valid
-		if ( this.sizeWidget.isValid() ) {
-			attrs = this.sizeWidget.getDimensions();
+		if ( this.sizeWidget.isCurrentDimensionsValid() ) {
+			attrs = this.sizeWidget.getCurrentDimensions();
 		}
 
 		surfaceModel.change(
 			ve.dm.Transaction.newFromAttributeChanges( doc, this.mediaNode.getOffset(), attrs )
 		);
 	}
-
-	// Clean size values
-	this.sizeWidget.clear();
 
 	// Cleanup
 	this.captionSurface.destroy();

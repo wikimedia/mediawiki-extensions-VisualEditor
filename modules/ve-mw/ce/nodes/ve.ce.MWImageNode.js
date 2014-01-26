@@ -22,6 +22,11 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
+	config = ve.extendObject( {
+		'enforceMax': false,
+		'minDimensions': { 'width': 1, 'height': 1 }
+	}, config );
+
 	// Parent constructor
 	ve.ce.GeneratedContentNode.call( this );
 
@@ -33,6 +38,9 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	ve.ce.FocusableNode.call( this, this.$figure, config );
 	ve.ce.RelocatableNode.call( this, this.$figure, config );
 	ve.ce.MWResizableNode.call( this, this.$image, config );
+
+	// Events
+	this.connect( this, { 'focus': 'onFocus' } );
 };
 
 /* Inheritance */
@@ -60,9 +68,9 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 			'action': 'query',
 			'prop': 'imageinfo',
 			'iiprop': 'url',
-			'iiurlwidth': this.model.getAttribute( 'width' ),
-			'iiurlheight': this.model.getAttribute( 'height' ),
-			'titles': this.model.getAttribute( 'resource' ).replace( /^(.+\/)*/, '' )
+			'iiurlwidth': this.getModel().getAttribute( 'width' ),
+			'iiurlheight': this.getModel().getAttribute( 'height' ),
+			'titles': this.getModel().getAttribute( 'resource' ).replace( /^(.+\/)*/, '' )
 	} )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );
@@ -106,4 +114,34 @@ ve.ce.MWImageNode.prototype.render = function ( generateContents ) {
  */
 ve.ce.MWImageNode.prototype.onParseError = function ( deferred ) {
 	deferred.reject();
+};
+
+/**
+ * Handle the node being focussed
+ */
+ve.ce.MWImageNode.prototype.onFocus = function () {
+	// Fetch the original dimensions the first time the node is focussed
+	if ( !this.originalDimensions ) {
+		this.fetchDimensions();
+	}
+};
+
+/**
+ * Fetch the original dimensions from the API
+ *
+ * @returns {jQuery.Promise} Promise from getImageInfo
+ */
+ve.ce.MWImageNode.prototype.fetchDimensions = function () {
+	return this.getModel().getImageInfo()
+		.done( ve.bind( function ( imageInfo ) {
+			var dimensions = {
+				'width': imageInfo.width,
+				'height': imageInfo.height
+			};
+			this.setOriginalDimensions( dimensions );
+			// Bitmaps can't be upscaled
+			if ( imageInfo.mediatype === 'BITMAP' ) {
+				this.setMaxDimensions( dimensions );
+			}
+		}, this ) );
 };

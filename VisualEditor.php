@@ -284,6 +284,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			// ve
 			'lib/ve/modules/ve/ve.Range.js',
+			'lib/ve/modules/ve/ve.Scalable.js',
 			'lib/ve/modules/ve/ve.Node.js',
 			'lib/ve/modules/ve/ve.BranchNode.js',
 			'lib/ve/modules/ve/ve.LeafNode.js',

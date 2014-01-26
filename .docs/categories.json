@@ -29,7 +29,8 @@
 					"ve.Node",
 					"ve.BranchNode",
 					"ve.LeafNode",
-					"ve.Document"
+					"ve.Document",
+					"ve.Scalable"
 				]
 			},
 			{
