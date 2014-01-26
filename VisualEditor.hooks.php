@@ -309,7 +309,7 @@ class VisualEditorHooks {
 	 * Adds extra variables to the page config.
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
-		global $wgStylePath;
+		global $wgStylePath, $wgSVGMaxSize;
 
 		$pageLanguage = $out->getTitle()->getPageLanguage();
 
@@ -320,7 +320,8 @@ class VisualEditorHooks {
 				'/common/images/magnify-clip' .
 				( $pageLanguage->isRTL() ? '-rtl' : '' ) . '.png',
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
-			'pageLanguageDir' => $pageLanguage->getDir()
+			'pageLanguageDir' => $pageLanguage->getDir(),
+			'svgMaxSize' => $wgSVGMaxSize,
 		);
 
 		return true;
