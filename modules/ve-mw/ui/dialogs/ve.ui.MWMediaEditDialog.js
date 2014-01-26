@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 /**
  * Dialog for editing MediaWiki media objects.
  *
@@ -25,7 +23,6 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( windowSet, config ) {
 	this.mediaNode = null;
 	this.captionNode = null;
 	this.store = null;
-	this.filename = null;
 };
 
 /* Inheritance */
@@ -124,10 +121,6 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
-	// TODO: Create a ve-wide spinner class instead of the local
-	// classes using spinners
-	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
-
 	// Set up the booklet layout
 	this.bookletLayout = new OO.ui.BookletLayout( {
 		'$': this.$,
@@ -177,11 +170,9 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 
 	this.sizeFieldset.$element.append( [
 		this.sizeWidget.$element,
-		this.sizeErrorLabel.$element,
-		this.$spinner
+		this.sizeErrorLabel.$element
 	] );
 	this.sizeErrorLabel.$element.hide();
-	this.$spinner.hide();
 
 	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
@@ -201,57 +192,10 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 };
 
 /**
- * Get the original size of the media object from the API, if it exists
- * @returns {jQuery.Promise}
- */
-ve.ui.MWMediaEditDialog.prototype.getOriginalDimensions = function () {
-	var index = this.store.indexOfHash( this.constructor.static.getSizeHash( this.filename ) ),
-		deferred = $.Deferred();
-
-	if ( index ) {
-		// The image size is already cached
-		deferred.resolve( this.store.value( index ) );
-	} else {
-		// Look for the media size through the API
-		$.ajax( {
-			'url': mw.util.wikiScript( 'api' ),
-			'data': {
-				'action': 'query',
-				'prop': 'imageinfo',
-				'indexpageids': '1',
-				'iiprop': 'size|mediatype',
-				'format': 'json',
-				'titles': this.filename
-			},
-			'dataType': 'json',
-			'type': 'POST',
-			// Wait up to 100 seconds before giving up
-			'timeout': 100000,
-			'cache': false
-		} )
-		.done( function ( resp ) {
-			var imginfo = resp.query.pages[ resp.query.pageids[0] ];
-
-			// Resolve with the size parameters
-			deferred.resolve( {
-				'height': imginfo.imageinfo[0].height,
-				'width': imginfo.imageinfo[0].width,
-				'mediatype': imginfo.imageinfo[0].mediatype
-			} );
-		} )
-		.fail( function () {
-			deferred.resolve( false );
-		} );
-	}
-	return deferred.promise();
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
-	var attrs, newDoc, originalSize, resource,
-		dimensions = {},
+	var newDoc,
 		doc = this.surface.getModel().getDocument();
 
 	// Parent method
@@ -261,10 +205,6 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.mediaNode = this.surface.getView().getFocusedNode().getModel();
 	this.captionNode = this.mediaNode.getCaptionNode();
 	this.store = this.surface.getModel().getDocument().getStore();
-
-	// Strip the raw filename up to the 'File:' namespage
-	resource = this.mediaNode.getAttribute( 'resource' );
-	this.filename = resource.substring( resource.indexOf( 'File:' ) );
 
 	if ( this.captionNode && this.captionNode.getLength() > 0 ) {
 		newDoc = doc.cloneFromRange( this.captionNode.getRange() );
@@ -287,52 +227,30 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		}
 	);
 
-	attrs = this.mediaNode.getAttributes();
-
-	// Show the spinner
-	this.$spinner.show();
+	// Set initial size in inputs
+	this.sizeWidget.setDimensions( {
+		'width': this.mediaNode.getAttribute( 'width' ),
+		'height': this.mediaNode.getAttribute( 'height' ),
+	} );
 
 	// Save original size for later calculations
-	this.getOriginalDimensions().done( ve.bind( function ( sizeObj ) {
-		if ( sizeObj && sizeObj.width && sizeObj.height ) {
-			// Set the original dimensions in the widget
-			this.sizeWidget.setOriginalDimensions( {
-				'width': sizeObj.width,
-				'height': sizeObj.height
-			} );
-
-			// Check if we need to limit the size
-			if ( sizeObj.mediatype === 'BITMAP' ) {
-				// Set the max dimensions
-				this.sizeWidget.setMaxDimensions( {
-					'width': sizeObj.width,
-					'height': sizeObj.height
-				} );
-			}
-
-			// Cache the originalSize and mediatype
-			originalSize = {
-				'height': sizeObj.height,
-				'width': sizeObj.width,
-				'mediatype': sizeObj.mediatype
+	this.mediaNode.getImageInfo().done( ve.bind( function ( imageInfo ) {
+		if ( imageInfo && imageInfo.width && imageInfo.height ) {
+			var dimensions = {
+				'width': imageInfo.width,
+				'height': imageInfo.height
 			};
-			this.store.index( originalSize, this.constructor.static.getSizeHash( this.filename ) );
+			// Set the original dimensions in the widget
+			this.sizeWidget.setOriginalDimensions( dimensions );
+
+			// Bitmaps also have a maximum size of originalDimensions
+			if ( imageInfo.mediatype === 'BITMAP' ) {
+				this.sizeWidget.setMaxDimensions( dimensions );
+			}
 		} else {
 			// Original dimensions couldn't be fetched. Display an error message
 			this.sizeErrorLabel.$element.hide();
 		}
-
-		// Set initial size in inputs
-		dimensions = {};
-		if ( attrs.height !== undefined && Number( attrs.height ) > 0 ) {
-			dimensions.height = attrs.height;
-		}
-		if ( attrs.width !== undefined && Number( attrs.width ) > 0 ) {
-			dimensions.width = attrs.width;
-		}
-		this.sizeWidget.setDimensions( dimensions );
-
-		this.$spinner.hide();
 	}, this ) );
 
 	// Initialization
@@ -389,18 +307,6 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 
 	// Parent method
 	ve.ui.MWDialog.prototype.teardown.call( this, data );
-};
-
-/* Static methods */
-
-/**
- * Get the store hash for the original dimensions of a given filename
- *
- * @param {string} filename Filename
- * @returns {string} Store hash
- */
-ve.ui.MWMediaEditDialog.static.getSizeHash = function ( filename ) {
-	return 'MWOriginalSize:' + filename;
 };
 
 /* Registration */
