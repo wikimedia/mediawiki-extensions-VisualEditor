@@ -10,7 +10,7 @@
  *
  * @class
  * @abstract
- * @extends {ve.ce.ResizableNode}
+ * @extends ve.ce.ResizableNode
  *
  * @constructor
  * @param {jQuery} [$resizable=this.$element] Resizable DOM element
