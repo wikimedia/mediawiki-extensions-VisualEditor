@@ -38,6 +38,12 @@ ve.dm.MWExtensionNode.static.matchTagNames = null;
 
 ve.dm.MWExtensionNode.static.isContent = true;
 
+/**
+ * HTML tag name.
+ * @static
+ * @property {string}
+ * @inheritable
+ */
 ve.dm.MWExtensionNode.static.tagName = null;
 
 /**

@@ -28,6 +28,8 @@ ve.dm.MWGalleryNode.static.name = 'mwGallery';
 
 ve.dm.MWGalleryNode.static.extensionName = 'gallery';
 
+ve.dm.MWGalleryNode.static.tagName = 'ul';
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWGalleryNode );
