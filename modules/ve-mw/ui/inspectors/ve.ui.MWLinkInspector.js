@@ -41,16 +41,17 @@ ve.ui.MWLinkInspector.static.linkTargetInputWidget = ve.ui.MWLinkTargetInputWidg
 /* Methods */
 
 /**
- * Gets an annotation object from a target.
+ * Gets an annotation object from a fragment.
  *
  * The type of link is automatically detected based on some crude heuristics.
  *
  * @method
- * @param {string} target Link target
+ * @param {ve.dm.SurfaceFragment} fragment Current selection
  * @returns {ve.dm.MWInternalLinkAnnotation|ve.dm.MWExternalLinkAnnotation|null}
  */
-ve.ui.MWLinkInspector.prototype.getAnnotationFromText = function ( target ) {
-	var title = mw.Title.newFromText( target );
+ve.ui.MWLinkInspector.prototype.getAnnotationFromFragment = function ( fragment ) {
+	var target = fragment.getText(),
+		title = mw.Title.newFromText( target );
 
 	// Figure out if this is an internal or external link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
