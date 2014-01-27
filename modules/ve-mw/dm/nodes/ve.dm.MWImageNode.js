@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 /**
  * DataModel generated content node.
  *
@@ -44,44 +42,35 @@ ve.dm.MWImageNode.prototype.getImageInfo = function () {
 		deferred.resolve( store.value( index ) );
 	} else {
 		// Look for the media size through the API
-		$.ajax( {
-			'url': mw.util.wikiScript( 'api' ),
-			'data': {
-				'action': 'query',
-				'prop': 'imageinfo',
-				'indexpageids': '1',
-				'iiprop': 'size|mediatype',
-				'format': 'json',
-				'titles': this.getFilename()
-			},
-			'dataType': 'json',
-			'type': 'POST',
-			// Wait up to 100 seconds before giving up
-			'timeout': 100000,
-			'cache': false
-		} )
-		.done( function ( resp ) {
-			var originalSize,
-				page = resp.query && resp.query.pages[resp.query.pageids[0]],
-				imageinfo = page && page.imageinfo && page.imageinfo[0];
+		ve.init.mw.Target.static.apiRequest( {
+			'action': 'query',
+			'prop': 'imageinfo',
+			'indexpageids': '1',
+			'iiprop': 'size|mediatype',
+			'titles': this.getFilename()
+		}, { 'type': 'POST' } )
+			.done( function ( resp ) {
+				var originalSize,
+					page = resp.query && resp.query.pages[resp.query.pageids[0]],
+					imageinfo = page && page.imageinfo && page.imageinfo[0];
 
-			if ( imageinfo ) {
-				originalSize = {
-					'width': imageinfo.width,
-					'height': imageinfo.height,
-					'mediatype': imageinfo.mediatype
-				};
+				if ( imageinfo ) {
+					originalSize = {
+						'width': imageinfo.width,
+						'height': imageinfo.height,
+						'mediatype': imageinfo.mediatype
+					};
 
-				// Store result and resolve
-				store.index( originalSize, node.getSizeHash() );
-				deferred.resolve( originalSize );
-			} else {
+					// Store result and resolve
+					store.index( originalSize, node.getSizeHash() );
+					deferred.resolve( originalSize );
+				} else {
 				deferred.reject();
-			}
-		} )
-		.fail( function () {
-			deferred.reject();
-		} );
+				}
+			} )
+			.fail( function () {
+				deferred.reject();
+			} );
 	}
 	return deferred.promise();
 };
