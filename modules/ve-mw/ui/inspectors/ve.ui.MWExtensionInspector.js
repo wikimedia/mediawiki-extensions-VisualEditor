@@ -67,6 +67,10 @@ ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
 
 	// Initialization
 	this.node = this.surface.getView().getFocusedNode();
+	// Make sure we're inspecting the right type of node
+	if ( !( this.node instanceof this.constructor.static.nodeView ) ) {
+		this.node = null;
+	}
 	this.input.setValue( this.node ? this.node.getModel().getAttribute( 'mw' ).body.extsrc : '' );
 
 	// By default, the direction of the input element should be the same
