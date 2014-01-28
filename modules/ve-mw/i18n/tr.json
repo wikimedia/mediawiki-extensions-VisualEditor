@@ -8,7 +8,8 @@
             "Rapsar",
             "Talha Samil Cakir",
             "TurkishStyles",
-            "Meelo"
+            "Meelo",
+            "Ceas08"
         ]
     },
     "tooltip-ca-createsource": "Bu sayfanın kaynak kodunu oluşturun",
@@ -33,6 +34,8 @@
     "visualeditor-dialog-media-content-section": "Başlık",
     "visualeditor-dialog-media-insert-button": "Dosya ekle",
     "visualeditor-dialog-media-insert-title": "Dosya ekle",
+    "visualeditor-dialog-media-page-advanced": "Gelişmiş ayarlar",
+    "visualeditor-dialog-media-size-section": "Resim boyutu",
     "visualeditor-dialog-media-title": "Dosya ayarları",
     "visualeditor-dialog-meta-categories-category": "Kategori",
     "visualeditor-dialog-meta-categories-data-label": "Kategoriler",
