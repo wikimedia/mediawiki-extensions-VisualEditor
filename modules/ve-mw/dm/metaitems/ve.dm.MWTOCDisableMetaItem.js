@@ -32,10 +32,6 @@ ve.dm.MWTOCDisableMetaItem.static.matchTagNames = [ 'meta' ];
 
 ve.dm.MWTOCDisableMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/notoc' ];
 
-ve.dm.MWTOCDisableMetaItem.static.toDataElement = function () {
-	return { 'type': this.name };
-};
-
 ve.dm.MWTOCDisableMetaItem.static.toDomElements = function ( dataElement, doc ) {
 	var meta = doc.createElement( 'meta' );
 	meta.setAttribute( 'property', 'mw:PageProp/notoc' );

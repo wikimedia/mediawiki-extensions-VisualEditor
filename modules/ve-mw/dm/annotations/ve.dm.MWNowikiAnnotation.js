@@ -33,7 +33,7 @@ ve.dm.MWNowikiAnnotation.static.matchRdfaTypes = [ 'mw:Nowiki' ];
 
 ve.dm.MWNowikiAnnotation.static.toDataElement = function ( domElements ) {
 	return {
-		'type': 'mwNowiki',
+		'type': this.name,
 		'attributes': {
 			'originalDomElements': ve.copy( domElements )
 		}

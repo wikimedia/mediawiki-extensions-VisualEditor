@@ -29,12 +29,6 @@ ve.dm.MWHeadingNode.static.name = 'mwHeading';
 
 ve.dm.MWHeadingNode.static.suggestedParentNodeTypes = [ 'document' ];
 
-ve.dm.MWHeadingNode.static.toDataElement = function () {
-	var parentElement = ve.dm.HeadingNode.static.toDataElement.apply( this, arguments );
-	parentElement.type = 'mwHeading';
-	return parentElement;
-};
-
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWHeadingNode );
