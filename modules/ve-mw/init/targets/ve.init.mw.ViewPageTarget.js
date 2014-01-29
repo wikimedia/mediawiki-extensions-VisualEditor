@@ -248,7 +248,8 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
  */
 ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( response, status ) {
 	// Don't show an error if the load was manually aborted
-	if ( status !== 'abort' && confirm( ve.msg( 'visualeditor-loadwarning', status ) ) ) {
+	// The response.status check here is to catch aborts triggered by navigation away from the page
+	if ( status !== 'abort' && response.status !== 0 && confirm( ve.msg( 'visualeditor-loadwarning', status ) ) ) {
 		this.load();
 	} else {
 		this.activating = false;
