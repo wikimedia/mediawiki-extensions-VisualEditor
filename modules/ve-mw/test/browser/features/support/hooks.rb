@@ -1,7 +1,3 @@
-at_exit do
-  $browser.close unless ENV["KEEP_BROWSER_OPEN"] == "true"
-end
-
 #This is for the Headings test
 Before("@edit_user_page") do
   if (!$edit_user_page or !(ENV["REUSE_BROWSER"] == "true")) and @browser
