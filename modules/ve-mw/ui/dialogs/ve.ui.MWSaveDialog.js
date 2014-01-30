@@ -360,6 +360,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		),
 		'flags': ['constructive']
 	} );
+	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
+		this.saveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+	}
 	this.saveButton.connect( this, { 'click': [ 'emit', 'save' ] } );
 
 	// Review button for "save" panel
