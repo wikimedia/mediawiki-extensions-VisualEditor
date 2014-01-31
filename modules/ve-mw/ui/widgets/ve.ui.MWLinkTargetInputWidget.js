@@ -84,7 +84,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
  * @param {Mixed} data Response from server
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
-	return ve.isArray( data ) && data.length ? data[1] : [];
+	return data[1] || [];
 };
 
 /**
