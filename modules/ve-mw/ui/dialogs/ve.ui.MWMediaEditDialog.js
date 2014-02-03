@@ -90,6 +90,27 @@ ve.ui.MWMediaEditDialog.static.surfaceCommands = [
 	'pasteSpecial'
 ];
 
+ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
+	ve.copy( ve.init.mw.ViewPageTarget.static.pasteRules ),
+	{
+		'all': {
+			'blacklist': OO.simpleArrayUnion(
+				ve.getProp( ve.init.mw.ViewPageTarget.static.pasteRules, 'all', 'blacklist' ) || [],
+				[
+					// Tables (but not lists) are possible in wikitext with a leading
+					// line break but we prevent creating these with the UI
+					'list', 'listItem', 'definitionList', 'definitionListItem',
+					'table', 'tableCaption', 'tableSection', 'tableRow', 'tableCell'
+				]
+			),
+			// Headings are also possible, but discouraged
+			'conversions': {
+				'mwHeading': 'paragraph'
+			}
+		}
+	}
+);
+
 /* Methods */
 
 /**
@@ -257,7 +278,8 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		{
 			'$': this.$,
 			'tools': this.constructor.static.toolbarGroups,
-			'commands': this.constructor.static.surfaceCommands
+			'commands': this.constructor.static.surfaceCommands,
+			'pasteRules': this.constructor.static.pasteRules
 		}
 	);
 

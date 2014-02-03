@@ -87,6 +87,29 @@ ve.ui.MWReferenceDialog.static.surfaceCommands = [
 	'pasteSpecial'
 ];
 
+ve.ui.MWReferenceDialog.static.pasteRules = ve.extendObject(
+	ve.copy( ve.init.mw.ViewPageTarget.static.pasteRules ),
+	{
+		'all': {
+			'blacklist': OO.simpleArrayUnion(
+				ve.getProp( ve.init.mw.ViewPageTarget.static.pasteRules, 'all', 'blacklist' ) || [],
+				[
+					// Nested references are impossible
+					'mwReference', 'mwReferenceList',
+					// Lists are tables are actually possible in wikitext with a leading
+					// line break but we prevent creating these with the UI
+					'list', 'listItem', 'definitionList', 'definitionListItem',
+					'table', 'tableCaption', 'tableSection', 'tableRow', 'tableCell'
+				]
+			),
+			// Headings are not possible in wikitext without HTML
+			'conversions': {
+				'mwHeading': 'paragraph'
+			}
+		}
+	}
+);
+
 /* Methods */
 
 /**
@@ -156,7 +179,8 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 		{
 			'$': this.$,
 			'tools': this.constructor.static.toolbarGroups,
-			'commands': this.constructor.static.surfaceCommands
+			'commands': this.constructor.static.surfaceCommands,
+			'pasteRules': this.constructor.static.pasteRules
 		}
 	);
 

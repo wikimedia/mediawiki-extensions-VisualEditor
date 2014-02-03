@@ -135,13 +135,16 @@ OO.inheritClass( ve.init.mw.ViewPageTarget, ve.init.mw.Target );
 /* Static Properties */
 
 ve.init.mw.ViewPageTarget.static.pasteRules = {
-	'blacklist': [
-		// Annotations
-		'link', 'textStyle/span', 'textStyle/underline',
-		// Nodes
-		'image', 'div', 'alienInline', 'alienBlock'
-	],
-	'removeHtmlAttributes': true
+	'external': {
+		'blacklist': [
+			// Annotations
+			'link', 'textStyle/span', 'textStyle/underline',
+			// Nodes
+			'image', 'div', 'alienInline', 'alienBlock'
+		],
+		'removeHtmlAttributes': true
+	},
+	'all': null
 };
 
 /**
