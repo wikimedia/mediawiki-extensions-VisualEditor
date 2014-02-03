@@ -124,6 +124,7 @@
     "visualeditor-mwalienextensioninspector-title": "Used as title for unknown MediaWiki extensions.\n{{Identical|MediaWiki extension}}",
     "visualeditor-mweditmodesource-title": "Label for changing edit mode to source editing.",
     "visualeditor-mweditmodesource-warning": "Warning message show before changing edit mode to source editing.",
+    "visualeditor-mwgalleryinspector-placeholder": "Placeholder text for the gallery inspector demonstrating how gallery syntax works.",
     "visualeditor-mwgalleryinspector-title": "Used as title for the gallery inspector.\n{{Identical|Gallery}}",
     "visualeditor-mwhieroinspector-title": "Used as title for the hieroglyphics inspector.",
     "visualeditor-mwmathinspector-title": "Title for the inspector to edit \u003Cnowiki\u003E\u003Cmath\u003E\u003C/nowiki\u003E formula blocks.\n{{Identical|Formula}}",

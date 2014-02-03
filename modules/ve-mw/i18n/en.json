@@ -119,6 +119,7 @@
     "visualeditor-mwalienextensioninspector-title": "MediaWiki extension",
     "visualeditor-mweditmodesource-title": "Switch to source editing",
     "visualeditor-mweditmodesource-warning": "You are about to switch to source editing.\nAny changes you've made to this document will be kept, but you will not be able switch back to VisualEditor without saving or reloading the page.\nDo you want to continue?",
+    "visualeditor-mwgalleryinspector-placeholder": "File:Example.jpg|Caption for image",
     "visualeditor-mwgalleryinspector-title": "Gallery",
     "visualeditor-mwhieroinspector-title": "Hieroglyphics",
     "visualeditor-mwmathinspector-title": "Formula",

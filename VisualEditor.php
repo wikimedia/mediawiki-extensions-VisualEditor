@@ -843,6 +843,7 @@ $wgResourceModules += array(
 			'ext.visualEditor.mwcore',
 		),
 		'messages' => array(
+			'visualeditor-mwgalleryinspector-placeholder',
 			'visualeditor-mwgalleryinspector-title',
 		),
 		'targets' => array( 'desktop', 'mobile' ),

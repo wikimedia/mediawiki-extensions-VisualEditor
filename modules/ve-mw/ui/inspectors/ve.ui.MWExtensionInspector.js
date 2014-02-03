@@ -27,6 +27,8 @@ OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.Inspector );
 
 /* Static properties */
 
+ve.ui.MWExtensionInspector.static.placeholder = null;
+
 ve.ui.MWExtensionInspector.static.nodeView = null;
 
 ve.ui.MWExtensionInspector.static.nodeModel = null;
@@ -72,6 +74,10 @@ ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
 		this.node = null;
 	}
 	this.input.setValue( this.node ? this.node.getModel().getAttribute( 'mw' ).body.extsrc : '' );
+
+	if ( this.constructor.static.placeholder ) {
+		this.input.$input.attr( 'placeholder', ve.msg( this.constructor.static.placeholder ) );
+	}
 
 	// By default, the direction of the input element should be the same
 	// as the direction of the content it applies to
