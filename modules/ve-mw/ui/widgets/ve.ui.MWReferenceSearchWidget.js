@@ -95,7 +95,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 		groups = internalList.getNodeGroups();
 
 	function extractAttrs() {
-		text += ' ' + $(this).attr( 'href' );
+		text += ' ' + this.getAttribute( 'href' );
 	}
 
 	this.index = [];
