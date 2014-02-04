@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * MediaWiki gallery inspector.
  *
@@ -32,11 +34,18 @@ ve.ui.MWGalleryInspector.static.icon = 'gallery';
 
 ve.ui.MWGalleryInspector.static.titleMessage = 'visualeditor-mwgalleryinspector-title';
 
-ve.ui.MWGalleryInspector.static.placeholder = 'visualeditor-mwgalleryinspector-placeholder';
-
 ve.ui.MWGalleryInspector.static.nodeView = ve.ce.MWGalleryNode;
 
 ve.ui.MWGalleryInspector.static.nodeModel = ve.dm.MWGalleryNode;
+
+/* Methods */
+
+/** */
+ve.ui.MWGalleryInspector.prototype.getInputPlaceholder = function () {
+	// 'File:' is always in content language
+	return mw.config.get( 'wgFormattedNamespaces' )['6'] + ':' +
+		ve.msg( 'visualeditor-mwgalleryinspector-placeholder' );
+};
 
 /* Registration */
 

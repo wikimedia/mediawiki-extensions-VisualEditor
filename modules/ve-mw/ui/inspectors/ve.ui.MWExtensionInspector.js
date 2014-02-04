@@ -67,6 +67,15 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 };
 
 /**
+ * Get the placeholder text for the content input area.
+ *
+ * @returns {string} Placeholder text
+ */
+ve.ui.MWExtensionInspector.prototype.getInputPlaceholder = function () {
+	return '';
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
@@ -84,9 +93,7 @@ ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
 	}
 	this.input.setValue( this.node ? this.node.getModel().getAttribute( 'mw' ).body.extsrc : '' );
 
-	if ( this.constructor.static.placeholder ) {
-		this.input.$input.attr( 'placeholder', ve.msg( this.constructor.static.placeholder ) );
-	}
+	this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
 	// By default, the direction of the input element should be the same
 	// as the direction of the content it applies to
