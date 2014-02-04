@@ -35,6 +35,15 @@ ve.ui.MWExtensionInspector.static.nodeModel = null;
 
 ve.ui.MWExtensionInspector.static.removable = false;
 
+/**
+ * Extension is allowed to have empty contents
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.ui.MWExtensionInspector.static.allowedEmpty = false;
+
 /* Methods */
 
 /**
@@ -109,31 +118,33 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 	var mwData,
 		surfaceModel = this.surface.getModel();
 
-	if ( this.node instanceof this.constructor.static.nodeView ) {
-		mwData = ve.copy( this.node.getModel().getAttribute( 'mw' ) );
-		mwData.body.extsrc = this.input.getValue();
-		surfaceModel.change(
-			ve.dm.Transaction.newFromAttributeChanges(
-				surfaceModel.getDocument(), this.node.getOuterRange().start, { 'mw': mwData }
-			)
-		);
-	} else {
-		mwData = {
-			'name': this.constructor.static.nodeModel.static.extensionName,
-			'attrs': {},
-			'body': {
-				'extsrc': this.input.getValue()
-			}
-		};
-		surfaceModel.getFragment().collapseRangeToEnd().insertContent( [
-			{
-				'type': this.constructor.static.nodeModel.static.name,
-				'attributes': {
-					'mw': mwData
+	if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
+		if ( this.node instanceof this.constructor.static.nodeView ) {
+			mwData = ve.copy( this.node.getModel().getAttribute( 'mw' ) );
+			mwData.body.extsrc = this.input.getValue();
+			surfaceModel.change(
+				ve.dm.Transaction.newFromAttributeChanges(
+					surfaceModel.getDocument(), this.node.getOuterRange().start, { 'mw': mwData }
+				)
+			);
+		} else {
+			mwData = {
+				'name': this.constructor.static.nodeModel.static.extensionName,
+				'attrs': {},
+				'body': {
+					'extsrc': this.input.getValue()
 				}
-			},
-			{ 'type': '/' + this.constructor.static.nodeModel.static.name }
-		] );
+			};
+			surfaceModel.getFragment().collapseRangeToEnd().insertContent( [
+				{
+					'type': this.constructor.static.nodeModel.static.name,
+					'attributes': {
+						'mw': mwData
+					}
+				},
+				{ 'type': '/' + this.constructor.static.nodeModel.static.name }
+			] );
+		}
 	}
 
 	// Parent method
