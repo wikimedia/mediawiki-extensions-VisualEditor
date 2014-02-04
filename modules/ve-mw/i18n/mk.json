@@ -107,6 +107,7 @@
     "visualeditor-mwalienextensioninspector-title": "Додаток за МедијаВики",
     "visualeditor-mweditmodesource-title": "Префрли на уредување извор",
     "visualeditor-mweditmodesource-warning": "Се префрлате на уредување на изворниот код.\nСите измени што ќе ги направите во овој документ ќе бидат задржани, но нема да можете да се вратите на ВизуеленУредник без да ја зачувате или превчитате страницата.\nСакате да продолжите?",
+    "visualeditor-mwgalleryinspector-placeholder": "File:Пример.jpg|Опис на сликата",
     "visualeditor-mwgalleryinspector-title": "Галерија",
     "visualeditor-mwhieroinspector-title": "Хиероглифи",
     "visualeditor-mwmathinspector-title": "Формула",

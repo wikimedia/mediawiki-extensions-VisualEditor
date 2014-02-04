@@ -115,6 +115,7 @@
     "visualeditor-mwalienextensioninspector-title": "Estensione di MediaWiki",
     "visualeditor-mweditmodesource-title": "Passa alla modifica sorgente",
     "visualeditor-mweditmodesource-warning": "Stai per passare alla modifica sorgente.\nEventuali modifiche apportate a questo documento verranno mantenute, ma non potrai ritornare a VisualEditor senza salvare o ricaricare la pagina.\nVuoi continuare?",
+    "visualeditor-mwgalleryinspector-placeholder": "File:Esempio.jpg|Didascalia dell'immagine",
     "visualeditor-mwgalleryinspector-title": "Galleria",
     "visualeditor-mwhieroinspector-title": "Geroglifici",
     "visualeditor-mwmathinspector-title": "Formula",
