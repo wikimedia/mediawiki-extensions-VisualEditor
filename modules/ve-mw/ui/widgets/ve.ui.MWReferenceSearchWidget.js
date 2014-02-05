@@ -123,6 +123,10 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 			citation = ( attr.refGroup.length ? attr.refGroup + ' ' : '' ) + ( j + 1 );
 			matches = attr.listKey.match( /^literal\/(.*)$/ );
 			name = matches && matches[1] || '';
+			// Hide previously auto-generated reference names
+			if ( name.match( /^:[0-9]+$/ ) ) {
+				name = '';
+			}
 			// Make visible text, citation and reference name searchable
 			text = [ view.$element.text().toLowerCase(), citation, name ].join( ' ' );
 			// Make URLs searchable
