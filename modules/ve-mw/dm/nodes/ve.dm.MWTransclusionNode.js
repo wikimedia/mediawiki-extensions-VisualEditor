@@ -89,7 +89,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var els, currentDom, i, len, wrapper, aboutGroup,
+	var els, currentDom, i, len, wrapper,
 		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
 		originalMw = dataElement.attributes.originalMw;
 
@@ -108,26 +108,24 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			els = [ doc.createElement( dataElement.attributes.originalDomElements[0].nodeName ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
-			// For the clipboard use the current DOM contents but mark as ignored
-			// for the converter
-			currentDom = converter.getStore().value( index );
-			// About-group elements together
-			aboutGroup = 'g' + Math.random();
-			if ( currentDom ) {
-				currentDom = ve.copyDomElements( currentDom, doc );
-				// i = 0 is the data-mw span
-				for ( i = 1, len = currentDom.length; i < len; i++ ) {
-					// Wrap plain text nodes so we can give them an attribute
-					if ( currentDom[i].nodeType === Node.TEXT_NODE ) {
-						wrapper = doc.createElement( 'span' );
-						wrapper.appendChild( currentDom[i] );
-						currentDom[i] = wrapper;
+			if ( converter.isForClipboard() ) {
+				// For the clipboard use the current DOM contents but mark as ignored
+				// for the converter
+				currentDom = converter.getStore().value( index );
+				if ( currentDom ) {
+					currentDom = ve.copyDomElements( currentDom, doc );
+					// i = 0 is the data-mw span
+					for ( i = 1, len = currentDom.length; i < len; i++ ) {
+						// Wrap plain text nodes so we can give them an attribute
+						if ( currentDom[i].nodeType === Node.TEXT_NODE ) {
+							wrapper = doc.createElement( 'span' );
+							wrapper.appendChild( currentDom[i] );
+							currentDom[i] = wrapper;
+						}
+						currentDom[i].setAttribute( 'data-ve-ignore', 'true' );
+						els.push( currentDom[i] );
 					}
-					currentDom[i].setAttribute( 'data-ve-ignore', 'true' );
-					currentDom[i].setAttribute( 'about', aboutGroup );
-					els.push( currentDom[i] );
 				}
-				els[0].setAttribute( 'about', aboutGroup );
 			}
 		}
 		// All we need to send back to Parsoid is the original transclusion marker, with a
