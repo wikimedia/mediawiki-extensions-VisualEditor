@@ -114,17 +114,20 @@ ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 		// Auto-remove if already existing
 		this.removePart( item.add );
 
-		// Add at index, or end if none was given
+		// Use specified index
 		index = item.index;
-		if ( index !== undefined && item.remove ) {
+		// Derive index from removal if given
+		if ( index === undefined && item.remove ) {
 			index = ve.indexOf( item.remove, this.parts );
 			if ( index !== -1 ) {
 				remove = 1;
 			}
 		}
+		// Use last index as a last resort
 		if ( index === undefined || index === -1 ) {
 			index = this.parts.length;
 		}
+
 		this.parts.splice( index, remove, item.add );
 		if ( item.add ) {
 			item.add.connect( this, { 'change': [ 'emit', 'change' ] } );

@@ -71,10 +71,9 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	var transclusion = this.placeholder.getTransclusion(),
-		parts = this.placeholder.getTransclusion().getParts(),
 		part = ve.dm.MWTemplateModel.newFromName( transclusion, this.addTemplateInput.getValue() );
 
-	transclusion.replacePart( this.placeholder, part, ve.indexOf( this.placeholder, parts ) );
+	transclusion.replacePart( this.placeholder, part );
 	this.addTemplateInput.pushPending();
 	this.addTemplateButton.setDisabled( true );
 	this.removeButton.setDisabled( true );
