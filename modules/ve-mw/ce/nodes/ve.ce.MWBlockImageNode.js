@@ -202,7 +202,7 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 		};
 	}
 
-	this.$image.attr( dimensions );
+	this.$image.css( dimensions );
 
 	this.$figure.css( {
 		// If we have a border then the width is increased by 2
