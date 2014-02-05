@@ -62,7 +62,7 @@ class VisualEditorPage
   end
 
   in_frame(:index => 1) do |frame|
-    span(:add_parameter, class: "ve-ui-mwParameterResultWidget-name", frame: frame)
+    span(:add_parameter, class: "oo-ui-iconedElement-icon oo-ui-icon-parameter", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
     span(:apply_changes, text: "Apply changes", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)

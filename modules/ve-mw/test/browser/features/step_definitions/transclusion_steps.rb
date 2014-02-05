@@ -1,5 +1,6 @@
 Given(/^I can see the Transclusion User Interface$/) do
   on(VisualEditorPage) do |page|
+    sleep 1
     page.wait_until(10) do
       page.title.include? "Transclusion"
     end
@@ -8,11 +9,21 @@ Given(/^I can see the Transclusion User Interface$/) do
 end
 
 When(/^I add the parameter$/) do
-  on(VisualEditorPage).add_parameter_element.when_present.click
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.add_parameter_element.exists?
+    end
+    page.add_parameter_element.click
+  end
 end
 
 When(/^I click Remove parameter$/) do
-  on(VisualEditorPage).remove_parameter_element.when_present.click
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.remove_parameter_element.exists?
+    end
+    page.remove_parameter_element.click
+  end
 end
 
 When(/^I click Remove template$/) do
@@ -28,13 +39,17 @@ end
 
 When(/^I enter (.+) in the parameter box$/) do |param_value|
   on(VisualEditorPage) do |page|
-    sleep 1
     page.parameter_box_element.when_present.send_keys(param_value)
   end
 end
 
 When(/^I enter (.+) into transclusion Content box$/) do |content|
-  on(VisualEditorPage).transclusion_textfield_element.when_present.send_keys(content)
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.transclusion_textfield_element.exists?
+    end
+    page.transclusion_textfield_element.send_keys(content)
+  end
 end
 
 Then(/^I should see a list of template suggestions$/) do
@@ -49,7 +64,12 @@ Then(/^I should not be able to see parameter named (.+)$/) do |param_name|
 end
 
 Then(/^I should see an input text area$/) do
-  on(VisualEditorPage).transclusion_textarea_element.when_present.should be_visible
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.transclusion_textarea_element.exists?
+    end
+    page.transclusion_textarea_element.should be_visible
+  end
 end
 
 Then(/^I should see the Apply changes button$/) do
