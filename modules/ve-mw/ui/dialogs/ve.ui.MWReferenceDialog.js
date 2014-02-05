@@ -57,17 +57,17 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 	},
 	// Link
 	{ 'include': [ 'link' ] },
-	// Structure
-	{
+	// No structure
+	/* {
 		'type': 'bar',
 		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
-	},
+	},*/
 	// Insert
 	{
 		'label': 'visualeditor-toolbar-insert',
 		'indicator': 'down',
 		'include': '*',
-		'exclude': [ { 'group': 'format' }, 'reference', 'referenceList' ],
+		'exclude': [ { 'group': 'format' }, { 'group': 'structure' }, 'reference', 'referenceList' ],
 		'demote': [ 'specialcharacter' ]
 	}
 ];
@@ -82,8 +82,6 @@ ve.ui.MWReferenceDialog.static.surfaceCommands = [
 	'underline',
 	'subscript',
 	'superscript',
-	'indent',
-	'outdent',
 	'pasteSpecial'
 ];
 
