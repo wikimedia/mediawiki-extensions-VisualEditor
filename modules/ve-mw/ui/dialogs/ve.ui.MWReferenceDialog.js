@@ -67,7 +67,11 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'label': 'visualeditor-toolbar-insert',
 		'indicator': 'down',
 		'include': '*',
-		'exclude': [ { 'group': 'format' }, { 'group': 'structure' }, 'reference', 'referenceList' ],
+		'exclude': [
+			{ 'group': 'format' }, { 'group': 'structure' },
+			'reference', 'referenceList',
+			'gallery'
+		],
 		'demote': [ 'specialcharacter' ]
 	}
 ];

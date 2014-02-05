@@ -72,7 +72,11 @@ ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 		'label': 'visualeditor-toolbar-insert',
 		'indicator': 'down',
 		'include': '*',
-		'exclude': [ { 'group': 'format' }, { 'group': 'structure' }, 'referenceList' ],
+		'exclude': [
+			{ 'group': 'format' }, { 'group': 'structure' },
+			'referenceList',
+			'gallery'
+		],
 		'demote': [ 'specialcharacter' ]
 	}
 ];
