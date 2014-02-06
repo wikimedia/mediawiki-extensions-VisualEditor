@@ -14,14 +14,19 @@
  *
  * @constructor
  * @param {jQuery} $container Container to render target into
+ * @param {Object} [config] Configuration options
+ * @cfg {number} [section] Number of the section target should scroll to
  */
-ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $el ) {
+ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, config ) {
 	var currentUri = new mw.Uri();
+	config = config || {};
 
 	// Parent constructor
 	ve.init.mw.Target.call(
-		this, $el, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid
+		this, $container, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid
 	);
+
+	this.section = config.section;
 
 	// Events
 	this.connect( this, {
@@ -55,6 +60,7 @@ ve.init.mw.MobileViewTarget.static.surfaceCommands = [
  */
 ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
 	this.$document[0].focus();
+	this.restoreEditSection();
 };
 
 /**
