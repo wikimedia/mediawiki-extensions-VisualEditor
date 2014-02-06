@@ -198,8 +198,20 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'promote': [ 'reference', 'mediaInsert' ],
 		'demote': [ 'language', 'specialcharacter' ]
 	}
-
 ];
+
+ve.init.mw.Target.static.pasteRules = {
+	'external': {
+		'blacklist': [
+			// Annotations
+			'link', 'textStyle/span', 'textStyle/underline',
+			// Nodes
+			'image', 'div', 'alienInline', 'alienBlock'
+		],
+		'removeHtmlAttributes': true
+	},
+	'all': null
+};
 
 /* Static Methods */
 
