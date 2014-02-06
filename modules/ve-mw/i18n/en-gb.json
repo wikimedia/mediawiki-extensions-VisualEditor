@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "Jdforrester"
+        ]
+    },
+    "visualeditor-loadwarning": "Error loading data from server: $1. Would you like to try again?",
+    "visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to try again?"
+}
