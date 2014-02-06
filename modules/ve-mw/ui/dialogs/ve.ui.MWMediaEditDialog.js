@@ -118,7 +118,7 @@ ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.initialize = function () {
-	var altTextFieldset;
+	var altTextFieldset, positionFieldset;
 	// Parent method
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
@@ -168,6 +168,24 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	altTextFieldset.$element
 		.append( this.altTextInput.$element );
 
+	// Position
+	positionFieldset = new OO.ui.FieldsetLayout( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-media-position-section' ),
+		'icon': 'parameter'
+	} );
+	this.positionInput =  new OO.ui.SelectWidget( {
+		'$': this.$
+	} );
+	this.positionInput.addItems( [
+		new OO.ui.OptionWidget( 'left', { 'label': ve.msg( 'visualeditor-dialog-media-position-left' ) } ),
+		new OO.ui.OptionWidget( 'right', { 'label': ve.msg( 'visualeditor-dialog-media-position-right' ) } ),
+		new OO.ui.OptionWidget( 'center', { 'label': ve.msg( 'visualeditor-dialog-media-position-center' ) } ),
+		new OO.ui.OptionWidget( 'none', { 'label': ve.msg( 'visualeditor-dialog-media-position-none' ) } )
+	], 0 );
+	// Build position fieldset
+	positionFieldset.$element.append( this.positionInput.$element );
+
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
@@ -204,7 +222,11 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		this.captionFieldset.$element,
 		altTextFieldset.$element
 	] );
-	this.advancedSettingsPage.$element.append( this.sizeFieldset.$element );
+
+	this.advancedSettingsPage.$element.append( [
+		positionFieldset.$element,
+		this.sizeFieldset.$element
+	] );
 
 	this.$body.append( this.bookletLayout.$element );
 	this.$foot.append( this.applyButton.$element );
@@ -265,6 +287,13 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	// Set initial alt text
 	this.altTextInput.setValue( this.mediaNode.getAttribute( 'alt' ) || '' );
 
+	// Set initial position
+	if ( this.mediaNode.getAttribute( 'align' ) !== undefined ) {
+		this.positionInput.selectItem(
+			this.positionInput.getItemFromData( this.mediaNode.getAttribute( 'align' ) )
+		);
+	}
+
 	// Initialization
 	this.captionFieldset.$element.append( this.captionSurface.$element );
 	this.captionSurface.initialize();
@@ -319,6 +348,11 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 			originalAlt !== undefined
 		) {
 			attrs.alt = attr;
+		}
+
+		attr = this.positionInput.getSelectedItem();
+		if ( attr ) {
+			attrs.align = attr.getData();
 		}
 
 		surfaceModel.change(
