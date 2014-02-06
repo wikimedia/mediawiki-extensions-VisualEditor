@@ -290,7 +290,11 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 				break;
 			// Other image attributes if they exist
 			case 'alt':
-				this.$image.attr( key, to );
+				if ( !to ) {
+					this.$image.removeAttr( key );
+				} else {
+					this.$image.attr( key, to );
+				}
 				break;
 		}
 	}

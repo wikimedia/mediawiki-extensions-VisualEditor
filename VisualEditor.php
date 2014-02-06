@@ -644,6 +644,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-beta-welcome-action-continue',
 			'visualeditor-dialog-beta-welcome-content',
 			'visualeditor-dialog-beta-welcome-title',
+			'visualeditor-dialog-media-alttext-section',
 			'visualeditor-dialog-media-content-section',
 			'visualeditor-dialog-media-insert-button',
 			'visualeditor-dialog-media-insert-title',
