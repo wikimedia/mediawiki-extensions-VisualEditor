@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * ContentEditable MediaWiki image node.
  *
@@ -134,14 +136,31 @@ ve.ce.MWImageNode.prototype.onFocus = function () {
 ve.ce.MWImageNode.prototype.fetchDimensions = function () {
 	return this.getModel().getImageInfo()
 		.done( ve.bind( function ( imageInfo ) {
-			var dimensions = {
-				'width': imageInfo.width,
-				'height': imageInfo.height
-			};
+			var svgMaxSize, maxDimensions,
+				dimensions = {
+					'width': imageInfo.width,
+					'height': imageInfo.height
+				};
 			this.setOriginalDimensions( dimensions );
-			// Bitmaps can't be upscaled
+
 			if ( imageInfo.mediatype === 'BITMAP' ) {
-				this.setMaxDimensions( dimensions );
+				maxDimensions = dimensions;
+			} else if ( imageInfo.mediatype === 'DRAWING' ) {
+				svgMaxSize = mw.config.get( 'wgVisualEditor' ).svgMaxSize;
+				if ( this.getRatio() > 1 ) {
+					maxDimensions = {
+						'width': Math.round( svgMaxSize * this.getRatio() ),
+						'height': svgMaxSize
+					};
+				} else {
+					maxDimensions = {
+						'width': svgMaxSize,
+						'height': Math.round( svgMaxSize / this.getRatio() )
+					};
+				}
+			}
+			if ( maxDimensions ) {
+				this.setMaxDimensions( maxDimensions );
 			}
 		}, this ) );
 };
