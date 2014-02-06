@@ -756,7 +756,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
  * @returns {boolean} Loading has been started
 */
 ve.init.mw.Target.prototype.load = function ( additionalModules ) {
-	var data, start;
+	var data, start, xhr;
 	// Prevent duplicate requests
 	if ( this.loading ) {
 		return false;
@@ -785,8 +785,8 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	// Load DOM
 	start = ve.now();
 
-	this.loading = this.constructor.static.apiRequest( data )
-		.then( function ( data, status, jqxhr ) {
+	xhr = this.constructor.static.apiRequest( data );
+	this.loading = xhr.then( function ( data, status, jqxhr ) {
 			ve.track( 'performance.system.domLoad', {
 				'bytes': $.byteLength( jqxhr.responseText ),
 				'duration': ve.now() - start,
@@ -796,7 +796,8 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 			return jqxhr;
 		} )
 		.done( ve.bind( ve.init.mw.Target.onLoad, this ) )
-		.fail( ve.bind( ve.init.mw.Target.onLoadError, this ) );
+		.fail( ve.bind( ve.init.mw.Target.onLoadError, this ) )
+		.promise( { 'abort': xhr.abort } );
 
 	return true;
 };
