@@ -41,8 +41,8 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 		]
 		.concat(
 			document.createElementNS && document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ).createSVGRect ?
-				['ext.visualEditor.viewPageTarget.icons-vector', 'ext.visualEditor.icons-vector'] :
-				['ext.visualEditor.viewPageTarget.icons-raster', 'ext.visualEditor.icons-raster']
+				this.constructor.static.iconModuleStyles.vector :
+				this.constructor.static.iconModuleStyles.raster
 		)
 		.concat( conf.pluginModules || [] );
 
@@ -211,6 +211,18 @@ ve.init.mw.Target.static.pasteRules = {
 		'removeHtmlAttributes': true
 	},
 	'all': null
+};
+
+/**
+ * Defines modules needed to style icons.
+ *
+ * @type {Object}
+ * @property {string[]} vector An array of module names that should be loaded when SVG supported.
+ * @property {string[]} raster An array of module names that should be loaded when SVG is not supported.
+ */
+ ve.init.mw.Target.static.iconModuleStyles = {
+	'vector': ['ext.visualEditor.viewPageTarget.icons-vector', 'ext.visualEditor.icons-vector'],
+	'raster': ['ext.visualEditor.viewPageTarget.icons-raster', 'ext.visualEditor.icons-raster']
 };
 
 /* Static Methods */
@@ -1166,28 +1178,12 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 /**
  * Show the toolbar.
  *
- * This also transplants the toolbar to a new location.
- *
+ * @abstract
  * @method
+ * @throws {Error} If abstract method has not been implemented.
  */
 ve.init.mw.Target.prototype.setUpToolbar = function () {
-	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
-	this.toolbar.setup( this.constructor.static.toolbarGroups );
-	this.surface.addCommands( this.constructor.static.surfaceCommands );
-	if ( !this.isMobileDevice ) {
-		this.toolbar.enableFloatable();
-	}
-	this.toolbar.$element
-		.addClass( 've-init-mw-viewPageTarget-toolbar' )
-		.insertBefore( $( '#firstHeading' ).length > 0 ? '#firstHeading' : this.surface.$element );
-	this.toolbar.$bar.slideDown( 'fast', ve.bind( function () {
-		// Check the surface wasn't torn down while the toolbar was animating
-		if ( this.surface ) {
-			this.toolbar.initialize();
-			this.surface.emit( 'position' );
-			this.surface.getContext().update();
-		}
-	}, this ) );
+	throw new Error( 've.init.mw.Target subclass must implement setUpToolbar' );
 };
 
 /**

@@ -34,41 +34,18 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $el ) {
 OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 
 /* Static Properties */
+$.extend( ve.init.mw.Target.static.iconModuleStyles, {
+	'raster': [],
+	'vector': []
+} );
 
 ve.init.mw.MobileViewTarget.static.toolbarGroups = [
-	{ 'include': [ 'undo', 'redo' ] },
-	{
-		'type': 'menu',
-		'indicator': 'down',
-		'include': [ { 'group': 'format' } ],
-		'promote': [ 'paragraph' ],
-		'demote': [ 'preformatted', 'heading1' ]
-	},
-	{ 'include': [ 'bold', 'italic', 'link', 'clear' ] },
-	{ 'include': [ 'number', 'bullet', 'outdent', 'indent' ] },
-	{ 'include': '*', 'exclude': [ { 'group': 'format' }, 'reference', 'referenceList', 'mediaEdit', 'mediaInsert', 'transclusion' ] }
+	{ 'include': [ 'bold', 'italic' ] }
 ];
 
 ve.init.mw.MobileViewTarget.static.surfaceCommands = [
-	'undo',
-	'redo',
 	'bold',
-	'italic',
-	'link',
-	'clear',
-	'underline',
-	'subscript',
-	'superscript',
-	'indent',
-	'outdent',
-	'paragraph',
-	'heading1',
-	'heading2',
-	'heading3',
-	'heading4',
-	'heading5',
-	'heading6',
-	'preformatted'
+	'italic'
 ];
 
 /* Methods */
@@ -78,4 +55,20 @@ ve.init.mw.MobileViewTarget.static.surfaceCommands = [
  */
 ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
 	this.$document[0].focus();
+};
+
+/**
+ * Show the toolbar.
+ *
+ * This also transplants the toolbar to a new location.
+ *
+ * @method
+ */
+ve.init.mw.Target.prototype.setUpToolbar = function () {
+	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
+	this.toolbar.setup( this.constructor.static.toolbarGroups );
+	this.surface.addCommands( this.constructor.static.surfaceCommands );
+	this.toolbar.$element
+		.addClass( 've-init-mw-viewPageTarget-toolbar' )
+		.appendTo( '.overlay-header > div' );
 };

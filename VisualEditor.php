@@ -913,14 +913,14 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.Icons-raster.css',
 			'modules/ve-mw/ui/styles/ve.ui.Icons-raster.css',
 		),
-		'targets' => array( 'desktop', 'mobile' ),
+		'targets' => array( 'desktop' ),
 	),
 	'ext.visualEditor.icons-vector' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.Icons-vector.css',
 			'modules/ve-mw/ui/styles/ve.ui.Icons-vector.css',
 		),
-		'targets' => array( 'desktop', 'mobile' ),
+		'targets' => array( 'desktop' ),
 	),
 );
 

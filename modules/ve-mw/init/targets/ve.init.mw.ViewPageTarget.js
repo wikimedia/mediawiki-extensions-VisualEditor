@@ -154,6 +154,25 @@ ve.init.mw.ViewPageTarget.compatibility = {
 
 /* Methods */
 
+/** */
+ve.init.mw.ViewPageTarget.prototype.setUpToolbar = function () {
+	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
+	this.toolbar.setup( this.constructor.static.toolbarGroups );
+	this.surface.addCommands( this.constructor.static.surfaceCommands );
+	this.toolbar.enableFloatable();
+	this.toolbar.$element
+		.addClass( 've-init-mw-viewPageTarget-toolbar' )
+		.insertBefore( $( '#firstHeading' ).length > 0 ? '#firstHeading' : this.surface.$element );
+	this.toolbar.$bar.slideDown( 'fast', ve.bind( function () {
+		// Check the surface wasn't torn down while the toolbar was animating
+		if ( this.surface ) {
+			this.toolbar.initialize();
+			this.surface.emit( 'position' );
+			this.surface.getContext().update();
+		}
+	}, this ) );
+};
+
 /**
  * Switch to edit mode.
  *
