@@ -92,11 +92,11 @@ ve.ui.MWMediaEditDialog.static.surfaceCommands = [
 ];
 
 ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
-	ve.copy( ve.init.mw.ViewPageTarget.static.pasteRules ),
+	ve.copy( ve.init.mw.Target.static.pasteRules ),
 	{
 		'all': {
 			'blacklist': OO.simpleArrayUnion(
-				ve.getProp( ve.init.mw.ViewPageTarget.static.pasteRules, 'all', 'blacklist' ) || [],
+				ve.getProp( ve.init.mw.Target.static.pasteRules, 'all', 'blacklist' ) || [],
 				[
 					// Tables (but not lists) are possible in wikitext with a leading
 					// line break but we prevent creating these with the UI

@@ -90,11 +90,11 @@ ve.ui.MWReferenceDialog.static.surfaceCommands = [
 ];
 
 ve.ui.MWReferenceDialog.static.pasteRules = ve.extendObject(
-	ve.copy( ve.init.mw.ViewPageTarget.static.pasteRules ),
+	ve.copy( ve.init.mw.Target.static.pasteRules ),
 	{
 		'all': {
 			'blacklist': OO.simpleArrayUnion(
-				ve.getProp( ve.init.mw.ViewPageTarget.static.pasteRules, 'all', 'blacklist' ) || [],
+				ve.getProp( ve.init.mw.Target.static.pasteRules, 'all', 'blacklist' ) || [],
 				[
 					// Nested references are impossible
 					'mwReference', 'mwReferenceList',

@@ -134,19 +134,6 @@ OO.inheritClass( ve.init.mw.ViewPageTarget, ve.init.mw.Target );
 
 /* Static Properties */
 
-ve.init.mw.ViewPageTarget.static.pasteRules = {
-	'external': {
-		'blacklist': [
-			// Annotations
-			'link', 'textStyle/span', 'textStyle/underline',
-			// Nodes
-			'image', 'div', 'alienInline', 'alienBlock'
-		],
-		'removeHtmlAttributes': true
-	},
-	'all': null
-};
-
 /**
  * Compatibility map used with jQuery.client to black-list incompatible browsers.
  *
