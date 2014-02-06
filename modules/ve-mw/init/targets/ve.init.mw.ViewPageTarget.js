@@ -47,7 +47,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.actFromPopState = false;
 	this.scrollTop = null;
 	this.currentUri = currentUri;
-	this.section = currentUri.query.vesection || null;
+	this.section = currentUri.query.vesection;
 	this.initialEditSummary = '';
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
@@ -1424,55 +1424,6 @@ ve.init.mw.ViewPageTarget.prototype.getEditSection = function ( heading ) {
  */
 ve.init.mw.ViewPageTarget.prototype.saveEditSection = function ( heading ) {
 	this.section = this.getEditSection( heading );
-};
-
-/**
- * Move the cursor in the editor to a given section.
- *
- * @method
- * @param {number} section Section to move cursor to
- */
-ve.init.mw.ViewPageTarget.prototype.restoreEditSection = function () {
-	if ( this.section !== null ) {
-		var offset, offsetNode, nextNode,
-			target = this,
-			surfaceView = this.surface.getView(),
-			surfaceModel = surfaceView.getModel(),
-			$section = this.$document.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
-			headingNode = $section.data( 'view' ),
-			lastHeadingLevel = -1;
-
-		if ( $section.length ) {
-			this.initialEditSummary = '/* ' +
-				ve.graphemeSafeSubstring( $section.text(), 0, 244 ) + ' */ ';
-		}
-
-		if ( headingNode ) {
-			// Find next sibling which isn't a heading
-			offsetNode = headingNode;
-			while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
-				lastHeadingLevel = offsetNode.getModel().getAttribute( 'level' );
-				// Next sibling
-				nextNode = offsetNode.parent.children[ve.indexOf( offsetNode, offsetNode.parent.children ) + 1];
-				if ( !nextNode ) {
-					break;
-				}
-				offsetNode = nextNode;
-			}
-			offset = surfaceModel.getDocument().data.getNearestContentOffset(
-				offsetNode.getModel().getOffset(), 1
-			);
-			surfaceModel.setSelection( new ve.Range( offset ) );
-			// Scroll to heading:
-			// Wait for toolbar to animate in so we can account for its height
-			setTimeout( function () {
-				var $window = $( OO.ui.Element.getWindow( target.$element ) );
-				$window.scrollTop( headingNode.$element.offset().top - target.toolbar.$element.height() );
-			}, 200 );
-		}
-
-		this.section = null;
-	}
 };
 
 /**

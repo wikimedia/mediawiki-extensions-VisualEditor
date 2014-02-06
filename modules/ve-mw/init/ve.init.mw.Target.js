@@ -1250,3 +1250,52 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 			viewPage.emit( 'sanityCheckComplete' );
 		} );
 };
+
+/**
+ * Move the cursor in the editor to section specified by this.section.
+ * Do nothing if this.section is undefined.
+ *
+ * @method
+ */
+ve.init.mw.Target.prototype.restoreEditSection = function () {
+	if ( this.section !== undefined ) {
+		var offset, offsetNode, nextNode,
+			target = this,
+			surfaceView = this.surface.getView(),
+			surfaceModel = surfaceView.getModel(),
+			$section = this.$document.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
+			headingNode = $section.data( 'view' ),
+			lastHeadingLevel = -1;
+
+		if ( $section.length ) {
+			this.initialEditSummary = '/* ' +
+				ve.graphemeSafeSubstring( $section.text(), 0, 244 ) + ' */ ';
+		}
+
+		if ( headingNode ) {
+			// Find next sibling which isn't a heading
+			offsetNode = headingNode;
+			while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
+				lastHeadingLevel = offsetNode.getModel().getAttribute( 'level' );
+				// Next sibling
+				nextNode = offsetNode.parent.children[ve.indexOf( offsetNode, offsetNode.parent.children ) + 1];
+				if ( !nextNode ) {
+					break;
+				}
+				offsetNode = nextNode;
+			}
+			offset = surfaceModel.getDocument().data.getNearestContentOffset(
+				offsetNode.getModel().getOffset(), 1
+			);
+			surfaceModel.setSelection( new ve.Range( offset ) );
+			// Scroll to heading:
+			// Wait for toolbar to animate in so we can account for its height
+			setTimeout( function () {
+				var $window = $( OO.ui.Element.getWindow( target.$element ) );
+				$window.scrollTop( headingNode.$element.offset().top - target.toolbar.$element.height() );
+			}, 200 );
+		}
+
+		this.section = undefined;
+	}
+};
