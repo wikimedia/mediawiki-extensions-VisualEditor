@@ -216,11 +216,13 @@ ve.init.mw.Target.static.pasteRules = {
 /**
  * Defines modules needed to style icons.
  *
- * @type {Object}
- * @property {string[]} vector An array of module names that should be loaded when SVG supported.
- * @property {string[]} raster An array of module names that should be loaded when SVG is not supported.
+ * @static
+ * @inheritable
+ * @property {Object} iconModuleStyles
+ * @property {string[]} iconModuleStyles.vector Modules that should be loaded when SVG supported
+ * @property {string[]} iconModuleStyles.raster Modules that should be loaded when SVG is not supported
  */
- ve.init.mw.Target.static.iconModuleStyles = {
+ve.init.mw.Target.static.iconModuleStyles = {
 	'vector': ['ext.visualEditor.viewPageTarget.icons-vector', 'ext.visualEditor.icons-vector'],
 	'raster': ['ext.visualEditor.viewPageTarget.icons-raster', 'ext.visualEditor.icons-raster']
 };
@@ -1176,14 +1178,15 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 };
 
 /**
- * Show the toolbar.
+ * Set up the toolbar and insert it into the DOM.
  *
- * @abstract
- * @method
- * @throws {Error} If abstract method has not been implemented.
+ * The default implementation inserts it before the surface, but subclasses can override this.
  */
 ve.init.mw.Target.prototype.setUpToolbar = function () {
-	throw new Error( 've.init.mw.Target subclass must implement setUpToolbar' );
+	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
+	this.toolbar.setup( this.constructor.static.toolbarGroups );
+	this.surface.addCommands( this.constructor.static.surfaceCommands );
+	this.toolbar.$element.insertBefore( this.surface.$element );
 };
 
 /**

@@ -58,17 +58,15 @@ ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
 };
 
 /**
- * Show the toolbar.
- *
- * This also transplants the toolbar to a new location.
- *
- * @method
+ * @inheritdoc
  */
-ve.init.mw.Target.prototype.setUpToolbar = function () {
-	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
-	this.toolbar.setup( this.constructor.static.toolbarGroups );
-	this.surface.addCommands( this.constructor.static.surfaceCommands );
+ve.init.mw.MobileViewTarget.prototype.setUpToolbar = function () {
+	// Parent method
+	ve.init.mw.Target.prototype.setUpToolbar.call( this );
+
 	this.toolbar.$element
+		// FIXME shouldn't be using viewPageTarget styles
 		.addClass( 've-init-mw-viewPageTarget-toolbar' )
+		// Move the toolbar to the overlay header
 		.appendTo( '.overlay-header > .toolbar' );
 };

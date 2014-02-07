@@ -154,15 +154,21 @@ ve.init.mw.ViewPageTarget.compatibility = {
 
 /* Methods */
 
-/** */
+/**
+ * @inheritdoc
+ */
 ve.init.mw.ViewPageTarget.prototype.setUpToolbar = function () {
-	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
-	this.toolbar.setup( this.constructor.static.toolbarGroups );
-	this.surface.addCommands( this.constructor.static.surfaceCommands );
+	var $firstHeading = $( '#firstHeading' );
+	// Parent method
+	ve.init.mw.Target.prototype.setUpToolbar.call( this );
+
 	this.toolbar.enableFloatable();
 	this.toolbar.$element
-		.addClass( 've-init-mw-viewPageTarget-toolbar' )
-		.insertBefore( $( '#firstHeading' ).length > 0 ? '#firstHeading' : this.surface.$element );
+		.addClass( 've-init-mw-viewPageTarget-toolbar' );
+	// Move the toolbar to before #firstHeading if it exists
+	if ( $firstHeading.length ) {
+		this.toolbar.$element.insertBefore( $firstHeading );
+	}
 	this.toolbar.$bar.slideDown( 'fast', ve.bind( function () {
 		// Check the surface wasn't torn down while the toolbar was animating
 		if ( this.surface ) {
