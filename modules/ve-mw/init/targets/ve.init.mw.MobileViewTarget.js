@@ -70,5 +70,5 @@ ve.init.mw.Target.prototype.setUpToolbar = function () {
 	this.surface.addCommands( this.constructor.static.surfaceCommands );
 	this.toolbar.$element
 		.addClass( 've-init-mw-viewPageTarget-toolbar' )
-		.appendTo( '.overlay-header > div' );
+		.appendTo( '.overlay-header > .toolbar' );
 };
