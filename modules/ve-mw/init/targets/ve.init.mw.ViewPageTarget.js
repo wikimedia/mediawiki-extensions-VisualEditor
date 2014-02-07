@@ -251,14 +251,18 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
  * Handle failed DOM load event.
  *
  * @method
- * @param {Object} response HTTP Response object
+ * @param {jqXHR|null} jqXHR jQuery XHR object
  * @param {string} status Text status message
- * @param {Mixed} error Thrown exception or HTTP error string
+ * @param {Mixed|null} error Thrown exception or HTTP error string
  */
-ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( response, status ) {
+ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
-	if ( status !== 'abort' && response.status !== 0 && confirm( ve.msg( 'visualeditor-loadwarning', status ) ) ) {
+	if (
+		status !== 'abort' &&
+		( !jqXHR || jqXHR.status !== 0 ) &&
+		confirm( ve.msg( 'visualeditor-loadwarning', status ) )
+	) {
 		this.load();
 	} else {
 		this.activating = false;
