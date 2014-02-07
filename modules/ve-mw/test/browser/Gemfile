@@ -3,4 +3,4 @@
 
 source "https://rubygems.org"
 
-gem "mediawiki-selenium"
+gem "mediawiki_selenium"

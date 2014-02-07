@@ -1,2 +1,2 @@
 require_relative "hooks"
-require "mediawiki/selenium"
+require "mediawiki_selenium"
