@@ -98,7 +98,7 @@ ve.dm.MWTransclusionModel.prototype.load = function ( data ) {
  * @fires change
  */
 ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
-	var i, len, item, title, index, remove;
+	var i, len, item, title, index, remove, existing;
 
 	for ( i = 0, len = queue.length; i < len; i++ ) {
 		remove = 0;
@@ -111,11 +111,16 @@ ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 			}
 		}
 
-		// Auto-remove if already existing
-		this.removePart( item.add );
-
 		// Use specified index
 		index = item.index;
+		// Auto-remove if already existing, preserving index
+		existing = ve.indexOf( item.add, this.parts );
+		if ( existing !== -1 ) {
+			this.removePart( item.add );
+			if ( index && index > existing ) {
+				index--;
+			}
+		}
 		// Derive index from removal if given
 		if ( index === undefined && item.remove ) {
 			index = ve.indexOf( item.remove, this.parts );
