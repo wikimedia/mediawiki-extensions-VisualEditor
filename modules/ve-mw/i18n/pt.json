@@ -10,7 +10,8 @@
             "Jaideraf",
             "Jdforrester",
             "Luckas",
-            "Vitorvicentevalente"
+            "Vitorvicentevalente",
+            "Imperadeiro98"
         ]
     },
     "tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -32,9 +33,15 @@
     "visualeditor-dialog-beta-welcome-action-continue": "Continuar",
     "visualeditor-dialog-beta-welcome-content": "Esta é a nossa nova maneira de editar, mais fácil. Está ainda em fase experimental, o que significa que pode encontrar partes da página em que não poderá editar, ou encontrar problemas que precisam de ser corrigidos. Nós encorajamos que reveja as suas alterações, e são bem-vindos relatórios sobre problemas que possam vir a surgir durante o uso do Editor Visual (clique no botão '{{int:visualeditor-help-tool}}' para enviar o relatório). Pode ainda utilizar o editor de código-fonte ao clicar no botão \"$1\" - as alterações que não foram guardadas serão perdidas.",
     "visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bem-vindo|Bem-vinda}} ao Editor Visual",
+    "visualeditor-dialog-media-alttext-section": "Texto alternativo",
     "visualeditor-dialog-media-content-section": "Legenda",
     "visualeditor-dialog-media-insert-button": "Inserir média",
     "visualeditor-dialog-media-insert-title": "Inserir média",
+    "visualeditor-dialog-media-position-center": "Centro",
+    "visualeditor-dialog-media-position-left": "Esquerda",
+    "visualeditor-dialog-media-position-none": "Nenhuma",
+    "visualeditor-dialog-media-position-right": "Direita",
+    "visualeditor-dialog-media-position-section": "Posição",
     "visualeditor-dialog-media-title": "Configurações de média",
     "visualeditor-dialog-meta-categories-category": "Categoria",
     "visualeditor-dialog-meta-categories-data-label": "Categorias",
