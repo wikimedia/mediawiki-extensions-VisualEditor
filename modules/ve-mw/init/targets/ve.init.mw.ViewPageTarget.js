@@ -671,13 +671,16 @@ ve.init.mw.ViewPageTarget.prototype.recordLastTransactionTime = function () {
 ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
 	var text, doc = this.surface.getView().getDocument(),
 		selection = this.surface.getModel().getSelection(),
-		node = doc.getNodeFromOffset( selection.start );
+		node = doc.getNodeFromOffset( selection.start ),
+		textMatches,
+		viewPageTarget = this;
 	if ( !( node instanceof ve.ce.ContentBranchNode ) ) {
 		return;
 	}
 	text = ve.ce.getDomText( node.$element[0] );
+	textMatches = text.match( /\[\[|\{\{|''|<nowiki|<ref|~~~|^==|^\*|^\#/ );
 
-	if ( text.match( /\[\[|\{\{|''|<nowiki|<ref|~~~|^==|^\*|^\#/ ) ) {
+	if ( textMatches && !this.wikitextWarning ) {
 		mw.notify(
 			$( $.parseHTML( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end(),
@@ -686,10 +689,12 @@ ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
 				'tag': 'visualeditor-wikitext-warning',
 				'autoHide': false
 			}
-		);
-		this.surface.getModel().disconnect(
-			this, { 'documentUpdate': 'checkForWikitextWarning' }
-		);
+		).done( function ( notif ) {
+			viewPageTarget.wikitextWarning = notif;
+		} );
+	} else if ( !textMatches && this.wikitextWarning ) {
+		this.wikitextWarning.close();
+		this.wikitextWarning = undefined;
 	}
 };
 
