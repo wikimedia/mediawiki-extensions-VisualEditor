@@ -72,7 +72,6 @@ $wgExtensionFunctions[] = 'VisualEditorHooks::onSetup';
 // Set default values for new preferences
 $wgDefaultUserOptions['visualeditor-enable'] = 0;
 $wgDefaultUserOptions['visualeditor-enable-experimental'] = 0;
-$wgDefaultUserOptions['visualeditor-enable-mwmath'] = 0;
 $wgDefaultUserOptions['visualeditor-betatempdisable'] = 0;
 
 // Register resource modules
@@ -1042,25 +1041,6 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.mwmath' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'modules/ve-mw/dm/nodes/ve.dm.MWMathNode.js',
-			'modules/ve-mw/ce/nodes/ve.ce.MWMathNode.js',
-			'modules/ve-mw/ui/inspectors/ve.ui.MWMathInspector.js',
-			'modules/ve-mw/ui/tools/ve.ui.MWMathInspectorTool.js',
-		),
-		'styles' => array(
-			'modules/ve-mw/ce/styles/ve.ce.MWMathNode.css',
-		),
-		'dependencies' => array(
-			'ext.visualEditor.mwcore',
-		),
-		'messages' => array(
-			'visualeditor-mwmathinspector-title',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-
 	'ext.visualEditor.mwgallery' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'modules/ve-mw/dm/nodes/ve.dm.MWGalleryNode.js',
@@ -1099,7 +1079,6 @@ $wgResourceModules += array(
 
 	'ext.visualEditor.experimental' => array(
 		'dependencies' => array(
-			'ext.visualEditor.mwmath',
 			'ext.visualEditor.mwhiero',
 			'ext.visualEditor.language',
 			'ext.visualEditor.mwlanguage',
@@ -1137,7 +1116,6 @@ $wgVisualEditorPreferenceModules = array(
 	'visualeditor-enable-experimental' => 'ext.visualEditor.experimental',
 	//'visualeditor-enable-language' => 'ext.visualEditor.language',
 	//'visualeditor-enable-mwalienextension' => 'ext.visualEditor.mwalienextension',
-	'visualeditor-enable-mwmath' => 'ext.visualEditor.mwmath',
 	//'visualeditor-enable-mwhiero' => 'ext.visualEditor.mwhiero'
 );
 

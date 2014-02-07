@@ -11,9 +11,6 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'gallery', 'inspector', 'open', 'gallery' )
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'math', 'inspector', 'open', 'math' )
-);
-ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'mediaEdit', 'dialog', 'open', 'mediaEdit' )
 );
 ve.ui.commandRegistry.register(
