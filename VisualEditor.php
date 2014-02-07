@@ -946,6 +946,11 @@ $wgVisualEditorPreferenceModules = array(
 // MUST NOT end in a slash due to Parsoid bug
 $wgVisualEditorParsoidURL = 'http://localhost:8000';
 
+// Proxy to use for curl requests.
+// false: use direct connection to Parsoid daemon ($wgHTTPProxy is not used
+// either)
+$wgVisualEditorParsoidHTTPProxy = false;
+
 // Interwiki prefix to pass to the Parsoid instance
 // Parsoid will be called as $url/$prefix/$pagename
 $wgVisualEditorParsoidPrefix = 'localhost';

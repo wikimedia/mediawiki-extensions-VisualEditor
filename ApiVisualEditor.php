@@ -10,9 +10,23 @@
 
 class ApiVisualEditor extends ApiBase {
 
+	/**
+	 * Parsoid HTTP proxy configuration for MWHttpRequest
+	 */
+	protected function getProxyConf() {
+		global $wgVisualEditorParsoidHTTPProxy;
+		if ( $wgVisualEditorParsoidHTTPProxy ) {
+			return array( 'proxy' => $wgVisualEditorParsoidHTTPProxy );
+		} else {
+			return array( 'noProxy' => true );
+		}
+	}
+
 	protected function getHTML( $title, $parserParams ) {
-		global $wgVisualEditorParsoidURL, $wgVisualEditorParsoidPrefix,
-			$wgVisualEditorParsoidTimeout, $wgVisualEditorParsoidForwardCookies;
+		global $wgVisualEditorParsoidURL,
+			$wgVisualEditorParsoidPrefix,
+			$wgVisualEditorParsoidTimeout,
+			$wgVisualEditorParsoidForwardCookies;
 
 		$restoring = false;
 
@@ -40,9 +54,12 @@ class ApiVisualEditor extends ApiBase {
 						'/' . urlencode( $title->getPrefixedDBkey() ),
 					$parserParams
 				),
-				array(
-					'method' => 'GET',
-					'timeout' => $wgVisualEditorParsoidTimeout
+				array_merge(
+					$this->getProxyConf(),
+					array(
+						'method'  => 'GET',
+						'timeout' => $wgVisualEditorParsoidTimeout,
+					)
 				)
 			);
 			// Forward cookies, but only if configured to do so and if there are read restrictions
@@ -118,21 +135,27 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	protected function postHTML( $title, $html, $parserParams ) {
-		global $wgVisualEditorParsoidURL, $wgVisualEditorParsoidPrefix,
-			$wgVisualEditorParsoidTimeout, $wgVisualEditorParsoidForwardCookies;
+		global $wgVisualEditorParsoidURL,
+			$wgVisualEditorParsoidPrefix,
+			$wgVisualEditorParsoidTimeout,
+			$wgVisualEditorParsoidForwardCookies;
+
 		if ( $parserParams['oldid'] === 0 ) {
 			$parserParams['oldid'] = '';
 		}
 		$req = MWHttpRequest::factory(
 			$wgVisualEditorParsoidURL . '/' . $wgVisualEditorParsoidPrefix .
 				'/' . urlencode( $title->getPrefixedDBkey() ),
-			array(
-				'method' => 'POST',
-				'postData' => array(
-					'content' => $html,
-					'oldid' => $parserParams['oldid']
-				),
-				'timeout' => $wgVisualEditorParsoidTimeout
+			array_merge(
+				$this->getProxyConf(),
+				array(
+					'method' => 'POST',
+					'postData' => array(
+						'content' => $html,
+						'oldid' => $parserParams['oldid']
+					),
+					'timeout' => $wgVisualEditorParsoidTimeout,
+				)
 			)
 		);
 		// Forward cookies, but only if configured to do so and if there are read restrictions
