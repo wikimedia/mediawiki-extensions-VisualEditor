@@ -92,6 +92,11 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 			// Add required params to user created templates
 			if ( added instanceof ve.dm.MWTemplateModel && this.loaded ) {
 				added.addRequiredParameters();
+				names = added.getParameterNames();
+				params = added.getParameters();
+				if ( names.length ) {
+					this.setPageByName( params[names[0]].getId() );
+				}
 			}
 		}
 	}
