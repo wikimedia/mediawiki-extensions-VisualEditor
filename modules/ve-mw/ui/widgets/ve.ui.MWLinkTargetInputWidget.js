@@ -69,12 +69,29 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemSelect = function ( item
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
-	return ve.init.mw.Target.static.apiRequest( {
-		'action': 'opensearch',
-		'search': this.value,
-		'namespace': 0,
-		'suggest': ''
-	} );
+	var propsJqXhr,
+		searchJqXhr = ve.init.mw.Target.static.apiRequest( {
+			'action': 'opensearch',
+			'search': this.value,
+			'namespace': 0,
+			'suggest': ''
+		} );
+
+	return searchJqXhr.then( function ( data ) {
+		propsJqXhr = ve.init.mw.Target.static.apiRequest( {
+			'action': 'query',
+			'prop': 'info|pageprops',
+			'titles': ( data[1] || [] ).join( '|' ),
+			'ppprop': 'disambiguation'
+		} );
+		return propsJqXhr;
+	} ).promise( { abort: function () {
+		searchJqXhr.abort();
+
+		if ( propsJqXhr ) {
+			propsJqXhr.abort();
+		}
+	} } );
 };
 
 /**
@@ -84,7 +101,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
  * @param {Mixed} data Response from server
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
-	return data[1] || [];
+	return data.query && data.query.pages || {};
 };
 
 /**
@@ -94,17 +111,34 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheItemFromData = function ( 
  * @returns {OO.ui.MenuItemWidget[]} Menu items
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
-	var i, len, item,
+	var i, len, item, pageExistsExact, pageExists, index, matchingPage,
 		menu$ = this.lookupMenu.$,
 		items = [],
-		matchingPages = data,
-		// If not found, run value through mw.Title to avoid treating a match as a
-		// mismatch where normalisation would make them matching (bug 48476)
-		pageExistsExact = ve.indexOf( this.value, matchingPages ) !== -1,
-		titleObj = mw.Title.newFromText( this.value ),
-		pageExists = pageExistsExact || (
-			titleObj && ve.indexOf( titleObj.getPrefixedText(), matchingPages ) !== -1
-		);
+		existingPages = [],
+		matchingPages = [],
+		disambigPages = [],
+		redirectPages = [],
+		titleObj = mw.Title.newFromText( this.value );
+
+	for ( index in data ) {
+		matchingPage = data[index];
+		existingPages.push( matchingPage.title );
+
+		if ( matchingPage.redirect !== undefined ) {
+			redirectPages.push( matchingPage.title );
+		} else if ( matchingPage.pageprops !== undefined && matchingPage.pageprops.disambiguation !== undefined ) {
+			disambigPages.push( matchingPage.title );
+		} else {
+			matchingPages.push( matchingPage.title );
+		}
+	}
+
+	// If not found, run value through mw.Title to avoid treating a match as a
+	// mismatch where normalisation would make them matching (bug 48476)
+	pageExistsExact = ve.indexOf( this.value, existingPages ) !== -1;
+	pageExists = pageExistsExact || (
+		titleObj && ve.indexOf( titleObj.getPrefixedText(), existingPages ) !== -1
+	);
 
 	// External link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
@@ -154,6 +188,34 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 			items.push( new OO.ui.MenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( matchingPages[i] ),
 				{ '$': menu$, 'rel': 'matchingPage', 'label': matchingPages[i] }
+			) );
+		}
+	}
+
+	// Disambiguation pages
+	if ( disambigPages.length ) {
+		items.push( new OO.ui.MenuSectionItemWidget(
+			'disambigPages',
+			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-disambig-page' ) }
+		) );
+		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
+			items.push( new OO.ui.MenuItemWidget(
+				this.getInternalLinkAnnotationFromTitle( disambigPages[i] ),
+				{ '$': menu$, 'rel': 'disambigPage', 'label': disambigPages[i] }
+			) );
+		}
+	}
+
+	// Redirect pages
+	if ( redirectPages.length ) {
+		items.push( new OO.ui.MenuSectionItemWidget(
+			'redirectPages',
+			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-redirect-page' ) }
+		) );
+		for ( i = 0, len = redirectPages.length; i < len; i++ ) {
+			items.push( new OO.ui.MenuItemWidget(
+				this.getInternalLinkAnnotationFromTitle( redirectPages[i] ),
+				{ '$': menu$, 'rel': 'redirectPage', 'label': redirectPages[i] }
 			) );
 		}
 	}

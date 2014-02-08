@@ -726,6 +726,8 @@ $wgResourceModules += array(
 			'visualeditor-linkinspector-illegal-title',
 			'visualeditor-linkinspector-suggest-external-link',
 			'visualeditor-linkinspector-suggest-matching-page',
+			'visualeditor-linkinspector-suggest-disambig-page',
+			'visualeditor-linkinspector-suggest-redirect-page',
 			'visualeditor-linkinspector-suggest-new-page',
 			'visualeditor-media-input-placeholder',
 			'visualeditor-meta-tool',
