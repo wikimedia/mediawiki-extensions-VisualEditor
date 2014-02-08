@@ -178,7 +178,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( matchingPages && matchingPages.length ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'matchingPages',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-matching-page' ) }
+			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-matching-page', matchingPages.length ) }
 		) );
 		// Offer the exact text as a suggestion if the page exists
 		if ( pageExists && !pageExistsExact ) {
@@ -196,7 +196,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( disambigPages.length ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'disambigPages',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-disambig-page' ) }
+			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length ) }
 		) );
 		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
 			items.push( new OO.ui.MenuItemWidget(
@@ -210,7 +210,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( redirectPages.length ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'redirectPages',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-redirect-page' ) }
+			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-redirect-page', redirectPages.length ) }
 		) );
 		for ( i = 0, len = redirectPages.length; i < len; i++ ) {
 			items.push( new OO.ui.MenuItemWidget(
