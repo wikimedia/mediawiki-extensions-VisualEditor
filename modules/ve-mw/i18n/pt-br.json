@@ -10,7 +10,8 @@
             "Luckas",
             "OTAVIO1981",
             555,
-            "Gloria sah"
+            "Gloria sah",
+            "Elival"
         ]
     },
     "tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -99,7 +100,7 @@
     "visualeditor-mainnamespacepagelink": "Project:Domínio principal",
     "visualeditor-media-input-placeholder": "Procurar por mídia",
     "visualeditor-meta-tool": "Opções",
-    "visualeditor-mwalienextensioninspector-title": "Extensão do MediaWiki",
+    "visualeditor-mwalienextensioninspector-title": "Extensão MediaWiki",
     "visualeditor-mweditmodesource-title": "Trocar para editor de código-fonte",
     "visualeditor-mweditmodesource-warning": "Você está prestes a mudar para a edição de código-fonte. \nQuaisquer alterações feitas a este documento serão mantidas, mas você não será capaz de regressar a editar no Editor Visual sem salvar ou recarregar a página. \nDeseja continuar?",
     "visualeditor-mwhieroinspector-title": "Hieróglifos",

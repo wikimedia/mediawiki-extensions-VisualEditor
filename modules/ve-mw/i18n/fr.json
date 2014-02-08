@@ -26,7 +26,8 @@
             "Trizek",
             "Urhixidur",
             "Verdy p",
-            "Wyz"
+            "Wyz",
+            "Dr Brains"
         ]
     },
     "tooltip-ca-createsource": "Créer le code source de cette page",
@@ -55,6 +56,9 @@
     "visualeditor-dialog-media-page-advanced": "Paramètres avancés",
     "visualeditor-dialog-media-page-general": "Paramètres généraux",
     "visualeditor-dialog-media-position-center": "Contre",
+    "visualeditor-dialog-media-type-border": "Bordure",
+    "visualeditor-dialog-media-type-section": "Type d’image",
+    "visualeditor-dialog-media-type-thumb": "Vignette",
     "visualeditor-dialog-media-position-left": "Gauche",
     "visualeditor-dialog-media-position-none": "Aucun",
     "visualeditor-dialog-media-position-right": "Droite",
@@ -127,6 +131,8 @@
     "visualeditor-linkinspector-illegal-title": "Titre de page non valide",
     "visualeditor-linkinspector-suggest-external-link": "Lien externe",
     "visualeditor-linkinspector-suggest-matching-page": "Page correspondante",
+    "visualeditor-linkinspector-suggest-disambig-page": "\n{{PLURAL:$1|Page d’homonymie|Pages d’homonymie}}",
+    "visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Page redirigée|Pages redirigées}}",
     "visualeditor-linkinspector-suggest-new-page": "Nouvelle page",
     "visualeditor-loadwarning": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
     "visualeditor-loadwarning-token": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
