@@ -174,17 +174,51 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-media-position-section' ),
 		'icon': 'parameter'
 	} );
-	this.positionInput =  new OO.ui.SelectWidget( {
+	this.positionInput =  new OO.ui.ButtonSelectWidget( {
 		'$': this.$
 	} );
 	this.positionInput.addItems( [
-		new OO.ui.OptionWidget( 'left', { 'label': ve.msg( 'visualeditor-dialog-media-position-left' ) } ),
-		new OO.ui.OptionWidget( 'right', { 'label': ve.msg( 'visualeditor-dialog-media-position-right' ) } ),
-		new OO.ui.OptionWidget( 'center', { 'label': ve.msg( 'visualeditor-dialog-media-position-center' ) } ),
-		new OO.ui.OptionWidget( 'none', { 'label': ve.msg( 'visualeditor-dialog-media-position-none' ) } )
+		new OO.ui.ButtonOptionWidget( 'left', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-left' ) } ),
+		new OO.ui.ButtonOptionWidget( 'center', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-center' ) } ),
+		new OO.ui.ButtonOptionWidget( 'right', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-right' ) } ),
+		new OO.ui.ButtonOptionWidget( 'none', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-none' ) } )
 	], 0 );
 	// Build position fieldset
 	positionFieldset.$element.append( this.positionInput.$element );
+
+	// Type
+	this.typeFieldset = new OO.ui.FieldsetLayout( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-media-type-section' ),
+		'icon': 'parameter'
+	} );
+
+	this.typeInput = new OO.ui.ButtonSelectWidget( {
+		'$': this.$
+	} );
+	this.typeInput.addItems( [
+		// TODO: Inline images require a bit of further work, will be coming soon
+		new OO.ui.ButtonOptionWidget( 'thumb', {
+			'$': this.$,
+			'label': ve.msg( 'visualeditor-dialog-media-type-thumb' )
+		} ),
+		new OO.ui.ButtonOptionWidget( 'frameless', {
+			'$': this.$,
+			'label': ve.msg( 'visualeditor-dialog-media-type-frameless' )
+		} ),
+		new OO.ui.ButtonOptionWidget( 'frame', {
+			'$': this.$,
+			'label': ve.msg( 'visualeditor-dialog-media-type-frame' )
+		} ),
+		new OO.ui.ButtonOptionWidget( 'border', {
+			'$': this.$,
+			'label': ve.msg( 'visualeditor-dialog-media-type-border' )
+		} )
+	] );
+
+	// Build type fieldset
+	this.typeFieldset.$element
+		.append( this.typeInput.$element );
 
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
@@ -225,6 +259,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 
 	this.advancedSettingsPage.$element.append( [
 		positionFieldset.$element,
+		this.typeFieldset.$element,
 		this.sizeFieldset.$element
 	] );
 
@@ -294,6 +329,13 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		);
 	}
 
+	// Set image type
+	if ( this.mediaNode.getAttribute( 'type' ) !== undefined ) {
+		this.typeInput.selectItem(
+			this.typeInput.getItemFromData( this.mediaNode.getAttribute( 'type' ) )
+		);
+	}
+
 	// Initialization
 	this.captionFieldset.$element.append( this.captionSurface.$element );
 	this.captionSurface.initialize();
@@ -353,6 +395,11 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 		attr = this.positionInput.getSelectedItem();
 		if ( attr ) {
 			attrs.align = attr.getData();
+		}
+
+		attr = this.typeInput.getSelectedItem();
+		if ( attr ) {
+			attrs.type = attr.getData();
 		}
 
 		surfaceModel.change(
