@@ -70,7 +70,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
 	var i, len, title, result = [];
-	if ( ve.isArray( data ) && data.length ) {
+	if ( data[1] ) {
 		for ( i = 0, len = data[1].length; i < len; i++ ) {
 			title = mw.Title.newFromText( data[1][i] );
 			if ( title ) {
