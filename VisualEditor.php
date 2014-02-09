@@ -712,6 +712,7 @@ $wgResourceModules += array(
 			'visualeditor-editconflict',
 			'visualeditor-editnotices-tool',
 			'visualeditor-editsummary',
+			'visualeditor-editsummary-bytes-remaining',
 			'visualeditor-feedback-tool',
 			'visualeditor-formatdropdown-format-mw-heading1',
 			'visualeditor-formatdropdown-format-mw-heading2',

@@ -111,6 +111,7 @@
     "visualeditor-editconflict": "Alert message when saving a page causes an edit conflict",
     "visualeditor-editnotices-tool": "Text of tool in the toolbar that shows edit notices (such as [[MediaWiki:Editnotice-0]] and [[MediaWiki:Editnotice-8/en]]) as a pop-up.\n\nParameters:\n* $1 - the number of notices",
     "visualeditor-editsummary": "Label for the edit summary box",
+    "visualeditor-editsummary-bytes-remaining": "Title text for the number of bytes remaining in the edit summary",
     "visualeditor-formatdropdown-format-mw-heading1": "Item in the MediaWiki formatting dropdown for a level 1 heading (page title).\n{{Identical|Page title}}",
     "visualeditor-formatdropdown-format-mw-heading2": "Item in the MediaWiki formatting dropdown for a level 2 heading (section).\n{{Identical|Heading}}",
     "visualeditor-formatdropdown-format-mw-heading3": "Item in the MediaWiki formatting dropdown for a level 3 heading (sub-section)",
