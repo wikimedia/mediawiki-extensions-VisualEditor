@@ -78,7 +78,7 @@
     "visualeditor-formatdropdown-format-mw-heading6": "אונטערקעפל 4",
     "visualeditor-linkinspector-illegal-title": "אומגילטיקער בלאט טיטל",
     "visualeditor-linkinspector-suggest-external-link": "דרויסנדיקער לינק",
-    "visualeditor-linkinspector-suggest-matching-page": "פאסנדער בלאט",
+    "visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|פאסנדער בלאט|פאסנדער בלעטער}}",
     "visualeditor-linkinspector-suggest-new-page": "נייער בלאַט",
     "visualeditor-loadwarning": "פֿעלער ביים אנלאדן דאטן פון סארווער:$1. צי ווילט איר פרובירן נאכאמאל?",
     "visualeditor-loadwarning-token": "פֿעלער ביים אנלאדן רעדאקטירן טאקן פון סארווער:$1. צי ווילט איר פרובירן נאכאמאל?",
