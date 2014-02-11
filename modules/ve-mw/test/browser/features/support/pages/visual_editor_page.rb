@@ -51,7 +51,7 @@ class VisualEditorPage
   div(:visual_editor_toolbar, class: "oo-ui-toolbar-tools")
   span(:transclusion, class: "oo-ui-iconedElement-icon oo-ui-icon-template")
 
-  in_frame(:index => 0) do |frame|
+  in_iframe(:index => 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
     span(:leftarrowclose, class: "oo-ui-iconedElement-icon oo-ui-icon-previous", frame: frame)
@@ -61,7 +61,7 @@ class VisualEditorPage
     div(:ve_link_ui, class: "oo-ui-window-title", frame: frame)
   end
 
-  in_frame(:index => 1) do |frame|
+  in_iframe(:index => 1) do |frame|
     span(:add_parameter, class: "oo-ui-iconedElement-icon oo-ui-icon-parameter", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
     span(:apply_changes, text: "Apply changes", frame: frame)
@@ -85,7 +85,7 @@ class VisualEditorPage
     text_field(:transclusion_textfield, index: 0, frame: frame)
   end
 
-  in_frame(:index => 2) do |frame|
+  in_iframe(:index => 2) do |frame|
     div(:links_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:links_review_changes, class: "oo-ui-labeledElement-label", text: "Review your changes", frame: frame)
     div(:media_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
