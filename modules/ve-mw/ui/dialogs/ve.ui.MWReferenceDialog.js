@@ -65,7 +65,7 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 	},*/
 	// Insert
 	{
-		'label': 'visualeditor-toolbar-insert',
+		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		'indicator': 'down',
 		'include': '*',
 		'exclude': [
