@@ -104,7 +104,11 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
  */
 ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
 	var title = mw.Title.newFromText( original );
-	return title ? title.getPrefixedText() : original;
+	if ( title ) {
+		return title.getPrefixedText() + ( title.getFragment() !== null ? '#' + title.getFragment() : '' );
+	} else {
+		return original;
+	}
 };
 
 /* Methods */
