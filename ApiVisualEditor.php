@@ -212,6 +212,7 @@ class ApiVisualEditor extends ApiBase {
 			'title' => $title,
 			'prop' => 'text',
 			'disablepp' => true,
+			'pst' => true,
 			'text' => $wikitext
 		);
 		$api = new ApiMain(
