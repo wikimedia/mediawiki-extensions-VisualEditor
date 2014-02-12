@@ -1088,10 +1088,12 @@ ve.init.mw.ViewPageTarget.prototype.setupSaveDialog = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
+	// Focus the surface to make sure any open inspectors are closed
+	this.surface.getView().focus();
+
 	// Preload the serialization
-	var doc = this.surface.getModel().getDocument();
 	if ( !this.docToSave ) {
-		this.docToSave = ve.dm.converter.getDomFromModel( doc );
+		this.docToSave = ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() );
 	}
 	this.prepareCacheKey( this.docToSave );
 
