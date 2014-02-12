@@ -27,7 +27,8 @@ OO.inheritClass( ve.ui.MWSyntaxHighlightTool, ve.ui.DialogTool );
 
 ve.ui.MWSyntaxHighlightTool.static.name = 'mwSyntaxHighlight';
 ve.ui.MWSyntaxHighlightTool.static.icon = 'syntaxHighlight';
-ve.ui.MWSyntaxHighlightTool.static.titleMessage = 'visualeditor-dialogbutton-syntaxhighlight-tooltip';
+ve.ui.MWSyntaxHighlightTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-syntaxhighlight-tooltip' );
 ve.ui.MWSyntaxHighlightTool.static.dialog = 'mwSyntaxHighlight';
 ve.ui.MWSyntaxHighlightTool.static.modelClasses = [ ve.dm.MWSyntaxHighlightNode ];
 ve.ui.MWSyntaxHighlightTool.static.group = 'syntaxHighlight';
@@ -71,7 +72,8 @@ ve.ui.MWSynHiUndoTool.static.name = 'synhiUndo';
 ve.ui.MWSynHiUndoTool.static.group = 'synhiEditorTool';
 ve.ui.MWSynHiUndoTool.static.method = 'undo';
 ve.ui.MWSynHiUndoTool.static.icon = 'undo';
-ve.ui.MWSynHiUndoTool.static.titleMessage = 'visualeditor-historybutton-undo-tooltip';
+ve.ui.MWSynHiUndoTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-historybutton-undo-tooltip' );
 ve.ui.MWSynHiUndoTool.static.autoAdd = false;
 ve.ui.syntaxHighlightEditorToolFactory.register( ve.ui.MWSynHiUndoTool );
 
@@ -83,7 +85,8 @@ ve.ui.MWSynHiRedoTool.static.name = 'synhiRedo';
 ve.ui.MWSynHiRedoTool.static.group = 'synhiEditorTool';
 ve.ui.MWSynHiRedoTool.static.method = 'redo';
 ve.ui.MWSynHiRedoTool.static.icon = 'redo';
-ve.ui.MWSynHiRedoTool.static.titleMessage = 'visualeditor-historybutton-redo-tooltip';
+ve.ui.MWSynHiRedoTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-historybutton-redo-tooltip' );
 ve.ui.MWSynHiRedoTool.static.autoAdd = false;
 ve.ui.syntaxHighlightEditorToolFactory.register( ve.ui.MWSynHiRedoTool );
 
@@ -95,7 +98,7 @@ ve.ui.MWSynHiIndentTool.static.name = 'synhiIndent';
 ve.ui.MWSynHiIndentTool.static.group = 'synhiEditorTool';
 ve.ui.MWSynHiIndentTool.static.method = 'indent';
 ve.ui.MWSynHiIndentTool.static.icon = 'indent-list';
-ve.ui.MWSynHiIndentTool.static.titleMessage = '';
+ve.ui.MWSynHiIndentTool.static.title = '';
 ve.ui.MWSynHiIndentTool.static.autoAdd = false;
 ve.ui.syntaxHighlightEditorToolFactory.register( ve.ui.MWSynHiIndentTool );
 
@@ -107,6 +110,6 @@ ve.ui.MWSynHiBeautifyTool.static.name = 'synhiBeautify';
 ve.ui.MWSynHiBeautifyTool.static.group = 'synhiEditorTool';
 ve.ui.MWSynHiBeautifyTool.static.method = 'doBeautify';
 ve.ui.MWSynHiBeautifyTool.static.icon = 'reformat';
-ve.ui.MWSynHiBeautifyTool.static.titleMessage = '';
+ve.ui.MWSynHiBeautifyTool.static.title = '';
 ve.ui.MWSynHiBeautifyTool.static.autoAdd = false;
 ve.ui.syntaxHighlightEditorToolFactory.register( ve.ui.MWSynHiBeautifyTool );

@@ -49,7 +49,8 @@ ve.ui.MWEditModeSourceTool = function VeUiMWEditModeSourceTool( toolGroup, confi
 OO.inheritClass( ve.ui.MWEditModeSourceTool, ve.ui.MWEditModeTool );
 ve.ui.MWEditModeSourceTool.static.name = 'editModeSource';
 ve.ui.MWEditModeSourceTool.static.icon = 'source';
-ve.ui.MWEditModeSourceTool.static.titleMessage = 'visualeditor-mweditmodesource-title';
+ve.ui.MWEditModeSourceTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-mweditmodesource-title' );
 
 ve.ui.MWEditModeSourceTool.prototype.onSelect = function () {
 	this.setActive( false );

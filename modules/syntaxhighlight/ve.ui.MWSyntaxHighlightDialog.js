@@ -26,7 +26,8 @@ OO.inheritClass( ve.ui.MWSyntaxHighlightDialog, ve.ui.MWDialog );
 
 /* Static Properties */
 
-ve.ui.MWSyntaxHighlightDialog.static.titleMessage = 'visualeditor-dialog-syntaxhighlight-title';
+ve.ui.MWSyntaxHighlightDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-syntaxhighlight-title' );
 
 ve.ui.MWSyntaxHighlightDialog.static.icon = 'syntaxHighlight';
 

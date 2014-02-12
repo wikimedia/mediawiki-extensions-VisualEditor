@@ -37,7 +37,8 @@ OO.inheritClass( ve.ui.MWMediaInsertDialog, ve.ui.MWDialog );
 
 ve.ui.MWMediaInsertDialog.static.name = 'mediaInsert';
 
-ve.ui.MWMediaInsertDialog.static.titleMessage = 'visualeditor-dialog-media-insert-title';
+ve.ui.MWMediaInsertDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-media-insert-title' );
 
 ve.ui.MWMediaInsertDialog.static.icon = 'picture';
 

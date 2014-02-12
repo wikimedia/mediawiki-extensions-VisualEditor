@@ -31,7 +31,8 @@ OO.inheritClass( ve.ui.MWReferenceDialog, ve.ui.MWDialog );
 
 ve.ui.MWReferenceDialog.static.name = 'reference';
 
-ve.ui.MWReferenceDialog.static.titleMessage = 'visualeditor-dialog-reference-title';
+ve.ui.MWReferenceDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-reference-title' );
 
 ve.ui.MWReferenceDialog.static.icon = 'reference';
 

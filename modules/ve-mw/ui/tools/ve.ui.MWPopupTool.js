@@ -62,7 +62,7 @@ OO.inheritClass( ve.ui.MWNoticesPopupTool, OO.ui.PopupTool );
 ve.ui.MWNoticesPopupTool.static.name = 'notices';
 ve.ui.MWNoticesPopupTool.static.group = 'utility';
 ve.ui.MWNoticesPopupTool.static.icon = 'alert';
-ve.ui.MWNoticesPopupTool.static.titleMessage = 'visualeditor-editnotices-tool';
+ve.ui.MWNoticesPopupTool.static.title = OO.ui.deferMsg( 'visualeditor-editnotices-tool' );
 ve.ui.MWNoticesPopupTool.static.autoAdd = false;
 
 /* Methods */
@@ -76,7 +76,7 @@ ve.ui.MWNoticesPopupTool.prototype.getTitle = function () {
 	var items = this.toolbar.getTarget().getEditNotices(),
 		count = ve.getObjectKeys( items ).length;
 
-	return ve.msg( this.constructor.static.titleMessage, count );
+	return ve.msg( this.constructor.static.title, count );
 };
 
 /* Registration */
@@ -172,7 +172,7 @@ OO.inheritClass( ve.ui.MWHelpPopupTool, OO.ui.PopupTool );
 ve.ui.MWHelpPopupTool.static.name = 'help';
 ve.ui.MWHelpPopupTool.static.group = 'utility';
 ve.ui.MWHelpPopupTool.static.icon = 'help';
-ve.ui.MWHelpPopupTool.static.titleMessage = 'visualeditor-help-tool';
+ve.ui.MWHelpPopupTool.static.title = OO.ui.deferMsg( 'visualeditor-help-tool' );
 ve.ui.MWHelpPopupTool.static.autoAdd = false;
 
 /* Methods */

@@ -21,8 +21,8 @@ OO.inheritClass( ve.ui.MWAlienExtensionInspectorTool, ve.ui.InspectorTool );
 ve.ui.MWAlienExtensionInspectorTool.static.name = 'alienExtension';
 ve.ui.MWAlienExtensionInspectorTool.static.group = 'object';
 ve.ui.MWAlienExtensionInspectorTool.static.icon = 'alienextension';
-ve.ui.MWAlienExtensionInspectorTool.static.titleMessage =
-	'visualeditor-mwalienextensioninspector-title';
+ve.ui.MWAlienExtensionInspectorTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-mwalienextensioninspector-title' );
 ve.ui.MWAlienExtensionInspectorTool.static.inspector = 'alienExtension';
 ve.ui.MWAlienExtensionInspectorTool.static.modelClasses = [ ve.dm.MWAlienExtensionNode ];
 ve.ui.MWAlienExtensionInspectorTool.static.autoAdd = false;

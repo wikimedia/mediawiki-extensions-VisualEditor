@@ -17,13 +17,20 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, name, config ) {
+	var spec = parameter.getTemplate().getSpec();
+
 	// Configuration initialization
 	config = ve.extendObject(
 		parameter.isRequired() ? {
 			'indicator': 'required',
 			'indicatorTitle': ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 		} : {},
-		{ 'icon': 'parameter', 'movable': false, 'level': 1 },
+		{
+			'icon': 'parameter',
+			'movable': false,
+			'level': 1,
+			'label': spec.getParameterLabel( parameter.getName() )
+		},
 		config
 	);
 
@@ -32,8 +39,7 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 
 	// Properties
 	this.parameter = parameter;
-	this.spec = parameter.getTemplate().getSpec();
-	this.label = this.spec.getParameterLabel( this.parameter.getName() );
+	this.spec = spec;
 	this.textInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,

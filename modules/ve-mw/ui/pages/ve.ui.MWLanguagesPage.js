@@ -19,13 +19,15 @@
  */
 ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage( name, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'language' }, config );
+	config = ve.extendObject( {
+		'icon': 'language',
+		'label': ve.msg( 'visualeditor-dialog-meta-languages-section' )
+	}, config );
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.label = ve.msg( 'visualeditor-dialog-meta-languages-section' );
 	this.languagesFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-meta-languages-label' ),

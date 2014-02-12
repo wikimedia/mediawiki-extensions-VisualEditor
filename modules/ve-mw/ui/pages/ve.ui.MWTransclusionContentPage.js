@@ -18,14 +18,17 @@
  */
 ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContent( content, name, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'source', 'movable': true }, config );
+	config = ve.extendObject( {
+		'icon': 'source',
+		'movable': true,
+		'label': ve.msg( 'visualeditor-dialog-transclusion-content' )
+	}, config );
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
 	this.content = content;
-	this.label = ve.msg( 'visualeditor-dialog-transclusion-content' );
 	this.textInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,

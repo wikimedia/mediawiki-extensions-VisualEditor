@@ -18,7 +18,10 @@
  */
 ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 	// Configuration initialization
-	config = ve.extendObject( config, { 'icon': 'settings' } );
+	config = ve.extendObject( {
+		'icon': 'settings',
+		'label': ve.msg( 'visualeditor-dialog-meta-settings-section' )
+	}, config );
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
@@ -26,8 +29,6 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 	// Properties
 	this.metaList = surface.getModel().metaList;
 	this.tocOptionTouched = false;
-	this.label = ve.msg( 'visualeditor-dialog-meta-settings-section' );
-
 	this.settingsFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-meta-settings-label' ),
