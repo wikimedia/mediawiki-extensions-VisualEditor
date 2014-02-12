@@ -170,6 +170,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{
 		'type': 'menu',
 		'indicator': 'down',
+		'title': OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
 		'include': [ { 'group': 'format' } ],
 		'promote': [ 'paragraph' ],
 		'demote': [ 'preformatted', 'heading1' ]
@@ -179,6 +180,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'type': 'list',
 		'icon': 'text-style',
 		'indicator': 'down',
+		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		'include': [ { 'group': 'textStyle' }, 'clear' ],
 		'promote': [ 'bold', 'italic' ],
 		'demote': [ 'strikethrough', 'code',  'underline', 'clear' ]
