@@ -248,7 +248,8 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 			this.initialEditSummary = '';
 
 			this.deactivating = false;
-			mw.hook( 've.deactivationComplete' ).fire();
+
+			mw.hook( 've.deactivationComplete' ).fire( this.edited );
 		}
 	}
 };
