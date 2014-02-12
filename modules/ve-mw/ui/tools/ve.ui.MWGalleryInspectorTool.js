@@ -21,7 +21,8 @@ OO.inheritClass( ve.ui.MWGalleryInspectorTool, ve.ui.InspectorTool );
 ve.ui.MWGalleryInspectorTool.static.name = 'gallery';
 ve.ui.MWGalleryInspectorTool.static.group = 'object';
 ve.ui.MWGalleryInspectorTool.static.icon = 'gallery';
-ve.ui.MWGalleryInspectorTool.static.titleMessage = 'visualeditor-mwgalleryinspector-title';
+ve.ui.MWGalleryInspectorTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-mwgalleryinspector-title' );
 ve.ui.MWGalleryInspectorTool.static.inspector = 'gallery';
 ve.ui.MWGalleryInspectorTool.static.modelClasses = [ ve.dm.MWGalleryNode ];
 ve.ui.toolFactory.register( ve.ui.MWGalleryInspectorTool );

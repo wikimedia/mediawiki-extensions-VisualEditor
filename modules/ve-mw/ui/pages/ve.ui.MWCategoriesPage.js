@@ -21,7 +21,10 @@
  */
 ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'tag' }, config );
+	config = ve.extendObject( {
+		'icon': 'tag',
+		'label': ve.msg( 'visualeditor-dialog-meta-categories-section' )
+	}, config );
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
@@ -30,7 +33,6 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	this.metaList = surface.getModel().metaList;
 	this.defaultSortKeyTouched = false;
 	this.fallbackDefaultSortKey = mw.config.get( 'wgTitle' );
-	this.label = ve.msg( 'visualeditor-dialog-meta-categories-section' );
 	this.categoriesFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-meta-categories-data-label' ),

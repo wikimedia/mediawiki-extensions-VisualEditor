@@ -33,7 +33,8 @@ OO.inheritClass( ve.ui.MWMediaEditDialog, ve.ui.MWDialog );
 
 ve.ui.MWMediaEditDialog.static.name = 'mediaEdit';
 
-ve.ui.MWMediaEditDialog.static.titleMessage = 'visualeditor-dialog-media-title';
+ve.ui.MWMediaEditDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-media-title' );
 
 ve.ui.MWMediaEditDialog.static.icon = 'picture';
 

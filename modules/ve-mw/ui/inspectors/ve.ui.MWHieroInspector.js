@@ -30,7 +30,8 @@ ve.ui.MWHieroInspector.static.name = 'hiero';
 
 ve.ui.MWHieroInspector.static.icon = 'hiero';
 
-ve.ui.MWHieroInspector.static.titleMessage = 'visualeditor-mwhieroinspector-title';
+ve.ui.MWHieroInspector.static.title =
+	OO.ui.deferMsg( 'visualeditor-mwhieroinspector-title' );
 
 ve.ui.MWHieroInspector.static.nodeView = ve.ce.MWHieroNode;
 

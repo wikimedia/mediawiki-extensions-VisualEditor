@@ -17,16 +17,21 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
+	var spec = template.getSpec();
+
 	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'template', 'movable': true }, config );
+	config = ve.extendObject( {
+		'icon': 'template',
+		'movable': true,
+		'label': spec.getLabel()
+	}, config );
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
 	this.template = template;
-	this.spec = this.template.getSpec();
-	this.label = this.spec.getLabel();
+	this.spec = spec;
 	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, { '$': this.$ } )
 		.connect( this, { 'select': 'onParameterSelect' } );
 	this.removeButton = new OO.ui.ButtonWidget( {

@@ -32,7 +32,8 @@ OO.inheritClass( ve.ui.MWBetaWelcomeDialog, ve.ui.MWDialog );
 
 ve.ui.MWBetaWelcomeDialog.static.name = 'betaWelcome';
 
-ve.ui.MWBetaWelcomeDialog.static.titleMessage = 'visualeditor-dialog-beta-welcome-title';
+ve.ui.MWBetaWelcomeDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-beta-welcome-title' );
 
 ve.ui.MWBetaWelcomeDialog.static.icon = 'help';
 
@@ -45,7 +46,7 @@ ve.ui.MWBetaWelcomeDialog.static.icon = 'help';
  * @returns {string} Window title
  */
 ve.ui.MWBetaWelcomeDialog.prototype.getTitle = function () {
-	return ve.msg( this.constructor.static.titleMessage, mw.user );
+	return ve.msg( this.constructor.static.title, mw.user );
 };
 
 /**

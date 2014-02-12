@@ -32,7 +32,8 @@ ve.ui.MWGalleryInspector.static.name = 'gallery';
 
 ve.ui.MWGalleryInspector.static.icon = 'gallery';
 
-ve.ui.MWGalleryInspector.static.titleMessage = 'visualeditor-mwgalleryinspector-title';
+ve.ui.MWGalleryInspector.static.title =
+	OO.ui.deferMsg( 'visualeditor-mwgalleryinspector-title' );
 
 ve.ui.MWGalleryInspector.static.nodeView = ve.ce.MWGalleryNode;
 

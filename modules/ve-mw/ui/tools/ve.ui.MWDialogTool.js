@@ -21,7 +21,8 @@ OO.inheritClass( ve.ui.MWMediaEditDialogTool, ve.ui.DialogTool );
 ve.ui.MWMediaEditDialogTool.static.name = 'mediaEdit';
 ve.ui.MWMediaEditDialogTool.static.group = 'object';
 ve.ui.MWMediaEditDialogTool.static.icon = 'picture';
-ve.ui.MWMediaEditDialogTool.static.titleMessage = 'visualeditor-dialogbutton-media-tooltip';
+ve.ui.MWMediaEditDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-media-tooltip' );
 ve.ui.MWMediaEditDialogTool.static.dialog = 'mediaEdit';
 ve.ui.MWMediaEditDialogTool.static.modelClasses = [ ve.dm.MWBlockImageNode ];
 ve.ui.MWMediaEditDialogTool.static.autoAdd = false;
@@ -44,7 +45,8 @@ OO.inheritClass( ve.ui.MWMediaInsertDialogTool, ve.ui.DialogTool );
 ve.ui.MWMediaInsertDialogTool.static.name = 'mediaInsert';
 ve.ui.MWMediaInsertDialogTool.static.group = 'object';
 ve.ui.MWMediaInsertDialogTool.static.icon = 'picture';
-ve.ui.MWMediaInsertDialogTool.static.titleMessage = 'visualeditor-dialogbutton-media-tooltip';
+ve.ui.MWMediaInsertDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-media-tooltip' );
 ve.ui.MWMediaInsertDialogTool.static.dialog = 'mediaInsert';
 ve.ui.toolFactory.register( ve.ui.MWMediaInsertDialogTool );
 
@@ -65,7 +67,8 @@ OO.inheritClass( ve.ui.MWReferenceDialogTool, ve.ui.DialogTool );
 ve.ui.MWReferenceDialogTool.static.name = 'reference';
 ve.ui.MWReferenceDialogTool.static.group = 'object';
 ve.ui.MWReferenceDialogTool.static.icon = 'reference';
-ve.ui.MWReferenceDialogTool.static.titleMessage = 'visualeditor-dialogbutton-reference-tooltip';
+ve.ui.MWReferenceDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-tooltip' );
 ve.ui.MWReferenceDialogTool.static.dialog = 'reference';
 ve.ui.MWReferenceDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 ve.ui.toolFactory.register( ve.ui.MWReferenceDialogTool );
@@ -86,8 +89,8 @@ OO.inheritClass( ve.ui.MWReferenceListDialogTool, ve.ui.DialogTool );
 ve.ui.MWReferenceListDialogTool.static.name = 'referenceList';
 ve.ui.MWReferenceListDialogTool.static.group = 'object';
 ve.ui.MWReferenceListDialogTool.static.icon = 'references';
-ve.ui.MWReferenceListDialogTool.static.titleMessage =
-	'visualeditor-dialogbutton-referencelist-tooltip';
+ve.ui.MWReferenceListDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-referencelist-tooltip' );
 ve.ui.MWReferenceListDialogTool.static.dialog = 'referenceList';
 ve.ui.MWReferenceListDialogTool.static.modelClasses = [ ve.dm.MWReferenceListNode ];
 ve.ui.toolFactory.register( ve.ui.MWReferenceListDialogTool );
@@ -108,8 +111,8 @@ OO.inheritClass( ve.ui.MWTransclusionDialogTool, ve.ui.DialogTool );
 ve.ui.MWTransclusionDialogTool.static.name = 'transclusion';
 ve.ui.MWTransclusionDialogTool.static.group = 'object';
 ve.ui.MWTransclusionDialogTool.static.icon = 'template';
-ve.ui.MWTransclusionDialogTool.static.titleMessage =
-	'visualeditor-dialogbutton-transclusion-tooltip';
+ve.ui.MWTransclusionDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-transclusion-tooltip' );
 ve.ui.MWTransclusionDialogTool.static.dialog = 'transclusion';
 ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 ve.ui.toolFactory.register( ve.ui.MWTransclusionDialogTool );
@@ -130,7 +133,8 @@ OO.inheritClass( ve.ui.MWMetaDialogTool, ve.ui.DialogTool );
 ve.ui.MWMetaDialogTool.static.name = 'meta';
 ve.ui.MWMetaDialogTool.static.group = 'utility';
 ve.ui.MWMetaDialogTool.static.icon = 'window';
-ve.ui.MWMetaDialogTool.static.titleMessage = 'visualeditor-meta-tool';
+ve.ui.MWMetaDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-meta-tool' );
 ve.ui.MWMetaDialogTool.static.dialog = 'meta';
 ve.ui.MWMetaDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWMetaDialogTool );
@@ -151,7 +155,8 @@ OO.inheritClass( ve.ui.MWPageSettingsDialogTool, ve.ui.DialogTool );
 ve.ui.MWPageSettingsDialogTool.static.name = 'settings';
 ve.ui.MWPageSettingsDialogTool.static.group = 'utility';
 ve.ui.MWPageSettingsDialogTool.static.icon = 'settings';
-ve.ui.MWPageSettingsDialogTool.static.titleMessage = 'visualeditor-settings-tool';
+ve.ui.MWPageSettingsDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-settings-tool' );
 ve.ui.MWPageSettingsDialogTool.static.dialog = 'meta';
 ve.ui.MWPageSettingsDialogTool.static.config = { 'page': 'settings' };
 ve.ui.MWPageSettingsDialogTool.static.autoAdd = false;
@@ -173,7 +178,8 @@ OO.inheritClass( ve.ui.MWCategoriesDialogTool, ve.ui.DialogTool );
 ve.ui.MWCategoriesDialogTool.static.name = 'categories';
 ve.ui.MWCategoriesDialogTool.static.group = 'utility';
 ve.ui.MWCategoriesDialogTool.static.icon = 'tag';
-ve.ui.MWCategoriesDialogTool.static.titleMessage = 'visualeditor-categories-tool';
+ve.ui.MWCategoriesDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-categories-tool' );
 ve.ui.MWCategoriesDialogTool.static.dialog = 'meta';
 ve.ui.MWCategoriesDialogTool.static.config = { 'page': 'categories' };
 ve.ui.MWCategoriesDialogTool.static.autoAdd = false;
@@ -195,7 +201,8 @@ OO.inheritClass( ve.ui.MWLanguagesDialogTool, ve.ui.DialogTool );
 ve.ui.MWLanguagesDialogTool.static.name = 'languages';
 ve.ui.MWLanguagesDialogTool.static.group = 'utility';
 ve.ui.MWLanguagesDialogTool.static.icon = 'language';
-ve.ui.MWLanguagesDialogTool.static.titleMessage = 'visualeditor-languages-tool';
+ve.ui.MWLanguagesDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-languages-tool' );
 ve.ui.MWLanguagesDialogTool.static.dialog = 'meta';
 ve.ui.MWLanguagesDialogTool.static.config = { 'page': 'languages' };
 ve.ui.MWLanguagesDialogTool.static.autoAdd = false;
@@ -217,7 +224,8 @@ OO.inheritClass( ve.ui.MWCommandHelpDialogTool, ve.ui.DialogTool );
 ve.ui.MWCommandHelpDialogTool.static.name = 'commandHelp';
 ve.ui.MWCommandHelpDialogTool.static.group = 'utility';
 ve.ui.MWCommandHelpDialogTool.static.icon = 'help';
-ve.ui.MWCommandHelpDialogTool.static.titleMessage = 'visualeditor-dialog-command-help-title';
+ve.ui.MWCommandHelpDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' );
 ve.ui.MWCommandHelpDialogTool.static.dialog = 'commandHelp';
 ve.ui.MWCommandHelpDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWCommandHelpDialogTool );

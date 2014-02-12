@@ -21,7 +21,8 @@ OO.inheritClass( ve.ui.MWMathInspectorTool, ve.ui.InspectorTool );
 ve.ui.MWMathInspectorTool.static.name = 'math';
 ve.ui.MWMathInspectorTool.static.group = 'object';
 ve.ui.MWMathInspectorTool.static.icon = 'math';
-ve.ui.MWMathInspectorTool.static.titleMessage = 'visualeditor-mwmathinspector-title';
+ve.ui.MWMathInspectorTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-mwmathinspector-title' );
 ve.ui.MWMathInspectorTool.static.inspector = 'math';
 ve.ui.MWMathInspectorTool.static.modelClasses = [ ve.dm.MWMathNode ];
 ve.ui.toolFactory.register( ve.ui.MWMathInspectorTool );

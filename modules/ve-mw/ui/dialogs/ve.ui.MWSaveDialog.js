@@ -43,7 +43,8 @@ OO.inheritClass( ve.ui.MWSaveDialog, ve.ui.MWDialog );
 
 ve.ui.MWSaveDialog.static.name = 'mwSave';
 
-ve.ui.MWSaveDialog.static.titleMessage = 'visualeditor-savedialog-title-save';
+ve.ui.MWSaveDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-savedialog-title-save' );
 
 /* Events */
 

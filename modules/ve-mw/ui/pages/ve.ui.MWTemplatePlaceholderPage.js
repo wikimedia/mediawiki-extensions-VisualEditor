@@ -24,10 +24,10 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholder( placeholde
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.placeholder = placeholder;
 	this.label = this.$( '<span>' )
-			.addClass( 've-ui-mwTransclusionDialog-placeholder-label' )
-			.text( ve.msg( 'visualeditor-dialog-transclusion-placeholder' ) );
+		.addClass( 've-ui-mwTransclusionDialog-placeholder-label' )
+		.text( ve.msg( 'visualeditor-dialog-transclusion-placeholder' ) );
+	this.placeholder = placeholder;
 	this.addTemplateInput = new ve.ui.MWTitleInputWidget( {
 			'$': this.$, '$overlay': this.$overlay, 'namespace': 10
 		} )

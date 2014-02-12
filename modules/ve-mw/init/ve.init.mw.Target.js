@@ -192,7 +192,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Insert
 	{
-		'label': 'visualeditor-toolbar-insert',
+		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		'indicator': 'down',
 		'include': '*',
 		'promote': [ 'reference', 'mediaInsert' ],
