@@ -306,6 +306,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		}
 	);
 
+	this.initialDimensions = ve.copy( mediaNodeView.currentDimensions );
 	this.sizeWidget.setPropertiesFromScalable( mediaNodeView );
 
 	// HACK: Override properties with image-specific current size
@@ -383,10 +384,19 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 		surfaceModel.change(
 			ve.dm.Transaction.newFromDocumentInsertion( doc, this.captionNode.getRange().start, newDoc )
 		);
-
 		// Change attributes only if the values are valid
 		if ( this.sizeWidget.isCurrentDimensionsValid() ) {
 			attrs = this.sizeWidget.getCurrentDimensions();
+			if (
+				this.mediaNode.getAttribute( 'defaultSize' ) &&
+				(
+					this.initialDimensions.width !== attrs.width ||
+					this.initialDimensions.height !== attrs.height
+				)
+			) {
+				// Size changed, remove default class
+				attrs.defaultSize = false;
+			}
 		}
 
 		attr = $.trim( this.altTextInput.getValue() );
