@@ -307,6 +307,19 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 
 	this.sizeWidget.setPropertiesFromScalable( mediaNodeView );
 
+	// HACK: Override properties with image-specific current size
+	// Ideally, this should be dealt with in setPropertiesFromScalable
+	// but the currentDimensions object of the mediaNodeView seems
+	// to not be updated properly. Without this hack, the media
+	// dialog presents the dimensions that the image had in the
+	// beginning of the session (in the wikitext) rather than update
+	// these when the image is resized either from the dialog or
+	// by the resize handles.
+	this.sizeWidget.setCurrentDimensions( {
+		'width': this.mediaNode.getAttribute( 'width' ),
+		'height': this.mediaNode.getAttribute( 'height' )
+	} );
+
 	if ( !mediaNodeView.getOriginalDimensions() ) {
 		mediaNodeView.fetchDimensions()
 			.done( function () {
