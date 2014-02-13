@@ -305,6 +305,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
 		new OO.ui.InputLabelWidget( { '$': this.$, 'label': 'text' } ).$element
 			.addClass( 've-ui-mwSaveDialog-editSummary-count' ).text( this.editSummaryByteLimit )
+			.attr( 'title', ve.msg( 'visualeditor-editsummary-bytes-remaining' ) )
 	);
 	this.$saveMessages = this.$( '<div>' );
 	this.$saveActions = this.$( '<div>' ).append(
