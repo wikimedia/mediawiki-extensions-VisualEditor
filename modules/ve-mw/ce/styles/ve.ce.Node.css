@@ -46,6 +46,13 @@
 	display: inline-block;
 }
 
+/* ve.ce.MWBlockImageNode */
+
+/* Hide outer shield for centered images */
+figure[typeof*='mw:Image'].mw-halign-center + .ve-ce-protectedNode-shield {
+	display: none;
+}
+
 /* ve.ce.MWAlienExtensionNode */
 
 .ve-ce-mwAlienExtensionNode {
