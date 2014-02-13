@@ -26,11 +26,11 @@
 					"ve",
 					"ve.Range",
 					"ve.EventSequencer",
+					"ve.Scalable",
 					"ve.Node",
 					"ve.BranchNode",
 					"ve.LeafNode",
-					"ve.Document",
-					"ve.Scalable"
+					"ve.Document"
 				]
 			},
 			{
