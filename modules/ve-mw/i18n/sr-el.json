@@ -1,10 +1,12 @@
 {
     "@metadata": {
         "authors": [
-            "Milicevic01"
+            "Milicevic01",
+            "Msannakoval"
         ]
     },
     "visualeditor-categories-tool": "Kategorije",
+    "visualeditor-dialog-meta-languages-label": "Jezici",
     "visualeditor-languages-tool": "Jezici",
     "visualeditor-preference-core-description": "Uključuje VisualEditor. Neće biti dostupan na stranicama za razgovor i nekim drugim imenskim prostorima.",
     "visualeditor-preference-enable": "Uključuje VisualEditor. Neće biti dostupan na stranicama za razgovor i nekim drugim imenskim prostorima.",
