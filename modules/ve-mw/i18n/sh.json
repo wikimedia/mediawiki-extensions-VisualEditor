@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "OC Ripper"
+            "OC Ripper",
+            "Msannakoval"
         ]
     },
     "tooltip-ca-createsource": "Stvorite izvorni kod ove stranice",
@@ -71,6 +72,7 @@
     "visualeditor-formatdropdown-format-mw-heading4": "Podnaslov 2",
     "visualeditor-formatdropdown-format-mw-heading5": "Podnaslov 3",
     "visualeditor-formatdropdown-format-mw-heading6": "Podnaslov 4",
+    "visualeditor-languages-tool": "Jezici",
     "visualeditor-linkinspector-suggest-external-link": "Vanjski link",
     "visualeditor-linkinspector-suggest-matching-page": "Odgovarajuća stranica",
     "visualeditor-linkinspector-suggest-new-page": "Nova stranica",
