@@ -612,6 +612,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWAdvancedTransclusionDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceListDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
+			'modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWFormatTool.js',
