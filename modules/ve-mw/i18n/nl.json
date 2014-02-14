@@ -17,7 +17,8 @@
             "Sjoerddebruin",
             "Southparkfan",
             "सरोज कुमार ढकाल",
-            "Kim Bruning"
+            "Kim Bruning",
+            "Niknetniko"
         ]
     },
     "tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
@@ -69,6 +70,8 @@
     "visualeditor-dialog-meta-languages-section": "Talen",
     "visualeditor-dialog-meta-settings-label": "Pagina-instellingen",
     "visualeditor-dialog-meta-settings-noeditsection-label": "De bewerkings-koppelingen die naast elke kop op de pagina staan uitschakelen.",
+    "visualeditor-dialog-meta-settings-redirect-label": "Pagina omleiden naar",
+    "visualeditor-dialog-meta-settings-redirect-placeholder": "Doelpagina voor omleiding",
     "visualeditor-dialog-meta-settings-section": "Pagina-instellingen",
     "visualeditor-dialog-meta-settings-toc-default": "Weergeven indien nodig",
     "visualeditor-dialog-meta-settings-toc-disable": "nooit weergegeven",
