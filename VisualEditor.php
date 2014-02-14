@@ -635,7 +635,16 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			// ce
-			'modules/ve-mw/ce/styles/ve.ce.Node.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWAlienExtensionNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWBlockImageNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWHieroNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWInlineImageNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWMathNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWNumberedExternalLinkNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWReferenceListNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWReferenceNode.css',
+			'modules/ve-mw/ce/styles/ve.ce.MWTransclusionNode.css',
+
 			// ui
 			'modules/ve-mw/ui/styles/ve.ui.MWWidget.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWInspector.css',
