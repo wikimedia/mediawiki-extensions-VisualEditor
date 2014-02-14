@@ -5,16 +5,10 @@ Feature: VisualEditor on production wikis
 
   Exclusions (see Bugzilla 60842):
 
-  http://af.wikipedia.org
-  http://am.wikipedia.org
   http://bpy.wikipedia.org
   http://cv.wikipedia.org
-  http://kaa.wikipedia.org
-  http://ln.wikipedia.org
   http://mzn.wikipedia.org
   http://new.wikipedia.org
-  http://pt.wikiversity.org
-  http://szl.wikipedia.org
 
   Scenario Outline: VisualEditor production availability
     Given I visit a non-existent page at <wiki>
@@ -24,8 +18,10 @@ Feature: VisualEditor on production wikis
     | aa.wikipedia.org        |
     | ab.wikipedia.org        |
     | ace.wikipedia.org       |
+    | af.wikipedia.org        |
     | ak.wikipedia.org        |
     | als.wikipedia.org       |
+    | am.wikipedia.org        |
     | an.wikipedia.org        |
     | ang.wikipedia.org       |
     | ar.wikipedia.org        |
@@ -130,6 +126,7 @@ Feature: VisualEditor on production wikis
     | jbo.wikipedia.org       |
     | jv.wikipedia.org        |
     | ka.wikipedia.org        |
+    | kaa.wikipedia.org       |
     | kab.wikipedia.org       |
     | kbd.wikipedia.org       |
     | kg.wikipedia.org        |
@@ -158,6 +155,7 @@ Feature: VisualEditor on production wikis
     | li.wikipedia.org        |
     | lij.wikipedia.org       |
     | lmo.wikipedia.org       |
+    | ln.wikipedia.org        |
     | lo.wikipedia.org        |
     | lt.wikipedia.org        |
     | ltg.wikipedia.org       |
@@ -213,6 +211,7 @@ Feature: VisualEditor on production wikis
     | ps.wikipedia.org        |
     | pt.wikibooks.org        |
     | pt.wikipedia.org        |
+    | pt.wikiversity.org      |
     | qu.wikipedia.org        |
     | rm.wikipedia.org        |
     | rmy.wikipedia.org       |
@@ -247,6 +246,7 @@ Feature: VisualEditor on production wikis
     | su.wikipedia.org        |
     | sv.wikipedia.org        |
     | sw.wikipedia.org        |
+    | szl.wikipedia.org       |
     | ta.wikipedia.org        |
     | te.wikipedia.org        |
     | test.wikipedia.org      |
