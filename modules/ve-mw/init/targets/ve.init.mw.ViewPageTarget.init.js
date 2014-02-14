@@ -363,14 +363,6 @@
 	init.isAvailable = (
 		support.visualEditor &&
 
-		// Disable on redirect pages until redirects are editable (bug 47328)
-		// Property wgIsRedirect is relatively new in core, many cached pages
-		// don't have it yet. We do a best-effort approach using the url query
-		// which will cover all working redirect (the only case where one can
-		// read a redirect page without ?redirect=no is in case of broken or
-		// double redirects).
-		!mw.config.get( 'wgIsRedirect', !!uri.query.redirect ) &&
-
 		// Only in supported skins
 		$.inArray( mw.config.get( 'skin' ), conf.skins ) !== -1 &&
 
