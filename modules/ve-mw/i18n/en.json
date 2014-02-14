@@ -62,6 +62,7 @@
     "visualeditor-dialog-meta-categories-category": "Category",
     "visualeditor-dialog-meta-categories-data-label": "Categories",
     "visualeditor-dialog-meta-categories-defaultsort-label": "Sort this page by default as",
+    "visualeditor-dialog-meta-categories-hidden": "This category is set not to show on pages to which it is added.",
     "visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Matching categories",
     "visualeditor-dialog-meta-categories-input-movecategorylabel": "Move this category here",
     "visualeditor-dialog-meta-categories-input-newcategorylabel": "New category",
