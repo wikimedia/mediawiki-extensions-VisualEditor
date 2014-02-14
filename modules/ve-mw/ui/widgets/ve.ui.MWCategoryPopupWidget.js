@@ -168,8 +168,8 @@ ve.ui.MWCategoryPopupWidget.prototype.setDefaultSortKey = function ( value ) {
  * @param {ve.ui.MWCategoryItemWidget} item Category item
  */
 ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
-	var left = item.$arrow.offset().left + ( item.$arrow.width() / 2 ),
-		top = item.$arrow.offset().top + item.$arrow.height(),
+	var left = item.$indicator.offset().left + ( item.$indicator.width() / 2 ),
+		top = item.$indicator.offset().top + item.$indicator.height(),
 		width = this.$menu.outerWidth( true ),
 		height = this.$menu.outerHeight( true );
 

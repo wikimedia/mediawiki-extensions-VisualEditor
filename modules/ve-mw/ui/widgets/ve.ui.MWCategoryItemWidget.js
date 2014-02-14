@@ -11,6 +11,7 @@
  * @class
  * @abstract
  * @extends OO.ui.Widget
+ * @mixins OO.ui.IndicatedElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -18,10 +19,13 @@
  */
 ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	// Config intialization
-	config = config || {};
+	config = ve.extendObject( { 'indicator': 'down' }, config );
 
 	// Parent constructor
 	OO.ui.Widget.call( this, config );
+
+	// Mixin constructors
+	OO.ui.IndicatedElement.call( this, this.$( '<span>' ), config );
 
 	// Properties
 	this.name = config.item.name;
@@ -30,7 +34,6 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	this.metaItem = config.item.metaItem;
 	this.menuOpen = false;
 	this.$label = this.$( '<span>' );
-	this.$arrow = this.$( '<div>' );
 	this.$categoryItem = this.$( '<div>' );
 
 	// Events
@@ -40,11 +43,12 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	} );
 
 	// Initialization
-	this.$label.text( this.value );
-	this.$arrow.addClass( 've-ui-mwCategoryItemControl oo-ui-icon-down' );
+	this.$label
+		.addClass( 've-ui-mwCategoryItemWidget-label' )
+		.text( this.value );
 	this.$categoryItem
-		.addClass( 've-ui-mwCategoryItemButton' )
-		.append( this.$label, this.$arrow, this.$( '<div>' ).css( 'clear', 'both' ) );
+		.addClass( 've-ui-mwCategoryItemWidget-button' )
+		.append( this.$label, this.$indicator );
 	this.$element
 		.addClass( 've-ui-mwCategoryItemWidget' )
 		.append( this.$categoryItem );
@@ -53,6 +57,8 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWCategoryItemWidget, OO.ui.Widget );
+
+OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.IndicatedElement );
 
 /* Events */
 
