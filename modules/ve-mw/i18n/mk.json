@@ -64,6 +64,7 @@
     "visualeditor-dialog-meta-settings-noeditsection-label": "Оневозможи ги врските за уредување до секое заглавие на страницава.",
     "visualeditor-dialog-meta-settings-redirect-label": "Пренасочи ја страницава кон",
     "visualeditor-dialog-meta-settings-redirect-placeholder": "Целна страница на пренасочувањето",
+    "visualeditor-dialog-meta-settings-redirect-staticlabel": "Спречи го подновувањето на ова пренасочување при преместување на целната страница.",
     "visualeditor-dialog-meta-settings-section": "Поставки за страницата",
     "visualeditor-dialog-meta-settings-toc-default": "Прикажи ако е потребно",
     "visualeditor-dialog-meta-settings-toc-disable": "Никогаш не прикажувај",

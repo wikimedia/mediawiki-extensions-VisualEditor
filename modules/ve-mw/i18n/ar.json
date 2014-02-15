@@ -8,7 +8,8 @@
             "Mido",
             "OsamaK",
             "زكريا",
-            "مشعل الحربي"
+            "مشعل الحربي",
+            "Asaifm"
         ]
     },
     "tooltip-ca-createsource": "إنشاء الكود المصدري لهذه الصفحة",
@@ -58,7 +59,7 @@
     "visualeditor-dialog-meta-settings-noeditsection-label": "تعطيل وصلات التعديل الظاهرة بجانب كل عنوان في هذه الصفحة.",
     "visualeditor-dialog-meta-settings-section": "إعدادات الصفحة",
     "visualeditor-dialog-meta-settings-toc-default": "أظهر إن لزم الأمر",
-    "visualeditor-dialog-meta-settings-toc-disable": "لا تظهر",
+    "visualeditor-dialog-meta-settings-toc-disable": "لا تظهر مطلقاً",
     "visualeditor-dialog-meta-settings-toc-force": "أظهر دائما",
     "visualeditor-dialog-meta-settings-toc-label": "أظهر فهرس المحتويات",
     "visualeditor-dialog-meta-title": "خيارات",
@@ -102,7 +103,7 @@
     "visualeditor-languages-tool": "لغات",
     "visualeditor-linkinspector-illegal-title": "عنوان الصفحة غير صحيح",
     "visualeditor-linkinspector-suggest-external-link": "وصلة خارجية",
-    "visualeditor-linkinspector-suggest-matching-page": "الصفحة المقابلة",
+    "visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|الصفحة المطابقة|الصفحات المطابقة}}",
     "visualeditor-linkinspector-suggest-new-page": "صفحة جديدة",
     "visualeditor-loadwarning": "خطأ في تحميل البيانات من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
     "visualeditor-loadwarning-token": "خطأ في تحميل تصريح التعديل من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
