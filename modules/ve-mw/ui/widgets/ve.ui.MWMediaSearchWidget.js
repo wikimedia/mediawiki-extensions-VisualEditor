@@ -187,15 +187,20 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 	}
 
 	for ( page in pages ) {
-		title = new mw.Title( pages[page].title ).getMainText();
-		if ( !( title in this.titles ) ) {
-			this.titles[title] = true;
-			items.push(
-				new ve.ui.MWMediaResultWidget(
-					pages[page],
-					{ '$': this.$, 'size': this.size }
-				)
-			);
+		// Verify that imageinfo exists
+		// In case it does not, skip the image to avoid errors in
+		// ve.ui.MWMediaResultWidget
+		if ( pages[page].imageinfo && pages[page].imageinfo.length > 0 ) {
+			title = new mw.Title( pages[page].title ).getMainText();
+			if ( !( title in this.titles ) ) {
+				this.titles[title] = true;
+				items.push(
+					new ve.ui.MWMediaResultWidget(
+						pages[page],
+						{ '$': this.$, 'size': this.size }
+					)
+				);
+			}
 		}
 	}
 
