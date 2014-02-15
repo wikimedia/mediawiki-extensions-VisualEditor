@@ -11,7 +11,7 @@
  * @class
  * @abstract
  * @extends OO.ui.Widget
- * @mixin OO.ui.GroupElement
+ * @mixins OO.ui.GroupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
