@@ -17,13 +17,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContent( content, name, config ) {
-	// Configuration initialization
-	config = ve.extendObject( {
-		'icon': 'source',
-		'movable': true,
-		'label': ve.msg( 'visualeditor-dialog-transclusion-content' )
-	}, config );
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -61,6 +54,21 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContent( content, n
 OO.inheritClass( ve.ui.MWTransclusionContentPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'source' )
+			.setMovable( true )
+			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-content' ) );
+	}
+};
 
 ve.ui.MWTransclusionContentPage.prototype.onTextInputChange = function () {
 	this.content.setValue( this.textInput.getValue() );

@@ -18,12 +18,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage( name, config ) {
-	// Configuration initialization
-	config = ve.extendObject( {
-		'icon': 'language',
-		'label': ve.msg( 'visualeditor-dialog-meta-languages-section' )
-	}, config );
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -49,6 +43,20 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage( name, config ) {
 OO.inheritClass( ve.ui.MWLanguagesPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLanguagesPage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'language' )
+			.setLabel( ve.msg( 'visualeditor-dialog-meta-languages-section' ) );
+	}
+};
 
 ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 	var i, $languagesTable = this.$( '<table>' ), languageslength = languages.length;

@@ -19,21 +19,6 @@
 ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, name, config ) {
 	var spec = parameter.getTemplate().getSpec();
 
-	// Configuration initialization
-	config = ve.extendObject(
-		parameter.isRequired() ? {
-			'indicator': 'required',
-			'indicatorTitle': ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
-		} : {},
-		{
-			'icon': 'parameter',
-			'movable': false,
-			'level': 1,
-			'label': spec.getParameterLabel( parameter.getName() )
-		},
-		config
-	);
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -82,6 +67,28 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 OO.inheritClass( ve.ui.MWTemplateParameterPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTemplateParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'parameter' )
+			.setMovable( false )
+			.setLevel( 1 )
+			.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
+
+		if ( this.parameter.isRequired() ) {
+			this.outlineItem
+				.setIndicator( 'required' )
+				.setIndicatorTitle( ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) );
+		}
+	}
+};
 
 ve.ui.MWTemplateParameterPage.prototype.onTextInputChange = function () {
 	this.parameter.setValue( this.textInput.getValue() );

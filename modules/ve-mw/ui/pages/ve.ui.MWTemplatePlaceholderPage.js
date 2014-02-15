@@ -17,16 +17,10 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholder( placeholder, name, config ) {
-	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'template', 'movable': true }, config );
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.label = this.$( '<span>' )
-		.addClass( 've-ui-mwTransclusionDialog-placeholder-label' )
-		.text( ve.msg( 'visualeditor-dialog-transclusion-placeholder' ) );
 	this.placeholder = placeholder;
 	this.addTemplateInput = new ve.ui.MWTitleInputWidget( {
 			'$': this.$, '$overlay': this.$overlay, 'namespace': 10
@@ -68,6 +62,22 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholder( placeholde
 OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'template' )
+			.setMovable( true )
+			.setFlags( [ 'placeholder' ] )
+			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-placeholder' ) );
+	}
+};
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	var transclusion = this.placeholder.getTransclusion(),

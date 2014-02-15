@@ -21,10 +21,7 @@
  */
 ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) {
 	// Configuration initialization
-	config = ve.extendObject( {
-		'icon': 'tag',
-		'label': ve.msg( 'visualeditor-dialog-meta-categories-section' )
-	}, config );
+	config = config || {};
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
@@ -83,6 +80,20 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 OO.inheritClass( ve.ui.MWCategoriesPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWCategoriesPage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'tag' )
+			.setLabel( ve.msg( 'visualeditor-dialog-meta-categories-section' ) );
+	}
+};
 
 /**
  * Handle category default sort change events.

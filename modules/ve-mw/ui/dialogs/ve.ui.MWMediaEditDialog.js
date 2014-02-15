@@ -129,21 +129,17 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'outlined': true
 	} );
 
-	this.generalSettingsPage = new OO.ui.PageLayout( 'general', {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-page-general' ),
-		'icon': 'parameter'
-	} );
-
-	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced', {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-page-advanced' ),
-		'icon': 'parameter'
-	} );
-
+	this.generalSettingsPage = new OO.ui.PageLayout( 'general', { '$': this.$ } );
+	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced', { '$': this.$ } );
 	this.bookletLayout.addPages( [
 		this.generalSettingsPage, this.advancedSettingsPage
 	] );
+	this.generalSettingsPage.getOutlineItem()
+		.setIcon( 'parameter' )
+		.setLabel( ve.msg( 'visualeditor-dialog-media-page-general' ) );
+	this.advancedSettingsPage.getOutlineItem()
+		.setIcon( 'parameter' )
+		.setLabel( ve.msg( 'visualeditor-dialog-media-page-advanced' ) );
 
 	// Define fieldsets for image settings
 

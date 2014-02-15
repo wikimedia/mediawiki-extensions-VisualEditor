@@ -19,13 +19,6 @@
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	var spec = template.getSpec();
 
-	// Configuration initialization
-	config = ve.extendObject( {
-		'icon': 'template',
-		'movable': true,
-		'label': spec.getLabel()
-	}, config );
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -70,6 +63,21 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 OO.inheritClass( ve.ui.MWTemplatePage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTemplatePage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'template' )
+			.setMovable( true )
+			.setLabel( this.spec.getLabel() );
+	}
+};
 
 ve.ui.MWTemplatePage.prototype.onParameterSelect = function ( name ) {
 	var param;

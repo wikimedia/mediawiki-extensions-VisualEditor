@@ -17,12 +17,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
-	// Configuration initialization
-	config = ve.extendObject( {
-		'icon': 'settings',
-		'label': ve.msg( 'visualeditor-dialog-meta-settings-section' )
-	}, config );
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -30,9 +24,6 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 	this.metaList = surface.getModel().metaList;
 	this.tocOptionTouched = false;
 	this.redirectOptionsTouched = false;
-
-	this.label = ve.msg( 'visualeditor-dialog-meta-settings-section' );
-
 	this.settingsFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-meta-settings-label' ),
@@ -104,6 +95,20 @@ OO.inheritClass( ve.ui.MWSettingsPage, OO.ui.PageLayout );
 /* Methods */
 
 /* Table of Contents methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWSettingsPage.prototype.setOutlineItem = function ( outlineItem ) {
+	// Parent method
+	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+
+	if ( this.outlineItem ) {
+		this.outlineItem
+			.setIcon( 'settings' )
+			.setLabel( ve.msg( 'visualeditor-dialog-meta-settings-section' ) );
+	}
+};
 
 /**
  * Handle Table Of Contents display change events.
