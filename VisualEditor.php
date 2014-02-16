@@ -65,6 +65,8 @@ $wgHooks['ResourceLoaderRegisterModules'][] = 'VisualEditorHooks::onResourceLoad
 $wgHooks['ResourceLoaderTestModules'][] = 'VisualEditorHooks::onResourceLoaderTestModules';
 $wgHooks['SkinTemplateNavigation'][] = 'VisualEditorHooks::onSkinTemplateNavigation';
 $wgHooks['ParserTestGlobals'][] = 'VisualEditorHooks::onParserTestGlobals';
+$wgHooks['EditPage::showEditForm:fields'][] = 'VisualEditorHooks::onEditPageShowEditFormFields';
+$wgHooks['PageContentSaveComplete'][] = 'VisualEditorHooks::onPageContentSaveComplete';
 $wgExtensionFunctions[] = 'VisualEditorHooks::onSetup';
 
 // Set default values for new preferences

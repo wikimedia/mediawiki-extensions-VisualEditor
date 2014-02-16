@@ -802,7 +802,7 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 	// Get Wikitext from the DOM
 	this.serialize(
 		this.docToSave || ve.dm.converter.getDomFromModel( doc ),
-		ve.bind( this.submitWithSaveFields, this, { 'wpDiff': 1 } )
+		ve.bind( this.submitWithSaveFields, this, { 'wpDiff': 1, 'wasve': 1 } )
 	);
 };
 
