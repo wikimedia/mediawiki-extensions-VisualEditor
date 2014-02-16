@@ -91,6 +91,7 @@
     "visualeditor-dialog-reference-insert-button": "Used as label for the button.\n{{Identical|Insert reference}}",
     "visualeditor-dialog-reference-insert-title": "Reference insert dialog title text.\n{{Identical|Insert reference}}",
     "visualeditor-dialog-reference-options-group-label": "Label for the reference group input",
+    "visualeditor-dialog-reference-options-group-placeholder": "Placeholder for the reference group input",
     "visualeditor-dialog-reference-options-name-label": "Label for the reference name input",
     "visualeditor-dialog-reference-options-section": "Label for the reference options sub-section.\n{{Identical|Options}}",
     "visualeditor-dialog-reference-title": "{{Identical|Reference}}",
