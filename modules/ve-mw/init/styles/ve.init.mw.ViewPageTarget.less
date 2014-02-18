@@ -5,6 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.surface, .ve-ui-surface {
+	background-color: green !important;
+}
+
 /* VisualEditor */
 
 .ve-init-mw-viewPageTarget-transform {
@@ -30,27 +34,32 @@
 
 /* Toolbar */
 
-.ve-init-mw-viewPageTarget-toolbar-utilites,
 .ve-init-mw-viewPageTarget-toolbar-actions {
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-actions {
 	font-size: 0.8em;
 	vertical-align: top;
 	padding: 0.25em;
+
+	> .oo-ui-buttonedElement-framed {
+		margin-left: 0.25em;
+		margin-right: 0.25em;
+		margin-top: 0.2em;
+	}
 }
 
-.ve-init-mw-viewPageTarget-toolbar-utilites > .oo-ui-buttonedElement-frameless {
-	margin-right: 0.2em;
-	margin-top: 0.2em;
+.ve-init-mw-viewPageTarget-toolbar-utilites {
+	display: inline-block;
+	vertical-align: middle;
+
+	> .oo-ui-buttonedElement-frameless {
+		margin-right: 0.2em;
+		margin-top: 0.2em;
+	}
 }
 
-.ve-init-mw-viewPageTarget-toolbar-actions > .oo-ui-buttonedElement-framed {
-	margin-left: 0.25em;
-	margin-right: 0.25em;
-	margin-top: 0.2em;
+.ve-init-mw-viewPageTarget-toolbar-actions {
+
 }
 
 /* Needs to override .oo-ui.widget.oo-ui-widget-disabled */
@@ -103,13 +112,15 @@
 	margin-top: 0.8em;
 }
 
-.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonedElement-frameless {
-	display: block;
-	margin: 0.5em 0;
-}
+.ve-ui-mwHelpPopupTool-item
+	> .oo-ui-buttonedElement-frameless {
+		display: block;
+		margin: 0.5em 0;
+	}
 
-.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonedElement-frameless:first-child {
-	margin-top: 0;
+	> .oo-ui-buttonedElement-frameless:first-child {
+		margin-top: 0;
+	}
 }
 
 .ve-init-mw-ViewPageTarget-version-label,
