@@ -51,6 +51,11 @@
 	top: 1em;
 }
 
+/* ve.ui.MWMediaDialog */
+.ve-ui-mwMediaEditDialog-altText {
+	width: auto;
+}
+
 /* ve.ui.MWMetaDialog */
 
 .ve-ui-mwMetaDialog-languages-table {
