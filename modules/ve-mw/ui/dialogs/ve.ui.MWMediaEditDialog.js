@@ -161,6 +161,8 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'$': this.$
 	} );
 
+	this.altTextInput.$element.addClass( 've-ui-mwMediaEditDialog-altText' );
+
 	// Build alt text fieldset
 	altTextFieldset.$element
 		.append( this.altTextInput.$element );
