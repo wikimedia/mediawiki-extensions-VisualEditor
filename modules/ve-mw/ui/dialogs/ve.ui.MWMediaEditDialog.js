@@ -286,12 +286,12 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	if ( this.captionNode && this.captionNode.getLength() > 0 ) {
 		newDoc = doc.cloneFromRange( this.captionNode.getRange() );
 	} else {
-		newDoc = [
+		newDoc = new ve.dm.Document( [
 			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
 			{ 'type': '/paragraph' },
 			{ 'type': 'internalList' },
 			{ 'type': '/internalList' }
-		];
+		] );
 	}
 
 	this.captionSurface = new ve.ui.SurfaceWidget(
