@@ -195,6 +195,8 @@ $wgResourceModules += array(
 			'editing',
 			'spamprotectionmatch',
 			'spamprotectiontext',
+			'summary-preview',
+			'parentheses',
 
 			// Messages needed by VE in init phase only (rest go below)
 			'visualeditor-loadwarning',

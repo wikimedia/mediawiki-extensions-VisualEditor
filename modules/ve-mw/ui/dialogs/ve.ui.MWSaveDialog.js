@@ -101,7 +101,8 @@ ve.ui.MWSaveDialog.prototype.setSanityCheck = function ( verified ) {
  * @throws {Error} Unknown saveDialog panel
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
-	var dialog = this,
+	var currentEditSummaryWikitext,
+		dialog = this,
 		panelObj = dialog[panel + 'Panel'];
 
 	if ( ve.indexOf( panel, [ 'save', 'review', 'conflict', 'nochanges' ] ) === -1 ) {
@@ -145,6 +146,23 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 		case 'review':
 			// Make room for the diff by transitioning to a non-small window
 			this.$frame.removeClass( 've-ui-window-frame-small' );
+
+			currentEditSummaryWikitext = this.editSummaryInput.getValue();
+			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
+				if ( this.editSummaryXhr ) {
+					this.editSummaryXhr.abort();
+				}
+				this.lastEditSummaryWikitext = currentEditSummaryWikitext;
+				this.$reviewEditSummary.empty()
+					.parent().addClass( 'mw-ajax-loader' );
+				this.editSummaryXhr = new mw.Api().post( {
+					action: 'parse',
+					summary: currentEditSummaryWikitext
+				} ).done( function ( result ) {
+					dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) )
+						.parent().removeClass( 'mw-ajax-loader' );
+				} );
+			}
 			/* falls through */
 		case 'nochanges':
 			this.saveButton.$element.hide();
@@ -328,8 +346,17 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Review panel
 	this.reviewPanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );
 	this.$reviewViewer = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-viewer' );
+	this.$reviewEditSummary = this.$( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
 	this.$reviewActions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-actions' );
-	this.reviewPanel.$element.append( this.$reviewViewer, this.$reviewActions );
+	this.reviewPanel.$element.append(
+		$( '<br>' ),
+		$( '<div>' )
+			.addClass( 'mw-summary-preview' )
+			.text( ve.msg( 'summary-preview' ) )
+			.append( $( '<br>' ), this.$reviewEditSummary ),
+		this.$reviewViewer,
+		this.$reviewActions
+	);
 
 	// Conflict panel
 	this.conflictPanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );
