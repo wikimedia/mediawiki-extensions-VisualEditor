@@ -137,7 +137,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			} );
 			break;
 		case 'conflict':
-			this.saveButton.$element.hide();
+			this.saveButton.setDisabled( true ).$element.hide();
 			this.reviewButton.$element.hide();
 			this.reviewGoodButton.$element.hide();
 			this.resolveConflictButton.$element.show();
