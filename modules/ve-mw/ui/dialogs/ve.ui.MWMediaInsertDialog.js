@@ -173,8 +173,7 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 				'attributes': {
 					'type': 'thumb',
 					'align': 'default',
-					//'href': info.descriptionurl,
-					'href': './' + this.item.title,
+					'href': info.descriptionurl,
 					'src': info.thumburl,
 					'width': info.thumbwidth,
 					'height': info.thumbheight,
