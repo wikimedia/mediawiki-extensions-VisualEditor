@@ -165,15 +165,18 @@ $wgResourceModules += array(
 		),
 		'skinStyles' => array(
 			'vector' => array(
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector.css',
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector-hd.css' => array(
 					'media' => 'screen and (min-width: 982px)'
 				),
 			),
 			'apex' => array(
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-apex.css',
 			),
 			'monobook' => array(
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-monobook.css',
 			)
 		),
@@ -993,7 +996,7 @@ $wgVisualEditorSerializationCacheTimeout = 3600;
 $wgVisualEditorNamespaces = $wgContentNamespaces;
 
 // List of skins VisualEditor integration supports
-$wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook' );
+$wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva' );
 
 // List of browsers VisualEditor is incompatibe with
 // See jQuery.client for specification
