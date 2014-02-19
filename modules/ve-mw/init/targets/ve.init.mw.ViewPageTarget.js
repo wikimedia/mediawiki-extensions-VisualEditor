@@ -216,6 +216,9 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 		) {
 			this.deactivating = true;
 			// User interface changes
+			if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
+				this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+			}
 			this.restorePage();
 			this.hideSpinner();
 			this.showTableOfContents();
@@ -1002,6 +1005,13 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarButtons = function () {
 	// TODO (mattflaschen, 2013-06-27): it would be useful to do this in a more general way, such
 	// as in the ButtonWidget constructor.
 	this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
+
+	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
+		// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
+		this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
+		this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+	}
+
 	this.updateToolbarSaveButtonState();
 
 	this.toolbarCancelButton.connect( this, { 'click': 'onToolbarCancelButtonClick' } );
