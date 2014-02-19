@@ -15,7 +15,8 @@
             "Ralgis",
             "Thehelpfulone",
             "Ciencia Al Poder",
-            "Carlitosag"
+            "Carlitosag",
+            "Epicfaace"
         ]
     },
     "tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -61,6 +62,9 @@
     "visualeditor-dialog-meta-languages-readonlynote": "Esta es una lista de páginas en otros idiomas vinculadas a esta; por ahora, solo se puede editar en modo fuente vo en Wikidata.",
     "visualeditor-dialog-meta-languages-section": "Idiomas",
     "visualeditor-dialog-meta-settings-label": "Configurar página",
+    "visualeditor-dialog-meta-settings-redirect-label": "Redirigir esta página a",
+    "visualeditor-dialog-meta-settings-redirect-placeholder": "La página de destino de la redirección",
+    "visualeditor-dialog-meta-settings-toc-default": "Si es necesario",
     "visualeditor-dialog-reference-insert-button": "Insertar una referencia",
     "visualeditor-dialog-reference-insert-title": "Insertar una referencia",
     "visualeditor-dialog-reference-options-group-label": "Usar este grupo",
