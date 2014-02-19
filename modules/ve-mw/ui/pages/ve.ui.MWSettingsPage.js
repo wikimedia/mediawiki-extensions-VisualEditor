@@ -70,7 +70,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
 			'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' )
 		}
 	);
-	this.redirectTargetInput = new OO.ui.TextInputWidget( {
+	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
 		'$': this.$,
 		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ),
 	} );
