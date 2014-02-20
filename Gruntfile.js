@@ -60,8 +60,7 @@ module.exports = function ( grunt ) {
 		},
 		jscs: {
 			src: [
-				'<%= jshint.all %>',
-				'!modules/syntaxhighlight/**/*.js'
+				'<%= jshint.all %>'
 			]
 		},
 		csslint: {
@@ -69,8 +68,7 @@ module.exports = function ( grunt ) {
 				csslintrc: '.csslintrc'
 			},
 			all: [
-				// TODO: modules/syntaxhighlight should be included, but is failing.
-				'modules/{ve-mw,ve-wmf}/**/*.css'
+				'modules/*/**/*.css'
 			],
 		},
 		watch: {

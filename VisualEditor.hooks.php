@@ -280,23 +280,6 @@ class VisualEditorHooks {
 			),
 		);
 */
-
-/* Disabling Beta Features option for syntax highlighting for now
-		$preferences['visualeditor-enable-mwsyntaxHighlight'] = array(
-			'version' => '1.0',
-			'label-message' => 'visualeditor-preference-mwsyntaxHighlight-label',
-			'desc-message' => 'visualeditor-preference-mwsyntaxHighlight-description',
-			'screenshot' => $wgExtensionAssetsPath .
-				"/VisualEditor/betafeatures-icon-VisualEditor-syntaxHighlight-$dir.svg",
-			'info-message' => 'visualeditor-preference-mwsyntaxHighlight-info-link',
-			'discussion-message' => 'visualeditor-preference-mwsyntaxHighlight-discussion-link',
-			'requirements' => array(
-				'betafeatures' => array(
-					'visualeditor-enable',
-				),
-			),
-		);
-*/
 	}
 
 	public static function onListDefinedTags( &$tags ) {

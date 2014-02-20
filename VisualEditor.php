@@ -911,30 +911,6 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.mwsyntaxHighlight' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'modules/syntaxhighlight/ve.dm.MWSyntaxHighlightNode.js',
-			'modules/syntaxhighlight/ve.ce.MWSyntaxHighlightNode.js',
-			'modules/syntaxhighlight/ve.ui.MWSyntaxHighlightTool.js',
-			'modules/syntaxhighlight/ve.ui.MWSyntaxHighlightDialog.js',
-			'modules/syntaxhighlight/ve.ui.MWSyntaxHighlightSimpleSurface.js',
-			'modules/syntaxhighlight/helpers/ve.ce.MWSyntaxHighlightHighlighter.js',
-			'modules/syntaxhighlight/helpers/ve.dm.MWSyntaxHighlightTokenizer.js',
-			'modules/syntaxhighlight/helpers/ve.ce.MWSyntaxHighlightValidator.js',
-		),
-		'dependencies' => array(
-			'ext.visualEditor.mwcore',
-		),
-		'messages' => array(
-			'visualeditor-dialog-syntaxhighlight-title',
-			'visualeditor-dialogbutton-syntaxhighlight-tooltip',
-		),
-		'styles' => array(
-			'syntaxhighlight/styles/ve.ui.MWSyntaxHighlight.css',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-
 	'ext.visualEditor.experimental' => array(
 		'dependencies' => array(
 			'ext.visualEditor.mwmath',
@@ -942,7 +918,6 @@ $wgResourceModules += array(
 			'ext.visualEditor.language',
 			'ext.visualEditor.mwlanguage',
 			'ext.visualEditor.mwalienextension',
-			//'ext.visualEditor.mwsyntaxHighlight',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
@@ -977,8 +952,7 @@ $wgVisualEditorPreferenceModules = array(
 	//'visualeditor-enable-language' => 'ext.visualEditor.language',
 	//'visualeditor-enable-mwalienextension' => 'ext.visualEditor.mwalienextension',
 	'visualeditor-enable-mwmath' => 'ext.visualEditor.mwmath',
-	//'visualeditor-enable-mwhiero' => 'ext.visualEditor.mwhiero',
-	//'visualeditor-enable-mwsyntaxhighlight' => 'ext.visualEditor.mwsyntaxhighlight'
+	//'visualeditor-enable-mwhiero' => 'ext.visualEditor.mwhiero'
 );
 
 // URL to the Parsoid instance
