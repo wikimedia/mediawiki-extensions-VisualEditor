@@ -30,6 +30,9 @@ ve.ui.MWAlienExtensionInspector.static.name = 'alienExtension';
 
 ve.ui.MWAlienExtensionInspector.static.icon = 'alienextension';
 
+ve.ui.MWAlienExtensionInspector.static.title =
+	OO.ui.deferMsg( 'visualeditor-mwalienextensioninspector-title' );
+
 ve.ui.MWAlienExtensionInspector.static.nodeView = ve.ce.MWAlienExtensionNode;
 
 ve.ui.MWAlienExtensionInspector.static.nodeModel = ve.dm.MWAlienExtensionNode;
