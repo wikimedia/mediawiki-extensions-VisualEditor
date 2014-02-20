@@ -118,21 +118,21 @@ $wgResourceModules += array(
 
 	'ext.visualEditor.viewPageTarget.icons-raster' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons-raster.less',
+			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons-raster.css',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
 	'ext.visualEditor.viewPageTarget.icons-vector' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons-vector.less',
+			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons-vector.css',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
 	'ext.visualEditor.viewPageTarget.init' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => 'modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.init.js',
-		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.init.less',
+		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.init.css',
 		'dependencies' => array(
 			'jquery.client',
 			'mediawiki.Title',
@@ -154,7 +154,7 @@ $wgResourceModules += array(
 	),
 
 	'ext.visualEditor.viewPageTarget.noscript' => $wgVisualEditorResourceTemplate + array(
-		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.less',
+		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.css',
 	),
 
 	'ext.visualEditor.viewPageTarget' => $wgVisualEditorResourceTemplate + array(
@@ -162,23 +162,23 @@ $wgResourceModules += array(
 			'modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.less',
+			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.css',
 		),
 		'skinStyles' => array(
 			'vector' => array(
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.less',
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector.less',
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector-hd.less' => array(
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector.css',
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector-hd.css' => array(
 					'media' => 'screen and (min-width: 982px)'
 				),
 			),
 			'apex' => array(
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.less',
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-apex.less',
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-apex.css',
 			),
 			'monobook' => array(
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.less',
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-monobook.less',
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
+				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-monobook.css',
 			)
 		),
 		'dependencies' => array(

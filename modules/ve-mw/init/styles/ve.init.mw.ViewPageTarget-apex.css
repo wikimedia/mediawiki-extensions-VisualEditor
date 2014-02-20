@@ -13,10 +13,10 @@
 	margin: -0.6em -3em 0.8em -3em;
 	position: relative;
 	font-size: 1.3em;
+}
 
-	.oo-ui-toolbar-bar {
-		line-height: 1.5em;
-	}
+.ve-init-mw-viewPageTarget-toolbar .oo-ui-toolbar-bar {
+	line-height: 1.5em;
 }
 
 .oo-ui-menuWidget-item:hover {
