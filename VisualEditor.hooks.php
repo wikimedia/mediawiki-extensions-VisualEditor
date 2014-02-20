@@ -379,18 +379,15 @@ class VisualEditorHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		global $wgResourceModules, $wgVisualEditorResourceTemplate;
-		$modules = array();
-		if ( !isset( $wgResourceModules['oojs'] ) && !$resourceLoader->getModule( 'oojs' ) ) {
-			$modules['oojs'] = $wgVisualEditorResourceTemplate + array(
+
+		$libModules = array(
+			'oojs' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
 					'lib/ve/lib/oojs/oojs.js',
 				),
 				'targets' => array( 'desktop', 'mobile' ),
-			);
-		}
-
-		if ( !isset( $wgResourceModules['oojs-ui'] ) && !$resourceLoader->getModule( 'oojs-ui' ) ) {
-			$modules['oojs-ui'] = $wgVisualEditorResourceTemplate + array(
+			),
+			'oojs-ui' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
 					'lib/ve/lib/oojs-ui/oojs-ui.js',
 				),
@@ -407,11 +404,8 @@ class VisualEditorHooks {
 					'oojs'
 				),
 				'targets' => array( 'desktop', 'mobile' ),
-			);
-		}
-
-		if ( !isset( $wgResourceModules['jquery.uls'] ) && !$resourceLoader->getModule( 'jquery.uls' ) ) {
-			$modules['jquery.uls'] = $wgVisualEditorResourceTemplate + array(
+			),
+			'jquery.uls' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
 					'lib/jquery.uls/src/jquery.uls.core.js',
 					'lib/jquery.uls/src/jquery.uls.lcd.js',
@@ -427,47 +421,23 @@ class VisualEditorHooks {
 					'jquery.uls.data',
 					'jquery.uls.compact',
 				),
-			);
-		}
-
-		if (
-			!isset( $wgResourceModules['jquery.uls.data'] ) &&
-			!$resourceLoader->getModule( 'jquery.uls.data' )
-		) {
-			$modules['jquery.uls.data'] = $wgVisualEditorResourceTemplate + array(
+			),
+			'jquery.uls.data' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
 					'lib/jquery.uls/src/jquery.uls.data.js',
 					'lib/jquery.uls/src/jquery.uls.data.utils.js',
 				),
 				'position' => 'top',
-			);
-		}
-
-		if (
-			!isset( $wgResourceModules['jquery.uls.grid'] ) &&
-			!$resourceLoader->getModule( 'jquery.uls.grid' )
-		) {
-			$modules['jquery.uls.grid'] = $wgVisualEditorResourceTemplate + array(
+			),
+			'jquery.uls.grid' => $wgVisualEditorResourceTemplate + array(
 				'styles' => 'lib/jquery.uls/css/jquery.uls.grid.css',
 				'position' => 'top',
-			);
-		}
-
-		if (
-			!isset( $wgResourceModules['jquery.uls.compact'] ) &&
-			!$resourceLoader->getModule( 'jquery.uls.compact' )
-		) {
-			$modules['jquery.uls.compact'] = $wgVisualEditorResourceTemplate + array(
+			),
+			'jquery.uls.compact' => $wgVisualEditorResourceTemplate + array(
 				'styles' => 'lib/jquery.uls/css/jquery.uls.compact.css',
 				'position' => 'top',
-			);
-		}
-
-		if (
-			!isset( $wgResourceModules['jquery.i18n'] ) &&
-			!$resourceLoader->getModule( 'jquery.i18n' )
-		) {
-			$modules['jquery.i18n'] = $wgVisualEditorResourceTemplate + array(
+			),
+			'jquery.i18n' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.js',
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.messagestore.js',
@@ -492,10 +462,18 @@ class VisualEditorHooks {
 					'sl' => 'lib/ve/lib/jquery.i18n/src/languages/sl.js',
 					'uk' => 'lib/ve/lib/jquery.i18n/src/languages/uk.js',
 				),
-			);
+			),
+		);
+
+		$addModules = array();
+
+		foreach ( $libModules as $name => $data ) {
+			if ( !isset( $wgResourceModules[$name] ) && !$resourceLoader->getModule( $name ) ) {
+				$addModules[$name] = $data;
+			}
 		}
 
-		$resourceLoader->register( $modules );
+		$resourceLoader->register( $addModules );
 		return true;
 	}
 
