@@ -212,6 +212,9 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 		'width': dimensions.width + ( this.captionVisible ? 2 : 0 ),
 		'height': this.captionVisible ? 'auto' : dimensions.height
 	} );
+
+	this.$figure.toggleClass( 'mw-default-size', !!this.model.getAttribute( 'defaultSize' ) );
+
 };
 
 /**
@@ -298,6 +301,9 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 				} else {
 					this.$image.attr( key, to );
 				}
+				break;
+			case 'defaultSize':
+				this.$figure.toggleClass( 'mw-default-size', to );
 				break;
 		}
 	}

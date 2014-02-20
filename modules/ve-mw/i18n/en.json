@@ -50,6 +50,8 @@
     "visualeditor-dialog-media-position-none": "None",
     "visualeditor-dialog-media-position-right": "Right",
     "visualeditor-dialog-media-position-section": "Position",
+    "visualeditor-dialog-media-size-choosecustom": "Set custom size",
+    "visualeditor-dialog-media-size-choosedefault": "Set to default size",
     "visualeditor-dialog-media-size-originalsize-error": "Could not retrieve original file size.",
     "visualeditor-dialog-media-size-section": "Image size",
     "visualeditor-dialog-media-title": "Media settings",

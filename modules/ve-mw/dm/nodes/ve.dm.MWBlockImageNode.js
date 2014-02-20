@@ -4,6 +4,7 @@
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
+/*global mw */
 
 /**
  * DataModel MediaWiki image node.
@@ -78,14 +79,13 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		},
 		width = $img.attr( 'width' ),
 		height = $img.attr( 'height' ),
-		altText = $img.attr( 'alt' );
+		altText = $img.attr( 'alt' ),
+		defaultSizeBoundingBox = mw.config.get( 'wgVisualEditorConfig' )
+			.defaultUserOptions.defaultthumbsize;
 
 	if ( altText !== undefined ) {
 		attributes.alt = altText;
 	}
-
-	attributes.width = width !== undefined && width !== '' ? Number( width ) : null;
-	attributes.height = height !== undefined && height !== '' ? Number( height ) : null;
 
 	// Extract individual classes
 	classes = typeof classes === 'string' ? classes.trim().split( /\s+/ ) : [];
@@ -107,10 +107,22 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		attributes.align = 'default';
 	}
 
+	attributes.width = width !== undefined && width !== '' ? Number( width ) : null;
+	attributes.height = height !== undefined && height !== '' ? Number( height ) : null;
+
 	// Default-size
 	if ( classes.indexOf( 'mw-default-size' ) !== -1 ) {
 		attributes.defaultSize = true;
 		recognizedClasses.push( 'mw-default-size' );
+
+		// Force default size
+		if ( attributes.width > attributes.height ) {
+			attributes.width = defaultSizeBoundingBox;
+			attributes.height = null;
+		} else {
+			attributes.width = null;
+			attributes.height = defaultSizeBoundingBox;
+		}
 	}
 
 	// Store unrecognized classes so we can restore them on the way out
@@ -158,7 +170,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	// Type
 	figure.setAttribute( 'typeof', this.typeToRdfa[dataElement.attributes.type] );
 
-	// Default-size
+	// Apply classes if size is default
 	if ( dataElement.attributes.defaultSize === true ) {
 		classes.push( 'mw-default-size' );
 	}

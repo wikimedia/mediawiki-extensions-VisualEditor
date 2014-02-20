@@ -681,6 +681,8 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-position-none',
 			'visualeditor-dialog-media-position-right',
 			'visualeditor-dialog-media-position-section',
+			'visualeditor-dialog-media-size-choosecustom',
+			'visualeditor-dialog-media-size-choosedefault',
 			'visualeditor-dialog-media-size-originalsize-error',
 			'visualeditor-dialog-media-size-section',
 			'visualeditor-dialog-media-title',

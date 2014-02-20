@@ -63,6 +63,9 @@ ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWDialog.prototype.initialize.call( this );
 
+	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+		.defaultUserOptions.defaultthumbsize;
+
 	// Widget
 	this.search = new ve.ui.MWMediaSearchWidget( {
 		'$': this.$
@@ -160,13 +163,20 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
-	var info;
-
+	var info, thumbheight, thumbwidth;
 	// Data initialization
 	data = data || {};
 
 	if ( data.action === 'insert' ) {
 		info = this.item.imageinfo[0];
+		// Calculate proper size according to default thumb size limit
+		if ( info.width > info.height ) {
+			thumbwidth = this.defaultThumbSize;
+			thumbheight = Math.round( ( info.height / info.width ) * thumbwidth );
+		} else {
+			thumbheight = this.defaultThumbSize;
+			thumbwidth = Math.round( ( info.width / info.height ) * thumbheight );
+		}
 		this.surface.getModel().getFragment().collapseRangeToEnd().insertContent( [
 			{
 				'type': 'mwBlockImage',
@@ -175,9 +185,10 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 					'align': 'default',
 					'href': info.descriptionurl,
 					'src': info.thumburl,
-					'width': info.thumbwidth,
-					'height': info.thumbheight,
-					'resource': './' + this.item.title
+					'width': thumbwidth,
+					'height': thumbheight,
+					'resource': './' + this.item.title,
+					'defaultSize': true
 				}
 			},
 			{ 'type': 'mwImageCaption' },
