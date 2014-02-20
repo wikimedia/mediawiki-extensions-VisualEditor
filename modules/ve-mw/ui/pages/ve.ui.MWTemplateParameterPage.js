@@ -28,6 +28,7 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 	this.valueInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,
+			'autosize': true,
 			'classes': [ 've-ui-mwTransclusionDialog-input' ]
 		} )
 		.setValue( this.parameter.getValue() )
