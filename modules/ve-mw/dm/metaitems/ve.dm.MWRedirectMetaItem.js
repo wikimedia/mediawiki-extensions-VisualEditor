@@ -32,20 +32,18 @@ ve.dm.MWRedirectMetaItem.static.matchTagNames = [ 'link' ];
 
 ve.dm.MWRedirectMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/redirect' ];
 
-ve.dm.MWRedirectMetaItem.static.toDataElement = function ( domElements ) {
-	var href = domElements[0].getAttribute( 'href' );
-	return {
-		'type': this.name,
-		'attributes': {
-			'href': href
-		}
-	};
+ve.dm.MWRedirectMetaItem.static.toDataElement = function ( domElements, converter ) {
+	// HACK piggy-back on MWInternalLinkAnnotation's ./ stripping logic
+	var linkData = ve.dm.MWInternalLinkAnnotation.static.toDataElement( domElements, converter );
+	linkData.type = this.name;
+	return linkData;
 };
 
 ve.dm.MWRedirectMetaItem.static.toDomElements = function ( dataElement, doc ) {
 	var meta = doc.createElement( 'link' );
 	meta.setAttribute( 'rel', 'mw:PageProp/redirect' );
-	meta.setAttribute( 'href', dataElement.attributes.href );
+	// HACK piggy-back on MWInternalLinkAnnotation's logic
+	meta.setAttribute( 'href', ve.dm.MWInternalLinkAnnotation.static.getHref( dataElement ) );
 	return [ meta ];
 };
 

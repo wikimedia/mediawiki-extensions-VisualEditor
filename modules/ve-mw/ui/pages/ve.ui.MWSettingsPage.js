@@ -226,7 +226,7 @@ ve.ui.MWSettingsPage.prototype.setup = function () {
 
 		// Redirect items
 		redirectTargetItem = this.getRedirectTargetItem(),
-		redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'href' ) || '',
+		redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '',
 		redirectStatic = this.getRedirectStaticItem();
 
 	// Table of Contents items
@@ -261,7 +261,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		// Redirect items
 		currentRedirectTargetItem = this.getRedirectTargetItem(),
 		newRedirectData = this.redirectTargetInput.getValue(),
-		newRedirectItemData = { 'type': 'mwRedirect', 'attributes': { 'href': newRedirectData } },
+		newRedirectItemData = { 'type': 'mwRedirect', 'attributes': { 'title': newRedirectData } },
 
 		currentStaticRedirectItem = this.getRedirectStaticItem(),
 		newStaticRedirectState = this.enableStaticRedirectInput.getValue(),
@@ -294,7 +294,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	if ( this.redirectOptionsTouched ) {
 		if ( currentRedirectTargetItem ) {
 			if ( newRedirectData ) {
-				if ( currentRedirectTargetItem.getAttribute( 'href' ) !== newRedirectData ) {
+				if ( currentRedirectTargetItem.getAttribute( 'title' ) !== newRedirectData ) {
 					// There was a redirect and is a new one, but they differ, so replace
 					currentRedirectTargetItem.replaceWith(
 						ve.extendObject( true, {},
