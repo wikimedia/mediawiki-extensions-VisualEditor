@@ -48,7 +48,7 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 		originalConfig,
 		cases = ve.dm.mwExample.domToDataCases;
 
-	QUnit.expect( 2 * Object.keys( cases ).length );
+	QUnit.expect( 2 * ve.getObjectKeys( cases ).length );
 
 	for ( msg in cases ) {
 		caseItem = ve.copy( cases[msg] );

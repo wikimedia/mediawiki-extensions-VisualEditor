@@ -837,7 +837,7 @@ ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
 				fields[$this.prop( 'name' )] = $this.val();
 			}
 		} );
-	$.extend( fields, {
+	ve.extendObject( fields, {
 		'wpSummary': this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
 		'wpCaptchaId': this.captcha && this.captcha.id,
 		'wpCaptchaWord': this.captcha && this.captcha.input.getValue()

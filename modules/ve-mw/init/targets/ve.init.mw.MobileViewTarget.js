@@ -39,7 +39,7 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, con
 OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 
 /* Static Properties */
-$.extend( ve.init.mw.Target.static.iconModuleStyles, {
+ve.extendObject( ve.init.mw.Target.static.iconModuleStyles, {
 	'raster': [],
 	'vector': []
 } );

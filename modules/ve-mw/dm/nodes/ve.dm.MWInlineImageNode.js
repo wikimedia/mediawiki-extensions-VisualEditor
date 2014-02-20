@@ -52,7 +52,7 @@ ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span' ];
 ve.dm.MWInlineImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.getMatchRdfaTypes = function () {
-	return Object.keys( this.rdfaToType );
+	return ve.getObjectKeys( this.rdfaToType );
 };
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
