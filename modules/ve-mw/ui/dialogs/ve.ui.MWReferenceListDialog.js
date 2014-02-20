@@ -52,7 +52,10 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 		'icon': 'settings'
 	} );
 
-	this.groupInput = new OO.ui.TextInputWidget( { '$': this.$ } );
+	this.groupInput = new OO.ui.TextInputWidget( {
+		'$': this.$,
+		'placeholder': ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
+	} );
 	this.groupField = new OO.ui.FieldLayout( this.groupInput, {
 		'$': this.$,
 		'align': 'top',

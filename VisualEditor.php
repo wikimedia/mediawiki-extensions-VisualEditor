@@ -702,6 +702,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-reference-insert-button',
 			'visualeditor-dialog-reference-insert-title',
 			'visualeditor-dialog-reference-options-group-label',
+			'visualeditor-dialog-reference-options-group-placeholder',
 			'visualeditor-dialog-reference-options-name-label',
 			'visualeditor-dialog-reference-options-section',
 			'visualeditor-dialog-reference-title',
