@@ -17,25 +17,8 @@
 ve.ui.MWLanguageInputWidget = function VeUiMWLanguageInputWidget( config ) {
 	// Parent constructor
 	ve.ui.LanguageInputWidget.call( this, config );
-};
 
-/* Inheritance */
-
-OO.inheritClass( ve.ui.MWLanguageInputWidget, ve.ui.LanguageInputWidget );
-
-/* Static properties */
-
-/* Methods */
-
-/**
- * @inheritdoc
- */
-ve.ui.MWLanguageInputWidget.prototype.initialize = function () {
-	// Parent method
-	ve.ui.LanguageInputWidget.prototype.initialize.call( this );
-
-	// Properties
-	this.changeButton = new OO.ui.ButtonWidget( {
+	var changeButton = new OO.ui.ButtonWidget( {
 		'label': ve.msg( 'visualeditor-languageinspector-widget-changelang' ),
 		// Add 'href' so the button returns true on click and triggers ULS
 		'href': '#',
@@ -43,12 +26,9 @@ ve.ui.MWLanguageInputWidget.prototype.initialize = function () {
 	} );
 
 	// Events
-	this.changeButton.$element.uls( {
+	changeButton.$element.uls( {
 		'onSelect': ve.bind( function ( language ) {
-			this.setValue( {
-				'lang': language,
-				'dir': $.uls.data.getDir( language )
-			} );
+			this.setAnnotationFromValues( language, $.uls.data.getDir( language ) );
 		}, this ),
 		'compact': true,
 		// Temporary Quicklist for the Prototype:
@@ -60,5 +40,9 @@ ve.ui.MWLanguageInputWidget.prototype.initialize = function () {
 	// TODO: Consider using getAutonym to display a nicer language name label somewhere
 
 	// Initialization
-	this.$element.append( this.changeButton.$element );
+	this.$element.prepend( $( '<div>' ).addClass( 've-ui-mwLangugageInputWidget-uls' ).append( changeButton.$element ) );
 };
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MWLanguageInputWidget, ve.ui.LanguageInputWidget );

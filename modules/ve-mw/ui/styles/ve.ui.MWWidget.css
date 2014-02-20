@@ -5,6 +5,13 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* ve.ui.MWLanguageInputWidget */
+
+.ve-ui-mwLangugageInputWidget-uls {
+	text-align: center;
+	margin-bottom: 0.5em;
+}
+
 /* ve.ui.MWLinkTargetInputWidget */
 
 .ve-ui-mwLinkTargetInputWidget-menu {
