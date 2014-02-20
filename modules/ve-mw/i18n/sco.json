@@ -1,0 +1,31 @@
+{
+    "@metadata": {
+        "authors": [
+            "John Reid"
+        ]
+    },
+    "visualeditor-dialog-media-alttext-section": "Alternative tex",
+    "visualeditor-dialog-media-position-center": "Center",
+    "visualeditor-dialog-media-type-border": "Border",
+    "visualeditor-dialog-media-type-frame": "Frame",
+    "visualeditor-dialog-media-type-frameless": "Frameless",
+    "visualeditor-dialog-media-type-section": "Eimage type",
+    "visualeditor-dialog-media-type-thumb": "Thummnail",
+    "visualeditor-dialog-media-position-left": "Cair",
+    "visualeditor-dialog-media-position-none": "Nane",
+    "visualeditor-dialog-media-position-right": "Richt",
+    "visualeditor-dialog-media-position-section": "Poseetion",
+    "visualeditor-dialog-meta-settings-redirect-label": "Redirect this page til",
+    "visualeditor-dialog-meta-settings-redirect-placeholder": "Target page fer redirection",
+    "visualeditor-dialog-meta-settings-redirect-staticlabel": "Stap this redirect fae being updatit whan target page is moved.",
+    "visualeditor-dialog-meta-settings-toc-default": "Gif needed",
+    "visualeditor-dialog-meta-settings-toc-disable": "Niver",
+    "visualeditor-dialog-meta-settings-toc-force": "Aye",
+    "visualeditor-editsummary-bytes-remaining": "The nummer o bytes left",
+    "visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Matching page|Matching pages}}",
+    "visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Disambiguation page|Disambiguation pages}}",
+    "visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Redirect page|Redirect pages}}",
+    "visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Caption fer eimage",
+    "visualeditor-toolbar-format-tooltip": "Format paragraph",
+    "visualeditor-toolbar-style-tooltip": "Style tex"
+}
