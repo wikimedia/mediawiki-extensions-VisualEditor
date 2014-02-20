@@ -237,7 +237,10 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 		'icon': 'settings'
 	} );
 	// TODO: Use a drop-down or something, and populate with existing groups instead of free-text
-	this.referenceGroupInput = new OO.ui.TextInputWidget( { '$': this.$ } );
+	this.referenceGroupInput = new OO.ui.TextInputWidget( {
+		'$': this.$,
+		'placeholder': ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
+	} );
 	this.referenceGroupField = new OO.ui.FieldLayout( this.referenceGroupInput, {
 		'$': this.$,
 		'align': 'top',
