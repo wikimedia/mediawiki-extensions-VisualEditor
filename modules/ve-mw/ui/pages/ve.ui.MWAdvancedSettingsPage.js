@@ -34,57 +34,57 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( surface, nam
 	// Initialization
 
 	// Indexing items
-	this.indexingOptionSelector = new OO.ui.ButtonSelectWidget( { '$': this.$ } );
-	this.indexingOptionWidgets = {
-		'mwIndexForce': new OO.ui.ButtonOptionWidget(
-			'mwIndexForce',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-force' ) }
-		),
-		'default': new OO.ui.ButtonOptionWidget(
-			'default',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-default' ) }
-		),
-		'mwIndexDisable': new OO.ui.ButtonOptionWidget(
-			'mwIndexDisable',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
-		)
-	};
-	this.indexingOptionSelector.addItems( ve.getObjectValues( this.indexingOptionWidgets ) );
-	this.advancedSettingsFieldset.$element.append(
-		this.$( '<span>' )
-			.text( ve.msg( 'visualeditor-dialog-meta-settings-index-label' ) ),
-		this.indexingOptionSelector.$element
+	this.indexing = new OO.ui.FieldLayout(
+		new OO.ui.ButtonSelectWidget( { '$': this.$ } )
+			.addItems( [
+				new OO.ui.ButtonOptionWidget(
+					'mwIndexForce',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-force' ) }
+				),
+				new OO.ui.ButtonOptionWidget(
+					'default',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-default' ) }
+				),
+				new OO.ui.ButtonOptionWidget(
+					'mwIndexDisable',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
+				)
+			] )
+			.connect( this, { 'select': 'onIndexingOptionChange' } ),
+		{
+			'$': this.$,
+			'align': 'top',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-index-label' )
+		}
 	);
 
 	// New edit section link items
-	this.newSectionEditLinkOptionSelector = new OO.ui.ButtonSelectWidget( { '$': this.$ } );
-	this.newSectionEditLinkOptionWidgets = {
-		'mwNewSectionEditForce': new OO.ui.ButtonOptionWidget(
-			'mwNewSectionEditForce',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' ) }
-		),
-		'default': new OO.ui.ButtonOptionWidget(
-			'default',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' ) }
-		),
-		'mwNewSectionEditDisable': new OO.ui.ButtonOptionWidget(
-			'mwNewSectionEditDisable',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' ) }
-		)
-	};
-	this.newSectionEditLinkOptionSelector.addItems( ve.getObjectValues( this.newSectionEditLinkOptionWidgets ) );
-	this.advancedSettingsFieldset.$element.append(
-		this.$( '<span>' )
-			.text( ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' ) ),
-		this.newSectionEditLinkOptionSelector.$element
+	this.newEditSectionLink = new OO.ui.FieldLayout(
+		new OO.ui.ButtonSelectWidget( { '$': this.$ } )
+			.addItems( [
+				new OO.ui.ButtonOptionWidget(
+					'mwNewSectionEditForce',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' ) }
+				),
+				new OO.ui.ButtonOptionWidget(
+					'default',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' ) }
+				),
+				new OO.ui.ButtonOptionWidget(
+					'mwNewSectionEditDisable',
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' ) }
+				)
+			] )
+			.connect( this, { 'select': 'onNewSectionEditLinkOptionChange' } ),
+		{
+			'$': this.$,
+			'align': 'top',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' )
+		}
 	);
 
+	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink ] );
 	this.$element.append( this.advancedSettingsFieldset.$element );
-
-	// Events
-	this.indexingOptionSelector.connect( this, { 'select': 'onIndexingOptionChange' } );
-	this.newSectionEditLinkOptionSelector.connect( this, { 'select': 'onNewSectionEditLinkOptionChange' } );
-
 };
 
 /* Inheritance */
@@ -150,19 +150,21 @@ ve.ui.MWAdvancedSettingsPage.prototype.getNewSectionEditLinkItem = function () {
  */
 ve.ui.MWAdvancedSettingsPage.prototype.setup = function () {
 	var // Indexing items
+		indexingField = this.indexing.getField(),
 		indexingOption = this.getIndexingOptionItem(),
 		indexingType = indexingOption && indexingOption.element.type || 'default',
 
 		// New section edit link items
+		newSectionEditField = this.newEditSectionLink.getField(),
 		newSectionEditLinkOption = this.getNewSectionEditLinkItem(),
 		newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default';
 
 	// Indexing items
-	this.indexingOptionSelector.selectItem( this.indexingOptionWidgets[indexingType] );
+	indexingField.selectItem( indexingField.getItemFromData( indexingType ) );
 	this.indexingOptionTouched = false;
 
 	// New section edit link items
-	this.newSectionEditLinkOptionSelector.selectItem( this.newSectionEditLinkOptionWidgets[newSectionEditLinkType] );
+	newSectionEditField.selectItem( newSectionEditField.getItemFromData( newSectionEditLinkType ) );
 	this.newSectionEditLinkOptionTouched = false;
 };
 
@@ -177,11 +179,11 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	var // Indexing items
 		currentIndexingItem = this.getIndexingOptionItem(),
-		newIndexingData = this.indexingOptionSelector.getSelectedItem(),
+		newIndexingData = this.indexing.getField().getSelectedItem(),
 
 		// New section edit link items
 		currentNewSectionEditLinkItem = this.getNewSectionEditLinkItem(),
-		newNewSectionEditLinkOptionData = this.newSectionEditLinkOptionSelector.getSelectedItem();
+		newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem();
 
 	// Alter the indexing option flag iff it's been touched & is actually different
 	if ( this.indexingOptionTouched ) {
