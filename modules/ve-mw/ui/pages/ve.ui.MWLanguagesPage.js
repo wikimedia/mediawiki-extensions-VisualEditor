@@ -123,7 +123,7 @@ ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred,
 /**
  * Gets language item from meta list item
  *
- * @param {Object} ve.dm.MWLanguageMetaItem
+ * @param {ve.dm.MWLanguageMetaItem} metaItem
  * @returns {Object} item
  */
 ve.ui.MWLanguagesPage.prototype.getLanguageItemFromMetaListItem = function ( metaItem ) {

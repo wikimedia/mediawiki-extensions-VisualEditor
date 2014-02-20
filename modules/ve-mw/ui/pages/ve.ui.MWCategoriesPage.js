@@ -128,7 +128,7 @@ ve.ui.MWCategoriesPage.prototype.onUpdateSortKey = function ( item ) {
 /**
  * Bound to MetaList insert event for adding meta dialog components.
  *
- * @param {Object} ve.dm.MetaItem
+ * @param {ve.dm.MetaItem} metaItem
  */
 ve.ui.MWCategoriesPage.prototype.onMetaListInsert = function ( metaItem ) {
 	// Responsible for adding UI components
@@ -143,7 +143,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListInsert = function ( metaItem ) {
 /**
  * Bound to MetaList insert event for removing meta dialog components.
  *
- * @param {Object} ve.dm.MetaItem
+ * @param {ve.dm.MetaItem} metaItem
  */
 ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
 	var item;
@@ -183,7 +183,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItems = function () {
 /**
  * Gets category item from meta list item
  *
- * @param {Object} ve.dm.MWCategoryMetaItem
+ * @param {ve.dm.MWCategoryMetaItem} metaItem
  * @returns {Object} item
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItemFromMetaListItem = function ( metaItem ) {
