@@ -38,13 +38,13 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( surface, nam
 			'mwIndexForce',
 			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-force' ) }
 		),
-		'mwIndexDisable': new OO.ui.ButtonOptionWidget(
-			'mwIndexDisable',
-			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
-		),
 		'default': new OO.ui.ButtonOptionWidget(
 			'default',
 			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-default' ) }
+		),
+		'mwIndexDisable': new OO.ui.ButtonOptionWidget(
+			'mwIndexDisable',
+			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
 		)
 	};
 	this.indexingOptionSelector.addItems( ve.getObjectValues( this.indexingOptionWidgets ) );

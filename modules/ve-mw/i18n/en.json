@@ -75,7 +75,7 @@
     "visualeditor-dialog-meta-languages-name-label": "Language",
     "visualeditor-dialog-meta-languages-readonlynote": "This is a list of pages in other languages that are linked to this one; for now, it can only be edited in source mode or on Wikidata.",
     "visualeditor-dialog-meta-languages-section": "Languages",
-    "visualeditor-dialog-meta-settings-index-default": "Like other pages in this namespace",
+    "visualeditor-dialog-meta-settings-index-default": "Default",
     "visualeditor-dialog-meta-settings-index-disable": "No",
     "visualeditor-dialog-meta-settings-index-force": "Yes",
     "visualeditor-dialog-meta-settings-index-label": "Let this page be indexed by search engines",
