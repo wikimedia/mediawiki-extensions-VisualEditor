@@ -128,7 +128,7 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
 
 	// We will only ask for the ajax call if this.sources
 	// isn't already set up
-	if ( $.isEmptyObject( this.sources ) ) {
+	if ( ve.isEmptyObject( this.sources ) ) {
 		// Take sources from api.php?action=query&meta=filerepoinfo&format=jsonfm
 		// The decision whether to take 'url' or 'apiurl' per each repository is made
 		// in the MWMediaSearchWidget depending on whether it is local and has apiurl

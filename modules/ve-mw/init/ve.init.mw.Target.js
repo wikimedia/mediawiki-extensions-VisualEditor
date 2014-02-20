@@ -946,7 +946,7 @@ ve.init.mw.Target.prototype.clearPreparedCacheKey = function () {
  */
 ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
 	var data, preparedCacheKey = this.getPreparedCacheKey( doc ), target = this;
-	data = $.extend( {}, options, { 'format': 'json' } );
+	data = ve.extendObject( {}, options, { 'format': 'json' } );
 
 	function ajaxRequest( cachekey ) {
 		var start = ve.now();
@@ -1014,7 +1014,7 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
 		return false;
 	}
 
-	data = $.extend( {}, options, {
+	data = ve.extendObject( {}, options, {
 		'action': 'visualeditoredit',
 		'page': this.pageName,
 		'oldid': this.revid,
@@ -1075,7 +1075,7 @@ ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
 	this.submitting = true;
 	var key,
 		$form = $( '<form method="post" enctype="multipart/form-data" style="display: none;"></form>' ),
-		params = $.extend( {
+		params = ve.extendObject( {
 			'format': 'text/x-wiki',
 			'model': 'wikitext',
 			'oldid': this.revid,

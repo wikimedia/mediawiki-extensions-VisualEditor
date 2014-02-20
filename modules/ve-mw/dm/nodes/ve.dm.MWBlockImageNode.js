@@ -56,7 +56,7 @@ ve.dm.MWBlockImageNode.static.matchTagNames = [ 'figure' ];
 ve.dm.MWBlockImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWBlockImageNode.static.getMatchRdfaTypes = function () {
-	return Object.keys( this.rdfaToType );
+	return ve.getObjectKeys( this.rdfaToType );
 };
 
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {

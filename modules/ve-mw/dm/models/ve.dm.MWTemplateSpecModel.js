@@ -51,7 +51,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 	if ( data.description !== null ) {
 		this.description = data.description;
 	}
-	if ( Array.isArray( data.paramOrder ) ) {
+	if ( ve.isArray( data.paramOrder ) ) {
 		this.paramOrder = data.paramOrder.slice();
 	}
 	if ( ve.isPlainObject( data.params ) ) {
