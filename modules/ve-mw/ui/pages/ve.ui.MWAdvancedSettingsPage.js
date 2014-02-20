@@ -23,6 +23,8 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( surface, nam
 	// Properties
 	this.metaList = surface.getModel().metaList;
 	this.indexingOptionTouched = false;
+	this.newSectionEditLinkOptionTouched = false;
+
 	this.advancedSettingsFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-meta-advancedsettings-label' ),
@@ -54,10 +56,34 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( surface, nam
 		this.indexingOptionSelector.$element
 	);
 
+	// New edit section link items
+	this.newSectionEditLinkOptionSelector = new OO.ui.ButtonSelectWidget( { '$': this.$ } );
+	this.newSectionEditLinkOptionWidgets = {
+		'mwNewSectionEditForce': new OO.ui.ButtonOptionWidget(
+			'mwNewSectionEditForce',
+			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' ) }
+		),
+		'default': new OO.ui.ButtonOptionWidget(
+			'default',
+			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' ) }
+		),
+		'mwNewSectionEditDisable': new OO.ui.ButtonOptionWidget(
+			'mwNewSectionEditDisable',
+			{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' ) }
+		)
+	};
+	this.newSectionEditLinkOptionSelector.addItems( ve.getObjectValues( this.newSectionEditLinkOptionWidgets ) );
+	this.advancedSettingsFieldset.$element.append(
+		this.$( '<span>' )
+			.text( ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' ) ),
+		this.newSectionEditLinkOptionSelector.$element
+	);
+
 	this.$element.append( this.advancedSettingsFieldset.$element );
 
 	// Events
 	this.indexingOptionSelector.connect( this, { 'select': 'onIndexingOptionChange' } );
+	this.newSectionEditLinkOptionSelector.connect( this, { 'select': 'onNewSectionEditLinkOptionChange' } );
 
 };
 
@@ -99,6 +125,24 @@ ve.ui.MWAdvancedSettingsPage.prototype.getIndexingOptionItem = function () {
 	return this.metaList.getItemsInGroup( 'mwIndex' )[0] || null;
 };
 
+/* New edit section link option methods */
+
+/**
+ * Handle new edit section link change events.
+ */
+ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = function () {
+	this.newSectionEditLinkOptionTouched = true;
+};
+
+/**
+ * Get the new section edit link item
+ *
+ * @returns {Object|null} New section edit link option, if any
+ */
+ve.ui.MWAdvancedSettingsPage.prototype.getNewSectionEditLinkItem = function () {
+	return this.metaList.getItemsInGroup( 'mwNewSectionEdit' )[0] || null;
+};
+
 /**
  * Setup settings page.
  *
@@ -107,11 +151,19 @@ ve.ui.MWAdvancedSettingsPage.prototype.getIndexingOptionItem = function () {
 ve.ui.MWAdvancedSettingsPage.prototype.setup = function () {
 	var // Indexing items
 		indexingOption = this.getIndexingOptionItem(),
-		indexingType = indexingOption && indexingOption.element.type || 'default';
+		indexingType = indexingOption && indexingOption.element.type || 'default',
+
+		// New section edit link items
+		newSectionEditLinkOption = this.getNewSectionEditLinkItem(),
+		newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default';
 
 	// Indexing items
 	this.indexingOptionSelector.selectItem( this.indexingOptionWidgets[indexingType] );
 	this.indexingOptionTouched = false;
+
+	// New section edit link items
+	this.newSectionEditLinkOptionSelector.selectItem( this.newSectionEditLinkOptionWidgets[newSectionEditLinkType] );
+	this.newSectionEditLinkOptionTouched = false;
 };
 
 /**
@@ -125,7 +177,11 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	var // Indexing items
 		currentIndexingItem = this.getIndexingOptionItem(),
-		newIndexingData = this.indexingOptionSelector.getSelectedItem();
+		newIndexingData = this.indexingOptionSelector.getSelectedItem(),
+
+		// New section edit link items
+		currentNewSectionEditLinkItem = this.getNewSectionEditLinkItem(),
+		newNewSectionEditLinkOptionData = this.newSectionEditLinkOptionSelector.getSelectedItem();
 
 	// Alter the indexing option flag iff it's been touched & is actually different
 	if ( this.indexingOptionTouched ) {
@@ -147,4 +203,23 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
+	// Alter the new section edit option flag iff it's been touched & is actually different
+	if ( this.newSectionEditLinkOptionTouched ) {
+		if ( newNewSectionEditLinkOptionData.data === 'default' ) {
+			if ( currentNewSectionEditLinkItem ) {
+				currentNewSectionEditLinkItem.remove();
+			}
+		} else {
+			if ( !currentNewSectionEditLinkItem ) {
+				this.metaList.insertMeta( { 'type': newNewSectionEditLinkOptionData.data } );
+			} else if ( currentNewSectionEditLinkItem.element.type !== newNewSectionEditLinkOptionData.data ) {
+				currentNewSectionEditLinkItem.replaceWith(
+					ve.extendObject( true, {},
+						currentNewSectionEditLinkItem.getElement(),
+						{ 'type': newNewSectionEditLinkOptionData.data }
+					)
+				);
+			}
+		}
+	}
 };
