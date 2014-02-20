@@ -49,11 +49,28 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']
 	} );
-	this.settingsPage = new ve.ui.MWSettingsPage( this.surface, 'settings', { '$': this.$ } );
-	this.categoriesPage = new ve.ui.MWCategoriesPage( this.surface, 'categories', {
-		'$': this.$, '$overlay': this.$overlay
-	} );
-	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages', { '$': this.$ } );
+	this.settingsPage = new ve.ui.MWSettingsPage(
+		this.surface,
+		'settings',
+		{ '$': this.$ }
+	);
+	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage(
+		this.surface,
+		'advancedSettings',
+		{ '$': this.$ }
+	);
+	this.categoriesPage = new ve.ui.MWCategoriesPage(
+		this.surface,
+		'categories',
+		{
+			'$': this.$,
+			'$overlay': this.$overlay
+		}
+	);
+	this.languagesPage = new ve.ui.MWLanguagesPage(
+		'languages',
+		{ '$': this.$ }
+	);
 
 	// Events
 	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
@@ -63,6 +80,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	this.$foot.append( this.applyButton.$element );
 	this.bookletLayout.addPages( [
 		this.settingsPage,
+		this.advancedSettingsPage,
 		this.categoriesPage,
 		this.languagesPage
 	] );
@@ -90,6 +108,7 @@ ve.ui.MWMetaDialog.prototype.setup = function ( data ) {
 
 	// Let each page set itself up ('languages' page doesn't need this yet)
 	this.settingsPage.setup( data );
+	this.advancedSettingsPage.setup( data );
 	this.categoriesPage.setup( data );
 };
 
@@ -109,6 +128,7 @@ ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 
 	// Let each page tear itself down ('languages' page doesn't need this yet)
 	this.settingsPage.teardown( data );
+	this.advancedSettingsPage.teardown( data );
 	this.categoriesPage.teardown( data );
 
 	// Return to normal tracking behavior

@@ -163,6 +163,29 @@ ve.ui.MWPageSettingsDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWPageSettingsDialogTool );
 
 /**
+ * MediaWiki UserInterface advanced page settings tool.
+ *
+ * @class
+ * @extends ve.ui.DialogTool
+ * @constructor
+ * @param {OO.ui.Toolbar} toolbar
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MWAdvancedPageSettingsDialogTool = function VeUiMWAdvancedPageSettingsDialogTool( toolbar, config ) {
+	ve.ui.DialogTool.call( this, toolbar, config );
+};
+OO.inheritClass( ve.ui.MWAdvancedPageSettingsDialogTool, ve.ui.DialogTool );
+ve.ui.MWAdvancedPageSettingsDialogTool.static.name = 'advancedSettings';
+ve.ui.MWAdvancedPageSettingsDialogTool.static.group = 'utility';
+ve.ui.MWAdvancedPageSettingsDialogTool.static.icon = 'advanced';
+ve.ui.MWAdvancedPageSettingsDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-advancedsettings-tool' );
+ve.ui.MWAdvancedPageSettingsDialogTool.static.dialog = 'meta';
+ve.ui.MWAdvancedPageSettingsDialogTool.static.config = { 'page': 'advancedSettings' };
+ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAdd = false;
+ve.ui.toolFactory.register( ve.ui.MWAdvancedPageSettingsDialogTool );
+
+/**
  * MediaWiki UserInterface categories tool.
  *
  * @class
