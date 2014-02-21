@@ -154,13 +154,20 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 				}
 				this.lastEditSummaryWikitext = currentEditSummaryWikitext;
 				this.$reviewEditSummary.empty()
-					.parent().addClass( 'mw-ajax-loader' );
+					.parent().show().addClass( 'mw-ajax-loader' );
 				this.editSummaryXhr = new mw.Api().post( {
 					action: 'parse',
 					summary: currentEditSummaryWikitext
 				} ).done( function ( result ) {
-					dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) )
-						.parent().removeClass( 'mw-ajax-loader' );
+					if ( result.parse.parsedsummary['*'] === '' ) {
+						dialog.$reviewEditSummary.parent().hide();
+					} else {
+						dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) );
+					}
+				} ).fail( function () {
+					dialog.$reviewEditSummary.parent().hide();
+				} ).always( function () {
+					dialog.$reviewEditSummary.parent().removeClass( 'mw-ajax-loader' );
 				} );
 			}
 			/* falls through */
