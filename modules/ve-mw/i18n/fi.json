@@ -13,7 +13,8 @@
             "Silvonen",
             "Skalman",
             "Stryn",
-            "VezonThunder"
+            "VezonThunder",
+            "Elseweyr"
         ]
     },
     "tooltip-ca-createsource": "Luo sivun lähdekoodi",
@@ -43,7 +44,7 @@
     "visualeditor-dialog-media-page-general": "Yleiset asetukset",
     "visualeditor-dialog-media-position-center": "Keskitetty",
     "visualeditor-dialog-media-position-left": "Vasen",
-    "visualeditor-dialog-media-position-none": "Tyhjä",
+    "visualeditor-dialog-media-position-none": "Ei mikään",
     "visualeditor-dialog-media-position-right": "Oikea",
     "visualeditor-dialog-media-position-section": "Sijainti",
     "visualeditor-dialog-media-size-originalsize-error": "Alkuperäistä tiedostokokoa ei voida hakea.",
@@ -76,7 +77,7 @@
     "visualeditor-dialog-meta-settings-redirect-placeholder": "Uudelleenohjauksen kohdesivu",
     "visualeditor-dialog-meta-settings-redirect-staticlabel": "Älä salli tämän ohjauksen päivitystä silloin kun kohdesivua siirretään.",
     "visualeditor-dialog-meta-settings-section": "Sivun asetukset",
-    "visualeditor-dialog-meta-settings-toc-default": "Jos tarvitaan",
+    "visualeditor-dialog-meta-settings-toc-default": "Tarvittaessa",
     "visualeditor-dialog-meta-settings-toc-disable": "Ei koskaan",
     "visualeditor-dialog-meta-settings-toc-force": "Aina",
     "visualeditor-dialog-meta-settings-toc-label": "Näytä sisällysluettelo",

@@ -74,6 +74,7 @@
     "visualeditor-dialog-meta-settings-newsectioneditlink-default": "Standard",
     "visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Neen",
     "visualeditor-dialog-meta-settings-newsectioneditlink-force": "Jo",
+    "visualeditor-dialog-meta-settings-newsectioneditlink-label": "En Tab op dëser Säit weisen fir en neien Abschnitt derbäizesetzen",
     "visualeditor-dialog-meta-settings-noeditsection-label": "D'Linken 'Änneren' niewent all Iwwerschrëft op dëser Säit ausschalten.",
     "visualeditor-dialog-meta-settings-redirect-label": "Dës Säit viruleeden op",
     "visualeditor-dialog-meta-settings-redirect-placeholder": "Zilsäit fir d'Viruleedung",
@@ -87,6 +88,7 @@
     "visualeditor-dialog-reference-insert-button": "Referenz drasetzen",
     "visualeditor-dialog-reference-insert-title": "Referenz drasetzen",
     "visualeditor-dialog-reference-options-group-label": "Dëse Grupp benotzen",
+    "visualeditor-dialog-reference-options-group-placeholder": "Allgemeng Referenzen",
     "visualeditor-dialog-reference-options-name-label": "Nees benotze mat dësem Numm",
     "visualeditor-dialog-reference-options-section": "Optiounen",
     "visualeditor-dialog-reference-title": "Referenz",
@@ -151,6 +153,7 @@
     "visualeditor-reference-input-placeholder": "Wat wëllt Dir referenzéieren?",
     "visualeditor-referencelist-isempty": "Et gëtt keng Referenze mam Grupp \"$1\" op dëser Säit fir an dës Lëscht opzehuelen.",
     "visualeditor-referencelist-isempty-default": "Et gëtt keng Referenzen op dëser Säit fir an dës Lëscht opzehuelen.",
+    "visualeditor-referencelist-missingref": "Dës Referenz ass an enger Schabloun oder engem anere generéierte Block definéiert a kann dowéinst just am Quelltextmodus geännert ginn.",
     "visualeditor-savedialog-error-badtoken": "Mir konnten Är Ännerung net verschaffe well d'Sessioun net méi valabel war.",
     "visualeditor-savedialog-identify-anon": "Wëllt Dir dës Säit als anonyme Benotzer späicheren? Är IP-Adress gëtt an de Versioune vun der Säit gespäichert.",
     "visualeditor-savedialog-identify-user": "Dir sidd elo als [[User:$1|$1]] ageloggt. Är Ännerung gëtt mat dësem Benotzerkont associéiert wann Dir dës Ännerung elo späichert.",
@@ -174,7 +177,10 @@
     "visualeditor-toolbar-cancel": "Ofbriechen",
     "visualeditor-toolbar-format-tooltip": "Abschnitt formatéieren",
     "visualeditor-toolbar-savedialog": "Säit späicheren",
+    "visualeditor-toolbar-style-tooltip": "Stil vum Text",
     "visualeditor-usernamespacepagelink": "Project:Benotzernummraum",
     "visualeditor-viewpage-savewarning": "Sidd Dir sécher datt Dir dës Säit elo nach just kucke wëllt ouni virdrun ze späicheren?",
-    "visualeditor-wikitext-warning": "Dir benotzt VisualEditor -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Klickt  \"{{int:visualeditor-ca-editsource}}\" fir d'Säit am Wikitext-Modus z'änneren - net gespäichert Ännerunge gi verluer."
+    "visualeditor-wikitext-warning": "Dir benotzt VisualEditor -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Klickt  \"{{int:visualeditor-ca-editsource}}\" fir d'Säit am Wikitext-Modus z'änneren - net gespäichert Ännerunge gi verluer.",
+    "visualeditor-wikitext-warning-link": "Help:Wikitext",
+    "visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }
