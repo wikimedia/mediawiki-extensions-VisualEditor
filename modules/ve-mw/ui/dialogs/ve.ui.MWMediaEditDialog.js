@@ -285,6 +285,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 	this.sizeSelectWidget.connect( this, { 'select': 'onSizeSelectWidgetSelect' } );
 	this.sizeWidget.connect( this, { 'change': 'onSizeWidgetChange' } );
+	this.typeInput.connect( this, { 'select': 'onTypeChange' } );
 
 	// Initialization
 	this.generalSettingsPage.$element.append( [
@@ -318,6 +319,22 @@ ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
 			this.sizeSelectWidget.getItemFromData( 'custom' )
 		);
 	}
+};
+
+/**
+ * Handle type change, particularly to and from 'thumb' to make
+ * sure size is limited.
+ */
+ve.ui.MWMediaEditDialog.prototype.onTypeChange = function () {
+	if ( this.typeInput.getSelectedItem().getData() === 'thumb' ) {
+		// Tell the size widget to limit maxDimensions
+		this.sizeWidget.setEnforcedMax( true );
+	} else {
+		// Don't limit the widget for other types (Wikitext doesn't)
+		this.sizeWidget.setEnforcedMax( false );
+	}
+	// Re-validate the existing dimensions
+	this.sizeWidget.validateDimensions();
 };
 
 /**
@@ -424,14 +441,30 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		mediaNodeView.fetchDimensions()
 			.done( function () {
 				dialog.sizeWidget.setOriginalDimensions( mediaNodeView.getOriginalDimensions() );
+				dialog.sizeWidget.setEnforcedMax( false );
 				if ( mediaNodeView.getMaxDimensions() ) {
 					dialog.sizeWidget.setMaxDimensions( mediaNodeView.getMaxDimensions() );
+					if ( dialog.mediaNode.getAttribute( 'type' ) === 'thumb' ) {
+						// Tell the size widget to limit maxDimensions to image's original dimensions
+						dialog.sizeWidget.setEnforcedMax( true );
+					}
 				}
 			} )
 			.fail( function () {
 				dialog.sizeErrorLabel.$element.show();
 			} );
+	} else {
+		if (
+			this.mediaNode.getAttribute( 'type' ) === 'thumb' &&
+			this.sizeWidget.getMaxDimensions()
+		) {
+			// Tell the size widget to limit maxDimensions to image's original dimensions
+			this.sizeWidget.setEnforcedMax( true );
+		} else {
+			this.sizeWidget.setEnforcedMax( false );
+		}
 	}
+
 	// Set initial alt text
 	this.altTextInput.setValue( this.mediaNode.getAttribute( 'alt' ) || '' );
 
