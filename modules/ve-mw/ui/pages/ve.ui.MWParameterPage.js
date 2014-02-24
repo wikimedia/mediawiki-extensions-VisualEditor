@@ -1,5 +1,5 @@
 /*!
- * VisualEditor user interface MWTemplateParameterPage class.
+ * VisualEditor user interface MWParameterPage class.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -12,11 +12,11 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.dm.MWTemplateParameterModel} parameter Template parameter
+ * @param {ve.dm.MWParameterModel} parameter Template parameter
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, name, config ) {
+ve.ui.MWParameterPage = function VeUiMWParameter( parameter, name, config ) {
 	var spec = parameter.getTemplate().getSpec();
 
 	// Parent constructor
@@ -65,14 +65,14 @@ ve.ui.MWTemplateParameterPage = function VeUiMWTemplateParameter( parameter, nam
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplateParameterPage, OO.ui.PageLayout );
+OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
 
 /* Methods */
 
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplateParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
+ve.ui.MWParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
 	// Parent method
 	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
 
@@ -91,10 +91,10 @@ ve.ui.MWTemplateParameterPage.prototype.setOutlineItem = function ( outlineItem 
 	}
 };
 
-ve.ui.MWTemplateParameterPage.prototype.onTextInputChange = function () {
+ve.ui.MWParameterPage.prototype.onTextInputChange = function () {
 	this.parameter.setValue( this.valueInput.getValue() );
 };
 
-ve.ui.MWTemplateParameterPage.prototype.onRemoveButtonClick = function () {
+ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
 };

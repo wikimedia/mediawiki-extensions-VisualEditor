@@ -83,7 +83,7 @@ ve.ui.MWTemplatePage.prototype.onParameterSelect = function ( name ) {
 	var param;
 
 	if ( name ) {
-		param = new ve.dm.MWTemplateParameterModel( this.template, name );
+		param = new ve.dm.MWParameterModel( this.template, name );
 		this.template.addParameter( param );
 		this.addParameterSearch.query.setValue();
 	}
