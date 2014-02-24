@@ -27,7 +27,8 @@
             "Urhixidur",
             "Verdy p",
             "Wyz",
-            "Dr Brains"
+            "Dr Brains",
+            "Drongou"
         ]
     },
     "tooltip-ca-createsource": "Créer le code source de cette page",
@@ -56,7 +57,7 @@
     "visualeditor-dialog-media-insert-title": "Insérer un média",
     "visualeditor-dialog-media-page-advanced": "Paramètres avancés",
     "visualeditor-dialog-media-page-general": "Paramètres généraux",
-    "visualeditor-dialog-media-position-center": "Contre",
+    "visualeditor-dialog-media-position-center": "Centre",
     "visualeditor-dialog-media-position-checkbox": "Envelopper le contenu avec cet élément",
     "visualeditor-dialog-media-position-left": "Gauche",
     "visualeditor-dialog-media-position-none": "Aucun",
