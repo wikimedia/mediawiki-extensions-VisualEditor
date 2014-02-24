@@ -317,7 +317,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		if ( currentStaticRedirectItem && ( !newStaticRedirectState || !newRedirectData ) ) {
 			currentStaticRedirectItem.remove();
 		}
-		if ( !currentStaticRedirectItem && newStaticRedirectState ) {
+		if ( !currentStaticRedirectItem && newStaticRedirectState && newRedirectData ) {
 			this.metaList.insertMeta( { 'type': 'mwStaticRedirect' } );
 		}
 	}
