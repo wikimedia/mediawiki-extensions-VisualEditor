@@ -62,7 +62,7 @@ OO.inheritClass( ve.ui.MWNoticesPopupTool, OO.ui.PopupTool );
 ve.ui.MWNoticesPopupTool.static.name = 'notices';
 ve.ui.MWNoticesPopupTool.static.group = 'utility';
 ve.ui.MWNoticesPopupTool.static.icon = 'alert';
-ve.ui.MWNoticesPopupTool.static.title = OO.ui.deferMsg( 'visualeditor-editnotices-tool' );
+ve.ui.MWNoticesPopupTool.static.title = OO.ui.deferMsg( 'visualeditor-editnotices-tooltip' );
 ve.ui.MWNoticesPopupTool.static.autoAdd = false;
 
 /* Methods */
