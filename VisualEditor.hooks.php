@@ -315,6 +315,7 @@ class VisualEditorHooks {
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		global $wgDefaultUserOptions,
+			$wgThumbLimits,
 			$wgVisualEditorDisableForAnons,
 			$wgVisualEditorEnableExperimentalCode,
 			$wgVisualEditorNamespaces,
@@ -334,6 +335,7 @@ class VisualEditorHooks {
 			'defaultUserOptions' => array(
 				'betatempdisable' => $wgDefaultUserOptions['visualeditor-betatempdisable'],
 				'enable' => $wgDefaultUserOptions['visualeditor-enable'],
+				'defaultthumbsize' => $wgThumbLimits[ $wgDefaultUserOptions['thumbsize'] ]
 			),
 			'blacklist' => $wgVisualEditorBrowserBlacklist,
 			'skins' => $wgVisualEditorSupportedSkins,

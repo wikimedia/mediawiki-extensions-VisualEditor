@@ -4,6 +4,7 @@
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
+/*global mw */
 
 /**
  * Dialog for editing MediaWiki media objects.
@@ -248,11 +249,30 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'$': this.$
 	} );
 
+	this.sizeSelectWidget = new OO.ui.ButtonSelectWidget( {
+		'$': this.$
+	} );
+	this.sizeSelectWidget.addItems( [
+		new OO.ui.ButtonOptionWidget( 'default', {
+			'$': this.$,
+			'label': ve.msg( 'visualeditor-dialog-media-size-choosedefault' )
+		} ),
+		new OO.ui.ButtonOptionWidget( 'custom', {
+			'$': this.$,
+			'label': ve.msg( 'visualeditor-dialog-media-size-choosecustom' )
+		} )
+	] );
+
 	this.sizeFieldset.$element.append( [
+		this.sizeSelectWidget.$element,
 		this.sizeWidget.$element,
 		this.sizeErrorLabel.$element
 	] );
 	this.sizeErrorLabel.$element.hide();
+
+	// Get wiki default thumbnail size
+	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+		.defaultUserOptions.defaultthumbsize;
 
 	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
@@ -263,6 +283,8 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	// Events
 	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
+	this.sizeSelectWidget.connect( this, { 'select': 'onSizeSelectWidgetSelect' } );
+	this.sizeWidget.connect( this, { 'change': 'onSizeWidgetChange' } );
 
 	// Initialization
 	this.generalSettingsPage.$element.append( [
@@ -278,6 +300,24 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 
 	this.$body.append( this.bookletLayout.$element );
 	this.$foot.append( this.applyButton.$element );
+};
+
+/**
+ * Handle change event on the sizeWidget. Switch the size select
+ * from default to custom and vise versa based on the values in
+ * the widget.
+ */
+ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
+	// Switch to 'custom' size
+	if ( this.sizeWidget.isEmpty() ) {
+		this.sizeSelectWidget.selectItem(
+			this.sizeSelectWidget.getItemFromData( 'default' )
+		);
+	} else {
+		this.sizeSelectWidget.selectItem(
+			this.sizeSelectWidget.getItemFromData( 'custom' )
+		);
+	}
 };
 
 /**
@@ -306,6 +346,24 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 	}
 
 	this.positionInput.setDisabled( !checked );
+};
+
+/**
+ * Respond to sizeSelectWidget change
+ */
+ve.ui.MWMediaEditDialog.prototype.onSizeSelectWidgetSelect = function () {
+	if ( this.sizeSelectWidget.getSelectedItem().getData() === 'default' ) {
+		// Reset so placeholders appear
+		this.sizeWidget.setCurrentDimensions( {
+			'width': 0,
+			'height': 0
+		} );
+	} else {
+		// Fill the values as actual values into the size widget
+		this.sizeWidget.setCurrentDimensions(
+			this.sizeWidget.getPlaceholderDimensions()
+		);
+	}
 };
 
 /**
@@ -416,6 +474,27 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		);
 	}
 
+	// Initialize size
+	if ( this.mediaNode.getAttribute( 'defaultSize' ) ) {
+		this.sizeSelectWidget.intializeSelection(
+			this.sizeSelectWidget.getItemFromData( 'default' )
+		);
+		// Current size will be used for placeholders
+		this.sizeWidget.setPlaceholderDimensions( {
+			'width': this.mediaNode.getAttribute( 'width' ),
+			'height': this.mediaNode.getAttribute( 'height' )
+		} );
+		// Use placeholders
+		this.sizeWidget.setCurrentDimensions( {
+			'width': 0,
+			'height': 0
+		} );
+	} else {
+		this.sizeSelectWidget.intializeSelection(
+			this.sizeSelectWidget.getItemFromData( 'custom' )
+		);
+	}
+
 	// Initialization
 	this.captionFieldset.$element.append( this.captionSurface.$element );
 	this.captionSurface.initialize();
@@ -449,17 +528,20 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 		surfaceModel.change(
 			ve.dm.Transaction.newFromDocumentInsertion( doc, this.captionNode.getRange().start, newDoc )
 		);
-		// Change attributes only if the values are valid
-		if ( this.sizeWidget.isCurrentDimensionsValid() ) {
-			attrs = this.sizeWidget.getCurrentDimensions();
-			if (
-				this.mediaNode.getAttribute( 'defaultSize' ) &&
-				(
-					this.initialDimensions.width !== attrs.width ||
-					this.initialDimensions.height !== attrs.height
-				)
-			) {
-				// Size changed, remove default class
+
+		if ( this.sizeSelectWidget.getSelectedItem().getData() === 'default' ) {
+			// Set the size attributes to the placeholder values
+			attrs = this.sizeWidget.getPlaceholderDimensions();
+			attrs.defaultSize = true;
+		} else {
+			// Change attributes only if the values are valid
+			if ( this.sizeWidget.isCurrentDimensionsValid() ) {
+				if ( this.sizeWidget.isEmpty() ) {
+					// use placeholder values
+					attrs = this.sizeWidget.getPlaceholderDimensions();
+				} else {
+					attrs = this.sizeWidget.getCurrentDimensions();
+				}
 				attrs.defaultSize = false;
 			}
 		}
