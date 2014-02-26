@@ -387,7 +387,7 @@ ve.dm.MWTransclusionModel.prototype.getParts = function () {
  */
 ve.dm.MWTransclusionModel.prototype.getPartFromId = function ( id ) {
 	var i, len,
-		// For ids from ve.dm.MWTemplateParameterModel, compare against the part id
+		// For ids from ve.dm.MWParameterModel, compare against the part id
 		// of the parameter instead of the entire model id (e.g. "part_1" instead of "part_1/foo").
 		partId = id.split( '/' )[0];
 
@@ -404,7 +404,7 @@ ve.dm.MWTransclusionModel.prototype.getPartFromId = function ( id ) {
  *
  * Indexes are linear depth-first addresses in the transclusion tree.
  *
- * @param {ve.dm.MWTransclusionPartModel|ve.dm.MWTemplateParameterModel} model Part or parameter
+ * @param {ve.dm.MWTransclusionPartModel|ve.dm.MWParameterModel} model Part or parameter
  * @returns {number} Page index of model
  */
 ve.dm.MWTransclusionModel.prototype.getIndex = function ( model ) {

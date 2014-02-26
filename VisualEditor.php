@@ -566,7 +566,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/dm/models/ve.dm.MWTemplateSpecModel.js',
 			'modules/ve-mw/dm/models/ve.dm.MWTemplateModel.js',
 			'modules/ve-mw/dm/models/ve.dm.MWTemplatePlaceholderModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWTemplateParameterModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWParameterModel.js',
 
 			// ce
 			'modules/ve-mw/ce/ve.ce.MWResizableNode.js',
@@ -609,7 +609,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/pages/ve.ui.MWCategoriesPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWLanguagesPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePage.js',
-			'modules/ve-mw/ui/pages/ve.ui.MWTemplateParameterPage.js',
+			'modules/ve-mw/ui/pages/ve.ui.MWParameterPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePlaceholderPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTransclusionContentPage.js',
 

@@ -105,10 +105,10 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 /**
  * Handle add param events.
  *
- * @param {ve.dm.MWTemplateParameterModel} param Added param
+ * @param {ve.dm.MWParameterModel} param Added param
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameter = function ( param ) {
-	var page = new ve.ui.MWTemplateParameterPage( param, param.getId(), { '$': this.$ } );
+	var page = new ve.ui.MWParameterPage( param, param.getId(), { '$': this.$ } );
 	this.bookletLayout.addPages( [ page ], this.transclusion.getIndex( param ) );
 	if ( this.loaded ) {
 		this.setPageByName( param.getId() );
@@ -118,7 +118,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameter = function ( param ) {
 /**
  * Handle remove param events.
  *
- * @param {ve.dm.MWTemplateParameterModel} param Removed param
+ * @param {ve.dm.MWParameterModel} param Removed param
  */
 ve.ui.MWTransclusionDialog.prototype.onRemoveParameter = function ( param ) {
 	this.bookletLayout.removePages( [ this.bookletLayout.getPage( param.getId() ) ] );

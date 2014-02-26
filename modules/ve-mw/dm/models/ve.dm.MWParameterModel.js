@@ -1,5 +1,5 @@
 /*!
- * VisualEditor DataModel MWTemplateParameterModel class.
+ * VisualEditor DataModel MWParameterModel class.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -16,7 +16,7 @@
  * @param {string} name Parameter name
  * @param {string} value Parameter value
  */
-ve.dm.MWTemplateParameterModel = function VeDmMWTemplateParameterModel( template, name, value ) {
+ve.dm.MWParameterModel = function VeDmMWParameterModel( template, name, value ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
@@ -30,7 +30,7 @@ ve.dm.MWTemplateParameterModel = function VeDmMWTemplateParameterModel( template
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.MWTemplateParameterModel, OO.EventEmitter );
+OO.mixinClass( ve.dm.MWParameterModel, OO.EventEmitter );
 
 /* Events */
 
@@ -47,7 +47,7 @@ OO.mixinClass( ve.dm.MWTemplateParameterModel, OO.EventEmitter );
  * @param {string} name Parameter name
  * @returns {boolean} Parameter is required
  */
-ve.dm.MWTemplateParameterModel.prototype.isRequired = function () {
+ve.dm.MWParameterModel.prototype.isRequired = function () {
 	return this.template.getSpec().isParameterRequired( this.name );
 };
 
@@ -56,7 +56,7 @@ ve.dm.MWTemplateParameterModel.prototype.isRequired = function () {
  *
  * @returns {ve.dm.MWTemplateModel} Template
  */
-ve.dm.MWTemplateParameterModel.prototype.getTemplate = function () {
+ve.dm.MWParameterModel.prototype.getTemplate = function () {
 	return this.template;
 };
 
@@ -65,7 +65,7 @@ ve.dm.MWTemplateParameterModel.prototype.getTemplate = function () {
  *
  * @returns {string} Unique ID
  */
-ve.dm.MWTemplateParameterModel.prototype.getId = function () {
+ve.dm.MWParameterModel.prototype.getId = function () {
 	return this.id;
 };
 
@@ -74,7 +74,7 @@ ve.dm.MWTemplateParameterModel.prototype.getId = function () {
  *
  * @returns {string} Parameter name
  */
-ve.dm.MWTemplateParameterModel.prototype.getName = function () {
+ve.dm.MWParameterModel.prototype.getName = function () {
 	return this.name;
 };
 
@@ -83,7 +83,7 @@ ve.dm.MWTemplateParameterModel.prototype.getName = function () {
  *
  * @returns {string} Parameter name
  */
-ve.dm.MWTemplateParameterModel.prototype.getOriginalName = function () {
+ve.dm.MWParameterModel.prototype.getOriginalName = function () {
 	return this.originalName;
 };
 
@@ -92,7 +92,7 @@ ve.dm.MWTemplateParameterModel.prototype.getOriginalName = function () {
  *
  * @returns {string} Parameter value
  */
-ve.dm.MWTemplateParameterModel.prototype.getValue = function () {
+ve.dm.MWParameterModel.prototype.getValue = function () {
 	return this.value;
 };
 
@@ -101,7 +101,7 @@ ve.dm.MWTemplateParameterModel.prototype.getValue = function () {
  *
  * @param {string} value Parameter value
  */
-ve.dm.MWTemplateParameterModel.prototype.setValue = function ( value ) {
+ve.dm.MWParameterModel.prototype.setValue = function ( value ) {
 	this.value = value;
 	this.emit( 'change' );
 };
@@ -109,6 +109,6 @@ ve.dm.MWTemplateParameterModel.prototype.setValue = function ( value ) {
 /**
  * Remove parameter from template.
  */
-ve.dm.MWTemplateParameterModel.prototype.remove = function () {
+ve.dm.MWParameterModel.prototype.remove = function () {
 	this.template.removeParameter( this );
 };

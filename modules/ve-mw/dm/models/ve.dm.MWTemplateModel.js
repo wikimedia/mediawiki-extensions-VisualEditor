@@ -42,12 +42,12 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
 
 /**
  * @event add
- * @param {ve.dm.MWTemplateParameterModel} param Added param
+ * @param {ve.dm.MWParameterModel} param Added param
  */
 
 /**
  * @event remove
- * @param {ve.dm.MWTemplateParameterModel} param Removed param
+ * @param {ve.dm.MWParameterModel} param Removed param
  */
 
 /* Static Methods */
@@ -67,7 +67,7 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
 
 	for ( key in data.params ) {
 		template.addParameter(
-			new ve.dm.MWTemplateParameterModel( template, key, data.params[key].wt, 'data' )
+			new ve.dm.MWParameterModel( template, key, data.params[key].wt, 'data' )
 		);
 	}
 
@@ -131,7 +131,7 @@ ve.dm.MWTemplateModel.prototype.getSpec = function () {
 /**
  * Get all params.
  *
- * @returns {Object.<string,ve.dm.MWTemplateParameterModel>} Parameters keyed by name
+ * @returns {Object.<string,ve.dm.MWParameterModel>} Parameters keyed by name
  */
 ve.dm.MWTemplateModel.prototype.getParameters = function () {
 	return this.params;
@@ -141,7 +141,7 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
  * Get a parameter.
  *
  * @param {string} name Parameter name
- * @returns {ve.dm.MWTemplateParameterModel} Parameter
+ * @returns {ve.dm.MWParameterModel} Parameter
  */
 ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
 	return this.params[name];
@@ -231,7 +231,7 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 /**
  * Add a parameter to template.
  *
- * @param {ve.dm.MWTemplateParameterModel} param Parameter to add
+ * @param {ve.dm.MWParameterModel} param Parameter to add
  * @fires add
  */
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
@@ -247,7 +247,7 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 /**
  * Remove parameter from template.
  *
- * @param {ve.dm.MWTemplateParameterModel} param Parameter to remove
+ * @param {ve.dm.MWParameterModel} param Parameter to remove
  * @fires remove
  */
 ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
@@ -272,7 +272,7 @@ ve.dm.MWTemplateModel.prototype.addRequiredParameters = function () {
 
 	for ( i = 0, len = names.length; i < len; i++ ) {
 		if ( !this.params[name] && spec.isParameterRequired( names[i] ) ) {
-			this.addParameter( new ve.dm.MWTemplateParameterModel( this, names[i] ) );
+			this.addParameter( new ve.dm.MWParameterModel( this, names[i] ) );
 		}
 	}
 };
