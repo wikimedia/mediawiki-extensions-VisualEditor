@@ -563,6 +563,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/ve.ui.MWWidget.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWDialog.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWExtensionInspector.css',
+			'modules/ve-mw/ui/styles/ve.ui.MWPage.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',

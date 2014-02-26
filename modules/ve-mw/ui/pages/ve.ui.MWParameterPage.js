@@ -17,50 +17,64 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWParameterPage = function VeUiMWParameter( parameter, name, config ) {
-	var spec = parameter.getTemplate().getSpec();
+	var paramName = parameter.getName();
 
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
 	this.parameter = parameter;
-	this.spec = spec;
+	this.spec = parameter.getTemplate().getSpec();
+	this.defaultValue = this.spec.getParameterDefaultValue( paramName );
+	this.$label = this.$( '<div>' );
+	this.$field = this.$( '<div>' );
+	this.$actions = this.$( '<div>' );
+	this.$info = this.$( '<div>' );
+	this.$description = this.$( '<div>' );
 	this.valueInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,
 			'autosize': true,
-			'classes': [ 've-ui-mwTransclusionDialog-input' ]
+			'placeholder': this.defaultValue
 		} )
 		.setValue( this.parameter.getValue() )
-		.connect( this, { 'change': 'onTextInputChange' } );
-	this.valueField = new OO.ui.FieldLayout( this.valueInput, {
-		'$': this.$,
-		'align': 'top',
-		'label': this.spec.getParameterDescription( this.parameter.getName() ) || ''
-	} );
+		.connect( this, { 'change': 'onValueInputChange' } );
 	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
 			'frameless': true,
 			'icon': 'remove',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-			'flags': ['destructive'],
-			'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
+			'tabIndex': -1
 		} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
-	this.valueFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': this.spec.getParameterLabel( this.parameter.getName() ),
-		'icon': 'parameter',
-		'items': [ this.valueInput ]
-	} );
 
 	// TODO: Use spec.required
 	// TODO: Use spec.deprecation
-	// TODO: Use spec.default
 	// TODO: Use spec.type
 
+	// Events
+	this.$label.on( 'click', ve.bind( this.onLabelClick, this ) );
+	this.$description.on( 'click', ve.bind( this.onDescriptionClick, this ) );
+
 	// Initialization
-	this.$element.append( this.valueFieldset.$element, this.removeButton.$element );
+	this.$label
+		.addClass( 've-ui-mwParameterPage-label' )
+		.text( this.spec.getParameterLabel( paramName ) );
+	this.$actions
+		.addClass( 've-ui-mwParameterPage-actions' )
+		.append( this.removeButton.$element );
+	this.$description
+		.addClass( 've-ui-mwParameterPage-description' )
+		.text( this.spec.getParameterDescription( paramName ) || '' );
+	this.$info
+		.addClass( 've-ui-mwParameterPage-info' )
+		.append( this.$description );
+	this.$field
+		.addClass( 've-ui-mwParameterPage-field' )
+		.append( this.valueInput.$element, this.$actions, this.$info );
+	this.$element
+		.addClass( 've-ui-mwParameterPage' )
+		.append( this.$label, this.$field );
 };
 
 /* Inheritance */
@@ -68,6 +82,33 @@ ve.ui.MWParameterPage = function VeUiMWParameter( parameter, name, config ) {
 OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
 
 /* Methods */
+
+ve.ui.MWParameterPage.prototype.isEmpty = function () {
+	return this.valueInput.getValue() === '' && this.defaultValue === '';
+};
+
+ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
+	var value = this.valueInput.getValue();
+
+	this.parameter.setValue( value );
+
+	if ( this.outlineItem ) {
+		this.outlineItem.setFlags( { 'empty': this.isEmpty() } );
+	}
+};
+
+ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
+	this.parameter.remove();
+};
+
+ve.ui.MWParameterPage.prototype.onLabelClick = function () {
+	this.valueInput.simulateLabelClick();
+};
+
+ve.ui.MWParameterPage.prototype.onDescriptionClick = function () {
+	this.valueInput.simulateLabelClick();
+	this.$description.toggleClass( 've-ui-mwParameterPage-description-all' );
+};
 
 /**
  * @inheritdoc
@@ -82,20 +123,15 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
 			.setMovable( false )
 			.setRemovable( true )
 			.setLevel( 1 )
+			.setFlags( { 'empty': this.isEmpty() } )
 			.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
 
 		if ( this.parameter.isRequired() ) {
 			this.outlineItem
 				.setIndicator( 'required' )
-				.setIndicatorTitle( ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) );
+				.setIndicatorTitle(
+					ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
+				);
 		}
 	}
-};
-
-ve.ui.MWParameterPage.prototype.onTextInputChange = function () {
-	this.parameter.setValue( this.valueInput.getValue() );
-};
-
-ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
-	this.parameter.remove();
 };
