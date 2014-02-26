@@ -523,6 +523,17 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 			'height': 0
 		} );
 	} else {
+		// Set placeholders for the default bounding box
+		if ( this.mediaNode.getAttribute( 'width' ) > this.mediaNode.getAttribute( 'height' ) ) {
+			this.sizeWidget.setPlaceholderDimensions( {
+				'width': this.defaultThumbSize,
+			} );
+		} else {
+			this.sizeWidget.setPlaceholderDimensions( {
+				'height': this.defaultThumbSize
+			} );
+		}
+
 		this.sizeSelectWidget.intializeSelection(
 			this.sizeSelectWidget.getItemFromData( 'custom' )
 		);
