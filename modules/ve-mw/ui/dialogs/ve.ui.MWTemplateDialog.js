@@ -59,7 +59,7 @@ ve.ui.MWTemplateDialog.prototype.getBookletLayout = function () {
 		'$': this.$,
 		'continuous': true,
 		'autoFocus': true,
-		'outlined': true
+		'outlined': false
 	} );
 };
 
