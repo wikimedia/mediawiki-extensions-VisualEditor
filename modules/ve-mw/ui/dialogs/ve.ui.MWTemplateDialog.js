@@ -41,6 +41,19 @@ ve.ui.MWTemplateDialog.static.title =
 /**
  * @inheritdoc
  */
+ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added  ) {
+	// Parent method
+	ve.ui.MWTransclusionDialog.prototype.onReplacePart.call( this, removed, added );
+
+	// Initialization
+	if ( added instanceof ve.dm.MWTemplateModel ) {
+		this.setTitle( added.getSpec().getLabel() );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTemplateDialog.prototype.getBookletLayout = function () {
 	return new OO.ui.BookletLayout( {
 		'$': this.$,
