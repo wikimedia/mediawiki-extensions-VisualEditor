@@ -64,6 +64,16 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	 */
 	this.sanityCheckPromise = null;
 
+	// Add modules specific to desktop (modules shared with mobile go in MWTarget)
+	this.modules.push(
+		'ext.visualEditor.mwformatting',
+		'ext.visualEditor.mwgallery',
+		'ext.visualEditor.mwimage',
+		'ext.visualEditor.mwmeta',
+		'ext.visualEditor.mwreference',
+		'ext.visualEditor.mwtransclusion'
+	);
+
 	// Load preference modules
 	for ( prefName in conf.preferenceModules ) {
 		prefValue = mw.config.get( 'wgUserName' ) === null ?
