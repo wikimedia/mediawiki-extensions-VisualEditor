@@ -131,10 +131,14 @@ ve.ui.MWTransclusionDialog.prototype.onRemoveParameter = function ( param ) {
 /**
  * Get a booklet layout widget.
  *
- * @return {OO.ui.BookletLayout} Configured widget
+ * @abstract
+ * @returns {OO.ui.BookletLayout} Configured widget
+ * @throws {Error} If method is not overridden in subclass
  */
 ve.ui.MWTransclusionDialog.prototype.getBookletLayout = function () {
-	return new OO.ui.BookletLayout( { '$': this.$, 'continuous': true } );
+	throw new Error(
+		'getBookletLayout must be overridden in subclass of ve.ui.MWTransclusionDialog'
+	);
 };
 
 /**

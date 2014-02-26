@@ -36,8 +36,6 @@ ve.ui.MWTemplateDialog.static.name = 'transclusion';
 ve.ui.MWTemplateDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-transclusion-title' );
 
-ve.ui.MWTemplateDialog.static.icon = 'template';
-
 /* Methods */
 
 /**
