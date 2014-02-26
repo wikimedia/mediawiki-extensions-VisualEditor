@@ -27,12 +27,6 @@
 	margin-top: 0;
 }
 
-.ve-ui-mwTransclusionDialog-addParameterFieldset > legend.oo-ui-labeledElement-label {
-	font-size: 1.25em;
-	padding-left: 2em;
-	line-height: 2em;
-}
-
 .ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
 	position: relative;
 	overflow: hidden;
@@ -48,7 +42,7 @@
 .ve-ui-mwTransclusionDialog-removeButton {
 	position: absolute;
 	right: 1.5em;
-	top: 1em;
+	top: 1.5em;
 }
 
 /* ve.ui.MWMediaDialog */
