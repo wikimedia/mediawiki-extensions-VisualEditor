@@ -117,6 +117,50 @@ class VisualEditorHooks {
 	}
 
 	/**
+	 * Called when the normal wikitext editor is shown.
+	 * Inserts a 'wasve' hidden field if requested by the client
+	 *
+	 * @param $editPage EditPage
+	 * @param $output OutputPage
+	 * @returns boolean true
+	 */
+	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
+		$request = RequestContext::getMain()->getRequest();
+		if ( $request->getBool( 'wasve' ) ) {
+			$output->addHTML( Xml::input( 'wasve', false, '1', array( 'type' => 'hidden' ) ) );
+		}
+		return true;
+	}
+
+	/**
+	 * Called when an edit is saved
+	 * Adds 'visualeditor-switched' tag to the edit if requested
+	 *
+	 * @param $article WikiPage
+	 * @param $user User
+	 * @param $content Content
+	 * @param $summary string
+	 * @param $isMinor boolean
+	 * @param $isWatch boolean
+	 * @param $section int
+	 * @param $flags int
+	 * @param $revision Revision
+	 * @param $status Status
+	 * @param $baseRevId int|boolean
+	 * @returns boolean true
+	 */
+	public static function onPageContentSaveComplete(
+		$article, $user, $content, $summary, $isMinor, $isWatch,
+		$section, $flags, $revision, $status, $baseRevId
+	) {
+		$request = RequestContext::getMain()->getRequest();
+		if ( $request->getBool( 'wasve' ) ) {
+			ChangeTags::addTags( 'visualeditor-switched', null, $revision->getId() );
+		}
+		return true;
+	}
+
+	/**
 	 * Changes the section edit links to add a VE edit link.
 	 *
 	 * This is attached to the MediaWiki 'DoEditSectionLink' hook.
@@ -285,6 +329,7 @@ class VisualEditorHooks {
 	public static function onListDefinedTags( &$tags ) {
 		$tags[] = 'visualeditor';
 		$tags[] = 'visualeditor-needcheck';
+		$tags[] = 'visualeditor-switched';
 		return true;
 	}
 
