@@ -63,6 +63,17 @@ ve.ui.MWTemplateDialog.prototype.getBookletLayout = function () {
 	} );
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTemplateDialog.prototype.setup = function ( data ) {
+	// Parent method
+	ve.ui.MWTransclusionDialog.prototype.setup.call( this, data );
+
+	// Initialization
+	this.setTitle( ve.msg( 'visualeditor-dialog-template-title' ) );
+};
+
 /* Registration */
 
 ve.ui.dialogFactory.register( ve.ui.MWTemplateDialog );

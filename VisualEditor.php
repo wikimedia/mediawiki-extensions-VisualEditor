@@ -908,6 +908,7 @@ $wgResourceModules += array(
 			'ext.visualEditor.mwcore',
 		),
 		'messages' => array(
+			'visualeditor-dialog-template-title',
 			'visualeditor-dialog-transclusion-add-content',
 			'visualeditor-dialog-transclusion-add-param',
 			'visualeditor-dialog-transclusion-add-template',
