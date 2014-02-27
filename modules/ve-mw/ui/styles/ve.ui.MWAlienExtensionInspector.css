@@ -1,17 +1,9 @@
 /*!
- * VisualEditor MediaWiki UserInterface Inspector styles.
+ * VisualEditor MediaWiki UserInterface alien extension inspector styles.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-
-/* ve.ui.MWExtensionInspector */
-
-.ve-ui-mwExtensionInspector-input textarea {
-	height: 8em;
-}
-
-/* ve.ui.MWAlienExtensionInspector */
 
 .ve-ui-mwAlienExtensionInspector-attributes .oo-ui-textInputWidget {
 	width: 100%;

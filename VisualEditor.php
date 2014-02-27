@@ -555,15 +555,14 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js',
-			'modules/ve-mw/ui/tools/ve.ui.MWInspectorTool.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js',
 		),
 		'styles' => array(
 			// ui
 			'modules/ve-mw/ui/styles/ve.ui.MWWidget.css',
-			'modules/ve-mw/ui/styles/ve.ui.MWInspector.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWDialog.css',
+			'modules/ve-mw/ui/styles/ve.ui.MWExtensionInspector.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',
@@ -671,6 +670,8 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWMediaInsertDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWMediaEditDialog.js',
+
+			'modules/ve-mw/ui/tools/ve.ui.MWMediaDialogTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWBlockImageNode.css',
@@ -723,6 +724,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkInspector.js',
+
+			'modules/ve-mw/ui/tools/ve.ui.MWLinkInspectorTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWNumberedExternalLinkNode.css',
@@ -767,6 +770,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/pages/ve.ui.MWLanguagesPage.js',
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWMetaDialog.js',
+
+			'modules/ve-mw/ui/tools/ve.ui.MWMetaDialogTool.js',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
@@ -835,6 +840,8 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceListDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
+
+			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWReferenceListNode.css',
@@ -890,6 +897,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTemplateDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWAdvancedTransclusionDialog.js',
+
+			'modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWTransclusionNode.css',
@@ -963,6 +972,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWAlienExtensionNode.css',
+			'modules/ve-mw/ui/styles/ve.ui.MWAlienExtensionInspector.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
