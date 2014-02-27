@@ -47,3 +47,7 @@ figure[typeof='mw:Image/Thumb'], figure[typeof='mw:Image/Frame'] {
 figure[typeof*='mw:Image'] .ve-ce-mwBlockImageNode-thumbimage {
 	border: 1px solid #cccccc;
 }
+
+figure[typeof*='mw:Image'].mw-image-border img {
+	border: 1px solid #cccccc;
+}
