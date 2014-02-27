@@ -108,7 +108,13 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
  * @param {ve.dm.MWParameterModel} param Added param
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameter = function ( param ) {
-	var page = new ve.ui.MWParameterPage( param, param.getId(), { '$': this.$ } );
+	var page;
+
+	if ( param.getName() ) {
+		page = new ve.ui.MWParameterPage( param, param.getId(), { '$': this.$ } );
+	} else {
+		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), { '$': this.$ } );
+	}
 	this.bookletLayout.addPages( [ page ], this.transclusion.getIndex( param ) );
 	if ( this.loaded ) {
 		this.setPageByName( param.getId() );

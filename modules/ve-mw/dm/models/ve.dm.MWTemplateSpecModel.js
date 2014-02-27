@@ -85,7 +85,7 @@ ve.dm.MWTemplateSpecModel.prototype.fill = function () {
 	var key;
 
 	for ( key in this.template.getParameters() ) {
-		if ( !this.params[key] ) {
+		if ( key && !this.params[key] ) {
 			this.params[key] = this.getDefaultParameterSpec( key );
 		}
 	}

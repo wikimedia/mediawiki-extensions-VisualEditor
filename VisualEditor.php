@@ -892,6 +892,7 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWParameterPage.js',
+			'modules/ve-mw/ui/pages/ve.ui.MWParameterPlaceholderPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePlaceholderPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTransclusionContentPage.js',
 

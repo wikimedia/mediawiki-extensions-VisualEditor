@@ -204,8 +204,14 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 				paramNames.splice( index, 1 );
 			}
 		}
-		// Unknown parameters in alpha-numeric order second
+		// Unknown parameters in alpha-numeric order second, empty string at the very end
 		paramNames.sort( function ( a, b ) {
+			if ( a === '' ) {
+				return 1;
+			}
+			if ( b === '' ) {
+				return -1;
+			}
 			var aIsNaN = isNaN( a ),
 				bIsNaN = isNaN( b );
 			if ( aIsNaN && bIsNaN ) {

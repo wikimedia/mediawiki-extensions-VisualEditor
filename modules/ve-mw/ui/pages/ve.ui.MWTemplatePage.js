@@ -17,16 +17,12 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var spec = template.getSpec();
-
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
 	this.template = template;
-	this.spec = spec;
-	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, { '$': this.$ } )
-		.connect( this, { 'select': 'onParameterSelect' } );
+	this.spec = template.getSpec();
 	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
 			'frameless': true,
@@ -40,22 +36,13 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		'$': this.$,
 		'label': this.spec.getLabel(),
 		'icon': 'template',
-		'$content': this.$( '<div>' ).text( this.template.getSpec().getDescription() || '' )
-	} );
-	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		'icon': 'parameter',
-		'classes': [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
-		'$content': this.addParameterSearch.$element
+		'$content': this.$( '<div>' ).text( this.spec.getDescription() || '' )
 	} );
 
 	// Initialization
-	this.$element.append(
-		this.infoFieldset.$element,
-		this.addParameterFieldset.$element,
-		this.removeButton.$element
-	);
+	this.$element
+		.addClass( 've-ui-mwTemplatePage' )
+		.append( this.infoFieldset.$element, this.removeButton.$element );
 };
 
 /* Inheritance */
@@ -77,16 +64,6 @@ ve.ui.MWTemplatePage.prototype.setOutlineItem = function ( outlineItem ) {
 			.setMovable( true )
 			.setRemovable( true )
 			.setLabel( this.spec.getLabel() );
-	}
-};
-
-ve.ui.MWTemplatePage.prototype.onParameterSelect = function ( name ) {
-	var param;
-
-	if ( name ) {
-		param = new ve.dm.MWParameterModel( this.template, name );
-		this.template.addParameter( param );
-		this.addParameterSearch.query.setValue();
 	}
 };
 
