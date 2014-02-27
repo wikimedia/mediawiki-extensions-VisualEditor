@@ -126,6 +126,7 @@
     "visualeditor-differror": "Error loading data from server: $1.",
     "visualeditor-editconflict": "Your changes could not be saved because of an edit conflict. Would you like to resolve the conflict manually?",
     "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notice|notices}}",
+    "visualeditor-editnotices-tooltip": "Edit notices",
     "visualeditor-editsummary": "Describe what you changed",
     "visualeditor-editsummary-bytes-remaining": "The number of bytes remaining",
     "visualeditor-formatdropdown-format-mw-heading1": "Page title",

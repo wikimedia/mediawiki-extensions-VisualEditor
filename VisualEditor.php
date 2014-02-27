@@ -593,6 +593,7 @@ $wgResourceModules += array(
 			'visualeditor-differror',
 			'visualeditor-editconflict',
 			'visualeditor-editnotices-tool',
+			'visualeditor-editnotices-tooltip',
 			'visualeditor-editsummary',
 			'visualeditor-editsummary-bytes-remaining',
 			'visualeditor-feedback-tool',
