@@ -16,6 +16,7 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @cfg {Object} [item] Category item
+ * @cfg {boolean} [hidden] Whether the category is hidden or not
  */
 ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	// Config intialization
@@ -32,6 +33,7 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	this.value = config.item.value;
 	this.sortKey = config.item.sortKey || '';
 	this.metaItem = config.item.metaItem;
+	this.isHidden = config.hidden;
 	this.menuOpen = false;
 	this.$label = this.$( '<span>' );
 	this.$categoryItem = this.$( '<div>' );

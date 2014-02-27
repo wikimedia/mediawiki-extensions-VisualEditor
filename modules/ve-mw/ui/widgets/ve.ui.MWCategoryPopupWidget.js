@@ -52,10 +52,12 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget ( config ) {
 	this.$title
 		.addClass( 've-ui-mwCategoryPopupWidget-title oo-ui-icon-tag' )
 		.text( ve.msg( 'visualeditor-dialog-meta-categories-category' ) );
+	this.$hiddenStatus = this.$( '<div>' );
 	this.$menu
 		.addClass( 've-ui-mwCategoryPopupWidget-content' )
 		.append(
 			this.$title,
+			this.$hiddenStatus,
 			this.removeButton.$element.addClass( 've-ui-mwCategoryPopupWidget-removeButton' ),
 			this.$sortKeyForm
 		);
@@ -140,6 +142,11 @@ ve.ui.MWCategoryPopupWidget.prototype.onHide = function () {
  */
 ve.ui.MWCategoryPopupWidget.prototype.loadCategoryIntoPopup = function ( item ) {
 	this.origSortkey = item.sortkey;
+	if ( item.isHidden ) {
+		this.$hiddenStatus.text( ve.msg( 'visualeditor-dialog-meta-categories-hidden' ) );
+	} else {
+		this.$hiddenStatus.empty();
+	}
 	this.sortKeyInput.$input.val( item.sortKey );
 };
 

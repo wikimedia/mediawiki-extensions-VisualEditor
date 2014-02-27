@@ -28,6 +28,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 
 	// Properties
 	this.categories = {};
+	this.categoryHiddenStatus = {};
 	this.popupState = false;
 	this.savedPopupState = false;
 	this.popup = new ve.ui.MWCategoryPopupWidget( {
@@ -89,10 +90,11 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
  */
 ve.ui.MWCategoryWidget.prototype.onLookupInputKeyDown = function ( e ) {
 	if ( this.input.getValue() !== '' && e.which === 13 ) {
-		this.emit(
-			'newCategory',
-			this.input.getCategoryItemFromValue( this.input.getValue() )
-		);
+		var item = this.input.getCategoryItemFromValue( this.input.getValue() ),
+			categoryWidget = this;
+		this.queryCategoryHiddenStatus( [item.name] ).done( function () {
+			categoryWidget.emit( 'newCategory', item );
+		} );
 		this.input.setValue( '' );
 	}
 };
@@ -104,7 +106,9 @@ ve.ui.MWCategoryWidget.prototype.onLookupInputKeyDown = function ( e ) {
  * @param {OO.ui.MenuItemWidget} item Selected item
  */
 ve.ui.MWCategoryWidget.prototype.onLookupMenuItemSelect = function ( item ) {
-	var value = item && item.getData();
+	var categoryItem,
+		value = item && item.getData(),
+		categoryWidget = this;
 
 	if ( value && value !== '' ) {
 		// Remove existing items by value
@@ -112,7 +116,11 @@ ve.ui.MWCategoryWidget.prototype.onLookupMenuItemSelect = function ( item ) {
 			this.categories[value].metaItem.remove();
 		}
 		// Add new item
-		this.emit( 'newCategory',  this.input.getCategoryItemFromValue( value ) );
+		categoryItem = this.input.getCategoryItemFromValue( value );
+		this.queryCategoryHiddenStatus( [categoryItem.name] ).done( function () {
+			categoryWidget.emit( 'newCategory', categoryItem );
+		} );
+
 		// Reset input
 		this.input.setValue( '' );
 	}
@@ -184,43 +192,86 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
 };
 
 /**
+ * Starts a request to update categoryHiddenStatus for the given titles.
+ * The returned promise will be resolved with an API result if an API call was made,
+ * or no arguments if it was unnecessary.
+ *
+ * @param {string[]} categoryNames
+ * @return {jQuery.Promise}
+ */
+ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( categoryNames ) {
+	var categoryWidget = this, categoryNamesToQuery = [];
+	// Get rid of any we already know the hidden status of.
+	categoryNamesToQuery = $.grep( categoryNames, function ( categoryTitle ) {
+		return !Object.prototype.hasOwnProperty.call( categoryWidget.categoryHiddenStatus, categoryTitle );
+	} );
+
+	if ( !categoryNamesToQuery.length ) {
+		return $.Deferred().resolve().promise();
+	}
+
+	/*global mw*/
+	return new mw.Api().get( {
+		action: 'query',
+		prop: 'pageprops',
+		titles: categoryNamesToQuery.join( '|' ),
+		ppprop: 'hiddencat'
+	} ).then( function ( result ) {
+		if ( result && result.query && result.query.pages ) {
+			$.each( result.query.pages, function ( index, pageInfo ) {
+				var hiddenStatus = !!( pageInfo.pageprops && pageInfo.pageprops.hiddencat !== undefined );
+				categoryWidget.categoryHiddenStatus[pageInfo.title] = hiddenStatus;
+			} );
+		}
+	} );
+};
+
+/**
  * Adds category items.
  *
  * @method
  * @param {Object[]} items Items to add
  * @param {number} [index] Index to insert items after
- * @chainable
+ * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 	var i, len, item, categoryItem,
 		categoryItems = [],
-		existingCategoryItem = null;
+		existingCategoryItem = null,
+		categoryNames = $.map( items, function ( item ) {
+			return item.name;
+		} ),
+		categoryWidget = this;
 
-	for ( i = 0, len = items.length; i < len; i++ ) {
-		item = items[i];
+	return this.queryCategoryHiddenStatus( categoryNames ).then( function () {
+		for ( i = 0, len = items.length; i < len; i++ ) {
+			item = items[i];
 
-		// Create a widget using the item data
-		categoryItem = new ve.ui.MWCategoryItemWidget( { '$': this.$, 'item': item } );
-		categoryItem.connect( this, {
-			'savePopupState': 'onSavePopupState',
-			'togglePopupMenu': 'onTogglePopupMenu'
-		} );
+			// Create a widget using the item data
+			categoryItem = new ve.ui.MWCategoryItemWidget( {
+				'$': categoryWidget.$,
+				'item': item,
+				'hidden': categoryWidget.categoryHiddenStatus[item.name]
+			} );
+			categoryItem.connect( categoryWidget, {
+				'savePopupState': 'onSavePopupState',
+				'togglePopupMenu': 'onTogglePopupMenu'
+			} );
 
-		// Index item by value
-		this.categories[item.value] = categoryItem;
-		// Copy sortKey from old item when "moving"
-		if ( existingCategoryItem ) {
-			categoryItem.sortKey = existingCategoryItem.sortKey;
+			// Index item by value
+			categoryWidget.categories[item.value] = categoryItem;
+			// Copy sortKey from old item when "moving"
+			if ( existingCategoryItem ) {
+				categoryItem.sortKey = existingCategoryItem.sortKey;
+			}
+
+			categoryItems.push( categoryItem );
 		}
 
-		categoryItems.push( categoryItem );
-	}
+		OO.ui.GroupElement.prototype.addItems.call( categoryWidget, categoryItems, index );
 
-	OO.ui.GroupElement.prototype.addItems.call( this, categoryItems, index );
-
-	this.fitInput();
-
-	return this;
+		categoryWidget.fitInput();
+	} );
 };
 
 /**
