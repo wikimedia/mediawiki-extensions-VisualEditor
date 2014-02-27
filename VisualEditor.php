@@ -537,20 +537,10 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/dm/metaitems/ve.dm.MWAlienMetaItem.js',
 
-			'modules/ve-mw/dm/models/ve.dm.MWTransclusionModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWTransclusionPartModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWTransclusionContentModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWTemplateSpecModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWTemplateModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWTemplatePlaceholderModel.js',
-			'modules/ve-mw/dm/models/ve.dm.MWParameterModel.js',
-
 			// ce
 			'modules/ve-mw/ce/nodes/ve.ce.MWEntityNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWExtensionNode.js',
 
-			'modules/ve-mw/ce/annotations/ve.ce.MWExternalLinkAnnotation.js',
-			'modules/ve-mw/ce/annotations/ve.ce.MWInternalLinkAnnotation.js',
 			'modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js',
 
 			// ui
@@ -727,6 +717,9 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ce/nodes/ve.ce.MWNumberedExternalLinkNode.js',
 
+			'modules/ve-mw/ce/annotations/ve.ce.MWExternalLinkAnnotation.js',
+			'modules/ve-mw/ce/annotations/ve.ce.MWInternalLinkAnnotation.js',
+
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkInspector.js',
@@ -874,6 +867,14 @@ $wgResourceModules += array(
 			'modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js',
 
 			'modules/ve-mw/dm/metaitems/ve.dm.MWTransclusionMetaItem.js',
+
+			'modules/ve-mw/dm/models/ve.dm.MWTransclusionModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWTransclusionPartModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWTransclusionContentModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWTemplateSpecModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWTemplateModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWTemplatePlaceholderModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWParameterModel.js',
 
 			'modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js',
 
