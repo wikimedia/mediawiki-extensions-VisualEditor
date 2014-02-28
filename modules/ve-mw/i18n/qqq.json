@@ -74,6 +74,7 @@
     "visualeditor-dialog-meta-categories-defaultsort-label": "Label for field setting the category default sort",
     "visualeditor-dialog-meta-categories-hidden": "Text shown on the category popup if the category is hidden",
     "visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Label for matching suggested category or categories",
+    "visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Label for hidden suggested category or categories",
     "visualeditor-dialog-meta-categories-input-movecategorylabel": "Label for moving a given category or categories to end of list",
     "visualeditor-dialog-meta-categories-input-newcategorylabel": "Label for a suggested uncreated category",
     "visualeditor-dialog-meta-categories-input-placeholder": "Placeholder text for category input\n{{Identical|Add category}}",
