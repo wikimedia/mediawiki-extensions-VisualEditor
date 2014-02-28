@@ -159,6 +159,7 @@
     "visualeditor-notification-created": "\"$1\" has been created.",
     "visualeditor-notification-restored": "\"$1\" has been restored.",
     "visualeditor-notification-saved": "Your changes to \"$1\" have been saved.",
+    "visualeditor-pagemenu-tooltip": "Page options",
     "visualeditor-parameter-input-placeholder": "Parameter name",
     "visualeditor-parameter-search-no-unused": "No unused parameters",
     "visualeditor-parameter-search-unknown": "Unknown parameter",
