@@ -93,3 +93,14 @@
 .ve-ui-mwParameterPage.oo-ui-pageLayout-active .ve-ui-mwParameterPage-description {
 	color: #999;
 }
+
+/* ve.ui.MWTransclusionContentPage */
+
+.ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget {
+	display: block;
+	width: 100%;
+}
+
+.ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget textarea {
+	height: 2.5em;
+}

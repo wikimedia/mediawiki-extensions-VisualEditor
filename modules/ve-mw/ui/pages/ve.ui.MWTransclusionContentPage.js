@@ -25,6 +25,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 	this.textInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,
+			'autosize': true,
 			'classes': [ 've-ui-mwTransclusionDialog-input' ]
 		} )
 		.setValue( this.content.getValue() )
@@ -46,7 +47,9 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 	} );
 
 	// Initialization
-	this.$element.append( this.valueFieldset.$element, this.removeButton.$element );
+	this.$element
+		.addClass( 've-ui-mwTransclusionContentPage' )
+		.append( this.valueFieldset.$element, this.removeButton.$element );
 };
 
 /* Inheritance */

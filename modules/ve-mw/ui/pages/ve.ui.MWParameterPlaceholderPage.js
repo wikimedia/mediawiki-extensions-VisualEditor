@@ -42,10 +42,9 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	} );
 
 	// Initialization
-	this.$element.append(
-		this.addParameterFieldset.$element,
-		this.removeButton.$element
-	);
+	this.$element
+		.addClass( 've-ui-mwParameterPlaceholderPage' )
+		.append( this.addParameterFieldset.$element, this.removeButton.$element );
 };
 
 /* Inheritance */

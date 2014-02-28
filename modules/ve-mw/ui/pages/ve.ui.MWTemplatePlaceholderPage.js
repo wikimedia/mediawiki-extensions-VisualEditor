@@ -54,7 +54,9 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	} );
 
 	// Initialization
-	this.$element.append( this.addTemplateFieldset.$element, this.removeButton.$element );
+	this.$element
+		.addClass( 've-ui-mwTemplatePlaceholderPage' )
+		.append( this.addTemplateFieldset.$element, this.removeButton.$element );
 };
 
 /* Inheritance */
