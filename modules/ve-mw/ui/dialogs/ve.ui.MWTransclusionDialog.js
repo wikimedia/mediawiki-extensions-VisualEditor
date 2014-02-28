@@ -23,6 +23,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( windowSet, confi
 	this.node = null;
 	this.transclusion = null;
 	this.loaded = false;
+	this.preventReselection = false;
 };
 
 /* Inheritance */
@@ -42,12 +43,12 @@ ve.ui.MWTransclusionDialog.static.icon = 'template';
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, selected,
-		removePages = [],
-		select = false;
+	var i, len, page, name, names, params, partPage, reselect,
+		removePages = [];
 
 	if ( removed ) {
 		// Remove parameter pages of removed templates
+		partPage = this.bookletLayout.getPage( removed.getId() );
 		if ( removed instanceof ve.dm.MWTemplateModel ) {
 			params = removed.getParameters();
 			for ( name in params ) {
@@ -55,14 +56,10 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 			}
 			removed.disconnect( this );
 		}
-		if ( this.bookletLayout.isOutlined() ) {
-			// Auto-select new part if placeholder is still selected
-			selected = this.bookletLayout.getOutline().getSelectedItem();
-			if ( selected && removed.getId() === selected.getData() ) {
-				select = true;
-			}
+		if ( this.loaded && !this.preventReselection && partPage.isActive() ) {
+			reselect = this.bookletLayout.getClosestPage( partPage );
 		}
-		removePages.push( this.bookletLayout.getPage( removed.getId() ) );
+		removePages.push( partPage );
 		this.bookletLayout.removePages( removePages );
 	}
 
@@ -76,22 +73,32 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 		}
 		if ( page ) {
 			this.bookletLayout.addPages( [ page ], this.transclusion.getIndex( added ) );
-			if ( select && this.loaded ) {
+			if ( reselect ) {
+				// Use added page instead of closest page
 				this.setPageByName( added.getId() );
 			}
 			// Add existing params to templates (the template might be being moved)
 			if ( added instanceof ve.dm.MWTemplateModel ) {
 				names = added.getParameterNames();
 				params = added.getParameters();
+				// Prevent selection changes
+				this.preventReselection = true;
 				for ( i = 0, len = names.length; i < len; i++ ) {
 					this.onAddParameter( params[names[i]] );
 				}
+				this.preventReselection = false;
 				added.connect( this, { 'add': 'onAddParameter', 'remove': 'onRemoveParameter' } );
+				if ( names.length ) {
+					this.setPageByName( params[names[0]].getId() );
+				}
 			}
 
 			// Add required params to user created templates
 			if ( added instanceof ve.dm.MWTemplateModel && this.loaded ) {
+				// Prevent selection changes
+				this.preventReselection = true;
 				added.addRequiredParameters();
+				this.preventReselection = false;
 				names = added.getParameterNames();
 				params = added.getParameters();
 				if ( names.length ) {
@@ -99,6 +106,8 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 				}
 			}
 		}
+	} else if ( reselect ) {
+		this.setPageByName( reselect.getName() );
 	}
 };
 
@@ -116,7 +125,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameter = function ( param ) {
 		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), { '$': this.$ } );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusion.getIndex( param ) );
-	if ( this.loaded ) {
+	if ( this.loaded && !this.preventReselection ) {
 		this.setPageByName( param.getId() );
 	}
 };
@@ -127,10 +136,12 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameter = function ( param ) {
  * @param {ve.dm.MWParameterModel} param Removed param
  */
 ve.ui.MWTransclusionDialog.prototype.onRemoveParameter = function ( param ) {
-	this.bookletLayout.removePages( [ this.bookletLayout.getPage( param.getId() ) ] );
-	if ( this.loaded ) {
-		// Return to template page
-		this.setPageByName( param.getTemplate().getId() );
+	var page = this.bookletLayout.getPage( param.getId() ),
+		reselect = this.bookletLayout.getClosestPage( page );
+
+	this.bookletLayout.removePages( [ page ] );
+	if ( this.loaded && !this.preventReselection ) {
+		this.setPageByName( reselect.getName() );
 	}
 };
 
