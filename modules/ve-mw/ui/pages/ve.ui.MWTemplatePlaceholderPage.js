@@ -16,7 +16,7 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholder( placeholder, name, config ) {
+ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 

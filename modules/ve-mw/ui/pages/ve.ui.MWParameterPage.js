@@ -16,7 +16,7 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWParameterPage = function VeUiMWParameter( parameter, name, config ) {
+ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
 	var paramName = parameter.getName();
 
 	// Parent constructor
@@ -48,7 +48,6 @@ ve.ui.MWParameterPage = function VeUiMWParameter( parameter, name, config ) {
 		} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
 
-	// TODO: Use spec.required
 	// TODO: Use spec.deprecation
 	// TODO: Use spec.type
 

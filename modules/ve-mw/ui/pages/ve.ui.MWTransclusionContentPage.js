@@ -16,7 +16,7 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContent( content, name, config ) {
+ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( content, name, config ) {
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
