@@ -18,11 +18,6 @@
 ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( windowSet, config ) {
 	// Parent constructor
 	ve.ui.MWTransclusionDialog.call( this, windowSet, config );
-
-	// Properties
-	this.node = null;
-	this.transclusion = null;
-	this.loaded = false;
 };
 
 /* Inheritance */
