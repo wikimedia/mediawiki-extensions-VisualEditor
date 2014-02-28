@@ -16,6 +16,9 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( windowSet, config ) {
+	// Configuration initialization
+	config = ve.extendObject( { 'small': true }, config );
+
 	// Parent constructor
 	ve.ui.MWTransclusionDialog.call( this, windowSet, config );
 };
