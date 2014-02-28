@@ -117,7 +117,7 @@ ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
 		existing = ve.indexOf( item.add, this.parts );
 		if ( existing !== -1 ) {
 			this.removePart( item.add );
-			if ( index && index > existing ) {
+			if ( index && existing + 1 < index ) {
 				index--;
 			}
 		}
