@@ -1053,6 +1053,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarButtons = function () {
 		{
 			'type': 'list',
 			'icon': 'menu',
+			'title': ve.msg( 'visualeditor-pagemenu-tooltip' ),
 			'include': [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'editModeSource', 'commandHelp' ]
 		}
 	] );
