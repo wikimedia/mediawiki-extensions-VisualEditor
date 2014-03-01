@@ -80,6 +80,7 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
 		this.outlineItem
 			.setIcon( 'parameter' )
 			.setMovable( false )
+			.setRemovable( true )
 			.setLevel( 1 )
 			.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
 

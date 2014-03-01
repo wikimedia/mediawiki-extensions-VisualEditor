@@ -66,6 +66,7 @@ ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function ( outlineIte
 		this.outlineItem
 			.setIcon( 'source' )
 			.setMovable( true )
+			.setRemovable( true )
 			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-content' ) );
 	}
 };

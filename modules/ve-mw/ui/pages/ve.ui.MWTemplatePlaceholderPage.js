@@ -74,6 +74,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function ( outlineIte
 		this.outlineItem
 			.setIcon( 'template' )
 			.setMovable( true )
+			.setRemovable( true )
 			.setFlags( [ 'placeholder' ] )
 			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-placeholder' ) );
 	}

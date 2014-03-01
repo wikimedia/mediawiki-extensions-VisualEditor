@@ -75,6 +75,7 @@ ve.ui.MWTemplatePage.prototype.setOutlineItem = function ( outlineItem ) {
 		this.outlineItem
 			.setIcon( 'template' )
 			.setMovable( true )
+			.setRemovable( true )
 			.setLabel( this.spec.getLabel() );
 	}
 };

@@ -46,16 +46,14 @@ ve.ui.MWAdvancedTransclusionDialog.static.icon = 'template';
  * @param {number} places Number of places to move the selected item
  */
 ve.ui.MWAdvancedTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
-	var part, index, name, promise,
+	var part, promise,
 		parts = this.transclusion.getParts(),
 		item = this.bookletLayout.getOutline().getSelectedItem();
 
 	if ( item ) {
-		name = item.getData();
-		part = this.transclusion.getPartFromId( name );
-		index = ve.indexOf( part, parts );
-		// Auto-removes part from old location
-		promise = this.transclusion.addPart( part, index + places );
+		part = this.transclusion.getPartFromId( item.getData() );
+		// Move part to new location, and if dialog is loaded switch to new part page
+		promise = this.transclusion.addPart( part, ve.indexOf( part, parts ) + places );
 		if ( this.loaded ) {
 			promise.done( ve.bind( this.setPageByName, this, part.getId() ) );
 		}
@@ -63,29 +61,66 @@ ve.ui.MWAdvancedTransclusionDialog.prototype.onOutlineControlsMove = function ( 
 };
 
 /**
- * Handle outline controls add events.
- *
- * @param {string} type Type of item to add
+ * Handle outline controls remove events.
  */
-ve.ui.MWAdvancedTransclusionDialog.prototype.onOutlineControlsAdd = function ( type ) {
-	var part, parts, item, index, promise;
-
-	if ( type === 'content' ) {
-		part = new ve.dm.MWTransclusionContentModel( this.transclusion, '', 'user' );
-	} else if ( type === 'template' ) {
-		part = new ve.dm.MWTemplatePlaceholderModel( this.transclusion, 'user' );
-	}
-	if ( part ) {
-		parts = this.transclusion.getParts();
+ve.ui.MWAdvancedTransclusionDialog.prototype.onOutlineControlsRemove = function () {
+	var id, part, param,
 		item = this.bookletLayout.getOutline().getSelectedItem();
-		index = item ?
-			ve.indexOf( this.transclusion.getPartFromId( item.getData() ), parts ) + 1 :
-			parts.length;
-		promise = this.transclusion.addPart( part, index );
-		if ( this.loaded ) {
-			promise.done( ve.bind( this.setPageByName, this, part.getId() ) );
+
+	if ( item ) {
+		id = item.getData();
+		part = this.transclusion.getPartFromId( id );
+		// Check if the part is the actual template, or one of its parameters
+		if ( part instanceof ve.dm.MWTemplateModel && id !== part.getId() ) {
+			param = part.getParameterFromId( id );
+			if ( param instanceof ve.dm.MWParameterModel ) {
+				part.removeParameter( param );
+			}
+		} else if ( part instanceof ve.dm.MWTransclusionPartModel ) {
+			this.transclusion.removePart( part );
 		}
 	}
+};
+
+/**
+ * Handle add template button click events.
+ */
+ve.ui.MWAdvancedTransclusionDialog.prototype.onAddTemplateButtonClick = function () {
+	this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusion ) );
+};
+
+/**
+ * Handle add content button click events.
+ */
+ve.ui.MWAdvancedTransclusionDialog.prototype.onAddContentButtonClick = function () {
+	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusion, '' ) );
+};
+
+/**
+ * Handle add parameter button click events.
+ */
+ve.ui.MWAdvancedTransclusionDialog.prototype.onAddParameterButtonClick = function () {
+	var part, param,
+		item = this.bookletLayout.getOutline().getSelectedItem();
+
+	if ( item ) {
+		part = this.transclusion.getPartFromId( item.getData() );
+		if ( part instanceof ve.dm.MWTemplateModel ) {
+			param = new ve.dm.MWParameterModel( part, '', null );
+			part.addParameter( param );
+		}
+	}
+};
+
+/**
+ * Handle booklet layout page set events.
+ *
+ * @param {OO.ui.PageLayout} page Active page
+ */
+ve.ui.MWAdvancedTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
+	this.addParameterButton.setDisabled(
+		!( page instanceof ve.ui.MWTemplatePage || page instanceof ve.ui.MWParameterPage )
+	);
 };
 
 /**
@@ -97,20 +132,31 @@ ve.ui.MWAdvancedTransclusionDialog.prototype.getBookletLayout = function () {
 		'continuous': true,
 		'autoFocus': true,
 		'outlined': true,
-		'editable': true,
-		'adders': [
-			{
-				'name': 'template',
-				'icon': 'template',
-				'title': ve.msg( 'visualeditor-dialog-transclusion-add-template' )
-			},
-			{
-				'name': 'content',
-				'icon': 'source',
-				'title': ve.msg( 'visualeditor-dialog-transclusion-add-content' )
-			}
-		]
+		'editable': true
 	} );
+};
+
+/**
+ * Add a part to the transclusion.
+ *
+ * @param {ve.dm.MWTransclusionPartModel} part Part to add
+ */
+ve.ui.MWAdvancedTransclusionDialog.prototype.addPart = function ( part ) {
+	var index, promise,
+		parts = this.transclusion.getParts(),
+		item = this.bookletLayout.getOutline().getSelectedItem();
+
+	if ( part ) {
+		// Insert after selected part, or at the end if nothing is selected
+		index = item ?
+			ve.indexOf( this.transclusion.getPartFromId( item.getData() ), parts ) + 1 :
+			parts.length;
+		// Add the part, and if dialog is loaded switch to part page
+		promise = this.transclusion.addPart( part, index );
+		if ( this.loaded ) {
+			promise.done( ve.bind( this.setPageByName, this, part.getId() ) );
+		}
+	}
 };
 
 /**
@@ -120,11 +166,39 @@ ve.ui.MWAdvancedTransclusionDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWTransclusionDialog.prototype.initialize.call( this );
 
-	// Events
-	this.bookletLayout.getOutlineControls().connect( this, {
-		'move': 'onOutlineControlsMove',
-		'add': 'onOutlineControlsAdd'
+	// Properties
+	this.addTemplateButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
+		'icon': 'template',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-add-template' )
 	} );
+
+	this.addContentButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
+		'icon': 'source',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-add-content' )
+	} );
+
+	this.addParameterButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
+		'icon': 'parameter',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-add-param' )
+	} );
+
+	// Events
+	this.bookletLayout.connect( this, { 'set': 'onBookletLayoutSet' } );
+	this.addTemplateButton.connect( this, { 'click': 'onAddTemplateButtonClick' } );
+	this.addContentButton.connect( this, { 'click': 'onAddContentButtonClick' } );
+	this.addParameterButton.connect( this, { 'click': 'onAddParameterButtonClick' } );
+	this.bookletLayout.getOutlineControls()
+		.addItems( [ this.addTemplateButton, this.addContentButton, this.addParameterButton ] )
+		.connect( this, {
+			'move': 'onOutlineControlsMove',
+			'remove': 'onOutlineControlsRemove'
+		} );
 };
 
 /* Registration */

@@ -229,6 +229,24 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 };
 
 /**
+ * Get parameter from its ID.
+ *
+ * @param {string} id Parameter ID
+ * @returns {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
+ */
+ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
+	var name;
+
+	for ( name in this.params ) {
+		if ( this.params[name].getId() === id ) {
+			return this.params[name];
+		}
+	}
+
+	return null;
+};
+
+/**
  * Add a parameter to template.
  *
  * @param {ve.dm.MWParameterModel} param Parameter to add
