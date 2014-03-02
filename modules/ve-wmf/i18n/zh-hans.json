@@ -22,6 +22,8 @@
     "tag-visualeditor-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑器]]进行的编辑",
     "tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑器：需检查]]",
     "tag-visualeditor-needcheck-description": "系统检测到使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑器]]进行编辑时可能发生有问题的更改。",
+    "tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑器：已切换]]",
+    "tag-visualeditor-switched-description": "用户开始使用可视化编辑器编辑，之后更换为维基文本编辑器。",
     "visualeditor-feedback-link": "Project:可视化编辑器/反馈",
     "visualeditor-feedback-tool": "留下反馈意见",
     "visualeditor-help-label": "阅读用户指南",

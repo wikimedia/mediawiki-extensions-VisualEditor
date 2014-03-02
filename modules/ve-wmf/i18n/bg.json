@@ -3,9 +3,12 @@
         "authors": [
             "DCLXVI",
             "Hristofor.mirchev",
-            "පසිඳු කාවින්ද"
+            "පසිඳු කාවින්ද",
+            "Mitzev"
         ]
     },
+    "tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}} |VisualEditor: включен]]",
+    "tag-visualeditor-switched-description": "Потребителят започва да редактирате с помощта на VisualEditor след това премина на редактора на wikitext.",
     "visualeditor-feedback-tool": "Обратна връзка",
     "visualeditor-help-label": "Прочитане на наръчника",
     "visualeditor-help-title": "Наръчник за употреба на редактора"

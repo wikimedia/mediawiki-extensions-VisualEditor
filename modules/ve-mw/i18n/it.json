@@ -11,7 +11,8 @@
             "Gianfranco",
             "Minerva Titani",
             "Raoli",
-            "Una giornata uggiosa '94"
+            "Una giornata uggiosa '94",
+            "Maria victoria"
         ]
     },
     "tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
@@ -46,6 +47,8 @@
     "visualeditor-dialog-media-position-none": "Nessuno",
     "visualeditor-dialog-media-position-right": "Destra",
     "visualeditor-dialog-media-position-section": "Posizione",
+    "visualeditor-dialog-media-size-choosecustom": "Imposta dimensioni personalizzate",
+    "visualeditor-dialog-media-size-choosedefault": "Imposta dimensioni predefinite",
     "visualeditor-dialog-media-size-originalsize-error": "Impossibile recuperare la dimensione originale del file.",
     "visualeditor-dialog-media-size-section": "Dimensione immagine",
     "visualeditor-dialog-media-title": "Impostazioni file multimediali",
@@ -59,6 +62,7 @@
     "visualeditor-dialog-meta-categories-category": "Categoria",
     "visualeditor-dialog-meta-categories-data-label": "Categorie",
     "visualeditor-dialog-meta-categories-defaultsort-label": "Ordina questa pagina, in modo predefinito, come",
+    "visualeditor-dialog-meta-categories-hidden": "Questa categoria è impostata non per essere visibile nelle pagine a cui viene aggiunta.",
     "visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Categorie corrispondenti",
     "visualeditor-dialog-meta-categories-input-movecategorylabel": "Sposta questa categoria qui",
     "visualeditor-dialog-meta-categories-input-newcategorylabel": "Nuova categoria",
@@ -80,7 +84,7 @@
     "visualeditor-dialog-meta-settings-newsectioneditlink-default": "Predefinito",
     "visualeditor-dialog-meta-settings-newsectioneditlink-disable": "No",
     "visualeditor-dialog-meta-settings-newsectioneditlink-force": "Sì",
-    "visualeditor-dialog-meta-settings-newsectioneditlink-label": "Mostra una scheda in questa pagina per aggiungere una nuova sezione",
+    "visualeditor-dialog-meta-settings-newsectioneditlink-label": "Mostra tabulazione in questa pagina per aggiungere una nuova sezione",
     "visualeditor-dialog-meta-settings-noeditsection-label": "Disabilita il collegamento per modificare accanto alle intestazioni in questa pagina.",
     "visualeditor-dialog-meta-settings-redirect-label": "Reindirizza questa pagina verso",
     "visualeditor-dialog-meta-settings-redirect-placeholder": "Pagina di destinazione per il reindirizzamento",
@@ -100,6 +104,7 @@
     "visualeditor-dialog-reference-title": "Riferimento",
     "visualeditor-dialog-reference-useexisting-label": "Usa un riferimento esistente",
     "visualeditor-dialog-referencelist-title": "Elenco riferimenti",
+    "visualeditor-dialog-template-title": "Template",
     "visualeditor-dialog-transclusion-add-content": "Aggiungi contenuto",
     "visualeditor-dialog-transclusion-add-param": "Aggiungi parametro",
     "visualeditor-dialog-transclusion-add-template": "Aggiungi template",

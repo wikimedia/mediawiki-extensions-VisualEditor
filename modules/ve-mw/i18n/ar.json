@@ -10,7 +10,8 @@
             "زكريا",
             "مشعل الحربي",
             "Asaifm",
-            "Tarawneh"
+            "Tarawneh",
+            "Meno25"
         ]
     },
     "tooltip-ca-createsource": "إنشاء الكود المصدري لهذه الصفحة",
@@ -70,7 +71,7 @@
     "visualeditor-dialog-meta-settings-noeditsection-label": "تعطيل وصلات التعديل الظاهرة بجانب كل عنوان في هذه الصفحة.",
     "visualeditor-dialog-meta-settings-section": "إعدادات الصفحة",
     "visualeditor-dialog-meta-settings-toc-default": "أظهر إن لزم الأمر",
-    "visualeditor-dialog-meta-settings-toc-disable": "لا تظهر مطلقاً",
+    "visualeditor-dialog-meta-settings-toc-disable": "لا تظهر مطلقا",
     "visualeditor-dialog-meta-settings-toc-force": "أظهر دائما",
     "visualeditor-dialog-meta-settings-toc-label": "أظهر فهرس المحتويات",
     "visualeditor-dialog-meta-title": "خيارات",

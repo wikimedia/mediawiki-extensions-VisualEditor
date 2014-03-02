@@ -25,13 +25,16 @@
             "Trizek",
             "Urhixidur",
             "Verdy p",
-            "Wyz"
+            "Wyz",
+            "Momo50WM"
         ]
     },
     "tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ÉditeurVisuel]]",
     "tag-visualeditor-description": "Modification effectuée au moyen de l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|ÉditeurVisuel]]",
     "tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ÉditeurVisuel : à vérifier]]",
     "tag-visualeditor-needcheck-description": "Modification faite en utilisant l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|ÉditeurVisuel]], où le système a détecté que le wikitexte contient peut-être des modifications accidentelles.",
+    "tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor:Basculé]]",
+    "tag-visualeditor-switched-description": "L’utilisateur a commencé à modifier en utilisant VisualEditor puis est passé sur l’éditeur wikitexte.",
     "visualeditor-feedback-link": "Project:ÉditeurVisuel/Avis",
     "visualeditor-feedback-tool": "Laisser un avis à propos de l’ÉditeurVisuel.",
     "visualeditor-help-label": "Lire le guide utilisateur",

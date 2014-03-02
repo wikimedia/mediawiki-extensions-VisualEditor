@@ -11,13 +11,16 @@
             "Gianfranco",
             "Minerva Titani",
             "Raoli",
-            "Una giornata uggiosa '94"
+            "Una giornata uggiosa '94",
+            "Maria victoria"
         ]
     },
     "tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
     "tag-visualeditor-description": "Modifica eseguita usando [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
     "tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: controllare]]",
     "tag-visualeditor-needcheck-description": "Modifica eseguita utilizzando [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] dove il sistema ha rilevato possibili modifiche non volute nel wikitesto.",
+    "tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: cambiato]]",
+    "tag-visualeditor-switched-description": "L'utente ha iniziato a modificare utilizzando VisualEditor poi ha cambiato all'editor wikitesto.",
     "visualeditor-feedback-link": "Project:VisualEditor/Commenti",
     "visualeditor-feedback-tool": "Commenta la nuova interfaccia",
     "visualeditor-help-label": "Leggi la guida utente",

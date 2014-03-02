@@ -19,6 +19,8 @@
     "tag-visualeditor-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]]做出的編輯",
     "tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器：需要檢查]]",
     "tag-visualeditor-needcheck-description": "系統偵測到透過[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]]所做出的編輯可能對 Wiki 標記語言做出不可預期的變更。",
+    "tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器：已切換]]",
+    "tag-visualeditor-switched-description": "用戶經由視覺化編輯器開始編輯後更改為維基代碼編輯器。",
     "visualeditor-feedback-link": "Project:VisualEditor/反饋",
     "visualeditor-feedback-tool": "留下反饋",
     "visualeditor-help-label": "閱讀使用者指南",
