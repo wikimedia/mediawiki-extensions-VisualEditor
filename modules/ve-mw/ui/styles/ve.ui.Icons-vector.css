@@ -21,6 +21,26 @@
 	background-image: url(images/icons/hiero.svg);
 }
 
+.oo-ui-icon-image-none {
+	/* @embed */
+	background-image: url(images/icons/image-none.svg);
+}
+
+.oo-ui-icon-image-frame {
+	/* @embed */
+	background-image: url(images/icons/image-frame.svg);
+}
+
+.oo-ui-icon-image-frameless {
+	/* @embed */
+	background-image: url(images/icons/image-frameless.svg);
+}
+
+.oo-ui-icon-image-thumbnail {
+	/* @embed */
+	background-image: url(images/icons/image-thumbnail.svg);
+}
+
 .oo-ui-icon-math {
 	/* @embed */
 	background-image: url(images/icons/math.svg);

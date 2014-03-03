@@ -241,18 +241,22 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		// TODO: Inline images require a bit of further work, will be coming soon
 		new OO.ui.ButtonOptionWidget( 'thumb', {
 			'$': this.$,
+			'icon': 'image-thumbnail',
 			'label': ve.msg( 'visualeditor-dialog-media-type-thumb' )
 		} ),
 		new OO.ui.ButtonOptionWidget( 'frameless', {
 			'$': this.$,
+			'icon': 'image-frameless',
 			'label': ve.msg( 'visualeditor-dialog-media-type-frameless' )
 		} ),
 		new OO.ui.ButtonOptionWidget( 'frame', {
 			'$': this.$,
+			'icon': 'image-frame',
 			'label': ve.msg( 'visualeditor-dialog-media-type-frame' )
 		} ),
 		new OO.ui.ButtonOptionWidget( 'none', {
 			'$': this.$,
+			'icon': 'image-none',
 			'label': ve.msg( 'visualeditor-dialog-media-type-none' )
 		} )
 	] );
