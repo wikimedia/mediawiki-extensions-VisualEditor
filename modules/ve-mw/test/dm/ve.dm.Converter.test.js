@@ -1,5 +1,5 @@
 /*!
- * VisualEditor DataModel MediaWiki Converter tests.
+ * VisualEditor DataModel MediaWiki-specific Converter tests.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -7,7 +7,7 @@
 
 /*global mw */
 
-QUnit.module( 've.dm.MWConverter' );
+QUnit.module( 've.dm.Converter' );
 
 /* Tests */
 
