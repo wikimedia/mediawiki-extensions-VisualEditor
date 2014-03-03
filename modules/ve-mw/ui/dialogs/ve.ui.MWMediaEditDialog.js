@@ -174,9 +174,21 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		'$': this.$
 	} );
 	this.positionInput.addItems( [
-		new OO.ui.ButtonOptionWidget( 'left', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-left' ) } ),
-		new OO.ui.ButtonOptionWidget( 'center', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-center' ) } ),
-		new OO.ui.ButtonOptionWidget( 'right', { '$': this.$, 'label': ve.msg( 'visualeditor-dialog-media-position-right' ) } ),
+		new OO.ui.ButtonOptionWidget( 'left', {
+			'$': this.$,
+			'icon': 'align-float-left',
+			'label': ve.msg( 'visualeditor-dialog-media-position-left' )
+		} ),
+		new OO.ui.ButtonOptionWidget( 'center', {
+			'$': this.$,
+			'icon': 'align-center',
+			'label': ve.msg( 'visualeditor-dialog-media-position-center' )
+		} ),
+		new OO.ui.ButtonOptionWidget( 'right', {
+			'$': this.$,
+			'icon': 'align-float-right',
+			'label': ve.msg( 'visualeditor-dialog-media-position-right' )
+		} ),
 	], 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
