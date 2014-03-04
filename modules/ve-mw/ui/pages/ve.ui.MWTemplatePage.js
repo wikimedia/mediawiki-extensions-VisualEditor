@@ -23,6 +23,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	// Properties
 	this.template = template;
 	this.spec = template.getSpec();
+	this.$more = this.$( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
 			'frameless': true,
@@ -38,11 +39,22 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		'icon': 'template',
 		'$content': this.$( '<div>' ).text( this.spec.getDescription() || '' )
 	} );
+	this.addButton = new OO.ui.ButtonWidget( {
+			'$': this.$,
+			'frameless': true,
+			'icon': 'parameter',
+			'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+			'tabIndex': -1
+		} )
+		.connect( this, { 'click': 'onAddButtonClick' } );
 
 	// Initialization
+	this.$more
+		.addClass( 've-ui-mwTemplatePage-more' )
+		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwTemplatePage' )
-		.append( this.infoFieldset.$element, this.removeButton.$element );
+		.append( this.infoFieldset.$element, this.removeButton.$element, this.$more );
 };
 
 /* Inheritance */
@@ -69,4 +81,8 @@ ve.ui.MWTemplatePage.prototype.setOutlineItem = function ( outlineItem ) {
 
 ve.ui.MWTemplatePage.prototype.onRemoveButtonClick = function () {
 	this.template.remove();
+};
+
+ve.ui.MWTemplatePage.prototype.onAddButtonClick = function () {
+	this.template.addParameter( new ve.dm.MWParameterModel( this.template ) );
 };

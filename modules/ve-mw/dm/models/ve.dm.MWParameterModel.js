@@ -13,8 +13,8 @@
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template Template
- * @param {string} name Parameter name
- * @param {string} value Parameter value
+ * @param {string} [name=''] Parameter name
+ * @param {string} [value=''] Parameter value
  */
 ve.dm.MWParameterModel = function VeDmMWParameterModel( template, name, value ) {
 	// Mixin constructors
@@ -23,7 +23,7 @@ ve.dm.MWParameterModel = function VeDmMWParameterModel( template, name, value ) 
 	// Properties
 	this.template = template;
 	this.originalName = name;
-	this.name = name.trim();
+	this.name = typeof name === 'string' ? name.trim() : '';
 	this.value = value || '';
 	this.id = this.template.getId() + '/' + name;
 };

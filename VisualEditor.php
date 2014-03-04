@@ -902,8 +902,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/pages/ve.ui.MWTransclusionContentPage.js',
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js',
-			'modules/ve-mw/ui/dialogs/ve.ui.MWTemplateDialog.js',
-			'modules/ve-mw/ui/dialogs/ve.ui.MWAdvancedTransclusionDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js',
 		),
@@ -919,12 +917,14 @@ $wgResourceModules += array(
 			'visualeditor-dialog-transclusion-add-param',
 			'visualeditor-dialog-transclusion-add-template',
 			'visualeditor-dialog-transclusion-content',
+			'visualeditor-dialog-transclusion-multiple-mode',
 			'visualeditor-dialog-transclusion-options',
 			'visualeditor-dialog-transclusion-placeholder',
 			'visualeditor-dialog-transclusion-remove-content',
 			'visualeditor-dialog-transclusion-remove-param',
 			'visualeditor-dialog-transclusion-remove-template',
 			'visualeditor-dialog-transclusion-required-parameter',
+			'visualeditor-dialog-transclusion-single-mode',
 			'visualeditor-dialog-transclusion-title',
 			'visualeditor-dialog-transclusion-wikitext-label',
 			'visualeditor-dialogbutton-transclusion-tooltip',

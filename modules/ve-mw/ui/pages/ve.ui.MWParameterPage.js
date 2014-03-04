@@ -31,6 +31,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$actions = this.$( '<div>' );
 	this.$info = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
+	this.$more = this.$( '<div>' );
 	this.valueInput = new OO.ui.TextInputWidget( {
 			'$': this.$,
 			'multiline': true,
@@ -47,6 +48,14 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			'tabIndex': -1
 		} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
+	this.addButton = new OO.ui.ButtonWidget( {
+			'$': this.$,
+			'frameless': true,
+			'icon': 'parameter',
+			'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+			'tabIndex': -1
+		} )
+		.connect( this, { 'click': 'onAddButtonClick' } );
 
 	// TODO: Use spec.deprecation
 	// TODO: Use spec.type
@@ -71,9 +80,12 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$field
 		.addClass( 've-ui-mwParameterPage-field' )
 		.append( this.valueInput.$element, this.$actions, this.$info );
+	this.$more
+		.addClass( 've-ui-mwParameterPage-more' )
+		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
-		.append( this.$label, this.$field );
+		.append( this.$label, this.$field, this.$more );
 };
 
 /* Inheritance */
@@ -98,6 +110,11 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 
 ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
+};
+
+ve.ui.MWParameterPage.prototype.onAddButtonClick = function () {
+	var template = this.parameter.getTemplate();
+	template.addParameter( new ve.dm.MWParameterModel( template ) );
 };
 
 ve.ui.MWParameterPage.prototype.onLabelClick = function () {
