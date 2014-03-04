@@ -158,6 +158,7 @@
     "visualeditor-notification-created": "「$1」已經建立。",
     "visualeditor-notification-restored": "「$1」已經還原。",
     "visualeditor-notification-saved": "你對「$1」的變更已經儲存。",
+    "visualeditor-pagemenu-tooltip": "頁面選項",
     "visualeditor-parameter-input-placeholder": "參數名稱",
     "visualeditor-parameter-search-no-unused": "沒有未使用的參數",
     "visualeditor-parameter-search-unknown": "未知的參數",

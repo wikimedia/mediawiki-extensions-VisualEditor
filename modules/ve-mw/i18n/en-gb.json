@@ -7,7 +7,5 @@
         ]
     },
     "visualeditor-dialog-media-position-center": "Centre",
-    "visualeditor-loadwarning": "Klaida įkeliant duomenis iš serverio: $1. Ar norėtumėte pabandyti dar kartą?",
-    "visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to try again?",
-    "visualeditor-pagemenu-tooltip": "Puslapio parinktys"
+    "visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to try again?"
 }

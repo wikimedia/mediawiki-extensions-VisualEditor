@@ -160,6 +160,7 @@
     "visualeditor-notification-created": "“$1”已创建。",
     "visualeditor-notification-restored": "“$1”已恢复。",
     "visualeditor-notification-saved": "您对“$1”的修改已保存。",
+    "visualeditor-pagemenu-tooltip": "页面选项",
     "visualeditor-parameter-input-placeholder": "参数名称",
     "visualeditor-parameter-search-no-unused": "没有未使用的参数",
     "visualeditor-parameter-search-unknown": "未知参数",

@@ -139,6 +139,7 @@
     "visualeditor-notification-created": "「$1」を作成しました。",
     "visualeditor-notification-restored": "「$1」を復元しました。",
     "visualeditor-notification-saved": "「$1」への変更を保存しました。",
+    "visualeditor-pagemenu-tooltip": "ページ設定",
     "visualeditor-parameter-input-placeholder": "引数名",
     "visualeditor-parameter-search-no-unused": "未使用の引数はありません",
     "visualeditor-parameter-search-unknown": "不明な引数",

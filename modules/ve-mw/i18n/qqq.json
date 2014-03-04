@@ -165,7 +165,7 @@
     "visualeditor-notification-created": "Shown after a user creates a new page. Parameters:\n* $1 - a page name",
     "visualeditor-notification-restored": "Shown after a user restores a page to a previous revision. Parameters:\n* $1 is a page name.",
     "visualeditor-notification-saved": "Shown after a user saves a page. Parameters:\n* $1 - a page name",
-    "visualeditor-pagemenu-tooltip": "Tooltip text for the page menu which has the following items:\n* {{msg-mw|visualeditor-meta-tool}}\n* {{msg-mw|visualeditor-settings-tool}}\n* {{msg-mw|visualeditor-advancedsettings-tool}}\n* {{msg-mw|visualeditor-categories-tool}}\n* {{msg-mw|visualeditor-languages-tool}}\n* {{msg-mw|visualeditor-mweditmodesource-title}}\n* {{msg-mw|visualeditor-dialog-commmand-help-title}}",
+    "visualeditor-pagemenu-tooltip": "Tooltip text for the page menu which has the following items:\n* {{msg-mw|visualeditor-meta-tool}}\n* {{msg-mw|visualeditor-settings-tool}}\n* {{msg-mw|visualeditor-advancedsettings-tool}}\n* {{msg-mw|visualeditor-categories-tool}}\n* {{msg-mw|visualeditor-languages-tool}}\n* {{msg-mw|visualeditor-mweditmodesource-title}}\n* {{msg-mw|visualeditor-dialog-command-help-title}}",
     "visualeditor-parameter-input-placeholder": "Placeholder text label for an input for adding a parameter to a template.\n{{Identical|Parameter name}}",
     "visualeditor-parameter-search-no-unused": "Message displayed in the transclusion dialog when no known parameters are unused by this template.",
     "visualeditor-parameter-search-unknown": "{{Identical|Unknown parameter}}",

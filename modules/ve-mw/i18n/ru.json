@@ -163,6 +163,7 @@
     "visualeditor-notification-created": "Страница «$1» была создана.",
     "visualeditor-notification-restored": "Прошлая версия на странице «$1» была восстановлена.",
     "visualeditor-notification-saved": "Ваши изменения на странице «$1» были сохранены.",
+    "visualeditor-pagemenu-tooltip": "Параметры страницы",
     "visualeditor-parameter-input-placeholder": "Имя параметра",
     "visualeditor-parameter-search-no-unused": "Нет неиспользованных параметров",
     "visualeditor-parameter-search-unknown": "Неизвестный параметр",

@@ -148,6 +148,7 @@
     "visualeditor-notification-created": "Страницата „$1“ е создадена.",
     "visualeditor-notification-restored": "Страницата „$1“ е повратена.",
     "visualeditor-notification-saved": "Измените во „$1“ се зачувани",
+    "visualeditor-pagemenu-tooltip": "Поставки за страница",
     "visualeditor-parameter-input-placeholder": "Назив на параметарот",
     "visualeditor-parameter-search-no-unused": "Нема неискористени параметри",
     "visualeditor-parameter-search-unknown": "Непознат параметар",

@@ -148,6 +148,7 @@
     "visualeditor-notification-created": "Creóse \"$1\".",
     "visualeditor-notification-restored": "Restauróse \"$1\".",
     "visualeditor-notification-saved": "Guardaronse los cambeos fechos en \"$1\".",
+    "visualeditor-pagemenu-tooltip": "Opciones de la páxina",
     "visualeditor-parameter-input-placeholder": "Nome del parámetru",
     "visualeditor-parameter-search-no-unused": "Nun hai parámetros ensin usu",
     "visualeditor-parameter-search-unknown": "Parámetru desconocíu",

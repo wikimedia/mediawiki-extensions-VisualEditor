@@ -173,6 +173,7 @@
     "visualeditor-notification-created": "« $1 » a été créée.",
     "visualeditor-notification-restored": "« $1 » a été restaurée.",
     "visualeditor-notification-saved": "Vos modifications sur « $1 » ont été enregistrées.",
+    "visualeditor-pagemenu-tooltip": "Options de page",
     "visualeditor-parameter-input-placeholder": "Nom du paramètre",
     "visualeditor-parameter-search-no-unused": "Aucun paramètre inutilisé",
     "visualeditor-parameter-search-unknown": "Paramètre inconnu",
