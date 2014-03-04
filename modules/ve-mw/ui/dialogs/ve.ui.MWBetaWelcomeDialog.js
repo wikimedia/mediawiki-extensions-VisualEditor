@@ -18,7 +18,7 @@
  */
 ve.ui.MWBetaWelcomeDialog = function VeUiMWBetaWelcomeDialog( windowSet, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'small': true, 'footless': false }, config );
+	config = ve.extendObject( { 'size': 'medium', 'footless': false }, config );
 
 	// Parent constructor
 	ve.ui.MWDialog.call( this, windowSet, config );

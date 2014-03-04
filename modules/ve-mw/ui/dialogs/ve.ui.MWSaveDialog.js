@@ -22,7 +22,7 @@
  */
 ve.ui.MWSaveDialog = function VeUiMWSaveDialog( windowSet, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'small': true }, config );
+	config = ve.extendObject( { 'size': 'medium' }, config );
 
 	// Parent constructor
 	ve.ui.MWDialog.call( this, windowSet, config );
@@ -120,6 +120,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	switch ( panel ) {
 		case 'save':
+			this.setSize( 'medium' );
 			if ( !this.sanityCheckVerified ) {
 				this.showMessage( 'dirtywarning', mw.msg( 'visualeditor-savedialog-warning-dirty' ) );
 			}
@@ -138,15 +139,14 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			} );
 			break;
 		case 'conflict':
+			this.setSize( 'medium' );
 			this.saveButton.setDisabled( true ).$element.hide();
 			this.reviewButton.$element.hide();
 			this.reviewGoodButton.$element.hide();
 			this.resolveConflictButton.$element.show();
 			break;
 		case 'review':
-			// Make room for the diff by transitioning to a non-small window
-			this.$frame.removeClass( 've-ui-window-frame-small' );
-
+			this.setSize( 'large' );
 			currentEditSummaryWikitext = this.editSummaryInput.getValue();
 			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 				if ( this.editSummaryXhr ) {
@@ -172,16 +172,12 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			}
 			/* falls through */
 		case 'nochanges':
+			this.setSize( 'medium' );
 			this.saveButton.$element.hide();
 			this.reviewButton.$element.hide();
 			this.reviewGoodButton.$element.show();
 			this.resolveConflictButton.$element.hide();
 			break;
-	}
-
-	if ( panel !== 'review' ) {
-		// Restore original "small" size
-		this.$frame.addClass( 've-ui-window-frame-small' );
 	}
 
 	// Show the target panel
