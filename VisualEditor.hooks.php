@@ -424,6 +424,9 @@ class VisualEditorHooks {
 				'styles' => array(
 					'lib/ve/lib/oojs-ui/oojs-ui.svg.css',
 				),
+				'skinStyles' => array(
+					'default' => 'lib/ve/lib/oojs-ui/oojs-ui-apex.css',
+				),
 				'messages' => array(
 					'ooui-dialog-action-close',
 					'ooui-outline-control-move-down',
