@@ -55,6 +55,7 @@
     "visualeditor-dialog-media-position-section": "Положение",
     "visualeditor-dialog-media-size-choosecustom": "Установить собственный размер",
     "visualeditor-dialog-media-size-choosedefault": "Установить размер по умолчанию",
+    "visualeditor-dialog-media-size-choosefull": "Задать полный размер",
     "visualeditor-dialog-media-size-originalsize-error": "Не удалось получить исходный размер файла.",
     "visualeditor-dialog-media-size-section": "Размер изображения",
     "visualeditor-dialog-media-title": "Параметры медиа-файла",
