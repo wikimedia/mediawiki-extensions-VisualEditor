@@ -449,7 +449,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.AnnotationInspector.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.LinkInspector.js',
 
-			'lib/ve/modules/ve/ui/widgets/ve.ui.GroupButtonWidget.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js',
 		),
 		'styles' => array(
