@@ -174,6 +174,9 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 	}
 	this.$figure.addClass( alignClass );
 
+	// Border
+	this.$figure.toggleClass( 'mw-image-border', !!this.model.getAttribute( 'borderImage' ) );
+
 	switch ( alignClass ) {
 		case 'mw-halign-right':
 			this.showHandles( ['sw'] );
