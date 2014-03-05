@@ -76,7 +76,8 @@ ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 			'referenceList',
 			'gallery'
 		],
-		'demote': [ 'specialcharacter' ]
+		'promote': [ 'reference', 'mediaInsert' ],
+		'demote': [ 'language', 'specialcharacter' ]
 	}
 ];
 
