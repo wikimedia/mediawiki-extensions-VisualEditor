@@ -37,7 +37,7 @@ ve.ui.MWCommandHelpDialog.static.getCommandGroups = function () {
 	if ( save !== '-' && save !== '' ) {
 		commandGroups.other.commands.push(
 			{
-				'shortcut': accessKeyPrefix + save.toUpperCase(),
+				'shortcuts': [ accessKeyPrefix + save.toUpperCase() ],
 				'msg': 'visualeditor-savedialog-label-save'
 			}
 		);
