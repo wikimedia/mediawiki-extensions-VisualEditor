@@ -73,7 +73,8 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 			'reference', 'referenceList',
 			'gallery'
 		],
-		'demote': [ 'specialcharacter' ]
+		'promote': [ 'reference', 'mediaInsert' ],
+		'demote': [ 'language', 'specialcharacter' ]
 	}
 ];
 
