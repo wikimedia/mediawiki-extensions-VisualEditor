@@ -121,6 +121,7 @@
     "visualeditor-dialogbutton-meta-tooltip": "הגדרות דף",
     "visualeditor-dialogbutton-reference-tooltip": "הפניה",
     "visualeditor-dialogbutton-referencelist-tooltip": "רשימת הערות שוליים",
+    "visualeditor-dialogbutton-template-tooltip": "תבנית",
     "visualeditor-dialogbutton-transclusion-tooltip": "הכללה",
     "visualeditor-diff-nochanges": "לא ניתן להתחיל את הסקירה, כי הגרסה שלך זהה לגרסה האחרונה של הדף.",
     "visualeditor-differror": "שגיאה בטעינת נתונים מהשרת: $1",
