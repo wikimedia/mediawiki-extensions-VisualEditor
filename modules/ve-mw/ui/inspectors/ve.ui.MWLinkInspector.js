@@ -14,12 +14,12 @@
  * @extends ve.ui.LinkInspector
  *
  * @constructor
- * @param {ve.ui.WindowSet} windowSet Window set this inspector is part of
+ * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkInspector = function VeUiMWLinkInspector( windowSet, config ) {
+ve.ui.MWLinkInspector = function VeUiMWLinkInspector( surface, config ) {
 	// Parent constructor
-	ve.ui.LinkInspector.call( this, windowSet, config );
+	ve.ui.LinkInspector.call( this, surface, config );
 };
 
 /* Inheritance */

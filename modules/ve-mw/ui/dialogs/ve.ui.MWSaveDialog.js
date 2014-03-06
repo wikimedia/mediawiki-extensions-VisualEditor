@@ -17,15 +17,15 @@
  * @extends ve.ui.MWDialog
  *
  * @constructor
- * @param {ve.ui.WindowSet} windowSet Window set this dialog is part of
+ * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Config options
  */
-ve.ui.MWSaveDialog = function VeUiMWSaveDialog( windowSet, config ) {
+ve.ui.MWSaveDialog = function VeUiMWSaveDialog( surface, config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'size': 'medium' }, config );
 
 	// Parent constructor
-	ve.ui.MWDialog.call( this, windowSet, config );
+	ve.ui.MWDialog.call( this, surface, config );
 
 	// Properties
 	this.sanityCheckVerified = false;

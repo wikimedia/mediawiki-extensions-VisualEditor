@@ -12,12 +12,12 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {ve.ui.WindowSet} windowSet Window set this inspector is part of
+ * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMathInspector = function VeUiMWMathInspector( windowSet, config ) {
+ve.ui.MWMathInspector = function VeUiMWMathInspector( surface, config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, windowSet, config );
+	ve.ui.MWExtensionInspector.call( this, surface, config );
 
 	this.onChangeHandler = ve.debounce( ve.bind( this.updatePreview, this ), 250 );
 };

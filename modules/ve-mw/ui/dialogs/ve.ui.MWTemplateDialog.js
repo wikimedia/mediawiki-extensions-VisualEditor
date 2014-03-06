@@ -12,15 +12,15 @@
  * @extends ve.ui.MWTransclusionDialog
  *
  * @constructor
- * @param {ve.ui.WindowSet} windowSet Window set this dialog is part of
+ * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( windowSet, config ) {
+ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( surface, config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'size': 'medium' }, config );
 
 	// Parent constructor
-	ve.ui.MWTransclusionDialog.call( this, windowSet, config );
+	ve.ui.MWTransclusionDialog.call( this, surface, config );
 };
 
 /* Inheritance */

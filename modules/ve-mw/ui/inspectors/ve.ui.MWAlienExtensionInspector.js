@@ -12,12 +12,12 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {ve.ui.WindowSet} windowSet Window set this inspector is part of
+ * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( windowSet, config ) {
+ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( surface, config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, windowSet, config );
+	ve.ui.MWExtensionInspector.call( this, surface, config );
 };
 
 /* Inheritance */
