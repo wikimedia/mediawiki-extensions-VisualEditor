@@ -24,6 +24,7 @@
 .ve-ui-mwParameterPage-field,
 .ve-ui-mwParameterPage-info,
 .ve-ui-mwParameterPage-actions,
+.ve-ui-mwParameterPage-indicators,
 .ve-ui-mwParameterPage .oo-ui-textInputWidget {
 	display: inline-block;
 	vertical-align: top;
@@ -46,18 +47,22 @@
 }
 
 .ve-ui-mwParameterPage .oo-ui-textInputWidget {
-	width: 90%;
+	width: 86%;
 }
 
 .ve-ui-mwParameterPage .oo-ui-textInputWidget textarea {
 	height: 2.5em;
 }
 
+.ve-ui-mwParameterPage-indicators,
 .ve-ui-mwParameterPage-actions {
-	display: none;
-	width: 10%;
+	width: 7%;
 	padding: 0.33em 0;
 	text-align: right;
+}
+
+.ve-ui-mwParameterPage-actions {
+	display: none;
 }
 
 .ve-ui-mwParameterPage.oo-ui-pageLayout-active .ve-ui-mwParameterPage-actions {
