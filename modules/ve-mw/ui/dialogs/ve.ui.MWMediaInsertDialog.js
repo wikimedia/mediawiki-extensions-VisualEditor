@@ -170,12 +170,9 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 	if ( data.action === 'insert' ) {
 		info = this.item.imageinfo[0];
 		// Calculate proper size according to default thumb size limit
-		if ( info.width > info.height ) {
+		if ( info.width > this.defaultThumbSize ) {
 			thumbwidth = this.defaultThumbSize;
 			thumbheight = Math.round( ( info.height / info.width ) * thumbwidth );
-		} else {
-			thumbheight = this.defaultThumbSize;
-			thumbwidth = Math.round( ( info.width / info.height ) * thumbheight );
 		}
 		this.surface.getModel().getFragment().collapseRangeToEnd().insertContent( [
 			{

@@ -80,7 +80,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		width = $img.attr( 'width' ),
 		height = $img.attr( 'height' ),
 		altText = $img.attr( 'alt' ),
-		defaultSizeBoundingBox = mw.config.get( 'wgVisualEditorConfig' )
+		defaultThumbWidth = mw.config.get( 'wgVisualEditorConfig' )
 			.defaultUserOptions.defaultthumbsize;
 
 	if ( altText !== undefined ) {
@@ -135,18 +135,15 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 			// rather than default MediaWiki configuration dimensions.
 			// We must force local wiki default in edit mode for default
 			// size images.
-			// FIXME if the image's original size is less than the default size,
-			// this is wrong.
-			if ( attributes.width > attributes.height ) {
+			// Only change the image size to default if the image isn't
+			// smaller than the default size
+			if (
+				attributes.width > defaultThumbWidth
+			) {
 				if ( attributes.height !== null ) {
-					attributes.height = ( attributes.height / attributes.width ) * defaultSizeBoundingBox;
+					attributes.height = Math.round( ( attributes.height / attributes.width ) * defaultThumbWidth );
 				}
-				attributes.width = defaultSizeBoundingBox;
-			} else {
-				if ( attributes.width !== null ) {
-					attributes.width = ( attributes.width / attributes.height ) * defaultSizeBoundingBox;
-				}
-				attributes.height = defaultSizeBoundingBox;
+				attributes.width = defaultThumbWidth;
 			}
 		}
 	}
