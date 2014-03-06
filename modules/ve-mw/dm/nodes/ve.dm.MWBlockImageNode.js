@@ -126,10 +126,17 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 			attributes.type === 'thumb' ||
 			attributes.type === 'frameless'
 		) {
+			// We're gonna change .width and .height, store the original
+			// values so we can restore them later.
+			// FIXME "just" don't modify .width and .height instead
+			attributes.originalWidth = attributes.width;
+			attributes.originalHeight = attributes.height;
 			// Parsoid hands us images with default Wikipedia dimensions
 			// rather than default MediaWiki configuration dimensions.
 			// We must force local wiki default in edit mode for default
 			// size images.
+			// FIXME if the image's original size is less than the default size,
+			// this is wrong.
 			if ( attributes.width > attributes.height ) {
 				if ( attributes.height !== null ) {
 					attributes.height = ( attributes.height / attributes.width ) * defaultSizeBoundingBox;
@@ -169,15 +176,15 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 // TODO: At this moment node is not resizable but when it will be then adding defaultSize class
 // should be more conditional.
 ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) {
-	var dataElement = data[0],
+	var rdfa, width, height,
+		dataElement = data[0],
 		figure = doc.createElement( 'figure' ),
 		imgWrapper = doc.createElement( dataElement.attributes.href !== '' ? 'a' : 'span' ),
 		img = doc.createElement( 'img' ),
 		wrapper = doc.createElement( 'div' ),
 		classes = [],
 		originalClasses = dataElement.attributes.originalClasses,
-		captionData = data.slice( 1, -1 ),
-		rdfa;
+		captionData = data.slice( 1, -1 );
 
 	if ( !this.typeToRdfa ) {
 		this.typeToRdfa = {};
@@ -228,9 +235,23 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	if ( dataElement.attributes.href !== '' ) {
 		imgWrapper.setAttribute( 'href', dataElement.attributes.href );
 	}
+
+	width = dataElement.attributes.width;
+	height = dataElement.attributes.height;
+	// If defaultSize is set, and was set on the way in, use the original width and height
+	// we got on the way in.
+	if ( dataElement.attributes.defaultSize ) {
+		if ( dataElement.attributes.originalWidth !== undefined ) {
+			width = dataElement.attributes.originalWidth;
+		}
+		if ( dataElement.attributes.originalHeight !== undefined ) {
+			height = dataElement.attributes.originalHeight;
+		}
+	}
+
 	img.setAttribute( 'src', dataElement.attributes.src );
-	img.setAttribute( 'width', dataElement.attributes.width );
-	img.setAttribute( 'height', dataElement.attributes.height );
+	img.setAttribute( 'width', width );
+	img.setAttribute( 'height', height );
 	img.setAttribute( 'resource', dataElement.attributes.resource );
 	if ( dataElement.attributes.alt !== undefined ) {
 		img.setAttribute( 'alt', dataElement.attributes.alt );
