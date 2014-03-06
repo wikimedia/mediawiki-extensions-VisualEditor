@@ -119,6 +119,10 @@
 	display: block;
 }
 
+.ve-ui-mwTemplatePage-description-missing {
+	font-style: italic;
+}
+
 /* ve.ui.MWTransclusionContentPage */
 
 .ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget {
