@@ -119,10 +119,10 @@ ve.ce.MWImageNode.prototype.onParseError = function ( deferred ) {
 };
 
 /**
- * Handle the node being focussed
+ * Handle the node being focused
  */
 ve.ce.MWImageNode.prototype.onFocus = function () {
-	// Fetch the original dimensions the first time the node is focussed
+	// Fetch the original dimensions the first time the node is focused
 	if ( !this.originalDimensions ) {
 		this.fetchDimensions();
 	}
