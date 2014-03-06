@@ -791,6 +791,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-meta-categories-data-label',
 			'visualeditor-dialog-meta-categories-defaultsort-label',
 			'visualeditor-dialog-meta-categories-hidden',
+			'visualeditor-dialog-meta-categories-input-hiddencategorieslabel',
 			'visualeditor-dialog-meta-categories-input-matchingcategorieslabel',
 			'visualeditor-dialog-meta-categories-input-movecategorylabel',
 			'visualeditor-dialog-meta-categories-input-newcategorylabel',
