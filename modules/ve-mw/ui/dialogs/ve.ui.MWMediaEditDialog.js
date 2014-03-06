@@ -375,9 +375,10 @@ ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
 /**
  * Handle type change, particularly to and from 'thumb' to make
  * sure size is limited.
+ * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
-ve.ui.MWMediaEditDialog.prototype.onTypeChange = function () {
-	var selectedType = this.typeInput.getSelectedItem() ? this.typeInput.getSelectedItem().getData() : '',
+ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
+	var selectedType = item ? item.getData() : '',
 		thumbOrFrameless = selectedType === 'thumb' || selectedType === 'frameless';
 
 	// As per wikitext docs, both 'thumb' and 'frameless' have
@@ -494,21 +495,17 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 
 /**
  * Respond to sizeSelectWidget change
+ * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
-ve.ui.MWMediaEditDialog.prototype.onSizeSelectWidgetSelect = function () {
-	if (
-		this.sizeSelectWidget.getSelectedItem() &&
-		this.sizeSelectWidget.getSelectedItem().getData() === 'default'
-	) {
+ve.ui.MWMediaEditDialog.prototype.onSizeSelectWidgetSelect = function ( item ) {
+	var currentItem = item ? item.getData() : '';
+	if ( currentItem === 'default' ) {
 		// Reset so placeholders appear
 		this.sizeWidget.setCurrentDimensions( {
 			'width': 0,
 			'height': 0
 		} );
-	} else if (
-		this.sizeSelectWidget.getSelectedItem() &&
-		this.sizeSelectWidget.getSelectedItem().getData() === 'full'
-	) {
+	} else if ( currentItem === 'full' ) {
 		if (
 			this.typeInput.getSelectedItem() &&
 			(
