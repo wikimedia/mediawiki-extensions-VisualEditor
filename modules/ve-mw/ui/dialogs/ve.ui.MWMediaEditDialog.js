@@ -325,48 +325,38 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
  * the widget.
  */
 ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
-	var selectedType = ( this.typeInput.getSelectedItem() ) ? this.typeInput.getSelectedItem().getData() : '';
+	var selectedType = this.typeInput.getSelectedItem() ? this.typeInput.getSelectedItem().getData() : '',
+		thumbOrFrameless = selectedType === 'thumb' || selectedType === 'frameless';
+
 	// Switch to 'default' or 'custom' size
 	if ( this.sizeWidget.isEmpty() ) {
-		if (
-			selectedType === 'thumb' ||
-			selectedType === 'frameless'
-		) {
-			this.sizeSelectWidget.selectItem(
-				this.sizeSelectWidget.getItemFromData( 'default' )
-			);
-		} else {
-			this.sizeSelectWidget.selectItem(
-				this.sizeSelectWidget.getItemFromData( 'full' )
-			);
-		}
-	} else {
-		// If the value is full size for either thumb or frameless
-		// images, make sure the size select is on 'full' despite the
-		// fact that there are actual "custom" numbers in the
-		// size widget
-		if (
-			(
-				selectedType === 'thumb' ||
-				selectedType === 'frameless'
-			) &&
-			OO.compare(
-				this.sizeWidget.getCurrentDimensions(),
-				this.sizeWidget.getOriginalDimensions()
+		this.sizeSelectWidget.selectItem(
+			this.sizeSelectWidget.getItemFromData(
+				thumbOrFrameless ?
+				'default' :
+				'full'
 			)
-		) {
-			this.sizeSelectWidget.selectItem(
-				this.sizeSelectWidget.getItemFromData( 'full' )
-			);
-		} else {
-			// Otherwise, when the widget has actual typed values, it
-			// is considerind 'custom' so clicking the 'full' button
-			// will result in removing size attributes altogether from
-			// the wikitext (faux-default)
-			this.sizeSelectWidget.selectItem(
-				this.sizeSelectWidget.getItemFromData( 'custom' )
-			);
-		}
+		);
+	} else {
+		this.sizeSelectWidget.selectItem(
+			this.sizeSelectWidget.getItemFromData(
+				thumbOrFrameless &&
+				OO.compare(
+					this.sizeWidget.getCurrentDimensions(),
+					this.sizeWidget.getOriginalDimensions()
+				) ?
+				// If the value is full size for either thumb or frameless
+				// images, make sure the size select is on 'full' despite the
+				// fact that there are actual "custom" numbers in the
+				// size widget
+				'full' :
+				// Otherwise, when the widget has actual typed values, it
+				// is considerind 'custom' so clicking the 'full' button
+				// will result in removing size attributes altogether from
+				// the wikitext (faux-default)
+				'custom'
+			)
+		);
 	}
 };
 
@@ -375,14 +365,14 @@ ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
  * sure size is limited.
  */
 ve.ui.MWMediaEditDialog.prototype.onTypeChange = function () {
-	var currentChoice = this.typeInput.getSelectedItem().getData();
-	if (
-		currentChoice === 'thumb' ||
-		// As per wikitext docs, both 'thumb' and 'frameless' have
-		// explicitly limited size, as opposed to the similar case
-		// of having no type specified
-		currentChoice === 'frameless'
-	) {
+	var selectedType = this.typeInput.getSelectedItem() ? this.typeInput.getSelectedItem().getData() : '',
+		thumbOrFrameless = selectedType === 'thumb' || selectedType === 'frameless';
+
+	// As per wikitext docs, both 'thumb' and 'frameless' have
+	// explicitly limited size, as opposed to the similar case
+	// of having no type specified
+	if ( thumbOrFrameless ) {
+
 		// Set the placeholders to be wiki default
 		if ( this.mediaNode.getAttribute( 'width' ) > this.mediaNode.getAttribute( 'height' ) ) {
 			this.sizeWidget.setPlaceholderDimensions( {
@@ -399,20 +389,6 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function () {
 		// Tell the size widget to limit maxDimensions
 		this.sizeWidget.setEnforcedMax( true );
 
-		// For these types, select 'full size' if the size widget is not empty
-		// and the dimensions are equal to original dimensions
-		if (
-			!this.sizeWidget.isEmpty() &&
-			OO.compare(
-				this.sizeWidget.getCurrentDimensions(),
-				this.sizeWidget.getOriginalDimensions()
-			)
-		) {
-			this.sizeSelectWidget.selectItem(
-				this.sizeSelectWidget.getItemFromData( 'full' )
-			);
-		}
-
 	} else {
 		// Set placeholders to be image original dimensions
 		// Technically, this is the 'default' of non thumb/frameless
@@ -427,7 +403,7 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function () {
 		// Don't limit the widget for other types (Wikitext doesn't)
 		this.sizeWidget.setEnforcedMax( false );
 
-		// For these types, filled in information is custom, unlike
+		// For these types, filled in information is custom
 		if ( !this.sizeWidget.isEmpty() ) {
 			this.sizeSelectWidget.selectItem(
 				this.sizeSelectWidget.getItemFromData( 'custom' )
@@ -435,33 +411,43 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function () {
 		}
 	}
 
-	// Default and faux-default
+	// Default, faux-default (full) buttons on type change
 	if ( this.sizeWidget.isEmpty() ) {
+
+		this.sizeSelectWidget.selectItem(
+			this.sizeSelectWidget.getItemFromData(
+				thumbOrFrameless ?
+				// default for thumb and frameless
+				'default' :
+				// full is the default of basic and frame
+				'full'
+			)
+		);
+	} else {
+		// If the size widget is not empty and the dimensions are
+		// equal to original dimensions, set button to 'full' in
+		// thumbnail or frameless
 		if (
-			currentChoice === 'thumb' ||
-			currentChoice === 'frameless'
+			thumbOrFrameless &&
+			OO.compare(
+				this.sizeWidget.getCurrentDimensions(),
+				this.sizeWidget.getOriginalDimensions()
+			)
 		) {
-			this.sizeSelectWidget.selectItem(
-				this.sizeSelectWidget.getItemFromData( 'default' )
-			);
-		} else {
-			// full is the default of basic and frame
 			this.sizeSelectWidget.selectItem(
 				this.sizeSelectWidget.getItemFromData( 'full' )
 			);
 		}
 	}
 
-	// Border
-	if (
-		currentChoice === 'thumb' ||
-		currentChoice === 'frame'
-	) {
+	// Enable or disable border
+	if ( thumbOrFrameless ) {
 		this.borderCheckbox.setDisabled( true );
 		this.borderCheckbox.setValue( false );
 	} else {
 		this.borderCheckbox.setDisabled( false );
 	}
+
 	// Re-validate the existing dimensions
 	this.sizeWidget.validateDimensions();
 };
