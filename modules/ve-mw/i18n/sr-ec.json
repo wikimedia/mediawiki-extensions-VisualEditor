@@ -79,6 +79,7 @@
     "visualeditor-dialogbutton-meta-tooltip": "Поставке странице",
     "visualeditor-dialogbutton-reference-tooltip": "Референце",
     "visualeditor-dialogbutton-referencelist-tooltip": "Списак референци",
+    "visualeditor-dialogbutton-template-tooltip": "Шаблон",
     "visualeditor-dialogbutton-transclusion-tooltip": "Укључивање",
     "visualeditor-differror": "Грешка приликом учитавања података са сервера: $1.",
     "visualeditor-editconflict": "Промене не могу бити сачуване због сукоба измена. Да ли желите да ручно решите проблем?",

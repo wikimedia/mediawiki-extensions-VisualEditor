@@ -120,6 +120,7 @@
     "visualeditor-dialogbutton-meta-tooltip": "Ustawienia strony",
     "visualeditor-dialogbutton-reference-tooltip": "Przypis",
     "visualeditor-dialogbutton-referencelist-tooltip": "Lista przypisów",
+    "visualeditor-dialogbutton-template-tooltip": "Szablon",
     "visualeditor-dialogbutton-transclusion-tooltip": "Szablon",
     "visualeditor-diff-nochanges": "Nie można uruchomić przeglądania zmian, ponieważ twoja wersja jest tożsama z ostatnią zapisaną wersją tej strony.",
     "visualeditor-differror": "Błąd podczas ładowania danych z serwera: $1.",

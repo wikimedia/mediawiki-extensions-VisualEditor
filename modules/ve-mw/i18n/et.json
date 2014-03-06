@@ -104,6 +104,7 @@
     "visualeditor-dialogbutton-meta-tooltip": "Lehekülje sätted",
     "visualeditor-dialogbutton-reference-tooltip": "Viide",
     "visualeditor-dialogbutton-referencelist-tooltip": "Viidete loend",
+    "visualeditor-dialogbutton-template-tooltip": "Mall",
     "visualeditor-dialogbutton-transclusion-tooltip": "Malli kasutamine",
     "visualeditor-diff-nochanges": "Ülevaatusega ei saa alustada, sest sinu redaktsioon kattub selle lehekülje viimase versiooniga.",
     "visualeditor-differror": "Tõrge serverist andmete laadimisel: $1.",

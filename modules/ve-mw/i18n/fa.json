@@ -114,6 +114,7 @@
     "visualeditor-dialogbutton-meta-tooltip": "تنظیمات صفحه",
     "visualeditor-dialogbutton-reference-tooltip": "منبع",
     "visualeditor-dialogbutton-referencelist-tooltip": "فهرست منابع",
+    "visualeditor-dialogbutton-template-tooltip": "الگو",
     "visualeditor-dialogbutton-transclusion-tooltip": "تراگنجانش",
     "visualeditor-diff-nochanges": "امکان آغاز بازبینی نبود چراکه نسخهٔ شما با آخرین نسخهٔ این صفحه یکسان است.",
     "visualeditor-differror": "خطای بارگیری داده‌ها از کارساز: $1.",
