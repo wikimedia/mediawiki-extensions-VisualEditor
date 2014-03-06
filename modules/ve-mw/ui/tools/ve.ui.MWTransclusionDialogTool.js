@@ -22,7 +22,7 @@ ve.ui.MWTransclusionDialogTool.static.name = 'transclusion';
 ve.ui.MWTransclusionDialogTool.static.group = 'object';
 ve.ui.MWTransclusionDialogTool.static.icon = 'template';
 ve.ui.MWTransclusionDialogTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-dialogbutton-transclusion-tooltip' );
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-template-tooltip' );
 ve.ui.MWTransclusionDialogTool.static.dialog = 'transclusion';
 ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 ve.ui.toolFactory.register( ve.ui.MWTransclusionDialogTool );
