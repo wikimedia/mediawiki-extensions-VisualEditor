@@ -96,7 +96,10 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 		description = spec.getParameterDescription( name );
 
 		this.index.push( {
-			'text': [ name, label, aliases.join( ' ' ), description ].join( ' ' ),
+			// Query information
+			'text': [ label, description ].join( ' ' ).toLowerCase(),
+			'names': [ name ].concat( aliases ).join( '|' ).toLowerCase(),
+			// Display information
 			'name': name,
 			'label': label,
 			'aliases': aliases,
@@ -114,17 +117,19 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
  * @method
  */
 ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
-	var i, len, item,
+	var i, len, item, textMatch, nameMatch,
 		exactMatch = false,
-		value = this.query.getValue().trim(),
+		value = this.query.getValue().trim().replace( /[\|\{\}]/g, '' ),
 		query = value.toLowerCase(),
 		items = [];
 
 	for ( i = 0, len = this.index.length; i < len; i++ ) {
 		item = this.index[i];
-		if ( item.text.indexOf( query ) >= 0 ) {
+		textMatch = item.text.indexOf( query ) >= 0;
+		nameMatch = item.names.indexOf( query ) >= 0;
+		if ( textMatch || nameMatch ) {
 			items.push( new ve.ui.MWParameterResultWidget( item, { '$': this.$ } ) );
-			if ( item.name === value || ve.indexOf( value, item.aliases ) !== -1 ) {
+			if ( nameMatch ) {
 				exactMatch = true;
 			}
 		}
