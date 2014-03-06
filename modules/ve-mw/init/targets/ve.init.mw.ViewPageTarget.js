@@ -226,7 +226,7 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 		) {
 			this.deactivating = true;
 			// User interface changes
-			if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
+			if ( this.elementsThatHadOurAccessKey ) {
 				this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
 			}
 			this.restorePage();
