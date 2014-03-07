@@ -1,33 +1,21 @@
 Given(/^I can see the Transclusion User Interface$/) do
-  on(VisualEditorPage) do |page|
-    sleep 1
-    page.wait_until(10) do
-      page.title.include? "Transclusion"
-    end
-    page.title.should match "Transclusion"
-  end
+  on(VisualEditorPage).template_header_element.when_present
 end
 
-When(/^I add the parameter$/) do
-  on(VisualEditorPage) do |page|
-    page.wait_until(10) do
-      page.add_parameter_element.exists?
-    end
-    page.add_parameter_element.click
-  end
+Given(/^I click Add parameter$/) do
+  on(VisualEditorPage).add_parameter_element.when_present.click
 end
 
 When(/^I click Remove parameter$/) do
-  on(VisualEditorPage) do |page|
-    page.wait_until(10) do
-      page.remove_parameter_element.exists?
-    end
-    page.remove_parameter_element.click
-  end
+  on(VisualEditorPage).remove_parameter_element.when_present.click
 end
 
 When(/^I click Remove template$/) do
   on(VisualEditorPage).remove_template_element.when_present.click
+end
+
+Given(/^I click the parameter representation containing q$/) do
+  on(VisualEditorPage).parameter_icon_element.when_present.click
 end
 
 When(/^I click Transclusion$/) do
@@ -52,24 +40,24 @@ When(/^I enter (.+) into transclusion Content box$/) do |content|
   end
 end
 
-Then(/^I should see a list of template suggestions$/) do
+Then(/^I see a list of template suggestions$/) do
   on(VisualEditorPage).suggestion_list_element.when_present.should be_visible
 end
 
-Then(/^I should be able to click the Add template button$/) do
-  on(VisualEditorPage).add_template_element.click
+Then(/^I click the Add template button$/) do
+  on(VisualEditorPage).add_template_element.when_present.click
 end
+
 Then(/^I should not be able to see parameter named (.+)$/) do |param_name|
   on(VisualEditorPage).template_list_item_element.should_not be_visible
 end
 
-Then(/^I should see an input text area$/) do
-  on(VisualEditorPage) do |page|
-    page.wait_until(10) do
-      page.transclusion_textarea_element.exists?
-    end
-    page.transclusion_textarea_element.should be_visible
-  end
+Then(/^I see an input text area$/) do
+  on(VisualEditorPage).transclusion_textfield_element.when_present
+end
+
+Then(/^I should see the Add parameter link$/) do
+  on(VisualEditorPage).add_parameter_element.should be_visible
 end
 
 Then(/^I should see the Apply changes button$/) do
