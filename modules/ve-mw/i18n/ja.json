@@ -50,6 +50,7 @@
     "visualeditor-dialog-meta-categories-data-label": "カテゴリ",
     "visualeditor-dialog-meta-categories-defaultsort-label": "このページのデフォルトソートキー",
     "visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "一致するカテゴリ",
+    "visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "隠しカテゴリ",
     "visualeditor-dialog-meta-categories-input-movecategorylabel": "指定したカテゴリをこの位置に移動",
     "visualeditor-dialog-meta-categories-input-newcategorylabel": "新しいカテゴリ",
     "visualeditor-dialog-meta-categories-input-placeholder": "追加するカテゴリ",
