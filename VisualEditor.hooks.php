@@ -144,7 +144,7 @@ class VisualEditorHooks {
 	 * @param $isWatch boolean
 	 * @param $section int
 	 * @param $flags int
-	 * @param $revision Revision
+	 * @param $revision Revision|null
 	 * @param $status Status
 	 * @param $baseRevId int|boolean
 	 * @returns boolean true
@@ -154,7 +154,7 @@ class VisualEditorHooks {
 		$section, $flags, $revision, $status, $baseRevId
 	) {
 		$request = RequestContext::getMain()->getRequest();
-		if ( $request->getBool( 'wasve' ) ) {
+		if ( $request->getBool( 'wasve' ) && $revision ) {
 			ChangeTags::addTags( 'visualeditor-switched', null, $revision->getId() );
 		}
 		return true;
