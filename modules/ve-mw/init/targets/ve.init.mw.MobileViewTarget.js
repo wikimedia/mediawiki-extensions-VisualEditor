@@ -39,11 +39,6 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, con
 OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 
 /* Static Properties */
-ve.extendObject( ve.init.mw.Target.static.iconModuleStyles, {
-	'raster': [],
-	'vector': []
-} );
-
 ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	{ 'include': [ 'bold', 'italic' ] }
 ];
