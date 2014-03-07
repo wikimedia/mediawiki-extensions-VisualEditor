@@ -16,7 +16,8 @@
             "Thehelpfulone",
             "Ciencia Al Poder",
             "Carlitosag",
-            "Epicfaace"
+            "Epicfaace",
+            "Ihojose"
         ]
     },
     "tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -50,6 +51,7 @@
     "visualeditor-dialog-meta-categories-data-label": "Categorías",
     "visualeditor-dialog-meta-categories-defaultsort-label": "Ordenar esta página por defecto como",
     "visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Categorías similares",
+    "visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Categorías ocultas",
     "visualeditor-dialog-meta-categories-input-movecategorylabel": "Mover esta categoría aquí",
     "visualeditor-dialog-meta-categories-input-newcategorylabel": "Nueva categoría",
     "visualeditor-dialog-meta-categories-input-placeholder": "Agregar categoría",
@@ -77,12 +79,14 @@
     "visualeditor-dialog-transclusion-add-param": "Añadir un parámetro",
     "visualeditor-dialog-transclusion-add-template": "Añadir una plantilla",
     "visualeditor-dialog-transclusion-content": "Contenido",
+    "visualeditor-dialog-transclusion-multiple-mode": "Mostrar opciones",
     "visualeditor-dialog-transclusion-options": "Opciones",
     "visualeditor-dialog-transclusion-placeholder": "Plantilla nueva",
     "visualeditor-dialog-transclusion-remove-content": "Eliminar el contenido",
     "visualeditor-dialog-transclusion-remove-param": "Eliminar el parámetro",
     "visualeditor-dialog-transclusion-remove-template": "Eliminar la plantilla",
     "visualeditor-dialog-transclusion-required-parameter": "Parámetro requerido",
+    "visualeditor-dialog-transclusion-single-mode": "Ocultar opciones",
     "visualeditor-dialog-transclusion-title": "Transclusión",
     "visualeditor-dialogbutton-media-tooltip": "Multimedia",
     "visualeditor-dialogbutton-meta-tooltip": "Configuración de página",
