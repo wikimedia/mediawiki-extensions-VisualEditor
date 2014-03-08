@@ -118,7 +118,7 @@ class VisualEditorHooks {
 
 	/**
 	 * Called when the normal wikitext editor is shown.
-	 * Inserts a 'wasve' hidden field if requested by the client
+	 * Inserts a 'veswitched' hidden field if requested by the client
 	 *
 	 * @param $editPage EditPage
 	 * @param $output OutputPage
@@ -126,8 +126,8 @@ class VisualEditorHooks {
 	 */
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
 		$request = RequestContext::getMain()->getRequest();
-		if ( $request->getBool( 'wasve' ) ) {
-			$output->addHTML( Xml::input( 'wasve', false, '1', array( 'type' => 'hidden' ) ) );
+		if ( $request->getBool( 'veswitched' ) ) {
+			$output->addHTML( Xml::input( 'veswitched', false, '1', array( 'type' => 'hidden' ) ) );
 		}
 		return true;
 	}
@@ -154,7 +154,7 @@ class VisualEditorHooks {
 		$section, $flags, $revision, $status, $baseRevId
 	) {
 		$request = RequestContext::getMain()->getRequest();
-		if ( $request->getBool( 'wasve' ) && $revision ) {
+		if ( $request->getBool( 'veswitched' ) && $revision ) {
 			ChangeTags::addTags( 'visualeditor-switched', null, $revision->getId() );
 		}
 		return true;
