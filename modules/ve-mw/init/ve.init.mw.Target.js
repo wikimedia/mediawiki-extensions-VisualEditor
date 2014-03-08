@@ -33,6 +33,7 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
 		.extend( { 'action': 'submit' } );
+	this.events = new ve.init.mw.TargetEvents( this );
 
 	this.modules = [
 			'ext.visualEditor.mwcore',
@@ -106,6 +107,12 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
  */
 
 /**
+ * @event saveErrorBadToken
+ * Fired on save if we have to fetch a new edit token
+ *  this is mainly for analytical purposes.
+ */
+
+/**
  * @event saveErrorNewUser
  * Fired when user is logged in as a new user
  * @param {boolean|undefined} isAnon Is newly logged in user anonymous. If
@@ -151,6 +158,11 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
  * @param {jqXHR|null} jqXHR
  * @param {string} status Text status message
  * @param {Mixed|null} error HTTP status text
+ */
+
+/**
+ * @event serializeComplete
+ * Fired when serialization is complete
  */
 
 /**
@@ -228,6 +240,15 @@ ve.init.mw.Target.static.iconModuleStyles = {
 	'vector': ['ext.visualEditor.viewPageTarget.icons-vector', 'ext.visualEditor.icons-vector'],
 	'raster': ['ext.visualEditor.viewPageTarget.icons-raster', 'ext.visualEditor.icons-raster']
 };
+
+/**
+ * Name of target class. Used by TargetEvents to identify which target we are tracking.
+ *
+ * @static
+ * @property {string}
+ * @inheritable
+ */
+ve.init.mw.Target.static.name = 'mwTarget';
 
 /* Static Methods */
 
@@ -485,24 +506,19 @@ ve.init.mw.Target.onSave = function ( response ) {
  * @fires saveErrorEmpty
  * @fires saveErrorSpamBlacklist
  * @fires saveErrorAbuseFilter
+ * @fires saveErrorBadToken
  * @fires saveErrorNewUser
  * @fires saveErrorCaptcha
  * @fires saveErrorUnknown
  */
 ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 	var api, editApi,
-		trackData = {
-			'duration': ve.now() - this.timings.saveDialogSave,
-			'retries': this.timings.saveRetries
-		},
 		viewPage = this;
 	this.saving = false;
 	this.emit( 'saveAsyncComplete' );
 
 	// Handle empty response
 	if ( !data ) {
-		trackData.type = 'empty';
-		ve.track( 'performance.user.saveError', trackData );
 		this.emit( 'saveErrorEmpty' );
 		return;
 	}
@@ -510,8 +526,6 @@ ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 
 	// Handle spam blacklist error (either from core or from Extension:SpamBlacklist)
 	if ( editApi && editApi.spamblacklist ) {
-		trackData.type = 'spamblacklist';
-		ve.track( 'performance.user.saveError', trackData );
 		this.emit( 'saveErrorSpamBlacklist', editApi );
 		return;
 	}
@@ -519,8 +533,6 @@ ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 	// Handle warnings/errors from Extension:AbuseFilter
 	// TODO: Move this to a plugin
 	if ( editApi && editApi.info && editApi.info.indexOf( 'Hit AbuseFilter:' ) === 0 && editApi.warning ) {
-		trackData.type = 'abusefilter';
-		ve.track( 'performance.user.saveError', trackData );
 		this.emit( 'saveErrorAbuseFilter', editApi );
 		return;
 	}
@@ -543,6 +555,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 			'intoken': 'edit'
 		} )
 			.always( function () {
+				viewPage.emit( 'saveErrorBadToken' );
 				viewPage.emit( 'saveAsyncComplete' );
 			} )
 			.done( function ( data ) {
@@ -563,12 +576,9 @@ ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 							mw.config.get( 'wgUserId' ) === userInfo.id
 					) {
 						// New session is the same user still
-						this.timings.saveRetries++;
 						viewPage.saveDocument();
 					} else {
 						// The now current session is a different user
-						trackData.type = 'badtoken';
-						ve.track( 'performance.user.saveError', trackData );
 						if ( isAnon ) {
 							// New session is an anonymous user
 							mw.config.set( {
@@ -605,15 +615,11 @@ ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 	// API for different things in the UI. At this point we only support the FancyCaptha which we
 	// very intuitively detect by the presence of a "url" property.
 	if ( editApi && editApi.captcha && editApi.captcha.url ) {
-		trackData.type = 'captcha';
-		ve.track( 'performance.user.saveError', trackData );
 		this.emit( 'saveErrorCaptcha', editApi );
 		return;
 	}
 
 	// Handle (other) unknown and/or unrecoverable errors
-	trackData.type = 'unknown';
-	ve.track( 'performance.user.saveError', trackData );
 	this.emit( 'saveErrorUnknown', editApi, data );
 };
 
@@ -674,6 +680,7 @@ ve.init.mw.Target.onShowChangesError = function ( jqXHR, status, error ) {
  * @method
  * @param {Object} data API response data
  * @param {string} status Text status message
+ * @fires serializeComplete
  */
 ve.init.mw.Target.onSerialize = function ( response ) {
 	this.serializing = false;
@@ -693,6 +700,7 @@ ve.init.mw.Target.onSerialize = function ( response ) {
 	} else {
 		if ( typeof this.serializeCallback === 'function' ) {
 			this.serializeCallback( data.content );
+			this.emit( 'serializeComplete' );
 			delete this.serializeCallback;
 		}
 	}
@@ -784,11 +792,13 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
  * @returns {boolean} Loading has been started
 */
 ve.init.mw.Target.prototype.load = function ( additionalModules ) {
-	var data, start, xhr;
+	var data, start, xhr, target = this;
+
 	// Prevent duplicate requests
 	if ( this.loading ) {
 		return false;
 	}
+	this.events.timings.activationStart = ve.now();
 	// Start loading the module immediately
 	mw.loader.using(
 		// Wait for site and user JS before running plugins
@@ -815,7 +825,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 
 	xhr = this.constructor.static.apiRequest( data );
 	this.loading = xhr.then( function ( data, status, jqxhr ) {
-			ve.track( 'performance.system.domLoad', {
+			target.events.track( 'performance.system.domLoad', {
 				'bytes': $.byteLength( jqxhr.responseText ),
 				'duration': ve.now() - start,
 				'cacheHit': /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
@@ -867,7 +877,7 @@ ve.init.mw.Target.prototype.clearState = function () {
  * @returns {jQuery.Promise} Abortable promise, resolved with the cache key.
  */
 ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
-	var xhr, html, start = ve.now(), deferred = $.Deferred();
+	var xhr, html, start = ve.now(), deferred = $.Deferred(), target = this;
 
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
 		return this.preparedCacheKeyPromise;
@@ -885,15 +895,15 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 		.done( function ( response ) {
 			var trackData = { 'duration': ve.now() - start };
 			if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
-				ve.track( 'performance.system.serializeforcache', trackData );
+				target.events.track( 'performance.system.serializeforcache', trackData );
 				deferred.resolve( response.visualeditor.cachekey );
 			} else {
-				ve.track( 'performance.system.serializeforcache.nocachekey', trackData );
+				target.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
 				deferred.reject();
 			}
 		} )
 		.fail( function () {
-			ve.track( 'performance.system.serializeforcache.fail', { 'duration': ve.now() - start } );
+			target.events.track( 'performance.system.serializeforcache.fail', { 'duration': ve.now() - start } );
 			deferred.reject();
 		} );
 
@@ -969,7 +979,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 					// Log the failure if eventName was set
 					if ( eventName ) {
 						fullEventName = 'performance.system.' + eventName + '.badCacheKey';
-						ve.track( fullEventName, eventData );
+						target.events.track( fullEventName, eventData );
 					}
 					// This cache key is evidently bad, clear it
 					target.clearPreparedCacheKey();
@@ -981,7 +991,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 				if ( eventName ) {
 					fullEventName = 'performance.system.' + eventName +
 						( typeof cachekey === 'string' ? '.withCacheKey' : '.withoutCacheKey' );
-					ve.track( fullEventName, eventData );
+					target.events.track( fullEventName, eventData );
 				}
 				return jqxhr;
 			} );
