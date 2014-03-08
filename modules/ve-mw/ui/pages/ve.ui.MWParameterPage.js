@@ -29,6 +29,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$label = this.$( '<div>' );
 	this.$field = this.$( '<div>' );
 	this.$actions = this.$( '<div>' );
+	this.$indicators = this.$( '<div>' );
 	this.$info = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
 	this.$more = this.$( '<div>' );
@@ -56,6 +57,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			'tabIndex': -1
 		} )
 		.connect( this, { 'click': 'onAddButtonClick' } );
+	this.requiredIndicator = new OO.ui.IndicatorWidget( { '$': this.$ } );
 
 	// TODO: Use spec.deprecation
 	// TODO: Use spec.type
@@ -71,6 +73,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$actions
 		.addClass( 've-ui-mwParameterPage-actions' )
 		.append( this.removeButton.$element );
+	this.$indicators
+		.addClass( 've-ui-mwParameterPage-indicators' )
+		.append( this.requiredIndicator.$element );
 	this.$description
 		.addClass( 've-ui-mwParameterPage-description' )
 		.text( this.spec.getParameterDescription( paramName ) || '' );
@@ -79,13 +84,21 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append( this.$description );
 	this.$field
 		.addClass( 've-ui-mwParameterPage-field' )
-		.append( this.valueInput.$element, this.$actions, this.$info );
+		.append( this.valueInput.$element, this.$indicators, this.$actions, this.$info );
 	this.$more
 		.addClass( 've-ui-mwParameterPage-more' )
 		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$label, this.$field, this.$more );
+
+	if ( this.parameter.isRequired() ) {
+		this.requiredIndicator
+			.setIndicator( 'required' )
+			.setIndicatorTitle(
+				ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
+			);
+	}
 };
 
 /* Inheritance */
