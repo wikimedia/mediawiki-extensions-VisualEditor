@@ -112,9 +112,9 @@
     "visualeditor-parameter-search-no-unused": "Нема некоришћених параметара",
     "visualeditor-parameter-search-unknown": "Непознати параметар",
     "visualeditor-preference-betatempdisable": "Привремено онемогући VisualEditor док је у бета верзији",
-    "visualeditor-preference-core-description": "Укључује VisualEditor. Неће бити доступан на страницама за разговор и неким другим именским просторима.",
+    "visualeditor-preference-core-description": "Укључује VisualEditor. Неће бити доступан на страницама за разговор и још неким именским просторима.",
     "visualeditor-preference-core-label": "VisualEditor",
-    "visualeditor-preference-enable": "Укључује VisualEditor. Неће бити доступан на страницама за разговор и неким другим именским просторима.",
+    "visualeditor-preference-enable": "Укључује VisualEditor. Неће бити доступан на страницама за разговор и још неким именским просторима.",
     "visualeditor-preference-mwmath-label": "Уређивање формула у VisualEditor-у",
     "visualeditor-reference-input-placeholder": "Шта желите да референцирате?",
     "visualeditor-savedialog-identify-user": "Сада сте пријављени као [[User:$1|$1]]. Ваше измене ће бити повезане са овим налогом ако сачувате ову измену.",
@@ -124,6 +124,7 @@
     "visualeditor-savedialog-label-resolve-conflict": "Реши сукоб",
     "visualeditor-savedialog-label-restore": "Поврати страницу",
     "visualeditor-savedialog-label-review": "Прегледај своје измене",
+    "visualeditor-savedialog-label-review-good": "Назад на чување измена",
     "visualeditor-savedialog-label-save": "Сачувај страницу",
     "visualeditor-savedialog-label-warning": "Упозорење",
     "visualeditor-savedialog-title-conflict": "Сукоб",
@@ -136,7 +137,7 @@
     "visualeditor-toolbar-savedialog": "Сачувај страницу",
     "visualeditor-usernamespacepagelink": "Project:User namespace",
     "visualeditor-viewpage-savewarning": "Да ли сте сигурни да желите да се вратите на приказ без претходног чувања?",
-    "visualeditor-wikitext-warning": "Користите VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики текст]] овде не ради. Кликните на „{{int:visualeditor-ca-editsource}}“ да уредите страницу у вики-текст моду - несачуване измене ће бити изгубљене.",
+    "visualeditor-wikitext-warning": "Користите VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]] овде не ради. Кликните на „{{int:visualeditor-ca-editsource}}“ да уредите страницу у викитекст моду - несачуване измене ће бити изгубљене.",
     "visualeditor-wikitext-warning-link": "Help:Wiki markup",
-    "visualeditor-wikitext-warning-title": "Детектован вики текст"
+    "visualeditor-wikitext-warning-title": "Детектован викитекст"
 }

@@ -8,7 +8,9 @@
     "visualeditor-categories-tool": "Kategorije",
     "visualeditor-dialog-meta-languages-label": "Jezici",
     "visualeditor-languages-tool": "Jezici",
-    "visualeditor-preference-core-description": "Uključuje VisualEditor. Neće biti dostupan na stranicama za razgovor i nekim drugim imenskim prostorima.",
-    "visualeditor-preference-enable": "Uključuje VisualEditor. Neće biti dostupan na stranicama za razgovor i nekim drugim imenskim prostorima.",
-    "visualeditor-toolbar-cancel": "Otkaži"
+    "visualeditor-preference-core-description": "Uključuje VisualEditor. Neće biti dostupan na stranicama za razgovor i još nekim imenskim prostorima.",
+    "visualeditor-preference-enable": "Uključuje VisualEditor. Neće biti dostupan na stranicama za razgovor i još nekim imenskim prostorima.",
+    "visualeditor-savedialog-label-review-good": "Nazad na čuvanje izmena",
+    "visualeditor-toolbar-cancel": "Otkaži",
+    "visualeditor-wikitext-warning-title": "Detektovan vikitekst"
 }

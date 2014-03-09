@@ -14,6 +14,7 @@
     "visualeditor-dialog-media-title": "срѣдьствъ строи",
     "visualeditor-dialog-meta-categories-category": "катигорїꙗ",
     "visualeditor-dialog-meta-categories-data-label": "катигорїѩ",
+    "visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "съкрꙑтꙑ катигорїѩ",
     "visualeditor-dialog-meta-categories-input-newcategorylabel": "нова катигорїꙗ",
     "visualeditor-dialog-meta-categories-input-placeholder": "катигорїѩ доложєниѥ",
     "visualeditor-dialog-meta-categories-options": "строи",
@@ -27,6 +28,7 @@
     "visualeditor-dialog-meta-settings-label": "страницѧ строи",
     "visualeditor-dialog-meta-settings-newsectioneditlink-disable": "нѣтъ",
     "visualeditor-dialog-meta-settings-newsectioneditlink-force": "да",
+    "visualeditor-dialog-meta-settings-section": "страницѧ строи",
     "visualeditor-dialog-meta-settings-toc-disable": "никъгда",
     "visualeditor-dialog-meta-settings-toc-force": "вьсѥгда",
     "visualeditor-dialog-meta-title": "строи",
@@ -55,6 +57,7 @@
     "visualeditor-savedialog-label-warning": "НАРОЧИТО",
     "visualeditor-savedialog-title-nochanges": "мѣнъ нѣстъ",
     "visualeditor-savedialog-title-save": "твоѩ мѣнъ съхранѥниѥ",
+    "visualeditor-settings-tool": "страницѧ строи",
     "visualeditor-toolbar-savedialog": "съхранѥниѥ",
     "visualeditor-usernamespacepagelink": "Project:Польꙃєватєльскъ имєнъ просторъ"
 }

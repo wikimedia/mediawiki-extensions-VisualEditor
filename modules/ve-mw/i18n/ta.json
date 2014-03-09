@@ -8,8 +8,10 @@
             "கௌசிக் பிரபு"
         ]
     },
+    "tooltip-ca-createsource": "இந்த பக்கத்தின் மூல நிரலை உருவாக்கவும்",
     "visualeditor-beta-appendix": "பீட்டா",
     "visualeditor-beta-label": "பீட்டா",
+    "visualeditor-ca-createsource": "மூலத்தை உருவாக்கவும்",
     "visualeditor-ca-editsource": "மூலத்தைத் தொகு",
     "visualeditor-ca-editsource-section": "மூலத்தைத் தொகு",
     "visualeditor-dialog-beta-welcome-action-continue": "தொடரவும்",
@@ -22,6 +24,7 @@
     "visualeditor-dialog-meta-languages-code-label": "மொழிக் குறியீடு",
     "visualeditor-dialog-meta-languages-label": "மொழிகள்",
     "visualeditor-dialog-meta-languages-section": "மொழிகள்",
+    "visualeditor-dialog-meta-settings-index-force": "ஆம்",
     "visualeditor-dialog-meta-settings-label": "பக்க அமைப்புகள்",
     "visualeditor-dialog-reference-insert-button": "மேற்கோளை உள்ளிடு",
     "visualeditor-dialog-reference-insert-title": "மேற்கோளை உள்ளிடு",
@@ -42,6 +45,7 @@
     "visualeditor-formatdropdown-format-mw-heading4": "உப தலைப்பு 2",
     "visualeditor-formatdropdown-format-mw-heading5": "உப தலைப்பு 3",
     "visualeditor-formatdropdown-format-mw-heading6": "உப தலைப்பு 4",
+    "visualeditor-languageinspector-widget-changelang": "மொழியை கண்டுபிடி",
     "visualeditor-linkinspector-suggest-external-link": "வெளியிணைப்பு",
     "visualeditor-linkinspector-suggest-new-page": "புதுப் பக்கம்",
     "visualeditor-meta-tool": "விருப்பத்தேர்வுகள்",
