@@ -37,26 +37,24 @@ ve.ce.MWImageCaptionNode.static.tagName = 'figcaption';
 /* Methods */
 
 /**
- * TODO: Magnify should appear/disappear based on the changes/updates to the parent (switching to
- * and from thumb or frame).
+ * Reset the magnify button if the structure of the caption changed,
+ * so it is always rendered in the right place.
+ *
+ * The magnify icon will always be attached to the caption; we
+ * handle hiding and showing it per block image type in the CSS rules.
  */
 ve.ce.MWImageCaptionNode.prototype.onSplice = function () {
-	var parentType = this.model.getParent().getAttribute( 'type' );
-
-	if ( parentType === 'thumb' ) {
-		if ( this.$magnify ) {
-			this.$magnify.detach();
-		} else {
-			this.buildMagnify();
-		}
+	if ( this.$magnify ) {
+		this.$magnify.detach();
+	} else {
+		this.buildMagnify();
 	}
 
 	// Parent method
 	ve.ce.BranchNode.prototype.onSplice.apply( this, arguments );
 
-	if ( parentType === 'thumb' ) {
-		this.$magnify.prependTo( this.$element );
-	}
+	// Reset the magnify icon, prepend it to the caption
+	this.$magnify.prependTo( this.$element );
 };
 
 /** */

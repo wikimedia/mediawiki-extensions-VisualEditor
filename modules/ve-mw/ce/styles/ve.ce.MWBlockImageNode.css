@@ -41,6 +41,10 @@ figure[typeof*='mw:Image'].mw-halign-left {
 	float: left;
 }
 
+figure:not([typeof='mw:Image/Thumb']) figcaption .magnify {
+	display:none;
+}
+
 /* TODO: Merge with div.thumbinner styles */
 figure[typeof='mw:Image/Thumb'], figure[typeof='mw:Image/Frame'] {
 	overflow: hidden;
