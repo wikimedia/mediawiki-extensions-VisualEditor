@@ -376,6 +376,12 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		this.baseTimeStamp = data.basetimestamp;
 		this.startTimeStamp = data.starttimestamp;
 		this.revid = data.oldid;
+
+		// Populate link cache
+		if ( data.links ) {
+			ve.init.platform.linkCache.set( data.links );
+		}
+
 		// Everything worked, the page was loaded, continue as soon as the modules are loaded
 		this.modulesReady.done( ve.bind( this.onReady, this ) );
 	}

@@ -16,12 +16,21 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation( model, parentNode, config ) {
+	var annotation = this;
 	// Parent constructor
 	ve.ce.LinkAnnotation.call( this, model, parentNode, config );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwInternalLinkAnnotation' );
 	this.$element.attr( 'title', model.getAttribute( 'title' ) );
+
+	// Style based on link cache information
+	ve.init.platform.linkCache.get( model.getAttribute( 'lookupTitle' ) )
+		.done( function ( data ) {
+			if ( data.missing ) {
+				annotation.$element.addClass( 'new' );
+			}
+		} );
 };
 
 /* Inheritance */
