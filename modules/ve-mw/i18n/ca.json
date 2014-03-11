@@ -28,7 +28,7 @@
     "visualeditor-desc": "Editor visual per a MediaWiki",
     "visualeditor-descriptionpagelink": "Project:Editor visual",
     "visualeditor-dialog-beta-welcome-action-continue": "Continua",
-    "visualeditor-dialog-beta-welcome-content": "Aquesta és la nostra nova (més senzilla) forma d'editar. Encara està en fase beta, la qual cosa significa que hi podeu trobar problemes que hem de resoldre o parts de la pàgina que no es poden editar. Us animem que en reviseu els canvis, i ens informeu de qualsevol problema que trobeu quan utilitzeu l'editor visual (feu clic al botó «{{int:visualeditor-help-tool}}» per a enviar-nos els vostres comentaris). Encara podeu utilitzar l'editor de wikitext si cliqueu la pestanya «$1». Els canvis que no hàgiu desat es perdran.",
+    "visualeditor-dialog-beta-welcome-content": "Aquesta és la nostra nova, i més senzilla, forma de fer modificacions. Encara està en fase beta, la qual cosa significa que hi podeu trobar parts de la pàgina que no es poden modificar o problemes que hem de resoldre. Us animem que en reviseu els canvis i que ens informeu de qualsevol problema que trobeu quan utilitzeu l'editor visual (feu clic al botó «{{int:visualeditor-help-tool}}» per a enviar-nos els vostres comentaris). Encara podeu utilitzar l'editor de wikitext si cliqueu la pestanya «$1». Els canvis que no hàgiu desat es perdran.",
     "visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Benvingut|Benvinguda|Benvingut}} a l'editor visual",
     "visualeditor-dialog-media-alttext-section": "Text alternatiu",
     "visualeditor-dialog-media-content-section": "Peu d'imatge",
