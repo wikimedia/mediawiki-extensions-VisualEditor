@@ -153,6 +153,7 @@
     "visualeditor-linkinspector-suggest-new-page": "New page",
     "visualeditor-loadwarning": "Error loading data from server: $1. Would you like to retry?",
     "visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to retry?",
+    "visualeditor-timeout":"It looks like full editing is currently unavailable; would you like to edit in source mode instead?",
     "visualeditor-mainnamespacepagelink": "Project:Main namespace",
     "visualeditor-media-input-placeholder": "Search for media",
     "visualeditor-meta-tool": "Options",

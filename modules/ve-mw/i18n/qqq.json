@@ -158,6 +158,7 @@
     "visualeditor-linkinspector-suggest-new-page": "Label for a new page in the link inspector.\n{{Identical|New page}}",
     "visualeditor-loadwarning": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server, in English. e.g. \"parsoidserver-http-bad-status: 404\"",
     "visualeditor-loadwarning-token": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server.",
+    "visualeditor-timeout":"Text (JavaScript confirm()) shown when the editor fails to load properly due to a 504 Gateway Timeout error.",
     "visualeditor-mainnamespacepagelink": "Name of a page describing the main namespace (NS0) in this project.\n{{doc-important|Do not translate \"Project\"; it is automatically converted to the wiki's project namespace.}}",
     "visualeditor-media-input-placeholder": "Place holder text for media search input",
     "visualeditor-meta-tool": "Text of tool in the toolbar the lets users set categories, language links and other page settings.\n{{Identical|Options}}",
