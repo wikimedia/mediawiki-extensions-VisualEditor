@@ -16,8 +16,14 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( surface, config ) {
+	// Configuration initialization
+	config = ve.extendObject( { 'size': 'small' }, config );
+
 	// Parent constructor
 	ve.ui.MWDialog.call( this, surface, config );
+
+	// Properties
+	this.inserting = false;
 };
 
 /* Inheritance */
@@ -47,9 +53,7 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 		'$': this.$, 'scrollable': true, 'padded': true
 	} );
 	this.optionsFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-reference-options-section' ),
-		'icon': 'settings'
+		'$': this.$
 	} );
 
 	this.groupInput = new OO.ui.TextInputWidget( {
@@ -64,7 +68,6 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 
 	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']
 	} );
 
@@ -92,12 +95,18 @@ ve.ui.MWReferenceListDialog.prototype.setup = function ( data ) {
 	node = this.surface.getView().getFocusedNode();
 	if ( node instanceof ve.ce.MWReferenceListNode ) {
 		refGroup = node.getModel().getAttribute( 'refGroup' );
-
+		this.inserting = false;
 	} else {
 		refGroup = '';
+		this.inserting = true;
 	}
 
 	this.groupInput.setValue( refGroup );
+	this.applyButton.setLabel ( ve.msg (
+			!this.inserting ?
+				'visualeditor-dialog-action-apply' :
+				'visualeditor-dialog-referencelist-insert-button'
+	) );
 
 	/**
 	 * Focused node.

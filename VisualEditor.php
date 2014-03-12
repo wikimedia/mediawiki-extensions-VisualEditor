@@ -868,6 +868,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-reference-title',
 			'visualeditor-dialog-reference-useexisting-label',
 			'visualeditor-dialog-referencelist-title',
+			'visualeditor-dialog-referencelist-insert-button',
 			'visualeditor-dialogbutton-reference-tooltip',
 			'visualeditor-dialogbutton-referencelist-tooltip',
 			'visualeditor-reference-input-placeholder',
