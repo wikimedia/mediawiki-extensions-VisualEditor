@@ -386,15 +386,16 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 	// of having no type specified
 	if ( thumbOrFrameless ) {
 
-		// Set the placeholders to be wiki default
-		if ( this.mediaNode.getAttribute( 'width' ) > this.mediaNode.getAttribute( 'height' ) ) {
+		// Set the placeholders to be wiki default, but only if the image
+		// is not smaller. Limit on width only (according to wikitext default)
+		if ( this.mediaNode.getAttribute( 'width' ) > this.defaultThumbSize ) {
 			this.sizeWidget.setPlaceholderDimensions( {
 				'width': this.defaultThumbSize,
 			} );
 		} else {
-			this.sizeWidget.setPlaceholderDimensions( {
-				'height': this.defaultThumbSize
-			} );
+			// The image is smaller than wiki default. Make the default dimensions
+			// the image max size
+			this.sizeWidget.setPlaceholderDimensions( this.sizeWidget.getOriginalDimensions() );
 		}
 
 		// Enable the size select widget 'default' option
