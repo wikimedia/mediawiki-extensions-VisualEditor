@@ -415,6 +415,9 @@ ve.init.mw.Target.prototype.onNoticesReady = function () {
 
 	for ( i = 0, len = noticeHtmls.length; i < len; i++ ) {
 		el = $( '<div>' )
+			// Public class for usage by third parties to change styling of
+			// edit notices within VisualEditor (bug 43013).
+			.addClass( 'mw-ve-editNotice' )
 			.html( noticeHtmls[i] )
 			.get( 0 );
 
