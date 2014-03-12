@@ -44,6 +44,9 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
 	// (which would mess up with the expected order of Back/Forwards browsing)
 	this.actFromPopState = false;
+	this.popState = {
+		tag: 'visualeditor'
+	};
 	this.scrollTop = null;
 	this.currentUri = currentUri;
 	this.section = currentUri.query.vesection;
@@ -130,7 +133,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		} );
 		if ( window.history.replaceState ) {
 			delete currentUri.query.venotify;
-			window.history.replaceState( null, document.title, currentUri );
+			window.history.replaceState( this.popState, document.title, currentUri );
 		}
 	}
 
@@ -186,6 +189,16 @@ ve.init.mw.ViewPageTarget.compatibility = {
  */
 
 /* Methods */
+
+/**
+ * Verify that a PopStateEvent correlates to a state we created.
+ *
+ * @param {Mixed} popState From PopStateEvent#state
+ * @return {boolean}
+ */
+ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
+	return popState && popState.tag === 'visualeditor';
+};
 
 /**
  * @inheritdoc
@@ -1314,8 +1327,6 @@ ve.init.mw.ViewPageTarget.prototype.restoreDocumentTitle = function () {
 
 /**
  * Page modifications for switching to edit mode.
- *
- * @method
  */
 ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	var uri;
@@ -1341,15 +1352,13 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 		uri = this.currentUri;
 		uri.query.veaction = 'edit';
 
-		window.history.pushState( null, document.title, uri );
+		window.history.pushState( this.popState, document.title, uri );
 	}
 	this.actFromPopState = false;
 };
 
 /**
  * Page modifications for switching back to view mode.
- *
- * @method
  */
 ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	var uri;
@@ -1377,9 +1386,9 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 		// If there are other query parameters, set the url to the current url (with veaction removed).
 		// Otherwise use the canonical style view url (bug 42553).
 		if ( ve.getObjectValues( uri.query ).length ) {
-			window.history.pushState( null, document.title, uri );
+			window.history.pushState( this.popState, document.title, uri );
 		} else {
-			window.history.pushState( null, document.title, this.viewUri );
+			window.history.pushState( this.popState, document.title, this.viewUri );
 		}
 	}
 	this.actFromPopState = false;
@@ -1388,8 +1397,17 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 /**
  * @param {Event} e Native event object
  */
-ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function () {
-	var newUri = this.currentUri = new mw.Uri( document.location.href );
+ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
+	var newUri;
+
+	if ( !this.verifyPopState( e.state ) ) {
+		// Ignore popstate events fired for states not created by us
+		// This also filters out the initial fire in Chrome (bug 57901).
+		return;
+	}
+
+	newUri = this.currentUri = new mw.Uri( document.location.href );
+
 	if ( !this.active && newUri.query.veaction === 'edit' ) {
 		this.actFromPopState = true;
 		this.activate();
