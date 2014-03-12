@@ -25,6 +25,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( surface, config 
 	this.loaded = false;
 	this.preventReselection = false;
 	this.mode = null;
+	this.inserting = false;
 };
 
 /* Inheritance */
@@ -150,7 +151,7 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, partPage, reselect,
+	var i, len, page, name, names, params, partPage, reselect, single,
 		removePages = [];
 
 	if ( removed ) {
@@ -216,7 +217,19 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	} else if ( reselect ) {
 		this.setPageByName( reselect.getName() );
 	}
-	this.modeButton.setDisabled( !this.isSingleTemplateTransclusion( this.transclusion ) );
+	// Update widgets related to a transclusion being a single template or not
+	single = this.isSingleTemplateTransclusion();
+	this.modeButton.setDisabled( !single );
+	this.applyButton
+		.setLabel( ve.msg(
+			!this.inserting ? 'visualeditor-dialog-action-apply' : (
+				single ?
+					'visualeditor-dialog-transclusion-insert-template' :
+					'visualeditor-dialog-transclusion-insert-transclusion'
+			)
+		) )
+		.setDisabled( !this.isInsertable() );
+	this.updateTitle();
 };
 
 /**
@@ -256,10 +269,10 @@ ve.ui.MWTransclusionDialog.prototype.onRemoveParameter = function ( param ) {
 /**
  * Checks if transclusion only contains a single template or template placeholder.
  *
- * @returns {boolean} Transclusion only contains a single template or template placeholder.
+ * @returns {boolean} Transclusion only contains a single template or template placeholder
  */
-ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function ( transclusion ) {
-	var parts = transclusion && transclusion.getParts();
+ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () {
+	var parts = this.transclusion && this.transclusion.getParts();
 
 	return parts && parts.length === 1 && (
 		parts[0] instanceof ve.dm.MWTemplateModel ||
@@ -268,10 +281,25 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function ( t
 };
 
 /**
+ * Checks if transclusion is in a valid state for inserting into the document
+ *
+ * If the transclusion is empty or only contains a placeholder it will not be insertable.
+ *
+ * @returns {boolean} Transclusion can be inserted
+ */
+ve.ui.MWTransclusionDialog.prototype.isInsertable = function () {
+	var parts = this.transclusion && this.transclusion.getParts();
+
+	return !this.loading &&
+		parts.length &&
+		( parts.length > 1 || !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) );
+};
+
+/**
  * Get the label of a template or template placeholder.
  *
  * @param {ve.dm.MWTemplateModel|ve.dm.MWTemplatePlaceholderModel} part Part to check
- * @returns {string} Label of template or template placeholder.
+ * @returns {string} Label of template or template placeholder
  */
 ve.ui.MWTransclusionDialog.prototype.getTemplatePartLabel = function ( part ) {
 	return part instanceof ve.dm.MWTemplateModel ?
@@ -310,7 +338,7 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 		parts = this.transclusion.getParts();
 		part = parts.length && parts[0];
 		if ( mode === 'auto' ) {
-			mode = this.isSingleTemplateTransclusion( this.transclusion ) ? 'single' : 'multiple';
+			mode = this.isSingleTemplateTransclusion() ? 'single' : 'multiple';
 		}
 	}
 	if ( !modeCssClasses[mode] ) {
@@ -325,16 +353,25 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 	}
 	this.setSize( single ? 'medium' : 'large' );
 	this.bookletLayout.toggleOutline( !single );
-	this.setTitle(
-		single && part ?
-			this.getTemplatePartLabel( part ) :
-			this.constructor.static.title
-	);
 	this.modeButton.setLabel( ve.msg(
 		single ?
 			'visualeditor-dialog-transclusion-multiple-mode' :
 			'visualeditor-dialog-transclusion-single-mode'
 	) );
+	this.updateTitle();
+};
+
+/**
+ * Update the dialog title.
+ */
+ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
+	var parts = this.transclusion && this.transclusion.getParts();
+
+	this.setTitle(
+		this.mode === 'single' && parts && parts.length && parts[0] ?
+			this.getTemplatePartLabel( parts[0] ) :
+			this.constructor.static.title
+	);
 };
 
 /**
@@ -370,7 +407,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	// Properties
 	this.applyButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
 		'flags': ['primary']
 	} );
 	this.modeButton = new OO.ui.ButtonWidget( { '$': this.$ } );
@@ -434,17 +470,21 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	this.node = this.surface.getView().getFocusedNode();
 	this.transclusion = new ve.dm.MWTransclusionModel();
 	this.loaded = false;
+	this.inserting = !( this.node instanceof ve.ce.MWTransclusionNode );
 
 	// Events
 	this.transclusion.connect( this, { 'replace': 'onReplacePart' } );
 
 	// Initialization
-	if ( this.node instanceof ve.ce.MWTransclusionNode ) {
-		promise = this.transclusion
-			.load( ve.copy( this.node.getModel().getAttribute( 'mw' ) ) );
-	} else {
+	this.applyButton
+		.setDisabled( true )
+		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-loading' ) );
+	if ( this.inserting ) {
 		promise = this.transclusion
 			.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusion ) );
+	} else {
+		promise = this.transclusion
+			.load( ve.copy( this.node.getModel().getAttribute( 'mw' ) ) );
 	}
 	promise.always( ve.bind( function () {
 		this.loaded = true;
