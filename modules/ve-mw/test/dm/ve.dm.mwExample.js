@@ -289,12 +289,12 @@ ve.dm.mwExample.mwNowikiHtml = '<body><p>Foo<span typeof="mw:Nowiki">[[Bar]]</sp
 
 ve.dm.mwExample.withMeta = [
 	{
-		'type': 'alienMeta',
+		'type': 'comment',
 		'attributes': {
-			'domElements': $( '<!-- No content conversion -->' ).toArray()
+			'text': ' No content conversion '
 		}
 	},
-	{ 'type': '/alienMeta' },
+	{ 'type': '/comment' },
 	{
 		'type': 'mwAlienMeta',
 		'attributes': {
@@ -341,12 +341,12 @@ ve.dm.mwExample.withMeta = [
 	'B',
 	'a',
 	{
-		'type': 'alienMeta',
+		'type': 'comment',
 		'attributes': {
-			'domElements': $( '<!-- inline -->' ).toArray()
+			'text': ' inline '
 		}
 	},
-	{ 'type': '/alienMeta' },
+	{ 'type': '/comment' },
 	'z',
 	{ 'type': '/paragraph' },
 	{
@@ -357,12 +357,12 @@ ve.dm.mwExample.withMeta = [
 	},
 	{ 'type': '/mwAlienMeta' },
 	{
-		'type': 'alienMeta',
+		'type': 'comment',
 		'attributes': {
-			'domElements': $( '<!--barbaz-->' ).toArray()
+			'text': 'barbaz'
 		}
 	},
-	{ 'type': '/alienMeta' },
+	{ 'type': '/comment' },
 	{
 		'type': 'mwCategory',
 		'attributes': {
@@ -482,9 +482,9 @@ ve.dm.mwExample.withMetaMetaData = [
 			}
 		},
 		{
-			'type': 'alienMeta',
+			'type': 'comment',
 			'attributes': {
-				'domElements': $( '<!--barbaz-->' ).toArray()
+				'text': 'barbaz'
 			}
 		},
 		{
@@ -1440,12 +1440,12 @@ ve.dm.mwExample.domToDataCases = {
 			'F', 'o', 'o',
 			{ 'type': '/paragraph' },
 			{
-				'type': 'alienMeta',
+				'type': 'comment',
 				'attributes': {
-					'domElements': $( '<!-- bar -->' ).toArray()
+					'text': ' bar '
 				}
 			},
-			{ 'type': '/alienMeta' },
+			{ 'type': '/comment' },
 			{ 'type': '/internalItem' },
 			{ 'type': '/internalList' }
 		]
