@@ -923,6 +923,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-transclusion-insert-transclusion',
 			'visualeditor-dialog-transclusion-loading',
 			'visualeditor-dialog-transclusion-multiple-mode',
+			'visualeditor-dialog-transclusion-no-template-description',
 			'visualeditor-dialog-transclusion-options',
 			'visualeditor-dialog-transclusion-placeholder',
 			'visualeditor-dialog-transclusion-remove-content',
