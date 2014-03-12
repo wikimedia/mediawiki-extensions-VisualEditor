@@ -35,7 +35,7 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 			originalConfig = setMwConfig( caseItem.mwConfig );
 		}
 
-		ve.test.utils.runGetModelFromDomTest( assert, caseItem );
+		ve.test.utils.runGetModelFromDomTest( assert, caseItem, msg );
 
 		if ( caseItem.mwConfig ) {
 			setMwConfig( originalConfig );
@@ -56,7 +56,7 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 			originalConfig = setMwConfig( caseItem.mwConfig );
 		}
 
-		ve.test.utils.runGetDomFromModelTest( assert, caseItem );
+		ve.test.utils.runGetDomFromModelTest( assert, caseItem, msg );
 
 		if ( caseItem.mwConfig ) {
 			setMwConfig( originalConfig );
