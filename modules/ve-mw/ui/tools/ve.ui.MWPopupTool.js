@@ -29,18 +29,18 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 	OO.ui.PopupTool.call( this, toolGroup, config );
 
 	// Properties
-	this.$items = this.$( '<div>' );
+	this.$items = this.$( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
 
 	// Initialization
 	for ( key in items ) {
-		this.$items.append( items[key] );
-	}
-	this.$items
-		.addClass( 've-ui-mwNoticesPopupTool-items' )
-		.children()
+		$( items[key] )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )
 			.find( 'a' )
 				.attr( 'target', '_blank' );
+
+		this.$items.append( items[key] );
+	}
+
 	this.popup.$body.append( this.$items );
 
 	// Automatically show/hide
