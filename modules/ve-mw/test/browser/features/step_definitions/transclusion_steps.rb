@@ -26,18 +26,11 @@ When(/^I click Transclusion$/) do
 end
 
 When(/^I enter (.+) in the parameter box$/) do |param_value|
-  on(VisualEditorPage) do |page|
-    page.parameter_box_element.when_present.send_keys(param_value)
-  end
+  on(VisualEditorPage).parameter_box_element.when_present.send_keys(param_value)
 end
 
 When(/^I enter (.+) into transclusion Content box$/) do |content|
-  on(VisualEditorPage) do |page|
-    page.wait_until(10) do
-      page.transclusion_textfield_element.exists?
-    end
-    page.transclusion_textfield_element.send_keys(content)
-  end
+  on(VisualEditorPage).transclusion_textfield_element.when_present.send_keys(content)
 end
 
 Then(/^I see a list of template suggestions$/) do
@@ -46,10 +39,6 @@ end
 
 Then(/^I click the Add template button$/) do
   on(VisualEditorPage).add_template_element.when_present.click
-end
-
-Then(/^I should not be able to see parameter named (.+)$/) do |param_name|
-  on(VisualEditorPage).template_list_item_element.should_not be_visible
 end
 
 Then(/^I see an input text area$/) do
