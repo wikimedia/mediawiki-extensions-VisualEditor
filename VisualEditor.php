@@ -1125,7 +1125,7 @@ $wgVisualEditorParsoidTimeout = 100;
 $wgVisualEditorSerializationCacheTimeout = 3600;
 
 // Namespaces to enable VisualEditor in
-$wgVisualEditorNamespaces = $wgContentNamespaces;
+$wgVisualEditorNamespaces = array_merge( $wgContentNamespaces, array( NS_USER ) );
 
 // List of skins VisualEditor integration supports
 $wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva' );
