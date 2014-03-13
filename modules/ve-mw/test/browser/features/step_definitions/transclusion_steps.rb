@@ -50,5 +50,5 @@ Then(/^I should see the Add parameter link$/) do
 end
 
 Then(/^I should see the Apply changes button$/) do
-  on(VisualEditorPage).apply_changes_element.when_present.should be_visible
+  on(VisualEditorPage).insert_template_element.when_present.should be_visible
 end

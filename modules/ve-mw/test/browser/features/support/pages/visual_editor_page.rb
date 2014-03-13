@@ -63,7 +63,7 @@ class VisualEditorPage
   in_iframe(:index => 1) do |frame|
     span(:add_parameter, text: "Add parameter", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
-    span(:apply_changes, text: "Apply changes", frame: frame)
+    span(:insert_template, text: "Insert template", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
     text_area(:describe_change, index: 0, frame: frame)
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
