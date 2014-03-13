@@ -109,7 +109,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		'showChanges': 'onShowChanges',
 		'showChangesError': 'onShowChangesError',
 		'noChanges': 'onNoChanges',
-		'serializeComplete': 'onSerializeComplete',
 		'serializeError': 'onSerializeError',
 		'sanityCheckComplete': 'updateToolbarSaveButtonState'
 	} );
@@ -594,20 +593,6 @@ ve.init.mw.ViewPageTarget.prototype.onShowChanges = function ( diffHtml ) {
 };
 
 /**
- * Handle Serialize event.
- *
- * @method
- * @param {string} wikitext
- */
-ve.init.mw.ViewPageTarget.prototype.onSerializeComplete = function ( wikitext ) {
-	// Invalidate the viewer wikitext on next change
-	this.surface.getModel().getDocument().once( 'transact',
-		ve.bind( this.saveDialog.clearDiff, this.saveDialog )
-	);
-	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
-};
-
-/**
  * Handle failed show changes event.
  *
  * @method
@@ -780,11 +765,25 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
 			// Has no callback, handled via target.onShowChanges
 			this.showChanges( this.docToSave );
 		} else {
-			this.serialize( this.docToSave, ve.bind( this.onSerialize, this ) );
+			this.serialize( this.docToSave, ve.bind( this.onSaveDialogReviewComplete, this ) );
 		}
 	} else {
 		this.saveDialog.swapPanel( 'review' );
 	}
+};
+
+/**
+ * Handle completed serialize request for diff views for new page creations.
+ *
+ * @method
+ * @param {string} wikitext
+ */
+ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
+	// Invalidate the viewer wikitext on next change
+	this.surface.getModel().getDocument().once( 'transact',
+		ve.bind( this.saveDialog.clearDiff, this.saveDialog )
+	);
+	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
 };
 
 /**
