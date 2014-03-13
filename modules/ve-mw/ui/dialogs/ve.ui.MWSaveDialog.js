@@ -102,6 +102,7 @@ ve.ui.MWSaveDialog.prototype.setSanityCheck = function ( verified ) {
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	var currentEditSummaryWikitext,
+		size = 'medium',
 		dialog = this,
 		panelObj = dialog[panel + 'Panel'];
 
@@ -120,7 +121,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	switch ( panel ) {
 		case 'save':
-			this.setSize( 'medium' );
 			if ( !this.sanityCheckVerified ) {
 				this.showMessage( 'dirtywarning', mw.msg( 'visualeditor-savedialog-warning-dirty' ) );
 			}
@@ -139,14 +139,13 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			} );
 			break;
 		case 'conflict':
-			this.setSize( 'medium' );
 			this.saveButton.setDisabled( true ).$element.hide();
 			this.reviewButton.$element.hide();
 			this.reviewGoodButton.$element.hide();
 			this.resolveConflictButton.$element.show();
 			break;
 		case 'review':
-			this.setSize( 'large' );
+			size = 'large';
 			currentEditSummaryWikitext = this.editSummaryInput.getValue();
 			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 				if ( this.editSummaryXhr ) {
@@ -172,7 +171,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			}
 			/* falls through */
 		case 'nochanges':
-			this.setSize( 'medium' );
 			this.saveButton.$element.hide();
 			this.reviewButton.$element.hide();
 			this.reviewGoodButton.$element.show();
@@ -180,6 +178,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			break;
 	}
 
+	// Set the size
+	this.setSize( size );
 	// Show the target panel
 	this.panel.setItem( panelObj );
 
