@@ -315,10 +315,19 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 	// The response.status check here is to catch aborts triggered by navigation away from the page
 	if (
 		status !== 'abort' &&
-		( !jqXHR || jqXHR.status !== 0 ) &&
+		( !jqXHR || ( jqXHR.status !== 0 && jqXHR.status !== 504 ) ) &&
 		confirm( ve.msg( 'visualeditor-loadwarning', status ) )
 	) {
 		this.load();
+	} else if (
+		jqXHR && jqXHR.status === 504 &&
+		confirm( ve.msg( 'visualeditor-timeout' ) )
+	) {
+		if ( 'veaction' in this.currentUri.query ) {
+			delete this.currentUri.query.veaction;
+		}
+		this.currentUri.query.action = 'edit';
+		window.location.href = this.currentUri.toString();
 	} else {
 		this.activating = false;
 		// User interface changes

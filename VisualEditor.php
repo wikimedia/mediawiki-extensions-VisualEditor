@@ -204,6 +204,7 @@ $wgResourceModules += array(
 			// Messages needed by VE in init phase only (rest go below)
 			'visualeditor-loadwarning',
 			'visualeditor-loadwarning-token',
+			'visualeditor-timeout',
 			'visualeditor-notification-created',
 			'visualeditor-notification-restored',
 			'visualeditor-notification-saved',
