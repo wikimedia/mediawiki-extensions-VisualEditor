@@ -1,4 +1,5 @@
 <?php
+// The messages are in modules/ve-mw/i18n and modules/ve-wmf/i18n
 $messages = array();
 $GLOBALS['wgHooks']['LocalisationCacheRecache'][] = function ( $cache, $code, &$cachedData ) {
 	global $wgMessagesDirs;
