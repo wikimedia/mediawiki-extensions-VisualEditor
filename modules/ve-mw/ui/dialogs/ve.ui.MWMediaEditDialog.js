@@ -353,6 +353,10 @@ ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
 		this.sizeSelectWidget.selectItem(
 			this.sizeSelectWidget.getItemFromData(
 				thumbOrFrameless &&
+				// Sanity check just in case before the comparison
+				this.sizeWidget.getCurrentDimensions() &&
+				// Make sure there are original dimensions set up
+				this.sizeWidget.getOriginalDimensions() &&
 				OO.compare(
 					this.sizeWidget.getCurrentDimensions(),
 					this.sizeWidget.getOriginalDimensions()
@@ -378,24 +382,24 @@ ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
 ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
-	var selectedType = item ? item.getData() : '',
+	var originalDimensions = this.sizeWidget.getOriginalDimensions(),
+		selectedType = item ? item.getData() : '',
 		thumbOrFrameless = selectedType === 'thumb' || selectedType === 'frameless';
 
 	// As per wikitext docs, both 'thumb' and 'frameless' have
 	// explicitly limited size, as opposed to the similar case
 	// of having no type specified
 	if ( thumbOrFrameless ) {
-
 		// Set the placeholders to be wiki default, but only if the image
 		// is not smaller. Limit on width only (according to wikitext default)
-		if ( this.mediaNode.getAttribute( 'width' ) > this.defaultThumbSize ) {
+		if ( originalDimensions.width > this.defaultThumbSize ) {
 			this.sizeWidget.setPlaceholderDimensions( {
 				'width': this.defaultThumbSize,
 			} );
 		} else {
 			// The image is smaller than wiki default. Make the default dimensions
 			// the image max size
-			this.sizeWidget.setPlaceholderDimensions( this.sizeWidget.getOriginalDimensions() );
+			this.sizeWidget.setPlaceholderDimensions( originalDimensions );
 		}
 
 		// Enable the size select widget 'default' option
@@ -408,9 +412,7 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 		// Technically, this is the 'default' of non thumb/frameless
 		// images, as that is the size that they render in when
 		// no size is specified.
-		this.sizeWidget.setPlaceholderDimensions(
-			this.sizeWidget.getOriginalDimensions()
-		);
+		this.sizeWidget.setPlaceholderDimensions( originalDimensions );
 
 		// Don't allow for 'default' choice
 		this.sizeSelectWidget.getItemFromData( 'default' ).setDisabled( true );
@@ -443,6 +445,10 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 		// thumbnail or frameless
 		if (
 			thumbOrFrameless &&
+			// Sanity check just in case before the comparison
+			this.sizeWidget.getCurrentDimensions() &&
+			// Make sure there are original dimensions set up
+			this.sizeWidget.getOriginalDimensions() &&
 			OO.compare(
 				this.sizeWidget.getCurrentDimensions(),
 				this.sizeWidget.getOriginalDimensions()
