@@ -49,6 +49,6 @@ Then(/^I should see the Add parameter link$/) do
   on(VisualEditorPage).add_parameter_element.should be_visible
 end
 
-Then(/^I should see the Apply changes button$/) do
+Then(/^I should see the Insert template button$/) do
   on(VisualEditorPage).insert_template_element.when_present.should be_visible
 end
