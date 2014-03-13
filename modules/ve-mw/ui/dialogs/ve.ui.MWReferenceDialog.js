@@ -16,6 +16,9 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( surface, config ) {
+	// Configuration initialization
+	config = ve.extendObject( { 'size': 'medium' }, config );
+
 	// Parent constructor
 	ve.ui.MWDialog.call( this, surface, config );
 
