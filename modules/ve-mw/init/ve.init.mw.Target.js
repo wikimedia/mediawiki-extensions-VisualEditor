@@ -1153,6 +1153,17 @@ ve.init.mw.Target.prototype.getEditNotices = function () {
 // FIXME: split out view specific functionality, emit to subclass
 
 /**
+ * Create a surface.
+ *
+ * @method
+ * @param {ve.dm.Document} dmDoc Document model
+ * @returns {ve.ui.Surface}
+ */
+ve.init.mw.Target.prototype.createSurface = function ( dmDoc ) {
+	return new ve.ui.Surface( dmDoc );
+};
+
+/**
  * Switch to editing mode.
  *
  * @method
@@ -1166,7 +1177,7 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 		var dmDoc = ve.dm.converter.getModelFromDom( doc );
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
-			target.surface = new ve.ui.Surface( dmDoc );
+			target.surface = target.createSurface( dmDoc );
 			target.surface.$element.addClass( 've-init-mw-viewPageTarget-surface' );
 			setTimeout( function () {
 				// Initialize surface
