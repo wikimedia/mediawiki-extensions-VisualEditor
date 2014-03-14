@@ -187,6 +187,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.base',
 			'ext.visualEditor.mediawiki',
+			'ext.visualEditor.core.desktop',
 			'jquery.placeholder',
 			'mediawiki.feedback',
 			'mediawiki.jqueryMsg',
@@ -216,9 +217,13 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'modules/ve-mw/init/targets/ve.init.mw.MobileViewTarget.js',
 		),
+		'styles' => array(
+			'modules/ve-mw/init/styles/ve.init.mw.MobileViewTarget.css',
+		),
 		'dependencies' => array(
 			'ext.visualEditor.base',
 			'ext.visualEditor.mediawiki',
+			'ext.visualEditor.core.mobile',
 		),
 		'targets' => array( 'mobile' ),
 	),
@@ -411,6 +416,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/ve.ui.js',
 
 			'lib/ve/modules/ve/ui/ve.ui.Surface.js',
+			'lib/ve/modules/ve/ui/ve.ui.DesktopSurface.js',
 			'lib/ve/modules/ve/ui/ve.ui.Context.js',
 			'lib/ve/modules/ve/ui/ve.ui.Dialog.js',
 			'lib/ve/modules/ve/ui/ve.ui.Inspector.js',
@@ -459,7 +465,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/styles/ve.ce.Node.css',
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
 			// ui
-			'lib/ve/modules/ve/ui/styles/ve.ui.Context.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Dialog.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Surface.css',
@@ -527,6 +532,34 @@ $wgResourceModules += array(
 			'visualeditor-version-label',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	'ext.visualEditor.core.desktop' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'lib/ve/modules/ve/ui/ve.ui.DesktopSurface.js',
+			'lib/ve/modules/ve/ui/ve.ui.DesktopContext.js',
+		),
+		'styles' => array(
+			'lib/ve/modules/ve/ui/styles/ve.ui.DesktopContext.css',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.core',
+		),
+		'targets' => array( 'desktop' ),
+	),
+
+	'ext.visualEditor.core.mobile' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'lib/ve/modules/ve/ui/ve.ui.MobileSurface.js',
+			'lib/ve/modules/ve/ui/ve.ui.MobileContext.js',
+		),
+		'styles' => array(
+			'lib/ve/modules/ve/ui/styles/ve.ui.MobileContext.css',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.core',
+		),
+		'targets' => array( 'mobile' ),
 	),
 
 	'ext.visualEditor.mwcore' => $wgVisualEditorResourceTemplate + array(

@@ -40,12 +40,14 @@ OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 
 /* Static Properties */
 ve.init.mw.MobileViewTarget.static.toolbarGroups = [
-	{ 'include': [ 'bold', 'italic' ] }
+	{ 'include': [ 'bold', 'italic' ] },
+	{ 'include': [ 'link' ] }
 ];
 
 ve.init.mw.MobileViewTarget.static.surfaceCommands = [
 	'bold',
-	'italic'
+	'italic',
+	'link'
 ];
 
 ve.init.mw.MobileViewTarget.static.name = 'mobile';
@@ -58,6 +60,17 @@ ve.init.mw.MobileViewTarget.static.name = 'mobile';
 ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
 	this.$document[0].focus();
 	this.restoreEditSection();
+};
+
+/**
+ * Create a surface.
+ *
+ * @method
+ * @param {ve.dm.Document} dmDoc Document model
+ * @returns {ve.ui.MobileSurface}
+ */
+ve.init.mw.Target.prototype.createSurface = function ( dmDoc ) {
+	return new ve.ui.MobileSurface( dmDoc );
 };
 
 /**

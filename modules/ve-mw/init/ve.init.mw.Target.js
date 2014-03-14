@@ -1160,7 +1160,7 @@ ve.init.mw.Target.prototype.getEditNotices = function () {
  * @returns {ve.ui.Surface}
  */
 ve.init.mw.Target.prototype.createSurface = function ( dmDoc ) {
-	return new ve.ui.Surface( dmDoc );
+	return new ve.ui.DesktopSurface( dmDoc );
 };
 
 /**
