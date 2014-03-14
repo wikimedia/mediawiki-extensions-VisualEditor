@@ -27,6 +27,30 @@ OO.inheritClass( ve.ce.MWHeadingNode, ve.ce.HeadingNode );
 
 ve.ce.MWHeadingNode.static.name = 'mwHeading';
 
+/* Methods */
+
+ve.ce.MWHeadingNode.prototype.onSetup = function () {
+	// Parent method
+	ve.ce.HeadingNode.prototype.onSetup.call( this );
+
+	// Make reference to the surface
+	this.surface = this.root.getSurface().getSurface();
+	this.rebuildToc();
+};
+
+ve.ce.MWHeadingNode.prototype.onTeardown = function () {
+	// Parent method
+	ve.ce.HeadingNode.prototype.onTeardown.call( this );
+
+	this.rebuildToc();
+};
+
+ve.ce.MWHeadingNode.prototype.rebuildToc = function () {
+	if ( this.surface.mwTocWidget ) {
+		this.surface.mwTocWidget.rebuild();
+	}
+};
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWHeadingNode );
