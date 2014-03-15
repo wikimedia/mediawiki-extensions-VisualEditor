@@ -195,7 +195,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		'include': [ { 'group': 'textStyle' }, 'clear' ],
 		'promote': [ 'bold', 'italic' ],
-		'demote': [ 'strikethrough', 'code',  'underline', 'clear' ]
+		'demote': [ 'strikethrough', 'code', 'underline', 'clear' ]
 	},
 	// Link
 	{ 'include': [ 'link' ] },
