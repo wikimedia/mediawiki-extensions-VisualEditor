@@ -146,6 +146,7 @@
     "visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Пренасочувачка страница|Пренасочувачки страници}}",
     "visualeditor-loadwarning": "Грешка при вчитување на податоците од опслужувачот: $1. Дали сакате да пробате одново?",
     "visualeditor-loadwarning-token": "Грешка при вчитувањето на шифрата на уредувањето од опслужувачот: $1. Дали би сакале да пробате пак?",
+    "visualeditor-timeout": "Засега не можете да вршите уредување во полн режим. Дали би сакале да уредувате во изворен режим?",
     "visualeditor-mainnamespacepagelink": "Project:Главен именски простор",
     "visualeditor-media-input-placeholder": "Пребарајте слики/снимки",
     "visualeditor-meta-tool": "Поставки",
