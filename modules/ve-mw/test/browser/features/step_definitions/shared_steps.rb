@@ -39,7 +39,7 @@ When(/^I edit the page with (.+)$/) do |input_string|
   on(VisualEditorPage) do |page|
     page.edit_ve_element.when_present.click
     # Attempt to dismiss "beta warning" pop-up multiple times, since SauceLabs sometimes fails on the first attempt to dismiss.
-    try = 10
+    try = 3
     try.times do
       #This begin/rescue clause dismisses the VE warning message when it exists, and does not fail when it does not exist
       begin
