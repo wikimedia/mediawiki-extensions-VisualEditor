@@ -180,7 +180,7 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 				'attributes': {
 					'type': 'thumb',
 					'align': 'default',
-					//'href': info.descriptionurl,
+					// https://bugzilla.wikimedia.org/show_bug.cgi?id=61560#c4
 					'href': './' + this.item.title,
 					'src': info.thumburl,
 					'width': thumbwidth,
