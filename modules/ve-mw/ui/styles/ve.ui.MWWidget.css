@@ -380,6 +380,11 @@
 	clear: both;
 }
 
+/* ve.ui.MWTitleInputWidget */
+.ve-ui-mwTitleInputWidget {
+	width:30em;
+}
+
 /* ve.ui.MWTocWidget */
 
 .ve-ui-mwTocWidget {

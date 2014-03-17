@@ -46,6 +46,9 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	this.defaultSortInput = new OO.ui.TextInputWidget( {
 		'$': this.$, 'placeholder': this.fallbackDefaultSortKey
 	} );
+
+	this.defaultSortInput.$element.addClass( 've-ui-mwCategoriesPage-defaultsort' );
+
 	this.defaultSort = new OO.ui.FieldLayout(
 		this.defaultSortInput,
 		{

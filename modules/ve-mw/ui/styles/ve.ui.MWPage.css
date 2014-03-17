@@ -5,6 +5,12 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
  
+/* ve.ui.MWCategoriesPage */
+
+.ve-ui-mwCategoriesPage-defaultsort {
+	width:30em;
+}
+ 
 /* ve.ui.MWParameterPage */
 
 .ve-ui-mwParameterPage.oo-ui-pageLayout {
