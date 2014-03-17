@@ -4,7 +4,10 @@ When(/^I click the Link button$/) do
 end
 
 Given(/^I can see the Link User Inteface$/) do
- on(VisualEditorPage).ve_link_ui.when_present.should match Regexp.escape("Hyperlink")
+  on(VisualEditorPage) do |page|
+    page.ve_link_ui_element.when_present
+    page.ve_link_ui.should match Regexp.escape("Hyperlink")
+  end
 end
 
 When(/^I click the blue text$/) do
