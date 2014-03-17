@@ -4,7 +4,8 @@
             "Amikeco",
             "Babanwalia",
             "Bouron",
-            "Nasir8891"
+            "Nasir8891",
+            "Aalam"
         ]
     },
     "tooltip-ca-createsource": "এই পাতার সোর্স কোড তৈরী করুন",
@@ -36,5 +37,6 @@
     "visualeditor-dialog-meta-languages-code-label": "ভাষার কোড",
     "visualeditor-dialog-meta-languages-label": "ভাষাসমূহ",
     "visualeditor-dialog-meta-languages-link-label": "পাতার লিংকসমূহ",
-    "visualeditor-dialog-meta-languages-section": "ভাষাসমূহ"
+    "visualeditor-dialog-meta-languages-section": "ভাষাসমূহ",
+    "visualeditor-dialog-transclusion-loading": "...ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 }
