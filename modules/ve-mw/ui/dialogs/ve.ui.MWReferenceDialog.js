@@ -46,6 +46,7 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 	/* {
 		'type': 'menu',
 		'indicator': 'down',
+		'title': OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
 		'include': [ { 'group': 'format' } ],
 		'promote': [ 'paragraph' ],
 		'demote': [ 'preformatted', 'heading1' ]
@@ -55,9 +56,10 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'type': 'list',
 		'icon': 'text-style',
 		'indicator': 'down',
+		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		'include': [ { 'group': 'textStyle' }, 'clear' ],
 		'promote': [ 'bold', 'italic' ],
-		'demote': [ 'strikethrough', 'code',  'underline', 'clear' ]
+		'demote': [ 'strikethrough', 'code', 'underline', 'clear' ]
 	},
 	// Link
 	{ 'include': [ 'link' ] },
@@ -72,8 +74,10 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'indicator': 'down',
 		'include': '*',
 		'exclude': [
-			{ 'group': 'format' }, { 'group': 'structure' },
-			'reference', 'referenceList',
+			{ 'group': 'format' },
+			{ 'group': 'structure' },
+			'reference',
+			'referenceList',
 			'gallery'
 		],
 		'promote': [ 'reference', 'mediaInsert' ],
