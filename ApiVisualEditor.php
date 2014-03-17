@@ -330,16 +330,6 @@ class ApiVisualEditor extends ApiBase {
 				if ( $parsed && $parsed['restoring'] ) {
 					$wgVisualEditorEditNotices[] = 'editingold';
 				}
-				// Page protected from editing
-				if ( $page->getNamespace() != NS_MEDIAWIKI && $page->isProtected( 'edit' ) ) {
-					# Is the title semi-protected?
-					if ( $page->isSemiProtected() ) {
-						$wgVisualEditorEditNotices[] = 'semiprotectedpagewarning';
-					} else {
-						# Then it must be protected based on static groups (regular)
-						$wgVisualEditorEditNotices[] = 'protectedpagewarning';
-					}
-				}
 				// Creating new page
 				if ( !$page->exists() ) {
 					$wgVisualEditorEditNotices[] = $user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon';
@@ -352,6 +342,33 @@ class ApiVisualEditor extends ApiBase {
 					foreach ( $wgVisualEditorEditNotices as $key ) {
 						$notices[] = wfMessage( $key )->parseAsBlock();
 					}
+				}
+				// Page protected from editing
+				if ( $page->getNamespace() != NS_MEDIAWIKI && $page->isProtected( 'edit' ) ) {
+					# Is the title semi-protected?
+					if ( $page->isSemiProtected() ) {
+						$noticeMsg = 'semiprotectedpagewarning';
+					} else {
+						# Then it must be protected based on static groups (regular)
+						$noticeMsg = 'protectedpagewarning';
+					}
+					$lp = new LogPager(
+						new LogEventsList( $this->getContext() ),
+						'protect',
+						'',
+						$page->getPrefixedDBkey()
+					);
+					$lp->mLimit = 1;
+
+					$notices[] = wfMessage( $noticeMsg )->parseAsBlock() . $lp->getBody() . Linker::link(
+						SpecialPage::getTitleFor( 'Log' ),
+						$this->msg( 'log-fulllog' )->escaped(),
+						array(),
+						array(
+							'page' => $page->getPrefixedDBkey(),
+							'type' => 'protect'
+						)
+					);
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
