@@ -46,7 +46,7 @@ ve.ui.MWPageSettingsDialogTool.static.icon = 'settings';
 ve.ui.MWPageSettingsDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-settings-tool' );
 ve.ui.MWPageSettingsDialogTool.static.dialog = 'meta';
-ve.ui.MWPageSettingsDialogTool.static.config = { 'page': 'settings' };
+ve.ui.MWPageSettingsDialogTool.static.dialogData = { 'page': 'settings' };
 ve.ui.MWPageSettingsDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWPageSettingsDialogTool );
 
@@ -69,7 +69,7 @@ ve.ui.MWAdvancedPageSettingsDialogTool.static.icon = 'advanced';
 ve.ui.MWAdvancedPageSettingsDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-advancedsettings-tool' );
 ve.ui.MWAdvancedPageSettingsDialogTool.static.dialog = 'meta';
-ve.ui.MWAdvancedPageSettingsDialogTool.static.config = { 'page': 'advancedSettings' };
+ve.ui.MWAdvancedPageSettingsDialogTool.static.dialogData = { 'page': 'advancedSettings' };
 ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWAdvancedPageSettingsDialogTool );
 
@@ -92,7 +92,7 @@ ve.ui.MWCategoriesDialogTool.static.icon = 'tag';
 ve.ui.MWCategoriesDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-categories-tool' );
 ve.ui.MWCategoriesDialogTool.static.dialog = 'meta';
-ve.ui.MWCategoriesDialogTool.static.config = { 'page': 'categories' };
+ve.ui.MWCategoriesDialogTool.static.dialogData = { 'page': 'categories' };
 ve.ui.MWCategoriesDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWCategoriesDialogTool );
 
@@ -115,6 +115,6 @@ ve.ui.MWLanguagesDialogTool.static.icon = 'language';
 ve.ui.MWLanguagesDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-languages-tool' );
 ve.ui.MWLanguagesDialogTool.static.dialog = 'meta';
-ve.ui.MWLanguagesDialogTool.static.config = { 'page': 'languages' };
+ve.ui.MWLanguagesDialogTool.static.dialogData = { 'page': 'languages' };
 ve.ui.MWLanguagesDialogTool.static.autoAdd = false;
 ve.ui.toolFactory.register( ve.ui.MWLanguagesDialogTool );
