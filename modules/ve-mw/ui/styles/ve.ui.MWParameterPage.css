@@ -1,17 +1,9 @@
 /*!
- * VisualEditor MediaWiki UserInterface Inspector styles.
+ * VisualEditor MediaWiki UserInterface MWParameterPage styles.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
- 
-/* ve.ui.MWCategoriesPage */
-
-.ve-ui-mwCategoriesPage-defaultsort {
-	width:30em;
-}
- 
-/* ve.ui.MWParameterPage */
 
 .ve-ui-mwParameterPage.oo-ui-pageLayout {
 	padding-top: 0;
@@ -112,30 +104,4 @@
 
 .ve-ui-mwParameterPage:last-child .ve-ui-mwParameterPage-more {
 	display: block;
-}
-
-/* ve.ui.TemplatePage */
-
-.ve-ui-mwTemplatePage-more {
-	display: none;
-	margin: 2.25em 0 0.5em 0;
-}
-
-.ve-ui-mwTemplatePage:last-child .ve-ui-mwTemplatePage-more {
-	display: block;
-}
-
-.ve-ui-mwTemplatePage-description-missing {
-	font-style: italic;
-}
-
-/* ve.ui.MWTransclusionContentPage */
-
-.ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget {
-	display: block;
-	width: 100%;
-}
-
-.ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget textarea {
-	height: 2.5em;
 }
