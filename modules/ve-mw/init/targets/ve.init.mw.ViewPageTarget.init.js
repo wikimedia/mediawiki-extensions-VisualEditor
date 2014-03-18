@@ -182,7 +182,7 @@
 					$caVeEdit = $( caVeEdit );
 					$caVeEditLink = $caVeEdit.find( 'a' );
 				}
-			} else {
+			} else if ( $caEdit.length && $caVeEdit.length ) {
 				// Make the state of the page consistent with the config if needed
 				/*jshint bitwise:false */
 				if ( reverseTabOrder ^ conf.tabPosition === 'before' ) {
