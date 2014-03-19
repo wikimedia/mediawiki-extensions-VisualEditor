@@ -372,6 +372,9 @@
 			conf.namespaces
 		) !== -1 &&
 
+		// Not on pages which are outputs of the Page Translation feature
+		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
+
 		// Only for pages with a wikitext content model
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
