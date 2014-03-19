@@ -351,6 +351,8 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 		'history': 'updateToolbarSaveButtonState'
 	} );
 	this.surface.setPasteRules( this.constructor.static.pasteRules );
+
+	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
 		this.surface.mwTocWidget = new ve.ui.MWTocWidget( this.surface );
 	}
@@ -990,6 +992,9 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	}
 	this.tearDownToolbar();
 	this.restoreDocumentTitle();
+	if ( this.surface.mwTocWidget ) {
+		this.mwTocWidget.teardown();
+	}
 	if ( this.saveDialog ) {
 		// If we got as far as setting up the save dialog, tear it down
 		this.saveDialog.close();
