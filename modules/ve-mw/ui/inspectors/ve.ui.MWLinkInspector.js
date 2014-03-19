@@ -78,7 +78,9 @@ ve.ui.MWLinkInspector.prototype.getAnnotationFromFragment = function ( fragment 
 			'type': 'link/mwInternal',
 			'attributes': {
 				'title': target,
-				'normalizedTitle': ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target )
+				// bug 62816: we really need a builder for this stuff
+				'normalizedTitle': ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
+				'lookupTitle': ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
 			}
 		} );
 	} else {

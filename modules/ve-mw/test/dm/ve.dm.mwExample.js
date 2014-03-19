@@ -168,6 +168,7 @@ ve.dm.mwExample.MWInternalLink.absoluteData = {
 		'title': 'Foo/Bar',
 		'origTitle': 'Foo/Bar',
 		'normalizedTitle': 'Foo/Bar',
+		'lookupTitle': 'Foo/Bar',
 		'hrefPrefix': ''
 	},
 	'htmlAttributes': [
@@ -178,6 +179,33 @@ ve.dm.mwExample.MWInternalLink.absoluteData = {
 			},
 			'computed': {
 				'href': ve.dm.mwExample.MWInternalLink.absoluteHref
+			}
+		}
+	]
+};
+
+ve.dm.mwExample.MWInternalSectionLink = {
+	'absoluteHref': new mw.Uri( '/wiki/Foo#Bar' ).toString()
+};
+
+ve.dm.mwExample.MWInternalSectionLink.absoluteOpen = '<a rel="mw:WikiLink" href="' + ve.dm.mwExample.MWInternalSectionLink.absoluteHref + '">';
+ve.dm.mwExample.MWInternalSectionLink.absoluteData = {
+	'type': 'link/mwInternal',
+	'attributes': {
+		'title': 'Foo#Bar',
+		'origTitle': 'Foo#Bar',
+		'normalizedTitle': 'Foo#Bar',
+		'lookupTitle': 'Foo',
+		'hrefPrefix': ''
+	},
+	'htmlAttributes': [
+		{
+			'values': {
+				'href': ve.dm.mwExample.MWInternalSectionLink.absoluteHref,
+				'rel': 'mw:WikiLink'
+			},
+			'computed': {
+				'href': ve.dm.mwExample.MWInternalSectionLink.absoluteHref
 			}
 		}
 	]
@@ -1296,6 +1324,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Bar',
 						'origTitle': 'Bar',
 						'normalizedTitle': 'Bar',
+						'lookupTitle': 'Bar',
 						'hrefPrefix': './'
 					},
 					'htmlAttributes': [
@@ -1319,6 +1348,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Bar',
 						'origTitle': 'Bar',
 						'normalizedTitle': 'Bar',
+						'lookupTitle': 'Bar',
 						'hrefPrefix': './'
 					},
 					'htmlAttributes': [
@@ -1342,6 +1372,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Bar',
 						'origTitle': 'Bar',
 						'normalizedTitle': 'Bar',
+						'lookupTitle': 'Bar',
 						'hrefPrefix': './'
 					},
 					'htmlAttributes': [
@@ -1463,6 +1494,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Foo/Bar',
 						'origTitle': 'Foo/Bar',
 						'normalizedTitle': 'Foo/Bar',
+						'lookupTitle': 'Foo/Bar',
 						'hrefPrefix': './../../../'
 					},
 					'htmlAttributes': [
@@ -1486,6 +1518,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Foo/Bar',
 						'origTitle': 'Foo/Bar',
 						'normalizedTitle': 'Foo/Bar',
+						'lookupTitle': 'Foo/Bar',
 						'hrefPrefix': './../../../'
 					},
 					'htmlAttributes': [
@@ -1509,6 +1542,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Foo/Bar',
 						'origTitle': 'Foo/Bar',
 						'normalizedTitle': 'Foo/Bar',
+						'lookupTitle': 'Foo/Bar',
 						'hrefPrefix': './../../../'
 					},
 					'htmlAttributes': [
@@ -1550,6 +1584,31 @@ ve.dm.mwExample.domToDataCases = {
 			{ 'type': '/internalList' }
 		],
 		'normalizedBody': '<p><a rel="mw:WikiLink" href="Foo/Bar">Foo</a></p>',
+		'mwConfig': {
+			'wgArticlePath': '/wiki/$1'
+		}
+	},
+	'internal link with absolute path and section': {
+		'body': '<p>' + ve.dm.mwExample.MWInternalSectionLink.absoluteOpen + 'Foo</a></p>',
+		'data': [
+			{ 'type': 'paragraph' },
+			[
+				'F',
+				[ ve.dm.mwExample.MWInternalSectionLink.absoluteData ]
+			],
+			[
+				'o',
+				[ ve.dm.mwExample.MWInternalSectionLink.absoluteData ]
+			],
+			[
+				'o',
+				[ ve.dm.mwExample.MWInternalSectionLink.absoluteData ]
+			],
+			{ 'type': '/paragraph' },
+			{ 'type': 'internalList' },
+			{ 'type': '/internalList' }
+		],
+		'normalizedBody': '<p><a rel="mw:WikiLink" href="Foo#Bar">Foo</a></p>',
 		'mwConfig': {
 			'wgArticlePath': '/wiki/$1'
 		}
@@ -1892,6 +1951,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Bar',
 						'origTitle': 'Bar',
 						'normalizedTitle': 'Bar',
+						'lookupTitle': 'Bar',
 						'hrefPrefix': './'
 					},
 					'htmlAttributes': [
@@ -1916,6 +1976,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Bar',
 						'origTitle': 'Bar',
 						'normalizedTitle': 'Bar',
+						'lookupTitle': 'Bar',
 						'hrefPrefix': './'
 					},
 					'htmlAttributes': [
@@ -1940,6 +2001,7 @@ ve.dm.mwExample.domToDataCases = {
 						'title': 'Bar',
 						'origTitle': 'Bar',
 						'normalizedTitle': 'Bar',
+						'lookupTitle': 'Bar',
 						'hrefPrefix': './'
 					},
 					'htmlAttributes': [
