@@ -22,6 +22,7 @@
     "visualeditor-desc": "Vizualni editor za MediaWiki",
     "visualeditor-descriptionpagelink": "Project:VisualEditor",
     "visualeditor-dialog-beta-welcome-action-continue": "Nastavi",
+    "visualeditor-dialog-beta-welcome-content": "Ovo je novi, jednostavniji način uređivanja. Još uvijek je u razvoju, tako da možda postoje dijelovi članka koje nećete moći uređivati, ili ćete naći probleme koje treba popraviti. Provjerite svoje izmjene u članku prije sačuvanja. Cijenimo svaki Vaš prijedlog u vezi korištenja VisualEditora. Prijedlog možete napisati klikom na dugme '{{int:visualeditor-help-tool}}'. Članak možete uređivati i na stari način pritiskom na karticu \"$1\". Sve nesačuvane izmjene biće izgubljene.",
     "visualeditor-dialog-media-content-section": "Opis slike",
     "visualeditor-dialog-media-insert-button": "Ubacite medijsku datoteku",
     "visualeditor-dialog-media-insert-title": "Ubacite medijsku datoteku",

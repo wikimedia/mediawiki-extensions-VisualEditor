@@ -89,7 +89,7 @@
     "visualeditor-dialog-meta-settings-newsectioneditlink-disable": "خیر",
     "visualeditor-dialog-meta-settings-newsectioneditlink-force": "بله",
     "visualeditor-dialog-meta-settings-newsectioneditlink-label": "نمایش یک برگه در این صفحه برای افزودن یک بخش جدید",
-    "visualeditor-dialog-meta-settings-noeditsection-label": "غیرفعال کردن ویرایش لینک‌ها کنار هر سرفصل در این صفحه.",
+    "visualeditor-dialog-meta-settings-noeditsection-label": "غیرفعال کردن ویرایش پیوندها کنار هر سرفصل در این صفحه.",
     "visualeditor-dialog-meta-settings-redirect-label": "تغییرجهت این صفحه به",
     "visualeditor-dialog-meta-settings-redirect-placeholder": "صفحه مورد نظر برای تغییرجهت",
     "visualeditor-dialog-meta-settings-redirect-staticlabel": "جلوگیری از این تغییر مسیر به روز رسانی شده هنگامی که صفحه مورد نظر منتقل شده‌است.",
