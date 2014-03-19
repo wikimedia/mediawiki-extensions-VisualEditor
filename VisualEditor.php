@@ -634,6 +634,7 @@ $wgResourceModules += array(
 			'visualeditor-mweditmodesource-title',
 			'visualeditor-mweditmodesource-warning',
 			'visualeditor-pagemenu-tooltip',
+			'visualeditor-pagetranslationwarning',
 			'visualeditor-savedialog-error-badtoken',
 			'visualeditor-savedialog-label-create',
 			'visualeditor-savedialog-label-error',

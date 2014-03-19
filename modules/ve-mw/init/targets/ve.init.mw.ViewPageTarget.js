@@ -113,6 +113,11 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		'sanityCheckComplete': 'updateToolbarSaveButtonState'
 	} );
 
+	if ( mw.config.get( 'wgTranslatePageTranslation' ) === 'source' ) {
+		// Warn users if they're on a source of the Page Translation feature
+		this.localNoticeMessages.push( 'visualeditor-pagetranslationwarning' );
+	}
+
 	if ( !browserWhitelisted ) {
 		// Show warning in unknown browsers that pass the support test
 		// Continue at own risk.
