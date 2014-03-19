@@ -146,15 +146,10 @@ ve.ui.MWTocWidget.prototype.hideOrShow = function () {
  * Rebuilds on both teardown and setup of a node, so rebuild is debounced
  */
 ve.ui.MWTocWidget.prototype.rebuild = ve.debounce( function () {
-	var item;
 	// Only rebuild when initialized
 	if ( this.surface.mwTocWidget.initialized ) {
 		this.$tempTopics.append( this.topics.$group.children().clone() );
-		for ( item in this.items ) {
-			this.items[item].remove();
-			delete this.items[item];
-		}
-		this.items = {};
+		this.teardownItems();
 		// Build after transactions
 		setTimeout( ve.bind( function () {
 			this.build();
@@ -162,6 +157,26 @@ ve.ui.MWTocWidget.prototype.rebuild = ve.debounce( function () {
 		}, this ), 0 );
 	}
 }, 0 );
+
+/**
+ * Teardown all of the TOC items
+ */
+ve.ui.MWTocWidget.prototype.teardownItems = function () {
+	var item;
+	for ( item in this.items ) {
+		this.items[item].remove();
+		delete this.items[item];
+	}
+	this.items = {};
+};
+
+/**
+ * Teardown the widget and remove it from the dom
+ */
+ve.ui.MWTocWidget.prototype.teardown = function () {
+	this.teardownItems();
+	this.$element.remove();
+};
 
 /**
  * Build TOC from mwHeading dm nodes
