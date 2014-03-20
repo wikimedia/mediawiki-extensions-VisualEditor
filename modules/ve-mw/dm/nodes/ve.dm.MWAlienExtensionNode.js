@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel MediaWiki math node.
+ * DataModel MediaWiki alien extension node.
  *
  * @class
  * @extends ve.dm.MWExtensionNode

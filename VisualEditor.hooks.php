@@ -293,21 +293,6 @@ class VisualEditorHooks {
 		);
 */
 
-		$preferences['visualeditor-enable-mwmath'] = array(
-			'version' => '1.0',
-			'label-message' => 'visualeditor-preference-mwmath-label',
-			'desc-message' => 'visualeditor-preference-mwmath-description',
-			'screenshot' => $wgExtensionAssetsPath .
-				"/VisualEditor/betafeatures-icon-VisualEditor-formulae-$dir.svg",
-			'info-message' => 'visualeditor-preference-mwmath-info-link',
-			'discussion-message' => 'visualeditor-preference-mwmath-discussion-link',
-			'requirements' => array(
-				'betafeatures' => array(
-					'visualeditor-enable',
-				),
-			),
-		);
-
 /* Disabling Beta Features option for hieroglyphics for now
 		$preferences['visualeditor-enable-mwhiero'] = array(
 			'version' => '1.0',
