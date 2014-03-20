@@ -315,7 +315,7 @@ ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
 	this.panels.setItem( this.editPanel );
 	this.useReference( ref );
 	this.search.buildIndex();
-	this.selectButton.setDisabled( !this.search.getResults().getItems().length );
+	this.selectButton.setDisabled( this.search.isIndexEmpty() );
 };
 
 /**
