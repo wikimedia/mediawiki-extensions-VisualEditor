@@ -148,6 +148,15 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 };
 
 /**
+ * Check whether the index built by #buildIndex is empty. This will return true if
+ * #buildIndex hasn't been called yet.
+ * @returns {boolean} Index is empty
+ */
+ve.ui.MWReferenceSearchWidget.prototype.isIndexEmpty = function () {
+	return this.index.length === 0;
+};
+
+/**
  * Handle media query response events.
  *
  * @method
