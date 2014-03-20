@@ -191,6 +191,7 @@ class ApiVisualEditor extends ApiBase {
 		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
 		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
 			$result['parse']['categorieshtml']['*'] : false;
+		$links = isset( $result['parse']['links'] ) ? $result['parse']['links'] : array();
 		$revision = Revision::newFromId( $result['parse']['revid'] );
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
 
@@ -381,6 +382,25 @@ class ApiVisualEditor extends ApiBase {
 				$states = array( 'minor' => false, 'watch' => false );
 				$checkboxes = $ep->getCheckboxes( $tabindex, $states );
 
+				// HACK: Find out which red links are on the page
+				// We do the lookup for the current version. This might not be entirely complete
+				// if we're loading an oldid, but it'll probably be close enough, and LinkCache
+				// will automatically request any additional data it needs.
+				$links = array();
+				$wikipage = WikiPage::factory( $page );
+				$popts = $wikipage->makeParserOptions( 'canonical' );
+				$cached = ParserCache::singleton()->get( $article, $popts, true );
+				if ( $cached ) {
+					foreach ( $cached->getLinks() as $ns => $dbks ) {
+						foreach ( $dbks as $dbk => $id ) {
+							$links[ Title::makeTitle( $ns, $dbk )->getPrefixedText() ] = array(
+								'missing' => $id == 0
+							);
+						}
+					}
+				}
+				// On parser cache miss, just don't bother populating red link data
+
 				if ( $parsed === false ) {
 					$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 				} else {
@@ -389,6 +409,7 @@ class ApiVisualEditor extends ApiBase {
 							'result' => 'success',
 							'notices' => $notices,
 							'checkboxes' => $checkboxes,
+							'links' => $links,
 						),
 						$parsed['result']
 					);
