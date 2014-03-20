@@ -321,6 +321,9 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		params = this.getParameters();
 
 	for ( name in params ) {
+		if ( name === '' ) {
+			continue;
+		}
 		template.params[params[name].getOriginalName()] = { 'wt': params[name].getValue() };
 	}
 
@@ -336,6 +339,9 @@ ve.dm.MWTemplateModel.prototype.getWikitext = function () {
 		params = this.getParameters();
 
 	for ( param in params ) {
+		if ( param === '' ) {
+			continue;
+		}
 		wikitext += '|' + param + '=' +
 			ve.dm.MWTransclusionNode.static.escapeParameter( params[param].getValue() );
 	}
