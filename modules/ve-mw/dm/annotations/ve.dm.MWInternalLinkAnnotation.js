@@ -40,7 +40,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
 	}
 
-	var matches, normalizedTitle,
+	var matches, normalizedTitle, lookupTitle,
 		doc = converter.getTargetHtmlDocument(),
 		// Protocol relative base
 		relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).toString().replace( /^https?:/, '' ),
@@ -61,7 +61,8 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 	/*jshint regexp:false */
 	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
 	// Normalize capitalisation and underscores
-	normalizedTitle = ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( matches[2] );
+	normalizedTitle = this.normalizeTitle( matches[2] );
+	lookupTitle = this.getLookupTitle( matches[2] );
 
 	return {
 		'type': this.name,
@@ -69,6 +70,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 			'hrefPrefix': matches[1],
 			'title': decodeURIComponent( matches[2] ).replace( /_/g, ' ' ),
 			'normalizedTitle': normalizedTitle,
+			'lookupTitle': lookupTitle,
 			'origTitle': matches[2]
 		}
 	};
@@ -98,17 +100,29 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 };
 
 /**
- * Normalize title for comparison purposes
+ * Normalize title for comparison purposes.
  * @param {string} title Original title
  * @returns {string} Normalized title, or the original if it is invalid
  */
 ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
 	var title = mw.Title.newFromText( original );
-	if ( title ) {
-		return title.getPrefixedText() + ( title.getFragment() !== null ? '#' + title.getFragment() : '' );
-	} else {
+	if ( !title ) {
 		return original;
 	}
+	return title.getPrefixedText() + ( title.getFragment() !== null ? '#' + title.getFragment() : '' );
+};
+
+/**
+ * Normalize title for lookup (search suggestion, existence) purposes.
+ * @param {string} title Original title
+ * @returns {string} Normalized title, or the original if it is invalid
+ */
+ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
+	var title = mw.Title.newFromText( original );
+	if ( !title ) {
+		return original;
+	}
+	return title.getPrefixedText();
 };
 
 /* Methods */
