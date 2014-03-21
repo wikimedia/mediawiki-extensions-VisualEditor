@@ -26,7 +26,10 @@ OO.inheritClass( ve.ui.MWEditModeTool, OO.ui.Tool );
 /* Static Properties */
 
 ve.ui.MWEditModeTool.static.group = 'editMode';
-ve.ui.MWEditModeTool.static.autoAdd = false;
+
+ve.ui.MWEditModeTool.static.autoAddToCatchall = false;
+
+ve.ui.MWEditModeTool.static.autoAddToGroup = false;
 
 /* Methods */
 

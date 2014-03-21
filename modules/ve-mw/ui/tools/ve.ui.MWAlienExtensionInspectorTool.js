@@ -25,5 +25,6 @@ ve.ui.MWAlienExtensionInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwalienextensioninspector-title' );
 ve.ui.MWAlienExtensionInspectorTool.static.inspector = 'alienExtension';
 ve.ui.MWAlienExtensionInspectorTool.static.modelClasses = [ ve.dm.MWAlienExtensionNode ];
-ve.ui.MWAlienExtensionInspectorTool.static.autoAdd = false;
+ve.ui.MWAlienExtensionInspectorTool.static.autoAddToCatchall = false;
+ve.ui.MWAlienExtensionInspectorTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWAlienExtensionInspectorTool );

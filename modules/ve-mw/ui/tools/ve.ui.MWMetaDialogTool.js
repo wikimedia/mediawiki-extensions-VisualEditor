@@ -24,7 +24,8 @@ ve.ui.MWMetaDialogTool.static.icon = 'window';
 ve.ui.MWMetaDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-meta-tool' );
 ve.ui.MWMetaDialogTool.static.dialog = 'meta';
-ve.ui.MWMetaDialogTool.static.autoAdd = false;
+ve.ui.MWMetaDialogTool.static.autoAddToCatchall = false;
+ve.ui.MWMetaDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWMetaDialogTool );
 
 /**
@@ -47,7 +48,8 @@ ve.ui.MWPageSettingsDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-settings-tool' );
 ve.ui.MWPageSettingsDialogTool.static.dialog = 'meta';
 ve.ui.MWPageSettingsDialogTool.static.dialogData = { 'page': 'settings' };
-ve.ui.MWPageSettingsDialogTool.static.autoAdd = false;
+ve.ui.MWPageSettingsDialogTool.static.autoAddToCatchall = false;
+ve.ui.MWPageSettingsDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWPageSettingsDialogTool );
 
 /**
@@ -70,7 +72,8 @@ ve.ui.MWAdvancedPageSettingsDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-advancedsettings-tool' );
 ve.ui.MWAdvancedPageSettingsDialogTool.static.dialog = 'meta';
 ve.ui.MWAdvancedPageSettingsDialogTool.static.dialogData = { 'page': 'advancedSettings' };
-ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAdd = false;
+ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAddToCatchall = false;
+ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWAdvancedPageSettingsDialogTool );
 
 /**
@@ -93,7 +96,8 @@ ve.ui.MWCategoriesDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-categories-tool' );
 ve.ui.MWCategoriesDialogTool.static.dialog = 'meta';
 ve.ui.MWCategoriesDialogTool.static.dialogData = { 'page': 'categories' };
-ve.ui.MWCategoriesDialogTool.static.autoAdd = false;
+ve.ui.MWCategoriesDialogTool.static.autoAddToCatchall = false;
+ve.ui.MWCategoriesDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWCategoriesDialogTool );
 
 /**
@@ -116,5 +120,6 @@ ve.ui.MWLanguagesDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-languages-tool' );
 ve.ui.MWLanguagesDialogTool.static.dialog = 'meta';
 ve.ui.MWLanguagesDialogTool.static.dialogData = { 'page': 'languages' };
-ve.ui.MWLanguagesDialogTool.static.autoAdd = false;
+ve.ui.MWLanguagesDialogTool.static.autoAddToCatchall = false;
+ve.ui.MWLanguagesDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWLanguagesDialogTool );
