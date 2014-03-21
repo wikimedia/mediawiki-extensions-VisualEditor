@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * ContentEditable MediaWiki internal link annotation.
  *
@@ -31,6 +33,19 @@ ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation( model, p
 				annotation.$element.addClass( 'new' );
 			}
 		} );
+
+	// HACK: Override href in case hrefPrefix isn't set
+	// This is a workaround for bug 58314 until such time as Parsoid gets rid of
+	// ../-prefixed hrefs.
+	if ( this.model.getAttribute( 'hrefPrefix' ) === undefined ) {
+		this.$element.attr( 'href', ve.resolveUrl(
+			// Repeat '../' wgPageName.split( '/' ).length - 1 times
+			// (= the number of slashes in wgPageName)
+			new Array( mw.config.get( 'wgPageName' ).split( '/' ).length ).join( '../' ) +
+				this.model.getHref(),
+			this.getModelHtmlDocument()
+		) );
+	}
 };
 
 /* Inheritance */
