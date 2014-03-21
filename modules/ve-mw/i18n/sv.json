@@ -169,6 +169,7 @@
     "visualeditor-notification-restored": "\"$1\" har återställts.",
     "visualeditor-notification-saved": "Dina ändringar i \"$1\" har sparats.",
     "visualeditor-pagemenu-tooltip": "Sidalternativ",
+    "visualeditor-pagetranslationwarning": "Du redigerar en översättbar sida. Stöd för att redigera detta i VisualEditor stöds inte ännu officiellt.",
     "visualeditor-parameter-input-placeholder": "Parameternamn",
     "visualeditor-parameter-search-no-unused": "Inga oanvända parametrar",
     "visualeditor-parameter-search-unknown": "Okänd parameter",

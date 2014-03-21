@@ -57,6 +57,7 @@
     "visualeditor-timeout": "It luiks like ful eeditin is onavailable the nou; wid ye like tae eedit in soorce mode instead?",
     "visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Caption fer eimage",
     "visualeditor-pagemenu-tooltip": "Page opties",
+    "visualeditor-pagetranslationwarning": "Ye'r eeditin aen owersetable page. Eeditin thir in VeesualEediter isna yet offeeciallie supported.",
     "visualeditor-toolbar-format-tooltip": "Format paragraph",
     "visualeditor-toolbar-style-tooltip": "Style tex"
 }

@@ -22,7 +22,7 @@
         ]
     },
     "tooltip-ca-createsource": "Создать страницу в редакторе исходного текста",
-    "tooltip-ca-editsource": "Арынның үндезин сөзүглелин эдер",
+    "tooltip-ca-editsource": "Править исходный текст этой страницы",
     "tooltip-ca-ve-edit": "Редактировать данную страницу с помощью визуального редактора",
     "visualeditor-advancedsettings-tool": "Дополнительные настройки",
     "visualeditor-beta-appendix": "бета-версия",
@@ -214,11 +214,11 @@
     "visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",
     "visualeditor-settings-tool": "Параметры страницы",
     "visualeditor-toolbar-cancel": "Отмена",
-    "visualeditor-toolbar-format-tooltip": "Форматировать абзац",
+    "visualeditor-toolbar-format-tooltip": "Формат абзаца",
     "visualeditor-toolbar-savedialog": "Записать страницу",
     "visualeditor-toolbar-style-tooltip": "Стиль текста",
     "visualeditor-usernamespacepagelink": "Project:Личное пространство",
-    "visualeditor-viewpage-savewarning": "Вы точно хотите вернуться в режим просмотра, не сохранив изменения?",
+    "visualeditor-viewpage-savewarning": "Вы уверены, что хотите вернуться в режим просмотра, не сохранив изменения?",
     "visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. Нажмите «{{MediaWiki:visualeditor-ca-editsource}}» для редактирования страницы в режиме вики-разметки. Несохранённые изменения будут потеряны.",
     "visualeditor-wikitext-warning-link": "Help:Вики-разметка",
     "visualeditor-wikitext-warning-title": "Обнаружена вики-разметка"

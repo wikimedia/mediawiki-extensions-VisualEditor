@@ -170,6 +170,7 @@
     "visualeditor-notification-restored": "「$1」已經還原。",
     "visualeditor-notification-saved": "你對「$1」的變更已經儲存。",
     "visualeditor-pagemenu-tooltip": "頁面選項",
+    "visualeditor-pagetranslationwarning": "您當前正在編輯可翻譯頁面。可視化編輯器於此類頁面之編輯尚不完全支援。",
     "visualeditor-parameter-input-placeholder": "參數名稱",
     "visualeditor-parameter-search-no-unused": "沒有未使用的參數",
     "visualeditor-parameter-search-unknown": "未知的參數",
