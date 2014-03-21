@@ -385,9 +385,11 @@ ve.ui.MWMediaEditDialog.prototype.onSizeWidgetChange = function () {
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
 ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
-	var originalDimensions = this.sizeWidget.getOriginalDimensions(),
+	var originalDimensions,
 		selectedType = item ? item.getData() : '',
 		thumbOrFrameless = selectedType === 'thumb' || selectedType === 'frameless';
+
+	originalDimensions = this.sizeWidget.getOriginalDimensions();
 
 	// As per wikitext docs, both 'thumb' and 'frameless' have
 	// explicitly limited size, as opposed to the similar case
@@ -395,14 +397,14 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 	if ( thumbOrFrameless ) {
 		// Set the placeholders to be wiki default, but only if the image
 		// is not smaller. Limit on width only (according to wikitext default)
-		if ( originalDimensions.width > this.defaultThumbSize ) {
-			this.sizeWidget.setPlaceholderDimensions( {
-				'width': this.defaultThumbSize,
-			} );
-		} else {
+		if ( originalDimensions && originalDimensions.width < this.defaultThumbSize ) {
 			// The image is smaller than wiki default. Make the default dimensions
 			// the image max size
 			this.sizeWidget.setPlaceholderDimensions( originalDimensions );
+		} else {
+			this.sizeWidget.setPlaceholderDimensions( {
+				'width': this.defaultThumbSize,
+			} );
 		}
 
 		// Enable the size select widget 'default' option
@@ -414,8 +416,10 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 		// Set placeholders to be image original dimensions
 		// Technically, this is the 'default' of non thumb/frameless
 		// images, as that is the size that they render in when
-		// no size is specified.
-		this.sizeWidget.setPlaceholderDimensions( originalDimensions );
+		// no size is specified. Only do that if original dimensions exist
+		if ( originalDimensions && originalDimensions.width && originalDimensions.height ) {
+			this.sizeWidget.setPlaceholderDimensions( originalDimensions );
+		}
 
 		// Don't allow for 'default' choice
 		this.sizeSelectWidget.getItemFromData( 'default' ).setDisabled( true );
@@ -451,10 +455,10 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 			// Sanity check just in case before the comparison
 			this.sizeWidget.getCurrentDimensions() &&
 			// Make sure there are original dimensions set up
-			this.sizeWidget.getOriginalDimensions() &&
+			originalDimensions &&
 			OO.compare(
 				this.sizeWidget.getCurrentDimensions(),
-				this.sizeWidget.getOriginalDimensions()
+				originalDimensions
 			)
 		) {
 			this.sizeSelectWidget.selectItem(
@@ -518,6 +522,7 @@ ve.ui.MWMediaEditDialog.prototype.onSizeSelectWidgetSelect = function ( item ) {
 	} else if ( currentItem === 'full' ) {
 		if (
 			this.typeInput.getSelectedItem() &&
+			this.sizeWidget.getPlaceholderDimensions() &&
 			(
 				this.typeInput.getSelectedItem().getData() === 'frame' ||
 				this.typeInput.getSelectedItem().getData() === 'none'
@@ -529,10 +534,14 @@ ve.ui.MWMediaEditDialog.prototype.onSizeSelectWidgetSelect = function ( item ) {
 				'height': 0
 			} );
 		} else {
-			// Fill in the values of the original dimensions
-			this.sizeWidget.setCurrentDimensions(
-				this.sizeWidget.getOriginalDimensions()
-			);
+			// The 'full' button should be disabled if originalDimensions
+			// aren't set, so this is just sanity check
+			if ( this.sizeWidget.getOriginalDimensions() ) {
+				// Fill in the values of the original dimensions
+				this.sizeWidget.setCurrentDimensions(
+					this.sizeWidget.getOriginalDimensions()
+				);
+			}
 		}
 	} else {
 		if ( this.sizeWidget.isEmpty() ) {
@@ -607,7 +616,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 				dialog.sizeWidget.setOriginalDimensions( mediaNodeView.getOriginalDimensions() );
 				dialog.sizeWidget.setEnforcedMax( false );
 				// Original dimensions available, enable the button
-				this.sizeSelectWidget.getItemFromData( 'full' ).setDisabled( false );
+				dialog.sizeSelectWidget.getItemFromData( 'full' ).setDisabled( false );
 				if ( mediaNodeView.getMaxDimensions() ) {
 					dialog.sizeWidget.setMaxDimensions( mediaNodeView.getMaxDimensions() );
 					if ( dialog.mediaNode.getAttribute( 'type' ) === 'thumb' ) {
@@ -633,6 +642,8 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		// If there are original dimensions, enable that choice
 		if ( this.sizeWidget.getOriginalDimensions() ) {
 			this.sizeSelectWidget.getItemFromData( 'full' ).setDisabled( false );
+		} else {
+			this.sizeSelectWidget.getItemFromData( 'full' ).setDisabled( true );
 		}
 	}
 
