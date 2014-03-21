@@ -993,7 +993,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	this.tearDownToolbar();
 	this.restoreDocumentTitle();
 	if ( this.surface.mwTocWidget ) {
-		this.mwTocWidget.teardown();
+		this.surface.mwTocWidget.teardown();
 	}
 	if ( this.saveDialog ) {
 		// If we got as far as setting up the save dialog, tear it down
