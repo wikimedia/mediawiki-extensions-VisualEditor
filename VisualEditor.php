@@ -607,7 +607,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js',
-			'modules/ve-mw/ui/tools/ve.ui.MWDialogTool.js',
+			'modules/ve-mw/ui/tools/ve.ui.MWCommandHelpDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js',
@@ -906,6 +906,8 @@ $wgResourceModules += array(
 
 	'ext.visualEditor.mwreference' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
+			'modules/ve-mw/dm/models/ve.dm.MWReferenceModel.js',
+
 			'modules/ve-mw/dm/nodes/ve.dm.MWReferenceListNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWReferenceNode.js',
 
@@ -915,9 +917,11 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceResultWidget.js',
 
+			'modules/ve-mw/ui/dialogs/ve.ui.MWCitationDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceListDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
 
+			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
 		),
 		'styles' => array(
@@ -928,6 +932,7 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
+			'ext.visualEditor.mwtransclusion',
 		),
 		'messages' => array(
 			'visualeditor-dialog-reference-insert-button',

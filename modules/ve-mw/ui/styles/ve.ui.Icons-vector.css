@@ -46,6 +46,26 @@
 	background-image: url(images/icons/references.svg);
 }
 
+.oo-ui-icon-ref-cite-book {
+	/* @embed */
+	background-image: url(images/icons/ref-cite-book.svg);
+}
+
+.oo-ui-icon-ref-cite-journal {
+	/* @embed */
+	background-image: url(images/icons/ref-cite-journal.svg);
+}
+
+.oo-ui-icon-ref-cite-news {
+	/* @embed */
+	background-image: url(images/icons/ref-cite-news.svg);
+}
+
+.oo-ui-icon-ref-cite-web {
+	/* @embed */
+	background-image: url(images/icons/ref-cite-web.svg);
+}
+
 .oo-ui-icon-source {
 	/* @embed */
 	background-image: url(images/icons/source.svg);

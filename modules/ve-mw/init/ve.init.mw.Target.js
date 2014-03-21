@@ -204,6 +204,13 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'type': 'bar',
 		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
 	},
+	// Cite
+	{
+		'type': 'list',
+		'label': 'Cite',
+		'indicator': 'down',
+		'include': [ { 'group': 'cite' } ]
+	},
 	// Insert
 	{
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
@@ -317,6 +324,7 @@ ve.init.mw.Target.onModulesReady = function () {
 			promises.push( callbackResult );
 		}
 	}
+	this.generateCitationFeatures();
 	// Dereference the callbacks
 	this.pluginCallbacks = [];
 	// Add the platform promise to the list
@@ -733,6 +741,79 @@ ve.init.mw.Target.onSerializeError = function ( jqXHR, status, error ) {
 };
 
 /* Methods */
+
+/**
+ * Add reference insertion tools from on-wiki data.
+ *
+ * By adding a definition in JSON to MediaWiki:Visualeditor-cite-tool-definition, the cite menu can
+ * be populated with tools that create refrences containing a specific templates. The content of the
+ * definition should be an array containing a series of objects, one for each tool. Each object must
+ * contain a `name`, `icon` and `template` property. An optional `title` property can also be used
+ * to define the tool title in plain text. The `name` property is a unique identifier for the tool,
+ * and also provides a fallback title for the tool by being transformed into a message key. The name
+ * is prefixed with `visualeditor-cite-tool-name-`, and messages can be defined on Wiki. Some common
+ * messages are pre-defined for tool names such as `web`, `book`, `news` and `journal`.
+ *
+ * Example:
+ * [ { "name": "web", "icon": "cite-web", "template": "Cite web" }, ... ]
+ *
+ */
+ve.init.mw.Target.prototype.generateCitationFeatures = function () {
+	var i, len, item, name, tool, tools, dialog;
+
+	/*jshint loopfunc:true */
+
+	try {
+		// Must use mw.message to avoid JSON being parsed as Wikitext
+		tools = JSON.parse( mw.message( 'visualeditor-cite-tool-definition.json' ).plain() );
+	} catch ( e ) { }
+
+	if ( ve.isArray( tools ) ) {
+		for ( i = 0, len = tools.length; i < len; i++ ) {
+			item = tools[i];
+			// Generate transclusion tool
+			name = 'transclusion-cite-' + item.name;
+			tool = function GeneratedMWTransclusionDialogTool( toolbar, config ) {
+				ve.ui.MWTransclusionDialogTool.call( this, toolbar, config );
+			};
+			OO.inheritClass( tool, ve.ui.MWTransclusionDialogTool );
+			tool.static.group = 'cite-transclusion';
+			tool.static.name = name;
+			tool.static.icon = item.icon;
+			tool.static.title = item.title;
+			tool.static.dialogData = { 'template': item.template };
+			tool.static.template = item.template;
+			tool.static.autoAddToCatchall = false;
+			tool.static.autoAddToGroup = true;
+			ve.ui.toolFactory.register( tool );
+			// Generate citation tool
+			name = 'cite-' + item.name;
+			tool = function GeneratedMWCitationDialogTool( toolbar, config ) {
+				ve.ui.MWCitationDialogTool.call( this, toolbar, config );
+			};
+			OO.inheritClass( tool, ve.ui.MWCitationDialogTool );
+			tool.static.group = 'cite';
+			tool.static.name = name;
+			tool.static.dialog = name;
+			tool.static.icon = item.icon;
+			tool.static.title = item.title;
+			tool.static.dialogData = { 'template': item.template };
+			tool.static.template = item.template;
+			tool.static.autoAddToCatchall = false;
+			tool.static.autoAddToGroup = true;
+			ve.ui.toolFactory.register( tool );
+			// Generate dialog
+			dialog = function GeneratedMWCitationDialog( toolbar, config ) {
+				ve.ui.MWCitationDialog.call( this, toolbar, config );
+			};
+			OO.inheritClass( dialog, ve.ui.MWCitationDialog );
+			dialog.static.name = name;
+			dialog.static.icon = item.icon;
+			dialog.static.title = item.title;
+			ve.ui.dialogFactory.register( dialog );
+		}
+	}
+};
 
 /**
  * Add a plugin module or callback.

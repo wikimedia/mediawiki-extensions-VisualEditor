@@ -12,7 +12,7 @@
  * @extends ve.ui.MWDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
+ * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( surface, config ) {
@@ -68,6 +68,13 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'type': 'bar',
 		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
 	},*/
+	// Cite
+	{
+		'type': 'list',
+		'label': 'Cite',
+		'indicator': 'down',
+		'include': [ { 'group': 'cite-transclusion' } ]
+	},
 	// Insert
 	{
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
@@ -138,11 +145,11 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 /**
  * Handle search select events.
  *
- * @param {Object|null} item Reference attributes or null if no item is selected
+ * @param {ve.dm.MWReferenceModel|null} ref Reference model or null if no item is selected
  */
-ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( item ) {
-	if ( item ) {
-		this.useReference( item );
+ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
+	if ( ref instanceof ve.dm.MWReferenceModel ) {
+		this.useReference( ref );
 		this.close( { 'action': 'insert' } );
 	}
 };
@@ -150,33 +157,17 @@ ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( item ) {
 /**
  * Work on a specific reference.
  *
- * @param {Object} [ref] Reference attributes, omit to work on a new reference
+ * @param {ve.dm.MWReferenceModel} [ref] Reference model, omit to work on a new reference
  * @chainable
  */
 ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
-	var newDoc, refGroup,
-		doc = this.surface.getModel().getDocument();
-
-	if ( ref ) {
+	// Properties
+	if ( ref instanceof ve.dm.MWReferenceModel ) {
 		// Use an existing reference
-		this.ref = {
-			'listKey': ref.listKey,
-			'listGroup': ref.listGroup,
-			'refGroup': ref.refGroup,
-			'listIndex': ref.listIndex
-		};
-		newDoc = doc.cloneFromRange( doc.getInternalList().getItemNode( ref.listIndex ).getRange() );
-		refGroup = ref.refGroup;
+		this.ref = ref;
 	} else {
 		// Create a new reference
-		this.ref = null;
-		newDoc = new ve.dm.Document( [
-			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
-			{ 'type': '/paragraph' },
-			{ 'type': 'internalList' },
-			{ 'type': '/internalList' }
-		] );
-		refGroup = '';
+		this.ref = new ve.dm.MWReferenceModel();
 	}
 
 	// Cleanup
@@ -186,7 +177,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 
 	// Properties
 	this.referenceSurface = new ve.ui.SurfaceWidget(
-		newDoc,
+		this.ref.getDocument(),
 		{
 			'$': this.$,
 			'tools': this.constructor.static.toolbarGroups,
@@ -195,12 +186,11 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 		}
 	);
 
-	// Event handlers
-	this.referenceSurface.getSurface().getModel().getDocument()
-		.connect( this, { 'transact': 'onDocumentTransact' } );
+	// Events
+	this.ref.getDocument().connect( this, { 'transact': 'onDocumentTransact' } );
 
 	// Initialization
-	this.referenceGroupInput.setValue( refGroup );
+	this.referenceGroupInput.setValue( this.ref.getGroup() );
 	this.contentFieldset.$element.append( this.referenceSurface.$element );
 	this.referenceSurface.initialize();
 
@@ -295,25 +285,31 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
+	var focusedNode;
+
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
-	var ref,
-		focusedNode = this.surface.getView().getFocusedNode();
+	focusedNode = this.surface.getView().getFocusedNode();
 
+	// Data initialization
+	data = data || {};
+
+	this.panels.setItem( this.editPanel );
 	if ( focusedNode instanceof ve.ce.MWReferenceNode ) {
-		ref = focusedNode.getModel().getAttributes();
+		this.useReference(
+			ve.dm.MWReferenceModel.static.newFromReferenceNode( focusedNode.getModel() )
+		);
 		this.applyButton.$element.show();
 		this.insertButton.$element.hide();
 		this.selectButton.$element.hide();
 	} else {
+		this.useReference( null );
+		this.selectButton.$element.show();
 		this.applyButton.$element.hide();
 		this.insertButton.$element.show();
-		this.selectButton.$element.show();
 	}
 	this.backButton.$element.hide();
-	this.panels.setItem( this.editPanel );
-	this.useReference( ref );
 	this.search.buildIndex();
 	this.selectButton.setDisabled( this.search.isIndexEmpty() );
 };
@@ -322,88 +318,25 @@ ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
-	var i, len, txs, item, newDoc, group, refGroup, listGroup, keyIndex, refNodes, itemNodeRange,
-		surfaceModel = this.surface.getModel(),
-		// Store the original selection browsers may reset it after
-		// the first model change.
-		selection = surfaceModel.getSelection().clone(),
-		doc = surfaceModel.getDocument(),
-		internalList = doc.getInternalList();
+	var surfaceModel = this.surface.getModel();
 
 	// Data initialization
 	data = data || {};
 
 	if ( data.action === 'insert' || data.action === 'apply' ) {
-		newDoc = this.referenceSurface.getSurface().getModel().getDocument();
-		refGroup = this.referenceGroupInput.getValue();
-		listGroup = 'mwReference/' + refGroup;
+		this.ref.setGroup( this.referenceGroupInput.getValue() );
 
-		// Internal item changes
-		if ( this.ref ) {
-			// Group/key has changed
-			if ( this.ref.listGroup !== listGroup ) {
-				// Get all reference nodes with the same group and key
-				group = internalList.getNodeGroup( this.ref.listGroup );
-				refNodes = group.keyedNodes[this.ref.listKey] ?
-					group.keyedNodes[this.ref.listKey].slice() :
-					[ group.firstNodes[this.ref.listIndex] ];
-				// Check for name collision when moving items between groups
-				keyIndex = internalList.getKeyIndex( this.ref.listGroup, this.ref.listKey );
-				if ( keyIndex !== undefined ) {
-					// Resolve name collision by generating a new list key
-					this.ref.listKey = 'auto/' + internalList.getNextUniqueNumber();
-				}
-				// Update the group name of all references nodes with the same group and key
-				txs = [];
-				for ( i = 0, len = refNodes.length; i < len; i++ ) {
-					// HACK: Removing and re-inserting nodes to/from the internal list is done
-					// because internal list doesn't yet support attribute changes
-					refNodes[i].removeFromInternalList();
-					txs.push( ve.dm.Transaction.newFromAttributeChanges(
-						doc,
-						refNodes[i].getOuterRange().start,
-						{ 'refGroup': refGroup, 'listGroup': listGroup }
-					) );
-				}
-				surfaceModel.change( txs );
-				// HACK: Same as above, internal list issues
-				for ( i = 0, len = refNodes.length; i < len; i++ ) {
-					refNodes[i].addToInternalList();
-				}
-				this.ref.listGroup = listGroup;
-				this.ref.refGroup = refGroup;
-			}
-			// Update internal node content
-			itemNodeRange = internalList.getItemNode( this.ref.listIndex ).getRange();
-			surfaceModel.change( ve.dm.Transaction.newFromRemoval( doc, itemNodeRange, true ) );
-			surfaceModel.change(
-				ve.dm.Transaction.newFromDocumentInsertion( doc, itemNodeRange.start, newDoc )
-			);
+		// Update internal item if it already exists
+		if ( this.ref instanceof ve.dm.MWReferenceModel ) {
+			this.ref.updateInternalItem( surfaceModel );
 		}
 
-		// Content changes
+		// Insert reference (will auto-create an internal item if needed)
 		if ( data.action === 'insert' ) {
-			if ( !this.ref ) {
-				listGroup = 'mwReference/' + refGroup;
-				// Create new internal item
-				this.ref = {
-					'listKey': 'auto/' + internalList.getNextUniqueNumber(),
-					'listGroup': listGroup,
-					'refGroup': refGroup
-				};
-				// Insert an internal item, then inject the subdocument into it
-				item = internalList.getItemInsertion( this.ref.listGroup, this.ref.listKey, [] );
-				surfaceModel.change( item.transaction );
-				this.ref.listIndex = item.index;
-				itemNodeRange = internalList.getItemNode( this.ref.listIndex ).getRange();
-				surfaceModel.change(
-					ve.dm.Transaction.newFromDocumentInsertion( doc, itemNodeRange.start, newDoc )
-				);
+			if ( !this.ref.findInternalItem( surfaceModel ) ) {
+				this.ref.insertInternalItem( surfaceModel );
 			}
-			// Add reference at cursor
-			surfaceModel.getFragment( selection ).collapseRangeToEnd().insertContent( [
-				{ 'type': 'mwReference', 'attributes': this.ref }, { 'type': '/mwReference' }
-			] ).collapseRangeToEnd().select();
+			this.ref.insertReferenceNode( surfaceModel );
 		}
 	}
 

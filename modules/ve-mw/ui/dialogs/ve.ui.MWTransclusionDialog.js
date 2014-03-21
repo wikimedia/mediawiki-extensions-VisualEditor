@@ -12,7 +12,7 @@
  * @extends ve.ui.MWDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
+ * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( surface, config ) {
@@ -458,6 +458,42 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 };
 
 /**
+ * Get the node to be edited.
+ *
+ * @param {Object} data Dialog opening data
+ * @returns {ve.dm.MWTransclusionNode|null} Node to be edited, null when node is not available
+ */
+ve.ui.MWTransclusionDialog.prototype.getNode = function () {
+	var focusedNode = this.surface.getView().getFocusedNode();
+
+	return focusedNode ? focusedNode.getModel() : null;
+};
+
+/**
+ * Save changes.
+ */
+ve.ui.MWTransclusionDialog.prototype.saveChanges = function () {
+	var surfaceModel = this.surface.getModel(),
+		obj = this.transclusion.getPlainObject();
+
+	if ( this.node instanceof ve.dm.MWTransclusionNode ) {
+		this.transclusion.updateTransclusionNode( surfaceModel, this.node );
+	} else if ( obj !== null ) {
+		this.transclusion.insertTransclusionNode( surfaceModel );
+	}
+};
+
+/**
+ * Initialize a new transclusion.
+ *
+ * @param {Object} data Dialog opening data
+ * @returns {jQuery.Promise} Promise resolved when transclusion parts are done being added
+ */
+ve.ui.MWTransclusionDialog.prototype.initializeTransclusion = function () {
+	return this.transclusion.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusion ) );
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
@@ -467,10 +503,10 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
 	// Properties
-	this.node = this.surface.getView().getFocusedNode();
+	this.node = this.getNode( data );
 	this.transclusion = new ve.dm.MWTransclusionModel();
 	this.loaded = false;
-	this.inserting = !( this.node instanceof ve.ce.MWTransclusionNode );
+	this.inserting = !( this.node instanceof ve.dm.MWTransclusionNode );
 
 	// Events
 	this.transclusion.connect( this, { 'replace': 'onReplacePart' } );
@@ -480,11 +516,10 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 		.setDisabled( true )
 		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-loading' ) );
 	if ( this.inserting ) {
-		promise = this.transclusion
-			.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusion ) );
+		promise = this.initializeTransclusion( data );
 	} else {
 		promise = this.transclusion
-			.load( ve.copy( this.node.getModel().getAttribute( 'mw' ) ) );
+			.load( ve.copy( this.node.getAttribute( 'mw' ) ) );
 	}
 	promise.always( ve.bind( function () {
 		this.loaded = true;
@@ -496,31 +531,12 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.teardown = function ( data ) {
-	var surfaceModel = this.surface.getModel(),
-		obj = this.transclusion.getPlainObject();
-
 	// Data initialization
 	data = data || {};
 
 	// Save changes
 	if ( data.action === 'apply' ) {
-		if ( this.node instanceof ve.ce.MWTransclusionNode ) {
-			if ( obj !== null ) {
-				surfaceModel.getFragment().changeAttributes( { 'mw': obj } );
-			} else {
-				surfaceModel.getFragment().removeContent();
-			}
-		} else if ( obj !== null ) {
-			surfaceModel.getFragment().collapseRangeToEnd().insertContent( [
-				{
-					'type': 'mwTransclusionInline',
-					'attributes': {
-						'mw': obj
-					}
-				},
-				{ 'type': '/mwTransclusionInline' }
-			] ).collapseRangeToEnd().select();
-		}
+		this.saveChanges();
 	}
 
 	this.transclusion.disconnect( this );

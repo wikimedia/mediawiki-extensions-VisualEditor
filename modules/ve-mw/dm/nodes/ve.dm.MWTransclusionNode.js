@@ -23,6 +23,12 @@ ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode( length, element ) {
 
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
+
+	// Properties
+	this.partsList = null;
+
+	// Events
+	this.connect( this, { 'attributeChange': 'onAttributeChange' } );
 };
 
 /* Inheritance */
@@ -206,6 +212,44 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 };
 
 /* Methods */
+
+/**
+ * Handle attribute change events.
+ *
+ * @method
+ * @param {string} key Attribute key
+ * @param {string} from Old value
+ * @param {string} to New value
+ */
+ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
+	if ( key === 'mw' ) {
+		this.partsList = null;
+	}
+};
+
+/**
+ * Get a simplified description of the transclusion's parts.
+ *
+ * @returns {Object[]} List of objects with either template or content properties
+ */
+ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
+	var i, len, part, content;
+
+	if ( !this.partsList ) {
+		this.partsList = [];
+		content = this.getAttribute( 'mw' );
+		for ( i = 0, len = content.parts.length; i < len; i++ ) {
+			part = content.parts[i];
+			this.partsList.push(
+				part.template ?
+					{ 'template': part.template.target.wt } :
+					{ 'content': part }
+			);
+		}
+	}
+
+	return this.partsList;
+};
 
 /**
  * Get the wikitext for this transclusion.

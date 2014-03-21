@@ -108,6 +108,23 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		// Normalise to 'copyrightwarning' so we have a consistent key in the front-end.
 		$msgArgs[ 'copyrightwarning' ] = $copywarnMsg;
 
+		// Citations
+		$citationDefinition = json_decode(
+			wfMessage( 'visualeditor-cite-tool-definition.json' )->plain()
+		);
+		$citationTools = array();
+		if ( is_array( $citationDefinition ) ) {
+			foreach ( $citationDefinition as $tool ) {
+				if ( !isset( $tool->title ) ) {
+					$tool->title =
+						wfMessage( 'visualeditor-cite-tool-name-' . $tool->name )->text();
+					$msgKeys[] = $tool->title;
+				}
+				$citationTools[] = $tool;
+			}
+		}
+		$msgVals['visualeditor-cite-tool-definition.json'] = json_encode( $citationTools );
+
 		$msgKeys = array_values( array_unique( array_merge(
 			$msgKeys,
 			array_keys( $msgArgs ),

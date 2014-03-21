@@ -17,12 +17,47 @@
 ve.ui.MWTransclusionDialogTool = function VeUiMWTransclusionDialogTool( toolGroup, config ) {
 	ve.ui.DialogTool.call( this, toolGroup, config );
 };
+
+/* Inheritance */
+
 OO.inheritClass( ve.ui.MWTransclusionDialogTool, ve.ui.DialogTool );
+
+/* Static Properties */
+
 ve.ui.MWTransclusionDialogTool.static.name = 'transclusion';
+
 ve.ui.MWTransclusionDialogTool.static.group = 'object';
+
 ve.ui.MWTransclusionDialogTool.static.icon = 'template';
+
 ve.ui.MWTransclusionDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-template-tooltip' );
+
 ve.ui.MWTransclusionDialogTool.static.dialog = 'transclusion';
+
+ve.ui.MWTransclusionDialogTool.static.template = null;
+
 ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode ];
+
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTransclusionDialogTool.static.isCompatibleWith = function ( model ) {
+	var partsList, compatible;
+
+	// Parent method
+	compatible = ve.ui.DialogTool.static.isCompatibleWith.call( this, model );
+
+	if ( compatible && this.template ) {
+		partsList = model.getPartsList();
+		return partsList.length === 1 && partsList[0].template === this.template;
+	}
+
+	return compatible;
+};
+
+/* Registration */
+
 ve.ui.toolFactory.register( ve.ui.MWTransclusionDialogTool );

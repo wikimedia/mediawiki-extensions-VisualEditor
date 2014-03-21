@@ -49,6 +49,46 @@ OO.mixinClass( ve.dm.MWTransclusionModel, OO.EventEmitter );
 /* Methods */
 
 /**
+ * Insert transclusion into a surface.
+ *
+ * Transclusion is inserted at the current cursor position in `surfaceModel`.
+ *
+ * @param {ve.dm.Surface} surfaceModel Surface model of main document
+ * @param {ve.Range} [at] Location to insert at
+ */
+ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceModel, at ) {
+	surfaceModel
+		.getFragment( at || surfaceModel.getSelection().clone(), true )
+			.insertContent( [
+				{
+					'type': 'mwTransclusionInline',
+					'attributes': {
+						'mw': this.getPlainObject()
+					}
+				},
+				{ 'type': '/mwTransclusionInline' }
+			] );
+};
+
+/**
+ * Update transclusion node in a document.
+ *
+ * @param {ve.dm.Surface} surfaceModel Surface model of main document
+ * @param {ve.dm.MWTransclusionNode} node Transclusion node to update
+ */
+ve.dm.MWTransclusionModel.prototype.updateTransclusionNode = function ( surfaceModel, node ) {
+	var obj = this.getPlainObject();
+
+	if ( obj !== null ) {
+		surfaceModel.getFragment( node.getOuterRange(), true )
+			.changeAttributes( { 'mw': obj } );
+	} else {
+		surfaceModel.getFragment( node.getOuterRange(), true )
+			.removeContent();
+	}
+};
+
+/**
  * Load from transclusion data, and fetch spec from server.
  *
  * @param {Object} data Transclusion data

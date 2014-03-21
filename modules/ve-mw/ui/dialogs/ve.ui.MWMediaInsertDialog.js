@@ -14,7 +14,7 @@
  * @extends ve.ui.MWDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
+ * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWMediaInsertDialog = function VeUiMWMediaInsertDialog( surface, config ) {

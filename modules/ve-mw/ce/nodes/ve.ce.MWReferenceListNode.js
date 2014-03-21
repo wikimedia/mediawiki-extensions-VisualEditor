@@ -195,15 +195,24 @@ ve.ce.MWReferenceListNode.prototype.update = function () {
 			if ( modelNode && modelNode.length ) {
 				viewNode = new ve.ce.InternalItemNode( modelNode );
 				// HACK: PHP parser doesn't wrap single lines in a paragraph
-				if ( viewNode.$element.children().length === 1 && viewNode.$element.children( 'p' ).length === 1 ) {
+				if (
+					viewNode.$element.children().length === 1 &&
+					viewNode.$element.children( 'p' ).length === 1
+				) {
 					// unwrap inner
-					viewNode.$element.children().replaceWith( viewNode.$element.children().contents() );
+					viewNode.$element.children().replaceWith(
+						viewNode.$element.children().contents()
+					);
 				}
 				$li.append(
 					this.$( '<span>' )
 						.addClass( 'reference-text' )
-						.append( viewNode.$element.clone().show() )
+						.append( viewNode.$element.show() )
 				);
+				// HACK: See bug 62682 - We happen to know that destroy doesn't abort async
+				// rendering for generated content nodes, but we really can't gaurantee that in the
+				// future - if you are here, debugging, because something isn't rendering properly,
+				// it's likely that something has changed and these assumptions are no longer valid
 				viewNode.destroy();
 			} else {
 				$li.append(

@@ -13,7 +13,7 @@
  * @extends ve.ui.MWDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
+ * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( surface, config ) {
@@ -68,6 +68,13 @@ ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 		'type': 'bar',
 		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
 	},*/
+	// Cite
+	{
+		'type': 'list',
+		'label': 'Cite',
+		'indicator': 'down',
+		'include': [ { 'group': 'cite' } ]
+	},
 	// Insert
 	{
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
