@@ -242,14 +242,16 @@ class VisualEditorHooks {
 	public static function onGetBetaPreferences( $user, &$preferences ) {
 		global $wgExtensionAssetsPath, $wgVisualEditorSupportedSkins, $wgVisualEditorBrowserBlacklist;
 
-		$dir = RequestContext::getMain()->getLanguage()->getDir();
+		$iconpath = $wgExtensionAssetsPath . "/VisualEditor";
 
 		$preferences['visualeditor-enable'] = array(
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-core-label',
 			'desc-message' => 'visualeditor-preference-core-description',
-			'screenshot' => $wgExtensionAssetsPath .
-				"/VisualEditor/betafeatures-icon-VisualEditor-$dir.svg",
+			'screenshot' => array(
+				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-ltr.svg",
+				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-rtl.svg",
+			),
 			'info-message' => 'visualeditor-preference-core-info-link',
 			'discussion-message' => 'visualeditor-preference-core-discussion-link',
 			'requirements' => array(
@@ -264,8 +266,10 @@ class VisualEditorHooks {
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-language-label',
 			'desc-message' => 'visualeditor-preference-language-description',
-			'screenshot' => $wgExtensionAssetsPath .
-				"/VisualEditor/betafeatures-icon-VisualEditor-language-$dir.svg",
+			'screenshot' => array(
+				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-language-ltr.svg",
+				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-language-rtl.svg",
+			),
 			'info-message' => 'visualeditor-preference-experimental-info-link',
 			'discussion-message' => 'visualeditor-preference-experimental-discussion-link',
 			'requirements' => array(
@@ -281,8 +285,10 @@ class VisualEditorHooks {
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-mwalienextension-label',
 			'desc-message' => 'visualeditor-preference-mwalienextension-description',
-			'screenshot' => $wgExtensionAssetsPath .
-				"/VisualEditor/betafeatures-icon-VisualEditor-alien-$dir.svg",
+			'screenshot' => array(
+				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-alien-ltr.svg",
+				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-alien-rtl.svg",
+			),
 			'info-message' => 'visualeditor-preference-mwalienextension-info-link',
 			'discussion-message' => 'visualeditor-preference-mwalienextension-discussion-link',
 			'requirements' => array(
@@ -298,8 +304,10 @@ class VisualEditorHooks {
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-mwhiero-label',
 			'desc-message' => 'visualeditor-preference-mwhiero-description',
-			'screenshot' => $wgExtensionAssetsPath .
-				"/VisualEditor/betafeatures-icon-VisualEditor-hieroglyphics-$dir.svg",
+			'screenshot' => array(
+				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-hieroglyphics-ltr.svg",
+				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-hieroglyphics-rtl.svg",
+			),
 			'info-message' => 'visualeditor-preference-mwhiero-info-link',
 			'discussion-message' => 'visualeditor-preference-mwhiero-discussion-link',
 			'requirements' => array(
