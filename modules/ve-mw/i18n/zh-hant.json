@@ -156,7 +156,7 @@
     "visualeditor-linkinspector-suggest-redirect-page": "$1個重定向頁",
     "visualeditor-loadwarning": "從伺服器載入資料時出現錯誤：$1。您想要重試嗎？",
     "visualeditor-loadwarning-token": "從伺服器載入編輯 Token 時發生錯誤：$1，您想要重試嗎？",
-    "visualeditor-timeout": "看起來完全編輯尚無法使用；您想改為代碼編輯模式麼？",
+    "visualeditor-timeout": "看起來完全編輯尚無法使用。您想改為代碼編輯模式麼？",
     "visualeditor-mainnamespacepagelink": "Project:主名字空間",
     "visualeditor-media-input-placeholder": "搜尋媒體",
     "visualeditor-meta-tool": "設定",

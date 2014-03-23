@@ -171,6 +171,7 @@
     "visualeditor-notification-restored": "\"$1\" on palautettu.",
     "visualeditor-notification-saved": "Muutoksesi sivuun \"$1\" on tallennettu.",
     "visualeditor-pagemenu-tooltip": "Sivun valinnat",
+    "visualeditor-pagetranslationwarning": "Olet muokkaamassa käännettävää sivua. Näiden muokkaaminen Visuaalisella muokkaimella ei ole vielä virallisesti tuettu.",
     "visualeditor-parameter-input-placeholder": "Parametrin nimi",
     "visualeditor-parameter-search-no-unused": "Ei käyttämättömiä parametrejä",
     "visualeditor-parameter-search-unknown": "Tuntematon parametri",

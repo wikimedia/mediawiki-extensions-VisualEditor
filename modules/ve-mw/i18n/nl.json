@@ -176,6 +176,7 @@
     "visualeditor-notification-restored": "\"$1\" is teruggeplaatst.",
     "visualeditor-notification-saved": "Uw wijzigingen aan \"$1\" zijn opgeslagen",
     "visualeditor-pagemenu-tooltip": "Paginainstellingen",
+    "visualeditor-pagetranslationwarning": "U probeert een te vertalen pagina te bewerken. Het bewerken van deze pagina is niet mogelijk in de Visuele tekstbewerker.",
     "visualeditor-parameter-input-placeholder": "Parameternaam",
     "visualeditor-parameter-search-no-unused": "Geen ongebruikte parameters",
     "visualeditor-parameter-search-unknown": "Onbekende parameter",
