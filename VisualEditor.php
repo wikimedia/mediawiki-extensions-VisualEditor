@@ -935,6 +935,7 @@ $wgResourceModules += array(
 			'ext.visualEditor.mwtransclusion',
 		),
 		'messages' => array(
+			'visualeditor-dialog-citation-insert-citation',
 			'visualeditor-dialog-reference-insert-button',
 			'visualeditor-dialog-reference-insert-title',
 			'visualeditor-dialog-reference-options-group-label',

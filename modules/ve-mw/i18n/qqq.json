@@ -47,6 +47,7 @@
     "visualeditor-dialog-beta-welcome-action-continue": "Used as label for the Continue button which is used to close the dialog and continue using VisualEditor.\n{{Identical|Continue}}",
     "visualeditor-dialog-beta-welcome-content": "Text explaining VisualEditor is in beta.\n\nRefers to {{msg-mw|Visualeditor-help-tool}}.\n\nParameters:\n* $1 - {{msg-mw|Edit}}",
     "visualeditor-dialog-beta-welcome-title": "Title of the beta welcome dialog. Parameters:\n* $1 - username or empty string, for GENDER support",
+    "visualeditor-dialog-citation-insert-citation": "Label for button that closes the citation insertion dialog and inserts the citation",
     "visualeditor-dialog-media-alttext-section": "Label for the image alternative text sub-section.",
     "visualeditor-dialog-media-content-section": "Label for the image content sub-section.\n{{Identical|Caption}}",
     "visualeditor-dialog-media-insert-button": "Used as label for the button.\n{{Identical|Insert media}}",

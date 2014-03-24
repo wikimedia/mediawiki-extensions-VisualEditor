@@ -151,7 +151,7 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, partPage, reselect, single,
+	var i, len, page, name, names, params, partPage, reselect,
 		removePages = [];
 
 	if ( removed ) {
@@ -218,16 +218,9 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 		this.setPageByName( reselect.getName() );
 	}
 	// Update widgets related to a transclusion being a single template or not
-	single = this.isSingleTemplateTransclusion();
-	this.modeButton.setDisabled( !single );
+	this.modeButton.setDisabled( !this.isSingleTemplateTransclusion() );
 	this.applyButton
-		.setLabel( ve.msg(
-			!this.inserting ? 'visualeditor-dialog-action-apply' : (
-				single ?
-					'visualeditor-dialog-transclusion-insert-template' :
-					'visualeditor-dialog-transclusion-insert-transclusion'
-			)
-		) )
+		.setLabel( this.getApplyButtonLabel() )
 		.setDisabled( !this.isInsertable() );
 	this.updateTitle();
 };
@@ -304,6 +297,23 @@ ve.ui.MWTransclusionDialog.prototype.isInsertable = function () {
 ve.ui.MWTransclusionDialog.prototype.getTemplatePartLabel = function ( part ) {
 	return part instanceof ve.dm.MWTemplateModel ?
 		part.getSpec().getLabel() : ve.msg( 'visualeditor-dialog-transclusion-placeholder' );
+};
+
+/**
+ * Get a label for the apply button.
+ *
+ * @returns {string} Apply button label
+ */
+ve.ui.MWTransclusionDialog.prototype.getApplyButtonLabel = function () {
+	var single = this.isSingleTemplateTransclusion();
+	return ve.msg(
+		this.inserting ?
+			(
+				single ?
+					'visualeditor-dialog-transclusion-insert-template' :
+					'visualeditor-dialog-transclusion-insert-transclusion'
+			) : 'visualeditor-dialog-action-apply'
+	);
 };
 
 /**
