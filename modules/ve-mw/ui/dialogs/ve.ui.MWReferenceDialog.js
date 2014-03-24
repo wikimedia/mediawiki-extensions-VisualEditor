@@ -407,6 +407,7 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 		}
 	}
 
+	this.search.clear();
 	this.referenceSurface.destroy();
 	this.referenceSurface = null;
 	this.ref = null;
