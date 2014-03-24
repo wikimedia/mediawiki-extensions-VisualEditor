@@ -1,11 +1,13 @@
 {
     "@metadata": {
         "authors": [
-            "Чаховіч Уладзіслаў"
+            "Чаховіч Уладзіслаў",
+            "Дзяніс Тутэйшы"
         ]
     },
     "tooltip-ca-editsource": "Правіць зыходны код гэтай старонкі",
     "tooltip-ca-ve-edit": "Правіць гэту старонку з візуальным рэдактарам",
+    "visualeditor-ca-createsource": "Стварыць зыходны тэкст",
     "visualeditor-ca-editsource": "Правіць зыходны тэкст",
     "visualeditor-ca-ve-create": "Візуальны рэдактар",
     "visualeditor-ca-ve-edit": "Візуальны рэдактар",
