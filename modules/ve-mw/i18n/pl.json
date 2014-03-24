@@ -134,7 +134,7 @@
     "visualeditor-differror": "Błąd podczas ładowania danych z serwera: $1.",
     "visualeditor-editconflict": "Twoje zmiany nie mogły zostać zapisane z powodu wystąpienia konfliktu edycji. Czy chcesz rozwiązać go ręcznie?",
     "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|komunikat|komunikaty|komunikatów}}",
-    "visualeditor-editnotices-tooltip": "Edytuj powiadomienia",
+    "visualeditor-editnotices-tooltip": "Komunikaty",
     "visualeditor-editsummary": "Opisz swoje zmiany",
     "visualeditor-editsummary-bytes-remaining": "Pozostało bajtów",
     "visualeditor-formatdropdown-format-mw-heading1": "Tytuł strony",

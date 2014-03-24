@@ -171,6 +171,7 @@
     "visualeditor-notification-restored": "„$1“ було відновлено.",
     "visualeditor-notification-saved": "Ваші зміни до „$1“ було збережено.",
     "visualeditor-pagemenu-tooltip": "Параметри сторінки",
+    "visualeditor-pagetranslationwarning": "Ви редагуєте сторінку для перекладу. Її редагування у Візуальному редакторі поки ще офіційно не підтримується.",
     "visualeditor-parameter-input-placeholder": "Ім'я параметра",
     "visualeditor-parameter-search-no-unused": "Немає невикористаних параметрів",
     "visualeditor-parameter-search-unknown": "Невідомий параметр",

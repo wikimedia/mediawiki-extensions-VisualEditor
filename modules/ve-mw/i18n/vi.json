@@ -12,7 +12,7 @@
     "visualeditor-advancedsettings-tool": "Tùy chọn nâng cao",
     "visualeditor-beta-appendix": "beta",
     "visualeditor-beta-label": "beta",
-    "visualeditor-beta-warning": "Trình soạn thảo trực quan đang là “phiên bản beta”. Bạn có thể gặp trục trặc và có thể không sửa đổi một số phần của trang. Bấm “{{int:visualeditor-ca-editsource}}” để đổi qua chế độ sửa đổi văn bản wiki – các thay đổi không lưu sẽ bị mất.",
+    "visualeditor-beta-warning": "Trình soạn thảo trực quan đang là “phiên bản beta”. Bạn có thể gặp trục trặc và có thể không sửa đổi một số phần của trang. Bấm “{{int:visualeditor-ca-editsource}}” để đổi qua chế độ sửa đổi mã wiki – các thay đổi không lưu sẽ bị mất.",
     "visualeditor-browserwarning": "Trình soạn thảo trực quan không chính thức hỗ trợ trình duyệt bạn đang sử dụng.",
     "visualeditor-ca-createsource": "Tạo mã nguồn",
     "visualeditor-ca-editsource": "Sửa mã nguồn",
@@ -160,6 +160,7 @@
     "visualeditor-notification-restored": "“$1” đã được phục hồi.",
     "visualeditor-notification-saved": "Các thay đổi của bạn tại “$1” đã được lưu.",
     "visualeditor-pagemenu-tooltip": "Tùy chọn trang",
+    "visualeditor-pagetranslationwarning": "Bạn đang sửa đổi một trang dịch được. Trình soạn thảo trực quan chưa chính thức hỗ trợ loại trang này.",
     "visualeditor-parameter-input-placeholder": "Tên tham số",
     "visualeditor-parameter-search-no-unused": "Không có tham số không sử dụng",
     "visualeditor-parameter-search-unknown": "Tham số bất ngờ",
@@ -203,7 +204,7 @@
     "visualeditor-toolbar-style-tooltip": "Kiểu văn bản",
     "visualeditor-usernamespacepagelink": "Project:Trang cá nhân",
     "visualeditor-viewpage-savewarning": "Bạn có chắc chắn muốn quay trở về chế độ xem mà không lưu giữ trước tiên?",
-    "visualeditor-wikitext-warning": "Bạn đang sử dụng Trình soạn thảo trực quan – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|văn bản wiki]] không phù hợp với trình soạn này. Bấm “{{int:visualeditor-ca-editsource}}” để đổi qua chế độ sửa đổi văn bản wiki – các thay đổi không lưu sẽ bị mất.",
+    "visualeditor-wikitext-warning": "Bạn đang sử dụng Trình soạn thảo trực quan – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|mã wiki]] không phù hợp với trình soạn này. Bấm “{{int:visualeditor-ca-editsource}}” để đổi qua chế độ sửa đổi mã wiki – các thay đổi không lưu sẽ bị mất.",
     "visualeditor-wikitext-warning-link": "Help:Mã wiki",
-    "visualeditor-wikitext-warning-title": "Phát hiện văn bản wiki"
+    "visualeditor-wikitext-warning-title": "Phát hiện mã wiki"
 }
