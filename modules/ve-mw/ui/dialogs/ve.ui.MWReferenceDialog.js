@@ -326,11 +326,6 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 	if ( data.action === 'insert' || data.action === 'apply' ) {
 		this.ref.setGroup( this.referenceGroupInput.getValue() );
 
-		// Update internal item if it already exists
-		if ( this.ref instanceof ve.dm.MWReferenceModel ) {
-			this.ref.updateInternalItem( surfaceModel );
-		}
-
 		// Insert reference (will auto-create an internal item if needed)
 		if ( data.action === 'insert' ) {
 			if ( !this.ref.findInternalItem( surfaceModel ) ) {
@@ -338,6 +333,8 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 			}
 			this.ref.insertReferenceNode( surfaceModel );
 		}
+		// Update internal item
+		this.ref.updateInternalItem( surfaceModel );
 	}
 
 	this.referenceSurface.destroy();
