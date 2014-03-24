@@ -371,9 +371,6 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.restoreEditSection();
 	this.setupBeforeUnloadHandler();
 	this.maybeShowDialogs();
-	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
-		this.showBetaWelcome();
-	}
 	mw.hook( 've.activationComplete' ).fire();
 };
 
@@ -1513,23 +1510,18 @@ ve.init.mw.ViewPageTarget.prototype.tearDownBeforeUnloadHandler = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
-		this.showBetaWelcome();
+		if (
+				!( 'vehidebetadialog' in this.currentUri.query ) &&
+				$.cookie( 've-beta-welcome-dialog' ) === null
+			) {
+			this.surface.getDialogs().getWindow( 'betaWelcome' ).open();
+		}
+		$.cookie( 've-beta-welcome-dialog', 1, { 'path': '/', 'expires': 30 } );
 	}
 
-	// FIXME: This doesn't actually return true even if there is a category.
 	if ( this.surface.getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
 		this.surface.getDialogs().getWindow( 'meta' ).open( { 'page': 'settings' } );
 	}
-};
-
-/**
- * Show beta welcome dialog if first load.
- */
-ve.init.mw.ViewPageTarget.prototype.showBetaWelcome = function () {
-	if ( $.cookie( 've-beta-welcome-dialog' ) === null ) {
-		this.surface.getDialogs().getWindow( 'betaWelcome' ).open();
-	}
-	$.cookie( 've-beta-welcome-dialog', 1, { 'path': '/', 'expires': 30 } );
 };
 
 /**
