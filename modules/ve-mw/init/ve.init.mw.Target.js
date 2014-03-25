@@ -761,6 +761,11 @@ ve.init.mw.Target.onSerializeError = function ( jqXHR, status, error ) {
 ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 	var i, len, item, name, tool, tools, dialog;
 
+	if ( !ve.ui.MWCitationDialog ) {
+		// Citation module isn't loaded, so skip this
+		return;
+	}
+
 	/*jshint loopfunc:true */
 
 	try {
