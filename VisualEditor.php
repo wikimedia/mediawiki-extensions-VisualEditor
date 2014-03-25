@@ -749,6 +749,8 @@ $wgResourceModules += array(
 
 	'ext.visualEditor.mwimage' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
+			'modules/ve-mw/dm/models/ve.dm.MWImageModel.js',
+
 			'modules/ve-mw/dm/nodes/ve.dm.MWImageNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWInlineImageNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWBlockImageNode.js',

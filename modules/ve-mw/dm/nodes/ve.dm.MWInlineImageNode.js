@@ -35,7 +35,7 @@ OO.mixinClass( ve.dm.MWInlineImageNode, ve.dm.MWImageNode );
 /* Static Properties */
 
 ve.dm.MWInlineImageNode.static.rdfaToType = {
-	'mw:Image': 'inline',
+	'mw:Image': 'none',
 	'mw:Image/Frameless': 'frameless'
 };
 
@@ -83,6 +83,11 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	// Extract individual classes
 	classes = typeof classes === 'string' ? classes.trim().split( /\s+/ ) : [];
 
+	// Deal with border flag
+	if ( classes.indexOf( 'mw-image-border' ) !== -1 ) {
+		attributes.borderImage = true;
+		recognizedClasses.push( 'mw-image-border' );
+	}
 	// Vertical alignment
 	if ( classes.indexOf( 'mw-valign-middle' ) !== -1 ) {
 		attributes.valign = 'middle';
@@ -114,7 +119,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 
 	// Border
 	if ( classes.indexOf( 'mw-image-border' ) !== -1 ) {
-		attributes.border = true;
+		attributes.borderImage = true;
 		recognizedClasses.push( 'mw-image-border' );
 	}
 
@@ -157,7 +162,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 		classes.push( 'mw-default-size' );
 	}
 
-	if ( data.attributes.border ) {
+	if ( data.attributes.borderImage ) {
 		classes.push( 'mw-image-border' );
 	}
 

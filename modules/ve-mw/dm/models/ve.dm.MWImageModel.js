@@ -1,0 +1,749 @@
+/*!
+ * VisualEditor DataModel MWImageModel class.
+ *
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+/*global mw */
+
+/**
+ * MediaWiki image model.
+ *
+ * @class
+ * @mixins OO.EventEmitter
+ *
+ * @constructor
+ */
+ve.dm.MWImageModel = function VeDmMWImageModel() {
+	// Mixin constructors
+	OO.EventEmitter.call( this );
+
+	// Properties
+	this.mediaNode = null;
+	this.attributesCache = null;
+
+	// Image properties
+	this.captionDoc = null;
+	this.caption = null;
+	this.altText = null;
+	this.type = null;
+	this.alignment = null;
+	this.defaultAlignment = false;
+	this.aligned = false;
+	this.scalable = null;
+	this.sizeType = null;
+	this.border = false;
+	this.borderable = false;
+	this.dir = 'ltr';
+	this.defaultDimensions = null;
+
+	// Get wiki default thumbnail size
+	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+		.defaultUserOptions.defaultthumbsize;
+};
+
+/* Inheritance */
+
+OO.mixinClass( ve.dm.MWImageModel, OO.EventEmitter );
+
+/* Events */
+
+/**
+ * Change of image alignment or of having alignment at all
+ * @event alignmentChange
+ * @param {string} Alignment 'left', 'right', 'center' or 'none'
+ */
+
+/**
+ * Change in size type between default and custom
+ * @event sizeDefaultChange
+ * @param {boolean} Image is default size
+ */
+
+/**
+ * Change in the image type
+ * @event typeChange
+ * @param {string} Image type 'thumb', 'frame', 'frameless' or 'none'
+ */
+/* Static Properties */
+
+ve.dm.MWImageModel.static.infoCache = {};
+
+/* Static Methods */
+
+/**
+ * Load from image data with scalable information.
+ *
+ * @param {ve.dm.MWImageNode} node Image node
+ * @return {ve.dm.MWImageModel} Image model
+ */
+ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
+	var doc = node.getDocument(),
+		captionNode,
+		attrs = node.getAttributes(),
+		imgModel = new ve.dm.MWImageModel();
+
+	imgModel.setMediaNode( node );
+	// Set scalable
+	imgModel.setScalable( node.getScalable() );
+
+	// Cache the attributes so we can create a new image without
+	// losing any existing information
+	imgModel.cacheOriginalImageAttributes( attrs );
+
+	// Collect all the information
+	imgModel.toggleBorder( !!attrs.borderImage );
+	imgModel.setAltText( attrs.alt );
+
+	imgModel.setDir( doc.getDir() );
+
+	imgModel.setMediaType( attrs.mediatype || 'BITMAP' );
+	imgModel.setType( attrs.type );
+
+	imgModel.toggleDefaultAlignment(
+		attrs.align === undefined ||
+		attrs.align === 'default'
+	);
+
+	// Fix cases where alignment is undefined
+	// Inline images have no 'align' (they have 'valign' instead)
+	// But we do want an alignment case for these in case they
+	// are transformed to block images
+	attrs.align = attrs.align !== undefined ? attrs.align : 'default';
+
+	imgModel.setAlignment( attrs.align );
+	imgModel.toggleAligned( attrs.align !== 'none' );
+
+	imgModel.setVerticalAlignment( attrs.valign );
+
+	// Default size
+	imgModel.toggleDefaultSize( !!attrs.defaultSize );
+	// TODO: When scale/upright is available, set the size
+	// type accordingly
+	imgModel.setSizeType(
+		imgModel.isDefaultSize() ?
+		'default' :
+		'custom'
+	);
+
+	// If this is a block image, get the caption
+	if ( imgModel.getImageNodeType() === 'mwBlockImage' ) {
+		captionNode = node.getCaptionNode();
+		if ( captionNode && captionNode.getLength() > 0 ) {
+			imgModel.setCaptionDocument( doc.cloneFromRange( captionNode.getRange() ) );
+		}
+	}
+	return imgModel;
+};
+
+/* Methods */
+
+/**
+ * Get the current image node type according to the attributes.
+ *
+ * @return {string} Node type 'mwInlineImage' or 'mwBlockImage'
+ */
+ve.dm.MWImageModel.prototype.getImageNodeType = function () {
+	if (
+		( this.getType() === 'frame' || this.getType() === 'none' ) &&
+		( !this.isAligned() || this.isDefaultAligned() )
+	) {
+		return 'mwInlineImage';
+	} else {
+		return 'mwBlockImage';
+	}
+};
+
+/**
+ * Update an existing image node by changing its attributes
+ *
+ * @param {ve.dm.Surface} surfaceModel Surface model of main document
+ */
+ve.dm.MWImageModel.prototype.updateImageNode = function ( surfaceModel ) {
+	var captionRange,
+		doc = surfaceModel.getDocument(),
+		captionNode = this.getMediaNode().getCaptionNode();
+
+	// Update the caption
+	if ( !captionNode ) {
+		// There was no caption before, so insert one now
+		surfaceModel.getFragment()
+			.adjustRange( 1 )
+			.collapseRangeToStart()
+			.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );
+		// Update the caption node
+		captionNode = this.getMediaNode().getCaptionNode();
+	}
+
+	captionRange = captionNode.getRange();
+
+	// Remove contents of old caption
+	surfaceModel.change(
+		ve.dm.Transaction.newFromRemoval(
+			doc,
+			captionRange,
+			true
+		)
+	);
+
+	// Add contents of new caption
+	surfaceModel.change(
+		ve.dm.Transaction.newFromDocumentInsertion(
+			doc,
+			captionRange.start,
+			this.getCaptionDocument()
+		)
+	);
+
+	// Update attributes
+	surfaceModel.change(
+		ve.dm.Transaction.newFromAttributeChanges(
+			doc,
+			this.mediaNode.getOffset(),
+			this.getUpdatedAttributes()
+		)
+	);
+};
+
+/**
+ * Insert image into a surface.
+ *
+ * Image is inserted at the current fragment position.
+ *
+ * @param {ve.dm.SurfaceFragment} fragment Fragment of the node
+ */
+ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
+	var editAttributes, coveredNodes, newNodeRange, newFragment, newNode, i,
+		contentToInsert = [],
+		nodeType = this.getImageNodeType(),
+		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
+		surfaceModel = fragment.getSurface();
+
+	editAttributes = $.extend( originalAttrs, this.getUpdatedAttributes() );
+
+	// Remove old classes
+	delete editAttributes.originalClasses;
+	delete editAttributes.unrecognizedClasses;
+
+	contentToInsert = [
+		{
+			// TODO: Add support for MWInlineImage type
+			'type': nodeType,
+			'attributes': editAttributes
+		}
+	];
+
+	if ( nodeType === 'mwBlockImage' ) {
+		contentToInsert.push( { 'type': 'mwImageCaption' } );
+		contentToInsert.push( { 'type': '/mwImageCaption' } );
+	}
+	contentToInsert.push( { 'type': '/' + nodeType } );
+
+	// Insert the new image
+	coveredNodes = fragment
+			.collapseRangeToEnd()
+			.insertContent( contentToInsert )
+			.getCoveredNodes();
+
+	// Get the new image node
+	for ( i = 0; i < coveredNodes.length; i++ ) {
+		if (
+			coveredNodes[i].node.type === 'mwBlockImage' ||
+			coveredNodes[i].node.type === 'mwInlineImage'
+		) {
+			newNodeRange = coveredNodes[i].nodeOuterRange;
+			break;
+		}
+	}
+
+	// Select the new node (without extras)
+	newFragment = surfaceModel.getFragment( newNodeRange );
+	newFragment.select();
+
+	// Check if there should be a caption
+	if ( nodeType === 'mwBlockImage' ) {
+		newNode = newFragment.getSelectedNode();
+
+		if ( this.getCaptionDocument().data.getLength() > 4 ) {
+			// Add contents of new caption
+			surfaceModel.change(
+				ve.dm.Transaction.newFromDocumentInsertion(
+					surfaceModel.getDocument(),
+					newNode.getCaptionNode().getRange().start,
+					this.getCaptionDocument()
+				)
+			);
+		}
+	}
+
+};
+
+/**
+ * Return all updated attributes that belong to the node.
+ * @return {Object} Updated attributes
+ */
+ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
+	var attrs,
+		origAttrs = this.getOriginalImageAttributes(),
+		currentDimensions = this.getCurrentDimensions();
+
+	attrs = {
+		'type': this.getType(),
+		'width': currentDimensions.width,
+		'height': currentDimensions.height,
+		'defaultSize': this.isDefaultSize(),
+		'borderImage': this.hasBorder()
+	};
+
+	if ( origAttrs.alt !== undefined || this.getAltText() !== '' ) {
+		attrs.alt = this.getAltText();
+	}
+
+	if (
+		this.isDefaultAligned() ||
+		this.getAlignment() === this.getDefaultDir()
+	) {
+		attrs.align = 'default';
+	} else if ( !this.isAligned() ) {
+		attrs.align = 'none';
+	} else {
+		attrs.align = this.getAlignment();
+	}
+
+	return attrs;
+};
+
+/**
+ * Deal with default change on the scalable object
+ *
+ * @param {boolean} isDefault
+ */
+ve.dm.MWImageModel.prototype.onScalableDefaultSizeChange = function ( isDefault ) {
+	this.toggleDefaultSize( isDefault );
+};
+
+/**
+ * Set the media node
+ * @param {ve.dm.MWImageNode} node Node model
+ */
+ve.dm.MWImageModel.prototype.setMediaNode = function ( node ) {
+	this.mediaNode = node;
+};
+
+/**
+ * Retrieve the media node
+ * @return {ve.dm.MWImageNode} node Node model
+ */
+ve.dm.MWImageModel.prototype.getMediaNode = function () {
+	return this.mediaNode;
+};
+
+/**
+ * Check whether the image is set to default size
+ * @return {boolean} Default size flag on or off
+ */
+ve.dm.MWImageModel.prototype.isDefaultSize = function () {
+	return this.scalable.isDefault();
+};
+
+/**
+ * Check whether the image has the border flag set
+ * @return {boolean} Border flag on or off
+ */
+ve.dm.MWImageModel.prototype.hasBorder = function () {
+	return this.border;
+};
+
+/**
+ * Check whether the image has floating alignment set
+ * @return {boolean} hasAlignment flag on or off
+ */
+ve.dm.MWImageModel.prototype.isAligned = function () {
+	return this.aligned;
+};
+
+/**
+ * Check whether the image is set to default alignment
+ * @return {boolean} defaultAlignment flag on or off
+ */
+ve.dm.MWImageModel.prototype.isDefaultAligned = function () {
+	return this.defaultAlignment;
+};
+
+/**
+ * Check whether the image can have a border set on it
+ * @return {boolean} Border possible or not
+ */
+ve.dm.MWImageModel.prototype.isBorderable = function () {
+	return this.borderable;
+};
+
+/**
+ * Get the image alternate text
+ * @return {string} Alternate text
+ */
+ve.dm.MWImageModel.prototype.getAltText = function () {
+	return this.altText;
+};
+
+/**
+ * Get image wikitext type; 'thumb', 'frame', 'frameless' or 'none/inline'
+ * @return {string} Image type
+ */
+ve.dm.MWImageModel.prototype.getType = function () {
+	return this.type;
+};
+
+/**
+ * Get the image size type of the image
+ */
+ve.dm.MWImageModel.prototype.getSizeType = function () {
+	return this.sizeType;
+};
+
+/**
+ * Get symbolic name of media type.
+ *
+ * Example values: "BITMAP" for JPEG or PNG images; "DRAWING" for SVG graphics
+ *
+ * @return {string|null} Symbolic media type name, or null if empty
+ */
+ve.dm.MWImageModel.prototype.getMediaType = function () {
+	return this.mediaType;
+};
+
+/**
+ * Get image alignment 'left', 'right', 'center', 'none' or 'default'
+ * @return {string} Image alignment
+ */
+ve.dm.MWImageModel.prototype.getAlignment = function () {
+	return this.alignment;
+};
+
+/**
+ * Get image vertical alignment
+ * 'middle', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' or 'default'
+ * @return {string} Image alignment
+ */
+ve.dm.MWImageModel.prototype.getVerticalAlignment = function () {
+	return this.verticalAlignment;
+};
+
+/**
+ * Get the scalable object responsible for size manipulations
+ * for the given image
+ * @return {ve.dm.Scalable} Scalable object
+ */
+ve.dm.MWImageModel.prototype.getScalable = function () {
+	return this.scalable;
+};
+
+/**
+ * Get the image current dimensions
+ * @return {Object} Current dimensions width/height
+ * @return {number} dimensions.width The width of the image
+ * @return {number} dimensions.height The height of the image
+ */
+ve.dm.MWImageModel.prototype.getCurrentDimensions = function () {
+	return this.scalable.getCurrentDimensions();
+};
+
+/**
+ * Get image caption document.
+ *
+ * Auto-generates a blank document if no document exists.
+ *
+ * @return {ve.dm.Document} Caption document
+ */
+ve.dm.MWImageModel.prototype.getCaptionDocument = function () {
+	if ( !this.captionDoc ) {
+		this.captionDoc = new ve.dm.Document( [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+			{ 'type': '/paragraph' },
+			{ 'type': 'internalList' },
+			{ 'type': '/internalList' }
+		] );
+	}
+	return this.captionDoc;
+};
+
+/**
+ * Toggle the option of whether this image can or cannot have
+ * a border set on it.
+ *
+ * @param {boolean} [borderable] Set or unset borderable. If not
+ *  specified, the current state is toggled.
+ */
+ve.dm.MWImageModel.prototype.toggleBorderable = function ( borderable ) {
+	borderable = borderable !== undefined ? !!borderable : !this.isBorderable();
+
+	this.borderable = borderable;
+};
+
+/**
+ * Toggle whether the image has an floating alignment set
+ *
+ * @param {boolean} [aligned] Image has alignment
+ * @fires alignmentChange
+ */
+ve.dm.MWImageModel.prototype.toggleAligned = function ( aligned ) {
+	var currentAlignment;
+
+	aligned = aligned !== undefined ? !!aligned : !this.isAligned();
+	this.aligned = !!aligned;
+
+	currentAlignment = !!aligned ? this.getAlignment() : 'none';
+	this.emit( 'alignmentChange',
+		!!aligned ?
+		this.getAlignment() : 'none'
+	);
+};
+/**
+ * Toggle the border flag of the image
+ *
+ * @param {boolean} [hasBorder] Border flag. Omit to toggle current value.
+ */
+ve.dm.MWImageModel.prototype.toggleBorder = function ( hasBorder ) {
+	hasBorder = hasBorder !== undefined ? !!hasBorder : !this.hasBorder();
+
+	this.border = !!hasBorder;
+};
+
+/**
+ * Toggle the default alignment flag of the image
+ *
+ * @param {Boolean} [isDefault] Default alignment flat. Omit to toggle current value.
+ * @fires alignmentChange
+ */
+ve.dm.MWImageModel.prototype.toggleDefaultAlignment = function ( isDefault ) {
+	isDefault = isDefault !== undefined ? !!isDefault : !this.isDefaultAligned();
+
+	this.defaultAlignment = !!isDefault;
+	this.emit( 'alignmentChange', this.alignment );
+};
+
+/**
+ * Toggle the default size flag of the image
+ * @param {boolean} [isDefault] Default size flag. Omit to toggle current value.
+ * @fires sizeDefaultChange
+ */
+ve.dm.MWImageModel.prototype.toggleDefaultSize = function ( isDefault ) {
+	isDefault = isDefault !== undefined ? !!isDefault : !this.isDefaultSize();
+
+	if ( this.isDefaultSize() !== isDefault ) {
+		this.scalable.toggleDefault( !!isDefault );
+		this.resetDefaultDimensions();
+		this.emit( 'sizeDefaultChange', !!isDefault );
+	}
+};
+
+/**
+ * Cache all image attributes
+ * @param {Object} attrs Image attributes
+ */
+ve.dm.MWImageModel.prototype.cacheOriginalImageAttributes = function ( attrs ) {
+	this.attributesCache = attrs;
+};
+
+/**
+ * Get the cache of all image attributes
+ * @return {Object} attrs Image attributes
+ */
+ve.dm.MWImageModel.prototype.getOriginalImageAttributes = function () {
+	return this.attributesCache;
+};
+
+/**
+ * Set the current dimensions of the image.
+ * Normalize in case only one dimension is available.
+ * @param {Object} dimensions Dimensions width and height
+ * @param {number} dimensions.width The width of the image
+ * @param {number} dimensions.height The height of the image
+ */
+ve.dm.MWImageModel.prototype.setCurrentDimensions = function ( dimensions ) {
+	var normalizedDimensions = this.scalable.getDimensionsFromValue( dimensions );
+	this.scalable.setCurrentDimensions( normalizedDimensions );
+};
+
+/**
+ * Set alternate text
+ * @param {string} text Alternate text
+ */
+ve.dm.MWImageModel.prototype.setAltText = function ( text ) {
+	this.altText = text;
+};
+
+/**
+ * Set image type
+ * @see #getType
+ *
+ * @param {string} type Image type
+ * @fires typeChange
+ */
+ve.dm.MWImageModel.prototype.setType = function ( type ) {
+	this.type = type;
+
+	if ( type === 'frame' || type === 'thumb' ) {
+		// Disable border option
+		this.toggleBorderable( false );
+	} else {
+		// Enable border option
+		this.toggleBorderable( true );
+	}
+
+	// Let the image node update scalable considerations
+	// for default and max dimensions as per the new type.
+	this.getMediaNode().updateType( type );
+
+	this.emit( 'typeChange', type );
+};
+
+/**
+ * Reset the default dimensions of the image based on its type
+ * and on whether we have the originalDimensions object from
+ * the API
+ */
+ve.dm.MWImageModel.prototype.resetDefaultDimensions = function () {
+	var originalDimensions = this.scalable.getOriginalDimensions();
+
+	if ( !$.isEmptyObject( originalDimensions ) ) {
+		if ( this.getType() === 'thumb' || this.getType() === 'frameless' ) {
+			// Default is thumb size
+			if ( originalDimensions.width <= this.defaultThumbSize ) {
+				this.scalable.setDefaultDimensions( originalDimensions );
+			} else {
+				this.scalable.setDefaultDimensions(
+					this.scalable.getDimensionsFromValue( {
+						'width': this.defaultThumbSize
+				} ) );
+			}
+		} else {
+			// Default is original size
+			this.scalable.setDefaultDimensions( originalDimensions );
+		}
+	} else {
+		this.scalable.setDefaultDimensions( {} );
+	}
+};
+
+/**
+ * Retrieve the currently set default dimensions from the scalable
+ * object attached to the image.
+ *
+ * @return {Object} Image default dimensions
+ */
+ve.dm.MWImageModel.prototype.getDefaultDimensions = function () {
+	return this.scalable.getDefaultDimensions();
+};
+
+/**
+ * Change size type of the image
+ *
+ * @param {string} type Size type 'default', 'custom' or 'scale'
+ */
+ve.dm.MWImageModel.prototype.setSizeType = function ( type ) {
+	if ( this.sizeType !== type ) {
+		this.sizeType = type;
+		this.toggleDefaultSize( type === 'default' );
+	}
+};
+
+/**
+ * Set symbolic name of media type.
+ *
+ * @see #getMediaType
+ *
+ * @param {string} type Media type
+ */
+ve.dm.MWImageModel.prototype.setMediaType = function ( type ) {
+	this.mediaType = type;
+};
+
+/**
+ * Set image alignment
+ *
+ * @see #getAlignment
+ *
+ * @param {string} align Alignment
+ */
+ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
+	if ( align === 'default' ) {
+		// If default, set the alignment to language dir default
+		align = this.getDefaultDir();
+		this.toggleDefaultAlignment( true );
+	} else {
+		this.toggleDefaultAlignment( false );
+	}
+
+	this.alignment = align;
+	this.emit( 'alignmentChange', align );
+};
+
+/**
+ * Set image vertical alignment
+ *
+ * @see #getVerticalAlignment
+ *
+ * @param {string} valign Alignment
+ */
+ve.dm.MWImageModel.prototype.setVerticalAlignment = function ( valign ) {
+	this.verticalAlignment = valign;
+	this.emit( 'alignmentChange', valign );
+};
+
+/**
+ * Get the default alignment according to the document direction
+ *
+ * @return {string} Node alignment based on document direction
+ */
+ve.dm.MWImageModel.prototype.getDefaultDir = function () {
+	if ( this.getDir() === 'rtl' ) {
+		// Assume position is 'left'
+		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'left' : 'right';
+	} else {
+		// Assume position is 'right'
+		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'right' : 'left';
+	}
+};
+
+/**
+ * Get the directionality of the image, especially important for
+ * default alignment.
+ *
+ * @return {string} Current document direction 'rtl' or 'ltr'
+ */
+ve.dm.MWImageModel.prototype.getDir = function () {
+	return this.dir;
+};
+
+/**
+ * Set the directionality of the image, especially important for
+ * default alignment.
+ * @param {string} dir 'rtl' or 'ltr'
+ */
+ve.dm.MWImageModel.prototype.setDir = function ( dir ) {
+	this.dir = dir;
+};
+
+/**
+ * Set the scalable object relevant to the image node
+ *
+ * @param {ve.dm.Scalable} Scalable object
+ */
+ve.dm.MWImageModel.prototype.setScalable = function ( scalable ) {
+	if ( this.scalable instanceof ve.dm.Scalable ) {
+		this.scalable.disconnect( this );
+	}
+	this.scalable = scalable;
+	// Events
+	this.scalable.connect( this, { 'defaultSizeChange': 'onScalableDefaultSizeChange' } );
+};
+
+/**
+ * Set image caption document.
+ *
+ * @param {ve.dm.Document} Image caption document
+ */
+ve.dm.MWImageModel.prototype.setCaptionDocument = function ( doc ) {
+	this.captionDoc = doc;
+};

@@ -262,7 +262,7 @@ ve.dm.mwExample.MWInlineImage = {
 			'isLinked': true,
 			'valign': 'text-top',
 			'resource': './File:Wiki.png',
-			'type': 'inline',
+			'type': 'none',
 			'originalClasses': 'foo mw-valign-text-top',
 			'unrecognizedClasses': ['foo']
 		},

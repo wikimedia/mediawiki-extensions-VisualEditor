@@ -59,6 +59,9 @@ ve.dm.MWImageNode.prototype.updateType = function ( type ) {
 		width = this.getAttribute( 'width' ),
 		height = this.getAttribute( 'height' );
 
+	// If no type is given, assume we are updating per current type
+	type = type || this.getAttribute( 'type' );
+
 	originalDimensions = scalable.getOriginalDimensions();
 
 	// Deal with the different default sizes
@@ -187,6 +190,8 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 				} );
 				// Update media type
 				this.mediaType = info.mediatype;
+				// Update according to type
+				this.updateType();
 			}
 		}, this ) ).promise();
 	}
