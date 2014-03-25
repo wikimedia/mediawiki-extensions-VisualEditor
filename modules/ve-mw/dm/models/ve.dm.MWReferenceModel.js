@@ -83,7 +83,7 @@ ve.dm.MWReferenceModel.prototype.insertInternalItem = function ( surfaceModel ) 
 
 	// Fill in data
 	this.setListKey( 'auto/' + internalList.getNextUniqueNumber() );
-	this.setListGroup( 'mwReference/' + this.refGroup );
+	this.setListGroup( 'mwReference/' + this.group );
 
 	// Insert internal reference item into document
 	item = internalList.getItemInsertion( this.listGroup, this.listKey, [] );
@@ -172,7 +172,7 @@ ve.dm.MWReferenceModel.prototype.insertReferenceNode = function ( surfaceModel, 
 						'listKey': this.listKey,
 						'listGroup': this.listGroup,
 						'listIndex': this.listIndex,
-						'refGroup': this.refGroup
+						'refGroup': this.group
 					}
 				},
 				{ 'type': '/mwReference' }
