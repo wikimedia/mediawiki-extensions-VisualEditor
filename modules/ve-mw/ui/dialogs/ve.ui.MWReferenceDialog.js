@@ -63,11 +63,6 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 	},
 	// Link
 	{ 'include': [ 'link' ] },
-	// No structure
-	/* {
-		'type': 'bar',
-		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
-	},*/
 	// Cite
 	{
 		'type': 'list',
@@ -75,6 +70,11 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'indicator': 'down',
 		'include': [ { 'group': 'cite-transclusion' } ]
 	},
+	// No structure
+	/* {
+		'type': 'bar',
+		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
+	},*/
 	// Insert
 	{
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),

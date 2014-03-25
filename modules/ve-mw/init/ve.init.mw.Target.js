@@ -199,17 +199,17 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Link
 	{ 'include': [ 'link' ] },
-	// Structure
-	{
-		'type': 'bar',
-		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
-	},
 	// Cite
 	{
 		'type': 'list',
 		'label': 'Cite',
 		'indicator': 'down',
 		'include': [ { 'group': 'cite' } ]
+	},
+	// Structure
+	{
+		'type': 'bar',
+		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
 	},
 	// Insert
 	{
