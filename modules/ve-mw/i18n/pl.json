@@ -15,7 +15,8 @@
             "Wpedzich",
             "Vuh",
             "Dalis",
-            "Jacenty359"
+            "Jacenty359",
+            "Matik7"
         ]
     },
     "tooltip-ca-createsource": "Tworzenie kodu źródłowego strony",
@@ -33,11 +34,16 @@
     "visualeditor-ca-ve-edit": "VisualEditor",
     "visualeditor-ca-ve-edit-section": "VisualEditor",
     "visualeditor-categories-tool": "Kategorie",
+    "visualeditor-cite-tool-name-web": "Strona internetowa",
+    "visualeditor-cite-tool-name-book": "Książka",
+    "visualeditor-cite-tool-name-news": "Gazeta",
+    "visualeditor-cite-tool-name-journal": "Dziennik",
     "visualeditor-desc": "Edytor graficzny dla MediaWiki",
     "visualeditor-descriptionpagelink": "Project:VisualEditor",
     "visualeditor-dialog-beta-welcome-action-continue": "Kontynuuj",
     "visualeditor-dialog-beta-welcome-content": "To jest nasz nowy, łatwiejszy sposób na edytowanie stron. Nadal jest w wersji beta, co oznacza, że możesz natrafić na części strony, których nie będziesz mógł zmienić, lub napotkać problemy wymagające naprawy. Zachęcamy Cię do przeglądania swoich zmian i zgłaszania wszystkich problemów napotkanych podczas używania VisualEditora (kliknij przycisk '{{int:visualeditor-help-tool}}' aby wysłać opinię). Możesz też użyć zwykłego edytora wikitekstowego klikając na zakładkę \"$1\" – niezapisane wcześniej zmiany zostaną utracone.",
     "visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Witamy}} w VisualEditorze",
+    "visualeditor-dialog-citation-insert-citation": "Wstaw cytat",
     "visualeditor-dialog-media-alttext-section": "Tekst alternatywny",
     "visualeditor-dialog-media-content-section": "Podpis",
     "visualeditor-dialog-media-insert-button": "Wstaw multimedia",
