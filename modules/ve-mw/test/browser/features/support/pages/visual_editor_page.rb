@@ -2,7 +2,7 @@ class VisualEditorPage
   include PageObject
 
   include URL
-  page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}")
+  page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}?vehidebetadialog=true")
 
   div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
   div(:content, class: "ve-ce-documentNode ve-ce-branchNode")
@@ -51,7 +51,7 @@ class VisualEditorPage
   div(:visual_editor_toolbar, class: "oo-ui-toolbar-tools")
   span(:transclusion, class: "oo-ui-iconedElement-icon oo-ui-icon-template")
 
-  in_iframe(:index => 0) do |frame|
+  in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
     span(:leftarrowclose, class: "oo-ui-iconedElement-icon oo-ui-icon-previous", frame: frame)
@@ -60,7 +60,8 @@ class VisualEditorPage
     div(:ve_link_ui, class: "oo-ui-window-title", frame: frame)
   end
 
-  in_iframe(:index => 1) do |frame|
+  # not having beta warning makes iframes off by one
+  in_iframe(index: 0) do |frame|
     span(:add_parameter, text: "Add parameter", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert template", frame: frame)
@@ -87,7 +88,8 @@ class VisualEditorPage
     text_field(:transclusion_textfield, index: 0, frame: frame)
   end
 
-  in_iframe(:index => 2) do |frame|
+  # not having beta warning makes iframes off by one
+  in_iframe(index: 1) do |frame|
     div(:links_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:links_review_changes, class: "oo-ui-labeledElement-label", text: "Review your changes", frame: frame)
     div(:media_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)

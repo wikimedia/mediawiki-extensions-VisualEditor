@@ -38,17 +38,8 @@ end
 When(/^I edit the page with (.+)$/) do |input_string|
   on(VisualEditorPage) do |page|
     page.edit_ve_element.when_present.click
-    # Attempt to dismiss "beta warning" pop-up multiple times, since SauceLabs sometimes fails on the first attempt to dismiss.
-    try = 3
-    try.times do
-      #This begin/rescue clause dismisses the VE warning message when it exists, and does not fail when it does not exist
-      begin
-        #should not be needed because try.times should handle the beta_warning. sleep 1 #Chrome seems to not honor when_present correctly as of 5 Dec 2013
-        page.beta_warning_element.when_present.click
-      rescue
-      end
-    end
-    page.content_element.fire_event("onfocus")
+    # no longer need to dismiss beta warning here https://gerrit.wikimedia.org/r/#/c/119217/
+    page.content_element.when_present.fire_event("onfocus")
     page.content_element.when_present.send_keys(input_string + " #{@random_string} ")
   end
 end
