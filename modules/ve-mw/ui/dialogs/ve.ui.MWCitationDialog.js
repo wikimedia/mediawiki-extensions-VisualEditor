@@ -38,6 +38,17 @@ ve.ui.MWCitationDialog.static.icon = 'reference';
 /**
  * @inheritdoc
  */
+ve.ui.MWCitationDialog.prototype.getApplyButtonLabel = function () {
+	return ve.msg(
+		this.inserting ?
+			'visualeditor-dialog-citation-insert-citation' :
+			'visualeditor-dialog-action-apply'
+	);
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWCitationDialog.prototype.getNode = function ( data ) {
 	var node, branches, leaves, transclusion;
 
