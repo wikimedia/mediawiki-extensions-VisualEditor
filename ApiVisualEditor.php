@@ -353,23 +353,32 @@ class ApiVisualEditor extends ApiBase {
 						# Then it must be protected based on static groups (regular)
 						$noticeMsg = 'protectedpagewarning';
 					}
-					$lp = new LogPager(
-						new LogEventsList( $this->getContext() ),
-						'protect',
-						'',
-						$page->getPrefixedDBkey()
-					);
-					$lp->mLimit = 1;
 
-					$notices[] = wfMessage( $noticeMsg )->parseAsBlock() . $lp->getBody() . Linker::link(
-						SpecialPage::getTitleFor( 'Log' ),
-						$this->msg( 'log-fulllog' )->escaped(),
-						array(),
-						array(
-							'page' => $page->getPrefixedDBkey(),
-							'type' => 'protect'
-						)
-					);
+					$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
+						$this->getLastLogEntry( $page, 'protect' );
+				}
+
+				// Show notice when editing user / user talk page of a user that doesn't exist
+				// or who is blocked
+				// HACK of course this code is partly duplicated from EditPage.php :(
+				if ( $page->getNamespace() == NS_USER || $page->getNamespace() == NS_USER_TALK ) {
+					$parts = explode( '/', $page->getText(), 2 );
+					$targetUsername = $parts[0];
+					$targetUser = User::newFromName( $targetUsername, false /* allow IP users*/ );
+
+					if (
+						!( $targetUser && $targetUser->isLoggedIn() ) &&
+						!User::isIP( $targetUsername )
+					) { // User does not exist
+						$notices[] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
+							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) ) .
+							"\n</div>";
+					} elseif ( $targetUser->isBlocked() ) { // Show log extract if the user is currently blocked
+						$notices[] = $this->msg(
+							'blocked-notice-logextract',
+							$targetUser->getName() // Support GENDER in notice
+						)->parseAsBlock() . $this->getLastLogEntry( $targetUser->getUserPage(), 'block' );
+					}
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
@@ -484,6 +493,33 @@ class ApiVisualEditor extends ApiBase {
 		}
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
+	}
+
+	/**
+	 * Gets the relevant HTML for the latest log entry on a given title, including a full log link.
+	 *
+	 * @param $title Title
+	 * @param $types array|string
+	 * @returns string
+	 */
+	private function getLastLogEntry( $title, $types = '' ) {
+		$lp = new LogPager(
+			new LogEventsList( $this->getContext() ),
+			$types,
+			'',
+			$title->getPrefixedDbKey()
+		);
+		$lp->mLimit = 1;
+
+		return $lp->getBody() . Linker::link(
+			SpecialPage::getTitleFor( 'Log' ),
+			$this->msg( 'log-fulllog' )->escaped(),
+			array(),
+			array(
+				'page' => $title->getPrefixedDBkey(),
+				'type' => is_string( $types ) ? $types : null
+			)
+		);
 	}
 
 	public function getAllowedParams() {
