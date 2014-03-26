@@ -27,5 +27,5 @@ When(/^I click Save page another time$/) do
 end
 
 Then(/^the saved page should contain all three edits\.$/) do
-  on(VisualEditorPage).page_text_element.when_present.text.should match(@third_edit_text + @second_edit_text + "Editing with " + @random_string + " " + @first_edit_text)
+  on(VisualEditorPage).page_text_element.when_present(10).text.should match(@third_edit_text + @second_edit_text + "Editing with " + @random_string + " " + @first_edit_text)
 end
