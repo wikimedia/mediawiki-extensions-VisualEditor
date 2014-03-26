@@ -93,16 +93,6 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.initializeTransclusion = function ( data ) {
-	var template = ve.dm.MWTemplateModel.newFromName( this.transclusion, data.template );
-	return this.transclusion.addPart( template ).done( function () {
-		template.addRequiredParameters();
-	} );
-};
-
-/**
- * @inheritdoc
- */
 ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
 	var focusedNode;
 

@@ -484,20 +484,10 @@ ve.ui.MWTransclusionDialog.prototype.saveChanges = function () {
 };
 
 /**
- * Initialize a new transclusion.
- *
- * @param {Object} data Dialog opening data
- * @returns {jQuery.Promise} Promise resolved when transclusion parts are done being added
- */
-ve.ui.MWTransclusionDialog.prototype.initializeTransclusion = function () {
-	return this.transclusion.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusion ) );
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
-	var promise;
+	var template, promise;
 
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
@@ -516,7 +506,16 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 		.setDisabled( true )
 		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-loading' ) );
 	if ( this.inserting ) {
-		promise = this.initializeTransclusion( data );
+		if ( data.template ) {
+			template = ve.dm.MWTemplateModel.newFromName( this.transclusion, data.template );
+			promise = this.transclusion.addPart( template ).done( function () {
+				template.addRequiredParameters();
+			} );
+		} else {
+			promise = this.transclusion.addPart(
+				new ve.dm.MWTemplatePlaceholderModel( this.transclusion )
+			);
+		}
 	} else {
 		promise = this.transclusion
 			.load( ve.copy( this.node.getAttribute( 'mw' ) ) );
