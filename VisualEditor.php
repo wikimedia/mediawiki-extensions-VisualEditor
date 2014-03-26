@@ -476,6 +476,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
 
 			// ui
+			'lib/ve/modules/ve/ui/styles/ve.ui.CommandHelpDialog.css',
 			"lib/ve/modules/ve/ui/styles/ve.ui.DesktopContext.css",
 			"lib/ve/modules/ve/ui/styles/ve.ui.FormatTool.css",
 			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
