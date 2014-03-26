@@ -195,6 +195,8 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 		] ).collapseRangeToEnd().select();
 	}
 
+	this.search.clear();
+
 	// Parent method
 	ve.ui.MWDialog.prototype.teardown.call( this, data );
 };

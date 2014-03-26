@@ -337,6 +337,7 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 		this.ref.updateInternalItem( surfaceModel );
 	}
 
+	this.search.clear();
 	this.referenceSurface.destroy();
 	this.referenceSurface = null;
 	this.ref = null;
