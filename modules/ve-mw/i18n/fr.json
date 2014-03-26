@@ -30,7 +30,8 @@
             "Dr Brains",
             "Drongou",
             "Elitre",
-            "John Trololo"
+            "John Trololo",
+            "Maxim21"
         ]
     },
     "tooltip-ca-createsource": "Créer le code source de cette page",
@@ -49,7 +50,7 @@
     "visualeditor-ca-ve-edit-section": "ÉditeurVisuel",
     "visualeditor-categories-tool": "Catégories",
     "visualeditor-cite-tool-name-web": "Site web",
-    "visualeditor-cite-tool-name-book": "Livres",
+    "visualeditor-cite-tool-name-book": "Livre",
     "visualeditor-cite-tool-name-news": "Journal",
     "visualeditor-cite-tool-name-journal": "Journal",
     "visualeditor-desc": "Éditeur visuel pour MediaWiki",
