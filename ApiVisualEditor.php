@@ -332,19 +332,26 @@ class ApiVisualEditor extends ApiBase {
 				if ( $parsed && $parsed['restoring'] ) {
 					$wgVisualEditorEditNotices[] = 'editingold';
 				}
-				// Creating new page
-				if ( !$page->exists() ) {
-					$wgVisualEditorEditNotices[] = $user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon';
-					// Page protected from creation
-					if ( $page->getRestrictions( 'create' ) ) {
-						$wgVisualEditorEditNotices[] = 'titleprotectedwarning';
-					}
-				}
 				if ( count( $wgVisualEditorEditNotices ) ) {
 					foreach ( $wgVisualEditorEditNotices as $key ) {
 						$notices[] = wfMessage( $key )->parseAsBlock();
 					}
 				}
+
+				// Creating new page
+				if ( !$page->exists() ) {
+					$notices[] = $this->msg(
+						$user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon',
+						Skin::makeInternalOrExternalUrl(
+							$this->msg( 'helppage' )->inContentLanguage()->text()
+						)
+					)->parseAsBlock();
+					// Page protected from creation
+					if ( $page->getRestrictions( 'create' ) ) {
+						$notices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock();
+					}
+				}
+
 				// Page protected from editing
 				if ( $page->getNamespace() != NS_MEDIAWIKI && $page->isProtected( 'edit' ) ) {
 					# Is the title semi-protected?
