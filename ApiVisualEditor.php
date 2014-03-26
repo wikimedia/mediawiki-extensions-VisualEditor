@@ -304,6 +304,7 @@ class ApiVisualEditor extends ApiBase {
 
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
+
 		$page = Title::newFromText( $params['page'] );
 		if ( !$page ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
@@ -527,10 +528,19 @@ class ApiVisualEditor extends ApiBase {
 			'page' => array(
 				ApiBase::PARAM_REQUIRED => true,
 			),
+			'format' => array(
+				ApiBase::PARAM_DFLT => 'json',
+				ApiBase::PARAM_TYPE => array( 'json', 'jsonfm' ),
+			),
 			'paction' => array(
 				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_TYPE => array(
-					'parse', 'parsefragment', 'serializeforcache', 'serialize', 'diff', 'getlanglinks',
+					'parse',
+					'parsefragment',
+					'serialize',
+					'serializeforcache',
+					'diff',
+					'getlanglinks',
 				),
 			),
 			'wikitext' => null,
