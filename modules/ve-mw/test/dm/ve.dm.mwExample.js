@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 /**
  * @class
  * @singleton
@@ -158,7 +156,7 @@ ve.dm.mwExample.MWTransclusion.mixedStoreItems = {
 };
 
 ve.dm.mwExample.MWInternalLink = {
-	'absoluteHref': new mw.Uri( '/wiki/Foo/Bar' ).toString()
+	'absoluteHref': ve.resolveUrl( '/wiki/Foo/Bar', ve.dm.example.base )
 };
 
 ve.dm.mwExample.MWInternalLink.absoluteOpen = '<a rel="mw:WikiLink" href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">';
@@ -185,7 +183,7 @@ ve.dm.mwExample.MWInternalLink.absoluteData = {
 };
 
 ve.dm.mwExample.MWInternalSectionLink = {
-	'absoluteHref': new mw.Uri( '/wiki/Foo#Bar' ).toString()
+	'absoluteHref': ve.resolveUrl( '/wiki/Foo#Bar', ve.dm.example.base )
 };
 
 ve.dm.mwExample.MWInternalSectionLink.absoluteOpen = '<a rel="mw:WikiLink" href="' + ve.dm.mwExample.MWInternalSectionLink.absoluteHref + '">';
