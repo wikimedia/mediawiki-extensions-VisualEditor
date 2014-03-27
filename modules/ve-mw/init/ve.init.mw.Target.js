@@ -310,6 +310,27 @@ ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
 };
 
 /**
+ * Take a target document with a possibly relative base URL, and modify it to be absolute.
+ * The base URL of the target document is resolved using the base URL of the source document.
+ * @param {HTMLDocument} targetDoc Document whose base URL should be resolved
+ * @param {HTMLDocument} sourceDoc Document whose base URL should be used for resolution
+ */
+ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
+	var $base;
+	if ( !targetDoc.baseURI ) {
+		$base = $( 'base', targetDoc );
+		if ( $base.length ) {
+			// Modify the existing <base> tag
+			$base.attr( 'href', ve.resolveUrl( $base.attr( 'href' ), sourceDoc ) );
+		} else {
+			// No <base> tag, add one
+			$base = $( '<base>', targetDoc ).attr( 'href', sourceDoc.baseURI );
+			$( 'head', sourceDoc ).append( $base );
+		}
+	}
+};
+
+/**
  * Handle the RL modules for VE and registered plugin modules being loaded.
  *
  * This method is called within the context of a target instance. It executes all registered
@@ -366,6 +387,9 @@ ve.init.mw.Target.onLoad = function ( response ) {
 	} else {
 		this.originalHtml = data.content;
 		this.doc = ve.createDocumentFromHtml( this.originalHtml );
+
+		// Parsoid outputs a protocol-relative <base> tag, so absolutize it
+		this.constructor.static.fixBase( this.doc, document );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.$checkboxes = $( ve.getObjectValues( data.checkboxes ).join( '' ) );
