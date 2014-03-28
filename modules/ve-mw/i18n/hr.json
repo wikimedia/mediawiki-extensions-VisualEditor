@@ -78,8 +78,6 @@
     "visualeditor-parameter-input-placeholder": "Naziv parametra",
     "visualeditor-parameter-search-no-unused": "Nema nekorištenih parametara",
     "visualeditor-preference-betatempdisable": "Privremeno onemogući VisualEditor (dok je u beta stanju)",
-    "visualeditor-preference-mwmath-description": "Pokusna podrška VisualEditoru za stvaranje i uređivanje matematičkih formula, prije konačnog izdanja. Kad god koristite pokusne mogućnosti, molimo, uvijek pregledajte izmjene prije spremanja.",
-    "visualeditor-preference-mwmath-label": "Uređivanje formula u VisualEditoru",
     "visualeditor-reference-input-placeholder": "Koji izvor želite koristiti?",
     "visualeditor-savedialog-label-create": "Stvori stranicu",
     "visualeditor-savedialog-label-error": "Pogrješka",

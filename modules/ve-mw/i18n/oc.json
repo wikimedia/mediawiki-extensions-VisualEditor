@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Jfblanc",
-            "Cedric31"
+            "Cedric31",
+            "Fitoschido"
         ]
     },
     "tooltip-ca-createsource": "Crear lo còde font d'aquela pagina",
@@ -13,7 +14,7 @@
     "visualeditor-beta-label": "bèta",
     "visualeditor-beta-warning": "VisualEditor es en desvolopament. Podètz aver de problèmas e poder pas modificar de parts de la pagina. Clicatz sus \"{{int:visualeditor-ca-editsource}}\" per passar en edicion classica. Los cambiaments qu'avètz faches seràn pas enregistrats.",
     "visualeditor-browserwarning": "Lo navegador qu'utilizatz es pas oficialament compatible amb VisualEditor.",
-    "visualeditor-ca-createsource": "VisualEditor es en desvolopament. Podètz aver de problèmas e poder pas modificar de parts de la pagina. Clicatz sus \"{{int:visualeditor-ca-editsource}}\" per passar en edicion classica. Los cambiaments qu'avètz faches seràn pas enregistrats.",
+    "visualeditor-ca-createsource": "Crear la font",
     "visualeditor-ca-editsource": "Modificar la font",
     "visualeditor-ca-editsource-section": "modificar la font",
     "visualeditor-ca-ve-create": "VisualEditor",
@@ -149,7 +150,6 @@
     "visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Legenda per l’imatge",
     "visualeditor-mwgalleryinspector-title": "Galariá",
     "visualeditor-mwhieroinspector-title": "Ieroglifs",
-    "visualeditor-mwmathinspector-title": "Formula",
     "visualeditor-notification-created": "« $1 » es estat creat.",
     "visualeditor-notification-restored": "« $1 » es estat restablit.",
     "visualeditor-notification-saved": "Vòstras modificacions sus « $1 » son estadas enregistradas.",
@@ -167,8 +167,6 @@
     "visualeditor-preference-mwalienextension-label": "Edicion de marcas d'extension de VisualEditor",
     "visualeditor-preference-mwhiero-description": "Apondre d'aisinas experimentalas a VisualEditor per crear o modificar de ieroglifs, per dire d'o ensajar, abans la mesa en produccion. Doblidètz pas d'enregistrar las modificacions abans d'utilizar las foncions experimentalas.",
     "visualeditor-preference-mwhiero-label": "Modificacion de ieroglifs amb l'EditorVisual",
-    "visualeditor-preference-mwmath-description": "Apondre d'aisinas experimentalas a VisualEditor per crear o modificar de formulas matematicas, per dire d'o ensajar, abans la mesa en produccion. Doblidètz pas d'enregistrar las modificacions abans d'utilizar las foncions experimentalas.",
-    "visualeditor-preference-mwmath-label": "Modificacion de formulas amb l'EditorVisual",
     "visualeditor-reference-input-placeholder": "A qué volètz apondre una referéncia?",
     "visualeditor-referencelist-isempty": "I a pas de referéncia dins lo grop \"$1\" d'aquesta pagina per apondre a aquela lista.",
     "visualeditor-referencelist-isempty-default": "I a pas de referéncias dins aquela pagina a apondre a aquela lista.",
