@@ -127,7 +127,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				'generator': 'search',
 				'gsrsearch': value,
 				'gsrnamespace': 6,
-				'gsrlimit': 15,
+				'gsrlimit': 20,
 				'gsroffset': source.gsroffset,
 				'prop': 'imageinfo',
 				'iiprop': 'dimensions|url',
