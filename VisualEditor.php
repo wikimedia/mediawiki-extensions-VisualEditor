@@ -487,6 +487,12 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.Surface.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Toolbar.css',
 		),
+		'skinStyles' => array(
+			'default' => array(
+				'lib/ve/modules/ve/ui/themes/apex/ve.ui.Inspector.css',
+			),
+			'minerva' => array(),
+		),
 		'dependencies' => array(
 			'rangy',
 			'unicodejs.wordbreak',
@@ -793,7 +799,12 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWNumberedExternalLinkNode.css',
-			'modules/ve-mw/ui/styles/ve.ui.MWLinkTargetInputWidget.css',
+		),
+		'skinStyles' => array(
+			'default' => array(
+				'modules/ve-mw/ui/themes/apex/ve.ui.MWLinkTargetInputWidget.css'
+			),
+			'minerva' => array(),
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
