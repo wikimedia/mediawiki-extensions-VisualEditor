@@ -993,7 +993,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/ve.ui.MWParameterSearchWidget.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWTransclusionContentPage.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWTransclusionDialog.css',
-			'modules/ve-mw/ui/styles/ve.ui.TemplatePage.css',
+			'modules/ve-mw/ui/styles/ve.ui.MWTemplatePage.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
