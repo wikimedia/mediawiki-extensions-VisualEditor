@@ -111,7 +111,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Insert transcluision",
     "visualeditor-dialog-transclusion-loading": "Laidin...",
     "visualeditor-dialog-transclusion-multiple-mode": "Shaw opties",
-    "visualeditor-dialog-transclusion-no-template-description": "Ye'r addin the \"$1\" template til this page. It disna hae ae descreeption yet, but thaur micht be some information oan the \u003Ca $2\u003Etemplate's page\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "Ye'r addin the \"$1\" template til this page. It disna hae ae descreeption yet, but thaur micht be some information oan the <a $2>template's page</a>.",
     "visualeditor-dialog-transclusion-options": "Opties",
     "visualeditor-dialog-transclusion-placeholder": "New template",
     "visualeditor-dialog-transclusion-remove-content": "Remuiv content",

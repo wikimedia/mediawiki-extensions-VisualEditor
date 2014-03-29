@@ -120,7 +120,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Vložit",
     "visualeditor-dialog-transclusion-loading": "Načítá se…",
     "visualeditor-dialog-transclusion-multiple-mode": "Zobrazit možnosti",
-    "visualeditor-dialog-transclusion-no-template-description": "Přidáváte na tuto stránku šablonu „$1“. Zatím nemá popis, ale nějaké informace by se mohly nacházet na \u003Ca $2\u003Ejejí stránce\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "Přidáváte na tuto stránku šablonu „$1“. Zatím nemá popis, ale nějaké informace by se mohly nacházet na <a $2>její stránce</a>.",
     "visualeditor-dialog-transclusion-options": "Možnosti",
     "visualeditor-dialog-transclusion-placeholder": "Nová šablona",
     "visualeditor-dialog-transclusion-remove-content": "Odstranit obsah",

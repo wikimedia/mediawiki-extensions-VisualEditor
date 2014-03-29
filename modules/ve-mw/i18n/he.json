@@ -123,7 +123,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "הכנסת הכללה",
     "visualeditor-dialog-transclusion-loading": "טעינה...",
     "visualeditor-dialog-transclusion-multiple-mode": "הצגת אפשרויות",
-    "visualeditor-dialog-transclusion-no-template-description": "מתבצעת הוספה של התבנית \"$1\" לדף הזה. עדיין אין לה תיאור, אבל ייתכן שאפשר למצוא מידע מסוים ב\u003Ca $2\u003Eדף של התבנית\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "מתבצעת הוספה של התבנית \"$1\" לדף הזה. עדיין אין לה תיאור, אבל ייתכן שאפשר למצוא מידע מסוים ב<a $2>דף של התבנית</a>.",
     "visualeditor-dialog-transclusion-options": "אפשרויות",
     "visualeditor-dialog-transclusion-placeholder": "תבנית חדשה",
     "visualeditor-dialog-transclusion-remove-content": "הסרת תוכן",

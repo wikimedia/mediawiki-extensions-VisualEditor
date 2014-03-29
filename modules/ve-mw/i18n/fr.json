@@ -141,7 +141,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Insérer une transclusion",
     "visualeditor-dialog-transclusion-loading": "Chargement en cours…",
     "visualeditor-dialog-transclusion-multiple-mode": "Afficher les options",
-    "visualeditor-dialog-transclusion-no-template-description": "Vous avez ajouté le modèle « $1 » à cette page. Il n’a pas encore de description, mais il peut y avoir des informations sur la \u003Ca $2\u003Epage du modèle\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "Vous avez ajouté le modèle « $1 » à cette page. Il n’a pas encore de description, mais il peut y avoir des informations sur la <a $2>page du modèle</a>.",
     "visualeditor-dialog-transclusion-options": "Options",
     "visualeditor-dialog-transclusion-placeholder": "Nouveau modèle",
     "visualeditor-dialog-transclusion-remove-content": "Supprimer le contenu",

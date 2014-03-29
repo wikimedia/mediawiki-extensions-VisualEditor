@@ -127,7 +127,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Insertar transclusión",
     "visualeditor-dialog-transclusion-loading": "Cargando…",
     "visualeditor-dialog-transclusion-multiple-mode": "Mostrar opciones",
-    "visualeditor-dialog-transclusion-no-template-description": "Se va a agregar la plantilla \"$1\" a esta página. Todavía no tiene una descripción, pero podría haber alguna información en la \u003Ca $2\u003Epágina de plantilla\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "Se va a agregar la plantilla \"$1\" a esta página. Todavía no tiene una descripción, pero podría haber alguna información en la <a $2>página de plantilla</a>.",
     "visualeditor-dialog-transclusion-options": "Opciones",
     "visualeditor-dialog-transclusion-placeholder": "Plantilla nueva",
     "visualeditor-dialog-transclusion-remove-content": "Eliminar el contenido",

@@ -95,7 +95,7 @@
     "visualeditor-dialog-transclusion-add-param": "Paraméter hozzáadása",
     "visualeditor-dialog-transclusion-add-template": "Sablon hozzáadása",
     "visualeditor-dialog-transclusion-content": "Tartalom",
-    "visualeditor-dialog-transclusion-no-template-description": "Éppen a(z) \"$1\" sablont adod hozzá ehhez a laphoz. Még nincs leírása, de a \u003Ca $2\u003Eleírólapja\u003C/a\u003E további információkkal szolgálhat.",
+    "visualeditor-dialog-transclusion-no-template-description": "Éppen a(z) \"$1\" sablont adod hozzá ehhez a laphoz. Még nincs leírása, de a <a $2>leírólapja</a> további információkkal szolgálhat.",
     "visualeditor-dialog-transclusion-options": "Beállítások",
     "visualeditor-dialog-transclusion-placeholder": "Új sablon",
     "visualeditor-dialog-transclusion-remove-content": "Tartalom eltávolítása",

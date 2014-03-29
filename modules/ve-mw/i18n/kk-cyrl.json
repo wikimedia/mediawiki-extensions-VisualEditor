@@ -107,7 +107,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Кірікбеттерді кірістіру",
     "visualeditor-dialog-transclusion-loading": "Жүктеуде…",
     "visualeditor-dialog-transclusion-multiple-mode": "Параметрлерді көрсету",
-    "visualeditor-dialog-transclusion-no-template-description": "Бұл бетке \"$1\" үлгісін қоспақшысыз. Онда сипаттамасы жоқ, бірақ \u003Ca $2\u003Eүлгі бетінде\u003C/a\u003E кейбір ақпараттар бар болу мүмкін.",
+    "visualeditor-dialog-transclusion-no-template-description": "Бұл бетке \"$1\" үлгісін қоспақшысыз. Онда сипаттамасы жоқ, бірақ <a $2>үлгі бетінде</a> кейбір ақпараттар бар болу мүмкін.",
     "visualeditor-dialog-transclusion-options": "Параметрлер",
     "visualeditor-dialog-transclusion-placeholder": "Жаңа үлгі",
     "visualeditor-dialog-transclusion-remove-content": "Контенті аластау",

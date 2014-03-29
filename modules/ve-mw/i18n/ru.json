@@ -128,7 +128,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Вставка включения",
     "visualeditor-dialog-transclusion-loading": "Загрузка…",
     "visualeditor-dialog-transclusion-multiple-mode": "Показать параметры",
-    "visualeditor-dialog-transclusion-no-template-description": "Вы добавляете шаблон «$1» на эту страницу. У него ещё нет описания, но может быть есть какая-то информация на \u003Ca $2\u003Eстранице шаблона\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "Вы добавляете шаблон «$1» на эту страницу. У него ещё нет описания, но может быть есть какая-то информация на <a $2>странице шаблона</a>.",
     "visualeditor-dialog-transclusion-options": "Параметры",
     "visualeditor-dialog-transclusion-placeholder": "Новый шаблон",
     "visualeditor-dialog-transclusion-remove-content": "Удалить содержимое",

@@ -142,7 +142,7 @@
     "visualeditor-dialogbutton-media-tooltip": "{{Identical|Media}}",
     "visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
     "visualeditor-dialogbutton-reference-tooltip": "{{Identical|Reference}}",
-    "visualeditor-dialogbutton-referencelist-tooltip": "Tooltip for button for dialog that inserts the references list object (\u003Ccode\u003E\u003Cnowiki\u003EReference list\u003C/nowiki\u003E\u003C/code\u003E).\n{{Identical|References list}}",
+    "visualeditor-dialogbutton-referencelist-tooltip": "Tooltip for button for dialog that inserts the references list object (<code><nowiki>Reference list</nowiki></code>).\n{{Identical|References list}}",
     "visualeditor-dialogbutton-template-tooltip": "{{Identical|Template}}",
     "visualeditor-dialogbutton-transclusion-tooltip": "{{Identical|Transclusion}}",
     "visualeditor-diff-nochanges": "Message displayed in the diff view when no changes were detected",

@@ -83,7 +83,7 @@
     "visualeditor-dialog-transclusion-content": "Чуьраниг",
     "visualeditor-dialog-transclusion-loading": "Чуйолуш…",
     "visualeditor-dialog-transclusion-multiple-mode": "Гайта параметраш",
-    "visualeditor-dialog-transclusion-no-template-description": "Ахьа хӀокху агӀона тӀетухуш ю кеп «$1». Цунах лаьцна хӀинца а хаам бац, амма \u003Ca $2\u003Eкепан агӀонгахь\u003C/a\u003E цхьа хаам хила мега.",
+    "visualeditor-dialog-transclusion-no-template-description": "Ахьа хӀокху агӀона тӀетухуш ю кеп «$1». Цунах лаьцна хӀинца а хаам бац, амма <a $2>кепан агӀонгахь</a> цхьа хаам хила мега.",
     "visualeditor-dialog-transclusion-options": "Параметраш",
     "visualeditor-dialog-transclusion-placeholder": "Керла кеп",
     "visualeditor-dialog-transclusion-remove-content": "ДӀадаккха чуьраниг",

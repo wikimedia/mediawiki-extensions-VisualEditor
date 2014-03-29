@@ -122,7 +122,7 @@
     "visualeditor-dialog-transclusion-insert-transclusion": "Inserisci inclusione",
     "visualeditor-dialog-transclusion-loading": "Caricamento...",
     "visualeditor-dialog-transclusion-multiple-mode": "Mostra opzioni",
-    "visualeditor-dialog-transclusion-no-template-description": "Stai aggiungendo il template \"$1\" a questa pagina. Non ha ancora una descrizione, ma potrebbero esserci alcune informazioni nella \u003Ca $2\u003Epagina del template\u003C/a\u003E.",
+    "visualeditor-dialog-transclusion-no-template-description": "Stai aggiungendo il template \"$1\" a questa pagina. Non ha ancora una descrizione, ma potrebbero esserci alcune informazioni nella <a $2>pagina del template</a>.",
     "visualeditor-dialog-transclusion-options": "Opzioni",
     "visualeditor-dialog-transclusion-placeholder": "Nuovo template",
     "visualeditor-dialog-transclusion-remove-content": "Rimuovi contenuto",
