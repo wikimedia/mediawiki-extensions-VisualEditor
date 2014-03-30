@@ -128,7 +128,7 @@
     "visualeditor-dialogbutton-referencelist-tooltip": "Список на наводи",
     "visualeditor-dialogbutton-template-tooltip": "Шаблон",
     "visualeditor-dialogbutton-transclusion-tooltip": "Превметнување",
-    "visualeditor-diff-nochanges": "Не можев да ја започнам проверката бидејќи вашата ревизија се совпаѓа со последната верзија на страницава.",
+    "visualeditor-diff-nochanges": "Не можев да ја започнам проверката бидејќи вашата преработка се совпаѓа со последната преработка на страницава.",
     "visualeditor-differror": "Грешка при вчитувањето на податоците од опслужувачот: $1.",
     "visualeditor-editconflict": "Не можев да ги зачувам вашите промени поради спротиставеност во уредувања. Дали би сакале да го решите ова рачно?",
     "visualeditor-editnotices-tool": "$1 {{PLURAL:$1|известување|известувања}}",

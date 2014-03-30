@@ -180,7 +180,7 @@
     "visualeditor-parameter-input-placeholder": "Parametrin nimi",
     "visualeditor-parameter-search-no-unused": "Ei käyttämättömiä parametrejä",
     "visualeditor-parameter-search-unknown": "Tuntematon parametri",
-    "visualeditor-preference-betatempdisable": "Poista Visuaalinen muokkain pois käytöstä, kun se on beetavaiheessa",
+    "visualeditor-preference-betatempdisable": "Ota Visuaalinen muokkain pois käytöstä, kun se on beetavaiheessa",
     "visualeditor-preference-core-description": "Ota käyttöön Visuaalinen muokkain. Se ei ole käytössä keskustelusivuilla ja joissakin muissa nimiavaruuksissa.",
     "visualeditor-preference-core-label": "Visuaalinen muokkain",
     "visualeditor-preference-enable": "Ota käyttöön Visuaalinen muokkain. Se ei ole käytössä keskustelusivuilla ja joissakin muissa nimiavaruuksissa.",
