@@ -403,8 +403,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// Review good button on "review" panel
 	this.reviewGoodButton = new OO.ui.ButtonWidget( {
-		'label': ve.msg( 'visualeditor-savedialog-label-review-good' ),
-		'flags': ['constructive']
+		'label': ve.msg( 'visualeditor-savedialog-label-review-good' )
 	} );
 	this.reviewGoodButton.connect( this, { 'click': [ 'swapPanel', 'save' ] } );
 	// Resolve conflict
