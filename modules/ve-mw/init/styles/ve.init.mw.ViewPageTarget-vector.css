@@ -27,6 +27,17 @@
 	position: relative;
 }
 
+.ve-init-debugBar {
+	padding: 1em;
+	margin: 1em -1em -1em -1em;
+	border-top: solid 1px #ccc;
+	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.15) inset;
+}
+
+.ve-init-debugBar ol {
+	margin-left: 0;
+}
+
 .ve-ui-surface-overlay-global {
 	z-index: 101; /* #p-personal is z-index 100 in vector :( */
 }

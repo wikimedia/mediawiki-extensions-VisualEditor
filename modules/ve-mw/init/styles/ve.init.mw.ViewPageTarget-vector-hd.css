@@ -8,3 +8,8 @@
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -1.25em -1.5em 1.5em -1.5em;
 }
+
+.ve-init-debugBar {
+	padding: 1.5em;
+	margin: 1em -1.5em -1.5em -1.5em;
+}

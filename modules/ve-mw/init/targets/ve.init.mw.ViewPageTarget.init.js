@@ -33,8 +33,19 @@
 			getTargetDeferred = $.Deferred();
 			loadTargetDeferred = $.Deferred()
 				.done( function () {
-					var target = new ve.init.mw.ViewPageTarget();
+					var debugBar, target = new ve.init.mw.ViewPageTarget();
 					ve.init.mw.targets.push( target );
+
+					if ( ve.debug ) {
+						debugBar = new ve.init.DebugBar();
+						target.on( 'surfaceReady', function () {
+							$( '#content' ).append( debugBar.$element.show() );
+							debugBar.attachToSurface( target.surface );
+							target.surface.on( 'destroy', function () {
+								debugBar.$element.hide();
+							} );
+						} );
+					}
 
 					// Tee tracked events to MediaWiki firehose, if available (1.23+).
 					if ( mw.track ) {
