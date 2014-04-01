@@ -23,7 +23,7 @@ ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( surface, config ) {
 	ve.ui.MWDialog.call( this, surface, config );
 
 	// Properties
-	this.ref = null;
+	this.referenceModel = null;
 };
 
 /* Inheritance */
@@ -155,6 +155,16 @@ ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 };
 
 /**
+ * Get the reference node to be edited.
+ *
+ * @returns {ve.dm.MWReferenceNode|null} Reference node to be edited, null if none exists
+ */
+ve.ui.MWReferenceDialog.prototype.getReferenceNode = function () {
+	var focusedNode = this.surface.getView().getFocusedNode();
+	return focusedNode instanceof ve.ce.MWReferenceNode ? focusedNode.getModel() : null;
+};
+
+/**
  * Work on a specific reference.
  *
  * @param {ve.dm.MWReferenceModel} [ref] Reference model, omit to work on a new reference
@@ -164,10 +174,10 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	// Properties
 	if ( ref instanceof ve.dm.MWReferenceModel ) {
 		// Use an existing reference
-		this.ref = ref;
+		this.referenceModel = ref;
 	} else {
 		// Create a new reference
-		this.ref = new ve.dm.MWReferenceModel();
+		this.referenceModel = new ve.dm.MWReferenceModel();
 	}
 
 	// Cleanup
@@ -177,7 +187,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 
 	// Properties
 	this.referenceSurface = new ve.ui.SurfaceWidget(
-		this.ref.getDocument(),
+		this.referenceModel.getDocument(),
 		{
 			'$': this.$,
 			'tools': this.constructor.static.toolbarGroups,
@@ -187,10 +197,10 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	);
 
 	// Events
-	this.ref.getDocument().connect( this, { 'transact': 'onDocumentTransact' } );
+	this.referenceModel.getDocument().connect( this, { 'transact': 'onDocumentTransact' } );
 
 	// Initialization
-	this.referenceGroupInput.setValue( this.ref.getGroup() );
+	this.referenceGroupInput.setValue( this.referenceModel.getGroup() );
 	this.contentFieldset.$element.append( this.referenceSurface.$element );
 	this.referenceSurface.initialize();
 
@@ -285,20 +295,18 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
-	var focusedNode;
-
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
-	focusedNode = this.surface.getView().getFocusedNode();
+	this.referenceNode = this.getReferenceNode();
 
 	// Data initialization
 	data = data || {};
 
 	this.panels.setItem( this.editPanel );
-	if ( focusedNode instanceof ve.ce.MWReferenceNode ) {
+	if ( this.referenceNode instanceof ve.dm.MWReferenceNode ) {
 		this.useReference(
-			ve.dm.MWReferenceModel.static.newFromReferenceNode( focusedNode.getModel() )
+			ve.dm.MWReferenceModel.static.newFromReferenceNode( this.referenceNode )
 		);
 		this.applyButton.$element.show();
 		this.insertButton.$element.hide();
@@ -324,23 +332,24 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 	data = data || {};
 
 	if ( data.action === 'insert' || data.action === 'apply' ) {
-		this.ref.setGroup( this.referenceGroupInput.getValue() );
+		this.referenceModel.setGroup( this.referenceGroupInput.getValue() );
 
 		// Insert reference (will auto-create an internal item if needed)
 		if ( data.action === 'insert' ) {
-			if ( !this.ref.findInternalItem( surfaceModel ) ) {
-				this.ref.insertInternalItem( surfaceModel );
+			if ( !this.referenceModel.findInternalItem( surfaceModel ) ) {
+				this.referenceModel.insertInternalItem( surfaceModel );
 			}
-			this.ref.insertReferenceNode( surfaceModel );
+			this.referenceModel.insertReferenceNode( surfaceModel );
 		}
 		// Update internal item
-		this.ref.updateInternalItem( surfaceModel );
+		this.referenceModel.updateInternalItem( surfaceModel );
 	}
 
 	this.search.clear();
 	this.referenceSurface.destroy();
 	this.referenceSurface = null;
-	this.ref = null;
+	this.referenceModel = null;
+	this.referenceNode = null;
 
 	// Parent method
 	ve.ui.MWDialog.prototype.teardown.call( this, data );

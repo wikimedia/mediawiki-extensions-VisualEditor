@@ -228,6 +228,18 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
 };
 
 /**
+ * Check if transclusion contains only a single template.
+ *
+ * @param {string} [template] Name of single template, omit to allow any template name
+ * @return {boolean} Transclusion only contains a single template
+ */
+ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( template ) {
+	var partsList = this.getPartsList();
+	return partsList.length === 1 &&
+		( template === undefined || partsList[0].template === template );
+};
+
+/**
  * Get a simplified description of the transclusion's parts.
  *
  * @returns {Object[]} List of objects with either template or content properties

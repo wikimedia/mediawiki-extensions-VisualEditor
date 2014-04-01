@@ -59,6 +59,7 @@ OO.mixinClass( ve.dm.MWTransclusionModel, OO.EventEmitter );
 ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceModel, at ) {
 	surfaceModel
 		.getFragment( at || surfaceModel.getSelection().clone(), true )
+			.collapseRangeToEnd()
 			.insertContent( [
 				{
 					'type': 'mwTransclusionInline',

@@ -20,7 +20,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( surface, config 
 	ve.ui.MWDialog.call( this, surface, config );
 
 	// Properties
-	this.node = null;
+	this.transclusionNode = null;
 	this.transclusion = null;
 	this.loaded = false;
 	this.preventReselection = false;
@@ -468,15 +468,13 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 };
 
 /**
- * Get the node to be edited.
+ * Get the transclusion node to be edited.
  *
- * @param {Object} data Dialog opening data
- * @returns {ve.dm.MWTransclusionNode|null} Node to be edited, null when node is not available
+ * @returns {ve.dm.MWTransclusionNode|null} Transclusion node to be edited, null if none exists
  */
-ve.ui.MWTransclusionDialog.prototype.getNode = function () {
+ve.ui.MWTransclusionDialog.prototype.getTransclusionNode = function () {
 	var focusedNode = this.surface.getView().getFocusedNode();
-
-	return focusedNode ? focusedNode.getModel() : null;
+	return focusedNode instanceof ve.ce.MWTransclusionNode ? focusedNode.getModel() : null;
 };
 
 /**
@@ -486,8 +484,8 @@ ve.ui.MWTransclusionDialog.prototype.saveChanges = function () {
 	var surfaceModel = this.surface.getModel(),
 		obj = this.transclusion.getPlainObject();
 
-	if ( this.node instanceof ve.dm.MWTransclusionNode ) {
-		this.transclusion.updateTransclusionNode( surfaceModel, this.node );
+	if ( this.transclusionNode instanceof ve.dm.MWTransclusionNode ) {
+		this.transclusion.updateTransclusionNode( surfaceModel, this.transclusionNode );
 	} else if ( obj !== null ) {
 		this.transclusion.insertTransclusionNode( surfaceModel );
 	}
@@ -497,7 +495,8 @@ ve.ui.MWTransclusionDialog.prototype.saveChanges = function () {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
-	var template, promise;
+	var template, promise,
+		transclusionNode = this.getTransclusionNode( data );
 
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
@@ -506,10 +505,12 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	data = data || {};
 
 	// Properties
-	this.node = this.getNode( data );
-	this.transclusion = new ve.dm.MWTransclusionModel();
 	this.loaded = false;
-	this.inserting = !( this.node instanceof ve.dm.MWTransclusionNode );
+	this.transclusion = new ve.dm.MWTransclusionModel();
+	this.transclusionNode = transclusionNode instanceof ve.dm.MWTransclusionNode &&
+		( !data.template || transclusionNode.isSingleTemplate( data.template ) ) ?
+			transclusionNode : null;
+	this.inserting = !this.transclusionNode;
 
 	// Events
 	this.transclusion.connect( this, { 'replace': 'onReplacePart' } );
@@ -531,7 +532,7 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 		}
 	} else {
 		promise = this.transclusion
-			.load( ve.copy( this.node.getAttribute( 'mw' ) ) );
+			.load( ve.copy( this.transclusionNode.getAttribute( 'mw' ) ) );
 	}
 	promise.always( ve.bind( function () {
 		this.loaded = true;
@@ -555,7 +556,7 @@ ve.ui.MWTransclusionDialog.prototype.teardown = function ( data ) {
 	this.transclusion.abortRequests();
 	this.transclusion = null;
 	this.bookletLayout.clearPages();
-	this.node = null;
+	this.transclusionNode = null;
 	this.content = null;
 
 	this.setMode( 'single' );

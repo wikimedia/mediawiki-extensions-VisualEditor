@@ -20,7 +20,8 @@ ve.ui.MWCitationDialog = function VeUiMWCitationDialog( surface, config ) {
 	ve.ui.MWTransclusionDialog.call( this, surface, config );
 
 	// Properties
-	this.ref = null;
+	this.referenceModel = null;
+	this.referenceNode = null;
 };
 
 /* Inheritance */
@@ -47,25 +48,35 @@ ve.ui.MWCitationDialog.prototype.getApplyButtonLabel = function () {
 };
 
 /**
+ * Get the reference node to be edited.
+ *
+ * @returns {ve.dm.MWReferenceNode|null} Reference node to be edited, null if none exists
+ */
+ve.ui.MWCitationDialog.prototype.getReferenceNode = function () {
+	var focusedNode = this.surface.getView().getFocusedNode();
+	return focusedNode instanceof ve.ce.MWReferenceNode ? focusedNode.getModel() : null;
+};
+
+/**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.getNode = function ( data ) {
-	var node, branches, leaves, transclusion;
+ve.ui.MWCitationDialog.prototype.getTransclusionNode = function () {
+	var branches, leaves, transclusionNode,
+		referenceNode = this.getReferenceNode();
 
-	node = ve.ui.MWTransclusionDialog.prototype.getNode.call( this, data );
-	if ( node ) {
-		branches = node.getInternalItem().getChildren();
+	if ( referenceNode instanceof ve.dm.MWReferenceNode ) {
+		branches = referenceNode.getInternalItem().getChildren();
 		leaves = branches &&
 			branches.length === 1 &&
 			branches[0].canContainContent() &&
 			branches[0].getChildren();
-		transclusion = leaves &&
+		transclusionNode = leaves &&
 			leaves.length === 1 &&
 			leaves[0] instanceof ve.dm.MWTransclusionNode &&
 			leaves[0];
 	}
 
-	return transclusion || null;
+	return transclusionNode || null;
 };
 
 /**
@@ -78,42 +89,57 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 		internalList = doc.getInternalList(),
 		obj = this.transclusion.getPlainObject();
 
-	if ( !this.ref ) {
-		this.ref = new ve.dm.MWReferenceModel();
-		this.ref.insertInternalItem( surfaceModel );
-		this.ref.insertReferenceNode( surfaceModel );
+	if ( !this.referenceModel ) {
+		surfaceModel.getFragment().collapseRangeToEnd();
+		this.referenceModel = new ve.dm.MWReferenceModel();
+		this.referenceModel.insertInternalItem( surfaceModel );
+		this.referenceModel.insertReferenceNode( surfaceModel );
 	}
 
-	item = this.ref.findInternalItem( surfaceModel );
+	item = this.referenceModel.findInternalItem( surfaceModel );
 	if ( item ) {
-		if ( this.node instanceof ve.dm.MWTransclusionNode ) {
-			this.transclusion.updateTransclusionNode( surfaceModel, this.node );
+		if ( this.transclusionNode instanceof ve.dm.MWTransclusionNode ) {
+			this.transclusion.updateTransclusionNode( surfaceModel, this.transclusionNode );
 		} else if ( obj !== null ) {
-			this.transclusion.insertTransclusionNode( surfaceModel, item.getRange() );
+			this.transclusion.insertTransclusionNode(
+				surfaceModel,
+				// HACK: This is trying to place the cursor inside the first content branch node
+				// but this theoretically not a safe assumption - in practice, the citation dialog
+				// will only reach this code if we are inserting (not updating) a transclusion, so
+				// the referenceModel will have already initialized the internal node with a
+				// paragraph - getting the range of the item covers the entire paragraph so we have
+				// to get the range of it's first (and empty) child
+				item.getChildren()[0].getRange()
+			);
 		}
 	}
 
 	// HACK: Scorch the earth - this is only needed because without it, the reference list won't
 	// re-render properly, and can be removed once someone fixes that
-	this.ref.setDocument(
-		doc.cloneFromRange( internalList.getItemNode( this.ref.getListIndex() ).getRange() )
+	this.referenceModel.setDocument(
+		doc.cloneFromRange(
+			internalList.getItemNode( this.referenceModel.getListIndex() ).getRange()
+		)
 	);
-	this.ref.updateInternalItem( surfaceModel );
+	this.referenceModel.updateInternalItem( surfaceModel );
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
-	var focusedNode;
-
 	// Parent method
 	ve.ui.MWTransclusionDialog.prototype.setup.call( this, data );
 
 	// Initialization
-	focusedNode = this.surface.getView().getFocusedNode();
-	this.ref = focusedNode && focusedNode.getModel() instanceof ve.dm.MWReferenceNode ?
-		ve.dm.MWReferenceModel.static.newFromReferenceNode( focusedNode.getModel() ) : null;
+	if ( this.transclusionNode ) {
+		this.referenceNode = this.getReferenceNode();
+		if ( this.referenceNode instanceof ve.dm.MWReferenceNode ) {
+			this.referenceModel = ve.dm.MWReferenceModel.static.newFromReferenceNode(
+				this.referenceNode
+			);
+		}
+	}
 };
 
 /**
@@ -124,5 +150,6 @@ ve.ui.MWCitationDialog.prototype.teardown = function ( data ) {
 	ve.ui.MWTransclusionDialog.prototype.teardown.call( this, data );
 
 	// Cleanup
-	this.ref = null;
+	this.referenceModel = null;
+	this.referenceNode = null;
 };
