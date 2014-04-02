@@ -422,6 +422,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/ve.ui.Dialog.js',
 			'lib/ve/modules/ve/ui/ve.ui.Inspector.js',
 			'lib/ve/modules/ve/ui/ve.ui.WindowSet.js',
+			'lib/ve/modules/ve/ui/ve.ui.Tool.js',
 			'lib/ve/modules/ve/ui/ve.ui.Toolbar.js',
 			'lib/ve/modules/ve/ui/ve.ui.TargetToolbar.js',
 			'lib/ve/modules/ve/ui/ve.ui.ToolFactory.js',
