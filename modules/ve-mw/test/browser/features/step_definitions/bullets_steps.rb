@@ -6,8 +6,8 @@ end
   on(VisualEditorPage) do |page|
     #extra space after 'line' below is a workaround for FF issue where VE is sending BACKSPACE before RETURN
     #probably caused by https://bugzilla.wikimedia.org/show_bug.cgi?id=56274
-    page.content_element.when_present.send_keys "This is a new line "
-    page.content_element.when_present.send_keys :return
+    page.content_element.when_present(10).send_keys "This is a new line "
+    page.content_element.when_present(10).send_keys :return
   end
 end
 

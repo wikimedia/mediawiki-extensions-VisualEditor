@@ -19,7 +19,7 @@ When(/^I enter and save a (.+) edit$/) do |count|
 end
 
 When(/^I insert the text (.*?)$/) do |input_string|
-  on(VisualEditorPage).content_element.when_present.send_keys(input_string)
+  on(VisualEditorPage).content_element.when_present(10).send_keys(input_string)
 end
 
 When(/^I click Save page another time$/) do
