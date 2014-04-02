@@ -23,8 +23,8 @@ ve.ui.MWReferenceDialogTool.static.group = 'object';
 ve.ui.MWReferenceDialogTool.static.icon = 'reference';
 ve.ui.MWReferenceDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-tooltip' );
-ve.ui.MWReferenceDialogTool.static.dialog = 'reference';
 ve.ui.MWReferenceDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
+ve.ui.MWReferenceDialogTool.static.commandName = 'reference';
 ve.ui.toolFactory.register( ve.ui.MWReferenceDialogTool );
 
 /**
@@ -45,6 +45,6 @@ ve.ui.MWReferenceListDialogTool.static.group = 'object';
 ve.ui.MWReferenceListDialogTool.static.icon = 'references';
 ve.ui.MWReferenceListDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-referencelist-tooltip' );
-ve.ui.MWReferenceListDialogTool.static.dialog = 'referenceList';
 ve.ui.MWReferenceListDialogTool.static.modelClasses = [ ve.dm.MWReferenceListNode ];
+ve.ui.MWReferenceListDialogTool.static.commandName = 'referenceList';
 ve.ui.toolFactory.register( ve.ui.MWReferenceListDialogTool );

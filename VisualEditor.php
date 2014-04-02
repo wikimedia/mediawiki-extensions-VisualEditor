@@ -603,6 +603,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js',
 
 			// ui
+			'modules/ve-mw/ui/actions/ve.ui.MWEditAction.js',
+
 			'modules/ve-mw/ui/ve.ui.MWDialog.js',
 			'modules/ve-mw/ui/ve.ui.MWCommandRegistry.js',
 
@@ -934,8 +936,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceListDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
 
-			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
+			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/ve.ce.MWReferenceListNode.css',

@@ -23,7 +23,7 @@ ve.ui.MWCommandHelpDialogTool.static.group = 'utility';
 ve.ui.MWCommandHelpDialogTool.static.icon = 'help';
 ve.ui.MWCommandHelpDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' );
-ve.ui.MWCommandHelpDialogTool.static.dialog = 'commandHelp';
+ve.ui.MWCommandHelpDialogTool.static.commandName = 'commandHelp';
 ve.ui.MWCommandHelpDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWCommandHelpDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWCommandHelpDialogTool );

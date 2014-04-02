@@ -783,7 +783,7 @@ ve.init.mw.Target.onSerializeError = function ( jqXHR, status, error ) {
  *
  */
 ve.init.mw.Target.prototype.generateCitationFeatures = function () {
-	var i, len, item, name, tool, tools, dialog;
+	var i, len, item, name, data, tool, tools, dialog;
 
 	if ( !ve.ui.MWCitationDialog ) {
 		// Citation module isn't loaded, so skip this
@@ -800,8 +800,9 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 	if ( ve.isArray( tools ) ) {
 		for ( i = 0, len = tools.length; i < len; i++ ) {
 			item = tools[i];
+			data = { 'template': item.template };
 			// Generate transclusion tool
-			name = 'transclusion-cite-' + item.name;
+			name = 'cite-transclusion-' + item.name;
 			tool = function GeneratedMWTransclusionDialogTool( toolbar, config ) {
 				ve.ui.MWTransclusionDialogTool.call( this, toolbar, config );
 			};
@@ -810,11 +811,14 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			tool.static.name = name;
 			tool.static.icon = item.icon;
 			tool.static.title = item.title;
-			tool.static.dialogData = { 'template': item.template };
+			tool.static.commandName = name;
 			tool.static.template = item.template;
 			tool.static.autoAddToCatchall = false;
 			tool.static.autoAddToGroup = true;
 			ve.ui.toolFactory.register( tool );
+			ve.ui.commandRegistry.register(
+				new ve.ui.Command( name, 'dialog', 'open', 'transclusion', data )
+			);
 			// Generate citation tool
 			name = 'cite-' + item.name;
 			tool = function GeneratedMWCitationDialogTool( toolbar, config ) {
@@ -823,14 +827,16 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			OO.inheritClass( tool, ve.ui.MWCitationDialogTool );
 			tool.static.group = 'cite';
 			tool.static.name = name;
-			tool.static.dialog = name;
 			tool.static.icon = item.icon;
 			tool.static.title = item.title;
-			tool.static.dialogData = { 'template': item.template };
+			tool.static.commandName = name;
 			tool.static.template = item.template;
 			tool.static.autoAddToCatchall = false;
 			tool.static.autoAddToGroup = true;
 			ve.ui.toolFactory.register( tool );
+			ve.ui.commandRegistry.register(
+				new ve.ui.Command( name, 'dialog', 'open', name, data )
+			);
 			// Generate dialog
 			dialog = function GeneratedMWCitationDialog( toolbar, config ) {
 				ve.ui.MWCitationDialog.call( this, toolbar, config );

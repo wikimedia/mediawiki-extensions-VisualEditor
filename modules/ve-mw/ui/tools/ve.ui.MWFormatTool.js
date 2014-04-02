@@ -22,7 +22,6 @@ ve.ui.MWHeading1FormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-mw-heading1' );
 ve.ui.MWHeading1FormatTool.static.format = { 'type': 'mwHeading', 'attributes': { 'level': 1 } };
 ve.ui.toolFactory.register( ve.ui.MWHeading1FormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'heading1', 'format', 'convert', 'mwHeading', { 'level': 1 } ) );
 
 /**
  * MediaWiki UserInterface heading 2 tool.
@@ -41,7 +40,6 @@ ve.ui.MWHeading2FormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-mw-heading2' );
 ve.ui.MWHeading2FormatTool.static.format = { 'type': 'mwHeading', 'attributes': { 'level': 2 } };
 ve.ui.toolFactory.register( ve.ui.MWHeading2FormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'heading2', 'format', 'convert', 'mwHeading', { 'level': 2 } ) );
 
 /**
  * MediaWiki UserInterface heading 3 tool.
@@ -60,7 +58,6 @@ ve.ui.MWHeading3FormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-mw-heading3' );
 ve.ui.MWHeading3FormatTool.static.format = { 'type': 'mwHeading', 'attributes': { 'level': 3 } };
 ve.ui.toolFactory.register( ve.ui.MWHeading3FormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'heading3', 'format', 'convert', 'mwHeading', { 'level': 3 } ) );
 
 /**
  * MediaWiki UserInterface heading 4 tool.
@@ -79,7 +76,6 @@ ve.ui.MWHeading4FormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-mw-heading4' );
 ve.ui.MWHeading4FormatTool.static.format = { 'type': 'mwHeading', 'attributes': { 'level': 4 } };
 ve.ui.toolFactory.register( ve.ui.MWHeading4FormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'heading4', 'format', 'convert', 'mwHeading', { 'level': 4 } ) );
 
 /**
  * MediaWiki UserInterface heading 5 tool.
@@ -98,7 +94,6 @@ ve.ui.MWHeading5FormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-mw-heading5' );
 ve.ui.MWHeading5FormatTool.static.format = { 'type': 'mwHeading', 'attributes': { 'level': 5 } };
 ve.ui.toolFactory.register( ve.ui.MWHeading5FormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'heading5', 'format', 'convert', 'mwHeading', { 'level': 5 } ) );
 
 /**
  * MediaWiki UserInterface heading 6 tool.
@@ -117,7 +112,6 @@ ve.ui.MWHeading6FormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-mw-heading6' );
 ve.ui.MWHeading6FormatTool.static.format = { 'type': 'mwHeading', 'attributes': { 'level': 6 } };
 ve.ui.toolFactory.register( ve.ui.MWHeading6FormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'heading6', 'format', 'convert', 'mwHeading', { 'level': 6 } ) );
 
 /**
  * MediaWiki UserInterface preformatted tool.
@@ -134,4 +128,3 @@ ve.ui.MWPreformattedFormatTool = function VeUiMWPreformattedFormatTool( toolGrou
 OO.inheritClass( ve.ui.MWPreformattedFormatTool, ve.ui.PreformattedFormatTool );
 ve.ui.MWPreformattedFormatTool.static.format = { 'type': 'mwPreformatted' };
 ve.ui.toolFactory.register( ve.ui.MWPreformattedFormatTool );
-ve.ui.commandRegistry.register( new ve.ui.Command( 'preformatted', 'format', 'convert', 'mwPreformatted' ) );

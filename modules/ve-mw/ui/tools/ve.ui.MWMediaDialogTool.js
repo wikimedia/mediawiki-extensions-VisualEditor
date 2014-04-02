@@ -23,8 +23,8 @@ ve.ui.MWMediaEditDialogTool.static.group = 'object';
 ve.ui.MWMediaEditDialogTool.static.icon = 'picture';
 ve.ui.MWMediaEditDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-media-tooltip' );
-ve.ui.MWMediaEditDialogTool.static.dialog = 'mediaEdit';
 ve.ui.MWMediaEditDialogTool.static.modelClasses = [ ve.dm.MWBlockImageNode ];
+ve.ui.MWMediaEditDialogTool.static.commandName = 'mediaEdit';
 ve.ui.MWMediaEditDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWMediaEditDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWMediaEditDialogTool );
@@ -47,5 +47,5 @@ ve.ui.MWMediaInsertDialogTool.static.group = 'object';
 ve.ui.MWMediaInsertDialogTool.static.icon = 'picture';
 ve.ui.MWMediaInsertDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-media-tooltip' );
-ve.ui.MWMediaInsertDialogTool.static.dialog = 'mediaInsert';
+ve.ui.MWMediaInsertDialogTool.static.commandName = 'mediaInsert';
 ve.ui.toolFactory.register( ve.ui.MWMediaInsertDialogTool );

@@ -23,8 +23,8 @@ ve.ui.MWAlienExtensionInspectorTool.static.group = 'object';
 ve.ui.MWAlienExtensionInspectorTool.static.icon = 'alienextension';
 ve.ui.MWAlienExtensionInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwalienextensioninspector-title' );
-ve.ui.MWAlienExtensionInspectorTool.static.inspector = 'alienExtension';
 ve.ui.MWAlienExtensionInspectorTool.static.modelClasses = [ ve.dm.MWAlienExtensionNode ];
+ve.ui.MWAlienExtensionInspectorTool.static.commandName = 'alienExtension';
 ve.ui.MWAlienExtensionInspectorTool.static.autoAddToCatchall = false;
 ve.ui.MWAlienExtensionInspectorTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWAlienExtensionInspectorTool );

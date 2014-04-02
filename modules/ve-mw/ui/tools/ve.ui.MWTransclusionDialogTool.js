@@ -33,11 +33,11 @@ ve.ui.MWTransclusionDialogTool.static.icon = 'template';
 ve.ui.MWTransclusionDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-template-tooltip' );
 
-ve.ui.MWTransclusionDialogTool.static.dialog = 'transclusion';
-
 ve.ui.MWTransclusionDialogTool.static.template = null;
 
 ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode ];
+
+ve.ui.MWTransclusionDialogTool.static.commandName = 'transclusion';
 
 /* Methods */
 

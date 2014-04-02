@@ -23,6 +23,6 @@ ve.ui.MWGalleryInspectorTool.static.group = 'object';
 ve.ui.MWGalleryInspectorTool.static.icon = 'gallery';
 ve.ui.MWGalleryInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwgalleryinspector-title' );
-ve.ui.MWGalleryInspectorTool.static.inspector = 'gallery';
 ve.ui.MWGalleryInspectorTool.static.modelClasses = [ ve.dm.MWGalleryNode ];
+ve.ui.MWGalleryInspectorTool.static.commandName = 'gallery';
 ve.ui.toolFactory.register( ve.ui.MWGalleryInspectorTool );

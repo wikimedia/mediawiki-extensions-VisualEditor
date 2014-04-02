@@ -502,6 +502,9 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	// Parent method
 	ve.ui.MWDialog.prototype.setup.call( this, data );
 
+	// Data initialization
+	data = data || {};
+
 	// Properties
 	this.node = this.getNode( data );
 	this.transclusion = new ve.dm.MWTransclusionModel();

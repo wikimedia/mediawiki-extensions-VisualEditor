@@ -23,6 +23,6 @@ ve.ui.MWHieroInspectorTool.static.group = 'object';
 ve.ui.MWHieroInspectorTool.static.icon = 'hiero';
 ve.ui.MWHieroInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwhieroinspector-title' );
-ve.ui.MWHieroInspectorTool.static.inspector = 'hiero';
 ve.ui.MWHieroInspectorTool.static.modelClasses = [ ve.dm.MWHieroNode ];
+ve.ui.MWHieroInspectorTool.static.commandName = 'hiero';
 ve.ui.toolFactory.register( ve.ui.MWHieroInspectorTool );
