@@ -1208,8 +1208,8 @@ ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
 			'format': 'text/x-wiki',
 			'model': 'wikitext',
 			'oldid': this.revid,
-			'wpStarttime': this.baseTimeStamp,
-			'wpEdittime': this.startTimeStamp,
+			'wpStarttime': this.startTimeStamp,
+			'wpEdittime': this.baseTimeStamp,
 			'wpTextbox1': wikitext,
 			'wpEditToken': this.editToken
 		}, fields );
