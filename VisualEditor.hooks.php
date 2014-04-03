@@ -101,9 +101,11 @@ class VisualEditorHooks {
 
 				// Inject the VE tab before or after the edit tab
 				if ( $wgVisualEditorTabPosition === 'before' ) {
+					$editTab['class'] = 'collapsible';
 					$newViews['ve-edit'] = $veTab;
 					$newViews['edit'] = $editTab;
 				} else {
+					$veTab['class'] = 'collapsible';
 					$newViews['edit'] = $editTab;
 					$newViews['ve-edit'] = $veTab;
 				}

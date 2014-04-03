@@ -203,6 +203,13 @@
 			if ( tabMessages[action + 'source'] !== null ) {
 				$caEditLink.text( mw.msg( tabMessages[action + 'source'] ) );
 			}
+
+			if ( conf.tabPosition === 'before' ) {
+				$caEdit.addClass( 'collapsible' );
+			} else {
+				$caVeEdit.addClass( 'collapsible' );
+			}
+
 			// Process appendix messages
 			if ( tabMessages[action + 'appendix'] !== null ) {
 				$caVeEditLink.append(
