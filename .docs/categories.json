@@ -39,6 +39,7 @@
 					"ve.init",
 					"ve.init.Platform",
 					"ve.init.Target",
+					"ve.init.DebugBar",
 					"ve.init.sa*"
 				]
 			},
