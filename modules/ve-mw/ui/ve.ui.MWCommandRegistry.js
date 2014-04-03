@@ -32,9 +32,6 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'hiero', 'inspector', 'open', 'hiero' )
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'editSource', 'edit', 'source' )
-);
-ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'meta', 'dialog', 'open', 'meta' )
 );
 ve.ui.commandRegistry.register(
