@@ -1296,7 +1296,11 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
-		var dmDoc = ve.dm.converter.getModelFromDom( doc );
+		var dmDoc = ve.dm.converter.getModelFromDom(
+			doc, null,
+			mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
+			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
+		);
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			target.surface = target.createSurface( dmDoc );
@@ -1308,10 +1312,6 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 				target.$element.append( target.surface.$element );
 				target.setUpToolbar();
 
-				target.$document.attr( {
-					'lang': mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
-					'dir': mw.config.get( 'wgVisualEditor' ).pageLanguageDir
-				} );
 				// Add appropriately mw-content-ltr or mw-content-rtl class
 				target.surface.view.$element.addClass(
 					'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir
@@ -1365,7 +1365,7 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 		// <body> were ignored in the conversion. So compare each child separately.
 		var i,
 			len = oldDom.body.childNodes.length,
-			newDoc = new ve.dm.Document( data, oldDom, undefined, doc.getInternalList(), doc.getInnerWhitespace() ),
+			newDoc = new ve.dm.Document( data, oldDom, undefined, doc.getInternalList(), doc.getInnerWhitespace(), doc.getLang(), doc.getDir() ),
 			newDom = ve.dm.converter.getDomFromModel( newDoc );
 
 		// Explicitly unlink our full copy of the original version of the document data

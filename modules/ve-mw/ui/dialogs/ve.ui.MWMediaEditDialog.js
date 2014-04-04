@@ -498,7 +498,7 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 		this.positionInput.selectItem( null );
 	} else {
 		// If checked, choose default position
-		if ( this.surface.getView().getDir() === 'ltr' ) {
+		if ( this.surface.getModel().getDocument().getDir() === 'ltr' ) {
 			// Assume default is 'right'
 			this.positionInput.selectItem(
 				this.positionInput.getItemFromData( 'right' )
@@ -670,7 +670,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		this.positionInput.setDisabled( false );
 		if ( this.mediaNode.getAttribute( 'align' ) === 'default' ) {
 			// Assume wiki default according to wiki dir
-			if ( this.surface.getView().getDir() === 'ltr' ) {
+			if ( this.surface.getModel().getDocument().getDir() === 'ltr' ) {
 				// Assume default is 'right'
 				this.positionInput.selectItem(
 					this.positionInput.getItemFromData( 'right' )
@@ -817,11 +817,11 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 				(
 					this.mediaNode.getAttribute( 'align' ) === 'default' &&
 					(
-						this.surface.getView().getDir() === 'ltr' &&
+						this.surface.getModel().getDocument().getDir() === 'ltr' &&
 						attr !== 'right'
 					) ||
 					(
-						this.surface.getView().getDir() === 'rtl' &&
+						this.surface.getModel().getDocument().getDir() === 'rtl' &&
 						attr !== 'left'
 					)
 				) ||

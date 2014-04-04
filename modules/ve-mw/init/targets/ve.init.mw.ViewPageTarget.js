@@ -944,7 +944,7 @@ ve.init.mw.ViewPageTarget.prototype.startSanityCheck = function () {
 		// <body> were ignored in the conversion. So compare each child separately.
 		var i,
 			len = oldDom.body.childNodes.length,
-			newDoc = new ve.dm.Document( data, oldDom, undefined, doc.getInternalList(), doc.getInnerWhitespace() ),
+			newDoc = new ve.dm.Document( data, oldDom, undefined, doc.getInternalList(), doc.getInnerWhitespace(), doc.getLang(), doc.getDir() ),
 			newDom = ve.dm.converter.getDomFromModel( newDoc );
 
 		// Explicitly unlink our full copy of the original version of the document data
