@@ -14,12 +14,11 @@
  * @extends ve.ui.CommandHelpDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWCommandHelpDialog = function VeUiMWCommandHelpDialog( surface, config ) {
+ve.ui.MWCommandHelpDialog = function VeUiMWCommandHelpDialog( config ) {
 	// Parent constructor
-	ve.ui.CommandHelpDialog.call( this, surface, config );
+	ve.ui.CommandHelpDialog.call( this, config );
 };
 
 /* Inheritance */

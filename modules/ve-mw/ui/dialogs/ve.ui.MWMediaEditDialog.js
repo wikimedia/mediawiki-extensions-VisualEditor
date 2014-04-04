@@ -10,15 +10,14 @@
  * Dialog for editing MediaWiki media objects.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( surface, config ) {
+ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( config ) {
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 
 	// Properties
 	this.mediaNode = null;
@@ -29,7 +28,7 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( surface, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMediaEditDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWMediaEditDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -134,7 +133,7 @@ ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
 ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	var altTextFieldset, positionFieldset, borderField, positionField;
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
 
@@ -390,7 +389,7 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 		this.positionInput.selectItem( null );
 	} else {
 		// If checked, choose default position
-		if ( this.surface.getModel().getDocument().getDir() === 'ltr' ) {
+		if ( this.getFragment().getDocument().getDir() === 'ltr' ) {
 			// Assume default is 'right'
 			this.positionInput.selectItem(
 				this.positionInput.getItemFromData( 'right' )
@@ -412,16 +411,15 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	var newDoc,
 		dialog = this,
-		doc = this.surface.getModel().getDocument(),
-		mediaNodeView = this.surface.getView().getFocusedNode();
+		doc = this.getFragment().getSurface().getDocument();
 
 	// Parent method
-	ve.ui.MWDialog.prototype.setup.call( this, data );
+	ve.ui.Dialog.prototype.setup.call( this, data );
 
 	// Properties
-	this.mediaNode = mediaNodeView.getModel();
+	this.mediaNode = this.getFragment().getSelectedNode();
 	this.captionNode = this.mediaNode.getCaptionNode();
-	this.store = this.surface.getModel().getDocument().getStore();
+	this.store = doc.getStore();
 
 	if ( this.captionNode && this.captionNode.getLength() > 0 ) {
 		newDoc = doc.cloneFromRange( this.captionNode.getRange() );
@@ -502,7 +500,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		this.positionInput.setDisabled( false );
 		if ( this.mediaNode.getAttribute( 'align' ) === 'default' ) {
 			// Assume wiki default according to wiki dir
-			if ( this.surface.getModel().getDocument().getDir() === 'ltr' ) {
+			if ( this.getFragment().getDocument().getDir() === 'ltr' ) {
 				// Assume default is 'right'
 				this.positionInput.selectItem(
 					this.positionInput.getItemFromData( 'right' )
@@ -548,7 +546,7 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 	var newDoc, doc, originalAlt, attr, transactionAttributes = {},
 		imageSizeType, imageType, imageAlignmentCheckbox,
 		imageAlignmentValue, originalDimensions,
-		surfaceModel = this.surface.getModel();
+		surfaceModel = this.getFragment().getSurface();
 
 	// Data initialization
 	data = data || {};
@@ -650,11 +648,11 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 				(
 					this.mediaNode.getAttribute( 'align' ) === 'default' &&
 					(
-						this.surface.getModel().getDocument().getDir() === 'ltr' &&
+						this.getFragment().getDocument().getDir() === 'ltr' &&
 						imageAlignmentValue !== 'right'
 					) ||
 					(
-						this.surface.getModel().getDocument().getDir() === 'rtl' &&
+						this.getFragment().getDocument().getDir() === 'rtl' &&
 						imageAlignmentValue !== 'left'
 					)
 				) ||
@@ -689,7 +687,7 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 	this.captionNode = null;
 
 	// Parent method
-	ve.ui.MWDialog.prototype.teardown.call( this, data );
+	ve.ui.Dialog.prototype.teardown.call( this, data );
 };
 
 /* Registration */

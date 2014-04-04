@@ -12,16 +12,15 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface being worked on
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( surface, name, config ) {
+ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config ) {
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.metaList = surface.getModel().metaList;
+	this.metaList = null;
 	this.indexingOptionTouched = false;
 	this.newSectionEditLinkOptionTouched = false;
 
@@ -146,9 +145,12 @@ ve.ui.MWAdvancedSettingsPage.prototype.getNewSectionEditLinkItem = function () {
 /**
  * Setup settings page.
  *
+ * @param {ve.dm.MetaList} metaList Meta list
  * @param {Object} [data] Dialog setup data
  */
-ve.ui.MWAdvancedSettingsPage.prototype.setup = function () {
+ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
+	this.metaList = metaList;
+
 	var // Indexing items
 		indexingField = this.indexing.getField(),
 		indexingOption = this.getIndexingOptionItem(),
@@ -224,4 +226,6 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 			}
 		}
 	}
+
+	this.metaList = null;
 };

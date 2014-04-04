@@ -12,12 +12,11 @@
  * @extends ve.ui.LanguageInspector
  *
  * @constructor
- * @param {ve.ui.Surface} surface
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLanguageInspector = function VeUiMWLanguageInspector( surface, config ) {
+ve.ui.MWLanguageInspector = function VeUiMWLanguageInspector( config ) {
 	// Parent constructor
-	ve.ui.LanguageInspector.call( this, surface, config );
+	ve.ui.LanguageInspector.call( this, config );
 };
 
 /* Inheritance */

@@ -14,12 +14,11 @@
  * @extends ve.ui.LinkInspector
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkInspector = function VeUiMWLinkInspector( surface, config ) {
+ve.ui.MWLinkInspector = function VeUiMWLinkInspector( config ) {
 	// Parent constructor
-	ve.ui.LinkInspector.call( this, surface, config );
+	ve.ui.LinkInspector.call( this, config );
 };
 
 /* Inheritance */

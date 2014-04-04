@@ -9,20 +9,19 @@
  * Dialog for editing MediaWiki page meta information.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMetaDialog = function VeUiMWMetaDialog( surface, config ) {
+ve.ui.MWMetaDialog = function VeUiMWMetaDialog( config ) {
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMetaDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWMetaDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -40,7 +39,7 @@ ve.ui.MWMetaDialog.static.icon = 'window';
  */
 ve.ui.MWMetaDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	// Properties
 	this.bookletLayout = new OO.ui.BookletLayout( { '$': this.$, 'outlined': true } );
@@ -50,17 +49,14 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		'flags': ['primary']
 	} );
 	this.settingsPage = new ve.ui.MWSettingsPage(
-		this.surface,
 		'settings',
 		{ '$': this.$ }
 	);
 	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage(
-		this.surface,
 		'advancedSettings',
 		{ '$': this.$ }
 	);
 	this.categoriesPage = new ve.ui.MWCategoriesPage(
-		this.surface,
 		'categories',
 		{
 			'$': this.$,
@@ -91,12 +87,12 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
  */
 ve.ui.MWMetaDialog.prototype.setup = function ( data ) {
 	// Parent method
-	ve.ui.MWDialog.prototype.setup.call( this, data );
+	ve.ui.Dialog.prototype.setup.call( this, data );
 
 	// Data initialization
 	data = data || {};
 
-	var surfaceModel = this.surface.getModel();
+	var surfaceModel = this.getFragment().getSurface();
 
 	if ( data.page && this.bookletLayout.getPage( data.page ) ) {
 		this.bookletLayout.setPage( data.page );
@@ -107,16 +103,16 @@ ve.ui.MWMetaDialog.prototype.setup = function ( data ) {
 	surfaceModel.stopHistoryTracking();
 
 	// Let each page set itself up ('languages' page doesn't need this yet)
-	this.settingsPage.setup( data );
-	this.advancedSettingsPage.setup( data );
-	this.categoriesPage.setup( data );
+	this.settingsPage.setup( surfaceModel.metaList, data );
+	this.advancedSettingsPage.setup( surfaceModel.metaList, data );
+	this.categoriesPage.setup( surfaceModel.metaList, data );
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
-	var surfaceModel = this.surface.getModel(),
+	var surfaceModel = this.getFragment().getSurface(),
 		// Place transactions made while dialog was open in a common history state
 		hasTransactions = surfaceModel.breakpoint();
 
@@ -132,10 +128,10 @@ ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 	this.categoriesPage.teardown( data );
 
 	// Return to normal tracking behavior
-	this.surface.getModel().startHistoryTracking();
+	surfaceModel.startHistoryTracking();
 
 	// Parent method
-	ve.ui.MWDialog.prototype.teardown.call( this, data );
+	ve.ui.Dialog.prototype.teardown.call( this, data );
 };
 
 /* Registration */

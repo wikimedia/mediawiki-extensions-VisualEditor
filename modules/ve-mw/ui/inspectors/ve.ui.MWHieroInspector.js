@@ -12,12 +12,11 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHieroInspector = function VeUiMWHieroInspector( surface, config ) {
+ve.ui.MWHieroInspector = function VeUiMWHieroInspector( config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, surface, config );
+	ve.ui.MWExtensionInspector.call( this, config );
 };
 
 /* Inheritance */
@@ -32,8 +31,6 @@ ve.ui.MWHieroInspector.static.icon = 'hiero';
 
 ve.ui.MWHieroInspector.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwhieroinspector-title' );
-
-ve.ui.MWHieroInspector.static.nodeView = ve.ce.MWHieroNode;
 
 ve.ui.MWHieroInspector.static.nodeModel = ve.dm.MWHieroNode;
 

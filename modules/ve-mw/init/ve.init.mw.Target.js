@@ -838,8 +838,8 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 				new ve.ui.Command( name, 'dialog', 'open', name, data )
 			);
 			// Generate dialog
-			dialog = function GeneratedMWCitationDialog( toolbar, config ) {
-				ve.ui.MWCitationDialog.call( this, toolbar, config );
+			dialog = function GeneratedMWCitationDialog( config ) {
+				ve.ui.MWCitationDialog.call( this, config );
 			};
 			OO.inheritClass( dialog, ve.ui.MWCitationDialog );
 			dialog.static.name = name;

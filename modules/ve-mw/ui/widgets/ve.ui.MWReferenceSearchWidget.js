@@ -12,10 +12,9 @@
  * @extends OO.ui.SearchWidget
  *
  * @constructor
- * @param {ve.ui.Surface} [varname] [description]
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( surface, config ) {
+ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
 	// Configuration intialization
 	config = ve.extendObject( {
 		'placeholder': ve.msg( 'visualeditor-reference-input-placeholder' )
@@ -25,7 +24,6 @@ ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( surface, c
 	OO.ui.SearchWidget.call( this, config );
 
 	// Properties
-	this.surface = surface;
 	this.index = [];
 
 	// Initialization
@@ -86,11 +84,11 @@ ve.ui.MWReferenceSearchWidget.prototype.onResultsSelect = function ( item ) {
  * Build a serchable index of references.
  *
  * @method
+ * @param {ve.dm.InternalList} internalList Internal list
  */
-ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
+ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function ( internalList ) {
 	var i, iLen, j, jLen, ref, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
-		internalList = this.surface.getModel().getDocument().getInternalList(),
 		groups = internalList.getNodeGroups();
 
 	function extractAttrs() {

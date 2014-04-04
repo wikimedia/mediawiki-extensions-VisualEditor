@@ -11,18 +11,17 @@
  * Dialog for inserting MediaWiki media objects.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMediaInsertDialog = function VeUiMWMediaInsertDialog( surface, config ) {
+ve.ui.MWMediaInsertDialog = function VeUiMWMediaInsertDialog( config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'footless': true }, config );
 
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 
 	// Properties
 	this.item = null;
@@ -31,7 +30,7 @@ ve.ui.MWMediaInsertDialog = function VeUiMWMediaInsertDialog( surface, config ) 
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMediaInsertDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWMediaInsertDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -61,7 +60,7 @@ ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
  */
 ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
 		.defaultUserOptions.defaultthumbsize;
@@ -88,7 +87,7 @@ ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
  */
 ve.ui.MWMediaInsertDialog.prototype.setup = function ( data ) {
 	// Parent method
-	ve.ui.MWDialog.prototype.setup.call( this, data );
+	ve.ui.Dialog.prototype.setup.call( this, data );
 
 	// Show a spinner while we check for file repos.
 	// this will only be done once per session.
@@ -189,7 +188,7 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 			};
 		}
 
-		this.surface.getModel().getFragment().collapseRangeToEnd().insertContent( [
+		this.getFragment().collapseRangeToEnd().insertContent( [
 			{
 				'type': 'mwBlockImage',
 				'attributes': {
@@ -213,7 +212,7 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 	this.search.clear();
 
 	// Parent method
-	ve.ui.MWDialog.prototype.teardown.call( this, data );
+	ve.ui.Dialog.prototype.teardown.call( this, data );
 };
 
 /* Registration */

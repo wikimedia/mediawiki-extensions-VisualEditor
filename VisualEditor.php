@@ -618,7 +618,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js',
 
 			// ui
-			'modules/ve-mw/ui/ve.ui.MWDialog.js',
 			'modules/ve-mw/ui/ve.ui.MWCommandRegistry.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWTitleInputWidget.js',

@@ -12,16 +12,15 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface being worked on
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWSettingsPage = function VeUiMWSettingsPage( surface, name, config ) {
+ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.metaList = surface.getModel().metaList;
+	this.metaList = null;
 	this.tocOptionTouched = false;
 	this.redirectOptionsTouched = false;
 	this.tableOfContentsTouched = false;
@@ -215,9 +214,12 @@ ve.ui.MWSettingsPage.prototype.getDisableSectionEditLinksItem = function () {
 /**
  * Setup settings page.
  *
+ * @param {ve.dm.MetaList} metaList Meta list
  * @param {Object} [data] Dialog setup data
  */
-ve.ui.MWSettingsPage.prototype.setup = function () {
+ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
+	this.metaList = metaList;
+
 	var // Table of Contents items
 		tableOfContentsMetaItem = this.getTableOfContentsMetaItem(),
 		tableOfContentsField = this.tableOfContents.getField(),
@@ -330,4 +332,6 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	if ( !currentDisableSectionEditLinksItem && newDisableSectionEditState ) {
 		this.metaList.insertMeta( { 'type': 'mwNoEditSection' } );
 	}
+
+	this.metaList = null;
 };

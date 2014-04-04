@@ -14,18 +14,17 @@
  * noted otherwise.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Config options
  */
-ve.ui.MWSaveDialog = function VeUiMWSaveDialog( surface, config ) {
+ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'size': 'medium' }, config );
 
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 
 	// Properties
 	this.sanityCheckVerified = false;
@@ -37,7 +36,7 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( surface, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWSaveDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWSaveDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -297,7 +296,7 @@ ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
 ve.ui.MWSaveDialog.prototype.initialize = function () {
 	var saveDialog = this;
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	// Properties
 	this.savePanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );

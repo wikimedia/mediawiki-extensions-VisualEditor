@@ -9,18 +9,17 @@
  * Dialog for inserting and editing MediaWiki reference lists.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( surface, config ) {
+ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'size': 'small' }, config );
 
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 
 	// Properties
 	this.inserting = false;
@@ -28,7 +27,7 @@ ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( surface, confi
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWReferenceListDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWReferenceListDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -46,7 +45,7 @@ ve.ui.MWReferenceListDialog.static.icon = 'references';
  */
 ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	// Properties
 	this.editPanel = new OO.ui.PanelLayout( {
@@ -86,15 +85,15 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
  */
 ve.ui.MWReferenceListDialog.prototype.setup = function ( data ) {
 	// Parent method
-	ve.ui.MWDialog.prototype.setup.call( this, data );
+	ve.ui.Dialog.prototype.setup.call( this, data );
 
 	var node, refGroup;
 
 	// Prepopulate from existing node if we're editing a node
 	// instead of inserting a new one
-	node = this.surface.getView().getFocusedNode();
-	if ( node instanceof ve.ce.MWReferenceListNode ) {
-		refGroup = node.getModel().getAttribute( 'refGroup' );
+	node = this.getFragment().getSelectedNode();
+	if ( node instanceof ve.dm.MWReferenceListNode ) {
+		refGroup = node.getAttribute( 'refGroup' );
 		this.inserting = false;
 	} else {
 		refGroup = '';
@@ -112,7 +111,7 @@ ve.ui.MWReferenceListDialog.prototype.setup = function ( data ) {
 	 * Focused node.
 	 *
 	 * @private
-	 * @property {ve.ce.MWReferenceListNode|undefined}
+	 * @property {ve.dm.MWReferenceListNode|undefined}
 	 */
 	this.node = node;
 };
@@ -121,10 +120,8 @@ ve.ui.MWReferenceListDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWReferenceListDialog.prototype.teardown = function ( data ) {
-	var refGroup, listGroup, oldListGroup, attrChanges,
-		doc, model,
-		surfaceModel = this.surface.getModel(),
-		node = this.node;
+	var refGroup, listGroup, oldListGroup, attrChanges, doc,
+		surfaceModel = this.getFragment().getSurface();
 
 	// Data initialization
 	data = data || {};
@@ -134,11 +131,10 @@ ve.ui.MWReferenceListDialog.prototype.teardown = function ( data ) {
 		refGroup = this.groupInput.getValue();
 		listGroup = 'mwReference/' + refGroup;
 
-		if ( node ) {
+		if ( this.node ) {
 			// Edit existing model
 			doc = surfaceModel.getDocument();
-			model = node.getModel();
-			oldListGroup = model.getAttribute( 'listGroup' );
+			oldListGroup = this.node.getAttribute( 'listGroup' );
 
 			if ( listGroup !== oldListGroup ) {
 				attrChanges = {
@@ -147,7 +143,7 @@ ve.ui.MWReferenceListDialog.prototype.teardown = function ( data ) {
 				};
 				surfaceModel.change(
 					ve.dm.Transaction.newFromAttributeChanges(
-						doc, model.getOuterRange().start, attrChanges
+						doc, this.node.getOuterRange().start, attrChanges
 					)
 				);
 			}
@@ -167,7 +163,7 @@ ve.ui.MWReferenceListDialog.prototype.teardown = function ( data ) {
 	}
 
 	// Parent method
-	ve.ui.MWDialog.prototype.teardown.call( this, data );
+	ve.ui.Dialog.prototype.teardown.call( this, data );
 };
 
 /* Registration */

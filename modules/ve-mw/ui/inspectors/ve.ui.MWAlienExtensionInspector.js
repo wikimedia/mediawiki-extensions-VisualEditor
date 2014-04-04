@@ -12,12 +12,15 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( surface, config ) {
+ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, surface, config );
+	ve.ui.MWExtensionInspector.call( this, config );
+
+	// Properties
+	this.attributeInputs = {};
+	this.$attributes = null;
 };
 
 /* Inheritance */
@@ -33,8 +36,6 @@ ve.ui.MWAlienExtensionInspector.static.icon = 'alienextension';
 ve.ui.MWAlienExtensionInspector.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwalienextensioninspector-title' );
 
-ve.ui.MWAlienExtensionInspector.static.nodeView = ve.ce.MWAlienExtensionNode;
-
 ve.ui.MWAlienExtensionInspector.static.nodeModel = ve.dm.MWAlienExtensionNode;
 
 /* Methods */
@@ -43,7 +44,7 @@ ve.ui.MWAlienExtensionInspector.static.nodeModel = ve.dm.MWAlienExtensionNode;
  * @inheritdoc
  */
 ve.ui.MWAlienExtensionInspector.prototype.getTitle = function () {
-	return this.surface.getView().getFocusedNode().getModel().getExtensionName();
+	return this.getFragment().getSelectedNode().getExtensionName();
 };
 
 /**
@@ -51,12 +52,21 @@ ve.ui.MWAlienExtensionInspector.prototype.getTitle = function () {
  */
 ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWExtensionInspector.prototype.initialize.call( this );
+	ve.ui.MWExtensionInspector.prototype.initialize.apply( this, arguments );
+
+	this.$attributes = this.$( '<div>' ).addClass( 've-ui-mwAlienExtensionInspector-attributes' );
+	this.$form.append( this.$attributes );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWAlienExtensionInspector.prototype.setup = function () {
+	// Parent method
+	ve.ui.MWExtensionInspector.prototype.setup.apply( this, arguments );
 
 	var key, attributeInput, field,
-		attributes = this.surface.getView().getFocusedNode().model.getAttribute( 'mw' ).attrs;
-
-	this.attributeInputs = {};
+		attributes = this.getFragment().getSelectedNode().getAttribute( 'mw' ).attrs;
 
 	if ( attributes && !ve.isEmptyObject( attributes ) ) {
 		for ( key in attributes ) {
@@ -73,9 +83,20 @@ ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 					'label': key
 				}
 			);
-			this.$form.append( field.$element.addClass( 've-ui-mwAlienExtensionInspector-attributes' ) );
+			this.$attributes.append( field.$element );
 		}
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWAlienExtensionInspector.prototype.teardown = function () {
+	// Parent method
+	ve.ui.MWExtensionInspector.prototype.teardown.apply( this, arguments );
+
+	this.$attributes.empty();
+	this.attributeInputs = {};
 };
 
 /** */

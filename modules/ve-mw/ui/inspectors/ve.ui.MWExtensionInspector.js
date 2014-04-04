@@ -13,12 +13,11 @@
  * @extends ve.ui.Inspector
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( surface, config ) {
+ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( config ) {
 	// Parent constructor
-	ve.ui.Inspector.call( this, surface, config );
+	ve.ui.Inspector.call( this, config );
 };
 
 /* Inheritance */
@@ -28,8 +27,6 @@ OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.Inspector );
 /* Static properties */
 
 ve.ui.MWExtensionInspector.static.placeholder = null;
-
-ve.ui.MWExtensionInspector.static.nodeView = null;
 
 ve.ui.MWExtensionInspector.static.nodeModel = null;
 
@@ -57,7 +54,6 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 
 	this.input = new OO.ui.TextInputWidget( {
 		'$': this.$,
-		'overlay': this.surface.$localOverlay,
 		'multiline': true
 	} );
 	this.input.$element.addClass( 've-ui-mwExtensionInspector-input' );
@@ -79,32 +75,20 @@ ve.ui.MWExtensionInspector.prototype.getInputPlaceholder = function () {
  * @inheritdoc
  */
 ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
-	var dir,
-		fragment = this.surface.getModel().getFragment( null, true );
-
 	// Parent method
 	ve.ui.Inspector.prototype.setup.call( this, data );
 
 	// Initialization
-	this.node = this.surface.getView().getFocusedNode();
+	this.node = this.getFragment().getSelectedNode();
 	// Make sure we're inspecting the right type of node
-	if ( !( this.node instanceof this.constructor.static.nodeView ) ) {
+	if ( !( this.node instanceof this.constructor.static.nodeModel ) ) {
 		this.node = null;
 	}
-	this.input.setValue( this.node ? this.node.getModel().getAttribute( 'mw' ).body.extsrc : '' );
+	this.input.setValue( this.node ? this.node.getAttribute( 'mw' ).body.extsrc : '' );
 
 	this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
-	// By default, the direction of the input element should be the same
-	// as the direction of the content it applies to
-	if ( this.node ) {
-		// The node is being edited
-		dir = this.node.$element.css( 'direction' );
-	} else {
-		// New insertion, base direction on the fragment range
-		dir = this.surface.getView().documentView.getDirectionFromRange( fragment.getRange() );
-	}
-	this.input.setRTL( dir === 'rtl' );
+	this.input.setRTL( data.dir === 'rtl' );
 };
 
 /**
@@ -123,11 +107,11 @@ ve.ui.MWExtensionInspector.prototype.ready = function () {
  */
 ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 	var mwData,
-		surfaceModel = this.surface.getModel();
+		surfaceModel = this.getFragment().getSurface();
 
 	if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
-		if ( this.node instanceof this.constructor.static.nodeView ) {
-			mwData = ve.copy( this.node.getModel().getAttribute( 'mw' ) );
+		if ( this.node instanceof this.constructor.static.nodeModel ) {
+			mwData = ve.copy( this.node.getAttribute( 'mw' ) );
 			this.updateMwData( mwData );
 			surfaceModel.change(
 				ve.dm.Transaction.newFromAttributeChanges(

@@ -14,12 +14,11 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface being worked on
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render category settings popups in
  */
-ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) {
+ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 	// Configuration initialization
 	config = config || {};
 
@@ -27,7 +26,7 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
-	this.metaList = surface.getModel().metaList;
+	this.metaList = null;
 	this.defaultSortKeyTouched = false;
 	this.fallbackDefaultSortKey = mw.config.get( 'wgTitle' );
 	this.categoriesFieldset = new OO.ui.FieldsetLayout( {
@@ -59,10 +58,6 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	);
 
 	// Events
-	this.metaList.connect( this, {
-		'insert': 'onMetaListInsert',
-		'remove': 'onMetaListRemove'
-	} );
 	this.categoryWidget.connect( this, {
 		'newCategory': 'onNewCategory',
 		'updateSortkey': 'onUpdateSortKey'
@@ -72,7 +67,6 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( surface, name, config ) 
 	} );
 
 	// Initialization
-	this.categoryWidget.addItems( this.getCategoryItems() );
 	this.categoriesFieldset.$element.append( this.categoryWidget.$element );
 	this.categoryOptionsFieldset.addItems( [ this.defaultSort ] );
 	this.$element.append( this.categoriesFieldset.$element, this.categoryOptionsFieldset.$element );
@@ -230,10 +224,21 @@ ve.ui.MWCategoriesPage.prototype.insertMetaListItem = function ( metaBase ) {
 };
 
 /**
- * Set up the page. This is called when the MWMetaDialog is set up.
+ * Setup categories page.
+ *
+ * @param {ve.dm.MetaList} metaList Meta list
+ * @param {Object} [data] Dialog setup data
  */
-ve.ui.MWCategoriesPage.prototype.setup = function () {
+ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
+	this.metaList = metaList;
+	this.metaList.connect( this, {
+		'insert': 'onMetaListInsert',
+		'remove': 'onMetaListRemove'
+	} );
+
 	var defaultSortKeyItem = this.getDefaultSortKeyItem();
+
+	this.categoryWidget.addItems( this.getCategoryItems() );
 
 	this.defaultSortInput.setValue(
 		defaultSortKeyItem ? defaultSortKeyItem.getAttribute( 'content' ) : ''
@@ -275,4 +280,8 @@ ve.ui.MWCategoriesPage.prototype.teardown = function () {
 			}
 		}
 	}
+
+	this.categoryWidget.clearItems();
+	this.metaList.disconnect( this );
+	this.metaList = null;
 };

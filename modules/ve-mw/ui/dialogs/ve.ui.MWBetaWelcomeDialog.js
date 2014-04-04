@@ -1,4 +1,3 @@
-/*global mw */
 /*!
  * VisualEditor user interface MWBetaWelcomeDialog class.
  *
@@ -6,27 +5,28 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * Dialog for inserting MediaWiki media objects.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWBetaWelcomeDialog = function VeUiMWBetaWelcomeDialog( surface, config ) {
+ve.ui.MWBetaWelcomeDialog = function VeUiMWBetaWelcomeDialog( config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'size': 'medium', 'footless': false }, config );
 
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWBetaWelcomeDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWBetaWelcomeDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -54,7 +54,7 @@ ve.ui.MWBetaWelcomeDialog.prototype.getTitle = function () {
  */
 ve.ui.MWBetaWelcomeDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	// Properties
 	this.contentLayout = new OO.ui.PanelLayout( {

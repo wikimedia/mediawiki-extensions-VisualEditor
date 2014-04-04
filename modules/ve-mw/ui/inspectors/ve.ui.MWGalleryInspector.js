@@ -14,12 +14,11 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWGalleryInspector = function VeUiMWGalleryInspector( surface, config ) {
+ve.ui.MWGalleryInspector = function VeUiMWGalleryInspector( config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, surface, config );
+	ve.ui.MWExtensionInspector.call( this, config );
 };
 
 /* Inheritance */
@@ -34,8 +33,6 @@ ve.ui.MWGalleryInspector.static.icon = 'gallery';
 
 ve.ui.MWGalleryInspector.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwgalleryinspector-title' );
-
-ve.ui.MWGalleryInspector.static.nodeView = ve.ce.MWGalleryNode;
 
 ve.ui.MWGalleryInspector.static.nodeModel = ve.dm.MWGalleryNode;
 

@@ -9,15 +9,14 @@
  * Dialog for inserting and editing MediaWiki transclusions.
  *
  * @class
- * @extends ve.ui.MWDialog
+ * @extends ve.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( surface, config ) {
+ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	// Parent constructor
-	ve.ui.MWDialog.call( this, surface, config );
+	ve.ui.Dialog.call( this, config );
 
 	// Properties
 	this.transclusionNode = null;
@@ -30,7 +29,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( surface, config 
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTransclusionDialog, ve.ui.MWDialog );
+OO.inheritClass( ve.ui.MWTransclusionDialog, ve.ui.Dialog );
 
 /* Static Properties */
 
@@ -412,7 +411,7 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  */
 ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWDialog.prototype.initialize.call( this );
+	ve.ui.Dialog.prototype.initialize.call( this );
 
 	// Properties
 	this.applyButton = new OO.ui.ButtonWidget( {
@@ -473,15 +472,15 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
  * @returns {ve.dm.MWTransclusionNode|null} Transclusion node to be edited, null if none exists
  */
 ve.ui.MWTransclusionDialog.prototype.getTransclusionNode = function () {
-	var focusedNode = this.surface.getView().getFocusedNode();
-	return focusedNode instanceof ve.ce.MWTransclusionNode ? focusedNode.getModel() : null;
+	var focusedNode = this.getFragment().getSelectedNode();
+	return focusedNode instanceof ve.dm.MWTransclusionNode ? focusedNode : null;
 };
 
 /**
  * Save changes.
  */
 ve.ui.MWTransclusionDialog.prototype.saveChanges = function () {
-	var surfaceModel = this.surface.getModel(),
+	var surfaceModel = this.getFragment().getSurface(),
 		obj = this.transclusion.getPlainObject();
 
 	if ( this.transclusionNode instanceof ve.dm.MWTransclusionNode ) {
@@ -499,7 +498,7 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 		transclusionNode = this.getTransclusionNode( data );
 
 	// Parent method
-	ve.ui.MWDialog.prototype.setup.call( this, data );
+	ve.ui.Dialog.prototype.setup.call( this, data );
 
 	// Data initialization
 	data = data || {};
@@ -562,7 +561,7 @@ ve.ui.MWTransclusionDialog.prototype.teardown = function ( data ) {
 	this.setMode( 'single' );
 
 	// Parent method
-	ve.ui.MWDialog.prototype.teardown.call( this, data );
+	ve.ui.Dialog.prototype.teardown.call( this, data );
 };
 
 /* Registration */

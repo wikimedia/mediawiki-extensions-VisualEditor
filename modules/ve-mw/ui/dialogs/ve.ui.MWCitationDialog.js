@@ -12,12 +12,11 @@
  * @extends ve.ui.MWTransclusionDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWCitationDialog = function VeUiMWCitationDialog( surface, config ) {
+ve.ui.MWCitationDialog = function VeUiMWCitationDialog( config ) {
 	// Parent constructor
-	ve.ui.MWTransclusionDialog.call( this, surface, config );
+	ve.ui.MWTransclusionDialog.call( this, config );
 
 	// Properties
 	this.referenceModel = null;
@@ -53,8 +52,8 @@ ve.ui.MWCitationDialog.prototype.getApplyButtonLabel = function () {
  * @returns {ve.dm.MWReferenceNode|null} Reference node to be edited, null if none exists
  */
 ve.ui.MWCitationDialog.prototype.getReferenceNode = function () {
-	var focusedNode = this.surface.getView().getFocusedNode();
-	return focusedNode instanceof ve.ce.MWReferenceNode ? focusedNode.getModel() : null;
+	var focusedNode = this.getFragment().getSelectedNode();
+	return focusedNode instanceof ve.dm.MWReferenceNode ? focusedNode : null;
 };
 
 /**
@@ -84,7 +83,7 @@ ve.ui.MWCitationDialog.prototype.getTransclusionNode = function () {
  */
 ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 	var item,
-		surfaceModel = this.surface.getModel(),
+		surfaceModel = this.getFragment().getSurface(),
 		doc = surfaceModel.getDocument(),
 		internalList = doc.getInternalList(),
 		obj = this.transclusion.getPlainObject();
