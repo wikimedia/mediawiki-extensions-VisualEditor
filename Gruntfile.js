@@ -81,8 +81,8 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'lint', ['jshint', 'jscs', 'csslint'] );
-	grunt.registerTask( 'test', ['lint'] );
 	grunt.registerTask( 'build', ['jsduckcatconfig', 'buildloader'] );
-	grunt.registerTask( 'default', ['build', 'test'] );
+	grunt.registerTask( 'lint', ['jshint', 'jscs', 'csslint'] );
+	grunt.registerTask( 'test', ['build', 'lint'] );
+	grunt.registerTask( 'default', ['test'] );
 };
