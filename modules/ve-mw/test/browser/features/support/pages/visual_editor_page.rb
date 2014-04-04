@@ -80,7 +80,7 @@ class VisualEditorPage
     span(:return_to_save, class: "oo-ui-labeledElement-label", text: "Return to save form", frame: frame)
     span(:review_changes, class: "oo-ui-labeledElement-label", text: "Review your changes", frame: frame)
     span(:second_save_page, class: "oo-ui-labeledElement-label", text: "Save page", frame: frame)
-    unordered_list(:suggestion_list, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-selectWidget oo-ui-clippableElement-clippable oo-ui-menuWidget oo-ui-textInputMenuWidget oo-ui-lookupWidget-menu ve-ui-mwTitleInputWidget-menu", frame: frame)
+    unordered_list(:suggestion_list, class: "ve-ui-mwTitleInputWidget-menu", frame: frame)
     div(:template_header, class: "ve-ui-mwTransclusionDialog-single", frame: frame)
     li(:template_list_item, text: "S", frame: frame)
     div(:title, class: "oo-ui-window-title", frame: frame)
