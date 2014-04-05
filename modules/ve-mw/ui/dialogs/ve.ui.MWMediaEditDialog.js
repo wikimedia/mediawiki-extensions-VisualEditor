@@ -495,7 +495,7 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 
 	if ( !checked ) {
 		// If unchecked, remove selection
-		this.positionInput.intializeSelection();
+		this.positionInput.initializeSelection();
 	} else {
 		// If checked, choose default position
 		if ( this.surface.getView().getDir() === 'ltr' ) {
@@ -664,7 +664,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	) {
 		this.positionCheckbox.setValue( false );
 		this.positionInput.setDisabled( true );
-		this.positionInput.intializeSelection();
+		this.positionInput.initializeSelection();
 	} else {
 		this.positionCheckbox.setValue( true );
 		this.positionInput.setDisabled( false );
@@ -692,7 +692,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.borderCheckbox.setValue( !!this.mediaNode.getAttribute( 'borderImage' ) );
 
 	// Set image type
-	this.typeInput.intializeSelection();
+	this.typeInput.initializeSelection();
 	if ( this.mediaNode.getAttribute( 'type' ) !== undefined ) {
 		this.typeInput.selectItem(
 			this.typeInput.getItemFromData( this.mediaNode.getAttribute( 'type' ) )
