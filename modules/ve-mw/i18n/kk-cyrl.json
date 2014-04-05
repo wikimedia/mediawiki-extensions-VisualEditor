@@ -148,6 +148,7 @@
     "visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|бағытталған бет|бағытталған бет}}",
     "visualeditor-loadwarning": "Серверден деректер жүктелмеді: $1. Қайталап көргіңіз келе ме?",
     "visualeditor-loadwarning-token": "Серверден өңдеу байрақшасы жүктелмеді: $1. Қайталап көргіңіз келе ме?",
+    "visualeditor-timeout": "Қазіргі уақытта толық өңдеу мүмкін емес секілді. Қайнарын өңдеу режиміне өткіңіз келе ме?",
     "visualeditor-mainnamespacepagelink": "Project:Негізгі есім кеңістігі",
     "visualeditor-media-input-placeholder": "Медиа іздеу",
     "visualeditor-meta-tool": "Параметрлер",
