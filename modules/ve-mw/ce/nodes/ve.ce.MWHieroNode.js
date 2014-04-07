@@ -33,6 +33,8 @@ ve.ce.MWHieroNode.static.name = 'mwHiero';
 
 ve.ce.MWHieroNode.static.tagName = 'div';
 
+ve.ce.MWHieroNode.static.primaryCommandName = 'hiero';
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWHieroNode );
