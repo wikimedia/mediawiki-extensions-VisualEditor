@@ -32,7 +32,7 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	this.namespace = config.namespace || null;
 
 	// Events
-	this.lookupMenu.connect( this, { 'select': 'onLookupMenuItemSelect' } );
+	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwTitleInputWidget' );
@@ -53,7 +53,7 @@ OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupInputWidget );
  * @method
  * @param {OO.ui.MenuItemWidget} item Selected item
  */
-ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemSelect = function ( item ) {
+ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	if ( item ) {
 		this.setValue( item.getData() );
 	}

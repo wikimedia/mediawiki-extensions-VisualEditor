@@ -28,7 +28,7 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	OO.ui.LookupInputWidget.call( this, this, config );
 
 	// Events
-	this.lookupMenu.connect( this, { 'select': 'onLookupMenuItemSelect' } );
+	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwLinkTargetInputWidget' );
@@ -54,7 +54,7 @@ OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupInputWidget );
  * @method
  * @param {OO.ui.MenuItemWidget|null} item Selected item
  */
-ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemSelect = function ( item ) {
+ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	if ( item ) {
 		this.setAnnotation( item.getData() );
 	} else if ( this.annotation ) {

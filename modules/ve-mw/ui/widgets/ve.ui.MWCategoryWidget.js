@@ -40,7 +40,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 
 	// Events
 	this.input.$input.on( 'keydown', ve.bind( this.onLookupInputKeyDown, this ) );
-	this.input.lookupMenu.connect( this, { 'select': 'onLookupMenuItemSelect' } );
+	this.input.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
 	this.popup.connect( this, {
 		'removeCategory': 'onRemoveCategory',
 		'updateSortkey': 'onUpdateSortkey',
@@ -105,7 +105,7 @@ ve.ui.MWCategoryWidget.prototype.onLookupInputKeyDown = function ( e ) {
  * @method
  * @param {OO.ui.MenuItemWidget} item Selected item
  */
-ve.ui.MWCategoryWidget.prototype.onLookupMenuItemSelect = function ( item ) {
+ve.ui.MWCategoryWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	var categoryItem,
 		value = item && item.getData(),
 		categoryWidget = this;
