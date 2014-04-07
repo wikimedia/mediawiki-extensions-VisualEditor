@@ -236,7 +236,7 @@ class VisualEditorHooks {
 		$preferences['visualeditor-betatempdisable'] = array(
 			'type' => 'toggle',
 			'label-message' => 'visualeditor-preference-betatempdisable',
-			'section' => 'editing/beta'
+			'section' => 'editing/editor'
 		);
 		return true;
 	}
