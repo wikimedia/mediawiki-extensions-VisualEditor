@@ -230,7 +230,7 @@ class VisualEditorHooks {
 			$preferences['visualeditor-enable'] = array(
 				'type' => 'toggle',
 				'label-message' => 'visualeditor-preference-enable',
-				'section' => 'editing/beta'
+				'section' => 'editing/editor'
 			);
 		}
 		$preferences['visualeditor-betatempdisable'] = array(
