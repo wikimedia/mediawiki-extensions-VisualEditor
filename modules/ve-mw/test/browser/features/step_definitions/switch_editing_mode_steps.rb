@@ -1,11 +1,15 @@
-When(/^I click the Edit source tab$/) do
-  on(VisualEditorPage).edit_wikitext_element.when_present.click
+When(/^I enter the wikitext editor$/) do
+  on(VisualEditorPage) do |page|
+    page.edit_wikitext_element.when_present.click
+    page.wikitext_editor_element.when_present
+  end
 end
 
 When(/^I click the Switch to source editing menu option$/) do
   on(VisualEditorPage) do |page|
     page.alert do
-      page.switch_to_source_editing_element
+      page.tools_menu_element.when_present.click
+      page.switch_to_source_editing_element.when_present.click
     end
   end
 end
@@ -13,9 +17,13 @@ end
 When(/^I click Edit for VisualEditor from this page$/) do
   on(VisualEditorPage) do |page|
     page.alert do
-      page.edit_ve_element
+      page.edit_ve_element.when_present.click
     end
   end
+end
+
+When(/^I see the wikitext editor$/) do
+  on(VisualEditorPage).wikitext_editor_element.when_present(10).should be_visible
 end
 
 Then(/^I should be in wikitext editing mode$/) do
@@ -42,7 +50,6 @@ Then(/^I should be in Visual Editor editing alternate mode$/) do
     page.wait_until(15) do
       page.text.include? "User:"
     end
+    page.content_element.when_present.should be_visible
   end
-  expected_url = /wiki\/User:(.+)?veaction=edit/
-  @browser.url.should match Regexp.new(expected_url)
 end
