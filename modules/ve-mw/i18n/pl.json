@@ -172,6 +172,7 @@
     "visualeditor-notification-restored": "Strona „$1” została przywrócona.",
     "visualeditor-notification-saved": "Twoje zmiany na stronie „$1” zostały zapisane.",
     "visualeditor-pagemenu-tooltip": "Opcje strony",
+    "visualeditor-pagetranslationwarning": "Edytujesz stronę przeznaczoną do tłumaczenia. Jej edycja w VisualEditorze nie jest jeszcze oficjalnie obsługiwana.",
     "visualeditor-parameter-input-placeholder": "Nazwa parametru",
     "visualeditor-parameter-search-no-unused": "Brak niewykorzystanych parametrów",
     "visualeditor-parameter-search-unknown": "Nieznany parametr",
