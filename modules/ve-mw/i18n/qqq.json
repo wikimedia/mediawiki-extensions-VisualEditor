@@ -34,6 +34,8 @@
     "visualeditor-ca-createsource": "Text for the create source link in the tab dropdown, if the page doesn't exist. It's shown next to the message {{msg-mw|vector-view-create}}, so they should be similar (for example, use a similar translation for \"Create\").\n\nIf the page exists, the following link text is used: {{msg-mw|Visualeditor-ca-editsource}}",
     "visualeditor-ca-editsource": "Text for the \"Edit source\" tab, if the page exists.\n\nIf the page doesn't exist, the following link text is used: {{msg-mw|Visualeditor-ca-createsource}}\n\nUsed in:\n* {{msg-mw|Visualeditor-beta-warning}}\n* {{msg-mw|Visualeditor-wikitext-warning}}\n{{Identical|Edit source}}",
     "visualeditor-ca-editsource-section": "Used as link text for \"edit source\" mode of section edit links.\n\nCorresponds to the {{msg-mw|editsection}} message for default mode.\n{{Identical|Edit source}}",
+    "visualeditor-ca-editlocaldescriptionsource": "Text for the \"Edit local description source\" tab, if the page exists and the page is the local description of a file in a foreign repository (e.g. Wikimedia Commons).",
+    "visualeditor-ca-createlocaldescriptionsource": "Text for the \"Create local description source\" tab, if the page exists and the page is the local description of a file in a foreign repository (e.g. Wikimedia Commons).",
     "visualeditor-ca-ve-create": "Link text of the dedicated VisualEditor \"Create\" tab.\n{{Identical|VisualEditor}}",
     "visualeditor-ca-ve-edit": "Link text of the dedicated VisualEditor {{msg-mw|Edit}} tab.\n{{Identical|VisualEditor}}",
     "visualeditor-ca-ve-edit-section": "{{Identical|VisualEditor}}",

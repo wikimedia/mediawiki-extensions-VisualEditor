@@ -1275,6 +1275,12 @@ $wgVisualEditorTabMessages = array(
 	// i18n message key to use for the old create tab
 	// If null, the tab's caption will not be changed
 	'createsource' => 'visualeditor-ca-createsource',
+	// i18n message key to use for the old create tab on pages for files in foreign repos
+	// If null, the tab's caption will not be changed
+	'editlocaldescriptionsource' => 'visualeditor-ca-editlocaldescriptionsource',
+	// i18n message key to use for the old edit tab on pages for files in foreign repos
+	// If null, the tab's caption will not be changed
+	'createlocaldescriptionsource' => 'visualeditor-ca-createlocaldescriptionsource',
 	// i18n message key to use for the VisualEditor section edit link
 	// If null, the default edit section link caption will be used
 	'editsection' => null,

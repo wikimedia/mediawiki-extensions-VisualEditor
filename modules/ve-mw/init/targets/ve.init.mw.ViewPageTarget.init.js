@@ -211,8 +211,14 @@
 			}
 
 			// Alter the edit tab (#ca-edit)
-			if ( tabMessages[action + 'source'] !== null ) {
-				$caEditLink.text( mw.msg( tabMessages[action + 'source'] ) );
+			if ( $( '#ca-view-foreign' ).length ) {
+				if ( tabMessages[action + 'localdescriptionsource'] !== null ) {
+					$caEditLink.text( mw.msg( tabMessages[action + 'localdescriptionsource'] ) );
+				}
+			} else {
+				if ( tabMessages[action + 'source'] !== null ) {
+					$caEditLink.text( mw.msg( tabMessages[action + 'source'] ) );
+				}
 			}
 
 			if ( conf.tabPosition === 'before' ) {
