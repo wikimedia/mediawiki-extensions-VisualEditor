@@ -993,6 +993,8 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWParameterSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWParameterResultWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWMoreParametersResultWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWNoParametersResultWidget.js',
 
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWParameterPage.js',
@@ -1008,6 +1010,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/styles/ve.ce.MWTransclusionNode.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWParameterPage.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWParameterResultWidget.css',
+			'modules/ve-mw/ui/styles/ve.ui.MWMoreParametersResultWidget.css',
+			'modules/ve-mw/ui/styles/ve.ui.MWNoParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWParameterSearchWidget.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWTransclusionContentPage.css',
 			'modules/ve-mw/ui/styles/ve.ui.MWTransclusionDialog.css',
@@ -1039,6 +1043,7 @@ $wgResourceModules += array(
 			'visualeditor-dialogbutton-template-tooltip',
 			'visualeditor-dialogbutton-transclusion-tooltip',
 			'visualeditor-parameter-input-placeholder',
+			'visualeditor-parameter-search-more',
 			'visualeditor-parameter-search-no-unused',
 			'visualeditor-parameter-search-unknown',
 		),

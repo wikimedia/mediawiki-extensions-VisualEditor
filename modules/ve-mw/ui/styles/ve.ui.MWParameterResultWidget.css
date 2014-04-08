@@ -14,10 +14,6 @@
 	margin-top: 0;
 }
 
-.ve-ui-mwParameterResultWidget.oo-ui-widget-disabled {
-	opacity: 0.5;
-}
-
 .ve-ui-mwParameterResultWidget-label,
 .ve-ui-mwParameterResultWidget-names,
 .ve-ui-mwParameterResultWidget-description {
@@ -43,12 +39,12 @@
 	padding: 0.125em 0.25em;
 	margin-left: 0.5em;
 	color: #999;
-	background-color: #fff;
+	background-color: #eee;
 	border: solid 1px #ddd;
 }
 
-.ve-ui-mwParameterResultWidget-names span:not(:first-child) {
-	background-color: #eee;
+.ve-ui-mwParameterResultWidget-name:first-child {
+	background-color: #fff;
 }
 
 .ve-ui-mwParameterResultWidget-description {
