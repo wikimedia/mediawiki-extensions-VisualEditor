@@ -8,7 +8,8 @@
             "Geraki",
             "Glavkos",
             "Nikosguard",
-            "Tifa93"
+            "Tifa93",
+            "Elitre"
         ]
     },
     "tooltip-ca-createsource": "Δημιουργήστε τον πηγαίο κώδικα γι'αυτή τη σελίδα",
@@ -34,7 +35,7 @@
     "visualeditor-descriptionpagelink": "Project:VisualEditor",
     "visualeditor-dialog-beta-welcome-action-continue": "Συνέχεια",
     "visualeditor-dialog-beta-welcome-content": "Αυτός είναι ο νέος, ευκολότερος τρόπος επεξεργασίας. Είναι ακόμη σε δοκιμαστική μορφή, που σημαίνει ότι θα βρείτε σημεία της σελίδας που δεν είναι δυνατό να επεξεργαστείτε, καθώς και ότι θα συναντήσετε προβλήματα που θα πρέπει να διορθωθούν. Σας παρακαλούμε να εξετάσετε τις αλλαγές που έγιναν και να αναφέρετε οποιοδήποτε πρόβλημα στη χρήση του VisualEditor  (για να στείλετε αναφορά, πατήστε το κουμπί '{{int:visualeditor-help-tool}}'). Μπορείτε να εξακολουθήσετε να χρησιμοποιείτε τον κλασικό επεξεργαστή κώδικα wiki πατώντας την καρτέλα \"$1\" (οι αλλαγές που δεν αποθηκεύσατε ως εκείνο το σημείο θα χαθούν).",
-    "visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Welcome}} στον VisualEditor",
+    "visualeditor-dialog-beta-welcome-title": "Καλωσορίσατε στον VisualEditor",
     "visualeditor-dialog-citation-insert-citation": "Εισαγωγή παραπομπής",
     "visualeditor-dialog-media-alttext-section": "Εναλλακτικό κείμενο",
     "visualeditor-dialog-media-content-section": "Λεζάντα",
