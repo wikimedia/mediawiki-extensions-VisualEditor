@@ -179,6 +179,7 @@
     "visualeditor-pagemenu-tooltip": "Page options",
     "visualeditor-pagetranslationwarning": "You are editing a translatable page. Editing these in VisualEditor is not yet officially supported.",
     "visualeditor-parameter-input-placeholder": "Parameter name",
+    "visualeditor-parameter-search-more": "Show $1 other {{PLURAL:$1|parameter|parameters}}",
     "visualeditor-parameter-search-no-unused": "No unused parameters",
     "visualeditor-parameter-search-unknown": "Unknown parameter",
     "visualeditor-preference-betatempdisable": "Temporarily disable VisualEditor while it is in beta",
