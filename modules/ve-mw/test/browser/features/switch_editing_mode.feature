@@ -5,15 +5,16 @@ Feature: Switching between wikitext and Visual Editor modes
 
   Background:
     Given I am logged in
-    And I am at my user page
+      And I am at my user page
     When I click Edit for VisualEditor
 
   Scenario: Switch editing modes via toolbar
-    When I click the Edit source tab
-    And I click Edit for VisualEditor
+    When I enter the wikitext editor
+      And I click Edit for VisualEditor
     Then I should be in Visual Editor editing mode
 
   Scenario: Switch editing modes via Page Settings drop-down menu
     When I click the Switch to source editing menu option
-    And I click Edit for VisualEditor from this page
+      And I see the wikitext editor
+      And I click Edit for VisualEditor from this page
     Then I should be in Visual Editor editing alternate mode

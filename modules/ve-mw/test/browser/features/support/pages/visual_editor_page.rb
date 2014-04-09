@@ -33,7 +33,13 @@ class VisualEditorPage
   a(:subheading3, text: /Sub-heading 3/)
   a(:subheading4, text: /Sub-heading 4/)
   span(:switch_to_source_editing, class: "oo-ui-iconedElement-icon oo-ui-icon-source")
-  span(:tools_menu, class: "oo-ui-iconedElement-icon oo-ui-icon-menu")
+
+  if ENV["BROWSER"] == "chrome"
+    div(:tools_menu, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-toolGroup oo-ui-iconedElement oo-ui-popupToolGroup oo-ui-listToolGroup")
+  else
+    span(:tools_menu, class: "oo-ui-iconedElement-icon oo-ui-icon-menu")
+  end
+
   span(:ve_bold_text, class: "oo-ui-iconedElement-icon oo-ui-icon-bold-b")
   span(:ve_bullets, class: "oo-ui-iconedElement-icon oo-ui-icon-bullet-list")
   span(:ve_computer_code, class: "oo-ui-iconedElement-icon oo-ui-icon-code")
@@ -50,6 +56,7 @@ class VisualEditorPage
   span(:ve_underline, class: "oo-ui-iconedElement-icon oo-ui-icon-underline-u")
   div(:visual_editor_toolbar, class: "oo-ui-toolbar-tools")
   span(:transclusion, class: "oo-ui-iconedElement-icon oo-ui-icon-template")
+  text_area(:wikitext_editor, id: "wpTextbox1")
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
