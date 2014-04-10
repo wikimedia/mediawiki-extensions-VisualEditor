@@ -715,11 +715,14 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarMetaButtonClick = function () {
  * @param {ve.dm.Transaction} transaction
  */
 ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
-	var text, doc = this.surface.getView().getDocument(),
+	var text, node, doc = this.surface.getView().getDocument(),
 		selection = this.surface.getModel().getSelection(),
-		node = doc.getNodeFromOffset( selection.start ),
 		textMatches,
 		viewPageTarget = this;
+	if ( !selection ) {
+		return;
+	}
+	node = doc.getNodeFromOffset( selection.start );
 	if ( !( node instanceof ve.ce.ContentBranchNode ) ) {
 		return;
 	}

@@ -480,13 +480,14 @@ ve.ui.MWTransclusionDialog.prototype.getTransclusionNode = function () {
  * Save changes.
  */
 ve.ui.MWTransclusionDialog.prototype.saveChanges = function () {
-	var surfaceModel = this.getFragment().getSurface(),
+	var surfaceFragment = this.getFragment(),
+		surfaceModel = surfaceFragment.getSurface(),
 		obj = this.transclusion.getPlainObject();
 
 	if ( this.transclusionNode instanceof ve.dm.MWTransclusionNode ) {
 		this.transclusion.updateTransclusionNode( surfaceModel, this.transclusionNode );
 	} else if ( obj !== null ) {
-		this.transclusion.insertTransclusionNode( surfaceModel );
+		this.transclusion.insertTransclusionNode( surfaceFragment );
 	}
 };
 

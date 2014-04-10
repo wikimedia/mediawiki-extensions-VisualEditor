@@ -49,26 +49,22 @@ OO.mixinClass( ve.dm.MWTransclusionModel, OO.EventEmitter );
 /* Methods */
 
 /**
- * Insert transclusion into a surface.
+ * Insert transclusion at the end of a surface fragment.
  *
- * Transclusion is inserted at the current cursor position in `surfaceModel`.
- *
- * @param {ve.dm.Surface} surfaceModel Surface model of main document
- * @param {ve.Range} [at] Location to insert at
+ * @param {ve.dm.SurfaceFragment} surfaceModel Surface fragment to insert at
  */
-ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceModel, at ) {
-	surfaceModel
-		.getFragment( at || surfaceModel.getSelection().clone(), true )
-			.collapseRangeToEnd()
-			.insertContent( [
-				{
-					'type': 'mwTransclusionInline',
-					'attributes': {
-						'mw': this.getPlainObject()
-					}
-				},
-				{ 'type': '/mwTransclusionInline' }
-			] );
+ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment ) {
+	surfaceFragment
+		.collapseRangeToEnd()
+		.insertContent( [
+			{
+				'type': 'mwTransclusionInline',
+				'attributes': {
+					'mw': this.getPlainObject()
+				}
+			},
+			{ 'type': '/mwTransclusionInline' }
+		] );
 };
 
 /**

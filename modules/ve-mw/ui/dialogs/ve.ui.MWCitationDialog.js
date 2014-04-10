@@ -83,7 +83,8 @@ ve.ui.MWCitationDialog.prototype.getTransclusionNode = function () {
  */
 ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 	var item,
-		surfaceModel = this.getFragment().getSurface(),
+		surfaceFragment = this.getFragment(),
+		surfaceModel = surfaceFragment.getSurface(),
 		doc = surfaceModel.getDocument(),
 		internalList = doc.getInternalList(),
 		obj = this.transclusion.getPlainObject();
@@ -92,7 +93,7 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 		surfaceModel.getFragment().collapseRangeToEnd();
 		this.referenceModel = new ve.dm.MWReferenceModel();
 		this.referenceModel.insertInternalItem( surfaceModel );
-		this.referenceModel.insertReferenceNode( surfaceModel );
+		this.referenceModel.insertReferenceNode( surfaceFragment );
 	}
 
 	item = this.referenceModel.findInternalItem( surfaceModel );
@@ -101,14 +102,13 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 			this.transclusion.updateTransclusionNode( surfaceModel, this.transclusionNode );
 		} else if ( obj !== null ) {
 			this.transclusion.insertTransclusionNode(
-				surfaceModel,
 				// HACK: This is trying to place the cursor inside the first content branch node
 				// but this theoretically not a safe assumption - in practice, the citation dialog
 				// will only reach this code if we are inserting (not updating) a transclusion, so
 				// the referenceModel will have already initialized the internal node with a
 				// paragraph - getting the range of the item covers the entire paragraph so we have
 				// to get the range of it's first (and empty) child
-				item.getChildren()[0].getRange()
+				surfaceFragment.clone( item.getChildren()[0].getRange() )
 			);
 		}
 	}
