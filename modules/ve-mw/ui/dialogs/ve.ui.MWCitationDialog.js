@@ -9,14 +9,14 @@
  * Dialog for inserting and editing MediaWiki transclusions.
  *
  * @class
- * @extends ve.ui.MWTransclusionDialog
+ * @extends ve.ui.MWTemplateDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWCitationDialog = function VeUiMWCitationDialog( config ) {
 	// Parent constructor
-	ve.ui.MWTransclusionDialog.call( this, config );
+	ve.ui.MWCitationDialog.super.call( this, config );
 
 	// Properties
 	this.referenceModel = null;
@@ -25,7 +25,7 @@ ve.ui.MWCitationDialog = function VeUiMWCitationDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWCitationDialog, ve.ui.MWTransclusionDialog );
+OO.inheritClass( ve.ui.MWCitationDialog, ve.ui.MWTemplateDialog );
 
 /* Static Properties */
 
@@ -128,7 +128,7 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
  */
 ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
 	// Parent method
-	ve.ui.MWTransclusionDialog.prototype.setup.call( this, data );
+	ve.ui.MWCitationDialog.super.prototype.setup.call( this, data );
 
 	// Initialization
 	if ( this.transclusionNode ) {
@@ -146,7 +146,7 @@ ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
  */
 ve.ui.MWCitationDialog.prototype.teardown = function ( data ) {
 	// Parent method
-	ve.ui.MWTransclusionDialog.prototype.teardown.call( this, data );
+	ve.ui.MWCitationDialog.super.prototype.teardown.call( this, data );
 
 	// Cleanup
 	this.referenceModel = null;

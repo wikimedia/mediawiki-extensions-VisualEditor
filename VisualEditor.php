@@ -1007,6 +1007,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePlaceholderPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTransclusionContentPage.js',
 
+			'modules/ve-mw/ui/dialogs/ve.ui.MWTemplateDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js',
