@@ -10,18 +10,18 @@
  *
  * @class
  * @abstract
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Config options
  */
 ve.ui.MWEditModeTool = function VeUiMWEditModeTool( toolGroup, config ) {
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWEditModeTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.MWEditModeTool, ve.ui.Tool );
 
 /* Static Properties */
 
@@ -33,7 +33,11 @@ ve.ui.MWEditModeTool.static.autoAddToGroup = false;
 
 /* Methods */
 
+/** */
 ve.ui.MWEditModeTool.prototype.onUpdateState = function () {
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
 	this.setActive( false );
 };
 
