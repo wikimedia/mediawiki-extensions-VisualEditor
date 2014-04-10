@@ -68,6 +68,9 @@ class VisualEditorHooks {
 			return true;
 		}
 		$title = $skin->getRelevantTitle();
+		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
+			return true;
+		}
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
 		// us to splice into the middle of an associative array.
