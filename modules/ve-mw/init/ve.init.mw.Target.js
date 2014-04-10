@@ -57,6 +57,10 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	);
 };
 
+/* Inheritance */
+
+OO.inheritClass( ve.init.mw.Target, ve.init.Target );
+
 /* Events */
 
 /**
@@ -169,11 +173,9 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
  * @event sanityCheckComplete
  */
 
-/* Inheritance */
-
-OO.inheritClass( ve.init.mw.Target, ve.init.Target );
-
 /* Static Properties */
+
+ve.init.mw.Target.static.citationToolsLimit = 5;
 
 ve.init.mw.Target.static.toolbarGroups = [
 	// History
@@ -783,7 +785,8 @@ ve.init.mw.Target.onSerializeError = function ( jqXHR, status, error ) {
  *
  */
 ve.init.mw.Target.prototype.generateCitationFeatures = function () {
-	var i, len, item, name, data, tool, tools, dialog;
+	var i, len, item, name, data, tool, tools, dialog,
+		limit = this.constructor.static.citationToolsLimit;
 
 	if ( !ve.ui.MWCitationDialog ) {
 		// Citation module isn't loaded, so skip this
@@ -798,7 +801,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 	} catch ( e ) { }
 
 	if ( ve.isArray( tools ) ) {
-		for ( i = 0, len = tools.length; i < len; i++ ) {
+		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
 			item = tools[i];
 			data = { 'template': item.template };
 			// Generate transclusion tool
