@@ -59,9 +59,6 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.MWImageNode.call( this, this.$figure, this.$image );
-
-	// Events
-	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
 };
 
 /* Inheritance */
@@ -254,14 +251,7 @@ ve.ce.MWBlockImageNode.prototype.onSetup = function () {
 };
 
 /**
- * Update the rendering of the 'align', src', 'width' and 'height' attributes
- * when they change in the model.
- *
- * @method
- * @param {string} key Attribute key
- * @param {string} from Old value
- * @param {string} to New value
- * @fires setup
+ * @inheritdoc
  */
 ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) {
 	if ( key === 'height' || key === 'width' ) {

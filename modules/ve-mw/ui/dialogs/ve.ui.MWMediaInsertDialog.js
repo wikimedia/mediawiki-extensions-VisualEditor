@@ -163,17 +163,32 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
-	var info, thumbheight, thumbwidth;
+	var info, newDimensions, scalable;
 	// Data initialization
 	data = data || {};
 
 	if ( data.action === 'insert' ) {
 		info = this.item.imageinfo[0];
-		// Calculate proper size according to default thumb size limit
+		// Create a scalable for calculations
+		scalable = new ve.dm.Scalable( {
+			'originalDimensions': {
+				'width': info.width,
+				'height': info.height
+			}
+		} );
+		// Resize to default thumbnail size, but only if the image itself
+		// isn't smaller than the default size
 		if ( info.width > this.defaultThumbSize ) {
-			thumbwidth = this.defaultThumbSize;
-			thumbheight = Math.round( ( info.height / info.width ) * thumbwidth );
+			newDimensions = scalable.getDimensionsFromValue( {
+				'width': this.defaultThumbSize
+			} );
+		} else {
+			newDimensions = {
+				'width': info.width,
+				'height': info.height
+			};
 		}
+
 		this.surface.getModel().getFragment().collapseRangeToEnd().insertContent( [
 			{
 				'type': 'mwBlockImage',
@@ -183,8 +198,8 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
 					'href': './' + this.item.title,
 					'src': info.thumburl,
-					'width': thumbwidth,
-					'height': thumbheight,
+					'width': newDimensions.width,
+					'height': newDimensions.height,
 					'resource': './' + this.item.title,
 					'defaultSize': true
 				}

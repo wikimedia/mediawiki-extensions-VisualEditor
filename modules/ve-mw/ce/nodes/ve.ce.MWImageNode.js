@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 /**
  * ContentEditable MediaWiki image node.
  *
@@ -43,7 +41,7 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	ve.ce.ClickableNode.call( this );
 
 	// Events
-	this.connect( this, { 'focus': 'onFocus' } );
+	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
 };
 
 /* Inheritance */
@@ -51,11 +49,16 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 OO.inheritClass( ve.ce.MWImageNode, ve.ce.GeneratedContentNode );
 
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ProtectedNode );
+
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.FocusableNode );
+
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.RelocatableNode );
+
 // Need to mixin base class as well
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ResizableNode );
+
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.MWResizableNode );
+
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ClickableNode );
 
 /* Static Properties */
@@ -63,6 +66,17 @@ OO.mixinClass( ve.ce.MWImageNode, ve.ce.ClickableNode );
 ve.ce.MWImageNode.static.primaryCommandName = 'mediaEdit';
 
 /* Methods */
+
+/**
+ * Update the rendering of the 'align', src', 'width' and 'height' attributes
+ * when they change in the model.
+ *
+ * @method
+ * @param {string} key Attribute key
+ * @param {string} from Old value
+ * @param {string} to New value
+ */
+ve.ce.MWImageNode.prototype.onAttributeChange = function () {};
 
 /** */
 ve.ce.MWImageNode.prototype.generateContents = function () {
@@ -118,51 +132,4 @@ ve.ce.MWImageNode.prototype.render = function ( generateContents ) {
  */
 ve.ce.MWImageNode.prototype.onParseError = function ( deferred ) {
 	deferred.reject();
-};
-
-/**
- * Handle the node being focused
- */
-ve.ce.MWImageNode.prototype.onFocus = function () {
-	// Fetch the original dimensions the first time the node is focused
-	if ( !this.originalDimensions ) {
-		this.fetchDimensions();
-	}
-};
-
-/**
- * Fetch the original dimensions from the API
- *
- * @returns {jQuery.Promise} Promise from getImageInfo
- */
-ve.ce.MWImageNode.prototype.fetchDimensions = function () {
-	return this.getModel().getImageInfo()
-		.done( ve.bind( function ( imageInfo ) {
-			var svgMaxSize, maxDimensions,
-				dimensions = {
-					'width': imageInfo.width,
-					'height': imageInfo.height
-				};
-			this.setOriginalDimensions( dimensions );
-
-			if ( imageInfo.mediatype === 'BITMAP' ) {
-				maxDimensions = dimensions;
-			} else if ( imageInfo.mediatype === 'DRAWING' ) {
-				svgMaxSize = mw.config.get( 'wgVisualEditor' ).svgMaxSize;
-				if ( this.getRatio() > 1 ) {
-					maxDimensions = {
-						'width': Math.round( svgMaxSize * this.getRatio() ),
-						'height': svgMaxSize
-					};
-				} else {
-					maxDimensions = {
-						'width': svgMaxSize,
-						'height': Math.round( svgMaxSize / this.getRatio() )
-					};
-				}
-			}
-			if ( maxDimensions ) {
-				this.setMaxDimensions( maxDimensions );
-			}
-		}, this ) );
 };
