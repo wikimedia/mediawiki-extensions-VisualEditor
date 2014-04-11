@@ -1520,7 +1520,10 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 	}
 
 	if ( this.surface.getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
-		this.surface.getDialogs().getWindow( 'meta' ).open( { 'page': 'settings' } );
+		this.surface.getDialogs().getWindow( 'meta' ).open(
+			this.surface.getModel().getFragment(),
+			{ 'page': 'settings' }
+		);
 	}
 };
 
