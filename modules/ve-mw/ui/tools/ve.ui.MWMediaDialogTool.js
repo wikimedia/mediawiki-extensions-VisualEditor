@@ -48,5 +48,5 @@ ve.ui.MWMediaInsertDialogTool.static.icon = 'picture';
 ve.ui.MWMediaInsertDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-media-tooltip' );
 ve.ui.MWMediaInsertDialogTool.static.commandName = 'mediaInsert';
-ve.ui.MWMediaInsertDialogTool.static.requiresFocus = true;
+ve.ui.MWMediaInsertDialogTool.static.requiresRange = true;
 ve.ui.toolFactory.register( ve.ui.MWMediaInsertDialogTool );

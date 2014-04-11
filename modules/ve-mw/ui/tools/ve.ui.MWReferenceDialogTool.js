@@ -25,7 +25,7 @@ ve.ui.MWReferenceDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-tooltip' );
 ve.ui.MWReferenceDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 ve.ui.MWReferenceDialogTool.static.commandName = 'reference';
-ve.ui.MWReferenceDialogTool.static.requiresFocus = true;
+ve.ui.MWReferenceDialogTool.static.requiresRange = true;
 ve.ui.toolFactory.register( ve.ui.MWReferenceDialogTool );
 
 /**
@@ -48,5 +48,5 @@ ve.ui.MWReferenceListDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-referencelist-tooltip' );
 ve.ui.MWReferenceListDialogTool.static.modelClasses = [ ve.dm.MWReferenceListNode ];
 ve.ui.MWReferenceListDialogTool.static.commandName = 'referenceList';
-ve.ui.MWReferenceListDialogTool.static.requiresFocus = true;
+ve.ui.MWReferenceListDialogTool.static.requiresRange = true;
 ve.ui.toolFactory.register( ve.ui.MWReferenceListDialogTool );

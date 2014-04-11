@@ -37,7 +37,7 @@ ve.ui.MWTransclusionDialogTool.static.template = null;
 
 ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
-ve.ui.MWTransclusionDialogTool.static.requiresFocus = true;
+ve.ui.MWTransclusionDialogTool.static.requiresRange = true;
 
 ve.ui.MWTransclusionDialogTool.static.commandName = 'transclusion';
 
