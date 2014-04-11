@@ -323,7 +323,8 @@ ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
-	var surfaceModel = this.getFragment().getSurface();
+	var surfaceFragment = this.getFragment(),
+		surfaceModel = surfaceFragment.getSurface();
 
 	// Data initialization
 	data = data || {};
@@ -336,7 +337,7 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 			if ( !this.referenceModel.findInternalItem( surfaceModel ) ) {
 				this.referenceModel.insertInternalItem( surfaceModel );
 			}
-			this.referenceModel.insertReferenceNode( surfaceModel );
+			this.referenceModel.insertReferenceNode( surfaceFragment );
 		}
 		// Update internal item
 		this.referenceModel.updateInternalItem( surfaceModel );

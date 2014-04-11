@@ -154,29 +154,25 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 };
 
 /**
- * Insert reference into a surface.
+ * Insert reference at the end of a surface fragment.
  *
- * Reference is inserted at the current cursor position in `surfaceModel`.
- *
- * @param {ve.dm.Surface} surfaceModel Surface model of main document
- * @param {ve.Range} [at] Location to insert at
+ * @param {ve.dm.SurfaceFragment} surfaceModel Surface fragment to insert at
  */
-ve.dm.MWReferenceModel.prototype.insertReferenceNode = function ( surfaceModel, at ) {
-	surfaceModel
-		.getFragment( at || surfaceModel.getSelection().clone(), true )
-			.collapseRangeToEnd()
-			.insertContent( [
-				{
-					'type': 'mwReference',
-					'attributes': {
-						'listKey': this.listKey,
-						'listGroup': this.listGroup,
-						'listIndex': this.listIndex,
-						'refGroup': this.group
-					}
-				},
-				{ 'type': '/mwReference' }
-			] );
+ve.dm.MWReferenceModel.prototype.insertReferenceNode = function ( surfaceFragment ) {
+	surfaceFragment
+		.collapseRangeToEnd()
+		.insertContent( [
+			{
+				'type': 'mwReference',
+				'attributes': {
+					'listKey': this.listKey,
+					'listGroup': this.listGroup,
+					'listIndex': this.listIndex,
+					'refGroup': this.group
+				}
+			},
+			{ 'type': '/mwReference' }
+		] );
 };
 
 /**
