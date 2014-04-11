@@ -31,6 +31,8 @@ ve.ui.MWCitationDialogTool.static.template = null;
 
 ve.ui.MWCitationDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
+ve.ui.MWCitationDialogTool.static.requiresRange = true;
+
 /* Methods */
 
 /**
