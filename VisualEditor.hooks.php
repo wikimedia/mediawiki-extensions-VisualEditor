@@ -79,10 +79,11 @@ class VisualEditorHooks {
 					$title->getNamespace() == NS_MEDIAWIKI &&
 					$title->getDefaultMessageText() !== false
 				);
+				$action = $existing ? 'edit' : 'create';
 				$veParams = $skin->editUrlOptions();
 				unset( $veParams['action'] ); // Remove action=edit
 				$veParams['veaction'] = 'edit'; // Set veaction=edit
-				$veTabMessage = $wgVisualEditorTabMessages[$existing ? 'edit' : 'create'];
+				$veTabMessage = $wgVisualEditorTabMessages[$action];
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					wfMessage( $veTabMessage )->setContext( $skin->getContext() )->text();
 				$veTab = array(
@@ -94,7 +95,16 @@ class VisualEditorHooks {
 
 				// Alter the edit tab
 				$editTab = $data;
-				$editTabMessage = $wgVisualEditorTabMessages[$existing ? 'editsource' : 'createsource'];
+				if (
+					$title->inNamespace( NS_FILE ) &&
+					WikiPage::factory( $title ) instanceof WikiFilePage &&
+					!WikiPage::factory( $title )->isLocal()
+				) {
+					$editTabMessage = $wgVisualEditorTabMessages[$action . 'localdescriptionsource'];
+				} else {
+					$editTabMessage = $wgVisualEditorTabMessages[$action . 'source'];
+				}
+
 				if ( $editTabMessage !== null ) {
 					$editTab['text'] = wfMessage( $editTabMessage )->setContext( $skin->getContext() )->text();
 				}
