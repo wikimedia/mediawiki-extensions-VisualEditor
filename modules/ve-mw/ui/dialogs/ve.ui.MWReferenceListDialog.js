@@ -22,7 +22,7 @@ ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( config ) {
 	ve.ui.Dialog.call( this, config );
 
 	// Properties
-	this.inserting = false;
+	this.node = null;
 };
 
 /* Inheritance */
@@ -94,26 +94,18 @@ ve.ui.MWReferenceListDialog.prototype.setup = function ( data ) {
 	node = this.getFragment().getSelectedNode();
 	if ( node instanceof ve.dm.MWReferenceListNode ) {
 		refGroup = node.getAttribute( 'refGroup' );
-		this.inserting = false;
+		this.node = node;
 	} else {
 		refGroup = '';
-		this.inserting = true;
+		this.node = null;
 	}
 
 	this.groupInput.setValue( refGroup );
 	this.applyButton.setLabel ( ve.msg (
-			!this.inserting ?
+			this.node ?
 				'visualeditor-dialog-action-apply' :
 				'visualeditor-dialog-referencelist-insert-button'
 	) );
-
-	/**
-	 * Focused node.
-	 *
-	 * @private
-	 * @property {ve.dm.MWReferenceListNode|undefined}
-	 */
-	this.node = node;
 };
 
 /**
