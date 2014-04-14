@@ -81,7 +81,7 @@ class VisualEditorPage
     div(:media_select, class: "ve-ui-mwMediaResultWidget-overlay", frame: frame)
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
     text_field(:parameter_box, index: 0, frame: frame)
-    span(:parameter_icon, class: "ve-ui-mwParameterResultWidget-name", frame: frame)
+    div(:parameter_icon, text: "q", frame: frame)
     a(:remove_parameter, title: "Remove parameter", frame: frame)
     a(:remove_template, title: "Remove template", frame: frame)
     span(:return_to_save, class: "oo-ui-labeledElement-label", text: "Return to save form", frame: frame)
