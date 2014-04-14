@@ -23,6 +23,9 @@ ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( config ) {
 
 	// Properties
 	this.referenceModel = null;
+
+	// Events
+	this.connect( this, { 'open': 'onOpen' } );
 };
 
 /* Inheritance */
@@ -317,6 +320,14 @@ ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
 	this.backButton.$element.hide();
 	this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
 	this.selectButton.setDisabled( this.search.isIndexEmpty() );
+};
+
+/**
+ * Respond to 'open' event. Fires once the dialog has finished opening.
+ */
+ve.ui.MWReferenceDialog.prototype.onOpen = function () {
+	// Focus the reference surface
+	this.referenceSurface.focus();
 };
 
 /**
