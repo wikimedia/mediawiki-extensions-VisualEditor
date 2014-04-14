@@ -1156,7 +1156,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 	}
 
 	this.saveDialog.setSanityCheck( this.sanityCheckVerified );
-	this.saveDialog.open();
+	this.saveDialog.open( this.surface.getModel().getFragment(), { 'dir': this.surface.getModel().getDocument().getLang() } );
 	this.emit( 'saveWorkflowBegin' );
 };
 
