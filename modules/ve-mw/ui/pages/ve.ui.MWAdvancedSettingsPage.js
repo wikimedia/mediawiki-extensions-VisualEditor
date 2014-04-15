@@ -16,6 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config ) {
+	var advancedSettingsPage = this;
+
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -82,7 +84,35 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		}
 	);
 
+	this.metaItemCheckboxes = [];
+	/*global mw*/
+	if ( mw.config.get( 'wgVariantArticlePath' ) ) {
+		this.metaItemCheckboxes.push(
+			{
+				metaName: 'mwNoContentConvert',
+				label: ve.msg( 'visualeditor-dialog-meta-settings-nocontentconvert-label' )
+			},
+			{
+				metaName: 'mwNoTitleConvert',
+				label: ve.msg( 'visualeditor-dialog-meta-settings-notitleconvert-label' )
+			}
+		);
+	}
+
 	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink ] );
+
+	$.each( this.metaItemCheckboxes, function () {
+		this.fieldLayout = new OO.ui.FieldLayout(
+			new OO.ui.CheckboxInputWidget( { '$': this.$ } ),
+			{
+				'$': advancedSettingsPage.$,
+				'align': 'inline',
+				'label': this.label
+			}
+		);
+		advancedSettingsPage.advancedSettingsFieldset.addItems( [ this.fieldLayout ] );
+	} );
+
 	this.$element.append( this.advancedSettingsFieldset.$element );
 };
 
@@ -116,12 +146,13 @@ ve.ui.MWAdvancedSettingsPage.prototype.onIndexingOptionChange = function () {
 };
 
 /**
- * Get indexing options
+ * Get the first meta item of a given name
  *
- * @returns {Object|null} Indexing option, if any
+ * @param {string} name Name of the meta item
+ * @returns {Object|null} Meta item, if any
  */
-ve.ui.MWAdvancedSettingsPage.prototype.getIndexingOptionItem = function () {
-	return this.metaList.getItemsInGroup( 'mwIndex' )[0] || null;
+ve.ui.MWAdvancedSettingsPage.prototype.getMetaItem = function ( name ) {
+	return this.metaList.getItemsInGroup( name )[0] || null;
 };
 
 /* New edit section link option methods */
@@ -131,15 +162,6 @@ ve.ui.MWAdvancedSettingsPage.prototype.getIndexingOptionItem = function () {
  */
 ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = function () {
 	this.newSectionEditLinkOptionTouched = true;
-};
-
-/**
- * Get the new section edit link item
- *
- * @returns {Object|null} New section edit link option, if any
- */
-ve.ui.MWAdvancedSettingsPage.prototype.getNewSectionEditLinkItem = function () {
-	return this.metaList.getItemsInGroup( 'mwNewSectionEdit' )[0] || null;
 };
 
 /**
@@ -153,13 +175,15 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 
 	var // Indexing items
 		indexingField = this.indexing.getField(),
-		indexingOption = this.getIndexingOptionItem(),
+		indexingOption = this.getMetaItem( 'mwIndex' ),
 		indexingType = indexingOption && indexingOption.element.type || 'default',
 
 		// New section edit link items
 		newSectionEditField = this.newEditSectionLink.getField(),
-		newSectionEditLinkOption = this.getNewSectionEditLinkItem(),
-		newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default';
+		newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' ),
+		newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default',
+
+		advancedSettingsPage = this;
 
 	// Indexing items
 	indexingField.selectItem( indexingField.getItemFromData( indexingType ) );
@@ -168,6 +192,12 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	// New section edit link items
 	newSectionEditField.selectItem( newSectionEditField.getItemFromData( newSectionEditLinkType ) );
 	this.newSectionEditLinkOptionTouched = false;
+
+	// Simple checkbox items
+	$.each( this.metaItemCheckboxes, function () {
+		var currentValue = !!advancedSettingsPage.getMetaItem( this.metaName );
+		this.fieldLayout.getField().setValue( currentValue );
+	} );
 };
 
 /**
@@ -180,12 +210,14 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 	data = data || {};
 
 	var // Indexing items
-		currentIndexingItem = this.getIndexingOptionItem(),
+		currentIndexingItem = this.getMetaItem( 'mwIndex' ),
 		newIndexingData = this.indexing.getField().getSelectedItem(),
 
 		// New section edit link items
-		currentNewSectionEditLinkItem = this.getNewSectionEditLinkItem(),
-		newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem();
+		currentNewSectionEditLinkItem = this.getMetaItem( 'mwNewSectionEdit' ),
+		newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem(),
+
+		advancedSettingsPage = this;
 
 	// Alter the indexing option flag iff it's been touched & is actually different
 	if ( this.indexingOptionTouched ) {
@@ -226,6 +258,17 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 			}
 		}
 	}
+
+	$.each( this.metaItemCheckboxes, function () {
+		var currentItem = advancedSettingsPage.getMetaItem( this.metaName ),
+			newValue = this.fieldLayout.getField().getValue();
+
+		if ( currentItem && !newValue ) {
+			currentItem.remove();
+		} else if ( !currentItem && newValue ) {
+			advancedSettingsPage.metaList.insertMeta( { 'type': this.metaName } );
+		}
+	} );
 
 	this.metaList = null;
 };
