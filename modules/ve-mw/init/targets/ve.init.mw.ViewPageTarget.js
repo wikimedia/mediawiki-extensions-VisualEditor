@@ -1142,8 +1142,8 @@ ve.init.mw.ViewPageTarget.prototype.setupSaveDialog = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
-	// Focus the surface to make sure any open inspectors are closed
-	this.surface.getView().focus();
+	// Make sure any open inspectors are closed
+	this.surface.getContext().closeCurrentInspector();
 
 	// Preload the serialization
 	if ( !this.docToSave ) {
