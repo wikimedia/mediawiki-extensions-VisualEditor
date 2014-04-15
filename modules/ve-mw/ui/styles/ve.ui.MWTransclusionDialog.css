@@ -31,7 +31,7 @@
 	top: 1.5em;
 }
 
-.ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout legend,
+.ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labeledElement-label,
 .ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconedElement-icon,
 .ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
 .ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
@@ -42,12 +42,12 @@
 	transition: all 250ms ease-in-out;
 }
 
-.ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout legend {
+.ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labeledElement-label {
 	height: 1.5em;
 	overflow: hidden;
 }
 
-.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout legend {
+.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labeledElement-label {
 	opacity: 0;
 	height: 0;
 	padding-top: 0;
