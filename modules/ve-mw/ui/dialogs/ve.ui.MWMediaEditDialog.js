@@ -368,10 +368,10 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 		this.scalable.setEnforcedMax( false );
 	}
 
-	// Disable border checkbox for framed images
+	// Disable border checkbox for thumb and framed images
 	// According to documentation:
 	// https://en.wikipedia.org/wiki/Wikipedia:Extended_image_syntax#Border
-	if ( selectedType === 'frame' ) {
+	if ( selectedType === 'thumb' || selectedType === 'frame' ) {
 		// Disable border option
 		this.borderCheckbox.setDisabled( true );
 		this.borderCheckbox.setValue( false );
