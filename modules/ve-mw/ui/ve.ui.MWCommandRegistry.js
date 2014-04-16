@@ -38,7 +38,7 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'meta/settings', 'dialog', 'open', 'meta', { 'page': 'settings' } )
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'meta/advanced', 'dialog', 'open', 'meta', { 'page': 'advanced' } )
+	new ve.ui.Command( 'meta/advanced', 'dialog', 'open', 'meta', { 'page': 'advancedSettings' } )
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'meta/categories', 'dialog', 'open', 'meta', { 'page': 'categories' } )
