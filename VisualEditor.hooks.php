@@ -273,7 +273,6 @@ class VisualEditorHooks {
 			)
 		);
 
-/* Disabling Beta Features option for language for now
 		$preferences['visualeditor-enable-language'] = array(
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-language-label',
@@ -290,7 +289,6 @@ class VisualEditorHooks {
 				),
 			),
 		);
-*/
 
 /* Disabling Beta Features option for generic content for now
 		$preferences['visualeditor-enable-mwalienextension'] = array(
