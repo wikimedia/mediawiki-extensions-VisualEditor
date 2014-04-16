@@ -347,18 +347,32 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				// Page protected from editing
-				if ( $page->getNamespace() != NS_MEDIAWIKI && $page->isProtected( 'edit' ) ) {
-					# Is the title semi-protected?
-					if ( $page->isSemiProtected() ) {
-						$noticeMsg = 'semiprotectedpagewarning';
-					} else {
-						# Then it must be protected based on static groups (regular)
-						$noticeMsg = 'protectedpagewarning';
+				if ( $page->getNamespace() != NS_MEDIAWIKI ) {
+					// Page protected from editing
+					if ( $page->isProtected( 'edit' ) ) {
+						# Is the title semi-protected?
+						if ( $page->isSemiProtected() ) {
+							$noticeMsg = 'semiprotectedpagewarning';
+						} else {
+							# Then it must be protected based on static groups (regular)
+							$noticeMsg = 'protectedpagewarning';
+						}
+						$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
+						$this->getLastLogEntry( $page, 'protect' );
 					}
 
-					$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
-						$this->getLastLogEntry( $page, 'protect' );
+					// Deal with cascading edit protection
+					list( $sources, $restrictions ) = $page->getCascadeProtectionSources();
+					if ( isset( $restrictions['edit'] ) ) {
+						$notice = $this->msg( 'cascadeprotectedwarning' )->parseAsBlock() . '<ul>';
+						// Unfortunately there's no nice way to get only the pages which cause
+						// editing to be restricted
+						foreach ( $sources as $source ) {
+							$notice .= "<li>" . Linker::link( $source ) . "</li>";
+						}
+						$notice .= '</ul>';
+						$notices[] = $notice;
+					}
 				}
 
 				// Show notice when editing user / user talk page of a user that doesn't exist
