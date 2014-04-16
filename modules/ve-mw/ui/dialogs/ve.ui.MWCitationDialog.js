@@ -90,7 +90,7 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 		obj = this.transclusion.getPlainObject();
 
 	if ( !this.referenceModel ) {
-		surfaceModel.getFragment().collapseRangeToEnd();
+		this.getFragment().collapseRangeToEnd();
 		this.referenceModel = new ve.dm.MWReferenceModel();
 		this.referenceModel.insertInternalItem( surfaceModel );
 		this.referenceModel.insertReferenceNode( surfaceFragment );
