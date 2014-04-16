@@ -487,6 +487,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.FormatTool.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.LanguageInputWidget.css',
+			'lib/ve/modules/ve/ui/styles/ve.ui.DimensionsWidget.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.MediaSizeWidget.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.SpecialCharacterInspector.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.SurfaceWidget.css',
