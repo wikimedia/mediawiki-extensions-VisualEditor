@@ -24,6 +24,9 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( config ) {
 	this.captionNode = null;
 	this.store = null;
 	this.scalable = null;
+
+	// Events
+	this.connect( this, { 'open': 'onOpen' } );
 };
 
 /* Inheritance */
@@ -307,6 +310,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 	this.sizeWidget.connect( this, { 'change': 'onSizeWidgetChange' } );
 	this.typeInput.connect( this, { 'select': 'onTypeChange' } );
+	this.bookletLayout.connect( this, { 'set': 'onBookletLayoutSet' } );
 
 	// Initialization
 	this.generalSettingsPage.$element.append( [
@@ -410,6 +414,13 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function () {
 	}
 
 	this.positionInput.setDisabled( !checked );
+};
+
+ve.ui.MWMediaEditDialog.prototype.onBookletLayoutSet = function ( page ) {
+	// When switching to the general settings page, focus the surface
+	if ( page === this.generalSettingsPage ) {
+		this.captionSurface.focus();
+	}
 };
 
 /**
@@ -544,6 +555,14 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	// Initialization
 	this.captionFieldset.$element.append( this.captionSurface.$element );
 	this.captionSurface.initialize();
+};
+
+/**
+ * Respond to 'open' event. Fires once the dialog has finished opening.
+ */
+ve.ui.MWMediaEditDialog.prototype.onOpen = function () {
+	// Focus the caption surface
+	this.captionSurface.focus();
 };
 
 /**
