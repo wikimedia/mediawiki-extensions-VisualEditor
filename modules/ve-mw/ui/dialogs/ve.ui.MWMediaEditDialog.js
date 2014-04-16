@@ -363,12 +363,19 @@ ve.ui.MWMediaEditDialog.prototype.onTypeChange = function ( item ) {
 			// enforce any max size
 			this.scalable.setEnforcedMax( false );
 		}
+	} else {
+		// Don't limit maximum dimensions on basic and frameless images
+		this.scalable.setEnforcedMax( false );
+	}
+
+	// Disable border checkbox for framed images
+	// According to documentation:
+	// https://en.wikipedia.org/wiki/Wikipedia:Extended_image_syntax#Border
+	if ( selectedType === 'frame' ) {
 		// Disable border option
 		this.borderCheckbox.setDisabled( true );
 		this.borderCheckbox.setValue( false );
 	} else {
-		// Don't limit maximum dimensions on basic and frameless images
-		this.scalable.setEnforcedMax( false );
 		// Enable border option
 		this.borderCheckbox.setDisabled( false );
 	}
