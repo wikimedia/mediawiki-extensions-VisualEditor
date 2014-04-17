@@ -41,6 +41,15 @@ ve.ui.MWExtensionInspector.static.removable = false;
  */
 ve.ui.MWExtensionInspector.static.allowedEmpty = false;
 
+/**
+ * Extension is forced to always be LTR; defaults to false
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.ui.MWExtensionInspector.static.forcedLtr = false;
+
 /* Methods */
 
 /**
@@ -88,7 +97,7 @@ ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
 
 	this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
-	this.input.setRTL( data.dir === 'rtl' );
+	this.input.setRTL( !this.static.forcedLtr && ( data.dir === 'rtl' ) );
 };
 
 /**
