@@ -1569,7 +1569,7 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
 			return null;
 		}
 		// Check if there's been an edit
-		if ( this.surface && this.edited ) {
+		if ( this.surface && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
 			// Return our message
 			message = ve.msg( 'visualeditor-viewpage-savewarning' );
 		}
