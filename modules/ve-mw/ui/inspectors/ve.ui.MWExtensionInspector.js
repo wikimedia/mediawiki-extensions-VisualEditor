@@ -42,13 +42,15 @@ ve.ui.MWExtensionInspector.static.removable = false;
 ve.ui.MWExtensionInspector.static.allowedEmpty = false;
 
 /**
- * Extension is forced to always be LTR; defaults to false
+ * Inspector's directionality, 'ltr' or 'rtl'
+ *
+ * Leave as null to use the directionality of the current fragment.
  *
  * @static
- * @property {boolean}
+ * @property {string|null}
  * @inheritable
  */
-ve.ui.MWExtensionInspector.static.forcedLtr = false;
+ve.ui.MWExtensionInspector.static.dir = null;
 
 /* Methods */
 
@@ -97,7 +99,8 @@ ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
 
 	this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
-	this.input.setRTL( !this.static.forcedLtr && ( data.dir === 'rtl' ) );
+	var dir = this.constructor.static.dir || data.dir;
+	this.input.setRTL( dir === 'rtl' );
 };
 
 /**
