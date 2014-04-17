@@ -84,7 +84,7 @@ class ApiVisualEditor extends ApiBase {
 					$resp->header( 'X-Parsoid-Performance: ' . $xpp );
 				}
 			} elseif ( $status->isGood() ) {
-				$this->dieUsage( $req->getContent(), 'parsoidserver-http-'.$req->getStatus() );
+				$this->dieUsage( $req->getContent(), 'parsoidserver-http-' . $req->getStatus() );
 			} elseif ( $errors = $status->getErrorsByType( 'error' ) ) {
 				$error = $errors[0];
 				$code = $error['message'];
@@ -93,7 +93,7 @@ class ApiVisualEditor extends ApiBase {
 				} else {
 					$message = 'MWHttpRequest error';
 				}
-				$this->dieUsage( $message, 'parsoidserver-'.$code );
+				$this->dieUsage( $message, 'parsoidserver-' . $code );
 			}
 
 			if ( $content === false ) {
