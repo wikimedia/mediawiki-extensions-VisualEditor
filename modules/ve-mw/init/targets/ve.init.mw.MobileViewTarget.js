@@ -69,7 +69,7 @@ ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
  * @param {ve.dm.Document} dmDoc Document model
  * @returns {ve.ui.MobileSurface}
  */
-ve.init.mw.Target.prototype.createSurface = function ( dmDoc ) {
+ve.init.mw.MobileViewTarget.prototype.createSurface = function ( dmDoc ) {
 	return new ve.ui.MobileSurface( dmDoc );
 };
 
