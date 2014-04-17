@@ -87,7 +87,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$editStatus = $saveresult['edit']['result'];
 
 		// Error
-		if ( !isset( $saveresult['edit']['result'] ) || $editStatus !== 'Success' ) {
+		if ( $editStatus !== 'Success' ) {
 			$result = array(
 				'result' => 'error',
 				'edit' => $saveresult['edit']
