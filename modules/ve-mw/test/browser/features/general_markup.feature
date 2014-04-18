@@ -1,7 +1,6 @@
-@ie6-bug  @ie7-bug  @ie8-bug @ie9-bug @ie10-bug @en.wikipedia.beta.wmflabs.org @test2.wikipedia.org @login
+@en.wikipedia.beta.wmflabs.org @firefox @login @make_selectable_line @test2.wikipedia.org
 Feature: VisualEditor general text markup features
 
-  @make_selectable_line
   Scenario Outline: VisualEditor general markup
     When I click the text style menu
     And I click the <type_of_markup> menu option

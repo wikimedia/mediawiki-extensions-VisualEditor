@@ -1,4 +1,4 @@
-@ie6-bug  @ie7-bug  @ie8-bug @ie9-bug @ie10-bug @login
+@firefox @login
 Feature: VisualEditor cursor
 
   Background:

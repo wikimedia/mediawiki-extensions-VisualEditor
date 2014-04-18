@@ -1,4 +1,4 @@
-@ie6-bug  @ie7-bug  @ie8-bug  @ie9-bug @ie10-bug @en.wikipedia.beta.wmflabs.org @test2.wikipedia.org @login
+@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: Switching between wikitext and Visual Editor modes
 
   Test for both pathways that allow switching between Visual Editor and wikitext editing modes.

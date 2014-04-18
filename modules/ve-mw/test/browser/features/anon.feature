@@ -1,7 +1,6 @@
-@clean @ie6-bug  @ie7-bug  @ie8-bug @ie9-bug @ie10-bug @test2.wikipedia.org
+@clean @firefox @login @test2.wikipedia.org
 Feature: VisualEditor
 
-  @login
   Scenario: Basic edit
     Given I am at my user page
     When I edit the page with Editing with

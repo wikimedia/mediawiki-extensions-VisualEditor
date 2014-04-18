@@ -1,5 +1,5 @@
 # encoding: UTF-8
-@ie6-bug  @ie7-bug  @ie8-bug @ie9-bug @ie10-bug @en.wikipedia.beta.wmflabs.org @test2.wikipedia.org @login
+@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor
 
   Background:
