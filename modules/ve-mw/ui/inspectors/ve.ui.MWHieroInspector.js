@@ -34,6 +34,8 @@ ve.ui.MWHieroInspector.static.title =
 
 ve.ui.MWHieroInspector.static.nodeModel = ve.dm.MWHieroNode;
 
+ve.ui.MWHieroInspector.static.dir = 'ltr';
+
 /* Methods */
 
 ve.ui.MWHieroInspector.prototype.initialize = function () {
@@ -46,10 +48,6 @@ ve.ui.MWHieroInspector.prototype.initialize = function () {
 ve.ui.MWHieroInspector.prototype.onOpen = function () {
 	// Parent method
 	ve.ui.MWExtensionInspector.prototype.onOpen.call( this );
-
-	// Override directionality settings, inspector's input
-	// should always be LTR:
-	this.input.setRTL( false );
 };
 
 /* Registration */
