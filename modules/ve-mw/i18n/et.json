@@ -16,6 +16,8 @@
 	"visualeditor-ca-createsource": "Loo lähtetekst",
 	"visualeditor-ca-editsource": "Muuda lähteteksti",
 	"visualeditor-ca-editsource-section": "redigeeri lähteteksti",
+	"visualeditor-ca-editlocaldescriptionsource": "Redigeeri kohaliku kirjelduse lähteteksti",
+	"visualeditor-ca-createlocaldescriptionsource": "Lisa kohaliku kirjelduse lähtetekst",
 	"visualeditor-categories-tool": "Kategooriad",
 	"visualeditor-cite-tool-name-web": "Võrgukoht",
 	"visualeditor-cite-tool-name-book": "Raamat",
