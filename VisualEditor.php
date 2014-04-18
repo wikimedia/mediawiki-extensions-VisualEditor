@@ -634,6 +634,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js',
+			'modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js',
 		),
 		'styles' => array(
 			// ui
