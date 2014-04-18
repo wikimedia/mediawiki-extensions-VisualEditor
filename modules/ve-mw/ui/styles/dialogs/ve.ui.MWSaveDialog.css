@@ -75,16 +75,6 @@
 	color: #aaa;
 }
 
-.ve-ui-mwSaveDialog-working {
-	display: none;
-	float: right;
-	height: 2.5em;
-	width: 128px;
-	margin-right: 1em;
-	background-position: right center;
-	background-repeat: no-repeat;
-}
-
 .ve-ui-mwSaveDialog-license,
 .ve-ui-mwSaveDialog-dirtymsg,
 .ve-ui-mwSaveDialog-report-notice {
