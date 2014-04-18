@@ -573,10 +573,6 @@ class ApiVisualEditor extends ApiBase {
 		return true;
 	}
 
-	public function getVersion() {
-		return __CLASS__ . ': $Id$';
-	}
-
 	public function getParamDescription() {
 		return array(
 			'page' => 'The page to perform actions on.',
