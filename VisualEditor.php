@@ -1026,6 +1026,7 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
+			'mediawiki.jqueryMsg',
 		),
 		'messages' => array(
 			'visualeditor-dialog-template-title',

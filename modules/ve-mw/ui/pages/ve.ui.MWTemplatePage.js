@@ -63,7 +63,8 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 			.append( ve.msg(
 				'visualeditor-dialog-transclusion-no-template-description',
 				title.getName(),
-				ve.getHtmlAttributes( { 'target': '_blank', 'href': title.getUrl() } )
+				ve.getHtmlAttributes( { 'target': '_blank', 'href': title.getUrl() } ),
+				mw.user
 			) );
 	}
 	this.infoFieldset.$element.append( this.$description );
