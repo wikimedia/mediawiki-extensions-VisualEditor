@@ -9,7 +9,7 @@ When(/^I enter and save the first edit$/) do
 end
 
 When(/^I enter and save a (.+) edit$/) do |count|
-  sleep 2 # Wait for the save confirmation to disappear
+  sleep 10 # Wait for the save confirmation to disappear
   edit_text = "Editing with " + Random.rand.to_s
   instance_variable_set("@#{count}_edit_text", edit_text)
   step "I click Edit for VisualEditor"
