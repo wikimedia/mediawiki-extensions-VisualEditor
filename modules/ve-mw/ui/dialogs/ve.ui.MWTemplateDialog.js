@@ -51,6 +51,8 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
  */
 ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
 	this.loaded = true;
+	this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+	this.popPending();
 };
 
 /**
@@ -343,6 +345,7 @@ ve.ui.MWTemplateDialog.prototype.setup = function ( data ) {
 			.load( ve.copy( this.transclusionNode.getAttribute( 'mw' ) ) );
 	}
 	promise.always( ve.bind( this.onTransclusionReady, this ) );
+	this.pushPending();
 };
 
 /**
@@ -357,6 +360,7 @@ ve.ui.MWTemplateDialog.prototype.teardown = function ( data ) {
 		this.saveChanges();
 	}
 
+	this.$element.removeClass( 've-ui-mwTemplateDialog-ready' );
 	this.transclusion.disconnect( this );
 	this.transclusion.abortRequests();
 	this.transclusion = null;
