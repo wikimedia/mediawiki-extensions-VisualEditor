@@ -58,6 +58,7 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
  */
 ve.ui.MWTransclusionDialog.prototype.onTransclusionReady = function () {
 	ve.ui.MWTransclusionDialog.super.prototype.onTransclusionReady.call( this );
+	this.modeButton.setDisabled( false );
 	this.setMode( 'auto' );
 };
 
@@ -310,7 +311,17 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 
 	// Initialization
 	this.$foot.append( this.modeButton.$element );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	this.setMode( 'single' );
+	this.modeButton.setDisabled( true );
+
+	// Parent method
+	ve.ui.MWTransclusionDialog.super.prototype.setup.call( this, data );
 };
 
 /**
