@@ -93,7 +93,6 @@
 			Array.prototype.map &&
 			Date.now &&
 			Date.prototype.toJSON &&
-			Function.prototype.bind &&
 			Object.create &&
 			Object.keys &&
 			String.prototype.trim &&
