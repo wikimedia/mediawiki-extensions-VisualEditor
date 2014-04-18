@@ -9,19 +9,19 @@
  * MediaWiki hieroglyphics inspector.
  *
  * @class
- * @extends ve.ui.MWExtensionInspector
+ * @extends ve.ui.MWLiveExtensionInspector
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWHieroInspector = function VeUiMWHieroInspector( config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, config );
+	ve.ui.MWLiveExtensionInspector.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWHieroInspector, ve.ui.MWExtensionInspector );
+OO.inheritClass( ve.ui.MWHieroInspector, ve.ui.MWLiveExtensionInspector );
 
 /* Static properties */
 
