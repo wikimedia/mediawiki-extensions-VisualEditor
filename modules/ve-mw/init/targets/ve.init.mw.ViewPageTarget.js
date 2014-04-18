@@ -442,7 +442,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
   */
 ve.init.mw.ViewPageTarget.prototype.onSaveAsyncBegin = function () {
 	this.saveDialog.saveButton.setDisabled( true );
-	this.saveDialog.$loadingIcon.show();
+	this.saveDialog.pushPending();
 };
 
 /**
@@ -452,7 +452,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveAsyncBegin = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveAsyncComplete = function () {
 	this.saveDialog.saveButton.setDisabled( false );
-	this.saveDialog.$loadingIcon.hide();
+	this.saveDialog.popPending();
 };
 
 /**
@@ -613,7 +613,7 @@ ve.init.mw.ViewPageTarget.prototype.onShowChanges = function ( diffHtml ) {
  */
 ve.init.mw.ViewPageTarget.prototype.onShowChangesError = function ( jqXHR, status ) {
 	alert( ve.msg( 'visualeditor-differror', status ) );
-	this.saveDialog.$loadingIcon.hide();
+	this.saveDialog.popPending();
 };
 
 /**
@@ -629,7 +629,7 @@ ve.init.mw.ViewPageTarget.prototype.onSerializeError = function ( jqXHR, status 
 	// It's possible to get here while the save dialog has never been opened (if the user uses
 	// the switch to source mode option)
 	if ( this.saveDialog ) {
-		this.saveDialog.$loadingIcon.hide();
+		this.saveDialog.popPending();
 	}
 };
 
@@ -639,7 +639,7 @@ ve.init.mw.ViewPageTarget.prototype.onSerializeError = function ( jqXHR, status 
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onEditConflict = function () {
-	this.saveDialog.$loadingIcon.hide();
+	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'conflict' );
 };
 
@@ -649,7 +649,7 @@ ve.init.mw.ViewPageTarget.prototype.onEditConflict = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onNoChanges = function () {
-	this.saveDialog.$loadingIcon.hide();
+	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'nochanges' );
 	this.saveDialog.reviewGoodButton.setDisabled( false );
 };
@@ -775,7 +775,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
 	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.reviewGoodButton.setDisabled( true );
-		this.saveDialog.$loadingIcon.show();
+		this.saveDialog.pushPending();
 		if ( this.pageExists ) {
 			// Has no callback, handled via target.onShowChanges
 			this.showChanges( this.docToSave );
@@ -828,7 +828,7 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function () {
 		);
 	} else {
 		this.saveDialog.saveButton.setDisabled( true );
-		this.saveDialog.$loadingIcon.show();
+		this.saveDialog.pushPending();
 		this.save( this.docToSave, saveOptions );
 	}
 };

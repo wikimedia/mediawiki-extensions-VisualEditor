@@ -72,7 +72,7 @@ ve.ui.MWSaveDialog.static.title =
 ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
 	this.$reviewViewer.empty().append( content );
 	this.reviewGoodButton.setDisabled( false );
-	this.$loadingIcon.hide();
+	this.popPending();
 	this.swapPanel( 'review' );
 };
 
@@ -412,16 +412,13 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	} );
 	this.resolveConflictButton.connect( this, { 'click': [ 'emit', 'resolve' ] } );
 
-	this.$loadingIcon = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-working' );
-
 	// Initialization
 	this.$body.append( this.panel.$element );
 	this.$foot.append(
 		this.reviewButton.$element,
 		this.saveButton.$element,
 		this.reviewGoodButton.$element,
-		this.resolveConflictButton.$element,
-		this.$loadingIcon
+		this.resolveConflictButton.$element
 	);
 
 	this.setupDeferred.resolve();
