@@ -301,6 +301,7 @@ class ApiVisualEditor extends ApiBase {
 				// Dirty hack to provide the correct context for edit notices
 				global $wgTitle; // FIXME NOOOOOOOOES
 				$wgTitle = $page;
+				RequestContext::getMain()->setTitle( $page );
 				$notices = $page->getEditNotices();
 				if ( $user->isAnon() ) {
 					$notices[] = $this->msg( 'anoneditwarning' )->parseAsBlock();
