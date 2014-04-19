@@ -161,6 +161,15 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
+	protected function parseWikitextFragment( $title, $wikitext ) {
+		return $this->requestParsoid( 'POST', $title,
+			array(
+				'wt' => $wikitext,
+				'body' => 1,
+			)
+		);
+	}
+
 	protected function parseWikitext( $title ) {
 		$apiParams = array(
 			'action' => 'parse',
@@ -195,29 +204,6 @@ class ApiVisualEditor extends ApiBase {
 			'basetimestamp' => $timestamp,
 			'starttimestamp' => wfTimestampNow()
 		);
-	}
-
-	protected function parseWikitextFragment( $wikitext, $title = null ) {
-		$apiParams = array(
-			'action' => 'parse',
-			'title' => $title,
-			'prop' => 'text',
-			'disablepp' => true,
-			'pst' => true,
-			'text' => $wikitext
-		);
-		$api = new ApiMain(
-			new DerivativeRequest(
-				$this->getRequest(),
-				$apiParams,
-				false // was posted?
-			),
-			true // enable write?
-		);
-
-		$api->execute();
-		$result = $api->getResultData();
-		return isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
 	}
 
 	protected function diffWikitext( $title, $wikitext ) {
@@ -426,9 +412,9 @@ class ApiVisualEditor extends ApiBase {
 				break;
 
 			case 'parsefragment':
-				$content = $this->parseWikitextFragment( $params['wikitext'], $page->getText() );
+				$content = $this->parseWikitextFragment( $page, $params['wikitext'] );
 				if ( $content === false ) {
-					$this->dieUsage( 'Error querying MediaWiki API', 'parsoidserver' );
+					$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 				} else {
 					$result = array(
 						'result' => 'success',
