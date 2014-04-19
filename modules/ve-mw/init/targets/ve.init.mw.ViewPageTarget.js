@@ -417,7 +417,10 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 		this.restoring = false;
 
 		if ( newid !== undefined ) {
-			mw.config.set( 'wgCurRevisionId', newid );
+			mw.config.set( {
+				'wgCurRevisionId': newid,
+				'wgRevisionId': newid
+			} );
 			this.revid = newid;
 		}
 		this.saveDialog.close();
