@@ -124,7 +124,7 @@
 	"visualeditor-dialog-transclusion-insert-transclusion": "Einbindung einfügen",
 	"visualeditor-dialog-transclusion-loading": "Laden …",
 	"visualeditor-dialog-transclusion-multiple-mode": "Optionen anzeigen",
-	"visualeditor-dialog-transclusion-no-template-description": "Du fügst dieser Seite die Vorlage „$1“ hinzu. Die Vorlage hat noch keine Beschreibung, aber vielleicht gibt es einige Informationen auf der <a $2>Vorlagenseite</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Du}} fügst dieser Seite die Vorlage „$1“ hinzu. Die Vorlage hat noch keine Beschreibung, aber vielleicht gibt es einige Informationen auf der <a $2>Vorlagenseite</a>.",
 	"visualeditor-dialog-transclusion-options": "Optionen",
 	"visualeditor-dialog-transclusion-placeholder": "Neue Vorlage",
 	"visualeditor-dialog-transclusion-remove-content": "Inhalt entfernen",

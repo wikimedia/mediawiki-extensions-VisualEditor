@@ -125,7 +125,7 @@
 	"visualeditor-dialog-transclusion-insert-transclusion": "載入嵌入物",
 	"visualeditor-dialog-transclusion-loading": "載入中…",
 	"visualeditor-dialog-transclusion-multiple-mode": "顯示選項",
-	"visualeditor-dialog-transclusion-no-template-description": "您正在此頁面加入模板「$1」。它當前尚無說明，但於<a $2>模板頁</a>可能有一些資訊。",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|您正在}}此頁面加入模板「$1」。它當前尚無說明，但於<a $2>模板頁</a>可能有一些資訊。",
 	"visualeditor-dialog-transclusion-options": "選項",
 	"visualeditor-dialog-transclusion-placeholder": "新模板",
 	"visualeditor-dialog-transclusion-remove-content": "移除內容",

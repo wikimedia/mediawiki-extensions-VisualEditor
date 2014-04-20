@@ -115,7 +115,7 @@
 	"visualeditor-dialog-transclusion-insert-transclusion": "Вметни превметнување",
 	"visualeditor-dialog-transclusion-loading": "Вчитувам...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Прикажи нагодувања",
-	"visualeditor-dialog-transclusion-no-template-description": "Го додавате шаблонот „$1“. Засега нема опис, но може ќе најдете некои информации на <a $2>шаблонската страница</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Го додавате}} шаблонот „$1“. Засега нема опис, но може ќе најдете некои информации на <a $2>шаблонската страница</a>.",
 	"visualeditor-dialog-transclusion-options": "Нагодувања",
 	"visualeditor-dialog-transclusion-placeholder": "Нов шаблон",
 	"visualeditor-dialog-transclusion-remove-content": "Отстрани содржина",

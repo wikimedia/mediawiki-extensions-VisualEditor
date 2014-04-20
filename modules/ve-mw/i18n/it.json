@@ -12,7 +12,8 @@
 			"Minerva Titani",
 			"Raoli",
 			"Una giornata uggiosa '94",
-			"Maria victoria"
+			"Maria victoria",
+			"Ontsed"
 		]
 	},
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
@@ -124,7 +125,7 @@
 	"visualeditor-dialog-transclusion-insert-transclusion": "Inserisci inclusione",
 	"visualeditor-dialog-transclusion-loading": "Caricamento...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostra opzioni",
-	"visualeditor-dialog-transclusion-no-template-description": "Stai aggiungendo il template \"$1\" a questa pagina. Non ha ancora una descrizione, ma potrebbero esserci alcune informazioni nella <a $2>pagina del template</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Stai aggiungendo}} il template \"$1\" a questa pagina. Non ha ancora una descrizione, ma potrebbero esserci alcune informazioni nella <a $2>pagina del template</a>.",
 	"visualeditor-dialog-transclusion-options": "Opzioni",
 	"visualeditor-dialog-transclusion-placeholder": "Nuovo template",
 	"visualeditor-dialog-transclusion-remove-content": "Rimuovi contenuto",
