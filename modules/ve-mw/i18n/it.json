@@ -13,7 +13,8 @@
 			"Raoli",
 			"Una giornata uggiosa '94",
 			"Maria victoria",
-			"Ontsed"
+			"Ontsed",
+			"PeppeAeco"
 		]
 	},
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
@@ -50,7 +51,7 @@
 	"visualeditor-dialog-media-page-advanced": "Impostazioni avanzate",
 	"visualeditor-dialog-media-page-general": "Impostazioni generali",
 	"visualeditor-dialog-media-position-center": "Centro",
-	"visualeditor-dialog-media-position-checkbox": "Racchiudere il contenuto con questo elemento",
+	"visualeditor-dialog-media-position-checkbox": "Disporre il testo intorno a questo elemento",
 	"visualeditor-dialog-media-position-left": "Sinistra",
 	"visualeditor-dialog-media-position-none": "Nessuno",
 	"visualeditor-dialog-media-position-right": "Destra",

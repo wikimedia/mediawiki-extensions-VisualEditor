@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AnakngAraw",
-			"Sky Harbor"
+			"Sky Harbor",
+			"Jojit fb"
 		]
 	},
 	"tooltip-ca-createsource": "Likhain ang kodigong batayan ng pahinang ito",
@@ -107,7 +108,7 @@
 	"visualeditor-referencelist-missingref": "Binigyan ng katuturan ang sangguniang ito sa isang padron o ibang uri ng blokeng ginawa, at sa panahong ito maaari lamang itong baguhin gamit ang paraang batayan.",
 	"visualeditor-savedialog-error-badtoken": "Hindi naming maiproseso ang pagbabago mo dahil nawalan na ng saysay ang sesyon.",
 	"visualeditor-savedialog-identify-anon": "Nais mo bang itala na lang ang pahinang ito bilang isang 'di-kilalang tagagamit?  Matatala ang iyong direksiyong IP sa kasaysayan ng pagbabago ng pahinang ito.",
-	"visualeditor-savedialog-identify-user": "Nakalagda ka na bilang si [[User:$1|$1]]. Iuugnay ang pagbabagong ito sa kuwenta mo kapag itinala mo ang pagbabagong ito.",
+	"visualeditor-savedialog-identify-user": "Naka-login ka na bilang si [[User:$1|$1]]. Iuugnay ang pagbabagong ito sa account mo kapag itinala mo ang pagbabagong ito.",
 	"visualeditor-savedialog-label-create": "Likhain ang pahina",
 	"visualeditor-savedialog-label-error": "Kamalian",
 	"visualeditor-savedialog-label-report": "Iulat ang problema",

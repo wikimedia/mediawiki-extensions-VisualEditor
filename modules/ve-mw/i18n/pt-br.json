@@ -12,7 +12,8 @@
 			555,
 			"Gloria sah",
 			"Elival",
-			"Amgauna"
+			"Amgauna",
+			"Fabsouza1"
 		]
 	},
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -71,7 +72,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "Adicionar uma categoria",
 	"visualeditor-dialog-meta-categories-options": "Opções",
 	"visualeditor-dialog-meta-categories-section": "Categorias",
-	"visualeditor-dialog-meta-categories-sortkey-label": "Ordenar esta página como",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Ordenar esta página como se ele fosse chamado",
 	"visualeditor-dialog-meta-languages-code-label": "Código do idioma",
 	"visualeditor-dialog-meta-languages-label": "Idiomas",
 	"visualeditor-dialog-meta-languages-link-label": "Página ligada",
