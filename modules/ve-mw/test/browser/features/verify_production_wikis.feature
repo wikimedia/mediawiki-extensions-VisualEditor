@@ -4,6 +4,10 @@ Feature: VisualEditor on production wikis
   Verify that VisualEditor is available as
   expected on production wiki sites.
 
+  Exclusion:
+
+  http://sv.wiktionary.org - only enabled in NS_USER for now.
+
   Scenario Outline: VisualEditor production availability
     Given I visit a non-existent page at <wiki>
     Then I should see the Visual Editor editing surface
@@ -302,7 +306,6 @@ Feature: VisualEditor on production wikis
     | zh.wikipedia.org        |
     | zu.wikipedia.org        |
     | fr.wiktionary.org       |
-    | sv.wiktionary.org       |
     | fr.wikibooks.org        |
     | pt.wikibooks.org        |
     | fr.wikiversity.org      |
