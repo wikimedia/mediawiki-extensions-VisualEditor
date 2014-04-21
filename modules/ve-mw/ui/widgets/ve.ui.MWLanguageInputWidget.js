@@ -40,7 +40,8 @@ ve.ui.MWLanguageInputWidget = function VeUiMWLanguageInputWidget( config ) {
 	// TODO: Consider using getAutonym to display a nicer language name label somewhere
 
 	// Initialization
-	this.$element.prepend( $( '<div>' ).addClass( 've-ui-mwLangugageInputWidget-uls' ).append( changeButton.$element ) );
+	// TODO: Re-enable when we've worked out a way to prevent ULS form stealing focus
+	// this.$element.prepend( $( '<div>' ).addClass( 've-ui-mwLangugageInputWidget-uls' ).append( changeButton.$element ) );
 };
 
 /* Inheritance */
