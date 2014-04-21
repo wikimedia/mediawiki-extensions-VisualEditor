@@ -718,4 +718,4 @@ ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWMediaEditDialog );
+ve.ui.windowFactory.register( ve.ui.MWMediaEditDialog );

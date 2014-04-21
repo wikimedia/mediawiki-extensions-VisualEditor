@@ -117,4 +117,4 @@ ve.ui.MWAlienExtensionInspector.prototype.updateMwData = function ( mwData ) {
 
 /* Registration */
 
-ve.ui.inspectorFactory.register( ve.ui.MWAlienExtensionInspector );
+ve.ui.windowFactory.register( ve.ui.MWAlienExtensionInspector );

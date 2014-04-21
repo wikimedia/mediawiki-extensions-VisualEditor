@@ -436,12 +436,11 @@ $wgResourceModules += array(
 
 			'lib/ve/modules/ve/ui/actions/ve.ui.AnnotationAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.ContentAction.js',
-			'lib/ve/modules/ve/ui/actions/ve.ui.DialogAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.FormatAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.HistoryAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.IndentationAction.js',
-			'lib/ve/modules/ve/ui/actions/ve.ui.InspectorAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.ListAction.js',
+			'lib/ve/modules/ve/ui/actions/ve.ui.WindowAction.js',
 
 			'lib/ve/modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js',
 

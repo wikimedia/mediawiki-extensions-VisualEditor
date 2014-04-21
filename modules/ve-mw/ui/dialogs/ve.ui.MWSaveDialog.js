@@ -433,4 +433,4 @@ ve.ui.MWSaveDialog.prototype.setup = function () {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWSaveDialog );
+ve.ui.windowFactory.register( ve.ui.MWSaveDialog );

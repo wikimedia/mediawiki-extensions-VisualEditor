@@ -366,4 +366,4 @@ ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWReferenceDialog );
+ve.ui.windowFactory.register( ve.ui.MWReferenceDialog );

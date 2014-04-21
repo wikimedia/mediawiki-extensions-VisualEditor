@@ -820,7 +820,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			tool.static.autoAddToGroup = true;
 			ve.ui.toolFactory.register( tool );
 			ve.ui.commandRegistry.register(
-				new ve.ui.Command( name, 'dialog', 'open', 'transclusion', data )
+				new ve.ui.Command( name, 'window', 'open', 'transclusion', data )
 			);
 			// Generate citation tool
 			name = 'cite-' + item.name;
@@ -838,7 +838,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			tool.static.autoAddToGroup = true;
 			ve.ui.toolFactory.register( tool );
 			ve.ui.commandRegistry.register(
-				new ve.ui.Command( name, 'dialog', 'open', name, data )
+				new ve.ui.Command( name, 'window', 'open', name, data )
 			);
 			// Generate dialog
 			dialog = function GeneratedMWCitationDialog( config ) {
@@ -848,7 +848,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			dialog.static.name = name;
 			dialog.static.icon = item.icon;
 			dialog.static.title = item.title;
-			ve.ui.dialogFactory.register( dialog );
+			ve.ui.windowFactory.register( dialog );
 		}
 	}
 };

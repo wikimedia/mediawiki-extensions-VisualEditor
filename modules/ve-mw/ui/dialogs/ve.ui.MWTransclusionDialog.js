@@ -336,4 +336,4 @@ ve.ui.MWTransclusionDialog.prototype.teardown = function ( data ) {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWTransclusionDialog );
+ve.ui.windowFactory.register( ve.ui.MWTransclusionDialog );

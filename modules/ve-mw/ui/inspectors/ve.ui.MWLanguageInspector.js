@@ -29,4 +29,4 @@ ve.ui.MWLanguageInspector.static.languageInputWidget = ve.ui.MWLanguageInputWidg
 
 /* Registration */
 
-ve.ui.inspectorFactory.register( ve.ui.MWLanguageInspector );
+ve.ui.windowFactory.register( ve.ui.MWLanguageInspector );

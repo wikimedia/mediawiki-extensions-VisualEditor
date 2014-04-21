@@ -52,4 +52,4 @@ ve.ui.MWHieroInspector.prototype.onOpen = function () {
 
 /* Registration */
 
-ve.ui.inspectorFactory.register( ve.ui.MWHieroInspector );
+ve.ui.windowFactory.register( ve.ui.MWHieroInspector );

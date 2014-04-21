@@ -160,4 +160,4 @@ ve.ui.MWReferenceListDialog.prototype.teardown = function ( data ) {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWReferenceListDialog );
+ve.ui.windowFactory.register( ve.ui.MWReferenceListDialog );

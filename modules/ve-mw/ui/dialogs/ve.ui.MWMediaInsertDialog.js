@@ -217,4 +217,4 @@ ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWMediaInsertDialog );
+ve.ui.windowFactory.register( ve.ui.MWMediaInsertDialog );

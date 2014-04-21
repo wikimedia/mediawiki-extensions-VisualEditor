@@ -136,4 +136,4 @@ ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWMetaDialog );
+ve.ui.windowFactory.register( ve.ui.MWMetaDialog );

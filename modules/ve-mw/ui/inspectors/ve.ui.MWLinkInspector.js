@@ -112,4 +112,4 @@ ve.ui.MWLinkInspector.prototype.getNodeChanges = function () {
 
 /* Registration */
 
-ve.ui.inspectorFactory.register( ve.ui.MWLinkInspector );
+ve.ui.windowFactory.register( ve.ui.MWLinkInspector );

@@ -47,4 +47,4 @@ ve.ui.MWGalleryInspector.prototype.getInputPlaceholder = function () {
 
 /* Registration */
 
-ve.ui.inspectorFactory.register( ve.ui.MWGalleryInspector );
+ve.ui.windowFactory.register( ve.ui.MWGalleryInspector );

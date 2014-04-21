@@ -47,4 +47,4 @@ ve.ui.MWCommandHelpDialog.static.getCommandGroups = function () {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWCommandHelpDialog );
+ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );

@@ -81,4 +81,4 @@ ve.ui.MWBetaWelcomeDialog.prototype.initialize = function () {
 
 /* Registration */
 
-ve.ui.dialogFactory.register( ve.ui.MWBetaWelcomeDialog );
+ve.ui.windowFactory.register( ve.ui.MWBetaWelcomeDialog );
