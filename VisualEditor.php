@@ -650,6 +650,7 @@ $wgResourceModules += array(
 			'mediawiki.action.history.diff',
 			'mediawiki.user',
 			'mediawiki.util',
+			'mediawiki.jqueryMsg',
 			'jquery.autoEllipsis',
 			'jquery.byteLimit',
 		),
