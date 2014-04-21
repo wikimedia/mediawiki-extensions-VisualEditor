@@ -16,6 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
+	var settingsPage = this;
+
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 
@@ -93,23 +95,45 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.redirectTargetInput.connect( this, { 'change': 'onRedirectTargetChange' } );
 	this.enableStaticRedirectInput.connect( this, { 'change': 'onEnableStaticRedirectChange' } );
 
-	// Disable section edit links items
-	this.disabledSectionEditLinks = new OO.ui.FieldLayout(
-		new OO.ui.CheckboxInputWidget( { '$': this.$ } ),
+	this.metaItemCheckboxes = [
 		{
-			'$': this.$,
-			'align': 'inline',
-			'label': ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' ),
+			metaName: 'mwNoEditSection',
+			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
 		}
-	);
+	];
+	/*global mw*/
+	if ( mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' ).category ) {
+		this.metaItemCheckboxes.push(
+			{
+				metaName: 'mwHiddenCategory',
+				label: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-label' )
+			},
+			{
+				metaName: 'mwNoGallery',
+				label: ve.msg( 'visualeditor-dialog-meta-settings-nogallery-label' )
+			}
+		);
+	}
 
 	this.settingsFieldset.addItems( [
 		this.enableRedirectField,
 		this.redirectTargetField,
 		this.enableStaticRedirectField,
-		this.tableOfContents,
-		this.disabledSectionEditLinks
+		this.tableOfContents
 	] );
+
+	$.each( this.metaItemCheckboxes, function () {
+		this.fieldLayout = new OO.ui.FieldLayout(
+			new OO.ui.CheckboxInputWidget( { '$': settingsPage.$ } ),
+			{
+				'$': settingsPage.$,
+				'align': 'inline',
+				'label': this.label
+			}
+		);
+		settingsPage.settingsFieldset.addItems( [ this.fieldLayout ] );
+	} );
+
 	this.$element.append( this.settingsFieldset.$element );
 };
 
@@ -144,15 +168,6 @@ ve.ui.MWSettingsPage.prototype.onTableOfContentsFieldChange = function () {
 	this.tableOfContentsTouched = true;
 };
 
-/**
- * Get Table Of Contents option
- *
- * @returns {ve.dm.MetaItem|null} TOC option, if any
- */
-ve.ui.MWSettingsPage.prototype.getTableOfContentsMetaItem = function () {
-	return this.metaList.getItemsInGroup( 'mwTOC' )[0] || null;
-};
-
 /* Redirect methods */
 
 /**
@@ -185,30 +200,13 @@ ve.ui.MWSettingsPage.prototype.onEnableStaticRedirectChange = function () {
 };
 
 /**
- * Get the redirect item
+ * Get the first meta item of a given name
  *
- * @returns {Object|null} Redirect target, if any
+ * @param {string} name Name of the meta item
+ * @returns {Object|null} Meta item, if any
  */
-ve.ui.MWSettingsPage.prototype.getRedirectTargetItem = function () {
-	return this.metaList.getItemsInGroup( 'mwRedirect' )[0] || null;
-};
-
-/**
- * Get the static redirect item
- *
- * @returns {Object|null} Redirect target, if any
- */
-ve.ui.MWSettingsPage.prototype.getRedirectStaticItem = function () {
-	return this.metaList.getItemsInGroup( 'mwStaticRedirect' )[0] || null;
-};
-
-/**
- * Get the section edit link disabling item
- *
- * @returns {Object|null} Section edit link disabling meta item, if any
- */
-ve.ui.MWSettingsPage.prototype.getDisableSectionEditLinksItem = function () {
-	return this.metaList.getItemsInGroup( 'mwNoEditSection' )[0] || null;
+ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
+	return this.metaList.getItemsInGroup( name )[0] || null;
 };
 
 /**
@@ -221,15 +219,17 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.metaList = metaList;
 
 	var // Table of Contents items
-		tableOfContentsMetaItem = this.getTableOfContentsMetaItem(),
+		tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' ),
 		tableOfContentsField = this.tableOfContents.getField(),
 		tableOfContentsMode = tableOfContentsMetaItem &&
 			tableOfContentsMetaItem.getType() || 'default',
 
 		// Redirect items
-		redirectTargetItem = this.getRedirectTargetItem(),
+		redirectTargetItem = this.getMetaItem( 'mwRedirect' ),
 		redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '',
-		redirectStatic = this.getRedirectStaticItem();
+		redirectStatic = this.getMetaItem( 'mwStaticRedirect' ),
+
+		settingsPage = this;
 
 	// Table of Contents items
 	tableOfContentsField.selectItem( tableOfContentsField.getItemFromData( tableOfContentsMode ) );
@@ -243,8 +243,11 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.enableStaticRedirectInput.setDisabled( !redirectTargetItem );
 	this.redirectOptionsTouched = false;
 
-	// Disable section edit links items
-	this.disabledSectionEditLinks.getField().setValue( !!this.getDisableSectionEditLinksItem() );
+	// Simple checkbox items
+	$.each( this.metaItemCheckboxes, function () {
+		var currentValue = !!settingsPage.getMetaItem( this.metaName );
+		this.fieldLayout.getField().setValue( currentValue );
+	} );
 };
 
 /**
@@ -257,21 +260,19 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	data = data || {};
 
 	var // Table of Contents items
-		tableOfContentsMetaItem = this.getTableOfContentsMetaItem(),
+		tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' ),
 		tableOfContentsSelectedItem = this.tableOfContents.getField().getSelectedItem(),
 		tableOfContentsValue = tableOfContentsSelectedItem && tableOfContentsSelectedItem.getData(),
 
 		// Redirect items
-		currentRedirectTargetItem = this.getRedirectTargetItem(),
+		currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' ),
 		newRedirectData = this.redirectTargetInput.getValue(),
 		newRedirectItemData = { 'type': 'mwRedirect', 'attributes': { 'title': newRedirectData } },
 
-		currentStaticRedirectItem = this.getRedirectStaticItem(),
+		currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' ),
 		newStaticRedirectState = this.enableStaticRedirectInput.getValue(),
 
-		// Disable section edit links items
-		currentDisableSectionEditLinksItem = this.getDisableSectionEditLinksItem(),
-		newDisableSectionEditState = this.disabledSectionEditLinks.getField().getValue();
+		settingsPage = this;
 
 	// Alter the TOC option flag iff it's been touched & is actually different
 	if ( this.tableOfContentsTouched ) {
@@ -325,13 +326,16 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
-	// Disable section edit links items
-	if ( currentDisableSectionEditLinksItem && !newDisableSectionEditState ) {
-		currentDisableSectionEditLinksItem.remove();
-	}
-	if ( !currentDisableSectionEditLinksItem && newDisableSectionEditState ) {
-		this.metaList.insertMeta( { 'type': 'mwNoEditSection' } );
-	}
+	$.each( this.metaItemCheckboxes, function () {
+		var currentItem = settingsPage.getMetaItem( this.metaName ),
+			newValue = this.fieldLayout.getField().getValue();
+
+		if ( currentItem && !newValue ) {
+			currentItem.remove();
+		} else if ( !currentItem && newValue ) {
+			settingsPage.metaList.insertMeta( { 'type': this.metaName } );
+		}
+	} );
 
 	this.metaList = null;
 };
