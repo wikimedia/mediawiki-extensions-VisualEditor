@@ -391,6 +391,19 @@ class ApiVisualEditor extends ApiBase {
 					)->parseAsBlock();
 				}
 
+				if ( class_exists( 'GlobalBlocking' ) ) {
+					$error = GlobalBlocking::getUserBlockErrors(
+						$user,
+						$this->getRequest()->getIP()
+					);
+					if ( count( $error ) ) {
+						$notices[] = call_user_func_array(
+							array( $this, 'msg' ),
+							$error
+						)->parseAsBlock();
+					}
+				}
+
 				// HACK: Build a fake EditPage so we can get checkboxes from it
 				$article = new Article( $page ); // Deliberately omitting ,0 so oldid comes from request
 				$ep = new EditPage( $article );
