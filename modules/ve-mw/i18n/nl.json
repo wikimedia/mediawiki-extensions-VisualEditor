@@ -19,7 +19,8 @@
 			"सरोज कुमार ढकाल",
 			"Kim Bruning",
 			"Niknetniko",
-			"Arent"
+			"Arent",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
@@ -86,7 +87,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "Categorie toevoegen",
 	"visualeditor-dialog-meta-categories-options": "Opties",
 	"visualeditor-dialog-meta-categories-section": "Categorieën",
-	"visualeditor-dialog-meta-categories-sortkey-label": "Pagina sorteren als",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Pagina sorteren onder de naam",
 	"visualeditor-dialog-meta-languages-code-label": "Taalcode",
 	"visualeditor-dialog-meta-languages-label": "Talen",
 	"visualeditor-dialog-meta-languages-link-label": "Gekoppelde pagina",

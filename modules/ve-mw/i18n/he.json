@@ -13,7 +13,8 @@
 			"ערן",
 			"פוילישער",
 			"קיפודנחש",
-			"תומר ט"
+			"תומר ט",
+			"Yona b"
 		]
 	},
 	"tooltip-ca-createsource": "יצירת קוד המקור של הדף הזה",
@@ -87,6 +88,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "שפה",
 	"visualeditor-dialog-meta-languages-readonlynote": "זוהי רשימת הדפים המקבילים בשפות אחרות. לעת־עתה ניתן לערוך אותה רק במצב עריכת קוד מקור או באתר ויקינתונים.",
 	"visualeditor-dialog-meta-languages-section": "שפות",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "קטגוריה מוסתרת",
 	"visualeditor-dialog-meta-settings-index-default": "בררת המחדל",
 	"visualeditor-dialog-meta-settings-index-disable": "לא",
 	"visualeditor-dialog-meta-settings-index-force": "כן",
@@ -142,7 +144,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "הכללה",
 	"visualeditor-diff-nochanges": "לא ניתן להתחיל את הסקירה, כי הגרסה שלך זהה לגרסה האחרונה של הדף.",
 	"visualeditor-differror": "שגיאה בטעינת נתונים מהשרת: $1",
-	"visualeditor-editconflict": "השינויים שלך לא נשמרו בגלל התנגשות עריכה. האם ברצונך לפתור את ההתנגשות ידנית?",
+	"visualeditor-editconflict": "השינויים שלך לא נשמרו בגלל התנגשות עריכה. האם {{GENDER:|תרצה|תרצי}} לפתור את ההתנגשות ידנית?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|הודעה אחת|$1 הודעות}}",
 	"visualeditor-editnotices-tooltip": "הודעות לעורכים",
 	"visualeditor-editsummary": "נא לתאר מה שינית",

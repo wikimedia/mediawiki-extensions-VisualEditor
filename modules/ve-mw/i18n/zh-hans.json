@@ -53,7 +53,7 @@
 	"visualeditor-dialog-media-page-advanced": "高级设置",
 	"visualeditor-dialog-media-page-general": "常规设置",
 	"visualeditor-dialog-media-position-center": "居中",
-	"visualeditor-dialog-media-position-checkbox": "在此项周围环绕文字",
+	"visualeditor-dialog-media-position-checkbox": "使文字内容环绕该对象",
 	"visualeditor-dialog-media-position-left": "左",
 	"visualeditor-dialog-media-position-none": "无",
 	"visualeditor-dialog-media-position-right": "右",
