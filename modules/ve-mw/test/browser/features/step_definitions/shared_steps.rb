@@ -66,3 +66,7 @@ end
 Then(/^Page text should contain (.+)$/) do |output_string|
   on(VisualEditorPage).page_text_element.when_present.text.should match Regexp.escape(output_string + " #{@random_string}")
 end
+
+Then(/^I can click the X on the save box$/) do
+  on(VisualEditorPage).ex_element.when_present.click
+end
