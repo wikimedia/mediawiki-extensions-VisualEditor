@@ -485,7 +485,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.DesktopContext.css',
 			'lib/ve/modules/ve/ui/styles/tools/ve.ui.FormatTool.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
-			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.LanguageInputWidget.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.DimensionsWidget.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.MediaSizeWidget.css',
 			'lib/ve/modules/ve/ui/styles/inspectors/ve.ui.SpecialCharacterInspector.css',
@@ -1068,18 +1067,24 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/modules/ve/dm/annotations/ve.dm.LanguageAnnotation.js',
 			'lib/ve/modules/ve/ce/annotations/ve.ce.LanguageAnnotation.js',
+			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageSearchWidget.js',
+			'lib/ve/modules/ve/ui/dialogs/ve.ui.LanguageSearchDialog.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWLanguageSearchWidget.js',
+			'modules/ve-mw/ui/dialogs/ve.ui.MWLanguageSearchDialog.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.LanguageInspector.js',
 			'lib/ve/modules/ve/ui/tools/ve.ui.LanguageInspectorTool.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLanguageInputWidget.css',
+			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.LanguageInputWidget.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',
-			'jquery.uls',
+			'jquery.uls.data',
 		),
 		'messages' => array(
+			'visualeditor-annotationbutton-language-tooltip',
+			'visualeditor-dialog-language-search-title',
 			'visualeditor-languageinspector-title',
 			'visualeditor-languageinspector-block-tooltip',
 			'visualeditor-languageinspector-block-tooltip-rtldirection',
@@ -1087,20 +1092,9 @@ $wgResourceModules += array(
 			'visualeditor-languageinspector-widget-label-language',
 			'visualeditor-languageinspector-widget-label-langcode',
 			'visualeditor-languageinspector-widget-label-direction',
-			'visualeditor-annotationbutton-language-tooltip',
+			'visualeditor-language-search-input-placeholder',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
-	),
-
-	'ext.visualEditor.mwlanguage' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'modules/ve-mw/ui/widgets/ve.ui.MWLanguageInputWidget.js',
-			'modules/ve-mw/ui/inspectors/ve.ui.MWLanguageInspector.js',
-		),
-		'dependencies' => array(
-			'ext.visualEditor.language',
-			'jquery.uls',
-		),
 	),
 
 	'ext.visualEditor.mwalienextension' => $wgVisualEditorResourceTemplate + array(
@@ -1163,7 +1157,6 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.mwhiero',
 			'ext.visualEditor.language',
-			'ext.visualEditor.mwlanguage',
 			'ext.visualEditor.mwalienextension',
 		),
 		'targets' => array( 'desktop', 'mobile' ),

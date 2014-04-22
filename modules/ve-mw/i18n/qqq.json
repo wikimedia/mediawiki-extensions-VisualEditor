@@ -164,7 +164,6 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Item in the MediaWiki formatting dropdown for a level 4 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading5": "Item in the MediaWiki formatting dropdown for a level 5 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading6": "Item in the MediaWiki formatting dropdown for a level 6 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
-	"visualeditor-languageinspector-widget-changelang": "Used as label for the button which is used to change the language of the given block in the language inspector.\n{{Identical|Change language}}",
 	"visualeditor-languages-tool": "Tool for opening the languages links section of the meta dialog.\n{{Identical|Language}}",
 	"visualeditor-linkinspector-illegal-title": "Warning that the entered text is not a valid page title.",
 	"visualeditor-linkinspector-suggest-disambig-page": "Label for suggested disambiguation pages in the link inspector. Parameters:\n* $1 - number of disambiguation pages, used for plural\n{{Identical|Disambiguation page}}",

@@ -409,7 +409,7 @@ class VisualEditorHooks {
 	 * Conditionally register the oojs and oojs-ui modules, in case they've already been registered
 	 * by a more recent version of MediaWiki core.
 	 *
-	 * Also conditionally register the jquery.uls and jquery.i18n modules, in case they've already
+	 * Also conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
 	 * been registered by the UniversalLanguageSelector extension.
 	 *
 	 * @param ResourceLoader $resourceLoader
@@ -447,29 +447,11 @@ class VisualEditorHooks {
 				),
 				'targets' => array( 'desktop', 'mobile' ),
 			),
-			'jquery.uls' => $wgVisualEditorResourceTemplate + array(
-				'scripts' => array(
-					'lib/jquery.uls/src/jquery.uls.core.js',
-					'lib/jquery.uls/src/jquery.uls.lcd.js',
-					'lib/jquery.uls/src/jquery.uls.languagefilter.js',
-					'lib/jquery.uls/src/jquery.uls.regionfilter.js',
-				),
-				'styles' => array(
-					'lib/jquery.uls/css/jquery.uls.css',
-					'lib/jquery.uls/css/jquery.uls.lcd.css',
-					'lib/jquery.uls/css/jquery.uls.grid.css',
-					'lib/jquery.uls/css/jquery.uls.compact.css',
-				),
-				'dependencies' => array(
-					'jquery.uls.data',
-				),
-			),
 			'jquery.uls.data' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
-					'lib/jquery.uls/src/jquery.uls.data.js',
-					'lib/jquery.uls/src/jquery.uls.data.utils.js',
+					'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
+					'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
 				),
-				'position' => 'top',
 			),
 			'jquery.i18n' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
