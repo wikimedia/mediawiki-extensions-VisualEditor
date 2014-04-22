@@ -1,8 +1,9 @@
 .uls-trigger {
 	/* @embed */
 	background: transparent url('../images/icon-language.png') no-repeat scroll left center;
+	/* @embed */
 	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/icon-language.svg');
-	background-image: -moz-linear-gradient(transparent, transparent), url('../images/icon-language.svg');
+	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url('../images/icon-language.svg');
 	padding-left: 30px;
 }
@@ -16,8 +17,6 @@
 	background-color: #ffffff;
 	border: 1px solid #ccc;
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -73,8 +72,9 @@
 .uls-worldmap {
 	/* @embed */
 	background: transparent url('../images/world_map.png') no-repeat scroll right top;
+	/* @embed */
 	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/world_map.svg');
-	background-image: -moz-linear-gradient(transparent, transparent), url('../images/world_map.svg');
+	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url('../images/world_map.svg');
 	background-size: 100%;
 }
@@ -111,10 +111,8 @@ div.uls-region {
 	/*Cross-browser background transparency*/
 	background: #3366bb;
 	background: rgba(51, 102, 187, 0.1);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#253366bb,
-		endColorstr=#253366bb );
-	-ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#253366bb, endColorstr=#253366bb)";
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#253366bb, endColorstr=#253366bb );
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#253366bb, endColorstr=#253366bb)";
 }
 
 .map-block .active {
@@ -165,8 +163,9 @@ div.uls-region {
 .icon-close {
 	/* @embed */
 	background: transparent url('../images/close.png') no-repeat scroll center center;
+	/* @embed */
 	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/close.svg');
-	background-image: -moz-linear-gradient(transparent, transparent), url('../images/close.svg');
+	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url('../images/close.svg');
 	float: right;
 	padding: 15px;
@@ -198,7 +197,6 @@ div.uls-region {
 	background: -webkit-gradient(linear, left top, left bottom, from(#F0F0F0), to(#FBFBFB));
 	background: -webkit-linear-gradient(top, #F0F0F0, #FBFBFB);
 	background: -moz-linear-gradient(top, #F0F0F0, #FBFBFB);
-	background: -ms-linear-gradient(top, #F0F0F0, #FBFBFB);
 	background: -o-linear-gradient(top, #F0F0F0, #FBFBFB);
 	background: linear-gradient(#F0F0F0, #FBFBFB);
 	border-top-color: #AAA;
@@ -213,8 +211,9 @@ div.uls-region {
 .uls-menu .search-label {
 	/* @embed */
 	background: transparent url('../images/search.png') no-repeat scroll right center;
+	/* @embed */
 	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/search.svg');
-	background-image: -moz-linear-gradient(transparent, transparent), url('../images/search.svg');
+	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url('../images/search.svg');
 	background-size: 30px;
 	height: 32px;
@@ -225,8 +224,9 @@ div.uls-region {
 .uls-menu .languagefilter-clear {
 	/* @embed */
 	background: transparent url('../images/clear.png') no-repeat scroll left center;
+	/* @embed */
 	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/clear.svg');
-	background-image: -moz-linear-gradient(transparent, transparent), url('../images/clear.svg');
+	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url('../images/clear.svg');
 	cursor: pointer;
 	height: 32px;

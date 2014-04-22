@@ -459,11 +459,11 @@ class VisualEditorHooks {
 				'styles' => array(
 					'lib/jquery.uls/css/jquery.uls.css',
 					'lib/jquery.uls/css/jquery.uls.lcd.css',
+					'lib/jquery.uls/css/jquery.uls.grid.css',
+					'lib/jquery.uls/css/jquery.uls.compact.css',
 				),
 				'dependencies' => array(
-					'jquery.uls.grid',
 					'jquery.uls.data',
-					'jquery.uls.compact',
 				),
 			),
 			'jquery.uls.data' => $wgVisualEditorResourceTemplate + array(
@@ -471,14 +471,6 @@ class VisualEditorHooks {
 					'lib/jquery.uls/src/jquery.uls.data.js',
 					'lib/jquery.uls/src/jquery.uls.data.utils.js',
 				),
-				'position' => 'top',
-			),
-			'jquery.uls.grid' => $wgVisualEditorResourceTemplate + array(
-				'styles' => 'lib/jquery.uls/css/jquery.uls.grid.css',
-				'position' => 'top',
-			),
-			'jquery.uls.compact' => $wgVisualEditorResourceTemplate + array(
-				'styles' => 'lib/jquery.uls/css/jquery.uls.compact.css',
 				'position' => 'top',
 			),
 			'jquery.i18n' => $wgVisualEditorResourceTemplate + array(
