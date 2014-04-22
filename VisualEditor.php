@@ -863,6 +863,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'modules/ve-mw/dm/metaitems/ve.dm.MWCategoryMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWDefaultSortMetaItem.js',
+			'modules/ve-mw/dm/metaitems/ve.dm.MWDisplayTitleMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWHiddenCategoryMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWIndexDisableMetaItem.js',
 			'modules/ve-mw/dm/metaitems/ve.dm.MWIndexForceMetaItem.js',
@@ -927,6 +928,8 @@ $wgResourceModules += array(
 			'visualeditor-dialog-meta-languages-name-label',
 			'visualeditor-dialog-meta-languages-readonlynote',
 			'visualeditor-dialog-meta-languages-section',
+			'visualeditor-dialog-meta-settings-displaytitle',
+			'visualeditor-dialog-meta-settings-displaytitle-enable',
 			'visualeditor-dialog-meta-settings-hiddencat-label',
 			'visualeditor-dialog-meta-settings-index-default',
 			'visualeditor-dialog-meta-settings-index-disable',

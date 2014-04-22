@@ -84,6 +84,32 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		}
 	);
 
+	this.displayTitleTouched = false;
+	this.enableDisplayTitleInput = new OO.ui.CheckboxInputWidget( { '$': this.$ } );
+	this.enableDisplayTitleInput.connect( this, { 'change': 'onEnableDisplayTitleInputChange' } );
+	this.enableDisplayTitleField = new OO.ui.FieldLayout(
+		this.enableDisplayTitleInput,
+		{
+			'$': this.$,
+			'align': 'inline',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' )
+		}
+	);
+	this.displayTitleInput = new OO.ui.TextInputWidget( {
+		'$': this.$,
+		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' )
+	} );
+	this.displayTitleInput.connect( this, { 'change': 'onDisplayTitleInputChange' } );
+	this.displayTitleField = new OO.ui.FieldLayout(
+		this.displayTitleInput,
+		{
+			'$': this.$,
+			'align': 'inline'
+		}
+	);
+
+	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink, this.enableDisplayTitleField, this.displayTitleField ] );
+
 	this.metaItemCheckboxes = [];
 	/*global mw*/
 	if ( mw.config.get( 'wgVariantArticlePath' ) ) {
@@ -98,8 +124,6 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 			}
 		);
 	}
-
-	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink ] );
 
 	$.each( this.metaItemCheckboxes, function () {
 		this.fieldLayout = new OO.ui.FieldLayout(
@@ -121,6 +145,29 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 OO.inheritClass( ve.ui.MWAdvancedSettingsPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * Handle redirect state change events.
+ *
+ * @param {boolean} value Whether a redirect is to be set for this page
+ */
+ve.ui.MWAdvancedSettingsPage.prototype.onEnableDisplayTitleInputChange = function ( value ) {
+	this.displayTitleInput.setDisabled( !value );
+	if ( !value ) {
+		this.displayTitleInput.setValue( '' );
+		this.enableDisplayTitleInput.setValue( false );
+	}
+	this.displayTitleTouched = true;
+};
+
+/**
+ * Handle redirect state change events.
+ *
+ * @param {boolean} value Whether a redirect is to be set for this page
+ */
+ve.ui.MWAdvancedSettingsPage.prototype.onDisplayTitleInputChange = function () {
+	this.displayTitleTouched = true;
+};
 
 /**
  * @inheritdoc
@@ -183,6 +230,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 		newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' ),
 		newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default',
 
+		displayTitleItem = this.getMetaItem( 'mwDisplayTitle' ),
+		displayTitle = displayTitleItem && displayTitleItem.getAttribute( 'content' ) || '',
+
 		advancedSettingsPage = this;
 
 	// Indexing items
@@ -192,6 +242,11 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	// New section edit link items
 	newSectionEditField.selectItem( newSectionEditField.getItemFromData( newSectionEditLinkType ) );
 	this.newSectionEditLinkOptionTouched = false;
+
+	this.enableDisplayTitleInput.setValue( !!displayTitleItem );
+	this.displayTitleInput.setValue( displayTitle );
+	this.displayTitleInput.setDisabled( !displayTitle );
+	this.displayTitleTouched = false;
 
 	// Simple checkbox items
 	$.each( this.metaItemCheckboxes, function () {
@@ -216,6 +271,10 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		// New section edit link items
 		currentNewSectionEditLinkItem = this.getMetaItem( 'mwNewSectionEdit' ),
 		newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem(),
+
+		currentDisplayTitleItem = this.getMetaItem( 'mwDisplayTitle' ),
+		newDisplayTitle = this.displayTitleInput.getValue(),
+		newDisplayTitleItemData = { 'type': 'mwDisplayTitle', 'attributes': { 'content': newDisplayTitle } },
 
 		advancedSettingsPage = this;
 
@@ -255,6 +314,30 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 						{ 'type': newNewSectionEditLinkOptionData.data }
 					)
 				);
+			}
+		}
+	}
+
+	if ( this.displayTitleTouched ) {
+		if ( currentDisplayTitleItem ) {
+			if ( newDisplayTitle ) {
+				if ( currentDisplayTitleItem.getAttribute( 'content' ) !== newDisplayTitle ) {
+					// There was a display title and is a new one, but they differ, so replace
+					currentDisplayTitleItem.replaceWith(
+						ve.extendObject( true, {},
+							currentDisplayTitleItem.getElement(),
+							newDisplayTitleItemData
+					) );
+				}
+			} else {
+				// There was a display title and is no new one, so remove
+				currentDisplayTitleItem.remove();
+			}
+		} else {
+			if ( newDisplayTitle ) {
+				// There's no existing display title but there is a new one, so create
+				// HACK: Putting this at index 0, offset 0 so that it works – bug 61862
+				this.metaList.insertMeta( newDisplayTitleItemData, 0, 0 );
 			}
 		}
 	}

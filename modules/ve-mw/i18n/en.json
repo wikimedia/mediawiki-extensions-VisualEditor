@@ -91,6 +91,8 @@
     "visualeditor-dialog-meta-languages-name-label": "Language",
     "visualeditor-dialog-meta-languages-readonlynote": "This is a list of pages in other languages that are linked to this one. For now, it can only be edited in source mode or on Wikidata.",
     "visualeditor-dialog-meta-languages-section": "Languages",
+    "visualeditor-dialog-meta-settings-displaytitle": "Display title",
+    "visualeditor-dialog-meta-settings-displaytitle-enable": "Enable display title",
     "visualeditor-dialog-meta-settings-hiddencat-label": "Hidden category",
     "visualeditor-dialog-meta-settings-index-default": "Default",
     "visualeditor-dialog-meta-settings-index-disable": "No",
