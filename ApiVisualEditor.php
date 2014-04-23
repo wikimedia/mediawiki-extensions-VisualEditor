@@ -211,7 +211,13 @@ class ApiVisualEditor extends ApiBase {
 			'action' => 'query',
 			'prop' => 'revisions',
 			'titles' => $title->getPrefixedDBkey(),
-			'rvdifftotext' => $wikitext
+			'rvdifftotext' => ContentHandler::makeContent( $wikitext, $title )
+								->preSaveTransform(
+									$title,
+									$this->getUser(),
+									WikiPage::factory( $title )->makeParserOptions( $this->getContext() )
+								)
+								->serialize( 'text/x-wiki' )
 		);
 		$api = new ApiMain(
 			new DerivativeRequest(
