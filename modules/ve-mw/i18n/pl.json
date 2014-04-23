@@ -16,7 +16,8 @@
 			"Vuh",
 			"Dalis",
 			"Jacenty359",
-			"Matik7"
+			"Matik7",
+			"Alan ffm"
 		]
 	},
 	"tooltip-ca-createsource": "Tworzenie kodu źródłowego strony",
@@ -86,6 +87,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "Język",
 	"visualeditor-dialog-meta-languages-readonlynote": "Poniżej znajduje się lista stron w innych językach, które są powiązane z tą; na razie można ją zmieniać tylko w trybie edycji kodu źródłowego albo w Wikidanych.",
 	"visualeditor-dialog-meta-languages-section": "Języki",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "Ukryta kategoria",
 	"visualeditor-dialog-meta-settings-index-default": "Domyślnie",
 	"visualeditor-dialog-meta-settings-index-disable": "Nie",
 	"visualeditor-dialog-meta-settings-index-force": "Tak",
@@ -95,6 +97,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nie",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Tak",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Pokazuj na tej stronie zakładkę do tworzenia nowej sekcji",
+	"visualeditor-dialog-meta-settings-nogallery-label": "Wyłącz galerię",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Wyłącz na tej stronie pokazywanie linków do edycji obok każdego nagłówka",
 	"visualeditor-dialog-meta-settings-redirect-label": "Przekieruj tę stronę do",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Docelowa strona przekierowania",
