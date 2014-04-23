@@ -537,23 +537,34 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( isAnon ) {
  * @param {Object} editApi
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
+	var $captchaDiv = $( '<div>' ), $captchaParagraph = $( '<p>' );
+
 	this.captcha = {
 		input: new OO.ui.TextInputWidget(),
 		id: editApi.captcha.id
 	};
-	this.showSaveError(
-		$( '<div>' ).append(
-			// msg: simplecaptcha-edit, fancycaptcha-edit, ..
-			$( '<p>' ).append(
-				$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
-				document.createTextNode( mw.msg( 'colon-separator' ) ),
-				$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
-					.filter( 'a' ).attr( 'target', '_blank' ).end()
-			),
-			$( '<img>' ).attr( 'src', editApi.captcha.url ),
-			this.captcha.input.$element
-		), false
+	$captchaDiv.append( $captchaParagraph );
+	$captchaParagraph.append(
+		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
+		document.createTextNode( mw.msg( 'colon-separator' ) )
 	);
+	if ( editApi.captcha.url ) { // FancyCaptcha
+		$captchaParagraph.append(
+			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
+				.filter( 'a' ).attr( 'target', '_blank' ).end()
+		);
+		$captchaDiv.append(
+			$( '<img>' ).attr( 'src', editApi.captcha.url )
+		);
+	} else if ( editApi.captcha.type === 'simple' ) { // SimpleCaptcha
+		$captchaParagraph.append(
+			mw.message( 'captcha-edit' ).parse(),
+			'<br>',
+			document.createTextNode( editApi.captcha.question )
+		);
+	}
+	$captchaDiv.append( this.captcha.input.$element );
+	this.showSaveError( $captchaDiv, false );
 	this.events.trackSaveError( 'captcha' );
 };
 
