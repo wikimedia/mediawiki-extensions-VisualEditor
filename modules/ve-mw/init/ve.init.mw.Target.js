@@ -511,27 +511,29 @@ ve.init.mw.Target.onLoadError = function ( jqXHR, status, error ) {
  *
  * @static
  * @method
+ * @param {HTMLDocument} doc HTML document we tried to save
+ * @param {Object} saveData Options that were used
  * @param {Object} response Response data
  * @param {string} status Text status message
  * @fires editConflict
  * @fires save
  */
-ve.init.mw.Target.onSave = function ( response ) {
+ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
 	this.saving = false;
 	var data = response.visualeditoredit;
 	if ( !data && !response.error ) {
-		this.onSaveError( null, 'Invalid response from server', response );
+		this.onSaveError( doc, saveData, null, 'Invalid response from server', response );
 	} else if ( response.error ) {
 		if ( response.error.code === 'editconflict' ) {
 			this.emit( 'editConflict' );
 		} else {
-			this.onSaveError( null, 'Save failure', response );
+			this.onSaveError( doc, saveData, null, 'Save failure', response );
 		}
 	} else if ( data.result !== 'success' ) {
 		// Note, this could be any of db failure, hookabort, badtoken or even a captcha
-		this.onSaveError( null, 'Save failure', response );
+		this.onSaveError( doc, saveData, null, 'Save failure', response );
 	} else if ( typeof data.content !== 'string' ) {
-		this.onSaveError( null, 'Invalid HTML content in response from server', response );
+		this.onSaveError( doc, saveData, null, 'Invalid HTML content in response from server', response );
 	} else {
 		this.emit( 'save', data.content, data.categorieshtml, data.newrevid );
 	}
@@ -541,6 +543,8 @@ ve.init.mw.Target.onSave = function ( response ) {
  * Handle an unsuccessful save request.
  *
  * @method
+ * @param {HTMLDocument} doc HTML document we tried to save
+ * @param {Object} saveData Options that were used
  * @param {Object} jqXHR
  * @param {string} status Text status message
  * @param {Object|null} data API response data
@@ -554,7 +558,7 @@ ve.init.mw.Target.onSave = function ( response ) {
  * @fires saveErrorCaptcha
  * @fires saveErrorUnknown
  */
-ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
+ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, status, data ) {
 	var api, editApi,
 		viewPage = this;
 	this.saving = false;
@@ -619,7 +623,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( jqXHR, status, data ) {
 							mw.config.get( 'wgUserId' ) === userInfo.id
 					) {
 						// New session is the same user still
-						viewPage.saveDocument();
+						viewPage.save( doc, saveData );
 					} else {
 						// The now current session is a different user
 						if ( isAnon ) {
@@ -1162,8 +1166,8 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
 	} );
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
-		.done( ve.bind( ve.init.mw.Target.onSave, this ) )
-		.fail( ve.bind( this.onSaveError, this ) );
+		.done( ve.bind( ve.init.mw.Target.onSave, this, doc, data ) )
+		.fail( ve.bind( this.onSaveError, this, doc, data ) );
 
 	return true;
 };
