@@ -1235,6 +1235,7 @@ ve.init.mw.ViewPageTarget.prototype.showPageContent = function () {
 		.removeClass( 've-init-mw-viewPageTarget-content' )
 		.show()
 		.fadeTo( 0, 1 );
+	$( '#t-print, #t-permalink, #p-coll-print_export, #t-cite' ).show();
 };
 
 /**
@@ -1257,6 +1258,7 @@ ve.init.mw.ViewPageTarget.prototype.hidePageContent = function () {
 	$( '#bodyContent > :visible:not(#siteSub,.ve-ui-mwTocWidget)' )
 		.addClass( 've-init-mw-viewPageTarget-content' )
 		.hide();
+	$( '#t-print, #t-permalink, #p-coll-print_export, #t-cite' ).hide();
 };
 
 /**
