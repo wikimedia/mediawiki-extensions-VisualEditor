@@ -1097,6 +1097,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.core',
 			'jquery.uls.data',
+			'mediawiki.language.names',
 		),
 		'messages' => array(
 			'visualeditor-annotationbutton-language-tooltip',

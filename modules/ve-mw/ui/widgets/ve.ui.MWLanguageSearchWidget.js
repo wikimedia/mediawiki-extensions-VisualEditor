@@ -31,5 +31,6 @@ OO.inheritClass( ve.ui.MWLanguageSearchWidget, ve.ui.LanguageSearchWidget );
  * @inheritDoc
  */
 ve.ui.MWLanguageSearchWidget.prototype.getLanguages = function () {
-	return mw.config.get( 'wgULSLanguages' ) || $.uls.data.getAutonyms();
+	return mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
+		$.uls.data.getAutonyms();
 };
