@@ -1081,6 +1081,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/modules/ve/dm/annotations/ve.dm.LanguageAnnotation.js',
 			'lib/ve/modules/ve/ce/annotations/ve.ce.LanguageAnnotation.js',
+			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageResultWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageSearchWidget.js',
 			'lib/ve/modules/ve/ui/dialogs/ve.ui.LanguageSearchDialog.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWLanguageSearchWidget.js',
@@ -1091,6 +1092,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.LanguageInputWidget.css',
+			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.LanguageSearchWidget.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',
