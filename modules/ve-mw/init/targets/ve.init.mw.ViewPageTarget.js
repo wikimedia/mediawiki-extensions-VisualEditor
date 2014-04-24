@@ -556,13 +556,22 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
 		$captchaDiv.append(
 			$( '<img>' ).attr( 'src', editApi.captcha.url )
 		);
-	} else if ( editApi.captcha.type === 'simple' ) { // SimpleCaptcha
+	} else if ( editApi.captcha.type === 'simple' || editApi.captcha.type === 'math' ) {
+		// SimpleCaptcha and MathCaptcha
 		$captchaParagraph.append(
 			mw.message( 'captcha-edit' ).parse(),
 			'<br>',
 			document.createTextNode( editApi.captcha.question )
 		);
+	} else if ( editApi.captcha.type === 'question' ) {
+		// QuestyCaptcha
+		$captchaParagraph.append(
+			mw.message( 'questycaptcha-edit' ).parse(),
+			'<br>',
+			editApi.captcha.question
+		);
 	}
+
 	$captchaDiv.append( this.captcha.input.$element );
 	this.showSaveError( $captchaDiv, false );
 	this.events.trackSaveError( 'captcha' );
