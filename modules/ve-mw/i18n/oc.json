@@ -142,7 +142,6 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Títol de paragraf de nivèl 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Títol de paragraf de nivèl 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Títol de paragraf de nivèl 4",
-	"visualeditor-languageinspector-widget-changelang": "Trobar la lenga",
 	"visualeditor-languages-tool": "Lengas",
 	"visualeditor-linkinspector-illegal-title": "Títol de pagina incorrècte",
 	"visualeditor-linkinspector-suggest-disambig-page": "\n{{PLURAL:$1|Pagina d’omonimia|Paginas d’omonimia}}",

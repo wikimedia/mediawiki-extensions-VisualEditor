@@ -155,7 +155,6 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Alaotsikko 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Alaotsikko 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Alaotsikko 4",
-	"visualeditor-languageinspector-widget-changelang": "Etsi kieli",
 	"visualeditor-languages-tool": "Kielet",
 	"visualeditor-linkinspector-illegal-title": "Virheellinen sivun otsikko",
 	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Täsmennyssivu|Täsmennyssivut}}",
