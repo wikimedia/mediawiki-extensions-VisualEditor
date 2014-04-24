@@ -1194,7 +1194,7 @@ $wgVisualEditorPluginModules = array();
 // ResourceLoader module names.
 $wgVisualEditorPreferenceModules = array(
 	'visualeditor-enable-experimental' => 'ext.visualEditor.experimental',
-	//'visualeditor-enable-language' => 'ext.visualEditor.language',
+	'visualeditor-enable-language' => 'ext.visualEditor.language',
 	//'visualeditor-enable-mwalienextension' => 'ext.visualEditor.mwalienextension',
 	//'visualeditor-enable-mwhiero' => 'ext.visualEditor.mwhiero'
 );
