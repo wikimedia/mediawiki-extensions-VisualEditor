@@ -10,17 +10,16 @@
  * Dialog for editing MediaWiki media objects.
  *
  * @class
- * @extends ve.ui.Dialog
+ * @extends ve.ui.NodeDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( config ) {
 	// Parent constructor
-	ve.ui.Dialog.call( this, config );
+	ve.ui.MWMediaEditDialog.super.call( this, config );
 
 	// Properties
-	this.mediaNode = null;
 	this.captionNode = null;
 	this.store = null;
 	this.scalable = null;
@@ -31,7 +30,7 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMediaEditDialog, ve.ui.Dialog );
+OO.inheritClass( ve.ui.MWMediaEditDialog, ve.ui.NodeDialog );
 
 /* Static Properties */
 
@@ -41,6 +40,10 @@ ve.ui.MWMediaEditDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-media-title' );
 
 ve.ui.MWMediaEditDialog.static.icon = 'picture';
+
+ve.ui.MWMediaEditDialog.static.defaultSize = 'large';
+
+ve.ui.MWMediaEditDialog.static.modelClasses = [ ve.dm.MWBlockImageNode ];
 
 ve.ui.MWMediaEditDialog.static.toolbarGroups = [
 	// History
@@ -135,8 +138,9 @@ ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
  */
 ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	var altTextFieldset, positionFieldset, borderField, positionField;
+
 	// Parent method
-	ve.ui.Dialog.prototype.initialize.call( this );
+	ve.ui.MWMediaEditDialog.super.prototype.initialize.call( this );
 
 	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
 
@@ -303,14 +307,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
-	this.applyButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
-		'flags': ['primary']
-	} );
-
 	// Events
-	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 	this.sizeWidget.connect( this, { 'change': 'onSizeWidgetChange' } );
 	this.typeInput.connect( this, { 'select': 'onTypeChange' } );
@@ -328,8 +325,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		this.sizeFieldset.$element
 	] );
 
-	this.$body.append( this.bookletLayout.$element );
-	this.$foot.append( this.applyButton.$element );
+	this.panels.addItems( [ this.bookletLayout ] );
 };
 
 /**
@@ -436,11 +432,10 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 		doc = this.getFragment().getSurface().getDocument();
 
 	// Parent method
-	ve.ui.Dialog.prototype.setup.call( this, data );
+	ve.ui.MWMediaEditDialog.super.prototype.setup.call( this, data );
 
 	// Properties
-	this.mediaNode = this.getFragment().getSelectedNode();
-	this.captionNode = this.mediaNode.getCaptionNode();
+	this.captionNode = this.selectedNode.getCaptionNode();
 	this.store = doc.getStore();
 
 	if ( this.captionNode && this.captionNode.getLength() > 0 ) {
@@ -469,14 +464,14 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.sizeErrorLabel.$element.hide();
 	// Ask for the asynchronous call to get a full scalable object
 	// with original dimensions and imageinfo from the API
-	this.mediaNode.getScalablePromise()
+	this.selectedNode.getScalablePromise()
 		.done( ve.bind( function () {
-			this.scalable = this.mediaNode.getScalable();
+			this.scalable = this.selectedNode.getScalable();
 			this.$spinner.hide();
 			this.$sizeWidgetElements.show();
 
 			if (
-				this.mediaNode.getAttribute( 'type' ) === 'thumb' &&
+				this.selectedNode.getAttribute( 'type' ) === 'thumb' &&
 				this.scalable.getOriginalDimensions()
 			) {
 				// Set the max dimensions to the image's original dimensions
@@ -501,18 +496,18 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 
 	// Initialize size
 	this.sizeWidget.setSizeType(
-		this.mediaNode.getAttribute( 'defaultSize' ) ?
+		this.selectedNode.getAttribute( 'defaultSize' ) ?
 		'default' :
 		'custom'
 	);
 
 	// Set initial alt text
-	this.altTextInput.setValue( this.mediaNode.getAttribute( 'alt' ) || '' );
+	this.altTextInput.setValue( this.selectedNode.getAttribute( 'alt' ) || '' );
 
 	// Set initial position
 	if (
-		!this.mediaNode.getAttribute( 'align' ) ||
-		this.mediaNode.getAttribute( 'align' ) === 'none'
+		!this.selectedNode.getAttribute( 'align' ) ||
+		this.selectedNode.getAttribute( 'align' ) === 'none'
 	) {
 		this.positionCheckbox.setValue( false );
 		this.positionInput.setDisabled( true );
@@ -520,7 +515,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	} else {
 		this.positionCheckbox.setValue( true );
 		this.positionInput.setDisabled( false );
-		if ( this.mediaNode.getAttribute( 'align' ) === 'default' ) {
+		if ( this.selectedNode.getAttribute( 'align' ) === 'default' ) {
 			// Assume wiki default according to wiki dir
 			if ( this.getFragment().getDocument().getDir() === 'ltr' ) {
 				// Assume default is 'right'
@@ -535,19 +530,19 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 			}
 		} else {
 			this.positionInput.selectItem(
-				this.positionInput.getItemFromData( this.mediaNode.getAttribute( 'align' ) )
+				this.positionInput.getItemFromData( this.selectedNode.getAttribute( 'align' ) )
 			);
 		}
 	}
 
 	// Border flag
-	this.borderCheckbox.setValue( !!this.mediaNode.getAttribute( 'borderImage' ) );
+	this.borderCheckbox.setValue( !!this.selectedNode.getAttribute( 'borderImage' ) );
 
 	// Set image type
 	this.typeInput.selectItem( null );
-	if ( this.mediaNode.getAttribute( 'type' ) !== undefined ) {
+	if ( this.selectedNode.getAttribute( 'type' ) !== undefined ) {
 		this.typeInput.selectItem(
-			this.typeInput.getItemFromData( this.mediaNode.getAttribute( 'type' ) )
+			this.typeInput.getItemFromData( this.selectedNode.getAttribute( 'type' ) )
 		);
 	} else {
 		// Explicitly show 'none' if no type was specified
@@ -573,151 +568,156 @@ ve.ui.MWMediaEditDialog.prototype.onOpen = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
-	var newDoc, doc, originalAlt, attr, transactionAttributes = {},
-		imageSizeType, imageType, imageAlignmentCheckbox,
-		imageAlignmentValue, originalDimensions,
-		surfaceModel = this.getFragment().getSurface();
-
-	// Data initialization
-	data = data || {};
-
-	if ( data.action === 'apply' ) {
-		newDoc = this.captionSurface.getSurface().getModel().getDocument();
-		doc = surfaceModel.getDocument();
-		if ( !this.captionNode ) {
-			// Insert a new caption at the beginning of the image node
-			surfaceModel.getFragment()
-				.adjustRange( 1 )
-				.collapseRangeToStart()
-				.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );
-			this.captionNode = this.mediaNode.getCaptionNode();
-		}
-		// Replace the contents of the caption
-		surfaceModel.change(
-			ve.dm.Transaction.newFromRemoval( doc, this.captionNode.getRange(), true )
-		);
-		surfaceModel.change(
-			ve.dm.Transaction.newFromDocumentInsertion( doc, this.captionNode.getRange().start, newDoc )
-		);
-
-		// Get all the details and their fallbacks
-		imageSizeType = this.sizeWidget.getSizeType() || 'default';
-		imageType = this.typeInput.getSelectedItem() ? this.typeInput.getSelectedItem().getData() : '';
-		imageAlignmentCheckbox = this.positionCheckbox.getValue();
-		if ( imageAlignmentCheckbox && this.positionInput.getSelectedItem() ) {
-			imageAlignmentValue = this.positionInput.getSelectedItem().getData();
-		}
-
-		// Size and scalabletravaganza
-		attr = null;
-		if ( imageSizeType === 'default' ) {
-			transactionAttributes.defaultSize = true;
-			originalDimensions = this.scalable.getOriginalDimensions();
-			// Figure out the default size
-			if ( imageType === 'thumb' || imageType === 'frame' ) {
-				// Default is thumb-default unless the image is originally smaller
-				if ( originalDimensions.width > this.defaultThumbSize ) {
-					attr = this.scalable.getDimensionsFromValue( { 'width': this.defaultThumbSize } );
-				} else {
-					attr = originalDimensions;
-				}
-			} else {
-				// Default is full size
-				if ( originalDimensions ) {
-					attr = originalDimensions;
-				}
-			}
-
-			// Apply
-			if ( attr ) {
-				transactionAttributes.width = attr.width;
-				transactionAttributes.height = attr.height;
-			}
-		// Upright is not yet implemented in Parsoid. When it is,
-		// the scale properties should be implemented here
-		//} else if ( imageSizeType === 'scale' ) {
-		} else if ( imageSizeType === 'custom' && this.sizeWidget.isValid() ) {
-			attr = this.sizeWidget.getCurrentDimensions();
-			transactionAttributes.width = attr.width;
-			transactionAttributes.height = attr.height;
-			transactionAttributes.defaultSize = false;
-		}
-
-		// Set alternate text
-		attr = $.trim( this.altTextInput.getValue() );
-		originalAlt = this.mediaNode.getAttribute( 'alt' );
-		// Allow the user to submit an empty alternate text but
-		// not if there was no alternate text originally to avoid
-		// dirty diffing images with empty |alt=
-		if (
-			// If there was no original alternate text but there
-			// is a value now, update
-			( originalAlt === undefined && attr ) ||
-			// If original alternate text was defined, always
-			// update, even if the input is empty to allow the
-			// user to unset it
-			originalAlt !== undefined
-		) {
-			transactionAttributes.alt = attr;
-		}
-
-		if ( !imageAlignmentCheckbox ) {
-			// Only change to 'none' if alignment was originally
-			// set to anything else
-			if (
-				this.mediaNode.getAttribute( 'align' ) &&
-				this.mediaNode.getAttribute( 'align' ) !== 'none'
-			) {
-				transactionAttributes.align = 'none';
-			}
-		} else {
-			// If alignment was originally default and is still
-			// set to the default position according to the wiki
-			// content direction, do not change it
-			if (
-				(
-					this.mediaNode.getAttribute( 'align' ) === 'default' &&
-					(
-						this.getFragment().getDocument().getDir() === 'ltr' &&
-						imageAlignmentValue !== 'right'
-					) ||
-					(
-						this.getFragment().getDocument().getDir() === 'rtl' &&
-						imageAlignmentValue !== 'left'
-					)
-				) ||
-				this.mediaNode.getAttribute( 'align' ) !== 'default'
-			) {
-				transactionAttributes.align = imageAlignmentValue;
-			}
-		}
-
-		// Border
-		if (
-			!this.borderCheckbox.isDisabled() &&
-			this.borderCheckbox.getValue() === true
-		) {
-			transactionAttributes.borderImage = true;
-		} else {
-			transactionAttributes.borderImage = false;
-		}
-
-		// Image type
-		if ( imageType ) {
-			transactionAttributes.type = imageType;
-		}
-		surfaceModel.change(
-			ve.dm.Transaction.newFromAttributeChanges( doc, this.mediaNode.getOffset(), transactionAttributes )
-		);
-	}
-
 	// Cleanup
 	this.captionSurface.destroy();
 	this.captionSurface = null;
 	this.captionNode = null;
 
 	// Parent method
-	ve.ui.Dialog.prototype.teardown.call( this, data );
+	ve.ui.MWMediaEditDialog.super.prototype.teardown.call( this, data );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMediaEditDialog.prototype.applyChanges = function () {
+	var newDoc, doc, originalAlt, attr, transactionAttributes = {},
+		imageSizeType, imageType, imageAlignmentCheckbox,
+		imageAlignmentValue, originalDimensions,
+		surfaceModel = this.getFragment().getSurface();
+
+	newDoc = this.captionSurface.getSurface().getModel().getDocument();
+	doc = surfaceModel.getDocument();
+	if ( !this.captionNode ) {
+		// Insert a new caption at the beginning of the image node
+		surfaceModel.getFragment()
+			.adjustRange( 1 )
+			.collapseRangeToStart()
+			.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );
+		this.captionNode = this.selectedNode.getCaptionNode();
+	}
+	// Replace the contents of the caption
+	surfaceModel.change(
+		ve.dm.Transaction.newFromRemoval( doc, this.captionNode.getRange(), true )
+	);
+	surfaceModel.change(
+		ve.dm.Transaction.newFromDocumentInsertion( doc, this.captionNode.getRange().start, newDoc )
+	);
+
+	// Get all the details and their fallbacks
+	imageSizeType = this.sizeWidget.getSizeType() || 'default';
+	imageType = this.typeInput.getSelectedItem() ? this.typeInput.getSelectedItem().getData() : '';
+	imageAlignmentCheckbox = this.positionCheckbox.getValue();
+	if ( imageAlignmentCheckbox && this.positionInput.getSelectedItem() ) {
+		imageAlignmentValue = this.positionInput.getSelectedItem().getData();
+	}
+
+	// Size and scalabletravaganza
+	attr = null;
+	if ( imageSizeType === 'default' ) {
+		transactionAttributes.defaultSize = true;
+		originalDimensions = this.scalable.getOriginalDimensions();
+		// Figure out the default size
+		if ( imageType === 'thumb' || imageType === 'frame' ) {
+			// Default is thumb-default unless the image is originally smaller
+			if ( originalDimensions.width > this.defaultThumbSize ) {
+				attr = this.scalable.getDimensionsFromValue( { 'width': this.defaultThumbSize } );
+			} else {
+				attr = originalDimensions;
+			}
+		} else {
+			// Default is full size
+			if ( originalDimensions ) {
+				attr = originalDimensions;
+			}
+		}
+
+		// Apply
+		if ( attr ) {
+			transactionAttributes.width = attr.width;
+			transactionAttributes.height = attr.height;
+		}
+	// Upright is not yet implemented in Parsoid. When it is,
+	// the scale properties should be implemented here
+	//} else if ( imageSizeType === 'scale' ) {
+	} else if ( imageSizeType === 'custom' && this.sizeWidget.isValid() ) {
+		attr = this.sizeWidget.getCurrentDimensions();
+		transactionAttributes.width = attr.width;
+		transactionAttributes.height = attr.height;
+		transactionAttributes.defaultSize = false;
+	}
+
+	// Set alternate text
+	attr = $.trim( this.altTextInput.getValue() );
+	originalAlt = this.selectedNode.getAttribute( 'alt' );
+	// Allow the user to submit an empty alternate text but
+	// not if there was no alternate text originally to avoid
+	// dirty diffing images with empty |alt=
+	if (
+		// If there was no original alternate text but there
+		// is a value now, update
+		( originalAlt === undefined && attr ) ||
+		// If original alternate text was defined, always
+		// update, even if the input is empty to allow the
+		// user to unset it
+		originalAlt !== undefined
+	) {
+		transactionAttributes.alt = attr;
+	}
+
+	if ( !imageAlignmentCheckbox ) {
+		// Only change to 'none' if alignment was originally
+		// set to anything else
+		if (
+			this.selectedNode.getAttribute( 'align' ) &&
+			this.selectedNode.getAttribute( 'align' ) !== 'none'
+		) {
+			transactionAttributes.align = 'none';
+		}
+	} else {
+		// If alignment was originally default and is still
+		// set to the default position according to the wiki
+		// content direction, do not change it
+		if (
+			(
+				this.selectedNode.getAttribute( 'align' ) === 'default' &&
+				(
+					this.getFragment().getDocument().getDir() === 'ltr' &&
+					imageAlignmentValue !== 'right'
+				) ||
+				(
+					this.getFragment().getDocument().getDir() === 'rtl' &&
+					imageAlignmentValue !== 'left'
+				)
+			) ||
+			this.selectedNode.getAttribute( 'align' ) !== 'default'
+		) {
+			transactionAttributes.align = imageAlignmentValue;
+		}
+	}
+
+	// Border
+	if (
+		!this.borderCheckbox.isDisabled() &&
+		this.borderCheckbox.getValue() === true
+	) {
+		transactionAttributes.borderImage = true;
+	} else {
+		transactionAttributes.borderImage = false;
+	}
+
+	// Image type
+	if ( imageType ) {
+		transactionAttributes.type = imageType;
+	}
+	surfaceModel.change(
+		ve.dm.Transaction.newFromAttributeChanges(
+			doc, this.selectedNode.getOffset(), transactionAttributes
+		)
+	);
+
+	// Parent method
+	return ve.ui.MWMediaEditDialog.super.prototype.applyChanges.call( this );
 };
 
 /* Registration */

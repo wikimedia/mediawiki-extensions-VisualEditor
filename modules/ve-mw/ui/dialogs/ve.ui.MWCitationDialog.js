@@ -52,14 +52,19 @@ ve.ui.MWCitationDialog.prototype.getApplyButtonLabel = function () {
  * @returns {ve.dm.MWReferenceNode|null} Reference node to be edited, null if none exists
  */
 ve.ui.MWCitationDialog.prototype.getReferenceNode = function () {
-	var focusedNode = this.getFragment().getSelectedNode();
-	return focusedNode instanceof ve.dm.MWReferenceNode ? focusedNode : null;
+	var selectedNode = this.getFragment().getSelectedNode();
+
+	if ( selectedNode instanceof ve.dm.MWReferenceNode ) {
+		return selectedNode;
+	}
+
+	return null;
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.getTransclusionNode = function () {
+ve.ui.MWCitationDialog.prototype.getSelectedNode = function () {
 	var branches, leaves, transclusionNode,
 		referenceNode = this.getReferenceNode();
 
@@ -81,13 +86,13 @@ ve.ui.MWCitationDialog.prototype.getTransclusionNode = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.saveChanges = function () {
+ve.ui.MWCitationDialog.prototype.applyChanges = function () {
 	var item,
 		surfaceFragment = this.getFragment(),
 		surfaceModel = surfaceFragment.getSurface(),
 		doc = surfaceModel.getDocument(),
 		internalList = doc.getInternalList(),
-		obj = this.transclusion.getPlainObject();
+		obj = this.transclusionModel.getPlainObject();
 
 	if ( !this.referenceModel ) {
 		this.getFragment().collapseRangeToEnd();
@@ -99,9 +104,9 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 	item = this.referenceModel.findInternalItem( surfaceModel );
 	if ( item ) {
 		if ( this.transclusionNode instanceof ve.dm.MWTransclusionNode ) {
-			this.transclusion.updateTransclusionNode( surfaceModel, this.transclusionNode );
+			this.transclusionModel.updateTransclusionNode( surfaceModel, this.transclusionNode );
 		} else if ( obj !== null ) {
-			this.transclusion.insertTransclusionNode(
+			this.transclusionModel.insertTransclusionNode(
 				// HACK: This is trying to place the cursor inside the first content branch node
 				// but this theoretically not a safe assumption - in practice, the citation dialog
 				// will only reach this code if we are inserting (not updating) a transclusion, so
@@ -121,6 +126,9 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 		)
 	);
 	this.referenceModel.updateInternalItem( surfaceModel );
+
+	// Grandparent method
+	return ve.ui.MWCitationDialog.super.super.prototype.applyChanges.call( this );
 };
 
 /**

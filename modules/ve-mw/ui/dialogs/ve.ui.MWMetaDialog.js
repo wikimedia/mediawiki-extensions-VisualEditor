@@ -9,19 +9,19 @@
  * Dialog for editing MediaWiki page meta information.
  *
  * @class
- * @extends ve.ui.Dialog
+ * @extends ve.ui.ActionDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWMetaDialog = function VeUiMWMetaDialog( config ) {
 	// Parent constructor
-	ve.ui.Dialog.call( this, config );
+	ve.ui.MWMetaDialog.super.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMetaDialog, ve.ui.Dialog );
+OO.inheritClass( ve.ui.MWMetaDialog, ve.ui.ActionDialog );
 
 /* Static Properties */
 
@@ -32,6 +32,8 @@ ve.ui.MWMetaDialog.static.title =
 
 ve.ui.MWMetaDialog.static.icon = 'window';
 
+ve.ui.MWMetaDialog.static.defaultSize = 'large';
+
 /* Methods */
 
 /**
@@ -39,15 +41,10 @@ ve.ui.MWMetaDialog.static.icon = 'window';
  */
 ve.ui.MWMetaDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.Dialog.prototype.initialize.call( this );
+	ve.ui.MWMetaDialog.super.prototype.initialize.call( this );
 
 	// Properties
 	this.bookletLayout = new OO.ui.BookletLayout( { '$': this.$, 'outlined': true } );
-	this.applyButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
-		'flags': ['primary']
-	} );
 	this.settingsPage = new ve.ui.MWSettingsPage(
 		'settings',
 		{ '$': this.$ }
@@ -68,12 +65,8 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		{ '$': this.$ }
 	);
 
-	// Events
-	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
-
 	// Initialization
-	this.$body.append( this.bookletLayout.$element );
-	this.$foot.append( this.applyButton.$element );
+	this.panels.addItems( [ this.bookletLayout ] );
 	this.bookletLayout.addPages( [
 		this.settingsPage,
 		this.advancedSettingsPage,
@@ -87,7 +80,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
  */
 ve.ui.MWMetaDialog.prototype.setup = function ( data ) {
 	// Parent method
-	ve.ui.Dialog.prototype.setup.call( this, data );
+	ve.ui.MWMetaDialog.super.prototype.setup.call( this, data );
 
 	// Data initialization
 	data = data || {};
@@ -116,6 +109,9 @@ ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 		// Place transactions made while dialog was open in a common history state
 		hasTransactions = surfaceModel.breakpoint();
 
+	// Data initialization
+	data = data || {};
+
 	// Undo everything done in the dialog and prevent redoing those changes
 	if ( data.action === 'cancel' && hasTransactions ) {
 		surfaceModel.undo();
@@ -131,7 +127,7 @@ ve.ui.MWMetaDialog.prototype.teardown = function ( data ) {
 	surfaceModel.startHistoryTracking();
 
 	// Parent method
-	ve.ui.Dialog.prototype.teardown.call( this, data );
+	ve.ui.MWMetaDialog.super.prototype.teardown.call( this, data );
 };
 
 /* Registration */

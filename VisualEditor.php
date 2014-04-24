@@ -442,6 +442,8 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/actions/ve.ui.ListAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.WindowAction.js',
 
+			'lib/ve/modules/ve/ui/dialogs/ve.ui.ActionDialog.js',
+			'lib/ve/modules/ve/ui/dialogs/ve.ui.NodeDialog.js',
 			'lib/ve/modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js',
 
 			'lib/ve/modules/ve/ui/widgets/ve.ui.SurfaceWidget.js',
@@ -481,6 +483,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
 
 			// ui
+			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.ActionDialog.css',
 			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.DesktopContext.css',
 			'lib/ve/modules/ve/ui/styles/tools/ve.ui.FormatTool.css',
@@ -526,6 +529,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-action-cancel',
 			'visualeditor-dialog-action-goback',
 			'visualeditor-dialog-command-help-title',
+			'visualeditor-dialog-error',
 			'visualeditor-dialog-media-size-originalsize-error',
 			'visualeditor-dimensionswidget-px',
 			'visualeditor-dimensionswidget-times',
@@ -1054,7 +1058,6 @@ $wgResourceModules += array(
 			'visualeditor-dialog-transclusion-remove-template',
 			'visualeditor-dialog-transclusion-required-parameter',
 			'visualeditor-dialog-transclusion-single-mode',
-			'visualeditor-dialog-transclusion-title',
 			'visualeditor-dialog-transclusion-wikitext-label',
 			'visualeditor-dialogbutton-template-tooltip',
 			'visualeditor-dialogbutton-transclusion-tooltip',

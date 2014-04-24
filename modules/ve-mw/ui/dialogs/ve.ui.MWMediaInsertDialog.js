@@ -24,7 +24,6 @@ ve.ui.MWMediaInsertDialog = function VeUiMWMediaInsertDialog( config ) {
 	ve.ui.Dialog.call( this, config );
 
 	// Properties
-	this.item = null;
 	this.sources = {};
 };
 
@@ -49,10 +48,89 @@ ve.ui.MWMediaInsertDialog.static.icon = 'picture';
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
-	this.item = item;
+	var info, newDimensions, scalable;
+
 	if ( item ) {
-		this.close( { 'action': 'insert' } );
+		info = item.imageinfo[0];
+		// Create a scalable for calculations
+		scalable = new ve.dm.Scalable( {
+			'originalDimensions': {
+				'width': info.width,
+				'height': info.height
+			}
+		} );
+		// Resize to default thumbnail size, but only if the image itself
+		// isn't smaller than the default size
+		if ( info.width > this.defaultThumbSize ) {
+			newDimensions = scalable.getDimensionsFromValue( {
+				'width': this.defaultThumbSize
+			} );
+		} else {
+			newDimensions = {
+				'width': info.width,
+				'height': info.height
+			};
+		}
+
+		this.getFragment().collapseRangeToEnd().insertContent( [
+			{
+				'type': 'mwBlockImage',
+				'attributes': {
+					'type': 'thumb',
+					'align': 'default',
+					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
+					'href': './' + item.title,
+					'src': info.thumburl,
+					'width': newDimensions.width,
+					'height': newDimensions.height,
+					'resource': './' + item.title,
+					'defaultSize': true
+				}
+			},
+			{ 'type': 'mwImageCaption' },
+			{ 'type': '/mwImageCaption' },
+			{ 'type': '/mwBlockImage' }
+		] ).collapseRangeToEnd().select();
+
+		this.close();
 	}
+};
+
+/**
+ * Get the object of file repos to use for the media search
+ *
+ * @returns {jQuery.Promise}
+ */
+ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
+	var deferred = $.Deferred();
+
+	// We will only ask for the ajax call if this.sources
+	// isn't already set up
+	if ( ve.isEmptyObject( this.sources ) ) {
+		// Take sources from api.php?action=query&meta=filerepoinfo&format=jsonfm
+		// The decision whether to take 'url' or 'apiurl' per each repository is made
+		// in the MWMediaSearchWidget depending on whether it is local and has apiurl
+		// defined at all.
+		ve.init.mw.Target.static.apiRequest( {
+			'action': 'query',
+			'meta': 'filerepoinfo'
+		} )
+		.done( function ( resp ) {
+			deferred.resolve( resp.query.repos );
+		} )
+		.fail( function () {
+			deferred.resolve( [ {
+				'url': mw.util.wikiScript( 'api' ),
+				'local': true
+			} ] );
+		} );
+	} else {
+		// There was no need to ask for the resources again
+		// return false so we can skip setting the sources
+		deferred.resolve( false );
+	}
+
+	return deferred.promise();
 };
 
 /**
@@ -66,9 +144,7 @@ ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 		.defaultUserOptions.defaultthumbsize;
 
 	// Widget
-	this.search = new ve.ui.MWMediaSearchWidget( {
-		'$': this.$
-	} );
+	this.search = new ve.ui.MWMediaSearchWidget( { '$': this.$ } );
 
 	// Initialization
 	this.search.$element.addClass( 've-ui-mwMediaInsertDialog-select' );
@@ -77,9 +153,7 @@ ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 	this.search.connect( this, { 'select': 'onSearchSelect' } );
 
 	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
-	this.$body.append( this.$spinner );
-	this.$body.append( this.search.$element );
-
+	this.$body.append( this.$spinner, this.search.$element );
 };
 
 /**
@@ -122,93 +196,9 @@ ve.ui.MWMediaInsertDialog.prototype.setup = function ( data ) {
 };
 
 /**
- * Get the object of file repos to use for the media search
- * @returns {jQuery.Promise}
- */
-ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
-	var deferred = $.Deferred();
-
-	// We will only ask for the ajax call if this.sources
-	// isn't already set up
-	if ( ve.isEmptyObject( this.sources ) ) {
-		// Take sources from api.php?action=query&meta=filerepoinfo&format=jsonfm
-		// The decision whether to take 'url' or 'apiurl' per each repository is made
-		// in the MWMediaSearchWidget depending on whether it is local and has apiurl
-		// defined at all.
-		ve.init.mw.Target.static.apiRequest( {
-			'action': 'query',
-			'meta': 'filerepoinfo'
-		} )
-		.done( function ( resp ) {
-			deferred.resolve( resp.query.repos );
-		} )
-		.fail( function () {
-			deferred.resolve( [ {
-				'url': mw.util.wikiScript( 'api' ),
-				'local': true
-			} ] );
-		} );
-	} else {
-		// There was no need to ask for the resources again
-		// return false so we can skip setting the sources
-		deferred.resolve( false );
-	}
-
-	return deferred.promise();
-
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
-	var info, newDimensions, scalable;
-	// Data initialization
-	data = data || {};
-
-	if ( data.action === 'insert' ) {
-		info = this.item.imageinfo[0];
-		// Create a scalable for calculations
-		scalable = new ve.dm.Scalable( {
-			'originalDimensions': {
-				'width': info.width,
-				'height': info.height
-			}
-		} );
-		// Resize to default thumbnail size, but only if the image itself
-		// isn't smaller than the default size
-		if ( info.width > this.defaultThumbSize ) {
-			newDimensions = scalable.getDimensionsFromValue( {
-				'width': this.defaultThumbSize
-			} );
-		} else {
-			newDimensions = {
-				'width': info.width,
-				'height': info.height
-			};
-		}
-
-		this.getFragment().collapseRangeToEnd().insertContent( [
-			{
-				'type': 'mwBlockImage',
-				'attributes': {
-					'type': 'thumb',
-					'align': 'default',
-					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
-					'href': './' + this.item.title,
-					'src': info.thumburl,
-					'width': newDimensions.width,
-					'height': newDimensions.height,
-					'resource': './' + this.item.title,
-					'defaultSize': true
-				}
-			},
-			{ 'type': 'mwImageCaption' },
-			{ 'type': '/mwImageCaption' },
-			{ 'type': '/mwBlockImage' }
-		] ).collapseRangeToEnd().select();
-	}
-
 	this.search.clear();
 
 	// Parent method

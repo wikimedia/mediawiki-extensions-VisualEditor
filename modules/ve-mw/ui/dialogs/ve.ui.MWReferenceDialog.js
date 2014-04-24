@@ -9,17 +9,14 @@
  * Dialog for editing MediaWiki references.
  *
  * @class
- * @extends ve.ui.Dialog
+ * @extends ve.ui.NodeDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( config ) {
-	// Configuration initialization
-	config = ve.extendObject( { 'size': 'medium' }, config );
-
 	// Parent constructor
-	ve.ui.Dialog.call( this, config );
+	ve.ui.MWReferenceDialog.super.call( this, config );
 
 	// Properties
 	this.referenceModel = null;
@@ -30,7 +27,7 @@ ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWReferenceDialog, ve.ui.Dialog );
+OO.inheritClass( ve.ui.MWReferenceDialog, ve.ui.NodeDialog );
 
 /* Static Properties */
 
@@ -40,6 +37,8 @@ ve.ui.MWReferenceDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-reference-title' );
 
 ve.ui.MWReferenceDialog.static.icon = 'reference';
+
+ve.ui.MWReferenceDialog.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
 ve.ui.MWReferenceDialog.static.toolbarGroups = [
 	// History
@@ -140,7 +139,6 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 		// TODO: Check for other types of empty, e.g. only whitespace?
 		disabled = data.length <= 4;
 
-	this.insertButton.setDisabled( disabled );
 	this.applyButton.setDisabled( disabled );
 };
 
@@ -157,13 +155,11 @@ ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 };
 
 /**
- * Get the reference node to be edited.
- *
- * @returns {ve.dm.MWReferenceNode|null} Reference node to be edited, null if none exists
+ * Respond to 'open' event. Fires once the dialog has finished opening.
  */
-ve.ui.MWReferenceDialog.prototype.getReferenceNode = function () {
-	var focusedNode = this.getFragment().getSelectedNode();
-	return focusedNode instanceof ve.dm.MWReferenceNode ? focusedNode : null;
+ve.ui.MWReferenceDialog.prototype.onOpen = function () {
+	// Focus the reference surface
+	this.referenceSurface.focus();
 };
 
 /**
@@ -212,26 +208,47 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWReferenceDialog.prototype.getApplyButtonLabel = function () {
+	return this.selectedNode instanceof ve.dm.MWReferenceNode ?
+		ve.ui.MWReferenceDialog.super.prototype.getApplyButtonLabel.call( this ) :
+		ve.msg( 'visualeditor-dialog-reference-insert-button' );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWReferenceDialog.prototype.applyChanges = function () {
+		var surfaceFragment = this.getFragment(),
+		surfaceModel = surfaceFragment.getSurface();
+
+	this.referenceModel.setGroup( this.referenceGroupInput.getValue() );
+
+	// Insert reference (will auto-create an internal item if needed)
+	if ( !( this.selectedNode instanceof ve.dm.MWReferenceNode ) ) {
+		if ( !this.referenceModel.findInternalItem( surfaceModel ) ) {
+			this.referenceModel.insertInternalItem( surfaceModel );
+		}
+		this.referenceModel.insertReferenceNode( surfaceFragment );
+	}
+	// Update internal item
+	this.referenceModel.updateInternalItem( surfaceModel );
+
+	// Parent method
+	return ve.ui.MWReferenceDialog.super.prototype.applyChanges.call( this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.Dialog.prototype.initialize.call( this );
+	ve.ui.MWReferenceDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
 	this.editPanel = new OO.ui.PanelLayout( {
 		'$': this.$, 'scrollable': true, 'padded': true
 	} );
 	this.searchPanel = new OO.ui.PanelLayout( { '$': this.$ } );
-	this.applyButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-action-apply' ),
-		'flags': ['primary']
-	} );
-	this.insertButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-reference-insert-button' ),
-		'flags': ['constructive']
-	} );
 	this.selectButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
 		'label': ve.msg ( 'visualeditor-dialog-reference-useexisting-label' )
@@ -259,18 +276,16 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	this.search = new ve.ui.MWReferenceSearchWidget( { '$': this.$ } );
 
 	// Events
-	this.applyButton.connect( this, { 'click': [ 'close', { 'action': 'apply' } ] } );
-	this.insertButton.connect( this, { 'click': [ 'close', { 'action': 'insert' } ] } );
 	this.selectButton.connect( this, { 'click': function () {
 		this.backButton.$element.show();
-		this.insertButton.$element.hide();
+		this.applyButton.$element.hide();
 		this.selectButton.$element.hide();
 		this.panels.setItem( this.searchPanel );
 		this.search.getQuery().$input.focus().select();
 	} } );
 	this.backButton.connect( this, { 'click': function () {
 		this.backButton.$element.hide();
-		this.insertButton.$element.show();
+		this.applyButton.$element.show();
 		this.selectButton.$element.show();
 		this.panels.setItem( this.editPanel );
 		this.editPanel.$element.find( '.ve-ce-documentNode' ).focus();
@@ -282,10 +297,8 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	this.editPanel.$element.append( this.contentFieldset.$element, this.optionsFieldset.$element );
 	this.optionsFieldset.addItems( [ this.referenceGroupField ] );
 	this.searchPanel.$element.append( this.search.$element );
-	this.$body.append( this.panels.$element );
 	this.$foot.append(
 		this.applyButton.$element,
-		this.insertButton.$element,
 		this.selectButton.$element,
 		this.backButton.$element
 	);
@@ -296,72 +309,36 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
  */
 ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
 	// Parent method
-	ve.ui.Dialog.prototype.setup.call( this, data );
-
-	this.referenceNode = this.getReferenceNode();
-
-	// Data initialization
-	data = data || {};
+	ve.ui.MWReferenceDialog.super.prototype.setup.call( this, data );
 
 	this.panels.setItem( this.editPanel );
-	if ( this.referenceNode instanceof ve.dm.MWReferenceNode ) {
+	if ( this.selectedNode instanceof ve.dm.MWReferenceNode ) {
 		this.useReference(
-			ve.dm.MWReferenceModel.static.newFromReferenceNode( this.referenceNode )
+			ve.dm.MWReferenceModel.static.newFromReferenceNode( this.selectedNode )
 		);
-		this.applyButton.$element.show();
-		this.insertButton.$element.hide();
 		this.selectButton.$element.hide();
 	} else {
 		this.useReference( null );
 		this.selectButton.$element.show();
-		this.applyButton.$element.hide();
-		this.insertButton.$element.show();
+		this.applyButton.setDisabled( true );
 	}
+	this.applyButton.$element.show();
 	this.backButton.$element.hide();
 	this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
 	this.selectButton.setDisabled( this.search.isIndexEmpty() );
 };
 
 /**
- * Respond to 'open' event. Fires once the dialog has finished opening.
- */
-ve.ui.MWReferenceDialog.prototype.onOpen = function () {
-	// Focus the reference surface
-	this.referenceSurface.focus();
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
-	var surfaceFragment = this.getFragment(),
-		surfaceModel = surfaceFragment.getSurface();
-
-	// Data initialization
-	data = data || {};
-
-	if ( data.action === 'insert' || data.action === 'apply' ) {
-		this.referenceModel.setGroup( this.referenceGroupInput.getValue() );
-
-		// Insert reference (will auto-create an internal item if needed)
-		if ( data.action === 'insert' ) {
-			if ( !this.referenceModel.findInternalItem( surfaceModel ) ) {
-				this.referenceModel.insertInternalItem( surfaceModel );
-			}
-			this.referenceModel.insertReferenceNode( surfaceFragment );
-		}
-		// Update internal item
-		this.referenceModel.updateInternalItem( surfaceModel );
-	}
-
 	this.search.clear();
 	this.referenceSurface.destroy();
 	this.referenceSurface = null;
 	this.referenceModel = null;
-	this.referenceNode = null;
 
 	// Parent method
-	ve.ui.Dialog.prototype.teardown.call( this, data );
+	ve.ui.MWReferenceDialog.super.prototype.teardown.call( this, data );
 };
 
 /* Registration */
