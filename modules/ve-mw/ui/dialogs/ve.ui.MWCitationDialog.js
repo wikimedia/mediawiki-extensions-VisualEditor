@@ -126,6 +126,17 @@ ve.ui.MWCitationDialog.prototype.saveChanges = function () {
 /**
  * @inheritdoc
  */
+ve.ui.MWCitationDialog.prototype.initialize = function ( data ) {
+	// Parent method
+	ve.ui.MWCitationDialog.super.prototype.initialize.call( this, data );
+
+	// HACK: Use the same styling as single-mode transclusion dialog - this should be generalized
+	this.frame.$content.addClass( 've-ui-mwTransclusionDialog-single' );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
 	// Parent method
 	ve.ui.MWCitationDialog.super.prototype.setup.call( this, data );
