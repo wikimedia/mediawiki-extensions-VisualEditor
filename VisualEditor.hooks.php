@@ -583,6 +583,7 @@ class VisualEditorHooks {
 				'lib/ve/modules/ve/test/ce/ve.ce.LeafNode.test.js',
 				'lib/ve/modules/ve/test/ce/nodes/ve.ce.TextNode.test.js',
 				// VisualEditor Actions Tests
+				'lib/ve/modules/ve/test/ui/actions/ve.ui.AnnotationAction.test.js',
 				'lib/ve/modules/ve/test/ui/actions/ve.ui.FormatAction.test.js',
 				'modules/ve-mw/test/ui/actions/ve.ui.FormatAction.test.js',
 				'lib/ve/modules/ve/test/ui/actions/ve.ui.IndentationAction.test.js',
