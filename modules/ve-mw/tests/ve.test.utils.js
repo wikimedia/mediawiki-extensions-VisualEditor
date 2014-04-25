@@ -95,10 +95,10 @@ ve.test.utils.mwEnvironment = ( function () {
 	// On load, teardown overrides so the first core tests run correctly
 	teardownOverrides();
 
-	return QUnit.newMwEnvironment( {
+	return {
 		setup: setupOverrides,
 		teardown: teardownOverrides
-	} );
+	};
 }() );
 
 ( function () {
