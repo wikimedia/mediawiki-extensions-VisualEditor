@@ -651,6 +651,7 @@ $wgResourceModules += array(
 			'mediawiki.jqueryMsg',
 			'jquery.autoEllipsis',
 			'jquery.byteLimit',
+			'ext.parsoid.styles',
 		),
 		'messages' => array(
 			'visualeditor-beta-label',
