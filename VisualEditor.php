@@ -700,6 +700,8 @@ $wgResourceModules += array(
 			'visualeditor-wikitext-warning-title',
 			'visualeditor-window-title',
 			'toc',
+			'showtoc',
+			'hidetoc',
 
 			'captcha-edit',
 			// Only used if FancyCaptcha is installed and triggered on save
