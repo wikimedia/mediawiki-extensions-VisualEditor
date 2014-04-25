@@ -112,9 +112,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	// Update the window title
 	this.setTitle( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
 
-	// Old messages should not persist after panel changes
-	this.clearAllMessages();
-
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
 	this.saveButton.setDisabled( false );
 
@@ -428,6 +425,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.setup = function () {
+	// Old messages should not persist after panel changes
+	this.clearAllMessages();
+
 	this.swapPanel( 'save' );
 };
 
