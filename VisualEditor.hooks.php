@@ -244,11 +244,33 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	/**
+	 * Convert a namespace index to the local text for display to the user.
+	 *
+	 * @param $nsIndex int
+	 * @return string
+	 */
+	private static function convertNs( $nsIndex ) {
+		global $wgLang;
+		if ( $nsIndex ) {
+			return $wgLang->convertNamespace( $nsIndex );
+		} else {
+			return wfMessage( 'blanknamespace' )->text();
+		}
+	}
+
 	public static function onGetPreferences( $user, &$preferences ) {
+		global $wgLang, $wgVisualEditorNamespaces;
 		if ( !array_key_exists( 'visualeditor-enable', $preferences ) ) {
 			$preferences['visualeditor-enable'] = array(
 				'type' => 'toggle',
-				'label-message' => 'visualeditor-preference-enable',
+				'label-message' => array(
+					'visualeditor-preference-enable',
+					$wgLang->commaList( array_map(
+						array( 'self', 'convertNs' ),
+						$wgVisualEditorNamespaces
+					) )
+				),
 				'section' => 'editing/editor'
 			);
 		}
