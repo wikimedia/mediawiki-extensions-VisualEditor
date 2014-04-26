@@ -122,7 +122,7 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 		surfaceModel = this.getFragment().getSurface();
 
 	if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
-		if ( this.node instanceof this.constructor.static.nodeModel ) {
+		if ( this.node ) {
 			mwData = ve.copy( this.node.getAttribute( 'mw' ) );
 			this.updateMwData( mwData );
 			surfaceModel.change(
@@ -147,6 +147,10 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 				{ 'type': '/' + this.constructor.static.nodeModel.static.name }
 			] );
 		}
+	} else if ( this.node && !this.constructor.static.allowedEmpty ) {
+		// Content has been emptied on a node which isn't allowed to
+		// be empty, so delete it.
+		surfaceModel.getFragment().removeContent();
 	}
 
 	// Parent method
