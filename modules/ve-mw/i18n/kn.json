@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vikassy"
+			"Vikassy",
+			"VASANTH S.N."
 		]
 	},
 	"visualeditor-cite-tool-name-web": "ಜಾಲತಾಣ",
 	"visualeditor-cite-tool-name-book": "ಪುಸ್ತಕ",
-	"visualeditor-cite-tool-name-news": "ವೃತ್ತ ಪತ್ರಿಕೆ"
+	"visualeditor-cite-tool-name-news": "ವೃತ್ತ ಪತ್ರಿಕೆ",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "ಅಡಗಿಸಲ್ಪಟ್ಟಿರುವ ವರ್ಗ"
 }

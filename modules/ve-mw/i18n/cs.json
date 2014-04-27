@@ -10,7 +10,8 @@
 			"Mormegil",
 			"Polda18",
 			"Tchoř",
-			"ශ්වෙත"
+			"ශ්වෙත",
+			"Matěj Suchánek"
 		]
 	},
 	"tooltip-ca-createsource": "Založit zdrojový kód této stránky",
@@ -77,7 +78,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "Přidat kategorii",
 	"visualeditor-dialog-meta-categories-options": "Možnosti",
 	"visualeditor-dialog-meta-categories-section": "Kategorie",
-	"visualeditor-dialog-meta-categories-sortkey-label": "Tuto stránku řadit, jako by se jmenovala",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Tuto stránku řadit tak, jak by se jmenovala",
 	"visualeditor-dialog-meta-languages-code-label": "Kód jazyka",
 	"visualeditor-dialog-meta-languages-label": "Jazyky",
 	"visualeditor-dialog-meta-languages-link-label": "Propojená stránka",

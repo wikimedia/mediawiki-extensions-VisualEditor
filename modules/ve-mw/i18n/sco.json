@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"John Reid"
+			"John Reid",
+			"Amire80"
 		]
 	},
 	"tooltip-ca-createsource": "Cræft the soorce code o this page",
@@ -171,7 +172,7 @@
 	"visualeditor-preference-core-label": "VeesualEediter",
 	"visualeditor-preference-enable": "Enable VeesualEeditor. It will na be available oan tauk pages n some ither namespaces.",
 	"visualeditor-preference-language-description": "Eik expereemental tuils til VeesualEediter fer maurkin tex wrutten in differant leids n in ae differant direction fer testin, aheid o general release. Please mynd tae aye luikower yer chynges afore hainin whan uisin expereemental featurs.",
-	"visualeditor-preference-language-label": "VeesualEediter leid tuils",
+	"visualeditor-preference-language-label": "VeesualEediter leid tuil",
 	"visualeditor-preference-mwalienextension-description": "Eik expereemental baseec support til VeesualEediter fer eeditin extension tags (like galleries or soorce code blocks), aheid o indiveedual tuils being available. Please mynd tae aye luikower yer chynges afore hainin whan uisin expereemental featurs.",
 	"visualeditor-preference-mwalienextension-label": "VeesualEediter extension tag eeditin",
 	"visualeditor-preference-mwhiero-description": "Eik expereemental support til VeesualEediter fer cræftin n eeditin hierigleepheecs fer testin, aheid o general release. Please mynd tae aye luikower yer chynges afore hainin whan uisin expereemental featurs.",
