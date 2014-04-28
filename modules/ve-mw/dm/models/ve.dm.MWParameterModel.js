@@ -52,6 +52,17 @@ ve.dm.MWParameterModel.prototype.isRequired = function () {
 };
 
 /**
+ * Check if parameter is suggestyed.
+ *
+ * @method
+ * @param {string} name Parameter name
+ * @returns {boolean} Parameter is suggested
+ */
+ve.dm.MWParameterModel.prototype.isSuggested = function () {
+	return this.template.getSpec().isParameterSuggested( this.name );
+};
+
+/**
  * Get template parameter is part of.
  *
  * @returns {ve.dm.MWTemplateModel} Template
