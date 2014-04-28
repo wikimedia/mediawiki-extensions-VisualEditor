@@ -25,7 +25,7 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( config ) {
 	this.scalable = null;
 
 	// Events
-	this.connect( this, { 'open': 'onOpen' } );
+	this.connect( this, { 'ready': 'onReady' } );
 };
 
 /* Inheritance */
@@ -557,9 +557,9 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 };
 
 /**
- * Respond to 'open' event. Fires once the dialog has finished opening.
+ * Handle window ready events
  */
-ve.ui.MWMediaEditDialog.prototype.onOpen = function () {
+ve.ui.MWMediaEditDialog.prototype.onReady = function () {
 	// Focus the caption surface
 	this.captionSurface.focus();
 };

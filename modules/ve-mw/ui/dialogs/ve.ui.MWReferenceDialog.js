@@ -22,7 +22,7 @@ ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( config ) {
 	this.referenceModel = null;
 
 	// Events
-	this.connect( this, { 'open': 'onOpen' } );
+	this.connect( this, { 'ready': 'onReady' } );
 };
 
 /* Inheritance */
@@ -155,9 +155,9 @@ ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 };
 
 /**
- * Respond to 'open' event. Fires once the dialog has finished opening.
+ * Handle window ready events
  */
-ve.ui.MWReferenceDialog.prototype.onOpen = function () {
+ve.ui.MWReferenceDialog.prototype.onReady = function () {
 	// Focus the reference surface
 	this.referenceSurface.focus();
 };
