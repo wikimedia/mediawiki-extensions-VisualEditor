@@ -1374,7 +1374,7 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	var uri;
 
 	// Put skin tabs in "edit" mode
-	$( $( '#p-views' ).length ? '#p-views' : '#p-cactions' )
+	$( '#p-views' )
 		.find( 'li.selected' ).removeClass( 'selected' );
 	$( '#ca-ve-edit' )
 		.addClass( 'selected' );
@@ -1408,7 +1408,8 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	// Put skin tabs back in "view" mode
 	$( $( '#p-views' ).length ? '#p-views' : '#p-cactions' )
 		.find( 'li.selected' ).removeClass( 'selected' );
-	$( '#ca-view' ).addClass( 'selected' );
+	$( $( '#ca-view' ).length ? '#ca-view' : '#p-cactions > .pBody > ul > li:nth-child(1)' )
+		.addClass( 'selected' );
 
 	// Make site notice visible again (if present)
 	$( '#siteNotice.ve-hide' )
