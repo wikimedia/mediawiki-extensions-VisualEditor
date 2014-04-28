@@ -106,6 +106,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) 
 		'aliases': [],
 		'name': name,
 		'required': false,
+		'suggested': false,
 		'deprecated': false
 	};
 };
@@ -254,6 +255,16 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterName = function ( name ) {
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
 	return !!this.params[name].required;
+};
+
+/**
+ * Check if parameter is suggsted.
+ *
+ * @param {string} name Parameter name
+ * @returns {boolean} Parameter is suggested
+ */
+ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
+	return !!this.params[name].suggested;
 };
 
 /**

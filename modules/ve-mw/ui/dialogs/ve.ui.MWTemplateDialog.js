@@ -106,11 +106,11 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				}
 			}
 
-			// Add required params to user created templates
+			// Add required and suggested params to user created templates
 			if ( added instanceof ve.dm.MWTemplateModel && this.loaded ) {
 				// Prevent selection changes
 				this.preventReselection = true;
-				added.addRequiredParameters();
+				added.addPromptedParameters();
 				this.preventReselection = false;
 				names = added.getParameterNames();
 				params = added.getParameters();
@@ -333,7 +333,7 @@ ve.ui.MWTemplateDialog.prototype.setup = function ( data ) {
 		if ( data.template ) {
 			template = ve.dm.MWTemplateModel.newFromName( this.transclusion, data.template );
 			promise = this.transclusion.addPart( template ).done( function () {
-				template.addRequiredParameters();
+				template.addPromptedParameters();
 			} );
 		} else {
 			promise = this.transclusion.addPart(
