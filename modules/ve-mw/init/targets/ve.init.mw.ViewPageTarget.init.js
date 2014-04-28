@@ -282,17 +282,21 @@
 					$divider
 						.addClass( 'mw-editsection-divider' )
 						.text( dividerText );
-					$editLink
-						.attr( 'href', function ( i, val ) {
-							return new mw.Uri( veEditUri ).extend( {
-								'vesection': new mw.Uri( val ).query.section
-							} );
-						} )
-						.addClass( 'mw-editsection-visualeditor' );
-					if ( conf.tabPosition === 'before' ) {
-						$editSourceLink.before( $editLink, $divider );
-					} else {
-						$editSourceLink.after( $divider, $editLink );
+					// Don't mess with section edit links on foreign file description pages
+					// (bug 54259)
+					if ( !$( '#ca-view-foreign' ).length ) {
+						$editLink
+							.attr( 'href', function ( i, val ) {
+								return new mw.Uri( veEditUri ).extend( {
+									'vesection': new mw.Uri( val ).query.section
+								} );
+							} )
+							.addClass( 'mw-editsection-visualeditor' );
+						if ( conf.tabPosition === 'before' ) {
+							$editSourceLink.before( $editLink, $divider );
+						} else {
+							$editSourceLink.after( $divider, $editLink );
+						}
 					}
 				} );
 			}

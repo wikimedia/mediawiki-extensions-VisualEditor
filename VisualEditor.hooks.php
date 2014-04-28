@@ -191,10 +191,16 @@ class VisualEditorHooks {
 	public static function onDoEditSectionLink( $skin, $title, $section, $tooltip, &$result, $lang ) {
 		// Only do this if the user has VE enabled
 		// (and we're not in parserTests)
+		// (and we're not on a foreign file description page)
 		if (
 			isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ||
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-betatempdisable' )
+			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
+			(
+				$title->inNamespace( NS_FILE ) &&
+				WikiPage::factory( $title ) instanceof WikiFilePage &&
+				!WikiPage::factory( $title )->isLocal()
+			)
 		) {
 			return;
 		}
