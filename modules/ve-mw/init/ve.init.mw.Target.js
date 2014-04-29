@@ -1315,6 +1315,7 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 			setTimeout( function () {
 				// Initialize surface
 				target.surface.getContext().hide();
+				target.surface.$element.addClass( 'mw-body-content' );
 				target.$document = target.surface.$element.find( '.ve-ce-documentNode' );
 				target.$element.append( target.surface.$element );
 				target.setUpToolbar();
