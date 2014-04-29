@@ -37,8 +37,6 @@ end
 
 When(/^I edit the page with (.+)$/) do |input_string|
   on(VisualEditorPage) do |page|
-    page.edit_ve_element.when_present.click
-    # no longer need to dismiss beta warning here https://gerrit.wikimedia.org/r/#/c/119217/
     page.content_element.when_present(10).fire_event("onfocus")
     page.content_element.when_present.send_keys(input_string + " #{@random_string} ")
   end
@@ -46,8 +44,8 @@ end
 
 When(/^I click Return to save form$/) do
   on(VisualEditorPage) do |page|
-    page.diff_view_element.when_present
-    page.return_to_save_element.when_present.click
+    page.diff_view_element.when_present(10)
+    page.return_to_save_element.when_present(10).click
   end
 end
 

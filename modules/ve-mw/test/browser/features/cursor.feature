@@ -2,8 +2,7 @@
 Feature: VisualEditor cursor
 
   Background:
-    Given I am logged in
-      And I am at the cursor test page
+    Given I am at the cursor test page
       And I click Edit for VisualEditor
 
 Scenario Outline: show hover icons
