@@ -100,7 +100,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			metaName: 'mwNoEditSection',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
 		}
-	];
+	].concat( ve.ui.MWSettingsPage.static.extraMetaCheckboxes );
 	/*global mw*/
 	if ( mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' ).category ) {
 		this.metaItemCheckboxes.push(
@@ -140,6 +140,18 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWSettingsPage, OO.ui.PageLayout );
+
+/* Allow extra meta item checkboxes to be added by extensions etc. */
+ve.ui.MWSettingsPage.static.extraMetaCheckboxes = [];
+
+/**
+ * Add a checkbox to the list of changeable page settings
+ * @param {string} metaName The name of the DM meta item
+ * @param {string} label The label to show next to the checkbox
+ */
+ve.ui.MWSettingsPage.static.addMetaCheckbox = function ( metaName, label ) {
+	this.extraMetaCheckboxes.push( { 'metaName': metaName, 'label': label } );
+};
 
 /* Methods */
 
