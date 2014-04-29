@@ -152,7 +152,7 @@
 	"visualeditor-preference-betatempdisable": "ビジュアルエディターを、ベータ版である間は一時的に無効にする",
 	"visualeditor-preference-core-description": "ビジュアルエディターを有効にする。これはトークページやその他の名前空間では利用できません。",
 	"visualeditor-preference-core-label": "ビジュアルエディター",
-	"visualeditor-preference-enable": "ビジュアルエディターを有効にする。これはトークページやその他の名前空間の一部では利用できません。",
+	"visualeditor-preference-enable": "ビジュアルエディターを有効にする。これは以下の名前空間のみで利用できます: $1",
 	"visualeditor-preference-language-label": "ビジュアルエディターの言語ツール",
 	"visualeditor-preference-mwalienextension-label": "ビジュアルエディターでの拡張機能タグの編集",
 	"visualeditor-preference-mwhiero-label": "ビジュアルエディターでのヒエログリフの編集",

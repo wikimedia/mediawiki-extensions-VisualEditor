@@ -189,7 +189,7 @@
 	"visualeditor-preference-betatempdisable": "Disattiva temporaneamente VisualEditor mentre è in versione beta",
 	"visualeditor-preference-core-description": "Abilita VisualEditor. Potrebbe non essere disponibile nelle pagine di discussione e in alcuni altri namespace.",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "Abilita VisualEditor. Potrebbe non essere disponibile nelle pagine di discussione ed in altri namespace.",
+	"visualeditor-preference-enable": "Abilita VisualEditor. Sarà disponibile nei seguenti namespace: $1",
 	"visualeditor-preference-language-description": "Aggiunge uno strumento sperimentale a VisualEditor per contrassegnare la lingua in cui il testo è scritto per eseguire prove, prima del rilascio generale. Ricorda di controllare sempre le modifiche prima di salvare quando usi le funzionalità sperimentali.",
 	"visualeditor-preference-language-label": "Strumento di VisualEditor per le lingue",
 	"visualeditor-preference-mwalienextension-description": "Aggiunge strumenti sperimentali a VisualEditor per la modifica dei tag (come gallerie d'immagini o blocchi di codici sorgente), prima che gli strumenti individuali siano disponibili. Ricorda di controllare sempre le modifiche prima di salvare quando usi le funzionalità sperimentali.",

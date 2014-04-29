@@ -189,7 +189,7 @@
 	"visualeditor-preference-betatempdisable": "在 VisualEditor 測試期間暫時停用。",
 	"visualeditor-preference-core-description": "啟用 VisualEditor，目前尚未支援討論頁面及其他名字空間。",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "啟用 VisualEditor，目前尚未支援討論頁面及其他名字空間。",
+	"visualeditor-preference-enable": "啟用 VisualEditor，目前尚未支援以下命名空間：\n$1",
 	"visualeditor-preference-language-description": "新增尚未正式發佈的實驗性語言工具進行測試。 使用實驗性質工具，請永遠記得在儲存之後重新檢視您所做的變更是否正常。",
 	"visualeditor-preference-language-label": "VisualEditor 語言工具",
 	"visualeditor-preference-mwalienextension-description": "新增尚未正式發佈的實驗性編輯擴充標籤工具 (可修改圖庫、原始碼區塊)。 使用實驗性質工具，請永遠記得在儲存之後重新檢視您所做的變更是否正常。",

@@ -207,7 +207,7 @@
 	"visualeditor-preference-betatempdisable": "Désactiver temporairement l'ÉditeurVisuel tant qu’il est en version bêta",
 	"visualeditor-preference-core-description": "Activer l’Éditeur Visuel. Il ne sera pas disponible sur les pages de discussion et quelques autres espaces de nom.",
 	"visualeditor-preference-core-label": "ÉditeurVisuel",
-	"visualeditor-preference-enable": "Activer l’ÉditeurVisuel. Il ne sera pas disponible sur les pages de discussion et quelques autres espaces de nom.",
+	"visualeditor-preference-enable": "Activer l’ÉditeurVisuel. Il sera disponible pour les espaces de nom suivants : $1",
 	"visualeditor-preference-language-description": "Ajouter un outil expérimental à l’Éditeur Visuel pour tester le marquage de la langue dans laquelle est écrit le texte, en avance sur la version générale. Souvenez-vous de toujours vérifier vos modifications avant d’enregistrer lors de l’utilisation des fonctionnalités expérimentales.",
 	"visualeditor-preference-language-label": "Outil de langue de l’ÉditeurVisuel",
 	"visualeditor-preference-mwalienextension-description": "Ajouter le support expérimental de base à l’ÉditeurVisuel pour modifier les balises des extensions (comme les galeries ou les blocs de code source), en avance par rapport à la disponibilité des outils individuels. Rappelez-vous de toujours vérifier vos modifications avant d’enregistrer lors de l’utilisation de fonctionnalités expérimentales.",

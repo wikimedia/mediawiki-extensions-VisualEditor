@@ -12,7 +12,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor 'beta' нұсқада. Сіз бағдарламалық жасақтама шектеулеріне кездессеңіз және беттің кейбір бөліктерін өңдей алмасаңыз  \"{{int:visualeditor-ca-editsource}}\" дегенді шертіп уикибелгі режиміне ауыса алысыз – бірақ сақталмаған өзгерістеріңіз жоғалады.",
 	"visualeditor-browserwarning": "Сіздің қолданып отырған шолғышыңызды VisualEditor ресми түрде қолдамайды.",
-	"visualeditor-ca-createsource": "Қайнарын құрыңыз",
+	"visualeditor-ca-createsource": "Қайнарын құру",
 	"visualeditor-ca-editsource": "Қайнарын өңдеу",
 	"visualeditor-ca-editsource-section": "қайнарын өңдеу",
 	"visualeditor-ca-editlocaldescriptionsource": "Жергілікті сипаттама қайнарын өңдеу",

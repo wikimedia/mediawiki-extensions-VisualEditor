@@ -187,7 +187,7 @@
 	"visualeditor-preference-betatempdisable": "Avaktivera tillfälligt VisualEditor medan den är i beta",
 	"visualeditor-preference-core-description": "Aktivera VisualEditor. Den kommer inte vara tillgänglig på diskussionssidor och i vissa andra namnrymder.",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "Aktivera VisualEditor. Den kommer inte vara tillgänglig på diskussionssidor och i vissa andra namnrymder.",
+	"visualeditor-preference-enable": "Aktivera VisualEditor. Den kommer att vara tillgänglig i följande namnrymder: $1",
 	"visualeditor-preference-language-description": "Lägg till ett experimentellt verktyg i VisualEditor för att markera det språk i vilket text är skriven för testning, före allmän utsättning. Kom ihåg att alltid granska dina ändringar innan du sparar när du använder experimentella funktioner.",
 	"visualeditor-preference-language-label": "Språkverktyg för VisualEditor",
 	"visualeditor-preference-mwalienextension-description": "Lägga till experimentella grundläggande stöd till VisualEditor för att kunna redigera taggar (som gallerier eller källkodsblock), innan dess att enskilda verktyg för detta finns tillgängliga. Kom ihåg att alltid granska ändringarna innan du sparar när du använder experimentella funktioner.",

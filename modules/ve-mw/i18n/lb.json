@@ -173,7 +173,7 @@
 	"visualeditor-preference-betatempdisable": "VisualEditor temporär ausschalte sou laang wéi en an enger Beta-Versioun ass",
 	"visualeditor-preference-core-description": "VisualEditor aschalten. Et ass net op Diskussiounssäiten an an e puer anere Nummraaim disponibel.",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "VisualEditor aktivéieren. Et ass net op Diskussiounssäiten an e puer anere Nummraim disponibel.",
+	"visualeditor-preference-enable": "VisualEditor aktivéieren. En ass an dësen Nummraim disponibel: $1",
 	"visualeditor-preference-language-label": "VisualEditor Sprooch-Tool",
 	"visualeditor-preference-mwhiero-label": "VisualEditor Hieroglyphen änneren",
 	"visualeditor-reference-input-placeholder": "Wat wëllt Dir referenzéieren?",

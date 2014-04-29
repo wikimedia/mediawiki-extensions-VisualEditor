@@ -189,7 +189,7 @@
 	"visualeditor-preference-betatempdisable": "כיבוי זמני של העורך החזותי בזמן שהוא בגרסת בטא",
 	"visualeditor-preference-core-description": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
 	"visualeditor-preference-core-label": "עורך חזותי",
-	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
+	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא יהיה זמין במרחבי השם הבאים: $1.",
 	"visualeditor-preference-language-description": "הוספת לעורך החזותי של כלי ניסיוני לסימון השפה שבה כתוב הקטע, לבדיקה לפני הוצאת הגרסה הכללית. נא לזכור תמיד לסקור את השינויים שלך לפני שמירה תוך כדי שימוש באפשרויות ניסיוניות.",
 	"visualeditor-preference-language-label": "כלי שפה של העורך החזותי",
 	"visualeditor-preference-mwalienextension-description": "הוספת לעורך החזותי של תמיכה ניסיונית בעריכת תגי הרחבות, כגון גלריות ובלוקים של קוד מקור, לפני שהכלים האלה זמינים. נא לזכור תמיד לסקור את השינויים שלך לפני שמירה תוך כדי שימוש באפשרויות ניסיוניות.",
