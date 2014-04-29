@@ -56,29 +56,13 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupInputWidget );
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
-	var propsJqXhr,
-		searchJqXhr = ve.init.mw.Target.static.apiRequest( {
-			'action': 'opensearch',
-			'search': this.categoryPrefix + this.value,
-			'suggest': ''
-		} );
-
-	return searchJqXhr.then( function ( data ) {
-		propsJqXhr = ve.init.mw.Target.static.apiRequest( {
-			'action': 'query',
-			'prop': 'pageprops',
-			'titles': ( data[1] || [] ).join( '|' ),
-			'ppprop': 'hiddencat',
-			'redirects': ''
-		} );
-		return propsJqXhr;
-	} ).promise( { abort: function () {
-		searchJqXhr.abort();
-
-		if ( propsJqXhr ) {
-			propsJqXhr.abort();
-		}
-	} } );
+	return ve.init.mw.Target.static.apiRequest( {
+		'action': 'query',
+		'list': 'allcategories',
+		'acprefix': this.value,
+		'acprop': 'hidden',
+		'redirects': ''
+	} );
 };
 
 /**
@@ -89,14 +73,14 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
 	var categoryInputWidget = this, result = {};
-	if ( data.query && data.query.pages ) {
-		$.each( data.query.pages, function ( pageId, pageInfo ) {
-			var title = mw.Title.newFromText( pageInfo.title );
+	if ( data.query && data.query.allcategories ) {
+		$.each( data.query.allcategories, function () {
+			var title = mw.Title.newFromText( this['*'] );
 			if ( title ) {
-				result[title.getMainText()] = !!( pageInfo.pageprops && pageInfo.pageprops.hiddencat !== undefined );
-				categoryInputWidget.categoryWidget.categoryHiddenStatus[pageInfo.title] = result[title.getMainText()];
+				result[title.getMainText()] = this.hasOwnProperty( 'hidden' );
+				categoryInputWidget.categoryWidget.categoryHiddenStatus[this['*']] = result[title.getMainText()];
 			} else {
-				mw.log.warning( '"' + pageInfo.title + '" is an invalid title!' );
+				mw.log.warning( '"' + this['*'] + '" is an invalid title!' );
 			}
 		} );
 	}
