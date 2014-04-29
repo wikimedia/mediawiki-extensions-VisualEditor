@@ -69,29 +69,15 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
-	var propsJqXhr,
-		searchJqXhr = ve.init.mw.Target.static.apiRequest( {
-			'action': 'opensearch',
-			'search': this.value,
-			'namespace': 0,
-			'suggest': ''
-		} );
-
-	return searchJqXhr.then( function ( data ) {
-		propsJqXhr = ve.init.mw.Target.static.apiRequest( {
-			'action': 'query',
-			'prop': 'info|pageprops',
-			'titles': ( data[1] || [] ).join( '|' ),
-			'ppprop': 'disambiguation'
-		} );
-		return propsJqXhr;
-	} ).promise( { abort: function () {
-		searchJqXhr.abort();
-
-		if ( propsJqXhr ) {
-			propsJqXhr.abort();
-		}
-	} } );
+	return ve.init.mw.Target.static.apiRequest( {
+		'action': 'query',
+		'generator': 'prefixsearch',
+		'gpssearch': this.value,
+		'gpsnamespace': 0,
+		'prop': 'info|pageprops',
+		'ppprop': 'disambiguation',
+		'redirect': ''
+	} );
 };
 
 /**
