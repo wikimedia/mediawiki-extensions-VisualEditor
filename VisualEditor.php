@@ -699,6 +699,8 @@ $wgResourceModules += array(
 			'visualeditor-toolbar-style-tooltip',
 			'visualeditor-toolbar-cite-label',
 			'visualeditor-viewpage-savewarning',
+			'visualeditor-viewpage-savewarning-discard',
+			'visualeditor-viewpage-savewarning-keep',
 			'visualeditor-wikitext-warning-title',
 			'visualeditor-window-title',
 			'toc',

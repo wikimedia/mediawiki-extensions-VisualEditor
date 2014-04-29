@@ -238,6 +238,8 @@
     "visualeditor-toolbar-style-tooltip": "Style text",
     "visualeditor-usernamespacepagelink": "Project:User namespace",
     "visualeditor-viewpage-savewarning": "Are you sure you want to go back to view mode without saving first?",
+    "visualeditor-viewpage-savewarning-discard": "Discard edits",
+    "visualeditor-viewpage-savewarning-keep": "Continue editing",
     "visualeditor-wikitext-warning": "You are using VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] does not work here. Click \"{{int:visualeditor-ca-editsource}}\" to edit the page in wikitext mode – unsaved changes will be lost.",
     "visualeditor-wikitext-warning-link": "Help:Wiki markup",
     "visualeditor-wikitext-warning-title": "Wikitext markup detected"

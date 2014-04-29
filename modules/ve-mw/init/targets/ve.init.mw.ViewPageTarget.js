@@ -266,58 +266,73 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 };
 
 /**
- * Switch to view mode.
+ * Determines whether we want to switch to view mode or not (displaying a dialog if necessary)
+ * Then, if we do, actually switches to view mode.
  *
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
+	var confirmDialog;
 	if ( override || ( this.active && !this.deactivating ) ) {
-		if (
-			override ||
-			!this.edited ||
-			confirm( ve.msg( 'visualeditor-viewpage-savewarning' ) )
-		) {
-			this.deactivating = true;
-			// User interface changes
-			if ( this.elementsThatHadOurAccessKey ) {
-				this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
-			}
-			this.restorePage();
-			this.hideSpinner();
-			this.showReadOnlyContent();
-
-			if ( this.toolbarCancelButton ) {
-				// If deactivate is called before a successful load, then
-				// setupToolbarButtons has not been called yet and as such tearDownToolbarButtons
-				// would throw an error when trying call methods on the button property (bug 46456)
-				this.tearDownToolbarButtons();
-				this.detachToolbarButtons();
-			}
-
-			// Check we got as far as setting up the surface
-			if ( this.active ) {
-				// If we got as far as setting up the surface, tear that down
-				this.tearDownSurface();
-			}
-
-			// Show/restore components that are otherwise handled by tearDownSurface
-			this.showPageContent();
-			this.restorePageTitle();
-
-			// If there is a load in progress, abort it
-			if ( this.loading ) {
-				this.loading.abort();
-			}
-
-			this.clearState();
-			this.docToSave = null;
-			this.initialEditSummary = '';
-
-			this.deactivating = false;
-
-			mw.hook( 've.deactivationComplete' ).fire( this.edited );
+		if ( override || !this.edited ) {
+			this.cancel();
+		} else {
+			confirmDialog = this.surface.dialogs.getWindow( 'confirm' );
+			confirmDialog.open( {
+				'prompt': ve.msg( 'visualeditor-viewpage-savewarning' ),
+				'okLabel': ve.msg( 'visualeditor-viewpage-savewarning-discard' ),
+				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' )
+			} );
+			confirmDialog.connect( this, { 'ok': 'cancel' } );
 		}
 	}
+};
+
+/**
+ * Switch to view mode
+ *
+ * @method
+ */
+ve.init.mw.ViewPageTarget.prototype.cancel = function () {
+	this.deactivating = true;
+	// User interface changes
+	if ( this.elementsThatHadOurAccessKey ) {
+		this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+	}
+	this.restorePage();
+	this.hideSpinner();
+	this.showReadOnlyContent();
+
+	if ( this.toolbarCancelButton ) {
+		// If deactivate is called before a successful load, then
+		// setupToolbarButtons has not been called yet and as such tearDownToolbarButtons
+		// would throw an error when trying call methods on the button property (bug 46456)
+		this.tearDownToolbarButtons();
+		this.detachToolbarButtons();
+	}
+
+	// Check we got as far as setting up the surface
+	if ( this.active ) {
+		// If we got as far as setting up the surface, tear that down
+		this.tearDownSurface();
+	}
+
+	// Show/restore components that are otherwise handled by tearDownSurface
+	this.showPageContent();
+	this.restorePageTitle();
+
+	// If there is a load in progress, abort it
+	if ( this.loading ) {
+		this.loading.abort();
+	}
+
+	this.clearState();
+	this.docToSave = null;
+	this.initialEditSummary = '';
+
+	this.deactivating = false;
+
+	mw.hook( 've.deactivationComplete' ).fire( this.edited );
 };
 
 /**
