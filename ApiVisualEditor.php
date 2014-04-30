@@ -330,13 +330,19 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				if ( $page->getNamespace() != NS_MEDIAWIKI ) {
+				// Look at protection status to set up notices + surface class(es)
+				$protectedClasses = array();
+				if ( MWNamespace::getRestrictionLevels( $page->getNamespace() ) !== array( '' ) ) {
 					// Page protected from editing
 					if ( $page->isProtected( 'edit' ) ) {
 						# Is the title semi-protected?
 						if ( $page->isSemiProtected() ) {
+							$protectedClasses[] = 'mw-textarea-sprotected';
+
 							$noticeMsg = 'semiprotectedpagewarning';
 						} else {
+							$protectedClasses[] = 'mw-textarea-protected';
+
 							# Then it must be protected based on static groups (regular)
 							$noticeMsg = 'protectedpagewarning';
 						}
@@ -347,6 +353,8 @@ class ApiVisualEditor extends ApiBase {
 					// Deal with cascading edit protection
 					list( $sources, $restrictions ) = $page->getCascadeProtectionSources();
 					if ( isset( $restrictions['edit'] ) ) {
+						$protectedClasses[] = ' mw-textarea-cprotected';
+
 						$notice = $this->msg( 'cascadeprotectedwarning' )->parseAsBlock() . '<ul>';
 						// Unfortunately there's no nice way to get only the pages which cause
 						// editing to be restricted
@@ -439,6 +447,7 @@ class ApiVisualEditor extends ApiBase {
 							'notices' => $notices,
 							'checkboxes' => $checkboxes,
 							'links' => $links,
+							'protectedClasses' => implode( ' ', $protectedClasses )
 						),
 						$parsed['result']
 					);
