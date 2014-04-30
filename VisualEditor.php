@@ -704,10 +704,12 @@ $wgResourceModules += array(
 			'hidetoc',
 
 			'captcha-edit',
-			// Only used if FancyCaptcha is installed and triggered on save
 			'captcha-label',
-			'fancycaptcha-edit',
 			'colon-separator',
+			// Only used if FancyCaptcha is installed and triggered on save
+			'fancycaptcha-edit',
+			// Only used if QuestyCaptcha is installed and triggered on save
+			'questycaptcha-edit'
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
