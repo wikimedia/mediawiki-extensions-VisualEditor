@@ -724,6 +724,11 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/tools/ve.ui.MWFormatTool.js',
 		),
+		'skinStyles' => array(
+			'vector' => array(
+				'modules/ve-mw/ui/themes/vector/ve.ui.MWFormatTool.css',
+			),
+		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
 		),
