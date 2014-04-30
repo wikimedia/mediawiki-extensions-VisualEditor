@@ -30,6 +30,9 @@ OO.inheritClass( ve.ui.MWTransclusionDialog, ve.ui.MWTemplateDialog );
 
 ve.ui.MWTransclusionDialog.static.name = 'transclusion';
 
+ve.ui.MWTransclusionDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-transclusion-title' );
+
 /**
  * Map of symbolic mode names and CSS classes.
  *
@@ -241,11 +244,12 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
  * Update the dialog title.
  */
 ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
-	this.setTitle(
-		this.mode === 'multiple' ?
-			this.constructor.static.title :
-			ve.ui.MWTransclusionDialog.super.prototype.updateTitle.call( this )
-	);
+	if ( this.mode === 'multiple' ) {
+		this.setTitle( this.constructor.static.title );
+	} else {
+		// Parent method
+		ve.ui.MWTransclusionDialog.super.prototype.updateTitle.call( this );
+	}
 };
 
 /**
