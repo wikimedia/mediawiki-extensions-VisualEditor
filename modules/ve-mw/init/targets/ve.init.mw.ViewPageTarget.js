@@ -1373,11 +1373,10 @@ ve.init.mw.ViewPageTarget.prototype.restoreDocumentTitle = function () {
 ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	var uri;
 
-	// Put skin tabs in "edit" mode
-	$( '#p-views' )
-		.find( 'li.selected' ).removeClass( 'selected' );
-	$( '#ca-ve-edit' )
-		.addClass( 'selected' );
+	// Deselect current mode (e.g. "view" or "history"). In skins like monobook that don't have
+	// separate tab sections for content actions and namespaces the below is a no-op.
+	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
+	$( '#ca-ve-edit' ).addClass( 'selected' );
 
 	// Hide site notice (if present)
 	$( '#siteNotice:visible' )
@@ -1405,11 +1404,11 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	var uri;
 
-	// Put skin tabs back in "view" mode
-	$( $( '#p-views' ).length ? '#p-views' : '#p-cactions' )
-		.find( 'li.selected' ).removeClass( 'selected' );
-	$( $( '#ca-view' ).length ? '#ca-view' : '#p-cactions > .pBody > ul > li:nth-child(1)' )
-		.addClass( 'selected' );
+	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
+	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
+	// In skins having #ca-view (like Vector), select that.
+	$( '#ca-ve-edit' ).removeClass( 'selected' );
+	$( '#ca-view' ).addClass( 'selected' );
 
 	// Make site notice visible again (if present)
 	$( '#siteNotice.ve-hide' )
