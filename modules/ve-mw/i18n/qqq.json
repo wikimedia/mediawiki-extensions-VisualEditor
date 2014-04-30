@@ -144,6 +144,7 @@
 	"visualeditor-dialog-transclusion-remove-template": "Label for button that removes a template from a transclusion.\n{{Identical|Remove template}}",
 	"visualeditor-dialog-transclusion-required-parameter": "Tooltip for required parameter indicator",
 	"visualeditor-dialog-transclusion-single-mode": "Label for button that hides advanced options in transclusion dialog",
+	"visualeditor-dialog-transclusion-title": "{{Identical|Transclusion}}",
 	"visualeditor-dialogbutton-media-tooltip": "{{Identical|Media}}",
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
 	"visualeditor-dialogbutton-reference-tooltip": "{{Identical|Reference}}",
