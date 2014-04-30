@@ -103,6 +103,7 @@
 	"visualeditor-dialog-transclusion-remove-param": "引数を除去",
 	"visualeditor-dialog-transclusion-remove-template": "テンプレートを除去",
 	"visualeditor-dialog-transclusion-required-parameter": "必須の引数",
+	"visualeditor-dialog-transclusion-title": "参照読み込み",
 	"visualeditor-dialogbutton-media-tooltip": "メディア",
 	"visualeditor-dialogbutton-meta-tooltip": "ページの設定",
 	"visualeditor-dialogbutton-reference-tooltip": "脚注",
