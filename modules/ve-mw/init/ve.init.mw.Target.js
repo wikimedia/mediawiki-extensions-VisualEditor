@@ -394,6 +394,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		this.constructor.static.fixBase( this.doc, document );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
+		this.protectedClasses = data.protectedClasses;
 		this.$checkboxes = $( ve.getObjectValues( data.checkboxes ).join( '' ) );
 		// Populate checkboxes with default values for minor and watch
 		this.$checkboxes
@@ -1311,7 +1312,8 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			target.surface = target.createSurface( dmDoc );
-			target.surface.$element.addClass( 've-init-mw-viewPageTarget-surface' );
+			target.surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
+				.addClass( target.protectedClasses );
 			setTimeout( function () {
 				// Initialize surface
 				target.surface.getContext().hide();
