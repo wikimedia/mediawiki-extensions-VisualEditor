@@ -19,7 +19,7 @@
 }
 
 .ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
-	padding: 0 1.5em;
+	padding: 0 1.714em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
 }
 
 .ve-init-mw-viewPageTarget-surface .oo-ui-menuWidget {

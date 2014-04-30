@@ -1317,13 +1317,17 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 			setTimeout( function () {
 				// Initialize surface
 				target.surface.getContext().hide();
-				target.surface.$element.addClass( 'mw-body-content' );
-				target.$document = target.surface.$element.find( '.ve-ce-documentNode' );
+				target.$document = target.surface.view.$element.find( '.ve-ce-documentNode' );
 				target.$element.append( target.surface.$element );
 				target.setUpToolbar();
 
-				// Add appropriately mw-content-ltr or mw-content-rtl class
-				target.surface.view.$element.addClass(
+				// Apply mw-body-content to the view (ve-ce-surface).
+				// Not to surface (ve-ui-surface), since that contains both the view
+				// and the overlay container, and we don't want inspectors to
+				// inherit skin typography styles for wikipage content.
+				target.surface.view.$element.addClass( 'mw-body-content' );
+				target.$document.addClass(
+					// Add appropriately mw-content-ltr or mw-content-rtl class
 					'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 				);
 				target.active = true;
