@@ -69,11 +69,6 @@ $wgHooks['EditPage::showEditForm:fields'][] = 'VisualEditorHooks::onEditPageShow
 $wgHooks['PageContentSaveComplete'][] = 'VisualEditorHooks::onPageContentSaveComplete';
 $wgExtensionFunctions[] = 'VisualEditorHooks::onSetup';
 
-// Set default values for new preferences
-$wgDefaultUserOptions['visualeditor-enable'] = 0;
-$wgDefaultUserOptions['visualeditor-enable-experimental'] = 0;
-$wgDefaultUserOptions['visualeditor-betatempdisable'] = 0;
-
 // Register resource modules
 
 $wgVisualEditorResourceTemplate = array(
@@ -1184,6 +1179,14 @@ $wgResourceModules += array(
 	),
 );
 
+/* Extend MediaWiki configuration */
+
+// Set default values for new preferences
+$wgDefaultUserOptions['visualeditor-enable'] = 0;
+$wgDefaultUserOptions['visualeditor-betatempdisable'] = 0;
+$wgDefaultUserOptions['visualeditor-enable-experimental'] = 0;
+$wgDefaultUserOptions['visualeditor-enable-language'] = 0;
+
 
 /* Configuration */
 
@@ -1193,6 +1196,7 @@ $wgVisualEditorPluginModules = array();
 
 // Array of modules to load based on a preference. Keys are preference names, values are
 // ResourceLoader module names.
+// Remember to also set defaults in $wgDefaultUserOptions!
 $wgVisualEditorPreferenceModules = array(
 	'visualeditor-enable-experimental' => 'ext.visualEditor.experimental',
 	'visualeditor-enable-language' => 'ext.visualEditor.language',
