@@ -150,7 +150,8 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 	if ( ref instanceof ve.dm.MWReferenceModel ) {
 		this.useReference( ref );
-		this.close( { 'action': 'insert' } );
+		// HACK - This proves that the interface for ActionDialog is screwed up
+		this.onApplyButtonClick();
 	}
 };
 
