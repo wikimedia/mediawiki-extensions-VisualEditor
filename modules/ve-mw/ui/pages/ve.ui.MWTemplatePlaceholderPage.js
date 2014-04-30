@@ -17,6 +17,11 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
+	// Configuration initialization
+	config = ve.extendObject( {
+		'scrollable': false
+	}, config );
+
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 

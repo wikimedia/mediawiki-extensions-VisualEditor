@@ -281,10 +281,12 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
  * Get parameter deprecation description.
  *
  * @param {string} name Parameter name
- * @returns {string} Explaining of why parameter is deprecated, empty if parameter is not deprecated
+ * @returns {string} Explaining of why parameter is deprecated, empty if parameter is either not
+ *   deprecated or no description has been specified
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = function ( name ) {
-	return this.params[name].deprecated || '';
+	return typeof this.params[name].deprecated === 'string' ?
+		this.params[name].deprecated : '';
 };
 
 /**

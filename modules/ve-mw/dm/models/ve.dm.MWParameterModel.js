@@ -44,7 +44,6 @@ OO.mixinClass( ve.dm.MWParameterModel, OO.EventEmitter );
  * Check if parameter is required.
  *
  * @method
- * @param {string} name Parameter name
  * @returns {boolean} Parameter is required
  */
 ve.dm.MWParameterModel.prototype.isRequired = function () {
@@ -52,7 +51,7 @@ ve.dm.MWParameterModel.prototype.isRequired = function () {
 };
 
 /**
- * Check if parameter is suggestyed.
+ * Check if parameter is suggested.
  *
  * @method
  * @param {string} name Parameter name
@@ -63,7 +62,17 @@ ve.dm.MWParameterModel.prototype.isSuggested = function () {
 };
 
 /**
- * Get template parameter is part of.
+ * Check if parameter is deprecated.
+ *
+ * @method
+ * @returns {boolean} Parameter is deprecated
+ */
+ve.dm.MWParameterModel.prototype.isDeprecated = function () {
+	return this.template.getSpec().isParameterDeprecated( this.name );
+};
+
+/**
+ * Get template of which this parameter is part.
  *
  * @returns {ve.dm.MWTemplateModel} Template
  */

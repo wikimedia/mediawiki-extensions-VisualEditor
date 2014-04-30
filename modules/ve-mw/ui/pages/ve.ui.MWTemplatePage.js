@@ -21,6 +21,11 @@
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	var title;
 
+	// Configuration initialization
+	config = ve.extendObject( {
+		'scrollable': false
+	}, config );
+
 	// Parent constructor
 	OO.ui.PageLayout.call( this, name, config );
 

@@ -48,11 +48,7 @@ ve.ui.MWTransclusionDialog.static.modeCssClasses = {
 ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 	{},
 	ve.ui.MWTemplateDialog.static.bookletLayoutConfig,
-	{
-		'autoFocus': true,
-		'outlined': true,
-		'editable': true
-	}
+	{ 'outlined': true, 'editable': true }
 );
 
 /* Methods */
@@ -64,7 +60,6 @@ ve.ui.MWTransclusionDialog.prototype.onTransclusionReady = function () {
 	// Parent method
 	ve.ui.MWTransclusionDialog.super.prototype.onTransclusionReady.call( this );
 
-	this.modeButton.setDisabled( false );
 	this.setMode( 'auto' );
 };
 
@@ -232,11 +227,13 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 	}
 	this.setSize( single ? 'medium' : 'large' );
 	this.bookletLayout.toggleOutline( !single );
-	this.modeButton.setLabel( ve.msg(
-		single ?
-			'visualeditor-dialog-transclusion-multiple-mode' :
-			'visualeditor-dialog-transclusion-single-mode'
-	) );
+	this.modeButton
+		.setLabel( ve.msg(
+			single ?
+				'visualeditor-dialog-transclusion-multiple-mode' :
+				'visualeditor-dialog-transclusion-single-mode'
+		) )
+		.setDisabled( !this.isSingleTemplateTransclusion() );
 	this.updateTitle();
 };
 
