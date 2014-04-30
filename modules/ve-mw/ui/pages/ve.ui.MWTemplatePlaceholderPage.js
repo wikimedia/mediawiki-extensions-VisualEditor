@@ -83,9 +83,14 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function ( outlineIte
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
-	var transclusion = this.placeholder.getTransclusion(),
-		part = ve.dm.MWTemplateModel.newFromName( transclusion, this.addTemplateInput.getValue() );
+	var part,
+		transclusion = this.placeholder.getTransclusion(),
+		menu = this.addTemplateInput.getLookupMenu();
 
+	if ( menu.isVisible() ) {
+		menu.chooseItem( menu.getSelectedItem() );
+	}
+	part = ve.dm.MWTemplateModel.newFromName( transclusion, this.addTemplateInput.getValue() );
 	transclusion.replacePart( this.placeholder, part );
 	this.addTemplateInput.pushPending();
 	this.addTemplateButton.setDisabled( true );
