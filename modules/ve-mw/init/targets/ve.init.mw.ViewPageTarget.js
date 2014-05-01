@@ -126,14 +126,12 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 	if ( currentUri.query.venotify ) {
 		// The following messages can be used here:
-		// visualeditor-notification-saved
-		// visualeditor-notification-created
-		// visualeditor-notification-restored
+		// postedit-confirmation-saved
+		// postedit-confirmation-created
+		// postedit-confirmation-restored
 		mw.hook( 'postEdit' ).fire( {
 			'message':
-				ve.msg( 'visualeditor-notification-' + currentUri.query.venotify,
-					new mw.Title( this.pageName ).toText()
-				)
+				ve.msg( 'postedit-confirmation-' + currentUri.query.venotify, mw.user )
 		} );
 
 		delete currentUri.query.venotify;
@@ -431,9 +429,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 		this.deactivate( true );
 		mw.hook( 'postEdit' ).fire( {
 			'message':
-				ve.msg( 'visualeditor-notification-saved',
-					new mw.Title( this.pageName ).toText()
-				)
+				ve.msg( 'postedit-confirmation-saved', mw.user )
 		} );
 	}
 };
