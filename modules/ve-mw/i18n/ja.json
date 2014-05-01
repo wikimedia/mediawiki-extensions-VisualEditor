@@ -98,6 +98,8 @@
 	"visualeditor-dialog-transclusion-insert-transclusion": "参照読み込みを挿入",
 	"visualeditor-dialog-transclusion-loading": "読み込み中...",
 	"visualeditor-dialog-transclusion-options": "オプション",
+	"visualeditor-dialog-transclusion-param-info": "引数の説明",
+	"visualeditor-dialog-transclusion-param-info-missing": "引数の説明はありません",
 	"visualeditor-dialog-transclusion-placeholder": "新規テンプレート",
 	"visualeditor-dialog-transclusion-remove-content": "内容を除去",
 	"visualeditor-dialog-transclusion-remove-param": "引数を除去",

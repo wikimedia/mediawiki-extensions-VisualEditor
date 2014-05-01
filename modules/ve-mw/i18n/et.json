@@ -166,7 +166,7 @@
 	"visualeditor-parameter-search-unknown": "Tundmatu parameeter",
 	"visualeditor-preference-betatempdisable": "Keela ajutiselt VisualEditor, kuniks selle arendus on beetajärgus",
 	"visualeditor-preference-core-description": "Kasuta VisualEditori See ei ole kasutatav arutelulehekülgedel ega veel mõnes nimeruumis.",
-	"visualeditor-preference-enable": "Kasuta VisualEditori See ei ole kasutatav arutelulehekülgedel ega veel mõnes nimeruumis.",
+	"visualeditor-preference-enable": "Kasuta VisualEditori. See ei ole kasutatav järgmistes nimeruumides: $1",
 	"visualeditor-reference-input-placeholder": "Millisele allikale tahad viidata?",
 	"visualeditor-referencelist-isempty": "Rühma \"$1\" viited, mida selles loendis näidata, puuduvad sellel leheküljel.",
 	"visualeditor-referencelist-isempty-default": "Viited, mida selles loendis näidata, puuduvad sellel leheküljel.",

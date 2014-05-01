@@ -80,6 +80,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Прикажи картицу за нови поднаслов странице",
 	"visualeditor-dialog-meta-settings-redirect-label": "Преусмери страницу на",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Циљна страница преусмеравања",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Онемогући ажурирање овог преусмерења ако се циљана страница премести.",
 	"visualeditor-dialog-meta-settings-section": "Поставке странице",
 	"visualeditor-dialog-meta-settings-toc-default": "Ако треба",
 	"visualeditor-dialog-meta-settings-toc-disable": "Никад",
