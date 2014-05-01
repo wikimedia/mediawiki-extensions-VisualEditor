@@ -20,9 +20,6 @@
  * @param {Object} [config] Config options
  */
 ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
-	// Configuration initialization
-	config = ve.extendObject( { 'size': 'medium' }, config );
-
 	// Parent constructor
 	ve.ui.Dialog.call( this, config );
 

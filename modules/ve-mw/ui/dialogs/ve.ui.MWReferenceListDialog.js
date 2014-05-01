@@ -15,9 +15,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( config ) {
-	// Configuration initialization
-	config = ve.extendObject( { 'size': 'small' }, config );
-
 	// Parent constructor
 	ve.ui.MWReferenceListDialog.super.call( this, config );
 };
@@ -36,6 +33,8 @@ ve.ui.MWReferenceListDialog.static.title =
 ve.ui.MWReferenceListDialog.static.icon = 'references';
 
 ve.ui.MWReferenceListDialog.static.modelClasses = [ ve.dm.MWReferenceListNode ];
+
+ve.ui.MWReferenceListDialog.static.defaultSize = 'small';
 
 /* Methods */
 
