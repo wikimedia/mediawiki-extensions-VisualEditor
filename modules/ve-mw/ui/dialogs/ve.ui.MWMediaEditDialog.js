@@ -584,13 +584,14 @@ ve.ui.MWMediaEditDialog.prototype.applyChanges = function () {
 	var newDoc, doc, originalAlt, attr, transactionAttributes = {},
 		imageSizeType, imageType, imageAlignmentCheckbox,
 		imageAlignmentValue, originalDimensions,
-		surfaceModel = this.getFragment().getSurface();
+		fragment = this.getFragment(),
+		surfaceModel = fragment.getSurface();
 
 	newDoc = this.captionSurface.getSurface().getModel().getDocument();
 	doc = surfaceModel.getDocument();
 	if ( !this.captionNode ) {
 		// Insert a new caption at the beginning of the image node
-		surfaceModel.getFragment()
+		fragment
 			.adjustRange( 1 )
 			.collapseRangeToStart()
 			.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );

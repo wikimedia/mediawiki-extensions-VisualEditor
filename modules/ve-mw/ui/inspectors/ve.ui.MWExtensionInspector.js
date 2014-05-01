@@ -119,7 +119,8 @@ ve.ui.MWExtensionInspector.prototype.ready = function () {
  */
 ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 	var mwData,
-		surfaceModel = this.getFragment().getSurface();
+		fragment = this.getFragment(),
+		surfaceModel = fragment.getSurface();
 
 	if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
 		if ( this.node ) {
@@ -137,7 +138,7 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 				'body': {}
 			};
 			this.updateMwData( mwData );
-			surfaceModel.getFragment().collapseRangeToEnd().insertContent( [
+			fragment.collapseRangeToEnd().insertContent( [
 				{
 					'type': this.constructor.static.nodeModel.static.name,
 					'attributes': {
@@ -150,7 +151,7 @@ ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
 	} else if ( this.node && !this.constructor.static.allowedEmpty ) {
 		// Content has been emptied on a node which isn't allowed to
 		// be empty, so delete it.
-		surfaceModel.getFragment().removeContent();
+		fragment.removeContent();
 	}
 
 	// Parent method
