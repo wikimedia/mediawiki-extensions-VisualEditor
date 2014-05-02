@@ -5,7 +5,7 @@ class VisualEditorPage
   page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}?vehidebetadialog=true&veaction=edit")
 
   div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
-  div(:content, class: "ve-ce-documentNode ve-ce-branchNode")
+  div(:content, class: "ve-ce-branchNode")
   span(:decrease_indentation, class: "oo-ui-iconedElement-icon oo-ui-icon-outdent-list")
   a(:decrease_indentation_on, title: /Decrease indentation/)
   span(:downarrow, class: "oo-ui-indicatedElement-indicator oo-ui-indicator-down")
