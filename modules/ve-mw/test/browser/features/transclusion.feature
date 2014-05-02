@@ -1,20 +1,16 @@
-@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@edit_user_page @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Transclusion
 
   Background:
-    Given I am logged in
-      And I am at my user page
-      When I click Edit for VisualEditor
-      And I click Transclusion
+    Given I click Transclusion
+      And I can see the Transclusion User Interface
 
   Scenario: Add template
-    Given I can see the Transclusion User Interface
     When I enter N into transclusion Content box
     Then I see a list of template suggestions
       And I click the Add template button
 
   Scenario: Add parameter to template
-    Given I can see the Transclusion User Interface
       And I enter N into transclusion Content box
       And I see a list of template suggestions
       And I click the Add template button
@@ -24,7 +20,6 @@ Feature: VisualEditor Transclusion
     Then I should see the Insert template button
 
   Scenario: Remove parameter
-    Given I can see the Transclusion User Interface
       And I enter N into transclusion Content box
       And I see a list of template suggestions
       And I click the Add template button
