@@ -8,7 +8,8 @@
 			"MIKHEIL",
 			"NoiX180",
 			"Pras",
-			"Tokoko"
+			"Tokoko",
+			"Otogi"
 		]
 	},
 	"tooltip-ca-createsource": "ამ გვერდის წყაროს კოდის შექმნა",
@@ -27,6 +28,8 @@
 	"visualeditor-desc": "მედიავიკის ვიზუალური რედაქტორი",
 	"visualeditor-descriptionpagelink": "Project:ვიზუალური რედაქტორი",
 	"visualeditor-dialog-beta-welcome-action-continue": "გაგრძელება",
+	"visualeditor-dialog-beta-welcome-content": "ეს არის ახალი, გვერდების რედაქტირების შედარებით მარტივი საშუალება. რედაქტორი — ჯერ კიდევ ბეტა-ვერსიაშია, რაც ნიშნავს, რომ შესაძლებელია პოვნა გვერდების ისეთი ნაწილებისა, რომელთა შეცვლა ამ ინსტრუმენტის მეშვეობით ვერ მოხერხდება, ან შესაძლოა წააწყდეთ პრობლემებს, რომლებიც უნდა იქნას გასწორებული. ჩვენ გირჩევთ შეამოწმოთ სტატიებში შეტანილი ცვლილებები და მივესალმებით ნებისმიერი შეტყობინების დატოვებას პრობლემების შესახებ, რომელიც შესაძლებელია აღმოჩნდეს ვიზუალური რედაქტორის გამოყენებისას (დააჭირეთ „{{int:visualeditor-help-tool}}“, რათა გაგზავნოთ გამოძახილი). თქვენ შეგიძლიათ გააგრძელოთ უწინდელი ვიკი-მარკირების რედაქტორის გამოყენება „$1“ ჩანართზე დაკლიკებით — შეუნახავი ცვლილებები დაიკარგება.",
+	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|მოგესალმებით}} ვიზუალურ რედაქტორში",
 	"visualeditor-dialog-media-alttext-section": "ალტერნატიული ტექსტი",
 	"visualeditor-dialog-media-content-section": "წარწერა",
 	"visualeditor-dialog-media-insert-button": "მედიაფაილის ჩასმა",
@@ -104,7 +107,6 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "ქვესათაური 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "ქვესათაური 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "ქვესათაური 4",
-	"visualeditor-languageinspector-widget-changelang": "იპოვე ენა",
 	"visualeditor-languages-tool": "ენები",
 	"visualeditor-linkinspector-illegal-title": "არასწორი სათაური",
 	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|მრავალმნიშვნელობის გვერდი|მრავალმნიშვნელობის გვერდები}}",
@@ -120,9 +122,7 @@
 	"visualeditor-mwgalleryinspector-placeholder": "მაგალითი.jpg|წარწერა",
 	"visualeditor-mwgalleryinspector-title": "გალერეა",
 	"visualeditor-mwhieroinspector-title": "იეროგლიფები",
-	"visualeditor-notification-created": "„$1“ შეიქმნა.",
-	"visualeditor-notification-restored": "„$1“ აღდგა.",
-	"visualeditor-notification-saved": "თქვენი ცვლილებები გვერდზე „$1“ შენახულია.",
+	"visualeditor-pagemenu-tooltip": "გვერდის პარამეტრები",
 	"visualeditor-parameter-input-placeholder": "პარამეტრის სახელი",
 	"visualeditor-parameter-search-no-unused": "გამოუყენებელი პარამეტრები არ არის",
 	"visualeditor-parameter-search-unknown": "უცნობი პარამეტრი",

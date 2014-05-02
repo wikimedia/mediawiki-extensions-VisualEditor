@@ -5,5 +5,9 @@
 			"सरोज कुमार ढकाल"
 		]
 	},
-	"visualeditor-desc": "मेडियाविकिको लागि दृष्टि सम्पादक"
+	"visualeditor-desc": "मेडियाविकिको लागि दृष्टि सम्पादक",
+	"visualeditor-dialog-media-position-left": "बायाँ",
+	"visualeditor-dialog-media-position-none": "कुनै पनि होइन",
+	"visualeditor-dialog-media-position-right": "दायाँ",
+	"visualeditor-dialog-media-position-section": "स्थान"
 }
