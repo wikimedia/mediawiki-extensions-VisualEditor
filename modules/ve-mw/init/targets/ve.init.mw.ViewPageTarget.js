@@ -210,17 +210,29 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
  * @inheritdoc
  */
 ve.init.mw.ViewPageTarget.prototype.setUpToolbar = function () {
-	var $firstHeading = $( '#firstHeading' );
+	var $firstHeading;
 	// Parent method
 	ve.init.mw.Target.prototype.setUpToolbar.call( this );
+
+	// Keep it hidden so that we can slide it down smoothly (avoids sudden
+	// offset flash when original content is hidden, and replaced in-place with a
+	// similar-looking surface).
+	// FIXME: This is not ideal, the parent class creates it and appends
+	// to target (visibly), only for us to hide it again 0ms later.
+	// Though we can't hide it by default because it needs visible dimensions
+	// to compute stuff during setup.
+	this.toolbar.$bar.hide();
 
 	this.toolbar.enableFloatable();
 	this.toolbar.$element
 		.addClass( 've-init-mw-viewPageTarget-toolbar' );
+
 	// Move the toolbar to before #firstHeading if it exists
+	$firstHeading = $( '#firstHeading' );
 	if ( $firstHeading.length ) {
 		this.toolbar.$element.insertBefore( $firstHeading );
 	}
+
 	this.toolbar.$bar.slideDown( 'fast', ve.bind( function () {
 		// Check the surface wasn't torn down while the toolbar was animating
 		if ( this.surface ) {

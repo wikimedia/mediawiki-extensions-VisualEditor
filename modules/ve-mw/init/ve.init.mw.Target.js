@@ -1311,7 +1311,8 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 	setTimeout( function () {
 		// Build model
 		var dmDoc = ve.dm.converter.getModelFromDom(
-			doc, null,
+			doc,
+			null,
 			mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 		);
