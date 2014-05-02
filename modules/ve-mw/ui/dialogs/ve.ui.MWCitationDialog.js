@@ -68,7 +68,7 @@ ve.ui.MWCitationDialog.prototype.getSelectedNode = function () {
 	var branches, leaves, transclusionNode,
 		referenceNode = this.getReferenceNode();
 
-	if ( referenceNode instanceof ve.dm.MWReferenceNode ) {
+	if ( referenceNode ) {
 		branches = referenceNode.getInternalItem().getChildren();
 		leaves = branches &&
 			branches.length === 1 &&
@@ -103,8 +103,8 @@ ve.ui.MWCitationDialog.prototype.applyChanges = function () {
 
 	item = this.referenceModel.findInternalItem( surfaceModel );
 	if ( item ) {
-		if ( this.transclusionNode instanceof ve.dm.MWTransclusionNode ) {
-			this.transclusionModel.updateTransclusionNode( surfaceModel, this.transclusionNode );
+		if ( this.selectedNode ) {
+			this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
 		} else if ( obj !== null ) {
 			this.transclusionModel.insertTransclusionNode(
 				// HACK: This is trying to place the cursor inside the first content branch node
@@ -150,9 +150,9 @@ ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
 	ve.ui.MWCitationDialog.super.prototype.setup.call( this, data );
 
 	// Initialization
-	if ( this.transclusionNode ) {
+	if ( this.selectedNode ) {
 		this.referenceNode = this.getReferenceNode();
-		if ( this.referenceNode instanceof ve.dm.MWReferenceNode ) {
+		if ( this.referenceNode ) {
 			this.referenceModel = ve.dm.MWReferenceModel.static.newFromReferenceNode(
 				this.referenceNode
 			);
