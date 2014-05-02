@@ -38,7 +38,8 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	this.modules = [
 			'ext.visualEditor.mwcore',
 			'ext.visualEditor.mwlink',
-			'ext.visualEditor.data'
+			'ext.visualEditor.data',
+			'ext.visualEditor.mwreference'
 		]
 		.concat(
 			document.createElementNS && document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ).createSVGRect ?

@@ -40,8 +40,17 @@ OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 
 /* Static Properties */
 ve.init.mw.MobileViewTarget.static.toolbarGroups = [
+	// Style
 	{ 'include': [ 'bold', 'italic' ] },
-	{ 'include': [ 'link' ] }
+	// Link
+	{ 'include': [ 'link' ] },
+	// Cite
+	{
+		'type': 'list',
+		'label': 'Cite',
+		'indicator': 'down',
+		'include': [ { 'group': 'cite' } ]
+	}
 ];
 
 ve.init.mw.MobileViewTarget.static.surfaceCommands = [
