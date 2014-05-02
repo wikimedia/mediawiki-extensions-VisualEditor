@@ -244,7 +244,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		// User interface changes
 		this.transformPage();
 		this.showSpinner();
-		this.hideTableOfContents();
+		this.hideReadOnlyContent();
 		this.mutePageContent();
 		this.mutePageTitle();
 
@@ -273,7 +273,7 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 			}
 			this.restorePage();
 			this.hideSpinner();
-			this.showTableOfContents();
+			this.showReadOnlyContent();
 
 			if ( this.toolbarCancelButton ) {
 				// If deactivate is called before a successful load, then
@@ -1278,11 +1278,9 @@ ve.init.mw.ViewPageTarget.prototype.hidePageContent = function () {
 };
 
 /**
- * Show the table of contents in the view mode.
- *
- * @method
+ * Show elements that didn't have a counter-part in the edit view.
  */
-ve.init.mw.ViewPageTarget.prototype.showTableOfContents = function () {
+ve.init.mw.ViewPageTarget.prototype.showReadOnlyContent = function () {
 	var $toc = $( '#toc' ),
 		$wrap = $toc.parent();
 	if ( $wrap.data( 've.hideTableOfContents' ) ) {
@@ -1290,19 +1288,26 @@ ve.init.mw.ViewPageTarget.prototype.showTableOfContents = function () {
 			$toc.unwrap();
 		} );
 	}
+
+	$( '#contentSub' ).show();
 };
 
 /**
- * Hide the table of contents in the view mode.
+ * Hide elements that don't have a counter-part in the edit view.
  *
- * @method
+ * Call this when puting the page content, so that when we replace the
+ * muted content with the edit surface, everything aligns in the same
+ * place. If things like contentSub and TOC remain visible in mute mode,
+ * there is an additional visual shift that is unpleasant to the user.
  */
-ve.init.mw.ViewPageTarget.prototype.hideTableOfContents = function () {
+ve.init.mw.ViewPageTarget.prototype.hideReadOnlyContent = function () {
 	$( '#toc' )
 		.wrap( '<div>' )
 		.parent()
 			.data( 've.hideTableOfContents', true )
 			.hide();
+
+	$( '#contentSub' ).hide();
 };
 
 /**
