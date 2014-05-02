@@ -282,7 +282,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 		this.applyButton.$element.hide();
 		this.selectButton.$element.hide();
 		this.panels.setItem( this.searchPanel );
-		this.search.getQuery().$input.focus().select();
+		this.search.getQuery().focus().select();
 	} } );
 	this.backButton.connect( this, { 'click': function () {
 		this.backButton.$element.hide();
@@ -333,7 +333,8 @@ ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
-	this.search.clear();
+	this.search.getQuery().setValue( '' );
+
 	this.referenceSurface.destroy();
 	this.referenceSurface = null;
 	this.referenceModel = null;

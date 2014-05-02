@@ -189,7 +189,7 @@ ve.ui.MWMediaInsertDialog.prototype.setup = function ( data ) {
 		// Initialization
 		// This must be done only after there are proper
 		// sources defined
-		this.search.getQuery().$input.focus().select();
+		this.search.getQuery().focus().select();
 		this.search.getResults().selectItem();
 		this.search.getResults().highlightItem();
 	}, this ) );
@@ -199,7 +199,7 @@ ve.ui.MWMediaInsertDialog.prototype.setup = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
-	this.search.clear();
+	this.search.getQuery().setValue( '' );
 
 	// Parent method
 	ve.ui.Dialog.prototype.teardown.call( this, data );

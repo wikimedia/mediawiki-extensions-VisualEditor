@@ -111,7 +111,7 @@ ve.ui.MWExtensionInspector.prototype.ready = function () {
 	ve.ui.Inspector.prototype.ready.call( this );
 
 	// Focus the input
-	this.input.$input.focus().select();
+	this.input.focus().select();
 };
 
 /**
