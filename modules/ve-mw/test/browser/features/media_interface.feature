@@ -1,14 +1,11 @@
-@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@edit_user_page @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Media Interface
 
   Scenario Outline: VisualEditor insert new media
-    Given I am logged in
-      And I am at my user page
-    When I click Edit for VisualEditor
-      And I click Media
+    Given I click Media
       And I enter <search_term> into media Search box
       And I select an Image
-      And I click Save page
+    When I click Save page
       And I click Links Review your changes
     Then <expected_markup_text> should appear in the media diff view
       And I can click the X on the media save box
