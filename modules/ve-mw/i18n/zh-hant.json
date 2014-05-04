@@ -127,6 +127,8 @@
 	"visualeditor-dialog-transclusion-add-param": "加入參數",
 	"visualeditor-dialog-transclusion-add-template": "加入模版",
 	"visualeditor-dialog-transclusion-content": "内容",
+	"visualeditor-dialog-transclusion-deprecated-parameter": "棄用參數",
+	"visualeditor-dialog-transclusion-deprecated-parameter-description": "參數已棄用。$1",
 	"visualeditor-dialog-transclusion-insert-template": "載入模板",
 	"visualeditor-dialog-transclusion-insert-transclusion": "插入嵌入頁面",
 	"visualeditor-dialog-transclusion-loading": "讀取中…",
