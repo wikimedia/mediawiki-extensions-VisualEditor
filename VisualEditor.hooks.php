@@ -312,8 +312,8 @@ class VisualEditorHooks {
 				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-language-ltr.svg",
 				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-language-rtl.svg",
 			),
-			'info-message' => 'visualeditor-preference-experimental-info-link',
-			'discussion-message' => 'visualeditor-preference-experimental-discussion-link',
+			'info-message' => 'visualeditor-preference-language-info-link',
+			'discussion-message' => 'visualeditor-preference-language-discussion-link',
 			'requirements' => array(
 				'betafeatures' => array(
 					'visualeditor-enable',
