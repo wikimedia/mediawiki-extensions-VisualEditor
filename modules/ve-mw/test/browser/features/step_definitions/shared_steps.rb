@@ -2,6 +2,18 @@ Given(/^I am at my user page$/) do
   visit(VisualEditorPage)
 end
 
+Given(/^I am on the (.+) page$/) do |article|
+  article = article.gsub(/ /, '_')
+  visit(ZtargetPage, :using_params => {:article_name => article})
+end
+
+Given(/^I make the text "(.*?)" be selected$/) do |select_text|
+  on(VisualEditorPage).content_element.when_present.click
+  require "watir-webdriver/extensions/select_text"
+  on(VisualEditorPage).content_element.when_present.select_text select_text
+  sleep 1 # turn the sleep on if this test fails with bullet/number in front of string NOT "This is.."
+end
+
 When(/^I click Review and Save$/) do
   on(VisualEditorPage) do |page|
     page.container_disabled_element.when_not_visible.should_not exist

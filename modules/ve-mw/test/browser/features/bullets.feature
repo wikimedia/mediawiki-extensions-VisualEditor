@@ -1,5 +1,9 @@
-@en.wikipedia.beta.wmflabs.org @firefox @login @make_selectable_line @test2.wikipedia.org
+@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Bullets, Numbering
+
+  Background:
+    Given I go to the "Bullets VisualEditor Test" page with content "Bullets VisualEditor Test"
+      And I make the text "Bullets VisualEditor Test" be selected
 
   Scenario Outline: check strings for bullets and numbering
     When I click <control>

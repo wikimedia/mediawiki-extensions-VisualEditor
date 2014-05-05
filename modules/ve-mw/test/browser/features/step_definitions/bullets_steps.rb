@@ -1,3 +1,9 @@
+Given(/^I go to the "(.+)" page with content "(.+)"$/) do |page_title, page_content|
+  @wikitext = page_content
+  on(APIPage).create page_title, page_content
+  step "I am on the #{page_title} page"
+end
+
 Given(/^I close the VE information window$/) do
   pending # express the regexp above with the code you wish you had
 end
@@ -24,9 +30,9 @@ end
 Then(/^a \# is added in front of input string in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "# This "
+      page.diff_view.include? "# #{@wikitext}"
     end
-    page.diff_view.should match Regexp.new(/^\# This is a new line/)
+    page.diff_view.should match Regexp.new(/^\# #{@wikitext}/)
   end
 end
 
@@ -37,9 +43,9 @@ end
 Then(/^a \* is added in front of input string in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "* This "
+      page.diff_view.include? "* #{@wikitext}"
     end
-    page.diff_view.should match Regexp.new(/^\* This is a new line/)
+    page.diff_view.should match Regexp.new(/^\* #{@wikitext}/)
   end
 end
 
@@ -50,18 +56,18 @@ end
 Then(/^a \#\# is added in front of input string in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "## This "
+      page.diff_view.include? "## #{@wikitext}"
     end
-    page.diff_view.should match Regexp.new(/^\#\# This is a new line/)
+    page.diff_view.should match Regexp.new(/^\#\# #{@wikitext}/)
   end
 end
 
 Then(/^a \*\* is added in front of input string in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "** This "
+      page.diff_view.include? "** #{@wikitext}"
     end
-    page.diff_view.should match Regexp.new(/^\*\* This is a new line/)
+    page.diff_view.should match Regexp.new(/^\*\* #{@wikitext}/)
   end
 end
 
@@ -73,9 +79,9 @@ end
 Then(/^nothing is added in front of input string in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "This "
+      page.review_failed_element.when_present.text.include? "No changes to review"
     end
-    page.diff_view.should match Regexp.new(/^This is a new line/)
+    page.review_failed_element.when_present.text.should match "No changes to review"
   end
 end
 
