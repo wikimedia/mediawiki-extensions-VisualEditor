@@ -45,8 +45,7 @@ ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
  */
 ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
 	'continuous': true,
-	'outlined': false,
-	'autoFocus': true
+	'outlined': false
 };
 
 /* Methods */
