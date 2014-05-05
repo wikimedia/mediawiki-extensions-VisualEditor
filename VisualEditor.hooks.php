@@ -221,7 +221,7 @@ class VisualEditorHooks {
 		}
 		$veLink = Linker::link( $title, wfMessage( $veEditSection )->inLanguage( $lang )->text(),
 			$attribs + array( 'class' => 'mw-editsection-visualeditor' ),
-			array( 'veaction' => 'edit', 'section' => $section ),
+			array( 'veaction' => 'edit', 'vesection' => $section ),
 			array( 'noclasses', 'known' )
 		);
 		$sourceLink = Linker::link( $title, wfMessage( $sourceEditSection )->inLanguage( $lang )->text(),
