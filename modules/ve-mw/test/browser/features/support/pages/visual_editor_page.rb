@@ -69,7 +69,7 @@ class VisualEditorPage
 
   # not having beta warning makes iframes off by one
   in_iframe(index: 0) do |frame|
-    span(:add_parameter, text: "Add parameter", frame: frame)
+    span(:add_parameter, text: "Add more information", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert template", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -82,7 +82,7 @@ class VisualEditorPage
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
     text_field(:parameter_box, index: 0, frame: frame)
     div(:parameter_icon, text: "q", frame: frame)
-    a(:remove_parameter, title: "Remove parameter", frame: frame)
+    a(:remove_parameter, title: "Remove field", frame: frame)
     a(:remove_template, title: "Remove template", frame: frame)
     span(:return_to_save, class: "oo-ui-labeledElement-label", text: "Return to save form", frame: frame)
     span(:review_changes, class: "oo-ui-labeledElement-label", text: "Review your changes", frame: frame)
