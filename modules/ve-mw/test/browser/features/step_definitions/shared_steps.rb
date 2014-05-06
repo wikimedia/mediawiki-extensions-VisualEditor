@@ -7,6 +7,12 @@ Given(/^I am on the (.+) page$/) do |article|
   visit(ZtargetPage, :using_params => {:article_name => article})
 end
 
+Given(/^I go to the "(.+)" page with content "(.+)"$/) do |page_title, page_content|
+  @wikitext = page_content
+  on(APIPage).create page_title, page_content
+  step "I am on the #{page_title} page"
+end
+
 Given(/^I make the text "(.*?)" be selected$/) do |select_text|
   on(VisualEditorPage).content_element.when_present.click
   require "watir-webdriver/extensions/select_text"

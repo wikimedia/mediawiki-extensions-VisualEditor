@@ -1,8 +1,3 @@
-Given(/^I go to the "(.+)" page with content "(.+)"$/) do |page_title, page_content|
-  @wikitext = page_content
-  on(APIPage).create page_title, page_content
-  step "I am on the #{page_title} page"
-end
 
 Given(/^I close the VE information window$/) do
   pending # express the regexp above with the code you wish you had
