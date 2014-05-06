@@ -589,6 +589,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/ve.ui.MobileContext.js',
 		),
 		'styles' => array(
+			'lib/ve/modules/ve/ui/styles/ve.ui.MobileSurface.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.MobileContext.css',
 		),
 		'dependencies' => array(
