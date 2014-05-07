@@ -68,7 +68,7 @@ When(/^I click Return to save form$/) do
 end
 
 When(/^I click Review your changes$/) do
-  on(VisualEditorPage).review_changes_element.when_present.click
+  on(VisualEditorPage).review_changes_element.when_present(10).click
 end
 
 When(/^I edit the description of the change$/) do
