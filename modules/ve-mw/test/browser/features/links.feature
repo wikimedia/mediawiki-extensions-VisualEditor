@@ -1,8 +1,10 @@
-@edit_user_page @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Links
 
   Background:
-    Given I click the Link button
+    Given I go to the "Links VisualEditor Test" page with content "Links VisualEditor Test"
+      And I make the text "Links VisualEditor Test" be selected
+      And I click the Link button
       And I can see the Link User Inteface
 
   Scenario: Enter external link
