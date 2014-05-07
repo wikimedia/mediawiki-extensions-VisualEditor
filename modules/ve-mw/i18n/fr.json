@@ -154,7 +154,7 @@
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Vous avez ajouté}} le modèle « $1 » à cette page. Il n’a pas encore de description, mais il peut y avoir des informations sur la <a $2>page du modèle</a>.",
 	"visualeditor-dialog-transclusion-options": "Options",
 	"visualeditor-dialog-transclusion-param-info": "Description du champ",
-	"visualeditor-dialog-transclusion-param-info-missing": "Aucune description disponible du champ",
+	"visualeditor-dialog-transclusion-param-info-missing": "Aucune description disponible sur le champ",
 	"visualeditor-dialog-transclusion-placeholder": "Nouveau modèle",
 	"visualeditor-dialog-transclusion-remove-content": "Supprimer le contenu",
 	"visualeditor-dialog-transclusion-remove-param": "Supprimer le champ",
