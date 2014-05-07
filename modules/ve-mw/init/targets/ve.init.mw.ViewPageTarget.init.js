@@ -258,10 +258,16 @@
 		},
 
 		setupSectionLinks: function () {
-			var $editsections = $( '#mw-content-text .mw-editsection' );
+			var $editsections = $( '#mw-content-text .mw-editsection' ),
+				bodyDir = $( 'body' ).css( 'direction' );
 
-			// match direction to the user interface
-			$editsections.css( 'direction', $( 'body' ).css( 'direction' ) );
+			// Match direction of the user interface
+			// TODO: Why is this needed? It seems to work fine without.
+			if ( $editsections.css( 'direction' ) !== bodyDir ) {
+				// Avoid creating inline style attributes if the inherited value is already correct
+				$editsections.css( 'direction', bodyDir );
+			}
+
 			// The "visibility" css construct ensures we always occupy the same space in the layout.
 			// This prevents the heading from changing its wrap when the user toggles editSourceLink.
 			if ( $editsections.find( '.mw-editsection-visualeditor' ).length === 0 ) {
@@ -326,7 +332,6 @@
 				// init without refresh as that'd initialise for the wrong rev id (bug 50925)
 				// and would preserve the wrong DOM with a diff on top.
 				$editsections
-					.addClass( 'mw-editsection-expanded' )
 					.find( '.mw-editsection-visualeditor' )
 						.click( init.onEditSectionLinkClick )
 				;
