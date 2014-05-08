@@ -3,7 +3,7 @@ Feature: VisualEditor Links
 
   Background:
     Given I go to the "Links VisualEditor Test" page with content "Links VisualEditor Test"
-      And I make the text "Links VisualEditor Test" be selected
+      And I click in the editable part
       And I click the Link button
       And I can see the Link User Inteface
 
