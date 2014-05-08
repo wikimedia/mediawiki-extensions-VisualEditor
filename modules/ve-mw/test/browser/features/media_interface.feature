@@ -1,5 +1,9 @@
-@edit_user_page @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@chrome @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Media Interface
+
+  Background:
+    Given I go to the "Media Interface VisualEditor Test" page with content "Media Interface VisualEditor Test"
+      And I click in the editable part
 
   Scenario Outline: VisualEditor insert new media
     Given I click Media

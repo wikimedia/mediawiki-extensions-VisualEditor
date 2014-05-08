@@ -13,6 +13,10 @@ Given(/^I go to the "(.+)" page with content "(.+)"$/) do |page_title, page_cont
   step "I am on the #{page_title} page"
 end
 
+Given(/^I click in the editable part$/) do
+  on(VisualEditorPage).content_element.when_present.send_keys("")
+end
+
 Given(/^I make the text "(.*?)" be selected$/) do |select_text|
   on(VisualEditorPage).content_element.when_present.click
   require "watir-webdriver/extensions/select_text"
