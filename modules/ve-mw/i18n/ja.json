@@ -4,7 +4,8 @@
 			"Fryed-peach",
 			"Miya",
 			"Penn Station",
-			"Shirayuki"
+			"Shirayuki",
+			"Whym"
 		]
 	},
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
@@ -56,7 +57,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "追加するカテゴリ",
 	"visualeditor-dialog-meta-categories-options": "オプション",
 	"visualeditor-dialog-meta-categories-section": "カテゴリ",
-	"visualeditor-dialog-meta-categories-sortkey-label": "このページのソートキー",
+	"visualeditor-dialog-meta-categories-sortkey-label": "このページの整列順序を決めるとき、次の文字列で代用する",
 	"visualeditor-dialog-meta-languages-code-label": "言語コード",
 	"visualeditor-dialog-meta-languages-label": "言語",
 	"visualeditor-dialog-meta-languages-link-label": "リンクされているページ",
