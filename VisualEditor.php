@@ -1037,14 +1037,22 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css',
-			'modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMoreParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterSearchWidget.css',
 			'modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css',
-			'modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css',
+		),
+		'skinStyles' => array(
+			'default' => array(
+				'modules/ve-mw/ui/themes/apex/pages/ve.ui.MWParameterPage.css',
+				'modules/ve-mw/ui/themes/apex/pages/ve.ui.MWTemplatePage.css',
+			),
+			'minerva' => array(
+				'modules/ve-mw/ui/themes/agora/pages/ve.ui.MWParameterPage.css',
+				'modules/ve-mw/ui/themes/agora/pages/ve.ui.MWTemplatePage.css',
+			),
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
