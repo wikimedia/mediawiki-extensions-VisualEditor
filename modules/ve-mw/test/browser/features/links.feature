@@ -1,4 +1,4 @@
-@en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@chrome @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Links
 
   Background:

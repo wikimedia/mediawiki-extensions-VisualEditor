@@ -1,4 +1,4 @@
-@firefox @login
+@chrome @firefox @login
 Feature: VisualEditor cursor
 
   Background:
