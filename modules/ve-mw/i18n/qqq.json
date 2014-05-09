@@ -73,7 +73,7 @@
 	"visualeditor-dialog-media-type-frameless": "Label for the image type option for frameless.",
 	"visualeditor-dialog-media-type-none": "Label for the image type option for basic image.\n{{Identical|Basic}}",
 	"visualeditor-dialog-media-type-section": "Label for the image type sub-section.\n\nFollowed by the following buttons:\n* {{msg-mw|Visualeditor-dialog-media-type-thumb}}\n* {{msg-mw|Visualeditor-dialog-media-type-frame}}\n* {{msg-mw|Visualeditor-dialog-media-type-frameless}}\n* {{msg-mw|Visualeditor-dialog-media-type-border}}",
-	"visualeditor-dialog-media-type-thumb": "Label for the image type option for thumbnail.",
+	"visualeditor-dialog-media-type-thumb": "Label for the image type option for thumbnail.\n{{Identical|Thumbnail}}",
 	"visualeditor-dialog-meta-advancedsettings-label": "Title for the advanced settings dialog section.\n{{Identical|Advanced settings}}",
 	"visualeditor-dialog-meta-advancedsettings-section": "Label for the advanced settings dialog section.\n{{Identical|Advanced settings}}",
 	"visualeditor-dialog-meta-categories-category": "Title of popup for editing category options.\n{{Identical|Category}}",
