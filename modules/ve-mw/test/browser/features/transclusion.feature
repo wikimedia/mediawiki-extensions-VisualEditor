@@ -1,8 +1,10 @@
-@edit_user_page @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@chrome @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
 Feature: VisualEditor Transclusion
 
   Background:
-    Given I click Transclusion
+    Given I go to the "Transclusion VisualEditor Test" page with content "Transclusion VisualEditor Test"
+      And I click in the editable part
+      And I click Transclusion
       And I can see the Transclusion User Interface
 
   Scenario: Add template
