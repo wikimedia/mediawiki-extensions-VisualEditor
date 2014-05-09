@@ -20,6 +20,7 @@ class VisualEditorPage
   div(:ip_warning, class: "ve-ui-mwNoticesPopupTool-item")
   span(:linksuggestion, text: "http://www.example.com")
   span(:looks_good, class: "oo-ui-labeledElement-label", text: "Looks good to me")
+  div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:newpage_linksuggestion, text: "DoesNotExist")
   div(:page_text, id: "mw-content-text")
   a(:page_title, text: /Page title/)

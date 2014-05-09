@@ -9,13 +9,17 @@ When(/^I enter and save the first edit$/) do
 end
 
 When(/^I enter and save a (.+) edit$/) do |count|
-  sleep 10 # Wait for the save confirmation to disappear
-  edit_text = "Editing with " + Random.rand.to_s
-  instance_variable_set("@#{count}_edit_text", edit_text)
-  step "I click Edit for VisualEditor"
-  step "I insert the text #{edit_text}"
-  step "I click Save page"
-  step "I click Save page another time"
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.medium_dialog_element.visible? == false
+    end
+    edit_text = "Editing with " + Random.rand.to_s
+    instance_variable_set("@#{count}_edit_text", edit_text)
+    step "I click Edit for VisualEditor"
+    step "I insert the text #{edit_text}"
+    step "I click Save page"
+    step "I click Save page another time"
+  end
 end
 
 When(/^I insert the text (.*?)$/) do |input_string|
