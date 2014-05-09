@@ -1,4 +1,4 @@
-@clean @firefox
+@chrome @clean @firefox
 Feature: VisualEditor on a fresh Mediawiki install
 
   Since this test currently uses a hard-coded
