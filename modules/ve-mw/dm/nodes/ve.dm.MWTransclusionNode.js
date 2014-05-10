@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw*/
+
 /**
  * DataModel MediaWiki transclusion node.
  *
@@ -230,13 +232,31 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
 /**
  * Check if transclusion contains only a single template.
  *
- * @param {string} [template] Name of single template, omit to allow any template name
- * @return {boolean} Transclusion only contains a single template
+ * @param {string|string[]} [templates] Names of templates to allow, omit to allow any template name
+ * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
-ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( template ) {
-	var partsList = this.getPartsList();
-	return partsList.length === 1 &&
-		( template === undefined || partsList[0].template === template );
+ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
+	function normalizeTitle( name ) {
+		var title = mw.Title.newFromText( name );
+		return title ? title.getPrefixedText() : name;
+	}
+
+	var i, len, partsList = this.getPartsList();
+	if ( partsList.length !== 1 ) {
+		return false;
+	}
+	if ( templates === undefined ) {
+		return true;
+	}
+	if ( typeof templates === 'string' ) {
+		templates = [ templates ];
+	}
+	for ( i = 0, len = templates.length; i < len; i++ ) {
+		if ( normalizeTitle( partsList[0].template ) === normalizeTitle( templates[i] ) ) {
+			return true;
+		}
+	}
+	return false;
 };
 
 /**
