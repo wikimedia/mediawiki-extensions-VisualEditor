@@ -28,11 +28,18 @@ OO.inheritClass( ve.ui.MWCitationDialogTool, ve.ui.MWReferenceDialogTool );
 
 ve.ui.MWCitationDialogTool.static.group = 'cite';
 
-ve.ui.MWCitationDialogTool.static.template = null;
-
 ve.ui.MWCitationDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
 ve.ui.MWCitationDialogTool.static.requiresRange = true;
+
+/**
+ * Only display tool for single-template transclusions of these templates.
+ *
+ * @property {string|string[]|null}
+ * @static
+ * @inheritable
+ */
+ve.ui.MWCitationDialogTool.static.template = null;
 
 /* Methods */
 
@@ -40,7 +47,7 @@ ve.ui.MWCitationDialogTool.static.requiresRange = true;
  * @inheritdoc
  */
 ve.ui.MWCitationDialogTool.static.isCompatibleWith = function ( model ) {
-	var internalItem, branches, leaves, partsList,
+	var internalItem, branches, leaves,
 		compatible = ve.ui.MWCitationDialogTool.super.static.isCompatibleWith.call( this, model );
 
 	if ( compatible && this.template ) {
@@ -51,9 +58,7 @@ ve.ui.MWCitationDialogTool.static.isCompatibleWith = function ( model ) {
 		if ( branches.length === 1 && branches[0].canContainContent() ) {
 			leaves = branches[0].getChildren();
 			if ( leaves.length === 1 && leaves[0] instanceof ve.dm.MWTransclusionNode ) {
-				partsList = leaves[0].getPartsList();
-				return partsList.length === 1 &&
-					partsList[0].template === this.template;
+				return leaves[0].isSingleTemplate( this.template );
 			}
 		}
 		return false;
