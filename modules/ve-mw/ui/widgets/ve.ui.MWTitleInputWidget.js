@@ -16,7 +16,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @param {number} [namespace] Namespace to prepend to queries not prefixed with ':'
+ * @cfg {number} [namespace] Namespace to prepend to queries not prefixed with ':'
  */
 ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	// Config intialization
