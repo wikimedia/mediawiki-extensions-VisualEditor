@@ -1554,14 +1554,42 @@ ve.init.mw.ViewPageTarget.prototype.tearDownBeforeUnloadHandler = function () {
  * Show dialogs as needed on load.
  */
 ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
+	var usePrefs, prefSaysShow, urlSaysHide;
 	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
+
+		// Only use the preference value if the user is logged-in.
+		// If the user is anonymous, we can't save the preference
+		// after showing the dialog. And we don't intend to use this
+		// preference to influence anonymous users (use the config
+		// variable for that; besides the pref value would be stale if
+		// the wiki uses static html caching).
+		usePrefs = !mw.user.isAnon();
+		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hidebetawelcome' );
+		urlSaysHide = 'vehidebetadialog' in this.currentUri.query;
+
 		if (
-				!( 'vehidebetadialog' in this.currentUri.query ) &&
-				$.cookie( 've-beta-welcome-dialog' ) === null
+				!urlSaysHide &&
+				(
+					prefSaysShow ||
+					$.cookie( 've-beta-welcome-dialog' ) === null
+				)
 			) {
 			this.surface.getDialogs().getWindow( 'betaWelcome' ).open();
 		}
-		$.cookie( 've-beta-welcome-dialog', 1, { 'path': '/', 'expires': 30 } );
+
+		if ( prefSaysShow ) {
+			ve.init.mw.Target.static.apiRequest( {
+				'action': 'options',
+				'token': mw.user.tokens.get( 'optionsToken' ),
+				'change': 'visualeditor-hidebetawelcome=1'
+			} );
+
+		// No need to set a cookie every time for logged-in users that have already
+		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
+		// view of the page via the hiding GET parameter.
+		} else if ( !usePrefs && !urlSaysHide ) {
+			$.cookie( 've-beta-welcome-dialog', 1, { 'path': '/', 'expires': 30 } );
+		}
 	}
 
 	if ( this.surface.getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {

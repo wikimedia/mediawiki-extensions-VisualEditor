@@ -1203,7 +1203,7 @@ $wgDefaultUserOptions['visualeditor-enable'] = 0;
 $wgDefaultUserOptions['visualeditor-betatempdisable'] = 0;
 $wgDefaultUserOptions['visualeditor-enable-experimental'] = 0;
 $wgDefaultUserOptions['visualeditor-enable-language'] = 0;
-
+$wgDefaultUserOptions['visualeditor-hidebetawelcome'] = 0;
 
 /* Configuration */
 
