@@ -279,6 +279,9 @@ class VisualEditorHooks {
 			'label-message' => 'visualeditor-preference-betatempdisable',
 			'section' => 'editing/editor'
 		);
+		$preferences['visualeditor-hidebetawelcome'] = array(
+			'type' => 'api'
+		);
 		return true;
 	}
 

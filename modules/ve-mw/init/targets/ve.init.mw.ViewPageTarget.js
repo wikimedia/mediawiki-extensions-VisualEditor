@@ -1580,9 +1580,9 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 		if ( prefSaysShow ) {
 			ve.init.mw.Target.static.apiRequest( {
 				'action': 'options',
-				'token': mw.user.tokens.get( 'optionsToken' ),
+				'token': mw.user.tokens.get( 'editToken' ),
 				'change': 'visualeditor-hidebetawelcome=1'
-			} );
+			}, { 'type': 'POST' } );
 
 		// No need to set a cookie every time for logged-in users that have already
 		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
