@@ -1103,6 +1103,7 @@ $wgResourceModules += array(
 		),
 		'messages' => array(
 			'visualeditor-annotationbutton-language-tooltip',
+			'visualeditor-dialog-language-auto-direction',
 			'visualeditor-dialog-language-search-title',
 			'visualeditor-languageinspector-title',
 			'visualeditor-languageinspector-block-tooltip',
