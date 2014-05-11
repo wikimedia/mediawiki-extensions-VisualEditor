@@ -114,6 +114,12 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 		'target': '_blank',
 		'label': ve.msg( 'visualeditor-help-label' )
 	} );
+	this.keyboardShortcutsButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'frameless': true,
+		'icon': 'help',
+		'label': ve.msg( 'visualeditor-dialog-command-help-title' )
+	} );
 	this.feedbackButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
 		'frameless': true,
@@ -123,6 +129,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 
 	// Events
 	this.feedbackButton.connect( this, { 'click': 'onFeedbackClick' } );
+	this.keyboardShortcutsButton.connect( this, { 'click': 'onKeyboardShortcutsClick' } );
 
 	// Initialization
 	this.$items
@@ -136,6 +143,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 			this.$( '<div>' )
 				.addClass( 've-ui-mwHelpPopupTool-item' )
 				.append( this.helpButton.$element )
+				.append( this.keyboardShortcutsButton.$element )
 				.append( this.feedbackButton.$element )
 		);
 	if ( ve.version.id !== false ) {
@@ -195,6 +203,16 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 		} );
 	}
 	this.feedback.launch();
+};
+
+/**
+ * Handle clicks on the keyboard shortcuts button.
+ *
+ * @method
+ */
+ve.ui.MWHelpPopupTool.prototype.onKeyboardShortcutsClick = function () {
+	this.hidePopup();
+	ve.ui.commandRegistry.lookup( 'commandHelp' ).execute( this.toolbar.getSurface() );
 };
 
 /* Registration */
