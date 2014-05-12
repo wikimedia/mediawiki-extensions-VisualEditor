@@ -218,6 +218,7 @@
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",
 	"visualeditor-settings-tool": "Ustawienia strony",
 	"visualeditor-toolbar-cancel": "Anuluj",
+	"visualeditor-toolbar-cite-label": "Cytuj",
 	"visualeditor-toolbar-format-tooltip": "Formatowanie akapitu",
 	"visualeditor-toolbar-savedialog": "Zapisz",
 	"visualeditor-toolbar-style-tooltip": "Styl tekstu",

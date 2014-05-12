@@ -221,6 +221,7 @@
 	"visualeditor-settings-tool": "Sidinställningar",
 	"visualeditor-timeout": "Det ser ut som att fullständig redigering inte är tillgängligt för tillfället. Vill du redigera wikitexten istället?",
 	"visualeditor-toolbar-cancel": "Avbryt",
+	"visualeditor-toolbar-cite-label": "Ange källa",
 	"visualeditor-toolbar-format-tooltip": "Formatera stycke",
 	"visualeditor-toolbar-savedialog": "Spara sidan",
 	"visualeditor-toolbar-style-tooltip": "Textstil",
