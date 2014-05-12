@@ -58,6 +58,8 @@ class VisualEditorPage
   div(:visual_editor_toolbar, class: "oo-ui-toolbar-tools")
   span(:transclusion, class: "oo-ui-iconedElement-icon oo-ui-icon-template")
   text_area(:wikitext_editor, id: "wpTextbox1")
+  a(:first_reference, text: "[1]", index: 1)
+  a(:second_reference, text: "[1]", index: 2)
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
@@ -95,6 +97,8 @@ class VisualEditorPage
     div(:title, class: "oo-ui-window-title", frame: frame)
     text_area(:transclusion_textarea, index: 0, frame: frame)
     text_field(:transclusion_textfield, index: 0, frame: frame)
+    span(:existing_reference, text: "Use an existing reference", frame: frame)
+    div(:extension_reference, class: "ve-ui-mwReferenceResultWidget-shield", frame: frame)
   end
 
   # not having beta warning makes iframes off by one
