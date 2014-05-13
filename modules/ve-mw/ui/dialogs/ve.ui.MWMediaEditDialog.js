@@ -621,10 +621,15 @@ ve.ui.MWMediaEditDialog.prototype.applyChanges = function () {
 		// Figure out the default size
 		if ( imageType === 'thumb' || imageType === 'frame' ) {
 			// Default is thumb-default unless the image is originally smaller
-			if ( originalDimensions.width > this.defaultThumbSize ) {
-				attr = this.scalable.getDimensionsFromValue( { 'width': this.defaultThumbSize } );
-			} else {
+			if (
+				originalDimensions &&
+				originalDimensions.width < this.defaultThumbSize
+			) {
 				attr = originalDimensions;
+			} else {
+				attr = this.scalable.getDimensionsFromValue( {
+					'width': this.defaultThumbSize
+				} );
 			}
 		} else {
 			// Default is full size
