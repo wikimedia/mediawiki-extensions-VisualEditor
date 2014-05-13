@@ -782,6 +782,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-content-section',
 			'visualeditor-dialog-media-insert-button',
 			'visualeditor-dialog-media-insert-title',
+			'visualeditor-dialog-media-noresults',
 			'visualeditor-dialog-media-page-advanced',
 			'visualeditor-dialog-media-page-general',
 			'visualeditor-dialog-media-position-center',

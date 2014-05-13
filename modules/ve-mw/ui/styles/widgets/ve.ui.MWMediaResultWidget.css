@@ -87,3 +87,7 @@
 .ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected .oo-ui-labeledElement-label {
 	background-color: #000;
 }
+
+.ve-ui-mwMediaSearchWidget-noresults {
+	padding-top: 1em;
+}
