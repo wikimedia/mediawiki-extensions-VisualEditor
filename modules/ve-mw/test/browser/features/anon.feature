@@ -2,7 +2,7 @@
 Feature: VisualEditor
 
   Scenario: Basic edit
-    Given I am at my user page
+    Given I go to the "Anonymous Edit Test" page with content "Anonymous Edit Test"
     When I edit the page with Editing with
       And I see the IP warning signs
       And I click Save page
