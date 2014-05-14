@@ -143,6 +143,7 @@
 	"visualeditor-saveerror": "פֿעלער בײַם אויפֿהיטן דאטן צום סארווער: $1.",
 	"visualeditor-serializeerror": "פֿעלער בײַם אנלאדן דאטן פון סארווער: $1.",
 	"visualeditor-toolbar-cancel": "אַנולירן",
+	"visualeditor-toolbar-cite-label": "ציטירן",
 	"visualeditor-toolbar-savedialog": "אױפֿהיטן בלאַט",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-wikitext-warning": "איר ניצט וויזועל־רעדאקטירער - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|וויקיטעקסט]] ארבעט נישט דא. קליקט \"{{int:visualeditor-ca-editsource}}\" כדי צו רעדאקטירן דעם בלאט אין וויקיטעקסט – אומגעהיטענע ענדערונגען וועלן פארלוירן גיין.",
