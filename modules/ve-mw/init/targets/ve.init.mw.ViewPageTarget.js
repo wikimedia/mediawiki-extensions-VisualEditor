@@ -1414,6 +1414,9 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
 	$( '#ca-ve-edit' ).addClass( 'selected' );
 
+	// PageTriage bar
+	$( '#mwe-pt-toolbar' ).hide();
+
 	// Hide site notice (if present)
 	$( '#siteNotice:visible' )
 		.addClass( 've-hide' )
@@ -1445,6 +1448,9 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	// In skins having #ca-view (like Vector), select that.
 	$( '#ca-ve-edit' ).removeClass( 'selected' );
 	$( '#ca-view' ).addClass( 'selected' );
+
+	// PageTriage bar
+	$( '#mwe-pt-toolbar' ).show();
 
 	// Make site notice visible again (if present)
 	$( '#siteNotice.ve-hide' )
