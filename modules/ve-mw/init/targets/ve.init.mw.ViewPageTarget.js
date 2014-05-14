@@ -1414,8 +1414,7 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
 	$( '#ca-ve-edit' ).addClass( 'selected' );
 
-	// PageTriage bar
-	$( '#mwe-pt-toolbar' ).hide();
+	mw.hook( 've.activate' ).fire();
 
 	// Hide site notice (if present)
 	$( '#siteNotice:visible' )
@@ -1449,8 +1448,7 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	$( '#ca-ve-edit' ).removeClass( 'selected' );
 	$( '#ca-view' ).addClass( 'selected' );
 
-	// PageTriage bar
-	$( '#mwe-pt-toolbar' ).show();
+	mw.hook( 've.deactivate' ).fire();
 
 	// Make site notice visible again (if present)
 	$( '#siteNotice.ve-hide' )
