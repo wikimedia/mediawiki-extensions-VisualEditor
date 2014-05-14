@@ -46,16 +46,6 @@ OO.inheritClass( ve.dm.MWImageNode, ve.dm.GeneratedContentNode );
 
 OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 
-/* Static Properties */
-
-/**
- * Cache the scalable promises to make sure that we only make one
- * API request per image.
- *
- * @property {Object}
- */
-ve.dm.MWImageNode.static.promiseCache = {};
-
 /* Methods */
 
 /**
@@ -177,36 +167,28 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 	// On the first call set off an async call to update the scalable's
 	// original dimensions from the API.
 	if ( !this.scalablePromise ) {
-		// Check if the promise is already cached
-		if ( !ve.dm.MWImageNode.static.promiseCache[this.getFilename()] ) {
-			this.scalablePromise = ve.init.mw.Target.static.apiRequest(
-				{
-					'action': 'query',
-					'prop': 'imageinfo',
-					'indexpageids': '1',
-					'iiprop': 'size|mediatype',
-					'titles': this.getFilename()
-				},
-				{ 'type': 'POST' }
-			).then( ve.bind( function ( response ) {
-				var page = response.query && response.query.pages[response.query.pageids[0]],
-					info = page && page.imageinfo && page.imageinfo[0];
+		this.scalablePromise = ve.init.mw.Target.static.apiRequest(
+			{
+				'action': 'query',
+				'prop': 'imageinfo',
+				'indexpageids': '1',
+				'iiprop': 'size|mediatype',
+				'titles': this.getFilename()
+			},
+			{ 'type': 'POST' }
+		).then( ve.bind( function ( response ) {
+			var page = response.query && response.query.pages[response.query.pageids[0]],
+				info = page && page.imageinfo && page.imageinfo[0];
 
-				if ( info ) {
-					this.getScalable().setOriginalDimensions( {
-						'width': info.width,
-						'height': info.height
-					} );
-					// Update media type
-					this.mediaType = info.mediatype;
-				}
-			}, this ) ).promise();
-			// Cache the promise
-			ve.dm.MWImageNode.static.promiseCache[this.getFilename()] = this.scalablePromise;
-		} else {
-			// If there is a promise for this image in cache, retrieve it
-			this.scalablePromise = ve.dm.MWImageNode.static.promiseCache[this.getFilename()];
-		}
+			if ( info ) {
+				this.getScalable().setOriginalDimensions( {
+					'width': info.width,
+					'height': info.height
+				} );
+				// Update media type
+				this.mediaType = info.mediatype;
+			}
+		}, this ) ).promise();
 	}
 	return this.scalablePromise;
 };
