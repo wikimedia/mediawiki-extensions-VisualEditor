@@ -28,7 +28,12 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	// Properties
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgArticleId', 0 ) !== 0;
+
+	// Sometimes we actually don't want to send a useful oldid
+	// if we do, PostEdit will give us a 'page restored' message
+	this.requestedRevId = revisionId;
 	this.revid = revisionId || mw.config.get( 'wgCurRevisionId' );
+
 	this.restoring = !!revisionId;
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
@@ -1227,7 +1232,7 @@ ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
 		params = ve.extendObject( {
 			'format': 'text/x-wiki',
 			'model': 'wikitext',
-			'oldid': this.revid,
+			'oldid': this.requestedRevId,
 			'wpStarttime': this.startTimeStamp,
 			'wpEdittime': this.baseTimeStamp,
 			'wpTextbox1': wikitext,
