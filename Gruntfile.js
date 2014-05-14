@@ -42,9 +42,10 @@ module.exports = function ( grunt ) {
 		},
 		buildloader: {
 			egiframe: {
-				target: '.docs/eg-iframe.html',
+				targetFile: '.docs/eg-iframe.html',
 				template: '.docs/eg-iframe.html.template',
 				modules: modules,
+				load: [ 'visualEditor.desktop' ],
 				pathPrefix: 'lib/ve/',
 				indent: '\t\t'
 			}
