@@ -34,6 +34,13 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.titles = {};
 	this.queryMediaSourcesCallback = ve.bind( this.queryMediaSources, this );
 
+	this.sourceCounter = 0;
+
+	this.$noItemsMessage = this.$( '<div>' )
+		.addClass( 've-ui-mwMediaSearchWidget-noresults' )
+		.text( ve.msg( 'visualeditor-dialog-media-noresults' ) )
+		.appendTo( this.$query );
+
 	// Events
 	this.$results.on( 'scroll', ve.bind( this.onResultsScroll, this ) );
 
@@ -103,6 +110,10 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 		return;
 	}
 
+	// Reset counter
+	this.sourceCounter = 0;
+	this.$noItemsMessage.hide();
+
 	for ( i = 0, len = this.sources.length; i < len; i++ ) {
 		source = this.sources[i];
 		// If we don't have either 'apiurl' or 'scriptDirUrl'
@@ -159,6 +170,17 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 ve.ui.MWMediaSearchWidget.prototype.onMediaQueryAlways = function ( source ) {
 	source.request = null;
 	this.query.popPending();
+
+	// Count this source as done
+	this.sourceCounter++;
+
+	// Check if all sources are done
+	// TODO use $.when() instead (bug 65321)
+	if ( this.sourceCounter >= this.sources.length ) {
+		if ( this.results.getItems().length === 0 ) {
+			this.$noItemsMessage.show();
+		}
+	}
 };
 
 /**
