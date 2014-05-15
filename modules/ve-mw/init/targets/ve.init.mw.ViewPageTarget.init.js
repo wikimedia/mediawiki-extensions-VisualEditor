@@ -156,7 +156,6 @@
 		setupTabs: function () {
 			// HACK: Remove this when the Education Program offers a proper way to detect and disable.
 			if (
-				mw.config.get( 'wgNamespaceIds' ).hasOwnProperty( 'education_program' ) &&
 				// HACK: Work around jscs.requireCamelCaseOrUpperCaseIdentifiers
 				mw.config.get( 'wgNamespaceIds' )[ true && 'education_program' ] === mw.config.get( 'wgNamespaceNumber' )
 			) {
