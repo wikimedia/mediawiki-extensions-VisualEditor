@@ -18,7 +18,6 @@
 ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	var prefName,
 		prefValue,
-		browserWhitelisted,
 		currentUri = new mw.Uri(),
 		conf = mw.config.get( 'wgVisualEditorConfig' );
 
@@ -85,11 +84,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		}
 	}
 
-	browserWhitelisted = (
-		'vewhitelist' in currentUri.query ||
-		$.client.test( ve.init.mw.ViewPageTarget.compatibility.whitelist, null, true )
-	);
-
 	// Events
 	this.connect( this, {
 		'save': 'onSave',
@@ -111,17 +105,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		'serializeError': 'onSerializeError',
 		'sanityCheckComplete': 'updateToolbarSaveButtonState'
 	} );
-
-	if ( mw.config.get( 'wgTranslatePageTranslation' ) === 'source' ) {
-		// Warn users if they're on a source of the Page Translation feature
-		this.localNoticeMessages.push( 'visualeditor-pagetranslationwarning' );
-	}
-
-	if ( !browserWhitelisted ) {
-		// Show warning in unknown browsers that pass the support test
-		// Continue at own risk.
-		this.localNoticeMessages.push( 'visualeditor-browserwarning' );
-	}
 
 	if ( currentUri.query.venotify ) {
 		// The following messages can be used here:
@@ -244,6 +227,28 @@ ve.init.mw.ViewPageTarget.prototype.setUpToolbar = function () {
 };
 
 /**
+ * Set up notices for things like unknown browsers.
+ * Needs to be done on each activation because localNoticeMessages is cleared in clearState
+ *
+ * @method
+ */
+ve.init.mw.ViewPageTarget.prototype.setupLocalNoticeMessages = function () {
+	if ( mw.config.get( 'wgTranslatePageTranslation' ) === 'source' ) {
+		// Warn users if they're on a source of the Page Translation feature
+		this.localNoticeMessages.push( 'visualeditor-pagetranslationwarning' );
+	}
+
+	if ( !(
+		'vewhitelist' in this.currentUri.query ||
+		$.client.test( ve.init.mw.ViewPageTarget.compatibility.whitelist, null, true )
+	) ) {
+		// Show warning in unknown browsers that pass the support test
+		// Continue at own risk.
+		this.localNoticeMessages.push( 'visualeditor-browserwarning' );
+	}
+};
+
+/**
  * Switch to edit mode.
  *
  * @method
@@ -258,6 +263,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.hideReadOnlyContent();
 		this.mutePageContent();
 		this.mutePageTitle();
+		this.setupLocalNoticeMessages();
 
 		this.saveScrollPosition();
 
