@@ -73,7 +73,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	);
 	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
 		'$': this.$,
-		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ),
+		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' )
 	} );
 	this.redirectTargetField = new OO.ui.FieldLayout(
 		this.redirectTargetInput,

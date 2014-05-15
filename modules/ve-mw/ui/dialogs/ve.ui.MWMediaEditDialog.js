@@ -207,7 +207,7 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 			'$': this.$,
 			'icon': 'align-float-right',
 			'label': ve.msg( 'visualeditor-dialog-media-position-right' )
-		} ),
+		} )
 	], 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {

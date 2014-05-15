@@ -430,7 +430,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 					.prop( 'checked' );
 			mw.page.watch.updateWatchLink(
 				$( '#ca-watch a, #ca-unwatch a' ),
-				watchChecked ? 'unwatch': 'watch'
+				watchChecked ? 'unwatch' : 'watch'
 			);
 		}
 

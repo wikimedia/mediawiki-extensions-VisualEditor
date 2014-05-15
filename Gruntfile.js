@@ -35,7 +35,7 @@ module.exports = function ( grunt ) {
 								'Tests'
 							]
 						},
-						include: ['UnicodeJS', 'OOJS UI', 'Upstream']
+						include: [ 'UnicodeJS', 'OOJS UI', 'Upstream' ]
 					}
 				]
 			}
@@ -71,7 +71,7 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'modules/*/**/*.css'
-			],
+			]
 		},
 		banana: {
 			all: 'modules/ve-{mw,wmf}/i18n/'
@@ -82,12 +82,12 @@ module.exports = function ( grunt ) {
 				'<%= jshint.all %>',
 				'<%= csslint.all %>'
 			],
-			tasks: ['test']
+			tasks: 'test'
 		}
 	} );
 
-	grunt.registerTask( 'build', ['jsduckcatconfig', 'buildloader'] );
-	grunt.registerTask( 'lint', ['jshint', 'jscs', 'csslint', 'banana' ] );
-	grunt.registerTask( 'test', ['build', 'lint'] );
-	grunt.registerTask( 'default', ['test'] );
+	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
+	grunt.registerTask( 'lint', [ 'jshint', 'jscs', 'csslint', 'banana' ] );
+	grunt.registerTask( 'test', [ 'build', 'lint' ] );
+	grunt.registerTask( 'default', 'test' );
 };

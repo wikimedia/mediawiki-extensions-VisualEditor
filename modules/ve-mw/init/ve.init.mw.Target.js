@@ -286,7 +286,7 @@ ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
 		'dataType': 'json',
 		'type': 'GET',
 		// Wait up to 100 seconds
-		'timeout': 100000,
+		'timeout': 100000
 	}, settings );
 
 	// If multipart/form-data has been requested and emulation is possible, emulate it

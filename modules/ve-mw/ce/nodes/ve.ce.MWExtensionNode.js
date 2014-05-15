@@ -69,7 +69,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 		'action': 'visualeditor',
 		'paction': 'parsefragment',
 		'page': mw.config.get( 'wgRelevantPageName' ),
-		'wikitext': wikitext,
+		'wikitext': wikitext
 	}, { 'type': 'POST' } )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );
