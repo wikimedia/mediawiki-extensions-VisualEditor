@@ -67,6 +67,7 @@
 	"visualeditor-dialog-media-content-section": "Légende",
 	"visualeditor-dialog-media-insert-button": "Insérer le média",
 	"visualeditor-dialog-media-insert-title": "Insérer un média",
+	"visualeditor-dialog-media-noresults": "Aucun résultat trouvé.",
 	"visualeditor-dialog-media-page-advanced": "Paramètres avancés",
 	"visualeditor-dialog-media-page-general": "Paramètres généraux",
 	"visualeditor-dialog-media-position-center": "Centre",
@@ -248,6 +249,8 @@
 	"visualeditor-toolbar-style-tooltip": "Style du texte",
 	"visualeditor-usernamespacepagelink": "Project:Espace de noms utilisateur",
 	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer ?",
+	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
+	"visualeditor-viewpage-savewarning-keep": "Continuer l’édition",
 	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|code wiki]] ne fonctionne pas ici. Cliquez sur « {{MediaWiki:visualeditor-ca-editsource}} » pour modifier le code de la page — les modifications non sauvegardées seront perdues.",
 	"visualeditor-wikitext-warning-link": "Help:Balisage wiki",
 	"visualeditor-wikitext-warning-title": "Balisage wikitexte détecté"

@@ -45,6 +45,7 @@
 	"visualeditor-dialog-media-content-section": "Popisek",
 	"visualeditor-dialog-media-insert-button": "Vložit média",
 	"visualeditor-dialog-media-insert-title": "Vložit média",
+	"visualeditor-dialog-media-noresults": "Nebyly nalezeny žádné výsledky.",
 	"visualeditor-dialog-media-page-advanced": "Pokročilá nastavení",
 	"visualeditor-dialog-media-page-general": "Obecná nastavení",
 	"visualeditor-dialog-media-position-center": "Střed",
@@ -226,6 +227,8 @@
 	"visualeditor-toolbar-style-tooltip": "Styl textu",
 	"visualeditor-usernamespacepagelink": "Project:Jmenný prostor Uživatel",
 	"visualeditor-viewpage-savewarning": "Opravdu se chcete vrátit k režimu zobrazení bez uložení?",
+	"visualeditor-viewpage-savewarning-discard": "Zahodit úpravy",
+	"visualeditor-viewpage-savewarning-keep": "Pokračovat v editování",
 	"visualeditor-wikitext-warning": "Používáte VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kliknutím na „{{int:visualeditor-ca-editsource}}“ můžete stránku editovat v režimu wikitextu – neuložené změny budou ztraceny.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu"

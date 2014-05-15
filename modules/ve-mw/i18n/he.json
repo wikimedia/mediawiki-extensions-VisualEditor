@@ -48,6 +48,7 @@
 	"visualeditor-dialog-media-content-section": "כותרת",
 	"visualeditor-dialog-media-insert-button": "הוספת מדיה",
 	"visualeditor-dialog-media-insert-title": "הוספת מדיה",
+	"visualeditor-dialog-media-noresults": "לא נמצאו תוצאות.",
 	"visualeditor-dialog-media-page-advanced": "הגדרות מתקדמות",
 	"visualeditor-dialog-media-page-general": "הגדרות כלליות",
 	"visualeditor-dialog-media-position-center": "מרכז",
@@ -231,6 +232,8 @@
 	"visualeditor-toolbar-style-tooltip": "סגנוּן טקסט",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-viewpage-savewarning": "האם ברצונך לשוב למצב תצוגה ללא שמירה?",
+	"visualeditor-viewpage-savewarning-discard": "ביטול העריכות",
+	"visualeditor-viewpage-savewarning-keep": "המשך עריכה",
 	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. יש ללחוץ על \"{{MediaWiki:visualeditor-ca-editsource}}\" כדי לערוך את הדף במצב קוד ויקי – שינויים שלא נשמרו יאבדו.",
 	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "נראה שיש כאן קוד ויקי"

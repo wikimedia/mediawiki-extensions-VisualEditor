@@ -46,6 +46,7 @@
 	"visualeditor-dialog-media-content-section": "Beschriftung",
 	"visualeditor-dialog-media-insert-button": "Medium einfügen",
 	"visualeditor-dialog-media-insert-title": "Medium einfügen",
+	"visualeditor-dialog-media-noresults": "Keine Ergebnisse gefunden.",
 	"visualeditor-dialog-media-page-advanced": "Erweiterte Einstellungen",
 	"visualeditor-dialog-media-page-general": "Allgemeine Einstellungen",
 	"visualeditor-dialog-media-position-center": "Zentriert",
@@ -227,6 +228,8 @@
 	"visualeditor-toolbar-style-tooltip": "Text gestalten",
 	"visualeditor-usernamespacepagelink": "Project:Benutzernamensraum",
 	"visualeditor-viewpage-savewarning": "Bist du sicher, dass du zum Ansichtsmodus wechseln möchtest, ohne vorher zu speichern?",
+	"visualeditor-viewpage-savewarning-discard": "Bearbeitungen verwerfen",
+	"visualeditor-viewpage-savewarning-keep": "Weiter bearbeiten",
 	"visualeditor-wikitext-warning": "Du benutzt VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Klicke auf „{{int:visualeditor-ca-editsource}}“, um die Seite im Wikitextmodus zu bearbeiten. Ungespeicherte Änderungen gehen dabei verloren.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"

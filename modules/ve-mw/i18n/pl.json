@@ -51,6 +51,7 @@
 	"visualeditor-dialog-media-content-section": "Podpis",
 	"visualeditor-dialog-media-insert-button": "Wstaw multimedia",
 	"visualeditor-dialog-media-insert-title": "Wstaw multimedia",
+	"visualeditor-dialog-media-noresults": "Nie znaleziono wyników.",
 	"visualeditor-dialog-media-page-advanced": "Ustawienia zaawansowane",
 	"visualeditor-dialog-media-page-general": "Ustawienia podstawowe",
 	"visualeditor-dialog-media-position-center": "Wyśrodkowane",
@@ -224,6 +225,8 @@
 	"visualeditor-toolbar-style-tooltip": "Styl tekstu",
 	"visualeditor-usernamespacepagelink": "Project:Strona użytkownika",
 	"visualeditor-viewpage-savewarning": "Czy na pewno chcesz powrócić do trybu czytania bez zapisania zmian?",
+	"visualeditor-viewpage-savewarning-discard": "Odrzuć zmiany",
+	"visualeditor-viewpage-savewarning-keep": "Kontynuuj edycję",
 	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki wikikodu]] tu nie działają. Kliknij „{{MediaWiki:visualeditor-ca-editsource}}” żeby zacząć edytować tę stronę w trybie kodu wiki – niezapisane zmiany zostaną utracone.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki wikikodu"

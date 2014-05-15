@@ -50,6 +50,7 @@
 	"visualeditor-dialog-media-content-section": "说明",
 	"visualeditor-dialog-media-insert-button": "插入媒体文件",
 	"visualeditor-dialog-media-insert-title": "插入媒体文件",
+	"visualeditor-dialog-media-noresults": "无搜索结果。",
 	"visualeditor-dialog-media-page-advanced": "高级设置",
 	"visualeditor-dialog-media-page-general": "常规设置",
 	"visualeditor-dialog-media-position-center": "居中",
@@ -231,6 +232,8 @@
 	"visualeditor-toolbar-style-tooltip": "样式文本",
 	"visualeditor-usernamespacepagelink": "Project:用户名字空间",
 	"visualeditor-viewpage-savewarning": "您确定要放弃保存回到浏览模式吗？",
+	"visualeditor-viewpage-savewarning-discard": "撤销编辑",
+	"visualeditor-viewpage-savewarning-keep": "继续编辑",
 	"visualeditor-wikitext-warning": "您正在使用可视化编辑器 - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wiki文本]]不适用于此。点击“{{MediaWiki:visualeditor-ca-editsource}}”在wiki文本模式下编辑该页面，未保存的更改将会丢失。",
 	"visualeditor-wikitext-warning-link": "Help:Wiki标记",
 	"visualeditor-wikitext-warning-title": "检测到wiki文本标记"

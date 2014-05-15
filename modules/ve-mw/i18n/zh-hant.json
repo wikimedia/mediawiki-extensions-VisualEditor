@@ -49,6 +49,7 @@
 	"visualeditor-dialog-media-content-section": "標題",
 	"visualeditor-dialog-media-insert-button": "插入媒體",
 	"visualeditor-dialog-media-insert-title": "插入媒體",
+	"visualeditor-dialog-media-noresults": "無搜尋結果",
 	"visualeditor-dialog-media-page-advanced": "進階設定",
 	"visualeditor-dialog-media-page-general": "一般設定",
 	"visualeditor-dialog-media-position-center": "置中",
@@ -230,6 +231,8 @@
 	"visualeditor-toolbar-style-tooltip": "文字樣式",
 	"visualeditor-usernamespacepagelink": "Project:使用者名字空間",
 	"visualeditor-viewpage-savewarning": "您確定要放棄儲存並回到檢視模式嗎？",
+	"visualeditor-viewpage-savewarning-discard": "取消編輯",
+	"visualeditor-viewpage-savewarning-keep": "繼續編輯",
 	"visualeditor-wikitext-warning": "您正使用 VisualEditor - 目前不支援 [[{{MediaWiki:visualeditor-wikitext-warning-link}}|WikiText]] 。 可點選 \"{{int:visualeditor-ca-editsource}}\" 使用 WikiText 模式編輯頁面，並且放棄尚未儲存的變更。",
 	"visualeditor-wikitext-warning-link": "Help:Wiki 標記語言",
 	"visualeditor-wikitext-warning-title": "偵測到 Wiki 標記語言"
