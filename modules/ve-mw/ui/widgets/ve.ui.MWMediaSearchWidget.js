@@ -181,6 +181,12 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryAlways = function ( source ) {
 			this.$noItemsMessage.show();
 		}
 	}
+
+	// Even if the whole list of sources didn't finish yet
+	// if there are results, make the message go away
+	if ( this.results.getItems().length > 0 ) {
+		this.$noItemsMessage.hide();
+	}
 };
 
 /**
