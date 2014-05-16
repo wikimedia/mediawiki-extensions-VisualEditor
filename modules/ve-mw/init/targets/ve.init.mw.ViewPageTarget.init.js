@@ -217,6 +217,11 @@
 				}
 			}
 
+			// If the edit tab is hidden, remove it.
+			if ( !( init.isAvailable && userPrefEnabled ) ) {
+				$caVeEdit.remove();
+			}
+
 			// Alter the edit tab (#ca-edit)
 			if ( $( '#ca-view-foreign' ).length ) {
 				if ( tabMessages[action + 'localdescriptionsource'] !== null ) {
