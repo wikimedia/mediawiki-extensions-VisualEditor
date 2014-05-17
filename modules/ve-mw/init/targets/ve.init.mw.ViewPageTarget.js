@@ -1514,8 +1514,16 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
  * @param {string} categoriesHtml Rendered categories HTML from server
  */
 ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml ) {
-	var $content = $( $.parseHTML( html ) );
-	mw.hook( 'wikipage.content' ).fire( $( '#mw-content-text' ).empty().append( $content ) );
+	var $content = $( $.parseHTML( html ) ), $editableContent;
+
+	if ( $( '#mw-imagepage-content' ).length ) {
+		// On file pages, we only want to replace the (local) description.
+		$editableContent = $( '#mw-imagepage-content' );
+	} else {
+		$editableContent = $( '#mw-content-text' );
+	}
+
+	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
 	$( '#catlinks' ).replaceWith( categoriesHtml );
 };
 
