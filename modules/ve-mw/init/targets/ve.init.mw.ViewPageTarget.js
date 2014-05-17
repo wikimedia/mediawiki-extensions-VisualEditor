@@ -890,19 +890,27 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.editSource = function () {
-	var doc = this.surface.getModel().getDocument();
+	var confirmDialog = this.surface.dialogs.getWindow( 'confirm' );
 
 	this.$document.css( 'opacity', 0.5 );
 
-	if ( !confirm( ve.msg( 'visualeditor-mweditmodesource-warning' ) ) ) {
-		this.$document.css( 'opacity', 1 );
-		return;
-	}
-	// Get Wikitext from the DOM
-	this.serialize(
-		this.docToSave || ve.dm.converter.getDomFromModel( doc ),
-		ve.bind( this.submitWithSaveFields, this, { 'wpDiff': 1, 'veswitched': 1 } )
-	);
+	confirmDialog.open( {
+		'prompt': ve.msg( 'visualeditor-mweditmodesource-warning' ),
+		'okLabel': ve.msg( 'visualeditor-mweditmodesource-warning-switch' ),
+		'cancelLabel': ve.msg( 'visualeditor-mweditmodesource-warning-cancel' )
+	} );
+	confirmDialog.connect( this, {
+		'ok': function () {
+			// Get Wikitext from the DOM
+			this.serialize(
+				this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
+				ve.bind( this.submitWithSaveFields, this, { 'wpDiff': 1, 'veswitched': 1 } )
+			);
+		},
+		'cancel': function () {
+			this.$document.css( 'opacity', 1 );
+		}
+	} );
 };
 
 /**
