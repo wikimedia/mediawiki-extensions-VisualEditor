@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lévi"
+			"Lévi",
+			"Gloria sah"
 		]
 	},
 	"tooltip-ca-createsource": "Fà al côdis surzéia ed cla pàgina ché.",
@@ -12,18 +13,19 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor l' é al livèl 'beta'. Ét prés incuntrêr erōr int al prugrâma e soquânti pêrti 'd la pàgina a prén mia èser cambîedi. Cléca só \"{{int:visualeditor-ca-editsource}}\" per pasêr a la manēra wikitèst – al mudéfichi mia salvêdi andrân pêrsi.",
 	"visualeditor-browserwarning": "A t'é druvêr un navigadōr che, p'r adès, al pōl mìa èser druvê per lavurêr bèin cun al VisualEditor.",
+	"visualeditor-ca-createlocaldescriptionsource": "Śòunta na surgìnt ed descrisiòun lochèla",
 	"visualeditor-ca-createsource": "Invèinta la surzéia.",
+	"visualeditor-ca-editlocaldescriptionsource": "Mudéfica la surzéia a l'urégin",
 	"visualeditor-ca-editsource": "Mudéfica la surzéia.",
 	"visualeditor-ca-editsource-section": "mudéfica la surzéia.",
-	"visualeditor-ca-editlocaldescriptionsource": "Mudéfica la surzéia a l'urégin",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Categoréi",
-	"visualeditor-cite-tool-name-web": "Sît internèt",
 	"visualeditor-cite-tool-name-book": "Léber",
-	"visualeditor-cite-tool-name-news": "Giurnêl",
 	"visualeditor-cite-tool-name-journal": "Publicasiòun",
+	"visualeditor-cite-tool-name-news": "Nuvitê",
+	"visualeditor-cite-tool-name-web": "Sît internèt",
 	"visualeditor-desc": "Editōr a vésta per MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Cunténva.",
@@ -34,6 +36,7 @@
 	"visualeditor-dialog-media-content-section": "Didascaléia",
 	"visualeditor-dialog-media-insert-button": "Mèt dèinter al file multimediêl",
 	"visualeditor-dialog-media-insert-title": "Mèt dèinter al file multimediêl",
+	"visualeditor-dialog-media-noresults": "Mìa catê nisùn risultê.",
 	"visualeditor-dialog-media-page-advanced": "Impustasiòun pió particulêri",
 	"visualeditor-dialog-media-page-general": "Impustasiòun generêli",
 	"visualeditor-dialog-media-position-center": "Cèinter",
@@ -118,9 +121,6 @@
 	"visualeditor-mweditmodesource-warning": "T'é drē pasêr a la mudéfica 'd la surzéia. Pusébili mudéfichi fâti a cól ducumèint ché a gnirân mantgnûdi, mó an 't pré mìa turnêr al VisualEditor sènsa salvêr o turnêr a carghêr la pàgina. Vōt cuntinvêr?",
 	"visualeditor-mwgalleryinspector-title": "Galerèia",
 	"visualeditor-mwhieroinspector-title": "Gerliféch",
-	"visualeditor-notification-created": "La pàgina $1 l'é stêda fâta.",
-	"visualeditor-notification-restored": "La pàgina $1 l'é stêda arnuvêda.",
-	"visualeditor-notification-saved": "Al mudéfichi fâti a $1 în stêdi salvêdi.",
 	"visualeditor-parameter-input-placeholder": "Nòm ed la mzûra.",
 	"visualeditor-parameter-search-no-unused": "Sèinsa amzûri mìa druvêdi.",
 	"visualeditor-parameter-search-unknown": "Amzûra mìa cgnusûda.",

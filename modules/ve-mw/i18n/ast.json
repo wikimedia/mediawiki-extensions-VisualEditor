@@ -37,6 +37,7 @@
 	"visualeditor-dialog-media-content-section": "Pie",
 	"visualeditor-dialog-media-insert-button": "Inxertar multimedia",
 	"visualeditor-dialog-media-insert-title": "Inxertar multimedia",
+	"visualeditor-dialog-media-noresults": "Nun s'alcontraron resultaos.",
 	"visualeditor-dialog-media-page-advanced": "Configuración avanzada",
 	"visualeditor-dialog-media-page-general": "Configuración xeneral",
 	"visualeditor-dialog-media-position-center": "Centrada",
@@ -218,6 +219,8 @@
 	"visualeditor-toolbar-style-tooltip": "Dar estilu al testu",
 	"visualeditor-usernamespacepagelink": "Project:Espaciu de nomes d'usuariu",
 	"visualeditor-viewpage-savewarning": "¿Seguro que quies volver al mou de visualización ensin guardar primero?",
+	"visualeditor-viewpage-savewarning-discard": "Descartar ediciones",
+	"visualeditor-viewpage-savewarning-keep": "Siguir editando",
 	"visualeditor-wikitext-warning": "Ta usando VisualEditor - el[[{{MediaWiki:visualeditor-wikitext-warning-link}}|testu wiki]] equí nun funciona. Calque «{{MediaWiki:visualeditor-ca-editsource}}» pa editar la páxina en mou de testu wiki – perderánse los cambios ensin guardar.",
 	"visualeditor-wikitext-warning-link": "Help:Testu wiki",
 	"visualeditor-wikitext-warning-title": "Detectaronse marques de testu wiki"

@@ -20,7 +20,8 @@
 			"Kim Bruning",
 			"Niknetniko",
 			"Arent",
-			"McDutchie"
+			"McDutchie",
+			"Gloria sah"
 		]
 	},
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
@@ -220,6 +221,7 @@
 	"visualeditor-settings-tool": "Pagina-instellingen",
 	"visualeditor-timeout": "De visuele tekstverwerker is op dit moment niet beschikbaar. Wilt u in bronmodus bewerken?",
 	"visualeditor-toolbar-cancel": "Annuleren",
+	"visualeditor-toolbar-cite-label": "Citeren",
 	"visualeditor-toolbar-format-tooltip": "Paragraaf maken",
 	"visualeditor-toolbar-savedialog": "Pagina opslaan",
 	"visualeditor-toolbar-style-tooltip": "Tekst opmaken",

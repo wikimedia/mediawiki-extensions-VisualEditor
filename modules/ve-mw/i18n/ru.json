@@ -53,6 +53,7 @@
 	"visualeditor-dialog-media-content-section": "Подпись",
 	"visualeditor-dialog-media-insert-button": "Вставить медиа-файл",
 	"visualeditor-dialog-media-insert-title": "Вставка медиа-файла",
+	"visualeditor-dialog-media-noresults": "Ничего не найдено.",
 	"visualeditor-dialog-media-page-advanced": "Дополнительные настройки",
 	"visualeditor-dialog-media-page-general": "Основные настройки",
 	"visualeditor-dialog-media-position-center": "По центру",
@@ -234,6 +235,8 @@
 	"visualeditor-toolbar-style-tooltip": "Стиль текста",
 	"visualeditor-usernamespacepagelink": "Project:Личное пространство",
 	"visualeditor-viewpage-savewarning": "Вы уверены, что хотите вернуться в режим просмотра, не сохранив изменения?",
+	"visualeditor-viewpage-savewarning-discard": "Отменить правки",
+	"visualeditor-viewpage-savewarning-keep": "Продолжить редактирование",
 	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. Нажмите «{{MediaWiki:visualeditor-ca-editsource}}» для редактирования страницы в режиме вики-разметки. Несохранённые изменения будут потеряны.",
 	"visualeditor-wikitext-warning-link": "Help:Вики-разметка",
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка"

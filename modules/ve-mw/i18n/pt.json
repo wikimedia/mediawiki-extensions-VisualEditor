@@ -47,6 +47,7 @@
 	"visualeditor-dialog-media-content-section": "Legenda",
 	"visualeditor-dialog-media-insert-button": "Inserir média",
 	"visualeditor-dialog-media-insert-title": "Inserir média",
+	"visualeditor-dialog-media-noresults": "Não foram encontrados resultados.",
 	"visualeditor-dialog-media-page-advanced": "Configurações avançadas",
 	"visualeditor-dialog-media-page-general": "Configurações gerais",
 	"visualeditor-dialog-media-position-center": "Centro",
@@ -228,6 +229,8 @@
 	"visualeditor-toolbar-style-tooltip": "Estilo de texto",
 	"visualeditor-usernamespacepagelink": "Project:Domínio utilizador",
 	"visualeditor-viewpage-savewarning": "Tem a certeza de que deseja voltar para a página sem gravar a edição?",
+	"visualeditor-viewpage-savewarning-discard": "Ignorar alterações",
+	"visualeditor-viewpage-savewarning-keep": "Continuar a editar",
 	"visualeditor-wikitext-warning": "Está a utilizar o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|códigos wiki]] não funcionam aqui. Clique em \"{{int:visualeditor-ca-editsource}}\" para editar o código-fonte desta página – alterações que não foram gravadas serão perdidas.",
 	"visualeditor-wikitext-warning-link": "Help:Marcação wiki",
 	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado"

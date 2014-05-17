@@ -7,7 +7,8 @@
 			"LFM",
 			"아라",
 			"Jskang",
-			"Priviet"
+			"Priviet",
+			"고기랑"
 		]
 	},
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
@@ -39,6 +40,7 @@
 	"visualeditor-dialog-media-content-section": "설명",
 	"visualeditor-dialog-media-insert-button": "미디어 넣기",
 	"visualeditor-dialog-media-insert-title": "미디어 넣기",
+	"visualeditor-dialog-media-noresults": "결과가 없습니다.",
 	"visualeditor-dialog-media-page-advanced": "고급 설정",
 	"visualeditor-dialog-media-page-general": "일반 설정",
 	"visualeditor-dialog-media-position-center": "중앙",
@@ -203,11 +205,14 @@
 	"visualeditor-serializeerror": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1.",
 	"visualeditor-settings-tool": "문서 설정",
 	"visualeditor-toolbar-cancel": "취소",
+	"visualeditor-toolbar-cite-label": "인용",
 	"visualeditor-toolbar-format-tooltip": "형식 문단",
 	"visualeditor-toolbar-savedialog": "문서 저장",
 	"visualeditor-toolbar-style-tooltip": "스타일 텍스트",
 	"visualeditor-usernamespacepagelink": "Project:사용자 이름공간",
 	"visualeditor-viewpage-savewarning": "먼저 저장하지 않고 보기 모드로 돌아가겠습니까?",
+	"visualeditor-viewpage-savewarning-discard": "편집 버리기",
+	"visualeditor-viewpage-savewarning-keep": "편집 계속",
 	"visualeditor-wikitext-warning": "시각편집기를 사용하고 있으며 [[{{MediaWiki:visualeditor-wikitext-warning-link}}|위키텍스트]]는 여기서 작동하지 않습니다. 위키텍스트 모드로 문서를 편집하려면 \"{{MediaWiki:visualeditor-ca-editsource}}\"을 클릭하세요 - 저장하지 않은 바뀜은 사라집니다.",
 	"visualeditor-wikitext-warning-link": "Help:위키 문법",
 	"visualeditor-wikitext-warning-title": "위키텍스트 문법이 감지됨"

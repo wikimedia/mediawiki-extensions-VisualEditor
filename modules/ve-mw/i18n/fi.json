@@ -48,6 +48,7 @@
 	"visualeditor-dialog-media-content-section": "Kuvateksti",
 	"visualeditor-dialog-media-insert-button": "Lisää mediatiedosto",
 	"visualeditor-dialog-media-insert-title": "Lisää mediatiedosto",
+	"visualeditor-dialog-media-noresults": "Tuloksia ei löytynyt.",
 	"visualeditor-dialog-media-page-advanced": "Lisäasetukset",
 	"visualeditor-dialog-media-page-general": "Yleiset asetukset",
 	"visualeditor-dialog-media-position-center": "Keskitetty",
@@ -229,6 +230,8 @@
 	"visualeditor-toolbar-style-tooltip": "Tekstin tyyli",
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
 	"visualeditor-viewpage-savewarning": "Oletko varma, että haluat palata katselutilaan tallentamatta ensin?",
+	"visualeditor-viewpage-savewarning-discard": "Hylkää muutokset",
+	"visualeditor-viewpage-savewarning-keep": "Jatka muokkaamista",
 	"visualeditor-wikitext-warning": "Käytät Visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Paina \"{{int:visualeditor-ca-editsource}}\" muokataksesi sivua wikiteksti-tilassa – tallentamattomat muokkaukset katoavat.",
 	"visualeditor-wikitext-warning-link": "Help:Koodiopas",
 	"visualeditor-wikitext-warning-title": "Wikikoodia havaittu"
