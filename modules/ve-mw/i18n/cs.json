@@ -11,7 +11,8 @@
 			"Polda18",
 			"Tchoř",
 			"ශ්වෙත",
-			"Matěj Suchánek"
+			"Matěj Suchánek",
+			"Gloria sah"
 		]
 	},
 	"tooltip-ca-createsource": "Založit zdrojový kód této stránky",
@@ -33,7 +34,7 @@
 	"visualeditor-categories-tool": "Kategorie",
 	"visualeditor-cite-tool-name-book": "Kniha",
 	"visualeditor-cite-tool-name-journal": "Časopis",
-	"visualeditor-cite-tool-name-news": "Noviny",
+	"visualeditor-cite-tool-name-news": "Novinky",
 	"visualeditor-cite-tool-name-web": "Webová stránka",
 	"visualeditor-desc": "WYSIWYG editor pro MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
@@ -132,7 +133,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Zobrazit možnosti",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Přidáváte}} na tuto stránku šablonu „$1“. Zatím nemá popis, ale nějaké informace by se mohly nacházet na <a $2>její stránce</a>.",
 	"visualeditor-dialog-transclusion-options": "Možnosti",
-	"visualeditor-dialog-transclusion-param-info": "Popis polí",
+	"visualeditor-dialog-transclusion-param-info": "Popis pole",
 	"visualeditor-dialog-transclusion-param-info-missing": "Popis polí není k dispozici",
 	"visualeditor-dialog-transclusion-placeholder": "Nová šablona",
 	"visualeditor-dialog-transclusion-remove-content": "Odstranit obsah",
@@ -182,7 +183,7 @@
 	"visualeditor-pagemenu-tooltip": "Možnosti stránky",
 	"visualeditor-pagetranslationwarning": "Editujete překládatelnou stránku. Editace takových stránek VisualEditorem dosud není oficiálně podporována.",
 	"visualeditor-parameter-input-placeholder": "Jméno pole",
-	"visualeditor-parameter-search-more": "Zobrazit $1 {{PLURAL:$1|další pole}}",
+	"visualeditor-parameter-search-more": "Zobrazit $1 {{PLURAL:$1|další pole|další pole|dalších polí}}",
 	"visualeditor-parameter-search-no-unused": "Žádná nevyužitá pole",
 	"visualeditor-parameter-search-unknown": "Neznámé pole",
 	"visualeditor-preference-betatempdisable": "Dočasně zakázat VisualEditor, dokud je ve verzi „beta“",

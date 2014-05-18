@@ -19,7 +19,8 @@
 			"Epicfaace",
 			"Ihojose",
 			"Csbotero",
-			"Gloria sah"
+			"Gloria sah",
+			"Wifidel"
 		]
 	},
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -41,7 +42,7 @@
 	"visualeditor-categories-tool": "Categorías",
 	"visualeditor-cite-tool-name-book": "Libro",
 	"visualeditor-cite-tool-name-journal": "Diario",
-	"visualeditor-cite-tool-name-news": "Periódico",
+	"visualeditor-cite-tool-name-news": "Noticias",
 	"visualeditor-cite-tool-name-web": "Sitio web",
 	"visualeditor-desc": "Editor visual para MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:EditorVisual",
@@ -53,6 +54,7 @@
 	"visualeditor-dialog-media-content-section": "Leyenda",
 	"visualeditor-dialog-media-insert-button": "Insertar multimedia",
 	"visualeditor-dialog-media-insert-title": "Insertar multimedia",
+	"visualeditor-dialog-media-noresults": "No se encontraron resultados",
 	"visualeditor-dialog-media-page-advanced": "Configuraciones avanzadas",
 	"visualeditor-dialog-media-page-general": "Configuraciones generales",
 	"visualeditor-dialog-media-position-center": "Centrar",
@@ -234,6 +236,8 @@
 	"visualeditor-toolbar-style-tooltip": "Estilo de texto",
 	"visualeditor-usernamespacepagelink": "Project:Espacio de nombres de usuario",
 	"visualeditor-viewpage-savewarning": "¿Está seguro de volver al modo de visualización sin guardar primero?",
+	"visualeditor-viewpage-savewarning-discard": "Descartar ediciones",
+	"visualeditor-viewpage-savewarning-keep": "Continuar editando",
 	"visualeditor-wikitext-warning": "Estás utilizando el editor visual, donde el [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexto]] no funciona. Pulsa en «{{int:visualeditor-ca-editsource}}» para editar la página en modo wikitexto (se perderán los cambios no guardados).",
 	"visualeditor-wikitext-warning-link": "Ayuda:Wikitexto",
 	"visualeditor-wikitext-warning-title": "Se ha detectado Wikitexto"

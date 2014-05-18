@@ -4,7 +4,8 @@
 			"AlimanRuna",
 			"Firilacroco",
 			"Minisarm",
-			"Stelistcristi"
+			"Stelistcristi",
+			"Gloria sah"
 		]
 	},
 	"tooltip-ca-createsource": "Creați codul sursă al acestei pagini",
@@ -26,7 +27,7 @@
 	"visualeditor-categories-tool": "Categorii",
 	"visualeditor-cite-tool-name-book": "Carte",
 	"visualeditor-cite-tool-name-journal": "Jurnal",
-	"visualeditor-cite-tool-name-news": "Ziar",
+	"visualeditor-cite-tool-name-news": "Noutăţi",
 	"visualeditor-cite-tool-name-web": "Site web",
 	"visualeditor-desc": "Editor vizual pentru MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:EditorVizual",
@@ -38,6 +39,7 @@
 	"visualeditor-dialog-media-content-section": "Descriere",
 	"visualeditor-dialog-media-insert-button": "Inserează elementul media",
 	"visualeditor-dialog-media-insert-title": "Inserare element media",
+	"visualeditor-dialog-media-noresults": "Niciun rezultat găsit.",
 	"visualeditor-dialog-media-page-advanced": "Setări avansate",
 	"visualeditor-dialog-media-page-general": "Setări generale",
 	"visualeditor-dialog-media-position-center": "Centru",
@@ -219,6 +221,7 @@
 	"visualeditor-toolbar-style-tooltip": "Stilul textului",
 	"visualeditor-usernamespacepagelink": "Project:Spațiul de nume utilizator",
 	"visualeditor-viewpage-savewarning": "Sunteți sigur că doriți să vă întoarceți în modul lecturare fără ca mai întâi să salvați?",
+	"visualeditor-viewpage-savewarning-keep": "Continua editarea",
 	"visualeditor-wikitext-warning": "Folosiți EditorulVizual — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|textul wiki]] nu funcționează aici. Apăsați „{{MediaWiki:visualeditor-ca-editsource}}” pentru a modifica textul folosind codul sursă, adică textul wiki (modificările nesalvate se vor pierde).",
 	"visualeditor-wikitext-warning-link": "Help:Limbajul wiki",
 	"visualeditor-wikitext-warning-title": "Limbaj de text wiki detectat"
