@@ -296,7 +296,11 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	ve.ui.Dialog.prototype.initialize.call( this );
 
 	// Properties
-	this.savePanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );
+	this.savePanel = new OO.ui.PanelLayout( {
+		'$': this.$,
+		'scrollable': true,
+		'classes': ['ve-ui-mwSaveDialog-savePanel']
+	} );
 
 	// Save panel
 	this.$editSummaryLabel = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )

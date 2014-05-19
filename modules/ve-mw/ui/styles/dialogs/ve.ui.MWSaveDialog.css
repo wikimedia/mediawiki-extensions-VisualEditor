@@ -13,27 +13,24 @@
 	padding: 0.25em 0;
 }
 
+.ve-ui-mwSaveDialog-savePanel {
+	/* Make room for input box shadow */
+	padding: 0 0.5em;
+}
+
 .ve-ui-mwSaveDialog-summary {
 	width: 100%;
 	background-color: #fff;
-	border: solid 1px #ccc;
-	padding: 0.5em;
-	border-radius: 0.25em 0.25em 0 0;
 }
 
 .ve-ui-mwSaveDialog-summary textarea {
+	border-radius: 0.25em 0.25em 0 0;
+	vertical-align: top;
 	margin: 0;
-	padding: 0;
+	padding: 0.5em;
 	resize: none;
 	height: 80px;
-	border: none;
-	box-shadow: none;
 	background-color: transparent;
-}
-
-.ve-ui-mwSaveDialog-summary textarea:focus,
-.ve-ui-mwSaveDialog-summary textarea:active {
-	box-shadow: none;
 }
 
 .ve-ui-mwSaveDialog-foot {
