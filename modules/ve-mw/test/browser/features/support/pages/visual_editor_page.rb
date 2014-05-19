@@ -56,7 +56,7 @@ class VisualEditorPage
   span(:ve_text_style, class: "oo-ui-iconedElement-icon oo-ui-icon-text-style")
   span(:ve_underline, class: "oo-ui-iconedElement-icon oo-ui-icon-underline-u")
   div(:visual_editor_toolbar, class: "oo-ui-toolbar-tools")
-  span(:transclusion, class: "oo-ui-iconedElement-icon oo-ui-icon-template")
+  a(:transclusion, css: "span.oo-ui-widget.oo-ui-iconedElement.oo-ui-tool.oo-ui-tool-name-transclusion.oo-ui-widget-enabled > a")
   text_area(:wikitext_editor, id: "wpTextbox1")
   a(:first_reference, text: "[1]", index: 1)
   a(:second_reference, text: "[1]", index: 2)
