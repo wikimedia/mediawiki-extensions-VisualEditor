@@ -46,6 +46,8 @@ ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	{ 'include': [ 'link' ] },
 	// Cite
 	{
+		'header': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
+		'indicator': 'down',
 		'type': 'list',
 		'icon': 'reference',
 		'title': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
