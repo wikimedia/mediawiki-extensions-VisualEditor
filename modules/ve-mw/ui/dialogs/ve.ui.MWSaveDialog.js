@@ -29,6 +29,9 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	this.restoring = false;
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
+
+	// Events
+	this.connect( this, { 'ready': 'onReady' } );
 };
 
 /* Inheritance */
@@ -424,7 +427,12 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 ve.ui.MWSaveDialog.prototype.setup = function () {
 	// Old messages should not persist after panel changes
 	this.clearAllMessages();
+};
 
+/**
+ * Handle window ready events
+ */
+ve.ui.MWSaveDialog.prototype.onReady = function () {
 	this.swapPanel( 'save' );
 };
 
