@@ -328,16 +328,6 @@ ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
 	ve.ui.MWTransclusionDialog.super.prototype.setup.call( this, data );
 };
 
-/**
- * @inheritdoc
- */
-ve.ui.MWTransclusionDialog.prototype.teardown = function ( data ) {
-	this.setMode( 'single' );
-
-	// Parent method
-	ve.ui.MWTransclusionDialog.super.prototype.teardown.call( this, data );
-};
-
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWTransclusionDialog );
