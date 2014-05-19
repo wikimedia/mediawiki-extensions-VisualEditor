@@ -151,7 +151,8 @@ ve.init.mw.ViewPageTarget.compatibility = {
 		'firefox': [['>=', 15]],
 		'iceweasel': [['>=', 10]],
 		'safari': [['>=', 5]],
-		'chrome': [['>=', 19]]
+		'chrome': [['>=', 19]],
+		'opera': [['>=', 15]]
 	}
 };
 
