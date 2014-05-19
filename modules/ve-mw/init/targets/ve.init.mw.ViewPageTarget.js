@@ -900,7 +900,9 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 	confirmDialog.open( {
 		'prompt': ve.msg( 'visualeditor-mweditmodesource-warning' ),
 		'okLabel': ve.msg( 'visualeditor-mweditmodesource-warning-switch' ),
-		'cancelLabel': ve.msg( 'visualeditor-mweditmodesource-warning-cancel' )
+		'okFlags': [ 'primary' ],
+		'cancelLabel': ve.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
+		'cancelFlags': []
 	} );
 	confirmDialog.connect( this, {
 		'ok': function () {
