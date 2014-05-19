@@ -221,6 +221,7 @@
 	"visualeditor-toolbar-style-tooltip": "Stilul textului",
 	"visualeditor-usernamespacepagelink": "Project:Spațiul de nume utilizator",
 	"visualeditor-viewpage-savewarning": "Sunteți sigur că doriți să vă întoarceți în modul lecturare fără ca mai întâi să salvați?",
+	"visualeditor-viewpage-savewarning-discard": "Renunță la modificări",
 	"visualeditor-viewpage-savewarning-keep": "Continua editarea",
 	"visualeditor-wikitext-warning": "Folosiți EditorulVizual — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|textul wiki]] nu funcționează aici. Apăsați „{{MediaWiki:visualeditor-ca-editsource}}” pentru a modifica textul folosind codul sursă, adică textul wiki (modificările nesalvate se vor pierde).",
 	"visualeditor-wikitext-warning-link": "Help:Limbajul wiki",

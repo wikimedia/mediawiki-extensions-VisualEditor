@@ -14,7 +14,8 @@
 			"Una giornata uggiosa '94",
 			"Maria victoria",
 			"Ontsed",
-			"PeppeAeco"
+			"PeppeAeco",
+			"Lucas2"
 		]
 	},
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
@@ -23,7 +24,7 @@
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor è in versione 'beta'. Potresti incontrare errori nel software e alcune parti della pagina potrebbero non risultare modificabili. Clicca su \"{{int:visualeditor-ca-editsource}}\" per passare alla modalità wikitesto – le modifiche non salvate andranno perse.",
+	"visualeditor-beta-warning": "VisualEditor è in versione di prova. Si potrebbero verificare errori e alcune parti della pagina potrebbero non risultare modificabili. Clicca su \"{{int:visualeditor-ca-editsource}}\" per passare alla modalità sorgente – le modifiche non salvate andranno perse.",
 	"visualeditor-browserwarning": "Stai usando un browser che non è ancora supportato completamente da VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Aggiungi sorgente descrizione locale",
 	"visualeditor-ca-createsource": "Crea sorgente",
@@ -36,12 +37,12 @@
 	"visualeditor-categories-tool": "Categorie",
 	"visualeditor-cite-tool-name-book": "Libro",
 	"visualeditor-cite-tool-name-journal": "Pubblicazione",
-	"visualeditor-cite-tool-name-news": "Giornale",
+	"visualeditor-cite-tool-name-news": "Notizie",
 	"visualeditor-cite-tool-name-web": "Sito web",
 	"visualeditor-desc": "Editor visivo per MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Continua",
-	"visualeditor-dialog-beta-welcome-content": "Questo è il nuovo, semplice strumento per modificare. È ancora in versione di prova, per cui puoi trovare parti della pagina non modificabili, o incontrare errori che dovranno essere corretti. Ti invitiamo a rivedere le modifiche apportate, e a segnalarci eventuali problemi che potresti incontrare usando VisualEditor (clicca su '{{int:visualeditor-help-tool}}' per lasciare un tuo messaggio). Puoi continuare a usare l'editor in wikitesto cliccando sulla scheda \"$1\" (le modifiche non salvate andranno perse).",
+	"visualeditor-dialog-beta-welcome-content": "Questo è il nuovo, semplice strumento per effettuare modifiche. È ancora in versione di prova, perciò è possibile trovare parti della pagina che non sono modificabili o incontrare errori ancora da correggere. Sei invitato a ricontrollare le modifiche apportate e a segnalarci eventuali problemi riscontrati utilizzando VisualEditor (clicca su '{{int:visualeditor-help-tool}}' per lasciare un messaggio). Puoi continuare utilizzando l'editor di sorgente dalla scheda \"$1\" – le modifiche non salvate andranno perse.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Benvenuto|Benvenuta|Benvenuto/a}} in VisualEditor",
 	"visualeditor-dialog-citation-insert-citation": "Inserisci citazione",
 	"visualeditor-dialog-media-alttext-section": "Testo alternativo",
@@ -188,7 +189,7 @@
 	"visualeditor-parameter-search-more": "Mostra {{PLURAL:$1|$1 altro campo|altri $1 campi}}",
 	"visualeditor-parameter-search-no-unused": "Senza campi inutilizzati",
 	"visualeditor-parameter-search-unknown": "Campo sconosciuto",
-	"visualeditor-preference-betatempdisable": "Disattiva temporaneamente VisualEditor mentre è in versione beta",
+	"visualeditor-preference-betatempdisable": "Disattiva temporaneamente VisualEditor mentre è in versione di prova",
 	"visualeditor-preference-core-description": "Abilita VisualEditor. Potrebbe non essere disponibile nelle pagine di discussione e in alcuni altri namespace.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Abilita VisualEditor. Sarà disponibile nei seguenti namespace: $1",
@@ -232,7 +233,7 @@
 	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Prosegui nella modifica",
-	"visualeditor-wikitext-warning": "Stai usando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Clicca su \"{{int:visualeditor-ca-editsource}}\" per modificare la pagina in modalità wikitesto – le modifiche non salvate andranno perse.",
+	"visualeditor-wikitext-warning": "Stai utilizzando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Clicca su \"{{int:visualeditor-ca-editsource}}\" per modificare la pagina in modalità sorgente – le modifiche non salvate andranno perse.",
 	"visualeditor-wikitext-warning-link": "Help:Markup",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }
