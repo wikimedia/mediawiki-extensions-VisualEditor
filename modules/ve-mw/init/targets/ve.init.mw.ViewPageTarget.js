@@ -288,7 +288,9 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 			confirmDialog.open( {
 				'prompt': ve.msg( 'visualeditor-viewpage-savewarning' ),
 				'okLabel': ve.msg( 'visualeditor-viewpage-savewarning-discard' ),
-				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' )
+				'okFlags': [ 'destructive' ],
+				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' ),
+				'cancelFlags': []
 			} );
 			confirmDialog.connect( this, { 'ok': 'cancel' } );
 		}
