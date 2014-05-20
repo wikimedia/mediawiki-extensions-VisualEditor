@@ -21,7 +21,7 @@
 	"visualeditor-advancedsettings-tool": "Pokročilá nastavení",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor je v „betaverzi“. Je možné, že narazíte na softwarové problémy a že některé části stránky nepůjde editovat. Kliknutím na „{{int:visualeditor-ca-editsource}}“ můžete přepnout do režimu zdrojového wikitextu – neuložené změny budou ztraceny.",
+	"visualeditor-beta-warning": "VisualEditor je v „betaverzi“. Je možné, že narazíte na softwarové problémy a že některé části stránky nepůjde editovat. Kdykoli se můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že otevřete rozbalovací menu vedle „{{int:visualeditor-toolbar-cancel}}“ a kliknete na „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-browserwarning": "Používáte prohlížeč, který není VisualEditorem oficiálně podporován.",
 	"visualeditor-ca-createlocaldescriptionsource": "Přidat zdroj místního popisu",
 	"visualeditor-ca-createsource": "Založit zdroj",
@@ -230,7 +230,7 @@
 	"visualeditor-viewpage-savewarning": "Opravdu se chcete vrátit k režimu zobrazení bez uložení?",
 	"visualeditor-viewpage-savewarning-discard": "Zahodit úpravy",
 	"visualeditor-viewpage-savewarning-keep": "Pokračovat v editování",
-	"visualeditor-wikitext-warning": "Používáte VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kliknutím na „{{int:visualeditor-ca-editsource}}“ můžete stránku editovat v režimu wikitextu – neuložené změny budou ztraceny.",
+	"visualeditor-wikitext-warning": "Používáte VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kdykoli se můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že otevřete rozbalovací menu vedle „{{int:visualeditor-toolbar-cancel}}“ a kliknete na „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu"
 }

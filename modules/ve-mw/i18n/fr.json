@@ -42,7 +42,7 @@
 	"visualeditor-advancedsettings-tool": "Paramètres avancés",
 	"visualeditor-beta-appendix": "bêta",
 	"visualeditor-beta-label": "bêta",
-	"visualeditor-beta-warning": "L’ÉditeurVisuel est au stade « bêta ». Il se peut que vous rencontriez des problèmes avec le logiciel et que vous ne puissiez pas modifier des parties de la page. Cliquez sur « {{int:visualeditor-ca-editsource}} » pour passer en mode wikitexte — les modifications non enregistrées seront perdues.",
+	"visualeditor-beta-warning": "L’ÉditeurVisuel est au stade « bêta ». Il se peut que vous rencontriez des problèmes avec le logiciel et que vous ne puissiez pas modifier des parties de la page. Pour revenir à l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-cancel}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement supporté par l’ÉditeurVisuel.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ajouter une source de description locale",
 	"visualeditor-ca-createsource": "Créer le wikicode",
@@ -55,7 +55,7 @@
 	"visualeditor-categories-tool": "Catégories",
 	"visualeditor-cite-tool-name-book": "Livre",
 	"visualeditor-cite-tool-name-journal": "Journal",
-	"visualeditor-cite-tool-name-news": "Journal",
+	"visualeditor-cite-tool-name-news": "Nouvelles",
 	"visualeditor-cite-tool-name-web": "Site web",
 	"visualeditor-desc": "Éditeur visuel pour MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:ÉditeurVisuel",
@@ -251,7 +251,7 @@
 	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer ?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
 	"visualeditor-viewpage-savewarning-keep": "Continuer l’édition",
-	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|code wiki]] ne fonctionne pas ici. Cliquez sur « {{MediaWiki:visualeditor-ca-editsource}} » pour modifier le code de la page — les modifications non sauvegardées seront perdues.",
+	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|code wiki]] ne fonctionne pas ici. Pour basculer vers l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-cancel}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-wikitext-warning-link": "Help:Balisage wiki",
 	"visualeditor-wikitext-warning-title": "Balisage wikitexte détecté"
 }

@@ -23,7 +23,7 @@
 	"visualeditor-advancedsettings-tool": "הגדרות מתקדמות",
 	"visualeditor-beta-appendix": "בטא",
 	"visualeditor-beta-label": "בטא",
-	"visualeditor-beta-warning": "זוהי גרסת ניסיונית (\"בטא\") של העורך החזותי. ייתכן שיהיו כאן בעיות בתכנה ושלא יתאפשר לערוך חלקים מהדף. יש ללחוץ \"{{int:visualeditor-ca-editsource}}\" כדי לעבור למצב עריכת קוד ויקי – שינויים שלא נשמרו יאבדו.",
+	"visualeditor-beta-warning": "העורך החזותי הוא \"בטא\". ייתכן שיהיו כאן בעיות בתכנה ושלא יתאפשר לערוך חלקים מהדף. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-cancel}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "העורך החזותי אינו תומך באופן רשמי בדפדפן שלך.",
 	"visualeditor-ca-createlocaldescriptionsource": "הוספת מקור תיאור מקומי",
 	"visualeditor-ca-createsource": "יצירת קוד מקור",
@@ -234,7 +234,7 @@
 	"visualeditor-viewpage-savewarning": "האם ברצונך לשוב למצב תצוגה ללא שמירה?",
 	"visualeditor-viewpage-savewarning-discard": "ביטול העריכות",
 	"visualeditor-viewpage-savewarning-keep": "המשך עריכה",
-	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. יש ללחוץ על \"{{MediaWiki:visualeditor-ca-editsource}}\" כדי לערוך את הדף במצב קוד ויקי – שינויים שלא נשמרו יאבדו.",
+	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-cancel}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "נראה שיש כאן קוד ויקי"
 }

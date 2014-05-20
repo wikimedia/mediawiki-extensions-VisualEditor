@@ -12,7 +12,7 @@
 	"visualeditor-advancedsettings-tool": "Напредни нагодувања",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "ВизуеленУредник е во „бета“. Може да наидете на извесни проблеми во програмот и да не можете да уредите делови од страницата. Стиснете на „{{int:visualeditor-ca-editsource}}“ за да се префрлите на викитекст. Незачуваните промени ќе се изгубат.",
+	"visualeditor-beta-warning": "ВизуеленУредник е во „бета“. Може да наидете на извесни проблеми во програмот и да не можете да уредите делови од страницата. За да се вратите на изворно уредување во секое време, без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-cancel}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-browserwarning": "Користите прелистувач што не е официјално поддржан од ВизуеленУредник.",
 	"visualeditor-ca-createlocaldescriptionsource": "Додај изворен локален опис",
 	"visualeditor-ca-createsource": "Создај извор",
@@ -25,7 +25,7 @@
 	"visualeditor-categories-tool": "Категории",
 	"visualeditor-cite-tool-name-book": "Книга",
 	"visualeditor-cite-tool-name-journal": "Списание",
-	"visualeditor-cite-tool-name-news": "Весник",
+	"visualeditor-cite-tool-name-news": "Новости",
 	"visualeditor-cite-tool-name-web": "Мреж. место",
 	"visualeditor-desc": "Визуелен уредник за МедијаВики",
 	"visualeditor-descriptionpagelink": "Project:ВизуеленУредник",
@@ -221,7 +221,7 @@
 	"visualeditor-viewpage-savewarning": "Дали сте сигурни дека сакате да се вратите на прегледниот режим без да ги зачувате измените?",
 	"visualeditor-viewpage-savewarning-discard": "Отфрли уредувања",
 	"visualeditor-viewpage-savewarning-keep": "Продолжи со уредување",
-	"visualeditor-wikitext-warning": "Користите ВизуеленУредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. Стиснете на „{{MediaWiki:visualeditor-ca-editsource}}“ за да ја уредите страницава во режим со викитекст — ако не ги зачувате, измените ќе се изгубат.",
+	"visualeditor-wikitext-warning": "Користите ВизуеленУредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-cancel}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-wikitext-warning-link": "Help:Викитекст",
 	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст"
 }

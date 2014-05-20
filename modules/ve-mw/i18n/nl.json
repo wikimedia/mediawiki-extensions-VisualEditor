@@ -55,6 +55,7 @@
 	"visualeditor-dialog-media-content-section": "Bijschrift",
 	"visualeditor-dialog-media-insert-button": "Media invoegen",
 	"visualeditor-dialog-media-insert-title": "Media invoegen",
+	"visualeditor-dialog-media-noresults": "Geen resultaten gevonden.",
 	"visualeditor-dialog-media-page-advanced": "Geavanceerde instellingen",
 	"visualeditor-dialog-media-page-general": "Algemene instellingen",
 	"visualeditor-dialog-media-position-center": "Centreren",
@@ -227,6 +228,7 @@
 	"visualeditor-toolbar-style-tooltip": "Tekst opmaken",
 	"visualeditor-usernamespacepagelink": "Project:Gebruikersnaamruimte",
 	"visualeditor-viewpage-savewarning": "Weet u zeker dat u wilt teruggaan naar de modus bekijken zonder eerst op te slaan?",
+	"visualeditor-viewpage-savewarning-keep": "Doorgaan met bewerken",
 	"visualeditor-wikitext-warning": "U bevindt zich in de visuele tekstverwerker - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] werkt hier niet. Klik op \"{{int:visualeditor-ca-editsource}}\" om naar wikitekstmodus te gaan – veranderingen die niet zijn opgeslagen gaan dan verloren.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
 	"visualeditor-wikitext-warning-title": "Wikitekst gedetecteerd"
