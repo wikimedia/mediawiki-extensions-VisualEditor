@@ -9,7 +9,7 @@
  * ContentEditable MediaWiki gallery node.
  *
  * @class
- * @extends ve.ce.MWExtensionNode
+ * @extends ve.ce.MWBlockExtensionNode
  *
  * @constructor
  * @param {ve.dm.MWGalleryNode} model Model to observe
@@ -17,12 +17,12 @@
  */
 ve.ce.MWGalleryNode = function VeCeMWGalleryNode( model, config ) {
 	// Parent constructor
-	ve.ce.MWExtensionNode.call( this, model, config );
+	ve.ce.MWBlockExtensionNode.call( this, model, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ce.MWGalleryNode, ve.ce.MWExtensionNode );
+OO.inheritClass( ve.ce.MWGalleryNode, ve.ce.MWBlockExtensionNode );
 
 /* Static Properties */
 

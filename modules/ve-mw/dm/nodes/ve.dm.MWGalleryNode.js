@@ -9,19 +9,19 @@
  * DataModel MediaWiki gallery node.
  *
  * @class
- * @extends ve.dm.MWExtensionNode
+ * @extends ve.dm.MWBlockExtensionNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
  */
 ve.dm.MWGalleryNode = function VeDmMWGalleryNode() {
 	// Parent constructor
-	ve.dm.MWExtensionNode.apply( this, arguments );
+	ve.dm.MWBlockExtensionNode.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWGalleryNode, ve.dm.MWExtensionNode );
+OO.inheritClass( ve.dm.MWGalleryNode, ve.dm.MWBlockExtensionNode );
 
 /* Static members */
 

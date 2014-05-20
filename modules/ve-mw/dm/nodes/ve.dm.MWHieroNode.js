@@ -9,19 +9,19 @@
  * DataModel MediaWiki hieroglyphics node.
  *
  * @class
- * @extends ve.dm.MWExtensionNode
+ * @extends ve.dm.MWBlockExtensionNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
  */
 ve.dm.MWHieroNode = function VeDmMWHieroNode() {
 	// Parent constructor
-	ve.dm.MWExtensionNode.apply( this, arguments );
+	ve.dm.MWBlockExtensionNode.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWHieroNode, ve.dm.MWExtensionNode );
+OO.inheritClass( ve.dm.MWHieroNode, ve.dm.MWBlockExtensionNode );
 
 /* Static members */
 

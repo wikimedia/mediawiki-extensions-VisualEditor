@@ -9,7 +9,7 @@
  * ContentEditable MediaWiki hieroglyphics node.
  *
  * @class
- * @extends ve.ce.MWExtensionNode
+ * @extends ve.ce.MWBlockExtensionNode
  *
  * @constructor
  * @param {ve.dm.MWHieroNode} model Model to observe
@@ -17,7 +17,7 @@
  */
 ve.ce.MWHieroNode = function VeCeMWHieroNode( model, config ) {
 	// Parent constructor
-	ve.ce.MWExtensionNode.call( this, model, config );
+	ve.ce.MWBlockExtensionNode.call( this, model, config );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwHieroNode' );
@@ -25,7 +25,7 @@ ve.ce.MWHieroNode = function VeCeMWHieroNode( model, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ce.MWHieroNode, ve.ce.MWExtensionNode );
+OO.inheritClass( ve.ce.MWHieroNode, ve.ce.MWBlockExtensionNode );
 
 /* Static Properties */
 

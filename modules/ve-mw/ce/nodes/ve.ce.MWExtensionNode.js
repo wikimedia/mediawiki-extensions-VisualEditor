@@ -16,20 +16,14 @@
  *
  * @class
  * @abstract
- * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
  * @mixins ve.ce.ProtectedNode
  * @mixins ve.ce.RelocatableNode
  * @mixins ve.ce.GeneratedContentNode
  *
  * @constructor
- * @param {ve.dm.MWExtensionNode} model Model to observe
- * @param {Object} [config] Configuration options
  */
-ve.ce.MWExtensionNode = function VeCeMWExtensionNode( model, config ) {
-	// Parent constructor
-	ve.ce.LeafNode.call( this, model, config );
-
+ve.ce.MWExtensionNode = function VeCeMWExtensionNode() {
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
 	ve.ce.ProtectedNode.call( this );
@@ -106,3 +100,61 @@ ve.ce.MWExtensionNode.prototype.afterRender = function () {
 ve.ce.MWExtensionNode.prototype.onParseError = function ( deferred ) {
 	deferred.reject();
 };
+
+/**
+ * ContentEditable MediaWiki inline extension node.
+ *
+ * @class
+ * @abstract
+ * @extends ve.ce.LeafNode
+ * @mixins ve.ce.MWExtensionNode
+ *
+ * @constructor
+ * @param {ve.dm.MWInlineExtensionNode} model Model to observe
+ * @param {Object} [config] Configuration options
+ */
+ve.ce.MWInlineExtensionNode = function VeCeMWInlineExtensionNode( model, config ) {
+	// Parent constructor
+	ve.ce.LeafNode.call( this, model, config );
+
+	// Mixin constructors
+	ve.ce.MWExtensionNode.call( this );
+
+	// DOM changes
+	this.$element.addClass( 've-ce-mwInlineExtensionNode' );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ce.MWInlineExtensionNode, ve.ce.LeafNode );
+
+OO.mixinClass( ve.ce.MWInlineExtensionNode, ve.ce.MWExtensionNode );
+
+/**
+ * ContentEditable MediaWiki block extension node.
+ *
+ * @class
+ * @abstract
+ * @extends ve.ce.BranchNode
+ * @mixins ve.ce.MWExtensionNode
+ *
+ * @constructor
+ * @param {ve.dm.MWBlockExtensionNode} model Model to observe
+ * @param {Object} [config] Configuration options
+ */
+ve.ce.MWBlockExtensionNode = function VeCeMWBlockExtensionNode( model, config ) {
+	// Parent constructor
+	ve.ce.BranchNode.call( this, model, config );
+
+	// Mixin constructors
+	ve.ce.MWExtensionNode.call( this );
+
+	// DOM changes
+	this.$element.addClass( 've-ce-mwBlockExtensionNode' );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ce.MWBlockExtensionNode, ve.ce.BranchNode );
+
+OO.mixinClass( ve.ce.MWBlockExtensionNode, ve.ce.MWExtensionNode );
