@@ -292,7 +292,17 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' ),
 				'cancelFlags': []
 			} );
-			confirmDialog.connect( this, { 'ok': 'cancel' } );
+			confirmDialog.connect( this, {
+				'ok': function () {
+					// Prevent future confirm dialogs from executing this handler (bug 65557)
+					confirmDialog.disconnect( this );
+					this.cancel();
+				},
+				'cancel': function () {
+					// Prevent future confirm dialogs from executing this handler (bug 65557)
+					confirmDialog.disconnect( this );
+				}
+			} );
 		}
 	}
 };
@@ -906,6 +916,8 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 	} );
 	confirmDialog.connect( this, {
 		'ok': function () {
+			// Prevent future confirm dialogs from executing this handler (bug 65557)
+			confirmDialog.disconnect( this );
 			// Get Wikitext from the DOM
 			this.serialize(
 				this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
@@ -913,6 +925,9 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 			);
 		},
 		'cancel': function () {
+			// Prevent future confirm dialogs from executing this handler (bug 65557)
+			confirmDialog.disconnect( this );
+			// Undo the opacity change
 			this.$document.css( 'opacity', 1 );
 		}
 	} );
