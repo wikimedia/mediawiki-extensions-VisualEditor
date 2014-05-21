@@ -311,6 +311,11 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 		attrs.align = this.getAlignment();
 	}
 
+	// If converting from block to inline, set isLinked=true to avoid |link=
+	if ( origAttrs.isLinked === undefined && this.getImageNodeType() === 'mwInlineImage' ) {
+		attrs.isLinked = true;
+	}
+
 	return attrs;
 };
 
