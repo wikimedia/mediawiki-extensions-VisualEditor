@@ -75,6 +75,7 @@ class VisualEditorPage
     span(:add_parameter, text: "Add more information", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert template", frame: frame)
+    a(:confirm_switch, css: "div.oo-ui-widget:nth-child(1) > a:nth-child(1) > span:nth-child(2)", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
     text_area(:describe_change, index: 0, frame: frame)
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)

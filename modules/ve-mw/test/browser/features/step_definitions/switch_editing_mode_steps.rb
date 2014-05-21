@@ -1,3 +1,7 @@
+When(/^I clear the confirm dialog$/) do
+  on(VisualEditorPage).confirm_switch_element.when_present.click
+end
+
 When(/^I enter the wikitext editor$/) do
   on(VisualEditorPage) do |page|
     page.edit_wikitext_element.when_present.click
