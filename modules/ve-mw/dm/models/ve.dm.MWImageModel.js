@@ -127,7 +127,7 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	);
 
 	// If this is a block image, get the caption
-	if ( imgModel.getImageNodeType() === 'mwBlockImage' ) {
+	if ( node.getType() === 'mwBlockImage' ) {
 		captionNode = node.getCaptionNode();
 		if ( captionNode && captionNode.getLength() > 0 ) {
 			imgModel.setCaptionDocument( doc.cloneFromRange( captionNode.getRange() ) );
@@ -145,7 +145,7 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
  */
 ve.dm.MWImageModel.prototype.getImageNodeType = function () {
 	if (
-		( this.getType() === 'frame' || this.getType() === 'none' ) &&
+		( this.getType() === 'frameless' || this.getType() === 'none' ) &&
 		( !this.isAligned() || this.isDefaultAligned() )
 	) {
 		return 'mwInlineImage';
@@ -160,46 +160,49 @@ ve.dm.MWImageModel.prototype.getImageNodeType = function () {
  * @param {ve.dm.Surface} surfaceModel Surface model of main document
  */
 ve.dm.MWImageModel.prototype.updateImageNode = function ( surfaceModel ) {
-	var captionRange,
+	var captionRange, captionNode,
 		doc = surfaceModel.getDocument(),
-		captionNode = this.getMediaNode().getCaptionNode();
+		node = this.getMediaNode();
 
 	// Update the caption
-	if ( !captionNode ) {
-		// There was no caption before, so insert one now
-		surfaceModel.getFragment()
-			.adjustRange( 1 )
-			.collapseRangeToStart()
-			.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );
-		// Update the caption node
-		captionNode = this.getMediaNode().getCaptionNode();
+	if ( node.getType() === 'mwBlockImage' ) {
+		captionNode = node.getCaptionNode();
+		if ( !captionNode ) {
+			// There was no caption before, so insert one now
+			surfaceModel.getFragment()
+				.adjustRange( 1 )
+				.collapseRangeToStart()
+				.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );
+			// Update the caption node
+			captionNode = this.getMediaNode().getCaptionNode();
+		}
+
+		captionRange = captionNode.getRange();
+
+		// Remove contents of old caption
+		surfaceModel.change(
+			ve.dm.Transaction.newFromRemoval(
+				doc,
+				captionRange,
+				true
+			)
+		);
+
+		// Add contents of new caption
+		surfaceModel.change(
+			ve.dm.Transaction.newFromDocumentInsertion(
+				doc,
+				captionRange.start,
+				this.getCaptionDocument()
+			)
+		);
 	}
-
-	captionRange = captionNode.getRange();
-
-	// Remove contents of old caption
-	surfaceModel.change(
-		ve.dm.Transaction.newFromRemoval(
-			doc,
-			captionRange,
-			true
-		)
-	);
-
-	// Add contents of new caption
-	surfaceModel.change(
-		ve.dm.Transaction.newFromDocumentInsertion(
-			doc,
-			captionRange.start,
-			this.getCaptionDocument()
-		)
-	);
 
 	// Update attributes
 	surfaceModel.change(
 		ve.dm.Transaction.newFromAttributeChanges(
 			doc,
-			this.mediaNode.getOffset(),
+			node.getOffset(),
 			this.getUpdatedAttributes()
 		)
 	);
@@ -232,7 +235,6 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			'attributes': editAttributes
 		}
 	];
-
 	if ( nodeType === 'mwBlockImage' ) {
 		contentToInsert.push( { 'type': 'mwImageCaption' } );
 		contentToInsert.push( { 'type': '/mwImageCaption' } );
@@ -259,10 +261,10 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	// Select the new node (without extras)
 	newFragment = surfaceModel.getFragment( newNodeRange );
 	newFragment.select();
+	newNode = newFragment.getSelectedNode();
 
 	// Check if there should be a caption
-	if ( nodeType === 'mwBlockImage' ) {
-		newNode = newFragment.getSelectedNode();
+	if ( newNode.getType() === 'mwBlockImage' ) {
 
 		if ( this.getCaptionDocument().data.getLength() > 4 ) {
 			// Add contents of new caption
@@ -672,7 +674,7 @@ ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
 		align = this.getDefaultDir();
 		this.toggleDefaultAlignment( true );
 	} else {
-		this.toggleDefaultAlignment( false );
+		this.toggleDefaultAlignment( this.getDefaultDir() === align );
 	}
 
 	this.alignment = align;
