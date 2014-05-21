@@ -243,7 +243,6 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 
 	// Insert the new image
 	coveredNodes = fragment
-			.collapseRangeToEnd()
 			.insertContent( contentToInsert )
 			.getCoveredNodes();
 
@@ -254,6 +253,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			coveredNodes[i].node.type === 'mwInlineImage'
 		) {
 			newNodeRange = coveredNodes[i].nodeOuterRange;
+			newNode = coveredNodes[i].node;
 			break;
 		}
 	}
@@ -261,10 +261,9 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	// Select the new node (without extras)
 	newFragment = surfaceModel.getFragment( newNodeRange );
 	newFragment.select();
-	newNode = newFragment.getSelectedNode();
 
 	// Check if there should be a caption
-	if ( newNode.getType() === 'mwBlockImage' ) {
+	if ( newNode && newNode.getType() === 'mwBlockImage' ) {
 
 		if ( this.getCaptionDocument().data.getLength() > 4 ) {
 			// Add contents of new caption
