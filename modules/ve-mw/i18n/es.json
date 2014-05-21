@@ -185,6 +185,8 @@
 	"visualeditor-mwalienextensioninspector-title": "Extensión de MediaWiki",
 	"visualeditor-mweditmodesource-title": "Cambiar a modo de código",
 	"visualeditor-mweditmodesource-warning": "Estás por cambiar a modo de código.\nCualquier cambio que hayas hecho se mantendrá, pero no se podrá volver al editor visual sin guardar o recargar la página.\n¿Estás seguro de querer continuar?",
+	"visualeditor-mweditmodesource-warning-switch": "Sí, cambiar",
+	"visualeditor-mweditmodesource-warning-cancel": "No, cancelar",
 	"visualeditor-mwgalleryinspector-placeholder": "Ejemplo.jpg|Leyenda de imagen",
 	"visualeditor-mwgalleryinspector-title": "Galería",
 	"visualeditor-mwhieroinspector-title": "Jeroglíficos",

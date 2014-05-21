@@ -24,7 +24,7 @@
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor è in versione di prova. Si potrebbero verificare errori e alcune parti della pagina potrebbero non risultare modificabili. Clicca su \"{{int:visualeditor-ca-editsource}}\" per passare alla modalità sorgente – le modifiche non salvate andranno perse.",
+	"visualeditor-beta-warning": "VisualEditor è in versione di prova. Si potrebbero verificare errori e alcune parti della pagina potrebbero non risultare modificabili. Per passare alla modifica sorgente in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-cancel}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "Stai usando un browser che non è ancora supportato completamente da VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Aggiungi sorgente descrizione locale",
 	"visualeditor-ca-createsource": "Crea sorgente",
@@ -180,6 +180,8 @@
 	"visualeditor-mwalienextensioninspector-title": "Estensione di MediaWiki",
 	"visualeditor-mweditmodesource-title": "Passa alla modifica sorgente",
 	"visualeditor-mweditmodesource-warning": "Stai per passare alla modifica sorgente.\nEventuali modifiche apportate a questo documento verranno mantenute, ma non potrai ritornare a VisualEditor senza salvare o ricaricare la pagina.\nVuoi continuare?",
+	"visualeditor-mweditmodesource-warning-switch": "Sì, cambia",
+	"visualeditor-mweditmodesource-warning-cancel": "No, annulla",
 	"visualeditor-mwgalleryinspector-placeholder": "Esempio.jpg|Didascalia dell'immagine",
 	"visualeditor-mwgalleryinspector-title": "Galleria",
 	"visualeditor-mwhieroinspector-title": "Geroglifici",
@@ -233,7 +235,7 @@
 	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Prosegui nella modifica",
-	"visualeditor-wikitext-warning": "Stai utilizzando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Clicca su \"{{int:visualeditor-ca-editsource}}\" per modificare la pagina in modalità sorgente – le modifiche non salvate andranno perse.",
+	"visualeditor-wikitext-warning": "Stai utilizzando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-cancel}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Markup",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }

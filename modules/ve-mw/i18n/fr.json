@@ -198,6 +198,8 @@
 	"visualeditor-mwalienextensioninspector-title": "Extension de MédiaWiki",
 	"visualeditor-mweditmodesource-title": "Passer à l’édition du code",
 	"visualeditor-mweditmodesource-warning": "Vous êtes sur le point de basculer vers l’édition du code.\nToutes les modifications que vous avez faites sur cette page seront conservées, mais vous ne pourrez pas retourner à l’Éditeur Visuel sans enregistrer ou recharger la page.\nVoulez-vous continuer ?",
+	"visualeditor-mweditmodesource-warning-switch": "Oui, basculer",
+	"visualeditor-mweditmodesource-warning-cancel": "Non, annuler",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Légende pour l’image",
 	"visualeditor-mwgalleryinspector-title": "Galerie",
 	"visualeditor-mwhieroinspector-title": "Hiéroglyphes",

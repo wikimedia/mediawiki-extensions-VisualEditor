@@ -168,6 +168,8 @@
 	"visualeditor-mwalienextensioninspector-title": "MediaWiki-Erweiderung",
 	"visualeditor-mweditmodesource-title": "Op ännere vum Quelltext wiesselen",
 	"visualeditor-mweditmodesource-warning": "Dir wiesselt elo an de Modus Quelltext änneren.\n\nAll Ännerungen déi Dir bis elo an dësem Dokument gemaach hutt gi gehal, et ass awer net méiglech zréck an de VisualEditor ze wiesselen ouni ze späicheren oder d'Säit neizelueden.\n\nWëllt Dir virufueren?",
+	"visualeditor-mweditmodesource-warning-switch": "Jo, wiesselen",
+	"visualeditor-mweditmodesource-warning-cancel": "Neen, ofbriechen",
 	"visualeditor-mwgalleryinspector-placeholder": "Beispill.jpg|Beschreiwung vum Bild",
 	"visualeditor-mwgalleryinspector-title": "Gallerie",
 	"visualeditor-mwhieroinspector-title": "Hieroglyphen",

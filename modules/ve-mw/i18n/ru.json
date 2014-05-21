@@ -29,7 +29,7 @@
 	"visualeditor-advancedsettings-tool": "Дополнительные настройки",
 	"visualeditor-beta-appendix": "бета-версия",
 	"visualeditor-beta-label": "бета-версия",
-	"visualeditor-beta-warning": "VisualEditor находится в статусе бета-версии. Могут возникнуть проблемы с программным обеспечением, и вы не сможете редактировать некоторые части страниц. Нажмите «{{int:visualeditor-ca-editsource}}» для переключения в режим вики-текста. Несохранённые изменения будут утеряны.",
+	"visualeditor-beta-warning": "VisualEditor находится в статусе бета-версии. Могут возникнуть проблемы с программным обеспечением, и вы не сможете редактировать некоторые части страниц. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-cancel}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-browserwarning": "Вы используете браузер, который официально не поддерживается VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Добавить источник локального описания",
 	"visualeditor-ca-createsource": "Создать как исходный текст",
@@ -185,6 +185,8 @@
 	"visualeditor-mwalienextensioninspector-title": "MediaWiki расширение",
 	"visualeditor-mweditmodesource-title": "Перейти к редактированию исходного текста",
 	"visualeditor-mweditmodesource-warning": "Вы собираетесь перейти к редактированию исходного текста.\nЛюбые изменения, внесённые в этот документ, будут сохранены, но вы не сможете переключиться обратно в Визуальный редактор без сохранения или перезагрузки страницы.\nВы хотите продолжить?",
+	"visualeditor-mweditmodesource-warning-switch": "Да, переключить",
+	"visualeditor-mweditmodesource-warning-cancel": "Нет, отменить",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Подпись к изображению",
 	"visualeditor-mwgalleryinspector-title": "Галерея",
 	"visualeditor-mwhieroinspector-title": "Иероглифы",
@@ -238,7 +240,7 @@
 	"visualeditor-viewpage-savewarning": "Вы уверены, что хотите вернуться в режим просмотра, не сохранив изменения?",
 	"visualeditor-viewpage-savewarning-discard": "Отменить правки",
 	"visualeditor-viewpage-savewarning-keep": "Продолжить редактирование",
-	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. Нажмите «{{MediaWiki:visualeditor-ca-editsource}}» для редактирования страницы в режиме вики-разметки. Несохранённые изменения будут потеряны.",
+	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. НЧтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-cancel}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-wikitext-warning-link": "Help:Вики-разметка",
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка"
 }

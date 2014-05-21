@@ -159,6 +159,8 @@
 	"visualeditor-mwalienextensioninspector-title": "MediaWiki lisa",
 	"visualeditor-mweditmodesource-title": "Redigeeri lähteteksti",
 	"visualeditor-mweditmodesource-warning": "Lähed üle lähteteksti redigeerimise režiimi.\nMuudatused, mida selles dokumendis teinud oled, säilitatakse, aga salvestamata või lehekülge uuesti laadimata ei saa sa lülituda tagasi VisualEditori režiimi.\nKas tahad jätkata?",
+	"visualeditor-mweditmodesource-warning-switch": "Jah, vaheta",
+	"visualeditor-mweditmodesource-warning-cancel": "Ei, loobu",
 	"visualeditor-mwgalleryinspector-placeholder": "Näide.jpg|Pildiallkiri",
 	"visualeditor-mwgalleryinspector-title": "Galerii",
 	"visualeditor-mwhieroinspector-title": "Hieroglüüfid",

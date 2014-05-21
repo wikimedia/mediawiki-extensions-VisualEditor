@@ -96,6 +96,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "Taal",
 	"visualeditor-dialog-meta-languages-readonlynote": "Dit is een lijst met pagina's in andere talen die gekoppeld zijn aan deze pagina. Deze lijst kan alleen in de broncodemodus of op Wikidata bewerkt worden.",
 	"visualeditor-dialog-meta-languages-section": "Talen",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "Verborgen categorie",
 	"visualeditor-dialog-meta-settings-index-default": "Standaard",
 	"visualeditor-dialog-meta-settings-index-disable": "Nee",
 	"visualeditor-dialog-meta-settings-index-force": "Ja",

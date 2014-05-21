@@ -177,6 +177,8 @@
 	"visualeditor-mwalienextensioninspector-title": "MediaWiki-Erweiterung",
 	"visualeditor-mweditmodesource-title": "Zur Quelltextbearbeitung wechseln",
 	"visualeditor-mweditmodesource-warning": "Du bist dabei, zur Quelltextbearbeitung zu wechseln.\nAlle durchgeführten Änderungen an diesem Dokument bleiben erhalten, aber du wirst nicht mehr in der Lage sein, zum VisualEditor zurückzugelangen, ohne dass du die Seite speicherst oder neu lädst.\nWillst du fortfahren?",
+	"visualeditor-mweditmodesource-warning-switch": "Ja, wechseln",
+	"visualeditor-mweditmodesource-warning-cancel": "Nein, abbrechen",
 	"visualeditor-mwgalleryinspector-placeholder": "Beispiel.jpg|Beschreibung für das Bild",
 	"visualeditor-mwgalleryinspector-title": "Galerie",
 	"visualeditor-mwhieroinspector-title": "Hieroglyphen",

@@ -179,6 +179,8 @@
 	"visualeditor-mwalienextensioninspector-title": "הרחבת מדיה־ויקי",
 	"visualeditor-mweditmodesource-title": "מעבר לעריכת קוד מקור",
 	"visualeditor-mweditmodesource-warning": "עומד להתבצע מעבר לעריכת קוד מקור.\nכל השינויים שעשית במסמך הזה יישמרו, אבל לא תתאשפר חזרה לעורך החזותי ללא שמירה או רענון.\nהאם להמשיך?",
+	"visualeditor-mweditmodesource-warning-switch": "כן, לעבור",
+	"visualeditor-mweditmodesource-warning-cancel": "לא, לבטל",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|כיתוב לתמונה",
 	"visualeditor-mwgalleryinspector-title": "גלריה",
 	"visualeditor-mwhieroinspector-title": "היירוגליפים",
