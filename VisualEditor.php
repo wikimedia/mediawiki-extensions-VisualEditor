@@ -114,16 +114,9 @@ $wgResourceModules += array(
 		)
 	),
 
-	'ext.visualEditor.viewPageTarget.icons-raster' => $wgVisualEditorResourceTemplate + array(
+	'ext.visualEditor.viewPageTarget.icons' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons-raster.css',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-
-	'ext.visualEditor.viewPageTarget.icons-vector' => $wgVisualEditorResourceTemplate + array(
-		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons-vector.css',
+			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons.css',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
@@ -1200,17 +1193,10 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.icons-raster' => $wgVisualEditorResourceTemplate + array(
+	'ext.visualEditor.icons' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
-			'lib/ve/modules/ve/ui/styles/ve.ui.Icons-raster.css',
-			'modules/ve-mw/ui/styles/ve.ui.Icons-raster.css',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-	'ext.visualEditor.icons-vector' => $wgVisualEditorResourceTemplate + array(
-		'styles' => array(
-			'lib/ve/modules/ve/ui/styles/ve.ui.Icons-vector.css',
-			'modules/ve-mw/ui/styles/ve.ui.Icons-vector.css',
+			'lib/ve/modules/ve/ui/styles/ve.ui.Icons.css',
+			'modules/ve-mw/ui/styles/ve.ui.Icons.css',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),

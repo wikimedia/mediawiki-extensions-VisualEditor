@@ -46,11 +46,7 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 			'ext.visualEditor.data',
 			'ext.visualEditor.mwreference'
 		]
-		.concat(
-			document.createElementNS && document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ).createSVGRect ?
-				this.constructor.static.iconModuleStyles.vector :
-				this.constructor.static.iconModuleStyles.raster
-		)
+		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );
 
 	this.pluginCallbacks = [];
@@ -247,14 +243,12 @@ ve.init.mw.Target.static.pasteRules = {
  *
  * @static
  * @inheritable
- * @property {Object} iconModuleStyles
- * @property {string[]} iconModuleStyles.vector Modules that should be loaded when SVG supported
- * @property {string[]} iconModuleStyles.raster Modules that should be loaded when SVG is not supported
+ * @property {string[]} iconModuleStyles Modules that should be loaded to provide the icons
  */
-ve.init.mw.Target.static.iconModuleStyles = {
-	'vector': ['ext.visualEditor.viewPageTarget.icons-vector', 'ext.visualEditor.icons-vector'],
-	'raster': ['ext.visualEditor.viewPageTarget.icons-raster', 'ext.visualEditor.icons-raster']
-};
+ve.init.mw.Target.static.iconModuleStyles = [
+	'ext.visualEditor.viewPageTarget.icons',
+	'ext.visualEditor.icons'
+];
 
 /**
  * Name of target class. Used by TargetEvents to identify which target we are tracking.

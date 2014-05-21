@@ -100,7 +100,11 @@
 			JSON.parse &&
 			JSON.stringify
 		),
-		contentEditable: 'contentEditable' in document.createElement( 'div' )
+		contentEditable: 'contentEditable' in document.createElement( 'div' ),
+		svg: !!(
+			document.createElementNS &&
+			document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ).createSVGRect
+		)
 	};
 
 	init = {
@@ -376,6 +380,7 @@
 
 	support.visualEditor = support.es5 &&
 		support.contentEditable &&
+		support.svg &&
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) );
 
 	enable = mw.user.options.get( 'visualeditor-enable', conf.defaultUserOptions.enable );
