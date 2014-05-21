@@ -526,21 +526,10 @@ ve.ui.MWMediaEditDialog.prototype.applyChanges = function () {
 	this.imageModel.setAltText(
 		this.altTextInput.getValue()
 	);
+
 	this.imageModel.setCaptionDocument(
 		this.captionSurface.getSurface().getModel().getDocument()
 	);
-
-	if ( this.typeInput.getSelectedItem() ) {
-		this.imageModel.setType(
-			this.typeInput.getSelectedItem().getData()
-		);
-	}
-	if ( this.positionCheckbox.getValue() && this.positionInput.getSelectedItem() ) {
-		this.imageModel.setAlignment(
-			this.positionInput.getSelectedItem().getData()
-		);
-	}
-	this.imageModel.toggleBorder( this.borderCheckbox.getValue() );
 
 	// Check if the image node changed from inline to block or
 	// vise versa
