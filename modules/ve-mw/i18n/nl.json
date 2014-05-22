@@ -21,7 +21,8 @@
 			"Niknetniko",
 			"Arent",
 			"McDutchie",
-			"Gloria sah"
+			"Gloria sah",
+			"Mar(c)"
 		]
 	},
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
@@ -43,7 +44,7 @@
 	"visualeditor-categories-tool": "Categorieën",
 	"visualeditor-cite-tool-name-book": "Boek",
 	"visualeditor-cite-tool-name-journal": "Dagboek",
-	"visualeditor-cite-tool-name-news": "Krant",
+	"visualeditor-cite-tool-name-news": "Nieuws",
 	"visualeditor-cite-tool-name-web": "Website",
 	"visualeditor-desc": "Visuele tekstverwerker voor MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Visuele tekstbewerker",
@@ -176,7 +177,7 @@
 	"visualeditor-media-input-placeholder": "Media zoeken",
 	"visualeditor-meta-tool": "Opties",
 	"visualeditor-mwalienextensioninspector-title": "Uitbreiding van MediaWiki",
-	"visualeditor-mweditmodesource-title": "Overschakelen naar broncodemodus",
+	"visualeditor-mweditmodesource-title": "Broncodemodus",
 	"visualeditor-mweditmodesource-warning": "U staat op het punt over te schakelen naar broncodebewerking.\nWijzigingen die u hebt gemaakt worden behouden, maar u kunt niet terug naar de visuele tekstverwerker zonder op te slaan en de pagina opnieuw te laden.\nWilt u doorgaan?",
 	"visualeditor-mwgalleryinspector-placeholder": "Voorbeeld.jpg|Bijschrift voor afbeelding",
 	"visualeditor-mwgalleryinspector-title": "Galerij",
@@ -229,6 +230,7 @@
 	"visualeditor-toolbar-style-tooltip": "Tekst opmaken",
 	"visualeditor-usernamespacepagelink": "Project:Gebruikersnaamruimte",
 	"visualeditor-viewpage-savewarning": "Weet u zeker dat u wilt teruggaan naar de modus bekijken zonder eerst op te slaan?",
+	"visualeditor-viewpage-savewarning-discard": "Wijzigingen niet opslaan",
 	"visualeditor-viewpage-savewarning-keep": "Doorgaan met bewerken",
 	"visualeditor-wikitext-warning": "U bevindt zich in de visuele tekstverwerker - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] werkt hier niet. Klik op \"{{int:visualeditor-ca-editsource}}\" om naar wikitekstmodus te gaan – veranderingen die niet zijn opgeslagen gaan dan verloren.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
