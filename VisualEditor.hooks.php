@@ -665,4 +665,15 @@ class VisualEditorHooks {
 	public static function onParserTestGlobals( array &$settings ) {
 		$settings['wgVisualEditorInParserTests'] = true;
 	}
+
+	/**
+	 * @param Array $redirectParams Parameters preserved on special page redirects
+	 *   to wiki pages
+	 * @return bool Always true
+	 */
+	public static function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
+		array_push( $redirectParams, 'veaction', 'vesection' );
+
+		return true;
+	}
 }
