@@ -19,6 +19,8 @@
 ve.ui.MWGalleryInspector = function VeUiMWGalleryInspector( config ) {
 	// Parent constructor
 	ve.ui.MWExtensionInspector.call( this, config );
+
+	this.$element.addClass( 've-ui-mwGalleryInpsector' );
 };
 
 /* Inheritance */
@@ -37,6 +39,14 @@ ve.ui.MWGalleryInspector.static.title =
 ve.ui.MWGalleryInspector.static.nodeModel = ve.dm.MWGalleryNode;
 
 /* Methods */
+
+/** */
+ve.ui.MWGalleryInspector.prototype.initialize = function () {
+	// Parent method
+	ve.ui.MWExtensionInspector.prototype.initialize.call( this );
+
+	this.input.$element.addClass( 've-ui-mwGalleryInpsector-input' );
+};
 
 /** */
 ve.ui.MWGalleryInspector.prototype.getInputPlaceholder = function () {
