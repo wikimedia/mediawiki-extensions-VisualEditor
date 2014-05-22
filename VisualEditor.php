@@ -1158,6 +1158,9 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/inspectors/ve.ui.MWGalleryInspector.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWGalleryInspectorTool.js',
 		),
+		'styles' => array(
+			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWGalleryInspector.css',
+		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
 		),
