@@ -267,6 +267,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 					categoryWidget.categoryRedirects[itemTitle],
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
+				config.hidden = categoryWidget.categoryHiddenStatus[categoryWidget.categoryRedirects[itemTitle]];
 			}
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( categoryWidget, {
