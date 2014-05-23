@@ -216,8 +216,11 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Structure
 	{
-		'type': 'bar',
-		'include': [ 'number', 'bullet', 'outdent', 'indent' ]
+		'type': 'list',
+		'icon': 'bullet-list',
+		'indicator': 'down',
+		'include': [ { 'group': 'structure' } ],
+		'demote': [ 'outdent', 'indent' ]
 	},
 	// Insert
 	{
