@@ -496,6 +496,7 @@ $wgResourceModules += array(
 		'skinStyles' => array(
 			'default' => array(
 				'lib/ve/modules/ve/ui/themes/apex/ve.ui.Inspector.css',
+				'lib/ve/modules/ve/ui/themes/apex/dialogs/ve.ui.ActionDialog.css',
 			),
 			'minerva' => array(),
 		),
