@@ -31,10 +31,10 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
 
 	// DOM Hierarchy for BlockImageNode:
 	// <div> this.$element
-	//   <figure> this.$figure (ve-ce-mwBlockImageNode-type (thumb) (tright/tleft/etc))
+	//   <figure> this.$figure (ve-ce-mwBlockImageNode-{type})
 	//     <a> this.$a
-	//       <img> this.$image (thumbimage)
-	//     <figcaption> this.caption.view.$element (thumbcaption)
+	//       <img> this.$image
+	//     <figcaption> this.caption.view.$element
 
 	// Build DOM:
 	this.$a = this.$( '<a>' )
@@ -206,15 +206,7 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 	}
 
 	this.$image.css( dimensions );
-
-	this.$figure.css( {
-		// If we have a border then the width is increased by 2
-		'width': dimensions.width + ( this.captionVisible ? 2 : 0 ),
-		'height': this.captionVisible ? 'auto' : dimensions.height
-	} );
-
 	this.$figure.toggleClass( 'mw-default-size', !!this.model.getAttribute( 'defaultSize' ) );
-
 };
 
 /**
