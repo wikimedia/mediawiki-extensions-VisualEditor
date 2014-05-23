@@ -45,7 +45,7 @@ module.exports = function ( grunt ) {
 				targetFile: '.docs/eg-iframe.html',
 				template: '.docs/eg-iframe.html.template',
 				modules: modules,
-				load: [ 'visualEditor.desktop' ],
+				load: [ 'visualEditor.desktop.standalone' ],
 				pathPrefix: 'lib/ve/',
 				indent: '\t\t'
 			}
