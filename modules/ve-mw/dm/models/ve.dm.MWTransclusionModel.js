@@ -228,7 +228,7 @@ ve.dm.MWTransclusionModel.prototype.fetch = function () {
 	}
 
 	// Request template specs from server
-	request = ve.init.mw.Target.static.apiRequest( {
+	request = ve.init.target.constructor.static.apiRequest( {
 		'action': 'templatedata',
 		'titles': titles.join( '|' ),
 		'lang': mw.config.get( 'wgUserLanguage' ),

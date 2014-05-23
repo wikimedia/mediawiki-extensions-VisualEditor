@@ -83,7 +83,7 @@ ve.ce.MWImageNode.prototype.onAttributeChange = function () {};
 ve.ce.MWImageNode.prototype.generateContents = function () {
 	var xhr, deferred = $.Deferred();
 
-	xhr = ve.init.mw.Target.static.apiRequest( {
+	xhr = ve.init.target.constructor.static.apiRequest( {
 			'action': 'query',
 			'prop': 'imageinfo',
 			'iiprop': 'url',

@@ -114,7 +114,7 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
 		// The decision whether to take 'url' or 'apiurl' per each repository is made
 		// in the MWMediaSearchWidget depending on whether it is local and has apiurl
 		// defined at all.
-		ve.init.mw.Target.static.apiRequest( {
+		ve.init.target.constructor.static.apiRequest( {
 			'action': 'query',
 			'meta': 'filerepoinfo'
 		} )

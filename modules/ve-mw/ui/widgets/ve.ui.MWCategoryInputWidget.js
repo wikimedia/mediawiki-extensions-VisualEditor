@@ -56,7 +56,7 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupInputWidget );
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
-	return ve.init.mw.Target.static.apiRequest( {
+	return ve.init.target.constructor.static.apiRequest( {
 		'action': 'query',
 		'list': 'allcategories',
 		'acprefix': this.value,

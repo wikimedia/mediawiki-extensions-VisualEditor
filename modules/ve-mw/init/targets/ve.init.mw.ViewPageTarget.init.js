@@ -34,7 +34,6 @@
 			loadTargetDeferred = $.Deferred()
 				.done( function () {
 					var target = new ve.init.mw.ViewPageTarget();
-					ve.init.mw.targets.push( target );
 
 					// Tee tracked events to MediaWiki firehose, if available (1.23+).
 					if ( mw.track ) {

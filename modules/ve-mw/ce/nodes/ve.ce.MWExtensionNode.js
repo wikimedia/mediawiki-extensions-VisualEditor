@@ -51,7 +51,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 			$( xmlDoc.documentElement ).attr( attrs ).text( extsrc )[0]
 		);
 
-	xhr = ve.init.mw.Target.static.apiRequest( {
+	xhr = ve.init.target.constructor.static.apiRequest( {
 		'action': 'visualeditor',
 		'paction': 'parsefragment',
 		'page': mw.config.get( 'wgRelevantPageName' ),

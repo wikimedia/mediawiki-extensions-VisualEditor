@@ -109,26 +109,34 @@ ve.ui.MWMediaEditDialog.static.surfaceCommands = [
 	'pasteSpecial'
 ];
 
-ve.ui.MWMediaEditDialog.static.pasteRules = ve.extendObject(
-	ve.copy( ve.init.mw.Target.static.pasteRules ),
-	{
-		'all': {
-			'blacklist': OO.simpleArrayUnion(
-				ve.getProp( ve.init.mw.Target.static.pasteRules, 'all', 'blacklist' ) || [],
-				[
-					// Tables (but not lists) are possible in wikitext with a leading
-					// line break but we prevent creating these with the UI
-					'list', 'listItem', 'definitionList', 'definitionListItem',
-					'table', 'tableCaption', 'tableSection', 'tableRow', 'tableCell'
-				]
-			),
-			// Headings are also possible, but discouraged
-			'conversions': {
-				'mwHeading': 'paragraph'
+/**
+ * Get the paste rules for the surface widget in the dialog
+ *
+ * @see ve.dm.ElementLinearData#sanitize
+ * @return {Object} Paste rules
+ */
+ve.ui.MWMediaEditDialog.static.getPasteRules = function () {
+	return ve.extendObject(
+		ve.copy( ve.init.target.constructor.static.pasteRules ),
+		{
+			'all': {
+				'blacklist': OO.simpleArrayUnion(
+					ve.getProp( ve.init.target.constructor.static.pasteRules, 'all', 'blacklist' ) || [],
+					[
+						// Tables (but not lists) are possible in wikitext with a leading
+						// line break but we prevent creating these with the UI
+						'list', 'listItem', 'definitionList', 'definitionListItem',
+						'table', 'tableCaption', 'tableSection', 'tableRow', 'tableCell'
+					]
+				),
+				// Headings are also possible, but discouraged
+				'conversions': {
+					'mwHeading': 'paragraph'
+				}
 			}
 		}
-	}
-);
+	);
+};
 
 /* Methods */
 
@@ -460,7 +468,7 @@ ve.ui.MWMediaEditDialog.prototype.getSetupProcess = function ( data ) {
 					'$': this.$,
 					'tools': this.constructor.static.toolbarGroups,
 					'commands': this.constructor.static.surfaceCommands,
-					'pasteRules': this.constructor.static.pasteRules
+					'pasteRules': this.constructor.static.getPasteRules()
 				}
 			);
 

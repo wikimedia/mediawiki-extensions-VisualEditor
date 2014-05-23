@@ -78,7 +78,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 		value = value.substr( 1 );
 	}
 
-	return ve.init.mw.Target.static.apiRequest( {
+	return ve.init.target.constructor.static.apiRequest( {
 		'action': 'opensearch',
 		'search': value,
 		'suggest': ''
