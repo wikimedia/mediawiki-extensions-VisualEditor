@@ -1291,17 +1291,6 @@ ve.init.mw.Target.prototype.getEditNotices = function () {
 // FIXME: split out view specific functionality, emit to subclass
 
 /**
- * Create a surface.
- *
- * @method
- * @param {ve.dm.Document} dmDoc Document model
- * @returns {ve.ui.Surface}
- */
-ve.init.mw.Target.prototype.createSurface = function ( dmDoc ) {
-	return new ve.ui.DesktopSurface( dmDoc );
-};
-
-/**
  * Switch to editing mode.
  *
  * @method
