@@ -415,7 +415,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/ve.ui.js',
 
 			'lib/ve/modules/ve/ui/ve.ui.Surface.js',
-			'lib/ve/modules/ve/ui/ve.ui.DesktopSurface.js',
 			'lib/ve/modules/ve/ui/ve.ui.Context.js',
 			'lib/ve/modules/ve/ui/ve.ui.Dialog.js',
 			'lib/ve/modules/ve/ui/ve.ui.Inspector.js',
@@ -482,7 +481,6 @@ $wgResourceModules += array(
 			// ui
 			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.ActionDialog.css',
 			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
-			'lib/ve/modules/ve/ui/styles/ve.ui.DesktopContext.css',
 			'lib/ve/modules/ve/ui/styles/tools/ve.ui.FormatTool.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.DimensionsWidget.css',
