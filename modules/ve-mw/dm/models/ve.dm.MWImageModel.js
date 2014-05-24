@@ -28,8 +28,6 @@ ve.dm.MWImageModel = function VeDmMWImageModel() {
 	this.altText = null;
 	this.type = null;
 	this.alignment = null;
-	this.defaultAlignment = false;
-	this.aligned = false;
 	this.scalable = null;
 	this.sizeType = null;
 	this.border = false;
@@ -100,11 +98,6 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	imgModel.setMediaType( attrs.mediatype || 'BITMAP' );
 	imgModel.setType( attrs.type );
 
-	imgModel.toggleDefaultAlignment(
-		attrs.align === undefined ||
-		attrs.align === 'default'
-	);
-
 	// Fix cases where alignment is undefined
 	// Inline images have no 'align' (they have 'valign' instead)
 	// But we do want an alignment case for these in case they
@@ -112,7 +105,6 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	attrs.align = attrs.align !== undefined ? attrs.align : 'default';
 
 	imgModel.setAlignment( attrs.align );
-	imgModel.toggleAligned( attrs.align !== 'none' );
 
 	imgModel.setVerticalAlignment( attrs.valign );
 
@@ -300,10 +292,7 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 		attrs.alt = this.getAltText();
 	}
 
-	if (
-		this.isDefaultAligned() ||
-		this.getAlignment() === this.getDefaultDir()
-	) {
+	if ( this.isDefaultAligned() ) {
 		attrs.align = 'default';
 	} else if ( !this.isAligned() ) {
 		attrs.align = 'none';
@@ -365,15 +354,34 @@ ve.dm.MWImageModel.prototype.hasBorder = function () {
  * @return {boolean} hasAlignment flag on or off
  */
 ve.dm.MWImageModel.prototype.isAligned = function () {
-	return this.aligned;
+	return this.alignment !== 'none';
 };
 
 /**
  * Check whether the image is set to default alignment
+ * We explicitly repeat tests so to avoid recursively calling
+ * the other methods.
  * @return {boolean} defaultAlignment flag on or off
  */
 ve.dm.MWImageModel.prototype.isDefaultAligned = function () {
-	return this.defaultAlignment;
+	var imageType = this.getType(),
+		alignment = this.getAlignment(),
+		defaultAlignment = ( this.getDir() === 'rtl' ) ? 'left' : 'right';
+
+	if (
+		(
+			( imageType === 'frameless' || imageType === 'none' ) &&
+			alignment === 'none'
+		) ||
+		(
+			( imageType === 'thumb' || imageType === 'frame' ) &&
+			alignment === defaultAlignment
+		)
+	) {
+		return true;
+	}
+
+	return false;
 };
 
 /**
@@ -491,18 +499,17 @@ ve.dm.MWImageModel.prototype.toggleBorderable = function ( borderable ) {
  *
  * @param {boolean} [aligned] Image has alignment
  * @fires alignmentChange
- */
+ *
 ve.dm.MWImageModel.prototype.toggleAligned = function ( aligned ) {
 	var currentAlignment;
 
 	aligned = aligned !== undefined ? !!aligned : !this.isAligned();
-	this.aligned = !!aligned;
 
-	currentAlignment = !!aligned ? this.getAlignment() : 'none';
-	this.emit( 'alignmentChange',
-		!!aligned ?
-		this.getAlignment() : 'none'
-	);
+	if ( !aligned ) {
+		this.setAlignment( 'none' );
+	}
+
+	this.emit( 'alignmentChange', this.getAlignment() );
 };
 /**
  * Toggle the border flag of the image
@@ -513,19 +520,6 @@ ve.dm.MWImageModel.prototype.toggleBorder = function ( hasBorder ) {
 	hasBorder = hasBorder !== undefined ? !!hasBorder : !this.hasBorder();
 
 	this.border = !!hasBorder;
-};
-
-/**
- * Toggle the default alignment flag of the image
- *
- * @param {Boolean} [isDefault] Default alignment flat. Omit to toggle current value.
- * @fires alignmentChange
- */
-ve.dm.MWImageModel.prototype.toggleDefaultAlignment = function ( isDefault ) {
-	isDefault = isDefault !== undefined ? !!isDefault : !this.isDefaultAligned();
-
-	this.defaultAlignment = !!isDefault;
-	this.emit( 'alignmentChange', this.alignment );
 };
 
 /**
@@ -676,9 +670,6 @@ ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
 	if ( align === 'default' ) {
 		// If default, set the alignment to language dir default
 		align = this.getDefaultDir();
-		this.toggleDefaultAlignment( true );
-	} else {
-		this.toggleDefaultAlignment( this.getDefaultDir() === align );
 	}
 
 	this.alignment = align;
@@ -705,10 +696,10 @@ ve.dm.MWImageModel.prototype.setVerticalAlignment = function ( valign ) {
 ve.dm.MWImageModel.prototype.getDefaultDir = function () {
 	if ( this.getDir() === 'rtl' ) {
 		// Assume position is 'left'
-		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'left' : 'right';
+		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'left' : 'none';
 	} else {
 		// Assume position is 'right'
-		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'right' : 'left';
+		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'right' : 'none';
 	}
 };
 
