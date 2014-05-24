@@ -310,8 +310,8 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	// Events
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 	this.borderCheckbox.connect( this, { 'change': 'onBorderCheckboxChange' } );
-	this.positionInput.connect( this, { 'select': 'onPositionInputSelect' } );
-	this.typeInput.connect( this, { 'select': 'onTypeInputSelect' } );
+	this.positionInput.connect( this, { 'choose': 'onPositionInputSelect' } );
+	this.typeInput.connect( this, { 'choose': 'onTypeInputSelect' } );
 
 	// Initialization
 	this.generalSettingsPage.$element.append( [
@@ -334,7 +334,13 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
  */
 ve.ui.MWMediaEditDialog.prototype.onImageModelAlignmentChange = function ( alignment ) {
 	var item = alignment ? this.positionInput.getItemFromData( alignment ) : null;
+
+	alignment = alignment || 'none';
+
+	this.positionCheckbox.setValue( alignment !== 'none' );
+	// Select the item without triggering the 'choose' event
 	this.positionInput.selectItem( item );
+
 };
 
 /**
@@ -343,7 +349,8 @@ ve.ui.MWMediaEditDialog.prototype.onImageModelAlignmentChange = function ( align
  */
 
 ve.ui.MWMediaEditDialog.prototype.onImageModelTypeChange = function ( type ) {
-	var item = type ? this.typeInput.getItemFromData( type ) : null;
+	var newImageType,
+		item = type ? this.typeInput.getItemFromData( type ) : null;
 
 	this.typeInput.selectItem( item );
 
@@ -354,6 +361,27 @@ ve.ui.MWMediaEditDialog.prototype.onImageModelTypeChange = function ( type ) {
 	this.borderCheckbox.setValue(
 		this.imageModel.isBorderable() && this.imageModel.hasBorder()
 	);
+
+	// If we switched node type (block/inline or vise versa) the 'default' value
+	// should be updated
+	newImageType = this.imageModel.getImageNodeType();
+	if (
+		this.mediaNode.type === 'mwBlockImage' &&
+		newImageType === 'mwInlineImage'
+	) {
+		// Always reset the default alignment value if we're switching from block
+		// to inline
+		this.imageModel.setAlignment( 'default' );
+	} else if (
+		this.mediaNode.type === 'mwInlineImage' &&
+		newImageType === 'mwBlockImage' &&
+		this.imageModel.getAlignment() === 'none'
+	) {
+		// If the alignment is 'none' and we switch from inline to block
+		// switch the alignment to default
+		this.imageModel.setAlignment( 'default' );
+	}
+
 };
 
 /**
@@ -362,12 +390,18 @@ ve.ui.MWMediaEditDialog.prototype.onImageModelTypeChange = function ( type ) {
  * @param {boolean} checked Checkbox status
  */
 ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function ( checked ) {
+	var newPositionValue;
 
-	// Update the image model
-	this.imageModel.toggleAligned( checked );
-
-	// Reset the GUI
-	if ( !checked ) {
+	// Update the image model with a default value
+	if ( checked ) {
+		if ( this.imageModel.getImageNodeType() === 'mwInlineImage' ) {
+			newPositionValue = this.mediaNode.getDocument().getDir() === 'rtl' ? 'left' : 'right';
+		} else {
+			newPositionValue = this.imageModel.getDefaultDir();
+		}
+		this.imageModel.setAlignment( newPositionValue );
+	} else {
+		this.imageModel.setAlignment( 'none' );
 		this.positionInput.selectItem( null );
 	}
 
@@ -462,7 +496,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.positionCheckbox.setValue(
 		this.imageModel.isAligned()
 	);
-	this.positionInput.selectItem(
+	this.positionInput.chooseItem(
 		this.imageModel.isAligned() ?
 		this.positionInput.getItemFromData(
 			this.imageModel.getAlignment()
@@ -479,7 +513,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	);
 
 	// Type select
-	this.typeInput.selectItem(
+	this.typeInput.chooseItem(
 		this.typeInput.getItemFromData(
 			this.imageModel.getType() || 'none'
 		)
