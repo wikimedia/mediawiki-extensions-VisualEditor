@@ -184,6 +184,8 @@
 	"visualeditor-toolbar-style-tooltip": "Стил текста",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-viewpage-savewarning": "Да ли сте сигурни да желите да се вратите на приказ без претходног чувања?",
+	"visualeditor-viewpage-savewarning-discard": "Занемари измене",
+	"visualeditor-viewpage-savewarning-keep": "Настави са уређивањем",
 	"visualeditor-wikitext-warning": "Користите Визуелни уређивач - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]] овде не ради. Кликните на „{{int:visualeditor-ca-editsource}}“ да уредите страницу у викитекст режиму - несачуване измене ће бити изгубљене.",
 	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "Детектован викитекст"
