@@ -820,10 +820,14 @@ ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
  * Re-evaluate whether the toolbar save button should be disabled or not.
  */
 ve.init.mw.ViewPageTarget.prototype.updateToolbarSaveButtonState = function () {
+	var isDisabled;
+
 	this.edited = this.surface.getModel().hasBeenModified();
 	// Disable the save button if we have no history or if the sanity check is not finished
-	this.toolbarSaveButton.setDisabled( ( !this.edited && !this.restoring ) || !this.sanityCheckFinished );
+	isDisabled = ( !this.edited && !this.restoring ) || !this.sanityCheckFinished;
+	this.toolbarSaveButton.setDisabled( isDisabled );
 	this.toolbarSaveButton.$element.toggleClass( 've-init-mw-viewPageTarget-waiting', !this.sanityCheckFinished );
+	mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
 };
 
 /**
