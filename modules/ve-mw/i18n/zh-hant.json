@@ -24,7 +24,7 @@
 	"visualeditor-advancedsettings-tool": "進階設定",
 	"visualeditor-beta-appendix": "測試",
 	"visualeditor-beta-label": "測試",
-	"visualeditor-beta-warning": "視覺化編輯器目前尚為「測試版」，您可能會遇到操作問題，且並非任何內容都可編輯。若要切換回元代碼編輯而不丟失更改，請打開「{{int:visualeditor-toolbar-cancel}}」之后的下拉清單並選擇「{{int:visualeditor-mweditmodesource-title}}」。",
+	"visualeditor-beta-warning": "VisualEditor 目前尚為 '測試版'，您可能會遇到操作問題，且可能無法編輯部分頁面。若要保留您現有的資料並切換回原始碼編輯器，請點選 \"{{int:visualeditor-toolbar-cancel}}\" 旁的下拉式選單，並選擇 \"{{int:visualeditor-mweditmodesource-title}}\"。",
 	"visualeditor-browserwarning": "VisualEditor 不支援您目前使用的瀏覽器。",
 	"visualeditor-ca-createlocaldescriptionsource": "加入本地說明來源",
 	"visualeditor-ca-createsource": "建立原始碼",
@@ -53,7 +53,7 @@
 	"visualeditor-dialog-media-page-advanced": "進階設定",
 	"visualeditor-dialog-media-page-general": "一般設定",
 	"visualeditor-dialog-media-position-center": "置中",
-	"visualeditor-dialog-media-position-checkbox": "此項目要與文字併排",
+	"visualeditor-dialog-media-position-checkbox": "此項目要與文字並排",
 	"visualeditor-dialog-media-position-left": "左",
 	"visualeditor-dialog-media-position-none": "無",
 	"visualeditor-dialog-media-position-right": "右",
@@ -235,7 +235,7 @@
 	"visualeditor-viewpage-savewarning": "您確定要放棄儲存並回到檢視模式嗎？",
 	"visualeditor-viewpage-savewarning-discard": "取消編輯",
 	"visualeditor-viewpage-savewarning-keep": "繼續編輯",
-	"visualeditor-wikitext-warning": "您正使用 VisualEditor - 目前不支援 [[{{MediaWiki:visualeditor-wikitext-warning-link}}|WikiText]] 。 可點選 \"{{int:visualeditor-ca-editsource}}\" 使用 WikiText 模式編輯頁面，並且放棄尚未儲存的變更。",
+	"visualeditor-wikitext-warning": "您正使用 VisualEditor - 目前不支援 [[{{MediaWiki:visualeditor-wikitext-warning-link}}|WikiText]] 。 若要保留您現有的資料並切換回原始碼編輯器，請點選 \"<visualeditor-toolbar-cancel>\" 旁的下拉式選單，並選擇 \"<visualeditor-mweditmodesource-title>\"。",
 	"visualeditor-wikitext-warning-link": "Help:Wiki 標記語言",
 	"visualeditor-wikitext-warning-title": "偵測到 Wiki 標記語言"
 }
