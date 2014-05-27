@@ -11,3 +11,7 @@ Before("@edit_user_page_login") do
     $edit_user_page_login=true
   end
 end
+
+Before("@language_screenshot") do |scenario|
+  @scenario = scenario
+end

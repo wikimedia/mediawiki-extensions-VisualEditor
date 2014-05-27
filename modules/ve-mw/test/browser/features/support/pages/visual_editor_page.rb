@@ -34,6 +34,8 @@ class VisualEditorPage
   a(:subheading3, text: /Sub-heading 3/)
   a(:subheading4, text: /Sub-heading 4/)
   span(:switch_to_source_editing, class: "oo-ui-iconedElement-icon oo-ui-icon-source")
+  div(:heading_dropdown_menus, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable")
+  div(:formatting_option_menus, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 1)
 
   if ENV["BROWSER"] == "chrome"
     div(:tools_menu, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-toolGroup oo-ui-iconedElement oo-ui-popupToolGroup oo-ui-listToolGroup")
