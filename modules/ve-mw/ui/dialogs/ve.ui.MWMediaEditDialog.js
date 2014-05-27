@@ -349,8 +349,7 @@ ve.ui.MWMediaEditDialog.prototype.onImageModelAlignmentChange = function ( align
  */
 
 ve.ui.MWMediaEditDialog.prototype.onImageModelTypeChange = function ( type ) {
-	var newImageType,
-		item = type ? this.typeInput.getItemFromData( type ) : null;
+	var item = type ? this.typeInput.getItemFromData( type ) : null;
 
 	this.typeInput.selectItem( item );
 
@@ -361,27 +360,6 @@ ve.ui.MWMediaEditDialog.prototype.onImageModelTypeChange = function ( type ) {
 	this.borderCheckbox.setValue(
 		this.imageModel.isBorderable() && this.imageModel.hasBorder()
 	);
-
-	// If we switched node type (block/inline or vise versa) the 'default' value
-	// should be updated
-	newImageType = this.imageModel.getImageNodeType();
-	if (
-		this.mediaNode.type === 'mwBlockImage' &&
-		newImageType === 'mwInlineImage'
-	) {
-		// Always reset the default alignment value if we're switching from block
-		// to inline
-		this.imageModel.setAlignment( 'default' );
-	} else if (
-		this.mediaNode.type === 'mwInlineImage' &&
-		newImageType === 'mwBlockImage' &&
-		this.imageModel.getAlignment() === 'none'
-	) {
-		// If the alignment is 'none' and we switch from inline to block
-		// switch the alignment to default
-		this.imageModel.setAlignment( 'default' );
-	}
-
 };
 
 /**
@@ -496,7 +474,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	this.positionCheckbox.setValue(
 		this.imageModel.isAligned()
 	);
-	this.positionInput.chooseItem(
+	this.positionInput.selectItem(
 		this.imageModel.isAligned() ?
 		this.positionInput.getItemFromData(
 			this.imageModel.getAlignment()
@@ -513,7 +491,7 @@ ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
 	);
 
 	// Type select
-	this.typeInput.chooseItem(
+	this.typeInput.selectItem(
 		this.typeInput.getItemFromData(
 			this.imageModel.getType() || 'none'
 		)

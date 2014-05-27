@@ -102,7 +102,7 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	// Inline images have no 'align' (they have 'valign' instead)
 	// But we do want an alignment case for these in case they
 	// are transformed to block images
-	attrs.align = attrs.align !== undefined ? attrs.align : 'default';
+	attrs.align = attrs.align || 'default';
 
 	imgModel.setAlignment( attrs.align );
 
@@ -132,13 +132,20 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 
 /**
  * Get the current image node type according to the attributes.
+ * If either of the parameters are given, the node type is tested
+ * against them, otherwise, it is tested against the current image
+ * parameters.
  *
+ * @param {string} [imageType] Optional. Image type.
+ * @param {string} [align] Optional. Image alignment.
  * @return {string} Node type 'mwInlineImage' or 'mwBlockImage'
  */
-ve.dm.MWImageModel.prototype.getImageNodeType = function () {
+ve.dm.MWImageModel.prototype.getImageNodeType = function ( imageType, align ) {
+	imageType = imageType || this.getType();
+
 	if (
 		( this.getType() === 'frameless' || this.getType() === 'none' ) &&
-		( !this.isAligned() || this.isDefaultAligned() )
+		( !this.isAligned( align ) || this.isDefaultAligned( imageType, align ) )
 	) {
 		return 'mwInlineImage';
 	} else {
@@ -351,22 +358,40 @@ ve.dm.MWImageModel.prototype.hasBorder = function () {
 
 /**
  * Check whether the image has floating alignment set
+ * @param {string} [align] Optional. Alignment value to test against.
  * @return {boolean} hasAlignment flag on or off
  */
-ve.dm.MWImageModel.prototype.isAligned = function () {
-	return this.alignment !== 'none';
+ve.dm.MWImageModel.prototype.isAligned = function ( align ) {
+	align = align || this.alignment;
+	// The image is aligned if it has alignment (not undefined and not null)
+	// and if its alignment is not 'none'.
+	// Inline images initially have null alignment value (and are not aligned)
+	return align && align !== 'none';
 };
 
 /**
  * Check whether the image is set to default alignment
  * We explicitly repeat tests so to avoid recursively calling
  * the other methods.
+ * @param {string} [align] Optional alignment value to test against.
+ * Supplying this parameter would test whether this align parameter
+ * would mean the image is aligned to its default position.
  * @return {boolean} defaultAlignment flag on or off
  */
-ve.dm.MWImageModel.prototype.isDefaultAligned = function () {
-	var imageType = this.getType(),
-		alignment = this.getAlignment(),
+ve.dm.MWImageModel.prototype.isDefaultAligned = function ( imageType, align ) {
+	var alignment = align || this.getAlignment(),
 		defaultAlignment = ( this.getDir() === 'rtl' ) ? 'left' : 'right';
+
+	imageType = imageType || this.getType();
+	// No alignment specified means defeault alignment always
+	// Inline images have no align attribute; during the initialization
+	// stage of the model we have to account for that option. Later the
+	// model creates a faux alignment for inline images ('none' for default)
+	// but if initially the alignment is null or undefined, it means the image
+	// is inline without explicit alignment (which makes it default aligned)
+	if ( !alignment ) {
+		return true;
+	}
 
 	if (
 		(
@@ -428,7 +453,8 @@ ve.dm.MWImageModel.prototype.getMediaType = function () {
 
 /**
  * Get image alignment 'left', 'right', 'center', 'none' or 'default'
- * @return {string} Image alignment
+ * @return {string|null} Image alignment. Inline images have initial alignment
+ * value of null.
  */
 ve.dm.MWImageModel.prototype.getAlignment = function () {
 	return this.alignment;
@@ -494,23 +520,6 @@ ve.dm.MWImageModel.prototype.toggleBorderable = function ( borderable ) {
 	this.borderable = borderable;
 };
 
-/**
- * Toggle whether the image has an floating alignment set
- *
- * @param {boolean} [aligned] Image has alignment
- * @fires alignmentChange
- *
-ve.dm.MWImageModel.prototype.toggleAligned = function ( aligned ) {
-	var currentAlignment;
-
-	aligned = aligned !== undefined ? !!aligned : !this.isAligned();
-
-	if ( !aligned ) {
-		this.setAlignment( 'none' );
-	}
-
-	this.emit( 'alignmentChange', this.getAlignment() );
-};
 /**
  * Toggle the border flag of the image
  *
@@ -581,6 +590,8 @@ ve.dm.MWImageModel.prototype.setAltText = function ( text ) {
  * @fires typeChange
  */
 ve.dm.MWImageModel.prototype.setType = function ( type ) {
+	var wasDefaultAligned = this.isDefaultAligned();
+
 	this.type = type;
 
 	if ( type === 'frame' || type === 'thumb' ) {
@@ -589,6 +600,11 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 	} else {
 		// Enable border option
 		this.toggleBorderable( true );
+	}
+
+	if ( wasDefaultAligned ) {
+		// Reset default alignment
+		this.setAlignment( 'default' );
 	}
 
 	// Let the image node update scalable considerations
