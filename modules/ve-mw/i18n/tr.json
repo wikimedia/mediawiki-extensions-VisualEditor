@@ -9,7 +9,8 @@
 			"Talha Samil Cakir",
 			"TurkishStyles",
 			"Meelo",
-			"Ceas08"
+			"Ceas08",
+			"Mavrikant"
 		]
 	},
 	"tooltip-ca-createsource": "Bu sayfanın kaynak kodunu oluşturun",
@@ -97,7 +98,7 @@
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Bu sayfada her başlığın yanındaki düzenle bağlantısını devre dışı bırak.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Galeriyi devre dışı bırak",
 	"visualeditor-dialog-meta-settings-redirect-label": "Bu sayfaya yönlendirir",
-	"visualeditor-dialog-meta-settings-redirect-placeholder": "Hedef sayfa için yeniden yönlendirme",
+	"visualeditor-dialog-meta-settings-redirect-placeholder": "Yeniden yönlendirme için hedef sayfa",
 	"visualeditor-dialog-meta-settings-section": "Sayfa ayarları",
 	"visualeditor-dialog-meta-settings-toc-default": "Gerekirse",
 	"visualeditor-dialog-meta-settings-toc-disable": "Asla",

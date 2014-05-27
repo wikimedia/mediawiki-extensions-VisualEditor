@@ -15,7 +15,8 @@
 			"Maria victoria",
 			"Ontsed",
 			"PeppeAeco",
-			"Lucas2"
+			"Lucas2",
+			"Nemo bis"
 		]
 	},
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
@@ -152,7 +153,7 @@
 	"visualeditor-dialogbutton-referencelist-tooltip": "Elenco riferimenti",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Inclusione",
-	"visualeditor-diff-nochanges": "Non può essere avviata la revisione poiché la tua versione corrisponde all'ultima della pagina.",
+	"visualeditor-diff-nochanges": "Non può essere avviata la verifica perché la tua versione corrisponde all'ultima della pagina.",
 	"visualeditor-differror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-editconflict": "Le modifiche apportate non possono essere salvate a causa di un conflitto di edizione. {{GENDER:|Vuoi}} risolvere il conflitto manualmente?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notifica|notifiche}}",

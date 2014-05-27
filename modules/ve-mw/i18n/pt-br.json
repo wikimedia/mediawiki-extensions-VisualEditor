@@ -15,7 +15,8 @@
 			"Amgauna",
 			"Fabsouza1",
 			"Agripinoduarte",
-			"Opraco"
+			"Opraco",
+			"Tuliouel"
 		]
 	},
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -33,6 +34,8 @@
 	"visualeditor-ca-ve-edit": "Editor visual",
 	"visualeditor-ca-ve-edit-section": "Editor Visual",
 	"visualeditor-categories-tool": "Categorias",
+	"visualeditor-cite-tool-name-journal": "Jornal",
+	"visualeditor-cite-tool-name-news": "Notícias",
 	"visualeditor-cite-tool-name-web": "Site",
 	"visualeditor-desc": "Editor visual para o MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Editor Visual",
@@ -91,7 +94,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Padrão",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Não",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Sim",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Mostra uma aba nesta página para adicionar uma nova seção",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Mostrar uma aba nesta página para adicionar uma nova seção",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Não converta conteúdo entre variantes de linguagem",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Desabilitar os links 'editar'próximo a cada seção nessa página.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Desabilitar galeria",

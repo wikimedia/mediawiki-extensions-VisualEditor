@@ -36,6 +36,7 @@
 	"visualeditor-dialog-media-content-section": "КуьгтаӀор",
 	"visualeditor-dialog-media-insert-button": "Медиа-файл чуйилар",
 	"visualeditor-dialog-media-insert-title": "Медиа-файл чуйилар",
+	"visualeditor-dialog-media-noresults": "ХӀума ца карийна",
 	"visualeditor-dialog-media-page-advanced": "Кхин тӀе гӀирс нисбар",
 	"visualeditor-dialog-media-page-general": "Массо гӀирс нисбар",
 	"visualeditor-dialog-media-position-center": "Юкъехь",
@@ -195,11 +196,14 @@
 	"visualeditor-serializeerror": "Серверан чура чуйохккхуш гӀалат даьлла: $1",
 	"visualeditor-settings-tool": "АгӀона параметраш",
 	"visualeditor-toolbar-cancel": "Цаоьшу",
+	"visualeditor-toolbar-cite-label": "Белгалдахарш",
 	"visualeditor-toolbar-format-tooltip": "Формат йе могӀа юьххьера юхаозаран",
 	"visualeditor-toolbar-savedialog": "Хьажа/дӀайазъé",
 	"visualeditor-toolbar-style-tooltip": "Йозан хатӀ",
 	"visualeditor-usernamespacepagelink": "Project:Долара цӀерийн меттиг",
 	"visualeditor-viewpage-savewarning": "Ахьа хийцамаш дӀаязбанца тадар дӀакъовлуш ду тидам бе хийцамаш дӀаязлур дац.",
+	"visualeditor-viewpage-savewarning-discard": "Юхудаха нисдарш",
+	"visualeditor-viewpage-savewarning-keep": "Кхин дӀа тае",
 	"visualeditor-wikitext-warning-link": "Help:Вики-билгало",
 	"visualeditor-wikitext-warning-title": "Карина вики-билгало"
 }
