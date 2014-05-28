@@ -556,8 +556,6 @@ ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
  * @param {Object} jqXHR
  * @param {string} status Text status message
  * @param {Object|null} data API response data
- * @fires saveAsyncBegin
- * @fires saveAsyncComplete
  * @fires saveErrorEmpty
  * @fires saveErrorSpamBlacklist
  * @fires saveErrorAbuseFilter
@@ -570,7 +568,6 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 	var api, editApi,
 		viewPage = this;
 	this.saving = false;
-	this.emit( 'saveAsyncComplete' );
 
 	// Handle empty response
 	if ( !data ) {
@@ -595,7 +592,6 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 	// Handle token errors
 	if ( data.error && data.error.code === 'badtoken' ) {
 		api = new mw.Api();
-		this.emit( 'saveAsyncBegin' );
 		api.get( {
 			// action=query&meta=userinfo and action=tokens&type=edit can't be combined
 			// but action=query&meta=userinfo and action=query&prop=info can, however
@@ -611,7 +607,6 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 		} )
 			.always( function () {
 				viewPage.emit( 'saveErrorBadToken' );
-				viewPage.emit( 'saveAsyncComplete' );
 			} )
 			.done( function ( data ) {
 				var userMsg,

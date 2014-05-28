@@ -88,8 +88,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.connect( this, {
 		'save': 'onSave',
 		'saveErrorEmpty': 'onSaveErrorEmpty',
-		'saveAsyncBegin': 'onSaveAsyncBegin',
-		'saveAsyncComplete': 'onSaveAsyncComplete',
 		'saveErrorSpamBlacklist': 'onSaveErrorSpamBlacklist',
 		'saveErrorAbuseFilter': 'onSaveErrorAbuseFilter',
 		'saveErrorBadToken': 'onSaveErrorBadToken',
@@ -425,6 +423,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid, isRedirect ) {
 	var newUrlParams, watchChecked;
+	this.saveDeferred.resolve();
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
 		this.tearDownBeforeUnloadHandler();
@@ -478,33 +477,12 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 };
 
 /**
- * Update save dialog when async begins
- *
- * @method
-  */
-ve.init.mw.ViewPageTarget.prototype.onSaveAsyncBegin = function () {
-	this.saveDialog.saveButton.setDisabled( true );
-	this.saveDialog.pushPending();
-};
-
-/**
- * Update save dialog when async completes
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.onSaveAsyncComplete = function () {
-	this.saveDialog.saveButton.setDisabled( false );
-	this.saveDialog.popPending();
-};
-
-/**
  * Update save dialog message on general error
  *
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
-	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ) );
-	this.saveDialog.saveButton.setDisabled( true );
+	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
 	this.events.trackSaveError( 'empty' );
 };
 
@@ -517,9 +495,9 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editApi ) {
 	this.showSaveError(
 		// TODO: Use mediawiki.language equivalant of Language.php::listToText once it exists
-		ve.msg( 'spamprotectiontext' ) + ' ' + ve.msg( 'spamprotectionmatch', editApi.spamblacklist.split( '|' ).join( ', ' ) )
+		ve.msg( 'spamprotectiontext' ) + ' ' + ve.msg( 'spamprotectionmatch', editApi.spamblacklist.split( '|' ).join( ', ' ) ),
+		false // prevents reapply
 	);
-	this.saveDialog.saveButton.setDisabled( true );
 	this.events.trackSaveError( 'spamblacklist' );
 };
 
@@ -530,7 +508,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editAp
  * @param {Object} editApi
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorAbuseFilter = function ( editApi ) {
-	this.showSaveError( $.parseHTML( editApi.warning ), false );
+	this.showSaveError( $( $.parseHTML( editApi.warning ) ) );
 	// Don't disable the save button. If the action is not disallowed the user may save the
 	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
 	// between filter triggers that are and aren't disallowing the action.
@@ -563,10 +541,8 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( isAnon ) {
 		userMsg = 'visualeditor-savedialog-identify-user---' + mw.config.get( 'wgUserName' );
 	}
 	this.showSaveError(
-		$( badToken ).add( $.parseHTML( mw.message( userMsg ).parse() ) ),
-		'warning'
+		$( badToken ).add( $.parseHTML( mw.message( userMsg ).parse() ) )
 	);
-	this.saveDialog.saveButton.setDisabled( false );
 };
 
 /**
@@ -612,7 +588,13 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
 	}
 
 	$captchaDiv.append( this.captcha.input.$element );
-	this.showSaveError( $captchaDiv, false );
+
+	// ActionDialog's error system isn't great for this yet.
+	//this.showSaveError( $captchaDiv );
+	this.saveDialog.clearMessage( 'api-save-error' );
+	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
+	this.saveDialog.popPending();
+
 	this.events.trackSaveError( 'captcha' );
 };
 
@@ -625,15 +607,15 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, data ) {
 	this.showSaveError(
-		document.createTextNode(
+		$( document.createTextNode(
 			( editApi && editApi.info ) ||
 			( data.error && data.error.info ) ||
 			( editApi && editApi.code ) ||
 			( data.error && data.error.code ) ||
 			'Unknown error'
-		)
+		) ),
+		false // prevents reapply
 	);
-	this.saveDialog.saveButton.setDisabled( true );
 	this.events.trackSaveError( 'unknown' );
 };
 
@@ -643,13 +625,11 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
  * @method
  * @param {string|jQuery|Node[]} msg Message content (string of HTML, jQuery object or array of
  *  Node objects)
- * @param {string|boolean} wrap Whether to wrap the message in a paragraph and if
- *  so, how. One of "warning", "error" or false.
+ * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
+ *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
  */
-ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, wrap ) {
-	wrap = wrap || 'error';
-	this.saveDialog.clearMessage( 'api-save-error' );
-	this.saveDialog.showMessage( 'api-save-error', msg, { 'wrap': wrap } );
+ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply ) {
+	this.saveDeferred.reject( [ msg ], allowReapply );
 };
 
 /**
@@ -870,8 +850,10 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wiki
 /**
  * Try to save the current document.
  * @fires saveInitiated
+ * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
+ *  succeeds/fails.
  */
-ve.init.mw.ViewPageTarget.prototype.saveDocument = function () {
+ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
 	var saveOptions = this.getSaveOptions();
 	this.emit( 'saveInitiated' );
 
@@ -893,9 +875,8 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function () {
 			{ wrap: false }
 		);
 	} else {
-		this.saveDialog.saveButton.setDisabled( true );
-		this.saveDialog.pushPending();
 		this.save( this.docToSave, saveOptions );
+		this.saveDeferred = saveDeferred;
 	}
 };
 
