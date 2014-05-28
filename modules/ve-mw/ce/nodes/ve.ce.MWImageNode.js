@@ -88,7 +88,7 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 			'iiprop': 'url',
 			'iiurlwidth': this.getModel().getAttribute( 'width' ),
 			'iiurlheight': this.getModel().getAttribute( 'height' ),
-			'titles': this.getModel().getAttribute( 'resource' ).replace( /^(.+\/)*/, '' )
+			'titles': this.getModel().getFilename()
 	} )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );
