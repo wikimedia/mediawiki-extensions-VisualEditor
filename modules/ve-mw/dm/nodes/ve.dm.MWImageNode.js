@@ -127,9 +127,17 @@ ve.dm.MWImageNode.prototype.onAttributeChange = function ( key, from, to ) {
  * @returns {string} Filename
  */
 ve.dm.MWImageNode.prototype.getFilename = function () {
-	// Strip the raw filename up to the 'File:' namespage
-	var resource = this.getAttribute( 'resource' );
-	return resource.substring( resource.indexOf( 'File:' ) );
+	// Strip ./ stuff and decode URI encoding
+	var resource = this.getAttribute( 'resource' ),
+		filename = resource.replace( /^(.+\/)*/, '' );
+
+	// Protect against decodeURIComponent() throwing exceptions
+	try {
+		filename = decodeURIComponent( filename );
+	} catch ( e ) {
+		ve.log( 'URI decoding exception', e );
+	}
+	return filename;
 };
 
 /**
