@@ -3,17 +3,15 @@ class VisualEditorPage
 
   include URL
   page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}?vehidebetadialog=true&veaction=edit")
-
+  span(:bullet_number_selector, class: "oo-ui-iconedElement-icon oo-ui-icon-bullet-list")
   div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
   div(:content, class: "ve-ce-branchNode")
   span(:decrease_indentation, class: "oo-ui-iconedElement-icon oo-ui-icon-outdent-list")
-  a(:decrease_indentation_on, title: /Decrease indentation/)
   span(:downarrow, class: "oo-ui-indicatedElement-indicator oo-ui-indicator-down")
   a(:edit_ve, title: /Edit this page with VisualEditor/)
   a(:edit_wikitext, title: /You can edit this page\./)
   a(:heading, text: /Heading/)
   span(:increase_indentation, class: "oo-ui-iconedElement-icon oo-ui-icon-indent-list")
-  a(:increase_indentation_on, title: /Increase indentation/)
   span(:insert_menu, text: "Insert")
   div(:insert_references, class: "oo-ui-window-title")
   span(:internal_linksuggestion, text: "Main Page")
@@ -42,7 +40,7 @@ class VisualEditorPage
   end
 
   span(:ve_bold_text, class: "oo-ui-iconedElement-icon oo-ui-icon-bold-b")
-  span(:ve_bullets, class: "oo-ui-iconedElement-icon oo-ui-icon-bullet-list")
+  span(:ve_bullets, class: "oo-ui-iconedElement-icon oo-ui-icon-bullet-list", index: 1)
   span(:ve_computer_code, class: "oo-ui-iconedElement-icon oo-ui-icon-code")
   div(:ve_heading_menu, class: "oo-ui-iconedElement-icon oo-ui-icon-down")
   span(:ve_link_icon, class: "oo-ui-iconedElement-icon oo-ui-icon-link")
