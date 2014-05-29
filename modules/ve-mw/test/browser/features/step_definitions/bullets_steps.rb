@@ -19,7 +19,10 @@ When(/^select the string$/) do
 end
 
 When(/^I click Numbering$/) do
- on(VisualEditorPage).ve_numbering_element.when_present(15).click
+  on(VisualEditorPage) do |page|
+    page.bullet_number_selector_element.when_present(15).click
+    page.ve_numbering_element.when_present.click
+  end
 end
 
 Then(/^a \# is added in front of input string in the diff view$/) do
@@ -32,7 +35,10 @@ Then(/^a \# is added in front of input string in the diff view$/) do
 end
 
 When(/^I click Bullets$/) do
-  on(VisualEditorPage).ve_bullets_element.when_present(15).click
+  on(VisualEditorPage) do |page|
+    page.bullet_number_selector_element.when_present(15).click
+    page.ve_bullets_element.when_present.click
+  end
 end
 
 Then(/^a \* is added in front of input string in the diff view$/) do
@@ -45,7 +51,10 @@ Then(/^a \* is added in front of input string in the diff view$/) do
 end
 
 When(/^I click Increase indentation$/) do
-  on(VisualEditorPage).increase_indentation_on_element.when_present(15).click
+  on(VisualEditorPage) do |page|
+    page.bullet_number_selector_element.when_present(15).click
+    page.increase_indentation_element.when_present.click
+  end
 end
 
 Then(/^a \#\# is added in front of input string in the diff view$/) do
@@ -68,7 +77,11 @@ end
 
 
 When(/^I click Decrease indentation$/) do
-  on(VisualEditorPage).decrease_indentation_on_element.when_present(15).click
+  on(VisualEditorPage) do |page|
+    sleep 2 #this is waiting for the Review Your Changes iframe to disappear
+    page.bullet_number_selector_element.when_present(15).click
+    page.decrease_indentation_element.when_present.click
+  end
 end
 
 Then(/^nothing is added in front of input string in the diff view$/) do
@@ -81,26 +94,32 @@ Then(/^nothing is added in front of input string in the diff view$/) do
 end
 
 Then(/^Decrease indentation should be disabled$/) do
-  on(VisualEditorPage).decrease_indentation_element.should be_visible
+  on(VisualEditorPage).decrease_indentation_element.should_not be_visible
 end
 
 Then(/^Increase indentation should be disabled$/) do
-  on(VisualEditorPage).increase_indentation_element.should be_visible
+  on(VisualEditorPage).increase_indentation_element.should_not be_visible
 end
 
 
 Then(/^Decrease indentation should be enabled$/) do
-  on(VisualEditorPage).decrease_indentation_on_element.class_name.should_not match /disabled/
+  on(VisualEditorPage).decrease_indentation_element.class_name.should_not match /disabled/
 end
 
 Then(/^Increase indentation should be enabled$/) do
-  on(VisualEditorPage).increase_indentation_on_element.class_name.should_not match /disabled/
+  on(VisualEditorPage).increase_indentation_element.class_name.should_not match /disabled/
 end
 
 When(/^I undo Bullets$/) do
-   on(VisualEditorPage).ve_bullets_element.when_present(15).click
+  on(VisualEditorPage) do |page|
+    page.bullet_number_selector_element.when_present(15).click
+    page.ve_bullets_element.when_present.click
+  end
 end
 
 When(/^I undo Numbering$/) do
-  on(VisualEditorPage).ve_numbering_element.when_present(15).click
+  on(VisualEditorPage) do |page|
+    page.bullet_number_selector_element.when_present(15).click
+    page.ve_numbering_element.when_present.click
+  end
 end
