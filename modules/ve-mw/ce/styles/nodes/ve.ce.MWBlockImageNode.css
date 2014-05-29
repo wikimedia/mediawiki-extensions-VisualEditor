@@ -10,3 +10,13 @@
 figure[typeof~='mw:Image'].mw-halign-center + .ve-ce-protectedNode-shield {
 	display: none;
 }
+
+/* Override border on shields for images */
+.ve-ce-mwBlockImageNode .ve-ce-protectedNode-shield {
+	border: none;
+}
+
+/* Override paragraph margins inside of captions */
+.ve-ce-mwBlockImageNode figcaption p {
+	margin: 0 !important;
+}
