@@ -9,3 +9,7 @@
 	display: inline-block;
 }
 
+/* Override border on shields for images */
+.ve-ce-mwInlineImageNode .ve-ce-protectedNode-shield {
+	border: none;
+}

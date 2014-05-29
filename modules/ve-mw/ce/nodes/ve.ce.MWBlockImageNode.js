@@ -48,7 +48,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
 	this.$figure = this.$( '<figure>' )
 		.appendTo( this.$element )
 		.append( this.$a )
-		.addClass( 've-ce-mwBlockImageNode-type-' + type )
+		.addClass( 've-ce-mwBlockImageNode ve-ce-mwBlockImageNode-type-' + type )
 		// 'typeof' should appear with the proper Parsoid-generated
 		// type. The model deals with converting it
 		.attr( 'typeof', this.typeToRdfa[ type ] );
