@@ -136,7 +136,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				)
 		);
 	}
-	if ( this.$description.text() === '' ) {
+	if ( this.$description.text().trim() === '' ) {
 		this.infoButton
 			.setDisabled( true )
 			.setTitle(
