@@ -26,6 +26,9 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'reference', 'window', 'open', 'reference' )
 );
 ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'reference/existing', 'window', 'open', 'reference', { 'useExisting': true } )
+);
+ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'transclusion', 'window', 'open', 'transclusion' )
 );
 ve.ui.commandRegistry.register(

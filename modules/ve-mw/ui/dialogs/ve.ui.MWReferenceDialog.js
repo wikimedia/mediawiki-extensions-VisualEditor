@@ -281,13 +281,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	this.search = new ve.ui.MWReferenceSearchWidget( { '$': this.$ } );
 
 	// Events
-	this.selectButton.connect( this, { 'click': function () {
-		this.backButton.$element.show();
-		this.applyButton.$element.hide();
-		this.selectButton.$element.hide();
-		this.panels.setItem( this.searchPanel );
-		this.search.getQuery().focus().select();
-	} } );
+	this.selectButton.connect( this, { 'click': 'useExistingReference' } );
 	this.backButton.connect( this, { 'click': function () {
 		this.backButton.$element.hide();
 		this.applyButton.$element.show();
@@ -310,7 +304,20 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 };
 
 /**
+ * Switches dialog to use existing reference mode
+ */
+ve.ui.MWReferenceDialog.prototype.useExistingReference = function () {
+	this.backButton.$element.show();
+	this.applyButton.$element.hide();
+	this.selectButton.$element.hide();
+	this.panels.setItem( this.searchPanel );
+	this.search.getQuery().focus().select();
+};
+
+/**
  * @inheritdoc
+ * @param {Object} [data] Setup data
+ * @param {boolean} [data.useExistingReference] Open the dialog in "use existing reference" mode
  */
 ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWReferenceDialog.super.prototype.getSetupProcess.call( this, data )
@@ -330,6 +337,10 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 			this.backButton.$element.hide();
 			this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
 			this.selectButton.setDisabled( this.search.isIndexEmpty() );
+
+			if ( data.useExisting ) {
+				this.useExistingReference();
+			}
 		}, this );
 };
 
