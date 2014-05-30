@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chrisportelli"
+			"Chrisportelli",
+			"CharlieTheCabbie"
 		]
 	},
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor huwa f'verżjoni 'beta'. Tista' tiltaqa' ma' xi kwistjonijiet tas-softwer, u ma tkunx tista' teditja xi partijiet tal-paġna. Agħfas fuq \"{{int:visualeditor-ca-editsource}}\" biex taqleb għall-modalità tat-test wiki – bidliet li mhumiex issjejvjati jintilfu.",
+	"visualeditor-beta-warning": "VisualEditor huwa f'verżjoni 'beta'. Tista' tiltaqa' ma' xi kwistjonijiet tas-softwer, u ma tkunx tista' teditja xi partijiet tal-paġna. Li jaqilbu lura għall-editjar sors fi kwalunkwe żmien mingħajr ma jitilfu bidliet tiegħek, tiftaħ il-dropdown li jmiss għal \"{{int: visualeditor-toolbar-cancel}}\" u agħżel \"{{int: visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-ca-editsource": "Editja s-sors",
 	"visualeditor-ca-editsource-section": "editja s-sors",
 	"visualeditor-dialog-beta-welcome-action-continue": "Kompli",
