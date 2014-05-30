@@ -12,3 +12,7 @@
 	left: 0;
 	right: 0;
 }
+
+.ve-ui-mwMediaSearchWidget .oo-ui-searchWidget-results {
+	padding-right: 0;
+}
