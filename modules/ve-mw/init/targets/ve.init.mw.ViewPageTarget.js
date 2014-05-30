@@ -279,7 +279,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
-	var confirmDialog;
+	var confirmDialog, target = this;
 	if ( override || ( this.active && !this.deactivating ) ) {
 		if ( override || !this.edited ) {
 			this.cancel();
@@ -292,15 +292,9 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' ),
 				'cancelFlags': []
 			} );
-			confirmDialog.connect( this, {
-				'ok': function () {
-					// Prevent future confirm dialogs from executing this handler (bug 65557)
-					confirmDialog.disconnect( this );
-					this.cancel();
-				},
-				'cancel': function () {
-					// Prevent future confirm dialogs from executing this handler (bug 65557)
-					confirmDialog.disconnect( this );
+			confirmDialog.once( 'done', function ( result ) {
+				if ( result === 'ok' ) {
+					target.cancel();
 				}
 			} );
 		}
@@ -907,7 +901,7 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.editSource = function () {
-	var confirmDialog = this.surface.dialogs.getWindow( 'confirm' );
+	var confirmDialog = this.surface.dialogs.getWindow( 'confirm' ), target = this;
 
 	this.$document.css( 'opacity', 0.5 );
 
@@ -918,21 +912,16 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 		'cancelLabel': ve.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
 		'cancelFlags': []
 	} );
-	confirmDialog.connect( this, {
-		'ok': function () {
-			// Prevent future confirm dialogs from executing this handler (bug 65557)
-			confirmDialog.disconnect( this );
+	confirmDialog.once( 'done', function ( result ) {
+		if ( result === 'ok' ) {
 			// Get Wikitext from the DOM
-			this.serialize(
-				this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
-				ve.bind( this.submitWithSaveFields, this, { 'wpDiff': 1, 'veswitched': 1 } )
+			target.serialize(
+				target.docToSave || ve.dm.converter.getDomFromModel( target.surface.getModel().getDocument() ),
+				ve.bind( target.submitWithSaveFields, target, { 'wpDiff': 1, 'veswitched': 1 } )
 			);
-		},
-		'cancel': function () {
-			// Prevent future confirm dialogs from executing this handler (bug 65557)
-			confirmDialog.disconnect( this );
+		} else {
 			// Undo the opacity change
-			this.$document.css( 'opacity', 1 );
+			target.$document.css( 'opacity', 1 );
 		}
 	} );
 };
