@@ -160,6 +160,54 @@ ve.ui.MWCitationDialog.prototype.getSetupProcess = function ( data ) {
 		}, this );
 };
 
+ve.ui.MWCitationDialog.prototype.onTransclusionReady = function () {
+	// Parent method
+	ve.ui.MWCitationDialog.super.prototype.onTransclusionReady.call( this );
+
+	if ( !this.hasUsefulParameter() ) {
+		this.applyButton.setDisabled( true );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWCitationDialog.prototype.setPageByName = function ( param ) {
+	// Parent method
+	ve.ui.MWCitationDialog.super.prototype.setPageByName.call( this, param );
+
+	this.applyButton.setDisabled( !this.hasUsefulParameter() );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWCitationDialog.prototype.onAddParameterBeforeLoad = function ( page ) {
+	var citeDialog = this;
+	page.preLoad = true;
+	page.valueInput.on( 'change', function () {
+		citeDialog.applyButton.setDisabled( !citeDialog.hasUsefulParameter() );
+	} );
+};
+
+/**
+ * Works out whether there are any set parameters that aren't just placeholders
+ * @return boolean
+ */
+ve.ui.MWCitationDialog.prototype.hasUsefulParameter = function () {
+	var foundUseful = false;
+	$.each( this.bookletLayout.pages, function () {
+		if (
+			this instanceof ve.ui.MWParameterPage &&
+			( !this.preLoad || this.valueInput.getValue() !== '' )
+		) {
+			foundUseful = true;
+			return false;
+		}
+	} );
+	return foundUseful;
+};
+
 /**
  * @inheritdoc
  */
