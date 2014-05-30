@@ -140,9 +140,10 @@ ve.ui.MWReferenceDialog.static.pasteRules = ve.extendObject(
 ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 	var data = this.referenceSurface.getContent(),
 		// TODO: Check for other types of empty, e.g. only whitespace?
-		disabled = data.length <= 4;
+		applyDisabled = data.length <= 4;
 
-	this.applyButton.setDisabled( disabled );
+	this.applyButton.setDisabled( applyDisabled );
+	this.selectButton.setDisabled( !applyDisabled );
 };
 
 /**
