@@ -181,6 +181,8 @@
 	"visualeditor-mwalienextensioninspector-title": "Rozszerzenia MediaWiki",
 	"visualeditor-mweditmodesource-title": "Przełącz na edycję wikitekstu",
 	"visualeditor-mweditmodesource-warning": "Zamierzasz przełączyć się na edytor kodu źródłowego.\nWszystkie zmiany wprowadzone do tej pory zostaną zachowane, ale bez zapisywania lub przeładowywania strony nie będzie możliwości powrotu do VisualEditora.\nCzy kontynuować?",
+	"visualeditor-mweditmodesource-warning-switch": "Tak, przełącz",
+	"visualeditor-mweditmodesource-warning-cancel": "Nie, anuluj",
 	"visualeditor-mwgalleryinspector-placeholder": "Przykład.jpg|Tytuł obrazu",
 	"visualeditor-mwgalleryinspector-title": "Galeria",
 	"visualeditor-mwhieroinspector-title": "Hieroglify",

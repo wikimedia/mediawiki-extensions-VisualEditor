@@ -34,6 +34,7 @@
 	"visualeditor-dialog-beta-welcome-content": "Ово је наш нови, лакши начин за уређивање. Још увек је у бета верзији, што значи да ћете можда наићи на делове странице које не можете уређивати, или проблеме које треба средити. Охрабрујемо вас да прегледате своје промене, и позивамо да нас известите о било ком проблему на који сте наишли користећи Визуелни уређивач (кликните на „{{int:visualeditor-help-tool}}“ дугме да пошаљете извештај о проблемима). Можете наставити да користе уређивач викитекста кликом на „$1“ - али несачуване промене биће изгубљене.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Добро дошли}} у Визуелни уређивач",
 	"visualeditor-dialog-citation-insert-citation": "Убаци цитат",
+	"visualeditor-dialog-media-alttext-section": "Алтернативни текст",
 	"visualeditor-dialog-media-content-section": "Натпис",
 	"visualeditor-dialog-media-noresults": "Нема резултата.",
 	"visualeditor-dialog-media-page-advanced": "Напредна подешавања",
