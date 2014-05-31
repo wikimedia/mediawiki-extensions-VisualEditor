@@ -291,11 +291,10 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 				'okFlags': [ 'destructive' ],
 				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' ),
 				'cancelFlags': []
-			} );
-			confirmDialog.once( 'done', function ( result ) {
-				if ( result === 'ok' ) {
+			} ).then( function ( closingPromise ) {
+				closingPromise.then( function () {
 					target.cancel();
-				}
+				} );
 			} );
 		}
 	}
@@ -911,18 +910,17 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 		'okFlags': [ 'primary' ],
 		'cancelLabel': ve.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
 		'cancelFlags': []
-	} );
-	confirmDialog.once( 'done', function ( result ) {
-		if ( result === 'ok' ) {
+	} ).then( function ( closingPromise ) {
+		closingPromise.then( function () {
 			// Get Wikitext from the DOM
 			target.serialize(
 				target.docToSave || ve.dm.converter.getDomFromModel( target.surface.getModel().getDocument() ),
 				ve.bind( target.submitWithSaveFields, target, { 'wpDiff': 1, 'veswitched': 1 } )
 			);
-		} else {
+		}, function () {
 			// Undo the opacity change
 			target.$document.css( 'opacity', 1 );
-		}
+		} );
 	} );
 };
 
