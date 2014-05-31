@@ -8,6 +8,9 @@
 /* MW Command Registrations */
 
 ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'linkNode', 'window', 'open', 'linkNode' )
+);
+ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'gallery', 'window', 'open', 'gallery' )
 );
 ve.ui.commandRegistry.register(

@@ -138,7 +138,7 @@ ve.ui.MWMediaInsertDialog.prototype.getFileRepos = function () {
  */
 ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.Dialog.prototype.initialize.call( this );
+	ve.ui.MWMediaInsertDialog.super.prototype.initialize.call( this );
 
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
 		.defaultUserOptions.defaultthumbsize;
@@ -159,50 +159,50 @@ ve.ui.MWMediaInsertDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWMediaInsertDialog.prototype.setup = function ( data ) {
-	// Parent method
-	ve.ui.Dialog.prototype.setup.call( this, data );
+ve.ui.MWMediaInsertDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWMediaInsertDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			// Show a spinner while we check for file repos.
+			// this will only be done once per session.
+			//
+			// This is in .setup rather than .initialize so that
+			// the user has visual indication (spinner) during the
+			// ajax request
+			this.$spinner.show();
+			this.search.$element.hide();
 
-	// Show a spinner while we check for file repos.
-	// this will only be done once per session.
-	//
-	// This is in .setup rather than .initialize so that
-	// the user has visual indication (spinner) during the
-	// ajax request
-	this.$spinner.show();
-	this.search.$element.hide();
+			// Get the repos from the API first
+			// The ajax request will only be done once per session
+			this.getFileRepos().done( ve.bind( function ( repos ) {
+				if ( repos ) {
+					this.sources = repos;
+					this.search.setSources( this.sources );
+				}
+				// Done, hide the spinner
+				this.$spinner.hide();
 
-	// Get the repos from the API first
-	// The ajax request will only be done once per session
-	this.getFileRepos().done( ve.bind( function ( repos ) {
-		if ( repos ) {
-			this.sources = repos;
-			this.search.setSources( this.sources );
-		}
-		// Done, hide the spinner
-		this.$spinner.hide();
+				// Show the search and query the media sources
+				this.search.$element.show();
+				this.search.queryMediaSources();
 
-		// Show the search and query the media sources
-		this.search.$element.show();
-		this.search.queryMediaSources();
-
-		// Initialization
-		// This must be done only after there are proper
-		// sources defined
-		this.search.getQuery().focus().select();
-		this.search.getResults().selectItem();
-		this.search.getResults().highlightItem();
-	}, this ) );
+				// Initialization
+				// This must be done only after there are proper
+				// sources defined
+				this.search.getQuery().focus().select();
+				this.search.getResults().selectItem();
+				this.search.getResults().highlightItem();
+			}, this ) );
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWMediaInsertDialog.prototype.teardown = function ( data ) {
-	this.search.getQuery().setValue( '' );
-
-	// Parent method
-	ve.ui.Dialog.prototype.teardown.call( this, data );
+ve.ui.MWMediaInsertDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWMediaInsertDialog.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			this.search.getQuery().setValue( '' );
+		}, this );
 };
 
 /* Registration */

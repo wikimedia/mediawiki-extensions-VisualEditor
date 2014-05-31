@@ -172,6 +172,8 @@
     "visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Matching page|Matching pages}}",
     "visualeditor-linkinspector-suggest-new-page": "New page",
     "visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Redirect page|Redirect pages}}",
+    "visualeditor-linknodeinspector-add-label": "Add label",
+    "visualeditor-linknodeinspector-title": "Simple link",
     "visualeditor-loadwarning": "Error loading data from server: $1. Would you like to retry?",
     "visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to retry?",
     "visualeditor-mainnamespacepagelink": "Project:Main namespace",

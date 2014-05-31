@@ -23,9 +23,6 @@ ve.ui.MWMediaEditDialog = function VeUiMWMediaEditDialog( config ) {
 	this.mediaNode = null;
 	this.imageModel = null;
 	this.store = null;
-
-	// Events
-	this.connect( this, { 'ready': 'onReady' } );
 };
 
 /* Inheritance */
@@ -425,110 +422,112 @@ ve.ui.MWMediaEditDialog.prototype.onTypeInputSelect = function ( item ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWMediaEditDialog.prototype.setup = function ( data ) {
-	var doc = this.getFragment().getSurface().getDocument();
+ve.ui.MWMediaEditDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWMediaEditDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			var doc = this.getFragment().getSurface().getDocument();
 
-	// Parent method
-	ve.ui.MWMediaEditDialog.super.prototype.setup.call( this, data );
+			// Properties
+			this.mediaNode = this.getFragment().getSelectedNode();
+			// Image model
+			this.imageModel = ve.dm.MWImageModel.static.newFromImageNode( this.mediaNode );
+			// Events
+			this.imageModel.connect( this, {
+				'alignmentChange': 'onImageModelAlignmentChange',
+				'typeChange': 'onImageModelTypeChange'
+			} );
 
-	// Properties
-	this.mediaNode = this.getFragment().getSelectedNode();
-	// Image model
-	this.imageModel = ve.dm.MWImageModel.static.newFromImageNode( this.mediaNode );
-	// Events
-	this.imageModel.connect( this, {
-		'alignmentChange': 'onImageModelAlignmentChange',
-		'typeChange': 'onImageModelTypeChange'
-	} );
+			this.store = doc.getStore();
+			// Set up the caption surface
+			this.captionSurface = new ve.ui.SurfaceWidget(
+				this.imageModel.getCaptionDocument(),
+				{
+					'$': this.$,
+					'tools': this.constructor.static.toolbarGroups,
+					'commands': this.constructor.static.surfaceCommands,
+					'pasteRules': this.constructor.static.pasteRules
+				}
+			);
 
-	this.store = doc.getStore();
-	// Set up the caption surface
-	this.captionSurface = new ve.ui.SurfaceWidget(
-		this.imageModel.getCaptionDocument(),
-		{
-			'$': this.$,
-			'tools': this.constructor.static.toolbarGroups,
-			'commands': this.constructor.static.surfaceCommands,
-			'pasteRules': this.constructor.static.pasteRules
-		}
-	);
+			// Size widget
+			this.$spinner.hide();
+			this.sizeErrorLabel.$element.hide();
+			this.sizeWidget.setScalable( this.imageModel.getScalable() );
 
-	// Size widget
-	this.$spinner.hide();
-	this.sizeErrorLabel.$element.hide();
-	this.sizeWidget.setScalable( this.imageModel.getScalable() );
+			// Initialize size
+			this.sizeWidget.setSizeType(
+				this.imageModel.isDefaultSize() ?
+				'default' :
+				'custom'
+			);
 
-	// Initialize size
-	this.sizeWidget.setSizeType(
-		this.imageModel.isDefaultSize() ?
-		'default' :
-		'custom'
-	);
+			// Set initial alt text
+			this.altTextInput.setValue(
+				this.imageModel.getAltText()
+			);
 
-	// Set initial alt text
-	this.altTextInput.setValue(
-		this.imageModel.getAltText()
-	);
+			// Set initial alignment
+			this.positionInput.setDisabled(
+				!this.imageModel.isAligned()
+			);
+			this.positionCheckbox.setValue(
+				this.imageModel.isAligned()
+			);
+			this.positionInput.selectItem(
+				this.imageModel.isAligned() ?
+				this.positionInput.getItemFromData(
+					this.imageModel.getAlignment()
+				) :
+				null
+			);
 
-	// Set initial alignment
-	this.positionInput.setDisabled(
-		!this.imageModel.isAligned()
-	);
-	this.positionCheckbox.setValue(
-		this.imageModel.isAligned()
-	);
-	this.positionInput.selectItem(
-		this.imageModel.isAligned() ?
-		this.positionInput.getItemFromData(
-			this.imageModel.getAlignment()
-		) :
-		null
-	);
+			// Border flag
+			this.borderCheckbox.setDisabled(
+				!this.imageModel.isBorderable()
+			);
+			this.borderCheckbox.setValue(
+				this.imageModel.isBorderable() && this.imageModel.hasBorder()
+			);
 
-	// Border flag
-	this.borderCheckbox.setDisabled(
-		!this.imageModel.isBorderable()
-	);
-	this.borderCheckbox.setValue(
-		this.imageModel.isBorderable() && this.imageModel.hasBorder()
-	);
+			// Type select
+			this.typeInput.selectItem(
+				this.typeInput.getItemFromData(
+					this.imageModel.getType() || 'none'
+				)
+			);
 
-	// Type select
-	this.typeInput.selectItem(
-		this.typeInput.getItemFromData(
-			this.imageModel.getType() || 'none'
-		)
-	);
-
-	// Initialization
-	this.captionFieldset.$element.append( this.captionSurface.$element );
-	this.captionSurface.initialize();
-};
-
-/**
- * Handle window ready events
- */
-ve.ui.MWMediaEditDialog.prototype.onReady = function () {
-	// Focus the caption surface
-	this.captionSurface.focus();
+			// Initialization
+			this.captionFieldset.$element.append( this.captionSurface.$element );
+			this.captionSurface.initialize();
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWMediaEditDialog.prototype.teardown = function ( data ) {
-	// Cleanup
-	this.imageModel.disconnect( this );
+ve.ui.MWMediaEditDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWMediaEditDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			// Focus the caption surface
+			this.captionSurface.focus();
+		}, this );
+};
 
-	this.captionSurface.destroy();
-	this.captionSurface = null;
-	this.captionNode = null;
-	// Reset the considerations for the scalable
-	// in the image node
-	this.mediaNode.updateType();
-
-	// Parent method
-	ve.ui.MWMediaEditDialog.super.prototype.teardown.call( this, data );
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMediaEditDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWMediaEditDialog.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			// Cleanup
+			this.imageModel.disconnect( this );
+			this.captionSurface.destroy();
+			this.captionSurface = null;
+			this.captionNode = null;
+			// Reset the considerations for the scalable
+			// in the image node
+			this.mediaNode.updateType();
+		}, this );
 };
 
 /**

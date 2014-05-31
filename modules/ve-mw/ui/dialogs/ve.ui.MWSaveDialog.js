@@ -29,9 +29,6 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	this.restoring = false;
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
-
-	// Events
-	this.connect( this, { 'ready': 'onReady' } );
 };
 
 /* Inheritance */
@@ -293,7 +290,7 @@ ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
 ve.ui.MWSaveDialog.prototype.initialize = function () {
 	var saveDialog = this;
 	// Parent method
-	ve.ui.Dialog.prototype.initialize.call( this );
+	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
 
 	// Properties
 	this.savePanel = new OO.ui.PanelLayout( {
@@ -428,16 +425,13 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWSaveDialog.prototype.setup = function () {
-	// Old messages should not persist after panel changes
-	this.clearAllMessages();
-};
-
-/**
- * Handle window ready events
- */
-ve.ui.MWSaveDialog.prototype.onReady = function () {
-	this.swapPanel( 'save' );
+ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			// Old messages should not persist after panel changes
+			this.clearAllMessages();
+			this.swapPanel( 'save' );
+		}, this );
 };
 
 /* Registration */

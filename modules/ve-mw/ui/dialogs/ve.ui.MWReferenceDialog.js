@@ -312,39 +312,38 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceDialog.prototype.setup = function ( data ) {
-	// Parent method
-	ve.ui.MWReferenceDialog.super.prototype.setup.call( this, data );
-
-	this.panels.setItem( this.editPanel );
-	if ( this.selectedNode instanceof ve.dm.MWReferenceNode ) {
-		this.useReference(
-			ve.dm.MWReferenceModel.static.newFromReferenceNode( this.selectedNode )
-		);
-		this.selectButton.$element.hide();
-	} else {
-		this.useReference( null );
-		this.selectButton.$element.show();
-		this.applyButton.setDisabled( true );
-	}
-	this.applyButton.$element.show();
-	this.backButton.$element.hide();
-	this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
-	this.selectButton.setDisabled( this.search.isIndexEmpty() );
+ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWReferenceDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			this.panels.setItem( this.editPanel );
+			if ( this.selectedNode instanceof ve.dm.MWReferenceNode ) {
+				this.useReference(
+					ve.dm.MWReferenceModel.static.newFromReferenceNode( this.selectedNode )
+				);
+				this.selectButton.$element.hide();
+			} else {
+				this.useReference( null );
+				this.selectButton.$element.show();
+				this.applyButton.setDisabled( true );
+			}
+			this.applyButton.$element.show();
+			this.backButton.$element.hide();
+			this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
+			this.selectButton.setDisabled( this.search.isIndexEmpty() );
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceDialog.prototype.teardown = function ( data ) {
-	this.search.getQuery().setValue( '' );
-
-	this.referenceSurface.destroy();
-	this.referenceSurface = null;
-	this.referenceModel = null;
-
-	// Parent method
-	ve.ui.MWReferenceDialog.super.prototype.teardown.call( this, data );
+ve.ui.MWReferenceDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWReferenceDialog.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			this.search.getQuery().setValue( '' );
+			this.referenceSurface.destroy();
+			this.referenceSurface = null;
+			this.referenceModel = null;
+		}, this );
 };
 
 /* Registration */

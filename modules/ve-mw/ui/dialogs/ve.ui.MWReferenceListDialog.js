@@ -126,22 +126,22 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceListDialog.prototype.setup = function ( data ) {
-	var node, refGroup;
+ve.ui.MWReferenceListDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWReferenceListDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			var node, refGroup;
 
-	// Parent method
-	ve.ui.MWReferenceListDialog.super.prototype.setup.call( this, data );
+			// Prepopulate from existing node if we're editing a node
+			// instead of inserting a new one
+			node = this.getFragment().getSelectedNode();
+			if ( this.selectedNode instanceof ve.dm.MWReferenceListNode ) {
+				refGroup = node.getAttribute( 'refGroup' );
+			} else {
+				refGroup = '';
+			}
 
-	// Prepopulate from existing node if we're editing a node
-	// instead of inserting a new one
-	node = this.getFragment().getSelectedNode();
-	if ( this.selectedNode instanceof ve.dm.MWReferenceListNode ) {
-		refGroup = node.getAttribute( 'refGroup' );
-	} else {
-		refGroup = '';
-	}
-
-	this.groupInput.setValue( refGroup );
+			this.groupInput.setValue( refGroup );
+		}, this );
 };
 
 /* Registration */

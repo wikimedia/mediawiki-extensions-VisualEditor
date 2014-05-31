@@ -1075,7 +1075,6 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	if ( this.saveDialog ) {
 		// If we got as far as setting up the save dialog, tear it down
 		this.saveDialog.close();
-		this.saveDialog.teardown();
 		this.saveDialog = null;
 	}
 	// Destroy surface

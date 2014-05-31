@@ -320,12 +320,12 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWTransclusionDialog.prototype.setup = function ( data ) {
-	this.setMode( 'single' );
-	this.modeButton.setDisabled( true );
-
-	// Parent method
-	ve.ui.MWTransclusionDialog.super.prototype.setup.call( this, data );
+ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
+		.first( function () {
+			this.setMode( 'single' );
+			this.modeButton.setDisabled( true );
+		}, this );
 };
 
 /* Registration */

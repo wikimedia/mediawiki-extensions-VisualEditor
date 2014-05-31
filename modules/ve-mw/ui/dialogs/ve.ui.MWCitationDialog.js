@@ -145,29 +145,29 @@ ve.ui.MWCitationDialog.prototype.initialize = function ( data ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.setup = function ( data ) {
-	// Parent method
-	ve.ui.MWCitationDialog.super.prototype.setup.call( this, data );
-
-	// Initialization
-	if ( this.selectedNode ) {
-		this.referenceNode = this.getReferenceNode();
-		if ( this.referenceNode ) {
-			this.referenceModel = ve.dm.MWReferenceModel.static.newFromReferenceNode(
-				this.referenceNode
-			);
-		}
-	}
+ve.ui.MWCitationDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWCitationDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			// Initialization
+			if ( this.selectedNode ) {
+				this.referenceNode = this.getReferenceNode();
+				if ( this.referenceNode ) {
+					this.referenceModel = ve.dm.MWReferenceModel.static.newFromReferenceNode(
+						this.referenceNode
+					);
+				}
+			}
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.teardown = function ( data ) {
-	// Parent method
-	ve.ui.MWCitationDialog.super.prototype.teardown.call( this, data );
-
-	// Cleanup
-	this.referenceModel = null;
-	this.referenceNode = null;
+ve.ui.MWCitationDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWCitationDialog.super.prototype.getTeardownProcess.call( this, data )
+		.next( function () {
+			// Cleanup
+			this.referenceModel = null;
+			this.referenceNode = null;
+		}, this );
 };

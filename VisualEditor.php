@@ -540,6 +540,8 @@ $wgResourceModules += array(
 			'visualeditor-inspector-close-tooltip',
 			'visualeditor-inspector-remove-tooltip',
 			'visualeditor-linkinspector-title',
+			'visualeditor-linknodeinspector-title',
+			'visualeditor-linknodeinspector-add-label',
 			'visualeditor-listbutton-bullet-tooltip',
 			'visualeditor-listbutton-number-tooltip',
 			'visualeditor-mediasizewidget-button-originaldimensions',
@@ -818,9 +820,10 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
 
-			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkInspector.js',
+			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js',
+			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js',
 
-			'modules/ve-mw/ui/tools/ve.ui.MWLinkInspectorTool.js',
+			'modules/ve-mw/ui/tools/ve.ui.MWLinkNodeInspectorTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/nodes/ve.ce.MWNumberedExternalLinkNode.css',

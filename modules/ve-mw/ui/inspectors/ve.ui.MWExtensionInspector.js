@@ -61,7 +61,7 @@ ve.ui.MWExtensionInspector.static.dir = null;
  */
 ve.ui.MWExtensionInspector.prototype.initialize = function () {
 	// Parent method
-	ve.ui.Inspector.prototype.initialize.call( this );
+	ve.ui.MWExtensionInspector.super.prototype.initialize.call( this );
 
 	this.input = new OO.ui.TextInputWidget( {
 		'$': this.$,
@@ -85,77 +85,79 @@ ve.ui.MWExtensionInspector.prototype.getInputPlaceholder = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWExtensionInspector.prototype.setup = function ( data ) {
-	// Parent method
-	ve.ui.Inspector.prototype.setup.call( this, data );
+ve.ui.MWExtensionInspector.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWExtensionInspector.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			// Initialization
+			this.node = this.getFragment().getSelectedNode();
+			// Make sure we're inspecting the right type of node
+			if ( !( this.node instanceof this.constructor.static.nodeModel ) ) {
+				this.node = null;
+			}
+			this.input.setValue( this.node ? this.node.getAttribute( 'mw' ).body.extsrc : '' );
 
-	// Initialization
-	this.node = this.getFragment().getSelectedNode();
-	// Make sure we're inspecting the right type of node
-	if ( !( this.node instanceof this.constructor.static.nodeModel ) ) {
-		this.node = null;
-	}
-	this.input.setValue( this.node ? this.node.getAttribute( 'mw' ).body.extsrc : '' );
+			this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
-	this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
-
-	var dir = this.constructor.static.dir || data.dir;
-	this.input.setRTL( dir === 'rtl' );
+			var dir = this.constructor.static.dir || data.dir;
+			this.input.setRTL( dir === 'rtl' );
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWExtensionInspector.prototype.ready = function () {
-	// Parent method
-	ve.ui.Inspector.prototype.ready.call( this );
-
-	// Focus the input
-	this.input.focus().select();
+ve.ui.MWExtensionInspector.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWExtensionInspector.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			// Focus the input
+			this.input.focus().select();
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWExtensionInspector.prototype.teardown = function ( data ) {
-	var mwData,
-		fragment = this.getFragment(),
-		surfaceModel = fragment.getSurface();
+ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			var mwData,
+				fragment = this.getFragment(),
+				surfaceModel = fragment.getSurface();
 
-	if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
-		if ( this.node ) {
-			mwData = ve.copy( this.node.getAttribute( 'mw' ) );
-			this.updateMwData( mwData );
-			surfaceModel.change(
-				ve.dm.Transaction.newFromAttributeChanges(
-					surfaceModel.getDocument(), this.node.getOuterRange().start, { 'mw': mwData }
-				)
-			);
-		} else {
-			mwData = {
-				'name': this.constructor.static.nodeModel.static.extensionName,
-				'attrs': {},
-				'body': {}
-			};
-			this.updateMwData( mwData );
-			fragment.collapseRangeToEnd().insertContent( [
-				{
-					'type': this.constructor.static.nodeModel.static.name,
-					'attributes': {
-						'mw': mwData
-					}
-				},
-				{ 'type': '/' + this.constructor.static.nodeModel.static.name }
-			] );
-		}
-	} else if ( this.node && !this.constructor.static.allowedEmpty ) {
-		// Content has been emptied on a node which isn't allowed to
-		// be empty, so delete it.
-		fragment.removeContent();
-	}
-
-	// Parent method
-	ve.ui.Inspector.prototype.teardown.call( this, data );
+			if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
+				if ( this.node ) {
+					mwData = ve.copy( this.node.getAttribute( 'mw' ) );
+					this.updateMwData( mwData );
+					surfaceModel.change(
+						ve.dm.Transaction.newFromAttributeChanges(
+							surfaceModel.getDocument(),
+							this.node.getOuterRange().start,
+							{ 'mw': mwData }
+						)
+					);
+				} else {
+					mwData = {
+						'name': this.constructor.static.nodeModel.static.extensionName,
+						'attrs': {},
+						'body': {}
+					};
+					this.updateMwData( mwData );
+					fragment.collapseRangeToEnd().insertContent( [
+						{
+							'type': this.constructor.static.nodeModel.static.name,
+							'attributes': {
+								'mw': mwData
+							}
+						},
+						{ 'type': '/' + this.constructor.static.nodeModel.static.name }
+					] );
+				}
+			} else if ( this.node && !this.constructor.static.allowedEmpty ) {
+				// Content has been emptied on a node which isn't allowed to
+				// be empty, so delete it.
+				fragment.removeContent();
+			}
+		}, this );
 };
 
 /**

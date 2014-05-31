@@ -305,58 +305,60 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplateDialog.prototype.setup = function ( data ) {
-	var template, promise;
+ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			var template, promise;
 
-	// Parent method
-	ve.ui.MWTemplateDialog.super.prototype.setup.call( this, data );
+			// Data initialization
+			data = data || {};
 
-	// Data initialization
-	data = data || {};
+			// Properties
+			this.loaded = false;
+			this.transclusionModel = new ve.dm.MWTransclusionModel();
 
-	// Properties
-	this.loaded = false;
-	this.transclusionModel = new ve.dm.MWTransclusionModel();
+			// Events
+			this.transclusionModel.connect( this, { 'replace': 'onReplacePart' } );
 
-	// Events
-	this.transclusionModel.connect( this, { 'replace': 'onReplacePart' } );
-
-	// Initialization
-	if ( !this.selectedNode ) {
-		if ( data.template ) {
-			// New specified template
-			template = ve.dm.MWTemplateModel.newFromName( this.transclusionModel, data.template );
-			promise = this.transclusionModel.addPart( template ).done( function () {
-				template.addPromptedParameters();
-			} );
-		} else {
-			// New template placeholder
-			promise = this.transclusionModel.addPart(
-				new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel )
-			);
-		}
-	} else {
-		// Load existing template
-		promise = this.transclusionModel
-			.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) );
-	}
-	this.applyButton.setDisabled( true );
-	this.pushPending();
-	promise.always( ve.bind( this.onTransclusionReady, this ) );
+			// Initialization
+			if ( !this.selectedNode ) {
+				if ( data.template ) {
+					// New specified template
+					template = ve.dm.MWTemplateModel.newFromName(
+						this.transclusionModel, data.template
+					);
+					promise = this.transclusionModel.addPart( template ).done( function () {
+						template.addPromptedParameters();
+					} );
+				} else {
+					// New template placeholder
+					promise = this.transclusionModel.addPart(
+						new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel )
+					);
+				}
+			} else {
+				// Load existing template
+				promise = this.transclusionModel
+					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) );
+			}
+			this.applyButton.setDisabled( true );
+			this.pushPending();
+			promise.always( ve.bind( this.onTransclusionReady, this ) );
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplateDialog.prototype.teardown = function ( data ) {
-	// Cleanup
-	this.$element.removeClass( 've-ui-mwTemplateDialog-ready' );
-	this.transclusionModel.disconnect( this );
-	this.transclusionModel.abortRequests();
-	this.transclusionModel = null;
-	this.bookletLayout.clearPages();
-	this.content = null;
-
-	// Parent method
-	ve.ui.MWTemplateDialog.super.prototype.teardown.call( this, data );
+ve.ui.MWTemplateDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWTemplateDialog.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			// Cleanup
+			this.$element.removeClass( 've-ui-mwTemplateDialog-ready' );
+			this.transclusionModel.disconnect( this );
+			this.transclusionModel.abortRequests();
+			this.transclusionModel = null;
+			this.bookletLayout.clearPages();
+			this.content = null;
+		}, this );
 };

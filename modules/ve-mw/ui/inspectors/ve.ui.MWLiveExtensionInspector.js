@@ -57,45 +57,44 @@ ve.ui.MWLiveExtensionInspector.prototype.getNewMwData = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWLiveExtensionInspector.prototype.setup = function ( data ) {
-	// Parent method
-	ve.ui.MWExtensionInspector.prototype.setup.call( this, data );
+ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWLiveExtensionInspector.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			// Initialization
+			this.getFragment().getSurface().pushStaging();
 
-	// Initialization
-	this.getFragment().getSurface().pushStaging();
+			if ( !this.node ) {
+				// Create a new node
+				// collapseRangeToEnd returns a new fragment
+				this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
+					{
+						'type': this.constructor.static.nodeModel.static.name,
+						'attributes': { 'mw': this.getNewMwData() }
+					},
+					{ 'type': '/' + this.constructor.static.nodeModel.static.name }
+				] );
+				// Check if the node was inserted at a structural offset and wrapped in a paragraph
+				if ( this.getFragment().getRange().getLength() === 4 ) {
+					this.fragment = this.getFragment().adjustRange( 1, -1 );
+				}
+				this.getFragment().select();
+				this.node = this.getFragment().getSelectedNode();
+			}
+			this.input.setValue( this.node.getAttribute( 'mw' ).body.extsrc );
 
-	if ( !this.node ) {
-		// Create a new node
-		// collapseRangeToEnd returns a new fragment
-		this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
-			{
-				'type': this.constructor.static.nodeModel.static.name,
-				'attributes': { 'mw': this.getNewMwData() }
-			},
-			{ 'type': '/' + this.constructor.static.nodeModel.static.name }
-		] );
-		// Check if the node was inserted at a structural offset and wrapped in a paragraph
-		if ( this.getFragment().getRange().getLength() === 4 ) {
-			this.fragment = this.getFragment().adjustRange( 1, -1 );
-		}
-		this.getFragment().select();
-		this.node = this.getFragment().getSelectedNode();
-	}
-	this.input.setValue( this.node.getAttribute( 'mw' ).body.extsrc );
-
-	this.input.on( 'change', this.onChangeHandler );
+			this.input.on( 'change', this.onChangeHandler );
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWLiveExtensionInspector.prototype.teardown = function ( data ) {
-	this.input.off( 'change', this.onChangeHandler );
-
-	this.getFragment().getSurface().applyStaging();
-
-	// Parent method
-	ve.ui.MWExtensionInspector.prototype.teardown.call( this, data );
+ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWLiveExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			this.input.off( 'change', this.onChangeHandler );
+			this.getFragment().getSurface().applyStaging();
+		}, this );
 };
 
 /**
