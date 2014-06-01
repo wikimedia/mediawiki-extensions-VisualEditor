@@ -161,6 +161,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Säit déi passt|Säiten déi passen}}",
 	"visualeditor-linkinspector-suggest-new-page": "Nei Säit",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Viruleedungssäit|Viruleedungssäiten}}",
+	"visualeditor-linknodeinspector-add-label": "Etikett derbäisetzen",
+	"visualeditor-linknodeinspector-title": "Einfache Link",
 	"visualeditor-loadwarning": "Feeler beim Luede vun Date vum Server: $1. Wëllt Dir nach eng Kéier probéieren?",
 	"visualeditor-loadwarning-token": "Feeler beim Luede vum Ännerungstoke vum Server: $1. Wëllt Dir nach eng Kéier probéieren?",
 	"visualeditor-mainnamespacepagelink": "Project:Haaptnummraum",

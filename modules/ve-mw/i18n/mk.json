@@ -160,6 +160,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Соодветна страница|Соодветни страници}}",
 	"visualeditor-linkinspector-suggest-new-page": "Нова страница",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Пренасочувачка страница|Пренасочувачки страници}}",
+	"visualeditor-linknodeinspector-add-label": "Додај етикета",
+	"visualeditor-linknodeinspector-title": "Проста врска",
 	"visualeditor-loadwarning": "Грешка при вчитување на податоците од опслужувачот: $1. Дали сакате да пробате одново?",
 	"visualeditor-loadwarning-token": "Грешка при вчитувањето на шифрата на уредувањето од опслужувачот: $1. Дали би сакале да пробате пак?",
 	"visualeditor-mainnamespacepagelink": "Project:Главен именски простор",

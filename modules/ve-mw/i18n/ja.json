@@ -137,6 +137,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|一致したページ}}",
 	"visualeditor-linkinspector-suggest-new-page": "新規ページ",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|転送ページ}}",
+	"visualeditor-linknodeinspector-add-label": "ラベルを追加",
+	"visualeditor-linknodeinspector-title": "単純なリンク",
 	"visualeditor-loadwarning": "サーバーからデータを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-loadwarning-token": "サーバーから編集トークンを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-mainnamespacepagelink": "Project:標準名前空間",

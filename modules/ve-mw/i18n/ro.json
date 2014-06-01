@@ -162,6 +162,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Pagină relevantă|Pagini relevante}}",
 	"visualeditor-linkinspector-suggest-new-page": "Pagină nouă",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Pagină de redirecționare|Pagini de redirecționare}}",
+	"visualeditor-linknodeinspector-add-label": "Adăugare etichetă",
+	"visualeditor-linknodeinspector-title": "Legătură simplă",
 	"visualeditor-loadwarning": "Eroare la încărcarea datelor de pe server: $1. Doriți să reîncercați?",
 	"visualeditor-loadwarning-token": "Eroare la încărcarea de pe server a jetonului modificării: $1. Doriți să reîncercați?",
 	"visualeditor-mainnamespacepagelink": "Project:Spațiul de nume principal",

@@ -33,7 +33,8 @@
 			"John Trololo",
 			"Maxim21",
 			"Orlodrim",
-			"Scoopfinder"
+			"Scoopfinder",
+			"Nnemo"
 		]
 	},
 	"tooltip-ca-createsource": "Créer le code source de cette page",
@@ -60,7 +61,7 @@
 	"visualeditor-desc": "Éditeur visuel pour MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:ÉditeurVisuel",
 	"visualeditor-dialog-beta-welcome-action-continue": "Continuer",
-	"visualeditor-dialog-beta-welcome-content": "Ceci est notre nouvelle façon, plus simple, de faire des modifications. Elle est encore au stade bêta, ce qui veut dire que vous pouvez trouver des parties de la page que vous ne pouvez pas modifier ou rencontrer des problèmes qui doivent être corrigés. Nous vous invitons à relire vos modifications et nous vous encourageons à signaler tout problème que vous rencontrez en utilisant l’Éditeur Visuel (cliquez sur le bouton « {{int:visualeditor-help-tool}} » pour envoyer un avis à propos de cet ÉditeurVisuel). Vous pouvez toujours utiliser l’éditeur de wikitexte en cliquant sur l’onglet « $1 » à la place — les modifications non enregistrées seront perdues.",
+	"visualeditor-dialog-beta-welcome-content": "Ceci est notre nouvelle façon, plus simple, de faire des modifications. Elle est encore au stade bêta, ce qui veut dire que vous pouvez trouver des parties de la page que vous ne pouvez pas modifier, ou rencontrer des problèmes qui doivent être corrigés. Nous vous invitons à relire vos modifications et nous vous encourageons à signaler tout problème que vous rencontrez en utilisant l’Éditeur Visuel (cliquez sur le bouton « {{int:visualeditor-help-tool}} » pour envoyer un avis à propos de cet ÉditeurVisuel). Vous pouvez toujours utiliser l’éditeur de wikitexte en cliquant sur l’onglet « $1 » à la place — les modifications non enregistrées seront perdues.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bienvenue}} dans l’ÉditeurVisuel.",
 	"visualeditor-dialog-citation-insert-citation": "Insérer une citation",
 	"visualeditor-dialog-media-alttext-section": "Texte de remplacement",

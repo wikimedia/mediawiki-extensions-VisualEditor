@@ -12,7 +12,8 @@
 			"Skalman",
 			"Tobulos1",
 			"WikiPhoenix",
-			"Lokal Profil"
+			"Lokal Profil",
+			"Josve05a"
 		]
 	},
 	"tooltip-ca-createsource": "Skapa den här sidan med wikitext",
@@ -169,6 +170,7 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Matchande sida|Matchande sidor}}",
 	"visualeditor-linkinspector-suggest-new-page": "Ny sida",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Omdirigeringssida|Omdirigeringssidor}}",
+	"visualeditor-linknodeinspector-add-label": "Lägg till etikett",
 	"visualeditor-loadwarning": "Fel uppstod vid inläsning av data från server: $1. Vill du försöka igen?",
 	"visualeditor-loadwarning-token": "Fel uppstod vid laddning av redigeringsnyckel från server: $1. Vill du försöka igen?",
 	"visualeditor-mainnamespacepagelink": "Project:Huvudnamnrymden",

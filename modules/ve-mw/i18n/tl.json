@@ -3,7 +3,8 @@
 		"authors": [
 			"AnakngAraw",
 			"Sky Harbor",
-			"Jojit fb"
+			"Jojit fb",
+			"Jewel457"
 		]
 	},
 	"tooltip-ca-createsource": "Likhain ang kodigong batayan ng pahinang ito",
@@ -42,7 +43,7 @@
 	"visualeditor-dialog-media-position-section": "Posisyon",
 	"visualeditor-dialog-media-size-section": "Sukat ng larawan",
 	"visualeditor-dialog-media-title": "Mga kagustuhan ng midya",
-	"visualeditor-dialog-media-type-thumb": "Kagyat",
+	"visualeditor-dialog-media-type-thumb": "Maliit na larawan",
 	"visualeditor-dialog-meta-categories-category": "Kategorya",
 	"visualeditor-dialog-meta-categories-data-label": "Mga kategorya",
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Uriin nang karaniwan ang pahinang ito bilang",
@@ -113,6 +114,7 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Magkaugnay na pahina}}",
 	"visualeditor-linkinspector-suggest-new-page": "Bagong pahina",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Pahina ng pagkarga}}",
+	"visualeditor-linknodeinspector-title": "Payak na kawing",
 	"visualeditor-loadwarning": "Kamalian sa pagkakarga ng datos mula sa serbidor: $1. Nais mo bang subukan muli?",
 	"visualeditor-loadwarning-token": "Kamalian sa pagkakarga ng token ng pagbabago mula sa serbidor: $1.  Nais mo bang subukan muli?",
 	"visualeditor-mainnamespacepagelink": "Project:Pangunahing ngalan-espasyo",

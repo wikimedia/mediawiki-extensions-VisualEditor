@@ -177,6 +177,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Соответствующая страница|Соответствующие страницы}}",
 	"visualeditor-linkinspector-suggest-new-page": "Новая страница",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Перенаправление|Перенаправления}}",
+	"visualeditor-linknodeinspector-add-label": "Добавить подпись",
+	"visualeditor-linknodeinspector-title": "Простая ссылка",
 	"visualeditor-loadwarning": "Ошибка при загрузке данных: $1. Попробовать снова?",
 	"visualeditor-loadwarning-token": "Ошибка при загрузке токена для редактирования с сервера: $1. Попробовать снова?",
 	"visualeditor-mainnamespacepagelink": "Project:Основное пространство",
