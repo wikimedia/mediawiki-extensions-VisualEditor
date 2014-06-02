@@ -6,7 +6,7 @@ end
 Given(/^I can see the Link User Inteface$/) do
   on(VisualEditorPage) do |page|
     page.ve_link_ui_element.when_present
-    page.ve_link_ui.should match Regexp.escape("Hyperlink")
+    page.ve_link_ui.should match Regexp.escape("Link")
   end
 end
 
