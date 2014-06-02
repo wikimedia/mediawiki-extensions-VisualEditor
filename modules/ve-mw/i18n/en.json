@@ -22,6 +22,7 @@
     "tooltip-ca-editsource": "Edit the source code of this page",
     "tooltip-ca-ve-edit": "Edit this page with VisualEditor",
     "visualeditor-advancedsettings-tool": "Advanced settings",
+    "visualeditor-annotationbutton-linknode-tooltip": "Simple link",
     "visualeditor-beta-appendix": "beta",
     "visualeditor-beta-label": "beta",
     "visualeditor-beta-warning": "VisualEditor is in 'beta'. You may encounter software issues, and you may not be able to edit parts of the page. To switch back to source editing at any time without losing your changes, open the dropdown next to \"{{int:visualeditor-toolbar-cancel}}\" and select \"{{int:visualeditor-mweditmodesource-title}}\".",

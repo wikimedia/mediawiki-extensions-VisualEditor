@@ -33,6 +33,7 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 	this.$link = this.$( '<a>' )
 		// CSS for numbering needs rel=mw:ExtLink
 		.attr( 'rel', 'mw:ExtLink' )
+		.addClass( 'external' )
 		.appendTo( this.$element );
 
 	// Events
@@ -56,7 +57,7 @@ ve.ce.MWNumberedExternalLinkNode.static.name = 'link/mwNumberedExternal';
 
 ve.ce.MWNumberedExternalLinkNode.static.tagName = 'span';
 
-ve.ce.MWNumberedExternalLinkNode.static.primaryCommandName = 'link';
+ve.ce.MWNumberedExternalLinkNode.static.primaryCommandName = 'linkNode';
 
 /* Methods */
 

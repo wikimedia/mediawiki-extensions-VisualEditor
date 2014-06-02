@@ -19,6 +19,10 @@ ve.ui.MWLinkNodeInspectorTool = function VeUiMWLinkNodeInspectorTool( toolGroup,
 };
 OO.inheritClass( ve.ui.MWLinkNodeInspectorTool, ve.ui.LinkInspectorTool );
 ve.ui.MWLinkNodeInspectorTool.static.name = 'linkNode';
+ve.ui.MWLinkNodeInspectorTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-annotationbutton-linknode-tooltip' );
 ve.ui.MWLinkNodeInspectorTool.static.modelClasses = [ ve.dm.MWNumberedExternalLinkNode ];
 ve.ui.MWLinkNodeInspectorTool.static.commandName = 'linkNode';
+ve.ui.MWLinkNodeInspectorTool.static.autoAddToGroup = false;
+ve.ui.MWLinkNodeInspectorTool.static.autoAddToCatchall = false;
 ve.ui.toolFactory.register( ve.ui.MWLinkNodeInspectorTool );
