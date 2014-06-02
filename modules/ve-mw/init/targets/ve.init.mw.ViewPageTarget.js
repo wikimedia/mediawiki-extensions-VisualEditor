@@ -1539,6 +1539,15 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, catego
 	if ( $( '#mw-imagepage-content' ).length ) {
 		// On file pages, we only want to replace the (local) description.
 		$editableContent = $( '#mw-imagepage-content' );
+	} else if ( $( '#mw-pages' ).length ) {
+		// It would be nice if MW core did this for us...
+		if ( !$( '#ve-cat-description' ).length ) {
+			$( '#mw-content-text > :not(div:has(#mw-pages))' ).wrapAll(
+				$( '<div>' )
+					.attr( 'id', 've-cat-description' )
+			);
+		}
+		$editableContent = $( '#ve-cat-description' );
 	} else {
 		$editableContent = $( '#mw-content-text' );
 	}
