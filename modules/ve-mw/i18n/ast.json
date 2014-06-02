@@ -3,7 +3,8 @@
 		"authors": [
 			"Basharh",
 			"Bishnu Saikia",
-			"Xuacu"
+			"Xuacu",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "Crear el códigu fonte d'esta páxina",
@@ -144,7 +145,7 @@
 	"visualeditor-differror": "Error al cargar los datos del sirvidor: $1.",
 	"visualeditor-editconflict": "Nun pudieron guardase los cambios por un conflictu d'edición. ¿{{GENDER:|Quies}} resolver el conflictu de mou manual?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avisu|avisos}}",
-	"visualeditor-editnotices-tooltip": "Editar avisos",
+	"visualeditor-editnotices-tooltip": "Avisos de edición",
 	"visualeditor-editsummary": "Describi lo que camudasti",
 	"visualeditor-editsummary-bytes-remaining": "El númberu de bytes que queden",
 	"visualeditor-formatdropdown-format-mw-heading1": "Títulu de la páxina",

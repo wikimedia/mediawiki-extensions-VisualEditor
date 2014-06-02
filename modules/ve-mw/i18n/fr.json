@@ -34,7 +34,8 @@
 			"Maxim21",
 			"Orlodrim",
 			"Scoopfinder",
-			"Nnemo"
+			"Nnemo",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "Créer le code source de cette page",
@@ -175,7 +176,7 @@
 	"visualeditor-differror": "Erreur lors du chargement des données depuis le serveur : $1.",
 	"visualeditor-editconflict": "Vos modifications n’ont pas pu être enregistrées à cause d’un conflit de modification. Voulez-{{GENDER:|vous}} résoudre ce conflit manuellement ?",
 	"visualeditor-editnotices-tool": "$1 avertissement{{PLURAL:$1||s}}",
-	"visualeditor-editnotices-tooltip": "Modifier les avis",
+	"visualeditor-editnotices-tooltip": "Avis de modification",
 	"visualeditor-editsummary": "Décrivez ce que vous avez modifié",
 	"visualeditor-editsummary-bytes-remaining": "Le nombre d’octets restant",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titre de la page",
@@ -191,6 +192,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Page correspondante|Pages correspondantes}}",
 	"visualeditor-linkinspector-suggest-new-page": "Nouvelle page",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Page redirigée|Pages redirigées}}",
+	"visualeditor-linknodeinspector-add-label": "Ajouter un libellé",
+	"visualeditor-linknodeinspector-title": "Lien simple",
 	"visualeditor-loadwarning": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-loadwarning-token": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-mainnamespacepagelink": "Project:Espace de noms principal",

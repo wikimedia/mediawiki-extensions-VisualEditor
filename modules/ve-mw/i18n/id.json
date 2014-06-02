@@ -10,7 +10,8 @@
 			"Rv77ax",
 			"William Surya Permana",
 			"Hysocc",
-			"Bennylin"
+			"Bennylin",
+			"Raynasution"
 		]
 	},
 	"tooltip-ca-createsource": "Buat kode sumber halaman ini",
@@ -160,6 +161,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|}}Halaman yang sesuai",
 	"visualeditor-linkinspector-suggest-new-page": "Halaman baru",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|}}Halaman pengalihan",
+	"visualeditor-linknodeinspector-add-label": "Tambahkan label",
+	"visualeditor-linknodeinspector-title": "contoh pranala",
 	"visualeditor-loadwarning": "Galat memuat data dari peladen: $1. Apakah Anda ingin mencoba lagi?",
 	"visualeditor-loadwarning-token": "Galat memuat token suntingan dari peladen: $1. Apakah Anda ingin mencoba lagi?",
 	"visualeditor-mainnamespacepagelink": "Project:Ruang nama utama",

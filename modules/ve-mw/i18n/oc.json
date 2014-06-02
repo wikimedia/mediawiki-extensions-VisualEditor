@@ -3,7 +3,8 @@
 		"authors": [
 			"Jfblanc",
 			"Cedric31",
-			"Fitoschido"
+			"Fitoschido",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "Crear lo còde font d'aquela pagina",
@@ -133,7 +134,7 @@
 	"visualeditor-differror": "Error de cargament de donadas del servidor $1.",
 	"visualeditor-editconflict": "Vòstras modificacions pòdon pas èsser enregistradas que i a un autre utilizaire que trabalhava tanben sus la pagina. Volètz resòlvre lo conflicte manualament?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notícia|notícias}}",
-	"visualeditor-editnotices-tooltip": "Modificar los avisses",
+	"visualeditor-editnotices-tooltip": "Avisses de modificación",
 	"visualeditor-editsummary": "Descriure vòstras modifications",
 	"visualeditor-editsummary-bytes-remaining": "Lo nombre d’octets que demòran",
 	"visualeditor-formatdropdown-format-mw-heading1": "Títol de pagina",

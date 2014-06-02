@@ -3,7 +3,8 @@
 		"authors": [
 			"Borichèt",
 			"Dragonòt",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "Creé ël còdes sorgiss ëd costa pàgina",
@@ -115,7 +116,7 @@
 	"visualeditor-differror": "Eror an cariand ij dat dal servent: $1.",
 	"visualeditor-editconflict": "Soe modìfiche a l'han nen podù esse salvà për via d'un conflit ëd modìfiche. Veul-lo arzòlve ël conflit a man?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|neuva|neuve}}",
-	"visualeditor-editnotices-tooltip": "Modifiché j'avis",
+	"visualeditor-editnotices-tooltip": "Avis di modifica",
 	"visualeditor-editsummary": "Descrive lòn ch'a l'ha modificà",
 	"visualeditor-editsummary-bytes-remaining": "Ël nùmer d'otet restant",
 	"visualeditor-formatdropdown-format-mw-heading1": "Tìtol ëd la pàgina",
@@ -124,7 +125,6 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Sot-antestassion 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Sot-antestassion 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sot-antestassion 4",
-	"visualeditor-languageinspector-widget-changelang": "Trové la lenga",
 	"visualeditor-languages-tool": "Lenghe",
 	"visualeditor-linkinspector-illegal-title": "Tìtol ëd pàgina nen bon",
 	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Pàgina|Pàgine}} d'omonimìa",
@@ -143,9 +143,6 @@
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Legenda për la plancia",
 	"visualeditor-mwgalleryinspector-title": "Galarìa",
 	"visualeditor-mwhieroinspector-title": "Geroglìfich",
-	"visualeditor-notification-created": "«$1» a l'é stàita creà.",
-	"visualeditor-notification-restored": "«$1» a l'é stàita ripristinà.",
-	"visualeditor-notification-saved": "Soe modìfiche a «$1» a son ëstàite salvà.",
 	"visualeditor-parameter-input-placeholder": "Nòm dël paràmeter",
 	"visualeditor-parameter-search-no-unused": "Gnun paràmeter nen dovrà",
 	"visualeditor-parameter-search-unknown": "Paràmeter sconossù",

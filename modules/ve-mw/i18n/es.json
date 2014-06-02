@@ -20,7 +20,8 @@
 			"Ihojose",
 			"Csbotero",
 			"Gloria sah",
-			"Wifidel"
+			"Wifidel",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -161,7 +162,7 @@
 	"visualeditor-differror": "Error al cargar datos del servidor: $1.",
 	"visualeditor-editconflict": "No se pudieron guardar tus cambios debido a un conflicto de edición. {{GENDER:|¿Deseas}} resolver el conflicto manualmente?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|aviso|avisos}}",
-	"visualeditor-editnotices-tooltip": "Editar avisos",
+	"visualeditor-editnotices-tooltip": "Avisos de edición",
 	"visualeditor-editsummary": "Describir cambios",
 	"visualeditor-editsummary-bytes-remaining": "El número de bytes restantes",
 	"visualeditor-formatdropdown-format-mw-heading1": "Título de página",

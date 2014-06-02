@@ -171,6 +171,7 @@
 	"visualeditor-linkinspector-suggest-new-page": "Ny sida",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Omdirigeringssida|Omdirigeringssidor}}",
 	"visualeditor-linknodeinspector-add-label": "Lägg till etikett",
+	"visualeditor-linknodeinspector-title": "Enkel länk",
 	"visualeditor-loadwarning": "Fel uppstod vid inläsning av data från server: $1. Vill du försöka igen?",
 	"visualeditor-loadwarning-token": "Fel uppstod vid laddning av redigeringsnyckel från server: $1. Vill du försöka igen?",
 	"visualeditor-mainnamespacepagelink": "Project:Huvudnamnrymden",

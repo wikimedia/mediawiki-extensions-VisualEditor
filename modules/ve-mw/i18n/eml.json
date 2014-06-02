@@ -140,7 +140,7 @@
 	"visualeditor-differror": "Erōr mèinter ch' i s' carghèven gl' infurmasiòun dàl sèrver: $1.",
 	"visualeditor-editconflict": "I vòster cambiamèint i n' pōlen mìa èser salvê perchè a gh' è un cunflìt ed cambiamèint. Vlî-{{GENDER:|v}} giustèr cal cunflìt chè manualmèint?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avîś}}",
-	"visualeditor-editnotices-tooltip": "Cambièr i avîś",
+	"visualeditor-editnotices-tooltip": "Scrîv i avîś",
 	"visualeditor-editsummary": "Descrivī quel ch' a 'î cambiê",
 	"visualeditor-editsummary-bytes-remaining": "Al nùm'r ed bytes ch'a 'rmàgn",
 	"visualeditor-formatdropdown-format-mw-heading1": "Tìtul 'dla pàgina",

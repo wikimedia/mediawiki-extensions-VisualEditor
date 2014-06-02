@@ -170,6 +170,8 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Página Correspondente|Páginas correspondentes}}",
 	"visualeditor-linkinspector-suggest-new-page": "Página nova",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Página de redireccionamento|Páginas de redireccionamento}}",
+	"visualeditor-linknodeinspector-add-label": "Adicionar etiqueta",
+	"visualeditor-linknodeinspector-title": "Ligação simples",
 	"visualeditor-loadwarning": "Erro ao carregar dados do servidor:  $1. Gostaria de tentar novamente?",
 	"visualeditor-loadwarning-token": "Erro ao carregar dados de edição do servidor: $1. Gostaria de tentar novamente?",
 	"visualeditor-mainnamespacepagelink": "Project:Domínio principal",

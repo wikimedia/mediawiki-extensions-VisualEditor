@@ -7,7 +7,8 @@
 			"Soued031",
 			"Tynchtyk Chorotegin",
 			"UV",
-			"Викиней"
+			"Викиней",
+			"McDutchie"
 		]
 	},
 	"tooltip-ca-createsource": "De Quelltext vun dëser Säit uleeën",
@@ -145,7 +146,7 @@
 	"visualeditor-differror": "Feeler beim Luede vun den Donnéeë vum Server: $1",
 	"visualeditor-editconflict": "Är Ännerunge konnte wéinst engem Ännerungskonflikt net gespäichert ginn. Wëllt {{Gender:|Dir}} de Konflikt manuell léisen?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Eng  Notiz|$1 Notizen}}",
-	"visualeditor-editnotices-tooltip": "Notizen änneren",
+	"visualeditor-editnotices-tooltip": "Ännerungsnotizen",
 	"visualeditor-editsummary": "Beschreift wat dir geännert hutt",
 	"visualeditor-editsummary-bytes-remaining": "D'Zuel vun de Byten déi nach iwwreg sinn",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titel vun der Säit",

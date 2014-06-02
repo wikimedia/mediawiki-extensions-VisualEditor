@@ -5,7 +5,8 @@
 			"Sank",
 			"Shanmugamp7",
 			"மதனாஹரன்",
-			"கௌசிக் பிரபு"
+			"கௌசிக் பிரபு",
+			"Kalyanasundar"
 		]
 	},
 	"tooltip-ca-createsource": "இந்த பக்கத்தின் மூல நிரலை உருவாக்கவும்",
@@ -45,9 +46,9 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "உப தலைப்பு 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "உப தலைப்பு 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "உப தலைப்பு 4",
-	"visualeditor-languageinspector-widget-changelang": "மொழியை கண்டுபிடி",
 	"visualeditor-linkinspector-suggest-external-link": "வெளியிணைப்பு",
 	"visualeditor-linkinspector-suggest-new-page": "புதுப் பக்கம்",
+	"visualeditor-linknodeinspector-add-label": "அடையாள சீட்டை சேர்க்கவும்",
 	"visualeditor-meta-tool": "விருப்பத்தேர்வுகள்",
 	"visualeditor-savedialog-label-create": "பக்கத்தை உருவாக்கு",
 	"visualeditor-savedialog-label-error": "பிழை",
