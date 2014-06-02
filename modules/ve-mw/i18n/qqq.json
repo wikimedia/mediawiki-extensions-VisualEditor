@@ -27,6 +27,7 @@
 	"tooltip-ca-editsource": "Tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists.\n\nSee also:\n* {{msg-mw|Tooltip-ca-createsource}} - tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist",
 	"tooltip-ca-ve-edit": "Tooltip of the dedicated VisualEditor \"Edit\" tab.",
 	"visualeditor-advancedsettings-tool": "Tool for opening the advanced settings section of the meta dialog.\n{{Identical|Advanced settings}}",
+	"visualeditor-annotationbutton-linknode-tooltip": "Tooltip text for link button for auto-numbered, labelless, external links.\n{{Related|Visualeditor-annotationbutton}}\n{{Related|visualeditor-linknodeinspector-title}}",
 	"visualeditor-beta-appendix": "Used in {{msg-mw|Guidedtour-tour-firsteditve-edit-page-description}}.\n{{Identical|Beta}}",
 	"visualeditor-beta-label": "Text of tool in the toolbar that highlights that VisualEditor is still in beta.\n{{Identical|Beta}}",
 	"visualeditor-beta-warning": "Note shown when user clicks on 'beta' label in VisualEditor, warning users that the software may have issues.\n\nRefers to:\n* {{msg-mw|Visualeditor-toolbar-cancel}}\n* {{msg-mw|Visualeditor-mweditmodesource-title}}\nSee also:\n* {{msg-mw|Visualeditor-wikitext-warning}}",
