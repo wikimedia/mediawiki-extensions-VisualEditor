@@ -150,6 +150,19 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	if ( this.loaded && !this.preventReselection ) {
 		this.setPageByName( param.getId() );
 	}
+
+	// Recalculate tab indexes
+	this.$body.find( '.ve-ui-mwParameterPage' ).each( function ( index ) {
+		$( this )
+			.find( '.ve-ui-mwParameterPage-field > .oo-ui-textInputWidget > textarea' )
+				.attr( 'tabindex', index * 3 + 1 )
+			.end()
+			.find( '.ve-ui-mwParameterPage-infoButton > a' )
+				.attr( 'tabindex', index * 3 + 2 )
+			.end()
+			.find( '.ve-ui-mwParameterPage-removeButton > a' )
+				.attr( 'tabindex', index * 3 + 3 );
+	} );
 };
 
 /**

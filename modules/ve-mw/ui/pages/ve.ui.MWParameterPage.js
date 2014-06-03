@@ -45,12 +45,15 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		} )
 		.setValue( this.parameter.getValue() )
 		.connect( this, { 'change': 'onValueInputChange' } );
+	if ( this.parameter.isRequired() ) {
+		this.valueInput.$input.prop( 'required', true );
+	}
+
 	this.removeButton = new OO.ui.ButtonWidget( {
 			'$': this.$,
 			'frameless': true,
 			'icon': 'remove',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-			'tabIndex': -1,
 			'classes': [ 've-ui-mwParameterPage-removeButton' ]
 		} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
@@ -59,7 +62,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			'frameless': true,
 			'icon': 'info',
 			'title': ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
-			'tabIndex': -1,
 			'classes': [ 've-ui-mwParameterPage-infoButton' ]
 		} );
 	this.addButton = new OO.ui.ButtonWidget( {
