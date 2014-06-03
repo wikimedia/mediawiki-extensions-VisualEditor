@@ -374,7 +374,7 @@ class VisualEditorHooks {
 	 * Adds extra variables to the page config.
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
-		global $wgStylePath, $wgSVGMaxSize;
+		global $wgStylePath, $wgSVGMaxSize, $wgNamespacesWithSubpages;
 
 		$pageLanguage = $out->getTitle()->getPageLanguage();
 
@@ -387,6 +387,7 @@ class VisualEditorHooks {
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'svgMaxSize' => $wgSVGMaxSize,
+			'namespacesWithSubpages' => $wgNamespacesWithSubpages
 		);
 
 		return true;
