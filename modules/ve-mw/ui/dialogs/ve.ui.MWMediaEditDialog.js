@@ -372,12 +372,10 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function ( checked 
 
 	// Update the image model with a default value
 	if ( checked ) {
-		if ( this.imageModel.getImageNodeType() === 'mwInlineImage' ) {
-			newPositionValue = this.mediaNode.getDocument().getDir() === 'rtl' ? 'left' : 'right';
-		} else {
+		if ( !this.positionInput.getSelectedItem() ) {
 			newPositionValue = this.imageModel.getDefaultDir();
+			this.imageModel.setAlignment( newPositionValue );
 		}
-		this.imageModel.setAlignment( newPositionValue );
 	} else {
 		this.imageModel.setAlignment( 'none' );
 		this.positionInput.selectItem( null );
@@ -470,15 +468,15 @@ ve.ui.MWMediaEditDialog.prototype.getSetupProcess = function ( data ) {
 			this.positionInput.setDisabled(
 				!this.imageModel.isAligned()
 			);
-			this.positionCheckbox.setValue(
-				this.imageModel.isAligned()
-			);
 			this.positionInput.selectItem(
 				this.imageModel.isAligned() ?
 				this.positionInput.getItemFromData(
 					this.imageModel.getAlignment()
 				) :
 				null
+			);
+			this.positionCheckbox.setValue(
+				this.imageModel.isAligned()
 			);
 
 			// Border flag

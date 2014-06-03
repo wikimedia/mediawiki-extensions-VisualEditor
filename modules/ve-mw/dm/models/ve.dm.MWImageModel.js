@@ -102,11 +102,7 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	// Inline images have no 'align' (they have 'valign' instead)
 	// But we do want an alignment case for these in case they
 	// are transformed to block images
-	attrs.align = attrs.align || 'default';
-
-	imgModel.setAlignment( attrs.align );
-
-	imgModel.setVerticalAlignment( attrs.valign );
+	imgModel.setAlignment( attrs.align || 'default' );
 
 	// Default size
 	imgModel.toggleDefaultSize( !!attrs.defaultSize );
@@ -590,9 +586,24 @@ ve.dm.MWImageModel.prototype.setAltText = function ( text ) {
  * @fires typeChange
  */
 ve.dm.MWImageModel.prototype.setType = function ( type ) {
-	var wasDefaultAligned = this.isDefaultAligned();
+	var isDefaultAligned = this.isDefaultAligned( this.imageCurrentType );
 
 	this.type = type;
+
+	// If we're switching between inline and block or vise versa,
+	// check if the old type image was default aligned
+	if ( isDefaultAligned && this.imageCurrentType !== this.type ) {
+		if ( this.type === 'none' || this.type === 'frameless' ) {
+			// Reset default alignment for switching to inline images
+			this.setAlignment( 'none' );
+		} else {
+			// Reset default alignment for all other images
+			this.setAlignment( 'default' );
+		}
+	}
+
+	// Cache the current type for next check
+	this.imageCurrentType = type;
 
 	if ( type === 'frame' || type === 'thumb' ) {
 		// Disable border option
@@ -600,11 +611,6 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 	} else {
 		// Enable border option
 		this.toggleBorderable( true );
-	}
-
-	if ( wasDefaultAligned ) {
-		// Reset default alignment
-		this.setAlignment( 'default' );
 	}
 
 	// Let the image node update scalable considerations
