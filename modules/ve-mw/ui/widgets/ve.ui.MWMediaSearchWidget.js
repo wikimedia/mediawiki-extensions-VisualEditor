@@ -141,7 +141,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				'gsrlimit': 20,
 				'gsroffset': source.gsroffset,
 				'prop': 'imageinfo',
-				'iiprop': 'dimensions|url',
+				'iiprop': 'dimensions|url|mediatype',
 				'iiurlheight': this.size
 			}, {
 				'url': url,
