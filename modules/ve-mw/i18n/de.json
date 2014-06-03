@@ -19,6 +19,7 @@
 	"tooltip-ca-editsource": "Den Quelltext dieser Seite bearbeiten",
 	"tooltip-ca-ve-edit": "Diese Seite mit dem VisualEditor bearbeiten",
 	"visualeditor-advancedsettings-tool": "Erweiterte Einstellungen",
+	"visualeditor-annotationbutton-linknode-tooltip": "Einfacher Link",
 	"visualeditor-beta-appendix": "Beta",
 	"visualeditor-beta-label": "Beta",
 	"visualeditor-beta-warning": "VisualEditor ist in der Beta. Dir werden Softwarefehler auffallen und du wirst Teile der Seite nicht bearbeiten können. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zurückzukehren, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-cancel}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus.",

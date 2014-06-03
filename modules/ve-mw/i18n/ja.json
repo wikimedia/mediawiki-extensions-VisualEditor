@@ -12,6 +12,7 @@
 	"tooltip-ca-editsource": "このページのソースコードを編集する",
 	"tooltip-ca-ve-edit": "このページをビジュアルエディターで編集する",
 	"visualeditor-advancedsettings-tool": "高度な設定",
+	"visualeditor-annotationbutton-linknode-tooltip": "単純なリンク",
 	"visualeditor-beta-appendix": "ベータ版",
 	"visualeditor-beta-label": "ベータ",
 	"visualeditor-beta-warning": "ビジュアルエディターは「ベータ版」です。ソフトウェアの問題点に遭遇するおそれがあり、ページの一部を編集できないおそれがあります。「{{int:visualeditor-toolbar-cancel}}」の隣のドロップダウンを開いて「{{int:visualeditor-mweditmodesource-title}}」を選択することで、編集内容を維持したままいつでもソース編集に戻せます。",

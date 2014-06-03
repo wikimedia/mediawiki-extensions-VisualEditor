@@ -195,6 +195,7 @@
 	"visualeditor-saveerror": "Tõrge andmete salvestamisel serverisse: $1.",
 	"visualeditor-serializeerror": "Tõrge serverist andmete laadimisel: $1.",
 	"visualeditor-settings-tool": "Lehekülje sätted",
+	"visualeditor-timeout": "Paistab, et täielik redigeerimine pole praegu võimalik. Kas soovid redigeerida hoopis lähteteksti režiimis?",
 	"visualeditor-toolbar-cancel": "Loobu",
 	"visualeditor-toolbar-format-tooltip": "Lõigu vormindus",
 	"visualeditor-toolbar-savedialog": "Salvesta lehekülg",

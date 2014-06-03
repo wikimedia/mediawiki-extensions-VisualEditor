@@ -24,6 +24,7 @@
 	"tooltip-ca-editsource": "编辑本页面的源代码",
 	"tooltip-ca-ve-edit": "使用可视化编辑器编辑本页",
 	"visualeditor-advancedsettings-tool": "高级设置",
+	"visualeditor-annotationbutton-linknode-tooltip": "简单链接",
 	"visualeditor-beta-appendix": "测试",
 	"visualeditor-beta-label": "测试",
 	"visualeditor-beta-warning": "可视化编辑器仍在“测试中”。您可能会遇到软件问题，并可能无法编辑页面中的某些部分。要回到源代码编辑而不丢失您的更改，请打开“{{int:visualeditor-toolbar-cancel}}”之后的下拉菜单，然后选择“{{int:visualeditor-mweditmodesource-title}}”。",

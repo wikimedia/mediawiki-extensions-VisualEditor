@@ -10,6 +10,7 @@
 	"tooltip-ca-editsource": "Уредување на изворниот код на страницава",
 	"tooltip-ca-ve-edit": "Уреди ја страницава со ВизуеленУредник",
 	"visualeditor-advancedsettings-tool": "Напредни нагодувања",
+	"visualeditor-annotationbutton-linknode-tooltip": "Проста врска",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
 	"visualeditor-beta-warning": "ВизуеленУредник е во „бета“. Може да наидете на извесни проблеми во програмот и да не можете да уредите делови од страницата. За да се вратите на изворно уредување во секое време, без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-cancel}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
