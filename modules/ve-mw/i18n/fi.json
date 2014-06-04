@@ -21,6 +21,7 @@
 	"tooltip-ca-editsource": "Muokkaa tämän sivun wikitekstiä",
 	"tooltip-ca-ve-edit": "Muokkaa tätä sivua Visuaalisella muokkaimella",
 	"visualeditor-advancedsettings-tool": "Lisäasetukset",
+	"visualeditor-annotationbutton-linknode-tooltip": "Yksinkertainen linkki",
 	"visualeditor-beta-appendix": "beeta",
 	"visualeditor-beta-label": "beeta",
 	"visualeditor-beta-warning": "Visuaalinen muokkain on beetavaiheessa. Saatat kohdata ohjelmisto-ongelmia, ja et ehkä voi vielä muokata kaikkia sivun osia. Paina \"{{int:visualeditor-ca-editsource}}\" vaihtaaksesi wikiteksti-tilaan – tallentamattomat muokkaukset katoavat.",

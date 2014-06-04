@@ -12,6 +12,7 @@
 	"tooltip-ca-editsource": "Modificați codul sursă al acestei pagini",
 	"tooltip-ca-ve-edit": "Modificați această pagină cu EditorulVizual",
 	"visualeditor-advancedsettings-tool": "Setări avansate",
+	"visualeditor-annotationbutton-linknode-tooltip": "Legătură simplă",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "EditorulVizual este în stadiul „beta”. Este posibil să întâmpinați probleme de software și să nu vă fie permisă modificarea în întregime a paginii. Pentru a reveni în orice moment la editarea codului sursă fără a pierde modificările, deschideți meniul de lângă „{{int:visualeditor-toolbar-cancel}}” și selectați „{{int:visualeditor-mweditmodesource-title}}”.",
