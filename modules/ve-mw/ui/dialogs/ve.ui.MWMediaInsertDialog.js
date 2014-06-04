@@ -59,9 +59,11 @@ ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
 				'height': info.height
 			}
 		} );
+
 		// Resize to default thumbnail size, but only if the image itself
 		// isn't smaller than the default size
-		if ( info.width > this.defaultThumbSize ) {
+		// For svg/drawings, the default wiki size is always applied
+		if ( info.width > this.defaultThumbSize || info.mediatype === 'DRAWING' ) {
 			newDimensions = scalable.getDimensionsFromValue( {
 				'width': this.defaultThumbSize
 			} );
@@ -84,6 +86,7 @@ ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
 					'width': newDimensions.width,
 					'height': newDimensions.height,
 					'resource': './' + item.title,
+					'mediaType': info.mediatype,
 					'defaultSize': true
 				}
 			},
