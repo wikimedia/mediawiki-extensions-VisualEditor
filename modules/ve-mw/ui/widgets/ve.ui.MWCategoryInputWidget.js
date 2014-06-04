@@ -142,6 +142,8 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 	} );
 
 	// Existing categories
+	// This is deliberately not checking the last existingCategories entry so we don't show it under
+	// "Move this category here" etc. That is done below.
 	for ( i = 0, len = existingCategories.length - 1; i < len; i++ ) {
 		item = existingCategories[i];
 		// Verify that item starts with category.value
@@ -151,6 +153,10 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 			}
 			existingCategoryItems.push( item );
 		}
+	}
+	// Now check the last one. Don't add to existingCategoryItems but do make it a match
+	if ( existingCategories[existingCategories.length - 1] === category.value ) {
+		exactMatch = true;
 	}
 
 	// Matching categories
