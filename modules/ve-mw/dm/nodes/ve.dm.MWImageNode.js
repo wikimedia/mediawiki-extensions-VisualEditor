@@ -34,7 +34,7 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	// Initialize
-	this.updateType( this.getAttribute( 'type' ) );
+	this.syncScalableToType( this.getAttribute( 'type' ) );
 
 	// Events
 	this.connect( this, { 'attributeChange': 'onAttributeChange' } );
@@ -49,11 +49,11 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 /* Methods */
 
 /**
- * Update image properties according to the image type.
+ * Update image scalable properties according to the image type.
  *
  * @param {string} type The new image type
  */
-ve.dm.MWImageNode.prototype.updateType = function ( type ) {
+ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
 	var originalDimensions, dimensions,
 		scalable = this.getScalable(),
 		width = this.getAttribute( 'width' ),
@@ -66,7 +66,10 @@ ve.dm.MWImageNode.prototype.updateType = function ( type ) {
 
 	// Deal with the different default sizes
 	if ( type === 'thumb' || type === 'frameless' ) {
-		if ( width >= this.defaultThumbSize ) {
+		// Set the default size to that in the wiki configuration if
+		// 1. The image width is not smaller than the default
+		// 2. If the image is an SVG drawing
+		if ( width >= this.defaultThumbSize || this.getMediaType() === 'DRAWING' ) {
 			dimensions = this.scalable.getDimensionsFromValue( {
 				'width': this.defaultThumbSize
 			} );
@@ -83,7 +86,7 @@ ve.dm.MWImageNode.prototype.updateType = function ( type ) {
 	}
 
 	// Deal with maximum dimensions for images and drawings
-	if ( this.mediaType !== 'DRAWING' ) {
+	if ( this.getMediaType() !== 'DRAWING' ) {
 		if ( originalDimensions ) {
 			scalable.setMaxDimensions( originalDimensions );
 			scalable.setEnforcedMax( true );
@@ -117,7 +120,7 @@ ve.dm.MWImageNode.prototype.updateType = function ( type ) {
  */
 ve.dm.MWImageNode.prototype.onAttributeChange = function ( key, from, to ) {
 	if ( key === 'type' ) {
-		this.updateType( to );
+		this.syncScalableToType( to );
 	}
 };
 
@@ -199,7 +202,7 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 				// Update media type
 				this.mediaType = info.mediatype;
 				// Update according to type
-				this.updateType();
+				this.syncScalableToType();
 			}
 		}, this ) ).promise();
 	}
@@ -220,4 +223,15 @@ ve.dm.MWImageNode.prototype.createScalable = function () {
 			'height': 1
 		}
 	} );
+};
+
+/**
+ * Get symbolic name of media type.
+ *
+ * Example values: "BITMAP" for JPEG or PNG images; "DRAWING" for SVG graphics
+ *
+ * @return {string|undefined} Symbolic media type name, or undefined if empty
+ */
+ve.dm.MWImageNode.prototype.getMediaType = function () {
+	return this.mediaType;
 };

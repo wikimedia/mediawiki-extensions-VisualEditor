@@ -95,7 +95,6 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 
 	imgModel.setDir( doc.getDir() );
 
-	imgModel.setMediaType( attrs.mediatype || 'BITMAP' );
 	imgModel.setType( attrs.type );
 
 	// Fix cases where alignment is undefined
@@ -117,6 +116,9 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 		'default' :
 		'custom'
 	);
+
+	// Make sure the node type and scalable are synchronized
+	node.syncScalableToType();
 
 	// If this is a block image, get the caption
 	if ( node.getType() === 'mwBlockImage' ) {
@@ -445,10 +447,10 @@ ve.dm.MWImageModel.prototype.getSizeType = function () {
  *
  * Example values: "BITMAP" for JPEG or PNG images; "DRAWING" for SVG graphics
  *
- * @return {string|null} Symbolic media type name, or null if empty
+ * @return {string|undefined} Symbolic media type name, or undefined if empty
  */
 ve.dm.MWImageModel.prototype.getMediaType = function () {
-	return this.mediaType;
+	return this.getMediaNode().getMediaType();
 };
 
 /**
@@ -609,7 +611,7 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 
 	// Let the image node update scalable considerations
 	// for default and max dimensions as per the new type.
-	this.getMediaNode().updateType( type );
+	this.getMediaNode().syncScalableToType( type );
 
 	this.emit( 'typeChange', type );
 };
@@ -662,17 +664,6 @@ ve.dm.MWImageModel.prototype.setSizeType = function ( type ) {
 		this.sizeType = type;
 		this.toggleDefaultSize( type === 'default' );
 	}
-};
-
-/**
- * Set symbolic name of media type.
- *
- * @see #getMediaType
- *
- * @param {string} type Media type
- */
-ve.dm.MWImageModel.prototype.setMediaType = function ( type ) {
-	this.mediaType = type;
 };
 
 /**

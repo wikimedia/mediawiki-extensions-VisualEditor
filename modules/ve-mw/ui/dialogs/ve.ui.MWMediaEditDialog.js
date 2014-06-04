@@ -526,7 +526,7 @@ ve.ui.MWMediaEditDialog.prototype.getTeardownProcess = function ( data ) {
 			this.captionNode = null;
 			// Reset the considerations for the scalable
 			// in the image node
-			this.mediaNode.updateType();
+			this.mediaNode.syncScalableToType();
 		}, this );
 };
 
