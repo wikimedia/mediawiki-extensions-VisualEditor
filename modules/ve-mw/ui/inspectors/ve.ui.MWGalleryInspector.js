@@ -20,7 +20,7 @@ ve.ui.MWGalleryInspector = function VeUiMWGalleryInspector( config ) {
 	// Parent constructor
 	ve.ui.MWExtensionInspector.call( this, config );
 
-	this.$element.addClass( 've-ui-mwGalleryInpsector' );
+	this.$element.addClass( 've-ui-mwGalleryInspector' );
 };
 
 /* Inheritance */
