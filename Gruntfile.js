@@ -8,8 +8,8 @@
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' );
 
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
+	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-jscs-checker' );
@@ -52,7 +52,7 @@ module.exports = function ( grunt ) {
 		},
 		jshint: {
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: true
 			},
 			all: [
 				'*.js',
@@ -61,17 +61,13 @@ module.exports = function ( grunt ) {
 			]
 		},
 		jscs: {
-			src: [
-				'<%= jshint.all %>'
-			]
+			src: '<%= jshint.all %>'
 		},
 		csslint: {
 			options: {
 				csslintrc: '.csslintrc'
 			},
-			all: [
-				'modules/*/**/*.css'
-			]
+			all: 'modules/*/**/*.css'
 		},
 		banana: {
 			all: 'modules/ve-{mw,wmf}/i18n/'
