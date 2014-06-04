@@ -149,8 +149,17 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded && !this.preventReselection ) {
 		this.setPageByName( param.getId() );
+	} else {
+		this.onAddParameterBeforeLoad( page );
 	}
 };
+
+/**
+ * Additional handling of parameter addition events before loading.
+ *
+ * @param {ve.ui.MWParameterPage} page Parameter page object
+ */
+ve.ui.MWTemplateDialog.prototype.onAddParameterBeforeLoad = function () {};
 
 /**
  * Handle remove param events.
