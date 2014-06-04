@@ -281,9 +281,16 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
  * @return {Object} Updated attributes
  */
 ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
-	var attrs,
-		origAttrs = this.getOriginalImageAttributes(),
-		currentDimensions = this.getCurrentDimensions();
+	var attrs, currentDimensions,
+		origAttrs = this.getOriginalImageAttributes();
+
+	// Adjust default dimensions if size is set to default
+	// FIXME modifying this.scalable shouldn't be done in a getter and shouldn't be needed (bug 66149)
+	if ( this.scalable.isDefault() && this.scalable.getDefaultDimensions() ) {
+		this.scalable.setCurrentDimensions( this.scalable.getDefaultDimensions() );
+	}
+
+	currentDimensions = this.getCurrentDimensions();
 
 	attrs = {
 		'type': this.getType(),
