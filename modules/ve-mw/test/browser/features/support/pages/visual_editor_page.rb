@@ -11,6 +11,7 @@ class VisualEditorPage
   a(:edit_ve, title: /Edit this page with VisualEditor/)
   a(:edit_wikitext, title: /You can edit this page\./)
   a(:heading, text: /Heading/)
+  span(:hamburger_menu, css: "div.oo-ui-listToolGroup:nth-child(2) > span:nth-child(1) > span:nth-child(3)")
   span(:increase_indentation, class: "oo-ui-iconedElement-icon oo-ui-icon-indent-list")
   span(:insert_menu, text: "Insert")
   div(:insert_references, class: "oo-ui-window-title")
@@ -20,6 +21,7 @@ class VisualEditorPage
   span(:looks_good, class: "oo-ui-labeledElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:newpage_linksuggestion, text: "DoesNotExist")
+  span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
   div(:page_text, id: "mw-content-text")
   a(:page_title, text: /Page title/)
   a(:paragraph, text: /Paragraph/)
@@ -65,6 +67,7 @@ class VisualEditorPage
     span(:leftarrowclose, class: "oo-ui-iconedElement-icon oo-ui-icon-previous", frame: frame)
     text_field(:link_textfield, index: 0, frame: frame)
     span(:another_save_page, class: "oo-ui-labeledElement-label", text: "Save page", frame: frame)
+    div(:options_page_title, class: "oo-ui-window-title", text: "Options", frame: frame)
     div(:ve_link_ui, class: "oo-ui-window-title", frame: frame)
   end
 
