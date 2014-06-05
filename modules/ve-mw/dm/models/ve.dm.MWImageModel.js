@@ -711,15 +711,22 @@ ve.dm.MWImageModel.prototype.setVerticalAlignment = function ( valign ) {
 /**
  * Get the default alignment according to the document direction
  *
+ * @param {string} [imageNodeType] Optional. The image node type that we would
+ * like to get the default direction for. Supplying this parameter allows us
+ * to check what the default alignment of a specific type of node would be.
+ * If the parameter is not supplied, the default alignment will be calculated
+ * based on the current node type.
  * @return {string} Node alignment based on document direction
  */
-ve.dm.MWImageModel.prototype.getDefaultDir = function () {
+ve.dm.MWImageModel.prototype.getDefaultDir = function ( imageNodeType ) {
+	imageNodeType = imageNodeType || this.getImageNodeType();
+
 	if ( this.getDir() === 'rtl' ) {
 		// Assume position is 'left'
-		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'left' : 'none';
+		return ( imageNodeType === 'mwBlockImage' ) ? 'left' : 'none';
 	} else {
 		// Assume position is 'right'
-		return ( this.getImageNodeType() === 'mwBlockImage' ) ? 'right' : 'none';
+		return ( imageNodeType === 'mwBlockImage' ) ? 'right' : 'none';
 	}
 };
 
