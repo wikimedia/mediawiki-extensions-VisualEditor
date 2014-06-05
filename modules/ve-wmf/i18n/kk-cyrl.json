@@ -4,7 +4,7 @@
 			"Arystanbek"
 		]
 	},
-	"tag-visualeditor": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]</span>",
+	"tag-visualeditor": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]-мен өңдеді</span>",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] қолданылып жасаған өңдеме.",
 	"tag-visualeditor-needcheck": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Тексеру]]</span>",
 	"tag-visualeditor-switched": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Ауысты]]</span>",
