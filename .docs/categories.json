@@ -38,7 +38,6 @@
 					"ve.init",
 					"ve.init.Platform",
 					"ve.init.Target",
-					"ve.init.DebugBar",
 					"ve.init.sa*"
 				]
 			},
@@ -99,6 +98,7 @@
 					"ve.ui.MobileContext",
 					"ve.ui.Toolbar",
 					"ve.ui.TargetToolbar",
+					"ve.ui.DebugBar",
 					"ve.ui.WindowSet",
 					"ve.ui.Action",
 					"ve.ui.Trigger",

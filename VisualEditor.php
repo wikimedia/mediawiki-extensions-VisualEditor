@@ -457,7 +457,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js',
 		),
 		'debugScripts' => array(
-			'lib/ve/modules/ve/init/ve.init.DebugBar.js',
+			'lib/ve/modules/ve/ui/ve.ui.DebugBar.js',
 		),
 		'styles' => array(
 			// ce
@@ -486,7 +486,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.Toolbar.css',
 
 			// TODO: add debugStyles to ResourceLoader
-			'lib/ve/modules/ve/init/styles/ve.init.DebugBar.css',
+			'lib/ve/modules/ve/ui/styles/ve.ui.DebugBar.css',
 		),
 		'skinStyles' => array(
 			'default' => array(

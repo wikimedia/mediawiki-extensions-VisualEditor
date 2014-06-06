@@ -489,7 +489,7 @@ ve.init.mw.Target.prototype.onReady = function () {
 	this.onNoticesReady();
 	this.loading = false;
 	this.edited = false;
-	this.setUpSurface( this.doc, ve.bind( function () {
+	this.setupSurface( this.doc, ve.bind( function () {
 		this.startSanityCheck();
 		this.emit( 'surfaceReady' );
 	}, this ) );
@@ -1301,7 +1301,7 @@ ve.init.mw.Target.prototype.getEditNotices = function () {
  * @param {HTMLDocument} doc HTML DOM to edit
  * @param {Function} [callback] Callback to call when done
  */
-ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
+ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
@@ -1317,6 +1317,7 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 			target.surface = surface;
 			surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
 				.addClass( target.protectedClasses );
+			surface.addCommands( target.constructor.static.surfaceCommands );
 			setTimeout( function () {
 				var surfaceView = surface.getView(),
 					$documentNode = surfaceView.getDocument().getDocumentNode().$element;
@@ -1324,7 +1325,10 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 				// Initialize surface
 				surface.getContext().hide();
 				target.$element.append( surface.$element );
-				target.setUpToolbar();
+				target.setupToolbar();
+				if ( ve.debug ) {
+					target.setupDebugBar();
+				}
 
 				// Apply mw-body-content to the view (ve-ce-surface).
 				// Not to surface (ve-ui-surface), since that contains both the view
@@ -1346,15 +1350,11 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 };
 
 /**
- * Set up the toolbar and insert it into the DOM.
- *
- * The default implementation inserts it before the surface, but subclasses can override this.
+ * @inheritdoc
  */
-ve.init.mw.Target.prototype.setUpToolbar = function () {
-	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true, 'actions': true } );
-	this.toolbar.setup( this.constructor.static.toolbarGroups );
-	this.surface.addCommands( this.constructor.static.surfaceCommands );
-	this.toolbar.$element.insertBefore( this.surface.$element );
+ve.init.mw.Target.prototype.setupToolbar = function () {
+	// Parent method
+	ve.init.Target.prototype.setupToolbar.call( this, { 'shadow': true, 'actions': true } );
 };
 
 /**

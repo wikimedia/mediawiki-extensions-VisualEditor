@@ -193,10 +193,10 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.setUpToolbar = function () {
+ve.init.mw.ViewPageTarget.prototype.setupToolbar = function () {
 	var $firstHeading;
 	// Parent method
-	ve.init.mw.Target.prototype.setUpToolbar.call( this );
+	ve.init.mw.Target.prototype.setupToolbar.call( this );
 
 	// Keep it hidden so that we can slide it down smoothly (avoids sudden
 	// offset flash when original content is hidden, and replaced in-place with a
@@ -1069,6 +1069,7 @@ ve.init.mw.ViewPageTarget.prototype.startSanityCheck = function () {
 ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	// Update UI
 	this.tearDownToolbar();
+	this.tearDownDebugBar();
 	this.restoreDocumentTitle();
 	if ( this.surface.mwTocWidget ) {
 		this.surface.mwTocWidget.teardown();
@@ -1373,6 +1374,18 @@ ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
 	this.toolbar.$bar.slideUp( 'fast', ve.bind( function () {
 		this.toolbar.destroy();
 		this.toolbar = null;
+	}, this ) );
+};
+
+/**
+ * Hide the debug bar.
+ *
+ * @method
+ */
+ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
+	this.debugBar.$element.slideUp( 'fast', ve.bind( function () {
+		this.debugBar.$element.remove();
+		this.debugBar = null;
 	}, this ) );
 };
 
