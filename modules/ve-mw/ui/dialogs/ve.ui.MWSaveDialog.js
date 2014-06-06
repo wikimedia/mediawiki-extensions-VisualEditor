@@ -121,8 +121,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			this.reviewButton.$element.show();
 			this.reviewGoodButton.$element.hide();
 			this.resolveConflictButton.$element.hide();
+			// HACK: FF needs *another* defer
 			setTimeout( function () {
-				// fix input reference
 				var $textarea = dialog.editSummaryInput.$input;
 				$textarea.focus();
 				// If message has be pre-filled (e.g. section edit), move cursor to end
@@ -425,8 +425,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
+ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			// Old messages should not persist after panel changes
 			this.clearAllMessages();
