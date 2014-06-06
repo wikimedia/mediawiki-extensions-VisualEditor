@@ -188,6 +188,8 @@
 	"visualeditor-toolbar-style-tooltip": "Stil teksta",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-viewpage-savewarning": "Da li ste sigurni da želite da se vratite na prikaz bez prethodnog čuvanja?",
+	"visualeditor-viewpage-savewarning-discard": "Zanemari izmene",
+	"visualeditor-viewpage-savewarning-keep": "Nastavi sa uređivanjem",
 	"visualeditor-wikitext-warning": "Koristite Vizuelni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikitekst]] ovde ne radi. Kliknite na „{{int:visualeditor-ca-editsource}}“ da uredite stranicu u vikitekst režimu - nesačuvane izmene će biti izgubljene.",
 	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "Detektovan vikitekst"

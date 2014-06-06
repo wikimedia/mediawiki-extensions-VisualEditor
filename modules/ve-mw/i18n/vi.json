@@ -10,6 +10,7 @@
 	"tooltip-ca-editsource": "Sửa đổi mã nguồn của trang này",
 	"tooltip-ca-ve-edit": "Sửa đổi trang này dùng Trình soạn thảo trực quan",
 	"visualeditor-advancedsettings-tool": "Tùy chọn nâng cao",
+	"visualeditor-annotationbutton-linknode-tooltip": "Liên kết đơn giản",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Trình soạn thảo trực quan đang là “phiên bản beta”. Bạn có thể gặp trục trặc và có thể không sửa đổi một số phần của trang. Để quay về chế độ sửa đổi mã wiki bất cứ lúc nào mà không mất các thay đổi của bạn, thả xuống trình đơn bên cạnh “{{int:visualeditor-toolbar-cancel}}” và chọn “{{int:visualeditor-mweditmodesource-title}}”.",
