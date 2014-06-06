@@ -310,8 +310,8 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 	// Events
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 	this.borderCheckbox.connect( this, { 'change': 'onBorderCheckboxChange' } );
-	this.positionInput.connect( this, { 'choose': 'onPositionInputSelect' } );
-	this.typeInput.connect( this, { 'choose': 'onTypeInputSelect' } );
+	this.positionInput.connect( this, { 'choose': 'onPositionInputChoose' } );
+	this.typeInput.connect( this, { 'choose': 'onTypeInputChoose' } );
 
 	// Initialization
 	this.generalSettingsPage.$element.append( [
@@ -333,14 +333,15 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
  * @param {string} alignment Image alignment
  */
 ve.ui.MWMediaEditDialog.prototype.onImageModelAlignmentChange = function ( alignment ) {
-	var item = alignment ? this.positionInput.getItemFromData( alignment ) : null;
-
+	var item;
 	alignment = alignment || 'none';
 
-	this.positionCheckbox.setValue( alignment !== 'none' );
+	item = alignment !== 'none' ? this.positionInput.getItemFromData( alignment ) : null;
+
 	// Select the item without triggering the 'choose' event
 	this.positionInput.selectItem( item );
 
+	this.positionCheckbox.setValue( alignment !== 'none' );
 };
 
 /**
@@ -368,20 +369,28 @@ ve.ui.MWMediaEditDialog.prototype.onImageModelTypeChange = function ( type ) {
  * @param {boolean} checked Checkbox status
  */
 ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function ( checked ) {
-	var newPositionValue;
+	var newPositionValue,
+		currentModelAlignment = this.imageModel.getAlignment();
 
-	// Update the image model with a default value
-	if ( checked ) {
-		if ( !this.positionInput.getSelectedItem() ) {
-			newPositionValue = this.imageModel.getDefaultDir();
+	// Only update if the current value is different than that of the image model
+	if (
+		( currentModelAlignment === 'none' && checked ) ||
+		( currentModelAlignment !== 'none' && !checked )
+	) {
+		this.positionInput.setDisabled( !checked );
+		if ( checked ) {
+			// Picking a floating alignment value will create a block image
+			// no matter what the type is, so in here we want to calculate
+			// the default alignment of a block to set as our initial alignment
+			// in case the checkbox is clicked but there was no alignment set
+			// previously.
+			newPositionValue = this.imageModel.getDefaultDir( 'mwBlockImage' );
 			this.imageModel.setAlignment( newPositionValue );
+		} else {
+			// If we're unchecking the box, always set alignment to none and unselect the position widget
+			this.imageModel.setAlignment( 'none' );
 		}
-	} else {
-		this.imageModel.setAlignment( 'none' );
-		this.positionInput.selectItem( null );
 	}
-
-	this.positionInput.setDisabled( !checked );
 };
 
 /**
@@ -390,9 +399,11 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function ( checked 
  * @param {boolean} checked Checkbox status
  */
 ve.ui.MWMediaEditDialog.prototype.onBorderCheckboxChange = function ( checked ) {
-
-	// Update the image model
-	this.imageModel.toggleBorder( checked );
+	// Only update if the value is different than the model
+	if ( this.imageModel.hasBorder() !== checked ) {
+		// Update the image model
+		this.imageModel.toggleBorder( checked );
+	}
 };
 
 /**
@@ -400,10 +411,13 @@ ve.ui.MWMediaEditDialog.prototype.onBorderCheckboxChange = function ( checked ) 
  *
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
-ve.ui.MWMediaEditDialog.prototype.onPositionInputSelect = function ( item ) {
+ve.ui.MWMediaEditDialog.prototype.onPositionInputChoose = function ( item ) {
 	var position = item ? item.getData() : 'default';
 
-	this.imageModel.setAlignment( position );
+	// Only update if the value is different than the model
+	if ( this.imageModel.getAlignment() !== position ) {
+		this.imageModel.setAlignment( position );
+	}
 };
 
 /**
@@ -411,10 +425,13 @@ ve.ui.MWMediaEditDialog.prototype.onPositionInputSelect = function ( item ) {
  *
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
-ve.ui.MWMediaEditDialog.prototype.onTypeInputSelect = function ( item ) {
+ve.ui.MWMediaEditDialog.prototype.onTypeInputChoose = function ( item ) {
 	var type = item ? item.getData() : 'default';
 
-	this.imageModel.setType( type );
+	// Only update if the value is different than the model
+	if ( this.imageModel.getType() !== type ) {
+		this.imageModel.setType( type );
+	}
 };
 
 /**
