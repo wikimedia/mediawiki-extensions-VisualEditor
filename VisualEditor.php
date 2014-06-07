@@ -742,10 +742,8 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.mwimage' => $wgVisualEditorResourceTemplate + array(
+	'ext.visualEditor.mwimage.core' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
-			'modules/ve-mw/dm/models/ve.dm.MWImageModel.js',
-
 			'modules/ve-mw/dm/nodes/ve.dm.MWImageNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWInlineImageNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWBlockImageNode.js',
@@ -757,6 +755,20 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/nodes/ve.ce.MWInlineImageNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWBlockImageNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWImageCaptionNode.js',
+		),
+		'styles' => array(
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWBlockImageNode.css',
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWInlineImageNode.css',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.mwcore',
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	'ext.visualEditor.mwimage' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'modules/ve-mw/dm/models/ve.dm.MWImageModel.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWMediaSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWMediaResultWidget.js',
@@ -767,14 +779,12 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWMediaDialogTool.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWBlockImageNode.css',
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWInlineImageNode.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaInsertDialog.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaResultWidget.css',
 		),
 		'dependencies' => array(
-			'ext.visualEditor.mwcore',
+			'ext.visualEditor.mwimage.core',
 		),
 		'messages' => array(
 			'visualeditor-dialog-media-alttext-section',
