@@ -13,9 +13,9 @@
  *
  * @constructor
  */
-ve.dm.MWAlienExtensionNode = function VeDmMWAlienExtensionNode( length, element ) {
+ve.dm.MWAlienExtensionNode = function VeDmMWAlienExtensionNode() {
 	// Parent constructor
-	ve.dm.MWExtensionNode.call( this, 0, element );
+	ve.dm.MWExtensionNode.apply( this, arguments );
 };
 
 /* Inheritance */

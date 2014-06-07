@@ -11,13 +11,13 @@
  * @class
  * @extends ve.dm.LeafNode
  * @mixins ve.dm.MWImageNode
+ *
  * @constructor
- * @param {number} [length] Length of content data in document
  * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.MWInlineImageNode = function VeDmMWInlineImageNode( length, element ) {
+ve.dm.MWInlineImageNode = function VeDmMWInlineImageNode() {
 	// Parent constructor
-	ve.dm.LeafNode.call( this, 0, element );
+	ve.dm.LeafNode.apply( this, arguments );
 
 	// Mixin constructors
 	ve.dm.MWImageNode.call( this );

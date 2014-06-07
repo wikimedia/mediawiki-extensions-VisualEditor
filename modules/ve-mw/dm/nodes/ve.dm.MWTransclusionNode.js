@@ -16,12 +16,11 @@
  * @mixins ve.dm.GeneratedContentNode
  *
  * @constructor
- * @param {number} [length] Length of content data in document; ignored and overridden to 0
  * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode( length, element ) {
+ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 	// Parent constructor
-	ve.dm.LeafNode.call( this, 0, element );
+	ve.dm.LeafNode.apply( this, arguments );
 
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
@@ -335,13 +334,13 @@ ve.dm.MWTransclusionNode.prototype.getClonedElement = function () {
  *
  * @class
  * @extends ve.dm.MWTransclusionNode
+ *
  * @constructor
- * @param {number} [length] Length of content data in document; ignored and overridden to 0
  * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.MWTransclusionBlockNode = function VeDmMWTransclusionBlockNode( length, element ) {
+ve.dm.MWTransclusionBlockNode = function VeDmMWTransclusionBlockNode() {
 	// Parent constructor
-	ve.dm.MWTransclusionNode.call( this, length, element );
+	ve.dm.MWTransclusionNode.apply( this, arguments );
 };
 
 OO.inheritClass( ve.dm.MWTransclusionBlockNode, ve.dm.MWTransclusionNode );
@@ -355,13 +354,13 @@ ve.dm.MWTransclusionBlockNode.static.name = 'mwTransclusionBlock';
  *
  * @class
  * @extends ve.dm.MWTransclusionNode
+ *
  * @constructor
- * @param {number} [length] Length of content data in document; ignored and overridden to 0
  * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.MWTransclusionInlineNode = function VeDmMWTransclusionInlineNode( length, element ) {
+ve.dm.MWTransclusionInlineNode = function VeDmMWTransclusionInlineNode() {
 	// Parent constructor
-	ve.dm.MWTransclusionNode.call( this, length, element );
+	ve.dm.MWTransclusionNode.apply( this, arguments );
 };
 
 OO.inheritClass( ve.dm.MWTransclusionInlineNode, ve.dm.MWTransclusionNode );

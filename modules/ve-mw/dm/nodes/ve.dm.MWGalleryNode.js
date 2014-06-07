@@ -12,10 +12,11 @@
  * @extends ve.dm.MWExtensionNode
  *
  * @constructor
+ * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.MWGalleryNode = function VeDmMWGalleryNode( length, element ) {
+ve.dm.MWGalleryNode = function VeDmMWGalleryNode() {
 	// Parent constructor
-	ve.dm.MWExtensionNode.call( this, 0, element );
+	ve.dm.MWExtensionNode.apply( this, arguments );
 };
 
 /* Inheritance */
