@@ -15,6 +15,7 @@
 	"tooltip-ca-editsource": "De Quelltext vun dëser Säit änneren",
 	"tooltip-ca-ve-edit": "Dës Säit mam VisualEditor änneren",
 	"visualeditor-advancedsettings-tool": "Erweidert Astellungen",
+	"visualeditor-annotationbutton-linknode-tooltip": "Einfache Link",
 	"visualeditor-beta-appendix": "Beta",
 	"visualeditor-beta-label": "Beta",
 	"visualeditor-beta-warning": "VisualEditor ass eng Betaversioun. Dir kéint Softwareproblemer begéinen an Dir kënnt vläicht net all Deeler vun der Säit änneren.\n\nFir zu all Ament op d'Ännere vum Quell code ze wiesselen ouni Är Ännerungen ze verléieren, maache den 'Dropdown'-Menü niewent \"{{int:visualeditor-toolbar-cancel}}\" op a wielt \"{{int:visualeditor-mweditmodesource-title}}\" eraus.",

@@ -20,6 +20,7 @@
 	"tooltip-ca-editsource": "Redigera wikitexten för den här sidan",
 	"tooltip-ca-ve-edit": "Redigera den här sidan med VisualEditor",
 	"visualeditor-advancedsettings-tool": "Avancerade inställningar",
+	"visualeditor-annotationbutton-linknode-tooltip": "Enkel länk",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor befinner sig i \"betaversion\". Du kan därför stöta på en del programvaruproblem och du kan kanske inte redigera delar av sidan. För att byta till redigering i wikitext-läge, utan att förlora dina ändringar, kan du när som helst öppna rullgardinsmenyn bredvid \"{{int:visualeditor-toolbar-cancel}}\" och välja \"{{int:visualeditor-mweditmodesource-title}}\".",

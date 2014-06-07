@@ -11,10 +11,11 @@
 			"William Surya Permana",
 			"Hysocc",
 			"Bennylin",
-			"Raynasution"
+			"Raynasution",
+			"Pizza1016"
 		]
 	},
-	"tooltip-ca-createsource": "Buat kode sumber halaman ini",
+	"tooltip-ca-createsource": "Cipta kod sumber laman ini",
 	"tooltip-ca-editsource": "Sunting kode sumber halaman ini",
 	"tooltip-ca-ve-edit": "Sunting halaman ini dengan VisualEditor",
 	"visualeditor-advancedsettings-tool": "Pengaturan lanjut",
@@ -23,7 +24,7 @@
 	"visualeditor-beta-warning": "VisualEditor masih berada dalam versi 'beta'. Anda mungkin akan menjumpai masalah peranti lunak, dan Anda mungkin tidak dapat menyunting bagian halaman tertentu. Klik \"{{int:visualeditor-ca-editsource}}\" untuk beralih ke mode teks wiki – perubahan yang belum disimpan akan hilang.",
 	"visualeditor-browserwarning": "Anda menggunakan peramban web yang tidak didukung oleh VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Tambah sumber deskripsi lokal",
-	"visualeditor-ca-createsource": "Buat sumber",
+	"visualeditor-ca-createsource": "Cipta sumber",
 	"visualeditor-ca-editlocaldescriptionsource": "Sunting sumber deskripsi lokal",
 	"visualeditor-ca-editsource": "Sunting sumber",
 	"visualeditor-ca-editsource-section": "sunting sumber",

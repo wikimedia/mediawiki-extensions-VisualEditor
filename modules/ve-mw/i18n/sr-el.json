@@ -152,6 +152,8 @@
 	"visualeditor-mwalienextensioninspector-title": "Medijaviki proširenje",
 	"visualeditor-mweditmodesource-title": "Prebaci na izvorno uređivanje",
 	"visualeditor-mweditmodesource-warning": "Prebacujete se na izvorno uređivanje.\nSve izmene koje ste načinili biće sačuvane, ali povratak u Vizuelni uređivač neće biti moguć bez čuvanja izmena ili osvežavanja stranice.\nŽelite li da nastavite?",
+	"visualeditor-mweditmodesource-warning-switch": "Da, prebaci",
+	"visualeditor-mweditmodesource-warning-cancel": "Ne, otkaži",
 	"visualeditor-mwgalleryinspector-placeholder": "Primer.jpg|Opis slike",
 	"visualeditor-mwgalleryinspector-title": "Galerija",
 	"visualeditor-mwhieroinspector-title": "Hijeroglifi",
