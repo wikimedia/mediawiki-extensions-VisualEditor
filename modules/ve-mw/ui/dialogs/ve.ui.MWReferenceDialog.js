@@ -143,7 +143,7 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 		applyDisabled = data.countNoninternalElements() <= 2;
 
 	this.applyButton.setDisabled( applyDisabled );
-	this.selectButton.setDisabled( !applyDisabled );
+	this.selectButton.setDisabled( !applyDisabled || this.search.isIndexEmpty() );
 };
 
 /**
@@ -153,6 +153,10 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
  */
 ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 	if ( ref instanceof ve.dm.MWReferenceModel ) {
+		if ( this.selectedNode instanceof ve.dm.MWReferenceNode ) {
+			this.getFragment().removeContent();
+			this.selectedNode = null;
+		}
 		this.useReference( ref );
 		// HACK - This proves that the interface for ActionDialog is screwed up
 		this.onApplyButtonClick();
@@ -235,6 +239,7 @@ ve.ui.MWReferenceDialog.prototype.applyChanges = function () {
 		}
 		this.referenceModel.insertReferenceNode( surfaceFragment );
 	}
+
 	// Update internal item
 	this.referenceModel.updateInternalItem( surfaceModel );
 
@@ -327,20 +332,25 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 				this.useReference(
 					ve.dm.MWReferenceModel.static.newFromReferenceNode( this.selectedNode )
 				);
-				this.selectButton.$element.hide();
 			} else {
 				this.useReference( null );
-				this.selectButton.$element.show();
 				this.applyButton.setDisabled( true );
 			}
+			this.selectButton.$element.show();
 			this.applyButton.$element.show();
 			this.backButton.$element.hide();
 			this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
-			this.selectButton.setDisabled( this.search.isIndexEmpty() );
 
 			if ( data.useExisting ) {
 				this.useExistingReference();
 			}
+
+			// If we're using an existing reference, start off disabled
+			// If not, set disabled based on whether or not there are any existing ones.
+			this.selectButton.setDisabled(
+				this.selectedNode instanceof ve.dm.MWReferenceNode ||
+				this.search.isIndexEmpty()
+			);
 		}, this );
 };
 
