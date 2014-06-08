@@ -130,6 +130,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|napomena|napomene}}",
 	"visualeditor-editnotices-tooltip": "Napomene",
 	"visualeditor-editsummary": "Opišite vaše izmene",
+	"visualeditor-editsummary-bytes-remaining": "Preostalo bajtova",
 	"visualeditor-formatdropdown-format-mw-heading1": "Naslov stranice",
 	"visualeditor-formatdropdown-format-mw-heading2": "Naslov",
 	"visualeditor-formatdropdown-format-mw-heading3": "Podnaslov 1",

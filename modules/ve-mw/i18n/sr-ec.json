@@ -132,6 +132,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|напомена|напомене}}",
 	"visualeditor-editnotices-tooltip": "Напомене",
 	"visualeditor-editsummary": "Опишите ваше измене",
+	"visualeditor-editsummary-bytes-remaining": "Преостало бајтова",
 	"visualeditor-formatdropdown-format-mw-heading1": "Наслов странице",
 	"visualeditor-formatdropdown-format-mw-heading2": "Наслов",
 	"visualeditor-formatdropdown-format-mw-heading3": "Поднаслов 1",
