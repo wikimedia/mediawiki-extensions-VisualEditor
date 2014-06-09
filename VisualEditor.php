@@ -69,6 +69,7 @@ $wgHooks['SkinTemplateNavigation'][] = 'VisualEditorHooks::onSkinTemplateNavigat
 $wgHooks['ParserTestGlobals'][] = 'VisualEditorHooks::onParserTestGlobals';
 $wgHooks['EditPage::showEditForm:fields'][] = 'VisualEditorHooks::onEditPageShowEditFormFields';
 $wgHooks['PageContentSaveComplete'][] = 'VisualEditorHooks::onPageContentSaveComplete';
+$wgHooks['BeforeInitialize'][] = 'VisualEditorHooks::onBeforeInitialize';
 $wgExtensionFunctions[] = 'VisualEditorHooks::onSetup';
 
 // Register resource modules

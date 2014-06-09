@@ -677,4 +677,24 @@ class VisualEditorHooks {
 
 		return true;
 	}
+
+	/**
+	 * If the user has specified that they want to edit the page with VE, suppress any redirect.
+	 * @param Title $title Title being used for request
+	 * @param Article|null $article
+	 * @param OutputPage $output
+	 * @param User $user
+	 * @param WebRequest $request
+	 * @param MediaWiki $mediaWiki
+	 * @return bool Always true
+	 */
+	public static function onBeforeInitialize(
+		Title $title, $article, OutputPage $output,
+		User $user, WebRequest $request, MediaWiki $mediaWiki
+	) {
+		if ( $request->getVal( 'veaction' ) === 'edit' ) {
+			$request->setVal( 'redirect', 'no' );
+		}
+		return true;
+	}
 }
