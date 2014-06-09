@@ -119,6 +119,7 @@
 	"visualeditor-linkinspector-suggest-external-link": "vanjska poveznica",
 	"visualeditor-linkinspector-suggest-matching-page": "Podudarna stranica",
 	"visualeditor-linkinspector-suggest-new-page": "Nova stranica",
+	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Stranica za preusmjeravanje|Stranice za preusmjeravanje}}",
 	"visualeditor-loadwarning": "Pogrješka prilikom učitavаnja podataka sa servera $1. Želite li pokušati ponovo?",
 	"visualeditor-media-input-placeholder": "Traži datoteke",
 	"visualeditor-meta-tool": "Postavke stranice",
