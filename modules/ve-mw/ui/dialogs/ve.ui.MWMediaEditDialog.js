@@ -4,7 +4,6 @@
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-/*global mw */
 
 /**
  * Dialog for editing MediaWiki media objects.
@@ -303,9 +302,6 @@ ve.ui.MWMediaEditDialog.prototype.initialize = function () {
 		this.$spinner,
 		this.$sizeWidgetElements
 	] );
-
-	// Get wiki default thumbnail size
-	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	// Events
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
