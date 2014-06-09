@@ -277,7 +277,10 @@ ve.init.mw.Target.static.name = 'mwTarget';
  */
 ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
 	var key, formData;
-	data = ve.extendObject( { 'format': 'json' }, data );
+	data = ve.extendObject( {
+		'format': 'json',
+		'uselang': mw.config.get( 'wgUserLanguage' )
+	}, data );
 	settings = ve.extendObject( {
 		'url': mw.util.wikiScript( 'api' ),
 		'dataType': 'json',
