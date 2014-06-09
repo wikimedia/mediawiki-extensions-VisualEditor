@@ -621,6 +621,11 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 		this.toggleBorderable( true );
 	}
 
+	// If type is frame, set to 'default' size
+	if ( type === 'frame' ) {
+		this.toggleDefaultSize( true );
+	}
+
 	// Let the image node update scalable considerations
 	// for default and max dimensions as per the new type.
 	this.getMediaNode().syncScalableToType( type );

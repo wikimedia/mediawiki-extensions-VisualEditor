@@ -428,6 +428,9 @@ ve.ui.MWMediaEditDialog.prototype.onTypeInputChoose = function ( item ) {
 	if ( this.imageModel.getType() !== type ) {
 		this.imageModel.setType( type );
 	}
+
+	// If type is 'frame', disable the size input widget completely
+	this.sizeWidget.setDisabled( type === 'frame' );
 };
 
 /**
@@ -471,6 +474,8 @@ ve.ui.MWMediaEditDialog.prototype.getSetupProcess = function ( data ) {
 				'default' :
 				'custom'
 			);
+
+			this.sizeWidget.setDisabled( this.imageModel.getType() === 'frame' );
 
 			// Set initial alt text
 			this.altTextInput.setValue(
