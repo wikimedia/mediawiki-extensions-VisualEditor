@@ -213,6 +213,7 @@ $wgResourceModules += array(
 			'ext.visualEditor.base',
 			'ext.visualEditor.mediawiki',
 			'ext.visualEditor.core.mobile',
+			'ext.visualEditor.mwimage.core',
 		),
 		'targets' => array( 'mobile' ),
 	),
