@@ -69,7 +69,7 @@ ve.init.mw.MobileViewTarget.static.name = 'mobile';
  * Once surface is ready ready, init UI.
  */
 ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
-	this.$document[0].focus();
+	this.surface.getView().focus();
 	this.restoreEditSection();
 };
 
