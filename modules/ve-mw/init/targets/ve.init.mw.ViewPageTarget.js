@@ -424,19 +424,24 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @param {number} [newid] New revision id, undefined if unchanged
  */
 ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid, isRedirect ) {
+	var newUrlParams, watchChecked;
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
 		this.tearDownBeforeUnloadHandler();
-		window.location.href = this.viewUri.extend( {
+		newUrlParams = {
 			'venotify': this.restoring ? 'restored' : 'created'
-		} );
+		};
+		if ( isRedirect ) {
+			newUrlParams.redirect = 'no';
+		}
+		window.location.href = this.viewUri.extend( newUrlParams );
 	} else {
 		// Update watch link to match 'watch checkbox' in save dialog.
 		// User logged in if module loaded.
 		// Just checking for mw.page.watch is not enough because in Firefox
 		// there is Object.prototype.watch...
 		if ( mw.page.watch && mw.page.watch.updateWatchLink ) {
-			var watchChecked = this.saveDialog.$saveOptions
+			watchChecked = this.saveDialog.$saveOptions
 				.find( '.ve-ui-mwSaveDialog-checkboxes' )
 					.find( '#wpWatchthis' )
 					.prop( 'checked' );
