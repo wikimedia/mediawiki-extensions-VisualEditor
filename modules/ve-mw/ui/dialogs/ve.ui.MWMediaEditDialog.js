@@ -368,12 +368,13 @@ ve.ui.MWMediaEditDialog.prototype.onPositionCheckboxChange = function ( checked 
 	var newPositionValue,
 		currentModelAlignment = this.imageModel.getAlignment();
 
-	// Only update if the current value is different than that of the image model
+	this.positionInput.setDisabled( !checked );
+	// Only update the model if the current value is different than that
+	// of the image model
 	if (
 		( currentModelAlignment === 'none' && checked ) ||
 		( currentModelAlignment !== 'none' && !checked )
 	) {
-		this.positionInput.setDisabled( !checked );
 		if ( checked ) {
 			// Picking a floating alignment value will create a block image
 			// no matter what the type is, so in here we want to calculate
