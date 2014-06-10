@@ -388,7 +388,12 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.activating = false;
 	this.surface.getModel().connect( this, {
-		'documentUpdate': 'checkForWikitextWarning',
+		'documentUpdate': function () {
+			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
+				this.surface,
+				this.wikitextWarning
+			);
+		},
 		'history': 'updateToolbarSaveButtonState'
 	} );
 	this.surface.setPasteRules( this.constructor.static.pasteRules );
@@ -774,13 +779,13 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarMetaButtonClick = function () {
  * This method is bound to the 'documentUpdate' event on the surface model, and unbinds itself when
  * the wikitext notification is displayed.
  *
- * @param {ve.dm.Transaction} transaction
+ * @param {ve.ui.Surface} surface
+ * @param {Object} [wikitextWarning] MediaWiki notification object
  */
-ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
-	var text, node, doc = this.surface.getView().getDocument(),
-		selection = this.surface.getModel().getSelection(),
-		textMatches,
-		viewPageTarget = this;
+ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, wikitextWarning ) {
+	var text, node, doc = surface.getView().getDocument(),
+		selection = surface.getModel().getSelection(),
+		textMatches;
 	if ( !selection ) {
 		return;
 	}
@@ -791,7 +796,7 @@ ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
 	text = ve.ce.getDomText( node.$element[0] );
 	textMatches = text.match( /\[\[|\{\{|''|<nowiki|<ref|~~~|^==|^\*|^\#/ );
 
-	if ( textMatches && !this.wikitextWarning ) {
+	if ( textMatches && !wikitextWarning ) {
 		mw.notify(
 			$( $.parseHTML( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end(),
@@ -801,12 +806,13 @@ ve.init.mw.ViewPageTarget.prototype.checkForWikitextWarning = function () {
 				'autoHide': false
 			}
 		).done( function ( notif ) {
-			viewPageTarget.wikitextWarning = notif;
+			wikitextWarning = notif;
 		} );
-	} else if ( !textMatches && this.wikitextWarning ) {
-		this.wikitextWarning.close();
-		this.wikitextWarning = undefined;
+	} else if ( !textMatches && wikitextWarning ) {
+		wikitextWarning.close();
+		wikitextWarning = undefined;
 	}
+	return wikitextWarning;
 };
 
 /**
