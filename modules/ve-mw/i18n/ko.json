@@ -9,7 +9,8 @@
 			"Jskang",
 			"Priviet",
 			"고기랑",
-			"Miri-Nae"
+			"Miri-Nae",
+			"Tyey"
 		]
 	},
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
@@ -155,6 +156,7 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|일치하는 문서}}",
 	"visualeditor-linkinspector-suggest-new-page": "새 문서",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|넘겨주기 문서}}",
+	"visualeditor-linknodeinspector-add-label": "라벨 추가",
 	"visualeditor-linknodeinspector-title": "간단 링크",
 	"visualeditor-loadwarning": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1 다시 시도하겠습니까?",
 	"visualeditor-loadwarning-token": "서버에서 편집 토큰을 불러오는 중 오류가 났습니다: $1. 다시 시도하겠습니까?",

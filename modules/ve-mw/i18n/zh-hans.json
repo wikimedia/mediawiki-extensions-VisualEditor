@@ -146,7 +146,7 @@
 	"visualeditor-dialog-transclusion-remove-param": "移除字段",
 	"visualeditor-dialog-transclusion-remove-template": "删除模板",
 	"visualeditor-dialog-transclusion-required-parameter": "必填字段",
-	"visualeditor-dialog-transclusion-required-parameter-description": "需要字段。",
+	"visualeditor-dialog-transclusion-required-parameter-description": "必填字段。",
 	"visualeditor-dialog-transclusion-single-mode": "隐藏选项",
 	"visualeditor-dialog-transclusion-title": "嵌入",
 	"visualeditor-dialogbutton-media-tooltip": "媒体文件",
