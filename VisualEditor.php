@@ -438,6 +438,8 @@ $wgResourceModules += array(
 
 			'lib/ve/modules/ve/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LinkTargetInputWidget.js',
+			'lib/ve/modules/ve/ui/widgets/ve.ui.ContextWidget.js',
+			'lib/ve/modules/ve/ui/widgets/ve.ui.ContextItemWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.DimensionsWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js',
 
@@ -477,6 +479,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
 			'lib/ve/modules/ve/ui/styles/tools/ve.ui.FormatTool.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
+			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.ContextItemWidget.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.DimensionsWidget.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.MediaSizeWidget.css',
 			'lib/ve/modules/ve/ui/styles/inspectors/ve.ui.SpecialCharacterInspector.css',
@@ -1128,6 +1131,8 @@ $wgResourceModules += array(
 			'visualeditor-annotationbutton-language-tooltip',
 			'visualeditor-dialog-language-auto-direction',
 			'visualeditor-dialog-language-search-title',
+			"visualeditor-languageannotation-description",
+			"visualeditor-languageannotation-description-with-dir",
 			'visualeditor-languageinspector-title',
 			'visualeditor-languageinspector-block-tooltip',
 			'visualeditor-languageinspector-block-tooltip-rtldirection',

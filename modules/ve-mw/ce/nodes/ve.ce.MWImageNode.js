@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * ContentEditable MediaWiki image node.
  *
@@ -64,6 +66,16 @@ OO.mixinClass( ve.ce.MWImageNode, ve.ce.ClickableNode );
 /* Static Properties */
 
 ve.ce.MWImageNode.static.primaryCommandName = 'mediaEdit';
+
+/* Static Methods */
+
+/**
+ * @inheritdoc ve.ce.Node
+ */
+ve.ce.MWImageNode.static.getDescription = function ( model ) {
+	var title = new mw.Title( model.getFilename() );
+	return title.getMain();
+};
 
 /* Methods */
 

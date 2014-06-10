@@ -60,6 +60,15 @@ ve.ce.MWReferenceListNode.static.tagName = 'div';
 
 ve.ce.MWReferenceListNode.static.primaryCommandName = 'referenceList';
 
+/* Static Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWReferenceListNode.static.getDescription = function ( model ) {
+	return model.getAttribute( 'refGroup' );
+};
+
 /* Methods */
 
 /**

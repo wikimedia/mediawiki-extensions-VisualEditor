@@ -59,6 +59,15 @@ ve.ce.MWNumberedExternalLinkNode.static.tagName = 'span';
 
 ve.ce.MWNumberedExternalLinkNode.static.primaryCommandName = 'linkNode';
 
+/* Static Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWNumberedExternalLinkNode.static.getDescription = function ( model ) {
+	return model.getAttribute( 'href' );
+};
+
 /* Methods */
 
 /**

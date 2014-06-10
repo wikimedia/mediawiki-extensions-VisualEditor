@@ -251,7 +251,10 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
 		templates = [ templates ];
 	}
 	for ( i = 0, len = templates.length; i < len; i++ ) {
-		if ( normalizeTitle( partsList[0].template ) === normalizeTitle( templates[i] ) ) {
+		if (
+			partsList[0].template &&
+			normalizeTitle( partsList[0].template ) === normalizeTitle( templates[i] )
+		) {
 			return true;
 		}
 	}

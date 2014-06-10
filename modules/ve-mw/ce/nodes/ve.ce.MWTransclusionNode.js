@@ -55,6 +55,26 @@ ve.ce.MWTransclusionNode.static.renderHtmlAttributes = false;
 
 ve.ce.MWTransclusionNode.static.primaryCommandName = 'transclusion';
 
+/* Static Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
+	var i, len, part,
+		parts = model.getPartsList(),
+		words = [];
+
+	for ( i = 0, len = parts.length; i < len; i++ ) {
+		part = parts[i];
+		if ( part.template ) {
+			words.push( part.template );
+		}
+	}
+
+	return words.join( ', ' );
+};
+
 /* Methods */
 
 /** */
