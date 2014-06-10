@@ -13,10 +13,10 @@
  * @class
  * @abstract
  * @extends ve.ce.LeafNode
- * @mixins ve.ce.ProtectedNode
  * @mixins ve.ce.FocusableNode
  * @mixins ve.ce.RelocatableNode
  * @mixins ve.ce.GeneratedContentNode
+ * @mixins ve.ce.ClickableNode
  *
  * @constructor
  * @param {ve.dm.MWTransclusionNode} model Model to observe
@@ -27,7 +27,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 	ve.ce.LeafNode.call( this, model, config );
 
 	// Mixin constructors
-	ve.ce.ProtectedNode.call( this );
 	ve.ce.FocusableNode.call( this );
 	ve.ce.RelocatableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
@@ -41,7 +40,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 
 OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
-OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.ProtectedNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.RelocatableNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );

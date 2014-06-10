@@ -140,7 +140,7 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 						direction: 1,
 						expand: false,
 						given: new ve.Range( 0 ),
-						expected: new ve.Range( 2 )
+						expected: new ve.Range( 0, 2 )
 					},
 					{
 						direction: 1,
@@ -158,7 +158,7 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 						direction: 1,
 						expand: false,
 						given: new ve.Range( 4 ),
-						expected: new ve.Range( 6 )
+						expected: new ve.Range( 4, 6 )
 					},
 					{
 						direction: 1,
@@ -196,13 +196,13 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 						direction: 1,
 						expand: false,
 						given: new ve.Range( 1 ),
-						expected: new ve.Range( 3 )
+						expected: new ve.Range( 1, 3 )
 					},
 					{
 						direction: 1,
 						expand: false,
 						given: new ve.Range( 5 ),
-						expected: new ve.Range( 7 )
+						expected: new ve.Range( 5, 7 )
 					}
 				]
 			}

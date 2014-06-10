@@ -7,12 +7,12 @@
 /*csslint regex-selectors:false, overqualified-elements:false */
 
 /* Hide outer shield for centered images */
-figure[typeof~='mw:Image'].mw-halign-center + .ve-ce-protectedNode-shield {
+figure[typeof~='mw:Image'].mw-halign-center + .ve-ce-focusableNode-shield {
 	display: none;
 }
 
 /* Override border on shields for images */
-.ve-ce-mwBlockImageNode .ve-ce-protectedNode-shield {
+.ve-ce-mwBlockImageNode .ve-ce-focusableNode-shield {
 	border: none;
 }
 

@@ -19,7 +19,6 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 	ve.ce.LeafNode.call( this, model, config );
 
 	// Mixin constructors
-	ve.ce.ProtectedNode.call( this );
 	ve.ce.FocusableNode.call( this );
 	ve.ce.ClickableNode.call( this );
 
@@ -47,7 +46,6 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 
 OO.inheritClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.LeafNode );
 
-OO.mixinClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.ProtectedNode );
 OO.mixinClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWNumberedExternalLinkNode, ve.ce.ClickableNode );
 

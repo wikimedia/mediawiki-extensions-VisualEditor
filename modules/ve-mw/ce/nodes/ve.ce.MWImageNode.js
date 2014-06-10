@@ -13,7 +13,6 @@
  * @class
  * @abstract
  * @extends ve.ce.GeneratedContentNode
- * @mixins ve.ce.ProtectedNode
  * @mixins ve.ce.FocusableNode
  * @mixins ve.ce.RelocatableNode
  * @mixins ve.ce.MWResizableNode
@@ -36,7 +35,6 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	this.$image = $image;
 
 	// Mixin constructors
-	ve.ce.ProtectedNode.call( this, this.$figure, config );
 	ve.ce.FocusableNode.call( this, this.$figure, config );
 	ve.ce.RelocatableNode.call( this, this.$figure, config );
 	ve.ce.MWResizableNode.call( this, this.$image, config );
@@ -49,8 +47,6 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ce.MWImageNode, ve.ce.GeneratedContentNode );
-
-OO.mixinClass( ve.ce.MWImageNode, ve.ce.ProtectedNode );
 
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.FocusableNode );
 

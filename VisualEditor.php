@@ -373,7 +373,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/ve.ce.BranchNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.ContentBranchNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.LeafNode.js',
-			'lib/ve/modules/ve/ce/ve.ce.ProtectedNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.FocusableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.RelocatableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.ResizableNode.js',
@@ -464,14 +463,13 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			// ce
+			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.FocusableNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.AlienNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.BranchNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.DocumentNode.css',
-			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.FocusableNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.GeneratedContentNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ImageNode.css',
 			'lib/ve/modules/ve/ce/styles/annotations/ve.ce.LanguageAnnotation.css',
-			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ProtectedNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.RelocatableNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ResizableNode.css',
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
