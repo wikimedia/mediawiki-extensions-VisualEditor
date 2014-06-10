@@ -285,12 +285,11 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 		origAttrs = this.getOriginalImageAttributes();
 
 	// Adjust default dimensions if size is set to default
-	// FIXME modifying this.scalable shouldn't be done in a getter and shouldn't be needed (bug 66149)
 	if ( this.scalable.isDefault() && this.scalable.getDefaultDimensions() ) {
-		this.scalable.setCurrentDimensions( this.scalable.getDefaultDimensions() );
+		currentDimensions = this.scalable.getDefaultDimensions();
+	} else {
+		currentDimensions = this.getCurrentDimensions();
 	}
-
-	currentDimensions = this.getCurrentDimensions();
 
 	attrs = {
 		'type': this.getType(),
