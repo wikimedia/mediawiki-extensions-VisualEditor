@@ -114,6 +114,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			if ( $result === false ) {
 				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 			}
+			$result['isRedirect'] = $page->isRedirect();
 
 			if ( isset( $saveresult['edit']['newrevid'] ) ) {
 				$result['newrevid'] = intval( $saveresult['edit']['newrevid'] );

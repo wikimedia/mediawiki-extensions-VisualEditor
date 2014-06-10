@@ -74,6 +74,7 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
  * @param {string} html Rendered page HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {number} [newid] New revision id, undefined if unchanged
+ * @param {boolean} isRedirect Whether this page is now a redirect or not.
  */
 
 /**
@@ -542,7 +543,7 @@ ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
 	} else if ( typeof data.content !== 'string' ) {
 		this.onSaveError( doc, saveData, null, 'Invalid HTML content in response from server', response );
 	} else {
-		this.emit( 'save', data.content, data.categorieshtml, data.newrevid );
+		this.emit( 'save', data.content, data.categorieshtml, data.newrevid, data.isRedirect );
 	}
 };
 
