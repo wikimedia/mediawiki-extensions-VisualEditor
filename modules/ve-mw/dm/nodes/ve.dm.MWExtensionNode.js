@@ -29,6 +29,8 @@ ve.dm.MWExtensionNode.static.enableAboutGrouping = true;
 
 ve.dm.MWExtensionNode.static.matchTagNames = null;
 
+ve.dm.MWExtensionNode.static.childNodeTypes = [];
+
 /**
  * HTML tag name.
  * @static
