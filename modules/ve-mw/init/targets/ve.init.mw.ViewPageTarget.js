@@ -404,7 +404,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.hidePageContent();
 	this.hideSpinner();
 
-	this.$document[0].focus();
+	this.surface.getView().focus();
 
 	this.setupToolbarButtons();
 	this.attachToolbarButtons();
@@ -905,9 +905,11 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.editSource = function () {
-	var confirmDialog = this.surface.dialogs.getWindow( 'confirm' ), target = this;
+	var confirmDialog = this.surface.dialogs.getWindow( 'confirm' ),
+		$documentNode = this.surface.getView().getDocument().getDocumentNode().$element,
+		target = this;
 
-	this.$document.css( 'opacity', 0.5 );
+	$documentNode.css( 'opacity', 0.5 );
 
 	confirmDialog.open( {
 		'prompt': ve.msg( 'visualeditor-mweditmodesource-warning' ),
@@ -924,7 +926,7 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 			);
 		}, function () {
 			// Undo the opacity change
-			target.$document.css( 'opacity', 1 );
+			$documentNode.css( 'opacity', 1 );
 		} );
 	} );
 };
@@ -1066,10 +1068,6 @@ ve.init.mw.ViewPageTarget.prototype.startSanityCheck = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	// Update UI
-	if ( this.$document ) {
-		this.$document.blur();
-		this.$document = null;
-	}
 	this.tearDownToolbar();
 	this.restoreDocumentTitle();
 	if ( this.surface.mwTocWidget ) {

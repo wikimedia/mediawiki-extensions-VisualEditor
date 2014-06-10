@@ -1313,29 +1313,32 @@ ve.init.mw.Target.prototype.setUpSurface = function ( doc, callback ) {
 		);
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
-			target.surface = target.createSurface( dmDoc );
-			target.surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
+			var surface = target.createSurface( dmDoc );
+			target.surface = surface;
+			surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
 				.addClass( target.protectedClasses );
 			setTimeout( function () {
+				var surfaceView = surface.getView(),
+					$documentNode = surfaceView.getDocument().getDocumentNode().$element;
+
 				// Initialize surface
-				target.surface.getContext().hide();
-				target.$document = target.surface.view.$element.find( '.ve-ce-documentNode' );
-				target.$element.append( target.surface.$element );
+				surface.getContext().hide();
+				target.$element.append( surface.$element );
 				target.setUpToolbar();
 
 				// Apply mw-body-content to the view (ve-ce-surface).
 				// Not to surface (ve-ui-surface), since that contains both the view
 				// and the overlay container, and we don't want inspectors to
 				// inherit skin typography styles for wikipage content.
-				target.surface.view.$element.addClass( 'mw-body-content' );
-				target.$document.addClass(
+				surfaceView.$element.addClass( 'mw-body-content' );
+				$documentNode.addClass(
 					// Add appropriately mw-content-ltr or mw-content-rtl class
 					'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 				);
 				target.active = true;
 				// Now that the surface is attached to the document and ready,
 				// let it initialize itself
-				target.surface.initialize();
+				surface.initialize();
 				setTimeout( callback );
 			} );
 		} );
@@ -1425,7 +1428,8 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 			target = this,
 			surfaceView = this.surface.getView(),
 			surfaceModel = surfaceView.getModel(),
-			$section = this.$document.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
+			$documentNode = surfaceView.getDocument().getDocumentNode().$element,
+			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
 			headingNode = $section.data( 'view' ),
 			lastHeadingLevel = -1;
 
