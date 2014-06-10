@@ -423,7 +423,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {number} [newid] New revision id, undefined if unchanged
  */
-ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid ) {
+ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid, isRedirect ) {
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
 		this.tearDownBeforeUnloadHandler();
@@ -461,7 +461,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 		}
 		this.saveDialog.close();
 		this.saveDialog.reset();
-		this.replacePageContent( html, categoriesHtml );
+		this.replacePageContent( html, categoriesHtml, isRedirect );
 		this.setupSectionEditLinks();
 		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
@@ -1531,7 +1531,7 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
  * @param {string} html Rendered HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
  */
-ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml ) {
+ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml, isRedirect ) {
 	var $content = $( $.parseHTML( html ) ), $editableContent;
 
 	if ( $( '#mw-imagepage-content' ).length ) {
@@ -1552,6 +1552,11 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, catego
 
 	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
 	$( '#catlinks' ).replaceWith( categoriesHtml );
+	if ( isRedirect ) {
+		$( '#contentSub' ).text( ve.msg( 'redirectpagesub' ) );
+	} else {
+		$( '#contentSub' ).text( '' );
+	}
 };
 
 /**

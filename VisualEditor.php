@@ -191,6 +191,7 @@ $wgResourceModules += array(
 			'spamprotectiontext',
 			'summary-preview',
 			'parentheses',
+			'redirectpagesub',
 
 			// Messages needed by VE in init phase only (rest go below)
 			'visualeditor-loadwarning',
