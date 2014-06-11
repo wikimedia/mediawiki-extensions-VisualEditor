@@ -35,9 +35,6 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'alienExtension', 'window', 'open', 'alienExtension' )
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'hiero', 'window', 'open', 'hiero' )
-);
-ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'meta', 'window', 'open', 'meta' )
 );
 ve.ui.commandRegistry.register(

@@ -1182,28 +1182,8 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.mwhiero' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'modules/ve-mw/dm/nodes/ve.dm.MWHieroNode.js',
-			'modules/ve-mw/ce/nodes/ve.ce.MWHieroNode.js',
-			'modules/ve-mw/ui/inspectors/ve.ui.MWHieroInspector.js',
-			'modules/ve-mw/ui/tools/ve.ui.MWHieroInspectorTool.js',
-		),
-		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWHieroNode.css',
-		),
-		'dependencies' => array(
-			'ext.visualEditor.mwcore',
-		),
-		'messages' => array(
-			'visualeditor-mwhieroinspector-title',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-
 	'ext.visualEditor.experimental' => array(
 		'dependencies' => array(
-			'ext.visualEditor.mwhiero',
 			'ext.visualEditor.language',
 			'ext.visualEditor.mwalienextension',
 		),
@@ -1241,7 +1221,6 @@ $wgVisualEditorPreferenceModules = array(
 	'visualeditor-enable-experimental' => 'ext.visualEditor.experimental',
 	'visualeditor-enable-language' => 'ext.visualEditor.language',
 	//'visualeditor-enable-mwalienextension' => 'ext.visualEditor.mwalienextension',
-	//'visualeditor-enable-mwhiero' => 'ext.visualEditor.mwhiero'
 );
 
 // URL to the Parsoid instance

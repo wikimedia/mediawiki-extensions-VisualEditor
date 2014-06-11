@@ -342,25 +342,6 @@ class VisualEditorHooks {
 			),
 		);
 */
-
-/* Disabling Beta Features option for hieroglyphics for now
-		$preferences['visualeditor-enable-mwhiero'] = array(
-			'version' => '1.0',
-			'label-message' => 'visualeditor-preference-mwhiero-label',
-			'desc-message' => 'visualeditor-preference-mwhiero-description',
-			'screenshot' => array(
-				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-hieroglyphics-ltr.svg",
-				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-hieroglyphics-rtl.svg",
-			),
-			'info-message' => 'visualeditor-preference-mwhiero-info-link',
-			'discussion-message' => 'visualeditor-preference-mwhiero-discussion-link',
-			'requirements' => array(
-				'betafeatures' => array(
-					'visualeditor-enable',
-				),
-			),
-		);
-*/
 	}
 
 	public static function onListDefinedTags( &$tags ) {
