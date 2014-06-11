@@ -14,7 +14,6 @@
  * @abstract
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.RelocatableNode
  * @mixins ve.ce.GeneratedContentNode
  * @mixins ve.ce.ClickableNode
  *
@@ -28,7 +27,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-	ve.ce.RelocatableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
 	ve.ce.ClickableNode.call( this );
 
@@ -41,7 +39,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
-OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.RelocatableNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.ClickableNode );
 

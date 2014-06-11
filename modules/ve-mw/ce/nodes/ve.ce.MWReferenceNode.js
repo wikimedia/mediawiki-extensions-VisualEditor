@@ -11,7 +11,6 @@
  * @class
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.RelocatableNode
  * @mixins ve.ce.ClickableNode
  *
  * @constructor
@@ -24,7 +23,6 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-	ve.ce.RelocatableNode.call( this );
 	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
@@ -46,7 +44,6 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 OO.inheritClass( ve.ce.MWReferenceNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.FocusableNode );
-OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.RelocatableNode );
 OO.mixinClass( ve.ce.MWReferenceNode, ve.ce.ClickableNode );
 
 /* Static Properties */

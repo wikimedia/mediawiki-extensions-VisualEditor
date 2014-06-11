@@ -374,7 +374,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/ve.ce.ContentBranchNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.LeafNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.FocusableNode.js',
-			'lib/ve/modules/ve/ce/ve.ce.RelocatableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.ResizableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.ClickableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.Surface.js',
@@ -470,7 +469,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.GeneratedContentNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ImageNode.css',
 			'lib/ve/modules/ve/ce/styles/annotations/ve.ce.LanguageAnnotation.css',
-			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.RelocatableNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ResizableNode.css',
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
 
