@@ -136,7 +136,7 @@ ve.ui.MWExtensionInspector.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWExtensionInspector.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			// Focus the input
-			this.input.focus().select();
+			this.input.focus();
 		}, this );
 };
 
