@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ce-mwHieroNode {
-	display: table;
+
+.ve-ce-mwHieroNode,
+.ve-ce-mwHieroNode .mw-hiero-outer {
+	display: inline-block;
 }
