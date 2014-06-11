@@ -45,7 +45,7 @@ ve.ui.MWGalleryInspector.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWExtensionInspector.prototype.initialize.call( this );
 
-	this.input.$element.addClass( 've-ui-mwGalleryInpsector-input' );
+	this.input.$element.addClass( 've-ui-mwGalleryInspector-input' );
 };
 
 /** */
