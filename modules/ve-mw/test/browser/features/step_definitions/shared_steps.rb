@@ -1,5 +1,8 @@
-Given(/^I am at my user page$/) do
-  visit(VisualEditorPage)
+Given(/^I go to the browser specific edit page page$/) do
+  page_title = "Edit page for " + ENV['BROWSER']
+  page_content = "Edit page for " + ENV['BROWSER']
+  on(APIPage).create page_title, page_content
+  step "I am on the #{page_title} page"
 end
 
 Given(/^I am on the (.+) page$/) do |article|
