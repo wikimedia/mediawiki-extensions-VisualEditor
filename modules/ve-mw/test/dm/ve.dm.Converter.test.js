@@ -7,24 +7,10 @@
 
 /*global mw */
 
-QUnit.module( 've.dm.Converter' );
-
-/* Tests */
-
-function setMwConfig( newConfig ) {
-	var key, oldConfig = {};
-	for ( key in newConfig ) {
-		// Store orignal value
-		oldConfig[key] = mw.config.get( key );
-		// Override config setting
-		mw.config.set( key, newConfig[key] );
-	}
-	return oldConfig;
-}
+QUnit.module( 've.dm.Converter', QUnit.newMwEnvironment() );
 
 QUnit.test( 'getModelFromDom', function ( assert ) {
 	var msg, caseItem,
-		originalConfig,
 		cases = ve.dm.mwExample.domToDataCases;
 
 	QUnit.expect( ve.test.utils.countGetModelFromDomTests( cases ) );
@@ -32,20 +18,15 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 	for ( msg in cases ) {
 		caseItem = ve.copy( cases[msg] );
 		if ( caseItem.mwConfig ) {
-			originalConfig = setMwConfig( caseItem.mwConfig );
+			mw.config.set( caseItem.mwConfig );
 		}
 
 		ve.test.utils.runGetModelFromDomTest( assert, caseItem, msg );
-
-		if ( caseItem.mwConfig ) {
-			setMwConfig( originalConfig );
-		}
 	}
 } );
 
 QUnit.test( 'getDomFromModel', function ( assert ) {
 	var msg, caseItem,
-		originalConfig,
 		cases = ve.dm.mwExample.domToDataCases;
 
 	QUnit.expect( 2 * ve.getObjectKeys( cases ).length );
@@ -53,13 +34,9 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 	for ( msg in cases ) {
 		caseItem = ve.copy( cases[msg] );
 		if ( caseItem.mwConfig ) {
-			originalConfig = setMwConfig( caseItem.mwConfig );
+			mw.config.set( caseItem.mwConfig );
 		}
 
 		ve.test.utils.runGetDomFromModelTest( assert, caseItem, msg );
-
-		if ( caseItem.mwConfig ) {
-			setMwConfig( originalConfig );
-		}
 	}
 } );
