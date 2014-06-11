@@ -18,6 +18,9 @@
 ve.ce.MWGalleryNode = function VeCeMWGalleryNode( model, config ) {
 	// Parent constructor
 	ve.ce.MWBlockExtensionNode.call( this, model, config );
+
+	// DOM changes
+	this.$element.addClass( 've-ce-mwGalleryNode' );
 };
 
 /* Inheritance */
