@@ -1205,7 +1205,7 @@ ve.init.mw.ViewPageTarget.prototype.setupSaveDialog = function () {
 		'save': 'saveDocument',
 		'review': 'onSaveDialogReview',
 		'resolve': 'onSaveDialogResolveConflict',
-		'close': 'onSaveDialogClose'
+		'teardown': 'onSaveDialogTeardown'
 	} );
 	// Setup edit summary and checkboxes
 	this.saveDialog.setEditSummary( this.initialEditSummary );
@@ -1237,11 +1237,12 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 	this.emit( 'saveWorkflowBegin' );
 };
 
- /**
- * Respond to the save dialog being closed.
+/**
+ * Handle dialog close events.
+ *
  * @fires saveWorkflowEnd
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveDialogClose = function () {
+ve.init.mw.ViewPageTarget.prototype.onSaveDialogTeardown = function () {
 	// Clear the cached HTML and cache key once the document changes
 	var clear = ve.bind( function () {
 		this.docToSave = null;

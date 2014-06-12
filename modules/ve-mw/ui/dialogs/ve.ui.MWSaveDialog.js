@@ -98,13 +98,14 @@ ve.ui.MWSaveDialog.prototype.setSanityCheck = function ( verified ) {
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	var currentEditSummaryWikitext,
-		size = 'medium',
 		dialog = this,
 		panelObj = dialog[panel + 'Panel'];
 
 	if ( ve.indexOf( panel, [ 'save', 'review', 'conflict', 'nochanges' ] ) === -1 ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
+
+	this.setSize( 'medium' );
 
 	// Update the window title
 	this.setTitle( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
@@ -138,7 +139,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			this.resolveConflictButton.$element.show();
 			break;
 		case 'review':
-			size = 'large';
+			this.setSize( 'large' );
 			currentEditSummaryWikitext = this.editSummaryInput.getValue();
 			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 				if ( this.editSummaryXhr ) {
@@ -171,8 +172,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			break;
 	}
 
-	// Set the size
-	this.setSize( size );
 	// Show the target panel
 	this.panel.setItem( panelObj );
 
@@ -425,12 +424,22 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
+ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
+		.first( function () {
+			this.swapPanel( 'save' );
+			// Old messages should not persist after panel changes
+			this.clearAllMessages();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			// Old messages should not persist after panel changes
-			this.clearAllMessages();
-			this.swapPanel( 'save' );
+			this.editSummaryInput.focus();
 		}, this );
 };
 
