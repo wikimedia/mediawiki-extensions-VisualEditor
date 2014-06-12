@@ -499,6 +499,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'rangy',
 			'unicodejs.wordbreak',
+			'jquery.uls.data',
 			'ext.visualEditor.base',
 		),
 		'messages' => array(
@@ -1111,8 +1112,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageResultWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageSearchWidget.js',
 			'lib/ve/modules/ve/ui/dialogs/ve.ui.LanguageSearchDialog.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWLanguageSearchWidget.js',
-			'modules/ve-mw/ui/dialogs/ve.ui.MWLanguageSearchDialog.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.LanguageInspector.js',
 			'lib/ve/modules/ve/ui/tools/ve.ui.LanguageInspectorTool.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js',
@@ -1123,7 +1122,6 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',
-			'jquery.uls.data',
 			'mediawiki.language.names',
 		),
 		'messages' => array(

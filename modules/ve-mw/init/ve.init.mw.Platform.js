@@ -76,6 +76,33 @@ ve.init.mw.Platform.prototype.getSystemPlatform = function () {
 };
 
 /** @inheritdoc */
+ve.init.mw.Platform.prototype.getLanguageCodes = function () {
+	return Object.keys(
+		mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
+		$.uls.data.getAutonyms()
+	);
+};
+
+/** @inheritdoc */
+ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
+	var languageNames = mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
+		$.uls.data.getAutonyms();
+	return languageNames[code];
+};
+
+/**
+ * @method
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.getLanguageAutonym = $.uls.data.getAutonym;
+
+/**
+ * @method
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.getLanguageDirection = $.uls.data.getDir;
+
+/** @inheritdoc */
 ve.init.mw.Platform.prototype.getUserLanguages = function () {
 	var lang = mw.config.get( 'wgUserLanguage' ),
 		langParts = lang.split( '-' ),

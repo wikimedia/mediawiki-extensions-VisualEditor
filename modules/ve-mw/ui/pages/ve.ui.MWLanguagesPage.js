@@ -85,7 +85,7 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 			// site codes don't always represent official language codes
 			// using real language code instead of a dummy ('redirect' in ULS' terminology)
 			languages[i].safelang = $.uls.data.isRedirect( languages[i].lang ) || languages[i].lang;
-			languages[i].dir = $.uls.data.getDir( languages[i].safelang );
+			languages[i].dir = ve.init.platform.getLanguageDirection( languages[i].safelang );
 		}
 		$languagesTable
 			.append( this.$( '<tr>' )
