@@ -81,6 +81,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Limbă",
 	"visualeditor-dialog-meta-languages-readonlynote": "Aceasta este o listă a paginilor în alte limbi care sunt legate de cea de față; pentru moment, lista poate fi modificată doar editând codul sursă al paginii sau accesând Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Limbi",
+	"visualeditor-dialog-meta-settings-displaytitle": "Titlu afișat",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Activează titlul de afișat",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Categorie ascunsă",
 	"visualeditor-dialog-meta-settings-index-default": "Implicit",
 	"visualeditor-dialog-meta-settings-index-disable": "Nu",

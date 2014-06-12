@@ -111,6 +111,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Langue",
 	"visualeditor-dialog-meta-languages-readonlynote": "Voici une liste de pages dans d’autres langues qui sont liées à celle-ci ; pour l’instant, elle ne peut être modifiée qu’en mode source ou sur Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Langues",
+	"visualeditor-dialog-meta-settings-displaytitle": "Afficher le titre",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Activer l’affichage du titre",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Catégorie cachée",
 	"visualeditor-dialog-meta-settings-index-default": "Par défaut",
 	"visualeditor-dialog-meta-settings-index-disable": "Non",

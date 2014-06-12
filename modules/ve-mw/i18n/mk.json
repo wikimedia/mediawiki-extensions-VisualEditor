@@ -79,6 +79,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Јазик",
 	"visualeditor-dialog-meta-languages-readonlynote": "Ова е список на сврзани страници на други јазици. Засега може да се уредува само непосредно во изворот или на Википодатоци.",
 	"visualeditor-dialog-meta-languages-section": "Јазици",
+	"visualeditor-dialog-meta-settings-displaytitle": "Наслов за приказ",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Овозможи наслов за приказ",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Скриена категорија",
 	"visualeditor-dialog-meta-settings-index-default": "По основно",
 	"visualeditor-dialog-meta-settings-index-disable": "Не",

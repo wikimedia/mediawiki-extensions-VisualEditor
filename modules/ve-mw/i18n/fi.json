@@ -90,6 +90,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Kieli",
 	"visualeditor-dialog-meta-languages-readonlynote": "Tämä on luettelo tälle sivulle viittaavista sivuista muilla kielillä. Tätä luetteloa voi muokata tällä hetkellä vain wikitekstitilassa tai Wikidatassa.",
 	"visualeditor-dialog-meta-languages-section": "Kielet",
+	"visualeditor-dialog-meta-settings-displaytitle": "Näkyvä otsikko",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Ota käyttöön näkyvä otsikko",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Piilotettu luokka",
 	"visualeditor-dialog-meta-settings-index-default": "Oletus",
 	"visualeditor-dialog-meta-settings-index-disable": "Ei",

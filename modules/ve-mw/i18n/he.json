@@ -90,6 +90,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "שפה",
 	"visualeditor-dialog-meta-languages-readonlynote": "זוהי רשימת הדפים המקבילים בשפות אחרות. לעת־עתה ניתן לערוך אותה רק במצב עריכת קוד מקור או באתר ויקינתונים.",
 	"visualeditor-dialog-meta-languages-section": "שפות",
+	"visualeditor-dialog-meta-settings-displaytitle": "כותרת התצוגה",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "הפעלת כותרת תצוגה",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "קטגוריה מוסתרת",
 	"visualeditor-dialog-meta-settings-index-default": "בררת המחדל",
 	"visualeditor-dialog-meta-settings-index-disable": "לא",

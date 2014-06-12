@@ -88,6 +88,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Sprache",
 	"visualeditor-dialog-meta-languages-readonlynote": "Dies ist eine Liste der Seiten in anderen Sprachen, die auf diese Seite verlinkt sind. Sie können derzeit nur im Quelltextmodus oder auf Wikidata bearbeitet werden.",
 	"visualeditor-dialog-meta-languages-section": "Sprachen",
+	"visualeditor-dialog-meta-settings-displaytitle": "Anzeigetitel",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Anzeigetitel aktivieren",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Versteckte Kategorie",
 	"visualeditor-dialog-meta-settings-index-default": "Standard",
 	"visualeditor-dialog-meta-settings-index-disable": "Nein",
