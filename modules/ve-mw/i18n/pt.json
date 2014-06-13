@@ -90,6 +90,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Idioma",
 	"visualeditor-dialog-meta-languages-readonlynote": "Esta é uma lista de páginas em outros idiomas que estão ligadas a esta; por enquanto, só pode ser editada através do seu código-fonte ou do Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Idiomas",
+	"visualeditor-dialog-meta-settings-displaytitle": "Exibir o título",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Ativar a exibição de título",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Categoria oculta",
 	"visualeditor-dialog-meta-settings-index-default": "Padrão",
 	"visualeditor-dialog-meta-settings-index-disable": "Não",

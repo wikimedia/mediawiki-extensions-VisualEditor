@@ -9,12 +9,15 @@
 			"NoiX180",
 			"Pras",
 			"Tokoko",
-			"Otogi"
+			"Otogi",
+			"Arystanbek"
 		]
 	},
 	"tooltip-ca-createsource": "ამ გვერდის წყაროს კოდის შექმნა",
 	"tooltip-ca-editsource": "ამ გვერდის წყაროს კოდის რედაქტირება",
 	"tooltip-ca-ve-edit": "გვერდის რედაქტირება ვიზუალური რედაქტორის საშუალებით",
+	"visualeditor-advancedsettings-tool": "",
+	"visualeditor-annotationbutton-linknode-tooltip": "",
 	"visualeditor-beta-appendix": "ბეტა",
 	"visualeditor-beta-label": "ბეტა",
 	"visualeditor-browserwarning": "თქვენ იყენებთ ბრაუზერს, რომელიც ოფიციალურად არ არის თავსებადი ვიზუალურ რედაქტორთან.",

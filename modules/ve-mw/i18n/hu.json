@@ -68,6 +68,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Nyelv",
 	"visualeditor-dialog-meta-languages-readonlynote": "Ez a lista azon más nyelvű oldalakat tartalmazza, amelyek ehhez kapcsolódnak; jelenleg csak forrásnézetben vagy a Wikidatán szerkeszthető.",
 	"visualeditor-dialog-meta-languages-section": "Nyelvek",
+	"visualeditor-dialog-meta-settings-displaytitle": "Cím megjelenítése",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Cím megjelenítésének engedélyezése",
 	"visualeditor-dialog-meta-settings-index-default": "Alapértelmezett",
 	"visualeditor-dialog-meta-settings-index-disable": "Nem",
 	"visualeditor-dialog-meta-settings-index-force": "Igen",
