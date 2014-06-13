@@ -488,6 +488,7 @@ class VisualEditorHooks {
 					'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
 					'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
 				),
+				'targets' => array( 'desktop', 'mobile' ),
 			),
 			'jquery.i18n' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
@@ -514,6 +515,7 @@ class VisualEditorHooks {
 					'sl' => 'lib/ve/lib/jquery.i18n/src/languages/sl.js',
 					'uk' => 'lib/ve/lib/jquery.i18n/src/languages/uk.js',
 				),
+				'targets' => array( 'desktop', 'mobile' ),
 			),
 		);
 
