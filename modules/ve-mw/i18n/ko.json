@@ -10,7 +10,8 @@
 			"Priviet",
 			"고기랑",
 			"Miri-Nae",
-			"Tyey"
+			"Tyey",
+			"Bluemersen"
 		]
 	},
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
@@ -19,7 +20,7 @@
 	"visualeditor-advancedsettings-tool": "고급 설정",
 	"visualeditor-beta-appendix": "베타",
 	"visualeditor-beta-label": "베타",
-	"visualeditor-beta-warning": "시각편집기는 '베타'입니다. 소프트웨어 문제가 발생할 수 있으며, 문서의 일부를 편집할 수 없을 수도 있습니다. 위키텍스트 모드로 전환하려면 \"{{int:visualeditor-ca-editsource}}\"을 클릭하세요 – 저장하지 않은 바뀜은 잃게 됩니다.",
+	"visualeditor-beta-warning": "시각편집기는 '베타'입니다. 소프트웨어 문제가 발생할 수 있으며, 문서의 일부를 편집할 수 없을 수도 있습니다. 편집한 내용을 잃지 않고 위키텍스트 모드로 언제든 돌아오려면 \"{{int:visualeditor-toolbar-cancel}}\" 옆의 드롭다운 메뉴를 열어 \"{{int:visualeditor-mweditmodesource-title}}\"를 선택하세요.",
 	"visualeditor-browserwarning": "시각편집기가 공식적으로 지원하지 않는 브라우저를 사용하고 있습니다.",
 	"visualeditor-ca-createsource": "원본 만들기",
 	"visualeditor-ca-editsource": "원본 편집",

@@ -20,7 +20,8 @@
 			"Agilight",
 			"Alexandr Efremov",
 			"Meshkov.a",
-			"Eroha"
+			"Eroha",
+			"Grebenkov"
 		]
 	},
 	"tooltip-ca-createsource": "Создать страницу в редакторе исходного текста",
@@ -42,7 +43,7 @@
 	"visualeditor-ca-ve-edit-section": "Визуальный редактор",
 	"visualeditor-categories-tool": "Категории",
 	"visualeditor-cite-tool-name-book": "Книга",
-	"visualeditor-cite-tool-name-journal": "Журнал",
+	"visualeditor-cite-tool-name-journal": "Статья",
 	"visualeditor-cite-tool-name-news": "Новости",
 	"visualeditor-cite-tool-name-web": "Веб-сайт",
 	"visualeditor-desc": "Визуальный редактор для MediaWiki",
