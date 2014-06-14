@@ -133,6 +133,7 @@
 	"visualeditor-parameter-input-placeholder": "Naziv parametra",
 	"visualeditor-parameter-search-no-unused": "Nema nekorištenih parametara",
 	"visualeditor-preference-betatempdisable": "Privremeno onemogući VisualEditor (dok je u beta stanju)",
+	"visualeditor-preference-core-description": "Omogući VisualEditor. Uređivanje VisualEditorom neće biti moguće na stranicama za razgovor i u nekim drugim imenskim prostorima.",
 	"visualeditor-preference-language-description": "Pokusni alat u VisualEditoru za označavanje jezika u kojem je napisan tekst za testiranje. Kad god koristite pokusne mogućnosti, molimo, uvijek pregledajte izmjene prije spremanja.",
 	"visualeditor-preference-language-label": "Jezični alat u VisualEditoru",
 	"visualeditor-reference-input-placeholder": "Koji izvor želite koristiti?",
