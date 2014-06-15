@@ -1453,7 +1453,11 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 			offset = surfaceModel.getDocument().data.getNearestContentOffset(
 				offsetNode.getModel().getOffset(), 1
 			);
-			surfaceModel.setSelection( new ve.Range( offset ) );
+			// onDocumentFocus is debounced, so wait for that to happen before setting
+			// the model selection, otherwise it will get reset
+			this.surface.getView().once( 'focus', function () {
+				surfaceModel.setSelection( new ve.Range( offset ) );
+			} );
 			// Scroll to heading:
 			// Wait for toolbar to animate in so we can account for its height
 			setTimeout( function () {
