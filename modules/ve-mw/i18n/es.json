@@ -98,6 +98,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "Idioma",
 	"visualeditor-dialog-meta-languages-readonlynote": "Esta es una lista de páginas en otros idiomas enlazadas a esta. Por ahora, solo se puede editar en modo fuente o en Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Idiomas",
+	"visualeditor-dialog-meta-settings-displaytitle": "Mostrar título",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Categoría oculta",
 	"visualeditor-dialog-meta-settings-index-default": "Predeterminado",
 	"visualeditor-dialog-meta-settings-index-disable": "No",

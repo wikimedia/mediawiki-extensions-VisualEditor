@@ -97,6 +97,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Язык",
 	"visualeditor-dialog-meta-languages-readonlynote": "Это список связанных страниц на других языках; на данный момент он может быть отредактирован только в режиме исходного текста или в Викиданных.",
 	"visualeditor-dialog-meta-languages-section": "Языки",
+	"visualeditor-dialog-meta-settings-displaytitle": "Отображаемый заголовок",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Включить отображаемый заголовок",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Скрытые категории",
 	"visualeditor-dialog-meta-settings-index-default": "По умолчанию",
 	"visualeditor-dialog-meta-settings-index-disable": "Нет",
