@@ -243,8 +243,7 @@ ve.ui.MWReferenceDialog.prototype.getApplyButtonLabel = function () {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.applyChanges = function () {
-		var surfaceFragment = this.getFragment(),
-		surfaceModel = surfaceFragment.getSurface();
+	var surfaceModel = this.getFragment().getSurface();
 
 	this.referenceModel.setGroup( this.referenceGroupInput.getValue() );
 
@@ -253,7 +252,9 @@ ve.ui.MWReferenceDialog.prototype.applyChanges = function () {
 		if ( !this.referenceModel.findInternalItem( surfaceModel ) ) {
 			this.referenceModel.insertInternalItem( surfaceModel );
 		}
-		this.referenceModel.insertReferenceNode( surfaceFragment );
+		// Collapse returns a new fragment, so update this.fragment
+		this.fragment = this.getFragment().collapseRangeToEnd();
+		this.referenceModel.insertReferenceNode( this.getFragment() );
 	}
 
 	// Update internal item

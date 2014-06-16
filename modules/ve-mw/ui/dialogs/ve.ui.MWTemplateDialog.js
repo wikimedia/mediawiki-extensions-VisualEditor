@@ -290,14 +290,15 @@ ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.applyChanges = function () {
-	var surfaceFragment = this.getFragment(),
-		surfaceModel = surfaceFragment.getSurface(),
+	var surfaceModel = this.getFragment().getSurface(),
 		obj = this.transclusionModel.getPlainObject();
 
 	if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
 		this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
 	} else if ( obj !== null ) {
-		this.transclusionModel.insertTransclusionNode( surfaceFragment );
+		// Collapse returns a new fragment, so update this.fragment
+		this.fragment = this.getFragment().collapseRangeToEnd();
+		this.transclusionModel.insertTransclusionNode( this.getFragment() );
 	}
 
 	// Parent method

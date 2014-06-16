@@ -74,7 +74,8 @@ ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
 			};
 		}
 
-		this.getFragment().collapseRangeToEnd().insertContent( [
+		// Collapse returns a new fragment, so update this.fragment
+		this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
 			{
 				'type': 'mwBlockImage',
 				'attributes': {
@@ -93,7 +94,7 @@ ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
 			{ 'type': 'mwImageCaption' },
 			{ 'type': '/mwImageCaption' },
 			{ 'type': '/mwBlockImage' }
-		] ).collapseRangeToEnd().select();
+		] );
 
 		this.close();
 	}

@@ -88,17 +88,17 @@ ve.ui.MWCitationDialog.prototype.getSelectedNode = function () {
  */
 ve.ui.MWCitationDialog.prototype.applyChanges = function () {
 	var item,
-		surfaceFragment = this.getFragment(),
-		surfaceModel = surfaceFragment.getSurface(),
+		surfaceModel = this.getFragment().getSurface(),
 		doc = surfaceModel.getDocument(),
 		internalList = doc.getInternalList(),
 		obj = this.transclusionModel.getPlainObject();
 
 	if ( !this.referenceModel ) {
-		this.getFragment().collapseRangeToEnd();
+		// Collapse returns a new fragment, so update this.fragment
+		this.fragment = this.getFragment().collapseRangeToEnd();
 		this.referenceModel = new ve.dm.MWReferenceModel();
 		this.referenceModel.insertInternalItem( surfaceModel );
-		this.referenceModel.insertReferenceNode( surfaceFragment );
+		this.referenceModel.insertReferenceNode( this.getFragment() );
 	}
 
 	item = this.referenceModel.findInternalItem( surfaceModel );
@@ -113,7 +113,7 @@ ve.ui.MWCitationDialog.prototype.applyChanges = function () {
 				// the referenceModel will have already initialized the internal node with a
 				// paragraph - getting the range of the item covers the entire paragraph so we have
 				// to get the range of it's first (and empty) child
-				surfaceFragment.clone( item.getChildren()[0].getRange() )
+				this.getFragment().clone( item.getChildren()[0].getRange() )
 			);
 		}
 	}

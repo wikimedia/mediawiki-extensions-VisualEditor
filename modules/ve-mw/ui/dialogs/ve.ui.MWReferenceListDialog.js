@@ -75,8 +75,8 @@ ve.ui.MWReferenceListDialog.prototype.applyChanges = function () {
 			);
 		}
 	} else {
-		// Create new model
-		this.getFragment().collapseRangeToEnd().insertContent( [
+		// Collapse returns a new fragment, so update this.fragment
+		this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
 			{
 				'type': 'mwReferenceList',
 				'attributes': {
@@ -85,7 +85,7 @@ ve.ui.MWReferenceListDialog.prototype.applyChanges = function () {
 				}
 			},
 			{ 'type': '/mwReferenceList' }
-		] ).collapseRangeToEnd().select();
+		] );
 	}
 
 	// Parent method
