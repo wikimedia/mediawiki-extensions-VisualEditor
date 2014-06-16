@@ -89,6 +89,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Språk",
 	"visualeditor-dialog-meta-languages-readonlynote": "Detta är en lista över sidor på andra språk som är kopplade till denna; just nu kan de endast redigeras i källtext eller på Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Språk",
+	"visualeditor-dialog-meta-settings-displaytitle": "Visningstitel",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Aktivera visningstitel",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Dold kategori",
 	"visualeditor-dialog-meta-settings-index-default": "Standard",
 	"visualeditor-dialog-meta-settings-index-disable": "Nej",
