@@ -139,7 +139,8 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
 		}
 	}
 	if ( this.$caption ) {
-		this.$caption.toggle( this.captionVisible );
+		// Don't use show() as it sets display to block, overriding the stylesheet.
+		this.$caption.css( 'display', this.captionVisible ? '' : 'none' );
 	}
 };
 
