@@ -36,7 +36,6 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this, this.$figure, config );
 	ve.ce.MWResizableNode.call( this, this.$image, config );
-	ve.ce.ClickableNode.call( this );
 
 	// Events
 	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
@@ -52,8 +51,6 @@ OO.mixinClass( ve.ce.MWImageNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ResizableNode );
 
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.MWResizableNode );
-
-OO.mixinClass( ve.ce.MWImageNode, ve.ce.ClickableNode );
 
 /* Static Properties */
 

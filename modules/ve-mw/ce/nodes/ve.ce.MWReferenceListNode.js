@@ -11,7 +11,6 @@
  * @class
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.ClickableNode
  *
  * @constructor
  * @param {ve.dm.MWReferenceListNode} model Model to observe
@@ -23,7 +22,6 @@ ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-	ve.ce.ClickableNode.call( this );
 
 	// Properties
 	this.internalList = null;
@@ -47,8 +45,6 @@ ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
 OO.inheritClass( ve.ce.MWReferenceListNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWReferenceListNode, ve.ce.FocusableNode );
-
-OO.mixinClass( ve.ce.MWReferenceListNode, ve.ce.ClickableNode );
 
 /* Static Properties */
 
