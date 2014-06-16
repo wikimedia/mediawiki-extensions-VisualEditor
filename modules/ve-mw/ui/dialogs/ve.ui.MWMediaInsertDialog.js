@@ -48,7 +48,7 @@ ve.ui.MWMediaInsertDialog.static.icon = 'picture';
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
-	var info, newDimensions, scalable;
+	var info, newDimensions, scalable, offset, structuralOffset;
 
 	if ( item ) {
 		info = item.imageinfo[0];
@@ -74,8 +74,11 @@ ve.ui.MWMediaInsertDialog.prototype.onSearchSelect = function ( item ) {
 			};
 		}
 
-		// Collapse returns a new fragment, so update this.fragment
-		this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
+		// Go to start of paragraph
+		offset = this.getFragment().getRange().start;
+		structuralOffset = this.getFragment().getDocument().data.getNearestStructuralOffset( offset, -1 );
+		this.fragment = this.getFragment().clone( new ve.Range( structuralOffset ) );
+		this.fragment.insertContent( [
 			{
 				'type': 'mwBlockImage',
 				'attributes': {
