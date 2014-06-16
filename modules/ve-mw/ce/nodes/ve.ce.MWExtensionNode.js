@@ -25,7 +25,6 @@ ve.ce.MWExtensionNode = function VeCeMWExtensionNode() {
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
-	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwExtensionNode' );
@@ -37,7 +36,6 @@ OO.inheritClass( ve.ce.MWExtensionNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.GeneratedContentNode );
-OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.ClickableNode );
 
 /* Methods */
 

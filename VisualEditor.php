@@ -375,7 +375,6 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/ve.ce.LeafNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.FocusableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.ResizableNode.js',
-			'lib/ve/modules/ve/ce/ve.ce.ClickableNode.js',
 			'lib/ve/modules/ve/ce/ve.ce.Surface.js',
 			'lib/ve/modules/ve/ce/ve.ce.SurfaceObserver.js',
 
