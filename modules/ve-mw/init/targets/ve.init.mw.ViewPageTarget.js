@@ -1383,10 +1383,12 @@ ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
-	this.debugBar.$element.slideUp( 'fast', ve.bind( function () {
-		this.debugBar.$element.remove();
-		this.debugBar = null;
-	}, this ) );
+	if ( this.debugBar ) {
+		this.debugBar.$element.slideUp( 'fast', ve.bind( function () {
+			this.debugBar.$element.remove();
+			this.debugBar = null;
+		}, this ) );
+	}
 };
 
 /**
