@@ -214,6 +214,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( surfaceModel ) {
  */
 ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	var editAttributes, coveredNodes, newNodeRange, newFragment, newNode, i,
+		nearestContentOffset,
 		contentToInsert = [],
 		nodeType = this.getImageNodeType(),
 		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
@@ -238,7 +239,18 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	}
 	contentToInsert.push( { 'type': '/' + nodeType } );
 
-	// Insert the new image
+	// Check if the image is converted from block to inline, and if so
+	// put it inside the closest content node
+	if ( nodeType === 'mwInlineImage' ) {
+		nearestContentOffset = fragment.getDocument().data.getNearestContentOffset( fragment.getRange().start );
+		if ( nearestContentOffset > -1 ) {
+			fragment = fragment.clone( new ve.Range( nearestContentOffset ) );
+			fragment.insertContent( contentToInsert );
+			return;
+		}
+	}
+	// Otherwise, proceed normally and
+	// insert the new image
 	coveredNodes = fragment
 			.insertContent( contentToInsert )
 			.getCoveredNodes();
