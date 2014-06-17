@@ -129,7 +129,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 		// If we don't have either 'apiurl' or 'scriptDirUrl'
 		// the source is invalid, and we will skip it
 		if ( source.apiurl || source.scriptDirUrl !== undefined ) {
-			if ( source.request ) {
+			if ( source.request && source.request.abort ) {
 				source.request.abort();
 			}
 			if ( !source.gsroffset ) {
