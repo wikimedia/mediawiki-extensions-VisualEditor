@@ -23,6 +23,7 @@ class VisualEditorPage
   span(:newpage_linksuggestion, text: "DoesNotExist")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
   div(:page_text, id: "mw-content-text")
+  div(:page_text_after_save, class: "ve-ce-documentNode mw-content-ltr ve-ce-branchNode noime")
   a(:page_title, text: /Page title/)
   a(:paragraph, text: /Paragraph/)
   a(:preformatted, text: /Preformatted/)

@@ -87,7 +87,7 @@ When(/^I see the IP warning signs$/) do
 end
 
 Then(/^Page text should contain (.+)$/) do |output_string|
-  on(VisualEditorPage).page_text_element.when_present.text.should match Regexp.escape(output_string + " #{@random_string}")
+  on(VisualEditorPage).page_text_after_save_element.when_present.text.should match Regexp.escape(output_string + " #{@random_string}")
 end
 
 Then(/^I can click the X on the save box$/) do
