@@ -35,6 +35,17 @@ ve.ce.MWGalleryNode.static.tagName = 'div';
 
 ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWGalleryNode.prototype.onSetup = function () {
+	ve.ce.MWGalleryNode.super.prototype.onSetup.apply( this, arguments );
+	// The ul.gallery is 100% width, so don't give it a highlight
+	this.$element.find( '.gallery' ).addClass( 've-ce-noHighlight' );
+};
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWGalleryNode );

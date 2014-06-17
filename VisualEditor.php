@@ -1169,7 +1169,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWGalleryInspectorTool.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWGalleryNode.css',
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWGalleryInspector.css',
 		),
 		'dependencies' => array(
