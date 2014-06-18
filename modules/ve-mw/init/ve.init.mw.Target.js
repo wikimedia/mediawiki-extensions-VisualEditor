@@ -543,7 +543,14 @@ ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
 	} else if ( typeof data.content !== 'string' ) {
 		this.onSaveError( doc, saveData, null, 'Invalid HTML content in response from server', response );
 	} else {
-		this.emit( 'save', data.content, data.categorieshtml, data.newrevid, data.isRedirect );
+		this.emit(
+			'save',
+			data.content,
+			data.categorieshtml,
+			data.newrevid,
+			data.isRedirect,
+			data.displayTitleHtml || null
+		);
 	}
 };
 
