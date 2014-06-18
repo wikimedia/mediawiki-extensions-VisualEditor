@@ -554,6 +554,7 @@ class VisualEditorHooks {
 				'lib/ve/modules/unicodejs/test/unicodejs.wordbreak.test.js',
 				// VisualEditor Tests
 				'lib/ve/modules/ve/test/ve.test.utils.js',
+				'modules/ve-mw/test/ve.test.utils.js',
 				'lib/ve/modules/ve/test/ve.test.js',
 				'lib/ve/modules/ve/test/ve.Document.test.js',
 				'lib/ve/modules/ve/test/ve.Node.test.js',

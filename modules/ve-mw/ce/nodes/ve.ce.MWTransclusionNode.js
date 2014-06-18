@@ -72,7 +72,7 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 /** */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
-	xhr = ve.init.mw.Target.static.apiRequest( {
+	xhr = ve.init.target.constructor.static.apiRequest( {
 		'action': 'visualeditor',
 		'paction': 'parsefragment',
 		'page': mw.config.get( 'wgRelevantPageName' ),

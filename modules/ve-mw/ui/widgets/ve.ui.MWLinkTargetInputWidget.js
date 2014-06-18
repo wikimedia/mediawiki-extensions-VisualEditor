@@ -70,7 +70,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 	if ( mw.Title.newFromText( this.value ) ) {
-		return ve.init.mw.Target.static.apiRequest( {
+		return ve.init.target.constructor.static.apiRequest( {
 			'action': 'query',
 			'generator': 'prefixsearch',
 			'gpssearch': this.value,

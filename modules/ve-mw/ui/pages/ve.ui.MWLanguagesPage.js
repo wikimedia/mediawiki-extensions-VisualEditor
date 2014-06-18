@@ -163,7 +163,7 @@ ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
 ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 	var deferred = $.Deferred();
 	// TODO: Detect paging token if results exceed limit
-	ve.init.mw.Target.static.apiRequest( {
+	ve.init.target.constructor.static.apiRequest( {
 		'action': 'visualeditor',
 		'paction': 'getlanglinks',
 		'page': mw.config.get( 'wgPageName' )

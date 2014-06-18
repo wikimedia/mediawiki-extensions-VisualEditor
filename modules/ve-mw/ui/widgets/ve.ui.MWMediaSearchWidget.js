@@ -143,7 +143,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				url = source.apiurl || ( source.scriptDirUrl + '/api.php' );
 			}
 			this.query.pushPending();
-			source.request = ve.init.mw.Target.static.apiRequest( {
+			source.request = ve.init.target.constructor.static.apiRequest( {
 				'action': 'query',
 				'generator': 'search',
 				'gsrsearch': value,

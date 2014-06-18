@@ -179,7 +179,7 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 	// On the first call set off an async call to update the scalable's
 	// original dimensions from the API.
 	if ( !this.scalablePromise ) {
-		this.scalablePromise = ve.init.mw.Target.static.apiRequest(
+		this.scalablePromise = ve.init.target.constructor.static.apiRequest(
 			{
 				'action': 'query',
 				'prop': 'imageinfo',
