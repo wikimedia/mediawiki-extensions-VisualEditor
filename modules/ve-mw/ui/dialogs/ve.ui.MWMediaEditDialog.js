@@ -471,6 +471,14 @@ ve.ui.MWMediaEditDialog.prototype.getSetupProcess = function ( data ) {
 					'pasteRules': this.constructor.static.getPasteRules()
 				}
 			);
+			this.captionSurface.getSurface().getModel().connect( this, {
+				'documentUpdate': function () {
+					this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
+						this.captionSurface.getSurface(),
+						this.wikitextWarning
+					);
+				}
+			} );
 
 			// Size widget
 			this.$spinner.hide();
@@ -546,6 +554,9 @@ ve.ui.MWMediaEditDialog.prototype.getTeardownProcess = function ( data ) {
 		.first( function () {
 			// Cleanup
 			this.imageModel.disconnect( this );
+			if ( this.wikitextWarning ) {
+				this.wikitextWarning.close();
+			}
 			this.captionSurface.destroy();
 			this.captionSurface = null;
 			this.captionNode = null;
