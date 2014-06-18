@@ -91,6 +91,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "語言",
 	"visualeditor-dialog-meta-languages-readonlynote": "此為連結至本頁的其他語言頁面清單，目前只能透過原始碼模式或者使用 WikiData 編輯。",
 	"visualeditor-dialog-meta-languages-section": "語言",
+	"visualeditor-dialog-meta-settings-displaytitle": "顯示標題",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "啟用顯示標題",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "隱藏分類",
 	"visualeditor-dialog-meta-settings-index-default": "預設",
 	"visualeditor-dialog-meta-settings-index-disable": "否",

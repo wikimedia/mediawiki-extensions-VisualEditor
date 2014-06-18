@@ -8,7 +8,8 @@
 			"QuimGil",
 			"SMP",
 			"Vriullop",
-			"Papapep"
+			"Papapep",
+			"Fitoschido"
 		]
 	},
 	"tooltip-ca-createsource": "Crea el codi font d'aquesta pàgina",
@@ -218,7 +219,7 @@
 	"visualeditor-toolbar-savedialog": "Desa la pàgina",
 	"visualeditor-toolbar-style-tooltip": "Estil de text",
 	"visualeditor-usernamespacepagelink": "Project:Espai d'usuari",
-	"visualeditor-viewpage-savewarning": "Esteu segurs que voleu tornar a la pàgina sense desar abans?",
+	"visualeditor-viewpage-savewarning": "Esteu segur que voleu tornar a la pàgina sense desar abans?",
 	"visualeditor-wikitext-warning": "Esteu utilitzant l'Editor Visual - el [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] no funciona aquí. Feu clic a \"{{int:visualeditor-ca-editsource}}\" per a editar la pàgina en format wikitext. Els canvis que no hàgiu desat es perdran.",
 	"visualeditor-wikitext-warning-link": "Help:Sintaxi wiki",
 	"visualeditor-wikitext-warning-title": "S'ha detectat sintaxi wiki"
