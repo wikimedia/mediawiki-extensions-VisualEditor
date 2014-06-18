@@ -115,9 +115,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 			}
 			$result['isRedirect'] = $page->isRedirect();
-			$result['displayTitleHtml'] = $this->getOutput()->getWikiPage()->getParserOutput(
-				$this->getOutput()->parserOptions()
-			)->getDisplayTitle();
 
 			if ( isset( $saveresult['edit']['newrevid'] ) ) {
 				$result['newrevid'] = intval( $saveresult['edit']['newrevid'] );
