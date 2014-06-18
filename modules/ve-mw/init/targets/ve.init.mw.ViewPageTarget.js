@@ -424,9 +424,11 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @method
  * @param {string} html Rendered page HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {number} [newid] New revision id, undefined if unchanged
+ * @param {number} newid New revision id, undefined if unchanged
+ * @param {boolean} isRedirect Whether this page is a redirect or not
+ * @param {string} displayTitle What HTML to show as the page title
  */
-ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid, isRedirect ) {
+ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid, isRedirect, displayTitle ) {
 	var newUrlParams, watchChecked;
 	this.saveDeferred.resolve();
 	if ( !this.pageExists || this.restoring ) {
@@ -470,7 +472,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 		}
 		this.saveDialog.close();
 		this.saveDialog.reset();
-		this.replacePageContent( html, categoriesHtml, isRedirect );
+		this.replacePageContent( html, categoriesHtml, isRedirect, displayTitle );
 		this.setupSectionEditLinks();
 		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
@@ -1536,8 +1538,10 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
  * @method
  * @param {string} html Rendered HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
+ * @param {boolean} isRedirect Whether this page is a redirect or not
+ * @param {string} displayTitle What HTML to show as the page title
  */
-ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml, isRedirect ) {
+ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml, isRedirect, displayTitle ) {
 	var $content = $( $.parseHTML( html ) ), $editableContent;
 
 	if ( $( '#mw-imagepage-content' ).length ) {
@@ -1557,6 +1561,9 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, catego
 	}
 
 	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
+	if ( displayTitle ) {
+		$( '#content > #firstHeading > span' ).html( displayTitle );
+	}
 	$( '#catlinks' ).replaceWith( categoriesHtml );
 	if ( isRedirect ) {
 		$( '#contentSub' ).text( ve.msg( 'redirectpagesub' ) );
