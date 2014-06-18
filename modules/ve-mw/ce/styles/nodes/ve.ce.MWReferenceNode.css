@@ -8,3 +8,8 @@
 .ve-ce-mwReferenceNode-missingref {
 	cursor: not-allowed;
 }
+
+/* HACK: Hide Ref errors in templates */
+.mw-ext-cite-error {
+	display: none;
+}

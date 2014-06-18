@@ -1084,7 +1084,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMoreParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css',
@@ -1186,7 +1185,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWAlienExtensionInspectorTool.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWAlienExtensionNode.css',
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css',
 		),
 		'dependencies' => array(

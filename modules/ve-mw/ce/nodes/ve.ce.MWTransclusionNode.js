@@ -27,9 +27,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwTransclusionNode' );
 };
 
 /* Inheritance */
@@ -148,9 +145,6 @@ ve.ce.MWTransclusionNode.prototype.onParseError = function ( deferred ) {
 ve.ce.MWTransclusionBlockNode = function VeCeMWTransclusionBlockNode( model ) {
 	// Parent constructor
 	ve.ce.MWTransclusionNode.call( this, model );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwTransclusionBlockNode' );
 };
 
 /* Inheritance */
@@ -174,9 +168,6 @@ ve.ce.MWTransclusionBlockNode.static.tagName = 'div';
 ve.ce.MWTransclusionInlineNode = function VeCeMWTransclusionInlineNode( model ) {
 	// Parent constructor
 	ve.ce.MWTransclusionNode.call( this, model );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwTransclusionInlineNode' );
 };
 
 /* Inheritance */

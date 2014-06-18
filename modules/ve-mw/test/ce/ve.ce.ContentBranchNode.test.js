@@ -35,11 +35,8 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 				{ 'type': '/paragraph' }
 			],
 			'html': 'a<b>b<span typeof="mw:Entity" class="ve-ce-leafNode ' +
-				've-ce-mwEntityNode" contenteditable="false">c</span>d<span ' +
-				'class="ve-ce-leafNode ve-ce-generatedContentNode ve-ce-noHighlight ' +
-				've-ce-alienNode ve-ce-alienInlineNode"><tt>e</tt></span></b>'
+				've-ce-mwEntityNode" contenteditable="false">c</span>d<tt>e</tt></b>'
 		} ];
-
 	QUnit.expect( cases.length );
 	for ( i = 0, len = cases.length; i < len; i++ ) {
 		doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( cases[i].data ) );
