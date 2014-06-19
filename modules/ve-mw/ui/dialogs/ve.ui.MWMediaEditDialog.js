@@ -585,14 +585,10 @@ ve.ui.MWMediaEditDialog.prototype.applyChanges = function () {
 	// vise versa
 	if ( this.mediaNode.type !== this.imageModel.getImageNodeType() ) {
 		// Remove the old image
-		surfaceModel.change(
-			ve.dm.Transaction.newFromRemoval(
-				surfaceModel.getDocument(),
-				this.mediaNode.getOuterRange()
-			)
-		);
+		this.fragment = this.getFragment().clone( this.mediaNode.getOuterRange() );
+		this.fragment.removeContent();
 		// Insert the new image
-		this.imageModel.insertImageNode( this.getFragment() );
+		this.fragment = this.imageModel.insertImageNode( this.getFragment() );
 	} else {
 		// Update current node
 		this.imageModel.updateImageNode( surfaceModel );

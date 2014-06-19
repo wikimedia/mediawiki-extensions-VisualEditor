@@ -210,11 +210,13 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( surfaceModel ) {
  *
  * Image is inserted at the current fragment position.
  *
- * @param {ve.dm.SurfaceFragment} fragment Fragment of the node
+ * @param {ve.dm.SurfaceFragment} fragment Fragment covering range to insert at
+ * @return {ve.dm.SurfaceFragment} Fragment covering inserted image
+ * @throws {Error} Unknown image node type
  */
 ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
-	var editAttributes, coveredNodes, newNodeRange, newFragment, newNode, i,
-		nearestContentOffset,
+	var editAttributes, captionDoc,
+		offset,
 		contentToInsert = [],
 		nodeType = this.getImageNodeType(),
 		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
@@ -228,64 +230,47 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 
 	contentToInsert = [
 		{
-			// TODO: Add support for MWInlineImage type
 			'type': nodeType,
 			'attributes': editAttributes
-		}
+		},
+		{ 'type': '/' + nodeType }
 	];
-	if ( nodeType === 'mwBlockImage' ) {
-		contentToInsert.push( { 'type': 'mwImageCaption' } );
-		contentToInsert.push( { 'type': '/mwImageCaption' } );
-	}
-	contentToInsert.push( { 'type': '/' + nodeType } );
 
-	// Check if the image is converted from block to inline, and if so
-	// put it inside the closest content node
-	if ( nodeType === 'mwInlineImage' ) {
-		nearestContentOffset = fragment.getDocument().data.getNearestContentOffset( fragment.getRange().start );
-		if ( nearestContentOffset > -1 ) {
-			fragment = fragment.clone( new ve.Range( nearestContentOffset ) );
+	switch ( nodeType ) {
+		case 'mwInlineImage':
+			// Try to put the image inside the nearest content node
+			offset = fragment.getDocument().data.getNearestContentOffset( fragment.getRange().start );
+			if ( offset > -1 ) {
+				fragment = fragment.clone( new ve.Range( offset ) );
+			}
 			fragment.insertContent( contentToInsert );
-			return;
-		}
+			return fragment;
+
+		case 'mwBlockImage':
+			contentToInsert.splice( 1, 0, { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } );
+			// Try to put the image in front of the structural node
+			offset = fragment.getDocument().data.getNearestStructuralOffset( fragment.getRange().start, -1 );
+			if ( offset > -1 ) {
+				fragment = fragment.clone( new ve.Range( offset ) );
+			}
+			fragment.insertContent( contentToInsert );
+			// Check if there is caption document and insert it
+			captionDoc = this.getCaptionDocument();
+			if ( captionDoc.data.getLength() > 4 ) {
+				// Add contents of new caption
+				surfaceModel.change(
+					ve.dm.Transaction.newFromDocumentInsertion(
+						surfaceModel.getDocument(),
+						fragment.getRange().start + 2,
+						this.getCaptionDocument()
+					)
+				);
+			}
+			return fragment;
+
+		default:
+			throw new Error( 'Unknown image node type ' + nodeType );
 	}
-	// Otherwise, proceed normally and
-	// insert the new image
-	coveredNodes = fragment
-			.insertContent( contentToInsert )
-			.getCoveredNodes();
-
-	// Get the new image node
-	for ( i = 0; i < coveredNodes.length; i++ ) {
-		if (
-			coveredNodes[i].node.type === 'mwBlockImage' ||
-			coveredNodes[i].node.type === 'mwInlineImage'
-		) {
-			newNodeRange = coveredNodes[i].nodeOuterRange;
-			newNode = coveredNodes[i].node;
-			break;
-		}
-	}
-
-	// Select the new node (without extras)
-	newFragment = surfaceModel.getFragment( newNodeRange );
-	newFragment.select();
-
-	// Check if there should be a caption
-	if ( newNode && newNode.getType() === 'mwBlockImage' ) {
-
-		if ( this.getCaptionDocument().data.getLength() > 4 ) {
-			// Add contents of new caption
-			surfaceModel.change(
-				ve.dm.Transaction.newFromDocumentInsertion(
-					surfaceModel.getDocument(),
-					newNode.getCaptionNode().getRange().start,
-					this.getCaptionDocument()
-				)
-			);
-		}
-	}
-
 };
 
 /**
