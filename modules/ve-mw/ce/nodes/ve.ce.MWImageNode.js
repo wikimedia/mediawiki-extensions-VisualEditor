@@ -54,7 +54,7 @@ OO.mixinClass( ve.ce.MWImageNode, ve.ce.MWResizableNode );
 
 /* Static Properties */
 
-ve.ce.MWImageNode.static.primaryCommandName = 'mediaEdit';
+ve.ce.MWImageNode.static.primaryCommandName = 'media';
 
 /* Static Methods */
 

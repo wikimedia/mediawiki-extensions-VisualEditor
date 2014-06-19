@@ -66,6 +66,7 @@ OO.mixinClass( ve.dm.MWImageModel, OO.EventEmitter );
  * @event typeChange
  * @param {string} Image type 'thumb', 'frame', 'frameless' or 'none'
  */
+
 /* Static Properties */
 
 ve.dm.MWImageModel.static.infoCache = {};
@@ -73,14 +74,69 @@ ve.dm.MWImageModel.static.infoCache = {};
 /* Static Methods */
 
 /**
+ * Create a new image node based on given parameters.
+ * @param {Object} attributes Image attributes
+ * @param {string} [imageType] Image node type 'mwInlineImage' or 'mwBlockImage'.
+ *  Defaults to 'mwBlockImage'
+ * @returns {ve.dm.MWImageNode} An image node
+ */
+ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
+	var scalable, attrs, newNode, newDimensions,
+		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
+
+	attrs = ve.extendObject( {
+		'type': 'thumb',
+		'align': 'default',
+		'width': defaultThumbSize,
+		'mediaType': 'BITMAP',
+		'defaultSize': true
+	}, attributes );
+
+	if ( attrs.defaultSize ) {
+		// Create a scalable for calculations
+		scalable = new ve.dm.Scalable( {
+			'originalDimensions': {
+				'width': attrs.width,
+				'height': attrs.height
+			}
+		} );
+
+		// Resize to default thumbnail size, but only if the image itself
+		// isn't smaller than the default size
+		// For svg/drawings, the default wiki size is always applied
+		if ( attrs.width > defaultThumbSize || attrs.mediaType === 'DRAWING' ) {
+			newDimensions = scalable.getDimensionsFromValue( {
+				'width': defaultThumbSize
+			} );
+			attrs.width = newDimensions.width;
+			attrs.height = newDimensions.height;
+		}
+	}
+
+	imageType = imageType || 'mwBlockImage';
+
+	newNode = ve.dm.nodeFactory.create( imageType, {
+		'type': imageType,
+		'attributes': attrs
+	} );
+
+	newNode.syncScalableToType();
+
+	return newNode;
+};
+
+/**
  * Load from image data with scalable information.
  *
  * @param {ve.dm.MWImageNode} node Image node
+ * @param {string} [dir] Optional. This is used when the node is new
+ * and not attached to the document yet, so we can supply the directionality
+ * directly. Defaults to node document direction, and if that's not available,
+ * defaults to 'ltr'.
  * @return {ve.dm.MWImageModel} Image model
  */
-ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
-	var doc = node.getDocument(),
-		captionNode,
+ve.dm.MWImageModel.static.newFromImageNode = function ( node, dir ) {
+	var captionNode,
 		attrs = node.getAttributes(),
 		imgModel = new ve.dm.MWImageModel();
 
@@ -96,7 +152,10 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	imgModel.toggleBorder( !!attrs.borderImage );
 	imgModel.setAltText( attrs.alt );
 
-	imgModel.setDir( doc.getDir() );
+	if ( !dir && node.getDocument() ) {
+		dir = node.getDocument().getDir();
+	}
+	imgModel.setDir( dir || 'ltr' );
 
 	imgModel.setType( attrs.type );
 
@@ -119,11 +178,14 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
 	// Make sure the node type and scalable are synchronized
 	node.syncScalableToType();
 
-	// If this is a block image, get the caption
-	if ( node.getType() === 'mwBlockImage' ) {
+	// If this is a block image and the caption already exists,
+	// store the initial caption and set it as the caption document
+	if ( node.getDocument() && node.getType() === 'mwBlockImage' ) {
 		captionNode = node.getCaptionNode();
 		if ( captionNode && captionNode.getLength() > 0 ) {
-			imgModel.setCaptionDocument( doc.cloneFromRange( captionNode.getRange() ) );
+			imgModel.setCaptionDocument(
+				node.getDocument().cloneFromRange( captionNode.getRange() )
+			);
 		}
 	}
 	return imgModel;
