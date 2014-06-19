@@ -116,15 +116,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			}
 			$result['isRedirect'] = $page->isRedirect();
 
-			$parserOutput = $this->getOutput()->getWikiPage()->getParserOutput(
-				$this->getOutput()->parserOptions()
-			);
-			if ( $parserOutput ) {
-				$result['displayTitleHtml'] = $parserOutput->getDisplayTitle();
-			} else {
-				wfDebug( '[VE] ApiVisualEditorEdit - parserOutput was false' );
-			}
-
 			if ( isset( $saveresult['edit']['newrevid'] ) ) {
 				$result['newrevid'] = intval( $saveresult['edit']['newrevid'] );
 			}
