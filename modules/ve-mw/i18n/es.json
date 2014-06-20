@@ -22,7 +22,8 @@
 			"Gloria sah",
 			"Wifidel",
 			"McDutchie",
-			"Macofe"
+			"Macofe",
+			"Themasterriot"
 		]
 	},
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
@@ -99,6 +100,7 @@
 	"visualeditor-dialog-meta-languages-readonlynote": "Esta es una lista de páginas en otros idiomas enlazadas a esta. Por ahora, solo se puede editar en modo fuente o en Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Idiomas",
 	"visualeditor-dialog-meta-settings-displaytitle": "Mostrar título",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Activar la visualización del título",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Categoría oculta",
 	"visualeditor-dialog-meta-settings-index-default": "Predeterminado",
 	"visualeditor-dialog-meta-settings-index-disable": "No",
@@ -248,5 +250,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Continuar editando",
 	"visualeditor-wikitext-warning": "Estás utilizando VisualEditor, donde el [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexto]] no funciona. Para volver a la edición de fuente en cualquier momento sin perder tus cambios abre el menú desplegable junto a \"{{int:visualeditor-toolbar-cancel}}\" y selecciona \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Ayuda:Wikitexto",
-	"visualeditor-wikitext-warning-title": "Se ha detectado Wikitexto"
+	"visualeditor-wikitext-warning-title": "Se ha detectado wikitexto"
 }
