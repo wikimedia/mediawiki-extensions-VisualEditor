@@ -169,6 +169,7 @@
 	"visualeditor-mwalienextensioninspector-title": "মিডিয়াৱিকি এক্সটেন্‌চন",
 	"visualeditor-mweditmodesource-title": "উৎস সম্পাদনালৈ যাওক",
 	"visualeditor-mweditmodesource-warning": "আপুনি উৎস সম্পাদনালৈ যাবলৈ ওলাইছে।\nআপুনি এই পৃষ্ঠাত কৰা সালসলনিবোৰ অক্ষত থাকিব, কিন্তু পৃষ্ঠাটো সাঁচি নৰখাকৈ বা ৰিল'ড নকৰাকৈ আপুনি ভিজুৱেলএডিটৰলৈ ঘূৰি যাব নোৱৰিব।\nআপুনি আগবাঢ়িবলৈ বিচাৰেনে?",
+	"visualeditor-mweditmodesource-warning-switch": "হয়, সলাওক",
 	"visualeditor-mweditmodesource-warning-cancel": "নহয়, বাতিল কৰক",
 	"visualeditor-mwgalleryinspector-placeholder": "উদাহৰণ.jpg|ছবিৰ কেপ্‌চন",
 	"visualeditor-mwgalleryinspector-title": "গেলেৰী",
@@ -215,6 +216,7 @@
 	"visualeditor-settings-tool": "পৃষ্ঠা ছেটিং",
 	"visualeditor-timeout": "সম্পূৰ্ণ সম্পাদনা এই মুহূৰ্তত সম্ভৱ নহ'ব। তাৰ সলনি আপুনি উৎস সম্পাদনা কৰিব নেকি?",
 	"visualeditor-toolbar-cancel": "বাতিল কৰক",
+	"visualeditor-toolbar-cite-label": "উদ্ধৃতি দিয়ক",
 	"visualeditor-toolbar-format-tooltip": "পৰিচ্ছেদ সজাওক",
 	"visualeditor-toolbar-savedialog": "পৃষ্ঠা সাঁচক",
 	"visualeditor-toolbar-style-tooltip": "লিখাৰ শৈলী",
@@ -222,7 +224,7 @@
 	"visualeditor-viewpage-savewarning": "সাঁচি নৰখাকৈ প্ৰদৰ্শন অৱস্থালৈ ঘূৰি যাব বুলি আপুনি নিশ্চিতনে?",
 	"visualeditor-viewpage-savewarning-discard": "সম্পাদনাসমূহ বাতিল কৰক",
 	"visualeditor-viewpage-savewarning-keep": "সম্পাদনা অব্যাহত ৰাখক",
-	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। ৱিকিপাঠ্য ৰূপত এই পৃষ্ঠাটো সম্পাদনা কৰিবলৈ \"{{int:visualeditor-ca-editsource}}\" ক্লিক কৰক – সাঁচি নৰখা সালসলনি হেৰাই যাব।",
+	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। আপোনাৰ সালসমনিসমূহ হেৰাই নোযোৱাকৈ উৎস সম্পাদনালৈ ঘূৰি যাবৰ বাবে \"{{int:visualeditor-toolbar-cancel}}\"-ৰ কাষৰ ড্ৰপ্‌ডাউন মেনুত ক্লিক কৰক আৰু \"{{int:visualeditor-mweditmodesource-title}}\" বাছনি কৰক।",
 	"visualeditor-wikitext-warning-link": "Help:ৱিকি মাৰ্কাআপ",
 	"visualeditor-wikitext-warning-title": "ৱিকিপাঠ্য মাৰ্কআপ চিনাক্ত কৰা হৈছে"
 }
