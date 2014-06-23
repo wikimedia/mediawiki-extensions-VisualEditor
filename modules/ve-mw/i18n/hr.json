@@ -54,6 +54,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Jezik",
 	"visualeditor-dialog-meta-languages-readonlynote": "Ovo je popis članaka na drugim jezicima koji su povezani s ovim. Za sada, uređivanje nije moguće u VisualEditoru, već na stari način.",
 	"visualeditor-dialog-meta-languages-section": "Jezici",
+	"visualeditor-dialog-meta-settings-displaytitle": "Prikaži naslov",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Omogući prikaz naslova",
 	"visualeditor-dialog-meta-settings-index-default": "Zadano",
 	"visualeditor-dialog-meta-settings-index-disable": "Ne",
 	"visualeditor-dialog-meta-settings-index-force": "Da",
