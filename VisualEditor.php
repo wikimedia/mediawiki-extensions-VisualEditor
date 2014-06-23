@@ -96,6 +96,37 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
+	'Base64.js' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'lib/Base64.js/base64.js',
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	// This includes typed arrays and base64 polyfills for IE9
+	// All the other polyfills Easy-Deflate provides are
+	// already VE requirements.
+	'easy-deflate.core' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'lib/Easy-Deflate/easydeflate.js',
+			'lib/Easy-Deflate/typedarrays.js',
+		),
+		'dependencies' => array(
+			'Base64.js'
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	'easy-deflate.deflate' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'lib/Easy-Deflate/deflate.js',
+		),
+		'dependencies' => array(
+			'easy-deflate.core'
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
 	'unicodejs.wordbreak' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'lib/ve/modules/unicodejs/unicodejs.js',
@@ -262,6 +293,7 @@ $wgResourceModules += array(
 			'mediawiki.Uri',
 			'mediawiki.user',
 			'mediawiki.util',
+			'easy-deflate.deflate',
 			'user.options',
 			'user.tokens',
 			'ext.visualEditor.base',
