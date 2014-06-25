@@ -469,6 +469,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ImageNode.css',
 			'lib/ve/modules/ve/ce/styles/annotations/ve.ce.LanguageAnnotation.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.ResizableNode.css',
+			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.TableCellNode.css',
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
 
 			// ui
