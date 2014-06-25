@@ -5,7 +5,8 @@
 			"Firilacroco",
 			"Minisarm",
 			"Stelistcristi",
-			"Gloria sah"
+			"Gloria sah",
+			"Danutz"
 		]
 	},
 	"tooltip-ca-createsource": "Creați codul sursă al acestei pagini",
@@ -179,7 +180,6 @@
 	"visualeditor-mweditmodesource-warning-cancel": "Nu, anulează",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Descrierea imaginii",
 	"visualeditor-mwgalleryinspector-title": "Galerie",
-	"visualeditor-mwhieroinspector-title": "Hieroglife",
 	"visualeditor-pagemenu-tooltip": "Opțiunile paginii",
 	"visualeditor-pagetranslationwarning": "Modificați o pagină care poate fi tradusă. Acest tip de modificări cu EditorulVizual nu sunt încă suportate în mod oficial.",
 	"visualeditor-parameter-input-placeholder": "Numele câmpului",
@@ -194,8 +194,6 @@
 	"visualeditor-preference-language-label": "Instrument lingvistic pentru EditorulVizual",
 	"visualeditor-preference-mwalienextension-description": "Adaugă suport de bază experimental EditoruluiVizual pentru a modifica etichetele de extensie (cum ar fi galeriile sau blocurile de cod sursă), înaintea ca uneltele individuale să fie disponibile. Nu uitați să vă revizuiți întotdeauna modificările înainte de a salva atunci când folosiți funcții pilot.",
 	"visualeditor-preference-mwalienextension-label": "Modificarea etichetelor de extensie pentru EditorulVizual",
-	"visualeditor-preference-mwhiero-description": "Adaugă suport experimental EditoruluiVizual pentru crearea și modificarea hieroglifelor, înaintea lansării publice. Nu uitați să vă revizuiți întotdeauna modificările înainte de a salva atunci când folosiți funcții pilot.",
-	"visualeditor-preference-mwhiero-label": "Modificarea hieroglifelor pentru EditorulVizual",
 	"visualeditor-reference-input-placeholder": "Ce doriți să folosiți ca referință?",
 	"visualeditor-referencelist-isempty": "Nu există referințe cu grupul „$1” în această pagină pentru includere în această listă.",
 	"visualeditor-referencelist-isempty-default": "Nu există referințe în această pagină pentru includere în această listă.",
@@ -203,7 +201,7 @@
 	"visualeditor-savedialog-error-badtoken": "Nu v-am putut procesa modificarea, deoarece sesiunea nu mai era validă.",
 	"visualeditor-savedialog-identify-anon": "Doriți, în schimb, să salvați această pagină ca anonim? Adresa dumneavoastră IP va fi înregistrată în istoricul paginii.",
 	"visualeditor-savedialog-identify-user": "Acum sunteți autentificat ca [[User:$1|$1]]. Dacă o salvați, modificarea dumneavoastră va fi asociată acestui cont.",
-	"visualeditor-savedialog-label-create": "Creează pagina",
+	"visualeditor-savedialog-label-create": "Creare pagină",
 	"visualeditor-savedialog-label-error": "Eroare",
 	"visualeditor-savedialog-label-report": "Semnalare problemă",
 	"visualeditor-savedialog-label-resolve-conflict": "Rezolvare conflict",
