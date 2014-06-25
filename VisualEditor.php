@@ -624,6 +624,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWBetaWelcomeDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js',
+			'modules/ve-mw/ui/dialogs/ve.ui.MWWikitextSwitchConfirmDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js',
@@ -671,6 +672,7 @@ $wgResourceModules += array(
 			'visualeditor-mweditmodesource-title',
 			'visualeditor-mweditmodesource-warning',
 			'visualeditor-mweditmodesource-warning-switch',
+			'visualeditor-mweditmodesource-warning-switch-discard',
 			'visualeditor-mweditmodesource-warning-cancel',
 			'visualeditor-pagemenu-tooltip',
 			'visualeditor-pagetranslationwarning',

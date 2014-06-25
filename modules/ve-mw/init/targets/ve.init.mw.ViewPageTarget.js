@@ -892,25 +892,34 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.editSource = function () {
-	var confirmDialog = this.surface.dialogs.getWindow( 'confirm' ),
-		$documentNode = this.surface.getView().getDocument().getDocumentNode().$element,
+	var $documentNode = this.surface.getView().getDocument().getDocumentNode().$element,
 		target = this;
 
 	$documentNode.css( 'opacity', 0.5 );
 
-	confirmDialog.open( {
-		'prompt': ve.msg( 'visualeditor-mweditmodesource-warning' ),
-		'okLabel': ve.msg( 'visualeditor-mweditmodesource-warning-switch' ),
-		'okFlags': [ 'primary' ],
-		'cancelLabel': ve.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
-		'cancelFlags': []
-	} ).then( function ( closingPromise ) {
-		closingPromise.then( function () {
-			// Get Wikitext from the DOM
-			target.serialize(
-				target.docToSave || ve.dm.converter.getDomFromModel( target.surface.getModel().getDocument() ),
-				ve.bind( target.submitWithSaveFields, target, { 'wpDiff': 1, 'veswitched': 1 } )
-			);
+	this.surface.dialogs.getWindow( 'wikitextswitchconfirm' ).open().then( function ( closingPromise ) {
+		closingPromise.then( function ( result ) {
+			if ( result.action === 'switch' ) {
+				// Get Wikitext from the DOM
+				target.serialize(
+					target.docToSave || ve.dm.converter.getDomFromModel( target.surface.getModel().getDocument() ),
+					ve.bind( target.submitWithSaveFields, target, { 'wpDiff': 1, 'veswitched': 1 } )
+				);
+			} else if ( result.action === 'discard' ) {
+				target.submitting = true;
+				$( '<form method="get" style="display: none;"></form>' ).append(
+					$( '<input>' ).attr( {
+						'name': 'action',
+						'value': 'edit',
+						'type': 'hidden'
+					} ),
+					$( '<input>' ).attr( {
+						'name': 'veswitched',
+						'value': 1,
+						'type': 'hidden'
+					} )
+				).appendTo( 'body' ).submit();
+			}
 		}, function () {
 			// Undo the opacity change
 			$documentNode.css( 'opacity', 1 );
@@ -1081,10 +1090,16 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
+	var viewPageTarget = this;
 	if ( this.isViewPage ) {
 		// Allow instant switching back to view mode, without refresh
 		$( '#ca-view a, #ca-nstab-visualeditor a' )
 			.click( ve.bind( this.onViewTabClick, this ) );
+
+		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
+			viewPageTarget.editSource();
+			e.preventDefault();
+		} );
 	}
 
 	mw.hook( 've.skinTabSetupComplete' ).fire();
