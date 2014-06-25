@@ -37,6 +37,17 @@ OO.inheritClass( ve.ce.MWExtensionNode, ve.ce.LeafNode );
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.GeneratedContentNode );
 
+/* Static properties */
+
+/**
+ * Extension renders visible content when empty
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.ce.MWExtensionNode.static.rendersEmpty = false;
+
 /* Methods */
 
 /** */
@@ -51,16 +62,20 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 			$( xmlDoc.documentElement ).attr( attrs ).text( extsrc )[0]
 		);
 
-	xhr = ve.init.target.constructor.static.apiRequest( {
-		'action': 'visualeditor',
-		'paction': 'parsefragment',
-		'page': mw.config.get( 'wgRelevantPageName' ),
-		'wikitext': wikitext
-	}, { 'type': 'POST' } )
-		.done( ve.bind( this.onParseSuccess, this, deferred ) )
-		.fail( ve.bind( this.onParseError, this, deferred ) );
-
-	return deferred.promise( { abort: xhr.abort } );
+	if ( !this.constructor.static.rendersEmpty && extsrc.trim() !== '' ) {
+		xhr = ve.init.target.constructor.static.apiRequest( {
+			'action': 'visualeditor',
+			'paction': 'parsefragment',
+			'page': mw.config.get( 'wgRelevantPageName' ),
+			'wikitext': wikitext
+		}, { 'type': 'POST' } )
+			.done( ve.bind( this.onParseSuccess, this, deferred ) )
+			.fail( ve.bind( this.onParseError, this, deferred ) );
+		return deferred.promise( { abort: xhr.abort } );
+	} else {
+		deferred.resolve( $( '<span>&nbsp;</span>' ).get() );
+		return deferred.promise();
+	}
 };
 
 /**
