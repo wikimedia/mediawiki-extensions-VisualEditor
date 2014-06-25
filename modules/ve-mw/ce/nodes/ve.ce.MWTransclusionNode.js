@@ -64,7 +64,12 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 		}
 	}
 
-	return words.join( ', ' );
+	return words
+		.map( function ( template ) {
+			var title = mw.Title.newFromText( template );
+			return title ? title.getPrefixedText() : template;
+		} )
+		.join( ', ' );
 };
 
 /* Methods */
