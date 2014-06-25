@@ -1418,7 +1418,7 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
  * @method
  */
 ve.init.mw.Target.prototype.restoreEditSection = function () {
-	if ( this.section !== undefined ) {
+	if ( this.section !== undefined && this.section > 0 ) {
 		var offset, offsetNode, nextNode,
 			target = this,
 			surfaceView = this.surface.getView(),
