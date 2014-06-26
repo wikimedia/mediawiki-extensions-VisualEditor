@@ -5,13 +5,15 @@
 			"George Animal",
 			"Nrowe",
 			"Tynchtyk Chorotegin",
-			"Викиней"
+			"Викиней",
+			"Connexx"
 		]
 	},
 	"tooltip-ca-createsource": "Барактын баштапкы кодун түзүү",
 	"tooltip-ca-editsource": "Барактын баштапкы кодун оңдоо",
 	"tooltip-ca-ve-edit": "Бул баракты ВизуалЭдитордун жардамы менен оңдоо",
 	"visualeditor-beta-label": "бета-версиясы",
+	"visualeditor-ca-editsource": "Булагын оңдоо",
 	"visualeditor-dialog-media-content-section": "Кол тамга",
 	"visualeditor-dialog-media-insert-button": "Медиа-файл коюу",
 	"visualeditor-dialog-media-insert-title": "Медиа-файл коюу",
