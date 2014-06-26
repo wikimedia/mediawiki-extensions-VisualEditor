@@ -127,7 +127,7 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 			titleObj = new mw.Title( title );
 			if ( titleObj.getNamespaceId() === 10 ) {
 				// Template namespace, remove namespace prefix
-				title = titleObj.getNameText();
+				title = titleObj.getMainText();
 			} else {
 				// Other namespace, already has a prefix
 				title = titleObj.getPrefixedText();
