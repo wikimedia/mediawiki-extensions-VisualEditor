@@ -7,7 +7,7 @@
 
 QUnit.module( 've.dm.Transaction' );
 
-// FIXME duplicates test runner; should be using a data provider
+// FIXME: Duplicates test runner; should be using a data provider
 QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 	var i, j, doc2, tx, actualStoreItems, expectedStoreItems, removalOps, doc,
 		complexDoc = ve.dm.mwExample.createExampleDocument( 'complexInternalData' ),
@@ -63,8 +63,11 @@ QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 						'remove': [],
 						'insert': complexDoc.getData( new ve.Range( 0, 4 ) )
 							// Reference gets (unnecessarily) renumbered from auto/0 to auto/1
-							.concat( [ ve.extendObject( true, {}, complexDoc.data.data[4],
-								{ 'attributes': { 'listKey': 'auto/1' } } ) ] )
+							.concat( [
+								ve.extendObject( true, {}, complexDoc.data.data[4],
+									{ 'attributes': { 'listKey': 'auto/1' } }
+								)
+							] )
 							.concat( complexDoc.getData( new ve.Range( 5, 7 ) ) ),
 						'removeMetadata': [],
 						'insertMetadata': complexDoc.getMetadata( new ve.Range( 0, 4 ) )
@@ -133,8 +136,11 @@ QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 						'insert': withReference.slice( 0, 4 )
 							// Renumber listIndex from 0 to 2
 							// Renumber listKey from auto/0 to auto/1
-							.concat( [ ve.extendObject( true, {}, withReference[4],
-								{ 'attributes': { 'listIndex': 2, 'listKey': 'auto/1' } } ) ] )
+							.concat( [
+								ve.extendObject( true, {}, withReference[4],
+									{ 'attributes': { 'listIndex': 2, 'listKey': 'auto/1' } }
+								)
+							] )
 							.concat( withReference.slice( 5, 7 ) )
 					},
 					{ 'type': 'retain', 'length': 1 },

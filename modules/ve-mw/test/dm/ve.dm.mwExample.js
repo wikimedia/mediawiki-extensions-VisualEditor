@@ -665,7 +665,7 @@ ve.dm.mwExample.references = [
 			},
 			'originalMw': '{"name":"ref","body":{"html":"No name 2"},"attrs":{}}',
 			'refGroup': ''
-			},
+		},
 		'htmlAttributes': [ { 'values': {
 			'about': '#mwt11',
 			'class': 'reference',
@@ -748,10 +748,9 @@ ve.dm.mwExample.references = [
 ];
 
 ve.dm.mwExample.complexInternalData = [
-	// Metadata is indented
 	// 0
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- before -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- before -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	{ 'type': 'paragraph' },
 	'F', ['o', [ve.dm.example.bold]], ['o', [ve.dm.example.italic]],
 	// 4
@@ -768,8 +767,8 @@ ve.dm.mwExample.complexInternalData = [
 	{ 'type': '/mwReference' },
 	// 6
 	{ 'type': '/paragraph' },
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- after -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- after -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	// 7
 	{ 'type': 'internalList' },
 	// 8
@@ -778,8 +777,8 @@ ve.dm.mwExample.complexInternalData = [
 	{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
 	'R', ['e', [ve.dm.example.bold]], 'f',
 	// 13
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- reference -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- reference -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	'e', ['r', [ve.dm.example.italic]], ['e', [ve.dm.example.italic]],
 	// 16
 	{ 'type': 'mwReference', 'attributes': {
@@ -800,23 +799,23 @@ ve.dm.mwExample.complexInternalData = [
 	{ 'type': '/internalItem' },
 	// 23
 	{ 'type': 'internalItem' },
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- beginning -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- beginning -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	// 24
 	{ 'type': 'preformatted' },
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- inside -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- inside -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	// 25
 	{ 'type': 'mwEntity', 'attributes': { 'character': '€' } },
 	// 26
 	{ 'type': '/mwEntity' },
 	'2', '5', '0',
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- inside2 -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- inside2 -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	// 30
 	{ 'type': '/preformatted' },
-		{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- end -->' ).get() } },
-		{ 'type': '/alienMeta' },
+	{ 'type': 'alienMeta', 'attributes': { 'domElements': $( '<!-- end -->' ).get() } },
+	{ 'type': '/alienMeta' },
 	// 31
 	{ 'type': '/internalItem' },
 	// 32
@@ -1452,7 +1451,9 @@ ve.dm.mwExample.domToDataCases = {
 								},
 								'computed': {
 									'href': 'http://example.com/#cite_note-bar-1'
-								} } ]
+								}
+							}
+						]
 					}
 				]
 			},

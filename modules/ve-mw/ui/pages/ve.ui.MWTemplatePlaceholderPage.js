@@ -27,29 +27,33 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 	// Properties
 	this.placeholder = placeholder;
+
 	this.addTemplateInput = new ve.ui.MWTitleInputWidget( {
-			'$': this.$, '$overlay': this.$overlay, 'namespace': 10
-		} )
+		'$': this.$, '$overlay': this.$overlay, 'namespace': 10
+	} )
 		.connect( this, {
 			'change': 'onTemplateInputChange',
 			'enter': 'onAddTemplate'
 		} );
+
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'label': ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
-			'flags': ['constructive'],
-			'disabled': true
-		} )
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
+		'flags': ['constructive'],
+		'disabled': true
+	} )
 		.connect( this, { 'click': 'onAddTemplate' } );
+
 	this.removeButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'remove',
-			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-			'flags': ['destructive'],
-			'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
-		} )
+		'$': this.$,
+		'frameless': true,
+		'icon': 'remove',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
+		'flags': ['destructive'],
+		'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
+	} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
+
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-transclusion-placeholder' ),

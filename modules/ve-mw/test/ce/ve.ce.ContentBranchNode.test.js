@@ -12,8 +12,7 @@ QUnit.module( 've.ce.ContentBranchNode' );
 // FIXME runner copypasted from core, use data provider
 QUnit.test( 'getRenderedContents', function ( assert ) {
 	var i, len, doc, $wrapper,
-		cases = [
-		{
+		cases = [ {
 			'msg': 'Annotation spanning text and inline nodes',
 			'data': [
 				{ 'type': 'paragraph' },
@@ -39,8 +38,8 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 				've-ce-mwEntityNode" contenteditable="false">c</span>d<span ' +
 				'class="ve-ce-leafNode ve-ce-generatedContentNode ve-ce-noHighlight ' +
 				've-ce-alienNode ve-ce-alienInlineNode"><tt>e</tt></span></b>'
-		}
-	];
+		} ];
+
 	QUnit.expect( cases.length );
 	for ( i = 0, len = cases.length; i < len; i++ ) {
 		doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( cases[i].data ) );

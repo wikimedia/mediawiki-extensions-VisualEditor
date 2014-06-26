@@ -48,18 +48,21 @@ OO.mixinClass( ve.dm.MWImageModel, OO.EventEmitter );
 
 /**
  * Change of image alignment or of having alignment at all
+ *
  * @event alignmentChange
  * @param {string} Alignment 'left', 'right', 'center' or 'none'
  */
 
 /**
  * Change in size type between default and custom
+ *
  * @event sizeDefaultChange
  * @param {boolean} Image is default size
  */
 
 /**
  * Change in the image type
+ *
  * @event typeChange
  * @param {string} Image type 'thumb', 'frame', 'frameless' or 'none'
  */
@@ -647,7 +650,8 @@ ve.dm.MWImageModel.prototype.resetDefaultDimensions = function () {
 				this.scalable.setDefaultDimensions(
 					this.scalable.getDimensionsFromValue( {
 						'width': this.defaultThumbSize
-				} ) );
+					} )
+				);
 			}
 		} else {
 			// Default is original size

@@ -46,12 +46,12 @@ ve.ui.MWLiveExtensionInspector.static.mwName = null;
  */
 ve.ui.MWLiveExtensionInspector.prototype.getNewMwData = function () {
 	return {
-			'name': this.constructor.static.mwName || this.constructor.static.name,
-			'attrs': {},
-			'body': {
-				'extsrc': ''
-			}
-		};
+		'name': this.constructor.static.mwName || this.constructor.static.name,
+		'attrs': {},
+		'body': {
+			'extsrc': ''
+		}
+	};
 };
 
 /**

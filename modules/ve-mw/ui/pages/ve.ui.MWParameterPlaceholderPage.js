@@ -30,14 +30,16 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	this.template = this.parameter.getTemplate();
 	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, { '$': this.$ } )
 		.connect( this, { 'select': 'onParameterSelect' } );
+
 	this.removeButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'remove',
-			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-			'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
-		} )
+		'$': this.$,
+		'frameless': true,
+		'icon': 'remove',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+		'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
+	} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
+
 	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),

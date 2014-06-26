@@ -84,12 +84,12 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 	var xhr, deferred = $.Deferred();
 
 	xhr = ve.init.target.constructor.static.apiRequest( {
-			'action': 'query',
-			'prop': 'imageinfo',
-			'iiprop': 'url',
-			'iiurlwidth': this.getModel().getAttribute( 'width' ),
-			'iiurlheight': this.getModel().getAttribute( 'height' ),
-			'titles': this.getModel().getFilename()
+		'action': 'query',
+		'prop': 'imageinfo',
+		'iiprop': 'url',
+		'iiurlwidth': this.getModel().getAttribute( 'width' ),
+		'iiurlheight': this.getModel().getAttribute( 'height' ),
+		'titles': this.getModel().getFilename()
 	} )
 		.done( ve.bind( this.onParseSuccess, this, deferred ) )
 		.fail( ve.bind( this.onParseError, this, deferred ) );

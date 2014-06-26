@@ -38,40 +38,44 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$more = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
 	this.valueInput = new OO.ui.TextInputWidget( {
-			'$': this.$,
-			'multiline': true,
-			'autosize': true,
-			'placeholder': this.defaultValue
-		} )
+		'$': this.$,
+		'multiline': true,
+		'autosize': true,
+		'placeholder': this.defaultValue
+	} )
 		.setValue( this.parameter.getValue() )
 		.connect( this, { 'change': 'onValueInputChange' } );
+
 	if ( this.parameter.isRequired() ) {
 		this.valueInput.$input.prop( 'required', true );
 	}
 
 	this.removeButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'remove',
-			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-			'classes': [ 've-ui-mwParameterPage-removeButton' ]
-		} )
+		'$': this.$,
+		'frameless': true,
+		'icon': 'remove',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+		'classes': [ 've-ui-mwParameterPage-removeButton' ]
+	} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
+
 	this.infoButton = new OO.ui.PopupButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'info',
-			'title': ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
-			'classes': [ 've-ui-mwParameterPage-infoButton' ]
-		} );
+		'$': this.$,
+		'frameless': true,
+		'icon': 'info',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
+		'classes': [ 've-ui-mwParameterPage-infoButton' ]
+	} );
+
 	this.addButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'parameter',
-			'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-			'tabIndex': -1
-		} )
+		'$': this.$,
+		'frameless': true,
+		'icon': 'parameter',
+		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		'tabIndex': -1
+	} )
 		.connect( this, { 'click': 'onAddButtonClick' } );
+
 	this.statusIndicator = new OO.ui.IndicatorWidget( {
 		'$': this.$,
 		'classes': [ 've-ui-mwParameterPage-statusIndicator' ]

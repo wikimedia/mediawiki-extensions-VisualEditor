@@ -41,11 +41,11 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	this.events = new ve.init.mw.TargetEvents( this );
 
 	this.modules = [
-			'ext.visualEditor.mwcore',
-			'ext.visualEditor.mwlink',
-			'ext.visualEditor.data',
-			'ext.visualEditor.mwreference'
-		]
+		'ext.visualEditor.mwcore',
+		'ext.visualEditor.mwlink',
+		'ext.visualEditor.data',
+		'ext.visualEditor.mwreference'
+	]
 		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );
 
@@ -964,7 +964,8 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	start = ve.now();
 
 	xhr = this.constructor.static.apiRequest( data );
-	this.loading = xhr.then( function ( data, status, jqxhr ) {
+	this.loading = xhr.then(
+		function ( data, status, jqxhr ) {
 			target.events.track( 'performance.system.domLoad', {
 				'bytes': $.byteLength( jqxhr.responseText ),
 				'duration': ve.now() - start,
@@ -972,7 +973,8 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 				'parsoid': jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
 			} );
 			return jqxhr;
-		} )
+		}
+	)
 		.done( ve.bind( ve.init.mw.Target.onLoad, this ) )
 		.fail( ve.bind( ve.init.mw.Target.onLoadError, this ) )
 		.promise( { 'abort': xhr.abort } );

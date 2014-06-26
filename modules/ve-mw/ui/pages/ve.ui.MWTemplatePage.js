@@ -35,13 +35,13 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.$more = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'remove',
-			'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-			'flags': ['destructive'],
-			'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
-		} )
+		'$': this.$,
+		'frameless': true,
+		'icon': 'remove',
+		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
+		'flags': ['destructive'],
+		'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
+	} )
 		.connect( this, { 'click': 'onRemoveButtonClick' } );
 	this.infoFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
@@ -49,12 +49,12 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		'icon': 'template'
 	} );
 	this.addButton = new OO.ui.ButtonWidget( {
-			'$': this.$,
-			'frameless': true,
-			'icon': 'parameter',
-			'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-			'tabIndex': -1
-		} )
+		'$': this.$,
+		'frameless': true,
+		'icon': 'parameter',
+		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		'tabIndex': -1
+	} )
 		.connect( this, { 'click': 'onAddButtonClick' } );
 
 	// Initialization
