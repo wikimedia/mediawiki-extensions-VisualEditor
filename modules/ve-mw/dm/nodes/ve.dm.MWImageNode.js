@@ -54,8 +54,7 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
 	var originalDimensions, dimensions,
 		scalable = this.getScalable(),
-		width = this.getAttribute( 'width' ),
-		height = this.getAttribute( 'height' );
+		width = this.getAttribute( 'width' );
 
 	// If no type is given, assume we are updating per current type
 	type = type || this.getAttribute( 'type' );
@@ -91,20 +90,9 @@ ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
 		} else {
 			scalable.setEnforcedMax( false );
 		}
-	} else {
-		// Set max to svgMaxSize on the shortest side
-		if ( width < height ) {
-			dimensions = scalable.getDimensionsFromValue( {
-				'width': this.svgMaxSize
-			} );
-		} else {
-			dimensions = scalable.getDimensionsFromValue( {
-				'height': this.svgMaxSize
-			} );
-		}
-		scalable.setMaxDimensions( dimensions );
-		scalable.setEnforcedMax( true );
 	}
+	// TODO: Some day, when svgMaxSize works properly in MediaWiki
+	// we can add it back as max dimension consideration.
 };
 /**
  * Respond to attribute change.
