@@ -82,8 +82,32 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
+	grunt.registerTask( 'git-status', function () {
+		var done = this.async();
+		// Are there unstaged changes?
+		require( 'child_process' ).exec( 'git ls-files --modified', function ( err, stdout, stderr ) {
+			var ret = err || stderr || stdout;
+			if ( ret ) {
+				grunt.log.write( ret );
+				grunt.log.error( 'Unstaged changes.' );
+				done( false );
+			} else {
+				grunt.log.ok( 'No unstaged changes.' );
+				done();
+			}
+		} );
+	} );
+
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
 	grunt.registerTask( 'lint', [ 'jshint', 'jscs', 'csslint', 'banana' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
+	grunt.registerTask( 'test-ci', [ 'git-status' ] );
 	grunt.registerTask( 'default', 'test' );
+
+	if ( process.env.JENKINS_HOME ) {
+		grunt.renameTask( 'test', 'test-internal' );
+		grunt.registerTask( 'test', [ 'test-internal', 'test-ci' ] );
+	} else {
+		grunt.registerTask( 'ci', [ 'test', 'test-ci' ] );
+	}
 };
