@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24"
-	 viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
-<g>
-	<path fill="none" d="M8,19h8c0,0,1,0,1-1V6H8V19z M10,9h5v2h-5V9z M10,12h5v2h-5V12z"/>
-	<path fill="#575757" d="M5,4v17h12c1,0,2-1,2-2V4H5z M17,18c0,1-1,1-1,1H8V6h9V18z"/>
-	<rect x="10" y="9" fill="#575757" width="5" height="2"/>
-	<rect x="10" y="12" fill="#575757" width="5" height="2"/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+	height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<g id="cite-journal" style="opacity:0.75;">
+	<path id="journal" d="M5,4v17h12c1,0,2-1,2-2V4H5z M17,18c0,1-1,1-1,1H8V6h9V18z"/>
+	<rect id="text1" x="10" y="9" width="5" height="2"/>
+	<rect id="text2" x="10" y="12" width="5" height="2"/>
 </g>
 </svg>
