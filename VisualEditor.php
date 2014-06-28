@@ -161,9 +161,6 @@ $wgResourceModules += array(
 			'vector' => array(
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector.css',
-				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector-hd.css' => array(
-					'media' => 'screen and (min-width: 982px)'
-				),
 			),
 			'apex' => array(
 				'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css',
