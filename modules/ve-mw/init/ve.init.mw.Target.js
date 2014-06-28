@@ -53,10 +53,6 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 	this.modulesReady = $.Deferred();
 	this.preparedCacheKeyPromise = null;
 	this.clearState();
-	this.isMobileDevice = (
-		'ontouchstart' in window ||
-			( window.DocumentTouch && document instanceof window.DocumentTouch )
-	);
 };
 
 /* Inheritance */
