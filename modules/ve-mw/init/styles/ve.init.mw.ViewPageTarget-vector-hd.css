@@ -5,6 +5,14 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-init-mw-viewPageTarget-surface {
+	margin: 0.8em -1.5em 0 -1.5em;
+}
+
+.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
+	padding: 0 1.714em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
+}
+
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -1.25em -1.5em 1.5em -1.5em;
 }
