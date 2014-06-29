@@ -33,7 +33,7 @@ QUnit.test( 'handleDelete', function ( assert ) {
 				'expectedData': function ( data ) {
 					data.splice( 5, 2 );
 				},
-				'expectedRange': new ve.Range( 5, 5 ),
+				'expectedRange': new ve.Range( 6 ),
 				'msg': 'Block transclusion is deleted with two keypresses'
 			},
 			{
