@@ -159,10 +159,10 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 			.find( '.ve-ui-mwParameterPage-field > .oo-ui-textInputWidget > textarea' )
 				.attr( 'tabindex', index * 3 + 1 )
 			.end()
-			.find( '.ve-ui-mwParameterPage-infoButton > a' )
+			.find( '.ve-ui-mwParameterPage-infoButton' )
 				.attr( 'tabindex', index * 3 + 2 )
 			.end()
-			.find( '.ve-ui-mwParameterPage-removeButton > a' )
+			.find( '.ve-ui-mwParameterPage-removeButton' )
 				.attr( 'tabindex', index * 3 + 3 );
 	} );
 };
