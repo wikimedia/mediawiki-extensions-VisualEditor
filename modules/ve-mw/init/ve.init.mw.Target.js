@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
+/*global mw,EasyDeflate */
 
 /**
  * Initialization MediaWiki target.
@@ -1022,7 +1022,8 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 	}
 	this.clearPreparedCacheKey();
 
-	html = this.getHtml( doc );
+	html = EasyDeflate.deflate( this.getHtml( doc ) );
+
 	xhr = this.constructor.static.apiRequest( {
 		'action': 'visualeditor',
 		'paction': 'serializeforcache',
@@ -1102,7 +1103,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 			data.cachekey = cachekey;
 		} else {
 			// Getting a cache key failed, fall back to sending the HTML
-			data.html = preparedCacheKey && preparedCacheKey.html || target.getHtml( doc );
+			data.html = preparedCacheKey && preparedCacheKey.html || EasyDeflate.deflate( target.getHtml( doc ) );
 			// If using the cache key fails, we'll come back here with cachekey still set
 			delete data.cachekey;
 		}
