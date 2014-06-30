@@ -89,12 +89,8 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 	var href = name;
 
-	if ( href.charAt( 0 ) !== ':' ) {
-		href = mw.config.get( 'wgFormattedNamespaces' )[10] + ':' + href;
-	}
-
 	// TODO: Do we need to account for the title being invalid?
-	href = new mw.Title( href ).getPrefixedText();
+	href = new mw.Title( href, mw.config.get( 'wgNamespaceIds' ).template ).getPrefixedText();
 
 	return new ve.dm.MWTemplateModel( transclusion, { 'href': href, 'wt': name }, 'user' );
 };

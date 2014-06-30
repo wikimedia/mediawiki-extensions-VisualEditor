@@ -16,7 +16,10 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {number} [namespace] Namespace to prepend to queries not prefixed with ':'
+ * @cfg {number} [namespace] Namespace to prepend to queries
+ * @cfg {boolean} [prefixColon=true] Whether or not to prefix entries outside the
+ *  target namespace (if set) with a colon. Assumed to be true unless
+ *  explicitly set to false.
  */
 ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	// Config intialization
@@ -30,6 +33,7 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 
 	// Properties
 	this.namespace = config.namespace || null;
+	this.prefixColon = config.prefixColon !== false;
 
 	// Events
 	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
@@ -69,8 +73,8 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 	var value = this.value;
 
 	// Prefix with default namespace name
-	if ( this.namespace !== null && value.charAt( 0 ) !== ':' ) {
-		value = mw.config.get( 'wgFormattedNamespaces' )[this.namespace] + ':' + value;
+	if ( this.namespace !== null && mw.Title.newFromText( value, this.namespace ) ) {
+		value = mw.Title.newFromText( value, this.namespace ).getPrefixedText();
 	}
 
 	// Dont send leading ':' to open search
@@ -111,7 +115,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 	if ( matchingPages && matchingPages.length ) {
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
 			title = new mw.Title( matchingPages[i] );
-			if ( this.namespace !== null ) {
+			if ( this.namespace !== null && ( this.prefixColon || title.namespace === 0 ) ) {
 				value = title.getNamespaceId() === this.namespace ?
 					title.getMainText() : ':' + title.getPrefixedText();
 			} else {
