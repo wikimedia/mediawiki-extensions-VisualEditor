@@ -25,9 +25,6 @@ ve.ce.MWExtensionNode = function VeCeMWExtensionNode() {
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwExtensionNode' );
 };
 
 /* Inheritance */
