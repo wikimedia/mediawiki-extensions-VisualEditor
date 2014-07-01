@@ -86,6 +86,47 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 	}
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
+	var target = this.targetInput.getValue(),
+		inserting = this.initialSelection.isCollapsed();
+
+	// If this is a new external link, insert an autonumbered link instead of a link annotation (in
+	// #getAnnotation we have the same condition to skip the annotating). Otherwise call parent method
+	// to figure out the text to insert and annotate.
+	if ( inserting && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
+		return [
+			{
+				type: 'link/mwNumberedExternal',
+				attributes: {
+					href: target
+				}
+			},
+			{ type: '/link/mwNumberedExternal' }
+		];
+	} else {
+		return ve.ui.MWLinkAnnotationInspector.super.prototype.getInsertionData.call( this );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.getAnnotation = function () {
+	var target = this.targetInput.getValue(),
+		inserting = this.initialSelection.isCollapsed();
+
+	// If this is a new external link, we've just inserted an autonumbered link node (see
+	// #getInsertionData). Do not place any annotations of top of it.
+	if ( inserting && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
+		return null;
+	} else {
+		return ve.ui.MWLinkAnnotationInspector.super.prototype.getAnnotation.call( this );
+	}
+};
+
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWLinkAnnotationInspector );
