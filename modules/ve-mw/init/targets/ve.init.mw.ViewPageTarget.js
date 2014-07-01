@@ -1097,8 +1097,10 @@ ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
 			.click( ve.bind( this.onViewTabClick, this ) );
 
 		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
-			viewPageTarget.editSource();
-			e.preventDefault();
+			if ( viewPageTarget.surface.getModel().hasBeenModified() ) {
+				viewPageTarget.editSource();
+				e.preventDefault();
+			}
 		} );
 	}
 
