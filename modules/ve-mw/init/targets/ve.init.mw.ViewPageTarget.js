@@ -71,6 +71,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		'ext.visualEditor.mwgallery',
 		'ext.visualEditor.mwimage',
 		'ext.visualEditor.mwmeta',
+		'ext.visualEditor.mwreference',
 		'ext.visualEditor.mwtransclusion'
 	);
 

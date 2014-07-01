@@ -1030,7 +1030,7 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.mwreference' => $wgVisualEditorResourceTemplate + array(
+	'ext.visualEditor.mwreference.core' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'modules/ve-mw/dm/models/ve.dm.MWReferenceModel.js',
 
@@ -1039,7 +1039,24 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ce/nodes/ve.ce.MWReferenceListNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWReferenceNode.js',
+		),
+		'styles' => array(
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceListNode.css',
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceNode.css',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.mwcore',
+		),
+		'messages' => array(
+			'visualeditor-referencelist-isempty',
+			'visualeditor-referencelist-isempty-default',
+			'visualeditor-referencelist-missingref',
+		),
+		'targets' => array( 'desktop', 'mobile' )
+	),
 
+	'ext.visualEditor.mwreference' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceResultWidget.js',
 
@@ -1051,13 +1068,11 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceListNode.css',
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceNode.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',
 		),
 		'dependencies' => array(
-			'ext.visualEditor.mwcore',
+			'ext.visualEditor.mwreference.core',
 			'ext.visualEditor.mwtransclusion',
 		),
 		'messages' => array(
@@ -1075,19 +1090,26 @@ $wgResourceModules += array(
 			'visualeditor-dialogbutton-reference-tooltip',
 			'visualeditor-dialogbutton-referencelist-tooltip',
 			'visualeditor-reference-input-placeholder',
-			'visualeditor-referencelist-isempty',
-			'visualeditor-referencelist-isempty-default',
-			'visualeditor-referencelist-missingref',
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	'ext.visualEditor.mwtransclusion.core' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js',
+
+			'modules/ve-mw/dm/metaitems/ve.dm.MWTransclusionMetaItem.js',
+
+			'modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.mwcore',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
 	'ext.visualEditor.mwtransclusion' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
-			'modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js',
-
-			'modules/ve-mw/dm/metaitems/ve.dm.MWTransclusionMetaItem.js',
-
 			'modules/ve-mw/dm/models/ve.dm.MWTransclusionModel.js',
 			'modules/ve-mw/dm/models/ve.dm.MWTransclusionPartModel.js',
 			'modules/ve-mw/dm/models/ve.dm.MWTransclusionContentModel.js',
@@ -1095,8 +1117,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/dm/models/ve.dm.MWTemplateModel.js',
 			'modules/ve-mw/dm/models/ve.dm.MWTemplatePlaceholderModel.js',
 			'modules/ve-mw/dm/models/ve.dm.MWParameterModel.js',
-
-			'modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWParameterSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWParameterResultWidget.js',
@@ -1133,7 +1153,7 @@ $wgResourceModules += array(
 			),
 		),
 		'dependencies' => array(
-			'ext.visualEditor.mwcore',
+			'ext.visualEditor.mwtransclusion.core',
 			'mediawiki.jqueryMsg',
 		),
 		'messages' => array(

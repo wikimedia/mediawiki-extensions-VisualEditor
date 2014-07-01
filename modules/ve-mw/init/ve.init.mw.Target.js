@@ -44,7 +44,8 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 		'ext.visualEditor.mwcore',
 		'ext.visualEditor.mwlink',
 		'ext.visualEditor.data',
-		'ext.visualEditor.mwreference'
+		'ext.visualEditor.mwreference.core',
+		'ext.visualEditor.mwtransclusion.core'
 	]
 		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );
