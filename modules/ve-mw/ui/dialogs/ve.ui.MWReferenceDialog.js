@@ -58,18 +58,18 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'icon': 'text-style',
 		'indicator': 'down',
 		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		'include': [ { 'group': 'textStyle' }, 'clear' ],
+		'include': [ { 'group': 'textStyle' }, 'language', 'clear' ],
 		'promote': [ 'bold', 'italic' ],
-		'demote': [ 'strikethrough', 'code', 'underline', 'clear' ]
+		'demote': [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
 	// Link
 	{ 'include': [ 'link' ] },
-	// Cite
+	// Cite but not reference
 	{
 		'type': 'list',
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
 		'indicator': 'down',
-		'include': [ { 'group': 'cite-transclusion' } ]
+		'include': [ { 'group': 'cite-transclusion' }/*, 'reference' ], 'demote': [ 'reference' */]
 	},
 	// No structure
 	/* {
@@ -91,8 +91,8 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 			'referenceList',
 			'gallery'
 		],
-		'promote': [ 'mediaInsert' ],
-		'demote': [ 'language', 'specialcharacter' ]
+		'promote': [ 'mediaInsert', 'transclusion' ],
+		'demote': [ 'specialcharacter' ]
 	}
 ];
 

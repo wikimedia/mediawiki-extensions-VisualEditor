@@ -194,9 +194,9 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'icon': 'text-style',
 		'indicator': 'down',
 		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		'include': [ { 'group': 'textStyle' }, 'clear' ],
+		'include': [ { 'group': 'textStyle' }, 'language', 'clear' ],
 		'promote': [ 'bold', 'italic' ],
-		'demote': [ 'strikethrough', 'code', 'underline', 'clear' ]
+		'demote': [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
 	// Link
 	{ 'include': [ 'link' ] },
@@ -205,7 +205,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'type': 'list',
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
 		'indicator': 'down',
-		'include': [ { 'group': 'cite' } ]
+		'include': [ { 'group': 'cite' }, 'reference' ],
+		'demote': [ 'reference' ]
 	},
 	// Structure
 	{
@@ -220,8 +221,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		'indicator': 'down',
 		'include': '*',
-		'promote': [ 'reference', 'mediaInsert' ],
-		'demote': [ 'language', 'specialcharacter' ]
+		'promote': [ 'mediaInsert', 'transclusion' ],
+		'demote': [ 'specialcharacter' ]
 	}
 ];
 
