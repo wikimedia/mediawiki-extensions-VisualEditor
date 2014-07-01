@@ -43,7 +43,7 @@ ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
 ve.ce.MWGalleryNode.prototype.onSetup = function () {
 	ve.ce.MWGalleryNode.super.prototype.onSetup.apply( this, arguments );
 	// The ul.gallery is 100% width, so don't give it a highlight
-	this.$element.find( '.gallery' ).addClass( 've-ce-noHighlight' );
+	this.$element.find( '.gallery' ).addBack( '.gallery' ).addClass( 've-ce-noHighlight' );
 };
 
 /* Registration */
