@@ -880,6 +880,7 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
 			$( '<p>' ).append( ve.init.platform.getParsedMessage( 'missingsummary' ) ),
 			{ wrap: false }
 		);
+		this.saveDialog.popPending();
 	} else {
 		this.save( this.docToSave, saveOptions );
 		this.saveDeferred = saveDeferred;
