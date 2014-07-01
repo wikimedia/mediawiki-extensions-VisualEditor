@@ -22,7 +22,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual: Comprobar]]",
 	"tag-visualeditor-needcheck-description": "Edición realizada con el [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]] en la que el sistema detectó posibles cambios no intencionales.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Switched]]",
-	"tag-visualeditor-switched-description": "Usuario comenzó a editar utilizando el Editor Visual y luego cambió al editor en modo fuente.",
+	"tag-visualeditor-switched-description": "El usuario comenzó a editar utilizando el Editor visual y luego cambió al editor de wikitexto.",
 	"visualeditor-feedback-link": "Wikipedia:Editor visual/Comentar",
 	"visualeditor-feedback-tool": "Comentar",
 	"visualeditor-help-label": "Leer la guía de usuario",
