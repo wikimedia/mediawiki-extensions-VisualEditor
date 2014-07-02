@@ -25,6 +25,7 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 	this.imageModel = null;
 	this.store = null;
 	this.fileRepoPromise = null;
+	this.pageTitle = '';
 
 	this.$element.addClass( 've-ui-mwMediaDialog' );
 };
@@ -332,7 +333,11 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		'$': this.$,
 		'label': ve.msg( 'visualeditor-dialog-media-change-image' )
 	} );
-	this.$foot.append( this.changeImageButton.$element );
+	this.goBackButton = new OO.ui.ButtonWidget( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-dialog-media-goback' )
+	} );
+	this.$foot.append( [ this.changeImageButton.$element, this.goBackButton.$element ] );
 
 	// Events
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
@@ -341,6 +346,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.typeInput.connect( this, { 'choose': 'onTypeInputChoose' } );
 	this.search.connect( this, { 'select': 'onSearchSelect' } );
 	this.changeImageButton.connect( this, { 'click': 'onChangeImageButtonClick' } );
+	this.goBackButton.connect( this, { 'click': 'onGoBackButtonClick' } );
 
 	// Panel classes
 	this.mediaSearchPanel.$element.addClass( 've-ui-mwMediaDialog-panel-search' );
@@ -403,6 +409,7 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 
 		newNode = ve.dm.MWImageModel.static.createImageNode( attrs, nodeType );
 		this.setImageModel( newNode );
+		this.setChanged();
 		this.switchPanels( 'edit' );
 	}
 };
@@ -412,6 +419,13 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
  */
 ve.ui.MWMediaDialog.prototype.onChangeImageButtonClick = function () {
 	this.switchPanels( 'search' );
+};
+
+/**
+ * Respond to go back button click
+ */
+ve.ui.MWMediaDialog.prototype.onGoBackButtonClick = function () {
+	this.switchPanels( 'edit' );
 };
 
 /**
@@ -428,6 +442,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
 	this.positionInput.selectItem( item );
 
 	this.positionCheckbox.setValue( alignment !== 'none' );
+	this.setChanged();
 };
 
 /**
@@ -447,6 +462,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
 	this.borderCheckbox.setValue(
 		this.imageModel.isBorderable() && this.imageModel.hasBorder()
 	);
+	this.setChanged();
 };
 
 /**
@@ -459,6 +475,7 @@ ve.ui.MWMediaDialog.prototype.onPositionCheckboxChange = function ( checked ) {
 		currentModelAlignment = this.imageModel.getAlignment();
 
 	this.positionInput.setDisabled( !checked );
+	this.setChanged();
 	// Only update the model if the current value is different than that
 	// of the image model
 	if (
@@ -490,6 +507,7 @@ ve.ui.MWMediaDialog.prototype.onBorderCheckboxChange = function ( checked ) {
 	if ( this.imageModel.hasBorder() !== checked ) {
 		// Update the image model
 		this.imageModel.toggleBorder( checked );
+		this.setChanged();
 	}
 };
 
@@ -504,6 +522,7 @@ ve.ui.MWMediaDialog.prototype.onPositionInputChoose = function ( item ) {
 	// Only update if the value is different than the model
 	if ( this.imageModel.getAlignment() !== position ) {
 		this.imageModel.setAlignment( position );
+		this.setChanged();
 	}
 };
 
@@ -518,10 +537,20 @@ ve.ui.MWMediaDialog.prototype.onTypeInputChoose = function ( item ) {
 	// Only update if the value is different than the model
 	if ( this.imageModel.getType() !== type ) {
 		this.imageModel.setType( type );
+		this.setChanged();
 	}
 
 	// If type is 'frame', disable the size input widget completely
 	this.sizeWidget.setDisabled( type === 'frame' );
+};
+
+/**
+ * When changes occur, enable the apply button.
+ */
+ve.ui.MWMediaDialog.prototype.setChanged = function () {
+	// TODO: Set up a better and deeper test of whether the new
+	// image parameters are different than the original image
+	this.applyButton.setDisabled( false );
 };
 
 /**
@@ -558,12 +587,60 @@ ve.ui.MWMediaDialog.prototype.getFileRepos = function () {
 ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var pageTitle = mw.config.get( 'wgTitle' ),
+				namespace = mw.config.get( 'wgNamespaceNumber' ),
+				namespacesWithSubpages = mw.config.get( 'wgVisualEditor' ).namespacesWithSubpages;
+
+			// Read the page title
+			if ( namespacesWithSubpages[ namespace ] ) {
+				// If we are in a namespace that allows for subpages, strip the entire
+				// title except for the part after the last /
+				pageTitle = pageTitle.substr( pageTitle.lastIndexOf( '/' ) + 1 );
+			}
+			this.pageTitle = pageTitle;
+
+			// Properties
+			this.mediaNode = this.getSelectedNode();
+			this.setImageModel( this.mediaNode );
+
+			this.resetCaption();
+
+			this.switchPanels( this.mediaNode ? 'edit' : 'search' );
+
+			this.applyButton.setDisabled( true );
+			// Initialization
+			this.captionFieldset.$element.append( this.captionSurface.$element );
+			this.captionSurface.initialize();
+
+		}, this );
+};
+
+/**
+ * Switch between the edit and insert/search panels
+ * @param {string} panel Panel name
+ */
+ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
+	switch ( panel ) {
+		case 'edit':
+			// Set the edit panel
+			this.panels.setItem( this.bookletLayout );
+			// Focus the general settings page
+			this.bookletLayout.setPage( 'general' );
+			// Hide/show buttons
+			this.changeImageButton.$element.show();
+			this.goBackButton.$element.hide();
+			this.applyButton.$element.show();
+			// Hide/show the panels
+			this.bookletLayout.$element.show();
+			this.mediaSearchPanel.$element.hide();
+			break;
+		default:
+		case 'search':
 			// Show a spinner while we check for file repos.
 			// this will only be done once per session.
-			//
-			// This is in .setup rather than .initialize so that
-			// the user has visual indication (spinner) during the
-			// ajax request
+			// The filerepo promise will be sent to the API
+			// only once per session so this will be resolved
+			// every time the search panel reloads
 			this.$spinner.show();
 			this.search.$element.hide();
 
@@ -575,6 +652,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				this.$spinner.hide();
 				// Show the search and query the media sources
 				this.search.$element.show();
+				this.search.query.setValue( this.pageTitle );
 				this.search.queryMediaSources();
 				// Initialization
 				// This must be done only after there are proper
@@ -584,36 +662,13 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				this.search.getResults().highlightItem();
 			}, this ) );
 
-			// Properties
-			this.mediaNode = this.getSelectedNode();
-			this.setImageModel( this.mediaNode );
-
-			this.resetCaption();
-
-			this.switchPanels( this.mediaNode ? 'edit' : 'search' );
-
-			// Initialization
-			this.captionFieldset.$element.append( this.captionSurface.$element );
-			this.captionSurface.initialize();
-		}, this );
-};
-
-/**
- * Switch between the edit and insert/search panels
- * @param {string} panel Panel name
- */
-ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
-	switch ( panel ) {
-		case 'edit':
-			this.panels.setItem( this.bookletLayout );
-			this.changeImageButton.setDisabled( false );
-			this.bookletLayout.$element.show();
-			this.mediaSearchPanel.$element.hide();
-			break;
-		default:
-		case 'search':
+			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
-			this.changeImageButton.setDisabled( true );
+			// Hide/show buttons
+			this.changeImageButton.$element.hide();
+			this.goBackButton.$element.show();
+			this.applyButton.$element.hide();
+			// Hide/show the panels
 			this.bookletLayout.$element.hide();
 			this.mediaSearchPanel.$element.show();
 			break;
@@ -628,7 +683,6 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 	var dir;
 
 	if ( !node ) {
-		this.applyButton.setDisabled( true );
 		return;
 	}
 
@@ -648,6 +702,14 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 		'alignmentChange': 'onImageModelAlignmentChange',
 		'typeChange': 'onImageModelTypeChange'
 	} );
+
+	// Check if there are changes to apply
+	if (
+		!this.mediaNode ||
+		this.imageModel.getMediaNode() !== this.mediaNode
+	) {
+		this.setChanged();
+	}
 
 	// Set up
 
@@ -743,8 +805,10 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 				this.captionSurface.getSurface(),
 				this.wikitextWarning
 			);
+			this.setChanged();
 		}
 	} );
+
 };
 
 /**
