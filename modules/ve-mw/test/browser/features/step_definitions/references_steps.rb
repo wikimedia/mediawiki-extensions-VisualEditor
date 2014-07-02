@@ -12,8 +12,8 @@ Given(/^I can see the References User Interface$/) do
   on(VisualEditorPage).title.should match "Reference"
 end
 
-When(/^I click Insert reference$/) do
-  on(VisualEditorPage).insert_reference_element.when_present.click
+When(/^I click Insert references list$/) do
+  on(VisualEditorPage).insert_references_list_element.when_present.click
 end
 
 When(/^I click Edit for VisualEditor$/) do
