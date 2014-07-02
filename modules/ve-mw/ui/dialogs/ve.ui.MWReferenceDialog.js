@@ -91,7 +91,7 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 			'referenceList',
 			'gallery'
 		],
-		'promote': [ 'mediaInsert', 'transclusion' ],
+		'promote': [ 'media', 'transclusion' ],
 		'demote': [ 'specialcharacter' ]
 	}
 ];

@@ -222,7 +222,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		'indicator': 'down',
 		'include': '*',
-		'promote': [ 'mediaInsert', 'transclusion' ],
+		'promote': [ 'media', 'transclusion' ],
 		'demote': [ 'specialcharacter' ]
 	}
 ];

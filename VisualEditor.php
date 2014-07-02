@@ -844,14 +844,11 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWMediaSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWMediaResultWidget.js',
 
-			'modules/ve-mw/ui/dialogs/ve.ui.MWMediaInsertDialog.js',
-			'modules/ve-mw/ui/dialogs/ve.ui.MWMediaEditDialog.js',
-
+			'modules/ve-mw/ui/dialogs/ve.ui.MWMediaDialog.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWMediaDialogTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.css',
-			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaInsertDialog.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaResultWidget.css',
 		),
 		'dependencies' => array(
@@ -859,6 +856,7 @@ $wgResourceModules += array(
 		),
 		'messages' => array(
 			'visualeditor-dialog-media-alttext-section',
+			'visualeditor-dialog-media-change-image',
 			'visualeditor-dialog-media-content-section',
 			'visualeditor-dialog-media-insert-button',
 			'visualeditor-dialog-media-insert-title',

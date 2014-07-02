@@ -14,10 +14,7 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'gallery', 'window', 'open', 'gallery' )
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'mediaEdit', 'window', 'open', 'mediaEdit' )
-);
-ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'mediaInsert', 'window', 'open', 'mediaInsert' )
+	new ve.ui.Command( 'media', 'window', 'open', 'media' )
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'referenceList', 'window', 'open', 'referenceList' )

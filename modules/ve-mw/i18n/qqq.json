@@ -60,6 +60,7 @@
 	"visualeditor-dialog-media-page-advanced": "Label for the advanced settings page in the media edit dialog.\n{{Identical|Advanced settings}}",
 	"visualeditor-dialog-media-page-general": "Label for the general settings page in the media edit dialog.\n{{Identical|General settings}}",
 	"visualeditor-dialog-media-position-center": "Label for the image position option for aligning to the center.\n{{Related|Visualeditor-dialog-media-position}}\n{{Identical|Center}}",
+	"visualeditor-dialog-media-change-image": "Label for the button to change image in the media edit dialog.",
 	"visualeditor-dialog-media-position-checkbox": "Label for the position checkbox, denoting whether to use a set float position.",
 	"visualeditor-dialog-media-position-left": "Label for the image position option for aligning to the left.\n{{Related|Visualeditor-dialog-media-position}}\n{{Identical|Left}}",
 	"visualeditor-dialog-media-position-none": "Label for the image position option for no alignment.\n{{Related|Visualeditor-dialog-media-position}}\n{{Identical|None}}",
