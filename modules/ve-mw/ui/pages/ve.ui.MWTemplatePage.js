@@ -19,7 +19,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var title;
+	var title, titleText;
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -63,11 +63,18 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		this.$description.text( this.spec.getDescription() );
 	} else {
 		title = new mw.Title( this.template.getTitle() );
+		if ( title.getNamespaceId() === 10 ) {
+			titleText = title.getMainText();
+		} else if ( title.getNamespaceId() === 0 ) {
+			titleText = ':' + title.getPrefixedText();
+		} else {
+			titleText = title.getPrefixedText();
+		}
 		this.$description
 			.addClass( 've-ui-mwTemplatePage-description-missing' )
 			.append( ve.msg(
 				'visualeditor-dialog-transclusion-no-template-description',
-				title.getMainText(),
+				titleText,
 				ve.getHtmlAttributes( { 'target': '_blank', 'href': title.getUrl() } ),
 				mw.user
 			) );
