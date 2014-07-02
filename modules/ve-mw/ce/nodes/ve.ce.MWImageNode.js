@@ -63,7 +63,7 @@ ve.ce.MWImageNode.static.primaryCommandName = 'media';
  */
 ve.ce.MWImageNode.static.getDescription = function ( model ) {
 	var title = new mw.Title( model.getFilename() );
-	return title.getMain();
+	return title.getMainText();
 };
 
 /* Methods */
