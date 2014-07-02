@@ -10,10 +10,6 @@ Given(/^I can see the Link User Inteface$/) do
   end
 end
 
-When(/^I click the blue text$/) do
-  on(VisualEditorPage).linksuggestion_element.when_present.click
-end
-
 When(/^I click < to close Link User Interface$/) do
   on(VisualEditorPage).leftarrowclose_element.when_present.click
 end
@@ -27,10 +23,6 @@ Then(/^an external link appears in the diff view$/) do
   end
 end
 
-When(/^I click the blue text for Matching Page$/) do
-  on(VisualEditorPage).internal_linksuggestion_element.when_present.click
-end
-
 Then(/^an internal link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
@@ -38,10 +30,6 @@ Then(/^an internal link appears in the diff view$/) do
     end
     page.links_diff_view.should match Regexp.escape("[[Main Page|Links]]")
   end
-end
-
-When(/^I click the blue text for New Page$/) do
-  on(VisualEditorPage).newpage_linksuggestion_element.when_present.click
 end
 
 Then(/^a non\-existing link appears in the diff view$/) do

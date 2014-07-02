@@ -15,12 +15,9 @@ class VisualEditorPage
   span(:increase_indentation, class: "oo-ui-iconedElement-icon oo-ui-icon-indent-list")
   span(:insert_menu, text: "Insert")
   div(:insert_references, class: "oo-ui-window-title")
-  span(:internal_linksuggestion, text: "Main Page")
   div(:ip_warning, class: "ve-ui-mwNoticesPopupTool-item")
-  span(:linksuggestion, text: "http://www.example.com")
   span(:looks_good, class: "oo-ui-labeledElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
-  span(:newpage_linksuggestion, text: "DoesNotExist")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
   div(:page_text, id: "mw-content-text")
   div(:page_text_after_save, class: "ve-ce-documentNode mw-content-ltr ve-ce-branchNode noime")
@@ -71,7 +68,7 @@ class VisualEditorPage
     text_field(:link_textfield, index: 0, frame: frame)
     span(:another_save_page, class: "oo-ui-labeledElement-label", text: "Save page", frame: frame)
     div(:options_page_title, class: "oo-ui-window-title", text: "Options", frame: frame)
-    div(:ve_link_ui, class: "oo-ui-window-title", frame: frame)
+    div(:ve_link_ui, class: "oo-ui-window-head", frame: frame)
   end
 
   # not having beta warning makes iframes off by one

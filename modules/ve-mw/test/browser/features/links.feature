@@ -9,7 +9,6 @@ Feature: VisualEditor Links
 
   Scenario: Enter external link
   When I enter http://www.example.com into link Content box
-    And I click the blue text
     And I click < to close Link User Interface
     And I click Save page
     And I click Links Review your changes
@@ -17,7 +16,6 @@ Feature: VisualEditor Links
 
   Scenario: Enter internal link
   When I enter Main Page into link Content box
-    And I click the blue text for Matching Page
     And I click < to close Link User Interface
     And I click Save page
     And I click Links Review your changes
@@ -25,8 +23,7 @@ Feature: VisualEditor Links
 
   Scenario: Enter non-existing link
     When I enter DoesNotExist into link Content box
-    And I click the blue text for New Page
     And I click < to close Link User Interface
     And I click Save page
     And I click Links Review your changes
-    Then a non-existing link appears in the diff view
+  Then a non-existing link appears in the diff view
