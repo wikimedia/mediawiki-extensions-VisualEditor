@@ -44,25 +44,25 @@
 }
 
 /* @noflip */
-.ve-ui-dir-block-rtl .oo-ui-icon-parameter {
+.oo-ui-rtl .oo-ui-icon-parameter {
 	/* @embed */
 	background-image: url(images/icons/parameter-rtl.svg);
 }
 
 /* @noflip */
-.ve-ui-dir-block-ltr .oo-ui-icon-parameter {
+.oo-ui-ltr .oo-ui-icon-parameter {
 	/* @embed */
 	background-image: url(images/icons/parameter-ltr.svg);
 }
 
 /* @noflip */
-.ve-ui-dir-block-rtl .oo-ui-icon-parameter-set {
+.oo-ui-rtl .oo-ui-icon-parameter-set {
 	/* @embed */
 	background-image: url(images/icons/parameter-set-rtl.svg);
 }
 
 /* @noflip */
-.ve-ui-dir-block-ltr .oo-ui-icon-parameter-set {
+.oo-ui-ltr .oo-ui-icon-parameter-set {
 	/* @embed */
 	background-image: url(images/icons/parameter-set-ltr.svg);
 }
