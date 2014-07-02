@@ -9,7 +9,8 @@ Feature: VisualEditor Media Interface
     Given I click Media
       And I enter <search_term> into media Search box
       And I select an Image
-    When I click Save page
+    When I click Apply changes
+      And I click Save page
       And I click Links Review your changes
     Then <expected_markup_text> should appear in the media diff view
       And I can click the X on the media save box

@@ -5,13 +5,17 @@ When(/^I click Media$/) do
   end
 end
 
+When(/^I click Apply changes$/) do
+  on(VisualEditorPage).media_apply_changes_element.when_present.click
+end
+
 When(/^I enter (.+) into media Search box$/) do |content|
   on(VisualEditorPage).media_search_element.when_present.send_keys(content)
 end
 
 When(/^I select an Image$/) do
   on(VisualEditorPage).media_select_element.when_present.click
-end
+  end
 
 Then(/^(.+) should appear in the media diff view$/) do |headings_string|
   on(VisualEditorPage) do |page|
