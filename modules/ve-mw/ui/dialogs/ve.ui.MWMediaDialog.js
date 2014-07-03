@@ -630,6 +630,10 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			this.changeImageButton.$element.show();
 			this.goBackButton.$element.hide();
 			this.applyButton.$element.show();
+			// Show the foot in case it was hidden before
+			this.$foot.show();
+			// HACK: OO.ui.Dialog needs an API for this
+			this.frame.$content.removeClass( 'oo-ui-dialog-content-footless' );
 			// Hide/show the panels
 			this.bookletLayout.$element.show();
 			this.mediaSearchPanel.$element.hide();
@@ -666,8 +670,13 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			this.panels.setItem( this.mediaSearchPanel );
 			// Hide/show buttons
 			this.changeImageButton.$element.hide();
-			this.goBackButton.$element.show();
 			this.applyButton.$element.hide();
+			// In insertion mode, hide the foot; in non-insertion mode, show "Go back"
+			this.goBackButton.$element.toggle( !!this.imageModel );
+			this.$foot.toggle( !!this.imageModel );
+			// HACK: OO.ui.Dialog needs an API for this
+			this.frame.$content.toggleClass( 'oo-ui-dialog-content-footless', !this.imageModel );
+
 			// Hide/show the panels
 			this.bookletLayout.$element.hide();
 			this.mediaSearchPanel.$element.show();
