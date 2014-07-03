@@ -88,6 +88,22 @@
 }
 
 /* @noflip */
+.ve-ui-dir-block-rtl .oo-ui-icon-reference-existing,
+/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-reference-existing,
+/* HACK */ .oo-ui-rtl .oo-ui-icon-reference-existing {
+	/* @embed */
+	background-image: url(images/icons/reference-existing-rtl.svg);
+}
+
+/* @noflip */
+.ve-ui-dir-block-ltr .oo-ui-icon-reference-existing,
+/* HACK */ .ve-ui-surface-dir-ltr .oo-ui-icon-reference-existing,
+/* HACK */ .oo-ui-ltr .oo-ui-icon-reference-existing {
+	/* @embed */
+	background-image: url(images/icons/reference-existing-ltr.svg);
+}
+
+/* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-references,
 /* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-references,
 /* HACK */ .oo-ui-rtl .oo-ui-icon-references {

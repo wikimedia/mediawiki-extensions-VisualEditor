@@ -55,7 +55,7 @@ ve.ui.MWReferenceDialog.static.actions = [
 	{
 		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		'flags': 'safe',
-		'modes': [ 'insert', 'edit' ]
+		'modes': [ 'insert', 'edit', 'insert-select' ]
 	},
 	{
 		'action': 'select',
@@ -101,7 +101,8 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		'type': 'list',
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
 		'indicator': 'down',
-		'include': [ { 'group': 'cite-transclusion' }/*, 'reference' ], 'demote': [ 'reference' */]
+		'include': [ { 'group': 'cite-transclusion' }/*, 'reference', 'reference/existing'*/ ]
+		/*'demote': [ 'reference', 'reference/existing' ]*/
 	},
 	// No structure
 	/* {
@@ -315,9 +316,14 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 
 /**
  * Switches dialog to use existing reference mode
+ *
+ * @param {string} [action='select'] Symbolic name of action, either 'select' or 'insert-select'
  */
-ve.ui.MWReferenceDialog.prototype.useExistingReference = function () {
-	this.actions.setMode( 'select' );
+ve.ui.MWReferenceDialog.prototype.useExistingReference = function ( action ) {
+	action = action || 'select';
+	if ( action === 'insert-select' || action === 'select' ) {
+		this.actions.setMode( action );
+	}
 	this.panels.setItem( this.searchPanel );
 	this.search.getQuery().focus().select();
 };
@@ -351,8 +357,8 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
 		this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 		this.panels.setItem( this.editPanel );
 		this.editPanel.$element.find( '.ve-ce-documentNode' ).focus();
-	} else if ( action === 'select' ) {
-		this.useExistingReference();
+	} else if ( action === 'select' || action === 'insert-select' ) {
+		this.useExistingReference( action );
 	}
 	return ve.ui.MWReferenceDialog.super.prototype.getActionProcess.call( this, action );
 };
@@ -380,7 +386,7 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 			this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
 
 			if ( data.useExisting ) {
-				this.useExistingReference();
+				this.useExistingReference( 'insert-select' );
 			}
 
 			// If we're using an existing reference, start off disabled

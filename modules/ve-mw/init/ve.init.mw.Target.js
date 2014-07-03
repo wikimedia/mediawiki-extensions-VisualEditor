@@ -212,8 +212,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 		'type': 'list',
 		'label': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
 		'indicator': 'down',
-		'include': [ { 'group': 'cite' }, 'reference' ],
-		'demote': [ 'reference' ]
+		'include': [ { 'group': 'cite' }, 'reference', 'reference/existing' ],
+		'demote': [ 'reference', 'reference/existing' ]
 	},
 	// Structure
 	{

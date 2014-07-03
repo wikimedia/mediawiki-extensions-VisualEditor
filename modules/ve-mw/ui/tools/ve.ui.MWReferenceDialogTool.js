@@ -45,7 +45,7 @@ ve.ui.MWUseExistingReferenceDialogTool.static.name = 'reference/existing';
 ve.ui.MWUseExistingReferenceDialogTool.static.group = 'object';
 ve.ui.MWUseExistingReferenceDialogTool.static.icon = 'reference-existing';
 ve.ui.MWUseExistingReferenceDialogTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-dialog-reference-useexisting-label' );
+	OO.ui.deferMsg( 'visualeditor-dialog-reference-useexisting-tool' );
 ve.ui.MWUseExistingReferenceDialogTool.static.modelClasses = [];
 ve.ui.MWUseExistingReferenceDialogTool.static.commandName = 'reference/existing';
 ve.ui.MWUseExistingReferenceDialogTool.static.requiresRange = true;
