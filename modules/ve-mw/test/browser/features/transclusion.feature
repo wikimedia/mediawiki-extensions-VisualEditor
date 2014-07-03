@@ -9,12 +9,12 @@ Feature: VisualEditor Transclusion
       And I can see the Transclusion User Interface
 
   Scenario: Add template
-    When I enter S into transclusion Content box
+    When I enter C into transclusion Content box
     Then I see a list of template suggestions
       And I click the Add template button
 
   Scenario: Add parameter to template
-      And I enter S into transclusion Content box
+      And I enter C into transclusion Content box
       And I see a list of template suggestions
       And I click the Add template button
       And I click Add parameter
@@ -23,7 +23,7 @@ Feature: VisualEditor Transclusion
     Then I should see the Insert template button
 
   Scenario: Remove parameter
-      And I enter S into transclusion Content box
+      And I enter C into transclusion Content box
       And I see a list of template suggestions
       And I click the Add template button
       And I click Add parameter
