@@ -28,7 +28,7 @@ ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
 	this.listNode = null;
 
 	// DOM changes
-	this.$element.addClass( 've-ce-mwReferenceListNode', 'reference' );
+	this.$element.addClass( 've-ce-mwReferenceListNode references' );
 	this.$reflist = this.$( '<ol class="references"></ol>' );
 	this.$refmsg = this.$( '<p>' )
 		.addClass( 've-ce-mwReferenceListNode-muted' );
