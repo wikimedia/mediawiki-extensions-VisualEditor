@@ -18,20 +18,9 @@
  * @param {number} [size] Vertical size of thumbnails
  */
 ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
-	var pageTitle = mw.config.get( 'wgTitle' ),
-		namespace = mw.config.get( 'wgNamespaceNumber' ),
-		namespacesWithSubpages = mw.config.get( 'wgVisualEditor' ).namespacesWithSubpages;
-
-	if ( namespacesWithSubpages[ namespace ] ) {
-		// If we are in a namespace that allows for subpages, strip the entire
-		// title except for the part after the last /
-		pageTitle = pageTitle.substr( pageTitle.lastIndexOf( '/' ) + 1 );
-	}
-
 	// Configuration intialization
 	config = ve.extendObject( {
-		'placeholder': ve.msg( 'visualeditor-media-input-placeholder' ),
-		'value': pageTitle
+		'placeholder': ve.msg( 'visualeditor-media-input-placeholder' )
 	}, config );
 
 	// Parent constructor

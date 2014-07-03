@@ -588,6 +588,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-command-help-title',
 			'visualeditor-dialog-error',
 			'visualeditor-dialog-error-dismiss',
+			'visualeditor-dialog-media-goback',
 			'visualeditor-dialog-media-size-originalsize-error',
 			'visualeditor-dimensionswidget-px',
 			'visualeditor-dimensionswidget-times',
