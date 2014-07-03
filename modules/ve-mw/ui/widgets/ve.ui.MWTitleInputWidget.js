@@ -17,7 +17,7 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @cfg {number} [namespace] Namespace to prepend to queries
- * @cfg {boolean} [prefixColon=true] Whether or not to prefix entries outside the
+ * @cfg {boolean} [prefixColon=false] Whether or not to prefix entries outside the
  *  target namespace (if set) with a colon. Assumed to be true unless
  *  explicitly set to false.
  */
@@ -33,7 +33,7 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 
 	// Properties
 	this.namespace = config.namespace || null;
-	this.prefixColon = config.prefixColon !== false;
+	this.prefixColon = config.prefixColon === true;
 
 	// Events
 	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
