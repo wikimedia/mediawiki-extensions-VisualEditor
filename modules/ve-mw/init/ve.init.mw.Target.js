@@ -50,6 +50,10 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );
 
+	if ( ve.init.platform.isInternetExplorer() ) {
+		this.modules.push( 'ext.visualEditor.iehacks' );
+	}
+
 	this.pluginCallbacks = [];
 	this.modulesReady = $.Deferred();
 	this.preparedCacheKeyPromise = null;
