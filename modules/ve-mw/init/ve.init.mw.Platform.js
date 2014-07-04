@@ -115,6 +115,10 @@ ve.init.mw.Platform.prototype.getUserLanguages = function () {
 	return langs;
 };
 
+ve.init.mw.Platform.prototype.isInternetExplorer = function () {
+	return $.client.profile().name === 'msie';
+};
+
 /* Initialization */
 
 ve.init.platform = new ve.init.mw.Platform();
