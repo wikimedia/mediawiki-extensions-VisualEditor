@@ -167,7 +167,6 @@
 	"visualeditor-mweditmodesource-warning": "Хьо чухулара тадаре деха гӀо?.\nХӀокху документан бина хийцамаш Ӏалаш бира бу амма агӀо Ӏалаш ца еш я карла ца йоккхуш VisualEditor юха гӀойла дац.\nКхин дӀа?",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Суьртан куьг",
 	"visualeditor-mwgalleryinspector-title": "Галерей",
-	"visualeditor-mwhieroinspector-title": "Иероглифаш",
 	"visualeditor-pagemenu-tooltip": "АгӀона параметраш",
 	"visualeditor-parameter-input-placeholder": "Параметран цӀе",
 	"visualeditor-parameter-search-more": "Гайта $1 {{PLURAL:$1|кхин параметр|кхин параметраш}}",
@@ -179,7 +178,6 @@
 	"visualeditor-preference-enable": "Лата йе Визуальни тадар. И лело йиш хира ю дийцаре агӀонашкахь а кхин цӀерийн меттигашкахь а.",
 	"visualeditor-preference-language-description": "Визуальни тадарна тӀетуху зуьйш болу гӀирс. Дехар до, хьой бина хийцамаш Ӏалаш бале царга даиман хьажа.",
 	"visualeditor-preference-language-label": "Визуальни тадаран меттанийн гӀирс",
-	"visualeditor-preference-mwhiero-label": "VisualEditor ца формулаш таяр",
 	"visualeditor-reference-input-placeholder": "Муьлхачунна тӀетовжа лаьа хьуна?",
 	"visualeditor-savedialog-label-create": "АгӀо кхолла",
 	"visualeditor-savedialog-label-error": "ГӀалат",
@@ -207,6 +205,7 @@
 	"visualeditor-viewpage-savewarning": "Ахьа хийцамаш дӀаязбанца тадар дӀакъовлуш ду тидам бе хийцамаш дӀаязлур дац.",
 	"visualeditor-viewpage-savewarning-discard": "Юхудаха нисдарш",
 	"visualeditor-viewpage-savewarning-keep": "Кхин дӀа тае",
+	"visualeditor-wikitext-warning": "Ахьа лелош ю Визуальни тадар — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билгало]] кхузахь болхбеш яц. Бина хийцамаш хӀаллак цахуьлуьйтуш чухулара таран кор схьадела белла «{{int:visualeditor-toolbar-cancel}}» хӀара могӀам тӀакха харжа «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-wikitext-warning-link": "Help:Вики-билгало",
 	"visualeditor-wikitext-warning-title": "Карина вики-билгало"
 }
