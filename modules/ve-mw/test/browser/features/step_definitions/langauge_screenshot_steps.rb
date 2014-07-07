@@ -1,6 +1,6 @@
 Given(/^I am editing a random page$/) do
   step "I am at a random page"
-  @browser.goto "#{@browser.url}?vehidebetadialog=true&veaction=edit"
+  @browser.goto "#{@browser.url}?uselang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}&vehidebetadialog=true&veaction=edit"
   step "I click in the editable part"
 end
 
