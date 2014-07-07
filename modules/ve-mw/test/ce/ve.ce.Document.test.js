@@ -227,7 +227,9 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 					tests[i].cases[j].expand
 				),
 				tests[i].cases[j].expected,
-				'i: ' + i + ', j: ' + j
+				'Test document ' + i +
+				', range ' + tests[i].cases[j].given.toJSON() +
+				', direction ' + tests[i].cases[j].direction
 			);
 		}
 		surface.destroy();
