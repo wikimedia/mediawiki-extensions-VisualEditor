@@ -31,7 +31,8 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 	this.internalList = this.model.getDocument().internalList;
 
 	// Events
-	this.connect( this, { 'live': 'onLive' } );
+	this.connect( this, { 'setup': 'onSetup' } );
+	this.connect( this, { 'teardown': 'onTeardown' } );
 
 	// Initialization
 	this.update();
@@ -54,17 +55,21 @@ ve.ce.MWReferenceNode.static.primaryCommandName = 'reference';
 /* Methods */
 
 /**
- * Handle live events.
+ * Handle setup event.
  * @method
  */
-ve.ce.MWReferenceNode.prototype.onLive = function () {
+ve.ce.MWReferenceNode.prototype.onSetup = function () {
+	this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
+};
+
+/**
+ * Handle teardown event.
+ * @method
+ */
+ve.ce.MWReferenceNode.prototype.onTeardown = function () {
 	// As we are listening to the internal list, we need to make sure
 	// we remove the listeners when this object is removed from the document
-	if ( this.live ) {
-		this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
-	} else {
-		this.internalList.disconnect( this );
-	}
+	this.internalList.disconnect( this );
 };
 
 /**
