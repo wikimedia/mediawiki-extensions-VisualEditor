@@ -22,7 +22,7 @@
 
 		this.cache = {}; // Keys are page names, values are deferreds
 		this.queue = []; // Array of page names queued to be looked up
-		this.schedule = ve.debounce( ve.bind( this.processQueue, this ), 0 );
+		this.schedule = ve.debounce( this.processQueue.bind( this ), 0 );
 	};
 
 	OO.mixinClass( ve.init.mw.LinkCache, OO.EventEmitter );

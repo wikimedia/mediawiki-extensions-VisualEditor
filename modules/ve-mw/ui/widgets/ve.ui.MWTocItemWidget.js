@@ -73,9 +73,9 @@ ve.ui.MWTocItemWidget.static.tagName = 'li';
  */
 ve.ui.MWTocItemWidget.prototype.onUpdate = function () {
 	// Timeout needed to let the dom element actually update
-	setTimeout( ve.bind( function () {
+	setTimeout( function () {
 		this.$tocText.text( this.node.$element.text() );
-	}, this ), 0 );
+	}.bind( this ), 0 );
 };
 
 /**

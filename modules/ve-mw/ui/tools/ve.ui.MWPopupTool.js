@@ -45,9 +45,9 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 
 	// Automatically show/hide
 	if ( count ) {
-		setTimeout( ve.bind( function () {
+		setTimeout( function () {
 			this.showPopup();
-		}, this ), 500 );
+		}.bind( this ), 500 );
 	} else {
 		this.$element.hide();
 	}

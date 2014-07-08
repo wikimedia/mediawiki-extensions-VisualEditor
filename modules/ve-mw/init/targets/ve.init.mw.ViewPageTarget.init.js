@@ -86,7 +86,8 @@
 			String.prototype.trim &&
 			window.JSON &&
 			JSON.parse &&
-			JSON.stringify
+			JSON.stringify &&
+			Function.prototype.bind
 		),
 		contentEditable: 'contentEditable' in document.createElement( 'div' ),
 		svg: !!(

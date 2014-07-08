@@ -40,7 +40,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	} );
 
 	// Events
-	this.input.$input.on( 'keydown', ve.bind( this.onLookupInputKeyDown, this ) );
+	this.input.$input.on( 'keydown', this.onLookupInputKeyDown.bind( this ) );
 	this.input.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
 	this.popup.connect( this, {
 		'removeCategory': 'onRemoveCategory',

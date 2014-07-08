@@ -35,7 +35,7 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage( name, config ) {
 	);
 	this.$element.append( this.languagesFieldset.$element );
 
-	this.getAllLanguageItems().done( ve.bind( this.onLoadLanguageData, this ) );
+	this.getAllLanguageItems().done( this.onLoadLanguageData.bind( this ) );
 };
 
 /* Inheritance */
@@ -168,8 +168,8 @@ ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 		'paction': 'getlanglinks',
 		'page': mw.config.get( 'wgPageName' )
 	} )
-		.done( ve.bind( this.onAllLanguageItemsSuccess, this, deferred ) )
-		.fail( ve.bind( this.onAllLanguageItemsError, this, deferred ) );
+		.done( this.onAllLanguageItemsSuccess.bind( this, deferred ) )
+		.fail( this.onAllLanguageItemsError.bind( this, deferred ) );
 	return deferred.promise();
 };
 

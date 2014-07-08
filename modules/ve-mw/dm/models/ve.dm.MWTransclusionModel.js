@@ -118,7 +118,7 @@
 					} );
 				}
 			}
-			setTimeout( ve.bind( this.fetch, this ) );
+			setTimeout( this.fetch.bind( this ) );
 		}
 
 		return $.when.apply( $, promises );
@@ -221,7 +221,7 @@
 
 		// Bypass server for empty lists
 		if ( !titles.length ) {
-			setTimeout( ve.bind( this.process, this, queue ) );
+			setTimeout( this.process.bind( this, queue ) );
 			return;
 		}
 
@@ -268,7 +268,7 @@
 					ve.extendObject( specCache, specs );
 				}
 			} )
-			.always( ve.bind( function () {
+			.always( function () {
 				// Prune completed request
 				var index = ve.indexOf( request, this.requests );
 				if ( index !== -1 ) {
@@ -276,7 +276,7 @@
 				}
 				// Actually add queued items
 				this.process( queue );
-			}, this ) );
+			}.bind( this ) );
 
 		this.requests.push( request );
 	};
@@ -367,7 +367,7 @@
 
 		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
 		// have no effect because the queue will be clear
-		setTimeout( ve.bind( this.fetch, this ) );
+		setTimeout( this.fetch.bind( this ) );
 
 		return deferred.promise();
 	};
@@ -391,7 +391,7 @@
 
 		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
 		// have no effect because the queue will be clear
-		setTimeout( ve.bind( this.fetch, this ) );
+		setTimeout( this.fetch.bind( this ) );
 
 		return deferred.promise();
 	};

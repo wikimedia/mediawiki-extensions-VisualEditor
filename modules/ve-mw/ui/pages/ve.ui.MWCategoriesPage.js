@@ -246,9 +246,9 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 	this.defaultSortKeyTouched = false;
 
 	// Update input position once visible
-	setTimeout( ve.bind( function () {
+	setTimeout( function () {
 		this.categoryWidget.fitInput();
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
