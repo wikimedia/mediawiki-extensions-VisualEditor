@@ -697,6 +697,7 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 
 	if ( this.imageModel ) {
 		this.imageModel.disconnect( this );
+		this.sizeWidget.disconnect( this );
 	}
 
 	dir = node.getDocument() ?
@@ -709,7 +710,8 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 	// Events
 	this.imageModel.connect( this, {
 		'alignmentChange': 'onImageModelAlignmentChange',
-		'typeChange': 'onImageModelTypeChange'
+		'typeChange': 'onImageModelTypeChange',
+		'sizeDefaultChange': 'setChanged'
 	} );
 
 	// Check if there are changes to apply
@@ -725,6 +727,7 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 	// Size widget
 	this.sizeErrorLabel.$element.hide();
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
+	this.sizeWidget.connect( this, { 'changeSizeType': 'setChanged' } );
 
 	// Initialize size
 	this.sizeWidget.setSizeType(
