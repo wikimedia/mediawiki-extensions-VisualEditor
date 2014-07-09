@@ -62,23 +62,32 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	if ( this.spec.getDescription() ) {
 		this.$description.text( this.spec.getDescription() );
 	} else {
-		title = new mw.Title( this.template.getTitle() );
-		if ( title.getNamespaceId() === 10 ) {
-			titleText = title.getMainText();
-		} else if ( title.getNamespaceId() === 0 ) {
-			titleText = ':' + title.getPrefixedText();
-		} else {
-			titleText = title.getPrefixedText();
+		title = this.template.getTitle();
+		// The transcluded page may be dynamically generated or unspecified in the DOM
+		// for other reasons (bug 66724). In that case we can't tell the user what
+		// the template is called nor link to the template page.
+		if ( title ) {
+			title = mw.Title.newFromText( title );
 		}
-		this.$description
-			.addClass( 've-ui-mwTemplatePage-description-missing' )
-			.append( ve.msg(
-				'visualeditor-dialog-transclusion-no-template-description',
-				titleText,
-				ve.getHtmlAttributes( { 'target': '_blank', 'href': title.getUrl() } ),
-				mw.user
-			) );
+		if ( title ) {
+			if ( title.getNamespaceId() === 10 ) {
+				titleText = title.getMainText();
+			} else if ( title.getNamespaceId() === 0 ) {
+				titleText = ':' + title.getPrefixedText();
+			} else {
+				titleText = title.getPrefixedText();
+			}
+			this.$description
+				.addClass( 've-ui-mwTemplatePage-description-missing' )
+				.append( ve.msg(
+					'visualeditor-dialog-transclusion-no-template-description',
+					titleText,
+					ve.getHtmlAttributes( { 'target': '_blank', 'href': title.getUrl() } ),
+					mw.user
+				) );
+		}
 	}
+
 	this.infoFieldset.$element.append( this.$description );
 	this.$more
 		.addClass( 've-ui-mwTemplatePage-more' )
