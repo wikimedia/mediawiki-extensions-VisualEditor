@@ -195,7 +195,7 @@
     "visualeditor-pagemenu-tooltip": "Page options",
     "visualeditor-pagetranslationwarning": "You are editing a translatable page. Editing these in VisualEditor is not yet officially supported.",
     "visualeditor-parameter-input-placeholder": "Field name",
-    "visualeditor-parameter-search-more": "Show $1 other {{PLURAL:$1|field|fields}}",
+    "visualeditor-parameter-search-more": "Show {{PLURAL:$1|one more field|$1 more fields}}",
     "visualeditor-parameter-search-no-unused": "No unused fields",
     "visualeditor-parameter-search-unknown": "Unknown field",
     "visualeditor-preference-betatempdisable": "Temporarily disable VisualEditor while it is in beta",
