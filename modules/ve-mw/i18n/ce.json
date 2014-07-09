@@ -12,7 +12,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Атта хьажорг",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "VisualEditor хӀинца а бета-верси ю цундела програмийн гӀалаташ хила там бу тӀакха агӀона цхьадолу даккъашна хийцам ба лур бац. ТӀетаӀ йе «{{int:visualeditor-ca-editsource}}» тадар чохь хийцамаш бан. ДӀаязбина боцу хийцамаш дӀабаьра бу. .",
+	"visualeditor-beta-warning": "VisualEditor хӀинца а бета-верси ю цундела програмийн гӀалаташ хила там бу тӀакха агӀона цхьадолу даккъашна хийцам ба лур бац. тадар чохь хийцамаш бан «<visualeditor-toolbar-cancel>» уллера «{{int:visualeditor-mweditmodesource-title}}» тӀетаӀ йе. ДӀаязбина боцу хийцамаш дӀабаьра бу.",
 	"visualeditor-browserwarning": "Ахьа лелош йолу браузеро VisualEditor официально ловш яц.",
 	"visualeditor-ca-createlocaldescriptionsource": "ТӀетоха хьост локальни цуьнах лаьцна",
 	"visualeditor-ca-createsource": "Кхолла дӀадолалун йоза санна",
