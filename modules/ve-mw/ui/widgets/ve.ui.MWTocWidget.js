@@ -52,7 +52,7 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	// Integration ignores hiding the TOC widget, though continues to hide the real page TOC
 	$( '#bodyContent' ).append( this.$element );
 
-	this.toggle.$link.on( 'click', ve.bind( function () {
+	this.toggle.$link.on( 'click', function () {
 		if ( this.toggle.open ) {
 			this.toggle.$link.text( this.toggle.showMsg );
 			this.toggle.open = false;
@@ -61,7 +61,7 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 			this.toggle.open = true;
 		}
 		this.topics.$group.add( this.$tempTopics ).slideToggle();
-	}, this ) );
+	}.bind( this ) );
 
 	this.metaList.connect( this, {
 		'insert': 'onMetaListInsert',
@@ -151,10 +151,10 @@ ve.ui.MWTocWidget.prototype.rebuild = ve.debounce( function () {
 		this.$tempTopics.append( this.topics.$group.children().clone() );
 		this.teardownItems();
 		// Build after transactions
-		setTimeout( ve.bind( function () {
+		setTimeout( function () {
 			this.build();
 			this.$tempTopics.empty();
-		}, this ), 0 );
+		}.bind( this ), 0 );
 	}
 }, 0 );
 

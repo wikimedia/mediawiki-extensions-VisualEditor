@@ -51,7 +51,7 @@ ve.init.mw.Platform.prototype.addMessages = function ( messages ) {
  * @method
  * @inheritdoc
  */
-ve.init.mw.Platform.prototype.getMessage = ve.bind( mw.msg, mw );
+ve.init.mw.Platform.prototype.getMessage = mw.msg.bind( mw );
 
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
@@ -125,6 +125,6 @@ ve.init.platform = new ve.init.mw.Platform();
 
 /* Extension */
 
-OO.ui.getUserLanguages = ve.bind( ve.init.platform.getUserLanguages, ve.init.platform );
+OO.ui.getUserLanguages = ve.init.platform.getUserLanguages.bind( ve.init.platform );
 
-OO.ui.msg = ve.bind( ve.init.platform.getMessage, ve.init.platform );
+OO.ui.msg = ve.init.platform.getMessage.bind( ve.init.platform );

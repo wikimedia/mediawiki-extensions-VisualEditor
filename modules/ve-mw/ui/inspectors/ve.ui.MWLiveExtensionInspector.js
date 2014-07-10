@@ -20,7 +20,7 @@ ve.ui.MWLiveExtensionInspector = function VeUiMWLiveExtensionInspector( config )
 	ve.ui.MWExtensionInspector.call( this, config );
 
 	// Late bind onChangeHanlder to a debounced updatePreview
-	this.onChangeHandler = ve.debounce( ve.bind( this.updatePreview, this ), 250 );
+	this.onChangeHandler = ve.debounce( this.updatePreview.bind( this ), 250 );
 };
 
 /* Inheritance */

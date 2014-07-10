@@ -427,7 +427,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		}
 
 		// Everything worked, the page was loaded, continue as soon as the modules are loaded
-		this.modulesReady.done( ve.bind( this.onReady, this ) );
+		this.modulesReady.done( this.onReady.bind( this ) );
 	}
 };
 
@@ -491,10 +491,10 @@ ve.init.mw.Target.prototype.onReady = function () {
 	this.onNoticesReady();
 	this.loading = false;
 	this.edited = false;
-	this.setupSurface( this.doc, ve.bind( function () {
+	this.setupSurface( this.doc, function () {
 		this.startSanityCheck();
 		this.emit( 'surfaceReady' );
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
@@ -952,7 +952,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	mw.loader.using(
 		// Wait for site and user JS before running plugins
 		this.modules.concat( additionalModules || [] ),
-		ve.bind( ve.init.mw.Target.onModulesReady, this )
+		ve.init.mw.Target.onModulesReady.bind( this )
 	);
 
 	data = {
@@ -984,8 +984,8 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 			return jqxhr;
 		}
 	)
-		.done( ve.bind( ve.init.mw.Target.onLoad, this ) )
-		.fail( ve.bind( ve.init.mw.Target.onLoadError, this ) )
+		.done( ve.init.mw.Target.onLoad.bind( this ) )
+		.fail( ve.init.mw.Target.onLoadError.bind( this ) )
 		.promise( { 'abort': xhr.abort } );
 
 	return true;
@@ -1186,8 +1186,8 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
 	} );
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
-		.done( ve.bind( ve.init.mw.Target.onSave, this, doc, data ) )
-		.fail( ve.bind( this.onSaveError, this, doc, data ) );
+		.done( ve.init.mw.Target.onSave.bind( this, doc, data ) )
+		.fail( this.onSaveError.bind( this, doc, data ) );
 
 	return true;
 };
@@ -1209,8 +1209,8 @@ ve.init.mw.Target.prototype.showChanges = function ( doc ) {
 		'page': this.pageName,
 		'oldid': this.revid
 	}, 'diff' )
-		.done( ve.bind( ve.init.mw.Target.onShowChanges, this ) )
-		.fail( ve.bind( ve.init.mw.Target.onShowChangesError, this ) );
+		.done( ve.init.mw.Target.onShowChanges.bind( this ) )
+		.fail( ve.init.mw.Target.onShowChangesError.bind( this ) );
 
 	return true;
 };
@@ -1285,8 +1285,8 @@ ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
 		'page': this.pageName,
 		'oldid': this.revid
 	}, 'serialize' )
-		.done( ve.bind( ve.init.mw.Target.onSerialize, this ) )
-		.fail( ve.bind( ve.init.mw.Target.onSerializeError, this ) );
+		.done( ve.init.mw.Target.onSerialize.bind( this ) )
+		.fail( ve.init.mw.Target.onSerializeError.bind( this ) );
 	return true;
 };
 

@@ -366,7 +366,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			this.applyButton.setDisabled( true );
 			this.pushPending();
-			promise.always( ve.bind( this.onTransclusionReady, this ) );
+			promise.always( this.onTransclusionReady.bind( this ) );
 		}, this );
 };
 

@@ -127,7 +127,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 	this.setupSkinTabs();
 
-	window.addEventListener( 'popstate', ve.bind( this.onWindowPopState, this ) ) ;
+	window.addEventListener( 'popstate', this.onWindowPopState.bind( this ) ) ;
 };
 
 /* Inheritance */
@@ -216,14 +216,14 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function () {
 		this.toolbar.$element.insertBefore( $firstHeading );
 	}
 
-	this.toolbar.$bar.slideDown( 'fast', ve.bind( function () {
+	this.toolbar.$bar.slideDown( 'fast', function () {
 		// Check the surface wasn't torn down while the toolbar was animating
 		if ( this.surface ) {
 			this.toolbar.initialize();
 			this.surface.getView().emit( 'position' );
 			this.surface.getContext().update();
 		}
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
@@ -649,7 +649,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply
 ve.init.mw.ViewPageTarget.prototype.onShowChanges = function ( diffHtml ) {
 	// Invalidate the viewer diff on next change
 	this.surface.getModel().getDocument().once( 'transact',
-		ve.bind( this.saveDialog.clearDiff, this.saveDialog )
+		this.saveDialog.clearDiff.bind( this.saveDialog )
 	);
 	this.saveDialog.setDiffAndReview( diffHtml );
 };
@@ -835,7 +835,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
 			// Has no callback, handled via target.onShowChanges
 			this.showChanges( this.docToSave );
 		} else {
-			this.serialize( this.docToSave, ve.bind( this.onSaveDialogReviewComplete, this ) );
+			this.serialize( this.docToSave, this.onSaveDialogReviewComplete.bind( this ) );
 		}
 	} else {
 		this.saveDialog.swapPanel( 'review' );
@@ -851,7 +851,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
 ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	// Invalidate the viewer wikitext on next change
 	this.surface.getModel().getDocument().once( 'transact',
-		ve.bind( this.saveDialog.clearDiff, this.saveDialog )
+		this.saveDialog.clearDiff.bind( this.saveDialog )
 	);
 	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
 };
@@ -907,7 +907,7 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 				// Get Wikitext from the DOM
 				target.serialize(
 					target.docToSave || ve.dm.converter.getDomFromModel( target.surface.getModel().getDocument() ),
-					ve.bind( target.submitWithSaveFields, target, { 'wpDiff': 1, 'veswitched': 1 } )
+					target.submitWithSaveFields.bind( target, { 'wpDiff': 1, 'veswitched': 1 } )
 				);
 			} else if ( result.action === 'discard' ) {
 				target.submitting = true;
@@ -940,7 +940,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogResolveConflict = function () {
 	// Get Wikitext from the DOM, and set up a submit call when it's done
 	this.serialize(
 		this.docToSave,
-		ve.bind( this.submitWithSaveFields, this, { 'wpSave': 1 } )
+		this.submitWithSaveFields.bind( this, { 'wpSave': 1 } )
 	);
 };
 
@@ -1098,7 +1098,7 @@ ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
 	if ( this.isViewPage ) {
 		// Allow instant switching back to view mode, without refresh
 		$( '#ca-view a, #ca-nstab-visualeditor a' )
-			.click( ve.bind( this.onViewTabClick, this ) );
+			.click( this.onViewTabClick.bind( this ) );
 
 		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
 			if ( viewPageTarget.surface.getModel().hasBeenModified() ) {
@@ -1253,10 +1253,10 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveDialogTeardown = function () {
 	// Clear the cached HTML and cache key once the document changes
-	var clear = ve.bind( function () {
+	var clear = function () {
 		this.docToSave = null;
 		this.clearPreparedCacheKey();
-	}, this );
+	}.bind( this );
 	if ( this.surface ) {
 		this.surface.getModel().getDocument().once( 'transact', clear );
 	} else {
@@ -1379,10 +1379,10 @@ ve.init.mw.ViewPageTarget.prototype.hideReadOnlyContent = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
-	this.toolbar.$bar.slideUp( 'fast', ve.bind( function () {
+	this.toolbar.$bar.slideUp( 'fast', function () {
 		this.toolbar.destroy();
 		this.toolbar = null;
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
@@ -1392,10 +1392,10 @@ ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
 	if ( this.debugBar ) {
-		this.debugBar.$element.slideUp( 'fast', ve.bind( function () {
+		this.debugBar.$element.slideUp( 'fast', function () {
 			this.debugBar.$element.remove();
 			this.debugBar = null;
-		}, this ) );
+		}.bind( this ) );
 	}
 };
 
@@ -1631,12 +1631,12 @@ ve.init.mw.ViewPageTarget.prototype.setupBeforeUnloadHandler = function () {
 	// Remember any already set on before unload handler
 	this.onBeforeUnloadFallback = window.onbeforeunload;
 	// Attach before unload handler
-	window.onbeforeunload = this.onBeforeUnloadHandler = ve.bind( this.onBeforeUnload, this );
+	window.onbeforeunload = this.onBeforeUnloadHandler = this.onBeforeUnload.bind( this );
 	// Attach page show handlers
 	if ( window.addEventListener ) {
-		window.addEventListener( 'pageshow', ve.bind( this.onPageShow, this ), false );
+		window.addEventListener( 'pageshow', this.onPageShow.bind( this ), false );
 	} else if ( window.attachEvent ) {
-		window.attachEvent( 'pageshow', ve.bind( this.onPageShow, this ) );
+		window.attachEvent( 'pageshow', this.onPageShow.bind( this ) );
 	}
 };
 

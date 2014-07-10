@@ -66,8 +66,8 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 			'page': mw.config.get( 'wgRelevantPageName' ),
 			'wikitext': wikitext
 		}, { 'type': 'POST' } )
-			.done( ve.bind( this.onParseSuccess, this, deferred ) )
-			.fail( ve.bind( this.onParseError, this, deferred ) );
+			.done( this.onParseSuccess.bind( this, deferred ) )
+			.fail( this.onParseError.bind( this, deferred ) );
 		return deferred.promise( { abort: xhr.abort } );
 	} else {
 		deferred.resolve( $( '<span>&nbsp;</span>' ).get() );
@@ -90,9 +90,9 @@ ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response )
 ve.ce.MWExtensionNode.prototype.afterRender = function () {
 	// Rerender after images load
 	// TODO: ignore shields, and count multiple images
-	this.$element.find( 'img' ).on( 'load', ve.bind( function () {
+	this.$element.find( 'img' ).on( 'load', function () {
 		this.emit( 'rerender' );
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**

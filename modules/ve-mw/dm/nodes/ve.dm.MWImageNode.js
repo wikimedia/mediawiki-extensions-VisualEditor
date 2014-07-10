@@ -176,7 +176,7 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 				'titles': this.getFilename()
 			},
 			{ 'type': 'POST' }
-		).then( ve.bind( function ( response ) {
+		).then( function ( response ) {
 			var page = response.query && response.query.pages[response.query.pageids[0]],
 				info = page && page.imageinfo && page.imageinfo[0];
 
@@ -190,7 +190,7 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 				// Update according to type
 				this.syncScalableToType();
 			}
-		}, this ) ).promise();
+		}.bind( this ) ).promise();
 	}
 	return this.scalablePromise;
 };

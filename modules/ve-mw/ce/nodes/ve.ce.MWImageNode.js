@@ -91,8 +91,8 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 		'iiurlheight': this.getModel().getAttribute( 'height' ),
 		'titles': this.getModel().getFilename()
 	} )
-		.done( ve.bind( this.onParseSuccess, this, deferred ) )
-		.fail( ve.bind( this.onParseError, this, deferred ) );
+		.done( this.onParseSuccess.bind( this, deferred ) )
+		.fail( this.onParseError.bind( this, deferred ) );
 
 	return deferred.promise( { abort: xhr.abort } );
 };

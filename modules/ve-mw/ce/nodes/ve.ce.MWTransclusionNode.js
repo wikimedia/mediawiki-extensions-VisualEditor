@@ -90,8 +90,8 @@ ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 		'page': mw.config.get( 'wgRelevantPageName' ),
 		'wikitext': ( config && config.wikitext ) || this.model.getWikitext()
 	}, { 'type': 'POST' } )
-		.done( ve.bind( this.onParseSuccess, this, deferred ) )
-		.fail( ve.bind( this.onParseError, this, deferred ) );
+		.done( this.onParseSuccess.bind( this, deferred ) )
+		.fail( this.onParseError.bind( this, deferred ) );
 
 	return deferred.promise( { abort: xhr.abort } );
 };

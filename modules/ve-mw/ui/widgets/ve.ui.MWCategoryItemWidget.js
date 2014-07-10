@@ -41,8 +41,8 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 
 	// Events
 	this.$categoryItem.on( {
-		'click': ve.bind( this.onClick, this ),
-		'mousedown': ve.bind( this.onMouseDown, this )
+		'click': this.onClick.bind( this ),
+		'mousedown': this.onMouseDown.bind( this )
 	} );
 
 	// Initialization

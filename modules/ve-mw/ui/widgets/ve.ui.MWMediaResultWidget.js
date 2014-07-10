@@ -79,8 +79,8 @@ ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
 
 	// Preload image
 	$image.on( {
-		'load': ve.bind( this.onThumbnailLoad, this ),
-		'error': ve.bind( this.onThumbnailError, this )
+		'load': this.onThumbnailLoad.bind( this ),
+		'error': this.onThumbnailError.bind( this )
 	} );
 
 	image.src = info.thumburl;

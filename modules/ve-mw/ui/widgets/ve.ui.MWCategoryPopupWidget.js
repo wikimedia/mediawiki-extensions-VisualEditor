@@ -45,7 +45,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	// Events
 	this.connect( this, { 'hide': 'onHide' } );
 	this.removeButton.connect( this, { 'click': 'onRemoveCategory' } );
-	this.$sortKeyForm.on( 'submit', ve.bind( this.onSortKeySubmit, this ) );
+	this.$sortKeyForm.on( 'submit', this.onSortKeySubmit.bind( this ) );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwCategoryPopupWidget' ).hide();

@@ -84,8 +84,8 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	// TODO: Use spec.type
 
 	// Events
-	this.$label.on( 'click', ve.bind( this.onLabelClick, this ) );
-	this.$description.on( 'click', ve.bind( this.onDescriptionClick, this ) );
+	this.$label.on( 'click', this.onLabelClick.bind( this ) );
+	this.$description.on( 'click', this.onDescriptionClick.bind( this ) );
 
 	// Initialization
 	this.$info
