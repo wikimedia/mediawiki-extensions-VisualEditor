@@ -1515,6 +1515,9 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 		if ( 'veaction' in uri.query ) {
 			delete uri.query.veaction;
 		}
+		if ( 'vesection' in uri.query ) {
+			delete uri.query.vesection;
+		}
 
 		// If there are other query parameters, set the url to the current url (with veaction removed).
 		// Otherwise use the canonical style view url (bug 42553).
