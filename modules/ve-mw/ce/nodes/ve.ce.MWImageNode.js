@@ -118,8 +118,8 @@ ve.ce.MWImageNode.prototype.onParseSuccess = function ( deferred, response ) {
 };
 
 /** */
-ve.ce.MWImageNode.prototype.render = function ( generateContents ) {
-	this.$image.attr( 'src', generateContents );
+ve.ce.MWImageNode.prototype.render = function ( generatedContents ) {
+	this.$image.attr( 'src', generatedContents );
 	if ( this.live ) {
 		this.afterRender();
 	}
