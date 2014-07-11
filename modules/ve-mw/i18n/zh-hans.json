@@ -198,7 +198,7 @@
 	"visualeditor-pagemenu-tooltip": "页面选项",
 	"visualeditor-pagetranslationwarning": "您正在编辑可翻译页面。可视化编辑器尚不支持编辑此类型页面。",
 	"visualeditor-parameter-input-placeholder": "字段名称",
-	"visualeditor-parameter-search-more": "显示另外$1个{{PLURAL:$1|字段}}。",
+	"visualeditor-parameter-search-more": "显示{{PLURAL:$1|另外$1个字段}}",
 	"visualeditor-parameter-search-no-unused": "没有未使用的字段",
 	"visualeditor-parameter-search-unknown": "未知字段",
 	"visualeditor-preference-betatempdisable": "暂时停用测试版可视化编辑器",

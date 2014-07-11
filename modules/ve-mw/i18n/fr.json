@@ -215,7 +215,7 @@
 	"visualeditor-pagemenu-tooltip": "Options de page",
 	"visualeditor-pagetranslationwarning": "Vous êtes en train de modifier une page qui peut être traduite. Ce genre de modification dans VisualEditor n’est pas encore pris en charge de façon officielle.",
 	"visualeditor-parameter-input-placeholder": "Nom du champ",
-	"visualeditor-parameter-search-more": "Voir {{PLURAL:$1|un autre champ|$1 autres champs}}",
+	"visualeditor-parameter-search-more": "Afficher {{PLURAL:$1|un autre champ|$1 autres champs}}",
 	"visualeditor-parameter-search-no-unused": "Aucun champ inutilisé",
 	"visualeditor-parameter-search-unknown": "Champ inconnu",
 	"visualeditor-preference-betatempdisable": "Désactiver temporairement l'ÉditeurVisuel tant qu’il est en version bêta",
