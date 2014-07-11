@@ -15,6 +15,7 @@ def language_string language_code
 end
 
 def license(language, language_code, file_name)
+  require "date"
   date = Date.today.to_s
   "=={{int:filedesc}}==
 {{Information
@@ -48,10 +49,11 @@ end
 
 def upload_images
   screenshot_directory = ENV["LANGUAGE_SCREENSHOT_PATH"] || "./screenshots"
-  Dir["./#{screenshot_directory}/*.png"].each do |file_path|
+  Dir["#{screenshot_directory}/*.png"].each do |file_path|
     puts "Uploading #{file_path}"
     upload_image file_path
   end
 end
 
+ENV["MEDIAWIKI_PASSWORD"] = ENV[ENV["MEDIAWIKI_PASSWORD_VARIABLE"]] if ENV["MEDIAWIKI_PASSWORD_VARIABLE"]
 upload_images
