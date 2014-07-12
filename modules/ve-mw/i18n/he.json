@@ -194,7 +194,7 @@
 	"visualeditor-pagemenu-tooltip": "אפשרויות דף",
 	"visualeditor-pagetranslationwarning": "זהו דף לתרגום. עריכה של דפים כאלה אינה נתמכת בעורך החזותי.",
 	"visualeditor-parameter-input-placeholder": "שם השדה",
-	"visualeditor-parameter-search-more": "להציג {{PLURAL:$1|שדה אחר|$1 שדות אחרים}}",
+	"visualeditor-parameter-search-more": "להציג {{PLURAL:$1|עוד שדה|עוד $1 שדות}}",
 	"visualeditor-parameter-search-no-unused": "אין שדות שאינם בשימוש",
 	"visualeditor-parameter-search-unknown": "שדה לא ידוע",
 	"visualeditor-preference-betatempdisable": "כיבוי זמני של העורך החזותי בזמן שהוא בגרסת בטא",
