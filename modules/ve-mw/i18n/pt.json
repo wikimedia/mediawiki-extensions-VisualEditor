@@ -194,7 +194,7 @@
 	"visualeditor-pagemenu-tooltip": "Opções da página",
 	"visualeditor-pagetranslationwarning": "Está a editar uma página traduzível. Estas edições não são oficialmente suportadas no Editor Visual.",
 	"visualeditor-parameter-input-placeholder": "Nome do campo",
-	"visualeditor-parameter-search-more": "Mostrar $1 {{PLURAL:$1|outro campo|outros campos}}",
+	"visualeditor-parameter-search-more": "Mostrar {{PLURAL:$1|outro campo|$1 outros campos}}",
 	"visualeditor-parameter-search-no-unused": "Sem campos não utilizados",
 	"visualeditor-parameter-search-unknown": "Campo desconhecido",
 	"visualeditor-preference-betatempdisable": "Desabilitar temporariamente o Editor Visual enquanto está em fase de testes",

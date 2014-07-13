@@ -174,7 +174,7 @@
 	"visualeditor-mwgalleryinspector-title": "גאלעריע",
 	"visualeditor-pagemenu-tooltip": "בלאט אפציעס",
 	"visualeditor-parameter-input-placeholder": "פעלד־נאמען",
-	"visualeditor-parameter-search-more": "ווײַזן $1  {{PLURAL:$1|אן אנדער פעלד|אנדערע פעלדער}}",
+	"visualeditor-parameter-search-more": "ווײַזן  {{PLURAL:$1|נאך א פעלד|נאך $1 פעלדער}}",
 	"visualeditor-parameter-search-no-unused": "קיין אומבאניצטע פעלדער",
 	"visualeditor-parameter-search-unknown": "אומבאוואוסט פעלד",
 	"visualeditor-preference-betatempdisable": "צײַטווײַל אומאקטיווירן וויזועל־רעדאקטירער ווען ער איז נאך אין בעטע",
