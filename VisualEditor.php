@@ -137,13 +137,6 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	// Alias for backwards compat, safe to remove after
-	'ext.visualEditor.editPageInit' => $wgVisualEditorResourceTemplate + array(
-		'dependencies' => array(
-			'ext.visualEditor.viewPageTarget',
-		)
-	),
-
 	'ext.visualEditor.viewPageTarget.icons' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
 			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons.css',
