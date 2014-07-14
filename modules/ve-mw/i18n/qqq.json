@@ -19,7 +19,8 @@
 			"Trevor Parscal",
 			"UV",
 			"Arjunaraoc",
-			"Robby"
+			"Robby",
+			"Nemo bis"
 		]
 	},
 	"accesskey-ca-editsource": "{{optional}}",
@@ -51,7 +52,7 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Used as label for the Continue button which is used to close the dialog and continue using VisualEditor.\n{{Identical|Continue}}",
 	"visualeditor-dialog-beta-welcome-content": "Text explaining VisualEditor is in beta.\n\nRefers to {{msg-mw|Visualeditor-help-tool}}.\n\nParameters:\n* $1 - {{msg-mw|Edit}}",
 	"visualeditor-dialog-beta-welcome-title": "Title of the beta welcome dialog. Parameters:\n* $1 - username or empty string, for GENDER support",
-	"visualeditor-dialog-citation-insert-citation": "Label for button that closes the citation insertion dialog and inserts the citation",
+	"visualeditor-dialog-citation-insert-citation": "Label for a 'submit' button in the citation insertion dialog, which inserts the citation and closes the dialog. Citation means a rich, formatted reference to a source using a template, which is commonly called a \"citation\" on Wikimedia projects. It should ''not'' be translated as \"footnote\" as that implies a location of the representation which is unlikely to remain consistent.",
 	"visualeditor-dialog-media-alttext-section": "Label for the image alternative text sub-section.",
 	"visualeditor-dialog-media-change-image": "Label for the button to change image in the media edit dialog.",
 	"visualeditor-dialog-media-content-section": "Label for the image content sub-section.\n{{Identical|Caption}}",
@@ -92,7 +93,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "Placeholder text for category input\n{{Identical|Add category}}",
 	"visualeditor-dialog-meta-categories-options": "Label for the category options sub-section.\n{{Identical|Options}}",
 	"visualeditor-dialog-meta-categories-section": "Label for the categories dialog section.\n{{Identical|Category}}",
-	"visualeditor-dialog-meta-categories-sortkey-label": "Label for setting the page's sort key for a given category",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Label for setting the page's sort key for a given category; the new value of the sort key flows immediately from this label – effectively, \"Sort this page as if it is called 'Foo'.\"",
 	"visualeditor-dialog-meta-languages-code-label": "Column header for the language links table, giving the language code of the remote wiki\n\t{{Identical|Language code}}",
 	"visualeditor-dialog-meta-languages-label": "{{Identical|Language}}",
 	"visualeditor-dialog-meta-languages-link-label": "Column header for the language links table, giving the name of the remote page.\n{{Identical|Linked page}}",

@@ -183,7 +183,7 @@
 	"visualeditor-pagemenu-tooltip": "Tùy chọn trang",
 	"visualeditor-pagetranslationwarning": "Bạn đang sửa đổi một trang dịch được. Trình soạn thảo trực quan chưa chính thức hỗ trợ loại trang này.",
 	"visualeditor-parameter-input-placeholder": "Tên trường",
-	"visualeditor-parameter-search-more": "Hiển thị $1 trường nữa",
+	"visualeditor-parameter-search-more": "Hiển thị {{PLURAL:$1|một|$1}} trường nữa",
 	"visualeditor-parameter-search-no-unused": "Không có trường không sử dụng",
 	"visualeditor-parameter-search-unknown": "Trường bất ngờ",
 	"visualeditor-preference-betatempdisable": "Tạm tắt Trình soạn thảo trực quan trong khi nó là phiên bản beta",
