@@ -20,10 +20,11 @@
 }
 
 /* Monobook sets font-size: x-small; on the body. Undo this in frames and overlays */
-.oo-ui-frame-body, body .ve-ui-surface-overlay {
+.oo-ui-frame-body,
+body .ve-ui-overlay {
 	font-size: medium;
 }
 
-.ve-ui-surface-overlay-global {
+.ve-ui-overlay {
 	z-index: 4;
 }

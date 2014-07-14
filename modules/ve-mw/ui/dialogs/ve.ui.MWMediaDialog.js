@@ -8,20 +8,20 @@
 /*global mw */
 
 /**
- * Dialog for editing MediaWiki media objects.
+ * Dialog for inserting and editing MediaWiki media.
  *
  * @class
  * @extends ve.ui.NodeDialog
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
+ve.ui.MWMediaDialog = function VeUiMWMediaDialog( manager, config ) {
 	// Parent constructor
-	ve.ui.MWMediaDialog.super.call( this, config );
+	ve.ui.MWMediaDialog.super.call( this, manager, config );
 
 	// Properties
-	this.mediaNode = null;
 	this.imageModel = null;
 	this.store = null;
 	this.fileRepoPromise = null;
@@ -43,7 +43,38 @@ ve.ui.MWMediaDialog.static.title =
 
 ve.ui.MWMediaDialog.static.icon = 'picture';
 
-ve.ui.MWMediaDialog.static.defaultSize = 'large';
+ve.ui.MWMediaDialog.static.size = 'large';
+
+ve.ui.MWMediaDialog.static.actions = [
+	{
+		'action': 'apply',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		'flags': 'primary',
+		'modes': 'edit'
+	},
+	{
+		'action': 'insert',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-media-insert-button' ),
+		'flags': [ 'primary', 'constructive' ],
+		'modes': 'insert'
+	},
+	{
+		'action': 'change',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-media-change-image' ),
+		'modes': [ 'edit', 'insert' ]
+	},
+	{
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		'flags': 'safe',
+		'modes': [ 'edit', 'insert', 'select' ]
+	},
+	{
+		'action': 'back',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
+		'flags': 'safe',
+		'modes': 'change'
+	}
+];
 
 ve.ui.MWMediaDialog.static.modelClasses = [ ve.dm.MWBlockImageNode, ve.dm.MWInlineImageNode ];
 
@@ -150,6 +181,13 @@ ve.ui.MWMediaDialog.static.getPasteRules = function () {
 /**
  * @inheritdoc
  */
+ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
+	return 400;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWMediaDialog.prototype.initialize = function () {
 	var altTextFieldset, positionFieldset, borderField, positionField;
 
@@ -157,6 +195,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
 
 	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
+
+	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
 
 	// Set up the booklet layout
 	this.bookletLayout = new OO.ui.BookletLayout( {
@@ -328,29 +368,17 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		this.$sizeWidgetElements
 	] );
 
-	// Footer button
-	this.changeImageButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-change-image' )
-	} );
-	this.goBackButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-goback' )
-	} );
-	this.$foot.append( [ this.changeImageButton.$element, this.goBackButton.$element ] );
-
 	// Events
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
 	this.borderCheckbox.connect( this, { 'change': 'onBorderCheckboxChange' } );
 	this.positionInput.connect( this, { 'choose': 'onPositionInputChoose' } );
 	this.typeInput.connect( this, { 'choose': 'onTypeInputChoose' } );
 	this.search.connect( this, { 'select': 'onSearchSelect' } );
-	this.changeImageButton.connect( this, { 'click': 'onChangeImageButtonClick' } );
-	this.goBackButton.connect( this, { 'click': 'onGoBackButtonClick' } );
 
 	// Panel classes
 	this.mediaSearchPanel.$element.addClass( 've-ui-mwMediaDialog-panel-search' );
 	this.bookletLayout.$element.addClass( 've-ui-mwMediaDialog-panel-settings' );
+	this.$body.append( this.panels.$element );
 
 	// Initialization
 	this.mediaSearchPanel.$element.append( this.search.$element );
@@ -412,20 +440,6 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 		this.setChanged();
 		this.switchPanels( 'edit' );
 	}
-};
-
-/**
- * Respond to change image button click
- */
-ve.ui.MWMediaDialog.prototype.onChangeImageButtonClick = function () {
-	this.switchPanels( 'search' );
-};
-
-/**
- * Respond to go back button click
- */
-ve.ui.MWMediaDialog.prototype.onGoBackButtonClick = function () {
-	this.switchPanels( 'edit' );
 };
 
 /**
@@ -550,7 +564,7 @@ ve.ui.MWMediaDialog.prototype.onTypeInputChoose = function ( item ) {
 ve.ui.MWMediaDialog.prototype.setChanged = function () {
 	// TODO: Set up a better and deeper test of whether the new
 	// image parameters are different than the original image
-	this.applyButton.setDisabled( false );
+	this.actions.setAbilities( { 'insert': true, 'apply': true } );
 };
 
 /**
@@ -600,14 +614,14 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			this.pageTitle = pageTitle;
 
 			// Properties
-			this.mediaNode = this.getSelectedNode();
-			this.setImageModel( this.mediaNode );
+			this.setImageModel( this.selectedNode );
 
 			this.resetCaption();
 
-			this.switchPanels( this.mediaNode ? 'edit' : 'search' );
+			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 
-			this.applyButton.setDisabled( true );
+			this.actions.setAbilities( { 'insert': false, 'apply': false } );
+
 			// Initialization
 			this.captionFieldset.$element.append( this.captionSurface.$element );
 			this.captionSurface.initialize();
@@ -627,11 +641,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			// Focus the general settings page
 			this.bookletLayout.setPage( 'general' );
 			// Hide/show buttons
-			this.changeImageButton.$element.show();
-			this.goBackButton.$element.hide();
-			this.applyButton.$element.show();
-			// Show the foot in case it was hidden before
-			this.$foot.show();
+			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 			// HACK: OO.ui.Dialog needs an API for this
 			this.frame.$content.removeClass( 'oo-ui-dialog-content-footless' );
 			// Hide/show the panels
@@ -650,7 +660,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 
 			// Get the repos from the API first
 			// The ajax request will only be done once per session
-			this.getFileRepos().done( ve.bind( function ( repos ) {
+			this.getFileRepos().done( function ( repos ) {
 				this.search.setSources( repos );
 				// Done, hide the spinner
 				this.$spinner.hide();
@@ -664,16 +674,12 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 				this.search.getQuery().focus().select();
 				this.search.getResults().selectItem();
 				this.search.getResults().highlightItem();
-			}, this ) );
+			}.bind( this ) );
 
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
-			// Hide/show buttons
-			this.changeImageButton.$element.hide();
-			this.applyButton.$element.hide();
-			// In insertion mode, hide the foot; in non-insertion mode, show "Go back"
-			this.goBackButton.$element.toggle( !!this.imageModel );
-			this.$foot.toggle( !!this.imageModel );
+			this.actions.setMode( this.imageModel ? 'change' : 'select' );
+
 			// HACK: OO.ui.Dialog needs an API for this
 			this.frame.$content.toggleClass( 'oo-ui-dialog-content-footless', !this.imageModel );
 
@@ -705,7 +711,8 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 		this.getFragment().getSurface().getDocument().getDir();
 
 	this.imageModel = ve.dm.MWImageModel.static.newFromImageNode( node, dir );
-	this.applyButton.setDisabled( false );
+
+	this.actions.setAbilities( { 'insert': true, 'apply': true } );
 
 	// Events
 	this.imageModel.connect( this, {
@@ -716,8 +723,8 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 
 	// Check if there are changes to apply
 	if (
-		!this.mediaNode ||
-		this.imageModel.getMediaNode() !== this.mediaNode
+		!this.selectedNode ||
+		this.imageModel.getMediaNode() !== this.selectedNode
 	) {
 		this.setChanged();
 	}
@@ -820,7 +827,6 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 			this.setChanged();
 		}
 	} );
-
 };
 
 /**
@@ -844,6 +850,7 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			this.search.getQuery().setValue( '' );
 			if ( this.imageModel ) {
 				this.imageModel.disconnect( this );
+				this.sizeWidget.disconnect( this );
 			}
 			if ( this.wikitextWarning ) {
 				this.wikitextWarning.close();
@@ -853,8 +860,8 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			this.captionNode = null;
 			// Reset the considerations for the scalable
 			// in the image node
-			if ( this.mediaNode ) {
-				this.mediaNode.syncScalableToType();
+			if ( this.selectedNode ) {
+				this.selectedNode.syncScalableToType();
 			}
 			this.imageModel = null;
 		}, this );
@@ -863,45 +870,60 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWMediaDialog.prototype.applyChanges = function () {
-	var surfaceModel = this.getFragment().getSurface();
-
-	// Update from the form
-	this.imageModel.setAltText(
-		this.altTextInput.getValue()
-	);
-
-	this.imageModel.setCaptionDocument(
-		this.captionSurface.getSurface().getModel().getDocument()
-	);
-
-	// TODO: Simplify this condition
-	if ( this.imageModel ) {
-		if (
-			// There was an initial node
-			this.mediaNode &&
-			// And we didn't change the image type block/inline or vise versa
-			this.mediaNode.type === this.imageModel.getImageNodeType() &&
-			// And we didn't change the image itself
-			this.mediaNode.getAttribute( 'src' ) === this.imageModel.getMediaNode().getAttribute( 'src' )
-		) {
-			// We only need to update the attributes of the current node
-			this.imageModel.updateImageNode( surfaceModel );
-		} else {
-			// Replacing an image or inserting a brand new one
-
-			// If there was a previous node, remove it first
-			if ( this.mediaNode ) {
-				// Remove the old image
-				this.fragment = this.getFragment().clone( this.mediaNode.getOuterRange() );
-				this.fragment.removeContent();
-			}
-			// Insert the new image
-			this.fragment = this.imageModel.insertImageNode( this.getFragment() );
-		}
+ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === 'change' ) {
+		return new OO.ui.Process( function () {
+			this.switchPanels( 'search' );
+		}, this );
 	}
-	// Parent method
-	return ve.ui.MWMediaDialog.super.prototype.applyChanges.call( this );
+	if ( action === 'back' ) {
+		return new OO.ui.Process( function () {
+			this.switchPanels( 'edit' );
+		}, this );
+	}
+	if ( action === 'apply' || action === 'insert' ) {
+		return new OO.ui.Process( function () {
+			var surfaceModel = this.getFragment().getSurface();
+
+			// Update from the form
+			this.imageModel.setAltText( this.altTextInput.getValue() );
+			this.imageModel.setCaptionDocument(
+				this.captionSurface.getSurface().getModel().getDocument()
+			);
+
+			// TODO: Simplify this condition
+			if ( this.imageModel ) {
+				if (
+					// There was an initial node
+					this.selectedNode &&
+					// And we didn't change the image type block/inline or vise versa
+					this.selectedNode.type === this.imageModel.getImageNodeType() &&
+					// And we didn't change the image itself
+					this.selectedNode.getAttribute( 'src' ) ===
+						this.imageModel.getMediaNode().getAttribute( 'src' )
+				) {
+					// We only need to update the attributes of the current node
+					this.imageModel.updateImageNode( surfaceModel );
+				} else {
+					// Replacing an image or inserting a brand new one
+
+					// If there was a previous node, remove it first
+					if ( this.selectedNode ) {
+						// Remove the old image
+						this.fragment = this.getFragment().clone(
+							this.selectedNode.getOuterRange()
+						);
+						this.fragment.removeContent();
+					}
+					// Insert the new image
+					this.fragment = this.imageModel.insertImageNode( this.getFragment() );
+				}
+			}
+
+			this.close( { 'action': action } );
+		}, this );
+	}
+	return ve.ui.MWMediaDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 /* Registration */

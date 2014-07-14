@@ -29,7 +29,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	this.$menu = this.$( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'remove',
 		'title': ve.msg( 'visualeditor-inspector-remove-tooltip' )
 	} );
@@ -115,7 +115,7 @@ ve.ui.MWCategoryPopupWidget.prototype.onSortKeySubmit = function () {
  * @param {ve.ui.MWCategoryItemWidget} item Category item
  */
 ve.ui.MWCategoryPopupWidget.prototype.openPopup = function ( item ) {
-	this.show();
+	this.toggle( true );
 	this.popupOpen = true;
 	this.category = item.value;
 	this.loadCategoryIntoPopup( item );
@@ -156,7 +156,7 @@ ve.ui.MWCategoryPopupWidget.prototype.loadCategoryIntoPopup = function ( item ) 
  * @method
  */
 ve.ui.MWCategoryPopupWidget.prototype.closePopup = function () {
-	this.hide();
+	this.toggle( false );
 	this.popupOpen = false;
 };
 
@@ -193,5 +193,5 @@ ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
 		this.$element.css( { 'left': left, 'top': top } );
 	}
 
-	this.display( width, height );
+	this.setSize( width, height );
 };

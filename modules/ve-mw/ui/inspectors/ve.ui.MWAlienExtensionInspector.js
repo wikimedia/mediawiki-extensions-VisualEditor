@@ -6,17 +6,18 @@
  */
 
 /**
- * MediaWiki alien extension inspector.
+ * Inspector for editing alienated MediaWiki extensions.
  *
  * @class
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( config ) {
+ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, config );
+	ve.ui.MWExtensionInspector.call( this, manager, config );
 
 	// Properties
 	this.attributeInputs = {};
@@ -43,19 +44,12 @@ ve.ui.MWAlienExtensionInspector.static.nodeModel = ve.dm.MWAlienExtensionNode;
 /**
  * @inheritdoc
  */
-ve.ui.MWAlienExtensionInspector.prototype.getTitle = function () {
-	return this.getFragment().getSelectedNode().getExtensionName();
-};
-
-/**
- * @inheritdoc
- */
 ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWExtensionInspector.prototype.initialize.apply( this, arguments );
 
 	this.$attributes = this.$( '<div>' ).addClass( 've-ui-mwAlienExtensionInspector-attributes' );
-	this.$form.append( this.$attributes );
+	this.form.$element.append( this.$attributes );
 };
 
 /**
@@ -85,6 +79,8 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 					this.$attributes.append( field.$element );
 				}
 			}
+
+			this.title.setLabel( this.getFragment().getSelectedNode().getExtensionName() );
 		}, this );
 };
 
@@ -93,7 +89,7 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWAlienExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWAlienExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
-		.next( function () {
+		.first( function () {
 			this.$attributes.empty();
 			this.attributeInputs = {};
 		}, this );

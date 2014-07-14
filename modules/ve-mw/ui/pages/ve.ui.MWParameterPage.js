@@ -52,7 +52,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	this.removeButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'remove',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
 		'classes': [ 've-ui-mwParameterPage-removeButton' ]
@@ -61,7 +61,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	this.infoButton = new OO.ui.PopupButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'info',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
 		'classes': [ 've-ui-mwParameterPage-infoButton' ]
@@ -69,7 +69,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	this.addButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'parameter',
 		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
 		'tabIndex': -1

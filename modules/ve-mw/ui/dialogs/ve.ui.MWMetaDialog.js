@@ -6,22 +6,23 @@
  */
 
 /**
- * Dialog for editing MediaWiki page meta information.
+ * Dialog for editing MediaWiki page information.
  *
  * @class
- * @extends ve.ui.ActionDialog
+ * @extends OO.ui.ProcessDialog
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMetaDialog = function VeUiMWMetaDialog( config ) {
+ve.ui.MWMetaDialog = function VeUiMWMetaDialog( manager, config ) {
 	// Parent constructor
-	ve.ui.MWMetaDialog.super.call( this, config );
+	ve.ui.MWMetaDialog.super.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMetaDialog, ve.ui.ActionDialog );
+OO.inheritClass( ve.ui.MWMetaDialog, ve.ui.FragmentDialog );
 
 /* Static Properties */
 
@@ -32,9 +33,28 @@ ve.ui.MWMetaDialog.static.title =
 
 ve.ui.MWMetaDialog.static.icon = 'window';
 
-ve.ui.MWMetaDialog.static.defaultSize = 'large';
+ve.ui.MWMetaDialog.static.size = 'large';
+
+ve.ui.MWMetaDialog.static.actions = [
+	{
+		'action': 'apply',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		'flags': 'primary'
+	},
+	{
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		'flags': 'safe'
+	}
+];
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMetaDialog.prototype.getBodyHeight = function () {
+	return 400;
+};
 
 /**
  * @inheritdoc
@@ -44,6 +64,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	ve.ui.MWMetaDialog.super.prototype.initialize.call( this );
 
 	// Properties
+	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
 	this.bookletLayout = new OO.ui.BookletLayout( { '$': this.$, 'outlined': true } );
 	this.settingsPage = new ve.ui.MWSettingsPage(
 		'settings',
@@ -66,6 +87,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	);
 
 	// Initialization
+	this.$body.append( this.panels.$element );
 	this.panels.addItems( [ this.bookletLayout ] );
 	this.bookletLayout.addPages( [
 		this.settingsPage,
@@ -73,6 +95,40 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		this.categoriesPage,
 		this.languagesPage
 	] );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
+	var surfaceModel = this.getFragment().getSurface();
+
+	if ( action === 'apply' ) {
+		return new OO.ui.Process( function () {
+			// Let each page tear itself down ('languages' page doesn't need this yet)
+			this.settingsPage.teardown( { 'action': action } );
+			this.advancedSettingsPage.teardown( { 'action': action } );
+			this.categoriesPage.teardown( { 'action': action } );
+
+			// ALWAYS return to normal tracking behavior
+			surfaceModel.startHistoryTracking();
+
+			this.close( { 'action': action } );
+		}, this );
+	}
+
+	return ve.ui.MWMetaDialog.super.prototype.getActionProcess.call( this, action )
+		.next( function () {
+			// Place transactions made while dialog was open in a common history state
+			if ( surfaceModel.breakpoint() ) {
+				// Undo everything done in the dialog and prevent redoing those changes
+				surfaceModel.undo();
+				surfaceModel.truncateUndoStack();
+
+				// ALWAYS return to normal tracking behavior
+				surfaceModel.startHistoryTracking();
+			}
+		}, this );
 };
 
 /**
@@ -98,35 +154,6 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			this.settingsPage.setup( surfaceModel.metaList, data );
 			this.advancedSettingsPage.setup( surfaceModel.metaList, data );
 			this.categoriesPage.setup( surfaceModel.metaList, data );
-		}, this );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
-	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
-			var surfaceModel = this.getFragment().getSurface(),
-				// Place transactions made while dialog was open in a common history state
-				hasTransactions = surfaceModel.breakpoint();
-
-			// Data initialization
-			data = data || {};
-
-			// Undo everything done in the dialog and prevent redoing those changes
-			if ( data.action === 'cancel' && hasTransactions ) {
-				surfaceModel.undo();
-				surfaceModel.truncateUndoStack();
-			}
-
-			// Let each page tear itself down ('languages' page doesn't need this yet)
-			this.settingsPage.teardown( data );
-			this.advancedSettingsPage.teardown( data );
-			this.categoriesPage.teardown( data );
-
-			// Return to normal tracking behavior
-			surfaceModel.startHistoryTracking();
 		}, this );
 };
 

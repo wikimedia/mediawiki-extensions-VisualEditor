@@ -6,25 +6,23 @@
  */
 
 /**
- * Link inspector.
+ * Inspector for editing unlabeled MediaWiki external links.
  *
  * @class
- * @extends ve.ui.Inspector
+ * @extends ve.ui.NodeInspector
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkNodeInspector = function VeUiMWLinkNodeInspector( config ) {
+ve.ui.MWLinkNodeInspector = function VeUiMWLinkNodeInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.Inspector.call( this, config );
-
-	// Properties
-	this.linkNode = null;
+	ve.ui.NodeInspector.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWLinkNodeInspector, ve.ui.Inspector );
+OO.inheritClass( ve.ui.MWLinkNodeInspector, ve.ui.NodeInspector );
 
 /* Static properties */
 
@@ -38,14 +36,14 @@ ve.ui.MWLinkNodeInspector.static.removable = false;
 
 ve.ui.MWLinkNodeInspector.static.modelClasses = [ ve.dm.MWNumberedExternalLinkNode ];
 
-/* Methods */
+ve.ui.MWLinkNodeInspector.static.actions = ve.ui.MWLinkNodeInspector.super.static.actions.concat( [
+	{
+		'action': 'convert',
+		'label': OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' )
+	}
+] );
 
-/**
- * Handle convert button click events.
- */
-ve.ui.MWLinkNodeInspector.prototype.onConvertButtonClick = function () {
-	this.close( { 'action': 'convert' } );
-};
+/* Methods */
 
 /**
  * @inheritdoc
@@ -56,18 +54,21 @@ ve.ui.MWLinkNodeInspector.prototype.initialize = function () {
 
 	// Properties
 	this.targetInput = new OO.ui.TextInputWidget( { '$': this.$ } );
-	this.convertButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'frameless': true,
-		'icon': 'add-item',
-		'label': ve.msg( 'visualeditor-linknodeinspector-add-label' )
-	} );
-
-	// Events
-	this.convertButton.connect( this, { 'click': 'onConvertButtonClick' } );
 
 	// Initialization
-	this.$form.append( this.targetInput.$element, this.convertButton.$element );
+	this.form.$element.append( this.targetInput.$element );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkNodeInspector.prototype.getActionProcess = function ( action ) {
+	if ( action === 'convert' ) {
+		return new OO.ui.Process( function () {
+			this.close( { 'action': action } );
+		}, this );
+	}
+	return ve.ui.MWLinkNodeInspector.super.prototype.getActionProcess.call( this, action );
 };
 
 /**
@@ -76,11 +77,10 @@ ve.ui.MWLinkNodeInspector.prototype.initialize = function () {
 ve.ui.MWLinkNodeInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLinkNodeInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			// Properties
-			this.linkNode = this.getFragment().getSelectedNode();
-
 			// Initialization
-			this.targetInput.setValue( this.linkNode ? this.linkNode.getAttribute( 'href' ) : '' );
+			this.targetInput.setValue(
+				this.selectedNode ? this.selectedNode.getAttribute( 'href' ) : ''
+			);
 		}, this );
 };
 
@@ -103,7 +103,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 			var content, annotation, annotations,
 				surfaceModel = this.getFragment().getSurface(),
 				doc = surfaceModel.getDocument(),
-				nodeRange = this.linkNode.getOuterRange(),
+				nodeRange = this.selectedNode.getOuterRange(),
 				value = this.targetInput.getValue(),
 				convert = data.action === 'convert',
 				remove = convert || data.action === 'remove' || !value;
@@ -133,7 +133,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 					}
 				} );
 				annotations = doc.data.getAnnotationsFromOffset(
-					this.linkNode.getOffset()
+					this.selectedNode.getOffset()
 				).clone();
 				annotations.push( annotation );
 				content = ve.splitClusters( value );

@@ -27,6 +27,9 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	// Mixin constructors
 	OO.ui.LookupInputWidget.call( this, this, config );
 
+	// Properties
+	this.annotation = null;
+
 	// Events
 	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
 
@@ -53,13 +56,26 @@ OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupInputWidget );
  *
  * @method
  * @param {OO.ui.MenuItemWidget|null} item Selected item
+ * @fires change
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	if ( item ) {
 		this.setAnnotation( item.getData() );
 	} else if ( this.annotation ) {
 		this.annotation = null;
+		this.emit( 'change', this.getValue() );
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
+	if ( this.annotation instanceof ve.dm.MWExternalLinkAnnotation ) {
+		return this.annotation.getAttribute( 'href' )
+			.match( /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi );
+	}
+	return true;
 };
 
 /**
@@ -231,6 +247,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.initializeLookupMenuSelection = function
 	if ( item ) {
 		// Set annotation directly, bypassing re-setting the value of the input
 		this.annotation = item.getData();
+		this.emit( 'change', this.getValue() );
 	}
 };
 
@@ -309,5 +326,22 @@ ve.ui.MWLinkTargetInputWidget.prototype.getTargetFromAnnotation = function ( ann
 	} else if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
 		return annotation.getAttribute( 'title' );
 	}
+
+	return '';
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkTargetInputWidget.prototype.getHref = function () {
+	var title;
+
+	if ( this.annotation instanceof ve.dm.MWExternalLinkAnnotation ) {
+		return this.annotation.getAttribute( 'href' );
+	} else if ( this.annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
+		title = mw.Title.newFromText( this.annotation.getAttribute( 'title' ) );
+		return title.getUrl();
+	}
+
 	return '';
 };

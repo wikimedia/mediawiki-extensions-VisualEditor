@@ -6,23 +6,24 @@
  */
 
 /**
- * MediaWiki extension inspector.
+ * Inspector for editing generic MediaWiki extensions.
  *
  * @class
  * @abstract
- * @extends ve.ui.Inspector
+ * @extends ve.ui.FragmentInspector
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( config ) {
+ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.Inspector.call( this, config );
+	ve.ui.FragmentInspector.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.Inspector );
+OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.FragmentInspector );
 
 /* Static properties */
 
@@ -72,7 +73,7 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 	this.isBlock = !this.constructor.static.nodeModel.static.isContent;
 
 	// Initialization
-	this.$form.append( this.input.$element );
+	this.form.$element.append( this.input.$element );
 };
 
 /**

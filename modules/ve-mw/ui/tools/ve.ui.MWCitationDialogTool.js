@@ -10,7 +10,7 @@
  *
  * @class
  * @abstract
- * @extends ve.ui.DialogTool
+ * @extends ve.ui.MWReferenceDialogTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options

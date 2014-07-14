@@ -12,11 +12,12 @@
  * @extends ve.ui.MWTemplateDialog
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
+ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( manager, config ) {
 	// Parent constructor
-	ve.ui.MWTransclusionDialog.super.call( this, config );
+	ve.ui.MWTransclusionDialog.super.call( this, manager, config );
 
 	// Properties
 	this.mode = null;
@@ -32,6 +33,13 @@ ve.ui.MWTransclusionDialog.static.name = 'transclusion';
 
 ve.ui.MWTransclusionDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-transclusion-title' );
+
+ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.actions.concat( [
+	{
+		'action': 'mode',
+		'modes': [ 'edit', 'insert' ]
+	}
+] );
 
 /**
  * Map of symbolic mode names and CSS classes.
@@ -136,13 +144,6 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 };
 
 /**
- * Handle mode button click events.
- */
-ve.ui.MWTransclusionDialog.prototype.onModeButtonClick = function () {
-	this.setMode( this.mode === 'single' ? 'multiple' : 'single' );
-};
-
-/**
  * Handle booklet layout page set events.
  *
  * @param {OO.ui.PageLayout} page Active page
@@ -157,8 +158,20 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
+	var single, label;
+
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
-	this.modeButton.setDisabled( !this.isSingleTemplateTransclusion() );
+
+	single = this.isSingleTemplateTransclusion();
+	label = single ?
+		ve.msg( 'visualeditor-dialog-transclusion-insert-template' ) :
+		ve.msg( 'visualeditor-dialog-transclusion-insert-transclusion' );
+
+	this.actions
+		.setAbilities( { 'mode': single } )
+		.forEach( { 'actions': 'insert' }, function ( action ) {
+			action.setLabel( label );
+		} );
 };
 
 /**
@@ -184,17 +197,6 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 		return new ve.ui.MWTransclusionContentPage( part, part.getId(), { '$': this.$ } );
 	}
 	return page;
-};
-
-/**
- * Get a label for the apply button.
- *
- * @returns {string} Apply button label
- */
-ve.ui.MWTransclusionDialog.prototype.getApplyButtonLabel = function () {
-	return !this.selectedNode && !this.isSingleTemplateTransclusion() ?
-		ve.msg( 'visualeditor-dialog-transclusion-insert-transclusion' ) :
-		ve.ui.MWTransclusionDialog.super.prototype.getApplyButtonLabel.call( this );
 };
 
 /**
@@ -227,14 +229,15 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 	}
 	this.setSize( single ? 'medium' : 'large' );
 	this.bookletLayout.toggleOutline( !single );
-	this.modeButton
-		.setLabel( ve.msg(
-			single ?
-				'visualeditor-dialog-transclusion-multiple-mode' :
-				'visualeditor-dialog-transclusion-single-mode'
-		) )
-		.setDisabled( !this.isSingleTemplateTransclusion() );
 	this.updateTitle();
+
+	this.actions.forEach( { 'actions': [ 'mode' ] }, function ( action ) {
+		action.setLabel(
+			single ?
+				ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' ) :
+				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
+		);
+	} );
 };
 
 /**
@@ -242,7 +245,7 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
  */
 ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
 	if ( this.mode === 'multiple' ) {
-		this.setTitle( this.constructor.static.title );
+		this.title.setLabel( this.constructor.static.title );
 	} else {
 		// Parent method
 		ve.ui.MWTransclusionDialog.super.prototype.updateTitle.call( this );
@@ -275,33 +278,44 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === 'mode' ) {
+		return new OO.ui.Process( function () {
+			this.setMode( this.mode === 'single' ? 'multiple' : 'single' );
+		}, this );
+	}
+
+	return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWTransclusionDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.modeButton = new OO.ui.ButtonWidget( { '$': this.$ } );
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'template',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-add-template' )
 	} );
 	this.addContentButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'source',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-add-content' )
 	} );
 	this.addParameterButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'parameter',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 	} );
 
 	// Events
-	this.modeButton.connect( this, { 'click': 'onModeButtonClick' } );
 	this.bookletLayout.connect( this, { 'set': 'onBookletLayoutSet' } );
 	this.addTemplateButton.connect( this, { 'click': 'onAddTemplateButtonClick' } );
 	this.addContentButton.connect( this, { 'click': 'onAddContentButtonClick' } );
@@ -312,9 +326,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 			'move': 'onOutlineControlsMove',
 			'remove': 'onOutlineControlsRemove'
 		} );
-
-	// Initialization
-	this.$foot.append( this.modeButton.$element );
 };
 
 /**
@@ -322,9 +333,9 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
-		.first( function () {
+		.next( function () {
 			this.setMode( 'single' );
-			this.modeButton.setDisabled( true );
+			this.actions.setAbilities( { 'mode': false } );
 		}, this );
 };
 

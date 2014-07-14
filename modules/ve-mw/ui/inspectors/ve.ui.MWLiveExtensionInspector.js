@@ -6,18 +6,19 @@
  */
 
 /**
- * MediaWiki live extension inspector.
+ * Inspector for editing generic MediaWiki extensions with dynamic rendering.
  *
  * @class
  * @abstract
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLiveExtensionInspector = function VeUiMWLiveExtensionInspector( config ) {
+ve.ui.MWLiveExtensionInspector = function VeUiMWLiveExtensionInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, config );
+	ve.ui.MWExtensionInspector.call( this, manager, config );
 
 	// Late bind onChangeHanlder to a debounced updatePreview
 	this.onChangeHandler = ve.debounce( this.updatePreview.bind( this ), 250 );

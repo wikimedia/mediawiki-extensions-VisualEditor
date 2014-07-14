@@ -36,7 +36,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.$description = this.$( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'remove',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
 		'flags': ['destructive'],
@@ -50,7 +50,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	} );
 	this.addButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'parameter',
 		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
 		'tabIndex': -1

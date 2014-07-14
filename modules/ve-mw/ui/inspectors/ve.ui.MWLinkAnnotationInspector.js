@@ -8,17 +8,18 @@
 /*global mw */
 
 /**
- * MediaWiki link inspector.
+ * Inspector for applying and editing labeled MediaWiki internal and external links.
  *
  * @class
  * @extends ve.ui.LinkInspector
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkInspector = function VeUiMWLinkInspector( config ) {
+ve.ui.MWLinkInspector = function VeUiMWLinkInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.LinkInspector.call( this, config );
+	ve.ui.LinkInspector.call( this, manager, config );
 };
 
 /* Inheritance */

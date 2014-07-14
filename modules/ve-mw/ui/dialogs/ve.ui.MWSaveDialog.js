@@ -8,20 +8,21 @@
 /*global mw */
 
 /**
- * Dialog for saving MediaWiki articles.
+ * Dialog for saving MediaWiki pages.
  *
  * Note that most methods are not safe to call before the dialog has initialized, except where
  * noted otherwise.
  *
  * @class
- * @extends ve.ui.ActionDialog
+ * @extends OO.ui.ProcessDialog
  *
  * @constructor
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Config options
  */
-ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
+ve.ui.MWSaveDialog = function VeUiMWSaveDialog( manager, config ) {
 	// Parent constructor
-	ve.ui.MWSaveDialog.super.call( this, config );
+	ve.ui.MWSaveDialog.super.call( this, manager, config );
 
 	// Properties
 	this.sanityCheckVerified = false;
@@ -33,7 +34,7 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWSaveDialog, ve.ui.ActionDialog );
+OO.inheritClass( ve.ui.MWSaveDialog, OO.ui.ProcessDialog );
 
 /* Static Properties */
 
@@ -41,6 +42,37 @@ ve.ui.MWSaveDialog.static.name = 'mwSave';
 
 ve.ui.MWSaveDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-savedialog-title-save' );
+
+ve.ui.MWSaveDialog.static.actions = [
+	{
+		'action': 'save',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		'flags': [ 'primary', 'constructive' ],
+		'modes': 'save'
+	},
+	{
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		'flags': 'safe',
+		'modes': 'save'
+	},
+	{
+		'action': 'review',
+		'label': OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
+		'modes': 'save'
+	},
+	{
+		'action': 'approve',
+		'label': OO.ui.deferMsg( 'visualeditor-savedialog-label-review-good' ),
+		'flags': 'primary',
+		'modes': 'review'
+	},
+	{
+		'action': 'resolve',
+		'label': OO.ui.deferMsg( 'visualeditor-savedialog-label-resolve-conflict' ),
+		'flags': [ 'primary', 'constructive' ],
+		'modes': 'conflict'
+	}
+];
 
 /* Events */
 
@@ -70,7 +102,7 @@ ve.ui.MWSaveDialog.static.title =
  */
 ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
 	this.$reviewViewer.empty().append( content );
-	this.reviewGoodButton.setDisabled( false );
+	this.actions.setAbilities( { 'approve': true } );
 	this.popPending();
 	this.swapPanel( 'review' );
 };
@@ -110,21 +142,17 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	this.setSize( 'medium' );
 
 	// Update the window title
-	this.setTitle( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
+	this.title.setLabel( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
 
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
-	this.applyButton.setDisabled( false );
+	this.actions.setAbilities( { 'save': true } );
 
 	switch ( panel ) {
 		case 'save':
-			this.isApplyable = true;
 			if ( !this.sanityCheckVerified ) {
 				this.showMessage( 'dirtywarning', mw.msg( 'visualeditor-savedialog-warning-dirty' ) );
 			}
-			this.applyButton.$element.show();
-			this.reviewButton.$element.show();
-			this.reviewGoodButton.$element.hide();
-			this.resolveConflictButton.$element.hide();
+			this.actions.setMode( 'save' );
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
 				var $textarea = dialog.editSummaryInput.$input;
@@ -136,10 +164,9 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			} );
 			break;
 		case 'conflict':
-			this.applyButton.setDisabled( true ).$element.hide();
-			this.reviewButton.$element.hide();
-			this.reviewGoodButton.$element.hide();
-			this.resolveConflictButton.$element.show();
+			this.actions
+				.setAbilities( { 'save': false } )
+				.setMode( 'save' );
 			break;
 		case 'review':
 			this.setSize( 'large' );
@@ -168,15 +195,12 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			}
 			/* falls through */
 		case 'nochanges':
-			this.applyButton.$element.hide();
-			this.reviewButton.$element.hide();
-			this.reviewGoodButton.$element.show();
-			this.resolveConflictButton.$element.hide();
+			this.actions.setMode( 'review' );
 			break;
 	}
 
 	// Show the target panel
-	this.panel.setItem( panelObj );
+	this.panels.setItem( panelObj );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
 
@@ -260,16 +284,15 @@ ve.ui.MWSaveDialog.prototype.reset = function () {
  * @param {jQuery} $checkboxes jQuery collection of checkboxes
  */
 ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( $checkboxes ) {
-	var saveDialog = this;
 	this.setupDeferred.done( function () {
-		saveDialog.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
+		this.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
 			.html( $checkboxes )
 			.find( 'a' )
 				.attr( 'target', '_blank' )
 				.end()
 			.find( 'input' )
 				.prop( 'tabIndex', 0 );
-	} );
+	}.bind( this ) );
 };
 
 /**
@@ -280,21 +303,22 @@ ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( $checkboxes ) {
  * @param {string} summary Edit summary to prefill
  */
 ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
-	var saveDialog = this;
 	this.setupDeferred.done( function () {
-		saveDialog.editSummaryInput.setValue( summary );
-	} );
+		this.editSummaryInput.setValue( summary );
+	}.bind( this ) );
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.initialize = function () {
-	var saveDialog = this;
+	var saveAccessKey;
+
 	// Parent method
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
 
 	// Properties
+	this.panels = new OO.ui.StackLayout( { '$': this.$, 'scrollable': true } );
 	this.savePanel = new OO.ui.PanelLayout( {
 		'$': this.$,
 		'scrollable': true,
@@ -316,10 +340,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers
 		// Users likely assume characters but then it seems to count down quicker
 		// than expected. Facing users with the word "byte" is bad? (bug 40035)
-		saveDialog.savePanel.$element.find( '.ve-ui-mwSaveDialog-editSummary-count' ).text(
-			saveDialog.editSummaryByteLimit - $.byteLength( saveDialog.editSummaryInput.getValue() )
+		this.savePanel.$element.find( '.ve-ui-mwSaveDialog-editSummary-count' ).text(
+			this.editSummaryByteLimit - $.byteLength( this.editSummaryInput.getValue() )
 		);
-	} );
+	}.bind( this ) );
 
 	this.$saveOptions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
 		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
@@ -375,43 +399,24 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.nochangesPanel.$element.append( this.$noChanges );
 
 	// Panel stack
-	this.panel = new OO.ui.StackLayout( { '$': this.$, 'scrollable': true } );
-	this.panel.$element.addClass( 've-ui-mwSaveDialog-panel' );
-	this.panel.addItems( [this.savePanel, this.reviewPanel, this.conflictPanel, this.nochangesPanel], 0 );
-
-	/* Buttons */
+	this.panels.$element.addClass( 've-ui-mwSaveDialog-panel' );
+	this.panels.addItems( [
+		this.savePanel,
+		this.reviewPanel,
+		this.conflictPanel,
+		this.nochangesPanel
+	] );
 
 	// Save button for "save" panel
-	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
-		this.applyButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+	saveAccessKey = ve.msg( 'accesskey-save' );
+	if ( saveAccessKey !== '-' && saveAccessKey !== '' ) {
+		this.actions.forEach( { 'actions': 'save' }, function ( action ) {
+			action.setAccessKey( saveAccessKey );
+		} );
 	}
 
-	// Review button for "save" panel
-	this.reviewButton = new OO.ui.ButtonWidget( {
-		'label': ve.msg( 'visualeditor-savedialog-label-review' )
-	} );
-	this.reviewButton.connect( this, { 'click': [ 'emit', 'review' ] } );
-
-	// Review good button on "review" panel
-	this.reviewGoodButton = new OO.ui.ButtonWidget( {
-		'label': ve.msg( 'visualeditor-savedialog-label-review-good' )
-	} );
-	this.reviewGoodButton.connect( this, { 'click': [ 'swapPanel', 'save' ] } );
-	// Resolve conflict
-	this.resolveConflictButton = new OO.ui.ButtonWidget( {
-		'label': ve.msg( 'visualeditor-savedialog-label-resolve-conflict' ),
-		'flags': ['constructive']
-	} );
-	this.resolveConflictButton.connect( this, { 'click': [ 'emit', 'resolve' ] } );
-
 	// Initialization
-	this.$body.append( this.panel.$element );
-	this.$foot.append(
-		this.reviewButton.$element,
-		this.applyButton.$element,
-		this.reviewGoodButton.$element,
-		this.resolveConflictButton.$element
-	);
+	this.$body.append( this.panels.$element );
 
 	this.setupDeferred.resolve();
 };
@@ -421,10 +426,21 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
  */
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
-		.first( function () {
+		.next( function () {
 			this.swapPanel( 'save' );
 			// Old messages should not persist after panel changes
 			this.clearAllMessages();
+			// Update save button label
+			this.actions.forEach( { 'actions': 'save' }, function ( action ) {
+				action.setLabel(
+					ve.msg(
+						// TODO: Actually populate this.resotring with information, right now it is
+						// always false because of an oversight when migrating this code from init
+						// visualeditor-savedialog-label-restore, visualeditor-savedialog-label-save
+						'visualeditor-savedialog-label-' + ( this.restoring ? 'restore' : 'save' )
+					)
+				);
+			} );
 		}, this );
 };
 
@@ -441,62 +457,34 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWSaveDialog.prototype.getApplyButtonFlags = function () {
-	return [ 'constructive' ];
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWSaveDialog.prototype.getApplyButtonLabel = function () {
-	return ve.msg(
-		// visualeditor-savedialog-label-restore, visualeditor-savedialog-label-save
-		'visualeditor-savedialog-label-' + ( this.restoring ? 'restore' : 'save' )
-	);
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWSaveDialog.prototype.pushPending = function () {
-	// Parent method
-	ve.ui.MWSaveDialog.super.prototype.pushPending.call( this );
-
-	this.applyButton.setDisabled( !this.isApplyable || this.isPending() );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWSaveDialog.prototype.popPending = function () {
-	// Parent method
-	ve.ui.MWSaveDialog.super.prototype.popPending.call( this );
-
-	this.applyButton.setDisabled( !this.isApplyable || this.isPending() );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWSaveDialog.prototype.applyChanges = function () {
-	var saveDeferred = $.Deferred();
-	this.emit( 'save', saveDeferred );
-	return saveDeferred.promise();
-};
-
-/*
- * @inheritdoc
- * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
- *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
- */
-ve.ui.MWSaveDialog.prototype.onApplyChangesFail = function ( errors, allowReapply ) {
-	if ( allowReapply === false ) {
-		this.isApplyable = false;
+ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === 'save' ) {
+		return new OO.ui.Process( function () {
+			var saveDeferred = $.Deferred();
+			this.emit( 'save', saveDeferred );
+			return saveDeferred.promise();
+		}, this );
 	}
-	this.dismissErrors();
+	if ( action === 'review' || action === 'resolve' ) {
+		return new OO.ui.Process( function () {
+			this.emit( action );
+		}, this );
+	}
+	if ( action === 'approve' ) {
+		return new OO.ui.Process( function () {
+			this.swapPanel( 'save' );
+		}, this );
+	}
 
-	// Parent method
-	ve.ui.MWSaveDialog.super.prototype.onApplyChangesFail.call( this, errors );
+	return ve.ui.MWSaveDialog.super.prototype.getActionProcess.call( this, action );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWSaveDialog.prototype.getBodyHeight = function () {
+	// Don't vary the height when the foot is made visible or not
+	return 350 - this.$foot.outerHeight( true );
 };
 
 /* Registration */

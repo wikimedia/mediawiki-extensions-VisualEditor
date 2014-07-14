@@ -46,7 +46,7 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 	// Automatically show/hide
 	if ( count ) {
 		setTimeout( function () {
-			this.showPopup();
+			this.popup.toggle( true );
 		}.bind( this ), 500 );
 	} else {
 		this.$element.hide();
@@ -107,7 +107,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	this.feedback = null;
 	this.helpButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'help',
 		'title': ve.msg( 'visualeditor-help-title' ),
 		'href': new mw.Title( ve.msg( 'visualeditor-help-link' ) ).getUrl(),
@@ -116,13 +116,13 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	} );
 	this.keyboardShortcutsButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'help',
 		'label': ve.msg( 'visualeditor-dialog-command-help-title' )
 	} );
 	this.feedbackButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'comment',
 		'label': ve.msg( 'visualeditor-feedback-tool' )
 	} );
@@ -193,7 +193,7 @@ ve.ui.MWHelpPopupTool.static.autoAddToGroup = false;
  * @method
  */
 ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
-	this.hidePopup();
+	this.popup.toggle( false );
 	if ( !this.feedback ) {
 		// This can't be constructed until the editor has loaded as it uses special messages
 		this.feedback = new mw.Feedback( {
@@ -211,7 +211,7 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
  * @method
  */
 ve.ui.MWHelpPopupTool.prototype.onKeyboardShortcutsClick = function () {
-	this.hidePopup();
+	this.popup.toggle( false );
 	ve.ui.commandRegistry.lookup( 'commandHelp' ).execute( this.toolbar.getSurface() );
 };
 

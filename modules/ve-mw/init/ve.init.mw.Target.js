@@ -1330,7 +1330,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 					$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 
 				// Initialize surface
-				surface.getContext().hide();
+				surface.getContext().toggle( false );
 				target.$element.append( surface.$element );
 				target.setupToolbar();
 				if ( ve.debug ) {

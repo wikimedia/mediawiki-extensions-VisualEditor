@@ -13,12 +13,12 @@
  * @extends ve.ui.NodeDialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface dialog is for
+ * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
+ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( manager, config ) {
 	// Parent constructor
-	ve.ui.MWTemplateDialog.super.call( this, config );
+	ve.ui.MWTemplateDialog.super.call( this, manager, config );
 
 	// Properties
 	this.transclusionModel = null;
@@ -35,6 +35,26 @@ OO.inheritClass( ve.ui.MWTemplateDialog, ve.ui.NodeDialog );
 ve.ui.MWTemplateDialog.static.icon = 'template';
 
 ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
+
+ve.ui.MWTemplateDialog.static.actions = [
+	{
+		'action': 'apply',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		'flags': 'primary',
+		'modes': 'edit'
+	},
+	{
+		'action': 'insert',
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-transclusion-insert-template' ),
+		'flags': [ 'primary', 'constructive' ],
+		'modes': 'insert'
+	},
+	{
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		'flags': 'safe',
+		'modes': [ 'insert', 'edit' ]
+	}
+];
 
 /**
  * Configuration for booklet layout.
@@ -66,7 +86,7 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, partPage, reselect,
+	var i, len, page, name, names, params, partPage, reselect, insertable,
 		removePages = [];
 
 	if ( removed ) {
@@ -126,10 +146,10 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	} else if ( reselect ) {
 		this.setPageByName( reselect.getName() );
 	}
-	// Update widgets related to a transclusion being a single template or not
-	this.applyButton
-		.setLabel( this.getApplyButtonLabel() )
-		.setDisabled( !this.isInsertable() );
+
+	insertable = this.isInsertable();
+	this.actions.setAbilities( { 'apply': insertable, 'insert': insertable } );
+
 	this.updateTitle();
 };
 
@@ -205,6 +225,13 @@ ve.ui.MWTemplateDialog.prototype.isInsertable = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWTemplateDialog.prototype.getBodyHeight = function () {
+	return 350;
+};
+
+/**
  * Get a page for a transclusion part.
  *
  * @param {ve.dm.MWTransclusionModel} part Part to get page for
@@ -228,15 +255,6 @@ ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 ve.ui.MWTemplateDialog.prototype.getTemplatePartLabel = function ( part ) {
 	return part instanceof ve.dm.MWTemplateModel ?
 		part.getSpec().getLabel() : ve.msg( 'visualeditor-dialog-transclusion-placeholder' );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWTemplateDialog.prototype.getApplyButtonLabel = function () {
-	return this.selectedNode ?
-		ve.ui.MWTemplateDialog.super.prototype.getApplyButtonLabel.call( this ) :
-		ve.msg( 'visualeditor-dialog-transclusion-insert-template' );
 };
 
 /**
@@ -279,30 +297,11 @@ ve.ui.MWTemplateDialog.prototype.setPageByName = function ( name ) {
 ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
-	this.setTitle(
+	this.title.setLabel(
 		parts && parts.length === 1 && parts[0] ?
 			this.getTemplatePartLabel( parts[0] ) :
 			ve.msg( 'visualeditor-dialog-transclusion-loading' )
 	);
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWTemplateDialog.prototype.applyChanges = function () {
-	var surfaceModel = this.getFragment().getSurface(),
-		obj = this.transclusionModel.getPlainObject();
-
-	if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
-		this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
-	} else if ( obj !== null ) {
-		// Collapse returns a new fragment, so update this.fragment
-		this.fragment = this.getFragment().collapseRangeToEnd();
-		this.transclusionModel.insertTransclusionNode( this.getFragment() );
-	}
-
-	// Parent method
-	return ve.ui.MWTemplateDialog.super.prototype.applyChanges.call( this );
 };
 
 /**
@@ -313,6 +312,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	ve.ui.MWTemplateDialog.super.prototype.initialize.call( this );
 
 	// Properties
+	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
 	this.bookletLayout = new OO.ui.BookletLayout(
 		ve.extendObject(
 			{ '$': this.$ },
@@ -322,7 +322,32 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 
 	// Initialization
 	this.frame.$content.addClass( 've-ui-mwTemplateDialog' );
+	this.$body.append( this.panels.$element );
 	this.panels.addItems( [ this.bookletLayout ] );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === 'apply' || action === 'insert' ) {
+		return new OO.ui.Process( function () {
+			var surfaceModel = this.getFragment().getSurface(),
+				obj = this.transclusionModel.getPlainObject();
+
+			if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
+				this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
+			} else if ( obj !== null ) {
+				// Collapse returns a new fragment, so update this.fragment
+				this.fragment = this.getFragment().collapseRangeToEnd();
+				this.transclusionModel.insertTransclusionNode( this.getFragment() );
+			}
+
+			this.close( { 'action': action } );
+		}, this );
+	}
+
+	return ve.ui.MWTemplateDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 /**
@@ -345,6 +370,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 			// Initialization
 			if ( !this.selectedNode ) {
+				this.actions.setMode( 'insert' );
 				if ( data.template ) {
 					// New specified template
 					template = ve.dm.MWTemplateModel.newFromName(
@@ -360,11 +386,12 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					);
 				}
 			} else {
+				this.actions.setMode( 'edit' );
 				// Load existing template
 				promise = this.transclusionModel
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) );
 			}
-			this.applyButton.setDisabled( true );
+			this.actions.setAbilities( { 'apply': false, 'insert': false } );
 			this.pushPending();
 			promise.always( this.onTransclusionReady.bind( this ) );
 		}, this );

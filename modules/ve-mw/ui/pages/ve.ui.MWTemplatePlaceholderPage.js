@@ -46,7 +46,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 	this.removeButton = new OO.ui.ButtonWidget( {
 		'$': this.$,
-		'frameless': true,
+		'framed': false,
 		'icon': 'remove',
 		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
 		'flags': ['destructive'],

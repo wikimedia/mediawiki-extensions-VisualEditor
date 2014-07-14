@@ -463,11 +463,9 @@ $wgResourceModules += array(
 			// ui
 			'lib/ve/modules/ve/ui/ve.ui.js',
 
+			'lib/ve/modules/ve/ui/ve.ui.Overlay.js',
 			'lib/ve/modules/ve/ui/ve.ui.Surface.js',
 			'lib/ve/modules/ve/ui/ve.ui.Context.js',
-			'lib/ve/modules/ve/ui/ve.ui.Dialog.js',
-			'lib/ve/modules/ve/ui/ve.ui.Inspector.js',
-			'lib/ve/modules/ve/ui/ve.ui.WindowSet.js',
 			'lib/ve/modules/ve/ui/ve.ui.Tool.js',
 			'lib/ve/modules/ve/ui/ve.ui.Toolbar.js',
 			'lib/ve/modules/ve/ui/ve.ui.TargetToolbar.js',
@@ -478,6 +476,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/ve.ui.TriggerRegistry.js',
 			'lib/ve/modules/ve/ui/ve.ui.Action.js',
 			'lib/ve/modules/ve/ui/ve.ui.ActionFactory.js',
+			'lib/ve/modules/ve/ui/ve.ui.WindowManager.js',
 
 			'lib/ve/modules/ve/ui/actions/ve.ui.AnnotationAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.ContentAction.js',
@@ -487,13 +486,13 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/actions/ve.ui.ListAction.js',
 			'lib/ve/modules/ve/ui/actions/ve.ui.WindowAction.js',
 
-			'lib/ve/modules/ve/ui/dialogs/ve.ui.ActionDialog.js',
-			'lib/ve/modules/ve/ui/dialogs/ve.ui.NodeDialog.js',
 			'lib/ve/modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js',
+			'lib/ve/modules/ve/ui/dialogs/ve.ui.FragmentDialog.js',
+			'lib/ve/modules/ve/ui/dialogs/ve.ui.NodeDialog.js',
 
 			'lib/ve/modules/ve/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.LinkTargetInputWidget.js',
-			'lib/ve/modules/ve/ui/widgets/ve.ui.ContextWidget.js',
+			'lib/ve/modules/ve/ui/widgets/ve.ui.ContextMenuWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.ContextItemWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.DimensionsWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js',
@@ -507,7 +506,10 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/tools/ve.ui.InspectorTool.js',
 			'lib/ve/modules/ve/ui/tools/ve.ui.ListTool.js',
 
+			'lib/ve/modules/ve/ui/inspectors/ve.ui.FragmentInspector.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.AnnotationInspector.js',
+			'lib/ve/modules/ve/ui/inspectors/ve.ui.InsertionInspector.js',
+			'lib/ve/modules/ve/ui/inspectors/ve.ui.NodeInspector.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.LinkInspector.js',
 
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js',
@@ -530,28 +532,22 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/styles/ve.ce.Surface.css',
 
 			// ui
-			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.ActionDialog.css',
 			'lib/ve/modules/ve/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
 			'lib/ve/modules/ve/ui/styles/tools/ve.ui.FormatTool.css',
-			'lib/ve/modules/ve/ui/styles/ve.ui.Inspector.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.ContextItemWidget.css',
-			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.ContextWidget.css',
+			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.ContextMenuWidget.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.DimensionsWidget.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.MediaSizeWidget.css',
+			'lib/ve/modules/ve/ui/styles/inspectors/ve.ui.FragmentInspector.css',
+			'lib/ve/modules/ve/ui/styles/inspectors/ve.ui.LinkInspector.css',
 			'lib/ve/modules/ve/ui/styles/inspectors/ve.ui.SpecialCharacterInspector.css',
 			'lib/ve/modules/ve/ui/styles/widgets/ve.ui.SurfaceWidget.css',
+			'lib/ve/modules/ve/ui/styles/ve.ui.Overlay.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Surface.css',
 			'lib/ve/modules/ve/ui/styles/ve.ui.Toolbar.css',
 
 			// TODO: add debugStyles to ResourceLoader
 			'lib/ve/modules/ve/ui/styles/ve.ui.DebugBar.css',
-		),
-		'skinStyles' => array(
-			'default' => array(
-				'lib/ve/modules/ve/ui/themes/apex/ve.ui.Inspector.css',
-				'lib/ve/modules/ve/ui/themes/apex/dialogs/ve.ui.ActionDialog.css',
-			),
-			'minerva' => array(),
 		),
 		'dependencies' => array(
 			'rangy',
@@ -577,6 +573,7 @@ $wgResourceModules += array(
 			'visualeditor-clipboard-paste-special',
 			'visualeditor-dialog-action-apply',
 			'visualeditor-dialog-action-cancel',
+			'visualeditor-dialog-action-done',
 			'visualeditor-dialog-action-goback',
 			'visualeditor-dialog-command-help-title',
 			'visualeditor-dialog-error',
@@ -602,6 +599,7 @@ $wgResourceModules += array(
 			'visualeditor-indentationbutton-outdent-tooltip',
 			'visualeditor-inspector-close-tooltip',
 			'visualeditor-inspector-remove-tooltip',
+			'visualeditor-linkinspector-open',
 			'visualeditor-linkinspector-title',
 			'visualeditor-listbutton-bullet-tooltip',
 			'visualeditor-listbutton-number-tooltip',
@@ -630,6 +628,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/modules/ve/ui/ve.ui.DesktopSurface.js',
 			'lib/ve/modules/ve/ui/ve.ui.DesktopContext.js',
+			'lib/ve/modules/ve/ui/ve.ui.DesktopInspectorManager.js',
 		),
 		'styles' => array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.DesktopContext.css',
@@ -644,6 +643,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/modules/ve/ui/ve.ui.MobileSurface.js',
 			'lib/ve/modules/ve/ui/ve.ui.MobileContext.js',
+			'lib/ve/modules/ve/ui/ve.ui.MobileWindowManager.js',
 		),
 		'styles' => array(
 			'lib/ve/modules/ve/ui/styles/ve.ui.MobileSurface.css',
@@ -693,7 +693,6 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			// ui
-			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWBetaWelcomeDialog.css',
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTitleInputWidget.css',
@@ -729,6 +728,7 @@ $wgResourceModules += array(
 			'visualeditor-help-link',
 			'visualeditor-help-title',
 			'visualeditor-mweditmodesource-title',
+			'visualeditor-mweditmodesource-tool',
 			'visualeditor-mweditmodesource-warning',
 			'visualeditor-mweditmodesource-warning-switch',
 			'visualeditor-mweditmodesource-warning-switch-discard',
@@ -1245,9 +1245,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/nodes/ve.ce.MWGalleryNode.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWGalleryInspector.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWGalleryInspectorTool.js',
-		),
-		'styles' => array(
-			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWGalleryInspector.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
