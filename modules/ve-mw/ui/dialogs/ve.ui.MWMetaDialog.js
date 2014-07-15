@@ -135,11 +135,9 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
  * @inheritdoc
  */
 ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			// Data initialization
-			data = data || {};
-
 			var surfaceModel = this.getFragment().getSurface();
 
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
