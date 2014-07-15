@@ -283,15 +283,13 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 		if ( override || !this.edited ) {
 			this.cancel();
 		} else {
-			this.surface.dialogs.openWindow( 'confirm', {
-				'prompt': ve.msg( 'visualeditor-viewpage-savewarning' ),
-				'okLabel': ve.msg( 'visualeditor-viewpage-savewarning-discard' ),
-				'okFlags': [ 'destructive' ],
-				'cancelLabel': ve.msg( 'visualeditor-viewpage-savewarning-keep' ),
-				'cancelFlags': []
-			} ).then( function ( opened ) {
-				opened.then( function () {
-					target.cancel();
+			this.surface.dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
+				opened.then( function ( closing ) {
+					closing.then( function ( data ) {
+						if ( data.action === 'discard' ) {
+							target.cancel();
+						}
+					} );
 				} );
 			} );
 		}
