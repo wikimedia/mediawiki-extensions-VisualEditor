@@ -194,6 +194,7 @@
 	"visualeditor-meta-tool": "Opciones",
 	"visualeditor-mwalienextensioninspector-title": "Extensión de MediaWiki",
 	"visualeditor-mweditmodesource-title": "Cambiar a edición de fuente",
+	"visualeditor-mweditmodesource-tool": "Cambiar a la edición del código",
 	"visualeditor-mweditmodesource-warning": "Estás por cambiar a la edición de fuente.\nCualquier cambio que hayas hecho puede mantenerse, pero no se podrá volver al Editor visual sin guardar o recargar la página.\n¿Estás seguro de querer continuar?",
 	"visualeditor-mweditmodesource-warning-switch": "Conservar los cambios",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Descartar los cambios",
