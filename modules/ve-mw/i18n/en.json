@@ -237,7 +237,7 @@
     "visualeditor-saveerror": "Error saving data to server: $1.",
     "visualeditor-serializeerror": "Error loading data from server: $1.",
     "visualeditor-settings-tool": "Page settings",
-    "visualeditor-timeout":"It looks like full editing is currently unavailable. Would you like to edit in source mode instead?",
+    "visualeditor-timeout":"It looks like this editor is currently unavailable. Would you like to edit in source mode instead?",
     "visualeditor-toolbar-cancel": "Cancel",
     "visualeditor-toolbar-cite-label": "Cite",
     "visualeditor-toolbar-format-tooltip": "Format paragraph",
