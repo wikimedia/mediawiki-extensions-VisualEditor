@@ -54,10 +54,9 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 		mwData = this.getModel().getAttribute( 'mw' ),
 		extsrc = config && config.extsrc !== undefined ? config.extsrc : mwData.body.extsrc,
 		attrs = config && config.attrs || mwData.attrs,
-		xmlDoc = ( new DOMParser() ).parseFromString( '<' + this.getModel().getExtensionName() + '/>', 'text/xml' ),
-		wikitext = ( new XMLSerializer() ).serializeToString(
-			$( xmlDoc.documentElement ).attr( attrs ).text( extsrc )[0]
-		);
+		tagName = this.getModel().getExtensionName(),
+		// XML-like tags in wikitext are not actually XML and don't expect their contents to be escaped.
+		wikitext = mw.html.element( tagName, attrs, new mw.html.Raw( extsrc ) );
 
 	if ( !this.constructor.static.rendersEmpty && extsrc.trim() !== '' ) {
 		xhr = ve.init.target.constructor.static.apiRequest( {
