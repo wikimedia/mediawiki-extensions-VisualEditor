@@ -8,6 +8,14 @@ describe "Rectangle" do
     expect(rectangle(input_rectangles)).to eq(input_rectangle)
   end
 
+  it "should return the co-ordinates of the rectangle which is inside a iframe" do
+    input_rectangle  = [50,50,10,10]
+    iframe_rectangle = [100,100,20,20]
+    input_rectangles = [input_rectangle]
+    output_rectangle = [150, 150, 10, 10]
+    expect(rectangle(input_rectangles, iframe_rectangle)).to eq(output_rectangle)
+  end
+
   it "if we provide 2 rectangles and if one contains the other then it should return co-ordinates of bigger rectangle" do
     input_rectangle_1 = [0,0,1,1]
     input_rectangle_2 = [0,0,2,2]
