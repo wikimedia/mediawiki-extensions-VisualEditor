@@ -858,11 +858,6 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			this.captionSurface.destroy();
 			this.captionSurface = null;
 			this.captionNode = null;
-			// Reset the considerations for the scalable
-			// in the image node
-			if ( this.selectedNode ) {
-				this.selectedNode.syncScalableToType();
-			}
 			this.imageModel = null;
 		}, this );
 };

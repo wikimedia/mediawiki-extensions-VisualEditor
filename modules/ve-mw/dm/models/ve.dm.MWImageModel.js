@@ -81,7 +81,7 @@ ve.dm.MWImageModel.static.infoCache = {};
  * @returns {ve.dm.MWImageNode} An image node
  */
 ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
-	var scalable, attrs, newNode, newDimensions,
+	var attrs, newNode, newDimensions,
 		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	attrs = ve.extendObject( {
@@ -93,21 +93,13 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 	}, attributes );
 
 	if ( attrs.defaultSize ) {
-		// Create a scalable for calculations
-		scalable = new ve.dm.Scalable( {
-			'originalDimensions': {
-				'width': attrs.width,
-				'height': attrs.height
-			}
-		} );
-
 		// Resize to default thumbnail size, but only if the image itself
 		// isn't smaller than the default size
 		// For svg/drawings, the default wiki size is always applied
 		if ( attrs.width > defaultThumbSize || attrs.mediaType === 'DRAWING' ) {
-			newDimensions = scalable.getDimensionsFromValue( {
+			newDimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
 				'width': defaultThumbSize
-			} );
+			}, attrs.width / attrs.height );
 			attrs.width = newDimensions.width;
 			attrs.height = newDimensions.height;
 		}
@@ -120,7 +112,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 		'attributes': attrs
 	} );
 
-	newNode.syncScalableToType();
+	ve.dm.MWImageNode.static.syncScalableToType( attrs.type, attrs.mediaType, newNode.getScalable() );
 
 	return newNode;
 };
@@ -141,8 +133,9 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node, dir ) {
 		imgModel = new ve.dm.MWImageModel();
 
 	imgModel.setMediaNode( node );
-	// Set scalable
-	imgModel.setScalable( node.getScalable() );
+
+	// Set scalable clone
+	imgModel.setScalable( node.getScalable().clone() );
 
 	// Cache the attributes so we can create a new image without
 	// losing any existing information
@@ -175,9 +168,6 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node, dir ) {
 		'custom'
 	);
 
-	// Make sure the node type and scalable are synchronized
-	node.syncScalableToType();
-
 	// If this is a block image and the caption already exists,
 	// store the initial caption and set it as the caption document
 	if ( node.getDocument() && node.getType() === 'mwBlockImage' ) {
@@ -188,6 +178,7 @@ ve.dm.MWImageModel.static.newFromImageNode = function ( node, dir ) {
 			);
 		}
 	}
+
 	return imgModel;
 };
 
@@ -636,7 +627,7 @@ ve.dm.MWImageModel.prototype.getOriginalImageAttributes = function () {
  * @param {number} dimensions.height The height of the image
  */
 ve.dm.MWImageModel.prototype.setCurrentDimensions = function ( dimensions ) {
-	var normalizedDimensions = this.scalable.getDimensionsFromValue( dimensions );
+	var normalizedDimensions = ve.dm.Scalable.static.getDimensionsFromValue( dimensions, this.scalable.getRatio() );
 	this.scalable.setCurrentDimensions( normalizedDimensions );
 };
 
@@ -690,7 +681,7 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 
 	// Let the image node update scalable considerations
 	// for default and max dimensions as per the new type.
-	this.getMediaNode().syncScalableToType( type );
+	ve.dm.MWImageNode.static.syncScalableToType( type, this.getMediaType(), this.getScalable() );
 
 	this.emit( 'typeChange', type );
 };
@@ -710,9 +701,9 @@ ve.dm.MWImageModel.prototype.resetDefaultDimensions = function () {
 				this.scalable.setDefaultDimensions( originalDimensions );
 			} else {
 				this.scalable.setDefaultDimensions(
-					this.scalable.getDimensionsFromValue( {
+					ve.dm.Scalable.static.getDimensionsFromValue( {
 						'width': this.defaultThumbSize
-					} )
+					}, this.scalable.getRatio() )
 				);
 			}
 		} else {
