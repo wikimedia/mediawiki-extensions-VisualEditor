@@ -216,6 +216,16 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
 };
 
 /**
+ * Get a parameter auto value.
+ *
+ * @param {string} name Parameter name
+ * @returns {string} Auto-value for the parameter
+ */
+ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
+	return this.params[name].autovalue;
+};
+
+/**
  * Get a parameter type.
  *
  * @param {string} name Parameter name
