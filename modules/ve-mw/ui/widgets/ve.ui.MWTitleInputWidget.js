@@ -17,9 +17,6 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @cfg {number} [namespace] Namespace to prepend to queries
- * @cfg {boolean} [prefixColon=false] Whether or not to prefix entries outside the
- *  target namespace (if set) with a colon. Assumed to be true unless
- *  explicitly set to false.
  */
 ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	// Config intialization
@@ -33,7 +30,6 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 
 	// Properties
 	this.namespace = config.namespace || null;
-	this.prefixColon = config.prefixColon === true;
 
 	// Events
 	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
@@ -115,9 +111,14 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 	if ( matchingPages && matchingPages.length ) {
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
 			title = new mw.Title( matchingPages[i] );
-			if ( this.namespace !== null && ( this.prefixColon || title.namespace === 0 ) ) {
-				value = title.getNamespaceId() === this.namespace ?
-					title.getMainText() : ':' + title.getPrefixedText();
+			if ( this.namespace !== null ) {
+				if ( title.getNamespaceId() === this.namespace ) {
+					value = title.getMainText();
+				} else if ( title.getNamespaceId() === 0 ) {
+					value = ':' + title.getPrefixedText();
+				} else {
+					value = title.getPrefixedText();
+				}
 			} else {
 				value = title.getPrefixedText();
 			}
