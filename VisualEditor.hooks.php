@@ -571,6 +571,7 @@ class VisualEditorHooks {
 				'lib/ve/modules/ve/test/dm/lineardata/ve.dm.MetaLinearData.test.js',
 				'modules/ve-mw/test/dm/ve.dm.mwExample.js',
 				'modules/ve-mw/test/dm/ve.dm.Converter.test.js',
+				'modules/ve-mw/test/dm/ve.dm.MWImageModel.test.js',
 				// VisualEditor ContentEditable Tests
 				'lib/ve/modules/ve/test/ce/ve.ce.test.js',
 				'lib/ve/modules/ve/test/ce/ve.ce.Document.test.js',
