@@ -354,12 +354,10 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var template, promise;
-
-			// Data initialization
-			data = data || {};
 
 			// Properties
 			this.loaded = false;

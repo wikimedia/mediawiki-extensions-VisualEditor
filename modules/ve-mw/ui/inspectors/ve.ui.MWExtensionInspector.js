@@ -89,6 +89,7 @@ ve.ui.MWExtensionInspector.prototype.getInputPlaceholder = function () {
  * @inheritdoc
  */
 ve.ui.MWExtensionInspector.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
 	return ve.ui.MWExtensionInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var value, dir;

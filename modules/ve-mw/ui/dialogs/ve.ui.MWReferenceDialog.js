@@ -363,6 +363,7 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
  * @param {boolean} [data.useExistingReference] Open the dialog in "use existing reference" mode
  */
 ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
 	return ve.ui.MWReferenceDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			this.panels.setItem( this.editPanel );
