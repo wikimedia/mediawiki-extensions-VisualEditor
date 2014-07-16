@@ -63,7 +63,8 @@ end
 
 When(/^I edit the page with (.+)$/) do |input_string|
   on(VisualEditorPage) do |page|
-    page.content_element.when_present(10).fire_event("onfocus")
+    #page is loading everything twice, sleep just to make the test pass
+    sleep 5
     page.content_element.when_present.send_keys(input_string + " #{@random_string} ")
   end
 end

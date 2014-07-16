@@ -19,7 +19,7 @@ class VisualEditorPage
   span(:looks_good, class: "oo-ui-labeledElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
-  div(:page_text, id: "mw-content-text")
+  div(:page_text, class: "ve-ce-surface mw-body-content")
   div(:page_text_after_save, class: "ve-ce-documentNode mw-content-ltr ve-ce-branchNode noime")
   a(:page_title, text: /Page title/)
   a(:paragraph, text: /Paragraph/)
