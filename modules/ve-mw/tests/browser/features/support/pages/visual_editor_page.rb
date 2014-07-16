@@ -82,7 +82,7 @@ class VisualEditorPage
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:ex, text: "Return to save form", frame: frame)
     span(:insert_references_list, text: "Insert references list", frame: frame)
-    span(:media_apply_changes, text: "Apply changes", frame: frame)
+    span(:media_apply_changes, text: "Insert media", frame: frame)
     text_field(:media_search, placeholder: "Search for media", frame: frame)
     div(:media_select, class: "ve-ui-mwMediaResultWidget-overlay", frame: frame)
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
@@ -109,6 +109,6 @@ class VisualEditorPage
     div(:links_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:links_review_changes, class: "oo-ui-labeledElement-label", text: "Review your changes", frame: frame)
     div(:media_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
-    a(:media_exit, title: "Close", frame: frame)
+    span(:media_exit, text: "Return to save form", frame: frame)
   end
 end
