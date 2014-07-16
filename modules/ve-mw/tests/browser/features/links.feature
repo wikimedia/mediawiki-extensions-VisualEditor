@@ -9,21 +9,21 @@ Feature: VisualEditor Links
 
   Scenario: Enter external link
   When I enter http://www.example.com into link Content box
-    And I click < to close Link User Interface
+    And I click Done to close Link User Interface
     And I click Save page
     And I click Links Review your changes
   Then an external link appears in the diff view
 
   Scenario: Enter internal link
   When I enter Main Page into link Content box
-    And I click < to close Link User Interface
+    And I click Done to close Link User Interface
     And I click Save page
     And I click Links Review your changes
   Then an internal link appears in the diff view
 
   Scenario: Enter non-existing link
     When I enter DoesNotExist into link Content box
-    And I click < to close Link User Interface
+    And I click Done to close Link User Interface
     And I click Save page
     And I click Links Review your changes
   Then a non-existing link appears in the diff view

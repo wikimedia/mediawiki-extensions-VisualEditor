@@ -10,8 +10,8 @@ Given(/^I can see the Link User Inteface$/) do
   end
 end
 
-When(/^I click < to close Link User Interface$/) do
-  on(VisualEditorPage).leftarrowclose_element.when_present.click
+When(/^I click Done to close Link User Interface$/) do
+  on(VisualEditorPage).links_done_element.when_present.click
 end
 
 Then(/^an external link appears in the diff view$/) do
