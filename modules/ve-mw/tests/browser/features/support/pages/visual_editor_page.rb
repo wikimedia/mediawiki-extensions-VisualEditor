@@ -67,7 +67,7 @@ class VisualEditorPage
     span(:links_done, text: "Done", frame: frame)
     text_field(:link_textfield, index: 0, frame: frame)
     span(:another_save_page, class: "oo-ui-labeledElement-label", text: "Save page", frame: frame)
-    div(:options_page_title, class: "oo-ui-window-title", text: "Options", frame: frame)
+    div(:options_page_title, class: "oo-ui-processDialog-location", text: "Options", frame: frame)
     div(:ve_link_ui, class: "oo-ui-window-head", frame: frame)
   end
 
