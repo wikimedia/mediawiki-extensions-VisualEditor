@@ -683,6 +683,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWBetaWelcomeDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js',
+			'modules/ve-mw/ui/dialogs/ve.ui.MWCancelConfirmDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWWikitextSwitchConfirmDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js',
@@ -759,6 +760,7 @@ $wgResourceModules += array(
 			'visualeditor-toolbar-style-tooltip',
 			'visualeditor-toolbar-cite-label',
 			'visualeditor-viewpage-savewarning',
+			'visualeditor-viewpage-savewarning-title',
 			'visualeditor-viewpage-savewarning-discard',
 			'visualeditor-viewpage-savewarning-keep',
 			'visualeditor-wikitext-warning-title',

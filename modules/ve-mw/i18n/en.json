@@ -245,6 +245,7 @@
     "visualeditor-toolbar-style-tooltip": "Style text",
     "visualeditor-usernamespacepagelink": "Project:User namespace",
     "visualeditor-viewpage-savewarning": "Are you sure you want to go back to view mode without saving first?",
+    "visualeditor-viewpage-savewarning-title": "Are you sure?",
     "visualeditor-viewpage-savewarning-discard": "Discard edits",
     "visualeditor-viewpage-savewarning-keep": "Continue editing",
     "visualeditor-wikitext-warning": "You are using VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] does not work here. To switch to source editing at any time without losing your changes, open the dropdown menu next to \"{{int:visualeditor-toolbar-cancel}}\" and select \"{{int:visualeditor-mweditmodesource-title}}\".",
