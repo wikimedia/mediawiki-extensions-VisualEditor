@@ -865,6 +865,10 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wiki
  *  succeeds/fails.
  */
 ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
+	if ( this.deactivating ) {
+		return false;
+	}
+
 	var saveOptions = this.getSaveOptions();
 	this.emit( 'saveInitiated' );
 
