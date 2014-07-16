@@ -470,7 +470,6 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 			} );
 			this.revid = newid;
 		}
-		this.saveDialog.close();
 		this.saveDialog.reset();
 		this.replacePageContent( html, categoriesHtml, isRedirect, displayTitle );
 		this.setupSectionEditLinks();
@@ -1090,9 +1089,11 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	if ( this.surface.mwTocWidget ) {
 		this.surface.mwTocWidget.teardown();
 	}
+
 	if ( this.saveDialog ) {
-		// If we got as far as setting up the save dialog, tear it down
+		// If the save dialog is still open (from saving) close it
 		promises.push( this.saveDialog.close() );
+		// Release the reference
 		this.saveDialog = null;
 	}
 
