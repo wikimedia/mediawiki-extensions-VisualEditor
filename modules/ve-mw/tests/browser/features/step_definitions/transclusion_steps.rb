@@ -1,5 +1,5 @@
 Given(/^I can see the Transclusion User Interface$/) do
-  on(VisualEditorPage).template_header_element.when_present
+ on(VisualEditorPage).title.should match "New template"
 end
 
 Given(/^I click Add parameter$/) do

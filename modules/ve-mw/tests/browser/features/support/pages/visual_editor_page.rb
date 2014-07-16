@@ -95,7 +95,6 @@ class VisualEditorPage
     div(:review_failed, class: "oo-ui-window-head", frame: frame)
     span(:second_save_page, class: "oo-ui-labeledElement-label", text: "Save page", frame: frame)
     unordered_list(:suggestion_list, class: "ve-ui-mwTitleInputWidget-menu", frame: frame)
-    div(:template_header, class: "ve-ui-mwTransclusionDialog-single", frame: frame)
     li(:template_list_item, text: "S", frame: frame)
     div(:title, class: "oo-ui-processDialog-location", frame: frame)
     text_area(:transclusion_textarea, index: 0, frame: frame)
