@@ -29,10 +29,13 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 	this.mediaType = 'BITMAP';
 	// Get wiki defaults
 	this.svgMaxSize = mw.config.get( 'wgVisualEditor' ).svgMaxSize;
-	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	// Initialize
-	this.syncScalableToType( this.getAttribute( 'type' ) );
+	this.constructor.static.syncScalableToType(
+		this.getAttribute( 'type' ),
+		this.mediaType,
+		this.getScalable()
+	);
 
 	// Events
 	this.connect( this, { 'attributeChange': 'onAttributeChange' } );
@@ -50,14 +53,13 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
  * Update image scalable properties according to the image type.
  *
  * @param {string} type The new image type
+ * @param {string} mediaType Image media type 'DRAWING' or 'BITMAP'
+ * @param {ve.dm.Scalable} scalable The scalable object to update
  */
-ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
+ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalable ) {
 	var originalDimensions, dimensions,
-		scalable = this.getScalable(),
-		width = this.getAttribute( 'width' );
-
-	// If no type is given, assume we are updating per current type
-	type = type || this.getAttribute( 'type' );
+		width = scalable.getCurrentDimensions().width,
+		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	originalDimensions = scalable.getOriginalDimensions();
 
@@ -66,14 +68,15 @@ ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
 		// Set the default size to that in the wiki configuration if
 		// 1. The image width is not smaller than the default
 		// 2. If the image is an SVG drawing
-		if ( width >= this.defaultThumbSize || this.getMediaType() === 'DRAWING' ) {
-			dimensions = this.scalable.getDimensionsFromValue( {
-				'width': this.defaultThumbSize
-			} );
+		if ( width >= defaultThumbSize || mediaType === 'DRAWING' ) {
+			dimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
+				'width': defaultThumbSize
+			}, scalable.getRatio() );
 		} else {
-			dimensions = this.scalable.getDimensionsFromValue( {
-				'width': width
-			} );
+			dimensions = ve.dm.Scalable.static.getDimensionsFromValue(
+				scalable.getCurrentDimensions(),
+				scalable.getRatio()
+			);
 		}
 		scalable.setDefaultDimensions( dimensions );
 	} else {
@@ -83,7 +86,7 @@ ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
 	}
 
 	// Deal with maximum dimensions for images and drawings
-	if ( this.getMediaType() !== 'DRAWING' ) {
+	if ( mediaType !== 'DRAWING' ) {
 		if ( originalDimensions ) {
 			scalable.setMaxDimensions( originalDimensions );
 			scalable.setEnforcedMax( true );
@@ -106,7 +109,7 @@ ve.dm.MWImageNode.prototype.syncScalableToType = function ( type ) {
  */
 ve.dm.MWImageNode.prototype.onAttributeChange = function ( key, from, to ) {
 	if ( key === 'type' ) {
-		this.syncScalableToType( to );
+		this.constructor.static.syncScalableToType( to, this.mediaType, this.getScalable() );
 	}
 };
 
@@ -188,7 +191,11 @@ ve.dm.MWImageNode.prototype.getScalablePromise = function () {
 				// Update media type
 				this.mediaType = info.mediatype;
 				// Update according to type
-				this.syncScalableToType();
+				this.constructor.static.syncScalableToType(
+					this.getAttribute( 'type' ),
+					this.mediaType,
+					this.getScalable()
+				);
 			}
 		}.bind( this ) ).promise();
 	}
