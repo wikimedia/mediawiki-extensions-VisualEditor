@@ -230,7 +230,7 @@
 	"visualeditor-saveerror": "Erro ao gravar dados no servidor: $1.",
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
 	"visualeditor-settings-tool": "Configurações da página",
-	"visualeditor-timeout": "Parece que a edição completa está indisponível de momento; gostaria de editar antes o código-fonte?",
+	"visualeditor-timeout": "Parece que o editor está indisponível de momento. Gostaria de editar antes o código-fonte?",
 	"visualeditor-toolbar-cancel": "Cancelar",
 	"visualeditor-toolbar-cite-label": "Citar",
 	"visualeditor-toolbar-format-tooltip": "Formatar parágrafo",

@@ -251,7 +251,7 @@
 	"visualeditor-saveerror": "Erreur lors de l’enregistrement des données sur le serveur : $1.",
 	"visualeditor-serializeerror": "Erreur lors du chargement des données depuis le serveur : $1.",
 	"visualeditor-settings-tool": "Paramètres de la page",
-	"visualeditor-timeout": "Il semble que la modification complète n’est pas disponible pour le moment ; voulez-vous modifier en mode source à la place ?",
+	"visualeditor-timeout": "Il semble que cet éditeur n’est pas disponible pour le moment. Voulez-vous modifier en mode source à la place ?",
 	"visualeditor-toolbar-cancel": "Annuler",
 	"visualeditor-toolbar-cite-label": "Citer",
 	"visualeditor-toolbar-format-tooltip": "Mise en forme du paragraphe",

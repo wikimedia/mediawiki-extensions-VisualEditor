@@ -232,7 +232,7 @@
 	"visualeditor-saveerror": "שגיאה בשמירת נתונים לשרת: $1.",
 	"visualeditor-serializeerror": "שגיאה בטעינת נתונים מהשרת: $1.",
 	"visualeditor-settings-tool": "הגדרות דף",
-	"visualeditor-timeout": "נראה שעריכה מלאה אינה זמינה כעת. האם ברצונך לערוך במצב עריכת קוד מקור?",
+	"visualeditor-timeout": "נראה שהעורך הזה אינו זמין כעת. האם ברצונך לערוך במצב עריכת קוד מקור?",
 	"visualeditor-toolbar-cancel": "ביטול",
 	"visualeditor-toolbar-cite-label": "ציטוט",
 	"visualeditor-toolbar-format-tooltip": "עיצוב פסקה",

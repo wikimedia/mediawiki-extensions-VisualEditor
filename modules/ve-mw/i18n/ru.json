@@ -237,7 +237,7 @@
 	"visualeditor-saveerror": "Ошибка при сохранении данных: $1.",
 	"visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",
 	"visualeditor-settings-tool": "Параметры страницы",
-	"visualeditor-timeout": "Похоже, что полное редактирование в настоящее время недоступно. Вы хотели бы вместо этого перейти к редактированию в режиме правки исходного текста?",
+	"visualeditor-timeout": "Похоже, что этот редактор в настоящее время недоступен. Вы хотели бы вместо этого перейти к редактированию в режиме правки исходного текста?",
 	"visualeditor-toolbar-cancel": "Отмена",
 	"visualeditor-toolbar-cite-label": "Источники",
 	"visualeditor-toolbar-format-tooltip": "Формат абзаца",

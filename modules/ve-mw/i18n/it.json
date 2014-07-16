@@ -232,7 +232,7 @@
 	"visualeditor-saveerror": "Errore durante il salvataggio dei dati sul server: $1.",
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-settings-tool": "Impostazioni pagina",
-	"visualeditor-timeout": "Sembra che l'editor completo non sia attualmente disponibile. Vorresti invece modificare in modalità sorgente?",
+	"visualeditor-timeout": "Sembra che questo editor non sia attualmente disponibile. Vorresti invece modificare in modalità sorgente?",
 	"visualeditor-toolbar-cancel": "Annulla",
 	"visualeditor-toolbar-cite-label": "Cita",
 	"visualeditor-toolbar-format-tooltip": "Formato del paragrafo",

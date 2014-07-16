@@ -229,7 +229,7 @@
 	"visualeditor-saveerror": "Fel uppstod vid sparande av data till server: $1.",
 	"visualeditor-serializeerror": "Fel uppstod vid inläsning av data från server: $1.",
 	"visualeditor-settings-tool": "Sidinställningar",
-	"visualeditor-timeout": "Det ser ut som att fullständig redigering inte är tillgängligt för tillfället. Vill du redigera wikitexten istället?",
+	"visualeditor-timeout": "Det ser ut som denna redigerare inte är tillgänglig för tillfället. Vill du redigera wikitexten istället?",
 	"visualeditor-toolbar-cancel": "Avbryt",
 	"visualeditor-toolbar-cite-label": "Ange källa",
 	"visualeditor-toolbar-format-tooltip": "Formatera stycke",

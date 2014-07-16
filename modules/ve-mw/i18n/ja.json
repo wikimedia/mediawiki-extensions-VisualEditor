@@ -188,7 +188,7 @@
 	"visualeditor-saveerror": "サーバーにデータを保存する際にエラーが発生しました: $1",
 	"visualeditor-serializeerror": "サーバーからデータを読み込む際にエラーが発生しました: $1",
 	"visualeditor-settings-tool": "ページの設定",
-	"visualeditor-timeout": "完全な編集は今のところできないように見えます。代わりにソース モードで編集しますか?",
+	"visualeditor-timeout": "このエディターは現在利用できないようです。代わりにソース モードで編集しますか?",
 	"visualeditor-toolbar-cancel": "キャンセル",
 	"visualeditor-toolbar-cite-label": "引用",
 	"visualeditor-toolbar-format-tooltip": "段落の書式",

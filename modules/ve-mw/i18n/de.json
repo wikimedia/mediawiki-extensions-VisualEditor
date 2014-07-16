@@ -228,7 +228,7 @@
 	"visualeditor-saveerror": "Fehler beim Speichern der Daten auf dem Server: $1.",
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",
 	"visualeditor-settings-tool": "Seiteneinstellungen",
-	"visualeditor-timeout": "Es sieht so aus, als ob eine vollständige Bearbeitung zur Zeit nicht verfügbar ist. Möchtest du stattdessen in den Quelltextmodus wechseln?",
+	"visualeditor-timeout": "Es sieht so aus, als ob dieser Editor zur Zeit nicht verfügbar ist. Möchtest du stattdessen in den Quelltextmodus wechseln?",
 	"visualeditor-toolbar-cancel": "Abbrechen",
 	"visualeditor-toolbar-cite-label": "Zitat",
 	"visualeditor-toolbar-format-tooltip": "Absatz formatieren",

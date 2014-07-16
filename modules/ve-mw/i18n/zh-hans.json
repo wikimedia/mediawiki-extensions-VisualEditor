@@ -234,7 +234,7 @@
 	"visualeditor-saveerror": "保存数据至服务器时出错：$1。",
 	"visualeditor-serializeerror": "从服务器加载数据时出错：$1。",
 	"visualeditor-settings-tool": "页面设置",
-	"visualeditor-timeout": "看起来完全编辑当前不可用。想要换用源代码模式编辑吗？",
+	"visualeditor-timeout": "看起来此编辑器当前不可用。想要换用源代码模式编辑吗？",
 	"visualeditor-toolbar-cancel": "取消",
 	"visualeditor-toolbar-cite-label": "引用",
 	"visualeditor-toolbar-format-tooltip": "段落格式",
