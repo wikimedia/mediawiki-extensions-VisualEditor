@@ -374,6 +374,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.positionInput.connect( this, { 'choose': 'onPositionInputChoose' } );
 	this.typeInput.connect( this, { 'choose': 'onTypeInputChoose' } );
 	this.search.connect( this, { 'select': 'onSearchSelect' } );
+	this.altTextInput.connect( this, { 'change': 'setChanged' } );
 
 	// Panel classes
 	this.mediaSearchPanel.$element.addClass( 've-ui-mwMediaDialog-panel-search' );
@@ -735,6 +736,7 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 	this.sizeErrorLabel.$element.hide();
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
 	this.sizeWidget.connect( this, { 'changeSizeType': 'setChanged' } );
+	this.sizeWidget.connect( this, { 'change': 'setChanged' } );
 
 	// Initialize size
 	this.sizeWidget.setSizeType(
