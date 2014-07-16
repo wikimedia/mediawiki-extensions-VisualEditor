@@ -1,4 +1,4 @@
-When(/^I clear the confirm dialog$/) do
+When(/^I clear the confirm dialog by clicking Keep changes$/) do
   on(VisualEditorPage).confirm_switch_element.when_present.click
 end
 
@@ -24,6 +24,14 @@ When(/^I click Edit for VisualEditor from this page$/) do
       page.edit_ve_element.when_present.click
     end
   end
+end
+
+When(/^I see the Cancel option$/) do
+  on(VisualEditorPage).confirm_switch_cancel_element.when_present
+end
+
+When(/^I see the Discard option$/) do
+  on(VisualEditorPage).confirm_switch_discard_element.when_present
 end
 
 When(/^I see the wikitext editor$/) do
