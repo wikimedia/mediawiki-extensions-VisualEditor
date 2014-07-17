@@ -403,8 +403,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
-	var newNode, attrs, info,
-		nodeType = 'mwBlockImage';
+	var attrs, info, dimensions;
 
 	if ( item ) {
 		info = item.imageinfo[0];
@@ -412,8 +411,6 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 			// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
 			'href': './' + item.title,
 			'src': info.thumburl,
-			'width': info.width,
-			'height': info.height,
 			'resource': './' + item.title,
 			'mediaType': info.mediatype
 		};
@@ -423,21 +420,25 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 			// a brand new node to insert
 			attrs.type = 'thumb';
 			attrs.align = 'default';
+			attrs.width = info.thumbwidth;
+			attrs.height = info.thumbheight;
 			attrs.defaultSize = true;
 		} else {
 			// Image model already exists, so we just need to create a new
 			// image based on the parameters that already exist
+			dimensions = this.imageModel.getScalable().getCurrentDimensions();
+
 			attrs.type = this.imageModel.getType();
 			attrs.align = this.imageModel.getAlignment();
-			attrs.defaultSize = this.imageModel.isDefaultSize();
+			attrs.width = dimensions.width;
+			attrs.height = dimensions.height;
 			if ( this.imageModel.getAltText() ) {
 				attrs.alt = this.imageModel.getAltText();
 			}
-			nodeType = this.imageModel.getImageNodeType();
 		}
 
-		newNode = ve.dm.MWImageModel.static.createImageNode( attrs, nodeType );
-		this.setImageModel( newNode );
+		this.setImageModel( attrs );
+
 		this.setChanged();
 		this.switchPanels( 'edit' );
 	}
@@ -614,8 +615,9 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			this.pageTitle = pageTitle;
 
-			// Properties
-			this.setImageModel( this.selectedNode );
+			if ( this.selectedNode ) {
+				this.setImageModel( this.selectedNode.getAttributes() );
+			}
 
 			this.resetCaption();
 
@@ -695,23 +697,22 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
  * Set the image model
  * @param {ve.dm.MWImageNode} node Image node, if it doesn't come from the selected node
  */
-ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
+ve.ui.MWMediaDialog.prototype.setImageModel = function ( attrs ) {
 	var dir;
-
-	if ( !node ) {
-		return;
-	}
 
 	if ( this.imageModel ) {
 		this.imageModel.disconnect( this );
 		this.sizeWidget.disconnect( this );
 	}
 
-	dir = node.getDocument() ?
-		node.getDocument().getDir() :
-		this.getFragment().getSurface().getDocument().getDir();
+	if ( this.selectedNode ) {
+		dir = this.selectedNode.getDocument() ?
+			this.selectedNode.getDocument().getDir() :
+			this.getFragment().getSurface().getDocument().getDir();
+		attrs = attrs || this.selectedNode.getAttributes();
+	}
 
-	this.imageModel = ve.dm.MWImageModel.static.newFromImageNode( node, dir );
+	this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes( attrs, dir );
 
 	this.actions.setAbilities( { 'insert': true, 'apply': true } );
 
@@ -721,14 +722,6 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 		'typeChange': 'onImageModelTypeChange',
 		'sizeDefaultChange': 'setChanged'
 	} );
-
-	// Check if there are changes to apply
-	if (
-		!this.selectedNode ||
-		this.imageModel.getMediaNode() !== this.selectedNode
-	) {
-		this.setChanged();
-	}
 
 	// Set up
 
@@ -744,7 +737,6 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( node ) {
 		'default' :
 		'custom'
 	);
-
 	this.sizeWidget.setDisabled( this.imageModel.getType() === 'frame' );
 
 	// Set initial alt text
@@ -796,6 +788,24 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		this.captionSurface = null;
 		this.captionNode = null;
 	}
+	// Get existing caption. We only do this in setup, because the caption
+	// should not reset to original if the image is replaced or edited.
+
+	// If the selected node is a block image and the caption already exists,
+	// store the initial caption and set it as the caption document
+	if (
+		this.imageModel &&
+		this.selectedNode &&
+		this.selectedNode.getDocument() &&
+		this.selectedNode instanceof ve.dm.MWBlockImageNode
+	) {
+		this.captionNode = this.selectedNode.getCaptionNode();
+		if ( this.captionNode && this.captionNode.getLength() > 0 ) {
+			this.imageModel.setCaptionDocument(
+				this.selectedNode.getDocument().cloneFromRange( this.captionNode.getRange() )
+			);
+		}
+	}
 
 	if ( this.imageModel ) {
 		captionDocument = this.imageModel.getCaptionDocument();
@@ -820,6 +830,8 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 			'pasteRules': this.constructor.static.getPasteRules()
 		}
 	);
+
+	// Events
 	this.captionSurface.getSurface().getModel().connect( this, {
 		'documentUpdate': function () {
 			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
@@ -897,10 +909,10 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 					this.selectedNode.type === this.imageModel.getImageNodeType() &&
 					// And we didn't change the image itself
 					this.selectedNode.getAttribute( 'src' ) ===
-						this.imageModel.getMediaNode().getAttribute( 'src' )
+						this.imageModel.getImageSource()
 				) {
 					// We only need to update the attributes of the current node
-					this.imageModel.updateImageNode( surfaceModel );
+					this.imageModel.updateImageNode( this.selectedNode, surfaceModel );
 				} else {
 					// Replacing an image or inserting a brand new one
 

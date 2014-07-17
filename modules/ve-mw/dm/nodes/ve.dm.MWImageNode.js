@@ -97,6 +97,45 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 	// TODO: Some day, when svgMaxSize works properly in MediaWiki
 	// we can add it back as max dimension consideration.
 };
+
+/**
+ * Get the scalable promise which fetches original dimensions from the API
+ * @param {string} filename The image filename whose details the scalable will represent
+ * @returns {jQuery.Promise} Promise which resolves after the image size details are fetched from the API
+ */
+ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
+	var scalablePromise = $.Deferred();
+	// On the first call set off an async call to update the scalable's
+	// original dimensions from the API.
+	if ( ve.init.target ) {
+		ve.init.target.constructor.static.apiRequest(
+			{
+				'action': 'query',
+				'prop': 'imageinfo',
+				'indexpageids': '1',
+				'iiprop': 'size|mediatype',
+				'titles': filename
+			},
+			{ 'type': 'POST' }
+		)
+		.done( function ( response ) {
+			var page = response.query && response.query.pages[response.query.pageids[0]],
+				info = page && page.imageinfo && page.imageinfo[0];
+			if ( info ) {
+				scalablePromise.resolve( info );
+			} else {
+				scalablePromise.reject();
+			}
+		} )
+		.fail( function () {
+			scalablePromise.reject();
+		} );
+	} else {
+		scalablePromise.reject();
+	}
+	return scalablePromise;
+};
+
 /**
  * Respond to attribute change.
  * Update the rendering of the 'align', src', 'width' and 'height' attributes
@@ -156,50 +195,27 @@ ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
  * @inheritdoc
  */
 ve.dm.MWImageNode.prototype.getScalable = function () {
-	this.getScalablePromise();
+	if ( !this.scalablePromise ) {
+		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() )
+			.done( ve.bind( function ( info ) {
+				if ( info ) {
+					this.getScalable().setOriginalDimensions( {
+						'width': info.width,
+						'height': info.height
+					} );
+					// Update media type
+					this.mediaType = info.mediatype;
+					// Update according to type
+					this.constructor.static.syncScalableToType(
+						this.getAttribute( 'type' ),
+						this.mediaType,
+						this.getScalable()
+					);
+				}
+			}, this ) );
+	}
 	// Parent method
 	return ve.dm.ResizableNode.prototype.getScalable.call( this );
-};
-
-/**
- * Get the scalable promise which fetches original dimensions from the API
- *
- * @returns {jQuery.Promise} Promise which resolves setOriginalDimensions has been called (if required)
- */
-ve.dm.MWImageNode.prototype.getScalablePromise = function () {
-	// On the first call set off an async call to update the scalable's
-	// original dimensions from the API.
-	if ( ve.init.target && !this.scalablePromise ) {
-		this.scalablePromise = ve.init.target.constructor.static.apiRequest(
-			{
-				'action': 'query',
-				'prop': 'imageinfo',
-				'indexpageids': '1',
-				'iiprop': 'size|mediatype',
-				'titles': this.getFilename()
-			},
-			{ 'type': 'POST' }
-		).then( function ( response ) {
-			var page = response.query && response.query.pages[response.query.pageids[0]],
-				info = page && page.imageinfo && page.imageinfo[0];
-
-			if ( info ) {
-				this.getScalable().setOriginalDimensions( {
-					'width': info.width,
-					'height': info.height
-				} );
-				// Update media type
-				this.mediaType = info.mediatype;
-				// Update according to type
-				this.constructor.static.syncScalableToType(
-					this.getAttribute( 'type' ),
-					this.mediaType,
-					this.getScalable()
-				);
-			}
-		}.bind( this ) ).promise();
-	}
-	return this.scalablePromise;
 };
 
 /**
