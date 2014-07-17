@@ -11,16 +11,16 @@ end
 Given (/^I go to "(.+)" page which has references$/) do |page_title|
   wikitext = "VisualEditor is a MediaWiki extension.<ref>[http://www.mediawiki.org/wiki/Extension:VisualEditor Extension:VisualEditor]</ref>"
   on(APIPage).create page_title, wikitext
-  step "I go to the #{page_title} page"
+  step "I go to the #{page_title} page for screenshot"
   step "I click in the editable part"
 end
 
 Given(/^I go to the "(.*?)" page with source content "(.*?)"$/) do |page_title, page_content|
   on(APIPage).create page_title, page_content
-  step "I go to the #{page_title} page"
+  step "I go to the #{page_title} page for screenshot"
 end
 
-Given(/^I go to the (.+) page$/) do |page_name|
+Given(/^I go to the (.*?) page for screenshot$/) do |page_name|
   step "I am on the #{page_name} page"
   @browser.goto "#{@browser.url}&uselang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
 end
