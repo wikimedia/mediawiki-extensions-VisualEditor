@@ -77,6 +77,7 @@ When(/^I click Return to save form$/) do
 end
 
 When(/^I click Review your changes$/) do
+  sleep 2
   on(VisualEditorPage).review_changes_element.when_present(10).click
 end
 
@@ -94,4 +95,8 @@ end
 
 Then(/^I can click the X on the save box$/) do
   on(VisualEditorPage).ex_element.when_present.click
+end
+
+Then(/^I can click Cancel save$/) do
+  on(VisualEditorPage).confirm_switch_cancel_element.when_present.click
 end

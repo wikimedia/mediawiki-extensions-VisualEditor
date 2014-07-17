@@ -23,6 +23,7 @@ Feature: VisualEditor Bullets, Numbering
       And I click Review your changes
     Then a <character> is added in front of input string in the diff view
       And I can click the X on the save box
+      And I can click Cancel save
       And I click Decrease indentation
   Examples:
     | control   | character |
