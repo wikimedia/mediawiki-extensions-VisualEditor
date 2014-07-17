@@ -240,6 +240,7 @@
 	"visualeditor-toolbar-style-tooltip": "Stile del testo",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
 	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",
+	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Prosegui nella modifica",
 	"visualeditor-wikitext-warning": "Stai utilizzando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare a \"{{int:visualeditor-ca-editsource}}\" in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-cancel}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",

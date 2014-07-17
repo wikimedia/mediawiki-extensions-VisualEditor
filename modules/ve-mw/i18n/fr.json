@@ -259,6 +259,7 @@
 	"visualeditor-toolbar-style-tooltip": "Style du texte",
 	"visualeditor-usernamespacepagelink": "Project:Espace de noms utilisateur",
 	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer ?",
+	"visualeditor-viewpage-savewarning-title": "Êtes-vous sûr ?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
 	"visualeditor-viewpage-savewarning-keep": "Continuer l’édition",
 	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|code wiki]] ne fonctionne pas ici. Pour basculer vers l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-cancel}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",

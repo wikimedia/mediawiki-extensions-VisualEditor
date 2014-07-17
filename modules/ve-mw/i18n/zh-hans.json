@@ -242,6 +242,7 @@
 	"visualeditor-toolbar-style-tooltip": "样式文本",
 	"visualeditor-usernamespacepagelink": "Project:用户名字空间",
 	"visualeditor-viewpage-savewarning": "您确定要放弃保存回到浏览模式吗？",
+	"visualeditor-viewpage-savewarning-title": "您确定么？",
 	"visualeditor-viewpage-savewarning-discard": "撤销编辑",
 	"visualeditor-viewpage-savewarning-keep": "继续编辑",
 	"visualeditor-wikitext-warning": "您正在使用可视化编辑器——[[{{MediaWiki:visualeditor-wikitext-warning-link}}|wiki文本]]不适用于此。要回到源代码编辑而不丢失您的更改，请打开“{{int:visualeditor-toolbar-cancel}}”之后的下拉菜单，然后选择“{{int:visualeditor-mweditmodesource-title}}”。",

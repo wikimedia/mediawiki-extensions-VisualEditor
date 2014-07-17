@@ -245,6 +245,7 @@
 	"visualeditor-toolbar-style-tooltip": "Стиль текста",
 	"visualeditor-usernamespacepagelink": "Project:Личное пространство",
 	"visualeditor-viewpage-savewarning": "Вы уверены, что хотите вернуться в режим просмотра, не сохранив изменения?",
+	"visualeditor-viewpage-savewarning-title": "Вы уверены?",
 	"visualeditor-viewpage-savewarning-discard": "Отменить правки",
 	"visualeditor-viewpage-savewarning-keep": "Продолжить редактирование",
 	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. НЧтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-cancel}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
