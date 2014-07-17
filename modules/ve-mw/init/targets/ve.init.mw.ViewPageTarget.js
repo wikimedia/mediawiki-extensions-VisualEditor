@@ -930,6 +930,11 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 								'name': 'veswitched',
 								'value': 1,
 								'type': 'hidden'
+							} ),
+							$( '<input>' ).attr( {
+								'name': 'title',
+								'value': target.pageName,
+								'type': 'hidden'
 							} )
 						).appendTo( 'body' ).submit();
 					}
