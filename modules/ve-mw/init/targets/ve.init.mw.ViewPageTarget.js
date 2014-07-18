@@ -890,6 +890,15 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 	var $documentNode = this.surface.getView().getDocument().getDocumentNode().$element,
 		target = this;
 
+	if ( !this.surface.getModel().hasBeenModified() ) {
+		target.submitting = true;
+		window.location.href = this.viewUri.clone().extend( {
+			'action': 'edit',
+			'veswitched': 1
+		} ).toString();
+		return;
+	}
+
 	$documentNode.css( 'opacity', 0.5 );
 
 	this.surface.getDialogs().openWindow( 'wikitextswitchconfirm' ).then( function ( opened ) {
@@ -910,23 +919,10 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 						);
 					} else if ( data.action === 'discard' ) {
 						target.submitting = true;
-						$( '<form method="get" style="display: none;"></form>' ).append(
-							$( '<input>' ).attr( {
-								'name': 'action',
-								'value': 'edit',
-								'type': 'hidden'
-							} ),
-							$( '<input>' ).attr( {
-								'name': 'veswitched',
-								'value': 1,
-								'type': 'hidden'
-							} ),
-							$( '<input>' ).attr( {
-								'name': 'title',
-								'value': target.pageName,
-								'type': 'hidden'
-							} )
-						).appendTo( 'body' ).submit();
+						window.location.href = target.viewUri.clone().extend( {
+							'action': 'edit',
+							'veswitched': 1
+						} ).toString();
 					}
 				},
 				function () {
@@ -1116,8 +1112,9 @@ ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
 			.click( this.onViewTabClick.bind( this ) );
 
 		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
+			viewPageTarget.editSource();
+
 			if ( viewPageTarget.surface.getModel().hasBeenModified() ) {
-				viewPageTarget.editSource();
 				e.preventDefault();
 			}
 		} );
