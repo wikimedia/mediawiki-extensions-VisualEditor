@@ -315,12 +315,12 @@ ve.dm.mwExample.mwNowikiHtml = '<body><p>Foo<span typeof="mw:Nowiki">[[Bar]]</sp
 
 ve.dm.mwExample.withMeta = [
 	{
-		'type': 'comment',
+		'type': 'commentMeta',
 		'attributes': {
 			'text': ' No content conversion '
 		}
 	},
-	{ 'type': '/comment' },
+	{ 'type': '/commentMeta' },
 	{
 		'type': 'mwAlienMeta',
 		'attributes': {
@@ -383,12 +383,12 @@ ve.dm.mwExample.withMeta = [
 	},
 	{ 'type': '/mwAlienMeta' },
 	{
-		'type': 'comment',
+		'type': 'commentMeta',
 		'attributes': {
 			'text': 'barbaz'
 		}
 	},
-	{ 'type': '/comment' },
+	{ 'type': '/commentMeta' },
 	{
 		'type': 'mwCategory',
 		'attributes': {
@@ -1468,7 +1468,6 @@ ve.dm.mwExample.domToDataCases = {
 				'type': 'paragraph'
 			},
 			'F', 'o', 'o',
-			{ 'type': '/paragraph' },
 			{
 				'type': 'comment',
 				'attributes': {
@@ -1476,6 +1475,7 @@ ve.dm.mwExample.domToDataCases = {
 				}
 			},
 			{ 'type': '/comment' },
+			{ 'type': '/paragraph' },
 			{ 'type': '/internalItem' },
 			{ 'type': '/internalList' }
 		]

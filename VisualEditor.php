@@ -356,6 +356,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/dm/nodes/ve.dm.AlienNode.js',
 			'lib/ve/modules/ve/dm/nodes/ve.dm.BreakNode.js',
 			'lib/ve/modules/ve/dm/nodes/ve.dm.CenterNode.js',
+			'lib/ve/modules/ve/dm/nodes/ve.dm.CommentNode.js',
 			'lib/ve/modules/ve/dm/nodes/ve.dm.DefinitionListItemNode.js',
 			'lib/ve/modules/ve/dm/nodes/ve.dm.DefinitionListNode.js',
 			'lib/ve/modules/ve/dm/nodes/ve.dm.DivNode.js',
@@ -420,6 +421,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ce/nodes/ve.ce.AlienNode.js',
 			'lib/ve/modules/ve/ce/nodes/ve.ce.BreakNode.js',
 			'lib/ve/modules/ve/ce/nodes/ve.ce.CenterNode.js',
+			'lib/ve/modules/ve/ce/nodes/ve.ce.CommentNode.js',
 			'lib/ve/modules/ve/ce/nodes/ve.ce.DefinitionListItemNode.js',
 			'lib/ve/modules/ve/ce/nodes/ve.ce.DefinitionListNode.js',
 			'lib/ve/modules/ve/ce/nodes/ve.ce.DivNode.js',
@@ -510,6 +512,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.AnnotationInspector.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.InsertionInspector.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.NodeInspector.js',
+			'lib/ve/modules/ve/ui/inspectors/ve.ui.CommentInspector.js',
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.LinkInspector.js',
 
 			'lib/ve/modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js',
@@ -519,6 +522,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			// ce
+			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.CommentNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.FocusableNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.AlienNode.css',
 			'lib/ve/modules/ve/ce/styles/nodes/ve.ce.BranchNode.css',
@@ -571,6 +575,10 @@ $wgResourceModules += array(
 			'visualeditor-clipboard-cut',
 			'visualeditor-clipboard-paste',
 			'visualeditor-clipboard-paste-special',
+			'visualeditor-commentinspector-edit',
+			'visualeditor-commentinspector-insert',
+			'visualeditor-commentinspector-title',
+			'visualeditor-commentinspector-tooltip',
 			'visualeditor-dialog-action-apply',
 			'visualeditor-dialog-action-cancel',
 			'visualeditor-dialog-action-done',
