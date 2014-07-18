@@ -30,7 +30,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 	// Properties
 	this.$spinner = $( '<div class="ve-init-mw-viewPageTarget-loading"></div>' );
-	this.toolbarCancelButton = null;
 	this.toolbarSaveButton = null;
 	this.saveDialog = null;
 	this.onBeforeUnloadFallback = null;
@@ -311,12 +310,13 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 	this.hideSpinner();
 	this.showReadOnlyContent();
 
-	if ( this.toolbarCancelButton ) {
-		// If deactivate is called before a successful load, then
-		// setupToolbarButtons has not been called yet and as such tearDownToolbarButtons
-		// would throw an error when trying call methods on the button property (bug 46456)
-		this.tearDownToolbarButtons();
-		this.detachToolbarButtons();
+	if ( this.toolbarSaveButton ) {
+		// If deactivate is called before a successful load, then the save button has not yet been
+		// fully set up so disconnecting it would throw an error when trying call methods on the
+		// button property (bug 46456)
+		this.toolbarSaveButton.disconnect( this );
+		this.toolbarSaveButton.$element.detach();
+		this.toolbar.$actions.empty();
 	}
 
 	// Check we got as far as setting up the surface
@@ -409,8 +409,8 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 
 	this.surface.getView().focus();
 
-	this.setupToolbarButtons();
-	this.attachToolbarButtons();
+	this.setupToolbarSaveButton();
+	this.attachToolbarSaveButton();
 	this.restoreScrollPosition();
 	this.restoreEditSection();
 	this.setupBeforeUnloadHandler();
@@ -732,16 +732,6 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
 	if ( this.edited || this.restoring ) {
 		this.showSaveDialog();
 	}
-};
-
-/**
- * Handle clicks on the save button in the toolbar.
- *
- * @method
- * @param {jQuery.Event} e Mouse click event
- */
-ve.init.mw.ViewPageTarget.prototype.onToolbarCancelButtonClick = function () {
-	this.deactivate();
 };
 
 /**
@@ -1144,21 +1134,16 @@ ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
 ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = null;
 
 /**
- * Add content and event bindings to toolbar buttons.
+ * Add content and event bindings to toolbar save button.
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.setupToolbarButtons = function () {
-	this.toolbarCancelButton = new OO.ui.ButtonWidget( { 'label': ve.msg( 'visualeditor-toolbar-cancel' ) } );
-	this.toolbarCancelButton.$element.addClass( 've-ui-toolbar-cancelButton' );
+ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 	this.toolbarSaveButton = new OO.ui.ButtonWidget( {
 		'label': ve.msg( 'visualeditor-toolbar-savedialog' ),
 		'flags': ['constructive'],
 		'disabled': !this.restoring
 	} );
-	// TODO (mattflaschen, 2013-06-27): it would be useful to do this in a more general way, such
-	// as in the ButtonWidget constructor.
-	this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
 
 	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
 		// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
@@ -1168,18 +1153,7 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarButtons = function () {
 
 	this.updateToolbarSaveButtonState();
 
-	this.toolbarCancelButton.connect( this, { 'click': 'onToolbarCancelButtonClick' } );
 	this.toolbarSaveButton.connect( this, { 'click': 'onToolbarSaveButtonClick' } );
-};
-
-/**
- * Remove content and event bindings from toolbar buttons.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.tearDownToolbarButtons = function () {
-	this.toolbarCancelButton.disconnect( this );
-	this.toolbarSaveButton.disconnect( this );
 };
 
 /**
@@ -1187,7 +1161,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownToolbarButtons = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.attachToolbarButtons = function () {
+ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 	var $actionTools = $( '<div>' ),
 		$pushButtons = $( '<div>' ),
 		actions = new ve.ui.TargetToolbar( this, this.surface );
@@ -1208,23 +1182,9 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarButtons = function () {
 
 	$pushButtons
 		.addClass( 've-init-mw-viewPageTarget-toolbar-actions' )
-		.append(
-			this.toolbarCancelButton.$element,
-			this.toolbarSaveButton.$element
-		);
+		.append( this.toolbarSaveButton.$element );
 
 	this.toolbar.$actions.append( $actionTools, $pushButtons );
-};
-
-/**
- * Remove the save button from the user interface.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.detachToolbarButtons = function () {
-	this.toolbarCancelButton.$element.detach();
-	this.toolbarSaveButton.$element.detach();
-	this.toolbar.$actions.empty();
 };
 
 /**

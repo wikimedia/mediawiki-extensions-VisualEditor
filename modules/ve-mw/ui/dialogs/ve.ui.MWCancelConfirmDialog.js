@@ -41,7 +41,7 @@ ve.ui.MWCancelConfirmDialog.static.message =
 	OO.ui.deferMsg( 'visualeditor-viewpage-savewarning' );
 
 ve.ui.MWCancelConfirmDialog.static.actions = [
-	{ 'action': 'discard', 'label': OO.ui.deferMsg( 'visualeditor-viewpage-savewarning-discard' ), 'flags': 'primary' },
+	{ 'action': 'discard', 'label': OO.ui.deferMsg( 'visualeditor-viewpage-savewarning-discard' ), 'flags': [ 'primary', 'destructive' ] },
 	{ 'action': 'keep', 'label': OO.ui.deferMsg( 'visualeditor-viewpage-savewarning-keep' ), 'flags': 'safe' }
 ];
 
