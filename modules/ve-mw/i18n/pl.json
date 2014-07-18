@@ -188,6 +188,7 @@
 	"visualeditor-meta-tool": "Opcje",
 	"visualeditor-mwalienextensioninspector-title": "Rozszerzenia MediaWiki",
 	"visualeditor-mweditmodesource-title": "Przełączyć na edycję wikitekstu?",
+	"visualeditor-mweditmodesource-tool": "Przełącz na edycję wikitekstu",
 	"visualeditor-mweditmodesource-warning": "Zamierzasz przełączyć się na edytor kodu źródłowego.\nMożesz zachować wszystkie zmiany wprowadzone do tej pory, ale bez zapisywania lub przeładowywania strony nie będziesz mieć możliwości powrotu do VisualEditora.\nCzy kontynuować?",
 	"visualeditor-mweditmodesource-warning-switch": "Zachowaj zmiany",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Porzuć zmiany",

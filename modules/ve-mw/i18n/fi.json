@@ -238,6 +238,7 @@
 	"visualeditor-toolbar-style-tooltip": "Tekstin tyyli",
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
 	"visualeditor-viewpage-savewarning": "Oletko varma, että haluat palata katselutilaan tallentamatta ensin?",
+	"visualeditor-viewpage-savewarning-title": "Oletko varma?",
 	"visualeditor-viewpage-savewarning-discard": "Hylkää muutokset",
 	"visualeditor-viewpage-savewarning-keep": "Jatka muokkaamista",
 	"visualeditor-wikitext-warning": "Käytät Visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Vaihtaaksesi wikitekstin muokkautilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia, avaa \"{{int:visualeditor-toolbar-cancel}}\"-painikkeen vieressä oleva alasvetovalikko ja valitse \"{{int:visualeditor-mweditmodesource-title}}\".",

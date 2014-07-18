@@ -224,6 +224,7 @@
 	"visualeditor-toolbar-style-tooltip": "Stil vum Text",
 	"visualeditor-usernamespacepagelink": "Project:Benotzernummraum",
 	"visualeditor-viewpage-savewarning": "Sidd Dir sécher datt Dir dës Säit elo nach just kucke wëllt ouni virdrun ze späicheren?",
+	"visualeditor-viewpage-savewarning-title": "Sidd Dir sécher?",
 	"visualeditor-viewpage-savewarning-discard": "Ännerungen ignoréieren",
 	"visualeditor-viewpage-savewarning-keep": "Virufuere mat Änneren",
 	"visualeditor-wikitext-warning": "Dir benotzt VisualEditor -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Fir all Ament an d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren, maacht den Dropdown-Menü niewent \"{{int:visualeditor-toolbar-cancel}}\" op a gitt op \"{{int:visualeditor-mweditmodesource-title}}\"",
