@@ -25,14 +25,13 @@ Given(/^I go to the (.*?) page for screenshot$/) do |page_name|
   @browser.goto "#{@browser.url}&uselang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
 end
 
-Given(/^I am editing a random page$/) do
-  step "I am at a random page"
-  @browser.goto "#{@browser.url}?uselang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}&vehidebetadialog=true&veaction=edit"
+Given(/^I am editing language screenshot page$/) do
+  step "I go to the \"Language Screenshot\" page with source content \"Language Screenshot\""
   step "I click in the editable part"
 end
 
-Given(/^I am edit a random page with (.+)$/) do |content|
-  step "I am editing a random page"
+Given(/^I am edit language screenshot page with (.+)$/) do |content|
+  step "I am editing language screenshot page"
   step "I edit the page with #{content}"
 end
 
