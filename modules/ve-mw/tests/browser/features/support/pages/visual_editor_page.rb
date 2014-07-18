@@ -39,7 +39,7 @@ class VisualEditorPage
   div(:page_option_menu, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 5)
   span(:special_character, class: "oo-ui-iconedElement-icon oo-ui-icon-special-character")
   div(:iframe, class: "oo-ui-window-frame")
-  image(:media_image, class: "ve-ce-focusableNode-highlight-relocatable-marker")
+  figure(:media_image, index: 0)
   unordered_list(:media_caption, class: "ve-ui-contextMenuWidget")
   span(:cite_menu, class: "oo-ui-popupToolGroup-handle", index: 2)
   div(:cite_pull_down, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 2)

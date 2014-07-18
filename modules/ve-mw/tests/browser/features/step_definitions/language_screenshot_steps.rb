@@ -5,7 +5,7 @@ end
 
 Given(/^I select the image in VisualEditor$/) do
   step "I click in the editable part"
-  on(VisualEditorPage).content_element.send_keys :arrow_left
+  on(VisualEditorPage).media_image_element.when_present.click
 end
 
 Given (/^I go to "(.+)" page which has references$/) do |page_title|
