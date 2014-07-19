@@ -157,7 +157,7 @@ ve.ui.MWReferenceDialog.static.getPasteRules = function () {
 					[
 						// Nested references are impossible
 						'mwReference', 'mwReferenceList',
-						// Lists are tables are actually possible in wikitext with a leading
+						// Lists and tables are actually possible in wikitext with a leading
 						// line break but we prevent creating these with the UI
 						'list', 'listItem', 'definitionList', 'definitionListItem',
 						'table', 'tableCaption', 'tableSection', 'tableRow', 'tableCell'
@@ -217,7 +217,7 @@ ve.ui.MWReferenceDialog.prototype.onReady = function () {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.getBodyHeight = function () {
-	return this.editPanel.$element[0].scrollHeight;
+	return Math.min( 400, Math.ceil( this.panels.getCurrentItem().$element[0].scrollHeight ) );
 };
 
 /**
