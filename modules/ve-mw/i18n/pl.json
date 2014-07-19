@@ -25,6 +25,7 @@
 	"tooltip-ca-editsource": "Edycja kodu źródłowego strony",
 	"tooltip-ca-ve-edit": "Edytuj tę stronę wykorzystując VisualEditor",
 	"visualeditor-advancedsettings-tool": "Zaawansowane",
+	"visualeditor-annotationbutton-linknode-tooltip": "Prosty link",
 	"visualeditor-beta-appendix": "BETA",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor jest na razie w fazie beta. Możesz napotkać na problemy z oprogramowaniem, które nie pozwolą Ci edytować niektórych elementów strony. Aby przełączyć się do edytora kodu źródłowego  otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-cancel}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
