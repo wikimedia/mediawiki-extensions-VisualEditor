@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 /**
  * Inspector for applying and editing labeled MediaWiki internal and external links.
  *

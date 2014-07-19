@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 ( function () {
-	/*global mw */
-
 	/**
 	 * MediaWiki link status cache.
 	 *
