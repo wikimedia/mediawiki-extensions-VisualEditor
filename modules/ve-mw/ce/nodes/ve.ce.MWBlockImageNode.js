@@ -227,7 +227,7 @@ ve.ce.MWBlockImageNode.prototype.getCssClass = function ( type, alignment ) {
 	// TODO use this.model.getAttribute( 'type' ) etc., see bug 52065
 	// Default is different between RTL and LTR wikis:
 	if ( type === 'default' && alignment === 'default' ) {
-		if ( this.$element.css( 'direction' ) === 'rtl' ) {
+		if ( this.getModel().getDocument().getDir() === 'rtl' ) {
 			return 'mw-halign-left';
 		} else {
 			return 'mw-halign-right';
