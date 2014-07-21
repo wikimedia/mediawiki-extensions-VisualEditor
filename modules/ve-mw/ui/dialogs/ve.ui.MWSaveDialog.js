@@ -154,7 +154,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
 				var $textarea = dialog.editSummaryInput.$input;
-				$textarea.focus();
+				$textarea[0].focus();
 				// If message has be pre-filled (e.g. section edit), move cursor to end
 				if ( $textarea.val() !== '' ) {
 					ve.selectEnd( $textarea[0] );

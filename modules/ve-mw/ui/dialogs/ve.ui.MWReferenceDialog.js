@@ -363,7 +363,7 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
 	} else if ( action === 'back' ) {
 		this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 		this.panels.setItem( this.editPanel );
-		this.editPanel.$element.find( '.ve-ce-documentNode' ).focus();
+		this.editPanel.$element.find( '.ve-ce-documentNode' )[0].focus();
 	} else if ( action === 'select' || action === 'insert-select' ) {
 		this.useExistingReference( action );
 	}
