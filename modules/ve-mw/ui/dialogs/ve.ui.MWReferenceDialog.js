@@ -21,9 +21,6 @@ ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( manager, config ) {
 
 	// Properties
 	this.referenceModel = null;
-
-	// Events
-	this.connect( this, { 'ready': 'onReady' } );
 };
 
 /* Inheritance */
@@ -206,11 +203,13 @@ ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 };
 
 /**
- * Handle window ready events
+ * @inheritdoc
  */
-ve.ui.MWReferenceDialog.prototype.onReady = function () {
-	// Focus the reference surface
-	this.referenceSurface.focus();
+ve.ui.MWReferenceDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWReferenceDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			this.referenceSurface.focus();
+		}, this );
 };
 
 /**
