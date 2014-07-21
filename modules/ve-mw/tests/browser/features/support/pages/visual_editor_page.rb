@@ -25,7 +25,7 @@ class VisualEditorPage
   a(:preformatted, text: /Preformatted/)
   span(:refs_link, text: "Reference")
   div(:save_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
-  a(:save_page, css: "div.ve-ui-toolbar-saveButton > a.oo-ui-buttonedElement-button")
+  span(:save_page, text: "Save page")
   a(:subheading1, text: /Sub-heading 1/)
   a(:subheading2, text: /Sub-heading 2/)
   a(:subheading3, text: /Sub-heading 3/)
