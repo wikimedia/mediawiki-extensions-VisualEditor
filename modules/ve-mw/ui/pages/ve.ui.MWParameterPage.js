@@ -74,7 +74,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
 		'tabIndex': -1
 	} )
-		.connect( this, { 'click': 'onAddButtonClick' } );
+		.connect( this, { 'click': 'onAddButtonFocus' } );
 
 	this.statusIndicator = new OO.ui.IndicatorWidget( {
 		'$': this.$,
@@ -103,7 +103,8 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		);
 	this.$more
 		.addClass( 've-ui-mwParameterPage-more' )
-		.append( this.addButton.$element );
+		.append( this.addButton.$element )
+		.focus( this.onAddButtonFocus.bind( this ) );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$info, this.$actions, this.$field, this.$more );
@@ -176,7 +177,7 @@ ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
 };
 
-ve.ui.MWParameterPage.prototype.onAddButtonClick = function () {
+ve.ui.MWParameterPage.prototype.onAddButtonFocus = function () {
 	var template = this.parameter.getTemplate();
 	template.addParameter( new ve.dm.MWParameterModel( template ) );
 };

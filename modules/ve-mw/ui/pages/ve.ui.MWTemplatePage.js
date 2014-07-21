@@ -55,7 +55,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
 		'tabIndex': -1
 	} )
-		.connect( this, { 'click': 'onAddButtonClick' } );
+		.connect( this, { 'click': 'onAddButtonFocus' } );
 
 	// Initialization
 	this.$description.addClass( 've-ui-mwTemplatePage-description' );
@@ -123,6 +123,6 @@ ve.ui.MWTemplatePage.prototype.onRemoveButtonClick = function () {
 	this.template.remove();
 };
 
-ve.ui.MWTemplatePage.prototype.onAddButtonClick = function () {
+ve.ui.MWTemplatePage.prototype.onAddButtonFocus = function () {
 	this.template.addParameter( new ve.dm.MWParameterModel( this.template ) );
 };

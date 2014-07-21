@@ -284,9 +284,10 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * Add all non-existing required and suggested parameters, if any.
  *
  * @method
+ * @returns {number} Number of parameters added
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
-	var i, len,
+	var i, len, addedCount = 0,
 		spec = this.getSpec(),
 		names = spec.getParameterNames();
 
@@ -299,8 +300,11 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 				)
 			) {
 			this.addParameter( new ve.dm.MWParameterModel( this, names[i] ) );
+			addedCount++;
 		}
 	}
+
+	return addedCount;
 };
 
 /**
