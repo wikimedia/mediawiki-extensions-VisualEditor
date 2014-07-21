@@ -1,4 +1,4 @@
-@en.wikipedia.beta.wmflabs.org @firefox @language_screenshot
+@en.wikipedia.beta.wmflabs.org @firefox @language_screenshot @login
 Feature: Language Screenshot
 
   Scenario: VisualEditor_Toolbar_Headings
@@ -26,7 +26,6 @@ Feature: Language Screenshot
     When I click on the Special character option in Insert menu
     Then I should see Special character Insertion window
 
-  @login
   Scenario: VisualEditor_save_dialog
     Given I am logged in
       And I am edit language screenshot page with Testing Save
