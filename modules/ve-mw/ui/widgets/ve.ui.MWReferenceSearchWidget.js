@@ -25,6 +25,8 @@ ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
 
 	// Properties
 	this.index = [];
+	this.indexEmpty = true;
+	this.built = false;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwReferenceSearchWidget' );
@@ -81,15 +83,40 @@ ve.ui.MWReferenceSearchWidget.prototype.onResultsSelect = function ( item ) {
 };
 
 /**
+ * Set the internal list and check if it contains any references
+ * @param {ve.dm.InternalList} internalList Internal list
+ */
+ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalList ) {
+	var i, iLen, groupNames, groupName, groups = internalList.getNodeGroups();
+
+	this.internalList = internalList;
+
+	groupNames = ve.getObjectKeys( groups );
+	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
+		groupName = groupNames[i];
+		if ( groupName.lastIndexOf( 'mwReference/' ) !== 0 ) {
+			continue;
+		}
+		if ( groups[groupName].indexOrder.length ) {
+			this.indexEmpty = false;
+			return;
+		}
+	}
+};
+
+/**
  * Build a serchable index of references.
  *
  * @method
- * @param {ve.dm.InternalList} internalList Internal list
  */
-ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function ( internalList ) {
+ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
+	if ( this.built ) {
+		return;
+	}
+
 	var i, iLen, j, jLen, ref, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
-		groups = internalList.getNodeGroups();
+		groups = this.internalList.getNodeGroups();
 
 	function extractAttrs() {
 		text += ' ' + this.getAttribute( 'href' );
@@ -109,7 +136,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function ( internalList ) {
 		for ( j = 0, jLen = indexOrder.length; j < jLen; j++ ) {
 			refNode = firstNodes[indexOrder[j]];
 			ref = ve.dm.MWReferenceModel.static.newFromReferenceNode( refNode );
-			view = new ve.ce.InternalItemNode( internalList.getItemNode( ref.getListIndex() ) );
+			view = new ve.ce.InternalItemNode( this.internalList.getItemNode( ref.getListIndex() ) );
 
 			// HACK: PHP parser doesn't wrap single lines in a paragraph
 			if ( view.$element.children().length === 1 && view.$element.children( 'p' ).length === 1 ) {
@@ -143,15 +170,17 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function ( internalList ) {
 
 	// Re-populate
 	this.onQueryChange();
+
+	this.built = true;
 };
 
 /**
- * Check whether the index built by #buildIndex is empty. This will return true if
- * #buildIndex hasn't been called yet.
+ * Check whether buildIndex will create an empty index based on the current internalList.
+ *
  * @returns {boolean} Index is empty
  */
 ve.ui.MWReferenceSearchWidget.prototype.isIndexEmpty = function () {
-	return this.index.length === 0;
+	return this.indexEmpty;
 };
 
 /**
