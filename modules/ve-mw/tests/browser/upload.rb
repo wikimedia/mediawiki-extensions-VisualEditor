@@ -45,6 +45,7 @@ def upload_image file_path
   client = MediawikiApi::Client.new ENV["MEDIAWIKI_API_UPLOAD_URL"]
   client.log_in ENV["MEDIAWIKI_USER"], ENV["MEDIAWIKI_PASSWORD"]
   client.upload_image(file_name, file_path, file_license, true)
+  sleep 5 # Restriction in bot speed: https://commons.wikimedia.org/wiki/Commons:Bots#Bot_speed
 end
 
 def upload_images
