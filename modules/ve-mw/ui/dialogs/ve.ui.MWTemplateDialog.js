@@ -228,7 +228,7 @@ ve.ui.MWTemplateDialog.prototype.isInsertable = function () {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getBodyHeight = function () {
-	return 350;
+	return 400;
 };
 
 /**
