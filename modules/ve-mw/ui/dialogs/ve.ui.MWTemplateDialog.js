@@ -86,7 +86,7 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, partPage, reselect, insertable,
+	var i, len, page, name, names, params, partPage, reselect, insertable, addedCount,
 		removePages = [];
 
 	if ( removed ) {
@@ -134,12 +134,14 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			if ( added instanceof ve.dm.MWTemplateModel && this.loaded ) {
 				// Prevent selection changes
 				this.preventReselection = true;
-				added.addPromptedParameters();
+				addedCount = added.addPromptedParameters();
 				this.preventReselection = false;
 				names = added.getParameterNames();
 				params = added.getParameters();
 				if ( names.length ) {
 					this.setPageByName( params[names[0]].getId() );
+				} else if ( addedCount === 0 ) {
+					page.onAddButtonFocus();
 				}
 			}
 		}
@@ -183,7 +185,10 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 				.attr( 'tabindex', index * 3 + 2 )
 			.end()
 			.find( '.ve-ui-mwParameterPage-removeButton' )
-				.attr( 'tabindex', index * 3 + 3 );
+				.attr( 'tabindex', index * 3 + 3 )
+			.end()
+			.find( '.ve-ui-mwParameterPage-more' )
+				.attr( 'tabindex', index * 3 + 4 );
 	} );
 };
 
