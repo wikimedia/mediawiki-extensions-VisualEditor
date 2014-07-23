@@ -218,7 +218,14 @@ ve.ui.MWReferenceDialog.prototype.onReady = function () {
  * @inheritdoc
  */
 ve.ui.MWReferenceDialog.prototype.getBodyHeight = function () {
-	return Math.min( 400, Math.ceil( this.panels.getCurrentItem().$element[0].scrollHeight ) );
+	// Clamp value to between 300 and 400px height, preferring the actual height if available
+	return Math.min(
+		400,
+		Math.max(
+			300,
+			Math.ceil( this.panels.getCurrentItem().$element[0].scrollHeight )
+		)
+	);
 };
 
 /**
