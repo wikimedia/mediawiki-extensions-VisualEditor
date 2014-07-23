@@ -1470,11 +1470,21 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 			// Scroll to heading:
 			// Wait for toolbar to animate in so we can account for its height
 			setTimeout( function () {
-				var $window = $( OO.ui.Element.getWindow( target.$element ) );
-				$window.scrollTop( headingNode.$element.offset().top - target.toolbar.$element.height() );
+				target.scrollTo( headingNode.$element.offset().top - target.toolbar.$element.height() );
 			}, 200 );
 		}
 
 		this.section = undefined;
 	}
+};
+
+/**
+ * Scroll to a given position in the document.
+ *
+ * @method
+ * @param {number} position Position (in pixels) to scroll to
+ */
+ve.init.mw.Target.prototype.scrollTo = function ( position ) {
+	var $window = $( OO.ui.Element.getWindow( this.$element ) );
+	$window.scrollTop( position );
 };
