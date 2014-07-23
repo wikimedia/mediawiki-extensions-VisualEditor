@@ -23,6 +23,7 @@ ve.dm.MWReferenceModel = function VeDmMWReferenceModel() {
 	this.listIndex = null;
 	this.group = '';
 	this.doc = null;
+	this.deferDoc = null;
 };
 
 /* Inheritance */
@@ -47,7 +48,10 @@ ve.dm.MWReferenceModel.static.newFromReferenceNode = function ( node ) {
 	ref.setListGroup( attr.listGroup );
 	ref.setListIndex( attr.listIndex );
 	ref.setGroup( attr.refGroup );
-	ref.setDocument( doc.cloneFromRange( internalList.getItemNode( attr.listIndex ).getRange() ) );
+	ref.deferDoc = function () {
+		// cloneFromRange is very expensive, so lazy evaluate it
+		return doc.cloneFromRange( internalList.getItemNode( attr.listIndex ).getRange() );
+	};
 
 	return ref;
 };
@@ -149,7 +153,7 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 	itemNodeRange = internalList.getItemNode( this.listIndex ).getRange();
 	surfaceModel.change( ve.dm.Transaction.newFromRemoval( doc, itemNodeRange, true ) );
 	surfaceModel.change(
-		ve.dm.Transaction.newFromDocumentInsertion( doc, itemNodeRange.start, this.doc )
+		ve.dm.Transaction.newFromDocumentInsertion( doc, itemNodeRange.start, this.getDocument() )
 	);
 };
 
@@ -219,12 +223,16 @@ ve.dm.MWReferenceModel.prototype.getGroup = function () {
  */
 ve.dm.MWReferenceModel.prototype.getDocument = function () {
 	if ( !this.doc ) {
-		this.doc = new ve.dm.Document( [
-			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
-			{ 'type': '/paragraph' },
-			{ 'type': 'internalList' },
-			{ 'type': '/internalList' }
-		] );
+		if ( this.deferDoc ) {
+			this.doc = this.deferDoc();
+		} else {
+			this.doc = new ve.dm.Document( [
+				{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
+				{ 'type': '/paragraph' },
+				{ 'type': 'internalList' },
+				{ 'type': '/internalList' }
+			] );
+		}
 	}
 	return this.doc;
 };
