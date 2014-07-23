@@ -29,6 +29,13 @@ OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.FragmentInspector );
 
 ve.ui.MWExtensionInspector.static.placeholder = null;
 
+/**
+ * Node class that this inspector inspects. Subclass of ve.dm.Node.
+ * @property {Function}
+ * @abstract
+ * @static
+ * @inheritable
+ */
 ve.ui.MWExtensionInspector.static.nodeModel = null;
 
 ve.ui.MWExtensionInspector.static.removable = false;
