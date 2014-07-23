@@ -371,6 +371,12 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
+				if ( !$page->userCan( 'create' ) && !$page->exists() ) {
+					$notices[] = $this->msg(
+						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
+					) . "<br>" . $this->msg( 'nocreatetext' )->parse();
+				}
+
 				// Show notice when editing user / user talk page of a user that doesn't exist
 				// or who is blocked
 				// HACK of course this code is partly duplicated from EditPage.php :(
