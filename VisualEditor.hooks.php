@@ -419,10 +419,7 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Conditionally register the oojs and oojs-ui modules, in case they've already been registered
-	 * by a more recent version of MediaWiki core.
-	 *
-	 * Also conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
+	 * Conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
 	 * been registered by the UniversalLanguageSelector extension.
 	 *
 	 * @param ResourceLoader $resourceLoader
@@ -432,38 +429,6 @@ class VisualEditorHooks {
 		global $wgResourceModules, $wgVisualEditorResourceTemplate;
 
 		$libModules = array(
-			'oojs' => $wgVisualEditorResourceTemplate + array(
-				'scripts' => array(
-					'lib/ve/lib/oojs/oojs.js',
-				),
-				'targets' => array( 'desktop', 'mobile' ),
-			),
-			'oojs-ui' => $wgVisualEditorResourceTemplate + array(
-				'scripts' => array(
-					'lib/ve/lib/oojs-ui/oojs-ui.js',
-				),
-				'styles' => array(
-					'lib/ve/lib/oojs-ui/oojs-ui.svg.css',
-				),
-				'skinStyles' => array(
-					'default' => 'lib/ve/lib/oojs-ui/oojs-ui-apex.css',
-				),
-				'messages' => array(
-					'ooui-dialog-action-close',
-					'ooui-outline-control-move-down',
-					'ooui-outline-control-move-up',
-					'ooui-outline-control-remove',
-					'ooui-toolbar-more',
-					'ooui-dialog-confirm-title',
-					'ooui-dialog-confirm-default-prompt',
-					'ooui-dialog-confirm-default-ok',
-					'ooui-dialog-confirm-default-cancel'
-				),
-				'dependencies' => array(
-					'oojs'
-				),
-				'targets' => array( 'desktop', 'mobile' ),
-			),
 			'jquery.uls.data' => $wgVisualEditorResourceTemplate + array(
 				'scripts' => array(
 					'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
