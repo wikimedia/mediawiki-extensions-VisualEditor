@@ -211,7 +211,6 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 		return $.Deferred().resolve().promise();
 	}
 
-	/*global mw*/
 	return new mw.Api().get( {
 		action: 'query',
 		prop: 'pageprops',

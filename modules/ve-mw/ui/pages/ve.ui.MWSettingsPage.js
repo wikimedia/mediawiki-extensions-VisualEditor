@@ -101,7 +101,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
 		}
 	].concat( ve.ui.MWSettingsPage.static.extraMetaCheckboxes );
-	/*global mw*/
+
 	if ( mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' ).category ) {
 		this.metaItemCheckboxes.push(
 			{

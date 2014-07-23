@@ -1,5 +1,3 @@
-/*global mw */
-
 /*!
  * VisualEditor MediaWiki UserInterface popup tool classes.
  *

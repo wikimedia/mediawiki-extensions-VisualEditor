@@ -111,7 +111,6 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink, this.enableDisplayTitleField, this.displayTitleField ] );
 
 	this.metaItemCheckboxes = [];
-	/*global mw*/
 	if ( mw.config.get( 'wgVariantArticlePath' ) ) {
 		this.metaItemCheckboxes.push(
 			{

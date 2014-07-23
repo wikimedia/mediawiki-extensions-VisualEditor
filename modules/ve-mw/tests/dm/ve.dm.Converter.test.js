@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
-
 QUnit.module( 've.dm.Converter', QUnit.newMwEnvironment() );
 
 QUnit.test( 'getModelFromDom', function ( assert ) {
