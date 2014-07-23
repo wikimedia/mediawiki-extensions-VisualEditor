@@ -59,6 +59,7 @@ ve.ce.MWReferenceNode.static.primaryCommandName = 'reference';
  * @method
  */
 ve.ce.MWReferenceNode.prototype.onSetup = function () {
+	ve.ce.MWReferenceNode.super.prototype.onSetup.call( this );
 	this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
 };
 
@@ -70,6 +71,8 @@ ve.ce.MWReferenceNode.prototype.onTeardown = function () {
 	// As we are listening to the internal list, we need to make sure
 	// we remove the listeners when this object is removed from the document
 	this.internalList.disconnect( this );
+
+	ve.ce.MWReferenceNode.super.prototype.onTeardown.call( this );
 };
 
 /**
