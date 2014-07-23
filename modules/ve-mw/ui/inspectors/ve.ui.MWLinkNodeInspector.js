@@ -107,40 +107,38 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				nodeRange = this.selectedNode.getOuterRange(),
 				value = this.targetInput.getValue(),
 				convert = data.action === 'convert',
-				remove = convert || data.action === 'remove' || !value;
+				remove = data.action === 'remove' || !value;
+
+			// Default to http:// if the external link doesn't already begin with a supported
+			// protocol - this prevents the link from being converted into literal text upon
+			// save and also fixes a common mistake users may make
+			if ( !ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( value ) ) {
+				value = 'http://' + value;
+			}
 
 			if ( remove ) {
 				surfaceModel.change(
 					ve.dm.Transaction.newFromRemoval( doc, nodeRange )
 				);
-			} else {
-				// Default to http:// if the external link doesn't already begin with a supported
-				// protocol - this prevents the link from being converted into literal text upon
-				// save and also fixes a common mistake users may make
-				if ( !ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( value ) ) {
-					value = 'http://' + value;
-				}
-				surfaceModel.change(
-					ve.dm.Transaction.newFromAttributeChanges(
-						doc, nodeRange.start, { 'href': value }
-					)
-				);
-			}
-			if ( convert ) {
+			} else if ( convert ) {
 				annotation = new ve.dm.MWExternalLinkAnnotation( {
 					'type': 'link/mwExternal',
 					'attributes': {
 						'href': value
 					}
 				} );
-				annotations = doc.data.getAnnotationsFromOffset(
-					this.selectedNode.getOffset()
-				).clone();
+				annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
 				annotations.push( annotation );
 				content = ve.splitClusters( value );
 				ve.dm.Document.static.addAnnotationsToData( content, annotations );
 				surfaceModel.change(
-					ve.dm.Transaction.newFromInsertion( doc, nodeRange.start, content )
+					ve.dm.Transaction.newFromReplacement( doc, nodeRange, content )
+				);
+			} else {
+				surfaceModel.change(
+					ve.dm.Transaction.newFromAttributeChanges(
+						doc, nodeRange.start, { 'href': value }
+					)
 				);
 			}
 		}, this );
