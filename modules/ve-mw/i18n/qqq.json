@@ -140,7 +140,7 @@
 	"visualeditor-dialog-reference-options-section": "Label for the reference options sub-section.\n{{Identical|Options}}",
 	"visualeditor-dialog-reference-title": "{{Identical|Reference}}",
 	"visualeditor-dialog-reference-useexisting-label": "Label for button in reference dialog to insert a re-use of an existing reference",
-	"visualeditor-dialog-reference-useexisting-tool": "Used as label for the button to let the user pick an existing reference from a list to insert a duplicate",
+	"visualeditor-dialog-reference-useexisting-tool": "Used as label for the button to let the user pick an existing reference from a list to insert a duplicate\n{{Identical|Re-use}}",
 	"visualeditor-dialog-referencelist-insert-button": "Used as label for the button to insert a new references list.",
 	"visualeditor-dialog-referencelist-title": "{{Identical|References list}}",
 	"visualeditor-dialog-template-title": "{{Identical|Template}}",
