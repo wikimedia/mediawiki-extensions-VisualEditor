@@ -6,7 +6,7 @@ Feature: Switching between wikitext and Visual Editor modes
   Background:
     Given I am logged in
       And I go to the browser specific edit page page
-    When I click Edit for VisualEditor
+    When I edit the page with Switch edit mode test
 
   Scenario: Switch editing modes via toolbar
     When I enter the wikitext editor

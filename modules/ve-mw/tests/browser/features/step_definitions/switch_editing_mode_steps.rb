@@ -5,6 +5,7 @@ end
 When(/^I enter the wikitext editor$/) do
   on(VisualEditorPage) do |page|
     page.edit_wikitext_element.when_present.click
+    step 'I clear the confirm dialog by clicking Keep changes'
     page.wikitext_editor_element.when_present
   end
 end
