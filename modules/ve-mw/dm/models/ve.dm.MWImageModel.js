@@ -12,8 +12,17 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
+ * @param {Object} [config] Configuration options
+ * @cfg {string} [resourceName] The resource name of the given media file
+ * @cfg {Object} [currentDimensions] Current dimensions, width & height
+ * @cfg {Object} [minDimensions] Minimum dimensions, width & height
+ * @cfg {boolean} [isDefaultSize] Object is using its default size dimensions
  */
-ve.dm.MWImageModel = function VeDmMWImageModel() {
+ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
+	var scalable, currentDimensions, minDimensions;
+
+	config = config || {};
+
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
@@ -37,6 +46,29 @@ ve.dm.MWImageModel = function VeDmMWImageModel() {
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
 		.defaultUserOptions.defaultthumbsize;
+
+	if ( config.resourceName ) {
+		this.setResourceName( config.resourceName );
+	}
+
+	// Create scalable
+	currentDimensions = config.currentDimensions || {};
+	minDimensions = config.minDimensions || {};
+
+	scalable = new ve.dm.Scalable( {
+		'currentDimensions': {
+			'width': currentDimensions.width,
+			'height': currentDimensions.height
+		},
+		'minDimensions': {
+			'width': minDimensions.width || 1,
+			'height': minDimensions.height || 1
+		},
+		'defaultSize': !!config.isDefaultSize
+	} );
+	// Set the initial scalable, connect it to events
+	// and request an update from the API
+	this.updateScalable( scalable );
 };
 
 /* Inheritance */
@@ -124,25 +156,18 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  * @return {ve.dm.MWImageModel} Image model
  */
 ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
-	var scalable,
-		imgModel = new ve.dm.MWImageModel();
+	var imgModel = new ve.dm.MWImageModel( {
+			'resourceName': attrs.resource.replace( /^(.+\/)*/, '' ),
+			'currentDimensions': {
+				'width': attrs.width,
+				'height': attrs.height
+			},
+			'defaultSize': attrs.defaultSize
+		} );
 
 	// Cache the attributes so we can create a new image without
 	// losing any existing information
 	imgModel.cacheOriginalImageAttributes( attrs );
-
-	// Create scalable
-	scalable = new ve.dm.Scalable( {
-		'currentDimensions': {
-			'width': attrs.width,
-			'height': attrs.height
-		},
-		'minDimensions': {
-			'width': 1,
-			'height': 1
-		}
-	} );
-	imgModel.setScalable( scalable );
 
 	// Collect all the information
 	imgModel.toggleBorder( !!attrs.borderImage );
@@ -370,6 +395,14 @@ ve.dm.MWImageModel.prototype.onScalableDefaultSizeChange = function ( isDefault 
 };
 
 /**
+ * Set the image file resource name
+ * @param {string} resourceName The resource name of the given media file
+ */
+ve.dm.MWImageModel.prototype.setResourceName = function ( resourceName ) {
+	this.imageResourceName = resourceName;
+};
+
+/**
  * Set symbolic name of media type.
  *
  * Example values: "BITMAP" for JPEG or PNG images; "DRAWING" for SVG graphics
@@ -455,6 +488,14 @@ ve.dm.MWImageModel.prototype.isDefaultAligned = function ( imageType, align ) {
  */
 ve.dm.MWImageModel.prototype.isBorderable = function () {
 	return this.borderable;
+};
+
+/**
+ * Get the image file resource name
+ * @returns {string} resourceName The resource name of the given media file
+ */
+ve.dm.MWImageModel.prototype.getResourceName = function () {
+	return this.imageResourceName;
 };
 
 /**
@@ -803,9 +844,8 @@ ve.dm.MWImageModel.prototype.getImageSource = function () {
  *
  * @param {ve.dm.Scalable} Scalable object
  */
-ve.dm.MWImageModel.prototype.setScalable = function ( scalable ) {
-	var imageName,
-		attrs = this.getOriginalImageAttributes();
+ve.dm.MWImageModel.prototype.updateScalable = function ( scalable ) {
+	var imageName = this.getResourceName();
 
 	if ( this.scalable instanceof ve.dm.Scalable ) {
 		this.scalable.disconnect( this );
@@ -815,24 +855,24 @@ ve.dm.MWImageModel.prototype.setScalable = function ( scalable ) {
 	// Events
 	this.scalable.connect( this, { 'defaultSizeChange': 'onScalableDefaultSizeChange' } );
 
-	// Update the given scalable object according to model attributes
-	imageName = attrs.resource.replace( /^(.+\/)*/, '' );
 	// Call for updated scalable
-	ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( ve.bind( function ( info ) {
-		this.scalable.setOriginalDimensions( {
-			'width': info.width,
-			'height': info.height
-		} );
-		// Update media type
-		this.setMediaType( info.mediatype );
+	if ( imageName ) {
+		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( ve.bind( function ( info ) {
+			this.scalable.setOriginalDimensions( {
+				'width': info.width,
+				'height': info.height
+			} );
+			// Update media type
+			this.setMediaType( info.mediatype );
 
-		// Update according to type
-		ve.dm.MWImageNode.static.syncScalableToType(
-			this.getType(),
-			this.getMediaType(),
-			this.getScalable()
-		);
-	}, this ) );
+			// Update according to type
+			ve.dm.MWImageNode.static.syncScalableToType(
+				this.getType(),
+				this.getMediaType(),
+				this.getScalable()
+			);
+		}, this ) );
+	}
 };
 
 /**

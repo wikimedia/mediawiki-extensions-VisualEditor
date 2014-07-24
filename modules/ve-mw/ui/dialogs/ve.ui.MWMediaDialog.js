@@ -436,6 +436,7 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 			attrs.align = this.imageModel.getAlignment();
 			attrs.width = dimensions.width;
 			attrs.height = dimensions.height;
+			attrs.defaultSize = this.imageModel.isDefaultSize();
 			if ( this.imageModel.getAltText() ) {
 				attrs.alt = this.imageModel.getAltText();
 			}
