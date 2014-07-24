@@ -30,8 +30,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 
 	this.settingsFieldset = new OO.ui.FieldsetLayout( {
 		'$': this.$,
-		label: ve.msg( 'visualeditor-dialog-meta-settings-label' ),
-		icon: 'settings'
+		'label': ve.msg( 'visualeditor-dialog-meta-settings-label' ),
+		'icon': 'settings'
 	} );
 
 	// Initialization
@@ -42,23 +42,22 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			.addItems( [
 				new OO.ui.ButtonOptionWidget(
 					'mwTOCForce',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-toc-force' ) }
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-force' ) }
 				),
 				new OO.ui.ButtonOptionWidget(
 					'default',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-toc-default' ) }
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-default' ) }
 				),
 				new OO.ui.ButtonOptionWidget(
 					'mwTOCDisable',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' ) }
+					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' ) }
 				)
 			] )
-			.connect( this, { select: 'onTableOfContentsFieldChange' } ),
+			.connect( this, { 'select': 'onTableOfContentsFieldChange' } ),
 		{
 			'$': this.$,
-			align: 'top',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-toc-label' ),
-			help: ve.msg( 'visualeditor-dialiog-meta-settings-toc-help' )
+			'align': 'top',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-toc-label' )
 		}
 	);
 
@@ -68,20 +67,19 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.enableRedirectInput,
 		{
 			'$': this.$,
-			align: 'inline',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' ),
-			help: ve.msg( 'visualeditor-dialiog-meta-settings-redirect-help' )
+			'align': 'inline',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' )
 		}
 	);
 	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
 		'$': this.$,
-		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' )
+		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' )
 	} );
 	this.redirectTargetField = new OO.ui.FieldLayout(
 		this.redirectTargetInput,
 		{
 			'$': this.$,
-			align: 'top'
+			'align': 'top'
 		}
 	);
 	this.enableStaticRedirectInput = new OO.ui.CheckboxInputWidget( { '$': this.$ } );
@@ -89,20 +87,18 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.enableStaticRedirectInput,
 		{
 			'$': this.$,
-			align: 'inline',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' ),
-			help: ve.msg( 'visualeditor-dialiog-meta-settings-redirect-statichelp' )
+			'align': 'inline',
+			'label': ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' )
 		}
 	);
-	this.enableRedirectInput.connect( this, { change: 'onEnableRedirectChange' } );
-	this.redirectTargetInput.connect( this, { change: 'onRedirectTargetChange' } );
-	this.enableStaticRedirectInput.connect( this, { change: 'onEnableStaticRedirectChange' } );
+	this.enableRedirectInput.connect( this, { 'change': 'onEnableRedirectChange' } );
+	this.redirectTargetInput.connect( this, { 'change': 'onRedirectTargetChange' } );
+	this.enableStaticRedirectInput.connect( this, { 'change': 'onEnableStaticRedirectChange' } );
 
 	this.metaItemCheckboxes = [
 		{
 			metaName: 'mwNoEditSection',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' ),
-			help: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-help' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
 		}
 	].concat( ve.ui.MWSettingsPage.static.extraMetaCheckboxes );
 	/*global mw*/
@@ -110,13 +106,11 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.metaItemCheckboxes.push(
 			{
 				metaName: 'mwHiddenCategory',
-				label: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-label' ),
-				help: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-help' )
+				label: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-label' )
 			},
 			{
 				metaName: 'mwNoGallery',
-				label: ve.msg( 'visualeditor-dialog-meta-settings-nogallery-label' ),
-				help: ve.msg( 'visualeditor-dialiog-meta-settings-nogallery-help' )
+				label: ve.msg( 'visualeditor-dialog-meta-settings-nogallery-label' )
 			}
 		);
 	}
@@ -133,9 +127,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			new OO.ui.CheckboxInputWidget( { '$': settingsPage.$ } ),
 			{
 				'$': settingsPage.$,
-				align: 'inline',
-				label: this.label,
-				help: this.help || ''
+				'align': 'inline',
+				'label': this.label
 			}
 		);
 		settingsPage.settingsFieldset.addItems( [ this.fieldLayout ] );
@@ -157,7 +150,7 @@ ve.ui.MWSettingsPage.static.extraMetaCheckboxes = [];
  * @param {string} label The label to show next to the checkbox
  */
 ve.ui.MWSettingsPage.static.addMetaCheckbox = function ( metaName, label ) {
-	this.extraMetaCheckboxes.push( { metaName: metaName, label: label } );
+	this.extraMetaCheckboxes.push( { 'metaName': metaName, 'label': label } );
 };
 
 /* Methods */
@@ -286,7 +279,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		// Redirect items
 		currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' ),
 		newRedirectData = this.redirectTargetInput.getValue(),
-		newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } },
+		newRedirectItemData = { 'type': 'mwRedirect', 'attributes': { 'title': newRedirectData } },
 
 		currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' ),
 		newStaticRedirectState = this.enableStaticRedirectInput.getValue(),
@@ -301,12 +294,12 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 			}
 		} else {
 			if ( !tableOfContentsMetaItem ) {
-				this.metaList.insertMeta( { type: tableOfContentsValue } );
+				this.metaList.insertMeta( { 'type': tableOfContentsValue } );
 			} else if ( tableOfContentsMetaItem.getType() !== tableOfContentsValue ) {
 				tableOfContentsMetaItem.replaceWith(
 					ve.extendObject( true, {},
 						tableOfContentsMetaItem.getElement(),
-						{ type: tableOfContentsValue }
+						{ 'type': tableOfContentsValue }
 					)
 				);
 			}
@@ -341,7 +334,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 			currentStaticRedirectItem.remove();
 		}
 		if ( !currentStaticRedirectItem && newStaticRedirectState && newRedirectData ) {
-			this.metaList.insertMeta( { type: 'mwStaticRedirect' } );
+			this.metaList.insertMeta( { 'type': 'mwStaticRedirect' } );
 		}
 	}
 
@@ -352,7 +345,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		if ( currentItem && !newValue ) {
 			currentItem.remove();
 		} else if ( !currentItem && newValue ) {
-			settingsPage.metaList.insertMeta( { type: this.metaName } );
+			settingsPage.metaList.insertMeta( { 'type': this.metaName } );
 		}
 	} );
 
