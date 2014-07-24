@@ -150,7 +150,7 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 			dir = images[imageType].dir;
 
 			// Start from original details
-			imageModel = new ve.dm.MWImageModel.static.newFromImageNode( imageNode[imageType], dir );
+			imageModel = new ve.dm.MWImageModel.static.newFromImageAttributes( images[imageType].attrs, dir );
 
 			// Run attributes
 			for ( method in images[imageType].tests[i].methods ) {
