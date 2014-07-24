@@ -21,7 +21,7 @@
  */
 ve.ce.MWExtensionNode = function VeCeMWExtensionNode() {
 	// Mixin constructors
-	ve.ce.FocusableNode.call( this );
+	ve.ce.FocusableNode.call( this, this.getFocusableElement() );
 	ve.ce.GeneratedContentNode.call( this );
 };
 

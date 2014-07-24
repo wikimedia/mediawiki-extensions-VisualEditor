@@ -38,12 +38,11 @@ ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
 /* Methods */
 
 /**
- * @inheritdoc
+ * @inheritdoc ve.ce.GeneratedContentNode
  */
-ve.ce.MWGalleryNode.prototype.onSetup = function () {
-	ve.ce.MWGalleryNode.super.prototype.onSetup.apply( this, arguments );
-	// The ul.gallery is 100% width, so don't give it a highlight
-	this.$element.find( '.gallery' ).addBack( '.gallery' ).addClass( 've-ce-noHighlight' );
+ve.ce.MWGalleryNode.prototype.getFocusableElement = function () {
+	var $gallery = this.$element.find( '.gallery' ).addBack( '.gallery' );
+	return $gallery.length ? $gallery.children() : this.$element;
 };
 
 /* Registration */
