@@ -63,7 +63,7 @@ ve.ui.MWReferenceListDialog.static.actions = [
  * @inheritdoc
  */
 ve.ui.MWReferenceListDialog.prototype.getBodyHeight = function () {
-	return Math.ceil( this.editPanel.$element[0].scrollHeight );
+	return Math.max( 150, Math.ceil( this.editPanel.$element[0].scrollHeight ) );
 };
 
 /**
