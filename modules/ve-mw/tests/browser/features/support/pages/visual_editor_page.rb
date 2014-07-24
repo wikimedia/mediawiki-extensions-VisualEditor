@@ -92,7 +92,6 @@ class VisualEditorPage
 
   # not having beta warning makes iframes off by one
   in_iframe(index: 0) do |frame|
-    span(:add_parameter, text: "Add more information", frame: frame)
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert template", frame: frame)
     span(:confirm_switch, text: "Keep changes", frame: frame)

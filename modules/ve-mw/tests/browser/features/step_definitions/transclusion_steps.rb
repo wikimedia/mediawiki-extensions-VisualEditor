@@ -5,10 +5,6 @@ Given(/^I can see the Transclusion User Interface$/) do
   end
 end
 
-Given(/^I click Add parameter$/) do
-  on(VisualEditorPage).add_parameter_element.when_present.click
-end
-
 When(/^I click Remove parameter$/) do
   on(VisualEditorPage).remove_parameter_element.when_present.click
 end
