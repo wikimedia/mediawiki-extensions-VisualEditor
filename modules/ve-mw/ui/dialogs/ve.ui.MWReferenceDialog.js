@@ -330,6 +330,7 @@ ve.ui.MWReferenceDialog.prototype.useExistingReference = function ( action ) {
 	if ( action === 'insert-select' || action === 'select' ) {
 		this.actions.setMode( action );
 	}
+	this.search.buildIndex();
 	this.panels.setItem( this.searchPanel );
 	this.search.getQuery().focus().select();
 };
@@ -389,7 +390,7 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 			}
 
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
-			this.search.buildIndex( this.getFragment().getDocument().getInternalList() );
+			this.search.setInternalList( this.getFragment().getDocument().getInternalList() );
 
 			if ( data.useExisting ) {
 				this.useExistingReference( 'insert-select' );
