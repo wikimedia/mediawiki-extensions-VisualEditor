@@ -14,6 +14,7 @@
  * @param {jQuery} $container Container to render target into
  * @param {Object} [config] Configuration options
  * @cfg {number} [section] Number of the section target should scroll to
+ * @cfg {boolean} [isIos=false] Whether the platform is an iOS device
  */
 ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, config ) {
 	var currentUri = new mw.Uri();
@@ -25,6 +26,7 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, con
 	);
 
 	this.section = config.section;
+	this.isIos = !!config.isIos;
 
 	// Events
 	this.connect( this, {
@@ -95,4 +97,15 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function () {
 		.addClass( 've-init-mw-viewPageTarget-toolbar' )
 		// Move the toolbar to the overlay header
 		.appendTo( '.overlay-header > .toolbar' );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileViewTarget.prototype.scrollTo = function ( position ) {
+	if ( this.isIos ) {
+		this.surface.$element.closest( '.overlay-content' ).scrollTop( position );
+	} else {
+		ve.init.mw.MobileViewTarget.super.prototype.scrollTo.call( this, position );
+	}
 };
