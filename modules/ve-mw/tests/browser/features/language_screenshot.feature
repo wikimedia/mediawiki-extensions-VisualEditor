@@ -1,4 +1,4 @@
-@en.wikipedia.beta.wmflabs.org @firefox @language_screenshot @login
+@firefox @language_screenshot @login
 Feature: Language Screenshot
 
   Scenario: VisualEditor_Toolbar_Headings
