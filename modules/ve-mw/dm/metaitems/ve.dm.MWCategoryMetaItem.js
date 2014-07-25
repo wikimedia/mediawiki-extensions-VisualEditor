@@ -58,7 +58,7 @@ ve.dm.MWCategoryMetaItem.static.toDomElements = function ( dataElement, doc ) {
 		origCategory = dataElement.attributes.origCategory || '',
 		origSortkey = dataElement.attributes.origSortkey || '',
 		normalizedOrigCategory = decodeURIComponent( origCategory ).replace( /_/g, ' ' ),
-		normalizedOrigSortkey = decodeURIComponent( origSortkey );
+		normalizedOrigSortkey = decodeURIComponent( origSortkey ).replace( /_/g, ' ' );
 	if ( normalizedOrigSortkey === sortkey ) {
 		sortkey = origSortkey;
 	} else {
