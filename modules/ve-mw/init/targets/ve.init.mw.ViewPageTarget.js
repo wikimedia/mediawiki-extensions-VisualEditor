@@ -1572,10 +1572,14 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, catego
 		$( '#content > #firstHeading > span' ).html( displayTitle );
 	}
 	$( '#catlinks' ).replaceWith( categoriesHtml );
-	if ( isRedirect ) {
-		$( '#contentSub' ).text( ve.msg( 'redirectpagesub' ) );
-	} else {
-		$( '#contentSub' ).text( '' );
+	if ( isRedirect && !$( '#contentSub > #redirectsub' ).length ) {
+		$( '#contentSub' ).append(
+			$( '<span>' )
+				.attr( 'id', 'redirectsub' )
+				.text( ve.msg( 'redirectpagesub' ) )
+		);
+	} else if ( !isRedirect ) {
+		$( '#contentSub > #redirectsub' ).remove();
 	}
 };
 
