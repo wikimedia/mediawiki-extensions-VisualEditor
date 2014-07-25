@@ -15,6 +15,7 @@ When(/^I enter and save a (.+) edit$/) do |count|
     end
     edit_text = "Editing with " + Random.rand.to_s
     instance_variable_set("@#{count}_edit_text", edit_text)
+    sleep 2
     step "I click Edit for VisualEditor"
     step "I insert the text #{edit_text}"
     step "I click Save page"
