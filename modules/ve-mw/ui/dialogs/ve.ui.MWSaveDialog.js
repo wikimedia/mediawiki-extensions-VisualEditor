@@ -350,9 +350,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 			.attr( 'title', ve.msg( 'visualeditor-editsummary-bytes-remaining' ) )
 	);
 	this.$saveMessages = this.$( '<div>' );
-	this.$saveActions = this.$( '<div>' ).append(
-		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-dirtymsg' )
-	);
+	this.$saveActions = this.$( '<div>' );
 	this.$saveFoot = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append(
 		this.$( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
 			.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) )
@@ -425,9 +423,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			this.swapPanel( 'save' );
-			// Old messages should not persist after panel changes
+			// Old messages should not persist
 			this.clearAllMessages();
+			this.swapPanel( 'save' );
 			// Update save button label
 			this.actions.forEach( { 'actions': 'save' }, function ( action ) {
 				action.setLabel(
