@@ -95,6 +95,7 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function () {
 	this.toolbar.$element
 		// FIXME shouldn't be using viewPageTarget styles
 		.addClass( 've-init-mw-viewPageTarget-toolbar' )
+		.append( this.surface.context.$element )
 		// Move the toolbar to the overlay header
 		.appendTo( '.overlay-header > .toolbar' );
 };
