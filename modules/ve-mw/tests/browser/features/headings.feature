@@ -1,4 +1,4 @@
-@chrome @firefox @login
+@chrome @en.wikipedia.beta.wmflabs.org @firefox @test2.wikipedia.org
 Feature: VisualEditor Headings
 
   Background:
