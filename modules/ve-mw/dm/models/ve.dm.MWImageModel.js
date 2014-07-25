@@ -33,7 +33,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.captionDoc = null;
 	this.caption = null;
 	this.mediaType = null;
-	this.altText = null;
+	this.altText = '';
 	this.type = null;
 	this.alignment = null;
 	this.scalable = null;
@@ -43,12 +43,18 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.dir = 'ltr';
 	this.defaultDimensions = null;
 
+	this.imageSrc = '';
+	this.imageResourceName = '';
+	this.imageHref = '';
+
+	this.boundingBox = null;
+
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
 		.defaultUserOptions.defaultthumbsize;
 
 	if ( config.resourceName ) {
-		this.setResourceName( config.resourceName );
+		this.setImageResourceName( config.resourceName );
 	}
 
 	// Create scalable
@@ -68,7 +74,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	} );
 	// Set the initial scalable, connect it to events
 	// and request an update from the API
-	this.updateScalable( scalable );
+	this.attachScalable( scalable );
 };
 
 /* Inheritance */
@@ -124,13 +130,8 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 	}, attributes );
 
 	if ( attrs.defaultSize ) {
-		// Resize to default thumbnail size, but only if the image itself
-		// isn't smaller than the default size
-		// For svg/drawings, the default wiki size is always applied
-		if ( attrs.width > defaultThumbSize || attrs.mediaType === 'DRAWING' ) {
-			newDimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
-				width: defaultThumbSize
-			}, attrs.width / attrs.height );
+		newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( attrs, attrs.mediaType );
+		if ( newDimensions ) {
 			attrs.width = newDimensions.width;
 			attrs.height = newDimensions.height;
 		}
@@ -157,21 +158,24 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  */
 ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
 	var imgModel = new ve.dm.MWImageModel( {
-			resourceName: attrs.resource.replace( /^(\.+\/)*/, '' ),
+			resourceName: attrs.resource,
 			currentDimensions: {
 				width: attrs.width,
 				height: attrs.height
 			},
-			defaultSize: attrs.defaultSize
+			defaultSize: !!attrs.defaultSize
 		} );
 
 	// Cache the attributes so we can create a new image without
 	// losing any existing information
 	imgModel.cacheOriginalImageAttributes( attrs );
 
+	imgModel.setImageSource( attrs.src );
+	imgModel.setImageHref( attrs.href );
+
 	// Collect all the information
 	imgModel.toggleBorder( !!attrs.borderImage );
-	imgModel.setAltText( attrs.alt );
+	imgModel.setAltText( attrs.alt || '' );
 
 	imgModel.setDir( dir || 'ltr' );
 
@@ -185,6 +189,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
 
 	// Default size
 	imgModel.toggleDefaultSize( !!attrs.defaultSize );
+
 	// TODO: When scale/upright is available, set the size
 	// type accordingly
 	imgModel.setSizeType(
@@ -196,6 +201,98 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
 };
 
 /* Methods */
+
+/**
+ * Get the hash object of the current image model state.
+ * @returns {Object} Hash object
+ */
+ve.dm.MWImageModel.prototype.getHashObject = function () {
+	var hash = {
+		src: this.getImageSource(),
+		altText: this.getAltText(),
+		type: this.getType(),
+		alignment: this.getAlignment(),
+		sizeType: this.getSizeType(),
+		border: this.hasBorder(),
+		borderable: this.isBorderable()
+	};
+
+	if ( this.getScalable() ) {
+		hash.scalable = {
+			currentDimensions: ve.copy( this.getScalable().getCurrentDimensions() ),
+			isDefault: this.getScalable().isDefault()
+		};
+	}
+	return hash;
+};
+
+/**
+ * Adjust the model parameters based on a new image
+ * @param {Object} attrs New image source attributes
+ * @param {Object} [dimensions] New dimensions of the image
+ */
+ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) {
+	var newDimensions, remoteFilename;
+
+	if ( attrs.mediaType ) {
+		this.setMediaType( attrs.mediaType );
+	}
+	if ( attrs.href ) {
+		this.setImageHref( attrs.href );
+	}
+	if ( attrs.resource ) {
+		this.setImageResourceName( attrs.resource );
+		remoteFilename = attrs.resource.replace( /^(\.+\/)*/, '' );
+	}
+	if ( attrs.src ) {
+		this.setImageSource( attrs.src );
+	}
+
+	// Remove the scalable default and original dimensions
+	this.scalable.clearOriginalDimensions();
+	this.scalable.clearDefaultDimensions();
+	this.scalable.clearMaxDimensions();
+	this.scalable.clearMinDimensions();
+
+	// Call for updated scalable
+	if ( remoteFilename ) {
+		ve.dm.MWImageNode.static.getScalablePromise( remoteFilename ).done( ve.bind( function ( info ) {
+			this.scalable.setOriginalDimensions( {
+				width: info.width,
+				height: info.height
+			} );
+			// Update media type
+			this.setMediaType( info.mediatype );
+			// Update defaults
+			ve.dm.MWImageNode.static.syncScalableToType(
+				this.getType(),
+				info.mediatype,
+				this.scalable
+			);
+		}, this ) );
+	}
+
+	// Resize the new image's current dimensions to default or based on the bounding box
+	if ( this.isDefaultSize() ) {
+		// Scale to default
+		newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( dimensions );
+	} else {
+		if ( this.getBoundingBox() ) {
+			// Scale the new image by its width
+			newDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
+				dimensions,
+				this.boundingBox,
+				true
+			);
+		} else {
+			newDimensions = dimensions;
+		}
+	}
+
+	if ( newDimensions ) {
+		this.getScalable().setCurrentDimensions( newDimensions );
+	}
+};
 
 /**
  * Get the current image node type according to the attributes.
@@ -218,6 +315,14 @@ ve.dm.MWImageModel.prototype.getImageNodeType = function ( imageType, align ) {
 	} else {
 		return 'mwBlockImage';
 	}
+};
+
+/**
+ * Get the original bounding box
+ * @returns {Object} Bounding box with width and height
+ */
+ve.dm.MWImageModel.prototype.getBoundingBox = function () {
+	return this.boundingBox;
 };
 
 /**
@@ -377,6 +482,10 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 		attrs.align = this.getAlignment();
 	}
 
+	attrs.src = this.getImageSource();
+	attrs.href = this.getImageHref();
+	attrs.resource = this.getImageResourceName();
+
 	// If converting from block to inline, set isLinked=true to avoid |link=
 	if ( origAttrs.isLinked === undefined && this.getImageNodeType() === 'mwInlineImage' ) {
 		attrs.isLinked = true;
@@ -395,11 +504,35 @@ ve.dm.MWImageModel.prototype.onScalableDefaultSizeChange = function ( isDefault 
 };
 
 /**
- * Set the image file resource name
- * @param {string} resourceName The resource name of the given media file
+ * Set the image file source
+ * @param {string} src The source of the given media file
  */
-ve.dm.MWImageModel.prototype.setResourceName = function ( resourceName ) {
+ve.dm.MWImageModel.prototype.setImageSource = function ( src ) {
+	this.imageSrc = src;
+};
+
+/**
+ * Set the image file resource name
+ * @param {string} resourceName The resource name of the given image file
+ */
+ve.dm.MWImageModel.prototype.setImageResourceName = function ( resourceName ) {
 	this.imageResourceName = resourceName;
+};
+
+/**
+ * Set the image href value
+ * @param {string} href The destination href of the given media file
+ */
+ve.dm.MWImageModel.prototype.setImageHref = function ( href ) {
+	this.imageHref = href;
+};
+
+/**
+ * Set the original bounding box
+ * @param {Object} box Bounding box with width and height
+ */
+ve.dm.MWImageModel.prototype.setBoundingBox = function ( box ) {
+	this.boundingBox = box;
 };
 
 /**
@@ -503,7 +636,7 @@ ve.dm.MWImageModel.prototype.getResourceName = function () {
  * @return {string} Alternate text
  */
 ve.dm.MWImageModel.prototype.getAltText = function () {
-	return this.altText;
+	return this.altText || '';
 };
 
 /**
@@ -832,20 +965,47 @@ ve.dm.MWImageModel.prototype.setDir = function ( dir ) {
 };
 
 /**
- * Get the image source
- * @return {string} Source attribute
+ * Get the image file source
+ * The image file source that points to the location of the
+ * file on the web.
+ * For instance, '//upload.wikimedia.org/wikipedia/commons/0/0f/Foo.jpg'
+ * @returns {string} The source of the given media file
  */
 ve.dm.MWImageModel.prototype.getImageSource = function () {
-	return this.getOriginalImageAttributes().src;
+	return this.imageSrc;
 };
 
 /**
- * Set the scalable object relevant to the image node
+ * Get the image file resource name.
+ * The resource name represents the filename without the full
+ * source url.
+ * For example, './File:Foo.jpg'
+ * @returns {string} The resource name of the given media file
+ */
+ve.dm.MWImageModel.prototype.getImageResourceName = function () {
+	return this.imageResourceName;
+};
+
+/**
+ * Get the image href value.
+ * This is the link that the image leads to. It usually contains
+ * the link to the source of the image in commons or locally, but
+ * may hold an alternative link if link= is supplied in the wikitext.
+ * For example, './File:Foo.jpg' or 'http://www.wikipedia.org'
+ * @returns {string} The destination href of the given media file
+ */
+ve.dm.MWImageModel.prototype.getImageHref = function () {
+	return this.imageHref;
+};
+
+/**
+ * Attach a new scalable object to the model and request the
+ * information from the API.
  *
  * @param {ve.dm.Scalable} Scalable object
  */
-ve.dm.MWImageModel.prototype.updateScalable = function ( scalable ) {
-	var imageName = this.getResourceName();
+ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
+	var imageName = this.getResourceName().replace( /^(\.+\/)*/, '' );
 
 	if ( this.scalable instanceof ve.dm.Scalable ) {
 		this.scalable.disconnect( this );

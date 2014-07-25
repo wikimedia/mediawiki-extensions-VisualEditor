@@ -406,42 +406,41 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
-	var attrs, info, dimensions;
+	var info;
 
 	if ( item ) {
 		info = item.imageinfo[0];
-		attrs = {
-			// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
-			href: './' + item.title,
-			src: info.thumburl,
-			resource: './' + item.title,
-			mediaType: info.mediatype
-		};
 
 		if ( !this.imageModel ) {
-			// Image model doesn't exist yet, which means we are creating
-			// a brand new node to insert
-			attrs.type = 'thumb';
-			attrs.align = 'default';
-			attrs.width = info.thumbwidth;
-			attrs.height = info.thumbheight;
-			attrs.defaultSize = true;
+			// Create a new image model based on default attributes
+			this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
+				{
+					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
+					href: './' + item.title,
+					src: info.thumburl,
+					resource: './' + item.title,
+					width: info.thumbwidth,
+					height: info.thumbheight,
+					mediaType: info.mediatype,
+					type: 'thumb',
+					align: 'default',
+					defaultSize: true
+				},
+				this.getFragment().getSurface().getDocument().getDir()
+			);
+			this.attachImageModel();
 		} else {
-			// Image model already exists, so we just need to create a new
-			// image based on the parameters that already exist
-			dimensions = this.imageModel.getScalable().getCurrentDimensions();
-
-			attrs.type = this.imageModel.getType();
-			attrs.align = this.imageModel.getAlignment();
-			attrs.width = dimensions.width;
-			attrs.height = dimensions.height;
-			attrs.defaultSize = this.imageModel.isDefaultSize();
-			if ( this.imageModel.getAltText() ) {
-				attrs.alt = this.imageModel.getAltText();
-			}
+			// Update the current image model with the new image source
+			this.imageModel.changeImageSource(
+				{
+					mediaType: info.mediatype,
+					href: './' + item.title,
+					src: info.thumburl,
+					resource: './' + item.title
+				},
+				{ width: info.width, height: info.height }
+			);
 		}
-
-		this.setImageModel( attrs );
 
 		this.setChanged();
 		this.switchPanels( 'edit' );
@@ -620,7 +619,19 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			this.pageTitle = pageTitle;
 
 			if ( this.selectedNode ) {
-				this.setImageModel( this.selectedNode.getAttributes() );
+				// Create image model
+				this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
+					this.selectedNode.getAttributes(),
+					this.selectedNode.getDocument().getDir()
+				);
+				this.attachImageModel();
+
+				if ( !this.imageModel.isDefaultSize() ) {
+					// To avoid dirty diff in case where only the image changes,
+					// we will store the initial bounding box, in case the image
+					// is not defaultSize
+					this.imageModel.setBoundingBox( this.imageModel.getCurrentDimensions() );
+				}
 			}
 
 			this.resetCaption();
@@ -700,27 +711,13 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 };
 
 /**
- * Set the image model
- * @param {ve.dm.MWImageNode} node Image node, if it doesn't come from the selected node
+ * Attach the image model to the dialog
  */
-ve.ui.MWMediaDialog.prototype.setImageModel = function ( attrs ) {
-	var dir;
-
+ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	if ( this.imageModel ) {
 		this.imageModel.disconnect( this );
 		this.sizeWidget.disconnect( this );
 	}
-
-	if ( this.selectedNode ) {
-		dir = this.selectedNode.getDocument() ?
-			this.selectedNode.getDocument().getDir() :
-			this.getFragment().getSurface().getDocument().getDir();
-		attrs = attrs || this.selectedNode.getAttributes();
-	}
-
-	this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes( attrs, dir );
-
-	this.actions.setAbilities( { insert: true, apply: true } );
 
 	// Events
 	this.imageModel.connect( this, {
@@ -744,6 +741,9 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( attrs ) {
 		'custom'
 	);
 	this.sizeWidget.setDisabled( this.imageModel.getType() === 'frame' );
+
+	// Update default dimensions
+	this.sizeWidget.updateDefaultDimensions();
 
 	// Set initial alt text
 	this.altTextInput.setValue(
@@ -857,6 +857,8 @@ ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 		.next( function () {
 			// Focus the caption surface
 			this.captionSurface.focus();
+			// Revalidate size
+			this.sizeWidget.validateDimensions();
 		}, this );
 };
 
