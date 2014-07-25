@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"StephDC"
+			"StephDC",
+			"LNDDYL"
 		]
 	},
+	"visualeditor-ca-editsource": "纂碼",
+	"visualeditor-ca-editsource-section": "纂碼",
 	"visualeditor-mweditmodesource-warning-switch": "留纂"
 }

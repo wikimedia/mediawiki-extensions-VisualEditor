@@ -241,7 +241,7 @@
 	"visualeditor-savedialog-title-conflict": "Title for save dialog slide if there is an edit conflict",
 	"visualeditor-savedialog-title-nochanges": "Title for save dialog slide for the wikitext diff if there are no changes",
 	"visualeditor-savedialog-title-review": "Title for save dialog slide for the wikitext diff",
-	"visualeditor-savedialog-title-save": "Title for save dialog slide for the final save step",
+	"visualeditor-savedialog-title-save": "Title for save dialog slide for the final save step. Appears between the buttons {{msg-mw|visualeditor-toolbar-savedialog}} and {{msg-mw|visualeditor-dialog-action-cancel}}.",
 	"visualeditor-savedialog-warning-dirty": "Note displayed to users in the save dialog if VisualEditor believes that it may have corrupted the page.",
 	"visualeditor-saveerror": "Text shown when the editor fails to save properly.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-serializeerror": "Text shown when the editor fails to load the wikitext for saving.\n\nParameters:\n* $1 is an error message, in English.",
