@@ -155,7 +155,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|varsel|varsler}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsvarsler",
 	"visualeditor-editsummary": "Beskriv hva du endret",
-	"visualeditor-editsummary-bytes-remaining": "Antall bytes som gjenstår",
+	"visualeditor-editsummary-bytes-remaining": "Antall byte som gjenstår",
 	"visualeditor-formatdropdown-format-mw-heading1": "Sidetittel",
 	"visualeditor-formatdropdown-format-mw-heading2": "Overskrift",
 	"visualeditor-formatdropdown-format-mw-heading3": "Underoverskrift 1",

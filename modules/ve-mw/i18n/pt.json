@@ -174,7 +174,7 @@
 	"visualeditor-linkinspector-illegal-title": "Título inválido",
 	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Página de desambiguação|Páginas de desambiguação}}",
 	"visualeditor-linkinspector-suggest-external-link": "Ligação externa",
-	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Página Correspondente|Páginas correspondentes}}",
+	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Página correspondente|Páginas correspondentes}}",
 	"visualeditor-linkinspector-suggest-new-page": "Página nova",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Página de redireccionamento|Páginas de redireccionamento}}",
 	"visualeditor-linknodeinspector-add-label": "Adicionar etiqueta",
