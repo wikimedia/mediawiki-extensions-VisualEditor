@@ -72,9 +72,7 @@
 	color: #aaa;
 }
 
-.ve-ui-mwSaveDialog-license,
-.ve-ui-mwSaveDialog-dirtymsg,
-.ve-ui-mwSaveDialog-report-notice {
+.ve-ui-mwSaveDialog-license {
 	font-size: 0.85em;
 	line-height: 1.25em;
 	padding: 0;

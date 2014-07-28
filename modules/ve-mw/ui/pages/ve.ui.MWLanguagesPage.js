@@ -60,7 +60,7 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 	var i, $languagesTable = this.$( '<table>' ), languageslength = languages.length;
 
 	$languagesTable
-		.addClass( 've-ui-MWLanguagesPage-languages-table' )
+		.addClass( 've-ui-mwLanguagesPage-languages-table' )
 		.append( this.$( '<tr>' )
 			.append(
 				this.$( '<th>' )

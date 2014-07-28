@@ -254,7 +254,6 @@ ve.init.mw.Target.static.pasteRules = {
  * @property {string[]} iconModuleStyles Modules that should be loaded to provide the icons
  */
 ve.init.mw.Target.static.iconModuleStyles = [
-	'ext.visualEditor.viewPageTarget.icons',
 	'ext.visualEditor.icons'
 ];
 
