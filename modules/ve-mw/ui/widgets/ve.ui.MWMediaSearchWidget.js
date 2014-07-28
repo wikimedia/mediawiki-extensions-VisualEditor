@@ -36,6 +36,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.$noItemsMessage = this.$( '<div>' )
 		.addClass( 've-ui-mwMediaSearchWidget-noresults' )
 		.text( ve.msg( 'visualeditor-dialog-media-noresults' ) )
+		.hide()
 		.appendTo( this.$query );
 
 	// Events
@@ -100,7 +101,8 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsScroll = function () {
  * @method
  */
 ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
-	var i, len, source,
+	var i, len, source, request,
+		promises = [],
 		ajaxOptions = {},
 		value = this.query.getValue();
 
@@ -144,7 +146,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				};
 			}
 			this.query.pushPending();
-			source.request = ve.init.target.constructor.static.apiRequest( {
+			request = ve.init.target.constructor.static.apiRequest( {
 				'action': 'query',
 				'generator': 'search',
 				'gsrsearch': value,
@@ -155,10 +157,13 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				'iiprop': 'dimensions|url|mediatype',
 				'iiurlheight': this.size
 			}, ajaxOptions )
-				.done( this.onMediaQueryDone.bind( this, source ) )
-				.always( this.onMediaQueryAlways.bind( this, source ) );
+				.done( this.onMediaQueryDone.bind( this, source ) );
 			source.value = value;
+			promises.push( request );
 		}
+
+		// When all sources are done, check to see if there are results
+		$.when.apply( $, promises ).done( this.onAllMediaQueriesDone.bind( this ) );
 	}
 };
 
@@ -168,25 +173,12 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
  * @method
  * @param {Object} source Media query source
  */
-ve.ui.MWMediaSearchWidget.prototype.onMediaQueryAlways = function ( source ) {
+ve.ui.MWMediaSearchWidget.prototype.onAllMediaQueriesDone = function ( source ) {
 	source.request = null;
 	this.query.popPending();
 
-	// Count this source as done
-	this.sourceCounter++;
-
-	// Check if all sources are done
-	// TODO use $.when() instead (bug 65321)
-	if ( this.sourceCounter >= this.sources.length ) {
-		if ( this.results.getItems().length === 0 ) {
-			this.$noItemsMessage.show();
-		}
-	}
-
-	// Even if the whole list of sources didn't finish yet
-	// if there are results, make the message go away
-	if ( this.results.getItems().length > 0 ) {
-		this.$noItemsMessage.hide();
+	if ( this.results.getItems().length === 0 ) {
+		this.$noItemsMessage.show();
 	}
 };
 
