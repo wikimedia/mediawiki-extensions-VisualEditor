@@ -4,6 +4,10 @@ class VisualEditorPage
   include URL
   page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}?vehidebetadialog=true&veaction=edit")
   span(:bullet_number_selector, class: "oo-ui-iconedElement-icon oo-ui-icon-bullet-list")
+  span(:cite_button, text: "Cite")
+  div(:cite_select, css: "div.oo-ui-widget:nth-child(5) > div:nth-child(2)")
+  a(:cite_book, css: ".oo-ui-tool-name-cite-book > a:nth-child(1)")
+  span(:cite_website, css: ".oo-ui-icon-ref-cite-web")
   div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
   div(:content, class: "ve-ce-branchNode")
   span(:decrease_indentation, class: "oo-ui-iconedElement-icon oo-ui-icon-outdent-list")
@@ -82,7 +86,25 @@ class VisualEditorPage
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
+    a(:cite_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 4, frame: frame)
+    a(:book_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
+    text_field(:cite_custom_field_name, css: ".oo-ui-textInputWidget-decorated > input:nth-child(1)", frame: frame)
+    li(:cite_new_field_instance , class: "oo-ui-widget oo-ui-widget-enabled oo-ui-optionWidget ve-ui-mwParameterResultWidget oo-ui-labeledElement", frame: frame)
+    text_area(:cite_new_website_field, css: "div.oo-ui-layout:nth-child(7) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)", frame: frame)
+    div(:cite_show_more_fields, class: "ve-ui-mwMoreParametersResultWidget-label", frame: frame)
+    div(:cite_ui, class: "oo-ui-window-body", frame: frame)
+
+    text_area(:cite_first_textarea, index: 0, frame: frame)
+    text_area(:cite_second_textarea, index: 1, frame: frame)
+    text_area(:cite_third_textarea, index: 2, frame: frame)
+    text_area(:cite_fourth_textarea, index: 3, frame: frame)
+    text_area(:cite_fifth_textarea, index: 4, frame: frame)
+    text_area(:cite_sixth_textarea, index: 5, frame: frame)
+    text_area(:cite_seventh_textarea, index: 6, frame: frame)
+    text_area(:cite_eighth_textarea, index: 7, frame: frame)
+
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
+    span(:insert_citation, text: "Insert citation", frame: frame)
     span(:links_done, text: "Done", frame: frame)
     text_field(:link_textfield, index: 0, frame: frame)
     span(:another_save_page, class: "oo-ui-labeledElement-label", text: "Save page", frame: frame)
