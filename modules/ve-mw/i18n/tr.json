@@ -220,7 +220,7 @@
 	"visualeditor-saveerror": "Sunucuya veri kaydedilirken hata: $1.",
 	"visualeditor-serializeerror": "Sunucudan veri yüklenirken hata oluştu: $1.",
 	"visualeditor-settings-tool": "Sayfa ayarları",
-	"visualeditor-timeout": "Tam düzenleme şu anda kullanılamıyor gibi görünüyor. Bunun yerine kaynak modunda düzenlemek ister misiniz?",
+	"visualeditor-timeout": "Bu düzenleyici şu anda kullanılamıyor gibi görünüyor. Bunun yerine kaynak modunda düzenlemek ister misiniz?",
 	"visualeditor-toolbar-cancel": "Vazgeç",
 	"visualeditor-toolbar-cite-label": "Kaynak göster",
 	"visualeditor-toolbar-format-tooltip": "Paragraf biçimi",
