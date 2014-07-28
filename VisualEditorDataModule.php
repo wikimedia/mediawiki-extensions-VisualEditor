@@ -76,7 +76,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			'summary' => array( 'summary' ),
 			'watchthis' => array( 'watchthis' ),
 			'visualeditor-browserwarning' => array( 'visualeditor-browserwarning' ),
-			'visualeditor-report-notice' => array( 'visualeditor-report-notice' ),
 			'visualeditor-wikitext-warning' => array( 'visualeditor-wikitext-warning' ),
 		);
 
