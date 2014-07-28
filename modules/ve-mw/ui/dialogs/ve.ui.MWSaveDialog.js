@@ -140,6 +140,11 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	this.setSize( 'medium' );
 
 	// Update the window title
+	// The following messages can be used here:
+	// visualeditor-savedialog-title-save
+	// visualeditor-savedialog-title-reviews
+	// visualeditor-savedialog-title-conflict
+	// visualeditor-savedialog-title-nochanges
 	this.title.setLabel( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
 
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
