@@ -434,9 +434,8 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
 		this.tearDownBeforeUnloadHandler();
-		newUrlParams = {
-			'venotify': this.restoring ? 'restored' : 'created'
-		};
+		newUrlParams = newid === undefined ? {} : { venotify: this.restoring ? 'restored' : 'created' };
+
 		if ( isRedirect ) {
 			newUrlParams.redirect = 'no';
 		}
@@ -475,10 +474,12 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 		this.setupSectionEditLinks();
 		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
-		mw.hook( 'postEdit' ).fire( {
-			'message':
-				ve.msg( 'postedit-confirmation-saved', mw.user )
-		} );
+		if ( newid !== undefined ) {
+			mw.hook( 'postEdit' ).fire( {
+				'message':
+					ve.msg( 'postedit-confirmation-saved', mw.user )
+			} );
+		}
 	}
 };
 
