@@ -103,10 +103,15 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.scrollTo = function ( position ) {
+ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode ) {
+	var target = this;
+
 	if ( this.isIos ) {
-		this.surface.$element.closest( '.overlay-content' ).scrollTop( position );
+		setTimeout( function () {
+			var position = headingNode.$element.offset().top - target.toolbar.$element.height();
+			target.surface.$element.closest( '.overlay-content' ).scrollTop( position );
+		}, 400 );
 	} else {
-		ve.init.mw.MobileViewTarget.super.prototype.scrollTo.call( this, position );
+		ve.init.mw.MobileViewTarget.super.prototype.scrollToHeading.call( this, headingNode );
 	}
 };

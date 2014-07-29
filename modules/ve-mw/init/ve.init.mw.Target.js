@@ -1434,7 +1434,6 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 ve.init.mw.Target.prototype.restoreEditSection = function () {
 	if ( this.section !== undefined && this.section > 0 ) {
 		var offset, offsetNode, nextNode,
-			target = this,
 			surfaceView = this.surface.getView(),
 			surfaceModel = surfaceView.getModel(),
 			$documentNode = surfaceView.getDocument().getDocumentNode().$element,
@@ -1468,10 +1467,7 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 				surfaceModel.setSelection( new ve.Range( offset ) );
 			} );
 			// Scroll to heading:
-			// Wait for toolbar to animate in so we can account for its height
-			setTimeout( function () {
-				target.scrollTo( headingNode.$element.offset().top - target.toolbar.$element.height() );
-			}, 200 );
+			this.scrollToHeading( headingNode );
 		}
 
 		this.section = undefined;
@@ -1479,12 +1475,17 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 };
 
 /**
- * Scroll to a given position in the document.
+ * Scroll to a given heading in the document.
  *
  * @method
- * @param {number} position Position (in pixels) to scroll to
+ * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
-ve.init.mw.Target.prototype.scrollTo = function ( position ) {
-	var $window = $( OO.ui.Element.getWindow( this.$element ) );
-	$window.scrollTop( position );
+ve.init.mw.Target.prototype.scrollToHeading = function ( headingNode ) {
+	var $window = $( OO.ui.Element.getWindow( this.$element ) ),
+		target = this;
+
+	// Wait for toolbar to animate in so we can account for its height
+	setTimeout( function () {
+		$window.scrollTop( headingNode.$element.offset().top - target.toolbar.$element.height() );
+	}, 200 );
 };
