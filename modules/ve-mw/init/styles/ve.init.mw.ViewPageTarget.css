@@ -54,37 +54,11 @@
 }
 
 /* Needs to override .oo-ui.widget.oo-ui-widget-disabled */
-.ve-ui-toolbar-actions .ve-init-mw-viewPageTarget-waiting.oo-ui-widget.oo-ui-widget-disabled {
+.ve-init-mw-viewPageTarget-waiting.oo-ui-widget.oo-ui-widget-disabled {
 	cursor: progress;
 }
 
 /* Tools */
-
-.ve-init-mw-viewPageTarget-tool {
-	position: relative;
-	display: inline-block;
-	vertical-align: top;
-	line-height: 2.8em;
-	margin-right: 1em;
-	padding-left: 30px;
-	cursor: pointer;
-	background-repeat: no-repeat;
-	background-position: left center;
-}
-
-.ve-init-mw-viewPageTarget-tool-label {
-	color: #555555;
-}
-
-.ve-init-mw-viewPageTarget-tool-beta-label {
-	font-size: 120%;
-	font-variant: small-caps;
-}
-
-.ve-init-mw-viewPageTarget-tool:hover .ve-init-mw-viewPageTarget-tool-label,
-.ve-init-mw-viewPageTarget-subtool-label:hover {
-	text-decoration: underline;
-}
 
 .ve-ui-mwNoticesPopupTool-items,
 .ve-ui-mwHelpPopupTool-items {
@@ -112,10 +86,10 @@
 	margin-top: 0;
 }
 
-.ve-init-mw-ViewPageTarget-version-label,
-.ve-init-mw-ViewPageTarget-version-link,
-.ve-init-mw-ViewPageTarget-version-date {
-	font-size: 0.8em;
+.ve-ui-mwHelpPopupTool-version-label,
+.ve-ui-mwHelpPopupTool-version-link,
+.ve-ui-mwHelpPopupTool-version-date {
+	font-size: 0.9em;
 	color: #555;
 }
 

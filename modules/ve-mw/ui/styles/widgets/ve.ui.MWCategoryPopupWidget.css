@@ -31,10 +31,6 @@
 	margin: -0.4em 0 1em 0.125em;
 }
 
-.ve-ui-mwCategoryPopupWidget .ve-ui-removeButtonLabel:hover {
-	opacity: 1;
-}
-
 .ve-ui-mwCategoryPopupWidget-removeButton {
 	position: absolute;
 	margin-right: 2px;

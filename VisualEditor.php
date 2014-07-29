@@ -137,13 +137,6 @@ $wgResourceModules += array(
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
-	'ext.visualEditor.viewPageTarget.icons' => $wgVisualEditorResourceTemplate + array(
-		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.Icons.css',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-
 	'ext.visualEditor.viewPageTarget.init' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => 'modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.init.js',
 		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.init.css',

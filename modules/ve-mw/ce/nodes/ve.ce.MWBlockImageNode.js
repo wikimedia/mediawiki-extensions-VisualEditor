@@ -48,6 +48,12 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
 	this.$figure = this.$( '<figure>' )
 		.appendTo( this.$element )
 		.append( this.$a )
+		// The following classes can be used here:
+		// ve-ce-mwBlockImageNode-type-thumb
+		// ve-ce-mwBlockImageNode-type-frame
+		// ve-ce-mwBlockImageNode-type-frameless
+		// ve-ce-mwBlockImageNode-type-border
+		// ve-ce-mwBlockImageNode-type-none
 		.addClass( 've-ce-mwBlockImageNode ve-ce-mwBlockImageNode-type-' + type )
 		// 'typeof' should appear with the proper Parsoid-generated
 		// type. The model deals with converting it
