@@ -1434,6 +1434,7 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 ve.init.mw.Target.prototype.restoreEditSection = function () {
 	if ( this.section !== undefined && this.section > 0 ) {
 		var offset, offsetNode, nextNode,
+			target = this,
 			surfaceView = this.surface.getView(),
 			surfaceModel = surfaceView.getModel(),
 			$documentNode = surfaceView.getDocument().getDocumentNode().$element,
@@ -1465,9 +1466,8 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 			// the model selection, otherwise it will get reset
 			this.surface.getView().once( 'focus', function () {
 				surfaceModel.setSelection( new ve.Range( offset ) );
+				target.scrollToHeading( headingNode );
 			} );
-			// Scroll to heading:
-			this.scrollToHeading( headingNode );
 		}
 
 		this.section = undefined;
