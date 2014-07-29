@@ -46,7 +46,7 @@
 	margin-left: 0;
 }
 
-.ve-ui-surface-globalOverlay {
+.ve-ui-overlay-global {
 	z-index: 101; /* #p-personal is z-index 100 in vector :( */
 }
 
