@@ -1221,8 +1221,6 @@ $wgResourceModules += array(
 			"visualeditor-languageannotation-description",
 			"visualeditor-languageannotation-description-with-dir",
 			'visualeditor-languageinspector-title',
-			'visualeditor-languageinspector-block-tooltip',
-			'visualeditor-languageinspector-block-tooltip-rtldirection',
 			'visualeditor-languageinspector-widget-changelang',
 			'visualeditor-languageinspector-widget-label-language',
 			'visualeditor-languageinspector-widget-label-langcode',

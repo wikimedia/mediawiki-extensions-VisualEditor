@@ -22,7 +22,6 @@ ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation( model, p
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwInternalLinkAnnotation' );
-	this.$element.attr( 'title', model.getAttribute( 'title' ) );
 
 	// Style based on link cache information
 	ve.init.platform.linkCache.get( model.getAttribute( 'lookupTitle' ) )

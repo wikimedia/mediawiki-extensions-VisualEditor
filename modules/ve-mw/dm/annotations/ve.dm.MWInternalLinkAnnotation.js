@@ -126,7 +126,7 @@ ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
 /* Methods */
 
 /**
- * @returns {Object}
+ * @inheritdoc
  */
 ve.dm.MWInternalLinkAnnotation.prototype.getComparableObject = function () {
 	return {
@@ -135,7 +135,9 @@ ve.dm.MWInternalLinkAnnotation.prototype.getComparableObject = function () {
 	};
 };
 
-/** */
+/**
+ * @inheritdoc
+ */
 ve.dm.MWInternalLinkAnnotation.prototype.getComparableHtmlAttributes = function () {
 	var attributes = ve.dm.Annotation.prototype.getComparableHtmlAttributes.call( this );
 	delete attributes.href;
