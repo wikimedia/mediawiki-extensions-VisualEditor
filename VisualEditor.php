@@ -901,6 +901,9 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/tools/ve.ui.MWLinkNodeInspectorTool.js',
 		),
+		'styles' => array(
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css'
+		),
 		'skinStyles' => array(
 			'default' => array(
 				'modules/ve-mw/ui/themes/apex/ve.ui.MWLinkTargetInputWidget.css'
