@@ -645,6 +645,8 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 			// HACK: OO.ui.Dialog needs an API for this
 			this.frame.$content.removeClass( 'oo-ui-dialog-content-footless' );
+			// Focus the caption surface
+			this.captionSurface.focus();
 			// Hide/show the panels
 			this.bookletLayout.$element.show();
 			this.mediaSearchPanel.$element.hide();
