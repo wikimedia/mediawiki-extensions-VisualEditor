@@ -104,13 +104,11 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode ) {
-	var target = this;
+	var position;
 
 	if ( this.isIos ) {
-		setTimeout( function () {
-			var position = headingNode.$element.offset().top - target.toolbar.$element.height();
-			target.surface.$element.closest( '.overlay-content' ).scrollTop( position );
-		}, 400 );
+		position = headingNode.$element.offset().top - this.toolbar.$element.height();
+		this.surface.$element.closest( '.overlay-content' ).scrollTop( position );
 	} else {
 		ve.init.mw.MobileViewTarget.super.prototype.scrollToHeading.call( this, headingNode );
 	}
