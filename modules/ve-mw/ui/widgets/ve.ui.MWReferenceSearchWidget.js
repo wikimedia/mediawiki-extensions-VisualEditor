@@ -158,7 +158,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 			view.$element.find( 'a[href]' ).each( extractAttrs );
 
 			this.index.push( {
-				'$element': view.$element.clone(),
+				'$element': view.$element,
 				'text': text,
 				'reference': ref,
 				'citation': citation,
