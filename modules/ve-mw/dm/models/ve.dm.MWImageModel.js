@@ -300,7 +300,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			fragment.insertContent( contentToInsert );
 			// Check if there is caption document and insert it
 			captionDoc = this.getCaptionDocument();
-			if ( captionDoc.data.getLength() > 4 ) {
+			if ( captionDoc.data.countNonInternalElements() > 2 ) {
 				// Add contents of new caption
 				surfaceModel.change(
 					ve.dm.Transaction.newFromDocumentInsertion(

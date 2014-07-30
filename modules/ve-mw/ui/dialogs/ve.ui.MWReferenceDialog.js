@@ -178,7 +178,7 @@ ve.ui.MWReferenceDialog.static.getPasteRules = function () {
 ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 	var data = this.referenceModel.getDocument().data,
 		// TODO: Check for other types of empty, e.g. only whitespace?
-		hasContent = data.countNoninternalElements() > 2;
+		hasContent = data.countNonInternalElements() > 2;
 
 	this.actions.setAbilities( {
 		'apply': hasContent,
