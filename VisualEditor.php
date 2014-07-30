@@ -491,6 +491,7 @@ $wgResourceModules += array(
 			'lib/ve/modules/ve/ui/widgets/ve.ui.ContextItemWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.DimensionsWidget.js',
 			'lib/ve/modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js',
+			'lib/ve/modules/ve/ui/widgets/ve.ui.WhitespacePreservingTextInputWidget.js',
 
 			'lib/ve/modules/ve/ui/tools/ve.ui.AnnotationTool.js',
 			'lib/ve/modules/ve/ui/tools/ve.ui.ClearAnnotationTool.js',
