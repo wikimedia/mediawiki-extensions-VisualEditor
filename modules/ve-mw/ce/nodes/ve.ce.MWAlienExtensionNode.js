@@ -33,6 +33,15 @@ ve.ce.MWAlienExtensionNode.static.name = 'mwAlienExtension';
 
 ve.ce.MWAlienExtensionNode.static.primaryCommandName = 'alienExtension';
 
+/* Static Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWAlienExtensionNode.static.getDescription = function ( model ) {
+	return model.getExtensionName();
+};
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWAlienExtensionNode );
