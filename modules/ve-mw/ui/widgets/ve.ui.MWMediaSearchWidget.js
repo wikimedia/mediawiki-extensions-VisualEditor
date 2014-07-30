@@ -100,7 +100,8 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsScroll = function () {
  * @method
  */
 ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
-	var i, len, source, url,
+	var i, len, source,
+		ajaxOptions = {},
 		value = this.query.getValue();
 
 	if ( value === '' ) {
@@ -123,11 +124,24 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				source.gsroffset = 0;
 			}
 			if ( source.local ) {
-				url = mw.util.wikiScript( 'api' );
+				ajaxOptions = {
+					'url': mw.util.wikiScript( 'api' ),
+					// If the url is local use json
+					'dataType': 'json'
+				};
 			} else {
-				// If 'apiurl' is set, use that. Otherwise, build the url
-				// from scriptDirUrl and /api.php suffix
-				url = source.apiurl || ( source.scriptDirUrl + '/api.php' );
+				ajaxOptions = {
+					// If 'apiurl' is set, use that. Otherwise, build the url
+					// from scriptDirUrl and /api.php suffix
+					'url': source.apiurl || ( source.scriptDirUrl + '/api.php' ),
+					// If the url is not the same origin use jsonp
+					'dataType': 'jsonp',
+					// JSON-P requests are not cached by default and get a &_=random trail.
+					// While setting cache=true will still bypass cache in most case due to the
+					// callback parameter, at least drop the &_=random trail which triggers
+					// an API warning (invalid parameter).
+					'cache': true
+				};
 			}
 			this.query.pushPending();
 			source.request = ve.init.target.constructor.static.apiRequest( {
@@ -140,17 +154,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				'prop': 'imageinfo',
 				'iiprop': 'dimensions|url|mediatype',
 				'iiurlheight': this.size
-			}, {
-				'url': url,
-				// This request won't be cached since the JSON-P callback is unique. However make sure
-				// to allow jQuery to cache otherwise so it won't e.g. add "&_=(random)" which will
-				// trigger a MediaWiki API error for invalid parameter "_".
-				'cache': true,
-				// TODO: Only use JSON-P for cross-domain.
-				// jQuery has this logic built-in (if url is not same-origin ..)
-				// but isn't working for some reason.
-				'dataType': 'jsonp'
-			} )
+			}, ajaxOptions )
 				.done( this.onMediaQueryDone.bind( this, source ) )
 				.always( this.onMediaQueryAlways.bind( this, source ) );
 			source.value = value;
