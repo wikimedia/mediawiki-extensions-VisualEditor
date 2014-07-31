@@ -88,6 +88,10 @@ ve.ui.MWReferenceSearchWidget.prototype.onResultsSelect = function ( item ) {
 ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalList ) {
 	var i, iLen, groupNames, groupName, groups = internalList.getNodeGroups();
 
+	if ( this.results.getSelectedItem() ) {
+		this.results.getSelectedItem().setSelected( false );
+	}
+
 	this.internalList = internalList;
 
 	groupNames = ve.getObjectKeys( groups );
