@@ -71,7 +71,8 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWExtensionInspector.super.prototype.initialize.call( this );
 
-	this.input = new OO.ui.TextInputWidget( {
+	this.input = new ve.ui.WhitespacePreservingTextInputWidget( {
+		'limit': 1,
 		'$': this.$,
 		'multiline': true
 	} );
@@ -99,7 +100,7 @@ ve.ui.MWExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWExtensionInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var value, dir;
+			var dir;
 
 			// Initialization
 			this.node = this.getFragment().getSelectedNode();
@@ -110,23 +111,11 @@ ve.ui.MWExtensionInspector.prototype.getSetupProcess = function ( data ) {
 				this.node = null;
 			}
 			if ( this.node ) {
-				value = this.node.getAttribute( 'mw' ).body.extsrc;
-				if ( this.isBlock ) {
-					// Trim leading/trailing linebreaks but remember them
-					if ( value.slice( 0, 1 ) === '\n' ) {
-						this.whitespace[0] = '\n';
-						value = value.slice( 1 );
-					}
-					if ( value.slice( -1 ) === '\n' ) {
-						this.whitespace[1] = '\n';
-						value = value.slice( 0, -1 );
-					}
-				}
-				this.input.setValue( value );
+				this.input.setValueAndWhitespace( this.node.getAttribute( 'mw' ).body.extsrc );
 			} else {
 				if ( this.isBlock ) {
 					// New nodes should use linebreaks for blocks
-					this.whitespace = [ '\n', '\n' ];
+					this.input.setWhitespace( [ '\n', '\n' ] );
 				}
 				this.input.setValue( '' );
 			}
