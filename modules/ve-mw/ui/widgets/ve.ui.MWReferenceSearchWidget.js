@@ -26,7 +26,6 @@ ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
 	// Properties
 	this.index = [];
 	this.indexEmpty = true;
-	this.built = false;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwReferenceSearchWidget' );
@@ -105,14 +104,13 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 };
 
 /**
- * Build a serchable index of references.
+ * Build a searchable index of references.
  *
  * @method
  */
 ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
-	if ( this.built ) {
-		return;
-	}
+	// FIXME: For performance, this should only build the index if (a) there's no existing index, or
+	// (b) there is, but it was built against a different version of the internalList. (Bug: 68890)
 
 	var i, iLen, j, jLen, ref, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
@@ -170,8 +168,6 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 
 	// Re-populate
 	this.onQueryChange();
-
-	this.built = true;
 };
 
 /**
