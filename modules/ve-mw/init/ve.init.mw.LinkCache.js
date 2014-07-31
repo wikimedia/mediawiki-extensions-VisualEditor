@@ -92,12 +92,17 @@
 		}
 
 		function processData( data ) {
-			var pageid, info, dfd, pages = data.query && data.query.pages || {};
+			var pageid, page, info, dfd,
+				pages = data.query && data.query.pages || {};
 			for ( pageid in pages ) {
+				page = pages[pageid];
 				info = {
-					'missing': pages[pageid].missing !== undefined
+					'missing': page.missing !== undefined,
+					'redirect': page.redirect !== undefined,
+					// Disambiguator extension
+					'disambiguation': page.pageprops && page.pageprops.disambiguation !== undefined
 				};
-				dfd = linkCache.cache[pages[pageid].title];
+				dfd = linkCache.cache[page.title];
 				if ( dfd ) {
 					dfd.resolve( info );
 				}
@@ -115,7 +120,8 @@
 			subqueue = queue.splice( 0, 50 ).map( normalizeTitle );
 			ve.init.target.constructor.static.apiRequest( {
 				'action': 'query',
-				'prop': 'info',
+				'prop': 'info|pageprops',
+				'ppprop': 'disambiguation',
 				'titles': subqueue.join( '|' )
 			} )
 				.done( processData )
