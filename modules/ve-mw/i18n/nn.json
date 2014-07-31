@@ -160,6 +160,7 @@
 	"visualeditor-meta-tool": "Sideinnstillingar",
 	"visualeditor-mwalienextensioninspector-title": "MediaWiki-utviding",
 	"visualeditor-mweditmodesource-title": "Byt til kjeldeendring",
+	"visualeditor-mweditmodesource-tool": "Byt til wikitekstendring",
 	"visualeditor-mweditmodesource-warning": "Du er i ferd med å byta til kjeldeendring.\nEventuelle endringar du har gjort på sida kan lagrast, men du vil ikkje vera i stand til å byta attende til VisualEditor utan å lagra eller lasta sida på nytt.\nYnskjer du å halda fram?",
 	"visualeditor-mweditmodesource-warning-switch": "Lagra endringane",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Gløym endringane",

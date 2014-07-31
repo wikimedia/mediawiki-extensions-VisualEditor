@@ -6,7 +6,8 @@
 			"Shanmugamp7",
 			"மதனாஹரன்",
 			"கௌசிக் பிரபு",
-			"Kalyanasundar"
+			"Kalyanasundar",
+			"ElangoRamanujam"
 		]
 	},
 	"tooltip-ca-createsource": "இந்த பக்கத்தின் மூல நிரலை உருவாக்கவும்",
@@ -54,5 +55,6 @@
 	"visualeditor-savedialog-label-error": "பிழை",
 	"visualeditor-savedialog-label-save": "பக்கத்தைச் சேமி",
 	"visualeditor-savedialog-label-warning": "எச்சரிக்கை",
-	"visualeditor-toolbar-savedialog": "பக்கத்தைச் சேமி"
+	"visualeditor-toolbar-savedialog": "பக்கத்தைச் சேமி",
+	"visualeditor-viewpage-savewarning-title": "உறுதியாகவா?"
 }
