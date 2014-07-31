@@ -18,8 +18,8 @@ ve.init.mw.TargetEvents = function ( target ) {
 	this.timings = { 'saveRetries': 0 };
 	// Events
 	this.target.connect( this, {
-		'saveWorkFlowBegin': 'onSaveWorkflowBegin',
-		'saveWorlFlowEnd': 'onSaveWorkflowEnd',
+		'saveWorkflowBegin': 'onSaveWorkflowBegin',
+		'saveWorkflowEnd': 'onSaveWorkflowEnd',
 		'saveInitiated': 'onSaveInitated',
 		'save': 'onSaveComplete',
 		'saveReview': 'onSaveReview',
