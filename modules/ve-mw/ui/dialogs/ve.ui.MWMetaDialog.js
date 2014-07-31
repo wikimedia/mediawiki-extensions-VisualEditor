@@ -124,10 +124,10 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 				// Undo everything done in the dialog and prevent redoing those changes
 				surfaceModel.undo();
 				surfaceModel.truncateUndoStack();
-
-				// ALWAYS return to normal tracking behavior
-				surfaceModel.startHistoryTracking();
 			}
+
+			// ALWAYS return to normal tracking behavior
+			surfaceModel.startHistoryTracking();
 		}, this );
 };
 
