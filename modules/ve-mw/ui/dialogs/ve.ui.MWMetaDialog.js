@@ -105,29 +105,14 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 
 	if ( action === 'apply' ) {
 		return new OO.ui.Process( function () {
-			// Let each page tear itself down ('languages' page doesn't need this yet)
-			this.settingsPage.teardown( { 'action': action } );
-			this.advancedSettingsPage.teardown( { 'action': action } );
-			this.categoriesPage.teardown( { 'action': action } );
-
-			// ALWAYS return to normal tracking behavior
-			surfaceModel.startHistoryTracking();
-
+			surfaceModel.applyStaging();
 			this.close( { 'action': action } );
 		}, this );
 	}
 
 	return ve.ui.MWMetaDialog.super.prototype.getActionProcess.call( this, action )
 		.next( function () {
-			// Place transactions made while dialog was open in a common history state
-			if ( surfaceModel.breakpoint() ) {
-				// Undo everything done in the dialog and prevent redoing those changes
-				surfaceModel.undo();
-				surfaceModel.truncateUndoStack();
-			}
-
-			// ALWAYS return to normal tracking behavior
-			surfaceModel.startHistoryTracking();
+			surfaceModel.popStaging();
 		}, this );
 };
 
@@ -145,13 +130,26 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			}
 
 			// Force all previous transactions to be separate from this history state
-			surfaceModel.breakpoint();
-			surfaceModel.stopHistoryTracking();
+			surfaceModel.pushStaging();
 
 			// Let each page set itself up ('languages' page doesn't need this yet)
 			this.settingsPage.setup( surfaceModel.metaList, data );
 			this.advancedSettingsPage.setup( surfaceModel.metaList, data );
 			this.categoriesPage.setup( surfaceModel.metaList, data );
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
+	data = data || {};
+	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			// Let each page tear itself down ('languages' page doesn't need this yet)
+			this.settingsPage.teardown( { 'action': data.action } );
+			this.advancedSettingsPage.teardown( { 'action': data.action } );
+			this.categoriesPage.teardown( { 'action': data.action } );
 		}, this );
 };
 
