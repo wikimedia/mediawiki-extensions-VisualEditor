@@ -179,22 +179,28 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 					this.editSummaryXhr.abort();
 				}
 				this.lastEditSummaryWikitext = currentEditSummaryWikitext;
-				this.$reviewEditSummary.empty()
-					.parent().show().addClass( 'mw-ajax-loader' );
-				this.editSummaryXhr = new mw.Api().post( {
-					action: 'parse',
-					summary: currentEditSummaryWikitext
-				} ).done( function ( result ) {
-					if ( result.parse.parsedsummary['*'] === '' ) {
+				this.$reviewEditSummary.empty();
+
+				if ( !currentEditSummaryWikitext || currentEditSummaryWikitext.trim() === '' ) {
+					// Don't bother with an API request for an empty summary
+					this.$reviewEditSummary.parent().hide();
+				} else {
+					this.$reviewEditSummary.parent().show().addClass( 'mw-ajax-loader' );
+					this.editSummaryXhr = new mw.Api().post( {
+						action: 'parse',
+						summary: currentEditSummaryWikitext
+					} ).done( function ( result ) {
+						if ( result.parse.parsedsummary['*'] === '' ) {
+							dialog.$reviewEditSummary.parent().hide();
+						} else {
+							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) );
+						}
+					} ).fail( function () {
 						dialog.$reviewEditSummary.parent().hide();
-					} else {
-						dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) );
-					}
-				} ).fail( function () {
-					dialog.$reviewEditSummary.parent().hide();
-				} ).always( function () {
-					dialog.$reviewEditSummary.parent().removeClass( 'mw-ajax-loader' );
-				} );
+					} ).always( function () {
+						dialog.$reviewEditSummary.parent().removeClass( 'mw-ajax-loader' );
+					} );
+				}
 			}
 			/* falls through */
 		case 'nochanges':
