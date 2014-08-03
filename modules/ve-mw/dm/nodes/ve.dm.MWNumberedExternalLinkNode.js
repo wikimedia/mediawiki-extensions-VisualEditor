@@ -33,6 +33,8 @@ ve.dm.MWNumberedExternalLinkNode.static.matchTagNames = [ 'a' ];
 
 ve.dm.MWNumberedExternalLinkNode.static.matchRdfaTypes = [ 'mw:ExtLink' ];
 
+ve.dm.MWNumberedExternalLinkNode.static.blacklistedAnnotationTypes = [ 'link' ];
+
 ve.dm.MWNumberedExternalLinkNode.static.matchFunction = function ( element ) {
 	// Must be empty
 	return element.childNodes.length === 0;
