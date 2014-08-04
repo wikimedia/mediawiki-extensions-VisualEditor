@@ -133,6 +133,21 @@ end
 
 Then(/^I take screenshot of insert pull-down menu$/) do
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element])
+
+  highlight @current_page.media_insert_menu_element
+  capture_screenshot("VisualEditor_Media_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
+
+  highlight @current_page.media_insert_menu_element, '#FFFFFF'
+  highlight @current_page.template_insert_menu_element
+  capture_screenshot("VisualEditor_Template_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
+
+  highlight @current_page.template_insert_menu_element, '#FFFFFF'
+  highlight @current_page.ref_list_insert_menu_element
+  capture_screenshot("VisualEditor_Reference_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
+
+  highlight @current_page.ref_list_insert_menu_element, '#FFFFFF'
+  highlight @current_page.formula_insert_menu_element
+  capture_screenshot("VisualEditor_Formula_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
 end
 
 Then(/^I should see Special character Insertion window$/) do

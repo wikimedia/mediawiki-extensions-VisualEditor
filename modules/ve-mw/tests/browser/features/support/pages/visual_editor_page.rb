@@ -79,6 +79,10 @@ class VisualEditorPage
   a(:internal_link, class: "ve-ce-LinkAnnotation ve-ce-mwInternalLinkAnnotation")
   unordered_list(:popup_icon, class: "ve-ui-context-menu")
   span(:basic_reference, class: "oo-ui-iconedElement-icon oo-ui-icon-reference")
+  span(:media_insert_menu, class: "oo-ui-tool-name-media")
+  span(:template_insert_menu, class: "oo-ui-tool-name-transclusion")
+  span(:ref_list_insert_menu, class: "oo-ui-tool-name-referenceList")
+  span(:formula_insert_menu,class: "oo-ui-tool-name-math")
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
