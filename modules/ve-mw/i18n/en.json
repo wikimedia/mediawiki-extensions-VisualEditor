@@ -25,7 +25,7 @@
     "visualeditor-annotationbutton-linknode-tooltip": "Simple link",
     "visualeditor-beta-appendix": "beta",
     "visualeditor-beta-label": "beta",
-    "visualeditor-beta-warning": "VisualEditor is in 'beta'. You may encounter software issues, and you may not be able to edit parts of the page. To switch back to source editing at any time without losing your changes, open the dropdown next to \"{{int:visualeditor-toolbar-cancel}}\" and select \"{{int:visualeditor-mweditmodesource-title}}\".",
+    "visualeditor-beta-warning": "VisualEditor is in 'beta'. You may encounter software issues, and you may not be able to edit parts of the page. To switch back to source editing at any time without losing your changes, open the dropdown next to \"{{int:visualeditor-toolbar-savedialog}}\" and select \"{{int:visualeditor-mweditmodesource-title}}\".",
     "visualeditor-browserwarning": "You are using a browser which is not officially supported by VisualEditor.",
     "visualeditor-ca-createlocaldescriptionsource": "Add local description source",
     "visualeditor-ca-createsource": "Create source",
@@ -239,7 +239,6 @@
     "visualeditor-serializeerror": "Error loading data from server: $1.",
     "visualeditor-settings-tool": "Page settings",
     "visualeditor-timeout":"It looks like this editor is currently unavailable. Would you like to edit in source mode instead?",
-    "visualeditor-toolbar-cancel": "Cancel",
     "visualeditor-toolbar-cite-label": "Cite",
     "visualeditor-toolbar-format-tooltip": "Format paragraph",
     "visualeditor-toolbar-savedialog": "Save page",
@@ -249,7 +248,7 @@
     "visualeditor-viewpage-savewarning-title": "Are you sure?",
     "visualeditor-viewpage-savewarning-discard": "Discard edits",
     "visualeditor-viewpage-savewarning-keep": "Continue editing",
-    "visualeditor-wikitext-warning": "You are using VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] does not work here. To switch to source editing at any time without losing your changes, open the dropdown menu next to \"{{int:visualeditor-toolbar-cancel}}\" and select \"{{int:visualeditor-mweditmodesource-title}}\".",
+    "visualeditor-wikitext-warning": "You are using VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] does not work here. To switch to source editing at any time without losing your changes, open the dropdown menu next to \"{{int:visualeditor-toolbar-savedialog}}\" and select \"{{int:visualeditor-mweditmodesource-title}}\".",
     "visualeditor-wikitext-warning-link": "Help:Wiki markup",
     "visualeditor-wikitext-warning-title": "Wikitext markup detected"
 }

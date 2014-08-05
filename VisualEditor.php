@@ -756,7 +756,6 @@ $wgResourceModules += array(
 			'visualeditor-savedialog-warning-dirty',
 			'visualeditor-saveerror',
 			'visualeditor-serializeerror',
-			'visualeditor-toolbar-cancel',
 			'visualeditor-toolbar-format-tooltip',
 			'visualeditor-toolbar-insert',
 			'visualeditor-toolbar-savedialog',
