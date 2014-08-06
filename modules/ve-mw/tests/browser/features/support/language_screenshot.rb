@@ -87,3 +87,6 @@ def top_left_x_y input_rectangles
   [top_left_x_coordinates(input_rectangles).min, top_left_y_coordinates(input_rectangles).min]
 end
 
+def highlight element, color='#FF00FF'
+  @current_page.execute_script("arguments[0].style.border = 'thick solid #{color}'", element)
+end
