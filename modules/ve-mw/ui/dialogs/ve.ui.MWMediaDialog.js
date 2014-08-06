@@ -187,7 +187,8 @@ ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.initialize = function () {
-	var altTextFieldset, positionFieldset, borderField, positionField;
+	var altTextFieldset, positionFieldset, borderField, positionField,
+		alignLeftButton, alignCenterButton, alignRightButton, alignButons;
 
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
@@ -254,23 +255,28 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.positionInput =  new OO.ui.ButtonSelectWidget( {
 		'$': this.$
 	} );
-	this.positionInput.addItems( [
-		new OO.ui.ButtonOptionWidget( 'left', {
-			'$': this.$,
-			'icon': 'align-float-left',
-			'label': ve.msg( 'visualeditor-dialog-media-position-left' )
-		} ),
-		new OO.ui.ButtonOptionWidget( 'center', {
-			'$': this.$,
-			'icon': 'align-center',
-			'label': ve.msg( 'visualeditor-dialog-media-position-center' )
-		} ),
-		new OO.ui.ButtonOptionWidget( 'right', {
-			'$': this.$,
-			'icon': 'align-float-right',
-			'label': ve.msg( 'visualeditor-dialog-media-position-right' )
-		} )
-	], 0 );
+
+	alignLeftButton = new OO.ui.ButtonOptionWidget( 'left', {
+		'$': this.$,
+		'icon': 'align-float-left',
+		'label': ve.msg( 'visualeditor-dialog-media-position-left' )
+	} );
+	alignCenterButton = new OO.ui.ButtonOptionWidget( 'center', {
+		'$': this.$,
+		'icon': 'align-center',
+		'label': ve.msg( 'visualeditor-dialog-media-position-center' )
+	} );
+	alignRightButton = new OO.ui.ButtonOptionWidget( 'right', {
+		'$': this.$,
+		'icon': 'align-float-right',
+		'label': ve.msg( 'visualeditor-dialog-media-position-right' )
+	} );
+
+	alignButons = ( this.frame.getDir() === 'ltr' ) ?
+		[ alignLeftButton, alignCenterButton, alignRightButton ] :
+		[ alignRightButton, alignCenterButton, alignLeftButton ];
+
+	this.positionInput.addItems( alignButons, 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
 		'$': this.$
