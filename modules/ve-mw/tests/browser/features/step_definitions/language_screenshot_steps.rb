@@ -123,7 +123,7 @@ Then(/^I should see pull-down menu containing Page Settings$/) do
 end
 
 Then(/^I take screenshot of Visual Editor insert menu$/) do
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.tools_menu_element, @current_page.page_option_menu_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.tools_menu_element, @current_page.page_option_menu_element], nil, 0)
 end
 
 Then(/^I should see Insert pull-down menu$/) do
@@ -137,18 +137,18 @@ end
 
 Then(/^I should see Special character Insertion window$/) do
   on(VisualEditorPage).iframe_element.when_present.should be_visible
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, -2)
 end
 
 Then(/^I should see save changes dialog box$/) do
   on(VisualEditorPage).iframe_element.when_present.should be_visible
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, -2)
 end
 
 Then(/^I should see Page settings dialog box$/) do
   on(VisualEditorPage).iframe_element.when_present.should be_visible
 
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, 0)
 
   capture_screenshot("VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_heading_element, @current_page.prevent_redirect_element], @current_page.iframe_element, 0)
 

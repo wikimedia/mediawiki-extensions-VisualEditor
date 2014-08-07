@@ -2,9 +2,15 @@ def capture_screenshot(file_name, page_elements, offset_element=nil, browser_zoo
   screenshot_directory = ENV["LANGUAGE_SCREENSHOT_PATH"] || "screenshots"
   FileUtils.mkdir_p screenshot_directory
   screenshot_path = "#{screenshot_directory}/#{file_name}"
-  browser_zoom.times do
-    @browser.send_keys [:control, :add]
+
+  browser_zoom.abs.times do
+    if browser_zoom > 0
+      @browser.send_keys [:control, :add]
+    else
+      @browser.send_keys [:control, :subtract]
+    end
   end
+
   @browser.screenshot.save screenshot_path
   crop_image screenshot_path, page_elements, offset_element
 end
