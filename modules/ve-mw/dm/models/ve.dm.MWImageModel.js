@@ -48,6 +48,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.imageHref = '';
 
 	this.boundingBox = null;
+	this.initialHash = {};
 
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
@@ -208,7 +209,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
  */
 ve.dm.MWImageModel.prototype.getHashObject = function () {
 	var hash = {
-		src: this.getImageSource(),
+		normalizedSource: this.getNormalizedImageSource(),
 		altText: this.getAltText(),
 		type: this.getType(),
 		alignment: this.getAlignment(),
@@ -224,6 +225,22 @@ ve.dm.MWImageModel.prototype.getHashObject = function () {
 		};
 	}
 	return hash;
+};
+
+/**
+ * Normalize the source url by stripping the protocol off.
+ * This is done so when an image is replaced with the same image,
+ * the imageModel can recognize that nothing has actually changed.
+ *
+ * Example:
+ * 'http://upload.wikimedia.org/wikipedia/commons/0/Foo.png'
+ * to '//upload.wikimedia.org/wikipedia/commons/0/Foo.png'
+ *
+ * @return {string} Normalized image source
+ */
+ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
+	// Strip the url prefix 'http' / 'https' etc
+	return this.getImageSource().replace( /^https?:\/\//, '//' );
 };
 
 /**
@@ -244,6 +261,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 		this.setImageResourceName( attrs.resource );
 		remoteFilename = attrs.resource.replace( /^(\.+\/)*/, '' );
 	}
+
 	if ( attrs.src ) {
 		this.setImageSource( attrs.src );
 	}
@@ -533,6 +551,16 @@ ve.dm.MWImageModel.prototype.setImageHref = function ( href ) {
  */
 ve.dm.MWImageModel.prototype.setBoundingBox = function ( box ) {
 	this.boundingBox = box;
+};
+
+/**
+ * Set the initial hash object of the image to be compared to when
+ * checking if the model is modified.
+ *
+ * @param {Object} hash The initial hash object
+ */
+ve.dm.MWImageModel.prototype.storeInitialHash = function ( hash ) {
+	this.initialHash = hash;
 };
 
 /**
@@ -1042,4 +1070,16 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
  */
 ve.dm.MWImageModel.prototype.setCaptionDocument = function ( doc ) {
 	this.captionDoc = doc;
+};
+
+/**
+ * Check if the model attributes and parameters have been modified by
+ * comparing the current hash to the new hash object.
+ * @return {boolean} Model has been modified
+ */
+ve.dm.MWImageModel.prototype.hasBeenModified = function () {
+	if ( this.initialHash ) {
+		return !ve.compare( this.initialHash, this.getHashObject() );
+	}
+	return true;
 };

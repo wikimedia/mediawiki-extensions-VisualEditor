@@ -23,6 +23,8 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 	this.store = null;
 	this.fileRepoPromise = null;
 	this.pageTitle = '';
+	this.isSettingUpModel = false;
+	this.isInsertion = false;
 
 	this.$element.addClass( 've-ui-mwMediaDialog' );
 };
@@ -377,8 +379,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.positionInput.connect( this, { choose: 'onPositionInputChoose' } );
 	this.typeInput.connect( this, { choose: 'onTypeInputChoose' } );
 	this.search.connect( this, { select: 'onSearchSelect' } );
-	this.altTextInput.connect( this, { change: 'setChanged' } );
-
+	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
 	// Panel classes
 	this.mediaSearchPanel.$element.addClass( 've-ui-mwMediaDialog-panel-search' );
 	this.bookletLayout.$element.addClass( 've-ui-mwMediaDialog-panel-settings' );
@@ -417,7 +418,7 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 				{
 					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
 					href: './' + item.title,
-					src: info.thumburl,
+					src: info.url,
 					resource: './' + item.title,
 					width: info.thumbwidth,
 					height: info.thumbheight,
@@ -435,14 +436,14 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 				{
 					mediaType: info.mediatype,
 					href: './' + item.title,
-					src: info.thumburl,
+					src: info.url,
 					resource: './' + item.title
 				},
 				{ width: info.width, height: info.height }
 			);
 		}
 
-		this.setChanged();
+		this.checkChanged();
 		this.switchPanels( 'edit' );
 	}
 };
@@ -461,7 +462,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
 	this.positionInput.selectItem( item );
 
 	this.positionCheckbox.setValue( alignment !== 'none' );
-	this.setChanged();
+	this.checkChanged();
 };
 
 /**
@@ -481,7 +482,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
 	this.borderCheckbox.setValue(
 		this.imageModel.isBorderable() && this.imageModel.hasBorder()
 	);
-	this.setChanged();
+	this.checkChanged();
 };
 
 /**
@@ -494,7 +495,7 @@ ve.ui.MWMediaDialog.prototype.onPositionCheckboxChange = function ( checked ) {
 		currentModelAlignment = this.imageModel.getAlignment();
 
 	this.positionInput.setDisabled( !checked );
-	this.setChanged();
+	this.checkChanged();
 	// Only update the model if the current value is different than that
 	// of the image model
 	if (
@@ -526,7 +527,7 @@ ve.ui.MWMediaDialog.prototype.onBorderCheckboxChange = function ( checked ) {
 	if ( this.imageModel.hasBorder() !== checked ) {
 		// Update the image model
 		this.imageModel.toggleBorder( checked );
-		this.setChanged();
+		this.checkChanged();
 	}
 };
 
@@ -541,7 +542,7 @@ ve.ui.MWMediaDialog.prototype.onPositionInputChoose = function ( item ) {
 	// Only update if the value is different than the model
 	if ( this.imageModel.getAlignment() !== position ) {
 		this.imageModel.setAlignment( position );
-		this.setChanged();
+		this.checkChanged();
 	}
 };
 
@@ -556,7 +557,7 @@ ve.ui.MWMediaDialog.prototype.onTypeInputChoose = function ( item ) {
 	// Only update if the value is different than the model
 	if ( this.imageModel.getType() !== type ) {
 		this.imageModel.setType( type );
-		this.setChanged();
+		this.checkChanged();
 	}
 
 	// If type is 'frame', disable the size input widget completely
@@ -564,12 +565,37 @@ ve.ui.MWMediaDialog.prototype.onTypeInputChoose = function ( item ) {
 };
 
 /**
+ * Respond to change in alternate text
+ * @param {string} text New alternate text
+ */
+ve.ui.MWMediaDialog.prototype.onAlternateTextChange = function ( text ) {
+	this.imageModel.setAltText( text );
+	this.checkChanged();
+};
+
+/**
  * When changes occur, enable the apply button.
  */
-ve.ui.MWMediaDialog.prototype.setChanged = function () {
-	// TODO: Set up a better and deeper test of whether the new
-	// image parameters are different than the original image
-	this.actions.setAbilities( { insert: true, apply: true } );
+ve.ui.MWMediaDialog.prototype.checkChanged = function () {
+	var captionChanged = false;
+
+	// Only check 'changed' status after the model has finished
+	// building itself
+	if ( !this.isSettingUpModel ) {
+		if ( this.captionSurface && this.captionSurface.getSurface() ) {
+			captionChanged = this.captionSurface.getSurface().getModel().hasBeenModified();
+		}
+
+		if (
+			this.isInsertion && this.imageModel ||
+			captionChanged ||
+			this.imageModel.hasBeenModified()
+		) {
+			this.actions.setAbilities( { insert: true, apply: true } );
+		} else {
+			this.actions.setAbilities( { insert: false, apply: false } );
+		}
+	}
 };
 
 /**
@@ -619,6 +645,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			this.pageTitle = pageTitle;
 
 			if ( this.selectedNode ) {
+				this.isInsertion = false;
 				// Create image model
 				this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
 					this.selectedNode.getAttributes(),
@@ -632,6 +659,10 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 					// is not defaultSize
 					this.imageModel.setBoundingBox( this.imageModel.getCurrentDimensions() );
 				}
+				// Store initial hash to compare against
+				this.imageModel.storeInitialHash( this.imageModel.getHashObject() );
+			} else {
+				this.isInsertion = true;
 			}
 
 			this.resetCaption();
@@ -723,16 +754,19 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	this.imageModel.connect( this, {
 		alignmentChange: 'onImageModelAlignmentChange',
 		typeChange: 'onImageModelTypeChange',
-		sizeDefaultChange: 'setChanged'
+		sizeDefaultChange: 'checkChanged'
 	} );
 
 	// Set up
+	// Ignore the following changes in validation while we are
+	// setting up the initial tools according to the model state
+	this.isSettingUpModel = true;
 
 	// Size widget
 	this.sizeErrorLabel.$element.hide();
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
-	this.sizeWidget.connect( this, { changeSizeType: 'setChanged' } );
-	this.sizeWidget.connect( this, { change: 'setChanged' } );
+	this.sizeWidget.connect( this, { changeSizeType: 'checkChanged' } );
+	this.sizeWidget.connect( this, { change: 'checkChanged' } );
 
 	// Initialize size
 	this.sizeWidget.setSizeType(
@@ -779,6 +813,8 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 			this.imageModel.getType() || 'none'
 		)
 	);
+
+	this.isSettingUpModel = false;
 };
 
 /**
