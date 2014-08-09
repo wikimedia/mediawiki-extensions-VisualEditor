@@ -105,10 +105,9 @@
 	"visualeditor-savedialog-title-nochanges": "Nisciuno càgnamiento a rivede",
 	"visualeditor-savedialog-title-review": "Rivede 'e càgnamiente",
 	"visualeditor-savedialog-title-save": "Sarva 'e càgnamiente",
-	"visualeditor-toolbar-cancel": "Annulla",
 	"visualeditor-toolbar-savedialog": "Sarva 'a paggena",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
-	"visualeditor-wikitext-warning": "Si ausando VisualEditor - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, apre 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-cancel}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Si ausando VisualEditor - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, apre 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Markup",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }

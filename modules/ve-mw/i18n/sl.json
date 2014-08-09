@@ -14,7 +14,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Preprosta povezava",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor je v razvoju. Naletite lahko na težave s programjem in morda nekaterih delov strani ne boste mogli urejati. Da kadar koli preklopite nazaj v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-cancel}}« in izberite »{{int:visualeditor-mweditmodesource-title}}«.",
+	"visualeditor-beta-warning": "VisualEditor je v razvoju. Naletite lahko na težave s programjem in morda nekaterih delov strani ne boste mogli urejati. Da kadar koli preklopite nazaj v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-title}}«.",
 	"visualeditor-browserwarning": "Uporabljate brskalnik, ki ga VisualEditor uradno ne podpira.",
 	"visualeditor-ca-createlocaldescriptionsource": "Dodaj vir lokalnega opisa",
 	"visualeditor-ca-createsource": "Ustvari kodo",
@@ -222,7 +222,6 @@
 	"visualeditor-serializeerror": "Napaka pri prenašanju s strežnika: $1",
 	"visualeditor-settings-tool": "Nastavitve strani",
 	"visualeditor-timeout": "Kot kaže, urejevalnik trenutno ni na voljo. Bi želeli namesto tega urediti stran v načinu izvorne kode?",
-	"visualeditor-toolbar-cancel": "Prekliči",
 	"visualeditor-toolbar-cite-label": "Navedi",
 	"visualeditor-toolbar-format-tooltip": "Oblika odstavka",
 	"visualeditor-toolbar-savedialog": "Shrani stran",
@@ -232,7 +231,7 @@
 	"visualeditor-viewpage-savewarning-title": "Ste prepričani?",
 	"visualeditor-viewpage-savewarning-discard": "Zavrzi urejanja",
 	"visualeditor-viewpage-savewarning-keep": "Nadaljuj z urejanjem",
-	"visualeditor-wikitext-warning": "Uporabljate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikibesedilo]] tukaj ne deluje. Da kadar koli preklopite v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-cancel}}« in izberite »{{int:visualeditor-mweditmodesource-title}}«.",
+	"visualeditor-wikitext-warning": "Uporabljate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikibesedilo]] tukaj ne deluje. Da kadar koli preklopite v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-title}}«.",
 	"visualeditor-wikitext-warning-link": "Help:Wikioznačevanje",
 	"visualeditor-wikitext-warning-title": "Zaznali smo označevanje wikibesedila"
 }

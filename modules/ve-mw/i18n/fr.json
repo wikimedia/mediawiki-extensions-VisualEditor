@@ -45,7 +45,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Lien simple",
 	"visualeditor-beta-appendix": "bêta",
 	"visualeditor-beta-label": "bêta",
-	"visualeditor-beta-warning": "L’ÉditeurVisuel est au stade « bêta ». Il se peut que vous rencontriez des problèmes avec le logiciel et que vous ne puissiez pas modifier des parties de la page. Pour revenir à l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-cancel}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
+	"visualeditor-beta-warning": "L’ÉditeurVisuel est au stade « bêta ». Il se peut que vous rencontriez des problèmes avec le logiciel et que vous ne puissiez pas modifier des parties de la page. Pour revenir à l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-savedialog}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement supporté par l’ÉditeurVisuel.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ajouter une source de description locale",
 	"visualeditor-ca-createsource": "Créer le wikicode",
@@ -253,7 +253,6 @@
 	"visualeditor-serializeerror": "Erreur lors du chargement des données depuis le serveur : $1.",
 	"visualeditor-settings-tool": "Paramètres de la page",
 	"visualeditor-timeout": "Il semble que cet éditeur n’est pas disponible pour le moment. Voulez-vous modifier en mode source à la place ?",
-	"visualeditor-toolbar-cancel": "Annuler",
 	"visualeditor-toolbar-cite-label": "Citer",
 	"visualeditor-toolbar-format-tooltip": "Mise en forme du paragraphe",
 	"visualeditor-toolbar-savedialog": "Enregistrer la page",
@@ -263,7 +262,7 @@
 	"visualeditor-viewpage-savewarning-title": "Êtes-vous sûr ?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
 	"visualeditor-viewpage-savewarning-keep": "Continuer l’édition",
-	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|code wiki]] ne fonctionne pas ici. Pour basculer vers l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-cancel}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
+	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|code wiki]] ne fonctionne pas ici. Pour basculer vers l’édition de la source à tout moment sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-savedialog}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-wikitext-warning-link": "Help:Balisage wiki",
 	"visualeditor-wikitext-warning-title": "Balisage wikitexte détecté"
 }

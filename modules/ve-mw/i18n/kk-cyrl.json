@@ -11,7 +11,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Мысал сілтеме",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor 'beta' нұсқада. Сіз бағдарламалық жасақтама шектеулеріне кездесуіңіз не беттің кейбір бөліктерін өңдей алмауыңыз мүмкін. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-cancel}}\" және \"{{int:visualeditor-mweditmodesource-title}}\" дегенді таңдаңыз.",
+	"visualeditor-beta-warning": "VisualEditor 'beta' нұсқада. Сіз бағдарламалық жасақтама шектеулеріне кездесуіңіз не беттің кейбір бөліктерін өңдей алмауыңыз мүмкін. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-title}}\" дегенді таңдаңыз.",
 	"visualeditor-browserwarning": "Сіздің қолданып отырған шолғышыңызды VisualEditor ресми түрде қолдамайды.",
 	"visualeditor-ca-createlocaldescriptionsource": "Жергілікті сипаттама қайнарын қосу",
 	"visualeditor-ca-createsource": "Қайнарын құру",
@@ -216,7 +216,6 @@
 	"visualeditor-serializeerror": "Серверден деректерді жүктеуде қате кетті: $1.",
 	"visualeditor-settings-tool": "Бет баптаулары",
 	"visualeditor-timeout": "Қазіргі уақытта бұл өңдеушімен өңдеу мүмкін емес секілді. Қайнарын өңдеу режиміне өткіңіз келе ме?",
-	"visualeditor-toolbar-cancel": "Болдырмау",
 	"visualeditor-toolbar-cite-label": "Дәйексөз алу",
 	"visualeditor-toolbar-format-tooltip": "параграф пішіні",
 	"visualeditor-toolbar-savedialog": "Бетті сақтау",
@@ -225,7 +224,7 @@
 	"visualeditor-viewpage-savewarning": "Бірінші сақтамай қарап шығу режимінен қайтқаныңызға сенімдісіз бе?",
 	"visualeditor-viewpage-savewarning-discard": "Өңдемелерді болдырмау",
 	"visualeditor-viewpage-savewarning-keep": "Өңдеуді жалғастыру",
-	"visualeditor-wikitext-warning": "Сіз VisualEditor қолданудасыз - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|уикимәтін]] мұнда жұмыс істемейді. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-cancel}}\" және \"{{int:visualeditor-mweditmodesource-title}}\" дегенді таңдаңыз.",
+	"visualeditor-wikitext-warning": "Сіз VisualEditor қолданудасыз - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|уикимәтін]] мұнда жұмыс істемейді. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-title}}\" дегенді таңдаңыз.",
 	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "Уикимәтін белгі салуы табылды"
 }

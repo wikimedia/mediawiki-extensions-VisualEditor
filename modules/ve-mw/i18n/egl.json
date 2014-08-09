@@ -11,7 +11,7 @@
 	"visualeditor-advancedsettings-tool": "Impustasiòun pió particulêri",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor l' é in versiòun prōva. Prén sucēder 'd j erōr  e soquânti pêrti 'd la pàgina a prén mia èser cambîedi. Per pasêr a \"{{int:visualeditor-ca-editsource}}\" in ògni mumèint sèinsa pêrder al mudéfichi, arvîr l'elèinch a tendèina aşvèin  a \"{{int:visualeditor-toolbar-cancel}}\" e sernîr \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "VisualEditor l' é in versiòun prōva. Prén sucēder 'd j erōr  e soquânti pêrti 'd la pàgina a prén mia èser cambîedi. Per pasêr a \"{{int:visualeditor-ca-editsource}}\" in ògni mumèint sèinsa pêrder al mudéfichi, arvîr l'elèinch a tendèina aşvèin  a \"{{int:visualeditor-toolbar-savedialog}}\" e sernîr \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "A t'é druvêr un navigadōr che, p'r adès, al pōl mìa èser druvê per lavurêr bèin cun al VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Śòunta na surgìnt ed descrisiòun lochèla",
 	"visualeditor-ca-createsource": "Invèinta la surzéia.",
@@ -157,11 +157,10 @@
 	"visualeditor-saveerror": "Erōr mèint'r a gnîva salvê al j infurmasiòun insém al terminêl:$1.",
 	"visualeditor-serializeerror": "Erōr mèint'r a gnîva carghê al j infurmasiòun dal terminêl:$1.",
 	"visualeditor-settings-tool": "Impustasiòun 'd la pàgina",
-	"visualeditor-toolbar-cancel": "Scanşèla.",
 	"visualeditor-toolbar-savedialog": "Sêlva la pàgina",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utèint",
 	"visualeditor-viewpage-savewarning": "Turnêr al môd a vésta sèinsa préma salvêr?",
-	"visualeditor-wikitext-warning": "T'é drē druvê al VisualEditor – al [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitèst]] ché al funsiòuna mìa. Per pasêr a \"{{int:visualeditor-ca-editsource}}\" in ògni mumèint sèinsa pêrder al mudéfichi, arvîr l'elench a tendèina aşvèin a \"{{int:visualeditor-toolbar-cancel}}\"  e  sernîr \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "T'é drē druvê al VisualEditor – al [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitèst]] ché al funsiòuna mìa. Per pasêr a \"{{int:visualeditor-ca-editsource}}\" in ògni mumèint sèinsa pêrder al mudéfichi, arvîr l'elench a tendèina aşvèin a \"{{int:visualeditor-toolbar-savedialog}}\"  e  sernîr \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Marcadûra",
 	"visualeditor-wikitext-warning-title": "Nutê wikitèst"
 }

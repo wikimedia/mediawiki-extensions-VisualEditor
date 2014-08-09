@@ -31,7 +31,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Простая ссылка",
 	"visualeditor-beta-appendix": "бета-версия",
 	"visualeditor-beta-label": "бета-версия",
-	"visualeditor-beta-warning": "VisualEditor находится в статусе бета-версии. Могут возникнуть проблемы с программным обеспечением, и вы не сможете редактировать некоторые части страниц. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-cancel}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-beta-warning": "VisualEditor находится в статусе бета-версии. Могут возникнуть проблемы с программным обеспечением, и вы не сможете редактировать некоторые части страниц. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-savedialog}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-browserwarning": "Вы используете браузер, официально не поддерживаемый Визуальным редактором.",
 	"visualeditor-ca-createlocaldescriptionsource": "Добавить источник локального описания",
 	"visualeditor-ca-createsource": "Создать как исходный текст",
@@ -239,7 +239,6 @@
 	"visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",
 	"visualeditor-settings-tool": "Параметры страницы",
 	"visualeditor-timeout": "Похоже, что этот редактор в настоящее время недоступен. Вы хотели бы вместо этого перейти к редактированию в режиме правки исходного текста?",
-	"visualeditor-toolbar-cancel": "Отмена",
 	"visualeditor-toolbar-cite-label": "Источники",
 	"visualeditor-toolbar-format-tooltip": "Формат абзаца",
 	"visualeditor-toolbar-savedialog": "Записать страницу",
@@ -249,7 +248,7 @@
 	"visualeditor-viewpage-savewarning-title": "Вы уверены?",
 	"visualeditor-viewpage-savewarning-discard": "Отменить правки",
 	"visualeditor-viewpage-savewarning-keep": "Продолжить редактирование",
-	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. НЧтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-cancel}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. НЧтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-savedialog}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-wikitext-warning-link": "Help:Вики-разметка",
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка"
 }

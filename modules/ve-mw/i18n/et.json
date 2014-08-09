@@ -12,7 +12,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Lihtlink",
 	"visualeditor-beta-appendix": "beeta",
 	"visualeditor-beta-label": "beeta",
-	"visualeditor-beta-warning": "VisualEditori arendus on beetajärgus. Võid leida tarkvaraprobleeme ja lehekülje mõne osa redigeerimine ei pruugi olla võimalik. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-cancel}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "VisualEditori arendus on beetajärgus. Võid leida tarkvaraprobleeme ja lehekülje mõne osa redigeerimine ei pruugi olla võimalik. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-savedialog}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "Kasutad võrgulehitsejat, mida VisualEditor ametlikult ei toeta.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lisa kohaliku kirjelduse lähtetekst",
 	"visualeditor-ca-createsource": "Loo lähtetekst",
@@ -204,7 +204,6 @@
 	"visualeditor-serializeerror": "Tõrge serverist andmete laadimisel: $1.",
 	"visualeditor-settings-tool": "Lehekülje sätted",
 	"visualeditor-timeout": "Paistab, et seda redaktorit ei saa praegu kasutada. Kas soovid redigeerida hoopis lähteteksti režiimis?",
-	"visualeditor-toolbar-cancel": "Loobu",
 	"visualeditor-toolbar-cite-label": "Viide",
 	"visualeditor-toolbar-format-tooltip": "Lõigu vorming",
 	"visualeditor-toolbar-savedialog": "Salvesta lehekülg",
@@ -214,7 +213,7 @@
 	"visualeditor-viewpage-savewarning-title": "Kas oled kindel?",
 	"visualeditor-viewpage-savewarning-discard": "Loobu muudatustest",
 	"visualeditor-viewpage-savewarning-keep": "Jätka redigeerimist",
-	"visualeditor-wikitext-warning": "Kasutad VisualEditori. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Vikitekst]] siin ei tööta. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-cancel}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Kasutad VisualEditori. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Vikitekst]] siin ei tööta. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-savedialog}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Vikitekst",
 	"visualeditor-wikitext-warning-title": "Tuvastatud vikiteksti märgistus"
 }

@@ -24,7 +24,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Ligação simples",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "O Editor Visual está em fase experimental. Pode deparar-se com problemas no ''software'', e não ser capaz de editar algumas partes da página. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-cancel}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "O Editor Visual está em fase experimental. Pode deparar-se com problemas no ''software'', e não ser capaz de editar algumas partes da página. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "Está a utilizar um navegador que não é oficialmente suportado pelo Editor Visual.",
 	"visualeditor-ca-createlocaldescriptionsource": "Adicionar fonte da descrição do local",
 	"visualeditor-ca-createsource": "Criar código-fonte",
@@ -232,7 +232,6 @@
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
 	"visualeditor-settings-tool": "Configurações da página",
 	"visualeditor-timeout": "Parece que o editor está indisponível de momento. Gostaria de editar antes o código-fonte?",
-	"visualeditor-toolbar-cancel": "Cancelar",
 	"visualeditor-toolbar-cite-label": "Citar",
 	"visualeditor-toolbar-format-tooltip": "Formatar parágrafo",
 	"visualeditor-toolbar-savedialog": "Gravar página",
@@ -242,7 +241,7 @@
 	"visualeditor-viewpage-savewarning-title": "Tem a certeza?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorar alterações",
 	"visualeditor-viewpage-savewarning-keep": "Continuar a editar",
-	"visualeditor-wikitext-warning": "Está a utilizar o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|códigos wiki]] não funcionam aqui. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-cancel}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Está a utilizar o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|códigos wiki]] não funcionam aqui. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Marcação wiki",
 	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado"
 }

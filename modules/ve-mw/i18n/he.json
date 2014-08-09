@@ -24,7 +24,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "קישור פשוט",
 	"visualeditor-beta-appendix": "בטא",
 	"visualeditor-beta-label": "בטא",
-	"visualeditor-beta-warning": "העורך החזותי הוא \"בטא\". ייתכן שיהיו כאן בעיות בתכנה ושלא יתאפשר לערוך חלקים מהדף. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-cancel}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "העורך החזותי הוא \"בטא\". ייתכן שיהיו כאן בעיות בתכנה ושלא יתאפשר לערוך חלקים מהדף. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-savedialog}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "העורך החזותי אינו תומך באופן רשמי בדפדפן שלך.",
 	"visualeditor-ca-createlocaldescriptionsource": "הוספת מקור תיאור מקומי",
 	"visualeditor-ca-createsource": "יצירת קוד מקור",
@@ -234,7 +234,6 @@
 	"visualeditor-serializeerror": "שגיאה בטעינת נתונים מהשרת: $1.",
 	"visualeditor-settings-tool": "הגדרות דף",
 	"visualeditor-timeout": "נראה שהעורך הזה אינו זמין כעת. האם ברצונך לערוך במצב עריכת קוד מקור?",
-	"visualeditor-toolbar-cancel": "ביטול",
 	"visualeditor-toolbar-cite-label": "ציטוט",
 	"visualeditor-toolbar-format-tooltip": "עיצוב פסקה",
 	"visualeditor-toolbar-savedialog": "שמירת דף",
@@ -244,7 +243,7 @@
 	"visualeditor-viewpage-savewarning-title": "בטוח?",
 	"visualeditor-viewpage-savewarning-discard": "ביטול העריכות",
 	"visualeditor-viewpage-savewarning-keep": "המשך עריכה",
-	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-cancel}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-savedialog}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "נראה שיש כאן קוד ויקי"
 }

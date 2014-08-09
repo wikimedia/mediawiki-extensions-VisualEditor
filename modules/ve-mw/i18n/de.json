@@ -22,7 +22,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Einfacher Link",
 	"visualeditor-beta-appendix": "Beta",
 	"visualeditor-beta-label": "Beta",
-	"visualeditor-beta-warning": "VisualEditor ist in der Beta. Dir werden Softwarefehler auffallen und du wirst Teile der Seite nicht bearbeiten können. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zurückzukehren, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-cancel}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus.",
+	"visualeditor-beta-warning": "VisualEditor ist in der Beta. Dir werden Softwarefehler auffallen und du wirst Teile der Seite nicht bearbeiten können. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zurückzukehren, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus.",
 	"visualeditor-browserwarning": "Du verwendest einen Browser, der vom VisualEditor nicht offiziell unterstützt wird.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lokalen Beschreibungsquelltext hinzufügen",
 	"visualeditor-ca-createsource": "Quelltext erstellen",
@@ -230,7 +230,6 @@
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",
 	"visualeditor-settings-tool": "Seiteneinstellungen",
 	"visualeditor-timeout": "Es sieht so aus, als ob dieser Editor zur Zeit nicht verfügbar ist. Möchtest du stattdessen in den Quelltextmodus wechseln?",
-	"visualeditor-toolbar-cancel": "Abbrechen",
 	"visualeditor-toolbar-cite-label": "Zitat",
 	"visualeditor-toolbar-format-tooltip": "Absatz formatieren",
 	"visualeditor-toolbar-savedialog": "Seite speichern",
@@ -240,7 +239,7 @@
 	"visualeditor-viewpage-savewarning-title": "Bist du sicher?",
 	"visualeditor-viewpage-savewarning-discard": "Bearbeitungen verwerfen",
 	"visualeditor-viewpage-savewarning-keep": "Weiter bearbeiten",
-	"visualeditor-wikitext-warning": "Du benutzt VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zu wechseln, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-cancel}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus. Verlustfrei zum VisualEditor zurückzuwechseln ist derzeit nicht möglich.",
+	"visualeditor-wikitext-warning": "Du benutzt VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zu wechseln, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus. Verlustfrei zum VisualEditor zurückzuwechseln ist derzeit nicht möglich.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }

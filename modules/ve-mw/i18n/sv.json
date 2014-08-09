@@ -23,7 +23,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Enkel länk",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor befinner sig i \"betaversion\". Du kan därför stöta på en del programvaruproblem och du kan kanske inte redigera delar av sidan. För att byta till redigering i wikitext-läge, utan att förlora dina ändringar, kan du när som helst öppna rullgardinsmenyn bredvid \"{{int:visualeditor-toolbar-cancel}}\" och välja \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "VisualEditor befinner sig i \"betaversion\". Du kan därför stöta på en del programvaruproblem och du kan kanske inte redigera delar av sidan. För att byta till redigering i wikitext-läge, utan att förlora dina ändringar, kan du när som helst öppna rullgardinsmenyn bredvid \"{{int:visualeditor-toolbar-savedialog}}\" och välja \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "Du använder en webbläsare som inte officiellt stöds av VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lägg till en lokal beskrivning med wikitext",
 	"visualeditor-ca-createsource": "Skapa wikitext",
@@ -231,7 +231,6 @@
 	"visualeditor-serializeerror": "Fel uppstod vid inläsning av data från server: $1.",
 	"visualeditor-settings-tool": "Sidinställningar",
 	"visualeditor-timeout": "Det ser ut som denna redigerare inte är tillgänglig för tillfället. Vill du redigera wikitexten istället?",
-	"visualeditor-toolbar-cancel": "Avbryt",
 	"visualeditor-toolbar-cite-label": "Ange källa",
 	"visualeditor-toolbar-format-tooltip": "Formatera stycke",
 	"visualeditor-toolbar-savedialog": "Spara sidan",
@@ -241,7 +240,7 @@
 	"visualeditor-viewpage-savewarning-title": "Är du säker?",
 	"visualeditor-viewpage-savewarning-discard": "Kassera ändringar",
 	"visualeditor-viewpage-savewarning-keep": "Fortsätt redigera",
-	"visualeditor-wikitext-warning": "Du använder VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] fungerar inte här. För att byta till redigering i wikitext-läge, utan att förlora dina ändringar, kan du när som helst öppna rullgardinsmenyn bredvid \"{{int:visualeditor-toolbar-cancel}}\" och välja \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Du använder VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] fungerar inte här. För att byta till redigering i wikitext-läge, utan att förlora dina ändringar, kan du när som helst öppna rullgardinsmenyn bredvid \"{{int:visualeditor-toolbar-savedialog}}\" och välja \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Wikitext upptäckt"
 }

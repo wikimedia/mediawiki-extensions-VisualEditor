@@ -14,7 +14,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Ligazón simple",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "O editor visual está en fase beta. Pode atopar erros no software e partes da páxina que non se poden editar. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-cancel}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "O editor visual está en fase beta. Pode atopar erros no software e partes da páxina que non se poden editar. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "Está utilizando un navegador que non está soportado oficialmente polo editor visual.",
 	"visualeditor-ca-createlocaldescriptionsource": "Engadir a fonte dunha descrición local",
 	"visualeditor-ca-createsource": "Crear a fonte",
@@ -222,7 +222,6 @@
 	"visualeditor-serializeerror": "Erro ao cargar os datos desde o servidor: $1.",
 	"visualeditor-settings-tool": "Configuración da páxina",
 	"visualeditor-timeout": "Semella que este editor non está dispoñible nestes intres. Quere editar no modo fonte?",
-	"visualeditor-toolbar-cancel": "Cancelar",
 	"visualeditor-toolbar-cite-label": "Citar",
 	"visualeditor-toolbar-format-tooltip": "Formato do parágrafo",
 	"visualeditor-toolbar-savedialog": "Gardar a páxina",
@@ -232,7 +231,7 @@
 	"visualeditor-viewpage-savewarning-title": "Está seguro?",
 	"visualeditor-viewpage-savewarning-discard": "Desbotar as edicións",
 	"visualeditor-viewpage-savewarning-keep": "Continuar editando",
-	"visualeditor-wikitext-warning": "Está usando o editor visual; o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|texto wiki]] non funciona aquí. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-cancel}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Está usando o editor visual; o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|texto wiki]] non funciona aquí. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Texto wiki",
 	"visualeditor-wikitext-warning-title": "Detectouse texto wiki"
 }

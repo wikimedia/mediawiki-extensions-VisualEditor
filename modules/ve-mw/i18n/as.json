@@ -11,7 +11,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "সৰল লিংক",
 	"visualeditor-beta-appendix": "বিটা",
 	"visualeditor-beta-label": "বিটা",
-	"visualeditor-beta-warning": "ভিজুৱেলএডিটৰ 'বিটা' অৱস্থাত আছে। আপুনি ছফ্টৱেৰৰ সমস্যা পাব পাৰে আৰু পৃষ্ঠাটোৰ কোনো অংশ সম্পাদনা কৰিব নোৱাৰিব পাৰে। আপোনাৰ সালসলনি নেহেৰোৱাকৈ ৱিকিপাঠ্য ৰূপলৈ ঘূৰি যোৱাৰ বাবে \"{{int:visualeditor-toolbar-cancel}}\"-ৰ কাষৰ ড্ৰপ্‌ডাউনত ক্লিক কৰক আৰু \"{{int:visualeditor-mweditmodesource-title}}\" বাছনি কৰক।",
+	"visualeditor-beta-warning": "ভিজুৱেলএডিটৰ 'বিটা' অৱস্থাত আছে। আপুনি ছফ্টৱেৰৰ সমস্যা পাব পাৰে আৰু পৃষ্ঠাটোৰ কোনো অংশ সম্পাদনা কৰিব নোৱাৰিব পাৰে। আপোনাৰ সালসলনি নেহেৰোৱাকৈ ৱিকিপাঠ্য ৰূপলৈ ঘূৰি যোৱাৰ বাবে \"{{int:visualeditor-toolbar-savedialog}}\"-ৰ কাষৰ ড্ৰপ্‌ডাউনত ক্লিক কৰক আৰু \"{{int:visualeditor-mweditmodesource-title}}\" বাছনি কৰক।",
 	"visualeditor-browserwarning": "আপুনি ব্যৱহাৰ কৰা ব্ৰাউজাৰটো ভিজুৱেলেডিটৰে আনুষ্ঠানিকভাৱে সমৰ্থন নকৰে।",
 	"visualeditor-ca-createlocaldescriptionsource": "স্থানীয় বিৱৰণ উৎস যোগ কৰক",
 	"visualeditor-ca-createsource": "উৎস সৃষ্টি কৰক",
@@ -212,7 +212,6 @@
 	"visualeditor-serializeerror": "ছাৰ্ভাৰৰ পৰা তথ্য ল'ড হওঁতে ত্ৰুটি হৈছে: $1।",
 	"visualeditor-settings-tool": "পৃষ্ঠা ছেটিং",
 	"visualeditor-timeout": "সম্পূৰ্ণ সম্পাদনা এই মুহূৰ্তত সম্ভৱ নহ'ব। তাৰ সলনি আপুনি উৎস সম্পাদনা কৰিব নেকি?",
-	"visualeditor-toolbar-cancel": "বাতিল কৰক",
 	"visualeditor-toolbar-cite-label": "উদ্ধৃতি দিয়ক",
 	"visualeditor-toolbar-format-tooltip": "পৰিচ্ছেদ সজাওক",
 	"visualeditor-toolbar-savedialog": "পৃষ্ঠা সাঁচক",
@@ -221,7 +220,7 @@
 	"visualeditor-viewpage-savewarning": "সাঁচি নৰখাকৈ প্ৰদৰ্শন অৱস্থালৈ ঘূৰি যাব বুলি আপুনি নিশ্চিতনে?",
 	"visualeditor-viewpage-savewarning-discard": "সম্পাদনাসমূহ বাতিল কৰক",
 	"visualeditor-viewpage-savewarning-keep": "সম্পাদনা অব্যাহত ৰাখক",
-	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। আপোনাৰ সালসমনিসমূহ হেৰাই নোযোৱাকৈ উৎস সম্পাদনালৈ ঘূৰি যাবৰ বাবে \"{{int:visualeditor-toolbar-cancel}}\"-ৰ কাষৰ ড্ৰপ্‌ডাউন মেনুত ক্লিক কৰক আৰু \"{{int:visualeditor-mweditmodesource-title}}\" বাছনি কৰক।",
+	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। আপোনাৰ সালসমনিসমূহ হেৰাই নোযোৱাকৈ উৎস সম্পাদনালৈ ঘূৰি যাবৰ বাবে \"{{int:visualeditor-toolbar-savedialog}}\"-ৰ কাষৰ ড্ৰপ্‌ডাউন মেনুত ক্লিক কৰক আৰু \"{{int:visualeditor-mweditmodesource-title}}\" বাছনি কৰক।",
 	"visualeditor-wikitext-warning-link": "Help:ৱিকি মাৰ্কাআপ",
 	"visualeditor-wikitext-warning-title": "ৱিকিপাঠ্য মাৰ্কআপ চিনাক্ত কৰা হৈছে"
 }

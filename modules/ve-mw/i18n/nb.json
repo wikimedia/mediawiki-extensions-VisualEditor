@@ -16,7 +16,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Enkel lenke",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor er i «beta». Du kan derfor komme ut for programvarefeil, og du kan ikke redigere alle elementene på siden enda. For å bytte tilbake til kilderedigering uten å miste endringene du evt. har gjort, åpne menyen ved siden av «{{int:visualeditor-toolbar-cancel}}» og velg «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-beta-warning": "VisualEditor er i «beta». Du kan derfor komme ut for programvarefeil, og du kan ikke redigere alle elementene på siden enda. For å bytte tilbake til kilderedigering uten å miste endringene du evt. har gjort, åpne menyen ved siden av «{{int:visualeditor-toolbar-savedialog}}» og velg «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-browserwarning": "Du benytter en nettleser som ikke er offisielt støttet av VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Legg til en lokal beskrivelse med wikitekst",
 	"visualeditor-ca-createsource": "Opprett kilde",
@@ -224,7 +224,6 @@
 	"visualeditor-serializeerror": "Det oppsto en feil ved henting av data fra tjeneren: $1.",
 	"visualeditor-settings-tool": "Sideinnstillinger",
 	"visualeditor-timeout": "Det virker som dette redigeringsverktøyet er utilgjengelig for øyeblikket. Vil du redigere i kildemodus istedet?",
-	"visualeditor-toolbar-cancel": "Avbryt",
 	"visualeditor-toolbar-cite-label": "Siter",
 	"visualeditor-toolbar-format-tooltip": "Formatér avsnitt",
 	"visualeditor-toolbar-savedialog": "Lagre side",
@@ -234,7 +233,7 @@
 	"visualeditor-viewpage-savewarning-title": "Er du sikker?",
 	"visualeditor-viewpage-savewarning-discard": "Forkast endringer",
 	"visualeditor-viewpage-savewarning-keep": "Fortsett å redigere",
-	"visualeditor-wikitext-warning": "Du bruker VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] virker ikke her. For å bytte til kilderedigering uten å miste endringene du har gjort, kan du åpne menyen ved siden av «{{int:visualeditor-toolbar-cancel}}» og velge \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Du bruker VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] virker ikke her. For å bytte til kilderedigering uten å miste endringene du har gjort, kan du åpne menyen ved siden av «{{int:visualeditor-toolbar-savedialog}}» og velge \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
 	"visualeditor-wikitext-warning-title": "Fant wikitekst"
 }

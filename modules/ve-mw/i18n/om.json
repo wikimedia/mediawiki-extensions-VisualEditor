@@ -197,7 +197,6 @@
 	"visualeditor-serializeerror": "Yeroo serveriirraa deetaa fiduuf yaalu dogongorri uummame: $1",
 	"visualeditor-settings-tool": "Qindaa'ina fuulaa",
 	"visualeditor-timeout": "Ediiteriin kun amma waan jiru hin fakkaatu. Bakkasaa, lakkaddaa jijjiirutti fayyadamuu barbaaddaa?",
-	"visualeditor-toolbar-cancel": "Dhiisi",
 	"visualeditor-toolbar-format-tooltip": "Keeyyata dhaangessi",
 	"visualeditor-toolbar-savedialog": "Fuula olkaayi",
 	"visualeditor-toolbar-style-tooltip": "Barreeffamatti haalata godhi",
@@ -206,7 +205,7 @@
 	"visualeditor-viewpage-savewarning-title": "Dhugaa jettaa?",
 	"visualeditor-viewpage-savewarning-discard": "Jijjiirama gati",
 	"visualeditor-viewpage-savewarning-keep": "Jijjiiruu itti fufi",
-	"visualeditor-wikitext-warning": "Amma Viizyuwaal'Ediiterii fayyadamaa jirta - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] asitti hin hojjatu. Fuula kana lakkaddaan jijjiiruf, baafata gad-buusaa kan \"{{int:visualeditor-toolbar-cancel}}\" bukkee jiru erga bantee booda \"{{int:visualeditor-mweditmodesource-title}}\" filadhu",
+	"visualeditor-wikitext-warning": "Amma Viizyuwaal'Ediiterii fayyadamaa jirta - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] asitti hin hojjatu. Fuula kana lakkaddaan jijjiiruf, baafata gad-buusaa kan \"{{int:visualeditor-toolbar-savedialog}}\" bukkee jiru erga bantee booda \"{{int:visualeditor-mweditmodesource-title}}\" filadhu",
 	"visualeditor-wikitext-warning-link": "Help:maarkaappii Wiikii",
 	"visualeditor-wikitext-warning-title": "Maarkaappiin Wiikiitekestii argame"
 }

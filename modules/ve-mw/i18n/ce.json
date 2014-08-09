@@ -210,7 +210,6 @@
 	"visualeditor-saveerror": "Хаамаш Ӏалашбеш гӀалат даьлла: $1.",
 	"visualeditor-serializeerror": "Серверан чура чуйохккхуш гӀалат даьлла: $1",
 	"visualeditor-settings-tool": "АгӀона параметраш",
-	"visualeditor-toolbar-cancel": "Цаоьшу",
 	"visualeditor-toolbar-cite-label": "Белгалдахарш",
 	"visualeditor-toolbar-format-tooltip": "Формат йе могӀа юьххьера юхаозаран",
 	"visualeditor-toolbar-savedialog": "Хьажа/дӀайазъé",
@@ -220,7 +219,7 @@
 	"visualeditor-viewpage-savewarning-title": "Бакъалла лаьий хӀуна?",
 	"visualeditor-viewpage-savewarning-discard": "Юхудаха нисдарш",
 	"visualeditor-viewpage-savewarning-keep": "Кхин дӀа тае",
-	"visualeditor-wikitext-warning": "Ахьа лелош ю Визуальни тадар — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билгало]] кхузахь болхбеш яц. Бина хийцамаш хӀаллак цахуьлуьйтуш чухулара таран кор схьадела белла «{{int:visualeditor-toolbar-cancel}}» хӀара могӀам тӀакха харжа «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-wikitext-warning": "Ахьа лелош ю Визуальни тадар — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билгало]] кхузахь болхбеш яц. Бина хийцамаш хӀаллак цахуьлуьйтуш чухулара таран кор схьадела белла «{{int:visualeditor-toolbar-savedialog}}» хӀара могӀам тӀакха харжа «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-wikitext-warning-link": "Help:Вики-билгало",
 	"visualeditor-wikitext-warning-title": "Карина вики-билгало"
 }

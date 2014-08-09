@@ -28,7 +28,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Prosty link",
 	"visualeditor-beta-appendix": "BETA",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor jest na razie w fazie beta. Możesz napotkać na problemy z oprogramowaniem, które nie pozwolą Ci edytować niektórych elementów strony. Aby przełączyć się do edytora kodu źródłowego  otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-cancel}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
+	"visualeditor-beta-warning": "VisualEditor jest na razie w fazie beta. Możesz napotkać na problemy z oprogramowaniem, które nie pozwolą Ci edytować niektórych elementów strony. Aby przełączyć się do edytora kodu źródłowego  otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
 	"visualeditor-browserwarning": "Używasz przeglądarki, która nie jest oficjalnie wspierana przez VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Utwórz kod źródłowy lokalnego opisu",
 	"visualeditor-ca-createsource": "Utwórz kod źródłowy",
@@ -232,7 +232,6 @@
 	"visualeditor-saveerror": "Błąd podczas zapisywania danych na serwerze: $1.",
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",
 	"visualeditor-settings-tool": "Ustawienia strony",
-	"visualeditor-toolbar-cancel": "Anuluj",
 	"visualeditor-toolbar-cite-label": "Przypis",
 	"visualeditor-toolbar-format-tooltip": "Formatowanie akapitu",
 	"visualeditor-toolbar-savedialog": "Zapisz",
@@ -242,7 +241,7 @@
 	"visualeditor-viewpage-savewarning-title": "Na pewno?",
 	"visualeditor-viewpage-savewarning-discard": "Odrzuć zmiany",
 	"visualeditor-viewpage-savewarning-keep": "Kontynuuj edycję",
-	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki wikikodu]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-cancel}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
+	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki wikikodu]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki wikikodu"
 }

@@ -217,7 +217,6 @@
 	"visualeditor-saveerror": "Galat menyimpan data ke peladen: $1.",
 	"visualeditor-serializeerror": "Galat memuat data dari pekaden: $1.",
 	"visualeditor-settings-tool": "Pengaturan halaman",
-	"visualeditor-toolbar-cancel": "Batal",
 	"visualeditor-toolbar-format-tooltip": "Format paragraf",
 	"visualeditor-toolbar-savedialog": "Simpan halaman",
 	"visualeditor-toolbar-style-tooltip": "Gaya teks",

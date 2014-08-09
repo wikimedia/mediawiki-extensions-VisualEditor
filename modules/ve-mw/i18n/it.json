@@ -26,7 +26,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Collegamento semplice",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor è in versione di prova. Si potrebbero verificare errori e alcune parti della pagina potrebbero non risultare modificabili. Per passare a \"{{int:visualeditor-ca-editsource}}\" in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-cancel}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "VisualEditor è in versione di prova. Si potrebbero verificare errori e alcune parti della pagina potrebbero non risultare modificabili. Per passare a \"{{int:visualeditor-ca-editsource}}\" in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-browserwarning": "Stai usando un browser che non è ancora supportato completamente da VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Aggiungi sorgente descrizione locale",
 	"visualeditor-ca-createsource": "Crea sorgente",
@@ -234,7 +234,6 @@
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-settings-tool": "Impostazioni pagina",
 	"visualeditor-timeout": "Sembra che questo editor non sia attualmente disponibile. Vorresti invece modificare in modalità sorgente?",
-	"visualeditor-toolbar-cancel": "Annulla",
 	"visualeditor-toolbar-cite-label": "Cita",
 	"visualeditor-toolbar-format-tooltip": "Formato del paragrafo",
 	"visualeditor-toolbar-savedialog": "Salva la pagina",
@@ -244,7 +243,7 @@
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Prosegui nella modifica",
-	"visualeditor-wikitext-warning": "Stai utilizzando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare a \"{{int:visualeditor-ca-editsource}}\" in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-cancel}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Stai utilizzando VisualEditor - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare a \"{{int:visualeditor-ca-editsource}}\" in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezionare \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Markup",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }

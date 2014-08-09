@@ -13,7 +13,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Проста врска",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "ВизуеленУредник е во „бета“. Може да наидете на извесни проблеми во програмот и да не можете да уредите делови од страницата. За да се вратите на изворно уредување во секое време, без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-cancel}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
+	"visualeditor-beta-warning": "ВизуеленУредник е во „бета“. Може да наидете на извесни проблеми во програмот и да не можете да уредите делови од страницата. За да се вратите на изворно уредување во секое време, без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-savedialog}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-browserwarning": "Користите прелистувач што не е официјално поддржан од ВизуеленУредник.",
 	"visualeditor-ca-createlocaldescriptionsource": "Додај изворен локален опис",
 	"visualeditor-ca-createsource": "Создај извор",
@@ -221,7 +221,6 @@
 	"visualeditor-serializeerror": "Грешка при вчитувањето на податоците од опслужувачот: $1.",
 	"visualeditor-settings-tool": "Поставки за страницата",
 	"visualeditor-timeout": "Се чини дека уредникот во моментов е недостапен. Дали би сакале да уредувате во изворен режим?",
-	"visualeditor-toolbar-cancel": "Откажи",
 	"visualeditor-toolbar-cite-label": "Наведи",
 	"visualeditor-toolbar-format-tooltip": "Форматирај пасус",
 	"visualeditor-toolbar-savedialog": "Зачувај страница",
@@ -231,7 +230,7 @@
 	"visualeditor-viewpage-savewarning-title": "Дали сте сигурни?",
 	"visualeditor-viewpage-savewarning-discard": "Отфрли уредувања",
 	"visualeditor-viewpage-savewarning-keep": "Продолжи со уредување",
-	"visualeditor-wikitext-warning": "Користите ВизуеленУредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-cancel}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
+	"visualeditor-wikitext-warning": "Користите ВизуеленУредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-savedialog}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-wikitext-warning-link": "Help:Викитекст",
 	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст"
 }
