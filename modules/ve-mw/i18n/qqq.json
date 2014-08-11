@@ -75,7 +75,7 @@
 	"visualeditor-dialog-media-size-originalsize-error": "Error message for failing to retrieve original file size from the API.",
 	"visualeditor-dialog-media-size-section": "Label for the image size sub-section.\n{{Identical|Image size}}",
 	"visualeditor-dialog-media-title": "Title for the editing dialog to set how a media item is displayed on the page",
-	"visualeditor-dialog-media-type-border": "Label for the image type option for bordered image.",
+	"visualeditor-dialog-media-type-border": "Label for the image type option for bordered image.\n{{Identical|Border}}",
 	"visualeditor-dialog-media-type-frame": "Label for the image type option for framed image.\n{{Identical|Frame}}",
 	"visualeditor-dialog-media-type-frameless": "Label for the image type option for frameless.",
 	"visualeditor-dialog-media-type-none": "Label for the image type option for basic image.\n{{Identical|Basic}}",

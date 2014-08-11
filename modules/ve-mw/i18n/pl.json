@@ -232,6 +232,7 @@
 	"visualeditor-saveerror": "Błąd podczas zapisywania danych na serwerze: $1.",
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",
 	"visualeditor-settings-tool": "Ustawienia strony",
+	"visualeditor-timeout": "Wygląda na to, że ten edytor jest obecnie niedostępny. Chcesz zamiast tego przejść do edycji kodu źródłowego?",
 	"visualeditor-toolbar-cite-label": "Przypis",
 	"visualeditor-toolbar-format-tooltip": "Formatowanie akapitu",
 	"visualeditor-toolbar-savedialog": "Zapisz",
