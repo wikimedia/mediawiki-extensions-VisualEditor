@@ -21,7 +21,6 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 	this.externalLinkUrlProtocolsRegExp = new RegExp(
 		'^(' + mw.config.get( 'wgUrlProtocols' ) + ')'
 	);
-	this.modulesUrl = mw.config.get( 'wgExtensionAssetsPath' ) + '/VisualEditor/modules';
 	this.parsedMessages = {};
 	this.linkCache = new ve.init.mw.LinkCache();
 };
@@ -35,11 +34,6 @@ OO.inheritClass( ve.init.mw.Platform, ve.init.Platform );
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.getExternalLinkUrlProtocolsRegExp = function () {
 	return this.externalLinkUrlProtocolsRegExp;
-};
-
-/** @inheritdoc */
-ve.init.mw.Platform.prototype.getModulesUrl = function () {
-	return this.modulesUrl;
 };
 
 /** @inheritdoc */
