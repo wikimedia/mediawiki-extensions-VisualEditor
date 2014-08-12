@@ -3,7 +3,8 @@
 		"authors": [
 			"MaGa",
 			"Roberta F.",
-			"SpeedyGonsales"
+			"SpeedyGonsales",
+			"Zeljko.filipin"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -12,5 +13,5 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: prebačeno na klasično uređivanje]]",
 	"visualeditor-feedback-tool": "Napišite povratnu informaciju",
 	"visualeditor-help-label": "Pročitajte vodič za korisnike",
-	"visualeditor-help-title": "Korisnički vodič za uporabu VisualEditora"
+	"visualeditor-help-title": "Vodič za uporabu VisualEditora"
 }
