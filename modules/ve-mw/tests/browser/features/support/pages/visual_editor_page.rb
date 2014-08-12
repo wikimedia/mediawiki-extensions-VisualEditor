@@ -26,6 +26,7 @@ class VisualEditorPage
   span(:refs_link, text: "Reference")
   div(:save_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggableElement-constructive oo-ui-.oo-ui-buttonedElement-framed")
   a(:save_page, css: "div.ve-init-mw-viewPageTarget-toolbar-actions > div.oo-ui-flaggableElement-constructive > a")
+  div(:save_enabled, css: "div.ve-init-mw-viewPageTarget-toolbar-actions > div.oo-ui-flaggableElement-constructive.oo-ui-widget-enabled")
   a(:subheading1, text: /Sub-heading 1/)
   a(:subheading2, text: /Sub-heading 2/)
   a(:subheading3, text: /Sub-heading 3/)
@@ -47,7 +48,8 @@ class VisualEditorPage
   div(:left_navigation, id: "left-navigation")
   div(:toolbar, class: "ve-init-mw-viewPageTarget-toolbar")
   span(:category_link, class: "oo-ui-iconedElement-icon oo-ui-icon-tag")
-
+  a(:formula_link, css: "span.oo-ui-tool-name-math > a.oo-ui-tool-link")
+  img(:formula_image, class: "mwe-math-fallback-png-inline")
 
   if ENV["BROWSER"] == "chrome"
     div(:tools_menu, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-toolGroup oo-ui-iconedElement oo-ui-popupToolGroup oo-ui-listToolGroup")
@@ -79,10 +81,12 @@ class VisualEditorPage
   a(:internal_link, class: "ve-ce-LinkAnnotation ve-ce-mwInternalLinkAnnotation")
   unordered_list(:popup_icon, class: "ve-ui-context-menu")
   span(:basic_reference, class: "oo-ui-iconedElement-icon oo-ui-icon-reference")
+  div(:toolbar_action, class: "oo-ui-toolbar-actions")
   span(:media_insert_menu, class: "oo-ui-tool-name-media")
   span(:template_insert_menu, class: "oo-ui-tool-name-transclusion")
   span(:ref_list_insert_menu, class: "oo-ui-tool-name-referenceList")
   span(:formula_insert_menu,class: "oo-ui-tool-name-math")
+  div(:language_notification, class: "tipsy-inner")
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
@@ -136,6 +140,9 @@ class VisualEditorPage
     div(:media_alternative_block, class: "oo-ui-layout oo-ui-iconedElement oo-ui-labeledElement oo-ui-fieldsetLayout", index: 1, frame: frame)
     list_item(:media_advanced_settings, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-optionWidget oo-ui-decoratedOptionWidget oo-ui-outlineItemWidget oo-ui-outlineItemWidget-level-0 oo-ui-iconedElement oo-ui-labeledElement", frame: frame)
     a(:insert_media, css: "div.oo-ui-processDialog-actions-primary > div.oo-ui-buttonedElement-frameless > a", frame: frame)
+    text_area(:formula_area, class: "oo-ui-ltr", frame: frame)
+    div(:settings_apply_button, class: "oo-ui-processDialog-actions-primary", frame: frame)
+    div(:page_settings_gap, class: "oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-scrollable oo-ui-panelLayout-expanded oo-ui-stackLayout oo-ui-bookletLayout-stackLayout", frame: frame)
   end
 
   # not having beta warning makes iframes off by one

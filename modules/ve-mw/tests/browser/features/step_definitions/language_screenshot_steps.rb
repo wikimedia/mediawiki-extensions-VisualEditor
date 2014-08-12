@@ -46,6 +46,10 @@ Given(/^I enter "(.*?)" in alternative text$/) do |content|
   on(VisualEditorPage).media_alternative_text_element.when_present.send_keys content
 end
 
+Given(/^I go to "(.*?)" page containing math formula/) do |page_title|
+  step "I go to the \"#{page_title}\" page with source content \"<math>2+2</math>\""
+end
+
 When(/^I click on the Insert menu$/) do
   on(VisualEditorPage).insert_menu_element.when_present.click
 end
@@ -93,6 +97,25 @@ end
 When(/^I click on category in hamburger menu$/) do
   step "I click the hamburger menu"
   on(VisualEditorPage).category_link_element.when_present.click
+end
+
+When(/^I click on Formula option in Insert menu$/) do
+  step "I click on the Insert menu"
+  on(VisualEditorPage).formula_link_element.when_present.click
+end
+
+When(/^I type a formula$/) do
+  on(VisualEditorPage).formula_area_element.when_present.send_keys "2+2"
+end
+
+When(/^I go to random page for screenshot$/) do
+  step "I am at a random page"
+  @browser.goto "#{@browser.url}?setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
+end
+
+When(/^I click on Reference list in Insert menu$/) do
+  step "I click on the Insert menu"
+  on(VisualEditorPage).ve_references_element.when_present.click
 end
 
 Then(/^I should see category dialog box$/) do
@@ -165,11 +188,13 @@ Then(/^I should see Page settings dialog box$/) do
 
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, 0)
 
-  capture_screenshot("VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_heading_element, @current_page.prevent_redirect_element], @current_page.iframe_element, 0)
+  capture_screenshot("VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_heading_element, @current_page.prevent_redirect_element, @current_page.page_settings_gap_element], @current_page.iframe_element, 0)
 
   capture_screenshot("VisualEditor_Page_Settings_TOC-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.table_of_contents_element], @current_page.iframe_element, 0)
 
   capture_screenshot("VisualEditor_Page_Settings_Edit_Links-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_editlinks_element], @current_page.iframe_element, 0)
+
+  capture_screenshot("VisualEditor_Apply_Changes-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.settings_apply_button_element], @current_page.iframe_element, 3)
 end
 
 Then(/^I should see list and indentation dropdown$/) do
@@ -226,11 +251,43 @@ Then(/^I should see Basic Reference dialog box$/) do
 end
 
 Then(/^I should see the right edit tab$/) do
-  on(VisualEditorPage).right_navigation_element.when_present.should be_visible
+  on(VisualEditorPage) do |page|
+    page.right_navigation_element.when_present.should be_visible
+    page.language_notification_element.when_not_present(10)
+  end
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.right_navigation_element, @current_page.left_navigation_element])
 end
 
 Then(/^I should see the VisualEditor tool-bar$/) do
-  on(VisualEditorPage).toolbar_element.when_present.should be_visible
+  on(VisualEditorPage) do |page|
+    page.toolbar_element.when_present.should be_visible
+    page.language_notification_element.when_not_present(10)
+  end
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.right_navigation_element, @current_page.left_navigation_element, @current_page.toolbar_element])
+end
+
+Then(/^I should see the formula insertion menu$/) do
+  on(VisualEditorPage) do |page|
+    page.iframe_element.when_present.should be_visible
+    page.formula_image_element.when_present(5).should be_visible
+  end
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element, @current_page.formula_image_element], nil, 0)
+end
+
+Then(/^I should see VisualEditor toolbar containing cancel and save button$/) do
+  on(VisualEditorPage) do |page|
+    page.toolbar_action_element.when_present.should be_visible
+    page.save_enabled_element.when_present(10).should be_visible
+  end
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.toolbar_action_element])
+end
+
+Then(/^I should see Reference list dialog box$/) do
+  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, 0)
+end
+
+When(/^I go to language screenshot page$/) do
+  step "I am on the Language Screenshot page"
+  @browser.goto "#{@browser.url}&setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
 end

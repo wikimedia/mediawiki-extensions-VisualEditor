@@ -107,7 +107,7 @@ Feature: Language Screenshot
 
   Scenario: VisualEditor_edit_tab
     Given I am logged in
-    When I go to the language screenshot page for screenshot
+    When I go to language screenshot page
     Then I should see the right edit tab
 
   Scenario: VisualEditor_toolbar
@@ -120,4 +120,18 @@ Feature: Language Screenshot
     When I click on category in hamburger menu
     Then I should see category dialog box
 
+  Scenario: VisualEditor_formula
+    Given I go to the "Formula Screenshot" page with source content ""
+    When I click on Formula option in Insert menu
+      And I type a formula
+    Then I should see the formula insertion menu
 
+  Scenario: VisualEditor_cancel_save
+    Given I am logged in
+    When I am edit language screenshot page with Testing toolbar
+    Then I should see VisualEditor toolbar containing cancel and save button
+
+  Scenario: VisualEditor_reference_list
+    Given I go to the "Reference VisualEditor Screenshot" page with source content "VisualEditor is a MediaWiki extension"
+    When I click on Reference list in Insert menu
+    Then I should see Reference list dialog box
