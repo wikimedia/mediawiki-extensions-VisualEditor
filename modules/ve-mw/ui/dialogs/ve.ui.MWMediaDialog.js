@@ -294,10 +294,10 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	} );
 
 	// Build position fieldset
-	positionFieldset.$element.append( [
+	positionFieldset.$element.append(
 		positionField.$element,
 		this.positionInput.$element
-	] );
+	);
 
 	// Type
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
@@ -342,10 +342,10 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	} );
 
 	// Build type fieldset
-	this.typeFieldset.$element.append( [
+	this.typeFieldset.$element.append(
 		this.typeInput.$element,
 		borderField.$element
-	] );
+	);
 
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
@@ -363,14 +363,14 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		'$': this.$
 	} );
 
-	this.$sizeWidgetElements = this.$( '<div>' ).append( [
+	this.$sizeWidgetElements = this.$( '<div>' ).append(
 		this.sizeWidget.$element,
 		this.sizeErrorLabel.$element
-	] );
-	this.sizeFieldset.$element.append( [
+	);
+	this.sizeFieldset.$element.append(
 		this.$spinner,
 		this.$sizeWidgetElements
-	] );
+	);
 
 	// Events
 	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
@@ -387,16 +387,16 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Initialization
 	this.mediaSearchPanel.$element.append( this.search.$element );
-	this.generalSettingsPage.$element.append( [
+	this.generalSettingsPage.$element.append(
 		this.captionFieldset.$element,
 		altTextFieldset.$element
-	] );
+	);
 
-	this.advancedSettingsPage.$element.append( [
+	this.advancedSettingsPage.$element.append(
 		positionFieldset.$element,
 		this.typeFieldset.$element,
 		this.sizeFieldset.$element
-	] );
+	);
 
 	this.panels.addItems( [ this.mediaSearchPanel, this.bookletLayout ] );
 };
