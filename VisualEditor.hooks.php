@@ -10,7 +10,7 @@
 
 class VisualEditorHooks {
 	public static function onSetup() {
-		global $wgResourceModules, $wgVisualEditorResourceTemplate,
+		global $wgResourceModules,
 			$wgVisualEditorTabMessages;
 
 		// This prevents VisualEditor from being run in environments that don't
@@ -37,6 +37,7 @@ class VisualEditorHooks {
 	 *
 	 * @param $output OutputPage
 	 * @param $skin Skin
+	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( &$output, &$skin ) {
 		$output->addModules( array( 'ext.visualEditor.viewPageTarget.init' ) );
@@ -259,7 +260,7 @@ class VisualEditorHooks {
 		}
 	}
 
-	public static function onGetPreferences( $user, &$preferences ) {
+	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang, $wgVisualEditorNamespaces;
 		if ( !array_key_exists( 'visualeditor-enable', $preferences ) ) {
 			$preferences['visualeditor-enable'] = array(
@@ -285,7 +286,7 @@ class VisualEditorHooks {
 		return true;
 	}
 
-	public static function onGetBetaPreferences( $user, &$preferences ) {
+	public static function onGetBetaPreferences( User $user, array &$preferences ) {
 		global $wgExtensionAssetsPath, $wgVisualEditorSupportedSkins, $wgVisualEditorBrowserBlacklist;
 
 		$iconpath = $wgExtensionAssetsPath . "/VisualEditor";
@@ -381,7 +382,6 @@ class VisualEditorHooks {
 		global $wgDefaultUserOptions,
 			$wgThumbLimits,
 			$wgVisualEditorDisableForAnons,
-			$wgVisualEditorEnableExperimentalCode,
 			$wgVisualEditorNamespaces,
 			$wgVisualEditorPluginModules,
 			$wgVisualEditorTabPosition,
