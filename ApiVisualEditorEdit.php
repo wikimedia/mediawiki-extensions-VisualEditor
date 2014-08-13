@@ -10,6 +10,10 @@
 
 class ApiVisualEditorEdit extends ApiVisualEditor {
 
+	public function __construct( ApiMain $main, $name, Config $config ) {
+		parent::__construct( $main, $name, $config );
+	}
+
 	protected function saveWikitext( $title, $wikitext, $params ) {
 		$apiParams = array(
 			'action' => 'edit',
@@ -53,15 +57,13 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	}
 
 	public function execute() {
-		global $wgVisualEditorNamespaces, $wgVisualEditorUseChangeTagging;
-
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 		$page = Title::newFromText( $params['page'] );
 		if ( !$page ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
-		if ( !in_array( $page->getNamespace(), $wgVisualEditorNamespaces ) ) {
+		if ( !in_array( $page->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
 			$this->dieUsage( "VisualEditor is not enabled in namespace " .
 				$page->getNamespace(), 'novenamespace' );
 		}
@@ -100,7 +102,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 		// Success
 		} else {
-			if ( isset( $saveresult['edit']['newrevid'] ) && $wgVisualEditorUseChangeTagging ) {
+			if ( isset( $saveresult['edit']['newrevid'] )
+				&& $this->veConfig->get( 'VisualEditorUseChangeTagging' )
+			) {
 				ChangeTags::addTags( 'visualeditor', null,
 					intval( $saveresult['edit']['newrevid'] ),
 					null

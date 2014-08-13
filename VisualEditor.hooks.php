@@ -10,9 +10,6 @@
 
 class VisualEditorHooks {
 	public static function onSetup() {
-		global $wgResourceModules,
-			$wgVisualEditorTabMessages;
-
 		// This prevents VisualEditor from being run in environments that don't
 		// have the dependent code in core; this should be updated as a part of
 		// when additional dependencies are created and pushed into MediaWiki's
@@ -20,14 +17,18 @@ class VisualEditorHooks {
 		// parties who attempt to install VisualEditor onto non-alpha wikis, as
 		// this should have no impact on deploying to Wikimedia's wiki cluster;
 		// is fine for release tarballs because 1.22wmf11 < 1.22alpha < 1.22.0.
-		wfUseMW( '1.24wmf6' );
+		wfUseMW( '1.24wmf17' );
 
+		$coreConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'main' );
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$resourceModules = $coreConfig->get( 'ResourceModules' );
 		// Add tab messages to the init init module
-		foreach ( $wgVisualEditorTabMessages as $msg ) {
+		foreach ( $veConfig->get( 'VisualEditorTabMessages' ) as $msg ) {
 			if ( $msg !== null ) {
-				$wgResourceModules['ext.visualEditor.viewPageTarget.init']['messages'][] = $msg;
+				$resourceModules['ext.visualEditor.viewPageTarget.init']['messages'][] = $msg;
 			}
 		}
+		$coreConfig->set( 'ResourceModules', $resourceModules );
 	}
 
 	/**
@@ -63,7 +64,8 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		global $wgVisualEditorTabMessages, $wgVisualEditorTabPosition;
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+
 		if ( !isset( $links['views']['edit'] ) ) {
 			// There's no edit link, nothing to do
 			return true;
@@ -72,6 +74,7 @@ class VisualEditorHooks {
 		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
 			return true;
 		}
+		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
 		// us to splice into the middle of an associative array.
@@ -87,7 +90,7 @@ class VisualEditorHooks {
 				$veParams = $skin->editUrlOptions();
 				unset( $veParams['action'] ); // Remove action=edit
 				$veParams['veaction'] = 'edit'; // Set veaction=edit
-				$veTabMessage = $wgVisualEditorTabMessages[$action];
+				$veTabMessage = $tabMessages[$action];
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					wfMessage( $veTabMessage )->setContext( $skin->getContext() )->text();
 				$veTab = array(
@@ -104,9 +107,9 @@ class VisualEditorHooks {
 					WikiPage::factory( $title ) instanceof WikiFilePage &&
 					!WikiPage::factory( $title )->isLocal()
 				) {
-					$editTabMessage = $wgVisualEditorTabMessages[$action . 'localdescriptionsource'];
+					$editTabMessage = $tabMessages[$action . 'localdescriptionsource'];
 				} else {
-					$editTabMessage = $wgVisualEditorTabMessages[$action . 'source'];
+					$editTabMessage = $tabMessages[$action . 'source'];
 				}
 
 				if ( $editTabMessage !== null ) {
@@ -114,7 +117,7 @@ class VisualEditorHooks {
 				}
 
 				// Inject the VE tab before or after the edit tab
-				if ( $wgVisualEditorTabPosition === 'before' ) {
+				if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
 					$editTab['class'] .= ' collapsible';
 					$newViews['ve-edit'] = $veTab;
 					$newViews['edit'] = $editTab;
@@ -206,11 +209,12 @@ class VisualEditorHooks {
 			return;
 		}
 
-		global $wgVisualEditorTabMessages, $wgVisualEditorTabPosition;
-		$veEditSection = $wgVisualEditorTabMessages['editsection'] !== null ?
-			$wgVisualEditorTabMessages['editsection'] : 'editsection';
-		$sourceEditSection = $wgVisualEditorTabMessages['editsectionsource'] !== null ?
-			$wgVisualEditorTabMessages['editsectionsource'] : 'editsection';
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$tabMessages = $config->get( 'VisualEditorTabMessages' );
+		$veEditSection = $tabMessages['editsection'] !== null ?
+			$tabMessages['editsection'] : 'editsection';
+		$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
+			$tabMessages['editsectionsource'] : 'editsection';
 
 		// Code mostly duplicated from Skin::doEditSectionLink() :(
 		$attribs = array();
@@ -231,7 +235,7 @@ class VisualEditorHooks {
 			array( 'noclasses', 'known' )
 		);
 
-		$veFirst = $wgVisualEditorTabPosition === 'before';
+		$veFirst = $config->get( 'VisualEditorTabPosition' ) === 'before';
 		$result = '<span class="mw-editsection">'
 			. '<span class="mw-editsection-bracket">[</span>'
 			. ( $veFirst ? $veLink : $sourceLink )
@@ -261,7 +265,8 @@ class VisualEditorHooks {
 	}
 
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		global $wgLang, $wgVisualEditorNamespaces;
+		global $wgLang;
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		if ( !array_key_exists( 'visualeditor-enable', $preferences ) ) {
 			$preferences['visualeditor-enable'] = array(
 				'type' => 'toggle',
@@ -269,7 +274,7 @@ class VisualEditorHooks {
 					'visualeditor-preference-enable',
 					$wgLang->commaList( array_map(
 						array( 'self', 'convertNs' ),
-						$wgVisualEditorNamespaces
+						$config->get( 'VisualEditorNamespaces' )
 					) )
 				),
 				'section' => 'editing/editor'
@@ -287,10 +292,10 @@ class VisualEditorHooks {
 	}
 
 	public static function onGetBetaPreferences( User $user, array &$preferences ) {
-		global $wgExtensionAssetsPath, $wgVisualEditorSupportedSkins, $wgVisualEditorBrowserBlacklist;
+		$coreConfig = RequestContext::getMain()->getConfig();
+		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor";
 
-		$iconpath = $wgExtensionAssetsPath . "/VisualEditor";
-
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$preferences['visualeditor-enable'] = array(
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-core-label',
@@ -303,8 +308,8 @@ class VisualEditorHooks {
 			'discussion-message' => 'visualeditor-preference-core-discussion-link',
 			'requirements' => array(
 				'javascript' => true,
-				'blacklist' => $wgVisualEditorBrowserBlacklist,
-				'skins' => $wgVisualEditorSupportedSkins,
+				'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			)
 		);
 
@@ -356,20 +361,18 @@ class VisualEditorHooks {
 	 * Adds extra variables to the page config.
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
-		global $wgStylePath, $wgSVGMaxSize, $wgNamespacesWithSubpages;
-
 		$pageLanguage = $out->getTitle()->getPageLanguage();
 
 		$vars['wgVisualEditor'] = array(
 			'isPageWatched' => $out->getUser()->isWatched( $out->getTitle() ),
 			// Same as in Linker.php
-			'magnifyClipIconURL' => $wgStylePath .
+			'magnifyClipIconURL' => $out->getConfig()->get( 'StylePath' ) .
 				'/common/images/magnify-clip' .
 				( $pageLanguage->isRTL() ? '-rtl' : '' ) . '.png',
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
-			'svgMaxSize' => $wgSVGMaxSize,
-			'namespacesWithSubpages' => $wgNamespacesWithSubpages
+			'svgMaxSize' => $out->getConfig()->get( 'SVGMaxSize' ),
+			'namespacesWithSubpages' => $out->getConfig()->get( 'NamespacesWithSubpages' )
 		);
 
 		return true;
@@ -379,40 +382,32 @@ class VisualEditorHooks {
 	 * Adds extra variables to the global config
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
-		global $wgDefaultUserOptions,
-			$wgThumbLimits,
-			$wgVisualEditorDisableForAnons,
-			$wgVisualEditorNamespaces,
-			$wgVisualEditorPluginModules,
-			$wgVisualEditorTabPosition,
-			$wgVisualEditorTabMessages,
-			$wgVisualEditorBrowserBlacklist,
-			$wgVisualEditorSupportedSkins,
-			$wgVisualEditorShowBetaWelcome,
-			$wgVisualEditorEnableTocWidget,
-			$wgVisualEditorPreferenceModules;
+		$coreConfig = RequestContext::getMain()->getConfig();
+		$defaultUserOptions = $coreConfig->get( 'DefaultUserOptions' );
+		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
 		$vars['wgVisualEditorConfig'] = array(
-			'disableForAnons' => $wgVisualEditorDisableForAnons,
-			'preferenceModules' => $wgVisualEditorPreferenceModules,
-			'namespaces' => $wgVisualEditorNamespaces,
-			'pluginModules' => $wgVisualEditorPluginModules,
+			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
+			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
+			'namespaces' => $veConfig->get( 'VisualEditorNamespaces' ),
+			'pluginModules' => $veConfig->get( 'VisualEditorPluginModules' ),
 			'defaultUserOptions' => array(
-				'betatempdisable' => $wgDefaultUserOptions['visualeditor-betatempdisable'],
-				'enable' => $wgDefaultUserOptions['visualeditor-enable'],
-				'defaultthumbsize' => $wgThumbLimits[ $wgDefaultUserOptions['thumbsize'] ]
+				'betatempdisable' => $defaultUserOptions['visualeditor-betatempdisable'],
+				'enable' => $defaultUserOptions['visualeditor-enable'],
+				'defaultthumbsize' => $thumbLimits[ $defaultUserOptions['thumbsize'] ]
 			),
-			'blacklist' => $wgVisualEditorBrowserBlacklist,
-			'skins' => $wgVisualEditorSupportedSkins,
-			'tabPosition' => $wgVisualEditorTabPosition,
-			'tabMessages' => $wgVisualEditorTabMessages,
-			'showBetaWelcome' => $wgVisualEditorShowBetaWelcome,
-			'enableTocWidget' => $wgVisualEditorEnableTocWidget
+			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+			'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
+			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
+			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
+			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
+			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' )
 		);
 
-		foreach ( $wgVisualEditorPreferenceModules as $pref => $module ) {
+		foreach ( $veConfig->get( 'VisualEditorPreferenceModules' ) as $pref => $module ) {
 			$vars['wgVisualEditorConfig']['defaultUserOptions'][$pref] =
-				$wgDefaultUserOptions[$pref];
+				$defaultUserOptions[$pref];
 		}
 
 		return true;
@@ -426,17 +421,18 @@ class VisualEditorHooks {
 	 * @returns boolean true
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
-		global $wgResourceModules, $wgVisualEditorResourceTemplate;
-
+		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
+		$veResourceTemplate = ConfigFactory::getDefaultInstance()
+			->makeConfig( 'visualeditor')->get( 'VisualEditorResourceTemplate' );
 		$libModules = array(
-			'jquery.uls.data' => $wgVisualEditorResourceTemplate + array(
+			'jquery.uls.data' => $veResourceTemplate + array(
 				'scripts' => array(
 					'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
 					'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
 				),
 				'targets' => array( 'desktop', 'mobile' ),
 			),
-			'jquery.i18n' => $wgVisualEditorResourceTemplate + array(
+			'jquery.i18n' => $veResourceTemplate + array(
 				'scripts' => array(
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.js',
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.messagestore.js',
@@ -468,7 +464,7 @@ class VisualEditorHooks {
 		$addModules = array();
 
 		foreach ( $libModules as $name => $data ) {
-			if ( !isset( $wgResourceModules[$name] ) && !$resourceLoader->getModule( $name ) ) {
+			if ( !isset( $resourceModules[$name] ) && !$resourceLoader->getModule( $name ) ) {
 				$addModules[$name] = $data;
 			}
 		}
