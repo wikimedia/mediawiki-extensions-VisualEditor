@@ -1,43 +1,51 @@
-@firefox @language_screenshot @login
+@firefox @login
 Feature: Language Screenshot
 
+  @language_screenshot
   Scenario: VisualEditor_Toolbar_Headings
     Given I am editing language screenshot page
     When I click the down arrow on Headings interface
     Then I should see Headings pull-down menu
 
+  @language_screenshot
   Scenario: VisualEditor_Toolbar_Formatting
     Given I am editing language screenshot page
     When I click the text style menu
     Then I should see Formatting pull-down menu
 
+  @language_screenshot
   Scenario: VisualEditor_More_Settings
     Given I am editing language screenshot page
     When I click the hamburger menu
     Then I should see pull-down menu containing Page Settings
 
+  @language_screenshot
   Scenario: VisualEditor_Insert_Menu
     Given I am editing language screenshot page
     When I click on the Insert menu
     Then I should see Insert pull-down menu
 
+  @language_screenshot
   Scenario: VisualEditor_Toolbar_SpecialCharacters
     Given I am editing language screenshot page
     When I click on the Special character option in Insert menu
     Then I should see Special character Insertion window
 
+  @language_screenshot
   Scenario: VisualEditor_save_dialog
     Given I am logged in
       And I am edit language screenshot page with Testing Save
     When I click Save page
     Then I should see save changes dialog box
 
+  @language_screenshot
   Scenario: VisualEditor_Page_Settings
     Given I am editing language screenshot page
       And I click the hamburger menu
     When I click on Page settings option
     Then I should see Page settings dialog box
 
+  @language_screenshot
   Scenario: VisualEditor_Toolbar_Lists_and_indentation
     Given I go to the "Indent Outdent Screenshot" page with source content "Indent Outdent Screenshot"
       And I make the text "Indent Outdent" be selected
@@ -105,32 +113,38 @@ Feature: Language Screenshot
     When I click on Basic Reference in Cite menu dropdown
     Then I should see Basic Reference dialog box
 
+  @language_screenshot
   Scenario: VisualEditor_edit_tab
     Given I am logged in
     When I go to language screenshot page
     Then I should see the right edit tab
 
+  @language_screenshot
   Scenario: VisualEditor_toolbar
     Given I am logged in
     When I am editing language screenshot page
     Then I should see the VisualEditor tool-bar
 
+  @language_screenshot
   Scenario: VisualEditor_category_editing
     Given I am editing language screenshot page
     When I click on category in hamburger menu
     Then I should see category dialog box
 
+  @language_screenshot
   Scenario: VisualEditor_formula
     Given I go to the "Formula Screenshot" page with source content ""
     When I click on Formula option in Insert menu
       And I type a formula
     Then I should see the formula insertion menu
 
+  @language_screenshot
   Scenario: VisualEditor_cancel_save
     Given I am logged in
     When I am edit language screenshot page with Testing toolbar
     Then I should see VisualEditor toolbar containing cancel and save button
 
+  @language_screenshot
   Scenario: VisualEditor_reference_list
     Given I go to the "Reference VisualEditor Screenshot" page with source content "VisualEditor is a MediaWiki extension"
     When I click on Reference list in Insert menu
