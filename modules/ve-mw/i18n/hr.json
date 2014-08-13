@@ -9,7 +9,7 @@
 	},
 	"tooltip-ca-ve-edit": "Uredi stranicu VisualEditorom",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",
-	"visualeditor-beta-warning": "VisualEditor je u razvoju. Možda ćete naići na probleme i možda postoje dijelovi članka koje nećete moći uređivati. Da biste u bilo kojem trenutku prebacili natrag na uređivanje koda bez gubitka promjena, otvorite padajući popis pokraj \"{{int:visualeditor-toolbar-savedialog}}\" i odaberite \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "VisualEditor je u razvoju. Možda ćete naići na probleme i možda postoje dijelovi članka koje nećete moći uređivati. Da biste u bilo kojem trenutku prebacili natrag na uređivanje koda bez gubitka promjena, otvorite padajući popis pokraj \"{{int:visualeditor-toolbar-savedialog}}\" i odaberite \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Koristite preglednik koji VisualEditor ne podržava.",
 	"visualeditor-ca-createlocaldescriptionsource": "dodaj izvor lokalnog opisa",
 	"visualeditor-ca-createsource": "Započni kôd",
@@ -153,9 +153,7 @@
 	"visualeditor-savedialog-title-review": "Pregledajte svoje izmjene",
 	"visualeditor-savedialog-title-save": "Spremanje izmjena",
 	"visualeditor-settings-tool": "Postavke stranice",
-	"visualeditor-toolbar-format-tooltip": "Oblikovanje odlomka",
 	"visualeditor-toolbar-savedialog": "Sačuvaj stranicu",
-	"visualeditor-toolbar-style-tooltip": "Oblikovanje teksta",
 	"visualeditor-viewpage-savewarning": "Jeste li sigurni da želite zatvoriti stranicu bez spremanja izmjena?",
 	"visualeditor-viewpage-savewarning-discard": "Odbaci izmjene",
 	"visualeditor-viewpage-savewarning-keep": "Nastavi s uređivanjem"

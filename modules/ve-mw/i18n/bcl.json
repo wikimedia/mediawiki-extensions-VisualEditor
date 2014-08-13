@@ -10,7 +10,7 @@
 	"tooltip-ca-ve-edit": "Liwaton ining pahina na gamit an Biswal-na-Paraliwat",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "An Biswal-na-Editor yaon pa sana sa 'beta'. Ika puwedeng makaka-engkuwentro nin mga isyu sa panuklob, asin ika mapuwedeng dae makakapagliwat nin mga parte kan pahina. Sa pagbalikwat pabalik sa ginikanang pagliliwat dawa noarin na dae mawawara an saimong mga kaliwatan, bukasi an pababang pahulog na sunod sa \"{{int:visualeditor-toolbar-savedialog}}\" asin pilion an \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-beta-warning": "An Biswal-na-Editor yaon pa sana sa 'beta'. Ika puwedeng makaka-engkuwentro nin mga isyu sa panuklob, asin ika mapuwedeng dae makakapagliwat nin mga parte kan pahina. Sa pagbalikwat pabalik sa ginikanang pagliliwat dawa noarin na dae mawawara an saimong mga kaliwatan, bukasi an pababang pahulog na sunod sa \"{{int:visualeditor-toolbar-savedialog}}\" asin pilion an \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Ika naggagamit nin sarong kilyawan na bakong opisyal na suportado kan Biswal-na-Paraliwat.",
 	"visualeditor-ca-createsource": "Muknaon an gikanan",
 	"visualeditor-ca-editsource": "Liwaton an gikanan",
