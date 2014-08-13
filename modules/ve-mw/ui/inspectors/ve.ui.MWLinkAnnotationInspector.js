@@ -15,25 +15,25 @@
  * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkInspector = function VeUiMWLinkInspector( manager, config ) {
+ve.ui.MWLinkAnnotationInspector = function VeUiMWLinkAnnotationInspector( manager, config ) {
 	// Parent constructor
 	ve.ui.LinkInspector.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWLinkInspector, ve.ui.LinkInspector );
+OO.inheritClass( ve.ui.MWLinkAnnotationInspector, ve.ui.LinkInspector );
 
 /* Static properties */
 
-ve.ui.MWLinkInspector.static.name = 'link';
+ve.ui.MWLinkAnnotationInspector.static.name = 'link';
 
-ve.ui.MWLinkInspector.static.modelClasses = [
+ve.ui.MWLinkAnnotationInspector.static.modelClasses = [
 	ve.dm.MWExternalLinkAnnotation,
 	ve.dm.MWInternalLinkAnnotation
 ];
 
-ve.ui.MWLinkInspector.static.linkTargetInputWidget = ve.ui.MWLinkTargetInputWidget;
+ve.ui.MWLinkAnnotationInspector.static.linkTargetInputWidget = ve.ui.MWLinkTargetInputWidget;
 
 /* Methods */
 
@@ -46,7 +46,7 @@ ve.ui.MWLinkInspector.static.linkTargetInputWidget = ve.ui.MWLinkTargetInputWidg
  * @param {ve.dm.SurfaceFragment} fragment Current selection
  * @returns {ve.dm.MWInternalLinkAnnotation|ve.dm.MWExternalLinkAnnotation|null}
  */
-ve.ui.MWLinkInspector.prototype.getAnnotationFromFragment = function ( fragment ) {
+ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function ( fragment ) {
 	var target = fragment.getText(),
 		title = mw.Title.newFromText( target );
 
@@ -89,4 +89,4 @@ ve.ui.MWLinkInspector.prototype.getAnnotationFromFragment = function ( fragment 
 
 /* Registration */
 
-ve.ui.windowFactory.register( ve.ui.MWLinkInspector );
+ve.ui.windowFactory.register( ve.ui.MWLinkAnnotationInspector );
