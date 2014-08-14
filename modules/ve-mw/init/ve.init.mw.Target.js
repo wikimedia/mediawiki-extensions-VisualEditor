@@ -52,7 +52,7 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );
 
-	if ( ve.init.platform.isInternetExplorer() ) {
+	if ( ve.init.platform.constructor.static.isInternetExplorer() ) {
 		this.modules.push( 'ext.visualEditor.iehacks' );
 	}
 

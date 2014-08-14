@@ -29,6 +29,18 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 
 OO.inheritClass( ve.init.mw.Platform, ve.init.Platform );
 
+/* Static Methods */
+
+/** @inheritdoc */
+ve.init.mw.Platform.static.getSystemPlatform = function () {
+	return $.client.profile().platform;
+};
+
+/** @inheritdoc */
+ve.init.mw.Platform.static.isInternetExplorer = function () {
+	return $.client.profile().name === 'msie';
+};
+
 /* Methods */
 
 /** @inheritdoc */
@@ -62,11 +74,6 @@ ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
 	}
 	// Fallback to regular messages, with mw.message html escaping applied.
 	return mw.message( key ).escaped();
-};
-
-/** @inheritdoc */
-ve.init.mw.Platform.prototype.getSystemPlatform = function () {
-	return $.client.profile().platform;
 };
 
 /** @inheritdoc */
@@ -107,10 +114,6 @@ ve.init.mw.Platform.prototype.getUserLanguages = function () {
 	}
 
 	return langs;
-};
-
-ve.init.mw.Platform.prototype.isInternetExplorer = function () {
-	return $.client.profile().name === 'msie';
 };
 
 /* Initialization */
