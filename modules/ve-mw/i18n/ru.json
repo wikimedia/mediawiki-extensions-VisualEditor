@@ -53,7 +53,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Добро пожаловать}} в Визуальный редактор",
 	"visualeditor-dialog-citation-insert-citation": "Вставка ссылки",
 	"visualeditor-dialog-media-alttext-section": "Альтернативный текст",
-	"visualeditor-dialog-media-change-image": "Изменить изображение",
+	"visualeditor-dialog-media-change-image": "Выбрать другое изображение",
 	"visualeditor-dialog-media-content-section": "Подпись",
 	"visualeditor-dialog-media-goback": "Вернуться назад",
 	"visualeditor-dialog-media-insert-button": "Вставить медиа-файл",

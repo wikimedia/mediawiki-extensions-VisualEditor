@@ -46,7 +46,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|ברוך הבא|ברוכה הבאה|ברוך בואך}} לעורך החזותי",
 	"visualeditor-dialog-citation-insert-citation": "הוספת ציטוט",
 	"visualeditor-dialog-media-alttext-section": "טקסט חלופי",
-	"visualeditor-dialog-media-change-image": "לשנות את התמונה",
+	"visualeditor-dialog-media-change-image": "בחירת תמונה אחרת",
 	"visualeditor-dialog-media-content-section": "כותרת",
 	"visualeditor-dialog-media-goback": "חזרה",
 	"visualeditor-dialog-media-insert-button": "הוספת מדיה",

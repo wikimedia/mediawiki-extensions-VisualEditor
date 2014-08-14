@@ -44,7 +44,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Willkommen}} beim VisualEditor",
 	"visualeditor-dialog-citation-insert-citation": "Zitat einfügen",
 	"visualeditor-dialog-media-alttext-section": "Alternativtext",
-	"visualeditor-dialog-media-change-image": "Bild ändern",
+	"visualeditor-dialog-media-change-image": "Ein anderes Bild auswählen",
 	"visualeditor-dialog-media-content-section": "Beschriftung",
 	"visualeditor-dialog-media-goback": "Zurück gehen",
 	"visualeditor-dialog-media-insert-button": "Medium einfügen",

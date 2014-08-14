@@ -46,7 +46,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Tervetuloa}} Visuaaliseen muokkaimeen",
 	"visualeditor-dialog-citation-insert-citation": "Aseta lainaus",
 	"visualeditor-dialog-media-alttext-section": "Vaihtoehtoinen teksti",
-	"visualeditor-dialog-media-change-image": "Vaihda kuva",
+	"visualeditor-dialog-media-change-image": "Valitse toinen kuva",
 	"visualeditor-dialog-media-content-section": "Kuvateksti",
 	"visualeditor-dialog-media-goback": "Takaisin",
 	"visualeditor-dialog-media-insert-button": "Lisää mediatiedosto",

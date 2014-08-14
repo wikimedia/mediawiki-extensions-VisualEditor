@@ -50,7 +50,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|欢迎}}使用可视化编辑器",
 	"visualeditor-dialog-citation-insert-citation": "插入引用",
 	"visualeditor-dialog-media-alttext-section": "替代文本",
-	"visualeditor-dialog-media-change-image": "更改图片",
+	"visualeditor-dialog-media-change-image": "选择另一个图片",
 	"visualeditor-dialog-media-content-section": "说明",
 	"visualeditor-dialog-media-goback": "返回",
 	"visualeditor-dialog-media-insert-button": "插入媒体文件",
