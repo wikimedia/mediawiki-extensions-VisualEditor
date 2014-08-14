@@ -57,7 +57,8 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
 		classes: [ 've-ui-mwParameterPage-removeButton' ]
 	} )
-		.connect( this, { click: 'onRemoveButtonClick' } );
+		.connect( this, { click: 'onRemoveButtonClick' } )
+		.toggle( !this.parameter.isRequired() );
 
 	this.infoButton = new OO.ui.PopupButtonWidget( {
 		$: this.$,
