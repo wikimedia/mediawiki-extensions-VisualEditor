@@ -144,45 +144,58 @@ ve.ui.MWExtensionInspector.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
-			var mwData,
-				surfaceModel = this.getFragment().getSurface();
-
-			if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
-				if ( this.node ) {
-					mwData = ve.copy( this.node.getAttribute( 'mw' ) );
-					this.updateMwData( mwData );
-					surfaceModel.change(
-						ve.dm.Transaction.newFromAttributeChanges(
-							surfaceModel.getDocument(),
-							this.node.getOuterRange().start,
-							{ 'mw': mwData }
-						)
-					);
-				} else {
-					mwData = {
-						'name': this.constructor.static.nodeModel.static.extensionName,
-						'attrs': {},
-						'body': {}
-					};
-					this.updateMwData( mwData );
-					// Collapse returns a new fragment, so update this.fragment
-					this.fragment = this.getFragment().collapseRangeToEnd();
-					this.getFragment().insertContent( [
-						{
-							'type': this.constructor.static.nodeModel.static.name,
-							'attributes': {
-								'mw': mwData
-							}
-						},
-						{ 'type': '/' + this.constructor.static.nodeModel.static.name }
-					] );
-				}
+			if ( this.constructor.static.allowedEmpty || this.input.getInnerValue() !== '' ) {
+				this.insertOrUpdateNode();
 			} else if ( this.node && !this.constructor.static.allowedEmpty ) {
 				// Content has been emptied on a node which isn't allowed to
 				// be empty, so delete it.
-				this.getFragment().removeContent();
+				this.removeNode();
 			}
 		}, this );
+};
+
+/**
+ * Insert or update the node in the document model from the new values
+ */
+ve.ui.MWExtensionInspector.prototype.insertOrUpdateNode = function () {
+	var mwData,
+		surfaceModel = this.getFragment().getSurface();
+	if ( this.node ) {
+		mwData = ve.copy( this.node.getAttribute( 'mw' ) );
+		this.updateMwData( mwData );
+		surfaceModel.change(
+			ve.dm.Transaction.newFromAttributeChanges(
+				surfaceModel.getDocument(),
+				this.node.getOuterRange().start,
+				{ 'mw': mwData }
+			)
+		);
+	} else {
+		mwData = {
+			'name': this.constructor.static.nodeModel.static.extensionName,
+			'attrs': {},
+			'body': {}
+		};
+		this.updateMwData( mwData );
+		// Collapse returns a new fragment, so update this.fragment
+		this.fragment = this.getFragment().collapseRangeToEnd();
+		this.getFragment().insertContent( [
+			{
+				'type': this.constructor.static.nodeModel.static.name,
+				'attributes': {
+					'mw': mwData
+				}
+			},
+			{ 'type': '/' + this.constructor.static.nodeModel.static.name }
+		] );
+	}
+};
+
+/**
+ * Remove the node form the document model
+ */
+ve.ui.MWExtensionInspector.prototype.removeNode = function () {
+	this.getFragment().removeContent();
 };
 
 /**
