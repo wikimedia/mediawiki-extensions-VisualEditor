@@ -11,32 +11,37 @@
 class ApiVisualEditor extends ApiBase {
 
 	/**
+	 * @var Config
+	 */
+	protected $veConfig;
+
+	public function __construct( ApiMain $main, $name, Config $config ) {
+		parent::__construct( $main, $name );
+		$this->veConfig = $config;
+	}
+
+	/**
 	 * Parsoid HTTP proxy configuration for MWHttpRequest
 	 */
 	protected function getProxyConf() {
-		global $wgVisualEditorParsoidHTTPProxy;
-		if ( $wgVisualEditorParsoidHTTPProxy ) {
-			return array( 'proxy' => $wgVisualEditorParsoidHTTPProxy );
+		$parsoidHTTPProxy = $this->veConfig->get( 'VisualEditorParsoidHTTPProxy' );
+		if ( $parsoidHTTPProxy ) {
+			return array( 'proxy' => $parsoidHTTPProxy );
 		} else {
 			return array( 'noProxy' => true );
 		}
 	}
 
 	protected function requestParsoid( $method, $title, $params ) {
-		global $wgVisualEditorParsoidURL,
-			$wgVisualEditorParsoidPrefix,
-			$wgVisualEditorParsoidTimeout,
-			$wgVisualEditorParsoidForwardCookies;
-
-		$url = $wgVisualEditorParsoidURL . '/' .
-			$wgVisualEditorParsoidPrefix . '/' .
+		$url = $this->veConfig->get( 'VisualEditorParsoidURL' ) . '/' .
+			$this->veConfig->get( 'VisualEditorParsoidPrefix' ) . '/' .
 			urlencode( $title->getPrefixedDBkey() );
 
 		$data = array_merge(
 			$this->getProxyConf(),
 			array(
 				'method' => $method,
-				'timeout' => $wgVisualEditorParsoidTimeout,
+				'timeout' => $this->veConfig->get( 'VisualEditorParsoidTimeout' ),
 			)
 		);
 
@@ -48,7 +53,9 @@ class ApiVisualEditor extends ApiBase {
 
 		$req = MWHttpRequest::factory( $url, $data );
 		// Forward cookies, but only if configured to do so and if there are read restrictions
-		if ( $wgVisualEditorParsoidForwardCookies && !User::isEveryoneAllowed( 'read' ) ) {
+		if ( $this->veConfig->get( 'VisualEditorParsoidForwardCookies' )
+			&& !User::isEveryoneAllowed( 'read' )
+		) {
 			$req->setHeader( 'Cookie', $this->getRequest()->getHeader( 'Cookie' ) );
 		}
 		$status = $req->execute();
@@ -83,11 +90,6 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	protected function getHTML( $title, $parserParams ) {
-		global $wgVisualEditorParsoidURL,
-			$wgVisualEditorParsoidPrefix,
-			$wgVisualEditorParsoidTimeout,
-			$wgVisualEditorParsoidForwardCookies;
-
 		$restoring = false;
 
 		if ( $title->exists() ) {
@@ -132,14 +134,14 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	protected function storeInSerializationCache( $title, $oldid, $html ) {
-		global $wgMemc, $wgVisualEditorSerializationCacheTimeout;
+		global $wgMemc;
 		$content = $this->postHTML( $title, $html, array( 'oldid' => $oldid ) );
 		if ( $content === false ) {
 			return false;
 		}
 		$hash = md5( $content );
 		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
-		$wgMemc->set( $key, $content, $wgVisualEditorSerializationCacheTimeout );
+		$wgMemc->set( $key, $content, $this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
 		return $hash;
 	}
 
@@ -282,8 +284,6 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	public function execute() {
-		global $wgVisualEditorNamespaces;
-
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 
@@ -291,7 +291,7 @@ class ApiVisualEditor extends ApiBase {
 		if ( !$page ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
-		if ( !in_array( $page->getNamespace(), $wgVisualEditorNamespaces ) ) {
+		if ( !in_array( $page->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
 			$this->dieUsage( "VisualEditor is not enabled in namespace " .
 				$page->getNamespace(), 'novenamespace' );
 		}
