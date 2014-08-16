@@ -188,7 +188,7 @@ ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
  */
 ve.ui.MWMediaDialog.prototype.initialize = function () {
 	var altTextFieldset, positionFieldset, borderField, positionField,
-		alignLeftButton, alignCenterButton, alignRightButton, alignButons;
+		alignLeftButton, alignCenterButton, alignRightButton, alignButtons;
 
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
@@ -272,11 +272,11 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-media-position-right' )
 	} );
 
-	alignButons = ( this.frame.getDir() === 'ltr' ) ?
+	alignButtons = ( this.frame.getDir() === 'ltr' ) ?
 		[ alignLeftButton, alignCenterButton, alignRightButton ] :
 		[ alignRightButton, alignCenterButton, alignLeftButton ];
 
-	this.positionInput.addItems( alignButons, 0 );
+	this.positionInput.addItems( alignButtons, 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
 		'$': this.$
@@ -590,7 +590,7 @@ ve.ui.MWMediaDialog.prototype.getFileRepos = function () {
 			'meta': 'filerepoinfo'
 		} ).then(
 			function ( resp ) {
-				return resp.query.repos || defaultSource;
+				return resp.query && resp.query.repos || defaultSource;
 			},
 			function () {
 				return $.Deferred().resolve( defaultSource );
