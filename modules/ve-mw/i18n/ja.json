@@ -38,7 +38,7 @@
 	"visualeditor-dialog-beta-welcome-title": "ビジュアルエディターへ{{GENDER:$1|ようこそ}}",
 	"visualeditor-dialog-citation-insert-citation": "引用を追加",
 	"visualeditor-dialog-media-alttext-section": "代替テキスト",
-	"visualeditor-dialog-media-change-image": "画像を変更",
+	"visualeditor-dialog-media-change-image": "別の画像を選択",
 	"visualeditor-dialog-media-content-section": "キャプション",
 	"visualeditor-dialog-media-goback": "戻る",
 	"visualeditor-dialog-media-insert-button": "メディアを挿入",

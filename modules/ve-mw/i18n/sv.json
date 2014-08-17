@@ -45,7 +45,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Välkommen}} till VisualEditor",
 	"visualeditor-dialog-citation-insert-citation": "Infoga källhänvisning",
 	"visualeditor-dialog-media-alttext-section": "Alternativ text",
-	"visualeditor-dialog-media-change-image": "Ändra bild",
+	"visualeditor-dialog-media-change-image": "Välj en annan bild",
 	"visualeditor-dialog-media-content-section": "Bildtext",
 	"visualeditor-dialog-media-goback": "Gå tillbaka",
 	"visualeditor-dialog-media-insert-button": "Infoga media",

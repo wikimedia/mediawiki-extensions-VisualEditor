@@ -19,7 +19,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Απλός σύνδεσμος",
 	"visualeditor-beta-appendix": "Δοκιμαστική έκδοση",
 	"visualeditor-beta-label": "Δοκιμαστική έκδοση",
-	"visualeditor-beta-warning": "Ο VisualEditor είναι σε δοκιμαστική έκδοση (beta). Λόγω πιθανών λαθών στο λογισμικό του, ίσως δεν μπορέσετε να επεξεργαστείτε κάποια μέρη της σελίδας.  Πατήστε \"{{int:visualeditor-ca-editsource}}\" για να μεταβείτε σε λειτουργία επεξεργασίας κώδικα wikitext (αν δεν έχετε αποθηκεύσει τις ως τώρα αλλαγές σας, αυτές θα χαθούν).",
+	"visualeditor-beta-warning": "Ο VisualEditor είναι σε δοκιμαστική έκδοση (beta). Ενδέχεται να αντιμετωπίσετε προβλήματα του λογισμικού και μπορεί να μην είστε σε θέση να επεξεργαστείτε τμήματα της σελίδας. Για να επιτστρέψετε πίσω στην επεξεργασία κώδικα οποιαδήποτε στιγμή χωρίς να χάσετε τις αλλαγές σας, ανοίξτε το πτυσσόμενο μενού δίπλα από το \"{{int:visualeditor-toolbar-savedialog}}\" και επιλέξτε \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Χρησιμοποιείτε πρόγραμμα περιήγησης που δεν υποστηρίζεται επίσημα από τον VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Προσθήκη τοπικής περιγραφής πηγής",
 	"visualeditor-ca-createsource": "Δημιουργία κώδικα",
@@ -41,7 +41,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Καλωσορίσατε}} στον VisualEditor",
 	"visualeditor-dialog-citation-insert-citation": "Εισαγωγή παραπομπής",
 	"visualeditor-dialog-media-alttext-section": "Εναλλακτικό κείμενο",
-	"visualeditor-dialog-media-change-image": "Αλλαγή εικόνας",
+	"visualeditor-dialog-media-change-image": "Επιλέξτε μια διαφορετική εικόνα",
 	"visualeditor-dialog-media-content-section": "Λεζάντα",
 	"visualeditor-dialog-media-goback": "Πήγαινε πίσω",
 	"visualeditor-dialog-media-insert-button": "Εισαγωγή πολυμέσου",
@@ -225,7 +225,7 @@
 	"visualeditor-viewpage-savewarning-title": "Είσαι σίγουρος;",
 	"visualeditor-viewpage-savewarning-discard": "Απόρριψη επεξεργασιών",
 	"visualeditor-viewpage-savewarning-keep": "Συνεχίστε την επεξεργασία",
-	"visualeditor-wikitext-warning": "Χρησιμοποιείτε τον VisualEditor - Ο [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] δεν λειτουργεί εδώ.Πατήστε \"{{MediaWiki:visualeditor-ca-editsource}}\" για να επεξεργαστείτε τη σελίδα με τον επεξεργαστή κώδικα (οι μη αποθηκευμένες αλλαγές θα χαθούν).",
+	"visualeditor-wikitext-warning": "Χρησιμοποιείτε τον VisualEditor - Ο [[{{MediaWiki:visualeditor-wikitext-warning-link}}|κώδικας wiki]] δεν λειτουργεί εδώ. Για να γυρίσετε σε επεξεργασία κώδικα σε οποιαδήποτε στιγμή χωρίς να χάσετε τις αλλαγές σας, ανοίξτε το πτυσσόμενο μενού δίπλα από το \"{{int:visualeditor-toolbar-savedialog}}\" και επιλέξτε \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Κώδικας wiki",
 	"visualeditor-wikitext-warning-title": "Ανιχνεύθηκε πηγαίος κώδικας (wikitext)"
 }

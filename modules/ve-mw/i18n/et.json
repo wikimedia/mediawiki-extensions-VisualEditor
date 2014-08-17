@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Avjoska",
-			"Pikne"
+			"Pikne",
+			"Boxmein"
 		]
 	},
 	"tooltip-ca-createsource": "Loo selle lehekülje lähtetekst",
@@ -30,7 +31,7 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Tere}} tulemast VisualEditori",
 	"visualeditor-dialog-citation-insert-citation": "Lisa viide",
 	"visualeditor-dialog-media-alttext-section": "Asendustekst",
-	"visualeditor-dialog-media-change-image": "Muuda pilti",
+	"visualeditor-dialog-media-change-image": "Vali teistsugune pilt",
 	"visualeditor-dialog-media-content-section": "Pildiallkiri",
 	"visualeditor-dialog-media-goback": "Mine tagasi",
 	"visualeditor-dialog-media-insert-button": "Lisa meediafail",
