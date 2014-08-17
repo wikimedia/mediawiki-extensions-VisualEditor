@@ -539,7 +539,7 @@ class ApiVisualEditor extends ApiBase {
 	 *
 	 * @param $title Title
 	 * @param $types array|string
-	 * @returns string
+	 * @return string
 	 */
 	private function getLastLogEntry( $title, $types = '' ) {
 		$lp = new LogPager(

@@ -141,7 +141,7 @@ class VisualEditorHooks {
 	 *
 	 * @param $editPage EditPage
 	 * @param $output OutputPage
-	 * @returns boolean true
+	 * @return boolean true
 	 */
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
 		$request = $output->getRequest();
@@ -166,7 +166,7 @@ class VisualEditorHooks {
 	 * @param $revision Revision|null
 	 * @param $status Status
 	 * @param $baseRevId int|boolean
-	 * @returns boolean true
+	 * @return boolean true
 	 */
 	public static function onPageContentSaveComplete(
 		$article, $user, $content, $summary, $isMinor, $isWatch,
@@ -190,7 +190,7 @@ class VisualEditorHooks {
 	 * @param $tooltip string
 	 * @param $result string HTML
 	 * @param $lang Language
-	 * @returns bool true
+	 * @return bool true
 	 */
 	public static function onDoEditSectionLink( $skin, $title, $section, $tooltip, &$result, $lang ) {
 		// Only do this if the user has VE enabled
@@ -418,7 +418,7 @@ class VisualEditorHooks {
 	 * been registered by the UniversalLanguageSelector extension.
 	 *
 	 * @param ResourceLoader $resourceLoader
-	 * @returns boolean true
+	 * @return boolean true
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
