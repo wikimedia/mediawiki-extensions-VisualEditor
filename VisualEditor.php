@@ -1051,23 +1051,23 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'modules/ve-mw/dm/models/ve.dm.MWReferenceModel.js',
 
-			'modules/ve-mw/dm/nodes/ve.dm.MWReferenceListNode.js',
+			'modules/ve-mw/dm/nodes/ve.dm.MWReferencesListNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWReferenceNode.js',
 
-			'modules/ve-mw/ce/nodes/ve.ce.MWReferenceListNode.js',
+			'modules/ve-mw/ce/nodes/ve.ce.MWReferencesListNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWReferenceNode.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceListNode.css',
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferencesListNode.css',
 			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceNode.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
 		),
 		'messages' => array(
-			'visualeditor-referencelist-isempty',
-			'visualeditor-referencelist-isempty-default',
-			'visualeditor-referencelist-missingref',
+			'visualeditor-referenceslist-isempty',
+			'visualeditor-referenceslist-isempty-default',
+			'visualeditor-referenceslist-missingref',
 		),
 		'targets' => array( 'desktop', 'mobile' )
 	),
@@ -1078,7 +1078,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceResultWidget.js',
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWCitationDialog.js',
-			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceListDialog.js',
+			'modules/ve-mw/ui/dialogs/ve.ui.MWReferencesListDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
@@ -1100,9 +1100,9 @@ $wgResourceModules += array(
 			'visualeditor-dialog-reference-title',
 			'visualeditor-dialog-reference-useexisting-label',
 			'visualeditor-dialog-reference-useexisting-tool',
-			'visualeditor-dialog-referencelist-title',
+			'visualeditor-dialog-referenceslist-title',
 			'visualeditor-dialogbutton-reference-tooltip',
-			'visualeditor-dialogbutton-referencelist-tooltip',
+			'visualeditor-dialogbutton-referenceslist-tooltip',
 			'visualeditor-reference-input-placeholder',
 		),
 		'targets' => array( 'desktop', 'mobile' ),

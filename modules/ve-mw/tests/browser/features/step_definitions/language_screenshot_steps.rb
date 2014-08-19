@@ -86,7 +86,7 @@ end
 When(/^I send right arrow times (\d+)$/) do |number|
   number.to_i.times do
     on(VisualEditorPage).content_element.send_keys :arrow_right
-    on(VisualEditorPage).content_element.fire_event("onblur") #gerrit 86800/86801 
+    on(VisualEditorPage).content_element.fire_event("onblur") #gerrit 86800/86801
   end
 end
 
@@ -113,7 +113,7 @@ When(/^I go to random page for screenshot$/) do
   @browser.goto "#{@browser.url}?setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
 end
 
-When(/^I click on Reference list in Insert menu$/) do
+When(/^I click on References list in Insert menu$/) do
   step "I click on the Insert menu"
   on(VisualEditorPage).ve_references_element.when_present.click
 end
@@ -166,7 +166,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
 
   highlight @current_page.template_insert_menu_element, '#FFFFFF'
   highlight @current_page.ref_list_insert_menu_element
-  capture_screenshot("VisualEditor_Reference_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
+  capture_screenshot("VisualEditor_References_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
 
   highlight @current_page.ref_list_insert_menu_element, '#FFFFFF'
   highlight @current_page.formula_insert_menu_element
@@ -282,7 +282,7 @@ Then(/^I should see VisualEditor toolbar containing cancel and save button$/) do
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.toolbar_action_element])
 end
 
-Then(/^I should see Reference list dialog box$/) do
+Then(/^I should see References list dialog box$/) do
   on(VisualEditorPage).iframe_element.when_present.should be_visible
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, 0)
 end

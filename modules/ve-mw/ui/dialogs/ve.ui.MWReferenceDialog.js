@@ -118,7 +118,7 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 			{ 'group': 'format' },
 			{ 'group': 'structure' },
 			'reference',
-			'referenceList',
+			'referencesList',
 			'gallery'
 		],
 		'promote': [ 'media', 'transclusion' ],
@@ -154,7 +154,7 @@ ve.ui.MWReferenceDialog.static.getPasteRules = function () {
 					ve.getProp( ve.init.target.constructor.static.pasteRules, 'all', 'blacklist' ) || [],
 					[
 						// Nested references are impossible
-						'mwReference', 'mwReferenceList',
+						'mwReference', 'mwReferencesList',
 						// Lists and tables are actually possible in wikitext with a leading
 						// line break but we prevent creating these with the UI
 						'list', 'listItem', 'definitionList', 'definitionListItem',

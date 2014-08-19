@@ -145,7 +145,7 @@ Feature: Language Screenshot
     Then I should see VisualEditor toolbar containing cancel and save button
 
   @language_screenshot
-  Scenario: VisualEditor_reference_list
+  Scenario: VisualEditor_references_list
     Given I go to the "Reference VisualEditor Screenshot" page with source content "VisualEditor is a MediaWiki extension"
-    When I click on Reference list in Insert menu
-    Then I should see Reference list dialog box
+    When I click on References list in Insert menu
+    Then I should see References list dialog box

@@ -111,7 +111,7 @@ ve.ce.MWReferenceNode.prototype.createHighlights = function () {
 		// same type doesn't show an inspector.
 		this.$highlights
 			.addClass( 've-ce-mwReferenceNode-missingref' )
-			.attr( 'title', ve.msg( 'visualeditor-referencelist-missingref' ) );
+			.attr( 'title', ve.msg( 'visualeditor-referenceslist-missingref' ) );
 	}
 };
 

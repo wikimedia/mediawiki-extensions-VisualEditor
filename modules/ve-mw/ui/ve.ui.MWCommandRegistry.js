@@ -17,7 +17,7 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'media', 'window', 'open', 'media' )
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'referenceList', 'window', 'open', 'referenceList' )
+	new ve.ui.Command( 'referencesList', 'window', 'open', 'referencesList' )
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'reference', 'window', 'open', 'reference' )

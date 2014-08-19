@@ -1,12 +1,12 @@
 /*!
- * VisualEditor DataModel MWReferenceListNode class.
+ * VisualEditor DataModel MWReferencesListNode class.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /**
- * DataModel MediaWiki reference list node.
+ * DataModel MediaWiki references list node.
  *
  * @class
  * @extends ve.dm.BranchNode
@@ -15,35 +15,35 @@
  * @param {Object} [element] Reference to element in linear model
  * @param {ve.dm.Node[]} [children]
  */
-ve.dm.MWReferenceListNode = function VeDmMWReferenceListNode() {
+ve.dm.MWReferencesListNode = function VeDmMWReferencesListNode() {
 	// Parent constructor
 	ve.dm.BranchNode.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWReferenceListNode, ve.dm.BranchNode );
+OO.inheritClass( ve.dm.MWReferencesListNode, ve.dm.BranchNode );
 
 /* Static members */
 
-ve.dm.MWReferenceListNode.static.name = 'mwReferenceList';
+ve.dm.MWReferencesListNode.static.name = 'mwReferencesList';
 
-ve.dm.MWReferenceListNode.static.handlesOwnChildren = true;
+ve.dm.MWReferencesListNode.static.handlesOwnChildren = true;
 
-ve.dm.MWReferenceListNode.static.matchTagNames = null;
+ve.dm.MWReferencesListNode.static.matchTagNames = null;
 
-ve.dm.MWReferenceListNode.static.matchRdfaTypes = [ 'mw:Extension/references' ];
+ve.dm.MWReferencesListNode.static.matchRdfaTypes = [ 'mw:Extension/references' ];
 
-ve.dm.MWReferenceListNode.static.storeHtmlAttributes = false;
+ve.dm.MWReferencesListNode.static.storeHtmlAttributes = false;
 
-ve.dm.MWReferenceListNode.static.toDataElement = function ( domElements, converter ) {
-	var referenceListData, $contents, contentsData,
+ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, converter ) {
+	var referencesListData, $contents, contentsData,
 		mwDataJSON = domElements[0].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		refGroup = mwData.attrs && mwData.attrs.group || '',
 		listGroup = 'mwReference/' + refGroup;
 
-	referenceListData = {
+	referencesListData = {
 		'type': this.name,
 		'attributes': {
 			'mw': mwData,
@@ -56,16 +56,16 @@ ve.dm.MWReferenceListNode.static.toDataElement = function ( domElements, convert
 	if ( mwData.body && mwData.body.html ) {
 		$contents = $( '<div>', domElements[0].ownerDocument ).append( mwData.body.html );
 		contentsData = converter.getDataFromDomClean( $contents[0] );
-		return [ referenceListData ].
+		return [ referencesListData ].
 			concat( contentsData ).
 			concat( [ { 'type': '/' + this.name } ] );
 	} else {
-		return referenceListData;
+		return referencesListData;
 	}
 
 };
 
-ve.dm.MWReferenceListNode.static.toDomElements = function ( data, doc, converter ) {
+ve.dm.MWReferencesListNode.static.toDomElements = function ( data, doc, converter ) {
 	var el, els, mwData, originalMw, wrapper, contentsHtml, originalHtml,
 		dataElement = data[0],
 		attribs = dataElement.attributes,
@@ -117,4 +117,4 @@ ve.dm.MWReferenceListNode.static.toDomElements = function ( data, doc, converter
 
 /* Registration */
 
-ve.dm.modelRegistry.register( ve.dm.MWReferenceListNode );
+ve.dm.modelRegistry.register( ve.dm.MWReferencesListNode );

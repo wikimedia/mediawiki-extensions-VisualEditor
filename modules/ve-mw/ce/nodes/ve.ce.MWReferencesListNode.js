@@ -1,22 +1,22 @@
 /*!
- * VisualEditor ContentEditable MWReferenceListNode class.
+ * VisualEditor ContentEditable MWReferencesListNode class.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /**
- * ContentEditable MediaWiki reference list node.
+ * ContentEditable MediaWiki references list node.
  *
  * @class
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
  *
  * @constructor
- * @param {ve.dm.MWReferenceListNode} model Model to observe
+ * @param {ve.dm.MWReferencesListNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
+ve.ce.MWReferencesListNode = function VeCeMWReferencesListNode( model, config ) {
 	// Parent constructor
 	ve.ce.LeafNode.call( this, model, config );
 
@@ -28,10 +28,10 @@ ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
 	this.listNode = null;
 
 	// DOM changes
-	this.$element.addClass( 've-ce-mwReferenceListNode references' );
+	this.$element.addClass( 've-ce-mwReferencesListNode references' );
 	this.$reflist = this.$( '<ol class="references"></ol>' );
 	this.$refmsg = this.$( '<p>' )
-		.addClass( 've-ce-mwReferenceListNode-muted' );
+		.addClass( 've-ce-mwReferencesListNode-muted' );
 
 	// Events
 	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
@@ -42,24 +42,24 @@ ve.ce.MWReferenceListNode = function VeCeMWReferenceListNode( model, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ce.MWReferenceListNode, ve.ce.LeafNode );
+OO.inheritClass( ve.ce.MWReferencesListNode, ve.ce.LeafNode );
 
-OO.mixinClass( ve.ce.MWReferenceListNode, ve.ce.FocusableNode );
+OO.mixinClass( ve.ce.MWReferencesListNode, ve.ce.FocusableNode );
 
 /* Static Properties */
 
-ve.ce.MWReferenceListNode.static.name = 'mwReferenceList';
+ve.ce.MWReferencesListNode.static.name = 'mwReferencesList';
 
-ve.ce.MWReferenceListNode.static.tagName = 'div';
+ve.ce.MWReferencesListNode.static.tagName = 'div';
 
-ve.ce.MWReferenceListNode.static.primaryCommandName = 'referenceList';
+ve.ce.MWReferencesListNode.static.primaryCommandName = 'referencesList';
 
 /* Static Methods */
 
 /**
  * @inheritdoc
  */
-ve.ce.MWReferenceListNode.static.getDescription = function ( model ) {
+ve.ce.MWReferencesListNode.static.getDescription = function ( model ) {
 	return model.getAttribute( 'refGroup' );
 };
 
@@ -70,7 +70,7 @@ ve.ce.MWReferenceListNode.static.getDescription = function ( model ) {
  *
  * @method
  */
-ve.ce.MWReferenceListNode.prototype.onSetup = function () {
+ve.ce.MWReferencesListNode.prototype.onSetup = function () {
 	this.internalList = this.model.getDocument().getInternalList();
 	this.listNode = this.internalList.getListNode();
 
@@ -86,7 +86,7 @@ ve.ce.MWReferenceListNode.prototype.onSetup = function () {
  *
  * @method
  */
-ve.ce.MWReferenceListNode.prototype.onTeardown = function () {
+ve.ce.MWReferencesListNode.prototype.onTeardown = function () {
 	this.internalList.disconnect( this, { 'update': 'onInternalListUpdate' } );
 	this.listNode.disconnect( this, { 'update': 'onListNodeUpdate' } );
 
@@ -105,7 +105,7 @@ ve.ce.MWReferenceListNode.prototype.onTeardown = function () {
  * @method
  * @param {string[]} groupsChanged A list of groups which have changed in this transaction
  */
-ve.ce.MWReferenceListNode.prototype.onInternalListUpdate = function ( groupsChanged ) {
+ve.ce.MWReferencesListNode.prototype.onInternalListUpdate = function ( groupsChanged ) {
 	// Only update if this group has been changed
 	if ( ve.indexOf( this.model.getAttribute( 'listGroup' ), groupsChanged ) !== -1 ) {
 		this.update();
@@ -119,7 +119,7 @@ ve.ce.MWReferenceListNode.prototype.onInternalListUpdate = function ( groupsChan
  * @param {string} from Old value
  * @param {string} to New value
  */
-ve.ce.MWReferenceListNode.prototype.onAttributeChange = function ( key ) {
+ve.ce.MWReferencesListNode.prototype.onAttributeChange = function ( key ) {
 	if ( key === 'listGroup' ) {
 		this.update();
 	}
@@ -132,7 +132,7 @@ ve.ce.MWReferenceListNode.prototype.onAttributeChange = function ( key ) {
  *
  * @method
  */
-ve.ce.MWReferenceListNode.prototype.onListNodeUpdate = function () {
+ve.ce.MWReferencesListNode.prototype.onListNodeUpdate = function () {
 	// When the list node updates we're not sure which list group the item
 	// belonged to so we always update
 	// TODO: Only re-render the reference which has been edited
@@ -140,9 +140,9 @@ ve.ce.MWReferenceListNode.prototype.onListNodeUpdate = function () {
 };
 
 /**
- * Update the reference list.
+ * Update the references list.
  */
-ve.ce.MWReferenceListNode.prototype.update = function () {
+ve.ce.MWReferencesListNode.prototype.update = function () {
 	var i, j, iLen, jLen, index, firstNode, key, keyedNodes, $li, modelNode, viewNode,
 		internalList = this.model.getDocument().internalList,
 		refGroup = this.model.getAttribute( 'refGroup' ),
@@ -154,9 +154,9 @@ ve.ce.MWReferenceListNode.prototype.update = function () {
 
 	if ( !nodes || !nodes.indexOrder.length ) {
 		if ( refGroup !== '' ) {
-			this.$refmsg.text( ve.msg( 'visualeditor-referencelist-isempty', refGroup ) );
+			this.$refmsg.text( ve.msg( 'visualeditor-referenceslist-isempty', refGroup ) );
 		} else {
-			this.$refmsg.text( ve.msg( 'visualeditor-referencelist-isempty-default' ) );
+			this.$refmsg.text( ve.msg( 'visualeditor-referenceslist-isempty-default' ) );
 		}
 		this.$element.append( this.$refmsg );
 	} else {
@@ -166,11 +166,11 @@ ve.ce.MWReferenceListNode.prototype.update = function () {
 
 			key = internalList.keys[index];
 			keyedNodes = nodes.keyedNodes[key];
-			// Exclude references defined inside the reference list node
+			// Exclude references defined inside the references list node
 			/*jshint loopfunc:true */
 			keyedNodes = keyedNodes.filter( function ( node ) {
 				while ( ( node = node.parent ) && node !== null ) {
-					if ( node instanceof ve.dm.MWReferenceListNode ) {
+					if ( node instanceof ve.dm.MWReferencesListNode ) {
 						return false;
 					}
 				}
@@ -220,8 +220,8 @@ ve.ce.MWReferenceListNode.prototype.update = function () {
 			} else {
 				$li.append(
 					this.$( '<span>' )
-						.addClass( 've-ce-mwReferenceListNode-muted' )
-						.text( ve.msg( 'visualeditor-referencelist-missingref' ) )
+						.addClass( 've-ce-mwReferencesListNode-muted' )
+						.text( ve.msg( 'visualeditor-referenceslist-missingref' ) )
 				);
 			}
 
@@ -233,4 +233,4 @@ ve.ce.MWReferenceListNode.prototype.update = function () {
 
 /* Registration */
 
-ve.ce.nodeFactory.register( ve.ce.MWReferenceListNode );
+ve.ce.nodeFactory.register( ve.ce.MWReferencesListNode );

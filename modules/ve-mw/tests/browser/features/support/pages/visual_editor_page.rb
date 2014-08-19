@@ -88,7 +88,7 @@ class VisualEditorPage
   div(:toolbar_action, class: "oo-ui-toolbar-actions")
   span(:media_insert_menu, class: "oo-ui-tool-name-media")
   span(:template_insert_menu, class: "oo-ui-tool-name-transclusion")
-  span(:ref_list_insert_menu, class: "oo-ui-tool-name-referenceList")
+  span(:ref_list_insert_menu, class: "oo-ui-tool-name-referencesList")
   span(:formula_insert_menu,class: "oo-ui-tool-name-math")
   div(:language_notification, class: "tipsy-inner")
 

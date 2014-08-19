@@ -1,12 +1,12 @@
 /*!
- * VisualEditor user interface MWReferenceListDialog class.
+ * VisualEditor user interface MWReferencesListDialog class.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /**
- * Dialog for inserting and editing MediaWiki reference lists.
+ * Dialog for inserting and editing MediaWiki references lists.
  *
  * @class
  * @extends ve.ui.NodeDialog
@@ -15,29 +15,29 @@
  * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferenceListDialog = function VeUiMWReferenceListDialog( manager, config ) {
+ve.ui.MWReferencesListDialog = function VeUiMWReferencesListDialog( manager, config ) {
 	// Parent constructor
-	ve.ui.MWReferenceListDialog.super.call( this, manager, config );
+	ve.ui.MWReferencesListDialog.super.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWReferenceListDialog, ve.ui.NodeDialog );
+OO.inheritClass( ve.ui.MWReferencesListDialog, ve.ui.NodeDialog );
 
 /* Static Properties */
 
-ve.ui.MWReferenceListDialog.static.name = 'referenceList';
+ve.ui.MWReferencesListDialog.static.name = 'referencesList';
 
-ve.ui.MWReferenceListDialog.static.title =
-	OO.ui.deferMsg( 'visualeditor-dialog-referencelist-title' );
+ve.ui.MWReferencesListDialog.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-referenceslist-title' );
 
-ve.ui.MWReferenceListDialog.static.icon = 'references';
+ve.ui.MWReferencesListDialog.static.icon = 'references';
 
-ve.ui.MWReferenceListDialog.static.modelClasses = [ ve.dm.MWReferenceListNode ];
+ve.ui.MWReferencesListDialog.static.modelClasses = [ ve.dm.MWReferencesListNode ];
 
-ve.ui.MWReferenceListDialog.static.size = 'medium';
+ve.ui.MWReferencesListDialog.static.size = 'medium';
 
-ve.ui.MWReferenceListDialog.static.actions = [
+ve.ui.MWReferencesListDialog.static.actions = [
 	{
 		'action': 'apply',
 		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
@@ -62,16 +62,16 @@ ve.ui.MWReferenceListDialog.static.actions = [
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceListDialog.prototype.getBodyHeight = function () {
+ve.ui.MWReferencesListDialog.prototype.getBodyHeight = function () {
 	return Math.max( 150, Math.ceil( this.editPanel.$element[0].scrollHeight ) );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceListDialog.prototype.initialize = function () {
+ve.ui.MWReferencesListDialog.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWReferenceListDialog.super.prototype.initialize.call( this );
+	ve.ui.MWReferencesListDialog.super.prototype.initialize.call( this );
 
 	// Properties
 	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
@@ -102,7 +102,7 @@ ve.ui.MWReferenceListDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceListDialog.prototype.getActionProcess = function ( action ) {
+ve.ui.MWReferencesListDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'apply' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			var refGroup, listGroup, oldListGroup, attrChanges, doc,
@@ -132,13 +132,13 @@ ve.ui.MWReferenceListDialog.prototype.getActionProcess = function ( action ) {
 				// Collapse returns a new fragment, so update this.fragment
 				this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
 					{
-						'type': 'mwReferenceList',
+						'type': 'mwReferencesList',
 						'attributes': {
 							'listGroup': listGroup,
 							'refGroup': refGroup
 						}
 					},
-					{ 'type': '/mwReferenceList' }
+					{ 'type': '/mwReferencesList' }
 				] );
 			}
 
@@ -146,21 +146,21 @@ ve.ui.MWReferenceListDialog.prototype.getActionProcess = function ( action ) {
 		}, this );
 	}
 	// Parent method
-	return ve.ui.MWReferenceListDialog.super.prototype.getActionProcess.call( this, action );
+	return ve.ui.MWReferencesListDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWReferenceListDialog.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWReferenceListDialog.super.prototype.getSetupProcess.call( this, data )
+ve.ui.MWReferencesListDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWReferencesListDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var node, refGroup;
 
 			// Prepopulate from existing node if we're editing a node
 			// instead of inserting a new one
 			node = this.getFragment().getSelectedNode();
-			if ( this.selectedNode instanceof ve.dm.MWReferenceListNode ) {
+			if ( this.selectedNode instanceof ve.dm.MWReferencesListNode ) {
 				refGroup = node.getAttribute( 'refGroup' );
 				this.actions.setMode( 'edit' );
 			} else {
@@ -174,4 +174,4 @@ ve.ui.MWReferenceListDialog.prototype.getSetupProcess = function ( data ) {
 
 /* Registration */
 
-ve.ui.windowFactory.register( ve.ui.MWReferenceListDialog );
+ve.ui.windowFactory.register( ve.ui.MWReferencesListDialog );

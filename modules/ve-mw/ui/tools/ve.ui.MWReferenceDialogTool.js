@@ -54,7 +54,7 @@ ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToCatchall = false;
 ve.ui.toolFactory.register( ve.ui.MWUseExistingReferenceDialogTool );
 
 /**
- * MediaWiki UserInterface reference list tool.
+ * MediaWiki UserInterface references list tool.
  *
  * @class
  * @extends ve.ui.DialogTool
@@ -62,16 +62,16 @@ ve.ui.toolFactory.register( ve.ui.MWUseExistingReferenceDialogTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferenceListDialogTool = function VeUiMWReferenceListDialogTool( toolGroup, config ) {
+ve.ui.MWReferencesListDialogTool = function VeUiMWReferencesListDialogTool( toolGroup, config ) {
 	ve.ui.DialogTool.call( this, toolGroup, config );
 };
-OO.inheritClass( ve.ui.MWReferenceListDialogTool, ve.ui.DialogTool );
-ve.ui.MWReferenceListDialogTool.static.name = 'referenceList';
-ve.ui.MWReferenceListDialogTool.static.group = 'object';
-ve.ui.MWReferenceListDialogTool.static.icon = 'references';
-ve.ui.MWReferenceListDialogTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-dialogbutton-referencelist-tooltip' );
-ve.ui.MWReferenceListDialogTool.static.modelClasses = [ ve.dm.MWReferenceListNode ];
-ve.ui.MWReferenceListDialogTool.static.commandName = 'referenceList';
-ve.ui.MWReferenceListDialogTool.static.requiresRange = true;
-ve.ui.toolFactory.register( ve.ui.MWReferenceListDialogTool );
+OO.inheritClass( ve.ui.MWReferencesListDialogTool, ve.ui.DialogTool );
+ve.ui.MWReferencesListDialogTool.static.name = 'referencesList';
+ve.ui.MWReferencesListDialogTool.static.group = 'object';
+ve.ui.MWReferencesListDialogTool.static.icon = 'references';
+ve.ui.MWReferencesListDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialogbutton-referenceslist-tooltip' );
+ve.ui.MWReferencesListDialogTool.static.modelClasses = [ ve.dm.MWReferencesListNode ];
+ve.ui.MWReferencesListDialogTool.static.commandName = 'referencesList';
+ve.ui.MWReferencesListDialogTool.static.requiresRange = true;
+ve.ui.toolFactory.register( ve.ui.MWReferencesListDialogTool );

@@ -124,7 +124,7 @@ ve.ui.MWMediaDialog.static.toolbarGroups = [
 		'exclude': [
 			{ 'group': 'format' },
 			{ 'group': 'structure' },
-			'referenceList',
+			'referencesList',
 			'gallery'
 		],
 		'promote': [ 'media', 'transclusion' ],

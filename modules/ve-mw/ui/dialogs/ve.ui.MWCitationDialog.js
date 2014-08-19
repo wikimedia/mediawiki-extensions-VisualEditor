@@ -196,7 +196,7 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 				}
 			}
 
-			// HACK: Scorch the earth - this is only needed because without it, the reference list
+			// HACK: Scorch the earth - this is only needed because without it, the references list
 			// won't re-render properly, and can be removed once someone fixes that
 			this.referenceModel.setDocument(
 				doc.cloneFromRange(

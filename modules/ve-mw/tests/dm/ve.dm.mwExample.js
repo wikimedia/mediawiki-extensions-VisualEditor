@@ -303,7 +303,7 @@ ve.dm.mwExample.MWInlineImage = {
 };
 
 ve.dm.mwExample.MWReference = {
-	'referenceList':
+	'referencesList':
 		'<ol class="references" typeof="mw:Extension/references" about="#mwt7" data-parsoid="{}"' +
 			'data-mw="{&quot;name&quot;:&quot;references&quot;,&quot;body&quot;:{' +
 			'&quot;extsrc&quot;:&quot;<ref name=\\&quot;foo\\&quot;>Ref in refs</ref>' +
@@ -732,7 +732,7 @@ ve.dm.mwExample.references = [
 	{ 'type': '/mwReference' },
 	{ 'type': '/paragraph' },
 	{
-		'type': 'mwReferenceList',
+		'type': 'mwReferencesList',
 		'attributes': {
 			'mw': {
 				'name': 'references',
@@ -744,7 +744,7 @@ ve.dm.mwExample.references = [
 			'refGroup': ''
 		}
 	},
-	{ 'type': '/mwReferenceList' },
+	{ 'type': '/mwReferencesList' },
 	{ 'type': 'internalList' },
 	{ 'type': 'internalItem' },
 	{ 'type': 'paragraph' },
@@ -1131,7 +1131,7 @@ ve.dm.mwExample.domToDataCases = {
 					'id="cite_ref-foo-3-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
 				'</span>' +
 			'</p>' +
-			ve.dm.mwExample.MWReference.referenceList,
+			ve.dm.mwExample.MWReference.referencesList,
 		'head': '<base href="http://example.com" />',
 		'data': [
 			{ 'type': 'paragraph' },
@@ -1315,7 +1315,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ 'type': '/mwReference' },
 			{ 'type': '/paragraph' },
 			{
-				'type': 'mwReferenceList',
+				'type': 'mwReferencesList',
 				'attributes': {
 					'mw': {
 						'name': 'references',
@@ -1326,7 +1326,7 @@ ve.dm.mwExample.domToDataCases = {
 						}
 					},
 					'originalMw': '{"name":"references","body":{"extsrc":"<ref name=\\"foo\\">Ref in refs</ref>","html":"<span about=\\"#mwt8\\" class=\\"reference\\" data-mw=\\"{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Ref in refs&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;foo&quot;}}\\" rel=\\"dc:references\\" typeof=\\"mw:Extension/ref\\"><a href=\\"#cite_note-foo-3\\">[3]</a></span>"},"attrs":{}}',
-					'domElements': $( ve.dm.mwExample.MWReference.referenceList ).toArray(),
+					'domElements': $( ve.dm.mwExample.MWReference.referencesList ).toArray(),
 					'listGroup': 'mwReference/',
 					'refGroup': ''
 				}
@@ -1366,7 +1366,7 @@ ve.dm.mwExample.domToDataCases = {
 			},
 			{ 'type': '/mwReference' },
 			{ 'type': '/paragraph' },
-			{ 'type': '/mwReferenceList' },
+			{ 'type': '/mwReferencesList' },
 			{ 'type': 'internalList' },
 			{ 'type': 'internalItem' },
 			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
