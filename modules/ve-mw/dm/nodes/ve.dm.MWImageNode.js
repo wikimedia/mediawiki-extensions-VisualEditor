@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel generated content node.
+ * DataModel MediaWiki image node.
  *
  * @class
  * @abstract
@@ -46,7 +46,16 @@ OO.inheritClass( ve.dm.MWImageNode, ve.dm.GeneratedContentNode );
 
 OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 
-/* Methods */
+/* Static methods */
+
+ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
+	return {
+		'type': dataElement.type,
+		'resource': dataElement.attributes.resource,
+		'width': dataElement.attributes.width,
+		'height': dataElement.attributes.height
+	};
+};
 
 /**
  * Update image scalable properties according to the image type.
@@ -135,6 +144,8 @@ ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
 	return scalablePromise;
 };
 
+/* Methods */
+
 /**
  * Respond to attribute change.
  * Update the rendering of the 'align', src', 'width' and 'height' attributes
@@ -177,17 +188,6 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
  */
 ve.dm.MWImageNode.prototype.getSizeHash = function () {
 	return 'MWImageOriginalSize:' + this.getFilename();
-};
-
-/* Static methods */
-
-ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
-	return {
-		'type': dataElement.type,
-		'resource': dataElement.attributes.resource,
-		'width': dataElement.attributes.width,
-		'height': dataElement.attributes.height
-	};
 };
 
 /**
