@@ -1145,6 +1145,10 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 		'disabled': !this.restoring
 	} );
 
+	// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
+	// tour to attach a guider to the "Save page" button.
+	this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
+
 	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
 		// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
 		this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
