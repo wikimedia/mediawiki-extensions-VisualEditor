@@ -136,7 +136,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "بخش بد",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "بخش زشت شده. $1",
 	"visualeditor-dialog-transclusion-insert-template": "وارد کردن الگو",
-	"visualeditor-dialog-transclusion-insert-transclusion": "درج تراگنجایش",
+	"visualeditor-dialog-transclusion-insert-transclusion": "درج تراگنجانش",
 	"visualeditor-dialog-transclusion-loading": "در حال بارگیری...",
 	"visualeditor-dialog-transclusion-multiple-mode": "نمایش گزینه‌ها",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|شما در حال اضافه کردن}} الگوی \"$1 \" به این صفحه هستید. این هنوز توضیح ندارد اما ممکن است برخی اطلاعات بر روی <a $2>صفحهٔ الگو </a> وجود داشته باشد.",
