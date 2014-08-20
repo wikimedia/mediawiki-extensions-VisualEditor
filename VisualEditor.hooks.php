@@ -17,7 +17,7 @@ class VisualEditorHooks {
 		// parties who attempt to install VisualEditor onto non-alpha wikis, as
 		// this should have no impact on deploying to Wikimedia's wiki cluster;
 		// is fine for release tarballs because 1.22wmf11 < 1.22alpha < 1.22.0.
-		wfUseMW( '1.24wmf17' );
+		wfUseMW( '1.24wmf18' );
 
 		$coreConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'main' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
@@ -365,10 +365,6 @@ class VisualEditorHooks {
 
 		$vars['wgVisualEditor'] = array(
 			'isPageWatched' => $out->getUser()->isWatched( $out->getTitle() ),
-			// Same as in Linker.php
-			'magnifyClipIconURL' => $out->getConfig()->get( 'StylePath' ) .
-				'/common/images/magnify-clip' .
-				( $pageLanguage->isRTL() ? '-rtl' : '' ) . '.png',
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'svgMaxSize' => $out->getConfig()->get( 'SVGMaxSize' ),

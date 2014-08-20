@@ -58,16 +58,7 @@ ve.ce.MWImageCaptionNode.prototype.buildMagnify = function () {
 		.addClass( 'magnify' );
 	this.$a = this.$( '<a>' )
 		.addClass( 'internal' )
-		// It's inside a protected node, so user can't see href/title anyways.
-		//.attr( 'href', '/wiki/File:Wiki.png' )
-		//.attr( 'title', 'Enlarge' )
 		.appendTo( this.$magnify );
-	this.$img = this.$( '<img>' )
-		.attr( 'src', mw.config.get( 'wgVisualEditor' ).magnifyClipIconURL )
-		.attr( 'width', 15 )
-		.attr( 'height', 11 )
-		//.attr( 'alt', '' )
-		.appendTo( this.$a );
 };
 
 /* Registration */
