@@ -1,7 +1,7 @@
 Given(/^I can see the Transclusion User Interface$/) do
   on(VisualEditorPage) do |page|
     page.title_element.when_present
-    page.title.should match "New template"
+    page.title.should match "Add a template"
   end
 end
 
