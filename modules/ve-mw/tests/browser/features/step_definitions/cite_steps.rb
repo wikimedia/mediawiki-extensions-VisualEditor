@@ -22,6 +22,14 @@ When(/^I click Insert Citation$/) do
   on(VisualEditorPage).insert_citation_element.when_present.click
 end
 
+When(/^I click Journal$/) do
+  on(VisualEditorPage).cite_journal_element.when_present.click
+end
+
+When(/^I click News$/) do
+  on(VisualEditorPage).cite_news_element.when_present.click
+end
+
 When(/^I click Website$/) do
   on(VisualEditorPage).cite_website_element.when_present.click
 end
@@ -75,6 +83,14 @@ When(/^the Book input field titles are in the correct order$/) do
   on(VisualEditorPage).cite_ui.should match /Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Pages/m
 end
 
+When(/^the Journal input field titles are in the correct order$/) do
+  on(VisualEditorPage).cite_ui.should match /Title.+Source date/m
+end
+
+When(/^the News input field titles are in the correct order$/) do
+  on(VisualEditorPage).cite_ui.should match /Source title.+Source date/m
+end
+
 When(/^the Website input field titles are in the correct order$/) do
   on(VisualEditorPage).cite_ui.should match /URL.+Source title.+Source date.+URL access date.+Website title/m
 end
@@ -85,6 +101,24 @@ Then(/^diff view should show the Book citation added$/) do
       page.links_diff_view.include? "Cite VisualEditor Test"
     end
     page.links_diff_view.should match Regexp.escape("<ref>{{Cite book|title = Book title|last = Book author last name|first = Book author first name|publisher = Book publisher|year = 2014|isbn = 9780743273565New book field contents|location = Location of publication|pages = 123|New book field = }}</ref>Cite VisualEditor Test")
+  end
+end
+
+Then(/^diff view should show the Journal citation added$/) do
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.links_diff_view.include? "Cite VisualEditor Test"
+    end
+    page.links_diff_view.should match Regexp.escape("<ref>{{Cite journal|title = Journal title|date = Journal Source date}}</ref>Cite VisualEditor Test")
+  end
+end
+
+Then(/^diff view should show the News citation added$/) do
+  on(VisualEditorPage) do |page|
+    page.wait_until(10) do
+      page.links_diff_view.include? "Cite VisualEditor Test"
+    end
+    page.links_diff_view.should match Regexp.escape("<ref>{{Cite news|title = News Source title|date = News Source date}}</ref>Cite VisualEditor Test")
   end
 end
 
