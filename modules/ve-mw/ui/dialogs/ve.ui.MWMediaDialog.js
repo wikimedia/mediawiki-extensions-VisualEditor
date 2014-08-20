@@ -52,7 +52,7 @@ ve.ui.MWMediaDialog.static.actions = [
 	},
 	{
 		'action': 'insert',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-media-insert-button' ),
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
 		'flags': [ 'primary', 'constructive' ],
 		'modes': 'insert'
 	},

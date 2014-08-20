@@ -163,9 +163,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
 
 	single = this.isSingleTemplateTransclusion();
-	label = single ?
-		ve.msg( 'visualeditor-dialog-transclusion-insert-template' ) :
-		ve.msg( 'visualeditor-dialog-transclusion-insert-transclusion' );
+	label = ve.msg( 'visualeditor-dialog-action-insert' );
 
 	this.actions
 		.setAbilities( { 'mode': single } )

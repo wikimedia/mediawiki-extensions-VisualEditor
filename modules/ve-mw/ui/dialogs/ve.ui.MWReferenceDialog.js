@@ -45,7 +45,7 @@ ve.ui.MWReferenceDialog.static.actions = [
 	},
 	{
 		'action': 'insert',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-reference-insert-button' ),
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
 		'flags': [ 'primary', 'constructive' ],
 		'modes': 'insert'
 	},
