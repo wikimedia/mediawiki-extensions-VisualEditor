@@ -598,6 +598,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-action-cancel',
 			'visualeditor-dialog-action-done',
 			'visualeditor-dialog-action-goback',
+			'visualeditor-dialog-action-insert',
 			'visualeditor-dialog-command-help-title',
 			'visualeditor-dialog-error',
 			'visualeditor-dialog-error-dismiss',
