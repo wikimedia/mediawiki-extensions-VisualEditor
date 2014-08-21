@@ -42,3 +42,23 @@ Feature: VisualEditor Cite
       And I click Save page
       And I click Links Review your changes
     Then diff view should show the Book citation added
+
+  Scenario: News
+    When I click News
+    And I fill in the first textarea with "News Source title"
+    And I fill in the second textarea with "News Source date"
+    And the News input field titles are in the correct order
+    And I click Insert Citation
+    And I click Save page
+    And I click Links Review your changes
+  Then diff view should show the News citation added
+
+  Scenario: Journal
+    When I click Journal
+    And I fill in the first textarea with "Journal title"
+    And I fill in the second textarea with "Journal Source date"
+    And the Journal input field titles are in the correct order
+    And I click Insert Citation
+    And I click Save page
+    And I click Links Review your changes
+  Then diff view should show the Journal citation added
