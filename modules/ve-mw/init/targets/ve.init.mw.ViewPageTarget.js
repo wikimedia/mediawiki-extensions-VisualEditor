@@ -1227,8 +1227,8 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 		}
 
 		this.saveDialog.setSanityCheck( this.sanityCheckVerified );
-		this.saveDialog.open(
-			this.surface.getModel().getFragment(),
+		this.surface.getDialogs().openWindow(
+			this.saveDialog,
 			{ 'dir': this.surface.getModel().getDocument().getLang() }
 		)
 			// Call onSaveDialogClose() when the save dialog starts closing
