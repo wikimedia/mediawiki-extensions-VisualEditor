@@ -26,6 +26,7 @@
 					"ve",
 					"ve.Range",
 					"ve.EventSequencer",
+					"ve.Filibuster",
 					"ve.Node",
 					"ve.BranchNode",
 					"ve.LeafNode",
