@@ -90,7 +90,7 @@ class VisualEditorPage
   div(:toolbar_action, class: "oo-ui-toolbar-actions")
   span(:media_insert_menu, class: "oo-ui-tool-name-media")
   span(:template_insert_menu, class: "oo-ui-tool-name-transclusion")
-  span(:ref_list_insert_menu, class: "oo-ui-tool-name-referencesList")
+  span(:ref_list_insert_menu, class: "oo-ui-tool-name-referenceList")
   span(:formula_insert_menu,class: "oo-ui-tool-name-math")
   div(:language_notification, class: "tipsy-inner")
 
@@ -126,7 +126,7 @@ class VisualEditorPage
   # not having beta warning makes iframes off by one
   in_iframe(index: 0) do |frame|
     span(:add_template, text: "Add template", frame: frame)
-    span(:insert_template, text: "Insert template", frame: frame)
+    span(:insert_template, text: "Insert", frame: frame)
     span(:confirm_switch, text: "Keep changes", frame: frame)
     span(:confirm_switch_cancel, text: "Cancel", frame: frame)
     span(:confirm_switch_discard, text: "Discard changes", frame: frame)
@@ -134,8 +134,8 @@ class VisualEditorPage
     text_area(:describe_change, index: 0, frame: frame)
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:ex, text: "Return to save form", frame: frame)
-    span(:insert_references_list, text: "Insert references list", frame: frame)
-    span(:media_apply_changes, text: "Insert media", frame: frame)
+    span(:insert_references_list, text: "Insert", frame: frame)
+    span(:media_apply_changes, text: "Insert", frame: frame)
     text_field(:media_search, css: "div.oo-ui-textInputWidget > input", frame: frame)
     div(:media_select, class: "ve-ui-mwMediaResultWidget-overlay", frame: frame)
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
