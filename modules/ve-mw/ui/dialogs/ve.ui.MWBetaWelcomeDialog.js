@@ -12,12 +12,11 @@
  * @extends OO.ui.MessageDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWBetaWelcomeDialog = function VeUiMWBetaWelcomeDialog( manager, config ) {
+ve.ui.MWBetaWelcomeDialog = function VeUiMWBetaWelcomeDialog( config ) {
 	// Parent constructor
-	ve.ui.MWBetaWelcomeDialog.super.call( this, manager, config );
+	ve.ui.MWBetaWelcomeDialog.super.call( this, config );
 };
 
 /* Inheritance */

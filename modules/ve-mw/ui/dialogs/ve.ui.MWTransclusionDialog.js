@@ -12,12 +12,11 @@
  * @extends ve.ui.MWTemplateDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( manager, config ) {
+ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	// Parent constructor
-	ve.ui.MWTransclusionDialog.super.call( this, manager, config );
+	ve.ui.MWTransclusionDialog.super.call( this, config );
 
 	// Properties
 	this.mode = null;
@@ -220,9 +219,9 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 	}
 	this.mode = mode;
 	single = mode === 'single';
-	if ( this.frame.$content ) {
+	if ( this.$content ) {
 		for ( name in modeCssClasses ) {
-			this.frame.$content.toggleClass( modeCssClasses[name], name === mode );
+			this.$content.toggleClass( modeCssClasses[name], name === mode );
 		}
 	}
 	this.setSize( single ? 'medium' : 'large' );

@@ -12,12 +12,11 @@
  * @extends OO.ui.MessageDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWWikitextSwitchConfirmDialog = function VeUiMWWikitextSwitchConfirmDialog( manager, config ) {
+ve.ui.MWWikitextSwitchConfirmDialog = function VeUiMWWikitextSwitchConfirmDialog( config ) {
 	// Parent constructor
-	ve.ui.MWWikitextSwitchConfirmDialog.super.call( this, manager, config );
+	ve.ui.MWWikitextSwitchConfirmDialog.super.call( this, config );
 };
 
 /* Inheritance */

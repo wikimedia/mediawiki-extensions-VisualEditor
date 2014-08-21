@@ -12,12 +12,11 @@
  * @extends ve.ui.MWTemplateDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWCitationDialog = function VeUiMWCitationDialog( manager, config ) {
+ve.ui.MWCitationDialog = function VeUiMWCitationDialog( config ) {
 	// Parent constructor
-	ve.ui.MWCitationDialog.super.call( this, manager, config );
+	ve.ui.MWCitationDialog.super.call( this, config );
 
 	// Properties
 	this.referenceModel = null;
@@ -81,7 +80,7 @@ ve.ui.MWCitationDialog.prototype.initialize = function ( data ) {
 	ve.ui.MWCitationDialog.super.prototype.initialize.call( this, data );
 
 	// HACK: Use the same styling as single-mode transclusion dialog - this should be generalized
-	this.frame.$content.addClass( 've-ui-mwTransclusionDialog-single' );
+	this.$content.addClass( 've-ui-mwTransclusionDialog-single' );
 };
 
 /**

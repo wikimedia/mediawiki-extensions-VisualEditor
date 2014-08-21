@@ -12,12 +12,11 @@
  * @extends ve.ui.NodeDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( manager, config ) {
+ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( config ) {
 	// Parent constructor
-	ve.ui.MWReferenceDialog.super.call( this, manager, config );
+	ve.ui.MWReferenceDialog.super.call( this, config );
 
 	// Properties
 	this.referenceModel = null;

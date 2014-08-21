@@ -12,12 +12,11 @@
  * @extends ve.ui.NodeDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMediaDialog = function VeUiMWMediaDialog( manager, config ) {
+ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 	// Parent constructor
-	ve.ui.MWMediaDialog.super.call( this, manager, config );
+	ve.ui.MWMediaDialog.super.call( this, config );
 
 	// Properties
 	this.imageModel = null;
@@ -272,7 +271,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		'label': ve.msg( 'visualeditor-dialog-media-position-right' )
 	} );
 
-	alignButtons = ( this.frame.getDir() === 'ltr' ) ?
+	alignButtons = ( this.getDir() === 'ltr' ) ?
 		[ alignLeftButton, alignCenterButton, alignRightButton ] :
 		[ alignRightButton, alignCenterButton, alignLeftButton ];
 
@@ -650,7 +649,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			// Hide/show buttons
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 			// HACK: OO.ui.Dialog needs an API for this
-			this.frame.$content.removeClass( 'oo-ui-dialog-content-footless' );
+			this.$content.removeClass( 'oo-ui-dialog-content-footless' );
 			// Focus the caption surface
 			this.captionSurface.focus();
 			// Hide/show the panels
@@ -690,7 +689,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			this.actions.setMode( this.imageModel ? 'change' : 'select' );
 
 			// HACK: OO.ui.Dialog needs an API for this
-			this.frame.$content.toggleClass( 'oo-ui-dialog-content-footless', !this.imageModel );
+			this.$content.toggleClass( 'oo-ui-dialog-content-footless', !this.imageModel );
 
 			// Hide/show the panels
 			this.bookletLayout.$element.hide();

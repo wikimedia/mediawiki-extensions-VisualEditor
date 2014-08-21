@@ -13,12 +13,11 @@
  * @extends ve.ui.FragmentInspector
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( manager, config ) {
+ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( config ) {
 	// Parent constructor
-	ve.ui.FragmentInspector.call( this, manager, config );
+	ve.ui.FragmentInspector.call( this, config );
 };
 
 /* Inheritance */

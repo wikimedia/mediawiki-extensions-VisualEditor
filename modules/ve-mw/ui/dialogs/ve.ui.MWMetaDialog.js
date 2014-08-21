@@ -12,12 +12,11 @@
  * @extends OO.ui.ProcessDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMetaDialog = function VeUiMWMetaDialog( manager, config ) {
+ve.ui.MWMetaDialog = function VeUiMWMetaDialog( config ) {
 	// Parent constructor
-	ve.ui.MWMetaDialog.super.call( this, manager, config );
+	ve.ui.MWMetaDialog.super.call( this, config );
 };
 
 /* Inheritance */

@@ -15,12 +15,11 @@
  * @extends OO.ui.ProcessDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Config options
  */
-ve.ui.MWSaveDialog = function VeUiMWSaveDialog( manager, config ) {
+ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	// Parent constructor
-	ve.ui.MWSaveDialog.super.call( this, manager, config );
+	ve.ui.MWSaveDialog.super.call( this, config );
 
 	// Properties
 	this.sanityCheckVerified = false;

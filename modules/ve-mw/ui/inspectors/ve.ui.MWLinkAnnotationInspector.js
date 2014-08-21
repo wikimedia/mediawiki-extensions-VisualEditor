@@ -12,12 +12,11 @@
  * @extends ve.ui.LinkInspector
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkAnnotationInspector = function VeUiMWLinkAnnotationInspector( manager, config ) {
+ve.ui.MWLinkAnnotationInspector = function VeUiMWLinkAnnotationInspector( config ) {
 	// Parent constructor
-	ve.ui.LinkInspector.call( this, manager, config );
+	ve.ui.LinkInspector.call( this, config );
 };
 
 /* Inheritance */

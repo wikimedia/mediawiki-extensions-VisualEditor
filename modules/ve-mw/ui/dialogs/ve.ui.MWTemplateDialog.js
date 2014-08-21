@@ -13,12 +13,11 @@
  * @extends ve.ui.NodeDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( manager, config ) {
+ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	// Parent constructor
-	ve.ui.MWTemplateDialog.super.call( this, manager, config );
+	ve.ui.MWTemplateDialog.super.call( this, config );
 
 	// Properties
 	this.transclusionModel = null;
@@ -224,7 +223,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 ve.ui.MWTemplateDialog.prototype.isInsertable = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
-	return !this.loading &&
+	return this.loading.state() === 'resolved' &&
 		parts.length &&
 		( parts.length > 1 || !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) );
 };
@@ -326,7 +325,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	);
 
 	// Initialization
-	this.frame.$content.addClass( 've-ui-mwTemplateDialog' );
+	this.$content.addClass( 've-ui-mwTemplateDialog' );
 	this.$body.append( this.panels.$element );
 	this.panels.addItems( [ this.bookletLayout ] );
 };

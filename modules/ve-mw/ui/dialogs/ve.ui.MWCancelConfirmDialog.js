@@ -12,12 +12,11 @@
  * @extends OO.ui.MessageDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWCancelConfirmDialog = function VeUiMWCancelConfirmDialog( manager, config ) {
+ve.ui.MWCancelConfirmDialog = function VeUiMWCancelConfirmDialog( config ) {
 	// Parent constructor
-	ve.ui.MWCancelConfirmDialog.super.call( this, manager, config );
+	ve.ui.MWCancelConfirmDialog.super.call( this, config );
 };
 
 /* Inheritance */

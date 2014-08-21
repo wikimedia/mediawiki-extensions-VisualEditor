@@ -12,12 +12,11 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( manager, config ) {
+ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, manager, config );
+	ve.ui.MWExtensionInspector.call( this, config );
 
 	// Properties
 	this.attributeInputs = {};

@@ -12,12 +12,11 @@
  * @extends ve.ui.NodeInspector
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkNodeInspector = function VeUiMWLinkNodeInspector( manager, config ) {
+ve.ui.MWLinkNodeInspector = function VeUiMWLinkNodeInspector( config ) {
 	// Parent constructor
-	ve.ui.NodeInspector.call( this, manager, config );
+	ve.ui.NodeInspector.call( this, config );
 };
 
 /* Inheritance */

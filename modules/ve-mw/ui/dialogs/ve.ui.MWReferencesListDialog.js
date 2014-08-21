@@ -12,12 +12,11 @@
  * @extends ve.ui.NodeDialog
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferencesListDialog = function VeUiMWReferencesListDialog( manager, config ) {
+ve.ui.MWReferencesListDialog = function VeUiMWReferencesListDialog( config ) {
 	// Parent constructor
-	ve.ui.MWReferencesListDialog.super.call( this, manager, config );
+	ve.ui.MWReferencesListDialog.super.call( this, config );
 };
 
 /* Inheritance */

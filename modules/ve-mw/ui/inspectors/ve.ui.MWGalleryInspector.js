@@ -12,12 +12,11 @@
  * @extends ve.ui.MWExtensionInspector
  *
  * @constructor
- * @param {OO.ui.WindowManager} manager Manager of window
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWGalleryInspector = function VeUiMWGalleryInspector( manager, config ) {
+ve.ui.MWGalleryInspector = function VeUiMWGalleryInspector( config ) {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, manager, config );
+	ve.ui.MWExtensionInspector.call( this, config );
 
 	this.$element.addClass( 've-ui-mwGalleryInspector' );
 };
