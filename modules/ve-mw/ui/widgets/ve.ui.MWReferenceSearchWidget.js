@@ -26,6 +26,7 @@ ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
 	// Properties
 	this.index = [];
 	this.indexEmpty = true;
+	this.built = false;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwReferenceSearchWidget' );
@@ -93,6 +94,8 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 	}
 
 	this.internalList = internalList;
+	this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
+	this.internalList.getListNode().connect( this, { 'update': 'onListNodeUpdate' } );
 
 	groupNames = ve.getObjectKeys( groups );
 	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
@@ -108,13 +111,42 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 };
 
 /**
+ * Handle the updating of the InternalList object.
+ *
+ * This will occur after a document transaction.
+ *
+ * @method
+ * @param {string[]} groupsChanged A list of groups which have changed in this transaction
+ */
+ve.ui.MWReferenceSearchWidget.prototype.onInternalListUpdate = function ( groupsChanged ) {
+	for ( var i = 0, len = groupsChanged.length; i < len; i++ ) {
+		if ( groupsChanged[i].indexOf( 'mwReference/' ) === 0 ) {
+			this.built = false;
+			break;
+		}
+	}
+};
+
+/**
+ * Handle the updating of the InternalListNode.
+ *
+ * This will occur after changes to any InternalItemNode.
+ *
+ * @method
+ */
+ve.ui.MWReferenceSearchWidget.prototype.onListNodeUpdate = function () {
+	this.built = false;
+};
+
+/**
  * Build a searchable index of references.
  *
  * @method
  */
 ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
-	// FIXME: For performance, this should only build the index if (a) there's no existing index, or
-	// (b) there is, but it was built against a different version of the internalList. (Bug: 68890)
+	if ( this.built ) {
+		return;
+	}
 
 	var i, iLen, j, jLen, ref, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
@@ -172,6 +204,8 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 
 	// Re-populate
 	this.onQueryChange();
+
+	this.built = true;
 };
 
 /**
