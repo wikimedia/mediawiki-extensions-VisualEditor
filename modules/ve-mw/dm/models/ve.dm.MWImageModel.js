@@ -157,7 +157,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  */
 ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
 	var imgModel = new ve.dm.MWImageModel( {
-			'resourceName': attrs.resource.replace( /^(.+\/)*/, '' ),
+			'resourceName': attrs.resource.replace( /^(\.+\/)*/, '' ),
 			'currentDimensions': {
 				'width': attrs.width,
 				'height': attrs.height
