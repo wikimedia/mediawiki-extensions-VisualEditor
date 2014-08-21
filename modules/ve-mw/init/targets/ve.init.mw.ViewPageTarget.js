@@ -1577,7 +1577,7 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, catego
 
 	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
-		$( '#content > #firstHeading > span' ).html( displayTitle );
+		$( '#content > #firstHeading > span:first' ).html( displayTitle );
 	}
 	$( '#catlinks' ).replaceWith( categoriesHtml );
 	if ( isRedirect && !$( '#contentSub > #redirectsub' ).length ) {
