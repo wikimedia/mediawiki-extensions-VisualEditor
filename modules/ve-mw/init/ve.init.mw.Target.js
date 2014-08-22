@@ -1432,14 +1432,10 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
  */
 ve.init.mw.Target.prototype.restoreEditSection = function () {
 	if ( this.section !== undefined && this.section > 0 ) {
-		var offset, offsetNode, nextNode,
-			target = this,
-			surfaceView = this.surface.getView(),
-			surfaceModel = surfaceView.getModel(),
+		var surfaceView = this.surface.getView(),
 			$documentNode = surfaceView.getDocument().getDocumentNode().$element,
 			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
-			headingNode = $section.data( 'view' ),
-			lastHeadingLevel = -1;
+			headingNode = $section.data( 'view' );
 
 		if ( $section.length ) {
 			this.initialEditSummary = '/* ' +
@@ -1447,30 +1443,45 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 		}
 
 		if ( headingNode ) {
-			// Find next sibling which isn't a heading
-			offsetNode = headingNode;
-			while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
-				lastHeadingLevel = offsetNode.getModel().getAttribute( 'level' );
-				// Next sibling
-				nextNode = offsetNode.parent.children[ve.indexOf( offsetNode, offsetNode.parent.children ) + 1];
-				if ( !nextNode ) {
-					break;
-				}
-				offsetNode = nextNode;
-			}
-			offset = surfaceModel.getDocument().data.getNearestContentOffset(
-				offsetNode.getModel().getOffset(), 1
-			);
-			// onDocumentFocus is debounced, so wait for that to happen before setting
-			// the model selection, otherwise it will get reset
-			this.surface.getView().once( 'focus', function () {
-				surfaceModel.setSelection( new ve.Range( offset ) );
-				target.scrollToHeading( headingNode );
-			} );
+			this.goToHeading( headingNode );
 		}
 
 		this.section = undefined;
 	}
+};
+
+/**
+ * Move the cursor to a given heading and scroll to it.
+ *
+ * @method
+ * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
+ */
+ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
+	var nextNode, offset,
+		target = this,
+		offsetNode = headingNode,
+		surfaceModel = this.surface.getView().getModel(),
+		lastHeadingLevel = -1;
+
+	// Find next sibling which isn't a heading
+	while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
+		lastHeadingLevel = offsetNode.getModel().getAttribute( 'level' );
+		// Next sibling
+		nextNode = offsetNode.parent.children[ve.indexOf( offsetNode, offsetNode.parent.children ) + 1];
+		if ( !nextNode ) {
+			break;
+		}
+		offsetNode = nextNode;
+	}
+	offset = surfaceModel.getDocument().data.getNearestContentOffset(
+		offsetNode.getModel().getOffset(), 1
+	);
+	// onDocumentFocus is debounced, so wait for that to happen before setting
+	// the model selection, otherwise it will get reset
+	this.surface.getView().once( 'focus', function () {
+		surfaceModel.setSelection( new ve.Range( offset ) );
+		target.scrollToHeading( headingNode );
+	} );
 };
 
 /**
@@ -1480,11 +1491,7 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.Target.prototype.scrollToHeading = function ( headingNode ) {
-	var $window = $( OO.ui.Element.getWindow( this.$element ) ),
-		target = this;
+	var $window = $( OO.ui.Element.getWindow( this.$element ) );
 
-	// Wait for toolbar to animate in so we can account for its height
-	setTimeout( function () {
-		$window.scrollTop( headingNode.$element.offset().top - target.toolbar.$element.height() );
-	}, 200 );
+	$window.scrollTop( headingNode.$element.offset().top - this.toolbar.$element.height() );
 };
