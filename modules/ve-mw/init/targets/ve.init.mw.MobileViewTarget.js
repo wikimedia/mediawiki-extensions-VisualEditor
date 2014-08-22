@@ -69,7 +69,6 @@ ve.init.mw.MobileViewTarget.static.name = 'mobile';
  * Once surface is ready ready, init UI.
  */
 ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
-	this.surface.getView().focus();
 	this.restoreEditSection();
 };
 
@@ -103,13 +102,22 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode ) {
-	var position;
+ve.init.mw.MobileViewTarget.prototype.goToHeading = function ( headingNode ) {
+	this.scrollToHeading( headingNode );
+};
 
-	if ( this.isIos ) {
-		position = headingNode.$element.offset().top - this.toolbar.$element.height();
-		this.surface.$element.closest( '.overlay-content' ).scrollTop( position );
-	} else {
-		ve.init.mw.MobileViewTarget.super.prototype.scrollToHeading.call( this, headingNode );
-	}
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode ) {
+	var target = this, position;
+
+	setTimeout( function () {
+		if ( target.isIos ) {
+			position = headingNode.$element.offset().top - target.toolbar.$element.height();
+			target.surface.$element.closest( '.overlay-content' ).scrollTop( position );
+		} else {
+			ve.init.mw.MobileViewTarget.super.prototype.scrollToHeading.call( target, headingNode );
+		}
+	} );
 };
