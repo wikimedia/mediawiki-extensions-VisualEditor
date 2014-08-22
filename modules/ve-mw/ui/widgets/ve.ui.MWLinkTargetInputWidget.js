@@ -27,6 +27,7 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 
 	// Properties
 	this.annotation = null;
+	this.choosing = false;
 
 	// Events
 	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
@@ -58,10 +59,25 @@ OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupInputWidget );
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	if ( item ) {
+		// WARNING: This assumes that #setAnnotation will emit `change` events synchronously
+		// TODO: Consider how this trick can be solved better, and possibly pushed upstream to
+		// OO.ui.LookupInputWidget so others don't fall into this trap
+		this.choosing = true;
 		this.setAnnotation( item.getData() );
+		this.choosing = false;
 	} else if ( this.annotation ) {
 		this.annotation = null;
 		this.emit( 'change', this.getValue() );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkTargetInputWidget.prototype.onLookupInputChange = function () {
+	// WARNING: See #onLookupMenuItemChoose for why this is fragile
+	if ( !this.choosing ) {
+		this.openLookupMenu();
 	}
 };
 
@@ -237,8 +253,15 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 ve.ui.MWLinkTargetInputWidget.prototype.initializeLookupMenuSelection = function () {
 	var item;
 
-	// Parent method
-	OO.ui.LookupInputWidget.prototype.initializeLookupMenuSelection.call( this );
+	if ( this.annotation ) {
+		this.lookupMenu.selectItem( this.lookupMenu.getItemFromData( this.annotation ) );
+	}
+
+	item = this.lookupMenu.getSelectedItem();
+	if ( !item ) {
+		// Parent method
+		OO.ui.LookupInputWidget.prototype.initializeLookupMenuSelection.call( this );
+	}
 
 	// Update annotation to match selected item
 	item = this.lookupMenu.getSelectedItem();
