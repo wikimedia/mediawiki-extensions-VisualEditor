@@ -21,8 +21,8 @@
  */
 ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	config = ve.extendObject( {
-		'enforceMax': false,
-		'minDimensions': { 'width': 1, 'height': 1 }
+		enforceMax: false,
+		minDimensions: { width: 1, height: 1 }
 	}, config );
 
 	// Parent constructor
@@ -36,7 +36,7 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	ve.ce.MWResizableNode.call( this, this.$image, config );
 
 	// Events
-	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
+	this.model.connect( this, { attributeChange: 'onAttributeChange' } );
 };
 
 /* Inheritance */
@@ -82,12 +82,12 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 	var xhr, deferred = $.Deferred();
 
 	xhr = ve.init.target.constructor.static.apiRequest( {
-		'action': 'query',
-		'prop': 'imageinfo',
-		'iiprop': 'url',
-		'iiurlwidth': this.getModel().getAttribute( 'width' ),
-		'iiurlheight': this.getModel().getAttribute( 'height' ),
-		'titles': this.getModel().getFilename()
+		action: 'query',
+		prop: 'imageinfo',
+		iiprop: 'url',
+		iiurlwidth: this.getModel().getAttribute( 'width' ),
+		iiurlheight: this.getModel().getAttribute( 'height' ),
+		titles: this.getModel().getFilename()
 	} )
 		.done( this.onParseSuccess.bind( this, deferred ) )
 		.fail( this.onParseError.bind( this, deferred ) );

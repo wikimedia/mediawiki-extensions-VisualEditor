@@ -51,7 +51,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.initialEditSummary = '';
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
-	this.veEditUri = this.viewUri.clone().extend( { 'veaction': 'edit' } );
+	this.veEditUri = this.viewUri.clone().extend( { veaction: 'edit' } );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
 		currentUri.query.diff === undefined
@@ -84,22 +84,22 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 	// Events
 	this.connect( this, {
-		'save': 'onSave',
-		'saveErrorEmpty': 'onSaveErrorEmpty',
-		'saveErrorSpamBlacklist': 'onSaveErrorSpamBlacklist',
-		'saveErrorAbuseFilter': 'onSaveErrorAbuseFilter',
-		'saveErrorBadToken': 'onSaveErrorBadToken',
-		'saveErrorNewUser': 'onSaveErrorNewUser',
-		'saveErrorCaptcha': 'onSaveErrorCaptcha',
-		'saveErrorUnknown': 'onSaveErrorUnknown',
-		'loadError': 'onLoadError',
-		'surfaceReady': 'onSurfaceReady',
-		'editConflict': 'onEditConflict',
-		'showChanges': 'onShowChanges',
-		'showChangesError': 'onShowChangesError',
-		'noChanges': 'onNoChanges',
-		'serializeError': 'onSerializeError',
-		'sanityCheckComplete': 'updateToolbarSaveButtonState'
+		save: 'onSave',
+		saveErrorEmpty: 'onSaveErrorEmpty',
+		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
+		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
+		saveErrorBadToken: 'onSaveErrorBadToken',
+		saveErrorNewUser: 'onSaveErrorNewUser',
+		saveErrorCaptcha: 'onSaveErrorCaptcha',
+		saveErrorUnknown: 'onSaveErrorUnknown',
+		loadError: 'onLoadError',
+		surfaceReady: 'onSurfaceReady',
+		editConflict: 'onEditConflict',
+		showChanges: 'onShowChanges',
+		showChangesError: 'onShowChangesError',
+		noChanges: 'onNoChanges',
+		serializeError: 'onSerializeError',
+		sanityCheckComplete: 'updateToolbarSaveButtonState'
 	} );
 
 	if ( currentUri.query.venotify ) {
@@ -108,8 +108,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		// postedit-confirmation-created
 		// postedit-confirmation-restored
 		mw.hook( 'postEdit' ).fire( {
-			'message':
-				ve.msg( 'postedit-confirmation-' + currentUri.query.venotify, mw.user )
+			message: ve.msg( 'postedit-confirmation-' + currentUri.query.venotify, mw.user )
 		} );
 
 		delete currentUri.query.venotify;
@@ -143,12 +142,12 @@ ve.init.mw.ViewPageTarget.compatibility = {
 	// The key is the browser name returned by jQuery.client
 	// The value is either null (match all versions) or a list of tuples
 	// containing an inequality (<,>,<=,>=) and a version number
-	'whitelist': {
-		'firefox': [['>=', 15]],
-		'iceweasel': [['>=', 10]],
-		'safari': [['>=', 6]],
-		'chrome': [['>=', 19]],
-		'opera': [['>=', 15]]
+	whitelist: {
+		firefox: [['>=', 15]],
+		iceweasel: [['>=', 10]],
+		safari: [['>=', 6]],
+		chrome: [['>=', 19]],
+		opera: [['>=', 15]]
 	}
 };
 
@@ -386,13 +385,13 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.activating = false;
 	this.surface.getModel().connect( this, {
-		'documentUpdate': function () {
+		documentUpdate: function () {
 			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
 				this.surface,
 				this.wikitextWarning
 			);
 		},
-		'history': 'updateToolbarSaveButtonState'
+		history: 'updateToolbarSaveButtonState'
 	} );
 	this.surface.setPasteRules( this.constructor.static.pasteRules );
 
@@ -464,8 +463,8 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 
 		if ( newid !== undefined ) {
 			mw.config.set( {
-				'wgCurRevisionId': newid,
-				'wgRevisionId': newid
+				wgCurRevisionId: newid,
+				wgRevisionId: newid
 			} );
 			this.revid = newid;
 		}
@@ -476,8 +475,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 		this.deactivate( true );
 		if ( newid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
-				'message':
-					ve.msg( 'postedit-confirmation-saved', mw.user )
+				message: ve.msg( 'postedit-confirmation-saved', mw.user )
 			} );
 		}
 	}
@@ -635,7 +633,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
  *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply ) {
-	this.saveDeferred.reject( [ new OO.ui.Error( msg, { 'recoverable': allowReapply } ) ] );
+	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply } ) ] );
 };
 
 /**
@@ -699,7 +697,7 @@ ve.init.mw.ViewPageTarget.prototype.onEditConflict = function () {
 ve.init.mw.ViewPageTarget.prototype.onNoChanges = function () {
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'nochanges' );
-	this.saveDialog.getActions().setAbilities( { 'approve': true } );
+	this.saveDialog.getActions().setAbilities( { approve: true } );
 };
 
 /**
@@ -777,9 +775,9 @@ ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, w
 			$( $.parseHTML( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end(),
 			{
-				'title': ve.msg( 'visualeditor-wikitext-warning-title' ),
-				'tag': 'visualeditor-wikitext-warning',
-				'autoHide': false
+				title: ve.msg( 'visualeditor-wikitext-warning-title' ),
+				tag: 'visualeditor-wikitext-warning',
+				autoHide: false
 			}
 		).done( function ( notif ) {
 			wikitextWarning = notif;
@@ -817,7 +815,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
 
 	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
 		this.emit( 'saveReview' );
-		this.saveDialog.getActions().setAbilities( { 'approve': false } );
+		this.saveDialog.getActions().setAbilities( { approve: false } );
 		this.saveDialog.pushPending();
 		if ( this.pageExists ) {
 			// Has no callback, handled via target.onShowChanges
@@ -894,8 +892,8 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 	if ( !this.surface.getModel().hasBeenModified() ) {
 		target.submitting = true;
 		window.location.href = this.viewUri.clone().extend( {
-			'action': 'edit',
-			'veswitched': 1
+			action: 'edit',
+			veswitched: 1
 		} ).toString();
 		return;
 	}
@@ -915,14 +913,14 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
 								),
 							target.submitWithSaveFields.bind(
 								target,
-								{ 'wpDiff': 1, 'veswitched': 1 }
+								{ wpDiff: 1, veswitched: 1 }
 							)
 						);
 					} else if ( data.action === 'discard' ) {
 						target.submitting = true;
 						window.location.href = target.viewUri.clone().extend( {
-							'action': 'edit',
-							'veswitched': 1
+							action: 'edit',
+							veswitched: 1
 						} ).toString();
 					}
 				},
@@ -944,7 +942,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogResolveConflict = function () {
 	// Get Wikitext from the DOM, and set up a submit call when it's done
 	this.serialize(
 		this.docToSave,
-		this.submitWithSaveFields.bind( this, { 'wpSave': 1 } )
+		this.submitWithSaveFields.bind( this, { wpSave: 1 } )
 	);
 };
 
@@ -964,9 +962,9 @@ ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
 			}
 		} );
 	ve.extendObject( fields, {
-		'wpSummary': this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
-		'wpCaptchaId': this.captcha && this.captcha.id,
-		'wpCaptchaWord': this.captcha && this.captcha.input.getValue()
+		wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
+		wpCaptchaId: this.captcha && this.captcha.id,
+		wpCaptchaWord: this.captcha && this.captcha.input.getValue()
 	} );
 	return fields;
 };
@@ -988,11 +986,11 @@ ve.init.mw.ViewPageTarget.prototype.submitWithSaveFields = function ( fields, wi
 ve.init.mw.ViewPageTarget.prototype.getSaveOptions = function () {
 	var key, options = this.getSaveFields(),
 		fieldMap = {
-			'wpSummary': 'summary',
-			'wpMinoredit': 'minor',
-			'wpWatchthis': 'watch',
-			'wpCaptchaId': 'captchaid',
-			'wpCaptchaWord': 'captchaword'
+			wpSummary: 'summary',
+			wpMinoredit: 'minor',
+			wpWatchthis: 'watch',
+			wpCaptchaId: 'captchaid',
+			wpCaptchaWord: 'captchaword'
 		};
 
 	for ( key in fieldMap ) {
@@ -1140,9 +1138,9 @@ ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = null;
  */
 ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 	this.toolbarSaveButton = new OO.ui.ButtonWidget( {
-		'label': ve.msg( 'visualeditor-toolbar-savedialog' ),
-		'flags': ['constructive'],
-		'disabled': !this.restoring
+		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
+		flags: ['constructive'],
+		disabled: !this.restoring
 	} );
 
 	// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
@@ -1157,7 +1155,7 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 
 	this.updateToolbarSaveButtonState();
 
-	this.toolbarSaveButton.connect( this, { 'click': 'onToolbarSaveButtonClick' } );
+	this.toolbarSaveButton.connect( this, { click: 'onToolbarSaveButtonClick' } );
 };
 
 /**
@@ -1171,12 +1169,12 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 		actions = new ve.ui.TargetToolbar( this, this.surface );
 
 	actions.setup( [
-		{ 'include': [ 'help', 'notices' ] },
+		{ include: [ 'help', 'notices' ] },
 		{
-			'type': 'list',
-			'icon': 'menu',
-			'title': ve.msg( 'visualeditor-pagemenu-tooltip' ),
-			'include': [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'editModeSource' ]
+			type: 'list',
+			icon: 'menu',
+			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+			include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'editModeSource' ]
 		}
 	] );
 
@@ -1217,9 +1215,9 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 
 			// Connect to save dialog
 			this.saveDialog.connect( this, {
-				'save': 'saveDocument',
-				'review': 'onSaveDialogReview',
-				'resolve': 'onSaveDialogResolveConflict'
+				save: 'saveDocument',
+				review: 'onSaveDialogReview',
+				resolve: 'onSaveDialogResolveConflict'
 			} );
 			// Setup edit summary and checkboxes
 			this.saveDialog.setEditSummary( this.initialEditSummary );
@@ -1229,7 +1227,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 		this.saveDialog.setSanityCheck( this.sanityCheckVerified );
 		this.surface.getDialogs().openWindow(
 			this.saveDialog,
-			{ 'dir': this.surface.getModel().getDocument().getLang() }
+			{ dir: this.surface.getModel().getDocument().getLang() }
 		)
 			// Call onSaveDialogClose() when the save dialog starts closing
 			.always( ve.bind( function ( opened ) {
@@ -1676,23 +1674,23 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 
 		if ( prefSaysShow ) {
 			ve.init.target.constructor.static.apiRequest( {
-				'action': 'options',
-				'token': mw.user.tokens.get( 'editToken' ),
-				'change': 'visualeditor-hidebetawelcome=1'
-			}, { 'type': 'POST' } );
+				action: 'options',
+				token: mw.user.tokens.get( 'editToken' ),
+				change: 'visualeditor-hidebetawelcome=1'
+			}, { type: 'POST' } );
 
 		// No need to set a cookie every time for logged-in users that have already
 		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
 		// view of the page via the hiding GET parameter.
 		} else if ( !usePrefs && !urlSaysHide ) {
-			$.cookie( 've-beta-welcome-dialog', 1, { 'path': '/', 'expires': 30 } );
+			$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 		}
 	}
 
 	if ( this.surface.getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
 		this.surface.getDialogs().openWindow( 'meta', {
-			'page': 'settings',
-			'fragment': this.surface.getModel().getFragment()
+			page: 'settings',
+			fragment: this.surface.getModel().getFragment()
 		} );
 	}
 };

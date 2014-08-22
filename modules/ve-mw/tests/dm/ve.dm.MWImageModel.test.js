@@ -14,102 +14,102 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 		expect = 0,
 		imageNode = {},
 		images = {
-			'mwInlineImage': {
-				'dir': 'ltr',
-				'attrs': {
-					'type': 'frameless',
-					'href': './File:Foo.jpg',
-					'src': 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Foo.jpg/229px-Foo.jpg',
-					'resource': './File:Foo.jpg',
-					'align': 'left',
-					'width': '100',
-					'height': '150',
-					'mediaType': 'BITMAP',
-					'defaultSize': true
+			mwInlineImage: {
+				dir: 'ltr',
+				attrs: {
+					type: 'frameless',
+					href: './File:Foo.jpg',
+					src: 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Foo.jpg/229px-Foo.jpg',
+					resource: './File:Foo.jpg',
+					align: 'left',
+					width: '100',
+					height: '150',
+					mediaType: 'BITMAP',
+					defaultSize: true
 				},
-				'tests': [
+				tests: [
 					{
-						'methods': {
-							'setType': 'thumb',
-							'setAlignment': 'default'
+						methods: {
+							setType: 'thumb',
+							setAlignment: 'default'
 						},
-						'results': {
-							'expect': {
-								'getImageNodeType': 'mwBlockImage',
-								'isBorderable': false
+						results: {
+							expect: {
+								getImageNodeType: 'mwBlockImage',
+								isBorderable: false
 							},
-							'position': 'oppositeToText'
+							position: 'oppositeToText'
 						}
 					}
 				]
 			},
-			'mwBlockImage': {
-				'dir': 'rtl',
-				'attrs': {
-					'href': './File:Foo.jpg',
-					'src': 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Foo.jpg/229px-Foo.jpg',
-					'resource': './File:Foo.jpg',
-					'type': 'thumb',
-					'align': 'default',
-					'width': '100',
-					'height': '150',
-					'mediaType': 'DRAWING',
-					'defaultSize': false
+			mwBlockImage: {
+				dir: 'rtl',
+				attrs: {
+					href: './File:Foo.jpg',
+					src: 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Foo.jpg/229px-Foo.jpg',
+					resource: './File:Foo.jpg',
+					type: 'thumb',
+					align: 'default',
+					width: '100',
+					height: '150',
+					mediaType: 'DRAWING',
+					defaultSize: false
 				},
-				'tests': [
+				tests: [
 					{
-						'methods': {
-							'setType': 'frameless',
-							'setAlignment': 'none'
+						methods: {
+							setType: 'frameless',
+							setAlignment: 'none'
 						},
-						'results': {
-							'expect': {
-								'getImageNodeType': 'mwInlineImage',
-								'getAlignment': 'none'
+						results: {
+							expect: {
+								getImageNodeType: 'mwInlineImage',
+								getAlignment: 'none'
 							},
-							'position': 'none'
+							position: 'none'
 						}
 					},
 					{
-						'methods': {
-							'setType': 'none',
-							'setAlignment': 'default',
-							'toggleBorder': true
+						methods: {
+							setType: 'none',
+							setAlignment: 'default',
+							toggleBorder: true
 						},
-						'results': {
-							'expect': {
-								'getImageNodeType': 'mwInlineImage',
-								'isBorderable': true,
-								'isDefaultSize': false
+						results: {
+							expect: {
+								getImageNodeType: 'mwInlineImage',
+								isBorderable: true,
+								isDefaultSize: false
 							},
-							'position': 'none'
+							position: 'none'
 						}
 					},
 					{
-						'methods': {
-							'setType': 'frame',
-							'setAlignment': 'default',
-							'toggleDefaultSize': true
+						methods: {
+							setType: 'frame',
+							setAlignment: 'default',
+							toggleDefaultSize: true
 						},
-						'results': {
-							'expect': {
-								'getImageNodeType': 'mwBlockImage',
-								'isBorderable': false,
-								'isDefaultSize': true
+						results: {
+							expect: {
+								getImageNodeType: 'mwBlockImage',
+								isBorderable: false,
+								isDefaultSize: true
 							},
-							'position': 'oppositeToText'
+							position: 'oppositeToText'
 						}
 					},
 					{
-						'methods': {
-							'setType': 'frame',
-							'setAlignment': 'right'
+						methods: {
+							setType: 'frame',
+							setAlignment: 'right'
 						},
-						'results': {
-							'expect': {
-								'getImageNodeType': 'mwBlockImage'
+						results: {
+							expect: {
+								getImageNodeType: 'mwBlockImage'
 							},
-							'position': 'withText'
+							position: 'withText'
 						}
 					}
 				]

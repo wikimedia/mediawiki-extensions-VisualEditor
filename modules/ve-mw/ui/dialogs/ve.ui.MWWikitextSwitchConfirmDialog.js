@@ -41,19 +41,19 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.message =
 
 ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
 	{
-		'action': 'cancel',
-		'label': OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-cancel' ),
-		'flags': 'safe'
+		action: 'cancel',
+		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-cancel' ),
+		flags: 'safe'
 	},
 	{
-		'action': 'switch',
-		'label': OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch' ),
-		'flags': 'primary'
+		action: 'switch',
+		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch' ),
+		flags: 'primary'
 	},
 	{
-		'action': 'discard',
-		'label': OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch-discard' ),
-		'flags': 'destructive'
+		action: 'discard',
+		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch-discard' ),
+		flags: 'destructive'
 	}
 ];
 
@@ -65,7 +65,7 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
 ve.ui.MWWikitextSwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'switch' || action === 'discard' ) {
 		return new OO.ui.Process( function () {
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 

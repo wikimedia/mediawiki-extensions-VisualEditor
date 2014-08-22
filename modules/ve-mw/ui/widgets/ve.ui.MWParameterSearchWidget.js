@@ -19,8 +19,8 @@
 ve.ui.MWParameterSearchWidget = function VeUiMWParameterSearchWidget( template, config ) {
 	// Configuration intialization
 	config = ve.extendObject( {
-		'placeholder': ve.msg( 'visualeditor-parameter-input-placeholder' ),
-		'limit': 3
+		placeholder: ve.msg( 'visualeditor-parameter-input-placeholder' ),
+		limit: 3
 	}, config );
 
 	// Parent constructor
@@ -33,7 +33,7 @@ ve.ui.MWParameterSearchWidget = function VeUiMWParameterSearchWidget( template, 
 	this.limit = config.limit || null;
 
 	// Events
-	this.template.connect( this, { 'add': 'buildIndex', 'remove': 'buildIndex' } );
+	this.template.connect( this, { add: 'buildIndex', remove: 'buildIndex' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwParameterSearchWidget' );
@@ -107,13 +107,13 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 
 		this.index.push( {
 			// Query information
-			'text': [ label, description ].join( ' ' ).toLowerCase(),
-			'names': [ name ].concat( aliases ).join( '|' ).toLowerCase(),
+			text: [ label, description ].join( ' ' ).toLowerCase(),
+			names: [ name ].concat( aliases ).join( '|' ).toLowerCase(),
 			// Display information
-			'name': name,
-			'label': label,
-			'aliases': aliases,
-			'description': description
+			name: name,
+			label: label,
+			aliases: aliases,
+			description: description
 		} );
 	}
 
@@ -143,7 +143,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 			nameMatch = item.names.indexOf( query ) >= 0;
 		}
 		if ( !hasQuery || textMatch || nameMatch ) {
-			items.push( new ve.ui.MWParameterResultWidget( item, { '$': this.$ } ) );
+			items.push( new ve.ui.MWParameterResultWidget( item, { $: this.$ } ) );
 			if ( hasQuery && nameMatch ) {
 				exactMatch = true;
 			}
@@ -156,20 +156,20 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 
 	if ( hasQuery && !exactMatch && value.length && !this.template.hasParameter( value ) ) {
 		items.unshift( new ve.ui.MWParameterResultWidget( {
-			'name': value,
-			'label': value,
-			'aliases': [],
-			'description': ve.msg( 'visualeditor-parameter-search-unknown' )
-		}, { '$': this.$ } ) );
+			name: value,
+			label: value,
+			aliases: [],
+			description: ve.msg( 'visualeditor-parameter-search-unknown' )
+		}, { $: this.$ } ) );
 	}
 
 	if ( !items.length ) {
 		items.push( new ve.ui.MWNoParametersResultWidget(
-			{}, { '$': this.$, 'disabled': true }
+			{}, { $: this.$, disabled: true }
 		) );
 	} else if ( remainder ) {
 		items.push( new ve.ui.MWMoreParametersResultWidget(
-			{ 'remainder': remainder }, { '$': this.$ }
+			{ remainder: remainder }, { $: this.$ }
 		) );
 	}
 

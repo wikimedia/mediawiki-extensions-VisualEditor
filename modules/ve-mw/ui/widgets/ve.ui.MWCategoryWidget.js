@@ -33,19 +33,19 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.popupState = false;
 	this.savedPopupState = false;
 	this.popup = new ve.ui.MWCategoryPopupWidget( {
-		'$': this.$, '$overlay': config.$overlay
+		$: this.$, $overlay: config.$overlay
 	} );
 	this.input = new ve.ui.MWCategoryInputWidget( this, {
-		'$': this.$, '$overlay': config.$overlay
+		$: this.$, $overlay: config.$overlay
 	} );
 
 	// Events
 	this.input.$input.on( 'keydown', this.onLookupInputKeyDown.bind( this ) );
-	this.input.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
+	this.input.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 	this.popup.connect( this, {
-		'removeCategory': 'onRemoveCategory',
-		'updateSortkey': 'onUpdateSortkey',
-		'hide': 'onPopupHide'
+		removeCategory: 'onRemoveCategory',
+		updateSortkey: 'onUpdateSortkey',
+		hide: 'onPopupHide'
 	} );
 
 	// Initialization
@@ -257,9 +257,9 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category ).getPrefixedText();
 			// Create a widget using the item data
 			config = {
-				'$': categoryWidget.$,
-				'item': item,
-				'hidden': categoryWidget.categoryHiddenStatus[item.name]
+				$: categoryWidget.$,
+				item: item,
+				hidden: categoryWidget.categoryHiddenStatus[item.name]
 			};
 			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle ) ) {
 				config.redirectTo = new mw.Title(
@@ -270,8 +270,8 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			}
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( categoryWidget, {
-				'savePopupState': 'onSavePopupState',
-				'togglePopupMenu': 'onTogglePopupMenu'
+				savePopupState: 'onSavePopupState',
+				togglePopupMenu: 'onTogglePopupMenu'
 			} );
 
 			// Index item by value
@@ -325,17 +325,17 @@ ve.ui.MWCategoryWidget.prototype.fitInput = function () {
 		return;
 	}
 
-	$input.css( { 'width': 'inherit' } );
+	$input.css( { width: 'inherit' } );
 	min = $input.outerWidth();
 
-	$input.css( { 'width': '100%' } );
+	$input.css( { width: '100%' } );
 	$lastItem = this.$element.find( '.ve-ui-mwCategoryItemWidget:last' );
 	if ( $lastItem.length ) {
 		// Try to fit to the right of the last item
 		gap = ( $input.offset().left + $input.outerWidth() ) -
 				( $lastItem.offset().left + $lastItem.outerWidth() );
 		if ( gap >= min ) {
-			$input.css( { 'width': gap } );
+			$input.css( { width: gap } );
 		}
 	}
 };

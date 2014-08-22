@@ -63,16 +63,16 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			if ( attributes && !ve.isEmptyObject( attributes ) ) {
 				for ( key in attributes ) {
 					attributeInput = new OO.ui.TextInputWidget( {
-						'$': this.$,
-						'value': attributes[key]
+						$: this.$,
+						value: attributes[key]
 					} );
 					this.attributeInputs[key] = attributeInput;
 					field = new OO.ui.FieldLayout(
 						attributeInput,
 						{
-							'$': this.$,
-							'align': 'left',
-							'label': key
+							$: this.$,
+							align: 'left',
+							label: key
 						}
 					);
 					this.$attributes.append( field.$element );

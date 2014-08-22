@@ -17,7 +17,7 @@
 ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
 	// Configuration intialization
 	config = ve.extendObject( {
-		'placeholder': ve.msg( 'visualeditor-reference-input-placeholder' )
+		placeholder: ve.msg( 'visualeditor-reference-input-placeholder' )
 	}, config );
 
 	// Parent constructor
@@ -94,8 +94,8 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 	}
 
 	this.internalList = internalList;
-	this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
-	this.internalList.getListNode().connect( this, { 'update': 'onListNodeUpdate' } );
+	this.internalList.connect( this, { update: 'onInternalListUpdate' } );
+	this.internalList.getListNode().connect( this, { update: 'onListNodeUpdate' } );
 
 	groupNames = ve.getObjectKeys( groups );
 	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
@@ -192,11 +192,11 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 			view.$element.find( 'a[href]' ).each( extractAttrs );
 
 			this.index.push( {
-				'$element': view.$element,
-				'text': text,
-				'reference': ref,
-				'citation': citation,
-				'name': name
+				$element: view.$element,
+				text: text,
+				reference: ref,
+				citation: citation,
+				name: name
 			} );
 			view.destroy();
 		}
@@ -239,7 +239,7 @@ ve.ui.MWReferenceSearchWidget.prototype.addResults = function () {
 				.text( item.name );
 			items.push(
 				new ve.ui.MWReferenceResultWidget( i, {
-					'$': this.$, 'label': $citation.add( $name ).add( item.$element )
+					$: this.$, label: $citation.add( $name ).add( item.$element )
 				} )
 			);
 		}

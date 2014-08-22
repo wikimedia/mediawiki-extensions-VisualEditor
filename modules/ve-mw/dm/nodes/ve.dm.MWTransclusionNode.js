@@ -27,7 +27,7 @@ ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 	this.partsList = null;
 
 	// Events
-	this.connect( this, { 'attributeChange': 'onAttributeChange' } );
+	this.connect( this, { attributeChange: 'onAttributeChange' } );
 };
 
 /* Inheritance */
@@ -77,11 +77,11 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 		type = isInline ? 'mwTransclusionInline' : 'mwTransclusionBlock';
 
 	dataElement = {
-		'type': type,
-		'attributes': {
-			'mw': mwData,
-			'originalDomElements': ve.copy( domElements ),
-			'originalMw': mwDataJSON
+		type: type,
+		attributes: {
+			mw: mwData,
+			originalDomElements: ve.copy( domElements ),
+			originalMw: mwDataJSON
 		}
 	};
 
@@ -274,8 +274,8 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 			part = content.parts[i];
 			this.partsList.push(
 				part.template ?
-					{ 'template': part.template.target.wt } :
-					{ 'content': part }
+					{ template: part.template.target.wt } :
+					{ content: part }
 			);
 		}
 	}
@@ -296,7 +296,7 @@ ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
 
 	// Normalize to multi template format
 	if ( content.params ) {
-		content = { 'parts': [ { 'template': content } ] };
+		content = { parts: [ { template: content } ] };
 	}
 	// Build wikitext from content
 	for ( i = 0, len = content.parts.length; i < len; i++ ) {

@@ -30,7 +30,7 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	this.namespace = config.namespace || null;
 
 	// Events
-	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
+	this.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwTitleInputWidget' );
@@ -77,9 +77,9 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 	}
 
 	return ve.init.target.constructor.static.apiRequest( {
-		'action': 'opensearch',
-		'search': value,
-		'suggest': ''
+		action: 'opensearch',
+		search: value,
+		suggest: ''
 	} );
 };
 
@@ -121,7 +121,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 				value = title.getPrefixedText();
 			}
 			items.push( new OO.ui.MenuItemWidget(
-				value, { '$': menu$, 'label': value }
+				value, { $: menu$, label: value }
 			) );
 		}
 	}

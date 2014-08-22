@@ -56,15 +56,15 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	minDimensions = config.minDimensions || {};
 
 	scalable = new ve.dm.Scalable( {
-		'currentDimensions': {
-			'width': currentDimensions.width,
-			'height': currentDimensions.height
+		currentDimensions: {
+			width: currentDimensions.width,
+			height: currentDimensions.height
 		},
-		'minDimensions': {
-			'width': minDimensions.width || 1,
-			'height': minDimensions.height || 1
+		minDimensions: {
+			width: minDimensions.width || 1,
+			height: minDimensions.height || 1
 		},
-		'defaultSize': !!config.isDefaultSize
+		defaultSize: !!config.isDefaultSize
 	} );
 	// Set the initial scalable, connect it to events
 	// and request an update from the API
@@ -116,11 +116,11 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	attrs = ve.extendObject( {
-		'type': 'thumb',
-		'align': 'default',
-		'width': defaultThumbSize,
-		'mediaType': 'BITMAP',
-		'defaultSize': true
+		type: 'thumb',
+		align: 'default',
+		width: defaultThumbSize,
+		mediaType: 'BITMAP',
+		defaultSize: true
 	}, attributes );
 
 	if ( attrs.defaultSize ) {
@@ -129,7 +129,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 		// For svg/drawings, the default wiki size is always applied
 		if ( attrs.width > defaultThumbSize || attrs.mediaType === 'DRAWING' ) {
 			newDimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
-				'width': defaultThumbSize
+				width: defaultThumbSize
 			}, attrs.width / attrs.height );
 			attrs.width = newDimensions.width;
 			attrs.height = newDimensions.height;
@@ -139,8 +139,8 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 	imageType = imageType || 'mwBlockImage';
 
 	newNode = ve.dm.nodeFactory.create( imageType, {
-		'type': imageType,
-		'attributes': attrs
+		type: imageType,
+		attributes: attrs
 	} );
 
 	ve.dm.MWImageNode.static.syncScalableToType( attrs.type, attrs.mediaType, newNode.getScalable() );
@@ -157,12 +157,12 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  */
 ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
 	var imgModel = new ve.dm.MWImageModel( {
-			'resourceName': attrs.resource.replace( /^(\.+\/)*/, '' ),
-			'currentDimensions': {
-				'width': attrs.width,
-				'height': attrs.height
+			resourceName: attrs.resource.replace( /^(\.+\/)*/, '' ),
+			currentDimensions: {
+				width: attrs.width,
+				height: attrs.height
 			},
-			'defaultSize': attrs.defaultSize
+			defaultSize: attrs.defaultSize
 		} );
 
 	// Cache the attributes so we can create a new image without
@@ -238,7 +238,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
 			surfaceModel.getFragment()
 				.adjustRange( 1 )
 				.collapseRangeToStart()
-				.insertContent( [ { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } ] );
+				.insertContent( [ { type: 'mwImageCaption' }, { type: '/mwImageCaption' } ] );
 			// Update the caption node
 			captionNode = node.getCaptionNode();
 		}
@@ -299,10 +299,10 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 
 	contentToInsert = [
 		{
-			'type': nodeType,
-			'attributes': editAttributes
+			type: nodeType,
+			attributes: editAttributes
 		},
-		{ 'type': '/' + nodeType }
+		{ type: '/' + nodeType }
 	];
 
 	switch ( nodeType ) {
@@ -316,7 +316,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			return fragment;
 
 		case 'mwBlockImage':
-			contentToInsert.splice( 1, 0, { 'type': 'mwImageCaption' }, { 'type': '/mwImageCaption' } );
+			contentToInsert.splice( 1, 0, { type: 'mwImageCaption' }, { type: '/mwImageCaption' } );
 			// Try to put the image in front of the structural node
 			offset = fragment.getDocument().data.getNearestStructuralOffset( fragment.getRange().start, -1 );
 			if ( offset > -1 ) {
@@ -358,11 +358,11 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 	}
 
 	attrs = {
-		'type': this.getType(),
-		'width': currentDimensions.width,
-		'height': currentDimensions.height,
-		'defaultSize': this.isDefaultSize(),
-		'borderImage': this.hasBorder()
+		type: this.getType(),
+		width: currentDimensions.width,
+		height: currentDimensions.height,
+		defaultSize: this.isDefaultSize(),
+		borderImage: this.hasBorder()
 	};
 
 	if ( origAttrs.alt !== undefined || this.getAltText() !== '' ) {
@@ -579,10 +579,10 @@ ve.dm.MWImageModel.prototype.getCurrentDimensions = function () {
 ve.dm.MWImageModel.prototype.getCaptionDocument = function () {
 	if ( !this.captionDoc ) {
 		this.captionDoc = new ve.dm.Document( [
-			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
-			{ 'type': '/paragraph' },
-			{ 'type': 'internalList' },
-			{ 'type': '/internalList' }
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
 		] );
 	}
 	return this.captionDoc;
@@ -726,7 +726,7 @@ ve.dm.MWImageModel.prototype.resetDefaultDimensions = function () {
 			} else {
 				this.scalable.setDefaultDimensions(
 					ve.dm.Scalable.static.getDimensionsFromValue( {
-						'width': this.defaultThumbSize
+						width: this.defaultThumbSize
 					}, this.scalable.getRatio() )
 				);
 			}
@@ -853,14 +853,14 @@ ve.dm.MWImageModel.prototype.updateScalable = function ( scalable ) {
 	this.scalable = scalable;
 
 	// Events
-	this.scalable.connect( this, { 'defaultSizeChange': 'onScalableDefaultSizeChange' } );
+	this.scalable.connect( this, { defaultSizeChange: 'onScalableDefaultSizeChange' } );
 
 	// Call for updated scalable
 	if ( imageName ) {
 		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( ve.bind( function ( info ) {
 			this.scalable.setOriginalDimensions( {
-				'width': info.width,
-				'height': info.height
+				width: info.width,
+				height: info.height
 			} );
 			// Update media type
 			this.setMediaType( info.mediatype );

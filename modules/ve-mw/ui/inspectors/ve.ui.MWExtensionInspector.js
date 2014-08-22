@@ -71,9 +71,9 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 	ve.ui.MWExtensionInspector.super.prototype.initialize.call( this );
 
 	this.input = new ve.ui.WhitespacePreservingTextInputWidget( {
-		'limit': 1,
-		'$': this.$,
-		'multiline': true
+		limit: 1,
+		$: this.$,
+		multiline: true
 	} );
 	this.input.$element.addClass( 've-ui-mwExtensionInspector-input' );
 
@@ -166,26 +166,26 @@ ve.ui.MWExtensionInspector.prototype.insertOrUpdateNode = function () {
 			ve.dm.Transaction.newFromAttributeChanges(
 				surfaceModel.getDocument(),
 				this.node.getOuterRange().start,
-				{ 'mw': mwData }
+				{ mw: mwData }
 			)
 		);
 	} else {
 		mwData = {
-			'name': this.constructor.static.nodeModel.static.extensionName,
-			'attrs': {},
-			'body': {}
+			name: this.constructor.static.nodeModel.static.extensionName,
+			attrs: {},
+			body: {}
 		};
 		this.updateMwData( mwData );
 		// Collapse returns a new fragment, so update this.fragment
 		this.fragment = this.getFragment().collapseRangeToEnd();
 		this.getFragment().insertContent( [
 			{
-				'type': this.constructor.static.nodeModel.static.name,
-				'attributes': {
-					'mw': mwData
+				type: this.constructor.static.nodeModel.static.name,
+				attributes: {
+					mw: mwData
 				}
 			},
-			{ 'type': '/' + this.constructor.static.nodeModel.static.name }
+			{ type: '/' + this.constructor.static.nodeModel.static.name }
 		] );
 	}
 };

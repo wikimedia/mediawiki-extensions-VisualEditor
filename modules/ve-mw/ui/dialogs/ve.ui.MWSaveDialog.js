@@ -42,32 +42,32 @@ ve.ui.MWSaveDialog.static.title =
 
 ve.ui.MWSaveDialog.static.actions = [
 	{
-		'action': 'save',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		'flags': [ 'primary', 'constructive' ],
-		'modes': 'save'
+		action: 'save',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		flags: [ 'primary', 'constructive' ],
+		modes: 'save'
 	},
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		'flags': 'safe',
-		'modes': 'save'
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: 'safe',
+		modes: 'save'
 	},
 	{
-		'action': 'review',
-		'label': OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
-		'modes': 'save'
+		action: 'review',
+		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
+		modes: 'save'
 	},
 	{
-		'action': 'approve',
-		'label': OO.ui.deferMsg( 'visualeditor-savedialog-label-review-good' ),
-		'flags': 'primary',
-		'modes': 'review'
+		action: 'approve',
+		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review-good' ),
+		flags: 'primary',
+		modes: 'review'
 	},
 	{
-		'action': 'resolve',
-		'label': OO.ui.deferMsg( 'visualeditor-savedialog-label-resolve-conflict' ),
-		'flags': [ 'primary', 'constructive' ],
-		'modes': 'conflict'
+		action: 'resolve',
+		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resolve-conflict' ),
+		flags: [ 'primary', 'constructive' ],
+		modes: 'conflict'
 	}
 ];
 
@@ -99,7 +99,7 @@ ve.ui.MWSaveDialog.static.actions = [
  */
 ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
 	this.$reviewViewer.empty().append( content );
-	this.actions.setAbilities( { 'approve': true } );
+	this.actions.setAbilities( { approve: true } );
 	this.popPending();
 	this.swapPanel( 'review' );
 };
@@ -147,7 +147,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	this.title.setLabel( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
 
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
-	this.actions.setAbilities( { 'save': true } );
+	this.actions.setAbilities( { save: true } );
 
 	switch ( panel ) {
 		case 'save':
@@ -167,7 +167,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			break;
 		case 'conflict':
 			this.actions
-				.setAbilities( { 'save': false } )
+				.setAbilities( { save: false } )
 				.setMode( 'save' );
 			break;
 		case 'review':
@@ -326,11 +326,11 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { '$': this.$, 'scrollable': true } );
+	this.panels = new OO.ui.StackLayout( { $: this.$, scrollable: true } );
 	this.savePanel = new OO.ui.PanelLayout( {
-		'$': this.$,
-		'scrollable': true,
-		'classes': ['ve-ui-mwSaveDialog-savePanel']
+		$: this.$,
+		scrollable: true,
+		classes: ['ve-ui-mwSaveDialog-savePanel']
 	} );
 
 	// Save panel
@@ -338,7 +338,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		.html( ve.init.platform.getParsedMessage( 'summary' ) )
 		.find( 'a' ).attr( 'target', '_blank' ).end();
 	this.editSummaryInput = new OO.ui.TextInputWidget(
-		{ '$': this.$, 'multiline': true, 'placeholder': ve.msg( 'visualeditor-editsummary' ) }
+		{ $: this.$, multiline: true, placeholder: ve.msg( 'visualeditor-editsummary' ) }
 	);
 	this.editSummaryInput.$element.addClass( 've-ui-mwSaveDialog-summary' );
 	this.editSummaryInput.$input
@@ -355,7 +355,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	this.$saveOptions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
 		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
-		new OO.ui.LabelWidget( { '$': this.$ } ).$element
+		new OO.ui.LabelWidget( { $: this.$ } ).$element
 			.addClass( 've-ui-mwSaveDialog-editSummary-count' ).text( this.editSummaryByteLimit )
 			.attr( 'title', ve.msg( 'visualeditor-editsummary-bytes-remaining' ) )
 	);
@@ -376,7 +376,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	);
 
 	// Review panel
-	this.reviewPanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );
+	this.reviewPanel = new OO.ui.PanelLayout( { $: this.$, scrollable: true } );
 	this.$reviewViewer = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-viewer' );
 	this.$reviewEditSummary = this.$( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
 	this.$reviewActions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-actions' );
@@ -391,14 +391,14 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	);
 
 	// Conflict panel
-	this.conflictPanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );
+	this.conflictPanel = new OO.ui.PanelLayout( { $: this.$, scrollable: true } );
 	this.$conflict = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-conflict' )
 		.html( ve.init.platform.getParsedMessage( 'visualeditor-editconflict' ) )
 		.find( 'a' ).attr( 'target', '_blank' ).end();
 	this.conflictPanel.$element.append( this.$conflict );
 
 	// No changes panel
-	this.nochangesPanel = new OO.ui.PanelLayout( { '$': this.$, 'scrollable': true } );
+	this.nochangesPanel = new OO.ui.PanelLayout( { $: this.$, scrollable: true } );
 	this.$noChanges = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-nochanges' )
 		.html( ve.init.platform.getParsedMessage( 'visualeditor-diff-nochanges' ) )
 		.find( 'a' ).attr( 'target', '_blank' ).end();
@@ -416,7 +416,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Save button for "save" panel
 	saveAccessKey = ve.msg( 'accesskey-save' );
 	if ( saveAccessKey !== '-' && saveAccessKey !== '' ) {
-		this.actions.forEach( { 'actions': 'save' }, function ( action ) {
+		this.actions.forEach( { actions: 'save' }, function ( action ) {
 			action.setAccessKey( saveAccessKey );
 		} );
 	}
@@ -437,7 +437,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			this.clearAllMessages();
 			this.swapPanel( 'save' );
 			// Update save button label
-			this.actions.forEach( { 'actions': 'save' }, function ( action ) {
+			this.actions.forEach( { actions: 'save' }, function ( action ) {
 				action.setLabel(
 					ve.msg(
 						// TODO: Actually populate this.resotring with information, right now it is

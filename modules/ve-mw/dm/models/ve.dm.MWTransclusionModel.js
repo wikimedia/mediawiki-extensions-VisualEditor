@@ -54,12 +54,12 @@
 		surfaceFragment
 			.insertContent( [
 				{
-					'type': 'mwTransclusionInline',
-					'attributes': {
-						'mw': this.getPlainObject()
+					type: 'mwTransclusionInline',
+					attributes: {
+						mw: this.getPlainObject()
 					}
 				},
-				{ 'type': '/mwTransclusionInline' }
+				{ type: '/mwTransclusionInline' }
 			] );
 	};
 
@@ -74,7 +74,7 @@
 
 		if ( obj !== null ) {
 			surfaceModel.getFragment( node.getOuterRange(), true )
-				.changeAttributes( { 'mw': obj } );
+				.changeAttributes( { mw: obj } );
 		} else {
 			surfaceModel.getFragment( node.getOuterRange(), true )
 				.removeContent();
@@ -94,7 +94,7 @@
 		// Convert single part format to multi-part format
 		// Parsoid doesn't use this format any more, but we accept it for backwards compatibility
 		if ( data.params && data.target ) {
-			data = { 'parts': [ { 'template': data } ] };
+			data = { parts: [ { template: data } ] };
 		}
 
 		if ( ve.isArray( data.parts ) ) {
@@ -104,15 +104,15 @@
 					deferred = $.Deferred();
 					promises.push( deferred.promise() );
 					this.queue.push( {
-						'add': ve.dm.MWTemplateModel.newFromData( this, part.template ),
-						'deferred': deferred
+						add: ve.dm.MWTemplateModel.newFromData( this, part.template ),
+						deferred: deferred
 					} );
 				} else if ( typeof part === 'string' ) {
 					deferred = $.Deferred();
 					promises.push( deferred.promise() );
 					this.queue.push( {
-						'add': new ve.dm.MWTransclusionContentModel( this, part, 'data' ),
-						'deferred': deferred
+						add: new ve.dm.MWTransclusionContentModel( this, part, 'data' ),
+						deferred: deferred
 					} );
 				}
 			}
@@ -168,7 +168,7 @@
 
 			this.parts.splice( index, remove, item.add );
 			if ( item.add ) {
-				item.add.connect( this, { 'change': [ 'emit', 'change' ] } );
+				item.add.connect( this, { change: [ 'emit', 'change' ] } );
 			}
 			if ( item.remove ) {
 				item.remove.disconnect( this );
@@ -225,10 +225,10 @@
 
 		// Request template specs from server
 		request = ve.init.target.constructor.static.apiRequest( {
-			'action': 'templatedata',
-			'titles': titles.join( '|' ),
-			'lang': mw.config.get( 'wgUserLanguage' ),
-			'redirects': '1'
+			action: 'templatedata',
+			titles: titles.join( '|' ),
+			lang: mw.config.get( 'wgUserLanguage' ),
+			redirects: '1'
 		} )
 			.done( function ( data ) {
 				var i, len, id, aliasMap = [];
@@ -298,7 +298,7 @@
 	 */
 	ve.dm.MWTransclusionModel.prototype.getPlainObject = function () {
 		var i, len, part, serialization,
-			obj = { 'parts': [] };
+			obj = { parts: [] };
 
 		for ( i = 0, len = this.parts.length; i < len; i++ ) {
 			part = this.parts[i];
@@ -361,7 +361,7 @@
 		) {
 			throw new Error( 'Invalid transclusion part' );
 		}
-		this.queue.push( { 'remove': remove, 'add': add, 'deferred': deferred } );
+		this.queue.push( { remove: remove, add: add, deferred: deferred } );
 
 		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
 		// have no effect because the queue will be clear
@@ -385,7 +385,7 @@
 		if ( !( part instanceof ve.dm.MWTransclusionPartModel ) ) {
 			throw new Error( 'Invalid transclusion part' );
 		}
-		this.queue.push( { 'add': part, 'index': index, 'deferred': deferred } );
+		this.queue.push( { add: part, index: index, deferred: deferred } );
 
 		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
 		// have no effect because the queue will be clear

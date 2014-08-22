@@ -35,8 +35,8 @@ ve.ui.MWBetaWelcomeDialog.static.icon = 'help';
 
 ve.ui.MWBetaWelcomeDialog.static.actions = [
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-beta-welcome-action-continue' ),
-		'flags': 'primary'
+		label: OO.ui.deferMsg( 'visualeditor-dialog-beta-welcome-action-continue' ),
+		flags: 'primary'
 	}
 ];
 
@@ -46,8 +46,8 @@ ve.ui.MWBetaWelcomeDialog.static.actions = [
 ve.ui.MWBetaWelcomeDialog.prototype.getSetupProcess = function ( data ) {
 	// Provide default title and message
 	data = $.extend( {
-		'title': ve.msg( 'visualeditor-dialog-beta-welcome-title', mw.user ),
-		'message': ve.msg( 'visualeditor-dialog-beta-welcome-content', $( '#ca-edit' ).text() )
+		title: ve.msg( 'visualeditor-dialog-beta-welcome-title', mw.user ),
+		message: ve.msg( 'visualeditor-dialog-beta-welcome-content', $( '#ca-edit' ).text() )
 	}, data );
 
 	return ve.ui.MWBetaWelcomeDialog.super.prototype.getSetupProcess.call( this, data );

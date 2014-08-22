@@ -44,32 +44,32 @@ ve.ui.MWMediaDialog.static.size = 'large';
 
 ve.ui.MWMediaDialog.static.actions = [
 	{
-		'action': 'apply',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		'flags': 'primary',
-		'modes': 'edit'
+		action: 'apply',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		flags: 'primary',
+		modes: 'edit'
 	},
 	{
-		'action': 'insert',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		'flags': [ 'primary', 'constructive' ],
-		'modes': 'insert'
+		action: 'insert',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
+		flags: [ 'primary', 'constructive' ],
+		modes: 'insert'
 	},
 	{
-		'action': 'change',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-media-change-image' ),
-		'modes': [ 'edit', 'insert' ]
+		action: 'change',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-change-image' ),
+		modes: [ 'edit', 'insert' ]
 	},
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		'flags': 'safe',
-		'modes': [ 'edit', 'insert', 'select' ]
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: 'safe',
+		modes: [ 'edit', 'insert', 'select' ]
 	},
 	{
-		'action': 'back',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
-		'flags': 'safe',
-		'modes': 'change'
+		action: 'back',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
+		flags: 'safe',
+		modes: 'change'
 	}
 ];
 
@@ -77,57 +77,57 @@ ve.ui.MWMediaDialog.static.modelClasses = [ ve.dm.MWBlockImageNode, ve.dm.MWInli
 
 ve.ui.MWMediaDialog.static.toolbarGroups = [
 	// History
-	{ 'include': [ 'undo', 'redo' ] },
+	{ include: [ 'undo', 'redo' ] },
 	// No formatting
 	/* {
-		'type': 'menu',
-		'indicator': 'down',
-		'title': OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
-		'include': [ { 'group': 'format' } ],
-		'promote': [ 'paragraph' ],
-		'demote': [ 'preformatted', 'heading1' ]
+		type: 'menu',
+		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
+		include: [ { group: 'format' } ],
+		promote: [ 'paragraph' ],
+		demote: [ 'preformatted', 'heading1' ]
 	},*/
 	// Style
 	{
-		'type': 'list',
-		'icon': 'text-style',
-		'indicator': 'down',
-		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		'include': [ { 'group': 'textStyle' }, 'language', 'clear' ],
-		'promote': [ 'bold', 'italic' ],
-		'demote': [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
+		type: 'list',
+		icon: 'text-style',
+		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		promote: [ 'bold', 'italic' ],
+		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
 	// Link
-	{ 'include': [ 'link' ] },
+	{ include: [ 'link' ] },
 	// Cite
 	{
-		'type': 'list',
-		'label': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		'indicator': 'down',
-		'include': [ { 'group': 'cite' }, 'reference', 'reference/existing' ],
-		'demote': [ 'reference', 'reference/existing' ]
+		type: 'list',
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
+		indicator: 'down',
+		include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
+		demote: [ 'reference', 'reference/existing' ]
 	},
 	// No structure
 	/* {
-		'type': 'list',
-		'icon': 'bullet-list',
-		'indicator': 'down',
-		'include': [ { 'group': 'structure' } ],
-		'demote': [ 'outdent', 'indent' ]
+		type: 'list',
+		icon: 'bullet-list',
+		indicator: 'down',
+		include: [ { group: 'structure' } ],
+		demote: [ 'outdent', 'indent' ]
 	},*/
 	// Insert
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		'indicator': 'down',
-		'include': '*',
-		'exclude': [
-			{ 'group': 'format' },
-			{ 'group': 'structure' },
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		indicator: 'down',
+		include: '*',
+		exclude: [
+			{ group: 'format' },
+			{ group: 'structure' },
 			'referencesList',
 			'gallery'
 		],
-		'promote': [ 'media', 'transclusion' ],
-		'demote': [ 'specialcharacter' ]
+		promote: [ 'media', 'transclusion' ],
+		demote: [ 'specialcharacter' ]
 	}
 ];
 
@@ -154,8 +154,8 @@ ve.ui.MWMediaDialog.static.getPasteRules = function () {
 	return ve.extendObject(
 		ve.copy( ve.init.target.constructor.static.pasteRules ),
 		{
-			'all': {
-				'blacklist': OO.simpleArrayUnion(
+			all: {
+				blacklist: OO.simpleArrayUnion(
 					ve.getProp( ve.init.target.constructor.static.pasteRules, 'all', 'blacklist' ) || [],
 					[
 						// Tables (but not lists) are possible in wikitext with a leading
@@ -165,8 +165,8 @@ ve.ui.MWMediaDialog.static.getPasteRules = function () {
 					]
 				),
 				// Headings are also possible, but discouraged
-				'conversions': {
-					'mwHeading': 'paragraph'
+				conversions: {
+					mwHeading: 'paragraph'
 				}
 			}
 		}
@@ -194,21 +194,21 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
 
-	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
+	this.panels = new OO.ui.StackLayout( { $: this.$ } );
 
 	// Set up the booklet layout
 	this.bookletLayout = new OO.ui.BookletLayout( {
-		'$': this.$,
-		'outlined': true
+		$: this.$,
+		outlined: true
 	} );
 
 	this.mediaSearchPanel = new OO.ui.PanelLayout( {
-		'$': this.$,
-		'scrollable': true
+		$: this.$,
+		scrollable: true
 	} );
 
-	this.generalSettingsPage = new OO.ui.PageLayout( 'general', { '$': this.$ } );
-	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced', { '$': this.$ } );
+	this.generalSettingsPage = new OO.ui.PageLayout( 'general', { $: this.$ } );
+	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced', { $: this.$ } );
 	this.bookletLayout.addPages( [
 		this.generalSettingsPage, this.advancedSettingsPage
 	] );
@@ -220,7 +220,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		.setLabel( ve.msg( 'visualeditor-dialog-media-page-advanced' ) );
 
 	// Define the media search page
-	this.search = new ve.ui.MWMediaSearchWidget( { '$': this.$ } );
+	this.search = new ve.ui.MWMediaSearchWidget( { $: this.$ } );
 
 	this.$body.append( this.search.$spinner );
 
@@ -228,20 +228,20 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Caption
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-content-section' ),
-		'icon': 'parameter'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
+		icon: 'parameter'
 	} );
 
 	// Alt text
 	altTextFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-alttext-section' ),
-		'icon': 'parameter'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
+		icon: 'parameter'
 	} );
 
 	this.altTextInput = new OO.ui.TextInputWidget( {
-		'$': this.$
+		$: this.$
 	} );
 
 	this.altTextInput.$element.addClass( 've-ui-mwMediaDialog-altText' );
@@ -252,23 +252,23 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Position
 	this.positionInput =  new OO.ui.ButtonSelectWidget( {
-		'$': this.$
+		$: this.$
 	} );
 
 	alignLeftButton = new OO.ui.ButtonOptionWidget( 'left', {
-		'$': this.$,
-		'icon': 'align-float-left',
-		'label': ve.msg( 'visualeditor-dialog-media-position-left' )
+		$: this.$,
+		icon: 'align-float-left',
+		label: ve.msg( 'visualeditor-dialog-media-position-left' )
 	} );
 	alignCenterButton = new OO.ui.ButtonOptionWidget( 'center', {
-		'$': this.$,
-		'icon': 'align-center',
-		'label': ve.msg( 'visualeditor-dialog-media-position-center' )
+		$: this.$,
+		icon: 'align-center',
+		label: ve.msg( 'visualeditor-dialog-media-position-center' )
 	} );
 	alignRightButton = new OO.ui.ButtonOptionWidget( 'right', {
-		'$': this.$,
-		'icon': 'align-float-right',
-		'label': ve.msg( 'visualeditor-dialog-media-position-right' )
+		$: this.$,
+		icon: 'align-float-right',
+		label: ve.msg( 'visualeditor-dialog-media-position-right' )
 	} );
 
 	alignButtons = ( this.getDir() === 'ltr' ) ?
@@ -278,18 +278,18 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.positionInput.addItems( alignButtons, 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
-		'$': this.$
+		$: this.$
 	} );
 	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
-		'$': this.$,
-		'align': 'inline',
-		'label': ve.msg( 'visualeditor-dialog-media-position-checkbox' )
+		$: this.$,
+		align: 'inline',
+		label: ve.msg( 'visualeditor-dialog-media-position-checkbox' )
 	} );
 
 	positionFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-position-section' ),
-		'icon': 'parameter'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-position-section' ),
+		icon: 'parameter'
 	} );
 
 	// Build position fieldset
@@ -300,44 +300,44 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Type
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-type-section' ),
-		'icon': 'parameter'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
+		icon: 'parameter'
 	} );
 
 	this.typeInput = new OO.ui.ButtonSelectWidget( {
-		'$': this.$
+		$: this.$
 	} );
 	this.typeInput.addItems( [
 		// TODO: Inline images require a bit of further work, will be coming soon
 		new OO.ui.ButtonOptionWidget( 'thumb', {
-			'$': this.$,
-			'icon': 'image-thumbnail',
-			'label': ve.msg( 'visualeditor-dialog-media-type-thumb' )
+			$: this.$,
+			icon: 'image-thumbnail',
+			label: ve.msg( 'visualeditor-dialog-media-type-thumb' )
 		} ),
 		new OO.ui.ButtonOptionWidget( 'frameless', {
-			'$': this.$,
-			'icon': 'image-frameless',
-			'label': ve.msg( 'visualeditor-dialog-media-type-frameless' )
+			$: this.$,
+			icon: 'image-frameless',
+			label: ve.msg( 'visualeditor-dialog-media-type-frameless' )
 		} ),
 		new OO.ui.ButtonOptionWidget( 'frame', {
-			'$': this.$,
-			'icon': 'image-frame',
-			'label': ve.msg( 'visualeditor-dialog-media-type-frame' )
+			$: this.$,
+			icon: 'image-frame',
+			label: ve.msg( 'visualeditor-dialog-media-type-frame' )
 		} ),
 		new OO.ui.ButtonOptionWidget( 'none', {
-			'$': this.$,
-			'icon': 'image-none',
-			'label': ve.msg( 'visualeditor-dialog-media-type-none' )
+			$: this.$,
+			icon: 'image-none',
+			label: ve.msg( 'visualeditor-dialog-media-type-none' )
 		} )
 	] );
 	this.borderCheckbox = new OO.ui.CheckboxInputWidget( {
-		'$': this.$
+		$: this.$
 	} );
 	borderField = new OO.ui.FieldLayout( this.borderCheckbox, {
-		'$': this.$,
-		'align': 'inline',
-		'label': ve.msg( 'visualeditor-dialog-media-type-border' )
+		$: this.$,
+		align: 'inline',
+		label: ve.msg( 'visualeditor-dialog-media-type-border' )
 	} );
 
 	// Build type fieldset
@@ -348,18 +348,18 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-size-section' ),
-		'icon': 'parameter'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-size-section' ),
+		icon: 'parameter'
 	} );
 
 	this.sizeErrorLabel = new OO.ui.LabelWidget( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
 	} );
 
 	this.sizeWidget = new ve.ui.MediaSizeWidget( {}, {
-		'$': this.$
+		$: this.$
 	} );
 
 	this.$sizeWidgetElements = this.$( '<div>' ).append(
@@ -372,12 +372,12 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	);
 
 	// Events
-	this.positionCheckbox.connect( this, { 'change': 'onPositionCheckboxChange' } );
-	this.borderCheckbox.connect( this, { 'change': 'onBorderCheckboxChange' } );
-	this.positionInput.connect( this, { 'choose': 'onPositionInputChoose' } );
-	this.typeInput.connect( this, { 'choose': 'onTypeInputChoose' } );
-	this.search.connect( this, { 'select': 'onSearchSelect' } );
-	this.altTextInput.connect( this, { 'change': 'setChanged' } );
+	this.positionCheckbox.connect( this, { change: 'onPositionCheckboxChange' } );
+	this.borderCheckbox.connect( this, { change: 'onBorderCheckboxChange' } );
+	this.positionInput.connect( this, { choose: 'onPositionInputChoose' } );
+	this.typeInput.connect( this, { choose: 'onTypeInputChoose' } );
+	this.search.connect( this, { select: 'onSearchSelect' } );
+	this.altTextInput.connect( this, { change: 'setChanged' } );
 
 	// Panel classes
 	this.mediaSearchPanel.$element.addClass( 've-ui-mwMediaDialog-panel-search' );
@@ -412,10 +412,10 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 		info = item.imageinfo[0];
 		attrs = {
 			// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
-			'href': './' + item.title,
-			'src': info.thumburl,
-			'resource': './' + item.title,
-			'mediaType': info.mediatype
+			href: './' + item.title,
+			src: info.thumburl,
+			resource: './' + item.title,
+			mediaType: info.mediatype
 		};
 
 		if ( !this.imageModel ) {
@@ -570,7 +570,7 @@ ve.ui.MWMediaDialog.prototype.onTypeInputChoose = function ( item ) {
 ve.ui.MWMediaDialog.prototype.setChanged = function () {
 	// TODO: Set up a better and deeper test of whether the new
 	// image parameters are different than the original image
-	this.actions.setAbilities( { 'insert': true, 'apply': true } );
+	this.actions.setAbilities( { insert: true, apply: true } );
 };
 
 /**
@@ -580,14 +580,14 @@ ve.ui.MWMediaDialog.prototype.setChanged = function () {
  */
 ve.ui.MWMediaDialog.prototype.getFileRepos = function () {
 	var defaultSource = [ {
-			'url': mw.util.wikiScript( 'api' ),
-			'local': true
+			url: mw.util.wikiScript( 'api' ),
+			local: true
 		} ];
 
 	if ( !this.fileRepoPromise ) {
 		this.fileRepoPromise = ve.init.target.constructor.static.apiRequest( {
-			'action': 'query',
-			'meta': 'filerepoinfo'
+			action: 'query',
+			meta: 'filerepoinfo'
 		} ).then(
 			function ( resp ) {
 				return resp.query && resp.query.repos || defaultSource;
@@ -627,7 +627,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 
-			this.actions.setAbilities( { 'insert': false, 'apply': false } );
+			this.actions.setAbilities( { insert: false, apply: false } );
 
 			// Initialization
 			this.captionFieldset.$element.append( this.captionSurface.$element );
@@ -720,13 +720,13 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( attrs ) {
 
 	this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes( attrs, dir );
 
-	this.actions.setAbilities( { 'insert': true, 'apply': true } );
+	this.actions.setAbilities( { insert: true, apply: true } );
 
 	// Events
 	this.imageModel.connect( this, {
-		'alignmentChange': 'onImageModelAlignmentChange',
-		'typeChange': 'onImageModelTypeChange',
-		'sizeDefaultChange': 'setChanged'
+		alignmentChange: 'onImageModelAlignmentChange',
+		typeChange: 'onImageModelTypeChange',
+		sizeDefaultChange: 'setChanged'
 	} );
 
 	// Set up
@@ -734,8 +734,8 @@ ve.ui.MWMediaDialog.prototype.setImageModel = function ( attrs ) {
 	// Size widget
 	this.sizeErrorLabel.$element.hide();
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
-	this.sizeWidget.connect( this, { 'changeSizeType': 'setChanged' } );
-	this.sizeWidget.connect( this, { 'change': 'setChanged' } );
+	this.sizeWidget.connect( this, { changeSizeType: 'setChanged' } );
+	this.sizeWidget.connect( this, { change: 'setChanged' } );
 
 	// Initialize size
 	this.sizeWidget.setSizeType(
@@ -817,10 +817,10 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		captionDocument = this.imageModel.getCaptionDocument();
 	} else {
 		captionDocument = new ve.dm.Document( [
-			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
-			{ 'type': '/paragraph' },
-			{ 'type': 'internalList' },
-			{ 'type': '/internalList' }
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
 		] );
 	}
 
@@ -830,16 +830,16 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	this.captionSurface = new ve.ui.SurfaceWidget(
 		captionDocument,
 		{
-			'$': this.$,
-			'tools': this.constructor.static.toolbarGroups,
-			'commands': this.constructor.static.surfaceCommands,
-			'pasteRules': this.constructor.static.getPasteRules()
+			$: this.$,
+			tools: this.constructor.static.toolbarGroups,
+			commands: this.constructor.static.surfaceCommands,
+			pasteRules: this.constructor.static.getPasteRules()
 		}
 	);
 
 	// Events
 	this.captionSurface.getSurface().getModel().connect( this, {
-		'documentUpdate': function () {
+		documentUpdate: function () {
 			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
 				this.captionSurface.getSurface(),
 				this.wikitextWarning
@@ -935,7 +935,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 				}
 			}
 
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 	return ve.ui.MWMediaDialog.super.prototype.getActionProcess.call( this, action );

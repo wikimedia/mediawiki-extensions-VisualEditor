@@ -30,7 +30,7 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	this.choosing = false;
 
 	// Events
-	this.lookupMenu.connect( this, { 'choose': 'onLookupMenuItemChoose' } );
+	this.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwLinkTargetInputWidget' );
@@ -101,13 +101,13 @@ ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 	if ( mw.Title.newFromText( this.value ) ) {
 		return ve.init.target.constructor.static.apiRequest( {
-			'action': 'query',
-			'generator': 'prefixsearch',
-			'gpssearch': this.value,
-			'gpsnamespace': 0,
-			'prop': 'info|pageprops',
-			'ppprop': 'disambiguation',
-			'redirect': ''
+			action: 'query',
+			generator: 'prefixsearch',
+			gpssearch: this.value,
+			gpsnamespace: 0,
+			prop: 'info|pageprops',
+			ppprop: 'disambiguation',
+			redirect: ''
 		} );
 	} else {
 		// Don't send invalid titles to the API.
@@ -168,11 +168,11 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'externalLink',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-external-link' ) }
+			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-external-link' ) }
 		) );
 		items.push( new OO.ui.MenuItemWidget(
 			this.getExternalLinkAnnotationFromUrl( this.value ),
-			{ '$': menu$, 'rel': 'externalLink', 'label': this.value }
+			{ $: menu$, rel: 'externalLink', label: this.value }
 		) );
 	}
 
@@ -181,17 +181,17 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 		if ( titleObj ) {
 			items.push( new OO.ui.MenuSectionItemWidget(
 				'newPage',
-				{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-new-page' ) }
+				{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-new-page' ) }
 			) );
 			items.push( new OO.ui.MenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( this.value ),
-				{ '$': menu$, 'rel': 'newPage', 'label': this.value }
+				{ $: menu$, rel: 'newPage', label: this.value }
 			) );
 		} else {
 			// If no title object could be created, it means the title is illegal
 			item = new OO.ui.MenuSectionItemWidget(
 				'illegalTitle',
-				{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-illegal-title' ) }
+				{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-illegal-title' ) }
 			);
 			item.$element.addClass( 've-ui-mwLinkTargetInputWidget-warning' );
 			items.push( item );
@@ -202,7 +202,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( matchingPages && matchingPages.length ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'matchingPages',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-matching-page', matchingPages.length ) }
+			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-matching-page', matchingPages.length ) }
 		) );
 		// Offer the exact text as a suggestion if the page exists
 		if ( pageExists && !pageExistsExact ) {
@@ -211,7 +211,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
 			items.push( new OO.ui.MenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( matchingPages[i] ),
-				{ '$': menu$, 'rel': 'matchingPage', 'label': matchingPages[i] }
+				{ $: menu$, rel: 'matchingPage', label: matchingPages[i] }
 			) );
 		}
 	}
@@ -220,12 +220,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( disambigPages.length ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'disambigPages',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length ) }
+			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length ) }
 		) );
 		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
 			items.push( new OO.ui.MenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( disambigPages[i] ),
-				{ '$': menu$, 'rel': 'disambigPage', 'label': disambigPages[i] }
+				{ $: menu$, rel: 'disambigPage', label: disambigPages[i] }
 			) );
 		}
 	}
@@ -234,12 +234,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	if ( redirectPages.length ) {
 		items.push( new OO.ui.MenuSectionItemWidget(
 			'redirectPages',
-			{ '$': menu$, 'label': ve.msg( 'visualeditor-linkinspector-suggest-redirect-page', redirectPages.length ) }
+			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-redirect-page', redirectPages.length ) }
 		) );
 		for ( i = 0, len = redirectPages.length; i < len; i++ ) {
 			items.push( new OO.ui.MenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( redirectPages[i] ),
-				{ '$': menu$, 'rel': 'redirectPage', 'label': redirectPages[i] }
+				{ $: menu$, rel: 'redirectPage', label: redirectPages[i] }
 			) );
 		}
 	}
@@ -308,12 +308,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getInternalLinkAnnotationFromTitle = fun
 	}
 
 	return new ve.dm.MWInternalLinkAnnotation( {
-		'type': 'link/mwInternal',
-		'attributes': {
-			'title': target,
+		type: 'link/mwInternal',
+		attributes: {
+			title: target,
 			// bug 62816: we really need a builder for this stuff
-			'normalizedTitle': ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
-			'lookupTitle': ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
+			normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
+			lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
 		}
 	} );
 };
@@ -327,9 +327,9 @@ ve.ui.MWLinkTargetInputWidget.prototype.getInternalLinkAnnotationFromTitle = fun
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getExternalLinkAnnotationFromUrl = function ( target ) {
 	return new ve.dm.MWExternalLinkAnnotation( {
-		'type': 'link/mwExternal',
-		'attributes': {
-			'href': target
+		type: 'link/mwExternal',
+		attributes: {
+			href: target
 		}
 	} );
 };

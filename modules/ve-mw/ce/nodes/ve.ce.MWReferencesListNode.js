@@ -34,7 +34,7 @@ ve.ce.MWReferencesListNode = function VeCeMWReferencesListNode( model, config ) 
 		.addClass( 've-ce-mwReferencesListNode-muted' );
 
 	// Events
-	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
+	this.model.connect( this, { attributeChange: 'onAttributeChange' } );
 
 	// Initialization
 	this.update();
@@ -74,8 +74,8 @@ ve.ce.MWReferencesListNode.prototype.onSetup = function () {
 	this.internalList = this.model.getDocument().getInternalList();
 	this.listNode = this.internalList.getListNode();
 
-	this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
-	this.listNode.connect( this, { 'update': 'onListNodeUpdate' } );
+	this.internalList.connect( this, { update: 'onInternalListUpdate' } );
+	this.listNode.connect( this, { update: 'onListNodeUpdate' } );
 
 	// Parent method
 	ve.ce.LeafNode.prototype.onSetup.call( this );
@@ -87,8 +87,8 @@ ve.ce.MWReferencesListNode.prototype.onSetup = function () {
  * @method
  */
 ve.ce.MWReferencesListNode.prototype.onTeardown = function () {
-	this.internalList.disconnect( this, { 'update': 'onInternalListUpdate' } );
-	this.listNode.disconnect( this, { 'update': 'onListNodeUpdate' } );
+	this.internalList.disconnect( this, { update: 'onInternalListUpdate' } );
+	this.listNode.disconnect( this, { update: 'onListNodeUpdate' } );
 
 	this.internalList = null;
 	this.listNode = null;

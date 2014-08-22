@@ -21,7 +21,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	// Configuration initialization
 	config = ve.extendObject( {
-		'scrollable': false
+		scrollable: false
 	}, config );
 
 	// Parent constructor
@@ -38,47 +38,47 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$more = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
 	this.valueInput = new OO.ui.TextInputWidget( {
-		'$': this.$,
-		'multiline': true,
-		'autosize': true,
-		'placeholder': this.defaultValue
+		$: this.$,
+		multiline: true,
+		autosize: true,
+		placeholder: this.defaultValue
 	} )
 		.setValue( this.parameter.getValue() )
-		.connect( this, { 'change': 'onValueInputChange' } );
+		.connect( this, { change: 'onValueInputChange' } );
 
 	if ( this.parameter.isRequired() ) {
 		this.valueInput.$input.prop( 'required', true );
 	}
 
 	this.removeButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'remove',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-		'classes': [ 've-ui-mwParameterPage-removeButton' ]
+		$: this.$,
+		framed: false,
+		icon: 'remove',
+		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+		classes: [ 've-ui-mwParameterPage-removeButton' ]
 	} )
-		.connect( this, { 'click': 'onRemoveButtonClick' } );
+		.connect( this, { click: 'onRemoveButtonClick' } );
 
 	this.infoButton = new OO.ui.PopupButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'info',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
-		'classes': [ 've-ui-mwParameterPage-infoButton' ]
+		$: this.$,
+		framed: false,
+		icon: 'info',
+		title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
+		classes: [ 've-ui-mwParameterPage-infoButton' ]
 	} );
 
 	this.addButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'parameter',
-		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		'tabIndex': -1
+		$: this.$,
+		framed: false,
+		icon: 'parameter',
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		tabIndex: -1
 	} )
-		.connect( this, { 'click': 'onAddButtonFocus' } );
+		.connect( this, { click: 'onAddButtonFocus' } );
 
 	this.statusIndicator = new OO.ui.IndicatorWidget( {
-		'$': this.$,
-		'classes': [ 've-ui-mwParameterPage-statusIndicator' ]
+		$: this.$,
+		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
 	} );
 
 	// TODO: Use spec.type
@@ -169,7 +169,7 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	this.parameter.setValue( value );
 
 	if ( this.outlineItem ) {
-		this.outlineItem.setFlags( { 'empty': this.isEmpty() } );
+		this.outlineItem.setFlags( { empty: this.isEmpty() } );
 	}
 };
 
@@ -199,7 +199,7 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
 			.setMovable( false )
 			.setRemovable( true )
 			.setLevel( 1 )
-			.setFlags( { 'empty': this.isEmpty() } )
+			.setFlags( { empty: this.isEmpty() } )
 			.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
 
 		if ( this.parameter.isRequired() ) {

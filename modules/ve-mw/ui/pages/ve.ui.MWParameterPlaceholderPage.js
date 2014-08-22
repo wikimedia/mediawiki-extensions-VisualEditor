@@ -19,7 +19,7 @@
 ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( parameter, name, config ) {
 	// Configuration initialization
 	config = ve.extendObject( {
-		'scrollable': false
+		scrollable: false
 	}, config );
 
 	// Parent constructor
@@ -28,24 +28,24 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	// Properties
 	this.parameter = parameter;
 	this.template = this.parameter.getTemplate();
-	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, { '$': this.$ } )
-		.connect( this, { 'select': 'onParameterSelect' } );
+	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, { $: this.$ } )
+		.connect( this, { select: 'onParameterSelect' } );
 
 	this.removeButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'remove',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-		'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
+		$: this.$,
+		framed: false,
+		icon: 'remove',
+		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
 	} )
-		.connect( this, { 'click': 'onRemoveButtonClick' } );
+		.connect( this, { click: 'onRemoveButtonClick' } );
 
 	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		'icon': 'parameter',
-		'classes': [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
-		'$content': this.addParameterSearch.$element
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		icon: 'parameter',
+		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
+		$content: this.addParameterSearch.$element
 	} );
 
 	// Initialization

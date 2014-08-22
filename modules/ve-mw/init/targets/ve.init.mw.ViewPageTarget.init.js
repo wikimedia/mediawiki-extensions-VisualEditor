@@ -62,7 +62,7 @@
 	// exposed to mw.config (see BUG 53774), so we assume it exists.
 	pageExists = !!mw.config.get( 'wgArticleId' ) || mw.config.get( 'wgNamespaceNumber' ) < 0;
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
-	veEditUri = viewUri.clone().extend( { 'veaction': 'edit' } );
+	veEditUri = viewUri.clone().extend( { veaction: 'edit' } );
 	isViewPage = (
 		mw.config.get( 'wgIsArticle' ) &&
 		!( 'diff' in uri.query )
@@ -289,7 +289,7 @@
 						$editLink
 							.attr( 'href', function ( i, val ) {
 								return new mw.Uri( veEditUri ).extend( {
-									'vesection': new mw.Uri( val ).query.section
+									vesection: new mw.Uri( val ).query.section
 								} );
 							} )
 							.addClass( 'mw-editsection-visualeditor' );

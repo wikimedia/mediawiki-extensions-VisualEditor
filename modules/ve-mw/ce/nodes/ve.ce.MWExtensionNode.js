@@ -9,8 +9,8 @@
  * ContentEditable MediaWiki extension node.
  *
  * Configuration options for .update():
- * - 'extsrc': override the contents of the tag (string)
- * - 'attrs': override the attributes of the tag (object)
+ * - extsrc: override the contents of the tag (string)
+ * - attrs: override the attributes of the tag (object)
  *
  * @class
  * @abstract
@@ -58,11 +58,11 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 
 	if ( !this.constructor.static.rendersEmpty && extsrc.trim() !== '' ) {
 		xhr = ve.init.target.constructor.static.apiRequest( {
-			'action': 'visualeditor',
-			'paction': 'parsefragment',
-			'page': mw.config.get( 'wgRelevantPageName' ),
-			'wikitext': wikitext
-		}, { 'type': 'POST' } )
+			action: 'visualeditor',
+			paction: 'parsefragment',
+			page: mw.config.get( 'wgRelevantPageName' ),
+			wikitext: wikitext
+		}, { type: 'POST' } )
 			.done( this.onParseSuccess.bind( this, deferred ) )
 			.fail( this.onParseError.bind( this, deferred ) );
 		return deferred.promise( { abort: xhr.abort } );

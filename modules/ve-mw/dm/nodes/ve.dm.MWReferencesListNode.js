@@ -44,13 +44,13 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 		listGroup = 'mwReference/' + refGroup;
 
 	referencesListData = {
-		'type': this.name,
-		'attributes': {
-			'mw': mwData,
-			'originalMw': mwDataJSON,
-			'domElements': ve.copy( domElements ),
-			'refGroup': refGroup,
-			'listGroup': listGroup
+		type: this.name,
+		attributes: {
+			mw: mwData,
+			originalMw: mwDataJSON,
+			domElements: ve.copy( domElements ),
+			refGroup: refGroup,
+			listGroup: listGroup
 		}
 	};
 	if ( mwData.body && mwData.body.html ) {
@@ -58,7 +58,7 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 		contentsData = converter.getDataFromDomClean( $contents[0] );
 		return [ referencesListData ].
 			concat( contentsData ).
-			concat( [ { 'type': '/' + this.name } ] );
+			concat( [ { type: '/' + this.name } ] );
 	} else {
 		return referencesListData;
 	}

@@ -18,7 +18,7 @@
 ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	// Configuration intialization
 	config = ve.extendObject( {
-		'placeholder': ve.msg( 'visualeditor-media-input-placeholder' )
+		placeholder: ve.msg( 'visualeditor-media-input-placeholder' )
 	}, config );
 
 	// Parent constructor
@@ -127,35 +127,35 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 			}
 			if ( source.local ) {
 				ajaxOptions = {
-					'url': mw.util.wikiScript( 'api' ),
+					url: mw.util.wikiScript( 'api' ),
 					// If the url is local use json
-					'dataType': 'json'
+					dataType: 'json'
 				};
 			} else {
 				ajaxOptions = {
 					// If 'apiurl' is set, use that. Otherwise, build the url
 					// from scriptDirUrl and /api.php suffix
-					'url': source.apiurl || ( source.scriptDirUrl + '/api.php' ),
+					url: source.apiurl || ( source.scriptDirUrl + '/api.php' ),
 					// If the url is not the same origin use jsonp
-					'dataType': 'jsonp',
+					dataType: 'jsonp',
 					// JSON-P requests are not cached by default and get a &_=random trail.
 					// While setting cache=true will still bypass cache in most case due to the
 					// callback parameter, at least drop the &_=random trail which triggers
 					// an API warning (invalid parameter).
-					'cache': true
+					cache: true
 				};
 			}
 			this.query.pushPending();
 			request = ve.init.target.constructor.static.apiRequest( {
-				'action': 'query',
-				'generator': 'search',
-				'gsrsearch': value,
-				'gsrnamespace': 6,
-				'gsrlimit': 20,
-				'gsroffset': source.gsroffset,
-				'prop': 'imageinfo',
-				'iiprop': 'dimensions|url|mediatype',
-				'iiurlheight': this.size
+				action: 'query',
+				generator: 'search',
+				gsrsearch: value,
+				gsrnamespace: 6,
+				gsrlimit: 20,
+				gsroffset: source.gsroffset,
+				prop: 'imageinfo',
+				iiprop: 'dimensions|url|mediatype',
+				iiurlheight: this.size
 			}, ajaxOptions )
 				.done( this.onMediaQueryDone.bind( this, source ) );
 			source.value = value;
@@ -218,7 +218,7 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 				items.push(
 					new ve.ui.MWMediaResultWidget(
 						pages[page],
-						{ '$': this.$, 'size': this.size }
+						{ $: this.$, size: this.size }
 					)
 				);
 			}

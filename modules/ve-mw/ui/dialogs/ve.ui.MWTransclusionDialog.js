@@ -35,8 +35,8 @@ ve.ui.MWTransclusionDialog.static.title =
 
 ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.actions.concat( [
 	{
-		'action': 'mode',
-		'modes': [ 'edit', 'insert' ]
+		action: 'mode',
+		modes: [ 'edit', 'insert' ]
 	}
 ] );
 
@@ -48,14 +48,14 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
  * @inheritable
  */
 ve.ui.MWTransclusionDialog.static.modeCssClasses = {
-	'single': 've-ui-mwTransclusionDialog-single',
-	'multiple': 've-ui-mwTransclusionDialog-multiple'
+	single: 've-ui-mwTransclusionDialog-single',
+	multiple: 've-ui-mwTransclusionDialog-multiple'
 };
 
 ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 	{},
 	ve.ui.MWTemplateDialog.static.bookletLayoutConfig,
-	{ 'outlined': true, 'editable': true }
+	{ outlined: true, editable: true }
 );
 
 /* Methods */
@@ -165,8 +165,8 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	label = ve.msg( 'visualeditor-dialog-action-insert' );
 
 	this.actions
-		.setAbilities( { 'mode': single } )
-		.forEach( { 'actions': 'insert' }, function ( action ) {
+		.setAbilities( { mode: single } )
+		.forEach( { actions: 'insert' }, function ( action ) {
 			action.setLabel( label );
 		} );
 };
@@ -191,7 +191,7 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () 
 ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 	var page = ve.ui.MWTransclusionDialog.super.prototype.getPageFromPart.call( this, part );
 	if ( !page && part instanceof ve.dm.MWTransclusionContentModel ) {
-		return new ve.ui.MWTransclusionContentPage( part, part.getId(), { '$': this.$ } );
+		return new ve.ui.MWTransclusionContentPage( part, part.getId(), { $: this.$ } );
 	}
 	return page;
 };
@@ -228,7 +228,7 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 	this.bookletLayout.toggleOutline( !single );
 	this.updateTitle();
 
-	this.actions.forEach( { 'actions': [ 'mode' ] }, function ( action ) {
+	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
 		action.setLabel(
 			single ?
 				ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' ) :
@@ -294,34 +294,34 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 
 	// Properties
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'template',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-add-template' )
+		$: this.$,
+		framed: false,
+		icon: 'template',
+		title: ve.msg( 'visualeditor-dialog-transclusion-add-template' )
 	} );
 	this.addContentButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'source',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-add-content' )
+		$: this.$,
+		framed: false,
+		icon: 'source',
+		title: ve.msg( 'visualeditor-dialog-transclusion-add-content' )
 	} );
 	this.addParameterButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'parameter',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-add-param' )
+		$: this.$,
+		framed: false,
+		icon: 'parameter',
+		title: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 	} );
 
 	// Events
-	this.bookletLayout.connect( this, { 'set': 'onBookletLayoutSet' } );
-	this.addTemplateButton.connect( this, { 'click': 'onAddTemplateButtonClick' } );
-	this.addContentButton.connect( this, { 'click': 'onAddContentButtonClick' } );
-	this.addParameterButton.connect( this, { 'click': 'onAddParameterButtonClick' } );
+	this.bookletLayout.connect( this, { set: 'onBookletLayoutSet' } );
+	this.addTemplateButton.connect( this, { click: 'onAddTemplateButtonClick' } );
+	this.addContentButton.connect( this, { click: 'onAddContentButtonClick' } );
+	this.addParameterButton.connect( this, { click: 'onAddParameterButtonClick' } );
 	this.bookletLayout.getOutlineControls()
 		.addItems( [ this.addTemplateButton, this.addContentButton, this.addParameterButton ] )
 		.connect( this, {
-			'move': 'onOutlineControlsMove',
-			'remove': 'onOutlineControlsRemove'
+			move: 'onOutlineControlsMove',
+			remove: 'onOutlineControlsRemove'
 		} );
 };
 
@@ -332,7 +332,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			this.setMode( 'single' );
-			this.actions.setAbilities( { 'mode': false } );
+			this.actions.setAbilities( { mode: false } );
 		}, this );
 };
 

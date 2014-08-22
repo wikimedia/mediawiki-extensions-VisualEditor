@@ -21,7 +21,7 @@
  */
 ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	// Config intialization
-	config = ve.extendObject( { 'indicator': 'down' }, config );
+	config = ve.extendObject( { indicator: 'down' }, config );
 
 	// Parent constructor
 	OO.ui.Widget.call( this, config );
@@ -41,8 +41,8 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 
 	// Events
 	this.$categoryItem.on( {
-		'click': this.onClick.bind( this ),
-		'mousedown': this.onMouseDown.bind( this )
+		click: this.onClick.bind( this ),
+		mousedown: this.onMouseDown.bind( this )
 	} );
 
 	// Initialization

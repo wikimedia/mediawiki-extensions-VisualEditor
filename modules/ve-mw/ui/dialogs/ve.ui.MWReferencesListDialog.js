@@ -38,21 +38,21 @@ ve.ui.MWReferencesListDialog.static.size = 'medium';
 
 ve.ui.MWReferencesListDialog.static.actions = [
 	{
-		'action': 'apply',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		'flags': 'primary',
-		'modes': 'edit'
+		action: 'apply',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		flags: 'primary',
+		modes: 'edit'
 	},
 	{
-		'action': 'insert',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		'flags': [ 'primary', 'constructive' ],
-		'modes': 'insert'
+		action: 'insert',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
+		flags: [ 'primary', 'constructive' ],
+		modes: 'insert'
 	},
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		'flags': 'safe',
-		'modes': [ 'insert', 'edit' ]
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: 'safe',
+		modes: [ 'insert', 'edit' ]
 	}
 ];
 
@@ -73,22 +73,22 @@ ve.ui.MWReferencesListDialog.prototype.initialize = function () {
 	ve.ui.MWReferencesListDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
+	this.panels = new OO.ui.StackLayout( { $: this.$ } );
 	this.editPanel = new OO.ui.PanelLayout( {
-		'$': this.$, 'scrollable': true, 'padded': true
+		$: this.$, scrollable: true, padded: true
 	} );
 	this.optionsFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$
+		$: this.$
 	} );
 
 	this.groupInput = new OO.ui.TextInputWidget( {
-		'$': this.$,
-		'placeholder': ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
+		$: this.$,
+		placeholder: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.groupField = new OO.ui.FieldLayout( this.groupInput, {
-		'$': this.$,
-		'align': 'top',
-		'label': ve.msg( 'visualeditor-dialog-reference-options-group-label' )
+		$: this.$,
+		align: 'top',
+		label: ve.msg( 'visualeditor-dialog-reference-options-group-label' )
 	} );
 
 	// Initialization
@@ -131,17 +131,17 @@ ve.ui.MWReferencesListDialog.prototype.getActionProcess = function ( action ) {
 				// Collapse returns a new fragment, so update this.fragment
 				this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
 					{
-						'type': 'mwReferencesList',
-						'attributes': {
-							'listGroup': listGroup,
-							'refGroup': refGroup
+						type: 'mwReferencesList',
+						attributes: {
+							listGroup: listGroup,
+							refGroup: refGroup
 						}
 					},
-					{ 'type': '/mwReferencesList' }
+					{ type: '/mwReferencesList' }
 				] );
 			}
 
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 	// Parent method

@@ -20,8 +20,8 @@ ve.dm.MWReferenceNode = function VeDmMWReferenceNode() {
 
 	// Event handlers
 	this.connect( this, {
-		'root': 'onRoot',
-		'unroot': 'onUnroot'
+		root: 'onRoot',
+		unroot: 'onUnroot'
 	} );
 };
 
@@ -63,16 +63,16 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 		contentsUsed = ( body !== '' && queueResult.isNew );
 
 	dataElement = {
-		'type': this.name,
-		'attributes': {
-			'mw': mwData,
-			'originalMw': mwDataJSON,
-			'childDomElements': ve.copy( Array.prototype.slice.apply( domElements[0].childNodes ) ),
-			'listIndex': listIndex,
-			'listGroup': listGroup,
-			'listKey': listKey,
-			'refGroup': refGroup,
-			'contentsUsed': contentsUsed
+		type: this.name,
+		attributes: {
+			mw: mwData,
+			originalMw: mwDataJSON,
+			childDomElements: ve.copy( Array.prototype.slice.apply( domElements[0].childNodes ) ),
+			listIndex: listIndex,
+			listGroup: listGroup,
+			listKey: listKey,
+			refGroup: refGroup,
+			contentsUsed: contentsUsed
 		}
 	};
 	return dataElement;
