@@ -27,6 +27,7 @@ Chris McMahon <cmcmahon@wikimedia.org>
 Erik Moeller <erik@wikimedia.org>
 Gabriel Wicke <gwicke@wikimedia.org>
 Jeff Hall <jeffreyehall@gmail.com>
+Juliusz Gonera <jgonera@gmail.com>
 Matthew Flaschen <mflaschen@wikimedia.org>
 Neil Kandalgaonkar <neilk@brevity.org>
 Mark A. Hershberger <mah@everybody.org>
