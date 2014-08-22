@@ -13,11 +13,18 @@
 	overflow: visible;
 }
 
-/* Set opacity directly on the highlights, rather than their containers */
+/* Set opacity directly on the highlights, rather than their containers,
+   otherwise the opacity isn't applied at all */
 .ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight {
 	opacity: 0.5;
 }
 
 .ve-ce-surface-highlights-blurred .ve-ce-focusableNode-highlight {
 	opacity: 0.15;
+}
+
+/* Don't apply a background color to language annotations, otherwise the
+   text disappears if the span has dir="rtl" */
+.ve-ce-LanguageAnnotation {
+	background: none;
 }
