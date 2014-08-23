@@ -270,7 +270,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	} );
 
 	// Initialization
-	this.referenceGroupInput.setValue( this.referenceModel.getGroup() );
+	this.referenceGroupInput.input.setValue( this.referenceModel.getGroup() );
 	this.contentFieldset.$element.append( this.referenceSurface.$element );
 	this.referenceSurface.initialize();
 
@@ -296,10 +296,9 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-reference-options-section' ),
 		icon: 'settings'
 	} );
-	// TODO: Use a drop-down or something, and populate with existing groups instead of free-text
-	this.referenceGroupInput = new OO.ui.TextInputWidget( {
+	this.referenceGroupInput = new ve.ui.MWReferenceGroupInputWidget( {
 		$: this.$,
-		placeholder: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
+		emptyGroupName: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.referenceGroupField = new OO.ui.FieldLayout( this.referenceGroupInput, {
 		$: this.$,
@@ -342,7 +341,7 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
 		return new OO.ui.Process( function () {
 			var surfaceModel = this.getFragment().getSurface();
 
-			this.referenceModel.setGroup( this.referenceGroupInput.getValue() );
+			this.referenceModel.setGroup( this.referenceGroupInput.input.getValue() );
 
 			// Insert reference (will auto-create an internal item if needed)
 			if ( !( this.selectedNode instanceof ve.dm.MWReferenceNode ) ) {
@@ -401,6 +400,8 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 				select: !( this.selectedNode instanceof ve.dm.MWReferenceNode ) &&
 					!this.search.isIndexEmpty()
 			} );
+
+			this.referenceGroupInput.populateMenu( this.getFragment().getDocument().getInternalList() );
 		}, this );
 };
 

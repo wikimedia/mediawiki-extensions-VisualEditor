@@ -81,9 +81,9 @@ ve.ui.MWReferencesListDialog.prototype.initialize = function () {
 		$: this.$
 	} );
 
-	this.groupInput = new OO.ui.TextInputWidget( {
+	this.groupInput = new ve.ui.MWReferenceGroupInputWidget( {
 		$: this.$,
-		placeholder: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
+		emptyGroupName: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.groupField = new OO.ui.FieldLayout( this.groupInput, {
 		$: this.$,
@@ -108,7 +108,7 @@ ve.ui.MWReferencesListDialog.prototype.getActionProcess = function ( action ) {
 				surfaceModel = this.getFragment().getSurface();
 
 			// Save changes
-			refGroup = this.groupInput.getValue();
+			refGroup = this.groupInput.input.getValue();
 			listGroup = 'mwReference/' + refGroup;
 
 			if ( this.selectedNode ) {
@@ -167,7 +167,8 @@ ve.ui.MWReferencesListDialog.prototype.getSetupProcess = function ( data ) {
 				this.actions.setMode( 'insert' );
 			}
 
-			this.groupInput.setValue( refGroup );
+			this.groupInput.input.setValue( refGroup );
+			this.groupInput.populateMenu( this.getFragment().getDocument().getInternalList() );
 		}, this );
 };
 
