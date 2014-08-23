@@ -4,7 +4,8 @@
 			"Singhalawap",
 			"පසිඳු කාවින්ද",
 			"ශ්වෙත",
-			"Sahan.ssw"
+			"Sahan.ssw",
+			"Indunil Chamara"
 		]
 	},
 	"tooltip-ca-createsource": "මෙම පිටුවේ ප්‍රභව කේතයන් නිර්මාණය කරන්න",
@@ -25,8 +26,8 @@
 	"visualeditor-descriptionpagelink": "ව්‍යාපෘතිය:විෂුවල්එඩිටර්",
 	"visualeditor-dialog-beta-welcome-action-continue": "කරගෙනයන්න",
 	"visualeditor-dialog-beta-welcome-title": "විෂුවල් එඩිටර් වෙත සාදරයෙන් පිලිගනිමු",
+	"visualeditor-dialog-media-change-image": "වෙනත් පින්තූරයක් තෝරන්න",
 	"visualeditor-dialog-media-content-section": "මාතෘකාව",
-	"visualeditor-dialog-media-insert-button": "මීඩියා ඇතුළුකරන්න",
 	"visualeditor-dialog-media-size-choosecustom": "අවශ්‍ය ප්‍රමාණයට සැකසීම",
 	"visualeditor-dialog-media-size-choosedefault": "මුල් ප්‍රමාණයට සකස් කරන්න",
 	"visualeditor-dialog-media-title": "මාධ්‍ය සැකසුම්",
@@ -61,7 +62,7 @@
 	"visualeditor-dialog-transclusion-add-template": "සැකිල්ල එක්කරන්න",
 	"visualeditor-dialog-transclusion-content": "අන්තර්ගතය",
 	"visualeditor-dialog-transclusion-options": "තෝරාගැනීම්",
-	"visualeditor-dialog-transclusion-placeholder": "අලුත් සැකිල්ල",
+	"visualeditor-dialog-transclusion-placeholder": "සැකිල්ල එක් කරන්න",
 	"visualeditor-dialog-transclusion-remove-content": "අන්තර්ගතය ඉවතලන්න",
 	"visualeditor-dialog-transclusion-remove-template": "සැකිල්ල ඉවතලන්න",
 	"visualeditor-dialogbutton-media-tooltip": "මාධ්‍යය",
@@ -78,7 +79,6 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "උප සිරස්තලය 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "උප සිරස්තලය 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "උප සිරස්තලය 4",
-	"visualeditor-languageinspector-widget-changelang": "බස සොයන්න.",
 	"visualeditor-linkinspector-suggest-external-link": "බාහිරට සබැඳිය",
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|ගැලපෙන පිටුව|ගැලපෙන පිටු}}",
 	"visualeditor-linkinspector-suggest-new-page": "අලුත් පිටුව",
@@ -86,9 +86,6 @@
 	"visualeditor-mainnamespacepagelink": "ව්‍යාපෘතිය:ප්‍රධාන නාමඅවකාශය",
 	"visualeditor-media-input-placeholder": "මාධ්‍ය සොයන්න",
 	"visualeditor-meta-tool": "පිටුවේ සැකසුම්",
-	"visualeditor-notification-created": "$1 තනා ඇත.",
-	"visualeditor-notification-restored": "$1 ප්‍රතිස්ථාපනය කරන ලදී.",
-	"visualeditor-notification-saved": "$1 වෙත ඔබේ වෙනස්කම් සුරකින ලදී.",
 	"visualeditor-parameter-search-unknown": "නොහඳුනන පරාමිතිය",
 	"visualeditor-savedialog-label-create": "පිටුව තනන්න",
 	"visualeditor-savedialog-label-error": "දෝෂය",
@@ -102,7 +99,6 @@
 	"visualeditor-savedialog-title-review": "ඔබ සිදුකල වෙනස්කම් සමාලෝචනය කරන්න",
 	"visualeditor-savedialog-title-save": "ඔබ කල වෙනස්කිරීම් සුරකින්න",
 	"visualeditor-saveerror": "ස'රවරය වෙත දත්ත සුරැකීමේ දෝෂය: $1.",
-	"visualeditor-toolbar-cancel": "අවලංගුකරන්න",
 	"visualeditor-toolbar-savedialog": "පිටුව සුරකින්න",
 	"visualeditor-usernamespacepagelink": "ව්‍යාපෘතිය:පරිශීලක නාමඅවකාශය"
 }

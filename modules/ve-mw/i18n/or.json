@@ -32,8 +32,6 @@
 	"visualeditor-dialog-meta-settings-hiddencat-label": "ଲୁଚିରହିଥିବା ଶ୍ରେଣୀ",
 	"visualeditor-dialog-meta-settings-label": "ପୃଷ୍ଠା ସେଟିଂ",
 	"visualeditor-dialog-meta-settings-nogallery-label": "ଗ୍ୟାଲେରି ନିଷ୍କ୍ରିୟ କରିବେ",
-	"visualeditor-dialog-reference-insert-button": "ଆଧାର ଦେବେ",
-	"visualeditor-dialog-reference-insert-title": "ଆଧାର ଦେବେ",
 	"visualeditor-dialog-reference-options-group-label": "ଏହି ଗୋଠକୁ ବ୍ୟବହାର କରନ୍ତୁ",
 	"visualeditor-dialog-reference-options-section": "ବିକଳ୍ପ",
 	"visualeditor-dialog-reference-title": "ଆଧାର",
@@ -53,6 +51,5 @@
 	"visualeditor-savedialog-label-create": "ପୃଷ୍ଠାଟିଏ ତିଆରିବା",
 	"visualeditor-savedialog-label-error": "ଭୁଲ",
 	"visualeditor-savedialog-label-warning": "ସାବଧାନ",
-	"visualeditor-toolbar-cancel": "ବାତିଲ",
 	"visualeditor-toolbar-savedialog": "ପୃଷ୍ଠାଟି ସାଇତିବେ"
 }
