@@ -15,28 +15,28 @@
  */
 ve.init.mw.TargetEvents = function ( target ) {
 	this.target = target;
-	this.timings = { 'saveRetries': 0 };
+	this.timings = { saveRetries: 0 };
 	// Events
 	this.target.connect( this, {
-		'saveWorkflowBegin': 'onSaveWorkflowBegin',
-		'saveWorkflowEnd': 'onSaveWorkflowEnd',
-		'saveInitiated': 'onSaveInitated',
-		'save': 'onSaveComplete',
-		'saveReview': 'onSaveReview',
-		'saveErrorEmpty': 'onSaveErrorEmpty',
-		'saveErrorSpamBlacklist': 'onSaveErrorSpamBlacklist',
-		'saveErrorAbuseFilter': 'onSaveErrorAbuseFilter',
-		'saveErrorBadToken': 'onSaveErrorBadToken',
-		'saveErrorNewUser': 'onSaveErrorNewUser',
-		'saveErrorCaptcha': 'onSaveErrorCaptcha',
-		'saveErrorUnknown': 'onSaveErrorUnknown',
-		'surfaceReady': 'onSurfaceReady',
-		'editConflict': 'onEditConflict',
-		'showChanges': 'onShowChanges',
-		'showChangesError': 'onShowChangesError',
-		'noChanges': 'onNoChanges',
-		'serializeComplete': 'onSerializeComplete',
-		'serializeError': 'onSerializeError'
+		saveWorkflowBegin: 'onSaveWorkflowBegin',
+		saveWorkflowEnd: 'onSaveWorkflowEnd',
+		saveInitiated: 'onSaveInitated',
+		save: 'onSaveComplete',
+		saveReview: 'onSaveReview',
+		saveErrorEmpty: 'onSaveErrorEmpty',
+		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
+		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
+		saveErrorBadToken: 'onSaveErrorBadToken',
+		saveErrorNewUser: 'onSaveErrorNewUser',
+		saveErrorCaptcha: 'onSaveErrorCaptcha',
+		saveErrorUnknown: 'onSaveErrorUnknown',
+		surfaceReady: 'onSurfaceReady',
+		editConflict: 'onEditConflict',
+		showChanges: 'onShowChanges',
+		showChangesError: 'onShowChangesError',
+		noChanges: 'onNoChanges',
+		serializeComplete: 'onSerializeComplete',
+		serializeError: 'onSerializeError'
 	} );
 };
 
@@ -57,7 +57,7 @@ ve.init.mw.TargetEvents.prototype.track = function ( topic, data ) {
 ve.init.mw.TargetEvents.prototype.onSaveWorkflowBegin = function () {
 	this.timings.saveWorkflowBegin = ve.now();
 	this.track( 'behavior.lastTransactionTillSaveDialogOpen', {
-		'duration': this.timings.saveWorkflowBegin - this.timings.lastTransaction
+		duration: this.timings.saveWorkflowBegin - this.timings.lastTransaction
 	} );
 };
 
@@ -65,7 +65,7 @@ ve.init.mw.TargetEvents.prototype.onSaveWorkflowBegin = function () {
  * Track when user ends the save workflow
  */
 ve.init.mw.TargetEvents.prototype.onSaveWorkflowEnd = function () {
-	this.track( 'behavior.saveDialogClose', { 'duration': ve.now() - this.timings.saveWorkflowBegin } );
+	this.track( 'behavior.saveDialogClose', { duration: ve.now() - this.timings.saveWorkflowBegin } );
 	this.timings.saveWorkflowBegin = null;
 };
 
@@ -76,7 +76,7 @@ ve.init.mw.TargetEvents.prototype.onSaveInitated = function () {
 	this.timings.saveInitiated = ve.now();
 	this.timings.saveRetries++;
 	this.track( 'behavior.saveDialogOpenTillSave', {
-		'duration': this.timings.saveInitiated - this.timings.saveWorkflowBegin
+		duration: this.timings.saveInitiated - this.timings.saveWorkflowBegin
 	} );
 };
 
@@ -84,7 +84,7 @@ ve.init.mw.TargetEvents.prototype.onSaveInitated = function () {
  * Track when document save is complete
  */
 ve.init.mw.TargetEvents.prototype.onSaveComplete = function () {
-	this.track( 'performance.user.saveComplete', { 'duration': ve.now() - this.timings.saveInitiated } );
+	this.track( 'performance.user.saveComplete', { duration: ve.now() - this.timings.saveInitiated } );
 	this.timings.saveRetries = 0;
 };
 
@@ -96,9 +96,9 @@ ve.init.mw.TargetEvents.prototype.onSaveComplete = function () {
  */
 ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 	this.track( 'performance.user.saveError', {
-		'duration': ve.now() - this.timings.saveInitiated,
-		'retries': this.timings.saveRetries,
-		'type': type
+		duration: ve.now() - this.timings.saveInitiated,
+		retries: this.timings.saveRetries,
+		type: type
 	} );
 };
 
@@ -115,7 +115,7 @@ ve.init.mw.TargetEvents.prototype.recordLastTransactionTime = function () {
 ve.init.mw.TargetEvents.prototype.onSaveReview = function () {
 	this.timings.saveReview = ve.now();
 	this.track( 'behavior.saveDialogOpenTillReview', {
-		'duration': this.timings.saveReview - this.timings.saveWorkflowBegin
+		duration: this.timings.saveReview - this.timings.saveWorkflowBegin
 	} );
 };
 
@@ -169,9 +169,9 @@ ve.init.mw.TargetEvents.prototype.onSaveErrorUnknown = function () {
 };
 
 ve.init.mw.TargetEvents.prototype.onSurfaceReady = function () {
-	this.track( 'performance.system.activation', { 'duration': ve.now() - this.timings.activationStart } );
+	this.track( 'performance.system.activation', { duration: ve.now() - this.timings.activationStart } );
 	this.target.surface.getModel().getDocument().connect( this, {
-		'transact': 'recordLastTransactionTime'
+		transact: 'recordLastTransactionTime'
 	} );
 };
 
@@ -180,8 +180,8 @@ ve.init.mw.TargetEvents.prototype.onSurfaceReady = function () {
  */
 ve.init.mw.TargetEvents.prototype.onEditConflict = function () {
 	this.track( 'performance.user.saveError.editconflict', {
-		'duration': ve.now() - this.timings.saveInitiated,
-		'retries': this.timings.saveRetries
+		duration: ve.now() - this.timings.saveInitiated,
+		retries: this.timings.saveRetries
 	} );
 };
 
@@ -189,28 +189,28 @@ ve.init.mw.TargetEvents.prototype.onEditConflict = function () {
  * Track when the user enters the review workflow
  */
 ve.init.mw.TargetEvents.prototype.onShowChanges = function () {
-	this.track( 'performance.user.reviewComplete', { 'duration': ve.now() - this.timings.saveReview } );
+	this.track( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
  * Track when the diff request fails in the review workflow
  */
 ve.init.mw.TargetEvents.prototype.onShowChangesError = function () {
-	this.track( 'performance.user.reviewError', { 'duration': ve.now() - this.timings.saveReview } );
+	this.track( 'performance.user.reviewError', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
  * Track when the diff request detects no changes
  */
 ve.init.mw.TargetEvents.prototype.onNoChanges = function () {
-	this.track( 'performance.user.reviewComplete', { 'duration': ve.now() - this.timings.saveReview } );
+	this.track( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
  * Track whe serilization is complete in review workflow
  */
 ve.init.mw.TargetEvents.prototype.onSerializeComplete = function () {
-	this.track( 'performance.user.reviewComplete', { 'duration': ve.now() - this.timings.saveReview } );
+	this.track( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
@@ -220,6 +220,6 @@ ve.init.mw.TargetEvents.prototype.onSerializeError = function () {
 	if ( this.timings.saveWorkflowBegin ) {
 		// This function can be called by the switch to wikitext button as well, so only log
 		// reviewError if we actually got here from the save workflow
-		this.track( 'performance.user.reviewError', { 'duration': ve.now() - this.timings.saveReview } );
+		this.track( 'performance.user.reviewError', { duration: ve.now() - this.timings.saveReview } );
 	}
 };

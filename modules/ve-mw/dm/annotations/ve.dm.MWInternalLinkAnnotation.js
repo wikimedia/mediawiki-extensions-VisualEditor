@@ -63,13 +63,13 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 	lookupTitle = this.getLookupTitle( matches[2] );
 
 	return {
-		'type': this.name,
-		'attributes': {
-			'hrefPrefix': matches[1],
-			'title': decodeURIComponent( matches[2] ).replace( /_/g, ' ' ),
-			'normalizedTitle': normalizedTitle,
-			'lookupTitle': lookupTitle,
-			'origTitle': matches[2]
+		type: this.name,
+		attributes: {
+			hrefPrefix: matches[1],
+			title: decodeURIComponent( matches[2] ).replace( /_/g, ' ' ),
+			normalizedTitle: normalizedTitle,
+			lookupTitle: lookupTitle,
+			origTitle: matches[2]
 		}
 	};
 };
@@ -130,8 +130,8 @@ ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
  */
 ve.dm.MWInternalLinkAnnotation.prototype.getComparableObject = function () {
 	return {
-		'type': this.getType(),
-		'normalizedTitle': this.getAttribute( 'normalizedTitle' )
+		type: this.getType(),
+		normalizedTitle: this.getAttribute( 'normalizedTitle' )
 	};
 };
 

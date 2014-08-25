@@ -46,10 +46,10 @@ ve.ui.MWLiveExtensionInspector.static.mwName = null;
  */
 ve.ui.MWLiveExtensionInspector.prototype.getNewMwData = function () {
 	return {
-		'name': this.constructor.static.mwName || this.constructor.static.name,
-		'attrs': {},
-		'body': {
-			'extsrc': ''
+		name: this.constructor.static.mwName || this.constructor.static.name,
+		attrs: {},
+		body: {
+			extsrc: ''
 		}
 	};
 };
@@ -68,10 +68,10 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 				// collapseRangeToEnd returns a new fragment
 				this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
 					{
-						'type': this.constructor.static.nodeModel.static.name,
-						'attributes': { 'mw': this.getNewMwData() }
+						type: this.constructor.static.nodeModel.static.name,
+						attributes: { mw: this.getNewMwData() }
 					},
-					{ 'type': '/' + this.constructor.static.nodeModel.static.name }
+					{ type: '/' + this.constructor.static.nodeModel.static.name }
 				] );
 				// Check if the node was inserted at a structural offset and wrapped in a paragraph
 				if ( this.getFragment().getRange().getLength() === 4 ) {
@@ -111,6 +111,6 @@ ve.ui.MWLiveExtensionInspector.prototype.updatePreview = function () {
 	mwData.body.extsrc = this.input.getValue();
 
 	if ( this.visible ) {
-		this.getFragment().changeAttributes( { 'mw': mwData } );
+		this.getFragment().changeAttributes( { mw: mwData } );
 	}
 };

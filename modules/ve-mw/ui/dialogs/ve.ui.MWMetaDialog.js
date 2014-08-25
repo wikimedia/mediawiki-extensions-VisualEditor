@@ -36,13 +36,13 @@ ve.ui.MWMetaDialog.static.size = 'large';
 
 ve.ui.MWMetaDialog.static.actions = [
 	{
-		'action': 'apply',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		'flags': 'primary'
+		action: 'apply',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		flags: 'primary'
 	},
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		'flags': 'safe'
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: 'safe'
 	}
 ];
 
@@ -63,26 +63,26 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	ve.ui.MWMetaDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
-	this.bookletLayout = new OO.ui.BookletLayout( { '$': this.$, 'outlined': true } );
+	this.panels = new OO.ui.StackLayout( { $: this.$ } );
+	this.bookletLayout = new OO.ui.BookletLayout( { $: this.$, outlined: true } );
 	this.settingsPage = new ve.ui.MWSettingsPage(
 		'settings',
-		{ '$': this.$ }
+		{ $: this.$ }
 	);
 	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage(
 		'advancedSettings',
-		{ '$': this.$ }
+		{ $: this.$ }
 	);
 	this.categoriesPage = new ve.ui.MWCategoriesPage(
 		'categories',
 		{
-			'$': this.$,
-			'$overlay': this.$overlay
+			$: this.$,
+			$overlay: this.$overlay
 		}
 	);
 	this.languagesPage = new ve.ui.MWLanguagesPage(
 		'languages',
-		{ '$': this.$ }
+		{ $: this.$ }
 	);
 
 	// Initialization
@@ -105,7 +105,7 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'apply' ) {
 		return new OO.ui.Process( function () {
 			surfaceModel.applyStaging();
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 
@@ -146,9 +146,9 @@ ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			// Let each page tear itself down ('languages' page doesn't need this yet)
-			this.settingsPage.teardown( { 'action': data.action } );
-			this.advancedSettingsPage.teardown( { 'action': data.action } );
-			this.categoriesPage.teardown( { 'action': data.action } );
+			this.settingsPage.teardown( { action: data.action } );
+			this.advancedSettingsPage.teardown( { action: data.action } );
+			this.categoriesPage.teardown( { action: data.action } );
 		}, this );
 };
 

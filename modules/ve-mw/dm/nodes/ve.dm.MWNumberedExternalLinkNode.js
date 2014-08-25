@@ -42,9 +42,9 @@ ve.dm.MWNumberedExternalLinkNode.static.matchFunction = function ( element ) {
 
 ve.dm.MWNumberedExternalLinkNode.static.toDataElement = function ( domElements ) {
 	return {
-		'type': this.name,
-		'attributes': {
-			'href': domElements[0].getAttribute( 'href' )
+		type: this.name,
+		attributes: {
+			href: domElements[0].getAttribute( 'href' )
 		}
 	};
 };

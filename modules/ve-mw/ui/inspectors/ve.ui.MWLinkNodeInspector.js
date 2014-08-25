@@ -37,8 +37,8 @@ ve.ui.MWLinkNodeInspector.static.modelClasses = [ ve.dm.MWNumberedExternalLinkNo
 
 ve.ui.MWLinkNodeInspector.static.actions = ve.ui.MWLinkNodeInspector.super.static.actions.concat( [
 	{
-		'action': 'convert',
-		'label': OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' )
+		action: 'convert',
+		label: OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' )
 	}
 ] );
 
@@ -52,7 +52,7 @@ ve.ui.MWLinkNodeInspector.prototype.initialize = function () {
 	ve.ui.MWLinkNodeInspector.super.prototype.initialize.call( this );
 
 	// Properties
-	this.targetInput = new OO.ui.TextInputWidget( { '$': this.$ } );
+	this.targetInput = new OO.ui.TextInputWidget( { $: this.$ } );
 
 	// Initialization
 	this.form.$element.append( this.targetInput.$element );
@@ -64,7 +64,7 @@ ve.ui.MWLinkNodeInspector.prototype.initialize = function () {
 ve.ui.MWLinkNodeInspector.prototype.getActionProcess = function ( action ) {
 	if ( action === 'convert' ) {
 		return new OO.ui.Process( function () {
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 	return ve.ui.MWLinkNodeInspector.super.prototype.getActionProcess.call( this, action );
@@ -121,9 +121,9 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				);
 			} else if ( convert ) {
 				annotation = new ve.dm.MWExternalLinkAnnotation( {
-					'type': 'link/mwExternal',
-					'attributes': {
-						'href': value
+					type: 'link/mwExternal',
+					attributes: {
+						href: value
 					}
 				} );
 				annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
@@ -136,7 +136,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 			} else {
 				surfaceModel.change(
 					ve.dm.Transaction.newFromAttributeChanges(
-						doc, nodeRange.start, { 'href': value }
+						doc, nodeRange.start, { href: value }
 					)
 				);
 			}

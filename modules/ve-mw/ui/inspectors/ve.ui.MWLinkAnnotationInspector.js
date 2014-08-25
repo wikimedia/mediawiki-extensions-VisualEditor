@@ -53,9 +53,9 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
 		// External link
 		return new ve.dm.MWExternalLinkAnnotation( {
-			'type': 'link/mwExternal',
-			'attributes': {
-				'href': target
+			type: 'link/mwExternal',
+			attributes: {
+				href: target
 			}
 		} );
 	} else if ( title ) {
@@ -71,12 +71,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 		}
 
 		return new ve.dm.MWInternalLinkAnnotation( {
-			'type': 'link/mwInternal',
-			'attributes': {
-				'title': target,
+			type: 'link/mwInternal',
+			attributes: {
+				title: target,
 				// bug 62816: we really need a builder for this stuff
-				'normalizedTitle': ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
-				'lookupTitle': ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
+				normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
+				lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
 			}
 		} );
 	} else {

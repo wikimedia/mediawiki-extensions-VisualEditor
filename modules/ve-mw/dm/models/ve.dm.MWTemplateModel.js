@@ -90,7 +90,7 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 	// TODO: Do we need to account for the title being invalid?
 	href = new mw.Title( href, mw.config.get( 'wgNamespaceIds' ).template ).getPrefixedText();
 
-	return new ve.dm.MWTemplateModel( transclusion, { 'href': href, 'wt': name }, 'user' );
+	return new ve.dm.MWTemplateModel( transclusion, { href: href, wt: name }, 'user' );
 };
 
 /* Methods */
@@ -257,7 +257,7 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	this.sequence = null;
 	this.params[name] = param;
 	this.spec.fill();
-	param.connect( this, { 'change': [ 'emit', 'change' ] } );
+	param.connect( this, { change: [ 'emit', 'change' ] } );
 	this.emit( 'add', param );
 	this.emit( 'change' );
 };
@@ -320,7 +320,7 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
 ve.dm.MWTemplateModel.prototype.serialize = function () {
 	var name,
 		template = ve.extendObject(
-			this.originalData || {}, { 'target': this.getTarget(), 'params': {} }
+			this.originalData || {}, { target: this.getTarget(), params: {} }
 		),
 		params = this.getParameters();
 
@@ -328,10 +328,10 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		if ( name === '' ) {
 			continue;
 		}
-		template.params[params[name].getOriginalName()] = { 'wt': params[name].getValue() };
+		template.params[params[name].getOriginalName()] = { wt: params[name].getValue() };
 	}
 
-	return { 'template': template };
+	return { template: template };
 };
 
 /**

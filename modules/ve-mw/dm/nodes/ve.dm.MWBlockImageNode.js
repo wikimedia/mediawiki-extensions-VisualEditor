@@ -45,7 +45,7 @@ ve.dm.MWBlockImageNode.static.rdfaToType = {
 ve.dm.MWBlockImageNode.static.name = 'mwBlockImage';
 
 ve.dm.MWBlockImageNode.static.storeHtmlAttributes = {
-	'blacklist': [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ]
+	blacklist: [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ]
 };
 
 ve.dm.MWBlockImageNode.static.handlesOwnChildren = true;
@@ -151,21 +151,21 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	// Store unrecognized classes so we can restore them on the way out
 	attributes.unrecognizedClasses = OO.simpleArrayDifference( classes, recognizedClasses );
 
-	dataElement = { 'type': this.name, 'attributes': attributes };
+	dataElement = { type: this.name, attributes: attributes };
 
 	this.storeGeneratedContents( dataElement, dataElement.attributes.src, converter.getStore() );
 
 	if ( $caption.length === 0 ) {
 		return [
 			dataElement,
-			{ 'type': 'mwImageCaption' },
-			{ 'type': '/mwImageCaption' },
-			{ 'type': '/' + this.name }
+			{ type: 'mwImageCaption' },
+			{ type: '/mwImageCaption' },
+			{ type: '/' + this.name }
 		];
 	} else {
 		return [ dataElement ].
-			concat( converter.getDataFromDomClean( $caption[0], { 'type': 'mwImageCaption' } ) ).
-			concat( [ { 'type': '/' + this.name } ] );
+			concat( converter.getDataFromDomClean( $caption[0], { type: 'mwImageCaption' } ) ).
+			concat( [ { type: '/' + this.name } ] );
 	}
 };
 

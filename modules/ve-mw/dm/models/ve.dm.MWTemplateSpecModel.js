@@ -97,15 +97,15 @@ ve.dm.MWTemplateSpecModel.prototype.fill = function () {
  */
 ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) {
 	return {
-		'label': name,
-		'description': null,
-		'default': '',
-		'type': 'string',
-		'aliases': [],
-		'name': name,
-		'required': false,
-		'suggested': false,
-		'deprecated': false
+		label: name,
+		description: null,
+		default: '',
+		type: 'string',
+		aliases: [],
+		name: name,
+		required: false,
+		suggested: false,
+		deprecated: false
 	};
 };
 

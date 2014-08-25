@@ -98,7 +98,7 @@ ve.ui.MWCitationDialog.prototype.getSetupProcess = function ( data ) {
 					);
 				}
 			}
-			this.actions.forEach( { 'actions': 'insert' }, function ( action ) {
+			this.actions.forEach( { actions: 'insert' }, function ( action ) {
 				action.setLabel( ve.msg( 'visualeditor-dialog-action-insert' ) );
 			} );
 		}, this );
@@ -109,7 +109,7 @@ ve.ui.MWCitationDialog.prototype.onTransclusionReady = function () {
 	ve.ui.MWCitationDialog.super.prototype.onTransclusionReady.call( this );
 
 	if ( !this.hasUsefulParameter() ) {
-		this.actions.setAbilities( { 'apply': false, 'insert': false } );
+		this.actions.setAbilities( { apply: false, insert: false } );
 	}
 };
 
@@ -122,7 +122,7 @@ ve.ui.MWCitationDialog.prototype.setPageByName = function ( param ) {
 	// Parent method
 	ve.ui.MWCitationDialog.super.prototype.setPageByName.call( this, param );
 
-	this.actions.setAbilities( { 'apply': hasUsefulParameter, 'insert': hasUsefulParameter } );
+	this.actions.setAbilities( { apply: hasUsefulParameter, insert: hasUsefulParameter } );
 };
 
 /**
@@ -133,7 +133,7 @@ ve.ui.MWCitationDialog.prototype.onAddParameterBeforeLoad = function ( page ) {
 
 	page.preLoad = true;
 	page.valueInput.on( 'change', function () {
-		this.actions.setAbilities( { 'apply': hasUsefulParameter, 'insert': hasUsefulParameter } );
+		this.actions.setAbilities( { apply: hasUsefulParameter, insert: hasUsefulParameter } );
 	}.bind( this ) );
 };
 
@@ -204,7 +204,7 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 			);
 			this.referenceModel.updateInternalItem( surfaceModel );
 
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 

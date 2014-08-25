@@ -97,10 +97,10 @@
 			for ( pageid in pages ) {
 				page = pages[pageid];
 				info = {
-					'missing': page.missing !== undefined,
-					'redirect': page.redirect !== undefined,
+					missing: page.missing !== undefined,
+					redirect: page.redirect !== undefined,
 					// Disambiguator extension
-					'disambiguation': page.pageprops && page.pageprops.disambiguation !== undefined
+					disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined
 				};
 				dfd = linkCache.cache[page.title];
 				if ( dfd ) {
@@ -119,10 +119,10 @@
 		while ( queue.length ) {
 			subqueue = queue.splice( 0, 50 ).map( normalizeTitle );
 			ve.init.target.constructor.static.apiRequest( {
-				'action': 'query',
-				'prop': 'info|pageprops',
-				'ppprop': 'disambiguation',
-				'titles': subqueue.join( '|' )
+				action: 'query',
+				prop: 'info|pageprops',
+				ppprop: 'disambiguation',
+				titles: subqueue.join( '|' )
 			} )
 				.done( processData )
 				.fail( rejectSubqueue );

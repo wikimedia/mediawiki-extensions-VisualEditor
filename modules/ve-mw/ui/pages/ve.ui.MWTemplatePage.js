@@ -21,7 +21,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 
 	// Configuration initialization
 	config = ve.extendObject( {
-		'scrollable': false
+		scrollable: false
 	}, config );
 
 	// Parent constructor
@@ -33,27 +33,27 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.$more = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'remove',
-		'title': ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-		'flags': ['destructive'],
-		'classes': [ 've-ui-mwTransclusionDialog-removeButton' ]
+		$: this.$,
+		framed: false,
+		icon: 'remove',
+		title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
+		flags: ['destructive'],
+		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
 	} )
-		.connect( this, { 'click': 'onRemoveButtonClick' } );
+		.connect( this, { click: 'onRemoveButtonClick' } );
 	this.infoFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': this.spec.getLabel(),
-		'icon': 'template'
+		$: this.$,
+		label: this.spec.getLabel(),
+		icon: 'template'
 	} );
 	this.addButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'parameter',
-		'label': ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		'tabIndex': -1
+		$: this.$,
+		framed: false,
+		icon: 'parameter',
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		tabIndex: -1
 	} )
-		.connect( this, { 'click': 'onAddButtonFocus' } );
+		.connect( this, { click: 'onAddButtonFocus' } );
 
 	// Initialization
 	this.$description.addClass( 've-ui-mwTemplatePage-description' );
@@ -80,7 +80,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 				.append( ve.msg(
 					'visualeditor-dialog-transclusion-no-template-description',
 					titleText,
-					ve.getHtmlAttributes( { 'target': '_blank', 'href': title.getUrl() } ),
+					ve.getHtmlAttributes( { target: '_blank', href: title.getUrl() } ),
 					mw.user
 				) );
 		}

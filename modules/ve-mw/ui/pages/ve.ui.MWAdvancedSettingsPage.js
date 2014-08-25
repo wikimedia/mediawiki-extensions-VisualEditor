@@ -27,84 +27,84 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	this.newSectionEditLinkOptionTouched = false;
 
 	this.advancedSettingsFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-meta-advancedsettings-label' ),
-		'icon': 'advanced'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-meta-advancedsettings-label' ),
+		icon: 'advanced'
 	} );
 
 	// Initialization
 
 	// Indexing items
 	this.indexing = new OO.ui.FieldLayout(
-		new OO.ui.ButtonSelectWidget( { '$': this.$ } )
+		new OO.ui.ButtonSelectWidget( { $: this.$ } )
 			.addItems( [
 				new OO.ui.ButtonOptionWidget(
 					'mwIndexForce',
-					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-force' ) }
+					{ label: ve.msg( 'visualeditor-dialog-meta-settings-index-force' ) }
 				),
 				new OO.ui.ButtonOptionWidget(
 					'default',
-					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-default' ) }
+					{ label: ve.msg( 'visualeditor-dialog-meta-settings-index-default' ) }
 				),
 				new OO.ui.ButtonOptionWidget(
 					'mwIndexDisable',
-					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
+					{ label: ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
 				)
 			] )
-			.connect( this, { 'select': 'onIndexingOptionChange' } ),
+			.connect( this, { select: 'onIndexingOptionChange' } ),
 		{
-			'$': this.$,
-			'align': 'top',
-			'label': ve.msg( 'visualeditor-dialog-meta-settings-index-label' )
+			$: this.$,
+			align: 'top',
+			label: ve.msg( 'visualeditor-dialog-meta-settings-index-label' )
 		}
 	);
 
 	// New edit section link items
 	this.newEditSectionLink = new OO.ui.FieldLayout(
-		new OO.ui.ButtonSelectWidget( { '$': this.$ } )
+		new OO.ui.ButtonSelectWidget( { $: this.$ } )
 			.addItems( [
 				new OO.ui.ButtonOptionWidget(
 					'mwNewSectionEditForce',
-					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' ) }
+					{ label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' ) }
 				),
 				new OO.ui.ButtonOptionWidget(
 					'default',
-					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' ) }
+					{ label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' ) }
 				),
 				new OO.ui.ButtonOptionWidget(
 					'mwNewSectionEditDisable',
-					{ 'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' ) }
+					{ label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' ) }
 				)
 			] )
-			.connect( this, { 'select': 'onNewSectionEditLinkOptionChange' } ),
+			.connect( this, { select: 'onNewSectionEditLinkOptionChange' } ),
 		{
-			'$': this.$,
-			'align': 'top',
-			'label': ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' )
+			$: this.$,
+			align: 'top',
+			label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' )
 		}
 	);
 
 	this.displayTitleTouched = false;
-	this.enableDisplayTitleInput = new OO.ui.CheckboxInputWidget( { '$': this.$ } );
-	this.enableDisplayTitleInput.connect( this, { 'change': 'onEnableDisplayTitleInputChange' } );
+	this.enableDisplayTitleInput = new OO.ui.CheckboxInputWidget( { $: this.$ } );
+	this.enableDisplayTitleInput.connect( this, { change: 'onEnableDisplayTitleInputChange' } );
 	this.enableDisplayTitleField = new OO.ui.FieldLayout(
 		this.enableDisplayTitleInput,
 		{
-			'$': this.$,
-			'align': 'inline',
-			'label': ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' )
+			$: this.$,
+			align: 'inline',
+			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' )
 		}
 	);
 	this.displayTitleInput = new OO.ui.TextInputWidget( {
-		'$': this.$,
-		'placeholder': ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' )
+		$: this.$,
+		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' )
 	} );
-	this.displayTitleInput.connect( this, { 'change': 'onDisplayTitleInputChange' } );
+	this.displayTitleInput.connect( this, { change: 'onDisplayTitleInputChange' } );
 	this.displayTitleField = new OO.ui.FieldLayout(
 		this.displayTitleInput,
 		{
-			'$': this.$,
-			'align': 'inline'
+			$: this.$,
+			align: 'inline'
 		}
 	);
 
@@ -126,11 +126,11 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 	$.each( this.metaItemCheckboxes, function () {
 		this.fieldLayout = new OO.ui.FieldLayout(
-			new OO.ui.CheckboxInputWidget( { '$': this.$ } ),
+			new OO.ui.CheckboxInputWidget( { $: this.$ } ),
 			{
-				'$': advancedSettingsPage.$,
-				'align': 'inline',
-				'label': this.label
+				$: advancedSettingsPage.$,
+				align: 'inline',
+				label: this.label
 			}
 		);
 		advancedSettingsPage.advancedSettingsFieldset.addItems( [ this.fieldLayout ] );
@@ -273,7 +273,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 		currentDisplayTitleItem = this.getMetaItem( 'mwDisplayTitle' ),
 		newDisplayTitle = this.displayTitleInput.getValue(),
-		newDisplayTitleItemData = { 'type': 'mwDisplayTitle', 'attributes': { 'content': newDisplayTitle } },
+		newDisplayTitleItemData = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } },
 
 		advancedSettingsPage = this;
 
@@ -285,12 +285,12 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 			}
 		} else {
 			if ( !currentIndexingItem ) {
-				this.metaList.insertMeta( { 'type': newIndexingData.data } );
+				this.metaList.insertMeta( { type: newIndexingData.data } );
 			} else if ( currentIndexingItem.element.type !== newIndexingData.data ) {
 				currentIndexingItem.replaceWith(
 					ve.extendObject( true, {},
 						currentIndexingItem.getElement(),
-						{ 'type': newIndexingData.data }
+						{ type: newIndexingData.data }
 					)
 				);
 			}
@@ -305,12 +305,12 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 			}
 		} else {
 			if ( !currentNewSectionEditLinkItem ) {
-				this.metaList.insertMeta( { 'type': newNewSectionEditLinkOptionData.data } );
+				this.metaList.insertMeta( { type: newNewSectionEditLinkOptionData.data } );
 			} else if ( currentNewSectionEditLinkItem.element.type !== newNewSectionEditLinkOptionData.data ) {
 				currentNewSectionEditLinkItem.replaceWith(
 					ve.extendObject( true, {},
 						currentNewSectionEditLinkItem.getElement(),
-						{ 'type': newNewSectionEditLinkOptionData.data }
+						{ type: newNewSectionEditLinkOptionData.data }
 					)
 				);
 			}
@@ -348,7 +348,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		if ( currentItem && !newValue ) {
 			currentItem.remove();
 		} else if ( !currentItem && newValue ) {
-			advancedSettingsPage.metaList.insertMeta( { 'type': this.metaName } );
+			advancedSettingsPage.metaList.insertMeta( { type: this.metaName } );
 		}
 	} );
 

@@ -37,21 +37,21 @@ ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
 ve.ui.MWTemplateDialog.static.actions = [
 	{
-		'action': 'apply',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		'flags': 'primary',
-		'modes': 'edit'
+		action: 'apply',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		flags: 'primary',
+		modes: 'edit'
 	},
 	{
-		'action': 'insert',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		'flags': [ 'primary', 'constructive' ],
-		'modes': 'insert'
+		action: 'insert',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
+		flags: [ 'primary', 'constructive' ],
+		modes: 'insert'
 	},
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		'flags': 'safe',
-		'modes': [ 'insert', 'edit' ]
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: 'safe',
+		modes: [ 'insert', 'edit' ]
 	}
 ];
 
@@ -63,8 +63,8 @@ ve.ui.MWTemplateDialog.static.actions = [
  * @inheritable
  */
 ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
-	'continuous': true,
-	'outlined': false
+	continuous: true,
+	outlined: false
 };
 
 /* Methods */
@@ -123,7 +123,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 					this.onAddParameter( params[names[i]] );
 				}
 				this.preventReselection = false;
-				added.connect( this, { 'add': 'onAddParameter', 'remove': 'onRemoveParameter' } );
+				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
 				if ( names.length ) {
 					this.setPageByName( params[names[0]].getId() );
 				}
@@ -149,7 +149,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	}
 
 	insertable = this.isInsertable();
-	this.actions.setAbilities( { 'apply': insertable, 'insert': insertable } );
+	this.actions.setAbilities( { apply: insertable, insert: insertable } );
 
 	this.updateTitle();
 };
@@ -163,9 +163,9 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	var page;
 
 	if ( param.getName() ) {
-		page = new ve.ui.MWParameterPage( param, param.getId(), { '$': this.$ } );
+		page = new ve.ui.MWParameterPage( param, param.getId(), { $: this.$ } );
 	} else {
-		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), { '$': this.$ } );
+		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), { $: this.$ } );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded && !this.preventReselection ) {
@@ -243,9 +243,9 @@ ve.ui.MWTemplateDialog.prototype.getBodyHeight = function () {
  */
 ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 	if ( part instanceof ve.dm.MWTemplateModel ) {
-		return new ve.ui.MWTemplatePage( part, part.getId(), { '$': this.$ } );
+		return new ve.ui.MWTemplatePage( part, part.getId(), { $: this.$ } );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
-		return new ve.ui.MWTemplatePlaceholderPage( part, part.getId(), { '$': this.$ } );
+		return new ve.ui.MWTemplatePlaceholderPage( part, part.getId(), { $: this.$ } );
 	}
 	return null;
 };
@@ -316,10 +316,10 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	ve.ui.MWTemplateDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
+	this.panels = new OO.ui.StackLayout( { $: this.$ } );
 	this.bookletLayout = new OO.ui.BookletLayout(
 		ve.extendObject(
-			{ '$': this.$ },
+			{ $: this.$ },
 			this.constructor.static.bookletLayoutConfig
 		)
 	);
@@ -347,7 +347,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				this.transclusionModel.insertTransclusionNode( this.getFragment() );
 			}
 
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	}
 
@@ -368,7 +368,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			this.transclusionModel = new ve.dm.MWTransclusionModel();
 
 			// Events
-			this.transclusionModel.connect( this, { 'replace': 'onReplacePart' } );
+			this.transclusionModel.connect( this, { replace: 'onReplacePart' } );
 
 			// Initialization
 			if ( !this.selectedNode ) {
@@ -393,7 +393,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				promise = this.transclusionModel
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) );
 			}
-			this.actions.setAbilities( { 'apply': false, 'insert': false } );
+			this.actions.setAbilities( { apply: false, insert: false } );
 			this.pushPending();
 			promise.always( this.onTransclusionReady.bind( this ) );
 		}, this );

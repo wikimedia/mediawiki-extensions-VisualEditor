@@ -31,8 +31,8 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 	this.internalList = this.model.getDocument().internalList;
 
 	// Events
-	this.connect( this, { 'setup': 'onSetup' } );
-	this.connect( this, { 'teardown': 'onTeardown' } );
+	this.connect( this, { setup: 'onSetup' } );
+	this.connect( this, { teardown: 'onTeardown' } );
 
 	// Initialization
 	this.update();
@@ -60,7 +60,7 @@ ve.ce.MWReferenceNode.static.primaryCommandName = 'reference';
  */
 ve.ce.MWReferenceNode.prototype.onSetup = function () {
 	ve.ce.MWReferenceNode.super.prototype.onSetup.call( this );
-	this.internalList.connect( this, { 'update': 'onInternalListUpdate' } );
+	this.internalList.connect( this, { update: 'onInternalListUpdate' } );
 };
 
 /**

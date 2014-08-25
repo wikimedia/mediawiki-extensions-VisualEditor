@@ -83,11 +83,11 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
 	xhr = ve.init.target.constructor.static.apiRequest( {
-		'action': 'visualeditor',
-		'paction': 'parsefragment',
-		'page': mw.config.get( 'wgRelevantPageName' ),
-		'wikitext': ( config && config.wikitext ) || this.model.getWikitext()
-	}, { 'type': 'POST' } )
+		action: 'visualeditor',
+		paction: 'parsefragment',
+		page: mw.config.get( 'wgRelevantPageName' ),
+		wikitext: ( config && config.wikitext ) || this.model.getWikitext()
+	}, { type: 'POST' } )
 		.done( this.onParseSuccess.bind( this, deferred ) )
 		.fail( this.onParseError.bind( this, deferred ) );
 
@@ -120,7 +120,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 	// be accessible to users (either to remove or edit)
 	if ( contentNodes.length === 0 ) {
 		$placeHolder = this.$( '<span>' )
-			.css( { 'display': 'block' } )
+			.css( { display: 'block' } )
 			// adapted from ve.ce.BranchNode.$blockSlugTemplate
 			// IE support may require using &nbsp;
 			.html( '&#xFEFF;' );

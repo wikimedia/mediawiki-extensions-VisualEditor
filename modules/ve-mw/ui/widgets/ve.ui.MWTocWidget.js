@@ -36,10 +36,10 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 
 	// TODO: fix i18n
 	this.toggle = {
-		'hideMsg': ve.msg( 'hidetoc' ),
-		'showMsg': ve.msg( 'showtoc' ),
-		'$link': this.$( '<a class="internal" id="togglelink"></a>' ).text( ve.msg( 'hidetoc' ) ),
-		'open': true
+		hideMsg: ve.msg( 'hidetoc' ),
+		showMsg: ve.msg( 'showtoc' ),
+		$link: this.$( '<a class="internal" id="togglelink"></a>' ).text( ve.msg( 'hidetoc' ) ),
+		open: true
 	};
 	this.$element.addClass( 'toc ve-ui-mwTocWidget' ).append(
 		this.$( '<div>' ).attr( 'id', 'toctitle' ).append(
@@ -64,8 +64,8 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	}.bind( this ) );
 
 	this.metaList.connect( this, {
-		'insert': 'onMetaListInsert',
-		'remove': 'onMetaListRemove'
+		insert: 'onMetaListInsert',
+		remove: 'onMetaListRemove'
 	} );
 
 	this.initFromMetaList();
@@ -266,13 +266,13 @@ ve.ui.MWTocWidget.prototype.build = function () {
 			headingOuterRange = nodes[i].nodeOuterRange;
 			ceNode = this.surface.getView().getDocument().getNodeFromOffset( headingOuterRange.end );
 			config = {
-				'node': ceNode,
-				'tocIndex': tocIndex,
-				'parent': parent,
-				'tocLevel': tocLevel,
-				'tocSection': tocSection,
-				'sectionPrefix': sectionPrefix.join( '.' ),
-				'insertIndex': sectionPrefix[sectionPrefix.length - 1]
+				node: ceNode,
+				tocIndex: tocIndex,
+				parent: parent,
+				tocLevel: tocLevel,
+				tocSection: tocSection,
+				sectionPrefix: sectionPrefix.join( '.' ),
+				insertIndex: sectionPrefix[sectionPrefix.length - 1]
 			};
 			// Add item
 			this.items[sectionPrefix.join( '.' )] = new ve.ui.MWTocItemWidget( config );

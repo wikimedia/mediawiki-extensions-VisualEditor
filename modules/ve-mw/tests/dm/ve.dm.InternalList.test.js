@@ -22,30 +22,30 @@ QUnit.test( 'addNode/removeNode', 6, function ( assert ) {
 		],
 		expectedNodes = {
 			'mwReference/': {
-				'keyedNodes': {
+				keyedNodes: {
 					'auto/0': [ referenceNodes[0] ],
 					'literal/bar': [ referenceNodes[1], referenceNodes[3] ],
 					'literal/:3': [ referenceNodes[2] ],
 					'auto/1': [ referenceNodes[4] ]
 				},
-				'firstNodes': [
+				firstNodes: [
 					referenceNodes[0],
 					referenceNodes[1],
 					referenceNodes[2],
 					referenceNodes[4]
 				],
-				'indexOrder': [ 0, 1, 2, 3 ],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				indexOrder: [ 0, 1, 2, 3 ],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			},
 			'mwReference/foo': {
-				'keyedNodes': {
+				keyedNodes: {
 					'auto/2': [ referenceNodes[5] ]
 				},
-				'firstNodes': [ undefined, undefined, undefined, undefined, referenceNodes[5] ],
-				'indexOrder': [ 4 ],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				firstNodes: [ undefined, undefined, undefined, undefined, referenceNodes[5] ],
+				indexOrder: [ 4 ],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			}
 		};
 
@@ -92,30 +92,30 @@ QUnit.test( 'addNode/removeNode', 6, function ( assert ) {
 		newInternalList.nodes,
 		{
 			'mwReference/': {
-				'keyedNodes': {
+				keyedNodes: {
 					'auto/0': [ referenceNodes[0] ],
 					'literal/bar': [ referenceNodes[3] ],
 					'literal/:3': [ referenceNodes[2] ],
 					'auto/1': [ referenceNodes[4] ]
 				},
-				'firstNodes': [
+				firstNodes: [
 					referenceNodes[0],
 					referenceNodes[3],
 					referenceNodes[2],
 					referenceNodes[4]
 				],
-				'indexOrder': [ 0, 2, 1, 3 ],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				indexOrder: [ 0, 2, 1, 3 ],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			},
 			'mwReference/foo': {
-				'keyedNodes': {
+				keyedNodes: {
 					'auto/2': [ referenceNodes[5] ]
 				},
-				'firstNodes': [ undefined, undefined, undefined, undefined, referenceNodes[5] ],
-				'indexOrder': [ 4 ],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				firstNodes: [ undefined, undefined, undefined, undefined, referenceNodes[5] ],
+				indexOrder: [ 4 ],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			}
 		},
 		'Keys re-ordered after one item of key removed'
@@ -128,29 +128,29 @@ QUnit.test( 'addNode/removeNode', 6, function ( assert ) {
 		newInternalList.nodes,
 		{
 			'mwReference/': {
-				'keyedNodes': {
+				keyedNodes: {
 					'auto/0': [ referenceNodes[0] ],
 					'literal/:3': [ referenceNodes[2] ],
 					'auto/1': [ referenceNodes[4] ]
 				},
-				'firstNodes': [
+				firstNodes: [
 					referenceNodes[0],
 					undefined,
 					referenceNodes[2],
 					referenceNodes[4]
 				],
-				'indexOrder': [ 0, 2, 3 ],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				indexOrder: [ 0, 2, 3 ],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			},
 			'mwReference/foo': {
-				'keyedNodes': {
+				keyedNodes: {
 					'auto/2': [ referenceNodes[5] ]
 				},
-				'firstNodes': [ undefined, undefined, undefined, undefined, referenceNodes[5] ],
-				'indexOrder': [ 4 ],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				firstNodes: [ undefined, undefined, undefined, undefined, referenceNodes[5] ],
+				indexOrder: [ 4 ],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			}
 		},
 		'Keys truncated after last item of key removed'
@@ -166,18 +166,18 @@ QUnit.test( 'addNode/removeNode', 6, function ( assert ) {
 		newInternalList.nodes,
 		{
 			'mwReference/': {
-				'keyedNodes': {},
-				'firstNodes': new Array( 4 ),
-				'indexOrder': [],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				keyedNodes: {},
+				firstNodes: new Array( 4 ),
+				indexOrder: [],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			},
 			'mwReference/foo': {
-				'keyedNodes': {},
-				'firstNodes': new Array( 5 ),
-				'indexOrder': [],
-				'uniqueListKeys': {},
-				'uniqueListKeysInUse': {}
+				keyedNodes: {},
+				firstNodes: new Array( 5 ),
+				indexOrder: [],
+				uniqueListKeys: {},
+				uniqueListKeysInUse: {}
 			}
 		},
 		'All nodes removed'
@@ -195,18 +195,18 @@ QUnit.test( 'getItemInsertion', 4, function ( assert ) {
 	assert.deepEqual(
 		insertion.transaction.getOperations(),
 		[
-			{ 'type': 'retain', 'length': 91 },
+			{ type: 'retain', length: 91 },
 			{
-				'type': 'replace',
-				'remove': [],
-				'insert': [
-					{ 'type': 'internalItem' },
-					{ 'type': '/internalItem' }
+				type: 'replace',
+				remove: [],
+				insert: [
+					{ type: 'internalItem' },
+					{ type: '/internalItem' }
 				],
-				'insertedDataOffset': 0,
-				'insertedDataLength': 2
+				insertedDataOffset: 0,
+				insertedDataLength: 2
 			},
-			{ 'type': 'retain', 'length': 1 }
+			{ type: 'retain', length: 1 }
 		],
 		'New reference operations match' );
 

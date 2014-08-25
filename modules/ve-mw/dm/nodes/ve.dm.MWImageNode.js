@@ -37,7 +37,7 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 	);
 
 	// Events
-	this.connect( this, { 'attributeChange': 'onAttributeChange' } );
+	this.connect( this, { attributeChange: 'onAttributeChange' } );
 };
 
 /* Inheritance */
@@ -50,10 +50,10 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 
 ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
 	return {
-		'type': dataElement.type,
-		'resource': dataElement.attributes.resource,
-		'width': dataElement.attributes.width,
-		'height': dataElement.attributes.height
+		type: dataElement.type,
+		resource: dataElement.attributes.resource,
+		width: dataElement.attributes.width,
+		height: dataElement.attributes.height
 	};
 };
 
@@ -78,7 +78,7 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 		// 2. If the image is an SVG drawing
 		if ( width >= defaultThumbSize || mediaType === 'DRAWING' ) {
 			dimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
-				'width': defaultThumbSize
+				width: defaultThumbSize
 			}, scalable.getRatio() );
 		} else {
 			dimensions = ve.dm.Scalable.static.getDimensionsFromValue(
@@ -118,13 +118,13 @@ ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
 	if ( ve.init.target ) {
 		ve.init.target.constructor.static.apiRequest(
 			{
-				'action': 'query',
-				'prop': 'imageinfo',
-				'indexpageids': '1',
-				'iiprop': 'size|mediatype',
-				'titles': filename
+				action: 'query',
+				prop: 'imageinfo',
+				indexpageids: '1',
+				iiprop: 'size|mediatype',
+				titles: filename
 			},
-			{ 'type': 'POST' }
+			{ type: 'POST' }
 		)
 		.done( function ( response ) {
 			var page = response.query && response.query.pages[response.query.pageids[0]],
@@ -199,8 +199,8 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 			.done( ve.bind( function ( info ) {
 				if ( info ) {
 					this.getScalable().setOriginalDimensions( {
-						'width': info.width,
-						'height': info.height
+						width: info.width,
+						height: info.height
 					} );
 					// Update media type
 					this.mediaType = info.mediatype;
@@ -222,13 +222,13 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
  */
 ve.dm.MWImageNode.prototype.createScalable = function () {
 	return new ve.dm.Scalable( {
-		'currentDimensions': {
-			'width': this.getAttribute( 'width' ),
-			'height': this.getAttribute( 'height' )
+		currentDimensions: {
+			width: this.getAttribute( 'width' ),
+			height: this.getAttribute( 'height' )
 		},
-		'minDimensions': {
-			'width': 1,
-			'height': 1
+		minDimensions: {
+			width: 1,
+			height: 1
 		}
 	} );
 };

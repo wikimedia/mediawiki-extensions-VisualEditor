@@ -37,32 +37,32 @@ ve.ui.MWReferenceDialog.static.icon = 'reference';
 
 ve.ui.MWReferenceDialog.static.actions = [
 	{
-		'action': 'apply',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		'flags': 'primary',
-		'modes': 'edit'
+		action: 'apply',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		flags: 'primary',
+		modes: 'edit'
 	},
 	{
-		'action': 'insert',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		'flags': [ 'primary', 'constructive' ],
-		'modes': 'insert'
+		action: 'insert',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
+		flags: [ 'primary', 'constructive' ],
+		modes: 'insert'
 	},
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		'flags': 'safe',
-		'modes': [ 'insert', 'edit', 'insert-select' ]
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: 'safe',
+		modes: [ 'insert', 'edit', 'insert-select' ]
 	},
 	{
-		'action': 'select',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-reference-useexisting-label' ),
-		'modes': [ 'insert', 'edit' ]
+		action: 'select',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-reference-useexisting-label' ),
+		modes: [ 'insert', 'edit' ]
 	},
 	{
-		'action': 'back',
-		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-goback' ),
-		'flags': 'safe',
-		'modes': 'select'
+		action: 'back',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-goback' ),
+		flags: 'safe',
+		modes: 'select'
 	}
 ];
 
@@ -70,58 +70,58 @@ ve.ui.MWReferenceDialog.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
 ve.ui.MWReferenceDialog.static.toolbarGroups = [
 	// History
-	{ 'include': [ 'undo', 'redo' ] },
+	{ include: [ 'undo', 'redo' ] },
 	// No formatting
 	/* {
-		'type': 'menu',
-		'indicator': 'down',
-		'title': OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
-		'include': [ { 'group': 'format' } ],
-		'promote': [ 'paragraph' ],
-		'demote': [ 'preformatted', 'heading1' ]
+		type: 'menu',
+		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
+		include: [ { group: 'format' } ],
+		promote: [ 'paragraph' ],
+		demote: [ 'preformatted', 'heading1' ]
 	},*/
 	// Style
 	{
-		'type': 'list',
-		'icon': 'text-style',
-		'indicator': 'down',
-		'title': OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		'include': [ { 'group': 'textStyle' }, 'language', 'clear' ],
-		'promote': [ 'bold', 'italic' ],
-		'demote': [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
+		type: 'list',
+		icon: 'text-style',
+		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		promote: [ 'bold', 'italic' ],
+		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
 	// Link
-	{ 'include': [ 'link' ] },
+	{ include: [ 'link' ] },
 	// Cite but not reference
 	{
-		'type': 'list',
-		'label': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		'indicator': 'down',
-		'include': [ { 'group': 'cite-transclusion' }/*, 'reference', 'reference/existing'*/ ]
-		/*'demote': [ 'reference', 'reference/existing' ]*/
+		type: 'list',
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
+		indicator: 'down',
+		include: [ { group: 'cite-transclusion' }/*, 'reference', 'reference/existing'*/ ]
+		/*demote: [ 'reference', 'reference/existing' ]*/
 	},
 	// No structure
 	/* {
-		'type': 'list',
-		'icon': 'bullet-list',
-		'indicator': 'down',
-		'include': [ { 'group': 'structure' } ],
-		'demote': [ 'outdent', 'indent' ]
+		type: 'list',
+		icon: 'bullet-list',
+		indicator: 'down',
+		include: [ { group: 'structure' } ],
+		demote: [ 'outdent', 'indent' ]
 	},*/
 	// Insert
 	{
-		'label': OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		'indicator': 'down',
-		'include': '*',
-		'exclude': [
-			{ 'group': 'format' },
-			{ 'group': 'structure' },
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		indicator: 'down',
+		include: '*',
+		exclude: [
+			{ group: 'format' },
+			{ group: 'structure' },
 			'reference',
 			'referencesList',
 			'gallery'
 		],
-		'promote': [ 'media', 'transclusion' ],
-		'demote': [ 'specialcharacter' ]
+		promote: [ 'media', 'transclusion' ],
+		demote: [ 'specialcharacter' ]
 	}
 ];
 
@@ -148,8 +148,8 @@ ve.ui.MWReferenceDialog.static.getPasteRules = function () {
 	return ve.extendObject(
 		ve.copy( ve.init.target.constructor.static.pasteRules ),
 		{
-			'all': {
-				'blacklist': OO.simpleArrayUnion(
+			all: {
+				blacklist: OO.simpleArrayUnion(
 					ve.getProp( ve.init.target.constructor.static.pasteRules, 'all', 'blacklist' ) || [],
 					[
 						// Nested references are impossible
@@ -161,8 +161,8 @@ ve.ui.MWReferenceDialog.static.getPasteRules = function () {
 					]
 				),
 				// Headings are not possible in wikitext without HTML
-				'conversions': {
-					'mwHeading': 'paragraph'
+				conversions: {
+					mwHeading: 'paragraph'
 				}
 			}
 		}
@@ -180,9 +180,9 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 		hasContent = data.countNonInternalElements() > 2;
 
 	this.actions.setAbilities( {
-		'apply': hasContent,
-		'insert': hasContent,
-		'select': !hasContent && !this.search.isIndexEmpty()
+		apply: hasContent,
+		insert: hasContent,
+		select: !hasContent && !this.search.isIndexEmpty()
 	} );
 };
 
@@ -251,17 +251,17 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	this.referenceSurface = new ve.ui.SurfaceWidget(
 		this.referenceModel.getDocument(),
 		{
-			'$': this.$,
-			'tools': this.constructor.static.toolbarGroups,
-			'commands': this.constructor.static.surfaceCommands,
-			'pasteRules': this.constructor.static.getPasteRules()
+			$: this.$,
+			tools: this.constructor.static.toolbarGroups,
+			commands: this.constructor.static.surfaceCommands,
+			pasteRules: this.constructor.static.getPasteRules()
 		}
 	);
 
 	// Events
-	this.referenceModel.getDocument().connect( this, { 'transact': 'onDocumentTransact' } );
+	this.referenceModel.getDocument().connect( this, { transact: 'onDocumentTransact' } );
 	this.referenceSurface.getSurface().getModel().connect( this, {
-		'documentUpdate': function () {
+		documentUpdate: function () {
 			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
 				this.referenceSurface.getSurface(),
 				this.wikitextWarning
@@ -285,31 +285,31 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	ve.ui.MWReferenceDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { '$': this.$ } );
+	this.panels = new OO.ui.StackLayout( { $: this.$ } );
 	this.editPanel = new OO.ui.PanelLayout( {
-		'$': this.$, 'scrollable': true, 'padded': true
+		$: this.$, scrollable: true, padded: true
 	} );
-	this.searchPanel = new OO.ui.PanelLayout( { '$': this.$ } );
-	this.contentFieldset = new OO.ui.FieldsetLayout( { '$': this.$ } );
+	this.searchPanel = new OO.ui.PanelLayout( { $: this.$ } );
+	this.contentFieldset = new OO.ui.FieldsetLayout( { $: this.$ } );
 	this.optionsFieldset = new OO.ui.FieldsetLayout( {
-		'$': this.$,
-		'label': ve.msg( 'visualeditor-dialog-reference-options-section' ),
-		'icon': 'settings'
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-reference-options-section' ),
+		icon: 'settings'
 	} );
 	// TODO: Use a drop-down or something, and populate with existing groups instead of free-text
 	this.referenceGroupInput = new OO.ui.TextInputWidget( {
-		'$': this.$,
-		'placeholder': ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
+		$: this.$,
+		placeholder: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.referenceGroupField = new OO.ui.FieldLayout( this.referenceGroupInput, {
-		'$': this.$,
-		'align': 'top',
-		'label': ve.msg( 'visualeditor-dialog-reference-options-group-label' )
+		$: this.$,
+		align: 'top',
+		label: ve.msg( 'visualeditor-dialog-reference-options-group-label' )
 	} );
-	this.search = new ve.ui.MWReferenceSearchWidget( { '$': this.$ } );
+	this.search = new ve.ui.MWReferenceSearchWidget( { $: this.$ } );
 
 	// Events
-	this.search.connect( this, { 'select': 'onSearchSelect' } );
+	this.search.connect( this, { select: 'onSearchSelect' } );
 
 	// Initialization
 	this.panels.addItems( [ this.editPanel, this.searchPanel ] );
@@ -357,7 +357,7 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
 			// Update internal item
 			this.referenceModel.updateInternalItem( surfaceModel );
 
-			this.close( { 'action': action } );
+			this.close( { action: action } );
 		}, this );
 	} else if ( action === 'back' ) {
 		this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
@@ -385,7 +385,7 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 				);
 			} else {
 				this.useReference( null );
-				this.actions.setAbilities( { 'apply': false, 'insert': false } );
+				this.actions.setAbilities( { apply: false, insert: false } );
 			}
 
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
@@ -398,7 +398,7 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 			// If we're using an existing reference, start off disabled
 			// If not, set disabled based on whether or not there are any existing ones.
 			this.actions.setAbilities( {
-				'select': !( this.selectedNode instanceof ve.dm.MWReferenceNode ) &&
+				select: !( this.selectedNode instanceof ve.dm.MWReferenceNode ) &&
 					!this.search.isIndexEmpty()
 			} );
 		}, this );

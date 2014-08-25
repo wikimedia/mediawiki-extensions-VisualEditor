@@ -30,7 +30,7 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, con
 
 	// Events
 	this.connect( this, {
-		'surfaceReady': 'onSurfaceReady'
+		surfaceReady: 'onSurfaceReady'
 	} );
 };
 
@@ -41,17 +41,17 @@ OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 /* Static Properties */
 ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	// Style
-	{ 'include': [ 'bold', 'italic' ] },
+	{ include: [ 'bold', 'italic' ] },
 	// Link
-	{ 'include': [ 'link' ] },
+	{ include: [ 'link' ] },
 	// Cite
 	{
-		'header': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		'indicator': 'down',
-		'type': 'list',
-		'icon': 'reference',
-		'title': OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		'include': [ { 'group': 'cite' }, 'reference/existing' ]
+		header: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
+		indicator: 'down',
+		type: 'list',
+		icon: 'reference',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
+		include: [ { group: 'cite' }, 'reference/existing' ]
 	}
 ];
 

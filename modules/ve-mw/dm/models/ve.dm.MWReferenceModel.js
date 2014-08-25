@@ -139,7 +139,7 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 			txs.push( ve.dm.Transaction.newFromAttributeChanges(
 				doc,
 				refNodes[i].getOuterRange().start,
-				{ 'refGroup': this.group, 'listGroup': listGroup }
+				{ refGroup: this.group, listGroup: listGroup }
 			) );
 		}
 		surfaceModel.change( txs );
@@ -166,15 +166,15 @@ ve.dm.MWReferenceModel.prototype.insertReferenceNode = function ( surfaceFragmen
 	surfaceFragment
 		.insertContent( [
 			{
-				'type': 'mwReference',
-				'attributes': {
-					'listKey': this.listKey,
-					'listGroup': this.listGroup,
-					'listIndex': this.listIndex,
-					'refGroup': this.group
+				type: 'mwReference',
+				attributes: {
+					listKey: this.listKey,
+					listGroup: this.listGroup,
+					listIndex: this.listIndex,
+					refGroup: this.group
 				}
 			},
-			{ 'type': '/mwReference' }
+			{ type: '/mwReference' }
 		] );
 };
 
@@ -227,10 +227,10 @@ ve.dm.MWReferenceModel.prototype.getDocument = function () {
 			this.doc = this.deferDoc();
 		} else {
 			this.doc = new ve.dm.Document( [
-				{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
-				{ 'type': '/paragraph' },
-				{ 'type': 'internalList' },
-				{ 'type': '/internalList' }
+				{ type: 'paragraph', internal: { generated: 'wrapper' } },
+				{ type: '/paragraph' },
+				{ type: 'internalList' },
+				{ type: '/internalList' }
 			] );
 		}
 	}

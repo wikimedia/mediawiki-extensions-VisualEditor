@@ -57,11 +57,11 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 
 	dataElement = {
-		'type': this.name,
-		'attributes': {
-			'mw': mwData,
-			'originalDomElements': ve.copy( domElements ),
-			'originalMw': mwDataJSON
+		type: this.name,
+		attributes: {
+			mw: mwData,
+			originalDomElements: ve.copy( domElements ),
+			originalMw: mwDataJSON
 		}
 	};
 

@@ -18,7 +18,7 @@
  */
 ve.ui.MWMoreParametersResultWidget = function VeUiMWMoreParametersResultWidget( data, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'icon': 'parameter-set' }, config );
+	config = ve.extendObject( { icon: 'parameter-set' }, config );
 
 	// Parent constructor
 	OO.ui.OptionWidget.call( this, data, config );

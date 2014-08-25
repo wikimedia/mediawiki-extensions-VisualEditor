@@ -85,17 +85,17 @@ ve.ce.MWBlockImageNode.static.renderHtmlAttributes = false;
 ve.ce.MWBlockImageNode.static.transition = false;
 
 ve.ce.MWBlockImageNode.static.cssClasses = {
-	'default': {
-		'left': 'mw-halign-left',
-		'right': 'mw-halign-right',
-		'center': 'mw-halign-center',
-		'none': 'mw-halign-none'
+	default: {
+		left: 'mw-halign-left',
+		right: 'mw-halign-right',
+		center: 'mw-halign-center',
+		none: 'mw-halign-none'
 	},
-	'none': {
-		'left': 'mw-halign-left',
-		'right': 'mw-halign-right',
-		'center': 'mw-halign-center',
-		'none': 'mw-halign-none'
+	none: {
+		left: 'mw-halign-left',
+		right: 'mw-halign-right',
+		center: 'mw-halign-center',
+		none: 'mw-halign-none'
 	}
 };
 
@@ -132,7 +132,7 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
 		if ( !this.$caption ) {
 			model = this.model.children[0];
 			view = ve.ce.nodeFactory.create( model.getType(), model );
-			model.connect( this, { 'update': 'onModelUpdate' } );
+			model.connect( this, { update: 'onModelUpdate' } );
 			this.children.push( view );
 			view.attach( this );
 			if ( this.live !== view.isLive() ) {
@@ -205,8 +205,8 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 	if ( !dimensions ) {
 		dimensions = {
-			'width': this.model.getAttribute( 'width' ),
-			'height': this.model.getAttribute( 'height' )
+			width: this.model.getAttribute( 'width' ),
+			height: this.model.getAttribute( 'height' )
 		};
 	}
 
@@ -215,8 +215,8 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 	// Make sure $element is sharing the dimensions, otherwise 'middle' and 'none'
 	// positions don't work properly
 	this.$element.css( {
-		'width': dimensions.width + ( this.captionVisible ? 2 : 0 ),
-		'height': this.captionVisible ? 'auto' : dimensions.height
+		width: dimensions.width + ( this.captionVisible ? 2 : 0 ),
+		height: this.captionVisible ? 'auto' : dimensions.height
 	} );
 	this.$element.toggleClass( 'mw-default-size', !!this.model.getAttribute( 'defaultSize' ) );
 };
@@ -272,14 +272,14 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 				break;
 			case 'width':
 				this.updateSize( {
-					'width': to,
-					'height': this.model.getAttribute( 'height' )
+					width: to,
+					height: this.model.getAttribute( 'height' )
 				} );
 				break;
 			case 'height':
 				this.updateSize( {
-					'width': this.model.getAttribute( 'width' ),
-					'height': to
+					width: this.model.getAttribute( 'width' ),
+					height: to
 				} );
 				break;
 			case 'type':

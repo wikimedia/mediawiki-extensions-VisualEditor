@@ -21,7 +21,7 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 		title = ve.msg( 'visualeditor-editnotices-tool', count );
 
 	// Configuration initialization
-	config = ve.extendObject( true, { 'popup': { 'head': true, 'label': title } }, config );
+	config = ve.extendObject( true, { popup: { head: true, label: title } }, config );
 
 	// Parent constructor
 	OO.ui.PopupTool.call( this, toolGroup, config );
@@ -95,7 +95,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	var title = ve.msg( 'visualeditor-help-tool' );
 
 	// Configuration initialization
-	config = ve.extendObject( true, { 'popup': { 'head': true, 'label': title } }, config );
+	config = ve.extendObject( true, { popup: { head: true, label: title } }, config );
 
 	// Parent constructor
 	OO.ui.PopupTool.call( this, toolGroup, config );
@@ -104,30 +104,30 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	this.$items = this.$( '<div>' );
 	this.feedback = null;
 	this.helpButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'help',
-		'title': ve.msg( 'visualeditor-help-title' ),
-		'href': new mw.Title( ve.msg( 'visualeditor-help-link' ) ).getUrl(),
-		'target': '_blank',
-		'label': ve.msg( 'visualeditor-help-label' )
+		$: this.$,
+		framed: false,
+		icon: 'help',
+		title: ve.msg( 'visualeditor-help-title' ),
+		href: new mw.Title( ve.msg( 'visualeditor-help-link' ) ).getUrl(),
+		target: '_blank',
+		label: ve.msg( 'visualeditor-help-label' )
 	} );
 	this.keyboardShortcutsButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'help',
-		'label': ve.msg( 'visualeditor-dialog-command-help-title' )
+		$: this.$,
+		framed: false,
+		icon: 'help',
+		label: ve.msg( 'visualeditor-dialog-command-help-title' )
 	} );
 	this.feedbackButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'comment',
-		'label': ve.msg( 'visualeditor-feedback-tool' )
+		$: this.$,
+		framed: false,
+		icon: 'comment',
+		label: ve.msg( 'visualeditor-feedback-tool' )
 	} );
 
 	// Events
-	this.feedbackButton.connect( this, { 'click': 'onFeedbackClick' } );
-	this.keyboardShortcutsButton.connect( this, { 'click': 'onKeyboardShortcutsClick' } );
+	this.feedbackButton.connect( this, { click: 'onFeedbackClick' } );
+	this.keyboardShortcutsButton.connect( this, { click: 'onKeyboardShortcutsClick' } );
 
 	// Initialization
 	this.$items
@@ -195,9 +195,9 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 	if ( !this.feedback ) {
 		// This can't be constructed until the editor has loaded as it uses special messages
 		this.feedback = new mw.Feedback( {
-			'title': new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
-			'bugsLink': new mw.Uri( 'https://bugzilla.wikimedia.org/enter_bug.cgi?product=VisualEditor&component=General' ),
-			'bugsListLink': new mw.Uri( 'https://bugzilla.wikimedia.org/buglist.cgi?query_format=advanced&resolution=---&resolution=LATER&resolution=DUPLICATE&product=VisualEditor&list_id=166234' )
+			title: new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
+			bugsLink: new mw.Uri( 'https://bugzilla.wikimedia.org/enter_bug.cgi?product=VisualEditor&component=General' ),
+			bugsListLink: new mw.Uri( 'https://bugzilla.wikimedia.org/buglist.cgi?query_format=advanced&resolution=---&resolution=LATER&resolution=DUPLICATE&product=VisualEditor&list_id=166234' )
 		} );
 	}
 	this.feedback.launch();

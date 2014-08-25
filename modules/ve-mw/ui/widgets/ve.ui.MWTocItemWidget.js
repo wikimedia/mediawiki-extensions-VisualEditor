@@ -50,7 +50,7 @@ ve.ui.MWTocItemWidget = function VeCeMWTocItemWidget( config ) {
 			.append( this.$( '<a>' ).append( this.$tocNumber, this.$tocText ) );
 
 		// Monitor node events
-		this.node.model.connect( this, { 'update': 'onUpdate' } );
+		this.node.model.connect( this, { update: 'onUpdate' } );
 	}
 	this.$element.append( this.$group );
 };

@@ -13,28 +13,28 @@ QUnit.module( 've.ce.ContentBranchNode' );
 QUnit.test( 'getRenderedContents', function ( assert ) {
 	var i, len, doc, $wrapper,
 		cases = [ {
-			'msg': 'Annotation spanning text and inline nodes',
-			'data': [
-				{ 'type': 'paragraph' },
+			msg: 'Annotation spanning text and inline nodes',
+			data: [
+				{ type: 'paragraph' },
 				'a',
-				['b', [ { 'type': 'textStyle/bold' } ]],
+				['b', [ { type: 'textStyle/bold' } ]],
 				{
-					'type': 'mwEntity',
-					'attributes': { 'character': 'c' },
-					'htmlAttributes': [ { 'keys': [ 'typeof' ], 'values': { 'typeof': 'mw:Entity' } } ],
-					'annotations': [ { 'type': 'textStyle/bold' } ]
+					type: 'mwEntity',
+					attributes: { character: 'c' },
+					htmlAttributes: [ { keys: [ 'typeof' ], values: { typeof: 'mw:Entity' } } ],
+					annotations: [ { type: 'textStyle/bold' } ]
 				},
-				{ 'type': '/mwEntity' },
-				['d', [ { 'type': 'textStyle/bold' } ]],
+				{ type: '/mwEntity' },
+				['d', [ { type: 'textStyle/bold' } ]],
 				{
-					'type': 'alienInline',
-					'attributes': { 'domElements': $( '<tt>e</tt>' ).toArray() },
-					'annotations': [ { 'type': 'textStyle/bold' } ]
+					type: 'alienInline',
+					attributes: { domElements: $( '<tt>e</tt>' ).toArray() },
+					annotations: [ { type: 'textStyle/bold' } ]
 				},
-				{ 'type': '/alienInline' },
-				{ 'type': '/paragraph' }
+				{ type: '/alienInline' },
+				{ type: '/paragraph' }
 			],
-			'html': 'a<b>b<span typeof="mw:Entity" class="ve-ce-leafNode ' +
+			html: 'a<b>b<span typeof="mw:Entity" class="ve-ce-leafNode ' +
 				've-ce-mwEntityNode" contenteditable="false">c</span>d<tt>e</tt></b>'
 		} ];
 	QUnit.expect( cases.length );

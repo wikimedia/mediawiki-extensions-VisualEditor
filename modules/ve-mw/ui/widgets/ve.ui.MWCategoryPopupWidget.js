@@ -16,7 +16,7 @@
  */
 ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	// Configuration initialization
-	config = ve.extendObject( { 'autoClose': true }, config );
+	config = ve.extendObject( { autoClose: true }, config );
 
 	// Parent constructor
 	OO.ui.PopupWidget.call( this, config );
@@ -28,23 +28,23 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	this.$title = this.$( '<label>' );
 	this.$menu = this.$( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
-		'$': this.$,
-		'framed': false,
-		'icon': 'remove',
-		'title': ve.msg( 'visualeditor-inspector-remove-tooltip' )
+		$: this.$,
+		framed: false,
+		icon: 'remove',
+		title: ve.msg( 'visualeditor-inspector-remove-tooltip' )
 	} );
-	this.sortKeyInput = new OO.ui.TextInputWidget( { '$': this.$ } );
+	this.sortKeyInput = new OO.ui.TextInputWidget( { $: this.$ } );
 	this.sortKeyField = new OO.ui.FieldLayout( this.sortKeyInput, {
-		'$': this.$,
-		'align': 'top',
-		'label': ve.msg ( 'visualeditor-dialog-meta-categories-sortkey-label' )
+		$: this.$,
+		align: 'top',
+		label: ve.msg ( 'visualeditor-dialog-meta-categories-sortkey-label' )
 	} );
 	this.$sortKeyForm = this.$( '<form>' ).addClass( 've-ui-mwCategoryPopupWidget-sortKeyForm' )
 		.append( this.sortKeyField.$element );
 
 	// Events
-	this.connect( this, { 'hide': 'onHide' } );
-	this.removeButton.connect( this, { 'click': 'onRemoveCategory' } );
+	this.connect( this, { hide: 'onHide' } );
+	this.removeButton.connect( this, { click: 'onRemoveCategory' } );
 	this.$sortKeyForm.on( 'submit', this.onSortKeySubmit.bind( this ) );
 
 	// Initialization
@@ -186,11 +186,11 @@ ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
 	if ( this.$container.attr( 'dir' ) === 'rtl' ) {
 		// flip me, I'm a mirror:
 		this.$element.css( {
-			'right': this.$container.outerWidth( true ) - left,
-			'top': top
+			right: this.$container.outerWidth( true ) - left,
+			top: top
 		} );
 	} else {
-		this.$element.css( { 'left': left, 'top': top } );
+		this.$element.css( { left: left, top: top } );
 	}
 
 	this.setSize( width, height );
