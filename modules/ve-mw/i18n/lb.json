@@ -18,7 +18,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Einfache Link",
 	"visualeditor-beta-appendix": "Beta",
 	"visualeditor-beta-label": "Beta",
-	"visualeditor-beta-warning": "VisualEditor ass eng Betaversioun. Dir kéint Softwareproblemer begéinen an Dir kënnt vläicht net all Deeler vun der Säit änneren.\n\nFir zu all Ament op d'Ännere vum Quell code ze wiesselen ouni Är Ännerungen ze verléieren, maache den 'Dropdown'-Menü niewent \"{{int:visualeditor-toolbar-savedialog}}\" op a wielt \"{{int:visualeditor-mweditmodesource-tool}}\" eraus.",
+	"visualeditor-beta-warning": "VisualEditor ass eng Betaversioun. Dir kéint Softwareproblemer begéinen an Dir kënnt vläicht net all Deeler vun der Säit änneren.\n\nFir zu all Ament op d'Ännere vum Quell code ze wiesselen ouni Är Ännerungen ze verléieren, maacht den 'Dropdown'-Menü niewent \"{{int:visualeditor-toolbar-savedialog}}\" op a wielt \"{{int:visualeditor-mweditmodesource-tool}}\" eraus.",
 	"visualeditor-browserwarning": "Dir benotzt e Browser deen net offiziell vum VisualEditor ënnerstëtzt gëtt.",
 	"visualeditor-ca-createlocaldescriptionsource": "Quell vun der lokaler Beschreiwung derbäisetzen",
 	"visualeditor-ca-createsource": "Quell uleeën",

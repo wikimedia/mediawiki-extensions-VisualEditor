@@ -181,8 +181,8 @@
 	"visualeditor-media-input-placeholder": "Szukaj multimediów",
 	"visualeditor-meta-tool": "Opcje",
 	"visualeditor-mwalienextensioninspector-title": "Rozszerzenia MediaWiki",
-	"visualeditor-mweditmodesource-title": "Przełączyć na edycję wikitekstu?",
-	"visualeditor-mweditmodesource-tool": "Przełącz na edycję wikitekstu",
+	"visualeditor-mweditmodesource-title": "Przełączyć na edycję kodu źródłowego?",
+	"visualeditor-mweditmodesource-tool": "Przełącz na edycję kodu źródłowego",
 	"visualeditor-mweditmodesource-warning": "Zamierzasz przełączyć się na edytor kodu źródłowego.\nMożesz zachować wszystkie zmiany wprowadzone do tej pory, ale bez zapisywania lub przeładowywania strony nie będziesz mieć możliwości powrotu do VisualEditora.\nCzy kontynuować?",
 	"visualeditor-mweditmodesource-warning-switch": "Zachowaj zmiany",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Porzuć zmiany",
@@ -232,7 +232,7 @@
 	"visualeditor-viewpage-savewarning-title": "Na pewno?",
 	"visualeditor-viewpage-savewarning-discard": "Odrzuć zmiany",
 	"visualeditor-viewpage-savewarning-keep": "Kontynuuj edycję",
-	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki wikikodu]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
+	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
 	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
-	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki wikikodu"
+	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego"
 }
