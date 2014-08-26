@@ -57,6 +57,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
 	return ve.init.target.constructor.static.apiRequest( {
 		action: 'query',
 		list: 'allcategories',
+		acmin: 1,
 		acprefix: this.value,
 		acprop: 'hidden',
 		redirects: ''
