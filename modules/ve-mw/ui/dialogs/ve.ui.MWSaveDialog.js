@@ -50,7 +50,7 @@ ve.ui.MWSaveDialog.static.actions = [
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		flags: 'safe',
-		modes: 'save'
+		modes: [ 'save', 'conflict' ]
 	},
 	{
 		action: 'review',
@@ -168,7 +168,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 		case 'conflict':
 			this.actions
 				.setAbilities( { save: false } )
-				.setMode( 'save' );
+				.setMode( 'conflict' );
 			break;
 		case 'review':
 			this.setSize( 'large' );
