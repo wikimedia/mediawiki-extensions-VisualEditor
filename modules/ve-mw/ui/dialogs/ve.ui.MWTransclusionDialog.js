@@ -151,6 +151,9 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
 	this.addParameterButton.setDisabled(
 		!( page instanceof ve.ui.MWTemplatePage || page instanceof ve.ui.MWParameterPage )
 	);
+	if ( page instanceof ve.ui.MWParameterPage ) {
+		this.bookletLayout.getOutlineControls().removeButton.toggle( !page.parameter.isRequired() );
+	}
 };
 
 /**
