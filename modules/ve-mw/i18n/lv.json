@@ -6,7 +6,8 @@
 			"Eitvys200",
 			"Papuass",
 			"PeterisP",
-			"Edgars2007"
+			"Edgars2007",
+			"Jdforrester"
 		]
 	},
 	"tooltip-ca-createsource": "Izveidot šīs lapas pirmkodu",
@@ -14,8 +15,8 @@
 	"tooltip-ca-ve-edit": "Labot šo lapu ar vizuālo redaktoru",
 	"visualeditor-advancedsettings-tool": "Papildu iestatījumi",
 	"visualeditor-annotationbutton-linknode-tooltip": "Vienkārša saite",
-	"visualeditor-beta-appendix": "testa funkcijas",
-	"visualeditor-beta-label": "testa funkcijas",
+	"visualeditor-beta-appendix": "beta",
+	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Vizuālais redaktors ir beta stadijā. Jūs varat saskarties ar kļūmēm un, iespējams, nevarēsiet labot daļu šīs lapas. Lai pārslēgtos wikitext režīmā, nospiediet \"{{int:visualeditor-ca-editsource}}\" - nesaglabātās izmaiņas tiks zaudētas.",
 	"visualeditor-browserwarning": "Jūs lietojat pārlūku, kuru vizuālais redaktors neatbalsta.",
 	"visualeditor-ca-createsource": "Radīt pirmkodu",
