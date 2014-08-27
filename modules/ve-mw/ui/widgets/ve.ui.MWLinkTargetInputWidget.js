@@ -89,7 +89,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
 		return this.annotation.getAttribute( 'href' )
 			.match( /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi );
 	}
-	return true;
+	return !!this.getValue();
 };
 
 /**
