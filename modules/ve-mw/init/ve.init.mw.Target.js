@@ -1437,7 +1437,7 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
 			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
 			headingNode = $section.data( 'view' );
 
-		if ( $section.length ) {
+		if ( $section.length && new mw.Uri().query.summary === undefined ) {
 			this.initialEditSummary = '/* ' +
 				ve.graphemeSafeSubstring( $section.text(), 0, 244 ) + ' */ ';
 		}
