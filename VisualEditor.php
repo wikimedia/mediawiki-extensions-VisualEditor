@@ -1165,8 +1165,8 @@ $wgResourceModules += array(
 				'modules/ve-mw/ui/themes/apex/pages/ve.ui.MWTemplatePage.css',
 			),
 			'minerva' => array(
-				'modules/ve-mw/ui/themes/agora/pages/ve.ui.MWParameterPage.css',
-				'modules/ve-mw/ui/themes/agora/pages/ve.ui.MWTemplatePage.css',
+				'modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWParameterPage.css',
+				'modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWTemplatePage.css',
 			),
 		),
 		'dependencies' => array(
