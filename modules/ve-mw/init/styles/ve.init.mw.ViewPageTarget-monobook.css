@@ -9,17 +9,17 @@
 	margin: -0.6em -0.8em 1em -0.8em;
 }
 
-.oo-ui-toolbar {
+/* Correct for Monobook's small font in toolbars and contexts, but beware:
+ *   - Only apply this to the outer toolbar, not the inner toolbar (otherwise it multiplies)
+ *   - Only apply this to the main surface's context, not inside dialogs (they have their own
+ *     font size fixes)
+ */
+.ve-init-mw-viewPageTarget-toolbar,
+.ve-init-mw-viewPageTarget-surface .ve-ui-context {
 	font-size: 1.25em;
 	line-height: 1.5em;
 }
 
-/* Monobook sets font-size: x-small; on the body. Undo this in frames and overlays */
-.oo-ui-frame-body,
-body .ve-ui-overlay {
-	font-size: medium;
-}
-
 .ve-ui-overlay {
-	z-index: 4;
+	z-index: 2;
 }
