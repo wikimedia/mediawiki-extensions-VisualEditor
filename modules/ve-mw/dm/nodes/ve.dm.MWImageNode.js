@@ -58,6 +58,79 @@ ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
 };
 
 /**
+ * Take the given dimensions and scale them to thumbnail size.
+ * @param {Object} dimensions Width and height of the image
+ * @param {string} [mediaType] Media type 'DRAWING' or 'BITMAP'
+ * @return {Object} The new width and height of the scaled image
+ */
+ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType ) {
+	var defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
+
+	mediaType = mediaType || 'BITMAP';
+
+	if ( dimensions.width && dimensions.height ) {
+		// Use dimensions
+		// Resize to default thumbnail size, but only if the image itself
+		// isn't smaller than the default size
+		// For svg/drawings, the default wiki size is always applied
+		if ( dimensions.width > defaultThumbSize || mediaType === 'DRAWING' ) {
+			return ve.dm.Scalable.static.getDimensionsFromValue( {
+				width: defaultThumbSize
+			}, dimensions.width / dimensions.height );
+		}
+	}
+	return dimensions;
+};
+
+/**
+ * Translate the image dimensions into new ones according to the bounding box.
+ * @param {Object} imageDimension Width and height of the image
+ * @param {Object} boundingBox The limit of the bounding box
+ * @param {boolean} adhereToWidth Resize the image using width consideration only
+ * @returns {Object|null} The new width and height of the scaled image or null if
+ * the given dimensions are missing width or height values and cannot be computed.
+ */
+ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox, adhereToWidth ) {
+	var limitNumber, dimCalcObject;
+
+	if ( $.isEmptyObject( boundingBox ) ) {
+		return imageDimensions;
+	}
+
+	if ( imageDimensions.width && imageDimensions.height) {
+		// First, find the bounding box number (which is the bigger
+		// of the two values)
+		if ( boundingBox.width > boundingBox.height || adhereToWidth ) {
+			limitNumber = boundingBox.width;
+		} else {
+			limitNumber = boundingBox.height;
+		}
+
+		// Second, check which of the image dimensions is bigger and apply
+		// the limit to it
+		if ( imageDimensions.width >= imageDimensions.height || adhereToWidth ) {
+			// Check if the width is not smaller than the limit number
+			if ( imageDimensions.width <= limitNumber ) {
+				return imageDimensions;
+			}
+			// Limit by width
+			dimCalcObject = { width: limitNumber };
+		} else {
+			// Check if the height is not smaller than the limit number
+			if ( imageDimensions.height <= limitNumber ) {
+				return imageDimensions;
+			}
+			dimCalcObject = { height: limitNumber };
+		}
+
+		return ve.dm.Scalable.static.getDimensionsFromValue(
+			dimCalcObject,
+			imageDimensions.width / imageDimensions.height
+		);
+	}
+};
+
+/**
  * Update image scalable properties according to the image type.
  *
  * @param {string} type The new image type
