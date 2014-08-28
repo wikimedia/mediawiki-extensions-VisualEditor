@@ -142,16 +142,20 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 		matchingPages = [],
 		disambigPages = [],
 		redirectPages = [],
-		titleObj = mw.Title.newFromText( this.value );
+		titleObj = mw.Title.newFromText( this.value ),
+		linkCacheUpdate = {};
 
 	for ( index in data ) {
 		matchingPage = data[index];
+		linkCacheUpdate[matchingPage.title] = { missing: false, redirect: false, disambiguation: false };
 		existingPages.push( matchingPage.title );
 
 		if ( matchingPage.redirect !== undefined ) {
 			redirectPages.push( matchingPage.title );
+			linkCacheUpdate[matchingPage.title].redirect = true;
 		} else if ( matchingPage.pageprops !== undefined && matchingPage.pageprops.disambiguation !== undefined ) {
 			disambigPages.push( matchingPage.title );
+			linkCacheUpdate[matchingPage.title].disambiguation = true;
 		} else {
 			matchingPages.push( matchingPage.title );
 		}
@@ -163,6 +167,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	pageExists = pageExistsExact || (
 		titleObj && ve.indexOf( titleObj.getPrefixedText(), existingPages ) !== -1
 	);
+
+	if ( !pageExists ) {
+		linkCacheUpdate[this.value] = { missing: true, redirect: false, disambiguation: false };
+	}
+
+	ve.init.platform.linkCache.set( linkCacheUpdate );
 
 	// External link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
