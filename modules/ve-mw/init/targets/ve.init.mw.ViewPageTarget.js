@@ -48,7 +48,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.scrollTop = null;
 	this.currentUri = currentUri;
 	this.section = currentUri.query.vesection;
-	this.initialEditSummary = '';
+	this.initialEditSummary = new mw.Uri().query.summary;
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
 	this.veEditUri = this.viewUri.clone().extend( { veaction: 'edit' } );
@@ -336,7 +336,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 
 		this.clearState();
 		this.docToSave = null;
-		this.initialEditSummary = '';
+		this.initialEditSummary = new mw.Uri().query.summary;
 
 		this.deactivating = false;
 
