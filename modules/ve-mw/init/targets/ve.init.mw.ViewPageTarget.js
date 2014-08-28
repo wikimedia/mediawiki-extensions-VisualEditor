@@ -1618,7 +1618,7 @@ ve.init.mw.ViewPageTarget.prototype.saveEditSection = function ( heading ) {
 };
 
 /**
- * Add onbeforunload handler.
+ * Add onbeforeunload handler.
  *
  * @method
  */
@@ -1726,7 +1726,7 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
 	} else {
 		// Override if submitting
 		if ( this.submitting ) {
-			return null;
+			return undefined;
 		}
 		// Check if there's been an edit
 		if ( this.surface && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
