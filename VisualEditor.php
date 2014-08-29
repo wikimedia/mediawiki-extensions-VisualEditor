@@ -537,6 +537,7 @@ $wgResourceModules += array(
 		),
 		'debugScripts' => array(
 			'lib/ve/src/ui/ve.ui.DebugBar.js',
+			'lib/ve/src/ve.Filibuster.js',
 		),
 		'styles' => array(
 			// ce
