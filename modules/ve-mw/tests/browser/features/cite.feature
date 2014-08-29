@@ -18,6 +18,7 @@ Feature: VisualEditor Cite
       And I click Add more information
       And I see Show more fields
       And I type in a field name "New website field"
+      And I click the new field label
       And I fill in the new field "New website field contents"
       And I click Insert Citation
       And I click Save page
@@ -37,6 +38,7 @@ Feature: VisualEditor Cite
       And the Book input field titles are in the correct order
       And I click Book Add more information
       And I type in a field name "New book field"
+      And I click the new field label
       And I fill in the new field "New book field contents"
       And I click Insert Citation
       And I click Save page

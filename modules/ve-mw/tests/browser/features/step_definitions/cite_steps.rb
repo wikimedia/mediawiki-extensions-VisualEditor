@@ -30,6 +30,10 @@ When(/^I click News$/) do
   on(VisualEditorPage).cite_news_element.when_present.click
 end
 
+When(/^I click the new field label$/) do
+  on(VisualEditorPage).cite_new_field_label_element.when_present.click
+end
+
 When(/^I click Website$/) do
   on(VisualEditorPage).cite_website_element.when_present.click
 end
@@ -67,7 +71,6 @@ When(/^I fill in the eighth textarea with "(.*?)"$/) do |eighth_string|
 end
 
 When(/^I fill in the new field "(.*?)"$/) do |new_field_text|
-  on(VisualEditorPage).cite_new_field_instance_element.when_present.click
   on(VisualEditorPage).cite_new_website_field_element.when_present.send_keys new_field_text
 end
 
