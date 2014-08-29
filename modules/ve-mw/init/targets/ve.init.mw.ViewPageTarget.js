@@ -386,10 +386,12 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.activating = false;
 	this.surface.getModel().connect( this, {
 		documentUpdate: function () {
-			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
-				this.surface,
-				this.wikitextWarning
-			);
+			mw.loader.using( 'mediawiki.notification' ).then( function () {
+				this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
+					this.surface,
+					this.wikitextWarning
+				);
+			}.bind( this ) );
 		},
 		history: 'updateToolbarSaveButtonState'
 	} );
@@ -771,7 +773,7 @@ ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, w
 	textMatches = text.match( /\[\[|\{\{|''|<nowiki|<ref|~~~|^==|^\*|^\#/ );
 
 	if ( textMatches && !wikitextWarning ) {
-		mw.notify(
+		wikitextWarning = mw.notification.notify(
 			$( $.parseHTML( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end(),
 			{
@@ -779,9 +781,7 @@ ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, w
 				tag: 'visualeditor-wikitext-warning',
 				autoHide: false
 			}
-		).done( function ( notif ) {
-			wikitextWarning = notif;
-		} );
+		);
 	} else if ( !textMatches && wikitextWarning ) {
 		wikitextWarning.close();
 		wikitextWarning = undefined;

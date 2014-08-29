@@ -840,10 +840,12 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	// Events
 	this.captionSurface.getSurface().getModel().connect( this, {
 		documentUpdate: function () {
-			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
-				this.captionSurface.getSurface(),
-				this.wikitextWarning
-			);
+			mw.loader.using( 'mediawiki.notification' ).then( function () {
+				this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
+					this.captionSurface.getSurface(),
+					this.wikitextWarning
+				);
+			}.bind( this ) );
 			this.setChanged();
 		}
 	} );

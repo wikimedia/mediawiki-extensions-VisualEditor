@@ -262,10 +262,12 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	this.referenceModel.getDocument().connect( this, { transact: 'onDocumentTransact' } );
 	this.referenceSurface.getSurface().getModel().connect( this, {
 		documentUpdate: function () {
-			this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
-				this.referenceSurface.getSurface(),
-				this.wikitextWarning
-			);
+			mw.loader.using( 'mediawiki.notification' ).then( function () {
+				this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
+					this.referenceSurface.getSurface(),
+					this.wikitextWarning
+				);
+			}.bind( this ) );
 		}
 	} );
 

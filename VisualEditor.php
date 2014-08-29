@@ -289,7 +289,6 @@ $wgResourceModules += array(
 			'jquery.client',
 			'mediawiki.Uri',
 			'mediawiki.api',
-			'mediawiki.notify',
 			'mediawiki.Title',
 			'mediawiki.Uri',
 			'mediawiki.user',
