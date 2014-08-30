@@ -12,7 +12,7 @@
 	"visualeditor-beta-appendix": "試用",
 	"visualeditor-beta-label": "試用",
 	"visualeditor-beta-warning": "VisualEditor 而家仲係試用版。你可能會遇到軟件問題，亦可能改唔到一版嘅某啲部份。你可以隨時撳「{{int:visualeditor-toolbar-savedialog}}」隔蘺嘅「{{int:visualeditor-mweditmodesource-tool}}」，轉去維基文本模式，未存妥修改唔會唔見。",
-	"visualeditor-browserwarning": "VisualEditor 並唔正式支援你嘅瀏覽器",
+	"visualeditor-browserwarning": "VisualEditor 並未正式支援你嘅瀏覽器",
 	"visualeditor-ca-createlocaldescriptionsource": "喺本站加檔案說明源碼",
 	"visualeditor-ca-createsource": "加源碼",
 	"visualeditor-ca-editlocaldescriptionsource": "改本站檔案說明源碼",

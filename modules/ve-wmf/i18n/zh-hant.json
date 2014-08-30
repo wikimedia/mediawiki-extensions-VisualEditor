@@ -18,9 +18,9 @@
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "使用 [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] 編輯",
+	"tag-visualeditor-description": "使用 [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] 完成的編輯",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: 需要檢查]]",
-	"tag-visualeditor-needcheck-description": "使用 [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] 作出的編輯。系統偵測到修改後的 WikiText 源碼可能出現了預期之外的變化。",
+	"tag-visualeditor-needcheck-description": "使用 [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] 完成的編輯。系統偵測到 WikiText 可能發生預期外的變更。",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: 已切換]]",
 	"tag-visualeditor-switched-description": "使用者使用 VisualEditor 後更改回 WikiText 編輯器。",
 	"visualeditor-feedback-link": "Project:VisualEditor/回饋",
