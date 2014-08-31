@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Mimarik",
-			"Teslaton"
+			"Teslaton",
+			"Muhammad Shuaib"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|بصری خانہ ترمیم]]",
 	"tag-visualeditor-description": "Úprava vykonaná pomocou [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Skontrolovať]]",
 	"tag-visualeditor-needcheck-description": "Úprava vykonaná pomocou [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]], pri ktorej systém odhalil možné nezamýšľané zmeny wikitextu.",

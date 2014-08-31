@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zylbath"
+			"Zylbath",
+			"Muhammad Shuaib"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|بصری خانہ ترمیم]]",
 	"tag-visualeditor-description": "Bearbeidt mit den [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: nakieken]]",
 	"tag-visualeditor-needcheck-description": "Mit den [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] bearbeidte Ännern, bi de dat Systeem wollmööglich Ännern in'n Wikitext opdeckt hett, de nich wüllt sünd.",

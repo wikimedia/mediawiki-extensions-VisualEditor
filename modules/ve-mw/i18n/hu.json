@@ -153,7 +153,7 @@
 	"visualeditor-linkinspector-suggest-matching-page": "Hozzáillő {{PLURAL:$1|oldal|oldalak}}",
 	"visualeditor-linkinspector-suggest-new-page": "Új lap",
 	"visualeditor-linkinspector-suggest-redirect-page": "Átirányító {{PLURAL:$1|lap|lapok}}",
-	"visualeditor-linknodeinspector-add-label": "Cím hozzáadása",
+	"visualeditor-linknodeinspector-add-label": "Címke hozzáadása",
 	"visualeditor-linknodeinspector-title": "Egyszerű link",
 	"visualeditor-loadwarning": "Hiba a kiszolgálóról való letöltés közben: $1. Megpróbálod újra?",
 	"visualeditor-loadwarning-token": "Hiba a kiszolgálóról való szerkesztőtoken-letöltés közben: $1. Megpróbálod újra?",
