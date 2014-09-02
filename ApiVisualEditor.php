@@ -315,7 +315,13 @@ class ApiVisualEditor extends ApiBase {
 				RequestContext::getMain()->setTitle( $page );
 				$notices = $page->getEditNotices();
 				if ( $user->isAnon() ) {
-					$notices[] = $this->msg( 'anoneditwarning' )->parseAsBlock();
+					$notices[] = $this->msg(
+						'anoneditwarning',
+						// Log-in link
+						'{{fullurl:Special:UserLogin|returnto={{FULLPAGENAMEE}}}}',
+						// Sign-up link
+						'{{fullurl:Special:UserLogin/signup|returnto={{FULLPAGENAMEE}}}}'
+					)->parseAsBlock();
 				}
 				if ( $parsed && $parsed['restoring'] ) {
 					$notices[] = $this->msg( 'editingold' )->parseAsBlock();
