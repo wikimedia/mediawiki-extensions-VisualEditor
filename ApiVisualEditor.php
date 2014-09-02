@@ -83,7 +83,7 @@ class ApiVisualEditor extends ApiBase {
 			} else {
 				$message = 'MWHttpRequest error';
 			}
-			$this->dieUsage( $message, 'parsoidserver-' . $code );
+			$this->dieUsage( "$message: " . $req->getContent(), 'parsoidserver-' . $code );
 		}
 		// TODO pass through X-Parsoid-Performance header, merge with getHTML above
 		return $req->getContent();
@@ -306,6 +306,7 @@ class ApiVisualEditor extends ApiBase {
 			$html = gzinflate( base64_decode( substr( $html, 11 ) ) );
 		}
 
+		wfDebugLog( 'visualeditor', "called on '$page' with paction: '{$params['paction']}'" );
 		switch ( $params['paction'] ) {
 			case 'parse':
 				$parsed = $this->getHTML( $page, $parserParams );
