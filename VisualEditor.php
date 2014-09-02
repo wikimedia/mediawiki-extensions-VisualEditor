@@ -1077,6 +1077,7 @@ $wgResourceModules += array(
 
 	'ext.visualEditor.mwreference' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
+			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceGroupInputWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceResultWidget.js',
 
@@ -1088,6 +1089,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 		),
 		'styles' => array(
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',
 		),
