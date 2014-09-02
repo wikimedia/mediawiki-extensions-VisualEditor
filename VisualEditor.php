@@ -386,8 +386,9 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/nodes/ve.dm.TableRowNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.TableSectionNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.TextNode.js',
-			'lib/ve/src/dm/nodes/ve.dm.BlockImageCaptionNode.js',
+			'lib/ve/src/dm/nodes/ve.dm.ImageNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.BlockImageNode.js',
+			'lib/ve/src/dm/nodes/ve.dm.BlockImageCaptionNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.InlineImageNode.js',
 
 			'lib/ve/src/dm/annotations/ve.dm.LinkAnnotation.js',
@@ -453,8 +454,9 @@ $wgResourceModules += array(
 			'lib/ve/src/ce/nodes/ve.ce.TableRowNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.TableSectionNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.TextNode.js',
-			'lib/ve/src/ce/nodes/ve.ce.BlockImageCaptionNode.js',
+			'lib/ve/src/ce/nodes/ve.ce.ImageNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.BlockImageNode.js',
+			'lib/ve/src/ce/nodes/ve.ce.BlockImageCaptionNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.InlineImageNode.js',
 
 			'lib/ve/src/ce/annotations/ve.ce.LinkAnnotation.js',
