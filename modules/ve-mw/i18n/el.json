@@ -9,7 +9,8 @@
 			"Glavkos",
 			"Nikosguard",
 			"Tifa93",
-			"Elitre"
+			"Elitre",
+			"Protnet"
 		]
 	},
 	"tooltip-ca-createsource": "Δημιουργήστε τον πηγαίο κώδικα γι'αυτή τη σελίδα",
@@ -134,7 +135,7 @@
 	"visualeditor-dialog-transclusion-remove-param": "Αφαίρεση πεδίου",
 	"visualeditor-dialog-transclusion-remove-template": "Αφαίρεση προτύπου",
 	"visualeditor-dialog-transclusion-required-parameter": "Απαιτούμενο πεδίο",
-	"visualeditor-dialog-transclusion-required-parameter-description": "Το πεδίο είναι υποχρεωτικό.",
+	"visualeditor-dialog-transclusion-required-parameter-description": "Το πεδίο απαιτείται.",
 	"visualeditor-dialog-transclusion-single-mode": "Απόκρυψη επιλογών",
 	"visualeditor-dialog-transclusion-title": "Ενσωμάτωση",
 	"visualeditor-dialogbutton-media-tooltip": "Πολυμέσο",
@@ -194,8 +195,8 @@
 	"visualeditor-preference-mwalienextension-description": "Προσθέτει εργαλεία (σε πειραματική ακόμα φάση) για επεξεργασία προσθέτων (όπως πινακοθηκών εικόνων ή τμημάτων πηγαίου κώδικα) πριν ενεργοποιηθούν τα αντίστοιχα πλήρη εργαλεία. Παρακαλούμε, όταν χρησιμοποιείτε πειραματικές δυνατότητες, να ελέγχετε τις αλλαγές σας πριν τις αποθηκεύσετε.",
 	"visualeditor-preference-mwalienextension-label": "Επεξεργασία ετικετών επεκτάσεων με το VisualEditor",
 	"visualeditor-reference-input-placeholder": "Που θέλετε να παραπέμψετε;",
-	"visualeditor-referenceslist-isempty": "Δεν υπάρχουν παραπομπές με την ομάδα \"$1\" σε αυτή τη σελίδα.",
-	"visualeditor-referenceslist-isempty-default": "Δεν υπάρχουν παραπομπές για να περιληφθούν σε αυτόν τον κατάλογο.",
+	"visualeditor-referenceslist-isempty": "Δεν υπάρχουν παραπομπές με την ομάδα «$1» σε αυτήν τη σελίδα για να περιληφθούν σε αυτόν τον κατάλογο.",
+	"visualeditor-referenceslist-isempty-default": "Δεν υπάρχουν παραπομπές σε αυτήν τη σελίδα για να περιληφθούν σε αυτόν τον κατάλογο.",
 	"visualeditor-referenceslist-missingref": "Η παραπομπή αυτή έχει οριστεί μέσω προτύπου ή άλλου αυτόματα παραγόμενου μπλοκ και, προς το παρόν, δεν μπορείτε να την επεξεργαστείτε με τον VisualEditor. Χρησιμοποιήστε τον επεξεργαστή κώδικα.",
 	"visualeditor-savedialog-error-badtoken": "Δεν μπορέσαμε να διαχειριστούμε την επεξεργασία σας γιατί η σύνοδος (session) δεν είναι πια έγκυρη.",
 	"visualeditor-savedialog-identify-anon": "Θέλετε να αποθηκεύσετε αυτή τη σελίδα ως ανώνυμος χρήστης; Σε αυτή την περίπτωση, θα καταγραφεί η IP σας στο ιστορικό της σελίδας.",
