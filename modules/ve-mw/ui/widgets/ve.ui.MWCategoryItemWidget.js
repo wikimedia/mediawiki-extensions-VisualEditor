@@ -11,7 +11,7 @@
  * @class
  * @abstract
  * @extends OO.ui.Widget
- * @mixins OO.ui.IndicatedElement
+ * @mixins OO.ui.IndicatorElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -27,7 +27,7 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	OO.ui.Widget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.IndicatedElement.call( this, this.$( '<span>' ), config );
+	OO.ui.IndicatorElement.call( this, config );
 
 	// Properties
 	this.name = config.item.name;
@@ -61,7 +61,7 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 
 OO.inheritClass( ve.ui.MWCategoryItemWidget, OO.ui.Widget );
 
-OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.IndicatedElement );
+OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.IndicatorElement );
 
 /* Events */
 

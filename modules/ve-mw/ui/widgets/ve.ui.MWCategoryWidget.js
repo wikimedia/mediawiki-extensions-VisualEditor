@@ -24,7 +24,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	OO.ui.Widget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.GroupElement.call( this, this.$( '<div>' ), config );
+	OO.ui.GroupElement.call( this, config );
 
 	// Properties
 	this.categories = {};

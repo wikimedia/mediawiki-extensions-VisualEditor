@@ -58,7 +58,7 @@
 	background-repeat: no-repeat;
 }
 
-.ve-ui-mwMediaResultWidget .oo-ui-labeledElement-label {
+.ve-ui-mwMediaResultWidget .oo-ui-labelElement-label {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -72,11 +72,11 @@
 	text-overflow: ellipsis;
 }
 
-.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted .oo-ui-labeledElement-label {
+.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted .oo-ui-labelElement-label {
 	background-color: rgba(0,0,0,0.75);
 }
 
-.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected .oo-ui-labeledElement-label {
+.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected .oo-ui-labelElement-label {
 	background-color: #000;
 }
 

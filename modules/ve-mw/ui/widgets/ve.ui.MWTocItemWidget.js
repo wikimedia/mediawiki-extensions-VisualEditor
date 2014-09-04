@@ -26,7 +26,7 @@ ve.ui.MWTocItemWidget = function VeCeMWTocItemWidget( config ) {
 	OO.ui.Widget.call( this, config );
 
 	// Mixin Constructor
-	OO.ui.GroupElement.call( this, this.$( '<ul>' ), config );
+	OO.ui.GroupElement.call( this, $.extend( {}, config, { $group: this.$( '<ul>' ) } ) );
 
 	config = config || {};
 
