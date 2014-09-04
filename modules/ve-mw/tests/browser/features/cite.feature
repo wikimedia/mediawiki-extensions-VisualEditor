@@ -14,6 +14,9 @@ Feature: VisualEditor Cite
       And I fill in the third textarea with "Website Source date 28 July 2014"
       And I fill in the fourth textarea with "28 July 2014"
       And I fill in the fifth textarea with "Website title"
+      And I fill in the sixth textarea with "Website publisher"
+      And I fill in the seventh textarea with "Website Last name"
+      And I fill in the eighth textarea with "Website First name"
       And the Website input field titles are in the correct order
       And I click Add more information
       And I see Show more fields
@@ -47,8 +50,13 @@ Feature: VisualEditor Cite
 
   Scenario: News
     When I click News
-    And I fill in the first textarea with "News Source title"
-    And I fill in the second textarea with "News Source date"
+    And I fill in the first textarea with "News URL"
+    And I fill in the second textarea with "News Source title"
+    And I fill in the third textarea with "News Last name"
+    And I fill in the fourth textarea with "News First name"
+    And I fill in the fifth textarea with "News Source date"
+    And I fill in the sixth textarea with "News Work"
+    And I fill in the seventh textarea with "News URL access date"
     And the News input field titles are in the correct order
     And I click Insert Citation
     And I click Save page

@@ -96,11 +96,11 @@ class VisualEditorPage
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
-    a(:cite_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 4, frame: frame)
+    a(:cite_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
     a(:book_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
     #text_field(:cite_custom_field_name, css: ".oo-ui-textInputWidget-decorated > input:nth-child(1)", frame: frame)
     text_field(:cite_custom_field_name, css: ".oo-ui-searchWidget-query > div:nth-child(1) > input:nth-child(1)", frame: frame)
-    text_area(:cite_new_website_field, css: "div.oo-ui-layout:nth-child(7) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)", frame: frame)
+    text_area(:cite_new_website_field, css: "div.oo-ui-layout:nth-child(10) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)", frame: frame)
     div(:cite_new_field_label, css: ".oo-ui-optionWidget", frame: frame)
     div(:cite_show_more_fields, class: "ve-ui-mwMoreParametersResultWidget-label", frame: frame)
     div(:cite_ui, class: "oo-ui-window-body", frame: frame)

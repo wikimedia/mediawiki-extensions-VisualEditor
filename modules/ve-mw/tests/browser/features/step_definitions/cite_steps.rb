@@ -83,7 +83,7 @@ When(/^I type in a field name "(.*?)"$/) do |custom_field|
 end
 
 When(/^the Book input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Pages/m
+  on(VisualEditorPage).cite_ui.should match /Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Page/m
 end
 
 When(/^the Journal input field titles are in the correct order$/) do
@@ -91,11 +91,11 @@ When(/^the Journal input field titles are in the correct order$/) do
 end
 
 When(/^the News input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /Source title.+Source date/m
+  on(VisualEditorPage).cite_ui.should match /URL.+Source title.+Last name.+First name.+Source date.+Work.+URL access date/m
 end
 
 When(/^the Website input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /URL.+Source title.+Source date.+URL access date.+Website title/m
+  on(VisualEditorPage).cite_ui.should match /URL.+Source title.+Source date.+URL access date.+Website title.+Publisher.+Last name.+First name/m
 end
 
 Then(/^diff view should show the Book citation added$/) do
@@ -103,7 +103,7 @@ Then(/^diff view should show the Book citation added$/) do
     page.wait_until(10) do
       page.links_diff_view.include? "Cite VisualEditor Test"
     end
-    page.links_diff_view.should match Regexp.escape("<ref>{{Cite book|title = Book title|last = Book author last name|first = Book author first name|publisher = Book publisher|year = 2014|isbn = 9780743273565New book field contents|location = Location of publication|pages = 123|New book field = }}</ref>Cite VisualEditor Test")
+    page.links_diff_view.should match Regexp.escape("<ref>{{Cite book|title = Book title|last = Book author last name|first = Book author first name|publisher = Book publisher|year = 2014|isbn = 9780743273565|location = Location of publication|pages = 123|New book field = New book field contents}}</ref>Cite VisualEditor Test")
   end
 end
 
@@ -121,7 +121,7 @@ Then(/^diff view should show the News citation added$/) do
     page.wait_until(10) do
       page.links_diff_view.include? "Cite VisualEditor Test"
     end
-    page.links_diff_view.should match Regexp.escape("<ref>{{Cite news|title = News Source title|date = News Source date}}</ref>Cite VisualEditor Test")
+    page.links_diff_view.should match Regexp.escape("<ref>{{Cite news|url = News URL|title = News Source title|last = News Last name|first = News First name|date = News Source date|work = News Work|accessdate = News URL access date}}</ref>Cite VisualEditor Test")
   end
 end
 
@@ -130,6 +130,6 @@ Then(/^diff view should show the Website citation added$/) do
     page.wait_until(10) do
       page.links_diff_view.include? "Cite VisualEditor Test"
     end
-    page.links_diff_view.should match Regexp.escape("<ref>{{Cite web|url = http://en.wikipedia.org/|title = Website Source title|date = Website Source date 28 July 2014|accessdate = 28 July 2014|website = Website title|New website field = New website field contents}}</ref>Cite VisualEditor Test")
+    page.links_diff_view.should match Regexp.escape("<ref>{{Cite web|url = http://en.wikipedia.org/|title = Website Source title|date = Website Source date 28 July 2014|accessdate = 28 July 2014|website = Website title|publisher = Website publisher|last = Website Last name|first = Website First name|New website field = New website field contents}}</ref>Cite VisualEditor Test")
   end
 end
