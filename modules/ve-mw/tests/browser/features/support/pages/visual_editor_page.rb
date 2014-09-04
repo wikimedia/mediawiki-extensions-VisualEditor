@@ -141,7 +141,7 @@ class VisualEditorPage
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
     text_field(:parameter_box, index: 0, frame: frame)
     div(:parameter_icon, text: "q", frame: frame)
-    a(:remove_parameter, title: "Remove field", frame: frame)
+    a(:remove_parameter, css: ".ve-ui-mwParameterPage-removeButton > a:nth-child(1)", frame: frame)
     a(:remove_template, title: "Remove template", frame: frame)
     span(:return_to_save, class: "oo-ui-labelElement-label", text: "Return to save form", frame: frame)
     span(:review_changes, class: "oo-ui-labelElement-label", text: "Review your changes", frame: frame)
