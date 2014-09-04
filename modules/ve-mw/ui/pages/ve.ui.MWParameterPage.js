@@ -33,7 +33,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.defaultValue = this.spec.getParameterDefaultValue( paramName );
 	this.$info = this.$( '<div>' );
 	this.$actions = this.$( '<div>' );
-	this.$label = this.$( '<div>' );
+	this.$labelElement = this.$( '<div>' );
 	this.$field = this.$( '<div>' );
 	this.$more = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
@@ -85,16 +85,16 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	// TODO: Use spec.type
 
 	// Events
-	this.$label.on( 'click', this.onLabelClick.bind( this ) );
+	this.$labelElement.on( 'click', this.onLabelClick.bind( this ) );
 
 	// Initialization
 	this.$info
 		.addClass( 've-ui-mwParameterPage-info' )
-		.append( this.$label, this.statusIndicator.$element );
+		.append( this.$labelElement, this.statusIndicator.$element );
 	this.$actions
 		.addClass( 've-ui-mwParameterPage-actions' )
 		.append( this.infoButton.$element, this.removeButton.$element );
-	this.$label
+	this.$labelElement
 		.addClass( 've-ui-mwParameterPage-label' )
 		.text( this.spec.getParameterLabel( paramName ) );
 	this.$field
