@@ -139,29 +139,28 @@ ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, bound
  */
 ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalable ) {
 	var originalDimensions, dimensions,
-		width = scalable.getCurrentDimensions().width,
 		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	originalDimensions = scalable.getOriginalDimensions();
 
-	// Deal with the different default sizes
-	if ( type === 'thumb' || type === 'frameless' ) {
-		// Set the default size to that in the wiki configuration if
-		// 1. The image width is not smaller than the default
-		// 2. If the image is an SVG drawing
-		if ( width >= defaultThumbSize || mediaType === 'DRAWING' ) {
-			dimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
-				width: defaultThumbSize
-			}, scalable.getRatio() );
+	// We can only set default dimensions if we have the original ones
+	if ( originalDimensions ) {
+		if ( type === 'thumb' || type === 'frameless' ) {
+			// Set the default size to that in the wiki configuration if
+			// 1. The original image width is not smaller than the default
+			// 2. If the image is an SVG drawing
+			if ( originalDimensions.width >= defaultThumbSize || mediaType === 'DRAWING' ) {
+				dimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
+					width: defaultThumbSize
+				}, scalable.getRatio() );
+			} else {
+				dimensions = ve.dm.Scalable.static.getDimensionsFromValue(
+					originalDimensions,
+					scalable.getRatio()
+				);
+			}
+			scalable.setDefaultDimensions( dimensions );
 		} else {
-			dimensions = ve.dm.Scalable.static.getDimensionsFromValue(
-				scalable.getCurrentDimensions(),
-				scalable.getRatio()
-			);
-		}
-		scalable.setDefaultDimensions( dimensions );
-	} else {
-		if ( originalDimensions ) {
 			scalable.setDefaultDimensions( originalDimensions );
 		}
 	}
