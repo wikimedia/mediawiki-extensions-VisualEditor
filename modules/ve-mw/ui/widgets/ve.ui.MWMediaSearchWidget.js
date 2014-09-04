@@ -179,6 +179,8 @@ ve.ui.MWMediaSearchWidget.prototype.onAllMediaQueriesDone = function ( source ) 
 
 	if ( this.results.getItems().length === 0 ) {
 		this.$noItemsMessage.show();
+	} else {
+		this.$noItemsMessage.hide();
 	}
 };
 
