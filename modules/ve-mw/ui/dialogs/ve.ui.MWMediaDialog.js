@@ -882,7 +882,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 					this.wikitextWarning
 				);
 			}.bind( this ) );
-			this.setChanged();
+			this.checkChanged();
 		}
 	} );
 };
