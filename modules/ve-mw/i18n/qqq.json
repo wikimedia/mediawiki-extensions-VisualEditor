@@ -21,7 +21,8 @@
 			"Arjunaraoc",
 			"Robby",
 			"Nemo bis",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Matma Rex"
 		]
 	},
 	"accesskey-ca-editsource": "{{optional}}",
@@ -48,7 +49,7 @@
 	"visualeditor-cite-tool-name-journal": "Title of tool that inserts a citation for a journal",
 	"visualeditor-cite-tool-name-news": "Title of tool that inserts a citation for a news.\n{{Identical|News}}",
 	"visualeditor-cite-tool-name-web": "Title of tool that inserts a citation for a website.\n{{Identical|Website}}",
-	"visualeditor-desc": "{{desc|name=VisualEditor|url=http://www.mediawiki.org/wiki/Extension:VisualEditor}}",
+	"visualeditor-desc": "{{desc|name=VisualEditor|url=https://www.mediawiki.org/wiki/Extension:VisualEditor}}",
 	"visualeditor-descriptionpagelink": "{{doc-important|Do not translate \"Project\"; it is automatically converted to the wiki's project namespace.}}\nName of a page describing the use of VisualEditor in this project.\n\nUsed in:\n* {{msg-mw|Tag-visualeditor}}\n* {{msg-mw|Tag-visualeditor-description}}\n* {{msg-mw|Tag-visualeditor-needcheck}}\n* {{msg-mw|Tag-visualeditor-needcheck-description}}",
 	"visualeditor-dialog-beta-welcome-action-continue": "Used as label for the Continue button which is used to close the dialog and continue using VisualEditor.\n{{Identical|Continue}}",
 	"visualeditor-dialog-beta-welcome-content": "Text explaining VisualEditor is in beta.\n\nRefers to {{msg-mw|Visualeditor-help-tool}}.\n\nParameters:\n* $1 - {{msg-mw|Edit}}",
