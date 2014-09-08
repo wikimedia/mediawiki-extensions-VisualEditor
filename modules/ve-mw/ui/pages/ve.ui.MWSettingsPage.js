@@ -57,7 +57,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		{
 			$: this.$,
 			align: 'top',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-toc-label' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-toc-label' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-toc-help' )
 		}
 	);
 
@@ -68,7 +69,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		{
 			$: this.$,
 			align: 'inline',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-redirect-help' )
 		}
 	);
 	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
@@ -88,7 +90,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		{
 			$: this.$,
 			align: 'inline',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-redirect-statichelp' )
 		}
 	);
 	this.enableRedirectInput.connect( this, { change: 'onEnableRedirectChange' } );
@@ -98,7 +101,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.metaItemCheckboxes = [
 		{
 			metaName: 'mwNoEditSection',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-help' )
 		}
 	].concat( ve.ui.MWSettingsPage.static.extraMetaCheckboxes );
 
@@ -106,11 +110,13 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.metaItemCheckboxes.push(
 			{
 				metaName: 'mwHiddenCategory',
-				label: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-label' )
+				label: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-label' ),
+				help: ve.msg( 'visualeditor-dialog-meta-settings-hiddencat-help' )
 			},
 			{
 				metaName: 'mwNoGallery',
-				label: ve.msg( 'visualeditor-dialog-meta-settings-nogallery-label' )
+				label: ve.msg( 'visualeditor-dialog-meta-settings-nogallery-label' ),
+				help: ve.msg( 'visualeditor-dialog-meta-settings-nogallery-help' )
 			}
 		);
 	}
@@ -128,7 +134,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			{
 				$: settingsPage.$,
 				align: 'inline',
-				label: this.label
+				label: this.label,
+				help: this.help || ''
 			}
 		);
 		settingsPage.settingsFieldset.addItems( [ this.fieldLayout ] );
