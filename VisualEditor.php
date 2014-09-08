@@ -39,6 +39,8 @@ $wgAutoloadClasses['ApiVisualEditor'] = $dir . 'ApiVisualEditor.php';
 $wgAutoloadClasses['ApiVisualEditorEdit'] = $dir . 'ApiVisualEditorEdit.php';
 $wgAutoloadClasses['VisualEditorHooks'] = $dir . 'VisualEditor.hooks.php';
 $wgAutoloadClasses['VisualEditorDataModule'] = $dir . 'VisualEditorDataModule.php';
+$wgAutoloadClasses['VisualEditorViewPageTargetInitModule'] =
+	$dir . 'VisualEditorViewPageTargetInitModule.php';
 $wgExtensionMessagesFiles['VisualEditor'] = $dir . 'VisualEditor.i18n.php';
 $wgMessagesDirs['VisualEditor'] = array(
 	__DIR__ . '/lib/ve/i18n',
@@ -158,6 +160,7 @@ $wgResourceModules += array(
 	),
 
 	'ext.visualEditor.viewPageTarget.init' => $wgVisualEditorResourceTemplate + array(
+		'class' => 'VisualEditorViewPageTargetInitModule',
 		'scripts' => 'modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.init.js',
 		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.init.css',
 		'dependencies' => array(
