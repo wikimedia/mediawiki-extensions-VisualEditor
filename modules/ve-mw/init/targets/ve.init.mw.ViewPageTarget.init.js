@@ -45,6 +45,8 @@
 					target.addPlugins( plugins );
 
 					return target;
+				}, function ( e ) {
+					mw.log.warning( 'VisualEditor failed to load: ' + e );
 				} );
 		}
 		return targetPromise;
