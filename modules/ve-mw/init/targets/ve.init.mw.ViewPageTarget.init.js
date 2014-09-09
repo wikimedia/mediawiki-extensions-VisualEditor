@@ -18,7 +18,7 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage,
-		init, support, getTargetDeferred, enable, userPrefEnabled,
+		init, support, targetPromise, enable, userPrefEnabled,
 		plugins = [];
 
 	/**
@@ -26,11 +26,9 @@
 	 * @returns {jQuery.Promise}
 	 */
 	function getTarget() {
-		var loadTargetDeferred;
-		if ( !getTargetDeferred ) {
-			getTargetDeferred = $.Deferred();
-			loadTargetDeferred = $.Deferred()
-				.done( function () {
+		if ( !targetPromise ) {
+			targetPromise = mw.loader.using( 'ext.visualEditor.viewPageTarget' )
+				.then( function () {
 					var target = new ve.init.mw.ViewPageTarget();
 
 					// Tee tracked events to MediaWiki firehose, if available (1.23+).
@@ -46,13 +44,10 @@
 					// Add plugins
 					target.addPlugins( plugins );
 
-					getTargetDeferred.resolve( target );
-				} )
-				.fail( getTargetDeferred.reject );
-
-			mw.loader.using( 'ext.visualEditor.viewPageTarget', loadTargetDeferred.resolve, loadTargetDeferred.reject );
+					return target;
+				} );
 		}
-		return getTargetDeferred.promise();
+		return targetPromise;
 	}
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
