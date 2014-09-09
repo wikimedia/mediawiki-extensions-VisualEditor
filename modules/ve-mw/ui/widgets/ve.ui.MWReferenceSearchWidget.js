@@ -108,6 +108,7 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 			return;
 		}
 	}
+	this.indexEmpty = true;
 };
 
 /**
