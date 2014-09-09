@@ -103,12 +103,14 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 	var i, len, title, value,
 		menu$ = this.lookupMenu.$,
 		items = [],
-		matchingPages = data;
+		matchingPages = data,
+		linkCacheUpdate = {};
 
 	// Matching pages
 	if ( matchingPages && matchingPages.length ) {
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
 			title = new mw.Title( matchingPages[i] );
+			linkCacheUpdate[matchingPages[i]] = { missing: false };
 			if ( this.namespace !== null ) {
 				if ( title.getNamespaceId() === this.namespace ) {
 					value = title.getMainText();
@@ -124,6 +126,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 				value, { $: menu$, label: value }
 			) );
 		}
+		ve.init.platform.linkCache.set( linkCacheUpdate );
 	}
 
 	return items;
