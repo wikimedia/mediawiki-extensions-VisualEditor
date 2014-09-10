@@ -3,13 +3,18 @@
 		"authors": [
 			"Fohanno",
 			"Fulup",
-			"Y-M D"
+			"Y-M D",
+			"Maoris"
 		]
 	},
+	"tooltip-ca-createsource": "Krouiñ kod mammennoù ar bajenn-mañ",
+	"tooltip-ca-editsource": "Kemmañ kod mammennoù ar bajenn-mañ",
+	"tooltip-ca-ve-edit": "Kemmañ ar bajenn-mañ gant VisualEditor",
 	"visualeditor-advancedsettings-tool": "Arventennoù araokaet",
 	"visualeditor-annotationbutton-linknode-tooltip": "Liamm simpl",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
+	"visualeditor-beta-warning": "E stumm 'beta' emañ VisualEditor. E c'hallfe bezañ kudennoù gant ar meziant ha marteze ne viot ket evit kemmañ tammoù eus ar bajenn. Evit dont en-dro da  gemm ar vammenn hep koll ar c'hemmoù, digorit ar roll disachañ e-kichen \"{{int:visualeditor-toolbar-savedialog}}\" ha dibabit \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-ca-createlocaldescriptionsource": "Ouzhpennañ deskrivadur lec'hel ar vammenn",
 	"visualeditor-ca-createsource": "Krouiñ ar vammenn",
 	"visualeditor-ca-editlocaldescriptionsource": "Kemmañ deskrivadur lec'hel ar vammenn",
@@ -127,9 +132,9 @@
 	"visualeditor-mwalienextensioninspector-title": "Astenn MediaWiki",
 	"visualeditor-mweditmodesource-title": "Mont da gemmañ ar vammenn ?",
 	"visualeditor-mweditmodesource-tool": "Mont da gemmañ ar vammenn",
+	"visualeditor-mweditmodesource-warning-cancel": "Nullañ",
 	"visualeditor-mweditmodesource-warning-switch": "Derc'hel ar c'hemmoù",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Dilezel ar c'hemmoù",
-	"visualeditor-mweditmodesource-warning-cancel": "Nullañ",
 	"visualeditor-mwgalleryinspector-placeholder": "Skouer.jpg|Alc'hwez ar skeudenn",
 	"visualeditor-mwgalleryinspector-title": "Skeudennaoueg",
 	"visualeditor-pagemenu-tooltip": "Dibarzhioù pajenn",
@@ -155,6 +160,6 @@
 	"visualeditor-toolbar-cite-label": "Menegiñ",
 	"visualeditor-toolbar-savedialog": "Enrollañ ar bajenn",
 	"visualeditor-usernamespacepagelink": "Raktres:Esaouenn-anv implijer",
-	"visualeditor-viewpage-savewarning-title": "Ha sur oc'h ?",
-	"visualeditor-viewpage-savewarning-keep": "Kenderc'hel da gemmañ"
+	"visualeditor-viewpage-savewarning-keep": "Kenderc'hel da gemmañ",
+	"visualeditor-viewpage-savewarning-title": "Ha sur oc'h ?"
 }
