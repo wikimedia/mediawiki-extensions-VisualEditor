@@ -18,17 +18,6 @@ class VisualEditorHooks {
 		// this should have no impact on deploying to Wikimedia's wiki cluster;
 		// is fine for release tarballs because 1.22wmf11 < 1.22alpha < 1.22.0.
 		wfUseMW( '1.24wmf18' );
-
-		$coreConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'main' );
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-		$resourceModules = $coreConfig->get( 'ResourceModules' );
-		// Add tab messages to the init init module
-		foreach ( $veConfig->get( 'VisualEditorTabMessages' ) as $msg ) {
-			if ( $msg !== null ) {
-				$resourceModules['ext.visualEditor.viewPageTarget.init']['messages'][] = $msg;
-			}
-		}
-		$coreConfig->set( 'ResourceModules', $resourceModules );
 	}
 
 	/**
