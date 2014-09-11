@@ -1,4 +1,4 @@
-@chrome @en.wikipedia.beta.wmflabs.org @firefox @login @test2.wikipedia.org
+@chrome @en.wikipedia.beta.wmflabs.org @firefox @internet_explorer_10 @login @safari @test2.wikipedia.org
 Feature: VisualEditor Media Interface
 
   Background:

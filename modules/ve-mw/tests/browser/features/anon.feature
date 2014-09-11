@@ -1,4 +1,4 @@
-@chrome @clean @firefox @login @test2.wikipedia.org
+@chrome @clean @firefox @internet_explorer_10 @login @safari @test2.wikipedia.org
 Feature: VisualEditor
 
   Scenario: Basic edit
