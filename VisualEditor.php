@@ -100,15 +100,6 @@ $wgVisualEditorResourceTemplate = array(
 );
 
 $wgResourceModules += array(
-	'rangy' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'lib/ve/lib/rangy/rangy-core-1.3.js',
-			'lib/ve/lib/rangy/rangy-position-1.3.js',
-			'lib/ve/lib/rangy/rangy-export.js',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
-
 	'jquery.visibleText' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'lib/ve/lib/jquery/jquery.visibleText.js',
@@ -577,7 +568,6 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/styles/ve.ui.DebugBar.css',
 		),
 		'dependencies' => array(
-			'rangy',
 			'unicodejs',
 			'jquery.uls.data',
 			'ext.visualEditor.base',
