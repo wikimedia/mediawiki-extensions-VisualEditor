@@ -191,7 +191,7 @@ QUnit.test( 'getItemInsertion', 4, function ( assert ) {
 
 	insertion = internalList.getItemInsertion( 'mwReference/', 'literal/foo', [] );
 	index = internalList.getItemNodeCount();
-	assert.equal( insertion.index, index, 'Insertion creates a new reference' );
+	assert.strictEqual( insertion.index, index, 'Insertion creates a new reference' );
 	assert.deepEqual(
 		insertion.transaction.getOperations(),
 		[
@@ -211,8 +211,8 @@ QUnit.test( 'getItemInsertion', 4, function ( assert ) {
 		'New reference operations match' );
 
 	insertion = internalList.getItemInsertion( 'mwReference/', 'literal/foo', [] );
-	assert.equal( insertion.index, index, 'Insertion with duplicate key reuses old index' );
-	assert.equal( insertion.transaction, null, 'Insertion with duplicate key has null transaction' );
+	assert.strictEqual( insertion.index, index, 'Insertion with duplicate key reuses old index' );
+	assert.strictEqual( insertion.transaction, null, 'Insertion with duplicate key has null transaction' );
 } );
 
 QUnit.test( 'getUniqueListKey', 7, function ( assert ) {
@@ -221,19 +221,19 @@ QUnit.test( 'getUniqueListKey', 7, function ( assert ) {
 		internalList = doc.getInternalList();
 
 	generatedName = internalList.getUniqueListKey( 'mwReference/', 'auto/0', 'literal/:' );
-	assert.equal( generatedName, 'literal/:0', '0 maps to 0' );
+	assert.strictEqual( generatedName, 'literal/:0', '0 maps to 0' );
 	generatedName = internalList.getUniqueListKey( 'mwReference/', 'auto/1', 'literal/:' );
-	assert.equal( generatedName, 'literal/:1', '1 maps to 1' );
+	assert.strictEqual( generatedName, 'literal/:1', '1 maps to 1' );
 	generatedName = internalList.getUniqueListKey( 'mwReference/', 'auto/2', 'literal/:' );
-	assert.equal( generatedName, 'literal/:2', '2 maps to 2' );
+	assert.strictEqual( generatedName, 'literal/:2', '2 maps to 2' );
 	generatedName = internalList.getUniqueListKey( 'mwReference/', 'auto/3', 'literal/:' );
-	assert.equal( generatedName, 'literal/:4', '3 maps to 4 (because a literal :3 is present)' );
+	assert.strictEqual( generatedName, 'literal/:4', '3 maps to 4 (because a literal :3 is present)' );
 	generatedName = internalList.getUniqueListKey( 'mwReference/', 'auto/4', 'literal/:' );
-	assert.equal( generatedName, 'literal/:5', '4 maps to 5' );
+	assert.strictEqual( generatedName, 'literal/:5', '4 maps to 5' );
 
 	generatedName = internalList.getUniqueListKey( 'mwReference/', 'auto/0', 'literal/:' );
-	assert.equal( generatedName, 'literal/:0', 'Reusing a key reuses the name' );
+	assert.strictEqual( generatedName, 'literal/:0', 'Reusing a key reuses the name' );
 
 	generatedName = internalList.getUniqueListKey( 'mwReference/foo', 'auto/4', 'literal/:' );
-	assert.equal( generatedName, 'literal/:0', 'Different groups are treated separately' );
+	assert.strictEqual( generatedName, 'literal/:0', 'Different groups are treated separately' );
 } );
