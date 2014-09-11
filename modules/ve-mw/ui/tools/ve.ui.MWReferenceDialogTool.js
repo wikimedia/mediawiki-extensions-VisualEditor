@@ -51,6 +51,27 @@ ve.ui.MWUseExistingReferenceDialogTool.static.commandName = 'reference/existing'
 ve.ui.MWUseExistingReferenceDialogTool.static.requiresRange = true;
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToGroup = false;
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToCatchall = false;
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWUseExistingReferenceDialogTool.prototype.onUpdateState = function ( fragment ) {
+	var groups = fragment.getDocument().getInternalList().getNodeGroups(), empty = true;
+
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
+	$.each( groups, function ( groupName, group ) {
+		if ( groupName.lastIndexOf( 'mwReference/' ) !== 0 ) {
+			return;
+		}
+		if ( group.indexOrder.length ) {
+			empty = false;
+			return false;
+		}
+	} );
+	this.setDisabled( empty );
+};
 ve.ui.toolFactory.register( ve.ui.MWUseExistingReferenceDialogTool );
 
 /**
