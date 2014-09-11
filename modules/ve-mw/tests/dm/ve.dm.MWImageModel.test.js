@@ -187,7 +187,7 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 						break;
 				}
 
-				assert.equal(
+				assert.strictEqual(
 					imageModel.getAlignment(),
 					expectedAlignment,
 					'getAlignment'
