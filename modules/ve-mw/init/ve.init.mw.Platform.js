@@ -88,7 +88,7 @@ ve.init.mw.Platform.prototype.getLanguageCodes = function () {
 ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
 	var languageNames = mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
 		$.uls.data.getAutonyms();
-	return languageNames[code];
+	return languageNames[code] || '';
 };
 
 /**
