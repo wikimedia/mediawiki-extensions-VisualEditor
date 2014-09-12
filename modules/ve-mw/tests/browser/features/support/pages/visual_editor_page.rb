@@ -128,7 +128,7 @@ class VisualEditorPage
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert", frame: frame)
     span(:confirm_switch, text: "Keep changes", frame: frame)
-    span(:confirm_switch_cancel, text: "Cancel", frame: frame)
+    span(:confirm_switch_cancel, text: "Resume editing", frame: frame)
     span(:confirm_switch_discard, text: "Discard changes", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
     text_area(:describe_change, index: 0, frame: frame)
