@@ -112,7 +112,7 @@
     "visualeditor-dialog-meta-settings-redirect-help": "You can make this page into a redirect, a page which will automatically take readers to another page on this wiki. This is useful for mis-spellings and alternative names or concepts. If you do so, readers will not see the contents of this page.",
     "visualeditor-dialog-meta-settings-redirect-label": "Redirect this page to",
     "visualeditor-dialog-meta-settings-redirect-placeholder": "Target page for redirection",
-    "visualeditor-dialog-meta-settings-redirect-statichelp": "You can prevent this redirect being updated automatically when the page to which it redirects is moved, in the very rare case that this is neeeded.",
+    "visualeditor-dialog-meta-settings-redirect-statichelp": "You can prevent this redirect being updated automatically when the page to which it redirects is moved, in the very rare case that this is needed.",
     "visualeditor-dialog-meta-settings-redirect-staticlabel": "Prevent this redirect being updated when target page is moved.",
     "visualeditor-dialog-meta-settings-section": "Page settings",
     "visualeditor-dialog-meta-settings-toc-default": "If needed",
