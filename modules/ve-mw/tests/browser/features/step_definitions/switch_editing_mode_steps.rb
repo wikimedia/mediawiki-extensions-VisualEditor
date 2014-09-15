@@ -28,7 +28,7 @@ When(/^I click Edit for VisualEditor from this page$/) do
 end
 
 When(/^I see the Cancel option$/) do
-  on(VisualEditorPage).confirm_switch_cancel_element.when_present
+  on(VisualEditorPage).confirm_switch_cancel_on_switch_element.when_present
 end
 
 When(/^I see the Discard option$/) do
