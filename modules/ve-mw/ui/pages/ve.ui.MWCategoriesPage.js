@@ -51,7 +51,8 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 		{
 			$: this.$,
 			align: 'top',
-			label: ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-label' )
+			label: ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-label' ),
+			help: ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-help' )
 		}
 	);
 
