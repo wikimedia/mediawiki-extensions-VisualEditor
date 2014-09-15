@@ -17,7 +17,8 @@
 			"Agripinoduarte",
 			"Opraco",
 			"Tuliouel",
-			"Rodrigo codignoli"
+			"Rodrigo codignoli",
+			"Teles"
 		]
 	},
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -41,7 +42,7 @@
 	"visualeditor-desc": "Editor visual para o MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Editor Visual",
 	"visualeditor-dialog-beta-welcome-action-continue": "Continuar",
-	"visualeditor-dialog-beta-welcome-content": "Esta é a nossa nova maneira de editar, mais fácil. Ele ainda está em fase Beta, o que significa que você pode encontrar partes da página que não pode editar, ou encontrar problemas que precisam ser corrigidos. Nós encorajamos você a rever suas alterações, e são bem-vindos relatórios sobre problemas que possam vir a surgir durante o uso do Editor Visual (clique no botão '{{int:visualeditor-help-tool}}' para enviar um relato). Você ainda pode usar o editor de wikitexto clicando na aba \"$1\" - as alterações não salvas serão perdidas.$1$1",
+	"visualeditor-dialog-beta-welcome-content": "Esta é a nossa nova maneira de editar, mais fácil. Está ainda em fase experimental, o que significa que pode encontrar partes da página em que não poderá editar ou encontrar problemas que precisam ser corrigidos. Nós encorajamos que reveja as suas alterações e são bem-vindos relatórios sobre problemas que possam vir a surgir durante o uso do Editor Visual (clique no botão '{{int:visualeditor-help-tool}}' para enviar o relatório). Pode ainda utilizar o editor de código-fonte ao clicar no botão \"$1\" - as alterações que não foram salvas serão perdidas.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bem-vindo}} ao Editor Visual",
 	"visualeditor-dialog-media-alttext-section": "Texto alternativo",
 	"visualeditor-dialog-media-change-image": "Escolha uma imagem diferente",

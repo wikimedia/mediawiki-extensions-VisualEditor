@@ -113,7 +113,7 @@
 	"visualeditor-dialog-meta-settings-redirect-help": "Puoi trasformare questa pagina in un redirect, cioè una pagina che porta automaticamente i lettori su un'altra pagina del wiki. Questo è utile per errori di grafia, e nomi o concetti alternativi. Se lo attivi, i lettori non vedranno il contenuto di questa pagina.",
 	"visualeditor-dialog-meta-settings-redirect-label": "Reindirizza questa pagina verso",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Pagina di destinazione per il reindirizzamento",
-	"visualeditor-dialog-meta-settings-redirect-statichelp": "Puoi impedire che questo redirect si aggiorni automaticamente se la pagina a cui punta viene spostata, nel molto raro caso che ciò sia opportuno.",
+	"visualeditor-dialog-meta-settings-redirect-statichelp": "Puoi impedire che questo redirect si aggiorni automaticamente se la pagina a cui punta viene spostata, nel raro caso che ciò sia necessario.",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Impedisci che questo redirect venga aggiornato quando viene spostata la pagina di destinazione.",
 	"visualeditor-dialog-meta-settings-section": "Impostazioni pagina",
 	"visualeditor-dialog-meta-settings-toc-default": "Se necessario",
