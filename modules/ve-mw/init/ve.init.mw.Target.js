@@ -398,7 +398,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		);
 	} else {
 		this.originalHtml = data.content;
-		this.doc = ve.createDocumentFromHtml( this.originalHtml );
+		this.doc = ve.parseXhtml( this.originalHtml );
 
 		// Parsoid outputs a protocol-relative <base> tag, so absolutize it
 		this.constructor.static.fixBase( this.doc, document );
@@ -927,7 +927,8 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 	copyAttributes( oldDoc.documentElement, newDoc.documentElement );
 	copyAttributes( oldDoc.head, newDoc.head );
 	copyAttributes( oldDoc.body, newDoc.body );
-	return '<!doctype html>' + ve.properOuterHtml( newDoc.documentElement );
+	// Add doctype manually
+	return '<!doctype html>' + ve.serializeXhtml( newDoc );
 };
 
 /**
