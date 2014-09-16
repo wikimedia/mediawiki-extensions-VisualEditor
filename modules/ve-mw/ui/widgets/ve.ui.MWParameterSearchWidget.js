@@ -148,7 +148,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 				exactMatch = true;
 			}
 		}
-		if ( !hasQuery && !this.showAll && items.length > this.limit ) {
+		if ( !hasQuery && !this.showAll && items.length >= this.limit ) {
 			remainder = len - i;
 			break;
 		}
