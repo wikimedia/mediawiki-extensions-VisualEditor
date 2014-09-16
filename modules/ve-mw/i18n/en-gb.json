@@ -7,5 +7,7 @@
 		]
 	},
 	"visualeditor-dialog-media-position-center": "Centre",
+	"visualeditor-dialog-meta-categories-defaultsort-help": "You can over-ride how this page is sorted when displayed within a category by setting a different index to sort with instead. This is often used to make pages about people show by last name, but be named with their first name shown first.",
+	"visualeditor-dialog-meta-settings-displaytitle-help": "You can over-ride how this page's title is displayed by setting a different label to show instead.",
 	"visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to try again?"
 }

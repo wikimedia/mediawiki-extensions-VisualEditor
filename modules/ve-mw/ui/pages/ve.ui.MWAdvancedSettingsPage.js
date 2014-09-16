@@ -55,7 +55,8 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		{
 			$: this.$,
 			align: 'top',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-index-label' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-index-label' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-index-help' )
 		}
 	);
 
@@ -80,7 +81,8 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		{
 			$: this.$,
 			align: 'top',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-help' )
 		}
 	);
 
@@ -92,7 +94,8 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		{
 			$: this.$,
 			align: 'inline',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' )
+			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-help' )
 		}
 	);
 	this.displayTitleInput = new OO.ui.TextInputWidget( {
@@ -115,11 +118,13 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		this.metaItemCheckboxes.push(
 			{
 				metaName: 'mwNoContentConvert',
-				label: ve.msg( 'visualeditor-dialog-meta-settings-nocontentconvert-label' )
+				label: ve.msg( 'visualeditor-dialog-meta-settings-nocontentconvert-label' ),
+				help: ve.msg( 'visualeditor-dialog-meta-settings-nocontentconvert-help' )
 			},
 			{
 				metaName: 'mwNoTitleConvert',
-				label: ve.msg( 'visualeditor-dialog-meta-settings-notitleconvert-label' )
+				label: ve.msg( 'visualeditor-dialog-meta-settings-notitleconvert-label' ),
+				help: ve.msg( 'visualeditor-dialog-meta-settings-notitleconvert-help' )
 			}
 		);
 	}
