@@ -881,56 +881,21 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
 };
 
 /**
- * Switch to edit source mode with the current wikitext
+ * Open the dialog to switch to edit source mode with the current wikitext, or just do it straight
+ * away if the document is unmodified. If we open the dialog, the document opacity will be set to
+ * half, which can be reset with the resetDocumentOpacity function.
  *
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.editSource = function () {
-	var $documentNode = this.surface.getView().getDocument().getDocumentNode().$element,
-		target = this;
-
 	if ( !this.surface.getModel().hasBeenModified() ) {
-		target.submitting = true;
-		window.location.href = this.viewUri.clone().extend( {
-			action: 'edit',
-			veswitched: 1
-		} ).toString();
+		this.switchToWikitextEditor( true );
 		return;
 	}
 
-	$documentNode.css( 'opacity', 0.5 );
+	this.surface.getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
 
-	this.surface.getDialogs().openWindow( 'wikitextswitchconfirm' ).then( function ( opened ) {
-		opened.then( function ( closing ) {
-			closing.then(
-				function ( data ) {
-					if ( data.action === 'switch' ) {
-						// Get Wikitext from the DOM
-						target.serialize(
-							target.docToSave ||
-								ve.dm.converter.getDomFromModel(
-									target.surface.getModel().getDocument()
-								),
-							target.submitWithSaveFields.bind(
-								target,
-								{ wpDiff: 1, veswitched: 1 }
-							)
-						);
-					} else if ( data.action === 'discard' ) {
-						target.submitting = true;
-						window.location.href = target.viewUri.clone().extend( {
-							action: 'edit',
-							veswitched: 1
-						} ).toString();
-					}
-				},
-				function () {
-					// Undo the opacity change
-					$documentNode.css( 'opacity', 1 );
-				}
-			);
-		} );
-	} );
+	this.surface.getDialogs().openWindow( 'wikitextswitchconfirm', { target: this } );
 };
 
 /**
@@ -1743,4 +1708,31 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
 		} );
 		return message;
 	}
+};
+
+/**
+ * Switches to the wikitext editor, either keeping (default) or discarding changes.
+ *
+ * @param {boolean} [discardChanges] Whether to discard changes or not.
+ */
+ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardChanges ) {
+	if ( discardChanges ) {
+		this.submitting = true;
+		window.location.href = this.viewUri.clone().extend( {
+			action: 'edit',
+			veswitched: 1
+		} ).toString();
+	} else {
+		this.serialize(
+			this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
+			ve.bind( this.submitWithSaveFields, this, { wpDiff: 1, veswitched: 1 } )
+		);
+	}
+};
+
+/**
+ * Resets the document opacity when we've decided to cancel switching to the wikitext editor.
+ */
+ve.init.mw.ViewPageTarget.prototype.resetDocumentOpacity = function () {
+	this.surface.getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
 };

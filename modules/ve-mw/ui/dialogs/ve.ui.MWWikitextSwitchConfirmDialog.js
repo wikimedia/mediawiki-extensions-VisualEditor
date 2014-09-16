@@ -63,14 +63,37 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
  * @inheritdoc
  */
 ve.ui.MWWikitextSwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
-	if ( action === 'switch' || action === 'discard' ) {
+	if ( action === 'switch' ) {
+		return new OO.ui.Process( function () {
+			this.getActions().setAbilities( { cancel: false, discard: false } );
+			this.getActions().get()[1].pushPending();
+			this.target.switchToWikitextEditor( false );
+		}, this );
+	} else if ( action === 'discard' ) {
+		return new OO.ui.Process( function () {
+			this.getActions().setAbilities( { cancel: false, switch: false } );
+			this.getActions().get()[2].pushPending();
+			this.target.switchToWikitextEditor( true );
+		}, this );
+	} else if ( action === 'cancel' ) {
 		return new OO.ui.Process( function () {
 			this.close( { action: action } );
+			this.target.resetDocumentOpacity();
 		}, this );
 	}
 
 	// Parent method
 	return ve.ui.MWWikitextSwitchConfirmDialog.super.prototype.getActionProcess.call( this, action );
+};
+
+/**
+ * @inheritdoc
+ **/
+ve.ui.MWWikitextSwitchConfirmDialog.prototype.setup = function ( data ) {
+	this.target = data.target;
+
+	// Parent method
+	return ve.ui.MWWikitextSwitchConfirmDialog.super.prototype.setup.call( this, data );
 };
 
 /**
