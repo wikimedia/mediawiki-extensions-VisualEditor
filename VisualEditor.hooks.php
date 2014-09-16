@@ -255,16 +255,20 @@ class VisualEditorHooks {
 
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		if ( !array_key_exists( 'visualeditor-enable', $preferences ) ) {
+			$namespaces = ConfigFactory::getDefaultInstance()
+				->makeConfig( 'visualeditor' )
+				->get( 'VisualEditorNamespaces' );
+
 			$preferences['visualeditor-enable'] = array(
 				'type' => 'toggle',
 				'label-message' => array(
 					'visualeditor-preference-enable',
 					$wgLang->commaList( array_map(
 						array( 'self', 'convertNs' ),
-						$config->get( 'VisualEditorNamespaces' )
-					) )
+						$namespaces
+					) ),
+					count( $namespaces )
 				),
 				'section' => 'editing/editor'
 			);
