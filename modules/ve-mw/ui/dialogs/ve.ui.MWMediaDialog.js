@@ -587,9 +587,15 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 		}
 
 		if (
-			this.isInsertion && this.imageModel ||
-			captionChanged ||
-			this.imageModel.hasBeenModified()
+			// Activate or deactivate the apply/insert buttons
+			// Make sure sizes are valid first
+			this.sizeWidget.isValid() &&
+			(
+				// Check that the model or caption changed
+				this.isInsertion && this.imageModel ||
+				captionChanged ||
+				this.imageModel.hasBeenModified()
+			)
 		) {
 			this.actions.setAbilities( { insert: true, apply: true } );
 		} else {
