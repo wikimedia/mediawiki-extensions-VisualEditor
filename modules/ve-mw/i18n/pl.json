@@ -198,7 +198,7 @@
 	"visualeditor-preference-betatempdisable": "Tymczasowo wyłącz VisualEditor (podczas gdy jest w wersji beta)",
 	"visualeditor-preference-core-description": "Uaktywnij VisualEditora.",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "Uaktywnij VisualEditora. Będzie dostępny w następujących przestrzeniach nazw: $1",
+	"visualeditor-preference-enable": "Uaktywnij VisualEditora. Będzie dostępny w {{PLURAL:$2|następującej przestrzeni nazw|następujących przestrzeniach nazw}}: $1",
 	"visualeditor-preference-language-label": "Narzędzie językowe VisualEditora",
 	"visualeditor-reference-input-placeholder": "Którego przypisu chcesz użyć?",
 	"visualeditor-referenceslist-isempty": "Na tej stronie nie ma przypisów z grupy \"$1\", aby uwzględnić je na tej liście.",

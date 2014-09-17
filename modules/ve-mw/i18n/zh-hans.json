@@ -204,7 +204,7 @@
 	"visualeditor-preference-betatempdisable": "暂时停用测试版可视化编辑器",
 	"visualeditor-preference-core-description": "启用可视化编辑器。它不能用于讨论页和某些其他名字空间。",
 	"visualeditor-preference-core-label": "可视化编辑器",
-	"visualeditor-preference-enable": "启用可视化编辑器。它将在以下名字空间可用：$1",
+	"visualeditor-preference-enable": "启用可视化编辑器。它将在以下{{PLURAL:$2|名字空间}}可用：$1",
 	"visualeditor-preference-language-description": "在正式发布前，将用于标记书面测试用途文本语言的测试工具加入可视化编辑器。请务必在保存前检查您使用测试功能作出的更改。",
 	"visualeditor-preference-language-label": "可视化编辑器语言工具",
 	"visualeditor-preference-mwalienextension-description": "在正式发布前，将添加编辑扩展标签（例如图库或源代码块）的测试功能加入可视化编辑器。请务必在保存前检查您使用测试功能作出的更改。",
