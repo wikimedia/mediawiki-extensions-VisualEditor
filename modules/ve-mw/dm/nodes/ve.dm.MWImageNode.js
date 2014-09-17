@@ -11,6 +11,7 @@
  * @class
  * @abstract
  * @extends ve.dm.GeneratedContentNode
+ * @mixins ve.dm.FocusableNode
  * @mixins ve.dm.ResizableNode
  *
  * @constructor
@@ -18,8 +19,10 @@
 ve.dm.MWImageNode = function VeDmMWImageNode() {
 	// Parent constructor
 	ve.dm.GeneratedContentNode.call( this );
-	// Mixin constructor
+
+	// Mixin constructors
 	ve.dm.ResizableNode.call( this );
+	ve.dm.FocusableNode.call( this );
 
 	this.scalablePromise = null;
 
@@ -43,6 +46,8 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 /* Inheritance */
 
 OO.inheritClass( ve.dm.MWImageNode, ve.dm.GeneratedContentNode );
+
+OO.mixinClass( ve.dm.MWImageNode, ve.dm.FocusableNode );
 
 OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 

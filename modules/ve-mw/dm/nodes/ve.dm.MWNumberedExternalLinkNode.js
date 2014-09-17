@@ -10,6 +10,7 @@
  *
  * @class
  * @extends ve.dm.LeafNode
+ * @mixins ve.dm.FocusableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -17,11 +18,16 @@
 ve.dm.MWNumberedExternalLinkNode = function VeDmMWNumberedExternalLinkNode() {
 	// Parent constructor
 	ve.dm.LeafNode.apply( this, arguments );
+
+	// Mixin constructors
+	ve.dm.FocusableNode.call( this );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.dm.MWNumberedExternalLinkNode, ve.dm.LeafNode );
+
+OO.mixinClass( ve.dm.MWNumberedExternalLinkNode, ve.dm.FocusableNode );
 
 /* Static Properties */
 

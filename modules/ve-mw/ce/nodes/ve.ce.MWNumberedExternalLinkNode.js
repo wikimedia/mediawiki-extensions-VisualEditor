@@ -10,6 +10,7 @@
  *
  * @class
  * @extends ve.ce.LeafNode
+ * @mixins ve.ce.FocusableNode
  * @constructor
  * @param {ve.dm.MWNumberedExternalLinkNode} model Model to observe
  * @param {Object} [config] Configuration options

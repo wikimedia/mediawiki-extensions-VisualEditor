@@ -12,6 +12,7 @@
  * @abstract
  * @extends ve.dm.LeafNode
  * @mixins ve.dm.GeneratedContentNode
+ * @mixins ve.dm.FocusableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -22,6 +23,7 @@ ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
+	ve.dm.FocusableNode.call( this );
 
 	// Properties
 	this.partsList = null;
@@ -35,6 +37,8 @@ ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 OO.inheritClass( ve.dm.MWTransclusionNode, ve.dm.LeafNode );
 
 OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.GeneratedContentNode );
+
+OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.FocusableNode );
 
 /* Static members */
 

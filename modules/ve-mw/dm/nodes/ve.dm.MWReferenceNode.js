@@ -10,6 +10,7 @@
  *
  * @class
  * @extends ve.dm.LeafNode
+ * @mixins ve.dm.FocusableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -17,6 +18,9 @@
 ve.dm.MWReferenceNode = function VeDmMWReferenceNode() {
 	// Parent constructor
 	ve.dm.LeafNode.apply( this, arguments );
+
+	// Mixin constructors
+	ve.dm.FocusableNode.call( this );
 
 	// Event handlers
 	this.connect( this, {
@@ -28,6 +32,8 @@ ve.dm.MWReferenceNode = function VeDmMWReferenceNode() {
 /* Inheritance */
 
 OO.inheritClass( ve.dm.MWReferenceNode, ve.dm.LeafNode );
+
+OO.mixinClass( ve.dm.MWReferenceNode, ve.dm.FocusableNode );
 
 /* Static members */
 

@@ -10,6 +10,7 @@
  *
  * @class
  * @extends ve.dm.BranchNode
+ * @mixins ve.dm.FocusableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -18,11 +19,16 @@
 ve.dm.MWReferencesListNode = function VeDmMWReferencesListNode() {
 	// Parent constructor
 	ve.dm.BranchNode.apply( this, arguments );
+
+	// Mixin constructors
+	ve.dm.FocusableNode.call( this );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.dm.MWReferencesListNode, ve.dm.BranchNode );
+
+OO.mixinClass( ve.dm.MWReferencesListNode, ve.dm.FocusableNode );
 
 /* Static members */
 

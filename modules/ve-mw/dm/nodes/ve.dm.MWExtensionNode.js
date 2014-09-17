@@ -10,6 +10,7 @@
  *
  * @class
  * @abstract
+ * @mixins ve.dm.FocusableNode
  * @mixins ve.dm.GeneratedContentNode
  *
  * @constructor
@@ -17,9 +18,12 @@
 ve.dm.MWExtensionNode = function VeDmMWExtensionNode() {
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
+	ve.dm.FocusableNode.call( this );
 };
 
 /* Inheritance */
+
+OO.mixinClass( ve.dm.MWExtensionNode, ve.dm.FocusableNode );
 
 OO.mixinClass( ve.dm.MWExtensionNode, ve.dm.GeneratedContentNode );
 
