@@ -1159,6 +1159,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePlaceholderPage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWTransclusionContentPage.js',
 
+			'modules/ve-mw/ui/dialogs/ve.ui.MWRequiredParamBlankConfirmDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTemplateDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js',
 
@@ -1185,6 +1186,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.mwtransclusion.core',
 			'mediawiki.jqueryMsg',
+			'mediawiki.language',
 		),
 		'messages' => array(
 			'visualeditor-dialog-template-title',
@@ -1206,6 +1208,10 @@ $wgResourceModules += array(
 			'visualeditor-dialog-transclusion-remove-template',
 			'visualeditor-dialog-transclusion-required-parameter',
 			'visualeditor-dialog-transclusion-required-parameter-description',
+			'visualeditor-dialog-transclusion-required-parameter-dialog-cancel',
+			'visualeditor-dialog-transclusion-required-parameter-dialog-ok',
+			'visualeditor-dialog-transclusion-required-parameter-dialog-title',
+			'visualeditor-dialog-transclusion-required-parameter-is-blank',
 			'visualeditor-dialog-transclusion-single-mode',
 			'visualeditor-dialog-transclusion-title',
 			'visualeditor-dialog-transclusion-wikitext-label',
@@ -1215,6 +1221,7 @@ $wgResourceModules += array(
 			'visualeditor-parameter-search-more',
 			'visualeditor-parameter-search-no-unused',
 			'visualeditor-parameter-search-unknown',
+			'quotation-marks',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),

@@ -23,6 +23,11 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.transclusionModel = null;
 	this.loaded = false;
 	this.preventReselection = false;
+
+	this.confirmOverlay = new ve.ui.Overlay( { classes: ['ve-ui-overlay-global'] } );
+	this.confirmDialogs = new OO.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
+	this.confirmOverlay.$element.append( this.confirmDialogs.$element );
+	$( 'body' ).append( this.confirmOverlay.$element );
 };
 
 /* Inheritance */
@@ -331,23 +336,78 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 };
 
 /**
+ * If the user has left blank required parameters, confirm that they actually want to do this.
+ * If no required parameters were left blank, or if they were but the user decided to go ahead
+ *  anyway, the returned deferred will be resolved.
+ * Otherwise, the returned deferred will be rejected.
+ * @returns {jQuery.Deferred}
+ */
+ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
+	var blankRequired = [], deferred = $.Deferred();
+	$.each( this.bookletLayout.pages, function () {
+		if ( !( this instanceof ve.ui.MWParameterPage ) ) {
+			return true;
+		}
+		if ( this.parameter.isRequired() && !this.valueInput.getValue() ) {
+			blankRequired.push( mw.msg(
+				'quotation-marks',
+				this.parameter.template.getSpec().getParameterLabel( this.parameter.getName() )
+			) );
+		}
+	} );
+	if ( blankRequired.length ) {
+		this.confirmDialogs.openWindow( 'requiredparamblankconfirm', {
+			message: mw.msg(
+				'visualeditor-dialog-transclusion-required-parameter-is-blank',
+				mw.language.listToText( blankRequired ),
+				blankRequired.length
+			),
+			title: mw.msg(
+				'visualeditor-dialog-transclusion-required-parameter-dialog-title',
+				blankRequired.length
+			)
+		} ).then( function ( opened ) {
+			opened.then( function ( closing ) {
+				closing.then( function ( data ) {
+					if ( data.action === 'ok' ) {
+						deferred.resolve();
+					} else {
+						deferred.reject();
+					}
+				} );
+			} );
+		} );
+	} else {
+		deferred.resolve();
+	}
+	return deferred.promise();
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'apply' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
-			var surfaceModel = this.getFragment().getSurface(),
-				obj = this.transclusionModel.getPlainObject();
+			var deferred = $.Deferred();
+			this.checkRequiredParameters().done( function () {
+				var surfaceModel = this.getFragment().getSurface(),
+					obj = this.transclusionModel.getPlainObject();
 
-			if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
-				this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
-			} else if ( obj !== null ) {
-				// Collapse returns a new fragment, so update this.fragment
-				this.fragment = this.getFragment().collapseRangeToEnd();
-				this.transclusionModel.insertTransclusionNode( this.getFragment() );
-			}
+				if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
+					this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
+				} else if ( obj !== null ) {
+					// Collapse returns a new fragment, so update this.fragment
+					this.fragment = this.getFragment().collapseRangeToEnd();
+					this.transclusionModel.insertTransclusionNode( this.getFragment() );
+				}
 
-			this.close( { action: action } );
+				this.close( { action: action } );
+			}.bind( this ) ).always( function () {
+				deferred.resolve();
+			} );
+
+			return deferred;
 		}, this );
 	}
 

@@ -161,50 +161,57 @@ ve.ui.MWCitationDialog.prototype.hasUsefulParameter = function () {
 ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'apply' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
-			var item,
-				surfaceModel = this.getFragment().getSurface(),
-				doc = surfaceModel.getDocument(),
-				internalList = doc.getInternalList(),
-				obj = this.transclusionModel.getPlainObject();
+			var deferred = $.Deferred();
+			this.checkRequiredParameters().done( function () {
+				var item,
+					surfaceModel = this.getFragment().getSurface(),
+					doc = surfaceModel.getDocument(),
+					internalList = doc.getInternalList(),
+					obj = this.transclusionModel.getPlainObject();
 
-			if ( !this.referenceModel ) {
-				// Collapse returns a new fragment, so update this.fragment
-				this.fragment = this.getFragment().collapseRangeToEnd();
-				this.referenceModel = new ve.dm.MWReferenceModel();
-				this.referenceModel.insertInternalItem( surfaceModel );
-				this.referenceModel.insertReferenceNode( this.getFragment() );
-			}
-
-			item = this.referenceModel.findInternalItem( surfaceModel );
-			if ( item ) {
-				if ( this.selectedNode ) {
-					this.transclusionModel.updateTransclusionNode(
-						surfaceModel, this.selectedNode
-					);
-				} else if ( obj !== null ) {
-					this.transclusionModel.insertTransclusionNode(
-						// HACK: This is trying to place the cursor inside the first content branch
-						// node but this theoretically not a safe assumption - in practice, the
-						// citation dialog will only reach this code if we are inserting (not
-						// updating) a transclusion, so the referenceModel will have already
-						// initialized the internal node with a paragraph - getting the range of the
-						// item covers the entire paragraph so we have to get the range of it's
-						// first (and empty) child
-						this.getFragment().clone( item.getChildren()[0].getRange() )
-					);
+				if ( !this.referenceModel ) {
+					// Collapse returns a new fragment, so update this.fragment
+					this.fragment = this.getFragment().collapseRangeToEnd();
+					this.referenceModel = new ve.dm.MWReferenceModel();
+					this.referenceModel.insertInternalItem( surfaceModel );
+					this.referenceModel.insertReferenceNode( this.getFragment() );
 				}
-			}
 
-			// HACK: Scorch the earth - this is only needed because without it, the references list
-			// won't re-render properly, and can be removed once someone fixes that
-			this.referenceModel.setDocument(
-				doc.cloneFromRange(
-					internalList.getItemNode( this.referenceModel.getListIndex() ).getRange()
-				)
-			);
-			this.referenceModel.updateInternalItem( surfaceModel );
+				item = this.referenceModel.findInternalItem( surfaceModel );
+				if ( item ) {
+					if ( this.selectedNode ) {
+						this.transclusionModel.updateTransclusionNode(
+							surfaceModel, this.selectedNode
+						);
+					} else if ( obj !== null ) {
+						this.transclusionModel.insertTransclusionNode(
+							// HACK: This is trying to place the cursor inside the first content branch
+							// node but this theoretically not a safe assumption - in practice, the
+							// citation dialog will only reach this code if we are inserting (not
+							// updating) a transclusion, so the referenceModel will have already
+							// initialized the internal node with a paragraph - getting the range of the
+							// item covers the entire paragraph so we have to get the range of it's
+							// first (and empty) child
+							this.getFragment().clone( item.getChildren()[0].getRange() )
+						);
+					}
+				}
 
-			this.close( { action: action } );
+				// HACK: Scorch the earth - this is only needed because without it, the references list
+				// won't re-render properly, and can be removed once someone fixes that
+				this.referenceModel.setDocument(
+					doc.cloneFromRange(
+						internalList.getItemNode( this.referenceModel.getListIndex() ).getRange()
+					)
+				);
+				this.referenceModel.updateInternalItem( surfaceModel );
+
+				this.close( { action: action } );
+			}.bind( this ) ).always( function () {
+				deferred.resolve();
+			} );
+
+			return deferred;
 		}, this );
 	}
 
