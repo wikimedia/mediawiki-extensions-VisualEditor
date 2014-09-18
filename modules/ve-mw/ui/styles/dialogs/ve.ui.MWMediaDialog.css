@@ -5,16 +5,56 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwMediaDialog-altText {
-	width: auto;
+.ve-ui-mwMediaDialog-panel-imageinfo-thumb {
+	text-align: center;
 }
 
-.ve-ui-mwMediaDialog .ve-ui-mwMediaSearchWidget {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+.ve-ui-mwMediaDialog-panel-imageinfo-thumb img {
+	margin: 1em 2em 0 2em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-info {
+	padding: 1em 2em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-main {
+	margin-bottom: 1.5em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-thumb img {
+	max-height: none;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-thumb,
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-info {
+	float: left;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-info {
+	padding-left: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-title {
+	font-size: 1.5em;
+	line-height: 1.5em;
+	margin-top: -0.2em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-details {
+	color: #666;
+	margin-bottom: 2em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-separator {
+	margin: 0 0.5em;
+	display: inline-block;
+}
+
+.ve-ui-mwMediaDialog-altText {
+	width: auto;
 }
 
 .ve-ui-mwMediaSearchWidget .oo-ui-searchWidget-results {

@@ -26,11 +26,19 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 
 	// Properties
 	this.sources = {};
-	this.size = config.size || 150;
+	this.size = config.size || 200;
+	this.fullSize = config.fullSize || 400;
+	this.$panels = config.$panels;
 	this.queryTimeout = null;
 	this.titles = {};
 	this.queryMediaSourcesCallback = this.queryMediaSources.bind( this );
 	this.promises = [];
+	this.numItems = 0;
+	this.lang = config.lang || 'en';
+
+	this.selected = null;
+
+	this.rows = [];
 
 	this.$noItemsMessage = this.$( '<div>' )
 		.addClass( 've-ui-mwMediaSearchWidget-noresults' )
@@ -40,6 +48,11 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 
 	// Events
 	this.$results.on( 'scroll', this.onResultsScroll.bind( this ) );
+	this.results.connect( this, {
+		choose: 'onResultsChoose',
+		add: 'onResultsAdd',
+		remove: 'onResultsRemove'
+	} );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwMediaSearchWidget' );
@@ -82,6 +95,15 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function () {
 };
 
 /**
+ * Respond to choosing result event.
+ *
+ * @param {OO.ui.OptionWidget} item Selected item
+ */
+ve.ui.MWMediaSearchWidget.prototype.onResultsChoose = function ( item ) {
+	this.emit( 'choose', item.getData() );
+};
+
+/**
  * Handle results scroll events.
  *
  * @param {jQuery.Event} e Scroll event
@@ -101,6 +123,7 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsScroll = function () {
  */
 ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 	var i, len, source, request,
+		lang = this.getLang(),
 		ajaxOptions = {},
 		value = this.query.getValue();
 
@@ -108,18 +131,8 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 		return;
 	}
 
-	// HACK: fit four images in the screen
-	// The -45 is here because the way the container is aligned, it
-	// is pushed behind the scrollbar. When we calculate the new size
-	// of the image results, we need to account for a bit thinner than
-	// the actual (partially hidden) width.
-	// Note: This will be fixed in an upcoming rewrite of the image
-	// search results.
-	this.size = ( this.results.$element.innerWidth() - 45 ) / 4;
-
 	// Reset message
 	this.$noItemsMessage.hide();
-
 	// Abort previous promises if they are pending
 	this.resetPromises();
 
@@ -160,8 +173,13 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				gsrlimit: 20,
 				gsroffset: source.gsroffset,
 				prop: 'imageinfo',
-				iiprop: 'dimensions|url|mediatype',
-				iiurlheight: this.size
+				// Language of the extmetadata details
+				iiextmetadatalanguage: lang,
+				iiprop: 'dimensions|url|mediatype|extmetadata|timestamp',
+				// Height of the dialog minus margins
+				iiurlheight: this.fullSize,
+				// Width of the dialog
+				iiurlwidth: 600 - 30 // Take off 30px for the margins
 			}, ajaxOptions )
 				.done( this.onMediaQueryDone.bind( this, source ) );
 			source.value = value;
@@ -174,6 +192,20 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 };
 
 /**
+ * Reset all the rows; destroy the jQuery elements and reset
+ * the rows array.
+ */
+ve.ui.MWMediaSearchWidget.prototype.resetRows = function () {
+	var i, len;
+
+	for ( i = 0, len = this.rows.length; i < len; i++ ) {
+		this.rows[i].$element.remove();
+	}
+
+	this.rows = [];
+};
+
+/**
  * Abort all api search query promises
  */
 ve.ui.MWMediaSearchWidget.prototype.resetPromises = function () {
@@ -183,6 +215,8 @@ ve.ui.MWMediaSearchWidget.prototype.resetPromises = function () {
 		this.promises[i].abort();
 		this.query.popPending();
 	}
+
+	this.rowIndex = 0;
 
 	// Empty the promise array
 	this.promises = [];
@@ -201,6 +235,118 @@ ve.ui.MWMediaSearchWidget.prototype.onAllMediaQueriesDone = function () {
 		this.$noItemsMessage.show();
 	} else {
 		this.$noItemsMessage.hide();
+	}
+};
+
+/**
+ * Find an available row at the end. Either we will need to create a new
+ * row or use the last available row if it isn't full.
+ * @return {number} Row index
+ */
+ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
+	var row,
+		maxLineWidth = this.results.$element.innerWidth() - 10;
+
+	if ( this.rows.length === 0 ) {
+		row = 0;
+	} else {
+		row = this.rows.length - 1;
+	}
+
+	if ( !this.rows[row] ) {
+		// Create new row
+		this.rows[row] = {
+			isFull: false,
+			width: 0,
+			items: [],
+			$element: this.$( '<div>' )
+					.addClass( 've-ui-mwMediaResultWidget-row' )
+					.css( {
+						width: maxLineWidth,
+						overflow: 'hidden'
+					} )
+					.data( 'row', row )
+					.attr( 'data-full', false )
+		};
+		// Append to results
+		this.results.$element.append( this.rows[row].$element );
+	} else if ( this.rows[row].isFull ) {
+		row++;
+		// Create new row
+		this.rows[row] = {
+			isFull: false,
+			width: 0,
+			items: [],
+			$element: this.$( '<div>' )
+				.addClass( 've-ui-mwMediaResultWidget-row' )
+				.css( {
+					width: maxLineWidth,
+					overflow: 'hidden'
+				} )
+				.data( 'row', row )
+				.attr( 'data-full', false )
+		};
+		// Append to results
+		this.results.$element.append( this.rows[row].$element );
+	}
+	return row;
+};
+
+/**
+ * Respond to add results event in the results widget.
+ * Override the way SelectWidget and GroupElement append the items
+ * into the group so we can append them in groups of rows.
+ * @param {ve.ui.MWMediaResultWidget[]} items An array of item elements
+ */
+ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
+	var i, j, ilen, jlen, itemWidth, row, effectiveWidth, resizeFactor,
+		maxLineWidth = this.results.$element.innerWidth() - 10;
+
+	// Go over the added items
+	row = this.getAvailableRow();
+	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
+		// TODO: Figure out a better way to calculate the margins
+		// between images (for now, hard-coded as 6)
+		itemWidth = items[i].$element.outerWidth() + 6;
+		// Add items to row until it is full
+		if ( this.rows[row].width + itemWidth >= maxLineWidth ) {
+			// Mark this row as full
+			this.rows[row].isFull = true;
+			this.rows[row].$element.attr( 'data-full', true );
+			// Resize all images in the row to fit the width
+			effectiveWidth = this.rows[row].width;
+			resizeFactor = maxLineWidth / effectiveWidth;
+			for ( j = 0, jlen = this.rows[row].items.length; j < jlen; j++ ) {
+				this.rows[row].items[j].resizeThumb( resizeFactor );
+			}
+			// find another row
+			row = this.getAvailableRow();
+		}
+		// Append to row
+		this.rows[row].width += itemWidth;
+		// Store reference to the item
+		this.rows[row].items.push( items[i] );
+		items[i].setRow( row );
+		// Append the item
+		this.rows[row].$element.append( items[i].$element );
+	}
+
+	// If we have less than 4 rows, call for more images
+	if ( this.rows.length < 4 ) {
+		this.queryMediaSources();
+	}
+};
+
+/**
+ * Respond to removing results event in the results widget.
+ * Clear the relevant rows.
+ * @param {OO.ui.OptionWidget[]} items Removed items
+ */
+ve.ui.MWMediaSearchWidget.prototype.onResultsRemove = function ( items ) {
+	if ( items.length > 0 ) {
+		// In the case of the media search widget, if any items are removed
+		// all are removed (new search)
+		this.resetRows();
 	}
 };
 
@@ -241,7 +387,8 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 					new ve.ui.MWMediaResultWidget( {
 						$: this.$,
 						data: pages[page],
-						size: this.size
+						size: this.size,
+						maxSize: this.results.$element.width() / 3
 					} )
 				);
 			}
@@ -249,4 +396,20 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 	}
 
 	this.results.addItems( items );
+};
+
+/**
+ * Set language for the search results.
+ * @param {string} lang Language
+ */
+ve.ui.MWMediaSearchWidget.prototype.setLang = function ( lang ) {
+	this.lang = lang;
+};
+
+/**
+ * Get language for the search results.
+ * @returns {string} lang Language
+ */
+ve.ui.MWMediaSearchWidget.prototype.getLang = function () {
+	return this.lang;
 };

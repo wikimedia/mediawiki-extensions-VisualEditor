@@ -91,11 +91,11 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
  * Translate the image dimensions into new ones according to the bounding box.
  * @param {Object} imageDimension Width and height of the image
  * @param {Object} boundingBox The limit of the bounding box
- * @param {boolean} adhereToWidth Resize the image using width consideration only
+ * @param {string} [sideConstraint] Constrain by height or width
  * @returns {Object|null} The new width and height of the scaled image or null if
  * the given dimensions are missing width or height values and cannot be computed.
  */
-ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox, adhereToWidth ) {
+ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox, sideConstraint ) {
 	var limitNumber, dimCalcObject;
 
 	if ( $.isEmptyObject( boundingBox ) ) {
@@ -105,7 +105,11 @@ ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, bound
 	if ( imageDimensions.width && imageDimensions.height) {
 		// First, find the bounding box number (which is the bigger
 		// of the two values)
-		if ( boundingBox.width > boundingBox.height || adhereToWidth ) {
+		if (
+			sideConstraint === 'width' ||
+			boundingBox.width > boundingBox.height &&
+			sideConstraint !== 'height'
+		) {
 			limitNumber = boundingBox.width;
 		} else {
 			limitNumber = boundingBox.height;
@@ -113,7 +117,11 @@ ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, bound
 
 		// Second, check which of the image dimensions is bigger and apply
 		// the limit to it
-		if ( imageDimensions.width >= imageDimensions.height || adhereToWidth ) {
+		if (
+			sideConstraint === 'width' ||
+			imageDimensions.width >= imageDimensions.height &&
+			sideConstraint !== 'height'
+		) {
 			// Check if the width is not smaller than the limit number
 			if ( imageDimensions.width <= limitNumber ) {
 				return imageDimensions;

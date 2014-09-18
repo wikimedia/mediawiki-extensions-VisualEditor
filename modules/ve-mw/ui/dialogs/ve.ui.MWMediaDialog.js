@@ -25,6 +25,7 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 	this.pageTitle = '';
 	this.isSettingUpModel = false;
 	this.isInsertion = false;
+	this.selectedImageInfo = null;
 
 	this.$element.addClass( 've-ui-mwMediaDialog' );
 };
@@ -63,6 +64,18 @@ ve.ui.MWMediaDialog.static.actions = [
 		modes: [ 'edit', 'insert' ]
 	},
 	{
+		action: 'choose',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-choose-image' ),
+		flags: [ 'primary', 'progressive' ],
+		modes: [ 'info' ]
+	},
+	{
+		action: 'cancelchoose',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
+		flags: 'safe',
+		modes: [ 'info' ]
+	},
+	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		flags: 'safe',
 		modes: [ 'edit', 'insert', 'select' ]
@@ -71,7 +84,7 @@ ve.ui.MWMediaDialog.static.actions = [
 		action: 'back',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
 		flags: 'safe',
-		modes: 'change'
+		modes: [ 'change' ]
 	}
 ];
 
@@ -153,13 +166,23 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Set up the booklet layout
 	this.bookletLayout = new OO.ui.BookletLayout( {
 		$: this.$,
+		classes: [ 've-ui-mwMediaDialog-panel-settings' ],
 		outlined: true
 	} );
 
 	this.mediaSearchPanel = new OO.ui.PanelLayout( {
 		$: this.$,
+		classes: [ 've-ui-mwMediaDialog-panel-search' ],
 		scrollable: true
 	} );
+
+	this.mediaImageInfoPanel = new OO.ui.PanelLayout( {
+		$: this.$,
+		classes: [ 've-ui-mwMediaDialog-panel-imageinfo' ],
+		scrollable: false
+	} );
+
+	this.$infoPanelWrapper = $( '<div>' ).addClass( 've-ui-mwMediaDialog-panel-imageinfo-wrapper' );
 
 	this.generalSettingsPage = new OO.ui.PageLayout( 'general', { $: this.$ } );
 	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced', { $: this.$ } );
@@ -174,7 +197,11 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		.setLabel( ve.msg( 'visualeditor-dialog-media-page-advanced' ) );
 
 	// Define the media search page
-	this.search = new ve.ui.MWMediaSearchWidget( { $: this.$ } );
+	this.search = new ve.ui.MWMediaSearchWidget( {
+		$: this.$,
+		// Height of the panels
+		fullSize: 300
+	} );
 
 	this.$body.append( this.search.$spinner );
 
@@ -337,12 +364,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.borderCheckbox.connect( this, { change: 'onBorderCheckboxChange' } );
 	this.positionSelect.connect( this, { choose: 'onPositionSelectChoose' } );
 	this.typeSelect.connect( this, { choose: 'onTypeSelectChoose' } );
-	this.search.connect( this, { select: 'onSearchSelect' } );
+	this.search.connect( this, { choose: 'onSearchChoose' } );
 	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
-	// Panel classes
-	this.mediaSearchPanel.$element.addClass( 've-ui-mwMediaDialog-panel-search' );
-	this.bookletLayout.$element.addClass( 've-ui-mwMediaDialog-panel-settings' );
-	this.$body.append( this.panels.$element );
 
 	// Initialization
 	this.mediaSearchPanel.$element.append( this.search.$element );
@@ -357,17 +380,322 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		this.sizeFieldset.$element
 	);
 
-	this.panels.addItems( [ this.mediaSearchPanel, this.bookletLayout ] );
+	this.panels.addItems( [
+		this.mediaSearchPanel,
+		this.mediaImageInfoPanel,
+		this.bookletLayout
+	] );
+
+	this.$body.append( this.panels.$element );
 };
 
 /**
- * Handle search result selection.
+ * Build the image info panel from the information in the API.
+ * Use the metadata info if it exists.
+ * Note: Some information in the metadata object needs to be safely
+ * stripped from its html wrappers.
+ *
+ * @param {Object} info Image info
+ */
+ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
+	var i, newDimensions, field, isPortrait, $info, $section,
+		contentDirection = this.getFragment().getDocument().getDir(),
+		imageinfo = info.imageinfo[0],
+		imageTitle = new OO.ui.LabelWidget( {
+			$: this.$,
+			label: new mw.Title( info.title ).getNameText()
+		} ),
+		metadata = imageinfo.extmetadata,
+		// Field configuration (in order)
+		apiDataKeysConfig = [
+			{
+				name: 'ImageDescription',
+				value: ve.getProp( metadata, 'ImageDescription', 'value' ),
+				data: {
+					keepOriginal: true
+				},
+				view: {
+					type: 'description',
+					primary: true,
+					descriptionHeight: '5em'
+				}
+			},
+			{
+				name: 'fileDetails',
+				data: { skipProcessing: true },
+				view: { icon: 'picture' }
+			},
+			{
+				name: 'Artist',
+				value: ve.getProp( metadata, 'Artist', 'value' ),
+				data: {},
+				view: {
+					label: 'visualeditor-dialog-media-info-artist',
+					icon: 'profile'
+				}
+			},
+			{
+				name: 'Credit',
+				value: ve.getProp( metadata, 'Credit', 'value' ),
+				data: {},
+				view: { icon: 'profile' }
+			},
+			{
+				name: 'LicenseShortName',
+				value: ve.getProp( metadata, 'LicenseShortName', 'value' ),
+				data: {},
+				view: {
+					href: ve.getProp( metadata, 'LicenseUrl' ),
+					icon: this.getLicenseIcon( ve.getProp( metadata, 'LicenseShortName', 'value' ) )
+				}
+			},
+			{
+				name: 'timestamp',
+				value: imageinfo.timestamp,
+				data: {
+					ignoreCharLimit: true
+				},
+				view: {
+					icon: 'time',
+					label: 'visualeditor-dialog-media-info-uploaded',
+					isDate: true
+				}
+			},
+			{
+				name: 'DateTimeOriginal',
+				value: ve.getProp( metadata, 'DateTimeOriginal', 'value' ),
+				data: {},
+				view: {
+					icon: 'time',
+					label: 'visualeditor-dialog-media-info-created'
+				}
+			},
+			{
+				name: 'moreinfo',
+				value: ve.msg( 'visualeditor-dialog-media-info-moreinfo' ),
+				data: {},
+				view: {
+					icon: 'info',
+					href: imageinfo.descriptionurl
+				}
+			}
+		],
+		fields = {},
+		// Store clean API data
+		apiData = {},
+		windowWidth = this.panels.$element.innerWidth(),
+		fileType = this.getFileType( imageinfo.url ),
+		$thumbContainer = this.$( '<div>' )
+			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-thumb' ),
+		$main = this.$( '<div>' )
+			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-main' ),
+		$details = this.$( '<div>' )
+			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-details' ),
+		$image = this.$( '<img>' );
+
+	// Main section - title
+	$main.append(
+		imageTitle.$element
+			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-title' )
+	);
+
+	// Clean data from the API responses
+	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
+		field = apiDataKeysConfig[i].name;
+		// Skip empty fields and those that are specifically configured to be skipped
+		if ( apiDataKeysConfig[i].data.skipProcessing ) {
+			apiData[field] = apiDataKeysConfig[i].value;
+		} else {
+			// Store a clean information from the API.
+			if ( apiDataKeysConfig[i].value ) {
+				apiData[field] = this.cleanAPIresponse( apiDataKeysConfig[i].value, apiDataKeysConfig[i].data );
+			}
+		}
+	}
+
+	// Add sizing info for non-audio images
+	if ( imageinfo.mediatype === 'AUDIO' ) {
+		// Label this file as an audio
+		apiData.fileDetails =  this.$( '<span>' )
+			.append( ve.msg( 'visualeditor-dialog-media-info-audiofile' ) );
+	} else {
+		// Build the display for image size and type
+		apiData.fileDetails = this.$( '<div>' )
+			.append(
+				this.$( '<span>' ).text(
+					imageinfo.width +
+					ve.msg( 'visualeditor-dialog-media-dimensionseparator' ) +
+					imageinfo.height +
+					ve.msg( 'visualeditor-dimensionswidget-px' )
+				),
+				this.$( '<span>' )
+					.addClass( 've-ui-mwMediaDialog-panel-imageinfo-separator' )
+					.text( mw.msg( 'visualeditor-dialog-media-info-separator' ) ),
+				this.$( '<span>' ).text( fileType )
+			);
+	}
+
+	// Attach all fields in order
+	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
+		field = apiDataKeysConfig[i].name;
+		if ( apiData[field] ) {
+			$section = apiDataKeysConfig[i].view.primary ? $main : $details;
+
+			fields[field] = new ve.ui.MWMediaInfoFieldWidget( apiData[field],
+				$.extend(
+						{},
+						apiDataKeysConfig[i].view,
+						{ $: this.$ }
+					)
+				);
+			$section.append( fields[field].$element );
+		}
+	}
+
+	// Build the info panel
+	$info = this.$( '<div>' )
+		.addClass( 've-ui-mwMediaDialog-panel-imageinfo-info' )
+		.append(
+			$main.attr( 'dir', contentDirection ),
+			$details
+		);
+
+	// Make sure all links open in a new window
+	$info.find( 'a' ).attr( 'target', '_blank' );
+
+	// Define thumbnail size
+	if ( imageinfo.mediatype === 'AUDIO' ) {
+		// HACK: We are getting the wrong information from the
+		// API about audio files. Set their thumbnail to square
+		newDimensions = {
+			width: imageinfo.thumbwidth,
+			height: imageinfo.thumbwidth
+		};
+	} else {
+		newDimensions = {
+			width: imageinfo.thumbwidth,
+			height: imageinfo.thumbheight
+		};
+	}
+
+	// Initialize thumb container
+	$thumbContainer.append( $image.attr( {
+		src: imageinfo.thumburl,
+		width: newDimensions.width,
+		height: newDimensions.height
+	} ) );
+
+	isPortrait = newDimensions.width < windowWidth * 3 / 5;
+	this.mediaImageInfoPanel.$element.toggleClass( 've-ui-mwMediaDialog-panel-imageinfo-portrait', isPortrait );
+	this.$infoPanelWrapper.append(
+		$thumbContainer,
+		$info
+	);
+	this.mediaImageInfoPanel.$element.append( this.$infoPanelWrapper );
+	if ( isPortrait ) {
+		$info.outerWidth( Math.floor( this.mediaImageInfoPanel.$element.width() - $thumbContainer.width() - 1 ) );
+	}
+
+	// Adjust height-limited fields
+	for ( field in fields ) {
+		if ( fields[field].getType() === 'description' ) {
+			fields[field].toggleReadMoreButton();
+		}
+	}
+};
+
+/**
+ * Clean the API responses and return it in plaintext. If needed, truncate.
+ * @param {string} rawResponse Raw response from the API
+ * @param {Object} config Configuration options
+ * @return {string} Plaintext clean response
+ */
+ve.ui.MWMediaDialog.prototype.cleanAPIresponse = function ( rawResponse, config ) {
+	var isTruncated, charLimit,
+		html = $.parseHTML( rawResponse ),
+		ellipsis = ve.msg( 'visualeditor-dialog-media-info-ellipsis' ),
+		originalText = this.$( '<div>' ).append( html ).text();
+
+	config = config || {};
+
+	charLimit = config.charLimit || 50;
+	isTruncated = originalText.length > charLimit;
+
+	if ( config.keepOriginal ) {
+		return html;
+	}
+
+	// Check if the string should be truncated
+	return isTruncated && !config.ignoreCharLimit ?
+		originalText.substring( 0, charLimit ) + ellipsis :
+		originalText;
+};
+
+/**
+ * Get the file type from the suffix of the url
+ * @param {string} url Full file url
+ * @return {string} File type
+ */
+ve.ui.MWMediaDialog.prototype.getFileType = function ( url ) {
+	// TODO: Validate these types, and work with icons
+	// SVG, PNG, JPEG, GIF, TIFF, XCF;
+	// OGA, OGG, MIDI, WAV;
+	// WEBM, OGV, OGX;
+	// APNG;
+	// PDF, DJVU
+	return url.split( '.' ).pop().toUpperCase();
+};
+
+/**
+ * Get the proper icon for the license if it is recognized
+ * or general info icon if it is not recognized.
+ * @param {string} license License short name
+ * @return {string} Icon name
+ */
+ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
+	var normalized;
+
+	if ( !license ) {
+		return 'info';
+	}
+
+	normalized = license.toLowerCase().replace( /[-_]/g, ' ' );
+
+	// FIXME: Structured data from Commons will make this properly
+	// multilingual. For now, this is the limit of what is sensible.
+	if ( normalized.match( /^((cc )?pd|public domain)/ ) ) {
+		return 'public-domain';
+	} else if ( normalized.match( /^cc (by|sa)?/ ) ) {
+		return 'creative-commons';
+	} else {
+		return 'info';
+	}
+};
+
+/**
+ * Handle search result choose event.
+ *
+ * @param {ve.ui.MWMediaResultWidget} info Chosen item
+ */
+ve.ui.MWMediaDialog.prototype.onSearchChoose = function ( info ) {
+	if ( info ) {
+		this.$infoPanelWrapper.empty();
+		// Switch panels
+		this.selectedImageInfo = info;
+		this.switchPanels( 'imageInfo' );
+		// Build info panel
+		this.buildMediaInfoPanel( info );
+	}
+};
+
+/**
+ * Handle new image being chosen.
  *
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
-ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
-	var info;
-
+ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
+	var info,
+		item = this.selectedImageInfo;
 	if ( item ) {
 		info = item.imageinfo[0];
 
@@ -390,6 +718,7 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 				this.getFragment().getDocument().getLang()
 			);
 			this.attachImageModel();
+			this.resetCaption();
 		} else {
 			// Update the current image model with the new image source
 			this.imageModel.changeImageSource(
@@ -610,6 +939,9 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			this.pageTitle = pageTitle;
 
+			// Set language for search results
+			this.search.setLang( this.getFragment().getDocument().getLang() );
+
 			if ( this.selectedNode ) {
 				this.isInsertion = false;
 				// Create image model
@@ -636,10 +968,6 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.actions.setAbilities( { insert: false, apply: false } );
 
-			// Initialization
-			this.captionFieldset.$element.append( this.captionSurface.$element );
-			this.captionSurface.initialize();
-
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 		}, this );
 };
@@ -647,8 +975,9 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 /**
  * Switch between the edit and insert/search panels
  * @param {string} panel Panel name
+ * @param {boolean} [stopSearchRequery] Do not re-query the API for the search panel
  */
-ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
+ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery ) {
 	var dialog = this;
 	switch ( panel ) {
 		case 'edit':
@@ -665,34 +994,37 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			// Hide/show the panels
 			this.bookletLayout.$element.show();
 			this.mediaSearchPanel.$element.hide();
+			this.mediaImageInfoPanel.$element.hide();
 			break;
-		default:
 		case 'search':
-			// Show a spinner while we check for file repos.
-			// this will only be done once per session.
-			// The filerepo promise will be sent to the API
-			// only once per session so this will be resolved
-			// every time the search panel reloads
-			this.$spinner.show();
-			this.search.$element.hide();
+			this.selectedImageInfo = null;
+			if ( !stopSearchRequery ) {
+				// Show a spinner while we check for file repos.
+				// this will only be done once per session.
+				// The filerepo promise will be sent to the API
+				// only once per session so this will be resolved
+				// every time the search panel reloads
+				this.$spinner.show();
+				this.search.$element.hide();
 
-			// Get the repos from the API first
-			// The ajax request will only be done once per session
-			dialog.getFileRepos().done( function ( repos ) {
-				dialog.search.setSources( repos );
-				// Done, hide the spinner
-				dialog.$spinner.hide();
-				// Show the search and query the media sources
-				dialog.search.$element.show();
-				dialog.search.query.setValue( dialog.pageTitle );
-				dialog.search.queryMediaSources();
-				// Initialization
-				// This must be done only after there are proper
-				// sources defined
-				dialog.search.getQuery().focus().select();
-				dialog.search.getResults().selectItem();
-				dialog.search.getResults().highlightItem();
-			} );
+				// Get the repos from the API first
+				// The ajax request will only be done once per session
+				dialog.getFileRepos().done( function ( repos ) {
+					dialog.search.setSources( repos );
+					// Done, hide the spinner
+					dialog.$spinner.hide();
+					// Show the search and query the media sources
+					dialog.search.$element.show();
+					dialog.search.query.setValue( dialog.pageTitle );
+					dialog.search.queryMediaSources();
+					// Initialization
+					// This must be done only after there are proper
+					// sources defined
+					dialog.search.getQuery().focus().select();
+					dialog.search.getResults().selectItem();
+					dialog.search.getResults().highlightItem();
+				} );
+			}
 
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
@@ -704,6 +1036,16 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 			// Hide/show the panels
 			this.bookletLayout.$element.hide();
 			this.mediaSearchPanel.$element.show();
+			this.mediaImageInfoPanel.$element.hide();
+			break;
+		default:
+		case 'imageInfo':
+			// Hide/show buttons
+			this.actions.setMode( 'info' );
+			// Hide/show the panels
+			this.mediaImageInfoPanel.$element.show();
+			this.bookletLayout.$element.hide();
+			this.mediaSearchPanel.$element.hide();
 			break;
 	}
 };
@@ -848,8 +1190,11 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		}
 	);
 
-	// Events
+	// Initialization
+	this.captionFieldset.$element.append( this.captionSurface.$element );
+	this.captionSurface.initialize();
 
+	// Events
 	this.captionSurface.getSurface().getModel().connect( this, {
 		history: this.checkChanged.bind( this )
 	} );
@@ -891,59 +1236,78 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
-	if ( action === 'change' ) {
-		return new OO.ui.Process( function () {
-			this.switchPanels( 'search' );
-		}, this );
-	}
-	if ( action === 'back' ) {
-		return new OO.ui.Process( function () {
-			this.switchPanels( 'edit' );
-		}, this );
-	}
-	if ( action === 'apply' || action === 'insert' ) {
-		return new OO.ui.Process( function () {
-			var surfaceModel = this.getFragment().getSurface();
+	var handler;
 
-			// Update from the form
-			this.imageModel.setAltText( this.altTextInput.getValue() );
-			this.imageModel.setCaptionDocument(
-				this.captionSurface.getSurface().getModel().getDocument()
-			);
+	switch ( action ) {
+		case 'change':
+			handler = function () {
+				this.switchPanels( 'search' );
+			};
+			break;
+		case 'back':
+			handler = function () {
+				this.switchPanels( 'edit' );
+			};
+			break;
+		case 'choose':
+			handler = function () {
+				this.confirmSelectedImage();
+				this.switchPanels( 'edit' );
+			};
+			break;
+		case 'cancelchoose':
+			handler = function () {
+				this.switchPanels( 'search', true );
+			};
+			break;
+		case 'apply':
+		case 'insert':
+			handler = function () {
+				var surfaceModel = this.getFragment().getSurface();
 
-			// TODO: Simplify this condition
-			if ( this.imageModel ) {
-				if (
-					// There was an initial node
-					this.selectedNode &&
-					// And we didn't change the image type block/inline or vise versa
-					this.selectedNode.type === this.imageModel.getImageNodeType() &&
-					// And we didn't change the image itself
-					this.selectedNode.getAttribute( 'src' ) ===
-						this.imageModel.getImageSource()
-				) {
-					// We only need to update the attributes of the current node
-					this.imageModel.updateImageNode( this.selectedNode, surfaceModel );
-				} else {
-					// Replacing an image or inserting a brand new one
+				// Update from the form
+				this.imageModel.setAltText( this.altTextInput.getValue() );
+				this.imageModel.setCaptionDocument(
+					this.captionSurface.getSurface().getModel().getDocument()
+				);
 
-					// If there was a previous node, remove it first
-					if ( this.selectedNode ) {
-						// Remove the old image
-						this.fragment = this.getFragment().clone(
-							new ve.dm.LinearSelection( this.fragment.getDocument(), this.selectedNode.getOuterRange() )
-						);
-						this.fragment.removeContent();
+				// TODO: Simplify this condition
+				if ( this.imageModel ) {
+					if (
+						// There was an initial node
+						this.selectedNode &&
+						// And we didn't change the image type block/inline or vise versa
+						this.selectedNode.type === this.imageModel.getImageNodeType() &&
+						// And we didn't change the image itself
+						this.selectedNode.getAttribute( 'src' ) ===
+							this.imageModel.getImageSource()
+					) {
+						// We only need to update the attributes of the current node
+						this.imageModel.updateImageNode( this.selectedNode, surfaceModel );
+					} else {
+						// Replacing an image or inserting a brand new one
+
+						// If there was a previous node, remove it first
+						if ( this.selectedNode ) {
+							// Remove the old image
+							this.fragment = this.getFragment().clone(
+								new ve.dm.LinearSelection( this.fragment.getDocument(), this.selectedNode.getOuterRange() )
+							);
+							this.fragment.removeContent();
+						}
+						// Insert the new image
+						this.fragment = this.imageModel.insertImageNode( this.getFragment() );
 					}
-					// Insert the new image
-					this.fragment = this.imageModel.insertImageNode( this.getFragment() );
 				}
-			}
 
-			this.close( { action: action } );
-		}, this );
+				this.close( { action: action } );
+			};
+			break;
+		default:
+			return ve.ui.MWMediaDialog.super.prototype.getActionProcess.call( this, action );
 	}
-	return ve.ui.MWMediaDialog.super.prototype.getActionProcess.call( this, action );
+
+	return new OO.ui.Process( handler, this );
 };
 
 /* Registration */
