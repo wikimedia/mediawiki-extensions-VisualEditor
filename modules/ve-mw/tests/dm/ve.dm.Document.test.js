@@ -1,17 +1,18 @@
 /*!
- * VisualEditor ContentEditable Document tests.
+ * VisualEditor DataModel Document tests.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.ce.Document' );
+QUnit.module( 've.dm.Document' );
 
 /* Tests */
 
 // FIXME runner copypasted from core, use data provider
 QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert ) {
-	var documentModel, surface, documentView, i, j, expectCount = 0,
+	var documentModel, i, j,
+		expectCount = 0,
 		store = new ve.dm.IndexValueStore(),
 		storeItems = [
 			ve.dm.mwExample.MWBlockImage.storeItems,
@@ -215,12 +216,10 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 	}
 	for ( i = 0; i < tests.length; i++ ) {
 		documentModel = new ve.dm.Document( new ve.dm.ElementLinearData( store, tests[i].data ) );
-		surface = ve.test.utils.createSurfaceFromDocument( documentModel );
-		documentView = surface.getView().getDocument();
 		for ( j = 0; j < tests[i].cases.length; j++ ) {
 			expectCount++;
 			assert.equalRange(
-				documentView.getRelativeRange(
+				documentModel.getRelativeRange(
 					tests[i].cases[j].given,
 					tests[i].cases[j].direction,
 					'character',
@@ -232,7 +231,6 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 				', direction ' + tests[i].cases[j].direction
 			);
 		}
-		surface.destroy();
 	}
 	QUnit.expect( expectCount );
 } );
