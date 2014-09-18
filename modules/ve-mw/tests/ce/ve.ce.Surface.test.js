@@ -12,41 +12,8 @@ QUnit.module( 've.ce.Surface' );
 QUnit.test( 'handleDelete', function ( assert ) {
 	var i,
 		cases = [
-			{
-				html:
-					'<p>Foo</p>' +
-					ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent +
-					'<p>Bar</p>',
-				range: new ve.Range( 4 ),
-				operations: ['delete'],
-				expectedData: function () {},
-				expectedRange: new ve.Range( 5, 7 ),
-				msg: 'Block transclusion is focused not deleted'
-			},
-			{
-				html:
-					'<p>Foo</p>' +
-					ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent +
-					'<p>Bar</p>',
-				range: new ve.Range( 4 ),
-				operations: ['delete', 'delete'],
-				expectedData: function ( data ) {
-					data.splice( 5, 2 );
-				},
-				expectedRange: new ve.Range( 6 ),
-				msg: 'Block transclusion is deleted with two keypresses'
-			},
-			{
-				html:
-					'<p>Foo</p>' +
-					ve.dm.mwExample.MWBlockImage.html +
-					'<p>Bar</p>',
-				range: new ve.Range( 4 ),
-				operations: ['delete'],
-				expectedData: function () { },
-				expectedRange: new ve.Range( 5, 14 ),
-				msg: 'Block image is focused not deleted'
-			},
+			// This asserts that getRelativeRange (via getRelativeOffset) doesn't try to
+			// enter a handleOwnChildren node
 			{
 				html:
 					ve.dm.mwExample.MWBlockImage.html +
