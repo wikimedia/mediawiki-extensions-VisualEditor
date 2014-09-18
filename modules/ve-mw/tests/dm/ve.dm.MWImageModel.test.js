@@ -133,7 +133,7 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 
 	for ( imageType in images ) {
 		// Create the node
-		imageNode[imageType] = new ve.dm.MWImageModel.static.createImageNode(
+		imageNode[imageType] = ve.dm.MWImageModel.static.createImageNode(
 			images[imageType].attrs,
 			imageType
 		);
@@ -150,7 +150,7 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 			dir = images[imageType].dir;
 
 			// Start from original details
-			imageModel = new ve.dm.MWImageModel.static.newFromImageAttributes( images[imageType].attrs, dir );
+			imageModel = ve.dm.MWImageModel.static.newFromImageAttributes( images[imageType].attrs, dir );
 
 			// Run attributes
 			for ( method in images[imageType].tests[i].methods ) {
