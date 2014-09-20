@@ -28,7 +28,6 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 
 	// Properties
 	this.categories = {};
-	this.categoryHiddenStatus = {};
 	this.categoryRedirects = {}; // Source -> target
 	this.popupState = false;
 	this.savedPopupState = false;
@@ -193,7 +192,7 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
 };
 
 /**
- * Starts a request to update categoryHiddenStatus for the given titles.
+ * Starts a request to update the link cache's hidden status for the given titles.
  * The returned promise will be resolved with an API result if an API call was made,
  * or no arguments if it was unnecessary.
  *
@@ -204,7 +203,8 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 	var categoryWidget = this, categoryNamesToQuery = [];
 	// Get rid of any we already know the hidden status of.
 	categoryNamesToQuery = $.grep( categoryNames, function ( categoryTitle ) {
-		return !Object.prototype.hasOwnProperty.call( categoryWidget.categoryHiddenStatus, categoryTitle );
+		var cacheEntry = ve.init.platform.linkCache.getCached( categoryTitle );
+		return !( cacheEntry && cacheEntry.hidden );
 	} );
 
 	if ( !categoryNamesToQuery.length ) {
@@ -218,10 +218,13 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 		ppprop: 'hiddencat',
 		redirects: ''
 	} ).then( function ( result ) {
+		var linkCacheUpdate = {};
 		if ( result && result.query && result.query.pages ) {
 			$.each( result.query.pages, function ( index, pageInfo ) {
-				var hiddenStatus = !!( pageInfo.pageprops && pageInfo.pageprops.hiddencat !== undefined );
-				categoryWidget.categoryHiddenStatus[pageInfo.title] = hiddenStatus;
+				linkCacheUpdate[pageInfo.title] = {
+					missing: false,
+					hidden: Object.prototype.hasOwnProperty( pageInfo.pageprops, 'hiddencat' )
+				};
 			} );
 		}
 		if ( result && result.query && result.query.redirects ) {
@@ -229,6 +232,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 				categoryWidget.categoryRedirects[redirectInfo.from] = redirectInfo.to;
 			} );
 		}
+		ve.init.platform.linkCache.set( linkCacheUpdate );
 	} );
 };
 
@@ -259,14 +263,14 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			config = {
 				$: categoryWidget.$,
 				item: item,
-				hidden: categoryWidget.categoryHiddenStatus[item.name]
+				hidden: ve.init.platform.linkCache.getCached( item.name ).hidden
 			};
 			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle ) ) {
 				config.redirectTo = new mw.Title(
 					categoryWidget.categoryRedirects[itemTitle],
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
-				config.hidden = categoryWidget.categoryHiddenStatus[categoryWidget.categoryRedirects[itemTitle]];
+				config.hidden = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle] ).hidden;
 			}
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( categoryWidget, {

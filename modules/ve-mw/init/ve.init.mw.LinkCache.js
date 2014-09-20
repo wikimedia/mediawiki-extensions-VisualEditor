@@ -52,6 +52,26 @@
 	};
 
 	/**
+	 * Look up data about a page in the cache. If the data about this page is already in the cache,
+	 * this returns that data. Otherwise, it returns undefined.
+	 *
+	 * @param {string} name Normalized page title
+	 * @returns {Object} Cache data for this name.
+	 */
+	ve.init.mw.LinkCache.prototype.getCached = function ( name ) {
+		var res;
+		if (
+			Object.prototype.hasOwnProperty.call( this.cache, name ) &&
+			this.cache[name].state() === 'resolved'
+		) {
+			this.cache[name].done( function ( data ) {
+				res = data;
+			} );
+			return res;
+		}
+	};
+
+	/**
 	 * Add entries to the cache.
 	 * @param {Object} entries Object keyed by page title, with the values being data objects
 	 * @fires add
