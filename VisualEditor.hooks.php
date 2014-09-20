@@ -255,7 +255,7 @@ class VisualEditorHooks {
 
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
-		if ( !array_key_exists( 'visualeditor-enable', $preferences ) ) {
+		if ( !class_exists( 'BetaFeatures' ) ) {
 			$namespaces = ConfigFactory::getDefaultInstance()
 				->makeConfig( 'visualeditor' )
 				->get( 'VisualEditorNamespaces' );
