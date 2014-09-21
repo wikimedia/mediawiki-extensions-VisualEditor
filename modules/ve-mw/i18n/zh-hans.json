@@ -18,7 +18,8 @@
 			"乌拉跨氪",
 			"Hudafu",
 			"Mywood",
-			"Impersonator 1"
+			"Impersonator 1",
+			"Duolaimi"
 		]
 	},
 	"tooltip-ca-createsource": "创建本页面的源代码",
@@ -39,7 +40,7 @@
 	"visualeditor-ca-ve-edit": "可视化编辑器",
 	"visualeditor-ca-ve-edit-section": "可视化编辑器",
 	"visualeditor-categories-tool": "分类",
-	"visualeditor-cite-tool-name-book": "书籍",
+	"visualeditor-cite-tool-name-book": "图书",
 	"visualeditor-cite-tool-name-journal": "期刊",
 	"visualeditor-cite-tool-name-news": "新闻",
 	"visualeditor-cite-tool-name-web": "网站",
