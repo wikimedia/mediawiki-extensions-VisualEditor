@@ -112,13 +112,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 			title = new mw.Title( matchingPages[i] );
 			linkCacheUpdate[matchingPages[i]] = { missing: false };
 			if ( this.namespace !== null ) {
-				if ( title.getNamespaceId() === this.namespace ) {
-					value = title.getMainText();
-				} else if ( title.getNamespaceId() === 0 ) {
-					value = ':' + title.getPrefixedText();
-				} else {
-					value = title.getPrefixedText();
-				}
+				value = title.getRelativeText( this.namespace );
 			} else {
 				value = title.getPrefixedText();
 			}
