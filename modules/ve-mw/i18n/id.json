@@ -12,7 +12,8 @@
 			"Hysocc",
 			"Bennylin",
 			"Raynasution",
-			"Pizza1016"
+			"Pizza1016",
+			"Ahdan"
 		]
 	},
 	"tooltip-ca-createsource": "Buat halaman ini dengan teks wiki",
@@ -126,6 +127,8 @@
 	"visualeditor-dialog-transclusion-remove-param": "Hapus parameter",
 	"visualeditor-dialog-transclusion-remove-template": "Hapus templat",
 	"visualeditor-dialog-transclusion-required-parameter": "Parameter yang diperlukan",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Kembali",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Tetap lanjutkan",
 	"visualeditor-dialog-transclusion-single-mode": "Sembunyikan pilihan",
 	"visualeditor-dialog-transclusion-title": "Transklusi",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
