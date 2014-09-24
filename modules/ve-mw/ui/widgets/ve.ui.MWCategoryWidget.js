@@ -263,8 +263,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			// Create a widget using the item data
 			config = {
 				$: categoryWidget.$,
-				item: item,
-				hidden: ve.init.platform.linkCache.getCached( item.name ).hidden
+				item: item
 			};
 			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle ) ) {
 				config.redirectTo = new mw.Title(
@@ -272,6 +271,8 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
 				config.hidden = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle] ).hidden;
+			} else {
+				config.hidden = ve.init.platform.linkCache.getCached( item.name ).hidden;
 			}
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( categoryWidget, {
