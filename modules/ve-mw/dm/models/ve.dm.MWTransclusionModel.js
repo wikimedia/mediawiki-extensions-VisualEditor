@@ -97,7 +97,7 @@
 			data = { parts: [ { template: data } ] };
 		}
 
-		if ( ve.isArray( data.parts ) ) {
+		if ( Array.isArray( data.parts ) ) {
 			for ( i = 0, len = data.parts.length; i < len; i++ ) {
 				part = data.parts[i];
 				if ( part.template ) {

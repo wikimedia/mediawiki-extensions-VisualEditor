@@ -822,7 +822,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 		tools = JSON.parse( mw.message( 'visualeditor-cite-tool-definition.json' ).plain() );
 	} catch ( e ) { }
 
-	if ( ve.isArray( tools ) ) {
+	if ( Array.isArray( tools ) ) {
 		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
 			item = tools[i];
 			data = { template: item.template };
