@@ -223,7 +223,8 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 			$.each( result.query.pages, function ( index, pageInfo ) {
 				linkCacheUpdate[pageInfo.title] = {
 					missing: false,
-					hidden: Object.prototype.hasOwnProperty( pageInfo.pageprops, 'hiddencat' )
+					hidden: pageInfo.pageprops &&
+						Object.prototype.hasOwnProperty.call( pageInfo.pageprops, 'hiddencat' )
 				};
 			} );
 		}
