@@ -85,11 +85,14 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLookupInputChange = function () {
  * @inheritdoc
  */
 ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
+	var valid;
 	if ( this.annotation instanceof ve.dm.MWExternalLinkAnnotation ) {
-		return this.annotation.getAttribute( 'href' )
+		valid = this.annotation.getAttribute( 'href' )
 			.match( /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi );
+	} else {
+		valid = !!this.getValue();
 	}
-	return !!this.getValue();
+	return $.Deferred().resolve( valid ).promise();
 };
 
 /**
