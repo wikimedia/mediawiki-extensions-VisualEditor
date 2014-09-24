@@ -104,6 +104,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "پیش‌فرض",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "خیر",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "بله",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "می‌توانید نمایش یک برگهٔ اضافی کنار برگهٔ «{{int:vector-view-edit}}» را اجبار کنید که افزودن بخش جدید را ساده خواهد کرد یا مجبور خواهد که نشان داده نشود اگر در غیر این صورت مورد نیاز است.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "نمایش یک برگه در این صفحه برای افزودن یک بخش جدید",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "می‌توانید از اینکه محتویات این صفحه به طور خودکار به خط‌های دیگر تبدیل شوند جلوگیری کنید.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "عدم تبدیل محتوی بین گونه‌های زبانی",

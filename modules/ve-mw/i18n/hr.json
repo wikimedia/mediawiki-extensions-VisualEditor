@@ -94,7 +94,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Prikaži na ovoj stranici karticu za dodavanje novog odlomka",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Možete spriječiti da se sadržaj ove stranice automatski prebaci u druga pisma.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Ne mijenjaj sadržaj između jezičnih inačica",
-	"visualeditor-dialog-meta-settings-noeditsection-help": "Možete spriječiti pojavljivanje poveznica za uređivanje pored svakog odlomka u neobičnom slučaju kad je to potrebno.",
+	"visualeditor-dialog-meta-settings-noeditsection-help": "U slučaju ako je to potrebno, možete spriječiti pojavljivanje poveznica za uređivanje pored svakog odlomka.",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Bez poveznica za uređivanje pojedinačnih odlomaka",
 	"visualeditor-dialog-meta-settings-nogallery-help": "Možete spriječiti ovu kategoriju da prikazuje datoteke suradnika kao galeriju, ako je to neprimjereno u ovom slučaju.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Isključi galeriju",
