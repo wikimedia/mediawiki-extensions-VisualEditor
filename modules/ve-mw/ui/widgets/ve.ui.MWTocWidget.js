@@ -264,7 +264,7 @@ ve.ui.MWTocWidget.prototype.build = function () {
 			// TODO: Cleanup config generation, merge local vars into config object
 			// Get CE node for the heading
 			headingOuterRange = nodes[i].nodeOuterRange;
-			ceNode = this.surface.getView().getDocument().getNodeFromOffset( headingOuterRange.end );
+			ceNode = this.surface.getView().getDocument().getBranchNodeFromOffset( headingOuterRange.end );
 			config = {
 				node: ceNode,
 				tocIndex: tocIndex,
