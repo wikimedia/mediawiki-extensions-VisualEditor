@@ -52,10 +52,11 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupInputWidget );
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
 	return ve.init.target.constructor.static.apiRequest( {
 		action: 'query',
-		list: 'allcategories',
-		acmin: 1,
-		acprefix: this.value,
-		acprop: 'hidden'
+		generator: 'allcategories',
+		gacmin: 1,
+		gacprefix: this.value,
+		prop: 'categoryinfo',
+		redirects: ''
 	} );
 };
 
@@ -65,10 +66,28 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
 	var result = [], linkCacheUpdate = {}, query = data.query || {};
 
-	$.each( query.allcategories || [], function ( index, category ) {
-		result.push( category['*'] );
-		linkCacheUpdate['Category:' + category['*']] = { missing: false, hidden: 'hidden' in category };
-	}.bind( this ) );
+	$.each( query.pages || [], function ( pageId, categoryPage ) {
+		result.push( mw.Title.newFromText( categoryPage.title ).getMainText() );
+		linkCacheUpdate[categoryPage.title] = {
+			missing: categoryPage.hasOwnProperty( 'missing' ),
+			hidden: categoryPage.categoryinfo && categoryPage.categoryinfo.hasOwnProperty( 'hidden' )
+		};
+	} );
+
+	$.each( query.redirects || [], function ( index, redirect ) {
+		if ( !linkCacheUpdate.hasOwnProperty( redirect.to ) ) {
+			linkCacheUpdate[redirect.to] = ve.init.platform.linkCache.getCached( redirect.to ) ||
+				{ missing: false, redirectFrom: [redirect.from] };
+		}
+		if (
+			linkCacheUpdate[redirect.to].redirectFrom &&
+			linkCacheUpdate[redirect.to].redirectFrom.indexOf( redirect.from ) === -1
+		) {
+			linkCacheUpdate[redirect.to].redirectFrom.push( redirect.from );
+		} else {
+			linkCacheUpdate[redirect.to].redirectFrom = [redirect.from];
+		}
+	} );
 
 	ve.init.platform.linkCache.set( linkCacheUpdate );
 
@@ -100,8 +119,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 			linkCacheUpdate['Category:' + suggestedCategory] = { missing: false };
 		}
 		if (
-			ve.indexOf( suggestedCategory, existingCategories ) === -1 &&
-			suggestedCategory.lastIndexOf( canonicalQueryValue, 0 ) === 0
+			ve.indexOf( suggestedCategory, existingCategories ) === -1
 		) {
 			if ( suggestedCacheEntry && suggestedCacheEntry.hidden ) {
 				hiddenCategoryItems.push( suggestedCategory );
@@ -158,12 +176,37 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 				sectionData.id, { $: this.lookupMenu.$, label: sectionData.label }
 			) );
 			$.each( sectionData.items, function ( index, categoryItem ) {
-				itemWidgets.push( new OO.ui.MenuItemWidget( categoryItem, { $: this.lookupMenu.$, label: categoryItem } ) );
+				itemWidgets.push( this.getCategoryWidgetFromName( categoryItem ) );
 			}.bind( this ) );
 		}
 	}.bind( this ) );
 
 	return itemWidgets;
+};
+
+/**
+ * Take a category name and turn it into a menu item widget, following redirects.
+ *
+ * @method
+ * @param {string} name Category name
+ * @returns {OO.ui.MenuItemWidget} Menu item widget to be shown
+ */
+ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( name ) {
+	var cachedData = ve.init.platform.linkCache.getCached(
+		mw.Title.newFromText( name, mw.config.get( 'wgNamespaceIds' ).category ).getPrefixedText()
+	);
+	if ( cachedData && cachedData.redirectFrom ) {
+		return new OO.ui.MenuItemWidget( name, {
+			$: this.lookupMenu.$,
+			autoFitLabel: false,
+			label: this.$( '<span>' )
+				.text( mw.Title.newFromText( cachedData.redirectFrom[0] ).getMainText() )
+				.append( '<br>↳ ' )
+				.append( this.$( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
+		} );
+	} else {
+		return new OO.ui.MenuItemWidget( name, { $: this.lookupMenu.$, label: name } );
+	}
 };
 
 /**
