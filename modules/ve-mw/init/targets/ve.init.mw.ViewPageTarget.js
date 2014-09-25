@@ -253,6 +253,9 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 	if ( !this.active && !this.activating ) {
 		this.activating = true;
 
+		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
+		mw.user.options.set( 'editondblclick', 0 );
+
 		// User interface changes
 		this.transformPage();
 		this.showSpinner();
@@ -308,6 +311,9 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 	this.restorePage();
 	this.hideSpinner();
 	this.showReadOnlyContent();
+
+	mw.user.options.set( 'editondblclick', this.originalEditondbclick );
+	this.originalEditondbclick = undefined;
 
 	if ( this.toolbarSaveButton ) {
 		// If deactivate is called before a successful load, then the save button has not yet been
