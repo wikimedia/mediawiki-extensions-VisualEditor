@@ -25,11 +25,11 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'BeforePageDisplay' hook.
 	 *
-	 * @param $output OutputPage
-	 * @param $skin Skin
+	 * @param OutputPage $output
+	 * @param Skin $skin
 	 * @return boolean
 	 */
-	public static function onBeforePageDisplay( &$output, &$skin ) {
+	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
 		$output->addModules( array( 'ext.visualEditor.viewPageTarget.init' ) );
 		$output->addModuleStyles( array( 'ext.visualEditor.viewPageTarget.noscript' ) );
 		return true;
@@ -44,7 +44,7 @@ class VisualEditorHooks {
 	 * @param array $links Navigation links
 	 * @return boolean
 	 */
-	public static function onSkinTemplateNavigation( &$skin, &$links ) {
+	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
 		// Only do this if the user has VE enabled
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
@@ -72,7 +72,7 @@ class VisualEditorHooks {
 			if ( $action === 'edit' ) {
 				// Build the VisualEditor tab
 				$existing = $title->exists() || (
-					$title->getNamespace() == NS_MEDIAWIKI &&
+					$title->inNamespace( NS_MEDIAWIKI ) &&
 					$title->getDefaultMessageText() !== false
 				);
 				$action = $existing ? 'edit' : 'create';
@@ -81,7 +81,7 @@ class VisualEditorHooks {
 				$veParams['veaction'] = 'edit'; // Set veaction=edit
 				$veTabMessage = $tabMessages[$action];
 				$veTabText = $veTabMessage === null ? $data['text'] :
-					wfMessage( $veTabMessage )->setContext( $skin->getContext() )->text();
+					$skin->msg( $veTabMessage )->text();
 				$veTab = array(
 					'href' => $title->getLocalURL( $veParams ),
 					'text' => $veTabText,
@@ -102,7 +102,7 @@ class VisualEditorHooks {
 				}
 
 				if ( $editTabMessage !== null ) {
-					$editTab['text'] = wfMessage( $editTabMessage )->setContext( $skin->getContext() )->text();
+					$editTab['text'] = $skin->msg( $editTabMessage )->text();
 				}
 
 				// Inject the VE tab before or after the edit tab
@@ -181,7 +181,9 @@ class VisualEditorHooks {
 	 * @param $lang Language
 	 * @return bool true
 	 */
-	public static function onDoEditSectionLink( $skin, $title, $section, $tooltip, &$result, $lang ) {
+	public static function onDoEditSectionLink( Skin $skin, Title $title, $section,
+		$tooltip, &$result, $lang
+	) {
 		// Only do this if the user has VE enabled
 		// (and we're not in parserTests)
 		// (and we're not on a foreign file description page)
@@ -195,7 +197,7 @@ class VisualEditorHooks {
 				!WikiPage::factory( $title )->isLocal()
 			)
 		) {
-			return;
+			return true;
 		}
 
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
@@ -210,15 +212,15 @@ class VisualEditorHooks {
 		if ( !is_null( $tooltip ) ) {
 			# Bug 25462: undo double-escaping.
 			$tooltip = Sanitizer::decodeCharReferences( $tooltip );
-			$attribs['title'] = wfMessage( 'editsectionhint' )->rawParams( $tooltip )
+			$attribs['title'] = $skin->msg( 'editsectionhint' )->rawParams( $tooltip )
 				->inLanguage( $lang )->text();
 		}
-		$veLink = Linker::link( $title, wfMessage( $veEditSection )->inLanguage( $lang )->text(),
+		$veLink = Linker::link( $title, $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
 			$attribs + array( 'class' => 'mw-editsection-visualeditor' ),
 			array( 'veaction' => 'edit', 'vesection' => $section ),
 			array( 'noclasses', 'known' )
 		);
-		$sourceLink = Linker::link( $title, wfMessage( $sourceEditSection )->inLanguage( $lang )->text(),
+		$sourceLink = Linker::link( $title, $skin->msg( $sourceEditSection )->inLanguage( $lang )->text(),
 			$attribs,
 			array( 'action' => 'edit', 'section' => $section ),
 			array( 'noclasses', 'known' )
@@ -229,7 +231,7 @@ class VisualEditorHooks {
 			. '<span class="mw-editsection-bracket">[</span>'
 			. ( $veFirst ? $veLink : $sourceLink )
 			. '<span class="mw-editsection-divider">'
-			. wfMessage( 'pipe-separator' )->inLanguage( $lang )->text()
+			. $skin->msg( 'pipe-separator' )->inLanguage( $lang )->text()
 			. '</span>'
 			. ( $veFirst ? $sourceLink : $veLink )
 			. '<span class="mw-editsection-bracket">]</span>'
