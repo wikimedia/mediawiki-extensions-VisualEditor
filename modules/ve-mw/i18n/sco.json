@@ -116,7 +116,7 @@
 	"visualeditor-dialog-transclusion-options": "Opties",
 	"visualeditor-dialog-transclusion-param-info": "Field descreeption",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nae field descreeption is available",
-	"visualeditor-dialog-transclusion-placeholder": "New template",
+	"visualeditor-dialog-transclusion-placeholder": "Eik ae template",
 	"visualeditor-dialog-transclusion-remove-content": "Remuiv content",
 	"visualeditor-dialog-transclusion-remove-param": "Remuiv feeld",
 	"visualeditor-dialog-transclusion-remove-template": "Remuiv template",
@@ -169,7 +169,7 @@
 	"visualeditor-preference-betatempdisable": "Tempralie diable VeesualEediter while it's still in beta",
 	"visualeditor-preference-core-description": "Enable VeesualEediter. It will na be available oan tauk pages n some ither namespaces.",
 	"visualeditor-preference-core-label": "VeesualEediter",
-	"visualeditor-preference-enable": "Enable the VeesualEediter. It will be available in the follaein namespaces: $1",
+	"visualeditor-preference-enable": "Enable the VeesualEediter. It will be available in the follaein {{PLURAL:$2|namespace|namespaces}}: $1",
 	"visualeditor-preference-language-description": "Eik aen expereemental tuil ti VeesualEediter fer maurkin the leid whaur teix is wrutten fer testin, aheid o general release. Please mynd tae aye owerluik yer chynges afore hainin whan uisin expereemental features.",
 	"visualeditor-preference-language-label": "VeesualEediter leid tuil",
 	"visualeditor-preference-mwalienextension-description": "Eik expereemental baseec support til VeesualEediter fer eeditin extension tags (like galleries or soorce code blocks), aheid o indiveedual tuils being available. Please mynd tae aye luikower yer chynges afore hainin whan uisin expereemental featurs.",
@@ -202,7 +202,7 @@
 	"visualeditor-toolbar-savedialog": "Hain page",
 	"visualeditor-usernamespacepagelink": "Project:Uiser namespace",
 	"visualeditor-viewpage-savewarning": "Ar ye sair that ye want tae gang back til see mode wioot hainin first?",
-	"visualeditor-wikitext-warning": "Ye'r uisin VeesualEediter - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitex]] disna wairk here. Clap oan \"{{int:visualeditor-ca-editsource}}\" tae eedit the page in wikitex mode – onhained chynges wil be tint.",
+	"visualeditor-wikitext-warning": "Ye'r uisin VeesualEediter - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] disna wairk here. Tae switch tae soorce eeditin at onie time wioot tintin yer chynges, apen the drapdoun menu nex tae \"{{int:visualeditor-toolbar-savedialog}}\" n clap oan \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-link": "Help:Wiki maurkup",
 	"visualeditor-wikitext-warning-title": "Wikitex maurup detectit"
 }
