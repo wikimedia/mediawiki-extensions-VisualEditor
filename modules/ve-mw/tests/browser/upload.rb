@@ -15,7 +15,7 @@ def license(language_code, file_name)
 =={{int:license-header}}==
 {{Wikipedia-screenshot}}
 
-[[Category:VisualEditor-#{language_code}]]"
+[[Category:VisualEditor automatic screenshots/#{language_code}]]"
 end
 
 def upload_image file_path, client
