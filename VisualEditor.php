@@ -1389,11 +1389,8 @@ $wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva' )
 // See jQuery.client for specification
 $wgVisualEditorBrowserBlacklist = array(
 	// IE <= 8 has various incompatibilities in layout and feature support
-	// IE9 and IE10 generally work but fail in ajax handling when making POST
-	// requests to the VisualEditor/Parsoid API which is causing silent failures
-	// when trying to save a page (bug 49187)
-	// IE11 has problems but it mostly works OK-ish so it's greylisted
-	'msie' => array ( array( '<=', 10 ) ),
+	// IE10 and 11 have problems but mostly work OK-ish so they're greylisted; IE9 to come
+	'msie' => array ( array( '<=', 9 ) ),
 	// Android 2.x and below "support" CE but don't trigger keyboard input
 	'android' => array( array( '<', 3 ) ),
 	// Firefox issues in versions 12 and below (bug 50780)
