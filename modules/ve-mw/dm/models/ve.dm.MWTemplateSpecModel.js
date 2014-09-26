@@ -123,15 +123,7 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 		try {
 			// Normalize and remove namespace prefix if in the Template: namespace
 			titleObj = new mw.Title( title );
-			if ( titleObj.getNamespaceId() === 10 ) {
-				// Template namespace, remove namespace prefix
-				title = titleObj.getMainText();
-			} else if ( titleObj.getNamespaceId() === 0 ) {
-				title = ':' + titleObj.getPrefixedText();
-			} else {
-				// Other namespace, already has a prefix
-				title = titleObj.getPrefixedText();
-			}
+			title = titleObj.getRelativeText( 10 );
 		} catch ( e ) { }
 	}
 

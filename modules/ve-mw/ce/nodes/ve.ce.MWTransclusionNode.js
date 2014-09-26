@@ -63,13 +63,7 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 		.map( function ( template ) {
 			var title = mw.Title.newFromText( template, mw.config.get( 'wgNamespaceIds' ).template );
 			if ( title ) {
-				if ( title.getNamespaceId() === 10 ) {
-					return title.getMainText();
-				} else if ( title.getNamespaceId() === 0 ) {
-					return ':' + title.getPrefixedText();
-				} else {
-					return title.getPrefixedText();
-				}
+				return title.getRelativeText( 10 );
 			} else {
 				return template;
 			}
