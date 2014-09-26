@@ -156,7 +156,7 @@ class VisualEditorPage
     text_field(:transclusion_textfield, index: 0, frame: frame)
     span(:existing_reference, text: "Use an existing reference", frame: frame)
     div(:extension_reference, class: "ve-ui-mwReferenceResultWidget-shield", frame: frame)
-    div(:page_settings_heading, class: "oo-ui-labelElement-label", frame: frame)
+    span(:page_settings_heading, css: "div.oo-ui-fieldsetLayout > span.oo-ui-labelElement-label", frame: frame)
     div(:redirect_page_option, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline", frame: frame)
     div(:target_redirect, class: "oo-ui-layout oo-ui-fieldLayout oo-ui-fieldLayout-align-top oo-ui-fieldLayout-disabled", frame: frame)
     div(:prevent_redirect, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline oo-ui-fieldLayout-disabled", frame: frame)
@@ -168,7 +168,6 @@ class VisualEditorPage
     a(:insert_media, css: "div.oo-ui-processDialog-actions-primary > div.oo-ui-buttonElement-frameless > a", frame: frame)
     text_area(:formula_area, class: "oo-ui-ltr", frame: frame)
     div(:settings_apply_button, class: "oo-ui-processDialog-actions-primary", frame: frame)
-    div(:page_settings_gap, class: "oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-scrollable oo-ui-panelLayout-expanded oo-ui-stackLayout oo-ui-bookletLayout-stackLayout", frame: frame)
   end
 
   # not having beta warning makes iframes off by one
