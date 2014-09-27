@@ -6,7 +6,8 @@
 			"Penn Station",
 			"Shirayuki",
 			"Whym",
-			"Takot"
+			"Takot",
+			"Plover-Y"
 		]
 	},
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
@@ -133,6 +134,7 @@
 	"visualeditor-dialog-transclusion-remove-template": "テンプレートを除去",
 	"visualeditor-dialog-transclusion-required-parameter": "必須のパラメーター",
 	"visualeditor-dialog-transclusion-required-parameter-description": "このフィールドは必須です。",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "戻る",
 	"visualeditor-dialog-transclusion-single-mode": "オプションを隠す",
 	"visualeditor-dialog-transclusion-title": "参照読み込み",
 	"visualeditor-dialogbutton-media-tooltip": "メディア",
