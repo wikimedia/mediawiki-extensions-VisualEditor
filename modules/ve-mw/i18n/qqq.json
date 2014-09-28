@@ -146,7 +146,7 @@
 	"visualeditor-dialog-referenceslist-title": "{{Identical|References list}}",
 	"visualeditor-dialog-template-title": "{{Identical|Template}}",
 	"visualeditor-dialog-transclusion-add-content": "Label for button that adds parameter content to a transclusion.",
-	"visualeditor-dialog-transclusion-add-param": "Label for button that adds parameter a parameter to a template.",
+	"visualeditor-dialog-transclusion-add-param": "Label for button that adds a parameter to a transcluded template.",
 	"visualeditor-dialog-transclusion-add-template": "Label for button that adds parameter a template to a transclusion.\n{{Identical|Add template}}",
 	"visualeditor-dialog-transclusion-content": "Label for editor of content between transclusion parts.\n{{Identical|Content}}",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Tooltip for deprecated parameter indicator",
