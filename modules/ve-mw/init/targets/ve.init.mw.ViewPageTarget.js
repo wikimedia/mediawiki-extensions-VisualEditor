@@ -1433,6 +1433,10 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	$( '#siteNotice:visible' )
 		.addClass( 've-hide' )
 		.slideUp( 'fast' );
+	// Hide page status indicators (if present)
+	$( '.mw-indicators:visible' )
+		.addClass( 've-hide' )
+		.fadeOut( 'fast' );
 
 	// Add class to document
 	$( 'html' ).addClass( 've-activated' );
@@ -1466,6 +1470,9 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	// Make site notice visible again (if present)
 	$( '#siteNotice.ve-hide' )
 		.slideDown( 'fast' );
+	// Make page status indicators visible again (if present)
+	$( '.mw-indicators.ve-hide' )
+		.fadeIn( 'fast' );
 
 	// Remove class from document
 	$( 'html' ).removeClass( 've-activated' );
