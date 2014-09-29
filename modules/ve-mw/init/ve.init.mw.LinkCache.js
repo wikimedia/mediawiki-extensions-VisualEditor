@@ -5,6 +5,17 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 ( function () {
+	var hasOwn = Object.prototype.hasOwnProperty;
+
+	// TODO should reuse ve.dm.MWInternalLinkAnnotation#getLookupTitle once factored out
+	function normalizeTitle( name ) {
+		var title = mw.Title.newFromText( name );
+		if ( !title ) {
+			return name;
+		}
+		return title.getPrefixedText();
+	}
+
 	/**
 	 * MediaWiki link status cache.
 	 *
@@ -18,8 +29,16 @@
 		// Mixin constructor
 		OO.EventEmitter.call( this );
 
-		this.cache = {}; // Keys are page names, values are deferreds
-		this.queue = []; // Array of page names queued to be looked up
+		// Keys are page names, values are deferreds
+		this.cache = {};
+
+		// Keys are page names, values are link data objects
+		// This is kept for synchronous retrieval of cached values via #getCached
+		this.cacheValues = {};
+
+		// Array of page names queued to be looked up
+		this.queue = [];
+
 		this.schedule = ve.debounce( this.processQueue.bind( this ), 0 );
 	};
 
@@ -43,7 +62,7 @@
 	 * @returns {jQuery.Promise} Promise that will be resolved with the data once it's available
 	 */
 	ve.init.mw.LinkCache.prototype.get = function ( name ) {
-		if ( !Object.prototype.hasOwnProperty.call( this.cache, name ) ) {
+		if ( !hasOwn.call( this.cache, name ) ) {
 			this.cache[name] = $.Deferred();
 			this.queue.push( name );
 			this.schedule();
@@ -56,18 +75,11 @@
 	 * this returns that data. Otherwise, it returns undefined.
 	 *
 	 * @param {string} name Normalized page title
-	 * @returns {Object} Cache data for this name.
+	 * @returns {Object|undefined} Cache data for this name.
 	 */
 	ve.init.mw.LinkCache.prototype.getCached = function ( name ) {
-		var res;
-		if (
-			Object.prototype.hasOwnProperty.call( this.cache, name ) &&
-			this.cache[name].state() === 'resolved'
-		) {
-			this.cache[name].done( function ( data ) {
-				res = data;
-			} );
-			return res;
+		if ( hasOwn.call( this.cacheValues, name ) ) {
+			return this.cacheValues[name];
 		}
 	};
 
@@ -79,22 +91,14 @@
 	ve.init.mw.LinkCache.prototype.set = function ( entries ) {
 		var name;
 		for ( name in entries ) {
-			if ( !Object.prototype.hasOwnProperty.call( this.cache, name ) ) {
+			if ( !hasOwn.call( this.cache, name ) ) {
 				this.cache[name] = $.Deferred();
 			}
 			this.cache[name].resolve( entries[name] );
+			this.cacheValues[name] = entries[name];
 		}
 		this.emit( 'add', ve.getObjectKeys( entries ) );
 	};
-
-	// TODO should reuse ve.dm.MWInternalLinkAnnotation#getLookupTitle once factored out
-	function normalizeTitle( name ) {
-		var title = mw.Title.newFromText( name );
-		if ( !title ) {
-			return name;
-		}
-		return title.getPrefixedText();
-	}
 
 	/**
 	 * Perform any scheduled API requests.
@@ -102,7 +106,7 @@
 	 * @fires add
 	 */
 	ve.init.mw.LinkCache.prototype.processQueue = function () {
-		var subqueue, queue, queueCopy, linkCache = this;
+		var subqueue, queue, linkCache = this;
 
 		function rejectSubqueue() {
 			var i, len;
@@ -112,21 +116,23 @@
 		}
 
 		function processData( data ) {
-			var pageid, page, info, dfd,
-				pages = data.query && data.query.pages || {};
-			for ( pageid in pages ) {
-				page = pages[pageid];
-				info = {
-					missing: page.missing !== undefined,
-					redirect: page.redirect !== undefined,
-					// Disambiguator extension
-					disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined
-				};
-				dfd = linkCache.cache[page.title];
-				if ( dfd ) {
-					dfd.resolve( info );
+			var pageid, page, info,
+				pages = data.query && data.query.pages,
+				processed = {};
+			if ( pages ) {
+				for ( pageid in pages ) {
+					page = pages[pageid];
+					info = {
+						missing: page.missing !== undefined,
+						redirect: page.redirect !== undefined,
+						// Disambiguator extension
+						disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined
+					};
+					processed[page.title] = info;
 				}
+				linkCache.set( processed );
 			}
+
 			// Reject everything in subqueue; this will only reject the ones
 			// that weren't already resolved above, because .reject() on an
 			// already resolved Deferred is a no-op.
@@ -134,7 +140,6 @@
 		}
 
 		queue = this.queue;
-		queueCopy = queue.slice();
 		this.queue = [];
 		while ( queue.length ) {
 			subqueue = queue.splice( 0, 50 ).map( normalizeTitle );
@@ -147,7 +152,6 @@
 				.done( processData )
 				.fail( rejectSubqueue );
 		}
-		this.emit( 'add', queueCopy );
 	};
 
 } () );
