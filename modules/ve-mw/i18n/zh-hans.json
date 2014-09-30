@@ -31,7 +31,7 @@
 	"visualeditor-beta-label": "测试",
 	"visualeditor-beta-warning": "可视化编辑器仍在“测试中”。您可能会遇到软件问题，并可能无法编辑页面中的某些部分。要回到源代码编辑而不丢失您的更改，请打开“{{int:visualeditor-toolbar-savedialog}}”之后的下拉菜单，然后选择“{{int:visualeditor-mweditmodesource-tool}}”。",
 	"visualeditor-browserwarning": "可视化编辑器不支持您正在使用的浏览器。",
-	"visualeditor-ca-createlocaldescriptionsource": "添加本地说明来源",
+	"visualeditor-ca-createlocaldescriptionsource": "添加本地说明源代码",
 	"visualeditor-ca-createsource": "创建源代码",
 	"visualeditor-ca-editlocaldescriptionsource": "编辑本地说明来源",
 	"visualeditor-ca-editsource": "编辑源代码",

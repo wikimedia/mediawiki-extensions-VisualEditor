@@ -29,7 +29,7 @@
 	"visualeditor-beta-warning": "VisualEditor è in versione di prova. Si potrebbero verificare errori e alcune parti della pagina potrebbero non risultare modificabili. Per passare a \"{{int:visualeditor-ca-editsource}}\" in qualsiasi momento senza perdere le modifiche, aprire il menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezionare \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Stai usando un browser che non è ancora supportato completamente da VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Aggiungi sorgente descrizione locale",
-	"visualeditor-ca-createsource": "Crea wikitesto",
+	"visualeditor-ca-createsource": "Crea con wikitesto",
 	"visualeditor-ca-editlocaldescriptionsource": "Modifica wikitesto locale",
 	"visualeditor-ca-editsource": "Modifica wikitesto",
 	"visualeditor-ca-editsource-section": "modifica wikitesto",
