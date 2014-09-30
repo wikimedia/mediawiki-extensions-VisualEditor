@@ -195,6 +195,12 @@
 				"classes": [
 					"OO.ui.*Widget"
 				]
+			},
+			{
+				"name": "Themes",
+				"classes": [
+					"OO.ui.*Theme"
+				]
 			}
 		]
 	},
