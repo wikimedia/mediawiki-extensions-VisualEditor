@@ -308,9 +308,11 @@ ve.ui.MWCategoryWidget.prototype.removeItems = function ( names ) {
 
 	for ( i = 0, len = names.length; i < len; i++ ) {
 		categoryItem = this.categories[names[i]];
-		categoryItem.disconnect( this );
-		items.push( categoryItem );
-		delete this.categories[names[i]];
+		if ( categoryItem ) {
+			categoryItem.disconnect( this );
+			items.push( categoryItem );
+			delete this.categories[names[i]];
+		}
 	}
 
 	OO.ui.GroupElement.prototype.removeItems.call( this, items );
