@@ -65,8 +65,8 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 
 			if ( !this.node ) {
 				// Create a new node
-				// collapseRangeToEnd returns a new fragment
-				this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
+				// collapseToEnd returns a new fragment
+				this.fragment = this.getFragment().collapseToEnd().insertContent( [
 					{
 						type: this.constructor.static.nodeModel.static.name,
 						attributes: { mw: this.getNewMwData() }
@@ -74,8 +74,8 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 					{ type: '/' + this.constructor.static.nodeModel.static.name }
 				] );
 				// Check if the node was inserted at a structural offset and wrapped in a paragraph
-				if ( this.getFragment().getRange().getLength() === 4 ) {
-					this.fragment = this.getFragment().adjustRange( 1, -1 );
+				if ( this.getFragment().getSelection().getRange().getLength() === 4 ) {
+					this.fragment = this.getFragment().adjustLinearSelection( 1, -1 );
 				}
 				this.getFragment().select();
 				this.node = this.getFragment().getSelectedNode();

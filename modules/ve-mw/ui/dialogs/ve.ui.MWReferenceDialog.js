@@ -351,7 +351,7 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
 					this.referenceModel.insertInternalItem( surfaceModel );
 				}
 				// Collapse returns a new fragment, so update this.fragment
-				this.fragment = this.getFragment().collapseRangeToEnd();
+				this.fragment = this.getFragment().collapseToEnd();
 				this.referenceModel.insertReferenceNode( this.getFragment() );
 			}
 

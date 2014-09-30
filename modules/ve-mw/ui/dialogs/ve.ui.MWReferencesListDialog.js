@@ -129,7 +129,7 @@ ve.ui.MWReferencesListDialog.prototype.getActionProcess = function ( action ) {
 				}
 			} else {
 				// Collapse returns a new fragment, so update this.fragment
-				this.fragment = this.getFragment().collapseRangeToEnd().insertContent( [
+				this.fragment = this.getFragment().collapseToEnd().insertContent( [
 					{
 						type: 'mwReferencesList',
 						attributes: {

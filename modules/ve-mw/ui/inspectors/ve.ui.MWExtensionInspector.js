@@ -177,7 +177,7 @@ ve.ui.MWExtensionInspector.prototype.insertOrUpdateNode = function () {
 		};
 		this.updateMwData( mwData );
 		// Collapse returns a new fragment, so update this.fragment
-		this.fragment = this.getFragment().collapseRangeToEnd();
+		this.fragment = this.getFragment().collapseToEnd();
 		this.getFragment().insertContent( [
 			{
 				type: this.constructor.static.nodeModel.static.name,

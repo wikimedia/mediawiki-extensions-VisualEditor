@@ -16,7 +16,7 @@ QUnit.test( 'convert (MW-specific types)', function ( assert ) {
 				range: new ve.Range( 14, 16 ),
 				type: 'mwHeading',
 				attributes: { level: 2 },
-				expectedSelection: new ve.Range( 14, 16 ),
+				expectedRange: new ve.Range( 14, 16 ),
 				expectedData: function ( data ) {
 					data.splice( 11, 2, { type: '/list' }, { type: 'mwHeading', attributes: { level: 2 } } );
 					data.splice( 19, 2, { type: '/mwHeading' }, { type: 'list', attributes: { style: 'bullet' } } );
@@ -27,7 +27,7 @@ QUnit.test( 'convert (MW-specific types)', function ( assert ) {
 				range: new ve.Range( 15, 50 ),
 				type: 'mwHeading',
 				attributes: { level: 3 },
-				expectedSelection: new ve.Range( 15, 44 ),
+				expectedRange: new ve.Range( 15, 44 ),
 				expectedData: function ( data ) {
 					data.splice( 11, 2, { type: '/list' }, { type: 'mwHeading', attributes: { level: 3 } } );
 					data.splice( 19, 4, { type: '/mwHeading' }, { type: 'mwHeading', attributes: { level: 3 } } );
@@ -41,7 +41,7 @@ QUnit.test( 'convert (MW-specific types)', function ( assert ) {
 				range: new ve.Range( 4, 28 ),
 				type: 'mwHeading',
 				attributes: { level: 1 },
-				expectedSelection: new ve.Range( 2, 22 ),
+				expectedRange: new ve.Range( 2, 22 ),
 				expectedData: function ( data ) {
 					data.splice( 0, 3, { type: 'mwHeading', attributes: { level: 1 } } );
 					data.splice( 7, 4, { type: '/mwHeading' }, { type: 'mwHeading', attributes: { level: 1 } } );
@@ -54,7 +54,7 @@ QUnit.test( 'convert (MW-specific types)', function ( assert ) {
 				range: new ve.Range( 5, 26 ),
 				type: 'mwPreformatted',
 				attributes: undefined,
-				expectedSelection: new ve.Range( 3, 20 ),
+				expectedRange: new ve.Range( 3, 20 ),
 				expectedData: function ( data ) {
 					data.splice( 0, 3, { type: 'mwPreformatted' } );
 					data.splice( 7, 4, { type: '/mwPreformatted' }, { type: 'mwPreformatted' } );
@@ -67,6 +67,6 @@ QUnit.test( 'convert (MW-specific types)', function ( assert ) {
 
 	QUnit.expect( cases.length * 4 );
 	for ( i = 0; i < cases.length; i++ ) {
-		ve.test.utils.runFormatConverterTest( assert, cases[i].range, cases[i].type, cases[i].attributes, cases[i].expectedSelection, cases[i].expectedData, cases[i].msg );
+		ve.test.utils.runFormatConverterTest( assert, cases[i].range, cases[i].type, cases[i].attributes, cases[i].expectedRange, cases[i].expectedData, cases[i].msg );
 	}
 } );

@@ -73,10 +73,10 @@
 		var obj = this.getPlainObject();
 
 		if ( obj !== null ) {
-			surfaceModel.getFragment( node.getOuterRange(), true )
+			surfaceModel.getLinearFragment( node.getOuterRange(), true )
 				.changeAttributes( { mw: obj } );
 		} else {
-			surfaceModel.getFragment( node.getOuterRange(), true )
+			surfaceModel.getLinearFragment( node.getOuterRange(), true )
 				.removeContent();
 		}
 	};

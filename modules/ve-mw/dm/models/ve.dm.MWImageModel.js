@@ -359,8 +359,8 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
 		if ( !captionNode ) {
 			// There was no caption before, so insert one now
 			surfaceModel.getFragment()
-				.adjustRange( 1 )
-				.collapseRangeToStart()
+				.adjustLinearSelection( 1 )
+				.collapseToStart()
 				.insertContent( [ { type: 'mwImageCaption' }, { type: '/mwImageCaption' } ] );
 			// Update the caption node
 			captionNode = node.getCaptionNode();
@@ -414,6 +414,10 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
 		surfaceModel = fragment.getSurface();
 
+	if ( !( fragment.getSelection() instanceof ve.dm.LinearSelection ) ) {
+		return fragment;
+	}
+
 	editAttributes = $.extend( originalAttrs, this.getUpdatedAttributes() );
 
 	// Remove old classes
@@ -431,9 +435,9 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	switch ( nodeType ) {
 		case 'mwInlineImage':
 			// Try to put the image inside the nearest content node
-			offset = fragment.getDocument().data.getNearestContentOffset( fragment.getRange().start );
+			offset = fragment.getDocument().data.getNearestContentOffset( fragment.getSelection().getRange().start );
 			if ( offset > -1 ) {
-				fragment = fragment.clone( new ve.Range( offset ) );
+				fragment = fragment.clone( new ve.dm.LinearSelection( fragment.getDocument(), new ve.Range( offset ) ) );
 			}
 			fragment.insertContent( contentToInsert );
 			return fragment;
@@ -441,9 +445,9 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 		case 'mwBlockImage':
 			contentToInsert.splice( 1, 0, { type: 'mwImageCaption' }, { type: '/mwImageCaption' } );
 			// Try to put the image in front of the structural node
-			offset = fragment.getDocument().data.getNearestStructuralOffset( fragment.getRange().start, -1 );
+			offset = fragment.getDocument().data.getNearestStructuralOffset( fragment.getSelection().getRange().start, -1 );
 			if ( offset > -1 ) {
-				fragment = fragment.clone( new ve.Range( offset ) );
+				fragment = fragment.clone( new ve.dm.LinearSelection( fragment.getDocument(), new ve.Range( offset ) ) );
 			}
 			fragment.insertContent( contentToInsert );
 			// Check if there is caption document and insert it
@@ -453,7 +457,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 				surfaceModel.change(
 					ve.dm.Transaction.newFromDocumentInsertion(
 						surfaceModel.getDocument(),
-						fragment.getRange().start + 2,
+						fragment.getSelection().getRange().start + 2,
 						this.getCaptionDocument()
 					)
 				);

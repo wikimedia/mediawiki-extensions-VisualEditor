@@ -398,7 +398,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 					this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
 				} else if ( obj !== null ) {
 					// Collapse returns a new fragment, so update this.fragment
-					this.fragment = this.getFragment().collapseRangeToEnd();
+					this.fragment = this.getFragment().collapseToEnd();
 					this.transclusionModel.insertTransclusionNode( this.getFragment() );
 				}
 

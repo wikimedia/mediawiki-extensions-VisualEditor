@@ -70,7 +70,7 @@ ve.ui.MWUseExistingReferenceDialogTool.prototype.onUpdateState = function ( frag
 			return false;
 		}
 	} );
-	this.setDisabled( ( this.constructor.static.requiresRange && !fragment.getRange() ) || empty );
+	this.setDisabled( ( this.constructor.static.requiresRange && fragment.isNull() ) || empty );
 };
 ve.ui.toolFactory.register( ve.ui.MWUseExistingReferenceDialogTool );
 

@@ -1491,7 +1491,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	// onDocumentFocus is debounced, so wait for that to happen before setting
 	// the model selection, otherwise it will get reset
 	this.surface.getView().once( 'focus', function () {
-		surfaceModel.setSelection( new ve.Range( offset ) );
+		surfaceModel.setLinearSelection( new ve.Range( offset ) );
 		target.scrollToHeading( headingNode );
 	} );
 };
