@@ -937,7 +937,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 		.remove( 'embed[id ^= xunlei_com_thunder_helper_plugin]' ) // Bug 63121
 		.remove( 'object[type = cosymantecnisbfw], script[id=NortonInternetSecurityBF]' ) // Bug 63229
 		.remove( 'div[id = kloutify]' ) // Bug 67006
-		.remove( 'div[id ^= mittoHidden' ); // Bug 68900#c1
+		.remove( 'div[id ^= mittoHidden]' ); // Bug 68900#c1
 	// Add doctype manually
 	return '<!doctype html>' + ve.serializeXhtml( newDoc );
 };
