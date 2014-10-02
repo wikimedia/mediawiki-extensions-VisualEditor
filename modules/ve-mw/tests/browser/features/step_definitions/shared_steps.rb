@@ -17,7 +17,10 @@ Given(/^I go to the "(.+)" page with content "(.+)"$/) do |page_title, page_cont
 end
 
 Given(/^I click in the editable part$/) do
-  on(VisualEditorPage).content_element.when_present.send_keys("")
+  on(VisualEditorPage) do |page|
+    page.content_element.when_present.fire_event("onfocus")
+    page.content_element.send_keys("")
+  end
 end
 
 Given(/^I make the text "(.*?)" be selected$/) do |select_text|
