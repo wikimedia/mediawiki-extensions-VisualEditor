@@ -274,12 +274,12 @@ Then(/^I should see the formula insertion menu$/) do
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element, @current_page.formula_image_element], nil, 0)
 end
 
-Then(/^I should see VisualEditor toolbar containing cancel and save button$/) do
+Then(/^I should see action buttons in the end of the VisualEditor toolbar$/) do
   on(VisualEditorPage) do |page|
-    page.toolbar_action_element.when_present.should be_visible
+    page.toolbar_actions_element.when_present.should be_visible
     page.save_enabled_element.when_present(10).should be_visible
   end
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.toolbar_action_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.toolbar_actions_element])
 end
 
 Then(/^I should see References list dialog box$/) do

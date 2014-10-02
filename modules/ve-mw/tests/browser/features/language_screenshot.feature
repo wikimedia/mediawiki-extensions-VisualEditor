@@ -139,10 +139,10 @@ Feature: Language Screenshot
     Then I should see the formula insertion menu
 
   @language_screenshot
-  Scenario: VisualEditor_cancel_save
+  Scenario: VisualEditor_toolbar_actions
     Given I am logged in
     When I am edit language screenshot page with Testing toolbar
-    Then I should see VisualEditor toolbar containing cancel and save button
+    Then I should see action buttons in the end of the VisualEditor toolbar
 
   @language_screenshot
   Scenario: VisualEditor_references_list

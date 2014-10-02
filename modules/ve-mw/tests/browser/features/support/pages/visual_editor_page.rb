@@ -87,7 +87,7 @@ class VisualEditorPage
   a(:internal_link, class: "ve-ce-linkAnnotation ve-ce-mwInternalLinkAnnotation")
   unordered_list(:popup_icon, class: "ve-ui-context-menu")
   span(:basic_reference, class: "oo-ui-iconElement-icon oo-ui-icon-reference")
-  div(:toolbar_action, class: "oo-ui-toolbar-actions")
+  div(:toolbar_actions, class: "oo-ui-toolbar-actions")
   span(:media_insert_menu, class: "oo-ui-tool-name-media")
   span(:template_insert_menu, class: "oo-ui-tool-name-transclusion")
   span(:ref_list_insert_menu, class: "oo-ui-tool-name-referencesList")
