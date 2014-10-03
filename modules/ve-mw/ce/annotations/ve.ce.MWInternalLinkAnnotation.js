@@ -24,22 +24,7 @@ ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation( model, p
 	this.$element.addClass( 've-ce-mwInternalLinkAnnotation' );
 
 	// Style based on link cache information
-	ve.init.platform.linkCache.get( model.getAttribute( 'lookupTitle' ) )
-		.done( function ( data ) {
-			if ( data.missing ) {
-				annotation.$element.addClass( 'new' );
-			} else {
-				// Provided by core MediaWiki, no styles by default.
-				if ( data.redirect ) {
-					annotation.$element.addClass( 'mw-redirect' );
-				}
-				// Should be provided by the Disambiguator extension, but no one has yet written a suitably
-				// performant patch to do it. It is instead implemented in JavaScript in on-wiki gadgets.
-				if ( data.disambiguation ) {
-					annotation.$element.addClass( 'mw-disambig' );
-				}
-			}
-		} );
+	ve.init.platform.linkCache.styleElement( model.getAttribute( 'lookupTitle' ), annotation.$element );
 
 	// HACK: Override href in case hrefPrefix isn't set
 	// This is a workaround for bug 58314 until such time as Parsoid gets rid of
