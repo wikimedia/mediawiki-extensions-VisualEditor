@@ -1316,7 +1316,8 @@ $wgResourceModules += array(
 	'ext.visualEditor.iehacks' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
 			'modules/ve-mw/init/styles/ve.init.mw.IEHacks.css'
-		)
+		),
+		'targets' => array( 'desktop', 'mobile' ),
 	),
 );
 
