@@ -105,15 +105,7 @@ ve.init.mw.Platform.prototype.getLanguageDirection = $.uls.data.getDir;
 
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.getUserLanguages = function () {
-	var lang = mw.config.get( 'wgUserLanguage' ),
-		langParts = lang.split( '-' ),
-		langs = [ lang ];
-
-	if ( langParts.length > 1 ) {
-		langs.push( langParts[0] );
-	}
-
-	return langs;
+	return mw.language.getFallbackLanguageChain();
 };
 
 /* Initialization */
