@@ -74,6 +74,7 @@ $wgConfigRegistry['visualeditor'] = 'GlobalVarConfig::newInstance';
 
 // Register Hooks
 $wgHooks['BeforePageDisplay'][] = 'VisualEditorHooks::onBeforePageDisplay';
+$wgHooks['ContentHandlerDefaultModelFor'][] = 'VisualEditorHooks::onContentHandlerDefaultModelFor';
 $wgHooks['DoEditSectionLink'][] = 'VisualEditorHooks::onDoEditSectionLink';
 $wgHooks['GetBetaFeaturePreferences'][] = 'VisualEditorHooks::onGetBetaPreferences';
 $wgHooks['GetPreferences'][] = 'VisualEditorHooks::onGetPreferences';
