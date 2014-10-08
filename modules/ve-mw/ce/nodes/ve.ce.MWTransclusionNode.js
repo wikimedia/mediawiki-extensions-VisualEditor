@@ -125,6 +125,26 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElements ) {
+	var $elements = this.$( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) );
+	$elements
+		.find( 'a[href]' ).addBack( 'a[href]' )
+		.each( function () {
+			var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+					this.href, this.ownerDocument
+				),
+				normalisedHref = targetData.title;
+			if ( mw.Title.newFromText( targetData.title ) ) {
+				normalisedHref = mw.Title.newFromText( targetData.title ).getPrefixedText();
+			}
+			ve.init.platform.linkCache.styleElement( normalisedHref, $( this ) );
+		} );
+	return $elements.toArray();
+};
+
+/**
  * Handle an unsuccessful response from the parser for the wikitext fragment.
  *
  * @param {jQuery.Deferred} deferred The promise object created by #generateContents

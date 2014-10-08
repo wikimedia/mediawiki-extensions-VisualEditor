@@ -84,6 +84,30 @@
 	};
 
 	/**
+	 * Requests information about the title, then adds classes to the provided element as appropriate.
+	 *
+	 * @param {string} title Defaults to 'href' attribute of $element
+	 * @param {jQuery} $element Element to style
+	 */
+	ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
+		this.get( title ).done( function ( data ) {
+			if ( data.missing ) {
+				$element.addClass( 'new' );
+			} else {
+				// Provided by core MediaWiki, no styles by default.
+				if ( data.redirect ) {
+					$element.addClass( 'mw-redirect' );
+				}
+				// Should be provided by the Disambiguator extension, but no one has yet written a suitably
+				// performant patch to do it. It is instead implemented in JavaScript in on-wiki gadgets.
+				if ( data.disambiguation ) {
+					$element.addClass( 'mw-disambig' );
+				}
+			}
+		} );
+	};
+
+	/**
 	 * Add entries to the cache.
 	 * @param {Object} entries Object keyed by page title, with the values being data objects
 	 * @fires add
