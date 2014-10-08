@@ -128,7 +128,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				} );
 				annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
 				annotations.push( annotation );
-				content = ve.splitClusters( value );
+				content = value.split( '' );
 				ve.dm.Document.static.addAnnotationsToData( content, annotations );
 				surfaceModel.change(
 					ve.dm.Transaction.newFromReplacement( doc, nodeRange, content )
