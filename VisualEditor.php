@@ -24,6 +24,7 @@ $wgExtensionCredits['other'][] = array(
 		'Moriel Schottlender',
 		'Roan Kattouw',
 		'Rob Moen',
+		'Sucheta Ghoshal',
 		'Timo Tijhof',
 		'Trevor Parscal',
 	),
