@@ -157,7 +157,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			this.actions.setMode( 'save' );
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
-				var $textarea = dialog.editSummaryInput.$input;
+				var $textarea = dialog.editSummaryInput.getValue();
 				$textarea[0].focus();
 				// If message has be pre-filled (e.g. section edit), move cursor to end
 				if ( $textarea.val() !== '' ) {
@@ -276,7 +276,7 @@ ve.ui.MWSaveDialog.prototype.clearAllMessages = function () {
  */
 ve.ui.MWSaveDialog.prototype.reset = function () {
 	// Reset summary input
-	this.editSummaryInput.$input.val( '' );
+	this.editSummaryInput.setValue( '' );
 	// Uncheck minoredit
 	this.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
 		.find( '#wpMinoredit' ).prop( 'checked', false );
