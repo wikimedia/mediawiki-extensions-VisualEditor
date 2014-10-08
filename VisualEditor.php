@@ -15,6 +15,7 @@ $wgExtensionCredits['other'][] = array(
 	'name' => 'VisualEditor',
 	'author' => array(
 		'Alex Monk',
+		'Bartosz Dziewoński',
 		'Christian Williams',
 		'David Chan',
 		'Ed Sanders',
