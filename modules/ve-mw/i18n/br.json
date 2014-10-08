@@ -112,6 +112,8 @@
 	"visualeditor-dialog-transclusion-remove-template": "Lemel ar patrom",
 	"visualeditor-dialog-transclusion-required-parameter": "Maezienn rekis",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Rekis eo ar maezienn.",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Distreiñ",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Kenderc'hel memestra",
 	"visualeditor-dialog-transclusion-single-mode": "Dibarzhioù kuzhet",
 	"visualeditor-dialog-transclusion-title": "Treuzklozadur",
 	"visualeditor-dialogbutton-media-tooltip": "Media",

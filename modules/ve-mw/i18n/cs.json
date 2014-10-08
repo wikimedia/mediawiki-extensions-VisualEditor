@@ -40,7 +40,7 @@
 	"visualeditor-desc": "WYSIWYG editor pro MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Pokračovat",
-	"visualeditor-dialog-beta-welcome-content": "Toto je náš nový, jednodušší způsob editace. Funguje stále ve verzi beta, což znamená, že narazíte na některé needitovatelné části stránky nebo se setkáte s problémy, které bude třeba opravit. Doporučujeme vám zkontrolovat provedené změny a uvítáme hlášení o jakýchkoli problémech, na které při užívání VisualEditoru narazíte (můžete nám dát vědět kliknutím na tlačítko „{{int:visualeditor-help-tool}}“). I nadále můžete používat editor wikitextu kliknutím na záložku „$1“ – neuložené změny budou ztraceny.",
+	"visualeditor-dialog-beta-welcome-content": "Toto je náš nový, jednodušší způsob editace. Funguje stále ve verzi beta, což znamená, že narazíte na některé needitovatelné části stránky nebo se setkáte s problémy, které bude třeba opravit. Doporučujeme vám zkontrolovat provedené změny a uvítáme hlášení o jakýchkoli problémech, na které při užívání VisualEditoru narazíte (můžete nám dát vědět kliknutím na tlačítko „{{int:visualeditor-help-tool}}“). Kdykoli se můžete přepnout na editor wikitextu kliknutím na záložku „$1“, přičemž vám zůstanou všechny provedené změny.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Vítejte}} ve VisualEditoru",
 	"visualeditor-dialog-media-alttext-section": "Alternativní text",
 	"visualeditor-dialog-media-change-image": "Vybrat jiný obrázek",
