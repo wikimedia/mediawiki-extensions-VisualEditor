@@ -972,7 +972,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 					if ( this.selectedNode ) {
 						// Remove the old image
 						this.fragment = this.getFragment().clone(
-							this.selectedNode.getOuterRange()
+							new ve.dm.LinearSelection( this.fragment.getDocument(), this.selectedNode.getOuterRange() )
 						);
 						this.fragment.removeContent();
 					}

@@ -192,7 +192,9 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 							// initialized the internal node with a paragraph - getting the range of the
 							// item covers the entire paragraph so we have to get the range of it's
 							// first (and empty) child
-							this.getFragment().clone( item.getChildren()[0].getRange() )
+							this.getFragment().clone(
+								new ve.dm.LinearSelection( doc, item.getChildren()[0].getRange() )
+							)
 						);
 					}
 				}
