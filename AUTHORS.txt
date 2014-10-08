@@ -1,6 +1,7 @@
 Principal Authors (major contributors, alphabetically)
 
 Alex Monk <krenair@wikimedia.org>
+Bartosz Dziewoński <matmarex@wikimedia.org>
 Christian Williams <christian@wikia-inc.com>
 David Chan <dchan@wikimedia.org>
 Ed Sanders <esanders@wikimedia.org>
@@ -20,7 +21,6 @@ Alexander Emsenhuber <ialex.wiki@gmail.com>
 Amir E. Aharoni <amir.aharoni@mail.huji.ac.il>
 Antoine Musso <hashar@free.fr>
 Audrey Tang <audreyt@audreyt.org>
-Bartosz Dziewoński <matma.rex@gmail.com>
 Brion Vibber <brion@wikimedia.org>
 C. Scott Ananian <cananian@wikimedia.org>
 Chris McMahon <cmcmahon@wikimedia.org>
