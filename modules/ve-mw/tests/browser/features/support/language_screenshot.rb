@@ -30,9 +30,16 @@ def crop_image path, page_elements, offset_element
   height = crop_rectangle[3]
 
   require "chunky_png"
-  element = ChunkyPNG::Image.from_file path
-  element.crop!(top_left_x, top_left_y, width, height)
-  element.save path
+  image = ChunkyPNG::Image.from_file path
+
+  # It happens with some elements that an image goes off the screen a bit,
+  # and chunky_png fails when this happens
+  if image.width < top_left_x + width
+    width = image.width - top_left_x
+  end
+
+  image.crop!(top_left_x, top_left_y, width, height)
+  image.save path
 end
 
 def rectangle rectangles, offset_rectangle=[0,0,0,0]
