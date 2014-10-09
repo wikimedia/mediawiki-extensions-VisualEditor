@@ -334,6 +334,13 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		classes: ['ve-ui-mwSaveDialog-savePanel']
 	} );
 
+	// Byte counter in edit summary
+	this.editSummaryCountLabel = new OO.ui.LabelWidget ( {
+		$: this.$,
+		classes: [ 've-ui-mwSaveDialog-editSummary-count' ],
+		label: String( this.editSummaryByteLimit )
+	} );
+
 	// Save panel
 	this.$editSummaryLabel = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )
 		.html( ve.init.platform.getParsedMessage( 'summary' ) )
@@ -349,15 +356,14 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers
 		// Users likely assume characters but then it seems to count down quicker
 		// than expected. Facing users with the word "byte" is bad? (bug 40035)
-		this.savePanel.$element.find( '.ve-ui-mwSaveDialog-editSummary-count' ).text(
-			this.editSummaryByteLimit - $.byteLength( this.editSummaryInput.getValue() )
+		this.editSummaryCountLabel.setLabel(
+			String( this.editSummaryByteLimit - $.byteLength( this.editSummaryInput.getValue() ) )
 		);
 	}.bind( this ) );
 
 	this.$saveOptions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
 		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
-		new OO.ui.LabelWidget( { $: this.$ } ).$element
-			.addClass( 've-ui-mwSaveDialog-editSummary-count' ).text( this.editSummaryByteLimit )
+		this.editSummaryCountLabel.$element
 			.attr( 'title', ve.msg( 'visualeditor-editsummary-bytes-remaining' ) )
 	);
 	this.$saveMessages = this.$( '<div>' );
