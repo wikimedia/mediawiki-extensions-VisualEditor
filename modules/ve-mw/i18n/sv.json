@@ -41,7 +41,7 @@
 	"visualeditor-desc": "Visuell redigerare för MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Fortsätt",
-	"visualeditor-dialog-beta-welcome-content": "Detta är vårt nya, enklare sätt att redigera. Det är fortfarande i beta, vilket innebär att du kan hitta delar av sidan som inte går att redigera, eller stöta på problem som måste korrigeras. Vi uppmuntrar till att granska ändringarna innan du sparar, och vi välkomnar rapporter om eventuella problem du kan stöta på när du använder VisualEditor (klicka på \"{{int:visualeditor-help-tool}}\"-knappen för att skicka feedback). Du kan fortsätta använda wikitext-editorn genom att klicka på \"$1\"-fliken istället – ändringar som inte sparats går förlorade.",
+	"visualeditor-dialog-beta-welcome-content": "Detta är vårt nya, enklare sätt att redigera. Det är fortfarande i beta, vilket innebär att du kan hitta delar av sidan som inte går att redigera, eller stöta på problem som måste korrigeras. Vi uppmuntrar till att granska ändringarna innan du sparar, och vi välkomnar rapporter om eventuella problem du kan stöta på när du använder VisualEditor (klicka på knappen \"{{int:visualeditor-help-tool}}\" för att skicka återkoppling). Du kan växla till wikitextredigeraren när du vill genom att klicka på fliken \"$1\" och behålla ändringarna du gjort.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Välkommen}} till VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Alternativ text",
 	"visualeditor-dialog-media-change-image": "Välj en annan bild",
