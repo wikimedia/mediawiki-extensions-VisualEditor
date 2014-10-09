@@ -338,7 +338,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.editSummaryCountLabel = new OO.ui.LabelWidget ( {
 		$: this.$,
 		classes: [ 've-ui-mwSaveDialog-editSummary-count' ],
-		label: String( this.editSummaryByteLimit )
+		label: String( this.editSummaryByteLimit ),
+		title: ve.msg( 'visualeditor-editsummary-bytes-remaining' )
 	} );
 
 	// Save panel
@@ -364,7 +365,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$saveOptions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
 		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
 		this.editSummaryCountLabel.$element
-			.attr( 'title', ve.msg( 'visualeditor-editsummary-bytes-remaining' ) )
 	);
 	this.$saveMessages = this.$( '<div>' );
 	this.$saveActions = this.$( '<div>' );
