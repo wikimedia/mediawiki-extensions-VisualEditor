@@ -9,7 +9,7 @@ QUnit.module( 've.ce.Surface' );
 
 /* Tests */
 
-QUnit.test( 'handleDelete', function ( assert ) {
+QUnit.test( 'handleLinearDelete', function ( assert ) {
 	var i,
 		cases = [
 			// This asserts that getRelativeRange (via getRelativeOffset) doesn't try to
