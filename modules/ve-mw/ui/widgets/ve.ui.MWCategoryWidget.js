@@ -39,7 +39,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	} );
 
 	// Events
-	this.input.$input.on( 'keydown', this.onLookupInputKeyDown.bind( this ) );
+	this.input.on( 'enter', this.onLookupEnter.bind( this ) );
 	this.input.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 	this.popup.connect( this, {
 		removeCategory: 'onRemoveCategory',
@@ -83,13 +83,10 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
 /* Methods */
 
 /**
- * Handle input key down event.
- *
- * @method
- * @param {jQuery.Event} e Input key down event
+ * Handle enter event in input field.
  */
-ve.ui.MWCategoryWidget.prototype.onLookupInputKeyDown = function ( e ) {
-	if ( this.input.getValue() !== '' && e.which === 13 ) {
+ve.ui.MWCategoryWidget.prototype.onLookupEnter = function () {
+	if ( this.input.getValue() !== '' ) {
 		var item = this.input.getCategoryItemFromValue( this.input.getValue() ),
 			categoryWidget = this;
 		this.queryCategoryHiddenStatus( [item.name] ).done( function () {
