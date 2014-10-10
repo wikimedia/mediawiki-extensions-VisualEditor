@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* global mw */
+
 /**
  * Dialog for inserting and editing MediaWiki transclusions.
  *
@@ -439,7 +441,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						this.transclusionModel, data.template
 					);
 					promise = this.transclusionModel.addPart( template ).done( function () {
-						template.addPromptedParameters();
+						this.initializeNewTemplateParameters();
 					} );
 				} else {
 					// New template placeholder
@@ -451,13 +453,37 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				this.actions.setMode( 'edit' );
 				// Load existing template
 				promise = this.transclusionModel
-					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) );
+					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) )
+					.done( ve.bind( function () {
+						this.initializeTemplateParameters();
+					}, this ) );
 			}
 			this.actions.setAbilities( { apply: false, insert: false } );
 			this.pushPending();
 			promise.always( this.onTransclusionReady.bind( this ) );
 		}, this );
 };
+
+/**
+ * Initialize parameters for new template insertion
+ *
+ * @method
+ */
+ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
+	var i, parts = this.transclusionModel.getParts();
+	for ( i = 0; i < parts.length; i++ ) {
+		if ( parts[i] instanceof ve.dm.MWTemplateModel ) {
+			parts[i].addPromptedParameters();
+		}
+	}
+};
+
+/**
+ * Intentionally empty. This is provided for Wikia extensibility.
+ *
+ * @method
+ */
+ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 
 /**
  * @inheritdoc
