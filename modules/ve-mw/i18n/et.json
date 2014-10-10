@@ -27,7 +27,7 @@
 	"visualeditor-cite-tool-name-web": "Võrgukoht",
 	"visualeditor-desc": "MediaWiki visuaaltoimetaja",
 	"visualeditor-dialog-beta-welcome-action-continue": "Jätka",
-	"visualeditor-dialog-beta-welcome-content": "See on uus vahend, millega on lihtsam redigeerida. Selle arendus on beetajärgus, mis tähendab, et lehekülje mõne osa redigeerimine ei pruugi olla võimalik ja võid leida tarkvaraprobleeme, mis vajavad parandamist. Soovitame sul oma muudatused üle vaadata ja oleme tänulikud, kui annad teada kõigist probleemidest, millega VisualEditori kasutades silmitsi satud. Tagasiside saatmiseks klõpsa nuppu \"{{int:visualeditor-help-tool}}\". Saad jätkata vikiteksti redaktori kasutamist, kui klõpsad sakki \"$1\" – salvestamata muudatused lähevad kaotsi.",
+	"visualeditor-dialog-beta-welcome-content": "See on uus vahend, millega on lihtsam redigeerida. Selle arendus on beetajärgus, mis tähendab, et lehekülje mõne osa redigeerimine ei pruugi olla võimalik ja võid leida tarkvaraprobleeme, mis vajavad parandamist. Soovitame sul oma muudatused üle vaadata ja oleme tänulikud, kui annad teada kõigist probleemidest, millega VisualEditori kasutades silmitsi satud. Tagasiside saatmiseks klõpsa nuppu \"{{int:visualeditor-help-tool}}\". Saad iga hetk antud vahendi vikiteksti redaktori vastu vahetada, ilma et muudatused kaotsi läheks, kui klõpsad kaardil \"$1\".",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Tere}} tulemast VisualEditori",
 	"visualeditor-dialog-media-alttext-section": "Asendustekst",
 	"visualeditor-dialog-media-change-image": "Vali teistsugune pilt",
