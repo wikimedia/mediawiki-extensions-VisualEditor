@@ -1,19 +1,11 @@
 {
   "name": "visualeditor",
   "version": "0.0.0",
+  "private": true,
+  "description": "Build tools for the VisualEditor-MediaWiki extension.",
   "scripts": {
     "test": "grunt test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/VisualEditor.git"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://git.wikimedia.org/blob/mediawiki%2Fextensions%2FVisualEditor.git/master/LICENSE.txt"
-    }
-  ],
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-banana-checker": "0.2.0",
