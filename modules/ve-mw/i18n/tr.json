@@ -137,6 +137,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Alanlar gereklidir.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Geri dön",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Yine de devam et",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Gerekli {{PLURAL:$1|parametre|parametre}} eksik",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|değiştirgesi|değiştirgeleri}}'ni eklemeden devam etmek istediğinize emin misiniz?",
 	"visualeditor-dialog-transclusion-single-mode": "Seçenekleri gizle",
 	"visualeditor-dialog-transclusion-title": "Şablon bütünleştirme",
