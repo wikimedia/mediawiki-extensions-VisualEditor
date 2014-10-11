@@ -67,7 +67,7 @@ module.exports = function ( grunt ) {
 			options: {
 				csslintrc: '.csslintrc'
 			},
-			all: 'modules/*/**/*.css'
+			all: 'modules/**/*.css'
 		},
 		banana: {
 			all: 'modules/ve-{mw,wmf}/i18n/'
