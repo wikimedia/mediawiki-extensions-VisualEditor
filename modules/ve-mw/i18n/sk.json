@@ -106,6 +106,8 @@
 	"visualeditor-preference-betatempdisable": "Dočasne zakázať VisualEditor, kým je v „beta“ verzii",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Povoliť VisualEditor. Nebude k dispozícii v diskusiách a niektorých ďalších menných priestoroch.",
+	"visualeditor-preference-language-description": "Pridá do VisualEditora experimentálnu podporu na označenie jazyka, v ktorom je text napísaný, kvôli testovaniu pred zverejnením tejto funkcie. Pri používaní experimentálnych funkcií prosím nezabudnite vždy skontrolovať uskutočnené zmeny.",
+	"visualeditor-preference-language-label": "Jazykové nástroje VisualEditora",
 	"visualeditor-reference-input-placeholder": "Akú referenciu chcete vložit?",
 	"visualeditor-referenceslist-isempty": "Na tejto stránke neexistuje žiadna referencia v skupine „$1“.",
 	"visualeditor-referenceslist-missingref": "Táto referencia je definovaná v šablóne alebo inej automaticky generovanej časti textu. Zatiľ je možné editovať ju len v režime zdrojového kódu.",
