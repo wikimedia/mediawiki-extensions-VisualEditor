@@ -605,6 +605,10 @@ class ApiVisualEditor extends ApiBase {
 		return false;
 	}
 
+	public function isInternal() {
+		return true;
+	}
+
 	public function isWriteMode() {
 		return true;
 	}
