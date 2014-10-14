@@ -49,6 +49,11 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	if ( this.parameter.isRequired() ) {
 		this.valueInput.$input.prop( 'required', true );
+		this.valueInput.$element.on( 'DOMNodeInsertedIntoDocument', function () {
+			// Don't start validating until the input is in the document ready to go,
+			// we don't want it to start off marked as invalid.
+			this.valueInput.setValidation( 'non-empty' );
+		}.bind( this ) );
 	}
 
 	this.removeButton = new OO.ui.ButtonWidget( {
