@@ -183,7 +183,9 @@ ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
 		height = this.$menu.outerHeight( true );
 
 	// Flip for RTL:
-	if ( this.$container.attr( 'dir' ) === 'rtl' ) {
+	// The $container does not have a 'dir' attribute; we must check the css( 'direction' )
+	// that is hierarchically inherited, instead, to get the proper rtl/ltr value
+	if ( this.$container.css( 'direction' ) === 'rtl' ) {
 		// flip me, I'm a mirror:
 		this.$element.css( {
 			right: this.$container.outerWidth( true ) - left,
