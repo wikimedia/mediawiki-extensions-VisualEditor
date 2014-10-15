@@ -869,7 +869,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	this.store = doc.getStore();
 
 	// Set up the caption surface
-	this.captionSurface = new ve.ui.SurfaceWidget(
+	this.captionSurface = new ve.ui.MWSurfaceWidget(
 		captionDocument,
 		{
 			$: this.$,

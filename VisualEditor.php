@@ -704,6 +704,7 @@ $wgResourceModules += array(
 			// ui
 			'modules/ve-mw/ui/ve.ui.MWCommandRegistry.js',
 
+			'modules/ve-mw/ui/widgets/ve.ui.MWSurfaceWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTitleInputWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js',
@@ -724,6 +725,7 @@ $wgResourceModules += array(
 			// ui
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css',
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWSurfaceWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTitleInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css',
 		),

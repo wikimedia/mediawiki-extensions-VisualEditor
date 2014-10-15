@@ -248,7 +248,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	}
 
 	// Properties
-	this.referenceSurface = new ve.ui.SurfaceWidget(
+	this.referenceSurface = new ve.ui.MWSurfaceWidget(
 		this.referenceModel.getDocument(),
 		{
 			$: this.$,
