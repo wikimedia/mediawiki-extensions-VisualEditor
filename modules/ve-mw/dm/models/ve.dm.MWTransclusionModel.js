@@ -255,7 +255,7 @@
 			}
 			// Follow MW's normalisation
 			if ( data.normalized ) {
-				aliasMap.push.apply( aliasMap, data.normalized );
+				ve.batchPush( aliasMap, data.normalized );
 			}
 			// Cross-reference aliased titles.
 			for ( i = 0, len = aliasMap.length; i < len; i++ ) {

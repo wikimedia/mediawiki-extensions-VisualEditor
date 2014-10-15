@@ -223,7 +223,7 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 			// Two numbers
 			return a - b;
 		} );
-		this.sequence.push.apply( this.sequence, paramNames );
+		ve.batchPush( this.sequence, paramNames );
 	}
 	return this.sequence;
 };
