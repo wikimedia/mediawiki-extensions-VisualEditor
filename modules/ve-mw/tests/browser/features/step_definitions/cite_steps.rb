@@ -130,6 +130,6 @@ Then(/^diff view should show the Website citation added$/) do
     page.wait_until(10) do
       page.links_diff_view.include? "Cite VisualEditor Test"
     end
-    page.links_diff_view.should match Regexp.escape("<ref>{{Cite web|url = http://en.wikipedia.org/|title = Website Source title|date = Website Source date 28 July 2014|accessdate = 28 July 2014|website = Website title|publisher = Website publisher|last = Website Last name|first = Website First name|New website field = New website field contents}}</ref>Cite VisualEditor Test")
+    page.links_diff_view.should match Regexp.escape("<ref>{{Cite web|url = http://en.wikipedia.org/|title = Website Source title|date = Website Source date 28 July 2014|accessdate = {{CURRENTMONTHNAME}} {{CURRENTYEAR}}28 July 2014|website = Website title|publisher = Website publisher|last = Website Last name|first = Website First name|New website field = New website field contents}}</ref>Cite VisualEditor Test")
   end
 end
