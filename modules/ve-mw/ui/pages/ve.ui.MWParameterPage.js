@@ -17,7 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
-	var paramName = parameter.getName();
+	var paramName = parameter.getName(), page = this;
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -48,12 +48,12 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.connect( this, { change: 'onValueInputChange' } );
 
 	if ( this.parameter.isRequired() ) {
-		this.valueInput.$input.prop( 'required', true );
-		this.valueInput.$element.on( 'DOMNodeInsertedIntoDocument', function () {
-			// Don't start validating until the input is in the document ready to go,
-			// we don't want it to start off marked as invalid.
-			this.valueInput.setValidation( 'non-empty' );
-		}.bind( this ) );
+		this.valueInput.$input
+			.prop( 'required', true )
+			.on( 'blur', function () {
+				page.valueInput.setValidation( 'non-empty' );
+				page.valueInput.setValidityFlag();
+			} );
 	}
 
 	this.removeButton = new OO.ui.ButtonWidget( {
