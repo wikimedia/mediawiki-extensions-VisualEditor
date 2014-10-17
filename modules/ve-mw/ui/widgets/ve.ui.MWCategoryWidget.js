@@ -16,7 +16,6 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
- * @cfg {jQuery} [$popupOverlay] Overlay to render popups in
  */
 ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	// Config intialization
@@ -34,7 +33,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.popupState = false;
 	this.savedPopupState = false;
 	this.popup = new ve.ui.MWCategoryPopupWidget( {
-		$: this.$, $overlay: config.$popupOverlay
+		$: this.$
 	} );
 	this.input = new ve.ui.MWCategoryInputWidget( this, {
 		$: this.$, $overlay: config.$overlay
@@ -54,6 +53,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 		.append(
 			this.$group.addClass( 've-ui-mwCategoryWidget-items' ),
 			this.input.$element,
+			this.popup.$element,
 			this.$( '<div>' ).css( 'clear', 'both' )
 		);
 };

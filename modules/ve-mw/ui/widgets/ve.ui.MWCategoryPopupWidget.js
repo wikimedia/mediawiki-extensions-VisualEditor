@@ -62,7 +62,6 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 			this.$sortKeyForm
 		);
 	this.$body.append( this.$menu );
-	config.$overlay.append( this.$element );
 };
 
 /* Inheritance */
@@ -177,23 +176,12 @@ ve.ui.MWCategoryPopupWidget.prototype.setDefaultSortKey = function ( value ) {
  * @param {ve.ui.MWCategoryItemWidget} item Category item
  */
 ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
-	var left = item.$indicator.offset().left + ( item.$indicator.width() / 2 ),
-		top = item.$indicator.offset().top + item.$indicator.height(),
-		width = this.$menu.outerWidth( true ),
-		height = this.$menu.outerHeight( true );
+	var pos = OO.ui.Element.getRelativePosition( item.$indicator, this.$element.offsetParent() );
+	// Align to the middle of the indicator
+	pos.left += item.$indicator.width() / 2;
+	// Position below the indicator
+	pos.top += item.$indicator.height();
 
-	// Flip for RTL:
-	// The $container does not have a 'dir' attribute; we must check the css( 'direction' )
-	// that is hierarchically inherited, instead, to get the proper rtl/ltr value
-	if ( this.$container.css( 'direction' ) === 'rtl' ) {
-		// flip me, I'm a mirror:
-		this.$element.css( {
-			right: this.$container.outerWidth( true ) - left,
-			top: top
-		} );
-	} else {
-		this.$element.css( { left: left, top: top } );
-	}
-
-	this.setSize( width, height );
+	this.$element.css( pos );
+	this.setSize( this.$menu.outerWidth( true ), this.$menu.outerHeight( true ) );
 };
