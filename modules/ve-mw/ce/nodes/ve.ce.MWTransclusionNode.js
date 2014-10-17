@@ -130,7 +130,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElements ) {
 	var $elements = this.$( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) );
 	$elements
-		.find( 'a[href]' ).addBack( 'a[href]' )
+		.find( 'a[href][rel="mw:WikiLink"]' ).addBack( 'a[href][rel="mw:WikiLink"]' )
 		.each( function () {
 			var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
 					this.href, this.ownerDocument
