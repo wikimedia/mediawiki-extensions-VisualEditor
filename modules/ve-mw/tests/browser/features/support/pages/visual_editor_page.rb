@@ -85,7 +85,7 @@ class VisualEditorPage
   unordered_list(:link_list, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-selectWidget oo-ui-selectWidget-depressed oo-ui-clippableElement-clippable oo-ui-menuWidget oo-ui-textInputMenuWidget oo-ui-lookupWidget-menu ve-ui-mwLinkTargetInputWidget-menu')
   a(:new_link, class: "ve-ce-linkAnnotation ve-ce-mwInternalLinkAnnotation new")
   a(:internal_link, class: "ve-ce-linkAnnotation ve-ce-mwInternalLinkAnnotation")
-  unordered_list(:popup_icon, class: "ve-ui-context-menu")
+  unordered_list(:popup_icon, class: "ve-ui-contextMenuWidget")
   span(:basic_reference, class: "oo-ui-iconElement-icon oo-ui-icon-reference")
   div(:toolbar_actions, class: "oo-ui-toolbar-actions")
   span(:media_insert_menu, class: "oo-ui-tool-name-media")
