@@ -25,7 +25,7 @@ ve.ui.MWReferenceDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-tooltip' );
 ve.ui.MWReferenceDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 ve.ui.MWReferenceDialogTool.static.commandName = 'reference';
-ve.ui.MWReferenceDialogTool.static.requiresRange = true;
+ve.ui.MWReferenceDialogTool.static.requiresSelection = [ 'linear' ];
 ve.ui.toolFactory.register( ve.ui.MWReferenceDialogTool );
 
 /**
@@ -48,7 +48,7 @@ ve.ui.MWUseExistingReferenceDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-reference-useexisting-tool' );
 ve.ui.MWUseExistingReferenceDialogTool.static.modelClasses = [];
 ve.ui.MWUseExistingReferenceDialogTool.static.commandName = 'reference/existing';
-ve.ui.MWUseExistingReferenceDialogTool.static.requiresRange = true;
+ve.ui.MWUseExistingReferenceDialogTool.static.requiresSelection = [ 'linear' ];
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToGroup = false;
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToCatchall = false;
 
@@ -94,5 +94,5 @@ ve.ui.MWReferencesListDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-referenceslist-tooltip' );
 ve.ui.MWReferencesListDialogTool.static.modelClasses = [ ve.dm.MWReferencesListNode ];
 ve.ui.MWReferencesListDialogTool.static.commandName = 'referencesList';
-ve.ui.MWReferencesListDialogTool.static.requiresRange = true;
+ve.ui.MWReferencesListDialogTool.static.requiresSelection = [ 'linear' ];
 ve.ui.toolFactory.register( ve.ui.MWReferencesListDialogTool );
