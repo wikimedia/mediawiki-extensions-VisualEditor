@@ -241,7 +241,7 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'ext.visualEditor.base',
-			'ext.visualEditor.mediawiki',
+			'ext.visualEditor.mediawiki.mobile',
 			'ext.visualEditor.core.mobile',
 			'ext.visualEditor.mwimage.core',
 		),
@@ -295,6 +295,17 @@ $wgResourceModules += array(
 			'ext.visualEditor.base',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	'ext.visualEditor.mediawiki.mobile' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => array(
+			'modules/ve-mw/ui/ve.ui.MWMobileContext.js',
+			'modules/ve-mw/ui/ve.ui.MWMobileSurface.js',
+		),
+		'dependencies' => array(
+			'ext.visualEditor.mediawiki',
+		),
+		'targets' => array( 'mobile' ),
 	),
 
 	'ext.visualEditor.standalone' => $wgVisualEditorResourceTemplate + array(
