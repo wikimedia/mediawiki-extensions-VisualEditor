@@ -43,7 +43,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 		.append( this.sortKeyField.$element );
 
 	// Events
-	this.connect( this, { hide: 'onHide' } );
+	this.connect( this, { toggle: 'onToggle' } );
 	this.removeButton.connect( this, { click: 'onRemoveCategory' } );
 	this.$sortKeyForm.on( 'submit', this.onSortKeySubmit.bind( this ) );
 
@@ -122,11 +122,15 @@ ve.ui.MWCategoryPopupWidget.prototype.openPopup = function ( item ) {
 };
 
 /**
- * Handle popup hide events.
+ * Handle popup toggle events.
  *
+ * @param {boolean} show Widget is being made visible
  * @method
  */
-ve.ui.MWCategoryPopupWidget.prototype.onHide = function () {
+ve.ui.MWCategoryPopupWidget.prototype.onToggle = function ( show ) {
+	if ( show ) {
+		return;
+	}
 	var newSortkey = this.sortKeyInput.$input.val();
 	if ( !this.removed && newSortkey !== ( this.origSortkey || '' ) ) {
 		this.emit( 'updateSortkey', this.category, this.sortKeyInput.$input.val() );
