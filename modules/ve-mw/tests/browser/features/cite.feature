@@ -3,9 +3,9 @@ Feature: VisualEditor Cite
 
   Background:
     Given I go to the "Cite VisualEditor Test" page with content "Cite VisualEditor Test"
-    And I click in the editable part
-    And I click the Cite button
-    And I can see the Cite User Interface
+      And I click in the editable part
+      And I click the Cite button
+      And I can see the Cite User Interface
 
   Scenario: Website
     When I click Website
@@ -50,25 +50,29 @@ Feature: VisualEditor Cite
 
   Scenario: News
     When I click News
-    And I fill in the first textarea with "News URL"
-    And I fill in the second textarea with "News Source title"
-    And I fill in the third textarea with "News Last name"
-    And I fill in the fourth textarea with "News First name"
-    And I fill in the fifth textarea with "News Source date"
-    And I fill in the sixth textarea with "News Work"
-    And I fill in the seventh textarea with "News URL access date"
-    And the News input field titles are in the correct order
-    And I click Insert Citation
-    And I click Save page
-    And I click Links Review your changes
+      And I fill in the first textarea with "News URL"
+      And I fill in the second textarea with "News Source title"
+      And I fill in the third textarea with "News Last name"
+      And I fill in the fourth textarea with "News First name"
+      And I fill in the fifth textarea with "News Source date"
+      And I fill in the sixth textarea with "News Work"
+      And I fill in the seventh textarea with "News URL access date"
+      And the News input field titles are in the correct order
+      And I click Insert Citation
+      And I click Save page
+      And I click Links Review your changes
   Then diff view should show the News citation added
 
   Scenario: Journal
     When I click Journal
-    And I fill in the first textarea with "Journal title"
-    And I fill in the second textarea with "Journal Source date"
-    And the Journal input field titles are in the correct order
-    And I click Insert Citation
-    And I click Save page
-    And I click Links Review your changes
+      And I fill in the first textarea with "Journal title"
+      And I fill in the second textarea with "Journal Source date"
+      And the Journal input field titles are in the correct order
+      And I click Insert Citation
+      And I click Save page
+      And I click Links Review your changes
   Then diff view should show the Journal citation added
+
+  Scenario: Basic
+    When I click Basic
+    Then I should see the VisualEditor interface

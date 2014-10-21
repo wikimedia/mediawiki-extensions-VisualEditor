@@ -4,6 +4,7 @@ class VisualEditorPage
   include URL
   page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}?vehidebetadialog=true&veaction=edit")
   span(:bullet_number_selector, class: "oo-ui-iconElement-icon oo-ui-icon-bullet-list")
+  span(:cite_basic_reference, css: ".oo-ui-icon-reference")
   span(:cite_button, text: "Cite")
   div(:cite_select, css: "div.oo-ui-widget:nth-child(5) > div:nth-child(2)")
   a(:cite_book, css: ".oo-ui-tool-name-cite-book > a:nth-child(1)")
@@ -98,6 +99,7 @@ class VisualEditorPage
     a(:beta_warning, title: "Close", frame: frame)
     a(:cite_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
     a(:book_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
+    div(:cite_visualeditor_user_interface, css: ".ve-ui-surfaceWidget", frame: frame)
     #text_field(:cite_custom_field_name, css: ".oo-ui-textInputWidget-decorated > input:nth-child(1)", frame: frame)
     text_field(:cite_custom_field_name, css: ".oo-ui-searchWidget-query > div:nth-child(1) > input:nth-child(1)", frame: frame)
     text_area(:cite_new_website_field, css: "div.oo-ui-layout:nth-child(10) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)", frame: frame)

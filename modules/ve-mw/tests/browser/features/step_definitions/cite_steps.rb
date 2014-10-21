@@ -10,6 +10,10 @@ When(/^I click Add more information$/) do
   on(VisualEditorPage).cite_add_more_information_button_element.when_present.click
 end
 
+When(/^I click Basic$/) do
+  on(VisualEditorPage).cite_basic_reference_element.when_present.click
+end
+
 When(/^I click Book$/) do
   on(VisualEditorPage).cite_book_element.when_present.click
 end
@@ -133,3 +137,8 @@ Then(/^diff view should show the Website citation added$/) do
     page.links_diff_view.should match Regexp.escape("<ref>{{Cite web|url = http://en.wikipedia.org/|title = Website Source title|date = Website Source date 28 July 2014|accessdate = {{CURRENTMONTHNAME}} {{CURRENTYEAR}}28 July 2014|website = Website title|publisher = Website publisher|last = Website Last name|first = Website First name|New website field = New website field contents}}</ref>Cite VisualEditor Test")
   end
 end
+
+Then(/^I should see the VisualEditor interface$/) do
+  expect(on(VisualEditorPage).cite_visualeditor_user_interface_element).to be_visible
+end
+
