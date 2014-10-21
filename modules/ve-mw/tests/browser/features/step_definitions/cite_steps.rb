@@ -138,7 +138,18 @@ Then(/^diff view should show the Website citation added$/) do
   end
 end
 
+Then(/^I should see the General references$/) do
+  expect(on(VisualEditorPage).cite_group_name_textarea_element).to be_visible
+end
+
+Then(/^I should see the Options use this group text$/) do
+  expect(on(VisualEditorPage).cite_basic_options_area_element.text).to match /Options.+Use this group/m
+end
+
 Then(/^I should see the VisualEditor interface$/) do
   expect(on(VisualEditorPage).cite_visualeditor_user_interface_element).to be_visible
 end
+
+
+
 

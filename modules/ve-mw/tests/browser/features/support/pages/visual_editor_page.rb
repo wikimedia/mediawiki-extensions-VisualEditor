@@ -100,8 +100,11 @@ class VisualEditorPage
     a(:cite_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
     a(:book_add_more_information_button, css: ".ve-ui-mwParameterPage-more a", index: 7, frame: frame)
     div(:cite_visualeditor_user_interface, css: ".ve-ui-surfaceWidget", frame: frame)
+    div(:cite_basic_options_area, class: "oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout", frame: frame)
+
     #text_field(:cite_custom_field_name, css: ".oo-ui-textInputWidget-decorated > input:nth-child(1)", frame: frame)
     text_field(:cite_custom_field_name, css: ".oo-ui-searchWidget-query > div:nth-child(1) > input:nth-child(1)", frame: frame)
+    div(:cite_group_name_textarea, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-indicatorElement oo-ui-textInputWidget" , frame: frame)
     text_area(:cite_new_website_field, css: "div.oo-ui-layout:nth-child(10) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)", frame: frame)
     div(:cite_new_field_label, css: ".oo-ui-optionWidget", frame: frame)
     div(:cite_show_more_fields, class: "ve-ui-mwMoreParametersResultWidget-label", frame: frame)
