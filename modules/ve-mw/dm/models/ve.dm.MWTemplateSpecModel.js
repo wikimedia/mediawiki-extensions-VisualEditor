@@ -23,6 +23,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	this.params = {};
 	this.paramOrder = [];
 	this.sets = [];
+	this.maps = {};
 
 	// Initialization
 	this.fill();
@@ -70,6 +71,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 		}
 	}
 	this.sets = data.sets;
+	this.maps = data.maps;
 };
 
 /**
@@ -316,4 +318,13 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
 	return this.sets;
+};
+
+/**
+ * Get map describing relationship between another content type and the parameters.
+ *
+ * @return {Object} Object with application property maps to parameters keyed to application name.
+ */
+ve.dm.MWTemplateSpecModel.prototype.getMaps = function () {
+	return this.maps;
 };
