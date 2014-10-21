@@ -339,17 +339,32 @@
 				return;
 			}
 
+			var $spinner = $( '<div class="mw-viewPageTarget-loading"></div>' );
+			$( '#firstHeading' ).prepend( $spinner );
+
+			if ( window.history.pushState && uri.query.veaction !== 'edit' ) {
+				//Set veaction to edit
+				uri = veEditUri;
+				window.history.pushState( { tag: 'visualeditor' }, document.title, uri );
+			}
+
 			e.preventDefault();
 
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'edit-link-click' } );
 				target.activate();
-			} );
+			} ).always( function () { $spinner.remove(); } );
 		},
 
 		onEditSectionLinkClick: function ( e ) {
 			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
 				return;
+			}
+
+			var $spinner = $( '<div class="mw-viewPageTarget-loading"></div>' );
+			$( '#firstHeading' ).prepend( $spinner );
+			if ( window.history.pushState && uri.query.veaction !== 'edit' ) {
+				window.history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
 
 			e.preventDefault();
@@ -358,7 +373,7 @@
 				ve.track( 'Edit', { action: 'section-edit-link-click' } );
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
 				target.activate();
-			} );
+			} ).always( function () { $spinner.remove(); } );
 		}
 	};
 
@@ -436,8 +451,11 @@
 	$( function () {
 		if ( init.isAvailable ) {
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
+				var $spinner = $( '<div class="mw-viewPageTarget-loading"></div>' );
+				$( '#firstHeading' ).prepend( $spinner );
+
 				getTarget().done( function ( target ) {
-					target.activate();
+					target.activate().always( function () { $spinner.remove(); } );
 				} );
 			}
 		}

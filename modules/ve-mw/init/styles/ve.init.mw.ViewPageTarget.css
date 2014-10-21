@@ -22,12 +22,6 @@
 	cursor: default;
 }
 
-.ve-init-mw-viewPageTarget-loading {
-	width: 128px;
-	height: 15px;
-	float: right;
-}
-
 /* Toolbar */
 
 .ve-init-mw-viewPageTarget-toolbar-utilites,
@@ -100,11 +94,4 @@
  */
 .ve-ui-mwHelpPopupTool-version-link {
 	unicode-bidi: embed;
-}
-
-/* Images */
-
-.ve-init-mw-viewPageTarget-loading {
-	/* @embed */
-	background-image: url(images/loading-ltr.gif);
 }

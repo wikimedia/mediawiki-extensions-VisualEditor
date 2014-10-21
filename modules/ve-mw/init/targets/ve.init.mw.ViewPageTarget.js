@@ -18,7 +18,8 @@
 ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	var prefName,
 		prefValue,
-		currentUri = new mw.Uri(),
+		//A workaround, as default URI does not get updated after pushState (bug 72334)
+		currentUri = new mw.Uri( document.location.href ),
 		conf = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Parent constructor
@@ -29,7 +30,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	);
 
 	// Properties
-	this.$spinner = $( '<div class="ve-init-mw-viewPageTarget-loading"></div>' );
 	this.toolbarSaveButton = null;
 	this.saveDialog = null;
 	this.onBeforeUnloadFallback = null;
@@ -248,17 +248,18 @@ ve.init.mw.ViewPageTarget.prototype.setupLocalNoticeMessages = function () {
  * Switch to edit mode.
  *
  * @method
+ * @return {jQuery.Promise}
  */
 ve.init.mw.ViewPageTarget.prototype.activate = function () {
 	if ( !this.active && !this.activating ) {
 		this.activating = true;
+		this.activatingDeferred = $.Deferred();
 
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
 
 		// User interface changes
 		this.transformPage();
-		this.showSpinner();
 		this.hideReadOnlyContent();
 		this.mutePageContent();
 		this.mutePageTitle();
@@ -268,6 +269,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 
 		this.load( [ 'site', 'user' ] );
 	}
+	return this.activatingDeferred.promise();
 };
 
 /**
@@ -309,7 +311,6 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 		this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
 	}
 	this.restorePage();
-	this.hideSpinner();
 	this.showReadOnlyContent();
 
 	mw.user.options.set( 'editondblclick', this.originalEditondbclick );
@@ -345,6 +346,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 		this.initialEditSummary = new mw.Uri().query.summary;
 
 		this.deactivating = false;
+		this.activatingDeferred.reject();
 
 		mw.hook( 've.deactivationComplete' ).fire( this.edited );
 	}.bind( this ) );
@@ -412,7 +414,6 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.transformPageTitle();
 	this.changeDocumentTitle();
 	this.hidePageContent();
-	this.hideSpinner();
 
 	this.surface.getView().focus();
 
@@ -422,6 +423,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.restoreEditSection();
 	this.setupBeforeUnloadHandler();
 	this.maybeShowDialogs();
+	this.activatingDeferred.resolve();
 	mw.hook( 've.activationComplete' ).fire();
 };
 
@@ -1249,24 +1251,6 @@ ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
 };
 
 /**
- * Show the loading spinner.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.showSpinner = function () {
-	$( '#firstHeading' ).prepend( this.$spinner );
-};
-
-/**
- * Hide the loading spinner.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.hideSpinner = function () {
-	this.$spinner.detach();
-};
-
-/**
  * Show the page content.
  *
  * @method
@@ -1444,7 +1428,7 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)
 	if ( !this.actFromPopState && window.history.pushState && this.currentUri.query.veaction !== 'edit' ) {
-		// Set the veaction query parameter
+		// Set the current URL
 		uri = this.currentUri;
 		uri.query.veaction = 'edit';
 
