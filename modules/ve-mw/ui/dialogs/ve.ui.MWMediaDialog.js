@@ -771,8 +771,11 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	// Size widget
 	this.sizeErrorLabel.$element.hide();
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
-	this.sizeWidget.connect( this, { changeSizeType: 'checkChanged' } );
-	this.sizeWidget.connect( this, { change: 'checkChanged' } );
+	this.sizeWidget.connect( this, {
+		changeSizeType: 'checkChanged',
+		change: 'checkChanged',
+		valid: 'checkChanged'
+	} );
 
 	// Initialize size
 	this.sizeWidget.setSizeType(

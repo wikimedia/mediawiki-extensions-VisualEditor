@@ -1056,13 +1056,20 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 			} );
 			// Update media type
 			this.setMediaType( info.mediatype );
-
 			// Update according to type
 			ve.dm.MWImageNode.static.syncScalableToType(
 				this.getType(),
 				this.getMediaType(),
 				this.getScalable()
 			);
+
+			// We have to adjust the details in the initial hash if the original
+			// image was 'default' since we didn't have default until now and the
+			// default dimensions that were 'recorded' were wrong
+			if ( this.initialHash.scalable.isDefault ) {
+				this.initialHash.scalable.currentDimensions = this.scalable.getDefaultDimensions();
+			}
+
 		}, this ) );
 	}
 };
