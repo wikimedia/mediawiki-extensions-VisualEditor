@@ -304,7 +304,7 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mediawiki',
-			'ext.visualEditor.core',
+			'ext.visualEditor.core.mobile',
 		),
 		'targets' => array( 'mobile' ),
 	),
