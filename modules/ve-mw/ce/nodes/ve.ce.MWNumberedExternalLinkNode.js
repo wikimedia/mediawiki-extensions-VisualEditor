@@ -54,7 +54,7 @@ ve.ce.MWNumberedExternalLinkNode.static.name = 'link/mwNumberedExternal';
 
 ve.ce.MWNumberedExternalLinkNode.static.tagName = 'span';
 
-ve.ce.MWNumberedExternalLinkNode.static.primaryCommandName = 'linkNode';
+ve.ce.MWNumberedExternalLinkNode.static.primaryCommandName = 'link';
 
 /* Static Methods */
 

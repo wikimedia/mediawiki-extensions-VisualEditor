@@ -732,6 +732,8 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js',
+
+			'modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js',
 		),
 		'styles' => array(
 			// ui
@@ -938,7 +940,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js',
 
-			'modules/ve-mw/ui/tools/ve.ui.MWLinkNodeInspectorTool.js',
+			'modules/ve-mw/ui/tools/ve.ui.MWLinkInspectorTool.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css'
