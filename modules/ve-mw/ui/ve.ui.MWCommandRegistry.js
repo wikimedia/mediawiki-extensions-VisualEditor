@@ -8,7 +8,7 @@
 /* MW Command Registrations */
 
 ve.ui.commandRegistry.register(
-	new ve.ui.Command( 'linkNode', 'window', 'open', 'linkNode' )
+	new ve.ui.Command( 'link', 'mwlink', 'open' )
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'gallery', 'window', 'open', 'gallery' )
