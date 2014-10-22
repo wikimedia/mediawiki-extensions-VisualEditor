@@ -163,6 +163,16 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
+	protected function pstWikitext( $title, $wikitext ) {
+		return ContentHandler::makeContent( $wikitext, $title )
+			->preSaveTransform(
+				$title,
+				$this->getUser(),
+				WikiPage::factory( $title )->makeParserOptions( $this->getContext() )
+			)
+			->serialize( 'text/x-wiki' );
+	}
+
 	protected function parseWikitextFragment( $title, $wikitext ) {
 		return $this->requestParsoid( 'POST', $title,
 			array(
@@ -213,13 +223,7 @@ class ApiVisualEditor extends ApiBase {
 			'action' => 'query',
 			'prop' => 'revisions',
 			'titles' => $title->getPrefixedDBkey(),
-			'rvdifftotext' => ContentHandler::makeContent( $wikitext, $title )
-								->preSaveTransform(
-									$title,
-									$this->getUser(),
-									WikiPage::factory( $title )->makeParserOptions( $this->getContext() )
-								)
-								->serialize( 'text/x-wiki' )
+			'rvdifftotext' => $this->pstWikitext( $title, $wikitext )
 		);
 		$api = new ApiMain(
 			new DerivativeRequest(
@@ -473,7 +477,11 @@ class ApiVisualEditor extends ApiBase {
 				break;
 
 			case 'parsefragment':
-				$content = $this->parseWikitextFragment( $page, $params['wikitext'] );
+				$wikitext = $params['wikitext'];
+				if ( $params['pst'] ) {
+					$wikitext = $this->pstWikitext( $page, $wikitext );
+				}
+				$content = $this->parseWikitextFragment( $page, $wikitext );
 				if ( $content === false ) {
 					$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 				} else {
@@ -594,6 +602,7 @@ class ApiVisualEditor extends ApiBase {
 			'oldid' => null,
 			'html' => null,
 			'cachekey' => null,
+			'pst' => false,
 		);
 	}
 
@@ -618,7 +627,9 @@ class ApiVisualEditor extends ApiBase {
 			'page' => 'The page to perform actions on.',
 			'paction' => 'Action to perform',
 			'oldid' => 'The revision number to use (defaults to latest version).',
-			'html' => 'HTML to send to parsoid in exchange for wikitext',
+			'html' => 'HTML to send to Parsoid to convert to wikitext',
+			'wikitext' => 'Wikitext to send to Parsoid to convert to HTML (paction=parsefragment)',
+			'pst' => 'Pre-save transform wikitext before sending it to Parsoid (paction=parsefragment)',
 			'basetimestamp' => 'When saving, set this to the timestamp of the revision that was'
 				. ' edited. Used to detect edit conflicts.',
 			'starttimestamp' => 'When saving, set this to the timestamp of when the page was loaded.'
