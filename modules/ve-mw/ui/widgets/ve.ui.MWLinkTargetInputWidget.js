@@ -109,8 +109,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 			gpssearch: this.value,
 			gpsnamespace: 0,
 			prop: 'info|pageprops',
-			ppprop: 'disambiguation',
-			redirect: ''
+			ppprop: 'disambiguation'
 		} );
 	} else {
 		// Don't send invalid titles to the API.
