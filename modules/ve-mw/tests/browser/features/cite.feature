@@ -76,3 +76,5 @@ Feature: VisualEditor Cite
   Scenario: Basic
     When I click Basic
     Then I should see the VisualEditor interface
+      And I should see the Options use this group text
+      And I should see the General references
