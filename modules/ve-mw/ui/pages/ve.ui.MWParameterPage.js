@@ -32,6 +32,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.spec = parameter.getTemplate().getSpec();
 	this.defaultValue = this.spec.getParameterDefaultValue( paramName );
 	this.autoValue = this.spec.getParameterAutoValue( paramName );
+	if ( this.autoValue && !this.parameter.getValue() ) {
+		this.parameter.setValue( this.autoValue );
+	}
+
 	this.$info = this.$( '<div>' );
 	this.$actions = this.$( '<div>' );
 	this.$labelElement = this.$( '<div>' );
@@ -44,7 +48,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		autosize: true,
 		placeholder: this.defaultValue
 	} )
-		.setValue( this.parameter.getValue() || this.autoValue )
+		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
 
 	if ( this.parameter.isRequired() ) {
