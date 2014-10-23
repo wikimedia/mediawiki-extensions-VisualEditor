@@ -541,7 +541,6 @@ $wgResourceModules += array(
 
 			'lib/ve/src/ui/inspectors/ve.ui.FragmentInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.AnnotationInspector.js',
-			'lib/ve/src/ui/inspectors/ve.ui.InsertionInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.NodeInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.CommentInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.LinkInspector.js',
