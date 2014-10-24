@@ -107,7 +107,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onTemplateInputChange = function ( value ) {
-	this.addTemplateButton.setDisabled( value === '' );
+	this.addTemplateButton.setDisabled( value.trim() === '' );
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onRemoveButtonClick = function () {
