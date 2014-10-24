@@ -92,7 +92,7 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, partPage, reselect, insertable, addedCount,
+	var i, len, page, name, names, params, partPage, reselect, addedCount,
 		removePages = [];
 
 	if ( removed ) {
@@ -155,8 +155,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 		this.setPageByName( reselect.getName() );
 	}
 
-	insertable = this.isInsertable();
-	this.actions.setAbilities( { apply: insertable, insert: insertable } );
+	this.setApplicableStatus();
 
 	this.updateTitle();
 };
@@ -221,18 +220,21 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 };
 
 /**
- * Checks if transclusion is in a valid state for inserting into the document
+ * Sets transclusion applicable status
  *
  * If the transclusion is empty or only contains a placeholder it will not be insertable.
- *
- * @returns {boolean} Transclusion can be inserted
+ * If the transclusion only contains a placeholder it will not be editable.
  */
-ve.ui.MWTemplateDialog.prototype.isInsertable = function () {
+ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
-	return this.loading.state() === 'resolved' &&
-		parts.length &&
-		( parts.length > 1 || !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) );
+	if ( this.loading.state() !== 'resolved' ) {
+		this.actions.setAbilities( { apply: false, insert: false } );
+	} else if ( parts.length && !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
+		this.actions.setAbilities( { apply: true, insert: true } );
+	} else {
+		this.actions.setAbilities( { apply: parts.length === 0, insert: false } );
+	}
 };
 
 /**
