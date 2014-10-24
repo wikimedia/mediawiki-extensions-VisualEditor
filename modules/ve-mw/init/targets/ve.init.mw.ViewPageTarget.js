@@ -771,7 +771,7 @@ ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, w
 	if ( !selection ) {
 		return;
 	}
-	node = doc.getBranchNodeFromOffset( selection.start );
+	node = doc.getBranchNodeFromOffset( selection.getRange().start );
 	if ( !( node instanceof ve.ce.ContentBranchNode ) ) {
 		return;
 	}
