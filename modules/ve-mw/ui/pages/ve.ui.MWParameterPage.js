@@ -30,11 +30,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	// Properties
 	this.parameter = parameter;
 	this.spec = parameter.getTemplate().getSpec();
-	this.defaultValue = this.spec.getParameterDefaultValue( paramName );
-	this.autoValue = this.spec.getParameterAutoValue( paramName );
-	if ( this.autoValue && !this.parameter.getValue() ) {
-		this.parameter.setValue( this.autoValue );
-	}
+	this.defaultValue = parameter.getDefaultValue();
 
 	this.$info = this.$( '<div>' );
 	this.$actions = this.$( '<div>' );
