@@ -141,9 +141,9 @@
 	"visualeditor-mweditmodesource-title": "Pukyu qillqa llamk'apuymanchu riy?",
 	"visualeditor-mweditmodesource-tool": "Pukyu qillqa llamk'apuyman riy",
 	"visualeditor-mweditmodesource-warning": "Pukyu qillqa llamk'apuymanmi riykachachkanki.\nKay p'anqapi tukuy llamk'apusqaykikuna kakunqam, hinaspaykipas manam VisualEditor  nisqaman kutimuyta atinkichu kay p'anqata mana waqaychaspa icha musuqmanta chaqnamuspa.\nÑawparikuyta munankichu?",
+	"visualeditor-mweditmodesource-warning-cancel": "Ama niy",
 	"visualeditor-mweditmodesource-warning-switch": "Hukchasqakunata hat'alliy",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Hukchasqakunata tatiy",
-	"visualeditor-mweditmodesource-warning-cancel": "Ama niy",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Rikch'apaq t'iktuna",
 	"visualeditor-mwgalleryinspector-title": "Rikch'akuna",
 	"visualeditor-pagemenu-tooltip": "P'anqapaq akllaykuna",
@@ -173,8 +173,8 @@
 	"visualeditor-toolbar-cite-label": "Qillqamanta willay",
 	"visualeditor-toolbar-savedialog": "P'anqata waqaychay",
 	"visualeditor-usernamespacepagelink": "Project:Ruraq sutisuyu",
-	"visualeditor-viewpage-savewarning-title": "Chiqapta munankichu?",
 	"visualeditor-viewpage-savewarning-discard": "Llamk'apusqakunata qarquy",
 	"visualeditor-viewpage-savewarning-keep": "Llamk'apuywan ñawparikuy",
+	"visualeditor-viewpage-savewarning-title": "Chiqapta munankichu?",
 	"visualeditor-wikitext-warning-title": "Wikiqillqam tarisqa"
 }

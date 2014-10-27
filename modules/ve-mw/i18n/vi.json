@@ -32,7 +32,7 @@
 	"visualeditor-desc": "Trình soạn thảo trực quan MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Soạn thảo trực quan",
 	"visualeditor-dialog-beta-welcome-action-continue": "Tiếp tục",
-	"visualeditor-dialog-beta-welcome-content": "Đây là cách sửa đổi mới và dễ dàng hơn. Tuy nhiên, nó chỉ mới ở dạng beta, có nghĩa là bạn có thể tìm thấy những trang mà bạn không thể sửa đổi, hoặc gặp những vấn đề cần được chỉnh sửa. Bạn nên xem trước những sửa đổi của bạn, và chúng tôi hoan nghênh những phản hồi của bạn về bất cứ vấn đề gì mà bạn gặp phải khi sửa dùng Trình soạn thảo trực quan (nhấn vào nút “{{int:visualeditor-help-tool}}” để gởi phản hồi). Để sửa dùng hộp văn bản thuần, nhấn vào nút “$1”&nbsp;– những sửa đổi chưa lưu sẽ bị mất.",
+	"visualeditor-dialog-beta-welcome-content": "Đây là cách sửa đổi mới và dễ dàng hơn. Tuy nhiên, nó chỉ mới ở dạng beta, có nghĩa là bạn có thể tìm thấy những trang mà bạn không thể sửa đổi, hoặc gặp những vấn đề cần được chỉnh sửa. Bạn nên xem trước những sửa đổi của bạn, và chúng tôi hoan nghênh những phản hồi của bạn về bất cứ vấn đề gì mà bạn gặp phải khi sửa dùng Trình soạn thảo trực quan (nhấn vào nút “{{int:visualeditor-help-tool}}” để gởi phản hồi). Để sửa dùng hộp văn bản thuần, nhấn vào nút “$1”&nbsp;– những thay đổi của bạn sẽ vẫn còn.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1}}Chào mừng đến với Trình soạn thảo trực quan",
 	"visualeditor-dialog-media-alttext-section": "Văn bản thay thế",
 	"visualeditor-dialog-media-change-image": "Chọn một hình ảnh khác",
