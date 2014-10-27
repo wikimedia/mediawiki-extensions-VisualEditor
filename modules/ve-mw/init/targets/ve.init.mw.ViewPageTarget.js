@@ -770,9 +770,11 @@ ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, w
 	var text, node, doc = surface.getView().getDocument(),
 		selection = surface.getModel().getSelection(),
 		textMatches;
-	if ( !selection ) {
+
+	if ( !( selection instanceof ve.dm.LinearSelection ) ) {
 		return;
 	}
+
 	node = doc.getBranchNodeFromOffset( selection.getRange().start );
 	if ( !( node instanceof ve.ce.ContentBranchNode ) ) {
 		return;
