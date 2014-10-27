@@ -165,6 +165,10 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
 
+	if ( this.transclusionModel.getParts().length === 0 ) {
+		this.addParameterButton.setDisabled( true );
+	}
+
 	single = this.isSingleTemplateTransclusion();
 	label = ve.msg( 'visualeditor-dialog-action-insert' );
 
