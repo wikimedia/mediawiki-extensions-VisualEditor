@@ -726,6 +726,7 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWExtensionNode.js',
+			'modules/ve-mw/dm/nodes/ve.dm.MWTableNode.js',
 
 			'modules/ve-mw/dm/annotations/ve.dm.MWNowikiAnnotation.js',
 
@@ -734,6 +735,7 @@ $wgResourceModules += array(
 			// ce
 			'modules/ve-mw/ce/nodes/ve.ce.MWEntityNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWExtensionNode.js',
+			'modules/ve-mw/ce/nodes/ve.ce.MWTableNode.js',
 
 			'modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js',
 

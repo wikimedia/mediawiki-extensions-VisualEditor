@@ -67,3 +67,12 @@ ve.ui.commandRegistry.register(
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'preformatted', 'format', 'convert', 'mwPreformatted' )
 );
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'insertTable', 'table', 'create', {
+		header: true,
+		rows: 3,
+		cols: 4,
+		type: 'mwTable',
+		attributes: { wikitable: true }
+	} )
+);
