@@ -80,7 +80,8 @@ ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 		action: 'visualeditor',
 		paction: 'parsefragment',
 		page: mw.config.get( 'wgRelevantPageName' ),
-		wikitext: ( config && config.wikitext ) || this.model.getWikitext()
+		wikitext: ( config && config.wikitext ) || this.model.getWikitext(),
+		pst: 1
 	}, { type: 'POST' } )
 		.done( this.onParseSuccess.bind( this, deferred ) )
 		.fail( this.onParseError.bind( this, deferred ) );
