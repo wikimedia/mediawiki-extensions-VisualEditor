@@ -47,26 +47,12 @@
 	background-image: url(images/icons/image-thumbnail.svg);
 }
 
-/* @noflip */
-.oo-ui-rtl .oo-ui-icon-parameter {
-	/* @embed */
-	background-image: url(images/icons/parameter-rtl.svg);
-}
-
-/* @noflip */
-.oo-ui-ltr .oo-ui-icon-parameter {
+.oo-ui-icon-parameter {
 	/* @embed */
 	background-image: url(images/icons/parameter-ltr.svg);
 }
 
-/* @noflip */
-.oo-ui-rtl .oo-ui-icon-parameter-set {
-	/* @embed */
-	background-image: url(images/icons/parameter-set-rtl.svg);
-}
-
-/* @noflip */
-.oo-ui-ltr .oo-ui-icon-parameter-set {
+.oo-ui-icon-parameter-set {
 	/* @embed */
 	background-image: url(images/icons/parameter-set-ltr.svg);
 }
