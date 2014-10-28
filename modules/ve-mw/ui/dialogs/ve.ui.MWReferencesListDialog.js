@@ -83,6 +83,7 @@ ve.ui.MWReferencesListDialog.prototype.initialize = function () {
 
 	this.groupInput = new ve.ui.MWReferenceGroupInputWidget( {
 		$: this.$,
+		$overlay: this.$overlay,
 		emptyGroupName: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.groupField = new OO.ui.FieldLayout( this.groupInput, {
