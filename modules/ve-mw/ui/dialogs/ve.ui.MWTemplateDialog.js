@@ -254,7 +254,11 @@ ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 	if ( part instanceof ve.dm.MWTemplateModel ) {
 		return new ve.ui.MWTemplatePage( part, part.getId(), { $: this.$ } );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
-		return new ve.ui.MWTemplatePlaceholderPage( part, part.getId(), { $: this.$ } );
+		return new ve.ui.MWTemplatePlaceholderPage(
+			part,
+			part.getId(),
+			{ $: this.$, $overlay: this.$overlay }
+		);
 	}
 	return null;
 };

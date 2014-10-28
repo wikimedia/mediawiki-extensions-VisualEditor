@@ -15,6 +15,7 @@
  * @param {ve.dm.MWTemplatePlaceholderModel} placeholder Template placeholder
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @cfg {jQuery} [$overlay] Overlay for dropdowns
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
 	// Configuration initialization
@@ -29,7 +30,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	this.placeholder = placeholder;
 
 	this.addTemplateInput = new ve.ui.MWTitleInputWidget( {
-		$: this.$, $overlay: this.$overlay, namespace: 10
+		$: this.$, $overlay: config.$overlay, namespace: 10
 	} )
 		.connect( this, {
 			change: 'onTemplateInputChange',
