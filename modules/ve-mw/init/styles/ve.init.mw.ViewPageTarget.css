@@ -95,3 +95,10 @@
 .ve-ui-mwHelpPopupTool-version-link {
 	unicode-bidi: embed;
 }
+
+/* Dialogs */
+
+/* Override overflow: hidden; from MW styles */
+.ve-ui-commandHelpDialog-section h3 {
+	overflow: visible;
+}
