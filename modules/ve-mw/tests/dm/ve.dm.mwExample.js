@@ -1974,9 +1974,7 @@ ve.dm.mwExample.domToDataCases = {
 					src: 'Bar',
 					width: 1,
 					height: 2,
-					resource: 'FooBar',
-					originalClasses: undefined,
-					unrecognizedClasses: []
+					resource: 'FooBar'
 				},
 				htmlAttributes: [ {
 					values: { 'data-parsoid': '{}' },
