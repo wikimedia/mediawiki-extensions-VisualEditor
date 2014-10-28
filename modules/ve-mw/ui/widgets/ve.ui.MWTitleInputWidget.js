@@ -137,3 +137,10 @@ ve.ui.MWTitleInputWidget.prototype.getTitle = function () {
 
 	return titleObj;
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTitleInputWidget.prototype.isValid = function () {
+	return $.Deferred().resolve( !!this.getTitle() ).promise();
+};
