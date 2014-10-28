@@ -5,15 +5,15 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-widget {
+.ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-widget {
 	display: inline-block;
 }
 
-.ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-buttonElement-framed {
+.ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-buttonElement-framed {
 	margin-left: 0.5em;
 }
 
-.ve-ui-mwTransclusionDialog-addTemplateFieldset .ve-ui-mwTitleInputWidget {
+.ve-ui-mwTransclusionDialog-addTemplateFieldset > .ve-ui-mwTitleInputWidget {
 	width: 20em;
 }
 
