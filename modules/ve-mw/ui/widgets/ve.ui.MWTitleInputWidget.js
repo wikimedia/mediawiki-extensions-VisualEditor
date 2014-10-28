@@ -125,3 +125,15 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 
 	return items;
 };
+
+/**
+ * Get template title
+ *
+ * @returns {mw.Title|null} Template title if valid or null
+ */
+ve.ui.MWTitleInputWidget.prototype.getTitle = function () {
+	var title = this.getValue(),
+		titleObj = mw.Title.newFromText( title );
+
+	return titleObj;
+};
