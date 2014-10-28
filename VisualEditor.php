@@ -1134,6 +1134,7 @@ $wgResourceModules += array(
 			'ext.visualEditor.mwtransclusion',
 		),
 		'messages' => array(
+			'visualeditor-dialog-reference-editing-reused',
 			'visualeditor-dialog-reference-options-group-label',
 			'visualeditor-dialog-reference-options-group-placeholder',
 			'visualeditor-dialog-reference-options-name-label',

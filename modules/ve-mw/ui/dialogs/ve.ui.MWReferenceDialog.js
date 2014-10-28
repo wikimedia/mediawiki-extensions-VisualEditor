@@ -233,6 +233,7 @@ ve.ui.MWReferenceDialog.prototype.getBodyHeight = function () {
  * @chainable
  */
 ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
+	var group;
 	// Properties
 	if ( ref instanceof ve.dm.MWReferenceModel ) {
 		// Use an existing reference
@@ -276,6 +277,18 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	this.contentFieldset.$element.append( this.referenceSurface.$element );
 	this.referenceSurface.initialize();
 
+	group = this.getFragment().getDocument().getInternalList()
+		.getNodeGroup( this.referenceModel.getListGroup() );
+	if ( group && group.keyedNodes[this.referenceModel.getListKey()].length > 1 ) {
+		this.$reuseWarning.show();
+		this.$reuseWarningText.text( mw.msg(
+			'visualeditor-dialog-reference-editing-reused',
+			group.keyedNodes[this.referenceModel.getListKey()].length
+		) );
+	} else {
+		this.$reuseWarning.hide();
+	}
+
 	return this;
 };
 
@@ -292,6 +305,11 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 		$: this.$, scrollable: true, padded: true
 	} );
 	this.searchPanel = new OO.ui.PanelLayout( { $: this.$ } );
+
+	this.reuseWarningIcon = new OO.ui.IconWidget( { icon: 'alert' } );
+	this.$reuseWarningText = this.$( '<span>' );
+	this.$reuseWarning = this.$( '<span>' ).append( this.reuseWarningIcon.$element, this.$reuseWarningText );
+
 	this.contentFieldset = new OO.ui.FieldsetLayout( { $: this.$ } );
 	this.optionsFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
@@ -314,7 +332,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 
 	// Initialization
 	this.panels.addItems( [ this.editPanel, this.searchPanel ] );
-	this.editPanel.$element.append( this.contentFieldset.$element, this.optionsFieldset.$element );
+	this.editPanel.$element.append( this.$reuseWarning, this.contentFieldset.$element, this.optionsFieldset.$element );
 	this.optionsFieldset.addItems( [ this.referenceGroupField ] );
 	this.searchPanel.$element.append( this.search.$element );
 	this.$body.append( this.panels.$element );
