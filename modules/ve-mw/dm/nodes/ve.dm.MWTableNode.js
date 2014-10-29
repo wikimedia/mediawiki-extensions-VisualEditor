@@ -57,7 +57,7 @@ ve.dm.MWTableNode.static.toDataElement = function ( domElements ) {
 
 ve.dm.MWTableNode.static.toDomElements = function ( dataElement, doc ) {
 	var element = doc.createElement( 'table' ),
-		classAttr = this.getClassAttrFromAttributes( dataElement.attributes );
+		classAttr = dataElement.attributes && this.getClassAttrFromAttributes( dataElement.attributes );
 
 	if ( classAttr ) {
 		element.className = classAttr;
