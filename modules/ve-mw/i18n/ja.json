@@ -8,7 +8,8 @@
 			"Whym",
 			"Takot",
 			"Plover-Y",
-			"Los688"
+			"Los688",
+			"SkyDaisy9"
 		]
 	},
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
@@ -120,6 +121,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "見出しの数が3個よりも少ないページにおいても、ページの上部へ強制的に目次（見出しの一覧）を表示、もしくは強制的に非表示にできます。既定の設定では、3個以上の見出しがあるページにおいて、目次を表示しています。",
 	"visualeditor-dialog-meta-settings-toc-label": "目次の表示",
 	"visualeditor-dialog-meta-title": "オプション",
+	"visualeditor-dialog-reference-editing-reused": "この参照はこのページ上で$1{{PLURAL:$1|回}}使用されています。",
 	"visualeditor-dialog-reference-options-group-label": "使用するグループ",
 	"visualeditor-dialog-reference-options-group-placeholder": "一般的な参照元",
 	"visualeditor-dialog-reference-options-name-label": "この名前で再使用",
@@ -238,6 +240,7 @@
 	"visualeditor-toolbar-cite-label": "参照",
 	"visualeditor-toolbar-savedialog": "ページを保存",
 	"visualeditor-usernamespacepagelink": "Project:利用者名前空間",
+	"visualeditor-version-label": "バージョン",
 	"visualeditor-viewpage-savewarning": "まだ保存していませんが、閲覧モードに本当に戻りますか?",
 	"visualeditor-viewpage-savewarning-discard": "編集内容を破棄",
 	"visualeditor-viewpage-savewarning-keep": "編集を続行",
