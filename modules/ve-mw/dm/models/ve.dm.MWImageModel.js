@@ -249,7 +249,8 @@ ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
  * @param {Object} [dimensions] New dimensions of the image
  */
 ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) {
-	var newDimensions, remoteFilename;
+	var newDimensions, remoteFilename,
+		imageModel = this;
 
 	if ( attrs.mediaType ) {
 		this.setMediaType( attrs.mediaType );
@@ -274,20 +275,20 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 
 	// Call for updated scalable
 	if ( remoteFilename ) {
-		ve.dm.MWImageNode.static.getScalablePromise( remoteFilename ).done( ve.bind( function ( info ) {
-			this.scalable.setOriginalDimensions( {
+		ve.dm.MWImageNode.static.getScalablePromise( remoteFilename ).done( function ( info ) {
+			imageModel.scalable.setOriginalDimensions( {
 				width: info.width,
 				height: info.height
 			} );
 			// Update media type
-			this.setMediaType( info.mediatype );
+			imageModel.setMediaType( info.mediatype );
 			// Update defaults
 			ve.dm.MWImageNode.static.syncScalableToType(
-				this.getType(),
+				imageModel.getType(),
 				info.mediatype,
-				this.scalable
+				imageModel.scalable
 			);
-		}, this ) );
+		} );
 	}
 
 	// Resize the new image's current dimensions to default or based on the bounding box
@@ -1037,7 +1038,8 @@ ve.dm.MWImageModel.prototype.getImageHref = function () {
  * @param {ve.dm.Scalable} Scalable object
  */
 ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
-	var imageName = this.getResourceName().replace( /^(\.+\/)*/, '' );
+	var imageName = this.getResourceName().replace( /^(\.+\/)*/, '' ),
+		imageModel = this;
 
 	if ( this.scalable instanceof ve.dm.Scalable ) {
 		this.scalable.disconnect( this );
@@ -1049,28 +1051,28 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 
 	// Call for updated scalable
 	if ( imageName ) {
-		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( ve.bind( function ( info ) {
-			this.scalable.setOriginalDimensions( {
+		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( function ( info ) {
+			imageModel.scalable.setOriginalDimensions( {
 				width: info.width,
 				height: info.height
 			} );
 			// Update media type
-			this.setMediaType( info.mediatype );
+			imageModel.setMediaType( info.mediatype );
 			// Update according to type
 			ve.dm.MWImageNode.static.syncScalableToType(
-				this.getType(),
-				this.getMediaType(),
-				this.getScalable()
+				imageModel.getType(),
+				imageModel.getMediaType(),
+				imageModel.getScalable()
 			);
 
 			// We have to adjust the details in the initial hash if the original
 			// image was 'default' since we didn't have default until now and the
 			// default dimensions that were 'recorded' were wrong
-			if ( !$.isEmptyObject( this.initialHash ) && this.initialHash.scalable.isDefault ) {
-				this.initialHash.scalable.currentDimensions = this.scalable.getDefaultDimensions();
+			if ( !$.isEmptyObject( imageModel.initialHash ) && imageModel.initialHash.scalable.isDefault ) {
+				imageModel.initialHash.scalable.currentDimensions = imageModel.scalable.getDefaultDimensions();
 			}
 
-		}, this ) );
+		} );
 	}
 };
 

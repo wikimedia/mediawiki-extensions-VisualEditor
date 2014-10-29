@@ -1175,7 +1175,8 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 	this.surface.getDialogs().getWindow( 'mwSave' ).then( function ( win ) {
-		var currentWindow = this.surface.getContext().getInspectors().getCurrentWindow();
+		var currentWindow = this.surface.getContext().getInspectors().getCurrentWindow(),
+			target = this;
 
 		// Make sure any open inspectors are closed
 		if ( currentWindow ) {
@@ -1208,9 +1209,9 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 			{ dir: this.surface.getModel().getDocument().getLang() }
 		)
 			// Call onSaveDialogClose() when the save dialog starts closing
-			.always( ve.bind( function ( opened ) {
-				opened.always( ve.bind( this.onSaveDialogClose, this ) );
-			}, this ) );
+			.always( function ( opened ) {
+				opened.always( target.onSaveDialogClose.bind( target ) );
+			} );
 		this.emit( 'saveWorkflowBegin' );
 	}.bind( this ) );
 };

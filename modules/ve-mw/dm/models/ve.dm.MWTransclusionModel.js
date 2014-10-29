@@ -237,8 +237,8 @@
 			lang: mw.config.get( 'wgUserLanguage' ),
 			redirects: '1'
 		} )
-			.done( ve.bind( this.fetchRequestDone, this, titles, specs ) )
-			.always( ve.bind( this.fetchRequestAlways, this, queue ) );
+			.done( this.fetchRequestDone.bind( this, titles, specs ) )
+			.always( this.fetchRequestAlways.bind( this, queue ) );
 	};
 
 	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( titles, specs, data ) {

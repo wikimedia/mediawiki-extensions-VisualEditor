@@ -271,24 +271,25 @@ ve.dm.MWImageNode.prototype.getSizeHash = function () {
  * @inheritdoc
  */
 ve.dm.MWImageNode.prototype.getScalable = function () {
+	var imageNode = this;
 	if ( !this.scalablePromise ) {
 		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() )
-			.done( ve.bind( function ( info ) {
+			.done( function ( info ) {
 				if ( info ) {
-					this.getScalable().setOriginalDimensions( {
+					imageNode.getScalable().setOriginalDimensions( {
 						width: info.width,
 						height: info.height
 					} );
 					// Update media type
-					this.mediaType = info.mediatype;
+					imageNode.mediaType = info.mediatype;
 					// Update according to type
-					this.constructor.static.syncScalableToType(
-						this.getAttribute( 'type' ),
-						this.mediaType,
-						this.getScalable()
+					imageNode.constructor.static.syncScalableToType(
+						imageNode.getAttribute( 'type' ),
+						imageNode.mediaType,
+						imageNode.getScalable()
 					);
 				}
-			}, this ) );
+			} );
 	}
 	// Parent method
 	return ve.dm.ResizableNode.prototype.getScalable.call( this );

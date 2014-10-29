@@ -447,7 +447,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						this.transclusionModel, data.template
 					);
 					promise = this.transclusionModel.addPart( template ).done(
-						ve.bind( this.initializeNewTemplateParameters, this )
+						this.initializeNewTemplateParameters.bind( this )
 					);
 				} else {
 					// New template placeholder
@@ -460,7 +460,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				// Load existing template
 				promise = this.transclusionModel
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) )
-					.done( ve.bind( this.initializeTemplateParameters, this ) );
+					.done( this.initializeTemplateParameters.bind( this ) );
 			}
 			this.actions.setAbilities( { apply: false, insert: false } );
 			this.pushPending();
