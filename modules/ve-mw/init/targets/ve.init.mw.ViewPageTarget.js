@@ -1420,7 +1420,7 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 		.addClass( 've-hide' )
 		.slideUp( 'fast' );
 	// Hide page status indicators (if present)
-	$( '.mw-indicators:visible' )
+	$( '.mw-indicators' )
 		.addClass( 've-hide' )
 		.fadeOut( 'fast' );
 
