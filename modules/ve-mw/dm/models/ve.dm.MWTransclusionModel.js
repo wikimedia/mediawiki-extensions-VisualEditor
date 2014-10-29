@@ -312,7 +312,7 @@
 		for ( i = 0, len = this.parts.length; i < len; i++ ) {
 			part = this.parts[i];
 			serialization = part.serialize();
-			if ( serialization !== undefined ) {
+			if ( serialization !== undefined && serialization !== '' ) {
 				obj.parts.push( serialization );
 			}
 		}
