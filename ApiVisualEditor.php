@@ -622,6 +622,9 @@ class ApiVisualEditor extends ApiBase {
 		return true;
 	}
 
+	/**
+	 * @deprecated since MediaWiki core 1.25
+	 */
 	public function getParamDescription() {
 		return array(
 			'page' => 'The page to perform actions on.',
@@ -639,6 +642,9 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
+	/**
+	 * @deprecated since MediaWiki core 1.25
+	 */
 	public function getDescription() {
 		return 'Returns HTML5 for a page from the parsoid service.';
 	}
