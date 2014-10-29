@@ -81,7 +81,10 @@
 					"ve.dm.Document*",
 					"ve.dm.*Node",
 					"ve.dm.*LinearData*",
-					"ve.dm.*Model"
+					"ve.dm.*Model",
+					"ve.dm.TableMatrix",
+					"ve.dm.TableMatrixCell",
+					"ve.dm.TableNodeCellIterator"
 				]
 			},
 			{
