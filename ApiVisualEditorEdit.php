@@ -184,6 +184,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return true;
 	}
 
+	/**
+	 * @deprecated since MediaWiki core 1.25
+	 */
 	public function getParamDescription() {
 		return array(
 			'page' => 'The page to perform actions on.',
@@ -205,6 +208,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		);
 	}
 
+	/**
+	 * @deprecated since MediaWiki core 1.25
+	 */
 	public function getDescription() {
 		return 'Save an HTML5 page to MediaWiki (converted to wikitext via the Parsoid service).';
 	}
