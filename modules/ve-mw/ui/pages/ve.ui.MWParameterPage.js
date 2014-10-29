@@ -17,8 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
-	var placeholder = null,
-		paramName = parameter.getName();
+	var paramName = parameter.getName();
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -29,7 +28,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
+	this.edited = false;
 	this.parameter = parameter;
+	this.originalValue = parameter.getValue();
 	this.spec = parameter.getTemplate().getSpec();
 	this.defaultValue = parameter.getDefaultValue();
 	this.exampleValue = parameter.getExampleValue();
@@ -40,18 +41,14 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$field = $( '<div>' );
 	this.$more = $( '<div>' );
 	this.$description = $( '<div>' );
-	if ( this.defaultValue ) {
-		placeholder = ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue );
-	} else if ( this.exampleValue ) {
-		placeholder = ve.msg( 'visualeditor-dialog-transclusion-param-example', this.exampleValue );
-	}
-	this.valueInput = new OO.ui.TextInputWidget( {
-		multiline: true,
-		autosize: true,
-		required: this.parameter.isRequired(),
-		validate: this.parameter.isRequired() ? 'non-empty' : null,
-		placeholder: placeholder
-	} )
+
+	this.rawFallbackButton = new OO.ui.ButtonWidget( {
+		framed: false,
+		icon: 'wikiText',
+		title: ve.msg( 'visualeditor-dialog-transclusion-raw-fallback' )
+	} ).connect( this, { click: 'onRawFallbackButtonClick' } );
+
+	this.valueInput = this.createValueInput()
 		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
 
@@ -84,8 +81,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
 	} );
 
-	// TODO: Use spec.type
-
 	// Events
 	this.$labelElement.on( 'click', this.onLabelClick.bind( this ) );
 
@@ -95,7 +90,11 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append( this.$labelElement, this.statusIndicator.$element );
 	this.$actions
 		.addClass( 've-ui-mwParameterPage-actions' )
-		.append( this.infoButton.$element, this.removeButton.$element );
+		.append(
+			this.rawFallbackButton.$element,
+			this.infoButton.$element,
+			this.removeButton.$element
+		);
 	this.$labelElement
 		.addClass( 've-ui-mwParameterPage-label' )
 		.text( this.spec.getParameterLabel( paramName ) );
@@ -184,6 +183,96 @@ OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
 /* Methods */
 
 /**
+ * Get default configuration for an input widget.
+ *
+ * @private
+ * @return {Object}
+ */
+ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
+	var required = this.parameter.isRequired(),
+		valueInputConfig = {
+			autosize: true,
+			required: required,
+			validate: required ? 'non-empty' : null
+		};
+
+	if ( this.defaultValue ) {
+		valueInputConfig.placeholder = ve.msg(
+			'visualeditor-dialog-transclusion-param-default',
+			this.defaultValue
+		);
+	} else if ( this.exampleValue ) {
+		valueInputConfig.placeholder = ve.msg(
+			'visualeditor-dialog-transclusion-param-example',
+			this.exampleValue
+		);
+	}
+
+	return valueInputConfig;
+};
+
+/**
+ * Create a value input widget based on the parameter type and whether it is
+ * required or not.
+ *
+ * @return {OO.ui.InputWidget}
+ */
+ve.ui.MWParameterPage.prototype.createValueInput = function () {
+	var type = this.parameter.getType(),
+		value = this.parameter.getValue(),
+		valueInputConfig = this.getDefaultInputConfig();
+
+	this.rawValueInput = false;
+	delete valueInputConfig.validate;
+
+	// TODO:
+	// * wiki-file-name
+	// * date - T100206
+	// * number - T124850
+	// * unbalanced-wikitext/content - T106242
+	// * string? - T124917
+	if (
+		type === 'wiki-page-name' &&
+		( value === '' || mw.Title.newFromText( value ) )
+	) {
+		return new mw.widgets.TitleInputWidget( valueInputConfig );
+	} else if (
+		type === 'wiki-user-name' &&
+		( value === '' || mw.Title.newFromText( value ) )
+	) {
+		valueInputConfig.validate = function ( value ) {
+			// TODO: Check against wgMaxNameChars
+			// TODO: Check against unicode blacklist regex from MW core's User::isValidUserName
+			return !!mw.Title.newFromText( value );
+		};
+		return new mw.widgets.UserInputWidget( valueInputConfig );
+	} else if (
+		type === 'wiki-template-name' &&
+		( value === '' || mw.Title.newFromText( value ) )
+	) {
+		return new mw.widgets.TitleInputWidget( $.extend( {}, valueInputConfig, {
+			namespace: mw.config.get( 'wgNamespaceIds' ).template
+		} ) );
+	} else if ( type === 'boolean' && ( value === '1' || value === '0' ) ) {
+		return new ve.ui.MWParameterCheckboxInputWidget( valueInputConfig );
+	} else if (
+		type === 'url' &&
+		(
+			value === '' ||
+			ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( value.trim() )
+		)
+	) {
+		return ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget( valueInputConfig );
+	} else if ( type !== 'line' ) {
+		this.rawValueInput = true;
+		valueInputConfig.multiline = true;
+		this.rawFallbackButton.$element.detach();
+	}
+
+	return new OO.ui.TextInputWidget( valueInputConfig );
+};
+
+/**
  * Check if the parameter is empty
  *
  * @return {boolean} The parameter is empty
@@ -200,6 +289,7 @@ ve.ui.MWParameterPage.prototype.isEmpty = function () {
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	var value = this.valueInput.getValue();
 
+	this.edited = true;
 	this.parameter.setValue( value );
 
 	if ( this.outlineItem ) {
@@ -212,6 +302,24 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
  */
 ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
+};
+
+/**
+ * Handle click events from the raw fallback button
+ */
+ve.ui.MWParameterPage.prototype.onRawFallbackButtonClick = function () {
+	this.valueInput.$element.detach();
+	if ( this.rawValueInput ) {
+		this.valueInput = this.createValueInput()
+			.setValue( this.valueInput.getValue() );
+	} else {
+		this.valueInput = new OO.ui.TextInputWidget( this.getDefaultInputConfig() )
+			.setValue( this.edited ? this.valueInput.getValue() : this.originalValue );
+		this.valueInput.$input.addClass( 've-ui-mwParameter-wikitextFallbackInput' );
+		this.rawValueInput = true;
+	}
+	this.valueInput.connect( this, { change: 'onValueInputChange' } );
+	this.$field.append( this.valueInput.$element );
 };
 
 /**
