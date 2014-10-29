@@ -348,6 +348,7 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/ve.dm.AnnotationSet.js',
 			'lib/ve/src/dm/ve.dm.MetaItemFactory.js',
 			'lib/ve/src/dm/ve.dm.Node.js',
+			'lib/ve/src/dm/ve.dm.ClassAttributeNode.js',
 			'lib/ve/src/dm/ve.dm.FocusableNode.js',
 			'lib/ve/src/dm/ve.dm.Scalable.js',
 			'lib/ve/src/dm/ve.dm.ResizableNode.js',
