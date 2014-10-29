@@ -45,7 +45,6 @@ Feature: Language Screenshot
     When I click on Page settings option
     Then I should see Page settings dialog box
 
-  @language_screenshot
   Scenario: VisualEditor_Toolbar_Lists_and_indentation
     Given I go to the "Indent Outdent Screenshot" page with source content "Indent Outdent Screenshot"
       And I make the text "Indent Outdent" be selected
@@ -131,7 +130,6 @@ Feature: Language Screenshot
     When I click on category in hamburger menu
     Then I should see category dialog box
 
-  @language_screenshot
   Scenario: VisualEditor_formula
     Given I go to the "Formula Screenshot" page with source content ""
     When I click on Formula option in Insert menu
