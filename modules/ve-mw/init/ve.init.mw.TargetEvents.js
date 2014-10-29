@@ -23,15 +23,15 @@ ve.init.mw.TargetEvents = function ( target ) {
 		saveInitiated: 'onSaveInitated',
 		save: 'onSaveComplete',
 		saveReview: 'onSaveReview',
-		saveErrorEmpty: 'onSaveErrorEmpty',
-		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
-		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
-		saveErrorBadToken: 'onSaveErrorBadToken',
-		saveErrorNewUser: 'onSaveErrorNewUser',
-		saveErrorCaptcha: 'onSaveErrorCaptcha',
-		saveErrorUnknown: 'onSaveErrorUnknown',
+		saveErrorEmpty: [ 'trackSaveError', 'empty' ],
+		saveErrorSpamBlacklist: [ 'trackSaveError', 'spamblacklist' ],
+		saveErrorAbuseFilter: [ 'trackSaveError', 'abusefilter' ],
+		saveErrorBadToken: [ 'trackSaveError', 'badtoken' ],
+		saveErrorNewUser: [ 'trackSaveError', 'newuser' ],
+		saveErrorCaptcha: [ 'trackSaveError', 'captcha' ],
+		saveErrorUnknown: [ 'trackSaveError', 'unknown' ],
+		editConflict: [ 'trackSaveError', 'editconflict' ],
 		surfaceReady: 'onSurfaceReady',
-		editConflict: 'onEditConflict',
 		showChanges: 'onShowChanges',
 		showChangesError: 'onShowChangesError',
 		noChanges: 'onNoChanges',
@@ -48,7 +48,12 @@ ve.init.mw.TargetEvents = function ( target ) {
  */
 ve.init.mw.TargetEvents.prototype.track = function ( topic, data ) {
 	data.targetName = this.target.constructor.static.name;
-	ve.track( topic, data );
+	ve.track( 'mwtiming.' + topic, data );
+
+	if ( topic.indexOf( 'performance.system.serializeforcache' ) === 0 ) {
+		// HACK: track serializeForCache duration here, because there's no event for that
+		this.timings.serializeForCache = data.duration;
+	}
 };
 
 /**
@@ -59,6 +64,7 @@ ve.init.mw.TargetEvents.prototype.onSaveWorkflowBegin = function () {
 	this.track( 'behavior.lastTransactionTillSaveDialogOpen', {
 		duration: this.timings.saveWorkflowBegin - this.timings.lastTransaction
 	} );
+	ve.track( 'mwedit.saveIntent' );
 };
 
 /**
@@ -78,14 +84,22 @@ ve.init.mw.TargetEvents.prototype.onSaveInitated = function () {
 	this.track( 'behavior.saveDialogOpenTillSave', {
 		duration: this.timings.saveInitiated - this.timings.saveWorkflowBegin
 	} );
+	ve.track( 'mwedit.saveAttempt' );
 };
 
 /**
- * Track when document save is complete
+ * Track when the save is complete
+ * @param {string} content
+ * @param {string} categoriesHtml
+ * @param {number} newRevId
  */
-ve.init.mw.TargetEvents.prototype.onSaveComplete = function () {
+ve.init.mw.TargetEvents.prototype.onSaveComplete = function ( content, categoriesHtml, newRevId ) {
 	this.track( 'performance.user.saveComplete', { duration: ve.now() - this.timings.saveInitiated } );
 	this.timings.saveRetries = 0;
+	ve.track( 'mwedit.saveSuccess', {
+		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 ),
+		'page.revid': newRevId
+	} );
 };
 
 /**
@@ -95,10 +109,35 @@ ve.init.mw.TargetEvents.prototype.onSaveComplete = function () {
  * @param {string} type Text for error type
  */
 ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
-	this.track( 'performance.user.saveError', {
+	var key,
+		// Maps mwtiming types to mwedit types
+		typeMap = {
+			badtoken: 'userBadToken',
+			newuser: 'userNewUser',
+			abusefilter: 'extensionAbuseFilter',
+			captcha: 'extensionCaptcha',
+			spamblacklist: 'extensionSpamBlacklist',
+			empty: 'responseEmpty',
+			unknown: 'responseUnknown',
+			editconflict: 'editConflict'
+		},
+		// Types that are logged as performance.user.saveError.{type}
+		// (for historical reasons; this sucks)
+		specialTypes = [ 'editconflict' ];
+
+	key = 'performance.user.saveError';
+	if ( specialTypes.indexOf( type ) !== -1 ) {
+		key += '.' + type;
+	}
+	this.track( key, {
 		duration: ve.now() - this.timings.saveInitiated,
 		retries: this.timings.saveRetries,
 		type: type
+	} );
+
+	ve.track( 'mwedit.saveFailure', {
+		type: typeMap[type] || 'responseUnknown',
+		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 )
 	} );
 };
 
@@ -119,69 +158,10 @@ ve.init.mw.TargetEvents.prototype.onSaveReview = function () {
 	} );
 };
 
-/**
- * Track when save api returns no data
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorEmpty = function () {
-	this.trackSaveError( 'empty' );
-};
-
-/**
- * Track when spamblacklist save error occurs
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorSpamBlacklist = function () {
-	this.trackSaveError( 'spamblacklist' );
-};
-
-/**
- * Track when abusefilter save error occurs
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorAbuseFilter = function () {
-	this.trackSaveError( 'abusefilter' );
-};
-
-/**
- * Track when the save request requires a new edit token
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorBadToken = function () {
-	this.trackSaveError( 'badtoken' );
-};
-
-/**
- * Track when the save request detects a new user session
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorNewUser = function () {
-	this.trackSaveError( 'newuser' );
-};
-
-/**
- * Track when the save request requires about captcha
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorCaptcha = function () {
-	this.trackSaveError( 'captcha' );
-};
-
-/**
- * Track when save request has an unknown error
- */
-ve.init.mw.TargetEvents.prototype.onSaveErrorUnknown = function () {
-	this.trackSaveError( 'unknown' );
-};
-
 ve.init.mw.TargetEvents.prototype.onSurfaceReady = function () {
 	this.track( 'performance.system.activation', { duration: ve.now() - this.timings.activationStart } );
 	this.target.surface.getModel().getDocument().connect( this, {
 		transact: 'recordLastTransactionTime'
-	} );
-};
-
-/**
- * Track when save request results in an edit conflict
- */
-ve.init.mw.TargetEvents.prototype.onEditConflict = function () {
-	this.track( 'performance.user.saveError.editconflict', {
-		duration: ve.now() - this.timings.saveInitiated,
-		retries: this.timings.saveRetries
 	} );
 };
 

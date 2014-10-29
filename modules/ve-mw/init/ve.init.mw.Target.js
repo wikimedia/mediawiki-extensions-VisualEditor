@@ -277,6 +277,14 @@ ve.init.mw.Target.static.iconModuleStyles = [
  */
 ve.init.mw.Target.static.name = 'mwTarget';
 
+/**
+ * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.
+ * @static
+ * @property {string}
+ * @inheritable
+ */
+ve.init.mw.Target.static.integrationType = 'page';
+
 /* Static Methods */
 
 /**
