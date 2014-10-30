@@ -319,9 +319,7 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
  */
 ve.dm.MWTemplateModel.prototype.serialize = function () {
 	var name,
-		template = ve.extendObject(
-			this.originalData || {}, { target: this.getTarget(), params: {} }
-		),
+		template = { target: this.getTarget(), params: {} },
 		params = this.getParameters();
 
 	for ( name in params ) {
@@ -331,6 +329,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		template.params[params[name].getOriginalName()] = { wt: params[name].getValue() };
 	}
 
+	template = ve.extendObject( true, {}, this.originalData || {}, template );
 	return { template: template };
 };
 
