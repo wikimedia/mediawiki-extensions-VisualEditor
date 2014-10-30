@@ -202,6 +202,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		forceExpand: [ 'bold', 'italic', 'clear' ],
 		promote: [ 'bold', 'italic' ],
 		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
@@ -228,6 +229,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		indicator: 'down',
 		include: '*',
+		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
 		promote: [ 'media', 'transclusion' ],
 		demote: [ 'specialcharacter' ]
 	},

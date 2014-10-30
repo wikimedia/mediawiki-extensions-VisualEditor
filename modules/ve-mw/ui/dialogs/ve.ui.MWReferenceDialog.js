@@ -87,12 +87,13 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		forceExpand: [ 'bold', 'italic', 'clear' ],
 		promote: [ 'bold', 'italic' ],
 		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
 	// Link
 	{ include: [ 'link' ] },
-	// Cite but not reference
+	// Cite-transclusion but not reference
 	{
 		type: 'list',
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
@@ -120,8 +121,18 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = [
 			'referencesList',
 			'gallery'
 		],
+		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
 		promote: [ 'media', 'transclusion' ],
 		demote: [ 'specialcharacter' ]
+	},
+	// Table
+	{
+		header: OO.ui.deferMsg( 'visualeditor-toolbar-table' ),
+		type: 'list',
+		icon: 'table-insert',
+		indicator: 'down',
+		include: [ { group: 'table' } ],
+		demote: [ 'deleteTable' ]
 	}
 ];
 

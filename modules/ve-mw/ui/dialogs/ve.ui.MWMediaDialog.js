@@ -96,6 +96,7 @@ ve.ui.MWMediaDialog.static.toolbarGroups = [
 		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		forceExpand: [ 'bold', 'italic', 'clear' ],
 		promote: [ 'bold', 'italic' ],
 		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
@@ -128,8 +129,18 @@ ve.ui.MWMediaDialog.static.toolbarGroups = [
 			'referencesList',
 			'gallery'
 		],
+		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
 		promote: [ 'media', 'transclusion' ],
 		demote: [ 'specialcharacter' ]
+	},
+	// Table
+	{
+		header: OO.ui.deferMsg( 'visualeditor-toolbar-table' ),
+		type: 'list',
+		icon: 'table-insert',
+		indicator: 'down',
+		include: [ { group: 'table' } ],
+		demote: [ 'deleteTable' ]
 	}
 ];
 
