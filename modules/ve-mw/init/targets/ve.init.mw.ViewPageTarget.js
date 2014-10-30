@@ -38,6 +38,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.activating = false;
 	this.deactivating = false;
 	this.edited = false;
+	this.recreating = false;
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
 	// (which would mess up with the expected order of Back/Forwards browsing)
@@ -92,6 +93,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		saveErrorNewUser: 'onSaveErrorNewUser',
 		saveErrorCaptcha: 'onSaveErrorCaptcha',
 		saveErrorUnknown: 'onSaveErrorUnknown',
+		saveErrorPageDeleted: 'onSaveErrorPageDeleted',
 		loadError: 'onLoadError',
 		surfaceReady: 'onSurfaceReady',
 		editConflict: 'onEditConflict',
@@ -495,6 +497,14 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 };
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.ViewPageTarget.prototype.onSaveError = function () {
+	this.pageDeletedWarning = false;
+	ve.init.mw.ViewPageTarget.super.prototype.onSaveError.apply( this, arguments );
+};
+
+/**
  * Update save dialog message on general error
  *
  * @method
@@ -637,6 +647,27 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
 };
 
 /**
+ * Update save dialog message on page deleted error
+ *
+ * @method
+ */
+ve.init.mw.ViewPageTarget.prototype.onSaveErrorPageDeleted = function () {
+	this.pageDeletedWarning = true;
+	this.showSaveError( mw.msg( 'visualeditor-recreate' ), true, true );
+};
+
+/**
+ * Handle MWSaveDialog retry events
+ * So we can handle trying to save again after page deletion warnings
+ */
+ve.init.mw.ViewPageTarget.prototype.onSaveRetry = function () {
+	if ( this.pageDeletedWarning ) {
+		this.recreating = true;
+		this.pageExists = false;
+	}
+};
+
+/**
  * Update save dialog api-save-error message
  *
  * @method
@@ -644,9 +675,10 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
  *  Node objects)
  * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
  *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
+ * @param {boolean} [warning=false] Whether or not this is a warning.
  */
-ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply ) {
-	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply } ) ] );
+ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
+	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
 };
 
 /**
@@ -944,6 +976,9 @@ ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
 		wpCaptchaId: this.captcha && this.captcha.id,
 		wpCaptchaWord: this.captcha && this.captcha.input.getValue()
 	} );
+	if ( this.recreating ) {
+		fields.wpRecreate = true;
+	}
 	return fields;
 };
 
@@ -1195,7 +1230,8 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 			this.saveDialog.connect( this, {
 				save: 'saveDocument',
 				review: 'onSaveDialogReview',
-				resolve: 'onSaveDialogResolveConflict'
+				resolve: 'onSaveDialogResolveConflict',
+				retry: 'onSaveRetry'
 			} );
 			// Setup edit summary and checkboxes
 			this.saveDialog.setEditSummary( this.initialEditSummary );

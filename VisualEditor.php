@@ -824,6 +824,7 @@ $wgResourceModules += array(
 			'visualeditor-savedialog-warning-dirty',
 			'visualeditor-saveerror',
 			'visualeditor-serializeerror',
+			'visualeditor-recreate',
 			'visualeditor-toolbar-cite-label',
 			'visualeditor-toolbar-savedialog',
 			'visualeditor-version-label',

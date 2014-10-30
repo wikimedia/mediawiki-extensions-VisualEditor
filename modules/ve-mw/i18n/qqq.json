@@ -281,6 +281,7 @@
 	"visualeditor-savedialog-warning-dirty": "Note displayed to users in the save dialog if VisualEditor believes that it may have corrupted the page.",
 	"visualeditor-saveerror": "Text shown when the editor fails to save properly.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-serializeerror": "Text shown when the editor fails to load the wikitext for saving.\n\nParameters:\n* $1 is an error message, in English.",
+	"visualeditor-recreate": "Text shown when the editor fails to save the page due to it having been deleted since they opened VE.",
 	"visualeditor-settings-tool": "Text of tool in the toolbar the lets users set specific page settings.\n{{Identical|Page settings}}",
 	"visualeditor-timeout": "Text (JavaScript confirm()) shown when the editor fails to load properly due to a 504 Gateway Timeout error.",
 	"visualeditor-toolbar-cite-label": "Label text for the toolbar button for inserting customized references.\n{{Identical|Cite}}",
