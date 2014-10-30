@@ -240,11 +240,12 @@
 	"visualeditor-toolbar-cite-label": "Przypis",
 	"visualeditor-toolbar-savedialog": "Zapisz",
 	"visualeditor-usernamespacepagelink": "Project:Strona użytkownika",
+	"visualeditor-version-label": "Wersja",
 	"visualeditor-viewpage-savewarning": "Czy na pewno chcesz powrócić do trybu czytania bez zapisania zmian?",
 	"visualeditor-viewpage-savewarning-discard": "Odrzuć zmiany",
 	"visualeditor-viewpage-savewarning-keep": "Kontynuuj edycję",
 	"visualeditor-viewpage-savewarning-title": "Na pewno?",
 	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
-	"visualeditor-wikitext-warning-link": "Help:Wikitekst",
+	"visualeditor-wikitext-warning-link": "Help:Formatowanie tekstu",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego"
 }

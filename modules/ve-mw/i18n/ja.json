@@ -12,6 +12,7 @@
 			"SkyDaisy9"
 		]
 	},
+	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (captcha response で保存する場合)。",
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
 	"tooltip-ca-editsource": "このページのソースコードを編集する",
 	"tooltip-ca-ve-edit": "このページをビジュアルエディターで編集する",

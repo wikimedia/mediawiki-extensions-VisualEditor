@@ -49,7 +49,7 @@
 	"apihelp-visualeditoredit-param-oldid": "{{doc-apihelp-param|visualeditoredit|oldid}}",
 	"apihelp-visualeditoredit-param-page": "{{doc-apihelp-param|visualeditoredit|page}}",
 	"apihelp-visualeditoredit-param-starttimestamp": "{{doc-apihelp-param|visualeditoredit|starttimestamp}}",
-	"apihelp-visualeditoredit-param-summary": "{{doc-apihelp-param|visualeditoredit|summary}}",
+	"apihelp-visualeditoredit-param-summary": "{{doc-apihelp-param|visualeditoredit|summary}}\n{{Identical|Edit summary}}",
 	"apihelp-visualeditoredit-param-watch": "{{doc-apihelp-param|visualeditoredit|watch}}",
 	"apihelp-visualeditoredit-param-wikitext": "{{doc-apihelp-param|visualeditoredit|wikitext}}",
 	"tooltip-ca-createsource": "Tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist.\n\nSee also:\n* {{msg-mw|Tooltip-ca-editsource}} - tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists",

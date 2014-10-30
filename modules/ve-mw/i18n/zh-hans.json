@@ -22,6 +22,11 @@
 			"Duolaimi"
 		]
 	},
+	"apihelp-visualeditoredit-description": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。",
+	"apihelp-visualeditoredit-param-captchaid": "验证码ID（当带验证码保存时）。",
+	"apihelp-visualeditoredit-param-captchaword": "回答验证码（当带验证码保存时）。",
+	"apihelp-visualeditoredit-param-minor": "标记小编辑。",
+	"apihelp-visualeditoredit-param-summary": "编辑摘要。",
 	"tooltip-ca-createsource": "创建本页面的源代码",
 	"tooltip-ca-editsource": "编辑本页面的源代码",
 	"tooltip-ca-ve-edit": "使用可视化编辑器编辑本页",

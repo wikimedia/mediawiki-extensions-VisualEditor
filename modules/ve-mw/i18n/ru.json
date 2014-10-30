@@ -135,6 +135,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "Вы можете сделать и так, что оглавление, в котором показываются все заголовки со страницы, появлялись, даже если там менее трёх заголовков, или же заставить его не появляется вообще. По умолчанию содержание показывается, если на странице присутствует три и более заголовков.",
 	"visualeditor-dialog-meta-settings-toc-label": "Показать оглавление",
 	"visualeditor-dialog-meta-title": "Настройки",
+	"visualeditor-dialog-reference-editing-reused": "Эта ссылка используется на странице $1 раз{{PLURAL:$1|||а}}.",
 	"visualeditor-dialog-reference-options-group-label": "Использовать эту группу",
 	"visualeditor-dialog-reference-options-group-placeholder": "Общие ссылки",
 	"visualeditor-dialog-reference-options-name-label": "Повторно использовать под данным именем",

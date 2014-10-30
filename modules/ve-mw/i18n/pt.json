@@ -18,6 +18,7 @@
 			"He7d3r"
 		]
 	},
+	"apihelp-visualeditoredit-param-summary": "Editar resumo.",
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
 	"tooltip-ca-editsource": "Editar o código-fonte desta página",
 	"tooltip-ca-ve-edit": "Editar esta página com o Editor Visual",
@@ -127,6 +128,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "Pode forçar o aparecimento de um índice de conteúdos em páginas com menos do que três títulos ou forçá-lo simplesmente a não aparecer. Por padrão, o índice é exibido se a página tiver três ou mais seções.",
 	"visualeditor-dialog-meta-settings-toc-label": "Mostrar a tabela de conteúdos",
 	"visualeditor-dialog-meta-title": "Opções",
+	"visualeditor-dialog-reference-editing-reused": "Esta referência é usada $1 {{PLURAL:$1|vezes}} nesta página.",
 	"visualeditor-dialog-reference-options-group-label": "Usar este grupo",
 	"visualeditor-dialog-reference-options-group-placeholder": "Referências gerais",
 	"visualeditor-dialog-reference-options-name-label": "Reutilizar por este nome",
@@ -245,6 +247,7 @@
 	"visualeditor-toolbar-cite-label": "Citar",
 	"visualeditor-toolbar-savedialog": "Gravar página",
 	"visualeditor-usernamespacepagelink": "Project:Página de usuário",
+	"visualeditor-version-label": "Versão",
 	"visualeditor-viewpage-savewarning": "Tem a certeza de que deseja voltar para a página sem gravar a edição?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorar alterações",
 	"visualeditor-viewpage-savewarning-keep": "Continuar a editar",
