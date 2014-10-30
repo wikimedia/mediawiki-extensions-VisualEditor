@@ -41,6 +41,7 @@ ve.dm.MWTableNode.static.classAttributes = {
 
 // HACK: users of parentNodeTypes should be fixed to check for inherited classes.
 ve.dm.TableSectionNode.static.parentNodeTypes.push( 'mwTable' );
+ve.dm.TableCaptionNode.static.parentNodeTypes.push( 'mwTable' );
 
 ve.dm.MWTableNode.static.toDataElement = function ( domElements ) {
 	var attributes = {},
