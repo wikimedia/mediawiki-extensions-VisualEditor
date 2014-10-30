@@ -665,6 +665,7 @@ $wgResourceModules += array(
 			'visualeditor-specialcharacter-button-tooltip',
 			'visualeditor-specialcharacterinspector-title',
 			'visualeditor-specialcharinspector-characterlist-insert',
+			'visualeditor-table-caption',
 			'visualeditor-table-delete-col',
 			'visualeditor-table-delete-row',
 			'visualeditor-table-delete-table',
