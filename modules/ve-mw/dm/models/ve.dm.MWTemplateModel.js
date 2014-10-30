@@ -81,16 +81,22 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
  * namespace, using a leading colon to access other namespaces.
  *
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion template is in
- * @param {string} name Template name
- * @returns {ve.dm.MWTemplateModel} New template model
+ * @param {string|mw.Title} name Template name
+ * @returns {ve.dm.MWTemplateModel|null} New template model
  */
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
-	var href = name;
+	var href, title;
+	if ( name instanceof mw.Title ) {
+		title = name;
+	} else {
+		title = mw.Title.newFromText( href, mw.config.get( 'wgNamespaceIds' ).template );
+	}
+	if ( title !== null ) {
+		href = title.getPrefixedText();
+		return new ve.dm.MWTemplateModel( transclusion, { href: href, wt: name }, 'user' );
+	}
 
-	// TODO: Do we need to account for the title being invalid?
-	href = new mw.Title( href, mw.config.get( 'wgNamespaceIds' ).template ).getPrefixedText();
-
-	return new ve.dm.MWTemplateModel( transclusion, { href: href, wt: name }, 'user' );
+	return null;
 };
 
 /* Methods */

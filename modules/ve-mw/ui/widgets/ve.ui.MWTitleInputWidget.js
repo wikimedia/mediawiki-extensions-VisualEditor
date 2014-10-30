@@ -133,7 +133,8 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
  */
 ve.ui.MWTitleInputWidget.prototype.getTitle = function () {
 	var title = this.getValue(),
-		titleObj = mw.Title.newFromText( title );
+		//mw.Title doesn't handle null well
+		titleObj = mw.Title.newFromText( title, this.namespace !== null ? this.namespace : undefined );
 
 	return titleObj;
 };

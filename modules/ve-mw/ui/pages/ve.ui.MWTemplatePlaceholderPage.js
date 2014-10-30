@@ -100,15 +100,15 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	if ( menu.isVisible() ) {
 		menu.chooseItem( menu.getSelectedItem() );
 	}
-	part = ve.dm.MWTemplateModel.newFromName( transclusion, this.addTemplateInput.getValue() );
+	part = ve.dm.MWTemplateModel.newFromName( transclusion, this.addTemplateInput.getTitle() );
 	transclusion.replacePart( this.placeholder, part );
 	this.addTemplateInput.pushPending();
 	this.addTemplateButton.setDisabled( true );
 	this.removeButton.setDisabled( true );
 };
 
-ve.ui.MWTemplatePlaceholderPage.prototype.onTemplateInputChange = function ( value ) {
-	this.addTemplateButton.setDisabled( value.trim() === '' );
+ve.ui.MWTemplatePlaceholderPage.prototype.onTemplateInputChange = function () {
+	this.addTemplateButton.setDisabled( this.addTemplateInput.getTitle() === null );
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onRemoveButtonClick = function () {
