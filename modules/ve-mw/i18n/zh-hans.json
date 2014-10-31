@@ -22,6 +22,8 @@
 			"Duolaimi"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "要执行的操作。",
+	"apihelp-visualeditor-param-page": "要执行操作的页面。",
 	"apihelp-visualeditoredit-description": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。",
 	"apihelp-visualeditoredit-param-captchaid": "验证码ID（当带验证码保存时）。",
 	"apihelp-visualeditoredit-param-captchaword": "回答验证码（当带验证码保存时）。",
