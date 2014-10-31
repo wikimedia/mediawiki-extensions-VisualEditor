@@ -52,16 +52,16 @@ OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupInputWidget );
  * @param {OO.ui.MenuItemWidget} item Selected item
  */
 ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
+	this.closeLookupMenu();
 	if ( item ) {
+		this.setLookupsDisabled( true );
 		this.setValue( item.getData() );
+		this.setLookupsDisabled( false );
 	}
 };
 
 /**
- * Gets a new request object of the current lookup query value.
- *
- * @method
- * @returns {jQuery.Deferred} Deferred object with success and fail handlers already attached
+ * @inheritdoc
  */
 ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 	var value = this.value;
@@ -84,20 +84,14 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 };
 
 /**
- * Get lookup cache item from server response data.
- *
- * @method
- * @param {Mixed} data Response from server
+ * @inheritdoc
  */
 ve.ui.MWTitleInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
 	return data[1] || [];
 };
 
 /**
- * Get list of menu items from a server response.
- *
- * @param {Object} data Query result
- * @returns {OO.ui.MenuItemWidget[]} Menu items
+ * @inheritdoc
  */
 ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
 	var i, len, title, value,
@@ -127,9 +121,9 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 };
 
 /**
- * Get template title
+ * Get title object corresponding to #getValue
  *
- * @returns {mw.Title|null} Template title if valid or null
+ * @returns {mw.Title|null} Title object, or null if value is invalid
  */
 ve.ui.MWTitleInputWidget.prototype.getTitle = function () {
 	var title = this.getValue(),
