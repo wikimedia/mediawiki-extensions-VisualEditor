@@ -243,6 +243,10 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
 		);
 	} );
+
+	// HACK blur any active input so that its dropdown will be hidden and won't end
+	// up being mispositioned
+	this.$content.find( 'input:focus' ).blur();
 };
 
 /**
