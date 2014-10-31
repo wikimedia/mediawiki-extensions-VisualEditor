@@ -7,6 +7,7 @@ David Chan <dchan@wikimedia.org>
 Ed Sanders <esanders@wikimedia.org>
 Inez Korczyński <inez@wikia-inc.com>
 James Forrester  <jforrester@wikimedia.org>
+Marielle Volz <marielle.volz@gmail.com>
 Moriel Schottlender <mschottlender@wikimedia.org>
 Roan Kattouw <roan@wikimedia.org>
 Rob Moen <rmoen@wikimedia.org>
@@ -20,22 +21,37 @@ Aaron Schulz <aschulz@wikimedia.org>
 Adam Wight <spam@ludd.net>
 Alexander Emsenhuber <ialex.wiki@gmail.com>
 Amir E. Aharoni <amir.aharoni@mail.huji.ac.il>
+Andrew Garrett <agarrett@wikimedia.org>
 Antoine Musso <hashar@free.fr>
 Audrey Tang <audreyt@audreyt.org>
+Brad Jorsch <bjorsch@wikimedia.org>
 Brion Vibber <brion@wikimedia.org>
 C. Scott Ananian <cananian@wikimedia.org>
 Chris McMahon <cmcmahon@wikimedia.org>
+Dan Duvall <dduvall@wikimedia.org>
+Derk-Jan Hartman <hartman.wiki@gmail.com>
 Erik Moeller <erik@wikimedia.org>
+Federico Leva <federicoleva@tiscali.it>
 Gabriel Wicke <gwicke@wikimedia.org>
 Jeff Hall <jeffreyehall@gmail.com>
+Jon Robson <jrobson@wikimedia.org>
 Juliusz Gonera <jgonera@gmail.com>
+Kaity Hammerstein <khammerstein@wikimedia.org>
+Kunal Mehta <legoktm@gmail.com>
 Matthew Flaschen <mflaschen@wikimedia.org>
-Neil Kandalgaonkar <neilk@brevity.org>
 Mark A. Hershberger <mah@everybody.org>
 Mark Holmquist <mtraceur@member.fsf.org>
+Niklas Laxström <niklas.laxstrom@gmail.com>
 Ori Livneh <ori@wikimedia.org>
+Quim Gil <quimgil@gmail.com>
 Raimond Spekking <raimond.spekking@gmail.com>
 Ryan Kaldari <rkaldari@wikimedia.org>
+Sam Reed <reedy@wikimedia.org>
+Sam Smith <git@samsmith.io>
 Siebrand Mazeland <siebrand@kitano.nl>
 Subramanya Sastry <ssastry@wikimedia.org>
+Vikas S Yaligar <vikasyaligar.it@gmail.com>
 Željko Filipin <zfilipin@wikimedia.org>
+addshore <addshorewiki@gmail.com>
+Helder <he7d3r@gmail.com>
+Jiabao <jiabao.foss@gmail.com>
