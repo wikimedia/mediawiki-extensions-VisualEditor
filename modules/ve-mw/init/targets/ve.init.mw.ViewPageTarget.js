@@ -439,8 +439,11 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @param {number} newid New revision id, undefined if unchanged
  * @param {boolean} isRedirect Whether this page is a redirect or not
  * @param {string} displayTitle What HTML to show as the page title
+ * @param {Object} lastModified Object containing user-formatted date and time strings
  */
-ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, newid, isRedirect, displayTitle ) {
+ve.init.mw.ViewPageTarget.prototype.onSave = function (
+	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified
+) {
 	var newUrlParams, watchChecked;
 	this.saveDeferred.resolve();
 	if ( !this.pageExists || this.restoring ) {
@@ -482,7 +485,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function ( html, categoriesHtml, ne
 			this.revid = newid;
 		}
 		this.saveDialog.reset();
-		this.replacePageContent( html, categoriesHtml, isRedirect, displayTitle );
+		this.replacePageContent( html, categoriesHtml, isRedirect, displayTitle, lastModified );
 		this.setupSectionEditLinks();
 		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
@@ -1521,9 +1524,18 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
  * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {boolean} isRedirect Whether this page is a redirect or not
  * @param {string} displayTitle What HTML to show as the page title
+ * @param {Object} lastModified Object containing user-formatted date and time strings
  */
-ve.init.mw.ViewPageTarget.prototype.replacePageContent = function ( html, categoriesHtml, isRedirect, displayTitle ) {
+ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
+	html, categoriesHtml, isRedirect, displayTitle, lastModified
+) {
 	var $content = $( $.parseHTML( html ) ), $editableContent;
+
+	$( '#footer-info-lastmod' ).text( ' ' + mw.msg(
+		'lastmodifiedat',
+		lastModified.date,
+		lastModified.time
+	) );
 
 	if ( $( '#mw-imagepage-content' ).length ) {
 		// On file pages, we only want to replace the (local) description.

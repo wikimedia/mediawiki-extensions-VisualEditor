@@ -215,6 +215,7 @@ $wgResourceModules += array(
 			// MW core messages
 			'creating',
 			'editing',
+			'lastmodifiedat',
 			'parentheses',
 			'redirectpagesub',
 			'spamprotectionmatch',

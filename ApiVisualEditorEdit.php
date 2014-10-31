@@ -133,6 +133,14 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				wfDebug( '[VE] ApiVisualEditorEdit - parserOutput was false' );
 			}
 
+			$lang = $this->getLanguage();
+			$ts = $saveresult['edit']['newtimestamp'];
+
+			$result['lastModified'] = array(
+				'date' => $lang->userDate( $ts, $user ),
+				'time' => $lang->userTime( $ts, $user )
+			);
+
 			if ( isset( $saveresult['edit']['newrevid'] ) ) {
 				$result['newrevid'] = intval( $saveresult['edit']['newrevid'] );
 			}
