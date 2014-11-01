@@ -20,6 +20,8 @@
 			"Deryck Chan"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "要執行的動作。",
+	"apihelp-visualeditoredit-param-summary": "編輯摘要。",
 	"tooltip-ca-createsource": "建立此頁面的原始碼",
 	"tooltip-ca-editsource": "編輯此頁面的原始碼",
 	"tooltip-ca-ve-edit": "使用 VisualEditor 編輯此頁",
@@ -235,6 +237,7 @@
 	"visualeditor-toolbar-cite-label": "引用",
 	"visualeditor-toolbar-savedialog": "儲存頁面",
 	"visualeditor-usernamespacepagelink": "Project:使用者命名空間",
+	"visualeditor-version-label": "版本",
 	"visualeditor-viewpage-savewarning": "您確定要放棄儲存並回到檢視模式嗎？",
 	"visualeditor-viewpage-savewarning-discard": "放棄編輯",
 	"visualeditor-viewpage-savewarning-keep": "繼續編輯",

@@ -6,6 +6,7 @@
 			"Pizza1016"
 		]
 	},
+	"apihelp-visualeditoredit-param-captchaid": "ID Captcha (apabila menyimpan dengan jawapan captcha).",
 	"tooltip-ca-createsource": "Cipta kod sumber untuk laman ini",
 	"tooltip-ca-editsource": "Sunting kod sumber untuk laman ini",
 	"tooltip-ca-ve-edit": "Sunting laman ini dengan VisualEditor",
