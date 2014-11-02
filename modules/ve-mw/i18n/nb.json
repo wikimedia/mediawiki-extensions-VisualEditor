@@ -9,6 +9,8 @@
 			"Gloria sah"
 		]
 	},
+	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
+	"apihelp-visualeditoredit-param-summary": "Redigeringsforklaring.",
 	"tooltip-ca-createsource": "Opprett kildekoden for denne siden",
 	"tooltip-ca-editsource": "Rediger kildekoden for denne siden",
 	"tooltip-ca-ve-edit": "Rediger siden med VisualEditor",
@@ -118,6 +120,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "Du kan fremtvinge visning av innholdsfortegnelse på sider med færre enn tre overskrifter, eller tvinge den til å ikke vises i det hele tatt. Som standard vises innholdsfortegnelsen hvis siden har tre eller flere overskrifter.",
 	"visualeditor-dialog-meta-settings-toc-label": "Vis innholdsfortegnelse",
 	"visualeditor-dialog-meta-title": "Valg",
+	"visualeditor-dialog-reference-editing-reused": "Denne referansen er brukt {{PLURAL:$1|én gang|$1  ganger}} på denne siden.",
 	"visualeditor-dialog-reference-options-group-label": "Bruk denne gruppen",
 	"visualeditor-dialog-reference-options-group-placeholder": "Generelle referanser",
 	"visualeditor-dialog-reference-options-name-label": "Gjenbruk med dette navnet",
@@ -236,6 +239,7 @@
 	"visualeditor-toolbar-cite-label": "Siter",
 	"visualeditor-toolbar-savedialog": "Lagre side",
 	"visualeditor-usernamespacepagelink": "Project:Brukersider",
+	"visualeditor-version-label": "Versjon",
 	"visualeditor-viewpage-savewarning": "Er du sikker på at du vil gå tilbake til visningsmodus uten å lagre først?",
 	"visualeditor-viewpage-savewarning-discard": "Forkast endringer",
 	"visualeditor-viewpage-savewarning-keep": "Fortsett å redigere",
