@@ -17,27 +17,27 @@ end
 Then(/^an external link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.links_diff_view.include? "example.com"
+      page.diff_view.include? "example.com"
     end
-    page.links_diff_view.should match Regexp.escape("[http://www.example.com Links]")
+    page.diff_view.should match Regexp.escape("[http://www.example.com Links]")
   end
 end
 
 Then(/^an internal link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.links_diff_view.include? "Main Page"
+      page.diff_view.include? "Main Page"
     end
-    page.links_diff_view.should match Regexp.escape("[[Main Page|Links]]")
+    page.diff_view.should match Regexp.escape("[[Main Page|Links]]")
   end
 end
 
 Then(/^a non\-existing link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.links_diff_view.include? "DoesNotExist"
+      page.diff_view.include? "DoesNotExist"
     end
-    page.links_diff_view.should match Regexp.escape("[[DoesNotExist|Links]]")
+    page.diff_view.should match Regexp.escape("[[DoesNotExist|Links]]")
   end
 end
 
@@ -45,10 +45,11 @@ When(/^I enter (.+) into link Content box$/) do |content|
   on(VisualEditorPage) do |page|
     page.link_textfield_element.when_present
     page.link_textfield_element.send_keys(content)
+    sleep 1
   end
 end
 
 When(/^I click Links Review your changes$/) do
-  on(VisualEditorPage).links_review_changes_element.when_present.click
+  on(VisualEditorPage).review_changes_element.when_present.click
 end
 
