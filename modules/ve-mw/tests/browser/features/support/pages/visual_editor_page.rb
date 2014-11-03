@@ -124,6 +124,11 @@ class VisualEditorPage
   div(:cite_show_more_fields, class: "ve-ui-mwMoreParametersResultWidget-label")
   span(:insert_citation, css: ".oo-ui-flaggedElement-primary > a:nth-child(1) > span:nth-child(2)")
 
+  text_field(:media_search, css: "div.oo-ui-textInputWidget > input")
+  span(:media_apply_changes, text: "Insert")
+  div(:media_select, class: "ve-ui-mwMediaResultWidget-overlay")
+  span(:media_exit, text: "Return to save form")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -147,9 +152,6 @@ class VisualEditorPage
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
     span(:ex, text: "Return to save form")
     span(:insert_references_list, text: "Insert", frame: frame)
-    span(:media_apply_changes, text: "Insert", frame: frame)
-    text_field(:media_search, css: "div.oo-ui-textInputWidget > input", frame: frame)
-    div(:media_select, class: "ve-ui-mwMediaResultWidget-overlay", frame: frame)
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
     text_field(:parameter_box, index: 0, frame: frame)
     div(:parameter_icon, text: "q", frame: frame)
@@ -182,6 +184,6 @@ class VisualEditorPage
     div(:links_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:links_review_changes, class: "oo-ui-labelElement-label", text: "Review your changes", frame: frame)
     div(:media_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
-    span(:media_exit, text: "Return to save form", frame: frame)
+
   end
 end
