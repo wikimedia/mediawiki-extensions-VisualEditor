@@ -69,6 +69,7 @@ class VisualEditorPage
   span(:ve_computer_code, class: "oo-ui-iconElement-icon oo-ui-icon-code")
   div(:ve_heading_menu, class: "oo-ui-iconElement-icon oo-ui-icon-down")
   span(:ve_link_icon, class: "oo-ui-iconElement-icon oo-ui-icon-link")
+  span(:ve_more_markup_options, class: "oo-ui-tool-title-text", text: "More")
   span(:ve_italics, class: "oo-ui-iconElement-icon oo-ui-icon-italic-i")
   span(:ve_media_menu, class: "oo-ui-iconElement-icon oo-ui-icon-picture")
   span(:ve_references, class: "oo-ui-iconElement-icon oo-ui-icon-references")

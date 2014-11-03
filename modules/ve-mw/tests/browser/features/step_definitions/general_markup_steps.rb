@@ -1,3 +1,7 @@
+When(/^I click the More option$/) do
+  on(VisualEditorPage).ve_more_markup_options_element.when_present(15).click
+end
+
 When(/^I click the text style menu$/) do
   on(VisualEditorPage).ve_text_style_element.when_present(15).click
 end
