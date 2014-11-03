@@ -14,6 +14,7 @@
  * @constructor
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @param {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	var settingsPage = this;
@@ -75,7 +76,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	);
 	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
 		$: this.$,
-		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' )
+		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ),
+		$overlay: config.$overlay
 	} );
 	this.redirectTargetField = new OO.ui.FieldLayout(
 		this.redirectTargetInput,

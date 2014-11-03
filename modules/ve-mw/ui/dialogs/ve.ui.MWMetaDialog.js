@@ -67,7 +67,10 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	this.bookletLayout = new OO.ui.BookletLayout( { $: this.$, outlined: true } );
 	this.settingsPage = new ve.ui.MWSettingsPage(
 		'settings',
-		{ $: this.$ }
+		{
+			$: this.$,
+			$overlay: this.$overlay
+		}
 	);
 	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage(
 		'advancedSettings',
