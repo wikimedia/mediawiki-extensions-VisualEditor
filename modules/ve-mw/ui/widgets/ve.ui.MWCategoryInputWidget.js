@@ -47,10 +47,7 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupInputWidget );
 /* Methods */
 
 /**
- * Gets a new request object of the current lookup query value.
- *
- * @method
- * @returns {jqXHR} AJAX object without success or fail handlers attached
+ * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
 	return ve.init.target.constructor.static.apiRequest( {
@@ -63,16 +60,12 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
 };
 
 /**
- * Get lookup cache item from server response data.
- *
- * @method
- * @param {Mixed} data Response from server
+ * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
-	var result = [], linkCacheUpdate = {};
-	data.query = data.query || {};
+	var result = [], linkCacheUpdate = {}, query = data.query || {};
 
-	$.each( data.query.allcategories || [], function ( index, category ) {
+	$.each( query.allcategories || [], function ( index, category ) {
 		result.push( category['*'] );
 		linkCacheUpdate['Category:' + category['*']] = { missing: false, hidden: category.hasOwnProperty( 'hidden' ) };
 	}.bind( this ) );
@@ -83,10 +76,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( da
 };
 
 /**
- * Get list of menu items from a server response.
- *
- * @param {Object} data Query result
- * @returns {OO.ui.MenuItemWidget[]} Menu items
+ * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
 	var exactMatch = false,

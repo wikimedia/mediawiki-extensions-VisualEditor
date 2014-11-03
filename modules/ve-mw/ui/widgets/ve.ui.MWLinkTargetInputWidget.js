@@ -27,7 +27,6 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 
 	// Properties
 	this.annotation = null;
-	this.choosing = false;
 
 	// Events
 	this.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
@@ -55,30 +54,31 @@ OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupInputWidget );
  *
  * @method
  * @param {OO.ui.MenuItemWidget|null} item Selected item
- * @fires change
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
+	this.closeLookupMenu();
 	if ( item ) {
-		// WARNING: This assumes that #setAnnotation will emit `change` events synchronously
-		// TODO: Consider how this trick can be solved better, and possibly pushed upstream to
-		// OO.ui.LookupInputWidget so others don't fall into this trap
-		this.choosing = true;
+		this.setLookupsDisabled( true );
 		this.setAnnotation( item.getData() );
-		this.choosing = false;
+		this.setLookupsDisabled( false );
 	} else if ( this.annotation ) {
 		this.annotation = null;
-		this.emit( 'change', this.getValue() );
 	}
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWLinkTargetInputWidget.prototype.onLookupInputChange = function () {
-	// WARNING: See #onLookupMenuItemChoose for why this is fragile
-	if ( !this.choosing ) {
-		this.openLookupMenu();
-	}
+ve.ui.MWLinkTargetInputWidget.prototype.focus = function () {
+	var retval;
+	// Prevent programmatic focus from opening the menu
+	this.setLookupsDisabled( true );
+
+	// Parent method
+	retval = ve.ui.MWLinkTargetInputWidget.super.prototype.focus.apply( this, arguments );
+
+	this.setLookupsDisabled( false );
+	return retval;
 };
 
 /**
@@ -114,7 +114,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 	} else {
 		// Don't send invalid titles to the API.
 		// Just pretend it returned nothing so we can show the 'invalid title' section
-		return $.Deferred().resolve( [] ).promise( { abort: function () {
+		return $.Deferred().resolve( {} ).promise( { abort: function () {
 			// Do nothing. This is just so OOUI doesn't break due to abort being undefined.
 		} } );
 	}
@@ -280,7 +280,6 @@ ve.ui.MWLinkTargetInputWidget.prototype.initializeLookupMenuSelection = function
 	if ( item ) {
 		// Set annotation directly, bypassing re-setting the value of the input
 		this.annotation = item.getData();
-		this.emit( 'change', this.getValue() );
 	}
 };
 
