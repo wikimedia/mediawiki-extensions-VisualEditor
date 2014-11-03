@@ -55,6 +55,5 @@ ve.ui.MWReferenceGroupInputWidget.prototype.populateMenu = function ( internalLi
 			}
 		}
 	) ), 0 );
-	this.onInputChange( this.input.getValue() );
 	this.menu.toggle( false );
 };
