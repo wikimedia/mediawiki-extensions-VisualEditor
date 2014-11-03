@@ -27,6 +27,7 @@ end
 When(/^I click Reference$/) do
   on(VisualEditorPage) do |page|
     page.insert_menu_element.when_present.click
+    page.ve_more_references_options_element.when_present.click
     page.ve_references_element.when_present.click
   end
 end

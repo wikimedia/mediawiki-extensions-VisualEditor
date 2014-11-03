@@ -70,6 +70,7 @@ class VisualEditorPage
   div(:ve_heading_menu, class: "oo-ui-iconElement-icon oo-ui-icon-down")
   span(:ve_link_icon, class: "oo-ui-iconElement-icon oo-ui-icon-link")
   span(:ve_more_markup_options, class: "oo-ui-tool-title-text", text: "More")
+  a(:ve_more_references_options, css: "span.oo-ui-tool-name-more-fewer:nth-child(9) > a:nth-child(1)")
   span(:ve_italics, class: "oo-ui-iconElement-icon oo-ui-icon-italic-i")
   span(:ve_media_menu, class: "oo-ui-iconElement-icon oo-ui-icon-picture")
   span(:ve_references, class: "oo-ui-iconElement-icon oo-ui-icon-references")
@@ -131,6 +132,9 @@ class VisualEditorPage
 
   div(:options_page_title, class: "oo-ui-processDialog-location", text: "Options")
 
+  div(:title, class: "oo-ui-processDialog-location")
+  span(:insert_references_list, text: "Insert")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -152,7 +156,6 @@ class VisualEditorPage
     text_area(:describe_change, index: 0)
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
     span(:ex, text: "Return to save form")
-    span(:insert_references_list, text: "Insert", frame: frame)
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
     text_field(:parameter_box, index: 0, frame: frame)
     div(:parameter_icon, text: "q", frame: frame)
@@ -161,7 +164,6 @@ class VisualEditorPage
     div(:review_failed, class: "oo-ui-window-head", frame: frame)
     div(:template_header, class: "ve-ui-mwTransclusionDialog-single", frame: frame)
     li(:template_list_item, text: "S", frame: frame)
-    div(:title, class: "oo-ui-processDialog-location", frame: frame)
     text_area(:transclusion_textarea, index: 0, frame: frame)
     text_field(:transclusion_textfield, index: 0, frame: frame)
     span(:existing_reference, text: "Use an existing reference", frame: frame)
