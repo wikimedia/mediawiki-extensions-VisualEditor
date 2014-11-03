@@ -135,6 +135,8 @@ class VisualEditorPage
   div(:title, class: "oo-ui-processDialog-location")
   span(:insert_references_list, text: "Insert")
 
+  span(:confirm_switch, text: "Keep changes")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -149,7 +151,6 @@ class VisualEditorPage
   in_iframe(index: 0) do |frame|
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert", frame: frame)
-    span(:confirm_switch, text: "Keep changes", frame: frame)
     span(:confirm_switch_cancel_on_switch, text: "Cancel", frame: frame)
     span(:confirm_switch_discard, text: "Discard changes", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
