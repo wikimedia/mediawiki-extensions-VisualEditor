@@ -19,7 +19,7 @@ When(/^I enter and save a (.+) edit$/) do |count|
     step "I click Edit for VisualEditor"
     step "I insert the text #{edit_text}"
     step "I click Save page"
-    step "I click Save page another time"
+    step "I click Save page the second time"
   end
 end
 
