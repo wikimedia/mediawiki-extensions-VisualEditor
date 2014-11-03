@@ -15,8 +15,20 @@ Feature: VisualEditor general text markup features
   Examples:
     | type_of_markup | expected_markup_text                          |
     | Bold           | '''General Markup VisualEditor Test'''        |
-    | Computer Code  | <code>General Markup VisualEditor Test</code> |
     | Italics        | ''General Markup VisualEditor Test''          |
+
+
+  Scenario Outline: VisualEditor more general markup
+    When I click the text style menu
+      And I click the More option
+    And I click the <type_of_markup> menu option
+    And I click Save page
+    And I click Review your changes
+    Then <expected_markup_text> should appear in the diff view
+    And I can click the X on the save box
+  Examples:
+    | type_of_markup | expected_markup_text                          |
+    | Computer Code  | <code>General Markup VisualEditor Test</code> |
     | Strikethrough  | <s>General Markup VisualEditor Test</s>       |
     | Subscript      | <sub>General Markup VisualEditor Test</sub>   |
     | Superscript    | <sup>General Markup VisualEditor Test</sup>   |
