@@ -79,6 +79,7 @@ end
 When(/^I click Decrease indentation$/) do
   on(VisualEditorPage) do |page|
     sleep 2 #this is waiting for the Review Your Changes iframe to disappear
+    step "I click in the editable part"
     page.bullet_number_selector_element.when_present(15).click
     page.decrease_indentation_element.when_present.click
   end

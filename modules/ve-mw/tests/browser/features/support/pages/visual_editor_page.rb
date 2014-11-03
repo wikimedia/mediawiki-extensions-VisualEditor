@@ -97,6 +97,7 @@ class VisualEditorPage
   span(:review_changes, class: "oo-ui-labelElement-label", text: "Review your changes")
   span(:return_to_save, class: "oo-ui-labelElement-label", text: "Return to save form")
   span(:second_save_page, css: ".oo-ui-flaggedElement-primary > a:nth-child(1) > span:nth-child(2)")
+  span(:confirm_switch_cancel, text: "Resume editing")
 
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
@@ -137,7 +138,6 @@ class VisualEditorPage
     span(:add_template, text: "Add template", frame: frame)
     span(:insert_template, text: "Insert", frame: frame)
     span(:confirm_switch, text: "Keep changes", frame: frame)
-    span(:confirm_switch_cancel, text: "Resume editing", frame: frame)
     span(:confirm_switch_cancel_on_switch, text: "Cancel", frame: frame)
     span(:confirm_switch_discard, text: "Discard changes", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
