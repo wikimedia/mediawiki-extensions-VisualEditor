@@ -25,7 +25,7 @@ Feature: VisualEditor Cite
       And I fill in the new field "New website field contents"
       And I click Insert Citation
       And I click Save page
-      And I click Links Review your changes
+      And I click Review your changes
     Then diff view should show the Website citation added
 
   Scenario: Book
@@ -45,7 +45,7 @@ Feature: VisualEditor Cite
       And I fill in the new field "New book field contents"
       And I click Insert Citation
       And I click Save page
-      And I click Links Review your changes
+      And I click Review your changes
     Then diff view should show the Book citation added
 
   Scenario: News
@@ -60,7 +60,7 @@ Feature: VisualEditor Cite
       And the News input field titles are in the correct order
       And I click Insert Citation
       And I click Save page
-      And I click Links Review your changes
+      And I click Review your changes
   Then diff view should show the News citation added
 
   Scenario: Journal
@@ -70,7 +70,7 @@ Feature: VisualEditor Cite
       And the Journal input field titles are in the correct order
       And I click Insert Citation
       And I click Save page
-      And I click Links Review your changes
+      And I click Review your changes
   Then diff view should show the Journal citation added
 
   Scenario: Basic
