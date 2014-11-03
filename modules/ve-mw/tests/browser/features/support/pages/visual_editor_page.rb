@@ -129,6 +129,8 @@ class VisualEditorPage
   div(:media_select, class: "ve-ui-mwMediaResultWidget-overlay")
   span(:media_exit, text: "Return to save form")
 
+  div(:options_page_title, class: "oo-ui-processDialog-location", text: "Options")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -136,7 +138,6 @@ class VisualEditorPage
     text_field(:link_textfield, index: 0, frame: frame)
     span(:another_save_page, class: "oo-ui-labelElement-label", text: "Save page", frame: frame)
     div(:suggestion_list, class: "ve-ui-mwTitleInputWidget-menu")
-    div(:options_page_title, class: "oo-ui-processDialog-location", text: "Options", frame: frame)
     div(:ve_link_ui, class: "oo-ui-window-head", frame: frame)
   end
 
