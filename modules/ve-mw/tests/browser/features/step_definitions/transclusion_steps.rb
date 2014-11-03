@@ -14,6 +14,7 @@ When(/^I click Remove template$/) do
 end
 
 Given(/^I click the parameter representation containing q$/) do
+  sleep 1
   on(VisualEditorPage).parameter_icon_element.when_present.click
 end
 
@@ -25,7 +26,7 @@ When(/^I click Transclusion$/) do
 end
 
 When(/^I enter (.+) in the parameter box$/) do |param_value|
-  on(VisualEditorPage).parameter_box_element.when_present.send_keys(param_value)
+  on(VisualEditorPage).transclusion_description_element.when_present.send_keys(param_value)
 end
 
 When(/^I enter (.+) into transclusion Content box$/) do |content|
@@ -41,7 +42,7 @@ Then(/^I click the Add template button$/) do
 end
 
 Then(/^I see an input text area$/) do
-  on(VisualEditorPage).transclusion_textfield_element.when_present
+  on(VisualEditorPage).transclusion_description_element.when_present
 end
 
 Then(/^I should see the Add parameter link$/) do

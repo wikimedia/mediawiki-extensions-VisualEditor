@@ -137,6 +137,13 @@ class VisualEditorPage
 
   span(:confirm_switch, text: "Keep changes")
 
+  text_field(:transclusion_textfield, css: "div.oo-ui-widget-enabled:nth-child(4) > input:nth-child(1)")
+  text_field(:transclusion_description, css: ".oo-ui-inputWidget > input:nth-child(1)")
+  span(:add_template, text: "Add template")
+  span(:insert_template, text: "Insert")
+  div(:parameter_icon, text: "q")
+  a(:remove_parameter, css: ".ve-ui-mwParameterPage-removeButton > a:nth-child(1)")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -149,8 +156,6 @@ class VisualEditorPage
 
   # not having beta warning makes iframes off by one
   in_iframe(index: 0) do |frame|
-    span(:add_template, text: "Add template", frame: frame)
-    span(:insert_template, text: "Insert", frame: frame)
     span(:confirm_switch_cancel_on_switch, text: "Cancel", frame: frame)
     span(:confirm_switch_discard, text: "Discard changes", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -158,15 +163,10 @@ class VisualEditorPage
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
     span(:ex, text: "Return to save form")
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
-    text_field(:parameter_box, index: 0, frame: frame)
-    div(:parameter_icon, text: "q", frame: frame)
-    a(:remove_parameter, css: ".ve-ui-mwParameterPage-removeButton > a:nth-child(1)", frame: frame)
     a(:remove_template, title: "Remove template", frame: frame)
     div(:review_failed, class: "oo-ui-window-head", frame: frame)
     div(:template_header, class: "ve-ui-mwTransclusionDialog-single", frame: frame)
     li(:template_list_item, text: "S", frame: frame)
-    text_area(:transclusion_textarea, index: 0, frame: frame)
-    text_field(:transclusion_textfield, index: 0, frame: frame)
     span(:existing_reference, text: "Use an existing reference", frame: frame)
     div(:extension_reference, class: "ve-ui-mwReferenceResultWidget-shield", frame: frame)
     span(:page_settings_heading, css: "div.oo-ui-fieldsetLayout > span.oo-ui-labelElement-label", frame: frame)
