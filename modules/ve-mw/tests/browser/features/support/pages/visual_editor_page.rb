@@ -144,6 +144,8 @@ class VisualEditorPage
   div(:parameter_icon, text: "q")
   a(:remove_parameter, css: ".ve-ui-mwParameterPage-removeButton > a:nth-child(1)")
 
+  div(:review_failed, class: "oo-ui-window-head")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -164,7 +166,6 @@ class VisualEditorPage
     span(:ex, text: "Return to save form")
     checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
     a(:remove_template, title: "Remove template", frame: frame)
-    div(:review_failed, class: "oo-ui-window-head", frame: frame)
     div(:template_header, class: "ve-ui-mwTransclusionDialog-single", frame: frame)
     li(:template_list_item, text: "S", frame: frame)
     span(:existing_reference, text: "Use an existing reference", frame: frame)
