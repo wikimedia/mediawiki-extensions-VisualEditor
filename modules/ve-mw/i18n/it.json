@@ -19,6 +19,8 @@
 			"Nemo bis"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "Azione da eseguire.",
+	"apihelp-visualeditor-param-page": "La pagina su cui eseguire l'azione.",
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
 	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
 	"tooltip-ca-ve-edit": "Modifica questa pagina con VisualEditor",
@@ -128,6 +130,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "Puoi forzare un indice che elenchi tutte le intestazioni nella pagina su pagine con meno di tre sezioni, o forzare che non appaia mai. Per impostazione predefinita, viene visualizzato se la pagina ha tre o più intestazioni.",
 	"visualeditor-dialog-meta-settings-toc-label": "Mostra l'indice",
 	"visualeditor-dialog-meta-title": "Opzioni",
+	"visualeditor-dialog-reference-editing-reused": "Questo riferimento è usato $1 {{PLURAL:$1|volta|volte}} su questa pagina.",
 	"visualeditor-dialog-reference-options-group-label": "Usa questo gruppo",
 	"visualeditor-dialog-reference-options-group-placeholder": "Riferimenti generali",
 	"visualeditor-dialog-reference-options-name-label": "Riutilizza questo nome",
@@ -246,6 +249,7 @@
 	"visualeditor-toolbar-cite-label": "Cita",
 	"visualeditor-toolbar-savedialog": "Salva la pagina",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
+	"visualeditor-version-label": "Versione",
 	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Prosegui nella modifica",

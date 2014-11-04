@@ -129,7 +129,7 @@
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "Label for the checkbox to enable the use of the display title text box.",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Message displayed as contextual help about the <nowiki>{{DISPLAYTITLE:…}}</nowiki> control to editors in the advanced page settings panel.",
 	"visualeditor-dialog-meta-settings-hiddencat-help": "Message displayed as contextual help about the <nowiki>__HIDDENCAT__</nowiki> tag to editors in the page settings panel on categories.",
-	"visualeditor-dialog-meta-settings-hiddencat-label": "Prompt for the checkbox to let the user hide this category from pages.",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "Prompt for the checkbox to let the user hide this category from pages.\n{{Identical|Hidden category}}",
 	"visualeditor-dialog-meta-settings-index-default": "Label for the option to have default indexing behavior.\n{{Identical|Default}}",
 	"visualeditor-dialog-meta-settings-index-disable": "Label for the option for indexing to be forced off.\n{{Identical|No}}",
 	"visualeditor-dialog-meta-settings-index-force": "Label for the option for indexing to be forced on.\n{{Identical|Yes}}",
