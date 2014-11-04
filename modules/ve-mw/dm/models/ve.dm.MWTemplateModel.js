@@ -88,6 +88,7 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 	var href, title;
 	if ( name instanceof mw.Title ) {
 		title = name;
+		name = title.getPrefixedText();
 	} else {
 		title = mw.Title.newFromText( name, mw.config.get( 'wgNamespaceIds' ).template );
 	}
