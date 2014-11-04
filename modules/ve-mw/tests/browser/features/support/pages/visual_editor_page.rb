@@ -146,6 +146,9 @@ class VisualEditorPage
 
   div(:review_failed, class: "oo-ui-window-head")
 
+  span(:confirm_switch_cancel_on_switch, text: "Cancel")
+  span(:confirm_switch_discard, text: "Discard changes")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -158,8 +161,6 @@ class VisualEditorPage
 
   # not having beta warning makes iframes off by one
   in_iframe(index: 0) do |frame|
-    span(:confirm_switch_cancel_on_switch, text: "Cancel", frame: frame)
-    span(:confirm_switch_discard, text: "Discard changes", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
     text_area(:describe_change, index: 0)
     div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
