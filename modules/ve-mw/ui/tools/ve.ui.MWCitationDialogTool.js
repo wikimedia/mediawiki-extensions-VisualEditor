@@ -30,8 +30,6 @@ ve.ui.MWCitationDialogTool.static.group = 'cite';
 
 ve.ui.MWCitationDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
-ve.ui.MWCitationDialogTool.static.requiresSelection = [ 'linear' ];
-
 /**
  * Only display tool for single-template transclusions of these templates.
  *

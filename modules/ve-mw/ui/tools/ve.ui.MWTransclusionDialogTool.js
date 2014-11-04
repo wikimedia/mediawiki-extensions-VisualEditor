@@ -35,8 +35,6 @@ ve.ui.MWTransclusionDialogTool.static.title =
 
 ve.ui.MWTransclusionDialogTool.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
-ve.ui.MWTransclusionDialogTool.static.requiresSelection = [ 'linear' ];
-
 ve.ui.MWTransclusionDialogTool.static.commandName = 'transclusion';
 
 /**

@@ -854,7 +854,10 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			tool.static.autoAddToGroup = true;
 			ve.ui.toolFactory.register( tool );
 			ve.ui.commandRegistry.register(
-				new ve.ui.Command( name, 'window', 'open', 'transclusion', data )
+				new ve.ui.Command(
+					name, 'window', 'open',
+					{ data: ['transclusion', data], supportedSelections: ['linear'] }
+				)
 			);
 			// Generate citation tool
 			name = 'cite-' + item.name;
@@ -872,7 +875,10 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			tool.static.autoAddToGroup = true;
 			ve.ui.toolFactory.register( tool );
 			ve.ui.commandRegistry.register(
-				new ve.ui.Command( name, 'window', 'open', name, data )
+				new ve.ui.Command(
+					name, 'window', 'open',
+					{ data: [name, data], supportedSelections: ['linear'] }
+				)
 			);
 			// Generate dialog
 			dialog = function GeneratedMWCitationDialog( config ) {
