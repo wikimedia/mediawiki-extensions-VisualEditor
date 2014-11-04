@@ -152,6 +152,10 @@ $wgResourceModules += array(
 		'dependencies' => 'unicodejs'
 	),
 
+	'rangefix' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => 'lib/ve/lib/rangefix/rangefix.js'
+	),
+
 	'ext.visualEditor.viewPageTarget.init' => $wgVisualEditorResourceTemplate + array(
 		'class' => 'VisualEditorViewPageTargetInitModule',
 		'scripts' => 'modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.init.js',
@@ -267,6 +271,7 @@ $wgResourceModules += array(
 			'oojs',
 			'oojs-ui',
 			'unicodejs',
+			'rangefix',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
