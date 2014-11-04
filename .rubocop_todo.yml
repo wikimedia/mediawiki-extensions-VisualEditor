@@ -23,11 +23,6 @@ Lint/ParenthesesAsGroupedExpression:
 Lint/UnusedBlockArgument:
   Enabled: false
 
-# Offense count: 1
-# Configuration parameters: CountComments.
-Metrics/ClassLength:
-  Max: 167
-
 # Offense count: 185
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:

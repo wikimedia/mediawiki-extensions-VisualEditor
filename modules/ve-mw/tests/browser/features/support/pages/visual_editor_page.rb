@@ -26,6 +26,8 @@ class VisualEditorPage
   span(:looks_good, class: "oo-ui-labelElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
+  span(:option_advanced_settings, class:"oo-ui-tool-title", text:"Advanced settings")
+  span(:option_page_settings, class:"oo-ui-tool-title", text:"Page settings")
   div(:page_text, id: "mw-content-text")
   a(:page_title, text: /Page title/)
   a(:paragraph, text: /Paragraph/)
@@ -149,6 +151,8 @@ class VisualEditorPage
   span(:confirm_switch_cancel_on_switch, text: "Cancel")
   span(:confirm_switch_discard, text: "Discard changes")
 
+  div(:options_settings_content, class: "oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-scrollable oo-ui-panelLayout-expanded oo-ui-pageLayout oo-ui-pageLayout-active")
+
   in_iframe(index: 0) do |frame|
     a(:beta_warning, title: "Close", frame: frame)
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
@@ -183,6 +187,7 @@ class VisualEditorPage
     a(:insert_media, css: "div.oo-ui-processDialog-actions-primary > div.oo-ui-buttonElement-frameless > a", frame: frame)
     text_area(:formula_area, class: "oo-ui-ltr", frame: frame)
     div(:settings_apply_button, class: "oo-ui-processDialog-actions-primary", frame: frame)
+
   end
 
   # not having beta warning makes iframes off by one
@@ -190,6 +195,7 @@ class VisualEditorPage
     div(:links_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
     span(:links_review_changes, class: "oo-ui-labelElement-label", text: "Review your changes", frame: frame)
     div(:media_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
-
+    span(:media_exit, text: "Return to save form", frame: frame)
+    div(:advanced_settings_overlay, class:"oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout", frame: frame)
   end
 end
