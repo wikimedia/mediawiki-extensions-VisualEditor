@@ -153,31 +153,26 @@ class VisualEditorPage
 
   div(:options_settings_content, class: "oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-scrollable oo-ui-panelLayout-expanded oo-ui-pageLayout oo-ui-pageLayout-active")
 
-  in_iframe(index: 0) do |frame|
-    a(:beta_warning, title: "Close", frame: frame)
-    div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
-    span(:links_done, text: "Done", frame: frame)
-    text_field(:link_textfield, index: 0, frame: frame)
-    span(:another_save_page, class: "oo-ui-labelElement-label", text: "Save page", frame: frame)
-    div(:suggestion_list, class: "ve-ui-mwTitleInputWidget-menu")
-    div(:ve_link_ui, class: "oo-ui-window-head", frame: frame)
-  end
+  checkbox(:minor_edit, id: "wpMinoredit")
+  div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
+  span(:ex, text: "Return to save form")
+  text_area(:describe_change, index: 0)
 
-  # not having beta warning makes iframes off by one
   in_iframe(index: 0) do |frame|
-    div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame)
-    text_area(:describe_change, index: 0)
-    div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
-    span(:ex, text: "Return to save form")
-    checkbox(:minor_edit, id: "wpMinoredit", frame: frame)
-    a(:remove_template, title: "Remove template", frame: frame)
-    div(:template_header, class: "ve-ui-mwTransclusionDialog-single", frame: frame)
-    li(:template_list_item, text: "S", frame: frame)
-    span(:existing_reference, text: "Use an existing reference", frame: frame)
+
+    #ACTUALLY IS IN THE IFRAME:
     div(:extension_reference, class: "ve-ui-mwReferenceResultWidget-shield", frame: frame)
+    span(:existing_reference, text: "Use an existing reference", frame: frame)
+    a(:remove_template, title: "Remove template", frame: frame)
+    div(:ve_link_ui, class: "oo-ui-window-head", frame: frame)
+    div(:suggestion_list, class: "ve-ui-mwTitleInputWidget-menu")
+    span(:another_save_page, class: "oo-ui-labelElement-label", text: "Save page", frame: frame)
+    text_field(:link_textfield, index: 0, frame: frame)
+    span(:links_done, text: "Done", frame: frame)
+    div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame) #ALSO USED IN LANGUAGE SCREENSHOT
+
+    #USED IN LANGUAGE SCREENSHOT TEST:
     span(:page_settings_heading, css: "div.oo-ui-fieldsetLayout > span.oo-ui-labelElement-label", frame: frame)
-    div(:redirect_page_option, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline", frame: frame)
-    div(:target_redirect, class: "oo-ui-layout oo-ui-fieldLayout oo-ui-fieldLayout-align-top oo-ui-fieldLayout-disabled", frame: frame)
     div(:prevent_redirect, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline oo-ui-fieldLayout-disabled", frame: frame)
     div(:table_of_contents, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top", frame: frame)
     div(:page_settings_editlinks, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline", frame: frame)
