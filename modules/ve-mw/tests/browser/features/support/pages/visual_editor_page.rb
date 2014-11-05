@@ -189,13 +189,4 @@ class VisualEditorPage
     div(:settings_apply_button, class: "oo-ui-processDialog-actions-primary", frame: frame)
 
   end
-
-  # not having beta warning makes iframes off by one
-  in_iframe(index: 1) do |frame|
-    div(:links_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
-    span(:links_review_changes, class: "oo-ui-labelElement-label", text: "Review your changes", frame: frame)
-    div(:media_diff_view, class: "ve-ui-mwSaveDialog-viewer", frame: frame)
-    span(:media_exit, text: "Return to save form", frame: frame)
-    div(:advanced_settings_overlay, class:"oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout", frame: frame)
-  end
 end
