@@ -856,7 +856,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			ve.ui.commandRegistry.register(
 				new ve.ui.Command(
 					name, 'window', 'open',
-					{ data: ['transclusion', data], supportedSelections: ['linear'] }
+					{ args: ['transclusion', data], supportedSelections: ['linear'] }
 				)
 			);
 			// Generate citation tool
@@ -877,7 +877,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			ve.ui.commandRegistry.register(
 				new ve.ui.Command(
 					name, 'window', 'open',
-					{ data: [name, data], supportedSelections: ['linear'] }
+					{ args: [name, data], supportedSelections: ['linear'] }
 				)
 			);
 			// Generate dialog
