@@ -40,7 +40,6 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	} );
 
 	// Events
-	this.input.on( 'enter', this.onLookupEnter.bind( this ) );
 	this.input.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 	this.popup.connect( this, {
 		removeCategory: 'onRemoveCategory',
@@ -83,20 +82,6 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
  */
 
 /* Methods */
-
-/**
- * Handle enter event in input field.
- */
-ve.ui.MWCategoryWidget.prototype.onLookupEnter = function () {
-	if ( this.input.getValue() !== '' ) {
-		var item = this.input.getCategoryItemFromValue( this.input.getValue() ),
-			categoryWidget = this;
-		this.queryCategoryHiddenStatus( [item.name] ).done( function () {
-			categoryWidget.emit( 'newCategory', item );
-		} );
-		this.input.setValue( '' );
-	}
-};
 
 /**
  * Handle menu item select event.
