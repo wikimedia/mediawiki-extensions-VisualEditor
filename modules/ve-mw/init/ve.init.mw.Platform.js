@@ -68,7 +68,7 @@ ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
 
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
-	if ( key in this.parsedMessages ) {
+	if ( Object.prototype.hasOwnProperty.call( this.parsedMessages, key ) ) {
 		// Prefer parsed results from VisualEditorDataModule if available.
 		return this.parsedMessages[key];
 	}

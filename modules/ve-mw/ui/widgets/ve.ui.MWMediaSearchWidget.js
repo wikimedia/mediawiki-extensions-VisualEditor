@@ -226,7 +226,7 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 		// ve.ui.MWMediaResultWidget
 		if ( pages[page].imageinfo && pages[page].imageinfo.length > 0 ) {
 			title = new mw.Title( pages[page].title ).getMainText();
-			if ( !( title in this.titles ) ) {
+			if ( !Object.prototype.hasOwnProperty.call( this.titles, title ) ) {
 				this.titles[title] = true;
 				items.push(
 					new ve.ui.MWMediaResultWidget(
