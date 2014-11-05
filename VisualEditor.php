@@ -153,7 +153,8 @@ $wgResourceModules += array(
 	),
 
 	'rangefix' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => 'lib/ve/lib/rangefix/rangefix.js'
+		'scripts' => 'lib/ve/lib/rangefix/rangefix.js',
+		'targets' => array( 'desktop', 'mobile' )
 	),
 
 	'ext.visualEditor.viewPageTarget.init' => $wgVisualEditorResourceTemplate + array(
