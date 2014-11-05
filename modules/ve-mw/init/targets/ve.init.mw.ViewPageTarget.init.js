@@ -352,8 +352,8 @@
 
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'edit-link-click' } );
-				target.activate();
-			} ).always( function () { $spinner.remove(); } );
+				target.activate().always( function () { $spinner.remove(); } );
+			} );
 		},
 
 		onEditSectionLinkClick: function ( e ) {
@@ -372,8 +372,8 @@
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'section-edit-link-click' } );
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-				target.activate();
-			} ).always( function () { $spinner.remove(); } );
+				target.activate().always( function () { $spinner.remove(); } );
+			} );
 		}
 	};
 
