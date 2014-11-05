@@ -1063,6 +1063,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-meta-categories-input-movecategorylabel',
 			'visualeditor-dialog-meta-categories-input-newcategorylabel',
 			'visualeditor-dialog-meta-categories-input-placeholder',
+			'visualeditor-dialog-meta-categories-missing',
 			'visualeditor-dialog-meta-categories-options',
 			'visualeditor-dialog-meta-categories-section',
 			'visualeditor-dialog-meta-categories-sortkey-label',

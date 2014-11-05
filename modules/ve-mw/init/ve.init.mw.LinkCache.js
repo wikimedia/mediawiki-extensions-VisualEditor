@@ -86,7 +86,7 @@
 	/**
 	 * Requests information about the title, then adds classes to the provided element as appropriate.
 	 *
-	 * @param {string} title Defaults to 'href' attribute of $element
+	 * @param {string} title
 	 * @param {jQuery} $element Element to style
 	 */
 	ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {

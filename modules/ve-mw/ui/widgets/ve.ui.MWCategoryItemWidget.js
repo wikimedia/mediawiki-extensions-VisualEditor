@@ -17,6 +17,7 @@
  * @param {Object} [config] Configuration options
  * @cfg {Object} [item] Category item
  * @cfg {boolean} [hidden] Whether the category is hidden or not
+ * @cfg {boolean} [missing] Whether the category's description page is missing
  * @cfg {string} [redirectTo] The name of the category this category's page redirects to.
  */
 ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
@@ -35,6 +36,7 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	this.sortKey = config.item.sortKey || '';
 	this.metaItem = config.item.metaItem;
 	this.isHidden = config.hidden;
+	this.isMissing = config.missing;
 	this.menuOpen = false;
 	this.$label = this.$( '<span>' );
 	this.$categoryItem = this.$( '<div>' );
@@ -49,6 +51,15 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	this.$label
 		.addClass( 've-ui-mwCategoryItemWidget-label' )
 		.text( config.redirectTo || this.value );
+	if ( config.redirectTo ) {
+		ve.init.platform.linkCache.styleElement( mw.Title.newFromText(
+			config.redirectTo,
+			mw.config.get( 'wgNamespaceIds' ).category
+		).getPrefixedText(), this.$label );
+	} else {
+		ve.init.platform.linkCache.styleElement( this.name, this.$label );
+	}
+
 	this.$categoryItem
 		.addClass( 've-ui-mwCategoryItemWidget-button' )
 		.append( this.$label, this.$indicator );

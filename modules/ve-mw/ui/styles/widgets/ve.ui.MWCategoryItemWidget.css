@@ -55,6 +55,10 @@
 	color: #333;
 }
 
+.ve-ui-mwCategoryItemWidget-label.new {
+	color: #BA0000;
+}
+
 .ve-ui-mwCategoryItemWidget-button:active {
 	border-color: #ddd;
 	box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.07);
