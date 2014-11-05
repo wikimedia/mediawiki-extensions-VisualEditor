@@ -65,8 +65,8 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 2.25em;
-	height: 2.25em;
+	width: 2em;
+	height: 100%;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
