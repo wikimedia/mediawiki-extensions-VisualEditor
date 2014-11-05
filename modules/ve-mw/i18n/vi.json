@@ -14,6 +14,8 @@
 	"apihelp-visualeditor-param-page": "Trang để thực hiện các tác vụ.",
 	"apihelp-visualeditor-param-wikitext": "Mã wiki để gửi cho Parsoid để nó chuyển đổi thành mã HTML (paction=parsefragment).",
 	"apihelp-visualeditoredit-description": "Lưu một trang HTML5 vào MediaWiki (chuyển đổi thành mã wiki qua dịch vụ Parsoid).",
+	"apihelp-visualeditoredit-param-captchaid": "ID CAPTCHA (khi lưu với một lời giải CAPTCHA).",
+	"apihelp-visualeditoredit-param-captchaword": "Lời giải CAPTCHA (khi lưu với một lời giải CAPTCHA).",
 	"apihelp-visualeditoredit-param-html": "Mã HTML để gửi cho Parsoid để nó gửi lại mã wiki.",
 	"apihelp-visualeditoredit-param-minor": "Đánh dấu là sửa đổi nhỏ.",
 	"apihelp-visualeditoredit-param-oldid": "Số phiên bản để sử dụng. Phiên bản hiện tại theo mặc định. Sử dụng 0 cho trang mới.",
