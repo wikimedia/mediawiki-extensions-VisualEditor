@@ -336,9 +336,6 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 		this.showPageContent();
 		this.restorePageTitle();
 
-		// Clear the selection; needed in Firefox for bug 71852
-		window.getSelection().removeAllRanges();
-
 		// If there is a load in progress, abort it
 		if ( this.loading ) {
 			this.loading.abort();
