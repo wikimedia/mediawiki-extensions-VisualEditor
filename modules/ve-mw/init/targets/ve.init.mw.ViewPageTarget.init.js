@@ -339,8 +339,7 @@
 				return;
 			}
 
-			var $spinner = $( '<div class="mw-viewPageTarget-loading"></div>' );
-			$( '#firstHeading' ).prepend( $spinner );
+			init.showLoading();
 
 			if ( window.history.pushState && uri.query.veaction !== 'edit' ) {
 				//Set veaction to edit
@@ -352,7 +351,7 @@
 
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'edit-link-click' } );
-				target.activate().always( function () { $spinner.remove(); } );
+				target.activate().always( init.hideLoading.bind( init ) );
 			} );
 		},
 
@@ -361,8 +360,7 @@
 				return;
 			}
 
-			var $spinner = $( '<div class="mw-viewPageTarget-loading"></div>' );
-			$( '#firstHeading' ).prepend( $spinner );
+			init.showLoading();
 			if ( window.history.pushState && uri.query.veaction !== 'edit' ) {
 				window.history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
@@ -372,8 +370,21 @@
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'section-edit-link-click' } );
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-				target.activate().always( function () { $spinner.remove(); } );
+				target.activate().always( init.hideLoading.bind( init ) );
 			} );
+		},
+
+		showLoading: function () {
+			if ( !init.$loading ) {
+				init.$loading = $( '<div class="mw-viewPageTarget-loading"></div>' );
+			}
+			$( '#firstHeading' ).prepend( init.$loading );
+		},
+
+		hideLoading: function () {
+			if ( init.$loading ) {
+				init.$loading.detach();
+			}
 		}
 	};
 
@@ -451,11 +462,10 @@
 	$( function () {
 		if ( init.isAvailable ) {
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
-				var $spinner = $( '<div class="mw-viewPageTarget-loading"></div>' );
-				$( '#firstHeading' ).prepend( $spinner );
+				init.showLoading();
 
 				getTarget().done( function ( target ) {
-					target.activate().always( function () { $spinner.remove(); } );
+					target.activate().always( init.hideLoading.bind( init ) );
 				} );
 			}
 		}
