@@ -105,6 +105,25 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWSaveDialog.prototype.pushPending = function () {
+	this.getActions().setAbilities( { review: false } );
+	return ve.ui.MWSaveDialog.super.prototype.pushPending.call( this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWSaveDialog.prototype.popPending = function () {
+	var ret = ve.ui.MWSaveDialog.super.prototype.popPending.call( this );
+	if ( !this.isPending() ) {
+		this.getActions().setAbilities( { review: true } );
+	}
+	return ret;
+};
+
+/**
  * Clear the diff displayed in the review panel, if any.
  */
 ve.ui.MWSaveDialog.prototype.clearDiff = function () {
