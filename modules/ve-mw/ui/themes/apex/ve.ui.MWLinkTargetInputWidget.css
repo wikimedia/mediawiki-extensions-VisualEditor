@@ -15,17 +15,6 @@
 	color: #0645AD;
 }
 
-.ve-ui-mwLinkTargetInputWidget-menu .oo-ui-menuItemWidget[rel=newPage] {
-	color: #BA0000;
-}
-
-.ve-ui-mwLinkTargetInputWidget-menu .oo-ui-menuItemWidget[rel=externalLink] {
+.ve-ui-mwLinkTargetInputWidget-extlink {
 	color: #36b;
-}
-
-.ve-ui-mwLinkTargetInputWidget-menu .oo-ui-menuItemWidget[rel=existingPage],
-.ve-ui-mwLinkTargetInputWidget-menu .oo-ui-menuItemWidget[rel=matchingPage],
-.ve-ui-mwLinkTargetInputWidget-menu .oo-ui-menuItemWidget[rel=disambigPage],
-.ve-ui-mwLinkTargetInputWidget-menu .oo-ui-menuItemWidget[rel=redirectPage] {
-	color: #0645AD;
 }

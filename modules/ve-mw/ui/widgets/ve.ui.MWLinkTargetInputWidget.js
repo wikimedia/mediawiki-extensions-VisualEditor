@@ -182,9 +182,9 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 			'externalLink',
 			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-external-link' ) }
 		) );
-		items.push( new OO.ui.MenuItemWidget(
+		items.push( new ve.ui.MWLinkMenuItemWidget(
 			this.getExternalLinkAnnotationFromUrl( this.value ),
-			{ $: menu$, rel: 'externalLink', label: this.value }
+			{ $: menu$, classes: [ 've-ui-mwLinkTargetInputWidget-extlink' ], label: this.value, href: this.value }
 		) );
 	}
 
@@ -195,9 +195,9 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 				'newPage',
 				{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-new-page' ) }
 			) );
-			items.push( new OO.ui.MenuItemWidget(
+			items.push( new ve.ui.MWInternalLinkMenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( this.value ),
-				{ $: menu$, rel: 'newPage', label: this.value }
+				{ $: menu$, pagename: this.value }
 			) );
 		} else {
 			// If no title object could be created, it means the title is illegal
@@ -221,9 +221,9 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 			matchingPages.unshift( this.value );
 		}
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
-			items.push( new OO.ui.MenuItemWidget(
+			items.push( new ve.ui.MWInternalLinkMenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( matchingPages[i] ),
-				{ $: menu$, rel: 'matchingPage', label: matchingPages[i] }
+				{ $: menu$, pagename: matchingPages[i] }
 			) );
 		}
 	}
@@ -235,9 +235,9 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length ) }
 		) );
 		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
-			items.push( new OO.ui.MenuItemWidget(
+			items.push( new ve.ui.MWInternalLinkMenuItemWidget(
 				this.getInternalLinkAnnotationFromTitle( disambigPages[i] ),
-				{ $: menu$, rel: 'disambigPage', label: disambigPages[i] }
+				{ $: menu$, pagename: disambigPages[i] }
 			) );
 		}
 	}
