@@ -56,6 +56,7 @@ end
 
 When(/^I click on the Special character option in Insert menu$/) do
   step "I click on the Insert menu"
+  step "I click on More in insert pull-down menu"
   on(VisualEditorPage).special_character_element.when_present.click
 end
 
@@ -114,12 +115,15 @@ When(/^I go to random page for screenshot$/) do
 end
 
 When(/^I click on References list in Insert menu$/) do
+  step "I click in the editable part"
   step "I click on the Insert menu"
+  step "I click on More in insert pull-down menu"
   on(VisualEditorPage).ve_references_element.when_present.click
 end
 
 Then(/^I should see category dialog box$/) do
   on(VisualEditorPage).iframe_element.when_present.should be_visible
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element])
 end
 
 Then(/^I should see Headings pull-down menu$/) do
@@ -155,6 +159,7 @@ Then(/^I should see Insert pull-down menu$/) do
 end
 
 Then(/^I take screenshot of insert pull-down menu$/) do
+  step "I click on More in insert pull-down menu"
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element])
 
   highlight @current_page.media_insert_menu_element
@@ -173,6 +178,10 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   capture_screenshot("VisualEditor_Formula_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element], nil, 0)
 end
 
+Then(/^I click on More in insert pull-down menu$/) do
+  on(VisualEditorPage).ve_more_references_options_element.when_present.click
+end
+
 Then(/^I should see Special character Insertion window$/) do
   on(VisualEditorPage).iframe_element.when_present.should be_visible
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, -2)
@@ -188,13 +197,13 @@ Then(/^I should see Page settings dialog box$/) do
 
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.iframe_element], nil, 0)
 
-  capture_screenshot("VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_heading_element, @current_page.prevent_redirect_element], @current_page.iframe_element, 0)
+  capture_screenshot("VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_icon_element, @current_page.prevent_redirect_element], nil, 0)
 
-  capture_screenshot("VisualEditor_Page_Settings_TOC-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.table_of_contents_element], @current_page.iframe_element, 0)
+  capture_screenshot("VisualEditor_Page_Settings_TOC-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.table_of_contents_element], nil, 0)
 
-  capture_screenshot("VisualEditor_Page_Settings_Edit_Links-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_editlinks_element], @current_page.iframe_element, 0)
+  capture_screenshot("VisualEditor_Page_Settings_Edit_Links-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.page_settings_editlinks_element], nil, 0)
 
-  capture_screenshot("VisualEditor_Apply_Changes-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.settings_apply_button_element], @current_page.iframe_element, 3)
+  capture_screenshot("VisualEditor_Apply_Changes-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.settings_apply_button_element], nil, 3)
 end
 
 Then(/^I should see list and indentation dropdown$/) do
