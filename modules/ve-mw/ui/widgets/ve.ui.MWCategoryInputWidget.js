@@ -67,7 +67,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( da
 
 	$.each( query.allcategories || [], function ( index, category ) {
 		result.push( category['*'] );
-		linkCacheUpdate['Category:' + category['*']] = { missing: false, hidden: category.hasOwnProperty( 'hidden' ) };
+		linkCacheUpdate['Category:' + category['*']] = { missing: false, hidden: 'hidden' in category };
 	}.bind( this ) );
 
 	ve.init.platform.linkCache.set( linkCacheUpdate );

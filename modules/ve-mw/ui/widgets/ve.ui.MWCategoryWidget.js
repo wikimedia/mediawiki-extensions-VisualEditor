@@ -96,7 +96,7 @@ ve.ui.MWCategoryWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 
 	if ( value && value !== '' ) {
 		// Remove existing items by value
-		if ( value in this.categories ) {
+		if ( Object.prototype.hasOwnProperty.call( this.categories, value ) ) {
 			this.categories[value].metaItem.remove();
 		}
 		// Add new item
