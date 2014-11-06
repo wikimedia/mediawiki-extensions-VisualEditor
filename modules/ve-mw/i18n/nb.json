@@ -10,6 +10,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
+	"apihelp-visualeditoredit-param-minor": "Merk som mindre redigering.",
 	"apihelp-visualeditoredit-param-summary": "Redigeringsforklaring.",
 	"tooltip-ca-createsource": "Opprett kildekoden for denne siden",
 	"tooltip-ca-editsource": "Rediger kildekoden for denne siden",
