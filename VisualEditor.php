@@ -968,6 +968,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/annotations/ve.ce.MWInternalLinkAnnotation.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWLinkMenuItemWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkMenuItemWidget.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js',
