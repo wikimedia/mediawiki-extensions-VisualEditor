@@ -439,7 +439,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @param {Object} lastModified Object containing user-formatted date and time strings
  */
 ve.init.mw.ViewPageTarget.prototype.onSave = function (
-	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified
+	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub
 ) {
 	var newUrlParams, watchChecked;
 	this.saveDeferred.resolve();
@@ -482,7 +482,13 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 			this.revid = newid;
 		}
 		this.saveDialog.reset();
-		this.replacePageContent( html, categoriesHtml, isRedirect, displayTitle, lastModified );
+		this.replacePageContent(
+			html,
+			categoriesHtml,
+			displayTitle,
+			lastModified,
+			contentSub
+		);
 		this.setupSectionEditLinks();
 		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
@@ -1519,12 +1525,12 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
  * @method
  * @param {string} html Rendered HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {boolean} isRedirect Whether this page is a redirect or not
  * @param {string} displayTitle What HTML to show as the page title
  * @param {Object} lastModified Object containing user-formatted date and time strings
+ * @param {string} contentSub What HTML to show as the content subtitle
  */
 ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, isRedirect, displayTitle, lastModified
+	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
 	var $content = $( $.parseHTML( html ) ), $editableContent;
 
@@ -1555,15 +1561,7 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
 		$( '#content > #firstHeading > span:first' ).html( displayTitle );
 	}
 	$( '#catlinks' ).replaceWith( categoriesHtml );
-	if ( isRedirect && !$( '#contentSub > #redirectsub' ).length ) {
-		$( '#contentSub' ).append(
-			$( '<span>' )
-				.attr( 'id', 'redirectsub' )
-				.text( ve.msg( 'redirectpagesub' ) )
-		);
-	} else if ( !isRedirect ) {
-		$( '#contentSub > #redirectsub' ).remove();
-	}
+	$( '#contentSub' ).html( contentSub );
 };
 
 /**

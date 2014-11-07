@@ -123,7 +123,26 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			if ( $result === false ) {
 				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 			}
+
 			$result['isRedirect'] = $page->isRedirect();
+
+			if ( class_exists( 'FlaggablePageView' ) ) {
+				$view = FlaggablePageView::singleton();
+
+				// Defeat !$this->isPageView( $request ) || $request->getVal( 'oldid' ) check in setPageContent
+				$view->getContext()->setRequest( new DerivativeRequest(
+					$this->getRequest(),
+					array(
+						'diff' => null,
+						'oldid' => '',
+						'action' => 'view'
+					) + $this->getRequest()->getValues()
+				) );
+
+				$view->setPageContent();
+				$view->displayTag();
+			}
+			$result['contentSub'] = $this->getOutput()->getSubtitle();
 
 			$content = new WikitextContent( $wikitext );
 			$parserOutput = $content->getParserOutput( $page );
