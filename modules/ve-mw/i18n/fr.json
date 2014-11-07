@@ -38,6 +38,10 @@
 			"McDutchie"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "Action à effectuer.",
+	"apihelp-visualeditor-param-page": "La page sur laquelle les modifications doivent être effectuées.",
+	"apihelp-visualeditoredit-param-page": "La page sur laquelle les modifications doivent être effectuées.",
+	"apihelp-visualeditoredit-param-summary": "Modifier le résumé.",
 	"tooltip-ca-createsource": "Créer le code source de cette page",
 	"tooltip-ca-editsource": "Modifier le code source de cette page",
 	"tooltip-ca-ve-edit": "Modifier cette page avec l'ÉditeurVisuel",
@@ -265,6 +269,7 @@
 	"visualeditor-toolbar-cite-label": "Citer",
 	"visualeditor-toolbar-savedialog": "Enregistrer la page",
 	"visualeditor-usernamespacepagelink": "Project:Espace de noms utilisateur",
+	"visualeditor-version-label": "Version",
 	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer ?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
 	"visualeditor-viewpage-savewarning-keep": "Continuer l’édition",
