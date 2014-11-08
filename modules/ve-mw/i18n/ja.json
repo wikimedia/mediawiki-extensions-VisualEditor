@@ -13,6 +13,7 @@
 		]
 	},
 	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (captcha response で保存する場合)。",
+	"apihelp-visualeditoredit-param-minor": "細部の編集のしるし。",
 	"apihelp-visualeditoredit-param-summary": "編集の要約",
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
 	"tooltip-ca-editsource": "このページのソースコードを編集する",
