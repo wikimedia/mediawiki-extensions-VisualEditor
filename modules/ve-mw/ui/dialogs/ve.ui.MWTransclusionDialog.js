@@ -225,28 +225,24 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 	if ( !modeCssClasses[mode] ) {
 		mode = 'multiple';
 	}
-	this.mode = mode;
-	single = mode === 'single';
-	if ( this.$content ) {
-		for ( name in modeCssClasses ) {
-			this.$content.toggleClass( modeCssClasses[name], name === mode );
+
+	if ( this.mode !== mode ) {
+		this.mode = mode;
+		single = mode === 'single';
+		if ( this.$content ) {
+			for ( name in modeCssClasses ) {
+				this.$content.toggleClass( modeCssClasses[name], name === mode );
+			}
 		}
+		this.setSize( single ? 'medium' : 'large' );
+		this.bookletLayout.toggleOutline( !single );
+		this.updateTitle();
+		this.updateModeActionLabel();
+
+		// HACK blur any active input so that its dropdown will be hidden and won't end
+		// up being mispositioned
+		this.$content.find( 'input:focus' ).blur();
 	}
-	this.setSize( single ? 'medium' : 'large' );
-	this.bookletLayout.toggleOutline( !single );
-	this.updateTitle();
-
-	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
-		action.setLabel(
-			single ?
-				ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' ) :
-				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
-		);
-	} );
-
-	// HACK blur any active input so that its dropdown will be hidden and won't end
-	// up being mispositioned
-	this.$content.find( 'input:focus' ).blur();
 };
 
 /**
@@ -259,6 +255,19 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
 		// Parent method
 		ve.ui.MWTransclusionDialog.super.prototype.updateTitle.call( this );
 	}
+};
+
+/**
+ * Update the label for the 'mode' action
+ */
+ve.ui.MWTransclusionDialog.prototype.updateModeActionLabel = function () {
+	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
+		action.setLabel(
+			this.mode === 'single' ?
+				ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' ) :
+				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
+		);
+	} );
 };
 
 /**
@@ -344,6 +353,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			this.setMode( 'single' );
+			this.updateModeActionLabel();
 			this.actions.setAbilities( { mode: false } );
 		}, this );
 };
