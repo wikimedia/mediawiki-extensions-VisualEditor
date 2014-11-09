@@ -116,6 +116,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Label for moving a given category or categories to end of list",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Label for a suggested uncreated category",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Placeholder text for category input\n{{Identical|Add category}}",
+	"visualeditor-dialog-meta-categories-missing": "Text shown on the category popup if the category does not have a description page.",
 	"visualeditor-dialog-meta-categories-options": "Label for the category options sub-section.\n{{Identical|Options}}",
 	"visualeditor-dialog-meta-categories-section": "Label for the categories dialog section.\n{{Identical|Category}}",
 	"visualeditor-dialog-meta-categories-sortkey-label": "[[Image:VisualEditor - Category editing 1.png|thumb|Screenshot of the feature]]\nLabel for setting the page's sort key for a given category; the new value of the sort key flows immediately from this label – effectively, \"Sort this page as if it is called 'Foo'.\"",

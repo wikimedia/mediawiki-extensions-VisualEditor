@@ -147,6 +147,8 @@ ve.ui.MWCategoryPopupWidget.prototype.loadCategoryIntoPopup = function ( item ) 
 	this.origSortkey = item.sortkey;
 	if ( item.isHidden ) {
 		this.$hiddenStatus.text( ve.msg( 'visualeditor-dialog-meta-categories-hidden' ) );
+	} else if ( item.isMissing ) {
+		this.$hiddenStatus.text( ve.msg( 'visualeditor-dialog-meta-categories-missing' ) );
 	} else {
 		this.$hiddenStatus.empty();
 	}

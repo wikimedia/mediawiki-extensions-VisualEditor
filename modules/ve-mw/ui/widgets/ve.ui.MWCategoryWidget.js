@@ -206,7 +206,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 		if ( result && result.query && result.query.pages ) {
 			$.each( result.query.pages, function ( index, pageInfo ) {
 				linkCacheUpdate[pageInfo.title] = {
-					missing: false,
+					missing: Object.prototype.hasOwnProperty.call( pageInfo, 'missing' ),
 					hidden: pageInfo.pageprops &&
 						Object.prototype.hasOwnProperty.call( pageInfo.pageprops, 'hiddencat' )
 				};
@@ -239,7 +239,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 		categoryWidget = this;
 
 	return this.queryCategoryHiddenStatus( categoryNames ).then( function () {
-		var itemTitle, config;
+		var itemTitle, config, cachedData;
 		for ( i = 0, len = items.length; i < len; i++ ) {
 			item = items[i];
 
@@ -254,9 +254,13 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 					categoryWidget.categoryRedirects[itemTitle],
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
-				config.hidden = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle] ).hidden;
+				cachedData = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle] );
+				config.hidden = cachedData.hidden;
+				config.missing = cachedData.missing;
 			} else {
-				config.hidden = ve.init.platform.linkCache.getCached( item.name ).hidden;
+				cachedData = ve.init.platform.linkCache.getCached( item.name );
+				config.hidden = cachedData.hidden;
+				config.missing = cachedData.missing;
 			}
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( categoryWidget, {
