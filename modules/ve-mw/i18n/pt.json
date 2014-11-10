@@ -18,7 +18,10 @@
 			"He7d3r"
 		]
 	},
-	"apihelp-visualeditoredit-param-summary": "Editar resumo.",
+	"apihelp-visualeditor-param-oldid": "O número da edição de utilização (por omissão, a versão mais recente).",
+	"apihelp-visualeditor-param-paction": "Ação a executar.",
+	"apihelp-visualeditoredit-param-minor": "Sinalização para edição menor.",
+	"apihelp-visualeditoredit-param-summary": "Edita o resumo.",
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
 	"tooltip-ca-editsource": "Editar o código-fonte desta página",
 	"tooltip-ca-ve-edit": "Editar esta página com o Editor Visual",
@@ -83,6 +86,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Mover esta categoria aqui",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Nova categoria",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Adicionar uma categoria",
+	"visualeditor-dialog-meta-categories-missing": "Esta categoria não possui uma página de descrição.",
 	"visualeditor-dialog-meta-categories-options": "Opções",
 	"visualeditor-dialog-meta-categories-section": "Categorias",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Ordenar esta página pelo seu título",

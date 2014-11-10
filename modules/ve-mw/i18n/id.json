@@ -13,7 +13,8 @@
 			"Bennylin",
 			"Raynasution",
 			"Pizza1016",
-			"Ahdan"
+			"Ahdan",
+			"Marwan Mohamad"
 		]
 	},
 	"tooltip-ca-createsource": "Buat halaman ini dengan teks wiki",
@@ -75,6 +76,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Pindahkan kategori ke sini",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Kategori baru",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Tambah kategori",
+	"visualeditor-dialog-meta-categories-missing": "Kategori ini tidak memiliki halaman deskripsi",
 	"visualeditor-dialog-meta-categories-options": "Opsi",
 	"visualeditor-dialog-meta-categories-section": "Kategori",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Urutkan halaman ini seperti jika halaman ini dipanggil",
@@ -214,6 +216,7 @@
 	"visualeditor-settings-tool": "Pengaturan halaman",
 	"visualeditor-toolbar-savedialog": "Simpan halaman",
 	"visualeditor-usernamespacepagelink": "Project:Ruang nama pengguna",
+	"visualeditor-version-label": "Versi",
 	"visualeditor-viewpage-savewarning": "Apakah Anda yakin ingin kembali ke mode baca tanpa menyimpan terlebih dahulu?",
 	"visualeditor-wikitext-warning": "Anda menggunakan VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|teks wiki]] tidak berfungsi di sini. Klik \"{{MediaWiki:visualeditor-ca-editsource}}\" untuk menyunting halaman dalam mode teks wiki – perubahan yang belum disimpan akan hilang.",
 	"visualeditor-wikitext-warning-link": "Help:Markah wiki",

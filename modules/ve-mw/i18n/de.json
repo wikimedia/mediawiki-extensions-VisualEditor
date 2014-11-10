@@ -101,6 +101,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Diese Kategorie hierher verschieben",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Neue Kategorie",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Eine Kategorie hinzufügen",
+	"visualeditor-dialog-meta-categories-missing": "Zu dieser Kategorie ist keine Beschreibungsseite vorhanden.",
 	"visualeditor-dialog-meta-categories-options": "Optionen",
 	"visualeditor-dialog-meta-categories-section": "Kategorien",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Diese Seite sortieren als hieße sie",

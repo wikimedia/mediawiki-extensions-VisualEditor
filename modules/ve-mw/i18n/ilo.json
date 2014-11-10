@@ -90,6 +90,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Iyalis ti kategoria ditoy",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Baro a kategoria",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Agnayon iti kategoria",
+	"visualeditor-dialog-meta-categories-missing": "Daytoy a kategoria ket awan iti panid ti deskripsion.",
 	"visualeditor-dialog-meta-categories-options": "Dagiti pagpilian",
 	"visualeditor-dialog-meta-categories-section": "Katkategoria",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Urnosen daytoy a panid a kas tinawtawagan",
