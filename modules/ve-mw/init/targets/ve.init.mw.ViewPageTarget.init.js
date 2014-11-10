@@ -59,11 +59,13 @@
 	// exposed to mw.config (see BUG 53774), so we assume it exists.
 	pageExists = !!mw.config.get( 'wgArticleId' ) || mw.config.get( 'wgNamespaceNumber' ) < 0;
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
-	veEditUri = viewUri.clone().extend( { veaction: 'edit' } );
 	isViewPage = (
 		mw.config.get( 'wgIsArticle' ) &&
 		!( 'diff' in uri.query )
 	);
+	// On a view page, extend the current URI so parameters like oldid are carried over
+	// On a non-view page, use viewUri
+	veEditUri = ( isViewPage ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
 
 	support = {
 		es5: !!(
