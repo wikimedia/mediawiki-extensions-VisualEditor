@@ -26,8 +26,8 @@ class VisualEditorPage
   span(:looks_good, class: "oo-ui-labelElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
-  span(:option_advanced_settings, class:"oo-ui-tool-title", text:"Advanced settings")
-  span(:option_page_settings, class:"oo-ui-tool-title", text:"Page settings")
+  span(:option_advanced_settings, class: "oo-ui-tool-title", text: "Advanced settings")
+  span(:option_page_settings, class: "oo-ui-tool-title", text: "Page settings")
   div(:page_text, id: "mw-content-text")
   a(:page_title, text: /Page title/)
   a(:paragraph, text: /Paragraph/)
@@ -46,9 +46,9 @@ class VisualEditorPage
   span(:page_settings, class: "oo-ui-iconElement-icon oo-ui-icon-settings")
   div(:indentation_pull_down, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 3)
   div(:insert_pull_down, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 4)
-  div(:page_option_menu, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 5)
+  div(:page_option_menu, class: "oo-ui-toolGroup-tools oo-ui-clippableElement-clippable", index: 6)
   span(:special_character, class: "oo-ui-iconElement-icon oo-ui-icon-special-character")
-  div(:iframe, class: "oo-ui-window-frame")
+  div(:iframe, css: "div.oo-ui-window-setup > div.oo-ui-window-frame")
   figure(:media_image, index: 0)
   unordered_list(:media_caption, class: "ve-ui-contextMenuWidget")
   span(:cite_menu, class: "oo-ui-popupToolGroup-handle", index: 2)
@@ -121,7 +121,7 @@ class VisualEditorPage
 
   #text_field(:cite_custom_field_name, css: ".oo-ui-textInputWidget-decorated > input:nth-child(1)", frame: frame)
   text_field(:cite_custom_field_name, css: ".oo-ui-searchWidget-query > div:nth-child(1) > input:nth-child(1)")
-  div(:cite_group_name_textarea, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-indicatorElement oo-ui-textInputWidget" )
+  div(:cite_group_name_textarea, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-indicatorElement oo-ui-textInputWidget")
   text_area(:cite_new_website_field, css: "div.oo-ui-layout:nth-child(10) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)")
   div(:cite_new_field_label, css: ".oo-ui-optionWidget")
   div(:cite_show_more_fields, class: "ve-ui-mwMoreParametersResultWidget-label")
@@ -158,6 +158,13 @@ class VisualEditorPage
   span(:ex, text: "Return to save form")
   text_area(:describe_change, index: 0)
 
+  #USED IN LANGUAGE SCREENSHOT TEST:
+  span(:page_settings_icon, class: "oo-ui-iconElement-icon oo-ui-icon-settings", index: 2)
+  label(:prevent_redirect, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline oo-ui-fieldLayout-disabled")
+  label(:table_of_contents, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top", index: 1)
+  label(:page_settings_editlinks, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline", index: 4)
+  div(:settings_apply_button, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-buttonElement oo-ui-labelElement oo-ui-flaggedElement-primary oo-ui-buttonWidget oo-ui-actionWidget oo-ui-buttonElement-framed")
+
   in_iframe(index: 0) do |frame|
 
     #ACTUALLY IS IN THE IFRAME:
@@ -172,16 +179,10 @@ class VisualEditorPage
     div(:content_box, class: "ve-ce-documentNode ve-ce-branchNode", frame: frame) #ALSO USED IN LANGUAGE SCREENSHOT
 
     #USED IN LANGUAGE SCREENSHOT TEST:
-    span(:page_settings_heading, css: "div.oo-ui-fieldsetLayout > span.oo-ui-labelElement-label", frame: frame)
-    div(:prevent_redirect, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline oo-ui-fieldLayout-disabled", frame: frame)
-    div(:table_of_contents, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top", frame: frame)
-    div(:page_settings_editlinks, class: "oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline", frame: frame)
     text_field(:media_alternative_text, css: "div.oo-ui-widget.oo-ui-widget-enabled.oo-ui-inputWidget.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input", frame: frame)
     div(:media_alternative_block, class: "oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout", index: 1, frame: frame)
     list_item(:media_advanced_settings, class: "oo-ui-widget oo-ui-widget-enabled oo-ui-optionWidget oo-ui-decoratedOptionWidget oo-ui-outlineItemWidget oo-ui-outlineItemWidget-level-0 oo-ui-iconElement oo-ui-labelElement", frame: frame)
     a(:insert_media, css: "div.oo-ui-processDialog-actions-primary > div.oo-ui-buttonElement-frameless > a", frame: frame)
     text_area(:formula_area, class: "oo-ui-ltr", frame: frame)
-    div(:settings_apply_button, class: "oo-ui-processDialog-actions-primary", frame: frame)
-
   end
 end
