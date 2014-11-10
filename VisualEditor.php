@@ -312,6 +312,7 @@ $wgResourceModules += array(
 			'user.options',
 			'user.tokens',
 			'ext.visualEditor.base',
+			'ext.visualEditor.track',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
