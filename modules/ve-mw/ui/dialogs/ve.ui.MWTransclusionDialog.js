@@ -261,9 +261,10 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
  * Update the label for the 'mode' action
  */
 ve.ui.MWTransclusionDialog.prototype.updateModeActionLabel = function () {
+	var mode = this.mode;
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
 		action.setLabel(
-			this.mode === 'single' ?
+			mode === 'single' ?
 				ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' ) :
 				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
 		);
