@@ -168,6 +168,7 @@ $wgResourceModules += array(
 			'mediawiki.Uri',
 			'mediawiki.util',
 			'user.options',
+			'ext.visualEditor.track',
 		),
 		'messages' => array(
 			'accesskey-ca-editsource',
@@ -254,11 +255,21 @@ $wgResourceModules += array(
 		'targets' => array( 'mobile' ),
 	),
 
+	'ext.visualEditor.ve' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => 'lib/ve/src/ve.js',
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
+	'ext.visualEditor.track' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => 'lib/ve/src/ve.track.js',
+		'dependencies' => 'ext.visualEditor.ve',
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
 	'ext.visualEditor.base' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			// ve
-			'lib/ve/src/ve.js',
-			'lib/ve/src/ve.track.js',
+			'lib/ve/src/ve.utils.js',
 
 			// init
 			'lib/ve/src/init/ve.init.js',
@@ -273,6 +284,7 @@ $wgResourceModules += array(
 			'oojs-ui',
 			'unicodejs',
 			'rangefix',
+			'ext.visualEditor.ve',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
