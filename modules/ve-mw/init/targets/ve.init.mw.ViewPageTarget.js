@@ -1737,7 +1737,7 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
 	} else {
 		this.serialize(
 			this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
-			ve.bind( this.submitWithSaveFields, this, { wpDiff: 1, veswitched: 1 } )
+			this.submitWithSaveFields.bind( this, { wpDiff: 1, veswitched: 1 } )
 		);
 	}
 };
