@@ -326,7 +326,9 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.serialize = function () {
-	var name,
+	var name, origName,
+		origData = this.originalData || {},
+		origParams = origData.params || {},
 		template = { target: this.getTarget(), params: {} },
 		params = this.getParameters();
 
@@ -334,10 +336,18 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		if ( name === '' ) {
 			continue;
 		}
-		template.params[params[name].getOriginalName()] = { wt: params[name].getValue() };
+		origName = params[name].getOriginalName();
+		template.params[origName] = ve.extendObject(
+			{},
+			origParams[origName],
+			{ wt: params[name].getValue() }
+		);
+
 	}
 
-	template = ve.extendObject( true, {}, this.originalData || {}, template );
+	// Performs a non-deep extend, so this won't reintroduce
+	// deleted parameters (bug 73134)
+	template = ve.extendObject( {}, origData, template );
 	return { template: template };
 };
 
