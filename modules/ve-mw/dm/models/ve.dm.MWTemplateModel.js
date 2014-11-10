@@ -85,12 +85,13 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
  * @returns {ve.dm.MWTemplateModel|null} New template model
  */
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
-	var href, title;
+	var href, title,
+		templateNs = mw.config.get( 'wgNamespaceIds' ).template;
 	if ( name instanceof mw.Title ) {
 		title = name;
-		name = title.getPrefixedText();
+		name = title.getRelativeText( templateNs );
 	} else {
-		title = mw.Title.newFromText( name, mw.config.get( 'wgNamespaceIds' ).template );
+		title = mw.Title.newFromText( name, templateNs );
 	}
 	if ( title !== null ) {
 		href = title.getPrefixedText();
