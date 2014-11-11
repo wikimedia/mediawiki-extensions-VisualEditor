@@ -170,7 +170,7 @@
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Danh sách chú thích tham khảo",
 	"visualeditor-dialogbutton-template-tooltip": "Bản mẫu",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Bản mẫu",
-	"visualeditor-diff-nochanges": "Không thể bắt đầu duyệt trang vì phiên bản của bạn hoàn toàn trùng với phiên bản mới nhất của trang này.",
+	"visualeditor-diff-nochanges": "Không thể bắt đầu xem lại vì phiên bản của bạn hoàn toàn trùng với phiên bản mới nhất của trang này.",
 	"visualeditor-differror": "Lỗi khi tải dữ liệu từ máy chủ: $1.",
 	"visualeditor-editconflict": "Không thể lưu các thay đổi của bạn do mâu thuẫn sửa đổi. Bạn có muốn giải quyết mâu thuẫn một cách thủ công?",
 	"visualeditor-editnotices-tool": "$1 thông báo",

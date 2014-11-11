@@ -103,6 +103,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "העברת הקטגוריה הזאת הנה",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "קטגוריה חדשה",
 	"visualeditor-dialog-meta-categories-input-placeholder": "הוספת קטגוריה",
+	"visualeditor-dialog-meta-categories-missing": "לקטגוריה הזאת חסר דף תיאור.",
 	"visualeditor-dialog-meta-categories-options": "אפשרויות",
 	"visualeditor-dialog-meta-categories-section": "קטגוריות",
 	"visualeditor-dialog-meta-categories-sortkey-label": "למיין את הדף הזה כאילו שמו הוא",

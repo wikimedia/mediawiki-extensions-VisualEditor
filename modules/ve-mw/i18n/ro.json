@@ -80,6 +80,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Deplasează această categorie aici",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Categorie nouă",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Adăugați o categorie",
+	"visualeditor-dialog-meta-categories-missing": "Acestei categorii îi lipsește o pagină descriptivă.",
 	"visualeditor-dialog-meta-categories-options": "Opțiuni",
 	"visualeditor-dialog-meta-categories-section": "Categorii",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Sortează această pagină ca și cum ar fi intitulată",
