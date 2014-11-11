@@ -543,6 +543,12 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/actions/ve.ui.TableAction.js',
 			'lib/ve/src/ui/actions/ve.ui.WindowAction.js',
 
+			'lib/ve/src/ui/commands/ve.ui.ClearAnnotationCommand.js',
+			'lib/ve/src/ui/commands/ve.ui.HistoryCommand.js',
+			'lib/ve/src/ui/commands/ve.ui.IndentationCommand.js',
+			'lib/ve/src/ui/commands/ve.ui.MergeCellsCommand.js',
+			'lib/ve/src/ui/commands/ve.ui.TableCaptionCommand.js',
+
 			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.FragmentDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.NodeDialog.js',
@@ -1161,6 +1167,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceGroupInputWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceResultWidget.js',
+
+			'modules/ve-mw/ui/commands/ve.ui.MWUseExistingReferenceCommand.js',
 
 			'modules/ve-mw/ui/dialogs/ve.ui.MWCitationDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferencesListDialog.js',

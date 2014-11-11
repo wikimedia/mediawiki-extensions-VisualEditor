@@ -38,12 +38,6 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'reference/existing', 'window', 'open',
-		{ args: [ 'reference', { useExisting: true } ], supportedSelections: ['linear'] }
-	)
-);
-ve.ui.commandRegistry.register(
-	new ve.ui.Command(
 		'transclusion', 'window', 'open',
 		{ args: ['transclusion'], supportedSelections: ['linear'] }
 	)
