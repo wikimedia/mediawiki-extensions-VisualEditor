@@ -532,6 +532,8 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.TriggerRegistry.js',
 			'lib/ve/src/ui/ve.ui.Action.js',
 			'lib/ve/src/ui/ve.ui.ActionFactory.js',
+			'lib/ve/src/ui/ve.ui.FileDropHandler.js',
+			'lib/ve/src/ui/ve.ui.FileDropHandlerFactory.js',
 			'lib/ve/src/ui/ve.ui.WindowManager.js',
 
 			'lib/ve/src/ui/actions/ve.ui.AnnotationAction.js',
@@ -552,6 +554,8 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.FragmentDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.NodeDialog.js',
+
+			'lib/ve/src/ui/filedrophandlers/ve.ui.PlainTextFileDropHandler.js',
 
 			'lib/ve/src/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.LinkTargetInputWidget.js',
