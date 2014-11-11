@@ -1177,6 +1177,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 	this.surface.getDialogs().getWindow( 'mwSave' ).then( function ( win ) {
 		var currentWindow = this.surface.getContext().getInspectors().getCurrentWindow(),
 			target = this;
+		this.origSelection = this.surface.getModel().getSelection();
 
 		// Make sure any open inspectors are closed
 		if ( currentWindow ) {
@@ -1232,6 +1233,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogClose = function () {
 	} else {
 		clear();
 	}
+	this.surface.getModel().setSelection( this.origSelection );
 	this.emit( 'saveWorkflowEnd' );
 };
 
