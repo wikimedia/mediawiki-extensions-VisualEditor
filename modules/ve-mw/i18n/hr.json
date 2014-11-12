@@ -4,7 +4,8 @@
 			"MaGa",
 			"Roberta F.",
 			"SpeedyGonsales",
-			"Zeljko.filipin"
+			"Zeljko.filipin",
+			"Milicevic01"
 		]
 	},
 	"tooltip-ca-createsource": "Napravi izvorni kod ove stranice",
@@ -95,7 +96,7 @@
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Možete spriječiti da se sadržaj ove stranice automatski prebaci u druga pisma.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Ne mijenjaj sadržaj između jezičnih inačica",
 	"visualeditor-dialog-meta-settings-noeditsection-help": "U slučaju ako je to potrebno, možete spriječiti pojavljivanje poveznica za uređivanje pored svakog odlomka.",
-	"visualeditor-dialog-meta-settings-noeditsection-label": "Bez poveznica za uređivanje pojedinačnih odlomaka",
+	"visualeditor-dialog-meta-settings-noeditsection-label": "Bez poveznica za uređivanje pojedinačnih odlomaka.",
 	"visualeditor-dialog-meta-settings-nogallery-help": "Možete spriječiti ovu kategoriju da prikazuje datoteke suradnika kao galeriju, ako je to neprimjereno u ovom slučaju.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Isključi galeriju",
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "Možete spriječiti da se naslov ove stranice automatski prebaci u druga pisma.",
@@ -226,6 +227,7 @@
 	"visualeditor-toolbar-cite-label": "Citiraj",
 	"visualeditor-toolbar-savedialog": "Sačuvaj stranicu",
 	"visualeditor-usernamespacepagelink": "Project:Suradnik imenski prostor",
+	"visualeditor-version-label": "Verzija",
 	"visualeditor-viewpage-savewarning": "Jeste li sigurni da želite zatvoriti stranicu bez spremanja izmjena?",
 	"visualeditor-viewpage-savewarning-discard": "Odbaci izmjene",
 	"visualeditor-viewpage-savewarning-keep": "Nastavi s uređivanjem",
