@@ -177,12 +177,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
 				// FIXME we need to add features to OO.ui.TextInputWidget so we don't need to access .$input
-				var $textarea = dialog.editSummaryInput.$input;
-				$textarea[0].focus();
-				// If message has be pre-filled (e.g. section edit), move cursor to end
-				if ( $textarea.val() !== '' ) {
-					ve.selectEnd( $textarea[0] );
-				}
+				ve.selectEnd( dialog.editSummaryInput.$input[0] );
 			} );
 			break;
 		case 'conflict':
@@ -473,16 +468,6 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 					)
 				);
 			} );
-		}, this );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
-	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
-			this.editSummaryInput.focus();
 		}, this );
 };
 
