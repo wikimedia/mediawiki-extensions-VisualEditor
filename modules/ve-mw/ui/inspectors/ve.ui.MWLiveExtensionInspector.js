@@ -87,10 +87,19 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWLiveExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			this.input.off( 'change', this.onChangeHandler );
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWLiveExtensionInspector.prototype.insertOrUpdateNode = function () {
 	// No need to call parent method as changes have already been made
 	// to the model in staging, just need to apply them.
-	this.input.off( 'change', this.onChangeHandler );
 	this.getFragment().getSurface().applyStaging();
 };
 
