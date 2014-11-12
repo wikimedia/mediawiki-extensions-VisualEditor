@@ -15,12 +15,9 @@
  * @param {ve.dm.MWAlienExtensionNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode( model, config ) {
+ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode() {
 	// Parent constructor
-	ve.ce.MWBlockExtensionNode.call( this, model, config );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwAlienExtensionNode' );
+	ve.ce.MWAlienExtensionNode.super.apply( this, arguments );
 };
 
 /* Inheritance */
@@ -40,6 +37,17 @@ ve.ce.MWAlienExtensionNode.static.primaryCommandName = 'alienExtension';
  */
 ve.ce.MWAlienExtensionNode.static.getDescription = function ( model ) {
 	return model.getExtensionName();
+};
+
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWAlienExtensionNode.prototype.onSetup = function () {
+	ve.ce.MWAlienExtensionNode.super.prototype.onSetup.call( this );
+	// DOM changes
+	this.$element.addClass( 've-ce-mwAlienExtensionNode' );
 };
 
 /* Registration */
