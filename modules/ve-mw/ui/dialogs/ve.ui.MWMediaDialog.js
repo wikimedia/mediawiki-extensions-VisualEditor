@@ -264,7 +264,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		.append( this.altTextInput.$element );
 
 	// Position
-	this.positionInput =  new OO.ui.ButtonSelectWidget( {
+	this.positionSelect = new OO.ui.ButtonSelectWidget( {
 		$: this.$
 	} );
 
@@ -288,7 +288,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		[ alignLeftButton, alignCenterButton, alignRightButton ] :
 		[ alignRightButton, alignCenterButton, alignLeftButton ];
 
-	this.positionInput.addItems( alignButtons, 0 );
+	this.positionSelect.addItems( alignButtons, 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
 		$: this.$
@@ -308,7 +308,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Build position fieldset
 	positionFieldset.$element.append(
 		positionField.$element,
-		this.positionInput.$element
+		this.positionSelect.$element
 	);
 
 	// Type
@@ -318,10 +318,10 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		icon: 'parameter'
 	} );
 
-	this.typeInput = new OO.ui.ButtonSelectWidget( {
+	this.typeSelect = new OO.ui.ButtonSelectWidget( {
 		$: this.$
 	} );
-	this.typeInput.addItems( [
+	this.typeSelect.addItems( [
 		// TODO: Inline images require a bit of further work, will be coming soon
 		new OO.ui.ButtonOptionWidget( 'thumb', {
 			$: this.$,
@@ -355,7 +355,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Build type fieldset
 	this.typeFieldset.$element.append(
-		this.typeInput.$element,
+		this.typeSelect.$element,
 		borderField.$element
 	);
 
@@ -387,8 +387,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Events
 	this.positionCheckbox.connect( this, { change: 'onPositionCheckboxChange' } );
 	this.borderCheckbox.connect( this, { change: 'onBorderCheckboxChange' } );
-	this.positionInput.connect( this, { choose: 'onPositionInputChoose' } );
-	this.typeInput.connect( this, { choose: 'onTypeInputChoose' } );
+	this.positionSelect.connect( this, { choose: 'onPositionSelectChoose' } );
+	this.typeSelect.connect( this, { choose: 'onTypeSelectChoose' } );
 	this.search.connect( this, { select: 'onSearchSelect' } );
 	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
 	// Panel classes
@@ -467,10 +467,10 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
 	var item;
 	alignment = alignment || 'none';
 
-	item = alignment !== 'none' ? this.positionInput.getItemFromData( alignment ) : null;
+	item = alignment !== 'none' ? this.positionSelect.getItemFromData( alignment ) : null;
 
 	// Select the item without triggering the 'choose' event
-	this.positionInput.selectItem( item );
+	this.positionSelect.selectItem( item );
 
 	this.positionCheckbox.setValue( alignment !== 'none' );
 	this.checkChanged();
@@ -482,9 +482,9 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
  */
 
 ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
-	var item = type ? this.typeInput.getItemFromData( type ) : null;
+	var item = type ? this.typeSelect.getItemFromData( type ) : null;
 
-	this.typeInput.selectItem( item );
+	this.typeSelect.selectItem( item );
 
 	this.borderCheckbox.setDisabled(
 		!this.imageModel.isBorderable()
@@ -505,7 +505,7 @@ ve.ui.MWMediaDialog.prototype.onPositionCheckboxChange = function ( checked ) {
 	var newPositionValue,
 		currentModelAlignment = this.imageModel.getAlignment();
 
-	this.positionInput.setDisabled( !checked );
+	this.positionSelect.setDisabled( !checked );
 	this.checkChanged();
 	// Only update the model if the current value is different than that
 	// of the image model
@@ -543,11 +543,11 @@ ve.ui.MWMediaDialog.prototype.onBorderCheckboxChange = function ( checked ) {
 };
 
 /**
- * Handle change event on the positionInput element.
+ * Handle change event on the positionSelect element.
  *
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
-ve.ui.MWMediaDialog.prototype.onPositionInputChoose = function ( item ) {
+ve.ui.MWMediaDialog.prototype.onPositionSelectChoose = function ( item ) {
 	var position = item ? item.getData() : 'default';
 
 	// Only update if the value is different than the model
@@ -558,11 +558,11 @@ ve.ui.MWMediaDialog.prototype.onPositionInputChoose = function ( item ) {
 };
 
 /**
- * Handle change event on the typeInput element.
+ * Handle change event on the typeSelect element.
  *
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
-ve.ui.MWMediaDialog.prototype.onTypeInputChoose = function ( item ) {
+ve.ui.MWMediaDialog.prototype.onTypeSelectChoose = function ( item ) {
 	var type = item ? item.getData() : 'default';
 
 	// Only update if the value is different than the model
@@ -805,12 +805,12 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	);
 
 	// Set initial alignment
-	this.positionInput.setDisabled(
+	this.positionSelect.setDisabled(
 		!this.imageModel.isAligned()
 	);
-	this.positionInput.selectItem(
+	this.positionSelect.selectItem(
 		this.imageModel.isAligned() ?
-		this.positionInput.getItemFromData(
+		this.positionSelect.getItemFromData(
 			this.imageModel.getAlignment()
 		) :
 		null
@@ -828,8 +828,8 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	);
 
 	// Type select
-	this.typeInput.selectItem(
-		this.typeInput.getItemFromData(
+	this.typeSelect.selectItem(
+		this.typeSelect.getItemFromData(
 			this.imageModel.getType() || 'none'
 		)
 	);
