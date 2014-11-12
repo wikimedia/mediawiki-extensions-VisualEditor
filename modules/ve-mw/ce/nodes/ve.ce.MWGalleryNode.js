@@ -15,12 +15,9 @@
  * @param {ve.dm.MWGalleryNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWGalleryNode = function VeCeMWGalleryNode( model, config ) {
+ve.ce.MWGalleryNode = function VeCeMWGalleryNode() {
 	// Parent constructor
-	ve.ce.MWBlockExtensionNode.call( this, model, config );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwGalleryNode' );
+	ve.ce.MWGalleryNode.super.apply( this, arguments );
 };
 
 /* Inheritance */
@@ -36,6 +33,17 @@ ve.ce.MWGalleryNode.static.tagName = 'div';
 ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWGalleryNode.prototype.onSetup = function () {
+	// Parent method
+	ve.ce.MWGalleryNode.super.prototype.onSetup.call( this );
+
+	// DOM changes
+	this.$element.addClass( 've-ce-mwGalleryNode' );
+};
 
 /**
  * @inheritdoc ve.ce.GeneratedContentNode
