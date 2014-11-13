@@ -564,7 +564,8 @@ ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
 			data.newrevid,
 			data.isRedirect,
 			data.displayTitleHtml,
-			data.lastModified
+			data.lastModified,
+			data.contentSub
 		);
 	}
 };
