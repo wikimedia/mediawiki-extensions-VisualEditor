@@ -146,7 +146,7 @@ class VisualEditorPage
   div(:parameter_icon, text: "q")
   a(:remove_parameter, css: ".ve-ui-mwParameterPage-removeButton > a:nth-child(1)")
 
-  div(:review_failed, class: "oo-ui-window-head")
+  span(:review_failed, text: "No changes to review")
 
   span(:confirm_switch_cancel_on_switch, text: "Cancel")
   span(:confirm_switch_discard, text: "Discard changes")
