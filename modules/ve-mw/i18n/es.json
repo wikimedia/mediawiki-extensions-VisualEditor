@@ -51,7 +51,7 @@
 	"visualeditor-desc": "Editor visual para MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Editor visual",
 	"visualeditor-dialog-beta-welcome-action-continue": "Continuar",
-	"visualeditor-dialog-beta-welcome-content": "Esta es nuestra nueva y más sencilla forma de editar. Todavía es una versión beta, lo que significa que puede que te encuentres con partes de la página que no podrás editar, o con problemas aún por resolver. Te recomendamos que revises tus cambios, y agradeceríamos que nos informases sobre cualquier tipo de error que pudieras encontrar usando el Editor visual (haz clic en el botón '{{int:visualeditor-help-tool}}' para enviar un comentario). Puedes seguir utilizando el editor clásico de wikitexto pulsando sobre la pestaña \"$1\" (los cambios que no hayan sido guardados se perderán).",
+	"visualeditor-dialog-beta-welcome-content": "Esta es nuestra nueva y más sencilla forma de editar. Todavía es una versión beta, lo que significa que puede que te encuentres con partes de la página que no podrás editar, o con problemas aún por resolver. Te recomendamos que revises tus cambios, y agradeceríamos que nos informases sobre cualquier tipo de error que pudieras encontrar usando el Editor visual (haz clic en el botón '{{int:visualeditor-help-tool}}' para enviar un comentario). Puedes pasarte al editor de wikitexto en cualquier momento pulsando sobre la pestaña \"$1\", conservando los cambios que hayas hecho.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bienvenido|Bienvenida}} al Editor visual",
 	"visualeditor-dialog-media-alttext-section": "Texto alternativo",
 	"visualeditor-dialog-media-change-image": "Elige una imagen diferente",

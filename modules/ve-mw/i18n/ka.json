@@ -13,6 +13,13 @@
 			"Arystanbek"
 		]
 	},
+	"apihelp-visualeditor-description": "HTML5-ის დაბრუნება გვერდისთვის parsoid სერვისიდან.",
+	"apihelp-visualeditor-param-basetimestamp": "როდესაც შეინახავთ, დააყენეთ ეს დარედაქტირებული გადასინჯვის ნიშნულად. გამოიყენება რედაქტირების კონფლიქტის აღმოსაჩენად.",
+	"apihelp-visualeditor-param-cachekey": "დაფორმატირების ან განსხვავებისათვის, გამოიყენეთ ქეშის წინა დაფორმატების მოთხოვნის შედეგი ამ გასაღებთან ერთად. $1html-ის მხედველობაში არმიღება.",
+	"apihelp-visualeditor-param-html": "HTML Parsoid-ზე გასაგზავნად და ვიკიტექსტის კონვერტირება.",
+	"apihelp-visualeditor-param-paction": "ქმედება შესრულებისთვის.",
+	"apihelp-visualeditor-param-page": "გვერდი, რომელზეც განხორციელდება მოქმედებები.",
+	"apihelp-visualeditor-param-pst": "ვიკიტექსტის წინასწარ გადახედვა Parsoid-ზე გაგზავნამდე (შეთანხმება=გარჩევის ფრაგმენტი)",
 	"tooltip-ca-createsource": "ამ გვერდის წყაროს კოდის შექმნა",
 	"tooltip-ca-editsource": "ამ გვერდის წყაროს კოდის რედაქტირება",
 	"tooltip-ca-ve-edit": "გვერდის რედაქტირება ვიზუალური რედაქტორის საშუალებით",
@@ -149,6 +156,7 @@
 	"visualeditor-settings-tool": "გვერდის პარამეტრები",
 	"visualeditor-toolbar-savedialog": "გვერდის შენახვა",
 	"visualeditor-usernamespacepagelink": "Project:მომხმარებლის სახელთა სივრცე",
+	"visualeditor-version-label": "ვერსია",
 	"visualeditor-viewpage-savewarning": "დარწმუნებული ხართ, რომ გინდათ დაბრუნდეთ გვერდზე რედაქტირების შენახვის გარეშე?",
 	"visualeditor-wikitext-warning": "თქვენ იყენებთ ვიზუალურ რედაქტორს - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ვიკიტექსტი]] აქ არ მუშაობს. დააწკაპუნეთ \"{{MediaWiki:visualeditor-ca-editsource}}\" რათა დაარედაქტიროთ გვერდი ვიკიტექსტის რეჟიმში – დაუმახსოვრებელი ცვლილებები დაიკარგება.",
 	"visualeditor-wikitext-warning-link": "Help:ვიკი-ტექსტი",
