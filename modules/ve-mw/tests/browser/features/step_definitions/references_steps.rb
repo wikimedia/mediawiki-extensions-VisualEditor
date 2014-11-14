@@ -46,17 +46,17 @@ When(/^I create a reference using existing reference$/) do
 end
 
 Then(/^first link to reference should be visible$/) do
-  on(VisualEditorPage).first_reference_element.when_present.should be_visible
+  expect(on(VisualEditorPage).first_reference_element.when_present).to be_visible
 end
 
 Then(/^second link to reference should be visible$/) do
-  on(VisualEditorPage).second_reference_element.when_present.should be_visible
+  expect(on(VisualEditorPage).second_reference_element.when_present).to be_visible
 end
 
 Then(/^I should see Insert reference button enabled$/) do
-  on(VisualEditorPage).insert_reference_element.should be_visible
+  expect(on(VisualEditorPage).insert_reference_element).to be_visible
 end
 
 Then(/^link to Insert menu should be visible$/) do
-  on(VisualEditorPage).insert_menu_element.should be_visible
+  expect(on(VisualEditorPage).insert_menu_element).to be_visible
 end
