@@ -17,6 +17,8 @@
 			"Elseweyr"
 		]
 	},
+	"apihelp-visualeditoredit-param-minor": "Merkitse pieneksi muutokseksi.",
+	"apihelp-visualeditoredit-param-summary": "Yhteenveto.",
 	"tooltip-ca-createsource": "Luo sivun lähdekoodi",
 	"tooltip-ca-editsource": "Muokkaa tämän sivun wikitekstiä",
 	"tooltip-ca-ve-edit": "Muokkaa tätä sivua Visuaalisella muokkaimella",
@@ -236,6 +238,7 @@
 	"visualeditor-toolbar-cite-label": "Viite",
 	"visualeditor-toolbar-savedialog": "Tallenna sivu",
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
+	"visualeditor-version-label": "Versio",
 	"visualeditor-viewpage-savewarning": "Oletko varma, että haluat palata katselutilaan tallentamatta ensin?",
 	"visualeditor-viewpage-savewarning-discard": "Hylkää muutokset",
 	"visualeditor-viewpage-savewarning-keep": "Jatka muokkaamista",
