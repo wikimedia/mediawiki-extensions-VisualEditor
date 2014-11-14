@@ -22,7 +22,7 @@ Then(/^(.+) should appear in the media diff view$/) do |headings_string|
     page.wait_until(15) do
       page.diff_view.include? "Your text"
     end
-    page.diff_view.should match Regexp.new(headings_string)
+    expect(page.diff_view).to match headings_string
   end
 end
 
