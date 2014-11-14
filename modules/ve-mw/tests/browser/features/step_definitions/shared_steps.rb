@@ -30,6 +30,13 @@ Given(/^I make the text "(.*?)" be selected$/) do |select_text|
   sleep 1 # turn the sleep on if this test fails with bullet/number in front of string NOT "This is.."
 end
 
+When(/^I click Edit for VisualEditor$/) do
+  on(VisualEditorPage) do |page|
+    page.edit_ve_element.when_present.click
+    page.content_element.when_present.click
+  end
+end
+
 When(/^I click Review and Save$/) do
   on(VisualEditorPage) do |page|
     page.container_disabled_element.when_not_visible.should_not exist
@@ -57,7 +64,10 @@ When(/^I click Save page$/) do
 end
 
 When(/^I click Save page the second time$/) do
-    on(VisualEditorPage).second_save_page_element.when_present.click
+  on(VisualEditorPage) do |page|
+    page.second_save_page_element.when_present.click
+    page.second_save_page_element.when_not_present
+  end
 end
 
 When(/^I do not see This is a minor edit$/) do
