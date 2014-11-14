@@ -46,7 +46,7 @@ Then(/^a non\-existing link appears in the diff view$/) do
     page.wait_until(10) do
       page.diff_view.include? "DoesNotExist"
     end
-    page.diff_view.should match Regexp.escape("[[DoesNotExist|Links]]")
+    expect(page.diff_view).to match "[[DoesNotExist|Links]]"
   end
 end
 
@@ -55,7 +55,7 @@ Then(/^an external link appears in the diff view$/) do
     page.wait_until(10) do
       page.diff_view.include? "example.com"
     end
-    page.diff_view.should match Regexp.escape("[http://www.example.com Links]")
+    expect(page.diff_view).to match "[http://www.example.com Links]"
   end
 end
 
@@ -64,6 +64,6 @@ Then(/^an internal link appears in the diff view$/) do
     page.wait_until(10) do
       page.diff_view.include? "Main Page"
     end
-    page.diff_view.should match Regexp.escape("[[Main Page|Links]]")
+    expect(page.diff_view).to match "[[Main Page|Links]]"
   end
 end
