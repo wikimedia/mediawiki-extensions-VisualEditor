@@ -16,14 +16,6 @@ When(/^I click Insert references list$/) do
   on(VisualEditorPage).insert_references_list_element.when_present.click
 end
 
-When(/^I click Edit for VisualEditor$/) do
-  on(VisualEditorPage) do |page|
-    page.edit_ve_element.when_present.click
-    # no longer need to dismiss beta warning here https://gerrit.wikimedia.org/r/#/c/119217/
-    page.content_element.when_present(10).fire_event("onfocus")
-  end
-end
-
 When(/^I click Reference$/) do
   on(VisualEditorPage) do |page|
     page.insert_menu_element.when_present.click
