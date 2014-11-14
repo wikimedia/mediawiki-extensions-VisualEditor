@@ -12,6 +12,7 @@
  * @abstract
  * @extends OO.ui.Widget
  * @mixins OO.ui.GroupElement
+ * @mixins OO.ui.DraggableGroupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -26,6 +27,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 
 	// Mixin constructors
 	OO.ui.GroupElement.call( this, config );
+	OO.ui.DraggableGroupElement.call( this, $.extend( {}, config, { orientation: 'horizontal' } ) );
 
 	// Properties
 	this.categories = {};
@@ -48,6 +50,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 		updateSortkey: 'onUpdateSortkey',
 		hide: 'onPopupHide'
 	} );
+	this.connect( this, { reorder: 'onReorder' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwCategoryWidget' )
@@ -64,6 +67,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 OO.inheritClass( ve.ui.MWCategoryWidget, OO.ui.Widget );
 
 OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
+OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.DraggableGroupElement );
 
 /* Events */
 
@@ -73,6 +77,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
  * @param {string} item.name Fully prefixed category name
  * @param {string} item.value Category value (name without prefix)
  * @param {Object} item.metaItem Category meta item
+ * @param {ve.dm.MetaItem} [afterCategory] Insert after this category; if unset, insert at the end
  */
 
 /**
@@ -138,6 +143,21 @@ ve.ui.MWCategoryWidget.prototype.getCategoryItemFromValue = function ( value ) {
 		value: value,
 		metaItem: {}
 	};
+};
+
+/**
+ * @param {Object} item Item that was moved
+ * @param {number} newIndex The new index of the item
+ */
+ve.ui.MWCategoryWidget.prototype.onReorder = function ( item, newIndex ) {
+	// Compute afterCategory before removing, otherwise newIndex
+	// could be off by one
+	var afterCategory = this.items[newIndex] && this.items[newIndex].metaItem;
+	if ( Object.prototype.hasOwnProperty.call( this.categories, item.value ) ) {
+		this.categories[item.value].metaItem.remove();
+	}
+
+	this.emit( 'newCategory', item, afterCategory );
 };
 
 /**
@@ -273,14 +293,17 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 	var i, len, item, categoryItem,
 		categoryItems = [],
-		existingCategoryItem = null,
+		existingCategoryItems = [],
 		categoryNames = $.map( items, function ( item ) {
 			return item.name;
 		} ),
 		categoryWidget = this;
 
 	return this.queryCategoryStatus( categoryNames ).then( function ( normalisedTitles ) {
-		var itemTitle, config, cachedData;
+		var itemTitle, config, cachedData,
+			checkValueMatches = function ( existingCategoryItem ) {
+				return config.item.value === existingCategoryItem.value;
+			};
 
 		for ( i = 0, len = items.length; i < len; i++ ) {
 			item = items[i];
@@ -313,39 +336,38 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			// Index item
 			categoryWidget.categories[itemTitle.getMainText()] = categoryItem;
 			// Copy sortKey from old item when "moving"
-			if ( existingCategoryItem ) {
-				categoryItem.sortKey = existingCategoryItem.sortKey;
+			existingCategoryItems = $.grep( categoryWidget.items, checkValueMatches );
+			if ( existingCategoryItems.length ) {
+				// There should only be one element in existingCategoryItems
+				categoryItem.sortKey = existingCategoryItems[0].sortKey;
+				categoryWidget.removeItems( [ existingCategoryItems[0] ] );
 			}
 
 			categoryItems.push( categoryItem );
 		}
 
-		OO.ui.GroupElement.prototype.addItems.call( categoryWidget, categoryItems, index );
+		OO.ui.DraggableGroupElement.prototype.addItems.call( categoryWidget, categoryItems, index );
 
 		categoryWidget.fitInput();
 	} );
 };
 
 /**
- * Remove category items.
- *
- * @method
- * @param {string[]} names Names of categories to remove
+ * @inheritdoc
  */
-ve.ui.MWCategoryWidget.prototype.removeItems = function ( names ) {
-	var i, len, categoryItem,
-		items = [];
+ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
+	var i, len, categoryItem;
 
-	for ( i = 0, len = names.length; i < len; i++ ) {
-		categoryItem = this.categories[names[i]];
+	for ( i = 0, len = items.length; i < len; i++ ) {
+		categoryItem = items[i];
 		if ( categoryItem ) {
 			categoryItem.disconnect( this );
 			items.push( categoryItem );
-			delete this.categories[names[i]];
+			delete this.categories[categoryItem.value];
 		}
 	}
 
-	OO.ui.GroupElement.prototype.removeItems.call( this, items );
+	OO.ui.DraggableGroupElement.prototype.removeItems.call( this, items );
 
 	this.fitInput();
 };

@@ -11,6 +11,7 @@
  * @class
  * @abstract
  * @extends OO.ui.ButtonWidget
+ * @mixins OO.ui.DraggableElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -25,6 +26,9 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 
 	// Parent constructor
 	OO.ui.ButtonWidget.call( this, config );
+
+	// Mixin constructors
+	OO.ui.DraggableElement.call( this, config );
 
 	// Properties
 	this.name = config.item.name;
@@ -56,6 +60,8 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWCategoryItemWidget, OO.ui.ButtonWidget );
+
+OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.DraggableElement );
 
 /* Events */
 

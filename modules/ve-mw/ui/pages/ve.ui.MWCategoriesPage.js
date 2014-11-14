@@ -106,10 +106,20 @@ ve.ui.MWCategoriesPage.prototype.onDefaultSortChange = function ( value ) {
  * Inserts new category into meta list
  *
  * @param {Object} item
+ * @param {ve.dm.MWCategoryMetaItem} [beforeMetaItem] Meta item to insert before,
+ *  or undefined to go at the end
  */
-ve.ui.MWCategoriesPage.prototype.onNewCategory = function ( item ) {
+ve.ui.MWCategoriesPage.prototype.onNewCategory = function ( item, beforeMetaItem ) {
 	// Insert new metaList item
-	this.insertMetaListItem( this.getCategoryItemForInsertion( item ) );
+	if ( beforeMetaItem ) {
+		this.insertMetaListItem(
+			this.getCategoryItemForInsertion( item ),
+			beforeMetaItem.getOffset(),
+			beforeMetaItem.getIndex()
+		);
+	} else {
+		this.insertMetaListItem( this.getCategoryItemForInsertion( item ) );
+	}
 };
 
 /**
@@ -146,8 +156,8 @@ ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
 	var item;
 
 	if ( metaItem.element.type === 'mwCategory' ) {
-		item = this.getCategoryItemFromMetaListItem( metaItem );
-		this.categoryWidget.removeItems( [item.value] );
+		item = this.categoryWidget.categories[this.getCategoryItemFromMetaListItem( metaItem ).value];
+		this.categoryWidget.removeItems( [item] );
 	}
 };
 
@@ -218,9 +228,11 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, 
  * Inserts a meta list item
  *
  * @param {Object} metaBase meta list insert object
+ * @param {number} [offset] Offset of the meta items within the document
+ * @param {number} [index] Index of the meta item within the group of meta items at this offset
  */
-ve.ui.MWCategoriesPage.prototype.insertMetaListItem = function ( metaBase ) {
-	this.metaList.insertMeta( metaBase );
+ve.ui.MWCategoriesPage.prototype.insertMetaListItem = function ( metaBase, offset, index ) {
+	this.metaList.insertMeta( metaBase, offset, index );
 };
 
 /**
