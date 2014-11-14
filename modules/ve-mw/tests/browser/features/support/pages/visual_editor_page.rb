@@ -23,6 +23,7 @@ class VisualEditorPage
   span(:insert_menu, class: "oo-ui-popupToolGroup-handle", index: 4)
   div(:insert_references, class: "oo-ui-processDialog-location")
   div(:ip_warning, class: "ve-ui-mwNoticesPopupTool-item")
+
   span(:looks_good, class: "oo-ui-labelElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
@@ -157,6 +158,10 @@ class VisualEditorPage
   div(:diff_view, class: "ve-ui-mwSaveDialog-viewer")
   span(:ex, text: "Return to save form")
   text_area(:describe_change, index: 0)
+
+  div(:link_overlay_does_not_exist, text: /New page/)
+  div(:link_overlay_external_link, text: /External link.+New page/m)
+  div(:link_overlay_wiki_page, text: /Matching page/)
 
   #USED IN LANGUAGE SCREENSHOT TEST:
   span(:page_settings_icon, class: "oo-ui-iconElement-icon oo-ui-icon-settings", index: 2)

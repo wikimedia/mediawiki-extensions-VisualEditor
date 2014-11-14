@@ -14,15 +14,30 @@ When(/^I click Links Review your changes$/) do
 end
 
 When(/^I click the Link button$/) do
-  sleep 1 #Chrome seems to not honor when_present correctly as of 5 Dec 2013
   on(VisualEditorPage).ve_link_icon_element.when_present.click
 end
 
-When(/^I enter (.+) into link Content box$/) do |content|
+When(/^I enter external link (.+) into link Content box$/) do |link_content|
   on(VisualEditorPage) do |page|
     page.link_textfield_element.when_present
-    page.link_textfield_element.send_keys(content)
-    sleep 1
+    page.link_textfield_element.send_keys(link_content)
+    page.link_overlay_external_link_element.when_present
+  end
+end
+
+When(/^I enter internal link (.+) into link Content box$/) do |link_content|
+  on(VisualEditorPage) do |page|
+    page.link_textfield_element.when_present
+    page.link_textfield_element.send_keys(link_content)
+    page.link_overlay_wiki_page_element.when_present
+  end
+end
+
+When(/^I enter non existing link (.+) into link Content box$/) do |link_content|
+  on(VisualEditorPage) do |page|
+    page.link_textfield_element.when_present
+    page.link_textfield_element.send_keys(link_content)
+    page.link_overlay_does_not_exist_element.when_present
   end
 end
 
