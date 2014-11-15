@@ -23,9 +23,14 @@
 			"Wifidel",
 			"McDutchie",
 			"Macofe",
-			"Themasterriot"
+			"Themasterriot",
+			"Vikytinta"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "Acción a realizar.",
+	"apihelp-visualeditor-param-page": "La página para realizar acciones.",
+	"apihelp-visualeditoredit-param-minor": "Bandera de edición menor.",
+	"apihelp-visualeditoredit-param-needcheck": "Al guardar, establezca este parámetro si la revisión puede tener problemas de roundtrip. Esto resultará en que la edición sea etiquetada.",
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
 	"tooltip-ca-editsource": "Editar el código fuente de esta página",
 	"tooltip-ca-ve-edit": "Editar esta página con el Editor visual",

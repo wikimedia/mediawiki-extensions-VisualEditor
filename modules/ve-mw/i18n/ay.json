@@ -1,9 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jduranboger"
+			"Jduranboger",
+			"Vikytinta"
 		]
 	},
+	"apihelp-visualeditor-description": "HTML5 ukar kutt'añataki ma pajinataki parsoid service ukataki.",
+	"apihelp-visualeditor-param-basetimestamp": "Imataki ukhat pach askichat imatak uka uñjañataki. Edicion ukan jan walt'awip uñjañataki apanqasi.",
+	"apihelp-visualeditor-param-html": "HTML Parsoid ukar apayañataki uk wikitexto ukar tukuyañataki.",
+	"apihelp-visualeditor-param-paction": "Acción a realizar.",
+	"apihelp-visualeditor-param-page": "La página para realizar acciones.",
 	"tooltip-ca-createsource": "Aka pajinan chimpu fuente-p uñstayama",
 	"tooltip-ca-editsource": "Aka pajinan chimpu fuente-p askichaña",
 	"tooltip-ca-ve-edit": "Editor Visual ukamp aka pajin askichaña",
@@ -90,6 +96,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Wiñaya",
 	"visualeditor-dialog-meta-settings-toc-label": "Utjir tabla uñachayaña",
 	"visualeditor-dialog-meta-title": "Ajllinaka",
+	"visualeditor-dialog-reference-editing-reused": "Aka referensiax apanaqasiwa $1 {{PLURAL:$1|pacha}} aka pajinana.",
 	"visualeditor-dialog-reference-options-group-label": "Aka tama apanaqaña",
 	"visualeditor-dialog-reference-options-name-label": "Aka sutimp wasitat apanaqaña",
 	"visualeditor-dialog-reference-options-section": "Ajllinaka",
