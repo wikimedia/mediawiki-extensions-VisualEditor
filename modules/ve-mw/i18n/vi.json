@@ -85,6 +85,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Chuyển thể loại sang đây",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Thể loại mới",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Thêm thể loại",
+	"visualeditor-dialog-meta-categories-missing": "Thể loại này thiếu trang miêu tả.",
 	"visualeditor-dialog-meta-categories-options": "Tùy chọn",
 	"visualeditor-dialog-meta-categories-section": "Thể loại",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Sắp xếp trang này như thể có tên",
