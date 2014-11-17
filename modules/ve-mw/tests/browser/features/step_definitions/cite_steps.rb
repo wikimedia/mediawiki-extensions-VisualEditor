@@ -86,22 +86,6 @@ When(/^I type in a field name "(.*?)"$/) do |custom_field|
   on(VisualEditorPage).cite_custom_field_name_element.when_present.send_keys custom_field
 end
 
-When(/^the Book input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Page/m
-end
-
-When(/^the Journal input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /Title.+Source date/m
-end
-
-When(/^the News input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /URL.+Source title.+Last name.+First name.+Source date.+Work.+URL access date/m
-end
-
-When(/^the Website input field titles are in the correct order$/) do
-  on(VisualEditorPage).cite_ui.should match /URL.+Source title.+Source date.+URL access date.+Website title.+Publisher.+Last name.+First name/m
-end
-
 Then(/^diff view should show the Book citation added$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
@@ -150,6 +134,18 @@ Then(/^I should see the VisualEditor interface$/) do
   expect(on(VisualEditorPage).cite_visualeditor_user_interface_element).to be_visible
 end
 
+Then(/^the Book input field titles are in the correct order$/) do
+  expect(on(VisualEditorPage).cite_ui).to match /Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Page/m
+end
 
+Then(/^the Journal input field titles are in the correct order$/) do
+  expect(on(VisualEditorPage).cite_ui).to match /Title.+Source date/m
+end
 
+Then(/^the News input field titles are in the correct order$/) do
+  expect(on(VisualEditorPage).cite_ui).to match /URL.+Source title.+Last name.+First name.+Source date.+Work.+URL access date/m
+end
 
+Then(/^the Website input field titles are in the correct order$/) do
+  expect(on(VisualEditorPage).cite_ui).to match /URL.+Source title.+Source date.+URL access date.+Website title.+Publisher.+Last name.+First name/m
+end
