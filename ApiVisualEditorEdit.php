@@ -139,7 +139,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					) + $this->getRequest()->getValues()
 				) );
 
-				$view->setPageContent();
+				// The two parameters here are references but we don't care
+				// about what FlaggedRevs does with them.
+				$outputDone = null;
+				$useParserCache = null;
+				$view->setPageContent( $outputDone, $useParserCache );
 				$view->displayTag();
 			}
 			$result['contentSub'] = $this->getOutput()->getSubtitle();
