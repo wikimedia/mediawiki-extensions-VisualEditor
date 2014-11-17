@@ -36,7 +36,7 @@ When(/^I see the Discard option$/) do
 end
 
 When(/^I see the wikitext editor$/) do
-  on(VisualEditorPage).wikitext_editor_element.when_present(10).should be_visible
+  on(VisualEditorPage).wikitext_editor_element.when_present(10)
 end
 
 Then(/^I should be in Visual Editor editing alternate mode$/) do
@@ -44,7 +44,7 @@ Then(/^I should be in Visual Editor editing alternate mode$/) do
     page.wait_until(15) do
       page.text.include? "Edit page for"
     end
-    page.content_element.when_present.should be_visible
+    expect(page.content_element.when_present).to be_visible
   end
 end
 
@@ -54,8 +54,7 @@ Then(/^I should be in Visual Editor editing mode$/) do
       page.text.include? "Edit page for"
     end
   end
-  expected_url = /w\/index\.php\?title=Edit_page_for_#{ENV['BROWSER']}&veaction=edit/
-  @browser.url.should match Regexp.new(expected_url)
+  expect(@browser.url).to match /w\/index\.php\?title=Edit_page_for_#{ENV['BROWSER']}&veaction=edit/
 end
 
 Then(/^I should be in wikitext editing mode$/) do
@@ -64,5 +63,5 @@ Then(/^I should be in wikitext editing mode$/) do
       page.text.include? "Editing Edit page for"
     end
   end
-  @browser.url.should eql(ENV['MEDIAWIKI_URL'] + "Edit page for " + ENV['BROWSER'] + "?action=submit")
+  expect(@browser.url).to eql(ENV['MEDIAWIKI_URL'] + "Edit page for " + ENV['BROWSER'] + "?action=submit")
 end
