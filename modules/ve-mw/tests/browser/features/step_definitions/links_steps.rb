@@ -1,8 +1,5 @@
 Given(/^I can see the Link User Inteface$/) do
-  on(VisualEditorPage) do |page|
-    page.ve_link_ui_element.when_present
-    page.ve_link_ui.should match Regexp.escape("Link")
-  end
+  on(VisualEditorPage).ve_link_ui_element.when_present
 end
 
 When(/^I click Done to close Link User Interface$/) do

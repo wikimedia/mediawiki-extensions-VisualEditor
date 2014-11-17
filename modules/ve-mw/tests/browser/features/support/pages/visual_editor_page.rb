@@ -177,7 +177,7 @@ class VisualEditorPage
     div(:extension_reference, class: "ve-ui-mwReferenceResultWidget-shield", frame: frame)
     span(:existing_reference, text: "Use an existing reference", frame: frame)
     a(:remove_template, title: "Remove template", frame: frame)
-    div(:ve_link_ui, class: "oo-ui-window-head", frame: frame)
+    div(:ve_link_ui, class: "oo-ui-window-head", text: /Link/, frame: frame)
     div(:suggestion_list, class: "ve-ui-mwTitleInputWidget-menu")
     span(:another_save_page, class: "oo-ui-labelElement-label", text: "Save page", frame: frame)
     text_field(:link_textfield, index: 0, frame: frame)
