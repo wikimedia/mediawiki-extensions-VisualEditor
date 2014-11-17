@@ -1,8 +1,5 @@
 Given(/^I can see the Transclusion User Interface$/) do
-  on(VisualEditorPage) do |page|
-    page.title_element.when_present
-    page.title.should match "Add a template"
-  end
+  on(VisualEditorPage).add_a_template_title_element.when_present
 end
 
 Given(/^I click Remove template$/) do
@@ -48,9 +45,9 @@ When(/^I enter (.+) into transclusion Content box$/) do |content|
 end
 
 Then(/^I should see a list of template suggestions$/) do
-  on(VisualEditorPage).suggestion_list_element.when_present.should be_visible
+  expect(on(VisualEditorPage).suggestion_list_element.when_present).to be_visible
 end
 
 Then(/^I should see the Insert template button$/) do
-  on(VisualEditorPage).insert_template_element.when_present.should be_visible
+  expect(on(VisualEditorPage).insert_template_element.when_present).to be_visible
 end
