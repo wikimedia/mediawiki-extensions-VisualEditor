@@ -9,7 +9,7 @@ Given(/^I go to a page that has references$/) do
 end
 
 Given(/^I can see the References User Interface$/) do
-  on(VisualEditorPage).title.should match "Reference"
+  on(VisualEditorPage).references_title_element.when_present
 end
 
 When(/^I click Insert references list$/) do

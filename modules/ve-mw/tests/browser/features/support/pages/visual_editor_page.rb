@@ -136,6 +136,7 @@ class VisualEditorPage
   div(:options_page_title, class: "oo-ui-processDialog-location", text: "Options")
 
   div(:title, class: "oo-ui-processDialog-location")
+  div(:references_title, class: "oo-ui-processDialog-location", text: /References/)
   span(:insert_references_list, text: "Insert")
 
   span(:confirm_switch, text: "Keep changes")
