@@ -205,7 +205,7 @@
 	"visualeditor-diff-nochanges": "Message displayed in the diff view when no changes were detected",
 	"visualeditor-differror": "Text shown when the editor fails to load the diff.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-editconflict": "Alert message when saving a page causes an edit conflict",
-	"visualeditor-editnotices-tool": "Text of tool in the toolbar that shows edit notices (such as [[MediaWiki:Editnotice-0]] and [[MediaWiki:Editnotice-8/en]]) as a pop-up.\n\nParameters:\n* $1 - the number of notices",
+	"visualeditor-editnotices-tool": "Text of tool in the toolbar that shows edit notices (such as [[MediaWiki:Editnotice-0]] and [[MediaWiki:Editnotice-8/en]]) as a pop-up.\n\nParameters:\n* $1 - the number of notices\n{{Identical|Notice}}",
 	"visualeditor-editnotices-tooltip": "Text of tooltip for the tool in the toolbar that shows edit notices (i.e. “messages about the editing”), e.g. the “you are not currently logged in” notice",
 	"visualeditor-editsummary": "Label for the edit summary box",
 	"visualeditor-editsummary-bytes-remaining": "Tooltip for the number of bytes remaining in the edit summary",
