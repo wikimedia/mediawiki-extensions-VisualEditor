@@ -2,11 +2,11 @@ When(/^I clear the confirm dialog by clicking Keep changes$/) do
   on(VisualEditorPage).confirm_switch_element.when_present.click
 end
 
-When(/^I enter the wikitext editor$/) do
+When(/^I click Edit for VisualEditor from this page$/) do
   on(VisualEditorPage) do |page|
-    page.edit_wikitext_element.when_present.click
-    step 'I clear the confirm dialog by clicking Keep changes'
-    page.wikitext_editor_element.when_present
+    page.alert do
+      page.edit_ve_element.when_present.click
+    end
   end
 end
 
@@ -19,11 +19,11 @@ When(/^I click the Switch to source editing menu option$/) do
   end
 end
 
-When(/^I click Edit for VisualEditor from this page$/) do
+When(/^I enter the wikitext editor$/) do
   on(VisualEditorPage) do |page|
-    page.alert do
-      page.edit_ve_element.when_present.click
-    end
+    page.edit_wikitext_element.when_present.click
+    step 'I clear the confirm dialog by clicking Keep changes'
+    page.wikitext_editor_element.when_present
   end
 end
 
@@ -39,13 +39,13 @@ When(/^I see the wikitext editor$/) do
   on(VisualEditorPage).wikitext_editor_element.when_present(10).should be_visible
 end
 
-Then(/^I should be in wikitext editing mode$/) do
+Then(/^I should be in Visual Editor editing alternate mode$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(15) do
-      page.text.include? "Editing Edit page for"
+      page.text.include? "Edit page for"
     end
+    page.content_element.when_present.should be_visible
   end
-  @browser.url.should eql(ENV['MEDIAWIKI_URL'] + "Edit page for " + ENV['BROWSER'] + "?action=submit")
 end
 
 Then(/^I should be in Visual Editor editing mode$/) do
@@ -58,11 +58,11 @@ Then(/^I should be in Visual Editor editing mode$/) do
   @browser.url.should match Regexp.new(expected_url)
 end
 
-Then(/^I should be in Visual Editor editing alternate mode$/) do
+Then(/^I should be in wikitext editing mode$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(15) do
-      page.text.include? "Edit page for"
+      page.text.include? "Editing Edit page for"
     end
-    page.content_element.when_present.should be_visible
   end
+  @browser.url.should eql(ENV['MEDIAWIKI_URL'] + "Edit page for " + ENV['BROWSER'] + "?action=submit")
 end
