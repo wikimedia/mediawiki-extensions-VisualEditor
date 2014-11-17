@@ -10,8 +10,7 @@ Feature: VisualEditor Transclusion
 
   Scenario: Add template
     When I enter S into transclusion Content box
-    Then I see a list of template suggestions
-      And I click the Add template button
+    Then I should see a list of template suggestions
 
   Scenario: Add parameter to template
       And I enter S into transclusion Content box
