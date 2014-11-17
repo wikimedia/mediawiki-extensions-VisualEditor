@@ -142,6 +142,7 @@ class VisualEditorPage
 
   text_field(:transclusion_textfield, css: "div.oo-ui-widget-enabled:nth-child(4) > input:nth-child(1)")
   text_field(:transclusion_description, css: ".oo-ui-inputWidget > input:nth-child(1)")
+  div(:no_unused_fields, text: "No unused fields")
   span(:add_template, text: "Add template")
   span(:insert_template, text: "Insert")
   div(:parameter_icon, text: "q")

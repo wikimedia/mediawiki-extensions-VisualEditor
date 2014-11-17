@@ -14,7 +14,6 @@ Given(/^I click the Add template button$/) do
 end
 
 Given(/^I click the parameter representation containing q$/) do
-  sleep 1
   on(VisualEditorPage).parameter_icon_element.when_present.click
 end
 
@@ -38,8 +37,10 @@ When(/^I click Remove parameter$/) do
 end
 
 When(/^I enter (.+) in the parameter box$/) do |param_value|
-  sleep 1
-  on(VisualEditorPage).transclusion_description_element.when_present.send_keys(param_value)
+  on(VisualEditorPage) do |page|
+    page.no_unused_fields_element.when_present
+    page.transclusion_description_element.when_present.send_keys(param_value)
+  end
 end
 
 When(/^I enter (.+) into transclusion Content box$/) do |content|
