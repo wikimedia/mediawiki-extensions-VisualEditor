@@ -1539,6 +1539,14 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
 	var $content = $( $.parseHTML( html ) ), $editableContent;
 
 	if ( lastModified ) {
+		// If we were not viewing the most recent revision before (a requirement
+		// for lastmod to have been added by MediaWiki), we will be now.
+		if ( !$( '#footer-info-lastmod' ).length ) {
+			$( '#footer-info' ).prepend(
+				$( '<li>' ).attr( 'id', 'footer-info-lastmod' )
+			);
+		}
+
 		$( '#footer-info-lastmod' ).text( ' ' + mw.msg(
 			'lastmodifiedat',
 			lastModified.date,
