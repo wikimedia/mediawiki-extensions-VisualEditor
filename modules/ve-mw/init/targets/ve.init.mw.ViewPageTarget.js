@@ -519,8 +519,10 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editApi ) {
 	this.showSaveError(
-		// TODO: Use mediawiki.language equivalant of Language.php::listToText once it exists
-		ve.msg( 'spamprotectiontext' ) + ' ' + ve.msg( 'spamprotectionmatch', editApi.spamblacklist.split( '|' ).join( ', ' ) ),
+		ve.msg( 'spamprotectiontext' ) + ' ' +
+			ve.msg(
+				'spamprotectionmatch', mw.language.listToText( editApi.spamblacklist.split( '|' ) )
+			),
 		false // prevents reapply
 	);
 	this.events.trackSaveError( 'spamblacklist' );
