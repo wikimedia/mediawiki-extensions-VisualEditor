@@ -344,6 +344,10 @@
 			init.showLoading();
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
+				// Replace the current state with one that is tagged as ours, to prevent the
+				// back button from breaking when used to exit VE. FIXME: there should be a better
+				// way to do this. See also similar code in the ViewPageTarget constructor.
+				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
 				// Set veaction to edit
 				uri = veEditUri;
 				history.pushState( { tag: 'visualeditor' }, document.title, uri );
@@ -363,7 +367,14 @@
 			}
 
 			init.showLoading();
+
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
+				// Replace the current state with one that is tagged as ours, to prevent the
+				// back button from breaking when used to exit VE. FIXME: there should be a better
+				// way to do this. See also similar code in the ViewPageTarget constructor.
+				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+				// Change the state to the href of the section link that was clicked. This saves
+				// us from having to figure out the section number again.
 				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
 
