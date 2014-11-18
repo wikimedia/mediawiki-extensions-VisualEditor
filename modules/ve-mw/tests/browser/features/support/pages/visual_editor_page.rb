@@ -11,9 +11,10 @@ class VisualEditorPage
   a(:cite_journal, css: ".oo-ui-tool-name-cite-journal > a:nth-child(1)")
   a(:cite_news, css: ".oo-ui-tool-name-cite-news > a:nth-child(1)")
   span(:cite_website, css: ".oo-ui-icon-ref-cite-web")
-  div(:container_disabled, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-flaggedElement-constructive oo-ui-.oo-ui-buttonElement-framed")
   div(:content, class: "ve-ce-branchNode")
+
   span(:decrease_indentation, class: "oo-ui-iconElement-icon oo-ui-icon-outdent-list")
+  div(:disabled_save_button, class: "oo-ui-widget oo-ui-widget-disabled oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-labelElement oo-ui-flaggedElement-constructive oo-ui-buttonWidget ve-ui-toolbar-saveButton")
   span(:downarrow, class: "oo-ui-indicatorElement-indicator oo-ui-indicator-down")
   a(:edit_ve, title: /Edit this page with VisualEditor/)
   a(:edit_wikitext, title: /You can edit this page\./)
@@ -22,9 +23,8 @@ class VisualEditorPage
   span(:increase_indentation, class: "oo-ui-iconElement-icon oo-ui-icon-indent-list")
   span(:insert_menu, class: "oo-ui-popupToolGroup-handle", index: 4)
   div(:insert_references, class: "oo-ui-processDialog-location")
-  div(:ip_warning, class: "ve-ui-mwNoticesPopupTool-item")
+  div(:ip_warning, class: "ve-ui-mwNoticesPopupTool-item", text: /Your IP address/)
 
-  span(:looks_good, class: "oo-ui-labelElement-label", text: "Looks good to me")
   div(:medium_dialog, class: "oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium")
   span(:options_in_hamburger, class: "oo-ui-tool-title", text: "Options")
   span(:option_advanced_settings, class: "oo-ui-tool-title", text: "Advanced settings")

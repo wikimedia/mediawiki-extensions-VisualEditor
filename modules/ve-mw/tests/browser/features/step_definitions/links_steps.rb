@@ -6,10 +6,6 @@ When(/^I click Done to close Link User Interface$/) do
   on(VisualEditorPage).links_done_element.when_present.click
 end
 
-When(/^I click Links Review your changes$/) do
-  on(VisualEditorPage).review_changes_element.when_present.click
-end
-
 When(/^I click the Link button$/) do
   on(VisualEditorPage).ve_link_icon_element.when_present.click
 end
