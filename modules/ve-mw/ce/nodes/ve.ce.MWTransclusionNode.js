@@ -68,7 +68,7 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 				return template;
 			}
 		} )
-		.join( ', ' );
+		.join( ve.msg( 'comma-separator' ) );
 };
 
 /* Methods */
