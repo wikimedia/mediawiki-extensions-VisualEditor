@@ -67,10 +67,6 @@ When(/^I click This is a minor edit$/) do
   on(VisualEditorPage).minor_edit_element.when_present.click
 end
 
-When(/^I do not see This is a minor edit$/) do
-  on(VisualEditorPage).minor_edit_element.should_not be_visible
-end
-
 When(/^I edit the description of the change$/) do
   on(VisualEditorPage).describe_change_element.when_visible.send_keys("Describing with #{@random_string}")
 end
