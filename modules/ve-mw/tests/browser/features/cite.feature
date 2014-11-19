@@ -39,7 +39,7 @@ Feature: VisualEditor Cite
       And I fill in the seventh textarea with "Location of publication"
       And I fill in the eighth textarea with "123"
       And the Book input field titles are in the correct order
-      And I click Book Add more information
+      And I click Add more information
       And I type in a field name "New book field"
       And I click the new field label
       And I fill in the new field "New book field contents"

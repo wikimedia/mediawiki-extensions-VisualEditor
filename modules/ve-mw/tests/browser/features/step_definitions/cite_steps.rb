@@ -18,10 +18,6 @@ When(/^I click Book$/) do
   on(VisualEditorPage).cite_book_element.when_present.click
 end
 
-When(/^I click Book Add more information$/) do
-  on(VisualEditorPage).book_add_more_information_button_element.when_present.click
-end
-
 When(/^I click Insert Citation$/) do
   on(VisualEditorPage).insert_citation_element.when_present.click
 end
