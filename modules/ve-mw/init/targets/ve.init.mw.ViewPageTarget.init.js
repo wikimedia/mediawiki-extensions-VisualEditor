@@ -349,15 +349,16 @@
 				// way to do this. See also similar code in the ViewPageTarget constructor.
 				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
 				// Set veaction to edit
+				history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+				// Update mw.Uri instance
 				uri = veEditUri;
-				history.pushState( { tag: 'visualeditor' }, document.title, uri );
 			}
 
 			e.preventDefault();
 
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'edit-link-click' } );
-				target.activate().always( init.hideLoading.bind( init ) );
+				target.activate().always( init.hideLoading );
 			} );
 		},
 
@@ -383,7 +384,7 @@
 			getTarget().done( function ( target ) {
 				ve.track( 'Edit', { action: 'section-edit-link-click' } );
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-				target.activate().always( init.hideLoading.bind( init ) );
+				target.activate().always( init.hideLoading );
 			} );
 		},
 
@@ -476,9 +477,8 @@
 		if ( init.isAvailable ) {
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
 				init.showLoading();
-
 				getTarget().done( function ( target ) {
-					target.activate().always( init.hideLoading.bind( init ) );
+					target.activate().always( init.hideLoading );
 				} );
 			}
 		}
