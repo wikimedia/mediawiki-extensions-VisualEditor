@@ -1,1 +1,1 @@
-window.VE_TESTDIR = window.mw.config.get( 'wgExtensionAssetsPath' ) + '/VisualEditor/modules/ve/test';
+window.VE_TESTDIR = mw.config.get( 'wgExtensionAssetsPath' ) + '/VisualEditor/modules/ve/test';
