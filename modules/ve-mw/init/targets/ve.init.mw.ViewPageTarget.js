@@ -18,8 +18,8 @@
 ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	var prefName,
 		prefValue,
-		//A workaround, as default URI does not get updated after pushState (bug 72334)
-		currentUri = new mw.Uri( document.location.href ),
+		// A workaround, as default URI does not get updated after pushState (bug 72334)
+		currentUri = new mw.Uri( location.href ),
 		conf = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Parent constructor
@@ -377,7 +377,7 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 			delete this.currentUri.query.veaction;
 		}
 		this.currentUri.query.action = 'edit';
-		window.location.href = this.currentUri.toString();
+		location.href = this.currentUri.toString();
 	} else {
 		this.activating = false;
 		// User interface changes
@@ -452,7 +452,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 		if ( isRedirect ) {
 			newUrlParams.redirect = 'no';
 		}
-		window.location.href = this.viewUri.extend( newUrlParams );
+		location.href = this.viewUri.extend( newUrlParams );
 	} else {
 		// Update watch link to match 'watch checkbox' in save dialog.
 		// User logged in if module loaded.
@@ -1510,7 +1510,7 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
 		return;
 	}
 
-	newUri = this.currentUri = new mw.Uri( document.location.href );
+	newUri = this.currentUri = new mw.Uri( location.href );
 
 	if ( !this.active && newUri.query.veaction === 'edit' ) {
 		this.actFromPopState = true;
@@ -1742,7 +1742,7 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
 ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardChanges ) {
 	if ( discardChanges ) {
 		this.submitting = true;
-		window.location.href = this.viewUri.clone().extend( {
+		location.href = this.viewUri.clone().extend( {
 			action: 'edit',
 			veswitched: 1
 		} ).toString();
