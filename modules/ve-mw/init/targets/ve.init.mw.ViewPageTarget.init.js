@@ -55,9 +55,7 @@
 	conf = mw.config.get( 'wgVisualEditorConfig' );
 	tabMessages = conf.tabMessages;
 	uri = new mw.Uri();
-	// BUG 49000: For special pages, no information about page existence is
-	// exposed to mw.config (see BUG 53774), so we assume it exists.
-	pageExists = !!mw.config.get( 'wgArticleId' ) || mw.config.get( 'wgNamespaceNumber' ) < 0;
+	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
 	isViewPage = (
 		mw.config.get( 'wgIsArticle' ) &&
