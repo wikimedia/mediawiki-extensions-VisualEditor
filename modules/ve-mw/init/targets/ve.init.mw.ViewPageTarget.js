@@ -327,6 +327,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function () {
 
 	// Check we got as far as setting up the surface
 	if ( this.active ) {
+		this.tearDownBeforeUnloadHandler();
 		// If we got as far as setting up the surface, tear that down
 		promises.push( this.tearDownSurface() );
 	}
@@ -496,7 +497,6 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 			contentSub
 		);
 		this.setupSectionEditLinks();
-		this.tearDownBeforeUnloadHandler();
 		this.deactivate( true );
 		if ( newid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
