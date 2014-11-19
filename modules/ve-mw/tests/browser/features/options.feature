@@ -19,3 +19,8 @@ Feature: VisualEditor Options
     When I click Page Settings
     Then I should see the options overlay
       And the options overlay should display Page Settings
+
+  Scenario: Categories
+    When I click Categories
+    Then I should see the options overlay
+      And the options overlay should display Categories
