@@ -343,10 +343,10 @@
 
 			init.showLoading();
 
-			if ( window.history.pushState && uri.query.veaction !== 'edit' ) {
-				//Set veaction to edit
+			if ( history.pushState && uri.query.veaction !== 'edit' ) {
+				// Set veaction to edit
 				uri = veEditUri;
-				window.history.pushState( { tag: 'visualeditor' }, document.title, uri );
+				history.pushState( { tag: 'visualeditor' }, document.title, uri );
 			}
 
 			e.preventDefault();
@@ -363,8 +363,8 @@
 			}
 
 			init.showLoading();
-			if ( window.history.pushState && uri.query.veaction !== 'edit' ) {
-				window.history.pushState( { tag: 'visualeditor' }, document.title, this.href );
+			if ( history.pushState && uri.query.veaction !== 'edit' ) {
+				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
 
 			e.preventDefault();

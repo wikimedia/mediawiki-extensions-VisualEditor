@@ -114,11 +114,11 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		delete currentUri.query.venotify;
 	}
 
-	if ( window.history.replaceState ) {
+	if ( history.replaceState ) {
 		// This is to stop the back button breaking when it's supposed to take us back out
 		// of VE. It used to only be called when venotify is used. FIXME: there should be
 		// a much better solution than this.
-		window.history.replaceState( this.popState, document.title, currentUri );
+		history.replaceState( this.popState, document.title, currentUri );
 	}
 
 	this.setupSkinTabs();
@@ -1442,12 +1442,12 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)
-	if ( !this.actFromPopState && window.history.pushState && this.currentUri.query.veaction !== 'edit' ) {
+	if ( !this.actFromPopState && history.pushState && this.currentUri.query.veaction !== 'edit' ) {
 		// Set the current URL
 		uri = this.currentUri;
 		uri.query.veaction = 'edit';
 
-		window.history.pushState( this.popState, document.title, uri );
+		history.pushState( this.popState, document.title, uri );
 	}
 	this.actFromPopState = false;
 };
@@ -1477,7 +1477,7 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	$( 'html' ).removeClass( 've-activated' );
 
 	// Push non-veaction=edit url in history
-	if ( !this.actFromPopState && window.history.pushState ) {
+	if ( !this.actFromPopState && history.pushState ) {
 		// Remove the veaction query parameter
 		uri = this.currentUri;
 		if ( 'veaction' in uri.query ) {
@@ -1490,9 +1490,9 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 		// If there are other query parameters, set the url to the current url (with veaction removed).
 		// Otherwise use the canonical style view url (bug 42553).
 		if ( ve.getObjectValues( uri.query ).length ) {
-			window.history.pushState( this.popState, document.title, uri );
+			history.pushState( this.popState, document.title, uri );
 		} else {
-			window.history.pushState( this.popState, document.title, this.viewUri );
+			history.pushState( this.popState, document.title, this.viewUri );
 		}
 	}
 	this.actFromPopState = false;
