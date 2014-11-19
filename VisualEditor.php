@@ -645,6 +645,7 @@ $wgResourceModules += array(
 			'visualeditor-commentinspector-edit',
 			'visualeditor-commentinspector-title',
 			'visualeditor-commentinspector-tooltip',
+			'visualeditor-content-select-all',
 			'visualeditor-contextitemwidget-label-secondary',
 			'visualeditor-dialog-action-apply',
 			'visualeditor-dialog-action-cancel',
