@@ -35,7 +35,7 @@ Given(/^I am edit language screenshot page with (.+)$/) do |content|
   step "I edit the page with #{content}"
 end
 
-Given(/^I select an image by searching (.+) in Media option$/) do |content|
+Given(/^I select an image by searching (.+) in Media option$/) do |_content|
   step "I click in the editable part"
   step "I click Media"
   step "I enter San Francisco into media Search box"

@@ -11,7 +11,7 @@ end
 
 When(/^I select an Image$/) do
   on(VisualEditorPage).media_select_element.when_present.click
-  end
+end
 
 Then(/^(.+) should appear in the media diff view$/) do |headings_string|
   on(VisualEditorPage) do |page|
