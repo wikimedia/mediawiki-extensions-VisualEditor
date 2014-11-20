@@ -69,54 +69,11 @@ Style/GlobalVars:
 Style/HashSyntax:
   Enabled: false
 
-# Offense count: 1
-# Configuration parameters: MaxLineLength.
-Style/IfUnlessModifier:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Width.
-Style/IndentationWidth:
-  Enabled: false
-
-# Offense count: 9
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Enabled: false
-
-# Offense count: 12
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MethodDefParentheses:
-  Enabled: false
 
 # Offense count: 179
 # Cop supports --auto-correct.
 Style/SpaceAfterComma:
   Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
-
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/SpaceAroundOperators:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/SpaceBeforeComma:
-  Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForEmptyBraces, SupportedStyles.
-Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
 
 # Offense count: 281
 # Cop supports --auto-correct.
@@ -124,8 +81,3 @@ Style/SpaceInsideHashLiteralBraces:
 Style/StringLiterals:
   Enabled: false
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Enabled: false
