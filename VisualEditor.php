@@ -740,10 +740,11 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.MobileSurface.js',
 			'lib/ve/src/ui/ve.ui.MobileContext.js',
 			'lib/ve/src/ui/ve.ui.MobileWindowManager.js',
+			'lib/ve/src/ui/widgets/ve.ui.MobileContextOptionWidget.js',
 		),
 		'styles' => array(
 			'lib/ve/src/ui/styles/ve.ui.MobileSurface.css',
-			'lib/ve/src/ui/styles/ve.ui.MobileContext.css',
+			'lib/ve/src/ui/styles/widgets/ve.ui.MobileContextOptionWidget.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',
