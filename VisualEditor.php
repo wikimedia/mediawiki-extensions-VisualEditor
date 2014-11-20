@@ -559,8 +559,8 @@ $wgResourceModules += array(
 
 			'lib/ve/src/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.LinkTargetInputWidget.js',
-			'lib/ve/src/ui/widgets/ve.ui.ContextMenuWidget.js',
-			'lib/ve/src/ui/widgets/ve.ui.ContextItemWidget.js',
+			'lib/ve/src/ui/widgets/ve.ui.ContextSelectWidget.js',
+			'lib/ve/src/ui/widgets/ve.ui.ContextOptionWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.DimensionsWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.MediaSizeWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.WhitespacePreservingTextInputWidget.js',
@@ -604,8 +604,8 @@ $wgResourceModules += array(
 			// ui
 			'lib/ve/src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
 			'lib/ve/src/ui/styles/tools/ve.ui.FormatTool.css',
-			'lib/ve/src/ui/styles/widgets/ve.ui.ContextItemWidget.css',
-			'lib/ve/src/ui/styles/widgets/ve.ui.ContextMenuWidget.css',
+			'lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.css',
+			'lib/ve/src/ui/styles/widgets/ve.ui.ContextSelectWidget.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.DimensionsWidget.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.MediaSizeWidget.css',
 			'lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.css',
@@ -992,8 +992,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/annotations/ve.ce.MWInternalLinkAnnotation.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWLinkMenuItemWidget.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkMenuItemWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWLinkMenuOptionWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkMenuOptionWidget.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js',

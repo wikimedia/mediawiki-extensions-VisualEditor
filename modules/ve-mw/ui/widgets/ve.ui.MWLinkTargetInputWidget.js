@@ -53,7 +53,7 @@ OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupInputWidget );
  * a link to "Foo".
  *
  * @method
- * @param {OO.ui.MenuItemWidget|null} item Selected item
+ * @param {OO.ui.MenuOptionWidget|null} item Selected item
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	this.closeLookupMenu();
@@ -134,7 +134,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheItemFromData = function ( 
  * Get list of menu items from a server response.
  *
  * @param {Object} data Query result
- * @returns {OO.ui.MenuItemWidget[]} Menu items
+ * @returns {OO.ui.MenuOptionWidget[]} Menu items
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
 	var i, len, item, pageExistsExact, pageExists, index, matchingPage,
@@ -178,11 +178,11 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 
 	// External link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
-		items.push( new OO.ui.MenuSectionItemWidget(
+		items.push( new OO.ui.MenuSectionOptionWidget(
 			'externalLink',
 			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-external-link' ) }
 		) );
-		items.push( new ve.ui.MWLinkMenuItemWidget(
+		items.push( new ve.ui.MWLinkMenuOptionWidget(
 			this.getExternalLinkAnnotationFromUrl( this.value ),
 			{ $: menu$, classes: [ 've-ui-mwLinkTargetInputWidget-extlink' ], label: this.value, href: this.value }
 		) );
@@ -191,17 +191,17 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 	// Internal link
 	if ( !pageExists ) {
 		if ( titleObj ) {
-			items.push( new OO.ui.MenuSectionItemWidget(
+			items.push( new OO.ui.MenuSectionOptionWidget(
 				'newPage',
 				{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-new-page' ) }
 			) );
-			items.push( new ve.ui.MWInternalLinkMenuItemWidget(
+			items.push( new ve.ui.MWInternalLinkMenuOptionWidget(
 				this.getInternalLinkAnnotationFromTitle( this.value ),
 				{ $: menu$, pagename: this.value }
 			) );
 		} else {
 			// If no title object could be created, it means the title is illegal
-			item = new OO.ui.MenuSectionItemWidget(
+			item = new OO.ui.MenuSectionOptionWidget(
 				'illegalTitle',
 				{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-illegal-title' ) }
 			);
@@ -212,7 +212,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 
 	// Matching pages
 	if ( matchingPages && matchingPages.length ) {
-		items.push( new OO.ui.MenuSectionItemWidget(
+		items.push( new OO.ui.MenuSectionOptionWidget(
 			'matchingPages',
 			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-matching-page', matchingPages.length ) }
 		) );
@@ -221,7 +221,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 			matchingPages.unshift( this.value );
 		}
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
-			items.push( new ve.ui.MWInternalLinkMenuItemWidget(
+			items.push( new ve.ui.MWInternalLinkMenuOptionWidget(
 				this.getInternalLinkAnnotationFromTitle( matchingPages[i] ),
 				{ $: menu$, pagename: matchingPages[i] }
 			) );
@@ -230,12 +230,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 
 	// Disambiguation pages
 	if ( disambigPages.length ) {
-		items.push( new OO.ui.MenuSectionItemWidget(
+		items.push( new OO.ui.MenuSectionOptionWidget(
 			'disambigPages',
 			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length ) }
 		) );
 		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
-			items.push( new ve.ui.MWInternalLinkMenuItemWidget(
+			items.push( new ve.ui.MWInternalLinkMenuOptionWidget(
 				this.getInternalLinkAnnotationFromTitle( disambigPages[i] ),
 				{ $: menu$, pagename: disambigPages[i] }
 			) );
@@ -244,12 +244,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( 
 
 	// Redirect pages
 	if ( redirectPages.length ) {
-		items.push( new OO.ui.MenuSectionItemWidget(
+		items.push( new OO.ui.MenuSectionOptionWidget(
 			'redirectPages',
 			{ $: menu$, label: ve.msg( 'visualeditor-linkinspector-suggest-redirect-page', redirectPages.length ) }
 		) );
 		for ( i = 0, len = redirectPages.length; i < len; i++ ) {
-			items.push( new OO.ui.MenuItemWidget(
+			items.push( new OO.ui.MenuOptionWidget(
 				this.getInternalLinkAnnotationFromTitle( redirectPages[i] ),
 				{ $: menu$, rel: 'redirectPage', label: redirectPages[i] }
 			) );

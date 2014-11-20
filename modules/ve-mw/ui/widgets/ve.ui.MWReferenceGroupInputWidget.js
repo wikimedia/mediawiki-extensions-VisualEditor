@@ -38,7 +38,7 @@ OO.inheritClass( ve.ui.MWReferenceGroupInputWidget, OO.ui.ComboBoxWidget );
  * @param {ve.dm.InternalList} internalList Internal list with which to populate the menu
  */
 ve.ui.MWReferenceGroupInputWidget.prototype.populateMenu = function ( internalList ) {
-	var placeholderGroupItem = new OO.ui.MenuItemWidget( '', {
+	var placeholderGroupItem = new OO.ui.MenuOptionWidget( '', {
 		$: this.$,
 		label: this.emptyGroupName,
 		flags: 'emptyGroupPlaceholder'
@@ -50,7 +50,7 @@ ve.ui.MWReferenceGroupInputWidget.prototype.populateMenu = function ( internalLi
 			if ( groupInternalName.indexOf( 'mwReference/' ) === 0 ) {
 				var groupName = groupInternalName.substring( 'mwReference/'.length );
 				if ( groupName ) {
-					return new OO.ui.MenuItemWidget( groupName, { label: groupName } );
+					return new OO.ui.MenuOptionWidget( groupName, { label: groupName } );
 				}
 			}
 		}

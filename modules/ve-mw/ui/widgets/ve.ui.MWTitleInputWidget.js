@@ -49,7 +49,7 @@ OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupInputWidget );
  * Handle menu item select event.
  *
  * @method
- * @param {OO.ui.MenuItemWidget} item Selected item
+ * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	this.closeLookupMenu();
@@ -110,7 +110,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 			} else {
 				value = title.getPrefixedText();
 			}
-			items.push( new OO.ui.MenuItemWidget(
+			items.push( new OO.ui.MenuOptionWidget(
 				value, { $: menu$, label: value }
 			) );
 		}

@@ -1,21 +1,21 @@
 /*!
- * VisualEditor UserInterface MWLinkMenuItemWidget class
+ * VisualEditor UserInterface MWLinkMenuOptionWidget class
  *
  * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
 /**
- * Creates a ve.ui.MWInternalLinkMenuItemWidget object.
+ * Creates a ve.ui.MWInternalLinkMenuOptionWidget object.
  *
  * @class
- * @extends ve.ui.MWLinkMenuItemWidget
+ * @extends ve.ui.MWLinkMenuOptionWidget
  *
  * @constructor
  * @param {Mixed} data Item data
  * @param {Object} [config] Configuration options
  * @cfg {string} [pagename] Pagename to return the names of internal pages
  */
-ve.ui.MWInternalLinkMenuItemWidget = function VeUiMWInternalLinkMenuItemWidget( data, config ) {
+ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidget( data, config ) {
 	// Config intialization
 	config = config || {};
 
@@ -23,7 +23,7 @@ ve.ui.MWInternalLinkMenuItemWidget = function VeUiMWInternalLinkMenuItemWidget( 
 	this.pagename = config.pagename;
 
 	// Parent constructor
-	ve.ui.MWLinkMenuItemWidget.call( this, data, $.extend( { label: this.pagename, href: mw.util.getUrl( this.pagename ) }, config ) );
+	ve.ui.MWLinkMenuOptionWidget.call( this, data, $.extend( { label: this.pagename, href: mw.util.getUrl( this.pagename ) }, config ) );
 
 	// Style based on link cache information
 	ve.init.platform.linkCache.styleElement( this.pagename, this.$link );
@@ -31,4 +31,4 @@ ve.ui.MWInternalLinkMenuItemWidget = function VeUiMWInternalLinkMenuItemWidget( 
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWInternalLinkMenuItemWidget, ve.ui.MWLinkMenuItemWidget );
+OO.inheritClass( ve.ui.MWInternalLinkMenuOptionWidget, ve.ui.MWLinkMenuOptionWidget );

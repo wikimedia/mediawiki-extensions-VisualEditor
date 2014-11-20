@@ -1,26 +1,26 @@
 /*!
- * VisualEditor UserInterface MWLinkMenuItemWidget class
+ * VisualEditor UserInterface MWLinkMenuOptionWidget class
  *
  * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
 /**
- * Creates a ve.ui.MWLinkMenuItemWidget object.
+ * Creates a ve.ui.MWLinkMenuOptionWidget object.
  *
  * @class
- * @extends OO.ui.MenuItemWidget
+ * @extends OO.ui.MenuOptionWidget
  *
  * @constructor
  * @param {Mixed} data Item data
  * @param {Object} [config] Configuration options
  * @cfg {string} [href] href to point to pages from link suggestions
  */
-ve.ui.MWLinkMenuItemWidget = function VeUiMWLinkMenuItemWidget( data, config ) {
+ve.ui.MWLinkMenuOptionWidget = function VeUiMWLinkMenuOptionWidget( data, config ) {
 	// Config intialization
 	config = config || {};
 
 	// Parent constructor
-	ve.ui.MWLinkMenuItemWidget.super.call( this, data, config );
+	ve.ui.MWLinkMenuOptionWidget.super.call( this, data, config );
 
 	// Intialization
 	this.$label.wrap( '<a>' );
@@ -30,4 +30,4 @@ ve.ui.MWLinkMenuItemWidget = function VeUiMWLinkMenuItemWidget( data, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWLinkMenuItemWidget, OO.ui.MenuItemWidget );
+OO.inheritClass( ve.ui.MWLinkMenuOptionWidget, OO.ui.MenuOptionWidget );

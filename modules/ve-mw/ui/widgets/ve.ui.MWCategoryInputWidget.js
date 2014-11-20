@@ -172,7 +172,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 		}
 	], function ( index, sectionData ) {
 		if ( sectionData.items.length ) {
-			itemWidgets.push( new OO.ui.MenuSectionItemWidget(
+			itemWidgets.push( new OO.ui.MenuSectionOptionWidget(
 				sectionData.id, { $: this.lookupMenu.$, label: sectionData.label }
 			) );
 			$.each( sectionData.items, function ( index, categoryItem ) {
@@ -189,14 +189,14 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
  *
  * @method
  * @param {string} name Category name
- * @returns {OO.ui.MenuItemWidget} Menu item widget to be shown
+ * @returns {OO.ui.MenuOptionWidget} Menu item widget to be shown
  */
 ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( name ) {
 	var cachedData = ve.init.platform.linkCache.getCached(
 		mw.Title.newFromText( name, mw.config.get( 'wgNamespaceIds' ).category ).getPrefixedText()
 	);
 	if ( cachedData && cachedData.redirectFrom ) {
-		return new OO.ui.MenuItemWidget( name, {
+		return new OO.ui.MenuOptionWidget( name, {
 			$: this.lookupMenu.$,
 			autoFitLabel: false,
 			label: this.$( '<span>' )
@@ -205,7 +205,7 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 				.append( this.$( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
 		} );
 	} else {
-		return new OO.ui.MenuItemWidget( name, { $: this.lookupMenu.$, label: name } );
+		return new OO.ui.MenuOptionWidget( name, { $: this.lookupMenu.$, label: name } );
 	}
 };
 

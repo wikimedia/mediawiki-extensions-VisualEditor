@@ -22,7 +22,7 @@
 	padding: 0 1.143em; /* surface-margin-left (1em) / (mw-body-content font-size) 0.875em */
 }
 
-.ve-init-mw-viewPageTarget-surface .oo-ui-menuWidget {
+.ve-init-mw-viewPageTarget-surface .oo-ui-menuSelectWidget {
 	font-size: 0.8em;
 }
 

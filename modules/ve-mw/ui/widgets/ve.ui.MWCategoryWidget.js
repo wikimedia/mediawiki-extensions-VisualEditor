@@ -87,7 +87,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
  * Handle menu item select event.
  *
  * @method
- * @param {OO.ui.MenuItemWidget} item Selected item
+ * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWCategoryWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	var categoryItem,
