@@ -15,16 +15,16 @@
  * @param {ve.ce.ContentBranchNode} [parentNode] Node rendering this annotation
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation( model, parentNode, config ) {
+ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation() {
 	var annotation = this;
 	// Parent constructor
-	ve.ce.LinkAnnotation.call( this, model, parentNode, config );
+	ve.ce.MWInternalLinkAnnotation.super.apply( this, arguments );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwInternalLinkAnnotation' );
 
 	// Style based on link cache information
-	ve.init.platform.linkCache.styleElement( model.getAttribute( 'lookupTitle' ), annotation.$element );
+	ve.init.platform.linkCache.styleElement( this.model.getAttribute( 'lookupTitle' ), annotation.$element );
 
 	// HACK: Override href in case hrefPrefix isn't set
 	// This is a workaround for bug 58314 until such time as Parsoid gets rid of
