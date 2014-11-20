@@ -18,7 +18,7 @@ def license(language_code, file_name)
 [[Category:VisualEditor automatic screenshots/#{language_code}]]"
 end
 
-def upload_image file_path, client
+def upload_image(file_path, client)
   language_code = ENV['LANGUAGE_SCREENSHOT_CODE']
   file_name = File.basename(file_path, "")
   file_license = license(language_code, file_name)

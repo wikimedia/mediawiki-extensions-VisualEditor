@@ -1,5 +1,5 @@
 When(/^I visit a non-existent page at (.+)$/) do |site|
-  visit(DummyPage, :using_params => {:site => site})
+  visit(DummyPage, :using_params => { :site => site })
 end
 
 Then(/^I should see the Visual Editor editing surface$/) do
