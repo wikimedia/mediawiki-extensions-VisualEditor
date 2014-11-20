@@ -1,6 +1,6 @@
 Given(/^I am on the (.+) page$/) do |article|
   article = article.gsub(/ /, '_')
-  visit(ZtargetPage, :using_params => { :article_name => article })
+  visit(ZtargetPage, using_params: { article_name: article })
 end
 
 Given(/^I click in the editable part$/) do

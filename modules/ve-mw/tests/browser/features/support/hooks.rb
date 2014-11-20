@@ -4,7 +4,7 @@ end
 
 #This is for the multiedit test
 Before("@edit_user_page_login") do
-  if (!$edit_user_page_login or !(ENV["REUSE_BROWSER"] == "true")) and @browser
+  if (!$edit_user_page_login || !(ENV["REUSE_BROWSER"] == "true")) && @browser
     step "I am logged in"
     step "I go to the browser specific edit page page"
     step "I edit the page with Editing with"
