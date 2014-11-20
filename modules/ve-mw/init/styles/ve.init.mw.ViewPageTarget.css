@@ -59,11 +59,6 @@
 	padding: 0.5em 1em;
 }
 
-.ve-init-mw-viewPageTarget-toolbar .oo-ui-popupButtonWidget .oo-ui-popupWidget-popup,
-.ve-init-mw-viewPageTarget-toolbar .oo-ui-popupButtonWidget .oo-ui-popupWidget-tail {
-	z-index: 4;
-}
-
 .ve-ui-mwNoticesPopupTool-items > div:not(:first-child),
 .ve-ui-mwHelpPopupTool-item:not(:first-child) {
 	border-top: solid 1px #ddd;
