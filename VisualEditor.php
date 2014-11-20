@@ -1133,7 +1133,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/contextitems/ve.ui.MWInternalLinkContextItem.js',
 		),
 		'styles' => array(
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css'
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css',
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css'
 		),
 		'skinStyles' => array(
 			'default' => array(
@@ -1550,6 +1551,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/ve.ui.Icons.css',
 		),
 		'dependencies' => array(
+			'oojs-ui.styles.icons-content',
 			'oojs-ui.styles.icons-editing-advanced',
 			'oojs-ui.styles.icons-editing-core',
 			'oojs-ui.styles.icons-editing-styling',

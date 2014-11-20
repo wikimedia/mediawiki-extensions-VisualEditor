@@ -33,6 +33,12 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	// Initialization
 	this.$element.addClass( 've-ui-mwLinkTargetInputWidget' );
 	this.lookupMenu.$element.addClass( 've-ui-mwLinkTargetInputWidget-menu' );
+	if ( mw.config.get( 'wgVisualEditor' ).usePageImages ) {
+		this.lookupMenu.$element.addClass( 've-ui-mwLinkTargetInputWidget-menu-withImages' );
+	}
+	if ( mw.config.get( 'wgVisualEditor' ).usePageDescriptions ) {
+		this.lookupMenu.$element.addClass( 've-ui-mwLinkTargetInputWidget-menu-withDescriptions' );
+	}
 
 	this.interwikiPrefixes = [];
 	this.interwikiPrefixesPromise = new mw.Api().get( {
@@ -103,8 +109,8 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 	var req,
 		widget = this,
 		promiseAbortObject = { abort: function () {
-		// Do nothing. This is just so OOUI doesn't break due to abort being undefined.
-	} };
+			// Do nothing. This is just so OOUI doesn't break due to abort being undefined.
+		} };
 
 	if ( mw.Title.newFromText( this.value ) ) {
 		return this.interwikiPrefixesPromise.then( function () {
@@ -124,7 +130,10 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 					generator: 'prefixsearch',
 					gpssearch: widget.value,
 					gpsnamespace: 0,
-					prop: 'info|pageprops',
+					gpslimit: 10,
+					prop: 'info|pageprops|pageimages|pageterms',
+					pithumbsize: 80,
+					pilimit: 10,
 					ppprop: 'disambiguation'
 				} );
 				promiseAbortObject.abort = req.abort.bind( req ); // todo: ew
@@ -155,26 +164,30 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheDataFromResponse = functio
  * @returns {OO.ui.MenuOptionWidget[]} Menu items
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	var i, len, item, pageExistsExact, pageExists, index, matchingPage,
+	var i, len, item, pageExistsExact, pageExists, index, matchingPage, linkData,
 		items = [],
 		existingPages = [],
 		matchingPages = [],
 		disambigPages = [],
 		redirectPages = [],
 		titleObj = mw.Title.newFromText( this.value ),
-		linkCacheUpdate = {};
+		links = {};
 
 	for ( index in data ) {
 		matchingPage = data[index];
-		linkCacheUpdate[matchingPage.title] = { missing: false, redirect: false, disambiguation: false };
+		links[matchingPage.title] = {
+			missing: false, redirect: false, disambiguation: false,
+			imageUrl: ve.getProp( matchingPage, 'thumbnail', 'source' ),
+			description: ve.getProp( matchingPage, 'terms', 'description' )
+		};
 		existingPages.push( matchingPage.title );
 
 		if ( matchingPage.redirect !== undefined ) {
 			redirectPages.push( matchingPage.title );
-			linkCacheUpdate[matchingPage.title].redirect = true;
+			links[matchingPage.title].redirect = true;
 		} else if ( matchingPage.pageprops !== undefined && matchingPage.pageprops.disambiguation !== undefined ) {
 			disambigPages.push( matchingPage.title );
-			linkCacheUpdate[matchingPage.title].disambiguation = true;
+			links[matchingPage.title].disambiguation = true;
 		} else {
 			matchingPages.push( matchingPage.title );
 		}
@@ -188,10 +201,10 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 	);
 
 	if ( !pageExists ) {
-		linkCacheUpdate[this.value] = { missing: true, redirect: false, disambiguation: false };
+		links[this.value] = { missing: true, redirect: false, disambiguation: false };
 	}
 
-	ve.init.platform.linkCache.set( linkCacheUpdate );
+	ve.init.platform.linkCache.set( links );
 
 	// External link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
@@ -233,17 +246,19 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 	if ( matchingPages && matchingPages.length ) {
 		items.push( new OO.ui.MenuSectionOptionWidget( {
 			data: 'matchingPages',
-			label: ve.msg( 'visualeditor-linkinspector-suggest-matching-page',
-			matchingPages.length )
+			label: ve.msg( 'visualeditor-linkinspector-suggest-matching-page', matchingPages.length )
 		} ) );
 		// Offer the exact text as a suggestion if the page exists
 		if ( pageExists && !pageExistsExact ) {
 			matchingPages.unshift( this.value );
 		}
 		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
+			linkData = links[matchingPages[i]] || {};
 			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
 				data: this.getInternalLinkAnnotationFromTitle( matchingPages[i] ),
-				pagename: matchingPages[i]
+				pagename: matchingPages[i],
+				imageUrl: linkData.imageUrl,
+				description: linkData.description
 			} ) );
 		}
 	}
@@ -255,9 +270,12 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 			label: ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length )
 		} ) );
 		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
+			linkData = links[disambigPages[i]] || {};
 			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
 				data: this.getInternalLinkAnnotationFromTitle( disambigPages[i] ),
-				pagename: disambigPages[i]
+				pagename: disambigPages[i],
+				imageUrl: linkData.imageUrl,
+				description: linkData.description
 			} ) );
 		}
 	}
@@ -269,10 +287,10 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 			label: ve.msg( 'visualeditor-linkinspector-suggest-redirect-page', redirectPages.length )
 		} ) );
 		for ( i = 0, len = redirectPages.length; i < len; i++ ) {
-			items.push( new OO.ui.MenuOptionWidget( {
+			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
 				data: this.getInternalLinkAnnotationFromTitle( redirectPages[i] ),
-				rel: 'redirectPage',
 				label: redirectPages[i]
+				// TODO: Add description based on redirect target
 			} ) );
 		}
 	}

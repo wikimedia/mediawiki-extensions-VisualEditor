@@ -1,7 +1,8 @@
 /*!
- * VisualEditor UserInterface MWLinkMenuOptionWidget class
+ * VisualEditor UserInterface MWLinkMenuOptionWidget class.
  *
- * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /**
@@ -16,7 +17,7 @@
  */
 ve.ui.MWLinkMenuOptionWidget = function VeUiMWLinkMenuOptionWidget( config ) {
 	// Config initialization
-	config = config || {};
+	config = $.extend( { icon: null }, config );
 
 	// Parent constructor
 	ve.ui.MWLinkMenuOptionWidget.super.call( this, config );
