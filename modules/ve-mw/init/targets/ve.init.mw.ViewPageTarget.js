@@ -1549,7 +1549,7 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
 			);
 		}
 
-		$( '#footer-info-lastmod' ).text( ' ' + mw.msg(
+		$( '#footer-info-lastmod' ).html( ' ' + mw.msg(
 			'lastmodifiedat',
 			lastModified.date,
 			lastModified.time
