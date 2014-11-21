@@ -23,11 +23,6 @@ Metrics/LineLength:
   Max: 398
 
 # Offense count: 3
-# Configuration parameters: CountComments.
-Metrics/MethodLength:
-  Max: 18
-
-# Offense count: 3
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
   Enabled: false
