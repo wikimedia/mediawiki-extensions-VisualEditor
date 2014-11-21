@@ -13,7 +13,7 @@ Given(/^I can see the References User Interface$/) do
 end
 
 When(/^I click Insert references list$/) do
-  on(VisualEditorPage).insert_references_list_element.when_present.click
+  on(VisualEditorPage).insert_element.when_present.click
 end
 
 When(/^I click Reference$/) do

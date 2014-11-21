@@ -49,5 +49,5 @@ Then(/^I should see a list of template suggestions$/) do
 end
 
 Then(/^I should see the Insert template button$/) do
-  expect(on(VisualEditorPage).insert_template_element.when_present).to be_visible
+  expect(on(VisualEditorPage).insert_element.when_present).to be_visible
 end
