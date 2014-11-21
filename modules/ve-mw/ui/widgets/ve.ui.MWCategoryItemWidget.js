@@ -21,7 +21,7 @@
  * @cfg {string} [redirectTo] The name of the category this category's page redirects to.
  */
 ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
-	// Config intialization
+	// Config initialization
 	config = ve.extendObject( { indicator: 'down' }, config );
 
 	// Parent constructor

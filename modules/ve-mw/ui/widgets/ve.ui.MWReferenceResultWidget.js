@@ -17,7 +17,7 @@
  * @cfg {boolean} [divider] Section divider item, not highlightable or selectable
  */
 ve.ui.MWReferenceResultWidget = function VeUiMWReferenceResultWidget( data, config ) {
-	// Configuration intialization
+	// Configuration initialization
 	config = config || {};
 
 	// Parent constructor

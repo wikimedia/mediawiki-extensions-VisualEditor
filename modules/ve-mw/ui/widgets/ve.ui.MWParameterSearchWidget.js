@@ -17,7 +17,7 @@
  * @cfg {number|null} [limit=3] Limit on the number of initial options to show, null to show all
  */
 ve.ui.MWParameterSearchWidget = function VeUiMWParameterSearchWidget( template, config ) {
-	// Configuration intialization
+	// Configuration initialization
 	config = ve.extendObject( {
 		placeholder: ve.msg( 'visualeditor-parameter-input-placeholder' ),
 		limit: 3

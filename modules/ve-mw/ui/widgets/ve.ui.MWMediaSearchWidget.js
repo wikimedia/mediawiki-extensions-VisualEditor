@@ -16,7 +16,7 @@
  * @param {number} [size] Vertical size of thumbnails
  */
 ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
-	// Configuration intialization
+	// Configuration initialization
 	config = ve.extendObject( {
 		placeholder: ve.msg( 'visualeditor-media-input-placeholder' )
 	}, config );
