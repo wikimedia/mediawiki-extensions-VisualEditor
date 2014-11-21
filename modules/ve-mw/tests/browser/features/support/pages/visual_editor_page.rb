@@ -162,9 +162,9 @@ class VisualEditorPage
     span(:another_save_page, class: 'oo-ui-labelElement-label', text: 'Save page', frame: frame)
     text_field(:link_textfield, index: 0, frame: frame)
     span(:links_done, text: 'Done', frame: frame)
-    div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) #ALSO USED IN LANGUAGE SCREENSHOT
+    div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) # ALSO USED IN LANGUAGE SCREENSHOT
 
-    #USED IN LANGUAGE SCREENSHOT TEST:
+    # USED IN LANGUAGE SCREENSHOT TEST:
     text_field(:media_alternative_text, css: 'div.oo-ui-widget.oo-ui-widget-enabled.oo-ui-inputWidget.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input', frame: frame)
     div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 1, frame: frame)
     list_item(:media_advanced_settings, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-optionWidget oo-ui-decoratedOptionWidget oo-ui-outlineItemWidget oo-ui-outlineItemWidget-level-0 oo-ui-iconElement oo-ui-labelElement', frame: frame)

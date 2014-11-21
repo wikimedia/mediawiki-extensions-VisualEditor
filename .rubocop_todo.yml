@@ -41,8 +41,3 @@ Style/GlobalVars:
 Style/IfUnlessModifier:
   Enabled: false
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Enabled: false
-

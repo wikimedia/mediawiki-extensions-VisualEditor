@@ -87,7 +87,7 @@ end
 When(/^I send right arrow times (\d+)$/) do |number|
   number.to_i.times do
     on(VisualEditorPage).content_element.send_keys :arrow_right
-    on(VisualEditorPage).content_element.fire_event('onblur') #gerrit 86800/86801
+    on(VisualEditorPage).content_element.fire_event('onblur') # gerrit 86800/86801
   end
 end
 
