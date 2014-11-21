@@ -1,3 +1,4 @@
+# This is the main page for VisualEditor
 class VisualEditorPage
   include PageObject
   include URL

@@ -27,10 +27,6 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 18
 
-# Offense count: 4
-Style/Documentation:
-  Enabled: false
-
 # Offense count: 3
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:

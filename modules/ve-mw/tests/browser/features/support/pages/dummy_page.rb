@@ -1,3 +1,4 @@
+# This is used in the verify_production_wikis test
 class DummyPage
   include PageObject
 
