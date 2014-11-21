@@ -7,6 +7,8 @@
 
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -0.6em -0.8em 1em -0.8em;
+	/* So that the toolbar always appears over the overlay */
+	z-index: 5;
 }
 
 /* Correct for Monobook's small font in toolbars and contexts, but beware:
@@ -21,6 +23,7 @@
 }
 
 .ve-ui-overlay {
-	z-index: 2;
+	/* So that the overlay always appears over the site logo, search box and personal tools */
+	z-index: 4;
 	font-size: 127%;
 }
