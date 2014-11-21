@@ -7,7 +7,7 @@ end
 
 When(/^I click Decrease indentation$/) do
   on(VisualEditorPage) do |page|
-    step "I click in the editable part"
+    step 'I click in the editable part'
     page.bullet_number_selector_element.when_present.click
     page.decrease_indentation_element.when_present.click
   end

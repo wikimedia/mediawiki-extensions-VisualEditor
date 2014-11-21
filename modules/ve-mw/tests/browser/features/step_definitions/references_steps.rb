@@ -4,7 +4,7 @@ Given(/^I go to a page that has references$/) do
 ==References==
 <references />"
 
-  on(APIPage).create "Reference VisualEditor Test", wikitext
+  on(APIPage).create 'Reference VisualEditor Test', wikitext
   step 'I am on the Reference VisualEditor Test page'
 end
 
@@ -40,9 +40,9 @@ When(/^I click on Extension:VisualEditor reference$/) do
 end
 
 When(/^I create a reference using existing reference$/) do
-  step("I click Reference")
-  step("I click use an existing reference button in References User Interface")
-  step("I click on Extension:VisualEditor reference")
+  step('I click Reference')
+  step('I click use an existing reference button in References User Interface')
+  step('I click on Extension:VisualEditor reference')
 end
 
 Then(/^first link to reference should be visible$/) do

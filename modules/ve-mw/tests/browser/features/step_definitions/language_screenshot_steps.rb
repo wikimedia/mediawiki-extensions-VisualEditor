@@ -1,18 +1,18 @@
 Given(/^I go to the "(.*?)" page which has a media image$/) do |page_title|
-  wikitext = "[[File:2012-07-18 Market Street - San Francisco.webm|thumb]]"
+  wikitext = '[[File:2012-07-18 Market Street - San Francisco.webm|thumb]]'
   step "I go to the \"#{page_title}\" page with source content \"#{wikitext}\""
 end
 
 Given(/^I select the image in VisualEditor$/) do
-  step "I click in the editable part"
+  step 'I click in the editable part'
   on(VisualEditorPage).media_image_element.when_present.click
 end
 
 Given (/^I go to "(.+)" page which has references$/) do |page_title|
-  wikitext = "VisualEditor is a MediaWiki extension.<ref>[http://www.mediawiki.org/wiki/Extension:VisualEditor Extension:VisualEditor]</ref>"
+  wikitext = 'VisualEditor is a MediaWiki extension.<ref>[http://www.mediawiki.org/wiki/Extension:VisualEditor Extension:VisualEditor]</ref>'
   on(APIPage).create page_title, wikitext
   step "I go to the #{page_title} page for screenshot"
-  step "I click in the editable part"
+  step 'I click in the editable part'
 end
 
 Given(/^I go to the "(.*?)" page with source content "(.*?)"$/) do |page_title, page_content|
@@ -27,19 +27,19 @@ end
 
 Given(/^I am editing language screenshot page$/) do
   step "I go to the \"Language Screenshot\" page with source content \"Language Screenshot\""
-  step "I click in the editable part"
+  step 'I click in the editable part'
 end
 
 Given(/^I am edit language screenshot page with (.+)$/) do |content|
-  step "I am editing language screenshot page"
+  step 'I am editing language screenshot page'
   step "I edit the page with #{content}"
 end
 
 Given(/^I select an image by searching (.+) in Media option$/) do |_content|
-  step "I click in the editable part"
-  step "I click Media"
-  step "I enter San Francisco into media Search box"
-  step "I select an Image"
+  step 'I click in the editable part'
+  step 'I click Media'
+  step 'I enter San Francisco into media Search box'
+  step 'I select an Image'
 end
 
 Given(/^I enter "(.*?)" in alternative text$/) do |content|
@@ -55,8 +55,8 @@ When(/^I click on the Insert menu$/) do
 end
 
 When(/^I click on the Special character option in Insert menu$/) do
-  step "I click on the Insert menu"
-  step "I click on More in insert pull-down menu"
+  step 'I click on the Insert menu'
+  step 'I click on More in insert pull-down menu'
   on(VisualEditorPage).special_character_element.when_present.click
 end
 
@@ -87,7 +87,7 @@ end
 When(/^I send right arrow times (\d+)$/) do |number|
   number.to_i.times do
     on(VisualEditorPage).content_element.send_keys :arrow_right
-    on(VisualEditorPage).content_element.fire_event("onblur") #gerrit 86800/86801
+    on(VisualEditorPage).content_element.fire_event('onblur') #gerrit 86800/86801
   end
 end
 
@@ -96,28 +96,28 @@ When(/^I click on Basic Reference in Cite menu dropdown$/) do
 end
 
 When(/^I click on category in hamburger menu$/) do
-  step "I click the hamburger menu"
+  step 'I click the hamburger menu'
   on(VisualEditorPage).category_link_element.when_present.click
 end
 
 When(/^I click on Formula option in Insert menu$/) do
-  step "I click on the Insert menu"
+  step 'I click on the Insert menu'
   on(VisualEditorPage).formula_link_element.when_present.click
 end
 
 When(/^I type a formula$/) do
-  on(VisualEditorPage).formula_area_element.when_present.send_keys "2+2"
+  on(VisualEditorPage).formula_area_element.when_present.send_keys '2+2'
 end
 
 When(/^I go to random page for screenshot$/) do
-  step "I am at a random page"
+  step 'I am at a random page'
   @browser.goto "#{@browser.url}?setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
 end
 
 When(/^I click on References list in Insert menu$/) do
-  step "I click in the editable part"
-  step "I click on the Insert menu"
-  step "I click on More in insert pull-down menu"
+  step 'I click in the editable part'
+  step 'I click on the Insert menu'
+  step 'I click on More in insert pull-down menu'
   on(VisualEditorPage).ve_references_element.when_present.click
 end
 
@@ -128,7 +128,7 @@ end
 
 Then(/^I should see Headings pull-down menu$/) do
   on(VisualEditorPage).heading_dropdown_menus_element.when_present.should be_visible
-  step "I take screenshot of pull-dowm menu"
+  step 'I take screenshot of pull-dowm menu'
 end
 
 Then(/^I take screenshot of pull-dowm menu$/) do
@@ -137,7 +137,7 @@ end
 
 Then(/^I should see Formatting pull-down menu$/) do
   on(VisualEditorPage).formatting_option_menus_element.when_present.should be_visible
-  step "I take screenshot of Formatting pull-down menu"
+  step 'I take screenshot of Formatting pull-down menu'
 end
 
 Then(/^I take screenshot of Formatting pull-down menu$/) do
@@ -146,7 +146,7 @@ end
 
 Then(/^I should see pull-down menu containing Page Settings$/) do
   on(VisualEditorPage).page_settings_element.when_present.should be_visible
-  step "I take screenshot of Visual Editor insert menu"
+  step 'I take screenshot of Visual Editor insert menu'
 end
 
 Then(/^I take screenshot of Visual Editor insert menu$/) do
@@ -155,11 +155,11 @@ end
 
 Then(/^I should see Insert pull-down menu$/) do
   on(VisualEditorPage).insert_pull_down_element.when_present.should be_visible
-  step "I take screenshot of insert pull-down menu"
+  step 'I take screenshot of insert pull-down menu'
 end
 
 Then(/^I take screenshot of insert pull-down menu$/) do
-  step "I click on More in insert pull-down menu"
+  step 'I click on More in insert pull-down menu'
   capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.insert_menu_element, @current_page.insert_pull_down_element])
 
   highlight @current_page.media_insert_menu_element
@@ -297,6 +297,6 @@ Then(/^I should see References list dialog box$/) do
 end
 
 When(/^I go to language screenshot page$/) do
-  step "I am on the Language Screenshot page"
+  step 'I am on the Language Screenshot page'
   @browser.goto "#{@browser.url}&setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
 end

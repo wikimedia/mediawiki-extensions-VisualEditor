@@ -1,5 +1,5 @@
 def capture_screenshot(file_name, page_elements, offset_element = nil, browser_zoom = 1)
-  screenshot_directory = ENV["LANGUAGE_SCREENSHOT_PATH"] || "screenshots"
+  screenshot_directory = ENV['LANGUAGE_SCREENSHOT_PATH'] || 'screenshots'
   FileUtils.mkdir_p screenshot_directory
   screenshot_path = "#{screenshot_directory}/#{file_name}"
 
@@ -29,7 +29,7 @@ def crop_image(path, page_elements, offset_element)
   width = crop_rectangle[2]
   height = crop_rectangle[3]
 
-  require "chunky_png"
+  require 'chunky_png'
   image = ChunkyPNG::Image.from_file path
 
   # It happens with some elements that an image goes off the screen a bit,

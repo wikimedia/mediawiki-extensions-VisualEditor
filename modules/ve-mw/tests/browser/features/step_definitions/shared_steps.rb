@@ -5,14 +5,14 @@ end
 
 Given(/^I click in the editable part$/) do
   on(VisualEditorPage) do |page|
-    page.content_element.when_present.fire_event("onfocus")
-    page.content_element.send_keys("")
+    page.content_element.when_present.fire_event('onfocus')
+    page.content_element.send_keys('')
   end
 end
 
 Given(/^I go to the browser specific edit page page$/) do
-  page_title = "Edit page for " + ENV['BROWSER']
-  page_content = "Edit page for " + ENV['BROWSER']
+  page_title = 'Edit page for ' + ENV['BROWSER']
+  page_content = 'Edit page for ' + ENV['BROWSER']
   on(APIPage).create page_title, page_content
   step "I am on the #{page_title} page"
 end
@@ -26,7 +26,7 @@ end
 Given(/^I make the text "(.*?)" be selected$/) do |select_text|
   on(VisualEditorPage) do |page|
     page.content_element.when_present.click
-    require "watir-webdriver/extensions/select_text"
+    require 'watir-webdriver/extensions/select_text'
     page.content_element.when_present.select_text select_text
   end
 end
@@ -99,9 +99,9 @@ Then(/^(.+) should appear in the diff view$/) do |headings_string|
     # Contents pulled from the Cucumber tables in the .feature are escaped regexes.
     # In this case we want unescaped regexes (and in one case a leading space)
     # So we put single quotes around the entries in the .feature file and strip them here to get unescaped regexes.
-    headings_string = headings_string.gsub(/"/, "")
+    headings_string = headings_string.gsub(/"/, '')
     page.wait_until(10) do
-      page.diff_view.include? "Your text"
+      page.diff_view.include? 'Your text'
     end
     expect(page.diff_view).to match headings_string
   end

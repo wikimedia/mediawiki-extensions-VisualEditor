@@ -37,26 +37,26 @@ end
 Then(/^a non\-existing link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "DoesNotExist"
+      page.diff_view.include? 'DoesNotExist'
     end
-    expect(page.diff_view).to match "[[DoesNotExist|Links]]"
+    expect(page.diff_view).to match '[[DoesNotExist|Links]]'
   end
 end
 
 Then(/^an external link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "example.com"
+      page.diff_view.include? 'example.com'
     end
-    expect(page.diff_view).to match "[http://www.example.com Links]"
+    expect(page.diff_view).to match '[http://www.example.com Links]'
   end
 end
 
 Then(/^an internal link appears in the diff view$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
-      page.diff_view.include? "Main Page"
+      page.diff_view.include? 'Main Page'
     end
-    expect(page.diff_view).to match "[[Main Page|Links]]"
+    expect(page.diff_view).to match '[[Main Page|Links]]'
   end
 end
