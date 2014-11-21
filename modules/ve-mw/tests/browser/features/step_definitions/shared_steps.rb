@@ -67,6 +67,10 @@ When(/^I click This is a minor edit$/) do
   on(VisualEditorPage).minor_edit_element.when_present.click
 end
 
+When(/^I do not see This is a minor edit$/) do
+  on(VisualEditorPage).minor_edit_element.when_not_present
+end
+
 When(/^I edit the description of the change$/) do
   on(VisualEditorPage).describe_change_element.when_visible.send_keys("Describing with #{@random_string}")
 end
@@ -79,7 +83,7 @@ When(/^I edit the page with (.+)$/) do |input_string|
 end
 
 When(/^I see the IP warning signs$/) do
-  on(VisualEditorPage).ip_warning.when_present
+  on(VisualEditorPage).ip_warning_element.when_present
 end
 
 Then(/^I can click Cancel save$/) do
