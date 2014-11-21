@@ -16,7 +16,7 @@
  * @cfg {string} [pagename] Pagename to return the names of internal pages
  */
 ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidget( data, config ) {
-	// Config intialization
+	// Config initialization
 	config = config || {};
 
 	// Properties

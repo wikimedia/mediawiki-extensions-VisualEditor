@@ -17,7 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget, config ) {
-	// Config intialization
+	// Config initialization
 	config = ve.extendObject( {
 		placeholder: ve.msg( 'visualeditor-dialog-meta-categories-input-placeholder' )
 	}, config );

@@ -17,7 +17,7 @@
  * @cfg {number} [namespace] Namespace to prepend to queries
  */
 ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
-	// Config intialization
+	// Config initialization
 	config = config || {};
 
 	// Parent constructor

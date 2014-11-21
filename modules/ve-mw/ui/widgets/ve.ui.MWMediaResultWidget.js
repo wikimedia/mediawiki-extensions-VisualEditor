@@ -17,7 +17,7 @@
  * @cfg {number} [size] Media thumbnail size
  */
 ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( data, config ) {
-	// Configuration intialization
+	// Configuration initialization
 	config = config || {};
 
 	// Parent constructor

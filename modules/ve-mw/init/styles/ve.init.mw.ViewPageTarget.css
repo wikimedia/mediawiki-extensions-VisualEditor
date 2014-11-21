@@ -24,7 +24,7 @@
 
 /* Toolbar */
 
-.ve-init-mw-viewPageTarget-toolbar-utilites,
+.ve-init-mw-viewPageTarget-toolbar-utilities,
 .ve-init-mw-viewPageTarget-toolbar-actions {
 	display: inline-block;
 	vertical-align: middle;
@@ -36,7 +36,7 @@
 	padding: 0.25em;
 }
 
-.ve-init-mw-viewPageTarget-toolbar-utilites > .oo-ui-buttonElement-frameless {
+.ve-init-mw-viewPageTarget-toolbar-utilities > .oo-ui-buttonElement-frameless {
 	margin-right: 0.2em;
 	margin-top: 0.2em;
 }

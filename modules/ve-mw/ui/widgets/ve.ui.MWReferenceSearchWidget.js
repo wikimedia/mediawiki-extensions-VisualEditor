@@ -15,7 +15,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
-	// Configuration intialization
+	// Configuration initialization
 	config = ve.extendObject( {
 		placeholder: ve.msg( 'visualeditor-reference-input-placeholder' )
 	}, config );

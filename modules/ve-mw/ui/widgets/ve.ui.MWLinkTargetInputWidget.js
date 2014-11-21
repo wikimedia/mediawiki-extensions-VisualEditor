@@ -16,7 +16,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
-	// Config intialization
+	// Config initialization
 	config = config || {};
 
 	// Parent constructor

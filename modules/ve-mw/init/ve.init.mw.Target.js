@@ -14,7 +14,7 @@
  * @extends ve.init.Target
  *
  * @constructor
- * @param {jQuery} $container Conainter to render target into
+ * @param {jQuery} $container Container to render target into
  * @param {string} pageName Name of target page
  * @param {number} [revisionId] If the editor should load a revision of the page, pass the
  *  revision id here. Defaults to loading the latest version (see #load).

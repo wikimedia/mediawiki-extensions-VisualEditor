@@ -16,13 +16,13 @@
  * @cfg {string} [href] href to point to pages from link suggestions
  */
 ve.ui.MWLinkMenuOptionWidget = function VeUiMWLinkMenuOptionWidget( data, config ) {
-	// Config intialization
+	// Config initialization
 	config = config || {};
 
 	// Parent constructor
 	ve.ui.MWLinkMenuOptionWidget.super.call( this, data, config );
 
-	// Intialization
+	// initialization
 	this.$label.wrap( '<a>' );
 	this.$link = this.$label.parent();
 	this.$link.attr( 'href', config.href );

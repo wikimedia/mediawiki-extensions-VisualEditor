@@ -1166,7 +1166,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 	] );
 
 	$actionTools
-		.addClass( 've-init-mw-viewPageTarget-toolbar-utilites' )
+		.addClass( 've-init-mw-viewPageTarget-toolbar-utilities' )
 		.append( actions.$element );
 
 	$pushButtons
