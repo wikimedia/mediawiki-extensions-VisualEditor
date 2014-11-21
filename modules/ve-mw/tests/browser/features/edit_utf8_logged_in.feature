@@ -1,5 +1,5 @@
 # encoding: UTF-8
-@chrome @en.wikipedia.beta.wmflabs.org @firefox @internet_explorer_10 @login @safari @test2.wikipedia.org
+@en.wikipedia.beta.wmflabs.org @firefox @internet_explorer_10 @login @safari @test2.wikipedia.org
 Feature: VisualEditor
 
   Background:
