@@ -35,7 +35,8 @@
 			"Orlodrim",
 			"Scoopfinder",
 			"Nnemo",
-			"McDutchie"
+			"McDutchie",
+			"Jdforrester"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "Action à effectuer.",
@@ -106,6 +107,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Déplacer cette catégorie ici",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Nouvelle catégorie",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Ajouter une catégorie",
+	"visualeditor-dialog-meta-categories-missing": "Cette catégorie manque une page de description.",
 	"visualeditor-dialog-meta-categories-options": "Options",
 	"visualeditor-dialog-meta-categories-section": "Catégories",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Trier cette page comme si elle était appelée",
@@ -151,6 +153,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "Vous pouvez forcer l’ajout d’une table des matières qui liste tous les titres de la page sur les pages avec moins de trois chapitres, ou l’empêcher d’apparaître quoi qu’il en soit. Par défaut, elle sera affichée si la page a trois chapitres ou plus.",
 	"visualeditor-dialog-meta-settings-toc-label": "Afficher le sommaire",
 	"visualeditor-dialog-meta-title": "Options",
+	"visualeditor-dialog-reference-editing-reused": "Cette référence est utilisée $1 {{PLURAL:$1|fois}} sur cette page.",
 	"visualeditor-dialog-reference-options-group-label": "Utiliser ce groupe",
 	"visualeditor-dialog-reference-options-group-placeholder": "Références générales",
 	"visualeditor-dialog-reference-options-name-label": "Réutiliser avec ce nom",

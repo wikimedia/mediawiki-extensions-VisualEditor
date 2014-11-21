@@ -85,6 +85,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Sposta questa categoria qui",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Nuova categoria",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Aggiungi una categoria",
+	"visualeditor-dialog-meta-categories-missing": "Questa categoria non ha una pagina di descrizione.",
 	"visualeditor-dialog-meta-categories-options": "Opzioni",
 	"visualeditor-dialog-meta-categories-section": "Categorie",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Ordina questa pagina come se si chiamasse",
