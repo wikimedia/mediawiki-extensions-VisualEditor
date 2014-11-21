@@ -391,6 +391,11 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
+	if ( !this.activating ) {
+		// Activation was aborted before we got here. Do nothing
+		// TODO are there things we need to clean up?
+		return;
+	}
 	this.activating = false;
 	this.surface.getModel().connect( this, {
 		documentUpdate: function () {
