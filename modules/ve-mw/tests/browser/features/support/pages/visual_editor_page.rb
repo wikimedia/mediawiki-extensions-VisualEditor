@@ -50,7 +50,7 @@ class VisualEditorPage
   a(:first_reference, text: '[1]', index: 1)
   div(:formatting_option_menus, class: 'oo-ui-toolGroup-tools oo-ui-clippableElement-clippable', index: 1)
   img(:formula_image, class: 'mwe-math-fallback-png-inline')
-  span(:formula_insert_menu,class: 'oo-ui-tool-name-math')
+  span(:formula_insert_menu, class: 'oo-ui-tool-name-math')
   a(:formula_link, css: 'span.oo-ui-tool-name-math > a.oo-ui-tool-link')
   a(:heading, text: /Heading/)
   span(:hamburger_menu, css: 'div.oo-ui-listToolGroup:nth-child(2) > span:nth-child(1) > span:nth-child(3)')

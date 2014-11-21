@@ -141,7 +141,7 @@ Then(/^I should see Formatting pull-down menu$/) do
 end
 
 Then(/^I take screenshot of Formatting pull-down menu$/) do
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.ve_text_style_element,@current_page.formatting_option_menus_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.ve_text_style_element, @current_page.formatting_option_menus_element])
 end
 
 Then(/^I should see pull-down menu containing Page Settings$/) do

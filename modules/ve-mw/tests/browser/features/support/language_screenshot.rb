@@ -19,7 +19,7 @@ def crop_image(path, page_elements, offset_element)
   if offset_element
     offset_rectangle = coordinates_from_page_element(offset_element)
   else
-    offset_rectangle = [0,0,0,0]
+    offset_rectangle = [0, 0, 0, 0]
   end
   rectangles = coordinates_from_page_elements(page_elements)
   crop_rectangle = rectangle(rectangles, offset_rectangle)
@@ -42,7 +42,7 @@ def crop_image(path, page_elements, offset_element)
   image.save path
 end
 
-def rectangle(rectangles, offset_rectangle = [0,0,0,0])
+def rectangle(rectangles, offset_rectangle = [0, 0, 0, 0])
   top_left_x, top_left_y = top_left_x_y rectangles
   bottom_right_x, bottom_right_y = bottom_right_x_y rectangles
 
