@@ -34,9 +34,7 @@ def crop_image(path, page_elements, offset_element)
 
   # It happens with some elements that an image goes off the screen a bit,
   # and chunky_png fails when this happens
-  if image.width < top_left_x + width
-    width = image.width - top_left_x
-  end
+  width = image.width - top_left_x if image.width < top_left_x + width
 
   image.crop!(top_left_x, top_left_y, width, height)
   image.save path
