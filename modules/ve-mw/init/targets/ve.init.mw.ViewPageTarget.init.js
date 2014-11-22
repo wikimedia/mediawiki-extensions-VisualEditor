@@ -31,13 +31,6 @@
 				.then( function () {
 					var target = new ve.init.mw.ViewPageTarget();
 
-					// Tee tracked events to MediaWiki firehose, if available (1.23+).
-					if ( mw.track ) {
-						ve.trackSubscribeAll( function ( topic, data ) {
-							mw.track.call( null, 've.' + topic, data );
-						} );
-					}
-
 					// Transfer methods
 					ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
 
@@ -342,6 +335,7 @@
 			}
 
 			init.showLoading();
+			ve.track( 'mwedit.init', { type: 'page', mechanism: 'click' } );
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
@@ -357,8 +351,11 @@
 			e.preventDefault();
 
 			getTarget().done( function ( target ) {
-				ve.track( 'Edit', { action: 'edit-link-click' } );
-				target.activate().always( init.hideLoading );
+				target.activate()
+					.done( function () {
+						ve.track( 'mwedit.ready' );
+					} )
+					.always( init.hideLoading );
 			} );
 		},
 
@@ -368,6 +365,7 @@
 			}
 
 			init.showLoading();
+			ve.track( 'mwedit.init', { type: 'section', mechanism: 'click' } );
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
@@ -382,9 +380,12 @@
 			e.preventDefault();
 
 			getTarget().done( function ( target ) {
-				ve.track( 'Edit', { action: 'section-edit-link-click' } );
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-				target.activate().always( init.hideLoading );
+				target.activate()
+					.done( function () {
+						ve.track( 'mwedit.ready' );
+					} )
+					.always( init.hideLoading );
 			} );
 		},
 
@@ -476,9 +477,16 @@
 	$( function () {
 		if ( init.isAvailable ) {
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
+				var isSection = uri.query.vesection !== undefined;
 				init.showLoading();
+
+				ve.track( 'mwedit.init', { type: isSection ? 'section' : 'page', mechanism: 'url' } );
 				getTarget().done( function ( target ) {
-					target.activate().always( init.hideLoading );
+					target.activate()
+						.done( function () {
+							ve.track( 'mwedit.ready' );
+						} )
+						.always( init.hideLoading );
 				} );
 			}
 		}

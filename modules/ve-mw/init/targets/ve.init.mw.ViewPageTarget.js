@@ -88,7 +88,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		saveErrorEmpty: 'onSaveErrorEmpty',
 		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
 		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
-		saveErrorBadToken: 'onSaveErrorBadToken',
 		saveErrorNewUser: 'onSaveErrorNewUser',
 		saveErrorCaptcha: 'onSaveErrorCaptcha',
 		saveErrorUnknown: 'onSaveErrorUnknown',
@@ -155,7 +154,7 @@ ve.init.mw.ViewPageTarget.compatibility = {
 
 /**
  * @event saveWorkflowBegin
- * Fired when user enters the save workflow
+ * Fired when user clicks the button to open the save dialog.
  */
 
 /**
@@ -276,19 +275,20 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
  * Determines whether we want to switch to view mode or not (displaying a dialog if necessary)
  * Then, if we do, actually switches to view mode.
  *
- * @method
+ * @param {boolean} [override] Do not display a dialog
+ * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
  */
-ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
+ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override, trackMechanism ) {
 	var target = this;
 	if ( override || ( this.active && !this.deactivating ) ) {
 		if ( override || !this.edited ) {
-			this.cancel();
+			this.cancel( trackMechanism );
 		} else {
 			this.surface.dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
 				opened.then( function ( closing ) {
 					closing.then( function ( data ) {
 						if ( data.action === 'discard' ) {
-							target.cancel();
+							target.cancel( trackMechanism );
 						}
 					} );
 				} );
@@ -300,10 +300,29 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override ) {
 /**
  * Switch to view mode
  *
- * @method
+ * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
  */
-ve.init.mw.ViewPageTarget.prototype.cancel = function () {
-	var promises = [];
+ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
+	var abortType, promises = [];
+
+	// Event tracking
+	if ( trackMechanism ) {
+		if ( this.activating ) {
+			abortType = 'preinit';
+		} else if ( !this.edited ) {
+			abortType = 'nochange';
+		} else if ( this.saving ) {
+			abortType = 'abandonMidsave';
+		} else {
+			// switchwith and switchwithout do not go through this code path,
+			// they go through switchToWikitextEditor() instead
+			abortType = 'abandon';
+		}
+		ve.track( 'mwedit.abort', {
+			type: abortType,
+			mechanism: trackMechanism
+		} );
+	}
 
 	this.deactivating = true;
 	// User interface changes
@@ -380,8 +399,12 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 		this.currentUri.query.action = 'edit';
 		location.href = this.currentUri.toString();
 	} else {
+		// Something weird happened? Deactivate
+		// TODO: how does this handle load errors triggered from
+		// calling this.loading.abort()?
 		this.activating = false;
-		// User interface changes
+		// Not passing trackMechanism because we don't know what happened
+		// and this is not a user action
 		this.deactivate( true );
 	}
 };
@@ -497,6 +520,8 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 			contentSub
 		);
 		this.setupSectionEditLinks();
+		// Tear down the target now that we're done saving
+		// Not passing trackMechanism because this isn't an abort action
 		this.deactivate( true );
 		if ( newid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
@@ -513,7 +538,6 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
 	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
-	this.events.trackSaveError( 'empty' );
 };
 
 /**
@@ -530,7 +554,6 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editAp
 			),
 		false // prevents reapply
 	);
-	this.events.trackSaveError( 'spamblacklist' );
 };
 
 /**
@@ -544,16 +567,6 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorAbuseFilter = function ( editApi 
 	// Don't disable the save button. If the action is not disallowed the user may save the
 	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
 	// between filter triggers that are and aren't disallowing the action.
-	this.events.trackSaveError( 'abusefilter' );
-};
-
-/**
- * Track when there is a bad edit token on save
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorBadToken = function () {
-	this.events.trackSaveError( 'badtoken' );
 };
 
 /**
@@ -625,8 +638,6 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
 	this.saveDialog.clearMessage( 'api-save-error' );
 	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
 	this.saveDialog.popPending();
-
-	this.events.trackSaveError( 'captcha' );
 };
 
 /**
@@ -647,7 +658,6 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
 		) ),
 		false // prevents reapply
 	);
-	this.events.trackSaveError( 'unknown' );
 };
 
 /**
@@ -738,11 +748,11 @@ ve.init.mw.ViewPageTarget.prototype.onViewTabClick = function ( e ) {
 		return;
 	}
 	if ( this.active ) {
-		this.deactivate();
+		this.deactivate( false, 'navigate-read' );
 		// Prevent the edit tab's normal behavior
 		e.preventDefault();
 	} else if ( this.activating ) {
-		this.deactivate( true );
+		this.deactivate( true, 'navigate-read' );
 		this.activating = false;
 		e.preventDefault();
 	}
@@ -1188,6 +1198,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
+	this.emit( 'saveWorkflowBegin' );
 	this.surface.getDialogs().getWindow( 'mwSave' ).then( function ( win ) {
 		var currentWindow = this.surface.getContext().getInspectors().getCurrentWindow(),
 			target = this;
@@ -1227,7 +1238,6 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 			.always( function ( opened ) {
 				opened.always( target.onSaveDialogClose.bind( target ) );
 			} );
-		this.emit( 'saveWorkflowBegin' );
 	}.bind( this ) );
 };
 
@@ -1525,7 +1535,7 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
 	}
 	if ( this.active && newUri.query.veaction !== 'edit' ) {
 		this.actFromPopState = true;
-		this.deactivate();
+		this.deactivate( false, 'navigate-back' );
 	}
 };
 
@@ -1748,6 +1758,7 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardChanges ) {
 	if ( discardChanges ) {
+		ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
 		this.submitting = true;
 		location.href = this.viewUri.clone().extend( {
 			action: 'edit',
@@ -1756,7 +1767,10 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
 	} else {
 		this.serialize(
 			this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
-			this.submitWithSaveFields.bind( this, { wpDiff: 1, veswitched: 1 } )
+			function () {
+				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
+				this.submitWithSaveFields( { wpDiff: 1, veswitched: 1 } );
+			}.bind( this )
 		);
 	}
 };
