@@ -492,6 +492,16 @@ ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 /**
  * @inheritdoc
  */
+ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			this.bookletLayout.focus();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTemplateDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
