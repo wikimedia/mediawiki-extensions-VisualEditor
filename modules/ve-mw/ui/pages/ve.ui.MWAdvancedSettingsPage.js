@@ -38,18 +38,18 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	this.indexing = new OO.ui.FieldLayout(
 		new OO.ui.ButtonSelectWidget( { $: this.$ } )
 			.addItems( [
-				new OO.ui.ButtonOptionWidget(
-					'mwIndexForce',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-index-force' ) }
-				),
-				new OO.ui.ButtonOptionWidget(
-					'default',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-index-default' ) }
-				),
-				new OO.ui.ButtonOptionWidget(
-					'mwIndexDisable',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-index-disable' ) }
-				)
+				new OO.ui.ButtonOptionWidget( {
+					data: 'mwIndexForce',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-index-force' )
+				} ),
+				new OO.ui.ButtonOptionWidget( {
+					data: 'default',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-index-default' )
+				} ),
+				new OO.ui.ButtonOptionWidget( {
+					data: 'mwIndexDisable',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-index-disable' )
+				} )
 			] )
 			.connect( this, { select: 'onIndexingOptionChange' } ),
 		{
@@ -64,18 +64,18 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	this.newEditSectionLink = new OO.ui.FieldLayout(
 		new OO.ui.ButtonSelectWidget( { $: this.$ } )
 			.addItems( [
-				new OO.ui.ButtonOptionWidget(
-					'mwNewSectionEditForce',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' ) }
-				),
-				new OO.ui.ButtonOptionWidget(
-					'default',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' ) }
-				),
-				new OO.ui.ButtonOptionWidget(
-					'mwNewSectionEditDisable',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' ) }
-				)
+				new OO.ui.ButtonOptionWidget( {
+					data: 'mwNewSectionEditForce',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' )
+				} ),
+				new OO.ui.ButtonOptionWidget( {
+					data: 'default',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' )
+				} ),
+				new OO.ui.ButtonOptionWidget( {
+					data: 'mwNewSectionEditDisable',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' )
+				} )
 			] )
 			.connect( this, { select: 'onNewSectionEditLinkOptionChange' } ),
 		{

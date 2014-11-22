@@ -41,18 +41,18 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.tableOfContents = new OO.ui.FieldLayout(
 		new OO.ui.ButtonSelectWidget( { $: this.$ } )
 			.addItems( [
-				new OO.ui.ButtonOptionWidget(
-					'mwTOCForce',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-toc-force' ) }
-				),
-				new OO.ui.ButtonOptionWidget(
-					'default',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-toc-default' ) }
-				),
-				new OO.ui.ButtonOptionWidget(
-					'mwTOCDisable',
-					{ label: ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' ) }
-				)
+				new OO.ui.ButtonOptionWidget( {
+					data: 'mwTOCForce',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-toc-force' )
+				} ),
+				new OO.ui.ButtonOptionWidget( {
+					data: 'default',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-toc-default' )
+				} ),
+				new OO.ui.ButtonOptionWidget( {
+					data: 'mwTOCDisable',
+					label: ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' )
+				} )
 			] )
 			.connect( this, { select: 'onTableOfContentsFieldChange' } ),
 		{

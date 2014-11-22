@@ -12,16 +12,15 @@
  * @extends OO.ui.OptionWidget
  *
  * @constructor
- * @param {Mixed} data Item data
  * @param {Object} [config] Configuration options
  * @cfg {number} [size] Media thumbnail size
  */
-ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( data, config ) {
+ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 	// Configuration initialization
 	config = config || {};
 
 	// Parent constructor
-	OO.ui.OptionWidget.call( this, data, config );
+	OO.ui.OptionWidget.call( this, config );
 
 	// Properties
 	this.size = config.size || 150;

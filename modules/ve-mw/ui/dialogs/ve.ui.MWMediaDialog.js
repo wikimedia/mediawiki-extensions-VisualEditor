@@ -268,18 +268,21 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		$: this.$
 	} );
 
-	alignLeftButton = new OO.ui.ButtonOptionWidget( 'left', {
+	alignLeftButton = new OO.ui.ButtonOptionWidget( {
 		$: this.$,
+		data: 'left',
 		icon: 'align-float-left',
 		label: ve.msg( 'visualeditor-dialog-media-position-left' )
 	} );
-	alignCenterButton = new OO.ui.ButtonOptionWidget( 'center', {
+	alignCenterButton = new OO.ui.ButtonOptionWidget( {
 		$: this.$,
+		data: 'center',
 		icon: 'align-center',
 		label: ve.msg( 'visualeditor-dialog-media-position-center' )
 	} );
-	alignRightButton = new OO.ui.ButtonOptionWidget( 'right', {
+	alignRightButton = new OO.ui.ButtonOptionWidget( {
 		$: this.$,
+		data: 'right',
 		icon: 'align-float-right',
 		label: ve.msg( 'visualeditor-dialog-media-position-right' )
 	} );
@@ -323,23 +326,27 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	} );
 	this.typeSelect.addItems( [
 		// TODO: Inline images require a bit of further work, will be coming soon
-		new OO.ui.ButtonOptionWidget( 'thumb', {
+		new OO.ui.ButtonOptionWidget( {
 			$: this.$,
+			data: 'thumb',
 			icon: 'image-thumbnail',
 			label: ve.msg( 'visualeditor-dialog-media-type-thumb' )
 		} ),
-		new OO.ui.ButtonOptionWidget( 'frameless', {
+		new OO.ui.ButtonOptionWidget( {
 			$: this.$,
+			data: 'frameless',
 			icon: 'image-frameless',
 			label: ve.msg( 'visualeditor-dialog-media-type-frameless' )
 		} ),
-		new OO.ui.ButtonOptionWidget( 'frame', {
+		new OO.ui.ButtonOptionWidget( {
 			$: this.$,
+			data: 'frame',
 			icon: 'image-frame',
 			label: ve.msg( 'visualeditor-dialog-media-type-frame' )
 		} ),
-		new OO.ui.ButtonOptionWidget( 'none', {
+		new OO.ui.ButtonOptionWidget( {
 			$: this.$,
+			data: 'none',
 			icon: 'image-none',
 			label: ve.msg( 'visualeditor-dialog-media-type-none' )
 		} )

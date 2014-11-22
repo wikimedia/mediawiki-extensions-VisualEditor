@@ -12,16 +12,16 @@
  * @extends OO.ui.DecoratedOptionWidget
  *
  * @constructor
- * @param {Mixed} data Item data
- * @param {number} [data.remainder] Remaining items that can be shown
  * @param {Object} [config] Configuration options
+ * @param {Mixed} [config.data] Item data
+ * @param {number} [config.data.remainder] Remaining items that can be shown
  */
-ve.ui.MWMoreParametersResultWidget = function VeUiMWMoreParametersResultWidget( data, config ) {
+ve.ui.MWMoreParametersResultWidget = function VeUiMWMoreParametersResultWidget( config ) {
 	// Configuration initialization
 	config = ve.extendObject( { icon: 'parameter-set' }, config );
 
 	// Parent constructor
-	OO.ui.DecoratedOptionWidget.call( this, data, config );
+	OO.ui.DecoratedOptionWidget.call( this, config );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwMoreParametersResultWidget' );

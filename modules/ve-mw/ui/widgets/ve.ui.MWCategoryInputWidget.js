@@ -172,9 +172,11 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 		}
 	], function ( index, sectionData ) {
 		if ( sectionData.items.length ) {
-			itemWidgets.push( new OO.ui.MenuSectionOptionWidget(
-				sectionData.id, { $: this.lookupMenu.$, label: sectionData.label }
-			) );
+			itemWidgets.push( new OO.ui.MenuSectionOptionWidget( {
+				$: this.lookupMenu.$,
+				data: sectionData.id,
+				label: sectionData.label
+			} ) );
 			$.each( sectionData.items, function ( index, categoryItem ) {
 				itemWidgets.push( this.getCategoryWidgetFromName( categoryItem ) );
 			}.bind( this ) );
@@ -196,8 +198,9 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 		mw.Title.newFromText( name, mw.config.get( 'wgNamespaceIds' ).category ).getPrefixedText()
 	);
 	if ( cachedData && cachedData.redirectFrom ) {
-		return new OO.ui.MenuOptionWidget( name, {
+		return new OO.ui.MenuOptionWidget( {
 			$: this.lookupMenu.$,
+			data: name,
 			autoFitLabel: false,
 			label: this.$( '<span>' )
 				.text( mw.Title.newFromText( cachedData.redirectFrom[0] ).getMainText() )
@@ -205,7 +208,11 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 				.append( this.$( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
 		} );
 	} else {
-		return new OO.ui.MenuOptionWidget( name, { $: this.lookupMenu.$, label: name } );
+		return new OO.ui.MenuOptionWidget( {
+			$: this.lookupMenu.$,
+			data: name,
+			label: name
+		} );
 	}
 };
 

@@ -229,10 +229,11 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 			if ( !Object.prototype.hasOwnProperty.call( this.titles, title ) ) {
 				this.titles[title] = true;
 				items.push(
-					new ve.ui.MWMediaResultWidget(
-						pages[page],
-						{ $: this.$, size: this.size }
-					)
+					new ve.ui.MWMediaResultWidget( {
+						$: this.$,
+						data: pages[page],
+						size: this.size
+					} )
 				);
 			}
 		}

@@ -11,16 +11,15 @@
  * @extends OO.ui.MenuOptionWidget
  *
  * @constructor
- * @param {Mixed} data Item data
  * @param {Object} [config] Configuration options
  * @cfg {string} [href] href to point to pages from link suggestions
  */
-ve.ui.MWLinkMenuOptionWidget = function VeUiMWLinkMenuOptionWidget( data, config ) {
+ve.ui.MWLinkMenuOptionWidget = function VeUiMWLinkMenuOptionWidget( config ) {
 	// Config initialization
 	config = config || {};
 
 	// Parent constructor
-	ve.ui.MWLinkMenuOptionWidget.super.call( this, data, config );
+	ve.ui.MWLinkMenuOptionWidget.super.call( this, config );
 
 	// initialization
 	this.$label.wrap( '<a>' );

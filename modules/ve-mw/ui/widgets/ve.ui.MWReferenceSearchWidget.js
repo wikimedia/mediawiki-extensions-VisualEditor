@@ -239,8 +239,10 @@ ve.ui.MWReferenceSearchWidget.prototype.addResults = function () {
 				.addClass( 've-ui-mwReferenceSearchWidget-name' )
 				.text( item.name );
 			items.push(
-				new ve.ui.MWReferenceResultWidget( i, {
-					$: this.$, label: $citation.add( $name ).add( item.$element )
+				new ve.ui.MWReferenceResultWidget( {
+					$: this.$,
+					data: i,
+					label: $citation.add( $name ).add( item.$element )
 				} )
 			);
 		}

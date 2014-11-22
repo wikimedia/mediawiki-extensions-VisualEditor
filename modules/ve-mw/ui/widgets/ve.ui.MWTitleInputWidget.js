@@ -110,9 +110,11 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data 
 			} else {
 				value = title.getPrefixedText();
 			}
-			items.push( new OO.ui.MenuOptionWidget(
-				value, { $: menu$, label: value }
-			) );
+			items.push( new OO.ui.MenuOptionWidget( {
+				$: menu$,
+				data: value,
+				label: value
+			} ) );
 		}
 		ve.init.platform.linkCache.set( linkCacheUpdate );
 	}
