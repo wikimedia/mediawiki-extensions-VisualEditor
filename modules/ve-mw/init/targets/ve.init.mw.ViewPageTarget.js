@@ -560,17 +560,16 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorBadToken = function () {
  * Update save dialog when token fetch indicates another user is logged in
  *
  * @method
- * @param {boolean|undefined} isAnon Is newly logged in user anonymous. If
- *  undefined, user is logged in
+ * @param {string|null} username Name of newly logged-in user, or null if anonymous
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( isAnon ) {
+ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( username ) {
 	var badToken, userMsg;
 	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
 	// mediawiki.jqueryMsg has a bug with [[User:$1|$1]] (bug 51388)
-	if ( isAnon ) {
+	if ( username === null ) {
 		userMsg = 'visualeditor-savedialog-identify-anon';
 	} else {
-		userMsg = 'visualeditor-savedialog-identify-user---' + mw.config.get( 'wgUserName' );
+		userMsg = 'visualeditor-savedialog-identify-user---' + username;
 	}
 	this.showSaveError(
 		$( badToken ).add( $.parseHTML( mw.message( userMsg ).parse() ) )

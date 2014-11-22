@@ -125,8 +125,7 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 /**
  * @event saveErrorNewUser
  * Fired when user is logged in as a new user
- * @param {boolean|undefined} isAnon Is newly logged in user anonymous. If
- *  undefined, user is logged in
+ * @param {string|null} username Name of newly logged-in user, or null if anonymous
  */
 
 /**
@@ -652,7 +651,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 						viewPage.save( doc, saveData );
 					} else {
 						// The now current session is a different user
-						if ( isAnon ) {
+						if ( userInfo.anon !== undefined ) {
 							// New session is an anonymous user
 							mw.config.set( {
 								// wgUserId is unset for anonymous users, not set to null
@@ -661,6 +660,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 								// functions like mw.user.isAnon rely on this.
 								wgUserName: null
 							} );
+							viewPage.emit( 'saveErrorNewUser', null );
 						} else {
 							// New session is a different user
 							mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
@@ -670,10 +670,9 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 								mw.messages.get( 'visualeditor-savedialog-identify-user' )
 									.replace( /\$1/g, userInfo.name )
 							);
+							viewPage.emit( 'saveErrorNewUser', userInfo.name );
 						}
-						viewPage.emit( 'saveErrorNewUser', isAnon );
 					}
-
 				}
 			} );
 		return;
