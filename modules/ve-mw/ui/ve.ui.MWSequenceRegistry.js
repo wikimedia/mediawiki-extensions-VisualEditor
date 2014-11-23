@@ -27,5 +27,5 @@ ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextHeading', 'mwWikitextWarning', [ { type: 'paragraph' }, '=', '=' ] )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextNumbered', 'mwWikitextWarning', [ { type: 'paragraph' }, '#' ] )
+	new ve.ui.Sequence( 'numberHash', 'numberWrapOnce', [ { type: 'paragraph' }, '#', ' ' ], 2 )
 );
