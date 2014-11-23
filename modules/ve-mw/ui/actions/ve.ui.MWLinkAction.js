@@ -41,6 +41,7 @@ ve.ui.MWLinkAction.static.methods = [ 'open' ];
  * Open either the 'link' or 'linkNode' window, depending on what is selected.
  *
  * @method
+ * @return {boolean} Action was executed
  */
 ve.ui.MWLinkAction.prototype.open = function () {
 	var fragment = this.surface.getModel().getFragment(),
@@ -50,6 +51,7 @@ ve.ui.MWLinkAction.prototype.open = function () {
 		windowName = 'linkNode';
 	}
 	this.surface.execute( 'window', 'open', windowName );
+	return true;
 };
 
 /* Registration */
