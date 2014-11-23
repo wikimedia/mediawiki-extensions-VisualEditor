@@ -101,7 +101,7 @@
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "Онемогући конвертовање наслова на друге језичке варијанте",
 	"visualeditor-dialog-meta-settings-redirect-help": "Можете од ове странице направити преусмерење, то је страница која аутоматски води читаоца до друге странице на овом викију. Ово је корисно за погрешно уписане појмове и алтернативна имена или појмове. Ако је направите, читаоци неће видети садржај ове странице.",
 	"visualeditor-dialog-meta-settings-redirect-label": "Преусмери страницу на",
-	"visualeditor-dialog-meta-settings-redirect-placeholder": "Циљна страница преусмеравања",
+	"visualeditor-dialog-meta-settings-redirect-placeholder": "Одредишна страница",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Онемогућава ажурирање овог преусмерења у случају да се одредишна страница премести, ово се користи само у ретким случајевима.",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Статичко преусмерење.",
 	"visualeditor-dialog-meta-settings-section": "Поставке странице",
