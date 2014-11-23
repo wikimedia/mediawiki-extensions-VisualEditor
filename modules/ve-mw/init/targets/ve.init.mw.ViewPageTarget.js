@@ -424,14 +424,6 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	}
 	this.activating = false;
 	this.surface.getModel().connect( this, {
-		documentUpdate: function () {
-			mw.loader.using( 'mediawiki.notification' ).then( function () {
-				this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
-					this.surface,
-					this.wikitextWarning
-				);
-			}.bind( this ) );
-		},
 		history: 'updateToolbarSaveButtonState'
 	} );
 	this.surface.setImportRules( this.constructor.static.importRules );
@@ -809,52 +801,6 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onToolbarMetaButtonClick = function () {
 	this.surface.getDialogs().openWindow( 'meta' );
-};
-
-/**
- * Check if the user is entering wikitext, and show a notification if they are.
- *
- * This check is fairly simplistic: it checks whether the content branch node the selection is in
- * looks like wikitext, so it can trigger if the user types in a paragraph that has pre-existing
- * wikitext-like content.
- *
- * This method is bound to the 'documentUpdate' event on the surface model, and unbinds itself when
- * the wikitext notification is displayed.
- *
- * @param {ve.ui.Surface} surface
- * @param {Object} [wikitextWarning] MediaWiki notification object
- */
-ve.init.mw.ViewPageTarget.static.checkForWikitextWarning = function ( surface, wikitextWarning ) {
-	var text, node, doc = surface.getView().getDocument(),
-		selection = surface.getModel().getSelection(),
-		textMatches;
-
-	if ( !( selection instanceof ve.dm.LinearSelection ) ) {
-		return;
-	}
-
-	node = doc.getBranchNodeFromOffset( selection.getRange().start );
-	if ( !( node instanceof ve.ce.ContentBranchNode ) ) {
-		return;
-	}
-	text = ve.ce.getDomText( node.$element[0] );
-	textMatches = text.match( /\[\[|\{\{|''|<nowiki|<ref|~~~|^==|^\*|^\#/ );
-
-	if ( textMatches && !wikitextWarning ) {
-		wikitextWarning = mw.notification.notify(
-			$( $.parseHTML( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) ) )
-				.filter( 'a' ).attr( 'target', '_blank' ).end(),
-			{
-				title: ve.msg( 'visualeditor-wikitext-warning-title' ),
-				tag: 'visualeditor-wikitext-warning',
-				autoHide: false
-			}
-		);
-	} else if ( !textMatches && wikitextWarning ) {
-		wikitextWarning.close();
-		wikitextWarning = undefined;
-	}
-	return wikitextWarning;
 };
 
 /**

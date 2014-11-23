@@ -5,7 +5,7 @@
  */
 
 /**
- * UserInterface use existing reference command.
+ * Use existing reference command.
  *
  * @class
  * @extends ve.ui.Command

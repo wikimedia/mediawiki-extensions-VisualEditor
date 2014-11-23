@@ -842,15 +842,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 
 	// Events
 	this.captionSurface.getSurface().getModel().connect( this, {
-		documentUpdate: function () {
-			mw.loader.using( 'mediawiki.notification' ).then( function () {
-				this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
-					this.captionSurface.getSurface(),
-					this.wikitextWarning
-				);
-			}.bind( this ) );
-			this.checkChanged();
-		}
+		documentUpdate: this.checkChanged.bind( this )
 	} );
 };
 
@@ -878,9 +870,6 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			if ( this.imageModel ) {
 				this.imageModel.disconnect( this );
 				this.sizeWidget.disconnect( this );
-			}
-			if ( this.wikitextWarning ) {
-				this.wikitextWarning.close();
 			}
 			this.captionSurface.destroy();
 			this.captionSurface = null;

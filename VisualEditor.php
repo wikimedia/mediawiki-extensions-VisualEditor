@@ -789,6 +789,9 @@ $wgResourceModules += array(
 
 			// ui
 			'modules/ve-mw/ui/ve.ui.MWCommandRegistry.js',
+			'modules/ve-mw/ui/ve.ui.MWSequenceRegistry.js',
+
+			'modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWSurfaceWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTitleInputWidget.js',

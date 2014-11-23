@@ -219,16 +219,6 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 
 	// Events
 	this.referenceModel.getDocument().connect( this, { transact: 'onDocumentTransact' } );
-	this.referenceSurface.getSurface().getModel().connect( this, {
-		documentUpdate: function () {
-			mw.loader.using( 'mediawiki.notification' ).then( function () {
-				this.wikitextWarning = ve.init.mw.ViewPageTarget.static.checkForWikitextWarning(
-					this.referenceSurface.getSurface(),
-					this.wikitextWarning
-				);
-			}.bind( this ) );
-		}
-	} );
 
 	// Initialization
 	this.referenceGroupInput.input.setValue( this.referenceModel.getGroup() );
@@ -391,9 +381,6 @@ ve.ui.MWReferenceDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWReferenceDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			this.search.getQuery().setValue( '' );
-			if ( this.wikitextWarning ) {
-				this.wikitextWarning.close();
-			}
 			this.referenceSurface.destroy();
 			this.referenceSurface = null;
 			this.referenceModel = null;
