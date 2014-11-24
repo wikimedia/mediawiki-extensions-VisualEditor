@@ -24,3 +24,14 @@ Feature: VisualEditor Options
     When I click Categories
     Then I should see the options overlay
       And the options overlay should display Categories
+
+  Scenario: Advanced Settings setting fields
+    When I click Advanced Settings
+      And I click Yes for Indexed by Search Engines
+      And I click Yes for showing tab for adding new section
+      And I check the option for Enable display title
+      And I type "automated test" for display title textbox
+      And I click Apply Changes button
+      And I click Save page
+      And I click Review your changes
+    Then the options set in Advanced Settings panel should appear in diff view
