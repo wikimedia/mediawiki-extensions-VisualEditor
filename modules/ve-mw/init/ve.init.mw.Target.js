@@ -1360,11 +1360,10 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		);
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
-			var surface = target.createSurface( dmDoc );
+			var surface = target.createSurface( dmDoc, { excludeCommands: target.constructor.static.excludeCommands } );
 			target.surface = surface;
 			surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
 				.addClass( target.protectedClasses );
-			surface.addCommands( target.constructor.static.surfaceCommands );
 			setTimeout( function () {
 				var surfaceView = surface.getView(),
 					$documentNode = surfaceView.getDocument().getDocumentNode().$element;
