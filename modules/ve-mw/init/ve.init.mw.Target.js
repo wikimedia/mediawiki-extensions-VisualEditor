@@ -250,7 +250,7 @@ ve.init.mw.Target.static.pasteRules = {
 			// Annotations
 			'link', 'textStyle/span', 'textStyle/underline',
 			// Nodes
-			'inlineImage', 'blockImage', 'div', 'alienInline', 'alienBlock'
+			'inlineImage', 'blockImage', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
 		removeHtmlAttributes: true
 	},
