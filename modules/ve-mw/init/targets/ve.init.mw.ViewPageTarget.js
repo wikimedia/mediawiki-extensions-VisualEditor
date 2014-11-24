@@ -432,7 +432,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 		},
 		history: 'updateToolbarSaveButtonState'
 	} );
-	this.surface.setPasteRules( this.constructor.static.pasteRules );
+	this.surface.setImportRules( this.constructor.static.importRules );
 
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {

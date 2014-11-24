@@ -97,18 +97,18 @@ ve.ui.MWReferenceDialog.static.excludeCommands = [
 ];
 
 /**
- * Get the paste rules for the surface widget in the dialog
+ * Get the import rules for the surface widget in the dialog
  *
  * @see ve.dm.ElementLinearData#sanitize
- * @return {Object} Paste rules
+ * @return {Object} Import rules
  */
-ve.ui.MWReferenceDialog.static.getPasteRules = function () {
+ve.ui.MWReferenceDialog.static.getImportRules = function () {
 	return ve.extendObject(
-		ve.copy( ve.init.target.constructor.static.pasteRules ),
+		ve.copy( ve.init.target.constructor.static.importRules ),
 		{
 			all: {
 				blacklist: OO.simpleArrayUnion(
-					ve.getProp( ve.init.target.constructor.static.pasteRules, 'all', 'blacklist' ) || [],
+					ve.getProp( ve.init.target.constructor.static.importRules, 'all', 'blacklist' ) || [],
 					[
 						// Nested references are impossible
 						'mwReference', 'mwReferencesList',
@@ -213,7 +213,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 			$: this.$,
 			tools: ve.init.target.constructor.static.toolbarGroups,
 			excludeCommands: this.constructor.static.excludeCommands,
-			pasteRules: this.constructor.static.getPasteRules()
+			importRules: this.constructor.static.getImportRules()
 		}
 	);
 

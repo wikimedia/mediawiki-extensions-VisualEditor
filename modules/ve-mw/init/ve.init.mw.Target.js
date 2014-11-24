@@ -243,7 +243,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	}
 ];
 
-ve.init.mw.Target.static.pasteRules = {
+ve.init.mw.Target.static.importRules = {
 	external: {
 		blacklist: [
 			// Annotations

@@ -152,6 +152,11 @@ $wgResourceModules += array(
 		'dependencies' => 'unicodejs'
 	),
 
+	'papaparse' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => 'lib/ve/lib/papaparse/papaparse.js',
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
 	'rangefix' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => 'lib/ve/lib/rangefix/rangefix.js',
 		'targets' => array( 'desktop', 'mobile' )
@@ -556,7 +561,9 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/dialogs/ve.ui.FragmentDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.NodeDialog.js',
 
+			'lib/ve/src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js',
 			'lib/ve/src/ui/filedrophandlers/ve.ui.PlainTextFileDropHandler.js',
+			'lib/ve/src/ui/filedrophandlers/ve.ui.HTMLFileDropHandler.js',
 
 			'lib/ve/src/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.LinkTargetInputWidget.js',
@@ -624,6 +631,7 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'unicodejs',
+			'papaparse',
 			'jquery.uls.data',
 			'ext.visualEditor.base',
 		),

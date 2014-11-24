@@ -98,18 +98,18 @@ ve.ui.MWMediaDialog.static.excludeCommands = [
 ];
 
 /**
- * Get the paste rules for the surface widget in the dialog
+ * Get the import rules for the surface widget in the dialog
  *
  * @see ve.dm.ElementLinearData#sanitize
- * @return {Object} Paste rules
+ * @return {Object} Import rules
  */
-ve.ui.MWMediaDialog.static.getPasteRules = function () {
+ve.ui.MWMediaDialog.static.getImportRules = function () {
 	return ve.extendObject(
-		ve.copy( ve.init.target.constructor.static.pasteRules ),
+		ve.copy( ve.init.target.constructor.static.importRules ),
 		{
 			all: {
 				blacklist: OO.simpleArrayUnion(
-					ve.getProp( ve.init.target.constructor.static.pasteRules, 'all', 'blacklist' ) || [],
+					ve.getProp( ve.init.target.constructor.static.importRules, 'all', 'blacklist' ) || [],
 					[
 						// Tables (but not lists) are possible in wikitext with a leading
 						// line break but we prevent creating these with the UI
@@ -836,7 +836,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 			$: this.$,
 			tools: ve.init.target.constructor.static.toolbarGroups,
 			excludeCommands: this.constructor.static.excludeCommands,
-			pasteRules: this.constructor.static.getPasteRules()
+			importRules: this.constructor.static.getImportRules()
 		}
 	);
 
