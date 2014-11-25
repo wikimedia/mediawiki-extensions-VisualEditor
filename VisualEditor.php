@@ -536,6 +536,8 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.CommandRegistry.js',
 			'lib/ve/src/ui/ve.ui.Trigger.js',
 			'lib/ve/src/ui/ve.ui.TriggerRegistry.js',
+			'lib/ve/src/ui/ve.ui.Sequence.js',
+			'lib/ve/src/ui/ve.ui.SequenceRegistry.js',
 			'lib/ve/src/ui/ve.ui.Action.js',
 			'lib/ve/src/ui/ve.ui.ActionFactory.js',
 			'lib/ve/src/ui/ve.ui.FileDropHandler.js',

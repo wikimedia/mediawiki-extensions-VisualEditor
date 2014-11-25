@@ -118,6 +118,7 @@
 					"ve.ui.*Command",
 					"ve.ui.*Factory",
 					"ve.ui.*Registry",
+					"ve.ui.*Sequence",
 					"ve.ui.*Tool",
 					"ve.ui.*Inspector",
 					"ve.ui.*Widget",
