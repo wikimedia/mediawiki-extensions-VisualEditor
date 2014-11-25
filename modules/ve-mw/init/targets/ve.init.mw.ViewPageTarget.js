@@ -1081,7 +1081,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 		this.surface.mwTocWidget.teardown();
 	}
 
-	if ( this.saveDialog ) {
+	if ( this.saveDialog && this.saveDialog.isOpened() ) {
 		// If the save dialog is still open (from saving) close it
 		promises.push( this.saveDialog.close() );
 		// Release the reference
