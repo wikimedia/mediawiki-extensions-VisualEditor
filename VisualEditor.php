@@ -453,7 +453,7 @@ $wgResourceModules += array(
 
 			// ce
 			'lib/ve/src/ce/ve.ce.js',
-			'lib/ve/src/ce/ve.ce.DomRange.js',
+			'lib/ve/src/ce/ve.ce.RangeState.js',
 			'lib/ve/src/ce/ve.ce.AnnotationFactory.js',
 			'lib/ve/src/ce/ve.ce.NodeFactory.js',
 			'lib/ve/src/ce/ve.ce.Document.js',
