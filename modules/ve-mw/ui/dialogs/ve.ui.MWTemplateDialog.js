@@ -495,7 +495,8 @@ ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			this.bookletLayout.focus();
+			// TODO: Uncomment this when OOUI is updated so .focus() on an empty booklet doesn't crash
+			//this.bookletLayout.focus();
 		}, this );
 };
 
