@@ -28,6 +28,7 @@ ve.init.mw.TargetEvents = function ( target ) {
 		saveErrorAbuseFilter: [ 'trackSaveError', 'abusefilter' ],
 		saveErrorBadToken: [ 'trackSaveError', 'badtoken' ],
 		saveErrorNewUser: [ 'trackSaveError', 'newuser' ],
+		saveErrorPageDeleted: [ 'trackSaveError', 'pagedeleted' ],
 		saveErrorCaptcha: [ 'trackSaveError', 'captcha' ],
 		saveErrorUnknown: [ 'trackSaveError', 'unknown' ],
 		editConflict: [ 'trackSaveError', 'editconflict' ],
@@ -119,6 +120,7 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 			spamblacklist: 'extensionSpamBlacklist',
 			empty: 'responseEmpty',
 			unknown: 'responseUnknown',
+			pagedeleted: 'editPageDeleted',
 			editconflict: 'editConflict'
 		},
 		// Types that are logged as performance.user.saveError.{type}
