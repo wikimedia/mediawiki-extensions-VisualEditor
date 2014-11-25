@@ -557,9 +557,10 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/commands/ve.ui.MergeCellsCommand.js',
 			'lib/ve/src/ui/commands/ve.ui.TableCaptionCommand.js',
 
-			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.FragmentDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.NodeDialog.js',
+			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
+			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
 
 			'lib/ve/src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js',
 			'lib/ve/src/ui/filedrophandlers/ve.ui.PlainTextFileDropHandler.js',
@@ -611,6 +612,7 @@ $wgResourceModules += array(
 
 			// ui
 			'lib/ve/src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
+			'lib/ve/src/ui/styles/dialogs/ve.ui.ProgressDialog.css',
 			'lib/ve/src/ui/styles/tools/ve.ui.FormatTool.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.ContextSelectWidget.css',
