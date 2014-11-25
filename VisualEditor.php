@@ -808,6 +808,7 @@ $wgResourceModules += array(
 		'styles' => array(
 			// ui
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css',
+			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWCommandHelpDialog.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTitleInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css',
