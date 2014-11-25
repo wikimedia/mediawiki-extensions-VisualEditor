@@ -77,84 +77,24 @@ ve.ui.MWMediaDialog.static.actions = [
 
 ve.ui.MWMediaDialog.static.modelClasses = [ ve.dm.MWBlockImageNode, ve.dm.MWInlineImageNode ];
 
-ve.ui.MWMediaDialog.static.toolbarGroups = [
-	// History
-	{ include: [ 'undo', 'redo' ] },
+ve.ui.MWMediaDialog.static.excludeCommands = [
 	// No formatting
-	/* {
-		type: 'menu',
-		indicator: 'down',
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
-		include: [ { group: 'format' } ],
-		promote: [ 'paragraph' ],
-		demote: [ 'preformatted', 'heading1' ]
-	},*/
-	// Style
-	{
-		type: 'list',
-		icon: 'text-style',
-		indicator: 'down',
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		include: [ { group: 'textStyle' }, 'language', 'clear' ],
-		forceExpand: [ 'bold', 'italic', 'clear' ],
-		promote: [ 'bold', 'italic' ],
-		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
-	},
-	// Link
-	{ include: [ 'link' ] },
-	// Cite
-	{
-		type: 'list',
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		indicator: 'down',
-		include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
-		demote: [ 'reference', 'reference/existing' ]
-	},
+	'paragraph',
+	'heading1',
+	'heading2',
+	'heading3',
+	'heading4',
+	'heading5',
+	'heading6',
+	'preformatted',
+	// TODO: Decide if tables tools should be allowed
+	'tableCellHeader',
+	'tableCellData',
 	// No structure
-	/* {
-		type: 'list',
-		icon: 'bullet-list',
-		indicator: 'down',
-		include: [ { group: 'structure' } ],
-		demote: [ 'outdent', 'indent' ]
-	},*/
-	// Insert
-	{
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		indicator: 'down',
-		include: '*',
-		exclude: [
-			{ group: 'format' },
-			{ group: 'structure' },
-			'referencesList',
-			'gallery'
-		],
-		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
-		promote: [ 'media', 'transclusion' ],
-		demote: [ 'specialcharacter' ]
-	},
-	// Table
-	{
-		header: OO.ui.deferMsg( 'visualeditor-toolbar-table' ),
-		type: 'list',
-		icon: 'table-insert',
-		indicator: 'down',
-		include: [ { group: 'table' } ],
-		demote: [ 'deleteTable' ]
-	}
-];
-
-ve.ui.MWMediaDialog.static.surfaceCommands = [
-	'undo',
-	'redo',
-	'bold',
-	'italic',
-	'link',
-	'clear',
-	'underline',
-	'subscript',
-	'superscript',
-	'pasteSpecial'
+	'bullet',
+	'number',
+	'indent',
+	'outdent'
 ];
 
 /**
@@ -894,8 +834,8 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		captionDocument,
 		{
 			$: this.$,
-			tools: this.constructor.static.toolbarGroups,
-			commands: this.constructor.static.surfaceCommands,
+			tools: ve.init.target.constructor.static.toolbarGroups,
+			excludeCommands: this.constructor.static.excludeCommands,
 			pasteRules: this.constructor.static.getPasteRules()
 		}
 	);

@@ -39,6 +39,7 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, con
 OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
 
 /* Static Properties */
+
 ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	// Style
 	{ include: [ 'bold', 'italic' ] },
@@ -55,11 +56,7 @@ ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	}
 ];
 
-ve.init.mw.MobileViewTarget.static.surfaceCommands = [
-	'bold',
-	'italic',
-	'link'
-];
+ve.init.mw.MobileViewTarget.static.excludeCommands = [];
 
 ve.init.mw.MobileViewTarget.static.name = 'mobile';
 
