@@ -47,7 +47,7 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 			this.popup.toggle( true );
 		}.bind( this ), 500 );
 	} else {
-		this.$element.hide();
+		this.$element = $( [] );
 	}
 };
 
