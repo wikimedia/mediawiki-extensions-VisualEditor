@@ -90,6 +90,11 @@ ve.ui.MWSaveDialog.static.actions = [
  * Emitted when the user clicks the resolve conflict button
  */
 
+/**
+ * @event retry
+ * Emitted when the user clicks the retry/continue save button after an error.
+ */
+
 /* Methods */
 
 /**
@@ -502,6 +507,16 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 ve.ui.MWSaveDialog.prototype.getBodyHeight = function () {
 	// Don't vary the height when the foot is made visible or not
 	return 350 - this.$foot.outerHeight( true );
+};
+
+/**
+ * Handle retry button click events.
+ *
+ * Hides errors and then tries again.
+ */
+ve.ui.MWSaveDialog.prototype.onRetryButtonClick = function () {
+	this.emit( 'retry' );
+	ve.ui.MWSaveDialog.super.prototype.onRetryButtonClick.apply( this, arguments );
 };
 
 /* Registration */

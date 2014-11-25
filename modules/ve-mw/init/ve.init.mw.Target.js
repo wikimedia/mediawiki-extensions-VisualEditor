@@ -142,6 +142,11 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
  */
 
 /**
+ * @event saveErrorPageDeleted
+ * Fired when user tries to save page that was deleted after opening VE
+ */
+
+/**
  * @event loadError
  * @param {jqXHR|null} jqXHR
  * @param {string} status Text status message
@@ -684,6 +689,8 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 				}
 			} );
 		return;
+	} else if ( data.error && data.error.code === 'pagedeleted' ) {
+		this.emit( 'saveErrorPageDeleted' );
 	}
 
 	// Handle captcha
