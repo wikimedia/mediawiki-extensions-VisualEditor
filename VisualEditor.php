@@ -562,7 +562,8 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
 
-			'lib/ve/src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js',
+			// FIXME disabled because papaparse is broken (T75896)
+			//'lib/ve/src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js',
 			'lib/ve/src/ui/filedrophandlers/ve.ui.PlainTextFileDropHandler.js',
 			'lib/ve/src/ui/filedrophandlers/ve.ui.HTMLFileDropHandler.js',
 
@@ -633,7 +634,8 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'unicodejs',
-			'papaparse',
+			// FIXME papaparse is broken (T75896)
+			//'papaparse',
 			'jquery.uls.data',
 			'ext.visualEditor.base',
 		),
