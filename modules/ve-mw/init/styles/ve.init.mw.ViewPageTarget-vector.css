@@ -26,6 +26,11 @@
 	font-size: 0.8em;
 }
 
+.ve-ui-mwSurfaceWidget .ve-ce-surface {
+	/* 0.875 (mw-body-content) / 0.8em (window) */
+	font-size: 1.09375em;
+}
+
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -1em -1em 1em -1em;
 	-webkit-transition: margin 200ms ease-out;
