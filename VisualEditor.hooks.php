@@ -570,7 +570,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/ve.ce.imetests.test.js',
 				//'lib/ve/tests/ce/imetests/backspace-chromium-ubuntu-none.js',
 				//'lib/ve/tests/ce/imetests/backspace-firefox-ubuntu-none.js',
-				'lib/ve/tests/ce/imetests/backspace-ie-win-none.js',
+				//'lib/ve/tests/ce/imetests/backspace-ie-win-none.js',
 				/*
 				'lib/ve/tests/ce/imetests/input-chrome-win-chinese-traditional-handwriting.js',
 				'lib/ve/tests/ce/imetests/input-chrome-win-greek.js',
