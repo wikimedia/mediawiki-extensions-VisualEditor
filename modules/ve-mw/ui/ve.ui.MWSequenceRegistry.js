@@ -29,3 +29,9 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'numberHash', 'numberWrapOnce', [ { type: 'paragraph' }, '#', ' ' ], 2 )
 );
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextDefinition', 'mwWikitextWarning',  [ { type: 'paragraph' }, ';' ] )
+);
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextDescription', 'mwWikitextWarning',  [ { type: 'paragraph' }, ':' ] )
+);
