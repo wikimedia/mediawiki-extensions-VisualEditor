@@ -82,7 +82,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 			$: this.$,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' ),
-			help: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-help' )
+			help: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-help', $( '#ca-edit' ).text() )
 		}
 	);
 
