@@ -265,6 +265,7 @@
 	"visualeditor-savedialog-warning-dirty": "ייתכן שהעריכה שלך התקלקלה – נא לסקור לפני שמירה.",
 	"visualeditor-saveerror": "שגיאה בשמירת נתונים לשרת: $1.",
 	"visualeditor-serializeerror": "שגיאה בטעינת נתונים מהשרת: $1.",
+	"visualeditor-recreate": "הדף הזה נמחק מאז שהתחלת לערוך. לחיצה על \"המשך\" תיצור את הדף מחדש.",
 	"visualeditor-settings-tool": "הגדרות דף",
 	"visualeditor-timeout": "נראה שהעורך הזה אינו זמין כעת. האם ברצונך לערוך במצב עריכת קוד מקור?",
 	"visualeditor-toolbar-cite-label": "ציטוט",
@@ -276,6 +277,5 @@
 	"visualeditor-viewpage-savewarning-keep": "המשך עריכה",
 	"visualeditor-viewpage-savewarning-title": "בטוח?",
 	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. כדי לעבור חזרה לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-savedialog}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "נראה שיש כאן קוד ויקי"
 }

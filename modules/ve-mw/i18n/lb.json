@@ -222,6 +222,7 @@
 	"visualeditor-savedialog-warning-dirty": "Är Ännerung ass eventuell korrupt - kuckt w.e.g. alles no ier Dir späichert.",
 	"visualeditor-saveerror": "Feeler beim Späichere vun den Donnéeën op de Server: $1.",
 	"visualeditor-serializeerror": "Feeler beim Luede vun Date vum Server: $1.",
+	"visualeditor-recreate": "D'Säit gouf geläscht zanter datt Dir ugefaang hutt se z'änneren. Klickt op 'Virufueren' fir ze nees unzeleeën.",
 	"visualeditor-settings-tool": "Astellunge vun der Säit",
 	"visualeditor-timeout": "Et gesäit esou aus wéi wann dësen Editeur elo net disponibel ass. Wëllt Dir an de Quelltextmodus wiesselen fir z'änneren?",
 	"visualeditor-toolbar-cite-label": "Zitat",
@@ -233,6 +234,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Virufuere mat Änneren",
 	"visualeditor-viewpage-savewarning-title": "Sidd Dir sécher?",
 	"visualeditor-wikitext-warning": "Dir benotzt VisualEditor -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Fir all Ament an d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren, maacht den Dropdown-Menü niewent \"{{int:visualeditor-toolbar-savedialog}}\" op a gitt op \"{{int:visualeditor-mweditmodesource-title}}\"",
-	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }

@@ -252,6 +252,7 @@
 	"visualeditor-savedialog-warning-dirty": "Уредувањето може да ви е пореметено — прегледајте го пред да го зачувате.",
 	"visualeditor-saveerror": "Грешка при зачувување на податоците во опслужувачот: $1.",
 	"visualeditor-serializeerror": "Грешка при вчитувањето на податоците од опслужувачот: $1.",
+	"visualeditor-recreate": "Некој ја има избришано страницата откако почнавте да ја уредувате. Стиснете на „Продолжи“ за да ја пресоздадете.",
 	"visualeditor-settings-tool": "Поставки за страницата",
 	"visualeditor-timeout": "Се чини дека уредникот во моментов е недостапен. Дали би сакале да уредувате во изворен режим?",
 	"visualeditor-toolbar-cite-label": "Наведи",
@@ -263,6 +264,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Продолжи со уредување",
 	"visualeditor-viewpage-savewarning-title": "Дали сте сигурни?",
 	"visualeditor-wikitext-warning": "Користите ВизуеленУредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-savedialog}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
-	"visualeditor-wikitext-warning-link": "Help:Викитекст",
 	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст"
 }

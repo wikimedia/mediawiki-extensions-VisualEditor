@@ -246,6 +246,7 @@
 	"visualeditor-savedialog-warning-dirty": "A sua edição pode ter sido corrompida – por favor, reveja antes de a gravar.",
 	"visualeditor-saveerror": "Erro ao gravar dados no servidor: $1.",
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
+	"visualeditor-recreate": "A página que começou a editar foi eliminada entretanto. Pressione \"continuar\" para recriá-la.",
 	"visualeditor-settings-tool": "Configurações da página",
 	"visualeditor-timeout": "Parece que o editor está indisponível de momento. Gostaria de editar antes o código-fonte?",
 	"visualeditor-toolbar-cite-label": "Citar",
@@ -257,6 +258,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Continuar a editar",
 	"visualeditor-viewpage-savewarning-title": "Tem a certeza?",
 	"visualeditor-wikitext-warning": "Está a utilizar o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|códigos wiki]] não funcionam aqui. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Marcação wiki",
 	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado"
 }

@@ -159,6 +159,5 @@
 	"visualeditor-version-label": "ვერსია",
 	"visualeditor-viewpage-savewarning": "დარწმუნებული ხართ, რომ გინდათ დაბრუნდეთ გვერდზე რედაქტირების შენახვის გარეშე?",
 	"visualeditor-wikitext-warning": "თქვენ იყენებთ ვიზუალურ რედაქტორს - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ვიკიტექსტი]] აქ არ მუშაობს. დააწკაპუნეთ \"{{MediaWiki:visualeditor-ca-editsource}}\" რათა დაარედაქტიროთ გვერდი ვიკიტექსტის რეჟიმში – დაუმახსოვრებელი ცვლილებები დაიკარგება.",
-	"visualeditor-wikitext-warning-link": "Help:ვიკი-ტექსტი",
 	"visualeditor-wikitext-warning-title": "აღმოჩენილია ვიკი-ტექსტი"
 }

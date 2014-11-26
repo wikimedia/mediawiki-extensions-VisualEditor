@@ -267,6 +267,7 @@
 	"visualeditor-savedialog-warning-dirty": "Votre modification peut avoir été corrompue — veuillez relire avant d’enregistrer.",
 	"visualeditor-saveerror": "Erreur lors de l’enregistrement des données sur le serveur : $1.",
 	"visualeditor-serializeerror": "Erreur lors du chargement des données depuis le serveur : $1.",
+	"visualeditor-recreate": "Cette page a été supprimée depuis que vous avez commencé la modification. Cliquez sur « Continuer » pour la recréer.",
 	"visualeditor-settings-tool": "Paramètres de la page",
 	"visualeditor-timeout": "Il semble que cet éditeur n’est pas disponible pour le moment. Voulez-vous modifier en mode source à la place ?",
 	"visualeditor-toolbar-cite-label": "Citer",
@@ -278,6 +279,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Continuer l’édition",
 	"visualeditor-viewpage-savewarning-title": "Êtes-vous sûr ?",
 	"visualeditor-wikitext-warning": "Vous utilisez l’ÉditeurVisuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexte]] ne fonctionne pas ici. Pour basculer à tout moment vers l’édition en wikitexte sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-savedialog}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
-	"visualeditor-wikitext-warning-link": "Help:Balisage wiki",
 	"visualeditor-wikitext-warning-title": "Balisage wikitexte détecté"
 }

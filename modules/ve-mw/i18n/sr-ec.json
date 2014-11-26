@@ -223,6 +223,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Настави са уређивањем",
 	"visualeditor-viewpage-savewarning-title": "Јесте ли сигурни?",
 	"visualeditor-wikitext-warning": "Користите Визуелни уређивач - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]] овде не ради. У сваком тренутку можете да се пребаците на изворно уређивање без губитка измена, отворите падајући мени поред дугмета „{{int:visualeditor-toolbar-savedialog}}“ и изаберите „{{int:visualeditor-mweditmodesource-tool}}“.",
-	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "Детектован викитекст"
 }
