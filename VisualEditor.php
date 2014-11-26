@@ -676,6 +676,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-size-originalsize-error',
 			'visualeditor-dimensionswidget-px',
 			'visualeditor-dimensionswidget-times',
+			'visualeditor-formatdropdown-format-blockquote',
 			'visualeditor-formatdropdown-format-heading-label',
 			'visualeditor-formatdropdown-format-heading1',
 			'visualeditor-formatdropdown-format-heading2',

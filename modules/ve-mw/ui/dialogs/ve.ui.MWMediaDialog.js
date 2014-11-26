@@ -87,6 +87,7 @@ ve.ui.MWMediaDialog.static.excludeCommands = [
 	'heading5',
 	'heading6',
 	'preformatted',
+	'blockquote',
 	// TODO: Decide if tables tools should be allowed
 	'tableCellHeader',
 	'tableCellData',

@@ -197,7 +197,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
 		include: [ { group: 'format' } ],
 		promote: [ 'paragraph' ],
-		demote: [ 'preformatted', 'heading1' ]
+		demote: [ 'preformatted', 'blockquote', 'heading1' ]
 	},
 	// Style
 	{

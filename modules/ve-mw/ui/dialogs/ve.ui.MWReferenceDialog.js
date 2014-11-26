@@ -78,6 +78,7 @@ ve.ui.MWReferenceDialog.static.excludeCommands = [
 	'heading5',
 	'heading6',
 	'preformatted',
+	'blockquote',
 	// No tables
 	'insertTable',
 	'deleteTable',
