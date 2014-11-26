@@ -6,10 +6,10 @@
  */
 
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextLink', 'mwWikitextWarning', '[[' )
+	new ve.ui.Sequence( 'wikitextLink', 'link', '[[', 2 )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextTemplate', 'mwWikitextWarning', '{{' )
+	new ve.ui.Sequence( 'wikitextTemplate', 'transclusion', '{{', 2 )
 );
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextItalic', 'mwWikitextWarning', '\'\'' )
