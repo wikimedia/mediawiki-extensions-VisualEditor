@@ -95,13 +95,15 @@ ve.ui.MWCategoryWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 		categoryWidget = this;
 
 	if ( value && value !== '' ) {
-		// Remove existing items by value
-		if ( Object.prototype.hasOwnProperty.call( this.categories, value ) ) {
-			this.categories[value].metaItem.remove();
-		}
 		// Add new item
 		categoryItem = this.input.getCategoryItemFromValue( value );
-		this.queryCategoryHiddenStatus( [categoryItem.name] ).done( function () {
+		this.queryCategoryStatus( [categoryItem.name] ).done( function ( normalisedTitles ) {
+			// Remove existing items by name
+			var toRemove = mw.Title.newFromText( categoryItem.name ).getMainText();
+			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categories, toRemove ) ) {
+				categoryWidget.categories[toRemove].metaItem.remove();
+			}
+			categoryItem.name = normalisedTitles[categoryItem.name] || categoryItem.name;
 			categoryWidget.emit( 'newCategory', categoryItem );
 		} );
 
@@ -176,14 +178,15 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
 };
 
 /**
- * Starts a request to update the link cache's hidden status for the given titles.
- * The returned promise will be resolved with an API result if an API call was made,
- * or no arguments if it was unnecessary.
+ * Starts a request to update the link cache's hidden and missing status for
+ *  the given titles, following normalisation responses as necessary.
+ * The returned promise will be resolved with an object with input titles as keys
+ * and their normalised versions as values, where different.
  *
  * @param {string[]} categoryNames
  * @return {jQuery.Promise}
  */
-ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( categoryNames ) {
+ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames ) {
 	var categoryWidget = this, categoryNamesToQuery = [];
 	// Get rid of any we already know the hidden status of.
 	categoryNamesToQuery = $.grep( categoryNames, function ( categoryTitle ) {
@@ -192,7 +195,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 	} );
 
 	if ( !categoryNamesToQuery.length ) {
-		return $.Deferred().resolve().promise();
+		return $.Deferred().resolve( {} ).promise();
 	}
 
 	return new mw.Api().get( {
@@ -202,7 +205,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 		ppprop: 'hiddencat',
 		redirects: ''
 	} ).then( function ( result ) {
-		var linkCacheUpdate = {};
+		var linkCacheUpdate = {}, normalisedTitles = {};
 		if ( result && result.query && result.query.pages ) {
 			$.each( result.query.pages, function ( index, pageInfo ) {
 				linkCacheUpdate[pageInfo.title] = {
@@ -218,6 +221,14 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryHiddenStatus = function ( category
 			} );
 		}
 		ve.init.platform.linkCache.set( linkCacheUpdate );
+
+		if ( result.query && result.query.normalized ) {
+			$.each( result.query.normalized, function ( index, normalisation ) {
+				normalisedTitles[normalisation.from] = normalisation.to;
+			} );
+		}
+
+		return normalisedTitles;
 	} );
 };
 
@@ -238,38 +249,39 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 		} ),
 		categoryWidget = this;
 
-	return this.queryCategoryHiddenStatus( categoryNames ).then( function () {
+	return this.queryCategoryStatus( categoryNames ).then( function ( normalisedTitles ) {
 		var itemTitle, config, cachedData;
+
 		for ( i = 0, len = items.length; i < len; i++ ) {
 			item = items[i];
+			item.name = normalisedTitles[item.name] || item.name;
 
-			itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category ).getPrefixedText();
+			itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category );
 			// Create a widget using the item data
 			config = {
 				$: categoryWidget.$,
 				item: item
 			};
-			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle ) ) {
+			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle.getPrefixedText() ) ) {
 				config.redirectTo = new mw.Title(
-					categoryWidget.categoryRedirects[itemTitle],
+					categoryWidget.categoryRedirects[itemTitle.getPrefixedText()],
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
-				cachedData = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle] );
-				config.hidden = cachedData.hidden;
-				config.missing = cachedData.missing;
+				cachedData = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle.getPrefixedText()] );
 			} else {
 				cachedData = ve.init.platform.linkCache.getCached( item.name );
-				config.hidden = cachedData.hidden;
-				config.missing = cachedData.missing;
 			}
+			config.hidden = cachedData.hidden;
+			config.missing = cachedData.missing;
+
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( categoryWidget, {
 				savePopupState: 'onSavePopupState',
 				togglePopupMenu: 'onTogglePopupMenu'
 			} );
 
-			// Index item by value
-			categoryWidget.categories[item.value] = categoryItem;
+			// Index item
+			categoryWidget.categories[itemTitle.getMainText()] = categoryItem;
 			// Copy sortKey from old item when "moving"
 			if ( existingCategoryItem ) {
 				categoryItem.sortKey = existingCategoryItem.sortKey;

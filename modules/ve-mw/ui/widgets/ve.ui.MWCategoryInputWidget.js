@@ -104,19 +104,29 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 		hiddenCategoryItems = [], newCategoryItems = [],
 		existingCategories = this.categoryWidget.getCategories(),
 		linkCacheUpdate = {},
-		canonicalQueryValue = mw.Title.newFromText( this.value );
+		canonicalQueryValue = mw.Title.newFromText( this.value ),
+		prefixedCanonicalQueryValue = mw.Title.newFromText(
+			this.value,
+			mw.config.get( 'wgNamespaceIds' ).category
+		);
+
+	prefixedCanonicalQueryValue = prefixedCanonicalQueryValue && prefixedCanonicalQueryValue.getPrefixedText();
 
 	if ( canonicalQueryValue ) {
 		canonicalQueryValue = canonicalQueryValue.getMainText();
 	} // Invalid titles just end up with canonicalQueryValue being null.
 
 	$.each( data, function ( index, suggestedCategory ) {
-		var suggestedCacheEntry = ve.init.platform.linkCache.getCached( 'Category:' + suggestedCategory );
+		var suggestedCategoryTitle = mw.Title.newFromText(
+				suggestedCategory,
+				mw.config.get( 'wgNamespaceIds' ).category
+			).getPrefixedText(),
+			suggestedCacheEntry = ve.init.platform.linkCache.getCached( suggestedCategoryTitle );
 		if ( canonicalQueryValue === suggestedCategory ) {
 			exactMatch = true;
 		}
 		if ( !suggestedCacheEntry ) {
-			linkCacheUpdate['Category:' + suggestedCategory] = { missing: false };
+			linkCacheUpdate[suggestedCategoryTitle] = { missing: false };
 		}
 		if (
 			ve.indexOf( suggestedCategory, existingCategories ) === -1
@@ -143,7 +153,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 	// New category
 	if ( !exactMatch ) {
 		newCategoryItems.push( canonicalQueryValue );
-		linkCacheUpdate['Category:' + canonicalQueryValue] = { missing: true };
+		linkCacheUpdate[prefixedCanonicalQueryValue] = { missing: true };
 	}
 
 	ve.init.platform.linkCache.set( linkCacheUpdate );
