@@ -33,5 +33,5 @@ ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextDefinition', 'mwWikitextWarning',  [ { type: 'paragraph' }, ';' ] )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextDescription', 'mwWikitextWarning',  [ { type: 'paragraph' }, ':' ] )
+	new ve.ui.Sequence( 'wikitextDescription', 'blockquote',  [ { type: 'paragraph' }, ':' ], 1 )
 );
