@@ -97,6 +97,13 @@ ve.ui.MWReferenceDialog.static.excludeCommands = [
 	'referencesList'
 ];
 
+// HACK: change group: 'cite' to group: 'cite-transclusion'
+ve.ui.MWReferenceDialog.static.toolbarGroups = ( function () {
+	var toolbarGroups = ve.copy( ve.init.mw.Target.static.toolbarGroups );
+	toolbarGroups[4].include[0].group = 'cite-transclusion';
+	return toolbarGroups;
+} () );
+
 /**
  * Get the import rules for the surface widget in the dialog
  *
@@ -212,7 +219,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 		this.referenceModel.getDocument(),
 		{
 			$: this.$,
-			tools: ve.init.target.constructor.static.toolbarGroups,
+			tools: this.constructor.static.toolbarGroups,
 			excludeCommands: this.constructor.static.excludeCommands,
 			importRules: this.constructor.static.getImportRules()
 		}
