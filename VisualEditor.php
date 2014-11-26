@@ -407,6 +407,7 @@ $wgResourceModules += array(
 
 			'lib/ve/src/dm/nodes/ve.dm.GeneratedContentNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.AlienNode.js',
+			'lib/ve/src/dm/nodes/ve.dm.BlockquoteNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.BreakNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.CenterNode.js',
 			'lib/ve/src/dm/nodes/ve.dm.CommentNode.js',
@@ -475,6 +476,7 @@ $wgResourceModules += array(
 
 			'lib/ve/src/ce/nodes/ve.ce.GeneratedContentNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.AlienNode.js',
+			'lib/ve/src/ce/nodes/ve.ce.BlockquoteNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.BreakNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.CenterNode.js',
 			'lib/ve/src/ce/nodes/ve.ce.CommentNode.js',
