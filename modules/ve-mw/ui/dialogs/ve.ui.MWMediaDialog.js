@@ -632,14 +632,13 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.resetCaption();
 
-			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
-
 			this.actions.setAbilities( { insert: false, apply: false } );
 
 			// Initialization
 			this.captionFieldset.$element.append( this.captionSurface.$element );
 			this.captionSurface.initialize();
 
+			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 		}, this );
 };
 
