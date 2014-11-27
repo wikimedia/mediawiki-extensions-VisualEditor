@@ -1748,9 +1748,9 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
 	} else {
 		this.serialize(
 			this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
-			function () {
+			function ( wikitext ) {
 				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
-				this.submitWithSaveFields( { wpDiff: 1, veswitched: 1 } );
+				this.submitWithSaveFields( { wpDiff: 1, veswitched: 1 }, wikitext );
 			}.bind( this )
 		);
 	}
