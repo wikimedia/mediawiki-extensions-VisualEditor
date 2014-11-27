@@ -889,6 +889,9 @@ $wgResourceModules += array(
 			'visualeditor-wikitext-warning-title',
 			'visualeditor-window-title',
 
+			// Mentioned in another message
+			'ooui-dialog-process-continue',
+
 			// Used by the TOC widget (currently experimental)
 			'toc',
 			'showtoc',

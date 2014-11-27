@@ -667,8 +667,10 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorPageDeleted = function () {
+	var continueLabel = mw.msg( 'ooui-dialog-process-continue' );
+
 	this.pageDeletedWarning = true;
-	this.showSaveError( mw.msg( 'visualeditor-recreate' ), true, true );
+	this.showSaveError( mw.msg( 'visualeditor-recreate', continueLabel ), true, true );
 };
 
 /**
