@@ -192,6 +192,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{ include: [ 'undo', 'redo' ] },
 	// Format
 	{
+		classes: [ 've-test-toolbar-format' ],
 		type: 'menu',
 		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
@@ -214,6 +215,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{ include: [ 'link' ] },
 	// Cite
 	{
+		classes: [ 've-test-toolbar-cite' ],
 		type: 'list',
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
 		indicator: 'down',
@@ -230,6 +232,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Insert
 	{
+		classes: [ 've-test-toolbar-insert' ],
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		indicator: 'down',
 		include: '*',

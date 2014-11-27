@@ -132,7 +132,7 @@ Then(/^I should see Headings pull-down menu$/) do
 end
 
 Then(/^I take screenshot of pull-dowm menu$/) do
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.downarrow_element, @current_page.heading_dropdown_menus_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.toolbar_format_element, @current_page.heading_dropdown_menus_element])
 end
 
 Then(/^I should see Formatting pull-down menu$/) do
@@ -179,7 +179,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
 end
 
 Then(/^I click on More in insert pull-down menu$/) do
-  on(VisualEditorPage).ve_more_references_options_element.when_present.click
+  on(VisualEditorPage).insert_more_fewer_element.when_present.click
 end
 
 Then(/^I should see Special character Insertion window$/) do

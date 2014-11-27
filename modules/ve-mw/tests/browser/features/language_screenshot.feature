@@ -96,6 +96,7 @@ Feature: Language Screenshot
       And I select the image in VisualEditor
     Then I should see media in VisualEditor
 
+  @language_screenshot
   Scenario: VisualEditor_Cite_Pulldown
     Given I am editing language screenshot page
     When I click on Cite menu
