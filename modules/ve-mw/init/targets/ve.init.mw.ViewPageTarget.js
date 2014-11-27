@@ -210,10 +210,10 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function () {
 
 	this.toolbar.$bar.slideDown( 'fast', function () {
 		// Check the surface wasn't torn down while the toolbar was animating
-		if ( this.surface ) {
+		if ( this.getSurface() ) {
 			this.toolbar.initialize();
-			this.surface.getView().emit( 'position' );
-			this.surface.getContext().updateDimensions();
+			this.getSurface().getView().emit( 'position' );
+			this.getSurface().getContext().updateDimensions();
 		}
 	}.bind( this ) );
 };
@@ -291,7 +291,7 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( noDialog, trackMecha
 	if ( noDialog || this.activating || !this.edited ) {
 		this.cancel( trackMechanism );
 	} else {
-		this.surface.dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
+		this.getSurface().dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
 			opened.then( function ( closing ) {
 				closing.then( function ( data ) {
 					if ( data && data.action === 'discard' ) {
@@ -430,14 +430,13 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 		return;
 	}
 	this.activating = false;
-	this.surface.getModel().connect( this, {
+	this.getSurface().getModel().connect( this, {
 		history: 'updateToolbarSaveButtonState'
 	} );
-	this.surface.setImportRules( this.constructor.static.importRules );
 
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
-		this.surface.mwTocWidget = new ve.ui.MWTocWidget( this.surface );
+		this.getSurface().mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
 	}
 
 	// Update UI
@@ -445,7 +444,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.changeDocumentTitle();
 	this.hidePageContent();
 
-	this.surface.getView().focus();
+	this.getSurface().getView().focus();
 
 	this.setupToolbarSaveButton();
 	this.attachToolbarSaveButton();
@@ -738,7 +737,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply
  */
 ve.init.mw.ViewPageTarget.prototype.onShowChanges = function ( diffHtml ) {
 	// Invalidate the viewer diff on next change
-	this.surface.getModel().getDocument().once( 'transact',
+	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
 	);
 	this.saveDialog.setDiffAndReview( diffHtml );
@@ -813,7 +812,7 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.ViewPageTarget.prototype.onToolbarMetaButtonClick = function () {
-	this.surface.getDialogs().openWindow( 'meta' );
+	this.getSurface().getDialogs().openWindow( 'meta' );
 };
 
 /**
@@ -822,7 +821,7 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarMetaButtonClick = function () {
 ve.init.mw.ViewPageTarget.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
-	this.edited = this.surface.getModel().hasBeenModified();
+	this.edited = this.getSurface().getModel().hasBeenModified();
 	// Disable the save button if we have no history or if the sanity check is not finished
 	isDisabled = ( !this.edited && !this.restoring ) || !this.sanityCheckFinished;
 	this.toolbarSaveButton.setDisabled( isDisabled );
@@ -863,7 +862,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	// Invalidate the viewer wikitext on next change
-	this.surface.getModel().getDocument().once( 'transact',
+	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
 	);
 	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
@@ -915,14 +914,14 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.editSource = function () {
-	if ( !this.surface.getModel().hasBeenModified() ) {
+	if ( !this.getSurface().getModel().hasBeenModified() ) {
 		this.switchToWikitextEditor( true );
 		return;
 	}
 
-	this.surface.getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
+	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
 
-	this.surface.getDialogs().openWindow( 'wikitextswitchconfirm', { target: this } );
+	this.getSurface().getDialogs().openWindow( 'wikitextswitchconfirm', { target: this } );
 };
 
 /**
@@ -1015,8 +1014,8 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 	this.tearDownToolbar();
 	this.tearDownDebugBar();
 	this.restoreDocumentTitle();
-	if ( this.surface.mwTocWidget ) {
-		this.surface.mwTocWidget.teardown();
+	if ( this.getSurface().mwTocWidget ) {
+		this.getSurface().mwTocWidget.teardown();
 	}
 
 	if ( this.saveDialog ) {
@@ -1030,9 +1029,8 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 
 	return $.when.apply( $, promises ).then( function () {
 		// Destroy surface
-		if ( this.surface ) {
-			this.surface.destroy();
-			this.surface = null;
+		while ( this.surfaces.length ) {
+			this.surfaces.pop().destroy();
 		}
 		this.active = false;
 	}.bind( this ) );
@@ -1045,17 +1043,17 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
-	var viewPageTarget = this;
+	var target = this;
 	if ( this.isViewPage ) {
 		// Allow instant switching back to view mode, without refresh
 		$( '#ca-view a, #ca-nstab-visualeditor a' )
 			.click( this.onViewTabClick.bind( this ) );
 
 		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
-			if ( viewPageTarget.surface && !viewPageTarget.deactivating ) {
-				viewPageTarget.editSource();
+			if ( target.getSurface() && !target.deactivating ) {
+				target.editSource();
 
-				if ( viewPageTarget.surface.getModel().hasBeenModified() ) {
+				if ( target.getSurface().getModel().hasBeenModified() ) {
 					e.preventDefault();
 				}
 			}
@@ -1107,7 +1105,7 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 	var $actionTools = $( '<div>' ),
 		$pushButtons = $( '<div>' ),
-		actions = new ve.ui.TargetToolbar( this, this.surface );
+		actions = new ve.ui.TargetToolbar( this, this.getSurface() );
 
 	actions.setup( [
 		{ include: [ 'help', 'notices' ] },
@@ -1138,10 +1136,10 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 	this.emit( 'saveWorkflowBegin' );
-	this.surface.getDialogs().getWindow( 'mwSave' ).then( function ( win ) {
-		var currentWindow = this.surface.getContext().getInspectors().getCurrentWindow(),
+	this.getSurface().getDialogs().getWindow( 'mwSave' ).then( function ( win ) {
+		var currentWindow = this.getSurface().getContext().getInspectors().getCurrentWindow(),
 			target = this;
-		this.origSelection = this.surface.getModel().getSelection();
+		this.origSelection = this.getSurface().getModel().getSelection();
 
 		// Make sure any open inspectors are closed
 		if ( currentWindow ) {
@@ -1150,7 +1148,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 
 		// Preload the serialization
 		if ( !this.docToSave ) {
-			this.docToSave = ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() );
+			this.docToSave = ve.dm.converter.getDomFromModel( this.getSurface().getModel().getDocument() );
 		}
 		this.prepareCacheKey( this.docToSave );
 
@@ -1170,9 +1168,9 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 		}
 
 		this.saveDialog.setSanityCheck( this.sanityCheckVerified );
-		this.surface.getDialogs().openWindow(
+		this.getSurface().getDialogs().openWindow(
 			this.saveDialog,
-			{ dir: this.surface.getModel().getDocument().getLang() }
+			{ dir: this.getSurface().getModel().getDocument().getLang() }
 		)
 			// Call onSaveDialogClose() when the save dialog starts closing
 			.done( function ( opened ) {
@@ -1192,12 +1190,12 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogClose = function () {
 		this.docToSave = null;
 		this.clearPreparedCacheKey();
 	}.bind( this );
-	if ( this.surface ) {
-		this.surface.getModel().getDocument().once( 'transact', clear );
+	if ( this.getSurface() ) {
+		this.getSurface().getModel().getDocument().once( 'transact', clear );
 	} else {
 		clear();
 	}
-	this.surface.getModel().setSelection( this.origSelection );
+	this.getSurface().getModel().setSelection( this.origSelection );
 	this.emit( 'saveWorkflowEnd' );
 };
 
@@ -1619,7 +1617,7 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 					)
 				)
 			) {
-			this.surface.getDialogs().openWindow( 'betaWelcome' );
+			this.getSurface().getDialogs().openWindow( 'betaWelcome' );
 		}
 
 		if ( prefSaysShow ) {
@@ -1641,10 +1639,10 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 		}
 	}
 
-	if ( this.surface.getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
-		this.surface.getDialogs().openWindow( 'meta', {
+	if ( this.getSurface().getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
+		this.getSurface().getDialogs().openWindow( 'meta', {
 			page: 'settings',
-			fragment: this.surface.getModel().getFragment()
+			fragment: this.getSurface().getModel().getFragment()
 		} );
 	}
 };
@@ -1683,7 +1681,7 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
 			return undefined;
 		}
 		// Check if there's been an edit
-		if ( this.surface && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
+		if ( this.getSurface() && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
 			// Return our message
 			message = ve.msg( 'visualeditor-viewpage-savewarning' );
 		}
@@ -1714,7 +1712,7 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
 		} ).toString();
 	} else {
 		this.serialize(
-			this.docToSave || ve.dm.converter.getDomFromModel( this.surface.getModel().getDocument() ),
+			this.docToSave || ve.dm.converter.getDomFromModel( this.getSurface().getModel().getDocument() ),
 			function ( wikitext ) {
 				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
 				this.submitWithSaveFields( { wpDiff: 1, veswitched: 1 }, wikitext );
@@ -1727,5 +1725,5 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
  * Resets the document opacity when we've decided to cancel switching to the wikitext editor.
  */
 ve.init.mw.ViewPageTarget.prototype.resetDocumentOpacity = function () {
-	this.surface.getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
+	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
 };

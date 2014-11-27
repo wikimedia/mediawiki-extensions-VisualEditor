@@ -602,7 +602,7 @@ ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
  */
 ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, status, data ) {
 	var api, editApi,
-		viewPage = this;
+		target = this;
 	this.saving = false;
 
 	// Handle empty response
@@ -637,12 +637,12 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 			prop: 'info',
 			// Try to send the normalised form so that it is less likely we get extra data like
 			// data.normalised back that we don't need.
-			titles: new mw.Title( viewPage.pageName ).toText(),
+			titles: new mw.Title( target.pageName ).toText(),
 			indexpageids: '',
 			intoken: 'edit'
 		} )
 			.always( function () {
-				viewPage.emit( 'saveErrorBadToken' );
+				target.emit( 'saveErrorBadToken' );
 			} )
 			.done( function ( data ) {
 				var userMsg,
@@ -653,7 +653,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 					isAnon = mw.user.isAnon();
 
 				if ( userInfo && editToken ) {
-					viewPage.editToken = editToken;
+					target.editToken = editToken;
 
 					if (
 						( isAnon && userInfo.anon !== undefined ) ||
@@ -662,7 +662,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 							mw.config.get( 'wgUserId' ) === userInfo.id
 					) {
 						// New session is the same user still
-						viewPage.save( doc, saveData );
+						target.save( doc, saveData );
 					} else {
 						// The now current session is a different user
 						if ( userInfo.anon !== undefined ) {
@@ -674,7 +674,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 								// functions like mw.user.isAnon rely on this.
 								wgUserName: null
 							} );
-							viewPage.emit( 'saveErrorNewUser', null );
+							target.emit( 'saveErrorNewUser', null );
 						} else {
 							// New session is a different user
 							mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
@@ -684,7 +684,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 								mw.messages.get( 'visualeditor-savedialog-identify-user' )
 									.replace( /\$1/g, userInfo.name )
 							);
-							viewPage.emit( 'saveErrorNewUser', userInfo.name );
+							target.emit( 'saveErrorNewUser', userInfo.name );
 						}
 					}
 				}
@@ -1367,8 +1367,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		);
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
-			var surface = target.createSurface( dmDoc, { excludeCommands: target.constructor.static.excludeCommands } );
-			target.surface = surface;
+			var surface = target.addSurface( dmDoc );
 			surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
 				.addClass( target.protectedClasses );
 			setTimeout( function () {
@@ -1379,9 +1378,6 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 				surface.getContext().toggle( false );
 				target.$element.append( surface.$element );
 				target.setupToolbar();
-				if ( ve.debug ) {
-					target.setupDebugBar();
-				}
 
 				// Apply mw-body-content to the view (ve-ce-surface).
 				// Not to surface (ve-ui-surface), since that contains both the view
@@ -1422,15 +1418,15 @@ ve.init.mw.Target.prototype.setupToolbar = function () {
 ve.init.mw.Target.prototype.startSanityCheck = function () {
 	// We have to get a copy of the data now, before we unlock the surface and let the user edit,
 	// but we can defer the actual conversion and comparison
-	var viewPage = this,
-		doc = viewPage.surface.getModel().getDocument(),
+	var target = this,
+		doc = target.surface.getModel().getDocument(),
 		data = new ve.dm.FlatLinearData( doc.getStore().clone(), ve.copy( doc.getFullData() ) ),
-		oldDom = viewPage.doc,
+		oldDom = target.doc,
 		d = $.Deferred();
 
 	// Reset
-	viewPage.sanityCheckFinished = false;
-	viewPage.sanityCheckVerified = false;
+	target.sanityCheckFinished = false;
+	target.sanityCheckVerified = false;
 
 	setTimeout( function () {
 		// We can't compare oldDom.body and newDom.body directly, because the attributes on the
@@ -1457,15 +1453,15 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 		d.resolve();
 	} );
 
-	viewPage.sanityCheckPromise = d.promise()
+	target.sanityCheckPromise = d.promise()
 		.done( function () {
 			// If we detect no roundtrip errors,
 			// don't emphasize "review changes" to the user.
-			viewPage.sanityCheckVerified = true;
+			target.sanityCheckVerified = true;
 		})
 		.always( function () {
-			viewPage.sanityCheckFinished = true;
-			viewPage.emit( 'sanityCheckComplete' );
+			target.sanityCheckFinished = true;
+			target.emit( 'sanityCheckComplete' );
 		} );
 };
 
@@ -1477,7 +1473,7 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
  */
 ve.init.mw.Target.prototype.restoreEditSection = function () {
 	if ( this.section !== undefined && this.section > 0 ) {
-		var surfaceView = this.surface.getView(),
+		var surfaceView = this.getSurface().getView(),
 			$documentNode = surfaceView.getDocument().getDocumentNode().$element,
 			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
 			headingNode = $section.data( 'view' );
