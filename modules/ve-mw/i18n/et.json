@@ -204,6 +204,7 @@
 	"visualeditor-savedialog-warning-dirty": "Sinu muudatus võib olla rikutud. Palun vaata see enne salvestamist üle.",
 	"visualeditor-saveerror": "Tõrge andmete salvestamisel serverisse: $1.",
 	"visualeditor-serializeerror": "Tõrge serverist andmete laadimisel: $1.",
+	"visualeditor-recreate": "See lehekülg on kustutatud, pärast seda kui redigeerimist alustasid. Klõpsa \"Jätka\", et lehekülg taasluua.",
 	"visualeditor-settings-tool": "Lehekülje sätted",
 	"visualeditor-timeout": "Paistab, et seda redaktorit ei saa praegu kasutada. Kas soovid redigeerida hoopis lähteteksti režiimis?",
 	"visualeditor-toolbar-cite-label": "Viide",
@@ -215,6 +216,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Jätka redigeerimist",
 	"visualeditor-viewpage-savewarning-title": "Kas oled kindel?",
 	"visualeditor-wikitext-warning": "Kasutad VisualEditori. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Vikitekst]] siin ei tööta. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-savedialog}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Vikitekst",
 	"visualeditor-wikitext-warning-title": "Tuvastatud vikiteksti märgistus"
 }

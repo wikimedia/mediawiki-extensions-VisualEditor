@@ -5,7 +5,7 @@
 			"Vikytinta"
 		]
 	},
-	"apihelp-visualeditor-description": "HTML5 ukar kutt'añataki ma pajinataki parsoid service ukataki.",
+	"apihelp-visualeditor-description": "HTML5 ukar kutt'añataki ma pajinataki parsoid servicio ukataki.",
 	"apihelp-visualeditor-param-basetimestamp": "Imataki ukhat pach askichat imatak uka uñjañataki. Edicion ukan jan walt'awip uñjañataki apanqasi.",
 	"apihelp-visualeditor-param-html": "HTML Parsoid ukar apayañataki uk wikitexto ukar tukuyañataki.",
 	"apihelp-visualeditor-param-paction": "Acción a realizar.",
@@ -168,6 +168,5 @@
 	"visualeditor-viewpage-savewarning-discard": "Askichaw pichsuña",
 	"visualeditor-viewpage-savewarning-keep": "Askichäwimp sarantaskañaki",
 	"visualeditor-viewpage-savewarning-title": "Iyawatati?",
-	"visualeditor-wikitext-warning-link": "Help:Wikiqillqata",
 	"visualeditor-wikitext-warning-title": "Wikiqillqatax jikxatatawa"
 }

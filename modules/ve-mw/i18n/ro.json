@@ -240,6 +240,7 @@
 	"visualeditor-savedialog-warning-dirty": "Este posibil ca modificarea dumneavoastră să fi fost coruptă — vă rugăm s-o revizualizați înainte de a salva.",
 	"visualeditor-saveerror": "Eroare la salvarea datelor pe server: $1.",
 	"visualeditor-serializeerror": "Eroare la încărcarea datelor de pe server: $1.",
+	"visualeditor-recreate": "Pagina a fost ștearsă de la momentul în care ați început s-o modificați. Apăsați „Continuă” pentru a o recrea.",
 	"visualeditor-settings-tool": "Setări pagină",
 	"visualeditor-timeout": "Se pare că acest editor nu este disponibil în acest moment. Doriți, în schimb, să modificați codul sursă?",
 	"visualeditor-toolbar-cite-label": "Citare",
@@ -251,6 +252,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Continuă editarea",
 	"visualeditor-viewpage-savewarning-title": "Sunteți sigur(ă)?",
 	"visualeditor-wikitext-warning": "Folosiți EditorulVizual — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|textul wiki]] nu funcționează aici. Pentru a reveni în orice moment la editarea codului sursă fără a pierde modificările, deschideți meniul de lângă „{{int:visualeditor-toolbar-savedialog}}” și selectați „{{int:visualeditor-mweditmodesource-title}}”.",
-	"visualeditor-wikitext-warning-link": "Help:Limbajul wiki",
 	"visualeditor-wikitext-warning-title": "Limbaj de text wiki detectat"
 }

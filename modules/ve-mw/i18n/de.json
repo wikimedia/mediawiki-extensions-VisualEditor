@@ -261,7 +261,7 @@
 	"visualeditor-savedialog-warning-dirty": "Deine Bearbeitung ist eventuell beschädigt. Bitte vor dem Speichern überprüfen.",
 	"visualeditor-saveerror": "Fehler beim Speichern der Daten auf dem Server: $1.",
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",
-	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem du zum Bearbeiten angefangen hast. Wähle „Fortfahren“, um sie neu zu erstellen.",
+	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem du zum Bearbeiten angefangen hast. Wähle „$1“, um sie neu zu erstellen.",
 	"visualeditor-settings-tool": "Seiteneinstellungen",
 	"visualeditor-timeout": "Es sieht so aus, als ob dieser Editor zur Zeit nicht verfügbar ist. Möchtest du stattdessen in den Quelltextmodus wechseln?",
 	"visualeditor-toolbar-cite-label": "Zitat",
