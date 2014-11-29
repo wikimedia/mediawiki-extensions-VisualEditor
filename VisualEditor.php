@@ -742,7 +742,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/src/ui/ve.ui.DesktopSurface.js',
 			'lib/ve/src/ui/ve.ui.DesktopContext.js',
-			'lib/ve/src/ui/ve.ui.DesktopInspectorManager.js',
+			'lib/ve/src/ui/windowmanagers/ve.ui.DesktopInspectorWindowManager.js',
 		),
 		'styles' => array(
 			'lib/ve/src/ui/styles/ve.ui.DesktopContext.css',
