@@ -15,7 +15,8 @@
 			"SandroHc",
 			"Opraco",
 			"Toliño",
-			"He7d3r"
+			"He7d3r",
+			"Amire80"
 		]
 	},
 	"apihelp-visualeditor-param-oldid": "O número da edição de utilização (por omissão, a versão mais recente).",
@@ -246,7 +247,7 @@
 	"visualeditor-savedialog-warning-dirty": "A sua edição pode ter sido corrompida – por favor, reveja antes de a gravar.",
 	"visualeditor-saveerror": "Erro ao gravar dados no servidor: $1.",
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
-	"visualeditor-recreate": "A página que começou a editar foi eliminada entretanto. Pressione \"continuar\" para recriá-la.",
+	"visualeditor-recreate": "A página que começou a editar foi eliminada entretanto. Pressione \"$1\" para recriá-la.",
 	"visualeditor-settings-tool": "Configurações da página",
 	"visualeditor-timeout": "Parece que o editor está indisponível de momento. Gostaria de editar antes o código-fonte?",
 	"visualeditor-toolbar-cite-label": "Citar",

@@ -14,7 +14,8 @@
 			"Raynasution",
 			"Pizza1016",
 			"Ahdan",
-			"Marwan Mohamad"
+			"Marwan Mohamad",
+			"Amire80"
 		]
 	},
 	"apihelp-visualeditor-description": "Mengembalikan HTML5 untuk halaman yang berasal dari layanan parsoid.",
@@ -269,7 +270,7 @@
 	"visualeditor-savedialog-warning-dirty": "Suntingan Anda mungkin telah rusak – harap tinjau dahulu sebelum menyimpan.",
 	"visualeditor-saveerror": "Galat menyimpan data ke peladen: $1.",
 	"visualeditor-serializeerror": "Galat memuat data dari peladen: $1.",
-	"visualeditor-recreate": "Halaman ini telah dihapus ketika Anda mulai menyunting. Tekan lanjutkan untuk membuatnya lagi.",
+	"visualeditor-recreate": "Halaman ini telah dihapus ketika Anda mulai menyunting. Tekan \"$1\" untuk membuatnya lagi.",
 	"visualeditor-settings-tool": "Pengaturan halaman",
 	"visualeditor-timeout": "Nampaknya penyunting ini tidak tersedia sat ini. Adakah Anda ingin menyunting dalam mode sumber saja?",
 	"visualeditor-toolbar-cite-label": "Kutip",

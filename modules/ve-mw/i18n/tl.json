@@ -4,7 +4,8 @@
 			"AnakngAraw",
 			"Sky Harbor",
 			"Jojit fb",
-			"Jewel457"
+			"Jewel457",
+			"Amire80"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kapag nagtatala, itakda ito sa panandang-oras ng rebisyong ibinago. Ginagamit upang matuklas ang mga alitan sa pagbabago.",
@@ -205,7 +206,7 @@
 	"visualeditor-savedialog-warning-dirty": "Maaaring nabalakyot ang pagbabago mo – pakirepaso ito bago mo itong itala.",
 	"visualeditor-saveerror": "Kamalian sa pagtala ng datos sa serbidor: $1.",
 	"visualeditor-serializeerror": "Kamalian sa pagkarga ng datos mula sa serbidor: $1",
-	"visualeditor-recreate": "Ibinura ang pahinang ito nang nagsimula kang mamatnugot.  Pindutin ang \"Magpatuloy\" upang mailikha ito muli.",
+	"visualeditor-recreate": "Ibinura ang pahinang ito nang nagsimula kang mamatnugot. Pindutin ang \"$1\" upang mailikha ito muli.",
 	"visualeditor-settings-tool": "Mga kagustuhan ng pahina",
 	"visualeditor-timeout": "Mukhang kasalukuyang hindi magagamit ang editor na ito.  Nais mo ba na lang bang mamatnugot gamit ang paraang batayan?",
 	"visualeditor-toolbar-cite-label": "Isangguni",

@@ -270,7 +270,7 @@
 	"visualeditor-savedialog-warning-dirty": "您的编辑可能已经损坏。请在保存前检查。",
 	"visualeditor-saveerror": "保存数据至服务器时出错：$1。",
 	"visualeditor-serializeerror": "从服务器加载数据时出错：$1。",
-	"visualeditor-recreate": "此页面自从您开始编辑以来已被删除。请点击继续以重新创建。",
+	"visualeditor-recreate": "此页面自从您开始编辑以来已被删除。请点击“$1”以重新创建。",
 	"visualeditor-settings-tool": "页面设置",
 	"visualeditor-timeout": "看起来此编辑器当前不可用。想要换用源代码模式编辑吗？",
 	"visualeditor-toolbar-cite-label": "引用",

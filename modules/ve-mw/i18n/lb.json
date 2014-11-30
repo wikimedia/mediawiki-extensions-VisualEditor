@@ -222,7 +222,7 @@
 	"visualeditor-savedialog-warning-dirty": "Är Ännerung ass eventuell korrupt - kuckt w.e.g. alles no ier Dir späichert.",
 	"visualeditor-saveerror": "Feeler beim Späichere vun den Donnéeën op de Server: $1.",
 	"visualeditor-serializeerror": "Feeler beim Luede vun Date vum Server: $1.",
-	"visualeditor-recreate": "D'Säit gouf geläscht zanter datt Dir ugefaang hutt se z'änneren. Klickt op 'Virufueren' fir ze nees unzeleeën.",
+	"visualeditor-recreate": "D'Säit gouf geläscht zanter datt Dir ugefaang hutt se z'änneren. Klickt op \"$1\" fir se nees unzeleeën.",
 	"visualeditor-settings-tool": "Astellunge vun der Säit",
 	"visualeditor-timeout": "Et gesäit esou aus wéi wann dësen Editeur elo net disponibel ass. Wëllt Dir an de Quelltextmodus wiesselen fir z'änneren?",
 	"visualeditor-toolbar-cite-label": "Zitat",

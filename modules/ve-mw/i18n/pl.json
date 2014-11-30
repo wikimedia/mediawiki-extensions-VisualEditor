@@ -236,6 +236,7 @@
 	"visualeditor-savedialog-warning-dirty": "Twoja edycja mogła zostać uszkodzona - przejrzyj ją przed zapisaniem.",
 	"visualeditor-saveerror": "Błąd podczas zapisywania danych na serwerze: $1.",
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",
+	"visualeditor-recreate": "Strona została usunięta od czasu rozpoczęcia twojej edycji. Naciśnij „$1”, aby ją powtórnie utworzyć.",
 	"visualeditor-settings-tool": "Ustawienia strony",
 	"visualeditor-timeout": "Wygląda na to, że ten edytor jest obecnie niedostępny. Chcesz zamiast tego przejść do edycji kodu źródłowego?",
 	"visualeditor-toolbar-cite-label": "Przypis",
@@ -247,6 +248,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Kontynuuj edycję",
 	"visualeditor-viewpage-savewarning-title": "Na pewno?",
 	"visualeditor-wikitext-warning": "Używasz teraz VisualEditora –  a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
-	"visualeditor-wikitext-warning-link": "Help:Formatowanie tekstu",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego"
 }

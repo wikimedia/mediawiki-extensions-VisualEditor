@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"Nikola Smolenski",
 			"Милан Јелисавчић",
-			"Rancher"
+			"Rancher",
+			"Amire80"
 		]
 	},
 	"tooltip-ca-createsource": "Направите изворни код ове странице",
@@ -212,7 +213,7 @@
 	"visualeditor-savedialog-warning-dirty": "Изгледа да постоји проблем са вашом изменом — молимо прегледајте је пре чувања.",
 	"visualeditor-saveerror": "Грешка приликом чувања података на сервер: $1.",
 	"visualeditor-serializeerror": "Грешка приликом учитавања података са сервера: $1.",
-	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните настави да је поново направите.",
+	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
 	"visualeditor-settings-tool": "Поставке странице",
 	"visualeditor-timeout": "Изгледа да овај уређивач тренутно није доступан. Желите ли да уређујете у изворном режиму?",
 	"visualeditor-toolbar-cite-label": "Цитирај",
