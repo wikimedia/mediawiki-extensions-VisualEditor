@@ -113,7 +113,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "По умолчанию",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Нет",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Да",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Вы можете принудительно отобразить дополнительную вкладку возле вкладки \"{{int:vector-view-edit}}\" на этой странице, которая упростит добавление нового раздела; или  принудительно не отображать её, если она отображается.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Вы можете принудительно отобразить дополнительную вкладку возле вкладки \"$1\" на этой странице, которая упростит добавление нового раздела; или  принудительно не отображать её, если она отображается.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Показать на этой странице вкладку для добавления нового раздела",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Вы можете предотвратить автоматическую конвертацию содержания этой страницы в другие сценарии.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Не конвертируйте содержимое между языковыми вариантами",
@@ -260,6 +260,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Продолжить редактирование",
 	"visualeditor-viewpage-savewarning-title": "Вы уверены?",
 	"visualeditor-wikitext-warning": "Вы используете Визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. НЧтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-savedialog}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
-	"visualeditor-wikitext-warning-link": "Help:Вики-разметка",
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка"
 }

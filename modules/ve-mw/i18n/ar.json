@@ -102,7 +102,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "افتراضي",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "لا",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "نعم",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "يمكن إظهار زر إضافة قسم جديد بجانب زر \"{{int:vector-view-edit}}\"، أو إخفاؤه.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "يمكن إظهار زر إضافة قسم جديد بجانب زر \"$1\"، أو إخفاؤه.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "إظهار اشارة تبويب على هذه الصفحة لإضافة قسم جديد",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "يمكن منع التحويل التلقائي لمحتويات الصفحة إلى أنظمة الكتابة الأخرى.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "لا تحول المحتوى بين تنويعات اللغات",
@@ -242,11 +242,11 @@
 	"visualeditor-toolbar-cite-label": "مرجع",
 	"visualeditor-toolbar-savedialog": "احفظ الصفحة",
 	"visualeditor-usernamespacepagelink": "Project:نطاق المستخدم",
+	"visualeditor-version-label": "نسخة",
 	"visualeditor-viewpage-savewarning": "هل أنت متأكد من أنك تريد العودة إلى وضع العرض دون الحفظ أولا؟",
 	"visualeditor-viewpage-savewarning-discard": "ألغ التعديلات",
 	"visualeditor-viewpage-savewarning-keep": "واصل التعديل",
 	"visualeditor-viewpage-savewarning-title": "متأكد؟",
 	"visualeditor-wikitext-warning": "أنت تستخدم المحرر المرئي، و[[{{MediaWiki:visualeditor-wikitext-warning-link}}|نص الويكي]] لا يعمل هنا. للاحتفاظ بتعديلاتك وإكمال التحرير عن طريق المصدر، افتح المنسدلة بجانب \"{{int:visualeditor-toolbar-savedialog}}\" واختر \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:نص ويكي",
 	"visualeditor-wikitext-warning-title": "يوجد نص ويكي"
 }

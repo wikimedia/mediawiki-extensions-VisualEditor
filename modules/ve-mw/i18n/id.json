@@ -128,7 +128,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Baku",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Tidak",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ya",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Anda dapat memaksa ditampilkannya tab tambahan di samping tab \"{{int:vector-view-edit}}\" pada halaman ini yang akan mempermudah penambahan bagian baru, atau memaksanya untuk tidak tampil jika biasanya tab tersebut ditampilkan.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Anda dapat memaksa ditampilkannya tab tambahan di samping tab \"$1\" pada halaman ini yang akan mempermudah penambahan bagian baru, atau memaksanya untuk tidak tampil jika biasanya tab tersebut ditampilkan.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Tunjukkan tab di halaman ini untuk menambah bagian baru",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Anda dapat mencegah isi dari halaman ini secara otomatis diubah menjadi aksara lain.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Jangan ubah isi di antara beragam bahasa",

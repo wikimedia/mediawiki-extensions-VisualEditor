@@ -44,7 +44,7 @@
 	"visualeditor-desc": "Visuaalinen muokkain MediaWikille",
 	"visualeditor-descriptionpagelink": "Project:Visuaalinen muokkain",
 	"visualeditor-dialog-beta-welcome-action-continue": "Jatka",
-	"visualeditor-dialog-beta-welcome-content": "Tämä on uusi, helpompi tapamme muokata. Se on vielä beetavaiheessa, mikä tarkoittaa, että osia sivuista ei voi muokata tai muokkauksessa esiintyy ongelmia, jotka pitää korjata. Kehotamme tarkistamaan muutoksesi ja otamme mielellämme vastaan kaikki raportit ongelmista, joihin saatat törmätä Visuaalista muokkainta käyttäessäsi (klikkaa '{{int:visualeditor-help-tool}}' -nappia antaaksesi palautetta). Voit jatkaa wikiteksti-muokkaimen käyttöä klikkaamalla \"$1\"-välilehteä – tallentamattomat muokkaukset häviävät.",
+	"visualeditor-dialog-beta-welcome-content": "Tämä on uusi, helpompi tapamme muokata. Se on vielä beetavaiheessa, mikä tarkoittaa, että osia sivuista ei voi muokata tai muokkauksessa esiintyy ongelmia, jotka pitää korjata. Kehotamme tarkistamaan muutoksesi ja otamme mielellämme vastaan kaikki raportit ongelmista, joihin saatat törmätä Visuaalista muokkainta käyttäessäsi (klikkaa '{{int:visualeditor-help-tool}}' -nappia antaaksesi palautetta). Voit vaihtaa wikiteksti-muokkaimeen milloin tahansa napsauttamalla \"$1\"-välilehteä, säilyttäen kaikki tekemäsi muutokset.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Tervetuloa}} Visuaaliseen muokkaimeen",
 	"visualeditor-dialog-media-alttext-section": "Vaihtoehtoinen teksti",
 	"visualeditor-dialog-media-change-image": "Valitse toinen kuva",
@@ -244,6 +244,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Jatka muokkaamista",
 	"visualeditor-viewpage-savewarning-title": "Oletko varma?",
 	"visualeditor-wikitext-warning": "Käytät Visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Vaihtaaksesi wikitekstin muokkautilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia, avaa \"{{int:visualeditor-toolbar-savedialog}}\"-painikkeen vieressä oleva alasvetovalikko ja valitse \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Koodiopas",
 	"visualeditor-wikitext-warning-title": "Wikikoodia havaittu"
 }

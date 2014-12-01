@@ -134,7 +134,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "默认",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "否",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "是",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "您可以强制在此页面显示除“{{int:vector-view-edit}}”外的额外标签，这将更方便添加新段落，或强制其不出现在将出现的页面。",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "您可以强制在此页面显示除“$1”外的额外标签，这将更方便添加新段落，或强制其不出现在将出现的页面。",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "在该页面上显示添加新段落的标签",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "您可以阻止此页面的内容自动转换成其他文字。",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "不对内容进行语言变体转换",

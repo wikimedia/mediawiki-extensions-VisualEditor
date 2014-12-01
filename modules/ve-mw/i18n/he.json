@@ -127,7 +127,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "בררת המחדל",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "לא",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "כן",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "אפשר לכפות הצגה של עוד לשונית בדף הזה בנוסף ל\"{{int:vector-view-edit}}\" שתעזור להוסיף עוד פסקה או לגרום לה לא להופיע בדפים שהיא אמורה להופיע בהם.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "אפשר לכפות הצגה של עוד לשונית בדף הזה בנוסף ל\"$1\" שתעזור להוסיף עוד פסקה או לגרום לה לא להופיע בדפים שהיא אמורה להופיע בהם.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "להציג בדף הזה לשונית להוספת פסקה חדשה",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "אפשר למנוע מתוכן הדף הזה להיות מומר אוטומטית לשיטות כתב אחרות.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "לא להמיר תוכן בין הגווני שפה",

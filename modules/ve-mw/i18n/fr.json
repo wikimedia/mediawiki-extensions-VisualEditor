@@ -132,7 +132,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Par défaut",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Non",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Oui",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Vous pouvez forcer l’affichage d’un onglet supplémentaire en plus de l’onglet « {{int:vector-view-edit}} » sur cette page, pour faciliter l’ajout d’une nouvelle section, ou l’empêcher d’apparaître s’il l’aurait dû.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Vous pouvez forcer l’affichage d’un onglet supplémentaire en plus de l’onglet « $1 » sur cette page, pour faciliter l’ajout d’une nouvelle section, ou l’empêcher d’apparaître s’il l’aurait dû.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Afficher un onglet sur cette page pour ajouter une nouvelle section",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Vous pouvez empêcher le contenu de cette page d’être converti automatiquement dans d’autres scripts.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Ne pas changer le contenu entre les variantes de langue",

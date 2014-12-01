@@ -105,7 +105,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Implicit",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nu",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Da",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Puteți forța afișarea pe această pagină a unei file suplimentare lângă fila „{{int:vector-view-edit}}”, lucru ce va facilita adăugarea de noi secțiuni, sau, dimpotrivă, să forțați neafișarea sa în cazul în care ar fi afișată.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Puteți forța afișarea pe această pagină a unei file suplimentare lângă fila „$1”, lucru ce va facilita adăugarea de noi secțiuni, sau, dimpotrivă, să forțați neafișarea sa în cazul în care ar fi afișată.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Arată o filă pe această pagină pentru adăugarea unei secțiuni noi",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Puteți împiedica convertirea automată a conținutului acestei pagini în alte scripturi.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Nu converti conținutul între variantele de limbă",

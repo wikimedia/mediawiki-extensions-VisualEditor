@@ -105,7 +105,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Domyślnie",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nie",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Tak",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Możesz ustawić wyświetlanie się dodatkowej zakładki obok {{int:vector-view-edit}}, która ułatwi dodawanie nowej sekcji, albo ustawić brak wyświetlania jej, jeżeli domyślnie by była.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Możesz ustawić wyświetlanie się dodatkowej zakładki obok $1, która ułatwi dodawanie nowej sekcji, albo ustawić brak wyświetlania jej, jeżeli domyślnie by była.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Pokazuj na tej stronie zakładkę do tworzenia nowej sekcji",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Nie konwertuj zawartości pomiędzy wariantami językowymi",
 	"visualeditor-dialog-meta-settings-noeditsection-help": "W wyjątkowych przypadkach, kiedy jest to wskazane, możesz ustawić brak wyświetlania się linków edytowania występujących przy każdym nagłówku.",
