@@ -126,7 +126,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Výchozí",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Ne",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ano",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Můžete u stránky vynutit zobrazení dodatečné záložky vedle záložky „{{int:vector-view-edit}}“, pomocí které bude možno snadno přidat novou sekci, nebo ji naopak zakázat v případě, kdy by se jinak zobrazila.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Můžete u stránky vynutit zobrazení dodatečné záložky vedle záložky „$1“, pomocí které bude možno snadno přidat novou sekci, nebo ji naopak zakázat v případě, kdy by se jinak zobrazila.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Zobrazovat na této stránce záložku pro přidání nové sekce",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Můžete zabránit automatickému převodu obsahu stránky do jiných písem.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Nepřevádět obsah mezi jazykovými variantami",
@@ -273,6 +273,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Pokračovat v editování",
 	"visualeditor-viewpage-savewarning-title": "Jste si {{GENDER:|jist|jista|jisti}}?",
 	"visualeditor-wikitext-warning": "Používáte VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kdykoli se můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že otevřete rozbalovací menu vedle „{{int:visualeditor-toolbar-savedialog}}“ a kliknete na „{{int:visualeditor-mweditmodesource-title}}“.",
-	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu"
 }

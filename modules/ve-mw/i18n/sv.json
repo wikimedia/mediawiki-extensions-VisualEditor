@@ -122,7 +122,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Standard",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nej",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ja",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Du kan tvinga visningen av en extra flik förutom den \"{{int:vector-view-edit}}\"-fliken på denna sida som kommer att göra det enkelt att lägga till ett nytt avsnitt, eller tvinga den att inte visas om det annars skulle göras.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Du kan tvinga visningen av en extra flik förutom den \"$1\"-fliken på denna sida som kommer att göra det enkelt att lägga till ett nytt avsnitt, eller tvinga den att inte visas om det annars skulle göras.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Visa en flik på den här sidan för att lägga till ett nytt avsnitt",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Du kan förhindra att sidans innehåll automatiskt omvandlas till andra skriftsystem.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Konvertera inte innehåll mellan språkvarianter",

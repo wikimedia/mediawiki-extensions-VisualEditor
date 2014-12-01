@@ -125,7 +125,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Standard",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nein",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ja",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Du kannst die Anzeige einer zusätzlichen Registerkarte neben der Registerkarte „{{int:vector-view-edit}}“ auf dieser Seite zum einfachen Hinzufügen eines neuen Abschnitts erzwingen oder die Anzeige unterdrücken.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Du kannst die Anzeige einer zusätzlichen Registerkarte neben der Registerkarte „$1“ auf dieser Seite zum einfachen Hinzufügen eines neuen Abschnitts erzwingen oder die Anzeige unterdrücken.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Eine Registerkarte auf dieser Seite zum Hinzufügen eines neuen Abschnitts anzeigen",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Du kannst verhindern, dass die Inhalte dieser Seite automatisch in andere Schriften konvertiert werden.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Inhalt zwischen den Sprachvarianten nicht konvertieren",

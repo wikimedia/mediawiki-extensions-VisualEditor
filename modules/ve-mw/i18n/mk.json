@@ -116,7 +116,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "По основно",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Не",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Да",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Можете да наметнете прикажување на дополнително јазиче покрај јазичето „{{int:vector-view-edit}}“ на страницава, со кое лесно се додава нов поднаслов или пак да му наметнете да не се прикажува и кога инакуи би требало.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Можете да наметнете прикажување на дополнително јазиче покрај јазичето „$1“ на страницава, со кое лесно се додава нов поднаслов или пак да му наметнете да не се прикажува и кога инакуи би требало.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Прикажи јазиче за нов поднаслов на страницава",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Можете да спречите содржината на страницава автоматски да се претвора во други писма.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Не претворај содржини меѓу јазичните варијанти",

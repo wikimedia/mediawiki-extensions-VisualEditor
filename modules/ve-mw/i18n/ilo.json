@@ -114,7 +114,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Kasisigud",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Saan",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Wen",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Mabalinmo a piliten ti pannakaiparang iti maysa a surok nga etiketa malaksid ti etiketa ti \"{{int:vector-view-edit}}\" iti daytoy a panid a mangpalaka ti aginayon iti baro a paset, wenno piliten met a saan nga agparang.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Mabalinmo a piliten ti pannakaiparang iti maysa a surok nga etiketa malaksid ti etiketa ti \"$1\" iti daytoy a panid a mangpalaka ti aginayon iti baro a paset, wenno piliten met a saan nga agparang.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Ipakita ti etiketa iti daytoy a panid tapno agnayon iti baro a paset",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Mabalinmo a pawilan dagiti linaon daytoy a panid iti automatiko a pagbaliwen kadagiti sabali nga eskritu.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Saan a pagbaliwen ti linaon a nagbaetan dagiti karuay ti pagsasao",
@@ -261,6 +261,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Agtuloy nga agurnos",
 	"visualeditor-viewpage-savewarning-title": "Siguradoka kadi?",
 	"visualeditor-wikitext-warning": "Agus-usarka ti VisualEditor - ti [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] ket saan a mabalin ditoy. Ti agsubli iti panagurnos iti taudan iti aniaman a panawen a saan a makapukaw kadagiti binaliwam, lukatan ti agpababa nga asideg ti \"{{int:visualeditor-toolbar-savedialog}}\" ken pilien ti \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Wiki a panagsurat",
 	"visualeditor-wikitext-warning-title": "nakadukatal ti wikitext a panagsurat"
 }

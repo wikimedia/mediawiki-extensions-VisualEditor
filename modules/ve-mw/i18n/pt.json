@@ -111,7 +111,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Padrão",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Não",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Sim",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Pode forçar a exibição de uma aba extra além da \"{{int:vector-view-edit}}\" nesta página, o que irá tornar mais fácil adicionar uma nova seção, ou poderá mesmo definir para que não apareça de todo.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Pode forçar a exibição de uma aba extra além da \"$1\" nesta página, o que irá tornar mais fácil adicionar uma nova seção, ou poderá mesmo definir para que não apareça de todo.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Mostrar uma aba nesta página para adicionar uma nova secção",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Pode prevenir que o conteúdo desta página seja automaticamente convertido em outros scripts.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Não converter o conteúdo entre variantes de idiomas",

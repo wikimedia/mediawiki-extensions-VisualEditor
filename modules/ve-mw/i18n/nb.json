@@ -99,7 +99,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Standard",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nei",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ja",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Du kan fremtvinge visning av en ekstra fane ved siden av «{{int:vector-view-edit}}» på denne siden for å legge til et nytt avsnitt, eller tvinge den til å skjules i tilfeller der den normalt ville vært synlig.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Du kan fremtvinge visning av en ekstra fane ved siden av «$1» på denne siden for å legge til et nytt avsnitt, eller tvinge den til å skjules i tilfeller der den normalt ville vært synlig.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Vis en fane på denne siden for å legge til et nytt avsnitt",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Du kan hindre sideinnholdet fra å automatisk konverteres til andre skriftsystemer.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Ikke konverter innhold mellom språkvarianter",

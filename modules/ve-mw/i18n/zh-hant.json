@@ -126,7 +126,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "預設",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "否",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "是",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "您可以強制在此頁面顯示除「{{int:vector-view-edit}}」外的額外標籤，這將更方便增加新章節，或強制其不出現在將出現的頁面。",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "您可以強制在此頁面顯示除「$1」外的額外標籤，這將更方便增加新章節，或強制其不出現在將出現的頁面。",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "於此頁顯示用來新增新章節的頁籤",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "您可以避免此頁面內容被自動轉換成其他語言文字。",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "不對內容進行語言變體的轉換",

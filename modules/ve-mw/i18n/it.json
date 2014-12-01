@@ -109,7 +109,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Predefinito",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "No",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Sì",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Puoi forzare la visualizzazione di una'ulteriore scheda oltre a \"{{int:vector-view-edit}}\" su questa pagina, per permettere di aggiungere facilmente una nuova sezione, o forzare di non mostrarla.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Puoi forzare la visualizzazione di una'ulteriore scheda oltre a \"$1\" su questa pagina, per permettere di aggiungere facilmente una nuova sezione, o forzare di non mostrarla.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Mostra una scheda in questa pagina per aggiungere una nuova sezione",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Puoi impedire che il contenuto di questa pagina sia automaticamente convertito in altri script.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Non convertire il contenuto tra le varianti linguistiche",
