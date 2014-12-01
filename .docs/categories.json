@@ -120,11 +120,10 @@
 					"ve.ui.*Registry",
 					"ve.ui.*Sequence",
 					"ve.ui.*Tool",
-					"ve.ui.*Inspector",
 					"ve.ui.*Widget",
 					"ve.ui.*WindowManager",
-					"ve.ui.*InspectorManager",
-					"ve.ui.*Dialog"
+					"ve.ui.*Dialog",
+					"ve.ui.*Inspector"
 				]
 			},
 			{
