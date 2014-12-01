@@ -40,6 +40,11 @@ ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) 
 		.extend( { action: 'submit' } );
 	this.events = new ve.init.mw.TargetEvents( this );
 
+	/**
+	 * @property {jQuery.Promise|null}
+	 */
+	this.sanityCheckPromise = null;
+
 	this.modules = [
 		'ext.visualEditor.mwcore',
 		'ext.visualEditor.mwlink',
