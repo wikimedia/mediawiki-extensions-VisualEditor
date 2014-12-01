@@ -131,7 +131,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Default",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "No",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Yes",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "You can force the display of an extra tab besides the \"{{int:vector-view-edit}}\" tab on this page which will make it easy to add a new section, or force it to not appear if it otherwise would.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "You can force the display of an extra tab besides the \"$1\" tab on this page which will make it easy to add a new section, or force it to not appear if it otherwise would.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Show a tab on this page to add a new section",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "You can prevent this page's contents being automatically converted into other scripts.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Don't convert content between language variants",
