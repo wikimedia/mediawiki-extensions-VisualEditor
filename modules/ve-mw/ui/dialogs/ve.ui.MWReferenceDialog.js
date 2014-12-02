@@ -138,17 +138,33 @@ ve.ui.MWReferenceDialog.static.getImportRules = function () {
 /* Methods */
 
 /**
+ * Determine whether the reference document we're editing has any content.
+ * @return {boolean} Document has content
+ */
+ve.ui.MWReferenceDialog.prototype.documentHasContent = function () {
+	// TODO: Check for other types of empty, e.g. only whitespace?
+	return this.referenceModel.getDocument().data.countNonInternalElements() > 2;
+};
+
+/**
  * Handle reference surface change events
  */
 ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
-	var data = this.referenceModel.getDocument().data,
-		// TODO: Check for other types of empty, e.g. only whitespace?
-		hasContent = data.countNonInternalElements() > 2;
+	var hasContent = this.documentHasContent();
 
 	this.actions.setAbilities( {
 		apply: hasContent,
 		insert: hasContent,
 		select: !hasContent && !this.search.isIndexEmpty()
+	} );
+};
+
+/**
+ * Handle reference group input change events
+ */
+ve.ui.MWReferenceDialog.prototype.onReferenceGroupInputChange = function () {
+	this.actions.setAbilities( {
+		apply: this.documentHasContent()
 	} );
 };
 
@@ -277,6 +293,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 		$overlay: this.$overlay,
 		emptyGroupName: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
+	this.referenceGroupInput.input.connect( this, { change: 'onReferenceGroupInputChange' } );
 	this.referenceGroupField = new OO.ui.FieldLayout( this.referenceGroupInput, {
 		$: this.$,
 		align: 'top',
@@ -375,7 +392,8 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 			// If not, set disabled based on whether or not there are any existing ones.
 			this.actions.setAbilities( {
 				select: !( this.selectedNode instanceof ve.dm.MWReferenceNode ) &&
-					!this.search.isIndexEmpty()
+					!this.search.isIndexEmpty(),
+				apply: false
 			} );
 
 			this.referenceGroupInput.populateMenu( this.getFragment().getDocument().getInternalList() );
