@@ -62,6 +62,12 @@
 	 * @returns {jQuery.Promise} Promise that will be resolved with the data once it's available
 	 */
 	ve.init.mw.LinkCache.prototype.get = function ( name ) {
+		if ( typeof name !== 'string' ) {
+			// Don't bother letting things like undefined or null make it all the way through,
+			// just reject them here. Otherwise they'll cause problems or exceptions at random
+			// other points in this file.
+			return $.Deferred().reject().promise();
+		}
 		if ( !hasOwn.call( this.cache, name ) ) {
 			this.cache[name] = $.Deferred();
 			this.queue.push( name );
