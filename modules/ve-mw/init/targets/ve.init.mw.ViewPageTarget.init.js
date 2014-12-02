@@ -111,15 +111,15 @@
 		 *
 		 *     @example
 		 *     // Register ResourceLoader module
-		 *     ve.libs.mw.addPlugin( 'ext.gadget.foobar' );
+		 *     mw.libs.ve.addPlugin( 'ext.gadget.foobar' );
 		 *
 		 *     // Register a callback
-		 *     ve.libs.mw.addPlugin( function ( target ) {
+		 *     mw.libs.ve.addPlugin( function ( target ) {
 		 *         ve.dm.Foobar = .....
 		 *     } );
 		 *
 		 *     // Register a callback that loads another script
-		 *     ve.libs.mw.addPlugin( function () {
+		 *     mw.libs.ve.addPlugin( function () {
 		 *         return $.getScript( 'http://example.com/foobar.js' );
 		 *     } );
 		 *
