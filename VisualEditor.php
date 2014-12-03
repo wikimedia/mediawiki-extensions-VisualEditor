@@ -563,13 +563,17 @@ $wgResourceModules += array(
 
 			'lib/ve/src/ui/dialogs/ve.ui.FragmentDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.NodeDialog.js',
-			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
+			'lib/ve/src/ui/dialogs/ve.ui.ToolbarDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
+			'lib/ve/src/ui/dialogs/ve.ui.FindAndReplaceDialog.js',
+			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
 
 			// FIXME disabled because papaparse is broken (T75896)
 			//'lib/ve/src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js',
 			'lib/ve/src/ui/filedrophandlers/ve.ui.PlainTextFileDropHandler.js',
 			'lib/ve/src/ui/filedrophandlers/ve.ui.HTMLFileDropHandler.js',
+
+			'lib/ve/src/ui/windowmanagers/ve.ui.ToolbarDialogWindowManager.js',
 
 			'lib/ve/src/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.LinkTargetInputWidget.js',
@@ -582,6 +586,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/tools/ve.ui.AnnotationTool.js',
 			'lib/ve/src/ui/tools/ve.ui.ClearAnnotationTool.js',
 			'lib/ve/src/ui/tools/ve.ui.DialogTool.js',
+			'lib/ve/src/ui/tools/ve.ui.FindAndReplaceTool.js',
 			'lib/ve/src/ui/tools/ve.ui.FormatTool.js',
 			'lib/ve/src/ui/tools/ve.ui.HistoryTool.js',
 			'lib/ve/src/ui/tools/ve.ui.IndentationTool.js',
@@ -616,7 +621,9 @@ $wgResourceModules += array(
 			'lib/ve/src/ce/styles/ve.ce.Surface.css',
 
 			// ui
+			'lib/ve/src/ui/styles/dialogs/ve.ui.ToolbarDialog.css',
 			'lib/ve/src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
+			'lib/ve/src/ui/styles/dialogs/ve.ui.FindAndReplaceDialog.css',
 			'lib/ve/src/ui/styles/dialogs/ve.ui.ProgressDialog.css',
 			'lib/ve/src/ui/styles/tools/ve.ui.FormatTool.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.css',
@@ -676,6 +683,13 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-size-originalsize-error',
 			'visualeditor-dimensionswidget-px',
 			'visualeditor-dimensionswidget-times',
+			'visualeditor-find-and-replace-find-text',
+			'visualeditor-find-and-replace-match-case',
+			'visualeditor-find-and-replace-replace-all-button',
+			'visualeditor-find-and-replace-replace-button',
+			'visualeditor-find-and-replace-replace-text',
+			'visualeditor-find-and-replace-results',
+			'visualeditor-find-and-replace-title',
 			'visualeditor-formatdropdown-format-blockquote',
 			'visualeditor-formatdropdown-format-heading-label',
 			'visualeditor-formatdropdown-format-heading1',
@@ -757,7 +771,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/src/ui/ve.ui.MobileSurface.js',
 			'lib/ve/src/ui/ve.ui.MobileContext.js',
-			'lib/ve/src/ui/ve.ui.MobileWindowManager.js',
+			'lib/ve/src/ui/windowmanagers/ve.ui.MobileInspectorWindowManager.js',
 			'lib/ve/src/ui/widgets/ve.ui.MobileContextOptionWidget.js',
 		),
 		'styles' => array(
