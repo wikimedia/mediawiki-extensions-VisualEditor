@@ -119,7 +119,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 	this.setupSkinTabs();
 
-	window.addEventListener( 'popstate', this.onWindowPopState.bind( this ) ) ;
+	window.addEventListener( 'popstate', this.onWindowPopState.bind( this ) );
 };
 
 /* Inheritance */
@@ -254,6 +254,9 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
 
+		this.onDocumentKeyDownHandler = this.onDocumentKeyDown.bind( this );
+		$( document ).on( 'keydown', this.onDocumentKeyDownHandler );
+
 		// User interface changes
 		this.transformPage();
 		this.hideReadOnlyContent();
@@ -284,7 +287,7 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override, trackMecha
 			this.surface.dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
 				opened.then( function ( closing ) {
 					closing.then( function ( data ) {
-						if ( data.action === 'discard' ) {
+						if ( data && data.action === 'discard' ) {
 							target.cancel( trackMechanism );
 						}
 					} );
@@ -328,6 +331,8 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 	}
 	this.restorePage();
 	this.showReadOnlyContent();
+
+	$( document ).off( 'keydown', this.onDocumentKeyDownHandler );
 
 	mw.user.options.set( 'editondblclick', this.originalEditondbclick );
 	this.originalEditondbclick = undefined;
@@ -443,6 +448,20 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.maybeShowDialogs();
 	this.activatingDeferred.resolve();
 	mw.hook( 've.activationComplete' ).fire();
+};
+
+ve.init.mw.ViewPageTarget.prototype.onDocumentKeyDown = function ( e ) {
+	if ( e.which === OO.ui.Keys.ESCAPE ) {
+		if ( this.active ) {
+			this.deactivate( false, 'navigate-read' );
+			e.preventDefault();
+		} else if ( this.activating ) {
+			this.deactivate( true, 'navigate-read' );
+			this.activating = false;
+			e.preventDefault();
+		}
+		return false;
+	}
 };
 
 /**
