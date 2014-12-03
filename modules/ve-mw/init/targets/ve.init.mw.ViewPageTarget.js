@@ -275,25 +275,31 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
  * Determines whether we want to switch to view mode or not (displaying a dialog if necessary)
  * Then, if we do, actually switches to view mode.
  *
- * @param {boolean} [override] Do not display a dialog
+ * A dialog will not be shown if deactivate() is called while activation is still in progress,
+ * or if the noDialog parameter is set to true. If deactivate() is called while the target
+ * is deactivating, or while it's not active and not activating, nothing happens.
+ *
+ * @param {boolean} [noDialog] Do not display a dialog
  * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
  */
-ve.init.mw.ViewPageTarget.prototype.deactivate = function ( override, trackMechanism ) {
+ve.init.mw.ViewPageTarget.prototype.deactivate = function ( noDialog, trackMechanism ) {
 	var target = this;
-	if ( override || ( this.active && !this.deactivating ) ) {
-		if ( override || !this.edited ) {
-			this.cancel( trackMechanism );
-		} else {
-			this.surface.dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
-				opened.then( function ( closing ) {
-					closing.then( function ( data ) {
-						if ( data && data.action === 'discard' ) {
-							target.cancel( trackMechanism );
-						}
-					} );
+	if ( this.deactivating || ( !this.active && !this.activating ) ) {
+		return;
+	}
+
+	if ( noDialog || this.activating || !this.edited ) {
+		this.cancel( trackMechanism );
+	} else {
+		this.surface.dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
+			opened.then( function ( closing ) {
+				closing.then( function ( data ) {
+					if ( data && data.action === 'discard' ) {
+						target.cancel( trackMechanism );
+					}
 				} );
 			} );
-		}
+		} );
 	}
 };
 
@@ -368,6 +374,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		this.initialEditSummary = new mw.Uri().query.summary;
 
 		this.deactivating = false;
+		this.activating = false;
 		this.activatingDeferred.reject();
 
 		mw.hook( 've.deactivationComplete' ).fire( this.edited );
@@ -450,18 +457,29 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	mw.hook( 've.activationComplete' ).fire();
 };
 
+/**
+ * Handle Escape key presses.
+ * @param {jQuery.Event} e Keydown event
+ */
 ve.init.mw.ViewPageTarget.prototype.onDocumentKeyDown = function ( e ) {
 	if ( e.which === OO.ui.Keys.ESCAPE ) {
-		if ( this.active ) {
-			this.deactivate( false, 'navigate-read' );
-			e.preventDefault();
-		} else if ( this.activating ) {
-			this.deactivate( true, 'navigate-read' );
-			this.activating = false;
-			e.preventDefault();
-		}
-		return false;
+		this.deactivate( false, 'navigate-read' );
+		e.preventDefault();
 	}
+};
+
+/**
+ * Handle clicks on the view tab.
+ *
+ * @method
+ * @param {jQuery.Event} e Mouse click event
+ */
+ve.init.mw.ViewPageTarget.prototype.onViewTabClick = function ( e ) {
+	if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+		return;
+	}
+	this.deactivate( false, 'navigate-read' );
+	e.preventDefault();
 };
 
 /**
@@ -774,27 +792,6 @@ ve.init.mw.ViewPageTarget.prototype.onNoChanges = function () {
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'nochanges' );
 	this.saveDialog.getActions().setAbilities( { approve: true } );
-};
-
-/**
- * Handle clicks on the view tab.
- *
- * @method
- * @param {jQuery.Event} e Mouse click event
- */
-ve.init.mw.ViewPageTarget.prototype.onViewTabClick = function ( e ) {
-	if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
-		return;
-	}
-	if ( this.active ) {
-		this.deactivate( false, 'navigate-read' );
-		// Prevent the edit tab's normal behavior
-		e.preventDefault();
-	} else if ( this.activating ) {
-		this.deactivate( true, 'navigate-read' );
-		this.activating = false;
-		e.preventDefault();
-	}
 };
 
 /**
