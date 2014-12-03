@@ -5,6 +5,8 @@
 			"Tumsaa"
 		]
 	},
+	"apihelp-visualeditoredit-param-minor": "Mallattoo gulaala xiqqaa itti godhi.",
+	"apihelp-visualeditoredit-param-summary": "Cuunfaa gulaalaa",
 	"tooltip-ca-createsource": "Fuula kanaaf lakkadda maddaa uumi",
 	"tooltip-ca-editsource": "Lakkadda maddaa fuula kanaa gulaali",
 	"tooltip-ca-ve-edit": "Fuula kana Viizyuwaal'Ediiteriin gulaali",
@@ -66,6 +68,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Garee kana as hoofi",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Garee haaraa",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Garee Dabali",
+	"visualeditor-dialog-meta-categories-missing": "Gareen kun fuula ibsa kennu hinqabu.",
 	"visualeditor-dialog-meta-categories-options": "Filannoo",
 	"visualeditor-dialog-meta-categories-section": "Gareewwan",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Fuula kana akkanatti fooyi",
@@ -201,11 +204,11 @@
 	"visualeditor-toolbar-cite-label": "Eeri",
 	"visualeditor-toolbar-savedialog": "Fuula olkaayi",
 	"visualeditor-usernamespacepagelink": "Project: iddoo maqaa fayyadamaa",
+	"visualeditor-version-label": "Fooyya'aa",
 	"visualeditor-viewpage-savewarning": "Odoo jijjiiraa hin olkaayin gara fuula dubbisaatti deebi'uu barbaaddaa?",
 	"visualeditor-viewpage-savewarning-discard": "Gulaala gati",
 	"visualeditor-viewpage-savewarning-keep": "Gulaaluu itti fufi",
 	"visualeditor-viewpage-savewarning-title": "Dhugaa jettaa?",
 	"visualeditor-wikitext-warning": "Amma Viizyuwaal'Ediiterii fayyadamaa jirta - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] asitti hin hojjatu. Fuula kana lakkaddaan jijjiiruf, baafata gad-buusaa kan \"{{int:visualeditor-toolbar-savedialog}}\" bukkee jiru erga bantee booda \"{{int:visualeditor-mweditmodesource-title}}\" filadhu",
-	"visualeditor-wikitext-warning-link": "Help:maarkaappii Wiikii",
 	"visualeditor-wikitext-warning-title": "Maarkaappiin Wiikiitekestii argame"
 }
