@@ -184,10 +184,10 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.setupToolbar = function () {
+ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 	var $firstHeading;
 	// Parent method
-	ve.init.mw.Target.prototype.setupToolbar.call( this );
+	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
 
 	// Keep it hidden so that we can slide it down smoothly (avoids sudden
 	// offset flash when original content is hidden, and replaced in-place with a
@@ -196,22 +196,21 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function () {
 	// to target (visibly), only for us to hide it again 0ms later.
 	// Though we can't hide it by default because it needs visible dimensions
 	// to compute stuff during setup.
-	this.toolbar.$bar.hide();
+	this.getToolbar().$bar.hide();
 
-	this.toolbar.enableFloatable();
-	this.toolbar.$element
+	this.getToolbar().$element
 		.addClass( 've-init-mw-viewPageTarget-toolbar' );
 
 	// Move the toolbar to before #firstHeading if it exists
 	$firstHeading = $( '#firstHeading' );
 	if ( $firstHeading.length ) {
-		this.toolbar.$element.insertBefore( $firstHeading );
+		this.getToolbar().$element.insertBefore( $firstHeading );
 	}
 
-	this.toolbar.$bar.slideDown( 'fast', function () {
+	this.getToolbar().$bar.slideDown( 'fast', function () {
 		// Check the surface wasn't torn down while the toolbar was animating
 		if ( this.getSurface() ) {
-			this.toolbar.initialize();
+			this.getToolbar().initialize();
 			this.getSurface().getView().emit( 'position' );
 			this.getSurface().getContext().updateDimensions();
 		}
@@ -349,7 +348,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		// button property (bug 46456)
 		this.toolbarSaveButton.disconnect( this );
 		this.toolbarSaveButton.$element.detach();
-		this.toolbar.$actions.empty();
+		this.getToolbar().$actions.empty();
 	}
 
 	// Check we got as far as setting up the surface
@@ -1111,7 +1110,7 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 	var $actionTools = $( '<div>' ),
 		$pushButtons = $( '<div>' ),
-		actions = new ve.ui.TargetToolbar( this, this.getSurface() );
+		actions = new ve.ui.TargetToolbar( this );
 
 	actions.setup( [
 		{ include: [ 'help', 'notices' ] },
@@ -1121,7 +1120,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 			include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'editModeSource', 'findAndReplace' ]
 		}
-	] );
+	], this.getSurface() );
 
 	$actionTools
 		.addClass( 've-init-mw-viewPageTarget-toolbar-utilities' )

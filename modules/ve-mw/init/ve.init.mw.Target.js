@@ -20,10 +20,10 @@
  *  revision id here. Defaults to loading the latest version (see #load).
  */
 ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) {
-	var conf = mw.config.get( 'wgVisualEditorConfig' );
-
 	// Parent constructor
-	ve.init.Target.call( this, $container );
+	ve.init.Target.call( this, $container, { shadow: true, actions: true, floatable: true } );
+
+	var conf = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Properties
 	this.pageName = pageName;
@@ -1368,16 +1368,18 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		setTimeout( function () {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			var surface = target.addSurface( dmDoc );
-			surface.$element.addClass( 've-init-mw-viewPageTarget-surface' )
-				.addClass( target.protectedClasses );
+			surface.$element
+				.addClass( 've-init-mw-viewPageTarget-surface' )
+				.addClass( target.protectedClasses )
+				.appendTo( target.$element );
+			target.setSurface( surface );
+
 			setTimeout( function () {
 				var surfaceView = surface.getView(),
 					$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 
 				// Initialize surface
 				surface.getContext().toggle( false );
-				target.$element.append( surface.$element );
-				target.setupToolbar();
 
 				// Apply mw-body-content to the view (ve-ce-surface).
 				// Not to surface (ve-ui-surface), since that contains both the view
@@ -1399,14 +1401,6 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 };
 
 /**
- * @inheritdoc
- */
-ve.init.mw.Target.prototype.setupToolbar = function () {
-	// Parent method
-	ve.init.Target.prototype.setupToolbar.call( this, { shadow: true, actions: true } );
-};
-
-/**
  * Fire off the sanity check. Must be called before the surface is activated.
  *
  * To access the result, check whether #sanityCheckPromise has been resolved or rejected
@@ -1419,14 +1413,14 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 	// We have to get a copy of the data now, before we unlock the surface and let the user edit,
 	// but we can defer the actual conversion and comparison
 	var target = this,
-		doc = target.surface.getModel().getDocument(),
+		doc = this.getSurface().getModel().getDocument(),
 		data = new ve.dm.FlatLinearData( doc.getStore().clone(), ve.copy( doc.getFullData() ) ),
-		oldDom = target.doc,
+		oldDom = this.doc,
 		d = $.Deferred();
 
 	// Reset
-	target.sanityCheckFinished = false;
-	target.sanityCheckVerified = false;
+	this.sanityCheckFinished = false;
+	this.sanityCheckVerified = false;
 
 	setTimeout( function () {
 		// We can't compare oldDom.body and newDom.body directly, because the attributes on the
@@ -1453,7 +1447,7 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 		d.resolve();
 	} );
 
-	target.sanityCheckPromise = d.promise()
+	this.sanityCheckPromise = d.promise()
 		.done( function () {
 			// If we detect no roundtrip errors,
 			// don't emphasize "review changes" to the user.
@@ -1501,7 +1495,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	var nextNode, offset,
 		target = this,
 		offsetNode = headingNode,
-		surfaceModel = this.surface.getView().getModel(),
+		surfaceModel = this.getSurface().getView().getModel(),
 		lastHeadingLevel = -1;
 
 	// Find next sibling which isn't a heading
@@ -1519,7 +1513,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	);
 	// onDocumentFocus is debounced, so wait for that to happen before setting
 	// the model selection, otherwise it will get reset
-	this.surface.getView().once( 'focus', function () {
+	this.getSurface().getView().once( 'focus', function () {
 		surfaceModel.setLinearSelection( new ve.Range( offset ) );
 		target.scrollToHeading( headingNode );
 	} );
@@ -1534,5 +1528,5 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 ve.init.mw.Target.prototype.scrollToHeading = function ( headingNode ) {
 	var $window = $( OO.ui.Element.static.getWindow( this.$element ) );
 
-	$window.scrollTop( headingNode.$element.offset().top - this.toolbar.$element.height() );
+	$window.scrollTop( headingNode.$element.offset().top - this.getToolbar().$element.height() );
 };
