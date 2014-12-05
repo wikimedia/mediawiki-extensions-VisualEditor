@@ -146,6 +146,16 @@ ve.ui.MWReferenceDialog.prototype.documentHasContent = function () {
 	return this.referenceModel.getDocument().data.countNonInternalElements() > 2;
 };
 
+/*
+ * Determine whether any changes have been made (and haven't been undone)
+ * @return {boolean} Dialog can be applied
+ */
+ve.ui.MWReferenceDialog.prototype.canApply = function () {
+	return this.documentHasContent() &&
+		( this.referenceSurface.getSurface().getModel().hasBeenModified() ||
+		this.referenceGroupInput.input.getValue() !== this.originalGroup );
+};
+
 /**
  * Handle reference surface change events
  */
@@ -153,7 +163,7 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
 	var hasContent = this.documentHasContent();
 
 	this.actions.setAbilities( {
-		apply: hasContent,
+		apply: this.canApply(),
 		insert: hasContent,
 		select: !hasContent && !this.search.isIndexEmpty()
 	} );
@@ -164,7 +174,7 @@ ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
  */
 ve.ui.MWReferenceDialog.prototype.onReferenceGroupInputChange = function () {
 	this.actions.setAbilities( {
-		apply: this.documentHasContent()
+		apply: this.canApply()
 	} );
 };
 
@@ -245,7 +255,8 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	this.referenceModel.getDocument().connect( this, { transact: 'onDocumentTransact' } );
 
 	// Initialization
-	this.referenceGroupInput.input.setValue( this.referenceModel.getGroup() );
+	this.originalGroup = this.referenceModel.getGroup();
+	this.referenceGroupInput.input.setValue( this.originalGroup );
 	this.contentFieldset.$element.append( this.referenceSurface.$element );
 	this.referenceSurface.initialize();
 
