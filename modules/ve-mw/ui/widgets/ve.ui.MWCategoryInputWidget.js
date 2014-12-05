@@ -112,9 +112,10 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 
 	prefixedCanonicalQueryValue = prefixedCanonicalQueryValue && prefixedCanonicalQueryValue.getPrefixedText();
 
+	// Invalid titles end up with canonicalQueryValue being null.
 	if ( canonicalQueryValue ) {
 		canonicalQueryValue = canonicalQueryValue.getMainText();
-	} // Invalid titles just end up with canonicalQueryValue being null.
+	}
 
 	$.each( data, function ( index, suggestedCategory ) {
 		var suggestedCategoryTitle = mw.Title.newFromText(
@@ -151,7 +152,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 	} );
 
 	// New category
-	if ( !exactMatch ) {
+	if ( !exactMatch && canonicalQueryValue ) {
 		newCategoryItems.push( canonicalQueryValue );
 		linkCacheUpdate[prefixedCanonicalQueryValue] = { missing: true };
 	}
