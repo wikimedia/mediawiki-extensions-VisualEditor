@@ -102,7 +102,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 		return this.onParseError.call( this, deferred );
 	}
 
-	contentNodes = $.parseHTML( response.visualeditor.content );
+	contentNodes = $.parseHTML( response.visualeditor.content, this.getModelHtmlDocument() );
 	// HACK: if $content consists of a single paragraph, unwrap it.
 	// We have to do this because the PHP parser wraps everything in <p>s, and inline templates
 	// will render strangely when wrapped in <p>s.
@@ -129,12 +129,13 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
  * @inheritdoc
  */
 ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElements ) {
-	var $elements = this.$( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) );
+	var $elements = this.$( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) ),
+		transclusionNode = this;
 	$elements
 		.find( 'a[href][rel="mw:WikiLink"]' ).addBack( 'a[href][rel="mw:WikiLink"]' )
 		.each( function () {
 			var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
-					this.href, this.ownerDocument
+					this.href, transclusionNode.getModelHtmlDocument()
 				),
 				normalisedHref = decodeURIComponent( targetData.title );
 			if ( mw.Title.newFromText( normalisedHref ) ) {
