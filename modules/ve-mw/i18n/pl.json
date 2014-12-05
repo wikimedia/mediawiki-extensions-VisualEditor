@@ -18,9 +18,12 @@
 			"Jacenty359",
 			"Matik7",
 			"Alan ffm",
-			"Andrzej aa"
+			"Andrzej aa",
+			"Rezonansowy"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "Zadanie do wykonania.",
+	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
 	"tooltip-ca-createsource": "Tworzenie kodu źródłowego strony",
 	"tooltip-ca-editsource": "Edycja kodu źródłowego strony",
 	"tooltip-ca-ve-edit": "Edytuj tę stronę wykorzystując VisualEditor",
@@ -84,6 +87,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Przenieś tu tę kategorię",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Nowa kategoria",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Dodaj kategorię",
+	"visualeditor-dialog-meta-categories-missing": "Ta kategoria nie posiada strony opisu.",
 	"visualeditor-dialog-meta-categories-options": "Opcje",
 	"visualeditor-dialog-meta-categories-section": "Kategorie",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Sortuj tę stronę jako",
