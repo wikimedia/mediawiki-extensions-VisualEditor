@@ -160,7 +160,7 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 				dataElement.attributes.listKey,
 				// Generate a name starting with ':' to distinguish it from normal names
 				'literal/:'
-			).substr( 'literal/'.length );
+			).slice( 'literal/'.length );
 		} else {
 			name = undefined;
 		}

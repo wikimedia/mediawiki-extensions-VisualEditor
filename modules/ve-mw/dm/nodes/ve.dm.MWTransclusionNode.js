@@ -166,8 +166,8 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 			output += input;
 			break;
 		}
-		output += input.substr( 0, match.index );
-		input = input.substr( match.index + match[0].length );
+		output += input.slice( 0, match.index );
+		input = input.slice( match.index + match[0].length );
 		if ( inNowiki ) {
 			if ( match[0] === '</nowiki>' ) {
 				inNowiki = false;

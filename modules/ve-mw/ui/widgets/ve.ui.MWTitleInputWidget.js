@@ -73,7 +73,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 
 	// Dont send leading ':' to open search
 	if ( value.charAt( 0 ) === ':' ) {
-		value = value.substr( 1 );
+		value = value.slice( 1 );
 	}
 
 	return ve.init.target.constructor.static.apiRequest( {

@@ -248,7 +248,7 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryItemFromValue = function ( valu
 	}
 
 	if ( this.forceCapitalization ) {
-		value = value.substr( 0, 1 ).toUpperCase() + value.substr( 1 );
+		value = value.slice( 0, 1 ).toUpperCase() + value.slice( 1 );
 	}
 
 	return {

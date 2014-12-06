@@ -53,11 +53,14 @@
 
 	ve.trackSubscribeAll( function ( topic, data ) {
 		data = data || {};
-		var newData, action, now = Math.floor( ve.now() ), prefix = topic.substr( 0, topic.indexOf( '.' ) );
+		var newData, action,
+			now = Math.floor( ve.now() ),
+			prefix = topic.slice( 0, topic.indexOf( '.' ) );
+
 		if ( prefix === 'mwtiming' ) {
 			// Legacy TimingData events
 			// Map timing.foo --> ve.foo
-			topic = 've.' + topic.substr( prefix.length + 1 );
+			topic = 've.' + topic.slice( prefix.length + 1 );
 		} else if ( prefix === 'mwedit' ) {
 			// Edit schema
 			action = topic.split( '.' )[1];

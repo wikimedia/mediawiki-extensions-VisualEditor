@@ -605,7 +605,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			if ( namespacesWithSubpages[ namespace ] ) {
 				// If we are in a namespace that allows for subpages, strip the entire
 				// title except for the part after the last /
-				pageTitle = pageTitle.substr( pageTitle.lastIndexOf( '/' ) + 1 );
+				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
 			}
 			this.pageTitle = pageTitle;
 
