@@ -1540,7 +1540,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.Target.prototype.scrollToHeading = function ( headingNode ) {
-	var $window = $( OO.ui.Element.getWindow( this.$element ) );
+	var $window = $( OO.ui.Element.static.getWindow( this.$element ) );
 
 	$window.scrollTop( headingNode.$element.offset().top - this.toolbar.$element.height() );
 };
