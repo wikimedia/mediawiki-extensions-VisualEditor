@@ -304,6 +304,9 @@ $wgResourceModules += array(
 			'modules/ve-mw/init/ve.init.mw.TargetEvents.js',
 			'modules/ve-mw/init/ve.init.mw.trackSubscriber.js',
 		),
+		'styles' => array(
+			'modules/ve-mw/init/styles/ve.init.mw.Target.css',
+		),
 		'dependencies' => array(
 			'jquery.visibleText',
 			'jquery.byteLength',
@@ -834,6 +837,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWCommandHelpDialog.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css',
+			'modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTitleInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css',
 		),
