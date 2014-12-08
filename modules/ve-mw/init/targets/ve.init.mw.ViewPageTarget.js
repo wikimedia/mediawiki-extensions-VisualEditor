@@ -1019,9 +1019,11 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 		this.surface.mwTocWidget.teardown();
 	}
 
-	if ( this.saveDialog && this.saveDialog.isOpened() ) {
-		// If the save dialog is still open (from saving) close it
-		promises.push( this.saveDialog.close() );
+	if ( this.saveDialog ) {
+		if ( this.saveDialog.isOpened() ) {
+			// If the save dialog is still open (from saving) close it
+			promises.push( this.saveDialog.close() );
+		}
 		// Release the reference
 		this.saveDialog = null;
 	}
@@ -1173,7 +1175,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 			{ dir: this.surface.getModel().getDocument().getLang() }
 		)
 			// Call onSaveDialogClose() when the save dialog starts closing
-			.always( function ( opened ) {
+			.done( function ( opened ) {
 				opened.always( target.onSaveDialogClose.bind( target ) );
 			} );
 	}.bind( this ) );
