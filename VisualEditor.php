@@ -1440,13 +1440,6 @@ $wgResourceModules += array(
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
-
-	'ext.visualEditor.iehacks' => $wgVisualEditorResourceTemplate + array(
-		'styles' => array(
-			'modules/ve-mw/init/styles/ve.init.mw.IEHacks.css'
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
 );
 
 /* Extend MediaWiki configuration */
