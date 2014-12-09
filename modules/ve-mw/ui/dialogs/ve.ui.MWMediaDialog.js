@@ -421,7 +421,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
 	// Select the item without triggering the 'choose' event
 	this.positionSelect.selectItem( item );
 
-	this.positionCheckbox.setValue( alignment !== 'none' );
+	this.positionCheckbox.setSelected( alignment !== 'none' );
 	this.checkChanged();
 };
 
@@ -439,7 +439,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
 		!this.imageModel.isBorderable()
 	);
 
-	this.borderCheckbox.setValue(
+	this.borderCheckbox.setSelected(
 		this.imageModel.isBorderable() && this.imageModel.hasBorder()
 	);
 	this.checkChanged();
@@ -764,7 +764,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 		) :
 		null
 	);
-	this.positionCheckbox.setValue(
+	this.positionCheckbox.setSelected(
 		this.imageModel.isAligned()
 	);
 
@@ -772,7 +772,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	this.borderCheckbox.setDisabled(
 		!this.imageModel.isBorderable()
 	);
-	this.borderCheckbox.setValue(
+	this.borderCheckbox.setSelected(
 		this.imageModel.isBorderable() && this.imageModel.hasBorder()
 	);
 

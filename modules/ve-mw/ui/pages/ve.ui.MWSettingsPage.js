@@ -267,7 +267,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	// Simple checkbox items
 	$.each( this.metaItemCheckboxes, function () {
 		var currentValue = !!settingsPage.getMetaItem( this.metaName );
-		this.fieldLayout.getField().setValue( currentValue );
+		this.fieldLayout.getField().setSelected( currentValue );
 	} );
 };
 
@@ -349,7 +349,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 	$.each( this.metaItemCheckboxes, function () {
 		var currentItem = settingsPage.getMetaItem( this.metaName ),
-			newValue = this.fieldLayout.getField().getValue();
+			newValue = this.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !newValue ) {
 			currentItem.remove();

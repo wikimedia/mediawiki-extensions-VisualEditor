@@ -159,7 +159,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.onEnableDisplayTitleInputChange = functio
 	this.displayTitleInput.setDisabled( !value );
 	if ( !value ) {
 		this.displayTitleInput.setValue( '' );
-		this.enableDisplayTitleInput.setValue( false );
+		this.enableDisplayTitleInput.setSelected( false );
 	}
 	this.displayTitleTouched = true;
 };
@@ -247,7 +247,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	newSectionEditField.selectItem( newSectionEditField.getItemFromData( newSectionEditLinkType ) );
 	this.newSectionEditLinkOptionTouched = false;
 
-	this.enableDisplayTitleInput.setValue( !!displayTitleItem );
+	this.enableDisplayTitleInput.setSelected( !!displayTitleItem );
 	this.displayTitleInput.setValue( displayTitle );
 	this.displayTitleInput.setDisabled( !displayTitle );
 	this.displayTitleTouched = false;
@@ -255,7 +255,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	// Simple checkbox items
 	$.each( this.metaItemCheckboxes, function () {
 		var currentValue = !!advancedSettingsPage.getMetaItem( this.metaName );
-		this.fieldLayout.getField().setValue( currentValue );
+		this.fieldLayout.getField().setSelected( currentValue );
 	} );
 };
 
@@ -348,7 +348,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	$.each( this.metaItemCheckboxes, function () {
 		var currentItem = advancedSettingsPage.getMetaItem( this.metaName ),
-			newValue = this.fieldLayout.getField().getValue();
+			newValue = this.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !newValue ) {
 			currentItem.remove();
