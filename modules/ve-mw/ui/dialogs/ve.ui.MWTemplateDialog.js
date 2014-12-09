@@ -24,6 +24,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	// Properties
 	this.transclusionModel = null;
 	this.loaded = false;
+	this.altered = false;
 	this.preventReselection = false;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: ['ve-ui-overlay-global'] } );
@@ -83,6 +84,16 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
 	this.loaded = true;
 	this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 	this.popPending();
+};
+
+/**
+ * Called when the transclusion model changes. E.g. parts changes, parameter values changes.
+ */
+ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
+	if ( this.loaded ) {
+		this.altered = true;
+		this.setApplicableStatus();
+	}
 };
 
 /**
@@ -155,6 +166,10 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 		this.setPageByName( reselect.getName() );
 	}
 
+	if ( this.loaded && ( added || removed ) ) {
+		this.altered = true;
+	}
+
 	this.setApplicableStatus();
 
 	this.updateTitle();
@@ -174,8 +189,13 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), { $: this.$ } );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
-	if ( this.loaded && !this.preventReselection ) {
-		this.setPageByName( param.getId() );
+	if ( this.loaded ) {
+		if ( !this.preventReselection ) {
+			this.setPageByName( param.getId() );
+		}
+
+		this.altered = true;
+		this.setApplicableStatus();
 	} else {
 		this.onAddParameterBeforeLoad( page );
 	}
@@ -214,8 +234,13 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 		reselect = this.bookletLayout.getClosestPage( page );
 
 	this.bookletLayout.removePages( [ page ] );
-	if ( this.loaded && !this.preventReselection ) {
-		this.setPageByName( reselect.getName() );
+	if ( this.loaded ) {
+		if ( !this.preventReselection ) {
+			this.setPageByName( reselect.getName() );
+		}
+
+		this.altered = true;
+		this.setApplicableStatus();
 	}
 };
 
@@ -229,11 +254,14 @@ ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
 	if ( this.loading.state() !== 'resolved' ) {
+		// Loading is not resolved
 		this.actions.setAbilities( { apply: false, insert: false } );
 	} else if ( parts.length && !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
-		this.actions.setAbilities( { apply: true, insert: true } );
+		// Loading is resolved, and we have parts, and first one is not placeholder
+		this.actions.setAbilities( { apply: this.altered, insert: true } );
 	} else {
-		this.actions.setAbilities( { apply: parts.length === 0, insert: false } );
+		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
+		this.actions.setAbilities( { apply: parts.length === 0 && this.altered, insert: false } );
 	}
 };
 
@@ -432,10 +460,14 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 			// Properties
 			this.loaded = false;
+			this.altered = false;
 			this.transclusionModel = new ve.dm.MWTransclusionModel();
 
 			// Events
-			this.transclusionModel.connect( this, { replace: 'onReplacePart' } );
+			this.transclusionModel.connect( this, {
+				replace: 'onReplacePart',
+				change: 'onTransclusionModelChange'
+			} );
 
 			// Initialization
 			if ( !this.selectedNode ) {

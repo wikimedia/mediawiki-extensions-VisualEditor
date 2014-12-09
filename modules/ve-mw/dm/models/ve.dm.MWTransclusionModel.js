@@ -135,7 +135,7 @@
 	 * @fires change
 	 */
 	ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
-		var i, len, item, title, index, remove, existing;
+		var i, len, item, title, index, remove, existing, resolveQueue = [];
 
 		for ( i = 0, len = queue.length; i < len; i++ ) {
 			remove = 0;
@@ -181,10 +181,17 @@
 
 			// Resolve promises
 			if ( item.deferred ) {
-				item.deferred.resolve();
+				resolveQueue.push( item.deferred );
 			}
 		}
 		this.emit( 'change' );
+
+		// We need to go back and resolve the deferreds after emitting change.
+		// Otherwise we get silly situations like a single change event being
+		// guaranteed after the transclusion loaded promise gets resolved.
+		for ( i = 0; i < resolveQueue.length; i++ ) {
+			resolveQueue[i].resolve();
+		}
 	};
 
 	/** */
