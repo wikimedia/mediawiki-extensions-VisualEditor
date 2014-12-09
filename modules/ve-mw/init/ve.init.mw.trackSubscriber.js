@@ -58,9 +58,13 @@
 			prefix = topic.slice( 0, topic.indexOf( '.' ) );
 
 		if ( prefix === 'mwtiming' ) {
-			// Legacy TimingData events
-			// Map timing.foo --> ve.foo
-			topic = 've.' + topic.slice( prefix.length + 1 );
+			// Add type for save errors; not in the topic for stupid historical reasons
+			if ( topic === 'mwtiming.performance.user.saveError' ) {
+				topic += '.' + data.type;
+			}
+			// Map mwtiming.foo --> timing.ve.foo.mobile
+			topic = 'timing.ve.' + topic.slice( 'mwtiming.'.length ) + '.' + data.targetName;
+			data = data.duration;
 		} else if ( prefix === 'mwedit' ) {
 			// Edit schema
 			action = topic.split( '.' )[1];
