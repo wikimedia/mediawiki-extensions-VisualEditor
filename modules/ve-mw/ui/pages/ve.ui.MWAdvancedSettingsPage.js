@@ -87,10 +87,10 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	);
 
 	this.displayTitleTouched = false;
-	this.enableDisplayTitleInput = new OO.ui.CheckboxInputWidget( { $: this.$ } );
-	this.enableDisplayTitleInput.connect( this, { change: 'onEnableDisplayTitleInputChange' } );
+	this.enableDisplayTitleCheckbox = new OO.ui.CheckboxInputWidget( { $: this.$ } );
+	this.enableDisplayTitleCheckbox.connect( this, { change: 'onEnableDisplayTitleCheckboxChange' } );
 	this.enableDisplayTitleField = new OO.ui.FieldLayout(
-		this.enableDisplayTitleInput,
+		this.enableDisplayTitleCheckbox,
 		{
 			$: this.$,
 			align: 'inline',
@@ -155,11 +155,11 @@ OO.inheritClass( ve.ui.MWAdvancedSettingsPage, OO.ui.PageLayout );
  *
  * @param {boolean} value Whether a redirect is to be set for this page
  */
-ve.ui.MWAdvancedSettingsPage.prototype.onEnableDisplayTitleInputChange = function ( value ) {
+ve.ui.MWAdvancedSettingsPage.prototype.onEnableDisplayTitleCheckboxChange = function ( value ) {
 	this.displayTitleInput.setDisabled( !value );
 	if ( !value ) {
 		this.displayTitleInput.setValue( '' );
-		this.enableDisplayTitleInput.setSelected( false );
+		this.enableDisplayTitleCheckbox.setSelected( false );
 	}
 	this.displayTitleTouched = true;
 };
@@ -247,15 +247,15 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	newSectionEditField.selectItem( newSectionEditField.getItemFromData( newSectionEditLinkType ) );
 	this.newSectionEditLinkOptionTouched = false;
 
-	this.enableDisplayTitleInput.setSelected( !!displayTitleItem );
+	this.enableDisplayTitleCheckbox.setSelected( !!displayTitleItem );
 	this.displayTitleInput.setValue( displayTitle );
 	this.displayTitleInput.setDisabled( !displayTitle );
 	this.displayTitleTouched = false;
 
 	// Simple checkbox items
 	$.each( this.metaItemCheckboxes, function () {
-		var currentValue = !!advancedSettingsPage.getMetaItem( this.metaName );
-		this.fieldLayout.getField().setSelected( currentValue );
+		var isSelected = !!advancedSettingsPage.getMetaItem( this.metaName );
+		this.fieldLayout.getField().setSelected( isSelected );
 	} );
 };
 
@@ -348,11 +348,11 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	$.each( this.metaItemCheckboxes, function () {
 		var currentItem = advancedSettingsPage.getMetaItem( this.metaName ),
-			newValue = this.fieldLayout.getField().isSelected();
+			isSelected = this.fieldLayout.getField().isSelected();
 
-		if ( currentItem && !newValue ) {
+		if ( currentItem && !isSelected ) {
 			currentItem.remove();
-		} else if ( !currentItem && newValue ) {
+		} else if ( !currentItem && isSelected ) {
 			advancedSettingsPage.metaList.insertMeta( { type: this.metaName } );
 		}
 	} );

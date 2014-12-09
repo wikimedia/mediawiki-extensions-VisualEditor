@@ -448,21 +448,21 @@ ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
 /**
  * Handle change event on the positionCheckbox element.
  *
- * @param {boolean} checked Checkbox status
+ * @param {boolean} isSelected Checkbox status
  */
-ve.ui.MWMediaDialog.prototype.onPositionCheckboxChange = function ( checked ) {
+ve.ui.MWMediaDialog.prototype.onPositionCheckboxChange = function ( isSelected ) {
 	var newPositionValue,
 		currentModelAlignment = this.imageModel.getAlignment();
 
-	this.positionSelect.setDisabled( !checked );
+	this.positionSelect.setDisabled( !isSelected );
 	this.checkChanged();
 	// Only update the model if the current value is different than that
 	// of the image model
 	if (
-		( currentModelAlignment === 'none' && checked ) ||
-		( currentModelAlignment !== 'none' && !checked )
+		( currentModelAlignment === 'none' && isSelected ) ||
+		( currentModelAlignment !== 'none' && !isSelected )
 	) {
-		if ( checked ) {
+		if ( isSelected ) {
 			// Picking a floating alignment value will create a block image
 			// no matter what the type is, so in here we want to calculate
 			// the default alignment of a block to set as our initial alignment
@@ -480,13 +480,13 @@ ve.ui.MWMediaDialog.prototype.onPositionCheckboxChange = function ( checked ) {
 /**
  * Handle change event on the positionCheckbox element.
  *
- * @param {boolean} checked Checkbox status
+ * @param {boolean} isSelected Checkbox status
  */
-ve.ui.MWMediaDialog.prototype.onBorderCheckboxChange = function ( checked ) {
+ve.ui.MWMediaDialog.prototype.onBorderCheckboxChange = function ( isSelected ) {
 	// Only update if the value is different than the model
-	if ( this.imageModel.hasBorder() !== checked ) {
+	if ( this.imageModel.hasBorder() !== isSelected ) {
 		// Update the image model
-		this.imageModel.toggleBorder( checked );
+		this.imageModel.toggleBorder( isSelected );
 		this.checkChanged();
 	}
 };

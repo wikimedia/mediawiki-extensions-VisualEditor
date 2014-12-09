@@ -266,8 +266,8 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 
 	// Simple checkbox items
 	$.each( this.metaItemCheckboxes, function () {
-		var currentValue = !!settingsPage.getMetaItem( this.metaName );
-		this.fieldLayout.getField().setSelected( currentValue );
+		var isSelected = !!settingsPage.getMetaItem( this.metaName );
+		this.fieldLayout.getField().setSelected( isSelected );
 	} );
 };
 
@@ -349,11 +349,11 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 	$.each( this.metaItemCheckboxes, function () {
 		var currentItem = settingsPage.getMetaItem( this.metaName ),
-			newValue = this.fieldLayout.getField().isSelected();
+			isSelected = this.fieldLayout.getField().isSelected();
 
-		if ( currentItem && !newValue ) {
+		if ( currentItem && !isSelected ) {
 			currentItem.remove();
-		} else if ( !currentItem && newValue ) {
+		} else if ( !currentItem && isSelected ) {
 			settingsPage.metaList.insertMeta( { type: this.metaName } );
 		}
 	} );
