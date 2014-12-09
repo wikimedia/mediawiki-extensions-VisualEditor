@@ -147,15 +147,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$view->displayTag();
 			}
 			$result['contentSub'] = $this->getOutput()->getSubtitle();
-
-			$content = new WikitextContent( $wikitext );
-			$parserOutput = $content->getParserOutput( $page );
-			if ( $parserOutput ) {
-				$result['displayTitleHtml'] = $parserOutput->getDisplayTitle();
-			} else {
-				wfDebug( '[VE] ApiVisualEditorEdit - parserOutput was false' );
-			}
-
 			$lang = $this->getLanguage();
 
 			if ( isset( $saveresult['edit']['newtimestamp'] ) ) {
