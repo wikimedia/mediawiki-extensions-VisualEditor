@@ -36,6 +36,7 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 		framed: false,
 		icon: 'remove',
 		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+		flags: [ 'destructive' ],
 		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
 	} )
 		.connect( this, { click: 'onRemoveButtonClick' } );
