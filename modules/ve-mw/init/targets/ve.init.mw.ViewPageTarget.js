@@ -1612,7 +1612,11 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 				!urlSaysHide &&
 				(
 					prefSaysShow ||
-					( !usePrefs && $.cookie( 've-beta-welcome-dialog' ) === null )
+					(
+						!usePrefs &&
+						localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
+						$.cookie( 've-beta-welcome-dialog' ) === null
+					)
 				)
 			) {
 			this.surface.getDialogs().openWindow( 'betaWelcome' );
@@ -1629,7 +1633,11 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
 		// view of the page via the hiding GET parameter.
 		} else if ( !usePrefs && !urlSaysHide ) {
-			$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+			try {
+				localStorage.setItem( 've-beta-welcome-dialog', 1 );
+			} catch ( e ) {
+				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+			}
 		}
 	}
 
