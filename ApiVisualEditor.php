@@ -186,7 +186,7 @@ class ApiVisualEditor extends ApiBase {
 		$apiParams = array(
 			'action' => 'parse',
 			'page' => $title->getPrefixedDBkey(),
-			'prop' => 'text|revid|categorieshtml',
+			'prop' => 'text|revid|categorieshtml|displaytitle',
 		);
 		$api = new ApiMain(
 			new DerivativeRequest(
@@ -205,16 +205,25 @@ class ApiVisualEditor extends ApiBase {
 		$links = isset( $result['parse']['links'] ) ? $result['parse']['links'] : array();
 		$revision = Revision::newFromId( $result['parse']['revid'] );
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
+		$displaytitle = isset( $result['parse']['displaytitle'] ) ?
+			$result['parse']['displaytitle'] : false;
 
 		if ( $content === false || ( strlen( $content ) && $revision === null ) ) {
 			return false;
+		}
+
+		if ( $displaytitle !== false ) {
+			// Escape entities as in OutputPage::setPageTitle()
+			$displaytitle = Sanitizer::normalizeCharReferences(
+				Sanitizer::removeHTMLtags( $displaytitle ) );
 		}
 
 		return array(
 			'content' => $content,
 			'categorieshtml' => $categorieshtml,
 			'basetimestamp' => $timestamp,
-			'starttimestamp' => wfTimestampNow()
+			'starttimestamp' => wfTimestampNow(),
+			'displayTitleHtml' => $displaytitle
 		);
 	}
 
