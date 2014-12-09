@@ -9,7 +9,7 @@
  * Dialog for editing MediaWiki page information.
  *
  * @class
- * @extends OO.ui.ProcessDialog
+ * @extends ve.ui.FragmentDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options

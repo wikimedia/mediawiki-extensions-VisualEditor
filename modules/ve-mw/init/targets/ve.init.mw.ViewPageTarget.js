@@ -23,11 +23,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		conf = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Parent constructor
-	ve.init.mw.Target.call(
-		this, $( '#content' ),
-		mw.config.get( 'wgRelevantPageName' ),
-		currentUri.query.oldid
-	);
+	ve.init.mw.Target.call( this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid );
 
 	// Properties
 	this.toolbarSaveButton = null;

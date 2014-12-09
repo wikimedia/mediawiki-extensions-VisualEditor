@@ -30,6 +30,7 @@
 			targetPromise = mw.loader.using( 'ext.visualEditor.viewPageTarget' )
 				.then( function () {
 					var target = new ve.init.mw.ViewPageTarget();
+					$( '#content' ).append( target.$element );
 
 					// Transfer methods
 					ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;

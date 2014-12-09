@@ -14,14 +14,13 @@
  * @extends ve.init.Target
  *
  * @constructor
- * @param {jQuery} $container Container to render target into
  * @param {string} pageName Name of target page
  * @param {number} [revisionId] If the editor should load a revision of the page, pass the
  *  revision id here. Defaults to loading the latest version (see #load).
  */
-ve.init.mw.Target = function VeInitMwTarget( $container, pageName, revisionId ) {
+ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 	// Parent constructor
-	ve.init.Target.call( this, $container, { shadow: true, actions: true, floatable: true } );
+	ve.init.Target.call( this, { shadow: true, actions: true, floatable: true } );
 
 	var conf = mw.config.get( 'wgVisualEditorConfig' );
 
