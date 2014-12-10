@@ -24,6 +24,8 @@ ve.dm.MWReferenceModel = function VeDmMWReferenceModel() {
 	this.group = '';
 	this.doc = null;
 	this.deferDoc = null;
+	this.dir = null;
+	this.lang = null;
 };
 
 /* Inheritance */
@@ -48,6 +50,8 @@ ve.dm.MWReferenceModel.static.newFromReferenceNode = function ( node ) {
 	ref.setListGroup( attr.listGroup );
 	ref.setListIndex( attr.listIndex );
 	ref.setGroup( attr.refGroup );
+	ref.setDir( doc.getDir() );
+	ref.setLang( doc.getLang() );
 	ref.deferDoc = function () {
 		// cloneFromRange is very expensive, so lazy evaluate it
 		return doc.cloneFromRange( internalList.getItemNode( attr.listIndex ).getRange() );
@@ -231,10 +235,48 @@ ve.dm.MWReferenceModel.prototype.getDocument = function () {
 				{ type: '/paragraph' },
 				{ type: 'internalList' },
 				{ type: '/internalList' }
-			] );
+			],
+			/* htmlDocument */ null,
+			/* parentDocument */ null,
+			/* internalList */ null,
+			/* innerWhitespace */ null,
+			/* lang */ this.getLang(),
+			/* dir */ this.getDir() );
 		}
 	}
 	return this.doc;
+};
+
+/**
+ * Set the directionality of the reference document
+ * @param {string} dir Document directionality
+ */
+ve.dm.MWReferenceModel.prototype.setDir = function ( dir ) {
+	this.dir = dir;
+};
+
+/**
+ * Get the directionality of the reference document
+ * @returns {string} Document directionality
+ */
+ve.dm.MWReferenceModel.prototype.getDir = function () {
+	return this.dir;
+};
+
+/**
+ * Set the language of the reference document
+ * @param {string} lang Document language
+ */
+ve.dm.MWReferenceModel.prototype.setLang = function ( lang ) {
+	this.lang = lang;
+};
+
+/**
+ * Get the language of the reference document
+ * @returns {string} Document language
+ */
+ve.dm.MWReferenceModel.prototype.getLang = function () {
+	return this.lang;
 };
 
 /**

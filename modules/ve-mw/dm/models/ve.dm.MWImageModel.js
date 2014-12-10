@@ -40,7 +40,8 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.sizeType = null;
 	this.border = false;
 	this.borderable = false;
-	this.dir = 'ltr';
+	this.dir = null;
+	this.lang = null;
 	this.defaultDimensions = null;
 
 	this.imageSrc = '';
@@ -154,10 +155,11 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  * Load from image data with scalable information.
  *
  * @param {Object} attrs Image node attributes
- * @param {string} [dir=ltr] Document direction
+ * @param {string} [dir] Document direction
+ * @param {string} [lang] Document language
  * @return {ve.dm.MWImageModel} Image model
  */
-ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
+ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang ) {
 	var imgModel = new ve.dm.MWImageModel( {
 			resourceName: attrs.resource,
 			currentDimensions: {
@@ -178,7 +180,8 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir ) {
 	imgModel.toggleBorder( !!attrs.borderImage );
 	imgModel.setAltText( attrs.alt || '' );
 
-	imgModel.setDir( dir || 'ltr' );
+	imgModel.setDir( dir );
+	imgModel.setLang( lang );
 
 	imgModel.setType( attrs.type );
 
@@ -749,7 +752,13 @@ ve.dm.MWImageModel.prototype.getCaptionDocument = function () {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		] );
+		],
+		/* htmlDocument */ null,
+		/* parentDocument */ null,
+		/* internalList */ null,
+		/* innerWhitespace */ null,
+		/* lang */ this.getLang(),
+		/* dir */ this.getDir() );
 	}
 	return this.captionDoc;
 };
@@ -995,6 +1004,24 @@ ve.dm.MWImageModel.prototype.getDir = function () {
  */
 ve.dm.MWImageModel.prototype.setDir = function ( dir ) {
 	this.dir = dir;
+};
+
+/**
+ * Get the language of the image document. Specifically relevant
+ * for the caption document.
+ * @return {string} Document language
+ */
+ve.dm.MWImageModel.prototype.getLang = function () {
+	return this.lang;
+};
+
+/**
+ * Set the language of the image document. Specifically relevant
+ * for the caption document.
+ * @param {string} lang Document language
+ */
+ve.dm.MWImageModel.prototype.setLang = function ( lang ) {
+	this.lang = lang;
 };
 
 /**
