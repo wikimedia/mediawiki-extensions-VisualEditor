@@ -686,6 +686,7 @@ $wgResourceModules += array(
 			'visualeditor-dimensionswidget-times',
 			'visualeditor-find-and-replace-find-text',
 			'visualeditor-find-and-replace-match-case',
+			'visualeditor-find-and-replace-regular-expression',
 			'visualeditor-find-and-replace-replace-all-button',
 			'visualeditor-find-and-replace-replace-button',
 			'visualeditor-find-and-replace-replace-text',
