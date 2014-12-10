@@ -7,7 +7,8 @@
 			"Pginer",
 			"QuimGil",
 			"SMP",
-			"Vriullop"
+			"Vriullop",
+			"Davidpar"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
@@ -17,5 +18,5 @@
 	"visualeditor-feedback-link": "Project:Editor visual/Comentaris",
 	"visualeditor-feedback-tool": "Comentaris",
 	"visualeditor-help-label": "Llegiu la guia d'usuari",
-	"visualeditor-help-title": "Guia d'usuari sobre la utilització de l'editor"
+	"visualeditor-help-title": "Guia sobre la utilització de l'editor"
 }
