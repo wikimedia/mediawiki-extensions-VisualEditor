@@ -108,6 +108,15 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 		return;
 	}
 
+	// HACK: fit four images in the screen
+	// The -45 is here because the way the container is aligned, it
+	// is pushed behind the scrollbar. When we calculate the new size
+	// of the image results, we need to account for a bit thinner than
+	// the actual (partially hidden) width.
+	// Note: This will be fixed in an upcoming rewrite of the image
+	// search results.
+	this.size = ( this.results.$element.innerWidth() - 45 ) / 4;
+
 	// Reset message
 	this.$noItemsMessage.hide();
 
