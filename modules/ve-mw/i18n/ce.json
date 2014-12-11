@@ -154,7 +154,7 @@
 	"visualeditor-languages-tool": "Меттанаш",
 	"visualeditor-linkinspector-illegal-title": "АгӀона магийна боцу корта",
 	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Цхьатера маьӀна долчера шорде агӀо|Цхьатера маьӀна долчера шорде агӀонаш}}",
-	"visualeditor-linkinspector-suggest-external-link": "Арахьара хьажораг",
+	"visualeditor-linkinspector-suggest-external-link": "Арахьара хьажорг",
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|йогӀуш йолу агӀо|йогӀуш йолу агӀонаш}}",
 	"visualeditor-linkinspector-suggest-new-page": "Керла агӀо",
 	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|ДӀасахьажораг|ДӀасахьажорагаш}}",
@@ -214,6 +214,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Кхин дӀа тае",
 	"visualeditor-viewpage-savewarning-title": "Бакъалла лаьий хӀуна?",
 	"visualeditor-wikitext-warning": "Ахьа лелош ю Визуальни тадар — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билгало]] кхузахь болхбеш яц. Бина хийцамаш хӀаллак цахуьлуьйтуш чухулара таран кор схьадела белла «{{int:visualeditor-toolbar-savedialog}}» хӀара могӀам тӀакха харжа «{{int:visualeditor-mweditmodesource-title}}».",
-	"visualeditor-wikitext-warning-link": "Help:Вики-билгало",
 	"visualeditor-wikitext-warning-title": "Карина вики-билгало"
 }
