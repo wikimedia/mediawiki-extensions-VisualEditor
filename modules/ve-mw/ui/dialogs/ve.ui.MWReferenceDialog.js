@@ -233,6 +233,8 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	} else {
 		// Create a new reference
 		this.referenceModel = new ve.dm.MWReferenceModel();
+		this.referenceModel.setDir( this.getFragment().getDocument().getDir() );
+		this.referenceModel.setLang( this.getFragment().getDocument().getLang() );
 	}
 
 	// Cleanup

@@ -386,7 +386,8 @@ ve.ui.MWMediaDialog.prototype.onSearchSelect = function ( item ) {
 					align: 'default',
 					defaultSize: true
 				},
-				this.getFragment().getSurface().getDocument().getDir()
+				this.getFragment().getDocument().getDir(),
+				this.getFragment().getDocument().getLang()
 			);
 			this.attachImageModel();
 		} else {
@@ -614,7 +615,8 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				// Create image model
 				this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
 					this.selectedNode.getAttributes(),
-					this.selectedNode.getDocument().getDir()
+					this.selectedNode.getDocument().getDir(),
+					this.selectedNode.getDocument().getLang()
 				);
 				this.attachImageModel();
 
@@ -789,7 +791,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
  */
 ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	var captionDocument,
-		doc = this.getFragment().getSurface().getDocument();
+		doc = this.getFragment().getDocument();
 
 	if ( this.captionSurface ) {
 		// Reset the caption surface if it already exists
@@ -824,7 +826,12 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		] );
+		],
+		// The ve.dm.Document constructor expects
+		// ( data, htmlDocument, parentDocument, internalList, innerWhitespace, lang, dir )
+		// as parameters. We are only interested in setting up language, hence the
+		// multiple 'null' values.
+		null, null, null, null, doc.getLang(), doc.getDir() );
 	}
 
 	this.store = doc.getStore();
