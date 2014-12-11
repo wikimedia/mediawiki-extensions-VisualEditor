@@ -38,7 +38,7 @@ ve.ui.MWMetaDialog.static.actions = [
 	{
 		action: 'apply',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: 'primary'
+		flags: [ 'progressive', 'primary' ]
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),

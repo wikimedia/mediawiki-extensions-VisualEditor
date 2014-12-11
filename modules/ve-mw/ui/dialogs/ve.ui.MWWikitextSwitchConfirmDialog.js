@@ -48,7 +48,7 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
 	{
 		action: 'switch',
 		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch' ),
-		flags: 'primary'
+		flags: [ 'progressive', 'primary' ]
 	},
 	{
 		action: 'discard',
