@@ -40,7 +40,7 @@ ve.ui.MWReferencesListDialog.static.actions = [
 	{
 		action: 'apply',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: 'primary',
+		flags: [ 'progressive', 'primary' ],
 		modes: 'edit'
 	},
 	{

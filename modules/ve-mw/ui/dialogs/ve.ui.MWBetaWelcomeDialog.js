@@ -36,7 +36,7 @@ ve.ui.MWBetaWelcomeDialog.static.icon = 'help';
 ve.ui.MWBetaWelcomeDialog.static.actions = [
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-beta-welcome-action-continue' ),
-		flags: 'primary'
+		flags: [ 'progressive', 'primary' ]
 	}
 ];
 
