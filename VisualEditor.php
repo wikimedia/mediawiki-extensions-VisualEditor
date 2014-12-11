@@ -275,6 +275,7 @@ $wgResourceModules += array(
 		'scripts' => array(
 			// ve
 			'lib/ve/src/ve.utils.js',
+			'lib/ve/src/ve.TriggerListener.js',
 
 			// init
 			'lib/ve/src/init/ve.init.js',
