@@ -424,6 +424,7 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
+	var surfaceReadyTime = ve.now();
 	if ( !this.activating ) {
 		// Activation was aborted before we got here. Do nothing
 		// TODO are there things we need to clean up?
@@ -438,6 +439,11 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
 		this.getSurface().mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
 	}
+
+	// Track how long it takes for the first transaction to happen
+	this.surface.getModel().getDocument().once( 'transact', function () {
+		ve.track( 'mwtiming.behavior.firstTransaction', { duration: ve.now() - surfaceReadyTime } );
+	} );
 
 	// Update UI
 	this.transformPageTitle();
