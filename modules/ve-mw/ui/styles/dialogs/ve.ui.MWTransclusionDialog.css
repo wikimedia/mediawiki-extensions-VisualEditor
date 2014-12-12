@@ -57,20 +57,12 @@
 }
 
 .ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
-	opacity: 0;
-	height: 0;
-	padding-top: 0;
-	padding-bottom: 0;
-	margin-bottom: 0;
+	display: none;
 }
 
 .ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
 .ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
 .ve-ui-mwTransclusionDialog-multiple .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
 .ve-ui-mwTransclusionDialog-multiple .oo-ui-bookletLayout .ve-ui-mwParameterPage-more {
-	opacity: 0;
-	height: 0;
-	overflow: hidden;
-	margin-top: 0;
-	margin-bottom: 0;
+	display: none;
 }
