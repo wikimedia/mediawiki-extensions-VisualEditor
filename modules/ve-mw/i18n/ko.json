@@ -89,7 +89,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "언어",
 	"visualeditor-dialog-meta-languages-readonlynote": "이 문서에 링크된 다른 언어의 문서 목록입니다. 지금은 위키데이터 혹은 원본 모드에서만 편집할 수 있습니다.",
 	"visualeditor-dialog-meta-languages-section": "언어",
-	"visualeditor-dialog-meta-settings-displaytitle": "제목 표시",
+	"visualeditor-dialog-meta-settings-displaytitle": "보여줄 제목",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "제목 표시 활성화",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "숨은 분류",
 	"visualeditor-dialog-meta-settings-index-default": "기본값",
@@ -229,11 +229,11 @@
 	"visualeditor-toolbar-cite-label": "인용",
 	"visualeditor-toolbar-savedialog": "문서 저장",
 	"visualeditor-usernamespacepagelink": "Project:사용자 이름공간",
+	"visualeditor-version-label": "버전",
 	"visualeditor-viewpage-savewarning": "먼저 저장하지 않고 보기 모드로 돌아가겠습니까?",
 	"visualeditor-viewpage-savewarning-discard": "편집 버리기",
 	"visualeditor-viewpage-savewarning-keep": "편집 계속",
 	"visualeditor-viewpage-savewarning-title": "확실합니까?",
 	"visualeditor-wikitext-warning": "시각편집기를 사용하고 있으며 [[{{MediaWiki:visualeditor-wikitext-warning-link}}|위키텍스트]]는 여기서 작동하지 않습니다. 변경한 것을 잃어버리지 않고 위키텍스트 모드에서 문서를 편집하려면 언제든지\"{{MediaWiki:visualeditor-ca-editsource}}\"을 클릭하세요.",
-	"visualeditor-wikitext-warning-link": "Help:위키 문법",
 	"visualeditor-wikitext-warning-title": "위키텍스트 문법이 감지됨"
 }
