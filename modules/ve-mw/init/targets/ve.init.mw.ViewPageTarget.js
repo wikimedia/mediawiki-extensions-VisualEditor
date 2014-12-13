@@ -462,8 +462,16 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @param {jQuery.Event} e Keydown event
  */
 ve.init.mw.ViewPageTarget.prototype.onDocumentKeyDown = function ( e ) {
+	var target = this;
 	if ( e.which === OO.ui.Keys.ESCAPE ) {
-		this.deactivate( false, 'navigate-read' );
+		setTimeout( function () {
+			// Listeners should stopPropagation if they handle the escape key, but
+			// also check they didn't fire after this event, as would be the case if
+			// they were bound to the document.
+			if ( !e.isPropagationStopped() ) {
+				target.deactivate( false, 'navigate-read' );
+			}
+		} );
 		e.preventDefault();
 	}
 };
