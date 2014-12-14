@@ -86,7 +86,7 @@ class VisualEditorPage
   checkbox(:minor_edit, id: 'wpMinoredit')
   div(:no_unused_fields, text: 'No unused fields')
   a(:new_link, class: 've-ce-linkAnnotation ve-ce-mwInternalLinkAnnotation new')
-  span(:options_categories, class: 'oo-ui-tool-title-text', text: 'Categories')
+  span(:options_categories, class: 'oo-ui-tool-title', text: 'Categories')
   span(:options_in_hamburger, class: 'oo-ui-tool-title', text: 'Options')
   span(:option_advanced_settings, class: 'oo-ui-tool-title', text: 'Advanced settings')
   span(:option_page_settings, class: 'oo-ui-tool-title', text: 'Page settings')
