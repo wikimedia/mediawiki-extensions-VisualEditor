@@ -7,6 +7,7 @@
 			"Yerpo"
 		]
 	},
+	"apihelp-visualeditoredit-param-summary": "Povzetek urejanja",
 	"tooltip-ca-createsource": "Ustvari izvorno kodo strani",
 	"tooltip-ca-editsource": "Uredi izvorno kodo te strani",
 	"tooltip-ca-ve-edit": "Urejanje strani z VisualEditorjem",
@@ -131,6 +132,8 @@
 	"visualeditor-dialog-transclusion-remove-template": "Odstrani predlogo",
 	"visualeditor-dialog-transclusion-required-parameter": "Obvezen parameter",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Parameter je obvezen.",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Pojdi nazaj",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Vseeno nadaljuj",
 	"visualeditor-dialog-transclusion-single-mode": "Skrij možnosti",
 	"visualeditor-dialog-transclusion-title": "Vključitev",
 	"visualeditor-dialogbutton-media-tooltip": "Predstavnost",
@@ -201,6 +204,7 @@
 	"visualeditor-savedialog-label-report": "Poročaj o težavi",
 	"visualeditor-savedialog-label-resolve-conflict": "Razreši spor",
 	"visualeditor-savedialog-label-restore": "Obnovi stran",
+	"visualeditor-savedialog-label-resume-editing": "Nadaljevanje urejanja",
 	"visualeditor-savedialog-label-review": "Preglejte svoje spremembe",
 	"visualeditor-savedialog-label-review-good": "Vrnitev na obrazec za shranjevanje",
 	"visualeditor-savedialog-label-save": "Shrani stran",
@@ -217,11 +221,11 @@
 	"visualeditor-toolbar-cite-label": "Navedi",
 	"visualeditor-toolbar-savedialog": "Shrani stran",
 	"visualeditor-usernamespacepagelink": "Project:Uporabniški imenski prostor",
+	"visualeditor-version-label": "Različica",
 	"visualeditor-viewpage-savewarning": "Ste prepričani, da se želite vrniti v način ogledovanja, ne da bi najprej shranili spremembe?",
 	"visualeditor-viewpage-savewarning-discard": "Zavrzi urejanja",
 	"visualeditor-viewpage-savewarning-keep": "Nadaljuj z urejanjem",
 	"visualeditor-viewpage-savewarning-title": "Ste prepričani?",
 	"visualeditor-wikitext-warning": "Uporabljate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikibesedilo]] tukaj ne deluje. Da kadar koli preklopite v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-title}}«.",
-	"visualeditor-wikitext-warning-link": "Help:Wikioznačevanje",
 	"visualeditor-wikitext-warning-title": "Zaznali smo označevanje wikibesedila"
 }
