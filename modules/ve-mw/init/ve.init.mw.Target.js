@@ -511,14 +511,15 @@ ve.init.mw.Target.prototype.onNoticesReady = function () {
  * @fires surfaceReady
  */
 ve.init.mw.Target.prototype.onReady = function () {
+	var target = this;
 	// We need to wait until onReady as local notices may require special messages
 	this.onNoticesReady();
 	this.loading = false;
 	this.edited = false;
 	this.setupSurface( this.doc, function () {
-		this.startSanityCheck();
-		this.emit( 'surfaceReady' );
-	}.bind( this ) );
+		target.startSanityCheck();
+		target.emit( 'surfaceReady' );
+	} );
 };
 
 /**

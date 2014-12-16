@@ -16,6 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
+	var widget = this;
+
 	// Parent constructor
 	OO.ui.Widget.call( this, config );
 
@@ -53,15 +55,15 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	$( '#bodyContent' ).append( this.$element );
 
 	this.toggle.$link.on( 'click', function () {
-		if ( this.toggle.open ) {
-			this.toggle.$link.text( this.toggle.showMsg );
-			this.toggle.open = false;
+		if ( widget.toggle.open ) {
+			widget.toggle.$link.text( widget.toggle.showMsg );
+			widget.toggle.open = false;
 		} else {
-			this.toggle.$link.text( this.toggle.hideMsg );
-			this.toggle.open = true;
+			widget.toggle.$link.text( widget.toggle.hideMsg );
+			widget.toggle.open = true;
 		}
-		this.topics.$group.add( this.$tempTopics ).slideToggle();
-	}.bind( this ) );
+		widget.topics.$group.add( widget.$tempTopics ).slideToggle();
+	} );
 
 	this.metaList.connect( this, {
 		insert: 'onMetaListInsert',
@@ -146,15 +148,16 @@ ve.ui.MWTocWidget.prototype.hideOrShow = function () {
  * Rebuilds on both teardown and setup of a node, so rebuild is debounced
  */
 ve.ui.MWTocWidget.prototype.rebuild = ve.debounce( function () {
+	var widget = this;
 	// Only rebuild when initialized
 	if ( this.surface.mwTocWidget.initialized ) {
 		this.$tempTopics.append( this.topics.$group.children().clone() );
 		this.teardownItems();
 		// Build after transactions
 		setTimeout( function () {
-			this.build();
-			this.$tempTopics.empty();
-		}.bind( this ), 0 );
+			widget.build();
+			widget.$tempTopics.empty();
+		}, 0 );
 	}
 }, 0 );
 

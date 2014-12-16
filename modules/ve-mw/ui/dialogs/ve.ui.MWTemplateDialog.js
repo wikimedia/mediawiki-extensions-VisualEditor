@@ -395,28 +395,27 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
+	var dialog = this;
 	if ( action === 'apply' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			var deferred = $.Deferred();
-			this.checkRequiredParameters().done( function () {
-				var surfaceModel = this.getFragment().getSurface(),
-					obj = this.transclusionModel.getPlainObject();
+			dialog.checkRequiredParameters().done( function () {
+				var surfaceModel = dialog.getFragment().getSurface(),
+					obj = dialog.transclusionModel.getPlainObject();
 
-				if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
-					this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
+				if ( dialog.selectedNode instanceof ve.dm.MWTransclusionNode ) {
+					dialog.transclusionModel.updateTransclusionNode( surfaceModel, dialog.selectedNode );
 				} else if ( obj !== null ) {
-					// Collapse returns a new fragment, so update this.fragment
-					this.fragment = this.getFragment().collapseToEnd();
-					this.transclusionModel.insertTransclusionNode( this.getFragment() );
+					// Collapse returns a new fragment, so update dialog.fragment
+					dialog.fragment = dialog.getFragment().collapseToEnd();
+					dialog.transclusionModel.insertTransclusionNode( dialog.getFragment() );
 				}
 
-				this.close( { action: action } );
-			}.bind( this ) ).always( function () {
-				deferred.resolve();
-			} );
+				dialog.close( { action: action } );
+			} ).always( deferred.resolve );
 
 			return deferred;
-		}, this );
+		} );
 	}
 
 	return ve.ui.MWTemplateDialog.super.prototype.getActionProcess.call( this, action );
@@ -470,8 +469,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 /**
  * Initialize parameters for new template insertion
- *
- * @method
  */
 ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
 	var i, parts = this.transclusionModel.getParts();
@@ -484,21 +481,20 @@ ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
 
 /**
  * Intentionally empty. This is provided for Wikia extensibility.
- *
- * @method
  */
 ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 
-/**
- * @inheritdoc
- */
+// TODO: Uncomment this when OOjs UI is updated so that .focus() on an empty
+// booklet doesn't crash.
+/*
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
-	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
+	var dialog = this;
+	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data );
 		.next( function () {
-			// TODO: Uncomment this when OOUI is updated so .focus() on an empty booklet doesn't crash
-			//this.bookletLayout.focus();
-		}, this );
+			dialog.bookletLayout.focus();
+		} );
 };
+*/
 
 /**
  * @inheritdoc

@@ -649,6 +649,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
  * @param {string} panel Panel name
  */
 ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
+	var dialog = this;
 	switch ( panel ) {
 		case 'edit':
 			// Set the edit panel
@@ -677,21 +678,21 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel ) {
 
 			// Get the repos from the API first
 			// The ajax request will only be done once per session
-			this.getFileRepos().done( function ( repos ) {
-				this.search.setSources( repos );
+			dialog.getFileRepos().done( function ( repos ) {
+				dialog.search.setSources( repos );
 				// Done, hide the spinner
-				this.$spinner.hide();
+				dialog.$spinner.hide();
 				// Show the search and query the media sources
-				this.search.$element.show();
-				this.search.query.setValue( this.pageTitle );
-				this.search.queryMediaSources();
+				dialog.search.$element.show();
+				dialog.search.query.setValue( dialog.pageTitle );
+				dialog.search.queryMediaSources();
 				// Initialization
 				// This must be done only after there are proper
 				// sources defined
-				this.search.getQuery().focus().select();
-				this.search.getResults().selectItem();
-				this.search.getResults().highlightItem();
-			}.bind( this ) );
+				dialog.search.getQuery().focus().select();
+				dialog.search.getResults().selectItem();
+				dialog.search.getResults().highlightItem();
+			} );
 
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );

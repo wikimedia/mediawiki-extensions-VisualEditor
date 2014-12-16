@@ -16,6 +16,7 @@
  */
 ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) {
 	var key,
+		tool = this,
 		items = toolGroup.getToolbar().getTarget().getEditNotices(),
 		count = ve.getObjectKeys( items ).length,
 		title = ve.msg( 'visualeditor-editnotices-tool', count );
@@ -41,11 +42,11 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 
 	this.popup.$body.append( this.$items );
 
-	// Automatically show/hide
+	// Automatically show
 	if ( count ) {
 		setTimeout( function () {
-			this.popup.toggle( true );
-		}.bind( this ), 500 );
+			tool.popup.toggle( true );
+		}, 500 );
 	} else {
 		this.$element = $( [] );
 	}
