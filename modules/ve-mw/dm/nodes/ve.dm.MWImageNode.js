@@ -164,36 +164,18 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
  * @returns {jQuery.Promise} Promise which resolves after the image size details are fetched from the API
  */
 ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
-	var scalablePromise = $.Deferred();
 	// On the first call set off an async call to update the scalable's
 	// original dimensions from the API.
-	if ( ve.init.target ) {
-		ve.init.target.constructor.static.apiRequest(
-			{
-				action: 'query',
-				prop: 'imageinfo',
-				indexpageids: '1',
-				iiprop: 'size|mediatype',
-				titles: filename
-			},
-			{ type: 'POST' }
-		)
-		.done( function ( response ) {
-			var page = response.query && response.query.pages[response.query.pageids[0]],
-				info = page && page.imageinfo && page.imageinfo[0];
-			if ( info ) {
-				scalablePromise.resolve( info );
-			} else {
-				scalablePromise.reject();
+	if ( ve.init.platform.imageInfoCache ) {
+		return ve.init.platform.imageInfoCache.get( filename ).then( function ( info ) {
+			if ( !info ) {
+				return $.Deferred().reject().promise();
 			}
-		} )
-		.fail( function () {
-			scalablePromise.reject();
+			return info;
 		} );
 	} else {
-		scalablePromise.reject();
+		return $.Deferred().reject().promise();
 	}
-	return scalablePromise;
 };
 
 /* Methods */
@@ -248,8 +230,10 @@ ve.dm.MWImageNode.prototype.getSizeHash = function () {
 ve.dm.MWImageNode.prototype.getScalable = function () {
 	var imageNode = this;
 	if ( !this.scalablePromise ) {
-		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() )
-			.done( function ( info ) {
+		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() );
+		// If the promise was already resolved before getScalablePromise returned, then jQuery will execute the done straight away.
+		// So don't just do getScalablePromise( ... ).done because we need to make sure that this.scalablePromise gets set first.
+		this.scalablePromise.done( function ( info ) {
 				if ( info ) {
 					imageNode.getScalable().setOriginalDimensions( {
 						width: info.width,
