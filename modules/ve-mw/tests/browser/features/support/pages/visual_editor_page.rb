@@ -126,7 +126,7 @@ class VisualEditorPage
   span(:save_page, class: 'oo-ui-labelElement-label', text: 'Save page')
   div(:save_enabled, css: 'div.ve-init-mw-viewPageTarget-toolbar-actions > div.oo-ui-flaggedElement-constructive.oo-ui-widget-enabled')
   a(:second_reference, text: '[1]', index: 2)
-  span(:second_save_page, css: '.oo-ui-flaggedElement-primary > a:nth-child(1) > span:nth-child(2)')
+  span(:second_save_page, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
   div(:settings_apply_button, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-buttonElement oo-ui-labelElement oo-ui-flaggedElement-primary oo-ui-buttonWidget oo-ui-actionWidget oo-ui-buttonElement-framed')
   span(:special_character, class: 'oo-ui-iconElement-icon oo-ui-icon-special-character')
   a(:subheading1, text: /Sub-heading 1/)
