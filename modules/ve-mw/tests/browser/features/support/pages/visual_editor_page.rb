@@ -77,6 +77,8 @@ class VisualEditorPage
   div(:link_overlay_does_not_exist, text: /New page/)
   div(:link_overlay_external_link, text: /External link.+New page/m)
   div(:link_overlay_wiki_page, text: /Matching page/)
+  text_field(:link_textfield, index: 0)
+  span(:links_done, text: 'Done')
   unordered_list(:media_caption, class: 've-ui-contextSelectWidget')
   span(:media_exit, text: 'Return to save form')
   figure(:media_image, index: 0)
@@ -150,6 +152,7 @@ class VisualEditorPage
   div(:ve_heading_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-down')
   span(:ve_italics, class: 'oo-ui-iconElement-icon oo-ui-icon-italic-i')
   span(:ve_link_icon, class: 'oo-ui-iconElement-icon oo-ui-icon-link')
+  span(:ve_link_ui, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-labelElement-label oo-ui-labelWidget oo-ui-processDialog-title oo-ui-labelElement', text: 'Link')
   span(:ve_media_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-picture')
   span(:ve_more_markup_options, css: 'span.oo-ui-tool-name-more-fewer:nth-child(10) > a:nth-child(1) > span:nth-child(2) > span:nth-child(1)')
   a(:ve_more_references_options, css: 'span.oo-ui-tool-name-more-fewer:nth-child(9) > a:nth-child(1)')
@@ -167,11 +170,8 @@ class VisualEditorPage
     div(:extension_reference, class: 've-ui-mwReferenceResultWidget-shield', frame: frame)
     span(:existing_reference, text: 'Use an existing reference', frame: frame)
     a(:remove_template, title: 'Remove template', frame: frame)
-    div(:ve_link_ui, class: 'oo-ui-window-head', text: /Link/, frame: frame)
     div(:suggestion_list, class: 've-ui-mwTitleInputWidget-menu')
     span(:another_save_page, class: 'oo-ui-labelElement-label', text: 'Save page', frame: frame)
-    text_field(:link_textfield, index: 0, frame: frame)
-    span(:links_done, text: 'Done', frame: frame)
     div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) # ALSO USED IN LANGUAGE SCREENSHOT
 
     # USED IN LANGUAGE SCREENSHOT TEST:
