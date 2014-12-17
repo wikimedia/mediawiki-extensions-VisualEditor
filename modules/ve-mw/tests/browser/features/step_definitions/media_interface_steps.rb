@@ -6,7 +6,10 @@ When(/^I click Media$/) do
 end
 
 When(/^I enter (.+) into media Search box$/) do |content|
-  on(VisualEditorPage).media_search_element.when_present.send_keys(content)
+  on(VisualEditorPage) do |page|
+    page.media_search_element.when_present.click
+    page.media_search_element.when_present.send_keys(content)
+  end
 end
 
 When(/^I select an Image$/) do
