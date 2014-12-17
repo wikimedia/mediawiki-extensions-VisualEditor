@@ -257,8 +257,8 @@ class ApiVisualEditor extends ApiBase {
 				'result' => 'success',
 				'diff' => $engine->addHeader(
 					$diffRows,
-					wfMessage( 'currentrev' )->parse(),
-					wfMessage( 'yourtext' )->parse()
+					$context->msg( 'currentrev' )->parse(),
+					$context->msg( 'yourtext' )->parse()
 				)
 			);
 		} else {
