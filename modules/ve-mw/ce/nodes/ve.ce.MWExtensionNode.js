@@ -85,11 +85,12 @@ ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response )
 
 /** */
 ve.ce.MWExtensionNode.prototype.afterRender = function () {
+	var node = this;
 	// Rerender after images load
 	// TODO: ignore shields, and count multiple images
 	this.$element.find( 'img' ).on( 'load', function () {
-		this.emit( 'rerender' );
-	}.bind( this ) );
+		node.emit( 'rerender' );
+	} );
 };
 
 /**

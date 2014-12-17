@@ -98,7 +98,8 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( da
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
-	var exactMatch = false,
+	var widget = this,
+		exactMatch = false,
 		itemWidgets = [],
 		existingCategoryItems = [], matchingCategoryItems = [],
 		hiddenCategoryItems = [], newCategoryItems = [],
@@ -138,7 +139,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 				matchingCategoryItems.push( suggestedCategory );
 			}
 		}
-	}.bind( this ) );
+	} );
 
 	// Existing categories
 	$.each( existingCategories, function ( index, existingCategory ) {
@@ -184,15 +185,15 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 	], function ( index, sectionData ) {
 		if ( sectionData.items.length ) {
 			itemWidgets.push( new OO.ui.MenuSectionOptionWidget( {
-				$: this.lookupMenu.$,
+				$: widget.lookupMenu.$,
 				data: sectionData.id,
 				label: sectionData.label
 			} ) );
 			$.each( sectionData.items, function ( index, categoryItem ) {
-				itemWidgets.push( this.getCategoryWidgetFromName( categoryItem ) );
-			}.bind( this ) );
+				itemWidgets.push( widget.getCategoryWidgetFromName( categoryItem ) );
+			} );
 		}
-	}.bind( this ) );
+	} );
 
 	return itemWidgets;
 };

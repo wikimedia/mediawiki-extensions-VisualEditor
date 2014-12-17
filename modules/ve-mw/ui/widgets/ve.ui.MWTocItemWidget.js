@@ -72,10 +72,11 @@ ve.ui.MWTocItemWidget.static.tagName = 'li';
  *
  */
 ve.ui.MWTocItemWidget.prototype.onUpdate = function () {
+	var widget = this;
 	// Timeout needed to let the dom element actually update
 	setTimeout( function () {
-		this.$tocText.text( this.node.$element.text() );
-	}.bind( this ), 0 );
+		widget.$tocText.text( widget.node.$element.text() );
+	} );
 };
 
 /**

@@ -230,13 +230,16 @@ ve.ui.MWCategoriesPage.prototype.insertMetaListItem = function ( metaBase ) {
  * @param {Object} [data] Dialog setup data
  */
 ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
+	var defaultSortKeyItem,
+		page = this;
+
 	this.metaList = metaList;
 	this.metaList.connect( this, {
 		insert: 'onMetaListInsert',
 		remove: 'onMetaListRemove'
 	} );
 
-	var defaultSortKeyItem = this.getDefaultSortKeyItem();
+	defaultSortKeyItem = this.getDefaultSortKeyItem();
 
 	this.categoryWidget.addItems( this.getCategoryItems() );
 
@@ -247,8 +250,8 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 
 	// Update input position once visible
 	setTimeout( function () {
-		this.categoryWidget.fitInput();
-	}.bind( this ) );
+		page.categoryWidget.fitInput();
+	} );
 };
 
 /**

@@ -129,12 +129,13 @@ ve.ui.MWCitationDialog.prototype.setPageByName = function ( param ) {
  * @inheritdoc
  */
 ve.ui.MWCitationDialog.prototype.onAddParameterBeforeLoad = function ( page ) {
-	var hasUsefulParameter = this.hasUsefulParameter();
+	var dialog = this,
+		hasUsefulParameter = this.hasUsefulParameter();
 
 	page.preLoad = true;
 	page.valueInput.on( 'change', function () {
-		this.actions.setAbilities( { apply: hasUsefulParameter, insert: hasUsefulParameter } );
-	}.bind( this ) );
+		dialog.actions.setAbilities( { apply: hasUsefulParameter, insert: hasUsefulParameter } );
+	} );
 };
 
 /**
@@ -159,34 +160,35 @@ ve.ui.MWCitationDialog.prototype.hasUsefulParameter = function () {
  * @inheritdoc
  */
 ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
+	var dialog = this;
 	if ( action === 'apply' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			var deferred = $.Deferred();
-			this.checkRequiredParameters().done( function () {
+			dialog.checkRequiredParameters().done( function () {
 				var item,
-					surfaceModel = this.getFragment().getSurface(),
+					surfaceModel = dialog.getFragment().getSurface(),
 					doc = surfaceModel.getDocument(),
 					internalList = doc.getInternalList(),
-					obj = this.transclusionModel.getPlainObject();
+					obj = dialog.transclusionModel.getPlainObject();
 
-				if ( !this.referenceModel ) {
-					// Collapse returns a new fragment, so update this.fragment
-					this.fragment = this.getFragment().collapseToEnd();
-					this.referenceModel = new ve.dm.MWReferenceModel();
-					this.referenceModel.setDir( doc.getDir() );
-					this.referenceModel.setLang( doc.getLang() );
-					this.referenceModel.insertInternalItem( surfaceModel );
-					this.referenceModel.insertReferenceNode( this.getFragment() );
+				if ( !dialog.referenceModel ) {
+					// Collapse returns a new fragment, so update dialog.fragment
+					dialog.fragment = dialog.getFragment().collapseToEnd();
+					dialog.referenceModel = new ve.dm.MWReferenceModel();
+					dialog.referenceModel.setDir( doc.getDir() );
+					dialog.referenceModel.setLang( doc.getLang() );
+					dialog.referenceModel.insertInternalItem( surfaceModel );
+					dialog.referenceModel.insertReferenceNode( dialog.getFragment() );
 				}
 
-				item = this.referenceModel.findInternalItem( surfaceModel );
+				item = dialog.referenceModel.findInternalItem( surfaceModel );
 				if ( item ) {
-					if ( this.selectedNode ) {
-						this.transclusionModel.updateTransclusionNode(
-							surfaceModel, this.selectedNode
+					if ( dialog.selectedNode ) {
+						dialog.transclusionModel.updateTransclusionNode(
+							surfaceModel, dialog.selectedNode
 						);
 					} else if ( obj !== null ) {
-						this.transclusionModel.insertTransclusionNode(
+						dialog.transclusionModel.insertTransclusionNode(
 							// HACK: This is trying to place the cursor inside the first content branch
 							// node but this theoretically not a safe assumption - in practice, the
 							// citation dialog will only reach this code if we are inserting (not
@@ -194,7 +196,7 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 							// initialized the internal node with a paragraph - getting the range of the
 							// item covers the entire paragraph so we have to get the range of it's
 							// first (and empty) child
-							this.getFragment().clone(
+							dialog.getFragment().clone(
 								new ve.dm.LinearSelection( doc, item.getChildren()[0].getRange() )
 							)
 						);
@@ -203,20 +205,18 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 
 				// HACK: Scorch the earth - this is only needed because without it, the references list
 				// won't re-render properly, and can be removed once someone fixes that
-				this.referenceModel.setDocument(
+				dialog.referenceModel.setDocument(
 					doc.cloneFromRange(
-						internalList.getItemNode( this.referenceModel.getListIndex() ).getRange()
+						internalList.getItemNode( dialog.referenceModel.getListIndex() ).getRange()
 					)
 				);
-				this.referenceModel.updateInternalItem( surfaceModel );
+				dialog.referenceModel.updateInternalItem( surfaceModel );
 
-				this.close( { action: action } );
-			}.bind( this ) ).always( function () {
-				deferred.resolve();
-			} );
+				dialog.close( { action: action } );
+			} ).always( deferred.resolve );
 
 			return deferred;
-		}, this );
+		} );
 	}
 
 	// Parent method

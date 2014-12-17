@@ -313,15 +313,17 @@ ve.ui.MWSaveDialog.prototype.reset = function () {
  * @param {jQuery} $checkboxes jQuery collection of checkboxes
  */
 ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( $checkboxes ) {
+	var dialog = this;
 	this.setupDeferred.done( function () {
-		this.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
-			.html( $checkboxes )
+		dialog.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
+			.empty()
+			.append( $checkboxes )
 			.find( 'a' )
 				.attr( 'target', '_blank' )
 				.end()
 			.find( 'input' )
 				.prop( 'tabIndex', 0 );
-	}.bind( this ) );
+	} );
 };
 
 /**
@@ -332,16 +334,18 @@ ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( $checkboxes ) {
  * @param {string} summary Edit summary to prefill
  */
 ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
+	var dialog = this;
 	this.setupDeferred.done( function () {
-		this.editSummaryInput.setValue( summary );
-	}.bind( this ) );
+		dialog.editSummaryInput.setValue( summary );
+	} );
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.initialize = function () {
-	var saveAccessKey;
+	var saveAccessKey,
+		dialog = this;
 
 	// Parent method
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
@@ -377,10 +381,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers
 		// Users likely assume characters but then it seems to count down quicker
 		// than expected. Facing users with the word "byte" is bad? (bug 40035)
-		this.editSummaryCountLabel.setLabel(
-			String( this.editSummaryByteLimit - $.byteLength( this.editSummaryInput.getValue() ) )
+		dialog.editSummaryCountLabel.setLabel(
+			String( dialog.editSummaryByteLimit - $.byteLength( dialog.editSummaryInput.getValue() ) )
 		);
-	}.bind( this ) );
+	} );
 
 	this.$saveOptions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
 		this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
