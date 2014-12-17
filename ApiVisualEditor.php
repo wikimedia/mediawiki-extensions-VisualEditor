@@ -467,6 +467,11 @@ class ApiVisualEditor extends ApiBase {
 						}
 					}
 				}
+
+				$links[$page->getPrefixedText()] = array(
+					'missing' => !$page->exists()
+				);
+
 				// On parser cache miss, just don't bother populating red link data
 
 				if ( $parsed === false ) {
