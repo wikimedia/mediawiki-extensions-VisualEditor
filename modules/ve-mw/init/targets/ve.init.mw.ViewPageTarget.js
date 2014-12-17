@@ -25,6 +25,10 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	// Parent constructor
 	ve.init.mw.Target.call( this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid );
 
+	// Parent constructor bound key event handlers, but we don't want them bound until
+	// we activate; so unbind them again
+	this.unbindHandlers();
+
 	// Properties
 	this.toolbarSaveButton = null;
 	this.saveDialog = null;
@@ -245,11 +249,10 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.activating = true;
 		this.activatingDeferred = $.Deferred();
 
+		this.bindHandlers();
+
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
-
-		this.onDocumentKeyDownHandler = this.onDocumentKeyDown.bind( this );
-		$( document ).on( 'keydown', this.onDocumentKeyDownHandler );
 
 		// User interface changes
 		this.transformPage();
@@ -334,7 +337,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 	this.restorePage();
 	this.showReadOnlyContent();
 
-	$( document ).off( 'keydown', this.onDocumentKeyDownHandler );
+	this.unbindHandlers();
 
 	mw.user.options.set( 'editondblclick', this.originalEditondbclick );
 	this.originalEditondbclick = undefined;
@@ -463,7 +466,11 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * @param {jQuery.Event} e Keydown event
  */
 ve.init.mw.ViewPageTarget.prototype.onDocumentKeyDown = function ( e ) {
+	// Parent method
+	ve.init.mw.ViewPageTarget.super.prototype.onDocumentKeyDown.apply( this, arguments );
+
 	var target = this;
+
 	if ( e.which === OO.ui.Keys.ESCAPE ) {
 		setTimeout( function () {
 			// Listeners should stopPropagation if they handle the escape key, but
