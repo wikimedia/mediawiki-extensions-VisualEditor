@@ -5,7 +5,8 @@
 			"Miya",
 			"Penn Station",
 			"Shirayuki",
-			"Takot"
+			"Takot",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ビジュアルエディター]]",
@@ -17,5 +18,6 @@
 	"visualeditor-feedback-link": "Project:ビジュアルエディター/フィードバック",
 	"visualeditor-feedback-tool": "フィードバックを送信",
 	"visualeditor-help-label": "利用者ガイドを読む",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ja",
 	"visualeditor-help-title": "エディターの使用法についてのガイド"
 }

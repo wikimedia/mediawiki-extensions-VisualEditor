@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Anakmalaysia",
-			"Aurora"
+			"Aurora",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -14,5 +15,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Maklum balas",
 	"visualeditor-feedback-tool": "Tinggalkan maklum balas",
 	"visualeditor-help-label": "Baca panduan pengguna",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ms",
 	"visualeditor-help-title": "Panduan penggunaan VisualEditor"
 }

@@ -12,7 +12,8 @@
 			"Tchoř",
 			"ශ්වෙත",
 			"Muhammad Shuaib",
-			"Jdforrester"
+			"Jdforrester",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -24,5 +25,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Názory",
 	"visualeditor-feedback-tool": "Zanechte zpětnou vazbu",
 	"visualeditor-help-label": "Přečtěte si uživatelskou příručku",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/cs",
 	"visualeditor-help-title": "Příručka k používání editoru"
 }

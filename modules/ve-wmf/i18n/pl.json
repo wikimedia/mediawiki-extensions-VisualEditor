@@ -13,7 +13,8 @@
 			"WTM",
 			"Woytecr",
 			"Wpedzich",
-			"Jacenty359"
+			"Jacenty359",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -25,5 +26,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Opinie",
 	"visualeditor-feedback-tool": "Prześlij opinię",
 	"visualeditor-help-label": "Przeczytaj poradnik użytkownika",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/pl",
 	"visualeditor-help-title": "Poradnik korzystania z edytora"
 }

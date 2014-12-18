@@ -3,7 +3,8 @@
 		"authors": [
 			"Cheers!",
 			"Jdforrester",
-			"Minh Nguyen"
+			"Minh Nguyen",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Soạn thảo trực quan]]",
@@ -15,5 +16,6 @@
 	"visualeditor-feedback-link": "Project:Soạn thảo trực quan/Phản hồi",
 	"visualeditor-feedback-tool": "Gửi phản hồi",
 	"visualeditor-help-label": "Đọc hướng dẫn sử dụng",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/vi",
 	"visualeditor-help-title": "Hướng dẫn sử dụng trình soạn"
 }

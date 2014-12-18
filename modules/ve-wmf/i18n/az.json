@@ -4,7 +4,8 @@
 			"Cekli829",
 			"Interfase",
 			"Jduranboger",
-			"Wertuose"
+			"Wertuose",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizual redaktor]]",
@@ -13,5 +14,6 @@
 	"visualeditor-feedback-link": "Layihə:Vizual redaktor/Rəy",
 	"visualeditor-feedback-tool": "Rəy bildir",
 	"visualeditor-help-label": "İstifadəçinin bələdçisini oxu",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/az",
 	"visualeditor-help-title": "Redaktorun istifadəsinə dair bələdçi"
 }

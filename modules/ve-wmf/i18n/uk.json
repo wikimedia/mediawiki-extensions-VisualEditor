@@ -15,7 +15,8 @@
 			"Tel'et",
 			"Tifinaghes",
 			"Ата",
-			"Piramidion"
+			"Piramidion",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор]]",
@@ -27,5 +28,6 @@
 	"visualeditor-feedback-link": "Project:Візуальний редактор/Відгуки",
 	"visualeditor-feedback-tool": "Залишити відгук",
 	"visualeditor-help-label": "Прочитайте посібник користувача",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/uk",
 	"visualeditor-help-title": "Посібник з використання редактора"
 }

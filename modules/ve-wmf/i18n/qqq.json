@@ -28,6 +28,6 @@
 	"visualeditor-feedback-link": "Link to a page where users can leave feedback that is automatically posted using this tool. This should be a sub-page of {{msg-mw|visualeditor-descriptionpagelink}}",
 	"visualeditor-feedback-tool": "Text of tool in the toolbar that lets users provide feedback.\n{{Identical|Leave feedback}}",
 	"visualeditor-help-label": "Display text for the link to the user guide.\n{{Identical|User guide}}",
-	"visualeditor-help-link": "{{notranslate}} Link to the user guide for how to use VisualEditor",
+	"visualeditor-help-link": "{{optional}}\n\nThis is the page title with interwiki link of the [[:mw:Help:VisualEditor/User guide|VisualEditor user guide in mediawiki.org]].\n\nIf the user guide is translated to your language there, you can put a link to the translated user guide here. Just copy the English string without \"Special:MyLanguage\" and add a slash and your language code in the end. For example, for Japanese write \"mw:Help:VisualEditor/User guide/ja\".",
 	"visualeditor-help-title": "Title (hover) text for the link to the user guide"
 }

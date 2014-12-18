@@ -3,7 +3,8 @@
 		"authors": [
 			"EugeneZelenko",
 			"Wizardist",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -13,5 +14,6 @@
 	"visualeditor-feedback-link": "Project:Візуальны рэдактар/Водгукі",
 	"visualeditor-feedback-tool": "Пакінуць водгук",
 	"visualeditor-help-label": "Прачытайце дапаможнік",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/be-tarask",
 	"visualeditor-help-title": "Дапаможнік па карыстаньні рэдактарам"
 }

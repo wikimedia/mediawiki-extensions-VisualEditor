@@ -6,7 +6,8 @@
 			"Kwj2772",
 			"LFM",
 			"아라",
-			"Revi"
+			"Revi",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|시각편집기]]",
@@ -18,5 +19,6 @@
 	"visualeditor-feedback-link": "Project:시각편집기/피드백",
 	"visualeditor-feedback-tool": "피드백 남기기",
 	"visualeditor-help-label": "사용자 가이드 읽기",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ko",
 	"visualeditor-help-title": "편집기를 사용하는 방법에 대한 사용자 가이드"
 }

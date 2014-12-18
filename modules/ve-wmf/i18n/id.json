@@ -8,7 +8,8 @@
 			"Kenrick95",
 			"McDutchie",
 			"Rv77ax",
-			"William Surya Permana"
+			"William Surya Permana",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -20,5 +21,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Umpan balik",
 	"visualeditor-feedback-tool": "Tinggalkan umpan balik",
 	"visualeditor-help-label": "Baca panduan pengguna",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/id",
 	"visualeditor-help-title": "Panduan menggunakan VisualEditor"
 }

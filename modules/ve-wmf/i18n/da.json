@@ -9,7 +9,8 @@
 			"Simeondahl",
 			"Tehnix",
 			"Thomsen",
-			"Sarrus"
+			"Sarrus",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -19,5 +20,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-tool": "Giv feedback",
 	"visualeditor-help-label": "Læs brugervejledningen",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/da",
 	"visualeditor-help-title": "Vejledning til hvordan du bruger editoren"
 }

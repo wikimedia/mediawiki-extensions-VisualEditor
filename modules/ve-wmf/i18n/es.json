@@ -14,7 +14,8 @@
 			"PoLuX124",
 			"Ralgis",
 			"Thehelpfulone",
-			"Macofe"
+			"Macofe",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
@@ -26,5 +27,6 @@
 	"visualeditor-feedback-link": "Project:Editor visual/Comentar",
 	"visualeditor-feedback-tool": "Comentar",
 	"visualeditor-help-label": "Leer la guía de usuario",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/es",
 	"visualeditor-help-title": "Guía para utilizar el editor"
 }

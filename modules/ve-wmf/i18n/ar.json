@@ -8,7 +8,8 @@
 			"Mido",
 			"OsamaK",
 			"زكريا",
-			"مشعل الحربي"
+			"مشعل الحربي",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
@@ -19,5 +20,6 @@
 	"visualeditor-feedback-link": "Project:المحرر المرئي/تعليقات",
 	"visualeditor-feedback-tool": "ضع تعليقا",
 	"visualeditor-help-label": "اقرأ دليل المستخدم",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ar",
 	"visualeditor-help-title": "دليل المستخدم لكيفية استخدام المحرر"
 }

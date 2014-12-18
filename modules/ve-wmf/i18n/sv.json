@@ -11,7 +11,8 @@
 			"Sendelbach",
 			"Skalman",
 			"WikiPhoenix",
-			"Lokal Profil"
+			"Lokal Profil",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -23,5 +24,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Återkoppling",
 	"visualeditor-feedback-tool": "Lämna feedback",
 	"visualeditor-help-label": "Läs användarguiden",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/sv",
 	"visualeditor-help-title": "Användarguide för hur du använder redigeraren"
 }

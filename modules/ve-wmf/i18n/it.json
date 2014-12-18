@@ -13,7 +13,8 @@
 			"Raoli",
 			"Una giornata uggiosa '94",
 			"Maria victoria",
-			"Lucas2"
+			"Lucas2",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -25,5 +26,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Commenti",
 	"visualeditor-feedback-tool": "Commenta la nuova interfaccia",
 	"visualeditor-help-label": "Leggi la guida utente",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/it",
 	"visualeditor-help-title": "Guida per l'utilizzo dell'editor"
 }

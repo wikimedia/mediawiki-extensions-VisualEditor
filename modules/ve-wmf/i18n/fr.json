@@ -27,7 +27,8 @@
 			"Verdy p",
 			"Wyz",
 			"Momo50WM",
-			"Orlodrim"
+			"Orlodrim",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ÉditeurVisuel]]",
@@ -39,5 +40,6 @@
 	"visualeditor-feedback-link": "Project:ÉditeurVisuel/Avis",
 	"visualeditor-feedback-tool": "Laisser un avis à propos de l’ÉditeurVisuel.",
 	"visualeditor-help-label": "Lire le guide utilisateur",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/fr",
 	"visualeditor-help-title": "Guide sur la manière d’utiliser l’éditeur"
 }

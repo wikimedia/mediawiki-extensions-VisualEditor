@@ -3,7 +3,8 @@
 		"authors": [
 			"Alison",
 			"Kscanne",
-			"Toliño"
+			"Toliño",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
@@ -15,5 +16,6 @@
 	"visualeditor-feedback-link": "Project:Editor visual/Comentarios",
 	"visualeditor-feedback-tool": "Deixe un comentario",
 	"visualeditor-help-label": "Ler a guía de usuario",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/gl",
 	"visualeditor-help-title": "Guía de usuario sobre como utilizar o editor"
 }

@@ -4,7 +4,8 @@
 			"AlimanRuna",
 			"Firilacroco",
 			"Minisarm",
-			"Stelistcristi"
+			"Stelistcristi",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|EditorVizual]]",
@@ -16,5 +17,6 @@
 	"visualeditor-feedback-link": "Project:EditorVizual/Feedback",
 	"visualeditor-feedback-tool": "Lăsați o părere",
 	"visualeditor-help-label": "Citiți ghidul utilizatorului",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ro",
 	"visualeditor-help-title": "Ghid pentru folosirea editorului"
 }

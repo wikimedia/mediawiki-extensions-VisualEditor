@@ -3,7 +3,8 @@
 		"authors": [
 			"Malafaya",
 			"פוילישער",
-			"十弌"
+			"十弌",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|וויזועלער רעדאקטירער]]",
@@ -15,5 +16,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/פֿידבעק",
 	"visualeditor-feedback-tool": "איבערלאזאן פֿידבעק",
 	"visualeditor-help-label": "לייענען דאס באניצער־האנטבוך",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/yi",
 	"visualeditor-help-title": "האנטבוך וויאזוי צו ניצן דעם רעדאקטירער"
 }

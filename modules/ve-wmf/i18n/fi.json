@@ -13,7 +13,8 @@
 			"Silvonen",
 			"Skalman",
 			"Stryn",
-			"VezonThunder"
+			"VezonThunder",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalinen muokkain]]",
@@ -25,5 +26,6 @@
 	"visualeditor-feedback-link": "Project:Visuaalinen muokkain/Palaute",
 	"visualeditor-feedback-tool": "Jätä palautetta",
 	"visualeditor-help-label": "Lue käyttöopas",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/fi",
 	"visualeditor-help-title": "Muokkaimen käyttöopas"
 }

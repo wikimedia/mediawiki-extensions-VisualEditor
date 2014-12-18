@@ -179,7 +179,7 @@
 	"visualeditor-preference-betatempdisable": "A VisualEditor ideiglenes letiltása, amíg béta állapotban van",
 	"visualeditor-preference-core-description": "VisualEditor engedélyezése. A vitalapokon és néhány egyéb névtérben nem elérhető.",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "VisualEditor engedélyezése. A következő névterekben lesz elérhető: $1",
+	"visualeditor-preference-enable": "VisualEditor engedélyezése. A következő {{PLURAL:$2|névtérben|névterekben}} lesz elérhető: $1",
 	"visualeditor-preference-language-label": "VisualEditor nyelvi eszköz",
 	"visualeditor-reference-input-placeholder": "Mire szeretnél hivatkozni?",
 	"visualeditor-referenceslist-isempty": "Nincsenek megjeleníthető forráshivatkozások a $1 csoportban ezen az oldalon.",
@@ -208,11 +208,11 @@
 	"visualeditor-timeout": "Úgy tűnik, hogy a szerkesztő jelenleg nem elérhető. Szeretnél helyette forráskód módban szerkeszteni?",
 	"visualeditor-toolbar-savedialog": "Oldal mentése",
 	"visualeditor-usernamespacepagelink": "Project:Felhasználói névtér",
+	"visualeditor-version-label": "Verzió",
 	"visualeditor-viewpage-savewarning": "A nézet módhoz való visszalépéskor a változtatások nincsenek mentve.",
 	"visualeditor-viewpage-savewarning-discard": "Változtatások elvetése",
 	"visualeditor-viewpage-savewarning-keep": "Szerkesztés folytatása",
 	"visualeditor-viewpage-savewarning-title": "Biztos vagy benne?",
 	"visualeditor-wikitext-warning": "Most a VisualEditorral szerkesztesz - a [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiszöveg]] itt nem működik. A forráskód nézetre való váltáshoz - ha nem akarod elveszíteni a változtatásaidat, - kattints a lenyíló menüre a „{{int:visualeditor-toolbar-savedialog}}” gomb mellett, és válaszd a „{{int:visualeditor-mweditmodesource-title}}” lehetőséget.",
-	"visualeditor-wikitext-warning-link": "Help:Wiki leírónyelv",
 	"visualeditor-wikitext-warning-title": "Wikiszöveg leírónyelv észlelve"
 }

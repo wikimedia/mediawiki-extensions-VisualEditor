@@ -15,7 +15,8 @@
 			"Xiaomingyan",
 			"Yfdyh000",
 			"Zhangjintao",
-			"乌拉跨氪"
+			"乌拉跨氪",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑器]]",
@@ -27,5 +28,6 @@
 	"visualeditor-feedback-link": "Project:可视化编辑器/反馈",
 	"visualeditor-feedback-tool": "留下反馈",
 	"visualeditor-help-label": "阅读用户指南",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/zh",
 	"visualeditor-help-title": "有关如何使用编辑器的指南"
 }

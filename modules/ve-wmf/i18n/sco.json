@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"John Reid"
+			"John Reid",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VeesualEediter]]",
@@ -13,5 +14,6 @@
 	"visualeditor-feedback-link": "Project:VeesualEediter/Feedback",
 	"visualeditor-feedback-tool": "Lea feedback",
 	"visualeditor-help-label": "Read the uiser guide",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/sco",
 	"visualeditor-help-title": "Guide fer hou tae uise the eediter"
 }

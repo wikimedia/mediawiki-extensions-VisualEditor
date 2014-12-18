@@ -16,7 +16,8 @@
 			"Siebrand",
 			"Southparkfan",
 			"सरोज कुमार ढकाल",
-			"Sjoerddebruin"
+			"Sjoerddebruin",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuele tekstverwerker]]",
@@ -28,5 +29,6 @@
 	"visualeditor-feedback-link": "Project:Visuele tekstverwerker/Terugkoppeling",
 	"visualeditor-feedback-tool": "Terugkoppeling achterlaten",
 	"visualeditor-help-label": "Gebruikershandleiding lezen",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/nl",
 	"visualeditor-help-title": "Handleiding voor de tekstverwerker"
 }

@@ -3,7 +3,8 @@
 		"authors": [
 			"Bjankuloski06",
 			"Brest",
-			"Iwan Novirion"
+			"Iwan Novirion",
+			"Amire80"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ВизуеленУредник]]",
@@ -15,5 +16,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Мислења",
 	"visualeditor-feedback-tool": "Дајте мислење",
 	"visualeditor-help-label": "Прочитајте го корисничкиот водич",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/mk",
 	"visualeditor-help-title": "Водич за употреба на уредникот"
 }
