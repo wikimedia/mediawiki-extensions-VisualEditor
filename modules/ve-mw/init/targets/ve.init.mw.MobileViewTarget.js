@@ -84,9 +84,9 @@ ve.init.mw.MobileViewTarget.prototype.createSurface = function ( dmDoc, config )
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.setupToolbar = function () {
+ve.init.mw.MobileViewTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
-	ve.init.mw.Target.prototype.setupToolbar.call( this );
+	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
 
 	this.toolbar.$element
 		// FIXME shouldn't be using viewPageTarget styles
