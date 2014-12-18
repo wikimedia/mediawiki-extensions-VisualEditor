@@ -16,13 +16,13 @@
  * @cfg {number} [section] Number of the section target should scroll to
  * @cfg {boolean} [isIos=false] Whether the platform is an iOS device
  */
-ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( $container, config ) {
+ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( config ) {
 	var currentUri = new mw.Uri();
 	config = config || {};
 
 	// Parent constructor
 	ve.init.mw.Target.call(
-		this, $container, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid
+		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid
 	);
 
 	this.section = config.section;
