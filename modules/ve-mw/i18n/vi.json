@@ -245,6 +245,7 @@
 	"visualeditor-savedialog-warning-dirty": "Sửa đổi của bạn có thể bị hư – xin vui lòng xem lại trước khi lưu.",
 	"visualeditor-saveerror": "Lỗi khi lưu dữ liệu trên máy chủ: $1.",
 	"visualeditor-serializeerror": "Lỗi khi tải dữ liệu từ máy chủ: $1.",
+	"visualeditor-recreate": "Trang này đã bị xóa sau khi bạn bắt đầu sửa đổi. Bấm “$1” để tạo nó lại.",
 	"visualeditor-settings-tool": "Tùy chọn trang",
 	"visualeditor-timeout": "Hình như chế độ sửa đổi này hiện không khả dụng. Bạn có muốn sử dụng chế độ sửa đổi mã nguồn thay thế?",
 	"visualeditor-toolbar-cite-label": "Chú thích nguồn",
