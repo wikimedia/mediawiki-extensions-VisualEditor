@@ -1067,7 +1067,7 @@ ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
 			.click( this.onViewTabClick.bind( this ) );
 
 		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
-			if ( e.which !== 1 || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+			if ( !target.active || e.which !== 1 || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
 				return;
 			}
 
