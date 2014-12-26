@@ -222,10 +222,10 @@
 	"visualeditor-toolbar-cite-label": "Kaynak göster",
 	"visualeditor-toolbar-savedialog": "Sayfayı kaydet",
 	"visualeditor-usernamespacepagelink": "Project:Kullanıcı sayfası",
+	"visualeditor-version-label": "Sürüm",
 	"visualeditor-viewpage-savewarning": "Kaydetmeden önce ilk görüntüleme moduna geri dönmek istediğinizden emin misiniz?",
 	"visualeditor-viewpage-savewarning-discard": "Düzenlemeler silinsin",
 	"visualeditor-viewpage-savewarning-keep": "Düzenlemeye devam",
-	"visualeditor-wikitext-warning": "Eğer görsel düzenleyiciyi kullanıyorsanız - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wiki metin editörü]] bu alanda çalışmamaktadır. Wiki metin modunda sayfayı düzenlemek için lütfen \"{{int:visualeditor-ca-editsource}}\" buraya tıklayın – ancak kaydedilmemiş değişiklikleriniz kaybolacaktır.",
-	"visualeditor-wikitext-warning-link": "Help:Biçimsel Rehber",
+	"visualeditor-wikitext-warning": "Görsel Düzenleyici'yi kullanmaktasınız - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|viki metin editörü]] burada çalışmamaktadır. Herhangi bir anda, değişikliklerinizi kaybetmeden kaynak düzenlemeye geçmek için, \"{{int:visualeditor-toolbar-savedialog}}\" yanındaki aşağı açılır menüden \"{{int:visualeditor-mweditmodesource-title}}\" seçeneğine tıklayın.",
 	"visualeditor-wikitext-warning-title": "Vikimetin biçimlendirmesi algılandı"
 }

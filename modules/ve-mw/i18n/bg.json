@@ -6,13 +6,18 @@
 			"MegaAlex",
 			"පසිඳු කාවින්ද",
 			"Mitzev",
-			"StanProg"
+			"StanProg",
+			"Spiritia"
 		]
 	},
 	"tooltip-ca-createsource": "Създаване на изходния код на страницата",
 	"tooltip-ca-editsource": "Редактиране на изходния код на страницата",
+	"tooltip-ca-ve-edit": "Можете да редактирате страницата чрез визуалния редактор [Alt + Shift + v]",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
+	"visualeditor-ca-createsource": "Създаване на кода",
+	"visualeditor-ca-editsource": "Редактиране на кода",
+	"visualeditor-ca-editsource-section": "редактиране на кода",
 	"visualeditor-categories-tool": "Категории",
 	"visualeditor-dialog-beta-welcome-action-continue": "Продължаване",
 	"visualeditor-dialog-media-content-section": "Надпис",
@@ -82,5 +87,6 @@
 	"visualeditor-savedialog-title-save": "Съхраняване на промените",
 	"visualeditor-saveerror": "Грешка при съхраняване на данните на сървъра: $1",
 	"visualeditor-serializeerror": "Грешка при зареждане на данните от сървъра: $1",
-	"visualeditor-toolbar-savedialog": "Съхраняване на страницата"
+	"visualeditor-toolbar-savedialog": "Съхраняване на страницата",
+	"visualeditor-version-label": "Версия"
 }
