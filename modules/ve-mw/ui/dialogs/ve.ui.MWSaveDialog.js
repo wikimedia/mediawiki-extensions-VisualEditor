@@ -471,8 +471,9 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			this.actions.forEach( { actions: 'save' }, function ( action ) {
 				action.setLabel(
 					ve.msg(
-						// TODO: Actually populate this.resotring with information, right now it is
-						// always false because of an oversight when migrating this code from init
+						// TODO: Actually populate this.restoring with information. Right now it is
+						// always false because of an oversight when migrating this code from init.
+						// Possible messages:
 						// visualeditor-savedialog-label-restore, visualeditor-savedialog-label-save
 						'visualeditor-savedialog-label-' + ( this.restoring ? 'restore' : 'save' )
 					)
