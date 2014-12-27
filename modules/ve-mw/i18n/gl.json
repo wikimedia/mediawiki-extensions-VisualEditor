@@ -4,7 +4,8 @@
 			"Alison",
 			"Kscanne",
 			"Toliño",
-			"McDutchie"
+			"McDutchie",
+			"Elisardojm"
 		]
 	},
 	"tooltip-ca-createsource": "Crear o código fonte desta páxina",
@@ -201,6 +202,7 @@
 	"visualeditor-savedialog-label-report": "Informar sobre un problema",
 	"visualeditor-savedialog-label-resolve-conflict": "Resolver o conflito",
 	"visualeditor-savedialog-label-restore": "Restaurar a páxina",
+	"visualeditor-savedialog-label-resume-editing": "Continuar edición",
 	"visualeditor-savedialog-label-review": "Revisar os seus cambios",
 	"visualeditor-savedialog-label-review-good": "Volver ao formulario para gardar",
 	"visualeditor-savedialog-label-save": "Gardar a páxina",
@@ -217,11 +219,11 @@
 	"visualeditor-toolbar-cite-label": "Citar",
 	"visualeditor-toolbar-savedialog": "Gardar a páxina",
 	"visualeditor-usernamespacepagelink": "Project:Espazo de nomes de usuario",
+	"visualeditor-version-label": "Versión",
 	"visualeditor-viewpage-savewarning": "Está seguro de querer volver ao modo de lectura sen gardar primeiro?",
 	"visualeditor-viewpage-savewarning-discard": "Desbotar as edicións",
 	"visualeditor-viewpage-savewarning-keep": "Continuar editando",
 	"visualeditor-viewpage-savewarning-title": "Está seguro?",
 	"visualeditor-wikitext-warning": "Está usando o editor visual; o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|texto wiki]] non funciona aquí. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Texto wiki",
 	"visualeditor-wikitext-warning-title": "Detectouse texto wiki"
 }

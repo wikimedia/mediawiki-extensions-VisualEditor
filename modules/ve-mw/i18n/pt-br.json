@@ -80,7 +80,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "Adicionar uma categoria",
 	"visualeditor-dialog-meta-categories-options": "Opções",
 	"visualeditor-dialog-meta-categories-section": "Categorias",
-	"visualeditor-dialog-meta-categories-sortkey-label": "Ordenar esta página como se ele fosse chamado",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Ordenar esta página como se ela fosse chamada",
 	"visualeditor-dialog-meta-languages-code-label": "Código do idioma",
 	"visualeditor-dialog-meta-languages-label": "Idiomas",
 	"visualeditor-dialog-meta-languages-link-label": "Página ligada",
@@ -204,8 +204,8 @@
 	"visualeditor-settings-tool": "Configurações de página",
 	"visualeditor-toolbar-savedialog": "Salvar página",
 	"visualeditor-usernamespacepagelink": "Project:Página de usuário",
+	"visualeditor-version-label": "Versão",
 	"visualeditor-viewpage-savewarning": "Tem certeza que deseja voltar para a página sem salvar a edição?",
 	"visualeditor-wikitext-warning": "Você está usando o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|código wiki]] não funciona aqui. Clique \"{{MediaWiki:visualeditor-ca-editsource}}\" para editar a página no modo de código wiki – as alterações não-salvas serão perdidas.",
-	"visualeditor-wikitext-warning-link": "Help:Marcação wiki",
 	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado"
 }

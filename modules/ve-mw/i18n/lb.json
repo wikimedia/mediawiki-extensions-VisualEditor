@@ -11,6 +11,7 @@
 			"McDutchie"
 		]
 	},
+	"apihelp-visualeditoredit-param-minor": "Markéierung fir kleng Ännerung.",
 	"apihelp-visualeditoredit-param-summary": "Resumé änneren.",
 	"tooltip-ca-createsource": "De Quelltext vun dëser Säit uleeën",
 	"tooltip-ca-editsource": "De Quelltext vun dëser Säit änneren",
@@ -112,6 +113,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Ëmmer",
 	"visualeditor-dialog-meta-settings-toc-label": "Inhaltsverzeechnes weisen",
 	"visualeditor-dialog-meta-title": "Optiounen",
+	"visualeditor-dialog-reference-editing-reused": "Dës Referenz gëtt {{PLURAL:$1|eemol|$1 Mol}} op dëser Säit benotzt.",
 	"visualeditor-dialog-reference-options-group-label": "Dëse Grupp benotzen",
 	"visualeditor-dialog-reference-options-group-placeholder": "Allgemeng Referenzen",
 	"visualeditor-dialog-reference-options-name-label": "Nees benotze mat dësem Numm",
@@ -140,6 +142,9 @@
 	"visualeditor-dialog-transclusion-required-parameter": "Obligatorescht Feld",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Feld ass obligatoresch.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Zréck goen",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Trotzdeem virufueren",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Et {{PLURAL:$1|feelt een obligatoresche Parameter|feele(n) $1 obligatoresch Parameteren}}",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Sidd Dir sécher datt Dir virufuere wëllt ouni {{PLURAL:$2|de Parameter|d'Parametere(n)}} $1 auszefëllen?",
 	"visualeditor-dialog-transclusion-single-mode": "Optioune verstoppen",
 	"visualeditor-dialog-transclusion-title": "An dëser Säit dran",
 	"visualeditor-dialogbutton-media-tooltip": "Medien",
