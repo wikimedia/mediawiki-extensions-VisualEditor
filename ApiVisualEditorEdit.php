@@ -53,7 +53,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 		$api->execute();
 
-		return $api->getResultData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			return $api->getResult()->getResultData();
+		} else {
+			return $api->getResultData();
+		}
 	}
 
 	public function execute() {
