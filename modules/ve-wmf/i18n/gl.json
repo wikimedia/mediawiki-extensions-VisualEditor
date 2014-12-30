@@ -4,7 +4,8 @@
 			"Alison",
 			"Kscanne",
 			"Toliño",
-			"Amire80"
+			"Amire80",
+			"Elisardojm"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
@@ -17,5 +18,5 @@
 	"visualeditor-feedback-tool": "Deixe un comentario",
 	"visualeditor-help-label": "Ler a guía de usuario",
 	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/gl",
-	"visualeditor-help-title": "Guía de usuario sobre como utilizar o editor"
+	"visualeditor-help-title": "Guía para utilizar o editor"
 }
