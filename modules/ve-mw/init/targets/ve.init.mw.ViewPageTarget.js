@@ -242,6 +242,18 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
 
+		$( '#ca-watch, #ca-unwatch' ).on( 'watchpage.mw', function ( e, actionPerformed ) {
+			if ( !this.active && !this.activating ) {
+				return;
+			}
+			this.$checkboxes.filter( '#wpWatchthis' )
+				.prop( 'checked',
+					mw.user.options.get( 'watchdefault' ) ||
+					( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
+					actionPerformed === 'watch'
+				);
+		}.bind( this ) );
+
 		// User interface changes
 		this.transformPage();
 		this.hideReadOnlyContent();

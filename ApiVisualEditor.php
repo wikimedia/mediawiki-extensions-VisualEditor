@@ -492,7 +492,8 @@ class ApiVisualEditor extends ApiBase {
 							'notices' => $notices,
 							'checkboxes' => $checkboxes,
 							'links' => $links,
-							'protectedClasses' => implode( ' ', $protectedClasses )
+							'protectedClasses' => implode( ' ', $protectedClasses ),
+							'watched' => $user->isWatched( $page )
 						),
 						$parsed['result']
 					);

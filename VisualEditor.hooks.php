@@ -388,7 +388,6 @@ class VisualEditorHooks {
 		$pageLanguage = $out->getTitle()->getPageLanguage();
 
 		$vars['wgVisualEditor'] = array(
-			'isPageWatched' => $out->getUser()->isWatched( $out->getTitle() ),
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'svgMaxSize' => $out->getConfig()->get( 'SVGMaxSize' ),

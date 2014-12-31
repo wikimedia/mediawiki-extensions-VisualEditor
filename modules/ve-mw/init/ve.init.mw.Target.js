@@ -442,7 +442,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 				.prop( 'checked',
 					mw.user.options.get( 'watchdefault' ) ||
 					( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
-					mw.config.get( 'wgVisualEditor' ).isPageWatched
+					data.watched
 				);
 
 		this.baseTimeStamp = data.basetimestamp;
