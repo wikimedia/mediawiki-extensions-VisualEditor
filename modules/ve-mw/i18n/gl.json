@@ -20,6 +20,7 @@
 	"apihelp-visualeditoredit-param-basetimestamp": "Cando se grave, gardar co selo de tempo da revisión que foi editada. Usado para detectar conflitos de edición.",
 	"apihelp-visualeditoredit-param-cachekey": "Usar o resultado dunha petición previa de serializeforcache con esta chave. Invalida $1html.",
 	"apihelp-visualeditoredit-param-minor": "Bandeira de edición menor.",
+	"apihelp-visualeditoredit-param-needcheck": "Ó gardar, estableza este parámetro se a revisión pode ter problemas de roundtrip. Isto fará que a edición sexa marcada.",
 	"apihelp-visualeditoredit-param-oldid": "Número de revisión a usar. Por defecto á última revisión. Usar 0 para unha páxina nova.",
 	"apihelp-visualeditoredit-param-page": "A páxina para realizar accións.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Cando se grave, gardar co selo de tempo de cando se cargou a páxina. Usado para detectar conflitos de edición.",
