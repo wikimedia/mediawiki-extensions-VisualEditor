@@ -12,9 +12,11 @@
 			"Asaifm",
 			"Tarawneh",
 			"Meno25",
-			"Gagnabil"
+			"Gagnabil",
+			"Abanima"
 		]
 	},
+	"apihelp-visualeditoredit-param-summary": "ملخص التعديل",
 	"tooltip-ca-createsource": "إنشاء الكود المصدري لهذه الصفحة",
 	"tooltip-ca-editsource": "عدل الكود المصدري لهذه الصفحة",
 	"tooltip-ca-ve-edit": "عدل هذه الصفحة بالمحرر المرئي",
@@ -79,6 +81,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "انقل هذا التصنيف إلى هنا",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "تصنيف جديد",
 	"visualeditor-dialog-meta-categories-input-placeholder": "أضف التصنيف",
+	"visualeditor-dialog-meta-categories-missing": "هذا التصنيف ليس لديه صفحة وصف.",
 	"visualeditor-dialog-meta-categories-options": "خيارات",
 	"visualeditor-dialog-meta-categories-section": "تصنيفات",
 	"visualeditor-dialog-meta-categories-sortkey-label": "صنف هذه الصفحة تحت الاسم التالي",
@@ -124,6 +127,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "يمكن إظهار فهرس المحتويات عند وجود عنوان قسم واحد أو أكثر، إو إخفاء الفهرس كليا. بدون هذه العلامة، يظهر الفهرس تلقائيا عند وجود ثلاثة عناوين أقسام أو أكثر.",
 	"visualeditor-dialog-meta-settings-toc-label": "أظهر فهرس المحتويات",
 	"visualeditor-dialog-meta-title": "خيارات",
+	"visualeditor-dialog-reference-editing-reused": "هذا المرجع مستخدم {{PLURAL:$1|مرة واحدة|مرتين| $1 مرات|$1 مرة}} في هذه الصفحة.",
 	"visualeditor-dialog-reference-options-group-label": "استخدم هذه المجموعة",
 	"visualeditor-dialog-reference-options-group-placeholder": "مراجع عامة",
 	"visualeditor-dialog-reference-options-name-label": "أعد استخدامها بهذا الاسم",
@@ -237,6 +241,7 @@
 	"visualeditor-savedialog-warning-dirty": "ربما تعرض تحريرك للعطب – نرجو المراجعة قبل الحفظ.",
 	"visualeditor-saveerror": "حدث خطأ أثناء حفظ البيانات إلى الخادم: $1.",
 	"visualeditor-serializeerror": "خطأ في تحميل البيانات من الخادم: $1.",
+	"visualeditor-recreate": "لقد تم حذف هذه الصفحة بعد أن بدأت بتحريرها. اضغط على «$1» لإعادة إنشائها.",
 	"visualeditor-settings-tool": "إعدادات الصفحة",
 	"visualeditor-timeout": "المحرر غير متوفر حاليا. أتود تعديل المصدر مباشرة؟",
 	"visualeditor-toolbar-cite-label": "مرجع",
