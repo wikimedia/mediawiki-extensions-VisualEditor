@@ -428,7 +428,7 @@ class VisualEditorHooks {
 
 	/**
 	 * Conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
-	 * been registered by the UniversalLanguageSelector extension.
+	 * been registered by the UniversalLanguageSelector extension or the TemplateData extension.
 	 *
 	 * @param ResourceLoader $resourceLoader
 	 * @return boolean true
