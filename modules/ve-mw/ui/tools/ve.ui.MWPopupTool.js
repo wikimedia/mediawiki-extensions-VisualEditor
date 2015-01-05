@@ -197,8 +197,8 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 		// This can't be constructed until the editor has loaded as it uses special messages
 		this.feedback = new mw.Feedback( {
 			title: new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
-			bugsLink: new mw.Uri( 'https://bugzilla.wikimedia.org/enter_bug.cgi?product=VisualEditor&component=General' ),
-			bugsListLink: new mw.Uri( 'https://bugzilla.wikimedia.org/buglist.cgi?query_format=advanced&resolution=---&resolution=LATER&resolution=DUPLICATE&product=VisualEditor&list_id=166234' )
+			bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/create/?projects=VisualEditor' ),
+			bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' )
 		} );
 	}
 	this.feedback.launch();
