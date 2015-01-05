@@ -24,17 +24,14 @@
 }
 
 .ve-ui-mwSaveDialog-summary textarea {
-	border-radius: 0.25em 0.25em 0 0;
-	vertical-align: top;
-	margin: 0;
-	padding: 0.5em;
+	display: block;
 	resize: none;
 	height: 4em;
 	background-color: transparent;
 }
 
 .ve-ui-mwSaveDialog-foot {
-	margin: 0.5em;
+	margin: 0.5em 0;
 }
 
 .ve-ui-mwSaveDialog-options {
@@ -42,7 +39,6 @@
 	background-color: #f7f7f7;
 	border: solid 1px #ccc;
 	border-top: none;
-	border-radius: 0 0 0.25em 0.25em;
 	min-height: 3em;
 }
 
