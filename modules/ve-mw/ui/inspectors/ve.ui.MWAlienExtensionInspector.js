@@ -88,7 +88,7 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWAlienExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWAlienExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.next( function () {
 			this.$attributes.empty();
 			this.attributeInputs = {};
 		}, this );
