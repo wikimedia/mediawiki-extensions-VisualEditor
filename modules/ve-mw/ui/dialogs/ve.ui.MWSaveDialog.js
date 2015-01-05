@@ -359,7 +359,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	} );
 
 	// Byte counter in edit summary
-	this.editSummaryCountLabel = new OO.ui.LabelWidget ( {
+	this.editSummaryCountLabel = new OO.ui.LabelWidget( {
 		$: this.$,
 		classes: [ 've-ui-mwSaveDialog-editSummary-count' ],
 		label: String( this.editSummaryByteLimit ),
