@@ -62,7 +62,7 @@
 	"visualeditor-dialog-meta-categories-hidden": "Cla categurìa che l'è custruìda p'r an vèd'r-es in dal pàgini in dû la vin śuntèda.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Categorìi quacèdi",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Categoréi cumpâgni",
-	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Cla categoréia ché spôst-la ché",
+	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Cla categoréia ché spôstla ché",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Categoréia nōva",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Zûnta 'na categoréia",
 	"visualeditor-dialog-meta-categories-options": "Sernidùri",
@@ -198,10 +198,10 @@
 	"visualeditor-toolbar-cite-label": "Sitèr",
 	"visualeditor-toolbar-savedialog": "Sàlva la pàgina",
 	"visualeditor-usernamespacepagelink": "Project:spàsi dal nòm dl' utèint",
+	"visualeditor-version-label": "Versiòun",
 	"visualeditor-viewpage-savewarning": "Sī-v sicûr ch' a vlī turnèr indrē a la manéra 'd letûra sàinsa avér prìma salvê?",
 	"visualeditor-viewpage-savewarning-discard": "Ann fer chèś ai cambiamèint",
 	"visualeditor-viewpage-savewarning-keep": "Cuntinuèr l'editasiòun",
 	"visualeditor-wikitext-warning": "A sî dré a druèr VisualEditor - Al [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] al ne funsiòuna brìsa chè. Andè a clichèr \"{{int:visualeditor-ca-editsource}}\" per cambièr la pàgina in dla manéra wikitexte (i cambiamèint mìa salvè i andràn pèrs)",
-	"visualeditor-wikitext-warning-link": "Help:La marcadûra wiki",
 	"visualeditor-wikitext-warning-title": "Controlèda la marcadûra dal wikitext"
 }
