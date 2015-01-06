@@ -16,6 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
+	var widget = this;
+
 	// Config initialization
 	config = config || {};
 
@@ -34,6 +36,17 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	// Initialization
 	this.$element.addClass( 've-ui-mwLinkTargetInputWidget' );
 	this.lookupMenu.$element.addClass( 've-ui-mwLinkTargetInputWidget-menu' );
+
+	this.interwikiPrefixes = [];
+	this.interwikiPrefixesPromise = ve.init.target.constructor.static.apiRequest( {
+		action: 'query',
+		meta: 'siteinfo',
+		siprop: 'interwikimap'
+	} ).done( function ( data ) {
+		$.each( data.query.interwikimap, function ( index, interwiki ) {
+			widget.interwikiPrefixes.push( interwiki.prefix );
+		} );
+	} );
 };
 
 /* Inheritance */
@@ -102,21 +115,36 @@ ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
+	var widget = this, promiseAbortObject = { abort: function () {
+		// Do nothing. This is just so OOUI doesn't break due to abort being undefined.
+	} }, req;
+
 	if ( mw.Title.newFromText( this.value ) ) {
-		return ve.init.target.constructor.static.apiRequest( {
-			action: 'query',
-			generator: 'prefixsearch',
-			gpssearch: this.value,
-			gpsnamespace: 0,
-			prop: 'info|pageprops',
-			ppprop: 'disambiguation'
-		} );
+		return this.interwikiPrefixesPromise.then( function () {
+			var interwiki = widget.value.substring( 0, widget.value.indexOf( ':' ) );
+			if ( interwiki && interwiki !== '' ) {
+				return $.Deferred().resolve( { query: {
+					pages: [{
+						title: widget.value
+					}]
+				} } ).promise( promiseAbortObject );
+			} else {
+				req = ve.init.target.constructor.static.apiRequest( {
+					action: 'query',
+					generator: 'prefixsearch',
+					gpssearch: widget.value,
+					gpsnamespace: 0,
+					prop: 'info|pageprops',
+					ppprop: 'disambiguation'
+				} );
+				promiseAbortObject.abort = req.abort.bind( req ); // todo: ew
+				return req;
+			}
+		} ).promise( promiseAbortObject );
 	} else {
 		// Don't send invalid titles to the API.
 		// Just pretend it returned nothing so we can show the 'invalid title' section
-		return $.Deferred().resolve( {} ).promise( { abort: function () {
-			// Do nothing. This is just so OOUI doesn't break due to abort being undefined.
-		} } );
+		return $.Deferred().resolve( {} ).promise( promiseAbortObject );
 	}
 };
 
