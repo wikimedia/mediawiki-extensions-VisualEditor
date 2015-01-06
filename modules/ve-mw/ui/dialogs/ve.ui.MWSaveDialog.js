@@ -485,6 +485,16 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			this.editSummaryInput.focus();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'save' ) {
 		return new OO.ui.Process( function () {
