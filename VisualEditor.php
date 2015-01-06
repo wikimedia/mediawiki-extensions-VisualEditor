@@ -645,6 +645,9 @@ $wgResourceModules += array(
 
 			// TODO: add debugStyles to ResourceLoader
 			'lib/ve/src/ui/styles/ve.ui.DebugBar.css',
+
+			'lib/ve/src/themes/mediawiki/dialogs.css',
+			'lib/ve/src/themes/mediawiki/widgets.css',
 		),
 		'dependencies' => array(
 			'unicodejs',
