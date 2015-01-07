@@ -15,78 +15,60 @@ class ApiVisualEditor extends ApiBase {
 	 */
 	protected $veConfig;
 
+	/**
+	 * @var VirtualRESTServiceClient
+	 */
+	protected $serviceClient;
+
 	public function __construct( ApiMain $main, $name, Config $config ) {
 		parent::__construct( $main, $name );
 		$this->veConfig = $config;
-	}
-
-	/**
-	 * Parsoid HTTP proxy configuration for MWHttpRequest
-	 */
-	protected function getProxyConf() {
-		$parsoidHTTPProxy = $this->veConfig->get( 'VisualEditorParsoidHTTPProxy' );
-		if ( $parsoidHTTPProxy ) {
-			return array( 'proxy' => $parsoidHTTPProxy );
-		} else {
-			return array( 'noProxy' => true );
+		$fowardCookies = false;
+		if ( $config->get( 'VisualEditorParsoidForwardCookies' ) && !User::isEveryoneAllowed( 'read' ) ) {
+			$forwardCookies = RequestContext::getMain()->getRequest()->getHeader( 'Cookie' );
 		}
+		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( array() ) );
+		$this->serviceClient->mount( '/parsoid/', new ParsoidVirtualRESTService( array(
+			'URL' => $config->get( 'VisualEditorParsoidURL' ),
+			'prefix' => $config->get( 'VisualEditorParsoidPrefix' ),
+			'timeout' => $config->get( 'VisualEditorParsoidTimeout' ),
+			'HTTPProxy' => $config->get( 'VisualEditorParsoidHTTPProxy' ),
+			'forwardCookies' => $forwardCookies,
+		) ) );
 	}
 
-	protected function requestParsoid( $method, $title, $params ) {
-		$url = $this->veConfig->get( 'VisualEditorParsoidURL' ) . '/' .
-			$this->veConfig->get( 'VisualEditorParsoidPrefix' ) . '/' .
-			urlencode( $title->getPrefixedDBkey() );
-
-		$data = array_merge(
-			$this->getProxyConf(),
-			array(
-				'method' => $method,
-				'timeout' => $this->veConfig->get( 'VisualEditorParsoidTimeout' ),
-			)
+	private function requestParsoid( $method, $title, $params ) {
+		$request = array(
+			'method' => $method,
+			'url' => '/parsoid/local/v1/page/' .
+				urlencode( $title->getPrefixedDBkey() ) . '/html'
 		);
-
-		if ( $method === 'POST' ) {
-			$data['postData'] = $params;
+		if ( $method === 'GET' ) {
+			$request['query'] = $params;
 		} else {
-			$url = wfAppendQuery( $url, $params );
+			$request['body'] = $params;
 		}
-
-		$req = MWHttpRequest::factory( $url, $data );
-		// Forward cookies, but only if configured to do so and if there are read restrictions
-		if ( $this->veConfig->get( 'VisualEditorParsoidForwardCookies' )
-			&& !User::isEveryoneAllowed( 'read' )
-		) {
-			$req->setHeader( 'Cookie', $this->getRequest()->getHeader( 'Cookie' ) );
-		}
-		$status = $req->execute();
-		if ( $status->isOK() ) {
+		$response = $this->serviceClient->run( $request );
+		if ( $response['code'] === 200 && $response['error'] === "" ) {
 			// Pass thru performance data from Parsoid to the client, unless the response was
 			// served directly from Varnish, in  which case discard the value of the XPP header
 			// and use it to declare the cache hit instead.
-			$xCache = $req->getResponseHeader( 'X-Cache' );
+			$xCache = $response['headers']['x-cache'];
 			if ( is_string( $xCache ) && strpos( $xCache, 'hit' ) !== false ) {
 				$xpp = 'cached-response=true';
 			} else {
-				$xpp = $req->getResponseHeader( 'X-Parsoid-Performance' );
+				$xpp = $response['headers']['x-parsoid-performance'];
 			}
 			if ( $xpp !== null ) {
 				$resp = $this->getRequest()->response();
 				$resp->header( 'X-Parsoid-Performance: ' . $xpp );
 			}
-		} elseif ( $status->isGood() ) {
-			$this->dieUsage( $req->getContent(), 'parsoidserver-http-' . $req->getStatus() );
-		} elseif ( $errors = $status->getErrorsByType( 'error' ) ) {
-			$error = $errors[0];
-			$code = $error['message'];
-			if ( count( $error['params'] ) ) {
-				$message = $error['params'][0];
-			} else {
-				$message = 'MWHttpRequest error';
-			}
-			$this->dieUsage( "$message: " . $req->getContent(), 'parsoidserver-' . $code );
+		} elseif ( $response['error'] !== '' ) {
+			$this->dieUsage( 'parsoidserver-http-error: ' . $response['error'], $response['error'] );
+		} else { // error null, code not 200
+			$this->dieUsage( 'parsoidserver-http: HTTP ' . $response['code'], $response['code'] );
 		}
-		// TODO pass through X-Parsoid-Performance header, merge with getHTML above
-		return $req->getContent();
+		return $response['body'];
 	}
 
 	protected function getHTML( $title, $parserParams ) {
@@ -157,7 +139,7 @@ class ApiVisualEditor extends ApiBase {
 		}
 		return $this->requestParsoid( 'POST', $title,
 			array(
-				'content' => $html,
+				'html' => $html,
 				'oldid' => $parserParams['oldid'],
 			)
 		);
@@ -176,7 +158,7 @@ class ApiVisualEditor extends ApiBase {
 	protected function parseWikitextFragment( $title, $wikitext ) {
 		return $this->requestParsoid( 'POST', $title,
 			array(
-				'wt' => $wikitext,
+				'wikitext' => $wikitext,
 				'body' => 1,
 			)
 		);
