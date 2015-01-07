@@ -37,11 +37,10 @@ class ApiVisualEditor extends ApiBase {
 		) ) );
 	}
 
-	private function requestParsoid( $method, $title, $params ) {
+	private function requestParsoid( $method, $path, $params ) {
 		$request = array(
 			'method' => $method,
-			'url' => '/parsoid/local/v1/page/' .
-				urlencode( $title->getPrefixedDBkey() ) . '/html'
+			'url' => '/parsoid/local/v1/' . $path
 		);
 		if ( $method === 'GET' ) {
 			$request['query'] = $params;
@@ -93,7 +92,11 @@ class ApiVisualEditor extends ApiBase {
 			$restoring = $revision && !$revision->isCurrent();
 			$oldid = $parserParams['oldid'];
 
-			$content = $this->requestParsoid( 'GET', $title, $parserParams );
+			$content = $this->requestParsoid(
+				'GET',
+				'page/' . urlencode( $title->getPrefixedDBkey() ) . '/html',
+				$parserParams
+			);
 
 			if ( $content === false ) {
 				return false;
@@ -137,7 +140,9 @@ class ApiVisualEditor extends ApiBase {
 		if ( $parserParams['oldid'] === 0 ) {
 			$parserParams['oldid'] = '';
 		}
-		return $this->requestParsoid( 'POST', $title,
+		return $this->requestParsoid(
+			'POST',
+			'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() ),
 			array(
 				'html' => $html,
 				'oldid' => $parserParams['oldid'],
@@ -156,7 +161,9 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	protected function parseWikitextFragment( $title, $wikitext ) {
-		return $this->requestParsoid( 'POST', $title,
+		return $this->requestParsoid(
+			'POST',
+			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
 			array(
 				'wikitext' => $wikitext,
 				'body' => 1,
