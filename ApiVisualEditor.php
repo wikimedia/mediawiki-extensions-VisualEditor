@@ -23,7 +23,7 @@ class ApiVisualEditor extends ApiBase {
 	public function __construct( ApiMain $main, $name, Config $config ) {
 		parent::__construct( $main, $name );
 		$this->veConfig = $config;
-		$fowardCookies = false;
+		$forwardCookies = false;
 		if ( $config->get( 'VisualEditorParsoidForwardCookies' ) && !User::isEveryoneAllowed( 'read' ) ) {
 			$forwardCookies = RequestContext::getMain()->getRequest()->getHeader( 'Cookie' );
 		}
