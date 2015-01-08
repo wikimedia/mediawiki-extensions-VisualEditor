@@ -176,6 +176,8 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, 
 	imgModel.cacheOriginalImageAttributes( attrs );
 
 	imgModel.setImageSource( attrs.src );
+	imgModel.setFilename( new mw.Title( attrs.resource.replace( /^(\.+\/)*/, '' ) ).getMainText() );
+
 	imgModel.setImageHref( attrs.href );
 
 	// Collect all the information
@@ -220,7 +222,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, 
  */
 ve.dm.MWImageModel.prototype.getHashObject = function () {
 	var hash = {
-		normalizedSource: this.getNormalizedImageSource(),
+		filename: this.getFilename(),
 		altText: this.getAltText(),
 		type: this.getType(),
 		alignment: this.getAlignment(),
@@ -260,7 +262,7 @@ ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
  * @param {Object} [dimensions] New dimensions of the image
  */
 ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) {
-	var newDimensions, remoteFilename,
+	var newDimensions,
 		imageModel = this;
 
 	if ( attrs.mediaType ) {
@@ -271,7 +273,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 	}
 	if ( attrs.resource ) {
 		this.setImageResourceName( attrs.resource );
-		remoteFilename = attrs.resource.replace( /^(\.+\/)*/, '' );
+		this.setFilename( new mw.Title( attrs.resource.replace( /^(\.+\/)*/, '' ) ).getMainText() );
 	}
 
 	if ( attrs.src ) {
@@ -285,8 +287,8 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 	this.scalable.clearMinDimensions();
 
 	// Call for updated scalable
-	if ( remoteFilename ) {
-		ve.dm.MWImageNode.static.getScalablePromise( remoteFilename ).done( function ( info ) {
+	if ( this.getFilename() ) {
+		ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( function ( info ) {
 			imageModel.scalable.setOriginalDimensions( {
 				width: info.width,
 				height: info.height
@@ -1109,6 +1111,22 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 
 		} );
 	}
+};
+
+/**
+ * Set the filename of the current image
+ * @param {string} filename Image filename
+ */
+ve.dm.MWImageModel.prototype.setFilename = function ( filename ) {
+	this.filename = filename;
+};
+
+/**
+ * Get the filename of the current image
+ * @returns {string} filename Image filename
+ */
+ve.dm.MWImageModel.prototype.getFilename = function () {
+	return this.filename;
 };
 
 /**

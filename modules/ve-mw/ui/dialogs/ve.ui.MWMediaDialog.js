@@ -207,11 +207,19 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Define fieldsets for image settings
 
+	// Filename
+	this.filenameFieldset = new OO.ui.FieldsetLayout( {
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-content-filename' ),
+		icon: 'picture'
+	} );
+
 	// Caption
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
-		icon: 'parameter'
+		icon: 'parameter',
+		classes: [ 've-ui-mwMediaDialog-caption-fielset']
 	} );
 
 	// Alt text
@@ -370,6 +378,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Initialization
 	this.mediaSearchPanel.$element.append( this.search.$element );
 	this.generalSettingsPage.$element.append(
+		this.filenameFieldset.$element,
 		this.captionFieldset.$element,
 		altTextFieldset.$element
 	);
@@ -1070,6 +1079,11 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	// Ignore the following changes in validation while we are
 	// setting up the initial tools according to the model state
 	this.isSettingUpModel = true;
+
+	// Filename
+	this.filenameFieldset.setLabel(
+		this.imageModel.getFilename()
+	);
 
 	// Size widget
 	this.sizeErrorLabel.$element.hide();

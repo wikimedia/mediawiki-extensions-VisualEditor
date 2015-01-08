@@ -60,3 +60,8 @@
 .ve-ui-mwMediaSearchWidget .oo-ui-searchWidget-results {
 	padding-right: 0;
 }
+
+/* HACK: Override ooui specific 2em top margin */
+.ve-ui-mwMediaDialog-caption-fielset.oo-ui-labelElement.oo-ui-fieldsetLayout {
+	margin-top: 0;
+}

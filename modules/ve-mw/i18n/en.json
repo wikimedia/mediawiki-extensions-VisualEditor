@@ -74,6 +74,7 @@
 	"visualeditor-dialog-media-change-image": "Change image",
 	"visualeditor-dialog-media-choose-image": "Use this image",
 	"visualeditor-dialog-media-content-section": "Caption",
+	"visualeditor-dialog-media-content-filename": "File name",
 	"visualeditor-dialog-media-dimensionseparator": " × ",
 	"visualeditor-dialog-media-goback": "Back",
 	"visualeditor-dialog-media-info-artist": "Uploaded by $1",

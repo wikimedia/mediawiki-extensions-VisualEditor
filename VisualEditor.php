@@ -1006,6 +1006,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-alttext-section',
 			'visualeditor-dialog-media-change-image',
 			'visualeditor-dialog-media-choose-image',
+			'visualeditor-dialog-media-content-filename',
 			'visualeditor-dialog-media-content-section',
 			'visualeditor-dialog-media-dimensionseparator',
 			'visualeditor-dialog-media-goback',
