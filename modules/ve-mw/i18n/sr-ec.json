@@ -82,7 +82,7 @@
 	"visualeditor-dialog-meta-languages-section": "Језици",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "Алтернативни приказ наслова",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Алтернативни приказ наслова омогућава да наслов странице буде другачији од назива саме странице.",
-	"visualeditor-dialog-meta-settings-hiddencat-help": "Можете онемогућити да се ова категорија приказује у спсиску категорија страница на којима се налази. Ово је корисно за администрацијске категорије које нису од значаја за већину читалаца.",
+	"visualeditor-dialog-meta-settings-hiddencat-help": "Можете онемогућити да се ова категорија приказује у списку категорија страница на којима се налази. Ово је корисно за администрацијске категорије које нису од значаја за већину читалаца.",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Скривена категорија",
 	"visualeditor-dialog-meta-settings-index-default": "Подразумевано",
 	"visualeditor-dialog-meta-settings-index-disable": "Не",
