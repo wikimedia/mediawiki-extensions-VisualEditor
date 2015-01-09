@@ -10,8 +10,7 @@
  *
  * @class
  * @abstract
- * @extends OO.ui.Widget
- * @mixins OO.ui.IndicatorElement
+ * @extends OO.ui.ButtonWidget
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -25,10 +24,7 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	config = ve.extendObject( { indicator: 'down' }, config );
 
 	// Parent constructor
-	OO.ui.Widget.call( this, config );
-
-	// Mixin constructors
-	OO.ui.IndicatorElement.call( this, config );
+	OO.ui.ButtonWidget.call( this, config );
 
 	// Properties
 	this.name = config.item.name;
@@ -37,20 +33,14 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	this.metaItem = config.item.metaItem;
 	this.isHidden = config.hidden;
 	this.isMissing = config.missing;
-	this.menuOpen = false;
-	this.$label = this.$( '<span>' );
-	this.$categoryItem = this.$( '<div>' );
 
 	// Events
-	this.$categoryItem.on( {
-		click: this.onClick.bind( this ),
+	this.$button.on( {
 		mousedown: this.onMouseDown.bind( this )
 	} );
 
 	// Initialization
-	this.$label
-		.addClass( 've-ui-mwCategoryItemWidget-label' )
-		.text( config.redirectTo || this.value );
+	this.setLabel( config.redirectTo || this.value );
 	if ( config.redirectTo ) {
 		ve.init.platform.linkCache.styleElement( mw.Title.newFromText(
 			config.redirectTo,
@@ -60,17 +50,12 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 		ve.init.platform.linkCache.styleElement( this.name, this.$label );
 	}
 
-	this.$categoryItem
-		.addClass( 've-ui-mwCategoryItemWidget-button' )
-		.append( this.$label, this.$indicator );
-	this.$element
-		.addClass( 've-ui-mwCategoryItemWidget' )
-		.append( this.$categoryItem );
+	this.$element.addClass( 've-ui-mwCategoryItemWidget' );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWCategoryItemWidget, OO.ui.Widget );
+OO.inheritClass( ve.ui.MWCategoryItemWidget, OO.ui.ButtonWidget );
 
 OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.IndicatorElement );
 

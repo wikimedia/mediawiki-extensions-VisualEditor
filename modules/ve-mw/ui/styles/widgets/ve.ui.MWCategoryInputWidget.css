@@ -13,9 +13,5 @@
 }
 
 .ve-ui-mwCategoryInputWidget input {
-	border-radius: 2em;
-	font-size: 1.05em;
-	margin-top: 0;
-	padding-left: 0.75em;
-	padding-right: 0.75em;
+	line-height: 1.35em;
 }
