@@ -70,7 +70,7 @@
 	"visualeditor-dialog-meta-languages-label": "Sprog",
 	"visualeditor-dialog-meta-languages-link-label": "Linket side",
 	"visualeditor-dialog-meta-languages-name-label": "Sprog",
-	"visualeditor-dialog-meta-languages-readonlynote": "Dette er en liste over sider på andre sprog, der er knyttet til denne side; foreløbig, kan den kun redigeres i wikikode tilstand eller på Wikidata.",
+	"visualeditor-dialog-meta-languages-readonlynote": "Dette er en liste over sider på andre sprog, der er knyttet til denne side. Foreløbig kan den kun redigeres i wikikode-tilstand eller på Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Sprog",
 	"visualeditor-dialog-meta-settings-index-default": "Standard",
 	"visualeditor-dialog-meta-settings-index-disable": "Nej",
@@ -182,8 +182,8 @@
 	"visualeditor-settings-tool": "Sideindstillinger",
 	"visualeditor-toolbar-savedialog": "Gem side",
 	"visualeditor-usernamespacepagelink": "Project:Brugernavnerummet",
+	"visualeditor-version-label": "Version",
 	"visualeditor-viewpage-savewarning": "Er du sikker på du ønsker at gå forlade editoren uden at gemme først?",
 	"visualeditor-wikitext-warning": "Du bruger VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] virker ikke her. Klik på \"{{MediaWiki:visualeditor-ca-editsource}}\"  for at redigere siden i wikitekst tilstand – ændringer der ikke er gemt vil gå tabt.",
-	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Wikitekst markup opdaget"
 }
