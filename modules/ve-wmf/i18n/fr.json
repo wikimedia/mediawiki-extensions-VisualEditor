@@ -38,7 +38,7 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ÉditeurVisuel : basculé]]",
 	"tag-visualeditor-switched-description": "L’utilisateur a commencé à modifier en utilisant VisualEditor puis est passé sur l’éditeur wikitexte.",
 	"visualeditor-feedback-link": "Project:ÉditeurVisuel/Avis",
-	"visualeditor-feedback-tool": "Laisser un avis à propos de l’ÉditeurVisuel.",
+	"visualeditor-feedback-tool": "Laisser un avis à propos de l’ÉditeurVisuel",
 	"visualeditor-help-label": "Lire le guide utilisateur",
 	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/fr",
 	"visualeditor-help-title": "Guide sur la manière d’utiliser l’éditeur"
