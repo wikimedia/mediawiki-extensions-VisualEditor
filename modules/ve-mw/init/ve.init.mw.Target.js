@@ -991,7 +991,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
  * @returns {boolean} Loading has been started
 */
 ve.init.mw.Target.prototype.load = function ( additionalModules ) {
-	var data, start, xhr, target = this;
+	var data, start, xhr, modulesPromise, additionalModulesPromise, target = this;
 
 	// Prevent duplicate requests
 	if ( this.loading ) {
@@ -999,11 +999,16 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	}
 	this.events.timings.activationStart = ve.now();
 	// Start loading the module immediately
-	mw.loader.using(
-		// Wait for site and user JS before running plugins
-		this.modules.concat( additionalModules || [] ),
-		ve.init.mw.Target.onModulesReady.bind( this )
-	);
+	modulesPromise = mw.loader.using( this.modules );
+	additionalModulesPromise = mw.loader.using( additionalModules || [] );
+
+	modulesPromise.done( function () {
+		// Wait for site and user JS before running plugins.
+		// These modules could fail to load, proceed even if they do.
+		additionalModulesPromise.always( function () {
+			ve.init.mw.Target.onModulesReady.call( target );
+		} );
+	} );
 
 	data = {
 		action: 'visualeditor',
