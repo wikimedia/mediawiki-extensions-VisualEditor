@@ -115,7 +115,7 @@
 					deferred = $.Deferred();
 					promises.push( deferred.promise() );
 					this.queue.push( {
-						add: new ve.dm.MWTransclusionContentModel( this, part, 'data' ),
+						add: new ve.dm.MWTransclusionContentModel( this, part ),
 						deferred: deferred
 					} );
 				}
