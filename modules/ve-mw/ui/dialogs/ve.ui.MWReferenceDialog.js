@@ -159,7 +159,7 @@ ve.ui.MWReferenceDialog.prototype.canApply = function () {
 /**
  * Handle reference surface change events
  */
-ve.ui.MWReferenceDialog.prototype.onDocumentTransact = function () {
+ve.ui.MWReferenceDialog.prototype.onSurfaceHistory = function () {
 	var hasContent = this.documentHasContent();
 
 	this.actions.setAbilities( {
@@ -254,7 +254,9 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	);
 
 	// Events
-	this.referenceModel.getDocument().connect( this, { transact: 'onDocumentTransact' } );
+	this.referenceSurface.getSurface().getModel().connect( this, {
+		history: this.onSurfaceHistory.bind( this )
+	} );
 
 	// Initialization
 	this.originalGroup = this.referenceModel.getGroup();

@@ -850,8 +850,8 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 
 	// Events
 
-	this.captionSurface.getSurface().getModel().getDocument().connect( this, {
-		transact: this.checkChanged.bind( this )
+	this.captionSurface.getSurface().getModel().connect( this, {
+		history: this.checkChanged.bind( this )
 	} );
 };
 
