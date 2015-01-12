@@ -46,8 +46,7 @@ $wgAutoloadClasses['VisualEditorViewPageTargetInitModule'] =
 $wgMessagesDirs['VisualEditor'] = array(
 	__DIR__ . '/lib/ve/i18n',
 	__DIR__ . '/modules/ve-mw/i18n',
-	__DIR__ . '/modules/ve-wmf/i18n',
-	__DIR__ . '/lib/ve/lib/oojs-ui/i18n'
+	__DIR__ . '/modules/ve-wmf/i18n'
 );
 
 // Register API modules
