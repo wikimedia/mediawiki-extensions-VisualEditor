@@ -1097,7 +1097,7 @@ ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = null;
 ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 	this.toolbarSaveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
-		flags: [ 'constructive', 'primary' ],
+		flags: [ 'progressive', 'primary' ],
 		disabled: !this.restoring
 	} );
 
