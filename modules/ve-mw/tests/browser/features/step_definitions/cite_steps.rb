@@ -96,7 +96,7 @@ Then(/^diff view should show the Journal citation added$/) do
     page.wait_until(10) do
       page.diff_view.include? 'Cite VisualEditor Test'
     end
-    expect(page.diff_view).to match '<ref>{{Cite journal|title = Journal title|date = Journal Source date}}</ref>Cite VisualEditor Test'
+    expect(page.diff_view).to match '<ref>{{Cite journal|url = Journal title|title = Journal Source date|last = Journal Last Name|first = Journal First Name|date = Journal Source Date|journal = Journal Journal|accessdate = Journal Access Date|doi = Journal DOI}}</ref>Cite VisualEditor Test'
   end
 end
 
