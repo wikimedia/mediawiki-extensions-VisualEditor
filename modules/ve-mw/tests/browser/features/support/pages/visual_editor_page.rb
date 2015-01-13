@@ -124,7 +124,7 @@ class VisualEditorPage
   a(:review_changes, css: '.oo-ui-processDialog-actions-other > div:nth-child(1) > a:nth-child(1)')
   span(:review_failed, text: 'No changes to review')
   div(:right_navigation, id: 'p-views')
-  span(:save_page, class: 'oo-ui-labelElement-label', text: 'Save page')
+  a(:save_page, css: '.ve-init-mw-viewPageTarget-toolbar-actions .oo-ui-buttonElement-button')
   div(:save_enabled, css: 'div.ve-init-mw-viewPageTarget-toolbar-actions > div.oo-ui-flaggedElement-constructive.oo-ui-widget-enabled')
   a(:second_reference, text: '[1]', index: 2)
   span(:second_save_page, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
