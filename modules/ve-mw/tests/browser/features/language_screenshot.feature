@@ -38,7 +38,6 @@ Feature: Language Screenshot
     When I click Save page
     Then I should see save changes dialog box
 
-  @language_screenshot
   Scenario: VisualEditor_Page_Settings
     Given I am editing language screenshot page
       And I click the hamburger menu
