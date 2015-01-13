@@ -688,6 +688,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-size-originalsize-error',
 			'visualeditor-dimensionswidget-px',
 			'visualeditor-dimensionswidget-times',
+			'visualeditor-find-and-replace-done',
 			'visualeditor-find-and-replace-find-text',
 			'visualeditor-find-and-replace-match-case',
 			'visualeditor-find-and-replace-regular-expression',
