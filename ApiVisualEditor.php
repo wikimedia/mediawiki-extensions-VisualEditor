@@ -187,7 +187,15 @@ class ApiVisualEditor extends ApiBase {
 		);
 
 		$api->execute();
-		$result = $api->getResultData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$result = $api->getResult()->getResultData();
+			// Transform content nodes to '*'
+			$result = ApiResult::transformForBC( $result );
+			// Remove any metadata keys from the links array
+			$result = ApiResult::removeMetadata( $result );
+		} else {
+			$result = $api->getResultData();
+		}
 		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
 		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
 			$result['parse']['categorieshtml']['*'] : false;
@@ -232,7 +240,13 @@ class ApiVisualEditor extends ApiBase {
 			false // enable write?
 		);
 		$api->execute();
-		$result = $api->getResultData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$result = $api->getResult()->getResultData();
+			// Transform content nodes to '*'
+			$result = ApiResult::transformForBC( $result );
+		} else {
+			$result = $api->getResultData();
+		}
 		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
 			return array( 'result' => 'fail' );
 		}
@@ -273,7 +287,13 @@ class ApiVisualEditor extends ApiBase {
 		);
 
 		$api->execute();
-		$result = $api->getResultData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$result = $api->getResult()->getResultData();
+			// Remove any metadata keys from the langlinks array
+			$result = ApiResult::removeMetadata( $result );
+		} else {
+			$result = $api->getResultData();
+		}
 		if ( !isset( $result['query']['pages'][$title->getArticleID()]['langlinks'] ) ) {
 			return false;
 		}
