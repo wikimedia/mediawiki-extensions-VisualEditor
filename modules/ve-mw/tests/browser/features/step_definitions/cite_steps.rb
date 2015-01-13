@@ -118,6 +118,18 @@ Then(/^diff view should show the Website citation added$/) do
   end
 end
 
+Then(/^I should see a Continue anyway button$/) do
+  expect(on(VisualEditorPage).required_parameters_continue_anyway_element.when_present).to be_visible
+end
+
+Then(/^I should see a Go back button$/) do
+  expect(on(VisualEditorPage).required_parameters_go_back_element.when_present).to be_visible
+end
+
+Then(/^I should see a Required parameters missing error$/) do
+  expect(on(VisualEditorPage).required_parameters_missing_message_element.when_present).to be_visible
+end
+
 Then(/^I should see the General references$/) do
   expect(on(VisualEditorPage).cite_group_name_textarea_element).to be_visible
 end
