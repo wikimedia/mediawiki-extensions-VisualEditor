@@ -67,6 +67,12 @@ Feature: VisualEditor Cite
     When I click Journal
       And I fill in the first textarea with "Journal title"
       And I fill in the second textarea with "Journal Source date"
+      And I fill in the third textarea with "Journal Last Name"
+      And I fill in the fourth textarea with "Journal First Name"
+      And I fill in the fifth textarea with "Journal Source Date"
+      And I fill in the sixth textarea with "Journal Journal"
+      And I fill in the seventh textarea with "Journal Access Date"
+      And I fill in the eighth textarea with "Journal DOI"
       And the Journal input field titles are in the correct order
       And I click Insert Citation
       And I click Save page
