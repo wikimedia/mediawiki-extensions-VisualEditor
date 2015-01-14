@@ -84,3 +84,11 @@ Feature: VisualEditor Cite
     Then I should see the VisualEditor interface
       And I should see the Options use this group text
       And I should see the General references
+
+  Scenario: Error message for required field not present
+    When I click Journal
+      And I fill in the first textarea with "Journal title"
+      And I click Insert Citation
+    Then I should see a Required parameters missing error
+      And I should see a Go back button
+      And I should see a Continue anyway button

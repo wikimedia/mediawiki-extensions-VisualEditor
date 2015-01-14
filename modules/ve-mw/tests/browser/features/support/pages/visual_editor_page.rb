@@ -171,6 +171,9 @@ class VisualEditorPage
     div(:extension_reference, class: 've-ui-mwReferenceResultWidget-shield', frame: frame)
     span(:existing_reference, text: 'Use an existing reference', frame: frame)
     a(:remove_template, title: 'Remove template', frame: frame)
+    span(:required_parameters_continue_anyway, text: 'Continue anyway', frame: frame)
+    span(:required_parameters_go_back, text: 'Go back', frame: frame)
+    span(:required_parameters_missing_message, text: 'Required parameters missing', frame: frame)
     div(:suggestion_list, class: 've-ui-mwTitleInputWidget-menu')
     span(:another_save_page, class: 'oo-ui-labelElement-label', text: 'Save page', frame: frame)
     div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) # ALSO USED IN LANGUAGE SCREENSHOT
