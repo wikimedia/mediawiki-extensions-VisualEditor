@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arystanbek"
+			"Arystanbek",
+			"Нұрлан Рахымжанов"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Өңдеу түйіндемесі.",
@@ -106,7 +107,7 @@
 	"visualeditor-dialog-reference-options-name-label": "Бұл атауды қайта қолдану",
 	"visualeditor-dialog-reference-options-section": "Параметрлер",
 	"visualeditor-dialog-reference-title": "Дереккөз",
-	"visualeditor-dialog-reference-useexisting-label": "Бұрыңғы қайнарын пайдалану",
+	"visualeditor-dialog-reference-useexisting-label": "Бұрынғы қайнарын пайдалану",
 	"visualeditor-dialog-reference-useexisting-tool": "Қайта қолдану",
 	"visualeditor-dialog-referenceslist-title": "Дереккөздер тізімі",
 	"visualeditor-dialog-template-title": "Үлгі",
@@ -221,6 +222,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Өңдеуді жалғастыру",
 	"visualeditor-viewpage-savewarning-title": "Сенімдісіз бе?",
 	"visualeditor-wikitext-warning": "Сіз VisualEditor қолданудасыз - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|уикимәтін]] мұнда жұмыс істемейді. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-title}}\" дегенді таңдаңыз.",
-	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "Уикимәтін белгі салуы табылды"
 }
