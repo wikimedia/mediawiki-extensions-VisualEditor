@@ -29,8 +29,9 @@ ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 	this.dimensions = {};
 	this.$thumb = this.buildThumbnail();
 	this.$overlay = this.$( '<div>' );
-
 	this.row = null;
+	// Store the thumbnail url
+	this.thumbUrl = ve.getProp( this.data.imageinfo, 0, 'thumburl' );
 
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
@@ -63,7 +64,6 @@ ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 OO.inheritClass( ve.ui.MWMediaResultWidget, OO.ui.OptionWidget );
 
 /* Methods */
-
 /** */
 ve.ui.MWMediaResultWidget.prototype.onThumbnailLoad = function () {
 	this.$thumb.first().addClass( 've-ui-texture-transparency' );
@@ -94,14 +94,12 @@ ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
 		$thumb = this.$( '<img>' );
 
 	// Preload image
-	$thumb.on( {
-		load: this.onThumbnailLoad.bind( this ),
-		error: this.onThumbnailError.bind( this )
-	} );
-
 	$thumb
-		.attr( 'src', info.thumburl )
-		.addClass( 've-ui-mwMediaResultWidget-thumbnail' );
+		.addClass( 've-ui-mwMediaResultWidget-thumbnail' )
+		.on( {
+			load: this.onThumbnailLoad.bind( this ),
+			error: this.onThumbnailError.bind( this )
+		} );
 
 	if ( info.mediatype === 'AUDIO' ) {
 		// HACK: We are getting the wrong information from the
@@ -132,6 +130,14 @@ ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
 	$thumb.css( this.dimensions );
 
 	return $thumb;
+};
+
+/**
+ * Replace the empty .src attribute of the image with the
+ * actual src.
+ */
+ve.ui.MWMediaResultWidget.prototype.lazyLoad = function () {
+	this.$thumb.attr( 'src', this.thumbUrl );
 };
 
 /**
@@ -174,25 +180,23 @@ ve.ui.MWMediaResultWidget.prototype.calculateThumbDimensions = function ( imageD
 		ratio = imageDimensions.width / imageDimensions.height;
 	// Rules of resizing:
 	// (1) Images must have height = this.initialSize
-	// (2) If after resize image width is larger than 3*this.width
-	//   ( which is about the size of the window ) the image is
-	//   scaled down to width = 3*this.width
+	// (2) If after resize image width is larger than maxWidth
+	//   the image is scaled down to width = 3*this.width
 	// (3) Smaller images do not scale up
 	//     * If image height < this.initialSize, add padding and center
 	//       the image vertically
 	//     * If image width < this.initialSize, add a fixed padding to both
 	//       sides.
+	//     This is done in 'calculateWrapperPadding'
 	// First scale all images based on height = this.initialSize
 	dimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
 		// Image thumb size
 		imageDimensions,
 		// Bounding box
 		{
-			width: this.initialSize,
+			width: maxWidth,
 			height: this.initialSize
-		},
-		// Lock to height
-		'height'
+		}
 	);
 
 	// Check if image width is larger than maxWidth
@@ -252,4 +256,12 @@ ve.ui.MWMediaResultWidget.prototype.setRow = function ( row ) {
  */
 ve.ui.MWMediaResultWidget.prototype.getRow = function () {
 	return this.row;
+};
+
+/**
+ * Check if the image has a src attribute already
+ * @returns {boolean} Thumbnail has its source attribute set
+ */
+ve.ui.MWMediaResultWidget.prototype.hasSrc = function () {
+	return !!this.$thumb.attr( 'src' );
 };
