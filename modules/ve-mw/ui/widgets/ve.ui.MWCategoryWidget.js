@@ -38,9 +38,11 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.input = new ve.ui.MWCategoryInputWidget( this, {
 		$: this.$, $overlay: config.$overlay
 	} );
+	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( 14 ) === -1;
+	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )['14'] + ':';
 
 	// Events
-	this.input.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
+	this.input.connect( this, { choose: 'onInputChoose' } );
 	this.popup.connect( this, {
 		removeCategory: 'onRemoveCategory',
 		updateSortkey: 'onUpdateSortkey',
@@ -84,32 +86,58 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
 /* Methods */
 
 /**
- * Handle menu item select event.
+ * Handle input 'choose' event.
  *
- * @method
- * @param {OO.ui.MenuOptionWidget} item Selected item
+ * @param {OO.ui.MenuOptionWidget|null} item Selected item
  */
-ve.ui.MWCategoryWidget.prototype.onLookupMenuItemChoose = function ( item ) {
+ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 	var categoryItem,
 		value = item && item.getData(),
-		categoryWidget = this;
+		widget = this;
 
 	if ( value && value !== '' ) {
 		// Add new item
-		categoryItem = this.input.getCategoryItemFromValue( value );
+		categoryItem = this.getCategoryItemFromValue( value );
 		this.queryCategoryStatus( [categoryItem.name] ).done( function ( normalisedTitles ) {
 			// Remove existing items by name
 			var toRemove = mw.Title.newFromText( categoryItem.name ).getMainText();
-			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categories, toRemove ) ) {
-				categoryWidget.categories[toRemove].metaItem.remove();
+			if ( Object.prototype.hasOwnProperty.call( widget.categories, toRemove ) ) {
+				widget.categories[toRemove].metaItem.remove();
 			}
 			categoryItem.name = normalisedTitles[categoryItem.name] || categoryItem.name;
-			categoryWidget.emit( 'newCategory', categoryItem );
+			widget.emit( 'newCategory', categoryItem );
 		} );
-
-		// Reset input
-		this.input.setValue( '' );
 	}
+};
+
+/**
+ * Get a category item.
+ *
+ * @param {string} value Category name
+ * @returns {Object} Category item with name, value and metaItem properties
+ */
+ve.ui.MWCategoryWidget.prototype.getCategoryItemFromValue = function ( value ) {
+	var title;
+
+	// Normalize
+	title = mw.Title.newFromText( this.categoryPrefix + value );
+	if ( title ) {
+		return {
+			name: title.getPrefixedText(),
+			value: title.getMainText(),
+			metaItem: {}
+		};
+	}
+
+	if ( this.forceCapitalization ) {
+		value = value.slice( 0, 1 ).toUpperCase() + value.slice( 1 );
+	}
+
+	return {
+		name: this.categoryPrefix + value,
+		value: value,
+		metaItem: {}
+	};
 };
 
 /**

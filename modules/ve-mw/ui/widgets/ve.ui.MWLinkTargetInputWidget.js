@@ -10,7 +10,7 @@
  *
  * @class
  * @extends ve.ui.LinkTargetInputWidget
- * @mixins OO.ui.LookupInputWidget
+ * @mixins OO.ui.LookupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -23,13 +23,10 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	ve.ui.LinkTargetInputWidget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.LookupInputWidget.call( this, this, config );
+	OO.ui.LookupElement.call( this, config );
 
 	// Properties
 	this.annotation = null;
-
-	// Events
-	this.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwLinkTargetInputWidget' );
@@ -40,20 +37,17 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 
 OO.inheritClass( ve.ui.MWLinkTargetInputWidget, ve.ui.LinkTargetInputWidget );
 
-OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupInputWidget );
+OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupElement );
 
 /* Methods */
 
 /**
- * Handle menu item select event.
+ * @inheritdoc
  *
  * If no item is selected then the input must be invalid, so clear the annotation.
  * We shouldn't just leave the previous annotation as the user has no way of knowing
  * what that might be. For example if "Foo{}Bar" is typed, this.annotation will be
  * a link to "Foo".
- *
- * @method
- * @param {OO.ui.MenuOptionWidget|null} item Selected item
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	this.closeLookupMenu();
@@ -126,7 +120,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
  * @method
  * @param {Mixed} data Response from server
  */
-ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
+ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
 	return data.query && data.query.pages || {};
 };
 
@@ -136,7 +130,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheItemFromData = function ( 
  * @param {Object} data Query result
  * @returns {OO.ui.MenuOptionWidget[]} Menu items
  */
-ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
+ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
 	var i, len, item, pageExistsExact, pageExists, index, matchingPage,
 		menu$ = this.lookupMenu.$,
 		items = [],
@@ -287,7 +281,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.initializeLookupMenuSelection = function
 	item = this.lookupMenu.getSelectedItem();
 	if ( !item ) {
 		// Parent method
-		OO.ui.LookupInputWidget.prototype.initializeLookupMenuSelection.call( this );
+		OO.ui.LookupElement.prototype.initializeLookupMenuSelection.call( this );
 	}
 
 	// Update annotation to match selected item

@@ -10,7 +10,7 @@
  *
  * @class
  * @extends OO.ui.TextInputWidget
- * @mixins OO.ui.LookupInputWidget
+ * @mixins OO.ui.LookupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -24,13 +24,10 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	OO.ui.TextInputWidget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.LookupInputWidget.call( this, this, config );
+	OO.ui.LookupElement.call( this, config );
 
 	// Properties
 	this.namespace = config.namespace || null;
-
-	// Events
-	this.lookupMenu.connect( this, { choose: 'onLookupMenuItemChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwTitleInputWidget' );
@@ -41,15 +38,12 @@ ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 
 OO.inheritClass( ve.ui.MWTitleInputWidget, OO.ui.TextInputWidget );
 
-OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupInputWidget );
+OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupElement );
 
 /* Methods */
 
 /**
- * Handle menu item select event.
- *
- * @method
- * @param {OO.ui.MenuOptionWidget} item Selected item
+ * @inheritdoc
  */
 ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	this.closeLookupMenu();
@@ -86,14 +80,14 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWTitleInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
+ve.ui.MWTitleInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
 	return data[1] || [];
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWTitleInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
+ve.ui.MWTitleInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
 	var i, len, title, value,
 		menu$ = this.lookupMenu.$,
 		items = [],
