@@ -18,10 +18,11 @@
 }
 
 .ve-ui-mwMediaDialog-panel-imageinfo-main {
-	margin-bottom: 1.5em;
+	margin-bottom: 1em;
 }
 
 .ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-thumb img {
+	margin-bottom: 1em;
 	max-height: none;
 }
 
@@ -45,7 +46,6 @@
 
 .ve-ui-mwMediaDialog-panel-imageinfo-details {
 	color: #666;
-	margin-bottom: 2em;
 }
 
 .ve-ui-mwMediaDialog-panel-imageinfo-separator {
