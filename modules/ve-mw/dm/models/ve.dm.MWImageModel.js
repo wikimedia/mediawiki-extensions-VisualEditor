@@ -157,10 +157,12 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  * @param {Object} attrs Image node attributes
  * @param {string} [dir] Document direction
  * @param {string} [lang] Document language
+ * @param {string} [caption] Existing image caption HTML
  * @return {ve.dm.MWImageModel} Image model
  */
-ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang ) {
-	var imgModel = new ve.dm.MWImageModel( {
+ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, caption ) {
+	var captionDomTree,
+		imgModel = new ve.dm.MWImageModel( {
 			resourceName: attrs.resource,
 			currentDimensions: {
 				width: attrs.width,
@@ -201,6 +203,12 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang )
 		'default' :
 		'custom'
 	);
+
+	// If a caption is given, use it in the document
+	if ( caption ) {
+		captionDomTree = ve.createDocumentFromHtml( caption );
+		imgModel.setCaptionDocument( ve.dm.converter.getModelFromDom( captionDomTree ) );
+	}
 	return imgModel;
 };
 
@@ -304,7 +312,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 			newDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
 				dimensions,
 				this.boundingBox,
-				true
+				'width'
 			);
 		} else {
 			newDimensions = dimensions;

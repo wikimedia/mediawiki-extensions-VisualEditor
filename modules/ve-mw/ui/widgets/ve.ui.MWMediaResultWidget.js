@@ -23,17 +23,39 @@ ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 	OO.ui.OptionWidget.call( this, config );
 
 	// Properties
-	this.size = config.size || 150;
+	this.initialSize = config.size || 150;
+	this.maxSize = config.maxSize || this.initialSize * 2;
+	this.expanded = false;
+	this.dimensions = {};
 	this.$thumb = this.buildThumbnail();
 	this.$overlay = this.$( '<div>' );
 
+	this.row = null;
+
+	// Get wiki default thumbnail size
+	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+		.defaultUserOptions.defaultthumbsize;
+
 	// Initialization
 	this.setLabel( new mw.Title( this.data.title ).getNameText() );
+	this.$label.addClass( 've-ui-mwMediaResultWidget-nameLabel' );
 	this.$overlay.addClass( 've-ui-mwMediaResultWidget-overlay' );
+
 	this.$element
 		.addClass( 've-ui-mwMediaResultWidget ve-ui-texture-pending' )
-		.css( { width: this.size, height: this.size } )
 		.prepend( this.$thumb, this.$overlay );
+
+	// Adjust wrapper padding
+	this.$element.css( $.extend( this.dimensions, this.calculateWrapperPadding( this.dimensions, this.initialSize ) ) );
+
+	// Select button
+	this.selectButton = new OO.ui.ButtonWidget( {
+		$: this.$,
+		label: ve.msg( 'visualeditor-dialog-media-searchselect' ),
+		icon: 'check'
+	} );
+	this.selectButton.$element.hide();
+	this.$element.prepend( this.selectButton.$element );
 };
 
 /* Inheritance */
@@ -67,36 +89,167 @@ ve.ui.MWMediaResultWidget.prototype.onThumbnailError = function () {
  * @returns {jQuery} Thumbnail element
  */
 ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
-	var info = this.data.imageinfo[0],
-		image = new Image(),
-		$image = this.$( image ),
-		$back = this.$( '<div>' ),
-		$front = this.$( '<div>' ),
-		$thumb = $back.add( $front );
+	var imageDimensions,
+		info = this.data.imageinfo[0],
+		$thumb = this.$( '<img>' );
 
 	// Preload image
-	$image.on( {
+	$thumb.on( {
 		load: this.onThumbnailLoad.bind( this ),
 		error: this.onThumbnailError.bind( this )
 	} );
 
-	image.src = info.thumburl;
+	$thumb
+		.attr( 'src', info.thumburl )
+		.addClass( 've-ui-mwMediaResultWidget-thumbnail' );
 
-	$thumb.addClass( 've-ui-mwMediaResultWidget-thumbnail' );
-	$thumb.last().css( 'background-image', 'url(' + info.thumburl + ')' );
-	if ( info.width >= this.size && info.height >= this.size ) {
-		$front.addClass( 've-ui-mwMediaResultWidget-crop' );
-		$thumb.css( { width: '100%', height: '100%' } );
+	if ( info.mediatype === 'AUDIO' ) {
+		// HACK: We are getting the wrong information from the
+		// API about audio files. Set their thumbnail to square
+		imageDimensions = {
+			width: this.initialSize,
+			height: this.initialSize
+		};
 	} else {
-		$thumb.css( {
-			width: info.thumbwidth,
-			height: info.thumbheight,
-			left: '50%',
-			top: '50%',
-			'margin-left': Math.round( -info.thumbwidth / 2 ),
-			'margin-top': Math.round( -info.thumbheight / 2 )
-		} );
+		if ( info.height < this.initialSize && info.width < this.maxSize ) {
+			// Define dimensions with original size
+			imageDimensions = {
+				width: info.width,
+				height: info.height
+			};
+		} else {
+			// Resize dimensions to be a fixed height
+			imageDimensions = ve.dm.Scalable.static.getDimensionsFromValue(
+				{ height: this.initialSize },
+				info.thumbwidth / info.thumbheight
+			);
+		}
 	}
+	// Resize the wrapper
+	this.dimensions = this.calculateThumbDimensions( imageDimensions );
+
+	// Resize the image
+	$thumb.css( this.dimensions );
 
 	return $thumb;
+};
+
+/**
+ * Retrieve the store dimensions object
+ * @return {Object} Thumb dimensions
+ */
+ve.ui.MWMediaResultWidget.prototype.getDimensions = function () {
+	return this.dimensions;
+};
+
+/**
+ * Resize thumbnail and element according to the resize factor
+ * @param {number} resizeFactor New resizing factor, multiplying the
+ *  current dimensions of the thumbnail
+ */
+ve.ui.MWMediaResultWidget.prototype.resizeThumb = function ( resizeFactor ) {
+	var wrapperCss, imageDimensions,
+		currWidth = this.$thumb.width(),
+		currHeight = this.$thumb.height();
+
+	imageDimensions = {
+		width: currWidth * resizeFactor,
+		height: currHeight * resizeFactor
+	};
+	// Resize thumb wrapper
+	this.$thumb.css( imageDimensions );
+	// Adjust wrapper padding - this is done so the image is placed in the center
+	wrapperCss = $.extend( imageDimensions, this.calculateWrapperPadding( imageDimensions, imageDimensions.height ) );
+	this.$element.css( wrapperCss );
+};
+
+/**
+ * Calculate thumbnail dimensions
+ * @param {Object} imageDimensions Image dimensions
+ * @return {Object} Thumbnail dimensions
+ */
+ve.ui.MWMediaResultWidget.prototype.calculateThumbDimensions = function ( imageDimensions ) {
+	var dimensions,
+		maxWidth = this.maxSize,
+		ratio = imageDimensions.width / imageDimensions.height;
+	// Rules of resizing:
+	// (1) Images must have height = this.initialSize
+	// (2) If after resize image width is larger than 3*this.width
+	//   ( which is about the size of the window ) the image is
+	//   scaled down to width = 3*this.width
+	// (3) Smaller images do not scale up
+	//     * If image height < this.initialSize, add padding and center
+	//       the image vertically
+	//     * If image width < this.initialSize, add a fixed padding to both
+	//       sides.
+	// First scale all images based on height = this.initialSize
+	dimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
+		// Image thumb size
+		imageDimensions,
+		// Bounding box
+		{
+			width: this.initialSize,
+			height: this.initialSize
+		},
+		// Lock to height
+		'height'
+	);
+
+	// Check if image width is larger than maxWidth
+	if ( dimensions.width > maxWidth ) {
+		// Resize again to fit maxWidth
+		dimensions = ve.dm.Scalable.static.getDimensionsFromValue( { width: maxWidth }, ratio );
+	}
+
+	return dimensions;
+};
+
+/**
+ * Adjust the wrapper padding for small images
+ * @param {Object} thumbDimensions Thumbnail dimensions
+ * @return {Object} Left and right padding
+ */
+ve.ui.MWMediaResultWidget.prototype.calculateWrapperPadding = function ( thumbDimensions, rowHeight ) {
+	var padding,
+		minWidthRatioForPadding = 2 / 3 * rowHeight,
+		paddingWidth = {},
+		paddingHeight = {},
+		minWidth = 0.5 * rowHeight;
+
+	// Check if the image fits the row height
+	if ( thumbDimensions.height < rowHeight ) {
+		// Set up top/bottom padding
+		paddingHeight = {
+			'padding-top': ( rowHeight - thumbDimensions.height ) / 2,
+			'padding-bottom': ( rowHeight - thumbDimensions.height ) / 2
+		};
+	}
+
+	// Check if the image is too thin so we can make a bit of space around it
+	if ( thumbDimensions.width < minWidth ) {
+		// Make the padding so that the total width is a 1/3 of the line height
+		padding = rowHeight - minWidthRatioForPadding - thumbDimensions.width;
+		paddingWidth = {
+			'padding-left': padding / 2,
+			'padding-right': padding / 2
+		};
+	}
+
+	return $.extend( {}, paddingWidth, paddingHeight );
+};
+
+/**
+ * Set the row this result is in.
+ * @param {number} row Row number
+ */
+ve.ui.MWMediaResultWidget.prototype.setRow = function ( row ) {
+	this.row = row;
+};
+
+/**
+ * Get the row this result is in.
+ * @return {number} row Row number
+ */
+ve.ui.MWMediaResultWidget.prototype.getRow = function () {
+	return this.row;
 };

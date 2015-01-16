@@ -13,6 +13,14 @@
 	overflow: hidden;
 }
 
+.ve-ui.mwMediaResultWidget-eol:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
 .ve-ui-mwMediaResultWidget-error {
 	background-color: #f3f3f3;
 }
@@ -58,7 +66,7 @@
 	background-repeat: no-repeat;
 }
 
-.ve-ui-mwMediaResultWidget .oo-ui-labelElement-label {
+.ve-ui-mwMediaResultWidget .ve-ui-mwMediaResultWidget-nameLabel {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -72,11 +80,11 @@
 	text-overflow: ellipsis;
 }
 
-.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted .oo-ui-labelElement-label {
+.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted .ve-ui-mwMediaResultWidget-nameLabel {
 	background-color: rgba(0,0,0,0.75);
 }
 
-.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected .oo-ui-labelElement-label {
+.ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected .ve-ui-mwMediaResultWidget-nameLabel {
 	background-color: #000;
 }
 
