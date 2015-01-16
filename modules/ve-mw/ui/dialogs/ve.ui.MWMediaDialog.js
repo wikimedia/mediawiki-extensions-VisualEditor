@@ -1067,6 +1067,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.setSize( 'large' );
 			// Set the edit panel
 			this.panels.setItem( this.bookletLayout );
+
 			// Focus the general settings page
 			this.bookletLayout.setPage( 'general' );
 			// Hide/show buttons
@@ -1075,10 +1076,6 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.$content.removeClass( 'oo-ui-dialog-content-footless' );
 			// Focus the caption surface
 			this.captionSurface.focus();
-			// Hide/show the panels
-			this.bookletLayout.$element.show();
-			this.mediaSearchPanel.$element.hide();
-			this.mediaImageInfoPanel.$element.hide();
 			break;
 		case 'search':
 			this.setSize( 'larger' );
@@ -1118,10 +1115,8 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			// HACK: OO.ui.Dialog needs an API for this
 			this.$content.toggleClass( 'oo-ui-dialog-content-footless', !this.imageModel );
 
-			// Hide/show the panels
-			this.bookletLayout.$element.hide();
-			this.mediaSearchPanel.$element.show();
-			this.mediaImageInfoPanel.$element.hide();
+			// Layout pending items
+			this.search.runLayoutQueue();
 			break;
 		default:
 		case 'imageInfo':
@@ -1129,9 +1124,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			// Hide/show buttons
 			this.actions.setMode( 'info' );
 			// Hide/show the panels
-			this.mediaImageInfoPanel.$element.show();
-			this.bookletLayout.$element.hide();
-			this.mediaSearchPanel.$element.hide();
+			this.panels.setItem( this.mediaImageInfoPanel );
 			break;
 	}
 };

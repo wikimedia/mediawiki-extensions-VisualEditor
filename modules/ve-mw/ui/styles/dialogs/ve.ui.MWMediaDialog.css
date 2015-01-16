@@ -11,6 +11,10 @@
 	padding-right: 2em;
 }
 
+.ve-ui-mwMediaDialog-panel-settings {
+	display: none;
+}
+
 .ve-ui-mwMediaDialog-panel-imageinfo-thumb {
 	text-align: center;
 }
