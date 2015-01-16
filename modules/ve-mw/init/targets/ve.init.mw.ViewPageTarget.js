@@ -1130,10 +1130,11 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 	var $actionTools = $( '<div>' ),
-		$pushButtons = $( '<div>' ),
-		actions = new ve.ui.TargetToolbar( this );
+		$pushButtons = $( '<div>' );
 
-	actions.setup( [
+	this.actionsToolbar = new ve.ui.TargetToolbar( this );
+
+	this.actionsToolbar.setup( [
 		{ include: [ 'help', 'notices' ] },
 		{
 			type: 'list',
@@ -1145,7 +1146,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 
 	$actionTools
 		.addClass( 've-init-mw-viewPageTarget-toolbar-utilities' )
-		.append( actions.$element );
+		.append( this.actionsToolbar.$element );
 
 	$pushButtons
 		.addClass( 've-init-mw-viewPageTarget-toolbar-actions' )
@@ -1605,7 +1606,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownBeforeUnloadHandler = function () {
  * Show dialogs as needed on load.
  */
 ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
-	var usePrefs, prefSaysShow, urlSaysHide;
+	var usePrefs, prefSaysShow, urlSaysHide, target = this;
 	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
 
 		// Only use the preference value if the user is logged-in.
@@ -1619,17 +1620,27 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 		urlSaysHide = 'vehidebetadialog' in this.currentUri.query;
 
 		if (
-				!urlSaysHide &&
+			!urlSaysHide &&
+			(
+				prefSaysShow ||
 				(
-					prefSaysShow ||
-					(
-						!usePrefs &&
-						localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
-						$.cookie( 've-beta-welcome-dialog' ) === null
-					)
+					!usePrefs &&
+					localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
+					$.cookie( 've-beta-welcome-dialog' ) === null
 				)
-			) {
-			this.getSurface().getDialogs().openWindow( 'betaWelcome' );
+			)
+		) {
+			this.getSurface().getDialogs().openWindow( 'betaWelcome' ).done( function ( opened ) {
+				opened.done( function ( closing ) {
+					closing.done( function () {
+						// Pop out the notices when the welcome dialog is closed
+						target.actionsToolbar.tools.notices.getPopup().toggle( true );
+					} );
+				} );
+			} );
+		} else {
+			// Automatically open the notices immediately
+			this.actionsToolbar.tools.notices.getPopup().toggle( true );
 		}
 
 		if ( prefSaysShow ) {
