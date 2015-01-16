@@ -46,7 +46,9 @@ class VisualEditorHooks {
 	 */
 	public static function onContentHandlerDefaultModelFor( Title $title, &$model ) {
 		$messages = array(
-			'Visualeditor-cite-tool-definition.json',
+			// FIXME: This is valid JSON, but JsonContent.php in MediaWiki doesn't think it is, so
+			// until that's fixed (T86270) we won't set this as the correct content type just yet.
+			// 'Visualeditor-cite-tool-definition.json',
 			'Visualeditor-specialcharinspector-characterlist-insert'
 		);
 
