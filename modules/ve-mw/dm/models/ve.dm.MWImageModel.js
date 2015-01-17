@@ -177,8 +177,13 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, 
 
 	imgModel.setImageSource( attrs.src );
 	imgModel.setFilename( new mw.Title( attrs.resource.replace( /^(\.+\/)*/, '' ) ).getMainText() );
-
 	imgModel.setImageHref( attrs.href );
+
+	// Set bounding box
+	imgModel.setBoundingBox( {
+		width: attrs.width,
+		height: attrs.height
+	} );
 
 	// Collect all the information
 	imgModel.toggleBorder( !!attrs.borderImage );
@@ -259,11 +264,11 @@ ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
 /**
  * Adjust the model parameters based on a new image
  * @param {Object} attrs New image source attributes
- * @param {Object} [dimensions] New dimensions of the image
+ * @param {Object} [APIinfo] The image's API info
+ * @throws {Error} Image has insufficient details to compute the imageModel details.
  */
-ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) {
-	var newDimensions,
-		imageModel = this;
+ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
+	var imageModel = this;
 
 	if ( attrs.mediaType ) {
 		this.setMediaType( attrs.mediaType );
@@ -286,46 +291,49 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 	this.scalable.clearMaxDimensions();
 	this.scalable.clearMinDimensions();
 
-	// Call for updated scalable
-	if ( this.getFilename() ) {
-		ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( function ( info ) {
-			imageModel.scalable.setOriginalDimensions( {
-				width: info.width,
-				height: info.height
-			} );
-			// Update media type
-			imageModel.setMediaType( info.mediatype );
-			// Update defaults
-			ve.dm.MWImageNode.static.syncScalableToType(
-				imageModel.getType(),
-				info.mediatype,
-				imageModel.scalable
-			);
+	// If we already have dimensions from the API, use them
+	if ( APIinfo ) {
+		imageModel.scalable.setOriginalDimensions( {
+			width: APIinfo.width,
+			height: APIinfo.height
 		} );
-	}
-
-	// Resize the new image's current dimensions to default or based on the bounding box
-	if ( this.isDefaultSize() ) {
-		// Scale to default
-		newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( dimensions );
+		// Update media type
+		imageModel.setMediaType( APIinfo.mediatype );
+		// Update defaults
+		ve.dm.MWImageNode.static.syncScalableToType(
+			imageModel.getType(),
+			APIinfo.mediatype,
+			imageModel.scalable
+		);
+		imageModel.updateScalableDetails( {
+			width: APIinfo.width,
+			height: APIinfo.height
+		} );
 	} else {
-		if ( this.getBoundingBox() ) {
-			// Scale the new image by its width
-			newDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
-				dimensions,
-				// Go by width to prevent dirty diffs
-				{
-					width: this.boundingBox.width,
-					height: Infinity
-				}
-			);
+		// Call for updated scalable if we don't have dimensions from the API info
+		if ( this.getFilename() ) {
+			// Update anyways
+			ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( function ( info ) {
+				imageModel.scalable.setOriginalDimensions( {
+					width: info.width,
+					height: info.height
+				} );
+				// Update media type
+				imageModel.setMediaType( info.mediatype );
+				// Update defaults
+				ve.dm.MWImageNode.static.syncScalableToType(
+					imageModel.getType(),
+					info.mediatype,
+					imageModel.scalable
+				);
+				imageModel.updateScalableDetails( {
+					width: info.width,
+					height: info.height
+				} );
+			} );
 		} else {
-			newDimensions = dimensions;
+			throw new Error( 'Cannot compute details for an image without remote filename and without sizing info.' );
 		}
-	}
-
-	if ( newDimensions ) {
-		this.getScalable().setCurrentDimensions( newDimensions );
 	}
 };
 
@@ -1130,6 +1138,37 @@ ve.dm.MWImageModel.prototype.setFilename = function ( filename ) {
  */
 ve.dm.MWImageModel.prototype.getFilename = function () {
 	return this.filename;
+};
+
+/**
+ * If the image changed, update scalable definitions.
+ * @param {Object} originalDimensions Image original dimensions
+ */
+ve.dm.MWImageModel.prototype.updateScalableDetails = function ( originalDimensions ) {
+	var newDimensions;
+
+	// Resize the new image's current dimensions to default or based on the bounding box
+	if ( this.isDefaultSize() ) {
+		// Scale to default
+		newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( originalDimensions );
+	} else {
+		if ( this.getBoundingBox() ) {
+			// Scale the new image by its width
+			newDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
+				originalDimensions,
+				{
+					width: this.boundingBox.width,
+					height: Infinity
+				}
+			);
+		} else {
+			newDimensions = originalDimensions;
+		}
+	}
+
+	if ( newDimensions ) {
+		this.getScalable().setCurrentDimensions( newDimensions );
+	}
 };
 
 /**
