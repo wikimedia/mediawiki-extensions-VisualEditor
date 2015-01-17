@@ -27,7 +27,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	// Properties
 	this.sources = {};
 	this.size = config.size || 200;
-	this.fullSize = config.fullSize || 400;
+	this.fullSize = config.fullSize || 500;
 	this.$panels = config.$panels;
 	this.queryTimeout = null;
 	this.titles = {};
