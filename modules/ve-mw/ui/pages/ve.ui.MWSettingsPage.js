@@ -201,7 +201,7 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 	this.enableStaticRedirectInput.setDisabled( !value );
 	if ( !value ) {
 		this.redirectTargetInput.setValue( '' );
-		this.enableStaticRedirectInput.setValue( false );
+		this.enableStaticRedirectInput.setSelected( false );
 	}
 	this.redirectOptionsTouched = true;
 };
@@ -260,7 +260,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.enableRedirectInput.setValue( !!redirectTargetItem );
 	this.redirectTargetInput.setValue( redirectTarget );
 	this.redirectTargetInput.setDisabled( !redirectTargetItem );
-	this.enableStaticRedirectInput.setValue( !!redirectStatic );
+	this.enableStaticRedirectInput.setSelected( !!redirectStatic );
 	this.enableStaticRedirectInput.setDisabled( !redirectTargetItem );
 	this.redirectOptionsTouched = false;
 
@@ -291,7 +291,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } },
 
 		currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' ),
-		newStaticRedirectState = this.enableStaticRedirectInput.getValue(),
+		newStaticRedirectState = this.enableStaticRedirectInput.isSelected(),
 
 		settingsPage = this;
 
