@@ -249,7 +249,7 @@
 	"visualeditor-preference-language-label": "Herramienta de idioma del Editor visual",
 	"visualeditor-preference-mwalienextension-description": "Añadir soporte básico experimental al Editor visual para la edición de etiquetas de extensión (como galerías o bloques de código fuente), en lugar de herramientas individuales disponibles. Por favor recuerde siempre revisar los cambios antes de guardar cuando se utilizan características experimentales.",
 	"visualeditor-preference-mwalienextension-label": "Edición de etiquetas de extensión del Editor visual",
-	"visualeditor-recreate": "La página ha sido eliminada luego de que empezaste a editar, Presiona \"$1\" para volverla a crear.",
+	"visualeditor-recreate": "La página fue borrada después de que comenzaste a editarla. Pulsa en «$1» para crearla de nuevo.",
 	"visualeditor-reference-input-placeholder": "¿Qué deseas referenciar?",
 	"visualeditor-referenceslist-isempty": "No hay referencias con el grupo «$1» en esta página para incluir en la lista.",
 	"visualeditor-referenceslist-isempty-default": "No hay referencias en esta página para incluir en esta lista.",
