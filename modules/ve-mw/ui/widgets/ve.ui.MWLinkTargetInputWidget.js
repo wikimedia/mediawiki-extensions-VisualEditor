@@ -122,7 +122,10 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 	if ( mw.Title.newFromText( this.value ) ) {
 		return this.interwikiPrefixesPromise.then( function () {
 			var interwiki = widget.value.substring( 0, widget.value.indexOf( ':' ) );
-			if ( interwiki && interwiki !== '' ) {
+			if (
+				interwiki && interwiki !== '' &&
+				widget.interwikiPrefixes.indexOf( interwiki ) !== -1
+			) {
 				return $.Deferred().resolve( { query: {
 					pages: [{
 						title: widget.value
