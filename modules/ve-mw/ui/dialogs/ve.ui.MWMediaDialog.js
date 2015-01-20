@@ -219,6 +219,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
+		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		icon: 'parameter',
 		classes: [ 've-ui-mwMediaDialog-caption-fielset']
 	} );
@@ -227,6 +228,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	altTextFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
+		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' ),
 		icon: 'parameter'
 	} );
 
@@ -276,12 +278,14 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
 		$: this.$,
 		align: 'inline',
-		label: ve.msg( 'visualeditor-dialog-media-position-checkbox' )
+		label: ve.msg( 'visualeditor-dialog-media-position-checkbox' ),
+		help: ve.msg( 'visualeditor-dialog-media-position-checkbox-help' )
 	} );
 
 	positionFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-position-section' ),
+		help: ve.msg( 'visualeditor-dialog-media-position-section-help' ),
 		icon: 'parameter'
 	} );
 
@@ -295,6 +299,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
+		help: ve.msg( 'visualeditor-dialog-media-type-section-help' ),
 		icon: 'parameter'
 	} );
 
@@ -347,7 +352,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-size-section' ),
-		icon: 'parameter'
+		icon: 'parameter',
+		help: ve.msg( 'visualeditor-dialog-media-size-section-help' )
 	} );
 
 	this.sizeErrorLabel = new OO.ui.LabelWidget( {
