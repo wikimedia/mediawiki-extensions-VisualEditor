@@ -995,6 +995,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.css',
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaSearchWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaInfoFieldWidget.css',
 		),

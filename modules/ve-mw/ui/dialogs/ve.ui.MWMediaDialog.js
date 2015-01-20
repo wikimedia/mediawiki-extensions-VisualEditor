@@ -146,7 +146,8 @@ ve.ui.MWMediaDialog.static.getImportRules = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
-	return 400;
+	// FIXME: This should vary on panel.
+	return 500;
 };
 
 /**
@@ -200,7 +201,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.search = new ve.ui.MWMediaSearchWidget( {
 		$: this.$,
 		// Height of the panels
-		fullSize: 300
+		fullSize: 400
 	} );
 
 	this.$body.append( this.search.$spinner );
@@ -492,7 +493,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 		fields = {},
 		// Store clean API data
 		apiData = {},
-		windowWidth = this.panels.$element.innerWidth(),
+		windowWidth = this.mediaImageInfoPanel.$element.innerWidth(),
 		fileType = this.getFileType( imageinfo.url ),
 		$thumbContainer = this.$( '<div>' )
 			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-thumb' ),
@@ -602,7 +603,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 	);
 	this.mediaImageInfoPanel.$element.append( this.$infoPanelWrapper );
 	if ( isPortrait ) {
-		$info.outerWidth( Math.floor( this.mediaImageInfoPanel.$element.width() - $thumbContainer.width() - 1 ) );
+		$info.outerWidth( Math.floor( this.mediaImageInfoPanel.$element.innerWidth() - $thumbContainer.width() - 1 ) );
 	}
 
 	// Adjust height-limited fields
@@ -990,6 +991,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 	var dialog = this;
 	switch ( panel ) {
 		case 'edit':
+			this.setSize( 'large' );
 			// Set the edit panel
 			this.panels.setItem( this.bookletLayout );
 			// Focus the general settings page
@@ -1006,6 +1008,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.mediaImageInfoPanel.$element.hide();
 			break;
 		case 'search':
+			this.setSize( 'larger' );
 			this.selectedImageInfo = null;
 			if ( !stopSearchRequery ) {
 				// Show a spinner while we check for file repos.
@@ -1049,6 +1052,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			break;
 		default:
 		case 'imageInfo':
+			this.setSize( 'larger' );
 			// Hide/show buttons
 			this.actions.setMode( 'info' );
 			// Hide/show the panels
