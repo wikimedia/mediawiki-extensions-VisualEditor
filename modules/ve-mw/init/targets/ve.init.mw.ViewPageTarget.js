@@ -175,8 +175,7 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
  * @inheritdoc
  */
 ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
-	var $firstHeading,
-		target = this;
+	var target = this;
 
 	// Parent method
 	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
@@ -193,11 +192,8 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 	this.getToolbar().$element
 		.addClass( 've-init-mw-viewPageTarget-toolbar' );
 
-	// Move the toolbar to before #firstHeading if it exists
-	$firstHeading = $( '#firstHeading' );
-	if ( $firstHeading.length ) {
-		this.getToolbar().$element.insertBefore( $firstHeading );
-	}
+	// Move the toolbar to top of target, before heading etc.
+	this.$element.prepend( this.getToolbar().$element );
 
 	this.getToolbar().$bar.slideDown( 'fast', function () {
 		// Check the surface wasn't torn down while the toolbar was animating
@@ -401,6 +397,9 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		target.activating = false;
 		target.activatingDeferred.reject();
 		$( 'html' ).removeClass( 've-active ve-deactivating' );
+
+		// Move remaining elements back out of the target
+		target.$element.parent().append( target.$element.children() );
 
 		mw.hook( 've.deactivationComplete' ).fire( target.edited );
 	} );
@@ -1063,8 +1062,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 		promises = [];
 
 	// Update UI
-	this.tearDownToolbar();
-	this.tearDownDebugBar();
+	promises.push( this.tearDownToolbar(), this.tearDownDebugBar() );
 	this.restoreDocumentTitle();
 	if ( this.getSurface().mwTocWidget ) {
 		this.getSurface().mwTocWidget.teardown();
@@ -1273,10 +1271,12 @@ ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
 
 /**
  * Hide the toolbar.
+ *
+ * @return {jQuery.Promise} Promise which resolves when toolbar is hidden
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
 	var target = this;
-	this.toolbar.$bar.slideUp( 'fast', function () {
+	return this.toolbar.$bar.slideUp( 'fast' ).promise().then( function () {
 		target.toolbar.destroy();
 		target.toolbar = null;
 	} );
@@ -1284,15 +1284,18 @@ ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
 
 /**
  * Hide the debug bar.
+ *
+ * @return {jQuery.Promise} Promise which resolves when debug bar is hidden
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
 	var target = this;
 	if ( this.debugBar ) {
-		this.debugBar.$element.slideUp( 'fast', function () {
+		return this.debugBar.$element.slideUp( 'fast' ).promise().then( function () {
 			target.debugBar.$element.remove();
 			target.debugBar = null;
 		} );
 	}
+	return $.Deferred().resolve().promise();
 };
 
 /**

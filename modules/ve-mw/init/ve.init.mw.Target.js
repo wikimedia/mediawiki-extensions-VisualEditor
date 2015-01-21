@@ -1399,6 +1399,9 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 		);
 		setTimeout( function () {
+			// Move all native content inside the target
+			target.$element.append( target.$element.siblings() );
+
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			var surface = target.addSurface( dmDoc ),
 				surfaceView = surface.getView(),
