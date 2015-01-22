@@ -182,6 +182,9 @@ $wgResourceModules += array(
 			'tooltip-ca-editsource',
 			'tooltip-ca-ve-edit',
 			'visualeditor-ca-editsource-section',
+			'postedit-confirmation-created',
+			'postedit-confirmation-restored',
+			'postedit-confirmation-saved',
 		),
 		'position' => 'top',
 	),
@@ -232,9 +235,6 @@ $wgResourceModules += array(
 			'summary-preview',
 
 			// Messages needed by VE in init phase only (rest go below)
-			'postedit-confirmation-created',
-			'postedit-confirmation-restored',
-			'postedit-confirmation-saved',
 			'visualeditor-loadwarning',
 			'visualeditor-loadwarning-token',
 			'visualeditor-savedialog-identify-anon',

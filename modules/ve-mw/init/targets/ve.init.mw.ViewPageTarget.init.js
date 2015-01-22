@@ -474,9 +474,12 @@
 	}
 
 	$( function () {
+		var currentUri = new mw.Uri( location.href ),
+			isSection;
+
 		if ( init.isAvailable ) {
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
-				var isSection = uri.query.vesection !== undefined;
+				isSection = uri.query.vesection !== undefined;
 				init.showLoading();
 
 				ve.track( 'mwedit.init', { type: isSection ? 'section' : 'page', mechanism: 'url' } );
@@ -492,6 +495,18 @@
 
 		if ( userPrefEnabled ) {
 			init.setupSkin();
+		}
+
+		if ( currentUri.query.venotify ) {
+			// The following messages can be used here:
+			// postedit-confirmation-saved
+			// postedit-confirmation-created
+			// postedit-confirmation-restored
+			mw.hook( 'postEdit' ).fire( {
+				message: mw.msg( 'postedit-confirmation-' + currentUri.query.venotify, mw.user )
+			} );
+
+			delete currentUri.query.venotify;
 		}
 	} );
 }() );

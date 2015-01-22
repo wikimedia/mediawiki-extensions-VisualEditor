@@ -98,18 +98,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		sanityCheckComplete: 'updateToolbarSaveButtonState'
 	} );
 
-	if ( currentUri.query.venotify ) {
-		// The following messages can be used here:
-		// postedit-confirmation-saved
-		// postedit-confirmation-created
-		// postedit-confirmation-restored
-		mw.hook( 'postEdit' ).fire( {
-			message: ve.msg( 'postedit-confirmation-' + currentUri.query.venotify, mw.user )
-		} );
-
-		delete currentUri.query.venotify;
-	}
-
 	if ( history.replaceState ) {
 		// This is to stop the back button breaking when it's supposed to take us back out
 		// of VE. It used to only be called when venotify is used. FIXME: there should be
