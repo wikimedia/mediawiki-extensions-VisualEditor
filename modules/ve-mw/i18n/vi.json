@@ -10,7 +10,7 @@
 	},
 	"apihelp-visualeditor-description": "Cho ra mã HTML5 của một trang từ dịch vụ Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Khi lưu, đặt thành dấu thời gian của phiên bản được sửa đổi. Được sử dụng để phát hiện các mâu thuẫn sửa đổi.",
-	"apihelp-visualeditor-param-cachekey": "Để sắp xếp hoặc phân loại, sử dụng kết quả của một yêu cầu serializeforcache (sắp xếp cho vùng nhớ đệm) trước đây với từ khóa này. Ghi đè $1html.",
+	"apihelp-visualeditor-param-cachekey": "Để tuần tự hóa hoặc so sánh, sử dụng kết quả của một yêu cầu serializeforcache (tuần tự hóa cho vùng nhớ đệm) trước đây với từ khóa này. Ghi đè $1html.",
 	"apihelp-visualeditor-param-html": "Mã HTML để gửi cho Parsoid để nó chuyển đổi thành mã wiki.",
 	"apihelp-visualeditor-param-oldid": "Số phiên bản để sử dụng (phiên bản hiện tại theo mặc định).",
 	"apihelp-visualeditor-param-paction": "Tác vụ để thực hiện.",
