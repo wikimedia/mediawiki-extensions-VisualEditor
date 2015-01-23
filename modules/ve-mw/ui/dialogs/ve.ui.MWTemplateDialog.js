@@ -484,17 +484,16 @@ ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
  */
 ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 
-// TODO: Uncomment this when OOjs UI is updated so that .focus() on an empty
-// booklet doesn't crash.
-/*
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	var dialog = this;
-	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data );
+	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			dialog.bookletLayout.focus();
 		} );
 };
-*/
 
 /**
  * @inheritdoc
