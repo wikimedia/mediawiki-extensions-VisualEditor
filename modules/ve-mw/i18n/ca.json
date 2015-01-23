@@ -13,7 +13,8 @@
 			"Edustus",
 			"Davidpar",
 			"Kippelboy",
-			"Unapersona"
+			"Unapersona",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Torna a HTML5 per a una pàgina des del servei Parsoid.",
@@ -54,9 +55,9 @@
 	"visualeditor-dialog-beta-welcome-content": "Aquesta és la nostra nova i més senzilla forma d'editar. Encara està en fase beta, la qual cosa significa que podeu trobar parts de la pàgina que no es poden modificar o problemes que s'han de resoldre. Us animem que en reviseu els canvis i que ens informeu de qualsevol problema que trobeu quan utilitzeu l'editor visual (feu clic al botó «{{int:visualeditor-help-tool}}» per a enviar-nos els vostres comentaris). Podeu canviar a l'editor de wikitext en qualsevol moment si cliqueu la pestanya «$1». Tots els canvis que hagueu fet es desaran.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Benvingut|Benvinguda|Benvingut}} a l'editor visual",
 	"visualeditor-dialog-media-alttext-section": "Text alternatiu",
-	"visualeditor-dialog-media-change-image": "Trieu una imatge diferent",
+	"visualeditor-dialog-media-change-image": "Canvia la imatge",
 	"visualeditor-dialog-media-content-section": "Peu d'imatge",
-	"visualeditor-dialog-media-goback": "Torna",
+	"visualeditor-dialog-media-goback": "Enrere",
 	"visualeditor-dialog-media-noresults": "No s'han trobat resultats.",
 	"visualeditor-dialog-media-page-advanced": "Configuració avançada",
 	"visualeditor-dialog-media-page-general": "Configuració general",
@@ -213,6 +214,7 @@
 	"visualeditor-preference-core-label": "Editor visual",
 	"visualeditor-preference-enable": "Activa l'editor visual. Estarà disponible en {{PLURAL:$2|l'espai de noms següent|els espais de noms següents}}: $1",
 	"visualeditor-preference-language-label": "Eina de llengua de l'editor visual",
+	"visualeditor-recreate": "La pàgina ha estat suprimida des de que vau començar a editar. Premeu \"$1\" per recrear-la.",
 	"visualeditor-reference-input-placeholder": "Què voleu referenciar?",
 	"visualeditor-referenceslist-isempty": "No hi ha cap referència amb el grup «$1» en aquesta pàgina a incloure en aquesta llista.",
 	"visualeditor-referenceslist-isempty-default": "No hi ha cap referència en aquesta pàgina que incloure en la llista.",
@@ -237,7 +239,6 @@
 	"visualeditor-savedialog-warning-dirty": "La seva edició pot estar corrompuda. Si us plau, reviseu-la abans de desar-la.",
 	"visualeditor-saveerror": "Error en desar dades al servidor: $1.",
 	"visualeditor-serializeerror": "Error en carregar dades des del servidor: $1.",
-	"visualeditor-recreate": "La pàgina ha estat suprimida des de que vau començar a editar. Premeu \"$1\" per recrear-la.",
 	"visualeditor-settings-tool": "Configuració de la pàgina",
 	"visualeditor-timeout": "Sembla que l'editor visual no està disponible en aquest moment. T'agradaria editar en mode codi?",
 	"visualeditor-toolbar-cite-label": "Referència",
