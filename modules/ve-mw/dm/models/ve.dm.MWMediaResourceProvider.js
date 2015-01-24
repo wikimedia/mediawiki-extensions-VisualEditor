@@ -68,14 +68,11 @@ ve.dm.MWMediaResourceProvider.prototype.loadSiteInfo = function () {
 	var provider = this;
 
 	if ( !this.siteInfoPromise ) {
-		this.siteInfoPromise = ve.init.target.constructor.static.apiRequest( {
+		this.siteInfoPromise = new mw.Api().get( {
 			action: 'query',
 			meta: 'siteinfo'
 		} )
 			.then( function ( data ) {
-				if ( data.error ) {
-					return $.Deferred().reject();
-				}
 				provider.setImageSizes( data.query.general.imagelimits || [] );
 				provider.setThumbSizes( data.query.general.thumblimits || [] );
 				provider.setUserParams( {
@@ -157,7 +154,7 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 
 	ajaxOptions = this.getAjaxSettings();
 
-	xhr = ve.init.target.constructor.static.apiRequest( $.extend( this.getStaticParams(), apiCallConfig ), ajaxOptions );
+	xhr = new mw.Api().get( $.extend( this.getStaticParams(), apiCallConfig ), ajaxOptions );
 	return xhr
 		.then( function ( data ) {
 			var page, newObj, raw,

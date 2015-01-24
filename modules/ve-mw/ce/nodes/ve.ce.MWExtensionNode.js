@@ -57,12 +57,12 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 		wikitext = mw.html.element( tagName, attrs, new mw.html.Raw( extsrc ) );
 
 	if ( !this.constructor.static.rendersEmpty && extsrc.trim() !== '' ) {
-		xhr = ve.init.target.constructor.static.apiRequest( {
+		xhr = new mw.Api().post( {
 			action: 'visualeditor',
 			paction: 'parsefragment',
 			page: mw.config.get( 'wgRelevantPageName' ),
 			wikitext: wikitext
-		}, { type: 'POST' } )
+		} )
 			.done( this.onParseSuccess.bind( this, deferred ) )
 			.fail( this.onParseError.bind( this, deferred ) );
 		return deferred.promise( { abort: xhr.abort } );

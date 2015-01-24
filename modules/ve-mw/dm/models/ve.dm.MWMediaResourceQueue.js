@@ -79,7 +79,7 @@ ve.dm.MWMediaResourceQueue.prototype.getFileRepos = function () {
 		} ];
 
 	if ( !this.fileRepoPromise ) {
-		this.fileRepoPromise = ve.init.target.constructor.static.apiRequest( {
+		this.fileRepoPromise = new mw.Api().get( {
 			action: 'query',
 			meta: 'filerepoinfo'
 		} ).then(

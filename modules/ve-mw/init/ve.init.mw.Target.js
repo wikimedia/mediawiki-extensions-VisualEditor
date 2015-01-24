@@ -143,9 +143,8 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
 /**
  * @event loadError
- * @param {jqXHR|null} jqXHR
- * @param {string} status Text status message
- * @param {Mixed|null} error HTTP status text
+ * @param {string} errorTypeText
+ * @param {Object|string} error
  */
 
 /**
@@ -287,59 +286,6 @@ ve.init.mw.Target.static.integrationType = 'page';
 /* Static Methods */
 
 /**
- * Send an AJAX request to the MediaWiki API.
- *
- * This method has special behavior for certain options. If the request type is POST, then
- * contentType will default to multipart/form-data. If the content type is multipart/form-data,
- * then the necessary emulation will be performed to make this content type actually work.
- *
- * @param {Object} data Query string parameters (for GET requests) or POST data (for POST requests)
- * @param {Object} [settings] Additional AJAX settings, or overrides of default settings
- * @returns {jqXHR} Return value of $.ajax()
- */
-ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
-	var key, formData;
-	data = ve.extendObject( {
-		format: 'json',
-		uselang: mw.config.get( 'wgUserLanguage' )
-	}, data );
-	settings = ve.extendObject( {
-		url: mw.util.wikiScript( 'api' ),
-		dataType: 'json',
-		type: 'GET',
-		// Wait up to 100 seconds
-		timeout: 100000
-	}, settings );
-
-	// If multipart/form-data has been requested and emulation is possible, emulate it
-	if (
-		settings.type === 'POST' && window.FormData && (
-			settings.contentType === undefined ||
-			settings.contentType === 'multipart/form-data'
-		)
-	) {
-		formData = new FormData();
-		for ( key in data ) {
-			formData.append( key, data[key] );
-		}
-		settings.data = formData;
-		// Prevent jQuery from mangling our FormData object
-		settings.processData = false;
-		// Prevent jQuery from overriding the Content-Type header
-		settings.contentType = false;
-	} else {
-		settings.data = data;
-		if ( settings.contentType === 'multipart/form-data' ) {
-			// We were asked to emulate but can't, so drop the Content-Type header, otherwise
-			// it'll be wrong and the server will fail to decode the POST body
-			delete settings.contentType;
-		}
-	}
-
-	return $.ajax( settings );
-};
-
-/**
  * Take a target document with a possibly relative base URL, and modify it to be absolute.
  * The base URL of the target document is resolved using the base URL of the source document.
  * @param {HTMLDocument} targetDoc Document whose base URL should be resolved
@@ -395,7 +341,7 @@ ve.init.mw.Target.onModulesReady = function () {
  *
  * @static
  * @method
- * @param {Object} response XHR Response object
+ * @param {Object} response API response data
  * @param {string} status Text status message
  * @fires loadError
  */
@@ -403,18 +349,9 @@ ve.init.mw.Target.onLoad = function ( response ) {
 	var i, len, linkData,
 		data = response ? response.visualeditor : null;
 
-	if ( !data && !response.error ) {
+	if ( typeof data.content !== 'string' ) {
 		ve.init.mw.Target.onLoadError.call(
-			this, null, 'Invalid response in response from server', null
-		);
-	} else if ( response.error || data.result === 'error' ) {
-		ve.init.mw.Target.onLoadError.call( this, null,
-			response.error.code + ': ' + response.error.info,
-			null
-		);
-	} else if ( typeof data.content !== 'string' ) {
-		ve.init.mw.Target.onLoadError.call(
-			this, null, 'No HTML content in response from server', null
+			this, 've-api', 'No HTML content in response from server'
 		);
 	} else {
 		ve.track( 'trace.parseResponse.enter' );
@@ -543,14 +480,13 @@ ve.init.mw.Target.prototype.onReady = function () {
  *
  * @static
  * @method
- * @param {Object} jqXHR
- * @param {string} status Text status message
- * @param {Mixed} error HTTP status text
+ * @param {string} errorTypeText Error type text from mw.Api
+ * @param {Object} error Object containing xhr, textStatus and exception keys
  * @fires loadError
  */
-ve.init.mw.Target.onLoadError = function ( jqXHR, status, error ) {
+ve.init.mw.Target.onLoadError = function ( errorText, error ) {
 	this.loading = false;
-	this.emit( 'loadError', jqXHR, status, error );
+	this.emit( 'loadError', errorText, error );
 };
 
 /**
@@ -1056,19 +992,17 @@ ve.init.mw.Target.prototype.requestPageData = function () {
 	start = ve.now();
 	ve.track( 'trace.domLoad.enter' );
 
-	xhr = this.constructor.static.apiRequest( data );
-	return xhr.then(
-		function ( data, status, jqxhr ) {
-			target.events.track( 'performance.system.domLoad', {
-				bytes: $.byteLength( jqxhr.responseText ),
-				duration: ve.now() - start,
-				cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-				parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
-			} );
-			ve.track( 'trace.domLoad.exit' );
-			return jqxhr;
-		}
-	).promise( { abort: xhr.abort } );
+	xhr = new mw.Api().get( data );
+	return xhr.then( function ( data, jqxhr ) {
+		target.events.track( 'performance.system.domLoad', {
+			bytes: $.byteLength( jqxhr.responseText ),
+			duration: ve.now() - start,
+			cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
+			parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
+		} );
+		ve.track( 'trace.domLoad.exit' );
+		return jqxhr;
+	} ).promise( { abort: xhr.abort } );
 };
 
 /**
@@ -1118,13 +1052,13 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 
 	html = EasyDeflate.deflate( this.getHtml( doc ) );
 
-	xhr = this.constructor.static.apiRequest( {
+	xhr = new mw.Api().post( {
 		action: 'visualeditor',
 		paction: 'serializeforcache',
 		html: html,
 		page: this.pageName,
 		oldid: this.revid
-	}, { type: 'POST' } )
+	} )
 		.done( function ( response ) {
 			var trackData = { duration: ve.now() - start };
 			if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
@@ -1195,7 +1129,9 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 	data = ve.extendObject( {}, options, { format: 'json' } );
 
 	function ajaxRequest( cachekey ) {
-		var start = ve.now();
+		var start = ve.now(),
+			fullEventName;
+
 		if ( typeof cachekey === 'string' ) {
 			data.cachekey = cachekey;
 		} else {
@@ -1204,33 +1140,47 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 			// If using the cache key fails, we'll come back here with cachekey still set
 			delete data.cachekey;
 		}
-		return target.constructor.static.apiRequest( data, { type: 'POST' } )
-			.then( function ( response, status, jqxhr ) {
-				var fullEventName, eventData = {
-					bytes: $.byteLength( jqxhr.responseText ),
-					duration: ve.now() - start,
-					parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
-				};
-				if ( response.error && response.error.code === 'badcachekey' ) {
-					// Log the failure if eventName was set
+		return new mw.Api().post( data )
+			.then(
+				function ( response, jqxhr ) {
+					var eventData = {
+						bytes: $.byteLength( jqxhr.responseText ),
+						duration: ve.now() - start,
+						parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
+					};
+
+					// Log data about the request if eventName was set
 					if ( eventName ) {
-						fullEventName = 'performance.system.' + eventName + '.badCacheKey';
+						fullEventName = 'performance.system.' + eventName +
+							( typeof cachekey === 'string' ? '.withCacheKey' : '.withoutCacheKey' );
 						target.events.track( fullEventName, eventData );
+					}
+					return jqxhr;
+				},
+				function ( errorName, errorObject ) {
+					var eventData;
+					if ( errorObject && errorObject.xhr ) {
+						eventData = {
+							bytes: $.byteLength( errorObject.xhr.responseText ),
+							duration: ve.now() - start,
+							parsoid: errorObject.xhr.getResponseHeader( 'X-Parsoid-Performance' )
+						};
+
+						if ( eventName ) {
+							if ( errorName === 'badcachekey' ) {
+								fullEventName = 'performance.system.' + eventName + '.badCacheKey';
+							} else {
+								fullEventName = 'performance.system.' + eventName + '.withoutCacheKey';
+							}
+							target.events.track( fullEventName, eventData );
+						}
 					}
 					// This cache key is evidently bad, clear it
 					target.clearPreparedCacheKey();
 					// Try again without a cache key
 					return ajaxRequest( null );
 				}
-
-				// Log data about the request if eventName was set
-				if ( eventName ) {
-					fullEventName = 'performance.system.' + eventName +
-						( typeof cachekey === 'string' ? '.withCacheKey' : '.withoutCacheKey' );
-					target.events.track( fullEventName, eventData );
-				}
-				return jqxhr;
-			} );
+			);
 	}
 
 	// If we successfully get prepared wikitext, then invoke ajaxRequest() with the cache key,

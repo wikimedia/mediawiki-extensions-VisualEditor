@@ -70,7 +70,7 @@ ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
 		value = value.slice( 1 );
 	}
 
-	return ve.init.target.constructor.static.apiRequest( {
+	return new mw.Api().get( {
 		action: 'opensearch',
 		search: value,
 		suggest: ''

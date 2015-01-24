@@ -21,7 +21,7 @@
 	 * @inheritdoc
 	 */
 	ve.init.mw.ImageInfoCache.prototype.getRequestPromise = function ( subqueue ) {
-		return ve.init.target.constructor.static.apiRequest(
+		return new mw.Api().get(
 			{
 				action: 'query',
 				prop: 'imageinfo',

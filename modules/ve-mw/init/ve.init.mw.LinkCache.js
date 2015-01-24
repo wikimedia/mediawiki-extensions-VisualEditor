@@ -77,7 +77,7 @@
 	 * @inheritdoc
 	 */
 	ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
-		return ve.init.target.constructor.static.apiRequest( {
+		return new mw.Api().get( {
 			action: 'query',
 			prop: 'info|pageprops',
 			ppprop: 'disambiguation',

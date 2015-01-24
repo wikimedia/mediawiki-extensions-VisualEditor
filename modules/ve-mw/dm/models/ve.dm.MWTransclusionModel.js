@@ -238,14 +238,14 @@
 	};
 
 	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, specs, queue ) {
-		return ve.init.target.constructor.static.apiRequest( {
+		var xhr = new mw.Api().get( {
 			action: 'templatedata',
 			titles: titles.join( '|' ),
 			lang: mw.config.get( 'wgUserLanguage' ),
 			redirects: '1'
-		} )
-			.done( this.fetchRequestDone.bind( this, titles, specs ) )
-			.always( this.fetchRequestAlways.bind( this, queue ) );
+		} ).done( this.fetchRequestDone.bind( this, titles, specs ) );
+		xhr.always( this.fetchRequestAlways.bind( this, queue, xhr ) );
+		return xhr;
 	};
 
 	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( titles, specs, data ) {
@@ -285,9 +285,9 @@
 		}
 	};
 
-	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( queue, data, textStatus, jqXHR ) {
+	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( queue, apiPromise ) {
 		// Prune completed request
-		var index = ve.indexOf( jqXHR, this.requests );
+		var index = ve.indexOf( apiPromise, this.requests );
 		if ( index !== -1 ) {
 			this.requests.splice( index, 1 );
 		}

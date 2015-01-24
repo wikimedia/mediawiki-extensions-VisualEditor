@@ -421,21 +421,28 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
  * Handle failed DOM load event.
  *
  * @method
- * @param {jqXHR|null} jqXHR jQuery XHR object
- * @param {string} status Text status message
- * @param {Mixed|null} error Thrown exception or HTTP error string
+ * @param {string} errorTypeText
+ * @param {string} error
  */
-ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
+ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( errorText, error ) {
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
 	if (
-		status !== 'abort' &&
-		( !jqXHR || ( jqXHR.status !== 0 && jqXHR.status !== 504 ) ) &&
-		confirm( ve.msg( 'visualeditor-loadwarning', status ) )
+		error &&
+		Object.prototype.hasOwnProperty.call( error, 'error' ) &&
+		Object.prototype.hasOwnProperty.call( error.error, 'info' )
+	) {
+		error = error.error.info;
+	}
+
+	if (
+		errorText === 'http' &&
+		( error.statusText !== 'abort' || error.xhr.status !== 504 ) &&
+		confirm( ve.msg( 'visualeditor-loadwarning', 'HTTP ' + error.xhr.status ) )
 	) {
 		this.load();
 	} else if (
-		jqXHR && jqXHR.status === 504 &&
+		errorText === 'http' && error.xhr.status === 504 &&
 		confirm( ve.msg( 'visualeditor-timeout' ) )
 	) {
 		if ( 'veaction' in this.currentUri.query ) {
@@ -443,6 +450,12 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
 		}
 		this.currentUri.query.action = 'edit';
 		location.href = this.currentUri.toString();
+	} else if (
+		errorText !== 'http' &&
+		typeof error === 'string' &&
+		confirm( ve.msg( 'visualeditor-loadwarning', errorText + ': ' + error ) )
+	) {
+		this.load();
 	} else {
 		// Something weird happened? Deactivate
 		// TODO: how does this handle load errors triggered from
@@ -1569,11 +1582,11 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 		}
 
 		if ( prefSaysShow ) {
-			ve.init.target.constructor.static.apiRequest( {
+			new mw.Api().post( {
 				action: 'options',
 				token: mw.user.tokens.get( 'editToken' ),
 				change: 'visualeditor-hidebetawelcome=1'
-			}, { type: 'POST' } );
+			} );
 
 		// No need to set a cookie every time for logged-in users that have already
 		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
