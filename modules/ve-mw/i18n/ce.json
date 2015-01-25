@@ -153,7 +153,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Корталг 4",
 	"visualeditor-languages-tool": "Меттанаш",
 	"visualeditor-linkinspector-illegal-title": "АгӀона магийна боцу корта",
-	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Цхьатера маьӀна долчера шорде агӀо|Цхьатера маьӀна долчера шорде агӀонаш}}",
+	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Цхьатера маьӀна долчера шордаран агӀо|Цхьатера маьӀна долчера шордаран агӀонаш}}",
 	"visualeditor-linkinspector-suggest-external-link": "Арахьара хьажорг",
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|йогӀуш йолу агӀо|йогӀуш йолу агӀонаш}}",
 	"visualeditor-linkinspector-suggest-new-page": "Керла агӀо",

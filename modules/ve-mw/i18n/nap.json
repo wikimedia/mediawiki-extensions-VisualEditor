@@ -26,7 +26,7 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Continua",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bemmenuto|Bemmenuta|Bemmenuto/a}} ncopp'â VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Testo alternativo",
-	"visualeditor-dialog-media-change-image": "Sceglie na fiùra differente",
+	"visualeditor-dialog-media-change-image": "Càgna fiùra",
 	"visualeditor-dialog-media-content-section": "Didascalia",
 	"visualeditor-dialog-media-position-center": "Centro",
 	"visualeditor-dialog-media-position-left": "Senista",
@@ -116,6 +116,5 @@
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
 	"visualeditor-version-label": "Verzione",
 	"visualeditor-wikitext-warning": "Si ausando VisualEditor - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, apre 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-link": "Help:Markup",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }
