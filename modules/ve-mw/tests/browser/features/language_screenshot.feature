@@ -3,43 +3,43 @@ Feature: Language Screenshot
 
   @language_screenshot
   Scenario: VisualEditor_Toolbar_Headings
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click the down arrow on Headings interface
     Then I should see Headings pull-down menu
 
   @language_screenshot
   Scenario: VisualEditor_Toolbar_Formatting
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click the text style menu
     Then I should see Formatting pull-down menu
 
   @language_screenshot
   Scenario: VisualEditor_More_Settings
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click the hamburger menu
     Then I should see pull-down menu containing Page Settings
 
   @language_screenshot
   Scenario: VisualEditor_Insert_Menu
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click on the Insert menu
     Then I should see Insert pull-down menu
 
   @language_screenshot
   Scenario: VisualEditor_Toolbar_SpecialCharacters
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click on the Special character option in Insert menu
     Then I should see Special character Insertion window
 
   @language_screenshot
   Scenario: VisualEditor_save_dialog
     Given I am logged in
-      And I am edit language screenshot page with Testing Save
+      And I edit language screenshot page with Testing Save
     When I click Save page
     Then I should see save changes dialog box
 
   Scenario: VisualEditor_Page_Settings
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
       And I click the hamburger menu
     When I click on Page settings option
     Then I should see Page settings dialog box
@@ -97,7 +97,7 @@ Feature: Language Screenshot
 
   @language_screenshot
   Scenario: VisualEditor_Cite_Pulldown
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click on Cite menu
     Then I should see Cite dropdown menu
 
@@ -121,12 +121,12 @@ Feature: Language Screenshot
   @language_screenshot
   Scenario: VisualEditor_toolbar
     Given I am logged in
-    When I am editing language screenshot page
+      And I am editing the language screenshots page
     Then I should see the VisualEditor tool-bar
 
   @language_screenshot
   Scenario: VisualEditor_category_editing
-    Given I am editing language screenshot page
+    Given I am editing the language screenshots page
     When I click on category in hamburger menu
     Then I should see category dialog box
 
@@ -139,7 +139,7 @@ Feature: Language Screenshot
   @language_screenshot
   Scenario: VisualEditor_toolbar_actions
     Given I am logged in
-    When I am edit language screenshot page with Testing toolbar
+    When I edit language screenshot page with Testing toolbar
     Then I should see action buttons in the end of the VisualEditor toolbar
 
   @language_screenshot
