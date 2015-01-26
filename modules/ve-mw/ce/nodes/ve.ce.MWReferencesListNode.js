@@ -210,7 +210,7 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 				$li.append(
 					this.$( '<span>' )
 						.addClass( 'reference-text' )
-						.append( viewNode.$element.show() )
+						.append( viewNode.$element )
 				);
 				// HACK: See bug 62682 - We happen to know that destroy doesn't abort async
 				// rendering for generated content nodes, but we really can't gaurantee that in the
