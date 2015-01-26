@@ -74,25 +74,32 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 };
 
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
+	// Workaround for jQuery's .children() being expensive due to
+	// https://github.com/jquery/sizzle/issues/311
+	function findChildren( parent, nodeNames ) {
+		return Array.prototype.filter.call( parent.childNodes, function ( element ) {
+			return nodeNames.indexOf( element.nodeName.toLowerCase() ) !== -1;
+		} );
+	}
+
 	var dataElement, newDimensions,
-		$figure = $( domElements[0] ),
-		// images with link='' have a span wrapper instead
-		$imgWrapper = $figure.children( 'a, span' ).eq( 0 ),
-		$img = $imgWrapper.children( 'img' ).eq( 0 ),
-		$caption = $figure.children( 'figcaption' ).eq( 0 ),
-		classAttr = $figure.attr( 'class' ),
-		typeofAttr = $figure.attr( 'typeof' ),
+		figure = domElements[0],
+		imgWrapper = findChildren( figure, [ 'a', 'span' ] )[0] || null,
+		img = imgWrapper && findChildren( imgWrapper, [ 'img' ] )[0] || null,
+		caption = findChildren( figure, [ 'figcaption' ] )[0] || null,
+		classAttr = figure.getAttribute( 'class' ),
+		typeofAttr = figure.getAttribute( 'typeof' ),
 		attributes = {
 			type: this.rdfaToType[typeofAttr],
-			href: $imgWrapper.attr( 'href' ) || '',
-			src: $img.attr( 'src' ),
-			resource: $img.attr( 'resource' )
+			href: imgWrapper && imgWrapper.getAttribute( 'href' ) || '',
+			src: img && img.getAttribute( 'src' ),
+			resource: img && img.getAttribute( 'resource' )
 		},
-		width = $img.attr( 'width' ),
-		height = $img.attr( 'height' ),
-		altText = $img.attr( 'alt' );
+		width = img && img.getAttribute( 'width' ),
+		height = img && img.getAttribute( 'height' ),
+		altText = img && img.getAttribute( 'alt' );
 
-	if ( altText !== undefined ) {
+	if ( altText !== null ) {
 		attributes.alt = altText;
 	}
 
@@ -100,8 +107,8 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 
 	attributes.align = attributes.align || 'default';
 
-	attributes.width = width !== undefined && width !== '' ? Number( width ) : null;
-	attributes.height = height !== undefined && height !== '' ? Number( height ) : null;
+	attributes.width = width !== null && width !== '' ? Number( width ) : null;
+	attributes.height = height !== null && height !== '' ? Number( height ) : null;
 
 	// Default-size
 	if ( attributes.defaultSize ) {
@@ -131,21 +138,20 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 
 	this.storeGeneratedContents( dataElement, dataElement.attributes.src, converter.getStore() );
 
-	if ( $caption.length === 0 ) {
+	if ( caption ) {
+		return [ dataElement ].
+			concat( converter.getDataFromDomClean( caption, { type: 'mwImageCaption' } ) ).
+			concat( [ { type: '/' + this.name } ] );
+	} else {
 		return [
 			dataElement,
 			{ type: 'mwImageCaption' },
 			{ type: '/mwImageCaption' },
 			{ type: '/' + this.name }
 		];
-	} else {
-		return [ dataElement ].
-			concat( converter.getDataFromDomClean( $caption[0], { type: 'mwImageCaption' } ) ).
-			concat( [ { type: '/' + this.name } ] );
 	}
 };
 
-// TODO: Consider using jQuery instead of pure JS.
 // TODO: At this moment node is not resizable but when it will be then adding defaultSize class
 // should be more conditional.
 ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) {
