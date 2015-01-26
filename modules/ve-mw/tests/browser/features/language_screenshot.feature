@@ -4,7 +4,7 @@ Feature: Language Screenshot
   @language_screenshot
   Scenario: VisualEditor_Toolbar_Headings
     Given I am editing the language screenshots page
-    When I click the down arrow on Headings interface
+    When I click the down arrow on the Headings menu
     Then I should see Headings pull-down menu
 
   @language_screenshot
