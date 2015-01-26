@@ -354,16 +354,17 @@ ve.init.mw.Target.static.apiRequest = function ( data, settings ) {
  * @param {HTMLDocument} sourceDoc Document whose base URL should be used for resolution
  */
 ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
-	var $base;
+	var baseNode;
 	if ( !targetDoc.baseURI ) {
-		$base = $( 'base', targetDoc );
-		if ( $base.length ) {
+		baseNode = targetDoc.getElementsByTagName( 'base' )[0];
+		if ( baseNode ) {
 			// Modify the existing <base> tag
-			$base.attr( 'href', ve.resolveUrl( $base.attr( 'href' ), sourceDoc ) );
+			baseNode.setAttribute( 'href', ve.resolveUrl( baseNode.getAttribute( 'href' ), sourceDoc ) );
 		} else {
 			// No <base> tag, add one
-			$base = $( '<base>', targetDoc ).attr( 'href', sourceDoc.baseURI );
-			$( 'head', sourceDoc ).append( $base );
+			baseNode = targetDoc.createElement( 'base' );
+			baseNode.setAttribute( 'href', sourceDoc.baseURI );
+			sourceDoc.head.appendChild( baseNode );
 		}
 	}
 };
