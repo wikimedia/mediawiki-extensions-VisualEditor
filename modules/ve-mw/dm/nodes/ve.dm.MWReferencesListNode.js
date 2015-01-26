@@ -43,7 +43,7 @@ ve.dm.MWReferencesListNode.static.matchRdfaTypes = [ 'mw:Extension/references' ]
 ve.dm.MWReferencesListNode.static.storeHtmlAttributes = false;
 
 ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, converter ) {
-	var referencesListData, $contents, contentsData,
+	var referencesListData, contentsDiv, contentsData,
 		mwDataJSON = domElements[0].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		refGroup = mwData.attrs && mwData.attrs.group || '',
@@ -60,8 +60,9 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 		}
 	};
 	if ( mwData.body && mwData.body.html ) {
-		$contents = $( '<div>', domElements[0].ownerDocument ).append( mwData.body.html );
-		contentsData = converter.getDataFromDomClean( $contents[0] );
+		contentsDiv = domElements[0].ownerDocument.createElement( 'div' );
+		contentsDiv.innerHTML = mwData.body.html;
+		contentsData = converter.getDataFromDomClean( contentsDiv );
 		return [ referencesListData ].
 			concat( contentsData ).
 			concat( [ { type: '/' + this.name } ] );
@@ -72,7 +73,9 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 };
 
 ve.dm.MWReferencesListNode.static.toDomElements = function ( data, doc, converter ) {
-	var el, els, mwData, originalMw, wrapper, contentsHtml, originalHtml,
+	var el, els, mwData, originalMw, contentsHtml, originalHtml,
+		wrapper = doc.createElement( 'div' ),
+		originalHtmlWrapper = doc.createElement( 'div' ),
 		dataElement = data[0],
 		attribs = dataElement.attributes,
 		contentsData = data.slice( 1, -1 );
@@ -99,12 +102,12 @@ ve.dm.MWReferencesListNode.static.toDomElements = function ( data, doc, converte
 	el.setAttribute( 'typeof', 'mw:Extension/references' );
 
 	if ( contentsData.length > 2 ) {
-		wrapper = doc.createElement( 'div' );
 		converter.getDomSubtreeFromData( data.slice( 1, -1 ), wrapper );
-		contentsHtml = $( wrapper ).html(); // Returns '' if wrapper is empty
+		contentsHtml = wrapper.innerHTML; // Returns '' if wrapper is empty
 		originalHtml = ve.getProp( mwData, 'body', 'html' ) || '';
+		originalHtmlWrapper.innerHTML = originalHtml;
 		// Only set body.html if contentsHtml and originalHtml are actually different
-		if ( !$( '<div>' ).html( originalHtml ).get( 0 ).isEqualNode( wrapper ) ) {
+		if ( !originalHtmlWrapper.isEqualNode( wrapper ) ) {
 			ve.setProp( mwData, 'body', 'html', contentsHtml );
 		}
 	}

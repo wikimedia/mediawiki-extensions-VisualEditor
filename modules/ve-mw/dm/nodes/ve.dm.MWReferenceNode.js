@@ -89,6 +89,7 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		originalMw, childDomElements, listKeyParts, name,
 		el = doc.createElement( 'span' ),
 		itemNodeWrapper = doc.createElement( 'div' ),
+		originalHtmlWrapper = doc.createElement( 'div' ),
 		itemNode = converter.internalList.getItemNode( dataElement.attributes.listIndex ),
 		itemNodeRange = itemNode.getRange();
 
@@ -141,10 +142,11 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 			itemNode.getDocument().getFullData( itemNodeRange, true ),
 			itemNodeWrapper
 		);
-		itemNodeHtml = $( itemNodeWrapper ).html(); // Returns '' if itemNodeWrapper is empty
+		itemNodeHtml = itemNodeWrapper.innerHTML; // Returns '' if itemNodeWrapper is empty
 		originalHtml = ve.getProp( mwData, 'body', 'html' ) || '';
+		originalHtmlWrapper.innerHTML = originalHtml;
 		// Only set body.html if itemNodeHtml and originalHtml are actually different
-		if ( !$( '<div>' ).html( originalHtml ).get( 0 ).isEqualNode( itemNodeWrapper ) ) {
+		if ( !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {
 			ve.setProp( mwData, 'body', 'html', itemNodeHtml );
 		}
 	}
