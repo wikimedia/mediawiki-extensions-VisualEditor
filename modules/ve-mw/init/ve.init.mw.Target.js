@@ -224,6 +224,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Structure
 	{
+		classes: [ 've-test-toolbar-structure' ],
 		type: 'list',
 		icon: 'bullet-list',
 		indicator: 'down',
