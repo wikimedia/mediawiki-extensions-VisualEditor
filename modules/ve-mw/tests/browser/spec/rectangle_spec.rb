@@ -48,7 +48,6 @@ describe 'Rectangle' do
 end
 
 describe 'Calculate topleft co-ordinates' do
-
   it 'if we provide 1 rectangle then it should return top left co-ordinates of the input rectangle' do
     input_rectangle = [2, 2, 1, 1]
     input_rectangles = [input_rectangle]
@@ -72,11 +71,9 @@ describe 'Calculate topleft co-ordinates' do
     output_coordinates = [1, 1]
     expect(top_left_x_y(input_rectangles)).to eq(output_coordinates)
   end
-
 end
 
 describe 'Topleft co-ordinates x' do
-
   it 'if we provide 1 rectangle then it should return array of top left x co-ordinate of the input rectangle' do
     input_rectangle = [2, 2, 1, 1]
     input_rectangles = [input_rectangle]
@@ -100,11 +97,9 @@ describe 'Topleft co-ordinates x' do
     output_coordinates = [3, 2, 1]
     expect(top_left_x_coordinates(input_rectangles)).to eq(output_coordinates)
   end
-
 end
 
 describe 'Topleft co-ordinates y' do
-
   it 'if we provide 1 rectangle then it should return array of top left y co-ordinate of the input rectangle' do
     input_rectangle = [2, 2, 1, 1]
     input_rectangles = [input_rectangle]
@@ -128,11 +123,9 @@ describe 'Topleft co-ordinates y' do
     output_coordinates = [3, 2, 1]
     expect(top_left_y_coordinates(input_rectangles)).to eq(output_coordinates)
   end
-
 end
 
 describe 'Calculate bottomright co-ordinates' do
-
   it 'if we provide 1 rectangle then it should return bottom right co-ordinates of the input rectangle' do
     input_rectangle = [2, 2, 1, 1]
     input_rectangles = [input_rectangle]
@@ -156,11 +149,9 @@ describe 'Calculate bottomright co-ordinates' do
     output_coordinates = [4, 4]
     expect(bottom_right_x_y(input_rectangles)).to eq(output_coordinates)
   end
-
 end
 
 describe 'Bottom right co-ordinates x' do
-
   it 'if we provide 1 rectangle then it should return array of bottom right x co-ordinate of the input rectangle' do
     input_rectangle = [2, 2, 1, 1]
     input_rectangles = [input_rectangle]
@@ -184,11 +175,9 @@ describe 'Bottom right co-ordinates x' do
     output_coordinates = [4, 3, 2]
     expect(bottom_right_x_coordinates(input_rectangles)).to eq(output_coordinates)
   end
-
 end
 
 describe 'Bottom right co-ordinates y' do
-
   it 'if we provide 1 rectangle then it should return array of bottom right y co-ordinate of the input rectangle' do
     input_rectangle = [2, 2, 1, 1]
     input_rectangles = [input_rectangle]
@@ -212,5 +201,4 @@ describe 'Bottom right co-ordinates y' do
     output_coordinates = [4, 3, 2]
     expect(bottom_right_y_coordinates(input_rectangles)).to eq(output_coordinates)
   end
-
 end
