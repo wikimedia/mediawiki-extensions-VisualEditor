@@ -52,23 +52,12 @@ $wgMessagesDirs['VisualEditor'] = array(
 // Register API modules
 $wgAPIModules['visualeditor'] = array(
 	'class' => 'ApiVisualEditor',
-	'factory' => 'wfVisualEditorApiFactory',
+	'factory' => 'VisualEditorHooks::VisualEditorApiFactory',
 );
 $wgAPIModules['visualeditoredit'] = array(
 	'class' => 'ApiVisualEditorEdit',
-	'factory' => 'wfVisualEditorApiFactory',
+	'factory' => 'VisualEditorHooks::VisualEditorApiFactory',
 );
-
-/**
- * @param ApiMain $main
- * @param string $name
- * @return ApiVisualEditor|ApiVisualEditorEdit
- */
-function wfVisualEditorApiFactory( $main, $name ) {
-	$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-	$class = $name === 'visualeditor' ? 'ApiVisualEditor' : 'ApiVisualEditorEdit';
-	return new $class( $main, $name, $config );
-}
 
 // Register Config instance
 $wgConfigRegistry['visualeditor'] = 'GlobalVarConfig::newInstance';

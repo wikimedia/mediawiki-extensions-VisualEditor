@@ -21,6 +21,22 @@ class VisualEditorHooks {
 	}
 
 	/**
+	 * Function called by extension registration once all extensions have been registered
+	 */
+	public static function onRegistration() {
+		global $wgVisualEditorNamespaces, $wgContentNamespaces;
+
+		$wgVisualEditorNamespaces = array_merge( $wgContentNamespaces, array( NS_USER ) );
+	}
+
+	public static function VisualEditorApiFactory( $main, $name ) {
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$class = $name === 'visualeditor' ? 'ApiVisualEditor' : 'ApiVisualEditorEdit';
+		return new $class( $main, $name, $config );
+	}
+
+
+	/**
 	 * Adds VisualEditor JS to the output.
 	 *
 	 * This is attached to the MediaWiki 'BeforePageDisplay' hook.
@@ -410,7 +426,10 @@ class VisualEditorHooks {
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $veConfig->get( 'VisualEditorNamespaces' ),
-			'pluginModules' => $veConfig->get( 'VisualEditorPluginModules' ),
+			'pluginModules' => array_merge(
+				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
+				$veConfig->get( 'VisualEditorPluginModules' ) // @todo deprecate the global setting
+			),
 			'defaultUserOptions' => array(
 				'betatempdisable' => $defaultUserOptions['visualeditor-betatempdisable'],
 				'enable' => $defaultUserOptions['visualeditor-enable'],
@@ -441,8 +460,10 @@ class VisualEditorHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
-		$veResourceTemplate = ConfigFactory::getDefaultInstance()
-			->makeConfig( 'visualeditor')->get( 'VisualEditorResourceTemplate' );
+		$veResourceTemplate = array(
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'VisualEditor',
+		);
 		$libModules = array(
 			'jquery.uls.data' => $veResourceTemplate + array(
 				'scripts' => array(
