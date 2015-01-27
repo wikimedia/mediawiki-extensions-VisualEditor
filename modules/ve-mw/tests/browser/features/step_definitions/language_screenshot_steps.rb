@@ -51,7 +51,7 @@ Given(/^I go to "(.*?)" page containing math formula/) do |page_title|
 end
 
 When(/^I click on the Insert menu$/) do
-  on(VisualEditorPage).insert_menu_element.when_present.click
+  on(VisualEditorPage).insert_indicator_down_element.when_present.click
 end
 
 When(/^I click on the Special character option in Insert menu$/) do
@@ -81,7 +81,7 @@ When(/^I click on Insert media button$/) do
 end
 
 When(/^I click on Cite menu$/) do
-  on(VisualEditorPage).cite_menu_element.when_present.click
+  on(VisualEditorPage).cite_indicator_down_element.when_present.click
 end
 
 When(/^I send right arrow times (\d+)$/) do |number|
@@ -132,7 +132,7 @@ Then(/^I should see Headings pull-down menu$/) do
 end
 
 Then(/^I take screenshot of pull-dowm menu$/) do
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.toolbar_format_element, @current_page.heading_dropdown_menus_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.format_indicator_down_element, @current_page.heading_dropdown_menus_element])
 end
 
 Then(/^I should see Formatting pull-down menu$/) do
@@ -162,13 +162,13 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   step 'I click on More in insert pull-down menu'
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_menu_element, @current_page.insert_pull_down_element]
+    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
   )
 
   highlight @current_page.media_insert_menu_element
   capture_screenshot(
     "VisualEditor_Media_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_menu_element, @current_page.insert_pull_down_element],
+    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element],
     nil,
     0
   )
@@ -177,7 +177,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   highlight @current_page.template_insert_menu_element
   capture_screenshot(
     "VisualEditor_Template_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_menu_element, @current_page.insert_pull_down_element],
+    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element],
     nil,
     0
   )
@@ -186,7 +186,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   highlight @current_page.ref_list_insert_menu_element
   capture_screenshot(
     "VisualEditor_References_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_menu_element, @current_page.insert_pull_down_element],
+    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element],
     nil,
     0
   )
@@ -195,7 +195,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   highlight @current_page.formula_insert_menu_element
   capture_screenshot(
     "VisualEditor_Formula_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_menu_element, @current_page.insert_pull_down_element],
+    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element],
     nil,
     0
   )
@@ -269,7 +269,7 @@ end
 
 Then (/^I should see Cite dropdown menu$/) do
   on(VisualEditorPage).cite_pull_down_element.when_present.should be_visible
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.cite_pull_down_element, @current_page.cite_menu_element])
+  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.cite_pull_down_element, @current_page.cite_indicator_down_element])
 end
 
 Then(/^I should see Reference icon$/) do

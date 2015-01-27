@@ -31,5 +31,5 @@ When(/^I click Subheading4$/) do
 end
 
 When(/^I click the down arrow on the Headings menu$/) do
-  on(VisualEditorPage).toolbar_format_element.when_present.click
+  on(VisualEditorPage).format_indicator_down_element.when_present.click
 end

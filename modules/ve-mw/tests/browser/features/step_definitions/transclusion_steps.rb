@@ -16,7 +16,7 @@ end
 
 Given(/^I click Transclusion$/) do
   on(VisualEditorPage) do |page|
-    page.insert_menu_element.when_present.click
+    page.insert_indicator_down_element.when_present.click
     page.transclusion_element.when_present.click
   end
 end
