@@ -172,6 +172,7 @@ class VisualEditorPage
   span(:ve_underline, class: 'oo-ui-iconElement-icon oo-ui-icon-underline-u')
   div(:visual_editor_toolbar, class: 'oo-ui-toolbar-tools')
   text_area(:wikitext_editor, id: 'wpTextbox1')
+  text_area(:formula_area, css: '.oo-ui-popupWidget-popup textarea')
 
   in_iframe(index: 0) do |frame|
     div(:extension_reference, class: 've-ui-mwReferenceResultWidget-shield', frame: frame)
@@ -189,6 +190,5 @@ class VisualEditorPage
     div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 1, frame: frame)
     list_item(:media_advanced_settings, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-optionWidget oo-ui-decoratedOptionWidget oo-ui-outlineItemWidget oo-ui-outlineItemWidget-level-0 oo-ui-iconElement oo-ui-labelElement', frame: frame)
     a(:insert_media, css: 'div.oo-ui-processDialog-actions-primary > div.oo-ui-buttonElement-frameless > a', frame: frame)
-    text_area(:formula_area, class: 'oo-ui-ltr', frame: frame)
   end
 end

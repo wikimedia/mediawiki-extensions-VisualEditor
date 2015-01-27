@@ -102,6 +102,7 @@ end
 
 When(/^I click on Formula option in Insert menu$/) do
   step 'I click on the Insert menu'
+  step 'I click on More in insert pull-down menu'
   on(VisualEditorPage).formula_link_element.when_present.click
 end
 

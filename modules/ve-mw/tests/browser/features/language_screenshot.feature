@@ -132,6 +132,7 @@ Feature: Language Screenshot
     When I click on category in hamburger menu
     Then I should see category dialog box
 
+  @language_screenshot
   Scenario: VisualEditor_formula
     Given I go to the "Formula Screenshot" page with source content ""
     When I click on Formula option in Insert menu
