@@ -37,7 +37,8 @@
 			"Nnemo",
 			"McDutchie",
 			"Jdforrester",
-			"Amire80"
+			"Amire80",
+			"Weft"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -99,6 +100,7 @@
 	"visualeditor-dialog-media-info-audiofile": "Fichier audio",
 	"visualeditor-dialog-media-info-created": "Créé : $1",
 	"visualeditor-dialog-media-info-credit": "Crédit",
+	"visualeditor-dialog-media-info-dateformat": "$2 $1 $3",
 	"visualeditor-dialog-media-info-imagedescription": "Description complète",
 	"visualeditor-dialog-media-info-licenseshortname": "Licence",
 	"visualeditor-dialog-media-info-moreinfo": "Plus d’informations",
