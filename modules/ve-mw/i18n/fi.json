@@ -14,7 +14,8 @@
 			"Skalman",
 			"Stryn",
 			"VezonThunder",
-			"Elseweyr"
+			"Elseweyr",
+			"McSalama"
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "Merkitse pieneksi muutokseksi.",
@@ -47,7 +48,7 @@
 	"visualeditor-dialog-beta-welcome-content": "Tämä on uusi, helpompi tapamme muokata. Se on vielä beetavaiheessa, mikä tarkoittaa, että osia sivuista ei voi muokata tai muokkauksessa esiintyy ongelmia, jotka pitää korjata. Kehotamme tarkistamaan muutoksesi ja otamme mielellämme vastaan kaikki raportit ongelmista, joihin saatat törmätä Visuaalista muokkainta käyttäessäsi (klikkaa '{{int:visualeditor-help-tool}}' -nappia antaaksesi palautetta). Voit vaihtaa wikiteksti-muokkaimeen milloin tahansa napsauttamalla \"$1\"-välilehteä, säilyttäen kaikki tekemäsi muutokset.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Tervetuloa}} Visuaaliseen muokkaimeen",
 	"visualeditor-dialog-media-alttext-section": "Vaihtoehtoinen teksti",
-	"visualeditor-dialog-media-change-image": "Valitse toinen kuva",
+	"visualeditor-dialog-media-change-image": "Vaihda kuva",
 	"visualeditor-dialog-media-content-section": "Kuvateksti",
 	"visualeditor-dialog-media-goback": "Takaisin",
 	"visualeditor-dialog-media-noresults": "Tuloksia ei löytynyt.",
