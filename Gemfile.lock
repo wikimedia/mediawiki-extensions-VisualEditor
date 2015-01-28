@@ -101,6 +101,6 @@ PLATFORMS
 DEPENDENCIES
   chunky_png
   mediawiki_api
-  mediawiki_selenium
+  mediawiki_selenium (~> 0.4.1)
   rspec
   rubocop
