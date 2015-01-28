@@ -123,10 +123,10 @@ When(/^I click on References list in Insert menu$/) do
 end
 
 Then(/^I should see category dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element]
+    [@current_page.window_frame_element]
   )
 end
 
@@ -221,31 +221,31 @@ Then(/^I click on More in insert pull-down menu$/) do
 end
 
 Then(/^I should see Special character Insertion window$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element],
+    [@current_page.window_frame_element],
     nil,
     -2
   )
 end
 
 Then(/^I should see save changes dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element],
+    [@current_page.window_frame_element],
     nil,
     -2
   )
 end
 
 Then(/^I should see Page settings dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
 
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element],
+    [@current_page.window_frame_element],
     nil,
     0
   )
@@ -293,7 +293,7 @@ Then(/^I should see link Content box with dropdown options$/) do
   on(VisualEditorPage).link_list_element.when_present(5).should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.link_list_element, @current_page.iframe_element, @current_page.new_link_element],
+    [@current_page.link_list_element, @current_page.window_frame_element, @current_page.new_link_element],
     nil,
     0
   )
@@ -308,19 +308,19 @@ Then(/^I should see link icon$/) do
 end
 
 Then(/^I should see media editing dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element]
+    [@current_page.window_frame_element]
   )
 end
 
 Then(/^I should see media caption dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
 
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element],
+    [@current_page.window_frame_element],
     nil,
     0
   )
@@ -328,15 +328,15 @@ Then(/^I should see media caption dialog box$/) do
   capture_screenshot(
     "VisualEditor_Media_alternative_text-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.media_alternative_block_element],
-    @current_page.iframe_element
+    @current_page.window_frame_element
   )
 end
 
 Then(/^I should see media advanced settings dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element],
+    [@current_page.window_frame_element],
     nil,
     0
   )
@@ -367,10 +367,10 @@ Then(/^I should see Reference icon$/) do
 end
 
 Then(/^I should see Basic Reference dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element]
+    [@current_page.window_frame_element]
   )
 end
 
@@ -400,13 +400,13 @@ end
 
 Then(/^I should see the formula insertion menu$/) do
   on(VisualEditorPage) do |page|
-    page.iframe_element.when_present.should be_visible
+    page.window_frame_element.when_present.should be_visible
     page.formula_image_element.when_present(5).should be_visible
   end
 
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element, @current_page.formula_image_element],
+    [@current_page.window_frame_element, @current_page.formula_image_element],
     nil,
     0
   )
@@ -425,10 +425,10 @@ Then(/^I should see action buttons in the end of the VisualEditor toolbar$/) do
 end
 
 Then(/^I should see References list dialog box$/) do
-  on(VisualEditorPage).iframe_element.when_present.should be_visible
+  on(VisualEditorPage).window_frame_element.when_present.should be_visible
   capture_screenshot(
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.iframe_element],
+    [@current_page.window_frame_element],
     nil,
     0
   )
