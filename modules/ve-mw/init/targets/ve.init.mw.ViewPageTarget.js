@@ -549,6 +549,15 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 			lastModified,
 			contentSub
 		);
+
+		if ( newid !== undefined ) {
+			$( '#t-permalink a, #coll-download-as-rl a' ).each( function () {
+				var uri = new mw.Uri( $( this ).attr( 'href' ) );
+				uri.query.oldid = newid;
+				$( this ).attr( 'href', uri.toString() );
+			} );
+		}
+
 		this.setupSectionEditLinks();
 		// Tear down the target now that we're done saving
 		// Not passing trackMechanism because this isn't an abort action
