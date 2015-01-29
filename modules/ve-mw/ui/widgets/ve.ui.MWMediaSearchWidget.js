@@ -32,6 +32,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.titles = {};
 	this.queryMediaSourcesCallback = this.queryMediaSources.bind( this );
 	this.promises = [];
+	this.layoutQueue = [];
 	this.numItems = 0;
 	this.lang = config.lang || 'en';
 
@@ -246,9 +247,10 @@ ve.ui.MWMediaSearchWidget.prototype.resetPromises = function () {
 	}
 
 	this.rowIndex = 0;
-
 	// Empty the promise array
 	this.promises = [];
+	// Empty the results queue
+	this.layoutQueue = [];
 };
 
 /**
@@ -329,41 +331,61 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
  * @param {ve.ui.MWMediaResultWidget[]} items An array of item elements
  */
 ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
-	var i, j, ilen, jlen, itemWidth, row, effectiveWidth, resizeFactor,
-		maxLineWidth = this.results.$element.innerWidth() - 10;
+	var search = this;
 
-	// Go over the added items
-	row = this.getAvailableRow();
-	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
-		// TODO: Figure out a better way to calculate the margins
-		// between images (for now, hard-coded as 6)
-		itemWidth = items[i].$element.outerWidth() + 6;
-		// Add items to row until it is full
-		if ( this.rows[row].width + itemWidth >= maxLineWidth ) {
-			// Mark this row as full
-			this.rows[row].isFull = true;
-			this.rows[row].$element.attr( 'data-full', true );
-			// Resize all images in the row to fit the width
-			effectiveWidth = this.rows[row].width;
-			resizeFactor = maxLineWidth / effectiveWidth;
-			for ( j = 0, jlen = this.rows[row].items.length; j < jlen; j++ ) {
-				this.rows[row].items[j].resizeThumb( resizeFactor );
+	// Add method to a queue; this queue will only run when the widget
+	// is visible
+	this.layoutQueue.push( function () {
+		var i, j, ilen, jlen, itemWidth, row, effectiveWidth, resizeFactor,
+			maxLineWidth = search.results.$element.innerWidth() - 10;
+
+		// Go over the added items
+		row = search.getAvailableRow();
+		for ( i = 0, ilen = items.length; i < ilen; i++ ) {
+			// TODO: Figure out a better way to calculate the margins
+			// between images (for now, hard-coded as 6)
+			itemWidth = items[i].$element.outerWidth() + 6;
+			// Add items to row until it is full
+			if ( search.rows[row].width + itemWidth >= maxLineWidth ) {
+				// Mark this row as full
+				search.rows[row].isFull = true;
+				search.rows[row].$element.attr( 'data-full', true );
+				// Resize all images in the row to fit the width
+				effectiveWidth = search.rows[row].width;
+				resizeFactor = maxLineWidth / effectiveWidth;
+				for ( j = 0, jlen = search.rows[row].items.length; j < jlen; j++ ) {
+					search.rows[row].items[j].resizeThumb( resizeFactor );
+				}
+				// find another row
+				row = search.getAvailableRow();
 			}
-			// find another row
-			row = this.getAvailableRow();
+			// Append to row
+			search.rows[row].width += itemWidth;
+			// Store reference to the item
+			search.rows[row].items.push( items[i] );
+			items[i].setRow( row );
+			// Append the item
+			search.rows[row].$element.append( items[i].$element );
 		}
-		// Append to row
-		this.rows[row].width += itemWidth;
-		// Store reference to the item
-		this.rows[row].items.push( items[i] );
-		items[i].setRow( row );
-		// Append the item
-		this.rows[row].$element.append( items[i].$element );
-	}
 
-	// If we have less than 4 rows, call for more images
-	if ( this.rows.length < 4 ) {
-		this.queryMediaSources();
+		// If we have less than 4 rows, call for more images
+		if ( search.rows.length < 4 ) {
+			search.queryMediaSources();
+		}
+	} );
+	this.runLayoutQueue();
+};
+
+/**
+ * Run layout methods from the queue only if the element is visible.
+ */
+ve.ui.MWMediaSearchWidget.prototype.runLayoutQueue = function () {
+	var i, len;
+
+	if ( this.$element.is( ':visible' ) ) {
+		for ( i = 0, len = this.layoutQueue.length; i < len; i++ ) {
+			this.layoutQueue.pop()();
+		}
 	}
 };
 
