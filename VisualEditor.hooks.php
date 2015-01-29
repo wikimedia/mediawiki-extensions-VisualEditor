@@ -367,6 +367,13 @@ class VisualEditorHooks {
 */
 	}
 
+	/**
+	 * Implements the ListDefinedTags and ChangeTagsListActive hooks, to populate
+	 * core Special:Tags with the change tags in use by VisualEditor.
+	 *
+	 * @param array $tags
+	 * @return bool true
+	 */
 	public static function onListDefinedTags( &$tags ) {
 		$tags[] = 'visualeditor';
 		$tags[] = 'visualeditor-needcheck';

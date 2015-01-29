@@ -80,6 +80,7 @@ $wgHooks['DoEditSectionLink'][] = 'VisualEditorHooks::onDoEditSectionLink';
 $wgHooks['GetBetaFeaturePreferences'][] = 'VisualEditorHooks::onGetBetaPreferences';
 $wgHooks['GetPreferences'][] = 'VisualEditorHooks::onGetPreferences';
 $wgHooks['ListDefinedTags'][] = 'VisualEditorHooks::onListDefinedTags';
+$wgHooks['ChangeTagsListActive'][] = 'VisualEditorHooks::onListDefinedTags';
 $wgHooks['MakeGlobalVariablesScript'][] = 'VisualEditorHooks::onMakeGlobalVariablesScript';
 $wgHooks['RedirectSpecialArticleRedirectParams'][] =
 	'VisualEditorHooks::onRedirectSpecialArticleRedirectParams';
