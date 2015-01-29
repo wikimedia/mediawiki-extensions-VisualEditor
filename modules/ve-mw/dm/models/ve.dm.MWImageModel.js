@@ -313,8 +313,11 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, dimensions ) 
 			// Scale the new image by its width
 			newDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
 				dimensions,
-				this.boundingBox,
-				'width'
+				// Go by width to prevent dirty diffs
+				{
+					width: this.boundingBox.width,
+					height: Infinity
+				}
 			);
 		} else {
 			newDimensions = dimensions;

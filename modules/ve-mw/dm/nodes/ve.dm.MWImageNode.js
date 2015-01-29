@@ -91,56 +91,23 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
  * Translate the image dimensions into new ones according to the bounding box.
  * @param {Object} imageDimension Width and height of the image
  * @param {Object} boundingBox The limit of the bounding box
- * @param {string} [sideConstraint] Constrain by height or width
- * @returns {Object|null} The new width and height of the scaled image or null if
- * the given dimensions are missing width or height values and cannot be computed.
+ * @returns {Object} The new width and height of the scaled image.
  */
-ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox, sideConstraint ) {
-	var limitNumber, dimCalcObject;
-
-	if ( $.isEmptyObject( boundingBox ) ) {
-		return imageDimensions;
-	}
-
-	if ( imageDimensions.width && imageDimensions.height) {
-		// First, find the bounding box number (which is the bigger
-		// of the two values)
-		if (
-			sideConstraint === 'width' ||
-			boundingBox.width > boundingBox.height &&
-			sideConstraint !== 'height'
-		) {
-			limitNumber = boundingBox.width;
-		} else {
-			limitNumber = boundingBox.height;
-		}
-
-		// Second, check which of the image dimensions is bigger and apply
-		// the limit to it
-		if (
-			sideConstraint === 'width' ||
-			imageDimensions.width >= imageDimensions.height &&
-			sideConstraint !== 'height'
-		) {
-			// Check if the width is not smaller than the limit number
-			if ( imageDimensions.width <= limitNumber ) {
-				return imageDimensions;
-			}
-			// Limit by width
-			dimCalcObject = { width: limitNumber };
-		} else {
-			// Check if the height is not smaller than the limit number
-			if ( imageDimensions.height <= limitNumber ) {
-				return imageDimensions;
-			}
-			dimCalcObject = { height: limitNumber };
-		}
-
-		return ve.dm.Scalable.static.getDimensionsFromValue(
-			dimCalcObject,
-			imageDimensions.width / imageDimensions.height
+ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox ) {
+	var newDimensions = ve.copy( imageDimensions ),
+		scale = Math.min(
+			boundingBox.height / imageDimensions.height,
+			boundingBox.width / imageDimensions.width
 		);
+
+	if ( scale < 1 ) {
+		// Scale down
+		newDimensions = {
+			width: newDimensions.width * scale,
+			height: newDimensions.height * scale
+		};
 	}
+	return newDimensions;
 };
 
 /**

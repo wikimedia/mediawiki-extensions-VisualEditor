@@ -26,8 +26,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 
 	// Properties
 	this.sources = {};
-	this.size = config.size || 200;
-	this.fullSize = config.fullSize || 500;
+	this.rowHeight = config.rowHeight || 200;
 	this.$panels = config.$panels;
 	this.queryTimeout = null;
 	this.titles = {};
@@ -73,6 +72,14 @@ ve.ui.MWMediaSearchWidget.prototype.setSources = function ( sources ) {
 };
 
 /**
+ * Set the fileRepo sources for the media search
+ * @param {Object} sources The sources object
+ */
+ve.ui.MWMediaSearchWidget.prototype.getSources = function () {
+	return this.sources;
+};
+
+/**
  * Handle select widget select events.
  *
  * @param {string} value New value
@@ -110,12 +117,33 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsChoose = function ( item ) {
  */
 ve.ui.MWMediaSearchWidget.prototype.onResultsScroll = function () {
 	var position = this.$results.scrollTop() + this.$results.outerHeight(),
-		threshold = this.results.$element.outerHeight() - this.size;
+		threshold = this.results.$element.outerHeight() - this.rowHeight * 3;
+
+	// Check if we need to ask for more results
 	if ( !this.query.isPending() && position > threshold ) {
 		this.queryMediaSources();
 	}
+
+	this.lazyLoadResults();
 };
 
+/**
+ * Lazy-load the images that are visible.
+ */
+ve.ui.MWMediaSearchWidget.prototype.lazyLoadResults = function () {
+	var i, elementTop,
+		items = this.results.getItems(),
+		resultsScrollTop = this.$results.scrollTop(),
+		position = resultsScrollTop + this.$results.outerHeight();
+	// Lazy-load results
+	for ( i = 0; i < items.length; i++ ) {
+		elementTop = items[i].$element.position().top;
+		if ( elementTop <= position && !items[i].hasSrc() ) {
+			// Load the image
+			items[i].lazyLoad();
+		}
+	}
+};
 /**
  * Query all sources for media.
  *
@@ -170,14 +198,15 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 				generator: 'search',
 				gsrsearch: value,
 				gsrnamespace: 6,
-				gsrlimit: 20,
+				// Initial number of images
+				// NOTE: If this is too high, it triggers Common's bot prevention code
+				gsrlimit: 30,
 				gsroffset: source.gsroffset,
 				prop: 'imageinfo',
 				// Language of the extmetadata details
 				iiextmetadatalanguage: lang,
 				iiprop: 'dimensions|url|mediatype|extmetadata|timestamp',
-				// Height of the dialog minus margins
-				iiurlheight: this.fullSize,
+				iiurlheight: this.rowHeight,
 				// Width of the dialog
 				iiurlwidth: 600 - 30 // Take off 30px for the margins
 			}, ajaxOptions )
@@ -235,6 +264,7 @@ ve.ui.MWMediaSearchWidget.prototype.onAllMediaQueriesDone = function () {
 		this.$noItemsMessage.show();
 	} else {
 		this.$noItemsMessage.hide();
+		this.lazyLoadResults();
 	}
 };
 
@@ -387,7 +417,7 @@ ve.ui.MWMediaSearchWidget.prototype.onMediaQueryDone = function ( source, data )
 					new ve.ui.MWMediaResultWidget( {
 						$: this.$,
 						data: pages[page],
-						size: this.size,
+						size: this.rowHeight,
 						maxSize: this.results.$element.width() / 3
 					} )
 				);

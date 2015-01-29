@@ -26,6 +26,7 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 	this.isSettingUpModel = false;
 	this.isInsertion = false;
 	this.selectedImageInfo = null;
+	this.searchCache = {};
 
 	this.$element.addClass( 've-ui-mwMediaDialog' );
 };
@@ -199,9 +200,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Define the media search page
 	this.search = new ve.ui.MWMediaSearchWidget( {
-		$: this.$,
-		// Height of the panels
-		fullSize: 400
+		$: this.$
 	} );
 
 	this.$body.append( this.search.$spinner );
@@ -414,7 +413,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
  * @param {Object} info Image info
  */
 ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
-	var i, newDimensions, field, isPortrait, $info, $section,
+	var i, newDimensions, field, isPortrait, $info, $section, windowWidth,
 		contentDirection = this.getFragment().getDocument().getDir(),
 		imageinfo = info.imageinfo[0],
 		imageTitle = new OO.ui.LabelWidget( {
@@ -499,7 +498,6 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 		fields = {},
 		// Store clean API data
 		apiData = {},
-		windowWidth = this.mediaImageInfoPanel.$element.innerWidth(),
 		fileType = this.getFileType( imageinfo.url ),
 		$thumbContainer = this.$( '<div>' )
 			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-thumb' ),
@@ -572,12 +570,25 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 	$info = this.$( '<div>' )
 		.addClass( 've-ui-mwMediaDialog-panel-imageinfo-info' )
 		.append(
-			$main.attr( 'dir', contentDirection ),
+			$main.prop( 'dir', contentDirection ),
 			$details
 		);
 
 	// Make sure all links open in a new window
-	$info.find( 'a' ).attr( 'target', '_blank' );
+	$info.find( 'a' ).prop( 'target', '_blank' );
+
+	// Initialize thumb container
+	$thumbContainer
+		.append( $image.prop( 'src', imageinfo.thumburl ) );
+
+	this.$infoPanelWrapper.append(
+		$thumbContainer,
+		$info
+	);
+
+	// Force a scrollbar to the screen before we measure it
+	this.mediaImageInfoPanel.$element.css( 'overflow-y', 'scroll' );
+	windowWidth = this.mediaImageInfoPanel.$element.width();
 
 	// Define thumbnail size
 	if ( imageinfo.mediatype === 'AUDIO' ) {
@@ -588,28 +599,39 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 			height: imageinfo.thumbwidth
 		};
 	} else {
-		newDimensions = {
-			width: imageinfo.thumbwidth,
-			height: imageinfo.thumbheight
-		};
+		// For regular images, calculate a bigger image dimensions
+		newDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
+			// Original image dimensions
+			{
+				width: imageinfo.width,
+				height: imageinfo.height
+			},
+			// Bounding box -- the size of the dialog, minus padding
+			{
+				width: windowWidth,
+				height: this.getBodyHeight() - 120
+			}
+		);
 	}
-
-	// Initialize thumb container
-	$thumbContainer.append( $image.attr( {
-		src: imageinfo.thumburl,
+	// Resize the image
+	$image.css( {
 		width: newDimensions.width,
 		height: newDimensions.height
-	} ) );
+	} );
 
-	isPortrait = newDimensions.width < windowWidth * 3 / 5;
+	// Call for a bigger image
+	this.fetchThumbnail( info.title, newDimensions )
+		.done( function ( thumburl ) {
+			if ( thumburl ) {
+				$image.prop( 'src', thumburl );
+			}
+		} );
+
+	isPortrait = newDimensions.width < ( windowWidth * 3 / 5 );
 	this.mediaImageInfoPanel.$element.toggleClass( 've-ui-mwMediaDialog-panel-imageinfo-portrait', isPortrait );
-	this.$infoPanelWrapper.append(
-		$thumbContainer,
-		$info
-	);
 	this.mediaImageInfoPanel.$element.append( this.$infoPanelWrapper );
 	if ( isPortrait ) {
-		$info.outerWidth( Math.floor( this.mediaImageInfoPanel.$element.innerWidth() - $thumbContainer.width() - 1 ) );
+		$info.outerWidth( Math.floor( windowWidth - $thumbContainer.outerWidth( true ) - 15 ) );
 	}
 
 	// Adjust height-limited fields
@@ -618,6 +640,53 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 			fields[field].toggleReadMoreButton();
 		}
 	}
+	// Let the scrollbar appear naturally if it should
+	this.mediaImageInfoPanel.$element.css( 'overflow', '' );
+};
+
+/**
+ * Fetch a bigger image thumbnail from the API.
+ * @param {string} imageName Image source
+ * @param {Object} dimensions Image dimensions
+ * @return {jQuery.Promise} Thumbnail promise that resolves with new thumb url
+ */
+ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions ) {
+	var dialog = this,
+		apiObj = {
+			action: 'query',
+			prop: 'imageinfo',
+			indexpageids: '1',
+			iiprop: 'url',
+			titles: imageName
+		};
+
+	// Check cache first
+	if ( this.searchCache[imageName] ) {
+		return $.Deferred().resolve( this.searchCache[imageName] );
+	}
+
+	if ( dimensions.width ) {
+		apiObj.iiurlwidth = dimensions.width;
+	}
+	if ( dimensions.height ) {
+		apiObj.iiurlheight = dimensions.height;
+	}
+	return ve.init.target.constructor.static.apiRequest( apiObj )
+		.then( function ( response ) {
+			var thumburl;
+			if ( !response || response.error ) {
+				return $.Deferred().reject();
+			}
+			thumburl = ve.getProp(
+				response.query.pages[response.query.pageids[0]],
+				'imageinfo',
+				0,
+				'thumburl'
+			);
+			// Cache
+			dialog.searchCache[imageName] = thumburl;
+			return thumburl;
+		} );
 };
 
 /**
