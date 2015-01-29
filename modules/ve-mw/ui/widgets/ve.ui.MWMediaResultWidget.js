@@ -55,7 +55,7 @@ ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 		label: ve.msg( 'visualeditor-dialog-media-searchselect' ),
 		icon: 'check'
 	} );
-	this.selectButton.$element.hide();
+	this.selectButton.toggle( false );
 	this.$element.prepend( this.selectButton.$element );
 };
 

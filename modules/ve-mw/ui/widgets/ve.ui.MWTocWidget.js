@@ -62,6 +62,7 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 			widget.toggle.$link.text( widget.toggle.hideMsg );
 			widget.toggle.open = true;
 		}
+		// FIXME: We should really use CSS here
 		widget.topics.$group.add( widget.$tempTopics ).slideToggle();
 	} );
 
@@ -136,11 +137,7 @@ ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
 ve.ui.MWTocWidget.prototype.hideOrShow = function () {
 	// In MediaWiki if __FORCETOC__ is anywhere TOC is always displayed
 	// ... Even if there is a __NOTOC__ in the article
-	if ( !this.mwTOCDisable && ( this.mwTOCForce || this.topics.items.length >= 3 ) ) {
-		this.$element.show();
-	} else {
-		this.$element.hide();
-	}
+	this.toggle( !this.mwTOCDisable && ( this.mwTOCForce || this.topics.items.length >= 3 ) );
 };
 
 /**

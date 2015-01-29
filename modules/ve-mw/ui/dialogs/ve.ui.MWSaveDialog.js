@@ -203,20 +203,22 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 				if ( !currentEditSummaryWikitext || currentEditSummaryWikitext.trim() === '' ) {
 					// Don't bother with an API request for an empty summary
-					this.$reviewEditSummary.parent().hide();
+					this.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 				} else {
-					this.$reviewEditSummary.parent().show().addClass( 'mw-ajax-loader' );
+					this.$reviewEditSummary.parent()
+						.removeClass( 'oo-ui-element-hidden' )
+						.addClass( 'mw-ajax-loader' );
 					this.editSummaryXhr = new mw.Api().post( {
 						action: 'parse',
 						summary: currentEditSummaryWikitext
 					} ).done( function ( result ) {
 						if ( result.parse.parsedsummary['*'] === '' ) {
-							dialog.$reviewEditSummary.parent().hide();
+							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						} else {
 							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) );
 						}
 					} ).fail( function () {
-						dialog.$reviewEditSummary.parent().hide();
+						dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 					} ).always( function () {
 						dialog.$reviewEditSummary.parent().removeClass( 'mw-ajax-loader' );
 					} );

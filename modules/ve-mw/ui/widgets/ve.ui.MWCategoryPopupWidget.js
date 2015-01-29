@@ -48,7 +48,9 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	this.$sortKeyForm.on( 'submit', this.onSortKeySubmit.bind( this ) );
 
 	// Initialization
-	this.$element.addClass( 've-ui-mwCategoryPopupWidget' ).hide();
+	this.$element
+		.addClass( 've-ui-mwCategoryPopupWidget' );
+	this.toggle( false );
 	this.$title
 		.addClass( 've-ui-mwCategoryPopupWidget-title oo-ui-icon-tag' )
 		.text( ve.msg( 'visualeditor-dialog-meta-categories-category' ) );
