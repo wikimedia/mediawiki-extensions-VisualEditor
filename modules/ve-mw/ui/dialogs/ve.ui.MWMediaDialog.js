@@ -813,7 +813,11 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 					src: info.url,
 					resource: './' + item.title
 				},
-				{ width: info.width, height: info.height }
+				info
+			);
+			// Update filename
+			this.filenameFieldset.setLabel(
+				this.imageModel.getFilename()
 			);
 		}
 
