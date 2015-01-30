@@ -10,7 +10,7 @@
  *
  * @class
  * @extends OO.ui.TextInputWidget
- * @mixins OO.ui.LookupInputWidget
+ * @mixins OO.ui.LookupElement
  *
  * @constructor
  * @param {ve.ui.MWCategoryWidget} categoryWidget
@@ -26,12 +26,10 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 	OO.ui.TextInputWidget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.LookupInputWidget.call( this, this, config );
+	OO.ui.LookupElement.call( this, config );
 
 	// Properties
 	this.categoryWidget = categoryWidget;
-	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( 14 ) === -1;
-	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )['14'] + ':';
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwCategoryInputWidget' );
@@ -42,7 +40,7 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 
 OO.inheritClass( ve.ui.MWCategoryInputWidget, OO.ui.TextInputWidget );
 
-OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupInputWidget );
+OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupElement );
 
 /* Methods */
 
@@ -63,7 +61,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
+ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
 	var result = [], linkCacheUpdate = {}, query = data.query || {};
 
 	$.each( query.pages || [], function ( pageId, categoryPage ) {
@@ -97,7 +95,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( da
 /**
  * @inheritdoc
  */
-ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
+ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
 	var widget = this,
 		exactMatch = false,
 		itemWidgets = [],
@@ -199,6 +197,16 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWCategoryInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
+	this.emit( 'choose', item );
+
+	// Reset input
+	this.setValue( '' );
+};
+
+/**
  * Take a category name and turn it into a menu item widget, following redirects.
  *
  * @method
@@ -226,35 +234,4 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 			label: name
 		} );
 	}
-};
-
-/**
- * Get a category item.
- *
- * @method
- * @param {string} value Category name
- * @returns {Object} Category item with name, value and metaItem properties
- */
-ve.ui.MWCategoryInputWidget.prototype.getCategoryItemFromValue = function ( value ) {
-	var title;
-
-	// Normalize
-	title = mw.Title.newFromText( this.categoryPrefix + value );
-	if ( title ) {
-		return {
-			name: title.getPrefixedText(),
-			value: title.getMainText(),
-			metaItem: {}
-		};
-	}
-
-	if ( this.forceCapitalization ) {
-		value = value.slice( 0, 1 ).toUpperCase() + value.slice( 1 );
-	}
-
-	return {
-		name: this.categoryPrefix + value,
-		value: value,
-		metaItem: {}
-	};
 };
