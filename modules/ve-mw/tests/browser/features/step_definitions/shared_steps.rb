@@ -4,10 +4,7 @@ Given(/^I am on the (.+) page$/) do |article|
 end
 
 Given(/^I click in the editable part$/) do
-  on(VisualEditorPage) do |page|
-    page.content_element.when_present.fire_event('onfocus')
-    page.content_element.send_keys('')
-  end
+  on(VisualEditorPage).content_element.send_keys('')
 end
 
 Given(/^I go to the browser specific edit page page$/) do
