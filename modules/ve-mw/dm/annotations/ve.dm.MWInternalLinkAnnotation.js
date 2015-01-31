@@ -67,7 +67,7 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 		// Protocol relative href
 		relativeHref = href.replace( /^https?:/, '' ),
 		// Check if this matches the server's article path
-		matches = relativeHref.match ( relativeBaseRegex );
+		matches = relativeHref.match( relativeBaseRegex );
 
 	if ( matches ) {
 		// Take the relative path
@@ -92,7 +92,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 	var href,
 		title = dataElement.attributes.title,
 		origTitle = dataElement.attributes.origTitle;
-	if ( origTitle && decodeURIComponent( origTitle ).replace( /_/g, ' ' ) === title ) {
+	if ( origTitle !== undefined && decodeURIComponent( origTitle ).replace( /_/g, ' ' ) === title ) {
 		// Restore href from origTitle
 		href = origTitle;
 		// Only use hrefPrefix if restoring from origTitle
