@@ -658,6 +658,9 @@ $wgResourceModules += array(
 		'messages' => array(
 			'visualeditor',
 			'visualeditor-aliennode-tooltip',
+			'visualeditor-align-widget-center',
+			'visualeditor-align-widget-left',
+			'visualeditor-align-widget-right',
 			'visualeditor-annotationbutton-bold-tooltip',
 			'visualeditor-annotationbutton-code-tooltip',
 			'visualeditor-annotationbutton-italic-tooltip',
@@ -689,6 +692,7 @@ $wgResourceModules += array(
 			'visualeditor-dimensionswidget-times',
 			'visualeditor-find-and-replace-done',
 			'visualeditor-find-and-replace-find-text',
+			'visualeditor-find-and-replace-invalid-regex',
 			'visualeditor-find-and-replace-match-case',
 			'visualeditor-find-and-replace-next-button',
 			'visualeditor-find-and-replace-previous-button',
