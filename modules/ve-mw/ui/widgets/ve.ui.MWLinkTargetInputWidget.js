@@ -97,7 +97,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
 		valid = this.annotation.getAttribute( 'href' )
 			.match( /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi );
 	} else {
-		valid = !!this.getValue();
+		valid = !!mw.Title.newFromText( this.getValue() );
 	}
 	return $.Deferred().resolve( valid ).promise();
 };
