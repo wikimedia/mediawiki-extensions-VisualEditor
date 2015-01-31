@@ -780,7 +780,9 @@ ve.ui.MWMediaDialog.prototype.onSearchChoose = function ( info ) {
  */
 ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 	var info,
+		obj = {},
 		item = this.selectedImageInfo;
+
 	if ( item ) {
 		info = item.imageinfo[0];
 
@@ -820,6 +822,10 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 				this.imageModel.getFilename()
 			);
 		}
+
+		// Cache
+		obj[ item.title ] = info;
+		ve.init.platform.imageInfoCache.set( obj );
 
 		this.checkChanged();
 		this.switchPanels( 'edit' );
