@@ -62,7 +62,9 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
-	var result = [], linkCacheUpdate = {}, query = data.query || {};
+	var result = [],
+		linkCacheUpdate = {},
+		query = data.query || {};
 
 	$.each( query.pages || [], function ( pageId, categoryPage ) {
 		result.push( mw.Title.newFromText( categoryPage.title ).getMainText() );
@@ -99,8 +101,10 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	var widget = this,
 		exactMatch = false,
 		itemWidgets = [],
-		existingCategoryItems = [], matchingCategoryItems = [],
-		hiddenCategoryItems = [], newCategoryItems = [],
+		existingCategoryItems = [],
+		matchingCategoryItems = [],
+		hiddenCategoryItems = [],
+		newCategoryItems = [],
 		existingCategories = this.categoryWidget.getCategories(),
 		linkCacheUpdate = {},
 		canonicalQueryValue = mw.Title.newFromText( this.value ),

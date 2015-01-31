@@ -63,9 +63,9 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 		contentsDiv = domElements[0].ownerDocument.createElement( 'div' );
 		contentsDiv.innerHTML = mwData.body.html;
 		contentsData = converter.getDataFromDomClean( contentsDiv );
-		return [ referencesListData ].
-			concat( contentsData ).
-			concat( [ { type: '/' + this.name } ] );
+		return [ referencesListData ]
+			.concat( contentsData )
+			.concat( [ { type: '/' + this.name } ] );
 	} else {
 		return referencesListData;
 	}

@@ -107,7 +107,8 @@ ve.init.mw.MobileViewTarget.prototype.goToHeading = function ( headingNode ) {
  * @inheritdoc
  */
 ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode ) {
-	var target = this, position;
+	var position,
+		target = this;
 
 	setTimeout( function () {
 		if ( target.isIos ) {

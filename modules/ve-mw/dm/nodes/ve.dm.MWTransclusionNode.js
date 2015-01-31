@@ -158,8 +158,13 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
  * @returns {string} Escaped parameter value
  */
 ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
-	var match, needsNowiki, input = param, output = '',
-		inNowiki = false, bracketStack = 0, linkStack = 0;
+	var match, needsNowiki,
+		input = param,
+		output = '',
+		inNowiki = false,
+		bracketStack = 0,
+		linkStack = 0;
+
 	while ( input.length > 0 ) {
 		match = input.match( /(?:\[\[)|(?:\]\])|(?:\{\{)|(?:\}\})|\|+|<\/?nowiki>|<nowiki\s*\/>/ );
 		if ( !match ) {

@@ -37,7 +37,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	this.sortKeyField = new OO.ui.FieldLayout( this.sortKeyInput, {
 		$: this.$,
 		align: 'top',
-		label: ve.msg ( 'visualeditor-dialog-meta-categories-sortkey-label' )
+		label: ve.msg( 'visualeditor-dialog-meta-categories-sortkey-label' )
 	} );
 	this.$sortKeyForm = this.$( '<form>' ).addClass( 've-ui-mwCategoryPopupWidget-sortKeyForm' )
 		.append( this.sortKeyField.$element );

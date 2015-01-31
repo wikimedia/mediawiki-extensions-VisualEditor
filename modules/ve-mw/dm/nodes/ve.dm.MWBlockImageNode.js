@@ -139,9 +139,9 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	this.storeGeneratedContents( dataElement, dataElement.attributes.src, converter.getStore() );
 
 	if ( caption ) {
-		return [ dataElement ].
-			concat( converter.getDataFromDomClean( caption, { type: 'mwImageCaption' } ) ).
-			concat( [ { type: '/' + this.name } ] );
+		return [ dataElement ]
+			.concat( converter.getDataFromDomClean( caption, { type: 'mwImageCaption' } ) )
+			.concat( [ { type: '/' + this.name } ] );
 	} else {
 		return [
 			dataElement,

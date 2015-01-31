@@ -57,7 +57,9 @@ ve.ui.MWLanguagesPage.prototype.setOutlineItem = function ( outlineItem ) {
 };
 
 ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
-	var i, $languagesTable = this.$( '<table>' ), languageslength = languages.length;
+	var i,
+		$languagesTable = this.$( '<table>' ),
+		languageslength = languages.length;
 
 	$languagesTable
 		.addClass( 've-ui-mwLanguagesPage-languages-table' )

@@ -109,9 +109,11 @@ ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
-	var widget = this, promiseAbortObject = { abort: function () {
+	var req,
+		widget = this,
+		promiseAbortObject = { abort: function () {
 		// Do nothing. This is just so OOUI doesn't break due to abort being undefined.
-	} }, req;
+	} };
 
 	if ( mw.Title.newFromText( this.value ) ) {
 		return this.interwikiPrefixesPromise.then( function () {

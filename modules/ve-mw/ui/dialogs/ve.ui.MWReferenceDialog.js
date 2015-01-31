@@ -102,7 +102,7 @@ ve.ui.MWReferenceDialog.static.toolbarGroups = ( function () {
 	var toolbarGroups = ve.copy( ve.init.mw.Target.static.toolbarGroups );
 	toolbarGroups[4].include[0].group = 'cite-transclusion';
 	return toolbarGroups;
-} () );
+}() );
 
 /**
  * Get the import rules for the surface widget in the dialog

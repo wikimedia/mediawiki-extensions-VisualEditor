@@ -39,4 +39,4 @@
 	ve.init.mw.ImageInfoCache.prototype.processPage = function ( page ) {
 		return page.imageinfo[0];
 	};
-} () );
+}() );

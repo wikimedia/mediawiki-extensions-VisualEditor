@@ -70,4 +70,4 @@
 			disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined
 		};
 	};
-} () );
+}() );

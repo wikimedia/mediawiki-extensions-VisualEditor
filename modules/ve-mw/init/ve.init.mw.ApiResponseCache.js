@@ -169,4 +169,4 @@
 				.then( rejectSubqueue.bind( null, subqueue ) );
 		}
 	};
-} () );
+}() );
