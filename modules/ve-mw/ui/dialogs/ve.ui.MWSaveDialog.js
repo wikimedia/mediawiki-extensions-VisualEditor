@@ -355,6 +355,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.savePanel = new OO.ui.PanelLayout( {
 		$: this.$,
 		scrollable: true,
+		padded: true,
 		classes: ['ve-ui-mwSaveDialog-savePanel']
 	} );
 
@@ -407,7 +408,11 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	);
 
 	// Review panel
-	this.reviewPanel = new OO.ui.PanelLayout( { $: this.$, scrollable: true } );
+	this.reviewPanel = new OO.ui.PanelLayout( {
+		$: this.$,
+		scrollable: true,
+		padded: true
+	} );
 	this.$reviewViewer = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-viewer' );
 	this.$reviewEditSummary = this.$( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
 	this.$reviewActions = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-actions' );
@@ -422,21 +427,28 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	);
 
 	// Conflict panel
-	this.conflictPanel = new OO.ui.PanelLayout( { $: this.$, scrollable: true } );
+	this.conflictPanel = new OO.ui.PanelLayout( {
+		$: this.$,
+		scrollable: true,
+		padded: true
+	} );
 	this.$conflict = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-conflict' )
 		.html( ve.init.platform.getParsedMessage( 'visualeditor-editconflict' ) )
 		.find( 'a' ).attr( 'target', '_blank' ).end();
 	this.conflictPanel.$element.append( this.$conflict );
 
 	// No changes panel
-	this.nochangesPanel = new OO.ui.PanelLayout( { $: this.$, scrollable: true } );
+	this.nochangesPanel = new OO.ui.PanelLayout( {
+		$: this.$,
+		scrollable: true,
+		padded: true
+	} );
 	this.$noChanges = this.$( '<div>' ).addClass( 've-ui-mwSaveDialog-nochanges' )
 		.html( ve.init.platform.getParsedMessage( 'visualeditor-diff-nochanges' ) )
 		.find( 'a' ).attr( 'target', '_blank' ).end();
 	this.nochangesPanel.$element.append( this.$noChanges );
 
 	// Panel stack
-	this.panels.$element.addClass( 've-ui-mwSaveDialog-panel' );
 	this.panels.addItems( [
 		this.savePanel,
 		this.reviewPanel,
