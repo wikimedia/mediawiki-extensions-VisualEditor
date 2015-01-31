@@ -1669,6 +1669,40 @@ ve.dm.mwExample.domToDataCases = {
 			wgArticlePath: '/wiki/$1'
 		}
 	},
+	'internal link with href set to ./': {
+		body: '<p><a rel="mw:WikiLink" href="./"> </a></p>',
+		head: '<base href="http://example.com" />',
+		data: [
+			{ type: 'paragraph' },
+			[
+				' ',
+				[ {
+					type: 'link/mwInternal',
+					attributes: {
+						title: '',
+						origTitle: '',
+						normalizedTitle: '',
+						lookupTitle: '',
+						hrefPrefix: './'
+					},
+					htmlAttributes: [
+						{
+							values: {
+								href: './',
+								rel: 'mw:WikiLink'
+							},
+							computed: {
+								href: 'http://example.com/'
+							}
+						}
+					]
+				} ]
+			],
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
 	'numbered external link (empty mw:Extlink)': {
 		body: '<p>Foo<a rel="mw:ExtLink" href="http://www.example.com"></a>Bar</p>',
 		data: [
