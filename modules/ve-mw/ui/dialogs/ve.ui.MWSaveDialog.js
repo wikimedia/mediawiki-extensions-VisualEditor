@@ -192,7 +192,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 				.setMode( 'conflict' );
 			break;
 		case 'review':
-			this.setSize( 'large' );
+			this.setSize( 'larger' );
 			currentEditSummaryWikitext = this.editSummaryInput.getValue();
 			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 				if ( this.editSummaryXhr ) {
