@@ -5,17 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwSaveDialog-panel {
-	margin: 1.25em;
-}
-
 .ve-ui-mwSaveDialog-summaryLabel {
 	padding: 0.25em 0;
-}
-
-.ve-ui-mwSaveDialog-savePanel {
-	/* Make room for input box shadow */
-	padding: 0 0.5em;
 }
 
 .ve-ui-mwSaveDialog-summary {
