@@ -79,7 +79,8 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
  * @param {Object} response Response data
  */
 ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response ) {
-	var data = response.visualeditor, contentNodes = this.$( data.content ).get();
+	var data = response.visualeditor,
+		contentNodes = this.$( data.content ).get();
 	deferred.resolve( contentNodes );
 };
 

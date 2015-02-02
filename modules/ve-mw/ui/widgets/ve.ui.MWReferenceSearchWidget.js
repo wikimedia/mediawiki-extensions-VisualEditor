@@ -120,7 +120,8 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
  * @param {string[]} groupsChanged A list of groups which have changed in this transaction
  */
 ve.ui.MWReferenceSearchWidget.prototype.onInternalListUpdate = function ( groupsChanged ) {
-	for ( var i = 0, len = groupsChanged.length; i < len; i++ ) {
+	var i, len;
+	for ( i = 0, len = groupsChanged.length; i < len; i++ ) {
 		if ( groupsChanged[i].indexOf( 'mwReference/' ) === 0 ) {
 			this.built = false;
 			break;

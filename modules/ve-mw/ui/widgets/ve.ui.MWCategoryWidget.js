@@ -215,7 +215,8 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames ) {
-	var categoryWidget = this, categoryNamesToQuery = [];
+	var categoryWidget = this,
+		categoryNamesToQuery = [];
 	// Get rid of any we already know the hidden status of.
 	categoryNamesToQuery = $.grep( categoryNames, function ( categoryTitle ) {
 		var cacheEntry = ve.init.platform.linkCache.getCached( categoryTitle );
@@ -233,7 +234,8 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 		ppprop: 'hiddencat',
 		redirects: ''
 	} ).then( function ( result ) {
-		var linkCacheUpdate = {}, normalisedTitles = {};
+		var linkCacheUpdate = {},
+			normalisedTitles = {};
 		if ( result && result.query && result.query.pages ) {
 			$.each( result.query.pages, function ( index, pageInfo ) {
 				linkCacheUpdate[pageInfo.title] = {
@@ -357,7 +359,7 @@ ve.ui.MWCategoryWidget.prototype.fitInput = function () {
 	var gap, min, $lastItem,
 		$input = this.input.$element;
 
-	if ( !$input.is( ':visible') ) {
+	if ( !$input.is( ':visible' ) ) {
 		return;
 	}
 

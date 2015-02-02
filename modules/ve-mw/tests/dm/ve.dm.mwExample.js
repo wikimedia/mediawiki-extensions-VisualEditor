@@ -739,7 +739,7 @@ ve.dm.mwExample.references = [
 				attrs: {}
 			},
 			originalMw: '{"name":"references","attrs":{}"}',
-			//domElements: HTML,
+			// domElements: HTML,
 			listGroup: 'mwReference/',
 			refGroup: ''
 		}

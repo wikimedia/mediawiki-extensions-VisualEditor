@@ -351,7 +351,8 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
  * @returns {jQuery.Deferred}
  */
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
-	var blankRequired = [], deferred = $.Deferred();
+	var blankRequired = [],
+		deferred = $.Deferred();
 	$.each( this.bookletLayout.pages, function () {
 		if ( !( this instanceof ve.ui.MWParameterPage ) ) {
 			return true;

@@ -17,7 +17,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
-	var paramName = parameter.getName(), page = this;
+	var paramName = parameter.getName(),
+		page = this;
 
 	// Configuration initialization
 	config = ve.extendObject( {

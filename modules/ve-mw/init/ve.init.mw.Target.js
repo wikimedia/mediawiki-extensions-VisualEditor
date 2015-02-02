@@ -1084,7 +1084,10 @@ ve.init.mw.Target.prototype.clearState = function () {
  * @returns {jQuery.Promise} Abortable promise, resolved with the cache key.
  */
 ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
-	var xhr, html, start = ve.now(), deferred = $.Deferred(), target = this;
+	var xhr, html,
+		start = ve.now(),
+		deferred = $.Deferred(),
+		target = this;
 
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
 		return this.preparedCacheKeyPromise;
@@ -1163,7 +1166,10 @@ ve.init.mw.Target.prototype.clearPreparedCacheKey = function () {
  * @returns {jQuery.Promise}
  */
 ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
-	var data, preparedCacheKey = this.getPreparedCacheKey( doc ), target = this;
+	var data,
+		preparedCacheKey = this.getPreparedCacheKey( doc ),
+		target = this;
+
 	data = ve.extendObject( {}, options, { format: 'json' } );
 
 	function ajaxRequest( cachekey ) {
@@ -1461,7 +1467,7 @@ ve.init.mw.Target.prototype.startSanityCheck = function () {
 			// If we detect no roundtrip errors,
 			// don't emphasize "review changes" to the user.
 			target.sanityCheckVerified = true;
-		})
+		} )
 		.always( function () {
 			target.sanityCheckFinished = true;
 			target.emit( 'sanityCheckComplete' );

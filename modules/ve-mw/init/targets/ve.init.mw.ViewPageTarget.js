@@ -655,7 +655,8 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( username ) {
  * @param {Object} editApi
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
-	var $captchaDiv = $( '<div>' ), $captchaParagraph = $( '<p>' );
+	var $captchaDiv = $( '<div>' ),
+		$captchaParagraph = $( '<p>' );
 
 	this.captcha = {
 		input: new OO.ui.TextInputWidget(),
@@ -974,7 +975,7 @@ ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
 			var $this = $( this );
 			// We can't just use $this.val() because .val() always returns the value attribute of
 			// a checkbox even when it's unchecked
-			if ( $this.prop ( 'name' ) && ( $this.prop( 'type' ) !== 'checkbox' || $this.prop( 'checked' ) ) ) {
+			if ( $this.prop( 'name' ) && ( $this.prop( 'type' ) !== 'checkbox' || $this.prop( 'checked' ) ) ) {
 				fields[$this.prop( 'name' )] = $this.val();
 			}
 		} );
@@ -1503,7 +1504,8 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
 ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
-	var $content = $( $.parseHTML( html ) ), $editableContent;
+	var $editableContent,
+		$content = $( $.parseHTML( html ) );
 
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
