@@ -5,7 +5,8 @@
 			"Kscanne",
 			"Toliño",
 			"McDutchie",
-			"Elisardojm"
+			"Elisardojm",
+			"Breogan2008"
 		]
 	},
 	"apihelp-visualeditor-description": "Devolve o código HTML5 para unha páxina do servizo Parsoid.",
@@ -86,6 +87,7 @@
 	"visualeditor-dialog-media-position-none": "Ningunha",
 	"visualeditor-dialog-media-position-right": "Dereita",
 	"visualeditor-dialog-media-position-section": "Posición",
+	"visualeditor-dialog-media-position-section-help": "Pode definir o lugar no que o ítem multimedia aparece na páxina. Isto emprégase para quebrar unha longa liña de imaxes nun lado da páxina.",
 	"visualeditor-dialog-media-searchselect": "Seleccionar",
 	"visualeditor-dialog-media-size-choosecustom": "Establecer un tamaño personalizado",
 	"visualeditor-dialog-media-size-choosedefault": "Establecer o tamaño predeterminado",
