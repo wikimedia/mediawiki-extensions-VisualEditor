@@ -26,6 +26,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 
 	// Properties
 	this.sources = {};
+	this.searchValue = '';
 	this.rowHeight = config.rowHeight || 200;
 	this.$panels = config.$panels;
 	this.queryTimeout = null;
@@ -85,11 +86,17 @@ ve.ui.MWMediaSearchWidget.prototype.getSources = function () {
  *
  * @param {string} value New value
  */
-ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function () {
-	var i, len;
+ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
+	var i, len,
+		trimmed = $.trim( value );
+
+	if ( trimmed === this.searchValue ) {
+		return;
+	}
+	this.searchValue = trimmed;
 
 	// Parent method
-	OO.ui.SearchWidget.prototype.onQueryChange.call( this );
+	OO.ui.SearchWidget.prototype.onQueryChange.apply( this, arguments );
 
 	// Reset
 	this.titles = {};
