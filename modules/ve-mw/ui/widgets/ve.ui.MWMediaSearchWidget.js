@@ -106,7 +106,7 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 
 	// Queue
 	clearTimeout( this.queryTimeout );
-	this.queryTimeout = setTimeout( this.queryMediaSourcesCallback, 100 );
+	this.queryTimeout = setTimeout( this.queryMediaSourcesCallback, 250 );
 };
 
 /**
