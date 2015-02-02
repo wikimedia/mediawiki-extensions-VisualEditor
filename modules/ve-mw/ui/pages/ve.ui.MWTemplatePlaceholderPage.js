@@ -18,6 +18,7 @@
  * @cfg {jQuery} [$overlay] Overlay for dropdowns
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
+	var addTemplateActionFieldLayout;
 	// Configuration initialization
 	config = ve.extendObject( {
 		scrollable: false
@@ -41,6 +42,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
 		flags: ['constructive'],
+		classes: [ 've-ui-mwTransclusionDialog-addButton' ],
 		disabled: true
 	} )
 		.connect( this, { click: 'onAddTemplate' } );
@@ -55,12 +57,18 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	} )
 		.connect( this, { click: 'onRemoveButtonClick' } );
 
+	addTemplateActionFieldLayout = new OO.ui.ActionFieldLayout(
+		this.addTemplateInput,
+		this.addTemplateButton,
+		{ $: this.$ }
+	);
+
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( {
 		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-transclusion-placeholder' ),
 		icon: 'template',
 		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
-		$content: this.addTemplateInput.$element.add( this.addTemplateButton.$element )
+		items: [ addTemplateActionFieldLayout ]
 	} );
 
 	// Initialization

@@ -13,7 +13,7 @@
 	margin-left: 0.5em;
 }
 
-.ve-ui-mwTransclusionDialog-addTemplateFieldset > .ve-ui-mwTitleInputWidget {
+.ve-ui-mwTransclusionDialog-addTemplateFieldset .ve-ui-mwTitleInputWidget {
 	width: 20em;
 }
 
@@ -33,6 +33,10 @@
 	position: absolute;
 	right: 1.5em;
 	top: 1.5em;
+}
+
+.ve-ui-mwTransclusionDialog-addButton {
+	white-space: nowrap;
 }
 
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label,
