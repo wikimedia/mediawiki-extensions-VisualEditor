@@ -114,7 +114,7 @@
 					"ve.ui.TargetToolbar",
 					"ve.ui.DebugBar",
 					"ve.ui.Trigger",
-					"ve.ui.*FileDropHandler",
+					"ve.ui.*TransferHandler",
 					"ve.ui.*Action",
 					"ve.ui.*Command",
 					"ve.ui.*Factory",
