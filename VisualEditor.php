@@ -298,7 +298,9 @@ $wgResourceModules += array(
 		'scripts' => array(
 			// init
 			'modules/ve-mw/init/ve.init.mw.js',
+			'modules/ve-mw/init/ve.init.mw.ApiResponseCache.js',
 			'modules/ve-mw/init/ve.init.mw.LinkCache.js',
+			'modules/ve-mw/init/ve.init.mw.ImageInfoCache.js',
 			'modules/ve-mw/init/ve.init.mw.Platform.js',
 			'modules/ve-mw/init/ve.init.mw.Target.js',
 			'modules/ve-mw/init/ve.init.mw.TargetEvents.js',
