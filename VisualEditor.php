@@ -548,8 +548,8 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.SequenceRegistry.js',
 			'lib/ve/src/ui/ve.ui.Action.js',
 			'lib/ve/src/ui/ve.ui.ActionFactory.js',
-			'lib/ve/src/ui/ve.ui.FileDropHandler.js',
-			'lib/ve/src/ui/ve.ui.FileDropHandlerFactory.js',
+			'lib/ve/src/ui/ve.ui.DataTransferHandler.js',
+			'lib/ve/src/ui/ve.ui.DataTransferHandlerFactory.js',
 			'lib/ve/src/ui/ve.ui.WindowManager.js',
 
 			'lib/ve/src/ui/actions/ve.ui.AnnotationAction.js',
@@ -574,9 +574,9 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/dialogs/ve.ui.FindAndReplaceDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
 
-			'lib/ve/src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js',
-			'lib/ve/src/ui/filedrophandlers/ve.ui.PlainTextFileDropHandler.js',
-			'lib/ve/src/ui/filedrophandlers/ve.ui.HTMLFileDropHandler.js',
+			'lib/ve/src/ui/datatransferhandlers/ve.ui.DSVFileTransferHandler.js',
+			'lib/ve/src/ui/datatransferhandlers/ve.ui.PlainTextFileTransferHandler.js',
+			'lib/ve/src/ui/datatransferhandlers/ve.ui.HTMLFileTransferHandler.js',
 
 			'lib/ve/src/ui/windowmanagers/ve.ui.ToolbarDialogWindowManager.js',
 
