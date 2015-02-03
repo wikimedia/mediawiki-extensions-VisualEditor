@@ -229,8 +229,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		indicator: 'down',
 		include: '*',
 		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
-		promote: [ 'media', 'transclusion' ],
-		demote: [ 'specialcharacter' ]
+		promote: [ 'media', 'transclusion' ]
 	},
 	// Table
 	{
@@ -240,7 +239,9 @@ ve.init.mw.Target.static.toolbarGroups = [
 		indicator: 'down',
 		include: [ { group: 'table' } ],
 		demote: [ 'deleteTable' ]
-	}
+	},
+	// SpecialCharacter
+	{ include: [ 'specialCharacter' ] }
 ];
 
 ve.init.mw.Target.static.importRules = {

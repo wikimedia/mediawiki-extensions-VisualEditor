@@ -577,6 +577,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/dialogs/ve.ui.CommandHelpDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.FindAndReplaceDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
+			'lib/ve/src/ui/dialogs/ve.ui.SpecialCharacterDialog.js',
 
 			'lib/ve/src/ui/datatransferhandlers/ve.ui.PlainTextStringTransferHandler.js',
 			'lib/ve/src/ui/datatransferhandlers/ve.ui.HTMLStringTransferHandler.js',
@@ -612,7 +613,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/inspectors/ve.ui.CommentInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.LinkInspector.js',
 
-			'lib/ve/src/ui/inspectors/ve.ui.SpecialCharacterInspector.js',
+			'lib/ve/src/ui/pages/ve.ui.SpecialCharacterPage.js',
 		),
 		'debugScripts' => array(
 			'lib/ve/src/ui/ve.ui.DebugBar.js',
@@ -637,6 +638,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css',
 			'lib/ve/src/ui/styles/dialogs/ve.ui.FindAndReplaceDialog.css',
 			'lib/ve/src/ui/styles/dialogs/ve.ui.ProgressDialog.css',
+			'lib/ve/src/ui/styles/dialogs/ve.ui.SpecialCharacterDialog.css',
 			'lib/ve/src/ui/styles/tools/ve.ui.FormatTool.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.ContextSelectWidget.css',
@@ -645,7 +647,6 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.css',
 			'lib/ve/src/ui/styles/inspectors/ve.ui.FragmentInspector.css',
 			'lib/ve/src/ui/styles/inspectors/ve.ui.LinkInspector.css',
-			'lib/ve/src/ui/styles/inspectors/ve.ui.SpecialCharacterInspector.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.SurfaceWidget.css',
 			'lib/ve/src/ui/styles/ve.ui.ContextItem.css',
 			'lib/ve/src/ui/styles/contextitems/ve.ui.CommentContextItem.css',
