@@ -606,7 +606,7 @@ class ApiVisualEditor extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'format' => array(
-				ApiBase::PARAM_DFLT => 'json',
+				ApiBase::PARAM_DFLT => 'jsonfm',
 				ApiBase::PARAM_TYPE => array( 'json', 'jsonfm' ),
 			),
 			'paction' => array(
