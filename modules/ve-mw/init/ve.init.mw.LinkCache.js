@@ -48,6 +48,32 @@
 	};
 
 	/**
+	 * Enable or disable automatic assumption of existence.
+	 *
+	 * While enabled, any get() for a title that's not already in the cache will return
+	 * { missing: false } and write that to the cache.
+	 *
+	 * @param {boolean} assume Assume all uncached titles exist
+	 */
+	ve.init.mw.LinkCache.prototype.setAssumeExistence = function ( assume ) {
+		this.assumeExistence = !!assume;
+	};
+
+	/**
+	 * @inheritdoc
+	 */
+	ve.init.mw.LinkCache.prototype.get = function ( title ) {
+		var data = {};
+		if ( this.assumeExistence ) {
+			data[this.normalizeTitle( title )] = { missing: false };
+			this.set( data );
+		}
+
+		// Parent method
+		return ve.init.mw.LinkCache.super.prototype.get.call( this, title );
+	};
+
+	/**
 	 * @inheritdoc
 	 */
 	ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
