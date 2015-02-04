@@ -306,12 +306,15 @@ ve.dm.mwExample.MWReference = {
 	referencesList:
 		'<ol class="references" typeof="mw:Extension/references" about="#mwt7" data-parsoid="{}"' +
 			'data-mw="{&quot;name&quot;:&quot;references&quot;,&quot;body&quot;:{' +
-			'&quot;extsrc&quot;:&quot;<ref name=\\&quot;foo\\&quot;>Ref in refs</ref>' +
-			'&quot;,&quot;html&quot;:&quot;<span about=\\&quot;#mwt8\\&quot; class=\\&quot;reference\\&quot; ' +
+			'&quot;html&quot;:&quot;<span about=\\&quot;#mwt8\\&quot; class=\\&quot;reference\\&quot; ' +
 			'data-mw=\\&quot;{&amp;quot;name&amp;quot;:&amp;quot;ref&amp;quot;,&amp;quot;body&amp;quot;:{&amp;quot;html&amp;quot;:&amp;quot;Ref in refs&amp;quot;},' +
-			'&amp;quot;attrs&amp;quot;:{&amp;quot;name&amp;quot;:&amp;quot;foo&amp;quot;}}\\&quot; ' +
+			'&amp;quot;attrs&amp;quot;:{&amp;quot;group&amp;quot;:&amp;quot;g1&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;foo&amp;quot;}}\\&quot; ' +
 			'rel=\\&quot;dc:references\\&quot; typeof=\\&quot;mw:Extension/ref\\&quot;>' +
-			'<a href=\\&quot;#cite_note-foo-3\\&quot;>[3]</a></span>&quot;},&quot;attrs&quot;:{}}"></ol>'
+			'<a href=\\&quot;#cite_note-foo-3\\&quot;>[3]</a></span>&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;}}">' +
+			'<li about="#cite_note-.3A0-2" id="cite_note-.3A0-2"><span rel="mw:referencedBy"><a href="#cite_ref-.3A0_2-0">↑</a></span> Quux</li>' +
+			'<li about="#cite_note-3" id="cite_note-3"><span rel="mw:referencedBy"><a href="#cite_ref-3">↑</a></span> No name</li>' +
+			'<li about="#cite_note-foo-4" id="cite_note-foo-4"><span rel="mw:referencedBy"><a href="#cite_ref-foo_4-0">↑</a></span> Ref in refs</li>' +
+			'</ol>'
 };
 
 ve.dm.mwExample.mwNowikiAnnotation = {
@@ -736,9 +739,9 @@ ve.dm.mwExample.references = [
 		attributes: {
 			mw: {
 				name: 'references',
-				attrs: {}
+				attrs: { group: 'g1' }
 			},
-			originalMw: '{"name":"references","attrs":{}"}',
+			originalMw: '{"name":"references","attrs":{"group":"g1"}"}',
 			// domElements: HTML,
 			listGroup: 'mwReference/',
 			refGroup: ''
@@ -1105,8 +1108,8 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'mw:Reference': {
 		// Wikitext:
-		// Foo<ref name="bar" /> Baz<ref group="g1" name=":0">Quux</ref> Whee<ref name="bar">[[Bar]]</ref> Yay<ref group="g1">No name</ref> Quux<ref name="bar">Different content</ref> Foo<ref group="g1">No name</ref> Bar<ref name="foo" />
-		// <references><ref name="foo">Ref in refs</ref></references>
+		// Foo<ref name="bar" /> Baz<ref group="g1" name=":0">Quux</ref> Whee<ref name="bar">[[Bar]]</ref> Yay<ref group="g1">No name</ref> Quux<ref name="bar">Different content</ref> Foo<ref group="g1" name="foo" />
+		// <references group="g1"><ref group="g1" name="foo">Ref in refs</ref></references>
 		body:
 			'<p>Foo' +
 				'<span about="#mwt1" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;attrs&quot;:{&quot;name&quot;:&quot;bar&quot;}}" id="cite_ref-bar-1-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
@@ -1114,21 +1117,26 @@ ve.dm.mwExample.domToDataCases = {
 				'</span>' +
 				' Baz' +
 				'<span about="#mwt2" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Quux&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;,&quot;name&quot;:&quot;:0&quot;}}" id="cite_ref-quux-2-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+					'<a href="#cite_note-.3A0-2">[g1 1]</a>' +
 				'</span>' +
 				' Whee' +
 				'<span about="#mwt3" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;' +
 				'<a rel=\\&quot;mw:WikiLink\\&quot; href=\\&quot;./Bar\\&quot;>Bar' +
 				'</a>&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;bar&quot;}}" id="cite_ref-bar-1-1" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+					'<a href="#cite_note-bar-1">[1]</a>' +
 				'</span>' +
 				' Yay' +
 				'<span about="#mwt4" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;No name&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;}}" id="cite_ref-1-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+					'<a href="#cite_note-3">[g1 2]</a>' +
 				'</span>' +
 				' Quux' +
 				'<span about="#mwt5" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Different content&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;bar&quot;}}" id="cite_ref-bar-1-2" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+					'<a href="#cite_note-bar-1">[1]</a>' +
 				'</span>' +
 				' Foo' +
-				'<span about="#mwt6" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;attrs&quot;:{&quot;name&quot;:&quot;foo&quot;}}" ' +
-					'id="cite_ref-foo-3-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+				'<span about="#mwt6" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;,&quot;name&quot;:&quot;foo&quot;}}" ' +
+					'id="cite_ref-foo-4" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+					'<a href="#cite_ref-foo-4">[g1 3]</a>' +
 				'</span>' +
 			'</p>' +
 			ve.dm.mwExample.MWReference.referencesList,
@@ -1183,7 +1191,7 @@ ve.dm.mwExample.domToDataCases = {
 					refGroup: 'g1',
 					mw: { name: 'ref', body: { html: 'Quux' }, attrs: { group: 'g1', name: ':0' } },
 					originalMw: '{"name":"ref","body":{"html":"Quux"},"attrs":{"group":"g1","name":":0"}}',
-					childDomElements: [],
+					childDomElements: $( '<a href="#cite_note-.3A0-2">[g1 1]</a>' ).toArray(),
 					contentsUsed: true
 				},
 				htmlAttributes: [
@@ -1196,7 +1204,17 @@ ve.dm.mwExample.domToDataCases = {
 							id: 'cite_ref-quux-2-0',
 							rel: 'dc:references',
 							typeof: 'mw:Extension/ref'
-						}
+						},
+						children: [
+							{
+								values: {
+									href: '#cite_note-.3A0-2'
+								},
+								computed: {
+									href: 'http://example.com/#cite_note-.3A0-2'
+								}
+							}
+						]
 					}
 				]
 			},
@@ -1211,7 +1229,7 @@ ve.dm.mwExample.domToDataCases = {
 					refGroup: '',
 					mw: { name: 'ref', body: { html: '<a rel="mw:WikiLink" href="./Bar">Bar</a>' }, attrs: { name: 'bar' } },
 					originalMw: '{"name":"ref","body":{"html":"<a rel=\\"mw:WikiLink\\" href=\\"./Bar\\">Bar</a>"},"attrs":{"name":"bar"}}',
-					childDomElements: [],
+					childDomElements: $( '<a href="#cite_note-bar-1">[1]</a>' ).toArray(),
 					contentsUsed: true
 				},
 				htmlAttributes: [
@@ -1224,7 +1242,17 @@ ve.dm.mwExample.domToDataCases = {
 							id: 'cite_ref-bar-1-1',
 							rel: 'dc:references',
 							typeof: 'mw:Extension/ref'
-						}
+						},
+						children: [
+							{
+								values: {
+									href: '#cite_note-bar-1'
+								},
+								computed: {
+									href: 'http://example.com/#cite_note-bar-1'
+								}
+							}
+						]
 					}
 				]
 			},
@@ -1239,7 +1267,7 @@ ve.dm.mwExample.domToDataCases = {
 					refGroup: 'g1',
 					mw: { name: 'ref', body: { html: 'No name' }, attrs: { group: 'g1' } },
 					originalMw: '{"name":"ref","body":{"html":"No name"},"attrs":{"group":"g1"}}',
-					childDomElements: [],
+					childDomElements: $( '<a href="#cite_note-3">[g1 2]</a>' ).toArray(),
 					contentsUsed: true
 				},
 				htmlAttributes: [
@@ -1252,7 +1280,17 @@ ve.dm.mwExample.domToDataCases = {
 							id: 'cite_ref-1-0',
 							rel: 'dc:references',
 							typeof: 'mw:Extension/ref'
-						}
+						},
+						children: [
+							{
+								values: {
+									href: '#cite_note-3'
+								},
+								computed: {
+									href: 'http://example.com/#cite_note-3'
+								}
+							}
+						]
 					}
 				]
 			},
@@ -1267,7 +1305,7 @@ ve.dm.mwExample.domToDataCases = {
 					refGroup: '',
 					mw: { name: 'ref', body: { html: 'Different content' }, attrs: { name: 'bar' } },
 					originalMw: '{"name":"ref","body":{"html":"Different content"},"attrs":{"name":"bar"}}',
-					childDomElements: [],
+					childDomElements: $( '<a href="#cite_note-bar-1">[1]</a>' ).toArray(),
 					contentsUsed: false
 				},
 				htmlAttributes: [
@@ -1280,7 +1318,17 @@ ve.dm.mwExample.domToDataCases = {
 							id: 'cite_ref-bar-1-2',
 							rel: 'dc:references',
 							typeof: 'mw:Extension/ref'
-						}
+						},
+						children: [
+							{
+								values: {
+									href: '#cite_note-bar-1'
+								},
+								computed: {
+									href: 'http://example.com/#cite_note-bar-1'
+								}
+							}
+						]
 					}
 				]
 			},
@@ -1289,13 +1337,13 @@ ve.dm.mwExample.domToDataCases = {
 			{
 				type: 'mwReference',
 				attributes: {
-					listGroup: 'mwReference/',
+					listGroup: 'mwReference/g1',
 					listIndex: 3,
 					listKey: 'literal/foo',
-					refGroup: '',
-					mw: { name: 'ref', attrs: { name: 'foo' } },
-					originalMw: '{"name":"ref","attrs":{"name":"foo"}}',
-					childDomElements: [],
+					refGroup: 'g1',
+					mw: { name: 'ref', attrs: { group: 'g1', name: 'foo' } },
+					originalMw: '{"name":"ref","attrs":{"group":"g1","name":"foo"}}',
+					childDomElements: $( '<a href="#cite_ref-foo-4">[g1 3]</a>' ).toArray(),
 					contentsUsed: false
 				},
 				htmlAttributes: [
@@ -1303,12 +1351,22 @@ ve.dm.mwExample.domToDataCases = {
 						values: {
 							about: '#mwt6',
 							class: 'reference',
-							'data-mw': '{"name":"ref","attrs":{"name":"foo"}}',
+							'data-mw': '{"name":"ref","attrs":{"group":"g1","name":"foo"}}',
 							'data-parsoid': '{}',
-							id: 'cite_ref-foo-3-0',
+							id: 'cite_ref-foo-4',
 							rel: 'dc:references',
 							typeof: 'mw:Extension/ref'
-						}
+						},
+						children: [
+							{
+								values: {
+									href: '#cite_ref-foo-4'
+								},
+								computed: {
+									href: 'http://example.com/#cite_ref-foo-4'
+								}
+							}
+						]
 					}
 				]
 			},
@@ -1319,16 +1377,15 @@ ve.dm.mwExample.domToDataCases = {
 				attributes: {
 					mw: {
 						name: 'references',
-						attrs: {},
+						attrs: { group: 'g1' },
 						body: {
-							extsrc: '<ref name="foo">Ref in refs</ref>',
-							html: '<span about="#mwt8" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Ref in refs&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;foo&quot;}}" rel="dc:references" typeof="mw:Extension/ref"><a href="#cite_note-foo-3">[3]</a></span>'
+							html: '<span about="#mwt8" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Ref in refs&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;,&quot;name&quot;:&quot;foo&quot;}}" rel="dc:references" typeof="mw:Extension/ref"><a href="#cite_note-foo-3">[3]</a></span>'
 						}
 					},
-					originalMw: '{"name":"references","body":{"extsrc":"<ref name=\\"foo\\">Ref in refs</ref>","html":"<span about=\\"#mwt8\\" class=\\"reference\\" data-mw=\\"{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Ref in refs&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;foo&quot;}}\\" rel=\\"dc:references\\" typeof=\\"mw:Extension/ref\\"><a href=\\"#cite_note-foo-3\\">[3]</a></span>"},"attrs":{}}',
+					originalMw: '{"name":"references","body":{"html":"<span about=\\"#mwt8\\" class=\\"reference\\" data-mw=\\"{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Ref in refs&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;,&quot;name&quot;:&quot;foo&quot;}}\\" rel=\\"dc:references\\" typeof=\\"mw:Extension/ref\\"><a href=\\"#cite_note-foo-3\\">[3]</a></span>"},"attrs":{"group":"g1"}}',
 					domElements: $( ve.dm.mwExample.MWReference.referencesList ).toArray(),
-					listGroup: 'mwReference/',
-					refGroup: ''
+					listGroup: 'mwReference/g1',
+					refGroup: 'g1'
 				}
 			},
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
@@ -1337,12 +1394,12 @@ ve.dm.mwExample.domToDataCases = {
 				attributes: {
 					childDomElements: $( '<a href="#cite_note-foo-3">[3]</a>' ).toArray(),
 					contentsUsed: true,
-					listGroup: 'mwReference/',
+					listGroup: 'mwReference/g1',
 					listIndex: 3,
 					listKey: 'literal/foo',
-					mw: { name: 'ref', attrs: { name: 'foo' }, body: { html: 'Ref in refs' } },
-					originalMw: '{"name":"ref","body":{"html":"Ref in refs"},"attrs":{"name":"foo"}}',
-					refGroup: ''
+					mw: { name: 'ref', attrs: { group: 'g1', name: 'foo' }, body: { html: 'Ref in refs' } },
+					originalMw: '{"name":"ref","body":{"html":"Ref in refs"},"attrs":{"group":"g1","name":"foo"}}',
+					refGroup: 'g1'
 				},
 				htmlAttributes: [ {
 					children: [
@@ -1358,7 +1415,7 @@ ve.dm.mwExample.domToDataCases = {
 					values: {
 						about: '#mwt8',
 						class: 'reference',
-						'data-mw': '{"name":"ref","body":{"html":"Ref in refs"},"attrs":{"name":"foo"}}',
+						'data-mw': '{"name":"ref","body":{"html":"Ref in refs"},"attrs":{"group":"g1","name":"foo"}}',
 						rel: 'dc:references',
 						typeof: 'mw:Extension/ref'
 					}
