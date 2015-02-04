@@ -408,7 +408,8 @@ ve.init.mw.Target.onModulesReady = function () {
  * @fires loadError
  */
 ve.init.mw.Target.onLoad = function ( response ) {
-	var data = response ? response.visualeditor : null;
+	var i, len, linkData,
+		data = response ? response.visualeditor : null;
 
 	if ( !data && !response.error ) {
 		ve.init.mw.Target.onLoadError.call(
@@ -451,7 +452,21 @@ ve.init.mw.Target.onLoad = function ( response ) {
 
 		// Populate link cache
 		if ( data.links ) {
-			ve.init.platform.linkCache.set( data.links );
+			// Format from the API: { missing: [titles], extant: true|[titles] }
+			// Format expected by LinkCache: { title: { missing: true|false } }
+			linkData = {};
+			for ( i = 0, len = data.links.missing.length; i < len; i++ ) {
+				linkData[data.links.missing[i]] = { missing: true };
+			}
+			if ( data.links.extant === true ) {
+				// Set back to false by onReady()
+				ve.init.platform.linkCache.setAssumeExistence( true );
+			} else {
+				for ( i = 0, len = data.links.extant.length; i < len; i++ ) {
+					linkData[data.links.extant[i]] = { missing: false };
+				}
+			}
+			ve.init.platform.linkCache.set( linkData );
 		}
 
 		// Everything worked, the page was loaded, continue as soon as the modules are loaded
@@ -521,6 +536,8 @@ ve.init.mw.Target.prototype.onReady = function () {
 	this.loading = false;
 	this.edited = false;
 	this.setupSurface( this.doc, function () {
+		// onLoad() may have called setAssumeExistence( true );
+		ve.init.platform.linkCache.setAssumeExistence( false );
 		target.startSanityCheck();
 		target.emit( 'surfaceReady' );
 	} );

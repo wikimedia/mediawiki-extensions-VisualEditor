@@ -467,19 +467,33 @@ class ApiVisualEditor extends ApiBase {
 				$wikipage = WikiPage::factory( $page );
 				$popts = $wikipage->makeParserOptions( 'canonical' );
 				$cached = ParserCache::singleton()->get( $article, $popts, true );
+				$isOldRevision = isset( $params['oldid'] ) && $params['oldid'] != 0 &&
+					$params['oldid'] != $page->getLatestRevID();
+				$links = array(
+					// Array of linked pages that are missing
+					'missing' => array(),
+					// For current revisions: true (treat all non-missing pages as existing)
+					// For old revisions: array of linked pages that exist
+					'extant' => $isOldRevision ? array() : true,
+				);
 				if ( $cached ) {
 					foreach ( $cached->getLinks() as $ns => $dbks ) {
 						foreach ( $dbks as $dbk => $id ) {
-							$links[ Title::makeTitle( $ns, $dbk )->getPrefixedText() ] = array(
-								'missing' => $id == 0
-							);
+							$pft = Title::makeTitle( $ns, $dbk )->getPrefixedText();
+							if ( $id == 0 ) {
+								$links['missing'][] = $pft;
+							} elseif ( $isOldRevision ) {
+								$links['extant'][] = $pft;
+							}
 						}
 					}
 				}
-
-				$links[$page->getPrefixedText()] = array(
-					'missing' => !$page->exists()
-				);
+				// Add information about current page
+				if ( !$page->exists() ) {
+					$links['missing'][] = $page->getPrefixedText();
+				} elseif ( $isOldRevision ) {
+					$links['extant'][] = $page->getPrefixedText();
+				}
 
 				// On parser cache miss, just don't bother populating red link data
 
