@@ -5,6 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-mwTransclusionDialog-addTemplateFieldset {
+	margin-left: 3.5em;
+}
+
 .ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-widget {
 	display: inline-block;
 }
