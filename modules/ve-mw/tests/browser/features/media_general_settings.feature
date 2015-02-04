@@ -10,18 +10,13 @@ Feature: VisualEditor Media Interface
     And I enter <search_term> into media Search box
     And I select an Image
     And I click Use this image
-
-    When I fill in the text area for caption with "caption"
-    And I fill in the test area for alternative text with "alt text"
-    And I click "Insert"
+    And I fill up the Caption field with "caption"
+    And I fill up the Alternative text with "alt text"
+    And I click Insert
     And I click Save page
     And I click Review your changes
-   Then diff view should show proper caption and alt text
-
-
-
+    Then <expected_markup_text> should appear in the media diff view
+    And I can click the X on the media save box
   Examples:
-    | search_term           | expected_markup_text                                                                    |
-    | San Francisco         | [[File:California county map (San Francisco County highlighted).svg\|thumb\|150x150px]] |
-    | Flash video           | [[File:Flash video file icon.png\|thumb\|32x32px]]                                      |
-    | cunfrunti             | [[File:Cunfrunti.mpg.OGG\|thumb\|183x183px]]                                            |
+    | search_term           | expected_markup_text                                                                     |
+    | duck                  | [[File:Ducks take off 444 720p25.ogg\|alt=alt text\|thumb\|caption]]                     |

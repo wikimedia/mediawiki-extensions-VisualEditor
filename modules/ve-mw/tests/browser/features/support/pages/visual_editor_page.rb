@@ -90,6 +90,8 @@ class VisualEditorPage
   div(:medium_dialog, class: 'oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium')
   span(:use_image_button, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
   span(:media_insert_button, css: '.oo-ui-flaggedElement-constructive > a:nth-child(1) > span:nth-child(2)')
+  div(:caption, css: 'div.ve-ui-surface:nth-child(2)')
+  div(:alternative_text, css: 'div.oo-ui-inputWidget:nth-child(4)')
   checkbox(:minor_edit, id: 'wpMinoredit')
   div(:no_unused_fields, text: 'No unused fields')
   a(:new_link, class: 've-ce-linkAnnotation ve-ce-mwInternalLinkAnnotation new')
