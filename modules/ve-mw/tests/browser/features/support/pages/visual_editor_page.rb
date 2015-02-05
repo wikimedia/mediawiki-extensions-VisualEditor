@@ -45,7 +45,7 @@ class VisualEditorPage
   span(:decrease_indentation, class: 'oo-ui-iconElement-icon oo-ui-icon-outdent-list')
   text_area(:describe_change, index: 0)
   div(:diff_view, class: 've-ui-mwSaveDialog-viewer')
-  div(:disabled_save_button, class: 'oo-ui-widget oo-ui-widget-disabled oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-labelElement oo-ui-flaggedElement-constructive oo-ui-flaggedElement-primary oo-ui-buttonWidget ve-ui-toolbar-saveButton oo-ui-image-constructive')
+  div(:disabled_save_button, css: 'div.ve-init-mw-viewPageTarget-toolbar-actions > div.oo-ui-flaggedElement-progressive.oo-ui-widget-disabled')
   text_field(:display_title_textbox, css: 'div.oo-ui-fieldLayout-align-inline:nth-child(4) > label:nth-child(1) > div:nth-child(1) > div:nth-child(1) > input:nth-child(1)')
   text_field(:redirect_page_name_textbox, css: '.oo-ui-flaggedElement-invalid > input:nth-child(1)')
   span(:toolbar_format, css: '.ve-test-toolbar-format .oo-ui-indicator-down')
