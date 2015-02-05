@@ -67,7 +67,7 @@ class VisualEditorPage
 ')
   span(:insert_indicator_down, css: '.ve-test-toolbar-insert .oo-ui-indicator-down')
   a(:insert_more_fewer, css: '.ve-test-toolbar-insert .oo-ui-tool-name-more-fewer .oo-ui-tool-link')
-  div(:insert_pull_down, class: 've-test-toolbar-insert')
+  div(:insert_pull_down, css: '.ve-test-toolbar-insert .oo-ui-clippableElement-clippable')
   div(:insert_references, class: 'oo-ui-processDialog-location')
   span(:insert, text: 'Insert')
   a(:insert_table, css: '.oo-ui-tool-name-insertTable a')
