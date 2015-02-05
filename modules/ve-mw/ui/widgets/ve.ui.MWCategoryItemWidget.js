@@ -85,6 +85,9 @@ OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.DraggableElement );
  */
 ve.ui.MWCategoryItemWidget.prototype.onMouseDown = function () {
 	this.emit( 'savePopupState' );
+
+	// Parent method
+	return ve.ui.MWCategoryItemWidget.super.prototype.onMouseDown.apply( this, arguments );
 };
 
 /**
@@ -96,4 +99,7 @@ ve.ui.MWCategoryItemWidget.prototype.onMouseDown = function () {
  */
 ve.ui.MWCategoryItemWidget.prototype.onClick = function () {
 	this.emit( 'togglePopupMenu', this );
+
+	// Parent method
+	return ve.ui.MWCategoryItemWidget.super.prototype.onClick.apply( this, arguments );
 };
