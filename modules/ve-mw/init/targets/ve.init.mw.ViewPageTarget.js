@@ -29,6 +29,8 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	// we activate; so unbind them again
 	this.unbindHandlers();
 
+	this.onWatchToggleHandler = this.onWatchToggle.bind( this );
+
 	// Properties
 	this.toolbarSaveButton = null;
 	this.saveDialog = null;
@@ -228,6 +230,43 @@ ve.init.mw.ViewPageTarget.prototype.setupLocalNoticeMessages = function () {
 };
 
 /**
+ * Handle the watch button being toggled on/off.
+ * @param {jQuery.Event} e Event object whih triggered the event
+ * @param {string} actionPerformed 'watch' or 'unwatch'
+ */
+ve.init.mw.ViewPageTarget.prototype.onWatchToggle = function ( e, actionPerformed ) {
+	if ( !this.active && !this.activating ) {
+		return;
+	}
+	this.$checkboxes.filter( '#wpWatchthis' )
+		.prop( 'checked',
+			mw.user.options.get( 'watchdefault' ) ||
+			( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
+			actionPerformed === 'watch'
+		);
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ViewPageTarget.prototype.bindHandlers = function () {
+	ve.init.mw.ViewPageTarget.super.prototype.bindHandlers.call( this );
+	if ( this.onWatchToggleHandler ) {
+		$( '#ca-watch, #ca-unwatch' ).on( 'watchpage.mw', this.onWatchToggleHandler );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ViewPageTarget.prototype.unbindHandlers = function () {
+	ve.init.mw.ViewPageTarget.super.prototype.unbindHandlers.call( this );
+	if ( this.onWatchToggleHandler ) {
+		$( '#ca-watch, #ca-unwatch' ).off( 'watchpage.mw', this.onWatchToggleHandler );
+	}
+};
+
+/**
  * Switch to edit mode.
  *
  * @return {jQuery.Promise}
@@ -241,18 +280,6 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
-
-		$( '#ca-watch, #ca-unwatch' ).on( 'watchpage.mw', function ( e, actionPerformed ) {
-			if ( !this.active && !this.activating ) {
-				return;
-			}
-			this.$checkboxes.filter( '#wpWatchthis' )
-				.prop( 'checked',
-					mw.user.options.get( 'watchdefault' ) ||
-					( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
-					actionPerformed === 'watch'
-				);
-		}.bind( this ) );
 
 		// User interface changes
 		this.transformPage();
