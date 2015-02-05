@@ -276,6 +276,11 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.activating = true;
 		this.activatingDeferred = $.Deferred();
 
+		$( 'html' ).addClass( 've-activating ve-activated' );
+		this.activatingDeferred.always( function () {
+			$( 'html' ).addClass( 've-active' ).removeClass( 've-activating' );
+		} );
+
 		this.bindHandlers();
 
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
@@ -283,9 +288,6 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 
 		// User interface changes
 		this.transformPage();
-		this.hideReadOnlyContent();
-		this.mutePageContent();
-		this.mutePageTitle();
 		this.setupLocalNoticeMessages();
 
 		this.saveScrollPosition();
@@ -357,12 +359,12 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 	}
 
 	this.deactivating = true;
+	$( 'html' ).removeClass( 've-activated' ).addClass( 've-deactivating' );
 	// User interface changes
 	if ( this.elementsThatHadOurAccessKey ) {
 		this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
 	}
 	this.restorePage();
-	this.showReadOnlyContent();
 
 	this.unbindHandlers();
 
@@ -386,10 +388,6 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 	}
 
 	$.when.apply( null, promises ).done( function () {
-		// Show/restore components that are otherwise handled by tearDownSurface
-		target.showPageContent();
-		target.restorePageTitle();
-
 		// If there is a load in progress, abort it
 		if ( target.loading ) {
 			target.loading.abort();
@@ -402,6 +400,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		target.deactivating = false;
 		target.activating = false;
 		target.activatingDeferred.reject();
+		$( 'html' ).removeClass( 've-active ve-deactivating' );
 
 		mw.hook( 've.deactivationComplete' ).fire( target.edited );
 	} );
@@ -456,6 +455,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 		// TODO are there things we need to clean up?
 		return;
 	}
+
 	this.activating = false;
 	this.getSurface().getModel().connect( this, {
 		history: 'updateToolbarSaveButtonState'
@@ -472,9 +472,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	} );
 
 	// Update UI
-	this.transformPageTitle();
 	this.changeDocumentTitle();
-	this.hidePageContent();
 
 	this.getSurface().getView().focus();
 
@@ -1274,75 +1272,6 @@ ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
 };
 
 /**
- * Show the page content.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.showPageContent = function () {
-	$( '#bodyContent > .ve-init-mw-viewPageTarget-content' )
-		.removeClass( 've-init-mw-viewPageTarget-content' )
-		.show()
-		.fadeTo( 0, 1 );
-	$( '#t-print, #t-permalink, #p-coll-print_export, #t-cite' ).show();
-};
-
-/**
- * Mute the page content.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.mutePageContent = function () {
-	$( '#bodyContent > :visible:not(#siteSub)' )
-		.addClass( 've-init-mw-viewPageTarget-content' )
-		.fadeTo( 'fast', 0.6 );
-};
-
-/**
- * Hide the page content.
- *
- * @method
- */
-ve.init.mw.ViewPageTarget.prototype.hidePageContent = function () {
-	$( '#bodyContent > :visible:not(#siteSub,.ve-ui-mwTocWidget)' )
-		.addClass( 've-init-mw-viewPageTarget-content' )
-		.hide();
-	$( '#t-print, #t-permalink, #p-coll-print_export, #t-cite' ).hide();
-};
-
-/**
- * Show elements that didn't have a counter-part in the edit view.
- */
-ve.init.mw.ViewPageTarget.prototype.showReadOnlyContent = function () {
-	var $toc = $( '#toc' ),
-		$wrap = $toc.parent();
-	if ( $wrap.data( 've.hideTableOfContents' ) ) {
-		$wrap.show( function () {
-			$toc.unwrap();
-		} );
-	}
-
-	$( '#contentSub' ).show();
-};
-
-/**
- * Hide elements that don't have a counter-part in the edit view.
- *
- * Call this when puting the page content, so that when we replace the
- * muted content with the edit surface, everything aligns in the same
- * place. If things like contentSub and TOC remain visible in mute mode,
- * there is an additional visual shift that is unpleasant to the user.
- */
-ve.init.mw.ViewPageTarget.prototype.hideReadOnlyContent = function () {
-	$( '#toc' )
-		.wrap( '<div>' )
-		.parent()
-			.data( 've.hideTableOfContents', true )
-			.hide();
-
-	$( '#contentSub' ).hide();
-};
-
-/**
  * Hide the toolbar.
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
@@ -1364,34 +1293,6 @@ ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
 			target.debugBar = null;
 		} );
 	}
-};
-
-/**
- * Transform the page title into a VE-style title.
- */
-ve.init.mw.ViewPageTarget.prototype.transformPageTitle = function () {
-	$( '#firstHeading' ).addClass( 've-init-mw-viewPageTarget-pageTitle' );
-};
-
-/**
- * Fade the page title to indicate it is not editable.
- */
-ve.init.mw.ViewPageTarget.prototype.mutePageTitle = function () {
-	$( '#firstHeading, #siteSub' )
-		.addClass( 've-init-mw-viewPageTarget-transform ve-init-mw-viewPageTarget-transform-muted' );
-};
-
-/**
- * Restore the page title to its original style.
- */
-ve.init.mw.ViewPageTarget.prototype.restorePageTitle = function () {
-	var $els = $( '#firstHeading, #siteSub' )
-		.removeClass( 've-init-mw-viewPageTarget-transform-muted' );
-
-	setTimeout( function () {
-		$els.removeClass( 've-init-mw-viewPageTarget-transform' );
-		$( '#firstHeading' ).removeClass( 've-init-mw-viewPageTarget-pageTitle' );
-	}, 1000 );
 };
 
 /**
@@ -1433,9 +1334,6 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 		.addClass( 've-hide' )
 		.fadeOut( 'fast' );
 
-	// Add class to document
-	$( 'html' ).addClass( 've-activated' );
-
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)
 	if ( !this.actFromPopState && history.pushState && this.currentUri.query.veaction !== 'edit' ) {
@@ -1468,9 +1366,6 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	// Make page status indicators visible again (if present)
 	$( '.mw-indicators.ve-hide' )
 		.fadeIn( 'fast' );
-
-	// Remove class from document
-	$( 'html' ).removeClass( 've-activated' );
 
 	// Push non-veaction=edit url in history
 	if ( !this.actFromPopState && history.pushState ) {
