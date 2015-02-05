@@ -39,7 +39,10 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 
 	// Table of Contents items
 	this.tableOfContents = new OO.ui.FieldLayout(
-		new OO.ui.ButtonSelectWidget( { $: this.$ } )
+		new OO.ui.ButtonSelectWidget( {
+			$: this.$,
+			classes: [ 've-test-page-settings-table-of-contents' ]
+		} )
 			.addItems( [
 				new OO.ui.ButtonOptionWidget( {
 					data: 'mwTOCForce',
@@ -69,6 +72,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.enableRedirectInput,
 		{
 			$: this.$,
+			classes: [ 've-test-page-settings-enable-redirect' ],
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-redirect-help' )
@@ -91,6 +95,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.enableStaticRedirectInput,
 		{
 			$: this.$,
+			classes: [ 've-test-page-settings-prevent-redirect' ],
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-redirect-statichelp' )
@@ -135,6 +140,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			new OO.ui.CheckboxInputWidget( { $: settingsPage.$ } ),
 			{
 				$: settingsPage.$,
+				classes: [ 've-test-page-settings-noeditsection' ],
 				align: 'inline',
 				label: this.label,
 				help: this.help || ''

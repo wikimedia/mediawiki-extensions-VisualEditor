@@ -251,7 +251,7 @@ Then(/^I should see Page settings dialog box$/) do
 
   capture_screenshot(
     "VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.page_settings_icon_element, @current_page.prevent_redirect_element],
+    [@current_page.enable_redirect_element, @current_page.prevent_redirect_element],
     nil,
     0
   )
