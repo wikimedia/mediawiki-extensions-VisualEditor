@@ -5,20 +5,36 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* VisualEditor */
+/*!
+ * State                | <html> classes
+ * Reading              | ve-available
+ * Activate editor      | ve-available ve-activated ve-activating
+ * Active               | ve-available ve-activated ve-active
+ * Deactivate editor    | ve-available ve-deactivating
+ * Deactivated          | ve-available
+ */
 
-.ve-init-mw-viewPageTarget-transform {
-	-webkit-transition: opacity 200ms ease-out;
-	-moz-transition: opacity 200ms ease-out;
-	-o-transition: opacity 200ms ease-out;
-	transition: opacity 200ms ease-out;
+.ve-activated #contentSub,
+.ve-activated #toc,
+/* Most of bodyContent can be hidden as VE has an equivalent of most children
+   in ve-init-target (sibling of #bodyContent). However, we can't hide it
+   completely as #siteSub should remain visible (for persistence with read mode),
+   and ve-ui-mwTocWidget is also part of #bodyContent. */
+.ve-active #bodyContent > :not(#siteSub):not(.ve-ui-mwTocWidget),
+.ve-active #t-print,
+.ve-active #t-permalink,
+.ve-active #p-coll-print_export,
+.ve-active #t-cite {
+	display: none;
 }
 
-.ve-init-mw-viewPageTarget-transform-muted {
+.ve-activating #bodyContent,
+.ve-activated #firstHeading,
+.ve-activated #siteSub {
 	opacity: 0.6;
 }
 
-.ve-init-mw-viewPageTarget-pageTitle {
+.ve-activated #firstHeading {
 	cursor: default;
 }
 
