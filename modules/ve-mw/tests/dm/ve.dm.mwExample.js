@@ -303,6 +303,8 @@ ve.dm.mwExample.MWInlineImage = {
 };
 
 ve.dm.mwExample.MWReference = {
+	// The HTML below is enriched to wrap reference contents in <span id="mw-cite-[...]">
+	// which Parsoid doesn't do yet, but T88290 asks for
 	referencesList:
 		'<ol class="references" typeof="mw:Extension/references" about="#mwt7" data-parsoid="{}"' +
 			'data-mw="{&quot;name&quot;:&quot;references&quot;,&quot;body&quot;:{' +
@@ -311,9 +313,9 @@ ve.dm.mwExample.MWReference = {
 			'&amp;quot;attrs&amp;quot;:{&amp;quot;group&amp;quot;:&amp;quot;g1&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;foo&amp;quot;}}\\&quot; ' +
 			'rel=\\&quot;dc:references\\&quot; typeof=\\&quot;mw:Extension/ref\\&quot;>' +
 			'<a href=\\&quot;#cite_note-foo-3\\&quot;>[3]</a></span>&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;}}">' +
-			'<li about="#cite_note-.3A0-2" id="cite_note-.3A0-2"><span rel="mw:referencedBy"><a href="#cite_ref-.3A0_2-0">↑</a></span> Quux</li>' +
-			'<li about="#cite_note-3" id="cite_note-3"><span rel="mw:referencedBy"><a href="#cite_ref-3">↑</a></span> No name</li>' +
-			'<li about="#cite_note-foo-4" id="cite_note-foo-4"><span rel="mw:referencedBy"><a href="#cite_ref-foo_4-0">↑</a></span> Ref in refs</li>' +
+			'<li about="#cite_note-.3A0-2" id="cite_note-.3A0-2"><span rel="mw:referencedBy"><a href="#cite_ref-.3A0_2-0">↑</a></span> <span id="mw-cite-:0">Quux</span></li>' +
+			'<li about="#cite_note-3" id="cite_note-3"><span rel="mw:referencedBy"><a href="#cite_ref-3">↑</a></span> <span id="mw-cite-3">No name</span></li>' +
+			'<li about="#cite_note-foo-4" id="cite_note-foo-4"><span rel="mw:referencedBy"><a href="#cite_ref-foo_4-0">↑</a></span> <span id="mw-cite-foo">Ref in refs</span></li>' +
 			'</ol>'
 };
 
@@ -1126,7 +1128,8 @@ ve.dm.mwExample.domToDataCases = {
 					'<a href="#cite_note-bar-1">[1]</a>' +
 				'</span>' +
 				' Yay' +
-				'<span about="#mwt4" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;No name&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;}}" id="cite_ref-1-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
+				// This reference has .body.id instead of .body.html
+				'<span about="#mwt4" class="reference" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;id&quot;:&quot;mw-cite-3&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;}}" id="cite_ref-1-0" rel="dc:references" typeof="mw:Extension/ref" data-parsoid="{}">' +
 					'<a href="#cite_note-3">[g1 2]</a>' +
 				'</span>' +
 				' Quux' +
@@ -1265,17 +1268,18 @@ ve.dm.mwExample.domToDataCases = {
 					listGroup: 'mwReference/g1',
 					listKey: 'auto/0',
 					refGroup: 'g1',
-					mw: { name: 'ref', body: { html: 'No name' }, attrs: { group: 'g1' } },
-					originalMw: '{"name":"ref","body":{"html":"No name"},"attrs":{"group":"g1"}}',
+					mw: { name: 'ref', body: { id: 'mw-cite-3' }, attrs: { group: 'g1' } },
+					originalMw: '{"name":"ref","body":{"id":"mw-cite-3"},"attrs":{"group":"g1"}}',
 					childDomElements: $( '<a href="#cite_note-3">[g1 2]</a>' ).toArray(),
-					contentsUsed: true
+					contentsUsed: true,
+					refListItemId: 'mw-cite-3'
 				},
 				htmlAttributes: [
 					{
 						values: {
 							about: '#mwt4',
 							class: 'reference',
-							'data-mw': '{"name":"ref","body":{"html":"No name"},"attrs":{"group":"g1"}}',
+							'data-mw': '{"name":"ref","body":{"id":"mw-cite-3"},"attrs":{"group":"g1"}}',
 							'data-parsoid': '{}',
 							id: 'cite_ref-1-0',
 							rel: 'dc:references',
