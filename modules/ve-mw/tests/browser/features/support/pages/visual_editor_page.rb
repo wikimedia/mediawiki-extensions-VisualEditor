@@ -62,7 +62,7 @@ class VisualEditorPage
   div(:heading_dropdown_menus, class: 'oo-ui-toolGroup-tools oo-ui-clippableElement-clippable', index: 1)
   div(:iframe, css: 'div.oo-ui-window-setup > div.oo-ui-window-frame')
   span(:increase_indentation, class: 'oo-ui-iconElement-icon oo-ui-icon-indent-list')
-  div(:indentation_pull_down, class: 'oo-ui-toolGroup-tools oo-ui-clippableElement-clippable', index: 3)
+  div(:indentation_pull_down, css: '.ve-test-toolbar-structure .oo-ui-clippableElement-clippable')
   span(:insert_citation, css: '.ve-ui-nodeDialog > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)
 ')
   span(:insert_indicator_down, css: '.ve-test-toolbar-insert .oo-ui-indicator-down')

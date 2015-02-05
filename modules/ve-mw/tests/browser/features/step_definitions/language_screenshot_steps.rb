@@ -231,7 +231,12 @@ end
 
 Then(/^I should see list and indentation dropdown$/) do
   on(VisualEditorPage).indentation_pull_down_element.when_present.should be_visible
-  capture_screenshot("#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png", [@current_page.indentation_pull_down_element, @current_page.bullet_number_selector_element], nil, 3)
+  capture_screenshot(
+    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    [@current_page.indentation_pull_down_element, @current_page.bullet_number_selector_element],
+    nil,
+    3
+  )
 end
 
 Then(/^I should see link Content box with dropdown options$/) do
