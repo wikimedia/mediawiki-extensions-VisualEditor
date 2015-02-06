@@ -17,4 +17,4 @@ Feature: VisualEditor Media Interface
       And I can click the X on the media save box
   Examples:
   | search_term           | expected_markup_text                                                                     |
-  | bug                   | [[File:Folgers.ogv\|thumb]]                                                              |
+  | bug                   | [[File:Folgers.ogv\|thughmb]]                                                             |

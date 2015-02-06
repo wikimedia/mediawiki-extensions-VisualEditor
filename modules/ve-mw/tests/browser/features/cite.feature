@@ -84,6 +84,7 @@ Feature: VisualEditor Cite
     Then I should see the VisualEditor interface
       And I should see the Options use this group text
       And I should see the General references
+      #And I fill in General references
 
   Scenario: Error message for required field not present
     When I click Journal
