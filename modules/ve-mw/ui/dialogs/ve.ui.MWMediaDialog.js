@@ -1098,17 +1098,17 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 				// The filerepo promise will be sent to the API
 				// only once per session so this will be resolved
 				// every time the search panel reloads
-				this.$spinner.show();
-				this.search.$element.hide();
+				this.$spinner.removeClass( 'oo-ui-element-hidden' );
+				this.search.toggle( false );
 
 				// Get the repos from the API first
 				// The ajax request will only be done once per session
 				dialog.getFileRepos().done( function ( repos ) {
 					dialog.search.setSources( repos );
 					// Done, hide the spinner
-					dialog.$spinner.hide();
+					dialog.$spinner.addClass( 'oo-ui-element-hidden' );
 					// Show the search and query the media sources
-					dialog.search.$element.show();
+					dialog.search.toggle( true );
 					dialog.search.query.setValue( dialog.pageTitle );
 					dialog.search.queryMediaSources();
 					// Initialization
@@ -1168,7 +1168,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	);
 
 	// Size widget
-	this.sizeErrorLabel.$element.hide();
+	this.sizeErrorLabel.toggle( false );
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
 	this.sizeWidget.connect( this, {
 		changeSizeType: 'checkChanged',

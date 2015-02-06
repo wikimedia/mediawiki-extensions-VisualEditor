@@ -42,9 +42,8 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.rows = [];
 
 	this.$noItemsMessage = this.$( '<div>' )
-		.addClass( 've-ui-mwMediaSearchWidget-noresults' )
+		.addClass( 've-ui-mwMediaSearchWidget-noresults oo-ui-element-hidden' )
 		.text( ve.msg( 'visualeditor-dialog-media-noresults' ) )
-		.hide()
 		.appendTo( this.$query );
 
 	// Events
@@ -168,7 +167,8 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaSources = function () {
 	}
 
 	// Reset message
-	this.$noItemsMessage.hide();
+	this.$noItemsMessage.addClass( 'oo-ui-element-hidden' );
+
 	// Abort previous promises if they are pending
 	this.resetPromises();
 
@@ -270,9 +270,9 @@ ve.ui.MWMediaSearchWidget.prototype.onAllMediaQueriesDone = function () {
 	this.query.popPending();
 
 	if ( this.results.getItems().length === 0 ) {
-		this.$noItemsMessage.show();
+		this.$noItemsMessage.removeClass( 'oo-ui-element-hidden' );
 	} else {
-		this.$noItemsMessage.hide();
+		this.$noItemsMessage.addClass( 'oo-ui-element-hidden' );
 		this.lazyLoadResults();
 	}
 };
