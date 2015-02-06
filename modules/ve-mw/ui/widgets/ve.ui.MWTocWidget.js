@@ -37,7 +37,7 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	this.mwTOCDisable = false;
 
 	// TODO: fix i18n
-	this.toggle = {
+	this.tocToggle = {
 		hideMsg: ve.msg( 'hidetoc' ),
 		showMsg: ve.msg( 'showtoc' ),
 		$link: this.$( '<a class="internal" id="togglelink"></a>' ).text( ve.msg( 'hidetoc' ) ),
@@ -46,7 +46,7 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	this.$element.addClass( 'toc ve-ui-mwTocWidget' ).append(
 		this.$( '<div>' ).attr( 'id', 'toctitle' ).append(
 			this.$( '<h2>' ).text( ve.msg( 'toc' ) ),
-			this.$( '<span>' ).addClass( 'toctoggle' ).append( this.toggle.$link )
+			this.$( '<span>' ).addClass( 'toctoggle' ).append( this.tocToggle.$link )
 		),
 		this.topics.$group, this.$tempTopics
 	);
@@ -54,13 +54,13 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	// Integration ignores hiding the TOC widget, though continues to hide the real page TOC
 	$( '#bodyContent' ).append( this.$element );
 
-	this.toggle.$link.on( 'click', function () {
-		if ( widget.toggle.open ) {
-			widget.toggle.$link.text( widget.toggle.showMsg );
-			widget.toggle.open = false;
+	this.tocToggle.$link.on( 'click', function () {
+		if ( widget.tocToggle.open ) {
+			widget.tocToggle.$link.text( widget.tocToggle.showMsg );
+			widget.tocToggle.open = false;
 		} else {
-			widget.toggle.$link.text( widget.toggle.hideMsg );
-			widget.toggle.open = true;
+			widget.tocToggle.$link.text( widget.tocToggle.hideMsg );
+			widget.tocToggle.open = true;
 		}
 		// FIXME: We should really use CSS here
 		widget.topics.$group.add( widget.$tempTopics ).slideToggle();
