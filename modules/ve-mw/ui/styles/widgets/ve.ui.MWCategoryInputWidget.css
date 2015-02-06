@@ -8,8 +8,7 @@
 .ve-ui-mwCategoryInputWidget {
 	float: left;
 	width: 15em;
-	margin-top: 0.75em;
-	margin-right: -1px;
+	margin: 0 -1px 0.5em 0;
 }
 
 .ve-ui-mwCategoryInputWidget input {
