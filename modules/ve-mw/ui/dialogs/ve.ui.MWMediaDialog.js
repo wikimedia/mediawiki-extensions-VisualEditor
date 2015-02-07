@@ -1084,6 +1084,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.panels.setItem( this.mediaImageInfoPanel );
 			break;
 	}
+	this.currentPanel = panel || 'imageinfo';
 };
 
 /**
@@ -1247,8 +1248,13 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			// Focus the caption surface
-			this.captionSurface.focus();
+			if ( this.currentPanel === 'search' ) {
+				// Focus the search input
+				this.search.query.focus().select();
+			} else {
+				// Focus the caption surface
+				this.captionSurface.focus();
+			}
 			// Revalidate size
 			this.sizeWidget.validateDimensions();
 		}, this );
