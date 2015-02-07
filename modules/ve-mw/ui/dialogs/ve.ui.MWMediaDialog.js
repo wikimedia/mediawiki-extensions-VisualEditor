@@ -410,15 +410,14 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
  * Note: Some information in the metadata object needs to be safely
  * stripped from its html wrappers.
  *
- * @param {Object} info Image info
+ * @param {Object} imageinfo Image info
  */
-ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
+ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	var i, newDimensions, field, isPortrait, $info, $section, windowWidth,
 		contentDirection = this.getFragment().getDocument().getDir(),
-		imageinfo = info.imageinfo[0],
 		imageTitle = new OO.ui.LabelWidget( {
 			$: this.$,
-			label: new mw.Title( info.title ).getNameText()
+			label: new mw.Title( imageinfo.title ).getNameText()
 		} ),
 		metadata = imageinfo.extmetadata,
 		// Field configuration (in order)
@@ -620,7 +619,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( info ) {
 	} );
 
 	// Call for a bigger image
-	this.fetchThumbnail( info.title, newDimensions )
+	this.fetchThumbnail( imageinfo.title, newDimensions )
 		.done( function ( thumburl ) {
 			if ( thumburl ) {
 				$image.prop( 'src', thumburl );
@@ -779,21 +778,18 @@ ve.ui.MWMediaDialog.prototype.onSearchChoose = function ( info ) {
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
-	var info,
-		obj = {},
-		item = this.selectedImageInfo;
+	var obj = {},
+		info = this.selectedImageInfo;
 
-	if ( item ) {
-		info = item.imageinfo[0];
-
+	if ( info ) {
 		if ( !this.imageModel ) {
 			// Create a new image model based on default attributes
 			this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
 				{
 					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
-					href: './' + item.title,
+					href: './' + info.title,
 					src: info.url,
-					resource: './' + item.title,
+					resource: './' + info.title,
 					width: info.thumbwidth,
 					height: info.thumbheight,
 					mediaType: info.mediatype,
@@ -811,9 +807,9 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 			this.imageModel.changeImageSource(
 				{
 					mediaType: info.mediatype,
-					href: './' + item.title,
+					href: './' + info.title,
 					src: info.url,
-					resource: './' + item.title
+					resource: './' + info.title
 				},
 				info
 			);
@@ -824,7 +820,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 		}
 
 		// Cache
-		obj[ item.title ] = info;
+		obj[ info.title ] = info;
 		ve.init.platform.imageInfoCache.set( obj );
 
 		this.checkChanged();
@@ -989,34 +985,6 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 };
 
 /**
- * Get the object of file repos to use for the media search
- *
- * @returns {jQuery.Promise}
- */
-ve.ui.MWMediaDialog.prototype.getFileRepos = function () {
-	var defaultSource = [ {
-			url: mw.util.wikiScript( 'api' ),
-			local: true
-		} ];
-
-	if ( !this.fileRepoPromise ) {
-		this.fileRepoPromise = ve.init.target.constructor.static.apiRequest( {
-			action: 'query',
-			meta: 'filerepoinfo'
-		} ).then(
-			function ( resp ) {
-				return resp.query && resp.query.repos || defaultSource;
-			},
-			function () {
-				return $.Deferred().resolve( defaultSource );
-			}
-		);
-	}
-
-	return this.fileRepoPromise;
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
@@ -1093,31 +1061,8 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.setSize( 'larger' );
 			this.selectedImageInfo = null;
 			if ( !stopSearchRequery ) {
-				// Show a spinner while we check for file repos.
-				// this will only be done once per session.
-				// The filerepo promise will be sent to the API
-				// only once per session so this will be resolved
-				// every time the search panel reloads
-				this.$spinner.removeClass( 'oo-ui-element-hidden' );
-				this.search.toggle( false );
-
-				// Get the repos from the API first
-				// The ajax request will only be done once per session
-				dialog.getFileRepos().done( function ( repos ) {
-					dialog.search.setSources( repos );
-					// Done, hide the spinner
-					dialog.$spinner.addClass( 'oo-ui-element-hidden' );
-					// Show the search and query the media sources
-					dialog.search.toggle( true );
-					dialog.search.query.setValue( dialog.pageTitle );
-					dialog.search.queryMediaSources();
-					// Initialization
-					// This must be done only after there are proper
-					// sources defined
-					dialog.search.getQuery().focus().select();
-					dialog.search.getResults().selectItem();
-					dialog.search.getResults().highlightItem();
-				} );
+				this.search.query.setValue( dialog.pageTitle );
+				this.search.query.focus().select();
 			}
 
 			// Set the edit panel

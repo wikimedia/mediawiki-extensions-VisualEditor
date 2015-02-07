@@ -24,14 +24,15 @@ ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 
 	// Properties
 	this.initialSize = config.size || 150;
-	this.maxSize = config.maxSize || this.initialSize * 2;
+	this.maxWidth = config.maxWidth || this.initialSize * 2;
 	this.expanded = false;
 	this.dimensions = {};
 	this.$thumb = this.buildThumbnail();
 	this.$overlay = this.$( '<div>' );
 	this.row = null;
 	// Store the thumbnail url
-	this.thumbUrl = ve.getProp( this.data.imageinfo, 0, 'thumburl' );
+	this.thumbUrl = this.data.thumburl;
+	this.src = null;
 
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
@@ -48,15 +49,6 @@ ve.ui.MWMediaResultWidget = function VeUiMWMediaResultWidget( config ) {
 
 	// Adjust wrapper padding
 	this.$element.css( $.extend( this.dimensions, this.calculateWrapperPadding( this.dimensions, this.initialSize ) ) );
-
-	// Select button
-	this.selectButton = new OO.ui.ButtonWidget( {
-		$: this.$,
-		label: ve.msg( 'visualeditor-dialog-media-searchselect' ),
-		icon: 'check'
-	} );
-	this.selectButton.toggle( false );
-	this.$element.prepend( this.selectButton.$element );
 };
 
 /* Inheritance */
@@ -90,7 +82,7 @@ ve.ui.MWMediaResultWidget.prototype.onThumbnailError = function () {
  */
 ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
 	var imageDimensions,
-		info = this.data.imageinfo[0],
+		info = this.data,
 		$thumb = this.$( '<img>' );
 
 	// Preload image
@@ -109,7 +101,7 @@ ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
 			height: this.initialSize
 		};
 	} else {
-		if ( info.height < this.initialSize && info.width < this.maxSize ) {
+		if ( info.height < this.initialSize && info.width < this.maxWidth ) {
 			// Define dimensions with original size
 			imageDimensions = {
 				width: info.width,
@@ -137,7 +129,10 @@ ve.ui.MWMediaResultWidget.prototype.buildThumbnail = function () {
  * actual src.
  */
 ve.ui.MWMediaResultWidget.prototype.lazyLoad = function () {
-	this.$thumb.attr( 'src', this.thumbUrl );
+	if ( !this.hasSrc() ) {
+		this.src = this.thumbUrl;
+		this.$thumb.attr( 'src', this.thumbUrl );
+	}
 };
 
 /**
@@ -176,7 +171,7 @@ ve.ui.MWMediaResultWidget.prototype.resizeThumb = function ( resizeFactor ) {
  */
 ve.ui.MWMediaResultWidget.prototype.calculateThumbDimensions = function ( imageDimensions ) {
 	var dimensions,
-		maxWidth = this.maxSize,
+		maxWidth = this.maxWidth,
 		ratio = imageDimensions.width / imageDimensions.height;
 	// Rules of resizing:
 	// (1) Images must have height = this.initialSize
@@ -263,5 +258,5 @@ ve.ui.MWMediaResultWidget.prototype.getRow = function () {
  * @returns {boolean} Thumbnail has its source attribute set
  */
 ve.ui.MWMediaResultWidget.prototype.hasSrc = function () {
-	return !!this.$thumb.attr( 'src' );
+	return !!this.src;
 };

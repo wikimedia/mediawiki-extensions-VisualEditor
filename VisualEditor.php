@@ -982,6 +982,8 @@ $wgResourceModules += array(
 	'ext.visualEditor.mwimage' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'modules/ve-mw/dm/models/ve.dm.MWImageModel.js',
+			'modules/ve-mw/dm/models/ve.dm.MWMediaResourceProvider.js',
+			'modules/ve-mw/dm/models/ve.dm.MWMediaResourceQueue.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWMediaSearchWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWMediaResultWidget.js',

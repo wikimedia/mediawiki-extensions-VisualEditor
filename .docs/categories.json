@@ -14,6 +14,12 @@
 				"classes": [
 					"ve.ui.MW*Page"
 				]
+			},
+			{
+				"name": "Data Model",
+				"classes": [
+					"ve.dm.MWMediaResource*"
+				]
 			}
 		]
 	},
