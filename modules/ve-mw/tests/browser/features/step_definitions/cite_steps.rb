@@ -85,6 +85,7 @@ end
 Then(/^diff view should show the Book citation added$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
+      sleep 1
       page.diff_view.include? 'Cite VisualEditor Test'
     end
     expect(page.diff_view).to match '<ref>{{Cite book|title = Book title|last = Book author last name|first = Book author first name|publisher = Book publisher|year = 2014|isbn = 9780743273565|location = Location of publication|pages = 123|New book field = New book field contents}}</ref>Cite VisualEditor Test'
@@ -94,6 +95,7 @@ end
 Then(/^diff view should show the Journal citation added$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
+      sleep 1
       page.diff_view.include? 'Cite VisualEditor Test'
     end
     expect(page.diff_view).to match '<ref>{{Cite journal|url = Journal title|title = Journal Source date|last = Journal Last Name|first = Journal First Name|date = Journal Source Date|journal = Journal Journal|accessdate = Journal Access Date|doi = Journal DOI}}</ref>Cite VisualEditor Test'
@@ -103,6 +105,7 @@ end
 Then(/^diff view should show the News citation added$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
+      sleep 1
       page.diff_view.include? 'Cite VisualEditor Test'
     end
     expect(page.diff_view).to match '<ref>{{Cite news|url = News URL|title = News Source title|last = News Last name|first = News First name|date = News Source date|work = News Work|accessdate = News URL access date}}</ref>Cite VisualEditor Test'
@@ -112,6 +115,7 @@ end
 Then(/^diff view should show the Website citation added$/) do
   on(VisualEditorPage) do |page|
     page.wait_until(10) do
+      sleep 1
       page.diff_view.include? 'Cite VisualEditor Test'
     end
     expect(page.diff_view).to match '<ref>{{Cite web|url = http://en.wikipedia.org/|title = Website Source title|date = Website Source date 28 July 2014|accessdate = {{CURRENTMONTHNAME}} {{CURRENTYEAR}}28 July 2014|website = Website title|publisher = Website publisher|last = Website Last name|first = Website First name|New website field = New website field contents}}</ref>Cite VisualEditor Test'

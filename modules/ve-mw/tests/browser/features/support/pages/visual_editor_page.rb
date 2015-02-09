@@ -24,7 +24,7 @@ class VisualEditorPage
   a(:cite_book, css: '.oo-ui-tool-name-cite-book > a:nth-child(1)')
   span(:cite_button, css: '.ve-test-toolbar-cite .oo-ui-labelElement-label')
   text_field(:cite_custom_field_name, css: '.oo-ui-searchWidget-query > div:nth-child(1) > input:nth-child(1)')
-  div(:cite_group_name_textarea, css: '.ve-ui-mwReferenceGroupInputWidget .oo-ui-indicatorElement:nth-child(1) > input')
+  text_field(:cite_group_name_textarea, css: 'div.oo-ui-indicatorElement:nth-child(1) > input:nth-child(1)')
   a(:cite_journal, css: '.oo-ui-tool-name-cite-journal > a:nth-child(1)')
   span(:cite_indicator_down, css: '.ve-test-toolbar-cite .oo-ui-indicator-down')
   div(:cite_new_field_label, css: '.oo-ui-optionWidget')
