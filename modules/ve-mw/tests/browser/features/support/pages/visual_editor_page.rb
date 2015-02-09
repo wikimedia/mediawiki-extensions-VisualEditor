@@ -67,6 +67,7 @@ class VisualEditorPage
   div(:indentation_pull_down, css: '.ve-test-toolbar-structure .oo-ui-clippableElement-clippable')
   span(:insert_citation, css: '.ve-ui-nodeDialog > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)
 ')
+  span(:insert_indicator, text: 'Insert')
   span(:insert_indicator_down, css: '.ve-test-toolbar-insert .oo-ui-indicator-down')
   a(:insert_more_fewer, css: '.ve-test-toolbar-insert .oo-ui-tool-name-more-fewer .oo-ui-tool-link')
   div(:insert_pull_down, css: '.ve-test-toolbar-insert .oo-ui-clippableElement-clippable')
