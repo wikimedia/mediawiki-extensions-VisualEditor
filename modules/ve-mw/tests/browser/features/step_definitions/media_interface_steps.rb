@@ -7,7 +7,9 @@ end
 
 When(/^I enter (.+) into media Search box$/) do |content|
   on(VisualEditorPage) do |page|
+    sleep 1
     page.media_search_element.when_present.click
+    page.media_search_element.send_keys('')
     page.media_search_element.when_present.send_keys(content)
   end
 end
@@ -31,6 +33,7 @@ Then(/^(.+) should appear in the media diff view$/) do |headings_string|
     # So we put single quotes around the entries in the .feature file and strip them here to get unescaped regexes.
     headings_string = headings_string.gsub(/'/, '')
     page.wait_until(15) do
+      sleep 1
       page.diff_view.include? 'Your text'
     end
     expect(page.diff_view).to match headings_string
