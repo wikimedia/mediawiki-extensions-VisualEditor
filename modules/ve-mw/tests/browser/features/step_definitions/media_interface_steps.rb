@@ -26,20 +26,11 @@ When (/^I click Insert$/) do
   on(VisualEditorPage).media_insert_button_element.when_present.click
 end
 
-Then(/^(.+) should appear in the media diff view$/) do |headings_string|
+Then(/^diff view should show correct markup$/) do
   on(VisualEditorPage) do |page|
-    # Contents pulled from the Cucumber tables in the .feature are escaped regexes.
-    # In this case we want unescaped regexes (and in one case a leading space)
-    # So we put single quotes around the entries in the .feature file and strip them here to get unescaped regexes.
-    headings_string = headings_string.gsub(/'/, '')
     page.wait_until(15) do
-      sleep 1
-      page.diff_view.include? 'Your text'
+      page.diff_view_element.exists?
     end
-    expect(page.diff_view).to match headings_string
+    expect(page.diff_view).to match /\[\[File:A Bug.JPG\|thumb\]\]/
   end
-end
-
-Then(/^I can click the X on the media save box$/) do
-  on(VisualEditorPage).media_exit_element.when_present.click
 end

@@ -13,8 +13,7 @@ Feature: VisualEditor Media Interface
       And I click Insert
       And I click Save page
       And I click Review your changes
-    Then <expected_markup_text> should appear in the media diff view
-      And I can click the X on the media save box
+    Then  diff view should show correct markup
   Examples:
-  | search_term           | expected_markup_text                                                                     |
-  | bug                   | [[File:Folgers.ogv\|thughmb]]                                                             |
+  | search_term           |
+  | bug                   |
