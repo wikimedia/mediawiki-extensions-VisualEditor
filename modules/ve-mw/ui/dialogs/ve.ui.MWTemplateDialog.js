@@ -253,12 +253,8 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
-	if ( this.loading.state() !== 'resolved' ) {
-		// Loading is not resolved
-		this.actions.setAbilities( { apply: false, insert: false } );
-	} else if ( parts.length && !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
-		// Loading is resolved, and we have parts, and first one is not placeholder
-		this.actions.setAbilities( { apply: this.altered, insert: true } );
+	if ( parts.length && !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
+		this.actions.setAbilities( { apply: true, insert: true } );
 	} else {
 		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
 		this.actions.setAbilities( { apply: parts.length === 0 && this.altered, insert: false } );
