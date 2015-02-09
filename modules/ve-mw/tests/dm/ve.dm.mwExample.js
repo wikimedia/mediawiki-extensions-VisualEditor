@@ -1425,7 +1425,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: '/mwReferencesList' },
 			{ type: 'internalList' },
-			{ type: 'internalItem' },
+			{ type: 'internalItem', attributes: { originalHtml: '<a rel="mw:WikiLink" href="./Bar">Bar</a>' } },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			[
 				'B',
@@ -1501,17 +1501,17 @@ ve.dm.mwExample.domToDataCases = {
 			],
 			{ type: '/paragraph' },
 			{ type: '/internalItem' },
-			{ type: 'internalItem' },
+			{ type: 'internalItem', attributes: { originalHtml: 'Quux' } },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'Q', 'u', 'u', 'x',
 			{ type: '/paragraph' },
 			{ type: '/internalItem' },
-			{ type: 'internalItem' },
+			{ type: 'internalItem', attributes: { originalHtml: 'No name' } },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'N', 'o', ' ', 'n', 'a', 'm', 'e',
 			{ type: '/paragraph' },
 			{ type: '/internalItem' },
-			{ type: 'internalItem' },
+			{ type: 'internalItem', attributes: { originalHtml: 'Ref in refs' } },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'R', 'e', 'f', ' ', 'i', 'n', ' ', 'r', 'e', 'f', 's',
 			{ type: '/paragraph' },
@@ -1574,7 +1574,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/mwReference' },
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
-			{ type: 'internalItem' },
+			{ type: 'internalItem', attributes: { originalHtml: 'Foo<!-- bar -->' } },
 			{
 				internal: {
 					generated: 'wrapper'
