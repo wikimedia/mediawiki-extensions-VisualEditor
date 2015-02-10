@@ -93,3 +93,10 @@ Feature: VisualEditor Cite
     Then I should see a Required parameters missing error
       And I should see a Go back button
       And I should see a Continue anyway button
+
+  Scenario: Reusing an existing reference
+    Given I go to a page that has references
+    When I edit the page with Some content related to existing reference
+      And I create a reference using existing reference
+    Then first link to reference should be visible
+      And second link to reference should be visible
