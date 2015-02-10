@@ -124,7 +124,8 @@ end
 
 Then(/^I should see category dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
@@ -136,7 +137,8 @@ Then(/^I should see Headings pull-down menu$/) do
 end
 
 Then(/^I take screenshot of pull-dowm menu$/) do
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.format_indicator_down_element, @current_page.heading_dropdown_menus_element]
   )
@@ -148,7 +150,8 @@ Then(/^I should see Formatting pull-down menu$/) do
 end
 
 Then(/^I take screenshot of Formatting pull-down menu$/) do
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.ve_text_style_element, @current_page.formatting_option_menus_element]
   )
@@ -160,7 +163,8 @@ Then(/^I should see pull-down menu containing Page Settings$/) do
 end
 
 Then(/^I take screenshot of Visual Editor insert menu$/) do
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.tools_menu_element, @current_page.page_option_menu_element]
   )
@@ -173,38 +177,43 @@ end
 
 Then(/^I take screenshot of insert pull-down menu$/) do
   step 'I click on More in insert pull-down menu'
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
   )
 
-  highlight @current_page.media_insert_menu_element
+  Screenshot.highlight(@current_page, @current_page.media_insert_menu_element)
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Media_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
   )
 
-  highlight @current_page.media_insert_menu_element, '#FFFFFF'
-  highlight @current_page.template_insert_menu_element
+  Screenshot.highlight(@current_page, @current_page.media_insert_menu_element, '#FFFFFF')
+  Screenshot.highlight(@current_page, @current_page.template_insert_menu_element)
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Template_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
   )
 
-  highlight @current_page.template_insert_menu_element, '#FFFFFF'
-  highlight @current_page.ref_list_insert_menu_element
+  Screenshot.highlight(@current_page, @current_page.template_insert_menu_element, '#FFFFFF')
+  Screenshot.highlight(@current_page, @current_page.ref_list_insert_menu_element)
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_References_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
   )
 
-  highlight @current_page.ref_list_insert_menu_element, '#FFFFFF'
-  highlight @current_page.formula_insert_menu_element
+  Screenshot.highlight(@current_page, @current_page.ref_list_insert_menu_element, '#FFFFFF')
+  Screenshot.highlight(@current_page, @current_page.formula_insert_menu_element)
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Formula_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
   )
@@ -216,8 +225,9 @@ end
 
 Then(/^I should see Special character Insertion window$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
-  zoom_browser(-2)
-  capture_screenshot(
+  Screenshot.zoom_browser(@browser, -2)
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
@@ -225,8 +235,9 @@ end
 
 Then(/^I should see save changes dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
-  zoom_browser(-2)
-  capture_screenshot(
+  Screenshot.zoom_browser(@browser, -2)
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
@@ -235,28 +246,33 @@ end
 Then(/^I should see Page settings dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.enable_redirect_element, @current_page.prevent_redirect_element]
   )
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Page_Settings_TOC-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.table_of_contents_element]
   )
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Page_Settings_Edit_Links-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.page_settings_editlinks_element]
   )
 
-  zoom_browser(3)
-  capture_screenshot(
+  Screenshot.zoom_browser(@browser, 3)
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Apply_Changes-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.settings_apply_button_element]
   )
@@ -264,8 +280,9 @@ end
 
 Then(/^I should see list and indentation dropdown$/) do
   on(VisualEditorPage).indentation_pull_down_element.when_present.should be_visible
-  zoom_browser(3)
-  capture_screenshot(
+  Screenshot.zoom_browser(@browser, 3)
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.indentation_pull_down_element, @current_page.bullet_number_selector_element]
   )
@@ -274,7 +291,8 @@ end
 Then(/^I should see link Content box with dropdown options$/) do
   on(VisualEditorPage).link_list_element.when_present(5).should be_visible
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.link_list_element, @current_page.window_frame_element, @current_page.new_link_element]
   )
@@ -282,7 +300,8 @@ end
 
 Then(/^I should see link icon$/) do
   on(VisualEditorPage).popup_icon_element.when_present(5).should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.popup_icon_element, @current_page.internal_link_element]
   )
@@ -290,7 +309,8 @@ end
 
 Then(/^I should see media editing dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
@@ -299,12 +319,14 @@ end
 Then(/^I should see media caption dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "VisualEditor_Media_alternative_text-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.media_alternative_block_element],
     @current_page.window_frame_element
@@ -314,7 +336,8 @@ end
 Then(/^I should see media advanced settings dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
@@ -322,7 +345,8 @@ end
 
 Then(/^I should see media in VisualEditor$/) do
   on(VisualEditorPage).media_image_element.when_present.should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.media_image_element, @current_page.media_caption_element]
   )
@@ -330,7 +354,8 @@ end
 
 Then (/^I should see Cite dropdown menu$/) do
   on(VisualEditorPage).cite_pull_down_element.when_present.should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.cite_pull_down_element, @current_page.cite_indicator_down_element]
   )
@@ -338,7 +363,8 @@ end
 
 Then(/^I should see Reference icon$/) do
   on(VisualEditorPage).popup_icon_element.when_present.should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.popup_icon_element, @current_page.first_reference_element]
   )
@@ -346,7 +372,8 @@ end
 
 Then(/^I should see Basic Reference dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )
@@ -358,7 +385,8 @@ Then(/^I should see the right edit tab$/) do
     page.language_notification_element.when_not_present(10)
   end
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.right_navigation_element, @current_page.left_navigation_element]
   )
@@ -370,7 +398,8 @@ Then(/^I should see the VisualEditor tool-bar$/) do
     page.language_notification_element.when_not_present(10)
   end
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.right_navigation_element, @current_page.left_navigation_element, @current_page.toolbar_element]
   )
@@ -382,7 +411,8 @@ Then(/^I should see the formula insertion menu$/) do
     page.formula_image_element.when_present(5).should be_visible
   end
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element, @current_page.formula_image_element]
   )
@@ -394,7 +424,8 @@ Then(/^I should see action buttons in the end of the VisualEditor toolbar$/) do
     page.save_enabled_element.when_present(10).should be_visible
   end
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.toolbar_actions_element]
   )
@@ -403,7 +434,8 @@ end
 Then(/^I should see References list dialog box$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
 
-  capture_screenshot(
+  Screenshot.capture(
+    @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
     [@current_page.window_frame_element]
   )

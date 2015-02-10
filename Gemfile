@@ -3,8 +3,7 @@
 
 source 'https://rubygems.org'
 
-gem 'chunky_png'
 gem 'mediawiki_api'
 gem 'mediawiki_selenium', '~> 0.4.1'
-gem 'rspec'
 gem 'rubocop', require: false
+gem 'screenshot', '~> 0.0.4'
