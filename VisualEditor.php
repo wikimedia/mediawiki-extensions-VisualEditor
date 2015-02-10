@@ -569,6 +569,7 @@ $wgResourceModules += array(
 
 			'lib/ve/src/ui/windowmanagers/ve.ui.ToolbarDialogWindowManager.js',
 
+			'lib/ve/src/ui/widgets/ve.ui.AlignWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.SurfaceWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.LinkTargetInputWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.ContextSelectWidget.js',
