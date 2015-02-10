@@ -155,8 +155,7 @@ ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.initialize = function () {
-	var altTextFieldset, positionFieldset, borderField, positionField,
-		alignLeftButton, alignCenterButton, alignRightButton, alignButtons;
+	var altTextFieldset, positionFieldset, borderField, positionField;
 
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
@@ -242,34 +241,10 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		.append( this.altTextInput.$element );
 
 	// Position
-	this.positionSelect = new OO.ui.ButtonSelectWidget( {
-		$: this.$
-	} );
-
-	alignLeftButton = new OO.ui.ButtonOptionWidget( {
+	this.positionSelect = new ve.ui.AlignWidget( {
 		$: this.$,
-		data: 'left',
-		icon: 'align-float-left',
-		label: ve.msg( 'visualeditor-dialog-media-position-left' )
+		dir: this.getDir()
 	} );
-	alignCenterButton = new OO.ui.ButtonOptionWidget( {
-		$: this.$,
-		data: 'center',
-		icon: 'align-center',
-		label: ve.msg( 'visualeditor-dialog-media-position-center' )
-	} );
-	alignRightButton = new OO.ui.ButtonOptionWidget( {
-		$: this.$,
-		data: 'right',
-		icon: 'align-float-right',
-		label: ve.msg( 'visualeditor-dialog-media-position-right' )
-	} );
-
-	alignButtons = ( this.getDir() === 'ltr' ) ?
-		[ alignLeftButton, alignCenterButton, alignRightButton ] :
-		[ alignRightButton, alignCenterButton, alignLeftButton ];
-
-	this.positionSelect.addItems( alignButtons, 0 );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
 		$: this.$
