@@ -31,6 +31,7 @@ class VisualEditorPage
   text_area(:cite_new_website_field, css: 'div.oo-ui-layout:nth-child(10) > div:nth-child(3) > div:nth-child(1) > textarea:nth-child(1)')
   a(:cite_news, css: '.oo-ui-tool-name-cite-news > a:nth-child(1)')
   div(:cite_pull_down, css: '.ve-test-toolbar-cite .oo-ui-clippableElement-clippable')
+  span(:cite_reuse_existing_reference, css: '.oo-ui-icon-reference-existing')
   div(:cite_select, css: 'div.oo-ui-widget:nth-child(5) > div:nth-child(2)')
   div(:cite_show_more_fields, class: 've-ui-mwMoreParametersResultWidget-label')
   div(:cite_ui, class: 'oo-ui-window-frame')
@@ -54,6 +55,7 @@ class VisualEditorPage
   a(:edit_ve, title: /Edit this page with VisualEditor/)
   a(:edit_wikitext, title: /You can edit this page\./)
   span(:ex, text: 'Return to save form')
+  div(:extension_reference, class: 've-ui-mwReferenceResultWidget-shield')
   a(:first_reference, text: '[1]', index: 1)
   div(:formatting_option_menus, class: 'oo-ui-toolGroup-tools oo-ui-clippableElement-clippable', index: 2)
   img(:formula_image, class: 've-ce-focusableNode-highlight-relocatable-marker')
@@ -176,8 +178,6 @@ class VisualEditorPage
   text_area(:formula_area, css: '.oo-ui-popupWidget-popup textarea')
 
   in_iframe(index: 0) do |frame|
-    div(:extension_reference, class: 've-ui-mwReferenceResultWidget-shield', frame: frame)
-    span(:existing_reference, text: 'Use an existing reference', frame: frame)
     a(:remove_template, title: 'Remove template', frame: frame)
     span(:required_parameters_continue_anyway, text: 'Continue anyway', frame: frame)
     span(:required_parameters_go_back, text: 'Go back', frame: frame)

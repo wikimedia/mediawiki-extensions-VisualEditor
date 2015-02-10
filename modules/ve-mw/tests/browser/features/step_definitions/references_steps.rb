@@ -32,7 +32,7 @@ When(/^I enter (.+) into Content box$/) do |content|
 end
 
 When(/^I click use an existing reference button in References User Interface$/) do
-  on(VisualEditorPage).existing_reference_element.when_present.click
+  on(VisualEditorPage).cite_reuse_existing_reference_element.when_present.click
 end
 
 When(/^I click on Extension:VisualEditor reference$/) do
@@ -40,7 +40,7 @@ When(/^I click on Extension:VisualEditor reference$/) do
 end
 
 When(/^I create a reference using existing reference$/) do
-  step('I click Reference')
+  step('I click the Cite button')
   step('I click use an existing reference button in References User Interface')
   step('I click on Extension:VisualEditor reference')
 end
