@@ -56,7 +56,7 @@ class VisualEditorPage
   span(:ex, text: 'Return to save form')
   a(:first_reference, text: '[1]', index: 1)
   div(:formatting_option_menus, class: 'oo-ui-toolGroup-tools oo-ui-clippableElement-clippable', index: 2)
-  img(:formula_image, class: 'mwe-math-fallback-png-inline')
+  img(:formula_image, class: 've-ce-focusableNode-highlight-relocatable-marker')
   span(:formula_insert_menu, class: 'oo-ui-tool-name-math')
   a(:formula_link, css: 'span.oo-ui-tool-name-math > a.oo-ui-tool-link')
   span(:heading, class: 'oo-ui-tool-title', text: /Heading/)
