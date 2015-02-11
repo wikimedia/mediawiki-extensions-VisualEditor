@@ -415,11 +415,21 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 				view: { icon: 'picture' }
 			},
 			{
+				name: 'LicenseShortName',
+				value: ve.getProp( metadata, 'LicenseShortName', 'value' ),
+				data: {},
+				view: {
+					href: ve.getProp( metadata, 'LicenseUrl' ),
+					icon: this.getLicenseIcon( ve.getProp( metadata, 'LicenseShortName', 'value' ) )
+				}
+			},
+			{
 				name: 'Artist',
 				value: ve.getProp( metadata, 'Artist', 'value' ),
 				data: {},
 				view: {
-					label: 'visualeditor-dialog-media-info-artist',
+					// "Artist" label
+					label: 'visualeditor-dialog-media-info-meta-artist',
 					icon: 'profile'
 				}
 			},
@@ -430,12 +440,13 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 				view: { icon: 'profile' }
 			},
 			{
-				name: 'LicenseShortName',
-				value: ve.getProp( metadata, 'LicenseShortName', 'value' ),
-				data: {},
+				name: 'user',
+				value: imageinfo.user,
+				data: { skipProcessing: true },
 				view: {
-					href: ve.getProp( metadata, 'LicenseUrl' ),
-					icon: this.getLicenseIcon( ve.getProp( metadata, 'LicenseShortName', 'value' ) )
+					icon: 'profile',
+					// This is 'uploaded by'
+					label: 'visualeditor-dialog-media-info-artist'
 				}
 			},
 			{

@@ -87,6 +87,7 @@
 	"visualeditor-dialog-media-info-ellipsis": "…",
 	"visualeditor-dialog-media-info-imagedescription": "Full description",
 	"visualeditor-dialog-media-info-licenseshortname": "License",
+	"visualeditor-dialog-media-info-meta-artist": "Artist: $1",
 	"visualeditor-dialog-media-info-moreinfo": "More information",
 	"visualeditor-dialog-media-info-readmore": "Read more",
 	"visualeditor-dialog-media-info-separator": "·",

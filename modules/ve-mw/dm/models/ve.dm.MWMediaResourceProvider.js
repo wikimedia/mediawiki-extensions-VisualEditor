@@ -30,7 +30,7 @@ ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( config ) {
 
 	// Fetching configuration
 	this.fetchLimit = config.limit || 30;
-	this.iiprop = config.iiprop || [ 'dimensions', 'url', 'mediatype', 'extmetadata', 'timestamp' ];
+	this.iiprop = config.iiprop || [ 'dimensions', 'url', 'mediatype', 'extmetadata', 'timestamp', 'user' ];
 	this.fetchProp = config.fetchProp || 'imageinfo';
 	this.lang = config.lang || 'en';
 
