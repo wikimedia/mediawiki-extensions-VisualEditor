@@ -56,14 +56,24 @@ ve.dm.MWReferenceNode.static.blacklistedAnnotationTypes = [ 'link' ];
 ve.dm.MWReferenceNode.static.listKeyRegex = /^(auto|literal)\/(.*)$/;
 
 ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter ) {
+	function getReflistItemHtml( id ) {
+		var elem = converter.getHtmlDocument().getElementById( id );
+		return elem && elem.innerHTML || '';
+	}
+
 	var dataElement,
 		mwDataJSON = domElements[0].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
-		body = mwData.body ? mwData.body.html : '',
+		reflistItemId = mwData.body && mwData.body.id,
+		body = ( mwData.body && mwData.body.html ) ||
+			( reflistItemId && getReflistItemHtml( reflistItemId ) ) ||
+			'',
 		refGroup = mwData.attrs && mwData.attrs.group || '',
 		listGroup = this.name + '/' + refGroup,
 		autoKeyed = !mwData.attrs || mwData.attrs.name === undefined,
-		listKey = autoKeyed ? 'auto/' + converter.internalList.getNextUniqueNumber() : 'literal/' + mwData.attrs.name,
+		listKey = autoKeyed ?
+			'auto/' + converter.internalList.getNextUniqueNumber() :
+			'literal/' + mwData.attrs.name,
 		queueResult = converter.internalList.queueItemHtml( listGroup, listKey, body ),
 		listIndex = queueResult.index,
 		contentsUsed = ( body !== '' && queueResult.isNew );
@@ -81,6 +91,9 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 			contentsUsed: contentsUsed
 		}
 	};
+	if ( reflistItemId ) {
+		dataElement.attributes.refListItemId = reflistItemId;
+	}
 	return dataElement;
 };
 
@@ -143,7 +156,8 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 			itemNodeWrapper
 		);
 		itemNodeHtml = itemNodeWrapper.innerHTML; // Returns '' if itemNodeWrapper is empty
-		originalHtml = ve.getProp( mwData, 'body', 'html' ) || '';
+		originalHtml = ve.getProp( mwData, 'body', 'html' ) ||
+			itemNode.getAttribute( 'originalHtml' ) || '';
 		originalHtmlWrapper.innerHTML = originalHtml;
 		// Only set body.html if itemNodeHtml and originalHtml are actually different
 		if ( !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {

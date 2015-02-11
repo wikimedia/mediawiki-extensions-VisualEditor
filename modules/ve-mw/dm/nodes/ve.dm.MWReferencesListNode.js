@@ -60,16 +60,15 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 		}
 	};
 	if ( mwData.body && mwData.body.html ) {
+		// Process the nodes in .body.html as if they were this node's children
 		contentsDiv = domElements[0].ownerDocument.createElement( 'div' );
 		contentsDiv.innerHTML = mwData.body.html;
 		contentsData = converter.getDataFromDomClean( contentsDiv );
-		return [ referencesListData ]
+		referencesListData = [ referencesListData ]
 			.concat( contentsData )
 			.concat( [ { type: '/' + this.name } ] );
-	} else {
-		return referencesListData;
 	}
-
+	return referencesListData;
 };
 
 ve.dm.MWReferencesListNode.static.toDomElements = function ( data, doc, converter ) {
