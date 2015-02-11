@@ -1023,6 +1023,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-media-info-ellipsis',
 			'visualeditor-dialog-media-info-imagedescription',
 			'visualeditor-dialog-media-info-licenseshortname',
+			'visualeditor-dialog-media-info-meta-artist',
 			'visualeditor-dialog-media-info-moreinfo',
 			'visualeditor-dialog-media-info-readmore',
 			'visualeditor-dialog-media-info-separator',
