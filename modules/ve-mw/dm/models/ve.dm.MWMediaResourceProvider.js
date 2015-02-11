@@ -190,6 +190,14 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 				if ( raw ) {
 					// Strip away the page ids
 					for ( page in raw ) {
+						if ( !raw[page].imageinfo ) {
+							// The search may give us pages that belong to the File:
+							// namespace but have no files in them, either because
+							// they were deleted or imported wrongly, or just started
+							// as pages. In that case, the response will not include
+							// imageinfo. Skip those files.
+							continue;
+						}
 						newObj = raw[page].imageinfo[0];
 						newObj.title = raw[page].title;
 						results.push( newObj );
