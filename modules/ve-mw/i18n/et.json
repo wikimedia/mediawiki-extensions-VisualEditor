@@ -41,6 +41,7 @@
 	"visualeditor-dialog-media-info-audiofile": "Helifail",
 	"visualeditor-dialog-media-info-created": "Valmistatud: $1",
 	"visualeditor-dialog-media-info-licenseshortname": "Litsents",
+	"visualeditor-dialog-media-info-meta-artist": "Kunstnik: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Veel teavet",
 	"visualeditor-dialog-media-info-uploaded": "Üles laaditud: $1",
 	"visualeditor-dialog-media-noresults": "Tulemusi ei leidu.",

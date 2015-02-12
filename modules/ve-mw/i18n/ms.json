@@ -38,6 +38,7 @@
 	"visualeditor-dialog-media-change-image": "Tukar imej",
 	"visualeditor-dialog-media-content-section": "Kapsyen",
 	"visualeditor-dialog-media-goback": "Undur",
+	"visualeditor-dialog-media-info-meta-artist": "Artis: $1",
 	"visualeditor-dialog-media-noresults": "Tiada hasil carian.",
 	"visualeditor-dialog-media-page-advanced": "Tetapan selanjutnya",
 	"visualeditor-dialog-media-page-general": "Tetapan umum",
@@ -233,6 +234,5 @@
 	"visualeditor-viewpage-savewarning-keep": "Teruskan menyunting",
 	"visualeditor-viewpage-savewarning-title": "Adakah anda pasti?",
 	"visualeditor-wikitext-warning": "Anda sedang menggunakan VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteks]] tidak boleh digunakan di sini. Klik \"{{int:visualeditor-ca-editsource}}\" untuk beralih ke mod wikiteks – sebarang suntingan yang belum disimpan akan disingkirkan.",
-	"visualeditor-wikitext-warning-link": "Help:Penanda Wiki",
 	"visualeditor-wikitext-warning-title": "Penanda Wiki dikesan"
 }
