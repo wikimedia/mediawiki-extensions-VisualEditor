@@ -128,6 +128,9 @@ class VisualEditorPage
   span(:refs_link, text: 'Reference')
   div(:references_title, class: 'oo-ui-processDialog-location', text: /References/)
   a(:remove_parameter, css: '.ve-ui-mwParameterPage-removeButton > a:nth-child(1)')
+  span(:required_parameters_continue_anyway, text: 'Continue anyway')
+  span(:required_parameters_go_back, text: 'Go back')
+  span(:required_parameters_missing_message, text: 'Required parameters missing')
   span(:return_to_save, class: 'oo-ui-labelElement-label', text: 'Return to save form')
   a(:review_changes, css: '.oo-ui-window-content-setup > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)')
   span(:review_failed, text: 'No changes to review')
@@ -179,9 +182,6 @@ class VisualEditorPage
 
   in_iframe(index: 0) do |frame|
     a(:remove_template, title: 'Remove template', frame: frame)
-    span(:required_parameters_continue_anyway, text: 'Continue anyway', frame: frame)
-    span(:required_parameters_go_back, text: 'Go back', frame: frame)
-    span(:required_parameters_missing_message, text: 'Required parameters missing', frame: frame)
     div(:suggestion_list, class: 've-ui-mwTitleInputWidget-menu')
     span(:another_save_page, class: 'oo-ui-labelElement-label', text: 'Save page', frame: frame)
     div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) # ALSO USED IN LANGUAGE SCREENSHOT
