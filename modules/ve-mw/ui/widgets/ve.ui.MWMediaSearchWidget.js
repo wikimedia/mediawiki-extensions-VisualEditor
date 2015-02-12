@@ -130,8 +130,10 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 				new ve.ui.MWMediaResultWidget( {
 					$: this.$,
 					data: items[i],
-					size: this.rowHeight,
-					maxWidth: this.results.$element.width() / 3
+					rowHeight: this.rowHeight,
+					maxWidth: this.results.$element.width() / 3,
+					minWidth: 30,
+					rowWidth: this.results.$element.width()
 				} )
 			);
 		}
@@ -237,8 +239,7 @@ ve.ui.MWMediaSearchWidget.prototype.resetRows = function () {
  * @return {number} Row index
  */
 ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
-	var row,
-		maxLineWidth = this.results.$element.innerWidth() - 10;
+	var row;
 
 	if ( this.rows.length === 0 ) {
 		row = 0;
@@ -255,7 +256,6 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 			$element: this.$( '<div>' )
 					.addClass( 've-ui-mwMediaResultWidget-row' )
 					.css( {
-						width: maxLineWidth,
 						overflow: 'hidden'
 					} )
 					.data( 'row', row )
@@ -273,7 +273,6 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 			$element: this.$( '<div>' )
 				.addClass( 've-ui-mwMediaResultWidget-row' )
 				.css( {
-					width: maxLineWidth,
 					overflow: 'hidden'
 				} )
 				.data( 'row', row )
@@ -282,6 +281,7 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 		// Append to results
 		this.results.$element.append( this.rows[row].$element );
 	}
+
 	return row;
 };
 
@@ -297,34 +297,45 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
 	// Add method to a queue; this queue will only run when the widget
 	// is visible
 	this.layoutQueue.push( function () {
-		var i, j, ilen, jlen, itemWidth, row, effectiveWidth, resizeFactor,
-			maxLineWidth = search.results.$element.innerWidth() - 10;
+		var i, j, ilen, jlen, itemWidth, row, effectiveWidth,
+			resizeFactor,
+			maxRowWidth = search.results.$element.width() - 15;
 
 		// Go over the added items
 		row = search.getAvailableRow();
 		for ( i = 0, ilen = items.length; i < ilen; i++ ) {
-			// TODO: Figure out a better way to calculate the margins
-			// between images (for now, hard-coded as 6)
-			itemWidth = items[i].$element.outerWidth() + 6;
+			itemWidth = items[i].$element.outerWidth( true );
+
 			// Add items to row until it is full
-			if ( search.rows[row].width + itemWidth >= maxLineWidth ) {
+			if ( search.rows[row].width + itemWidth >= maxRowWidth ) {
 				// Mark this row as full
 				search.rows[row].isFull = true;
 				search.rows[row].$element.attr( 'data-full', true );
-				// Resize all images in the row to fit the width
+
+				// Find the resize factor
 				effectiveWidth = search.rows[row].width;
-				resizeFactor = maxLineWidth / effectiveWidth;
+				resizeFactor = maxRowWidth / effectiveWidth;
+
+				search.rows[row].$element.attr( 'data-effectiveWidth', effectiveWidth );
+				search.rows[row].$element.attr( 'data-resizeFactor', resizeFactor );
+				search.rows[row].$element.attr( 'data-row', row );
+
+				// Resize all images in the row to fit the width
 				for ( j = 0, jlen = search.rows[row].items.length; j < jlen; j++ ) {
 					search.rows[row].items[j].resizeThumb( resizeFactor );
 				}
+
 				// find another row
 				row = search.getAvailableRow();
 			}
-			// Append to row
+
+			// Add the commulative
 			search.rows[row].width += itemWidth;
-			// Store reference to the item
+
+			// Store reference to the item and to the row
 			search.rows[row].items.push( items[i] );
 			items[i].setRow( row );
+
 			// Append the item
 			search.rows[row].$element.append( items[i].$element );
 		}

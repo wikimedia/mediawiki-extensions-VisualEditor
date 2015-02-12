@@ -103,8 +103,8 @@ ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, bound
 	if ( scale < 1 ) {
 		// Scale down
 		newDimensions = {
-			width: newDimensions.width * scale,
-			height: newDimensions.height * scale
+			width: Math.floor( newDimensions.width * scale ),
+			height: Math.floor( newDimensions.height * scale )
 		};
 	}
 	return newDimensions;

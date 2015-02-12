@@ -11,6 +11,8 @@
 	padding: 0;
 	margin: 2px;
 	overflow: hidden;
+	box-sizing: border-box;
+	text-align: center;
 }
 
 .ve-ui.mwMediaResultWidget-eol:after {
@@ -26,8 +28,8 @@
 }
 
 .ve-ui-mwMediaResultWidget-thumbnail {
-	position: absolute;
 	opacity: 0;
+	display: inline-block;
 	-webkit-transition: opacity 400ms;
 	-moz-transition: opacity 400ms;
 	-o-transition: opacity 400ms;
@@ -78,6 +80,7 @@
 	line-height: 1.125em;
 	background-color: rgba(0,0,0,0.5);
 	text-overflow: ellipsis;
+	text-align: left;
 }
 
 .ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted .ve-ui-mwMediaResultWidget-nameLabel {
