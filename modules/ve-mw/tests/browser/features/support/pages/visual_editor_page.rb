@@ -145,6 +145,7 @@ class VisualEditorPage
   a(:subheading2, text: /Sub-heading 2/)
   a(:subheading3, text: /Sub-heading 3/)
   a(:subheading4, text: /Sub-heading 4/)
+  div(:suggestion_list, class: 've-ui-mwTitleInputWidget-menu')
   span(:switch_to_source_editing, class: 'oo-ui-iconElement-icon oo-ui-icon-source')
   table(:table, class: 've-ce-tableNode')
   div(:table_of_contents, class: 've-test-page-settings-table-of-contents')
@@ -158,7 +159,6 @@ class VisualEditorPage
   end
   a(:transclusion, css: 'span.oo-ui-widget.oo-ui-iconElement.oo-ui-tool.oo-ui-tool-name-transclusion.oo-ui-widget-enabled > a')
   text_field(:transclusion_description, css: '.oo-ui-inputWidget > input:nth-child(1)')
-  text_field(:transclusion_textfield, css: 'div.oo-ui-widget-enabled:nth-child(4) > input:nth-child(1)')
   span(:ve_bold_text, class: 'oo-ui-iconElement-icon oo-ui-icon-bold-b')
   span(:ve_bullets, class: 'oo-ui-iconElement-icon oo-ui-icon-bullet-list', index: 1)
   span(:ve_computer_code, class: 'oo-ui-iconElement-icon oo-ui-icon-code')
@@ -181,8 +181,6 @@ class VisualEditorPage
   text_area(:formula_area, css: '.oo-ui-popupWidget-popup textarea')
 
   in_iframe(index: 0) do |frame|
-    a(:remove_template, title: 'Remove template', frame: frame)
-    div(:suggestion_list, class: 've-ui-mwTitleInputWidget-menu')
     span(:another_save_page, class: 'oo-ui-labelElement-label', text: 'Save page', frame: frame)
     div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) # ALSO USED IN LANGUAGE SCREENSHOT
 
