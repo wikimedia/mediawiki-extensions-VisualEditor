@@ -24,13 +24,6 @@ When(/^I click Reference$/) do
   end
 end
 
-When(/^I enter (.+) into Content box$/) do |content|
-  on(VisualEditorPage) do |page|
-    page.content_box_element.when_present
-    page.content_box_element.send_keys(content)
-  end
-end
-
 When(/^I click use an existing reference button in References User Interface$/) do
   on(VisualEditorPage).cite_reuse_existing_reference_element.when_present.click
 end

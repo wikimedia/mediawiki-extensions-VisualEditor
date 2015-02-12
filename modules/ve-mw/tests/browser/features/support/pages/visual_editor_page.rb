@@ -181,8 +181,6 @@ class VisualEditorPage
   text_area(:formula_area, css: '.oo-ui-popupWidget-popup textarea')
 
   in_iframe(index: 0) do |frame|
-    span(:another_save_page, class: 'oo-ui-labelElement-label', text: 'Save page', frame: frame)
-    div(:content_box, class: 've-ce-documentNode ve-ce-branchNode', frame: frame) # ALSO USED IN LANGUAGE SCREENSHOT
 
     # USED IN LANGUAGE SCREENSHOT TEST:
     text_field(:media_alternative_text, css: 'div.oo-ui-widget.oo-ui-widget-enabled.oo-ui-inputWidget.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input', frame: frame)
