@@ -36,6 +36,8 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.saveDialog = null;
 	this.onBeforeUnloadFallback = null;
 	this.onBeforeUnloadHandler = null;
+	this.onUnloadFallback = null;
+	this.onUnloadHandler = null;
 	this.active = false;
 	this.activating = false;
 	this.deactivating = false;
@@ -414,7 +416,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 
 	// Check we got as far as setting up the surface
 	if ( this.active ) {
-		this.tearDownBeforeUnloadHandler();
+		this.tearDownUnloadHandlers();
 		// If we got as far as setting up the surface, tear that down
 		promises.push( this.tearDownSurface() );
 	}
@@ -533,7 +535,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.attachToolbarSaveButton();
 	this.restoreScrollPosition();
 	this.restoreEditSection();
-	this.setupBeforeUnloadHandler();
+	this.setupUnloadHandlers();
 	this.maybeShowDialogs();
 	this.activatingDeferred.resolve();
 	mw.hook( 've.activationComplete' ).fire();
@@ -596,7 +598,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 	this.saveDeferred.resolve();
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
-		this.tearDownBeforeUnloadHandler();
+		this.tearDownUnloadHandlers();
 		newUrlParams = newid === undefined ? {} : { venotify: this.restoring ? 'restored' : 'created' };
 
 		if ( isRedirect ) {
@@ -1547,15 +1549,18 @@ ve.init.mw.ViewPageTarget.prototype.saveEditSection = function ( heading ) {
 };
 
 /**
- * Add onbeforeunload handler.
+ * Add onunload and unbeforeunload handlesr.
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.setupBeforeUnloadHandler = function () {
-	// Remember any already set on before unload handler
+ve.init.mw.ViewPageTarget.prototype.setupUnloadHandlers = function () {
+	// Remember any already set on handlers
 	this.onBeforeUnloadFallback = window.onbeforeunload;
-	// Attach before unload handler
+	this.onUnloadFallback = window.onunload;
+	// Attach our handlers
 	window.onbeforeunload = this.onBeforeUnloadHandler = this.onBeforeUnload.bind( this );
+	window.onunload = this.onUnloadHandler = this.onUnload.bind( this );
+
 	// Attach page show handlers
 	if ( window.addEventListener ) {
 		window.addEventListener( 'pageshow', this.onPageShow.bind( this ), false );
@@ -1563,15 +1568,15 @@ ve.init.mw.ViewPageTarget.prototype.setupBeforeUnloadHandler = function () {
 		window.attachEvent( 'pageshow', this.onPageShow.bind( this ) );
 	}
 };
-
 /**
- * Remove onbeforunload handler.
+ * Remove onunload and onbeforunload handlers.
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.tearDownBeforeUnloadHandler = function () {
-	// Restore whatever previous onbeforeload hook existed
+ve.init.mw.ViewPageTarget.prototype.tearDownUnloadHandlers = function () {
+	// Restore whatever previous onunload/onbeforeunload hooks existed
 	window.onbeforeunload = this.onBeforeUnloadFallback;
+	window.onunload = this.onUnloadFallback;
 };
 
 /**
@@ -1648,8 +1653,9 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onPageShow = function () {
-	// Re-add onbeforeunload handler
+	// Re-add onunload and onbeforeunload handlers
 	window.onbeforeunload = this.onBeforeUnloadHandler;
+	window.onunload = this.onUnloadHandler;
 };
 
 /**
@@ -1687,6 +1693,45 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
 		// ...but if the user chooses not to leave the page, we need to rebind it
 		setTimeout( function () {
 			window.onbeforeunload = onBeforeUnloadHandler;
+		} );
+		return message;
+	}
+};
+
+/**
+ * Handle unload event.
+ *
+ * @method
+ */
+ve.init.mw.ViewPageTarget.prototype.onUnload = function () {
+	var fallbackResult,
+		message,
+		onUnloadHandler = this.onUnloadHandler;
+	// Check if someone already set on onunload hook
+	if ( this.onUnloadFallback ) {
+		// Get the result of their onunload hook
+		fallbackResult = this.onBeforeUnloadFallback();
+	}
+	// Check if their onunload hook returned something
+	if ( fallbackResult !== undefined ) {
+		// Exit here, returning their message
+		message = fallbackResult;
+	} else {
+		// Override if submitting
+		if ( this.submitting ) {
+			return undefined;
+		}
+		ve.track( 'mwedit.abort', {
+			type: this.edited ? 'unknown-edited' : 'unknown',
+			mechanism: 'navigation'
+		} );
+	}
+	// Unset the onunload handler so we don't break page caching in Firefox
+	window.onunload = null;
+	if ( message !== undefined ) {
+		// ...but if the user chooses not to leave the page, we need to rebind it
+		setTimeout( function () {
+			window.onunload = onUnloadHandler;
 		} );
 		return message;
 	}

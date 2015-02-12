@@ -65,11 +65,30 @@
 			event;
 
 		timeStamp = timeStamp || this.timeStamp;  // I8e82acc12 back-compat
-		timing[action] = timeStamp;
 
 		if ( action === 'init' ) {
 			// Regenerate editingSessionId
 			editingSessionId = mw.user.generateRandomSessionId();
+		} else if (
+			action === 'abort' &&
+			( data.type === 'unknown' || data.type === 'unknown-edited' )
+		) {
+			if (
+				timing.saveAttempt &&
+				timing.saveSuccess === undefined &&
+				timing.saveFailure === undefined
+			) {
+				data.type = 'abandonMidsave';
+			} else if (
+				timing.init &&
+				timing.ready === undefined
+			) {
+				data.type = 'preinit';
+			} else if ( data.type === 'unknown' ) {
+				data.type = 'nochange';
+			} else {
+				data.type = 'abandon';
+			}
 		}
 
 		event = $.extend( {
@@ -101,6 +120,12 @@
 		delete event.type;
 		delete event.mechanism;
 		delete event.timing;
+
+		if ( action === 'abort' ) {
+			timing = {};
+		} else {
+			timing[action] = timeStamp;
+		}
 
 		mw.track( 'event.Edit', event );
 	} );
