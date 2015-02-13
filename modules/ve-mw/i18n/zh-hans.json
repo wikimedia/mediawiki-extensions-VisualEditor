@@ -88,6 +88,7 @@
 	"visualeditor-dialog-media-info-ellipsis": "…",
 	"visualeditor-dialog-media-info-imagedescription": "完整描述",
 	"visualeditor-dialog-media-info-licenseshortname": "授权协议",
+	"visualeditor-dialog-media-info-meta-artist": "艺术家：$1",
 	"visualeditor-dialog-media-info-moreinfo": "更多信息",
 	"visualeditor-dialog-media-info-readmore": "阅读更多",
 	"visualeditor-dialog-media-info-separator": "·",

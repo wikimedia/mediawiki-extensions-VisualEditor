@@ -96,7 +96,7 @@
 	"visualeditor-dialog-media-info-ellipsis": "An ellipses symbol denoting a truncated string.\n{{Optional}}",
 	"visualeditor-dialog-media-info-imagedescription": "Label for the description for the image in the media dialog.",
 	"visualeditor-dialog-media-info-licenseshortname": "Label for the license information for the image in the media dialog.\n{{Identical|License}}",
-	"visualeditor-dialog-media-info-meta-artist": "Label for the artist information for the image in the media dialog. $1 - Artist name.",
+	"visualeditor-dialog-media-info-meta-artist": "Label for the artist information for the image in the media dialog. $1 - Artist name.\n{{Identical|Artist}}",
 	"visualeditor-dialog-media-info-moreinfo": "Label for the link to more information in the image data panel.\n{{Identical|More information}}",
 	"visualeditor-dialog-media-info-readmore": "Label for the link to expand the text in the image data panel.\n{{Identical|Read more}}",
 	"visualeditor-dialog-media-info-separator": "Character separating information in the image info panel in the media dialog.\n{{Optional}}",
