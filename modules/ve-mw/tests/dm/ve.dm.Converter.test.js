@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.dm.Converter', QUnit.newMwEnvironment() );
+QUnit.module( 've.dm.Converter (MW)', QUnit.newMwEnvironment() );
 
 QUnit.test( 'getModelFromDom', function ( assert ) {
 	var msg, caseItem,

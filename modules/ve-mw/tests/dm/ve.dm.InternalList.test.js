@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.dm.InternalList' );
+QUnit.module( 've.dm.InternalList (MW)' );
 
 /* Tests */
 
