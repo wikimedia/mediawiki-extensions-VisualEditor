@@ -737,6 +737,7 @@ $wgResourceModules += array(
 			'visualeditor-shortcuts-history',
 			'visualeditor-shortcuts-other',
 			'visualeditor-shortcuts-text-style',
+			'visualeditor-slug-insert',
 			'visualeditor-specialcharacter-button-tooltip',
 			'visualeditor-specialcharacterinspector-title',
 			'visualeditor-specialcharinspector-characterlist-insert',
