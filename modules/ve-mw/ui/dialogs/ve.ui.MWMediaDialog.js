@@ -978,7 +978,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			var pageTitle = mw.config.get( 'wgTitle' ),
 				namespace = mw.config.get( 'wgNamespaceNumber' ),
-				namespacesWithSubpages = mw.config.get( 'wgVisualEditor' ).namespacesWithSubpages;
+				namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
 
 			// Read the page title
 			if ( namespacesWithSubpages[ namespace ] ) {
