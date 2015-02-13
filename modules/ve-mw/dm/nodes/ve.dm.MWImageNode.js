@@ -30,7 +30,7 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 	// fetch the actual media type from the API
 	this.mediaType = 'BITMAP';
 	// Get wiki defaults
-	this.svgMaxSize = mw.config.get( 'wgVisualEditor' ).svgMaxSize;
+	this.svgMaxSize = mw.config.get( 'wgVisualEditorConfig' ).svgMaxSize;
 
 	// Initialize
 	this.constructor.static.syncScalableToType(

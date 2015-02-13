@@ -406,8 +406,6 @@ class VisualEditorHooks {
 		$vars['wgVisualEditor'] = array(
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
-			'svgMaxSize' => $out->getConfig()->get( 'SVGMaxSize' ),
-			'namespacesWithSubpages' => $out->getConfig()->get( 'NamespacesWithSubpages' )
 		);
 
 		return true;
@@ -440,7 +438,9 @@ class VisualEditorHooks {
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
-			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' )
+			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
+			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
+			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 		);
 
 		foreach ( $veConfig->get( 'VisualEditorPreferenceModules' ) as $pref => $module ) {
