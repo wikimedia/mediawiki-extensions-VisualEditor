@@ -965,8 +965,8 @@ ve.dm.mwExample.domToDataCases = {
 		storeItems: [
 			ve.dm.mwExample.MWTransclusion.blockStoreItems
 		],
-		modify: function ( data ) {
-			data[0].attributes.mw.parts[0].template.params['1'].wt = 'Hello, globe!';
+		modify: function ( model ) {
+			model.data.data[0].attributes.mw.parts[0].template.params['1'].wt = 'Hello, globe!';
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified
 	},
@@ -998,8 +998,8 @@ ve.dm.mwExample.domToDataCases = {
 		storeItems: [
 			ve.dm.mwExample.MWTransclusion.inlineStoreItems
 		],
-		modify: function ( data ) {
-			data[1].attributes.mw.parts[0].template.params['1'].wt = '5,678';
+		modify: function ( model ) {
+			model.data.data[1].attributes.mw.parts[0].template.params['1'].wt = '5,678';
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified + ve.dm.mwExample.MWTransclusion.inlineClose
 	},
@@ -2179,15 +2179,15 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'mw:Nowiki unwraps when text modified': {
 		data: ve.dm.mwExample.mwNowiki,
-		modify: function ( data ) {
-			data[7][0] = 'z';
+		modify: function ( model ) {
+			model.data.data[7][0] = 'z';
 		},
 		normalizedBody: '<p>Foo[[Bzr]]Baz</p>'
 	},
 	'mw:Nowiki unwraps when annotations modified': {
 		data: ve.dm.mwExample.mwNowiki,
-		modify: function ( data ) {
-			data[7][1].push( ve.dm.example.bold );
+		modify: function ( model ) {
+			model.data.data[7][1].push( model.getStore().index( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	}

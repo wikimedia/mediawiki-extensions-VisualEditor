@@ -373,6 +373,8 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/ve.dm.AlignableNode.js',
 			'lib/ve/src/dm/ve.dm.FocusableNode.js',
 			'lib/ve/src/dm/ve.dm.Scalable.js',
+			'lib/ve/src/dm/ve.dm.APIResultsProvider.js',
+			'lib/ve/src/dm/ve.dm.APIResultsQueue.js',
 			'lib/ve/src/dm/ve.dm.ResizableNode.js',
 			'lib/ve/src/dm/ve.dm.BranchNode.js',
 			'lib/ve/src/dm/ve.dm.LeafNode.js',
