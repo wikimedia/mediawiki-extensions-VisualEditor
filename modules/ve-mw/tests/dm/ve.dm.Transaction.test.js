@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.dm.Transaction' );
+QUnit.module( 've.dm.Transaction (MW)' );
 
 // FIXME: Duplicates test runner; should be using a data provider
 QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
