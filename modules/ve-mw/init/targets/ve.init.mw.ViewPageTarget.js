@@ -72,9 +72,8 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 	// Load preference modules
 	for ( prefName in conf.preferenceModules ) {
-		prefValue = mw.config.get( 'wgUserName' ) === null ?
-			conf.defaultUserOptions[prefName] :
-			mw.user.options.get( prefName, conf.defaultUserOptions[prefName] );
+		prefValue = mw.user.options.get( prefName );
+		// Check "0" (T89513)
 		if ( prefValue && prefValue !== '0' ) {
 			this.modules.push( conf.preferenceModules[prefName] );
 		}
