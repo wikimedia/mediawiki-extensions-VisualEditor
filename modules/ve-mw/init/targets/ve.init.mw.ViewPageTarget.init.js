@@ -24,9 +24,36 @@
 
 	function showLoading() {
 		if ( !init.$loading ) {
-			init.$loading = $( '<div class="mw-viewPageTarget-loading"></div>' );
+			init.$loading = $(
+				'<div class="ve-init-mw-viewPageTarget-loading-overlay">' +
+					'<div class="ve-init-mw-viewPageTarget-progress">' +
+						'<div class="ve-init-mw-viewPageTarget-progress-bar"></div>' +
+					'</div>' +
+				'</div>'
+			);
 		}
-		$( '#firstHeading' ).prepend( init.$loading );
+		var $window = $( window ),
+			$content = $( '#content' ),
+			scrollTop = $window.scrollTop(),
+			offsetTop = $content.offset().top,
+			windowHeight = $window.height();
+
+		if ( scrollTop > offsetTop ) {
+			init.$loading.css( 'top', ( scrollTop - offsetTop ) + ( windowHeight / 2 ) );
+		} else {
+			init.$loading.css( 'top', ( windowHeight - ( offsetTop - scrollTop ) ) / 2 );
+		}
+
+		$content.prepend( init.$loading );
+	}
+
+	function setLoadingProgress( target, duration ) {
+		var $bar = init.$loading.find( '.ve-init-mw-viewPageTarget-progress-bar' ).stop();
+		if ( duration ) {
+			$bar.animate( { width: target + '%' }, duration );
+		} else {
+			$bar.css( 'width', target + '%' );
+		}
 	}
 
 	function hideLoading() {
@@ -41,7 +68,6 @@
 	 * @return {jQuery.Promise}
 	 */
 	function getTarget() {
-		showLoading();
 		if ( !targetPromise ) {
 			// The TargetLoader module is loaded in the bottom queue, so it should have been
 			// requested already but it might not have finished loading yet
@@ -99,13 +125,17 @@
 			} );
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
+		showLoading();
+		setLoadingProgress( 70, 3000 );
 
 		targetPromise = targetPromise || getTarget();
 		targetPromise
 			.then( function ( target ) {
+				setLoadingProgress( 100, 1000 );
 				return target.activate( dataPromise );
 			} )
 			.then( function () {
+				setLoadingProgress( 0 );
 				ve.track( 'mwedit.ready' );
 			} )
 			.always( hideLoading );
