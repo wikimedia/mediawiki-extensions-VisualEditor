@@ -98,7 +98,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var els, currentDom, i, len, wrapper,
+	var els, currentDom, i, len, wrapper, span,
 		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
 		originalMw = dataElement.attributes.originalMw;
 
@@ -133,6 +133,20 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		els[0].setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
 	}
 	if ( converter.isForClipboard() ) {
+		// If the first element is a <link> or <meta> tag, e.g. a category, ensure it
+		// is not destroyed by copy-paste by replacing it with a span
+		if ( els[0].tagName === 'LINK' || els[0].tagName === 'META' ) {
+			span = doc.createElement( 'span' );
+			span.setAttribute( 'typeof', 'mw:Transclusion' );
+			span.setAttribute( 'data-mw', els[0].getAttribute( 'data-mw' ) );
+			els[0] = span;
+		}
+
+		// Empty spans can get thrown around by Chrome when pasting, so give them a space
+		if ( els[0].innerHTML === '' ) {
+			els[0].appendChild( doc.createTextNode( '\u00a0' ) );
+		}
+
 		// Mark the data-mw element as not having valid generated contents with it in case it is
 		// inserted into another editor (e.g. via paste).
 		els[0].setAttribute( 'data-ve-no-generated-contents', true );
