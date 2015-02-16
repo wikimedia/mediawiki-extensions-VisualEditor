@@ -419,7 +419,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 				value: ve.getProp( metadata, 'LicenseShortName', 'value' ),
 				data: {},
 				view: {
-					href: ve.getProp( metadata, 'LicenseUrl' ),
+					href: ve.getProp( metadata, 'LicenseUrl', 'value' ),
 					icon: this.getLicenseIcon( ve.getProp( metadata, 'LicenseShortName', 'value' ) )
 				}
 			},
