@@ -71,6 +71,7 @@
 	"visualeditor-dialog-media-info-credit": "Kreditering",
 	"visualeditor-dialog-media-info-imagedescription": "Fullstendig beskrivelse",
 	"visualeditor-dialog-media-info-licenseshortname": "Lisens",
+	"visualeditor-dialog-media-info-meta-artist": "Artist: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Mer informasjon",
 	"visualeditor-dialog-media-info-readmore": "Les mer",
 	"visualeditor-dialog-media-info-uploaded": "Lastet opp: $1",

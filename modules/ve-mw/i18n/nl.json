@@ -69,6 +69,7 @@
 	"visualeditor-dialog-media-info-ellipsis": "…",
 	"visualeditor-dialog-media-info-imagedescription": "Volledige beschrijving",
 	"visualeditor-dialog-media-info-licenseshortname": "Licentie",
+	"visualeditor-dialog-media-info-meta-artist": "Artiest: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Meer informatie",
 	"visualeditor-dialog-media-info-readmore": "Meer lezen",
 	"visualeditor-dialog-media-info-uploaded": "Geüpload: $1",

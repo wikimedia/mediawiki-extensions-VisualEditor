@@ -89,6 +89,7 @@
 	"visualeditor-dialog-media-info-dateformat": "$2 de $1 de $3",
 	"visualeditor-dialog-media-info-imagedescription": "Descripción completa",
 	"visualeditor-dialog-media-info-licenseshortname": "Licencia",
+	"visualeditor-dialog-media-info-meta-artist": "Artista: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Más información",
 	"visualeditor-dialog-media-info-readmore": "Leer más",
 	"visualeditor-dialog-media-info-uploaded": "Subido el: $1",
