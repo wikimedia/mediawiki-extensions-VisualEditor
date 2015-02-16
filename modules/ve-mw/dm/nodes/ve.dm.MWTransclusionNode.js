@@ -111,29 +111,19 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		)
 	) {
 		// The object in the store is also used for CE rendering so return a copy
-		return ve.copyDomElements( dataElement.attributes.originalDomElements, doc );
+		els = ve.copyDomElements( dataElement.attributes.originalDomElements, doc );
 	} else {
 		if ( dataElement.attributes.originalDomElements ) {
 			els = [ doc.createElement( dataElement.attributes.originalDomElements[0].nodeName ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
 			if ( converter.isForClipboard() ) {
-				// For the clipboard use the current DOM contents but mark as ignored
-				// for the converter
+				// For the clipboard use the current DOM contents so the user has something
+				// meaningful to paste into external applications
 				currentDom = converter.getStore().value( index );
 				if ( currentDom ) {
-					currentDom = ve.copyDomElements( currentDom, doc );
-					// i = 0 is the data-mw span
-					for ( i = 1, len = currentDom.length; i < len; i++ ) {
-						// Wrap plain text nodes so we can give them an attribute
-						if ( currentDom[i].nodeType === Node.TEXT_NODE ) {
-							wrapper = doc.createElement( 'span' );
-							wrapper.appendChild( currentDom[i] );
-							currentDom[i] = wrapper;
-						}
-						currentDom[i].setAttribute( 'data-ve-ignore', 'true' );
-						els.push( currentDom[i] );
-					}
+					// Ignore currentDom[0] as that is the data-mw span we are recreating
+					els = els.concat( ve.copyDomElements( currentDom.slice( 1 ), doc ) );
 				}
 			}
 		}
@@ -141,13 +131,24 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		// reconstructed data-mw property.
 		els[0].setAttribute( 'typeof', 'mw:Transclusion' );
 		els[0].setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
-		// Mark the element as not having valid generated contents with it in case it is
+	}
+	if ( converter.isForClipboard() ) {
+		// Mark the data-mw element as not having valid generated contents with it in case it is
 		// inserted into another editor (e.g. via paste).
 		els[0].setAttribute( 'data-ve-no-generated-contents', true );
-		// TODO: Include last-known generated contents in the output for rich
-		// paste into a non-VE editor
-		return els;
+
+		// ... and mark all but the first child as ignorable
+		for ( i = 1, len = els.length; i < len; i++ ) {
+			// Wrap plain text nodes so we can give them an attribute
+			if ( els[i].nodeType === Node.TEXT_NODE ) {
+				wrapper = doc.createElement( 'span' );
+				wrapper.appendChild( els[i] );
+				els[i] = wrapper;
+			}
+			els[i].setAttribute( 'data-ve-ignore', 'true' );
+		}
 	}
+	return els;
 };
 
 /**

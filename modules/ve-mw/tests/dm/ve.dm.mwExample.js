@@ -25,7 +25,6 @@ ve.dm.mwExample.MWTransclusion = {
 	blockOpenModified:
 		'<div about="#mwt1" typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Test&quot;,&quot;href&quot;:&quot;./Template:Test&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;Hello, globe!&quot;}},&quot;i&quot;:0}}]}"' +
-			' data-ve-no-generated-contents="true"' +
 		'>' +
 		'</div>',
 	blockContent: '<p about="#mwt1" data-parsoid="{}">Hello, world!</p>',
@@ -36,7 +35,6 @@ ve.dm.mwExample.MWTransclusion = {
 	inlineOpenModified:
 		'<span about="#mwt1" typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;5,678&quot;}},&quot;i&quot;:0}}]}"' +
-			' data-ve-no-generated-contents="true"' +
 		'>',
 	inlineContent: '$1,234.00',
 	inlineClose: '</span>',
