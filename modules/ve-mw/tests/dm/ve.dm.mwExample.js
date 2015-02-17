@@ -930,13 +930,60 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		normalizedBody: '<b>abcd</b> <b>ab</b> <b data-parsoid="3">ab</b><b data-parsoid="4">c</b>'
 	},
-	'mw:Image': {
+	mwImage: {
 		body: '<p>' + ve.dm.mwExample.MWInlineImage.html + '</p>',
 		data: [
 			{ type: 'paragraph' },
 			ve.dm.mwExample.MWInlineImage.data,
 			{ type: '/mwInlineImage' },
 			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
+	'mwHeading and mwPreformatted nodes': {
+		body: '<h2>Foo</h2><pre>Bar</pre>',
+		data: [
+			{
+				type: 'mwHeading',
+				attributes: {
+					level: 2
+				}
+			},
+			'F', 'o', 'o',
+			{ type: '/mwHeading' },
+			{ type: 'mwPreformatted' },
+			'B', 'a', 'r',
+			{ type: '/mwPreformatted' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
+	mwTable: {
+		body: '<table class="wikitable sortable"><tr><td>Foo</td></tr></table>',
+		data: [
+			{
+				type: 'mwTable',
+				attributes: {
+					wikitable: true,
+					sortable: true,
+					originalClasses: 'wikitable sortable',
+					unrecognizedClasses: []
+				},
+				htmlAttributes: [ { values: {
+					class: 'wikitable sortable'
+				} } ]
+			},
+			{ type: 'tableSection', attributes: { style: 'body' } },
+			{ type: 'tableRow' },
+			{ type: 'tableCell', attributes: { style: 'data' } },
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			'F', 'o', 'o',
+			{ type: '/paragraph' },
+			{ type: '/tableCell' },
+			{ type: '/tableRow' },
+			{ type: '/tableSection' },
+			{ type: '/mwTable' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		]
