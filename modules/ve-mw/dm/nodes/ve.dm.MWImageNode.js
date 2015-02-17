@@ -234,21 +234,21 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 		// If the promise was already resolved before getScalablePromise returned, then jQuery will execute the done straight away.
 		// So don't just do getScalablePromise( ... ).done because we need to make sure that this.scalablePromise gets set first.
 		this.scalablePromise.done( function ( info ) {
-				if ( info ) {
-					imageNode.getScalable().setOriginalDimensions( {
-						width: info.width,
-						height: info.height
-					} );
-					// Update media type
-					imageNode.mediaType = info.mediatype;
-					// Update according to type
-					imageNode.constructor.static.syncScalableToType(
-						imageNode.getAttribute( 'type' ),
-						imageNode.mediaType,
-						imageNode.getScalable()
-					);
-				}
-			} );
+			if ( info ) {
+				imageNode.getScalable().setOriginalDimensions( {
+					width: info.width,
+					height: info.height
+				} );
+				// Update media type
+				imageNode.mediaType = info.mediatype;
+				// Update according to type
+				imageNode.constructor.static.syncScalableToType(
+					imageNode.getAttribute( 'type' ),
+					imageNode.mediaType,
+					imageNode.getScalable()
+				);
+			}
+		} );
 	}
 	// Parent method
 	return ve.dm.ResizableNode.prototype.getScalable.call( this );
