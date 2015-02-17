@@ -139,7 +139,7 @@ Then(/^I should see the General references$/) do
 end
 
 Then(/^I should see the Options use this group text$/) do
-  expect(on(VisualEditorPage).cite_basic_options_area_element.text).to match /Options.+Use this group/m
+  expect(on(VisualEditorPage).cite_basic_options_area_element.text).to match(/Options.+Use this group/m)
 end
 
 Then(/^I should see the VisualEditor interface$/) do
@@ -147,17 +147,17 @@ Then(/^I should see the VisualEditor interface$/) do
 end
 
 Then(/^the Book input field titles are in the correct order$/) do
-  expect(on(VisualEditorPage).cite_ui).to match /Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Page/m
+  expect(on(VisualEditorPage).cite_ui).to match(/Title.+Last name.+First name.+Publisher.+Year of publication.+ISBN.+Location of publication.+Page/m)
 end
 
 Then(/^the Journal input field titles are in the correct order$/) do
-  expect(on(VisualEditorPage).cite_ui).to match /Title.+Source date/m
+  expect(on(VisualEditorPage).cite_ui).to match(/Title.+Source date/m)
 end
 
 Then(/^the News input field titles are in the correct order$/) do
-  expect(on(VisualEditorPage).cite_ui).to match /URL.+Source title.+Last name.+First name.+Source date.+Work.+URL access date/m
+  expect(on(VisualEditorPage).cite_ui).to match(/URL.+Source title.+Last name.+First name.+Source date.+Work.+URL access date/m)
 end
 
 Then(/^the Website input field titles are in the correct order$/) do
-  expect(on(VisualEditorPage).cite_ui).to match /URL.+Source title.+Source date.+URL access date.+Website title.+Publisher.+Last name.+First name/m
+  expect(on(VisualEditorPage).cite_ui).to match(/URL.+Source title.+Source date.+URL access date.+Website title.+Publisher.+Last name.+First name/m)
 end
