@@ -18,15 +18,3 @@ Metrics/LineLength:
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
   Enabled: false
-
-# Offense count: 170
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/HashSyntax:
-  Enabled: false
-
-# Offense count: 2317
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
