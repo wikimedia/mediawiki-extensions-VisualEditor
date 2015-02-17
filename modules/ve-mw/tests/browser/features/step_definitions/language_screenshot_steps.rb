@@ -8,7 +8,7 @@ Given(/^I select the image in VisualEditor$/) do
   on(VisualEditorPage).media_image_element.when_present.click
 end
 
-Given (/^I go to "(.+)" page which has references$/) do |page_title|
+Given(/^I go to "(.+)" page which has references$/) do |page_title|
   wikitext = 'VisualEditor is a MediaWiki extension.<ref>[http://www.mediawiki.org/wiki/Extension:VisualEditor Extension:VisualEditor]</ref>'
   on(APIPage).create page_title, wikitext
   step "I go to the #{page_title} page for screenshot"
@@ -60,7 +60,7 @@ When(/^I click on the Special character option in Insert menu$/) do
   on(VisualEditorPage).special_character_element.when_present.click
 end
 
-When (/^I click on list and indentation dropdown$/) do
+When(/^I click on list and indentation dropdown$/) do
   on(VisualEditorPage).bullet_number_selector_element.when_present.click
 end
 
@@ -352,7 +352,7 @@ Then(/^I should see media in VisualEditor$/) do
   )
 end
 
-Then (/^I should see Cite dropdown menu$/) do
+Then(/^I should see Cite dropdown menu$/) do
   on(VisualEditorPage).cite_pull_down_element.when_present.should be_visible
   Screenshot.capture(
     @browser,

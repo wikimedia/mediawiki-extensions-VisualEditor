@@ -18,11 +18,11 @@ When(/^I select an Image$/) do
   on(VisualEditorPage).media_select_element.when_present(20).click
 end
 
-When (/^I click Use this image/) do
+When(/^I click Use this image/) do
   on(VisualEditorPage).use_image_button_element.when_present.click
 end
 
-When (/^I click Insert$/) do
+When(/^I click Insert$/) do
   on(VisualEditorPage).media_insert_button_element.when_present.click
 end
 

@@ -9,10 +9,6 @@
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 
-# Offense count: 6
-Lint/ParenthesesAsGroupedExpression:
-  Enabled: false
-
 # Offense count: 3
 Metrics/AbcSize:
   Max: 20
