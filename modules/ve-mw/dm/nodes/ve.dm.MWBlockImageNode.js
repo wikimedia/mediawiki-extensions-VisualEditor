@@ -48,7 +48,7 @@ ve.dm.MWBlockImageNode.static.rdfaToType = {
 
 ve.dm.MWBlockImageNode.static.name = 'mwBlockImage';
 
-ve.dm.MWBlockImageNode.static.storeHtmlAttributes = {
+ve.dm.MWBlockImageNode.static.preserveHtmlAttributes = {
 	blacklist: [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ]
 };
 

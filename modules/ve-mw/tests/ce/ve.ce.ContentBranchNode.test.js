@@ -21,7 +21,6 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 				{
 					type: 'mwEntity',
 					attributes: { character: 'c' },
-					htmlAttributes: [ { keys: [ 'typeof' ], values: { typeof: 'mw:Entity' } } ],
 					annotations: [ { type: 'textStyle/bold' } ]
 				},
 				{ type: '/mwEntity' },
@@ -34,7 +33,7 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 				{ type: '/alienInline' },
 				{ type: '/paragraph' }
 			],
-			html: 'a<b>b<span typeof="mw:Entity" class="ve-ce-leafNode ' +
+			html: 'a<b>b<span class="ve-ce-leafNode ' +
 				've-ce-mwEntityNode" contenteditable="false">c</span>d<tt>e</tt></b>'
 		} ];
 	QUnit.expect( cases.length );

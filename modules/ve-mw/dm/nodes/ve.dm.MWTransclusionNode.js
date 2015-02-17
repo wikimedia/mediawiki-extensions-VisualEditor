@@ -84,7 +84,6 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 		type: type,
 		attributes: {
 			mw: mwData,
-			originalDomElements: ve.copy( domElements ),
 			originalMw: mwDataJSON
 		}
 	};
@@ -105,16 +104,16 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
 	if (
-		dataElement.attributes.originalDomElements && (
+		dataElement.originalDomElements && (
 			index === dataElement.attributes.originalIndex ||
 			( originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) ) )
 		)
 	) {
 		// The object in the store is also used for CE rendering so return a copy
-		els = ve.copyDomElements( dataElement.attributes.originalDomElements, doc );
+		els = ve.copyDomElements( dataElement.originalDomElements, doc );
 	} else {
-		if ( dataElement.attributes.originalDomElements ) {
-			els = [ doc.createElement( dataElement.attributes.originalDomElements[0].nodeName ) ];
+		if ( dataElement.originalDomElements ) {
+			els = [ doc.createElement( dataElement.originalDomElements[0].nodeName ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
 			if ( converter.isForClipboard() ) {
@@ -344,11 +343,14 @@ ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
 
 /** */
 ve.dm.MWTransclusionNode.prototype.getClonedElement = function () {
-	var clone = ve.dm.LeafNode.prototype.getClonedElement.call( this );
+	var i, len, clone = ve.dm.LeafNode.prototype.getClonedElement.call( this );
 	delete clone.attributes.originalMw;
-	delete clone.attributes.originalDomElements;
 	// Remove about attribute to prevent about grouping of duplicated transclusions
-	this.constructor.static.removeHtmlAttribute( clone, 'about' );
+	if ( clone.originalDomElements ) {
+		for ( i = 0, len = clone.originalDomElements.length; i < len; i++ ) {
+			clone.originalDomElements.removeAttribute( 'about' );
+		}
+	}
 	return clone;
 };
 

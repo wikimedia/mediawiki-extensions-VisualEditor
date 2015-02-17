@@ -40,7 +40,7 @@ ve.dm.MWReferencesListNode.static.matchTagNames = null;
 
 ve.dm.MWReferencesListNode.static.matchRdfaTypes = [ 'mw:Extension/references' ];
 
-ve.dm.MWReferencesListNode.static.storeHtmlAttributes = false;
+ve.dm.MWReferencesListNode.static.preserveHtmlAttributes = false;
 
 ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, converter ) {
 	var referencesListData, contentsDiv, contentsData,
@@ -54,7 +54,6 @@ ve.dm.MWReferencesListNode.static.toDataElement = function ( domElements, conver
 		attributes: {
 			mw: mwData,
 			originalMw: mwDataJSON,
-			domElements: ve.copy( domElements ),
 			refGroup: refGroup,
 			listGroup: listGroup
 		}
@@ -79,9 +78,9 @@ ve.dm.MWReferencesListNode.static.toDomElements = function ( data, doc, converte
 		attribs = dataElement.attributes,
 		contentsData = data.slice( 1, -1 );
 
-	if ( attribs.domElements ) {
+	if ( dataElement.originalDomElements ) {
 		// If there's more than 1 element, preserve entire array, not just first element
-		els = ve.copyDomElements( attribs.domElements, doc );
+		els = ve.copyDomElements( dataElement.originalDomElements, doc );
 		el = els[0];
 	} else {
 		el = doc.createElement( 'div' );

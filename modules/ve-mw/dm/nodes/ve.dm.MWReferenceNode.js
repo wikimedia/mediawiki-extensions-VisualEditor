@@ -83,7 +83,6 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 		attributes: {
 			mw: mwData,
 			originalMw: mwDataJSON,
-			childDomElements: ve.copy( Array.prototype.slice.apply( domElements[0].childNodes ) ),
 			listIndex: listIndex,
 			listGroup: listGroup,
 			listKey: listKey,
@@ -99,7 +98,7 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 
 ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var itemNodeHtml, originalHtml, mwData, i, iLen, keyedNodes, setContents, contentsAlreadySet,
-		originalMw, childDomElements, listKeyParts, name,
+		originalMw, listKeyParts, name,
 		el = doc.createElement( 'span' ),
 		itemNodeWrapper = doc.createElement( 'div' ),
 		originalHtmlWrapper = doc.createElement( 'div' ),
@@ -202,10 +201,9 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 	if ( originalMw && ve.compare( mwData, JSON.parse( originalMw ) ) ) {
 		el.setAttribute( 'data-mw', originalMw );
 
-		// Restore the span's childNodes to prevent unnecessary DOM diffs
-		childDomElements = ve.copyDomElements( dataElement.attributes.childDomElements, doc );
-		for ( i = 0, iLen = childDomElements.length; i < iLen; i++ ) {
-			el.appendChild( childDomElements[i] );
+		// Return the original DOM elements if possible
+		if ( dataElement.originalDomElements ) {
+			return ve.copyDomElements( dataElement.originalDomElements, doc );
 		}
 	} else {
 		el.setAttribute( 'data-mw', JSON.stringify( mwData ) );

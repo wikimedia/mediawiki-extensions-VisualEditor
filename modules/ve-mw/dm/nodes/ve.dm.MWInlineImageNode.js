@@ -43,7 +43,7 @@ ve.dm.MWInlineImageNode.static.isContent = true;
 
 ve.dm.MWInlineImageNode.static.name = 'mwInlineImage';
 
-ve.dm.MWInlineImageNode.static.storeHtmlAttributes = {
+ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = {
 	blacklist: [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href' ]
 };
 

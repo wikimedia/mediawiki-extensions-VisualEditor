@@ -64,7 +64,6 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 		type: this.name,
 		attributes: {
 			mw: mwData,
-			originalDomElements: ve.copy( domElements ),
 			originalMw: mwDataJSON
 		}
 	};
@@ -87,7 +86,7 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 		( originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) ) )
 	) {
 		// The object in the store is also used for CE rendering so return a copy
-		return ve.copyDomElements( dataElement.attributes.originalDomElements, doc );
+		return ve.copyDomElements( dataElement.originalDomElements, doc );
 	} else {
 		el = doc.createElement( this.tagName );
 		el.setAttribute( 'typeof', 'mw:Extension/' + this.getExtensionName( dataElement ) );

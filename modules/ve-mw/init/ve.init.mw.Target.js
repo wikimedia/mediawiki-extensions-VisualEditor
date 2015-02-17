@@ -251,7 +251,7 @@ ve.init.mw.Target.static.importRules = {
 			// Nodes
 			'inlineImage', 'blockImage', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
-		removeHtmlAttributes: true
+		removeOriginalDomElements: true
 	},
 	all: null
 };
