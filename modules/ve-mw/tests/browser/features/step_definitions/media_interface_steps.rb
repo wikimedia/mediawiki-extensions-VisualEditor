@@ -31,6 +31,6 @@ Then(/^diff view should show correct markup$/) do
     page.wait_until(15) do
       page.diff_view_element.exists?
     end
-    expect(page.diff_view).to match /\[\[File:A Bug.JPG\|thumb\]\]/
+    expect(page.diff_view).to match(/\[\[File:A Bug.JPG\|thumb\]\]/)
   end
 end

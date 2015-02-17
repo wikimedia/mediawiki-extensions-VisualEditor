@@ -87,7 +87,7 @@ Then(/^the options set in Advanced Settings panel should appear in diff view$/) 
     page.wait_until(10) do
       page.diff_view.include? 'automated test'
     end
-    expect(page.diff_view).to match /{{DISPLAYTITLE:automated test}}.+Options VisualEditor Test.+__INDEX__.+__NEWSECTIONLINK__/m
+    expect(page.diff_view).to match(/{{DISPLAYTITLE:automated test}}.+Options VisualEditor Test.+__INDEX__.+__NEWSECTIONLINK__/m)
   end
 end
 
@@ -96,6 +96,6 @@ Then(/^the options set in Page Settings panel should appear in diff view$/) do
     page.wait_until(10) do
       page.diff_view.include? 'Linux'
     end
-    expect(page.diff_view).to match /#REDIRECT \[\[Linux\]\]Options VisualEditor Test.+__FORCETOC__.+__STATICREDIRECT__.+__NOEDITSECTION__.+__DISAMBIG__/m
+    expect(page.diff_view).to match(/#REDIRECT \[\[Linux\]\]Options VisualEditor Test.+__FORCETOC__.+__STATICREDIRECT__.+__NOEDITSECTION__.+__DISAMBIG__/m)
   end
 end

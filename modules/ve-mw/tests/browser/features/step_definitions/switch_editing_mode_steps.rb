@@ -54,7 +54,7 @@ Then(/^I should be in Visual Editor editing mode$/) do
       page.text.include? 'Edit page for'
     end
   end
-  expect(@browser.url).to match /w\/index\.php\?title=Edit_page_for_#{ENV['BROWSER']}&veaction=edit/
+  expect(@browser.url).to match(/w\/index\.php\?title=Edit_page_for_#{ENV['BROWSER']}&veaction=edit/)
 end
 
 Then(/^I should be in wikitext editing mode$/) do
