@@ -49,12 +49,21 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	}
 
 	if ( config.href ) {
-		this.$text.append(
-			this.$( '<a>' )
-				.attr( 'target', '_blank' )
-				.attr( 'href', config.href )
-				.append( content )
-		);
+		this.$text
+			.append(
+				this.$( '<a>' )
+					.attr( 'target', '_blank' )
+					.attr( 'rel', 'mw:ExtLink' )
+					.attr( 'href',
+						// For the cases where we get urls that are "local"
+						// without http(s) prefix, we will add that prefix
+						// ourselves
+						!config.href.match( /^(https?:)?\/\// ) ?
+								'//' + config.href :
+								config.href
+					)
+					.append( content )
+			);
 	} else {
 		this.$text.append( content );
 	}
