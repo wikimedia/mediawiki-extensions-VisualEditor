@@ -181,7 +181,6 @@ class VisualEditorPage
   text_area(:formula_area, css: '.oo-ui-popupWidget-popup textarea')
 
   in_iframe(index: 0) do |frame|
-
     # USED IN LANGUAGE SCREENSHOT TEST:
     text_field(:media_alternative_text, css: 'div.oo-ui-widget.oo-ui-widget-enabled.oo-ui-inputWidget.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input', frame: frame)
     div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 1, frame: frame)
