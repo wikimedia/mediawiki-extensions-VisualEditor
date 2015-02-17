@@ -206,7 +206,7 @@
 	"visualeditor-diff-nochanges": "您無法檢視差異，因為此頁面目前沒有變更任何的內容。",
 	"visualeditor-differror": "讀取伺服器資料發生錯誤：$1 。",
 	"visualeditor-editconflict": "由於編輯衝突，無法儲存目前的變更。{{GENDER:|您}}是否要手動排除衝突？",
-	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|則通知|則通知}}",
+	"visualeditor-editnotices-tool": "$1 則通知",
 	"visualeditor-editnotices-tooltip": "編輯說明",
 	"visualeditor-editsummary": "描述您所變更的內容",
 	"visualeditor-editsummary-bytes-remaining": "尚可使用的位元組數",
