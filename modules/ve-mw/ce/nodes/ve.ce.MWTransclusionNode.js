@@ -132,18 +132,20 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElements ) {
 	var $elements = this.$( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) ),
 		transclusionNode = this;
-	$elements
-		.find( 'a[href][rel="mw:WikiLink"]' ).addBack( 'a[href][rel="mw:WikiLink"]' )
-		.each( function () {
-			var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
-					this.href, transclusionNode.getModelHtmlDocument()
-				),
-				normalisedHref = decodeURIComponent( targetData.title );
-			if ( mw.Title.newFromText( normalisedHref ) ) {
-				normalisedHref = mw.Title.newFromText( normalisedHref ).getPrefixedText();
-			}
-			ve.init.platform.linkCache.styleElement( normalisedHref, $( this ) );
-		} );
+	if ( this.getModelHtmlDocument() ) {
+		$elements
+			.find( 'a[href][rel="mw:WikiLink"]' ).addBack( 'a[href][rel="mw:WikiLink"]' )
+			.each( function () {
+				var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+						this.href, transclusionNode.getModelHtmlDocument()
+					),
+					normalisedHref = decodeURIComponent( targetData.title );
+				if ( mw.Title.newFromText( normalisedHref ) ) {
+					normalisedHref = mw.Title.newFromText( normalisedHref ).getPrefixedText();
+				}
+				ve.init.platform.linkCache.styleElement( normalisedHref, $( this ) );
+			} );
+	}
 	return $elements.toArray();
 };
 
