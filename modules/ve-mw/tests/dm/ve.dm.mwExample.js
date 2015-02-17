@@ -861,15 +861,15 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
-	mwTable: {
-		body: '<table class="wikitable sortable"><tr><td>Foo</td></tr></table>',
+	'mwTable with duplicate class attributes': {
+		body: '<table class="wikitable sortable wikitable"><tr><td>Foo</td></tr></table>',
 		data: [
 			{
 				type: 'mwTable',
 				attributes: {
 					wikitable: true,
 					sortable: true,
-					originalClasses: 'wikitable sortable',
+					originalClasses: 'wikitable sortable wikitable',
 					unrecognizedClasses: []
 				}
 			},
