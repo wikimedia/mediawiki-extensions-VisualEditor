@@ -984,16 +984,19 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 	copyAttributes( oldDoc.head, newDoc.head );
 	copyAttributes( oldDoc.body, newDoc.body );
 	$( newDoc )
-		.remove( 'div[id = myEventWatcherDiv]' ) // Bug 51423
-		.remove( 'embed[type = "application/iodbc"]' ) // Bug 51521
-		.remove( 'embed[type = "application/x-datavault"]' ) // Bug 52791
-		.remove( 'script[id = FoxLingoJs]' ) // Bug 52884
-		.remove( 'style[id = _clearly_component__css]' ) // Bug 53252
-		.remove( 'div[id = sendToInstapaperResults]' ) // Bug 61776
-		.remove( 'embed[id ^= xunlei_com_thunder_helper_plugin]' ) // Bug 63121
-		.remove( 'object[type = cosymantecnisbfw], script[id=NortonInternetSecurityBF]' ) // Bug 63229
-		.remove( 'div[id = kloutify]' ) // Bug 67006
-		.remove( 'div[id ^= mittoHidden]' ); // Bug 68900#c1
+		.find(
+			'div[id="myEventWatcherDiv"], ' + // Bug 51423
+			'embed[type="application/iodbc"], ' + // Bug 51521
+			'embed[type="application/x-datavault"], ' + // Bug 52791
+			'script[id="FoxLingoJs"], ' + // Bug 52884
+			'style[id="_clearly_component__css"], ' + // Bug 53252
+			'div[id="sendToInstapaperResults"], ' + // Bug 61776
+			'embed[id^="xunlei_com_thunder_helper_plugin"], ' + // Bug 63121
+			'object[type="cosymantecnisbfw"], script[id="NortonInternetSecurityBF"], ' + // Bug 63229
+			'div[id="kloutify"], ' + // Bug 67006
+			'div[id^="mittoHidden"]' // Bug 68900#c1
+		)
+		.remove();
 	// Add doctype manually
 	return '<!doctype html>' + ve.serializeXhtml( newDoc );
 };
