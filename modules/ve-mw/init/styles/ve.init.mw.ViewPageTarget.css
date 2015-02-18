@@ -62,8 +62,3 @@
 	margin-right: 0.25em;
 	margin-top: 0.2em;
 }
-
-/* Needs to override .oo-ui.widget.oo-ui-widget-disabled */
-.ve-init-mw-viewPageTarget-waiting.oo-ui-widget.oo-ui-widget-disabled {
-	cursor: progress;
-}

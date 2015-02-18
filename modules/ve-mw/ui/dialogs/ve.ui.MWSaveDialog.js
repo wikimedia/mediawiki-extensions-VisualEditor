@@ -22,7 +22,6 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	ve.ui.MWSaveDialog.super.call( this, config );
 
 	// Properties
-	this.sanityCheckVerified = false;
 	this.editSummaryByteLimit = 255;
 	this.restoring = false;
 	this.messages = {};
@@ -137,15 +136,6 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
 };
 
 /**
- * Set sanity check flag
- *
- * @param {boolean} verified Status of sanity check
- */
-ve.ui.MWSaveDialog.prototype.setSanityCheck = function ( verified ) {
-	this.sanityCheckVerified = !!verified;
-};
-
-/**
  * Swap state in the save dialog.
  *
  * @param {string} panel One of 'save', 'review', 'conflict' or 'nochanges'
@@ -176,9 +166,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	switch ( panel ) {
 		case 'save':
-			if ( !this.sanityCheckVerified ) {
-				this.showMessage( 'dirtywarning', mw.msg( 'visualeditor-savedialog-warning-dirty' ) );
-			}
 			this.actions.setMode( 'save' );
 			// HACK: FF needs *another* defer
 			setTimeout( function () {

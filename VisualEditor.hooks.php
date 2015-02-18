@@ -392,7 +392,7 @@ class VisualEditorHooks {
 	 */
 	public static function onListDefinedTags( &$tags ) {
 		$tags[] = 'visualeditor';
-		$tags[] = 'visualeditor-needcheck';
+		$tags[] = 'visualeditor-needcheck'; // No longer in active use
 		$tags[] = 'visualeditor-switched';
 		return true;
 	}

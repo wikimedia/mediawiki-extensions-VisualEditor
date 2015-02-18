@@ -113,12 +113,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					intval( $saveresult['edit']['newrevid'] ),
 					null
 				);
-				if ( $params['needcheck'] ) {
-					ChangeTags::addTags( 'visualeditor-needcheck', null,
-						intval( $saveresult['edit']['newrevid'] ),
-						null
-					);
-				}
 			}
 
 			// Return result of parseWikitext instead of saveWikitext so that the
@@ -183,9 +177,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'wikitext' => null,
 			'basetimestamp' => null,
 			'starttimestamp' => null,
-			'needcheck' => array(
-				ApiBase::PARAM_TYPE => 'boolean'
-			),
 			'oldid' => null,
 			'minor' => null,
 			'watch' => null,
@@ -228,8 +219,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'starttimestamp' => 'When saving, set this to the timestamp of when the page was loaded.'
 				. ' Used to detect edit conflicts.',
 			'token' => 'Edit token',
-			'needcheck' => 'When saving, set this parameter if the revision might have roundtrip'
-				. ' problems. This will result in the edit being tagged.',
 			'captchaid' => 'Captcha ID (when saving with a captcha response).',
 			'captchaword' => 'Answer to the captcha (when saving with a captcha response).',
 			'cachekey' => 'Use the result of a previous serializeforcache request with this key.'

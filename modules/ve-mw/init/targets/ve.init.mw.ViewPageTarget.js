@@ -96,8 +96,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		showChanges: 'onShowChanges',
 		showChangesError: 'onShowChangesError',
 		noChanges: 'onNoChanges',
-		serializeError: 'onSerializeError',
-		sanityCheckComplete: 'updateToolbarSaveButtonState'
+		serializeError: 'onSerializeError'
 	} );
 
 	if ( history.replaceState ) {
@@ -873,10 +872,9 @@ ve.init.mw.ViewPageTarget.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
 	this.edited = this.getSurface().getModel().hasBeenModified();
-	// Disable the save button if we have no history or if the sanity check is not finished
-	isDisabled = ( !this.edited && !this.restoring ) || !this.sanityCheckFinished;
+	// Disable the save button if we have no history
+	isDisabled = !this.edited && !this.restoring;
 	this.toolbarSaveButton.setDisabled( isDisabled );
-	this.toolbarSaveButton.$element.toggleClass( 've-init-mw-viewPageTarget-waiting', !this.sanityCheckFinished );
 	mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
 };
 
@@ -887,9 +885,6 @@ ve.init.mw.ViewPageTarget.prototype.updateToolbarSaveButtonState = function () {
  * @fires saveReview
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
-	this.sanityCheckVerified = true;
-	this.saveDialog.setSanityCheck( this.sanityCheckVerified );
-
 	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.getActions().setAbilities( { approve: false } );
@@ -1043,10 +1038,6 @@ ve.init.mw.ViewPageTarget.prototype.getSaveOptions = function () {
 			options[fieldMap[key]] = options[key];
 			delete options[key];
 		}
-	}
-
-	if ( this.sanityCheckPromise.state() === 'rejected' ) {
-		options.needcheck = 1;
 	}
 
 	return options;
@@ -1217,7 +1208,6 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 			target.saveDialog.setupCheckboxes( target.$checkboxes );
 		}
 
-		target.saveDialog.setSanityCheck( target.sanityCheckVerified );
 		target.getSurface().getDialogs().openWindow(
 			target.saveDialog,
 			{ dir: target.getSurface().getModel().getDocument().getLang() }
