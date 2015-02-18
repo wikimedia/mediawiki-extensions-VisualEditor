@@ -1395,6 +1395,10 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 		);
 		ve.track( 'trace.convertModelFromDom.exit' );
+		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
+		ve.track( 'trace.buildModelTree.enter' );
+		dmDoc.buildNodeTree();
+		ve.track( 'trace.buildModelTree.exit' );
 		setTimeout( function () {
 			// Move all native content inside the target
 			target.$element.append( target.$element.siblings() );
