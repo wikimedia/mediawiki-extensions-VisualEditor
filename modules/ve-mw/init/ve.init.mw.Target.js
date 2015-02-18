@@ -417,6 +417,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 			this, null, 'No HTML content in response from server', null
 		);
 	} else {
+		ve.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
 		this.doc = ve.parseXhtml( this.originalHtml );
 
@@ -461,6 +462,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 			ve.init.platform.linkCache.set( linkData );
 		}
 
+		ve.track( 'trace.parseResponse.exit' );
 		// Everything worked, the page was loaded, continue as soon as the modules are loaded
 		this.modulesReady.done( this.onReady.bind( this ) );
 	}
@@ -1038,6 +1040,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 
 	// Load DOM
 	start = ve.now();
+	ve.track( 'trace.domLoad.enter' );
 
 	xhr = this.constructor.static.apiRequest( data );
 	this.loading = xhr.then(
@@ -1048,6 +1051,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 				cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
 				parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
 			} );
+			ve.track( 'trace.domLoad.exit' );
 			return jqxhr;
 		}
 	)
@@ -1383,20 +1387,24 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
+		ve.track( 'trace.convertModelFromDom.enter' );
 		var dmDoc = ve.dm.converter.getModelFromDom(
 			doc,
 			null,
 			mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 		);
+		ve.track( 'trace.convertModelFromDom.exit' );
 		setTimeout( function () {
 			// Move all native content inside the target
 			target.$element.append( target.$element.siblings() );
 
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
+			ve.track( 'trace.createSurface.enter' );
 			var surface = target.addSurface( dmDoc ),
 				surfaceView = surface.getView(),
 				$documentNode = surfaceView.getDocument().getDocumentNode().$element;
+			ve.track( 'trace.createSurface.exit' );
 
 			surface.$element
 				.addClass( 've-init-mw-viewPageTarget-surface' )
@@ -1417,12 +1425,14 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 
 			setTimeout( function () {
 				// Initialize surface
+				ve.track( 'trace.initializeSurface.enter' );
 				surface.getContext().toggle( false );
 
 				target.active = true;
 				// Now that the surface is attached to the document and ready,
 				// let it initialize itself
 				surface.initialize();
+				ve.track( 'trace.initializeSurface.exit' );
 				setTimeout( callback );
 			} );
 		} );

@@ -175,6 +175,7 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
  */
 ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 	var target = this;
+	ve.track( 'trace.setupToolbar.enter' );
 
 	// Parent method
 	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
@@ -194,12 +195,16 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 	// Move the toolbar to top of target, before heading etc.
 	this.$element.prepend( this.getToolbar().$element );
 
+	ve.track( 'trace.setupToolbar.exit' );
+
 	this.getToolbar().$bar.slideDown( 'fast', function () {
 		// Check the surface wasn't torn down while the toolbar was animating
 		if ( target.getSurface() ) {
+			ve.track( 'trace.initializeToolbar.enter' );
 			target.getToolbar().initialize();
 			target.getSurface().getView().emit( 'position' );
 			target.getSurface().getContext().updateDimensions();
+			ve.track( 'trace.initializeToolbar.exit' );
 		}
 	} );
 };
@@ -268,6 +273,7 @@ ve.init.mw.ViewPageTarget.prototype.unbindHandlers = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.activate = function () {
 	if ( !this.active && !this.activating ) {
+		ve.track( 'trace.activate.enter' );
 		this.activating = true;
 		this.activatingDeferred = $.Deferred();
 
@@ -482,6 +488,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.maybeShowDialogs();
 	this.activatingDeferred.resolve();
 	mw.hook( 've.activationComplete' ).fire();
+	ve.track( 'trace.activate.exit' );
 };
 
 /**
