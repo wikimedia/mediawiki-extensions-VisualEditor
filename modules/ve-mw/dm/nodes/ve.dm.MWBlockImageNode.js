@@ -48,8 +48,11 @@ ve.dm.MWBlockImageNode.static.rdfaToType = {
 
 ve.dm.MWBlockImageNode.static.name = 'mwBlockImage';
 
-ve.dm.MWBlockImageNode.static.preserveHtmlAttributes = {
-	blacklist: [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ]
+ve.dm.MWBlockImageNode.static.preserveHtmlAttributes = function ( attribute ) {
+	return ve.indexOf(
+		attribute,
+		[ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ]
+	) === -1;
 };
 
 ve.dm.MWBlockImageNode.static.handlesOwnChildren = true;

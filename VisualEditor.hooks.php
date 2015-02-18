@@ -563,7 +563,6 @@ class VisualEditorHooks {
 				'modules/ve-mw/tests/dm/ve.dm.SurfaceFragment.test.js',
 				'lib/ve/tests/dm/ve.dm.ModelRegistry.test.js',
 				'lib/ve/tests/dm/ve.dm.MetaList.test.js',
-				'lib/ve/tests/dm/ve.dm.Model.test.js',
 				'lib/ve/tests/dm/lineardata/ve.dm.FlatLinearData.test.js',
 				'lib/ve/tests/dm/lineardata/ve.dm.ElementLinearData.test.js',
 				'lib/ve/tests/dm/lineardata/ve.dm.MetaLinearData.test.js',
