@@ -85,7 +85,8 @@
 				'page.length': -1, // FIXME
 				editingSessionId: editingSessionId,
 				'user.id': mw.user.getId(),
-				'user.editCount': mw.config.get( 'wgUserEditCount', 0 )
+				'user.editCount': mw.config.get( 'wgUserEditCount', 0 ),
+				'mediawiki.version': mw.config.get( 'wgVersion' )
 			}, data );
 
 			if ( mw.user.isAnon() ) {
