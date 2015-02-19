@@ -76,10 +76,6 @@ When(/^I click on Advanced Settings tab$/) do
   on(VisualEditorPage).media_advanced_settings_element.when_present.click
 end
 
-When(/^I click on Insert media button$/) do
-  on(VisualEditorPage).insert_media_element.when_present.click
-end
-
 When(/^I click on Cite menu$/) do
   on(VisualEditorPage).cite_indicator_down_element.when_present.click
 end
@@ -328,8 +324,7 @@ Then(/^I should see media caption dialog box$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Media_alternative_text-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.media_alternative_block_element],
-    @current_page.window_frame_element
+    [@current_page.media_alternative_block_element]
   )
 end
 

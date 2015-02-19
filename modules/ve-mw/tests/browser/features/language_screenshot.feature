@@ -82,6 +82,7 @@ Feature: Language Screenshot
   Scenario: VisualEditor_Media_caption_editing
     Given I go to the "Media Interface Screenshot" page with source content "Media Interface Screenshot"
       And I select an image by searching San Francisco in Media option
+      And I click Use this image
       And I enter "San Francisco" in alternative text
     When I enter "San Francisco is located on the West Coast of the United States" in caption text box
     Then I should see media caption dialog box
@@ -89,6 +90,7 @@ Feature: Language Screenshot
   Scenario: VisualEditor_Media_advanced_settings
     Given I go to the "Media Interface Screenshot" page with source content "Media Interface Screenshot"
       And I select an image by searching San Francisco in Media option
+      And I click Use this image
     When I click on Advanced Settings tab
     Then I should see media advanced settings dialog box
 

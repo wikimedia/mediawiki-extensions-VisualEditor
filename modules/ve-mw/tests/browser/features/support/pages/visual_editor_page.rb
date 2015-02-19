@@ -179,12 +179,9 @@ class VisualEditorPage
   div(:visual_editor_toolbar, class: 'oo-ui-toolbar-tools')
   text_area(:wikitext_editor, id: 'wpTextbox1')
   text_area(:formula_area, css: '.oo-ui-popupWidget-popup textarea')
+  text_field(:media_alternative_text, css: 'div.oo-ui-widget.oo-ui-widget-enabled.oo-ui-inputWidget.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input')
+  div(:content_box, class: 've-ce-documentNode ve-ce-branchNode noime')
+  div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 2)
+  div(:media_advanced_settings, class: 'oo-ui-outlineOptionWidget-level-0', index: 1)
 
-  in_iframe(index: 0) do |frame|
-    # USED IN LANGUAGE SCREENSHOT TEST:
-    text_field(:media_alternative_text, css: 'div.oo-ui-widget.oo-ui-widget-enabled.oo-ui-inputWidget.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input', frame: frame)
-    div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 1, frame: frame)
-    list_item(:media_advanced_settings, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-optionWidget oo-ui-decoratedOptionWidget oo-ui-outlineItemWidget oo-ui-outlineItemWidget-level-0 oo-ui-iconElement oo-ui-labelElement', frame: frame)
-    a(:insert_media, css: 'div.oo-ui-processDialog-actions-primary > div.oo-ui-buttonElement-frameless > a', frame: frame)
-  end
 end
