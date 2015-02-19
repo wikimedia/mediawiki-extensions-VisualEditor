@@ -1272,6 +1272,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.mwreference.core',
 			'ext.visualEditor.mwtransclusion',
+			'ext.visualEditor.mediawiki'
 		),
 		'messages' => array(
 			'visualeditor-dialog-reference-editing-reused',

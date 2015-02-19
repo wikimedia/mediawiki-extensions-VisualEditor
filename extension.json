@@ -1295,7 +1295,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwreference.core",
-				"ext.visualEditor.mwtransclusion"
+				"ext.visualEditor.mwtransclusion",
+				"ext.visualEditor.mediawiki"
 			],
 			"messages": [
 				"visualeditor-dialog-reference-editing-reused",
