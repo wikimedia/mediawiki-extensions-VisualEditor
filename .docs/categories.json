@@ -123,6 +123,7 @@
 					"ve.ui.DebugBar",
 					"ve.ui.Trigger",
 					"ve.ui.*TransferHandler",
+					"ve.ui.DataTransferItem",
 					"ve.ui.*Action",
 					"ve.ui.*Command",
 					"ve.ui.*Factory",

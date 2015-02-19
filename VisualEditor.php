@@ -467,6 +467,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ce/ve.ce.BranchNode.js',
 			'lib/ve/src/ce/ve.ce.ContentBranchNode.js',
 			'lib/ve/src/ce/ve.ce.LeafNode.js',
+			'lib/ve/src/ce/ve.ce.ClassAttributeNode.js',
 			'lib/ve/src/ce/ve.ce.AlignableNode.js',
 			'lib/ve/src/ce/ve.ce.FocusableNode.js',
 			'lib/ve/src/ce/ve.ce.ResizableNode.js',
@@ -542,6 +543,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.Action.js',
 			'lib/ve/src/ui/ve.ui.ActionFactory.js',
 			'lib/ve/src/ui/ve.ui.DataTransferHandler.js',
+			'lib/ve/src/ui/ve.ui.FileTransferHandler.js',
 			'lib/ve/src/ui/ve.ui.DataTransferHandlerFactory.js',
 			'lib/ve/src/ui/ve.ui.WindowManager.js',
 
