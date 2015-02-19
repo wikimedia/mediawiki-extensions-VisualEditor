@@ -209,17 +209,17 @@ class VisualEditorHooks {
 	/**
 	 * Changes the section edit links to add a VE edit link.
 	 *
-	 * This is attached to the MediaWiki 'DoEditSectionLink' hook.
+	 * This is attached to the MediaWiki 'SkinEditSectionLinks' hook.
 	 *
 	 * @param $skin Skin
 	 * @param $title Title
 	 * @param $section string
 	 * @param $tooltip string
-	 * @param $result string HTML
+	 * @param $result array
 	 * @param $lang Language
 	 * @return bool true
 	 */
-	public static function onDoEditSectionLink( Skin $skin, Title $title, $section,
+	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
 		$tooltip, &$result, $lang
 	) {
 		// Only do this if the user has VE enabled
@@ -245,35 +245,24 @@ class VisualEditorHooks {
 		$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
 			$tabMessages['editsectionsource'] : 'editsection';
 
-		// Code mostly duplicated from Skin::doEditSectionLink() :(
-		$attribs = array();
-		if ( !is_null( $tooltip ) ) {
-			# Bug 25462: undo double-escaping.
-			$tooltip = Sanitizer::decodeCharReferences( $tooltip );
-			$attribs['title'] = $skin->msg( 'editsectionhint' )->rawParams( $tooltip )
-				->inLanguage( $lang )->text();
-		}
-		$veLink = Linker::link( $title, $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
-			$attribs + array( 'class' => 'mw-editsection-visualeditor' ),
-			array( 'veaction' => 'edit', 'vesection' => $section ),
-			array( 'noclasses', 'known' )
-		);
-		$sourceLink = Linker::link( $title, $skin->msg( $sourceEditSection )->inLanguage( $lang )->text(),
-			$attribs,
-			array( 'action' => 'edit', 'section' => $section ),
-			array( 'noclasses', 'known' )
+		$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
+
+		$veLink = array(
+			'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
+			'targetTitle' => $title,
+			'attribs' => $result['editsection']['attribs'] + array(
+				'class' => 'mw-editsection-visualeditor'
+			),
+			'query' => array( 'veaction' => 'edit', 'vesection' => $section ),
+			'options' => array( 'noclasses', 'known' )
 		);
 
-		$veFirst = $config->get( 'VisualEditorTabPosition' ) === 'before';
-		$result = '<span class="mw-editsection">'
-			. '<span class="mw-editsection-bracket">[</span>'
-			. ( $veFirst ? $veLink : $sourceLink )
-			. '<span class="mw-editsection-divider">'
-			. $skin->msg( 'pipe-separator' )->inLanguage( $lang )->text()
-			. '</span>'
-			. ( $veFirst ? $sourceLink : $veLink )
-			. '<span class="mw-editsection-bracket">]</span>'
-			. '</span>';
+		$result['veeditsection'] = $veLink;
+		if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
+			krsort( $result );
+			// TODO: This will probably cause weird ordering if any other extensions added something already.
+			// ... wfArrayInsertBefore?
+		}
 
 		return true;
 	}
