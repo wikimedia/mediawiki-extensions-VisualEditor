@@ -1493,6 +1493,11 @@ $wgDefaultUserOptions['visualeditor-hidebetawelcome'] = 0;
 
 // Array of ResourceLoader module names (strings) that should be loaded when VisualEditor is
 // loaded. Other extensions that extend VisualEditor should add to this array.
+//
+// WARNING: When removing a module, first remove it from this array, wait for the change
+// to propagate, and only then remove the module code and module registration. Otherwise
+// there may be a period of time during which VisualEditor depends on a module that no
+// longer exists.
 $wgVisualEditorPluginModules = array();
 
 // Array of modules to load based on a preference. Keys are preference names, values are
