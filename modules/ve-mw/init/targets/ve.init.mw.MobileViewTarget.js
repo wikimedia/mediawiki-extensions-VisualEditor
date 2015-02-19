@@ -88,12 +88,16 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
 
-	this.toolbar.$element
-		// FIXME shouldn't be using viewPageTarget styles
-		.addClass( 've-init-mw-viewPageTarget-toolbar' )
-		.append( this.surface.context.$element )
-		// Move the toolbar to the overlay header
-		.appendTo( '.overlay-header > .toolbar' );
+	// Append the context to the toolbar
+	this.toolbar.$element.append( surface.context.$element );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileViewTarget.prototype.attachToolbar = function () {
+	// Move the toolbar to the overlay header
+	this.toolbar.$element.appendTo( '.overlay-header > .toolbar' );
 };
 
 /**

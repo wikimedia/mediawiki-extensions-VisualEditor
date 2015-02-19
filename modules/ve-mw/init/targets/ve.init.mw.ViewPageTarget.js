@@ -192,9 +192,6 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 	this.getToolbar().$element
 		.addClass( 've-init-mw-viewPageTarget-toolbar' );
 
-	// Move the toolbar to top of target, before heading etc.
-	this.$element.prepend( this.getToolbar().$element );
-
 	ve.track( 'trace.setupToolbar.exit' );
 
 	this.getToolbar().$bar.slideDown( 'fast', function () {
@@ -207,6 +204,17 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 			ve.track( 'trace.initializeToolbar.exit' );
 		}
 	} );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ViewPageTarget.prototype.attachToolbar = function () {
+	// Move the toolbar to top of target, before heading etc.
+	// Avoid re-attaching as it breaks CSS animations
+	if ( !this.getToolbar().$element.parent().is( this.$element ) ) {
+		this.$element.prepend( this.getToolbar().$element );
+	}
 };
 
 /**
