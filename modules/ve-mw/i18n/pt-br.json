@@ -19,7 +19,8 @@
 			"Tuliouel",
 			"Rodrigo codignoli",
 			"Teles",
-			"He7d3r"
+			"He7d3r",
+			"Fasouzafreitas"
 		]
 	},
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -30,6 +31,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "O Editor Visual está em fase experimental. Pode deparar-se com problemas no ''software'', e não ser capaz de editar algumas partes da página. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Você está usando um navegador que ainda não é oficialmente suportado pelo Editor Visual.",
+	"visualeditor-ca-createlocaldescriptionsource": "Adicionar fonte da descrição do local",
 	"visualeditor-ca-createsource": "Criar código-fonte",
 	"visualeditor-ca-editsource": "Editar código-fonte",
 	"visualeditor-ca-editsource-section": "editar código-fonte",

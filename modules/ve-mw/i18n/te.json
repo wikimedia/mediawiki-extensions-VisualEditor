@@ -24,6 +24,7 @@
 	"visualeditor-beta-label": "బీటా",
 	"visualeditor-beta-warning": "విజువల్ ఎడిటర్ బీటాస్థితిలోవున్నది. మీరు సాఫ్ట్‌వేర్ సమస్యలు ఎదుర్కొనవచ్చు లేక పేజీలో కొన్ని భాగాలు మార్చలేకపోవచ్చు. \"{{int:visualeditor-ca-editsource}}\" నొక్కి వికీపాఠ్య పద్ధతిలోకి మారవచ్చు. భద్రపరచని మార్పులువదలివేయబడతాయి.",
 	"visualeditor-browserwarning": "మీరు వాడే బ్రౌజర్ (విహరిణి)కి విజువల్ ఎడిటర్ అధికారిక తోడ్పాటు లేదు.",
+	"visualeditor-ca-createlocaldescriptionsource": "ప్రాంతీయ వివరణ మూలాన్ని చేర్చు",
 	"visualeditor-ca-createsource": "మూలపాఠ్యాన్ని సృష్టించండి",
 	"visualeditor-ca-editsource": "మూలపాఠ్యాన్ని సవరించు",
 	"visualeditor-ca-editsource-section": "మూలపాఠ్యాన్ని సవరించు",
@@ -128,6 +129,5 @@
 	"visualeditor-savedialog-title-nochanges": "సమీక్షించాల్సిన మార్పులేమీ లేవు",
 	"visualeditor-savedialog-title-review": "మీ మార్పులను సమీక్షించండి",
 	"visualeditor-savedialog-title-save": "మీ మార్పులను భద్రపరచండి",
-	"visualeditor-toolbar-savedialog": "పేజీని భద్రపరచు",
-	"visualeditor-wikitext-warning-link": "సహాయం: వికీ మార్కప్"
+	"visualeditor-toolbar-savedialog": "పేజీని భద్రపరచు"
 }

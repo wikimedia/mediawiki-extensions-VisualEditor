@@ -118,7 +118,7 @@
 	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Teka zey na perer|Teké zey na perer}}",
 	"visualeditor-linkinspector-suggest-new-page": "Pela newiye",
 	"visualeditor-mainnamespacepagelink": "Project:Keyey cadé naman",
-	"visualeditor-media-input-placeholder": "Dosya bıvin",
+	"visualeditor-media-input-placeholder": "Medya cı geyre",
 	"visualeditor-meta-tool": "Weçinıtışi",
 	"visualeditor-mwalienextensioninspector-title": "Derganeya MediaWiki",
 	"visualeditor-mweditmodesource-title": "Açarne ra vurnayışê çımey",
@@ -146,7 +146,7 @@
 	"visualeditor-settings-tool": "Eyarê pele",
 	"visualeditor-toolbar-savedialog": "Perer qeyd ke",
 	"visualeditor-usernamespacepagelink": "Project:Karber cayé naman",
+	"visualeditor-version-label": "Versiyon",
 	"visualeditor-viewpage-savewarning": "Verdé qeyd kerdışi şıma qayılé peyser şıré verén asayışin?",
-	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "Timaryayışa wiki metini vineyé"
 }
