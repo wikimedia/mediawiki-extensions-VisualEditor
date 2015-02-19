@@ -453,7 +453,9 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( jqXHR, status ) {
  * @method
  */
 ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
-	var surfaceReadyTime = ve.now();
+	var surfaceReadyTime = ve.now(),
+		target = this;
+
 	if ( !this.activating ) {
 		// Activation was aborted before we got here. Do nothing
 		// TODO are there things we need to clean up?
@@ -472,7 +474,10 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 
 	// Track how long it takes for the first transaction to happen
 	this.surface.getModel().getDocument().once( 'transact', function () {
-		ve.track( 'mwtiming.behavior.firstTransaction', { duration: ve.now() - surfaceReadyTime } );
+		ve.track( 'mwtiming.behavior.firstTransaction', {
+			duration: ve.now() - surfaceReadyTime,
+			targetName: target.constructor.static.name
+		} );
 	} );
 
 	// Update UI
