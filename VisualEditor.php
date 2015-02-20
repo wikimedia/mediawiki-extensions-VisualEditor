@@ -1564,6 +1564,8 @@ $wgVisualEditorBrowserBlacklist = array(
 	// Firefox issues in versions 12 and below (bug 50780)
 	// Wikilink [[./]] bug in Firefox 14 and below (bug 50720)
 	'firefox' => array( array( '<=', 14 ) ),
+	// Safari corruption issues from various old browser plugins
+	'safari' => array( array( '<=', 6 ) ),
 	// Opera < 12 was not tested and it's userbase is almost nonexistent anyway
 	'opera' => array( array( '<', 12 ) ),
 	// Blacklist all versions:

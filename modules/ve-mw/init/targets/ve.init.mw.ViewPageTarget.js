@@ -130,7 +130,7 @@ ve.init.mw.ViewPageTarget.compatibility = {
 	whitelist: {
 		firefox: [['>=', 15]],
 		iceweasel: [['>=', 10]],
-		safari: [['>=', 6]],
+		safari: [['>=', 7]],
 		chrome: [['>=', 19]],
 		opera: [['>=', 15]]
 	}
