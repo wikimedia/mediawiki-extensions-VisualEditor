@@ -9,24 +9,28 @@
 
 ( function () {
 
-	var lastEventWithAction = {},
+	var timing = {},
 		editingSessionId = mw.user.generateRandomSessionId();
 
-	function getDefaultTiming( action, data, now ) {
+	function computeDuration( action, event, timeStamp ) {
+		if ( event.timing !== undefined ) {
+			return event.timing;
+		}
+
 		switch ( action ) {
 			case 'init':
 				// Account for second opening
-				return now - Math.max(
-					Math.floor( window.mediaWikiLoadStart ),
-					lastEventWithAction.saveSuccess || 0,
-					lastEventWithAction.abort || 0
+				return timeStamp - Math.max(
+					window.mediaWikiLoadStart,
+					timing.saveSuccess || 0,
+					timing.abort || 0
 				);
 			case 'ready':
-				return now - lastEventWithAction.init;
+				return timeStamp - timing.init;
 			case 'saveIntent':
-				return now - lastEventWithAction.ready;
+				return timeStamp - timing.ready;
 			case 'saveAttempt':
-				return now - lastEventWithAction.saveIntent;
+				return timeStamp - timing.saveIntent;
 			case 'saveSuccess':
 			case 'saveFailure':
 				// HERE BE DRAGONS: the caller must compute these themselves
@@ -35,49 +39,39 @@
 				mw.log.warn( 've.init.mw.trackSubscriber: Do not rely on default timing value for saveSuccess/saveFailure' );
 				return -1;
 			case 'abort':
-				switch ( data.type ) {
+				switch ( event.type ) {
 					case 'preinit':
-						return now - lastEventWithAction.init;
+						return timeStamp - timing.init;
 					case 'nochange':
 					case 'switchwith':
 					case 'switchwithout':
 					case 'abandon':
-						return now - lastEventWithAction.ready;
+						return timeStamp - timing.ready;
 					case 'abandonMidsave':
-						return now - lastEventWithAction.saveAttempt;
+						return timeStamp - timing.saveAttempt;
 				}
 		}
 		mw.log.warn( 've.init.mw.trackSubscriber: Unrecognized action', action );
 		return -1;
 	}
 
-	ve.trackSubscribeAll( function ( topic, data ) {
-		data = data || {};
-		var newData, action,
-			now = Math.floor( ve.now() ),
-			prefix = topic.slice( 0, topic.indexOf( '.' ) );
+	ve.trackSubscribe( 'mwedit.', function ( topic, data, timeStamp ) {
+		var action = topic.split( '.' )[1],
+			event;
 
-		if ( prefix === 'mwtiming' ) {
-			// Add type for save errors; not in the topic for stupid historical reasons
-			if ( topic === 'mwtiming.performance.user.saveError' ) {
-				topic += '.' + data.type;
-			}
-			// Map mwtiming.foo --> timing.ve.foo.mobile
-			topic = 'timing.ve.' + topic.slice( 'mwtiming.'.length ) + '.' + data.targetName;
-			data = data.duration;
-		} else if ( prefix === 'mwedit' ) {
-			// Edit schema
-			action = topic.split( '.' )[1];
-			if ( action === 'init' ) {
-				// Regenerate editingSessionId
-				editingSessionId = mw.user.generateRandomSessionId();
-			}
-			newData = $.extend( {
+		timing[action] = timeStamp || this.timeStamp;  // I8e82acc12 back-compat
+
+		if ( action === 'init' ) {
+			// Regenerate editingSessionId
+			editingSessionId = mw.user.generateRandomSessionId();
+		}
+
+		event = $.extend( {
 				version: 1,
 				action: action,
 				editor: 'visualeditor',
 				platform: 'desktop', // FIXME
-				integration: ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
+				integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
 				'page.id': mw.config.get( 'wgArticleId' ),
 				'page.title': mw.config.get( 'wgPageName' ),
 				'page.ns': mw.config.get( 'wgNamespaceNumber' ),
@@ -87,27 +81,33 @@
 				'user.id': mw.user.getId(),
 				'user.editCount': mw.config.get( 'wgUserEditCount', 0 ),
 				'mediawiki.version': mw.config.get( 'wgVersion' )
-			}, data );
+		}, data );
 
-			if ( mw.user.isAnon() ) {
-				newData['user.class'] = 'IP';
-			}
-
-			newData['action.' + action + '.type'] = data.type;
-			newData['action.' + action + '.mechanism'] = data.mechanism;
-			newData['action.' + action + '.timing'] = data.timing !== undefined ?
-				Math.floor( data.timing ) : getDefaultTiming( action, data, now );
-			// Remove renamed properties
-			delete newData.type;
-			delete newData.mechanism;
-			delete newData.timing;
-
-			data = newData;
-			topic = 'event.Edit';
-			lastEventWithAction[action] = now;
+		if ( mw.user.isAnon() ) {
+			event['user.class'] = 'IP';
 		}
 
-		mw.track( topic, data );
+		event['action.' + action + '.type'] = event.type;
+		event['action.' + action + '.mechanism'] = event.mechanism;
+		event['action.' + action + '.timing'] = Math.round( computeDuration( action, event, this.timeStamp ) );
+
+		// Remove renamed properties
+		delete event.type;
+		delete event.mechanism;
+		delete event.timing;
+
+		mw.track( 'event.Edit', event );
+	} );
+
+	ve.trackSubscribe( 'mwtiming.', function ( topic, data ) {
+		// Add type for save errors; not in the topic for stupid historical reasons
+		if ( topic === 'mwtiming.performance.user.saveError' ) {
+			topic = topic + '.' + data.type;
+		}
+
+		// Map mwtiming.foo --> timing.ve.foo.mobile
+		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
+		mw.track( topic, data.duration );
 	} );
 
 } )();
