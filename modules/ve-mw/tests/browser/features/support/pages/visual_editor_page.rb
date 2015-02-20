@@ -183,5 +183,4 @@ class VisualEditorPage
   div(:content_box, class: 've-ce-documentNode ve-ce-branchNode noime')
   div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 2)
   div(:media_advanced_settings, class: 'oo-ui-outlineOptionWidget-level-0', index: 1)
-
 end
