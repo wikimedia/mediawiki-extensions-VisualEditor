@@ -64,7 +64,8 @@
 		var action = topic.split( '.' )[1],
 			event;
 
-		timing[action] = timeStamp || this.timeStamp;  // I8e82acc12 back-compat
+		timeStamp = timeStamp || this.timeStamp;  // I8e82acc12 back-compat
+		timing[action] = timeStamp;
 
 		if ( action === 'init' ) {
 			// Regenerate editingSessionId
@@ -72,20 +73,20 @@
 		}
 
 		event = $.extend( {
-				version: 1,
-				action: action,
-				editor: 'visualeditor',
-				platform: 'desktop', // FIXME
-				integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
-				'page.id': mw.config.get( 'wgArticleId' ),
-				'page.title': mw.config.get( 'wgPageName' ),
-				'page.ns': mw.config.get( 'wgNamespaceNumber' ),
-				'page.revid': mw.config.get( 'wgRevisionId' ),
-				'page.length': -1, // FIXME
-				editingSessionId: editingSessionId,
-				'user.id': mw.user.getId(),
-				'user.editCount': mw.config.get( 'wgUserEditCount', 0 ),
-				'mediawiki.version': mw.config.get( 'wgVersion' )
+			version: 1,
+			action: action,
+			editor: 'visualeditor',
+			platform: 'desktop', // FIXME
+			integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
+			'page.id': mw.config.get( 'wgArticleId' ),
+			'page.title': mw.config.get( 'wgPageName' ),
+			'page.ns': mw.config.get( 'wgNamespaceNumber' ),
+			'page.revid': mw.config.get( 'wgRevisionId' ),
+			'page.length': -1, // FIXME
+			editingSessionId: editingSessionId,
+			'user.id': mw.user.getId(),
+			'user.editCount': mw.config.get( 'wgUserEditCount', 0 ),
+			'mediawiki.version': mw.config.get( 'wgVersion' )
 		}, data );
 
 		if ( mw.user.isAnon() ) {
