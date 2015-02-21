@@ -8,6 +8,11 @@
  */
 
 ( function () {
+	if ( mw.loader.getState( 'schema.Edit' ) === null ) {
+		// Only route any events into the Edit schema if the module is actually available.
+		// It won't be if EventLogging is installed but WikimediaEvents is not.
+		return;
+	}
 
 	var timing = {},
 		editingSessionId = mw.user.generateRandomSessionId();
