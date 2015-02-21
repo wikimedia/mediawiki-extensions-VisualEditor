@@ -302,12 +302,19 @@ ve.dm.mwExample.mwNowikiHtmlFromData = '<body><p>Foo[[Bar]]Baz</p></body>';
 
 ve.dm.mwExample.withMeta = [
 	{
-		type: 'commentMeta',
+		type: 'paragraph',
+		internal: {
+			generated: 'wrapper'
+		}
+	},
+	{
+		type: 'comment',
 		attributes: {
 			text: ' No content conversion '
 		}
 	},
-	{ type: '/commentMeta' },
+	{ type: '/comment' },
+	{ type: '/paragraph' },
 	{
 		type: 'mwAlienMeta',
 		attributes: {
@@ -359,12 +366,19 @@ ve.dm.mwExample.withMeta = [
 	},
 	{ type: '/mwAlienMeta' },
 	{
-		type: 'commentMeta',
+		type: 'paragraph',
+		internal: {
+			generated: 'wrapper'
+		}
+	},
+	{
+		type: 'comment',
 		attributes: {
 			text: 'barbaz'
 		}
 	},
-	{ type: '/commentMeta' },
+	{ type: '/comment' },
+	{ type: '/paragraph' },
 	{
 		type: 'mwCategory',
 		attributes: {
