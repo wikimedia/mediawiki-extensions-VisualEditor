@@ -173,33 +173,40 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
  * @inheritdoc
  */
 ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
-	var target = this;
+	var initPromise, toolbar,
+		target = this,
+		wasSetup = !!this.toolbar;
+
 	ve.track( 'trace.setupToolbar.enter' );
 
 	// Parent method
 	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
 
-	// Keep it hidden so that we can slide it down smoothly (avoids sudden
-	// offset flash when original content is hidden, and replaced in-place with a
-	// similar-looking surface).
-	// FIXME: This is not ideal, the parent class creates it and appends
-	// to target (visibly), only for us to hide it again 0ms later.
-	// Though we can't hide it by default because it needs visible dimensions
-	// to compute stuff during setup.
-	this.getToolbar().$bar.hide();
-
-	this.getToolbar().$element
-		.addClass( 've-init-mw-viewPageTarget-toolbar' );
+	toolbar = this.getToolbar();
 
 	ve.track( 'trace.setupToolbar.exit' );
+	if ( !wasSetup ) {
+		// Keep it hidden so that we can slide it down smoothly (avoids sudden
+		// offset flash when original content is hidden, and replaced in-place with a
+		// similar-looking surface).
+		// FIXME: This is not ideal, the parent class creates it and appends
+		// to target (visibly), only for us to hide it again 0ms later.
+		// Though we can't hide it by default because it needs visible dimensions
+		// to compute stuff during setup.
+		this.getToolbar().$bar.hide();
+		initPromise = toolbar.$bar.slideDown( 'fast' ).promise();
+	} else {
+		initPromise = $.Deferred().resolve();
+	}
 
-	this.getToolbar().$bar.slideDown( 'fast', function () {
+	initPromise.done( function () {
+		var surface = target.getSurface();
 		// Check the surface wasn't torn down while the toolbar was animating
-		if ( target.getSurface() ) {
+		if ( surface ) {
 			ve.track( 'trace.initializeToolbar.enter' );
 			target.getToolbar().initialize();
-			target.getSurface().getView().emit( 'position' );
-			target.getSurface().getContext().updateDimensions();
+			surface.getView().emit( 'position' );
+			surface.getContext().updateDimensions();
 			ve.track( 'trace.initializeToolbar.exit' );
 		}
 	} );
@@ -212,6 +219,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to top of target, before heading etc.
 	// Avoid re-attaching as it breaks CSS animations
 	if ( !this.getToolbar().$element.parent().is( this.$element ) ) {
+		this.getToolbar().$element.addClass( 've-init-mw-viewPageTarget-toolbar' );
 		this.$element.prepend( this.getToolbar().$element );
 	}
 };
@@ -299,6 +307,18 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.setupLocalNoticeMessages();
 
 		this.saveScrollPosition();
+
+		// Create dummy surface to show toolbar while loading
+		var surface = this.addSurface( [] );
+		surface.disable();
+		// setSurface creates dummy toolbar
+		this.setSurface( surface );
+		// Disconnect the tool factory listeners so the toolbar
+		// doesn't start showing new tools as they load, too
+		// much flickering
+		this.getToolbar().getToolFactory().off( 'register' );
+		// Disable all the tools
+		this.getToolbar().updateToolState();
 
 		this.load( [ 'site', 'user' ] );
 	}
@@ -1341,6 +1361,9 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 	$( '#ca-ve-edit' ).addClass( 'selected' );
 
 	mw.hook( 've.activate' ).fire();
+
+	// Move all native content inside the target
+	this.$element.append( this.$element.siblings() );
 
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)

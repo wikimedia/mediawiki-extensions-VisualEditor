@@ -1400,8 +1400,8 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		dmDoc.buildNodeTree();
 		ve.track( 'trace.buildModelTree.exit' );
 		setTimeout( function () {
-			// Move all native content inside the target
-			target.$element.append( target.$element.siblings() );
+			// Clear dummy surfaces
+			target.clearSurfaces();
 
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			ve.track( 'trace.createSurface.enter' );
