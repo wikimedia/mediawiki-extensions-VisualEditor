@@ -21,11 +21,25 @@
 		init, support, targetPromise, enable, userPrefEnabled,
 		plugins = [];
 
+	function showLoading() {
+		if ( !init.$loading ) {
+			init.$loading = $( '<div class="mw-viewPageTarget-loading"></div>' );
+		}
+		$( '#firstHeading' ).prepend( init.$loading );
+	}
+
+	function hideLoading() {
+		if ( init.$loading ) {
+			init.$loading.detach();
+		}
+	}
+
 	/**
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
 	 * @returns {jQuery.Promise}
 	 */
 	function getTarget() {
+		showLoading();
 		if ( !targetPromise ) {
 			targetPromise = mw.loader.using( 'ext.visualEditor.viewPageTarget' )
 				.then( function () {
@@ -44,6 +58,22 @@
 				} );
 		}
 		return targetPromise;
+	}
+
+	/**
+	 * Load the target and activate it.
+	 *
+	 * @returns {jQuery.Promise}
+	 */
+	function activateTarget( targetPromise ) {
+		return targetPromise
+			.then( function ( target ) {
+				return target.activate();
+			} )
+			.then( function () {
+				ve.track( 'mwedit.ready' );
+			} )
+			.always( hideLoading );
 	}
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
@@ -333,7 +363,6 @@
 				return;
 			}
 
-			init.showLoading();
 			ve.track( 'mwedit.init', { type: 'page', mechanism: 'click' } );
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
@@ -349,21 +378,15 @@
 
 			e.preventDefault();
 
-			getTarget().done( function ( target ) {
-				target.activate()
-					.done( function () {
-						ve.track( 'mwedit.ready' );
-					} )
-					.always( init.hideLoading );
-			} );
+			activateTarget( getTarget() );
 		},
 
 		onEditSectionLinkClick: function ( e ) {
+			var targetPromise;
 			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
 				return;
 			}
 
-			init.showLoading();
 			ve.track( 'mwedit.init', { type: 'section', mechanism: 'click' } );
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
@@ -378,27 +401,10 @@
 
 			e.preventDefault();
 
-			getTarget().done( function ( target ) {
+			targetPromise = getTarget().then( function ( target ) {
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-				target.activate()
-					.done( function () {
-						ve.track( 'mwedit.ready' );
-					} )
-					.always( init.hideLoading );
 			} );
-		},
-
-		showLoading: function () {
-			if ( !init.$loading ) {
-				init.$loading = $( '<div class="mw-viewPageTarget-loading"></div>' );
-			}
-			$( '#firstHeading' ).prepend( init.$loading );
-		},
-
-		hideLoading: function () {
-			if ( init.$loading ) {
-				init.$loading.detach();
-			}
+			activateTarget( targetPromise );
 		}
 	};
 
@@ -480,16 +486,9 @@
 		if ( init.isAvailable ) {
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
 				isSection = uri.query.vesection !== undefined;
-				init.showLoading();
 
 				ve.track( 'mwedit.init', { type: isSection ? 'section' : 'page', mechanism: 'url' } );
-				getTarget().done( function ( target ) {
-					target.activate()
-						.done( function () {
-							ve.track( 'mwedit.ready' );
-						} )
-						.always( init.hideLoading );
-				} );
+				activateTarget( getTarget() );
 			}
 		}
 
