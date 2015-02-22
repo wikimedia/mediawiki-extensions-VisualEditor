@@ -46,7 +46,7 @@
 	"visualeditor-beta-label": "Beta",
 	"visualeditor-beta-warning": "VisualEditor ist in der Beta. Dir werden Softwarefehler auffallen und du wirst Teile der Seite nicht bearbeiten können. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zurückzukehren, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-tool}}“ aus.",
 	"visualeditor-browserwarning": "Du verwendest einen Browser, der vom VisualEditor nicht offiziell unterstützt wird.",
-	"visualeditor-ca-createlocaldescriptionsource": "Lokalen Beschreibungsquelltext hinzufügen",
+	"visualeditor-ca-createlocaldescriptionsource": "Lokalen Beschreibungstext hinzufügen",
 	"visualeditor-ca-createsource": "Quelltext erstellen",
 	"visualeditor-ca-editlocaldescriptionsource": "Lokalen Beschreibungsquelltext bearbeiten",
 	"visualeditor-ca-editsource": "Quelltext bearbeiten",
