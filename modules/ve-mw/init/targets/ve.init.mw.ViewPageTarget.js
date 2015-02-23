@@ -1311,9 +1311,14 @@ ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
  * Change the document title to state that we are now editing.
  */
 ve.init.mw.ViewPageTarget.prototype.changeDocumentTitle = function () {
+	var pageName = mw.config.get( 'wgPageName' ),
+		title = mw.Title.newFromText( pageName );
+	if ( title ) {
+		pageName = title.getPrefixedText();
+	}
 	document.title = ve.msg(
 		this.pageExists ? 'editing' : 'creating',
-		mw.config.get( 'wgTitle' )
+		pageName
 	) + ' - ' + mw.config.get( 'wgSiteName' );
 };
 
