@@ -403,6 +403,7 @@
 
 			targetPromise = getTarget().then( function ( target ) {
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
+				return target;
 			} );
 			activateTarget( targetPromise );
 		}
