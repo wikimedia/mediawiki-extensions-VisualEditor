@@ -95,7 +95,7 @@
 
 		event['action.' + action + '.type'] = event.type;
 		event['action.' + action + '.mechanism'] = event.mechanism;
-		event['action.' + action + '.timing'] = Math.round( computeDuration( action, event, this.timeStamp ) );
+		event['action.' + action + '.timing'] = Math.round( computeDuration( action, event, timeStamp ) );
 
 		// Remove renamed properties
 		delete event.type;
