@@ -97,9 +97,18 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var els, currentDom, i, len, wrapper, span,
+	var els, i, len, span,
 		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
 		originalMw = dataElement.attributes.originalMw;
+
+	function wrapTextNode( node ) {
+		if ( node.nodeType === Node.TEXT_NODE ) {
+			var wrapper = doc.createElement( 'span' );
+			wrapper.appendChild( node );
+			return wrapper;
+		}
+		return node;
+	}
 
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
@@ -112,19 +121,15 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		// The object in the store is also used for CE rendering so return a copy
 		els = ve.copyDomElements( dataElement.originalDomElements, doc );
 	} else {
-		if ( dataElement.originalDomElements ) {
+		if ( converter.isForClipboard() && index !== null ) {
+			// For the clipboard use the current DOM contents so the user has something
+			// meaningful to paste into external applications
+			els = ve.copyDomElements( converter.getStore().value( index ), doc );
+			els[0] = wrapTextNode( els[0] );
+		} else if ( dataElement.originalDomElements ) {
 			els = [ doc.createElement( dataElement.originalDomElements[0].nodeName ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
-			if ( converter.isForClipboard() ) {
-				// For the clipboard use the current DOM contents so the user has something
-				// meaningful to paste into external applications
-				currentDom = converter.getStore().value( index );
-				if ( currentDom ) {
-					// Ignore currentDom[0] as that is the data-mw span we are recreating
-					els = els.concat( ve.copyDomElements( currentDom.slice( 1 ), doc ) );
-				}
-			}
 		}
 		// All we need to send back to Parsoid is the original transclusion marker, with a
 		// reconstructed data-mw property.
@@ -153,11 +158,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		// ... and mark all but the first child as ignorable
 		for ( i = 1, len = els.length; i < len; i++ ) {
 			// Wrap plain text nodes so we can give them an attribute
-			if ( els[i].nodeType === Node.TEXT_NODE ) {
-				wrapper = doc.createElement( 'span' );
-				wrapper.appendChild( els[i] );
-				els[i] = wrapper;
-			}
+			els[i] = wrapTextNode( els[i] );
 			els[i].setAttribute( 'data-ve-ignore', 'true' );
 		}
 	}
