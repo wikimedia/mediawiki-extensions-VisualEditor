@@ -18,7 +18,7 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage,
-		init, support, targetPromise, enable, userPrefEnabled,
+		init, support, targetPromise, enable, tempdisable, userPrefEnabled,
 		plugins = [];
 
 	function showLoading() {
@@ -414,7 +414,9 @@
 		support.svg &&
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) );
 
-	enable = mw.user.options.get( 'visualeditor-enable', conf.defaultUserOptions.enable );
+	// Cast "0" (T89513)
+	enable = Number( mw.user.options.get( 'visualeditor-enable' ) );
+	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
 
 	userPrefEnabled = (
 		// Allow disabling for anonymous users separately from changing the
@@ -423,20 +425,7 @@
 
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
-		// Because user.options is embedded in the HTML and cached per-page for anons on wikis
-		// with static caching (e.g. wgUseFileCache or reverse-proxy) ignore user.options for
-		// anons as it is likely outdated.
-		(
-			mw.config.get( 'wgUserName' ) === null ?
-				( conf.defaultUserOptions.enable && !conf.defaultUserOptions.betatempdisable ) :
-				(
-					enable && enable !== '0' &&
-						!mw.user.options.get(
-							'visualeditor-betatempdisable',
-							conf.defaultUserOptions.betatempdisable
-						)
-				)
-		)
+		enable && !tempdisable
 	);
 
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,

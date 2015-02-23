@@ -429,8 +429,6 @@ class VisualEditorHooks {
 				$veConfig->get( 'VisualEditorPluginModules' ) // @todo deprecate the global setting
 			),
 			'defaultUserOptions' => array(
-				'betatempdisable' => $defaultUserOptions['visualeditor-betatempdisable'],
-				'enable' => $defaultUserOptions['visualeditor-enable'],
 				'defaultthumbsize' => $thumbLimits[ $defaultUserOptions['thumbsize'] ]
 			),
 			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
@@ -442,11 +440,6 @@ class VisualEditorHooks {
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 		);
-
-		foreach ( $veConfig->get( 'VisualEditorPreferenceModules' ) as $pref => $module ) {
-			$vars['wgVisualEditorConfig']['defaultUserOptions'][$pref] =
-				$defaultUserOptions[$pref];
-		}
 
 		return true;
 	}
