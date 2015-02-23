@@ -287,7 +287,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 
 		$( 'html' ).addClass( 've-activating ve-activated' );
 		this.activatingDeferred.always( function () {
-			$( 'html' ).addClass( 've-active' ).removeClass( 've-activating' );
+			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
 		} );
 
 		this.bindHandlers();
@@ -368,7 +368,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 	}
 
 	this.deactivating = true;
-	$( 'html' ).removeClass( 've-activated' ).addClass( 've-deactivating' );
+	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active' );
 	// User interface changes
 	if ( this.elementsThatHadOurAccessKey ) {
 		this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
@@ -409,7 +409,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		target.deactivating = false;
 		target.activating = false;
 		target.activatingDeferred.reject();
-		$( 'html' ).removeClass( 've-active ve-deactivating' );
+		$( 'html' ).removeClass( 've-deactivating' );
 
 		// Move remaining elements back out of the target
 		target.$element.parent().append( target.$element.children() );
@@ -1338,15 +1338,6 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 
 	mw.hook( 've.activate' ).fire();
 
-	// Hide site notice (if present)
-	$( '#siteNotice:visible' )
-		.addClass( 've-hide' )
-		.slideUp( 'fast' );
-	// Hide page status indicators (if present)
-	$( '.mw-indicators' )
-		.addClass( 've-hide' )
-		.fadeOut( 'fast' );
-
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)
 	if ( !this.actFromPopState && history.pushState && this.currentUri.query.veaction !== 'edit' ) {
@@ -1372,13 +1363,6 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	$( '#ca-view' ).addClass( 'selected' );
 
 	mw.hook( 've.deactivate' ).fire();
-
-	// Make site notice visible again (if present)
-	$( '#siteNotice.ve-hide' )
-		.slideDown( 'fast' );
-	// Make page status indicators visible again (if present)
-	$( '.mw-indicators.ve-hide' )
-		.fadeIn( 'fast' );
 
 	// Push non-veaction=edit url in history
 	if ( !this.actFromPopState && history.pushState ) {
