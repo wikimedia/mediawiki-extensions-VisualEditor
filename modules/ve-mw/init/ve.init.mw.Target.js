@@ -994,7 +994,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 };
 
 /**
- * Get DOM data from the Parsoid API.
+ * Load the editor.
  *
  * This method performs an asynchronous action and uses a callback function to handle the result.
  *
@@ -1005,7 +1005,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
  * @returns {boolean} Loading has been started
 */
 ve.init.mw.Target.prototype.load = function ( additionalModules ) {
-	var data, start, xhr, modulesPromise, additionalModulesPromise, target = this;
+	var modulesPromise, additionalModulesPromise, target = this;
 
 	// Prevent duplicate requests
 	if ( this.loading ) {
@@ -1024,11 +1024,26 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 		} );
 	} );
 
-	data = {
-		action: 'visualeditor',
-		paction: 'parse',
-		page: this.pageName
-	};
+	this.loading = this.requestPageData();
+	this.loading
+		.done( ve.init.mw.Target.onLoad.bind( this ) )
+		.fail( ve.init.mw.Target.onLoadError.bind( this ) );
+
+	return true;
+};
+
+/**
+ * Request the page HTML and various metadata from the MediaWiki API and Parsoid.
+ * @return {jQuery.Promise} Abortable promise resolved with a JSON object
+ */
+ve.init.mw.Target.prototype.requestPageData = function () {
+	var start, xhr,
+		target = this,
+		data = {
+			action: 'visualeditor',
+			paction: 'parse',
+			page: this.pageName
+		};
 
 	// Only request the API to explicitly load the currently visible revision if we're restoring
 	// from oldid. Otherwise we should load the latest version. This prevents us from editing an
@@ -1037,13 +1052,12 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 	if ( this.restoring ) {
 		data.oldid = this.revid;
 	}
-
 	// Load DOM
 	start = ve.now();
 	ve.track( 'trace.domLoad.enter' );
 
 	xhr = this.constructor.static.apiRequest( data );
-	this.loading = xhr.then(
+	return xhr.then(
 		function ( data, status, jqxhr ) {
 			target.events.track( 'performance.system.domLoad', {
 				bytes: $.byteLength( jqxhr.responseText ),
@@ -1054,12 +1068,7 @@ ve.init.mw.Target.prototype.load = function ( additionalModules ) {
 			ve.track( 'trace.domLoad.exit' );
 			return jqxhr;
 		}
-	)
-		.done( ve.init.mw.Target.onLoad.bind( this ) )
-		.fail( ve.init.mw.Target.onLoadError.bind( this ) )
-		.promise( { abort: xhr.abort } );
-
-	return true;
+	).promise( { abort: xhr.abort } );
 };
 
 /**
