@@ -545,6 +545,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.DataTransferHandler.js',
 			'lib/ve/src/ui/ve.ui.FileTransferHandler.js',
 			'lib/ve/src/ui/ve.ui.DataTransferHandlerFactory.js',
+			'lib/ve/src/ui/ve.ui.DataTransferItem.js',
 			'lib/ve/src/ui/ve.ui.WindowManager.js',
 
 			'lib/ve/src/ui/actions/ve.ui.AnnotationAction.js',
@@ -569,6 +570,8 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/dialogs/ve.ui.FindAndReplaceDialog.js',
 			'lib/ve/src/ui/dialogs/ve.ui.ProgressDialog.js',
 
+			'lib/ve/src/ui/datatransferhandlers/ve.ui.PlainTextStringTransferHandler.js',
+			'lib/ve/src/ui/datatransferhandlers/ve.ui.HTMLStringTransferHandler.js',
 			'lib/ve/src/ui/datatransferhandlers/ve.ui.DSVFileTransferHandler.js',
 			'lib/ve/src/ui/datatransferhandlers/ve.ui.PlainTextFileTransferHandler.js',
 			'lib/ve/src/ui/datatransferhandlers/ve.ui.HTMLFileTransferHandler.js',
