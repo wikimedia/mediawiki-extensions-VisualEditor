@@ -209,7 +209,6 @@ $wgResourceModules += array(
 			'ext.visualEditor.mediawiki',
 			'ext.visualEditor.core.desktop',
 			'jquery.placeholder',
-			'mediawiki.feedback',
 			'mediawiki.jqueryMsg',
 			'mediawiki.util',
 		),

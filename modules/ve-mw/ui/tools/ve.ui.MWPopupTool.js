@@ -97,7 +97,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 
 	// Properties
 	this.$items = this.$( '<div>' );
-	this.feedback = null;
+	this.feedbackPromise = null;
 	this.helpButton = new OO.ui.ButtonWidget( {
 		$: this.$,
 		framed: false,
@@ -187,15 +187,19 @@ ve.ui.MWHelpPopupTool.static.autoAddToGroup = false;
  */
 ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 	this.popup.toggle( false );
-	if ( !this.feedback ) {
-		// This can't be constructed until the editor has loaded as it uses special messages
-		this.feedback = new mw.Feedback( {
-			title: new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
-			bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/create/?projects=VisualEditor' ),
-			bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' )
+	if ( !this.feedbackPromise ) {
+		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( function () {
+			// This can't be constructed until the editor has loaded as it uses special messages
+			return new mw.Feedback( {
+				title: new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
+				bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/create/?projects=VisualEditor' ),
+				bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' )
+			} );
 		} );
 	}
-	this.feedback.launch();
+	this.feedbackPromise.done( function ( feedback ) {
+		feedback.launch();
+	} );
 };
 
 /**
