@@ -15,6 +15,8 @@
  */
 
 .ve-activated #toc,
+.ve-activated #siteNotice,
+.ve-activated .mw-indicators,
 /* Most of bodyContent can be hidden as VE has an equivalent of most children
    in ve-init-target (sibling of #bodyContent). However, we can't hide it
    completely as subs should remain visible (for persistence with read mode),
