@@ -32,12 +32,27 @@ ve.dm.mwExample.MWTransclusion = {
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Test&quot;,&quot;href&quot;:&quot;./Template:Test&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;Hello, world!&quot;}},&quot;i&quot;:0}}]}"' +
 		'>' +
 		'</span>',
+	blockOpenClipboard:
+		'<div about="#mwt1" typeof="mw:Transclusion"' +
+			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Test&quot;,&quot;href&quot;:&quot;./Template:Test&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;Hello, world!&quot;}},&quot;i&quot;:0}}]}"' +
+			' data-ve-no-generated-contents="true"' +
+		'>' +
+			'&nbsp;' +
+		'</div>',
 	blockOpenFromDataModified:
 		'<span typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Test&quot;,&quot;href&quot;:&quot;./Template:Test&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;Hello, globe!&quot;}},&quot;i&quot;:0}}]}"' +
 		'>' +
 		'</span>',
+	blockOpenModifiedClipboard:
+		'<span typeof="mw:Transclusion"' +
+			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Test&quot;,&quot;href&quot;:&quot;./Template:Test&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;Hello, globe!&quot;}},&quot;i&quot;:0}}]}"' +
+			' data-ve-no-generated-contents="true"' +
+		'>' +
+			'&nbsp;' +
+		'</span>',
 	blockContent: '<p about="#mwt1" data-parsoid="{}">Hello, world!</p>',
+	blockContentClipboard: '<p about="#mwt1" data-parsoid="{}" data-ve-ignore="true">Hello, world!</p>',
 	inlineOpen:
 		'<span about="#mwt1" typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;1,234&quot;}},&quot;i&quot;:0}}]}"' +
@@ -50,10 +65,21 @@ ve.dm.mwExample.MWTransclusion = {
 		'<span typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;1,234&quot;}},&quot;i&quot;:0}}]}"' +
 		'>',
+	inlineOpenClipboard:
+		'<span about="#mwt1" typeof="mw:Transclusion"' +
+			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;1,234&quot;}},&quot;i&quot;:0}}]}"' +
+			' data-ve-no-generated-contents="true"' +
+		'>',
 	inlineOpenFromDataModified:
 		'<span typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;5,678&quot;}},&quot;i&quot;:0}}]}"' +
 		'>',
+	inlineOpenModifiedClipboard:
+		'<span typeof="mw:Transclusion"' +
+			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;5,678&quot;}},&quot;i&quot;:0}}]}"' +
+			' data-ve-no-generated-contents="true"' +
+		'>' +
+			'&nbsp;',
 	inlineContent: '$1,234.00',
 	inlineClose: '</span>',
 	mixed:
@@ -65,6 +91,12 @@ ve.dm.mwExample.MWTransclusion = {
 		'<span typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;5,678&quot;}},&quot;i&quot;:0}}]}"' +
 		'></span>',
+	mixedClipboard:
+		'<span typeof="mw:Transclusion"' +
+			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Inline&quot;,&quot;href&quot;:&quot;./Template:Inline&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;5,678&quot;}},&quot;i&quot;:0}}]}"' +
+			' data-ve-no-generated-contents="true"' +
+		'>&nbsp;</span>' +
+		'<span about="#mwt1" data-ve-ignore="true">Foo</span>',
 	pairOne:
 		'<p about="#mwt1" typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}" data-parsoid="1"' +
@@ -77,6 +109,12 @@ ve.dm.mwExample.MWTransclusion = {
 		'<span typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}"' +
 		'></span>',
+	pairClipboard:
+		'<p about="#mwt1" typeof="mw:Transclusion"' +
+			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}"' +
+			' data-parsoid="1"' +
+			' data-ve-no-generated-contents="true"' +
+		'>foo</p>',
 	meta:
 		'<link rel="mw:PageProp/Category" href="./Category:Page" about="#mwt1" typeof="mw:Transclusion"' +
 			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}">' +
@@ -861,7 +899,8 @@ ve.dm.mwExample.domToDataCases = {
 			ve.dm.mwExample.MWTransclusion.blockStoreItems
 		],
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
-		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromData
+		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromData,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenClipboard + ve.dm.mwExample.MWTransclusion.blockContentClipboard
 	},
 	'mw:Transclusion (block level - modified)': {
 		body: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
@@ -878,7 +917,8 @@ ve.dm.mwExample.domToDataCases = {
 			model.data.data[0].attributes.mw.parts[0].template.params['1'].wt = 'Hello, globe!';
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified,
-		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified
+		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenModifiedClipboard
 	},
 	'mw:Transclusion (inline)': {
 		body: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
@@ -894,7 +934,8 @@ ve.dm.mwExample.domToDataCases = {
 			ve.dm.mwExample.MWTransclusion.inlineStoreItems
 		],
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
-		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromData + ve.dm.mwExample.MWTransclusion.inlineClose
+		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromData + ve.dm.mwExample.MWTransclusion.inlineClose,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenClipboard + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose
 	},
 	'mw:Transclusion (inline - modified)': {
 		body: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
@@ -913,11 +954,13 @@ ve.dm.mwExample.domToDataCases = {
 			model.data.data[1].attributes.mw.parts[0].template.params['1'].wt = '5,678';
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified + ve.dm.mwExample.MWTransclusion.inlineClose,
-		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose
+		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenModifiedClipboard + ve.dm.mwExample.MWTransclusion.inlineClose
 	},
 	'two mw:Transclusion nodes with identical params but different htmlAttributes': {
 		body: ve.dm.mwExample.MWTransclusion.pairOne + ve.dm.mwExample.MWTransclusion.pairTwo,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.pairFromData + ve.dm.mwExample.MWTransclusion.pairFromData,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.pairClipboard + ve.dm.mwExample.MWTransclusion.pairClipboard,
 		data: [
 			{
 				type: 'mwTransclusionBlock',
@@ -1266,6 +1309,11 @@ ve.dm.mwExample.domToDataCases = {
 			'data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:' +
 			'{&quot;html&quot;:&quot;Foo<!-- bar -->&quot;},&quot;attrs&quot;:{}}" ' +
 			'typeof="mw:Extension/ref"></span></p>',
+		clipboardBody: '<p><span typeof="mw:Extension/ref" ' +
+			'data-mw="{&quot;attrs&quot;:{},&quot;body&quot;:' +
+			'{&quot;html&quot;:&quot;Foo<span rel=\\&quot;ve:Comment\\&quot; data-ve-comment=\\&quot; bar \\&quot;></span>&quot;},&quot;name&quot;:&quot;ref&quot;}" ' +
+			'>' +
+			'<sup>[1]</sup></span></p>',
 		head: '<base href="http://example.com" />',
 		data: [
 			{ type: 'paragraph' },
@@ -1522,12 +1570,19 @@ ve.dm.mwExample.domToDataCases = {
 			'<meta property="mw:bar" content="baz" /><!--barbaz-->' +
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
+		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" No content conversion "></span><meta property="mw:ThisIsAnAlien" /><p>Foo' +
+			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
+			'<meta property="mw:foo" content="bar" />Ba<span rel="ve:Comment" data-ve-comment=" inline "></span>z</p>' +
+			'<meta property="mw:bar" content="baz" /><span rel="ve:Comment" data-ve-comment="barbaz"></span>' +
+			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
+			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		head: '<base href="http://example.com" />',
 		data: ve.dm.mwExample.withMeta
 	},
 	'RDFa types spread across two attributes, about grouping is forced': {
 		body: ve.dm.mwExample.MWTransclusion.mixed,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.mixedFromData,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.mixedClipboard,
 		data: [
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			ve.dm.mwExample.MWTransclusion.mixedDataOpen,

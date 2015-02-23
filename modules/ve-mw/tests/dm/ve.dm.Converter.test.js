@@ -41,7 +41,7 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 	var msg, caseItem,
 		cases = ve.dm.mwExample.domToDataCases;
 
-	QUnit.expect( 2 * ve.getObjectKeys( cases ).length );
+	QUnit.expect( 3 * ve.getObjectKeys( cases ).length );
 
 	ve.test.utils.modelRegistrySetup();
 	for ( msg in cases ) {
