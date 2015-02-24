@@ -15,7 +15,6 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
- * @cfg {jQuery} [$popupOverlay] Overlay to render popups in
  */
 ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 	// Configuration initialization
@@ -39,7 +38,7 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 		icon: 'settings'
 	} );
 	this.categoryWidget = new ve.ui.MWCategoryWidget( {
-		$: this.$, $overlay: config.$overlay, $popupOverlay: config.$popupOverlay
+		$: this.$, $overlay: config.$overlay
 	} );
 	this.defaultSortInput = new OO.ui.TextInputWidget( {
 		$: this.$, placeholder: this.fallbackDefaultSortKey

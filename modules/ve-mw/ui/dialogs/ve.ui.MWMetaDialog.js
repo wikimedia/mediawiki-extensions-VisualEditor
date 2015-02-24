@@ -80,8 +80,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		'categories',
 		{
 			$: this.$,
-			$overlay: this.$overlay,
-			$popupOverlay: this.$innerOverlay
+			$overlay: this.$overlay
 		}
 	);
 	this.languagesPage = new ve.ui.MWLanguagesPage(
