@@ -208,7 +208,6 @@ $wgResourceModules += array(
 			'ext.visualEditor.base',
 			'ext.visualEditor.mediawiki',
 			'ext.visualEditor.core.desktop',
-			'jquery.placeholder',
 			'mediawiki.jqueryMsg',
 			'mediawiki.util',
 		),
@@ -276,7 +275,6 @@ $wgResourceModules += array(
 			'oojs',
 			'oojs-ui',
 			'unicodejs',
-			'rangefix',
 			'ext.visualEditor.ve',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
@@ -651,6 +649,7 @@ $wgResourceModules += array(
 		),
 		'dependencies' => array(
 			'unicodejs',
+			'rangefix',
 			'papaparse',
 			'jquery.uls.data',
 			'ext.visualEditor.base',

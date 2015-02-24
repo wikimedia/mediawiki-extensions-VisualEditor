@@ -295,7 +295,6 @@
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
-				"jquery.placeholder",
 				"mediawiki.jqueryMsg",
 				"mediawiki.util"
 			],
@@ -362,7 +361,6 @@
 				"oojs",
 				"oojs-ui",
 				"unicodejs",
-				"rangefix",
 				"ext.visualEditor.ve"
 			],
 			"targets": [
@@ -709,6 +707,7 @@
 			],
 			"dependencies": [
 				"unicodejs",
+				"rangefix",
 				"papaparse",
 				"jquery.uls.data",
 				"ext.visualEditor.base"
