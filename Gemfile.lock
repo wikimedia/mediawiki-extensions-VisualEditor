@@ -97,7 +97,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  commons_upload (~> 0.0.1)
+  commons_upload (~> 0.0.2)
   mediawiki_api
   mediawiki_selenium (~> 0.4.1)
   rubocop
