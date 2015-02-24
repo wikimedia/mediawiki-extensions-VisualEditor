@@ -9,46 +9,49 @@
  * MediaWiki media resource provider.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @extends ve.dm.APIResultsProvider
  *
  * @constructor
+ * @param {string} apiurl The API url
  * @param {Object} [config] Configuration options
+ * @cfg {string} [scriptDirUrl] The url of the API script
  */
-ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( config ) {
+ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( apiurl, config ) {
 	config = config || {};
 
-	// Source Configuration
-	this.apiurl = this.setAPIurl( config.apiurl );
-	this.name = config.name;
-	this.displayName = config.displayName;
-	this.local = config.local;
-	this.scriptDirUrl  = config.scriptDirUrl;
-
-	// ajaxOptions configuration
-	this.dataType = config.dataType || 'jsonp';
-	this.cached = config.cached || true;
+	// Parent constructor
+	ve.dm.MWMediaResourceProvider.super.call( this, apiurl, config );
 
 	// Fetching configuration
-	this.fetchLimit = config.limit || 30;
-	this.iiprop = config.iiprop || [ 'dimensions', 'url', 'mediatype', 'extmetadata', 'timestamp', 'user' ];
-	this.fetchProp = config.fetchProp || 'imageinfo';
-	this.lang = config.lang || 'en';
+	this.scriptDirUrl = config.scriptDirUrl;
 
+	if ( config.local ) {
+		this.setAjaxSettings( {
+			url: mw.util.wikiScript( 'api' ),
+			// If the url is local use json
+			dataType: 'json'
+		} );
+	} else {
+		this.setAjaxSettings( {
+			// If 'apiurl' is set, use that. Otherwise, build the url
+			// from scriptDirUrl and /api.php suffix
+			url: this.getAPIurl() || ( this.scriptDirUrl + '/api.php' ),
+			// If the url is not the same origin use jsonp
+			dataType: 'jsonp',
+			// JSON-P requests are not cached by default and get a &_=random trail.
+			// While setting cache=true will still bypass cache in most case due to the
+			// callback parameter, at least drop the &_=random trail which triggers
+			// an API warning (invalid parameter).
+			cache: true
+		} );
+	}
 	this.siteInfoPromise = null;
 	this.thumbSizes = [];
 	this.imageSizes = [];
-
-	this.depleted = false;
-	this.offset = config.offset || 0;
-	this.setQuery( config.query || '' );
-
-	// Mixin constructors
-	OO.EventEmitter.call( this );
 };
 
-/* Setup */
-OO.initClass( ve.dm.MWMediaResourceProvider );
-OO.mixinClass( ve.dm.MWMediaResourceProvider, OO.EventEmitter );
+/* Inheritance */
+OO.inheritClass( ve.dm.MWMediaResourceProvider, ve.dm.APIResultsProvider );
 
 /* Methods */
 
@@ -73,17 +76,22 @@ ve.dm.MWMediaResourceProvider.prototype.loadSiteInfo = function () {
 				if ( data.error ) {
 					return $.Deferred().reject();
 				}
-				provider.setImageSizes( ve.getProp( data, 'query', 'general', 'imagelimits' ) || [] );
-				provider.setThumbSizes( ve.getProp( data, 'query', 'general', 'thumblimits' ) || [] );
+				provider.setImageSizes( data.query.general.imagelimits || [] );
+				provider.setThumbSizes( data.query.general.thumblimits || [] );
+				provider.setUserParams( {
+					// Standard width per resource
+					iiurlwidth: provider.getStandardWidth()
+				} );
 			} );
 	}
 	return this.siteInfoPromise;
 };
 
 /**
- * Get results from the source
+ * Override parent method and get results from the source
  *
- * @return {jQuery.Promise} Promise that is resolved into an array
+ * @param {number} [howMany] The number of items to pull from the API
+ * @returns {jQuery.Promise} Promise that is resolved into an array
  * of available results, or is rejected if no results are available.
  */
 ve.dm.MWMediaResourceProvider.prototype.getResults = function ( howMany ) {
@@ -101,8 +109,9 @@ ve.dm.MWMediaResourceProvider.prototype.getResults = function ( howMany ) {
 		} )
 		.then(
 			function ( results ) {
-				if ( results.length === 0 ) {
+				if ( !results || results.length === 0 ) {
 					provider.toggleDepleted( true );
+					return [];
 				}
 				return results;
 			},
@@ -130,63 +139,47 @@ ve.dm.MWMediaResourceProvider.prototype.getResults = function ( howMany ) {
 ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 	var xhr,
 		ajaxOptions = {},
-		query = this.getQuery(),
 		provider = this,
-		apiCallConfig = {
-			action: 'query',
-			generator: 'search',
-			gsrsearch: query,
-			gsrnamespace: 6,
-			continue: '',
-			gsroffset: this.getOffset(),
-			prop: this.getFetchProp(),
-			// Language of the extmetadata details
-			iiextmetadatalanguage: this.getLang(),
-			iiprop: this.getIiProp().join( '|' ),
-			iiurlheight: this.getMaxHeight(),
-			// Standard width per resource
-			iiurlwidth: this.getStandardWidth()
-		};
+		apiCallConfig = $.extend(
+			{},
+			this.getUserParams(),
+			{
+				gsroffset: this.getOffset(),
+				iiextmetadatalanguage: provider.getLang()
+			} );
 
-	howMany = howMany || 20;
-	// Initial number of images
-	apiCallConfig.gsrlimit = howMany;
+	// Number of images
+	apiCallConfig.gsrlimit = howMany || this.getDefaultFetchLimit();
 
-	if ( this.isValid() ) {
-		if ( this.isLocal() ) {
-			ajaxOptions = {
-				url: mw.util.wikiScript( 'api' ),
-				// If the url is local use json
-				dataType: 'json'
-			};
-		} else {
-			ajaxOptions = {
-				// If 'apiurl' is set, use that. Otherwise, build the url
-				// from scriptDirUrl and /api.php suffix
-				url: this.apiurl || ( this.scriptDirUrl + '/api.php' ),
-				// If the url is not the same origin use jsonp
-				dataType: 'jsonp',
-				// JSON-P requests are not cached by default and get a &_=random trail.
-				// While setting cache=true will still bypass cache in most case due to the
-				// callback parameter, at least drop the &_=random trail which triggers
-				// an API warning (invalid parameter).
-				cache: true
-			};
-		}
+	if ( !this.isValid() ) {
+		return $.Deferred().reject().promise( { abort: $.noop } );
+	}
 
-		xhr = ve.init.target.constructor.static.apiRequest( apiCallConfig, ajaxOptions );
-		return xhr
-			.then( function ( data ) {
-				var page, newObj,
-					results = [],
-					raw = ve.getProp( data, 'query', 'pages' );
-				if ( data[ 'continue' ] ) {
-					// Update the offset for next time
-					provider.setOffset( data[ 'continue' ].gsroffset );
-				} else {
-					// This is the last available set of result. Mark as depleted!
-					provider.toggleDepleted( true );
-				}
+	ajaxOptions = this.getAjaxSettings();
+
+	xhr = ve.init.target.constructor.static.apiRequest( $.extend( this.getStaticParams(), apiCallConfig ), ajaxOptions );
+	return xhr
+		.then( function ( data ) {
+			var page, newObj, raw,
+				results = [];
+
+			if ( data.error ) {
+				provider.toggleDepleted( true );
+				return [];
+			}
+
+			if ( data[ 'continue' ] ) {
+				// Update the offset for next time
+				provider.setOffset( data[ 'continue' ].gsroffset );
+			} else {
+				// This is the last available set of results. Mark as depleted!
+				provider.toggleDepleted( true );
+			}
+
+			// If the source returned no results, it will not have a
+			// query property
+			if ( data.query ) {
+				raw = data.query.pages;
 				if ( raw ) {
 					// Strip away the page ids
 					for ( page in raw ) {
@@ -203,51 +196,10 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 						results.push( newObj );
 					}
 				}
-				return results;
-			} )
-			.promise( { abort: xhr.abort } );
-	}
-};
-
-/**
- * Get search query
- *
- * @return {string} search query
- */
-ve.dm.MWMediaResourceProvider.prototype.getQuery = function () {
-	return this.query;
-};
-
-/**
- * Set search query
- *
- * @param {string} value
- */
-ve.dm.MWMediaResourceProvider.prototype.setQuery = function ( value ) {
-	if ( this.query !== value ) {
-		this.query = value;
-		// Reset offset
-		this.setOffset( 0 );
-		// Reset depleted status
-		this.toggleDepleted( false );
-	}
-};
-/**
- * Set api url
- *
- * @param {string} API url
- */
-ve.dm.MWMediaResourceProvider.prototype.setAPIurl = function ( url ) {
-	this.apiurl = url;
-};
-
-/**
- * Set api url
- *
- * @return {string} API url
- */
-ve.dm.MWMediaResourceProvider.prototype.getAPIurl = function () {
-	return this.apiurl;
+			}
+			return results;
+		} )
+		.promise( { abort: xhr.abort } );
 };
 
 /**
@@ -269,130 +221,15 @@ ve.dm.MWMediaResourceProvider.prototype.getName = function () {
 };
 
 /**
- * Get displayName
- *
- * @return {string} displayName
- */
-ve.dm.MWMediaResourceProvider.prototype.getDisplayName = function () {
-	return this.displayName;
-};
-
-/**
- * Set displayName
- *
- * @param {string} displayName
- */
-ve.dm.MWMediaResourceProvider.prototype.setDisplayName = function ( displayName ) {
-	this.displayName = displayName;
-};
-
-/**
- * Get isLocal value
- *
- * @return {boolean} isLocal value
- */
-ve.dm.MWMediaResourceProvider.prototype.isLocal = function () {
-	return this.local;
-};
-
-/**
- * Get ScriptDirUrl
- *
- * @return {string} ScriptDirUrl
- */
-ve.dm.MWMediaResourceProvider.prototype.getScriptDirUrl = function () {
-	return this.scriptDirUrl;
-};
-
-/**
- * Set scriptDirUrl
- *
- * @param {string} scriptDirUrl
- */
-ve.dm.MWMediaResourceProvider.prototype.setScriptDirUrl = function ( scriptDirUrl ) {
-	this.scriptDirUrl = scriptDirUrl;
-};
-
-/**
- * Get dataType
- *
- * @return {string} dataType
- */
-ve.dm.MWMediaResourceProvider.prototype.getDataType = function () {
-	return this.dataType;
-};
-
-/**
- * Set dataType
- *
- * @param {string} dataType
- */
-ve.dm.MWMediaResourceProvider.prototype.setDataType = function ( dataType ) {
-	this.dataType = dataType;
-};
-
-/**
- * Get cached
- *
- * @return {boolean} cached
- */
-ve.dm.MWMediaResourceProvider.prototype.isCached = function () {
-	return this.cached;
-};
-
-/**
- * Get fetch limit or 'page' size. This is the number
- * of results per request.
- *
- * @return {number} limit
- */
-ve.dm.MWMediaResourceProvider.prototype.getFetchLimit = function () {
-	return this.limit;
-};
-
-/**
- * Set limit
- *
- * @param {number} limit
- */
-ve.dm.MWMediaResourceProvider.prototype.setFetchLimit = function ( limit ) {
-	this.limit = limit;
-};
-
-/**
- * Get properties
- *
- * @return {string[]} properties
- */
-ve.dm.MWMediaResourceProvider.prototype.getIiProp = function () {
-	return this.iiprop;
-};
-
-/**
- * Get max height
- *
- * @return {number|undefined} Maximum height
- */
-ve.dm.MWMediaResourceProvider.prototype.getMaxHeight = function () {
-	return this.maxHeight;
-};
-
-/**
- * Set maximum height
- *
- * @param {number} Maximum height
- */
-ve.dm.MWMediaResourceProvider.prototype.setMaxHeight = function ( maxHeight ) {
-	this.maxHeight = maxHeight;
-};
-
-/**
  * Get standard width, based on the provider source's thumb sizes.
  *
  * @return {number|undefined} fetchWidth
  */
 ve.dm.MWMediaResourceProvider.prototype.getStandardWidth = function () {
-	return this.thumbSizes && this.thumbSizes[ this.thumbSizes.length - 1 ];
+	return ( this.thumbSizes && this.thumbSizes[ this.thumbSizes.length - 1 ] ) ||
+		( this.imageSizes && this.imageSizes[ 0 ] ) ||
+		// Fall back on a number
+		300;
 };
 
 /**
@@ -411,42 +248,6 @@ ve.dm.MWMediaResourceProvider.prototype.getFetchProp = function () {
  */
 ve.dm.MWMediaResourceProvider.prototype.setFetchProp = function ( prop ) {
 	this.fetchProp = prop;
-};
-
-/**
- * Get lang
- *
- * @return {string} lang
- */
-ve.dm.MWMediaResourceProvider.prototype.getLang = function () {
-	return this.lang;
-};
-
-/**
- * Set lang
- *
- * @param {string} lang
- */
-ve.dm.MWMediaResourceProvider.prototype.setLang = function ( lang ) {
-	this.lang = lang;
-};
-
-/**
- * Get Offset
- *
- * @return {number} Offset
- */
-ve.dm.MWMediaResourceProvider.prototype.getOffset = function () {
-	return this.offset;
-};
-
-/**
- * Set Offset
- *
- * @param {number} Offset
- */
-ve.dm.MWMediaResourceProvider.prototype.setOffset = function ( offset ) {
-	this.offset = offset;
 };
 
 /**
@@ -486,32 +287,15 @@ ve.dm.MWMediaResourceProvider.prototype.getImageSizes = function () {
 };
 
 /**
- * Check whether the provider is depleted
- *
- * @return {boolean} depleted
- */
-ve.dm.MWMediaResourceProvider.prototype.isDepleted = function () {
-	return this.depleted;
-};
-
-/**
- * Toggle depleted state
- *
- * @param {boolean} depleted
- */
-ve.dm.MWMediaResourceProvider.prototype.toggleDepleted = function ( isDepleted ) {
-	this.depleted = isDepleted !== undefined ? isDepleted : !this.depleted;
-};
-
-/**
  * Check if this source is valid and ready for search.
  * @return {boolean} Source is valid
  */
 ve.dm.MWMediaResourceProvider.prototype.isValid = function () {
-	return this.getQuery() &&
+	var params = this.getUserParams();
+	return params.gsrsearch &&
 		(
 			// If we don't have either 'apiurl' or 'scriptDirUrl'
 			// the source is invalid, and we will skip it
-			this.apiurl || this.scriptDirUrl !== undefined
+			this.apiurl !== undefined || this.scriptDirUrl !== undefined
 		);
 };

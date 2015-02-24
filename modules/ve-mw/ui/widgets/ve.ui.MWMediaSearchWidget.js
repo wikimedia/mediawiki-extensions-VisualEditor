@@ -29,7 +29,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.searchValue = '';
 	this.resourceQueue = new ve.dm.MWMediaResourceQueue( {
 		limit: 20,
-		threshhold: 10
+		threshold: 10
 	} );
 
 	this.queryTimeout = null;
@@ -89,7 +89,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 	this.query.pushPending();
 	search.noItemsMessage.toggle( false );
 
-	this.resourceQueue.setQuery( value );
+	this.resourceQueue.setParams( { gsrsearch: value } );
 	this.resourceQueue.get( 20 )
 		.then( function ( items ) {
 			if ( items.length > 0 ) {
@@ -114,9 +114,10 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 	var i, len, title,
 		resultWidgets = [],
-		value = this.resourceQueue.getQuery();
+		inputSearchQuery = this.query.getValue(),
+		queueSearchQuery = this.resourceQueue.getSearchQuery();
 
-	if ( value === '' || value !== this.query.getValue() ) {
+	if ( inputSearchQuery === '' || queueSearchQuery !== inputSearchQuery ) {
 		return;
 	}
 
@@ -163,7 +164,7 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 	this.layoutQueue = [];
 
 	// Change resource queue query
-	this.resourceQueue.setQuery( this.searchValue );
+	this.resourceQueue.setParams( { gsrsearch: this.searchValue } );
 
 	// Queue
 	clearTimeout( this.queryTimeout );
