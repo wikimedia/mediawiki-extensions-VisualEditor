@@ -115,7 +115,7 @@ class VisualEditorPage
   checkbox(:option_to_refer_as_disambiguation_page, index: 3)
   span(:option_to_set_index_by_search, class: 'oo-ui-labelElement-label', text: 'Yes', index: 0)
   span(:option_to_show_new_section_tab, class: 'oo-ui-labelElement-label', text: 'Yes', index: 1)
-  div(:page_option_menu, class: 'oo-ui-toolGroup-tools oo-ui-clippableElement-clippable', index: 6)
+  div(:page_option_menu, css: '.oo-ui-toolbar-actions .oo-ui-toolbar-tools .oo-ui-toolGroup-tools.oo-ui-clippableElement-clippable')
   span(:page_settings, class: 'oo-ui-iconElement-icon oo-ui-icon-settings')
   div(:page_settings_editlinks, class: 've-test-page-settings-noeditsection')
   div(:page_text, id: 'mw-content-text')
