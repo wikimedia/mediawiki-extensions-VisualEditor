@@ -13,6 +13,7 @@
 	"visualeditor-beta-label": "Beta",
 	"visualeditor-beta-warning": "VisualEditor werket noch uun 'Beta'. Det ment, diar lääpt noch ei ales trinj. Trak üüb „{{int:visualeditor-ca-editsource}}“, do komst dü tu det Wikitext-muude. Wat noch ei seekert wurden as, gongt ferleesen.",
 	"visualeditor-browserwarning": "Dü brükst en browser, diar ei faan VisualEditor gudkäänd as.",
+	"visualeditor-ca-createlocaldescriptionsource": "Lokaal beskriiwangstekst diartudu",
 	"visualeditor-ca-createsource": "Kweltekst skriiw",
 	"visualeditor-ca-editsource": "Kweltekst bewerke",
 	"visualeditor-ca-editsource-section": "kweltekst bewerke",
@@ -189,8 +190,8 @@
 	"visualeditor-timeout": "Uun uugenblak könst dü wel ei ales bewerke. Wel dü uun steed di kweltekst bewerke?",
 	"visualeditor-toolbar-savedialog": "Sidj seekre",
 	"visualeditor-usernamespacepagelink": "Project:Brükernöömrüm",
+	"visualeditor-version-label": "Werjuun",
 	"visualeditor-viewpage-savewarning": "Wel dü würelk turag tu't uunlukin-muude, saner tu seekrin?",
 	"visualeditor-wikitext-warning": "Dü brükst VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] werket heer ei. Trak üüb „{{int:visualeditor-ca-editsource}}“, am det sidj uun Wikitext-muude tu bewerkin. Wat noch ei seekert wurden as, gongt ferleesen.",
-	"visualeditor-wikitext-warning-link": "Help:Wikitext",
 	"visualeditor-wikitext-warning-title": "Wikitext as fünjen wurden"
 }
