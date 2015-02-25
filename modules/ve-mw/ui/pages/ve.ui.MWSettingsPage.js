@@ -264,7 +264,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)
-	this.enableRedirectInput.setValue( !!redirectTargetItem );
+	this.enableRedirectInput.setSelected( !!redirectTargetItem );
 	this.redirectTargetInput.setValue( redirectTarget );
 	this.redirectTargetInput.setDisabled( !redirectTargetItem );
 	this.enableStaticRedirectInput.setSelected( !!redirectStatic );
