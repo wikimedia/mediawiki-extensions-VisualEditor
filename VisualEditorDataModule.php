@@ -158,7 +158,10 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	}
 
 	public function getDependencies() {
-		return array( 'ext.visualEditor.base' );
+		return array(
+			'ext.visualEditor.base',
+			'ext.visualEditor.mediawiki',
+		);
 	}
 
 	public function getModifiedTime( ResourceLoaderContext $context ) {
