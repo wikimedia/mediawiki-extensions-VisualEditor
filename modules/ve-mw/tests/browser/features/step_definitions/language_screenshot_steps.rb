@@ -371,16 +371,20 @@ Then(/^I should see Basic Reference dialog box$/) do
   )
 end
 
-Then(/^I should see the right edit tab$/) do
+Then(/^I should see the Edit source tab at the top of the page$/) do
+  on(VisualEditorPage).edit_source_tab_element.when_present.should be_visible
+end
+
+Then(/^I should see the Edit tab at the top of the page$/) do
   on(VisualEditorPage) do |page|
-    page.right_navigation_element.when_present.should be_visible
     page.language_notification_element.when_not_present(10)
+    page.ve_edit_tab_element.when_present.should be_visible
   end
 
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.right_navigation_element, @current_page.left_navigation_element]
+    [@current_page.top_editing_tabs_element]
   )
 end
 
@@ -393,7 +397,7 @@ Then(/^I should see the VisualEditor tool-bar$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.right_navigation_element, @current_page.left_navigation_element, @current_page.toolbar_element]
+    [@current_page.top_editing_tabs_element, @current_page.left_navigation_element, @current_page.toolbar_element]
   )
 end
 

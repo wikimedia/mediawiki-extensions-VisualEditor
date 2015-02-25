@@ -119,7 +119,8 @@ Feature: Language Screenshot
   Scenario: VisualEditor_edit_tab
     Given I am logged in
     When I go to language screenshot page
-    Then I should see the right edit tab
+    Then I should see the Edit source tab at the top of the page
+      And I should see the Edit tab at the top of the page
 
   @language_screenshot
   Scenario: VisualEditor_toolbar
