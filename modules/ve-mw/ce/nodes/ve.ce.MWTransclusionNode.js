@@ -76,13 +76,13 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 /** */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
-	xhr = ve.init.target.constructor.static.apiRequest( {
+	xhr = new mw.Api().post( {
 		action: 'visualeditor',
 		paction: 'parsefragment',
 		page: mw.config.get( 'wgRelevantPageName' ),
 		wikitext: ( config && config.wikitext ) || this.model.getWikitext(),
 		pst: 1
-	}, { type: 'POST' } )
+	} )
 		.done( this.onParseSuccess.bind( this, deferred ) )
 		.fail( this.onParseError.bind( this, deferred ) );
 

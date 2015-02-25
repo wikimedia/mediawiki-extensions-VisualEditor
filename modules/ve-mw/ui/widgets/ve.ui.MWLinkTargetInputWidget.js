@@ -35,7 +35,7 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	this.lookupMenu.$element.addClass( 've-ui-mwLinkTargetInputWidget-menu' );
 
 	this.interwikiPrefixes = [];
-	this.interwikiPrefixesPromise = ve.init.target.constructor.static.apiRequest( {
+	this.interwikiPrefixesPromise = new mw.Api().get( {
 		action: 'query',
 		meta: 'siteinfo',
 		siprop: 'interwikimap'
@@ -128,7 +128,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 					}]
 				} } ).promise( promiseAbortObject );
 			} else {
-				req = ve.init.target.constructor.static.apiRequest( {
+				req = new mw.Api().get( {
 					action: 'query',
 					generator: 'prefixsearch',
 					gpssearch: widget.value,

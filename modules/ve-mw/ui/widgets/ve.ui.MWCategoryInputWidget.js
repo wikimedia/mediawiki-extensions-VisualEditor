@@ -48,7 +48,7 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupElement );
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
-	return ve.init.target.constructor.static.apiRequest( {
+	return new mw.Api().get( {
 		action: 'query',
 		generator: 'allcategories',
 		gacmin: 1,
