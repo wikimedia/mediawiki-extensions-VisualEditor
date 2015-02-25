@@ -785,7 +785,7 @@ ve.init.mw.Target.onSerializeError = function ( jqXHR, status, error ) {
  *
  */
 ve.init.mw.Target.prototype.generateCitationFeatures = function () {
-	var i, len, item, name, data, tool, tools, dialog,
+	var i, len, item, name, data, tool, tools, dialog, contextItem,
 		limit = this.constructor.static.citationToolsLimit;
 
 	if ( !ve.ui.MWCitationDialog ) {
@@ -846,6 +846,30 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 					{ args: [name, data], supportedSelections: ['linear'] }
 				)
 			);
+			// Generate transclusion context item
+			name = 'cite-transclusion-' + item.name;
+			contextItem = function GeneratedMWTransclusionContextItem( toolbar, config ) {
+				ve.ui.MWTransclusionContextItem.call( this, toolbar, config );
+			};
+			OO.inheritClass( contextItem, ve.ui.MWTransclusionContextItem );
+			contextItem.static.name = name;
+			contextItem.static.icon = item.icon;
+			contextItem.static.label = item.title;
+			contextItem.static.commandName = name;
+			contextItem.static.template = item.template;
+			ve.ui.contextItemFactory.register( contextItem );
+			// Generate citation context item
+			name = 'cite-' + item.name;
+			contextItem = function GeneratedMWCitationContextItem( toolbar, config ) {
+				ve.ui.MWCitationContextItem.call( this, toolbar, config );
+			};
+			OO.inheritClass( contextItem, ve.ui.MWCitationContextItem );
+			contextItem.static.name = name;
+			contextItem.static.icon = item.icon;
+			contextItem.static.label = item.title;
+			contextItem.static.commandName = name;
+			contextItem.static.template = item.template;
+			ve.ui.contextItemFactory.register( contextItem );
 			// Generate dialog
 			dialog = function GeneratedMWCitationDialog( config ) {
 				ve.ui.MWCitationDialog.call( this, config );

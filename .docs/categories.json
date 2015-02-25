@@ -126,6 +126,7 @@
 					"ve.ui.DataTransferItem",
 					"ve.ui.*Action",
 					"ve.ui.*Command",
+					"ve.ui.*ContextItem",
 					"ve.ui.*Factory",
 					"ve.ui.*Registry",
 					"ve.ui.*Sequence",
@@ -177,7 +178,8 @@
 					"OO.ui.Dialog",
 					"OO.ui.WindowManager",
 					"OO.ui.Error",
-					"OO.ui.Process"
+					"OO.ui.Process",
+					"OO.ui.HtmlSnippet"
 				]
 			},
 			{

@@ -28,8 +28,6 @@ OO.inheritClass( ve.ui.MWCitationDialogTool, ve.ui.MWReferenceDialogTool );
 
 ve.ui.MWCitationDialogTool.static.group = 'cite';
 
-ve.ui.MWCitationDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
-
 /**
  * Only display tool for single-template transclusions of these templates.
  *
@@ -39,7 +37,7 @@ ve.ui.MWCitationDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
  */
 ve.ui.MWCitationDialogTool.static.template = null;
 
-/* Methods */
+/* Static Methods */
 
 /**
  * @inheritdoc

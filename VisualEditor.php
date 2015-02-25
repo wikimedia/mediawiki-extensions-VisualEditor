@@ -526,6 +526,9 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.Overlay.js',
 			'lib/ve/src/ui/ve.ui.Surface.js',
 			'lib/ve/src/ui/ve.ui.Context.js',
+			'lib/ve/src/ui/ve.ui.ModeledFactory.js',
+			'lib/ve/src/ui/ve.ui.ContextItem.js',
+			'lib/ve/src/ui/ve.ui.ContextItemFactory.js',
 			'lib/ve/src/ui/ve.ui.TableContext.js',
 			'lib/ve/src/ui/ve.ui.Tool.js',
 			'lib/ve/src/ui/ve.ui.Toolbar.js',
@@ -553,6 +556,11 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/actions/ve.ui.ListAction.js',
 			'lib/ve/src/ui/actions/ve.ui.TableAction.js',
 			'lib/ve/src/ui/actions/ve.ui.WindowAction.js',
+
+			'lib/ve/src/ui/contextitems/ve.ui.CommentContextItem.js',
+			'lib/ve/src/ui/contextitems/ve.ui.LanguageContextItem.js',
+			'lib/ve/src/ui/contextitems/ve.ui.LinkContextItem.js',
+			'lib/ve/src/ui/contextitems/ve.ui.ToolContextItem.js',
 
 			'lib/ve/src/ui/commands/ve.ui.ClearAnnotationCommand.js',
 			'lib/ve/src/ui/commands/ve.ui.HistoryCommand.js',
@@ -587,7 +595,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/tools/ve.ui.AnnotationTool.js',
 			'lib/ve/src/ui/tools/ve.ui.ClearAnnotationTool.js',
 			'lib/ve/src/ui/tools/ve.ui.DialogTool.js',
-			'lib/ve/src/ui/tools/ve.ui.FindAndReplaceTool.js',
+			'lib/ve/src/ui/tools/ve.ui.ToolbarDialogTool.js',
 			'lib/ve/src/ui/tools/ve.ui.FormatTool.js',
 			'lib/ve/src/ui/tools/ve.ui.HistoryTool.js',
 			'lib/ve/src/ui/tools/ve.ui.IndentationTool.js',
@@ -636,6 +644,11 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/styles/inspectors/ve.ui.LinkInspector.css',
 			'lib/ve/src/ui/styles/inspectors/ve.ui.SpecialCharacterInspector.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.SurfaceWidget.css',
+			'lib/ve/src/ui/styles/ve.ui.ContextItem.css',
+			'lib/ve/src/ui/styles/contextitems/ve.ui.CommentContextItem.css',
+			'lib/ve/src/ui/styles/contextitems/ve.ui.LanguageContextItem.css',
+			'lib/ve/src/ui/styles/contextitems/ve.ui.LinkContextItem.css',
+			'lib/ve/src/ui/styles/contextitems/ve.ui.ToolContextItem.css',
 			'lib/ve/src/ui/styles/ve.ui.Overlay.css',
 			'lib/ve/src/ui/styles/ve.ui.Surface.css',
 			'lib/ve/src/ui/styles/ve.ui.Toolbar.css',
@@ -783,12 +796,11 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'lib/ve/src/ui/ve.ui.MobileSurface.js',
 			'lib/ve/src/ui/ve.ui.MobileContext.js',
-			'lib/ve/src/ui/windowmanagers/ve.ui.MobileWindowManager.js',
-			'lib/ve/src/ui/widgets/ve.ui.MobileContextOptionWidget.js',
+			'lib/ve/src/ui/windowmanagers/ve.ui.MobileWindowManager.js'
 		),
 		'styles' => array(
+			'lib/ve/src/ui/styles/ve.ui.MobileContext.css',
 			'lib/ve/src/ui/styles/ve.ui.MobileSurface.css',
-			'lib/ve/src/ui/styles/widgets/ve.ui.MobileContextOptionWidget.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.core',
@@ -1085,6 +1097,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWLinkInspectorTool.js',
+
+			'modules/ve-mw/ui/contextitems/ve.ui.MWInternalLinkContextItem.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css'
@@ -1267,6 +1281,10 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
+
+			'modules/ve-mw/ui/contextitems/ve.ui.MWReferenceContextItem.js',
+			'modules/ve-mw/ui/contextitems/ve.ui.MWReferencesListContextItem.js',
+			'modules/ve-mw/ui/contextitems/ve.ui.MWCitationContextItem.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
@@ -1287,6 +1305,8 @@ $wgResourceModules += array(
 			'visualeditor-dialog-reference-title',
 			'visualeditor-dialog-reference-useexisting-label',
 			'visualeditor-dialog-reference-useexisting-tool',
+			'visualeditor-dialog-referenceslist-contextitem-description-general',
+			'visualeditor-dialog-referenceslist-contextitem-description-named',
 			'visualeditor-dialog-referenceslist-title',
 			'visualeditor-dialogbutton-reference-tooltip',
 			'visualeditor-dialogbutton-referenceslist-tooltip',
@@ -1335,6 +1355,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js',
+
+			'modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterResultWidget.css',
@@ -1365,6 +1387,7 @@ $wgResourceModules += array(
 			'visualeditor-dialog-transclusion-add-param',
 			'visualeditor-dialog-transclusion-add-template',
 			'visualeditor-dialog-transclusion-content',
+			'visualeditor-dialog-transclusion-contextitem-description',
 			'visualeditor-dialog-transclusion-deprecated-parameter',
 			'visualeditor-dialog-transclusion-deprecated-parameter-description',
 			'visualeditor-dialog-transclusion-loading',
