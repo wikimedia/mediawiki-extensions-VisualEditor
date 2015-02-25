@@ -254,7 +254,7 @@ ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
 	if ( parts.length && !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
-		this.actions.setAbilities( { apply: true, insert: true } );
+		this.actions.setAbilities( { apply: this.altered, insert: true } );
 	} else {
 		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
 		this.actions.setAbilities( { apply: parts.length === 0 && this.altered, insert: false } );
