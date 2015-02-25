@@ -24,6 +24,7 @@ ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( apiurl, co
 
 	// Fetching configuration
 	this.scriptDirUrl = config.scriptDirUrl;
+	this.isLocal = config.local;
 
 	if ( config.local ) {
 		this.setAjaxSettings( {
@@ -291,8 +292,10 @@ ve.dm.MWMediaResourceProvider.prototype.isValid = function () {
 	var params = this.getUserParams();
 	return params.gsrsearch &&
 		(
+			this.isLocal ||
 			// If we don't have either 'apiurl' or 'scriptDirUrl'
 			// the source is invalid, and we will skip it
-			this.apiurl !== undefined || this.scriptDirUrl !== undefined
+			this.apiurl !== undefined ||
+			this.scriptDirUrl !== undefined
 		);
 };
