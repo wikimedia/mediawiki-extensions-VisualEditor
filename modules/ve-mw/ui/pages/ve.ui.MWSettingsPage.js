@@ -109,7 +109,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		{
 			metaName: 'mwNoEditSection',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' ),
-			help: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-help' )
+			help: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-help' ),
+			classes: [ 've-test-page-settings-noeditsection' ]
 		}
 	].concat( ve.ui.MWSettingsPage.static.extraMetaCheckboxes );
 
@@ -140,7 +141,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			new OO.ui.CheckboxInputWidget( { $: settingsPage.$ } ),
 			{
 				$: settingsPage.$,
-				classes: [ 've-test-page-settings-noeditsection' ],
+				classes: this.classes,
 				align: 'inline',
 				label: this.label,
 				help: this.help || ''
