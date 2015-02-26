@@ -37,6 +37,8 @@
 	 * @inheritdoc
 	 */
 	ve.init.mw.ImageInfoCache.prototype.processPage = function ( page ) {
-		return page.imageinfo[0];
+		if ( page.imageinfo ) {
+			return page.imageinfo[0];
+		}
 	};
 }() );
