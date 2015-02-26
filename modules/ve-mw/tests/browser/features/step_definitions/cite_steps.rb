@@ -1,7 +1,3 @@
-Given(/^I click the Cite button$/) do
-  on(VisualEditorPage).cite_button_element.when_present.click
-end
-
 Given(/^I can see the Cite User Interface$/) do
   on(VisualEditorPage).cite_select_element.when_present
 end

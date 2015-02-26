@@ -347,12 +347,13 @@ Then(/^I should see media in VisualEditor$/) do
   )
 end
 
-Then(/^I should see Cite dropdown menu$/) do
-  on(VisualEditorPage).cite_pull_down_element.when_present.should be_visible
+Then(/^I should see the Cite button$/) do
+  on(VisualEditorPage).cite_button_element.when_present.should be_visible
+  Screenshot.zoom_browser(@browser, 3)
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.cite_pull_down_element, @current_page.cite_indicator_down_element]
+    [@current_page.cite_button_element]
   )
 end
 

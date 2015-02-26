@@ -22,7 +22,7 @@ class VisualEditorPage
   div(:cite_basic_options_area, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout')
   span(:cite_basic_reference, css: '.oo-ui-icon-reference')
   a(:cite_book, css: '.oo-ui-tool-name-cite-book > a:nth-child(1)')
-  span(:cite_button, css: '.ve-test-toolbar-cite .oo-ui-labelElement-label')
+  div(:cite_button, class: 've-test-toolbar-cite')
   text_field(:cite_custom_field_name, css: '.oo-ui-searchWidget-query > div:nth-child(1) > input:nth-child(1)')
   text_field(:cite_group_name_textarea, css: 'div.oo-ui-indicatorElement:nth-child(1) > input:nth-child(1)')
   a(:cite_journal, css: '.oo-ui-tool-name-cite-journal > a:nth-child(1)')

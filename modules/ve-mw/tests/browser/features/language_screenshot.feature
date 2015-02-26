@@ -102,8 +102,7 @@ Feature: Language Screenshot
   @language_screenshot
   Scenario: VisualEditor_Cite_Pulldown
     Given I am editing the language screenshots page
-    When I click on Cite menu
-    Then I should see Cite dropdown menu
+    Then I should see the Cite button
 
   Scenario: VisualEditor_References_icon
     Given I go to "Reference VisualEditor Screenshot" page which has references
@@ -112,7 +111,7 @@ Feature: Language Screenshot
 
   Scenario: VisualEditor_References_edit
     Given I go to the "Reference VisualEditor Screenshot" page with source content "VisualEditor is a MediaWiki extension"
-      And I click on Cite menu
+      And I click the Cite button
     When I click on Basic Reference in Cite menu dropdown
     Then I should see Basic Reference dialog box
 
