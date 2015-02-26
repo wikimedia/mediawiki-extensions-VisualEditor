@@ -155,14 +155,10 @@ end
 
 Then(/^I should see pull-down menu containing Page Settings$/) do
   on(VisualEditorPage).page_settings_element.when_present.should be_visible
-  step 'I take screenshot of Visual Editor insert menu'
-end
-
-Then(/^I take screenshot of Visual Editor insert menu$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.tools_menu_element, @current_page.page_option_menu_element]
+    [@current_page.disabled_save_button_element, @current_page.page_option_menu_element]
   )
 end
 
