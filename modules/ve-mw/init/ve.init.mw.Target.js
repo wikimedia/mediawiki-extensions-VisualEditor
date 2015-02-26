@@ -978,7 +978,8 @@ ve.init.mw.Target.prototype.requestPageData = function () {
 		data = {
 			action: 'visualeditor',
 			paction: 'parse',
-			page: this.pageName
+			page: this.pageName,
+			uselang: mw.config.get( 'wgUserLanguage' )
 		};
 
 	// Only request the API to explicitly load the currently visible revision if we're restoring
