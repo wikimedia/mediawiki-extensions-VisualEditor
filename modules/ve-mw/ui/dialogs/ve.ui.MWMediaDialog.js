@@ -619,11 +619,9 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 		$info.outerWidth( Math.floor( windowWidth - $thumbContainer.outerWidth( true ) - 15 ) );
 	}
 
-	// Adjust height-limited fields
+	// Initialize fields
 	for ( field in fields ) {
-		if ( fields[field].getType() === 'description' ) {
-			fields[field].toggleReadMoreButton();
-		}
+		fields[field].initialize();
 	}
 	// Let the scrollbar appear naturally if it should
 	this.mediaImageInfoPanel.$element.css( 'overflow', '' );
