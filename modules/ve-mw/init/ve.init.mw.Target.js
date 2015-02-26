@@ -1052,13 +1052,16 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 
 	html = EasyDeflate.deflate( this.getHtml( doc ) );
 
-	xhr = new mw.Api().post( {
-		action: 'visualeditor',
-		paction: 'serializeforcache',
-		html: html,
-		page: this.pageName,
-		oldid: this.revid
-	} )
+	xhr = new mw.Api().post(
+		{
+			action: 'visualeditor',
+			paction: 'serializeforcache',
+			html: html,
+			page: this.pageName,
+			oldid: this.revid
+		},
+		{ contentType: 'multipart/form-data' }
+	)
 		.done( function ( response ) {
 			var trackData = { duration: ve.now() - start };
 			if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
@@ -1140,7 +1143,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 			// If using the cache key fails, we'll come back here with cachekey still set
 			delete data.cachekey;
 		}
-		return new mw.Api().post( data )
+		return new mw.Api().post( data, { contentType: 'multipart/form-data' } )
 			.then(
 				function ( response, jqxhr ) {
 					var eventData = {
