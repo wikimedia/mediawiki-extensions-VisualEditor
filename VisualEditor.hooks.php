@@ -46,7 +46,10 @@ class VisualEditorHooks {
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
-		$output->addModules( array( 'ext.visualEditor.viewPageTarget.init' ) );
+		$output->addModules( array(
+			'ext.visualEditor.viewPageTarget.init',
+			'ext.visualEditor.targetLoader'
+		) );
 		$output->addModuleStyles( array( 'ext.visualEditor.viewPageTarget.noscript' ) );
 		return true;
 	}

@@ -186,6 +186,14 @@ $wgResourceModules += array(
 		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.css',
 	),
 
+	'ext.visualEditor.targetLoader' => $wgVisualEditorResourceTemplate + array(
+		'scripts' => 'modules/ve-mw/init/ve.init.mw.TargetLoader.js',
+		'dependencies' => array(
+			'ext.visualEditor.track',
+		),
+		'targets' => array( 'desktop', 'mobile' ),
+	),
+
 	'ext.visualEditor.viewPageTarget' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.js',

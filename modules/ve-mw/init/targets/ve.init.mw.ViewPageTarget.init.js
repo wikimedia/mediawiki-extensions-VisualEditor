@@ -13,7 +13,8 @@
  * Platform preparation for the MediaWiki view page. This loads (when user needs it) the
  * actual MediaWiki integration and VisualEditor library.
  *
- * @class ve.init.mw.ViewPageTarget.init
+ * @class mw.libs.ve
+ * @alternateClassName ve.init.mw.ViewPageTarget.init
  * @singleton
  */
 ( function () {
@@ -36,22 +37,38 @@
 
 	/**
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
-	 * @returns {jQuery.Promise}
+	 * @private
+	 * @return {jQuery.Promise}
 	 */
 	function getTarget() {
 		showLoading();
 		if ( !targetPromise ) {
-			targetPromise = mw.loader.using( 'ext.visualEditor.viewPageTarget' )
+			// The TargetLoader module is loaded in the bottom queue, so it should have been
+			// requested already but it might not have finished loading yet
+			targetPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
 				.then( function () {
-					var target = new ve.init.mw.ViewPageTarget();
-					$( '#content' ).append( target.$element );
-
+					// Add modules specific to desktop (modules shared between desktop
+					// and mobile are already added by TargetLoader)
+					// Note: it's safe to use .forEach() (ES5) here, because this code will
+					// never be called if the browser doesn't support ES5
+					[
+						'ext.visualEditor.viewPageTarget',
+						'ext.visualEditor.mwformatting',
+						'ext.visualEditor.mwgallery',
+						'ext.visualEditor.mwimage',
+						'ext.visualEditor.mwmeta'
+					].forEach( mw.libs.ve.targetLoader.addPlugin );
+					// Add requested plugins
+					plugins.forEach( mw.libs.ve.targetLoader.addPlugin );
+					plugins = [];
+					return mw.libs.ve.targetLoader.loadModules();
+				} )
+				.then( function () {
 					// Transfer methods
 					ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
 
-					// Add plugins
-					target.addPlugins( plugins );
-
+					var target = new ve.init.mw.ViewPageTarget();
+					$( '#content' ).append( target.$element );
 					return target;
 				}, function ( e ) {
 					mw.log.warn( 'VisualEditor failed to load: ' + e );
@@ -61,12 +78,19 @@
 	}
 
 	/**
-	 * Load the target and activate it.
+	 * Load and activate the target.
 	 *
-	 * @returns {jQuery.Promise}
+	 * If you need to call methods on the target before activate is called, call getTarget()
+	 * yourself, chain your work onto that promise, and pass that chained promise in as targetPromise.
+	 * E.g. `activateTarget( getTarget().then( function( target ) { target.doAThing(); } ) );`
+	 *
+	 * @private
+	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.Target
+	 * @return {jQuery.Promise} Resolved when the target has finished activating
 	 */
 	function activateTarget( targetPromise ) {
-		return targetPromise
+		var promise = targetPromise || getTarget();
+		promise
 			.then( function ( target ) {
 				return target.activate();
 			} )
@@ -136,11 +160,9 @@
 		 *
 		 * If it's a function, it will be invoked once the VisualEditor core modules and any
 		 * plugin modules registered through this function have been loaded, but before the editor
-		 * is intialized. The function takes one parameter, which is the ve.init.mw.Target instance
-		 * that's initializing, and can optionally return a jQuery.Promise . VisualEditor will
+		 * is intialized. The function can optionally return a jQuery.Promise . VisualEditor will
 		 * only be initialized once all promises returned by plugin functions have been resolved.
 		 *
-		 *     @example
 		 *     // Register ResourceLoader module
 		 *     mw.libs.ve.addPlugin( 'ext.gadget.foobar' );
 		 *
@@ -378,7 +400,7 @@
 
 			e.preventDefault();
 
-			activateTarget( getTarget() );
+			activateTarget();
 		},
 
 		onEditSectionLinkClick: function ( e ) {
@@ -478,7 +500,7 @@
 				isSection = uri.query.vesection !== undefined;
 
 				ve.track( 'mwedit.init', { type: isSection ? 'section' : 'page', mechanism: 'url' } );
-				activateTarget( getTarget() );
+				activateTarget();
 			}
 		}
 

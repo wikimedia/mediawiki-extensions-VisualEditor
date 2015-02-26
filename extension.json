@@ -269,6 +269,16 @@
 		"ext.visualEditor.viewPageTarget.noscript": {
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.css"
 		},
+		"ext.visualEditor.targetLoader": {
+			"scripts": "modules/ve-mw/init/ve.init.mw.TargetLoader.js",
+			"dependencies": [
+				"ext.visualEditor.track"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.viewPageTarget": {
 			"scripts": [
 				"modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.js"

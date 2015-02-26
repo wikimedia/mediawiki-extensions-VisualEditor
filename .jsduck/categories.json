@@ -5,6 +5,7 @@
 			{
 				"name": "Initialization",
 				"classes": [
+					"mw.libs.ve*",
 					"ve.init.mw*",
 					"ve.version"
 				]

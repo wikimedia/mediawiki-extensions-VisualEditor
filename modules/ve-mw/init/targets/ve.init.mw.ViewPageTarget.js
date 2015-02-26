@@ -16,11 +16,8 @@
  * @constructor
  */
 ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
-	var prefName,
-		prefValue,
-		// A workaround, as default URI does not get updated after pushState (bug 72334)
-		currentUri = new mw.Uri( location.href ),
-		conf = mw.config.get( 'wgVisualEditorConfig' );
+	// A workaround, as default URI does not get updated after pushState (bug 72334)
+	var currentUri = new mw.Uri( location.href );
 
 	// Parent constructor
 	ve.init.mw.Target.call( this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid );
@@ -63,23 +60,6 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	);
 	this.originalDocumentTitle = document.title;
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
-
-	// Add modules specific to desktop (modules shared with mobile go in MWTarget)
-	this.modules.push(
-		'ext.visualEditor.mwformatting',
-		'ext.visualEditor.mwgallery',
-		'ext.visualEditor.mwimage',
-		'ext.visualEditor.mwmeta'
-	);
-
-	// Load preference modules
-	for ( prefName in conf.preferenceModules ) {
-		prefValue = mw.user.options.get( prefName );
-		// Check "0" (T89513)
-		if ( prefValue && prefValue !== '0' ) {
-			this.modules.push( conf.preferenceModules[prefName] );
-		}
-	}
 
 	// Events
 	this.connect( this, {
@@ -331,7 +311,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		// Disable all the tools
 		this.getToolbar().updateToolState();
 
-		this.load( [ 'site', 'user' ] );
+		this.load();
 	}
 	return this.activatingDeferred.promise();
 };
