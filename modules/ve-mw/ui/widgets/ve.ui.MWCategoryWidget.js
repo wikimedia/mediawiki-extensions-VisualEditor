@@ -168,6 +168,7 @@ ve.ui.MWCategoryWidget.prototype.onReorder = function ( item, newIndex ) {
  */
 ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
 	this.categories[name].metaItem.remove();
+	delete this.categories[name];
 };
 
 /**
@@ -180,6 +181,14 @@ ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
 ve.ui.MWCategoryWidget.prototype.onUpdateSortkey = function ( name, value ) {
 	this.categories[name].sortKey = value;
 	this.emit( 'updateSortkey', this.categories[name] );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWCategoryWidget.prototype.clearItems = function () {
+	OO.ui.GroupElement.prototype.clearItems.call( this );
+	this.categories = {};
 };
 
 /**
