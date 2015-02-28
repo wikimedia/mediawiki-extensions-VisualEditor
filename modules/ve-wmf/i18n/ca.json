@@ -10,7 +10,8 @@
 			"Vriullop",
 			"Davidpar",
 			"Kippelboy",
-			"Unapersona"
+			"Unapersona",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
@@ -22,6 +23,6 @@
 	"visualeditor-feedback-link": "Project:Editor visual/Comentaris",
 	"visualeditor-feedback-tool": "Comentaris",
 	"visualeditor-help-label": "Llegiu la guia d'usuari",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ca",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guia sobre la utilització de l'editor"
 }

@@ -4,7 +4,8 @@
 			"Bjankuloski06",
 			"Brest",
 			"Iwan Novirion",
-			"Amire80"
+			"Amire80",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ВизуеленУредник]]",
@@ -16,6 +17,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Мислења",
 	"visualeditor-feedback-tool": "Дајте мислење",
 	"visualeditor-help-label": "Прочитајте го корисничкиот водич",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/mk",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Водич за употреба на уредникот"
 }

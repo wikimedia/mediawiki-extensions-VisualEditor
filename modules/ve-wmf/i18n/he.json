@@ -12,7 +12,8 @@
 			"חיים",
 			"ערן",
 			"פוילישער",
-			"קיפודנחש"
+			"קיפודנחש",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|העורך החזותי]]",
@@ -24,6 +25,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-tool": "שליחת משוב",
 	"visualeditor-help-label": "לקרוא את המדריך למשתמש",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/he",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "מדריך למשתמש בעורך"
 }

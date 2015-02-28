@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80"
+			"Amire80",
+			"아라"
 		]
 	},
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ceb"
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide"
 }

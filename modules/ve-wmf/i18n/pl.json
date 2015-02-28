@@ -15,7 +15,8 @@
 			"Wpedzich",
 			"Jacenty359",
 			"Amire80",
-			"Krol111"
+			"Krol111",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -27,6 +28,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Opinie",
 	"visualeditor-feedback-tool": "Prześlij opinię",
 	"visualeditor-help-label": "Przeczytaj poradnik użytkownika",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/pl",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Poradnik korzystania z edytora"
 }

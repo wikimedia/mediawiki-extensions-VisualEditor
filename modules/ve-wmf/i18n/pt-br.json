@@ -11,7 +11,8 @@
 			"OTAVIO1981",
 			555,
 			"He7d3r",
-			"Amire80"
+			"Amire80",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual]]",
@@ -21,6 +22,6 @@
 	"visualeditor-feedback-link": "Project:Editor Visual/Comentários",
 	"visualeditor-feedback-tool": "Deixar um comentário",
 	"visualeditor-help-label": "Ler o guia do usuário",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/pt-br",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guia do usuário para saber como usar o editor"
 }

@@ -10,7 +10,8 @@
 			"زكريا",
 			"مشعل الحربي",
 			"Amire80",
-			"Abanima"
+			"Abanima",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
@@ -22,6 +23,6 @@
 	"visualeditor-feedback-link": "Project:المحرر المرئي/تعليقات",
 	"visualeditor-feedback-tool": "ضع تعليقا",
 	"visualeditor-help-label": "اقرأ دليل المستخدم",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ar",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "دليل المستخدم لكيفية استخدام المحرر"
 }

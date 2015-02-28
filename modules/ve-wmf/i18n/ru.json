@@ -15,7 +15,8 @@
 			"Putnik",
 			"Sunpriat",
 			"Yury Katkov",
-			"Умар"
+			"Умар",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальный редактор]]",
@@ -27,6 +28,6 @@
 	"visualeditor-feedback-link": "Project:Визуальный редактор/Отзывы",
 	"visualeditor-feedback-tool": "Оставить отзыв",
 	"visualeditor-help-label": "Прочтите руководство пользователя",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/ru",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Руководство по использованию редактора"
 }

@@ -5,7 +5,8 @@
 			"Tumsaa",
 			"Muhammad Shuaib",
 			"Jdforrester",
-			"Amire80"
+			"Amire80",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -14,6 +15,6 @@
 	"visualeditor-feedback-link": "Project:Viizyuwaal'Ediiterii/Yaada",
 	"visualeditor-feedback-tool": "Yaada kenni",
 	"visualeditor-help-label": "Qajeelfama fayyadamaa dubbisi",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/om",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Qajeelcha akkaataa fayyadama Viizyuwaal'ediiterii ibsu"
 }

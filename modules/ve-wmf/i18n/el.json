@@ -9,7 +9,8 @@
 			"Glavkos",
 			"Nikosguard",
 			"Tifa93",
-			"Amire80"
+			"Amire80",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -21,6 +22,6 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Ανατροφοδότηση",
 	"visualeditor-feedback-tool": "Αφήστε σχόλια",
 	"visualeditor-help-label": "Διαβάστε τον οδηγό χρήστη",
-	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/el",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Οδηγός για το πως θα χρησιμοποιήσετε τον επεξεργαστή"
 }
