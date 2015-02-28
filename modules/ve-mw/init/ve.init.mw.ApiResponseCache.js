@@ -121,7 +121,7 @@
 	 * Process each page in the response of an API request
 	 * @abstract
 	 * @param {Object} page The page object
-	 * @return {Object} The relevant info that we want to cache and return.
+	 * @return {Object|undefined} Any relevant info that we want to cache and return.
 	 */
 	ve.init.mw.ApiResponseCache.prototype.processPage = function () {
 		throw new Error( 'Stub, override in subclass' );
@@ -143,14 +143,17 @@
 		}
 
 		function processResult( data ) {
-			var pageid, page,
+			var pageid, page, processedPage,
 				pages = ( data.query && data.query.pages ) || data.pages,
 				processed = {};
 
 			if ( pages ) {
 				for ( pageid in pages ) {
 					page = pages[pageid];
-					processed[page.title] = batchQueue.processPage( page );
+					processedPage = batchQueue.processPage( page );
+					if ( processedPage !== undefined ) {
+						processed[page.title] = processedPage;
+					}
 				}
 				batchQueue.set( processed );
 			}
