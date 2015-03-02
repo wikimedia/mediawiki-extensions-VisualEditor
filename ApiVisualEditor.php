@@ -474,7 +474,7 @@ class ApiVisualEditor extends ApiBase {
 					'missing' => array(),
 					// For current revisions: true (treat all non-missing pages as existing)
 					// For old revisions: array of linked pages that exist
-					'extant' => $isOldRevision ? array() : true,
+					'extant' => $isOldRevision || !$cached ? array() : true,
 				);
 				if ( $cached ) {
 					foreach ( $cached->getLinks() as $ns => $dbks ) {
