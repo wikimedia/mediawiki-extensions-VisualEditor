@@ -156,7 +156,8 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		);
 		itemNodeHtml = itemNodeWrapper.innerHTML; // Returns '' if itemNodeWrapper is empty
 		originalHtml = ve.getProp( mwData, 'body', 'html' ) ||
-			itemNode.getAttribute( 'originalHtml' ) || '';
+			( ve.getProp( mwData, 'body', 'id' ) !== undefined && itemNode.getAttribute( 'originalHtml' ) ) ||
+			'';
 		originalHtmlWrapper.innerHTML = originalHtml;
 		// Only set body.html if itemNodeHtml and originalHtml are actually different
 		if ( !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {
