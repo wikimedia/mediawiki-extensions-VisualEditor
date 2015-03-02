@@ -1533,7 +1533,6 @@ $wgVisualEditorPluginModules = array();
 // Remember to also set defaults in $wgDefaultUserOptions!
 $wgVisualEditorPreferenceModules = array(
 	'visualeditor-enable-experimental' => 'ext.visualEditor.experimental',
-	'visualeditor-enable-language' => 'ext.visualEditor.language',
 	//'visualeditor-enable-mwalienextension' => 'ext.visualEditor.mwalienextension',
 );
 
