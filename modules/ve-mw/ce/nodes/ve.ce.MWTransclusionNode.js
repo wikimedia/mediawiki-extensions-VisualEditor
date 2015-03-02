@@ -24,6 +24,7 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
+	OO.ui.IconElement.call( this, $.extend( {}, config, { $icon: this.$element } ) );
 	ve.ce.GeneratedContentNode.call( this );
 };
 
@@ -33,6 +34,7 @@ OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWTransclusionNode, OO.ui.IconElement );
 
 /* Static Properties */
 
@@ -96,7 +98,7 @@ ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
  * @param {Object} response Response data
  */
 ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, response ) {
-	var contentNodes, $placeHolder;
+	var contentNodes;
 
 	if ( !response || response.error || !response.visualeditor || response.visualeditor.result !== 'success' ) {
 		return this.onParseError.call( this, deferred );
@@ -111,19 +113,39 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 		contentNodes = Array.prototype.slice.apply( contentNodes[0].childNodes );
 	}
 
-	// Check if the final result of the imported template is empty.
-	// If it is empty, put an inline placeholder inside it so that it can
-	// be accessible to users (either to remove or edit)
-	if ( contentNodes.length === 0 ) {
-		$placeHolder = this.$( '<span>' )
-			.css( { display: 'block' } )
-			// adapted from ve.ce.BranchNode.$blockSlugTemplate
-			// IE support may require using &nbsp;
-			.html( '&#xFEFF;' );
-
-		contentNodes.push( $placeHolder[0] );
-	}
 	deferred.resolve( contentNodes );
+};
+
+/**
+ * Extend the ve.ce.GeneratedContentNode render method to check for hidden templates.
+ *
+ * Check if the final result of the imported template is empty.
+ * If it is empty, set the icon to be the template icon so that it can
+ * be accessible to users (either to remove or edit)
+ *
+ * @see ve.ce.GeneratedContentNode#render
+ */
+ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
+	// Call parent mixin
+	ve.ce.GeneratedContentNode.prototype.render.call( this, generatedContents );
+
+	// Since render replaces this.$element with a new node, we need to make sure
+	// our iconElement is defined again to be this.$element
+	this.setIconElement( this.$element );
+	this.$element.addClass( 've-ce-mwTransclusionNode' );
+	if (
+		$( generatedContents ).text().trim().length === 0 &&
+		// Check whether the element is too small to comfortably select
+		(
+			this.$element.width() < 8 ||
+			this.$element.height() < 8
+		)
+	) {
+		// The template is empty or hidden
+		this.setIcon( 'template' );
+	} else {
+		this.setIcon( null );
+	}
 };
 
 /**

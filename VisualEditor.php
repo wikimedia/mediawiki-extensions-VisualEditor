@@ -1323,6 +1323,9 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js',
 		),
+		'styles' => array(
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css'
+		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
 		),
