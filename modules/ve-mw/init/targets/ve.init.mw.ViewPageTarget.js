@@ -41,6 +41,8 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.deactivating = false;
 	this.edited = false;
 	this.recreating = false;
+	this.activatingDeferred = null;
+	this.toolbarSetupDeferred = null;
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
 	// (which would mess up with the expected order of Back/Forwards browsing)
@@ -173,9 +175,9 @@ ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
  * @inheritdoc
  */
 ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
-	var initPromise, toolbar,
-		target = this,
-		wasSetup = !!this.toolbar;
+	var toolbar,
+		wasSetup = !!this.toolbar,
+		target = this;
 
 	ve.track( 'trace.setupToolbar.enter' );
 
@@ -186,20 +188,18 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.exit' );
 	if ( !wasSetup ) {
-		// Keep it hidden so that we can slide it down smoothly (avoids sudden
-		// offset flash when original content is hidden, and replaced in-place with a
-		// similar-looking surface).
-		// FIXME: This is not ideal, the parent class creates it and appends
-		// to target (visibly), only for us to hide it again 0ms later.
-		// Though we can't hide it by default because it needs visible dimensions
-		// to compute stuff during setup.
-		this.getToolbar().$bar.hide();
-		initPromise = toolbar.$bar.slideDown( 'fast' ).promise();
-	} else {
-		initPromise = $.Deferred().resolve();
+		setTimeout( function () {
+			var height = toolbar.$bar.outerHeight();
+			toolbar.$element.css( 'height', height );
+			toolbar.$element.one( 'transitionend', function () {
+				// Clear to allow growth during use and when resizing window
+				toolbar.$element.css( 'height', '' );
+				target.toolbarSetupDeferred.resolve();
+			} );
+		} );
 	}
 
-	initPromise.done( function () {
+	this.toolbarSetupDeferred.done( function () {
 		var surface = target.getSurface();
 		// Check the surface wasn't torn down while the toolbar was animating
 		if ( surface ) {
@@ -218,9 +218,12 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 ve.init.mw.ViewPageTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to top of target, before heading etc.
 	// Avoid re-attaching as it breaks CSS animations
-	if ( !this.getToolbar().$element.parent().is( this.$element ) ) {
-		this.getToolbar().$element.addClass( 've-init-mw-viewPageTarget-toolbar' );
-		this.$element.prepend( this.getToolbar().$element );
+	if ( !this.toolbar.$element.parent().is( this.$element ) ) {
+		this.toolbar.$element
+			// Set 0 before attach (expanded in #setupToolbar)
+			.css( 'height', '0' )
+			.addClass( 've-init-mw-viewPageTarget-toolbar' );
+		this.$element.prepend( this.toolbar.$element );
 	}
 };
 
@@ -291,9 +294,10 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		ve.track( 'trace.activate.enter' );
 		this.activating = true;
 		this.activatingDeferred = $.Deferred();
+		this.toolbarSetupDeferred = $.Deferred();
 
 		$( 'html' ).addClass( 've-activating ve-activated' );
-		this.activatingDeferred.always( function () {
+		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).always( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
 		} );
 
@@ -1317,11 +1321,18 @@ ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
  * @return {jQuery.Promise} Promise which resolves when toolbar is hidden
  */
 ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
-	var target = this;
-	return this.toolbar.$bar.slideUp( 'fast' ).promise().then( function () {
-		target.toolbar.destroy();
-		target.toolbar = null;
+	var target = this,
+		deferred = $.Deferred();
+	this.toolbar.$element.css( 'height', this.toolbar.$bar.outerHeight() );
+	setTimeout( function () {
+		target.toolbar.$element.css( 'height', '0' );
+		target.toolbar.$element.one( 'transitionend', function () {
+			target.toolbar.destroy();
+			target.toolbar = null;
+			deferred.resolve();
+		} );
 	} );
+	return deferred.promise();
 };
 
 /**
