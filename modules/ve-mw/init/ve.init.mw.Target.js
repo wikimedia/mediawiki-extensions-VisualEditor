@@ -46,7 +46,8 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 		'ext.visualEditor.mwreference.core',
 		'ext.visualEditor.mwtransclusion.core',
 		'ext.visualEditor.mwreference',
-		'ext.visualEditor.mwtransclusion'
+		'ext.visualEditor.mwtransclusion',
+		'ext.visualEditor.language'
 	]
 		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );

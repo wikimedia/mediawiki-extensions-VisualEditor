@@ -346,23 +346,6 @@ class VisualEditorHooks {
 			)
 		);
 
-		$preferences['visualeditor-enable-language'] = array(
-			'version' => '1.0',
-			'label-message' => 'visualeditor-preference-language-label',
-			'desc-message' => 'visualeditor-preference-language-description',
-			'screenshot' => array(
-				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-language-ltr.svg",
-				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-language-rtl.svg",
-			),
-			'info-message' => 'visualeditor-preference-language-info-link',
-			'discussion-message' => 'visualeditor-preference-language-discussion-link',
-			'requirements' => array(
-				'betafeatures' => array(
-					'visualeditor-enable',
-				),
-			),
-		);
-
 /* Disabling Beta Features option for generic content for now
 		$preferences['visualeditor-enable-mwalienextension'] = array(
 			'version' => '1.0',

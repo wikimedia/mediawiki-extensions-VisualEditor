@@ -22,8 +22,7 @@
 	"type": "other",
 	"config": {
 		"VisualEditorPreferenceModules": {
-			"visualeditor-enable-experimental": "ext.visualEditor.experimental",
-			"visualeditor-enable-language": "ext.visualEditor.language"
+			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
 		},
 		"VisualEditorSerializationCacheTimeout": 3600,
 		"VisualEditorUseChangeTagging": true,
