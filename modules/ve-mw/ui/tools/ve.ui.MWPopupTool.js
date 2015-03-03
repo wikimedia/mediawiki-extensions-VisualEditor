@@ -193,7 +193,9 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 			return new mw.Feedback( {
 				title: new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
 				bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/create/?projects=VisualEditor' ),
-				bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' )
+				bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' ),
+				showUseragentCheckbox: true,
+				useragentCheckboxMandatory: true
 			} );
 		} );
 	}
