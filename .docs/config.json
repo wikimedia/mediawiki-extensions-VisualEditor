@@ -10,7 +10,7 @@
 	"--output": "../docs",
 	"--": [
 		"./external.js",
-		"../lib/ve/.docs/external.js",
+		"../lib/ve/.jsduck/external.js",
 		"../lib/ve/lib/oojs",
 		"../lib/ve/lib/oojs-ui",
 		"../lib/ve/lib/unicodejs",

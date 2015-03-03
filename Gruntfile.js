@@ -24,7 +24,7 @@ module.exports = function ( grunt ) {
 				from: [
 					'.docs/mw-categories.json',
 					{
-						file: 'lib/ve/.docs/categories.json',
+						file: 'lib/ve/.jsduck/categories.json',
 						aggregate: {
 							'VisualEditor (core)': [
 								'General',
