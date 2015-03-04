@@ -314,6 +314,7 @@ $wgResourceModules += array(
 			'moment',
 			'ext.visualEditor.base',
 			'ext.visualEditor.track',
+			'jquery.uls.data',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
@@ -343,6 +344,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.base',
 			'jquery.i18n',
+			'jquery.uls.data',
 		),
 	),
 
@@ -668,7 +670,6 @@ $wgResourceModules += array(
 			'unicodejs',
 			'rangefix',
 			'papaparse',
-			'jquery.uls.data',
 			'ext.visualEditor.base',
 		),
 		'messages' => array(
@@ -1175,6 +1176,7 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
 			'ext.visualEditor.mwlink',
+			'jquery.uls.data',
 		),
 		'messages' => array(
 			'visualeditor-advancedsettings-tool',

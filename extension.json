@@ -396,7 +396,8 @@
 				"user.tokens",
 				"moment",
 				"ext.visualEditor.base",
-				"ext.visualEditor.track"
+				"ext.visualEditor.track",
+				"jquery.uls.data"
 			],
 			"targets": [
 				"desktop",
@@ -427,7 +428,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.base",
-				"jquery.i18n"
+				"jquery.i18n",
+				"jquery.uls.data"
 			]
 		},
 		"ext.visualEditor.data": {
@@ -721,7 +723,6 @@
 				"unicodejs",
 				"rangefix",
 				"papaparse",
-				"jquery.uls.data",
 				"ext.visualEditor.base"
 			],
 			"messages": [
@@ -1200,7 +1201,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
-				"ext.visualEditor.mwlink"
+				"ext.visualEditor.mwlink",
+				"jquery.uls.data"
 			],
 			"messages": [
 				"visualeditor-advancedsettings-tool",
