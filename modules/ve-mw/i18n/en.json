@@ -201,6 +201,8 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Show options",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|You are adding}} the \"$1\" template to this page. It doesn't yet have a description, but there might be some information on the <a $2>template's page</a>.",
 	"visualeditor-dialog-transclusion-options": "Options",
+	"visualeditor-dialog-transclusion-param-default": "Default value: $1",
+	"visualeditor-dialog-transclusion-param-example": "Example value: $1",
 	"visualeditor-dialog-transclusion-param-info": "Field description",
 	"visualeditor-dialog-transclusion-param-info-missing": "No field description available",
 	"visualeditor-dialog-transclusion-placeholder": "Add a template",

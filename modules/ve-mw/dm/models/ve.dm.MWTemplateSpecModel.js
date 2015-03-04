@@ -210,6 +210,18 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
 };
 
 /**
+ * Get a parameter example value.
+ *
+ * @param {string} name Parameter name
+ * @param {string} [lang] Language to get description
+ * @returns {string} Example parameter value
+ */
+ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, lang ) {
+	var value = this.params[name].example;
+	return ve.isPlainObject( value ) ? OO.ui.getLocalValue( value, lang ) : value;
+};
+
+/**
  * Get a parameter auto value.
  *
  * @param {string} name Parameter name

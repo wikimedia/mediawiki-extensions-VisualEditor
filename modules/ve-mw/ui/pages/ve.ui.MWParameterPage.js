@@ -17,7 +17,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
-	var paramName = parameter.getName(),
+	var placeholder = null,
+		paramName = parameter.getName(),
 		page = this;
 
 	// Configuration initialization
@@ -32,6 +33,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.parameter = parameter;
 	this.spec = parameter.getTemplate().getSpec();
 	this.defaultValue = parameter.getDefaultValue();
+	this.exampleValue = parameter.getExampleValue();
 
 	this.$info = this.$( '<div>' );
 	this.$actions = this.$( '<div>' );
@@ -39,11 +41,16 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$field = this.$( '<div>' );
 	this.$more = this.$( '<div>' );
 	this.$description = this.$( '<div>' );
+	if ( this.defaultValue ) {
+		placeholder = ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue );
+	} else if ( this.exampleValue ) {
+		placeholder = ve.msg( 'visualeditor-dialog-transclusion-param-example', this.exampleValue );
+	}
 	this.valueInput = new OO.ui.TextInputWidget( {
 		$: this.$,
 		multiline: true,
 		autosize: true,
-		placeholder: this.defaultValue
+		placeholder: placeholder
 	} )
 		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
@@ -151,6 +158,27 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				)
 		);
 	}
+
+	if ( this.defaultValue ) {
+		this.$description.append(
+			this.$( '<p>' )
+				.addClass( 've-ui-mwParameterPage-description-default' )
+				.text(
+					ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue )
+				)
+		);
+	}
+
+	if ( this.exampleValue ) {
+		this.$description.append(
+			this.$( '<p>' )
+				.addClass( 've-ui-mwParameterPage-description-example' )
+				.text(
+					ve.msg( 'visualeditor-dialog-transclusion-param-example', this.exampleValue )
+				)
+		);
+	}
+
 	if ( this.$description.text().trim() === '' ) {
 		this.infoButton
 			.setDisabled( true )
