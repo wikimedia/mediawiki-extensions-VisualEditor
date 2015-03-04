@@ -46,12 +46,13 @@ ve.ui.MWInternalLinkContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.MWInternalLinkContextItem.prototype.renderBody = function () {
-	var $link = $( '<a>' )
-		.text( this.getDescription() )
-		.attr( {
-			href: this.model.getHref(),
-			target: '_blank'
-		} );
+	var htmlDoc = this.context.getSurface().getModel().getDocument().getHtmlDocument(),
+		$link = $( '<a>' )
+			.text( this.getDescription() )
+			.attr( {
+				href: ve.resolveUrl( this.model.getHref(), htmlDoc ),
+				target: '_blank'
+			} );
 	this.$body.empty().append( $link );
 
 	// Style based on link cache information
