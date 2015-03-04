@@ -107,14 +107,37 @@ OO.mixinClass( ve.ui.MWMediaInfoFieldWidget, OO.ui.LabelElement );
 ve.ui.MWMediaInfoFieldWidget.static.tagName = 'div';
 
 /**
+ * Define a height threshold for the description fields.
+ * If the rendered field's height is under the defined limit
+ * (max-height + threshold) we should remove the max-height
+ * and display the field as-is.
+ * This prevents cases where "read more" appears but only
+ * exposes only a few pixels or a line extra.
+ *
+ * @property {number} Threshold in pixels
+ */
+ve.ui.MWMediaInfoFieldWidget.static.threshold = 24;
+
+/**
  * Toggle the read more button according to whether it should be
  * visible or not.
  */
-ve.ui.MWMediaInfoFieldWidget.prototype.toggleReadMoreButton = function () {
-	var show = this.$text.height() < this.$text.prop( 'scrollHeight' );
-	// Only show the readMore button if it should be shown, and not while
-	// the expansion animation is ongoing
-	this.readMoreButton.toggle( show );
+ve.ui.MWMediaInfoFieldWidget.prototype.initialize = function () {
+	var actualHeight, containerHeight;
+
+	if ( this.getType() === 'description' ) {
+		actualHeight = this.$text.prop( 'scrollHeight' );
+		containerHeight = this.$text.outerHeight( true );
+
+		if ( actualHeight < containerHeight + this.constructor.static.threshold ) {
+			// The contained result is big enough to show. Remove the maximum height
+			this.$text
+				.css( 'maxHeight', '' );
+		} else {
+			// Only show the readMore button if it should be shown
+			this.readMoreButton.toggle( containerHeight < actualHeight );
+		}
+	}
 };
 
 /**
