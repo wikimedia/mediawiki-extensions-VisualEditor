@@ -284,8 +284,6 @@
 	"visualeditor-preference-core-description": "Activer l’Éditeur Visuel. Il ne sera pas disponible sur les pages de discussion et quelques autres espaces de noms.",
 	"visualeditor-preference-core-label": "ÉditeurVisuel",
 	"visualeditor-preference-enable": "Activer l’ÉditeurVisuel. Il sera disponible pour {{PLURAL:$2|l’espace de nom suivant|les espaces de nom suivants}} : $1",
-	"visualeditor-preference-language-description": "Ajouter un outil expérimental à l’Éditeur Visuel pour tester le marquage de la langue dans laquelle est écrit le texte, en avance sur la version générale. Souvenez-vous de toujours vérifier vos modifications avant d’enregistrer lors de l’utilisation des fonctionnalités expérimentales.",
-	"visualeditor-preference-language-label": "Outil de langue de l’ÉditeurVisuel",
 	"visualeditor-preference-mwalienextension-description": "Ajouter le support expérimental basique à l’ÉditeurVisuel pour modifier les balises des extensions (comme les galeries ou les blocs de code source), en avance par rapport à la disponibilité des outils individuels. Rappelez-vous de toujours vérifier vos modifications avant d’enregistrer lors de l’utilisation de fonctionnalités expérimentales.",
 	"visualeditor-preference-mwalienextension-label": "Modification des balises d’extensions avec l’ÉditeurVisuel",
 	"visualeditor-recreate": "Cette page a été supprimée depuis que vous avez commencé la modification. Cliquez sur « $1 » pour la recréer.",

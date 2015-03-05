@@ -208,8 +208,6 @@
 	"visualeditor-preference-betatempdisable": "Keela ajutiselt VisualEditor, kuniks selle arendus on beetajärgus",
 	"visualeditor-preference-core-description": "Kasuta VisualEditori. See ei ole kasutatav arutelulehekülgedel ega veel mõnes nimeruumis.",
 	"visualeditor-preference-enable": "Kasuta VisualEditori. See on saadaval {{PLURAL:$2|järgmises nimeruumis|järgmistes nimeruumides}}: $1",
-	"visualeditor-preference-language-description": "Lisab VisualEditori jaoks katselise tööriista, millega saab ära märkida, millises keeles on tekst kirjutatud. Palun pea meeles, et katselise tööriistaga tehtud muudatused tuleb alati enne salvestamist üle vaadata.",
-	"visualeditor-preference-language-label": "VisualEditori keeleriist",
 	"visualeditor-recreate": "See lehekülg on kustutatud, pärast seda kui redigeerimist alustasid. Klõpsa \"$1\", et lehekülg taasluua.",
 	"visualeditor-reference-input-placeholder": "Millisele allikale tahad viidata?",
 	"visualeditor-referenceslist-isempty": "Rühma \"$1\" viited, mida selles loendis näidata, puuduvad sellel leheküljel.",

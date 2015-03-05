@@ -5,7 +5,7 @@
 			"Snævar"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:Visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Breyting gerð með hjálp [[{{MediaWiki:Visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"visualeditor-feedback-link": "Project:VisualEditor/Ábendingar",
 	"visualeditor-feedback-tool": "Skilja eftir ábendingu",

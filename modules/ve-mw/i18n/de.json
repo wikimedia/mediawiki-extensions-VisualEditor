@@ -257,8 +257,6 @@
 	"visualeditor-preference-core-description": "VisualEditor aktivieren. Der Editor ist auf Diskussionsseiten und in einigen anderen Namensräumen nicht verfügbar.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "VisualEditor aktivieren. Der Editor ist verfügbar {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}}: $1",
-	"visualeditor-preference-language-description": "Ergänzt ein experimentelles Testwerkzeug vor der allgemeinen Freigabe zum Markieren der Sprache, in der Texte verfasst wurden. Bitte überprüfe vor dem Speichern immer deine Änderungen, wenn du experimentelle Funktionen benutzt.",
-	"visualeditor-preference-language-label": "VisualEditor-Sprachwerkzeug",
 	"visualeditor-preference-mwalienextension-description": "Ergänzt experimentellen Basissupport zum Bearbeiten von Erweiterungstags (wie Galerien oder Quellcodeblöcke), bevor einzelne Werkzeuge verfügbar sind. Bitte überprüfe vor dem Speichern immer deine Änderungen, wenn du experimentelle Funktionen benutzt.",
 	"visualeditor-preference-mwalienextension-label": "VisualEditor-Erweiterungstagbearbeitung",
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem du zum Bearbeiten angefangen hast. Wähle „$1“, um sie neu zu erstellen.",

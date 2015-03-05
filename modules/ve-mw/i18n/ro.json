@@ -237,8 +237,6 @@
 	"visualeditor-preference-core-description": "Activează EditorulVizual. Nu va fi disponibil în paginile de discuție și în alte câteva spații de nume.",
 	"visualeditor-preference-core-label": "EditorVizual",
 	"visualeditor-preference-enable": "Activează EditorulVizual. Va fi disponibil în {{PLURAL:$2|următorul spațiu de nume|următoarele spații de nume}}: $1",
-	"visualeditor-preference-language-description": "Adaugă EditoruluiVizual o unealtă experimentală pentru marcarea limbii în care este redactat textul, înaintea lansării publice. Nu uitați să vă revizuiți întotdeauna modificările înainte de a salva atunci când folosiți funcții pilot.",
-	"visualeditor-preference-language-label": "Instrument lingvistic pentru EditorulVizual",
 	"visualeditor-preference-mwalienextension-description": "Adaugă suport de bază experimental EditoruluiVizual pentru a modifica etichetele de extensie (cum ar fi galeriile sau blocurile de cod sursă), înaintea ca uneltele individuale să fie disponibile. Nu uitați să vă revizuiți întotdeauna modificările înainte de a salva atunci când folosiți funcții pilot.",
 	"visualeditor-preference-mwalienextension-label": "Modificarea etichetelor de extensie pentru EditorulVizual",
 	"visualeditor-recreate": "Pagina a fost ștearsă de la momentul în care ați început s-o modificați. Apăsați „$1” pentru a o recrea.",

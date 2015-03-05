@@ -219,8 +219,6 @@
 	"visualeditor-preference-core-description": "تمكين المحرر المرئي. لن يكون متوفرًا في صفحات النقاش ونطاقات أخرى.",
 	"visualeditor-preference-core-label": "المحرر المرئي",
 	"visualeditor-preference-enable": "تمكين المحرر المرئي. متوفر في {{PLURAL:$2|النطاق التالي|النطاقات التالية}}: $1",
-	"visualeditor-preference-language-description": "إضافة أداة تجريبية إلى المحرر المرئي لتحديد لغة نص أجنبي. تذكر عند استخدام أدوات تجريبية أن تراجع تعديلاتك قبل حفظها.",
-	"visualeditor-preference-language-label": "أداة اللغة في المحرر المرئي",
 	"visualeditor-preference-mwalienextension-description": "أضف دعما تجريبيا إلى المحرر المرئي لتعديل وسوم الامتدادات (مثل المعارض أو كتل الأكواد المصدرية)، قبل إتاحة الأدوات الفردية. تذكر حين تستخدم خاصيات تجريبية أن تعاين التعديلات قبل حفظها.",
 	"visualeditor-preference-mwalienextension-label": "تعديل وسوم الامتدادات بالمحرر المرئي",
 	"visualeditor-recreate": "لقد تم حذف هذه الصفحة بعد أن بدأت بتحريرها. اضغط على «$1» لإعادة إنشائها.",

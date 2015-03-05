@@ -267,8 +267,6 @@
 	"visualeditor-preference-core-description": "Habilitar el Editor visual. No estará disponible en páginas de discusión y en algunos otros espacios de nombres.",
 	"visualeditor-preference-core-label": "Editor visual",
 	"visualeditor-preference-enable": "Activar el editor visual. Estará disponible en {{PLURAL:$2|el siguiente espacio|los siguientes espacios}} de nombres: $1",
-	"visualeditor-preference-language-description": "Añadir una herramienta experimental al Editor visual para marcar el idioma en el que el texto está escrito para pruebas, en lugar de la versión general. Por favor recuerde siempre revisar los cambios antes de guardar cuando se utilizan características experimentales.",
-	"visualeditor-preference-language-label": "Herramienta de idioma del Editor visual",
 	"visualeditor-preference-mwalienextension-description": "Añadir soporte básico experimental al Editor visual para la edición de etiquetas de extensión (como galerías o bloques de código fuente), en lugar de herramientas individuales disponibles. Por favor recuerde siempre revisar los cambios antes de guardar cuando se utilizan características experimentales.",
 	"visualeditor-preference-mwalienextension-label": "Edición de etiquetas de extensión del Editor visual",
 	"visualeditor-recreate": "La página fue borrada después de que comenzaste a editarla. Pulsa en «$1» para crearla de nuevo.",
