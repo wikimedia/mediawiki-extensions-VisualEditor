@@ -20,9 +20,9 @@ module.exports = function ( grunt ) {
 		pkg: grunt.file.readJSON( 'package.json' ),
 		jsduckcatconfig: {
 			main: {
-				target: '.docs/categories.json',
+				target: '.jsduck/categories.json',
 				from: [
-					'.docs/mw-categories.json',
+					'.jsduck/mw-categories.json',
 					{
 						file: 'lib/ve/.jsduck/categories.json',
 						aggregate: {
@@ -42,8 +42,8 @@ module.exports = function ( grunt ) {
 		},
 		buildloader: {
 			egiframe: {
-				targetFile: '.docs/eg-iframe.html',
-				template: '.docs/eg-iframe.html.template',
+				targetFile: '.jsduck/eg-iframe.html',
+				template: '.jsduck/eg-iframe.html.template',
 				modules: modules,
 				load: [ 'visualEditor.desktop.standalone' ],
 				pathPrefix: 'lib/ve/',
@@ -56,7 +56,7 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'*.js',
-				'{.docs,build}/**/*.js',
+				'{.jsduck,build}/**/*.js',
 				'modules/**/*.js'
 			]
 		},

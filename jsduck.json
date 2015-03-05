@@ -1,0 +1,22 @@
+{
+	"--title": "VisualEditor - Documentation",
+	"--categories": ".jsduck/categories.json",
+	"--eg-iframe": ".jsduck/eg-iframe.html",
+	"--tags": ".jsduck/CustomTags.rb",
+	"--warnings": ["-nodoc(class,public)"],
+	"--builtin-classes": true,
+	"--processes": "0",
+	"--warnings-exit-nonzero": true,
+	"--external": "HTMLDocument,Window,Node,Set,Range,Selection,ClientRect,File,Blob,DataTransfer,DataTransferItem",
+	"--output": "docs",
+	"--": [
+		".jsduck/external.js",
+		"lib/ve/.jsduck/external.js",
+		"lib/ve/lib/oojs",
+		"lib/ve/lib/oojs-ui",
+		"lib/ve/lib/unicodejs",
+		"lib/ve/src",
+		"lib/ve/tests",
+		"modules/ve-mw"
+	]
+}
