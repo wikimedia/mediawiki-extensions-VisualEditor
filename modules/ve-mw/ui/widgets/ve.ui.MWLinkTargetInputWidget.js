@@ -106,7 +106,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.isValid = function () {
  * Gets a new request object of the current lookup query value.
  *
  * @method
- * @returns {jqXHR} AJAX object without success or fail handlers attached
+ * @returns {jQuery.Promise} Promise without success or fail handlers attached
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 	var req,
