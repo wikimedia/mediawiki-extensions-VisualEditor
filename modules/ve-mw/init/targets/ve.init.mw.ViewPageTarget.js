@@ -1621,9 +1621,8 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 		}
 
 		if ( prefSaysShow ) {
-			new mw.Api().post( {
+			new mw.Api().postWithToken( 'options', {
 				action: 'options',
-				token: mw.user.tokens.get( 'editToken' ),
 				change: 'visualeditor-hidebetawelcome=1'
 			} );
 
