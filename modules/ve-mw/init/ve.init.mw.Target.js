@@ -1171,7 +1171,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 
 	data = ve.extendObject( {}, options, { format: 'json' } );
 
-	function ajaxRequest( cachekey ) {
+	function ajaxRequest( cachekey, isRetried ) {
 		var start = ve.now(),
 			fullEventName;
 
@@ -1220,8 +1220,14 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 					}
 					// This cache key is evidently bad, clear it
 					target.clearPreparedCacheKey();
-					// Try again without a cache key
-					return ajaxRequest( null );
+					if ( !isRetried ) {
+						// Try again without a cache key
+						return ajaxRequest( null, true );
+					} else {
+						// Failed twice in a row, must be some other error - let caller handle it.
+						// FIXME Can't just `return this` because all callers are broken.
+						return $.Deferred().reject( null, errorName, errorObject ).promise();
+					}
 				}
 			);
 	}
