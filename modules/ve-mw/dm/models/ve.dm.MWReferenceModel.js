@@ -66,7 +66,7 @@ ve.dm.MWReferenceModel.static.newFromReferenceNode = function ( node ) {
  * Find matching item in a surface.
  *
  * @param {ve.dm.Surface} surfaceModel Surface reference is in
- * @returns {ve.dm.InternalItemNode|null} Internal reference item, null if none exists
+ * @return {ve.dm.InternalItemNode|null} Internal reference item, null if none exists
  */
 ve.dm.MWReferenceModel.prototype.findInternalItem = function ( surfaceModel ) {
 	if ( this.listIndex !== null ) {
@@ -223,25 +223,33 @@ ve.dm.MWReferenceModel.prototype.getGroup = function () {
  *
  * Auto-generates a blank document if no document exists.
  *
- * @returns {ve.dm.Document} Reference document
+ * @return {ve.dm.Document} Reference document
  */
 ve.dm.MWReferenceModel.prototype.getDocument = function () {
 	if ( !this.doc ) {
 		if ( this.deferDoc ) {
 			this.doc = this.deferDoc();
 		} else {
-			this.doc = new ve.dm.Document( [
-				{ type: 'paragraph', internal: { generated: 'wrapper' } },
-				{ type: '/paragraph' },
-				{ type: 'internalList' },
-				{ type: '/internalList' }
-			],
-			/* htmlDocument */ null,
-			/* parentDocument */ null,
-			/* internalList */ null,
-			/* innerWhitespace */ null,
-			/* lang */ this.getLang(),
-			/* dir */ this.getDir() );
+			this.doc = new ve.dm.Document(
+				[
+					{ type: 'paragraph', internal: { generated: 'wrapper' } },
+					{ type: '/paragraph' },
+					{ type: 'internalList' },
+					{ type: '/internalList' }
+				],
+				// htmlDocument
+				null,
+				// parentDocument
+				null,
+				// internalList
+				null,
+				// innerWhitespace
+				null,
+				// lang
+				this.getLang(),
+				// dir
+				this.getDir()
+			);
 		}
 	}
 	return this.doc;

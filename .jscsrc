@@ -1,6 +1,5 @@
 {
 	"preset": "wikimedia",
 
-	"requireSpacesInsideArrayBrackets": null,
-	"disallowMixedSpacesAndTabs": null
+	"requireSpacesInsideArrayBrackets": null
 }

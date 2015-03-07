@@ -21,8 +21,10 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 		tests = [
 			{
 				data: [
-					/* 0 */ ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
-					/* 1 */ { type: '/mwBlockImage' }
+					// 0
+					ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
+					// 1
+					{ type: '/mwBlockImage' }
 				],
 				cases: [
 					{
@@ -89,10 +91,14 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 			},
 			{
 				data: [
-					/* 0 */ ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
-					/* 1 */ { type: '/mwBlockImage' },
-					/* 2 */ ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
-					/* 3 */ { type: '/mwBlockImage' }
+					// 0
+					ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
+					// 1
+					{ type: '/mwBlockImage' },
+					// 2
+					ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
+					// 3
+					{ type: '/mwBlockImage' }
 				],
 				cases: [
 					{
@@ -129,12 +135,18 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 			},
 			{
 				data: [
-					/* 0 */ { type: 'alienBlock' },
-					/* 1 */ { type: '/alienBlock' },
-					/* 2 */ ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
-					/* 3 */ { type: '/mwBlockImage' },
-					/* 4 */ { type: 'alienBlock' },
-					/* 5 */ { type: '/alienBlock' }
+					// 0
+					{ type: 'alienBlock' },
+					// 1
+					{ type: '/alienBlock' },
+					// 2
+					ve.copy( ve.dm.mwExample.MWBlockImage.data[0] ),
+					// 3
+					{ type: '/mwBlockImage' },
+					// 4
+					{ type: 'alienBlock' },
+					// 5
+					{ type: '/alienBlock' }
 				],
 				cases: [
 					{
@@ -183,14 +195,22 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 			},
 			{
 				data: [
-					/* 0 */ { type: 'paragraph' },
-					/* 1 */ { type: 'alienInline' },
-					/* 2 */ { type: '/alienInline' },
-					/* 3 */ ve.copy( ve.dm.mwExample.MWInlineImage.data ),
-					/* 4 */ { type: '/mwInlineImage' },
-					/* 5 */ { type: 'alienInline' },
-					/* 6 */ { type: '/alienInline' },
-					/* 7 */ { type: '/paragraph' }
+					// 0
+					{ type: 'paragraph' },
+					// 1
+					{ type: 'alienInline' },
+					// 2
+					{ type: '/alienInline' },
+					// 3
+					ve.copy( ve.dm.mwExample.MWInlineImage.data ),
+					// 4
+					{ type: '/mwInlineImage' },
+					// 5
+					{ type: 'alienInline' },
+					// 6
+					{ type: '/alienInline' },
+					// 7
+					{ type: '/paragraph' }
 				],
 				cases: [
 					{

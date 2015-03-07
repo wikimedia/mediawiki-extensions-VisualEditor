@@ -245,7 +245,7 @@ ve.dm.MWReferenceNode.static.remapInternalListKeys = function ( dataElement, int
  * @static
  * @param {Object} dataElement Element data
  * @param {ve.dm.InternalList} internalList Internal list
- * @returns {string} Reference label
+ * @return {string} Reference label
  */
 ve.dm.MWReferenceNode.static.getIndexLabel = function ( dataElement, internalList ) {
 	var listIndex = dataElement.attributes.listIndex,
@@ -270,8 +270,8 @@ ve.dm.MWReferenceNode.prototype.isInspectable = function () {
 
 /**
  * Gets the internal item node associated with this node
- * @method
- * @returns {ve.dm.InternalItemNode} Item node
+ *
+ * @return {ve.dm.InternalItemNode} Item node
  */
 ve.dm.MWReferenceNode.prototype.getInternalItem = function () {
 	return this.getDocument().getInternalList().getItemNode( this.getAttribute( 'listIndex' ) );
@@ -279,8 +279,8 @@ ve.dm.MWReferenceNode.prototype.getInternalItem = function () {
 
 /**
  * Gets the index label for the reference
- * @method
- * @returns {string} Reference label
+ *
+ * @return {string} Reference label
  */
 ve.dm.MWReferenceNode.prototype.getIndexLabel = function () {
 	return this.constructor.static.getIndexLabel( this.element, this.getDocument().getInternalList() );
@@ -288,7 +288,6 @@ ve.dm.MWReferenceNode.prototype.getIndexLabel = function () {
 
 /**
  * Handle the node being attached to the root
- * @method
  */
 ve.dm.MWReferenceNode.prototype.onRoot = function () {
 	this.addToInternalList();
@@ -296,7 +295,6 @@ ve.dm.MWReferenceNode.prototype.onRoot = function () {
 
 /**
  * Handle the node being detatched from the root
- * @method
  */
 ve.dm.MWReferenceNode.prototype.onUnroot = function () {
 	this.removeFromInternalList();
@@ -304,7 +302,6 @@ ve.dm.MWReferenceNode.prototype.onUnroot = function () {
 
 /**
  * Register the node with the internal list
- * @method
  */
 ve.dm.MWReferenceNode.prototype.addToInternalList = function () {
 	if ( this.getRoot() === this.getDocument().getDocumentNode() ) {
@@ -319,7 +316,6 @@ ve.dm.MWReferenceNode.prototype.addToInternalList = function () {
 
 /**
  * Unregister the node from the internal list
- * @method
  */
 ve.dm.MWReferenceNode.prototype.removeFromInternalList = function () {
 	this.getDocument().getInternalList().removeNode(

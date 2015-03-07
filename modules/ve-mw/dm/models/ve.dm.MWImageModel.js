@@ -117,7 +117,7 @@ ve.dm.MWImageModel.static.infoCache = {};
  * @param {Object} attributes Image attributes
  * @param {string} [imageType] Image node type 'mwInlineImage' or 'mwBlockImage'.
  *  Defaults to 'mwBlockImage'
- * @returns {ve.dm.MWImageNode} An image node
+ * @return {ve.dm.MWImageNode} An image node
  */
 ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 	var attrs, newNode, newDimensions,
@@ -223,7 +223,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, 
 
 /**
  * Get the hash object of the current image model state.
- * @returns {Object} Hash object
+ * @return {Object} Hash object
  */
 ve.dm.MWImageModel.prototype.getHashObject = function () {
 	var hash = {
@@ -362,7 +362,7 @@ ve.dm.MWImageModel.prototype.getImageNodeType = function ( imageType, align ) {
 
 /**
  * Get the original bounding box
- * @returns {Object} Bounding box with width and height
+ * @return {Object} Bounding box with width and height
  */
 ve.dm.MWImageModel.prototype.getBoundingBox = function () {
 	return this.boundingBox;
@@ -682,7 +682,7 @@ ve.dm.MWImageModel.prototype.isBorderable = function () {
 
 /**
  * Get the image file resource name
- * @returns {string} resourceName The resource name of the given media file
+ * @return {string} resourceName The resource name of the given media file
  */
 ve.dm.MWImageModel.prototype.getResourceName = function () {
 	return this.imageResourceName;
@@ -768,18 +768,26 @@ ve.dm.MWImageModel.prototype.getCurrentDimensions = function () {
  */
 ve.dm.MWImageModel.prototype.getCaptionDocument = function () {
 	if ( !this.captionDoc ) {
-		this.captionDoc = new ve.dm.Document( [
-			{ type: 'paragraph', internal: { generated: 'wrapper' } },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
-		],
-		/* htmlDocument */ null,
-		/* parentDocument */ null,
-		/* internalList */ null,
-		/* innerWhitespace */ null,
-		/* lang */ this.getLang(),
-		/* dir */ this.getDir() );
+		this.captionDoc = new ve.dm.Document(
+			[
+				{ type: 'paragraph', internal: { generated: 'wrapper' } },
+				{ type: '/paragraph' },
+				{ type: 'internalList' },
+				{ type: '/internalList' }
+			],
+			// htmlDocument
+			null,
+			// parentDocument
+			null,
+			// internalList
+			null,
+			// innerWhitespace
+			null,
+			// lang
+			this.getLang(),
+			// dir
+			this.getDir()
+		);
 	}
 	return this.captionDoc;
 };
@@ -1050,7 +1058,7 @@ ve.dm.MWImageModel.prototype.setLang = function ( lang ) {
  * The image file source that points to the location of the
  * file on the web.
  * For instance, '//upload.wikimedia.org/wikipedia/commons/0/0f/Foo.jpg'
- * @returns {string} The source of the given media file
+ * @return {string} The source of the given media file
  */
 ve.dm.MWImageModel.prototype.getImageSource = function () {
 	return this.imageSrc;
@@ -1061,7 +1069,7 @@ ve.dm.MWImageModel.prototype.getImageSource = function () {
  * The resource name represents the filename without the full
  * source url.
  * For example, './File:Foo.jpg'
- * @returns {string} The resource name of the given media file
+ * @return {string} The resource name of the given media file
  */
 ve.dm.MWImageModel.prototype.getImageResourceName = function () {
 	return this.imageResourceName;
@@ -1073,7 +1081,7 @@ ve.dm.MWImageModel.prototype.getImageResourceName = function () {
  * the link to the source of the image in commons or locally, but
  * may hold an alternative link if link= is supplied in the wikitext.
  * For example, './File:Foo.jpg' or 'http://www.wikipedia.org'
- * @returns {string} The destination href of the given media file
+ * @return {string} The destination href of the given media file
  */
 ve.dm.MWImageModel.prototype.getImageHref = function () {
 	return this.imageHref;
@@ -1134,7 +1142,7 @@ ve.dm.MWImageModel.prototype.setFilename = function ( filename ) {
 
 /**
  * Get the filename of the current image
- * @returns {string} filename Image filename
+ * @return {string} filename Image filename
  */
 ve.dm.MWImageModel.prototype.getFilename = function () {
 	return this.filename;
