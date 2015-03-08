@@ -229,7 +229,6 @@
 	"visualeditor-preference-core-description": "Activa l'Editor Visual. No estarà disponible en pàgines de discussió i alguns altres espais de noms.",
 	"visualeditor-preference-core-label": "Editor visual",
 	"visualeditor-preference-enable": "Activa l'editor visual. Estarà disponible en {{PLURAL:$2|l'espai de noms següent|els espais de noms següents}}: $1",
-	"visualeditor-preference-language-label": "Eina de llengua de l'editor visual",
 	"visualeditor-recreate": "La pàgina ha estat suprimida des de que vau començar a editar. Premeu \"$1\" per recrear-la.",
 	"visualeditor-reference-input-placeholder": "Què voleu referenciar?",
 	"visualeditor-referenceslist-isempty": "No hi ha cap referència amb el grup «$1» en aquesta pàgina a incloure en aquesta llista.",

@@ -24,7 +24,7 @@
 			"Linforest"
 		]
 	},
-	"apihelp-visualeditor-description": "从parsoid服务为页面返回HTML5。",
+	"apihelp-visualeditor-description": "从Parsoid服务为页面返回HTML5。",
 	"apihelp-visualeditor-param-basetimestamp": "在保存时，请将此设置为编辑该修订版本时的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditor-param-cachekey": "对于序列化或版本差异，使用之前的serializeforcache请求与此密钥产生的结果。覆盖$1html。",
 	"apihelp-visualeditor-param-html": "要发送至Parsoid以转换成wiki文本的HTML。",
@@ -74,10 +74,12 @@
 	"visualeditor-dialog-beta-welcome-content": "这是我们全新的更易使用的编辑工具。它仍处于测试当中，这意味着您可能会发现页面中某些部分无法编辑，或是遇到需要修复的问题。我们鼓励您复核您做出的更改，也欢迎报告在使用可视化编辑器过程中遇到的问题（点击“{{int:visualeditor-help-tool}}”按钮提交反馈）。您随时可以切换为wiki文本编辑器，通过点击“$1”标签，这会保持您做出的任何更改。",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|欢迎}}使用可视化编辑器",
 	"visualeditor-dialog-media-alttext-section": "替代文本",
+	"visualeditor-dialog-media-alttext-section-help": "您可以用此提供一段文本描述，用于不能看见项目的人们。描述应该让他们足够理解媒体项目提供的目的和信息。这对于盲人用户和其他使用屏幕阅读器软件或纯文本浏览器的人们来说是至关重要的。",
 	"visualeditor-dialog-media-change-image": "更改图片",
 	"visualeditor-dialog-media-choose-image": "使用这个图片",
 	"visualeditor-dialog-media-content-filename": "文件名",
 	"visualeditor-dialog-media-content-section": "说明",
+	"visualeditor-dialog-media-content-section-help": "您可以用此显示一个标签，对读者而言它会显示在项目之后。这经常被用于解释为什么项目与其所在的上下文相关。它应该是简明扼要的。",
 	"visualeditor-dialog-media-dimensionseparator": " ×",
 	"visualeditor-dialog-media-goback": "返回",
 	"visualeditor-dialog-media-info-artist": "由$1上传",
