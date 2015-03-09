@@ -24,7 +24,7 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-	OO.ui.IconElement.call( this, $.extend( {}, config, { $icon: this.$element } ) );
+	OO.ui.IconElement.call( this, config );
 	ve.ce.GeneratedContentNode.call( this );
 };
 
@@ -126,6 +126,8 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
  * @see ve.ce.GeneratedContentNode#render
  */
 ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
+	// Detach the icon
+	this.$icon.detach();
 	// Call parent mixin
 	ve.ce.GeneratedContentNode.prototype.render.call( this, generatedContents );
 
@@ -140,10 +142,15 @@ ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
 			this.$element.height() < 8
 		)
 	) {
-		this.setIconElement( this.$element );
-		// The template is empty or hidden
+		// We have to reset the icon when it is reappended, because
+		// setIcon also affects the classes attached to this.$element
 		this.setIcon( 'template' );
+		// Reattach icon
+		this.$element.prepend( this.$icon );
 	} else {
+		// We have to clear the icon because if the icon's symbolic name
+		// has not changed since the last time we rendered, this.setIcon()
+		// above will internally short circuit.
 		this.setIcon( null );
 	}
 };

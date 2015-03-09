@@ -10,8 +10,13 @@
 	vertical-align: middle;
 	padding: 0.2em;
 	margin: -0.25em 0.15em 0 0.15em;
-	width: 1em;
-	height: 1em;
+}
+
+.ve-ce-mwTransclusionNode.oo-ui-iconElement .oo-ui-iconElement-icon {
+	display: inline-block;
+	vertical-align: middle;
+	width: 1.25em;
+	height: 1.25em;
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 24px 24px;
