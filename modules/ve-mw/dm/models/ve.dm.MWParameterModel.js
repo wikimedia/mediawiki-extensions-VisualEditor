@@ -127,6 +127,15 @@ ve.dm.MWParameterModel.prototype.getDefaultValue = function () {
 };
 
 /**
+ * Get default parameter value.
+ *
+ * @returns {string} Default parameter value
+ */
+ve.dm.MWParameterModel.prototype.getExampleValue = function () {
+	return this.template.getSpec().getParameterExampleValue( this.name );
+};
+
+/**
  * Get automatic parameter value.
  *
  * @returns {string} Automatic parameter name.
