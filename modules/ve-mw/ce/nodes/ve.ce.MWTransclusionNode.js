@@ -131,7 +131,6 @@ ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
 
 	// Since render replaces this.$element with a new node, we need to make sure
 	// our iconElement is defined again to be this.$element
-	this.setIconElement( this.$element );
 	this.$element.addClass( 've-ce-mwTransclusionNode' );
 	if (
 		$( generatedContents ).text().trim().length === 0 &&
@@ -141,6 +140,7 @@ ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
 			this.$element.height() < 8
 		)
 	) {
+		this.setIconElement( this.$element );
 		// The template is empty or hidden
 		this.setIcon( 'template' );
 	} else {
