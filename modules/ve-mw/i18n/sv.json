@@ -14,7 +14,8 @@
 			"WikiPhoenix",
 			"Lokal Profil",
 			"Josve05a",
-			"Jenniesarina"
+			"Jenniesarina",
+			"Dan Koehl"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
@@ -146,7 +147,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "Omdirigera denna sida till",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Målsidan för omdirigering",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Du kan förhindra att denna omdirigering uppdateras automatiskt när sidan till vilken den omdirigeras flyttas, i de mycket sällsynta fall där detta behövs.",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Förhindra denna omdirigering från att uppdateras när målsidan flyttas.",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Förhindra att denna redirect från att uppdateras då target-sidan är flyttad.",
 	"visualeditor-dialog-meta-settings-section": "Sidinställningar",
 	"visualeditor-dialog-meta-settings-toc-default": "Vid behov",
 	"visualeditor-dialog-meta-settings-toc-disable": "Aldrig",
@@ -174,6 +175,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Visa alternativ",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Du lägger till}} mallen \"$1\" på denna sida. Den saknar ännu en beskrivning, men det kan finnas information på <a $2>mallens sida</a>.",
 	"visualeditor-dialog-transclusion-options": "Alternativ",
+	"visualeditor-dialog-transclusion-param-default": "Förvalt värde: $1",
 	"visualeditor-dialog-transclusion-param-info": "Fältbeskrivning",
 	"visualeditor-dialog-transclusion-param-info-missing": "Ingen fältbeskrivning finns tillgänglig",
 	"visualeditor-dialog-transclusion-placeholder": "Lägga till en mall",
@@ -240,8 +242,6 @@
 	"visualeditor-preference-core-description": "Aktivera VisualEditor. Den kommer inte vara tillgänglig på diskussionssidor och i vissa andra namnrymder.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Aktivera VisualEditor. Den kommer att vara tillgänglig i följande {{PLURAL:$2|namnrymd|namnrymder}}: $1",
-	"visualeditor-preference-language-description": "Lägg till ett experimentellt verktyg i VisualEditor för att markera det språk i vilket text är skriven för testning, före allmän utsättning. Kom ihåg att alltid granska dina ändringar innan du sparar när du använder experimentella funktioner.",
-	"visualeditor-preference-language-label": "Språkverktyg för VisualEditor",
 	"visualeditor-preference-mwalienextension-description": "Lägga till experimentella grundläggande stöd till VisualEditor för att kunna redigera taggar (som gallerier eller källkodsblock), innan dess att enskilda verktyg för detta finns tillgängliga. Kom ihåg att alltid granska ändringarna innan du sparar när du använder experimentella funktioner.",
 	"visualeditor-preference-mwalienextension-label": "VisualEditor-tillägg för taggredigering",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",

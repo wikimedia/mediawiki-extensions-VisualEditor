@@ -191,6 +191,8 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Optionen anzeigen",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Du}} fügst dieser Seite die Vorlage „$1“ hinzu. Die Vorlage hat noch keine Beschreibung, aber vielleicht gibt es einige Informationen auf der <a $2>Vorlagenseite</a>.",
 	"visualeditor-dialog-transclusion-options": "Optionen",
+	"visualeditor-dialog-transclusion-param-default": "Standardwert: $1",
+	"visualeditor-dialog-transclusion-param-example": "Beispielwert: $1",
 	"visualeditor-dialog-transclusion-param-info": "Beschreibung des Feldes",
 	"visualeditor-dialog-transclusion-param-info-missing": "Keine Feldbeschreibung verfügbar",
 	"visualeditor-dialog-transclusion-placeholder": "Eine Vorlage hinzufügen",

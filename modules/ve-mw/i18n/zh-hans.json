@@ -204,6 +204,8 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "显示选项",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|您正在}}将“$1”模板添加至该页面。它还没有说明，但在<a $2>模板页面</a>上可能有一些信息。",
 	"visualeditor-dialog-transclusion-options": "选项",
+	"visualeditor-dialog-transclusion-param-default": "默认值：$1",
+	"visualeditor-dialog-transclusion-param-example": "示例值：$1",
 	"visualeditor-dialog-transclusion-param-info": "字段说明",
 	"visualeditor-dialog-transclusion-param-info-missing": "没有可用的字段说明",
 	"visualeditor-dialog-transclusion-placeholder": "加入一个模板",
