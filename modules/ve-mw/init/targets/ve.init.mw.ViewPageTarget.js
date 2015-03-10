@@ -1477,7 +1477,7 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
 ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
-	var $editableContent,
+	var $editableContent, $imgContent,
 		$content = $( $.parseHTML( html ) );
 
 	if ( lastModified ) {
@@ -1496,9 +1496,10 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	if ( $( '#mw-imagepage-content' ).length ) {
+	$imgContent = $( '#mw-imagepage-content' );
+	if ( $imgContent.length ) {
 		// On file pages, we only want to replace the (local) description.
-		$editableContent = $( '#mw-imagepage-content' );
+		$editableContent = $imgContent;
 	} else if ( $( '#mw-pages' ).length ) {
 		// It would be nice if MW core did this for us...
 		if ( !$( '#ve-cat-description' ).length ) {
