@@ -122,9 +122,6 @@ ve.ce.MWInlineExtensionNode = function VeCeMWInlineExtensionNode( model, config 
 
 	// Mixin constructors
 	ve.ce.MWExtensionNode.call( this );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwInlineExtensionNode' );
 };
 
 /* Inheritance */
@@ -151,9 +148,6 @@ ve.ce.MWBlockExtensionNode = function VeCeMWBlockExtensionNode( model, config ) 
 
 	// Mixin constructors
 	ve.ce.MWExtensionNode.call( this );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwBlockExtensionNode' );
 };
 
 /* Inheritance */

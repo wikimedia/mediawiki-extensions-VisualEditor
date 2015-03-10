@@ -35,17 +35,6 @@ ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
 /* Methods */
 
 /**
- * @inheritdoc
- */
-ve.ce.MWGalleryNode.prototype.onSetup = function () {
-	// Parent method
-	ve.ce.MWGalleryNode.super.prototype.onSetup.call( this );
-
-	// DOM changes
-	this.$element.addClass( 've-ce-mwGalleryNode' );
-};
-
-/**
  * @inheritdoc ve.ce.GeneratedContentNode
  */
 ve.ce.MWGalleryNode.prototype.getFocusableElement = function () {
