@@ -81,7 +81,7 @@
 					"ve.dm.*Selection",
 					"ve.dm.Transaction",
 					"ve.dm.TransactionProcessor",
-					"ve.dm.TransactionProcessor.processors",
+					"ve.dm.TransactionProcessor.*",
 					"ve.dm.*Annotation",
 					"ve.dm.AnnotationSet",
 					"ve.dm.*MetaItem",
