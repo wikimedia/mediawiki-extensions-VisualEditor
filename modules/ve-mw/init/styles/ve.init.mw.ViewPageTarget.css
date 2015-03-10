@@ -25,7 +25,8 @@
 .ve-activated #t-print,
 .ve-activated #t-permalink,
 .ve-activated #p-coll-print_export,
-.ve-activated #t-cite {
+.ve-activated #t-cite,
+.ve-deactivating .ve-ce-surface {
 	display: none;
 }
 
