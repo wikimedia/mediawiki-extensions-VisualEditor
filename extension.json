@@ -115,8 +115,8 @@
 		"ContentHandlerDefaultModelFor": [
 			"VisualEditorHooks::onContentHandlerDefaultModelFor"
 		],
-		"DoEditSectionLink": [
-			"VisualEditorHooks::onDoEditSectionLink"
+		"SkinEditSectionLinks": [
+			"VisualEditorHooks::onSkinEditSectionLinks"
 		],
 		"GetBetaFeaturePreferences": [
 			"VisualEditorHooks::onGetBetaPreferences"
