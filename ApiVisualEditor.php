@@ -23,18 +23,59 @@ class ApiVisualEditor extends ApiBase {
 	public function __construct( ApiMain $main, $name, Config $config ) {
 		parent::__construct( $main, $name );
 		$this->veConfig = $config;
-		$forwardCookies = false;
-		if ( $config->get( 'VisualEditorParsoidForwardCookies' ) && !User::isEveryoneAllowed( 'read' ) ) {
-			$forwardCookies = RequestContext::getMain()->getRequest()->getHeader( 'Cookie' );
-		}
 		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( array() ) );
-		$this->serviceClient->mount( '/parsoid/', new ParsoidVirtualRESTService( array(
-			'URL' => $config->get( 'VisualEditorParsoidURL' ),
-			'prefix' => $config->get( 'VisualEditorParsoidPrefix' ),
-			'timeout' => $config->get( 'VisualEditorParsoidTimeout' ),
-			'HTTPProxy' => $config->get( 'VisualEditorParsoidHTTPProxy' ),
-			'forwardCookies' => $forwardCookies,
-		) ) );
+		$this->serviceClient->mount( '/parsoid/', $this->getVRSObject() );
+	}
+
+	/**
+	 * Creates the virtual REST service object to be used in VE's API calls. The
+	 * method determines whether to instantiate a ParsoidVirtualRESTService or a
+	 * RestbaseVirtualRESTService object based on configuration directives: if
+	 * $wgVirtualRestConfig['modules']['restbase'] is defined, RESTBase is chosen,
+	 * otherwise Parsoid is used (either by using the MW Core config, or the
+	 * VE-local one).
+	 *
+	 * @return VirtualRESTService the VirtualRESTService object to use
+	 */
+	private function getVRSObject() {
+		// the params array to create the service object with
+		$params = array();
+		// the VRS class to use, defaults to Parsoid
+		$class = 'ParsoidVirtualRESTService';
+		$config = $this->veConfig;
+		// the global virtual rest service config object, if any
+		$vrs = $this->getConfig()->get( 'VirtualRestConfig' );
+		if ( isset( $vrs['modules'] ) && isset( $vrs['modules']['restbase'] ) ) {
+			// if restbase is available, use it
+			$params = $vrs['modules']['restbase'];
+			$class = 'RestbaseVirtualRESTService';
+			// remove once VE generates restbase paths
+			$params['parsoidCompat'] = true;
+		} elseif ( isset( $vrs['modules'] ) && isset( $vrs['modules']['parsoid'] ) ) {
+			// there's a global parsoid config, use it next
+			$params = $vrs['modules']['parsoid'];
+		} else {
+			// no global modules defined, fall back to old defaults
+			$params = array(
+				'URL' => $config->get( 'VisualEditorParsoidURL' ),
+				'prefix' => $config->get( 'VisualEditorParsoidPrefix' ),
+				'timeout' => $config->get( 'VisualEditorParsoidTimeout' ),
+				'HTTPProxy' => $config->get( 'VisualEditorParsoidHTTPProxy' ),
+				'forwardCookies' => $config->get( 'VisualEditorParsoidForwardCookies' )
+			);
+		}
+		// merge the global and service-specific params
+		if ( isset( $vrs['global'] ) ) {
+			$params = array_merge( $vrs['global'], $params );
+		}
+		// set up cookie forwarding
+		if ( $params['forwardCookies'] && !User::isEveryoneAllowed( 'read' ) ) {
+			$params['forwardCookies'] = RequestContext::getMain()->getRequest()->getHeader( 'Cookie' );
+		} else {
+			$params['forwardCookies'] = false;
+		}
+		// create the VRS object and return it
+		return new $class( $params );
 	}
 
 	private function requestParsoid( $method, $path, $params ) {
