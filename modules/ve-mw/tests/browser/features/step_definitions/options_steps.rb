@@ -96,6 +96,6 @@ Then(/^the options set in Page Settings panel should appear in diff view$/) do
     page.wait_until(10) do
       page.diff_view.include? 'Linux'
     end
-    expect(page.diff_view).to match(/#REDIRECT \[\[Linux\]\]Options VisualEditor Test.+__FORCETOC__.+__STATICREDIRECT__.+__NOEDITSECTION__.+__DISAMBIG__/m)
+    expect(page.diff_view).to match(/#REDIRECT \[\[Linux\]\].+Options VisualEditor Test.+__FORCETOC__.+__STATICREDIRECT__.+__NOEDITSECTION__.+__DISAMBIG__/m)
   end
 end
