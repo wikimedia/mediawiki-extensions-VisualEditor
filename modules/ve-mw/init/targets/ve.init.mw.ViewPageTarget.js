@@ -1231,6 +1231,9 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 		.append( this.toolbarSaveButton.$element );
 
 	this.toolbar.$actions.append( $actionTools, $pushButtons );
+	// Make the toolbar recalculate its sizes for narrow/wide switching.
+	// This really should not be necessary.
+	this.toolbar.narrowThreshold = this.toolbar.$group.width() + this.toolbar.$actions.width();
 };
 
 /**
