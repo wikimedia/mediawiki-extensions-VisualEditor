@@ -199,19 +199,19 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 				target.toolbarSetupDeferred.resolve();
 			} );
 		} );
-	}
 
-	this.toolbarSetupDeferred.done( function () {
-		var surface = target.getSurface();
-		// Check the surface wasn't torn down while the toolbar was animating
-		if ( surface ) {
-			ve.track( 'trace.initializeToolbar.enter' );
-			target.getToolbar().initialize();
-			surface.getView().emit( 'position' );
-			surface.getContext().updateDimensions();
-			ve.track( 'trace.initializeToolbar.exit' );
-		}
-	} );
+		this.toolbarSetupDeferred.done( function () {
+			var surface = target.getSurface();
+			// Check the surface wasn't torn down while the toolbar was animating
+			if ( surface ) {
+				ve.track( 'trace.initializeToolbar.enter' );
+				target.getToolbar().initialize();
+				surface.getView().emit( 'position' );
+				surface.getContext().updateDimensions();
+				ve.track( 'trace.initializeToolbar.exit' );
+			}
+		} );
+	}
 };
 
 /**
