@@ -48,7 +48,7 @@ end
 
 When(/^I click Save page$/) do
   on(VisualEditorPage) do |page|
-    page.disabled_save_button_element.when_not_present(10)
+    page.disabled_save_button_element.when_not_visible(15)
     page.save_page_element.when_present.click
   end
 end
@@ -75,7 +75,7 @@ end
 When(/^I edit the page with (.+)$/) do |input_string|
   on(VisualEditorPage) do |page|
     page.page_text_element.when_not_visible
-    page.content_element.send_keys(input_string + " #{@random_string} ")
+    page.content_element.when_present(10).send_keys(input_string + " #{@random_string} ")
   end
 end
 
