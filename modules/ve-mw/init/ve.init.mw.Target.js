@@ -40,6 +40,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 	this.events = new ve.init.mw.TargetEvents( this );
 
 	this.modules = [
+		'ext.visualEditor.icons',
 		'ext.visualEditor.mwcore',
 		'ext.visualEditor.mwlink',
 		'ext.visualEditor.data',
@@ -49,7 +50,6 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 		'ext.visualEditor.mwtransclusion',
 		'ext.visualEditor.language'
 	]
-		.concat( this.constructor.static.iconModuleStyles )
 		.concat( conf.pluginModules || [] );
 
 	this.pluginCallbacks = [];
@@ -256,17 +256,6 @@ ve.init.mw.Target.static.importRules = {
 	},
 	all: null
 };
-
-/**
- * Defines modules needed to style icons.
- *
- * @static
- * @inheritable
- * @property {string[]} iconModuleStyles Modules that should be loaded to provide the icons
- */
-ve.init.mw.Target.static.iconModuleStyles = [
-	'ext.visualEditor.icons'
-];
 
 /**
  * Name of target class. Used by TargetEvents to identify which target we are tracking.
