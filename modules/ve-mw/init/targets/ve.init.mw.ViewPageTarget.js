@@ -290,6 +290,9 @@ ve.init.mw.ViewPageTarget.prototype.unbindHandlers = function () {
  * @return {jQuery.Promise}
  */
 ve.init.mw.ViewPageTarget.prototype.activate = function () {
+	var surface,
+		pageTarget = this;
+
 	if ( !this.active && !this.activating ) {
 		ve.track( 'trace.activate.enter' );
 		this.activating = true;
@@ -299,6 +302,10 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		$( 'html' ).addClass( 've-activating ve-activated' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).always( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
+			// We have to focus the page after hiding the original content, otherwise
+			// in firefox the contentEditable container was below the view page, and
+			// 'focus' scrolled the screen down.
+			pageTarget.getSurface().getView().focus();
 		} );
 
 		this.bindHandlers();
@@ -313,7 +320,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		this.saveScrollPosition();
 
 		// Create dummy surface to show toolbar while loading
-		var surface = this.addSurface( [] );
+		surface = this.addSurface( [] );
 		surface.disable();
 		// setSurface creates dummy toolbar
 		this.setSurface( surface );
@@ -527,15 +534,15 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	// Update UI
 	this.changeDocumentTitle();
 
-	this.getSurface().getView().focus();
-
 	this.setupToolbarSaveButton();
 	this.attachToolbarSaveButton();
 	this.restoreScrollPosition();
 	this.restoreEditSection();
 	this.setupUnloadHandlers();
 	this.maybeShowDialogs();
+
 	this.activatingDeferred.resolve();
+
 	mw.hook( 've.activationComplete' ).fire();
 	ve.track( 'trace.activate.exit' );
 };
