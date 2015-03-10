@@ -195,7 +195,7 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 
 	if ( !this.sequence ) {
 		paramOrder = this.spec.getParameterOrder();
-		paramNames = ve.getObjectKeys( this.params );
+		paramNames = Object.keys( this.params );
 
 		this.sequence = [];
 		// Known parameters first

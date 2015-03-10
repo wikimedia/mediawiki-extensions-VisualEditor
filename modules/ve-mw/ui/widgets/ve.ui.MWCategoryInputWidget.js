@@ -133,7 +133,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 			linkCacheUpdate[suggestedCategoryTitle] = { missing: false };
 		}
 		if (
-			ve.indexOf( suggestedCategory, existingCategories ) === -1
+			existingCategories.indexOf( suggestedCategory ) === -1
 		) {
 			if ( suggestedCacheEntry && suggestedCacheEntry.hidden ) {
 				hiddenCategoryItems.push( suggestedCategory );

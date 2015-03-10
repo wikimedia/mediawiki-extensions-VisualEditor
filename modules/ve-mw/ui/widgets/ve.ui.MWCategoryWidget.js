@@ -231,7 +231,7 @@ ve.ui.MWCategoryWidget.prototype.setDefaultSortKey = function ( value ) {
  * @param {string[]} List of category names
  */
 ve.ui.MWCategoryWidget.prototype.getCategories = function () {
-	return ve.getObjectKeys( this.categories );
+	return Object.keys( this.categories );
 };
 
 /**

@@ -151,7 +151,7 @@
 			// Use specified index
 			index = item.index;
 			// Auto-remove if already existing, preserving index
-			existing = ve.indexOf( item.add, this.parts );
+			existing = this.parts.indexOf( item.add );
 			if ( existing !== -1 ) {
 				this.removePart( item.add );
 				if ( index && existing + 1 < index ) {
@@ -160,7 +160,7 @@
 			}
 			// Derive index from removal if given
 			if ( index === undefined && item.remove ) {
-				index = ve.indexOf( item.remove, this.parts );
+				index = this.parts.indexOf( item.remove );
 				if ( index !== -1 ) {
 					remove = 1;
 				}
@@ -221,7 +221,7 @@
 					// Skip already cached data
 					!hasOwn.call( specCache, title ) &&
 					// Skip duplicate titles in the same batch
-					ve.indexOf( title, titles ) === -1
+					titles.indexOf( title ) === -1
 				) {
 					titles.push( title );
 				}
@@ -287,7 +287,7 @@
 
 	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( queue, apiPromise ) {
 		// Prune completed request
-		var index = ve.indexOf( apiPromise, this.requests );
+		var index = this.requests.indexOf( apiPromise );
 		if ( index !== -1 ) {
 			this.requests.splice( index, 1 );
 		}
@@ -417,7 +417,7 @@
 	 * @fires replace
 	 */
 	ve.dm.MWTransclusionModel.prototype.removePart = function ( part ) {
-		var index = ve.indexOf( part, this.parts );
+		var index = this.parts.indexOf( part );
 		if ( index !== -1 ) {
 			this.parts.splice( index, 1 );
 			part.disconnect( this );

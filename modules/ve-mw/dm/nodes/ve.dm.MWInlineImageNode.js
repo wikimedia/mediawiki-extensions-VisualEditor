@@ -44,10 +44,8 @@ ve.dm.MWInlineImageNode.static.isContent = true;
 ve.dm.MWInlineImageNode.static.name = 'mwInlineImage';
 
 ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = function ( attribute ) {
-	return ve.indexOf(
-		attribute,
-		[ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href' ]
-	) === -1;
+	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href' ];
+	return attributes.indexOf( attribute ) === -1;
 };
 
 ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span' ];
@@ -55,7 +53,7 @@ ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span' ];
 ve.dm.MWInlineImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.getMatchRdfaTypes = function () {
-	return ve.getObjectKeys( this.rdfaToType );
+	return Object.keys( this.rdfaToType );
 };
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {

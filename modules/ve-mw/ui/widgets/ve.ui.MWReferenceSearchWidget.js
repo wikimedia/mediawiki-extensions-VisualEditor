@@ -97,7 +97,7 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 	this.internalList.connect( this, { update: 'onInternalListUpdate' } );
 	this.internalList.getListNode().connect( this, { update: 'onListNodeUpdate' } );
 
-	groupNames = ve.getObjectKeys( groups );
+	groupNames = Object.keys( groups );
 	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
 		groupName = groupNames[i];
 		if ( groupName.lastIndexOf( 'mwReference/' ) !== 0 ) {
@@ -159,7 +159,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 	}
 
 	this.index = [];
-	groupNames = ve.getObjectKeys( groups ).sort();
+	groupNames = Object.keys( groups ).sort();
 
 	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
 		groupName = groupNames[i];

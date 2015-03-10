@@ -49,10 +49,8 @@ ve.dm.MWBlockImageNode.static.rdfaToType = {
 ve.dm.MWBlockImageNode.static.name = 'mwBlockImage';
 
 ve.dm.MWBlockImageNode.static.preserveHtmlAttributes = function ( attribute ) {
-	return ve.indexOf(
-		attribute,
-		[ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ]
-	) === -1;
+	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ];
+	return attributes.indexOf( attribute ) === -1;
 };
 
 ve.dm.MWBlockImageNode.static.handlesOwnChildren = true;
@@ -64,7 +62,7 @@ ve.dm.MWBlockImageNode.static.matchTagNames = [ 'figure' ];
 ve.dm.MWBlockImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWBlockImageNode.static.getMatchRdfaTypes = function () {
-	return ve.getObjectKeys( this.rdfaToType );
+	return Object.keys( this.rdfaToType );
 };
 
 ve.dm.MWBlockImageNode.static.classAttributes = {

@@ -232,7 +232,7 @@ ve.dm.MWReferenceNode.static.remapInternalListIndexes = function ( dataElement, 
 ve.dm.MWReferenceNode.static.remapInternalListKeys = function ( dataElement, internalList ) {
 	var suffix = '';
 	// Try name, name2, name3, ... until unique
-	while ( ve.indexOf( dataElement.attributes.listKey + suffix, internalList.keys ) !== -1 ) {
+	while ( internalList.keys.indexOf( dataElement.attributes.listKey + suffix ) !== -1 ) {
 		suffix = suffix ? suffix + 1 : 2;
 	}
 	if ( suffix ) {

@@ -1494,7 +1494,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
 		lastHeadingLevel = offsetNode.getModel().getAttribute( 'level' );
 		// Next sibling
-		nextNode = offsetNode.parent.children[ve.indexOf( offsetNode, offsetNode.parent.children ) + 1];
+		nextNode = offsetNode.parent.children[offsetNode.parent.children.indexOf( offsetNode ) + 1];
 		if ( !nextNode ) {
 			break;
 		}

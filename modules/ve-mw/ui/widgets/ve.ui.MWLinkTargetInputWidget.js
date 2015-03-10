@@ -192,9 +192,9 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 
 	// If not found, run value through mw.Title to avoid treating a match as a
 	// mismatch where normalisation would make them matching (bug 48476)
-	pageExistsExact = ve.indexOf( this.value, existingPages ) !== -1;
+	pageExistsExact = existingPages.indexOf( this.value ) !== -1;
 	pageExists = pageExistsExact || (
-		titleObj && ve.indexOf( titleObj.getPrefixedText(), existingPages ) !== -1
+		titleObj && existingPages.indexOf( titleObj.getPrefixedText() ) !== -1
 	);
 
 	if ( !pageExists ) {

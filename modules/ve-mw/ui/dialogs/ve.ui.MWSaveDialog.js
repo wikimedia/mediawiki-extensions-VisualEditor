@@ -147,7 +147,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 		dialog = this,
 		panelObj = dialog[panel + 'Panel'];
 
-	if ( ve.indexOf( panel, [ 'save', 'review', 'conflict', 'nochanges' ] ) === -1 ) {
+	if ( ( [ 'save', 'review', 'conflict', 'nochanges' ].indexOf( panel ) ) === -1 ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
 

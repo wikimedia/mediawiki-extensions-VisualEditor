@@ -17,7 +17,7 @@
 ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) {
 	var key,
 		items = toolGroup.getToolbar().getTarget().getEditNotices(),
-		count = ve.getObjectKeys( items ).length,
+		count = Object.keys( items ).length,
 		title = ve.msg( 'visualeditor-editnotices-tool', count );
 
 	// Configuration initialization
@@ -68,7 +68,7 @@ ve.ui.MWNoticesPopupTool.static.autoAddToGroup = false;
  */
 ve.ui.MWNoticesPopupTool.prototype.getTitle = function () {
 	var items = this.toolbar.getTarget().getEditNotices(),
-		count = ve.getObjectKeys( items ).length;
+		count = Object.keys( items ).length;
 
 	return ve.msg( this.constructor.static.title, count );
 };

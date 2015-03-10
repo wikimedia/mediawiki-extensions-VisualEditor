@@ -55,9 +55,8 @@ ve.dm.MWTransclusionNode.static.matchRdfaTypes = [
 ];
 
 ve.dm.MWTransclusionNode.static.matchFunction = function ( domElement ) {
-	return ve.indexOf( 'mw:Transclusion',
-		( domElement.getAttribute( 'typeof' ) || '' ).split( ' ' )
-	) !== -1;
+	var types = ( domElement.getAttribute( 'typeof' ) || '' ).split( ' ' );
+	return types.indexOf( 'mw:Transclusion' ) !== -1;
 };
 
 ve.dm.MWTransclusionNode.static.enableAboutGrouping = true;

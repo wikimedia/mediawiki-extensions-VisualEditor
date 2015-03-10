@@ -104,7 +104,7 @@
 			this.deferreds[name].resolve( entries[name] );
 			this.cacheValues[name] = entries[name];
 		}
-		this.emit( 'add', ve.getObjectKeys( entries ) );
+		this.emit( 'add', Object.keys( entries ) );
 	};
 
 	/**

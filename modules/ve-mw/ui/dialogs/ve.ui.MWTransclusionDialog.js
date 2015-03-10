@@ -83,7 +83,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
 	if ( item ) {
 		part = this.transclusionModel.getPartFromId( item.getData() );
 		// Move part to new location, and if dialog is loaded switch to new part page
-		promise = this.transclusionModel.addPart( part, ve.indexOf( part, parts ) + places );
+		promise = this.transclusionModel.addPart( part, parts.indexOf( part ) + places );
 		if ( this.loaded && !this.preventReselection ) {
 			promise.done( this.setPageByName.bind( this, part.getId() ) );
 		}
@@ -284,7 +284,7 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	if ( part ) {
 		// Insert after selected part, or at the end if nothing is selected
 		index = item ?
-			ve.indexOf( this.transclusionModel.getPartFromId( item.getData() ), parts ) + 1 :
+			parts.indexOf( this.transclusionModel.getPartFromId( item.getData() ) ) + 1 :
 			parts.length;
 		// Add the part, and if dialog is loaded switch to part page
 		promise = this.transclusionModel.addPart( part, index );
