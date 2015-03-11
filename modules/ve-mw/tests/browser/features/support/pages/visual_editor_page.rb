@@ -170,7 +170,7 @@ class VisualEditorPage
   span(:ve_link_ui, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-labelElement-label oo-ui-labelWidget oo-ui-processDialog-title oo-ui-labelElement', text: 'Link')
   span(:ve_media_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-picture')
   span(:ve_more_markup_options, css: 'span.oo-ui-tool-name-more-fewer:nth-child(10) > a:nth-child(1) > span:nth-child(2)')
-  a(:ve_more_references_options, css: 'span.oo-ui-tool-name-more-fewer:nth-child(9) > a:nth-child(1)')
+  a(:ve_more_references_options, css: '.ve-test-toolbar-insert > div:nth-child(2) > span:nth-child(8) > a:nth-child(1)')
   span(:ve_numbering, class: 'oo-ui-iconElement-icon oo-ui-icon-number-list')
   span(:ve_references, class: 'oo-ui-iconElement-icon oo-ui-icon-references')
   span(:ve_strikethrough, class: 'oo-ui-iconElement-icon oo-ui-icon-strikethrough-s')
