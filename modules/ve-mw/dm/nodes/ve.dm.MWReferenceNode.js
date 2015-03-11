@@ -25,7 +25,8 @@ ve.dm.MWReferenceNode = function VeDmMWReferenceNode() {
 	// Event handlers
 	this.connect( this, {
 		root: 'onRoot',
-		unroot: 'onUnroot'
+		unroot: 'onUnroot',
+		attributeChange: 'onAttributeChange'
 	} );
 };
 
@@ -305,10 +306,13 @@ ve.dm.MWReferenceNode.prototype.onUnroot = function () {
  */
 ve.dm.MWReferenceNode.prototype.addToInternalList = function () {
 	if ( this.getRoot() === this.getDocument().getDocumentNode() ) {
+		this.registeredListGroup = this.element.attributes.listGroup;
+		this.registeredListKey = this.element.attributes.listKey;
+		this.registeredListIndex = this.element.attributes.listIndex;
 		this.getDocument().getInternalList().addNode(
-			this.element.attributes.listGroup,
-			this.element.attributes.listKey,
-			this.element.attributes.listIndex,
+			this.registeredListGroup,
+			this.registeredListKey,
+			this.registeredListIndex,
 			this
 		);
 	}
@@ -319,9 +323,9 @@ ve.dm.MWReferenceNode.prototype.addToInternalList = function () {
  */
 ve.dm.MWReferenceNode.prototype.removeFromInternalList = function () {
 	this.getDocument().getInternalList().removeNode(
-		this.element.attributes.listGroup,
-		this.element.attributes.listKey,
-		this.element.attributes.listIndex,
+		this.registeredListGroup,
+		this.registeredListKey,
+		this.registeredListIndex,
 		this
 	);
 };
@@ -333,6 +337,21 @@ ve.dm.MWReferenceNode.prototype.getClonedElement = function () {
 	delete clone.attributes.mw;
 	delete clone.attributes.originalMw;
 	return clone;
+};
+
+ve.dm.MWReferenceNode.prototype.onAttributeChange = function ( key, from, to ) {
+	if (
+		( key !== 'listGroup' && key !== 'listKey' ) ||
+		( key === 'listGroup' && this.registeredListGroup === to ) ||
+		( key === 'listKey' && this.registeredListKey === to )
+	) {
+		return;
+	}
+
+	// Need the old list keys and indexes, so we register them in addToInternalList
+	// They've already been updated in this.element.attributes before this code runs
+	this.removeFromInternalList();
+	this.addToInternalList();
 };
 
 /* Registration */
