@@ -116,6 +116,7 @@
 	"visualeditor-dialog-reference-options-section": "Seçenekler",
 	"visualeditor-dialog-reference-title": "Kaynak",
 	"visualeditor-dialog-reference-useexisting-label": "Mevcut bir kaynak kullanın",
+	"visualeditor-dialog-reference-useexisting-tool": "Tekrar kullan",
 	"visualeditor-dialog-referenceslist-title": "Kaynak listesi",
 	"visualeditor-dialog-template-title": "Şablon",
 	"visualeditor-dialog-transclusion-add-content": "İçerik ekle",
@@ -175,7 +176,7 @@
 	"visualeditor-media-input-placeholder": "Dosya ara",
 	"visualeditor-meta-tool": "Seçenekler",
 	"visualeditor-mwalienextensioninspector-title": "MediaWiki uzantısı",
-	"visualeditor-mweditmodesource-title": "Kaynağı değiştire dön",
+	"visualeditor-mweditmodesource-title": "Kaynağı değiştire geçiş yap",
 	"visualeditor-mweditmodesource-warning": "Kaynak biçiminde düzenlemeye geçmek üzeresiniz.\nBu belgeye yaptığınız değişiklikleriniz korunacaktır, fakat Görsel Düzenleyiciye değişiklikleri kaydetmeden ya da sayfayı yenilemeden geçiş yapamayacaksınız.\nDevam etmek istiyor musunuz?",
 	"visualeditor-mweditmodesource-warning-cancel": "Hayır, iptal et",
 	"visualeditor-mweditmodesource-warning-switch": "Evet, geç",
@@ -191,8 +192,6 @@
 	"visualeditor-preference-core-description": "Görsel Düzenleyiciyi etkinleştirin. Mesaj sayfalarında ve bazı diğer ad alanlarında kullanılamayacaktır.",
 	"visualeditor-preference-core-label": "Görsel Düzenleyici",
 	"visualeditor-preference-enable": "Görsel Düzenleyiciyi etkinleştirin. Aşağıdaki {{PLURAL:$2|ad alanı|ad alanlarında}} kullanılacaktır: $1",
-	"visualeditor-preference-language-description": "Görsel Editör'le düzenlendiğiniz ve test aşamasında olan bir işaretleme diliyle yazılmış metninizi genel yayın öncesinde test edebilmek için bu deney aracını kullanın. Deneysel özellikleri kullanırken, değişikliklerinizi kaydetmeden önce gözden geçirmeyi lütfen unutmayın.",
-	"visualeditor-preference-language-label": "Görsel Düzenleyici dil aracı",
 	"visualeditor-preference-mwalienextension-label": "Görsel Düzenleyiciyi uzantı etiketi düzenleme",
 	"visualeditor-reference-input-placeholder": "Hangi kaynağı kullanmak istersiniz?",
 	"visualeditor-referenceslist-isempty": "Bu listeye dahil etmek için bu sayfada \"$1\" grubu kaynağına uygun kaynak bulunmamaktadır.",
@@ -226,6 +225,7 @@
 	"visualeditor-viewpage-savewarning": "Kaydetmeden önce ilk görüntüleme moduna geri dönmek istediğinizden emin misiniz?",
 	"visualeditor-viewpage-savewarning-discard": "Düzenlemeler silinsin",
 	"visualeditor-viewpage-savewarning-keep": "Düzenlemeye devam",
+	"visualeditor-viewpage-savewarning-title": "Emin misiniz?",
 	"visualeditor-wikitext-warning": "Görsel Düzenleyici'yi kullanmaktasınız - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|viki metin editörü]] burada çalışmamaktadır. Herhangi bir anda, değişikliklerinizi kaybetmeden kaynak düzenlemeye geçmek için, \"{{int:visualeditor-toolbar-savedialog}}\" yanındaki aşağı açılır menüden \"{{int:visualeditor-mweditmodesource-title}}\" seçeneğine tıklayın.",
 	"visualeditor-wikitext-warning-title": "Vikimetin biçimlendirmesi algılandı"
 }

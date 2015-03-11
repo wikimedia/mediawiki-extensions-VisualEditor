@@ -15,6 +15,7 @@
 	"visualeditor-beta-label": "бэта",
 	"visualeditor-beta-warning": "Візуальны рэдактар знаходзіцца ў «бэце». Вы можаце сустрэць праблемы пры выкарыстаньні, некаторыя часткі старонкі могуць быць недаступныя для рэдагаваньня. Пстрыкніце «{{int:visualeditor-ca-editsource}}», каб пераключыцца ў рэжым вікітэксту — незахаваныя зьмены будуць страчаныя.",
 	"visualeditor-browserwarning": "Вы карыстаеце браўзэрам, які не падтрымліваецца афіцыйна візуальным рэдактарам.",
+	"visualeditor-ca-createlocaldescriptionsource": "Дадаць крыніцу лякальнага апісаньня",
 	"visualeditor-ca-createsource": "Стварыць крыніцу",
 	"visualeditor-ca-editsource": "Рэдагаваць крыніцу",
 	"visualeditor-ca-editsource-section": "рэдагаваць крыніцу",
@@ -115,8 +116,8 @@
 	"visualeditor-serializeerror": "Памылка ў часе загрузкі зьвестак з сэрвэра: $1.",
 	"visualeditor-toolbar-savedialog": "Захаваць старонку",
 	"visualeditor-usernamespacepagelink": "Project:Старонка ўдзельніка",
+	"visualeditor-version-label": "Вэрсія",
 	"visualeditor-viewpage-savewarning": "Вы ўпэўненыя, што жадаеце перайсьці ў рэжым прагляду без папярэдняга захаваньня?",
 	"visualeditor-wikitext-warning": "Вы карыстаецеся візуальным рэдактарам — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікітэкст]] тут не працуе. Пстрыкніце «{{MediaWiki:visualeditor-ca-editsource}}», каб рэдагаваць старонку ў рэжыме вікітэксту — незахаваныя зьмены будуць страчаныя.",
-	"visualeditor-wikitext-warning-link": "Help:Вікі-фарматаваньне",
 	"visualeditor-wikitext-warning-title": "Выяўленае ўжываньне вікітэксту"
 }
