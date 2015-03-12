@@ -38,11 +38,13 @@ ve.ui.MWLinkNodeInspector.static.modelClasses = [ ve.dm.MWNumberedExternalLinkNo
 ve.ui.MWLinkNodeInspector.static.actions = ve.ui.MWLinkNodeInspector.super.static.actions.concat( [
 	{
 		action: 'open',
-		label: OO.ui.deferMsg( 'visualeditor-linkinspector-open' )
+		label: OO.ui.deferMsg( 'visualeditor-linkinspector-open' ),
+		modes: [ 'edit', 'insert' ]
 	},
 	{
 		action: 'convert',
-		label: OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' )
+		label: OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' ),
+		modes: [ 'edit' ]
 	}
 ] );
 
