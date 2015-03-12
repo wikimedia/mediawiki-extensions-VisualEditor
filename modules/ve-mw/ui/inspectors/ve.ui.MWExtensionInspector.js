@@ -37,8 +37,6 @@ ve.ui.MWExtensionInspector.static.placeholder = null;
  */
 ve.ui.MWExtensionInspector.static.nodeModel = null;
 
-ve.ui.MWExtensionInspector.static.removable = false;
-
 /**
  * Extension is allowed to have empty contents
  *
