@@ -64,7 +64,8 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 
 	view.destroy();
 
-	return view.$element;
+	// Strip the HTML rendering of any events that might be still bound to it
+	return $( view.$element.html() );
 };
 
 /**
