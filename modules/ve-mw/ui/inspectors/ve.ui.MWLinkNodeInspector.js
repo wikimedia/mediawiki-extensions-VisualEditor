@@ -31,8 +31,6 @@ ve.ui.MWLinkNodeInspector.static.icon = 'link';
 
 ve.ui.MWLinkNodeInspector.static.title = OO.ui.deferMsg( 'visualeditor-linknodeinspector-title' );
 
-ve.ui.MWLinkNodeInspector.static.removable = false;
-
 ve.ui.MWLinkNodeInspector.static.modelClasses = [ ve.dm.MWNumberedExternalLinkNode ];
 
 ve.ui.MWLinkNodeInspector.static.actions = ve.ui.MWLinkNodeInspector.super.static.actions.concat( [
