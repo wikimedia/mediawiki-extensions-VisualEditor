@@ -1325,8 +1325,6 @@ $wgResourceModules += array(
 		'scripts' => array(
 			'modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js',
 
-			'modules/ve-mw/dm/metaitems/ve.dm.MWTransclusionMetaItem.js',
-
 			'modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js',
 		),
 		'styles' => array(
