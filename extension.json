@@ -1349,7 +1349,6 @@
 		"ext.visualEditor.mwtransclusion.core": {
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js",
-				"modules/ve-mw/dm/metaitems/ve.dm.MWTransclusionMetaItem.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js"
 			],
 			"dependencies": [

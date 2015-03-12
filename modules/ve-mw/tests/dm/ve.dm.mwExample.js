@@ -115,11 +115,19 @@ ve.dm.mwExample.MWTransclusion = {
 			' data-parsoid="1"' +
 			' data-ve-no-generated-contents="true"' +
 		'>foo</p>',
-	meta:
-		'<link rel="mw:PageProp/Category" href="./Category:Page" about="#mwt1" typeof="mw:Transclusion"' +
-			' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}">' +
+	meta: '<link rel="mw:PageProp/Category" href="./Category:Page" about="#mwt1" typeof="mw:Transclusion"' +
+		' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}">' +
 		'<span about="#mwt1" data-parsoid="{}">\n</span>' +
-		'<link rel="mw:PageProp/Category" href="./Category:Book" about="#mwt1">'
+		'<link rel="mw:PageProp/Category" href="./Category:Book" about="#mwt1">',
+	metaFromData:
+		'<span typeof=\"mw:Transclusion\"' +
+		' data-mw=\"{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;' +
+			'[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}\"></span>',
+	metaClipboard:
+		'<span typeof=\"mw:Transclusion\"' +
+		' data-mw=\"{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;' +
+			'[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}\"' +
+		' data-ve-no-generated-contents=\"true\">&nbsp;</span>'
 };
 ve.dm.mwExample.MWTransclusion.blockData = {
 	type: 'mwTransclusionBlock',
@@ -1026,15 +1034,35 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'mw:Transclusion containing only meta data': {
 		body: ve.dm.mwExample.MWTransclusion.meta,
+		fromDataBody: ve.dm.mwExample.MWTransclusion.metaFromData,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.metaClipboard,
 		data: [
 			{
-				type: 'mwTransclusionMeta',
+				internal: { generated: 'wrapper' },
+				type: 'paragraph'
+			},
+			{
+				type: 'mwTransclusionInline',
 				attributes: {
-					domElements: $( ve.dm.mwExample.MWTransclusion.meta ).toArray()
+					mw: {
+						parts: [ {
+							template: {
+								target: {
+									wt: 'Template:Echo',
+									href: './Template:Echo'
+								},
+								params: {
+									1: { wt: '[[Category:Page]]\n[[Category:Book]]' }
+								},
+								i: 0
+							}
+						} ]
+					},
+					originalIndex: 0,
+					originalMw: '{\"parts\":[{\"template\":{\"target\":{\"wt\":\"Template:Echo\",\"href\":\"./Template:Echo\"},\"params\":{\"1\":{\"wt\":\"[[Category:Page]]\\n[[Category:Book]]\"}},\"i\":0}}]}'
 				}
 			},
-			{ type: '/mwTransclusionMeta' },
-			{ type: 'paragraph', internal: { generated: 'empty' } },
+			{ type: '/mwTransclusionInline' },
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
