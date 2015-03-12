@@ -388,9 +388,6 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/ve.dm.TransactionProcessor.js',
 			'lib/ve/src/dm/ve.dm.Transaction.js',
 			'lib/ve/src/dm/ve.dm.Selection.js',
-			'lib/ve/src/dm/ve.dm.LinearSelection.js',
-			'lib/ve/src/dm/ve.dm.NullSelection.js',
-			'lib/ve/src/dm/ve.dm.TableSelection.js',
 			'lib/ve/src/dm/ve.dm.Surface.js',
 			'lib/ve/src/dm/ve.dm.SurfaceFragment.js',
 			'lib/ve/src/dm/ve.dm.DataString.js',
@@ -400,6 +397,10 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/ve.dm.DocumentSynchronizer.js',
 			'lib/ve/src/dm/ve.dm.IndexValueStore.js',
 			'lib/ve/src/dm/ve.dm.Converter.js',
+
+			'lib/ve/src/dm/selections/ve.dm.LinearSelection.js',
+			'lib/ve/src/dm/selections/ve.dm.NullSelection.js',
+			'lib/ve/src/dm/selections/ve.dm.TableSelection.js',
 
 			'lib/ve/src/dm/lineardata/ve.dm.FlatLinearData.js',
 			'lib/ve/src/dm/lineardata/ve.dm.ElementLinearData.js',
@@ -670,6 +671,7 @@ $wgResourceModules += array(
 			'unicodejs',
 			'rangefix',
 			'papaparse',
+			'jquery.client',
 			'ext.visualEditor.base',
 		),
 		'messages' => array(

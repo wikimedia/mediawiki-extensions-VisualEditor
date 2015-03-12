@@ -108,6 +108,13 @@
 			"factory": "VisualEditorHooks::VisualEditorApiFactory"
 		}
 	},
+	"MessagesDirs": {
+		"VisualEditor": [
+			"lib/ve/i18n",
+			"modules/ve-mw/i18n",
+			"modules/ve-wmf/i18n"
+		]
+	},
 	"Hooks": {
 		"BeforePageDisplay": [
 			"VisualEditorHooks::onBeforePageDisplay"
@@ -159,13 +166,6 @@
 		],
 		"BeforeInitialize": [
 			"VisualEditorHooks::onBeforeInitialize"
-		]
-	},
-	"MessagesDirs": {
-		"VisualEditor": [
-			"lib/ve/i18n",
-			"modules/ve-mw/i18n",
-			"modules/ve-wmf/i18n"
 		]
 	},
 	"ResourceModules": {
@@ -468,9 +468,6 @@
 				"lib/ve/src/dm/ve.dm.TransactionProcessor.js",
 				"lib/ve/src/dm/ve.dm.Transaction.js",
 				"lib/ve/src/dm/ve.dm.Selection.js",
-				"lib/ve/src/dm/ve.dm.LinearSelection.js",
-				"lib/ve/src/dm/ve.dm.NullSelection.js",
-				"lib/ve/src/dm/ve.dm.TableSelection.js",
 				"lib/ve/src/dm/ve.dm.Surface.js",
 				"lib/ve/src/dm/ve.dm.SurfaceFragment.js",
 				"lib/ve/src/dm/ve.dm.DataString.js",
@@ -480,6 +477,9 @@
 				"lib/ve/src/dm/ve.dm.DocumentSynchronizer.js",
 				"lib/ve/src/dm/ve.dm.IndexValueStore.js",
 				"lib/ve/src/dm/ve.dm.Converter.js",
+				"lib/ve/src/dm/selections/ve.dm.LinearSelection.js",
+				"lib/ve/src/dm/selections/ve.dm.NullSelection.js",
+				"lib/ve/src/dm/selections/ve.dm.TableSelection.js",
 				"lib/ve/src/dm/lineardata/ve.dm.FlatLinearData.js",
 				"lib/ve/src/dm/lineardata/ve.dm.ElementLinearData.js",
 				"lib/ve/src/dm/lineardata/ve.dm.MetaLinearData.js",
@@ -723,6 +723,7 @@
 				"unicodejs",
 				"rangefix",
 				"papaparse",
+				"jquery.client",
 				"ext.visualEditor.base"
 			],
 			"messages": [
@@ -1350,6 +1351,9 @@
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js"
+			],
+			"styles": [
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
