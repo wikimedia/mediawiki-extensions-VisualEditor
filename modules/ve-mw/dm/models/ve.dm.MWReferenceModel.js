@@ -137,9 +137,6 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 		// Update the group name of all references nodes with the same group and key
 		txs = [];
 		for ( i = 0, len = refNodes.length; i < len; i++ ) {
-			// HACK: Removing and re-inserting nodes to/from the internal list is done
-			// because internal list doesn't yet support attribute changes
-			refNodes[i].removeFromInternalList();
 			txs.push( ve.dm.Transaction.newFromAttributeChanges(
 				doc,
 				refNodes[i].getOuterRange().start,
@@ -147,10 +144,6 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 			) );
 		}
 		surfaceModel.change( txs );
-		// HACK: Same as above, internal list issues
-		for ( i = 0, len = refNodes.length; i < len; i++ ) {
-			refNodes[i].addToInternalList();
-		}
 		this.listGroup = listGroup;
 	}
 	// Update internal node content
