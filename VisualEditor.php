@@ -564,6 +564,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.DataTransferHandlerFactory.js',
 			'lib/ve/src/ui/ve.ui.DataTransferItem.js',
 			'lib/ve/src/ui/ve.ui.WindowManager.js',
+			'lib/ve/src/ui/windowmanagers/ve.ui.SurfaceWindowManager.js',
 
 			'lib/ve/src/ui/actions/ve.ui.AnnotationAction.js',
 			'lib/ve/src/ui/actions/ve.ui.ContentAction.js',
