@@ -1298,6 +1298,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWCitationDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferencesListDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
+			'modules/ve-mw/ui/dialogs/ve.ui.MWGeneralReferenceDialog.js',
 
 			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
@@ -1310,6 +1311,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',
+			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWGeneralReferenceDialog.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwreference.core',
@@ -1317,6 +1319,8 @@ $wgResourceModules += array(
 			'ext.visualEditor.mediawiki'
 		),
 		'messages' => array(
+			'visualeditor-dialog-generalreference-intro',
+			'visualeditor-dialog-generalreference-title',
 			'visualeditor-dialog-reference-editing-reused',
 			'visualeditor-dialog-reference-options-group-label',
 			'visualeditor-dialog-reference-options-group-placeholder',
@@ -1324,11 +1328,13 @@ $wgResourceModules += array(
 			'visualeditor-dialog-reference-options-section',
 			'visualeditor-dialog-reference-title',
 			'visualeditor-dialog-reference-useexisting-label',
+			'visualeditor-dialog-reference-useexisting-full-label',
 			'visualeditor-dialog-reference-useexisting-tool',
 			'visualeditor-dialog-referenceslist-contextitem-description-general',
 			'visualeditor-dialog-referenceslist-contextitem-description-named',
 			'visualeditor-dialog-referenceslist-title',
 			'visualeditor-dialogbutton-reference-tooltip',
+			'visualeditor-dialogbutton-reference-full-label',
 			'visualeditor-dialogbutton-referenceslist-tooltip',
 			'visualeditor-reference-input-placeholder',
 		),
