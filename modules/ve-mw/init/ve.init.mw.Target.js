@@ -892,62 +892,25 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 /**
  * Load the editor.
  *
- * This method performs an asynchronous action and uses a callback function to handle the result.
+ * This method initiates an API request for the page data unless dataPromise is passed in,
+ * in which case it waits for that promise instead.
  *
- * @method
+ * @param {jQuery.Promise} [dataPromise] Promise for pending request, if any
  * @returns {boolean} Loading has been started
 */
-ve.init.mw.Target.prototype.load = function () {
+ve.init.mw.Target.prototype.load = function ( dataPromise ) {
 	// Prevent duplicate requests
 	if ( this.loading ) {
 		return false;
 	}
 	this.events.timings.activationStart = ve.now();
 
-	this.loading = this.requestPageData();
+	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData();
 	this.loading
 		.done( ve.init.mw.Target.onLoad.bind( this ) )
 		.fail( ve.init.mw.Target.onLoadError.bind( this ) );
 
 	return true;
-};
-
-/**
- * Request the page HTML and various metadata from the MediaWiki API and Parsoid.
- * @return {jQuery.Promise} Abortable promise resolved with a JSON object
- */
-ve.init.mw.Target.prototype.requestPageData = function () {
-	var start, xhr,
-		target = this,
-		data = {
-			action: 'visualeditor',
-			paction: 'parse',
-			page: this.pageName,
-			uselang: mw.config.get( 'wgUserLanguage' )
-		};
-
-	// Only request the API to explicitly load the currently visible revision if we're restoring
-	// from oldid. Otherwise we should load the latest version. This prevents us from editing an
-	// old version if an edit was made while the user was viewing the page and/or the user is
-	// seeing (slightly) stale cache.
-	if ( this.restoring ) {
-		data.oldid = this.revid;
-	}
-	// Load DOM
-	start = ve.now();
-	ve.track( 'trace.domLoad.enter' );
-
-	xhr = new mw.Api().get( data );
-	return xhr.then( function ( data, jqxhr ) {
-		target.events.track( 'performance.system.domLoad', {
-			bytes: $.byteLength( jqxhr.responseText ),
-			duration: ve.now() - start,
-			cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-			parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
-		} );
-		ve.track( 'trace.domLoad.exit' );
-		return jqxhr;
-	} ).promise( { abort: xhr.abort } );
 };
 
 /**

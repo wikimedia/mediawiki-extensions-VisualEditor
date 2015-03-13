@@ -190,6 +190,7 @@ $wgResourceModules += array(
 		'scripts' => 'modules/ve-mw/init/ve.init.mw.TargetLoader.js',
 		'dependencies' => array(
 			'ext.visualEditor.track',
+			'mediawiki.api'
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
@@ -323,6 +324,7 @@ $wgResourceModules += array(
 			'moment',
 			'ext.visualEditor.base',
 			'ext.visualEditor.track',
+			'ext.visualEditor.targetLoader',
 			'jquery.uls.data',
 		),
 		'targets' => array( 'desktop', 'mobile' ),

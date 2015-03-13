@@ -267,9 +267,11 @@ ve.init.mw.ViewPageTarget.prototype.unbindHandlers = function () {
 /**
  * Switch to edit mode.
  *
+ * @param {jQuery.Promise} [dataPromise] Promise for pending request from
+ *   mw.libs.ve.targetLoader#requestPageData, if any
  * @return {jQuery.Promise}
  */
-ve.init.mw.ViewPageTarget.prototype.activate = function () {
+ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
 	var surface,
 		pageTarget = this;
 
@@ -311,7 +313,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function () {
 		// Disable all the tools
 		this.getToolbar().updateToolState();
 
-		this.load();
+		this.load( dataPromise );
 	}
 	return this.activatingDeferred.promise();
 };

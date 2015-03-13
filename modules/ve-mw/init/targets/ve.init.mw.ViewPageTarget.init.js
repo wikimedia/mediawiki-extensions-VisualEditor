@@ -89,10 +89,19 @@
 	 * @return {jQuery.Promise} Resolved when the target has finished activating
 	 */
 	function activateTarget( targetPromise ) {
-		var promise = targetPromise || getTarget();
-		promise
+		// The TargetLoader module is loaded in the bottom queue, so it should have been
+		// requested already but it might not have finished loading yet
+		var dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
+			.then( function () {
+				return mw.libs.ve.targetLoader.requestPageData(
+					mw.config.get( 'wgRelevantPageName' ),
+					uri.query.oldid
+				);
+			} );
+		targetPromise = targetPromise || getTarget();
+		targetPromise
 			.then( function ( target ) {
-				return target.activate();
+				return target.activate( dataPromise );
 			} )
 			.then( function () {
 				ve.track( 'mwedit.ready' );

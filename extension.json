@@ -268,7 +268,8 @@
 		"ext.visualEditor.targetLoader": {
 			"scripts": "modules/ve-mw/init/ve.init.mw.TargetLoader.js",
 			"dependencies": [
-				"ext.visualEditor.track"
+				"ext.visualEditor.track",
+				"mediawiki.api"
 			],
 			"targets": [
 				"desktop",
@@ -404,6 +405,7 @@
 				"moment",
 				"ext.visualEditor.base",
 				"ext.visualEditor.track",
+				"ext.visualEditor.targetLoader",
 				"jquery.uls.data"
 			],
 			"targets": [

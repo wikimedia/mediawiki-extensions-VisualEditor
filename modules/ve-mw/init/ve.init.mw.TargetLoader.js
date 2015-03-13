@@ -87,6 +87,43 @@
 						return callback();
 					} ) );
 				} );
+		},
+
+		/**
+		 * Request the page HTML and various metadata from the MediaWiki API and Parsoid.
+		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
+		 */
+		requestPageData: function ( pageName, oldid ) {
+			var start, xhr,
+				data = {
+					action: 'visualeditor',
+					paction: 'parse',
+					page: pageName,
+					uselang: mw.config.get( 'wgUserLanguage' )
+				};
+
+			// Only request the API to explicitly load the currently visible revision if we're restoring
+			// from oldid. Otherwise we should load the latest version. This prevents us from editing an
+			// old version if an edit was made while the user was viewing the page and/or the user is
+			// seeing (slightly) stale cache.
+			if ( oldid !== undefined ) {
+				data.oldid = oldid;
+			}
+			// Load DOM
+			start = ve.now();
+			ve.track( 'trace.domLoad.enter' );
+
+			xhr = new mw.Api().get( data );
+			return xhr.then( function ( data, jqxhr ) {
+				ve.track( 'mwtiming.performance.system.domLoad', {
+					bytes: $.byteLength( jqxhr.responseText ),
+					duration: ve.now() - start,
+					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
+					parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
+				} );
+				ve.track( 'trace.domLoad.exit' );
+				return data;
+			} ).promise( { abort: xhr.abort } );
 		}
 	};
 }() );
