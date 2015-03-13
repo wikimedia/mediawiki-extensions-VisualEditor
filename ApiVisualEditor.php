@@ -94,9 +94,10 @@ class ApiVisualEditor extends ApiBase {
 			// served directly from Varnish, in  which case discard the value of the XPP header
 			// and use it to declare the cache hit instead.
 			$headers = $response['headers'];
+			$xpp = null;
 			if ( isset( $headers['x-cache'] ) && strpos( $headers['x-cache'], 'hit' ) !== false ) {
 				$xpp = 'cached-response=true';
-			} else {
+			} elseif ( isset( $headers['x-parsoid-performance'] ) ) {
 				$xpp = $headers['x-parsoid-performance'];
 			}
 			if ( $xpp !== null ) {
