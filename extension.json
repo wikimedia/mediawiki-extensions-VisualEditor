@@ -938,7 +938,8 @@
 				"mediawiki.jqueryMsg",
 				"jquery.autoEllipsis",
 				"jquery.byteLimit",
-				"mediawiki.skinning.content.parsoid"
+				"mediawiki.skinning.content.parsoid",
+				"mediawiki.language.specialCharacters"
 			],
 			"messages": [
 				"visualeditor-beta-label",
