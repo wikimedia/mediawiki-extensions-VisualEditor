@@ -60,6 +60,59 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		}
 	}
 
+	protected function parseWikitext( $title ) {
+		$apiParams = array(
+			'action' => 'parse',
+			'page' => $title->getPrefixedDBkey(),
+			'prop' => 'text|revid|categorieshtml|displaytitle',
+		);
+		$api = new ApiMain(
+			new DerivativeRequest(
+				$this->getRequest(),
+				$apiParams,
+				false // was posted?
+			),
+			true // enable write?
+		);
+
+		$api->execute();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$result = $api->getResult()->getResultData();
+			// Transform content nodes to '*'
+			$result = ApiResult::transformForBC( $result );
+			// Remove any metadata keys from the links array
+			$result = ApiResult::removeMetadata( $result );
+		} else {
+			$result = $api->getResultData();
+		}
+		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
+		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
+			$result['parse']['categorieshtml']['*'] : false;
+		$links = isset( $result['parse']['links'] ) ? $result['parse']['links'] : array();
+		$revision = Revision::newFromId( $result['parse']['revid'] );
+		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
+		$displaytitle = isset( $result['parse']['displaytitle'] ) ?
+			$result['parse']['displaytitle'] : false;
+
+		if ( $content === false || ( strlen( $content ) && $revision === null ) ) {
+			return false;
+		}
+
+		if ( $displaytitle !== false ) {
+			// Escape entities as in OutputPage::setPageTitle()
+			$displaytitle = Sanitizer::normalizeCharReferences(
+				Sanitizer::removeHTMLtags( $displaytitle ) );
+		}
+
+		return array(
+			'content' => $content,
+			'categorieshtml' => $categorieshtml,
+			'basetimestamp' => $timestamp,
+			'starttimestamp' => wfTimestampNow(),
+			'displayTitleHtml' => $displaytitle
+		);
+	}
+
 	public function execute() {
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
