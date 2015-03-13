@@ -112,54 +112,6 @@ class ApiVisualEditor extends ApiBase {
 		return $response['body'];
 	}
 
-	protected function getHTML( $title, $parserParams ) {
-		$restoring = false;
-
-		if ( $title->exists() ) {
-			$latestRevision = Revision::newFromTitle( $title );
-			if ( $latestRevision === null ) {
-				return false;
-			}
-			$revision = null;
-			if ( !isset( $parserParams['oldid'] ) || $parserParams['oldid'] === 0 ) {
-				$parserParams['oldid'] = $latestRevision->getId();
-				$revision = $latestRevision;
-			} else {
-				$revision = Revision::newFromId( $parserParams['oldid'] );
-				if ( $revision === null ) {
-					return false;
-				}
-			}
-
-			$restoring = $revision && !$revision->isCurrent();
-			$oldid = $parserParams['oldid'];
-
-			$content = $this->requestParsoid(
-				'GET',
-				'page/' . urlencode( $title->getPrefixedDBkey() ) . '/html',
-				$parserParams
-			);
-
-			if ( $content === false ) {
-				return false;
-			}
-			$timestamp = $latestRevision->getTimestamp();
-		} else {
-			$content = '';
-			$timestamp = wfTimestampNow();
-			$oldid = 0;
-		}
-		return array(
-			'result' => array(
-				'content' => $content,
-				'basetimestamp' => $timestamp,
-				'starttimestamp' => wfTimestampNow(),
-				'oldid' => $oldid,
-			),
-			'restoring' => $restoring,
-		);
-	}
-
 	protected function storeInSerializationCache( $title, $oldid, $html ) {
 		global $wgMemc;
 		$content = $this->postHTML( $title, $html, array( 'oldid' => $oldid ) );
@@ -320,13 +272,56 @@ class ApiVisualEditor extends ApiBase {
 		wfDebugLog( 'visualeditor', "called on '$title' with paction: '{$params['paction']}'" );
 		switch ( $params['paction'] ) {
 			case 'parse':
-				$parsed = $this->getHTML( $title, $parserParams );
-
+			case 'metadata':
 				// Dirty hack to provide the correct context for edit notices
 				global $wgTitle; // FIXME NOOOOOOOOES
 				$wgTitle = $title;
 				RequestContext::getMain()->setTitle( $title );
+
+				// Get information about current revision
+				if ( $title->exists() ) {
+					$latestRevision = Revision::newFromTitle( $title );
+					if ( $latestRevision === null ) {
+						$this->dieUsage( 'Could not find latest revision for title', 'latestnotfound' );
+					}
+					$revision = null;
+					if ( !isset( $parserParams['oldid'] ) || $parserParams['oldid'] === 0 ) {
+						$parserParams['oldid'] = $latestRevision->getId();
+						$revision = $latestRevision;
+					} else {
+						$revision = Revision::newFromId( $parserParams['oldid'] );
+						if ( $revision === null ) {
+							$this->dieUsage( 'Could not find revision ID ' . $parserParams['oldid'], 'oldidnotfound' );
+						}
+					}
+
+					$restoring = $revision && !$revision->isCurrent();
+					$baseTimestamp = $latestRevision->getTimestamp();
+					$oldid = intval( $parserParams['oldid'] );
+
+					// If requested, request HTML from Parsoid
+					if ( $params['paction'] === 'parse' ) {
+						$content = $this->requestParsoid(
+							'GET',
+							'page/' . urlencode( $title->getPrefixedDBkey() ) . '/html',
+							$parserParams
+						);
+						if ( $content === false ) {
+							$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+						}
+					}
+
+				} else {
+					$content = '';
+					$baseTimestamp = wfTimestampNow();
+					$oldid = 0;
+					$restoring = false;
+				}
+
+				// Get edit notices
 				$notices = $title->getEditNotices();
+
+				// Anonymous user notice
 				if ( $user->isAnon() ) {
 					$notices[] = $this->msg(
 						'anoneditwarning',
@@ -336,11 +331,13 @@ class ApiVisualEditor extends ApiBase {
 						'{{fullurl:Special:UserLogin/signup|returnto={{FULLPAGENAMEE}}}}'
 					)->parseAsBlock();
 				}
-				if ( $parsed && $parsed['restoring'] ) {
+
+				// Old revision notice
+				if ( $restoring ) {
 					$notices[] = $this->msg( 'editingold' )->parseAsBlock();
 				}
 
-				// Creating new page
+				// New page notices
 				if ( !$title->exists() ) {
 					$notices[] = $this->msg(
 						$user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon',
@@ -390,6 +387,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
+				// Permission notice
 				if ( !$title->userCan( 'create' ) && !$title->exists() ) {
 					$notices[] = $this->msg(
 						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
@@ -419,6 +417,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
+				// Blocked user notice
 				if ( $user->isBlockedFrom( $title ) && $user->getBlock()->prevents( 'edit' ) !== false ) {
 					$notices[] = call_user_func_array(
 						array( $this, 'msg' ),
@@ -426,6 +425,7 @@ class ApiVisualEditor extends ApiBase {
 					)->parseAsBlock();
 				}
 
+				// Blocked user notice for global blocks
 				if ( class_exists( 'GlobalBlocking' ) ) {
 					$error = GlobalBlocking::getUserBlockErrors(
 						$user,
@@ -457,14 +457,12 @@ class ApiVisualEditor extends ApiBase {
 				$wikipage = WikiPage::factory( $title );
 				$popts = $wikipage->makeParserOptions( 'canonical' );
 				$cached = ParserCache::singleton()->get( $article, $popts, true );
-				$isOldRevision = isset( $params['oldid'] ) && $params['oldid'] != 0 &&
-					$params['oldid'] != $title->getLatestRevID();
 				$links = array(
 					// Array of linked pages that are missing
 					'missing' => array(),
 					// For current revisions: true (treat all non-missing pages as existing)
 					// For old revisions: array of linked pages that exist
-					'extant' => $isOldRevision || !$cached ? array() : true,
+					'extant' => $restoring || !$cached ? array() : true,
 				);
 				if ( $cached ) {
 					foreach ( $cached->getLinks() as $ns => $dbks ) {
@@ -472,7 +470,7 @@ class ApiVisualEditor extends ApiBase {
 							$pft = Title::makeTitle( $ns, $dbk )->getPrefixedText();
 							if ( $id == 0 ) {
 								$links['missing'][] = $pft;
-							} elseif ( $isOldRevision ) {
+							} elseif ( $restoring ) {
 								$links['extant'][] = $pft;
 							}
 						}
@@ -481,26 +479,26 @@ class ApiVisualEditor extends ApiBase {
 				// Add information about current page
 				if ( !$title->exists() ) {
 					$links['missing'][] = $title->getPrefixedText();
-				} elseif ( $isOldRevision ) {
+				} elseif ( $restoring ) {
 					$links['extant'][] = $title->getPrefixedText();
 				}
 
 				// On parser cache miss, just don't bother populating red link data
 
-				if ( $parsed === false ) {
-					$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
-				} else {
-					$result = array_merge(
-						array(
-							'result' => 'success',
-							'notices' => $notices,
-							'checkboxes' => $checkboxes,
-							'links' => $links,
-							'protectedClasses' => implode( ' ', $protectedClasses ),
-							'watched' => $user->isWatched( $title )
-						),
-						$parsed['result']
-					);
+				$result = array(
+					'result' => 'success',
+					'notices' => $notices,
+					'checkboxes' => $checkboxes,
+					'links' => $links,
+					'protectedClasses' => implode( ' ', $protectedClasses ),
+					'watched' => $user->isWatched( $title ),
+					'basetimestamp' => $baseTimestamp,
+					'starttimestamp' => wfTimestampNow(),
+					'oldid' => $oldid,
+
+				);
+				if ( $params['paction'] === 'parse' ) {
+					$result['content'] = $content;
 				}
 				break;
 
@@ -617,6 +615,7 @@ class ApiVisualEditor extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_TYPE => array(
 					'parse',
+					'metadata',
 					'parsefragment',
 					'serialize',
 					'serializeforcache',

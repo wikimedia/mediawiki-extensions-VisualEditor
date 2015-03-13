@@ -414,6 +414,7 @@ class VisualEditorHooks {
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
+			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
 		);
 
 		return true;

@@ -92,6 +92,7 @@
 		},
 		"VisualEditorTabPosition": "before",
 		"VisualEditorParsoidURL": "http://localhost:8000",
+		"VisualEditorRestbaseURL": false,
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorNamespaces": [],
 		"VisualEditorParsoidTimeout": 100

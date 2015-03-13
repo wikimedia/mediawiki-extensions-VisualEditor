@@ -96,10 +96,10 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( pageName, oldid ) {
-			var start, xhr,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise,
 				data = {
 					action: 'visualeditor',
-					paction: 'parse',
+					paction: conf.restbaseUrl ? 'metadata' : 'parse',
 					page: pageName,
 					uselang: mw.config.get( 'wgUserLanguage' )
 				};
@@ -113,19 +113,53 @@
 			}
 			// Load DOM
 			start = ve.now();
-			ve.track( 'trace.domLoad.enter' );
+			ve.track( 'trace.apiLoad.enter' );
 
-			xhr = new mw.Api().get( data );
-			return xhr.then( function ( data, jqxhr ) {
-				ve.track( 'mwtiming.performance.system.domLoad', {
+			apiXhr = new mw.Api().get( data );
+			apiPromise = apiXhr.then( function ( data, jqxhr ) {
+				ve.track( 'trace.apiLoad.exit' );
+				ve.track( 'mwtiming.performance.system.apiLoad', {
 					bytes: $.byteLength( jqxhr.responseText ),
 					duration: ve.now() - start,
 					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
 					parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
 				} );
-				ve.track( 'trace.domLoad.exit' );
 				return data;
-			} ).promise( { abort: xhr.abort } );
+			} );
+
+			if ( conf.restbaseUrl ) {
+				ve.track( 'trace.restbaseLoad.enter' );
+				restbaseXhr = $.ajax( {
+					url: conf.restbaseUrl + encodeURIComponent( pageName ) +
+						( oldid === undefined ? '' : '/' + oldid ),
+					type: 'GET',
+					dataType: 'text'
+				} );
+				restbasePromise = restbaseXhr.then( function ( data, status, jqxhr ) {
+					ve.track( 'trace.restbaseLoad.exit' );
+					ve.track( 'mwtiming.performance.system.restbaseLoad', {
+						bytes: $.byteLength( jqxhr.responseText ),
+						duration: ve.now() - start
+					} );
+					return data;
+				} );
+
+				dataPromise = $.when( apiPromise, restbasePromise )
+					.then( function ( apiData, restbaseHtml ) {
+						if ( apiData.visualeditor ) {
+							apiData.visualeditor.content = restbaseHtml;
+						}
+						return apiData;
+					} )
+					.promise( { abort: function () {
+						apiXhr.abort();
+						restbaseXhr.abort();
+					} } );
+			} else {
+				dataPromise = apiPromise.promise( { abort: apiXhr.abort } );
+			}
+
+			return dataPromise;
 		}
 	};
 }() );

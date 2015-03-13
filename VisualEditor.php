@@ -1607,6 +1607,15 @@ $wgVisualEditorParsoidTimeout = 100;
 // Serialization cache timeout, in seconds
 $wgVisualEditorSerializationCacheTimeout = 3600;
 
+// URL to RESTbase. The page name will be appended directly to this value, so this needs to be set
+// to something like 'https://rest.wikimedia.org/en.wikipedia.org/v1/page/html/' including the
+// trailing slash.
+//
+// If this is set, the page HTML will be requested from RESTbase. If this is not set, the page HTML
+// will be requested from the API, which will send an HTTP request to Parsoid or to RESTbase
+// if available.
+$wgVisualEditorRestbaseURL = false;
+
 // Namespaces to enable VisualEditor in
 $wgVisualEditorNamespaces = array_merge( $wgContentNamespaces, array( NS_USER ) );
 
