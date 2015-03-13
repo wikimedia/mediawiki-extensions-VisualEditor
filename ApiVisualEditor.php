@@ -677,8 +677,6 @@ class ApiVisualEditor extends ApiBase {
 				),
 			),
 			'wikitext' => null,
-			'basetimestamp' => null,
-			'starttimestamp' => null,
 			'oldid' => null,
 			'html' => null,
 			'cachekey' => null,
@@ -713,10 +711,6 @@ class ApiVisualEditor extends ApiBase {
 			'html' => 'HTML to send to Parsoid to convert to wikitext',
 			'wikitext' => 'Wikitext to send to Parsoid to convert to HTML (paction=parsefragment)',
 			'pst' => 'Pre-save transform wikitext before sending it to Parsoid (paction=parsefragment)',
-			'basetimestamp' => 'When saving, set this to the timestamp of the revision that was'
-				. ' edited. Used to detect edit conflicts.',
-			'starttimestamp' => 'When saving, set this to the timestamp of when the page was loaded.'
-				. ' Used to detect edit conflicts.',
 			'cachekey' => 'For serialize or diff, use the result of a previous serializeforcache'
 				. ' request with this key. Overrides html.',
 		);
