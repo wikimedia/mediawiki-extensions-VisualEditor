@@ -19,7 +19,8 @@
 			"Matik7",
 			"Alan ffm",
 			"Andrzej aa",
-			"Rezonansowy"
+			"Rezonansowy",
+			"Peter Bowman"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "Zadanie do wykonania.",
@@ -166,7 +167,7 @@
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Dodajesz}} do strony szablon „$1”. Na razie nie ma on opisu, ale być może jakieś pomocne informacje znajdują się na <a $2>jego stronie</a>.",
 	"visualeditor-dialog-transclusion-options": "Opcje",
 	"visualeditor-dialog-transclusion-param-default": "Wartość domyślna: $1",
-	"visualeditor-dialog-transclusion-param-example": "Przykładowa wartość:$1",
+	"visualeditor-dialog-transclusion-param-example": "Przykładowa wartość: $1",
 	"visualeditor-dialog-transclusion-param-info": "Opis pola",
 	"visualeditor-dialog-transclusion-param-info-missing": "Opis pola nie jest dostępny",
 	"visualeditor-dialog-transclusion-placeholder": "Dodaj szablon",
