@@ -10,7 +10,8 @@
 			"Wikiuser13",
 			"Goelujjwal",
 			"Kunalgrover05",
-			"संजीव कुमार"
+			"संजीव कुमार",
+			"Phoenix303"
 		]
 	},
 	"tooltip-ca-createsource": "इस पृष्ठ का स्रोत पाठ बनाएँ",
@@ -39,6 +40,7 @@
 	"visualeditor-dialog-beta-welcome-title": "यथादृश्य संपादिका में आपका {{GENDER:$1|स्वागत}} है",
 	"visualeditor-dialog-media-alttext-section": "वैकल्पिक(आल्ट) पाठ",
 	"visualeditor-dialog-media-content-section": "शीर्षक",
+	"visualeditor-dialog-media-noresults": "कोई परिणाम नहीं मिले",
 	"visualeditor-dialog-media-page-advanced": "उन्नत विकल्प",
 	"visualeditor-dialog-media-page-general": "सामान्य विकल्प",
 	"visualeditor-dialog-media-position-center": "केंद्रित",
@@ -166,8 +168,6 @@
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/Talk:VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-label": "यथादृश्य संपादिका",
 	"visualeditor-preference-enable": "यथादृश्य संपादिका सक्षम करें। यह वार्ता पृष्ठों और कुछ अन्य नामस्थानों में उपलब्ध नहीं होगा।",
-	"visualeditor-preference-language-description": "यथादृश्य संपादिका में जाँच हेतु विभिन्न भाषाओं एवं भिन्न दिशाओं में लिखने के प्रयोगात्मक उपकरण जोड़ें, उनके सामान्य रूप से जारी होने से पहले। प्रयोगात्मक सुविधाओं का उपयोग करते समय कृपया अपने बदलाव सहेजने से पहले सदैव जाँचें।",
-	"visualeditor-preference-language-label": "यथादृश्य संपादिका भाषा उपकरण",
 	"visualeditor-preference-mwalienextension-description": "यथादृश्य संपादिका में जाँच हेतु एक्सटेंशन टैग सम्पादन की प्रयोगात्मक सुविधा जोड़ें, उसके सामान्य रूप से जारी होने से पहले। प्रयोगात्मक सुविधाओं का उपयोग करते समय कृपया अपने बदलाव सहेजने से पहले सदैव जाँचें।",
 	"visualeditor-preference-mwalienextension-label": "विज़ुअल सम्पादक एक्सटेंशन टैग सम्पादन",
 	"visualeditor-reference-input-placeholder": "आप किसे संदर्भित करना चाहते हैं?",
@@ -196,8 +196,8 @@
 	"visualeditor-settings-tool": "पृष्ठ विकल्प",
 	"visualeditor-toolbar-savedialog": "पृष्ठ सहेजें",
 	"visualeditor-usernamespacepagelink": "Project:सदस्य नामस्थान",
+	"visualeditor-version-label": "अवतरण",
 	"visualeditor-viewpage-savewarning": "क्या आप सचमुच सहेजे बिना दृश्य मोड में वापिस जाना चाहते हैं?",
 	"visualeditor-wikitext-warning": "आप यथादृश्य संपादिका का प्रयोग कर रहे हैं। इसमें [[{{MediaWiki:visualeditor-wikitext-warning-link}}|विकिपाठ]] काम नहीं करता है। पृष्ठ के विकिपाठ में किये सम्पादनों को खोये बिना स्रोत सम्पादित करने के लिए \"{{int:visualeditor-toolbar-savedialog}}\" अगला ड्रोप-डाउन मेन्यु खोलें और \"{{int:visualeditor-mweditmodesource-title}}\" को चुनें।",
-	"visualeditor-wikitext-warning-link": "Help:विकि विन्यास",
 	"visualeditor-wikitext-warning-title": "विकिपाठ विन्यास पाया गया"
 }

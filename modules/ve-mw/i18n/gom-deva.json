@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Darshan kandolkar"
+			"Darshan kandolkar",
+			"Konknni mogi 24"
 		]
 	},
 	"tooltip-ca-ve-edit": "हें पान दृश्यसंपादक वापरून संस्करण करात",
+	"visualeditor-ca-createlocaldescriptionsource": "थळावे वर्णन जोडात",
+	"visualeditor-ca-createsource": "स्रोत निर्माण कर",
 	"visualeditor-ca-editsource": "उगम संस्करण करात.",
-	"visualeditor-ca-editsource-section": "उगम संस्करण करात."
+	"visualeditor-ca-editsource-section": "उगम संस्करण करात.",
+	"visualeditor-descriptionpagelink": "Project:दृश्यसंपादक"
 }

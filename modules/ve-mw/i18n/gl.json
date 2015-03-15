@@ -8,7 +8,8 @@
 			"Elisardojm",
 			"Breogan2008",
 			"Fisterraeomar",
-			"Agremon"
+			"Agremon",
+			"Vivaelcelta"
 		]
 	},
 	"apihelp-visualeditor-description": "Devolve o código HTML5 para unha páxina do servizo Parsoid.",
@@ -69,7 +70,7 @@
 	"visualeditor-dialog-media-content-section-help": "Podes usar isto para incluír unha etiqueta ao pé do elemento para todos os lectores. Isto adoita usarse para explicar a pertinencia do elemento no contexto no que aparece. Debe ser concisa e informativa.",
 	"visualeditor-dialog-media-dimensionseparator": " ×",
 	"visualeditor-dialog-media-goback": "Volver",
-	"visualeditor-dialog-media-info-artist": "Cargado por $1",
+	"visualeditor-dialog-media-info-artist": "Subido por $1",
 	"visualeditor-dialog-media-info-audiofile": "Ficheiro de son",
 	"visualeditor-dialog-media-info-created": "Creado o $1",
 	"visualeditor-dialog-media-info-credit": "Créditos",
@@ -80,7 +81,7 @@
 	"visualeditor-dialog-media-info-moreinfo": "Máis información",
 	"visualeditor-dialog-media-info-readmore": "Ler máis",
 	"visualeditor-dialog-media-info-separator": "·",
-	"visualeditor-dialog-media-info-uploaded": "Cargado o $1",
+	"visualeditor-dialog-media-info-uploaded": "Subido o $1",
 	"visualeditor-dialog-media-noresults": "Non se atopou ningún resultado.",
 	"visualeditor-dialog-media-originaldimensions": "Dimensións orixinais",
 	"visualeditor-dialog-media-page-advanced": "Configuración avanzada",
