@@ -8,7 +8,47 @@
 /*csslint known-properties:false */
 /* Bug: https://github.com/stubbornella/csslint/issues/436 */
 
-/* Visual Editor */
+/*!
+ * State                | <html> classes
+ * - mw.ViewPageTarget.init.css is loaded
+ * Reading              | ve-available
+ * Loading editor       | ve-available ve-activated ve-loading
+ * - mw.ViewPageTarget.css is loaded
+ * Activate editor      | ve-available ve-activated ve-activating
+ * Active               | ve-available ve-activated ve-active
+ * Deactivate editor    | ve-available ve-deactivating
+ * Deactivated          | ve-available
+ */
+
+.ve-activated #toc,
+.ve-activated #siteNotice,
+.ve-activated .mw-indicators,
+/* Most of bodyContent can be hidden as VE has an equivalent of most children
+   in ve-init-target (sibling of #bodyContent). However, we can't hide it
+   completely as subs should remain visible (for persistence with read mode),
+   and ve-ui-mwTocWidget is also part of #bodyContent. */
+.ve-active #bodyContent > :not(#siteSub):not(#contentSub):not(.ve-ui-mwTocWidget),
+.ve-activated #t-print,
+.ve-activated #t-permalink,
+.ve-activated #p-coll-print_export,
+.ve-activated #t-cite,
+.ve-activating .ve-ui-surface,
+.ve-deactivating .ve-ui-surface {
+	display: none;
+}
+
+.ve-activated #bodyContent,
+.ve-activated #firstHeading,
+.ve-activated #siteSub,
+.ve-activated #contentSub {
+	opacity: 0.6;
+}
+
+.ve-activated #firstHeading {
+	cursor: default;
+}
+
+/* Progress bar */
 
 .mw-viewPageTarget-loading {
 	width: 128px;

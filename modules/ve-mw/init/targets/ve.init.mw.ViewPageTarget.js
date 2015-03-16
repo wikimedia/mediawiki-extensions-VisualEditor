@@ -281,7 +281,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
 		this.activatingDeferred = $.Deferred();
 		this.toolbarSetupDeferred = $.Deferred();
 
-		$( 'html' ).addClass( 've-activating ve-activated' );
+		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).always( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
 			// We have to focus the page after hiding the original content, otherwise

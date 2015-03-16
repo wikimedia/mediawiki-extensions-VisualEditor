@@ -86,7 +86,6 @@
 	 *
 	 * @private
 	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.Target
-	 * @return {jQuery.Promise} Resolved when the target has finished activating
 	 */
 	function activateTarget( targetPromise ) {
 		// The TargetLoader module is loaded in the bottom queue, so it should have been
@@ -98,6 +97,9 @@
 					uri.query.oldid
 				);
 			} );
+
+		$( 'html' ).addClass( 've-activated ve-loading' );
+
 		targetPromise = targetPromise || getTarget();
 		targetPromise
 			.then( function ( target ) {
