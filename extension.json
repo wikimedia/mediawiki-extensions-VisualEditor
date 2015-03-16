@@ -32,10 +32,6 @@
 			"monobook",
 			"minerva"
 		],
-		"VisualEditorResourceTemplate": {
-			"localBasePath": "/vagrant/mediawiki/extensions/VisualEditor",
-			"remoteExtPath": "VisualEditor"
-		},
 		"VisualEditorParsoidPrefix": "localhost",
 		"VisualEditorDisableForAnons": false,
 		"VisualEditorPluginModules": [],

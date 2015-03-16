@@ -1671,3 +1671,5 @@ $wgVisualEditorTabMessages = array(
 	'editsectionappendix' => null,
 	'editsectionsourceappendix' => null,
 );
+
+unset( $wgVisualEditorResourceTemplate );
