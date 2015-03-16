@@ -27,7 +27,7 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 				['d', [ { type: 'textStyle/bold' } ]],
 				{
 					type: 'alienInline',
-					attributes: { domElements: $( '<tt>e</tt>' ).toArray() },
+					originalDomElements: $( '<tt>e</tt>' ).toArray(),
 					annotations: [ { type: 'textStyle/bold' } ]
 				},
 				{ type: '/alienInline' },

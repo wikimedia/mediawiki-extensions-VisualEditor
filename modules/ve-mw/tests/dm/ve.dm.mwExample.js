@@ -363,9 +363,7 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwAlienMeta',
-		attributes: {
-			domElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
-		}
+		originalDomElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
 	},
 	{ type: '/mwAlienMeta' },
 	{ type: 'paragraph' },
@@ -388,9 +386,7 @@ ve.dm.mwExample.withMeta = [
 	'r',
 	{
 		type: 'mwAlienMeta',
-		attributes: {
-			domElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
-		}
+		originalDomElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
 	},
 	{ type: '/mwAlienMeta' },
 	'B',
@@ -406,9 +402,7 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwAlienMeta',
-		attributes: {
-			domElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
-		}
+		originalDomElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
 	},
 	{ type: '/mwAlienMeta' },
 	{
@@ -438,9 +432,7 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/mwCategory' },
 	{
 		type: 'mwAlienMeta',
-		attributes: {
-			domElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
-		}
+		originalDomElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
 	},
 	{ type: '/mwAlienMeta' },
 	{ type: 'internalList' },
@@ -467,15 +459,11 @@ ve.dm.mwExample.withMetaMetaData = [
 	[
 		{
 			type: 'alienMeta',
-			attributes: {
-				domElements: $( '<!-- No content conversion -->' ).toArray()
-			}
+			originalDomElements: $( '<!-- No content conversion -->' ).toArray()
 		},
 		{
 			type: 'mwAlienMeta',
-			attributes: {
-				domElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
-			}
+			originalDomElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
 		}
 	],
 	undefined,
@@ -498,27 +486,21 @@ ve.dm.mwExample.withMetaMetaData = [
 	[
 		{
 			type: 'mwAlienMeta',
-			attributes: {
-				domElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
-			}
+			originalDomElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
 		}
 	],
 	undefined,
 	[
 		{
 			type: 'alienMeta',
-			attributes: {
-				domElements: $( '<!-- inline -->' ).toArray()
-			}
+			originalDomElements: $( '<!-- inline -->' ).toArray()
 		}
 	],
 	undefined,
 	[
 		{
 			type: 'mwAlienMeta',
-			attributes: {
-				domElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
-			}
+			originalDomElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
 		},
 		{
 			type: 'comment',
@@ -538,9 +520,7 @@ ve.dm.mwExample.withMetaMetaData = [
 		},
 		{
 			type: 'mwAlienMeta',
-			attributes: {
-				domElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
-			}
+			originalDomElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
 		}
 	],
 	undefined,
@@ -661,13 +641,13 @@ ve.dm.mwExample.references = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwReferencesList',
+		// orginalDomElements: HTML,
 		attributes: {
 			mw: {
 				name: 'references',
 				attrs: { group: 'g1' }
 			},
 			originalMw: '{"name":"references","attrs":{"group":"g1"}"}',
-			// domElements: HTML,
 			listGroup: 'mwReference/',
 			refGroup: ''
 		}
@@ -704,7 +684,7 @@ ve.dm.mwExample.references = [
 
 ve.dm.mwExample.complexInternalData = [
 	// 0
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- before -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- before -->' ).toArray() },
 	{ type: '/alienMeta' },
 	{ type: 'paragraph' },
 	'F', ['o', [ve.dm.example.bold]], ['o', [ve.dm.example.italic]],
@@ -722,7 +702,7 @@ ve.dm.mwExample.complexInternalData = [
 	{ type: '/mwReference' },
 	// 6
 	{ type: '/paragraph' },
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- after -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- after -->' ).toArray() },
 	{ type: '/alienMeta' },
 	// 7
 	{ type: 'internalList' },
@@ -732,7 +712,7 @@ ve.dm.mwExample.complexInternalData = [
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	'R', ['e', [ve.dm.example.bold]], 'f',
 	// 13
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- reference -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- reference -->' ).toArray() },
 	{ type: '/alienMeta' },
 	'e', ['r', [ve.dm.example.italic]], ['e', [ve.dm.example.italic]],
 	// 16
@@ -754,22 +734,22 @@ ve.dm.mwExample.complexInternalData = [
 	{ type: '/internalItem' },
 	// 23
 	{ type: 'internalItem' },
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- beginning -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- beginning -->' ).toArray() },
 	{ type: '/alienMeta' },
 	// 24
 	{ type: 'preformatted' },
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- inside -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- inside -->' ).toArray() },
 	{ type: '/alienMeta' },
 	// 25
 	{ type: 'mwEntity', attributes: { character: '€' } },
 	// 26
 	{ type: '/mwEntity' },
 	'2', '5', '0',
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- inside2 -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- inside2 -->' ).toArray() },
 	{ type: '/alienMeta' },
 	// 30
 	{ type: '/preformatted' },
-	{ type: 'alienMeta', attributes: { domElements: $( '<!-- end -->' ).get() } },
+	{ type: 'alienMeta', originalDomElements: $( '<!-- end -->' ).toArray() },
 	{ type: '/alienMeta' },
 	// 31
 	{ type: '/internalItem' },

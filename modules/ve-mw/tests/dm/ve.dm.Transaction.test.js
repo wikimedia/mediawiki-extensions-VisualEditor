@@ -11,7 +11,7 @@ QUnit.module( 've.dm.Transaction (MW)' );
 QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 	var i, j, doc2, tx, actualStoreItems, expectedStoreItems, removalOps, doc,
 		complexDoc = ve.dm.mwExample.createExampleDocument( 'complexInternalData' ),
-		comment = { type: 'alienMeta', attributes: { domElements: $( '<!-- hello -->' ).get() } },
+		comment = { type: 'alienMeta', originalDomElements: $( '<!-- hello -->' ).toArray() },
 		withReference = [
 			{ type: 'paragraph' },
 			'B', 'a', 'r',
