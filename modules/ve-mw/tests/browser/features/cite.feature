@@ -4,8 +4,7 @@ Feature: VisualEditor Cite
   Background:
     Given I go to the "Cite VisualEditor Test" page with content "Cite VisualEditor Test"
       And I click in the editable part
-      And I click the Cite button
-      And I can see the Cite User Interface
+      And I open the Cite menu
 
   Scenario: Website
     When I click Website
