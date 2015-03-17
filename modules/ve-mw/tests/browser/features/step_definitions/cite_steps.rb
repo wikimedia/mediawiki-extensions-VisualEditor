@@ -1,5 +1,5 @@
-Given(/^I can see the Cite User Interface$/) do
-  on(VisualEditorPage).cite_select_element.when_present
+Given(/^I open the Cite menu$/) do
+  on(VisualEditorPage).cite_menu_element.when_present.click
 end
 
 When(/^I click Add more information$/) do
