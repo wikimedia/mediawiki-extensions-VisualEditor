@@ -193,7 +193,7 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	protected function pstWikitext( $title, $wikitext ) {
-		return ContentHandler::makeContent( $wikitext, $title )
+		return ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT )
 			->preSaveTransform(
 				$title,
 				$this->getUser(),
