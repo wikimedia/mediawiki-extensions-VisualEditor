@@ -39,6 +39,8 @@
 		}
 	}
 
+	mw.libs.ve = mw.libs.ve || {};
+
 	mw.libs.ve.targetLoader = {
 		/**
 		 * Add a plugin module or callback.
