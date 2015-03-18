@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bachounda"
+			"Bachounda",
+			"Oldstoneage"
 		]
 	},
 	"tooltip-ca-createsource": "اصنع الكود المصدري لهذه الباجة",
@@ -23,6 +24,7 @@
 	"visualeditor-cite-tool-name-journal": "جرنان",
 	"visualeditor-cite-tool-name-news": "الخبار",
 	"visualeditor-cite-tool-name-web": "موقع",
+	"visualeditor-descriptionpagelink": "Project:كاتبي منظور (VisualEditor)",
 	"visualeditor-dialog-beta-welcome-action-continue": "استمر",
 	"visualeditor-dialog-media-content-section": "تعليق",
 	"visualeditor-dialog-media-goback": "ارجع (ولّي)",
@@ -88,6 +90,7 @@
 	"visualeditor-savedialog-warning-dirty": "بالك تحريرك صرالو عطب – مادا بيك راجع قبل الحفظ.",
 	"visualeditor-saveerror": "صرات غلطه وقت حفظ المعلومات للخادم: $1.",
 	"visualeditor-toolbar-savedialog": "سجل الباجة",
+	"visualeditor-version-label": "نسخة",
 	"visualeditor-viewpage-savewarning-keep": "واصل التعديل",
 	"visualeditor-viewpage-savewarning-title": "متأكد؟"
 }

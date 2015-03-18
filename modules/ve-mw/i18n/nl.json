@@ -25,7 +25,8 @@
 			"Mar(c)",
 			"Robin0van0der0vliet",
 			"Servien",
-			"TheDJ"
+			"TheDJ",
+			"JensRiskin"
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "Als kleine bewerking markeren.",
@@ -167,8 +168,8 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Opties weergeven",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|U}} voegt de sjabloon \"$1\" toe aan deze pagina. Er is nog geen beschrijving, maar mogelijk is er informatie op de <a $2>sjabloonpagina</a>.",
 	"visualeditor-dialog-transclusion-options": "Opties",
-	"visualeditor-dialog-transclusion-param-default": "Standaard waarde: $1",
-	"visualeditor-dialog-transclusion-param-example": "Voorbeeld waarde: $1",
+	"visualeditor-dialog-transclusion-param-default": "Standaardwaarde: $1",
+	"visualeditor-dialog-transclusion-param-example": "Voorbeeldwaarde: $1",
 	"visualeditor-dialog-transclusion-param-info": "Veldomschrijving",
 	"visualeditor-dialog-transclusion-param-info-missing": "Geen veldomschrijving beschikbaar",
 	"visualeditor-dialog-transclusion-placeholder": "Sjabloon toevoegen",
@@ -179,8 +180,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Veld is vereist.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Terug",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Toch doorgaan",
-	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Verplichte {{PLURAL:$1|parameter ontbreekt|parameters ontbreken}}",
-	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Weet u zeker dat u de {{PLURAL:$2|parameter|$1 parameters}} niet wil invullen?",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Verplichte {{PLURAL:$1|parameter ontbreekt|parameters}} ontbreken",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Weet u zeker dat wilt verder gaan zonder de {{PLURAL:$2|parameter|$1 parameters}} in te vullen?",
 	"visualeditor-dialog-transclusion-single-mode": "Opties verbergen",
 	"visualeditor-dialog-transclusion-title": "Transclusie",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
