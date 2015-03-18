@@ -1271,6 +1271,8 @@ $wgResourceModules += array(
 
 			'modules/ve-mw/ce/nodes/ve.ce.MWReferencesListNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWReferenceNode.js',
+
+			'modules/ve-mw/ui/commands/ve.ui.MWReferencesListCommand.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ce/styles/nodes/ve.ce.MWReferencesListNode.css',

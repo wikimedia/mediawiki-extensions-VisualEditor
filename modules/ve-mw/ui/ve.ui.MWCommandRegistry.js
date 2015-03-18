@@ -26,12 +26,6 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'referencesList', 'window', 'open',
-		{ args: ['referencesList'], supportedSelections: ['linear'] }
-	)
-);
-ve.ui.commandRegistry.register(
-	new ve.ui.Command(
 		'reference', 'window', 'open',
 		{ args: ['reference'], supportedSelections: ['linear'] }
 	)
