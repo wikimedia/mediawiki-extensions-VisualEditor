@@ -115,11 +115,13 @@
 		event['action.' + action + '.type'] = event.type;
 		event['action.' + action + '.mechanism'] = event.mechanism;
 		event['action.' + action + '.timing'] = Math.round( computeDuration( action, event, timeStamp ) );
+		event['action.' + action + '.message'] = event.message;
 
 		// Remove renamed properties
 		delete event.type;
 		delete event.mechanism;
 		delete event.timing;
+		delete event.message;
 
 		if ( action === 'abort' ) {
 			timing = {};

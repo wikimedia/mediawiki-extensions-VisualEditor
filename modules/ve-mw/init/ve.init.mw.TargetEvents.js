@@ -110,7 +110,8 @@ ve.init.mw.TargetEvents.prototype.onSaveComplete = function ( content, categorie
  * @param {string} type Text for error type
  */
 ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
-	var key,
+	var key, data,
+		failureArguments = [],
 		// Maps mwtiming types to mwedit types
 		typeMap = {
 			badtoken: 'userBadToken',
@@ -127,6 +128,10 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 		// (for historical reasons; this sucks)
 		specialTypes = [ 'editconflict' ];
 
+	if ( arguments ) {
+		failureArguments = Array.prototype.slice.call( arguments, 1 );
+	}
+
 	key = 'performance.user.saveError';
 	if ( specialTypes.indexOf( type ) !== -1 ) {
 		key += '.' + type;
@@ -137,10 +142,14 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 		type: type
 	} );
 
-	ve.track( 'mwedit.saveFailure', {
+	data = {
 		type: typeMap[type] || 'responseUnknown',
 		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 )
-	} );
+	};
+	if ( type === 'unknown' && failureArguments[1].error && failureArguments[1].error.code ) {
+		data.message = failureArguments[1].error.code;
+	}
+	ve.track( 'mwedit.saveFailure', data );
 };
 
 /**
