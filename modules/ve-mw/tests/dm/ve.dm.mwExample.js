@@ -838,6 +838,9 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
+		normalizedBody: '<b>a</b><b data-parsoid="1">b</b><b>c</b><b data-parsoid="2">d</b> ' +
+			'<b>ab</b> ' +
+			'<b data-parsoid="3">ab</b><b data-parsoid="4">c</b>',
 		fromDataBody: '<b>abcd</b> <b>ab</b> <b>abc</b>'
 	},
 	mwImage: {
