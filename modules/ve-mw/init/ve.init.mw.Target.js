@@ -127,6 +127,11 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
  */
 
 /**
+ * @event saveErrorTitleBlacklist
+ * Fired when the user tries to save page in violation of the TitleBlacklist
+ */
+
+/**
  * @event loadError
  * @param {string} errorTypeText
  * @param {Object|string} error
@@ -591,6 +596,8 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 		return;
 	} else if ( data.error && data.error.code === 'pagedeleted' ) {
 		this.emit( 'saveErrorPageDeleted' );
+	} else if ( data.error && data.error.code === 'titleblacklist-forbidden-edit' ) {
+		this.emit( 'saveErrorTitleBlacklist' );
 	}
 
 	// Handle captcha

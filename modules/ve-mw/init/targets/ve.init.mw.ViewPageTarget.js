@@ -71,6 +71,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 		saveErrorCaptcha: 'onSaveErrorCaptcha',
 		saveErrorUnknown: 'onSaveErrorUnknown',
 		saveErrorPageDeleted: 'onSaveErrorPageDeleted',
+		saveErrorTitleBlacklist: 'onSaveErrorTitleBlacklist',
 		loadError: 'onLoadError',
 		surfaceReady: 'onSurfaceReady',
 		editConflict: 'onEditConflict',
@@ -684,7 +685,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editAp
 };
 
 /**
- * Update save dialog message on spam blacklist error
+ * Update save dialog message on abuse filter error
  *
  * @method
  * @param {Object} editApi
@@ -694,6 +695,15 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorAbuseFilter = function ( editApi 
 	// Don't disable the save button. If the action is not disallowed the user may save the
 	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
 	// between filter triggers that are and aren't disallowing the action.
+};
+
+/**
+ * Update save dialog message on title blacklist error
+ *
+ * @method
+ */
+ve.init.mw.ViewPageTarget.prototype.onSaveErrorTitleBlacklist = function () {
+	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
 };
 
 /**

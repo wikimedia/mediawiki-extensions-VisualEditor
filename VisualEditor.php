@@ -240,6 +240,7 @@ $wgResourceModules += array(
 			'visualeditor-savedialog-identify-anon',
 			'visualeditor-savedialog-identify-user',
 			'visualeditor-timeout',
+			'visualeditor-saveerror-titleblacklist',
 		),
 	),
 	'ext.visualEditor.mobileViewTarget' => $wgVisualEditorResourceTemplate + array(

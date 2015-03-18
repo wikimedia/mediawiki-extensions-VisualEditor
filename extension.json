@@ -317,7 +317,8 @@
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-user",
-				"visualeditor-timeout"
+				"visualeditor-timeout",
+				"visualeditor-saveerror-titleblacklist"
 			]
 		},
 		"ext.visualEditor.mobileViewTarget": {

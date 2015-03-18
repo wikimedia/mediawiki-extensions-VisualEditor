@@ -29,6 +29,7 @@ ve.init.mw.TargetEvents = function ( target ) {
 		saveErrorBadToken: [ 'trackSaveError', 'badtoken' ],
 		saveErrorNewUser: [ 'trackSaveError', 'newuser' ],
 		saveErrorPageDeleted: [ 'trackSaveError', 'pagedeleted' ],
+		saveErrorTitleBlacklist: [ 'trackSaveError', 'titleblacklist' ],
 		saveErrorCaptcha: [ 'trackSaveError', 'captcha' ],
 		saveErrorUnknown: [ 'trackSaveError', 'unknown' ],
 		editConflict: [ 'trackSaveError', 'editconflict' ],
@@ -121,6 +122,7 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 			empty: 'responseEmpty',
 			unknown: 'responseUnknown',
 			pagedeleted: 'editPageDeleted',
+			titleblacklist: 'extensionTitleBlacklist',
 			editconflict: 'editConflict'
 		},
 		// Types that are logged as performance.user.saveError.{type}
