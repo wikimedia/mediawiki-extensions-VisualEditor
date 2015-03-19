@@ -48,7 +48,6 @@ end
 
 When(/^I click Save page$/) do
   on(VisualEditorPage) do |page|
-    page.disabled_save_button_element.when_not_visible(15)
     page.save_page_element.when_present.click
   end
 end
