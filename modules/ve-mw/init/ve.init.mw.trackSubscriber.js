@@ -133,13 +133,15 @@
 	} );
 
 	ve.trackSubscribe( 'mwtiming.', function ( topic, data ) {
+		var target;
 		// Add type for save errors; not in the topic for stupid historical reasons
 		if ( topic === 'mwtiming.performance.user.saveError' ) {
 			topic = topic + '.' + data.type;
 		}
 
+		target = data.targetName || 'mwTarget';
 		// Map mwtiming.foo --> timing.ve.foo.mobile
-		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
+		topic = topic.replace( /^mwtiming/, 'timing.ve.' + target );
 		mw.track( topic, data.duration );
 	} );
 
