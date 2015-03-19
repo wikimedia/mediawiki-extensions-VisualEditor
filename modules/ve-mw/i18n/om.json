@@ -226,6 +226,7 @@
 	"visualeditor-savedialog-title-save": "Jijjiirama kee olkaayi",
 	"visualeditor-savedialog-warning-dirty": "Gulaalli kee faalamuu hin oolle - maaloo, olkaawuu dura keeddeebi'i.",
 	"visualeditor-saveerror": "Yeroo serveriirraa deetaa olkaawuf yaalu dogoggorri uummame: $1",
+	"visualeditor-saveerror-titleblacklist": "Dogoggora fuula olkaawuu: mata-dureen barruu kanaa dhorkameera.",
 	"visualeditor-serializeerror": "Yeroo serveriirraa deetaa fiduuf yaalu dogongorri uummame: $1",
 	"visualeditor-settings-tool": "Qindaa'ina fuulaa",
 	"visualeditor-timeout": "Ediiteriin kun amma waan jiru hin fakkaatu. Bakkasaa, lakkaddaa gulaalutti fayyadamuu barbaaddaa?",
