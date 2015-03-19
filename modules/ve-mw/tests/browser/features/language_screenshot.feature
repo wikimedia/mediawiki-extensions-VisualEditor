@@ -147,7 +147,6 @@ Feature: Language Screenshot
     When I edit language screenshot page with Testing toolbar
     Then I should see action buttons in the end of the VisualEditor toolbar
 
-  @language_screenshot
   Scenario: VisualEditor_references_list
     Given I go to the "Reference VisualEditor Screenshot" page with source content "VisualEditor is a MediaWiki extension"
     When I click on References list in Insert menu
