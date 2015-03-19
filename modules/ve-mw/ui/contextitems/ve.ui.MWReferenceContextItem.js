@@ -59,14 +59,23 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 		view.$element.children().replaceWith( view.$element.children().contents() );
 	}
 
-	// Make all links open in a new window
-	view.$element.find( 'a' ).attr( 'target', '_blank' );
-
 	// Cleanup
 	view.destroy();
 
-	// HACK: Use the $element property of the view, which will be updated asynchronously despite
-	// having been destroyed
+	// Make all links open in a new window (sync rendering)
+	view.$element.find( 'a' ).attr( 'target', '_blank' );
+
+	// Make all links open in a new window (async rendering)
+	ve.BranchNode.static.traverse( view, function ( node ) {
+		// Duck type ve.ce.GeneratedContentNode
+		if ( typeof node.generateContents === 'function' ) {
+			node.once( 'rerender', function () {
+				node.$element.find( 'a' ).attr( 'target', '_blank' );
+			} );
+		}
+	} );
+
+	// WARNING: The $element property may be rendered into asynchronously
 	return view.$element;
 };
 
