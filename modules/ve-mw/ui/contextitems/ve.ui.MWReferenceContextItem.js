@@ -62,10 +62,12 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 	// Make all links open in a new window
 	view.$element.find( 'a' ).attr( 'target', '_blank' );
 
+	// Cleanup
 	view.destroy();
 
-	// Strip the HTML rendering of any events that might be still bound to it
-	return $( view.$element.html() );
+	// HACK: Use the $element property of the view, which will be updated asynchronously despite
+	// having been destroyed
+	return view.$element;
 };
 
 /**
