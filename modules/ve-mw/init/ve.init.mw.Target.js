@@ -460,14 +460,8 @@ ve.init.mw.Target.onLoadError = function ( errorText, error ) {
 ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
 	this.saving = false;
 	var data = response.visualeditoredit;
-	if ( !data && !response.error ) {
+	if ( !data ) {
 		this.onSaveError( doc, saveData, null, 'Invalid response from server', response );
-	} else if ( response.error ) {
-		if ( response.error.code === 'editconflict' ) {
-			this.emit( 'editConflict' );
-		} else {
-			this.onSaveError( doc, saveData, null, 'Save failure', response );
-		}
 	} else if ( data.result !== 'success' ) {
 		// Note, this could be any of db failure, hookabort, badtoken or even a captcha
 		this.onSaveError( doc, saveData, null, 'Save failure', response );
@@ -514,6 +508,7 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 		this.emit( 'saveErrorEmpty' );
 		return;
 	}
+
 	editApi = data && data.visualeditoredit && data.visualeditoredit.edit;
 
 	// Handle spam blacklist error (either from core or from Extension:SpamBlacklist)
@@ -594,10 +589,15 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 				}
 			} );
 		return;
+	} else if ( data.error && data.error.code === 'editconflict' ) {
+		this.emit( 'editConflict' );
+		return;
 	} else if ( data.error && data.error.code === 'pagedeleted' ) {
 		this.emit( 'saveErrorPageDeleted' );
+		return;
 	} else if ( data.error && data.error.code === 'titleblacklist-forbidden-edit' ) {
 		this.emit( 'saveErrorTitleBlacklist' );
+		return;
 	}
 
 	// Handle captcha
