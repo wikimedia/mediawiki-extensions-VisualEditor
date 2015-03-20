@@ -578,6 +578,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/actions/ve.ui.TableAction.js',
 			'lib/ve/src/ui/actions/ve.ui.WindowAction.js',
 
+			'lib/ve/src/ui/contextitems/ve.ui.AlignableContextItem.js',
 			'lib/ve/src/ui/contextitems/ve.ui.CommentContextItem.js',
 			'lib/ve/src/ui/contextitems/ve.ui.LanguageContextItem.js',
 			'lib/ve/src/ui/contextitems/ve.ui.LinkContextItem.js',
@@ -667,6 +668,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/styles/inspectors/ve.ui.LinkInspector.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.SurfaceWidget.css',
 			'lib/ve/src/ui/styles/ve.ui.ContextItem.css',
+			'lib/ve/src/ui/styles/contextitems/ve.ui.AlignableContextItem.css',
 			'lib/ve/src/ui/styles/contextitems/ve.ui.CommentContextItem.css',
 			'lib/ve/src/ui/styles/contextitems/ve.ui.LanguageContextItem.css',
 			'lib/ve/src/ui/styles/contextitems/ve.ui.LinkContextItem.css',

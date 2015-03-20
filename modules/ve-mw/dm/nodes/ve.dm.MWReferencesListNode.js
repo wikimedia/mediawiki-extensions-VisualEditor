@@ -36,6 +36,8 @@ ve.dm.MWReferencesListNode.static.name = 'mwReferencesList';
 
 ve.dm.MWReferencesListNode.static.handlesOwnChildren = true;
 
+ve.dm.MWReferencesListNode.static.ignoreChildren = true;
+
 ve.dm.MWReferencesListNode.static.matchTagNames = null;
 
 ve.dm.MWReferencesListNode.static.matchRdfaTypes = [ 'mw:Extension/references' ];
