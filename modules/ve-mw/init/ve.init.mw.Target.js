@@ -301,7 +301,7 @@ ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
  * @fires loadError
  */
 ve.init.mw.Target.onLoad = function ( response ) {
-	var i, len, linkData,
+	var i, len, linkData, aboutDoc, docRevId,
 		data = response ? response.visualeditor : null;
 
 	if ( typeof data.content !== 'string' ) {
@@ -334,6 +334,26 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		this.baseTimeStamp = data.basetimestamp;
 		this.startTimeStamp = data.starttimestamp;
 		this.revid = data.oldid;
+
+		aboutDoc = this.doc.children[0].getAttribute( 'about' );
+		docRevId = aboutDoc.match( /revision\/([0-9]*)$/ )[1];
+		if ( Number.parseInt( docRevId ) !== this.revid ) {
+			if ( this.retriedRevIdConflict ) {
+				// Retried already, just error the second time.
+				ve.init.mw.Target.onLoadError.call(
+					this,
+					've-api',
+					'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
+						'returned by server do not match'
+				);
+			} else {
+				this.retriedRevIdConflict = true;
+				// Have to retry both until we can access the document server directly...
+				this.loading = false;
+				this.load();
+			}
+			return;
+		}
 
 		// Populate link cache
 		if ( data.links ) {
