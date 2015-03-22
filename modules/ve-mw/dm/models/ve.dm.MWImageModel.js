@@ -141,7 +141,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 
 	imageType = imageType || 'mwBlockImage';
 
-	newNode = ve.dm.nodeFactory.create( imageType, {
+	newNode = ve.dm.nodeFactory.createFromElement( {
 		type: imageType,
 		attributes: attrs
 	} );
