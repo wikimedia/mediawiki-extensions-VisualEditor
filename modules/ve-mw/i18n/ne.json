@@ -3,11 +3,16 @@
 		"authors": [
 			"RajeshPandey",
 			"सरोज कुमार ढकाल",
-			"Ganesh Paudel"
+			"Ganesh Paudel",
+			"बिप्लब आनन्द"
 		]
 	},
+	"tooltip-ca-ve-edit": "यस पृष्ठलाई भिजुअल इडिटरद्वारा सम्पादन गर्ने",
+	"visualeditor-ca-editsource": "श्रोत सम्पादन गर्ने",
+	"visualeditor-ca-editsource-section": "सम्पादन गर्ने",
 	"visualeditor-cite-tool-name-news": "समाचार",
 	"visualeditor-desc": "मेडियाविकिको लागि दृष्टि सम्पादक",
+	"visualeditor-descriptionpagelink": "Project:भिजुअल इडिटर",
 	"visualeditor-dialog-media-noresults": "कुनै पनि नतिजाहरू भेटिएन",
 	"visualeditor-dialog-media-position-left": "बायाँ",
 	"visualeditor-dialog-media-position-none": "कुनै पनि होइन",

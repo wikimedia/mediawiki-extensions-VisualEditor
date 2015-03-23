@@ -4,7 +4,8 @@
 			"Чаховіч Уладзіслаў",
 			"Дзяніс Тутэйшы",
 			"Artificial123",
-			"Amire80"
+			"Amire80",
+			"Mikalai Udodau"
 		]
 	},
 	"tooltip-ca-createsource": "Стварыць старонку ў рэдактары зыходнага тэксту",
@@ -12,6 +13,7 @@
 	"tooltip-ca-ve-edit": "Правіць гэту старонку з візуальным рэдактарам",
 	"visualeditor-ca-createsource": "Стварыць зыходны тэкст",
 	"visualeditor-ca-editsource": "Правіць зыходны тэкст",
+	"visualeditor-ca-editsource-section": "Правіць зыходнік",
 	"visualeditor-ca-ve-create": "Візуальны рэдактар",
 	"visualeditor-ca-ve-edit": "Візуальны рэдактар",
 	"visualeditor-cite-tool-name-news": "Навіны",
@@ -40,6 +42,7 @@
 	"visualeditor-serializeerror": "Памылка загрузкі дадзеных з сервера: $1.",
 	"visualeditor-toolbar-savedialog": "Захаваць старонку",
 	"visualeditor-usernamespacepagelink": "Project:Асабістая прастора",
+	"visualeditor-version-label": "Версія",
 	"visualeditor-viewpage-savewarning": "Вы сапраўды жадаеце вярнуцца ў рэжым прагляду, не захаваўшы змены?",
 	"visualeditor-viewpage-savewarning-discard": "Адмяніць змены",
 	"visualeditor-viewpage-savewarning-keep": "Працягнуць рэдагаванне"
