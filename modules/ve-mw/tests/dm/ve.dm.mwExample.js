@@ -1051,6 +1051,46 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'mw:AlienExtension': {
+		body:
+			'<div about="#mwt1" typeof="mw:Extension/syntaxhighlight"' +
+				' data-mw="{&quot;name&quot;:&quot;syntaxhighlight&quot;,&quot;attrs&quot;:{&quot;lang&quot;:&quot;php&quot;},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\n$foo = bar;\\n&quot;}}"' +
+				' data-parsoid="1"' +
+			'>' +
+				'<div><span>Rendering</span></div>' +
+			'</div>',
+		normalizedBody:
+			'<div typeof="mw:Extension/syntaxhighlight"' +
+				' data-mw="{&quot;name&quot;:&quot;syntaxhighlight&quot;,&quot;attrs&quot;:{&quot;lang&quot;:&quot;php5&quot;},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\n$foo = bar;\\n&quot;}}"' +
+				' about="#mwt1" data-parsoid="1"' +
+			'>' +
+			'</div>',
+		data: [
+			{
+				type: 'mwAlienExtension',
+				attributes: {
+					mw: {
+						name: 'syntaxhighlight',
+						attrs: {
+							lang: 'php'
+						},
+						body: {
+							extsrc: '\n$foo = bar;\n'
+						}
+					},
+					originalIndex: 0,
+					originalMw: '{"name":"syntaxhighlight","attrs":{"lang":"php"},"body":{"extsrc":"\\n$foo = bar;\\n"}}'
+				},
+				originalDomElements: $( '<div about="#mwt1" data-parsoid="1"></div>' ).toArray()
+			},
+			{ type: '/mwAlienExtension' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		modify: function ( model ) {
+			model.data.data[0].attributes.mw.attrs.lang = 'php5';
+		}
+	},
 	'mw:Reference': {
 		// Wikitext:
 		// Foo<ref name="bar" /> Baz<ref group="g1" name=":0">Quux</ref> Whee<ref name="bar">[[Bar]]</ref> Yay<ref group="g1">No name</ref> Quux<ref name="bar">Different content</ref> Foo<ref group="g1" name="foo" />
