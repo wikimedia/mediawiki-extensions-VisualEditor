@@ -188,6 +188,7 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 				surface.getView().emit( 'position' );
 				surface.getContext().updateDimensions();
 				ve.track( 'trace.initializeToolbar.exit' );
+				ve.track( 'trace.activate.exit' );
 			}
 		} );
 	}
@@ -277,7 +278,6 @@ ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
 		pageTarget = this;
 
 	if ( !this.active && !this.activating ) {
-		ve.track( 'trace.activate.enter' );
 		this.activating = true;
 		this.activatingDeferred = $.Deferred();
 		this.toolbarSetupDeferred = $.Deferred();
@@ -527,7 +527,6 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.activatingDeferred.resolve();
 
 	mw.hook( 've.activationComplete' ).fire();
-	ve.track( 'trace.activate.exit' );
 };
 
 /**
