@@ -32,17 +32,15 @@
 				'</div>'
 			);
 		}
-		var $window = $( window ),
-			$content = $( '#content' ),
-			scrollTop = $window.scrollTop(),
+		var $content = $( '#content' ),
+			contentRect = $content[0].getBoundingClientRect(),
 			offsetTop = $content.offset().top,
-			windowHeight = $window.height();
+			windowHeight = $( window ).height(),
+			top = Math.max( contentRect.top, 0 ),
+			bottom = Math.min( contentRect.bottom, windowHeight ),
+			middle = ( top + bottom ) / 2;
 
-		if ( scrollTop > offsetTop ) {
-			init.$loading.css( 'top', ( scrollTop - offsetTop ) + ( windowHeight / 2 ) );
-		} else {
-			init.$loading.css( 'top', ( windowHeight - ( offsetTop - scrollTop ) ) / 2 );
-		}
+		init.$loading.css( 'top', middle - offsetTop );
 
 		$content.prepend( init.$loading );
 	}
