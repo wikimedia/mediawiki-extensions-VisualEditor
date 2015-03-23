@@ -10,32 +10,23 @@
  *
  * @class
  * @abstract
- * @extends ve.ui.FragmentInspector
+ * @extends ve.ui.NodeInspector
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector( config ) {
+ve.ui.MWExtensionInspector = function VeUiMWExtensionInspector() {
 	// Parent constructor
-	ve.ui.FragmentInspector.call( this, config );
+	ve.ui.MWExtensionInspector.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.FragmentInspector );
+OO.inheritClass( ve.ui.MWExtensionInspector, ve.ui.NodeInspector );
 
 /* Static properties */
 
 ve.ui.MWExtensionInspector.static.placeholder = null;
-
-/**
- * Node class that this inspector inspects. Subclass of ve.dm.Node.
- * @property {Function}
- * @abstract
- * @static
- * @inheritable
- */
-ve.ui.MWExtensionInspector.static.nodeModel = null;
 
 /**
  * Extension is allowed to have empty contents
@@ -75,8 +66,6 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 	} );
 	this.input.$element.addClass( 've-ui-mwExtensionInspector-input' );
 
-	this.isBlock = !this.constructor.static.nodeModel.static.isContent;
-
 	// Initialization
 	this.form.$element.append( this.input.$element );
 };
@@ -100,17 +89,12 @@ ve.ui.MWExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			var dir;
 
 			// Initialization
-			this.node = this.getFragment().getSelectedNode();
 			this.whitespace = [ '', '' ];
 
-			// Make sure we're inspecting the right type of node
-			if ( !( this.node instanceof this.constructor.static.nodeModel ) ) {
-				this.node = null;
-			}
-			if ( this.node ) {
-				this.input.setValueAndWhitespace( this.node.getAttribute( 'mw' ).body.extsrc );
+			if ( this.selectedNode ) {
+				this.input.setValueAndWhitespace( this.selectedNode.getAttribute( 'mw' ).body.extsrc );
 			} else {
-				if ( this.isBlock ) {
+				if ( !this.constructor.static.modelClasses[0].static.isContent ) {
 					// New nodes should use linebreaks for blocks
 					this.input.setWhitespace( [ '\n', '\n' ] );
 				}
@@ -143,7 +127,7 @@ ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 		.first( function () {
 			if ( this.constructor.static.allowedEmpty || this.input.getInnerValue() !== '' ) {
 				this.insertOrUpdateNode();
-			} else if ( this.node && !this.constructor.static.allowedEmpty ) {
+			} else if ( this.selectedNode && !this.constructor.static.allowedEmpty ) {
 				// Content has been emptied on a node which isn't allowed to
 				// be empty, so delete it.
 				this.removeNode();
@@ -152,38 +136,52 @@ ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 };
 
 /**
+ * Create an new data element for the model class associated with this inspector
+ *
+ * @returns {Object} Element data
+ */
+ve.ui.MWExtensionInspector.prototype.getNewElement = function () {
+	// Extension inspectors which create elements should either match
+	// a single modelClass or override this method.
+	var modelClass = this.constructor.static.modelClasses[0];
+	return {
+		type: modelClass.static.name,
+		attributes: {
+			mw: {
+				name: modelClass.static.extensionName,
+				attrs: {},
+				body: {
+					extsrc: ''
+				}
+			}
+		}
+	};
+};
+
+/**
  * Insert or update the node in the document model from the new values
  */
 ve.ui.MWExtensionInspector.prototype.insertOrUpdateNode = function () {
-	var mwData,
+	var mwData, element,
 		surfaceModel = this.getFragment().getSurface();
-	if ( this.node ) {
-		mwData = ve.copy( this.node.getAttribute( 'mw' ) );
+	if ( this.selectedNode ) {
+		mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
 		this.updateMwData( mwData );
 		surfaceModel.change(
 			ve.dm.Transaction.newFromAttributeChanges(
 				surfaceModel.getDocument(),
-				this.node.getOuterRange().start,
+				this.selectedNode.getOuterRange().start,
 				{ mw: mwData }
 			)
 		);
 	} else {
-		mwData = {
-			name: this.constructor.static.nodeModel.static.extensionName,
-			attrs: {},
-			body: {}
-		};
-		this.updateMwData( mwData );
+		element = this.getNewElement();
+		this.updateMwData( element.attributes.mw );
 		// Collapse returns a new fragment, so update this.fragment
 		this.fragment = this.getFragment().collapseToEnd();
 		this.getFragment().insertContent( [
-			{
-				type: this.constructor.static.nodeModel.static.name,
-				attributes: {
-					mw: mwData
-				}
-			},
-			{ type: '/' + this.constructor.static.nodeModel.static.name }
+			element,
+			{ type: '/' + element.type }
 		] );
 	}
 };
