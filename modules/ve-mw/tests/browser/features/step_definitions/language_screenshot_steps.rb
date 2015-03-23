@@ -65,6 +65,13 @@ When(/^I click on list and indentation dropdown$/) do
 end
 
 When(/^I click on Page settings option$/) do
+  Screenshot.highlight(@current_page, @current_page.page_settings_item_element)
+  Screenshot.capture(
+    @browser,
+    "VisualEditor_page_settings_item-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    [@current_page.hamburger_menu_element, @current_page.page_option_menu_element]
+  )
+
   on(VisualEditorPage).page_settings_element.when_present.click
 end
 
