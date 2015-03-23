@@ -10,6 +10,7 @@ class VisualEditorPage
   span(:basic_reference, class: 'oo-ui-iconElement-icon oo-ui-icon-reference')
   span(:bullet_number_selector, class: 'oo-ui-iconElement-icon oo-ui-icon-bullet-list')
   span(:category_link, class: 'oo-ui-iconElement-icon oo-ui-icon-tag')
+  span(:category_item, class: 'oo-ui-tool-name-categories')
   text_area(:cite_first_textarea, index: 0)
   text_area(:cite_second_textarea, index: 2)
   text_area(:cite_third_textarea, index: 4)

@@ -93,6 +93,14 @@ end
 
 When(/^I click on category in hamburger menu$/) do
   step 'I click the hamburger menu'
+
+  Screenshot.highlight(@current_page, @current_page.category_item_element)
+  Screenshot.capture(
+    @browser,
+    "VisualEditor_category_item-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    [@current_page.hamburger_menu_element, @current_page.page_option_menu_element]
+  )
+
   on(VisualEditorPage).category_link_element.when_present.click
 end
 
