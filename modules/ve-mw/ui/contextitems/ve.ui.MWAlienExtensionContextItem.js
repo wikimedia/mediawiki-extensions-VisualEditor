@@ -35,7 +35,10 @@ ve.ui.MWAlienExtensionContextItem.static.name = 'alienExtension';
 
 ve.ui.MWAlienExtensionContextItem.static.icon = 'alienextension';
 
-ve.ui.MWAlienExtensionContextItem.static.modelClasses = [ ve.dm.MWAlienExtensionNode ];
+ve.ui.MWAlienExtensionContextItem.static.modelClasses = [
+	ve.dm.MWAlienInlineExtensionNode,
+	ve.dm.MWAlienBlockExtensionNode
+];
 
 ve.ui.MWAlienExtensionContextItem.static.commandName = 'alienExtension';
 

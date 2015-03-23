@@ -33,7 +33,10 @@ ve.ui.MWAlienExtensionInspector.static.name = 'alienExtension';
 
 ve.ui.MWAlienExtensionInspector.static.icon = 'alienextension';
 
-ve.ui.MWAlienExtensionInspector.static.modelClasses = [ ve.dm.MWAlienExtensionNode ];
+ve.ui.MWAlienExtensionInspector.static.modelClasses = [
+	ve.dm.MWAlienInlineExtensionNode,
+	ve.dm.MWAlienBlockExtensionNode
+];
 
 /* Methods */
 

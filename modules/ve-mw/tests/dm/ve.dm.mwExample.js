@@ -1051,7 +1051,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
-	'mw:AlienExtension': {
+	'mw:AlienBlockExtension': {
 		body:
 			'<div about="#mwt1" typeof="mw:Extension/syntaxhighlight"' +
 				' data-mw="{&quot;name&quot;:&quot;syntaxhighlight&quot;,&quot;attrs&quot;:{&quot;lang&quot;:&quot;php&quot;},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\n$foo = bar;\\n&quot;}}"' +
@@ -1067,7 +1067,7 @@ ve.dm.mwExample.domToDataCases = {
 			'</div>',
 		data: [
 			{
-				type: 'mwAlienExtension',
+				type: 'mwAlienBlockExtension',
 				attributes: {
 					mw: {
 						name: 'syntaxhighlight',
@@ -1083,12 +1083,51 @@ ve.dm.mwExample.domToDataCases = {
 				},
 				originalDomElements: $( '<div about="#mwt1" data-parsoid="1"></div>' ).toArray()
 			},
-			{ type: '/mwAlienExtension' },
+			{ type: '/mwAlienBlockExtension' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
 			model.data.data[0].attributes.mw.attrs.lang = 'php5';
+		}
+	},
+	'mw:AlienInlineExtension': {
+		body:
+			'<p>' +
+				'<img src="Foo" width="100" height="20" alt="Bar" typeof="mw:Extension/score"' +
+					' data-mw="{&quot;name&quot;:&quot;score&quot;,&quot;attrs&quot;:{},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\\\relative c&#39; { e d c d e e e }&quot;}}" ' +
+					' data-parsoid="1" about="#mwt1" />' +
+			'</p>',
+		normalizedBody:
+			'<p>' +
+				'<span typeof="mw:Extension/score"' +
+					' data-mw="{&quot;name&quot;:&quot;score&quot;,&quot;attrs&quot;:{},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\\\relative c&#39; { d d d e e e }&quot;}}" ' +
+					' src="Foo" width="100" height="20" alt="Bar" data-parsoid="1" about="#mwt1" />' +
+			'</p>',
+		data: [
+			{ type: 'paragraph' },
+			{
+				type: 'mwAlienInlineExtension',
+				attributes: {
+					mw: {
+						name: 'score',
+						attrs: {},
+						body: {
+							extsrc: '\\relative c\' { e d c d e e e }'
+						}
+					},
+					originalIndex: 0,
+					originalMw: '{"name":"score","attrs":{},"body":{"extsrc":"\\\\relative c\' { e d c d e e e }"}}'
+				},
+				originalDomElements: $( '<img src="Foo" width="100" height="20" alt="Bar" about="#mwt1" data-parsoid="1"></img>' ).toArray()
+			},
+			{ type: '/mwAlienInlineExtension' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		modify: function ( model ) {
+			model.data.data[1].attributes.mw.body.extsrc = '\\relative c\' { d d d e e e }';
 		}
 	},
 	'mw:Reference': {
