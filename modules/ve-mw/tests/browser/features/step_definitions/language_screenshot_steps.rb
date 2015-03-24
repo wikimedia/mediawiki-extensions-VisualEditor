@@ -144,10 +144,10 @@ end
 
 Then(/^I should see Headings pull-down menu$/) do
   on(VisualEditorPage).heading_dropdown_menus_element.when_present.should be_visible
-  step 'I take screenshot of pull-dowm menu'
+  step 'I take screenshot of Headings pull-down menu'
 end
 
-Then(/^I take screenshot of pull-dowm menu$/) do
+Then(/^I take screenshot of Headings pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
