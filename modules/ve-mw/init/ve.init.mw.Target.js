@@ -182,6 +182,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Style
 	{
+		classes: [ 've-test-toolbar-style' ],
 		type: 'list',
 		icon: 'text-style',
 		indicator: 'down',

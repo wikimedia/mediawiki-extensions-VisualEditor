@@ -179,6 +179,7 @@ class VisualEditorPage
   span(:ve_strikethrough, class: 'oo-ui-iconElement-icon oo-ui-icon-strikethrough-s')
   span(:ve_subscript, class: 'oo-ui-iconElement-icon oo-ui-icon-subscript')
   span(:ve_superscript, class: 'oo-ui-iconElement-icon oo-ui-icon-superscript')
+  div(:ve_text_style_button, class: 've-test-toolbar-style')
   span(:ve_text_style, class: 'oo-ui-iconElement-icon oo-ui-icon-text-style')
   span(:ve_underline, class: 'oo-ui-iconElement-icon oo-ui-icon-underline-u')
   div(:visual_editor_toolbar, class: 'oo-ui-toolbar-tools')
