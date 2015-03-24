@@ -151,7 +151,7 @@ Then(/^I take screenshot of pull-dowm menu$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.format_indicator_down_element, @current_page.heading_dropdown_menus_element]
+    [@current_page.format_indicator_element, @current_page.heading_dropdown_menus_element]
   )
 end
 

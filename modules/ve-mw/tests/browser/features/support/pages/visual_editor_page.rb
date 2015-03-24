@@ -52,6 +52,7 @@ class VisualEditorPage
   div(:enable_redirect, class: 've-test-page-settings-enable-redirect')
   div(:prevent_redirect, class: 've-test-page-settings-prevent-redirect')
   text_field(:redirect_page_name_textbox, css: '.oo-ui-flaggedElement-invalid > input:nth-child(1)')
+  div(:format_indicator, class: 've-test-toolbar-format')
   span(:format_indicator_down, css: '.ve-test-toolbar-format .oo-ui-indicator-down')
   a(:edit_ve, title: /Edit this page with VisualEditor/)
   a(:edit_wikitext, title: /You can edit this page\./)
