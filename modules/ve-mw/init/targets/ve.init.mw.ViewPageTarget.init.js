@@ -424,6 +424,7 @@
 				return;
 			}
 
+			ve.track( 'trace.activate.enter' );
 			ve.track( 'mwedit.init', { type: 'page', mechanism: 'click' } );
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
@@ -448,6 +449,7 @@
 				return;
 			}
 
+			ve.track( 'trace.activate.enter' );
 			ve.track( 'mwedit.init', { type: 'section', mechanism: 'click' } );
 
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
@@ -538,6 +540,7 @@
 			if ( isViewPage && uri.query.veaction === 'edit' ) {
 				isSection = uri.query.vesection !== undefined;
 
+				ve.track( 'trace.activate.enter' );
 				ve.track( 'mwedit.init', { type: isSection ? 'section' : 'page', mechanism: 'url' } );
 				activateTarget();
 			}
