@@ -98,3 +98,8 @@
 		margin: 1em -1.5em -1.5em -1.5em;
 	}
 }
+
+/* Prevent the progress bar from overlaying the welcome dialog */
+.ve-init-mw-viewPageTarget-windowManager-welcome .oo-ui-dialog {
+	z-index: 2;
+}

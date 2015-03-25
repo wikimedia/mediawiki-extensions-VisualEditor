@@ -18,7 +18,8 @@
 	font-size: 1em;
 }
 
-.ve-ui-overlay {
+.ve-ui-overlay,
+.ve-init-mw-viewPageTarget-windowManager-welcome {
 	/* Mimic #globalWrapper */
 	font-size: 127%;
 }
