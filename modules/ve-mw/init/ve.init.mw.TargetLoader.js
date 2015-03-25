@@ -121,8 +121,7 @@
 				ve.track( 'mwtiming.performance.system.apiLoad', {
 					bytes: $.byteLength( jqxhr.responseText ),
 					duration: ve.now() - start,
-					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-					parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
+					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) )
 				} );
 				return data;
 			} );

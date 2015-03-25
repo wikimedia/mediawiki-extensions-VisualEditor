@@ -1095,8 +1095,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 				function ( response, jqxhr ) {
 					var eventData = {
 						bytes: $.byteLength( jqxhr.responseText ),
-						duration: ve.now() - start,
-						parsoid: jqxhr.getResponseHeader( 'X-Parsoid-Performance' )
+						duration: ve.now() - start
 					};
 
 					// Log data about the request if eventName was set
@@ -1112,8 +1111,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 					if ( errorObject && errorObject.xhr ) {
 						eventData = {
 							bytes: $.byteLength( errorObject.xhr.responseText ),
-							duration: ve.now() - start,
-							parsoid: errorObject.xhr.getResponseHeader( 'X-Parsoid-Performance' )
+							duration: ve.now() - start
 						};
 
 						if ( eventName ) {
