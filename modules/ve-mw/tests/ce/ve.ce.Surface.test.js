@@ -22,7 +22,10 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				operations: ['backspace'],
 				// TODO: This action should probably unwrap the list item as
 				expectedData: function () {},
-				expectedRange: new ve.Range( 12 ),
+				expectedSelection: {
+					type: 'linear',
+					range: new ve.Range( 12 )
+				},
 				msg: 'Backspace in a list next to a block image doesn\'t merge into the caption'
 			}
 		];
@@ -32,7 +35,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
 			assert, cases[i].html, cases[i].range, cases[i].operations,
-			cases[i].expectedData, cases[i].expectedRange, cases[i].msg
+			cases[i].expectedData, cases[i].expectedSelection, cases[i].msg
 		);
 	}
 } );

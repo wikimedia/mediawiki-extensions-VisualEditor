@@ -27,14 +27,17 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 				['d', [ { type: 'textStyle/bold' } ]],
 				{
 					type: 'alienInline',
-					originalDomElements: $( '<tt>e</tt>' ).toArray(),
+					originalDomElements: $( '<span rel="ve:Alien">e</span>' ).toArray(),
 					annotations: [ { type: 'textStyle/bold' } ]
 				},
 				{ type: '/alienInline' },
 				{ type: '/paragraph' }
 			],
-			html: 'a<b>b<span class="ve-ce-leafNode ' +
-				've-ce-mwEntityNode" contenteditable="false">c</span>d<tt>e</tt></b>'
+			html:
+				'a<b>b' +
+					'<span class="ve-ce-leafNode ve-ce-mwEntityNode" contenteditable="false">c</span>' +
+					'd<span rel="ve:Alien" class="ve-ce-focusableNode" contenteditable="false">e</span>' +
+				'</b>'
 		} ];
 	QUnit.expect( cases.length );
 	for ( i = 0, len = cases.length; i < len; i++ ) {

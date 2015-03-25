@@ -378,6 +378,7 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/ve.dm.js',
 			'lib/ve/src/dm/ve.dm.Model.js',
 			'lib/ve/src/dm/ve.dm.ModelRegistry.js',
+			'lib/ve/src/dm/ve.dm.ModelFactory.js',
 			'lib/ve/src/dm/ve.dm.NodeFactory.js',
 			'lib/ve/src/dm/ve.dm.AnnotationFactory.js',
 			'lib/ve/src/dm/ve.dm.AnnotationSet.js',
