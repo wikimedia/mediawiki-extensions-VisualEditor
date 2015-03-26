@@ -406,7 +406,8 @@ Then(/^I should see the Edit tab at the top of the page$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.top_editing_tabs_element]
+    [@current_page.top_editing_tabs_element],
+    3
   )
 end
 
