@@ -298,13 +298,13 @@ class ApiVisualEditor extends ApiBase {
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 
-		$page = Title::newFromText( $params['page'] );
-		if ( !$page ) {
+		$title = Title::newFromText( $params['page'] );
+		if ( !$title ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
-		if ( !in_array( $page->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
+		if ( !in_array( $title->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
 			$this->dieUsage( "VisualEditor is not enabled in namespace " .
-				$page->getNamespace(), 'novenamespace' );
+				$title->getNamespace(), 'novenamespace' );
 		}
 
 		$parserParams = array();
@@ -317,15 +317,16 @@ class ApiVisualEditor extends ApiBase {
 			$html = gzinflate( base64_decode( substr( $html, 11 ) ) );
 		}
 
-		wfDebugLog( 'visualeditor', "called on '$page' with paction: '{$params['paction']}'" );
+		wfDebugLog( 'visualeditor', "called on '$title' with paction: '{$params['paction']}'" );
 		switch ( $params['paction'] ) {
 			case 'parse':
-				$parsed = $this->getHTML( $page, $parserParams );
+				$parsed = $this->getHTML( $title, $parserParams );
+
 				// Dirty hack to provide the correct context for edit notices
 				global $wgTitle; // FIXME NOOOOOOOOES
-				$wgTitle = $page;
-				RequestContext::getMain()->setTitle( $page );
-				$notices = $page->getEditNotices();
+				$wgTitle = $title;
+				RequestContext::getMain()->setTitle( $title );
+				$notices = $title->getEditNotices();
 				if ( $user->isAnon() ) {
 					$notices[] = $this->msg(
 						'anoneditwarning',
@@ -340,7 +341,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Creating new page
-				if ( !$page->exists() ) {
+				if ( !$title->exists() ) {
 					$notices[] = $this->msg(
 						$user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon',
 						Skin::makeInternalOrExternalUrl(
@@ -348,18 +349,18 @@ class ApiVisualEditor extends ApiBase {
 						)
 					)->parseAsBlock();
 					// Page protected from creation
-					if ( $page->getRestrictions( 'create' ) ) {
+					if ( $title->getRestrictions( 'create' ) ) {
 						$notices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock();
 					}
 				}
 
 				// Look at protection status to set up notices + surface class(es)
 				$protectedClasses = array();
-				if ( MWNamespace::getRestrictionLevels( $page->getNamespace() ) !== array( '' ) ) {
+				if ( MWNamespace::getRestrictionLevels( $title->getNamespace() ) !== array( '' ) ) {
 					// Page protected from editing
-					if ( $page->isProtected( 'edit' ) ) {
+					if ( $title->isProtected( 'edit' ) ) {
 						# Is the title semi-protected?
-						if ( $page->isSemiProtected() ) {
+						if ( $title->isSemiProtected() ) {
 							$protectedClasses[] = 'mw-textarea-sprotected';
 
 							$noticeMsg = 'semiprotectedpagewarning';
@@ -370,11 +371,11 @@ class ApiVisualEditor extends ApiBase {
 							$noticeMsg = 'protectedpagewarning';
 						}
 						$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
-						$this->getLastLogEntry( $page, 'protect' );
+						$this->getLastLogEntry( $title, 'protect' );
 					}
 
 					// Deal with cascading edit protection
-					list( $sources, $restrictions ) = $page->getCascadeProtectionSources();
+					list( $sources, $restrictions ) = $title->getCascadeProtectionSources();
 					if ( isset( $restrictions['edit'] ) ) {
 						$protectedClasses[] = ' mw-textarea-cprotected';
 
@@ -389,7 +390,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				if ( !$page->userCan( 'create' ) && !$page->exists() ) {
+				if ( !$title->userCan( 'create' ) && !$title->exists() ) {
 					$notices[] = $this->msg(
 						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
 					) . "<br>" . $this->msg( 'nocreatetext' )->parse();
@@ -398,8 +399,8 @@ class ApiVisualEditor extends ApiBase {
 				// Show notice when editing user / user talk page of a user that doesn't exist
 				// or who is blocked
 				// HACK of course this code is partly duplicated from EditPage.php :(
-				if ( $page->getNamespace() == NS_USER || $page->getNamespace() == NS_USER_TALK ) {
-					$parts = explode( '/', $page->getText(), 2 );
+				if ( $title->getNamespace() == NS_USER || $title->getNamespace() == NS_USER_TALK ) {
+					$parts = explode( '/', $title->getText(), 2 );
 					$targetUsername = $parts[0];
 					$targetUser = User::newFromName( $targetUsername, false /* allow IP users*/ );
 
@@ -418,7 +419,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				if ( $user->isBlockedFrom( $page ) && $user->getBlock()->prevents( 'edit' ) !== false ) {
+				if ( $user->isBlockedFrom( $title ) && $user->getBlock()->prevents( 'edit' ) !== false ) {
 					$notices[] = call_user_func_array(
 						array( $this, 'msg' ),
 						$user->getBlock()->getPermissionsError( $this->getContext() )
@@ -439,7 +440,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
-				$article = new Article( $page ); // Deliberately omitting ,0 so oldid comes from request
+				$article = new Article( $title ); // Deliberately omitting ,0 so oldid comes from request
 				$ep = new EditPage( $article );
 				$req = $this->getRequest();
 				$req->setVal( 'format', 'text/x-wiki' );
@@ -453,11 +454,11 @@ class ApiVisualEditor extends ApiBase {
 				// if we're loading an oldid, but it'll probably be close enough, and LinkCache
 				// will automatically request any additional data it needs.
 				$links = array();
-				$wikipage = WikiPage::factory( $page );
+				$wikipage = WikiPage::factory( $title );
 				$popts = $wikipage->makeParserOptions( 'canonical' );
 				$cached = ParserCache::singleton()->get( $article, $popts, true );
 				$isOldRevision = isset( $params['oldid'] ) && $params['oldid'] != 0 &&
-					$params['oldid'] != $page->getLatestRevID();
+					$params['oldid'] != $title->getLatestRevID();
 				$links = array(
 					// Array of linked pages that are missing
 					'missing' => array(),
@@ -478,10 +479,10 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 				// Add information about current page
-				if ( !$page->exists() ) {
-					$links['missing'][] = $page->getPrefixedText();
+				if ( !$title->exists() ) {
+					$links['missing'][] = $title->getPrefixedText();
 				} elseif ( $isOldRevision ) {
-					$links['extant'][] = $page->getPrefixedText();
+					$links['extant'][] = $title->getPrefixedText();
 				}
 
 				// On parser cache miss, just don't bother populating red link data
@@ -496,7 +497,7 @@ class ApiVisualEditor extends ApiBase {
 							'checkboxes' => $checkboxes,
 							'links' => $links,
 							'protectedClasses' => implode( ' ', $protectedClasses ),
-							'watched' => $user->isWatched( $page )
+							'watched' => $user->isWatched( $title )
 						),
 						$parsed['result']
 					);
@@ -506,9 +507,9 @@ class ApiVisualEditor extends ApiBase {
 			case 'parsefragment':
 				$wikitext = $params['wikitext'];
 				if ( $params['pst'] ) {
-					$wikitext = $this->pstWikitext( $page, $wikitext );
+					$wikitext = $this->pstWikitext( $title, $wikitext );
 				}
-				$content = $this->parseWikitextFragment( $page, $wikitext );
+				$content = $this->parseWikitextFragment( $title, $wikitext );
 				if ( $content === false ) {
 					$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 				} else {
@@ -529,7 +530,7 @@ class ApiVisualEditor extends ApiBase {
 					if ( $params['html'] === null ) {
 						$this->dieUsageMsg( 'missingparam', 'html' );
 					}
-					$content = $this->postHTML( $page, $html, $parserParams );
+					$content = $this->postHTML( $title, $html, $parserParams );
 					if ( $content === false ) {
 						$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 					}
@@ -544,13 +545,13 @@ class ApiVisualEditor extends ApiBase {
 						$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
 					}
 				} else {
-					$wikitext = $this->postHTML( $page, $html, $parserParams );
+					$wikitext = $this->postHTML( $title, $html, $parserParams );
 					if ( $wikitext === false ) {
 						$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 					}
 				}
 
-				$diff = $this->diffWikitext( $page, $wikitext );
+				$diff = $this->diffWikitext( $title, $wikitext );
 				if ( $diff['result'] === 'fail' ) {
 					$this->dieUsage( 'Diff failed', 'difffailed' );
 				}
@@ -559,12 +560,12 @@ class ApiVisualEditor extends ApiBase {
 				break;
 
 			case 'serializeforcache':
-				$key = $this->storeInSerializationCache( $page, $parserParams['oldid'], $html );
+				$key = $this->storeInSerializationCache( $title, $parserParams['oldid'], $html );
 				$result = array( 'result' => 'success', 'cachekey' => $key );
 				break;
 
 			case 'getlanglinks':
-				$langlinks = $this->getLangLinks( $page );
+				$langlinks = $this->getLangLinks( $title );
 				if ( $langlinks === false ) {
 					$this->dieUsage( 'Error querying MediaWiki API', 'parsoidserver' );
 				} else {
