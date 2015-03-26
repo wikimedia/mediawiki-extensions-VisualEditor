@@ -301,7 +301,8 @@ ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
  * @fires loadError
  */
 ve.init.mw.Target.onLoad = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevId,
+	var i, len, linkData, aboutDoc, docRevIdMatches,
+		docRevId = 0,
 		data = response ? response.visualeditor : null;
 
 	if ( typeof data.content !== 'string' ) {
@@ -335,9 +336,14 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		this.startTimeStamp = data.starttimestamp;
 		this.revid = data.oldid;
 
-		aboutDoc = this.doc.children[0].getAttribute( 'about' );
-		docRevId = aboutDoc.match( /revision\/([0-9]*)$/ )[1];
-		if ( Number.parseInt( docRevId ) !== this.revid ) {
+		aboutDoc = this.doc.documentElement.getAttribute( 'about' );
+		if ( aboutDoc ) {
+			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
+			if ( docRevIdMatches.length >= 2 ) {
+				docRevId = Number.parseInt( docRevIdMatches[1] );
+			}
+		}
+		if ( docRevId !== this.revid ) {
 			if ( this.retriedRevIdConflict ) {
 				// Retried already, just error the second time.
 				ve.init.mw.Target.onLoadError.call(
