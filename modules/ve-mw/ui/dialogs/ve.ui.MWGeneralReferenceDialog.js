@@ -49,45 +49,23 @@ ve.ui.MWGeneralReferenceDialog.prototype.getBodyHeight = function () {
 	return 400;
 };
 
-ve.ui.MWGeneralReferenceDialog.prototype.initialize = function ( data ) {
-	var topLabel, refButtonsFieldset, refBaseButtonsFieldset, refBasic,
-		tools, i, len, item, button,
+/**
+ * @inheritdoc
+ */
+ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
+	var sourceField, refBasic,
+		tools, i, len, item,
+		items = [],
 		limit = ve.init.mw.Target.static.citationToolsLimit;
 
 	// Parent method
-	ve.ui.MWGeneralReferenceDialog.super.prototype.initialize.call( this, data );
+	ve.ui.MWGeneralReferenceDialog.super.prototype.initialize.apply( this, arguments );
 
 	this.panel = new OO.ui.PanelLayout( {
 		classes: [ 've-ui-mwGeneralReferenceDialog-panel' ],
 		padded: true,
 		expanded: false
 	} );
-
-	topLabel = new OO.ui.LabelWidget( {
-		label: ve.msg( 'visualeditor-dialog-generalreference-intro' )
-	} );
-
-	refButtonsFieldset = new OO.ui.FieldsetLayout( {
-		classes: [ 've-ui-mwGeneralReferenceDialog-buttons-fieldset' ]
-	} );
-	refBaseButtonsFieldset = new OO.ui.FieldsetLayout( {
-		classes: [ 've-ui-mwGeneralReferenceDialog-buttons-base-fieldset' ]
-	} );
-
-	// Basic and re-use reference buttons
-	refBasic = new OO.ui.ButtonWidget( {
-		icon: 'reference',
-		label: ve.msg( 'visualeditor-dialogbutton-reference-full-label' ),
-		classes: [ 've-ui-mwGeneralReferenceDialog-ref-buttons' ],
-		framed: false
-	} );
-	this.refExisting = new OO.ui.ButtonWidget( {
-		icon: 'reference-existing',
-		label: ve.msg( 'visualeditor-dialog-reference-useexisting-full-label' ),
-		classes: [ 've-ui-mwGeneralReferenceDialog-ref-buttons' ],
-		framed: false
-	} );
-	refBaseButtonsFieldset.$element.append( refBasic.$element, this.refExisting.$element );
 
 	// Attach cite dialog tools
 	try {
@@ -99,29 +77,54 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function ( data ) {
 	if ( Array.isArray( tools ) ) {
 		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
 			item = tools[i];
-			// Create a button
-			button = new OO.ui.ButtonWidget( {
+			items.push( new OO.ui.DecoratedOptionWidget( {
 				icon: item.icon,
 				label: item.title,
-				classes: [ 've-ui-mwGeneralReferenceDialog-ref-buttons' ],
-				framed: false
-			} );
-			// Attach to fieldset
-			refButtonsFieldset.$element.append( button.$element );
-			// Event
-			button.connect( this, { click: [ 'onDialogButtonClick', 'transclusion', { template: item.template } ] } );
+				data: {
+					windowName: 'transclusion',
+					dialogData: { template: item.template }
+				}
+			} ) );
 		}
 	}
+	// Basic tools
+	refBasic = new OO.ui.DecoratedOptionWidget( {
+		icon: 'reference',
+		label: ve.msg( 'visualeditor-dialogbutton-reference-full-label' ),
+		data: { windowName: 'reference' }
+	} );
+	this.refExisting = new OO.ui.DecoratedOptionWidget( {
+		icon: 'reference-existing',
+		label: ve.msg( 'visualeditor-dialog-reference-useexisting-full-label' ),
+		data: {
+			windowName: 'reference',
+			dialogData: { useExisting: true }
+		}
+	} );
+
+	this.sourceSelect = new OO.ui.SelectWidget( {
+		classes: [ 've-ui-mwGeneralReferenceDialog-select' ],
+		items: items
+	} );
+	sourceField = new OO.ui.FieldLayout( this.sourceSelect, {
+		classes: [ 've-ui-mwGeneralReferenceDialog-source-field' ],
+		align: 'top',
+		label: ve.msg( 'visualeditor-dialog-generalreference-intro' )
+	} );
+
+	this.basicSelect = new OO.ui.SelectWidget( {
+		classes: [ 've-ui-mwGeneralReferenceDialog-select' ],
+		items: [ refBasic, this.refExisting ]
+	} );
 
 	// Events
-	refBasic.connect( this, { click: [ 'onDialogButtonClick', 'reference' ] } );
-	this.refExisting.connect( this, { click: [ 'onDialogButtonClick', 'reference', { useExisting: true } ] } );
+	this.sourceSelect.connect( this, { choose: 'onSelectChoose' } );
+	this.basicSelect.connect( this, { choose: 'onSelectChoose' } );
 
 	// Assemble the panel
 	this.panel.$element.append(
-		topLabel.$element,
-		refButtonsFieldset.$element,
-		refBaseButtonsFieldset.$element
+		sourceField.$element,
+		this.basicSelect.$element
 	);
 
 	this.$body
@@ -141,7 +144,20 @@ ve.ui.MWGeneralReferenceDialog.prototype.getSetupProcess = function ( data ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWGeneralReferenceDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWGeneralReferenceDialog.super.prototype.getTeardownProcess.call( this, data )
+		.next( function () {
+			// Clear selections
+			this.sourceSelect.selectItem();
+			this.basicSelect.selectItem();
+		}, this );
+};
+
+/**
  * Check if there are any references in the current page.
+ *
  * @return {boolean} There are references
  */
 ve.ui.MWGeneralReferenceDialog.prototype.doReferencesExist = function () {
@@ -157,19 +173,21 @@ ve.ui.MWGeneralReferenceDialog.prototype.doReferencesExist = function () {
 };
 
 /**
- * Respond to dialog button click
- * @param {string} windowName Window name
- * @param {Object} dialogData Data object
+ * Handle select widget choose events
+ *
+ * @param {OO.ui.OptionWidget} item Chosen item
  */
-ve.ui.MWGeneralReferenceDialog.prototype.onDialogButtonClick = function ( windowName, dialogData ) {
-	var dialog = this,
-		fragment = this.getFragment();
+ve.ui.MWGeneralReferenceDialog.prototype.onSelectChoose = function ( item ) {
+	var data = item.getData(),
+		// Closing the dialog may unset some properties, so cache the ones we want
+		fragment = this.getFragment(),
+		manager = this.getManager();
 
-	// Open the new dialog
+	// Close this dialog then open the new dialog
 	this.close().then( function () {
-		dialog.getManager().openWindow( windowName, $.extend( {
+		manager.openWindow( data.windowName, $.extend( {
 			fragment: fragment
-		}, dialogData ) );
+		}, data.dialogData ) );
 	} );
 };
 
