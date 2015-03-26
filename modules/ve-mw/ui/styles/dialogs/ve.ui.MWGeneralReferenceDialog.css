@@ -4,18 +4,15 @@
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
+
 .ve-ui-mwGeneralReferenceDialog-panel {
 	margin: 1em 3em;
 }
-.ve-ui-mwGeneralReferenceDialog-ref-buttons {
-	display: block;
-	margin: 1.5em 0;
+
+.ve-ui-mwGeneralReferenceDialog-select .oo-ui-optionWidget {
+	margin: 1em 0;
 }
 
-.ve-ui-mwGeneralReferenceDialog-buttons-fieldset {
-	margin-top: 1em;
-}
-
-.ve-ui-mwGeneralReferenceDialog-buttons-base-fieldset {
-	border-top: 1px solid #cccccc;
+.ve-ui-mwGeneralReferenceDialog-source-field {
+	border-bottom: 1px solid #cccccc;
 }
