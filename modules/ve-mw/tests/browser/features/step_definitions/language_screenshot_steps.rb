@@ -238,11 +238,12 @@ end
 
 Then(/^I should see Special character Insertion window$/) do
   on(VisualEditorPage).window_frame_element.when_present.should be_visible
+
   Screenshot.zoom_browser(@browser, -2)
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.window_frame_element]
+    [@current_page.toolbar_element, @current_page.window_frame_element]
   )
 end
 
