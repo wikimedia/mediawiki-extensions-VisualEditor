@@ -30,7 +30,8 @@
 			"vector",
 			"apex",
 			"monobook",
-			"minerva"
+			"minerva",
+			"blueprint"
 		],
 		"VisualEditorParsoidPrefix": "localhost",
 		"VisualEditorDisableForAnons": false,
