@@ -20,8 +20,6 @@
 ve.ui.MWGeneralReferenceDialog = function VeUiMWGeneralReferenceDialog( config ) {
 	// Parent constructor
 	ve.ui.MWGeneralReferenceDialog.super.call( this, config );
-
-	this.fragment = null;
 };
 
 /* Inheritance */
@@ -137,8 +135,6 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function ( data ) {
 ve.ui.MWGeneralReferenceDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWGeneralReferenceDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			this.fragment = data.fragment;
-
 			// Check if the 'use existing' button should be enabled
 			this.refExisting.setDisabled( !this.doReferencesExist() );
 		}, this );
@@ -150,7 +146,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWGeneralReferenceDialog.prototype.doReferencesExist = function () {
 	var groupName,
-		groups = this.fragment.getDocument().getInternalList().getNodeGroups();
+		groups = this.getFragment().getDocument().getInternalList().getNodeGroups();
 
 	for ( groupName in groups ) {
 		if ( groupName.lastIndexOf( 'mwReference/' ) === 0 && groups[groupName].indexOrder.length ) {
@@ -167,7 +163,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.doReferencesExist = function () {
  */
 ve.ui.MWGeneralReferenceDialog.prototype.onDialogButtonClick = function ( windowName, dialogData ) {
 	var dialog = this,
-		fragment = this.fragment;
+		fragment = this.getFragment();
 
 	// Open the new dialog
 	this.close().then( function () {
