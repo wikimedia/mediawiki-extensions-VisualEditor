@@ -75,7 +75,37 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 
 /* Methods */
 
-/** */
+/**
+ * @inheritdoc
+ */
+ve.ce.MWTransclusionNode.prototype.onSetup = function () {
+	// Parent method
+	ve.ce.MWTransclusionNode.super.prototype.onSetup.call( this );
+
+	if (
+		this.$element.text().trim().length === 0 &&
+		// Check whether the element is too small to comfortably select
+		(
+			this.$element.width() < 8 ||
+			this.$element.height() < 8
+		)
+	) {
+		// We have to reset the icon when it is reappended, because
+		// setIcon also affects the classes attached to this.$element
+		this.setIcon( 'template' );
+		// Reattach icon
+		this.$element.prepend( this.$icon );
+	} else {
+		// We have to clear the icon because if the icon's symbolic name
+		// has not changed since the last time we rendered, this.setIcon()
+		// above will internally short circuit.
+		this.setIcon( null );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
 	xhr = new mw.Api().post( {
@@ -134,25 +164,6 @@ ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
 	// Since render replaces this.$element with a new node, we need to make sure
 	// our iconElement is defined again to be this.$element
 	this.$element.addClass( 've-ce-mwTransclusionNode' );
-	if (
-		$( generatedContents ).text().trim().length === 0 &&
-		// Check whether the element is too small to comfortably select
-		(
-			this.$element.width() < 8 ||
-			this.$element.height() < 8
-		)
-	) {
-		// We have to reset the icon when it is reappended, because
-		// setIcon also affects the classes attached to this.$element
-		this.setIcon( 'template' );
-		// Reattach icon
-		this.$element.prepend( this.$icon );
-	} else {
-		// We have to clear the icon because if the icon's symbolic name
-		// has not changed since the last time we rendered, this.setIcon()
-		// above will internally short circuit.
-		this.setIcon( null );
-	}
 };
 
 /**
