@@ -188,7 +188,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
+    [@current_page.insert_button_element, @current_page.insert_pull_down_element]
   )
 
   Screenshot.highlight(@current_page, @current_page.media_insert_menu_element)
@@ -196,7 +196,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Media_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
+    [@current_page.insert_button_element, @current_page.insert_pull_down_element]
   )
 
   Screenshot.highlight(@current_page, @current_page.media_insert_menu_element, '#FFFFFF')
@@ -205,7 +205,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Template_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
+    [@current_page.insert_button_element, @current_page.insert_pull_down_element]
   )
 
   Screenshot.highlight(@current_page, @current_page.template_insert_menu_element, '#FFFFFF')
@@ -214,7 +214,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_References_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
+    [@current_page.insert_button_element, @current_page.insert_pull_down_element]
   )
 
   Screenshot.highlight(@current_page, @current_page.ref_list_insert_menu_element, '#FFFFFF')
@@ -223,7 +223,7 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Formula_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.insert_indicator_down_element, @current_page.insert_pull_down_element]
+    [@current_page.insert_button_element, @current_page.insert_pull_down_element]
   )
 end
 
