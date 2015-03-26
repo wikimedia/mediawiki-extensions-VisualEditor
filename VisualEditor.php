@@ -392,6 +392,7 @@ $wgResourceModules += array(
 			'lib/ve/src/dm/ve.dm.APIResultsQueue.js',
 			'lib/ve/src/dm/ve.dm.ResizableNode.js',
 			'lib/ve/src/dm/ve.dm.BranchNode.js',
+			'lib/ve/src/dm/ve.dm.ContentBranchNode.js',
 			'lib/ve/src/dm/ve.dm.LeafNode.js',
 			'lib/ve/src/dm/ve.dm.Annotation.js',
 			'lib/ve/src/dm/ve.dm.InternalList.js',
