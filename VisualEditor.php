@@ -1612,7 +1612,7 @@ $wgVisualEditorNamespaces = array_merge( $wgContentNamespaces, array( NS_USER ) 
 $wgVisualEditorEnableTocWidget = false;
 
 // List of skins VisualEditor integration supports
-$wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva' );
+$wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva', 'blueprint' );
 
 // List of browsers VisualEditor is incompatibe with
 // See jQuery.client for specification
