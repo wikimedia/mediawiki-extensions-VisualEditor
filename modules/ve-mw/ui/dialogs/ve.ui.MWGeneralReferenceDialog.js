@@ -91,13 +91,6 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function ( data ) {
 	} );
 	refBaseButtonsFieldset.$element.append( refBasic.$element, this.refExisting.$element );
 
-	// Assemble the panel
-	this.panel.$element.append(
-		topLabel.$element,
-		refButtonsFieldset.$element,
-		refBaseButtonsFieldset.$element
-	);
-
 	// Attach cite dialog tools
 	try {
 		// Must use mw.message to avoid JSON being parsed as Wikitext
@@ -125,6 +118,13 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function ( data ) {
 	// Events
 	refBasic.connect( this, { click: [ 'onDialogButtonClick', 'reference' ] } );
 	this.refExisting.connect( this, { click: [ 'onDialogButtonClick', 'reference', { useExisting: true } ] } );
+
+	// Assemble the panel
+	this.panel.$element.append(
+		topLabel.$element,
+		refButtonsFieldset.$element,
+		refBaseButtonsFieldset.$element
+	);
 
 	this.$body
 		.addClass( 've-ui-mwGeneralReferenceDialog' )
