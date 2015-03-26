@@ -170,6 +170,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 	if ( this.transclusionModel.getParts().length === 0 ) {
 		this.addParameterButton.setDisabled( true );
+		this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
 	}
 
 	single = this.isSingleTemplateTransclusion();
