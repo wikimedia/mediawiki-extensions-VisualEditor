@@ -297,7 +297,8 @@ Then(/^I should see list and indentation dropdown$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.indentation_button_element, @current_page.indentation_pull_down_element]
+    [@current_page.indentation_button_element, @current_page.indentation_pull_down_element],
+    3
   )
 end
 
