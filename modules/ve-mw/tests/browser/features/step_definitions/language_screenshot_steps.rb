@@ -165,7 +165,8 @@ Then(/^I take screenshot of Formatting pull-down menu$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.ve_text_style_button_element, @current_page.formatting_option_menus_element]
+    [@current_page.ve_text_style_button_element, @current_page.formatting_option_menus_element],
+    3
   )
 end
 
