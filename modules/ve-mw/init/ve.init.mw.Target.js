@@ -354,8 +354,13 @@ ve.init.mw.Target.onLoad = function ( response ) {
 				);
 			} else {
 				this.retriedRevIdConflict = true;
-				// Have to retry both until we can access the document server directly...
+				// TODO this retries both requests, in RESTbase mode we should only retry
+				// the request that gave us the lower revid
 				this.loading = false;
+				// HACK: Load with explicit revid to hopefully prevent this from happening again
+				if ( !this.requestedRevId ) {
+					this.requestedRevId = Math.max( docRevId, this.revid );
+				}
 				this.load();
 			}
 			return;
