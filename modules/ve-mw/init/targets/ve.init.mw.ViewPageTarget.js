@@ -40,6 +40,9 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	this.recreating = false;
 	this.activatingDeferred = null;
 	this.toolbarSetupDeferred = null;
+	this.welcomeDialog = null;
+	this.welcomeDialogPromise = null;
+
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
 	// (which would mess up with the expected order of Back/Forwards browsing)
@@ -282,6 +285,8 @@ ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
 		this.activatingDeferred = $.Deferred();
 		this.toolbarSetupDeferred = $.Deferred();
 
+		this.maybeShowWelcomeDialog();
+
 		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).always( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
@@ -335,6 +340,9 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( noDialog, trackMecha
 	if ( this.deactivating || ( !this.active && !this.activating ) ) {
 		return;
 	}
+
+	// Just in case this wasn't closed before
+	this.welcomeDialog.close();
 
 	if ( noDialog || this.activating || !this.edited ) {
 		this.cancel( trackMechanism );
@@ -522,7 +530,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.restoreScrollPosition();
 	this.restoreEditSection();
 	this.setupUnloadHandlers();
-	this.maybeShowDialogs();
+	this.maybeShowMetaDialog();
 
 	this.activatingDeferred.resolve();
 
@@ -1573,11 +1581,25 @@ ve.init.mw.ViewPageTarget.prototype.tearDownUnloadHandlers = function () {
 };
 
 /**
- * Show dialogs as needed on load.
+ * Show the beta dialog as needed
  */
-ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
-	var usePrefs, prefSaysShow, urlSaysHide, target = this;
+ve.init.mw.ViewPageTarget.prototype.maybeShowWelcomeDialog = function () {
+	var usePrefs, prefSaysShow, urlSaysHide, windowManager,
+		target = this;
+
+	this.welcomeDialogPromise = $.Deferred();
+
 	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
+		// Set up a temporary window manager
+		windowManager = new OO.ui.WindowManager( {
+			classes: [
+			've-init-mw-viewPageTarget-windowManager',
+			've-init-mw-viewPageTarget-windowManager-welcome'
+		]
+		} );
+		$( 'body' ).append( windowManager.$element );
+		this.welcomeDialog = new ve.ui.MWBetaWelcomeDialog();
+		windowManager.addWindows( [ this.welcomeDialog ] );
 
 		// Only use the preference value if the user is logged-in.
 		// If the user is anonymous, we can't save the preference
@@ -1600,17 +1622,20 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 				)
 			)
 		) {
-			this.getSurface().getDialogs().openWindow( 'betaWelcome' ).done( function ( opened ) {
-				opened.done( function ( closing ) {
-					closing.done( function () {
-						// Pop out the notices when the welcome dialog is closed
-						target.actionsToolbar.tools.notices.getPopup().toggle( true );
-					} );
+			windowManager.openWindow( this.welcomeDialog )
+				.then( function ( opened ) {
+					return opened;
+				} )
+				.then( function ( closing ) {
+					return closing;
+				} )
+				.then( function () {
+					// Detach the temporary window manager
+					windowManager.destroy();
+					target.welcomeDialogPromise.resolve();
 				} );
-			} );
 		} else {
-			// Automatically open the notices immediately
-			this.actionsToolbar.tools.notices.getPopup().toggle( true );
+			this.welcomeDialogPromise.resolve();
 		}
 
 		if ( prefSaysShow ) {
@@ -1629,7 +1654,22 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowDialogs = function () {
 				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 			}
 		}
+	} else {
+		this.welcomeDialogPromise.reject();
 	}
+};
+
+/**
+ * Show the meta dialog as needed on load.
+ */
+ve.init.mw.ViewPageTarget.prototype.maybeShowMetaDialog = function () {
+	var target = this;
+
+	this.welcomeDialogPromise
+		.always( function () {
+			// Pop out the notices when the welcome dialog is closed
+			target.actionsToolbar.tools.notices.getPopup().toggle( true );
+		} );
 
 	if ( this.getSurface().getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
 		this.getSurface().getDialogs().openWindow( 'meta', {
