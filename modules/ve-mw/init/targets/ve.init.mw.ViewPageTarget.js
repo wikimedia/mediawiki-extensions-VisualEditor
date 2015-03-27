@@ -342,7 +342,9 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( noDialog, trackMecha
 	}
 
 	// Just in case this wasn't closed before
-	this.welcomeDialog.close();
+	if ( this.welcomeDialog ) {
+		this.welcomeDialog.close();
+	}
 
 	if ( noDialog || this.activating || !this.edited ) {
 		this.cancel( trackMechanism );
