@@ -340,7 +340,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		if ( aboutDoc ) {
 			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
 			if ( docRevIdMatches.length >= 2 ) {
-				docRevId = Number.parseInt( docRevIdMatches[1] );
+				docRevId = parseInt( docRevIdMatches[1] );
 			}
 		}
 		if ( docRevId !== this.revid ) {
