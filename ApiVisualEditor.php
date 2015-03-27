@@ -162,13 +162,28 @@ class ApiVisualEditor extends ApiBase {
 
 	protected function storeInSerializationCache( $title, $oldid, $html ) {
 		global $wgMemc;
-		$content = $this->postHTML( $title, $html, array( 'oldid' => $oldid ) );
-		if ( $content === false ) {
+
+		// Convert the VE HTML to wikitext
+		$text = $this->postHTML( $title, $html, array( 'oldid' => $oldid ) );
+		if ( $text === false ) {
 			return false;
 		}
-		$hash = md5( $content );
+
+		// Store the corresponding wikitext, referenceable by a new key
+		$hash = md5( $text );
 		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
-		$wgMemc->set( $key, $content, $this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
+		$wgMemc->set( $key, $text,
+			$this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
+
+		// Also parse and prepare the edit in case it might be saved later
+		$page = WikiPage::factory( $title );
+		$content = ContentHandler::makeContent( $text, $title, CONTENT_MODEL_WIKITEXT );
+
+		$res = ApiStashEdit::parseAndStash( $page, $content, $this->getUser() );
+		if ( $res === ApiStashEdit::ERROR_NONE ) {
+			wfDebugLog( 'StashEdit', "Cached parser output for VE content key '$key'." );
+		}
+
 		return $hash;
 	}
 
