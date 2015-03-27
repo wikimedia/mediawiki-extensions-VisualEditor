@@ -146,7 +146,7 @@ class VisualEditorPage
   div(:save_enabled, css: 'div.ve-init-mw-viewPageTarget-toolbar-actions > div.oo-ui-flaggedElement-progressive.oo-ui-widget-enabled')
   a(:second_reference, text: '[1]', index: 2)
   span(:second_save_page, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
-  div(:settings_apply_button, css: '.oo-ui-window-frame .oo-ui-buttonElement.oo-ui-flaggedElement-progressive')
+  div(:settings_apply_button, css: '.oo-ui-window-frame .oo-ui-processDialog-actions-primary')
   span(:special_character, class: 'oo-ui-iconElement-icon oo-ui-icon-special-character')
   a(:subheading1, text: /Sub-heading 1/)
   a(:subheading2, text: /Sub-heading 2/)
