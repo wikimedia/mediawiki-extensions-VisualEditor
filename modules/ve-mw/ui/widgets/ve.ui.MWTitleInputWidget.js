@@ -47,11 +47,9 @@ OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupElement );
  */
 ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	this.closeLookupMenu();
-	if ( item ) {
-		this.setLookupsDisabled( true );
-		this.setValue( item.getData() );
-		this.setLookupsDisabled( false );
-	}
+	this.setLookupsDisabled( true );
+	this.setValue( item.getData() );
+	this.setLookupsDisabled( false );
 };
 
 /**
