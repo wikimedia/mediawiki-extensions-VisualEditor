@@ -284,7 +284,8 @@ Then(/^I should see Page settings dialog box$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Page_Settings_Edit_Links-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.page_settings_editlinks_element]
+    [@current_page.page_settings_editlinks_element],
+    3
   )
 
   Screenshot.zoom_browser(@browser, 3)
