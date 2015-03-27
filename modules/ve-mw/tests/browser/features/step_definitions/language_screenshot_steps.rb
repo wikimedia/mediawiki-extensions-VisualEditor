@@ -56,7 +56,7 @@ end
 
 When(/^I click on the Special character option in Insert menu$/) do
   step 'I click on the Insert menu'
-  step 'I click on More in insert pull-down menu'
+  step 'I click on More in the pull-down menu'
   on(VisualEditorPage).special_character_element.when_present.click
 end
 
@@ -113,7 +113,7 @@ end
 
 When(/^I click on Formula option in Insert menu$/) do
   step 'I click on the Insert menu'
-  step 'I click on More in insert pull-down menu'
+  step 'I click on More in the pull-down menu'
   on(VisualEditorPage).formula_link_element.when_present.click
 end
 
@@ -129,7 +129,7 @@ end
 When(/^I click on References list in Insert menu$/) do
   step 'I click in the editable part'
   step 'I click on the Insert menu'
-  step 'I click on More in insert pull-down menu'
+  step 'I click on More in the pull-down menu'
   on(VisualEditorPage).ve_references_element.when_present.click
 end
 
@@ -162,6 +162,7 @@ Then(/^I should see Formatting pull-down menu$/) do
 end
 
 Then(/^I take screenshot of Formatting pull-down menu$/) do
+  step 'I click on More in the pull-down menu'
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -185,7 +186,7 @@ Then(/^I should see Insert pull-down menu$/) do
 end
 
 Then(/^I take screenshot of insert pull-down menu$/) do
-  step 'I click on More in insert pull-down menu'
+  step 'I click on More in the pull-down menu'
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -233,8 +234,8 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   )
 end
 
-Then(/^I click on More in insert pull-down menu$/) do
-  on(VisualEditorPage).insert_more_fewer_element.when_present.click
+Then(/^I click on More in the pull-down menu$/) do
+  on(VisualEditorPage).more_fewer_element.when_present.click
 end
 
 Then(/^I should see Special character Insertion window$/) do
