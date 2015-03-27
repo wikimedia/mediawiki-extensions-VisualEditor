@@ -185,6 +185,7 @@ ve.ui.MWCategoryPopupWidget.prototype.setDefaultSortKey = function ( value ) {
  */
 ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
 	var pos = OO.ui.Element.static.getRelativePosition( item.$indicator, this.$element.offsetParent() );
+
 	// Align to the middle of the indicator
 	pos.left += item.$indicator.width() / 2;
 	// Position below the indicator
