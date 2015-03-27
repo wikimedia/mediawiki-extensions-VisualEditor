@@ -106,7 +106,8 @@ When(/^I click on category in hamburger menu$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_category_item-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.hamburger_menu_element, @current_page.page_option_menu_element]
+    [@current_page.hamburger_menu_element, @current_page.page_option_menu_element],
+    3
   )
 
   on(VisualEditorPage).category_link_element.when_present.click
@@ -139,7 +140,8 @@ Then(/^I should see category dialog box$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.window_frame_element]
+    [@current_page.window_frame_element],
+    3
   )
 end
 
@@ -177,7 +179,8 @@ Then(/^I should see pull-down menu containing Page Settings$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.disabled_save_button_element, @current_page.page_option_menu_element]
+    [@current_page.disabled_save_button_element, @current_page.page_option_menu_element],
+    3
   )
 end
 
@@ -256,7 +259,8 @@ Then(/^I should see save changes dialog box$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.window_frame_element]
+    [@current_page.window_frame_element],
+    3
   )
 end
 
@@ -266,7 +270,8 @@ Then(/^I should see Page settings dialog box$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.window_frame_element]
+    [@current_page.window_frame_element],
+    3
   )
 
   Screenshot.capture(
@@ -379,7 +384,8 @@ Then(/^I should see the Cite button$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.cite_button_element]
+    [@current_page.cite_button_element],
+    3
   )
 end
 
@@ -441,7 +447,8 @@ Then(/^I should see the formula insertion menu$/) do
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.window_frame_element, @current_page.formula_image_element]
+    [@current_page.window_frame_element, @current_page.formula_image_element],
+    3
   )
 end
 
