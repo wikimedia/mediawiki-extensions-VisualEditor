@@ -15,9 +15,9 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWReferencesListContextItem = function VeMWReferencesListContextItem( context, model, config ) {
+ve.ui.MWReferencesListContextItem = function VeMWReferencesListContextItem() {
 	// Parent constructor
-	ve.ui.MWReferencesListContextItem.super.call( this, context, model, config );
+	ve.ui.MWReferencesListContextItem.super.apply( this, arguments );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwReferencesListContextItem' );

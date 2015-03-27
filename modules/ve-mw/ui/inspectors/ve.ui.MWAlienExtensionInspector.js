@@ -14,9 +14,9 @@
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector( config ) {
+ve.ui.MWAlienExtensionInspector = function VeUiMWAlienExtensionInspector() {
 	// Parent constructor
-	ve.ui.MWExtensionInspector.call( this, config );
+	ve.ui.MWAlienExtensionInspector.super.apply( this, arguments );
 
 	// Properties
 	this.attributeInputs = {};
