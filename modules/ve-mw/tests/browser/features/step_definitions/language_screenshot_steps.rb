@@ -272,13 +272,15 @@ Then(/^I should see Page settings dialog box$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.enable_redirect_element, @current_page.prevent_redirect_element]
+    [@current_page.enable_redirect_element, @current_page.prevent_redirect_element],
+    3
   )
 
   Screenshot.capture(
     @browser,
     "VisualEditor_Page_Settings_TOC-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.table_of_contents_element]
+    [@current_page.table_of_contents_element],
+    3
   )
 
   Screenshot.capture(
