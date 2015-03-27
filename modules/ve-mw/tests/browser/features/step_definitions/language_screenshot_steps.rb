@@ -294,7 +294,8 @@ Then(/^I should see Page settings dialog box$/) do
   Screenshot.capture(
     @browser,
     "VisualEditor_Apply_Changes-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.settings_apply_button_element]
+    [@current_page.settings_apply_button_element],
+    3
   )
 end
 
