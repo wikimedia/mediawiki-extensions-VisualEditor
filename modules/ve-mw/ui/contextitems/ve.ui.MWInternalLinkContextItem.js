@@ -15,9 +15,9 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWInternalLinkContextItem = function VeMWInternalLinkContextItem( context, model, config ) {
+ve.ui.MWInternalLinkContextItem = function VeMWInternalLinkContextItem() {
 	// Parent constructor
-	ve.ui.MWInternalLinkContextItem.super.call( this, context, model, config );
+	ve.ui.MWInternalLinkContextItem.super.apply( this, arguments );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwInternalLinkContextItem' );

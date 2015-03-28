@@ -15,9 +15,9 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWCitationContextItem = function VeMWCitationContextItem( context, model, config ) {
+ve.ui.MWCitationContextItem = function VeMWCitationContextItem() {
 	// Parent constructor
-	ve.ui.MWCitationContextItem.super.call( this, context, model, config );
+	ve.ui.MWCitationContextItem.super.apply( this, arguments );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwCitationContextItem' );
