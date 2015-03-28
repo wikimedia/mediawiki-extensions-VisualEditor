@@ -792,6 +792,7 @@ $wgResourceModules += array(
 			'visualeditor-table-insert-row-before',
 			'visualeditor-table-insert-table',
 			'visualeditor-table-merge-cells',
+			'visualeditor-tablecell-tooltip',
 			'visualeditor-toolbar-format-tooltip',
 			'visualeditor-toolbar-history',
 			'visualeditor-toolbar-insert',
