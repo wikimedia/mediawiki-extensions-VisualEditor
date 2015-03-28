@@ -109,6 +109,28 @@ ve.init.mw.Platform.prototype.getUserLanguages = function () {
 	return mw.language.getFallbackLanguageChain();
 };
 
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
+	var characters = {},
+		groupObject;
+	$.each( mw.language.specialCharacters, function ( groupName, groupCharacters ) {
+		groupObject = {};
+		$.each( groupCharacters, function ( charKey, charVal ) {
+			if ( typeof charVal === 'string' ) {
+				// VE can only handle the strings right now
+				// (which is the vast majority of the entries)
+				groupObject[charVal] = charVal;
+			}
+		} );
+		characters[mw.msg( 'special-characters-group-' + groupName )] = groupObject;
+	} );
+
+	// This implementation always resolves instantly
+	return $.Deferred().resolve( characters ).promise();
+};
+
 /* Initialization */
 
 ve.init.platform = new ve.init.mw.Platform();
