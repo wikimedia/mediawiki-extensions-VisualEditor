@@ -1500,16 +1500,13 @@ $wgResourceModules += array(
 			'modules/ve-mw/dm/nodes/ve.dm.MWAlienExtensionNode.js',
 			'modules/ve-mw/ce/nodes/ve.ce.MWAlienExtensionNode.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWAlienExtensionInspector.js',
-			'modules/ve-mw/ui/tools/ve.ui.MWAlienExtensionInspectorTool.js',
+			'modules/ve-mw/ui/contextitems/ve.ui.MWAlienExtensionContextItem.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
-		),
-		'messages' => array(
-			'visualeditor-mwalienextensioninspector-title',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
