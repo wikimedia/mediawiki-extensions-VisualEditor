@@ -38,7 +38,8 @@
 			"McDutchie",
 			"Jdforrester",
 			"Amire80",
-			"Weft"
+			"Weft",
+			"Zetud"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -58,7 +59,7 @@
 	"apihelp-visualeditoredit-param-captchaword": "Réponse au Captcha (lors d’un enregistrement avec une réponse Captcha).",
 	"apihelp-visualeditoredit-param-html": "HTML à envoyer à Parsoid en échange de wikicode.",
 	"apihelp-visualeditoredit-param-minor": "Marquage d’édition mineure.",
-	"apihelp-visualeditoredit-param-needcheck": "Lors de l’enregistrement, règle ce paamètre si la version pourrait rencontrer des problèmes (roundtrip problems). Cela résultera en un balisage de l’édition.",
+	"apihelp-visualeditoredit-param-needcheck": "Lors de l’enregistrement, régler ce paramètre si la version pourrait rencontrer des problèmes (roundtrip problems). Cela résultera en un balisage de l’édition.",
 	"apihelp-visualeditoredit-param-oldid": "Le numéro de version à utiliser. Par défaut celui de la dernière version. Utilisez 0 pour une nouvelle page.",
 	"apihelp-visualeditoredit-param-page": "La page sur laquelle les modifications doivent être effectuées.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Lors de l’enregistrement, règle ceci avec l’horodatage du moment où la page a été chargée. Utilisé pour détecter les conflits d’édition.",
@@ -129,7 +130,7 @@
 	"visualeditor-dialog-media-size-choosefull": "Fixer à la taille maximale",
 	"visualeditor-dialog-media-size-originalsize-error": "Impossible de retrouver la taille du fichier d’origine.",
 	"visualeditor-dialog-media-size-section": "Taille de l’image",
-	"visualeditor-dialog-media-size-section-help": "Vous pouvez choisir à quelle taille apparaît le media sur la page. Cela devrait être presque toujours la taille normale, en effet une taille personnalisée va interférer avec la mise en page pour les lecteurs et les rendre incompatibles.",
+	"visualeditor-dialog-media-size-section-help": "Vous pouvez choisir à quelle taille apparaît le media sur la page. Cela devrait être presque toujours la taille normale, car une taille personnalisée va interférer avec la mise en page pour les lecteurs et les rendre incompatibles.",
 	"visualeditor-dialog-media-thumbdimensions": "Dimensions de la vignette",
 	"visualeditor-dialog-media-title": "Paramètres du média",
 	"visualeditor-dialog-media-type-border": "Bordure",
@@ -137,7 +138,7 @@
 	"visualeditor-dialog-media-type-frameless": "Sans cadre",
 	"visualeditor-dialog-media-type-none": "Basique",
 	"visualeditor-dialog-media-type-section": "Type d’image",
-	"visualeditor-dialog-media-type-section-help": "Vous pouvez choisit comment le media apparaît sur la page. Cela doit être dans presque tous les cas le format vignette pour être cohérent avec les autre pages.",
+	"visualeditor-dialog-media-type-section-help": "Vous pouvez choisir comment le media apparaît sur la page. Cela doit être dans presque tous les cas le format vignette pour être cohérent avec les autres pages.",
 	"visualeditor-dialog-media-type-thumb": "Vignette",
 	"visualeditor-dialog-meta-advancedsettings-label": "Paramètres avancés",
 	"visualeditor-dialog-meta-advancedsettings-section": "Paramètres avancés",

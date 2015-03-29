@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"George Animal",
-			"Purodha"
+			"Purodha",
+			"Bikarhêner"
 		]
 	},
+	"visualeditor-dialog-generalreference-intro": "Tîpa çavkanîye hilbijêre:",
 	"visualeditor-dialog-meta-categories-data-label": "Kategorî",
 	"visualeditor-dialog-meta-categories-section": "Kategorî",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Navê rûpelê di kategoriyê de",

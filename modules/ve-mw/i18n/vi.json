@@ -151,7 +151,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "Đổi hướng trang này đến",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Trang để đổi hướng đến",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Bạn có thể ngăn trang đổi hướng này được cập nhật tự động khi trang mà nó đổi hướng đến được di chuyển, chỉ làm việc này trong một số trường hợp rất hiếm.",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Cố định trang đổi hướng này để không được cập nhật khi trang đích được di chuyển.",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Ngăn không cho trang đổi hướng này được cập nhật khi trang đích được di chuyển.",
 	"visualeditor-dialog-meta-settings-section": "Tùy chọn trang",
 	"visualeditor-dialog-meta-settings-toc-default": "Nếu cần thiết",
 	"visualeditor-dialog-meta-settings-toc-disable": "Không bao giờ",

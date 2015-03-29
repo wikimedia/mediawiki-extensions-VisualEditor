@@ -107,6 +107,7 @@
 	"visualeditor-dialog-transclusion-add-param": "Donn mieh Aanjahbe derbei",
 	"visualeditor-dialog-transclusion-add-template": "Donn en Schabloon dobei",
 	"visualeditor-dialog-transclusion-content": "Enhald",
+	"visualeditor-dialog-transclusion-contextitem-description": "Generated from: $1\n<!-- \nhttps://translatewiki.net/wiki/Thread:Support/About_MediaWiki:Visualeditor-dialog-transclusion-contextitem-description/en\n-->",
 	"visualeditor-dialog-transclusion-param-default": "Schtandattwäät: $1",
 	"visualeditor-dialog-transclusion-param-example": "beijschpell_Wäät: $1",
 	"visualeditor-editsummary": "Donn beschriive, wat De jeändert häs.",
