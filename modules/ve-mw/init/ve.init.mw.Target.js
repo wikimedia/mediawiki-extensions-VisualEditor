@@ -392,35 +392,20 @@ ve.init.mw.Target.onLoad = function ( response ) {
 };
 
 /**
- * Handle the edit notices being ready for rendering.
+ * Handle both DOM and modules being loaded and ready.
+ *
+ * @fires surfaceReady
  */
-ve.init.mw.Target.prototype.onNoticesReady = function () {
-	var noticeHtmls,
-		target = this;
+ve.init.mw.Target.prototype.onReady = function () {
+	var target = this;
 
-	// Merge locally and remotely generated notices
-	noticeHtmls = this.remoteNotices.concat(
+	// We need to wait until onReady as local notices may require special messages
+	this.editNotices = this.remoteNotices.concat(
 		this.localNoticeMessages.map( function ( msgKey ) {
 			return '<p>' + ve.init.platform.getParsedMessage( msgKey ) + '</p>';
 		} )
 	);
 
-	this.editNotices = {};
-	noticeHtmls.forEach( function ( noticeHtml, i ) {
-		target.editNotices[i] = $.parseHTML( noticeHtml )[0];
-	} );
-};
-
-/**
- * Handle both DOM and modules being loaded and ready.
- *
- * @method
- * @fires surfaceReady
- */
-ve.init.mw.Target.prototype.onReady = function () {
-	var target = this;
-	// We need to wait until onReady as local notices may require special messages
-	this.onNoticesReady();
 	this.loading = false;
 	this.edited = false;
 	this.setupSurface( this.doc, function () {
