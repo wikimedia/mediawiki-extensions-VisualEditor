@@ -26,10 +26,6 @@
 	font-size: 0.8em;
 }
 
-.ve-ui-mwSurfaceWidget .ve-ce-surface {
-	/* 0.875 (mw-body-content) / 0.8em (window) */
-	font-size: 1.09375em;
-}
 
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -1em -1em 1em -1em;
@@ -44,10 +40,13 @@
 	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
-.ve-ui-debugBar {
+.ve-init-target > .ve-ui-debugBar {
 	padding: 1em;
 	margin: 1em -1em -1em -1em;
-	border-top: solid 1px #ccc;
+}
+
+.ve-ui-debugBar {
+	border-top: 1px solid #ccc;
 	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.15) inset;
 }
 
