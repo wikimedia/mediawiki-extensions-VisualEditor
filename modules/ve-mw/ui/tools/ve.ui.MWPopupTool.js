@@ -15,9 +15,9 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) {
-	var key,
+	var tool = this,
 		items = toolGroup.getToolbar().getTarget().getEditNotices(),
-		count = Object.keys( items ).length,
+		count = items.length,
 		title = ve.msg( 'visualeditor-editnotices-tool', count );
 
 	// Configuration initialization
@@ -30,14 +30,15 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 	this.$items = this.$( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
 
 	// Initialization
-	for ( key in items ) {
-		$( items[key] )
+	items.forEach( function ( item ) {
+		var node = $.parseHTML( item )[0];
+		$( node )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )
 			.find( 'a' )
 				.attr( 'target', '_blank' );
 
-		this.$items.append( items[key] );
-	}
+		tool.$items.append( node );
+	} );
 
 	this.popup.$body.append( this.$items );
 
@@ -67,10 +68,9 @@ ve.ui.MWNoticesPopupTool.static.autoAddToGroup = false;
  * @inheritdoc
  */
 ve.ui.MWNoticesPopupTool.prototype.getTitle = function () {
-	var items = this.toolbar.getTarget().getEditNotices(),
-		count = Object.keys( items ).length;
+	var items = this.toolbar.getTarget().getEditNotices();
 
-	return ve.msg( this.constructor.static.title, count );
+	return ve.msg( this.constructor.static.title, items.length );
 };
 
 /* Registration */
@@ -182,8 +182,6 @@ ve.ui.MWHelpPopupTool.static.autoAddToGroup = false;
 
 /**
  * Handle clicks on the feedback button.
- *
- * @method
  */
 ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 	this.popup.toggle( false );
@@ -206,8 +204,6 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 
 /**
  * Handle clicks on the keyboard shortcuts button.
- *
- * @method
  */
 ve.ui.MWHelpPopupTool.prototype.onKeyboardShortcutsClick = function () {
 	this.popup.toggle( false );
