@@ -134,14 +134,24 @@
 					type: 'GET',
 					dataType: 'text'
 				} );
-				restbasePromise = restbaseXhr.then( function ( data, status, jqxhr ) {
-					ve.track( 'trace.restbaseLoad.exit' );
-					ve.track( 'mwtiming.performance.system.restbaseLoad', {
-						bytes: $.byteLength( jqxhr.responseText ),
-						duration: ve.now() - start
-					} );
-					return data;
-				} );
+				restbasePromise = restbaseXhr.then(
+					function ( data, status, jqxhr ) {
+						ve.track( 'trace.restbaseLoad.exit' );
+						ve.track( 'mwtiming.performance.system.restbaseLoad', {
+							bytes: $.byteLength( jqxhr.responseText ),
+							duration: ve.now() - start
+						} );
+						return data;
+					},
+					function ( response ) {
+						if ( response.status === 404 ) {
+							// Page does not exist, so let the user start with a blank document.
+							return $.Deferred().resolve( '' ).promise();
+						} else {
+							mw.log.warn( 'One of the load requests failed (unhandled).' );
+						}
+					}
+				);
 
 				dataPromise = $.when( apiPromise, restbasePromise )
 					.then( function ( apiData, restbaseHtml ) {
