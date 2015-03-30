@@ -329,6 +329,10 @@ $wgResourceModules += array(
 			'ext.visualEditor.targetLoader',
 			'jquery.uls.data',
 		),
+		'messages' => array(
+			'visualeditor-quick-access-characters.json',
+			'visualeditor-special-characters-group-other'
+		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
 
@@ -779,7 +783,6 @@ $wgResourceModules += array(
 			'visualeditor-slug-insert',
 			'visualeditor-specialcharacter-button-tooltip',
 			'visualeditor-specialcharacterinspector-title',
-			'visualeditor-specialcharinspector-characterlist-insert',
 			'visualeditor-table-caption',
 			'visualeditor-table-delete-col',
 			'visualeditor-table-delete-row',

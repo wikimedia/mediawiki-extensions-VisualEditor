@@ -66,7 +66,7 @@ class VisualEditorHooks {
 	public static function onContentHandlerDefaultModelFor( Title $title, &$model ) {
 		$messages = array(
 			'Visualeditor-cite-tool-definition.json',
-			'Visualeditor-specialcharinspector-characterlist-insert'
+			'Visualeditor-quick-access-characters.json'
 		);
 
 		if ( $title->inNamespace( NS_MEDIAWIKI ) && in_array( $title->getText(), $messages ) ) {
