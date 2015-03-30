@@ -12,16 +12,15 @@
 	line-height: 1.5em;
 }
 
-.oo-ui-window {
-	/* Correct for Monobook's x-small font on non-isolated windows */
-	/* 0.8em / x-small */
-	font-size: 1em;
-}
-
-.ve-ui-overlay,
-.ve-init-mw-viewPageTarget-windowManager-welcome {
+.ve-ui-overlay {
 	/* Mimic #globalWrapper */
 	font-size: 127%;
+}
+
+.ve-ui-overlay-global,
+.ve-init-mw-viewPageTarget-windowManager-welcome {
+	/* Mimic #globalWrapper + Correct for Monobook's x-small font on the root overlay */
+	font-size: 1.5875em;
 }
 
 .ve-ui-overlay-global {
