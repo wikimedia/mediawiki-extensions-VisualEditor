@@ -250,7 +250,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:主命名空間",
 	"visualeditor-media-input-placeholder": "搜尋媒體",
 	"visualeditor-meta-tool": "選項",
-	"visualeditor-mwalienextensioninspector-title": "MediaWiki 擴充套件",
 	"visualeditor-mweditmodesource-title": "切換為原始碼編輯?",
 	"visualeditor-mweditmodesource-tool": "切換為原始碼編輯",
 	"visualeditor-mweditmodesource-warning": "您正切換回原始碼編輯模式。\n目前對此文件所使的變更可以被保留，但在尚未儲存或重新載頁面之前無法切換回 VisualEditor。\n您是否要繼續？",

@@ -8,6 +8,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid ಸೇವೆಯಿಂದ ಪುಟವೊಂದಕ್ಕೆ HTML5 ಹಿಂದಿರುಗಿಸುತ್ತದೆ.",
+	"apihelp-visualeditor-param-paction": "ಕ್ರಿಯಾ ಪ್ರಯೋಗ",
 	"tooltip-ca-createsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸೃಷ್ಟಿಸಿ",
 	"tooltip-ca-editsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸಂಪಾದಿಸಿ",
 	"tooltip-ca-ve-edit": "ಈ ಪುಟವನು ದೃಶ್ಯ ಸಂಪಾದಕದಿಂದ ಸಂಪಾದಿಸಿ",
@@ -158,7 +159,6 @@
 	"visualeditor-loadwarning-token": "ಪರಿಚಾರಕದ೦ದ ಸಂಪಾದಿಸುವ ಟೋಕ್ನ್ ಬರುವಾಗ ಎನೊ ತಪ್ಪುವಾಗಿದೆ: $1.ಮತೆ ಪ್ರಯತನಾ ಮಾಡಿ?",
 	"visualeditor-media-input-placeholder": "ಮಾಧ್ಯಮಗಳನ್ನು ಹುಡುಕಿ",
 	"visualeditor-meta-tool": "ಆಯ್ಕೆಗಳು",
-	"visualeditor-mwalienextensioninspector-title": "ಮಿಡಿಯಾವೀಕಿ ಇಕ್ಸ್ಟೇನ್ಶನ",
 	"visualeditor-mweditmodesource-title": "ಮೂಲದಲಿ ಸಂಪಾದಿಸಲು ಹೊಗಿ?",
 	"visualeditor-mweditmodesource-tool": "ಮೂಲದಲಿ ಸಂಪಾದಿಸಲು ಹೊಗಿ",
 	"visualeditor-mweditmodesource-warning-cancel": "ರದ್ದು ಮಾಡು",

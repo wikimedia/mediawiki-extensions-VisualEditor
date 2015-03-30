@@ -133,7 +133,6 @@
 	"visualeditor-loadwarning": "Klaida, įkeliant duomenis iš serverio: $1. Norėtumėte pabandyti dar kartą?",
 	"visualeditor-media-input-placeholder": "Ieškoti failų",
 	"visualeditor-meta-tool": "Nustatymai",
-	"visualeditor-mwalienextensioninspector-title": "MediaWiki plėtinys",
 	"visualeditor-mweditmodesource-title": "Pereiti prie kodo redagavimo",
 	"visualeditor-mweditmodesource-warning": "Jūs ketinate pereiti prie puslapio kodo redagavimo.\nBet kokie pakeitimai, kuriuos atlikote, bus išsaugoti, tačiau negalėsite vėl pereiti prie VisualEditor, neišsaugoję ar neperkrovę puslapio.",
 	"visualeditor-mwgalleryinspector-title": "Galerija",
