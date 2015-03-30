@@ -82,19 +82,12 @@ ve.ce.MWTransclusionNode.prototype.onSetup = function () {
 	// Parent method
 	ve.ce.MWTransclusionNode.super.prototype.onSetup.call( this );
 
-	if (
-		this.$element.text().trim().length === 0 &&
-		// Check whether the element is too small to comfortably select
-		(
-			this.$element.width() < 8 ||
-			this.$element.height() < 8
-		)
-	) {
+	if ( !this.isVisible() ) {
 		// We have to reset the icon when it is reappended, because
 		// setIcon also affects the classes attached to this.$element
 		this.setIcon( 'template' );
 		// Reattach icon
-		this.$element.prepend( this.$icon );
+		this.$element.first().prepend( this.$icon );
 	} else {
 		// We have to clear the icon because if the icon's symbolic name
 		// has not changed since the last time we rendered, this.setIcon()
