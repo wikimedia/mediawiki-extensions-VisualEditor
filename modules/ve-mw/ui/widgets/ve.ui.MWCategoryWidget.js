@@ -93,11 +93,11 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.DraggableGroupElement );
 /**
  * Handle input 'choose' event.
  *
- * @param {OO.ui.MenuOptionWidget|null} item Selected item
+ * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 	var categoryItem,
-		value = item && item.getData(),
+		value = item.getData(),
 		widget = this;
 
 	if ( value && value !== '' ) {

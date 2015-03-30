@@ -42,6 +42,14 @@ OO.inheritClass( ve.ui.MWCategoryInputWidget, OO.ui.TextInputWidget );
 
 OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupElement );
 
+/* Events */
+
+/**
+ * @event choose
+ * A category was chosen
+ * @param {OO.ui.MenuOptionWidget} item Chosen item
+ */
+
 /* Methods */
 
 /**

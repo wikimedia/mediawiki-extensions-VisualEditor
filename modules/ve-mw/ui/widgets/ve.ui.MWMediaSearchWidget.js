@@ -58,7 +58,6 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.$results.on( 'scroll', this.onResultsScroll.bind( this ) );
 	this.$query.append( this.noItemsMessage.$element );
 	this.results.connect( this, {
-		choose: 'onResultsChoose',
 		add: 'onResultsAdd',
 		remove: 'onResultsRemove'
 	} );
@@ -171,15 +170,6 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 	// Queue
 	clearTimeout( this.queryTimeout );
 	this.queryTimeout = setTimeout( this.queryMediaQueueCallback, 350 );
-};
-
-/**
- * Respond to choosing result event.
- *
- * @param {OO.ui.OptionWidget} item Selected item
- */
-ve.ui.MWMediaSearchWidget.prototype.onResultsChoose = function ( item ) {
-	this.emit( 'choose', item.getData() );
 };
 
 /**

@@ -353,7 +353,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.borderCheckbox.connect( this, { change: 'onBorderCheckboxChange' } );
 	this.positionSelect.connect( this, { choose: 'onPositionSelectChoose' } );
 	this.typeSelect.connect( this, { choose: 'onTypeSelectChoose' } );
-	this.search.connect( this, { choose: 'onSearchChoose' } );
+	this.search.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
 
 	// Initialization
@@ -737,19 +737,18 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
 };
 
 /**
- * Handle search result choose event.
+ * Handle search choose event.
  *
- * @param {ve.ui.MWMediaResultWidget} info Chosen item
+ * @param {ve.ui.MWMediaResultWidget} item Chosen item
  */
-ve.ui.MWMediaDialog.prototype.onSearchChoose = function ( info ) {
-	if ( info ) {
-		this.$infoPanelWrapper.empty();
-		// Switch panels
-		this.selectedImageInfo = info;
-		this.switchPanels( 'imageInfo' );
-		// Build info panel
-		this.buildMediaInfoPanel( info );
-	}
+ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
+	var info = item.getData();
+	this.$infoPanelWrapper.empty();
+	// Switch panels
+	this.selectedImageInfo = info;
+	this.switchPanels( 'imageInfo' );
+	// Build info panel
+	this.buildMediaInfoPanel( info );
 };
 
 /**
@@ -897,7 +896,7 @@ ve.ui.MWMediaDialog.prototype.onBorderCheckboxChange = function ( isSelected ) {
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.onPositionSelectChoose = function ( item ) {
-	var position = item ? item.getData() : 'default';
+	var position = item.getData();
 
 	// Only update if the value is different than the model
 	if ( this.imageModel.getAlignment() !== position ) {
@@ -912,7 +911,7 @@ ve.ui.MWMediaDialog.prototype.onPositionSelectChoose = function ( item ) {
  * @param {OO.ui.ButtonOptionWidget} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.onTypeSelectChoose = function ( item ) {
-	var type = item ? item.getData() : 'default';
+	var type = item.getData();
 
 	// Only update if the value is different than the model
 	if ( this.imageModel.getType() !== type ) {
@@ -1041,8 +1040,8 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.setSize( 'larger' );
 			this.selectedImageInfo = null;
 			if ( !stopSearchRequery ) {
-				this.search.query.setValue( dialog.pageTitle );
-				this.search.query.focus().select();
+				this.search.getQuery().setValue( dialog.pageTitle );
+				this.search.getQuery().focus().select();
 			}
 
 			// Set the edit panel
@@ -1230,7 +1229,7 @@ ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 		.next( function () {
 			if ( this.currentPanel === 'search' ) {
 				// Focus the search input
-				this.search.query.focus().select();
+				this.search.getQuery().focus().select();
 			} else {
 				// Focus the caption surface
 				this.captionSurface.focus();

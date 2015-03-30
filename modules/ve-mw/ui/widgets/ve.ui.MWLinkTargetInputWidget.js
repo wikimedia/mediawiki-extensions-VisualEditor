@@ -56,21 +56,12 @@ OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupElement );
 
 /**
  * @inheritdoc
- *
- * If no item is selected then the input must be invalid, so clear the annotation.
- * We shouldn't just leave the previous annotation as the user has no way of knowing
- * what that might be. For example if "Foo{}Bar" is typed, this.annotation will be
- * a link to "Foo".
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
 	this.closeLookupMenu();
-	if ( item ) {
-		this.setLookupsDisabled( true );
-		this.setAnnotation( item.getData() );
-		this.setLookupsDisabled( false );
-	} else if ( this.annotation ) {
-		this.annotation = null;
-	}
+	this.setLookupsDisabled( true );
+	this.setAnnotation( item.getData() );
+	this.setLookupsDisabled( false );
 };
 
 /**
