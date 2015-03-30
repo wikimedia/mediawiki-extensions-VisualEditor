@@ -116,12 +116,15 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 	var characters = {},
 		groupObject;
 	$.each( mw.language.specialCharacters, function ( groupName, groupCharacters ) {
-		groupObject = {};
+		groupObject = {}; // key is label, value is char to insert
 		$.each( groupCharacters, function ( charKey, charVal ) {
+			// VE can only handle replace right now (which is the vast majority of the
+			// entries), not encapsulate.
+			// Can't handle titleMsg either.
 			if ( typeof charVal === 'string' ) {
-				// VE can only handle the strings right now
-				// (which is the vast majority of the entries)
 				groupObject[charVal] = charVal;
+			} else if ( typeof charVal === 'object' && 0 in charVal && 1 in charVal ) {
+				groupObject[charVal[0]] = charVal[1];
 			}
 		} );
 		characters[mw.msg( 'special-characters-group-' + groupName )] = groupObject;
