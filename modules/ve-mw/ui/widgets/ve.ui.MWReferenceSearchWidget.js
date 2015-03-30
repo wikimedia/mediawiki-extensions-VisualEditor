@@ -150,7 +150,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 		return;
 	}
 
-	var i, iLen, j, jLen, ref, group, groupName, groupNames, view, text, firstNodes, indexOrder,
+	var i, iLen, j, jLen, refModel, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
 		groups = this.internalList.getNodeGroups();
 
@@ -169,25 +169,29 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 		group = groups[groupName];
 		firstNodes = group.firstNodes;
 		indexOrder = group.indexOrder;
+
 		for ( j = 0, jLen = indexOrder.length; j < jLen; j++ ) {
 			refNode = firstNodes[indexOrder[j]];
-			ref = ve.dm.MWReferenceModel.static.newFromReferenceNode( refNode );
-			view = new ve.ce.InternalItemNode( this.internalList.getItemNode( ref.getListIndex() ) );
+			refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( refNode );
+			view = new ve.ui.PreviewWidget(
+				refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
+			);
 
-			// HACK: PHP parser doesn't wrap single lines in a paragraph
-			if ( view.$element.children().length === 1 && view.$element.children( 'p' ).length === 1 ) {
-				// unwrap inner
-				view.$element.children().replaceWith( view.$element.children().contents() );
-			}
-
-			refGroup = ref.getGroup();
+			refGroup = refModel.getGroup();
 			citation = ( refGroup && refGroup.length ? refGroup + ' ' : '' ) + ( j + 1 );
-			matches = ref.getListKey().match( /^literal\/(.*)$/ );
+			matches = refModel.getListKey().match( /^literal\/(.*)$/ );
 			name = matches && matches[1] || '';
 			// Hide previously auto-generated reference names
 			if ( name.match( /^:[0-9]+$/ ) ) {
 				name = '';
 			}
+
+			// TODO: At some point we need to make sure this text is updated in
+			// case the view node is still rendering. This shouldn't happen because
+			// all references are supposed to be in the store and therefore are
+			// immediately rendered, but we shouldn't trust that on principle to
+			// account for edge cases.
+
 			// Make visible text, citation and reference name searchable
 			text = [ view.$element.text().toLowerCase(), citation, name ].join( ' ' );
 			// Make URLs searchable
@@ -196,11 +200,10 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 			this.index.push( {
 				$element: view.$element,
 				text: text,
-				reference: ref,
+				reference: refModel,
 				citation: citation,
 				name: name
 			} );
-			view.destroy();
 		}
 	}
 

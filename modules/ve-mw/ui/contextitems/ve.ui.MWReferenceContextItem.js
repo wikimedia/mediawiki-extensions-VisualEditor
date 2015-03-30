@@ -18,7 +18,7 @@
 ve.ui.MWReferenceContextItem = function VeMWReferenceContextItem() {
 	// Parent constructor
 	ve.ui.MWReferenceContextItem.super.apply( this, arguments );
-
+	this.view = null;
 	// Initialization
 	this.$element.addClass( 've-ui-mwReferenceContextItem' );
 };
@@ -48,35 +48,13 @@ ve.ui.MWReferenceContextItem.static.commandName = 'reference';
  * @return {jQuery} DOM rendering of reference
  */
 ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
-	var ref = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model ),
-		view = new ve.ce.InternalItemNode(
-			this.model.getDocument().getInternalList().getItemNode( ref.getListIndex() )
-		);
-
-	// HACK: PHP parser doesn't wrap single lines in a paragraph
-	if ( view.$element.children().length === 1 && view.$element.children( 'p' ).length === 1 ) {
-		// unwrap inner
-		view.$element.children().replaceWith( view.$element.children().contents() );
-	}
-
-	// Cleanup
-	view.destroy();
-
-	// Make all links open in a new window (sync rendering)
-	view.$element.find( 'a' ).attr( 'target', '_blank' );
-
-	// Make all links open in a new window (async rendering)
-	ve.BranchNode.static.traverse( view, function ( node ) {
-		// Duck type ve.ce.GeneratedContentNode
-		if ( typeof node.generateContents === 'function' ) {
-			node.once( 'rerender', function () {
-				node.$element.find( 'a' ).attr( 'target', '_blank' );
-			} );
-		}
-	} );
+	var refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model );
+	this.view = new ve.ui.PreviewWidget(
+		refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
+	);
 
 	// WARNING: The $element property may be rendered into asynchronously
-	return view.$element;
+	return this.view.$element;
 };
 
 /**
@@ -91,6 +69,18 @@ ve.ui.MWReferenceContextItem.prototype.getDescription = function () {
  */
 ve.ui.MWReferenceContextItem.prototype.renderBody = function () {
 	this.$body.empty().append( this.getRendering() );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWReferenceContextItem.prototype.teardown = function () {
+	if ( this.view ) {
+		this.view.destroy();
+	}
+
+	// Call parent
+	ve.ui.MWReferenceContextItem.super.prototype.teardown.call( this );
 };
 
 /* Registration */
