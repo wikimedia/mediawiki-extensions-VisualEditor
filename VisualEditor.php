@@ -95,12 +95,6 @@ $wgVisualEditorResourceTemplate = array(
 );
 
 $wgResourceModules += array(
-	'jquery.visibleText' => $wgVisualEditorResourceTemplate + array(
-		'scripts' => array(
-			'lib/ve/lib/jquery/jquery.visibleText.js',
-		),
-		'targets' => array( 'desktop', 'mobile' ),
-	),
 	'Base64.js' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'lib/Base64.js/base64.js',
@@ -311,7 +305,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/init/styles/ve.init.mw.Target.css',
 		),
 		'dependencies' => array(
-			'jquery.visibleText',
 			'jquery.byteLength',
 			'jquery.client',
 			'mediawiki.api',
