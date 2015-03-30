@@ -393,51 +393,22 @@ ve.init.mw.Target.onLoad = function ( response ) {
 
 /**
  * Handle the edit notices being ready for rendering.
- *
- * @method
  */
 ve.init.mw.Target.prototype.onNoticesReady = function () {
-	var i, len, noticeHtmls, tmp, el;
-
-	// Since we're going to parse them, we might as well save these nodes
-	// so we don't have to parse them again later.
-	this.editNotices = {};
-
-	/* Don't show notices without visible html (bug 43013). */
-
-	// This is a temporary container for parsed notices in the <body>.
-	// We need the elements to be in the DOM in order for stylesheets to apply
-	// and jquery.visibleText to determine whether a node is visible.
-	tmp = document.createElement( 'div' );
-
-	// The following is essentially display none, but we can't use that
-	// since then all descendants will be considered invisible too.
-	tmp.style.cssText = 'position: static; top: 0; width: 0; height: 0; border: 0; visibility: hidden;';
-	document.body.appendChild( tmp );
+	var noticeHtmls,
+		target = this;
 
 	// Merge locally and remotely generated notices
-	noticeHtmls = this.remoteNotices.slice();
-	for ( i = 0, len = this.localNoticeMessages.length; i < len; i++ ) {
-		noticeHtmls.push(
-			'<p>' + ve.init.platform.getParsedMessage( this.localNoticeMessages[i] ) + '</p>'
-		);
-	}
+	noticeHtmls = this.remoteNotices.concat(
+		this.localNoticeMessages.map( function ( msgKey ) {
+			return '<p>' + ve.init.platform.getParsedMessage( msgKey ) + '</p>';
+		} )
+	);
 
-	for ( i = 0, len = noticeHtmls.length; i < len; i++ ) {
-		el = $( '<div>' )
-			// Public class for usage by third parties to change styling of
-			// edit notices within VisualEditor (bug 43013).
-			.addClass( 'mw-ve-editNotice' )
-			.html( noticeHtmls[i] )
-			.get( 0 );
-
-		tmp.appendChild( el );
-		if ( $.getVisibleText( el ).trim() !== '' ) {
-			this.editNotices[i] = el;
-		}
-		tmp.removeChild( el );
-	}
-	document.body.removeChild( tmp );
+	this.editNotices = {};
+	noticeHtmls.forEach( function ( noticeHtml, i ) {
+		target.editNotices[i] = $.parseHTML( noticeHtml )[0];
+	} );
 };
 
 /**

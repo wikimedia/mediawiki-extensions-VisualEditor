@@ -168,15 +168,6 @@
 		]
 	},
 	"ResourceModules": {
-		"jquery.visibleText": {
-			"scripts": [
-				"lib/ve/lib/jquery/jquery.visibleText.js"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
 		"Base64.js": {
 			"scripts": [
 				"lib/Base64.js/base64.js"
@@ -394,7 +385,6 @@
 				"modules/ve-mw/init/styles/ve.init.mw.Target.css"
 			],
 			"dependencies": [
-				"jquery.visibleText",
 				"jquery.byteLength",
 				"jquery.client",
 				"mediawiki.api",
