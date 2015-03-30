@@ -38,10 +38,10 @@
 }
 
 .ve-init-mw-viewPageTarget-toolbar > .oo-ui-toolbar-bar {
-	/* Upstream OOjs UI has 4px. We split this between 3px here
+	/* Upstream OOjs UI has 2px. We split this between 1px here
 	   and 1px on the container to allow a smooth collapse transition
 	   where the bottom pixel line sweeps it up. */
-	border-bottom: 3px solid rgba(0,0,0,0.15);
+	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .ve-ui-debugBar {
