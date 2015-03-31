@@ -42,6 +42,7 @@
 .ve-activated #siteSub,
 .ve-activated #contentSub {
 	opacity: 0.6;
+	pointer-events: none;
 }
 
 .ve-activated #firstHeading {
