@@ -81,7 +81,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
 				icon: item.icon,
 				label: item.title,
 				data: {
-					windowName: 'transclusion',
+					windowName: 'cite-' + item.name,
 					dialogData: { template: item.template }
 				}
 			} ) );
