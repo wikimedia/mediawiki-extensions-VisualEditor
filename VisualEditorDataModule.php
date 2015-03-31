@@ -171,7 +171,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			// Also invalidate this module if this file changes (i.e. when messages were
 			// added or removed, or when the Javascript invocation in getScript is changed).
 			// Use 1 because 0 = now, would invalidate continously
-			file_exists( __FILE__ ) ? filemtime( __FILE__ ) : 1
+			ResourceLoaderModule::safeFilemtime( __FILE__ )
 		);
 	}
 
