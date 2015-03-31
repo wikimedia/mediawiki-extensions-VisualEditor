@@ -62,7 +62,7 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	}
 
 	var // Protocol relative base
-		relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).toString().replace( /^https?:/, '' ),
+		relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/, '' ),
 		relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) ),
 		// Protocol relative href
 		relativeHref = href.replace( /^https?:/, '' ),
