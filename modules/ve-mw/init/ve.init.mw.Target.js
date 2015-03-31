@@ -301,7 +301,7 @@ ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
  * @fires loadError
  */
 ve.init.mw.Target.onLoad = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevIdMatches,
+	var i, len, linkData, aboutDoc, docRevIdMatches, baseNode,
 		docRevId = 0,
 		data = response ? response.visualeditor : null;
 
@@ -316,6 +316,25 @@ ve.init.mw.Target.onLoad = function ( response ) {
 
 		// Parsoid outputs a protocol-relative <base> tag, so absolutize it
 		this.constructor.static.fixBase( this.doc, document );
+
+		// If the document has an invalid <base> tag or no <base> tag at all (new pages,
+		// for example, don't have a <base> tag) then set a base URI based on wgArticlePath.
+		if ( !this.doc.baseURI ) {
+			// Use existing <base> tag if present
+			baseNode = this.doc.getElementsByName( 'base' )[0] || this.doc.createElement( 'base' );
+			baseNode.setAttribute( 'href',
+				ve.resolveUrl(
+					// Don't replace $1 with this.pageName, because that'll break if
+					// this.pageName contains a slash
+					mw.config.get( 'wgArticlePath' ).replace( '$1', '' ),
+					document
+				)
+			);
+			// If baseNode was created by us, attach it
+			if ( !baseNode.parentNode ) {
+				this.doc.head.appendChild( baseNode );
+			}
+		}
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
