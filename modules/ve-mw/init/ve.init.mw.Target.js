@@ -865,6 +865,21 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 };
 
 /**
+ * Get deflated HTML. This function is async because easy-deflate may not have finished loading yet.
+ *
+ * @param {HTMLDocument} newDoc Document to get HTML for
+ * @return {jQuery.Promise} Promise resolved with deflated HTML
+ * @see #getHtml
+ */
+ve.init.mw.Target.prototype.deflateHtml = function ( newDoc ) {
+	var html = this.getHtml( newDoc );
+	return mw.loader.using( 'easy-deflate.deflate' )
+		.then( function () {
+			return EasyDeflate.deflate( html );
+		} );
+};
+
+/**
  * Load the editor.
  *
  * This method initiates an API request for the page data unless dataPromise is passed in,
@@ -928,9 +943,9 @@ ve.init.mw.Target.prototype.clearState = function () {
  * @returns {jQuery.Promise} Abortable promise, resolved with the cache key.
  */
 ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
-	var xhr, html,
+	var xhr, deflated,
+		aborted = false,
 		start = ve.now(),
-		deferred = $.Deferred(),
 		target = this;
 
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
@@ -938,38 +953,50 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 	}
 	this.clearPreparedCacheKey();
 
-	html = EasyDeflate.deflate( this.getHtml( doc ) );
-
-	xhr = new mw.Api().post(
-		{
-			action: 'visualeditor',
-			paction: 'serializeforcache',
-			html: html,
-			page: this.pageName,
-			oldid: this.revid
-		},
-		{ contentType: 'multipart/form-data' }
-	)
-		.done( function ( response ) {
-			var trackData = { duration: ve.now() - start };
-			if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
-				target.events.track( 'performance.system.serializeforcache', trackData );
-				deferred.resolve( response.visualeditor.cachekey );
-			} else {
-				target.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
-				deferred.reject();
+	this.preparedCacheKeyPromise = this.deflateHtml( doc )
+		.then( function ( deflatedHtml ) {
+			deflated = deflatedHtml;
+			if ( aborted ) {
+				return $.Deferred().reject();
 			}
+			xhr = new mw.Api().post(
+				{
+					action: 'visualeditor',
+					paction: 'serializeforcache',
+					html: deflatedHtml,
+					page: target.pageName,
+					oldid: target.revid
+				},
+				{ contentType: 'multipart/form-data' }
+			);
+			return xhr.then(
+				function ( response ) {
+					var trackData = { duration: ve.now() - start };
+					if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
+						target.events.track( 'performance.system.serializeforcache', trackData );
+						return response.visualeditor.cachekey;
+					} else {
+						target.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
+						return $.Deferred().reject();
+					}
+				},
+				function () {
+					target.events.track( 'performance.system.serializeforcache.fail', { duration: ve.now() - start } );
+				}
+			);
 		} )
-		.fail( function () {
-			target.events.track( 'performance.system.serializeforcache.fail', { duration: ve.now() - start } );
-			deferred.reject();
+		.promise( {
+			abort: function () {
+				if ( xhr ) {
+					xhr.abort();
+				}
+				aborted = true;
+			},
+			getDeflatedHtml: function () {
+				return deflated;
+			},
+			doc: doc
 		} );
-
-	this.preparedCacheKeyPromise = deferred.promise( {
-		abort: xhr.abort,
-		html: html,
-		doc: doc
-	} );
 	return this.preparedCacheKeyPromise;
 };
 
@@ -1020,18 +1047,27 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 	data = ve.extendObject( {}, options, { format: 'json' } );
 
 	function ajaxRequest( cachekey, isRetried ) {
-		var start = ve.now(),
-			fullEventName;
+		var fullEventName,
+			start = ve.now(),
+			deflatePromise = $.Deferred().resolve().promise();
 
 		if ( typeof cachekey === 'string' ) {
 			data.cachekey = cachekey;
 		} else {
 			// Getting a cache key failed, fall back to sending the HTML
-			data.html = preparedCacheKey && preparedCacheKey.html || EasyDeflate.deflate( target.getHtml( doc ) );
+			data.html = preparedCacheKey && preparedCacheKey.getDeflatedHtml && preparedCacheKey.getDeflatedHtml();
+			if ( !data.html ) {
+				deflatePromise = target.deflateHtml( doc ).then( function ( deflatedHtml ) {
+					data.html = deflatedHtml;
+				} );
+			}
 			// If using the cache key fails, we'll come back here with cachekey still set
 			delete data.cachekey;
 		}
-		return new mw.Api().post( data, { contentType: 'multipart/form-data' } )
+		return deflatePromise
+			.then( function () {
+				return new mw.Api().post( data, { contentType: 'multipart/form-data' } );
+			} )
 			.then(
 				function ( response, jqxhr ) {
 					var eventData = {

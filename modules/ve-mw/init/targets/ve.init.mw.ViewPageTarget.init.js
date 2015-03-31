@@ -109,6 +109,15 @@
 					mw.log.warn( 'VisualEditor failed to load: ' + e );
 				} );
 		}
+
+		targetPromise.then( function () {
+			// Enqueue the loading of deferred modules (that is, modules which provide
+			// functionality that is not needed for loading the editor).
+			setTimeout( function () {
+				mw.loader.load( 'easy-deflate.deflate' );
+			}, 500 );
+		} );
+
 		return targetPromise;
 	}
 

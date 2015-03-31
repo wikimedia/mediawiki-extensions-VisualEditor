@@ -313,7 +313,6 @@ $wgResourceModules += array(
 			'mediawiki.Uri',
 			'mediawiki.user',
 			'mediawiki.util',
-			'easy-deflate.deflate',
 			'user.options',
 			'user.tokens',
 			'moment',
