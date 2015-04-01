@@ -82,8 +82,8 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	return { title: matches[2], hrefPrefix: matches[1] };
 };
 
-ve.dm.MWInternalLinkAnnotation.static.toDomElements = function ( dataElement, doc ) {
-	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.call( this, dataElement, doc );
+ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
+	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.apply( this, arguments );
 	parentResult[0].setAttribute( 'rel', 'mw:WikiLink' );
 	return parentResult;
 };
