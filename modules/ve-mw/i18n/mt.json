@@ -86,14 +86,10 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Ġib din il-kategorija hawn",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Kategorija ġdida",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Żid kategorija",
-	"visualeditor-dialog-meta-categories-input-placeholder": "Żid kategorija",
 	"visualeditor-dialog-meta-categories-missing": "Din il-kategorija m'għandhiex paġna ta' deskrizzjoni",
 	"visualeditor-dialog-meta-categories-options": "Għażliet",
 	"visualeditor-dialog-meta-categories-section": "Kategoriji",
-	"visualeditor-dialog-meta-categories-section": "Kategoriji",
 	"visualeditor-dialog-meta-languages-code-label": "Kodiċi tal-lingwa",
-	"visualeditor-dialog-meta-languages-code-label": "Kodiċi tal-lingwa",
-	"visualeditor-dialog-meta-languages-label": "Lingwi",
 	"visualeditor-dialog-meta-languages-label": "Lingwi",
 	"visualeditor-dialog-meta-languages-link-label": "Paġna marbuta",
 	"visualeditor-dialog-meta-languages-name-label": "Lingwa",
@@ -113,5 +109,5 @@
 	"visualeditor-linkinspector-suggest-new-page": "Paġna ġdida",
 	"visualeditor-mweditmodesource-title": "Aqleb għall-editjar tas-sors",
 	"visualeditor-mweditmodesource-warning": "Ħa taqleb għall-editjar tas-sors. Il-bidliet li għamilt jistgħu jinżammu, imma ma tkunx tista' taqleb lura għall-VisualEditor mingħajr ma' tissejvja l-paġna jew terġa' ttellagħha.\nGħadek trid tkompli?",
-	"visualeditor-wikitext-warning-link": "Help:Sintassi"
+	"visualeditor-version-label": "Verżjoni"
 }
