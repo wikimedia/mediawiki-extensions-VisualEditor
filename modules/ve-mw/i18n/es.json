@@ -300,6 +300,7 @@
 	"visualeditor-saveerror": "Error al guardar datos en el servidor: $1.",
 	"visualeditor-serializeerror": "Error al cargar datos del servidor: $1.",
 	"visualeditor-settings-tool": "Configuración de página",
+	"visualeditor-special-characters-group-other": "Usado a menudo",
 	"visualeditor-timeout": "Parece que este editor no está disponible actualmente. ¿Te gustaría editar en modo de fuente?",
 	"visualeditor-toolbar-cite-label": "Citar",
 	"visualeditor-toolbar-savedialog": "Guardar página",
