@@ -9,6 +9,11 @@
  */
 
 class ApiVisualEditor extends ApiBase {
+	// These are safe even if VE is not enabled on the page.
+	// This is intended for other VE interfaces, such as Flow's.
+	protected static $SAFE_ACTIONS = array(
+		'parsefragment',
+	);
 
 	/**
 	 * @var Config
@@ -266,7 +271,12 @@ class ApiVisualEditor extends ApiBase {
 		if ( !$title ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
-		if ( !in_array( $title->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
+
+		$isSafeAction = in_array( $params['paction'], self::$SAFE_ACTIONS, true );
+
+		if ( !$isSafeAction &&
+			!in_array( $title->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
+
 			$this->dieUsage( "VisualEditor is not enabled in namespace " .
 				$title->getNamespace(), 'novenamespace' );
 		}
