@@ -71,6 +71,17 @@
 			// requested already but it might not have finished loading yet
 			targetPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
 				.then( function () {
+					mw.libs.ve.targetLoader.addPlugin( function () {
+						// If the user and site modules fail, we still want to continue
+						// loading, so convert failure to success
+
+						return mw.loader.using( [ 'user', 'site' ] ).then(
+							null,
+							function () {
+								return $.Deferred().resolve();
+							}
+						);
+					} );
 					// Add modules specific to desktop (modules shared between desktop
 					// and mobile are already added by TargetLoader)
 					// Note: it's safe to use .forEach() (ES5) here, because this code will

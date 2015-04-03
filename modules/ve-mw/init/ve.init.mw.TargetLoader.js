@@ -71,16 +71,8 @@
 		 * @return {jQuery.Promise} Promise resolved when the loading process is complete
 		 */
 		loadModules: function () {
-			var modulesPromise = mw.loader.using( modules ),
-				userSitePromise = mw.loader.using( [ 'user', 'site' ] )
-					// If the user and site modules fail, we still want to continue loading,
-					// so convert failure to success
-					.then( null, function () {
-						return $.Deferred().resolve();
-					} );
-
 			ve.track( 'trace.moduleLoad.enter' );
-			return $.when( modulesPromise, userSitePromise )
+			return mw.loader.using( modules )
 				.then( function () {
 					ve.track( 'trace.moduleLoad.exit' );
 					pluginCallbacks.push( ve.init.platform.getInitializedPromise.bind( ve.init.platform ) );
