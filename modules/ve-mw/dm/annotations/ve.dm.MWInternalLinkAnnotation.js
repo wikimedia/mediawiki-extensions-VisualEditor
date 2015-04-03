@@ -76,7 +76,6 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 
 	// The href is simply the title, unless we're dealing with a page that has slashes in its name
 	// in which case it's preceded by one or more instances of "./" or "../", so strip those
-	/*jshint regexp:false */
 	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
 
 	return { title: matches[2], hrefPrefix: matches[1] };

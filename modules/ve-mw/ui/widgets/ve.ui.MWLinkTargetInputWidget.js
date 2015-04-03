@@ -114,6 +114,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLinkTypeSelectChoose = function () {
 			this.allowProtocolInInternal = true;
 		}
 		if ( this.lookupInputFocused ) {
+			this.onLookupInputChange();
 			this.populateLookupMenu();
 		}
 	}
@@ -222,6 +223,20 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheDataFromResponse = functio
  * @inheritdoc OO.ui.LookupElement
  */
 ve.ui.MWLinkTargetInputWidget.prototype.onLookupInputChange = function () {
+	var title;
+	if ( !this.isExternal() && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
+		// Check if the 'external' link is in fact a page on the same wiki
+		// e.g. http://en.wikipedia.org/wiki/Target -> Target
+		title = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+			this.value,
+			ve.init.target.doc
+		).title;
+		if ( title !== this.value ) {
+			this.setValue( title );
+			return;
+		}
+	}
+
 	// If the user types http:// in an internal search switch them to external (unless
 	// they have previously explicitly switched back to internal)
 	if (
