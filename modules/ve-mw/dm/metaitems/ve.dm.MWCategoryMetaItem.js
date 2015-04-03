@@ -41,9 +41,9 @@ ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements ) {
 		type: this.name,
 		attributes: {
 			hrefPrefix: matches[1],
-			category: decodeURIComponent( matches[2] ).replace( /_/g, ' ' ),
+			category: ve.safeDecodeURIComponent( matches[2] ).replace( /_/g, ' ' ),
 			origCategory: matches[2],
-			sortkey: decodeURIComponent( rawSortkey ).replace( /_/g, ' ' ),
+			sortkey: ve.safeDecodeURIComponent( rawSortkey ).replace( /_/g, ' ' ),
 			origSortkey: rawSortkey
 		}
 	};
@@ -57,8 +57,8 @@ ve.dm.MWCategoryMetaItem.static.toDomElements = function ( dataElement, doc ) {
 		sortkey = dataElement.attributes.sortkey || '',
 		origCategory = dataElement.attributes.origCategory || '',
 		origSortkey = dataElement.attributes.origSortkey || '',
-		normalizedOrigCategory = decodeURIComponent( origCategory ).replace( /_/g, ' ' ),
-		normalizedOrigSortkey = decodeURIComponent( origSortkey ).replace( /_/g, ' ' );
+		normalizedOrigCategory = ve.safeDecodeURIComponent( origCategory ).replace( /_/g, ' ' ),
+		normalizedOrigSortkey = ve.safeDecodeURIComponent( origSortkey ).replace( /_/g, ' ' );
 	if ( normalizedOrigSortkey === sortkey ) {
 		sortkey = origSortkey;
 	} else {

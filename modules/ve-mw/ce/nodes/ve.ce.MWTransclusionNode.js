@@ -172,7 +172,7 @@ ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElemen
 				var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
 						this.href, transclusionNode.getModelHtmlDocument()
 					),
-					normalisedHref = decodeURIComponent( targetData.title );
+					normalisedHref = ve.safeDecodeURIComponent( targetData.title );
 				if ( mw.Title.newFromText( normalisedHref ) ) {
 					normalisedHref = mw.Title.newFromText( normalisedHref ).getPrefixedText();
 				}

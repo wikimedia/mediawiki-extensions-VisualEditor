@@ -206,13 +206,7 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
 	var resource = this.getAttribute( 'resource' ) || '',
 		filename = resource.replace( /^(\.+\/)*/, '' );
 
-	// Protect against decodeURIComponent() throwing exceptions
-	try {
-		filename = decodeURIComponent( filename );
-	} catch ( e ) {
-		ve.log( 'URI decoding exception', e );
-	}
-	return filename;
+	return ve.safeDecodeURIComponent( filename );
 };
 
 /**
