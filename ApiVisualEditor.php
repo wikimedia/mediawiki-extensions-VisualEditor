@@ -586,6 +586,9 @@ class ApiVisualEditor extends ApiBase {
 				break;
 
 			case 'serializeforcache':
+				if ( !isset( $parserParams['oldid'] ) ) {
+					$parserParams['oldid'] = Revision::newFromTitle( $title )->getId();
+				}
 				$key = $this->storeInSerializationCache( $title, $parserParams['oldid'], $html );
 				$result = array( 'result' => 'success', 'cachekey' => $key );
 				break;
