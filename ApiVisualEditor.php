@@ -288,7 +288,13 @@ class ApiVisualEditor extends ApiBase {
 
 		$html = $params['html'];
 		if ( substr( $html, 0, 11 ) === 'rawdeflate,' ) {
-			$html = gzinflate( base64_decode( substr( $html, 11 ) ) );
+			$deflated = base64_decode( substr( $html, 11 ) );
+			wfSuppressWarnings();
+			$html = gzinflate( $deflated );
+			wfRestoreWarnings();
+			if ( $deflated === $html || $html === false ) {
+				$this->dieUsage( "HTML provided is not properly deflated", 'invaliddeflate' );
+			}
 		}
 
 		wfDebugLog( 'visualeditor', "called on '$title' with paction: '{$params['paction']}'" );
