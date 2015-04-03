@@ -8,6 +8,7 @@
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' );
 
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
@@ -71,6 +72,13 @@ module.exports = function ( grunt ) {
 		},
 		banana: {
 			all: 'modules/ve-{mw,wmf}/i18n/'
+		},
+		copy: {
+			jsduck: {
+				src: 'lib/ve/**/*',
+				dest: 'docs/',
+				expand: true
+			}
 		},
 		watch: {
 			files: [
