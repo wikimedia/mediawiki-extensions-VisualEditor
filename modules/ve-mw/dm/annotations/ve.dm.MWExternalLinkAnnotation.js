@@ -60,6 +60,15 @@ ve.dm.MWExternalLinkAnnotation.prototype.getComparableObject = function () {
 	};
 };
 
+/**
+ * @inheritdoc
+ */
+ve.dm.MWExternalLinkAnnotation.prototype.getComparableHtmlAttributes = function () {
+	// Assume that wikitext never adds meaningful html attributes for comparison purposes,
+	// although ideally this should be decided by Parsoid (Bug T95028).
+	return {};
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWExternalLinkAnnotation );
