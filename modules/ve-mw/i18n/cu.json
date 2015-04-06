@@ -11,6 +11,9 @@
 	"visualeditor-ca-editsource": "исправи источьнъ обраꙁъ",
 	"visualeditor-ca-editsource-section": "исправи источьнъ обраꙁъ",
 	"visualeditor-categories-tool": "катигорїѩ",
+	"visualeditor-cite-tool-name-news": "вѣсти",
+	"visualeditor-cite-tool-name-web": "мєждоусѣтьно мѣсто",
+	"visualeditor-dialog-media-info-licenseshortname": "прощєниѥ",
 	"visualeditor-dialog-media-title": "срѣдьствъ строи",
 	"visualeditor-dialog-meta-categories-category": "катигорїꙗ",
 	"visualeditor-dialog-meta-categories-data-label": "катигорїѩ",
@@ -55,5 +58,6 @@
 	"visualeditor-savedialog-title-save": "твоѩ мѣнъ съхранѥниѥ",
 	"visualeditor-settings-tool": "страницѧ строи",
 	"visualeditor-toolbar-savedialog": "съхранѥниѥ",
-	"visualeditor-usernamespacepagelink": "Project:Польꙃєватєльскъ имєнъ просторъ"
+	"visualeditor-usernamespacepagelink": "Project:Польꙃєватєльскъ имєнъ просторъ",
+	"visualeditor-version-label": "обраꙁъ"
 }

@@ -271,6 +271,7 @@
 	"visualeditor-saveerror-titleblacklist": "Eroare la salvarea paginii: titlu paginii se află pe lista neagră.",
 	"visualeditor-serializeerror": "Eroare la încărcarea datelor de pe server: $1.",
 	"visualeditor-settings-tool": "Setări pagină",
+	"visualeditor-special-characters-group-other": "Adesea utilizate",
 	"visualeditor-timeout": "Se pare că acest editor nu este disponibil în acest moment. Doriți, în schimb, să modificați codul sursă?",
 	"visualeditor-toolbar-cite-label": "Citare",
 	"visualeditor-toolbar-savedialog": "Salvare pagină",

@@ -297,6 +297,7 @@
 	"visualeditor-saveerror-titleblacklist": "Chyba při uložení stránky: Název stránky je na černé listině",
 	"visualeditor-serializeerror": "Chyba při načítání dat ze serveru: $1.",
 	"visualeditor-settings-tool": "Nastavení stránky",
+	"visualeditor-special-characters-group-other": "Často používané",
 	"visualeditor-timeout": "Zdá se, že tento editor není momentálně dostupný. Chcete místo toho editovat zdrojový kód?",
 	"visualeditor-toolbar-cite-label": "Citace",
 	"visualeditor-toolbar-savedialog": "Uložit stránku",

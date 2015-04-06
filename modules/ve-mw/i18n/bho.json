@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Nepaboy",
-			"SatyamMishra"
+			"SatyamMishra",
+			"Ganesh"
 		]
 	},
+	"visualeditor-ca-editsource": "स्रोत संपादित करीं",
 	"visualeditor-ca-editsource-section": "स्रोत सम्पादन",
 	"visualeditor-dialog-media-change-image": "चित्र बदलीं",
 	"visualeditor-dialog-media-goback": "वापस जाईं",

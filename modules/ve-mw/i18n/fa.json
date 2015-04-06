@@ -287,6 +287,7 @@
 	"visualeditor-saveerror-titleblacklist": "خطا در ذخیرهٔ صفحه: نام این صفحه در فهرست سیاه است",
 	"visualeditor-serializeerror": "خطای بارگیری داده‌ها از کارساز: $1.",
 	"visualeditor-settings-tool": "تنظیمات صفحه",
+	"visualeditor-special-characters-group-other": "استفادهٔ غالب",
 	"visualeditor-timeout": "به نظر می‌رسد این ویرایشگر در حال حاضر در دسترس نیست؛ آیا می‌خواهید در حالت منبع ویرایش کنید؟",
 	"visualeditor-toolbar-cite-label": "یادکرد",
 	"visualeditor-toolbar-savedialog": "ذخیره‌سازی صفحه",
