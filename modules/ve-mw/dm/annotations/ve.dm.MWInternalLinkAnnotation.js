@@ -148,10 +148,9 @@ ve.dm.MWInternalLinkAnnotation.prototype.getComparableObject = function () {
  * @inheritdoc
  */
 ve.dm.MWInternalLinkAnnotation.prototype.getComparableHtmlAttributes = function () {
-	var attributes = ve.dm.Annotation.prototype.getComparableHtmlAttributes.call( this );
-	delete attributes.href;
-	delete attributes.rel;
-	return attributes;
+	// Assume that wikitext never adds meaningful html attributes for comparison purposes,
+	// although ideally this should be decided by Parsoid (Bug T95028).
+	return {};
 };
 
 /* Registration */
