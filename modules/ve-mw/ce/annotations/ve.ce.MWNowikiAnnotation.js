@@ -14,7 +14,7 @@
  * @param {ve.dm.MWNowikiAnnotation} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWNowikiAnnotation = function VeCeMWInternalLinkAnnotation( model, config ) {
+ve.ce.MWNowikiAnnotation = function VeCeMWNowikiAnnotation( model, config ) {
 	// Parent constructor
 	ve.ce.Annotation.call( this, model, config );
 
