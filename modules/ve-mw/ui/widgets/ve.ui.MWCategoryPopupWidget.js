@@ -192,5 +192,5 @@ ve.ui.MWCategoryPopupWidget.prototype.setPopup = function ( item ) {
 	pos.top += item.$indicator.height();
 
 	this.$element.css( pos );
-	this.setSize( this.$menu.outerWidth( true ), this.$menu.outerHeight( true ) );
+	this.updateDimensions();
 };
