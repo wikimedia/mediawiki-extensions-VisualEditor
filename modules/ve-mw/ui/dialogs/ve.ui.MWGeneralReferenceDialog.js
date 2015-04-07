@@ -185,7 +185,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.onSelectChoose = function ( item ) {
 
 	// Close this dialog then open the new dialog
 	this.close().then( function () {
-		manager.openWindow( data.windowName, $.extend( {
+		manager.getSurface().execute( 'window', 'open', data.windowName, $.extend( {
 			fragment: fragment
 		}, data.dialogData ) );
 	} );
