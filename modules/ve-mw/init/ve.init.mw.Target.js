@@ -768,44 +768,6 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 			item = tools[i];
 			data = { template: item.template };
 
-			// Generate transclusion tool
-			name = 'cite-transclusion-' + item.name;
-			if ( !ve.ui.toolFactory.lookup( name ) ) {
-				tool = function GeneratedMWTransclusionDialogTool( toolbar, config ) {
-					ve.ui.MWTransclusionDialogTool.call( this, toolbar, config );
-				};
-				OO.inheritClass( tool, ve.ui.MWTransclusionDialogTool );
-				tool.static.group = 'cite-transclusion';
-				tool.static.name = name;
-				tool.static.icon = item.icon;
-				tool.static.title = item.title;
-				tool.static.commandName = name;
-				tool.static.template = item.template;
-				tool.static.autoAddToCatchall = false;
-				tool.static.autoAddToGroup = true;
-				ve.ui.toolFactory.register( tool );
-				ve.ui.commandRegistry.register(
-					new ve.ui.Command(
-						name, 'window', 'open',
-						{ args: ['transclusion', data], supportedSelections: ['linear'] }
-					)
-				);
-			}
-
-			// Generate transclusion context item
-			if ( !ve.ui.contextItemFactory.lookup( name ) ) {
-				contextItem = function GeneratedMWTransclusionContextItem( toolbar, config ) {
-					ve.ui.MWTransclusionContextItem.call( this, toolbar, config );
-				};
-				OO.inheritClass( contextItem, ve.ui.MWTransclusionContextItem );
-				contextItem.static.name = name;
-				contextItem.static.icon = item.icon;
-				contextItem.static.label = item.title;
-				contextItem.static.commandName = name;
-				contextItem.static.template = item.template;
-				ve.ui.contextItemFactory.register( contextItem );
-			}
-
 			// Generate citation tool
 			name = 'cite-' + item.name;
 			if ( !ve.ui.toolFactory.lookup( name ) ) {
@@ -824,8 +786,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 				ve.ui.toolFactory.register( tool );
 				ve.ui.commandRegistry.register(
 					new ve.ui.Command(
-						name, 'window', 'open',
-						{ args: [name, data], supportedSelections: ['linear'] }
+						name, 'mwcite', 'open', { args: [name, data], supportedSelections: ['linear'] }
 					)
 				);
 			}

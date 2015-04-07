@@ -1314,6 +1314,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/contextitems/ve.ui.MWReferenceContextItem.js',
 			'modules/ve-mw/ui/contextitems/ve.ui.MWReferencesListContextItem.js',
 			'modules/ve-mw/ui/contextitems/ve.ui.MWCitationContextItem.js',
+			'modules/ve-mw/ui/actions/ve.ui.MWCitationAction.js',
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',

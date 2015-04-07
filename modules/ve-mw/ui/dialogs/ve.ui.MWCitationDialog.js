@@ -21,6 +21,7 @@ ve.ui.MWCitationDialog = function VeUiMWCitationDialog( config ) {
 	// Properties
 	this.referenceModel = null;
 	this.referenceNode = null;
+	this.inDialog = '';
 };
 
 /* Inheritance */
@@ -89,6 +90,9 @@ ve.ui.MWCitationDialog.prototype.initialize = function ( data ) {
 ve.ui.MWCitationDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWCitationDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			data = data || {};
+			this.inDialog = data.inDialog;
+
 			// Initialization
 			if ( this.selectedNode ) {
 				this.referenceNode = this.getReferenceNode();
@@ -161,7 +165,10 @@ ve.ui.MWCitationDialog.prototype.hasUsefulParameter = function () {
  */
 ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 	var dialog = this;
-	if ( action === 'apply' || action === 'insert' ) {
+	if (
+		this.inDialog !== 'reference' &&
+		( action === 'apply' || action === 'insert' )
+	) {
 		return new OO.ui.Process( function () {
 			var deferred = $.Deferred();
 			dialog.checkRequiredParameters().done( function () {
