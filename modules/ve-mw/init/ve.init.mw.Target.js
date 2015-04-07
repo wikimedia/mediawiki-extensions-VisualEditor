@@ -1278,6 +1278,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		ve.track( 'trace.convertModelFromDom.enter' );
 		var dmDoc = ve.dm.converter.getModelFromDom(
 			doc,
+			false,
 			null,
 			mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
