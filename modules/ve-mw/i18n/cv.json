@@ -6,8 +6,13 @@
 	},
 	"visualeditor-ca-editsource": "Кодне тӳрлет",
 	"visualeditor-ca-editsource-section": "кодне тӳрлет",
+	"visualeditor-categories-tool": "Категорисем",
+	"visualeditor-dialog-meta-categories-data-label": "Категорисем",
+	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Пытарнă категорисем",
+	"visualeditor-dialog-meta-categories-section": "Категорисем",
 	"visualeditor-dialog-meta-languages-label": "Чĕлхесем",
 	"visualeditor-dialog-meta-languages-section": "Чĕлхесем",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "Пытарнă категори",
 	"visualeditor-languages-tool": "Чĕлхесем",
 	"visualeditor-linkinspector-suggest-new-page": "Çĕнĕ страница"
 }
