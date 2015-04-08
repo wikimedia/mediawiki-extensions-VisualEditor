@@ -60,10 +60,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		}
 	}
 
-	protected function parseWikitext( $title ) {
+	protected function parseWikitext( $title, $newRevId ) {
 		$apiParams = array(
 			'action' => 'parse',
 			'page' => $title->getPrefixedDBkey(),
+			'oldid' => $newRevId,
 			'prop' => 'text|revid|categorieshtml|displaytitle',
 		);
 		$api = new ApiMain(
@@ -159,18 +160,18 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 		// Success
 		} else {
-			if ( isset( $saveresult['edit']['newrevid'] )
-				&& $this->veConfig->get( 'VisualEditorUseChangeTagging' )
-			) {
-				ChangeTags::addTags( 'visualeditor', null,
-					intval( $saveresult['edit']['newrevid'] ),
-					null
-				);
+			if ( isset( $saveresult['edit']['newrevid'] ) ) {
+				$newRevId = intval( $saveresult['edit']['newrevid'] );
+				if ( $this->veConfig->get( 'VisualEditorUseChangeTagging' ) ) {
+					ChangeTags::addTags( 'visualeditor', null, $newRevId, null );
+				}
+			} else {
+				$newRevId = $page->getLatestRevId();
 			}
 
 			// Return result of parseWikitext instead of saveWikitext so that the
 			// frontend can update the page rendering without a refresh.
-			$result = $this->parseWikitext( $page );
+			$result = $this->parseWikitext( $page, $newRevId );
 			if ( $result === false ) {
 				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
 			}
