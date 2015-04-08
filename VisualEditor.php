@@ -1501,6 +1501,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css',
+			'modules/ve-mw/ce/styles/nodes/ve.ce.MWAlienExtensionNode.css',
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
