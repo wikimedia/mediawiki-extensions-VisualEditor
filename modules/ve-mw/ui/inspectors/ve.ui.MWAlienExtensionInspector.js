@@ -33,7 +33,7 @@ ve.ui.MWAlienExtensionInspector.static.name = 'alienExtension';
 
 ve.ui.MWAlienExtensionInspector.static.icon = 'alienextension';
 
-ve.ui.MWAlienExtensionInspector.static.nodeModel = ve.dm.MWAlienExtensionNode;
+ve.ui.MWAlienExtensionInspector.static.modelClasses = [ ve.dm.MWAlienExtensionNode ];
 
 /* Methods */
 
@@ -55,7 +55,7 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWAlienExtensionInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var key, attributeInput, field,
-				attributes = this.getFragment().getSelectedNode().getAttribute( 'mw' ).attrs;
+				attributes = this.selectedNode.getAttribute( 'mw' ).attrs;
 
 			if ( attributes && !ve.isEmptyObject( attributes ) ) {
 				for ( key in attributes ) {
@@ -76,7 +76,7 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 				}
 			}
 
-			this.title.setLabel( this.getFragment().getSelectedNode().getExtensionName() );
+			this.title.setLabel( this.selectedNode.getExtensionName() );
 		}, this );
 };
 
