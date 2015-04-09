@@ -84,6 +84,7 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
 	this.loaded = true;
 	this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 	this.popPending();
+	this.bookletLayout.focus( 1 );
 };
 
 /**
@@ -512,17 +513,6 @@ ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
  * Intentionally empty. This is provided for Wikia extensibility.
  */
 ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
-	var dialog = this;
-	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
-			dialog.bookletLayout.focus();
-		} );
-};
 
 /**
  * @inheritdoc
