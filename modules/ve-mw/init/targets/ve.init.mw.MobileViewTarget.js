@@ -67,6 +67,7 @@ ve.init.mw.MobileViewTarget.static.name = 'mobile';
  */
 ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
 	this.restoreEditSection();
+	this.events.trackActivationComplete();
 };
 
 /**

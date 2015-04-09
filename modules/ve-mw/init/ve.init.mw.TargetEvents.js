@@ -155,6 +155,21 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 };
 
 /**
+ * Record activation having started.
+ * @param {number} [startTime] Timestamp activation started. Defaults to current time
+ */
+ve.init.mw.TargetEvents.prototype.trackActivationStart = function ( startTime ) {
+	this.timings.activationStart = startTime || ve.now();
+};
+
+/**
+ * Record activation being complete.
+ */
+ve.init.mw.TargetEvents.prototype.trackActivationComplete = function () {
+	this.track( 'performance.system.activation', { duration: ve.now() - this.timings.activationStart } );
+};
+
+/**
  * Record the time of the last transaction in response to a 'transact' event on the document.
  */
 ve.init.mw.TargetEvents.prototype.recordLastTransactionTime = function () {
@@ -172,7 +187,6 @@ ve.init.mw.TargetEvents.prototype.onSaveReview = function () {
 };
 
 ve.init.mw.TargetEvents.prototype.onSurfaceReady = function () {
-	this.track( 'performance.system.activation', { duration: ve.now() - this.timings.activationStart } );
 	this.target.surface.getModel().getDocument().connect( this, {
 		transact: 'recordLastTransactionTime'
 	} );

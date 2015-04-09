@@ -535,6 +535,7 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
 	this.maybeShowMetaDialog();
 
 	this.activatingDeferred.resolve();
+	this.events.trackActivationComplete();
 
 	mw.hook( 've.activationComplete' ).fire();
 };

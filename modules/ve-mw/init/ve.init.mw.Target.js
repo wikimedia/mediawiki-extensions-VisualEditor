@@ -878,7 +878,8 @@ ve.init.mw.Target.prototype.load = function ( dataPromise ) {
 	if ( this.loading ) {
 		return false;
 	}
-	this.events.timings.activationStart = ve.now();
+	this.events.trackActivationStart( mw.libs.ve.activationStart );
+	mw.libs.ve.activationStart = null;
 
 	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData(
 		this.pageName,
