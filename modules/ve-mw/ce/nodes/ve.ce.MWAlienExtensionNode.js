@@ -9,49 +9,36 @@
  * ContentEditable MediaWiki alien extension node.
  *
  * @class
- * @extends ve.ce.MWBlockExtensionNode
+ * @abstract
+ * @mixins OO.ui.IconElement
  *
  * @constructor
- * @param {ve.dm.MWAlienExtensionNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode( config ) {
-	// Parent constructor
-	ve.ce.MWAlienExtensionNode.super.apply( this, arguments );
-
 	// Mixin constructors
 	OO.ui.IconElement.call( this, config );
+
+	// Events
+	this.connect( this, { setup: 'onAlienSetup' } );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ce.MWAlienExtensionNode, ve.ce.MWBlockExtensionNode );
+OO.initClass( ve.ce.MWAlienExtensionNode );
 
 OO.mixinClass( ve.ce.MWAlienExtensionNode, OO.ui.IconElement );
 
-/* Static Properties */
-
-ve.ce.MWAlienExtensionNode.static.name = 'mwAlienExtension';
+/* Static members */
 
 ve.ce.MWAlienExtensionNode.static.primaryCommandName = 'alienExtension';
-
-/* Static Methods */
-
-/**
- * @inheritdoc
- */
-ve.ce.MWAlienExtensionNode.static.getDescription = function ( model ) {
-	return model.getExtensionName();
-};
 
 /* Methods */
 
 /**
- * @inheritdoc
+ * Handle setup events
  */
-ve.ce.MWAlienExtensionNode.prototype.onSetup = function () {
-	ve.ce.MWAlienExtensionNode.super.prototype.onSetup.call( this );
-
+ve.ce.MWAlienExtensionNode.prototype.onAlienSetup = function () {
 	if ( !this.isVisible() ) {
 		this.setIcon( 'alienextension' );
 		this.$element.first().prepend( this.$icon );
@@ -61,7 +48,7 @@ ve.ce.MWAlienExtensionNode.prototype.onSetup = function () {
 };
 
 /**
- * @inheritdoc
+ * @inheritdoc ve.ce.MWExtensionNode
  */
 ve.ce.MWAlienExtensionNode.prototype.render = function ( generatedContents ) {
 	// Since render is trigerred before onSetup, we need to make sure that the
@@ -77,6 +64,76 @@ ve.ce.MWAlienExtensionNode.prototype.render = function ( generatedContents ) {
 	this.$element.addClass( 've-ce-mwAlienExtensionNode' );
 };
 
+/* Static methods */
+
+/**
+ * @inheritdoc ve.ce.MWExtensionNode
+ */
+ve.ce.MWAlienExtensionNode.static.getDescription = function ( model ) {
+	return model.getExtensionName();
+};
+
+/**
+ * ContentEditable MediaWiki alien inline extension node.
+ *
+ * @class
+ * @abstract
+ * @extends ve.ce.MWInlineExtensionNode
+ * @mixins ve.ce.MWAlienExtensionNode
+ *
+ * @constructor
+ * @param {ve.dm.MWAlienInlineExtensionNode} model Model to observe
+ * @param {Object} [config] Configuration options
+ */
+ve.ce.MWAlienInlineExtensionNode = function VeCeMWAlienInlineExtensionNode( config ) {
+	// Parent constructor
+	ve.ce.MWAlienInlineExtensionNode.super.apply( this, arguments );
+
+	// Mixin constructors
+	ve.ce.MWAlienExtensionNode.call( this, config );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ce.MWAlienInlineExtensionNode, ve.ce.MWInlineExtensionNode );
+
+OO.mixinClass( ve.ce.MWAlienInlineExtensionNode, ve.ce.MWAlienExtensionNode );
+
+/* Static members */
+
+ve.ce.MWAlienInlineExtensionNode.static.name = 'mwAlienInlineExtension';
+
+/**
+ * ContentEditable MediaWiki alien block extension node.
+ *
+ * @class
+ * @abstract
+ * @extends ve.ce.MWBlockExtensionNode
+ * @mixins ve.ce.MWAlienExtensionNode
+ *
+ * @constructor
+ * @param {ve.dm.MWAlienBlockExtensionNode} model Model to observe
+ * @param {Object} [config] Configuration options
+ */
+ve.ce.MWAlienBlockExtensionNode = function VeCeMWAlienBlockExtensionNode() {
+	// Parent constructor
+	ve.ce.MWAlienBlockExtensionNode.super.apply( this, arguments );
+
+	// Mixin constructors
+	ve.ce.MWAlienExtensionNode.call( this );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ce.MWAlienBlockExtensionNode, ve.ce.MWBlockExtensionNode );
+
+OO.mixinClass( ve.ce.MWAlienBlockExtensionNode, ve.ce.MWAlienExtensionNode );
+
+/* Static members */
+
+ve.ce.MWAlienBlockExtensionNode.static.name = 'mwAlienBlockExtension';
+
 /* Registration */
 
-ve.ce.nodeFactory.register( ve.ce.MWAlienExtensionNode );
+ve.ce.nodeFactory.register( ve.ce.MWAlienInlineExtensionNode );
+ve.ce.nodeFactory.register( ve.ce.MWAlienBlockExtensionNode );

@@ -10,12 +10,16 @@
  *
  * @class
  * @abstract
+ * @extends ve.dm.LeafNode
  * @mixins ve.dm.FocusableNode
  * @mixins ve.dm.GeneratedContentNode
  *
  * @constructor
  */
 ve.dm.MWExtensionNode = function VeDmMWExtensionNode() {
+	// Parent constructor
+	ve.dm.MWExtensionNode.super.apply( this, arguments );
+
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
 	ve.dm.FocusableNode.call( this );
@@ -23,8 +27,8 @@ ve.dm.MWExtensionNode = function VeDmMWExtensionNode() {
 
 /* Inheritance */
 
+OO.inheritClass( ve.dm.MWExtensionNode, ve.dm.LeafNode );
 OO.mixinClass( ve.dm.MWExtensionNode, ve.dm.FocusableNode );
-
 OO.mixinClass( ve.dm.MWExtensionNode, ve.dm.GeneratedContentNode );
 
 /* Static members */
@@ -131,25 +135,19 @@ ve.dm.MWExtensionNode.prototype.getExtensionName = function () {
  *
  * @class
  * @abstract
- * @extends ve.dm.LeafNode
- * @mixins ve.dm.MWExtensionNode
+ * @extends ve.dm.MWExtensionNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
  */
 ve.dm.MWInlineExtensionNode = function VeDmMWInlineExtensionNode() {
 	// Parent constructor
-	ve.dm.LeafNode.apply( this, arguments );
-
-	// Mixin constructors
-	ve.dm.MWExtensionNode.call( this );
+	ve.dm.MWInlineExtensionNode.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWInlineExtensionNode, ve.dm.LeafNode );
-
-OO.mixinClass( ve.dm.MWInlineExtensionNode, ve.dm.MWExtensionNode );
+OO.inheritClass( ve.dm.MWInlineExtensionNode, ve.dm.MWExtensionNode );
 
 /* Static members */
 
@@ -160,23 +158,17 @@ ve.dm.MWInlineExtensionNode.static.isContent = true;
  *
  * @class
  * @abstract
- * @extends ve.dm.BranchNode
- * @mixins ve.dm.MWExtensionNode
+ * @extends ve.dm.MWExtensionNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
  * @param {ve.dm.Node[]} [children]
  */
-ve.dm.MWBlockExtensionNode = function VeDmMWInlineExtensionNode() {
+ve.dm.MWBlockExtensionNode = function VeDmMWBlockExtensionNode() {
 	// Parent constructor
-	ve.dm.BranchNode.apply( this, arguments );
-
-	// Mixin constructors
-	ve.dm.MWExtensionNode.call( this );
+	ve.dm.MWBlockExtensionNode.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWBlockExtensionNode, ve.dm.BranchNode );
-
-OO.mixinClass( ve.dm.MWBlockExtensionNode, ve.dm.MWExtensionNode );
+OO.inheritClass( ve.dm.MWBlockExtensionNode, ve.dm.MWExtensionNode );
