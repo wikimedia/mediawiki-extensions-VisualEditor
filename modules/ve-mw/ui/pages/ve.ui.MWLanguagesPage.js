@@ -21,14 +21,13 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage( name, config ) {
 
 	// Properties
 	this.languagesFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-meta-languages-label' ),
 		icon: 'language'
 	} );
 
 	// Initialization
 	this.languagesFieldset.$element.append(
-		this.$( '<span>' )
+		$( '<span>' )
 			.text( ve.msg( 'visualeditor-dialog-meta-languages-readonlynote' ) )
 	);
 	this.$element.append( this.languagesFieldset.$element );
@@ -58,22 +57,22 @@ ve.ui.MWLanguagesPage.prototype.setOutlineItem = function ( outlineItem ) {
 
 ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 	var i,
-		$languagesTable = this.$( '<table>' ),
+		$languagesTable = $( '<table>' ),
 		languageslength = languages.length;
 
 	$languagesTable
 		.addClass( 've-ui-mwLanguagesPage-languages-table' )
-		.append( this.$( '<tr>' )
+		.append( $( '<tr>' )
 			.append(
-				this.$( '<th>' )
+				$( '<th>' )
 					.append( ve.msg( 'visualeditor-dialog-meta-languages-code-label' ) )
 			)
 			.append(
-				this.$( '<th>' )
+				$( '<th>' )
 					.append( ve.msg( 'visualeditor-dialog-meta-languages-name-label' ) )
 			)
 			.append(
-				this.$( '<th>' )
+				$( '<th>' )
 					.append( ve.msg( 'visualeditor-dialog-meta-languages-link-label' ) )
 			)
 		);
@@ -88,10 +87,10 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 			languages[i].dir = ve.init.platform.getLanguageDirection( languages[i].safelang );
 		}
 		$languagesTable
-			.append( this.$( '<tr>' )
-				.append( this.$( '<td>' ).text( languages[i].lang ) )
-				.append( this.$( '<td>' ).text( languages[i].langname ).add(
-						this.$( '<td>' ).text( languages[i].title )
+			.append( $( '<tr>' )
+				.append( $( '<td>' ).text( languages[i].lang ) )
+				.append( $( '<td>' ).text( languages[i].langname ).add(
+						$( '<td>' ).text( languages[i].title )
 					)
 					.attr( 'lang', languages[i].safelang )
 					.attr( 'dir', languages[i].dir ) )

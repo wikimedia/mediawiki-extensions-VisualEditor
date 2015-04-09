@@ -29,7 +29,7 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 		.prop( 'contentEditable', 'false' );
 
 	// Add link
-	this.$link = this.$( '<a>' )
+	this.$link = $( '<a>' )
 		// CSS for numbering needs rel=mw:ExtLink
 		.attr( 'rel', 'mw:ExtLink' )
 		.addClass( 'external' )

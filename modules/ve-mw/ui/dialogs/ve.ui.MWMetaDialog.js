@@ -63,30 +63,15 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	ve.ui.MWMetaDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { $: this.$ } );
-	this.bookletLayout = new OO.ui.BookletLayout( { $: this.$, outlined: true } );
+	this.panels = new OO.ui.StackLayout();
+	this.bookletLayout = new OO.ui.BookletLayout( { outlined: true } );
 	this.settingsPage = new ve.ui.MWSettingsPage(
 		'settings',
-		{
-			$: this.$,
-			$overlay: this.$overlay
-		}
+		{ $overlay: this.$overlay }
 	);
-	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage(
-		'advancedSettings',
-		{ $: this.$ }
-	);
-	this.categoriesPage = new ve.ui.MWCategoriesPage(
-		'categories',
-		{
-			$: this.$,
-			$overlay: this.$overlay
-		}
-	);
-	this.languagesPage = new ve.ui.MWLanguagesPage(
-		'languages',
-		{ $: this.$ }
-	);
+	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage( 'advancedSettings' );
+	this.categoriesPage = new ve.ui.MWCategoriesPage( 'categories', { $overlay: this.$overlay } );
+	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages' );
 
 	// Initialization
 	this.$body.append( this.panels.$element );

@@ -23,7 +23,7 @@ ve.ui.MWReferenceResultWidget = function VeUiMWReferenceResultWidget( config ) {
 	OO.ui.OptionWidget.call( this, config );
 
 	// Properties
-	this.$shield = this.$( '<div>' );
+	this.$shield = $( '<div>' );
 
 	// Initialization
 	this.$shield.addClass( 've-ui-mwReferenceResultWidget-shield' );

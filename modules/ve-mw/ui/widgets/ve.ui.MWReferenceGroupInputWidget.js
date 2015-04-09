@@ -39,7 +39,6 @@ OO.inheritClass( ve.ui.MWReferenceGroupInputWidget, OO.ui.ComboBoxWidget );
  */
 ve.ui.MWReferenceGroupInputWidget.prototype.populateMenu = function ( internalList ) {
 	var placeholderGroupItem = new OO.ui.MenuOptionWidget( {
-		$: this.$,
 		data: '',
 		label: this.emptyGroupName,
 		flags: 'emptyGroupPlaceholder'

@@ -27,5 +27,5 @@ OO.inheritClass( ve.ui.MWMobileSurface, ve.ui.MobileSurface );
  * @inheritdoc
  */
 ve.ui.MWMobileSurface.prototype.createContext = function () {
-	return new ve.ui.MWMobileContext( this, { $: this.$ } );
+	return new ve.ui.MWMobileContext( this );
 };

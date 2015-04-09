@@ -163,7 +163,7 @@ ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
  * @inheritdoc
  */
 ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElements ) {
-	var $elements = this.$( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) ),
+	var $elements = $( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) ),
 		transclusionNode = this;
 	if ( this.getModelHtmlDocument() ) {
 		$elements

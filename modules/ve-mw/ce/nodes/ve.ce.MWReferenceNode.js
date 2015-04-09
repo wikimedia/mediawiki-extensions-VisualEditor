@@ -24,7 +24,7 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 	ve.ce.FocusableNode.call( this );
 
 	// DOM changes
-	this.$link = this.$( '<a>' ).attr( 'href', '#' );
+	this.$link = $( '<a>' ).attr( 'href', '#' );
 	this.$element.addClass( 've-ce-mwReferenceNode reference' ).append( this.$link );
 
 	this.index = '';

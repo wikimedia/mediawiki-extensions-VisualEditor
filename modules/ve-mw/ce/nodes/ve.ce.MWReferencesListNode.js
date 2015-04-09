@@ -29,8 +29,8 @@ ve.ce.MWReferencesListNode = function VeCeMWReferencesListNode( model, config ) 
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwReferencesListNode references' );
-	this.$reflist = this.$( '<ol class="references"></ol>' );
-	this.$refmsg = this.$( '<p>' )
+	this.$reflist = $( '<ol class="references"></ol>' );
+	this.$refmsg = $( '<p>' )
 		.addClass( 've-ce-mwReferencesListNode-muted' );
 
 	// Events
@@ -181,13 +181,13 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 				continue;
 			}
 
-			$li = this.$( '<li>' );
+			$li = $( '<li>' );
 
 			if ( keyedNodes.length > 1 ) {
 				for ( j = 0, jLen = keyedNodes.length; j < jLen; j++ ) {
 					$li.append(
-						this.$( '<sup>' ).append(
-							this.$( '<a>' ).text( ( i + 1 ) + '.' + j )
+						$( '<sup>' ).append(
+							$( '<a>' ).text( ( i + 1 ) + '.' + j )
 						)
 					).append( ' ' );
 				}
@@ -208,7 +208,7 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 					);
 				}
 				$li.append(
-					this.$( '<span>' )
+					$( '<span>' )
 						.addClass( 'reference-text' )
 						.append( viewNode.$element )
 				);
@@ -219,7 +219,7 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 				viewNode.destroy();
 			} else {
 				$li.append(
-					this.$( '<span>' )
+					$( '<span>' )
 						.addClass( 've-ce-mwReferencesListNode-muted' )
 						.text( ve.msg( 'visualeditor-referenceslist-missingref' ) )
 				);

@@ -67,21 +67,17 @@ ve.ui.MWReferencesListDialog.prototype.initialize = function () {
 	ve.ui.MWReferencesListDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { $: this.$ } );
+	this.panels = new OO.ui.StackLayout();
 	this.editPanel = new OO.ui.PanelLayout( {
-		$: this.$, scrollable: true, padded: true
+		scrollable: true, padded: true
 	} );
-	this.optionsFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$
-	} );
+	this.optionsFieldset = new OO.ui.FieldsetLayout();
 
 	this.groupInput = new ve.ui.MWReferenceGroupInputWidget( {
-		$: this.$,
 		$overlay: this.$overlay,
 		emptyGroupName: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.groupField = new OO.ui.FieldLayout( this.groupInput, {
-		$: this.$,
 		align: 'top',
 		label: ve.msg( 'visualeditor-dialog-reference-options-group-label' )
 	} );

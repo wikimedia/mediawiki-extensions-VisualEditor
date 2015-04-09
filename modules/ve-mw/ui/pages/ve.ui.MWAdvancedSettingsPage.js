@@ -27,7 +27,6 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	this.newSectionEditLinkOptionTouched = false;
 
 	this.advancedSettingsFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-meta-advancedsettings-label' ),
 		icon: 'advanced'
 	} );
@@ -36,7 +35,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 	// Indexing items
 	this.indexing = new OO.ui.FieldLayout(
-		new OO.ui.ButtonSelectWidget( { $: this.$ } )
+		new OO.ui.ButtonSelectWidget()
 			.addItems( [
 				new OO.ui.ButtonOptionWidget( {
 					data: 'mwIndexForce',
@@ -53,7 +52,6 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 			] )
 			.connect( this, { select: 'onIndexingOptionChange' } ),
 		{
-			$: this.$,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-index-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-index-help' )
@@ -62,7 +60,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 	// New edit section link items
 	this.newEditSectionLink = new OO.ui.FieldLayout(
-		new OO.ui.ButtonSelectWidget( { $: this.$ } )
+		new OO.ui.ButtonSelectWidget()
 			.addItems( [
 				new OO.ui.ButtonOptionWidget( {
 					data: 'mwNewSectionEditForce',
@@ -79,7 +77,6 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 			] )
 			.connect( this, { select: 'onNewSectionEditLinkOptionChange' } ),
 		{
-			$: this.$,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-help', $( '#ca-edit' ).text() )
@@ -87,28 +84,23 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 	);
 
 	this.displayTitleTouched = false;
-	this.enableDisplayTitleCheckbox = new OO.ui.CheckboxInputWidget( { $: this.$ } );
+	this.enableDisplayTitleCheckbox = new OO.ui.CheckboxInputWidget();
 	this.enableDisplayTitleCheckbox.connect( this, { change: 'onEnableDisplayTitleCheckboxChange' } );
 	this.enableDisplayTitleField = new OO.ui.FieldLayout(
 		this.enableDisplayTitleCheckbox,
 		{
-			$: this.$,
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-help' )
 		}
 	);
 	this.displayTitleInput = new OO.ui.TextInputWidget( {
-		$: this.$,
 		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' )
 	} );
 	this.displayTitleInput.connect( this, { change: 'onDisplayTitleInputChange' } );
 	this.displayTitleField = new OO.ui.FieldLayout(
 		this.displayTitleInput,
-		{
-			$: this.$,
-			align: 'inline'
-		}
+		{ align: 'inline' }
 	);
 
 	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink, this.enableDisplayTitleField, this.displayTitleField ] );
@@ -131,9 +123,8 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 	$.each( this.metaItemCheckboxes, function () {
 		this.fieldLayout = new OO.ui.FieldLayout(
-			new OO.ui.CheckboxInputWidget( { $: this.$ } ),
+			new OO.ui.CheckboxInputWidget(),
 			{
-				$: advancedSettingsPage.$,
 				align: 'inline',
 				label: this.label
 			}

@@ -32,9 +32,9 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 
 	// Mixin constructors
 	OO.ui.IconElement.call( this, config );
-	OO.ui.LabelElement.call( this, $.extend( { $label: this.$( '<div>' ) }, config ) );
+	OO.ui.LabelElement.call( this, $.extend( { $label: $( '<div>' ) }, config ) );
 
-	this.$text = this.$( '<div>' )
+	this.$text = $( '<div>' )
 		.addClass( 've-ui-mwMediaInfoFieldWidget-text' );
 	this.$overlay = null;
 	this.type = config.type || 'attribute';
@@ -51,7 +51,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	if ( config.href ) {
 		this.$text
 			.append(
-				this.$( '<a>' )
+				$( '<a>' )
 					.attr( 'target', '_blank' )
 					.attr( 'rel', 'mw:ExtLink' )
 					.attr( 'href',
@@ -77,7 +77,6 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	if ( this.type === 'description' ) {
 		// Limit height
 		this.readMoreButton = new OO.ui.ButtonWidget( {
-			$: this.$,
 			framed: false,
 			icon: 'expand',
 			label: ve.msg( 'visualeditor-dialog-media-info-readmore' ),

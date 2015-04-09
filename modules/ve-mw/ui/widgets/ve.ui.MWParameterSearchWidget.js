@@ -143,7 +143,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 			nameMatch = item.names.indexOf( query ) >= 0;
 		}
 		if ( !hasQuery || textMatch || nameMatch ) {
-			items.push( new ve.ui.MWParameterResultWidget( { $: this.$, data: item } ) );
+			items.push( new ve.ui.MWParameterResultWidget( { data: item } ) );
 			if ( hasQuery && nameMatch ) {
 				exactMatch = true;
 			}
@@ -156,7 +156,6 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 
 	if ( hasQuery && !exactMatch && value.length && !this.template.hasParameter( value ) ) {
 		items.unshift( new ve.ui.MWParameterResultWidget( {
-			$: this.$,
 			data: {
 				name: value,
 				label: value,
@@ -168,13 +167,11 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 
 	if ( !items.length ) {
 		items.push( new ve.ui.MWNoParametersResultWidget( {
-			$: this.$,
 			data: {},
 			disabled: true
 		} ) );
 	} else if ( remainder ) {
 		items.push( new ve.ui.MWMoreParametersResultWidget( {
-			$: this.$,
 			data: { remainder: remainder }
 		} ) );
 	}

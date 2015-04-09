@@ -83,7 +83,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
  */
 ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response ) {
 	var data = response.visualeditor,
-		contentNodes = this.$( data.content ).get();
+		contentNodes = $( data.content ).get();
 	deferred.resolve( contentNodes );
 };
 
@@ -134,7 +134,7 @@ OO.inheritClass( ve.ce.MWInlineExtensionNode, ve.ce.MWExtensionNode );
  */
 ve.ce.MWInlineExtensionNode.prototype.onParseSuccess = function ( deferred, response ) {
 	var data = response.visualeditor,
-		contentNodes = this.$( data.content ).get();
+		contentNodes = $( data.content ).get();
 
 	// Inline nodes will come back in wrapper paragraphs, so unwrap them.
 	if ( contentNodes[0] && contentNodes[0].childNodes ) {

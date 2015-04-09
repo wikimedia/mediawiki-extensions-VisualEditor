@@ -35,19 +35,18 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.defaultValue = parameter.getDefaultValue();
 	this.exampleValue = parameter.getExampleValue();
 
-	this.$info = this.$( '<div>' );
-	this.$actions = this.$( '<div>' );
-	this.$labelElement = this.$( '<div>' );
-	this.$field = this.$( '<div>' );
-	this.$more = this.$( '<div>' );
-	this.$description = this.$( '<div>' );
+	this.$info = $( '<div>' );
+	this.$actions = $( '<div>' );
+	this.$labelElement = $( '<div>' );
+	this.$field = $( '<div>' );
+	this.$more = $( '<div>' );
+	this.$description = $( '<div>' );
 	if ( this.defaultValue ) {
 		placeholder = ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue );
 	} else if ( this.exampleValue ) {
 		placeholder = ve.msg( 'visualeditor-dialog-transclusion-param-example', this.exampleValue );
 	}
 	this.valueInput = new OO.ui.TextInputWidget( {
-		$: this.$,
 		multiline: true,
 		autosize: true,
 		placeholder: placeholder
@@ -65,7 +64,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	this.removeButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'remove',
 		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
@@ -76,7 +74,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.toggle( !this.parameter.isRequired() );
 
 	this.infoButton = new OO.ui.PopupButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'info',
 		title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
@@ -84,7 +81,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	} );
 
 	this.addButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'parameter',
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
@@ -93,7 +89,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.connect( this, { click: 'onAddButtonFocus' } );
 
 	this.statusIndicator = new OO.ui.IndicatorWidget( {
-		$: this.$,
 		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
 	} );
 
@@ -126,7 +121,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append( this.$info, this.$actions, this.$field, this.$more );
 	this.$description
 		.addClass( 've-ui-mwParameterPage-description' )
-		.append( this.$( '<p>' ).text( this.spec.getParameterDescription( paramName ) || '' ) );
+		.append( $( '<p>' ).text( this.spec.getParameterDescription( paramName ) || '' ) );
 
 	if ( this.parameter.isRequired() ) {
 		this.statusIndicator
@@ -135,7 +130,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 			);
 		this.$description.append(
-			this.$( '<p>' )
+			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-description-required' )
 				.text(
 					ve.msg( 'visualeditor-dialog-transclusion-required-parameter-description' )
@@ -148,7 +143,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
 			);
 		this.$description.append(
-			this.$( '<p>' )
+			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-description-deprecated' )
 				.text(
 					ve.msg(
@@ -161,7 +156,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	if ( this.defaultValue ) {
 		this.$description.append(
-			this.$( '<p>' )
+			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-description-default' )
 				.text(
 					ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue )
@@ -171,7 +166,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	if ( this.exampleValue ) {
 		this.$description.append(
-			this.$( '<p>' )
+			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-description-example' )
 				.text(
 					ve.msg( 'visualeditor-dialog-transclusion-param-example', this.exampleValue )

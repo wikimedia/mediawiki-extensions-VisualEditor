@@ -61,7 +61,6 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 
 	this.input = new ve.ui.WhitespacePreservingTextInputWidget( {
 		limit: 1,
-		$: this.$,
 		multiline: true
 	} );
 	this.input.$element.addClass( 've-ui-mwExtensionInspector-input' );

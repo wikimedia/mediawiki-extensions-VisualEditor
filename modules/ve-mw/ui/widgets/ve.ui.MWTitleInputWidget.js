@@ -87,7 +87,6 @@ ve.ui.MWTitleInputWidget.prototype.getLookupCacheDataFromResponse = function ( d
  */
 ve.ui.MWTitleInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
 	var i, len, title, value,
-		menu$ = this.lookupMenu.$,
 		items = [],
 		matchingPages = data,
 		linkCacheUpdate = {};
@@ -103,7 +102,6 @@ ve.ui.MWTitleInputWidget.prototype.getLookupMenuOptionsFromData = function ( dat
 				value = title.getPrefixedText();
 			}
 			items.push( new OO.ui.MenuOptionWidget( {
-				$: menu$,
 				data: value,
 				label: value
 			} ) );

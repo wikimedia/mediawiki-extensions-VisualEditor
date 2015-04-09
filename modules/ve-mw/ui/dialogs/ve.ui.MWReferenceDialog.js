@@ -244,7 +244,6 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	this.referenceSurface = new ve.ui.MWSurfaceWidget(
 		this.referenceModel.getDocument(),
 		{
-			$: this.$,
 			tools: ve.copy( ve.init.mw.Target.static.toolbarGroups ),
 			excludeCommands: this.constructor.static.excludeCommands,
 			importRules: this.constructor.static.getImportRules(),
@@ -286,34 +285,31 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	ve.ui.MWReferenceDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { $: this.$ } );
+	this.panels = new OO.ui.StackLayout();
 	this.editPanel = new OO.ui.PanelLayout( {
-		$: this.$, scrollable: true, padded: true
+		scrollable: true, padded: true
 	} );
-	this.searchPanel = new OO.ui.PanelLayout( { $: this.$ } );
+	this.searchPanel = new OO.ui.PanelLayout();
 
 	this.reuseWarningIcon = new OO.ui.IconWidget( { icon: 'alert' } );
-	this.$reuseWarningText = this.$( '<span>' );
-	this.$reuseWarning = this.$( '<span>' ).append( this.reuseWarningIcon.$element, this.$reuseWarningText );
+	this.$reuseWarningText = $( '<span>' );
+	this.$reuseWarning = $( '<span>' ).append( this.reuseWarningIcon.$element, this.$reuseWarningText );
 
-	this.contentFieldset = new OO.ui.FieldsetLayout( { $: this.$ } );
+	this.contentFieldset = new OO.ui.FieldsetLayout();
 	this.optionsFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-reference-options-section' ),
 		icon: 'settings'
 	} );
 	this.referenceGroupInput = new ve.ui.MWReferenceGroupInputWidget( {
-		$: this.$,
 		$overlay: this.$overlay,
 		emptyGroupName: ve.msg( 'visualeditor-dialog-reference-options-group-placeholder' )
 	} );
 	this.referenceGroupInput.input.connect( this, { change: 'onReferenceGroupInputChange' } );
 	this.referenceGroupField = new OO.ui.FieldLayout( this.referenceGroupInput, {
-		$: this.$,
 		align: 'top',
 		label: ve.msg( 'visualeditor-dialog-reference-options-group-label' )
 	} );
-	this.search = new ve.ui.MWReferenceSearchWidget( { $: this.$ } );
+	this.search = new ve.ui.MWReferenceSearchWidget();
 
 	// Events
 	this.search.connect( this, { select: 'onSearchSelect' } );

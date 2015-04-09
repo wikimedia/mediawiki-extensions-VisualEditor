@@ -47,7 +47,7 @@ ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWExtensionInspector.prototype.initialize.apply( this, arguments );
 
-	this.$attributes = this.$( '<div>' ).addClass( 've-ui-mwAlienExtensionInspector-attributes' );
+	this.$attributes = $( '<div>' ).addClass( 've-ui-mwAlienExtensionInspector-attributes' );
 	this.form.$element.append( this.$attributes );
 };
 
@@ -63,14 +63,12 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			if ( attributes && !ve.isEmptyObject( attributes ) ) {
 				for ( key in attributes ) {
 					attributeInput = new OO.ui.TextInputWidget( {
-						$: this.$,
 						value: attributes[key]
 					} );
 					this.attributeInputs[key] = attributeInput;
 					field = new OO.ui.FieldLayout(
 						attributeInput,
 						{
-							$: this.$,
 							align: 'left',
 							label: key
 						}

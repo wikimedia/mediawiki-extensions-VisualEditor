@@ -22,10 +22,10 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 	ve.ce.LeafNode.call( this, model, config );
 
 	if ( this.model.getAttribute( 'isLinked' ) ) {
-		this.$element = this.$( '<a>' ).addClass( 'image' );
-		this.$image = this.$( '<img>' ).appendTo( this.$element );
+		this.$element = $( '<a>' ).addClass( 'image' );
+		this.$image = $( '<img>' ).appendTo( this.$element );
 	} else {
-		this.$element = this.$image = this.$( '<img>' ).appendTo( this.$element );
+		this.$element = this.$image = $( '<img>' ).appendTo( this.$element );
 	}
 
 	// Mixin constructors

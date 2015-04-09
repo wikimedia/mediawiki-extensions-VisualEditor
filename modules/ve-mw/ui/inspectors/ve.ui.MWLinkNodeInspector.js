@@ -57,7 +57,6 @@ ve.ui.MWLinkNodeInspector.prototype.initialize = function () {
 
 	// Properties
 	this.targetInput = new OO.ui.TextInputWidget( {
-		$: this.$,
 		validate: ve.init.platform.getExternalLinkUrlProtocolsRegExp()
 	} );
 

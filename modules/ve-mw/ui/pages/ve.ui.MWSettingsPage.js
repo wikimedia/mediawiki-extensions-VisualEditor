@@ -30,7 +30,6 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.label = ve.msg( 'visualeditor-dialog-meta-settings-section' );
 
 	this.settingsFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-meta-settings-label' ),
 		icon: 'settings'
 	} );
@@ -40,7 +39,6 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	// Table of Contents items
 	this.tableOfContents = new OO.ui.FieldLayout(
 		new OO.ui.ButtonSelectWidget( {
-			$: this.$,
 			classes: [ 've-test-page-settings-table-of-contents' ]
 		} )
 			.addItems( [
@@ -59,7 +57,6 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			] )
 			.connect( this, { select: 'onTableOfContentsFieldChange' } ),
 		{
-			$: this.$,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-toc-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-toc-help' )
@@ -67,11 +64,10 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	);
 
 	// Redirect items
-	this.enableRedirectInput = new OO.ui.CheckboxInputWidget( { $: this.$ } );
+	this.enableRedirectInput = new OO.ui.CheckboxInputWidget();
 	this.enableRedirectField = new OO.ui.FieldLayout(
 		this.enableRedirectInput,
 		{
-			$: this.$,
 			classes: [ 've-test-page-settings-enable-redirect' ],
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' ),
@@ -79,22 +75,17 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		}
 	);
 	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
-		$: this.$,
 		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ),
 		$overlay: config.$overlay
 	} );
 	this.redirectTargetField = new OO.ui.FieldLayout(
 		this.redirectTargetInput,
-		{
-			$: this.$,
-			align: 'top'
-		}
+		{ align: 'top' }
 	);
-	this.enableStaticRedirectInput = new OO.ui.CheckboxInputWidget( { $: this.$ } );
+	this.enableStaticRedirectInput = new OO.ui.CheckboxInputWidget();
 	this.enableStaticRedirectField = new OO.ui.FieldLayout(
 		this.enableStaticRedirectInput,
 		{
-			$: this.$,
 			classes: [ 've-test-page-settings-prevent-redirect' ],
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' ),
@@ -138,9 +129,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 
 	$.each( this.metaItemCheckboxes, function () {
 		this.fieldLayout = new OO.ui.FieldLayout(
-			new OO.ui.CheckboxInputWidget( { $: settingsPage.$ } ),
+			new OO.ui.CheckboxInputWidget(),
 			{
-				$: settingsPage.$,
 				classes: this.classes,
 				align: 'inline',
 				label: this.label,

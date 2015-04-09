@@ -36,11 +36,11 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
 	//     <figcaption> this.caption.view.$element
 
 	// Build DOM:
-	this.$a = this.$( '<a>' )
+	this.$a = $( '<a>' )
 		.addClass( 'image' )
 		.attr( 'href', this.getResolvedAttribute( 'href' ) );
 
-	this.$image = this.$( '<img>' )
+	this.$image = $( '<img>' )
 		.attr( 'src', this.getResolvedAttribute( 'src' ) )
 		.appendTo( this.$a );
 

@@ -28,20 +28,18 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 	this.defaultSortKeyTouched = false;
 	this.fallbackDefaultSortKey = mw.config.get( 'wgTitle' );
 	this.categoriesFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-meta-categories-data-label' ),
 		icon: 'tag'
 	} );
 	this.categoryOptionsFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-meta-categories-options' ),
 		icon: 'settings'
 	} );
 	this.categoryWidget = new ve.ui.MWCategoryWidget( {
-		$: this.$, $overlay: config.$overlay
+		$overlay: config.$overlay
 	} );
 	this.defaultSortInput = new OO.ui.TextInputWidget( {
-		$: this.$, placeholder: this.fallbackDefaultSortKey
+		placeholder: this.fallbackDefaultSortKey
 	} );
 
 	this.defaultSortInput.$element.addClass( 've-ui-mwCategoriesPage-defaultsort' );
@@ -49,7 +47,6 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 	this.defaultSort = new OO.ui.FieldLayout(
 		this.defaultSortInput,
 		{
-			$: this.$,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-categories-defaultsort-help' )

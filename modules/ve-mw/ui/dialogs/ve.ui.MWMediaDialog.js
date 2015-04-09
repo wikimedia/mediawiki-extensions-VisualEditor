@@ -160,33 +160,30 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
 
-	this.$spinner = this.$( '<div>' ).addClass( 've-specialchar-spinner' );
+	this.$spinner = $( '<div>' ).addClass( 've-specialchar-spinner' );
 
-	this.panels = new OO.ui.StackLayout( { $: this.$ } );
+	this.panels = new OO.ui.StackLayout();
 
 	// Set up the booklet layout
 	this.bookletLayout = new OO.ui.BookletLayout( {
-		$: this.$,
 		classes: [ 've-ui-mwMediaDialog-panel-settings' ],
 		outlined: true
 	} );
 
 	this.mediaSearchPanel = new OO.ui.PanelLayout( {
-		$: this.$,
 		classes: [ 've-ui-mwMediaDialog-panel-search' ],
 		scrollable: true
 	} );
 
 	this.mediaImageInfoPanel = new OO.ui.PanelLayout( {
-		$: this.$,
 		classes: [ 've-ui-mwMediaDialog-panel-imageinfo' ],
 		scrollable: false
 	} );
 
 	this.$infoPanelWrapper = $( '<div>' ).addClass( 've-ui-mwMediaDialog-panel-imageinfo-wrapper' );
 
-	this.generalSettingsPage = new OO.ui.PageLayout( 'general', { $: this.$ } );
-	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced', { $: this.$ } );
+	this.generalSettingsPage = new OO.ui.PageLayout( 'general' );
+	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced' );
 	this.bookletLayout.addPages( [
 		this.generalSettingsPage, this.advancedSettingsPage
 	] );
@@ -198,9 +195,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		.setLabel( ve.msg( 'visualeditor-dialog-media-page-advanced' ) );
 
 	// Define the media search page
-	this.search = new ve.ui.MWMediaSearchWidget( {
-		$: this.$
-	} );
+	this.search = new ve.ui.MWMediaSearchWidget();
 
 	this.$body.append( this.search.$spinner );
 
@@ -208,14 +203,12 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Filename
 	this.filenameFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-content-filename' ),
 		icon: 'picture'
 	} );
 
 	// Caption
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		icon: 'parameter',
@@ -224,15 +217,12 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Alt text
 	altTextFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' ),
 		icon: 'parameter'
 	} );
 
-	this.altTextInput = new OO.ui.TextInputWidget( {
-		$: this.$
-	} );
+	this.altTextInput = new OO.ui.TextInputWidget();
 
 	this.altTextInput.$element.addClass( 've-ui-mwMediaDialog-altText' );
 
@@ -242,22 +232,17 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Position
 	this.positionSelect = new ve.ui.AlignWidget( {
-		$: this.$,
 		dir: this.getDir()
 	} );
 
-	this.positionCheckbox = new OO.ui.CheckboxInputWidget( {
-		$: this.$
-	} );
+	this.positionCheckbox = new OO.ui.CheckboxInputWidget();
 	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
-		$: this.$,
 		align: 'inline',
 		label: ve.msg( 'visualeditor-dialog-media-position-checkbox' ),
 		help: ve.msg( 'visualeditor-dialog-media-position-checkbox-help' )
 	} );
 
 	positionFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-position-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-position-section-help' ),
 		icon: 'parameter'
@@ -271,47 +256,37 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Type
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-type-section-help' ),
 		icon: 'parameter'
 	} );
 
-	this.typeSelect = new OO.ui.ButtonSelectWidget( {
-		$: this.$
-	} );
+	this.typeSelect = new OO.ui.ButtonSelectWidget();
 	this.typeSelect.addItems( [
 		// TODO: Inline images require a bit of further work, will be coming soon
 		new OO.ui.ButtonOptionWidget( {
-			$: this.$,
 			data: 'thumb',
 			icon: 'image-thumbnail',
 			label: ve.msg( 'visualeditor-dialog-media-type-thumb' )
 		} ),
 		new OO.ui.ButtonOptionWidget( {
-			$: this.$,
 			data: 'frameless',
 			icon: 'image-frameless',
 			label: ve.msg( 'visualeditor-dialog-media-type-frameless' )
 		} ),
 		new OO.ui.ButtonOptionWidget( {
-			$: this.$,
 			data: 'frame',
 			icon: 'image-frame',
 			label: ve.msg( 'visualeditor-dialog-media-type-frame' )
 		} ),
 		new OO.ui.ButtonOptionWidget( {
-			$: this.$,
 			data: 'none',
 			icon: 'image-none',
 			label: ve.msg( 'visualeditor-dialog-media-type-none' )
 		} )
 	] );
-	this.borderCheckbox = new OO.ui.CheckboxInputWidget( {
-		$: this.$
-	} );
+	this.borderCheckbox = new OO.ui.CheckboxInputWidget();
 	borderField = new OO.ui.FieldLayout( this.borderCheckbox, {
-		$: this.$,
 		align: 'inline',
 		label: ve.msg( 'visualeditor-dialog-media-type-border' )
 	} );
@@ -324,22 +299,18 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-size-section' ),
 		icon: 'parameter',
 		help: ve.msg( 'visualeditor-dialog-media-size-section-help' )
 	} );
 
 	this.sizeErrorLabel = new OO.ui.LabelWidget( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
 	} );
 
-	this.sizeWidget = new ve.ui.MediaSizeWidget( {}, {
-		$: this.$
-	} );
+	this.sizeWidget = new ve.ui.MediaSizeWidget( {} );
 
-	this.$sizeWidgetElements = this.$( '<div>' ).append(
+	this.$sizeWidgetElements = $( '<div>' ).append(
 		this.sizeWidget.$element,
 		this.sizeErrorLabel.$element
 	);
@@ -391,7 +362,6 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	var i, newDimensions, field, isPortrait, $info, $section, windowWidth,
 		contentDirection = this.getFragment().getDocument().getDir(),
 		imageTitle = new OO.ui.LabelWidget( {
-			$: this.$,
 			label: new mw.Title( imageinfo.title ).getNameText()
 		} ),
 		metadata = imageinfo.extmetadata,
@@ -484,13 +454,13 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 		// Store clean API data
 		apiData = {},
 		fileType = this.getFileType( imageinfo.url ),
-		$thumbContainer = this.$( '<div>' )
+		$thumbContainer = $( '<div>' )
 			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-thumb' ),
-		$main = this.$( '<div>' )
+		$main = $( '<div>' )
 			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-main' ),
-		$details = this.$( '<div>' )
+		$details = $( '<div>' )
 			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-details' ),
-		$image = this.$( '<img>' );
+		$image = $( '<img>' );
 
 	// Main section - title
 	$main.append(
@@ -515,22 +485,22 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	// Add sizing info for non-audio images
 	if ( imageinfo.mediatype === 'AUDIO' ) {
 		// Label this file as an audio
-		apiData.fileDetails =  this.$( '<span>' )
+		apiData.fileDetails =  $( '<span>' )
 			.append( ve.msg( 'visualeditor-dialog-media-info-audiofile' ) );
 	} else {
 		// Build the display for image size and type
-		apiData.fileDetails = this.$( '<div>' )
+		apiData.fileDetails = $( '<div>' )
 			.append(
-				this.$( '<span>' ).text(
+				$( '<span>' ).text(
 					imageinfo.width +
 					ve.msg( 'visualeditor-dialog-media-dimensionseparator' ) +
 					imageinfo.height +
 					ve.msg( 'visualeditor-dimensionswidget-px' )
 				),
-				this.$( '<span>' )
+				$( '<span>' )
 					.addClass( 've-ui-mwMediaDialog-panel-imageinfo-separator' )
 					.text( mw.msg( 'visualeditor-dialog-media-info-separator' ) ),
-				this.$( '<span>' ).text( fileType )
+				$( '<span>' ).text( fileType )
 			);
 	}
 
@@ -540,19 +510,13 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 		if ( apiData[field] ) {
 			$section = apiDataKeysConfig[i].view.primary ? $main : $details;
 
-			fields[field] = new ve.ui.MWMediaInfoFieldWidget( apiData[field],
-				$.extend(
-						{},
-						apiDataKeysConfig[i].view,
-						{ $: this.$ }
-					)
-				);
+			fields[field] = new ve.ui.MWMediaInfoFieldWidget( apiData[field], apiDataKeysConfig[i].view );
 			$section.append( fields[field].$element );
 		}
 	}
 
 	// Build the info panel
-	$info = this.$( '<div>' )
+	$info = $( '<div>' )
 		.addClass( 've-ui-mwMediaDialog-panel-imageinfo-info' )
 		.append(
 			$main.prop( 'dir', contentDirection ),
@@ -678,7 +642,7 @@ ve.ui.MWMediaDialog.prototype.cleanAPIresponse = function ( rawResponse, config 
 	var isTruncated, charLimit,
 		html = $.parseHTML( rawResponse ),
 		ellipsis = ve.msg( 'visualeditor-dialog-media-info-ellipsis' ),
-		originalText = this.$( '<div>' ).append( html ).text();
+		originalText = $( '<div>' ).append( html ).text();
 
 	config = config || {};
 
@@ -1204,7 +1168,6 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	this.captionSurface = new ve.ui.MWSurfaceWidget(
 		captionDocument,
 		{
-			$: this.$,
 			tools: ve.init.target.constructor.static.toolbarGroups,
 			excludeCommands: this.constructor.static.excludeCommands,
 			importRules: this.constructor.static.getImportRules()

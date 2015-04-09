@@ -48,7 +48,6 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.selected = null;
 
 	this.noItemsMessage = new OO.ui.LabelWidget( {
-		$: this.$,
 		label: ve.msg( 'visualeditor-dialog-media-noresults' ),
 		classes: [ 've-ui-mwMediaSearchWidget-noresults' ]
 	} );
@@ -127,7 +126,6 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 			this.itemCache[title] = true;
 			resultWidgets.push(
 				new ve.ui.MWMediaResultWidget( {
-					$: this.$,
 					data: items[i],
 					rowHeight: this.rowHeight,
 					maxWidth: this.results.$element.width() / 3,
@@ -243,7 +241,7 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 			isFull: false,
 			width: 0,
 			items: [],
-			$element: this.$( '<div>' )
+			$element: $( '<div>' )
 					.addClass( 've-ui-mwMediaResultWidget-row' )
 					.css( {
 						overflow: 'hidden'
@@ -260,7 +258,7 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 			isFull: false,
 			width: 0,
 			items: [],
-			$element: this.$( '<div>' )
+			$element: $( '<div>' )
 				.addClass( 've-ui-mwMediaResultWidget-row' )
 				.css( {
 					overflow: 'hidden'

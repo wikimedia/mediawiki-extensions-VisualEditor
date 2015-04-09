@@ -36,7 +36,7 @@ OO.inheritClass( ve.ui.MWMoreParametersResultWidget, OO.ui.DecoratedOptionWidget
 
 /** */
 ve.ui.MWMoreParametersResultWidget.prototype.buildLabel = function () {
-	return this.$( '<div>' )
+	return $( '<div>' )
 		.addClass( 've-ui-mwMoreParametersResultWidget-label' )
 		.text( ve.msg( 'visualeditor-parameter-search-more', this.data.remainder ) );
 };

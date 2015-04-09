@@ -31,7 +31,7 @@ OO.inheritClass( ve.ui.MWNoParametersResultWidget, OO.ui.OptionWidget );
 
 /** */
 ve.ui.MWNoParametersResultWidget.prototype.buildLabel = function () {
-	return this.$( '<div>' )
+	return $( '<div>' )
 		.addClass( 've-ui-mwNoParametersResultWidget-label' )
 		.text( ve.msg( 'visualeditor-parameter-search-no-unused' ) );
 };

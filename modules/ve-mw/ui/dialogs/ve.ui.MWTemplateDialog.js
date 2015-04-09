@@ -184,9 +184,9 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	var page;
 
 	if ( param.getName() ) {
-		page = new ve.ui.MWParameterPage( param, param.getId(), { $: this.$ } );
+		page = new ve.ui.MWParameterPage( param, param.getId() );
 	} else {
-		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), { $: this.$ } );
+		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId() );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
@@ -276,12 +276,12 @@ ve.ui.MWTemplateDialog.prototype.getBodyHeight = function () {
  */
 ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 	if ( part instanceof ve.dm.MWTemplateModel ) {
-		return new ve.ui.MWTemplatePage( part, part.getId(), { $: this.$ } );
+		return new ve.ui.MWTemplatePage( part, part.getId() );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		return new ve.ui.MWTemplatePlaceholderPage(
 			part,
 			part.getId(),
-			{ $: this.$, $overlay: this.$overlay }
+			{ $overlay: this.$overlay }
 		);
 	}
 	return null;
@@ -353,13 +353,8 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	ve.ui.MWTemplateDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { $: this.$ } );
-	this.bookletLayout = new OO.ui.BookletLayout(
-		ve.extendObject(
-			{ $: this.$ },
-			this.constructor.static.bookletLayoutConfig
-		)
-	);
+	this.panels = new OO.ui.StackLayout();
+	this.bookletLayout = new OO.ui.BookletLayout( this.constructor.static.bookletLayoutConfig );
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );

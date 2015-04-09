@@ -203,7 +203,7 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () 
 ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 	var page = ve.ui.MWTransclusionDialog.super.prototype.getPageFromPart.call( this, part );
 	if ( !page && part instanceof ve.dm.MWTransclusionContentModel ) {
-		return new ve.ui.MWTransclusionContentPage( part, part.getId(), { $: this.$ } );
+		return new ve.ui.MWTransclusionContentPage( part, part.getId() );
 	}
 	return page;
 };
@@ -320,19 +320,16 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 
 	// Properties
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'template',
 		title: ve.msg( 'visualeditor-dialog-transclusion-add-template' )
 	} );
 	this.addContentButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'source',
 		title: ve.msg( 'visualeditor-dialog-transclusion-add-content' )
 	} );
 	this.addParameterButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'parameter',
 		title: ve.msg( 'visualeditor-dialog-transclusion-add-param' )

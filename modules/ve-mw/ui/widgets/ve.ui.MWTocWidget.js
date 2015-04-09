@@ -28,7 +28,7 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	// Topic level 0 lives inside of a toc item
 	this.topics = new ve.ui.MWTocItemWidget();
 	// Place for a cloned previous toc to live while rebuilding.
-	this.$tempTopics = this.$( '<ul>' );
+	this.$tempTopics = $( '<ul>' );
 	// Section keyed item map
 	this.items = {};
 	this.initialized = false;
@@ -40,13 +40,13 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	this.tocToggle = {
 		hideMsg: ve.msg( 'hidetoc' ),
 		showMsg: ve.msg( 'showtoc' ),
-		$link: this.$( '<a class="internal" id="togglelink"></a>' ).text( ve.msg( 'hidetoc' ) ),
+		$link: $( '<a class="internal" id="togglelink"></a>' ).text( ve.msg( 'hidetoc' ) ),
 		open: true
 	};
 	this.$element.addClass( 'toc ve-ui-mwTocWidget' ).append(
-		this.$( '<div>' ).attr( 'id', 'toctitle' ).append(
-			this.$( '<h2>' ).text( ve.msg( 'toc' ) ),
-			this.$( '<span>' ).addClass( 'toctoggle' ).append( this.tocToggle.$link )
+		$( '<div>' ).attr( 'id', 'toctitle' ).append(
+			$( '<h2>' ).text( ve.msg( 'toc' ) ),
+			$( '<span>' ).addClass( 'toctoggle' ).append( this.tocToggle.$link )
 		),
 		this.topics.$group, this.$tempTopics
 	);

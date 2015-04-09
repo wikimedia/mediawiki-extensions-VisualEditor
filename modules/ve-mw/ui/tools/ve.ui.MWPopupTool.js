@@ -27,7 +27,7 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 	OO.ui.PopupTool.call( this, toolGroup, config );
 
 	// Properties
-	this.$items = this.$( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
+	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
 
 	// Initialization
 	items.forEach( function ( item ) {
@@ -96,10 +96,9 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	OO.ui.PopupTool.call( this, toolGroup, config );
 
 	// Properties
-	this.$items = this.$( '<div>' );
+	this.$items = $( '<div>' );
 	this.feedbackPromise = null;
 	this.helpButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'help',
 		title: ve.msg( 'visualeditor-help-title' ),
@@ -108,13 +107,11 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 		label: ve.msg( 'visualeditor-help-label' )
 	} );
 	this.keyboardShortcutsButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'help',
 		label: ve.msg( 'visualeditor-dialog-command-help-title' )
 	} );
 	this.feedbackButton = new OO.ui.ButtonWidget( {
-		$: this.$,
 		framed: false,
 		icon: 'comment',
 		label: ve.msg( 'visualeditor-feedback-tool' )
@@ -128,12 +125,12 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	this.$items
 		.addClass( 've-ui-mwHelpPopupTool-items' )
 		.append(
-			this.$( '<div>' )
+			$( '<div>' )
 				.addClass( 've-ui-mwHelpPopupTool-item' )
 				.text( ve.msg( 'visualeditor-beta-warning' ) )
 		)
 		.append(
-			this.$( '<div>' )
+			$( '<div>' )
 				.addClass( 've-ui-mwHelpPopupTool-item' )
 				.append( this.helpButton.$element )
 				.append( this.keyboardShortcutsButton.$element )
@@ -141,21 +138,21 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 		);
 	if ( ve.version.id !== false ) {
 		this.$items
-			.append( this.$( '<div>' )
+			.append( $( '<div>' )
 				.addClass( 've-ui-mwHelpPopupTool-item' )
-				.append( this.$( '<span>' )
+				.append( $( '<span>' )
 					.addClass( 've-ui-mwHelpPopupTool-version-label' )
 					.text( ve.msg( 'visualeditor-version-label' ) )
 				)
 				.append( ' ' )
-				.append( this.$( '<a>' )
+				.append( $( '<a>' )
 					.addClass( 've-ui-mwHelpPopupTool-version-link' )
 					.attr( 'target', '_blank' )
 					.attr( 'href', ve.version.url )
 					.text( ve.version.id )
 				)
 				.append( ' ' )
-				.append( this.$( '<span>' )
+				.append( $( '<span>' )
 					.addClass( 've-ui-mwHelpPopupTool-version-date' )
 					.text( ve.version.dateString )
 				)

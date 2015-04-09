@@ -34,12 +34,8 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.categoryRedirects = {}; // Source -> target
 	this.popupState = false;
 	this.savedPopupState = false;
-	this.popup = new ve.ui.MWCategoryPopupWidget( {
-		$: this.$
-	} );
-	this.input = new ve.ui.MWCategoryInputWidget( this, {
-		$: this.$, $overlay: config.$overlay
-	} );
+	this.popup = new ve.ui.MWCategoryPopupWidget();
+	this.input = new ve.ui.MWCategoryInputWidget( this, { $overlay: config.$overlay } );
 	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( 14 ) === -1;
 	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )['14'] + ':';
 
@@ -58,7 +54,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 			this.$group.addClass( 've-ui-mwCategoryWidget-items' ),
 			this.input.$element,
 			this.popup.$element,
-			this.$( '<div>' ).css( 'clear', 'both' )
+			$( '<div>' ).css( 'clear', 'both' )
 		);
 };
 
@@ -321,7 +317,6 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category );
 			// Create a widget using the item data
 			config = {
-				$: categoryWidget.$,
 				item: item
 			};
 			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle.getPrefixedText() ) ) {

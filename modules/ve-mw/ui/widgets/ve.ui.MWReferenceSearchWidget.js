@@ -233,15 +233,14 @@ ve.ui.MWReferenceSearchWidget.prototype.addResults = function () {
 	for ( i = 0, len = this.index.length; i < len; i++ ) {
 		item = this.index[i];
 		if ( item.text.indexOf( query ) >= 0 ) {
-			$citation = this.$( '<div>' )
+			$citation = $( '<div>' )
 				.addClass( 've-ui-mwReferenceSearchWidget-citation' )
 				.text( '[' + item.citation + ']' );
-			$name = this.$( '<div>' )
+			$name = $( '<div>' )
 				.addClass( 've-ui-mwReferenceSearchWidget-name' )
 				.text( item.name );
 			items.push(
 				new ve.ui.MWReferenceResultWidget( {
-					$: this.$,
 					data: i,
 					label: $citation.add( $name ).add( item.$element )
 				} )

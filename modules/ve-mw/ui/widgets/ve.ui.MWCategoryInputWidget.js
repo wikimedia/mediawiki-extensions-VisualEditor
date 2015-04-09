@@ -195,7 +195,6 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	], function ( index, sectionData ) {
 		if ( sectionData.items.length ) {
 			itemWidgets.push( new OO.ui.MenuSectionOptionWidget( {
-				$: widget.lookupMenu.$,
 				data: sectionData.id,
 				label: sectionData.label
 			} ) );
@@ -231,17 +230,15 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 	);
 	if ( cachedData && cachedData.redirectFrom ) {
 		return new OO.ui.MenuOptionWidget( {
-			$: this.lookupMenu.$,
 			data: name,
 			autoFitLabel: false,
-			label: this.$( '<span>' )
+			label: $( '<span>' )
 				.text( mw.Title.newFromText( cachedData.redirectFrom[0] ).getMainText() )
 				.append( '<br>↳ ' )
-				.append( this.$( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
+				.append( $( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
 		} );
 	} else {
 		return new OO.ui.MenuOptionWidget( {
-			$: this.lookupMenu.$,
 			data: name,
 			label: name
 		} );
