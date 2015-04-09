@@ -524,6 +524,19 @@
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
 
+	// Pre-fetch RESTBase DNS and negotiate TLS.
+	function restbasePreConnect() {
+		var url, a = document.createElement( 'a' );
+
+		a.href = conf.restbaseUrl;
+		url = '//' + a.hostname + '/' + mw.config.get( 'wgServerName' ) + '/v1/';
+		if ( navigator.sendBeacon ) {
+			navigator.sendBeacon( url );
+		} else {
+			new Image().src = url;
+		}
+	}
+
 	// Note: Though VisualEditor itself only needs this exposure for a very small reason
 	// (namely to access init.blacklist from the unit tests...) this has become one of the nicest
 	// ways to easily detect whether the VisualEditor initialisation code is present.
@@ -560,6 +573,11 @@
 
 		if ( userPrefEnabled ) {
 			init.setupSkin();
+			if ( conf.restbaseUrl ) {
+				$( window ).load( function () {
+					setTimeout( restbasePreConnect );
+				} );
+			}
 		}
 
 		if ( currentUri.query.venotify ) {
