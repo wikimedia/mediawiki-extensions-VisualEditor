@@ -919,7 +919,11 @@ ve.init.mw.Target.prototype.load = function ( dataPromise ) {
 	}
 	this.events.timings.activationStart = ve.now();
 
-	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.pageName, this.requestedRevId );
+	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData(
+		this.pageName,
+		this.requestedRevId,
+		this.constructor.name
+	);
 	this.loading
 		.done( ve.init.mw.Target.onLoad.bind( this ) )
 		.fail( ve.init.mw.Target.onLoadError.bind( this ) );

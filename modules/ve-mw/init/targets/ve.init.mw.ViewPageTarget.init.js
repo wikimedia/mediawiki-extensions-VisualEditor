@@ -129,7 +129,8 @@
 			.then( function () {
 				return mw.libs.ve.targetLoader.requestPageData(
 					mw.config.get( 'wgRelevantPageName' ),
-					uri.query.oldid
+					uri.query.oldid,
+					'mwTarget' // ve.init.mw.ViewPageTarget.static.name
 				);
 			} );
 
