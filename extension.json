@@ -98,6 +98,7 @@
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorAutoAccountEnable": false,
 		"VisualEditorAvailableNamespaces": { "2": true },
+		"VisualEditorSkinToolbarScrollOffset": [],
 		"VisualEditorParsoidTimeout": 100
 	},
 	"APIModules": {

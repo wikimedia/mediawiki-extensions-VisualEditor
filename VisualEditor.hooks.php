@@ -57,6 +57,15 @@ class VisualEditorHooks {
 			'ext.visualEditor.targetLoader'
 		) );
 		$output->addModuleStyles( array( 'ext.visualEditor.viewPageTarget.noscript' ) );
+		// add scroll offset js variable to output
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$skinsToolbarScrollOffset = $veConfig->get( 'VisualEditorSkinToolbarScrollOffset' );
+		$toolbarScrollOffset = 0;
+		$skinName = $skin->getSkinName();
+		if ( isset( $skinsToolbarScrollOffset[$skinName] ) ) {
+			$toolbarScrollOffset = $skinsToolbarScrollOffset[$skinName];
+		}
+		$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
 		return true;
 	}
 
