@@ -83,12 +83,14 @@
 
 	/**
 	 * Fired when a new entry is added to the cache.
+	 *
 	 * @event add
 	 * @param {Object} entries Cache entries that were added. Object mapping names to data objects.
 	 */
 
 	/**
 	 * Add entries to the cache.
+	 *
 	 * @param {Object} entries Object keyed by page title, with the values being data objects
 	 * @fires add
 	 */
@@ -109,26 +111,27 @@
 
 	/**
 	 * Get an API request promise to deal with a list of titles
+	 *
 	 * @abstract
+	 * @method
 	 * @param subqueue
 	 * @return {jQuery.Promise}
 	 */
-	ve.init.mw.ApiResponseCache.prototype.getRequestPromise = function () {
-		throw new Error( 'Stub, override in subclass' );
-	};
+	ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
 
 	/**
 	 * Process each page in the response of an API request
+	 *
 	 * @abstract
+	 * @method
 	 * @param {Object} page The page object
 	 * @return {Object|undefined} Any relevant info that we want to cache and return.
 	 */
-	ve.init.mw.ApiResponseCache.prototype.processPage = function () {
-		throw new Error( 'Stub, override in subclass' );
-	};
+	ve.init.mw.ApiResponseCache.prototype.processPage = null;
 
 	/**
 	 * Perform any scheduled API requests.
+	 *
 	 * @private
 	 * @fires add
 	 */
