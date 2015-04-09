@@ -20,6 +20,7 @@ ve.ui.MWReferenceDialog = function VeUiMWReferenceDialog( config ) {
 
 	// Properties
 	this.referenceModel = null;
+	this.useExisting = false;
 };
 
 /* Inheritance */
@@ -193,7 +194,11 @@ ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
 ve.ui.MWReferenceDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWReferenceDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			this.referenceSurface.focus();
+			if ( this.useExisting ) {
+				this.search.getQuery().focus().select();
+			} else {
+				this.referenceSurface.focus();
+			}
 		}, this );
 };
 
@@ -396,7 +401,7 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 			if ( data.useExisting ) {
 				this.useExistingReference( 'insert-select' );
 			}
-
+			this.useExisting = !!data.useExisting;
 			// If we're using an existing reference, start off disabled
 			// If not, set disabled based on whether or not there are any existing ones.
 			this.actions.setAbilities( {
