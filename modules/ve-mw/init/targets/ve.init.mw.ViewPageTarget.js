@@ -1256,7 +1256,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
 
 		// Preload the serialization
 		if ( !target.docToSave ) {
-			target.docToSave = ve.dm.converter.getDomFromModel( target.getSurface().getModel().getDocument() );
+			target.docToSave = target.getSurface().getDom();
 		}
 		target.prepareCacheKey( target.docToSave );
 
@@ -1734,7 +1734,7 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
 		} ).toString();
 	} else {
 		this.serialize(
-			this.docToSave || ve.dm.converter.getDomFromModel( this.getSurface().getModel().getDocument() ),
+			this.docToSave || this.getSurface().getDom(),
 			function ( wikitext ) {
 				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
 				target.submitWithSaveFields( { wpDiff: 1, veswitched: 1 }, wikitext );
