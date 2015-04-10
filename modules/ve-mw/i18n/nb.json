@@ -7,7 +7,8 @@
 			"Laaknor",
 			"Njardarlogar",
 			"Gloria sah",
-			"Apple farmer"
+			"Apple farmer",
+			"Kingu"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -58,6 +59,7 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Fortsett",
 	"visualeditor-dialog-beta-welcome-content": "Dette er vår nye, enklere måte å redigere på. Den er fortsatt i beta, så du kan finne elementer på siden som ikke kan redigeres, eller komme borti problemer som må fikses. Vi anbefaler at du gjennomgår endringene dine når du lagrer, og vi setter pris på rapporter om uregelmessigheter (trykk på '{{int:visualeditor-help-tool}}'-knappen for å gi tilbakemelding). Du kan når som helst bytte til wikitekst-editoren og beholde endringer du har gjort ved å trykke på «$1»-fanen.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Velkommen}} til VisualEditor",
+	"visualeditor-dialog-generalreference-title": "Legg til referanse",
 	"visualeditor-dialog-media-alttext-section": "Alternativ tekst",
 	"visualeditor-dialog-media-alttext-section-help": "Feltet brukes for å gi en beskrivelse av medieobjektet for brukere som ikke kan se det. Beskrivelsen bør være god nok til at de kan forstå meningen og informasjonen som gis av det. Dette er viktig for blinde og andre som bruker skjermleserprogramvare eller tekstbaserte nettlesere.",
 	"visualeditor-dialog-media-change-image": "Endre bilde",
@@ -233,7 +235,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:Navnerom",
 	"visualeditor-media-input-placeholder": "Søk etter mediefiler",
 	"visualeditor-meta-tool": "Valg",
-	"visualeditor-mwalienextensioninspector-title": "MediaWiki-utvidelse",
 	"visualeditor-mweditmodesource-title": "Bytt til kilderedigering?",
 	"visualeditor-mweditmodesource-tool": "Bytt til kilderedigering",
 	"visualeditor-mweditmodesource-warning": "Du er i ferd med å bytte til kilderedigering. Du kan beholde endringer du allerede har gjort, men når du har byttet vil du ikke kunne bytte tilbake igjen til VisualEditor uten å lagre og gjenoppfriske siden. Er du sikker på at du vil fortsette?",
@@ -280,6 +281,7 @@
 	"visualeditor-saveerror": "Det oppsto et problem ved lagring av data til serveren: $1.",
 	"visualeditor-serializeerror": "Det oppsto en feil ved henting av data fra tjeneren: $1.",
 	"visualeditor-settings-tool": "Sideinnstillinger",
+	"visualeditor-special-characters-group-other": "Ofte brukt",
 	"visualeditor-timeout": "Det virker som dette redigeringsverktøyet er utilgjengelig for øyeblikket. Vil du redigere i kildemodus istedet?",
 	"visualeditor-toolbar-cite-label": "Siter",
 	"visualeditor-toolbar-savedialog": "Lagre side",
