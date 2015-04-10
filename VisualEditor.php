@@ -1379,6 +1379,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWParameterResultWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWMoreParametersResultWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWNoParametersResultWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWTemplateMenuOptionWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWTemplateTitleInputWidget.js',
 
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePage.js',
 			'modules/ve-mw/ui/pages/ve.ui.MWParameterPage.js',
@@ -1399,6 +1401,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMoreParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterSearchWidget.css',
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTemplateMenuOptionWidget.css',
 			'modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css',
 		),

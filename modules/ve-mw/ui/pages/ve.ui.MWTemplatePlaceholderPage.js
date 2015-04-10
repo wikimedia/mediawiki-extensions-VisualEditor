@@ -30,8 +30,8 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	// Properties
 	this.placeholder = placeholder;
 
-	this.addTemplateInput = new ve.ui.MWTitleInputWidget( {
-		$overlay: config.$overlay, namespace: 10
+	this.addTemplateInput = new ve.ui.MWTemplateTitleInputWidget( {
+		$: this.$, $overlay: config.$overlay, namespace: 10
 	} )
 		.connect( this, {
 			change: 'onTemplateInputChange',
