@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Shubha"
+			"Shubha",
+			"NehalDaveND"
 		]
 	},
 	"visualeditor-ca-createsource": "स्रोतः सृज्यताम्",
 	"visualeditor-ca-editsource": "स्रोतः सम्पाद्यताम्",
-	"visualeditor-ca-editsource-section": "स्रोतः सम्पाद्यताम्"
+	"visualeditor-ca-editsource-section": "स्रोतः सम्पाद्यताम्",
+	"visualeditor-dialog-meta-languages-label": "भाषाः",
+	"visualeditor-dialog-meta-languages-section": "भाषाः",
+	"visualeditor-languages-tool": "भाषाः"
 }
