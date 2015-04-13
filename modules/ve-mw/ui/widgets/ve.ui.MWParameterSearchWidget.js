@@ -29,7 +29,7 @@ ve.ui.MWParameterSearchWidget = function VeUiMWParameterSearchWidget( template, 
 	// Properties
 	this.template = template;
 	this.index = [];
-	this.showAll = false;
+	this.showAll = !!config.showAll;
 	this.limit = config.limit || null;
 
 	// Events
@@ -73,6 +73,7 @@ ve.ui.MWParameterSearchWidget.prototype.onQueryChange = function () {
  * @method
  * @param {OO.ui.OptionWidget} item Selected item
  * @fires select
+ * @fires showAll
  */
 ve.ui.MWParameterSearchWidget.prototype.onResultsSelect = function ( item ) {
 	if ( item instanceof ve.ui.MWParameterResultWidget ) {
@@ -80,6 +81,7 @@ ve.ui.MWParameterSearchWidget.prototype.onResultsSelect = function ( item ) {
 	} else if ( item instanceof ve.ui.MWMoreParametersResultWidget ) {
 		this.showAll = true;
 		this.addResults();
+		this.emit( 'showAll' );
 	}
 };
 

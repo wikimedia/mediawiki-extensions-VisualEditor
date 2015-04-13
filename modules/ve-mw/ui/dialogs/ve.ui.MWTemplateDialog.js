@@ -26,6 +26,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.loaded = false;
 	this.altered = false;
 	this.preventReselection = false;
+	this.expandedParamList = {};
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: ['ve-ui-overlay-global'] } );
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
@@ -114,6 +115,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			params = removed.getParameters();
 			for ( name in params ) {
 				removePages.push( this.bookletLayout.getPage( params[name].getId() ) );
+				delete this.expandedParamList[params[name].getId()];
 			}
 			removed.disconnect( this );
 		}
@@ -177,6 +179,16 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 };
 
 /**
+ * Respond to showAll event in the placeholder page.
+ * Cache this so we can make sure the parameter list is expanded
+ * when we next load this same pageId placeholder.
+ *
+ * @param {string} pageId Page Id
+ */
+ve.ui.MWTemplateDialog.prototype.onParameterPlaceholderShowAll = function ( pageId ) {
+	this.expandedParamList[ pageId ] = true;
+};
+/**
  * Handle add param events.
  *
  * @param {ve.dm.MWParameterModel} param Added param
@@ -187,7 +199,11 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	if ( param.getName() ) {
 		page = new ve.ui.MWParameterPage( param, param.getId() );
 	} else {
-		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId() );
+		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {
+			$: this.$,
+			expandedParamList: !!this.expandedParamList[ param.getId() ]
+		} )
+			.connect( this, { showAll: 'onParameterPlaceholderShowAll' } );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {

@@ -26,10 +26,17 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	OO.ui.PageLayout.call( this, name, config );
 
 	// Properties
+	this.name = name;
 	this.parameter = parameter;
 	this.template = this.parameter.getTemplate();
-	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template )
-		.connect( this, { select: 'onParameterSelect' } );
+	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, {
+		$: this.$,
+		showAll: !!config.expandedParamList
+	} )
+		.connect( this, {
+			select: 'onParameterSelect',
+			showAll: 'onParameterShowAll'
+		} );
 
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -60,6 +67,14 @@ OO.inheritClass( ve.ui.MWParameterPlaceholderPage, OO.ui.PageLayout );
 /* Methods */
 
 /**
+ * Respond to the parameter search widget showAll event
+ * @fires showAll
+ */
+ve.ui.MWParameterPlaceholderPage.prototype.onParameterShowAll = function () {
+	this.emit( 'showAll', this.name );
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWParameterPlaceholderPage.prototype.setOutlineItem = function ( outlineItem ) {
@@ -83,7 +98,6 @@ ve.ui.MWParameterPlaceholderPage.prototype.onParameterSelect = function ( name )
 	if ( name ) {
 		param = new ve.dm.MWParameterModel( this.template, name );
 		this.addParameterSearch.query.setValue( '' );
-		this.parameter.remove();
 		this.template.addParameter( param );
 	}
 };
