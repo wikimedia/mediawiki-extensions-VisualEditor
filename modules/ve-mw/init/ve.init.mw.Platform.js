@@ -30,18 +30,6 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 
 OO.inheritClass( ve.init.mw.Platform, ve.init.Platform );
 
-/* Static Methods */
-
-/** @inheritdoc */
-ve.init.mw.Platform.static.getSystemPlatform = function () {
-	return $.client.profile().platform;
-};
-
-/** @inheritdoc */
-ve.init.mw.Platform.static.isInternetExplorer = function () {
-	return $.client.profile().name === 'msie';
-};
-
 /* Methods */
 
 /** @inheritdoc */
