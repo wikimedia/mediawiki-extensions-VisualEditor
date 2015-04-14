@@ -30,14 +30,14 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
 
 	// Initialization
-	items.forEach( function ( item ) {
-		var node = $.parseHTML( item )[0];
-		$( node )
+	items.forEach( function ( itemHtml ) {
+		var $node = $( '<div>' )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )
-			.find( 'a' )
-				.attr( 'target', '_blank' );
+			.append( $.parseHTML( itemHtml ) );
 
-		tool.$items.append( node );
+		$node.find( 'a' ).attr( 'target', '_blank' );
+
+		tool.$items.append( $node );
 	} );
 
 	this.popup.$body.append( this.$items );
