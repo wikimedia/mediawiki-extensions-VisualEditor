@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amir a57"
+			"Amir a57",
+			"Koroğlu"
 		]
 	},
 	"tooltip-ca-ve-edit": "بو صفحه نین دَییدیرمه سی گورمک دَییشدیرمه سی ایله.",
 	"visualeditor-ca-createlocaldescriptionsource": "یئرلی آچیقلاما آرتیر",
 	"visualeditor-ca-createsource": "یازی کوکون یارات",
 	"visualeditor-ca-editsource": "کوکو دَییشدیر",
-	"visualeditor-ca-editsource-section": "کوکو دَییشدیر",
+	"visualeditor-ca-editsource-section": "کؤکو دَییشدیر",
 	"visualeditor-descriptionpagelink": "Project:گورمک دَییشدیرمه سی"
 }
