@@ -60,8 +60,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 		} );
 	} else if ( title ) {
 		// Internal link
-		// TODO: In the longer term we'll want to have autocompletion and existence and validity
-		// checks using AJAX
 
 		if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
 			// File: or Category: link
