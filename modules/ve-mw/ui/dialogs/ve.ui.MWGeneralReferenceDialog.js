@@ -53,7 +53,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.getBodyHeight = function () {
  * @inheritdoc
  */
 ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
-	var sourceField, refBasic,
+	var sourceField,
 		tools, i, len, item,
 		items = [],
 		limit = ve.init.mw.Target.static.citationToolsLimit;
@@ -88,7 +88,8 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
 		}
 	}
 	// Basic tools
-	refBasic = new OO.ui.DecoratedOptionWidget( {
+
+	this.refBasic = new OO.ui.DecoratedOptionWidget( {
 		icon: 'reference',
 		label: ve.msg( 'visualeditor-dialogbutton-reference-full-label' ),
 		data: { windowName: 'reference' }
@@ -114,7 +115,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
 
 	this.basicSelect = new OO.ui.SelectWidget( {
 		classes: [ 've-ui-mwGeneralReferenceDialog-select' ],
-		items: [ refBasic, this.refExisting ]
+		items: [ this.refBasic, this.refExisting ]
 	} );
 
 	// Events
@@ -138,8 +139,14 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
 ve.ui.MWGeneralReferenceDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWGeneralReferenceDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			// Check if the 'use existing' button should be enabled
-			this.refExisting.setDisabled( !this.doReferencesExist() );
+			if ( this.manager.surface.getInDialog() === 'reference' ) {
+				// Hide basic reference if we are already in the basic reference menu
+				this.refBasic.setDisabled( true );
+				this.refExisting.setDisabled( true );
+			} else {
+				// Check if the 'use existing' button should be enabled
+				this.refExisting.setDisabled( !this.doReferencesExist() );
+			}
 		}, this );
 };
 
@@ -185,7 +192,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.onSelectChoose = function ( item ) {
 
 	// Close this dialog then open the new dialog
 	this.close().then( function () {
-		manager.getSurface().execute( 'window', 'open', data.windowName, $.extend( {
+		manager.getSurface().execute( 'mwcite', 'open', data.windowName, $.extend( {
 			fragment: fragment
 		}, data.dialogData ) );
 	} );
