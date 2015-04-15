@@ -14,7 +14,8 @@
 			"פוילישער",
 			"קיפודנחש",
 			"תומר ט",
-			"Yona b"
+			"Yona b",
+			"LaG roiL"
 		]
 	},
 	"apihelp-visualeditor-description": "החזרת HTML5 של דף משירות parsoid.",
@@ -41,7 +42,7 @@
 	"apihelp-visualeditoredit-param-summary": "תקציר עריכה.",
 	"tooltip-ca-createsource": "יצירת קוד המקור של הדף הזה",
 	"tooltip-ca-editsource": "עריכת קוד המקור של הדף הזה",
-	"tooltip-ca-ve-edit": "עריכת הדף באמצעות עורך חזותי",
+	"tooltip-ca-ve-edit": "עריכת דף זה בעורך החזותי",
 	"visualeditor-advancedsettings-tool": "הגדרות מתקדמות",
 	"visualeditor-annotationbutton-linknode-tooltip": "קישור פשוט",
 	"visualeditor-beta-appendix": "בטא",
