@@ -25,6 +25,7 @@
 		"VisualEditorPreferenceModules": {
 			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
 		},
+		"VisualEditorRestbaseURL": false,
 		"VisualEditorSerializationCacheTimeout": 3600,
 		"VisualEditorUseChangeTagging": true,
 		"VisualEditorSupportedSkins": [
@@ -92,7 +93,6 @@
 		},
 		"VisualEditorTabPosition": "before",
 		"VisualEditorParsoidURL": "http://localhost:8000",
-		"VisualEditorRestbaseURL": false,
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorNamespaces": [],
 		"VisualEditorParsoidTimeout": 100
@@ -384,10 +384,6 @@
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.Target.css"
 			],
-			"messages": [
-				"visualeditor-quick-access-characters.json",
-				"visualeditor-special-characters-group-other"
-			],
 			"dependencies": [
 				"jquery.byteLength",
 				"jquery.client",
@@ -397,7 +393,6 @@
 				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
-				"easy-deflate.deflate",
 				"user.options",
 				"user.tokens",
 				"moment",
@@ -405,6 +400,10 @@
 				"ext.visualEditor.track",
 				"ext.visualEditor.targetLoader",
 				"jquery.uls.data"
+			],
+			"messages": [
+				"visualeditor-quick-access-characters.json",
+				"visualeditor-special-characters-group-other"
 			],
 			"targets": [
 				"desktop",
@@ -671,6 +670,7 @@
 				"lib/ve/src/ui/widgets/ve.ui.ContextOptionWidget.js",
 				"lib/ve/src/ui/widgets/ve.ui.DimensionsWidget.js",
 				"lib/ve/src/ui/widgets/ve.ui.MediaSizeWidget.js",
+				"lib/ve/src/ui/widgets/ve.ui.PreviewWidget.js",
 				"lib/ve/src/ui/widgets/ve.ui.WhitespacePreservingTextInputWidget.js",
 				"lib/ve/src/ui/tools/ve.ui.AnnotationTool.js",
 				"lib/ve/src/ui/tools/ve.ui.ClearAnnotationTool.js",
