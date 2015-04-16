@@ -22,7 +22,7 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage( name, config ) {
 	// Properties
 	this.languagesFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-meta-languages-label' ),
-		icon: 'language'
+		icon: 'textLanguage'
 	} );
 
 	// Initialization

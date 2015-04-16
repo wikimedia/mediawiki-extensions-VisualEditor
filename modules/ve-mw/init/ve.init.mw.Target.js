@@ -184,7 +184,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{
 		classes: [ 've-test-toolbar-style' ],
 		type: 'list',
-		icon: 'text-style',
+		icon: 'textStyle',
 		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
@@ -207,7 +207,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{
 		classes: [ 've-test-toolbar-structure' ],
 		type: 'list',
-		icon: 'bullet-list',
+		icon: 'listBullet',
 		indicator: 'down',
 		include: [ { group: 'structure' } ],
 		demote: [ 'outdent', 'indent' ]
@@ -225,7 +225,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{
 		header: OO.ui.deferMsg( 'visualeditor-toolbar-table' ),
 		type: 'list',
-		icon: 'table-insert',
+		icon: 'table',
 		indicator: 'down',
 		include: [ { group: 'table' } ],
 		demote: [ 'deleteTable' ]

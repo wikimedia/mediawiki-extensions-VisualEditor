@@ -112,7 +112,7 @@ ve.ui.MWLanguagesDialogTool = function VeUiMWLanguagesDialogTool( toolbar, confi
 OO.inheritClass( ve.ui.MWLanguagesDialogTool, ve.ui.DialogTool );
 ve.ui.MWLanguagesDialogTool.static.name = 'languages';
 ve.ui.MWLanguagesDialogTool.static.group = 'utility';
-ve.ui.MWLanguagesDialogTool.static.icon = 'language';
+ve.ui.MWLanguagesDialogTool.static.icon = 'textLanguage';
 ve.ui.MWLanguagesDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-languages-tool' );
 ve.ui.MWLanguagesDialogTool.static.commandName = 'meta/languages';

@@ -1548,12 +1548,12 @@ ve.dm.mwExample.domToDataCases = {
 		}
 	},
 	'internal link with href set to ./': {
-		body: '<p><a rel="mw:WikiLink" href="./"> </a></p>',
+		body: '<p><a rel="mw:WikiLink" href="./">x</a></p>',
 		head: '<base href="http://example.com" />',
 		data: [
 			{ type: 'paragraph' },
 			[
-				' ',
+				'x',
 				[ {
 					type: 'link/mwInternal',
 					attributes: {

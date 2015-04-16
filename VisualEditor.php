@@ -1538,8 +1538,13 @@ $wgResourceModules += array(
 
 	'ext.visualEditor.icons' => $wgVisualEditorResourceTemplate + array(
 		'styles' => array(
-			'lib/ve/src/ui/styles/ve.ui.Icons.css',
 			'modules/ve-mw/ui/styles/ve.ui.Icons.css',
+		),
+		'dependencies' => array(
+			'oojs-ui.styles.icons-editing-advanced',
+			'oojs-ui.styles.icons-editing-core',
+			'oojs-ui.styles.icons-editing-styling',
+			'oojs-ui.styles.icons-editing-list',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
