@@ -970,6 +970,8 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				this.isInsertion = true;
 			}
 
+			this.search.setup();
+
 			this.resetCaption();
 
 			this.actions.setAbilities( { insert: false, apply: false } );
@@ -1210,6 +1212,7 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 		.first( function () {
 			// Cleanup
 			this.search.getQuery().setValue( '' );
+			this.search.teardown();
 			if ( this.imageModel ) {
 				this.imageModel.disconnect( this );
 				this.sizeWidget.disconnect( this );
