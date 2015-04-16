@@ -133,13 +133,3 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 	// This implementation always resolves instantly
 	return $.Deferred().resolve( characters ).promise();
 };
-
-/* Initialization */
-
-ve.init.platform = new ve.init.mw.Platform();
-
-/* Extension */
-
-OO.ui.getUserLanguages = ve.init.platform.getUserLanguages.bind( ve.init.platform );
-
-OO.ui.msg = ve.init.platform.getMessage.bind( ve.init.platform );
