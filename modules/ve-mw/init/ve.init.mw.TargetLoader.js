@@ -21,6 +21,7 @@
 		modules = [
 			'ext.visualEditor.mwcore',
 			'ext.visualEditor.mwlink',
+			'ext.visualEditor.mwformatting',
 			'ext.visualEditor.data',
 			'ext.visualEditor.mwreference',
 			'ext.visualEditor.mwtransclusion',
