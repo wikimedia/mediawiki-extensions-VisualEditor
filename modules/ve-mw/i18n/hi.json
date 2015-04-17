@@ -12,7 +12,8 @@
 			"Kunalgrover05",
 			"संजीव कुमार",
 			"Phoenix303",
-			"Ankita-ks"
+			"Ankita-ks",
+			"Sahilrathod"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid सेवा से एक पेज के लिए HTML5 वापस करता है।",
@@ -116,7 +117,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "भाषा",
 	"visualeditor-dialog-meta-languages-readonlynote": "ये अन्य भाषाओं के उन पृष्ठों की सूची है जो इस पृष्ठ से जुड़े हैं। फ़िलहाल इसे केवल स्रोत सम्पादन में अथवा विकिडाटा पर ही सम्पादित किया जा सकता है।",
 	"visualeditor-dialog-meta-languages-section": "भाषाएँ",
-	"visualeditor-dialog-meta-settings-displaytitle": "प्रदर्शित शीर्षक",
+	"visualeditor-dialog-meta-settings-displaytitle": "शीर्षक प्रदर्शित करें",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "प्रदर्शित शीर्षक सक्रिय करें",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "आप इस पृष्ठ के शीर्षक के बजाय दिखाने के लिए एक अलग लेबल निर्धारित कर सकते हैं।",
 	"visualeditor-dialog-meta-settings-hiddencat-help": "आप इस श्रेणी को सदस्य पृष्ठों पर श्रेणियों की सूची में प्रदर्शित होने से रोक सकते हैं। यह उन श्रेणियों के लिए उपयोगी है जो संपादकों के लिये दिलचस्प हों पर अधिकांश पाठकों के लिये नहीं, जैसे वह पृष्ठ जिन्हे स्पष्टीकरण की जरूरत हो।",

@@ -14,6 +14,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VidRedaktilo estas nun en \"beta-versio\". Povas okazi ke vi spertos programarajn problemojn kaj vi ne povos redakti partojn de la paĝo. Alklaku \"{{int:visualeditor-ca-editsource}}\" por ŝanĝi al redaktado de viki-kodo - nekonservitaj ŝanĝoj estos perditaj.",
 	"visualeditor-browserwarning": "Vi uzas krozilon kiu ankoraŭ ne estas oficiale subtenata de VidRedaktilo.",
+	"visualeditor-ca-createlocaldescriptionsource": "Aldoni lokan priskribon kod-redakte",
 	"visualeditor-ca-createsource": "Krei fonton",
 	"visualeditor-ca-editsource": "Redakti fonton",
 	"visualeditor-ca-editsource-section": "redakti fonton",
@@ -88,7 +89,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:Ĉefa nomspaco",
 	"visualeditor-media-input-placeholder": "Serĉi aŭdvidaĵojn",
 	"visualeditor-meta-tool": "Paĝaj agordoj",
-	"visualeditor-mwalienextensioninspector-title": "Etendilo de MediaWiki",
 	"visualeditor-parameter-input-placeholder": "Nomo de parametro",
 	"visualeditor-parameter-search-no-unused": "Neniuj neuzitaj parametroj",
 	"visualeditor-parameter-search-unknown": "Nekonata parametro",
@@ -96,7 +96,6 @@
 	"visualeditor-preference-core-description": "Ŝalti VidRedaktilon. Ĝi ne estos uzebla en diskutoj kaj iuj aliaj nomspacoj.",
 	"visualeditor-preference-core-label": "VidRedaktilo",
 	"visualeditor-preference-enable": "Ŝalti VidRedaktilon.Ĝi ne estos uzebla en diskutoj kaj iuj aliaj nomspacoj.",
-	"visualeditor-preference-language-label": "Lingvaj iloj de VidRedaktilo",
 	"visualeditor-reference-input-placeholder": "Kion vi volas referenci?",
 	"visualeditor-referenceslist-isempty": "En tiu ĉi paĝo ne estas referencoj de grupo \"$1\" por aldoni al tiu ĉi listo.",
 	"visualeditor-referenceslist-isempty-default": "En tiu ĉi paĝo ne estas referencoj por aldoni al tiu ĉi listo.",
@@ -117,5 +116,6 @@
 	"visualeditor-serializeerror": "Eraro dum ŝutado de datumoj de servilo: $1.",
 	"visualeditor-toolbar-savedialog": "Konservi paĝon",
 	"visualeditor-usernamespacepagelink": "Project:Ĉefa nomspaco",
+	"visualeditor-version-label": "Versio",
 	"visualeditor-viewpage-savewarning": "Ĉu vi vere volas reveni al montra reĝimo sen konservo?"
 }
