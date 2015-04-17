@@ -88,7 +88,6 @@
 					// never be called if the browser doesn't support ES5
 					[
 						'ext.visualEditor.viewPageTarget',
-						'ext.visualEditor.mwformatting',
 						'ext.visualEditor.mwgallery',
 						'ext.visualEditor.mwimage',
 						'ext.visualEditor.mwmeta'
