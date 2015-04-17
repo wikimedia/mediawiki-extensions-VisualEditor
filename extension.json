@@ -93,6 +93,7 @@
 		},
 		"VisualEditorTabPosition": "before",
 		"VisualEditorParsoidURL": "http://localhost:8000",
+		"VisualEditorEnableSplitTest": false,
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorNamespaces": [],
 		"VisualEditorParsoidTimeout": 100
@@ -165,6 +166,9 @@
 		],
 		"BeforeInitialize": [
 			"VisualEditorHooks::onBeforeInitialize"
+		],
+		"AddNewAccount": [
+			"VisualEditorHooks::onAddNewAccount"
 		]
 	},
 	"ResourceModules": {
