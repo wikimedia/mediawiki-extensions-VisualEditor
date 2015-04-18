@@ -249,7 +249,7 @@
 	"visualeditor-differror": "Erreur lors du chargement des données depuis le serveur : $1.",
 	"visualeditor-editconflict": "Vos modifications n’ont pas pu être enregistrées à cause d’un conflit de versions. Voulez-vous résoudre ce conflit manuellement ?",
 	"visualeditor-editnotices-tool": "$1 avertissement{{PLURAL:$1||s}}",
-	"visualeditor-editnotices-tooltip": "Modifier les avis",
+	"visualeditor-editnotices-tooltip": "Avertissements",
 	"visualeditor-editsummary": "Décrivez ce que vous avez modifié",
 	"visualeditor-editsummary-bytes-remaining": "Le nombre d’octets restant",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titre de la page",
