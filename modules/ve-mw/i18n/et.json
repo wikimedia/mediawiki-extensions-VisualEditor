@@ -236,6 +236,7 @@
 	"visualeditor-savedialog-title-save": "Salvestamine",
 	"visualeditor-savedialog-warning-dirty": "Sinu muudatus võib olla rikutud. Palun vaata see enne salvestamist üle.",
 	"visualeditor-saveerror": "Tõrge andmete salvestamisel serverisse: $1.",
+	"visualeditor-saveerror-titleblacklist": "Tõrge lehekülje salvestamisel: lehekülje pealkiri on mustas nimekirjas.",
 	"visualeditor-serializeerror": "Tõrge serverist andmete laadimisel: $1.",
 	"visualeditor-settings-tool": "Lehekülje sätted",
 	"visualeditor-special-characters-group-other": "Sageli vajaminev",
