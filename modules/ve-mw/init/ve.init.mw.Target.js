@@ -848,16 +848,17 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 	copyAttributes( oldDoc.body, newDoc.body );
 	$( newDoc )
 		.find(
-			'div[id="myEventWatcherDiv"], ' + // Bug 51423
-			'embed[type="application/iodbc"], ' + // Bug 51521
-			'embed[type="application/x-datavault"], ' + // Bug 52791
-			'script[id="FoxLingoJs"], ' + // Bug 52884
-			'style[id="_clearly_component__css"], ' + // Bug 53252
-			'div[id="sendToInstapaperResults"], ' + // Bug 61776
-			'embed[id^="xunlei_com_thunder_helper_plugin"], ' + // Bug 63121
-			'object[type="cosymantecnisbfw"], script[id="NortonInternetSecurityBF"], ' + // Bug 63229
-			'div[id="kloutify"], ' + // Bug 67006
-			'div[id^="mittoHidden"]' // Bug 68900#c1
+			'div[id="myEventWatcherDiv"], ' + // T53423
+			'embed[type="application/iodbc"], ' + // T53521
+			'embed[type="application/x-datavault"], ' + // T54791
+			'script[id="FoxLingoJs"], ' + // T54884
+			'style[id="_clearly_component__css"], ' + // T55252
+			'div[id="sendToInstapaperResults"], ' + // T63776
+			'embed[id^="xunlei_com_thunder_helper_plugin"], ' + // T65121
+			'object[type="cosymantecnisbfw"], script[id="NortonInternetSecurityBF"], ' + // T65229
+			'div[id="kloutify"], ' + // T69006
+			'div[id^="mittoHidden"], ' + // T70900
+			'script[src*="netdefender"]' // T96533
 		)
 		.remove();
 	// Add doctype manually
