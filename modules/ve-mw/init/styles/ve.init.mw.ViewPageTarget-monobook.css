@@ -12,6 +12,21 @@
 	line-height: 1.5em;
 }
 
+.ve-init-target > .ve-ui-debugBar {
+	/* Correct for Monobook's x-small font */
+	font-size: 1.25em;
+	border-top: 1px solid #ccc;
+}
+
+.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
+	padding: 0;
+}
+
+.ve-init-target > .ve-ui-debugBar {
+	padding: 0.8em;
+	margin: 0.8em -0.8em -0.8em -0.8em;
+}
+
 .ve-ui-overlay {
 	/* Mimic #globalWrapper */
 	font-size: 127%;
