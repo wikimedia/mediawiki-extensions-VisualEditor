@@ -26,7 +26,6 @@
 	font-size: 0.8em;
 }
 
-
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -1em -1em 1em -1em;
 	position: relative;
@@ -92,7 +91,7 @@
 		margin: -1.25em -1.5em 1.5em -1.5em;
 	}
 
-	.ve-ui-debugBar {
+	.ve-init-target > .ve-ui-debugBar {
 		padding: 1.5em;
 		margin: 1em -1.5em -1.5em -1.5em;
 	}
