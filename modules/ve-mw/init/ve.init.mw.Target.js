@@ -1279,13 +1279,10 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 	setTimeout( function () {
 		// Build model
 		ve.track( 'trace.convertModelFromDom.enter' );
-		var dmDoc = ve.dm.converter.getModelFromDom(
-			doc,
-			false,
-			null,
-			mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
-			mw.config.get( 'wgVisualEditor' ).pageLanguageDir
-		);
+		var dmDoc = ve.dm.converter.getModelFromDom( doc, {
+			lang: mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
+			dir: mw.config.get( 'wgVisualEditor' ).pageLanguageDir
+		} );
 		ve.track( 'trace.convertModelFromDom.exit' );
 		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
 		ve.track( 'trace.buildModelTree.enter' );
