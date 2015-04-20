@@ -18,7 +18,6 @@ module.exports = function ( grunt ) {
 	grunt.loadTasks( 'build/tasks' );
 
 	grunt.initConfig( {
-		pkg: grunt.file.readJSON( 'package.json' ),
 		jsduckcatconfig: {
 			main: {
 				target: '.jsduck/categories.json',
