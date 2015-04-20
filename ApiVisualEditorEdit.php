@@ -78,11 +78,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 		$api->execute();
 		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData();
-			// Transform content nodes to '*'
-			$result = ApiResult::transformForBC( $result );
-			// Remove any metadata keys from the links array
-			$result = ApiResult::removeMetadata( $result );
+			$result = $api->getResult()->getResultData( null, array(
+				'BC' => array(), // Transform content nodes to '*'
+				'Types' => array(), // Add back-compat subelements
+				'Strip' => 'all', // Remove any metadata keys from the links array
+			) );
 		} else {
 			$result = $api->getResultData();
 		}

@@ -199,9 +199,10 @@ class ApiVisualEditor extends ApiBase {
 		);
 		$api->execute();
 		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData();
-			// Transform content nodes to '*'
-			$result = ApiResult::transformForBC( $result );
+			$result = $api->getResult()->getResultData( null, array(
+				'BC' => array(), // Transform content nodes to '*'
+				'Types' => array(), // Add back-compat subelements
+			) );
 		} else {
 			$result = $api->getResultData();
 		}
@@ -246,9 +247,11 @@ class ApiVisualEditor extends ApiBase {
 
 		$api->execute();
 		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData();
-			// Remove any metadata keys from the langlinks array
-			$result = ApiResult::removeMetadata( $result );
+			$result = $api->getResult()->getResultData( null, array(
+				'BC' => array(), // Backwards-compatible structure transformations
+				'Types' => array(), // Backwards-compatible structure transformations
+				'Strip' => 'all', // Remove any metadata keys from the langlinks array
+			) );
 		} else {
 			$result = $api->getResultData();
 		}
