@@ -27,7 +27,8 @@
 			init.$loading = $(
 				'<div class="ve-init-mw-viewPageTarget-loading-overlay">' +
 					'<div class="ve-init-mw-viewPageTarget-progress">' +
-						'<div class="ve-init-mw-viewPageTarget-progress-bar"></div>' +
+						// Stylesheets might not have processed yet, so manually set starting width to 0
+						'<div class="ve-init-mw-viewPageTarget-progress-bar" style="width: 0;"></div>' +
 					'</div>' +
 				'</div>'
 			);
