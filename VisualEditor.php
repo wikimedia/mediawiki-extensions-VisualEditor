@@ -1416,7 +1416,7 @@ $wgResourceModules += array(
 			),
 			'minerva' => array(
 				'modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWParameterPage.css',
-				'modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWTemplatePage.css',
+				'modules/ve-mw/ui/themes/minerva/ve.ui.MobileWindowManager.css',
 			),
 		),
 		'dependencies' => array(
