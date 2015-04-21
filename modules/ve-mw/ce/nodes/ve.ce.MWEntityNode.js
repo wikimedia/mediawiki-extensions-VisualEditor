@@ -43,8 +43,6 @@ ve.ce.MWEntityNode.static.name = 'mwEntity';
 /**
  * Handle model update events.
  *
- * If the source changed since last update the image's src attribute will be updated accordingly.
- *
  * @method
  */
 ve.ce.MWEntityNode.prototype.onUpdate = function () {
