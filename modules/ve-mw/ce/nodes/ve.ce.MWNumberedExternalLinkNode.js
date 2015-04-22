@@ -70,8 +70,6 @@ ve.ce.MWNumberedExternalLinkNode.static.getDescription = function ( model ) {
 /**
  * Handle model update events.
  *
- * If the source changed since last update the image's src attribute will be updated accordingly.
- *
  * @method
  */
 ve.ce.MWNumberedExternalLinkNode.prototype.onUpdate = function () {
