@@ -46,7 +46,14 @@ ve.ce.MWEntityNode.static.name = 'mwEntity';
  * @method
  */
 ve.ce.MWEntityNode.prototype.onUpdate = function () {
-	this.$element.text( this.model.getAttribute( 'character' ) );
+	var
+		chr = this.model.getAttribute( 'character' ),
+		whitespaceHtmlChars = ve.ce.TextNode.whitespaceHtmlCharacters,
+		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();
+	if ( !significantWhitespace && Object.prototype.hasOwnProperty.call( whitespaceHtmlChars, chr ) ) {
+		chr = whitespaceHtmlChars[chr];
+	}
+	this.$element.text( chr );
 };
 
 /* Registration */
