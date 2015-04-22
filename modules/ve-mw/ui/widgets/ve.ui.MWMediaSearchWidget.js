@@ -44,6 +44,9 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	this.queryMediaQueueCallback = this.queryMediaQueue.bind( this );
 	this.layoutQueue = [];
 	this.numItems = 0;
+	this.currentItemCache = [];
+
+	this.resultsSize = {};
 
 	this.selected = null;
 
@@ -61,6 +64,8 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 		remove: 'onResultsRemove'
 	} );
 
+	this.resizeHandler = ve.debounce( this.afterResultsResize.bind( this ), 500 );
+
 	// Initialization
 	this.$element.addClass( 've-ui-mwMediaSearchWidget' );
 };
@@ -71,6 +76,49 @@ OO.inheritClass( ve.ui.MWMediaSearchWidget, OO.ui.SearchWidget );
 
 /* Methods */
 
+/**
+ * Respond to window resize and check if the result display should
+ * be updated.
+ */
+ve.ui.MWMediaSearchWidget.prototype.afterResultsResize = function () {
+	var items = this.currentItemCache,
+		value = this.query.getValue();
+
+	if (
+		items.length > 0 &&
+		(
+			this.resultsSize.width !== this.$results.width() ||
+			this.resultsSize.height !== this.$results.height()
+		)
+	) {
+		this.resetRows();
+		this.itemCache = {};
+		this.processQueueResults( items, value );
+		if ( this.results.getItems().length > 0 ) {
+			this.lazyLoadResults();
+		}
+
+		// Cache the size
+		this.resultsSize = {
+			width: this.$results.width(),
+			height: this.$results.height()
+		};
+	}
+};
+
+/**
+ * Teardown the widget; disconnect the window resize event.
+ */
+ve.ui.MWMediaSearchWidget.prototype.teardown = function () {
+	$( window ).off( 'resize', this.resizeHandler );
+};
+
+/**
+ * Setup the widget; activate the resize event.
+ */
+ve.ui.MWMediaSearchWidget.prototype.setup = function () {
+	$( window ).on( 'resize', this.resizeHandler );
+};
 /**
  * Query all sources for media.
  *
@@ -92,6 +140,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 		.then( function ( items ) {
 			if ( items.length > 0 ) {
 				search.processQueueResults( items, value );
+				search.currentItemCache = search.currentItemCache.concat( items );
 			}
 
 			search.query.popPending();
@@ -157,6 +206,7 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 
 	// Reset
 	this.itemCache = {};
+	this.currentItemCache = [];
 	this.resetRows();
 
 	// Empty the results queue
@@ -218,6 +268,7 @@ ve.ui.MWMediaSearchWidget.prototype.resetRows = function () {
 	}
 
 	this.rows = [];
+	this.itemCache = {};
 };
 
 /**
@@ -359,6 +410,7 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsRemove = function ( items ) {
 		// In the case of the media search widget, if any items are removed
 		// all are removed (new search)
 		this.resetRows();
+		this.currentItemCache = [];
 	}
 };
 
