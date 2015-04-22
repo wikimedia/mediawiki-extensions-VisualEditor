@@ -665,7 +665,7 @@ class VisualEditorHooks {
 			$user->isLoggedin() &&
 			( ( $user->getId() % 2 ) === 0 )
 		) {
-			$user->setOption( 'visualeditor-testabpreference', 1 );
+			$user->setOption( 'visualeditor-enable', 1 );
 			$user->saveSettings();
 		}
 		return true;
