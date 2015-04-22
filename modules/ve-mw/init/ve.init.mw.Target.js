@@ -238,7 +238,7 @@ ve.init.mw.Target.static.importRules = {
 	external: {
 		blacklist: [
 			// Annotations
-			'link', 'textStyle/span', 'textStyle/font', 'textStyle/underline',
+			'link', 'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language',
 			// Nodes
 			'inlineImage', 'blockImage', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
