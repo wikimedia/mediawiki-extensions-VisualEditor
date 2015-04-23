@@ -9,10 +9,14 @@
 	margin-top: 0.8em;
 }
 
+.ve-ui-overlay-global {
+	/* Match skin's font-size */
+	font-size: 0.8em;
+}
+
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -0.6em -3em 0.8em -3em;
 	position: relative;
-	font-size: 1.3em;
 }
 
 .ve-init-mw-viewPageTarget-toolbar .oo-ui-toolbar-bar {

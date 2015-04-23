@@ -11,19 +11,19 @@
 }
 
 .oo-ui-menuToolGroup .oo-ui-tool-name-heading1 .oo-ui-tool-title {
-	font-size: 144%; /* 0.8 * 180% */
+	font-size: 180%;
 }
 
 .oo-ui-menuToolGroup .oo-ui-tool-name-heading2 .oo-ui-tool-title {
-	font-size: 120%; /* 0.8 * 150% */
+	font-size: 150%;
 }
 
 .oo-ui-menuToolGroup .oo-ui-tool-name-heading3 .oo-ui-tool-title {
-	font-size: 94%; /* 0.8 * 117% */
+	font-size: 117%;
 }
 
 .oo-ui-menuToolGroup .oo-ui-tool-name-heading4 .oo-ui-tool-title,
 .oo-ui-menuToolGroup .oo-ui-tool-name-heading5 .oo-ui-tool-title,
 .oo-ui-menuToolGroup .oo-ui-tool-name-heading6 .oo-ui-tool-title {
-	font-size: 80%; /* 0.8 * 100% */
+	font-size: 100%;
 }

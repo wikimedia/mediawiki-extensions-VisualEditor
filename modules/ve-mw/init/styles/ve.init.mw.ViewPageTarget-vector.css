@@ -22,8 +22,16 @@
 	padding: 0 1.143em; /* surface-margin-left (1em) / (mw-body-content font-size) 0.875em */
 }
 
-.ve-init-mw-viewPageTarget-surface .oo-ui-menuSelectWidget {
+.ve-init-target,
+.ve-ui-overlay-global {
+	/* Enforce different font-size for all UI elements of VisualEditor */
 	font-size: 0.8em;
+}
+
+.ve-init-target .ve-ce-surface.mw-body-content,
+.ve-ui-overlay-global .ve-ce-surface.mw-body-content {
+	/* Match skin's font-size for the surface content */
+	font-size: 1.09375em; /* 0.875/0.8 */
 }
 
 .ve-init-mw-viewPageTarget-toolbar {
