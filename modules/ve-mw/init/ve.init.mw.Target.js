@@ -383,6 +383,10 @@ ve.init.mw.Target.onLoad = function ( response ) {
 				this.load();
 			}
 			return;
+		} else {
+			// Set this to false after a successful load, so we don't immediately give up
+			// if a subsequent load mismatches again
+			this.retriedRevIdConflict = false;
 		}
 
 		// Populate link cache
