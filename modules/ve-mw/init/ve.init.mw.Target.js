@@ -267,25 +267,20 @@ ve.init.mw.Target.static.integrationType = 'page';
 /* Static Methods */
 
 /**
- * Take a target document with a possibly relative base URL, and modify it to be absolute.
- * The base URL of the target document is resolved using the base URL of the source document.
- * @param {HTMLDocument} targetDoc Document whose base URL should be resolved
- * @param {HTMLDocument} sourceDoc Document whose base URL should be used for resolution
+ * Fix the base URL from Parsoid if necessary.
+ *
+ * Absolutizes the base URL if it's relative, and sets a base URL based on wgArticlePath
+ * if there was no base URL at all.
+ *
+ * @param {HTMLDocument} doc Parsoid document
  */
-ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
-	var baseNode;
-	if ( !targetDoc.baseURI ) {
-		baseNode = targetDoc.getElementsByTagName( 'base' )[0];
-		if ( baseNode ) {
-			// Modify the existing <base> tag
-			baseNode.setAttribute( 'href', ve.resolveUrl( baseNode.getAttribute( 'href' ), sourceDoc ) );
-		} else {
-			// No <base> tag, add one
-			baseNode = targetDoc.createElement( 'base' );
-			baseNode.setAttribute( 'href', sourceDoc.baseURI );
-			sourceDoc.head.appendChild( baseNode );
-		}
-	}
+ve.init.mw.Target.static.fixBase = function ( doc ) {
+	ve.fixBase( doc, document, ve.resolveUrl(
+		// Don't replace $1 with the page name, because that'll break if
+		// the page name contains a slash
+		mw.config.get( 'wgArticlePath' ).replace( '$1', '' ),
+		document
+	) );
 };
 
 /**
@@ -301,7 +296,7 @@ ve.init.mw.Target.static.fixBase = function ( targetDoc, sourceDoc ) {
  * @fires loadError
  */
 ve.init.mw.Target.onLoad = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevIdMatches, baseNode,
+	var i, len, linkData, aboutDoc, docRevIdMatches,
 		docRevId = 0,
 		data = response ? response.visualeditor : null;
 
@@ -314,27 +309,8 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		this.originalHtml = data.content;
 		this.doc = ve.parseXhtml( this.originalHtml );
 
-		// Parsoid outputs a protocol-relative <base> tag, so absolutize it
-		this.constructor.static.fixBase( this.doc, document );
-
-		// If the document has an invalid <base> tag or no <base> tag at all (new pages,
-		// for example, don't have a <base> tag) then set a base URI based on wgArticlePath.
-		if ( !this.doc.baseURI ) {
-			// Use existing <base> tag if present
-			baseNode = this.doc.getElementsByName( 'base' )[0] || this.doc.createElement( 'base' );
-			baseNode.setAttribute( 'href',
-				ve.resolveUrl(
-					// Don't replace $1 with this.pageName, because that'll break if
-					// this.pageName contains a slash
-					mw.config.get( 'wgArticlePath' ).replace( '$1', '' ),
-					document
-				)
-			);
-			// If baseNode was created by us, attach it
-			if ( !baseNode.parentNode ) {
-				this.doc.head.appendChild( baseNode );
-			}
-		}
+		// Fix relative or missing base URL if needed
+		this.constructor.static.fixBase( this.doc );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
