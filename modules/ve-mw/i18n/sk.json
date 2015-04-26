@@ -3,7 +3,8 @@
 		"authors": [
 			"Mimarik",
 			"Teslaton",
-			"Sudo77(new)"
+			"Sudo77(new)",
+			"TomášPolonec"
 		]
 	},
 	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
@@ -15,6 +16,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor je v „betaverzii“. Môžete natrafiť na softvérové problémy a nemusíte byť schopní upravovať niektoré časti stránky. Kedykoľvek sa však môžete bez straty vykonaných zmien prepnúť do režimu editácie zdrojového kódu (wikitextu) – rozbalením ponuky vedľa tlačítka „{{int:visualeditor-toolbar-savedialog}}“ a kliknutím na „{{int:visualeditor-mweditmodesource-tool}}“.",
 	"visualeditor-browserwarning": "Používate prehliadač, ktorý nie je VisualEditorom oficiálne podporovaný.",
+	"visualeditor-ca-createlocaldescriptionsource": "Pridať zdroj miestneho popisu",
 	"visualeditor-ca-createsource": "Vytvoriť zdroj",
 	"visualeditor-ca-editsource": "Upraviť zdroj",
 	"visualeditor-ca-editsource-section": "upraviť zdroj",
@@ -155,7 +157,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:Hlavný menný priestor",
 	"visualeditor-media-input-placeholder": "Hľadať obrázky (zvuky, videá)",
 	"visualeditor-meta-tool": "Nastavenia",
-	"visualeditor-mwalienextensioninspector-title": "Rozšírenie MediaWiki",
 	"visualeditor-mweditmodesource-title": "Prepnúť na úpravu zdrojového kódu",
 	"visualeditor-mweditmodesource-tool": "Prepnúť na úpravu zdrojového kódu",
 	"visualeditor-mweditmodesource-warning": "Chystáte sa prepnúť na úpravu zdrojového kódu.\nVykonané zmeny zostanú zachované, bez uloženia alebo znovunačítania stránky sa však už nebudete môcť vrátiť späť do VisualEditoru.\nChcete pokračovať?",
@@ -171,8 +172,6 @@
 	"visualeditor-preference-core-description": "Povoliť VisualEditor (nebude k dispozícii v diskusiách a niektorých ďalších menných priestoroch).",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Povoliť VisualEditor. Nebude k dispozícii v diskusiách a niektorých ďalších menných priestoroch.",
-	"visualeditor-preference-language-description": "Pridá do VisualEditora experimentálnu podporu na označenie jazyka, v ktorom je text napísaný, kvôli testovaniu pred zverejnením tejto funkcie. Pri používaní experimentálnych funkcií prosím nezabudnite vždy skontrolovať uskutočnené zmeny.",
-	"visualeditor-preference-language-label": "Jazykové nástroje VisualEditora",
 	"visualeditor-reference-input-placeholder": "Akú referenciu chcete vložit?",
 	"visualeditor-referenceslist-isempty": "Na tejto stránke neexistuje žiadna referencia v skupine „$1“.",
 	"visualeditor-referenceslist-missingref": "Táto referencia je definovaná v šablóne alebo inej automaticky generovanej časti textu. Zatiľ je možné editovať ju len v režime zdrojového kódu.",
@@ -200,11 +199,11 @@
 	"visualeditor-toolbar-cite-label": "Citácia",
 	"visualeditor-toolbar-savedialog": "Uložiť stránku",
 	"visualeditor-usernamespacepagelink": "Project:Menný priestor Redaktor",
+	"visualeditor-version-label": "Verzia",
 	"visualeditor-viewpage-savewarning": "Naozaj se chcete vrátiť späť do režimu prehliadania bez uloženia zmien?",
 	"visualeditor-viewpage-savewarning-discard": "Zahodiť úpravy",
 	"visualeditor-viewpage-savewarning-keep": "Pokračovať v editácii",
 	"visualeditor-viewpage-savewarning-title": "Ste si istí?",
 	"visualeditor-wikitext-warning": "Používate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] tu nefunguje. Kliknutím na „{{int:visualeditor-ca-editsource}}“ môžete stránku upravovať v režime zdrojového kódu – o neuložené zmeny však prídete.",
-	"visualeditor-wikitext-warning-link": "Help:Prehľad editácie stránok",
 	"visualeditor-wikitext-warning-title": "Zistená syntax wikitextu"
 }

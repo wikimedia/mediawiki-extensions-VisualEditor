@@ -3,7 +3,8 @@
 		"authors": [
 			"Ashok modhvadia",
 			"KartikMistry",
-			"The Discoverer"
+			"The Discoverer",
+			"Arbhatt"
 		]
 	},
 	"tooltip-ca-createsource": "આ પાનાંનો સ્ત્રોત કોડ બનાવો",
@@ -14,6 +15,7 @@
 	"visualeditor-beta-label": "બીટા",
 	"visualeditor-beta-warning": "વિઝ્યુલસંપાદ 'બીટા' માં છે. તમને કદાચ સોફ્ટવેર મુશ્કેલીઓનો સામનો કરવો પડશે, અને તમે કદાચ પાનાંના ભાગોમાં ફેરફાર નહી કરી શકો. તમારા ફેરફારો ગુમાવ્યા વગર સાચવવા માટે, કોઇ પણ સમયે  \"{{int:visualeditor-toolbar-savedialog}}\" ની બાજુમાં રહેલા ડ્રોપડાઉન મેનુ ખોલો અને \"{{int:visualeditor-mweditmodesource-tool}}\" પસંદ કરો.",
 	"visualeditor-browserwarning": "તમે વિઝ્યુલસંપાદક વડે આધારિત ન હોય એવું બ્રાઉઝર વાપરી રહ્યા છો.",
+	"visualeditor-ca-createlocaldescriptionsource": "સ્થાનિક વર્ણન ઉમેરો",
 	"visualeditor-ca-createsource": "સ્રોત બનાવો",
 	"visualeditor-ca-editsource": "સ્ત્રોતમાં ફેરફાર કરો",
 	"visualeditor-ca-editsource-section": "સ્ત્રોતમાં ફેરફાર કરો",
@@ -141,7 +143,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:મુખ્ય નામઅવકાશ",
 	"visualeditor-media-input-placeholder": "મીડિઆ માટે શોધો",
 	"visualeditor-meta-tool": "વિકલ્પો",
-	"visualeditor-mwalienextensioninspector-title": "મિડિઆવિકિ એક્સટેન્શન",
 	"visualeditor-mweditmodesource-title": "સ્ત્રોત ફેરફારમાં જાઓ",
 	"visualeditor-mweditmodesource-warning-cancel": "રદ કરો",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|આ ચિત્ર માટેનું લખાણ",
@@ -155,7 +156,6 @@
 	"visualeditor-preference-core-description": "વિઝ્યુલએડિટર સક્રિય કરો. તે ચર્ચા પાનાંઓ અને બીજા કેટલાંક નામસ્થળોએ પ્રાપ્ત નહી હોય.",
 	"visualeditor-preference-core-label": "વિઝ્યુલએડિટર",
 	"visualeditor-preference-enable": "વિઝ્યુલએડિટર સક્રિય કરો. તે માત્ર ચર્ચા પાનાંઓ અને બીજા કેટલાંક નામસ્થળોએ પ્રાપ્ત નહી હોય.",
-	"visualeditor-preference-language-label": "વિઝ્યુલએડિટર ભાષા સાધન",
 	"visualeditor-preference-mwalienextension-label": "વિઝ્યુઅલએડિટર એક્સટેન્શન ટેગ સંપાદન",
 	"visualeditor-reference-input-placeholder": "તમે શું સંદર્ભ કરવા માંગો છો?",
 	"visualeditor-referenceslist-isempty": "આ યાદીમાં દાખલ કરવા માટે આ પાનાં પર સમૂહ \"$1\" નો કોઇ સંદર્ભ નથી.",
@@ -183,9 +183,9 @@
 	"visualeditor-settings-tool": "પાનાં ગોઠવણીઓ",
 	"visualeditor-toolbar-savedialog": "પાનું સાચવો",
 	"visualeditor-usernamespacepagelink": "Project:સભ્ય નામઅવકાશ",
+	"visualeditor-version-label": "આવૃત્તિ",
 	"visualeditor-viewpage-savewarning": "તમે પહેલાં સાચવ્યા વગર દેખાવ સ્થિતિમાં પાછાં જવા માટે ચોક્કસ છો?",
 	"visualeditor-viewpage-savewarning-title": "શું તમે ચોક્કસ છો?",
 	"visualeditor-wikitext-warning": "તમે વિઝ્યુલસંપાદક ઉપયોગ કરી રહ્યા છો - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|વિકિલખાણ]] અહીં કામ કરશે નહી. \"{{int:visualeditor-ca-editsource}}\" પર ક્લિક કરી પાનાંને વિકિલખાણ સ્થિતિમાં સંપાદિત કરો – ન સાચવેલ ફેરફારો નાશ પામશે.",
-	"visualeditor-wikitext-warning-link": "Help:વિકિ માર્કઅપ",
 	"visualeditor-wikitext-warning-title": "વિકિલખાણ માર્કઅપ દેખાયું"
 }
