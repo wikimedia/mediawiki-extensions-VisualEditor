@@ -12,6 +12,7 @@
 	"visualeditor-beta-label": "bèta",
 	"visualeditor-beta-warning": "De visuele tekstverwarker is n 'bèta'-versie. Der kunnen nog wat luzen in de programmatuur zitten, en je kunnen misschien niet alle onderdelen van de zied bewarken. Um weer naor t bewarken in wikitekste te gaon, zonder dat wiezigingen verleuren gaon, du'j t keuzemenu los naost \"{{int:visualeditor-toolbar-savedialog}}\" en klik op \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Je gebruken n webkieker die niet ondersteund wörden deur VisualEditor.",
+	"visualeditor-ca-createlocaldescriptionsource": "Lokale beschrieving derbie doon",
 	"visualeditor-ca-createsource": "Bronkode anmaken",
 	"visualeditor-ca-editsource": "Bronkode bewarken",
 	"visualeditor-ca-editsource-section": "bronkode bewarken",
