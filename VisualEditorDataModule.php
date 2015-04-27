@@ -148,7 +148,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		return $citationTools;
 	}
 
-	public function getDependencies() {
+	public function getDependencies( ResourceLoaderContext $context = null ) {
 		return array(
 			'ext.visualEditor.base',
 			'ext.visualEditor.mediawiki',
