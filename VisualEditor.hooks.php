@@ -381,6 +381,8 @@ class VisualEditorHooks {
 		$vars['wgVisualEditor'] = array(
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
+			'usePageImages' => defined( 'PAGE_IMAGES_INSTALLED' ),
+			'usePageDescriptions' => defined( 'WBC_VERSION' ),
 		);
 
 		return true;

@@ -79,7 +79,10 @@
 	ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
 		return new mw.Api().get( {
 			action: 'query',
-			prop: 'info|pageprops',
+			gpslimit: 10,
+			prop: 'info|pageprops|pageimages|pageterms',
+			pithumbsize: 80,
+			pilimit: 10,
 			ppprop: 'disambiguation',
 			titles: subqueue.join( '|' )
 		} );
@@ -93,7 +96,9 @@
 			missing: page.missing !== undefined,
 			redirect: page.redirect !== undefined,
 			// Disambiguator extension
-			disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined
+			disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined,
+			imageUrl: ve.getProp( page, 'thumbnail', 'source' ),
+			description: ve.getProp( page, 'terms', 'description' )
 		};
 	};
 }() );
