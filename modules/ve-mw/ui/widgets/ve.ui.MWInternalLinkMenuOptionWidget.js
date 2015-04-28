@@ -19,7 +19,7 @@
  */
 ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidget( config ) {
 	// Config initialization
-	config = ve.extendObject( { icon: 'article' }, config );
+	config = ve.extendObject( { icon: 'page-existing' }, config );
 
 	// Properties
 	this.pagename = config.pagename;

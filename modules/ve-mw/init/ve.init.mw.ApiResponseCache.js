@@ -34,7 +34,11 @@
 		this.schedule = ve.debounce( this.processQueue.bind( this ), 0 );
 	};
 
+	/* Inheritance */
+
 	OO.mixinClass( ve.init.mw.ApiResponseCache, OO.EventEmitter );
+
+	/* Methods */
 
 	// TODO should reuse ve.dm.MWInternalLinkAnnotation#getLookupTitle once factored out
 	ve.init.mw.ApiResponseCache.prototype.normalizeTitle = function ( title ) {

@@ -325,7 +325,8 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 				data: this.getInternalLinkAnnotationFromTitle( suggestionPages[i] ),
 				pagename: suggestionPages[i],
 				imageUrl: linkData.imageUrl,
-				description: linkData.description
+				description: linkData.description,
+				icon: ve.init.platform.linkCache.constructor.static.getIconForLink( linkData )
 			} ) );
 		}
 

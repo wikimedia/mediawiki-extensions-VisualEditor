@@ -19,9 +19,32 @@
 		this.cacheValues = {};
 	};
 
+	/* Inheritance */
+
 	OO.inheritClass( ve.init.mw.LinkCache, ve.init.mw.ApiResponseCache );
 
-	// TODO unit tests
+	/* Static methods */
+
+	/**
+	 * Get the icon name to use for a particular link type
+	 *
+	 * @param {Object} linkData Link data
+	 * @return {string} Icon name
+	 */
+	ve.init.mw.LinkCache.static.getIconForLink = function ( linkData ) {
+		if ( linkData.missing ) {
+			return 'page-not-found';
+		}
+		if ( linkData.redirect ) {
+			return 'page-redirect';
+		}
+		if ( linkData.disambiguation ) {
+			return 'page-disambiguation';
+		}
+		return 'page-existing';
+	};
+
+	/* Methods */
 
 	/**
 	 * Requests information about the title, then adds classes to the provided element as appropriate.

@@ -64,7 +64,7 @@ ve.ui.MWInternalLinkContextItem.prototype.renderBody = function () {
 	ve.init.platform.linkCache.styleElement( title, $link );
 
 	if ( usePageImages ) {
-		icon = new OO.ui.IconWidget( { icon: 'article' } );
+		icon = new OO.ui.IconWidget( { icon: 'page-existing' } );
 		$wrapper
 			.addClass( 've-ui-mwInternalLinkContextItem-withImage' )
 			.append( icon.$element );
@@ -80,10 +80,14 @@ ve.ui.MWInternalLinkContextItem.prototype.renderBody = function () {
 
 	if ( usePageImages || usePageDescriptions ) {
 		ve.init.platform.linkCache.get( title ).then( function ( linkData ) {
-			if ( usePageImages && linkData.imageUrl ) {
-				icon.$element
-					.addClass( 've-ui-mwInternalLinkContextItem-hasImage' )
-					.css( 'background-image', 'url(' + linkData.imageUrl + ')' );
+			if ( usePageImages ) {
+				if ( linkData.imageUrl ) {
+					icon.$element
+						.addClass( 've-ui-mwInternalLinkContextItem-hasImage' )
+						.css( 'background-image', 'url(' + linkData.imageUrl + ')' );
+				} else {
+					icon.setIcon( ve.init.platform.linkCache.constructor.static.getIconForLink( linkData ) );
+				}
 			}
 			if ( usePageDescriptions && linkData.description ) {
 				$description = $( '<span>' )
