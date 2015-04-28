@@ -21,6 +21,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor er i 'beta'. Du kan støde på softwareproblemer, og der er muligvis dele af siden du ikke kan redigere. For at skifte tilbage til kilderedigering uden at miste dine ændringer, skal du åbne rullemenuen ud for \"{{int:visualeditor-toolbar-savedialog}}\", og vælg \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Du bruger en browser, der ikke officielt understøttes af VisualEditor.",
+	"visualeditor-ca-createlocaldescriptionsource": "Tilføj lokal beskrivelse med wikitekst",
 	"visualeditor-ca-createsource": "Opret kilde",
 	"visualeditor-ca-editsource": "Redigér wikikode",
 	"visualeditor-ca-editsource-section": "redigér wikikode",
