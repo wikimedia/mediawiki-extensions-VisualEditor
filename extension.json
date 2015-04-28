@@ -1164,10 +1164,9 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css"
 			],
 			"skinStyles": {
-				"default": [
+				"apex": [
 					"modules/ve-mw/ui/themes/apex/ve.ui.MWLinkTargetInputWidget.css"
-				],
-				"minerva": []
+				]
 			},
 			"dependencies": [
 				"ext.visualEditor.mwcore"

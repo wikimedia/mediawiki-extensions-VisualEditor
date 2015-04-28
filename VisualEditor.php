@@ -1138,10 +1138,9 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css'
 		),
 		'skinStyles' => array(
-			'default' => array(
+			'apex' => array(
 				'modules/ve-mw/ui/themes/apex/ve.ui.MWLinkTargetInputWidget.css'
 			),
-			'minerva' => array(),
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
