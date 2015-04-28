@@ -130,10 +130,10 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 					generator: 'prefixsearch',
 					gpssearch: widget.value,
 					gpsnamespace: 0,
-					gpslimit: 10,
+					gpslimit: 5,
 					prop: 'info|pageprops|pageimages|pageterms',
 					pithumbsize: 80,
-					pilimit: 10,
+					pilimit: 5,
 					ppprop: 'disambiguation'
 				} );
 				promiseAbortObject.abort = req.abort.bind( req ); // todo: ew
@@ -164,54 +164,43 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheDataFromResponse = functio
  * @returns {OO.ui.MenuOptionWidget[]} Menu items
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	var i, len, item, pageExistsExact, pageExists, index, matchingPage, linkData,
+	var i, len, index, pageExists, pageExistsExact, suggestionPage, linkData,
 		items = [],
-		existingPages = [],
-		matchingPages = [],
-		disambigPages = [],
-		redirectPages = [],
+		suggestionPages = [],
 		titleObj = mw.Title.newFromText( this.value ),
 		links = {};
 
 	for ( index in data ) {
-		matchingPage = data[index];
-		links[matchingPage.title] = {
-			missing: false, redirect: false, disambiguation: false,
-			imageUrl: ve.getProp( matchingPage, 'thumbnail', 'source' ),
-			description: ve.getProp( matchingPage, 'terms', 'description' )
+		suggestionPage = data[index];
+		links[suggestionPage.title] = {
+			missing: false,
+			redirect: suggestionPage.redirect !== undefined,
+			disambiguation: ve.getProp( suggestionPage, 'pageprops', 'disambiguation' ) !== undefined,
+			imageUrl: ve.getProp( suggestionPage, 'thumbnail', 'source' ),
+			description: ve.getProp( suggestionPage, 'terms', 'description' )
 		};
-		existingPages.push( matchingPage.title );
-
-		if ( matchingPage.redirect !== undefined ) {
-			redirectPages.push( matchingPage.title );
-			links[matchingPage.title].redirect = true;
-		} else if ( matchingPage.pageprops !== undefined && matchingPage.pageprops.disambiguation !== undefined ) {
-			disambigPages.push( matchingPage.title );
-			links[matchingPage.title].disambiguation = true;
-		} else {
-			matchingPages.push( matchingPage.title );
-		}
+		suggestionPages.push( suggestionPage.title );
 	}
 
 	// If not found, run value through mw.Title to avoid treating a match as a
 	// mismatch where normalisation would make them matching (bug 48476)
-	pageExistsExact = existingPages.indexOf( this.value ) !== -1;
+
+	pageExistsExact = suggestionPages.indexOf( this.value ) !== -1;
 	pageExists = pageExistsExact || (
-		titleObj && existingPages.indexOf( titleObj.getPrefixedText() ) !== -1
+		titleObj && suggestionPages.indexOf( titleObj.getPrefixedText() ) !== -1
 	);
 
 	if ( !pageExists ) {
-		links[this.value] = { missing: true, redirect: false, disambiguation: false };
+		links[this.value] = {
+			missing: true, redirect: false, disambiguation: false,
+			description: ve.msg( 'visualeditor-linkinspector-description-new-page' )
+		};
 	}
 
 	ve.init.platform.linkCache.set( links );
 
 	// External link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( this.value ) ) {
-		items.push( new OO.ui.MenuSectionOptionWidget( {
-			data: 'externalLink',
-			label: ve.msg( 'visualeditor-linkinspector-suggest-external-link' )
-		} ) );
 		items.push( new ve.ui.MWLinkMenuOptionWidget( {
 			data: this.getExternalLinkAnnotationFromUrl( this.value ),
 			classes: [ 've-ui-mwLinkTargetInputWidget-extlink' ],
@@ -220,79 +209,23 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 		} ) );
 	}
 
-	// Internal link
-	if ( !pageExists ) {
-		if ( titleObj ) {
-			items.push( new OO.ui.MenuSectionOptionWidget( {
-				data: 'newPage',
-				label: ve.msg( 'visualeditor-linkinspector-suggest-new-page' )
-			} ) );
-			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
-				data: this.getInternalLinkAnnotationFromTitle( this.value ),
-				pagename: this.value
-			} ) );
-		} else {
-			// If no title object could be created, it means the title is illegal
-			item = new OO.ui.MenuSectionOptionWidget( {
-				data: 'illegalTitle',
-				label: ve.msg( 'visualeditor-linkinspector-illegal-title' )
-			} );
-			item.$element.addClass( 've-ui-mwLinkTargetInputWidget-warning' );
-			items.push( item );
-		}
+	// Internal Link
+	// Offer the exact text as a suggestion if the page exists
+	if ( pageExists && !pageExistsExact ) {
+		suggestionPages.unshift( this.value );
 	}
-
-	// Matching pages
-	if ( matchingPages && matchingPages.length ) {
-		items.push( new OO.ui.MenuSectionOptionWidget( {
-			data: 'matchingPages',
-			label: ve.msg( 'visualeditor-linkinspector-suggest-matching-page', matchingPages.length )
-		} ) );
-		// Offer the exact text as a suggestion if the page exists
-		if ( pageExists && !pageExistsExact ) {
-			matchingPages.unshift( this.value );
-		}
-		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
-			linkData = links[matchingPages[i]] || {};
-			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
-				data: this.getInternalLinkAnnotationFromTitle( matchingPages[i] ),
-				pagename: matchingPages[i],
-				imageUrl: linkData.imageUrl,
-				description: linkData.description
-			} ) );
-		}
+	// Offer the exact text as a new page if the title is valid
+	if ( !pageExists && titleObj ) {
+		suggestionPages.push( this.value );
 	}
-
-	// Disambiguation pages
-	if ( disambigPages.length ) {
-		items.push( new OO.ui.MenuSectionOptionWidget( {
-			data: 'disambigPages',
-			label: ve.msg( 'visualeditor-linkinspector-suggest-disambig-page', disambigPages.length )
+	for ( i = 0, len = suggestionPages.length; i < len; i++ ) {
+		linkData = links[suggestionPages[i]] || {};
+		items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
+			data: this.getInternalLinkAnnotationFromTitle( suggestionPages[i] ),
+			pagename: suggestionPages[i],
+			imageUrl: linkData.imageUrl,
+			description: linkData.description
 		} ) );
-		for ( i = 0, len = disambigPages.length; i < len; i++ ) {
-			linkData = links[disambigPages[i]] || {};
-			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
-				data: this.getInternalLinkAnnotationFromTitle( disambigPages[i] ),
-				pagename: disambigPages[i],
-				imageUrl: linkData.imageUrl,
-				description: linkData.description
-			} ) );
-		}
-	}
-
-	// Redirect pages
-	if ( redirectPages.length ) {
-		items.push( new OO.ui.MenuSectionOptionWidget( {
-			data: 'redirectPages',
-			label: ve.msg( 'visualeditor-linkinspector-suggest-redirect-page', redirectPages.length )
-		} ) );
-		for ( i = 0, len = redirectPages.length; i < len; i++ ) {
-			items.push( new ve.ui.MWInternalLinkMenuOptionWidget( {
-				data: this.getInternalLinkAnnotationFromTitle( redirectPages[i] ),
-				label: redirectPages[i]
-				// TODO: Add description based on redirect target
-			} ) );
-		}
 	}
 
 	return items;
