@@ -50,7 +50,7 @@ ve.ui.MWLanguagesPage.prototype.setOutlineItem = function ( outlineItem ) {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'language' )
+			.setIcon( 'textLanguage' )
 			.setLabel( ve.msg( 'visualeditor-dialog-meta-languages-section' ) );
 	}
 };
