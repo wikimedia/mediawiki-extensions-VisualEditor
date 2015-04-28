@@ -181,6 +181,7 @@ $wgResourceModules += array(
 	),
 
 	'ext.visualEditor.viewPageTarget.noscript' => $wgVisualEditorResourceTemplate + array(
+		'position' => 'top',
 		'styles' => 'modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.css',
 	),
 

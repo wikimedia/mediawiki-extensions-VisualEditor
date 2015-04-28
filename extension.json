@@ -261,6 +261,7 @@
 			"position": "top"
 		},
 		"ext.visualEditor.viewPageTarget.noscript": {
+			"position": "top",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.css"
 		},
 		"ext.visualEditor.targetLoader": {
