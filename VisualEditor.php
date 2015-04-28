@@ -1134,6 +1134,7 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/contextitems/ve.ui.MWInternalLinkContextItem.js',
 		),
 		'styles' => array(
+			'modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css'
 		),
