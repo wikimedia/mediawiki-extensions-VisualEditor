@@ -286,7 +286,6 @@ $wgResourceModules += array(
 		'dependencies' => array(
 			'oojs',
 			'oojs-ui',
-			'oojs-ui.styles.icons-editing-core',
 			'unicodejs',
 			'ext.visualEditor.ve',
 		),
@@ -1558,6 +1557,8 @@ $wgResourceModules += array(
 			'oojs-ui.styles.icons-editing-core',
 			'oojs-ui.styles.icons-editing-styling',
 			'oojs-ui.styles.icons-editing-list',
+			'oojs-ui.styles.indicators',
+			'oojs-ui.styles.textures',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
