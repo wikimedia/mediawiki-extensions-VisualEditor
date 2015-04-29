@@ -1548,7 +1548,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/ve.ui.Icons.css',
 		),
 		'dependencies' => array(
-			'oojs-ui.styles.icons-content',
 			'oojs-ui.styles.icons-editing-advanced',
 			'oojs-ui.styles.icons-editing-core',
 			'oojs-ui.styles.icons-editing-styling',
