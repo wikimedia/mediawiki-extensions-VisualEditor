@@ -242,6 +242,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Sub-heading 4",
 	"visualeditor-languages-tool": "Languages",
 	"visualeditor-linkinspector-description-new-page": "Page does not exist yet",
+	"visualeditor-linkinspector-description-redirect": "redirect to $1",
 	"visualeditor-linkinspector-illegal-title": "Invalid page title",
 	"visualeditor-linknodeinspector-add-label": "Add label",
 	"visualeditor-linknodeinspector-title": "Simple link",

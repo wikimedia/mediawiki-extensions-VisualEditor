@@ -193,6 +193,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 					prop: 'info|pageprops|pageimages|pageterms',
 					pithumbsize: 80,
 					pilimit: 5,
+					redirects: '',
 					wbptterms: 'description',
 					ppprop: 'disambiguation'
 				} );
@@ -214,7 +215,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
  * @param {Mixed} data Response from server
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
-	return data.query && data.query.pages || {};
+	return data.query || {};
 };
 
 /**
@@ -241,22 +242,42 @@ ve.ui.MWLinkTargetInputWidget.prototype.onLookupInputChange = function () {
  * @returns {OO.ui.MenuOptionWidget[]} Menu items
  */
 ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	var i, len, index, pageExists, pageExistsExact, suggestionPage, linkData,
+	var i, len, index, pageExists, pageExistsExact, suggestionPage, linkData, redirect, redirects,
 		items = [],
 		suggestionPages = [],
 		titleObj = mw.Title.newFromText( this.value ),
+		redirectsTo = {},
 		links = {};
 
-	for ( index in data ) {
-		suggestionPage = data[index];
+	if ( data.redirects ) {
+		for ( i = 0, len = data.redirects.length; i < len; i++ ) {
+			redirect = data.redirects[i];
+			redirectsTo[redirect.to] = redirectsTo[redirect.to] || [];
+			redirectsTo[redirect.to].push( redirect.from );
+		}
+	}
+
+	for ( index in data.pages ) {
+		suggestionPage = data.pages[index];
 		links[suggestionPage.title] = {
 			missing: false,
-			redirect: suggestionPage.redirect !== undefined,
+			redirect: false,
 			disambiguation: ve.getProp( suggestionPage, 'pageprops', 'disambiguation' ) !== undefined,
 			imageUrl: ve.getProp( suggestionPage, 'thumbnail', 'source' ),
 			description: ve.getProp( suggestionPage, 'terms', 'description' )
 		};
 		suggestionPages.push( suggestionPage.title );
+
+		redirects = redirectsTo[suggestionPage.title] || [];
+		for ( i = 0, len = redirects.length; i < len; i++ ) {
+			links[redirects[i]] = {
+				missing: false,
+				redirect: true,
+				disambiguation: false,
+				description: ve.msg( 'visualeditor-linkinspector-description-redirect', suggestionPage.title )
+			};
+			suggestionPages.push( redirects[i] );
+		}
 	}
 
 	// If not found, run value through mw.Title to avoid treating a match as a
