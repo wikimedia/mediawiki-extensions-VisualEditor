@@ -1624,9 +1624,6 @@ $wgVisualEditorSerializationCacheTimeout = 3600;
 // to something like 'https://rest.wikimedia.org/en.wikipedia.org/v1/page/html/' including the
 // trailing slash.
 //
-// VisualEditor will attempt to pre-fetch DNS for RESTBase by requesting '/_preconnect' from the
-// host it derives from this URL.
-//
 // If this is set, the page HTML will be requested from RESTbase. If this is not set, the page HTML
 // will be requested from the API, which will send an HTTP request to Parsoid or to RESTbase
 // if available.
