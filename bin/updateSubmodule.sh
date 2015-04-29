@@ -29,7 +29,7 @@ cd lib/ve
 git fetch origin
 
 # Figure out what to set the submodule to
-if [ "x$1" != "x" ]
+if [ -n "${1:-}" ]
 then
 	TARGET="$1"
 	TARGETDESC="$1"
