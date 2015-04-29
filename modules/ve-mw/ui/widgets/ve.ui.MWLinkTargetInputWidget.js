@@ -193,6 +193,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupRequest = function () {
 					prop: 'info|pageprops|pageimages|pageterms',
 					pithumbsize: 80,
 					pilimit: 5,
+					wbptterms: 'description',
 					ppprop: 'disambiguation'
 				} );
 				promiseAbortObject.abort = req.abort.bind( req ); // todo: ew

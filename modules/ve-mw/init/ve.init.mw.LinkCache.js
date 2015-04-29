@@ -83,6 +83,7 @@
 			prop: 'info|pageprops|pageimages|pageterms',
 			pithumbsize: 80,
 			pilimit: 10,
+			wbptterms: 'description',
 			ppprop: 'disambiguation',
 			titles: subqueue.join( '|' )
 		} );
