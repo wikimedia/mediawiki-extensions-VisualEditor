@@ -105,8 +105,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Meħtieġa  {{PLURAL:$1| parametru obligatorju nieqes|parametri obligatorji nieqsa}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Żgur li tixtieq tkompli mingħajr ma tagħti l- {{PLURAL:$2|parametru|parametri}} $1?",
 	"visualeditor-languages-tool": "Lingwi",
-	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Paġna li taqbel|Paġni li jaqblu}}",
-	"visualeditor-linkinspector-suggest-new-page": "Paġna ġdida",
 	"visualeditor-mweditmodesource-title": "Aqleb għall-editjar tas-sors",
 	"visualeditor-mweditmodesource-warning": "Ħa taqleb għall-editjar tas-sors. Il-bidliet li għamilt jistgħu jinżammu, imma ma tkunx tista' taqleb lura għall-VisualEditor mingħajr ma' tissejvja l-paġna jew terġa' ttellagħha.\nGħadek trid tkompli?",
 	"visualeditor-version-label": "Verżjoni"

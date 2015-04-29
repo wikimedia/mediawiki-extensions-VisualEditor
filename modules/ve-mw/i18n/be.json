@@ -26,8 +26,6 @@
 	"visualeditor-editconflict": "Вашы змены не атрымалася запісаць, таму што адбыўся канфлікт правак. Жадаеце вырашыць канфлікт уручную?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|паведамленне|паведамленні|паведамленняў}}",
 	"visualeditor-editsummary": "Апішыце, што вы змянілі",
-	"visualeditor-linkinspector-suggest-external-link": "Вонкавая спасылка",
-	"visualeditor-linkinspector-suggest-new-page": "Новая старонка",
 	"visualeditor-linknodeinspector-add-label": "Дадаць пазнаку",
 	"visualeditor-loadwarning": "Памылка пры загрузцы дадзеных: $1. Паўтарыць спробу?",
 	"visualeditor-mainnamespacepagelink": "Project:Асноўная прастора",
