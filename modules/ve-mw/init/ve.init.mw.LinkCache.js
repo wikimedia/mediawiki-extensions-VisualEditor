@@ -44,6 +44,19 @@
 		return 'page-existing';
 	};
 
+	/**
+	 * @inheritdoc
+	 */
+	ve.init.mw.LinkCache.static.processPage = function ( page ) {
+		return {
+			missing: page.missing !== undefined,
+			redirect: page.redirect !== undefined,
+			disambiguation: ve.getProp( page, 'pageprops', 'disambiguation' ) !== undefined,
+			imageUrl: ve.getProp( page, 'thumbnail', 'source' ),
+			description: ve.getProp( page, 'terms', 'description' )
+		};
+	};
+
 	/* Methods */
 
 	/**
@@ -88,7 +101,7 @@
 	ve.init.mw.LinkCache.prototype.get = function ( title ) {
 		var data = {};
 		if ( this.assumeExistence ) {
-			data[this.normalizeTitle( title )] = { missing: false };
+			data[this.constructor.static.normalizeTitle( title )] = { missing: false };
 			this.set( data );
 		}
 
@@ -112,17 +125,4 @@
 		} );
 	};
 
-	/**
-	 * @inheritdoc
-	 */
-	ve.init.mw.LinkCache.prototype.processPage = function ( page ) {
-		return {
-			missing: page.missing !== undefined,
-			redirect: page.redirect !== undefined,
-			// Disambiguator extension
-			disambiguation: page.pageprops && page.pageprops.disambiguation !== undefined,
-			imageUrl: ve.getProp( page, 'thumbnail', 'source' ),
-			description: ve.getProp( page, 'terms', 'description' )
-		};
-	};
 }() );
