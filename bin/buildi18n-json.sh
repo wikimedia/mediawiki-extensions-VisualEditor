@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Requires VisualEditor.i18n.php to still contain all messages
 # To reset it to that state, you can run:

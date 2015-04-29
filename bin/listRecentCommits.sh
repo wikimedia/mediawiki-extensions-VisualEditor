@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -eu
 
 # This script generates a structured git log of commits to the VisualEditor-MediaWiki repository,
 # and walks the submodule updates to the lib/ve submodule and the OOjs and OOjs UI pull-through
@@ -11,9 +11,9 @@
 cd $(cd $(dirname $0)/..; pwd)
 
 # Ensure input is correct
-if [ "x$1" = "x" ]
+if [ -z "${1:-}" ]
 then
-	echo >&2 "Usage: listRecentCommits.sh startBranch"
+	echo >&2 "Usage: listRecentCommits.sh <startBranch>"
 	exit 1
 fi
 STARTHASH=`git rev-parse $1`

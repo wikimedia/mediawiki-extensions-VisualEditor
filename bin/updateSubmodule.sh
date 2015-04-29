@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -eu
 
 # This script generates a commit that updates the lib/ve submodule
 # ./bin/updateSubmodule.sh        updates to master
