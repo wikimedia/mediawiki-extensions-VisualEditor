@@ -28,8 +28,8 @@ ve.ce.MWReferencesListNode = function VeCeMWReferencesListNode( model, config ) 
 	this.listNode = null;
 
 	// DOM changes
-	this.$element.addClass( 've-ce-mwReferencesListNode references' );
-	this.$reflist = $( '<ol class="references"></ol>' );
+	this.$element.addClass( 've-ce-mwReferencesListNode' );
+	this.$reflist = $( '<ol class="mw-references"></ol>' );
 	this.$refmsg = $( '<p>' )
 		.addClass( 've-ce-mwReferencesListNode-muted' );
 
@@ -143,7 +143,8 @@ ve.ce.MWReferencesListNode.prototype.onListNodeUpdate = function () {
  * Update the references list.
  */
 ve.ce.MWReferencesListNode.prototype.update = function () {
-	var i, j, n, iLen, jLen, index, firstNode, key, keyedNodes, $li, modelNode, viewNode,
+	var i, j, n, iLen, jLen, index, firstNode, key, keyedNodes, modelNode, viewNode,
+		$li, $refSpan, $link,
 		internalList = this.model.getDocument().internalList,
 		refGroup = this.model.getAttribute( 'refGroup' ),
 		listGroup = this.model.getAttribute( 'listGroup' ),
@@ -151,6 +152,12 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 
 	this.$reflist.detach().empty();
 	this.$refmsg.detach();
+
+	if ( refGroup !== '' ) {
+		this.$reflist.attr( 'data-mw-group', refGroup );
+	} else {
+		this.$reflist.removeAttr( 'data-mw-group' );
+	}
 
 	if ( !nodes || !nodes.indexOrder.length ) {
 		if ( refGroup !== '' ) {
@@ -191,13 +198,26 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 			$li = $( '<li>' );
 
 			if ( keyedNodes.length > 1 ) {
+				$refSpan = $( '<span rel="mw:referencedBy">' );
 				for ( j = 0, jLen = keyedNodes.length; j < jLen; j++ ) {
-					$li.append(
-						$( '<sup>' ).append(
-							$( '<a>' ).text( n + '.' + j )
-						)
-					).append( ' ' );
+					$link = $( '<a>' ).append(
+						$( '<span class="mw-linkback-text">' )
+							.text( ( j + 1 ) + ' ' )
+					);
+					if ( refGroup !== '' ) {
+						$link.attr( 'data-mw-group', refGroup );
+					}
+					$refSpan.append( $link );
 				}
+				$li.append( $refSpan );
+			} else {
+				$link = $( '<a rel="mw:referencedBy">' ).append(
+					$( '<span class="mw-linkback-text">' ).text( '↑ ' )
+				);
+				if ( refGroup !== '' ) {
+					$link.attr( 'data-mw-group', refGroup );
+				}
+				$li.append( $link );
 			}
 
 			// Generate reference HTML from first item in key

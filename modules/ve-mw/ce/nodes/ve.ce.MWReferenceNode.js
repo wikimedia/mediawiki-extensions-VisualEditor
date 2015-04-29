@@ -25,7 +25,13 @@ ve.ce.MWReferenceNode = function VeCeMWReferenceNode( model, config ) {
 
 	// DOM changes
 	this.$link = $( '<a>' ).attr( 'href', '#' );
-	this.$element.addClass( 've-ce-mwReferenceNode reference' ).append( this.$link );
+	this.$element.addClass( 've-ce-mwReferenceNode mw-ref' ).append( this.$link )
+		// In case we have received a version with old-style Cite HTML, remove the
+		// old reference class
+		.removeClass( 'reference' );
+	// Add a backwards-compatible text for browsers that don't support counters
+	this.$text = $( '<span>' ).addClass( 'mw-reflink-text' );
+	this.$link.append( this.$text );
 
 	this.index = '';
 	this.internalList = this.model.getDocument().internalList;
@@ -96,7 +102,14 @@ ve.ce.MWReferenceNode.prototype.onInternalListUpdate = function ( groupsChanged 
  * @method
  */
 ve.ce.MWReferenceNode.prototype.update = function () {
-	this.$link.text( this.model.getIndexLabel() );
+	var group = this.model.getGroup();
+	this.$text.text( this.model.getIndexLabel() );
+	this.$link.css( 'counterReset', 'mw-Ref ' + this.model.getIndex() );
+	if ( group ) {
+		this.$link.attr( 'data-mw-group', group );
+	} else {
+		this.$link.removeAttr( 'data-mw-group' );
+	}
 };
 
 /** */

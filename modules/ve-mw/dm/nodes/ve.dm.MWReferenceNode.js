@@ -244,6 +244,31 @@ ve.dm.MWReferenceNode.static.remapInternalListKeys = function ( dataElement, int
 };
 
 /**
+ * Gets the index for the reference
+ * @static
+ * @param {Object} dataElement Element data
+ * @param {ve.dm.InternalList} internalList Internal list
+ * @return {Number} Index
+ */
+ve.dm.MWReferenceNode.static.getIndex = function ( dataElement, internalList ) {
+	var listIndex = dataElement.attributes.listIndex,
+		listGroup = dataElement.attributes.listGroup,
+		position = internalList.getIndexPosition( listGroup, listIndex );
+
+	return position + 1;
+};
+
+/**
+ * Gets the group for the reference
+ * @static
+ * @param {Object} dataElement Element data
+ * @return {string} Group
+ */
+ve.dm.MWReferenceNode.static.getGroup = function ( dataElement ) {
+	return dataElement.attributes.refGroup;
+};
+
+/**
  * Gets the index label for the reference
  * @static
  * @param {Object} dataElement Element data
@@ -251,12 +276,10 @@ ve.dm.MWReferenceNode.static.remapInternalListKeys = function ( dataElement, int
  * @return {string} Reference label
  */
 ve.dm.MWReferenceNode.static.getIndexLabel = function ( dataElement, internalList ) {
-	var listIndex = dataElement.attributes.listIndex,
-		listGroup = dataElement.attributes.listGroup,
-		refGroup = dataElement.attributes.refGroup,
-		position = internalList.getIndexPosition( listGroup, listIndex );
+	var refGroup = dataElement.attributes.refGroup,
+		index = ve.dm.MWReferenceNode.static.getIndex( dataElement, internalList );
 
-	return '[' + ( refGroup ? refGroup + ' ' : '' ) + ( position + 1 ) + ']';
+	return '[' + ( refGroup ? refGroup + ' ' : '' ) + index + ']';
 };
 
 /* Methods */
@@ -278,6 +301,24 @@ ve.dm.MWReferenceNode.prototype.isInspectable = function () {
  */
 ve.dm.MWReferenceNode.prototype.getInternalItem = function () {
 	return this.getDocument().getInternalList().getItemNode( this.getAttribute( 'listIndex' ) );
+};
+
+/**
+ * Gets the index for the reference
+ *
+ * @return {Number} Index
+ */
+ve.dm.MWReferenceNode.prototype.getIndex = function () {
+	return this.constructor.static.getIndex( this.element, this.getDocument().getInternalList() );
+};
+
+/**
+ * Gets the group for the reference
+ *
+ * @return {string} Group
+ */
+ve.dm.MWReferenceNode.prototype.getGroup = function () {
+	return this.constructor.static.getGroup( this.element );
 };
 
 /**
