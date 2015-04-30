@@ -4,48 +4,46 @@
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function () {
-	/**
-	 * Get information about images.
-	 * @class
-	 * @extends ve.init.mw.ApiResponseCache
-	 * @constructor
-	 */
-	ve.init.mw.ImageInfoCache = function VeInitMwImageInfoCache() {
-		ve.init.mw.ImageInfoCache.super.call( this );
-	};
 
-	/* Inheritance */
+/**
+ * Get information about images.
+ * @class
+ * @extends ve.init.mw.ApiResponseCache
+ * @constructor
+ */
+ve.init.mw.ImageInfoCache = function VeInitMwImageInfoCache() {
+	ve.init.mw.ImageInfoCache.super.call( this );
+};
 
-	OO.inheritClass( ve.init.mw.ImageInfoCache, ve.init.mw.ApiResponseCache );
+/* Inheritance */
 
-	/* Static methods */
+OO.inheritClass( ve.init.mw.ImageInfoCache, ve.init.mw.ApiResponseCache );
 
-	/**
-	 * @inheritdoc
-	 */
-	ve.init.mw.ImageInfoCache.static.processPage = function ( page ) {
-		if ( page.imageinfo ) {
-			return page.imageinfo[0];
-		}
-	};
+/* Static methods */
 
-	/* Methods */
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ImageInfoCache.static.processPage = function ( page ) {
+	if ( page.imageinfo ) {
+		return page.imageinfo[0];
+	}
+};
 
-	/**
-	 * @inheritdoc
-	 */
-	ve.init.mw.ImageInfoCache.prototype.getRequestPromise = function ( subqueue ) {
-		return new mw.Api().get(
-			{
-				action: 'query',
-				prop: 'imageinfo',
-				indexpageids: '1',
-				iiprop: 'size|mediatype',
-				titles: subqueue.join( '|' )
-			},
-			{ type: 'POST' }
-		);
-	};
+/* Methods */
 
-}() );
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ImageInfoCache.prototype.getRequestPromise = function ( subqueue ) {
+	return new mw.Api().get(
+		{
+			action: 'query',
+			prop: 'imageinfo',
+			indexpageids: '1',
+			iiprop: 'size|mediatype',
+			titles: subqueue.join( '|' )
+		},
+		{ type: 'POST' }
+	);
+};
