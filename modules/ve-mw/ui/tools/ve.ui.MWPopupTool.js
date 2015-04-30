@@ -6,13 +6,38 @@
  */
 
 /**
+ * MediaWiki UserInterface popup tool.
+ *
+ * @class
+ * @abstract
+ * @extends OO.ui.PopupTool
+ * @constructor
+ * @param {String} title Title
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config]
+ */
+ve.ui.MWPopupTool = function VeUiMWPopupTool( title, toolGroup, config ) {
+	// Configuration initialization
+	config = ve.extendObject( { popup: { head: true, label: title } }, config );
+
+	// Parent constructor
+	ve.ui.MWPopupTool.super.call( this, toolGroup, config );
+
+	this.$element.addClass( 've-ui-mwPopupTool' );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MWPopupTool, OO.ui.PopupTool );
+
+/**
  * MediaWiki UserInterface notices popup tool.
  *
  * @class
- * @extends OO.ui.PopupTool
+ * @extends ve.ui.MWPopupTool
  * @constructor
- * @param {OO.ui.ToolGroup} toolGroup Tool group. Must belong to a ve.ui.TargetToolbar
- * @param {Object} [config] Configuration options
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config]
  */
 ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) {
 	var tool = this,
@@ -20,11 +45,8 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 		count = items.length,
 		title = ve.msg( 'visualeditor-editnotices-tool', count );
 
-	// Configuration initialization
-	config = ve.extendObject( true, { popup: { head: true, label: title } }, config );
-
 	// Parent constructor
-	OO.ui.PopupTool.call( this, toolGroup, config );
+	ve.ui.MWNoticesPopupTool.super.call( this, title, toolGroup, config );
 
 	// Properties
 	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
@@ -49,7 +71,7 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWNoticesPopupTool, OO.ui.PopupTool );
+OO.inheritClass( ve.ui.MWNoticesPopupTool, ve.ui.MWPopupTool );
 
 /* Static Properties */
 
@@ -81,19 +103,14 @@ ve.ui.toolFactory.register( ve.ui.MWNoticesPopupTool );
  * MediaWiki UserInterface help popup tool.
  *
  * @class
- * @extends OO.ui.PopupTool
+ * @extends ve.ui.MWPopupTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
-	var title = ve.msg( 'visualeditor-help-tool' );
-
-	// Configuration initialization
-	config = ve.extendObject( true, { popup: { head: true, label: title } }, config );
-
 	// Parent constructor
-	OO.ui.PopupTool.call( this, toolGroup, config );
+	ve.ui.MWHelpPopupTool.super.call( this, ve.msg( 'visualeditor-help-tool' ), toolGroup, config );
 
 	// Properties
 	this.$items = $( '<div>' );
@@ -164,7 +181,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWHelpPopupTool, OO.ui.PopupTool );
+OO.inheritClass( ve.ui.MWHelpPopupTool, ve.ui.MWPopupTool );
 
 /* Static Properties */
 
