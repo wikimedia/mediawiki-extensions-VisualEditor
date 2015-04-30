@@ -28,8 +28,8 @@
 	font-size: 0.8em;
 }
 
-.ve-init-target .ve-ce-surface.mw-body-content,
-.ve-ui-overlay-global .ve-ce-surface.mw-body-content {
+.ve-init-target .mw-body-content,
+.ve-ui-overlay-global .mw-body-content {
 	/* Match skin's font-size for the surface content */
 	font-size: 1.09375em; /* 0.875/0.8 */
 }
