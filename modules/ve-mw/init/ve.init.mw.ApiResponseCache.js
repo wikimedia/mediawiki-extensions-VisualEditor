@@ -38,16 +38,34 @@
 
 	OO.mixinClass( ve.init.mw.ApiResponseCache, OO.EventEmitter );
 
-	/* Methods */
+	/* Static methods */
 
-	// TODO should reuse ve.dm.MWInternalLinkAnnotation#getLookupTitle once factored out
-	ve.init.mw.ApiResponseCache.prototype.normalizeTitle = function ( title ) {
+	/**
+	 * Process each page in the response of an API request
+	 *
+	 * @abstract
+	 * @static
+	 * @method
+	 * @param {Object} page The page object
+	 * @return {Object|undefined} Any relevant info that we want to cache and return.
+	 */
+	ve.init.mw.ApiResponseCache.static.processPage = null;
+
+	/**
+	 * Normalize the title of the response
+	 *
+	 * @param {string} title Title
+	 * @return {string} Normalized title
+	 */
+	ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
 		var titleObj = mw.Title.newFromText( title );
 		if ( !titleObj ) {
 			return title;
 		}
 		return titleObj.getPrefixedText();
 	};
+
+	/* Methods */
 
 	/**
 	 * Look up data about a title. If the data about this title is already in the cache, this
@@ -63,7 +81,7 @@
 			// other points in this file.
 			return $.Deferred().reject().promise();
 		}
-		title = this.normalizeTitle( title );
+		title = this.constructor.static.normalizeTitle( title );
 		if ( !hasOwn.call( this.deferreds, title ) ) {
 			this.deferreds[title] = $.Deferred();
 			this.queue.push( title );
@@ -124,28 +142,19 @@
 	ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
 
 	/**
-	 * Process each page in the response of an API request
-	 *
-	 * @abstract
-	 * @method
-	 * @param {Object} page The page object
-	 * @return {Object|undefined} Any relevant info that we want to cache and return.
-	 */
-	ve.init.mw.ApiResponseCache.prototype.processPage = null;
-
-	/**
 	 * Perform any scheduled API requests.
 	 *
 	 * @private
 	 * @fires add
 	 */
 	ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
-		var subqueue, queue, batchQueue = this;
+		var subqueue, queue,
+			cache = this;
 
 		function rejectSubqueue( rejectQueue ) {
 			var i, len;
 			for ( i = 0, len = rejectQueue.length; i < len; i++ ) {
-				batchQueue.deferreds[rejectQueue[i]].reject();
+				cache.deferreds[rejectQueue[i]].reject();
 			}
 		}
 
@@ -157,19 +166,19 @@
 			if ( pages ) {
 				for ( pageid in pages ) {
 					page = pages[pageid];
-					processedPage = batchQueue.processPage( page );
+					processedPage = cache.constructor.static.processPage( page );
 					if ( processedPage !== undefined ) {
 						processed[page.title] = processedPage;
 					}
 				}
-				batchQueue.set( processed );
+				cache.set( processed );
 			}
 		}
 
 		queue = this.queue;
 		this.queue = [];
 		while ( queue.length ) {
-			subqueue = queue.splice( 0, 50 ).map( this.normalizeTitle );
+			subqueue = queue.splice( 0, 50 ).map( this.constructor.static.normalizeTitle );
 			this.getRequestPromise( subqueue )
 				.then( processResult )
 

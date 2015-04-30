@@ -15,7 +15,22 @@
 		ve.init.mw.ImageInfoCache.super.call( this );
 	};
 
+	/* Inheritance */
+
 	OO.inheritClass( ve.init.mw.ImageInfoCache, ve.init.mw.ApiResponseCache );
+
+	/* Static methods */
+
+	/**
+	 * @inheritdoc
+	 */
+	ve.init.mw.ImageInfoCache.static.processPage = function ( page ) {
+		if ( page.imageinfo ) {
+			return page.imageinfo[0];
+		}
+	};
+
+	/* Methods */
 
 	/**
 	 * @inheritdoc
@@ -33,12 +48,4 @@
 		);
 	};
 
-	/**
-	 * @inheritdoc
-	 */
-	ve.init.mw.ImageInfoCache.prototype.processPage = function ( page ) {
-		if ( page.imageinfo ) {
-			return page.imageinfo[0];
-		}
-	};
 }() );

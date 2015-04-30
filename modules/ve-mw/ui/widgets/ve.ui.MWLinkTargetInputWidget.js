@@ -259,13 +259,7 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 
 	for ( index in data.pages ) {
 		suggestionPage = data.pages[index];
-		links[suggestionPage.title] = {
-			missing: false,
-			redirect: false,
-			disambiguation: ve.getProp( suggestionPage, 'pageprops', 'disambiguation' ) !== undefined,
-			imageUrl: ve.getProp( suggestionPage, 'thumbnail', 'source' ),
-			description: ve.getProp( suggestionPage, 'terms', 'description' )
-		};
+		links[suggestionPage.title] = ve.init.platform.linkCache.constructor.static.processPage( suggestionPage );
 		suggestionPages.push( suggestionPage.title );
 
 		redirects = redirectsTo[suggestionPage.title] || [];
