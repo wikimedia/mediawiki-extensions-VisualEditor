@@ -35,7 +35,8 @@
 }
 
 .ve-init-mw-viewPageTarget-toolbar {
-	margin: -1em -1em 1em -1em;
+	/* 1/0.8 */
+	margin: -1.25em -1.25em 1.25em -1.25em;
 	position: relative;
 	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
@@ -48,8 +49,9 @@
 }
 
 .ve-init-target > .ve-ui-debugBar {
-	padding: 1em;
-	margin: 1em -1em -1em -1em;
+	/* 1/0.8 */
+	padding: 1.25em;
+	margin: 1.25em -1.25em -1.25em -1.25em;
 }
 
 .ve-ui-debugBar {
@@ -96,12 +98,14 @@
 	}
 
 	.ve-init-mw-viewPageTarget-toolbar {
-		margin: -1.25em -1.5em 1.5em -1.5em;
+		/* 1.25/0.8, 1.5/0.8 */
+		margin: -1.5625em -1.875em 1.875em -1.875em;
 	}
 
 	.ve-init-target > .ve-ui-debugBar {
-		padding: 1.5em;
-		margin: 1em -1.5em -1.5em -1.5em;
+		/* 1/0.8, 1.5/0.8 */
+		padding: 1.875em;
+		margin: 1.25em -1.875em -1.875em -1.875em;
 	}
 }
 

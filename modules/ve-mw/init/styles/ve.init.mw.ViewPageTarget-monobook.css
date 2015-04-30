@@ -23,7 +23,8 @@
 }
 
 .ve-init-mw-viewPageTarget-toolbar {
-	margin: -0.6em -0.8em 1em -0.8em;
+	/* 0.6/0.8, 0.8/0.8, 1/0.6 */
+	margin: -0.75em -1em 1.25em -1em;
 }
 
 .ve-init-target > .ve-ui-debugBar {
@@ -35,8 +36,9 @@
 }
 
 .ve-init-target > .ve-ui-debugBar {
-	padding: 0.8em;
-	margin: 0.8em -0.8em -0.8em -0.8em;
+	/* 0.8/0.8 */
+	padding: 1em;
+	margin: 1em -1em -1em -1em;
 }
 
 .ve-ui-overlay-global {
