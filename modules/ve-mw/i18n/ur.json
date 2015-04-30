@@ -4,7 +4,8 @@
 			"Noor2020",
 			"පසිඳු කාවින්ද",
 			"عثمان خان شاہ",
-			"Syedalinaqinaqvi"
+			"Syedalinaqinaqvi",
+			"عرفان ارشد"
 		]
 	},
 	"tooltip-ca-ve-edit": "ویژول ایڈیٹر کے ذریعے اس صفحے کو ترمیم کریں",
@@ -12,6 +13,6 @@
 	"visualeditor-ca-createsource": "مسودہ بنائے",
 	"visualeditor-ca-editsource": "مسودے میں ترمیم کریں",
 	"visualeditor-ca-editsource-section": "مسودے میں ترمیم کریں",
-	"visualeditor-descriptionpagelink": "منصوبہ:ویژول ایڈیٹر",
+	"visualeditor-descriptionpagelink": "Project:ویژوئل ایڈیٹر",
 	"visualeditor-serializeerror": "نقص ہے ڈیٹا اثقال کرنے میں :  $1 ۔"
 }
