@@ -5,16 +5,28 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-overlay-global {
+	/* Enforce different font-size for all UI elements of VisualEditor */
+	font-size: 1.28em; /* 0.8em / x-small */
+}
+
+.ve-init-target {
+	/* Enforce different font-size for all UI elements of VisualEditor. The difference is tiny, but
+	   enough to make the icon containers 23.813px rather than 24px and thus the icons blurry */
+	font-size: 1.00787401575em; /* 0.8em / x-small / 127% */
+}
+
+.ve-init-target .ve-ce-surface.mw-body-content,
+.ve-ui-overlay-global .ve-ce-surface.mw-body-content {
+	/* Match skin's font-size for the surface content */
+	font-size: 0.992187499998em; /* 1/1.00787401575 */
+}
+
 .ve-init-mw-viewPageTarget-toolbar {
 	margin: -0.6em -0.8em 1em -0.8em;
-	/* Correct for Monobook's x-small font on the root toolbar */
-	font-size: 1.25em;
-	line-height: 1.5em;
 }
 
 .ve-init-target > .ve-ui-debugBar {
-	/* Correct for Monobook's x-small font */
-	font-size: 1.25em;
 	border-top: 1px solid #ccc;
 }
 
@@ -25,17 +37,6 @@
 .ve-init-target > .ve-ui-debugBar {
 	padding: 0.8em;
 	margin: 0.8em -0.8em -0.8em -0.8em;
-}
-
-.ve-ui-overlay {
-	/* Mimic #globalWrapper */
-	font-size: 127%;
-}
-
-.ve-ui-overlay-global,
-.ve-init-mw-viewPageTarget-windowManager-welcome {
-	/* Mimic #globalWrapper + Correct for Monobook's x-small font on the root overlay */
-	font-size: 1.5875em;
 }
 
 .ve-ui-overlay-global {
