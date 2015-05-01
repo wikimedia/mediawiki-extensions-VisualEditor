@@ -17,7 +17,8 @@
 			"PeppeAeco",
 			"Lucas2",
 			"Nemo bis",
-			"Fringio"
+			"Fringio",
+			"Martinligabue"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -236,12 +237,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Sottotitolo 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sottotitolo 4",
 	"visualeditor-languages-tool": "Lingue",
+	"visualeditor-linkinspector-description-new-page": "Questa pagina non esiste ancora.",
 	"visualeditor-linkinspector-illegal-title": "Titolo di pagina non valido",
-	"visualeditor-linkinspector-suggest-disambig-page": "{{PLURAL:$1|Pagina|Pagine}} di disambiguazione",
-	"visualeditor-linkinspector-suggest-external-link": "Collegamento esterno",
-	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Pagina corrispondente|Pagine corrispondenti}}",
-	"visualeditor-linkinspector-suggest-new-page": "Nuova pagina",
-	"visualeditor-linkinspector-suggest-redirect-page": "{{PLURAL:$1|Pagina|Pagine}} di reindirizzamento",
 	"visualeditor-linknodeinspector-add-label": "Aggiungi etichetta",
 	"visualeditor-linknodeinspector-title": "Collegamento semplice",
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
@@ -249,7 +246,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:Namespace principale",
 	"visualeditor-media-input-placeholder": "Ricerca file multimediali",
 	"visualeditor-meta-tool": "Opzioni",
-	"visualeditor-mwalienextensioninspector-title": "Estensione di MediaWiki",
 	"visualeditor-mweditmodesource-title": "Passare a \"{{int:visualeditor-ca-editsource}}\"?",
 	"visualeditor-mweditmodesource-tool": "Passa a \"{{int:visualeditor-ca-editsource}}\"",
 	"visualeditor-mweditmodesource-warning": "Stai per passare a \"{{int:visualeditor-ca-editsource}}\".\nEventuali modifiche apportate a questo documento potranno essere mantenute, ma non potrai ritornare a VisualEditor senza salvare o ricaricare la pagina.\nVuoi continuare?",
