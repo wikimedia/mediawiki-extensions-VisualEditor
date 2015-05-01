@@ -15,7 +15,8 @@
 	part of it instead of its parent, thus making it treat the area as part
 	of content editable.
 	*/
-	margin: 0.8em -1em 0 -1em;
+	/* 0.8/0.8, 1/0.8 */
+	margin: 1em -1.25em 0 -1.25em;
 }
 
 .ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
@@ -90,7 +91,8 @@
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and (min-width: 982px) {
 	.ve-init-mw-viewPageTarget-surface {
-		margin: 0.8em -1.5em 0 -1.5em;
+		/* 0.8/0.8, 1.5/0.8 */
+		margin: 1em -1.875em 0 -1.875em;
 	}
 
 	.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
