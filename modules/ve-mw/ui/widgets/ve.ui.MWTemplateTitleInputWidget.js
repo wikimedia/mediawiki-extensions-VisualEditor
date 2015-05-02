@@ -36,7 +36,7 @@ OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, ve.ui.MWTitleInputWidget );
  * @inheritdoc
  */
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
-	var xhr, pageId,
+	var xhr,
 		widget = this,
 		value = this.value;
 
@@ -77,6 +77,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			}
 		} )
 		.then( function ( templateDataResponse ) {
+			var pageId;
 			// Look for descriptions and cache them
 			if ( templateDataResponse ) {
 				for ( pageId in templateDataResponse.pages ) {
