@@ -23,7 +23,19 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 	ve.ce.FocusableNode.call( this );
 
 	// DOM changes
-	this.$element.addClass( 've-ce-mwNumberedExternalLinkNode' );
+	this.$element
+		// TODO: Test to see whether we can get away with adding unicode-bidi
+		// embed/isolate style on $element. unicode-bidi isolate is more conceptually
+		// correct, but not well supported (e.g. it seems to result in unexpected jumping
+		// on Chromium).
+		.addClass( 've-ce-mwNumberedExternalLinkNode' )
+		// Need some content to make span take up a cursor position, but it must be text
+		// with no directionality, else it can break Chromium cursoring (see
+		// https://code.google.com/p/chromium/issues/detail?id=441056 ). Either a
+		// unicorn-like img tag or the actual apparent link text ("[1]", hitherto shown
+		// with CSS generated content) would fall foul of this bug. Use a zero-width
+		// space so it doesn't change the appearance.
+		.text( '\u200B' );
 
 	// Add link
 	this.$link = $( '<a>' )
