@@ -5,31 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwLinkTargetInputWidget {
-	margin-top: 2.75em;
-}
-
-
-.ve-ui-mwLinkTargetInputWidget-linkTypeSelect {
-	position: absolute;
-	top: -1.75em;
-}
-
-.ve-ui-mwLinkTargetInputWidget-linkTypeSelect .oo-ui-buttonOptionWidget .oo-ui-buttonElement-button {
-	height: auto;
-	margin: 0;
-	padding: 0 0.5em;
-	color: #888;
-}
-
-.ve-ui-mwLinkTargetInputWidget-linkTypeSelect .oo-ui-optionWidget-selected .oo-ui-buttonElement-button {
-	background: #eee;
-}
-
-.ve-ui-mwLinkTargetInputWidget .oo-ui-iconElement-icon {
-	opacity: 0.4;
-}
-
 /* Warning text for invalid titles (bug 62761) */
 
 .ve-ui-mwLinkTargetInputWidget-warning {

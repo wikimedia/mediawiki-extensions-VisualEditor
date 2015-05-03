@@ -1,5 +1,5 @@
 /*!
- * VisualEditor UserInterface LinkInspector class.
+ * VisualEditor UserInterface LinkAnnotationInspector class.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -9,19 +9,19 @@
  * Inspector for applying and editing labeled MediaWiki internal and external links.
  *
  * @class
- * @extends ve.ui.LinkInspector
+ * @extends ve.ui.LinkAnnotationInspector
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWLinkAnnotationInspector = function VeUiMWLinkAnnotationInspector( config ) {
 	// Parent constructor
-	ve.ui.LinkInspector.call( this, config );
+	ve.ui.MWLinkAnnotationInspector.super.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWLinkAnnotationInspector, ve.ui.LinkInspector );
+OO.inheritClass( ve.ui.MWLinkAnnotationInspector, ve.ui.LinkAnnotationInspector );
 
 /* Static properties */
 
@@ -32,9 +32,141 @@ ve.ui.MWLinkAnnotationInspector.static.modelClasses = [
 	ve.dm.MWInternalLinkAnnotation
 ];
 
-ve.ui.MWLinkAnnotationInspector.static.linkTargetInputWidget = ve.ui.MWLinkTargetInputWidget;
-
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
+	var overlay = this.manager.getOverlay();
+
+	// Properties
+	this.allowProtocolInInternal = false;
+	this.internalAnnotationInput = new ve.ui.MWInternalLinkAnnotationWidget( {
+		// Sub-classes may want to know where to position overlays
+		$overlay: overlay ? overlay.$element : this.$frame
+	} );
+	this.externalAnnotationInput = new ve.ui.MWExternalLinkAnnotationWidget();
+
+	this.linkTypeSelect = new OO.ui.ButtonSelectWidget( {
+		classes: [ 've-ui-mwLinkAnnotationInspector-linkTypeSelect' ],
+		items: [
+			new OO.ui.ButtonOptionWidget( { framed: false, data: 'internal', label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ) } ),
+			new OO.ui.ButtonOptionWidget( { framed: false, data: 'external', label: ve.msg( 'visualeditor-linkinspector-button-link-external' ) } )
+		]
+	} );
+
+	// Events
+	this.linkTypeSelect.connect( this, { select: 'onLinkTypeSelectSelect' } );
+	this.internalAnnotationInput.connect( this, { change: 'onInternalLinkChange' } );
+
+	// Parent method
+	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
+
+	// Initialization
+	this.form.$element.prepend( this.linkTypeSelect.$element );
+};
+
+/**
+ * Check if the current input mode is for external links
+ *
+ * @return {boolean} Input mode is for external links
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
+	var item = this.linkTypeSelect.getSelectedItem();
+	return item && item.getData() === 'external';
+};
+
+ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( annotation ) {
+	var title,
+		href = annotation ? annotation.getAttribute( 'title' ) : '';
+
+	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href ) ) {
+		// Check if the 'external' link is in fact a page on the same wiki
+		// e.g. http://en.wikipedia.org/wiki/Target -> Target
+		title = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+			href,
+			ve.init.target.doc
+		).title;
+		if ( title !== href ) {
+			this.internalAnnotationInput.text.setValue( title );
+			return;
+		}
+	}
+
+	if (
+		!this.allowProtocolInInternal &&
+		ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href )
+	) {
+		this.linkTypeSelect.selectItem( this.linkTypeSelect.getItemFromData( 'external' ) );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
+	return this.isExternal() ? this.externalAnnotationInput : this.internalAnnotationInput;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWLinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			this.linkTypeSelect.selectItem(
+				this.linkTypeSelect.getItemFromData(
+					this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
+				)
+			);
+			this.annotationInput.setAnnotation( this.initialAnnotation );
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWLinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
+		.next( function () {
+			this.allowProtocolInInternal = false;
+		}, this );
+};
+
+/**
+ * Handle select events from the linkTypeSelect widget
+ *
+ * @param {OO.ui.MenuOptionWidget} item Selected item
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
+	var text = this.annotationInput.text.getValue(),
+		isExternal = this.isExternal(),
+		inputHasProtocol = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( text );
+
+	this.annotationInput.$element.detach();
+
+	this.annotationInput = this.createAnnotationInput();
+	this.form.$element.append( this.annotationInput.$element );
+
+	if ( isExternal ) {
+		// If the user switches to external links clear the input, unless the input is URL-like
+		if ( !inputHasProtocol ) {
+			text = '';
+		}
+	} else {
+		// If the user manually switches to internal links with an external link in the input, remember this
+		if ( inputHasProtocol ) {
+			this.allowProtocolInInternal = true;
+		}
+	}
+
+	this.annotationInput.text.setValue( text ).focus();
+
+	if ( !isExternal ) {
+		this.annotationInput.text.populateLookupMenu();
+	}
+};
 
 /**
  * Gets an annotation object from a fragment.
@@ -88,40 +220,21 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
  * @inheritdoc
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
-	var target = this.targetInput.getValue(),
-		inserting = this.initialSelection.isCollapsed();
-
 	// If this is a new external link, insert an autonumbered link instead of a link annotation (in
 	// #getAnnotation we have the same condition to skip the annotating). Otherwise call parent method
 	// to figure out the text to insert and annotate.
-	if ( inserting && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
+	if ( this.isExternal() ) {
 		return [
 			{
 				type: 'link/mwNumberedExternal',
 				attributes: {
-					href: target
+					href: this.annotationInput.getHref()
 				}
 			},
 			{ type: '/link/mwNumberedExternal' }
 		];
 	} else {
 		return ve.ui.MWLinkAnnotationInspector.super.prototype.getInsertionData.call( this );
-	}
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWLinkAnnotationInspector.prototype.getAnnotation = function () {
-	var target = this.targetInput.getValue(),
-		inserting = this.initialSelection.isCollapsed();
-
-	// If this is a new external link, we've just inserted an autonumbered link node (see
-	// #getInsertionData). Do not place any annotations of top of it.
-	if ( inserting && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
-		return null;
-	} else {
-		return ve.ui.MWLinkAnnotationInspector.super.prototype.getAnnotation.call( this );
 	}
 };
 

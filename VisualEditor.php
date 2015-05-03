@@ -1,4 +1,5 @@
 <?php
+
 /**
  * VisualEditor extension
  *
@@ -613,7 +614,7 @@ $wgResourceModules += array(
 
 			'lib/ve/src/ui/widgets/ve.ui.AlignWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.SurfaceWidget.js',
-			'lib/ve/src/ui/widgets/ve.ui.LinkTargetInputWidget.js',
+			'lib/ve/src/ui/widgets/ve.ui.LinkAnnotationWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.ContextSelectWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.ContextOptionWidget.js',
 			'lib/ve/src/ui/widgets/ve.ui.DimensionsWidget.js',
@@ -636,7 +637,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/inspectors/ve.ui.AnnotationInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.NodeInspector.js',
 			'lib/ve/src/ui/inspectors/ve.ui.CommentInspector.js',
-			'lib/ve/src/ui/inspectors/ve.ui.LinkInspector.js',
+			'lib/ve/src/ui/inspectors/ve.ui.LinkAnnotationInspector.js',
 
 			'lib/ve/src/ui/pages/ve.ui.SpecialCharacterPage.js',
 		),
@@ -672,7 +673,6 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/styles/widgets/ve.ui.MediaSizeWidget.css',
 			'lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.css',
 			'lib/ve/src/ui/styles/inspectors/ve.ui.FragmentInspector.css',
-			'lib/ve/src/ui/styles/inspectors/ve.ui.LinkInspector.css',
 			'lib/ve/src/ui/styles/widgets/ve.ui.SurfaceWidget.css',
 			'lib/ve/src/ui/styles/ve.ui.ContextItem.css',
 			'lib/ve/src/ui/styles/contextitems/ve.ui.AlignableContextItem.css',
@@ -1125,6 +1125,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWLinkMenuOptionWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkMenuOptionWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkAnnotationWidget.js',
+			'modules/ve-mw/ui/widgets/ve.ui.MWExternalLinkAnnotationWidget.js',
 
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js',
 			'modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js',
@@ -1136,7 +1138,8 @@ $wgResourceModules += array(
 		'styles' => array(
 			'modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css',
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css'
+			'modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css',
+			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.css',
 		),
 		'skinStyles' => array(
 			'apex' => array(
