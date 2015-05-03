@@ -34,8 +34,8 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	this.linkTypeSelect = new OO.ui.ButtonSelectWidget( {
 		classes: [ 've-ui-mwLinkTargetInputWidget-linkTypeSelect' ]
 	} ).addItems( [
-		new OO.ui.ButtonOptionWidget( { framed: false, data: 'internal', label: 'Search articles' } ),
-		new OO.ui.ButtonOptionWidget( { framed: false, data: 'external', label: 'External link' } )
+		new OO.ui.ButtonOptionWidget( { framed: false, data: 'internal', label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ) } ),
+		new OO.ui.ButtonOptionWidget( { framed: false, data: 'external', label: ve.msg( 'visualeditor-linkinspector-button-link-external' ) } )
 	] ).connect( this, {
 		select: 'onLinkTypeSelectSelect',
 		choose: 'onLinkTypeSelectChoose'
