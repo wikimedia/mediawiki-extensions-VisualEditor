@@ -5,6 +5,14 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-init-mw-viewPageTarget-surface,
+.ve-init-mw-viewPageTarget-toolbar,
+.ve-init-target > .ve-ui-debugBar,
+.ve-ui-overlay-global {
+	/* Enforce different font-size for all UI elements of VisualEditor */
+	font-size: 0.8em;
+}
+
 .ve-init-mw-viewPageTarget-surface {
 	/*
 	In order to allow placing the text cursor to the start or end of the text by
@@ -21,12 +29,6 @@
 
 .ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
 	padding: 0 1.143em; /* surface-margin-left (1em) / (mw-body-content font-size) 0.875em */
-}
-
-.ve-init-target,
-.ve-ui-overlay-global {
-	/* Enforce different font-size for all UI elements of VisualEditor */
-	font-size: 0.8em;
 }
 
 .ve-init-target .mw-body-content,
