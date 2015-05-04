@@ -1147,6 +1147,8 @@ $wgResourceModules += array(
 		),
 		'messages' => array(
 			'visualeditor-annotationbutton-linknode-tooltip',
+			'visualeditor-linkinspector-button-link-external',
+			'visualeditor-linkinspector-button-link-internal',
 			'visualeditor-linkinspector-description-new-page',
 			'visualeditor-linkinspector-description-redirect',
 			'visualeditor-linkinspector-illegal-title',
