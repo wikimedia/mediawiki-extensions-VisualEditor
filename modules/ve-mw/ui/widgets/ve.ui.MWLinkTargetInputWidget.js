@@ -320,7 +320,8 @@ ve.ui.MWLinkTargetInputWidget.prototype.getLookupMenuOptionsFromData = function 
 				pagename: suggestionPages[i],
 				imageUrl: linkData.imageUrl,
 				description: linkData.description,
-				icon: ve.init.platform.linkCache.constructor.static.getIconForLink( linkData )
+				icon: ve.init.platform.linkCache.constructor.static.getIconForLink( linkData ),
+				query: this.value
 			} ) );
 		}
 
