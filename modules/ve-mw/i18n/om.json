@@ -117,7 +117,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Yeroo hunda agarsiis",
 	"visualeditor-dialog-meta-settings-toc-label": "Gabatee baafataa agarsiisi",
 	"visualeditor-dialog-meta-title": "Filannoo",
-	"visualeditor-dialog-reference-editing-reused": "Wabiin kun si'a $1 fuula kanarratti fayyadame.",
+	"visualeditor-dialog-reference-editing-reused": "Wabiin kun si'a $1 {{PLURAL:$1}} fuula kanarratti fayyadame.",
 	"visualeditor-dialog-reference-options-group-label": "Garee kana fayyadami",
 	"visualeditor-dialog-reference-options-group-placeholder": "Wabii waliigalaa",
 	"visualeditor-dialog-reference-options-name-label": "Maqaa kanaan lammata fayyadami",
