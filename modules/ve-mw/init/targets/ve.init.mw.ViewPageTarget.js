@@ -1596,9 +1596,9 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowWelcomeDialog = function () {
 		// Set up a temporary window manager
 		windowManager = new OO.ui.WindowManager( {
 			classes: [
-			've-init-mw-viewPageTarget-windowManager',
-			've-init-mw-viewPageTarget-windowManager-welcome'
-		]
+				've-init-mw-viewPageTarget-windowManager',
+				've-init-mw-viewPageTarget-windowManager-welcome'
+			]
 		} );
 		$( 'body' ).append( windowManager.$element );
 		this.welcomeDialog = new ve.ui.MWBetaWelcomeDialog();
