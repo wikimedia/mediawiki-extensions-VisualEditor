@@ -25,7 +25,7 @@ ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidg
 	this.pagename = config.pagename;
 
 	// Parent constructor
-	ve.ui.MWLinkMenuOptionWidget.call( this, $.extend( { label: this.pagename, href: mw.util.getUrl( this.pagename ) }, config ) );
+	ve.ui.MWLinkMenuOptionWidget.call( this, $.extend( { label: this.pagename, href: mw.util.getUrl( this.pagename ), autoFitLabel: false }, config ) );
 
 	// Style based on link cache information
 	ve.init.platform.linkCache.styleElement( this.pagename, this.$link );
@@ -46,6 +46,9 @@ ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidg
 				.text( config.description )
 		);
 	}
+
+	// Highlight matching parts of link suggestion
+	this.$label.autoEllipsis( { hasSpan: false, tooltip: true, matchText: config.query } );
 };
 
 /* Inheritance */
