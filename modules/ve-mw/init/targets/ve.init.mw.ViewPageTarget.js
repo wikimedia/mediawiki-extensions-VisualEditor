@@ -288,12 +288,14 @@ ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
 		this.maybeShowWelcomeDialog();
 
 		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
-		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).always( function () {
+		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
 			// We have to focus the page after hiding the original content, otherwise
 			// in firefox the contentEditable container was below the view page, and
 			// 'focus' scrolled the screen down.
 			pageTarget.getSurface().getView().focus();
+		} ).fail( function () {
+			$( 'html' ).removeClass( 've-activating' );
 		} );
 
 		this.bindHandlers();
@@ -419,6 +421,11 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		promises.push( this.tearDownSurface() );
 	}
 
+	// If a dummy toolbar was created, destroy it
+	if ( this.toolbar ) {
+		this.toolbar.destroy();
+	}
+
 	$.when.apply( null, promises ).done( function () {
 		// If there is a load in progress, abort it
 		if ( target.loading ) {
@@ -482,9 +489,6 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( errorText, error ) 
 		this.load();
 	} else {
 		// Something weird happened? Deactivate
-		// TODO: how does this handle load errors triggered from
-		// calling this.loading.abort()?
-		this.activating = false;
 		// Not passing trackMechanism because we don't know what happened
 		// and this is not a user action
 		this.deactivate( true );
