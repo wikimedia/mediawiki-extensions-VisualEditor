@@ -657,6 +657,7 @@ $wgResourceModules += array(
 			'lib/ve/src/ce/styles/nodes/ve.ce.TableCellNode.css',
 			'lib/ve/src/ce/styles/nodes/ve.ce.TableNode.css',
 			'lib/ve/src/ce/styles/ve.ce.Surface.css',
+			'lib/ve/src/ui/styles/ve.ui.css',
 
 			// ui
 			'lib/ve/src/ui/styles/dialogs/ve.ui.ToolbarDialog.css',
