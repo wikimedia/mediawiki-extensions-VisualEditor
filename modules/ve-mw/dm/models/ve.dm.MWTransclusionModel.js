@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* global mw */
-
 ( function () {
 	var hasOwn = Object.hasOwnProperty,
 		specCache = {};
