@@ -22,5 +22,7 @@
 	"visualeditor-dialog-meta-languages-section": "Ziman",
 	"visualeditor-dialog-template-title": "Şablon",
 	"visualeditor-dialog-transclusion-param-example": "Bihayê mînak:$1",
-	"visualeditor-dialogbutton-template-tooltip": "Şablon"
+	"visualeditor-dialogbutton-template-tooltip": "Şablon",
+	"visualeditor-linkinspector-button-link-external": "Girêdana derve",
+	"visualeditor-linkinspector-button-link-internal": "Li gotaran bigere"
 }

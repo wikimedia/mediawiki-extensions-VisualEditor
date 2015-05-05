@@ -231,6 +231,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Unterüberschrift 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Unterüberschrift 4",
 	"visualeditor-languages-tool": "Sprachen",
+	"visualeditor-linkinspector-button-link-external": "Externer Link",
+	"visualeditor-linkinspector-button-link-internal": "Seiten suchen",
 	"visualeditor-linkinspector-description-new-page": "Seite ist noch nicht vorhanden",
 	"visualeditor-linkinspector-description-redirect": "Weiterleitung nach $1",
 	"visualeditor-linkinspector-illegal-title": "Ungültiger Seitentitel",
