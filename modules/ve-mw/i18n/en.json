@@ -278,7 +278,7 @@
 	"visualeditor-preference-mwalienextension-info-link": "\/\/mediawiki.org\/wiki\/Special:MyLanguage\/VisualEditor\/Beta_Features\/Generic",
 	"visualeditor-preference-mwalienextension-label": "VisualEditor extension tag editing",
 	"visualeditor-recreate": "The page has been deleted since you started editing. Press \"$1\" to recreate it.",
-	"visualeditor-reference-input-placeholder": "What do you want to reference?",
+	"visualeditor-reference-input-placeholder": "Search within current citations",
 	"visualeditor-referenceslist-isempty": "There are no references with the group \"$1\" on this page to include in this list.",
 	"visualeditor-referenceslist-isempty-default": "There are no references on this page to include in this list.",
 	"visualeditor-referenceslist-missingref": "This reference is defined in a template or other generated block, and for now can only be edited in source mode.",

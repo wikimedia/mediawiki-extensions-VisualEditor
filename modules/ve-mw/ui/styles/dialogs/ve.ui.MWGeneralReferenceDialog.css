@@ -13,6 +13,6 @@
 	margin: 1em 0;
 }
 
-.ve-ui-mwGeneralReferenceDialog-source-field {
-	border-bottom: 1px solid #cccccc;
+.ve-ui-mwGeneralReferenceDialog-select .ve-ui-mwGeneralReferenceDialog-spacer:not(:first-child) {
+	border-top: 1px solid #cccccc;
 }

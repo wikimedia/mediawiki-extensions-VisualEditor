@@ -1316,6 +1316,8 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
 			'modules/ve-mw/ui/dialogs/ve.ui.MWGeneralReferenceDialog.js',
 
+			'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSourceSelectWidget.js',
+
 			'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
 			'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 

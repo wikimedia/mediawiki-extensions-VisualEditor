@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* global mw */
-
 /**
  * Dialog for inserting and editing MediaWiki references by type.
  *
@@ -53,10 +51,7 @@ ve.ui.MWGeneralReferenceDialog.prototype.getBodyHeight = function () {
  * @inheritdoc
  */
 ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
-	var sourceField,
-		tools, i, len, item,
-		items = [],
-		limit = ve.init.mw.Target.static.citationToolsLimit;
+	var sourceField;
 
 	// Parent method
 	ve.ui.MWGeneralReferenceDialog.super.prototype.initialize.apply( this, arguments );
@@ -67,66 +62,23 @@ ve.ui.MWGeneralReferenceDialog.prototype.initialize = function () {
 		expanded: false
 	} );
 
-	// Attach cite dialog tools
-	try {
-		// Must use mw.message to avoid JSON being parsed as Wikitext
-		tools = JSON.parse( mw.message( 'visualeditor-cite-tool-definition.json' ).plain() );
-	} catch ( e ) { }
-
-	// Go over available tools
-	if ( Array.isArray( tools ) ) {
-		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
-			item = tools[i];
-			items.push( new OO.ui.DecoratedOptionWidget( {
-				icon: item.icon,
-				label: item.title,
-				data: {
-					windowName: 'cite-' + item.name,
-					dialogData: { template: item.template }
-				}
-			} ) );
-		}
-	}
-	// Basic tools
-
-	this.refBasic = new OO.ui.DecoratedOptionWidget( {
-		icon: 'reference',
-		label: ve.msg( 'visualeditor-dialogbutton-reference-full-label' ),
-		data: { windowName: 'reference' }
-	} );
-	this.refExisting = new OO.ui.DecoratedOptionWidget( {
-		icon: 'reference-existing',
-		label: ve.msg( 'visualeditor-dialog-reference-useexisting-full-label' ),
-		data: {
-			windowName: 'reference',
-			dialogData: { useExisting: true }
-		}
-	} );
-
-	this.sourceSelect = new OO.ui.SelectWidget( {
+	this.sourceSelect = new ve.ui.MWReferenceSourceSelectWidget( {
 		classes: [ 've-ui-mwGeneralReferenceDialog-select' ],
-		items: items
+		showExisting: true
 	} );
+	$( '<div>' ).addClass( 've-ui-mwGeneralReferenceDialog-spacer' ).insertBefore(
+		this.sourceSelect.getRefBasic().$element
+	);
 	sourceField = new OO.ui.FieldLayout( this.sourceSelect, {
-		classes: [ 've-ui-mwGeneralReferenceDialog-source-field' ],
 		align: 'top',
 		label: ve.msg( 'visualeditor-dialog-generalreference-intro' )
 	} );
 
-	this.basicSelect = new OO.ui.SelectWidget( {
-		classes: [ 've-ui-mwGeneralReferenceDialog-select' ],
-		items: [ this.refBasic, this.refExisting ]
-	} );
-
 	// Events
-	this.sourceSelect.connect( this, { choose: 'onSelectChoose' } );
-	this.basicSelect.connect( this, { choose: 'onSelectChoose' } );
+	this.sourceSelect.connect( this, { choose: 'onSourceSelectChoose' } );
 
 	// Assemble the panel
-	this.panel.$element.append(
-		sourceField.$element,
-		this.basicSelect.$element
-	);
+	this.panel.$element.append( sourceField.$element );
 
 	this.$body
 		.addClass( 've-ui-mwGeneralReferenceDialog' )
@@ -141,11 +93,11 @@ ve.ui.MWGeneralReferenceDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			if ( this.manager.surface.getInDialog() === 'reference' ) {
 				// Hide basic reference if we are already in the basic reference menu
-				this.refBasic.setDisabled( true );
-				this.refExisting.setDisabled( true );
+				this.sourceSelect.getRefBasic().setDisabled( true );
+				this.sourceSelect.getRefExisting().setDisabled( true );
 			} else {
 				// Check if the 'use existing' button should be enabled
-				this.refExisting.setDisabled( !this.doReferencesExist() );
+				this.sourceSelect.getRefExisting().setDisabled( !this.doReferencesExist() );
 			}
 		}, this );
 };
@@ -156,9 +108,8 @@ ve.ui.MWGeneralReferenceDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWGeneralReferenceDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWGeneralReferenceDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
-			// Clear selections
+			// Clear selection
 			this.sourceSelect.selectItem();
-			this.basicSelect.selectItem();
 		}, this );
 };
 
@@ -180,11 +131,11 @@ ve.ui.MWGeneralReferenceDialog.prototype.doReferencesExist = function () {
 };
 
 /**
- * Handle select widget choose events
+ * Handle source select widget choose events
  *
  * @param {OO.ui.OptionWidget} item Chosen item
  */
-ve.ui.MWGeneralReferenceDialog.prototype.onSelectChoose = function ( item ) {
+ve.ui.MWGeneralReferenceDialog.prototype.onSourceSelectChoose = function ( item ) {
 	var data = item.getData(),
 		// Closing the dialog may unset some properties, so cache the ones we want
 		fragment = this.getFragment(),
