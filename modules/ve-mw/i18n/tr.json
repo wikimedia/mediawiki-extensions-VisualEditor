@@ -12,7 +12,8 @@
 			"Ceas08",
 			"Mavrikant",
 			"Sayginer",
-			"Violetanka"
+			"Violetanka",
+			"Captantrips"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Düzenleme özeti.",
@@ -176,6 +177,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Alt başlık 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Alt başlık 4",
 	"visualeditor-languages-tool": "Diller",
+	"visualeditor-linkinspector-button-link-external": "Dış bağlantı",
+	"visualeditor-linkinspector-button-link-internal": "Arama sayfaları",
 	"visualeditor-linkinspector-illegal-title": "Geçersiz sayfa başlığı",
 	"visualeditor-linknodeinspector-add-label": "Etiket ekle",
 	"visualeditor-linknodeinspector-title": "Basit bağlantı",

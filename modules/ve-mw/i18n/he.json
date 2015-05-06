@@ -235,7 +235,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "כותרת־משנה 4",
 	"visualeditor-languages-tool": "שפות",
 	"visualeditor-linkinspector-button-link-external": "קישור חיצוני",
-	"visualeditor-linkinspector-button-link-internal": "חיפוש ערכים",
+	"visualeditor-linkinspector-button-link-internal": "חיפוש דפים",
 	"visualeditor-linkinspector-description-new-page": "הדף עדיין לא קיים",
 	"visualeditor-linkinspector-description-redirect": "הפניה ל{{GRAMMAR:תחילית|$1}}",
 	"visualeditor-linkinspector-illegal-title": "שם דף בלתי־תקין",

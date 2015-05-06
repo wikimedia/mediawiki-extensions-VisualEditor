@@ -17,7 +17,8 @@
 			"Toliño",
 			"He7d3r",
 			"Amire80",
-			"Imperadeiro90"
+			"Imperadeiro90",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-param-oldid": "O número da edição de utilização (por omissão, a versão mais recente).",
@@ -221,6 +222,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Sub-título 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sub-título 4",
 	"visualeditor-languages-tool": "Idiomas",
+	"visualeditor-linkinspector-button-link-external": "Ligação externa",
 	"visualeditor-linkinspector-description-new-page": "a página ainda não existe.",
 	"visualeditor-linkinspector-illegal-title": "Título inválido",
 	"visualeditor-linknodeinspector-add-label": "Adicionar etiqueta",

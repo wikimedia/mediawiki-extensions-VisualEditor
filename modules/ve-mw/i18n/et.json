@@ -212,6 +212,7 @@
 	"visualeditor-reference-input-placeholder": "Millisele allikale tahad viidata?",
 	"visualeditor-referenceslist-isempty": "Rühma \"$1\" viited, mida selles loendis näidata, puuduvad sellel leheküljel.",
 	"visualeditor-referenceslist-isempty-default": "Viited, mida selles loendis näidata, puuduvad sellel leheküljel.",
+	"visualeditor-referenceslist-missingref": "Selle viite kirjeldus on mallis või muul moel genereeritud plokis ning praegu saab seda redigeerida vaid lähteteksti režiimis.",
 	"visualeditor-savedialog-error-badtoken": "Sinu muudatust ei õnnestunud töödelda, sest seansi kehtivus on lõppenud.",
 	"visualeditor-savedialog-identify-anon": "Kas tahad salvestada seda lehekülge hoopis anonüümse kasutajana? Sinu IP-aadress talletatakse selle lehekülje redigeerimisloos.",
 	"visualeditor-savedialog-identify-user": "Oled nüüd sisse logitud nimega [[User:$1|$1]]. Kui salvestatad, seostatakse see muudatus sinu kontoga.",

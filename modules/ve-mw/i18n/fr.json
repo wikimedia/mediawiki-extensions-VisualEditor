@@ -260,7 +260,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Sous-titre 4",
 	"visualeditor-languages-tool": "Langues",
 	"visualeditor-linkinspector-button-link-external": "Lien externe",
-	"visualeditor-linkinspector-button-link-internal": "Chercher des articles",
+	"visualeditor-linkinspector-button-link-internal": "Chercher des pages",
 	"visualeditor-linkinspector-description-new-page": "la page n’existe pas encore",
 	"visualeditor-linkinspector-description-redirect": "Redirection vers $1",
 	"visualeditor-linkinspector-illegal-title": "Titre de page non valide",

@@ -244,6 +244,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "子标题3",
 	"visualeditor-formatdropdown-format-mw-heading6": "子标题4",
 	"visualeditor-languages-tool": "语言",
+	"visualeditor-linkinspector-button-link-external": "外部链接",
+	"visualeditor-linkinspector-button-link-internal": "搜索页面",
 	"visualeditor-linkinspector-description-new-page": "页面不存在",
 	"visualeditor-linkinspector-description-redirect": "重定向至$1",
 	"visualeditor-linkinspector-illegal-title": "无效的页面标题",

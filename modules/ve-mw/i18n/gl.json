@@ -233,6 +233,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Subcabeceira 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Subcabeceira 4",
 	"visualeditor-languages-tool": "Linguas",
+	"visualeditor-linkinspector-button-link-external": "Ligazón externa",
+	"visualeditor-linkinspector-button-link-internal": "Procurar páxinas",
 	"visualeditor-linkinspector-description-new-page": "a páxina aínda non existe",
 	"visualeditor-linkinspector-description-redirect": "redirección cara a $1",
 	"visualeditor-linkinspector-illegal-title": "Título de páxina incorrecto",
