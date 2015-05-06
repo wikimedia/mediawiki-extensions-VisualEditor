@@ -143,7 +143,7 @@ ve.ce.MWReferencesListNode.prototype.onListNodeUpdate = function () {
  * Update the references list.
  */
 ve.ce.MWReferencesListNode.prototype.update = function () {
-	var i, j, iLen, jLen, index, firstNode, key, keyedNodes, $li, modelNode, viewNode,
+	var i, j, n, iLen, jLen, index, firstNode, key, keyedNodes, $li, modelNode, viewNode,
 		internalList = this.model.getDocument().internalList,
 		refGroup = this.model.getAttribute( 'refGroup' ),
 		listGroup = this.model.getAttribute( 'listGroup' ),
@@ -160,15 +160,20 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 		}
 		this.$element.append( this.$refmsg );
 	} else {
+		n = 0;
 		for ( i = 0, iLen = nodes.indexOrder.length; i < iLen; i++ ) {
 			index = nodes.indexOrder[i];
 			firstNode = nodes.firstNodes[index];
 
 			key = internalList.keys[index];
 			keyedNodes = nodes.keyedNodes[key];
-			// Exclude references defined inside the references list node
 			/*jshint loopfunc:true */
 			keyedNodes = keyedNodes.filter( function ( node ) {
+				// Exclude placeholder references
+				if ( node.getAttribute( 'placeholder' ) ) {
+					return false;
+				}
+				// Exclude references defined inside the references list node
 				while ( ( node = node.parent ) && node !== null ) {
 					if ( node instanceof ve.dm.MWReferencesListNode ) {
 						return false;
@@ -180,6 +185,8 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 			if ( !keyedNodes.length ) {
 				continue;
 			}
+			// Only increment counter for non-empty groups
+			n++;
 
 			$li = $( '<li>' );
 
@@ -187,7 +194,7 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 				for ( j = 0, jLen = keyedNodes.length; j < jLen; j++ ) {
 					$li.append(
 						$( '<sup>' ).append(
-							$( '<a>' ).text( ( i + 1 ) + '.' + j )
+							$( '<a>' ).text( n + '.' + j )
 						)
 					).append( ' ' );
 				}
