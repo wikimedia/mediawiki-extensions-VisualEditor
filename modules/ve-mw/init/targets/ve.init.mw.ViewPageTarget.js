@@ -419,10 +419,8 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
 		this.tearDownUnloadHandlers();
 		// If we got as far as setting up the surface, tear that down
 		promises.push( this.tearDownSurface() );
-	}
-
-	// If a dummy toolbar was created, destroy it
-	if ( this.toolbar ) {
+	} else if ( this.toolbar ) {
+		// If a dummy toolbar was created, destroy it
 		this.toolbar.destroy();
 	}
 
