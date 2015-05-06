@@ -372,9 +372,9 @@ class ApiVisualEditor extends ApiBase {
 				if ( !$title->exists() ) {
 					$notices[] = $this->msg(
 						$user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon',
-						Skin::makeInternalOrExternalUrl(
+						wfExpandUrl( Skin::makeInternalOrExternalUrl(
 							$this->msg( 'helppage' )->inContentLanguage()->text()
-						)
+						) )
 					)->parseAsBlock();
 					// Page protected from creation
 					if ( $title->getRestrictions( 'create' ) ) {
