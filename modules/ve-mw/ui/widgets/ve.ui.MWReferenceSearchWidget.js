@@ -150,7 +150,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 		return;
 	}
 
-	var i, iLen, j, jLen, refModel, group, groupName, groupNames, view, text, firstNodes, indexOrder,
+	var n, i, iLen, j, jLen, refModel, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
 		groups = this.internalList.getNodeGroups();
 
@@ -170,15 +170,22 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 		firstNodes = group.firstNodes;
 		indexOrder = group.indexOrder;
 
+		n = 0;
 		for ( j = 0, jLen = indexOrder.length; j < jLen; j++ ) {
 			refNode = firstNodes[indexOrder[j]];
+			// Exclude placeholder references
+			if ( refNode.getAttribute( 'placeholder' ) ) {
+				continue;
+			}
+			// Only increment counter for real references
+			n++;
 			refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( refNode );
 			view = new ve.ui.PreviewWidget(
 				refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
 			);
 
 			refGroup = refModel.getGroup();
-			citation = ( refGroup && refGroup.length ? refGroup + ' ' : '' ) + ( j + 1 );
+			citation = ( refGroup && refGroup.length ? refGroup + ' ' : '' ) + n;
 			matches = refModel.getListKey().match( /^literal\/(.*)$/ );
 			name = matches && matches[1] || '';
 			// Hide previously auto-generated reference names
