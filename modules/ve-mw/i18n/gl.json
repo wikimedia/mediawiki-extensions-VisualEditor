@@ -266,7 +266,7 @@
 	"visualeditor-preference-mwalienextension-description": "Engadir ao editor visual o soporte básico experimental para editar as etiquetas das extensións (como as galerías ou os bloques de código fonte), antes de que esas ferramentas estean dispoñibles. Lembre revisar sempre os seus cambios antes de gardalos ao usar as características experimentais.",
 	"visualeditor-preference-mwalienextension-label": "Edición de etiquetas das extensións do editor visual",
 	"visualeditor-recreate": "Alguén borrou a páxina desde que comezou a editala. Prema en \"$1\" para creala de novo.",
-	"visualeditor-reference-input-placeholder": "Que quere referenciar?",
+	"visualeditor-reference-input-placeholder": "Buscar dentro das referencias actuais",
 	"visualeditor-referenceslist-isempty": "Non hai referencias co grupo \"$1\" nesta páxina para incluílas nesta lista.",
 	"visualeditor-referenceslist-isempty-default": "Non hai referencias nesta páxina para incluílas nesta lista.",
 	"visualeditor-referenceslist-missingref": "Esta referencia está definida nun modelo ou noutro bloque xerado; polo de agora, só se pode editar no modo fonte.",

@@ -267,7 +267,7 @@
 	"visualeditor-preference-mwalienextension-description": "הוספת לעורך החזותי של תמיכה ניסיונית בעריכת תגי הרחבות, כגון גלריות ובלוקים של קוד מקור, לפני שהכלים האלה זמינים. נא לזכור תמיד לסקור את השינויים שלך לפני שמירה תוך כדי שימוש באפשרויות ניסיוניות.",
 	"visualeditor-preference-mwalienextension-label": "עריכת תגי הרחבות בעורך החזותי",
 	"visualeditor-recreate": "הדף הזה נמחק מאז שהתחלת לערוך. לחיצה על \"$1\" תיצור את הדף מחדש.",
-	"visualeditor-reference-input-placeholder": "לאן ברצונך להפנות בהערת השוליים?",
+	"visualeditor-reference-input-placeholder": "חיפוש בין הערות השוליים הקיימות",
 	"visualeditor-referenceslist-isempty": "לא קיימים מקורות עם קבוצה בשם \"$1\" בדף הזה שאפשר לכלול ברשימה הזאת.",
 	"visualeditor-referenceslist-isempty-default": "בדף הזה אין הערות שוליים שאפשר לכלול ברשימה הזאת.",
 	"visualeditor-referenceslist-missingref": "הערת השוליים הזאת מוגדרת בתבנית או מחוללת בדרך אחרת כלשהי, ואי־אפשר לערוך אותה עדיין באמצעות העורך החזותי.",

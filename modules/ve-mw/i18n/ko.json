@@ -15,7 +15,8 @@
 			"Ryuch",
 			"Naturehead",
 			"Revi",
-			"Infinity"
+			"Infinity",
+			"SeoJeongHo"
 		]
 	},
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
@@ -166,6 +167,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "3단계 하위 문단 제목",
 	"visualeditor-formatdropdown-format-mw-heading6": "4단계 하위 문단 제목",
 	"visualeditor-languages-tool": "언어",
+	"visualeditor-linkinspector-button-link-internal": "페이지 검색",
 	"visualeditor-linkinspector-illegal-title": "잘못된 문서 제목",
 	"visualeditor-linknodeinspector-add-label": "라벨 추가",
 	"visualeditor-linknodeinspector-title": "간단 링크",
