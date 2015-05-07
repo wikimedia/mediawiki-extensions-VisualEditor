@@ -18,8 +18,7 @@
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
 	var placeholder = null,
-		paramName = parameter.getName(),
-		page = this;
+		paramName = parameter.getName();
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -49,19 +48,12 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.valueInput = new OO.ui.TextInputWidget( {
 		multiline: true,
 		autosize: true,
+		required: this.parameter.isRequired(),
+		validate: this.parameter.isRequired() ? 'non-empty' : null,
 		placeholder: placeholder
 	} )
 		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
-
-	if ( this.parameter.isRequired() ) {
-		this.valueInput.$input
-			.prop( 'required', true )
-			.on( 'blur', function () {
-				page.valueInput.setValidation( 'non-empty' );
-				page.valueInput.setValidityFlag();
-			} );
-	}
 
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
