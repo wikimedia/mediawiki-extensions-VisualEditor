@@ -13,22 +13,30 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {string} [pagename] Pagename to return the names of internal pages
+ * @cfg {string} [data] Page title
  * @cfg {string} [imageUrl] Thumbnail image URL with URL encoding
  * @cfg {string} [description] Page description
+ * @cfg {string} [query] Matching query string
  */
 ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidget( config ) {
-	// Config initialization
-	config = ve.extendObject( { icon: 'page-existing' }, config );
+	var title = config.data;
 
-	// Properties
-	this.pagename = config.pagename;
+	// Config initialization
+	config = ve.extendObject( {
+		icon: 'page-existing',
+		label: title,
+		href: mw.util.getUrl( title ),
+		autoFitLabel: false
+	}, config );
 
 	// Parent constructor
-	ve.ui.MWLinkMenuOptionWidget.call( this, $.extend( { label: this.pagename, href: mw.util.getUrl( this.pagename ), autoFitLabel: false }, config ) );
+	ve.ui.MWInternalLinkMenuOptionWidget.super.call( this, config );
+
+	// Highlight matching parts of link suggestion
+	this.$label.autoEllipsis( { hasSpan: false, tooltip: true, matchText: config.query } );
 
 	// Style based on link cache information
-	ve.init.platform.linkCache.styleElement( this.pagename, this.$link );
+	ve.init.platform.linkCache.styleElement( title, this.$link );
 
 	// Intialization
 	this.$element.addClass( 've-ui-mwInternalLinkMenuOptionWidget' );
@@ -46,9 +54,6 @@ ve.ui.MWInternalLinkMenuOptionWidget = function VeUiMWInternalLinkMenuOptionWidg
 				.text( config.description )
 		);
 	}
-
-	// Highlight matching parts of link suggestion
-	this.$label.autoEllipsis( { hasSpan: false, tooltip: true, matchText: config.query } );
 };
 
 /* Inheritance */
