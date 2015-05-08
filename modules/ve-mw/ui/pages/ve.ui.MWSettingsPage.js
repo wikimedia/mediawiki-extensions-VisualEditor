@@ -250,7 +250,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 		settingsPage = this;
 
 	// Table of Contents items
-	tableOfContentsField.selectItem( tableOfContentsField.getItemFromData( tableOfContentsMode ) );
+	tableOfContentsField.selectItemByData( tableOfContentsMode );
 	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)

@@ -339,9 +339,7 @@ ve.ui.MWTemplateDialog.prototype.getSelectedNode = function ( data ) {
  */
 ve.ui.MWTemplateDialog.prototype.setPageByName = function ( name ) {
 	if ( this.bookletLayout.isOutlined() ) {
-		this.bookletLayout.getOutline().selectItem(
-			this.bookletLayout.getOutline().getItemFromData( name )
-		);
+		this.bookletLayout.getOutline().selectItemByData( name );
 	} else {
 		this.bookletLayout.setPage( name );
 	}
