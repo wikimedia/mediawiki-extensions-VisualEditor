@@ -773,16 +773,14 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 
 /**
  * Handle image model alignment change
+ *
  * @param {string} alignment Image alignment
  */
 ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment ) {
-	var item;
 	alignment = alignment || 'none';
 
-	item = alignment !== 'none' ? this.positionSelect.getItemFromData( alignment ) : null;
-
 	// Select the item without triggering the 'choose' event
-	this.positionSelect.selectItem( item );
+	this.positionSelect.selectItemByData( alignment !== 'none' ? alignment : undefined );
 
 	this.positionCheckbox.setSelected( alignment !== 'none' );
 	this.checkChanged();
@@ -790,13 +788,11 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
 
 /**
  * Handle image model type change
+ *
  * @param {string} alignment Image alignment
  */
-
 ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
-	var item = type ? this.typeSelect.getItemFromData( type ) : null;
-
-	this.typeSelect.selectItem( item );
+	this.typeSelect.selectItemByData( type );
 
 	this.borderCheckbox.setDisabled(
 		!this.imageModel.isBorderable()
@@ -1079,39 +1075,19 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	this.sizeWidget.updateDefaultDimensions();
 
 	// Set initial alt text
-	this.altTextInput.setValue(
-		this.imageModel.getAltText()
-	);
+	this.altTextInput.setValue( this.imageModel.getAltText() );
 
 	// Set initial alignment
-	this.positionSelect.setDisabled(
-		!this.imageModel.isAligned()
-	);
-	this.positionSelect.selectItem(
-		this.imageModel.isAligned() ?
-		this.positionSelect.getItemFromData(
-			this.imageModel.getAlignment()
-		) :
-		null
-	);
-	this.positionCheckbox.setSelected(
-		this.imageModel.isAligned()
-	);
+	this.positionSelect.setDisabled( !this.imageModel.isAligned() );
+	this.positionSelect.selectItemByData( this.imageModel.isAligned() && this.imageModel.getAlignment() );
+	this.positionCheckbox.setSelected( this.imageModel.isAligned() );
 
 	// Border flag
-	this.borderCheckbox.setDisabled(
-		!this.imageModel.isBorderable()
-	);
-	this.borderCheckbox.setSelected(
-		this.imageModel.isBorderable() && this.imageModel.hasBorder()
-	);
+	this.borderCheckbox.setDisabled( !this.imageModel.isBorderable() );
+	this.borderCheckbox.setSelected( this.imageModel.isBorderable() && this.imageModel.hasBorder() );
 
 	// Type select
-	this.typeSelect.selectItem(
-		this.typeSelect.getItemFromData(
-			this.imageModel.getType() || 'none'
-		)
-	);
+	this.typeSelect.selectItemByData( this.imageModel.getType() || 'none' );
 
 	this.isSettingUpModel = false;
 };

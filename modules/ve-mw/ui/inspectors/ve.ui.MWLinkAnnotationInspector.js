@@ -98,7 +98,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 		!this.allowProtocolInInternal &&
 		ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href )
 	) {
-		this.linkTypeSelect.selectItem( this.linkTypeSelect.getItemFromData( 'external' ) );
+		this.linkTypeSelect.selectItemByData( 'external' );
 	}
 };
 
@@ -115,10 +115,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
 ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			this.linkTypeSelect.selectItem(
-				this.linkTypeSelect.getItemFromData(
-					this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
-				)
+			this.linkTypeSelect.selectItemByData(
+				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
 		}, this );

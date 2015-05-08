@@ -231,11 +231,11 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 		advancedSettingsPage = this;
 
 	// Indexing items
-	indexingField.selectItem( indexingField.getItemFromData( indexingType ) );
+	indexingField.selectItemByData( indexingType );
 	this.indexingOptionTouched = false;
 
 	// New section edit link items
-	newSectionEditField.selectItem( newSectionEditField.getItemFromData( newSectionEditLinkType ) );
+	newSectionEditField.selectItemByData( newSectionEditLinkType );
 	this.newSectionEditLinkOptionTouched = false;
 
 	this.enableDisplayTitleCheckbox.setSelected( !!displayTitleItem );
