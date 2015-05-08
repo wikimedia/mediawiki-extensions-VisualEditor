@@ -39,6 +39,7 @@ ve.ui.MWEditModeTool.prototype.onUpdateState = function () {
 	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
 
 	this.setActive( false );
+	this.setDisabled( false );
 };
 
 /**
