@@ -53,7 +53,10 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 		refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
 	);
 
-	// WARNING: The $element property may be rendered into asynchronously
+	// The $element property may be rendered into asynchronously, update the context's size when the
+	// rendering is complete if that's the case
+	this.view.once( 'render', this.context.updateDimensions.bind( this.context ) );
+
 	return this.view.$element;
 };
 
