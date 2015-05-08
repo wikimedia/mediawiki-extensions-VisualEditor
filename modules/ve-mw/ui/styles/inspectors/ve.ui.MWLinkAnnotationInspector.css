@@ -5,17 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwLinkAnnotationInspector-linkTypeSelect .oo-ui-buttonOptionWidget .oo-ui-buttonElement-button {
-	height: auto;
-	margin: 0;
-	padding: 0 0.5em;
-	color: #888;
-}
-
-.ve-ui-mwLinkAnnotationInspector-linkTypeSelect .oo-ui-optionWidget-selected .oo-ui-buttonElement-button {
-	background: #eee;
-}
-
-.ve-ui-mwLinkAnnotationInspector .oo-ui-iconElement-icon {
-	opacity: 0.4;
+.ve-ui-mwLinkAnnotationInspector-linkTypeSelect {
+	margin: -0.75em -0.75em 0.75em -0.75em;
 }

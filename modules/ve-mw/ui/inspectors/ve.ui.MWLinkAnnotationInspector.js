@@ -48,11 +48,11 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	} );
 	this.externalAnnotationInput = new ve.ui.MWExternalLinkAnnotationWidget();
 
-	this.linkTypeSelect = new OO.ui.ButtonSelectWidget( {
+	this.linkTypeSelect = new OO.ui.TabSelectWidget( {
 		classes: [ 've-ui-mwLinkAnnotationInspector-linkTypeSelect' ],
 		items: [
-			new OO.ui.ButtonOptionWidget( { framed: false, data: 'internal', label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ) } ),
-			new OO.ui.ButtonOptionWidget( { framed: false, data: 'external', label: ve.msg( 'visualeditor-linkinspector-button-link-external' ) } )
+			new OO.ui.TabOptionWidget( { data: 'internal', label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ) } ),
+			new OO.ui.TabOptionWidget( { data: 'external', label: ve.msg( 'visualeditor-linkinspector-button-link-external' ) } )
 		]
 	} );
 
