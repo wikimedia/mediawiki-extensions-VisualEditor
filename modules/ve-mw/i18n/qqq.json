@@ -79,8 +79,6 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Used as label for the Continue button which is used to close the dialog and continue using VisualEditor.\n{{Identical|Continue}}",
 	"visualeditor-dialog-beta-welcome-content": "Text explaining VisualEditor is in beta.\n\nRefers to {{msg-mw|Visualeditor-help-tool}}.\n\nParameters:\n* $1 - {{msg-mw|Edit}}",
 	"visualeditor-dialog-beta-welcome-title": "Title of the beta welcome dialog. Parameters:\n* $1 - username or empty string, for GENDER support",
-	"visualeditor-dialog-generalreference-intro": "Introduction text to the general reference dialog, requesting the user to choose the type of source to add",
-	"visualeditor-dialog-generalreference-title": "Title of the general references dialog.",
 	"visualeditor-dialog-media-alttext-section": "Label for the image alternative text sub-section.",
 	"visualeditor-dialog-media-alttext-section-help": "Message displayed as contextual help about the alternative text box to editors in the media editing dialog.",
 	"visualeditor-dialog-media-change-image": "Label for the button to change the current image in the media edit dialog.",

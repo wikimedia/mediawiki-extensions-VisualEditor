@@ -1338,7 +1338,6 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCitationDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWReferencesListDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWGeneralReferenceDialog.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWReferenceSourceSelectWidget.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js",
@@ -1350,8 +1349,7 @@
 			"styles": [
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWGeneralReferenceDialog.css"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwreference.core",
@@ -1359,8 +1357,6 @@
 				"ext.visualEditor.mediawiki"
 			],
 			"messages": [
-				"visualeditor-dialog-generalreference-intro",
-				"visualeditor-dialog-generalreference-title",
 				"visualeditor-dialog-reference-editing-reused",
 				"visualeditor-dialog-reference-options-group-label",
 				"visualeditor-dialog-reference-options-group-placeholder",
