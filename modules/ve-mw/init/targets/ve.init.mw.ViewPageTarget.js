@@ -100,6 +100,12 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 OO.inheritClass( ve.init.mw.ViewPageTarget, ve.init.mw.Target );
 
+/* Events */
+
+/**
+ * @event deactivate
+ */
+
 /* Static Properties */
 
 /**
@@ -1428,6 +1434,7 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	$( '#ca-view' ).addClass( 'selected' );
 
 	mw.hook( 've.deactivate' ).fire();
+	this.emit( 'deactivate' );
 
 	// Push non-veaction=edit url in history
 	if ( !this.actFromPopState && history.pushState ) {
