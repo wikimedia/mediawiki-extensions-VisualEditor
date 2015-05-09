@@ -30,7 +30,6 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	this.parameter = parameter;
 	this.template = this.parameter.getTemplate();
 	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, {
-		$: this.$,
 		showAll: !!config.expandedParamList
 	} )
 		.connect( this, {

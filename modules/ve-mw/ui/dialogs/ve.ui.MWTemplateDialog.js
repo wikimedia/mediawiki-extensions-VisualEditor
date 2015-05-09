@@ -198,7 +198,6 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 		page = new ve.ui.MWParameterPage( param, param.getId() );
 	} else {
 		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {
-			$: this.$,
 			expandedParamList: !!this.expandedParamList[ param.getId() ]
 		} )
 			.connect( this, { showAll: 'onParameterPlaceholderShowAll' } );
