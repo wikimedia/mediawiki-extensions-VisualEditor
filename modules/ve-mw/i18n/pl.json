@@ -54,8 +54,6 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Kontynuuj",
 	"visualeditor-dialog-beta-welcome-content": "To jest nasz nowy, łatwiejszy sposób na edytowanie stron. Nadal jest w wersji beta, co oznacza, że możesz natrafić na części strony, których nie będziesz mógł zmienić, lub napotkać problemy wymagające naprawy. Zachęcamy Cię do przeglądania swoich zmian i zgłaszania wszystkich problemów napotkanych podczas używania VisualEditora (kliknij przycisk '{{int:visualeditor-help-tool}}' aby wysłać opinię). Możesz też w dowolnym momencie przełączyć się na zwykły edytor wikitekstowy klikając na zakładkę „$1”, zachowując przy tym wszystkie wcześniej wykonane zmiany.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Witamy}} w VisualEditorze",
-	"visualeditor-dialog-generalreference-intro": "Wybierz typ źródła:",
-	"visualeditor-dialog-generalreference-title": "Dodaj przypis",
 	"visualeditor-dialog-media-alttext-section": "Tekst alternatywny",
 	"visualeditor-dialog-media-change-image": "Zmień obrazek",
 	"visualeditor-dialog-media-choose-image": "Użyj tej ilustracji",

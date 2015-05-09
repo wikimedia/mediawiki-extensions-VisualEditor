@@ -42,8 +42,6 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Συνέχεια",
 	"visualeditor-dialog-beta-welcome-content": "Αυτός είναι ο νέος, ευκολότερος τρόπος επεξεργασίας. Είναι ακόμη σε δοκιμαστική μορφή, που σημαίνει ότι θα βρείτε σημεία της σελίδας που δεν είναι δυνατό να επεξεργαστείτε, ή ότι θα συναντήσετε προβλήματα που θα πρέπει να διορθωθούν. Σας παρακαλούμε να εξετάσετε τις αλλαγές σας και να αναφέρετε οποιοδήποτε πρόβλημα που μπορεί να συναντήσετε χρησιμοποιοώντας το VisualEditor  (για να στείλετε αναφορά, πατήστε το κουμπί '{{int:visualeditor-help-tool}}'). Μπορείτε να μεταβείτε στον επεξεργαστή κώδικα wiki πατώντας την καρτέλα \"$1\", κρατώντας όσες αλλαγές έχετε κάνει.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Καλωσορίσατε}} στον VisualEditor",
-	"visualeditor-dialog-generalreference-intro": "Επιλέξτε έναν τύπο πηγής:",
-	"visualeditor-dialog-generalreference-title": "Προσθήκη αναφοράς",
 	"visualeditor-dialog-media-alttext-section": "Εναλλακτικό κείμενο",
 	"visualeditor-dialog-media-change-image": "Αλλαγή εικόνας",
 	"visualeditor-dialog-media-content-filename": "Όνομα αρχείου",

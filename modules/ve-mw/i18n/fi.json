@@ -47,8 +47,6 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Jatka",
 	"visualeditor-dialog-beta-welcome-content": "Tämä on uusi, helpompi tapamme muokata. Se on vielä beetavaiheessa, mikä tarkoittaa, että osia sivuista ei voi muokata tai muokkauksessa esiintyy ongelmia, jotka pitää korjata. Kehotamme tarkistamaan muutoksesi ja otamme mielellämme vastaan kaikki raportit ongelmista, joihin saatat törmätä Visuaalista muokkainta käyttäessäsi (klikkaa '{{int:visualeditor-help-tool}}' -nappia antaaksesi palautetta). Voit vaihtaa wikiteksti-muokkaimeen milloin tahansa napsauttamalla \"$1\"-välilehteä, säilyttäen kaikki tekemäsi muutokset.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Tervetuloa}} Visuaaliseen muokkaimeen",
-	"visualeditor-dialog-generalreference-intro": "Valitse lähteen tyyppi:",
-	"visualeditor-dialog-generalreference-title": "lisää lähde",
 	"visualeditor-dialog-media-alttext-section": "Vaihtoehtoinen teksti",
 	"visualeditor-dialog-media-change-image": "Vaihda kuva",
 	"visualeditor-dialog-media-choose-image": "Käytä tätä kuvaa",

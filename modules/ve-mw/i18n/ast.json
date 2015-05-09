@@ -36,8 +36,6 @@
 	"visualeditor-dialog-beta-welcome-action-continue": "Siguir",
 	"visualeditor-dialog-beta-welcome-content": "Esta ye la nuesa manera fácil d'editar. Inda ta en fase beta, lo que significa que podríes atopar partes de la páxina que nun puen editase, o alcontrar problemes que necesiten igua. Encamentámoste que revises los cambios, y prestaríanos recibir informes de los problemes que puedas alcontrar al usar VisualEditor (calca nel botón '{{int:visualeditor-help-tool}}' pa unvianos comentarios). Tamién pues cambiar al editor de testu wiki en cualquier momentu calcando na llingüeta \"$1\", calteniendo los cambios que ficisti.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bienllegáu|Bienllegada}} a VisualEditor",
-	"visualeditor-dialog-generalreference-intro": "Escueyi un tipu de fonte:",
-	"visualeditor-dialog-generalreference-title": "Amestar referencia",
 	"visualeditor-dialog-media-alttext-section": "Testu alternativu",
 	"visualeditor-dialog-media-change-image": "Camudar imaxe",
 	"visualeditor-dialog-media-choose-image": "Usar esta imaxe",

@@ -184,7 +184,7 @@
 	"visualeditor-preference-enable": "Omogoči VisualEditor. Na voljo bo v {{PLURAL:$2|naslednjem imenskem prostoru|naslednjih imenskih prostorih}}: $1.",
 	"visualeditor-preference-mwalienextension-description": "Dodaj preizkusno osnovno podporo za urejanje razširitvenih oznak (npr. galerij in dele izvorne kode) v VirtualEditor še preden so posamezna orodja na voljo. Prosimo, da pri uporabi preizkusnih funkcij vedno pregledate svoje spremembe pred shranjevanjem.",
 	"visualeditor-preference-mwalienextension-label": "Urejanje razširitvenih oznak VisualEditor",
-	"visualeditor-reference-input-placeholder": "Na kaj se želite sklicevati?",
+	"visualeditor-reference-input-placeholder": "Išči znotraj trenutnih navedkov",
 	"visualeditor-referenceslist-isempty": "Na tej strani ni sklicev s skupino »$1« za vključitev na ta seznam.",
 	"visualeditor-referenceslist-isempty-default": "Na tej strani ni sklicev, ki bi jih lahko vključili v ta seznam.",
 	"visualeditor-referenceslist-missingref": "Sklic je opredeljen v predlogi ali drugem ustvarjenem bloku, zato ga lahko trenutno urejate samo v urejevalniku izvorne kode.",

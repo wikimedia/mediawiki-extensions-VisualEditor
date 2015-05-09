@@ -13,7 +13,8 @@
 			"Mavrikant",
 			"Sayginer",
 			"Violetanka",
-			"Captantrips"
+			"Captantrips",
+			"Stultiwikia"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Düzenleme özeti.",
@@ -206,7 +207,7 @@
 	"visualeditor-preference-core-label": "Görsel Düzenleyici",
 	"visualeditor-preference-enable": "Görsel Düzenleyiciyi etkinleştirin. Aşağıdaki {{PLURAL:$2|ad alanı|ad alanlarında}} kullanılacaktır: $1",
 	"visualeditor-preference-mwalienextension-label": "Görsel Düzenleyiciyi uzantı etiketi düzenleme",
-	"visualeditor-reference-input-placeholder": "Hangi kaynağı kullanmak istersiniz?",
+	"visualeditor-reference-input-placeholder": "Varolan kaynakça içinde ara",
 	"visualeditor-referenceslist-isempty": "Bu listeye dahil etmek için bu sayfada \"$1\" grubu kaynağına uygun kaynak bulunmamaktadır.",
 	"visualeditor-referenceslist-missingref": "Bu kaynak ve şablonlar blok olarak tanımlandığından dolayı henüz yalnızca wiki metin editöründe kaynak modunda düzenlenebilir.",
 	"visualeditor-savedialog-error-badtoken": "Düzenlemenizi işleyemedik çünkü oturumunuz artık geçerli değil.",

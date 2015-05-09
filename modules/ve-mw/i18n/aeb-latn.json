@@ -4,8 +4,9 @@
 			"Csisc"
 		]
 	},
-	"tooltip-ca-ve-edit": "Baddil hel-pâj mģê il-êditër illî ywarrîk in-netîje ţûl",
+	"tooltip-ca-ve-edit": "Beddil hē il-pāj mģē il-ēditër illī ywarrīk in-netīje ţūl",
+	"visualeditor-ca-createsource": "Aģmil is-sūrs",
 	"visualeditor-ca-editsource": "Baddil il-Kod",
-	"visualeditor-ca-editsource-section": "baddil il-Kod",
-	"visualeditor-descriptionpagelink": "Project:Il-êdîtër illî yitcêf"
+	"visualeditor-ca-editsource-section": "beddil il-Kod",
+	"visualeditor-descriptionpagelink": "Project:Il-ēdītër illī yitcēf"
 }

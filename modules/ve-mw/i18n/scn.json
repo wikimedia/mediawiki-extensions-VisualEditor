@@ -17,6 +17,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor è n virsioni 'beta'. Putissitu ncuntrari errura ntô software, e certi parti dâ pàggina putissiru non arrisurtari canciàbbili. Pi' turnari a' canciari direttamenti lu surgenti quannu voi voi, senza pèrdiri li canciamenti, apri u menu a' scìnniri a' latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghî \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Stai usannu nu browser ca nun è suppurtatu ufficiarmenti di VisualEditor.",
+	"visualeditor-ca-createlocaldescriptionsource": "Agghiunci na discrizzioni lucali tràmiti surgenti",
 	"visualeditor-ca-createsource": "Crea surgenti",
 	"visualeditor-ca-editsource": "Cancia surgenti",
 	"visualeditor-ca-editsource-section": "cancia la surgenti",

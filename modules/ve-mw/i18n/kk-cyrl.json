@@ -32,8 +32,6 @@
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Жалғастыру",
 	"visualeditor-dialog-beta-welcome-title": "VisualEditor-ға {{GENDER:$1|қош келдіңіз}}",
-	"visualeditor-dialog-generalreference-intro": "Қайнардың түрін таңдаңыз:",
-	"visualeditor-dialog-generalreference-title": "Дереккөз қосу",
 	"visualeditor-dialog-media-alttext-section": "Баламалы мәтін",
 	"visualeditor-dialog-media-change-image": "Суретті өзгерту",
 	"visualeditor-dialog-media-choose-image": "Бұл суретті қолдану",
