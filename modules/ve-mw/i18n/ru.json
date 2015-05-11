@@ -207,6 +207,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Подзаголовок 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Подзаголовок 4",
 	"visualeditor-languages-tool": "Языки",
+	"visualeditor-linkinspector-button-link-external": "Внешняя ссылка",
+	"visualeditor-linkinspector-button-link-internal": "Поиск страницы",
 	"visualeditor-linkinspector-illegal-title": "Недопустимый заголовок страницы",
 	"visualeditor-linknodeinspector-add-label": "Добавить подпись",
 	"visualeditor-linknodeinspector-title": "Простая ссылка",

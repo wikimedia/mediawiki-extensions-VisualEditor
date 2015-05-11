@@ -152,6 +152,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Корталг 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Корталг 4",
 	"visualeditor-languages-tool": "Меттанаш",
+	"visualeditor-linkinspector-button-link-external": "Арахьара хьажорг",
+	"visualeditor-linkinspector-button-link-internal": "АгӀо лахар",
 	"visualeditor-linkinspector-description-redirect": "ДӀасхьажорг $1 тӀе",
 	"visualeditor-linkinspector-illegal-title": "АгӀона магийна боцу корта",
 	"visualeditor-linknodeinspector-add-label": "ТӀетоха куьг",
