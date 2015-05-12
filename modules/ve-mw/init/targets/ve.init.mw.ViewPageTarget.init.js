@@ -20,6 +20,13 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage,
 		init, support, targetPromise, enable, tempdisable, userPrefEnabled,
+		active = false,
+		progressStep = 0,
+		progressSteps = [
+			[30, 3000],
+			[70, 2000],
+			[100, 1000]
+		],
 		plugins = [];
 
 	function showLoading() {
@@ -46,13 +53,29 @@
 		$content.prepend( init.$loading );
 	}
 
+	function incrementLoadingProgress() {
+		var step = progressSteps[progressStep];
+		setLoadingProgress( step[0], step[1] );
+		progressStep++;
+	}
+
+	function resetLoadingProgress() {
+		progressStep = 0;
+		setLoadingProgress( 0, 0 );
+	}
+
 	function setLoadingProgress( target, duration ) {
 		var $bar = init.$loading.find( '.ve-init-mw-viewPageTarget-progress-bar' ).stop();
-		if ( duration ) {
-			$bar.animate( { width: target + '%' }, duration );
-		} else {
+		$bar.css( {
+			'-webkit-transition': 'width ' + duration + 'ms ease-in',
+			'-moz-transition': 'width ' + duration + 'ms ease-in',
+			'-ms-transition': 'width ' + duration + 'ms ease-in',
+			'-o-transition': 'width ' + duration + 'ms ease-in',
+			transition: 'width ' + duration + 'ms ease-in'
+		} );
+		setTimeout( function () {
 			$bar.css( 'width', target + '%' );
-		}
+		} );
 	}
 
 	function hideLoading() {
@@ -141,20 +164,27 @@
 					uri.query.oldid,
 					'mwTarget' // ve.init.mw.ViewPageTarget.static.name
 				);
+			} )
+			.done( function () {
+				incrementLoadingProgress();
 			} );
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
 		showLoading();
-		setLoadingProgress( 70, 3000 );
+		incrementLoadingProgress();
+		active = true;
 
 		targetPromise = targetPromise || getTarget();
 		targetPromise
 			.then( function ( target ) {
-				setLoadingProgress( 100, 1000 );
+				incrementLoadingProgress();
+				target.on( 'deactivate', function () {
+					active = false;
+				} );
 				return target.activate( dataPromise );
 			} )
 			.then( function () {
-				setLoadingProgress( 0 );
+				resetLoadingProgress();
 				ve.track( 'mwedit.ready' );
 			} )
 			.always( hideLoading );
@@ -453,20 +483,23 @@
 
 			trackActivateStart( { type: 'page', mechanism: 'click' } );
 
-			if ( history.pushState && uri.query.veaction !== 'edit' ) {
-				// Replace the current state with one that is tagged as ours, to prevent the
-				// back button from breaking when used to exit VE. FIXME: there should be a better
-				// way to do this. See also similar code in the ViewPageTarget constructor.
-				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
-				// Set veaction to edit
-				history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+			if ( !active ) {
+				if ( history.pushState ) {
+					// Replace the current state with one that is tagged as ours, to prevent the
+					// back button from breaking when used to exit VE. FIXME: there should be a better
+					// way to do this. See also similar code in the ViewPageTarget constructor.
+					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+					// Set veaction to edit
+					history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+				}
+
 				// Update mw.Uri instance
 				uri = veEditUri;
+
+				activateTarget();
 			}
 
 			e.preventDefault();
-
-			activateTarget();
 		},
 
 		onEditSectionLinkClick: function ( e ) {
