@@ -21,25 +21,3 @@
 .ve-active .ve-ui-toolbar-floating .oo-ui-toolbar-bar {
 	transform: translateY(0);
 }
-
-.ve-init-mw-viewPageTarget-toolbar-utilities,
-.ve-init-mw-viewPageTarget-toolbar-actions {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-actions {
-	vertical-align: top;
-	padding: 0.25em;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-utilities > .oo-ui-buttonElement-frameless {
-	margin-right: 0.2em;
-	margin-top: 0.2em;
-}
-
-.ve-init-mw-viewPageTarget-toolbar-actions > .oo-ui-buttonElement-framed {
-	margin-left: 0.25em;
-	margin-right: 0.25em;
-	margin-top: 0.2em;
-}
