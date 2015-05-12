@@ -27,6 +27,10 @@
 	margin: -0.75em -1em 1.25em -1em;
 }
 
+.ve-init-mw-viewPageTarget-toolbar > .oo-ui-toolbar-bar {
+	top: -3px;
+}
+
 .ve-init-target > .ve-ui-debugBar {
 	border-top: 1px solid #ccc;
 }
