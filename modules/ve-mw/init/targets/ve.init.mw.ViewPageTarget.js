@@ -1211,9 +1211,6 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
  * Add the save button to the user interface.
  */
 ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
-	var $actionTools = $( '<div>' ),
-		$pushButtons = $( '<div>' );
-
 	this.actionsToolbar = new ve.ui.TargetToolbar( this );
 
 	this.actionsToolbar.setup( [
@@ -1226,15 +1223,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
 		}
 	], this.getSurface() );
 
-	$actionTools
-		.addClass( 've-init-mw-viewPageTarget-toolbar-utilities' )
-		.append( this.actionsToolbar.$element );
-
-	$pushButtons
-		.addClass( 've-init-mw-viewPageTarget-toolbar-actions' )
-		.append( this.toolbarSaveButton.$element );
-
-	this.toolbar.$actions.append( $actionTools, $pushButtons );
+	this.toolbar.$actions.append( this.actionsToolbar.$element, this.toolbarSaveButton.$element );
 	// Make the toolbar recalculate its sizes for narrow/wide switching.
 	// This really should not be necessary.
 	this.toolbar.narrowThreshold = this.toolbar.$group.width() + this.toolbar.$actions.width();
