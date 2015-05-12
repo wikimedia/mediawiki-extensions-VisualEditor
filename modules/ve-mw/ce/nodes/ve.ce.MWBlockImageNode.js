@@ -17,13 +17,14 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
-	var type, align;
+	var type, align, isError;
 
 	// Parent constructor
 	ve.ce.BranchNode.call( this, model, config );
 
 	type = this.model.getAttribute( 'type' );
 	align = this.model.getAttribute( 'align' );
+	isError = this.model.getAttribute( 'isError' );
 
 	// Properties
 	this.captionVisible = false;
@@ -36,13 +37,19 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
 	//     <figcaption> this.caption.view.$element
 
 	// Build DOM:
-	this.$a = $( '<a>' )
-		.addClass( 'image' )
-		.attr( 'href', this.getResolvedAttribute( 'href' ) );
-
 	this.$image = $( '<img>' )
-		.attr( 'src', this.getResolvedAttribute( 'src' ) )
-		.appendTo( this.$a );
+		.attr( 'src', this.getResolvedAttribute( 'src' ) );
+
+	if ( isError ) {
+		this.$a = $( '<a>' )
+			.addClass( 'new' )
+			.text( this.model.getFilename() );
+	} else {
+		this.$a = $( '<a>' )
+			.addClass( 'image' )
+			.attr( 'href', this.getResolvedAttribute( 'href' ) )
+			.append( this.$image );
+	}
 
 	this.$element
 		.append( this.$a )
