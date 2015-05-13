@@ -29,6 +29,7 @@
 	"visualeditor-dialog-media-info-ellipsis": "…",
 	"visualeditor-dialog-media-info-separator": "·",
 	"visualeditor-dialog-media-noresults": "Ti encam nehatin dîtin.",
+	"visualeditor-dialog-media-size-section": "Mezinahiya wêneyî",
 	"visualeditor-dialog-meta-advancedsettings-label": "Hevyazên pêşketî",
 	"visualeditor-dialog-meta-advancedsettings-section": "Hevyazên pêşketî",
 	"visualeditor-dialog-meta-categories-category": "Kategorî",
@@ -52,6 +53,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Na",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Erê",
 	"visualeditor-dialog-meta-settings-redirect-label": "Vê rûpelê beralî bike ber bi",
+	"visualeditor-dialog-meta-settings-section": "Hevyazên rûpelê",
 	"visualeditor-dialog-meta-settings-toc-default": "Gava pêwist be",
 	"visualeditor-dialog-meta-settings-toc-disable": "Qet",
 	"visualeditor-dialog-meta-settings-toc-force": "Hertim",
@@ -71,6 +73,7 @@
 	"visualeditor-dialog-transclusion-placeholder": "Şablonekê lê zêde bike",
 	"visualeditor-dialog-transclusion-remove-content": "Naverokê jê bibe",
 	"visualeditor-dialog-transclusion-remove-template": "Şablonê jê bibe",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Vegere",
 	"visualeditor-dialog-transclusion-single-mode": "Vebijarkan veşêre",
 	"visualeditor-dialogbutton-meta-tooltip": "Hevyazên rûpelê",
 	"visualeditor-dialogbutton-template-tooltip": "Şablon",
@@ -89,6 +92,7 @@
 	"visualeditor-savedialog-label-save": "Rûpelê tomar bike",
 	"visualeditor-savedialog-label-warning": "Hişyarî",
 	"visualeditor-savedialog-title-save": "Guherandinên xwe tomar bike",
+	"visualeditor-settings-tool": "Hevyazên rûpelê",
 	"visualeditor-toolbar-savedialog": "Rûpelê tomar bike",
 	"visualeditor-version-label": "Guherto"
 }
