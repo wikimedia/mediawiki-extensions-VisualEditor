@@ -18,7 +18,8 @@
 			"Lucas2",
 			"Nemo bis",
 			"Fringio",
-			"Martinligabue"
+			"Martinligabue",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -235,6 +236,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Sottotitolo 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sottotitolo 4",
 	"visualeditor-languages-tool": "Lingue",
+	"visualeditor-linkinspector-button-link-external": "Collegamento esterno",
+	"visualeditor-linkinspector-button-link-internal": "Ricerca pagine",
 	"visualeditor-linkinspector-description-new-page": "Questa pagina non esiste ancora.",
 	"visualeditor-linkinspector-illegal-title": "Titolo di pagina non valido",
 	"visualeditor-linknodeinspector-add-label": "Aggiungi etichetta",

@@ -184,7 +184,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Назад",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Все равно продолжить",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Требуемый параметр{{PLURAL:$1||ы}} отсутству{{PLURAL:$1|ет|ют}}",
-	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Вы уверены, что хотите продолжить без заполнения $1 {{PLURAL:$2|параметра|параметров}}?",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Вы уверены, что хотите продолжить без заполнения {{PLURAL:$2|параметра|параметров}} «$1»?",
 	"visualeditor-dialog-transclusion-single-mode": "Скрыть параметры",
 	"visualeditor-dialog-transclusion-title": "Включение",
 	"visualeditor-dialogbutton-media-tooltip": "Медиа-файл",
