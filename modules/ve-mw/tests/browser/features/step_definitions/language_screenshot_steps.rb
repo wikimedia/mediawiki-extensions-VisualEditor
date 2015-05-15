@@ -58,7 +58,7 @@ When(/^I click on the Special character option in the toolbar$/) do
   on(VisualEditorPage).special_character_element.when_present.click
 end
 
-When(/^I click on list and indentation dropdown$/) do
+When(/^I click on list and indentation button$/) do
   on(VisualEditorPage).bullet_number_selector_element.when_present.click
 end
 
@@ -303,7 +303,7 @@ end
 
 Then(/^I should see list and indentation dropdown$/) do
   on(VisualEditorPage).indentation_pull_down_element.when_present.should be_visible
-  Screenshot.zoom_browser(@browser, 3)
+
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
