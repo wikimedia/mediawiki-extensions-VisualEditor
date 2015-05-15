@@ -147,7 +147,7 @@ class VisualEditorPage
   a(:second_reference, text: '[1]', index: 2)
   span(:second_save_page, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
   div(:settings_apply_button, css: '.oo-ui-window-frame .oo-ui-processDialog-actions-primary')
-  span(:special_character, class: 'oo-ui-iconElement-icon oo-ui-icon-special-character')
+  span(:special_character, class: 'oo-ui-iconElement-icon oo-ui-icon-specialCharacter')
   a(:subheading1, text: /Sub-heading 1/)
   a(:subheading2, text: /Sub-heading 2/)
   a(:subheading3, text: /Sub-heading 3/)

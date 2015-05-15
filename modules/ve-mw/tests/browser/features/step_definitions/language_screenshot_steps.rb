@@ -54,9 +54,7 @@ When(/^I click on the Insert menu$/) do
   on(VisualEditorPage).insert_indicator_down_element.when_present.click
 end
 
-When(/^I click on the Special character option in Insert menu$/) do
-  step 'I click on the Insert menu'
-  step 'I click on More in the pull-down menu'
+When(/^I click on the Special character option in the toolbar$/) do
   on(VisualEditorPage).special_character_element.when_present.click
 end
 
