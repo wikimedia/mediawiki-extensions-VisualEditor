@@ -49,8 +49,7 @@ Feature: Language Screenshot
   Scenario: VisualEditor_Toolbar_Lists_and_indentation
     Given I go to the "Indent Outdent Screenshot" page with source content "Indent Outdent Screenshot"
       And I make the text "Indent Outdent" be selected
-    When I click Bullets
-      And I click on list and indentation dropdown
+    When I click on list and indentation button
     Then I should see list and indentation dropdown
 
   Scenario: VisualEditor_External_link
