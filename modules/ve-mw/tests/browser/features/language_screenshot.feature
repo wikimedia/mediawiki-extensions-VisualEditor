@@ -28,7 +28,7 @@ Feature: Language Screenshot
   @language_screenshot
   Scenario: VisualEditor_Toolbar_SpecialCharacters
     Given I am editing the language screenshots page
-    When I click on the Special character option in Insert menu
+    When I click on the Special character option in the toolbar
     Then I should see Special character Insertion window
 
   @language_screenshot
