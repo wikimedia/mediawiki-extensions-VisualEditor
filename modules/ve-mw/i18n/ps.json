@@ -4,6 +4,7 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
+	"apihelp-visualeditor-param-page": "هغه مخ چې کړنې پرې ترسره کېږي.",
 	"apihelp-visualeditoredit-param-summary": "لنډيز سمول.",
 	"tooltip-ca-createsource": "د دې مخ د سرچينې کوډ جوړول",
 	"tooltip-ca-editsource": "د دې مخ د سرچينې کوډ سمول",
@@ -59,6 +60,7 @@
 	"visualeditor-dialog-media-size-choosedefault": "تلواليزې کچې ته امستل",
 	"visualeditor-dialog-media-size-choosefull": "بشپړې کچې ته امستل",
 	"visualeditor-dialog-media-size-section": "انځور کچه",
+	"visualeditor-dialog-media-thumbdimensions": "د بټنوک ډډونونه",
 	"visualeditor-dialog-media-title": "د رسنۍ امستنې",
 	"visualeditor-dialog-media-type-border": "پوله",
 	"visualeditor-dialog-media-type-frame": "چوکاټ",
@@ -117,6 +119,7 @@
 	"visualeditor-dialog-transclusion-add-param": "نور مالومات ورگډول",
 	"visualeditor-dialog-transclusion-add-template": "کينډۍ ورگډول",
 	"visualeditor-dialog-transclusion-content": "منځپانگه",
+	"visualeditor-dialog-transclusion-contextitem-description": "جوړ شوی له: $1",
 	"visualeditor-dialog-transclusion-loading": "برسېرېدنې کې دی...",
 	"visualeditor-dialog-transclusion-multiple-mode": "خوښنې ښکاره کول",
 	"visualeditor-dialog-transclusion-options": "خوښنې",
@@ -150,6 +153,7 @@
 	"visualeditor-linkinspector-button-link-external": "باندنۍ تړنه",
 	"visualeditor-linkinspector-button-link-internal": "مخونه پلټل",
 	"visualeditor-linkinspector-description-new-page": "پدې نوم لا تر اوسه پورې مخ نشته",
+	"visualeditor-linkinspector-description-redirect": "$1 ته ورگرځول",
 	"visualeditor-linkinspector-illegal-title": "ناسم سرليک",
 	"visualeditor-linknodeinspector-add-label": "لېبل ورگډول",
 	"visualeditor-linknodeinspector-title": "ساده تړنه",
@@ -159,9 +163,11 @@
 	"visualeditor-meta-tool": "خوښنې",
 	"visualeditor-mweditmodesource-warning-cancel": "ناگارل",
 	"visualeditor-mweditmodesource-warning-switch": "بدلونونه ساتل",
+	"visualeditor-mweditmodesource-warning-switch-discard": "بدلونونه غورځول",
 	"visualeditor-mwgalleryinspector-title": "انځورتون",
 	"visualeditor-pagemenu-tooltip": "د مخ خوښنې",
 	"visualeditor-parameter-input-placeholder": "د ډاگي نوم",
+	"visualeditor-parameter-search-more": "{{PLURAL:$1|يو بل ډاگی|$1 نور ډاگونه}} ښکاره کول",
 	"visualeditor-parameter-search-no-unused": "ناکارېدلي ډاگونه نشته",
 	"visualeditor-parameter-search-unknown": "ناجوت ډاگی",
 	"visualeditor-preference-core-description": "ليدنيز سمونگر چارنول. دا به د خبرو اترو په مخونو او ځينو نورو نومتشيالونو کې نه وي.",
@@ -186,5 +192,6 @@
 	"visualeditor-toolbar-savedialog": "مخ خوندي کول",
 	"visualeditor-usernamespacepagelink": "Project:کارن نومتشيال",
 	"visualeditor-version-label": "بڼه",
+	"visualeditor-viewpage-savewarning-discard": "سمونونه غورځول",
 	"visualeditor-viewpage-savewarning-title": "آيا تاسې ډاډه ياست؟"
 }
