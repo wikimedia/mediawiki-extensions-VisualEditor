@@ -46,18 +46,11 @@ ve.dm.MWTransclusionNode.static.name = 'mwTransclusion';
 
 ve.dm.MWTransclusionNode.static.matchTagNames = null;
 
-ve.dm.MWTransclusionNode.static.matchRdfaTypes = [
-	'mw:Transclusion',
-	// We're interested in all nodes that have mw:Transclusion, even if they also have other mw:
-	// types. So we match all mw: types, then use a matchFunction to assert that mw:Transclusion
-	// is in there.
-	/^mw:/
-];
+ve.dm.MWTransclusionNode.static.matchRdfaTypes = [ 'mw:Transclusion' ];
 
-ve.dm.MWTransclusionNode.static.matchFunction = function ( domElement ) {
-	var types = ( domElement.getAttribute( 'typeof' ) || '' ).split( ' ' );
-	return types.indexOf( 'mw:Transclusion' ) !== -1;
-};
+// Transclusion nodes can contain other types, e.g. mw:PageProp/Category.
+// Allow all other types (null) so they match to this node.
+ve.dm.MWTransclusionNode.static.allowedRdfaTypes = null;
 
 ve.dm.MWTransclusionNode.static.enableAboutGrouping = true;
 

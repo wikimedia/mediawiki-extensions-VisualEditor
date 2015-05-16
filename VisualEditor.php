@@ -843,8 +843,6 @@ $wgResourceModules += array(
 	'ext.visualEditor.mwcore' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			// dm
-			'modules/ve-mw/dm/ve.dm.MW.js',
-
 			'modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWExtensionNode.js',
 			'modules/ve-mw/dm/nodes/ve.dm.MWTableNode.js',
