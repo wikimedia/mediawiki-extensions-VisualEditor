@@ -448,6 +448,8 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	// Remove old classes
 	delete editAttributes.originalClasses;
 	delete editAttributes.unrecognizedClasses;
+	// Newly created images must have valid URLs, so remove the error attribute
+	delete editAttributes.isError;
 
 	contentToInsert = [
 		{
