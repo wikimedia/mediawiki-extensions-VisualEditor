@@ -37,7 +37,10 @@ ve.test.utils.mwEnvironment = ( function () {
 			ve.dm.MWPreformattedNode,
 			ve.dm.MWTableNode
 		],
-		overridden = [];
+		overridden = [
+			ve.dm.InlineImageNode,
+			ve.dm.BlockImageNode
+		];
 
 	function setupOverrides() {
 		var i;

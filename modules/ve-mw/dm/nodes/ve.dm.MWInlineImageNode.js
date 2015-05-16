@@ -211,4 +211,5 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 
 /* Registration */
 
+ve.dm.modelRegistry.unregister( ve.dm.InlineImageNode );
 ve.dm.modelRegistry.register( ve.dm.MWInlineImageNode );
