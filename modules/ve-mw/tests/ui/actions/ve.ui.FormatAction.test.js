@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.ui.FormatAction (MW)' );
+QUnit.module( 've.ui.FormatAction (MW)', ve.test.utils.mwEnvironment );
 
 /* Tests */
 

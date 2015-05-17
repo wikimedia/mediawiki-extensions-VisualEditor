@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.ce.Surface (MW)' );
+QUnit.module( 've.ce.Surface (MW)', ve.test.utils.mwEnvironment );
 
 /* Tests */
 

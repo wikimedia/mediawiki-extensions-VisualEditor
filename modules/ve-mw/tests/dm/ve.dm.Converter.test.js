@@ -5,19 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.dm.Converter (MW)', QUnit.newMwEnvironment() );
-
-ve.test.utils.modelRegistrySetup = function () {
-	ve.dm.modelRegistry.register( ve.dm.MWHeadingNode );
-	ve.dm.modelRegistry.register( ve.dm.MWPreformattedNode );
-	ve.dm.modelRegistry.register( ve.dm.MWTableNode );
-};
-
-ve.test.utils.modelRegistryTeardown = function () {
-	ve.dm.modelRegistry.register( ve.dm.HeadingNode );
-	ve.dm.modelRegistry.register( ve.dm.PreformattedNode );
-	ve.dm.modelRegistry.register( ve.dm.TableNode );
-};
+QUnit.module( 've.dm.Converter (MW)', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'getModelFromDom', function ( assert ) {
 	var msg, caseItem,
@@ -25,7 +13,6 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 
 	QUnit.expect( ve.test.utils.countGetModelFromDomTests( cases ) );
 
-	ve.test.utils.modelRegistrySetup();
 	for ( msg in cases ) {
 		caseItem = ve.copy( cases[msg] );
 		if ( caseItem.mwConfig ) {
@@ -34,7 +21,6 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 
 		ve.test.utils.runGetModelFromDomTest( assert, caseItem, msg );
 	}
-	ve.test.utils.modelRegistryTeardown();
 } );
 
 QUnit.test( 'getDomFromModel', function ( assert ) {
@@ -43,7 +29,6 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 
 	QUnit.expect( 3 * Object.keys( cases ).length );
 
-	ve.test.utils.modelRegistrySetup();
 	for ( msg in cases ) {
 		caseItem = ve.copy( cases[msg] );
 		if ( caseItem.mwConfig ) {
@@ -52,5 +37,4 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 
 		ve.test.utils.runGetDomFromModelTest( assert, caseItem, msg );
 	}
-	ve.test.utils.modelRegistryTeardown();
 } );
