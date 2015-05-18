@@ -63,12 +63,11 @@ ve.dm.MWBlockImageNode.static.matchTagNames = [ 'figure' ];
 
 ve.dm.MWBlockImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
-ve.dm.MWBlockImageNode.static.matchRdfaTypes = [
-	// We're interested in all nodes that have mw:Image, even if they also have other mw:
-	// types. So we match all mw: types, then use a matchFunction to assert that mw:Image
-	// is in there.
-	/^mw:/
-];
+ve.dm.MWBlockImageNode.static.getMatchRdfaTypes = function () {
+	return Object.keys( this.rdfaToType );
+};
+
+ve.dm.MWBlockImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
 
 ve.dm.MWBlockImageNode.static.matchFunction = function ( domElement ) {
 	var nodetypes = ( domElement.getAttribute( 'typeof' ) || '' ).split( ' ' ),

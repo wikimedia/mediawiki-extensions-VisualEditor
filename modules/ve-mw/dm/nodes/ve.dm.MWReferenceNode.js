@@ -44,6 +44,8 @@ ve.dm.MWReferenceNode.static.matchTagNames = null;
 
 ve.dm.MWReferenceNode.static.matchRdfaTypes = [ 'mw:Extension/ref' ];
 
+ve.dm.MWReferenceNode.static.allowedRdfaTypes = [ 'dc:references' ];
+
 ve.dm.MWReferenceNode.static.isContent = true;
 
 ve.dm.MWReferenceNode.static.blacklistedAnnotationTypes = [ 'link' ];
