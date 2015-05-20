@@ -27,6 +27,8 @@
 			"Дмитрий"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "Действие, которое необходимо выполнить.",
+	"apihelp-visualeditor-param-page": "Страница, на которой необходимо выполнить действие.",
 	"apihelp-visualeditoredit-param-summary": "Редактировать описание изменений.",
 	"tooltip-ca-createsource": "Создать страницу в редакторе исходного текста",
 	"tooltip-ca-editsource": "Править исходный текст этой страницы",

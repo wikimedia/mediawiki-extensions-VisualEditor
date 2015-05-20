@@ -4,7 +4,8 @@
 			"Ashok modhvadia",
 			"KartikMistry",
 			"The Discoverer",
-			"Arbhatt"
+			"Arbhatt",
+			"Dsvyas"
 		]
 	},
 	"tooltip-ca-createsource": "આ પાનાંનો સ્ત્રોત કોડ બનાવો",
@@ -158,7 +159,7 @@
 	"visualeditor-referenceslist-isempty-default": "આ યાદીમાં ઉમેરવા માટે આ પાનાં પર કોઇ સંદર્ભ નથી.",
 	"visualeditor-referenceslist-missingref": "આ સંદર્ભ ટેમ્પલેટ અથવા બનેલ માળખાંમાં વ્યાખ્યાયિત થયેલ છે, અને અત્યારે તે માત્ર સ્ત્રોત સ્થિતિમાં જ ફેરફાર કરી શકાય છે.",
 	"visualeditor-savedialog-error-badtoken": "અમે તમારા ફેરફાર પર પ્રક્રિયા કરી શકતા નથી કારણકે સત્ર હવે યોગ્ય નથી.",
-	"visualeditor-savedialog-identify-anon": "શું તમે આ પાનાંને અજ્ઞાત સભ્ય તરીકે સાચવવામાં માંગો છો? તમારું IP સરનામું આ પાનાંના ફેરફાર ઇતિહાસમાં નોંધાઇ જશે.",
+	"visualeditor-savedialog-identify-anon": "શું તમે આ પાનાંને અજ્ઞાત સભ્ય તરીકે સાચવવા માંગો છો? તમારું IP સરનામું આ પાનાના ફેરફાર ઇતિહાસમાં નોંધાઇ જશે.",
 	"visualeditor-savedialog-identify-user": "તમે હવે [[User:$1|$1]] પ્રવેશ મેળવેલ છે. જો તમે આ ફેરફાર સાચવશો તો તમારા ફેરફારો હવે આ ખાતાં સાથે જોડાશે.",
 	"visualeditor-savedialog-label-create": "પાનું બનાવો",
 	"visualeditor-savedialog-label-error": "ક્ષતિ",

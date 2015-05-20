@@ -189,6 +189,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "عنوان فرعي 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "عنوان فرعي 4",
 	"visualeditor-languages-tool": "اللغات",
+	"visualeditor-linkinspector-button-link-external": "وصلة خارجية",
+	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحة",
 	"visualeditor-linkinspector-illegal-title": "عنوان الصفحة غير صحيح",
 	"visualeditor-linknodeinspector-add-label": "إضافة تسمية",
 	"visualeditor-linknodeinspector-title": "وصلة بسيطة",
