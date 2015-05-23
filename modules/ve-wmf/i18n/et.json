@@ -12,7 +12,7 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Ümberlülitus]]",
 	"tag-visualeditor-switched-description": "Kasutaja alustas redigeerimist VisualEditoriga, aga läks seejärel üle vikiteksti redaktorile.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Tagasiside",
-	"visualeditor-feedback-tool": "Anna tagasisidet",
+	"visualeditor-feedback-tool": "Anna selle tarkvara kohta tagasisidet",
 	"visualeditor-help-label": "Loe kasutusjuhendit",
 	"visualeditor-help-title": "Redaktori kasutusjuhend"
 }

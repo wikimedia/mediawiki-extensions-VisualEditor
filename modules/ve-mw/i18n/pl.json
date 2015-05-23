@@ -25,6 +25,7 @@
 			"Jdforrester"
 		]
 	},
+	"apihelp-visualeditor-param-oldid": "Numer wersji, którą chcesz użyć (domyślnie to numer aktualnej wersji).",
 	"apihelp-visualeditor-param-paction": "Zadanie do wykonania.",
 	"apihelp-visualeditoredit-param-minor": "Oznacz jako drobną edycję.",
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
