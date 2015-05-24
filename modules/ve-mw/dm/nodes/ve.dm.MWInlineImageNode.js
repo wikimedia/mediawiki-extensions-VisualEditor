@@ -56,22 +56,34 @@ ve.dm.MWInlineImageNode.static.getMatchRdfaTypes = function () {
 	return Object.keys( this.rdfaToType );
 };
 
+ve.dm.MWInlineImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
+
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
-	var dataElement,
+	var dataElement, attributes,
 		$span = $( domElements[0] ),
 		$firstChild = $span.children().first(), // could be <span> or <a>
 		$img = $firstChild.children().first(),
-		typeofAttr = $span.attr( 'typeof' ),
+		typeofAttrs = $span.attr( 'typeof' ).split( ' ' ),
 		classes = $span.attr( 'class' ),
 		recognizedClasses = [],
-		attributes = {
-			type: this.rdfaToType[typeofAttr],
-			src: $img.attr( 'src' ),
-			resource: $img.attr( 'resource' ),
-			originalClasses: classes
-		},
+		errorIndex = typeofAttrs.indexOf( 'mw:Error' ),
 		width = $img.attr( 'width' ),
 		height = $img.attr( 'height' );
+
+	if ( errorIndex !== -1 ) {
+		typeofAttrs.splice( errorIndex, 1 );
+	}
+
+	attributes = {
+		type: this.rdfaToType[typeofAttrs[0]],
+		src: $img.attr( 'src' ),
+		resource: $img.attr( 'resource' ),
+		originalClasses: classes
+	};
+
+	if ( errorIndex !== -1 ) {
+		attributes.isError = true;
+	}
 
 	attributes.width = width !== undefined && width !== '' ? Number( width ) : null;
 	attributes.height = height !== undefined && height !== '' ? Number( height ) : null;
