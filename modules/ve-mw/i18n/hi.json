@@ -13,12 +13,16 @@
 			"संजीव कुमार",
 			"Phoenix303",
 			"Ankita-ks",
-			"Sahilrathod"
+			"Sahilrathod",
+			"Hindustanilanguage"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid सेवा से एक पेज के लिए HTML5 वापस करता है।",
 	"apihelp-visualeditor-param-html": "HTML विकिटेक्स्ट में कन्वर्ट करने के लिए Parsoid में भेजे।",
 	"apihelp-visualeditor-param-pst": "Parsoid को भेजने से पहले परिवरतित विकिटेक्स्ट को बचाएँ\n(paction=parsefragment)",
+	"apihelp-visualeditoredit-param-captchaid": "कैपचा आई०डी० (जब कैपचा के जवाब में सहेज रहे हों) ।",
+	"apihelp-visualeditoredit-param-captchaword": "कैपचा का जवाब दें (जब कैपचा के जवाब में सहेज रहे हों) ।",
+	"apihelp-visualeditoredit-param-minor": "मामूली सम्पादन की झंडी",
 	"apihelp-visualeditoredit-param-summary": "संपादन सारांश",
 	"tooltip-ca-createsource": "इस पृष्ठ का स्रोत पाठ बनाएँ",
 	"tooltip-ca-editsource": "इस पृष्ठ का स्रोत पाठ सम्पादित करें",
@@ -209,6 +213,10 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "उप-शीर्षक 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "उप-शीर्षक 4",
 	"visualeditor-languages-tool": "भाषाएँ",
+	"visualeditor-linkinspector-button-link-external": "बाहरी कड़ियाँ",
+	"visualeditor-linkinspector-button-link-internal": "खोज पृष्ठ",
+	"visualeditor-linkinspector-description-new-page": "पृष्ठ अभी मौजूद नहीं है",
+	"visualeditor-linkinspector-description-redirect": "$1 को अनुप्रेषित",
 	"visualeditor-linkinspector-illegal-title": "अमान्य पृष्ठ नाम",
 	"visualeditor-linknodeinspector-add-label": "लेबल जोड़ें",
 	"visualeditor-linknodeinspector-title": "सरल कड़ी",

@@ -77,6 +77,8 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Падзагаловак 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Падзагаловак 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Падзагаловак 4",
+	"visualeditor-linkinspector-button-link-external": "Вонкавая спасылка",
+	"visualeditor-linkinspector-button-link-internal": "Пошук старонкі",
 	"visualeditor-linkinspector-description-new-page": "старонка яшчэ не існуе",
 	"visualeditor-linkinspector-illegal-title": "Няслушная назва старонкі",
 	"visualeditor-loadwarning": "Памылка ў час загрузкі зьвестак з сэрвэру: $1. Жадаеце паўтарыць?",
