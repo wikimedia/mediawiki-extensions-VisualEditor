@@ -246,7 +246,7 @@
 	"visualeditor-preference-mwalienextension-description": "Thêm chức năng thử nghiệm cơ bản vào Trình soạn thảo trực quan để sửa đổi các thẻ mở rộng (chẳng hạn tập ảnh và khối mã nguồn), để thử thách trước khi phát hành cho mọi người. Sau khi bật lên tính năng thử nghiệm này, xin vui lòng nhớ luôn xem lại các thay đổi trước khi lưu.",
 	"visualeditor-preference-mwalienextension-label": "Sửa thẻ mở rộng trong Trình soạn thảo trực quan",
 	"visualeditor-recreate": "Trang này đã bị xóa sau khi bạn bắt đầu sửa đổi. Bấm “$1” để tạo nó lại.",
-	"visualeditor-reference-input-placeholder": "Tìm kiếm trong đoạn trích dẫn hiện tại",
+	"visualeditor-reference-input-placeholder": "Tìm kiếm trong chú thích hiện tại",
 	"visualeditor-referenceslist-isempty": "Trang này không có chú thích tham khảo thuộc nhóm “$1” để liệt kê tại đây.",
 	"visualeditor-referenceslist-isempty-default": "Trang này không có chú thích tham khảo để liệt kê tại đây.",
 	"visualeditor-referenceslist-missingref": "Chú thích tham khảo này được định rõ trong một bản mẫu hoặc phần nội dung tự động khác. Hiện nay chỉ có thể sửa đổi chú thích này trong chế độ sửa mã nguồn.",
