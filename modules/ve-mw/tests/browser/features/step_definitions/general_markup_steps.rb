@@ -1,5 +1,5 @@
 When(/^I click the Bold menu option$/) do
-  on(VisualEditorPage).ve_bold_text_element.when_present(15).click
+  on(VisualEditorPage).ve_bold_text_element.when_present.click
 end
 
 When(/^I click the Computer Code menu option$/) do
@@ -7,7 +7,7 @@ When(/^I click the Computer Code menu option$/) do
 end
 
 When(/^I click the Italics menu option$/) do
-  on(VisualEditorPage).ve_italics_element.when_present(15).click
+  on(VisualEditorPage).ve_italics_element.when_present.click
 end
 
 When(/^I click the More option$/) do

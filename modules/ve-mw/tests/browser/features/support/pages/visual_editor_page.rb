@@ -56,7 +56,6 @@ class VisualEditorPage
   span(:confirm_switch_cancel_on_switch, text: 'Cancel')
   span(:confirm_switch_discard, text: 'Discard changes')
   span(:option_to_always_show_TOC, css: 'div.oo-ui-fieldLayout-align-top:nth-child(4) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
-  div(:content, class: 've-ce-branchNode')
   span(:decrease_indentation, class: 'oo-ui-iconElement-icon oo-ui-icon-outdent')
   text_area(:describe_change, index: 0)
   div(:diff_view, class: 've-ui-mwSaveDialog-viewer')
@@ -177,11 +176,9 @@ class VisualEditorPage
   div(:toolbar_actions, class: 'oo-ui-toolbar-actions')
   a(:transclusion, css: 'span.oo-ui-widget.oo-ui-iconElement.oo-ui-tool.oo-ui-tool-name-transclusion.oo-ui-widget-enabled > a')
   text_field(:transclusion_description, css: '.oo-ui-inputWidget > input:nth-child(1)')
-  span(:ve_bold_text, class: 'oo-ui-iconElement-icon oo-ui-icon-bold')
   span(:ve_bullets, css: '.oo-ui-clippableElement-clippable .oo-ui-iconElement-icon.oo-ui-icon-listBullet')
   span(:ve_computer_code, class: 'oo-ui-iconElement-icon oo-ui-icon-code')
   div(:ve_heading_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-down')
-  span(:ve_italics, class: 'oo-ui-iconElement-icon oo-ui-icon-italic')
   span(:ve_link_icon, class: 'oo-ui-iconElement-icon oo-ui-icon-link')
   span(:ve_link_ui, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-labelElement-label oo-ui-labelWidget oo-ui-processDialog-title oo-ui-labelElement', text: 'Link')
   span(:ve_media_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-picture')
@@ -202,6 +199,18 @@ class VisualEditorPage
   div(:content_box, class: 've-ce-documentNode ve-ce-branchNode noime')
   div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 2)
   div(:media_advanced_settings, class: 'oo-ui-outlineOptionWidget-level-0', index: 1)
+
+  def ve_bold_text_element
+    @browser.execute_script('return ve.init.target.getToolbar().items[2].tools.bold.$link[0]')
+  end
+
+  def ve_italics_element
+    @browser.execute_script('return ve.init.target.getToolbar().items[2].tools.italic.$link[0]')
+  end
+
+  def content_element
+    @browser.execute_script('return ve.init.target.surface.view.documentView.documentNode.$element[0]')
+  end
 
   def tools_menu_element
     if browser_name == :chrome
