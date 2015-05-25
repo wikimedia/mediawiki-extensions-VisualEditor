@@ -889,7 +889,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWCommandHelpDialog.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css',
 			'modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css',
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTitleInputWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css',
 		),
 		'dependencies' => array(
@@ -903,6 +902,7 @@ $wgResourceModules += array(
 			'jquery.byteLimit',
 			'mediawiki.skinning.content.parsoid',
 			'mediawiki.language.specialCharacters',
+			'mediawiki.widgets'
 		),
 		'messages' => array(
 			'visualeditor-beta-label',

@@ -6,128 +6,43 @@
  */
 
 /**
- * Creates an ve.ui.MWTitleInputWidget object.
+ * Thin wrapper around mw.widgets.TitleInputWidget
  *
  * @class
- * @extends OO.ui.TextInputWidget
- * @mixins OO.ui.LookupElement
+ * @extends mw.widgets.TitleInputWidget
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {number} [namespace] Namespace to prepend to queries
  */
 ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
-	// Config initialization
-	config = config || {};
-
 	// Parent constructor
-	OO.ui.TextInputWidget.call( this, config );
-
-	// Mixin constructors
-	OO.ui.LookupElement.call( this, config );
-
-	// Properties
-	this.namespace = config.namespace || null;
-
-	// Initialization
-	this.$element.addClass( 've-ui-mwTitleInputWidget' );
-	this.lookupMenu.$element.addClass( 've-ui-mwTitleInputWidget-menu' );
+	ve.ui.MWTitleInputWidget.super.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTitleInputWidget, OO.ui.TextInputWidget );
-
-OO.mixinClass( ve.ui.MWTitleInputWidget, OO.ui.LookupElement );
+OO.inheritClass( ve.ui.MWTitleInputWidget, mw.widgets.TitleInputWidget );
 
 /* Methods */
 
 /**
- * @inheritdoc
- */
-ve.ui.MWTitleInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
-	this.closeLookupMenu();
-	this.setLookupsDisabled( true );
-	this.setValue( item.getData() );
-	this.setLookupsDisabled( false );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWTitleInputWidget.prototype.getLookupRequest = function () {
-	var value = this.value;
-
-	// Prefix with default namespace name
-	if ( this.namespace !== null && mw.Title.newFromText( value, this.namespace ) ) {
-		value = mw.Title.newFromText( value, this.namespace ).getPrefixedText();
-	}
-
-	// Dont send leading ':' to open search
-	if ( value.charAt( 0 ) === ':' ) {
-		value = value.slice( 1 );
-	}
-
-	return new mw.Api().get( {
-		action: 'opensearch',
-		search: value,
-		suggest: ''
-	} );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWTitleInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
-	return data[1] || [];
-};
-
-/**
- * @inheritdoc
+ * Get a list of menu option widgets from the (possibly cached) data returned by
+ * #getLookupCacheDataFromResponse.
+ *
+ * See the parent documentation at <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.widgets.TitleInputWidget>
+ *
+ * @param {Mixed} data Cached result data, usually an array
+ * @return {OO.ui.MenuOptionWidget[]} Menu items
  */
 ve.ui.MWTitleInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	var i, len, title, value,
-		items = [],
-		matchingPages = data,
+	var i, len,
 		linkCacheUpdate = {};
-
-	// Matching pages
-	if ( matchingPages && matchingPages.length ) {
-		for ( i = 0, len = matchingPages.length; i < len; i++ ) {
-			title = new mw.Title( matchingPages[i] );
-			linkCacheUpdate[matchingPages[i]] = { missing: false };
-			if ( this.namespace !== null ) {
-				value = title.getRelativeText( this.namespace );
-			} else {
-				value = title.getPrefixedText();
-			}
-			items.push( new OO.ui.MenuOptionWidget( {
-				data: value,
-				label: value
-			} ) );
+	if ( data && data.length ) {
+		for ( i = 0, len = data.length; i < len; i++ ) {
+			linkCacheUpdate[data[i]] = { missing: false };
 		}
 		ve.init.platform.linkCache.set( linkCacheUpdate );
 	}
 
-	return items;
-};
-
-/**
- * Get title object corresponding to #getValue
- *
- * @returns {mw.Title|null} Title object, or null if value is invalid
- */
-ve.ui.MWTitleInputWidget.prototype.getTitle = function () {
-	var title = this.getValue(),
-		// mw.Title doesn't handle null well
-		titleObj = mw.Title.newFromText( title, this.namespace !== null ? this.namespace : undefined );
-
-	return titleObj;
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWTitleInputWidget.prototype.isValid = function () {
-	return $.Deferred().resolve( !!this.getTitle() ).promise();
+	return ve.ui.MWTitleInputWidget.super.prototype.getLookupMenuOptionsFromData.apply( this, arguments );
 };

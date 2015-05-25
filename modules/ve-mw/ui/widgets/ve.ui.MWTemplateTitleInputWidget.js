@@ -26,6 +26,7 @@ ve.ui.MWTemplateTitleInputWidget = function VeUiMWTemplateTitleInputWidget( conf
 	// Initialization
 	this.$element.addClass( 've-ui-mwTemplateTitleInputWidget' );
 };
+
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, ve.ui.MWTitleInputWidget );
@@ -33,7 +34,11 @@ OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, ve.ui.MWTitleInputWidget );
 /* Methods */
 
 /**
- * @inheritdoc
+ * Get a new request object of the current lookup query value.
+ *
+ * See the parent documentation at <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.widgets.TitleInputWidget>
+ *
+ * @return {jQuery.Promise} jQuery AJAX object, or promise object with an .abort() method
  */
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	var xhr,
