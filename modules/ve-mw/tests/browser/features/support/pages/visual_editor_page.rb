@@ -166,11 +166,11 @@ class VisualEditorPage
   end
   a(:transclusion, css: 'span.oo-ui-widget.oo-ui-iconElement.oo-ui-tool.oo-ui-tool-name-transclusion.oo-ui-widget-enabled > a')
   text_field(:transclusion_description, css: '.oo-ui-inputWidget > input:nth-child(1)')
-  span(:ve_bold_text, class: 'oo-ui-iconElement-icon oo-ui-icon-bold-b')
+  span(:ve_bold_text, class: 'oo-ui-iconElement-icon oo-ui-icon-bold')
   span(:ve_bullets, css: '.oo-ui-clippableElement-clippable .oo-ui-iconElement-icon.oo-ui-icon-listBullet')
   span(:ve_computer_code, class: 'oo-ui-iconElement-icon oo-ui-icon-code')
   div(:ve_heading_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-down')
-  span(:ve_italics, class: 'oo-ui-iconElement-icon oo-ui-icon-italic-i')
+  span(:ve_italics, class: 'oo-ui-iconElement-icon oo-ui-icon-italic')
   span(:ve_link_icon, class: 'oo-ui-iconElement-icon oo-ui-icon-link')
   span(:ve_link_ui, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-labelElement-label oo-ui-labelWidget oo-ui-processDialog-title oo-ui-labelElement', text: 'Link')
   span(:ve_media_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-picture')
