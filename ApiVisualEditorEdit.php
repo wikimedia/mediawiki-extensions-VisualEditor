@@ -163,7 +163,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			if ( isset( $saveresult['edit']['newrevid'] ) ) {
 				$newRevId = intval( $saveresult['edit']['newrevid'] );
 				if ( $this->veConfig->get( 'VisualEditorUseChangeTagging' ) ) {
-					ChangeTags::addTags( 'visualeditor', null, $newRevId, null );
+					// Defer till after the RC row is inserted
+					// @TODO: doEditContent should let callers specify desired tags
+					DeferredUpdates::addCallableUpdate( function() use ( $newRevId ) {
+						ChangeTags::addTags( 'visualeditor', null, $newRevId, null );
+					} );
 				}
 			} else {
 				$newRevId = $page->getLatestRevId();

@@ -84,7 +84,7 @@ $wgHooks['ResourceLoaderTestModules'][] = 'VisualEditorHooks::onResourceLoaderTe
 $wgHooks['SkinTemplateNavigation'][] = 'VisualEditorHooks::onSkinTemplateNavigation';
 $wgHooks['ParserTestGlobals'][] = 'VisualEditorHooks::onParserTestGlobals';
 $wgHooks['EditPage::showEditForm:fields'][] = 'VisualEditorHooks::onEditPageShowEditFormFields';
-$wgHooks['PageContentSaveComplete'][] = 'VisualEditorHooks::onPageContentSaveComplete';
+$wgHooks['RecentChange_save'][] = 'VisualEditorHooks::onRecentChange_save';
 $wgHooks['BeforeInitialize'][] = 'VisualEditorHooks::onBeforeInitialize';
 $wgExtensionFunctions[] = 'VisualEditorHooks::onSetup';
 
