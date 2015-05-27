@@ -18,7 +18,8 @@
 			"Vincent Liu",
 			"LNDDYL",
 			"Deryck Chan",
-			"Cwek"
+			"Cwek",
+			"Zhxy 519"
 		]
 	},
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
@@ -196,7 +197,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "參數已停用。$1",
 	"visualeditor-dialog-transclusion-loading": "讀取中…",
 	"visualeditor-dialog-transclusion-multiple-mode": "顯示選項",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|您正在}}此頁面加入樣板 \"$1\"。此樣板目前尚無任何內容描述，但您可自 <a $2>樣板頁面</a> 取得一些有用的資訊。",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|您正在}}此頁面加入模板 \"$1\"。此模板目前尚無任何內容描述，但您可自 <a $2>模板頁面</a> 取得一些有用的資訊。",
 	"visualeditor-dialog-transclusion-options": "選項",
 	"visualeditor-dialog-transclusion-param-default": "預設值：$1",
 	"visualeditor-dialog-transclusion-param-example": "範例值：$1",
@@ -269,7 +270,7 @@
 	"visualeditor-reference-input-placeholder": "您想引用什麼參考文獻？",
 	"visualeditor-referenceslist-isempty": "此頁面中無群組為 \"$1\" 的參考文獻可加入引用清單。",
 	"visualeditor-referenceslist-isempty-default": "此頁面目前無任何參考文獻可加入引用清單。",
-	"visualeditor-referenceslist-missingref": "此參考文獻已定義於樣板或其他自動產生的區塊上，目前只能使用原始碼模式來編輯。",
+	"visualeditor-referenceslist-missingref": "此參考文獻已定義於模板或其他自動產生的區塊上，目前只能使用原始碼模式來編輯。",
 	"visualeditor-savedialog-error-badtoken": "工作階段失效，我們無法處理您的編輯。",
 	"visualeditor-savedialog-identify-anon": "您是否要以匿名使用者的身份來儲存頁面？ 您的 IP 位址將記錄於本頁面的編輯歷史中。",
 	"visualeditor-savedialog-identify-user": "您目前以 [[User:$1|$1]] 的身份登入。 若您儲存本次的編輯，修訂歷史記錄將會記錄此帳號。",

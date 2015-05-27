@@ -113,6 +113,7 @@
 	"visualeditor-savedialog-warning-dirty": "Вашая праўка магла быць сапсаваная — праверце яе, калі ласка, перад захаваньнем.",
 	"visualeditor-saveerror": "Памылка ў час захаваньня зьвестак на сэрвэры: $1.",
 	"visualeditor-serializeerror": "Памылка ў часе загрузкі зьвестак з сэрвэра: $1.",
+	"visualeditor-toolbar-cite-label": "Крыніцы",
 	"visualeditor-toolbar-savedialog": "Захаваць старонку",
 	"visualeditor-usernamespacepagelink": "Project:Старонка ўдзельніка",
 	"visualeditor-version-label": "Вэрсія",

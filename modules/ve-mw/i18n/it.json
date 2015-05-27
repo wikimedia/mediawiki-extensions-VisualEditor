@@ -19,7 +19,8 @@
 			"Nemo bis",
 			"Fringio",
 			"Martinligabue",
-			"Macofe"
+			"Macofe",
+			"Mpiva"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -239,6 +240,7 @@
 	"visualeditor-linkinspector-button-link-external": "Collegamento esterno",
 	"visualeditor-linkinspector-button-link-internal": "Ricerca pagine",
 	"visualeditor-linkinspector-description-new-page": "Questa pagina non esiste ancora.",
+	"visualeditor-linkinspector-description-redirect": "reindirizzamento a $1",
 	"visualeditor-linkinspector-illegal-title": "Titolo di pagina non valido",
 	"visualeditor-linknodeinspector-add-label": "Aggiungi etichetta",
 	"visualeditor-linknodeinspector-title": "Collegamento semplice",
@@ -268,7 +270,7 @@
 	"visualeditor-preference-mwalienextension-description": "Aggiunge strumenti sperimentali a VisualEditor per la modifica dei tag (come gallerie d'immagini o blocchi di codici sorgente), prima che gli strumenti individuali siano disponibili. Ricorda di controllare sempre le modifiche prima di salvare quando usi le funzionalità sperimentali.",
 	"visualeditor-preference-mwalienextension-label": "Modifica tag con VisualEditor",
 	"visualeditor-recreate": "Questa pagina è stata eliminata dopo che hai iniziato a modificarla. Premi \"$1\" per ricrearla.",
-	"visualeditor-reference-input-placeholder": "A cosa si desidera fare riferimento?",
+	"visualeditor-reference-input-placeholder": "Ricerca all'interno delle citazioni correnti",
 	"visualeditor-referenceslist-isempty": "Non ci sono riferimenti con il gruppo \"$1\" su questa pagina da includere in questo elenco.",
 	"visualeditor-referenceslist-isempty-default": "Non ci sono riferimenti su questa pagina da includere in questo elenco.",
 	"visualeditor-referenceslist-missingref": "Questa nota è definita in un template o in un altro blocco generato e per ora può essere modificata solo in modalità sorgente.",
@@ -294,6 +296,7 @@
 	"visualeditor-saveerror-titleblacklist": "Errore nel salvataggio della pagina: il titolo della pagina è stato inserito in una lista nera",
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-settings-tool": "Impostazioni pagina",
+	"visualeditor-special-characters-group-other": "Usato spesso",
 	"visualeditor-timeout": "Sembra che questo editor non sia attualmente disponibile. Vorresti invece modificare in modalità sorgente?",
 	"visualeditor-toolbar-cite-label": "Cita",
 	"visualeditor-toolbar-savedialog": "Salva la pagina",

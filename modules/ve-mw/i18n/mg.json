@@ -15,6 +15,7 @@
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Tohizina",
 	"visualeditor-dialog-beta-welcome-title": "Tonga soa eto amin'i VisualEditor{{GENDER:$1|}}",
 	"visualeditor-dialog-media-position-checkbox": "Fonosina manodidin'ity zavatra ity ny soratra",
@@ -75,8 +76,5 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Zana-dohateny 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Zana-dohateny 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Zana-dohateny 4",
-	"visualeditor-linkinspector-suggest-external-link": "Rohy ivelany",
-	"visualeditor-linkinspector-suggest-matching-page": "Pejy miady aminy{{PLURAL:$1|$1}}",
-	"visualeditor-linkinspector-suggest-new-page": "Pejy vaova",
 	"visualeditor-mwgalleryinspector-title": "Galeria"
 }

@@ -15,7 +15,8 @@
 			"Maria victoria",
 			"Lucas2",
 			"Amire80",
-			"아라"
+			"아라",
+			"Mpiva"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -25,7 +26,7 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: commutato]]",
 	"tag-visualeditor-switched-description": "L'utente ha iniziato a modificare utilizzando VisualEditor, poi è passato all'editor di wikitesto.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Commenti",
-	"visualeditor-feedback-tool": "Commenta la nuova interfaccia",
+	"visualeditor-feedback-tool": "Lascia un feedback su questo software",
 	"visualeditor-help-label": "Leggi la guida utente",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guida per l'utilizzo dell'editor"
