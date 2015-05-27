@@ -90,7 +90,7 @@ ve.ui.MWLiveExtensionInspector.prototype.removeNode = function () {
 ve.ui.MWLiveExtensionInspector.prototype.updatePreview = function () {
 	var mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
 
-	mwData.body.extsrc = this.input.getValue();
+	this.updateMwData( mwData );
 
 	if ( this.visible ) {
 		this.getFragment().changeAttributes( { mw: mwData } );
