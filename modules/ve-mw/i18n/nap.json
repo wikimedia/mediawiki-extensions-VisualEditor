@@ -112,6 +112,6 @@
 	"visualeditor-toolbar-savedialog": "Sarva 'a paggena",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
 	"visualeditor-version-label": "Verzione",
-	"visualeditor-wikitext-warning": "Si ausando VisualEditor - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, apre 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Si ausando VisualEditor - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, arape 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }
