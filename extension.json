@@ -161,8 +161,8 @@
 		"EditPage::showEditForm:fields": [
 			"VisualEditorHooks::onEditPageShowEditFormFields"
 		],
-		"PageContentSaveComplete": [
-			"VisualEditorHooks::onPageContentSaveComplete"
+		"RecentChange_save": [
+			"VisualEditorHooks::onRecentChange_save"
 		],
 		"BeforeInitialize": [
 			"VisualEditorHooks::onBeforeInitialize"

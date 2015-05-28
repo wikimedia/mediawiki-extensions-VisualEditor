@@ -185,26 +185,14 @@ class VisualEditorHooks {
 	 * Called when an edit is saved
 	 * Adds 'visualeditor-switched' tag to the edit if requested
 	 *
-	 * @param $article WikiPage
-	 * @param $user User
-	 * @param $content Content
-	 * @param $summary string
-	 * @param $isMinor boolean
-	 * @param $isWatch boolean
-	 * @param $section int
-	 * @param $flags int
-	 * @param $revision Revision|null
-	 * @param $status Status
-	 * @param $baseRevId int|boolean
+	 * @param RecentChange $rc
 	 * @return boolean true
 	 */
-	public static function onPageContentSaveComplete(
-		$article, $user, $content, $summary, $isMinor, $isWatch,
-		$section, $flags, $revision, $status, $baseRevId
-	) {
+	public static function onRecentChange_save( RecentChange $rc ) {
 		$request = RequestContext::getMain()->getRequest();
-		if ( $request->getBool( 'veswitched' ) && $revision ) {
-			ChangeTags::addTags( 'visualeditor-switched', null, $revision->getId() );
+		if ( $request->getBool( 'veswitched' ) && $rc->mAttribs['rc_this_oldid'] ) {
+			ChangeTags::addTags( 'visualeditor-switched',
+				$rc->mAttribs['rc_id'], $rc->mAttribs['rc_this_oldid'] );
 		}
 		return true;
 	}
