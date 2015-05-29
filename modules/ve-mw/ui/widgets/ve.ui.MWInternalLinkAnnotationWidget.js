@@ -23,25 +23,12 @@ ve.ui.MWInternalLinkAnnotationWidget = function VeUiMWInternalLinkAnnotationWidg
 
 OO.inheritClass( ve.ui.MWInternalLinkAnnotationWidget, ve.ui.LinkAnnotationWidget );
 
-/* Methods */
-
-/**
- * Create a text input widget to be used by the annotation widget
- *
- * @param {Object} [config] Configuration options
- * @return {OO.ui.TextInputWidget} Text input widget
- */
-ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
-	return new ve.ui.MWLinkTargetInputWidget( {
-		icon: 'search',
-		$overlay: config.$overlay
-	} );
-};
+/* Static Methods */
 
 /**
  * @inheritdoc
  */
-ve.ui.MWInternalLinkAnnotationWidget.prototype.getAnnotationFromText = function ( value ) {
+ve.ui.MWInternalLinkAnnotationWidget.static.getAnnotationFromText = function ( value ) {
 	var title,
 		target = value.trim();
 
@@ -75,6 +62,21 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.getAnnotationFromText = function 
 /**
  * @inheritdoc
  */
-ve.ui.MWInternalLinkAnnotationWidget.prototype.getTextFromAnnotation = function ( annotation ) {
+ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( annotation ) {
 	return annotation ? annotation.getAttribute( 'title' ) : '';
+};
+
+/* Methods */
+
+/**
+ * Create a text input widget to be used by the annotation widget
+ *
+ * @param {Object} [config] Configuration options
+ * @return {OO.ui.TextInputWidget} Text input widget
+ */
+ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
+	return new ve.ui.MWLinkTargetInputWidget( {
+		icon: 'search',
+		$overlay: config.$overlay
+	} );
 };

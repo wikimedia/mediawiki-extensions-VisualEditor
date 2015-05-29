@@ -23,25 +23,12 @@ ve.ui.MWExternalLinkAnnotationWidget = function VeUiMWExternalLinkAnnotationWidg
 
 OO.inheritClass( ve.ui.MWExternalLinkAnnotationWidget, ve.ui.LinkAnnotationWidget );
 
-/* Methods */
-
-/**
- * Create a text input widget to be used by the annotation widget
- *
- * @param {Object} [config] Configuration options
- * @return {OO.ui.TextInputWidget} Text input widget
- */
-ve.ui.MWExternalLinkAnnotationWidget.prototype.createInputWidget = function () {
-	return new OO.ui.TextInputWidget( {
-		icon: 'linkExternal',
-		validate: ve.init.platform.getExternalLinkUrlProtocolsRegExp()
-	} );
-};
+/* Static Methods */
 
 /**
  * @inheritdoc
  */
-ve.ui.MWExternalLinkAnnotationWidget.prototype.getAnnotationFromText = function ( value ) {
+ve.ui.MWExternalLinkAnnotationWidget.static.getAnnotationFromText = function ( value ) {
 	var href = value.trim();
 
 	// Keep annotation in sync with value
@@ -55,4 +42,19 @@ ve.ui.MWExternalLinkAnnotationWidget.prototype.getAnnotationFromText = function 
 			}
 		} );
 	}
+};
+
+/* Methods */
+
+/**
+ * Create a text input widget to be used by the annotation widget
+ *
+ * @param {Object} [config] Configuration options
+ * @return {OO.ui.TextInputWidget} Text input widget
+ */
+ve.ui.MWExternalLinkAnnotationWidget.prototype.createInputWidget = function () {
+	return new OO.ui.TextInputWidget( {
+		icon: 'linkExternal',
+		validate: ve.init.platform.getExternalLinkUrlProtocolsRegExp()
+	} );
 };
