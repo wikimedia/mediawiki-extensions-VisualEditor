@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Poiuyt",
+			"十弌"
+		]
+	},
+	"tooltip-ca-ve-edit": "用可视化编辑器编辑箇页",
+	"visualeditor-ca-editsource": "编辑源代码",
+	"visualeditor-ca-editsource-section": "编辑源代码",
+	"visualeditor-version-label": "版本"
+}
