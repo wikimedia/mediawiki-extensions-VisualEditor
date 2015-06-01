@@ -21,19 +21,83 @@
 	"descriptionmsg": "visualeditor-desc",
 	"license-name": "MIT",
 	"type": "other",
-	"DefaultUserOptions": {
-		"visualeditor-enable": 0,
-		"visualeditor-betatempdisable": 0,
-		"visualeditor-enable-experimental": 0,
-		"visualeditor-enable-language": 0,
-		"visualeditor-hidebetawelcome": 0
+	"config": {
+		"VisualEditorPreferenceModules": {
+			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
+		},
+		"VisualEditorRestbaseURL": false,
+		"VisualEditorSerializationCacheTimeout": 3600,
+		"VisualEditorUseChangeTagging": true,
+		"VisualEditorSupportedSkins": [
+			"vector",
+			"apex",
+			"monobook",
+			"minerva",
+			"blueprint"
+		],
+		"VisualEditorParsoidPrefix": "localhost",
+		"VisualEditorDisableForAnons": false,
+		"VisualEditorPluginModules": [],
+		"VisualEditorParsoidForwardCookies": false,
+		"VisualEditorTabMessages": {
+			"edit": null,
+			"editsource": "visualeditor-ca-editsource",
+			"create": null,
+			"createsource": "visualeditor-ca-createsource",
+			"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
+			"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
+			"editsection": null,
+			"editsectionsource": "visualeditor-ca-editsource-section",
+			"editappendix": null,
+			"editsourceappendix": null,
+			"createappendix": null,
+			"createsourceappendix": null,
+			"editsectionappendix": null,
+			"editsectionsourceappendix": null
+		},
+		"VisualEditorShowBetaWelcome": false,
+		"VisualEditorParsoidHTTPProxy": false,
+		"VisualEditorBrowserBlacklist": {
+			"msie": [
+				[
+					"<=",
+					9
+				]
+			],
+			"android": [
+				[
+					"<",
+					3
+				]
+			],
+			"firefox": [
+				[
+					"<=",
+					14
+				]
+			],
+			"safari": [
+				[
+					"<=",
+					6
+				]
+			],
+			"opera": [
+				[
+					"<",
+					12
+				]
+			],
+			"blackberry": null,
+			"silk": null
+		},
+		"VisualEditorTabPosition": "before",
+		"VisualEditorParsoidURL": "http://localhost:8000",
+		"VisualEditorEnableSplitTest": false,
+		"VisualEditorEnableTocWidget": false,
+		"VisualEditorNamespaces": [],
+		"VisualEditorParsoidTimeout": 100
 	},
-	"ConfigRegistry": {
-		"visualeditor": "GlobalVarConfig::newInstance"
-	},
-	"ExtensionFunctions": [
-		"VisualEditorHooks::onSetup"
-	],
 	"APIModules": {
 		"visualeditor": {
 			"class": "ApiVisualEditor",
@@ -51,12 +115,61 @@
 			"modules/ve-wmf/i18n"
 		]
 	},
-	"AutoloadClasses": {
-		"ApiVisualEditor": "ApiVisualEditor.php",
-		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
-		"VisualEditorHooks": "VisualEditor.hooks.php",
-		"VisualEditorDataModule": "VisualEditorDataModule.php",
-		"VisualEditorViewPageTargetInitModule": "VisualEditorViewPageTargetInitModule.php"
+	"Hooks": {
+		"BeforePageDisplay": [
+			"VisualEditorHooks::onBeforePageDisplay"
+		],
+		"ContentHandlerDefaultModelFor": [
+			"VisualEditorHooks::onContentHandlerDefaultModelFor"
+		],
+		"SkinEditSectionLinks": [
+			"VisualEditorHooks::onSkinEditSectionLinks"
+		],
+		"GetBetaFeaturePreferences": [
+			"VisualEditorHooks::onGetBetaPreferences"
+		],
+		"GetPreferences": [
+			"VisualEditorHooks::onGetPreferences"
+		],
+		"ListDefinedTags": [
+			"VisualEditorHooks::onListDefinedTags"
+		],
+		"ChangeTagsListActive": [
+			"VisualEditorHooks::onListDefinedTags"
+		],
+		"MakeGlobalVariablesScript": [
+			"VisualEditorHooks::onMakeGlobalVariablesScript"
+		],
+		"RedirectSpecialArticleRedirectParams": [
+			"VisualEditorHooks::onRedirectSpecialArticleRedirectParams"
+		],
+		"ResourceLoaderGetConfigVars": [
+			"VisualEditorHooks::onResourceLoaderGetConfigVars"
+		],
+		"ResourceLoaderRegisterModules": [
+			"VisualEditorHooks::onResourceLoaderRegisterModules"
+		],
+		"ResourceLoaderTestModules": [
+			"VisualEditorHooks::onResourceLoaderTestModules"
+		],
+		"SkinTemplateNavigation": [
+			"VisualEditorHooks::onSkinTemplateNavigation"
+		],
+		"ParserTestGlobals": [
+			"VisualEditorHooks::onParserTestGlobals"
+		],
+		"EditPage::showEditForm:fields": [
+			"VisualEditorHooks::onEditPageShowEditFormFields"
+		],
+		"RecentChange_save": [
+			"VisualEditorHooks::onRecentChange_save"
+		],
+		"BeforeInitialize": [
+			"VisualEditorHooks::onBeforeInitialize"
+		],
+		"AddNewAccount": [
+			"VisualEditorHooks::onAddNewAccount"
+		]
 	},
 	"ResourceModules": {
 		"Base64.js": {
@@ -253,6 +366,7 @@
 			"dependencies": [
 				"oojs",
 				"oojs-ui",
+				"oojs-ui.styles.icons-editing-core",
 				"unicodejs",
 				"ext.visualEditor.ve"
 			],
@@ -1466,9 +1580,7 @@
 				"oojs-ui.styles.icons-editing-advanced",
 				"oojs-ui.styles.icons-editing-core",
 				"oojs-ui.styles.icons-editing-styling",
-				"oojs-ui.styles.icons-editing-list",
-				"oojs-ui.styles.indicators",
-				"oojs-ui.styles.textures"
+				"oojs-ui.styles.icons-editing-list"
 			],
 			"targets": [
 				"desktop",
@@ -1480,137 +1592,24 @@
 		"localBasePath": "",
 		"remoteExtPath": "VisualEditor"
 	},
-	"Hooks": {
-		"BeforePageDisplay": [
-			"VisualEditorHooks::onBeforePageDisplay"
-		],
-		"ContentHandlerDefaultModelFor": [
-			"VisualEditorHooks::onContentHandlerDefaultModelFor"
-		],
-		"SkinEditSectionLinks": [
-			"VisualEditorHooks::onSkinEditSectionLinks"
-		],
-		"GetBetaFeaturePreferences": [
-			"VisualEditorHooks::onGetBetaPreferences"
-		],
-		"GetPreferences": [
-			"VisualEditorHooks::onGetPreferences"
-		],
-		"ListDefinedTags": [
-			"VisualEditorHooks::onListDefinedTags"
-		],
-		"ChangeTagsListActive": [
-			"VisualEditorHooks::onListDefinedTags"
-		],
-		"MakeGlobalVariablesScript": [
-			"VisualEditorHooks::onMakeGlobalVariablesScript"
-		],
-		"RedirectSpecialArticleRedirectParams": [
-			"VisualEditorHooks::onRedirectSpecialArticleRedirectParams"
-		],
-		"ResourceLoaderGetConfigVars": [
-			"VisualEditorHooks::onResourceLoaderGetConfigVars"
-		],
-		"ResourceLoaderRegisterModules": [
-			"VisualEditorHooks::onResourceLoaderRegisterModules"
-		],
-		"ResourceLoaderTestModules": [
-			"VisualEditorHooks::onResourceLoaderTestModules"
-		],
-		"SkinTemplateNavigation": [
-			"VisualEditorHooks::onSkinTemplateNavigation"
-		],
-		"ParserTestGlobals": [
-			"VisualEditorHooks::onParserTestGlobals"
-		],
-		"EditPage::showEditForm:fields": [
-			"VisualEditorHooks::onEditPageShowEditFormFields"
-		],
-		"RecentChange_save": [
-			"VisualEditorHooks::onRecentChange_save"
-		],
-		"BeforeInitialize": [
-			"VisualEditorHooks::onBeforeInitialize"
-		],
-		"AddNewAccount": [
-			"VisualEditorHooks::onAddNewAccount"
-		]
+	"DefaultUserOptions": {
+		"visualeditor-enable": 0,
+		"visualeditor-betatempdisable": 0,
+		"visualeditor-enable-experimental": 0,
+		"visualeditor-enable-language": 0,
+		"visualeditor-hidebetawelcome": 0
 	},
-	"config": {
-		"VisualEditorPluginModules": [],
-		"VisualEditorPreferenceModules": {
-			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
-		},
-		"VisualEditorParsoidURL": "http://localhost:8000",
-		"VisualEditorParsoidHTTPProxy": false,
-		"VisualEditorParsoidPrefix": "localhost",
-		"VisualEditorParsoidForwardCookies": false,
-		"VisualEditorParsoidTimeout": 100,
-		"VisualEditorSerializationCacheTimeout": 3600,
-		"VisualEditorRestbaseURL": false,
-		"VisualEditorNamespaces": [],
-		"VisualEditorEnableTocWidget": false,
-		"VisualEditorSupportedSkins": [
-			"vector",
-			"apex",
-			"monobook",
-			"minerva",
-			"blueprint"
-		],
-		"VisualEditorBrowserBlacklist": {
-			"msie": [
-				[
-					"<=",
-					9
-				]
-			],
-			"android": [
-				[
-					"<",
-					3
-				]
-			],
-			"firefox": [
-				[
-					"<=",
-					14
-				]
-			],
-			"safari": [
-				[
-					"<=",
-					6
-				]
-			],
-			"opera": [
-				[
-					"<",
-					12
-				]
-			],
-			"blackberry": null,
-			"silk": null
-		},
-		"VisualEditorUseChangeTagging": true,
-		"VisualEditorDisableForAnons": false,
-		"VisualEditorShowBetaWelcome": false,
-		"VisualEditorTabPosition": "before",
-		"VisualEditorTabMessages": {
-			"edit": null,
-			"editsource": "visualeditor-ca-editsource",
-			"create": null,
-			"createsource": "visualeditor-ca-createsource",
-			"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
-			"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
-			"editsection": null,
-			"editsectionsource": "visualeditor-ca-editsource-section",
-			"editappendix": null,
-			"editsourceappendix": null,
-			"createappendix": null,
-			"createsourceappendix": null,
-			"editsectionappendix": null,
-			"editsectionsourceappendix": null
-		},
-		"VisualEditorEnableSplitTest": false
+	"ExtensionFunctions": [
+		"VisualEditorHooks::onSetup"
+	],
+	"AutoloadClasses": {
+		"ApiVisualEditor": "ApiVisualEditor.php",
+		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
+		"VisualEditorHooks": "VisualEditor.hooks.php",
+		"VisualEditorDataModule": "VisualEditorDataModule.php",
+		"VisualEditorViewPageTargetInitModule": "VisualEditorViewPageTargetInitModule.php"
+	},
+	"ConfigRegistry": {
+		"visualeditor": "GlobalVarConfig::newInstance"
 	}
 }
