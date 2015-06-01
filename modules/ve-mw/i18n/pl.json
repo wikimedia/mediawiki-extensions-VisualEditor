@@ -31,7 +31,7 @@
 	"apihelp-visualeditor-param-paction": "Zadanie do wykonania.",
 	"apihelp-visualeditor-param-page": "Strona, na której wykonuje się działania.",
 	"apihelp-visualeditor-param-wikitext": "Wikikod wysyłany do usługi Parsoid, konwertowany na HTML (paction=parsefragment).",
-	"apihelp-visualeditoredit-description": "Zapisz stronę HTML5 w MediaWiki (konwertowana n wikikod przez usługę Parsoid).",
+	"apihelp-visualeditoredit-description": "Zapisz stronę HTML5 w MediaWiki (konwertowana na wikikod przez usługę Parsoid).",
 	"apihelp-visualeditoredit-param-html": "Kod HTML wysyłany do usługi Parsoid, konwertowany na wikikod.",
 	"apihelp-visualeditoredit-param-minor": "Oznacz jako drobną edycję.",
 	"apihelp-visualeditoredit-param-page": "Strona, na której wykonuje się działania.",
