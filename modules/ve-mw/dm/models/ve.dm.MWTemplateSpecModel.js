@@ -71,7 +71,9 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 		}
 	}
 	this.sets = data.sets;
-	this.maps = data.maps;
+	if ( data.maps ) {
+		this.maps = data.maps;
+	}
 };
 
 /**
