@@ -6,7 +6,7 @@
  */
 
 /*global mw */
-QUnit.module( 've.init.mw.ViewPageTarget' );
+QUnit.module( 've.init.mw.ViewPageTarget', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'compatibility', function ( assert ) {
 	var i, profile, list, matches, compatibility,

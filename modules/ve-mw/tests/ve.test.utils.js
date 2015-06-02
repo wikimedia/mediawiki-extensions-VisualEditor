@@ -21,3 +21,49 @@ ve.test.utils.createSurfaceFromDocument = function ( doc ) {
 	target.addSurface( doc );
 	return target.surface;
 };
+
+// Unregister MW override nodes.
+// They are temporarily registered in setup/teardown.
+ve.dm.modelRegistry.unregister( ve.dm.MWHeadingNode );
+ve.dm.modelRegistry.unregister( ve.dm.MWPreformattedNode );
+ve.dm.modelRegistry.unregister( ve.dm.MWTableNode );
+// Re-register unregistered nodes.
+ve.dm.modelRegistry.register( ve.dm.InlineImageNode );
+ve.dm.modelRegistry.register( ve.dm.BlockImageNode );
+
+ve.test.utils.mwEnvironment = ( function () {
+	var overrides = [
+			ve.dm.MWHeadingNode,
+			ve.dm.MWPreformattedNode,
+			ve.dm.MWTableNode
+		],
+		overridden = [];
+
+	function setupOverrides() {
+		var i;
+		for ( i = 0; i < overrides.length; i++ ) {
+			ve.dm.modelRegistry.register( overrides[i] );
+		}
+		for ( i = 0; i < overridden.length; i++ ) {
+			ve.dm.modelRegistry.unregister( overridden[i] );
+		}
+	}
+
+	function teardownOverrides() {
+		var i;
+		for ( i = 0; i < overrides.length; i++ ) {
+			ve.dm.modelRegistry.unregister( overrides[i] );
+		}
+		for ( i = 0; i < overridden.length; i++ ) {
+			ve.dm.modelRegistry.register( overridden[i] );
+		}
+	}
+
+	// On load, teardown overrides so the first core tests run correctly
+	teardownOverrides();
+
+	return QUnit.newMwEnvironment( {
+		setup: setupOverrides,
+		teardown: teardownOverrides
+	} );
+} )();
