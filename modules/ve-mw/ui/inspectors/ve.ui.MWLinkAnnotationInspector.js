@@ -59,6 +59,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	// Events
 	this.linkTypeSelect.connect( this, { select: 'onLinkTypeSelectSelect' } );
 	this.internalAnnotationInput.connect( this, { change: 'onInternalLinkChange' } );
+	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
 
 	// Parent method
 	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
@@ -77,6 +78,11 @@ ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
 	return item && item.getData() === 'external';
 };
 
+/**
+ * Handle change events on the internal link widget
+ *
+ * @param {ve.dm.MWInternalLinkAnnotation} annotation Annotation
+ */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( annotation ) {
 	var title,
 		href = annotation ? annotation.getAttribute( 'title' ) : '';
@@ -100,6 +106,16 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 	) {
 		this.linkTypeSelect.selectItemByData( 'external' );
 	}
+	this.updateActions();
+};
+
+/**
+ * Handle change events on the external link widget
+ *
+ * @param {ve.dm.MWExternalLinkAnnotation} annotation Annotation
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkChange = function () {
+	this.updateActions();
 };
 
 /**
