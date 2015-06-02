@@ -251,4 +251,5 @@ ve.dm.MWBlockImageNode.prototype.getCaptionNode = function () {
 
 /* Registration */
 
+ve.dm.modelRegistry.unregister( ve.dm.BlockImageNode );
 ve.dm.modelRegistry.register( ve.dm.MWBlockImageNode );

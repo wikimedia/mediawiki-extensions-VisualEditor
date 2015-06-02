@@ -240,7 +240,7 @@ ve.init.mw.Target.static.importRules = {
 			// Annotations
 			'link', 'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language',
 			// Nodes
-			'inlineImage', 'blockImage', 'div', 'alienInline', 'alienBlock', 'comment'
+			'div', 'alienInline', 'alienBlock', 'comment'
 		],
 		removeOriginalDomElements: true
 	},
