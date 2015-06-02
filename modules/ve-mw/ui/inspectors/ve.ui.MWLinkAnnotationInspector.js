@@ -147,16 +147,9 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 	this.annotationInput = this.createAnnotationInput();
 	this.form.$element.append( this.annotationInput.$element );
 
-	if ( isExternal ) {
-		// If the user switches to external links clear the input, unless the input is URL-like
-		if ( !inputHasProtocol ) {
-			text = '';
-		}
-	} else {
-		// If the user manually switches to internal links with an external link in the input, remember this
-		if ( inputHasProtocol ) {
-			this.allowProtocolInInternal = true;
-		}
+	// If the user manually switches to internal links with an external link in the input, remember this
+	if ( !isExternal && inputHasProtocol ) {
+		this.allowProtocolInInternal = true;
 	}
 
 	this.annotationInput.text.setValue( text ).focus();
