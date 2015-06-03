@@ -61,7 +61,15 @@ module.exports = function ( grunt ) {
 			]
 		},
 		jscs: {
-			src: '<%= jshint.all %>'
+			fix: {
+				options: {
+					fix: true
+				},
+				src: '<%= jshint.all %>'
+			},
+			main: {
+				src: '<%= jshint.all %>'
+			}
 		},
 		csslint: {
 			options: {
@@ -110,7 +118,8 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'jshint', 'jscs', 'csslint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'jshint', 'jscs:main', 'csslint', 'banana' ] );
+	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
 	grunt.registerTask( 'default', 'test' );
