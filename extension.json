@@ -1611,5 +1611,6 @@
 	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
-	}
+	},
+	"manifest_version": 1
 }
