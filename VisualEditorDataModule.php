@@ -148,15 +148,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		return $citationTools;
 	}
 
-	public function getMessages() {
-		// We don't actually use the client-side message system for these messages.
-		// But we're registering them in this standardised method to make use of the
-		// getMsgBlobMtime utility to make cache invalidation work out-of-the-box.
-
-		$msgInfo = $this->getMessageInfo();
-		return $msgInfo['keys'];
-	}
-
 	public function getDependencies() {
 		return array(
 			'ext.visualEditor.base',
@@ -164,33 +155,12 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		);
 	}
 
-	public function getModifiedTime( ResourceLoaderContext $context ) {
-		return max(
-			$this->getGitHeadModifiedTime( $context ),
-			$this->getMsgBlobMtime( $context->getLanguage() ),
-			// Also invalidate this module if this file changes (i.e. when messages were
-			// added or removed, or when the Javascript invocation in getScript is changed).
-			// Use 1 because 0 = now, would invalidate continously
-			ResourceLoaderModule::safeFilemtime( __FILE__ )
+	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+		$summary = parent::getDefinitionSummary( $context );
+		$summary[] = array(
+			'script' => $this->getScript( $context ),
 		);
-	}
-
-	protected function getGitHeadModifiedTime( ResourceLoaderContext $context ) {
-		$cache = wfGetCache( CACHE_ANYTHING );
-		$key = wfMemcKey( 'resourceloader', 'vedatamodule', 'changeinfo' );
-
-		$hash = $this->getGitHeadHash();
-
-		$result = $cache->get( $key );
-		if ( is_array( $result ) && $result['hash'] === $hash ) {
-			return $result['timestamp'];
-		}
-		$timestamp = wfTimestamp();
-		$cache->set( $key, array(
-			'hash' => $hash,
-			'timestamp' => $timestamp,
-		) );
-		return $timestamp;
+		return $summary;
 	}
 
 	protected function getGitHeadHash() {
