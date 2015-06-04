@@ -30,7 +30,8 @@
 			{
 				"name": "MediaWiki",
 				"classes": [
-					"mw.Title"
+					"mw.Title",
+					"mw.widgets.TitleInputWidget"
 				]
 			}
 		]
