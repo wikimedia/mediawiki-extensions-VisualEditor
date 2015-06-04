@@ -155,6 +155,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 	var text = this.annotationInput.text.getValue(),
+		end = text.length,
 		isExternal = this.isExternal(),
 		inputHasProtocol = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( text );
 
@@ -169,6 +170,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 	}
 
 	this.annotationInput.text.setValue( text ).focus();
+	// Firefox moves the cursor to the beginning
+	this.annotationInput.text.$input[0].setSelectionRange( end, end );
 
 	if ( !isExternal ) {
 		this.annotationInput.text.populateLookupMenu();
