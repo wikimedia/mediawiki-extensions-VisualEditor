@@ -10,7 +10,7 @@
  *
  * @class
  * @extends OO.ui.Widget
- * @mixins OO.ui.GroupElement
+ * @mixins OO.ui.mixin.GroupElement
  *
  * @constructor
  * @param {Object} config TOC Item configuration
@@ -26,7 +26,7 @@ ve.ui.MWTocItemWidget = function VeCeMWTocItemWidget( config ) {
 	OO.ui.Widget.call( this, config );
 
 	// Mixin Constructor
-	OO.ui.GroupElement.call( this, $.extend( {}, config, { $group: $( '<ul>' ) } ) );
+	OO.ui.mixin.GroupElement.call( this, $.extend( {}, config, { $group: $( '<ul>' ) } ) );
 
 	config = config || {};
 
@@ -59,7 +59,7 @@ ve.ui.MWTocItemWidget = function VeCeMWTocItemWidget( config ) {
 
 OO.inheritClass( ve.ui.MWTocItemWidget, OO.ui.Widget );
 
-OO.mixinClass( ve.ui.MWTocItemWidget, OO.ui.GroupElement );
+OO.mixinClass( ve.ui.MWTocItemWidget, OO.ui.mixin.GroupElement );
 
 /* Static Properties */
 

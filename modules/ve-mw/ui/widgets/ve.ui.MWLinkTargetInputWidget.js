@@ -25,7 +25,7 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 	ve.ui.MWLinkTargetInputWidget.super.call( this, config );
 
 	// Mixin constructors
-	OO.ui.LookupElement.call( this, config );
+	OO.ui.mixin.LookupElement.call( this, config );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwLinkTargetInputWidget' );
@@ -53,7 +53,7 @@ ve.ui.MWLinkTargetInputWidget = function VeUiMWLinkTargetInputWidget( config ) {
 
 OO.inheritClass( ve.ui.MWLinkTargetInputWidget, OO.ui.TextInputWidget );
 
-OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.LookupElement );
+OO.mixinClass( ve.ui.MWLinkTargetInputWidget, OO.ui.mixin.LookupElement );
 
 /* Methods */
 

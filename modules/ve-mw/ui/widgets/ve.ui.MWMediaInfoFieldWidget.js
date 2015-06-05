@@ -10,8 +10,8 @@
  *
  * @class
  * @extends OO.ui.Widget
- * @mixins OO.ui.IconElement
- * @mixins OO.ui.TitledElement
+ * @mixins OO.ui.mixin.IconElement
+ * @mixins OO.ui.mixin.TitledElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -31,8 +31,8 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	ve.ui.MWMediaInfoFieldWidget.super.call( this, config );
 
 	// Mixin constructors
-	OO.ui.IconElement.call( this, config );
-	OO.ui.LabelElement.call( this, $.extend( { $label: $( '<div>' ) }, config ) );
+	OO.ui.mixin.IconElement.call( this, config );
+	OO.ui.mixin.LabelElement.call( this, $.extend( { $label: $( '<div>' ) }, config ) );
 
 	this.$text = $( '<div>' )
 		.addClass( 've-ui-mwMediaInfoFieldWidget-text' );
@@ -98,8 +98,8 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 /* Setup */
 
 OO.inheritClass( ve.ui.MWMediaInfoFieldWidget, OO.ui.Widget );
-OO.mixinClass( ve.ui.MWMediaInfoFieldWidget, OO.ui.IconElement );
-OO.mixinClass( ve.ui.MWMediaInfoFieldWidget, OO.ui.LabelElement );
+OO.mixinClass( ve.ui.MWMediaInfoFieldWidget, OO.ui.mixin.IconElement );
+OO.mixinClass( ve.ui.MWMediaInfoFieldWidget, OO.ui.mixin.LabelElement );
 
 /* Static Properties */
 

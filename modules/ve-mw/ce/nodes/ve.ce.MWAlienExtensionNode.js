@@ -10,14 +10,14 @@
  *
  * @class
  * @abstract
- * @mixins OO.ui.IconElement
+ * @mixins OO.ui.mixin.IconElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode( config ) {
 	// Mixin constructors
-	OO.ui.IconElement.call( this, config );
+	OO.ui.mixin.IconElement.call( this, config );
 
 	// Events
 	this.connect( this, { setup: 'onAlienSetup' } );
@@ -27,7 +27,7 @@ ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode( config ) {
 
 OO.initClass( ve.ce.MWAlienExtensionNode );
 
-OO.mixinClass( ve.ce.MWAlienExtensionNode, OO.ui.IconElement );
+OO.mixinClass( ve.ce.MWAlienExtensionNode, OO.ui.mixin.IconElement );
 
 /* Static members */
 

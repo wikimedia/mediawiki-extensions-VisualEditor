@@ -26,8 +26,8 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	OO.ui.Widget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.GroupElement.call( this, config );
-	OO.ui.DraggableGroupElement.call( this, $.extend( {}, config, { orientation: 'horizontal' } ) );
+	OO.ui.mixin.GroupElement.call( this, config );
+	OO.ui.mixin.DraggableGroupElement.call( this, $.extend( {}, config, { orientation: 'horizontal' } ) );
 
 	// Properties
 	this.categories = {};
@@ -183,7 +183,7 @@ ve.ui.MWCategoryWidget.prototype.onUpdateSortkey = function ( name, value ) {
  * @inheritdoc
  */
 ve.ui.MWCategoryWidget.prototype.clearItems = function () {
-	OO.ui.GroupElement.prototype.clearItems.call( this );
+	OO.ui.mixin.GroupElement.prototype.clearItems.call( this );
 	this.categories = {};
 };
 
@@ -350,7 +350,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			categoryItems.push( categoryItem );
 		}
 
-		OO.ui.DraggableGroupElement.prototype.addItems.call( categoryWidget, categoryItems, index );
+		OO.ui.mixin.DraggableGroupElement.prototype.addItems.call( categoryWidget, categoryItems, index );
 
 		categoryWidget.fitInput();
 	} );
@@ -371,7 +371,7 @@ ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
 		}
 	}
 
-	OO.ui.DraggableGroupElement.prototype.removeItems.call( this, items );
+	OO.ui.mixin.DraggableGroupElement.prototype.removeItems.call( this, items );
 
 	this.fitInput();
 };

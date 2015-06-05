@@ -12,6 +12,7 @@
  * @abstract
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
+ * @mixins OO.ui.mixin.IconElement
  * @mixins ve.ce.GeneratedContentNode
  *
  * @constructor
@@ -24,7 +25,7 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-	OO.ui.IconElement.call( this, config );
+	OO.ui.mixin.IconElement.call( this, config );
 	ve.ce.GeneratedContentNode.call( this );
 };
 
@@ -34,7 +35,7 @@ OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
-OO.mixinClass( ve.ce.MWTransclusionNode, OO.ui.IconElement );
+OO.mixinClass( ve.ce.MWTransclusionNode, OO.ui.mixin.IconElement );
 
 /* Static Properties */
 
