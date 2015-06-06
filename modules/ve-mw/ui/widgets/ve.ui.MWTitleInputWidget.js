@@ -17,6 +17,10 @@
 ve.ui.MWTitleInputWidget = function VeUiMWTitleInputWidget( config ) {
 	// Parent constructor
 	ve.ui.MWTitleInputWidget.super.call( this, config );
+
+	// Initialization
+	this.$element.addClass( 've-ui-mwTitleInputWidget' );
+	this.lookupMenu.$element.addClass( 've-ui-mwTitleInputWidget-menu' );
 };
 
 /* Inheritance */
