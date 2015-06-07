@@ -5,6 +5,9 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "यै पानालाई भिजुअल इडिटर बठे सम्पादन अद्य्या",
+	"visualeditor-ca-createlocaldescriptionsource": "स्थानिय वर्णन सम्पादन अर",
+	"visualeditor-ca-createsource": "श्रोत बनाउन्या",
 	"visualeditor-ca-editsource": "श्रोत सम्पादन अद्य्या",
-	"visualeditor-ca-editsource-section": "सम्पादन अद्य्या"
+	"visualeditor-ca-editsource-section": "सम्पादन अद्य्या",
+	"visualeditor-descriptionpagelink": "Project:भिजुअल इडिटर"
 }
