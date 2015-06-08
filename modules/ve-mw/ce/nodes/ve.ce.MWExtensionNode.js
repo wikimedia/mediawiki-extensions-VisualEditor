@@ -50,14 +50,22 @@ ve.ce.MWExtensionNode.static.rendersEmpty = false;
 
 /** */
 ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
-	var xhr,
+	var xhr, attr, wikitext,
 		deferred = $.Deferred(),
 		mwData = this.getModel().getAttribute( 'mw' ),
 		extsrc = config && config.extsrc !== undefined ? config.extsrc : mwData.body.extsrc,
 		attrs = config && config.attrs || mwData.attrs,
-		tagName = this.getModel().getExtensionName(),
-		// XML-like tags in wikitext are not actually XML and don't expect their contents to be escaped.
-		wikitext = mw.html.element( tagName, attrs, new mw.html.Raw( extsrc ) );
+		tagName = this.getModel().getExtensionName();
+
+	// undefined means omit the attribute, not convert it to string 'undefined'
+	for ( attr in mwData.attrs ) {
+		if ( mwData.attrs[attr] === undefined ) {
+			delete mwData.attrs[attr];
+		}
+	}
+
+	// XML-like tags in wikitext are not actually XML and don't expect their contents to be escaped.
+	wikitext = mw.html.element( tagName, attrs, new mw.html.Raw( extsrc ) );
 
 	if ( !this.constructor.static.rendersEmpty && extsrc.trim() !== '' ) {
 		xhr = new mw.Api().post( {
