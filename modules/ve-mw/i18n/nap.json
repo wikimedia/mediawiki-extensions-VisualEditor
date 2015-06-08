@@ -8,6 +8,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Tuorna HTML5 pe na pàggena 'a 'o servizio Parsoid.",
+	"apihelp-visualeditor-param-html": "HTML 'a mannà a 'o Parsoid pe s' 'o putè cagnà dint'a nu wikitesto.",
 	"apihelp-visualeditor-param-paction": "Azione 'a ffà.",
 	"apihelp-visualeditor-param-page": "'A paggena ncopp' 'a quale s'avesser'apprecà l'aziune.",
 	"tooltip-ca-createsource": "Cria 'o codece surgente 'e chista paggena",
