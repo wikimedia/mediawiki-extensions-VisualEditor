@@ -145,6 +145,9 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
 			this.allowProtocolInInternal = false;
+			// Make sure both inputs are cleared
+			this.internalAnnotationInput.setAnnotation( null );
+			this.externalAnnotationInput.setAnnotation( null );
 		}, this );
 };
 
