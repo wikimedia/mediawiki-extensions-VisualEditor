@@ -550,11 +550,11 @@ $wgResourceModules += array(
 			'lib/ve/src/ui/ve.ui.Overlay.js',
 			'lib/ve/src/ui/ve.ui.Surface.js',
 			'lib/ve/src/ui/ve.ui.Context.js',
-			'lib/ve/src/ui/ve.ui.LinearContext.js',
+			'lib/ve/src/ui/contexts/ve.ui.LinearContext.js',
+			'lib/ve/src/ui/contexts/ve.ui.TableContext.js',
 			'lib/ve/src/ui/ve.ui.ModeledFactory.js',
 			'lib/ve/src/ui/ve.ui.ContextItem.js',
 			'lib/ve/src/ui/ve.ui.ContextItemFactory.js',
-			'lib/ve/src/ui/ve.ui.TableContext.js',
 			'lib/ve/src/ui/ve.ui.Tool.js',
 			'lib/ve/src/ui/ve.ui.Toolbar.js',
 			'lib/ve/src/ui/ve.ui.TargetToolbar.js',
@@ -812,7 +812,7 @@ $wgResourceModules += array(
 	'ext.visualEditor.core.desktop' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'lib/ve/src/ui/ve.ui.DesktopSurface.js',
-			'lib/ve/src/ui/ve.ui.DesktopContext.js',
+			'lib/ve/src/ui/contexts/ve.ui.DesktopContext.js',
 			'lib/ve/src/ui/windowmanagers/ve.ui.DesktopInspectorWindowManager.js',
 		),
 		'styles' => array(
@@ -827,7 +827,7 @@ $wgResourceModules += array(
 	'ext.visualEditor.core.mobile' => $wgVisualEditorResourceTemplate + array(
 		'scripts' => array(
 			'lib/ve/src/ui/ve.ui.MobileSurface.js',
-			'lib/ve/src/ui/ve.ui.MobileContext.js',
+			'lib/ve/src/ui/contexts/ve.ui.MobileContext.js',
 			'lib/ve/src/ui/windowmanagers/ve.ui.MobileWindowManager.js'
 		),
 		'styles' => array(

@@ -10,7 +10,7 @@
  *
  * @class
  * @extends OO.ui.TextInputWidget
- * @mixins OO.ui.LookupElement
+ * @mixins OO.ui.mixin.LookupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options

@@ -11,8 +11,8 @@
  * @class
  * @abstract
  * @extends OO.ui.Widget
- * @mixins OO.ui.GroupElement
- * @mixins OO.ui.DraggableGroupElement
+ * @mixins OO.ui.mixin.GroupElement
+ * @mixins OO.ui.mixin.DraggableGroupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -62,8 +62,8 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 
 OO.inheritClass( ve.ui.MWCategoryWidget, OO.ui.Widget );
 
-OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.GroupElement );
-OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.DraggableGroupElement );
+OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.GroupElement );
+OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
 
 /* Events */
 

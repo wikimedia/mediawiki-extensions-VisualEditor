@@ -35,7 +35,7 @@ module.exports = function ( grunt ) {
 								'Tests'
 							]
 						},
-						include: [ 'UnicodeJS', 'OOJS UI', 'Upstream' ]
+						include: [ 'UnicodeJS', 'OOjs UI', 'Upstream' ]
 					}
 				]
 			}

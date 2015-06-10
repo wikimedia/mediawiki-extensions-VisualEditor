@@ -10,7 +10,7 @@
  *
  * @class
  * @extends OO.ui.TextInputWidget
- * @mixins OO.ui.LookupElement
+ * @mixins OO.ui.mixin.LookupElement
  *
  * @constructor
  * @param {ve.ui.MWCategoryWidget} categoryWidget
@@ -26,7 +26,7 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 	OO.ui.TextInputWidget.call( this, config );
 
 	// Mixin constructors
-	OO.ui.LookupElement.call( this, config );
+	OO.ui.mixin.LookupElement.call( this, config );
 
 	// Properties
 	this.categoryWidget = categoryWidget;
@@ -40,7 +40,7 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 
 OO.inheritClass( ve.ui.MWCategoryInputWidget, OO.ui.TextInputWidget );
 
-OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupElement );
+OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.mixin.LookupElement );
 
 /* Events */
 
