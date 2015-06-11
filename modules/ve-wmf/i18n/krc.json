@@ -11,7 +11,8 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуал редактор]]: кёчгенди",
 	"tag-visualeditor-switched-description": "Редакторлукъ этиу VisualEditor бла башланнганды, сора уа викитекст редакторгъа кёчюлгенди.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Оюмла",
-	"visualeditor-feedback-tool": "Оюм къой",
+	"visualeditor-feedback-tool": "Оюмунгу къой",
 	"visualeditor-help-label": "Хайырланыу гидни окъу",
+	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Редакторну къалай хайырландырыргъа керек болгъанына гид"
 }
