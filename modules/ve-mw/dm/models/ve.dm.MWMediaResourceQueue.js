@@ -75,7 +75,7 @@ ve.dm.MWMediaResourceQueue.prototype.setup = function () {
 ve.dm.MWMediaResourceQueue.prototype.getFileRepos = function () {
 	var defaultSource = [ {
 			url: mw.util.wikiScript( 'api' ),
-			local: true
+			local: ''
 		} ];
 
 	if ( !this.fileRepoPromise ) {
