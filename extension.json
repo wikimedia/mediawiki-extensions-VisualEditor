@@ -21,6 +21,7 @@
 	"descriptionmsg": "visualeditor-desc",
 	"license-name": "MIT",
 	"type": "other",
+	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
 		"VisualEditorPreferenceModules": {
 			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
