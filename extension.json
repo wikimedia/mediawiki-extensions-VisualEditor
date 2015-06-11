@@ -366,7 +366,6 @@
 			"dependencies": [
 				"oojs",
 				"oojs-ui",
-				"oojs-ui.styles.icons-editing-core",
 				"unicodejs",
 				"ext.visualEditor.ve"
 			],
@@ -1580,7 +1579,9 @@
 				"oojs-ui.styles.icons-editing-advanced",
 				"oojs-ui.styles.icons-editing-core",
 				"oojs-ui.styles.icons-editing-styling",
-				"oojs-ui.styles.icons-editing-list"
+				"oojs-ui.styles.icons-editing-list",
+				"oojs-ui.styles.indicators",
+				"oojs-ui.styles.textures"
 			],
 			"targets": [
 				"desktop",
