@@ -69,13 +69,6 @@ ve.dm.MWBlockImageNode.static.getMatchRdfaTypes = function () {
 
 ve.dm.MWBlockImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
 
-ve.dm.MWBlockImageNode.static.matchFunction = function ( domElement ) {
-	var nodetypes = ( domElement.getAttribute( 'typeof' ) || '' ).split( ' ' ),
-		matchTypes = Object.keys( this.rdfaToType ),
-		storeType = OO.simpleArrayIntersection( nodetypes, matchTypes );
-	return storeType.length !== 0;
-};
-
 ve.dm.MWBlockImageNode.static.classAttributes = {
 	'mw-image-border': { borderImage: true },
 	'mw-halign-left': { align: 'left' },
