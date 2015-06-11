@@ -24,9 +24,9 @@ ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( apiurl, co
 
 	// Fetching configuration
 	this.scriptDirUrl = config.scriptDirUrl;
-	this.isLocal = config.local;
+	this.isLocal = ( 'local' in config );
 
-	if ( config.local ) {
+	if ( this.isLocal ) {
 		this.setAjaxSettings( {
 			url: mw.util.wikiScript( 'api' ),
 			// If the url is local use json
