@@ -215,7 +215,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Volver",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Continuar de todos modos",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Parámetro necesario faltante|Parámetros necesarios faltantes}}",
-	"visualeditor-dialog-transclusion-required-parameter-is-blank": "¿Estás seguro de que quieres continuar sin rellenar {{PLURAL:$2|el parámetro|los $1 parámetros}}?",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "¿Estás seguro de que quieres continuar sin rellenar {{PLURAL:$2|el parámetro|los parámetros}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ocultar opciones",
 	"visualeditor-dialog-transclusion-title": "Transclusión",
 	"visualeditor-dialogbutton-media-tooltip": "Multimedia",

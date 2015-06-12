@@ -8,11 +8,13 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Tuorna HTML5 pe na pàggena 'a 'o servizio Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Quanno se stesse a sarvà, mpustate stu parametro a 'o timestamp d' 'a verziona ca se steva a cagnà. Ausato pe' putè scummiglià cunflitte 'e cagnamiento.",
 	"apihelp-visualeditor-param-html": "HTML 'a mannà a 'o Parsoid pe s' 'o putè cagnà dint'a nu wikitesto.",
 	"apihelp-visualeditor-param-oldid": "'O nummero 'e virziona ca s'avess'ausà (predefinito a ll'urdema verziona).",
 	"apihelp-visualeditor-param-paction": "Azione 'a ffà.",
 	"apihelp-visualeditor-param-page": "'A paggena ncopp' 'a quale s'avesser'apprecà l'aziune.",
 	"apihelp-visualeditor-param-starttimestamp": "Quanno se stesse a sarvà, mpustate stu parametro a 'o timestamp 'e quann' 'a paggena è stata carrecata. Chest'è ausato pe' putè scummiglià cunflitte 'e cagnamiento.",
+	"apihelp-visualeditoredit-param-minor": "Identificazione comme cagnamiento minore.",
 	"tooltip-ca-createsource": "Cria 'o codece surgente 'e chista paggena",
 	"tooltip-ca-editsource": "Càgna 'o codece surgente 'e chista paggena",
 	"tooltip-ca-ve-edit": "Càgna chista paggena cu VisualEditor",
