@@ -12,6 +12,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-jscs' );
 	grunt.loadTasks( 'lib/ve/build/tasks' );
@@ -80,6 +81,12 @@ module.exports = function ( grunt ) {
 		banana: {
 			all: 'modules/ve-{mw,wmf}/i18n/'
 		},
+		jsonlint: {
+			all: [
+				'**/*.json',
+				'!node_modules/**'
+			]
+		},
 		copy: {
 			jsduck: {
 				src: 'lib/ve/**/*',
@@ -118,7 +125,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'jshint', 'jscs:main', 'csslint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
