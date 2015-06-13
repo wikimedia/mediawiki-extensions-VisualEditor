@@ -17,7 +17,7 @@ class VisualEditorHooks {
 		// parties who attempt to install VisualEditor onto non-alpha wikis, as
 		// this should have no impact on deploying to Wikimedia's wiki cluster;
 		// is fine for release tarballs because 1.22wmf11 < 1.22alpha < 1.22.0.
-		wfUseMW( '1.26wmf12' );
+		wfUseMW( '1.26wmf21' );
 	}
 
 	/**
