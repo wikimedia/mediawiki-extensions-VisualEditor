@@ -85,9 +85,10 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	} );
 
 	if ( history.replaceState ) {
-		// This is to stop the back button breaking when it's supposed to take us back out
-		// of VE. It used to only be called when venotify is used. FIXME: there should be
-		// a much better solution than this.
+		// We replace the current state with one that's marked with our tag. This way, when users
+		// use the Back button to exit the editor we can restore Read mode. This is because we want
+		// to ignore foreign states in onWindowPopState. Without this, the Read state is foreign.
+		// FIXME: There should be a much better solution than this.
 		history.replaceState( this.popState, document.title, currentUri );
 	}
 
@@ -1414,7 +1415,7 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
  * Page modifications for switching back to view mode.
  */
 ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
-	var uri;
+	var uri, keys;
 
 	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
 	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
@@ -1425,9 +1426,9 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 	mw.hook( 've.deactivate' ).fire();
 	this.emit( 'deactivate' );
 
-	// Push non-veaction=edit url in history
+	// Push article url into history
 	if ( !this.actFromPopState && history.pushState ) {
-		// Remove the veaction query parameter
+		// Remove the VisualEditor query parameters
 		uri = this.currentUri;
 		if ( 'veaction' in uri.query ) {
 			delete uri.query.veaction;
@@ -1436,12 +1437,13 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 			delete uri.query.vesection;
 		}
 
-		// If there are other query parameters, set the url to the current url (with veaction removed).
-		// Otherwise use the canonical style view url (bug 42553).
-		if ( ve.getObjectValues( uri.query ).length ) {
-			history.pushState( this.popState, document.title, uri );
-		} else {
+		// If there are any other query parameters left, re-use that uri object.
+		// Otherwise use the canonical style view url (T44553, T102363).
+		keys = Object.keys( uri.query );
+		if ( !keys.length || ( keys.length === 1 && keys[0] === 'title' ) ) {
 			history.pushState( this.popState, document.title, this.viewUri );
+		} else {
+			history.pushState( this.popState, document.title, uri );
 		}
 	}
 	this.actFromPopState = false;
