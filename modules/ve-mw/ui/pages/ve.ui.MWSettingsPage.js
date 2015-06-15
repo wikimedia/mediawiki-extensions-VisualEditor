@@ -74,7 +74,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			help: ve.msg( 'visualeditor-dialog-meta-settings-redirect-help' )
 		}
 	);
-	this.redirectTargetInput = new ve.ui.MWTitleInputWidget( {
+	this.redirectTargetInput = new mw.widgets.TitleInputWidget( {
 		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ),
 		$overlay: config.$overlay
 	} );

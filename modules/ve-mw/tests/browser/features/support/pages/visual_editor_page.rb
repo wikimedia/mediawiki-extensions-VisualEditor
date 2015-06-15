@@ -152,7 +152,7 @@ class VisualEditorPage
   a(:subheading2, text: /Sub-heading 2/)
   a(:subheading3, text: /Sub-heading 3/)
   a(:subheading4, text: /Sub-heading 4/)
-  div(:suggestion_list, class: 've-ui-mwTitleInputWidget-menu')
+  div(:suggestion_list, class: 'mw-widget-titleInputWidget-menu')
   span(:switch_to_source_editing, class: 'oo-ui-iconElement-icon oo-ui-icon-source')
   table(:table, class: 've-ce-tableNode')
   div(:table_of_contents, class: 've-test-page-settings-table-of-contents')
