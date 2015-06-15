@@ -6,7 +6,8 @@
 			"Ganesh Paudel",
 			"बिप्लब आनन्द",
 			"Nirjal stha",
-			"NehalDaveND"
+			"NehalDaveND",
+			"राम प्रसाद जोशी"
 		]
 	},
 	"tooltip-ca-ve-edit": "यस पृष्ठलाई भिजुअल इडिटरद्वारा सम्पादन गर्ने",
@@ -44,11 +45,11 @@
 	"visualeditor-dialog-media-size-section": "तस्वीर आकार",
 	"visualeditor-dialog-media-type-none": "सामान्य",
 	"visualeditor-dialog-media-type-thumb": "थम्बनेल",
-	"visualeditor-dialog-meta-categories-category": "श्रेणीहरु",
+	"visualeditor-dialog-meta-categories-category": "श्रेणीहरू",
 	"visualeditor-dialog-meta-categories-data-label": "श्रेणीहरू",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "लुकाइएका श्रेणीहरू",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "श्रेणीहरू पछ्याउने",
-	"visualeditor-dialog-meta-categories-input-newcategorylabel": "नयाँ श्रेणीहरु",
+	"visualeditor-dialog-meta-categories-input-newcategorylabel": "नयाँ श्रेणीहरू",
 	"visualeditor-dialog-meta-categories-input-placeholder": "वर्ग थपियो",
 	"visualeditor-dialog-meta-categories-options": "विकल्पहरु",
 	"visualeditor-dialog-meta-categories-section": "श्रेणीहरू",
@@ -57,7 +58,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "भाषा",
 	"visualeditor-dialog-meta-languages-section": "भाषाहरु",
 	"visualeditor-dialog-meta-settings-displaytitle": "प्रदर्शन शिर्षक",
-	"visualeditor-dialog-meta-settings-hiddencat-label": "लुकाइएका श्रेणीहरु",
+	"visualeditor-dialog-meta-settings-hiddencat-label": "लुकाइएका श्रेणीहरू",
 	"visualeditor-dialog-meta-settings-index-default": "पूर्वस्थापित",
 	"visualeditor-dialog-meta-settings-index-disable": "होइन",
 	"visualeditor-dialog-meta-settings-index-force": "हो",
@@ -107,6 +108,6 @@
 	"visualeditor-savedialog-label-warning": "चेतावनीहरू:",
 	"visualeditor-toolbar-cite-label": "उर्ध्वभरण",
 	"visualeditor-toolbar-savedialog": "सङ्ग्रह गर्ने",
-	"visualeditor-version-label": "संस्करणहरु",
+	"visualeditor-version-label": "संस्करणहरू",
 	"visualeditor-viewpage-savewarning-keep": "सम्पादन जारी राख्ने"
 }
