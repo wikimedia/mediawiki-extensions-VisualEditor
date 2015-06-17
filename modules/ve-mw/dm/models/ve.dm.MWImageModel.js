@@ -43,6 +43,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.dir = null;
 	this.lang = null;
 	this.defaultDimensions = null;
+	this.changedImageSource = false;
 
 	this.imageSrc = '';
 	this.imageResourceName = '';
@@ -270,6 +271,8 @@ ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
 ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 	var imageModel = this;
 
+	this.changedImageSource = true;
+
 	if ( attrs.mediaType ) {
 		this.setMediaType( attrs.mediaType );
 	}
@@ -449,7 +452,9 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 	delete editAttributes.originalClasses;
 	delete editAttributes.unrecognizedClasses;
 	// Newly created images must have valid URLs, so remove the error attribute
-	delete editAttributes.isError;
+	if ( this.isChangedImageSource() ) {
+		delete editAttributes.isError;
+	}
 
 	contentToInsert = [
 		{
@@ -619,6 +624,14 @@ ve.dm.MWImageModel.prototype.isDefaultSize = function () {
  */
 ve.dm.MWImageModel.prototype.hasBorder = function () {
 	return this.border;
+};
+
+/**
+ * Check whether the image source is changed
+ * @return {boolean} changedImageSource flag on or off
+ */
+ve.dm.MWImageModel.prototype.isChangedImageSource = function () {
+	return this.changedImageSource;
 };
 
 /**
