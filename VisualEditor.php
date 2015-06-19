@@ -1644,7 +1644,7 @@ $wgVisualEditorSupportedSkins = array( 'vector', 'apex', 'monobook', 'minerva', 
 $wgVisualEditorBrowserBlacklist = array(
 	// IE <= 8 has various incompatibilities in layout and feature support
 	// IE10 and 11 have problems but mostly work OK-ish so they're greylisted; IE9 to come
-	'msie' => array ( array( '<=', 9 ) ),
+	'msie' => array( array( '<=', 9 ) ),
 	// Android 2.x and below "support" CE but don't trigger keyboard input
 	'android' => array( array( '<', 3 ) ),
 	// Firefox issues in versions 12 and below (bug 50780)

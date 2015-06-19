@@ -19,7 +19,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 	/* Methods */
 
-	public function __construct () {
+	public function __construct() {
 		$this->gitInfo = new GitInfo( __DIR__ );
 	}
 
