@@ -314,6 +314,7 @@
 				"spamprotectionmatch",
 				"spamprotectiontext",
 				"summary-preview",
+				"fancycaptcha-reload-text",
 				"visualeditor-loadwarning",
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
