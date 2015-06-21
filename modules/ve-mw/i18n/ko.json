@@ -16,7 +16,8 @@
 			"Naturehead",
 			"Revi",
 			"Infinity",
-			"SeoJeongHo"
+			"SeoJeongHo",
+			"Alex00728"
 		]
 	},
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
@@ -196,7 +197,7 @@
 	"visualeditor-preference-enable": "시각편집기 활성화하기. 다음 {{PLURAL:$2|이름공간}}에서 사용할 수 있습니다: $1",
 	"visualeditor-preference-mwalienextension-description": "화랑이나 원본 코드 블록과 같은 확장 태그를 편집하기 위한 시험용 기본 도구를 개별 도구를 사용하기에 앞서 시각편집기에 추가합니다. 시험 기능을 사용할 때는 저장하기에 앞서 자신의 변경 사항을 항상 검토해 보십시오.",
 	"visualeditor-preference-mwalienextension-label": "시각편집기 태그 편집 확장 기능",
-	"visualeditor-reference-input-placeholder": "어느 주석을 찾겠습니까?",
+	"visualeditor-reference-input-placeholder": "현재 주석에서 찾기",
 	"visualeditor-referenceslist-isempty": "이 문서에 목록에 추가할 \"$1\" 그룹으로 된 주석이 없습니다.",
 	"visualeditor-referenceslist-isempty-default": "이 페이지에 목록에 추가할 주석이 없습니다.",
 	"visualeditor-referenceslist-missingref": "이 주석은 틀이나 다른 생성된 블록에서 정의했고, 지금은 원본 모드에서만 편집할 수 있습니다.",

@@ -3,20 +3,21 @@
 		"authors": [
 			"George Animal",
 			"Purodha",
-			"Bikarhêner"
+			"Bikarhêner",
+			"Ghybu"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Kurteya guherandinê.",
 	"tooltip-ca-createsource": "Ji vê rûpelê re koda çavkanîyê çêke",
-	"tooltip-ca-editsource": "Koda çavkanîyê vê rûpelê biguherîne",
+	"tooltip-ca-editsource": "Koda çavkaniyê vê rûpelê biguherîne",
 	"tooltip-ca-ve-edit": "Vê rûpelê bi VisualEditorê bikeysbike",
 	"visualeditor-advancedsettings-tool": "Hevyazên pêşketî",
 	"visualeditor-annotationbutton-linknode-tooltip": "Girêdanê hêsan",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Çavkanîye biafirîne",
-	"visualeditor-ca-editsource": "Çavkanîye biguherîne",
-	"visualeditor-ca-editsource-section": "Çavkanîye biguherîne",
+	"visualeditor-ca-editsource": "Çavkaniye biguherîne",
+	"visualeditor-ca-editsource-section": "çavkaniye biguherîne",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",

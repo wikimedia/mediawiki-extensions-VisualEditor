@@ -247,7 +247,7 @@
 	"visualeditor-preference-mwalienextension-description": "यथादृश्य संपादिका में जाँच हेतु एक्सटेंशन टैग सम्पादन की प्रयोगात्मक सुविधा जोड़ें, उसके सामान्य रूप से जारी होने से पहले। प्रयोगात्मक सुविधाओं का उपयोग करते समय कृपया अपने बदलाव सहेजने से पहले सदैव जाँचें।",
 	"visualeditor-preference-mwalienextension-label": "यथादृश्य संपादिका एक्सटेंशन टैग सम्पादन",
 	"visualeditor-recreate": "आपके संपादन शुरू करने के बाद से पृष्ठ को हटा दिया गया है। पुन: निर्माण करने के लिए \"$1\" दबाएं।",
-	"visualeditor-reference-input-placeholder": "आप किसे सन्दर्भित करना चाहते हैं?",
+	"visualeditor-reference-input-placeholder": "वर्तमान उद्धरणों में खोजें",
 	"visualeditor-referenceslist-isempty": "इस पृष्ठ पर \"$1\" सन्दर्भ समूह में कोई सन्दर्भ नहीं हैं जो इस सूची में जोड़े जा सकें।",
 	"visualeditor-referenceslist-isempty-default": "इस पृष्ठ पर कोई सन्दर्भ नहीं हैं जो इस सूची में जोड़े जा सकें।",
 	"visualeditor-referenceslist-missingref": "ये सन्दर्भ किसी साँचे या अन्य ब्लॉक का प्रयोग करता है, और इसलिए अभी केवल स्रोत सम्पादन में सम्पादित किया जा सकता है।",

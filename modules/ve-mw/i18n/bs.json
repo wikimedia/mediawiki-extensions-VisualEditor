@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"DzWiki",
-			"KWiki"
+			"KWiki",
+			"Srdjan m"
 		]
 	},
 	"tooltip-ca-createsource": "Napravite izvorni kôd ove stranice",
@@ -32,12 +33,17 @@
 	"visualeditor-dialog-beta-welcome-content": "Ovo je novi, jednostavniji način uređivanja. Još uvijek je u razvoju, tako da možda postoje dijelovi članka koje nećete moći uređivati ili ćete naći probleme koje treba popraviti. Provjerite svoje izmjene u članku prije no što ih sačuvate. Cijenimo svaki Vaš prijedlog u vezi s korištenjem vizualnog uređivača. Prijedlog možete napisati klikom na dugme '{{int:visualeditor-help-tool}}'. U svakom trenutku možete da se prebacite na uređivač wikiteksta klikom na karticu \"$1\", bez gubljenja izmjena.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Dobro došli}} u Vizuelni uređivač",
 	"visualeditor-dialog-media-alttext-section": "Alternativni tekst",
-	"visualeditor-dialog-media-change-image": "Odaberi drugu sliku",
+	"visualeditor-dialog-media-change-image": "Promijeni sliku",
+	"visualeditor-dialog-media-choose-image": "Koristi ovu sliku",
 	"visualeditor-dialog-media-content-filename": "Ime datoteke",
 	"visualeditor-dialog-media-content-section": "Opis slike",
 	"visualeditor-dialog-media-goback": "Nazad",
+	"visualeditor-dialog-media-info-audiofile": "Audio datoteka",
+	"visualeditor-dialog-media-info-created": "Napravljeno: $1",
 	"visualeditor-dialog-media-info-licenseshortname": "Licenca",
+	"visualeditor-dialog-media-info-meta-artist": "Umjetnik: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Više informacija",
+	"visualeditor-dialog-media-info-readmore": "Pročitaj više",
 	"visualeditor-dialog-media-page-advanced": "Napredne postavke",
 	"visualeditor-dialog-media-page-general": "Opće postavke",
 	"visualeditor-dialog-media-position-center": "Centar",
@@ -63,7 +69,7 @@
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Sortiraj ovu stranicu po defaultu kao",
 	"visualeditor-dialog-meta-categories-hidden": "Ova kategorija je podešena da se ne prikazuje na stranicama na kojima je dodata.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Sakrivene kategorije",
-	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Pomjerite ovu kategoriju ovdje",
+	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Premjestite ovu kategoriju ovdje",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Nova kategorija",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Dodaj kategoriju",
 	"visualeditor-dialog-meta-categories-options": "Opcije",
@@ -201,6 +207,6 @@
 	"visualeditor-viewpage-savewarning-discard": "Odbaci izmjene",
 	"visualeditor-viewpage-savewarning-keep": "Nastavi s uređivanjem",
 	"visualeditor-viewpage-savewarning-title": "Da li ste sigurni?",
-	"visualeditor-wikitext-warning": "Koristite vizualni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] ovdje ne radi. Kliknite \"{{int:visualeditor-ca-editsource}}\" da uredite stranicu u wikitext načinu – nesačuvane izmjene bit će izgubljene.",
+	"visualeditor-wikitext-warning": "Koristite vizualni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] ovdje ne radi. Kako bi ste prebacili u uređivanje izvornog koda u bilo koje vrijeme bez da se promjene izgube, otvorite padajući meni pored \"{{int:visualeditor-toolbar-savedialog}}\" i izaberite \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Detektovan wiki kôd"
 }
