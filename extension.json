@@ -1564,8 +1564,7 @@
 		},
 		"ext.visualEditor.experimental": {
 			"dependencies": [
-				"ext.visualEditor.language",
-				"ext.visualEditor.mwalienextension"
+				"ext.visualEditor.language"
 			],
 			"targets": [
 				"desktop",

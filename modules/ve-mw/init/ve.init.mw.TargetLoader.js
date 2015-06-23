@@ -25,6 +25,7 @@
 			'ext.visualEditor.data',
 			'ext.visualEditor.mwreference',
 			'ext.visualEditor.mwtransclusion',
+			'ext.visualEditor.mwalienextension',
 			'ext.visualEditor.language',
 			'ext.visualEditor.icons'
 		]

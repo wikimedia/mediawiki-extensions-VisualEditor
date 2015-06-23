@@ -594,6 +594,7 @@ class VisualEditorHooks {
 				'ext.visualEditor.mwmeta',
 				'ext.visualEditor.mwreference',
 				'ext.visualEditor.mwtransclusion',
+				'ext.visualEditor.mwalienextension',
 				'ext.visualEditor.experimental',
 				'ext.visualEditor.viewPageTarget.init',
 				'ext.visualEditor.viewPageTarget',

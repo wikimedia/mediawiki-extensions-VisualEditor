@@ -1540,7 +1540,6 @@ $wgResourceModules += array(
 	'ext.visualEditor.experimental' => array(
 		'dependencies' => array(
 			'ext.visualEditor.language',
-			'ext.visualEditor.mwalienextension',
 		),
 		'targets' => array( 'desktop', 'mobile' ),
 	),
