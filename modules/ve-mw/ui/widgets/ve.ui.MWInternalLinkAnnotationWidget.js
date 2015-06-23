@@ -80,3 +80,11 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 		$overlay: config.$overlay
 	} );
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWInternalLinkAnnotationWidget.prototype.getHref = function () {
+	var title = ve.ui.MWInternalLinkAnnotationWidget.super.prototype.getHref.call( this );
+	return mw.util.getUrl( title );
+};
