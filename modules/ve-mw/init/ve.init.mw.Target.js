@@ -828,17 +828,14 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 	copyAttributes( oldDoc.body, newDoc.body );
 	$( newDoc )
 		.find(
+			'script, ' + // T54884, T65229, T96533, T103430
+			'object, ' + // T65229
+			'style, ' + // T55252
+			'embed, ' + // T53521, T54791, T65121
 			'div[id="myEventWatcherDiv"], ' + // T53423
-			'embed[type="application/iodbc"], ' + // T53521
-			'embed[type="application/x-datavault"], ' + // T54791
-			'script[id="FoxLingoJs"], ' + // T54884
-			'style[id="_clearly_component__css"], ' + // T55252
 			'div[id="sendToInstapaperResults"], ' + // T63776
-			'embed[id^="xunlei_com_thunder_helper_plugin"], ' + // T65121
-			'object[type="cosymantecnisbfw"], script[id="NortonInternetSecurityBF"], ' + // T65229
 			'div[id="kloutify"], ' + // T69006
-			'div[id^="mittoHidden"], ' + // T70900
-			'script[src*="netdefender"]' // T96533
+			'div[id^="mittoHidden"]' // T70900
 		)
 		.remove();
 	// Add doctype manually
