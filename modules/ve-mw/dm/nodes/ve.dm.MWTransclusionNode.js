@@ -52,6 +52,12 @@ ve.dm.MWTransclusionNode.static.matchRdfaTypes = [ 'mw:Transclusion' ];
 // Allow all other types (null) so they match to this node.
 ve.dm.MWTransclusionNode.static.allowedRdfaTypes = null;
 
+// HACK: This prevents any rules with higher specificity from matching,
+// e.g. LanguageAnnotation which uses a match function
+ve.dm.MWTransclusionNode.static.matchFunction = function () {
+	return true;
+};
+
 ve.dm.MWTransclusionNode.static.enableAboutGrouping = true;
 
 ve.dm.MWTransclusionNode.static.getHashObject = function ( dataElement ) {

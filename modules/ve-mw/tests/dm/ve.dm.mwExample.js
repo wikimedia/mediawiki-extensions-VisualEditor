@@ -1051,6 +1051,26 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'mw:Transclusion which is also a language annotation': {
+		body: '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}">content</span>',
+		data: [
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			{
+				type: 'mwTransclusionInline',
+				attributes: {
+					mw: {},
+					originalIndex: 0,
+					originalMw: '{}'
+				},
+				originalDomElements: $( '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}">content</span>' ).toArray()
+			},
+			{ type: '/mwTransclusionInline' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		clipboardBody: '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}" data-ve-no-generated-contents="true">content</span>'
+	},
 	'mw:AlienBlockExtension': {
 		body:
 			'<div about="#mwt1" typeof="mw:Extension/syntaxhighlight"' +
