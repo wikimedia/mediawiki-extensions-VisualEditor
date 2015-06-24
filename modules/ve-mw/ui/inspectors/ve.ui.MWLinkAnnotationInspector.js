@@ -85,14 +85,15 @@ ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( annotation ) {
 	var title,
-		href = annotation ? annotation.getAttribute( 'title' ) : '';
+		href = annotation ? annotation.getAttribute( 'title' ) : '',
+		htmlDoc = this.getFragment().getDocument().getHtmlDocument();
 
-	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href ) ) {
+	if ( htmlDoc && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href ) ) {
 		// Check if the 'external' link is in fact a page on the same wiki
 		// e.g. http://en.wikipedia.org/wiki/Target -> Target
 		title = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
 			href,
-			ve.init.target.doc
+			htmlDoc
 		).title;
 		if ( title !== href ) {
 			this.internalAnnotationInput.text.setValue( title );
