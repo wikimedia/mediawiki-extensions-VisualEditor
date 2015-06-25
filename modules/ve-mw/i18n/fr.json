@@ -264,8 +264,6 @@
 	"visualeditor-languages-tool": "Langues",
 	"visualeditor-linkinspector-button-link-external": "Lien externe",
 	"visualeditor-linkinspector-button-link-internal": "Chercher des pages",
-	"visualeditor-linkinspector-description-new-page": "la page n’existe pas encore",
-	"visualeditor-linkinspector-description-redirect": "Redirection vers $1",
 	"visualeditor-linkinspector-illegal-title": "Titre de page non valide",
 	"visualeditor-linknodeinspector-add-label": "Ajouter un libellé",
 	"visualeditor-linknodeinspector-title": "Lien simple",

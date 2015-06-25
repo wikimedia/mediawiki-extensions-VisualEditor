@@ -200,8 +200,6 @@
 	"visualeditor-languages-tool": "اللغات",
 	"visualeditor-linkinspector-button-link-external": "وصلة خارجية",
 	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحة",
-	"visualeditor-linkinspector-description-new-page": "الصفحة غير موجودة بعد",
-	"visualeditor-linkinspector-description-redirect": "تحويل إلى $1",
 	"visualeditor-linkinspector-illegal-title": "عنوان الصفحة غير صحيح",
 	"visualeditor-linknodeinspector-add-label": "إضافة تسمية",
 	"visualeditor-linknodeinspector-title": "وصلة بسيطة",
