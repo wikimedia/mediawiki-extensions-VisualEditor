@@ -865,7 +865,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js',
 
 			'modules/ve-mw/ui/widgets/ve.ui.MWSurfaceWidget.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWTitleInputWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js',
 
@@ -1120,9 +1119,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ce/annotations/ve.ce.MWExternalLinkAnnotation.js',
 			'modules/ve-mw/ce/annotations/ve.ce.MWInternalLinkAnnotation.js',
 
-			'modules/ve-mw/ui/widgets/ve.ui.MWLinkTargetInputWidget.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWLinkMenuOptionWidget.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkMenuOptionWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWInternalLinkAnnotationWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWExternalLinkAnnotationWidget.js',
 
@@ -1135,14 +1131,7 @@ $wgResourceModules += array(
 		),
 		'styles' => array(
 			'modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css',
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWLinkTargetInputWidget.css',
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWInternalLinkMenuOptionWidget.css',
 			'modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.css',
-		),
-		'skinStyles' => array(
-			'apex' => array(
-				'modules/ve-mw/ui/themes/apex/ve.ui.MWLinkTargetInputWidget.css'
-			),
 		),
 		'dependencies' => array(
 			'ext.visualEditor.mwcore',
@@ -1151,8 +1140,6 @@ $wgResourceModules += array(
 			'visualeditor-annotationbutton-linknode-tooltip',
 			'visualeditor-linkinspector-button-link-external',
 			'visualeditor-linkinspector-button-link-internal',
-			'visualeditor-linkinspector-description-new-page',
-			'visualeditor-linkinspector-description-redirect',
 			'visualeditor-linkinspector-illegal-title',
 			'visualeditor-linknodeinspector-add-label',
 			'visualeditor-linknodeinspector-title',
@@ -1386,7 +1373,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/widgets/ve.ui.MWParameterResultWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWMoreParametersResultWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWNoParametersResultWidget.js',
-			'modules/ve-mw/ui/widgets/ve.ui.MWTemplateMenuOptionWidget.js',
 			'modules/ve-mw/ui/widgets/ve.ui.MWTemplateTitleInputWidget.js',
 
 			'modules/ve-mw/ui/pages/ve.ui.MWTemplatePage.js',
@@ -1408,7 +1394,6 @@ $wgResourceModules += array(
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWMoreParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css',
 			'modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterSearchWidget.css',
-			'modules/ve-mw/ui/styles/widgets/ve.ui.MWTemplateMenuOptionWidget.css',
 			'modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css',
 			'modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css',
 		),

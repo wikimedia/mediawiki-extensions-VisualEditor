@@ -75,8 +75,11 @@ ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( a
  * @return {OO.ui.TextInputWidget} Text input widget
  */
 ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
-	return new ve.ui.MWLinkTargetInputWidget( {
+	return new mw.widgets.TitleInputWidget( {
+		$overlay: config.$overlay,
 		icon: 'search',
-		$overlay: config.$overlay
+		showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
+		showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
+		cache: ve.init.platform.linkCache
 	} );
 };
