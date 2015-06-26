@@ -23,7 +23,7 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Bytte]]",
 	"tag-visualeditor-switched-description": "Användaren började redigera med VisualEditor men bytte sedan till wikitext-redigering.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Återkoppling",
-	"visualeditor-feedback-tool": "Lämna feedback",
+	"visualeditor-feedback-tool": "Lämna återkoppling om denna programvara",
 	"visualeditor-help-label": "Läs användarguiden",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Användarguide för hur du använder redigeraren"
