@@ -56,11 +56,17 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.mixin.LookupElement );
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
+	var title = mw.Title.newFromText( this.value );
+	if ( title && title.getNamespaceId() === mw.config.get( 'wgNamespaceIds' ).category ) {
+		title = title.getMainText();
+	} else {
+		title = this.value;
+	}
 	return new mw.Api().get( {
 		action: 'query',
 		generator: 'allcategories',
 		gacmin: 1,
-		gacprefix: this.value,
+		gacprefix: title,
 		prop: 'categoryinfo',
 		redirects: ''
 	} );
