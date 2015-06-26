@@ -31,4 +31,6 @@ ve.ui.MWLinkInspectorTool.static.modelClasses =
 		ve.dm.MWNumberedExternalLinkNode
 	] );
 
+ve.ui.MWLinkInspectorTool.static.associatedWindows = [ 'link', 'linkNode' ];
+
 ve.ui.toolFactory.register( ve.ui.MWLinkInspectorTool );

@@ -763,6 +763,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 				tool.static.template = item.template;
 				tool.static.autoAddToCatchall = false;
 				tool.static.autoAddToGroup = true;
+				tool.static.associatedWindows = [ name ];
 				ve.ui.toolFactory.register( tool );
 				ve.ui.commandRegistry.register(
 					new ve.ui.Command(
