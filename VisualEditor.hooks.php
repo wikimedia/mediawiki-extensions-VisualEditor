@@ -551,13 +551,11 @@ class VisualEditorHooks {
 				'lib/ve/tests/init/ve.init.Platform.test.js',
 				'modules/ve-mw/tests/init/targets/ve.init.mw.ViewPageTarget.test.js',
 				// IME tests
-				// FIXME: these work in VE core but break in VE-MW, so not running most of them for now
 				'lib/ve/tests/ce/ve.ce.TestRunner.js',
 				'lib/ve/tests/ce/ve.ce.imetests.test.js',
-				//'lib/ve/tests/ce/imetests/backspace-chromium-ubuntu-none.js',
-				//'lib/ve/tests/ce/imetests/backspace-firefox-ubuntu-none.js',
-				//'lib/ve/tests/ce/imetests/backspace-ie-win-none.js',
-				/*
+				'lib/ve/tests/ce/imetests/backspace-chromium-ubuntu-none.js',
+				'lib/ve/tests/ce/imetests/backspace-firefox-ubuntu-none.js',
+				'lib/ve/tests/ce/imetests/backspace-ie-win-none.js',
 				'lib/ve/tests/ce/imetests/input-chrome-win-chinese-traditional-handwriting.js',
 				'lib/ve/tests/ce/imetests/input-chrome-win-greek.js',
 				'lib/ve/tests/ce/imetests/input-chrome-win-welsh.js',
@@ -580,7 +578,6 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/imetests/leftarrow-chromium-ubuntu-none.js',
 				'lib/ve/tests/ce/imetests/leftarrow-firefox-ubuntu-none.js',
 				'lib/ve/tests/ce/imetests/leftarrow-ie-win-none.js',
-				*/
 			),
 			'dependencies' => array(
 				'unicodejs',
