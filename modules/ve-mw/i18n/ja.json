@@ -9,7 +9,8 @@
 			"Takot",
 			"Plover-Y",
 			"Los688",
-			"SkyDaisy9"
+			"SkyDaisy9",
+			"Sujiniku"
 		]
 	},
 	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (captcha response で保存する場合)。",
@@ -124,7 +125,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "このページを以下のページにリダイレクト",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "リダイレクト先のページ",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "これが必要とされるのは非常に稀なケースですが、リダイレクト先のページが移動された際に、ここのリダイレクトが自動的に更新することを防ぎます。",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "リダイレクト先のページが移動された際にこのリダイレクトが更新されないようにする",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "ターゲット先のページが移動された際に、更新されることから、このリダイレクトを防ぐ。",
 	"visualeditor-dialog-meta-settings-section": "ページの設定",
 	"visualeditor-dialog-meta-settings-toc-default": "必要であれば表示",
 	"visualeditor-dialog-meta-settings-toc-disable": "常に非表示",
@@ -214,7 +215,7 @@
 	"visualeditor-preference-enable": "ビジュアルエディターを有効にする。これは以下の{{PLURAL:$2|名前空間}}のみで利用できます: $1",
 	"visualeditor-preference-mwalienextension-description": "ビジュアルエディターで拡張タグ(ギャラリーやソースコードブロック)を編集する、基本的なサポートを追加します。これは実験的機能です。実験的機能を使用する際には、保存前に変更内容をもう一度ご確認ください。",
 	"visualeditor-preference-mwalienextension-label": "ビジュアルエディターでの拡張機能タグの編集",
-	"visualeditor-reference-input-placeholder": "出典を検索",
+	"visualeditor-reference-input-placeholder": "現在の引用内を検索",
 	"visualeditor-referenceslist-isempty": "このページには、この一覧に含めるためのグループ「$1」の出典はありません。",
 	"visualeditor-referenceslist-isempty-default": "このページには、この一覧に含められる出典はありません。",
 	"visualeditor-referenceslist-missingref": "この出典はテンプレート内または別途生成されたブロック内で定義されているため、現時点ではソース モードのみで編集できます。",
