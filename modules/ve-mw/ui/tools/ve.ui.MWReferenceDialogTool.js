@@ -25,6 +25,7 @@ ve.ui.MWReferenceDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-tooltip' );
 ve.ui.MWReferenceDialogTool.static.modelClasses = [ ve.dm.MWReferenceNode ];
 ve.ui.MWReferenceDialogTool.static.commandName = 'reference';
+ve.ui.MWReferenceDialogTool.static.autoAddToCatchall = false;
 ve.ui.toolFactory.register( ve.ui.MWReferenceDialogTool );
 
 /**
