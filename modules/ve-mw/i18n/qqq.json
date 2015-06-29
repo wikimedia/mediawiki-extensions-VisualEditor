@@ -54,6 +54,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "{{doc-apihelp-param|visualeditoredit|wikitext}}",
 	"tooltip-ca-createsource": "Tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist.\n\nSee also:\n* {{msg-mw|Tooltip-ca-editsource}} - tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists",
 	"tooltip-ca-editsource": "Tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists.\n\nSee also:\n* {{msg-mw|Tooltip-ca-createsource}} - tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist",
+	"tooltip-ca-edit": "Over-ridden tooltip of the wikitext \"Edit source\" tab.",
 	"tooltip-ca-ve-edit": "Tooltip of the dedicated VisualEditor \"Edit\" tab.",
 	"visualeditor-advancedsettings-tool": "Tool for opening the advanced settings section of the meta dialog.\n{{Identical|Advanced settings}}",
 	"visualeditor-annotationbutton-linknode-tooltip": "Tooltip text for link button for auto-numbered, labelless, external links.\n\nSee also:\n* {{msg-mw|Visualeditor-linknodeinspector-title}}\n{{Related|Visualeditor-annotationbutton}}",
