@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"SmartNart12"
+			"SmartNart12",
+			"Bedynokue.nart",
+			"SamGamgee"
 		]
 	},
+	"tooltip-ca-ve-edit": "Визуал-1амэпсымэк1э нэк1убгъом е1аз",
+	"visualeditor-ca-editsource": "Вики-текстым е1аз",
 	"visualeditor-ca-editsource-section": "вики-текстым е1аз"
 }
