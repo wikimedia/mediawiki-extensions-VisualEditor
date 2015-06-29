@@ -272,6 +272,10 @@
 				"ext.visualEditor.track",
 				"mediawiki.api"
 			],
+			"messages": [
+				"visualeditor-loaderror-title",
+				"visualeditor-loaderror-message"
+			],
 			"targets": [
 				"desktop",
 				"mobile"

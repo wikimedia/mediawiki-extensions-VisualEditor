@@ -245,6 +245,8 @@
 	"visualeditor-linkinspector-illegal-title": "Invalid page title",
 	"visualeditor-linknodeinspector-add-label": "Add label",
 	"visualeditor-linknodeinspector-title": "Simple link",
+	"visualeditor-loaderror-message": "Error loading data from server: $1.",
+	"visualeditor-loaderror-title": "The editor could not load",
 	"visualeditor-loadwarning": "Error loading data from server: $1. Would you like to retry?",
 	"visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to retry?",
 	"visualeditor-mainnamespacepagelink": "Project:Main namespace",
