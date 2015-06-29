@@ -144,7 +144,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 		.append(
 			$( '<div>' )
 				.addClass( 've-ui-mwHelpPopupTool-item' )
-				.text( ve.msg( 'visualeditor-beta-warning' ) )
+				.text( ve.msg( 'visualeditor-beta-warning', $( '#ca-edit' ).text() ) )
 		)
 		.append(
 			$( '<div>' )

@@ -1237,7 +1237,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 			]
 		} );
 		$( 'body' ).append( windowManager.$element );
-		this.welcomeDialog = new ve.ui.MWBetaWelcomeDialog();
+		this.welcomeDialog = new ve.ui.MWWelcomeDialog();
 		windowManager.addWindows( [ this.welcomeDialog ] );
 
 		// Only use the preference value if the user is logged-in.

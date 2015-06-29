@@ -1,0 +1,10 @@
+/*!
+ * VisualEditor MediaWiki UserInterface beta welcome dialog styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+.visualeditor-welcomedialog-content {
+	background: url(images/welcomeSplash.png) 50%/35% no-repeat;
+	height: 200px;
+}

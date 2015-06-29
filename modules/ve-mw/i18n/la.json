@@ -24,8 +24,6 @@
 	"visualeditor-categories-tool": "Categoriae",
 	"visualeditor-desc": "Editor visualis pro MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Editor visualis",
-	"visualeditor-dialog-beta-welcome-action-continue": "Pergere",
-	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bene venisti}} ad editorem visualem",
 	"visualeditor-dialog-media-content-section": "Rubrica",
 	"visualeditor-dialog-media-title": "Praeferentiae mediorum",
 	"visualeditor-dialog-meta-categories-category": "Categoria",

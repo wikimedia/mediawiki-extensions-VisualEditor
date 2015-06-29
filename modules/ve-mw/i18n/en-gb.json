@@ -12,7 +12,6 @@
 	"tooltip-ca-ve-edit": "Edit this page",
 	"visualeditor-ca-editsource": "Edit source",
 	"visualeditor-ca-editsource-section": "edit source",
-	"visualeditor-dialog-beta-welcome-content": "This is our new, easier way to edit. It's still in beta, which means you might find parts of the page you can't edit, or encounter issues that need to be fixed. We encourage you to review your changes, and we welcome reports about any issues you might encounter in using VisualEditor (click the \"{{int:visualeditor-help-tool}}\" button to submit feedback). You can switch to the wikitext editor at any time by clicking on the \"$1\" tab, keeping any changes you have made.",
 	"visualeditor-dialog-media-alttext-section-help": "You can use this to give a text description which is used for people who are unable to see the item. The description should be good enough for them to understand the purpose and information given by the media item. This is vital for blind users and other people using screen-reader software or text-only browsers.",
 	"visualeditor-dialog-media-content-section-help": "You can use this to show a label that shows next to the item for all readers. This is often used to explain why the item is relevant to the context in which it is shown. It should be succinct and informative.",
 	"visualeditor-dialog-media-info-licenseshortname": "Licence",

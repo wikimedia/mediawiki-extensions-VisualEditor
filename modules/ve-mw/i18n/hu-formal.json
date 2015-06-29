@@ -35,8 +35,6 @@
 	"visualeditor-cite-tool-name-web": "Weboldal",
 	"visualeditor-desc": "Vizuális szerkesztő a MediaWikihez",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
-	"visualeditor-dialog-beta-welcome-action-continue": "Folytatás",
-	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Üdvözlöm}} a VisualEditorban",
 	"visualeditor-dialog-media-alttext-section": "Alternatív szöveg",
 	"visualeditor-dialog-media-change-image": "Kép megváltoztatása",
 	"visualeditor-dialog-media-choose-image": "Ezen kép használata",

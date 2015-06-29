@@ -28,8 +28,6 @@
 	"visualeditor-cite-tool-name-web": "Websydło",
 	"visualeditor-desc": "WYSIWYG-editor za MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
-	"visualeditor-dialog-beta-welcome-action-continue": "Dale",
-	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Witaj}} we VisualEditorje",
 	"visualeditor-dialog-media-alttext-section": "Alternatiwny tekst",
 	"visualeditor-dialog-media-content-section": "Popis",
 	"visualeditor-dialog-media-page-advanced": "Rozšěrjene nastajenja",

@@ -26,8 +26,6 @@
 	"visualeditor-cite-tool-name-web": "वेबसाइट",
 	"visualeditor-desc": "मेडियाविकिको लागि दृष्टि सम्पादक",
 	"visualeditor-descriptionpagelink": "Project:भिजुअल इडिटर",
-	"visualeditor-dialog-beta-welcome-action-continue": "जारी राख्ने",
-	"visualeditor-dialog-beta-welcome-title": "दृष्टि सम्पादक मा {{GENDER:$1|स्वागत}}",
 	"visualeditor-dialog-media-change-image": "चित्र परिवर्तन",
 	"visualeditor-dialog-media-content-filename": "फाइल नाम",
 	"visualeditor-dialog-media-goback": "पछाडि",
