@@ -695,10 +695,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editApi ) {
 	this.showSaveError(
-		ve.msg( 'spamprotectiontext' ) + ' ' +
-			ve.msg(
-				'spamprotectionmatch', mw.language.listToText( editApi.spamblacklist.split( '|' ) )
-			),
+		$( $.parseHTML( editApi.sberrorparsed ) ),
 		false // prevents reapply
 	);
 };

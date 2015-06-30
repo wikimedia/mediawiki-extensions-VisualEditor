@@ -158,6 +158,13 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				'edit' => $saveresult['edit']
 			);
 
+			if ( isset( $saveresult['edit']['spamblacklist'] ) ) {
+				$matches = explode( '|', $saveresult['edit']['spamblacklist'] );
+				$matcheslist = $this->getLanguage()->listToText( $matches );
+				$result['edit']['sberrorparsed'] = $this->msg( 'spamprotectiontext' )->parse() . ' ' .
+					$this->msg( 'spamprotectionmatch', $matcheslist )->parse();
+			}
+
 		// Success
 		} else {
 			if ( isset( $saveresult['edit']['newrevid'] ) ) {
