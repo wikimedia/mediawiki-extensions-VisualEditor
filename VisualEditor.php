@@ -172,6 +172,7 @@ $wgResourceModules += array(
 			'pipe-separator',
 			'tooltip-ca-createsource',
 			'tooltip-ca-editsource',
+			'tooltip-ca-edit',
 			'tooltip-ca-ve-edit',
 			'visualeditor-ca-editsource-section',
 			'postedit-confirmation-created',
