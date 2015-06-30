@@ -1287,6 +1287,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			// and the overlay container, and we don't want inspectors to
 			// inherit skin typography styles for wikipage content.
 			surfaceView.$element.addClass( 'mw-body-content' );
+			surface.$placeholder.addClass( 'mw-body-content' );
 			$documentNode.addClass(
 				// Add appropriately mw-content-ltr or mw-content-rtl class
 				'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir

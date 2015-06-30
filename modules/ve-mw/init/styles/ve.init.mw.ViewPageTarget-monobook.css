@@ -35,8 +35,13 @@
 	border-top: 1px solid #ccc;
 }
 
-.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode {
+.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode,
+.ve-init-mw-viewPageTarget-surface .ve-ui-surface-placeholder {
 	padding: 0;
+}
+
+.ve-init-mw-viewPageTarget-surface .ve-ui-surface-placeholder {
+	margin-top: -0.45em;
 }
 
 .ve-init-target > .ve-ui-debugBar {

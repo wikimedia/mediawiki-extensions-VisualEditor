@@ -23,6 +23,7 @@ ve.ui.MWSurfaceWidget = function VeUiMWSurfaceWidget( doc, config ) {
 	// Initialization
 	this.$element.addClass( 've-ui-mwSurfaceWidget' );
 	this.surface.getView().$element.addClass( 'mw-body-content' );
+	this.surface.$placeholder.addClass( 'mw-body-content' );
 };
 
 /* Inheritance */
