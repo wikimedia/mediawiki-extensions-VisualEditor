@@ -5,7 +5,8 @@
 			"VASANTH S.N.",
 			"Nayvik",
 			"Omshivaprakash",
-			"Yogesh"
+			"Yogesh",
+			"Shushruth"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid ಸೇವೆಯಿಂದ ಪುಟವೊಂದಕ್ಕೆ HTML5 ಹಿಂದಿರುಗಿಸುತ್ತದೆ.",
@@ -13,6 +14,7 @@
 	"apihelp-visualeditoredit-param-summary": "ಸಂಪಾದನೆಯ ಸಾರಾಂಶ",
 	"tooltip-ca-createsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸೃಷ್ಟಿಸಿ",
 	"tooltip-ca-editsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸಂಪಾದಿಸಿ",
+	"tooltip-ca-edit": "ಈ ಪುಟವನ್ನು ನೀವು ಸಂಪಾದಿಸಬಹುದು. ಉಳಿಸುವ ಮುನ್ನ ಮುನ್ನೋಟವನ್ನು ಉಪಯೋಗಿಸಿ.",
 	"tooltip-ca-ve-edit": "ಈ ಪುಟವನ್ನು ದೃಶ್ಯ ಸಂಪಾದಕದಿಂದ ಸಂಪಾದಿಸಿ",
 	"visualeditor-advancedsettings-tool": "ಸುಧಾರಿತ ಸಂಯೋಜನೆಗಳು",
 	"visualeditor-annotationbutton-linknode-tooltip": "ಸರಳ ಕೊಂಡಿ",

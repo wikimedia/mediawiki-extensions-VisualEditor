@@ -8,6 +8,7 @@
 	},
 	"tooltip-ca-createsource": "Napravite izvorni kôd ove stranice",
 	"tooltip-ca-editsource": "Uredi izvorni kod ove stranice",
+	"tooltip-ca-edit": "Možete uređivati ovaj članak. Molimo Vas, koristite dugme \"Prikaži izgled\" prije spašavanja izmjena.",
 	"tooltip-ca-ve-edit": "Uredite ovu stranicu pomoću vizualnog uređivača",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",
 	"visualeditor-annotationbutton-linknode-tooltip": "Jednostavni link",

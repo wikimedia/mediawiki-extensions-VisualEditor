@@ -10,6 +10,7 @@
 	},
 	"tooltip-ca-createsource": "Направите изворни код ове странице",
 	"tooltip-ca-editsource": "Уредите изворни код ове странице",
+	"tooltip-ca-edit": "Можете да уређујете ову страницу. Користите претпреглед пре снимања",
 	"tooltip-ca-ve-edit": "Уредите ову страницу Визуелним уређивачем",
 	"visualeditor-advancedsettings-tool": "Напредне поставке",
 	"visualeditor-annotationbutton-linknode-tooltip": "Проста веза",

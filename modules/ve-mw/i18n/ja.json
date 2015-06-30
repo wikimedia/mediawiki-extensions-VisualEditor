@@ -18,6 +18,7 @@
 	"apihelp-visualeditoredit-param-summary": "編集の要約",
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
 	"tooltip-ca-editsource": "このページのソースコードを編集する",
+	"tooltip-ca-edit": "このページを編集できます。保存前にプレビューボタンを使用してください。",
 	"tooltip-ca-ve-edit": "このページをビジュアルエディターで編集する",
 	"visualeditor-advancedsettings-tool": "高度な設定",
 	"visualeditor-annotationbutton-linknode-tooltip": "単純なリンク",

@@ -22,6 +22,7 @@
 	"apihelp-visualeditoredit-param-summary": "Yhteenveto.",
 	"tooltip-ca-createsource": "Luo sivun lähdekoodi",
 	"tooltip-ca-editsource": "Muokkaa tämän sivun wikitekstiä",
+	"tooltip-ca-edit": "Muokkaa tätä sivua",
 	"tooltip-ca-ve-edit": "Muokkaa tätä sivua Visuaalisella muokkaimella",
 	"visualeditor-advancedsettings-tool": "Lisäasetukset",
 	"visualeditor-annotationbutton-linknode-tooltip": "Yksinkertainen linkki",

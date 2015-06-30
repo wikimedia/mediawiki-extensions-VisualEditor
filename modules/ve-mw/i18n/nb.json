@@ -8,7 +8,8 @@
 			"Njardarlogar",
 			"Gloria sah",
 			"Apple farmer",
-			"Kingu"
+			"Kingu",
+			"Nghtwlkr"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -34,6 +35,7 @@
 	"apihelp-visualeditoredit-param-summary": "Redigeringsforklaring.",
 	"tooltip-ca-createsource": "Opprett kildekoden for denne siden",
 	"tooltip-ca-editsource": "Rediger kildekoden for denne siden",
+	"tooltip-ca-edit": "Du kan redigere denne siden. Vennligst bruk forhåndsvisningsknappen før du lagrer.",
 	"tooltip-ca-ve-edit": "Rediger siden med VisualEditor",
 	"visualeditor-advancedsettings-tool": "Avanserte innstillinger",
 	"visualeditor-annotationbutton-linknode-tooltip": "Enkel lenke",
