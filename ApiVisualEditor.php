@@ -369,8 +369,9 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// New page notices
+				$placeholder = null;
 				if ( !$title->exists() ) {
-					$notices[] = $this->msg(
+					$placeholder = $this->msg(
 						$user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon',
 						wfExpandUrl( Skin::makeInternalOrExternalUrl(
 							$this->msg( 'helppage' )->inContentLanguage()->text()
@@ -519,6 +520,7 @@ class ApiVisualEditor extends ApiBase {
 				$result = array(
 					'result' => 'success',
 					'notices' => $notices,
+					'placeholder' => $placeholder,
 					'checkboxes' => $checkboxes,
 					'links' => $links,
 					'protectedClasses' => implode( ' ', $protectedClasses ),
