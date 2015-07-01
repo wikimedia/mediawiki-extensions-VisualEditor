@@ -66,6 +66,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget() {
 
 	// Events
 	this.connect( this, {
+		saveBegin: 'showSaveDialog',
 		save: 'onSave',
 		saveErrorEmpty: 'onSaveErrorEmpty',
 		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
@@ -76,7 +77,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget() {
 		saveErrorPageDeleted: 'onSaveErrorPageDeleted',
 		saveErrorTitleBlacklist: 'onSaveErrorTitleBlacklist',
 		loadError: 'onLoadError',
-		surfaceReady: 'onSurfaceReady',
 		editConflict: 'onEditConflict',
 		showChanges: 'onShowChanges',
 		showChangesError: 'onShowChangesError',
@@ -516,9 +516,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
 	}
 
 	this.activating = false;
-	this.getSurface().getModel().connect( this, {
-		history: 'updateToolbarSaveButtonState'
-	} );
 
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
@@ -535,11 +532,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
 
 	// Update UI
 	this.changeDocumentTitle();
-
-	this.setupToolbarSaveButton();
-	this.attachToolbarSaveButton();
 	this.restoreScrollPosition();
-	this.restoreEditSection();
+
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
+
 	this.setupUnloadHandlers();
 	this.maybeShowMetaDialog();
 
@@ -920,18 +917,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onNoChanges = function () {
 };
 
 /**
- * Handle clicks on the save button in the toolbar.
- *
- * @method
- * @param {jQuery.Event} e Mouse click event
- */
-ve.init.mw.DesktopArticleTarget.prototype.onToolbarSaveButtonClick = function () {
-	if ( this.edited || this.restoring ) {
-		this.showSaveDialog();
-	}
-};
-
-/**
  * Handle clicks on the MwMeta button in the toolbar.
  *
  * @method
@@ -939,19 +924,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarSaveButtonClick = function ()
  */
 ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function () {
 	this.getSurface().getDialogs().openWindow( 'meta' );
-};
-
-/**
- * Re-evaluate whether the toolbar save button should be disabled or not.
- */
-ve.init.mw.DesktopArticleTarget.prototype.updateToolbarSaveButtonState = function () {
-	var isDisabled;
-
-	this.edited = this.getSurface().getModel().hasBeenModified();
-	// Disable the save button if we have no history
-	isDisabled = !this.edited && !this.restoring;
-	this.toolbarSaveButton.setDisabled( isDisabled );
-	mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
 };
 
 /**
@@ -1192,32 +1164,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = null;
 
 /**
- * Add content and event bindings to toolbar save button.
- */
-ve.init.mw.DesktopArticleTarget.prototype.setupToolbarSaveButton = function () {
-	this.toolbarSaveButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
-		flags: [ 'progressive', 'primary' ],
-		disabled: !this.restoring
-	} );
-
-	// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
-	// tour to attach a guider to the "Save page" button.
-	this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
-
-	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
-		// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
-		this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
-		this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
-	}
-
-	this.updateToolbarSaveButtonState();
-
-	this.toolbarSaveButton.connect( this, { click: 'onToolbarSaveButtonClick' } );
-};
-
-/**
- * Add the save button to the user interface.
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () {
 	this.actionsToolbar = new ve.ui.TargetToolbar( this );

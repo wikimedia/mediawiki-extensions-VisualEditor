@@ -45,6 +45,11 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 	this.preparedCacheKeyPromise = null;
 	this.clearState();
 	this.generateCitationFeatures();
+
+	// Events
+	this.connect( this, {
+		surfaceReady: 'onSurfaceReady'
+	} );
 };
 
 /* Inheritance */
@@ -415,8 +420,22 @@ ve.init.mw.Target.prototype.onReady = function () {
 	this.setupSurface( this.doc, function () {
 		// onLoad() may have called setAssumeExistence( true );
 		ve.init.platform.linkCache.setAssumeExistence( false );
+		target.getSurface().getModel().connect( target, {
+			history: 'updateToolbarSaveButtonState'
+		} );
 		target.emit( 'surfaceReady' );
 	} );
+};
+
+/**
+ * Once surface is ready ready, init UI
+ *
+ * @method
+ */
+ve.init.mw.Target.prototype.onSurfaceReady = function () {
+	this.setupToolbarSaveButton();
+	this.attachToolbarSaveButton();
+	this.restoreEditSection();
 };
 
 /**
@@ -1314,6 +1333,64 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			} );
 		} );
 	} );
+};
+
+/**
+ * Add content and event bindings to toolbar save button.
+ *
+ * @param {Object} [config] Configuration options for the button
+ */
+ve.init.mw.Target.prototype.setupToolbarSaveButton = function ( config ) {
+	this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
+		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
+		flags: [ 'progressive', 'primary' ],
+		disabled: !this.restoring
+	}, config ) );
+
+	// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
+	// tour to attach a guider to the "Save page" button.
+	this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
+
+	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
+		// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
+		this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
+		this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+	}
+
+	this.updateToolbarSaveButtonState();
+
+	this.toolbarSaveButton.connect( this, { click: 'onToolbarSaveButtonClick' } );
+};
+
+/**
+ * Add the save button to the user interface.
+ */
+ve.init.mw.Target.prototype.attachToolbarSaveButton = function () {
+	this.toolbar.$actions.append( this.toolbarSaveButton.$element );
+};
+
+/**
+ * Re-evaluate whether the toolbar save button should be disabled or not.
+ */
+ve.init.mw.Target.prototype.updateToolbarSaveButtonState = function () {
+	var isDisabled;
+
+	this.edited = this.getSurface().getModel().hasBeenModified();
+	// Disable the save button if we have no history
+	isDisabled = !this.edited && !this.restoring;
+	this.toolbarSaveButton.setDisabled( isDisabled );
+	mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
+};
+
+/**
+ * Handle clicks on the save button in the toolbar.
+ *
+ * @fires saveBegin
+ */
+ve.init.mw.Target.prototype.onToolbarSaveButtonClick = function () {
+	if ( this.edited || this.restoring ) {
+		this.emit( 'saveBegin' );
+	}
 };
 
 /**

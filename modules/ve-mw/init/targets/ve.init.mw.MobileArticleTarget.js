@@ -27,20 +27,24 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 
 	this.section = config.section;
 	this.isIos = !!config.isIos;
-
-	// Events
-	this.connect( this, {
-		surfaceReady: 'onSurfaceReady'
-	} );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.Target );
 
+/* Events */
+
+/**
+ * @event back
+ * Leave the editor
+ */
+
 /* Static Properties */
 
 ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
+	// Link
+	{ include: [ 'back' ] },
 	// Style
 	{ include: [ 'bold', 'italic' ] },
 	// Link
@@ -64,7 +68,9 @@ ve.init.mw.MobileArticleTarget.static.name = 'mobile';
  * Once surface is ready ready, init UI.
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
-	this.restoreEditSection();
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
+
 	this.events.trackActivationComplete();
 };
 
@@ -83,9 +89,19 @@ ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, confi
 /**
  * @inheritdoc
  */
+ve.init.mw.MobileArticleTarget.prototype.setupToolbarSaveButton = function () {
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbarSaveButton.call( this, {
+		label: ve.msg( 'visualeditor-toolbar-savedialog-short' )
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
-	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
+	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
 	// Append the context to the toolbar
 	this.toolbar.$element.append( surface.context.$element );
@@ -122,3 +138,32 @@ ve.init.mw.MobileArticleTarget.prototype.scrollToHeading = function ( headingNod
 		}
 	} );
 };
+
+/**
+ * Back tool
+ */
+ve.ui.MWBackTool = function VeUiMwBackTool() {
+	// Parent constructor
+	ve.ui.MWBackTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.MWBackTool, ve.ui.Tool );
+ve.ui.MWBackTool.static.name = 'back';
+ve.ui.MWBackTool.static.group = 'history';
+ve.ui.MWBackTool.static.icon = 'previous';
+ve.ui.MWBackTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
+ve.ui.MWBackTool.static.commandName = 'back';
+ve.ui.toolFactory.register( ve.ui.MWBackTool );
+
+/**
+ * Back command
+ */
+ve.ui.MWBackCommand = function VeUiMwBackCommmand() {
+	// Parent constructor
+	ve.ui.MWBackCommand.super.call( this, 'back' );
+};
+OO.inheritClass( ve.ui.MWBackCommand, ve.ui.Command );
+ve.ui.MWBackCommand.prototype.execute = function () {
+	ve.init.target.emit( 'back' );
+};
+ve.ui.commandRegistry.register( new ve.ui.MWBackCommand() );
