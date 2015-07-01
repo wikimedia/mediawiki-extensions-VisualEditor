@@ -8,15 +8,16 @@ Given(/^I click in the editable part$/) do
 end
 
 Given(/^I go to the browser specific edit page page$/) do
-  page_title = 'Edit page for ' + ENV['BROWSER']
-  page_content = 'Edit page for ' + ENV['BROWSER']
-  on(APIPage).create page_title, page_content
+  page_title = 'Edit page for ' + browser_name
+  page_content = 'Edit page for ' + browser_name
+
+  api.create_page page_title, page_content
   step "I am on the #{page_title} page"
 end
 
 Given(/^I go to the "(.+)" page with content "(.+)"$/) do |page_title, page_content|
   @wikitext = page_content
-  on(APIPage).create page_title, page_content
+  api.create_page page_title, page_content
   step "I am on the #{page_title} page"
 end
 

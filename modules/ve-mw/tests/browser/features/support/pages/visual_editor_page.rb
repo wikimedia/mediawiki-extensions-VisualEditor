@@ -1,8 +1,8 @@
 # This is the main page for VisualEditor
 class VisualEditorPage
   include PageObject
-  include URL
-  page_url URL.url("User:#{ENV['MEDIAWIKI_USER']}/#{ENV['BROWSER']}?vehidebetadialog=true&veaction=edit")
+
+  page_url 'User:<%= env.user %>/<%= env.browser_name %>?vehidebetadialog=true&veaction=edit'
 
   div(:add_a_template_title, class: 'oo-ui-processDialog-location', text: /Add a template/)
   text_field(:add_category, css: 'div.ve-ui-mwCategoryInputWidget > input')
@@ -168,11 +168,6 @@ class VisualEditorPage
   span(:template_insert_menu, class: 'oo-ui-tool-name-transclusion')
   div(:toolbar, class: 've-init-mw-desktopArticleTarget-toolbar')
   div(:toolbar_actions, class: 'oo-ui-toolbar-actions')
-  if ENV['BROWSER'] == 'chrome'
-    div(:tools_menu, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-toolGroup oo-ui-iconElement oo-ui-popupToolGroup oo-ui-listToolGroup')
-  else
-    span(:tools_menu, class: 'oo-ui-iconElement-icon oo-ui-icon-menu')
-  end
   a(:transclusion, css: 'span.oo-ui-widget.oo-ui-iconElement.oo-ui-tool.oo-ui-tool-name-transclusion.oo-ui-widget-enabled > a')
   text_field(:transclusion_description, css: '.oo-ui-inputWidget > input:nth-child(1)')
   span(:ve_bold_text, class: 'oo-ui-iconElement-icon oo-ui-icon-bold')
@@ -200,4 +195,12 @@ class VisualEditorPage
   div(:content_box, class: 've-ce-documentNode ve-ce-branchNode noime')
   div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 2)
   div(:media_advanced_settings, class: 'oo-ui-outlineOptionWidget-level-0', index: 1)
+
+  def tools_menu_element
+    if browser_name == :chrome
+      div(class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-toolGroup oo-ui-iconElement oo-ui-popupToolGroup oo-ui-listToolGroup')
+    else
+      span(class: 'oo-ui-iconElement-icon oo-ui-icon-menu')
+    end
+  end
 end
