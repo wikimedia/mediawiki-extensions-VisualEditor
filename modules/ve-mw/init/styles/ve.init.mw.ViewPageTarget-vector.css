@@ -23,7 +23,7 @@
 	margin: 1em -1.25em 0 -1.25em;
 }
 
-.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode
+.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode,
 .ve-init-mw-viewPageTarget-surface .ve-ui-surface-placeholder {
 	padding: 0 1.143em; /* surface-margin-left (1em) / (mw-body-content font-size) 0.875em */
 }
