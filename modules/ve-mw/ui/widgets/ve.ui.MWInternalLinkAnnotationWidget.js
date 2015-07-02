@@ -83,3 +83,11 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 		cache: ve.init.platform.linkCache
 	} );
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWInternalLinkAnnotationWidget.prototype.getHref = function () {
+	var title = ve.ui.MWInternalLinkAnnotationWidget.super.prototype.getHref.call( this );
+	return mw.util.getUrl( title );
+};
