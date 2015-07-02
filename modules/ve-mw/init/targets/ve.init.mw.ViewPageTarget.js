@@ -765,12 +765,15 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
 		document.createTextNode( mw.msg( 'colon-separator' ) )
 	);
 	if ( editApi.captcha.url ) { // FancyCaptcha
+		mw.loader.load( 'ext.confirmEdit.fancyCaptcha' );
 		$captchaParagraph.append(
 			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end()
 		);
 		$captchaDiv.append(
-			$( '<img>' ).attr( 'src', editApi.captcha.url )
+			$( '<img>' ).attr( 'src', editApi.captcha.url ).addClass( 'fancycaptcha-image' ),
+			' ',
+			$( '<a>' ).addClass( 'fancycaptcha-reload' ).text( mw.msg( 'fancycaptcha-reload-text' ) )
 		);
 	} else if ( editApi.captcha.type === 'simple' || editApi.captcha.type === 'math' ) {
 		// SimpleCaptcha and MathCaptcha
