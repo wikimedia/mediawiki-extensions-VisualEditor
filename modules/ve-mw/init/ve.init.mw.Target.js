@@ -313,7 +313,6 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		this.constructor.static.fixBase( this.doc );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
-		this.placeholderText = $( $.parseHTML( data.placeholder ) ).text();
 		this.protectedClasses = data.protectedClasses;
 		this.$checkboxes = $( ve.getObjectValues( data.checkboxes ).join( '' ) );
 		// Populate checkboxes with default values for minor and watch
@@ -1273,7 +1272,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			ve.track( 'trace.createSurface.enter' );
-			var surface = target.addSurface( dmDoc, { placeholder: target.placeholderText } ),
+			var surface = target.addSurface( dmDoc ),
 				surfaceView = surface.getView(),
 				$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 			ve.track( 'trace.createSurface.exit' );
