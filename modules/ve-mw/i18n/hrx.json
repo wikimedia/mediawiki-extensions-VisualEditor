@@ -7,6 +7,6 @@
 	},
 	"tooltip-ca-edit": "Seit beoorbeite. Bitte voar dem Speichre die Voarschaufunktion benutze.",
 	"tooltip-ca-ve-edit": "Die Seit beoorbeite",
-	"visualeditor-ca-editsource-section": "Quelltext beoorbeite",
-	"visualeditor-descriptionpagelink": "VisualEditor"
+	"ca-editsource-section": "Quelltext beoorbeite",
+	"descriptionpagelink": "VisualEditor"
 }
