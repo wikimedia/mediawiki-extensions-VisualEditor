@@ -144,6 +144,16 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWLinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWLinkAnnotationInspector.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			this.internalAnnotationInput.text.populateLookupMenu();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
