@@ -493,7 +493,9 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			.append(
 				$( '<span>' ).text(
 					imageinfo.width +
-					ve.msg( 'visualeditor-dialog-media-dimensionseparator' ) +
+					'\u00a0' +
+					ve.msg( 'visualeditor-dimensionswidget-times' ) +
+					'\u00a0' +
 					imageinfo.height +
 					ve.msg( 'visualeditor-dimensionswidget-px' )
 				),

@@ -87,7 +87,6 @@
 	"visualeditor-dialog-media-content-filename": "Label for the image filename.\n{{Identical|Filename}}",
 	"visualeditor-dialog-media-content-section": "Label for the image content sub-section.\n{{Identical|Caption}}",
 	"visualeditor-dialog-media-content-section-help": "Message displayed as contextual help about the caption box to editors in the media editing dialog.",
-	"visualeditor-dialog-media-dimensionseparator": "Label dimensions separator in the image size display.{{Optional}}",
 	"visualeditor-dialog-media-goback": "Label for the button to go back to edit settings in the media dialog.\n{{Identical|Go back}}",
 	"visualeditor-dialog-media-info-artist": "Label for the uploader information for the image in the media dialog. $1 - Uploader name.",
 	"visualeditor-dialog-media-info-audiofile": "Label for denoting an audio file for the media info in the media dialog.",
