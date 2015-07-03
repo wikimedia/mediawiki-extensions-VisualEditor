@@ -78,7 +78,6 @@
 	"visualeditor-dialog-media-content-filename": "File name",
 	"visualeditor-dialog-media-content-section": "Caption",
 	"visualeditor-dialog-media-content-section-help": "You can use this to show a label that shows next to the item for all readers. This is often used to explain why the item is relevant to the context in which it is shown. It should be succinct and informative.",
-	"visualeditor-dialog-media-dimensionseparator": " × ",
 	"visualeditor-dialog-media-goback": "Back",
 	"visualeditor-dialog-media-info-artist": "Uploaded by $1",
 	"visualeditor-dialog-media-info-audiofile": "Audio file",
