@@ -937,7 +937,6 @@
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
-				"jquery.autoEllipsis",
 				"jquery.byteLimit",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.language.specialCharacters",
