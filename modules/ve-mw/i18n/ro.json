@@ -212,8 +212,6 @@
 	"visualeditor-languages-tool": "Limbi",
 	"visualeditor-linkinspector-button-link-external": "Legătură externă",
 	"visualeditor-linkinspector-button-link-internal": "Caută pagini",
-	"visualeditor-linkinspector-description-new-page": "pagina nu există încă",
-	"visualeditor-linkinspector-description-redirect": "redirecționare către $1",
 	"visualeditor-linkinspector-illegal-title": "Titlu de pagină nevalid",
 	"visualeditor-linknodeinspector-add-label": "Adăugare etichetă",
 	"visualeditor-linknodeinspector-title": "Legătură simplă",

@@ -234,8 +234,6 @@
 	"visualeditor-languages-tool": "Języki",
 	"visualeditor-linkinspector-button-link-external": "Link zewnętrzny",
 	"visualeditor-linkinspector-button-link-internal": "Wyszukaj strony",
-	"visualeditor-linkinspector-description-new-page": "strona jeszcze nie istnieje",
-	"visualeditor-linkinspector-description-redirect": "przekierowanie do $1",
 	"visualeditor-linkinspector-illegal-title": "Nieprawidłowy tytuł strony",
 	"visualeditor-linknodeinspector-add-label": "Dodaj etykietę",
 	"visualeditor-linknodeinspector-title": "Prosty link",

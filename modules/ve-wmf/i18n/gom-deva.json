@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vaishali Parab"
+			"Vaishali Parab",
+			"The Discoverer"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|दृश्य संपादक]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|दिसपीसंपादक]]"
 }

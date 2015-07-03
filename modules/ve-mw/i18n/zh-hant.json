@@ -238,8 +238,6 @@
 	"visualeditor-languages-tool": "語言",
 	"visualeditor-linkinspector-button-link-external": "外部連結",
 	"visualeditor-linkinspector-button-link-internal": "搜尋頁面",
-	"visualeditor-linkinspector-description-new-page": "頁面不存在",
-	"visualeditor-linkinspector-description-redirect": "重新導向至 $1",
 	"visualeditor-linkinspector-illegal-title": "無效的頁面標題",
 	"visualeditor-linknodeinspector-add-label": "加入標籤",
 	"visualeditor-linknodeinspector-title": "簡易連結",

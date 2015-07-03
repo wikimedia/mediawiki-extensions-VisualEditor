@@ -238,8 +238,6 @@
 	"visualeditor-languages-tool": "Jazyky",
 	"visualeditor-linkinspector-button-link-external": "Externí odkaz",
 	"visualeditor-linkinspector-button-link-internal": "Hledání stránek",
-	"visualeditor-linkinspector-description-new-page": "stránka zatím neexistuje",
-	"visualeditor-linkinspector-description-redirect": "přesměrování na $1",
 	"visualeditor-linkinspector-illegal-title": "Neplatný název stránky",
 	"visualeditor-linknodeinspector-add-label": "Přidat popisek",
 	"visualeditor-linknodeinspector-title": "Jednoduchý odkaz",

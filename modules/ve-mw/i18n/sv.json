@@ -233,8 +233,6 @@
 	"visualeditor-languages-tool": "Språk",
 	"visualeditor-linkinspector-button-link-external": "Extern länk",
 	"visualeditor-linkinspector-button-link-internal": "Sök sidor",
-	"visualeditor-linkinspector-description-new-page": "sidan existerar inte ännu",
-	"visualeditor-linkinspector-description-redirect": "omdirigerar till $1",
 	"visualeditor-linkinspector-illegal-title": "Ogiltig sidtitel",
 	"visualeditor-linknodeinspector-add-label": "Lägg till etikett",
 	"visualeditor-linknodeinspector-title": "Enkel länk",

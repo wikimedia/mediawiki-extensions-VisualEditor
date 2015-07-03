@@ -250,8 +250,6 @@
 	"visualeditor-languages-tool": "Talen",
 	"visualeditor-linkinspector-button-link-external": "Externe link",
 	"visualeditor-linkinspector-button-link-internal": "Pagina's zoeken",
-	"visualeditor-linkinspector-description-new-page": "pagina bestaat nog niet",
-	"visualeditor-linkinspector-description-redirect": "doorverwijzing naar $1",
 	"visualeditor-linkinspector-illegal-title": "Ongeldige paginanaam",
 	"visualeditor-linknodeinspector-add-label": "Label toevoegen",
 	"visualeditor-linknodeinspector-title": "Eenvoudige koppeling",

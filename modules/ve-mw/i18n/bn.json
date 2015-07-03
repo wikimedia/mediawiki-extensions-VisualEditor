@@ -9,13 +9,15 @@
 			"Sayak Sarkar",
 			"Tauhid16",
 			"Aftabuzzaman",
-			"RYasmeen (WMF)"
+			"RYasmeen (WMF)",
+			"Sayma Jahan"
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "অনুল্লেখ্য সম্পাদনার জন্য পতাকা।",
 	"apihelp-visualeditoredit-param-summary": "সম্পাদনা সারাংশ।",
 	"tooltip-ca-createsource": "এই পাতার উৎস কোড তৈরি করুন",
 	"tooltip-ca-editsource": "এই পাতার উৎস কোড সম্পাদনা করুন",
+	"tooltip-ca-edit": "উইকি টেক্সট ব্যবহার করে পেজটি এডিট করুন",
 	"tooltip-ca-ve-edit": "ভিজ্যুয়ালএডিটরে এই পাতা সম্পাদনা করুন",
 	"visualeditor-advancedsettings-tool": "উন্নত সেটিং",
 	"visualeditor-beta-appendix": "বেটা",
@@ -176,8 +178,6 @@
 	"visualeditor-languages-tool": "ভাষাসমূহ",
 	"visualeditor-linkinspector-button-link-external": "বহিঃসংযোগ",
 	"visualeditor-linkinspector-button-link-internal": "পাতা অনুসন্ধান করুন",
-	"visualeditor-linkinspector-description-new-page": "পাতা এখনো বিদ্যমান নয়",
-	"visualeditor-linkinspector-description-redirect": "$1-এ পুনঃনির্দেশিত",
 	"visualeditor-linkinspector-illegal-title": "পাতার শিরোনাম ভুল",
 	"visualeditor-linknodeinspector-add-label": "লেভেল যোগ",
 	"visualeditor-linknodeinspector-title": "সরল লিঙ্ক",

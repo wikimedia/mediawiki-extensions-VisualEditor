@@ -12,7 +12,7 @@
 	},
 	"tooltip-ca-createsource": "Crea lu codici surgenti di sta pàggina",
 	"tooltip-ca-editsource": "Cancia lu codici surgenti di sta pàggina",
-	"tooltip-ca-ve-edit": "Cancia sta pàggina cu VisualEditor",
+	"tooltip-ca-ve-edit": "Cancia sta pàggina",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor è n virsioni 'beta'. Putissitu ncuntrari errura ntô software, e certi parti dâ pàggina putissiru non arrisurtari canciàbbili. Pi' turnari a' canciari direttamenti lu surgenti quannu voi voi, senza pèrdiri li canciamenti, apri u menu a' scìnniri a' latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghî \"{{int:visualeditor-mweditmodesource-tool}}\".",

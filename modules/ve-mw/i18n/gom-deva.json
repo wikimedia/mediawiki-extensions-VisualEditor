@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Darshan kandolkar",
-			"Konknni mogi 24"
+			"Konknni mogi 24",
+			"The Discoverer"
 		]
 	},
-	"tooltip-ca-ve-edit": "हें पान दृश्यसंपादक वापरून संस्करण करात",
-	"visualeditor-ca-createlocaldescriptionsource": "थळावे वर्णन जोडात",
-	"visualeditor-ca-createsource": "स्रोत निर्माण कर",
+	"tooltip-ca-ve-edit": "हें पान बदल",
+	"visualeditor-ca-createlocaldescriptionsource": "थळावे वर्णन स्त्रोत जोडात",
+	"visualeditor-ca-createsource": "स्रोत रोच",
 	"visualeditor-ca-editsource": "उगम संस्करण करात.",
 	"visualeditor-ca-editsource-section": "उगम संस्करण करात.",
-	"visualeditor-descriptionpagelink": "Project:दृश्यसंपादक"
+	"visualeditor-descriptionpagelink": "Project:दिसपीसंपादक"
 }

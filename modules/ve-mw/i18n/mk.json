@@ -226,8 +226,6 @@
 	"visualeditor-languages-tool": "Јазици",
 	"visualeditor-linkinspector-button-link-external": "Надворешна врска",
 	"visualeditor-linkinspector-button-link-internal": "Пребарај страници",
-	"visualeditor-linkinspector-description-new-page": "страницата сè уште не постои",
-	"visualeditor-linkinspector-description-redirect": "пренасочување кон $1",
 	"visualeditor-linkinspector-illegal-title": "Неважечки наслов на страница",
 	"visualeditor-linknodeinspector-add-label": "Додај натпис",
 	"visualeditor-linknodeinspector-title": "Проста врска",

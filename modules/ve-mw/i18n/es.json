@@ -24,7 +24,8 @@
 			"McDutchie",
 			"Macofe",
 			"Themasterriot",
-			"Vikytinta"
+			"Vikytinta",
+			"Ncontinanza"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -51,6 +52,7 @@
 	"apihelp-visualeditoredit-param-summary": "Editar sumario.",
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
 	"tooltip-ca-editsource": "Editar el código fuente de esta página",
+	"tooltip-ca-edit": "Editar esta página usando wikitext",
 	"tooltip-ca-ve-edit": "Editar esta página con el Editor visual",
 	"visualeditor-advancedsettings-tool": "Configuraciones avanzadas",
 	"visualeditor-annotationbutton-linknode-tooltip": "Enlace simple",
@@ -241,8 +243,6 @@
 	"visualeditor-languages-tool": "Idiomas",
 	"visualeditor-linkinspector-button-link-external": "Enlace externo",
 	"visualeditor-linkinspector-button-link-internal": "Buscar páginas",
-	"visualeditor-linkinspector-description-new-page": "la página aún no existe",
-	"visualeditor-linkinspector-description-redirect": "redirigir a $1",
 	"visualeditor-linkinspector-illegal-title": "El título de la página no es válido",
 	"visualeditor-linknodeinspector-add-label": "Añadir etiqueta",
 	"visualeditor-linknodeinspector-title": "Enlace simple",

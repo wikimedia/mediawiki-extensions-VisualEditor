@@ -222,8 +222,6 @@
 	"visualeditor-languages-tool": "Idiomas",
 	"visualeditor-linkinspector-button-link-external": "Ligação externa",
 	"visualeditor-linkinspector-button-link-internal": "Procurar páginas",
-	"visualeditor-linkinspector-description-new-page": "a página ainda não existe.",
-	"visualeditor-linkinspector-description-redirect": "redirecionar para $1",
 	"visualeditor-linkinspector-illegal-title": "Título inválido",
 	"visualeditor-linknodeinspector-add-label": "Adicionar etiqueta",
 	"visualeditor-linknodeinspector-title": "Ligação simples",
