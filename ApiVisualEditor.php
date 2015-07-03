@@ -491,27 +491,27 @@ class ApiVisualEditor extends ApiBase {
 				$links = array(
 					// Array of linked pages that are missing
 					'missing' => array(),
-					// For current revisions: true (treat all non-missing pages as existing)
-					// For old revisions: array of linked pages that exist
-					'extant' => $restoring || !$cached ? array() : true,
+					// For current revisions: 1 (treat all non-missing pages as known)
+					// For old revisions: array of linked pages that are known
+					'known' => $restoring || !$cached ? array() : 1,
 				);
 				if ( $cached ) {
-					foreach ( $cached->getLinks() as $ns => $dbks ) {
-						foreach ( $dbks as $dbk => $id ) {
-							$pft = Title::makeTitle( $ns, $dbk )->getPrefixedText();
-							if ( $id == 0 ) {
-								$links['missing'][] = $pft;
-							} elseif ( $restoring ) {
-								$links['extant'][] = $pft;
+					foreach ( $cached->getLinks() as $namespace => $cachedTitles ) {
+						foreach ( $cachedTitles as $cachedTitleText => $exists ) {
+							$cachedTitle = Title::makeTitle( $namespace, $cachedTitleText );
+							if ( !$cachedTitle->isKnown() ) {
+								$links['missing'][] = $cachedTitle->getPrefixedText();
+							} elseif ( $links['known'] !== 1 ) {
+								$links['known'][] = $cachedTitle->getPrefixedText();
 							}
 						}
 					}
 				}
 				// Add information about current page
-				if ( !$title->exists() ) {
+				if ( !$title->isKnown() ) {
 					$links['missing'][] = $title->getPrefixedText();
-				} elseif ( $restoring ) {
-					$links['extant'][] = $title->getPrefixedText();
+				} elseif ( $links['known'] !== 1 ) {
+					$links['known'][] = $title->getPrefixedText();
 				}
 
 				// On parser cache miss, just don't bother populating red link data

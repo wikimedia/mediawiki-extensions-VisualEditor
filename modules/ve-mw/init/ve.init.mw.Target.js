@@ -367,18 +367,18 @@ ve.init.mw.Target.onLoad = function ( response ) {
 
 		// Populate link cache
 		if ( data.links ) {
-			// Format from the API: { missing: [titles], extant: true|[titles] }
+			// Format from the API: { missing: [titles], known: 1|[titles] }
 			// Format expected by LinkCache: { title: { missing: true|false } }
 			linkData = {};
 			for ( i = 0, len = data.links.missing.length; i < len; i++ ) {
 				linkData[data.links.missing[i]] = { missing: true };
 			}
-			if ( data.links.extant === true ) {
+			if ( data.links.known === 1 ) {
 				// Set back to false by onReady()
 				ve.init.platform.linkCache.setAssumeExistence( true );
 			} else {
-				for ( i = 0, len = data.links.extant.length; i < len; i++ ) {
-					linkData[data.links.extant[i]] = { missing: false };
+				for ( i = 0, len = data.links.known.length; i < len; i++ ) {
+					linkData[data.links.known[i]] = { missing: false };
 				}
 			}
 			ve.init.platform.linkCache.set( linkData );
