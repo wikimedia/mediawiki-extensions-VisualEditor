@@ -325,25 +325,6 @@ class VisualEditorHooks {
 				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			)
 		);
-
-/* Disabling Beta Features option for generic content for now
-		$preferences['visualeditor-enable-mwalienextension'] = array(
-			'version' => '1.0',
-			'label-message' => 'visualeditor-preference-mwalienextension-label',
-			'desc-message' => 'visualeditor-preference-mwalienextension-description',
-			'screenshot' => array(
-				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-alien-ltr.svg",
-				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-alien-rtl.svg",
-			),
-			'info-message' => 'visualeditor-preference-mwalienextension-info-link',
-			'discussion-message' => 'visualeditor-preference-mwalienextension-discussion-link',
-			'requirements' => array(
-				'betafeatures' => array(
-					'visualeditor-enable',
-				),
-			),
-		);
-*/
 	}
 
 	/**
