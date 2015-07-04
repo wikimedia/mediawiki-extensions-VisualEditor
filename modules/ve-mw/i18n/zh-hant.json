@@ -264,8 +264,6 @@
 	"visualeditor-preference-core-description": "開啟 VisualEditor，目前尚未支援對話頁面及其他命名空間。",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "開啟 VisualEditor，將可於以下{{PLURAL:$2|命名空間}}使用：$1",
-	"visualeditor-preference-mwalienextension-description": "新增尚未正式發佈的實驗性編輯擴充標籤工具到 VisualEditor (可修改圖庫、原始碼區塊)。 使用實驗性質工具，請永遠記得在儲存之後重新檢視您所做的變更是否正常。",
-	"visualeditor-preference-mwalienextension-label": "VisualEditor 擴充標籤編輯",
 	"visualeditor-recreate": "此頁面在您編輯的這段期間已被刪除，請點選 \"$1\" 重新建立頁面。",
 	"visualeditor-reference-input-placeholder": "搜尋目前的引用",
 	"visualeditor-referenceslist-isempty": "此頁面中無群組為 \"$1\" 的參考文獻可加入引用清單。",

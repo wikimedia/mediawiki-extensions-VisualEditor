@@ -106,8 +106,6 @@
 	"visualeditor-preference-core-description": "Abbilita VisualEditor. Putissi nun èssiri dispunibbili ntê pàggini di discussioni e nti certi àutri namespace.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Attiva lu VisualEditor. Veni attivatu nta {{PLURAL:$2|stu namespace|sti namespace}}: $1",
-	"visualeditor-preference-mwalienextension-description": "Junci strummenta spirimintali a VisualEditor pi lu canciu dî tag (comu gallirii di mmàggini o blocca di codici surgenti), prima ca li strummenta ndividuali sunnu dispunibbili. Arricorda di cuntrullari sempri li canci prima di sarbari quannu usi li li funziunalitati spirimintali.",
-	"visualeditor-preference-mwalienextension-label": "Cunciu tag cu VisualEditor",
 	"visualeditor-reference-input-placeholder": "Cerca ntê citazzioni attuali",
 	"visualeditor-referenceslist-isempty": "Nun sunnu prisenti rifirimenti cû gruppu \"$1\" nti sta pàggina ca s'hannu a nclùdiri nti st'elencu.",
 	"visualeditor-referenceslist-isempty-default": "Nun sunnu prisenti rifirimenti nti sta pàggina ca s'hannu a nclùdiri nti st'elencu.",

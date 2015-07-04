@@ -262,8 +262,6 @@
 	"visualeditor-preference-core-description": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
 	"visualeditor-preference-core-label": "עורך חזותי",
 	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא יהיה זמין {{PLURAL:$2|במרחב השם הבא|במרחבי השם הבאים}}: $1",
-	"visualeditor-preference-mwalienextension-description": "הוספת לעורך החזותי של תמיכה ניסיונית בעריכת תגי הרחבות, כגון גלריות ובלוקים של קוד מקור, לפני שהכלים האלה זמינים. נא לזכור תמיד לסקור את השינויים שלך לפני שמירה תוך כדי שימוש באפשרויות ניסיוניות.",
-	"visualeditor-preference-mwalienextension-label": "עריכת תגי הרחבות בעורך החזותי",
 	"visualeditor-recreate": "הדף הזה נמחק מאז שהתחלת לערוך. לחיצה על \"$1\" תיצור את הדף מחדש.",
 	"visualeditor-reference-input-placeholder": "חיפוש בין הערות השוליים הקיימות",
 	"visualeditor-referenceslist-isempty": "לא קיימים מקורות עם קבוצה בשם \"$1\" בדף הזה שאפשר לכלול ברשימה הזאת.",

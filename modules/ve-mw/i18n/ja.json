@@ -219,8 +219,6 @@
 	"visualeditor-preference-core-description": "ビジュアルエディターを有効にする。これはトークページやその他の名前空間では利用できません。",
 	"visualeditor-preference-core-label": "ビジュアルエディター",
 	"visualeditor-preference-enable": "ビジュアルエディターを有効にする。これは以下の{{PLURAL:$2|名前空間}}のみで利用できます: $1",
-	"visualeditor-preference-mwalienextension-description": "ビジュアルエディターで拡張タグ(ギャラリーやソースコードブロック)を編集する、基本的なサポートを追加します。これは実験的機能です。実験的機能を使用する際には、保存前に変更内容をもう一度ご確認ください。",
-	"visualeditor-preference-mwalienextension-label": "ビジュアルエディターでの拡張機能タグの編集",
 	"visualeditor-reference-input-placeholder": "現在の引用内を検索",
 	"visualeditor-referenceslist-isempty": "このページには、この一覧に含めるためのグループ「$1」の出典はありません。",
 	"visualeditor-referenceslist-isempty-default": "このページには、この一覧に含められる出典はありません。",

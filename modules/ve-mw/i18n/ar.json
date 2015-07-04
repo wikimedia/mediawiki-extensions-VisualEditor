@@ -227,8 +227,6 @@
 	"visualeditor-preference-core-description": "تمكين المحرر المرئي. لن يكون متوفرًا في صفحات النقاش ونطاقات أخرى.",
 	"visualeditor-preference-core-label": "المحرر المرئي",
 	"visualeditor-preference-enable": "تمكين المحرر المرئي. متوفر في {{PLURAL:$2|النطاق التالي|النطاقات التالية}}: $1",
-	"visualeditor-preference-mwalienextension-description": "أضف دعما تجريبيا إلى المحرر المرئي لتعديل وسوم الامتدادات (مثل المعارض أو كتل الأكواد المصدرية)، قبل إتاحة الأدوات الفردية. تذكر حين تستخدم خاصيات تجريبية أن تعاين التعديلات قبل حفظها.",
-	"visualeditor-preference-mwalienextension-label": "تعديل وسوم الامتدادات بالمحرر المرئي",
 	"visualeditor-recreate": "لقد تم حذف هذه الصفحة بعد أن بدأت بتحريرها. اضغط على «$1» لإعادة إنشائها.",
 	"visualeditor-reference-input-placeholder": "ما الذي تريد أن تضيف له مرجعا؟",
 	"visualeditor-referenceslist-isempty": "ما من مراجع من المجموعة \"$1\" في هذه الصفحة لتضمينها في هذه القائمة.",

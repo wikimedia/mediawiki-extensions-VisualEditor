@@ -133,7 +133,6 @@
 	"visualeditor-preference-core-description": "Abbilite VisualEditor. Non g'è disponibbile sus a le pàggene de le 'ngazzaminde e sus a otre namespace.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Abbilite VisualEditor. Non g'è disponibbile sus a {{PLURAL:$2|'u namespace|le namespace}}: $1",
-	"visualeditor-preference-mwalienextension-label": "Estenzione pu cangiaminde de le tag de VisualEditor",
 	"visualeditor-reference-input-placeholder": "Cirche cu le citaziune de mò",
 	"visualeditor-referenceslist-isempty": "Non ge stonne refèreminde cu 'u gruppe \"$1\" sus a sta pàgene da 'ngludere jndr'à st'elenghe.",
 	"visualeditor-referenceslist-isempty-default": "Non ge stonne refereminde a sta pàgene da 'ngludere jndr'à l'elenghe.",

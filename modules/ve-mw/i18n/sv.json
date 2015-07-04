@@ -259,8 +259,6 @@
 	"visualeditor-preference-core-description": "Aktivera VisualEditor. Den kommer inte vara tillgänglig på diskussionssidor och i vissa andra namnrymder.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Aktivera VisualEditor. Den kommer att vara tillgänglig i följande {{PLURAL:$2|namnrymd|namnrymder}}: $1",
-	"visualeditor-preference-mwalienextension-description": "Lägga till experimentella grundläggande stöd till VisualEditor för att kunna redigera taggar (som gallerier eller källkodsblock), innan dess att enskilda verktyg för detta finns tillgängliga. Kom ihåg att alltid granska ändringarna innan du sparar när du använder experimentella funktioner.",
-	"visualeditor-preference-mwalienextension-label": "VisualEditor-tillägg för taggredigering",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",
 	"visualeditor-reference-input-placeholder": "Sök i de aktuella referenserna",
 	"visualeditor-referenceslist-isempty": "Det finns inga referenser med gruppen \"$1\" på denna sida att inkludera i denna lista.",

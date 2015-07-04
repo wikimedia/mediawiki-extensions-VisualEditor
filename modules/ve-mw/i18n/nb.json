@@ -254,8 +254,6 @@
 	"visualeditor-preference-core-description": "Skru på VisualEditor. Den vil ikke være tilgjengelig på diskusjonssider og enkelte andre navnerom.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Aktiver VisualEditor. Den vil ikke være tilgjengelig i følgende {{PLURAL:$2|navnerom}}: $1",
-	"visualeditor-preference-mwalienextension-description": "Aktiver eksperimentell støtte i VisualEditor for å redigere tilleggstagger (som gallerier og kildekodeblokker). Husk å alltid gjennomgå endringene dine før du lagrer når du bruker eksperimentell funksjonalitet.",
-	"visualeditor-preference-mwalienextension-label": "Tilleggstaggredigering for VisualEditor",
 	"visualeditor-recreate": "Siden har blitt slettet etter at du begynte å redigere. Trykk \"$1\" for å gjenopprette den.",
 	"visualeditor-reference-input-placeholder": "Hva ønsker du å referere til?",
 	"visualeditor-referenceslist-isempty": "Det finnes ingen kildehenvisninger i gruppen «$1» på denne siden som kan  inkluderes i denne lista.",

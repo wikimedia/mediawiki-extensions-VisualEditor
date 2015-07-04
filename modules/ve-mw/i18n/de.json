@@ -258,8 +258,6 @@
 	"visualeditor-preference-core-description": "VisualEditor aktivieren. Der Editor ist auf Diskussionsseiten und in einigen anderen Namensräumen nicht verfügbar.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "VisualEditor aktivieren. Der Editor ist verfügbar {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}}: $1",
-	"visualeditor-preference-mwalienextension-description": "Ergänzt experimentellen Basissupport zum Bearbeiten von Erweiterungstags (wie Galerien oder Quellcodeblöcke), bevor einzelne Werkzeuge verfügbar sind. Bitte überprüfe vor dem Speichern immer deine Änderungen, wenn du experimentelle Funktionen benutzt.",
-	"visualeditor-preference-mwalienextension-label": "VisualEditor-Erweiterungstagbearbeitung",
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem du zum Bearbeiten angefangen hast. Wähle „$1“, um sie neu zu erstellen.",
 	"visualeditor-reference-input-placeholder": "Innerhalb aktueller Zitate suchen",
 	"visualeditor-referenceslist-isempty": "Auf dieser Seite gibt es keine Einzelnachweise mit der Gruppe „$1“ zum Anzeigen in dieser Liste.",

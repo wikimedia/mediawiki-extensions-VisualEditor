@@ -208,8 +208,6 @@
 	"visualeditor-preference-core-description": "開 VisualEditor（即見編輯）。某啲名域道暫時未用得呢個編輯器。",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "開 VisualEdior（即見編輯），喺呢啲名域道可以用：$1",
-	"visualeditor-preference-mwalienextension-description": "優先試用 VisualEditor 延伸標籤編輯功能，例如圖集同程式碼排版。試用新功能嗰陣，記得複查吓你改嘅嘢，然後先記低。",
-	"visualeditor-preference-mwalienextension-label": "VisualEditor 延伸標籤編輯功能",
 	"visualeditor-reference-input-placeholder": "你想引用啲乜？",
 	"visualeditor-referenceslist-isempty": "呢版冇「$1」組嘅參考資料畀你加落呢張表道。",
 	"visualeditor-referenceslist-isempty-default": "呢版冇參考資料畀你加落呢張表道。",

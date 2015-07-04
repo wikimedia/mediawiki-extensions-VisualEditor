@@ -227,8 +227,6 @@
 	"visualeditor-preference-core-description": "Ενεργοποίηση του VisualEditor. Δεν θα είναι διαθέσιμος στις σελίδες συζήτησης και κάποιους άλλους χώρους του εγχειρήματος.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Ενεργοποίηση του VisualEditor. Θα είναι διαθέσιμος {{PLURAL:$2|στον ακόλουθο χώρο|στους ακόλουθους χώρους}}: $1.",
-	"visualeditor-preference-mwalienextension-description": "Προσθέτει εργαλεία (σε πειραματική ακόμα φάση) για επεξεργασία προσθέτων (όπως πινακοθηκών εικόνων ή τμημάτων πηγαίου κώδικα) πριν ενεργοποιηθούν τα αντίστοιχα πλήρη εργαλεία. Παρακαλούμε, όταν χρησιμοποιείτε πειραματικές δυνατότητες, να ελέγχετε τις αλλαγές σας πριν τις αποθηκεύσετε.",
-	"visualeditor-preference-mwalienextension-label": "Επεξεργασία ετικετών επεκτάσεων με το VisualEditor",
 	"visualeditor-recreate": "Η σελίδα έχει διαγραφεί από τότε που αρχίσατε να την επεξεργάζεστε. Πατήστε \"$1\" για να τη δημιουργήσετε ξανά.",
 	"visualeditor-reference-input-placeholder": "Που θέλετε να παραπέμψετε;",
 	"visualeditor-referenceslist-isempty": "Δεν υπάρχουν παραπομπές με την ομάδα «$1» σε αυτήν τη σελίδα για να περιληφθούν σε αυτόν τον κατάλογο.",

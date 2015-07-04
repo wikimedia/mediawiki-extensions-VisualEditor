@@ -202,7 +202,6 @@
 	"visualeditor-preference-core-description": "ভিজ্যুয়ালএডিটর সক্রিয় করুন। এটি আলাপ পাতায় এবং অন্যান্য কিছু নামস্থানে উপলব্ধ হবে না।",
 	"visualeditor-preference-core-label": "ভিজ্যুয়ালএডিটর",
 	"visualeditor-preference-enable": "ভিজ্যুয়ালএডিটর সক্রিয় করো। এটি নিন্মোক্ত {{PLURAL:$2|নামস্থানে|নামস্থানসমূহে}} উপলব্ধ হবে: $1",
-	"visualeditor-preference-mwalienextension-label": "ভিজ্যুয়ালএডিটর এক্সটেনশন ট্যাগ সম্পাদনা",
 	"visualeditor-reference-input-placeholder": "বর্তমান তথ্যসূত্রের মধ্যে অনুসন্ধান করুন",
 	"visualeditor-referenceslist-isempty": "এই পাতাতে \"$1\" দলের জন্য কোন তথ্যসূত্র নেই।",
 	"visualeditor-referenceslist-isempty-default": "এই তালিকার এই পৃষ্ঠার থেকে সংযজন করার মতো কোন উল্লেখ নেই।",
