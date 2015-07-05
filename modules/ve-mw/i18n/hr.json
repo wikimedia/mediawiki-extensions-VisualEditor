@@ -5,12 +5,13 @@
 			"Roberta F.",
 			"SpeedyGonsales",
 			"Zeljko.filipin",
-			"Milicevic01"
+			"Milicevic01",
+			"Teoo3"
 		]
 	},
 	"tooltip-ca-createsource": "Napravi izvorni kod ove stranice",
 	"tooltip-ca-editsource": "Uredi izvorni kod ove stranice",
-	"tooltip-ca-ve-edit": "Uredi stranicu VisualEditorom",
+	"tooltip-ca-ve-edit": "Uredi ovu stranicu",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",
 	"visualeditor-annotationbutton-linknode-tooltip": "Jednostavni link",
 	"visualeditor-beta-appendix": "beta",
@@ -191,7 +192,6 @@
 	"visualeditor-languages-tool": "Jezici",
 	"visualeditor-linkinspector-button-link-external": "Vanjska poveznica",
 	"visualeditor-linkinspector-button-link-internal": "Pretraži stranice",
-	"visualeditor-linkinspector-description-redirect": "preusmjeravanje na $1",
 	"visualeditor-linkinspector-illegal-title": "Neispravan naslov stranice",
 	"visualeditor-linknodeinspector-add-label": "Dodaj oznaku",
 	"visualeditor-linknodeinspector-title": "Jednostavni link",
@@ -218,8 +218,6 @@
 	"visualeditor-preference-core-description": "Omogući VisualEditor. Uređivanje VisualEditorom neće biti moguće na stranicama za razgovor i u nekim drugim imenskim prostorima.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Omogući VisualEditor. Bit će dostupan u sljedećim imenskim prostorima: $1",
-	"visualeditor-preference-mwalienextension-description": "Dodaj eksperimentalnu osnovnu podršku za VisualEditor za uređivanje oznaka dodataka (kao što su galerije slike i dijelovi izvornog koda), prije nego što su pojedinačni alati dostupni. Molimo vas, uvijek zapamtite provjeriti vaše promjene prije snimanja dok koristite eksperimentalne funkcionalnosti.",
-	"visualeditor-preference-mwalienextension-label": "Uređivanje oznaka dodataka u VisualEditor-u.",
 	"visualeditor-reference-input-placeholder": "Koji izvor želite koristiti?",
 	"visualeditor-referenceslist-isempty": "Nema referenci u grupi \"$1\" na ovoj stranici koje bi mogle biti uključene u ovaj popis.",
 	"visualeditor-referenceslist-isempty-default": "Nema referenci na ovoj stranici koje bi mogle biti uključene u ovaj popis.",

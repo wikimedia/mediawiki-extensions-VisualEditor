@@ -15,7 +15,8 @@
 			"Lokal Profil",
 			"Josve05a",
 			"Jenniesarina",
-			"Dan Koehl"
+			"Dan Koehl",
+			"Rockyfelle"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
@@ -41,7 +42,8 @@
 	"apihelp-visualeditoredit-param-summary": "Redigeringssammanfattning.",
 	"tooltip-ca-createsource": "Skapa den här sidan med wikitext",
 	"tooltip-ca-editsource": "Redigera wikitexten för den här sidan",
-	"tooltip-ca-ve-edit": "Redigera den här sidan med VisualEditor",
+	"tooltip-ca-edit": "Redigera denna sida med wikitext",
+	"tooltip-ca-ve-edit": "Redigera den här sida",
 	"visualeditor-advancedsettings-tool": "Avancerade inställningar",
 	"visualeditor-annotationbutton-linknode-tooltip": "Enkel länk",
 	"visualeditor-beta-appendix": "beta",

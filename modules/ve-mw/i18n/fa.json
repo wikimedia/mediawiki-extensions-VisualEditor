@@ -16,7 +16,8 @@
 			"Armin1392",
 			"Calak",
 			"Alirezaaa",
-			"Movyn"
+			"Movyn",
+			"Leyth"
 		]
 	},
 	"apihelp-visualeditor-description": "بازگرداندن HTML5 برای یک صفحه از سرور پارسوید.",
@@ -43,6 +44,7 @@
 	"apihelp-visualeditoredit-param-summary": "خلاصه ویرایش.",
 	"tooltip-ca-createsource": "ساخت کد متن این صفحه.",
 	"tooltip-ca-editsource": "ویرایش کد متن این صفحه.",
+	"tooltip-ca-edit": "این صفحه را با استفاده از ویکی‌متن ویرایش کنید",
 	"tooltip-ca-ve-edit": "ویرایش این صفحه با ویرایشگر دیداری‏.",
 	"visualeditor-advancedsettings-tool": "تنظیمات پیشرفته",
 	"visualeditor-annotationbutton-linknode-tooltip": "پیوند ساده",
@@ -259,7 +261,7 @@
 	"visualeditor-preference-core-label": "ویرایشگر دیداری",
 	"visualeditor-preference-enable": "فعال‌سازی ویرایش‌گر دیداری. {{PLURAL:$2|فضای نام|فضای نام‌های}} زیر فعال خواهد بود: $1",
 	"visualeditor-recreate": "صفحه از زمانی که شما مشغول ویرایش شدید حذف شد. برای ساخت مجدد صفحه \"$1\" را فشار دهید.",
-	"visualeditor-reference-input-placeholder": "می‌خواهید به چه چیزی ارجاع دهید؟",
+	"visualeditor-reference-input-placeholder": "جستجو داخل ارجاع‌های کنونی",
 	"visualeditor-referenceslist-isempty": "ارجاعی با گروه «$1» در این صفحه برای شامل‌کردن در این فهرست وجود ندارد.",
 	"visualeditor-referenceslist-isempty-default": "ارجاعی در این صفحه برای شامل‌کردن در این فهرست وجود ندارد.",
 	"visualeditor-referenceslist-missingref": "این یادکرد درون یک الگو یا قطعهٔ تولیدی دیگر تعریف شده است و هم‌اکنون تنها می‌توان در حالت متنی آن را ویرایش کرد",
