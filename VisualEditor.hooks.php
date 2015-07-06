@@ -21,12 +21,22 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Function called by extension registration once all extensions have been registered
+	 * Initialise the 'VisualEditorNamespaces' setting, and add content namespaces
+	 * and NS_USER to it. This will run after LocalSettings.php is processed.
 	 */
 	public static function onRegistration() {
 		global $wgVisualEditorNamespaces, $wgContentNamespaces;
 
-		$wgVisualEditorNamespaces = array_merge( $wgContentNamespaces, array( NS_USER ) );
+		if ( !isset( $wgVisualEditorNamespaces ) ) {
+			$wgVisualEditorNamespaces = array();
+		}
+
+		$wgVisualEditorNamespaces = array_merge(
+			$wgVisualEditorNamespaces,
+			$wgContentNamespaces,
+			array( NS_USER )
+		);
+
 	}
 
 	public static function VisualEditorApiFactory( $main, $name ) {
