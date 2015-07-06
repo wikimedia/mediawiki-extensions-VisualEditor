@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gazimagomedov"
+			"Gazimagomedov",
+			"Аль-Гимравий"
 		]
 	},
-	"tooltip-ca-ve-edit": "Гьаб гьубер хисизабизе",
+	"tooltip-ca-ve-edit": "Гьаб гьумер хисизабизе",
 	"visualeditor-ca-editsource-section": "вики-текст хисизабизе",
 	"visualeditor-descriptionpagelink": "Project:Визуальнияв редактор",
 	"visualeditor-dialog-meta-settings-toc-label": "БетIер бихьизабизе"
