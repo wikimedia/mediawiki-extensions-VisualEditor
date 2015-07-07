@@ -33,6 +33,7 @@
 	"apihelp-visualeditoredit-param-summary": "Редактировать описание изменений.",
 	"tooltip-ca-createsource": "Создать страницу в редакторе исходного текста",
 	"tooltip-ca-editsource": "Править исходный текст этой страницы",
+	"tooltip-ca-edit": "Редактировать эту страницу в режиме вики-текста",
 	"tooltip-ca-ve-edit": "Редактировать данную страницу",
 	"visualeditor-advancedsettings-tool": "Дополнительные настройки",
 	"visualeditor-annotationbutton-linknode-tooltip": "Простая ссылка",

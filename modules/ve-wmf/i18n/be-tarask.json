@@ -5,7 +5,8 @@
 			"Wizardist",
 			"Чаховіч Уладзіслаў",
 			"Amire80",
-			"아라"
+			"아라",
+			"Red Winged Duck"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -13,7 +14,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Праверыць]]",
 	"tag-visualeditor-needcheck-description": "Праўка была зроблена [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуальным рэдактарам]], і сыстэма заўважыла патэнцыйна непажаданыя зьмены ў вікітэксьце.",
 	"visualeditor-feedback-link": "Project:Візуальны рэдактар/Водгукі",
-	"visualeditor-feedback-tool": "Пакінуць водгук",
+	"visualeditor-feedback-tool": "Пакінуць водгук пра гэтае праграмнае забесьпячэньне",
 	"visualeditor-help-label": "Прачытайце дапаможнік",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Дапаможнік па карыстаньні рэдактарам"
