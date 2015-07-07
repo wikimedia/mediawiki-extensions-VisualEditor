@@ -428,6 +428,7 @@ class VisualEditorHooks {
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.messagestore.js',
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.parser.js',
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.emitter.js',
+					'lib/ve/lib/jquery.i18n/src/jquery.i18n.emitter.bidi.js',
 					'lib/ve/lib/jquery.i18n/src/jquery.i18n.language.js',
 				),
 				'dependencies' => 'mediawiki.libs.pluralruleparser',
