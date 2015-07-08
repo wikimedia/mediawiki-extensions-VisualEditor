@@ -1347,7 +1347,9 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	var nextNode, offset,
 		target = this,
 		offsetNode = headingNode,
-		surfaceModel = this.getSurface().getView().getModel(),
+		surface = this.getSurface(),
+		surfaceModel = surface.getModel(),
+		surfaceView = surface.getView(),
 		lastHeadingLevel = -1;
 
 	// Find next sibling which isn't a heading
@@ -1365,8 +1367,11 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	);
 	// onDocumentFocus is debounced, so wait for that to happen before setting
 	// the model selection, otherwise it will get reset
-	this.getSurface().getView().once( 'focus', function () {
+	surfaceView.once( 'focus', function () {
 		surfaceModel.setLinearSelection( new ve.Range( offset ) );
+		// Focussing the document triggers showSelection which calls scrollIntoView
+		// which uses a jQuery animation, so make sure this is aborted.
+		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[0] ) ).stop( true );
 		target.scrollToHeading( headingNode );
 	} );
 };
