@@ -452,6 +452,7 @@
 		"ext.visualEditor.core": {
 			"scripts": [
 				"lib/ve/src/ve.Range.js",
+				"lib/ve/src/ve.SelectionState.js",
 				"lib/ve/src/ve.Node.js",
 				"lib/ve/src/ve.BranchNode.js",
 				"lib/ve/src/ve.LeafNode.js",

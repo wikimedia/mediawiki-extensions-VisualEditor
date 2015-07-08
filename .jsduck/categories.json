@@ -44,6 +44,7 @@
 				"classes": [
 					"ve",
 					"ve.Range",
+					"ve.SelectionState",
 					"ve.EventSequencer",
 					"ve.Filibuster",
 					"ve.TriggerListener",
