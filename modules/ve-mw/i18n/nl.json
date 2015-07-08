@@ -55,6 +55,7 @@
 	"apihelp-visualeditoredit-param-summary": "Bewerkingssamenvatting.",
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
 	"tooltip-ca-editsource": "Broncode van deze pagina bewerken",
+	"tooltip-ca-edit": "Deze pagina bewerken via wikitekst",
 	"tooltip-ca-ve-edit": "Deze pagina met visuele tekstverwerker bewerken",
 	"visualeditor-advancedsettings-tool": "Geavanceerde instellingen",
 	"visualeditor-annotationbutton-linknode-tooltip": "Eenvoudige koppeling",
