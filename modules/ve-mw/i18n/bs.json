@@ -3,7 +3,8 @@
 		"authors": [
 			"DzWiki",
 			"KWiki",
-			"Srdjan m"
+			"Srdjan m",
+			"Semso98"
 		]
 	},
 	"tooltip-ca-createsource": "Napravite izvorni kôd ove stranice",
@@ -177,7 +178,7 @@
 	"visualeditor-preference-core-description": "Omogući vizualni uređivač. Neće biti dostupan na stranicama za razgovor i nekim drugim imenskim prostorima.",
 	"visualeditor-preference-core-label": "Vizualni uređivač",
 	"visualeditor-preference-enable": "Omogući vizualni uređivač. Bit će dostupan u sljedećim {{PLURAL:$2|imenskim prostorima}}: $1",
-	"visualeditor-reference-input-placeholder": "Šta želite da referencirate?",
+	"visualeditor-reference-input-placeholder": "Traži unutar trenutnih navoda",
 	"visualeditor-referenceslist-isempty": "Nema referenci u grupi \"$1\" na ovoj stranici.",
 	"visualeditor-referenceslist-missingref": "Ova referenca je definirana u šablonu ili drugom generiranom bloku i sada se može uređivati jedino u izvornom modu.",
 	"visualeditor-savedialog-error-badtoken": "Nismo mogli procesuirati vaše uređivanje jer sesija više nije bila validna.",
@@ -193,7 +194,7 @@
 	"visualeditor-savedialog-label-save": "Sačuvaj stranicu",
 	"visualeditor-savedialog-label-warning": "Upozorenje",
 	"visualeditor-savedialog-title-conflict": "Sukob",
-	"visualeditor-savedialog-title-nochanges": "Nema izmjena",
+	"visualeditor-savedialog-title-nochanges": "Nema izmjena za pregled",
 	"visualeditor-savedialog-title-review": "Pregledaj Vaše izmjene",
 	"visualeditor-savedialog-title-save": "Sačuvajte Vaše izmjene",
 	"visualeditor-savedialog-warning-dirty": "Vaše uređivanje može biti oštećeno – molimo pregledajte prije sačuvanja.",
