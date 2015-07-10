@@ -1227,6 +1227,43 @@ ve.dm.mwExample.domToDataCases = {
 				'&amp;quot;attrs&amp;quot;:{&amp;quot;group&amp;quot;:&amp;quot;g1&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;foo&amp;quot;}}\\&quot;>' +
 				'</span>&quot;}}">' +
 			'</div>',
+		clipboardBody:
+			'<p>Foo' +
+				'<span typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;attrs&quot;:{&quot;name&quot;:&quot;bar&quot;}}">' +
+					'<sup>[1]</sup>' +
+				'</span>' +
+				' Baz' +
+				'<span typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Quux&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;,&quot;name&quot;:&quot;:0&quot;}}">' +
+					'<sup>[g1 1]</sup>' +
+				'</span>' +
+				' Whee' +
+				'<span typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;' +
+				'<a href=\\&quot;./Bar\\&quot; rel=\\&quot;mw:WikiLink\\&quot;>Bar' +
+				'</a>&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;bar&quot;}}">' +
+					'<sup>[1]</sup>' +
+				'</span>' +
+				' Yay' +
+				// This reference has .body.id instead of .body.html
+				'<span typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;id&quot;:&quot;mw-cite-3&quot;,&quot;html&quot;:&quot;No name&quot;},&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;}}">' +
+					'<sup>[g1 2]</sup>' +
+				'</span>' +
+				' Quux' +
+				'<span typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;body&quot;:{&quot;html&quot;:&quot;Different content&quot;},&quot;attrs&quot;:{&quot;name&quot;:&quot;bar&quot;}}">' +
+					'<sup>[1]</sup>' +
+				'</span>' +
+				' Foo' +
+				'<span typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;,&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;,&quot;name&quot;:&quot;foo&quot;}}">' +
+					'<sup>[g1 3]</sup>' +
+				'</span>' +
+			'</p>' +
+			// The HTML below is enriched to wrap reference contents in <span id="mw-cite-[...]">
+			// which Parsoid doesn't do yet, but T88290 asks for
+			'<div typeof="mw:Extension/references"' +
+				'data-mw="{&quot;name&quot;:&quot;references&quot;,&quot;attrs&quot;:{&quot;group&quot;:&quot;g1&quot;},&quot;body&quot;:{' +
+				'&quot;html&quot;:&quot;<span typeof=\\&quot;mw:Extension/ref\\&quot; ' +
+				'data-mw=\\&quot;{&amp;quot;name&amp;quot;:&amp;quot;ref&amp;quot;,&amp;quot;attrs&amp;quot;:{&amp;quot;group&amp;quot;:&amp;quot;g1&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;foo&amp;quot;},&amp;quot;body&amp;quot;:{&amp;quot;html&amp;quot;:&amp;quot;Ref in refs&amp;quot;}}' +
+				'\\&quot;><sup>[g1 3]</sup></span>&quot;}}">' +
+			'</div>',
 		head: '<base href="http://example.com" />',
 		data: [
 			{ type: 'paragraph' },

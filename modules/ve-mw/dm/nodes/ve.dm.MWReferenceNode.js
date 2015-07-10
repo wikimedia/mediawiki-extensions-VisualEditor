@@ -102,6 +102,7 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var itemNodeHtml, originalHtml, mwData, i, iLen, keyedNodes, setContents, contentsAlreadySet,
 		originalMw, listKeyParts, name,
+		isForClipboard = converter.isForClipboard(),
 		el = doc.createElement( 'span' ),
 		itemNodeWrapper = doc.createElement( 'div' ),
 		originalHtmlWrapper = doc.createElement( 'div' ),
@@ -162,8 +163,9 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 			( ve.getProp( mwData, 'body', 'id' ) !== undefined && itemNode.getAttribute( 'originalHtml' ) ) ||
 			'';
 		originalHtmlWrapper.innerHTML = originalHtml;
-		// Only set body.html if itemNodeHtml and originalHtml are actually different
-		if ( !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {
+		// Only set body.html if itemNodeHtml and originalHtml are actually different,
+		// or we are writing the clipboard for use in another VE instance
+		if ( isForClipboard || !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {
 			ve.setProp( mwData, 'body', 'html', itemNodeHtml );
 		}
 	}
@@ -199,10 +201,11 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		delete mwData.attrs.refGroup;
 	}
 
-	// If mwAttr and originalMw are the same, use originalMw to prevent reserialization.
+	// If mwAttr and originalMw are the same, use originalMw to prevent reserialization,
+	// unless we are writing the clipboard for use in another VE instance
 	// Reserialization has the potential to reorder keys and so change the DOM unnecessarily
 	originalMw = dataElement.attributes.originalMw;
-	if ( originalMw && ve.compare( mwData, JSON.parse( originalMw ) ) ) {
+	if ( !isForClipboard && originalMw && ve.compare( mwData, JSON.parse( originalMw ) ) ) {
 		el.setAttribute( 'data-mw', originalMw );
 
 		// Return the original DOM elements if possible
