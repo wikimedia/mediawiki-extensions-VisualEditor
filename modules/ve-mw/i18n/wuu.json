@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Poiuyt",
-			"十弌"
+			"十弌",
+			"反共复国"
 		]
 	},
-	"tooltip-ca-ve-edit": "用可视化编辑器编辑箇页",
+	"tooltip-ca-ve-edit": "编辑箇页",
 	"visualeditor-ca-createlocaldescriptionsource": "添加本地说明源代码",
 	"visualeditor-ca-createsource": "创建源代码",
 	"visualeditor-ca-editsource": "编辑源代码",

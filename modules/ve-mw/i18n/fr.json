@@ -68,6 +68,7 @@
 	"apihelp-visualeditoredit-param-summary": "Modifier le résumé.",
 	"tooltip-ca-createsource": "Créer le wikicode de cette page",
 	"tooltip-ca-editsource": "Modifier le wikicode de cette page",
+	"tooltip-ca-edit": "Modifier cette page en utilisant le wikitexte",
 	"tooltip-ca-ve-edit": "Modifier cette page avec l'ÉditeurVisuel",
 	"visualeditor-advancedsettings-tool": "Paramètres avancés",
 	"visualeditor-annotationbutton-linknode-tooltip": "Lien simple",
