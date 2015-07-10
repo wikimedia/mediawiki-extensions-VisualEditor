@@ -157,6 +157,7 @@ class ApiVisualEditor extends ApiBase {
 			array(
 				'html' => $html,
 				'oldid' => $parserParams['oldid'],
+				'scrubWikitext' => 1,
 			)
 		);
 	}
