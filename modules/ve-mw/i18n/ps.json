@@ -4,7 +4,9 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
+	"apihelp-visualeditor-param-paction": "د ترسره کولو کړنه.",
 	"apihelp-visualeditor-param-page": "هغه مخ چې کړنې پرې ترسره کېږي.",
+	"apihelp-visualeditoredit-param-minor": "د وړوکي سمون رپی.",
 	"apihelp-visualeditoredit-param-summary": "لنډيز سمول.",
 	"tooltip-ca-createsource": "د دې مخ د سرچينې کوډ جوړول",
 	"tooltip-ca-editsource": "د دې مخ د سرچينې کوډ سمول",
@@ -96,6 +98,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "تلواليز",
 	"visualeditor-dialog-meta-settings-index-disable": "نه",
 	"visualeditor-dialog-meta-settings-index-force": "هو",
+	"visualeditor-dialog-meta-settings-index-label": "همدا مخ د پلټنې ماشينونو له خوا ليکلړ کښنې ته پرېښودل",
 	"visualeditor-dialog-meta-settings-label": "مخ امستنې",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "تلواليز",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "نه",
@@ -107,6 +110,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "تل",
 	"visualeditor-dialog-meta-settings-toc-label": "نيوليک ښکاره کول",
 	"visualeditor-dialog-meta-title": "خوښنې",
+	"visualeditor-dialog-reference-editing-reused": "په همدې مخ دا سرچينه $1 {{PLURAL:$1|واره}} کارېدلې.",
 	"visualeditor-dialog-reference-options-group-label": "دا ډله کارول",
 	"visualeditor-dialog-reference-options-group-placeholder": "ټولگړې سرچينې",
 	"visualeditor-dialog-reference-options-name-label": "په دغه نوم بياکارول",
