@@ -13,27 +13,17 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {boolean} [divider] Section divider item, not highlightable or selectable
  */
-ve.ui.MWReferenceResultWidget = function VeUiMWReferenceResultWidget( config ) {
-	// Configuration initialization
-	config = config || {};
-
+ve.ui.MWReferenceResultWidget = function VeUiMWReferenceResultWidget() {
 	// Parent constructor
-	OO.ui.OptionWidget.call( this, config );
-
-	// Properties
-	this.$shield = $( '<div>' );
+	ve.ui.MWReferenceResultWidget.super.apply( this, arguments );
 
 	// Initialization
-	this.$shield.addClass( 've-ui-mwReferenceResultWidget-shield' );
 	this.$element
 		.addClass( 've-ui-mwReferenceResultWidget' )
-		.append( this.$shield );
-	if ( config.divider ) {
-		this.$element.addClass( 've-ui-mwReferenceResultWidget-divider' );
-		this.setDisabled( true );
-	}
+		.append(
+			$( '<div>' ).addClass( 've-ui-mwReferenceResultWidget-shield' )
+		);
 };
 
 /* Inheritance */

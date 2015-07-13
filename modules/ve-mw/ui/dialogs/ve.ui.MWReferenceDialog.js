@@ -99,7 +99,7 @@ ve.ui.MWReferenceDialog.static.excludeCommands = [
 ];
 
 /**
- * Get the import rules for the surface widget in the dialog
+ * Get the import rules for the surface widget in the dialog.
  *
  * @see ve.dm.ElementLinearData#sanitize
  * @return {Object} Import rules
@@ -133,6 +133,7 @@ ve.ui.MWReferenceDialog.static.getImportRules = function () {
 
 /**
  * Determine whether the reference document we're editing has any content.
+ *
  * @return {boolean} Document has content
  */
 ve.ui.MWReferenceDialog.prototype.documentHasContent = function () {
@@ -141,7 +142,8 @@ ve.ui.MWReferenceDialog.prototype.documentHasContent = function () {
 };
 
 /*
- * Determine whether any changes have been made (and haven't been undone)
+ * Determine whether any changes have been made (and haven't been undone).
+ *
  * @return {boolean} Dialog can be applied
  */
 ve.ui.MWReferenceDialog.prototype.canApply = function () {
@@ -164,7 +166,7 @@ ve.ui.MWReferenceDialog.prototype.onSurfaceHistory = function () {
 };
 
 /**
- * Handle reference group input change events
+ * Handle reference group input change events.
  */
 ve.ui.MWReferenceDialog.prototype.onReferenceGroupInputChange = function () {
 	this.actions.setAbilities( {
@@ -323,7 +325,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 };
 
 /**
- * Switches dialog to use existing reference mode
+ * Switches dialog to use existing reference mode.
  *
  * @param {string} [action='select'] Symbolic name of action, either 'select' or 'insert-select'
  */
