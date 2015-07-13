@@ -703,7 +703,7 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
 };
 
 /**
- * Handle search choose event.
+ * Handle search results choose event.
  *
  * @param {ve.ui.MWMediaResultWidget} item Chosen item
  */
