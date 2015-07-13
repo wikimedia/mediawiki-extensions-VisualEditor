@@ -175,19 +175,19 @@ ve.ui.MWReferenceDialog.prototype.onReferenceGroupInputChange = function () {
 };
 
 /**
- * Handle search select events.
+ * Handle search results choose events.
  *
- * @param {ve.dm.MWReferenceModel|null} ref Reference model or null if no item is selected
+ * @param {ve.ui.MWReferenceResultWidget} item Chosen item
  */
-ve.ui.MWReferenceDialog.prototype.onSearchSelect = function ( ref ) {
-	if ( ref instanceof ve.dm.MWReferenceModel ) {
-		if ( this.selectedNode instanceof ve.dm.MWReferenceNode ) {
-			this.getFragment().removeContent();
-			this.selectedNode = null;
-		}
-		this.useReference( ref );
-		this.executeAction( 'insert' );
+ve.ui.MWReferenceDialog.prototype.onSearchResultsChoose = function ( item ) {
+	var ref = item.getData();
+
+	if ( this.selectedNode instanceof ve.dm.MWReferenceNode ) {
+		this.getFragment().removeContent();
+		this.selectedNode = null;
 	}
+	this.useReference( ref );
+	this.executeAction( 'insert' );
 };
 
 /**
@@ -314,7 +314,7 @@ ve.ui.MWReferenceDialog.prototype.initialize = function () {
 	this.search = new ve.ui.MWReferenceSearchWidget();
 
 	// Events
-	this.search.connect( this, { select: 'onSearchSelect' } );
+	this.search.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 
 	// Initialization
 	this.panels.addItems( [ this.editPanel, this.searchPanel ] );
