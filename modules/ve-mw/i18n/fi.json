@@ -15,7 +15,8 @@
 			"Stryn",
 			"VezonThunder",
 			"Elseweyr",
-			"McSalama"
+			"McSalama",
+			"Alluk."
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "Merkitse pieneksi muutokseksi.",
@@ -23,12 +24,12 @@
 	"tooltip-ca-createsource": "Luo sivun lähdekoodi",
 	"tooltip-ca-editsource": "Muokkaa tämän sivun wikitekstiä",
 	"tooltip-ca-edit": "Muokkaa tätä sivua",
-	"tooltip-ca-ve-edit": "Muokkaa tätä sivua Visuaalisella muokkaimella",
+	"tooltip-ca-ve-edit": "Muokkaa tätä sivua",
 	"visualeditor-advancedsettings-tool": "Lisäasetukset",
 	"visualeditor-annotationbutton-linknode-tooltip": "Yksinkertainen linkki",
 	"visualeditor-beta-appendix": "beeta",
 	"visualeditor-beta-label": "beeta",
-	"visualeditor-beta-warning": "Visuaalinen muokkain on beetavaiheessa. Saatat kohdata ohjelmisto-ongelmia, ja et ehkä voi muokata kaikkia sivun osia. Vaihtaaksesi takaisin wikitekstin muokkaustilaan menettämättä muokkauksiasi, avaa \"{{int:visualeditor-toolbar-savedialog}}\"-painikkeen vieressä oleva alasvetovalikko ja valitse \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Visuaalinen muokkain on beetavaiheessa. Ohjelmistossa saattaa olla virheitä, eikä kaikkia sivun osia voi välttämättä muokata. Palaa perinteiseen wikitekstin muokkaustilaan muokkauksia menettämättä avaamalla \"{{int:visualeditor-toolbar-savedialog}}\"-painikkeen vieressä oleva alasvetovalikko ja valitsemalla \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Visuaalinen muokkain ei tue virallisesti käyttämääsi selainta.",
 	"visualeditor-ca-createlocaldescriptionsource": "Luo paikallisen kuvauksen lähdeteksti",
 	"visualeditor-ca-createsource": "Luo lähdekoodi",

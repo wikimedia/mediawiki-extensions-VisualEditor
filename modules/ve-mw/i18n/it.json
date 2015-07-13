@@ -20,7 +20,8 @@
 			"Fringio",
 			"Martinligabue",
 			"Macofe",
-			"Mpiva"
+			"Mpiva",
+			"Stefania.scaramuzzi"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -47,6 +48,7 @@
 	"apihelp-visualeditoredit-param-summary": "Oggetto della modifica.",
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
 	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
+	"tooltip-ca-edit": "Modificare questa pagina utilizzando wikitext",
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
 	"visualeditor-annotationbutton-linknode-tooltip": "Collegamento semplice",

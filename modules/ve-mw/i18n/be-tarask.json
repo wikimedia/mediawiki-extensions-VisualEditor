@@ -51,6 +51,7 @@
 	"visualeditor-dialog-meta-languages-readonlynote": "Гэта сьпіс старонак на іншых мовах, зь якімі злучаная гэтая старонка. Пакуль што яго можна зьмяніць толькі ў рэжыме крынічнага тэксту або ў Вікізьвестках.",
 	"visualeditor-dialog-meta-languages-section": "Мовы",
 	"visualeditor-dialog-meta-settings-label": "Парамэтры старонкі",
+	"visualeditor-dialog-meta-settings-noeditsection-label": "Адключыць спасылкі на рэдагаваньне побач з кожным загалоўкам на гэтай старонцы.",
 	"visualeditor-dialog-meta-settings-redirect-label": "Перакіроўваць гэтую старонку на",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Мэтавая старонка для перанакіраваньня",
 	"visualeditor-dialog-meta-settings-section": "Парамэтры старонкі",

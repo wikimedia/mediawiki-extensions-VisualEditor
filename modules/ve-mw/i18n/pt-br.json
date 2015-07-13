@@ -20,12 +20,13 @@
 			"Rodrigo codignoli",
 			"Teles",
 			"He7d3r",
-			"Fasouzafreitas"
+			"Fasouzafreitas",
+			"TheEduGobi"
 		]
 	},
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
 	"tooltip-ca-editsource": "Editar o código-fonte desta página",
-	"tooltip-ca-ve-edit": "Editar esta página com o Editor Visual",
+	"tooltip-ca-ve-edit": "Editar esta página",
 	"visualeditor-advancedsettings-tool": "Configurações avançadas",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
@@ -170,8 +171,6 @@
 	"visualeditor-preference-core-description": "Ativar o Editor Visual. Ele não estará disponível nas páginas de discussão e em alguns outros domínios.",
 	"visualeditor-preference-core-label": "Editor Visual",
 	"visualeditor-preference-enable": "Ativar o Editor Visual. Ele não estará disponível nas páginas de discussão e em alguns outros domínios.",
-	"visualeditor-preference-mwalienextension-description": "Adicionar suporte básico experimental ao Editor Visual para editar tags de extensões (como galerias ou blocos de código-fonte), antes das ferramentas individuais estarem disponíveis. Por favor lembre sempre de revisar suas alterações antes de salvar quando utilizar ferramentas experimentais.",
-	"visualeditor-preference-mwalienextension-label": "Edição de tags no Editor Visual",
 	"visualeditor-reference-input-placeholder": "O que você pretende referenciar?",
 	"visualeditor-referenceslist-isempty": "Não há qualquer referência com o grupo \"$1\" nesta página para incluir nesta lista.",
 	"visualeditor-referenceslist-isempty-default": "Não há qualquer referência nesta página para a incluir nesta lista.",
