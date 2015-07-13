@@ -36,13 +36,6 @@ ve.ui.MWReferenceSearchWidget = function VeUiMWReferenceSearchWidget( config ) {
 
 OO.inheritClass( ve.ui.MWReferenceSearchWidget, OO.ui.SearchWidget );
 
-/* Events */
-
-/**
- * @event select
- * @param {ve.dm.MWReferenceModel|null} data Reference model, null if no item is selected
- */
-
 /* Methods */
 
 /**
@@ -57,29 +50,6 @@ ve.ui.MWReferenceSearchWidget.prototype.onQueryChange = function () {
 
 	// Populate
 	this.addResults();
-};
-
-/**
- * Handle select widget select events.
- *
- * @method
- * @param {OO.ui.OptionWidget} item Selected item
- * @fires select
- */
-ve.ui.MWReferenceSearchWidget.prototype.onResultsSelect = function ( item ) {
-	var data;
-
-	if ( item ) {
-		data = item.getData();
-		// Resolve indexed values
-		if ( this.index[data] ) {
-			data = this.index[data].reference;
-		}
-	} else {
-		data = null;
-	}
-
-	this.emit( 'select', data );
 };
 
 /**
@@ -251,7 +221,7 @@ ve.ui.MWReferenceSearchWidget.prototype.addResults = function () {
 				.text( item.name );
 			items.push(
 				new ve.ui.MWReferenceResultWidget( {
-					data: i,
+					data: item.reference,
 					label: $citation.add( $name ).add( item.$element )
 				} )
 			);
