@@ -48,7 +48,7 @@
 	"apihelp-visualeditoredit-param-summary": "Oggetto della modifica.",
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
 	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
-	"tooltip-ca-edit": "Modificare questa pagina utilizzando wikitext",
+	"tooltip-ca-edit": "Modifica questa pagina utilizzando il wikitesto",
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
 	"visualeditor-annotationbutton-linknode-tooltip": "Collegamento semplice",

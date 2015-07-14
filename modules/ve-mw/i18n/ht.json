@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tisave"
+			"Tisave",
+			"Bfpage"
 		]
 	},
-	"tooltip-ca-ve-edit": "Chanje paj sa a ak VisualEditor"
+	"tooltip-ca-ve-edit": "Edit paj sa a"
 }
