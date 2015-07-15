@@ -50,6 +50,14 @@ Given(/^I go to "(.*?)" page containing math formula/) do |page_title|
   step "I go to the \"#{page_title}\" page with source content \"<math>2+2</math>\""
 end
 
+Given(/^I select "(.*?)" in editable part$/) do |string|
+  on(VisualEditorPage).content_element.select_text translate(string)
+end
+
+Given(/^I go to the "(.*?)" page with source content "(.*?)" for language screenshot$/) do |page, content|
+  step "I go to the \"#{page}\" page with source content \"#{translate(content)}\""
+end
+
 When(/^I click on the Insert menu$/) do
   on(VisualEditorPage).insert_indicator_down_element.when_present.click
 end

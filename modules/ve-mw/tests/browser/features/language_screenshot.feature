@@ -52,11 +52,12 @@ Feature: Language Screenshot
     When I click on list and indentation button
     Then I should see list and indentation dropdown
 
-  Scenario: VisualEditor_External_link
-    Given I go to the "Links VisualEditor Screenshot" page with source content "Links VisualEditor Screenshot"
+  @language_screenshot
+  Scenario: VisualEditor_Internal_link
+    Given I go to the "Links VisualEditor Screenshot" page with source content "Hello World" for language screenshot
       And I click in the editable part
+      And I select "World" in editable part
       And I click the Link button
-    When I enter http://www.mediawiki.org into link Content box
     Then I should see link Content box with dropdown options
 
   Scenario: VisualEditor_Link_editing_inline

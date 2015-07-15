@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"languagescreenshot-hello-world-text": "A text to show as content in VisualEditor.",
+	"languagescreenshot-world-text": "The word 'world' from {{msg-mw|languagescreenshot-hello-world-text}}."
+}

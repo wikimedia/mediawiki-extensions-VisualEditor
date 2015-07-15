@@ -84,7 +84,7 @@ class VisualEditorPage
   div(:ip_warning, class: 've-ui-mwNoticesPopupTool-item', text: /Your IP address/)
   div(:language_notification, class: 'tipsy-inner')
   div(:left_navigation, id: 'left-navigation')
-  unordered_list(:link_list, class: 'oo-ui-widget oo-ui-widget-enabled oo-ui-selectWidget oo-ui-selectWidget-depressed oo-ui-clippableElement-clippable oo-ui-menuWidget oo-ui-textInputMenuWidget oo-ui-lookupWidget-menu ve-ui-mwLinkTargetInputWidget-menu')
+  div(:link_list, class: 'oo-ui-windowManager-floating')
   div(:link_overlay_does_not_exist, text: /New page/)
   div(:link_overlay_external_link, text: /External link.+New page/m)
   div(:link_overlay_wiki_page, text: /Matching page/)
