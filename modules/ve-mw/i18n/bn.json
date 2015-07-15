@@ -10,9 +10,12 @@
 			"Tauhid16",
 			"Aftabuzzaman",
 			"RYasmeen (WMF)",
-			"Sayma Jahan"
+			"Sayma Jahan",
+			"NahidSultan"
 		]
 	},
+	"apihelp-visualeditor-description": "পারসয়েড পরিষেবা হতে কোন পাতার জন্য এইচটিএমএল৫-এ ফিরে যান।",
+	"apihelp-visualeditor-param-basetimestamp": "সংরক্ষণ করার সময় এটিকে পূর্বের সম্পাদিত ইতিহাসের সময়সূচীর সাথে মিলিয়ে দিয়ে সম্পাদনা দ্বন্দ্ব চিহ্নিত করুন।",
 	"apihelp-visualeditoredit-param-minor": "অনুল্লেখ্য সম্পাদনার জন্য পতাকা।",
 	"apihelp-visualeditoredit-param-summary": "সম্পাদনা সারাংশ।",
 	"tooltip-ca-createsource": "এই পাতার উৎস কোড তৈরি করুন",

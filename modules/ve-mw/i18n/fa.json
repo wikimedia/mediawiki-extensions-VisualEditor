@@ -17,7 +17,8 @@
 			"Calak",
 			"Alirezaaa",
 			"Movyn",
-			"Leyth"
+			"Leyth",
+			"MRG90"
 		]
 	},
 	"apihelp-visualeditor-description": "بازگرداندن HTML5 برای یک صفحه از سرور پارسوید.",
@@ -76,6 +77,7 @@
 	"visualeditor-dialog-media-choose-image": "استفاده از این پرونده",
 	"visualeditor-dialog-media-content-filename": "نام پرونده",
 	"visualeditor-dialog-media-content-section": "برنگاشت",
+	"visualeditor-dialog-media-content-section-help": "شما می‌توانید از این امکان برای نمایش‌دادن برچسبی که در کنار آیتم برای همهٔ خوانندگان نمایش می‌یابد استفاده کنید. این امکان معمولاً برای توضیح اینکه چرا آیتم با متنی که در آن نمایش‌یافته مرتبط است، استفاده می‌شود. محتوای آن باید خلاصه و حاوی اطلاعات مفید باشد.",
 	"visualeditor-dialog-media-goback": "بازگشت",
 	"visualeditor-dialog-media-info-artist": "بارگذاری‌شده توسط $1",
 	"visualeditor-dialog-media-info-audiofile": "پرونده صوتی",

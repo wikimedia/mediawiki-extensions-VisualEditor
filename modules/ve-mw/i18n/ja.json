@@ -129,7 +129,7 @@
 	"visualeditor-dialog-meta-settings-redirect-help": "このページを、リダイレクト（転送）のページとすることができます。これは、読者を自動的に、ウィキ内の別のページに誘導します。この方法は、綴り間違いや別称・別コンセプトの際に有用です。これを設定した場合、読者にはリダイレクト・ページの内容は表示されません。",
 	"visualeditor-dialog-meta-settings-redirect-label": "このページを以下のページにリダイレクト",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "リダイレクト先のページ",
-	"visualeditor-dialog-meta-settings-redirect-statichelp": "これが必要とされるのは非常に稀なケースですが、リダイレクト先のページが移動された際に、ここのリダイレクトが自動的に更新することを防ぎます。",
+	"visualeditor-dialog-meta-settings-redirect-statichelp": "これが必要とされるのは非常に稀なケースですが、リダイレクト先のページが移動された際に、ここのリダイレクトが自動的に更新されることを防ぐことができます。",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "ターゲット先のページが移動された際に、更新されることから、このリダイレクトを防ぐ。",
 	"visualeditor-dialog-meta-settings-section": "ページの設定",
 	"visualeditor-dialog-meta-settings-toc-default": "必要であれば表示",

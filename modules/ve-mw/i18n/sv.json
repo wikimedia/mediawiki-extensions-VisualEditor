@@ -16,7 +16,8 @@
 			"Josve05a",
 			"Jenniesarina",
 			"Dan Koehl",
-			"Rockyfelle"
+			"Rockyfelle",
+			"Warrakkk"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
@@ -36,6 +37,7 @@
 	"apihelp-visualeditoredit-param-captchaword": "Svar till captcha (vid sparning med ett captcha-svar).",
 	"apihelp-visualeditoredit-param-html": "HTML att skicka till Parsoid i utbyte mot wikitext.",
 	"apihelp-visualeditoredit-param-minor": "Flagga för mindre redigering.",
+	"apihelp-visualeditoredit-param-needcheck": "När du sparar, ställ in den här parametern om ändringen kan komma att ha tur- och returproblem. Detta resulterar i att redigeringen markeras.",
 	"apihelp-visualeditoredit-param-oldid": "Versionsnummer att använda. Standard är senaste versionen. Använd 0 för en ny sida.",
 	"apihelp-visualeditoredit-param-page": "Sidan som åtgärden ska utföras på.",
 	"apihelp-visualeditoredit-param-starttimestamp": "När du sparar, ställ in denna till tidsstämpel för när sidan laddades. Används för att upptäcka redigeringskonflikter.",

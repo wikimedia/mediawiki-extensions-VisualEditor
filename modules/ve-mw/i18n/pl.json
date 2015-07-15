@@ -38,6 +38,7 @@
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
 	"tooltip-ca-createsource": "Tworzenie kodu źródłowego strony",
 	"tooltip-ca-editsource": "Edycja kodu źródłowego strony",
+	"tooltip-ca-edit": "Edytuj tę stronę używając edytora kodu źródłowego",
 	"tooltip-ca-ve-edit": "Edytuj tę stronę",
 	"visualeditor-advancedsettings-tool": "Zaawansowane",
 	"visualeditor-annotationbutton-linknode-tooltip": "Prosty link",
