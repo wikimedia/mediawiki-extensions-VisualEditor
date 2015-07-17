@@ -177,3 +177,7 @@ Feature: Language Screenshot
     Given I go to the "Reference VisualEditor Screenshot" page with source content "VisualEditor is a MediaWiki extension"
     When I click on References list in Insert menu
     Then I should see References list dialog box
+
+  Scenario: Load i18n messages from MediaWiki to browser tests
+    Given I am on the Main page
+    Then I should see save button

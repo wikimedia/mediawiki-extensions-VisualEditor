@@ -4,6 +4,12 @@ class VisualEditorPage
 
   page_url 'User:<%= env.user %>/<%= env.browser_name %>?vehidebetadialog=true&veaction=edit'
 
+  def self.translate(string)
+    file = File.read "../../i18n/#{ENV['LANGUAGE_SCREENSHOT_CODE']}.json"
+    json = JSON.parse(file)
+    json[string]
+  end
+
   div(:add_a_template_title, class: 'oo-ui-processDialog-location', text: /Add a template/)
   text_field(:add_category, css: 'div.ve-ui-mwCategoryInputWidget > input')
   span(:add_template, text: 'Add template')
@@ -150,7 +156,7 @@ class VisualEditorPage
   div(:top_editing_tabs, id: 'p-views')
   li(:ve_edit_tab, id: 'ca-ve-edit')
   li(:edit_source_tab, id: 'ca-edit')
-  a(:save_page, css: '.oo-ui-flaggedElement-progressive > a:nth-child(1)')
+  a(:save_page, text: translate('visualeditor-savedialog-label-save'))
   div(:save_enabled, css: 'div.ve-init-mw-desktopArticleTarget-toolbar .oo-ui-toolbar-actions > div.oo-ui-flaggedElement-progressive.oo-ui-widget-enabled')
   div(:search_page_link, class: 'oo-ui-optionWidget-selected')
   a(:second_reference, text: '[1]', index: 2)

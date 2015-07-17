@@ -529,3 +529,7 @@ When(/^I go to language screenshot page$/) do
   step 'I am on the Language Screenshot page'
   browser.goto "#{browser.url}&setlang=#{lookup(:language_screenshot_code)}"
 end
+
+Then(/^I should see save button$/) do
+  on(VisualEditorPage).save_page_element.when_present.should be_visible
+end
