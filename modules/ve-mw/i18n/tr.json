@@ -15,7 +15,8 @@
 			"Violetanka",
 			"Captantrips",
 			"Stultiwikia",
-			"Arystanbek"
+			"Arystanbek",
+			"Uğurkent"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -39,7 +40,7 @@
 	"apihelp-visualeditoredit-param-summary": "Düzenleme özeti.",
 	"tooltip-ca-createsource": "Bu sayfanın kaynak kodunu oluşturun",
 	"tooltip-ca-editsource": "Bu sayfanın kaynak kodunu düzenleyin",
-	"tooltip-ca-ve-edit": "Bu sayfayı Görsel Düzenleyici ile düzenleyin",
+	"tooltip-ca-ve-edit": "Bu sayfayı düzenleyin",
 	"visualeditor-advancedsettings-tool": "Gelişmiş ayarlar",
 	"visualeditor-annotationbutton-linknode-tooltip": "Basit bağlantı",
 	"visualeditor-beta-appendix": "beta",
@@ -218,7 +219,6 @@
 	"visualeditor-languages-tool": "Diller",
 	"visualeditor-linkinspector-button-link-external": "Dış bağlantı",
 	"visualeditor-linkinspector-button-link-internal": "Arama sayfaları",
-	"visualeditor-linkinspector-description-new-page": "sayfa henüz mevcut değil",
 	"visualeditor-linkinspector-illegal-title": "Geçersiz sayfa başlığı",
 	"visualeditor-linknodeinspector-add-label": "Etiket ekle",
 	"visualeditor-linknodeinspector-title": "Basit bağlantı",
@@ -245,8 +245,6 @@
 	"visualeditor-preference-core-description": "Görsel Düzenleyiciyi etkinleştirin. Mesaj sayfalarında ve bazı diğer ad alanlarında kullanılamayacaktır.",
 	"visualeditor-preference-core-label": "Görsel Düzenleyici",
 	"visualeditor-preference-enable": "Görsel Düzenleyiciyi etkinleştirin. Aşağıdaki {{PLURAL:$2|ad alanı|ad alanlarında}} kullanılacaktır: $1",
-	"visualeditor-preference-mwalienextension-description": "Deneysel temel destek uzantısı etiketleri (Galeri ya da kaynak kod blokları gibi) öncesinde bireysel araçları mevcut olan düzenleme için VisualEditor ekleyin. Her zaman deneysel özelliklerde kaydetmeden önce yaptığınız değişiklikleri gözden geçirmek için unutmayın.",
-	"visualeditor-preference-mwalienextension-label": "Görsel Düzenleyiciyi uzantı etiketi düzenleme",
 	"visualeditor-recreate": "Bu sayfa siz düzenlemeye başladıktan sonra silindi. Basın \"$1\" için yeniden oluşturun.",
 	"visualeditor-reference-input-placeholder": "Varolan kaynakça içinde ara",
 	"visualeditor-referenceslist-isempty": "Bu listeye dahil etmek için bu sayfada \"$1\" grubu kaynağına uygun kaynak bulunmamaktadır.",

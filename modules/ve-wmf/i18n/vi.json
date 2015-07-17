@@ -5,17 +5,18 @@
 			"Jdforrester",
 			"Minh Nguyen",
 			"Amire80",
-			"아라"
+			"아라",
+			"Anh88"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Soạn thảo trực quan]]",
 	"tag-visualeditor-description": "Đã sửa đổi dùng [[{{MediaWiki:visualeditor-descriptionpagelink}}|Trình soạn thảo trực quan]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Trình soạn thảo trực quan: Cần kiểm tra]]",
-	"tag-visualeditor-needcheck-description": "Sửa đổi được thực hiện dùng [[{{MediaWiki:visualeditor-descriptionpagelink}}|Trình soạn thảo trực quan]] và phần mềm nhận ra những thay đổi có thể bất ngờ trong mã wiki.",
+	"tag-visualeditor-needcheck-description": "Sửa đổi được thực hiện dùng [[{{MediaWiki:visualeditor-descriptionpagelink}}|Trình soạn thảo trực quan]] ở vị trí mà hệ thống đã nhận diện wikitext có khả năng có những thay đổi ngoài ý muốn.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Trình soạn thảo trực quan: Đã chuyển]]",
-	"tag-visualeditor-switched-description": "Người dùng bắt đầu sửa đổi trong Trình soạn thảo trực quan rồi chuyển sang chế độ sửa đổi mã wiki.",
+	"tag-visualeditor-switched-description": "Người dùng đã bắt đầu sửa đổi bằng cách dùng Trình soạn thảo trực quan, sau đó đã chuyển qua chế độ sửa đổi mã wiki.",
 	"visualeditor-feedback-link": "Project:Soạn thảo trực quan/Phản hồi",
-	"visualeditor-feedback-tool": "Gửi phản hồi",
+	"visualeditor-feedback-tool": "Để lại phản hồi về phần mềm này",
 	"visualeditor-help-label": "Đọc hướng dẫn sử dụng",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Hướng dẫn sử dụng trình soạn"

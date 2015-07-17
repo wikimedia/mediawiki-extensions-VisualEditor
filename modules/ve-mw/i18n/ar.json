@@ -14,9 +14,11 @@
 			"Meno25",
 			"Gagnabil",
 			"Abanima",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Bachounda"
 		]
 	},
+	"apihelp-visualeditor-description": "يرجع الأيش تي أم أل 5 لصفحة من الخدمة بارسويد (Parsoid ).",
 	"apihelp-visualeditoredit-param-summary": "ملخص التعديل",
 	"tooltip-ca-createsource": "إنشاء الكود المصدري لهذه الصفحة",
 	"tooltip-ca-editsource": "عدل الكود المصدري لهذه الصفحة",

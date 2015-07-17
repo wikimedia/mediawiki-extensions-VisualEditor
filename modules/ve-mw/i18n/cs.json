@@ -15,7 +15,8 @@
 			"Gloria sah",
 			"Vojtěch Dostál",
 			"Aktron",
-			"Cvanca"
+			"Cvanca",
+			"Kusavica"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
@@ -42,6 +43,7 @@
 	"apihelp-visualeditoredit-param-summary": "Shrnutí editace.",
 	"tooltip-ca-createsource": "Založit zdrojový kód této stránky",
 	"tooltip-ca-editsource": "Editovat zdrojový kód této stránky",
+	"tooltip-ca-edit": "Editovat tuto stránku pomocí wikitextu",
 	"tooltip-ca-ve-edit": "Editovat tuto stránku VisualEditorem",
 	"visualeditor-advancedsettings-tool": "Pokročilá nastavení",
 	"visualeditor-annotationbutton-linknode-tooltip": "Jednoduchý odkaz",

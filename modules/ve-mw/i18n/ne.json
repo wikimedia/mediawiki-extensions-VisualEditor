@@ -107,5 +107,7 @@
 	"visualeditor-toolbar-cite-label": "उर्ध्वभरण",
 	"visualeditor-toolbar-savedialog": "सङ्ग्रह गर्ने",
 	"visualeditor-version-label": "संस्करणहरू",
-	"visualeditor-viewpage-savewarning-keep": "सम्पादन जारी राख्ने"
+	"visualeditor-viewpage-savewarning-discard": "सम्पादन रद्द गर्नु",
+	"visualeditor-viewpage-savewarning-keep": "सम्पादन जारी राख्ने",
+	"visualeditor-viewpage-savewarning-title": "निश्चित हुनुहुन्छ ?"
 }

@@ -3,7 +3,8 @@
 		"authors": [
 			"Calak",
 			"Muhammed taha",
-			"Serwan"
+			"Serwan",
+			"Pirehelokan"
 		]
 	},
 	"tooltip-ca-createsource": "کۆدی سەرچاوەی ئەم پەڕەیە دروست بکە",
@@ -59,6 +60,7 @@
 	"visualeditor-meta-tool": "ھەڵبژاردەکان",
 	"visualeditor-parameter-input-placeholder": "ناوی پارامەتر",
 	"visualeditor-parameter-search-unknown": "پارامەتری نەناسراو",
+	"visualeditor-preference-core-label": "دەستکاریی دیداری",
 	"visualeditor-preference-enable": "ڕێگە بدە بە دەستکاریکەری دیداری کە بوونی ھەیە لە {{{{PLURAL:$2|بۆشایی ناوی|بۆشایی ناوەکانى}}:$1",
 	"visualeditor-savedialog-label-create": "پەڕە دروست بکە",
 	"visualeditor-savedialog-label-error": "ھەڵە",

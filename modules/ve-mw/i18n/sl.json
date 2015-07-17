@@ -15,7 +15,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Preprosta povezava",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor je v razvoju. Naletite lahko na težave s programjem in morda nekaterih delov strani ne boste mogli urejati. Da kadar koli preklopite nazaj v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-tool}}«.",
+	"visualeditor-beta-warning": "VisualEditor je v razvoju. Naletite lahko na težave s programjem in morda nekaterih delov strani ne boste mogli urejati. Da kadarkoli preklopite nazaj v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-tool}}«.",
 	"visualeditor-browserwarning": "Uporabljate brskalnik, ki ga VisualEditor uradno ne podpira.",
 	"visualeditor-ca-createlocaldescriptionsource": "Dodaj vir lokalnega opisa",
 	"visualeditor-ca-createsource": "Ustvari kodo",
