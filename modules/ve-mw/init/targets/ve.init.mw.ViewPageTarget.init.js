@@ -66,13 +66,7 @@
 
 	function setLoadingProgress( target, duration ) {
 		var $bar = init.$loading.find( '.ve-init-mw-viewPageTarget-progress-bar' ).stop();
-		$bar.css( {
-			'-webkit-transition': 'width ' + duration + 'ms ease-in',
-			'-moz-transition': 'width ' + duration + 'ms ease-in',
-			'-ms-transition': 'width ' + duration + 'ms ease-in',
-			'-o-transition': 'width ' + duration + 'ms ease-in',
-			transition: 'width ' + duration + 'ms ease-in'
-		} );
+		$bar.css( 'transition', 'width ' + duration + 'ms ease-in' );
 		setTimeout( function () {
 			$bar.css( 'width', target + '%' );
 		} );
