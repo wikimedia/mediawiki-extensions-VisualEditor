@@ -144,7 +144,9 @@
 							// Page does not exist, so let the user start with a blank document.
 							return $.Deferred().resolve( '' ).promise();
 						} else {
-							mw.log.warn( 'One of the load requests failed (unhandled).' );
+							window.alert( mw.msg( 'visualeditor-loaderror-message', 'HTTP ' + response.status ) );
+
+							mw.log.warn( 'RESTBase load failed: ' + response.statusText );
 						}
 					}
 				);

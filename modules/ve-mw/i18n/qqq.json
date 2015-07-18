@@ -253,6 +253,8 @@
 	"visualeditor-linkinspector-illegal-title": "Warning that the entered text is not a valid page title.",
 	"visualeditor-linknodeinspector-add-label": "Label of button that converts an auto-numbered, external, labelless link into a labeled external link",
 	"visualeditor-linknodeinspector-title": "Title of inspector for editing auto-numbered, external, labelless links.\n\nSee also:\n* {{msg-mw|Visualeditor-annotationbutton-linknode-tooltip}}",
+	"visualeditor-loaderror-message": "Text shown in a message box when the editor fails to load properly due to a RESTBase call failing.\n\nParameters:\n* $1 - an error message",
+	"visualeditor-loaderror-title": "Text shown as the title of a message box when the editor fails to load properly for some reason.",
 	"visualeditor-loadwarning": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server, in English. e.g. \"parsoidserver-http-err\"",
 	"visualeditor-loadwarning-token": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server.",
 	"visualeditor-mainnamespacepagelink": "Name of a page describing the main namespace (NS0) in this project.\n{{doc-important|Do not translate \"Project\"; it is automatically converted to the wiki's project namespace.}}",
