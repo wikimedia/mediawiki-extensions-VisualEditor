@@ -903,8 +903,8 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 	// Only check 'changed' status after the model has finished
 	// building itself
 	if ( !this.isSettingUpModel ) {
-		if ( this.captionSurface && this.captionSurface.getSurface() ) {
-			captionChanged = this.captionSurface.getSurface().getModel().hasBeenModified();
+		if ( this.captionTarget && this.captionTarget.getSurface() ) {
+			captionChanged = this.captionTarget.getSurface().getModel().hasBeenModified();
 		}
 
 		if (
@@ -998,7 +998,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			// HACK: OO.ui.Dialog needs an API for this
 			this.$content.removeClass( 'oo-ui-dialog-content-footless' );
 			// Focus the caption surface
-			this.captionSurface.focus();
+			this.captionTarget.focus();
 			break;
 		case 'search':
 			this.setSize( 'larger' );
@@ -1101,10 +1101,10 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	var captionDocument,
 		doc = this.getFragment().getDocument();
 
-	if ( this.captionSurface ) {
+	if ( this.captionTarget ) {
 		// Reset the caption surface if it already exists
-		this.captionSurface.destroy();
-		this.captionSurface = null;
+		this.captionTarget.destroy();
+		this.captionTarget = null;
 		this.captionNode = null;
 	}
 	// Get existing caption. We only do this in setup, because the caption
@@ -1144,8 +1144,8 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 
 	this.store = doc.getStore();
 
-	// Set up the caption surface
-	this.captionSurface = new ve.ui.MWSurfaceWidget(
+	// Set up the caption target
+	this.captionTarget = new ve.ui.MWTargetWidget(
 		captionDocument,
 		{
 			tools: ve.init.target.constructor.static.toolbarGroups,
@@ -1155,11 +1155,11 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	);
 
 	// Initialization
-	this.captionFieldset.$element.append( this.captionSurface.$element );
-	this.captionSurface.initialize();
+	this.captionFieldset.$element.append( this.captionTarget.$element );
+	this.captionTarget.initialize();
 
 	// Events
-	this.captionSurface.getSurface().getModel().connect( this, {
+	this.captionTarget.getSurface().getModel().connect( this, {
 		history: this.checkChanged.bind( this )
 	} );
 };
@@ -1175,7 +1175,7 @@ ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 				this.search.getQuery().focus().select();
 			} else {
 				// Focus the caption surface
-				this.captionSurface.focus();
+				this.captionTarget.focus();
 			}
 			// Revalidate size
 			this.sizeWidget.validateDimensions();
@@ -1195,8 +1195,8 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 				this.imageModel.disconnect( this );
 				this.sizeWidget.disconnect( this );
 			}
-			this.captionSurface.destroy();
-			this.captionSurface = null;
+			this.captionTarget.destroy();
+			this.captionTarget = null;
 			this.captionNode = null;
 			this.imageModel = null;
 		}, this );
@@ -1238,7 +1238,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 				// Update from the form
 				this.imageModel.setAltText( this.altTextInput.getValue() );
 				this.imageModel.setCaptionDocument(
-					this.captionSurface.getSurface().getModel().getDocument()
+					this.captionTarget.getSurface().getModel().getDocument()
 				);
 
 				// TODO: Simplify this condition

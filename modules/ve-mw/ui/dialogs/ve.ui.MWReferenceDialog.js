@@ -148,7 +148,7 @@ ve.ui.MWReferenceDialog.prototype.documentHasContent = function () {
  */
 ve.ui.MWReferenceDialog.prototype.canApply = function () {
 	return this.documentHasContent() &&
-		( this.referenceSurface.getSurface().getModel().hasBeenModified() ||
+		( this.referenceTarget.getSurface().getModel().hasBeenModified() ||
 		this.referenceGroupInput.input.getValue() !== this.originalGroup );
 };
 
@@ -199,7 +199,7 @@ ve.ui.MWReferenceDialog.prototype.getReadyProcess = function ( data ) {
 			if ( this.useExisting ) {
 				this.search.getQuery().focus().select();
 			} else {
-				this.referenceSurface.focus();
+				this.referenceTarget.focus();
 			}
 		}, this );
 };
@@ -238,12 +238,12 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	}
 
 	// Cleanup
-	if ( this.referenceSurface ) {
-		this.referenceSurface.destroy();
+	if ( this.referenceTarget ) {
+		this.referenceTarget.destroy();
 	}
 
 	// Properties
-	this.referenceSurface = new ve.ui.MWSurfaceWidget(
+	this.referenceTarget = new ve.ui.MWTargetWidget(
 		this.referenceModel.getDocument(),
 		{
 			tools: ve.copy( ve.init.mw.Target.static.toolbarGroups ),
@@ -254,15 +254,15 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	);
 
 	// Events
-	this.referenceSurface.getSurface().getModel().connect( this, {
+	this.referenceTarget.getSurface().getModel().connect( this, {
 		history: this.onSurfaceHistory.bind( this )
 	} );
 
 	// Initialization
 	this.originalGroup = this.referenceModel.getGroup();
 	this.referenceGroupInput.input.setValue( this.originalGroup );
-	this.contentFieldset.$element.append( this.referenceSurface.$element );
-	this.referenceSurface.initialize();
+	this.contentFieldset.$element.append( this.referenceTarget.$element );
+	this.referenceTarget.initialize();
 
 	group = this.getFragment().getDocument().getInternalList()
 		.getNodeGroup( this.referenceModel.getListGroup() );
@@ -419,8 +419,8 @@ ve.ui.MWReferenceDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWReferenceDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			this.search.getQuery().setValue( '' );
-			this.referenceSurface.destroy();
-			this.referenceSurface = null;
+			this.referenceTarget.destroy();
+			this.referenceTarget = null;
 			this.referenceModel = null;
 		}, this );
 };
