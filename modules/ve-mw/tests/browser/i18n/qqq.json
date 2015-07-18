@@ -5,5 +5,6 @@
 		]
 	},
 	"languagescreenshot-hello-world-text": "A text to show as content in VisualEditor.",
-	"languagescreenshot-world-text": "The word 'world' from {{msg-mw|languagescreenshot-hello-world-text}}."
+	"languagescreenshot-world-text": "The word 'world' from {{msg-mw|languagescreenshot-hello-world-text}}.",
+	"languagescreenshot-category-earth-text": "A text used in wikicode to add Category Earth to a article."
 }

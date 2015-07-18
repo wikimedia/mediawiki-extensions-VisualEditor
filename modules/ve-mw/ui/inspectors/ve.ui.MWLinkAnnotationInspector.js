@@ -51,8 +51,16 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.linkTypeSelect = new OO.ui.TabSelectWidget( {
 		classes: [ 've-ui-mwLinkAnnotationInspector-linkTypeSelect' ],
 		items: [
-			new OO.ui.TabOptionWidget( { data: 'internal', label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ) } ),
-			new OO.ui.TabOptionWidget( { data: 'external', label: ve.msg( 'visualeditor-linkinspector-button-link-external' ) } )
+			new OO.ui.TabOptionWidget( {
+				data: 'internal',
+				classes: [ 've-test-internal-link-tab' ],
+				label: ve.msg( 'visualeditor-linkinspector-button-link-internal' )
+			} ),
+			new OO.ui.TabOptionWidget( {
+				data: 'external',
+				classes: [ 've-test-external-link-tab' ],
+				label: ve.msg( 'visualeditor-linkinspector-button-link-external' )
+			} )
 		]
 	} );
 

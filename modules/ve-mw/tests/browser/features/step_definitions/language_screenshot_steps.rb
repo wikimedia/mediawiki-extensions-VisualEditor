@@ -58,6 +58,11 @@ Given(/^I go to the "(.*?)" page with source content "(.*?)" for language screen
   step "I go to the \"#{page}\" page with source content \"#{translate(content)}\""
 end
 
+Given(/^I am editing the language screenshots page with category "(.*?)"$/) do |category|
+  translate_text = "category #{category}"
+  step "I go to the \"Language Screenshot\" page with source content \"[[#{translate(translate_text)}]]\""
+end
+
 When(/^I click on the Insert menu$/) do
   on(VisualEditorPage).insert_indicator_down_element.when_present.click
 end
@@ -141,18 +146,57 @@ When(/^I click on References list in Insert menu$/) do
   on(VisualEditorPage).ve_references_element.when_present.click
 end
 
-Then(/^I should see category dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+When(/^I click the External link button in the panel$/) do
+  on(VisualEditorPage).external_link_element.when_present.click
+end
+
+When(/^I enter external link "(.*?)" into external link Content box$/) do |external_url|
+  on(VisualEditorPage).external_link_field_element.value = ''
+  on(VisualEditorPage).external_link_field_element.when_present.send_keys(external_url)
+end
+
+When(/^I click on search pages in panel$/) do
+  on(VisualEditorPage).search_page_link_element.when_present.click
+end
+
+When(/^I add Category "(.*?)" in category dialog box$/) do |category|
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
+  Screenshot.capture(
+    @browser,
+    "VisualEditor_category_editing-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    [@current_page.window_frame_element],
+    3
+  )
+  on(VisualEditorPage).add_category_element.when_present.send_keys(translate(category))
+end
+
+When(/^I click on first category$/) do
+  on(VisualEditorPage).category_first_element.when_present.click
+end
+
+Then(/^I should see delete button in category info box$/) do
+  expect(on(VisualEditorPage).category_remove_element.when_present).to be_visible
+  Screenshot.highlight(@current_page, @current_page.category_remove_element)
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.window_frame_element],
+    [@current_page.category_popup_element, @current_page.category_add_area_element],
+    3
+    )
+end
+
+Then(/^I should see category recommendation drop down$/) do
+  expect(on(VisualEditorPage).category_recommendation_element.when_present).to be_visible
+  Screenshot.capture(
+    @browser,
+    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    [@current_page.category_recommendation_element, @current_page.category_add_area_element],
     3
   )
 end
 
 Then(/^I should see Headings pull-down menu$/) do
-  on(VisualEditorPage).heading_dropdown_menus_element.when_present.should be_visible
+  expect(on(VisualEditorPage).heading_dropdown_menus_element.when_present).to be_visible
   step 'I take screenshot of Headings pull-down menu'
 end
 
@@ -166,7 +210,7 @@ Then(/^I take screenshot of Headings pull-down menu$/) do
 end
 
 Then(/^I should see Formatting pull-down menu$/) do
-  on(VisualEditorPage).formatting_option_menus_element.when_present.should be_visible
+  expect(on(VisualEditorPage).formatting_option_menus_element.when_present).to be_visible
   step 'I take screenshot of Formatting pull-down menu'
 end
 
@@ -181,7 +225,7 @@ Then(/^I take screenshot of Formatting pull-down menu$/) do
 end
 
 Then(/^I should see pull-down menu containing Page Settings$/) do
-  on(VisualEditorPage).page_settings_element.when_present.should be_visible
+  expect(on(VisualEditorPage).page_settings_element.when_present).to be_visible
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -191,7 +235,7 @@ Then(/^I should see pull-down menu containing Page Settings$/) do
 end
 
 Then(/^I should see Insert pull-down menu$/) do
-  on(VisualEditorPage).insert_pull_down_element.when_present.should be_visible
+  expect(on(VisualEditorPage).insert_pull_down_element.when_present).to be_visible
   step 'I take screenshot of insert pull-down menu'
 end
 
@@ -249,7 +293,7 @@ Then(/^I click on More in the pull-down menu$/) do
 end
 
 Then(/^I should see Special character Insertion window$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.zoom_browser(@browser, -2)
   Screenshot.capture(
@@ -260,7 +304,7 @@ Then(/^I should see Special character Insertion window$/) do
 end
 
 Then(/^I should see save changes dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
   Screenshot.zoom_browser(@browser, -2)
   Screenshot.capture(
     @browser,
@@ -271,7 +315,7 @@ Then(/^I should see save changes dialog box$/) do
 end
 
 Then(/^I should see Page settings dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
     @browser,
@@ -310,7 +354,7 @@ Then(/^I should see Page settings dialog box$/) do
 end
 
 Then(/^I should see list and indentation dropdown$/) do
-  on(VisualEditorPage).indentation_pull_down_element.when_present.should be_visible
+  expect(on(VisualEditorPage).indentation_pull_down_element.when_present).to be_visible
 
   Screenshot.capture(
     @browser,
@@ -321,17 +365,18 @@ Then(/^I should see list and indentation dropdown$/) do
 end
 
 Then(/^I should see link Content box with dropdown options$/) do
-  on(VisualEditorPage).link_list_element.when_present(5).should be_visible
+  expect(on(VisualEditorPage).link_list_element.when_present(5)).to be_visible
 
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
-    [@current_page.link_list_element, @current_page.window_frame_element, @current_page.new_link_element]
+    [@current_page.link_list_element, @current_page.window_frame_element, @current_page.new_link_element],
+    3
   )
 end
 
 Then(/^I should see link icon$/) do
-  on(VisualEditorPage).popup_icon_element.when_present(5).should be_visible
+  expect(on(VisualEditorPage).popup_icon_element.when_present(5)).to be_visible
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -340,7 +385,7 @@ Then(/^I should see link icon$/) do
 end
 
 Then(/^I should see media editing dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -349,7 +394,7 @@ Then(/^I should see media editing dialog box$/) do
 end
 
 Then(/^I should see media caption dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
     @browser,
@@ -365,7 +410,7 @@ Then(/^I should see media caption dialog box$/) do
 end
 
 Then(/^I should see media advanced settings dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
     @browser,
@@ -375,7 +420,7 @@ Then(/^I should see media advanced settings dialog box$/) do
 end
 
 Then(/^I should see media in VisualEditor$/) do
-  on(VisualEditorPage).media_image_element.when_present.should be_visible
+  expect(on(VisualEditorPage).media_image_element.when_present).to be_visible
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -384,7 +429,7 @@ Then(/^I should see media in VisualEditor$/) do
 end
 
 Then(/^I should see the Cite button$/) do
-  on(VisualEditorPage).cite_button_element.when_present.should be_visible
+  expect(on(VisualEditorPage).cite_button_element.when_present).to be_visible
   Screenshot.zoom_browser(@browser, 3)
   Screenshot.capture(
     @browser,
@@ -395,7 +440,7 @@ Then(/^I should see the Cite button$/) do
 end
 
 Then(/^I should see Reference icon$/) do
-  on(VisualEditorPage).popup_icon_element.when_present.should be_visible
+  expect(on(VisualEditorPage).popup_icon_element.when_present).to be_visible
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -404,7 +449,7 @@ Then(/^I should see Reference icon$/) do
 end
 
 Then(/^I should see Basic Reference dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
   Screenshot.capture(
     @browser,
     "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
@@ -413,13 +458,13 @@ Then(/^I should see Basic Reference dialog box$/) do
 end
 
 Then(/^I should see the Edit source tab at the top of the page$/) do
-  on(VisualEditorPage).edit_source_tab_element.when_present.should be_visible
+  expect(on(VisualEditorPage).edit_source_tab_element.when_present).to be_visible
 end
 
 Then(/^I should see the Edit tab at the top of the page$/) do
   on(VisualEditorPage) do |page|
     page.language_notification_element.when_not_present(10)
-    page.ve_edit_tab_element.when_present.should be_visible
+    expect(page.ve_edit_tab_element.when_present).to be_visible
   end
 
   Screenshot.capture(
@@ -432,7 +477,7 @@ end
 
 Then(/^I should see the VisualEditor tool-bar$/) do
   on(VisualEditorPage) do |page|
-    page.toolbar_element.when_present.should be_visible
+    expect(page.toolbar_element.when_present).to be_visible
     page.language_notification_element.when_not_present(10)
   end
 
@@ -445,8 +490,8 @@ end
 
 Then(/^I should see the formula insertion menu$/) do
   on(VisualEditorPage) do |page|
-    page.window_frame_element.when_present.should be_visible
-    page.formula_image_element.when_present(5).should be_visible
+    expect(page.window_frame_element.when_present).to be_visible
+    expect(page.formula_image_element.when_present(5)).to be_visible
   end
 
   Screenshot.capture(
@@ -459,8 +504,8 @@ end
 
 Then(/^I should see action buttons in the end of the VisualEditor toolbar$/) do
   on(VisualEditorPage) do |page|
-    page.toolbar_actions_element.when_present.should be_visible
-    page.save_enabled_element.when_present(10).should be_visible
+    expect(page.toolbar_actions_element.when_present).to be_visible
+    expect(page.save_enabled_element.when_present(10)).to be_visible
   end
 
   Screenshot.capture(
@@ -471,7 +516,7 @@ Then(/^I should see action buttons in the end of the VisualEditor toolbar$/) do
 end
 
 Then(/^I should see References list dialog box$/) do
-  on(VisualEditorPage).window_frame_element.when_present.should be_visible
+  expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
     @browser,
