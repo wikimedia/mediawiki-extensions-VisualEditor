@@ -235,6 +235,8 @@
 	"visualeditor-linkinspector-illegal-title": "Ungültiger Seitentitel",
 	"visualeditor-linknodeinspector-add-label": "Beschriftung hinzufügen",
 	"visualeditor-linknodeinspector-title": "Einfacher Link",
+	"visualeditor-loaderror-message": "Fehler beim Laden der Daten vom Server: $1.",
+	"visualeditor-loaderror-title": "Der Editor konnte nicht geladen werden",
 	"visualeditor-loadwarning": "Fehler beim Laden der Daten vom Server: $1. Soll der Vorgang erneut durchgeführt werden?",
 	"visualeditor-loadwarning-token": "Fehler beim Laden des Bearbeitungstokens vom Server: $1. Willst du es erneut versuchen?",
 	"visualeditor-mainnamespacepagelink": "Project:Artikelnamensraum",

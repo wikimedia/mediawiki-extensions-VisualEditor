@@ -16,7 +16,8 @@
 			"Unapersona",
 			"Macofe",
 			"Toniher",
-			"Maceleiro"
+			"Maceleiro",
+			"F3RaN"
 		]
 	},
 	"apihelp-visualeditor-description": "Torna a HTML5 per a una pàgina des del servei Parsoid.",
@@ -216,6 +217,8 @@
 	"visualeditor-linkinspector-illegal-title": "Títol de pàgina invàlid",
 	"visualeditor-linknodeinspector-add-label": "Afegeix una etiqueta",
 	"visualeditor-linknodeinspector-title": "Enllaç senzill",
+	"visualeditor-loaderror-message": "Error de càrrega de dades del servidor: $1",
+	"visualeditor-loaderror-title": "L'editor no s'ha pogut carregar",
 	"visualeditor-loadwarning": "Error en carregar dades des del servidor: $1. Voleu tornar-ho a provar?",
 	"visualeditor-loadwarning-token": "Error en carregar el token d'edició des del servidor: $1. Voleu tornar-ho a provar?",
 	"visualeditor-mainnamespacepagelink": "Project:Espai principal",
