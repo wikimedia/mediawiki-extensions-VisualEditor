@@ -91,6 +91,8 @@ ve.ui.MWMediaDialog.static.actions = [
 
 ve.ui.MWMediaDialog.static.modelClasses = [ ve.dm.MWBlockImageNode, ve.dm.MWInlineImageNode ];
 
+ve.ui.MWMediaDialog.static.includeCommands = null;
+
 ve.ui.MWMediaDialog.static.excludeCommands = [
 	// No formatting
 	'paragraph',
@@ -1149,6 +1151,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		captionDocument,
 		{
 			tools: ve.init.target.constructor.static.toolbarGroups,
+			includeCommands: this.constructor.static.includeCommands,
 			excludeCommands: this.constructor.static.excludeCommands,
 			importRules: this.constructor.static.getImportRules()
 		}

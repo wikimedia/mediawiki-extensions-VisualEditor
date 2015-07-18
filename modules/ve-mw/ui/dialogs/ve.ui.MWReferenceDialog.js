@@ -69,6 +69,8 @@ ve.ui.MWReferenceDialog.static.actions = [
 
 ve.ui.MWReferenceDialog.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
+ve.ui.MWReferenceDialog.static.includeCommands = null;
+
 ve.ui.MWReferenceDialog.static.excludeCommands = [
 	// No formatting
 	'paragraph',
@@ -247,6 +249,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 		this.referenceModel.getDocument(),
 		{
 			tools: ve.copy( ve.init.mw.Target.static.toolbarGroups ),
+			includeCommands: this.constructor.static.includeCommands,
 			excludeCommands: this.constructor.static.excludeCommands,
 			importRules: this.constructor.static.getImportRules(),
 			inDialog: this.constructor.static.name

@@ -56,8 +56,6 @@ ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	}
 ];
 
-ve.init.mw.MobileViewTarget.static.excludeCommands = [];
-
 ve.init.mw.MobileViewTarget.static.name = 'mobile';
 
 /* Methods */
