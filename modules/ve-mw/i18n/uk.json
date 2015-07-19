@@ -241,6 +241,8 @@
 	"visualeditor-linkinspector-illegal-title": "Невірний заголовок сторінки",
 	"visualeditor-linknodeinspector-add-label": "Додати підпис",
 	"visualeditor-linknodeinspector-title": "Просте посилання",
+	"visualeditor-loaderror-message": "Помилка при завантаженні даних із сервера: $1.",
+	"visualeditor-loaderror-title": "Редактор не зміг завантажитись",
 	"visualeditor-loadwarning": "Помилка при завантаженні даних із сервера: $1. Спробувати знову?",
 	"visualeditor-loadwarning-token": "Помилка при завантаженні маркера редагування із сервера: $1. Спробувати знову?",
 	"visualeditor-mainnamespacepagelink": "Project:Основний простір назв",

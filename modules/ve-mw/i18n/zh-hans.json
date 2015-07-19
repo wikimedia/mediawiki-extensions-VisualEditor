@@ -247,6 +247,8 @@
 	"visualeditor-linkinspector-illegal-title": "无效的页面标题",
 	"visualeditor-linknodeinspector-add-label": "添加标签",
 	"visualeditor-linknodeinspector-title": "简单链接",
+	"visualeditor-loaderror-message": "从服务器加载数据时出错：$1。",
+	"visualeditor-loaderror-title": "编辑器无法加载",
 	"visualeditor-loadwarning": "从服务器加载数据时出错：$1。想要重试吗？",
 	"visualeditor-loadwarning-token": "从服务器加载编辑密钥时出错：$1。想要重试吗？",
 	"visualeditor-mainnamespacepagelink": "Project:主名字空间",

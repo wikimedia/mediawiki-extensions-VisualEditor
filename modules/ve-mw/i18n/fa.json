@@ -18,11 +18,12 @@
 			"Alirezaaa",
 			"Movyn",
 			"Leyth",
-			"MRG90"
+			"MRG90",
+			"الناز"
 		]
 	},
-	"apihelp-visualeditor-description": "بازگرداندن HTML5 برای یک صفحه از سرور پارسوید.",
-	"apihelp-visualeditor-param-basetimestamp": "در زمان ذخیره‌کردن، این را برای زمان نسخهٔ ویرایش تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
+	"apihelp-visualeditor-description": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
+	"apihelp-visualeditor-param-basetimestamp": "هنگام ذخیره کردن، زمان نسخهٔ ویرایش شده را برای این مورد تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditor-param-cachekey": "برای پیوند تفاوت، از نتیجه درخواست تفاوت پیشین به کمک این کلید استفاده کنید. بازنویسی $1html.",
 	"apihelp-visualeditor-param-html": "HTML برای ارسال به پارسوید برای تبدیل به متن ویکی.",
 	"apihelp-visualeditor-param-oldid": "تعداد نسخه‌ها برای استفاده (آخرین نسخه به عنوان پیش‌فرض)",
@@ -244,6 +245,8 @@
 	"visualeditor-linkinspector-illegal-title": "عنوان صفحهٔ نامعتبر",
 	"visualeditor-linknodeinspector-add-label": "افزودن برچسب",
 	"visualeditor-linknodeinspector-title": "پیوند ساده",
+	"visualeditor-loaderror-message": "خطا هنگام بارکردن داده از کارگزار: $1",
+	"visualeditor-loaderror-title": "ویرایشگر بار نشد",
 	"visualeditor-loadwarning": "خطای بارگیری داده‌ها از کارساز:  $1. دوباره تلاش می‌کنید؟",
 	"visualeditor-loadwarning-token": "خطای بارگیری بهامهر ویرایش از کارساز:  $1. دوباره تلاش می‌کنید؟",
 	"visualeditor-mainnamespacepagelink": "Project:فضای نام اصلی",

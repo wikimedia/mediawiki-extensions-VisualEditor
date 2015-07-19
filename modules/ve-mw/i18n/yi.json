@@ -10,6 +10,7 @@
 	"apihelp-visualeditor-param-oldid": "די ווערסיע־נומער צו ניצן (גרונטלעך די לעצטע ווערסיע).",
 	"apihelp-visualeditor-param-paction": "פעולה אויסצופירן.",
 	"apihelp-visualeditor-param-page": "דעם בלאט אויף וואס מ׳זאל אויספירן פעולות.",
+	"apihelp-visualeditoredit-description": "אויפהיטן א HTML5-בלאט ביי מעדיעוויקי (קאנווערטירט אויף וויקיטעקסט דורך דער Parsoid-דינסט).",
 	"apihelp-visualeditoredit-param-minor": "פאן פאר מינערדיקער רעדאקטירונג.",
 	"apihelp-visualeditoredit-param-page": "דעם בלאט אויף וואס מ׳זאל אויספירן פעולות.",
 	"apihelp-visualeditoredit-param-summary": "רעדאקטירונג רעזומע.",

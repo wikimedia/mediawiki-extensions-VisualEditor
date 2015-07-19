@@ -269,6 +269,8 @@
 	"visualeditor-linkinspector-illegal-title": "Titre de page non valide",
 	"visualeditor-linknodeinspector-add-label": "Ajouter un libellé",
 	"visualeditor-linknodeinspector-title": "Lien simple",
+	"visualeditor-loaderror-message": "Erreur lors du chargement des données depuis le serveur : $1.",
+	"visualeditor-loaderror-title": "L'éditeur n'a pas pu charger",
 	"visualeditor-loadwarning": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-loadwarning-token": "Erreur lors du chargement du jeton d'édition du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-mainnamespacepagelink": "Project:Espace de noms principal",

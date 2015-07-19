@@ -11,7 +11,8 @@
 			"Los688",
 			"SkyDaisy9",
 			"Sujiniku",
-			"2nd-player"
+			"2nd-player",
+			"Jdforrester"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -234,6 +235,8 @@
 	"visualeditor-linkinspector-illegal-title": "無効なページ名",
 	"visualeditor-linknodeinspector-add-label": "ラベルを追加",
 	"visualeditor-linknodeinspector-title": "単純なリンク",
+	"visualeditor-loaderror-message": "サーバーからデータを読み込む際にエラーが発生しました: $1",
+	"visualeditor-loaderror-title": "エディタが読み込めませんでした",
 	"visualeditor-loadwarning": "サーバーからデータを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-loadwarning-token": "サーバーから編集トークンを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-mainnamespacepagelink": "Project:標準名前空間",

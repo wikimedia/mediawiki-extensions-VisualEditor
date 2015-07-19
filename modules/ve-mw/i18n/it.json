@@ -21,7 +21,8 @@
 			"Martinligabue",
 			"Macofe",
 			"Mpiva",
-			"Stefania.scaramuzzi"
+			"Stefania.scaramuzzi",
+			"Jdforrester"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -244,6 +245,8 @@
 	"visualeditor-linkinspector-illegal-title": "Titolo di pagina non valido",
 	"visualeditor-linknodeinspector-add-label": "Aggiungi etichetta",
 	"visualeditor-linknodeinspector-title": "Collegamento semplice",
+	"visualeditor-loaderror-message": "Errore durante il caricamento dei dati dal server: $1.",
+	"visualeditor-loaderror-title": "L'editor non è riuscito a caricare",
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
 	"visualeditor-loadwarning-token": "Errore durante il caricamento del token di modifica dal server: $1. Riprovare?",
 	"visualeditor-mainnamespacepagelink": "Project:Namespace principale",

@@ -240,6 +240,8 @@
 	"visualeditor-linkinspector-illegal-title": "Ogiltig sidtitel",
 	"visualeditor-linknodeinspector-add-label": "Lägg till etikett",
 	"visualeditor-linknodeinspector-title": "Enkel länk",
+	"visualeditor-loaderror-message": "Fel vid inläsning av data från servern: $1.",
+	"visualeditor-loaderror-title": "Redigeraren kunde inte starta",
 	"visualeditor-loadwarning": "Fel uppstod vid inläsning av data från server: $1. Vill du försöka igen?",
 	"visualeditor-loadwarning-token": "Fel uppstod vid laddning av redigeringsnyckel från server: $1. Vill du försöka igen?",
 	"visualeditor-mainnamespacepagelink": "Project:Huvudnamnrymden",

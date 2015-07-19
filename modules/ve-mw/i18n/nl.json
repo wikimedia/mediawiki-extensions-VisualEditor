@@ -28,7 +28,8 @@
 			"TheDJ",
 			"JensRiskin",
 			"MedShot",
-			"Esketti"
+			"Esketti",
+			"FabianRM"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -153,7 +154,7 @@
 	"visualeditor-dialog-meta-languages-section": "Talen",
 	"visualeditor-dialog-meta-settings-displaytitle": "Weergavetitel",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "Weergavetitel inschakelen",
-	"visualeditor-dialog-meta-settings-displaytitle-help": "U kunt de weergegeven paginanaam aanpassen door het instellen van een ander weergavelabel.",
+	"visualeditor-dialog-meta-settings-displaytitle-help": "U kunt de weergegeven paginanaam aanpassen door een ander weergavelabel in te stellen.",
 	"visualeditor-dialog-meta-settings-hiddencat-help": "U kunt voorkomen dat deze categorie wordt weergegeven in de lijst met categorieën voor de pagina. Dit is handig voor de categorieën die van belang zijn voor de redactie, maar niet de meeste lezers, zoals pagina's die een illustratie nodig hebben.",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Verborgen categorie",
 	"visualeditor-dialog-meta-settings-index-default": "Standaard",
@@ -253,6 +254,8 @@
 	"visualeditor-linkinspector-illegal-title": "Ongeldige paginanaam",
 	"visualeditor-linknodeinspector-add-label": "Label toevoegen",
 	"visualeditor-linknodeinspector-title": "Eenvoudige koppeling",
+	"visualeditor-loaderror-message": "Er is een fout opgetreden tijdens het laden: $1.",
+	"visualeditor-loaderror-title": "De editor kon niet worden geladen",
 	"visualeditor-loadwarning": "Fout tijdens het laden van gegevens van de server: $1. Wilt u het opnieuw proberen?",
 	"visualeditor-loadwarning-token": "Fout tijdens het laden van een token van server: $1. Wilt u het opnieuw proberen?",
 	"visualeditor-mainnamespacepagelink": "Project:Hoofdnaamruimte",
