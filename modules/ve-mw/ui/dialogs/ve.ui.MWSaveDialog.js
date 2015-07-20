@@ -358,13 +358,23 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$editSummaryLabel = $( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )
 		.html( ve.init.platform.getParsedMessage( 'summary' ) )
 		.find( 'a' ).attr( 'target', '_blank' ).end();
-	this.editSummaryInput = new OO.ui.TextInputWidget(
-		{ multiline: true, placeholder: ve.msg( 'visualeditor-editsummary' ) }
-	);
-	this.editSummaryInput.$element.addClass( 've-ui-mwSaveDialog-summary' );
-	this.editSummaryInput.$input
-		.byteLimit( this.editSummaryByteLimit )
-		.prop( 'tabIndex', 0 );
+	this.editSummaryInput = new OO.ui.TextInputWidget( {
+		multiline: true,
+		placeholder: ve.msg( 'visualeditor-editsummary' ),
+		classes: [ 've-ui-mwSaveDialog-summary' ],
+		inputFilter: function ( value ) {
+			// Prevent the user from inputting newlines (this kicks in on paste, etc.)
+			return value.replace( /\r?\n/g, ' ' );
+		}
+	} );
+	// Prevent the user from inputting newlines from keyboard
+	this.editSummaryInput.$input.on( 'keypress', function ( e ) {
+		if ( e.which === OO.ui.Keys.ENTER ) {
+			e.preventDefault();
+		}
+	} );
+	// Limit byte length, and display the remaining bytes
+	this.editSummaryInput.$input.byteLimit( this.editSummaryByteLimit );
 	this.editSummaryInput.on( 'change', function () {
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers
 		// Users likely assume characters but then it seems to count down quicker
