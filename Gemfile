@@ -6,4 +6,4 @@ source 'https://rubygems.org'
 gem 'commons_upload', '~> 0.0.4'
 gem 'mediawiki_selenium', '~> 1.5.0'
 gem 'rubocop', require: false
-gem 'screenshot', '~> 0.0.6'
+gem 'screenshot', '~> 0.0.7'
