@@ -10,7 +10,8 @@
 			"Fisterraeomar",
 			"Agremon",
 			"Vivaelcelta",
-			"Banjo"
+			"Banjo",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Devolve o código HTML5 para unha páxina do servizo Parsoid.",
@@ -236,6 +237,7 @@
 	"visualeditor-linkinspector-illegal-title": "Título de páxina incorrecto",
 	"visualeditor-linknodeinspector-add-label": "Engadir unha etiqueta",
 	"visualeditor-linknodeinspector-title": "Ligazón simple",
+	"visualeditor-loaderror-message": "Erro ao cargar os datos desde o servidor: $1.",
 	"visualeditor-loadwarning": "Erro ao cargar os datos desde o servidor: $1. Quéreo intentar de novo?",
 	"visualeditor-loadwarning-token": "Erro ao cargar o pase de edición desde o servidor: $1. Quéreo intentar de novo?",
 	"visualeditor-mainnamespacepagelink": "Project:Espazo de nomes principal",

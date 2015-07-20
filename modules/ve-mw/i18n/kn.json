@@ -6,7 +6,8 @@
 			"Nayvik",
 			"Omshivaprakash",
 			"Yogesh",
-			"Shushruth"
+			"Shushruth",
+			"Ananth subray"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid ಸೇವೆಯಿಂದ ಪುಟವೊಂದಕ್ಕೆ HTML5 ಹಿಂದಿರುಗಿಸುತ್ತದೆ.",
@@ -15,7 +16,7 @@
 	"tooltip-ca-createsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸೃಷ್ಟಿಸಿ",
 	"tooltip-ca-editsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸಂಪಾದಿಸಿ",
 	"tooltip-ca-edit": "ಈ ಪುಟವನ್ನು ನೀವು ಸಂಪಾದಿಸಬಹುದು. ಉಳಿಸುವ ಮುನ್ನ ಮುನ್ನೋಟವನ್ನು ಉಪಯೋಗಿಸಿ.",
-	"tooltip-ca-ve-edit": "ಈ ಪುಟವನ್ನು ದೃಶ್ಯ ಸಂಪಾದಕದಿಂದ ಸಂಪಾದಿಸಿ",
+	"tooltip-ca-ve-edit": "ಈ ಪುಟವನ್ನು ಬದಲಾಯಿಸಿ",
 	"visualeditor-advancedsettings-tool": "ಸುಧಾರಿತ ಸಂಯೋಜನೆಗಳು",
 	"visualeditor-annotationbutton-linknode-tooltip": "ಸರಳ ಕೊಂಡಿ",
 	"visualeditor-beta-appendix": "ಬೀಟಾ",
@@ -168,6 +169,8 @@
 	"visualeditor-linkinspector-button-link-internal": "ಪುಟಗಳನ್ನು ಹುಡುಕಿ",
 	"visualeditor-linkinspector-illegal-title": "ಪುಟದ ಶೀರ್ಷಿಕ ಪಡೆಯಲಿಲ",
 	"visualeditor-linknodeinspector-title": "ಸರಳದ ಸಂಪರ್ಕ",
+	"visualeditor-loaderror-message": "ಪರಿಚಾರಕದಿಂದ ಡೇಟಾ ಬರುವಾಗ ದೋಷವುಂಟಾಗಿದೆ: $1",
+	"visualeditor-loaderror-title": "ಸಂಪಾದಕ ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ",
 	"visualeditor-loadwarning": "ಸರ್ವರ್‌ನಿಂದ ಡೇಟಾ ಬರುವಾಗ ದೋಷವುಂಟಾಗಿದೆ: $1. ಮತೆ ಪ್ರಯತ್ನಿಸಬೇಕೆ?",
 	"visualeditor-loadwarning-token": "ಪರಿಚಾರಕದ೦ದ ಸಂಪಾದಿಸುವ ಟೋಕ್ನ್ ಬರುವಾಗ ಎನೊ ತಪ್ಪುವಾಗಿದೆ: $1.ಮತೆ ಪ್ರಯತನಾ ಮಾಡಿ?",
 	"visualeditor-media-input-placeholder": "ಮಾಧ್ಯಮಗಳನ್ನು ಹುಡುಕಿ",
@@ -184,7 +187,7 @@
 	"visualeditor-parameter-search-more": "ತೋರಿಸು {{PLURAL:$1|೧ ಹೆಚ್ಚು ಕ್ಷೇತ್ರ|$1 ಹೆಚ್ಚು ಕ್ಷೇತ್ರ}}",
 	"visualeditor-parameter-search-no-unused": "ಯಾವುದು ಬಳಸದ ಕ್ಷೇತ್ರ ಈಲಾ",
 	"visualeditor-parameter-search-unknown": "ಅಜ್ಞಾತದ ಕ್ಷೇತ್ರ",
-	"visualeditor-preference-core-label": "ದೃಶ್ಯ ಸಂಪಾದಕ",
+	"visualeditor-preference-core-label": "ದೃಶ್ಯ ಸಂಪಾದನೆ",
 	"visualeditor-savedialog-label-create": "ಪುಟವನ್ನು ಸೃಷ್ಟಿಸು",
 	"visualeditor-savedialog-label-error": "ದೋಷ",
 	"visualeditor-savedialog-label-report": "ಸಮಸ್ಯೆಯ ವರದಿಮಾಡಿ",

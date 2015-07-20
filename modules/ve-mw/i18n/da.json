@@ -9,7 +9,8 @@
 			"Simeondahl",
 			"Tehnix",
 			"Sarrus",
-			"McDutchie"
+			"McDutchie",
+			"Macofe"
 		]
 	},
 	"tooltip-ca-createsource": "Opret kildekoden til denne side",
@@ -29,6 +30,9 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Kategorier",
+	"visualeditor-cite-tool-name-book": "Bog",
+	"visualeditor-cite-tool-name-news": "Nyheder",
+	"visualeditor-cite-tool-name-web": "Hjemmeside",
 	"visualeditor-desc": "Visual editor for MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-beta-welcome-action-continue": "Fortsæt",
@@ -36,6 +40,9 @@
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Velkommen}} til VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Alternativ tekst",
 	"visualeditor-dialog-media-content-section": "Billedtekst",
+	"visualeditor-dialog-media-info-licenseshortname": "Licens",
+	"visualeditor-dialog-media-info-moreinfo": "Flere oplysninger",
+	"visualeditor-dialog-media-info-readmore": "Læs mere",
 	"visualeditor-dialog-media-page-advanced": "Avancerede indstillinger",
 	"visualeditor-dialog-media-page-general": "Generelle indstillinger",
 	"visualeditor-dialog-media-position-center": "Centreret",
@@ -147,8 +154,6 @@
 	"visualeditor-preference-core-description": "Aktiver VisualEditor. Den vil ikke være aktiv for diskussionssider og for nogle andre navnerum.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Aktiver VisualEditor. Den vil ikke være aktiv for diskussionssider og for nogle andre navnerum.",
-	"visualeditor-preference-mwalienextension-description": "Tilføj eksperimentel grundlæggende støtte til VisualEditor til redigering udvidelsestags (som gallerier, eller kildekode blokke), forud for de enkelte værktøjer er til rådighed. Husk altid at gennemgå dine ændringer, før der gemmes når du bruger eksperimentelle funktioner.",
-	"visualeditor-preference-mwalienextension-label": "VisualEditor redigering af udvidelsestags",
 	"visualeditor-reference-input-placeholder": "Hvad vil du henvise til?",
 	"visualeditor-referenceslist-isempty": "Der er ingen referencer med gruppen \"$1\" på denne side, som kan medtages i denne liste.",
 	"visualeditor-referenceslist-isempty-default": "Der er ingen referencer på denne side som kan medtages i denne liste.",

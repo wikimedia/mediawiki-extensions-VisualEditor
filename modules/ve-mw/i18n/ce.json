@@ -176,7 +176,7 @@
 	"visualeditor-parameter-search-no-unused": "Лелош йоцу параметраш яц",
 	"visualeditor-parameter-search-unknown": "Йоьвзуш йоцу параметр",
 	"visualeditor-preference-betatempdisable": "Цкъачунна дӀаяйа БӀаьран тадар, и дика таялца",
-	"visualeditor-preference-core-description": "Латае БӀаьран тадар. И лело йиш хира ю дийцаре агӀонашкахь а кхин цӀерийн анашкахь а.",
+	"visualeditor-preference-core-description": "Латае БӀаьран тадар. И лело йиш хира ю дийцаре агӀонашкахь а, кхин цӀерийн анашкахь а.",
 	"visualeditor-preference-core-label": "БӀаьран тадар",
 	"visualeditor-preference-enable": "Латае БӀаьран тадар. И лело йиш хира ю цӀерийн {{PLURAL:$2|анахь|анашкахь}}: $1",
 	"visualeditor-reference-input-placeholder": "Муьлхачунна тӀетовжа лаьа хьуна?",

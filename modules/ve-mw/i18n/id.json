@@ -15,7 +15,8 @@
 			"Pizza1016",
 			"Ahdan",
 			"Marwan Mohamad",
-			"Amire80"
+			"Amire80",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Mengembalikan HTML5 untuk halaman yang berasal dari layanan parsoid.",
@@ -238,6 +239,7 @@
 	"visualeditor-linkinspector-illegal-title": "Judul halaman tidak sah",
 	"visualeditor-linknodeinspector-add-label": "Tambah label",
 	"visualeditor-linknodeinspector-title": "Pranala sederhana",
+	"visualeditor-loaderror-message": "Galat memuat data dari peladen: $1.",
 	"visualeditor-loadwarning": "Galat memuat data dari peladen: $1. Apakah Anda ingin mencoba lagi?",
 	"visualeditor-loadwarning-token": "Galat memuat token suntingan dari peladen: $1. Apakah Anda ingin mencoba lagi?",
 	"visualeditor-mainnamespacepagelink": "Project:Ruang nama utama",

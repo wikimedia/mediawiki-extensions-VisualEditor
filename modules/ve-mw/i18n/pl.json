@@ -237,6 +237,8 @@
 	"visualeditor-linkinspector-illegal-title": "Nieprawidłowy tytuł strony",
 	"visualeditor-linknodeinspector-add-label": "Dodaj etykietę",
 	"visualeditor-linknodeinspector-title": "Prosty link",
+	"visualeditor-loaderror-message": "Błąd podczas pobierania danych z serwera: $1.",
+	"visualeditor-loaderror-title": "Edytor nie może zostać uruchomiony",
 	"visualeditor-loadwarning": "Błąd podczas ładowania danych z serwera: $1. Ponowić próbę?",
 	"visualeditor-loadwarning-token": "Błąd podczas pobierania tokenu z serwera: $1. Ponowić próbę?",
 	"visualeditor-mainnamespacepagelink": "Project:Przestrzeń główna",

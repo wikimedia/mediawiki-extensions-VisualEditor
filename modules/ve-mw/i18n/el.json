@@ -11,7 +11,8 @@
 			"Tifa93",
 			"Elitre",
 			"Protnet",
-			"Stam.nikos"
+			"Stam.nikos",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Επιστρέφει HTML5 για μια σελίδα από την υπηρεσία Parsoid.",
@@ -230,6 +231,7 @@
 	"visualeditor-linkinspector-illegal-title": "Μη έγκυρος τίτλος σελίδας",
 	"visualeditor-linknodeinspector-add-label": "Προσθήκη ετικέτας",
 	"visualeditor-linknodeinspector-title": "Απλός σύνδεσμος",
+	"visualeditor-loaderror-message": "Σφάλμα κατά τη φόρτωση δεδομένων από τον διακομιστή: $1.",
 	"visualeditor-loadwarning": "Σφάλμα κατά τη φόρτωση των δεδομένων από τον διακομιστή: $1. Θέλετε να προσπαθήσετε πάλι;",
 	"visualeditor-loadwarning-token": "Σφάλμα κατά τη φόρτωση των δεδομένων από το διακομιστή: $1. Θέλετε να προσπαθήσετε πάλι;",
 	"visualeditor-mainnamespacepagelink": "Project:Κύριος ονοματοχώρος",

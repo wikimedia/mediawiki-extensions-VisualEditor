@@ -5,7 +5,8 @@
 			"Unai Fdz. de Betoño",
 			"Xabier Armendaritz",
 			"Subi",
-			"Sator"
+			"Sator",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 orri baterako itzultzen du Parsoid zerbitzutik.",
@@ -218,6 +219,7 @@
 	"visualeditor-linkinspector-illegal-title": "Orri izenburu hori ez da baliozkoa",
 	"visualeditor-linknodeinspector-add-label": "Etiketa gehitu",
 	"visualeditor-linknodeinspector-title": "Lotura arrunta",
+	"visualeditor-loaderror-message": "Errorea zerbitzaritik datuak kargatzean: $1.",
 	"visualeditor-loadwarning": "Errorea, zerbitzaritik datuak kargatzean: $1. Berriz saiatu nahi duzu?",
 	"visualeditor-loadwarning-token": "Errorea, zerbitzaritik edizio agiria kargatzean: $1. Berriz saiatu nahi duzu?",
 	"visualeditor-mainnamespacepagelink": "Project:Eremu nagusia",

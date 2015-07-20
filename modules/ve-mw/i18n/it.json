@@ -246,7 +246,7 @@
 	"visualeditor-linknodeinspector-add-label": "Aggiungi etichetta",
 	"visualeditor-linknodeinspector-title": "Collegamento semplice",
 	"visualeditor-loaderror-message": "Errore durante il caricamento dei dati dal server: $1.",
-	"visualeditor-loaderror-title": "L'editor non è riuscito a caricare",
+	"visualeditor-loaderror-title": "L'editor non è riuscito a caricarsi",
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
 	"visualeditor-loadwarning-token": "Errore durante il caricamento del token di modifica dal server: $1. Riprovare?",
 	"visualeditor-mainnamespacepagelink": "Project:Namespace principale",

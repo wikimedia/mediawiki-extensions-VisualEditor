@@ -16,7 +16,8 @@
 			"VezonThunder",
 			"Elseweyr",
 			"McSalama",
-			"Alluk."
+			"Alluk.",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Hakee sivun HTML5-lähdekoodin Parsoid-palvelusta.",
@@ -220,6 +221,7 @@
 	"visualeditor-linkinspector-illegal-title": "Virheellinen sivun otsikko",
 	"visualeditor-linknodeinspector-add-label": "Lisää selite",
 	"visualeditor-linknodeinspector-title": "Yksinkertainen linkki",
+	"visualeditor-loaderror-message": "Virhe ladattaessa tietoja palvelimelta: $1.",
 	"visualeditor-loadwarning": "Virhe ladattaessa tietoja palvelimelta: $1. Haluatko yrittää uudelleen?",
 	"visualeditor-loadwarning-token": "Virhe ladattaessa tietoja palvelimelta: $1. Haluatko yrittää uudelleen?",
 	"visualeditor-mainnamespacepagelink": "Project:Päänimiavaruus",

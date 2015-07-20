@@ -7,7 +7,8 @@
 			"ViDam",
 			"Tacsipacsi",
 			"Csega",
-			"Kishajnalka"
+			"Kishajnalka",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "A Parsoid szolgáltatástól kapott oldalból HTML5 oldalt készít.",
@@ -230,6 +231,7 @@
 	"visualeditor-linkinspector-illegal-title": "Érvénytelen lapcím",
 	"visualeditor-linknodeinspector-add-label": "Címke hozzáadása",
 	"visualeditor-linknodeinspector-title": "Egyszerű link",
+	"visualeditor-loaderror-message": "Hiba a kiszolgálóról való letöltés közben: $1",
 	"visualeditor-loadwarning": "Hiba a kiszolgálóról való letöltés közben: $1. Megpróbálod újra?",
 	"visualeditor-loadwarning-token": "Hiba a kiszolgálóról való szerkesztőtoken-letöltés közben: $1. Megpróbálod újra?",
 	"visualeditor-mainnamespacepagelink": "Project:Fő névtér",

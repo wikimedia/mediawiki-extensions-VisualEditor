@@ -15,6 +15,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Праверыць]]",
 	"tag-visualeditor-needcheck-description": "Праўка была зроблена [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуальным рэдактарам]], і сыстэма заўважыла патэнцыйна непажаданыя зьмены ў вікітэксьце.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальны рэдактар: пераключана]]",
+	"tag-visualeditor-switched-description": "Удзельнік пачаў рэдагаваць з дапамогай візуальнага рэдактару, а потым пераключыўся на рэдактар вікітэксту.",
 	"visualeditor-feedback-link": "Project:Візуальны рэдактар/Водгукі",
 	"visualeditor-feedback-tool": "Пакінуць водгук пра гэтае праграмнае забесьпячэньне",
 	"visualeditor-help-label": "Прачытайце дапаможнік",

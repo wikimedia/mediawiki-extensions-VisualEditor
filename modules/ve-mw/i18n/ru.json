@@ -27,6 +27,8 @@
 			"Дмитрий"
 		]
 	},
+	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
+	"apihelp-visualeditor-param-html": "HTML для отправки в Parsoid, чтобы конвертировать в вики-текст.",
 	"apihelp-visualeditor-param-paction": "Действие, которое необходимо выполнить.",
 	"apihelp-visualeditor-param-page": "Страница, на которой необходимо выполнить действие.",
 	"apihelp-visualeditoredit-param-minor": "Флаг для малой правки.",
@@ -223,6 +225,8 @@
 	"visualeditor-linkinspector-illegal-title": "Недопустимый заголовок страницы",
 	"visualeditor-linknodeinspector-add-label": "Добавить подпись",
 	"visualeditor-linknodeinspector-title": "Простая ссылка",
+	"visualeditor-loaderror-message": "Ошибка при загрузке данных с сервера: $1",
+	"visualeditor-loaderror-title": "Редактор не может загрузиться",
 	"visualeditor-loadwarning": "Ошибка при загрузке данных: $1. Попробовать снова?",
 	"visualeditor-loadwarning-token": "Ошибка при загрузке токена для редактирования с сервера: $1. Попробовать снова?",
 	"visualeditor-mainnamespacepagelink": "Project:Основное пространство",

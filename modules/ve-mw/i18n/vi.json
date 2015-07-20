@@ -7,7 +7,8 @@
 			"Trần Nguyễn Minh Huy",
 			"Dinhxuanduyet",
 			"KhangND",
-			"Anh88"
+			"Anh88",
+			"Quenhitran"
 		]
 	},
 	"apihelp-visualeditor-description": "Trả về mã HTML5 cho một trang từ dịch vụ Parsoid.",
@@ -42,9 +43,9 @@
 	"visualeditor-beta-label": "thử nghiệm",
 	"visualeditor-beta-warning": "Phiên bản này đang là bản Thử Nghiệm. Để chuyển qua Chế độ chỉnh sửa source bất cứ lúc nào mà không làm mất những thay đổi của bạn, xin mở Danh sách thả xuống từ \"{{int:visualeditor-toolbar-savedialog}}\" và Chọn \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Bạn đang sử dụng một Trình Duyệt Web mà nó không được chính thức hỗ trợ bởi Trình Soạn thảo này.",
-	"visualeditor-ca-createlocaldescriptionsource": "Thêm nguồn mô tả nội bộ",
+	"visualeditor-ca-createlocaldescriptionsource": "Thêm mã nguồn miêu tả trên wiki địa phương",
 	"visualeditor-ca-createsource": "Tạo mã nguồn",
-	"visualeditor-ca-editlocaldescriptionsource": "Sửa mã nguồn miêu tả địa phương",
+	"visualeditor-ca-editlocaldescriptionsource": "Sửa mã nguồn miêu tả trên wiki địa phương",
 	"visualeditor-ca-editsource": "Sửa mã nguồn",
 	"visualeditor-ca-editsource-section": "sửa mã nguồn",
 	"visualeditor-ca-ve-create": "Trình Soạn thảo trực quan",

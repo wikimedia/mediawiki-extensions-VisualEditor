@@ -178,7 +178,7 @@
 	"visualeditor-dialog-reference-useexisting-full-label": "このページ内にある出典を再利用する",
 	"visualeditor-dialog-reference-useexisting-label": "既存の出典を使用",
 	"visualeditor-dialog-reference-useexisting-tool": "再利用",
-	"visualeditor-dialog-referenceslist-contextitem-description-general": "一般的なリファレンスのリスト",
+	"visualeditor-dialog-referenceslist-contextitem-description-general": "汎用の脚注リスト",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "グループ「$1」の脚注のリスト",
 	"visualeditor-dialog-referenceslist-title": "出典一覧",
 	"visualeditor-dialog-template-title": "テンプレート",

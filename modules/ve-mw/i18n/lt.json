@@ -236,6 +236,8 @@
 	"visualeditor-linkinspector-illegal-title": "Neleistinas puslapio pavadinimas",
 	"visualeditor-linknodeinspector-add-label": "Pridėti žymę",
 	"visualeditor-linknodeinspector-title": "Paprasta nuoroda",
+	"visualeditor-loaderror-message": "Klaida įkeliant duomenis iš serverio: $1.",
+	"visualeditor-loaderror-title": "Nepavyko įkelti redaktoriaus",
 	"visualeditor-loadwarning": "Klaida, įkeliant duomenis iš serverio: $1. Norėtumėte pabandyti dar kartą?",
 	"visualeditor-loadwarning-token": "Klaida iš serverio įkeliant redagavimo raktą: $1. Ar norėtumėte pabandyti dar kartą?",
 	"visualeditor-mainnamespacepagelink": "Project:Pagrindinė vardų sritis",
