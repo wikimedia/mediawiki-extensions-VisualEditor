@@ -16,7 +16,8 @@
 			"Captantrips",
 			"Stultiwikia",
 			"Arystanbek",
-			"Uğurkent"
+			"Uğurkent",
+			"Kincki"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -222,6 +223,8 @@
 	"visualeditor-linkinspector-illegal-title": "Geçersiz sayfa başlığı",
 	"visualeditor-linknodeinspector-add-label": "Etiket ekle",
 	"visualeditor-linknodeinspector-title": "Basit bağlantı",
+	"visualeditor-loaderror-message": "$1 Sunucusundan veri yüklenirken hata oluştu.",
+	"visualeditor-loaderror-title": "Editör yüklenemedi",
 	"visualeditor-loadwarning": "Sunucudan veri yüklenirken hata: $1. Yeniden denemek ister misiniz?",
 	"visualeditor-loadwarning-token": "Sunucudan düzenleme belirteci yüklenmesinde hata: $1. Yeniden denemek ister misiniz?",
 	"visualeditor-mainnamespacepagelink": "Project:Main namespace",

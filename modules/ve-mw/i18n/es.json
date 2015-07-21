@@ -283,7 +283,7 @@
 	"visualeditor-referenceslist-missingref": "Esta referencia está definida en una plantilla u otro tipo de bloque generado, y por ahora sólo puede editarse en el editor de fuente.",
 	"visualeditor-savedialog-error-badtoken": "No pudimos procesar tu edición porque la sesión ha expirado.",
 	"visualeditor-savedialog-identify-anon": "¿Desea guardar esta página como usuario anónimo? Su dirección IP se registrará en el historial de edición de esta página.",
-	"visualeditor-savedialog-identify-user": "Has iniciado sesión como [[User:$1|$1]]. Tu edición será asociada con esta cuenta si la guardas.",
+	"visualeditor-savedialog-identify-user": "Has iniciado sesión como [[User:$1|$1]]. Si guardas esta edición, se asociará con esta cuenta.",
 	"visualeditor-savedialog-label-create": "Crear página",
 	"visualeditor-savedialog-label-error": "Error",
 	"visualeditor-savedialog-label-report": "Informar sobre un problema",

@@ -15,7 +15,8 @@
 			"Gagnabil",
 			"Abanima",
 			"محمد أحمد عبد الفتاح",
-			"Bachounda"
+			"Bachounda",
+			"Mervat Salman"
 		]
 	},
 	"apihelp-visualeditor-description": "يرجع الأيش تي أم أل 5 لصفحة من الخدمة بارسويد (Parsoid ).",
@@ -209,6 +210,8 @@
 	"visualeditor-linkinspector-illegal-title": "عنوان الصفحة غير صحيح",
 	"visualeditor-linknodeinspector-add-label": "إضافة تسمية",
 	"visualeditor-linknodeinspector-title": "وصلة بسيطة",
+	"visualeditor-loaderror-message": "حدث خطأ في تحميل البيانات من الخادم: $1.",
+	"visualeditor-loaderror-title": "لم يتمكن المحرر من التحميل",
 	"visualeditor-loadwarning": "خطأ في تحميل البيانات من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
 	"visualeditor-loadwarning-token": "خطأ في تحميل تصريح التعديل من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
 	"visualeditor-mainnamespacepagelink": "Project:النطاق الرئيسي",

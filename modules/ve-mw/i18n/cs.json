@@ -263,10 +263,10 @@
 	"visualeditor-parameter-search-more": "Zobrazit $1 {{PLURAL:$1|další pole|další pole|dalších polí}}",
 	"visualeditor-parameter-search-no-unused": "Žádná nevyužitá pole",
 	"visualeditor-parameter-search-unknown": "Neznámé pole",
-	"visualeditor-preference-betatempdisable": "Dočasně zakázat VisualEditor, dokud je ve verzi „beta“",
-	"visualeditor-preference-core-description": "Povolit VisualEditor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
-	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "Povolit VisualEditor. Bude k dispozici v {{PLURAL:$2|následujícím jmenném prostoru|následujících jmenných prostorech}}: $1",
+	"visualeditor-preference-betatempdisable": "Dočasně zakázat vizuální editor, dokud je ve verzi „beta“",
+	"visualeditor-preference-core-description": "Povolit vizuální editor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
+	"visualeditor-preference-core-label": "Vizuální editace",
+	"visualeditor-preference-enable": "Povolit vizuální editor. Bude k dispozici v {{PLURAL:$2|následujícím jmenném prostoru|následujících jmenných prostorech}}: $1",
 	"visualeditor-recreate": "Zatímco tuto stránku editujete, byla smazána. Pokud ji chcete znovu založit, klikněte na „$1“.",
 	"visualeditor-reference-input-placeholder": "Hledat ve stávajících referencích",
 	"visualeditor-referenceslist-isempty": "Na této stránce nejsou žádné reference se skupinou „$1“, které by se v tomto seznamu zobrazily.",
@@ -304,6 +304,6 @@
 	"visualeditor-viewpage-savewarning-discard": "Zahodit úpravy",
 	"visualeditor-viewpage-savewarning-keep": "Pokračovat v editování",
 	"visualeditor-viewpage-savewarning-title": "Jste si {{GENDER:|jist|jista|jisti}}?",
-	"visualeditor-wikitext-warning": "Používáte VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kdykoli se můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že otevřete rozbalovací menu vedle „{{int:visualeditor-toolbar-savedialog}}“ a kliknete na „{{int:visualeditor-mweditmodesource-title}}“.",
+	"visualeditor-wikitext-warning": "Používáte vizuální editor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kdykoli se můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že otevřete rozbalovací menu vedle „{{int:visualeditor-toolbar-savedialog}}“ a kliknete na „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu"
 }
