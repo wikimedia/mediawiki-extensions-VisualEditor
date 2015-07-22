@@ -721,4 +721,23 @@ class VisualEditorHooks {
 		}
 		return true;
 	}
+
+	/**
+	 * Sets user preference to enable the VisualEditor account for new auto-
+	 * created ('auth') accounts, if $wgVisualEditorAutoAccountEnable is set.
+	 *
+	 * To be removed once no longer needed.
+	 */
+	public static function onAuthPluginAutoCreate( $user ) {
+		if (
+			RequestContext::getMain()->getConfig()->get( 'VisualEditorAutoAccountEnable' ) &&
+			$user->isLoggedin()
+		) {
+			$user->setOption( 'visualeditor-enable', 1 );
+			$user->saveSettings();
+		}
+		return true;
+	}
+
+
 }

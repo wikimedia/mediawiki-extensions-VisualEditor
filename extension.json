@@ -96,6 +96,7 @@
 		"VisualEditorParsoidURL": "http://localhost:8000",
 		"VisualEditorEnableSplitTest": false,
 		"VisualEditorEnableTocWidget": false,
+		"VisualEditorAutoAccountEnable": false,
 		"VisualEditorNamespaces": [],
 		"VisualEditorParsoidTimeout": 100
 	},
@@ -170,6 +171,9 @@
 		],
 		"AddNewAccount": [
 			"VisualEditorHooks::onAddNewAccount"
+		],
+		"AuthPluginAutoCreate": [
+			"VisualEditorHooks::onAuthPluginAutoCreate"
 		]
 	},
 	"ResourceModules": {
