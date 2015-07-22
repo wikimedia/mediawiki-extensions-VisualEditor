@@ -5,6 +5,7 @@
 			"HalanTul"
 		]
 	},
+	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Бигэргэтэргэ көннөрүү кэмин бэлиэтээ. Сөп түбэһиспэт көннөрүүлэри булан ыларга туһалыа.",
 	"apihelp-visualeditor-param-oldid": "Көннөрүү нүөмэрин тутун (анаан этиллибэтэҕинэ бүтэһик көннөрүү киэнин).",
 	"apihelp-visualeditor-param-paction": "Оҥоһуллуохтаах.",
@@ -207,6 +208,7 @@
 	"visualeditor-linknodeinspector-add-label": "Ойуулааһынна эп",
 	"visualeditor-linknodeinspector-title": "Судургу сигэ",
 	"visualeditor-loaderror-message": "Сиэрбэртэн хачайдыырга алҕас таҕыста: $1.",
+	"visualeditor-loaderror-title": "Сатаан үлэлээбэтэ",
 	"visualeditor-loadwarning": "Хачайдааһын алҕаһа: $1. Хатылаан көрөҕүн дуо?",
 	"visualeditor-loadwarning-token": "Эрэдээксийэ токенын хачайдыырга алҕас таҕыста: $1. Хатылаан көрөҕүн дуо?",
 	"visualeditor-mainnamespacepagelink": "Project:Сүрүн эйгэ",

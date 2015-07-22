@@ -134,6 +134,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Вы можаце прымусова адлюстраваць на гэтай старонцы побач з закладкай «$1» дадатковую закладку, якая спросьціць даданьне новага разьдзелу, ці наадварот, прымусова не адлюстроўваць яе, калі яна адлюстроўваецца.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Паказваць на гэтай старонцы закладку для даданьня новага разьдзелу",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Адключыць спасылкі на рэдагаваньне побач з кожным загалоўкам на гэтай старонцы.",
+	"visualeditor-dialog-meta-settings-nogallery-label": "Адключыць галерэю",
 	"visualeditor-dialog-meta-settings-redirect-label": "Перакіроўваць гэтую старонку на",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Мэтавая старонка для перанакіраваньня",
 	"visualeditor-dialog-meta-settings-section": "Парамэтры старонкі",

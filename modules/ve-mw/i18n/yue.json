@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Deryck Chan",
-			"William915"
+			"William915",
+			"CRCHF"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "保存嗰陣，將爾個設成編輯嘅版本嘅時間戳。用來檢測編輯衝突。",
@@ -24,7 +25,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "短拎",
 	"visualeditor-beta-appendix": "試用",
 	"visualeditor-beta-label": "試用",
-	"visualeditor-beta-warning": "VisualEditor 而家仲係試用版。你可能會遇到軟件問題，亦可能改唔到一版嘅某啲部份。你可以隨時撳「{{int:visualeditor-toolbar-savedialog}}」隔蘺嘅「{{int:visualeditor-mweditmodesource-tool}}」，轉去維基文本模式，未存妥修改唔會唔見。",
+	"visualeditor-beta-warning": "VisualEditor 而家重係試用版。你可能會遇到軟件問題，亦可能改唔到一版嘅某啲部份。你可以隨時撳「{{int:visualeditor-toolbar-savedialog}}」隔蘺嘅「{{int:visualeditor-mweditmodesource-tool}}」轉去維基文本模式，未存妥修改唔會冇咗。",
 	"visualeditor-browserwarning": "VisualEditor 並未正式支援你嘅瀏覽器",
 	"visualeditor-ca-createlocaldescriptionsource": "喺本站加檔案說明源碼",
 	"visualeditor-ca-createsource": "加源碼",
@@ -192,7 +193,7 @@
 	"visualeditor-meta-tool": "選項",
 	"visualeditor-mweditmodesource-title": "確定要去改源碼？",
 	"visualeditor-mweditmodesource-tool": "去改源碼",
-	"visualeditor-mweditmodesource-warning": "你而家轉緊去源碼編輯模式。\n你對呢版嘅修改會保留，但係你唔可以轉返去 VisualEditor，除非你記低呢版先，或者重新載入呢版。\n繼唔繼續？",
+	"visualeditor-mweditmodesource-warning": "你而家轉緊去源碼編輯模式。\n你對呢版嘅修改會保留，但係你唔可以轉返去 VisualEditor，除非你記低呢版先或重新載入呢版。\n繼唔繼續？",
 	"visualeditor-mweditmodesource-warning-cancel": "取消",
 	"visualeditor-mweditmodesource-warning-switch": "保留修改",
 	"visualeditor-mweditmodesource-warning-switch-discard": "放棄修改",
@@ -205,9 +206,9 @@
 	"visualeditor-parameter-search-no-unused": "所有參數用晒",
 	"visualeditor-parameter-search-unknown": "唔知呢個係咩參數",
 	"visualeditor-preference-betatempdisable": "試用期內暫時停用 VisualEditor",
-	"visualeditor-preference-core-description": "開 VisualEditor（即見編輯）。某啲名域道暫時未用得呢個編輯器。",
+	"visualeditor-preference-core-description": "開 VisualEditor（即見編輯）。某啲名域度暫時未用得呢個編輯器。",
 	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-enable": "開 VisualEdior（即見編輯），喺呢啲名域道可以用：$1",
+	"visualeditor-preference-enable": "開 VisualEdior（即見編輯），喺$1呢啲名域道可以用",
 	"visualeditor-reference-input-placeholder": "你想引用啲乜？",
 	"visualeditor-referenceslist-isempty": "呢版冇「$1」組嘅參考資料畀你加落呢張表道。",
 	"visualeditor-referenceslist-isempty-default": "呢版冇參考資料畀你加落呢張表道。",
