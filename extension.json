@@ -94,7 +94,7 @@
 		},
 		"VisualEditorTabPosition": "before",
 		"VisualEditorParsoidURL": "http://localhost:8000",
-		"VisualEditorEnableSplitTest": false,
+		"VisualEditorNewAccountEnableProportion": false,
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorAutoAccountEnable": false,
 		"VisualEditorNamespaces": [],

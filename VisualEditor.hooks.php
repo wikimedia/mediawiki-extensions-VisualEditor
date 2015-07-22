@@ -705,16 +705,20 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Sets user preference to enable the VisualEditor account if their new
-	 * account's userID is even, if $wgVisualEditorEnableSplitTest is true.
+	 * Sets user preference to enable the VisualEditor account if the account's
+	 * userID is matches modulo $wgVisualEditorNewAccountEnableProportion, if set.
+	 * If set to '1', all new accounts would have VisualEditor enabled; at '2',
+	 * 50% would; at '20', 5% would, and so on.
 	 *
 	 * To be removed once no longer needed.
 	 */
 	public static function onAddNewAccount( $user, $byEmail ) {
+		$x = RequestContext::getMain()->getConfig()->get( 'VisualEditorNewAccountEnableProportion' );
+
 		if (
-			RequestContext::getMain()->getConfig()->get( 'VisualEditorEnableSplitTest' ) &&
+			$x &&
 			$user->isLoggedin() &&
-			( ( $user->getId() % 2 ) === 0 )
+			( ( $user->getId() % $x ) === 0 )
 		) {
 			$user->setOption( 'visualeditor-enable', 1 );
 			$user->saveSettings();
