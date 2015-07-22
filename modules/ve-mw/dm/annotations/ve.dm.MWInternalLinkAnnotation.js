@@ -30,7 +30,7 @@ OO.inheritClass( ve.dm.MWInternalLinkAnnotation, ve.dm.LinkAnnotation );
 
 ve.dm.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
 
-ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = ['mw:WikiLink'];
+ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:WikiLink' ];
 
 ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
 	var targetData = this.getTargetDataFromHref(

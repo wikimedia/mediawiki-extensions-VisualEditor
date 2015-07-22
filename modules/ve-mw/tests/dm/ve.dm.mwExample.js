@@ -274,7 +274,7 @@ ve.dm.mwExample.MWBlockImage = {
 				height: 2,
 				resource: 'FooBar',
 				originalClasses: 'mw-halign-right foobar',
-				unrecognizedClasses: ['foobar']
+				unrecognizedClasses: [ 'foobar' ]
 			}
 		},
 		{ type: 'mwImageCaption' },
@@ -311,7 +311,7 @@ ve.dm.mwExample.MWInlineImage = {
 			resource: './File:Wiki.png',
 			type: 'none',
 			originalClasses: 'foo mw-valign-text-top',
-			unrecognizedClasses: ['foo']
+			unrecognizedClasses: [ 'foo' ]
 		}
 	},
 	storeItems: [
@@ -687,7 +687,7 @@ ve.dm.mwExample.complexInternalData = [
 	{ type: 'alienMeta', originalDomElements: $( '<!-- before -->' ).toArray() },
 	{ type: '/alienMeta' },
 	{ type: 'paragraph' },
-	'F', ['o', [ve.dm.example.bold]], ['o', [ve.dm.example.italic]],
+	'F', [ 'o', [ ve.dm.example.bold ] ], [ 'o', [ ve.dm.example.italic ] ],
 	// 4
 	{ type: 'mwReference', attributes: {
 		mw: {},
@@ -710,11 +710,11 @@ ve.dm.mwExample.complexInternalData = [
 	{ type: 'internalItem' },
 	// 9
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
-	'R', ['e', [ve.dm.example.bold]], 'f',
+	'R', [ 'e', [ ve.dm.example.bold ] ], 'f',
 	// 13
 	{ type: 'alienMeta', originalDomElements: $( '<!-- reference -->' ).toArray() },
 	{ type: '/alienMeta' },
-	'e', ['r', [ve.dm.example.italic]], ['e', [ve.dm.example.italic]],
+	'e', [ 'r', [ ve.dm.example.italic ] ], [ 'e', [ ve.dm.example.italic ] ],
 	// 16
 	{ type: 'mwReference', attributes: {
 		mw: {},

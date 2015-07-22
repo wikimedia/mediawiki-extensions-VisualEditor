@@ -85,5 +85,5 @@ ve.ui.MWTocItemWidget.prototype.onUpdate = function () {
  */
 ve.ui.MWTocItemWidget.prototype.remove = function () {
 	this.node.model.disconnect( this );
-	this.parent.removeItems( [this] );
+	this.parent.removeItems( [ this ] );
 };

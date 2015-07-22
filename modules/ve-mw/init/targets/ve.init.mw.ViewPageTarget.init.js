@@ -23,9 +23,9 @@
 		active = false,
 		progressStep = 0,
 		progressSteps = [
-			[30, 3000],
-			[70, 2000],
-			[100, 1000]
+			[ 30, 3000 ],
+			[ 70, 2000 ],
+			[ 100, 1000 ]
 		],
 		plugins = [];
 

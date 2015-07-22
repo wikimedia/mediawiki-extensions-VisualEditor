@@ -767,7 +767,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 				ve.ui.toolFactory.register( tool );
 				ve.ui.commandRegistry.register(
 					new ve.ui.Command(
-						name, 'mwcite', 'open', { args: [name, data], supportedSelections: ['linear'] }
+						name, 'mwcite', 'open', { args: [ name, data ], supportedSelections: [ 'linear' ] }
 					)
 				);
 			}

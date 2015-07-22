@@ -17,14 +17,14 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 			data: [
 				{ type: 'paragraph' },
 				'a',
-				['b', [ { type: 'textStyle/bold' } ]],
+				[ 'b', [ { type: 'textStyle/bold' } ] ],
 				{
 					type: 'mwEntity',
 					attributes: { character: 'c' },
 					annotations: [ { type: 'textStyle/bold' } ]
 				},
 				{ type: '/mwEntity' },
-				['d', [ { type: 'textStyle/bold' } ]],
+				[ 'd', [ { type: 'textStyle/bold' } ] ],
 				{
 					type: 'alienInline',
 					originalDomElements: $( '<span rel="ve:Alien">e</span>' ).toArray(),

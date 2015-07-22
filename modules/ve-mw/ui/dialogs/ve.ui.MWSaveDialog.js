@@ -344,7 +344,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.savePanel = new OO.ui.PanelLayout( {
 		scrollable: true,
 		padded: true,
-		classes: ['ve-ui-mwSaveDialog-savePanel']
+		classes: [ 've-ui-mwSaveDialog-savePanel' ]
 	} );
 
 	// Byte counter in edit summary

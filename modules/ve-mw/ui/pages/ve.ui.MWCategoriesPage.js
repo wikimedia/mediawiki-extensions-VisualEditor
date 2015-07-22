@@ -153,7 +153,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
 
 	if ( metaItem.element.type === 'mwCategory' ) {
 		item = this.categoryWidget.categories[this.getCategoryItemFromMetaListItem( metaItem ).value];
-		this.categoryWidget.removeItems( [item] );
+		this.categoryWidget.removeItems( [ item ] );
 	}
 };
 

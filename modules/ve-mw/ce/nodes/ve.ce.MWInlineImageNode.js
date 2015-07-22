@@ -46,9 +46,9 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 		.attr( 'height', this.model.getAttribute( 'height' ) );
 
 	if ( this.$element.css( 'direction' ) === 'rtl' ) {
-		this.showHandles( ['sw'] );
+		this.showHandles( [ 'sw' ] );
 	} else {
-		this.showHandles( ['se'] );
+		this.showHandles( [ 'se' ] );
 	}
 
 	this.updateClasses();

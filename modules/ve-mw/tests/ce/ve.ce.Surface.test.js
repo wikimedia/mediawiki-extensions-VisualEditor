@@ -19,7 +19,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 					ve.dm.mwExample.MWBlockImage.html +
 					'<ul><li><p>Foo</p></li><li><p>Bar</p></li></ul>',
 				range: new ve.Range( 12 ),
-				operations: ['backspace'],
+				operations: [ 'backspace' ],
 				// TODO: This action should probably unwrap the list item as
 				expectedData: function () {},
 				expectedSelection: {
