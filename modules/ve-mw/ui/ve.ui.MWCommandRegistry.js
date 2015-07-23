@@ -9,43 +9,43 @@
 
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'link', 'mwlink', 'open', { supportedSelections: ['linear'] }
+		'link', 'mwlink', 'open', { supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'gallery', 'window', 'open',
-		{ args: ['gallery'], supportedSelections: ['linear'] }
+		{ args: [ 'gallery' ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'media', 'window', 'open',
-		{ args: ['media'], supportedSelections: ['linear'] }
+		{ args: [ 'media' ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'reference', 'window', 'open',
-		{ args: ['reference'], supportedSelections: ['linear'] }
+		{ args: [ 'reference' ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'transclusion', 'window', 'open',
-		{ args: ['transclusion'], supportedSelections: ['linear'] }
+		{ args: [ 'transclusion' ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'alienExtension', 'window', 'open',
-		{ args: ['alienExtension'], supportedSelections: ['linear'] }
+		{ args: [ 'alienExtension' ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'meta', 'window', 'open',
-		{ args: ['meta'] }
+		{ args: [ 'meta' ] }
 	)
 );
 ve.ui.commandRegistry.register(
@@ -75,43 +75,43 @@ ve.ui.commandRegistry.register(
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'heading1', 'format', 'convert',
-		{ args: [ 'mwHeading', { level: 1 } ], supportedSelections: ['linear'] }
+		{ args: [ 'mwHeading', { level: 1 } ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'heading2', 'format', 'convert',
-		{ args: [ 'mwHeading', { level: 2 } ], supportedSelections: ['linear'] }
+		{ args: [ 'mwHeading', { level: 2 } ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'heading3', 'format', 'convert',
-		{ args: [ 'mwHeading', { level: 3 } ], supportedSelections: ['linear'] }
+		{ args: [ 'mwHeading', { level: 3 } ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'heading4', 'format', 'convert',
-		{ args: [ 'mwHeading', { level: 4 } ], supportedSelections: ['linear'] }
+		{ args: [ 'mwHeading', { level: 4 } ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'heading5', 'format', 'convert',
-		{ args: [ 'mwHeading', { level: 5 } ], supportedSelections: ['linear'] }
+		{ args: [ 'mwHeading', { level: 5 } ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'heading6', 'format', 'convert',
-		{ args: [ 'mwHeading', { level: 6 } ], supportedSelections: ['linear'] }
+		{ args: [ 'mwHeading', { level: 6 } ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'preformatted', 'format', 'convert',
-		{ args: [ 'mwPreformatted' ], supportedSelections: ['linear'] }
+		{ args: [ 'mwPreformatted' ], supportedSelections: [ 'linear' ] }
 	)
 );
 ve.ui.commandRegistry.register(
@@ -124,7 +124,7 @@ ve.ui.commandRegistry.register(
 				type: 'mwTable',
 				attributes: { wikitable: true }
 			} ],
-			supportedSelections: ['linear']
+			supportedSelections: [ 'linear' ]
 		}
 	)
 );

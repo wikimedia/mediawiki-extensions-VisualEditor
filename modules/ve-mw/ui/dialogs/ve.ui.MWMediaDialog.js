@@ -214,7 +214,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		icon: 'parameter',
-		classes: [ 've-ui-mwMediaDialog-caption-fielset']
+		classes: [ 've-ui-mwMediaDialog-caption-fielset' ]
 	} );
 
 	// Alt text

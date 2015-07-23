@@ -276,7 +276,7 @@ ve.ui.MWTocWidget.prototype.build = function () {
 			};
 			// Add item
 			this.items[sectionPrefix.join( '.' )] = new ve.ui.MWTocItemWidget( config );
-			config.parent.addItems( [this.items[sectionPrefix.join( '.' )]], config.insertIndex );
+			config.parent.addItems( [ this.items[sectionPrefix.join( '.' )] ], config.insertIndex );
 			previousHeadingLevel = headingLevel;
 			previousHeadingNode = nodes[i].node.parent;
 		}

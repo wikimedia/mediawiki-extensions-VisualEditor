@@ -41,7 +41,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
-		flags: ['constructive'],
+		flags: [ 'constructive' ],
 		classes: [ 've-ui-mwTransclusionDialog-addButton' ],
 		disabled: true
 	} )
@@ -51,7 +51,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		framed: false,
 		icon: 'remove',
 		title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-		flags: ['destructive'],
+		flags: [ 'destructive' ],
 		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
 	} )
 		.connect( this, { click: 'onRemoveButtonClick' } );

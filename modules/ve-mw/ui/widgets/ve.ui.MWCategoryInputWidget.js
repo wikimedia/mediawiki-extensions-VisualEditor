@@ -91,7 +91,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 	$.each( query.redirects || [], function ( index, redirect ) {
 		if ( !linkCacheUpdate.hasOwnProperty( redirect.to ) ) {
 			linkCacheUpdate[redirect.to] = ve.init.platform.linkCache.getCached( redirect.to ) ||
-				{ missing: false, redirectFrom: [redirect.from] };
+				{ missing: false, redirectFrom: [ redirect.from ] };
 		}
 		if (
 			linkCacheUpdate[redirect.to].redirectFrom &&
@@ -99,7 +99,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 		) {
 			linkCacheUpdate[redirect.to].redirectFrom.push( redirect.from );
 		} else {
-			linkCacheUpdate[redirect.to].redirectFrom = [redirect.from];
+			linkCacheUpdate[redirect.to].redirectFrom = [ redirect.from ];
 		}
 	} );
 

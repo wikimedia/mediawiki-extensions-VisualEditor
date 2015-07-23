@@ -187,13 +187,13 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 
 	switch ( alignClass ) {
 		case 'mw-halign-right':
-			this.showHandles( ['sw'] );
+			this.showHandles( [ 'sw' ] );
 			break;
 		case 'mw-halign-left':
-			this.showHandles( ['se'] );
+			this.showHandles( [ 'se' ] );
 			break;
 		case 'mw-halign-center':
-			this.showHandles( ['sw', 'se'] );
+			this.showHandles( [ 'sw', 'se' ] );
 			break;
 		default:
 			this.showHandles();

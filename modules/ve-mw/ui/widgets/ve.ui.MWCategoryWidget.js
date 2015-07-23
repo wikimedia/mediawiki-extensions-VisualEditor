@@ -99,7 +99,7 @@ ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 	if ( value && value !== '' ) {
 		// Add new item
 		categoryItem = this.getCategoryItemFromValue( value );
-		this.queryCategoryStatus( [categoryItem.name] ).done( function ( normalisedTitles ) {
+		this.queryCategoryStatus( [ categoryItem.name ] ).done( function ( normalisedTitles ) {
 			// Remove existing items by name
 			var toRemove = mw.Title.newFromText( categoryItem.name ).getMainText();
 			if ( Object.prototype.hasOwnProperty.call( widget.categories, toRemove ) ) {

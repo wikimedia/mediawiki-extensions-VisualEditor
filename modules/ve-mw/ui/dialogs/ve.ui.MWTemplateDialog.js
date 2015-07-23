@@ -26,7 +26,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.preventReselection = false;
 	this.expandedParamList = {};
 
-	this.confirmOverlay = new ve.ui.Overlay( { classes: ['ve-ui-overlay-global'] } );
+	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
 	this.confirmOverlay.$element.append( this.confirmDialogs.$element );
 	$( 'body' ).append( this.confirmOverlay.$element );

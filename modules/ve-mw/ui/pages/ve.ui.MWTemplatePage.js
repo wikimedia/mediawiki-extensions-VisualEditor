@@ -36,7 +36,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		framed: false,
 		icon: 'remove',
 		title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-		flags: ['destructive'],
+		flags: [ 'destructive' ],
 		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
 	} )
 		.connect( this, { click: 'onRemoveButtonClick' } );

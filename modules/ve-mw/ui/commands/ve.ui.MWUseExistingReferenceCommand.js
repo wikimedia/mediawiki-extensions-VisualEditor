@@ -16,7 +16,7 @@ ve.ui.MWUseExistingReferenceCommand = function VeUiMWUseExistingReferenceCommand
 	// Parent constructor
 	ve.ui.MWUseExistingReferenceCommand.super.call(
 		this, 'reference/existing', 'window', 'open',
-		{ args: [ 'reference', { useExisting: true } ], supportedSelections: ['linear'] }
+		{ args: [ 'reference', { useExisting: true } ], supportedSelections: [ 'linear' ] }
 	);
 };
 

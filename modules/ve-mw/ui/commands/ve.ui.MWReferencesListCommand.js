@@ -19,7 +19,7 @@ ve.ui.MWReferencesListCommand = function VeUiMWReferencesListCommand() {
 	// Parent constructor
 	ve.ui.MWReferencesListCommand.super.call(
 		this, 'referencesList', null, null,
-		{ supportedSelections: ['linear'] }
+		{ supportedSelections: [ 'linear' ] }
 	);
 };
 
