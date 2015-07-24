@@ -34,6 +34,7 @@ ve.ui.MWParameterSearchWidget = function VeUiMWParameterSearchWidget( template, 
 
 	// Events
 	this.template.connect( this, { add: 'buildIndex', remove: 'buildIndex' } );
+	this.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwParameterSearchWidget' );
@@ -47,7 +48,7 @@ OO.inheritClass( ve.ui.MWParameterSearchWidget, OO.ui.SearchWidget );
 /* Events */
 
 /**
- * @event select
+ * @event choose
  * @param {string|null} name Parameter name or null if no item is selected
  */
 
@@ -68,16 +69,16 @@ ve.ui.MWParameterSearchWidget.prototype.onQueryChange = function () {
 };
 
 /**
- * Handle select widget select events.
+ * Handle SelectWidget choose events.
  *
  * @method
  * @param {OO.ui.OptionWidget} item Selected item
- * @fires select
+ * @fires choose
  * @fires showAll
  */
-ve.ui.MWParameterSearchWidget.prototype.onResultsSelect = function ( item ) {
+ve.ui.MWParameterSearchWidget.prototype.onSearchResultsChoose = function ( item ) {
 	if ( item instanceof ve.ui.MWParameterResultWidget ) {
-		this.emit( 'select', item.getData().name );
+		this.emit( 'choose', item.getData().name );
 	} else if ( item instanceof ve.ui.MWMoreParametersResultWidget ) {
 		this.showAll = true;
 		this.addResults();

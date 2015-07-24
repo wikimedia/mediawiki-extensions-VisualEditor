@@ -33,7 +33,7 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 		showAll: !!config.expandedParamList
 	} )
 		.connect( this, {
-			select: 'onParameterSelect',
+			choose: 'onParameterChoose',
 			showAll: 'onParameterShowAll'
 		} );
 
@@ -91,7 +91,7 @@ ve.ui.MWParameterPlaceholderPage.prototype.setOutlineItem = function ( outlineIt
 	}
 };
 
-ve.ui.MWParameterPlaceholderPage.prototype.onParameterSelect = function ( name ) {
+ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name ) {
 	var param;
 
 	if ( name ) {
