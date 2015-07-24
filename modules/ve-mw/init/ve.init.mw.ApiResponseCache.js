@@ -115,14 +115,9 @@ ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
  * @fires add
  */
 ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
-	var name, hasOwn = Object.prototype.hasOwnProperty;
+	var name;
 	for ( name in entries ) {
-		if ( hasOwn.call( this.cacheValues, name ) ) {
-			continue;
-		}
-		if ( !hasOwn.call( this.deferreds, name ) ) {
-			this.deferreds[name] = $.Deferred();
-		}
+		this.deferreds[name] = $.Deferred();
 		this.deferreds[name].resolve( entries[name] );
 		this.cacheValues[name] = entries[name];
 	}

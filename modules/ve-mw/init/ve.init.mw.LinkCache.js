@@ -66,7 +66,17 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
  * @param {jQuery} $element Element to style
  */
 ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
-	this.get( title ).done( function ( data ) {
+	var promise,
+		cachedMissingData = this.getCached( '_missing/' + title );
+
+	// Use the synchronous missing link cache data if it exists
+	if ( cachedMissingData ) {
+		promise = $.Deferred().resolve( cachedMissingData ).promise();
+	} else {
+		promise = this.get( title );
+	}
+
+	promise.done( function ( data ) {
 		if ( data.missing ) {
 			$element.addClass( 'new' );
 		} else {
@@ -96,13 +106,28 @@ ve.init.mw.LinkCache.prototype.setAssumeExistence = function ( assume ) {
 };
 
 /**
+ * Set link missing data
+ *
+ * Stored separately from the full link data cache
+ *
+ * @param {Object} entries Object keyed by page title, with the values being data objects
+ */
+ve.init.mw.LinkCache.prototype.setMissing = function ( entries ) {
+	var name, missingEntries = {};
+	for ( name in entries ) {
+		missingEntries['_missing/' + name] = entries[name];
+	}
+	this.set( missingEntries );
+};
+
+/**
  * @inheritdoc
  */
 ve.init.mw.LinkCache.prototype.get = function ( title ) {
 	var data = {};
 	if ( this.assumeExistence ) {
 		data[this.constructor.static.normalizeTitle( title )] = { missing: false };
-		this.set( data );
+		this.setMissing( data );
 	}
 
 	// Parent method

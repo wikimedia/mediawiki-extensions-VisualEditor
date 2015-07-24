@@ -381,7 +381,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 					linkData[data.links.known[i]] = { missing: false };
 				}
 			}
-			ve.init.platform.linkCache.set( linkData );
+			ve.init.platform.linkCache.setMissing( linkData );
 		}
 
 		ve.track( 'trace.parseResponse.exit' );
