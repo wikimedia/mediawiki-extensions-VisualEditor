@@ -44,7 +44,7 @@ ve.ui.MWSaveDialog.static.actions = [
 		action: 'save',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
 		flags: [ 'primary', 'constructive' ],
-		modes: 'save',
+		modes: [ 'save', 'review' ],
 		accessKey: 's'
 	},
 	{
