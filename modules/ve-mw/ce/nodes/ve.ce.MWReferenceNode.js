@@ -112,22 +112,6 @@ ve.ce.MWReferenceNode.prototype.update = function () {
 	}
 };
 
-/** */
-ve.ce.MWReferenceNode.prototype.createHighlights = function () {
-	// Mixin method
-	ve.ce.FocusableNode.prototype.createHighlights.call( this );
-
-	if ( !this.getModel().isInspectable() ) {
-		// TODO: Move this into one of the classes mixin or inherit from
-		// as any focusable node that isn't inspectable should have this
-		// as it would be bad UX to have a focusable nodes where one of the
-		// same type doesn't show an inspector.
-		this.$highlights
-			.addClass( 've-ce-mwReferenceNode-missingref' )
-			.attr( 'title', ve.msg( 'visualeditor-referenceslist-missingref' ) );
-	}
-};
-
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWReferenceNode );

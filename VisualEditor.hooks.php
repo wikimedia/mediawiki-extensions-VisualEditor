@@ -460,6 +460,7 @@ class VisualEditorHooks {
 				'modules/ve-mw/ui/actions/ve.ui.MWCitationAction.js',
 			),
 			'styles' => array(
+				'modules/ve-mw/ui/styles/contextitems/ve.ui.MWReferenceContextItem.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',

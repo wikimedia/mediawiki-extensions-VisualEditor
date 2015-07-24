@@ -48,23 +48,30 @@ ve.ui.MWReferenceContextItem.static.commandName = 'reference';
  * @return {jQuery} DOM rendering of reference
  */
 ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
-	var refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model );
-	this.view = new ve.ui.PreviewWidget(
-		refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
-	);
+	var refModel;
+	if ( this.model.isEditable() ) {
+		refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model );
+		this.view = new ve.ui.PreviewWidget(
+			refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
+		);
 
-	// The $element property may be rendered into asynchronously, update the context's size when the
-	// rendering is complete if that's the case
-	this.view.once( 'render', this.context.updateDimensions.bind( this.context ) );
+		// The $element property may be rendered into asynchronously, update the context's size when the
+		// rendering is complete if that's the case
+		this.view.once( 'render', this.context.updateDimensions.bind( this.context ) );
 
-	return this.view.$element;
+		return this.view.$element;
+	} else {
+		return $( '<div>' )
+			.addClass( 've-ui-mwReferenceContextItem-muted' )
+			.text( ve.msg( 'visualeditor-referenceslist-missingref' ) );
+	}
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWReferenceContextItem.prototype.getDescription = function () {
-	return this.getRendering().text();
+	return this.model.isEditable() ? this.getRendering().text() : ve.msg( 'visualeditor-referenceslist-missingref' );
 };
 
 /**

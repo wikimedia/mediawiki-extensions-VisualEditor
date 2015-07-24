@@ -288,11 +288,11 @@ ve.dm.MWReferenceNode.static.getIndexLabel = function ( dataElement, internalLis
 /* Methods */
 
 /**
- * Don't allow reference nodes to be inspected if we can't find their contents.
+ * Don't allow reference nodes to be edited if we can't find their contents.
  *
  * @inheritdoc
  */
-ve.dm.MWReferenceNode.prototype.isInspectable = function () {
+ve.dm.MWReferenceNode.prototype.isEditable = function () {
 	var internalItem = this.getInternalItem();
 	return internalItem && internalItem.getLength() > 0;
 };
