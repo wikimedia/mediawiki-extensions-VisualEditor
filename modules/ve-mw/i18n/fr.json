@@ -249,7 +249,7 @@
 	"visualeditor-dialogbutton-reference-tooltip": "Référence",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Liste des références",
 	"visualeditor-dialogbutton-template-tooltip": "Modèle",
-	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusion",
+	"visualeditor-dialogbutton-transclusion-tooltip": "Modèle",
 	"visualeditor-diff-nochanges": "Impossible de commencer la relecture car votre révision correspond à la dernière version de cette page.",
 	"visualeditor-differror": "Erreur lors du chargement des données depuis le serveur : $1.",
 	"visualeditor-editconflict": "Vos modifications n’ont pas pu être enregistrées à cause d’un conflit d'édition. Voulez-vous résoudre ce conflit manuellement ?",

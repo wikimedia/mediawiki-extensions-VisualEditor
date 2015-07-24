@@ -166,7 +166,7 @@
 	"visualeditor-mweditmodesource-warning": "Prebacujete se na izvorno uređivanje.\nSve izmjene koje ste napravili mogu biti sačuvane, ali povratak u vizualni uređivač neće biti moguć bez spašavanja izmjena ili ponovnog učitavanja stranice.\nŽelite li nastaviti?",
 	"visualeditor-mweditmodesource-warning-cancel": "Otkaži",
 	"visualeditor-mweditmodesource-warning-switch": "Zadrži izmjene",
-	"visualeditor-mweditmodesource-warning-switch-discard": "Poništi izmjene",
+	"visualeditor-mweditmodesource-warning-switch-discard": "Odbaci izmjene",
 	"visualeditor-mwgalleryinspector-placeholder": "Primjer.jpg|Opis slike",
 	"visualeditor-mwgalleryinspector-title": "Galerija",
 	"visualeditor-pagemenu-tooltip": "Opcije stranice",

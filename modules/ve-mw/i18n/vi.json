@@ -234,6 +234,8 @@
 	"visualeditor-linkinspector-illegal-title": "Tên trang không hợp lệ",
 	"visualeditor-linknodeinspector-add-label": "Thêm văn bản",
 	"visualeditor-linknodeinspector-title": "Liên kết đơn giản",
+	"visualeditor-loaderror-message": "Lỗi khi tải dữ liệu từ máy chủ: $1.",
+	"visualeditor-loaderror-title": "Không thể tải trình soạn thảo",
 	"visualeditor-loadwarning": "Lỗi tải dữ liệu từ máy chủ: $1. Bạn có muốn thử lại không?",
 	"visualeditor-loadwarning-token": "Lỗi tải dấu hiệu sửa đổi từ máy chủ: $1. Bạn có muốn thử lại không?",
 	"visualeditor-mainnamespacepagelink": "Project:Không gian tên chính",

@@ -169,7 +169,7 @@
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "No convertir el contenido entre variantes de idioma",
 	"visualeditor-dialog-meta-settings-noeditsection-help": "Evita que aparezca el enlace \"editar\" junto a cada sección, en el caso inusual de que esto sea apropiado.",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Desactivar los enlaces de edición junto a cada encabezado en esta página.",
-	"visualeditor-dialog-meta-settings-nogallery-help": "Evita que esta categoria muestre los archivos que comtiene como una galería, en el caso inusual de que esto sea apropiado.",
+	"visualeditor-dialog-meta-settings-nogallery-help": "Puedes evitar que esta categoría muestre los archivos que contiene como una galería, en el caso de que esto no sea apropiado.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Deshabilitar galería",
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "Evita que el título de la página se convierta automáticamente en otros scripts.",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "No convertir título entre variantes de idioma",
