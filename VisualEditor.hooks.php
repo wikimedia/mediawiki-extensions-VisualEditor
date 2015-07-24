@@ -485,6 +485,7 @@ class VisualEditorHooks {
 				'visualeditor-dialog-referenceslist-title',
 				'visualeditor-dialogbutton-reference-full-label',
 				'visualeditor-dialogbutton-reference-tooltip',
+				'visualeditor-dialogbutton-reference-title',
 				'visualeditor-dialogbutton-referenceslist-tooltip',
 				'visualeditor-reference-input-placeholder',
 			),
