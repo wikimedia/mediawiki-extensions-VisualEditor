@@ -33,7 +33,7 @@ ve.ui.MWReferenceContextItem.static.name = 'reference';
 
 ve.ui.MWReferenceContextItem.static.icon = 'reference';
 
-ve.ui.MWReferenceContextItem.static.label = OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-tooltip' );
+ve.ui.MWReferenceContextItem.static.label = OO.ui.deferMsg( 'visualeditor-dialogbutton-reference-title' );
 
 ve.ui.MWReferenceContextItem.static.modelClasses = [ ve.dm.MWReferenceNode ];
 
