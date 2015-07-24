@@ -409,57 +409,27 @@ class VisualEditorHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
+
 		$veResourceTemplate = array(
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'VisualEditor',
 		);
-		$libModules = array(
-			'jquery.uls.data' => $veResourceTemplate + array(
-				'scripts' => array(
-					'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
-					'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
-				),
-				'targets' => array( 'desktop', 'mobile' ),
-			),
-			'jquery.i18n' => $veResourceTemplate + array(
-				'scripts' => array(
-					'lib/ve/lib/jquery.i18n/src/jquery.i18n.js',
-					'lib/ve/lib/jquery.i18n/src/jquery.i18n.messagestore.js',
-					'lib/ve/lib/jquery.i18n/src/jquery.i18n.parser.js',
-					'lib/ve/lib/jquery.i18n/src/jquery.i18n.emitter.js',
-					'lib/ve/lib/jquery.i18n/src/jquery.i18n.emitter.bidi.js',
-					'lib/ve/lib/jquery.i18n/src/jquery.i18n.language.js',
-				),
-				'dependencies' => 'mediawiki.libs.pluralruleparser',
-				'languageScripts' => array(
-					'bs' => 'lib/ve/lib/jquery.i18n/src/languages/bs.js',
-					'dsb' => 'lib/ve/lib/jquery.i18n/src/languages/dsb.js',
-					'fi' => 'lib/ve/lib/jquery.i18n/src/languages/fi.js',
-					'ga' => 'lib/ve/lib/jquery.i18n/src/languages/ga.js',
-					'he' => 'lib/ve/lib/jquery.i18n/src/languages/he.js',
-					'hsb' => 'lib/ve/lib/jquery.i18n/src/languages/hsb.js',
-					'hu' => 'lib/ve/lib/jquery.i18n/src/languages/hu.js',
-					'hy' => 'lib/ve/lib/jquery.i18n/src/languages/hy.js',
-					'la' => 'lib/ve/lib/jquery.i18n/src/languages/la.js',
-					'ml' => 'lib/ve/lib/jquery.i18n/src/languages/ml.js',
-					'os' => 'lib/ve/lib/jquery.i18n/src/languages/os.js',
-					'ru' => 'lib/ve/lib/jquery.i18n/src/languages/ru.js',
-					'sl' => 'lib/ve/lib/jquery.i18n/src/languages/sl.js',
-					'uk' => 'lib/ve/lib/jquery.i18n/src/languages/uk.js',
-				),
-				'targets' => array( 'desktop', 'mobile' ),
-			),
-		);
 
-		$addModules = array();
-
-		foreach ( $libModules as $name => $data ) {
-			if ( !isset( $resourceModules[$name] ) && !$resourceLoader->isModuleRegistered( $name ) ) {
-				$addModules[$name] = $data;
-			}
+		// Only pull in VisualEditor core's local version of jquery.uls.data if it hasn't been
+		// installed locally already (presumably, by the UniversalLanguageSelector extension).
+		if (
+			!isset( $resourceModules[ 'jquery.uls.data' ] ) &&
+			!$resourceLoader->isModuleRegistered( 'jquery.uls.data' )
+		) {
+			$resourceLoader->register( array(
+				'jquery.uls.data' => $veResourceTemplate + array(
+					'scripts' => array(
+						'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
+						'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
+					),
+					'targets' => array( 'desktop', 'mobile' ),
+			) ) );
 		}
-
-		$resourceLoader->register( $addModules );
 
 		// Register ext.visualEditor.mwreference here, as it depends on the new
 		// Cite CSS style module ext.cite.style only if the Cite extension is
