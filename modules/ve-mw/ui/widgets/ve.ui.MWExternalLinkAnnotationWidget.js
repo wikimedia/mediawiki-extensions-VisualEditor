@@ -55,6 +55,8 @@ ve.ui.MWExternalLinkAnnotationWidget.static.getAnnotationFromText = function ( v
 ve.ui.MWExternalLinkAnnotationWidget.prototype.createInputWidget = function () {
 	return new OO.ui.TextInputWidget( {
 		icon: 'linkExternal',
-		validate: ve.init.platform.getExternalLinkUrlProtocolsRegExp()
+		validate: function ( text ) {
+			return !!ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( text.trim() );
+		}
 	} );
 };
