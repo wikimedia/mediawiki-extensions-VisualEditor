@@ -1197,6 +1197,7 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			if ( this.imageModel ) {
 				this.imageModel.disconnect( this );
 				this.sizeWidget.disconnect( this );
+				this.captionTarget.getSurface().getModel().disconnect( this );
 			}
 			this.captionTarget.destroy();
 			this.captionTarget = null;

@@ -421,6 +421,7 @@ ve.ui.MWReferenceDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWReferenceDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWReferenceDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
+			this.referenceTarget.getSurface().getModel().disconnect( this );
 			this.search.getQuery().setValue( '' );
 			this.referenceTarget.destroy();
 			this.referenceTarget = null;
