@@ -10,7 +10,8 @@
 			"Apple farmer",
 			"Kingu",
 			"Nghtwlkr",
-			"Jdforrester"
+			"Jdforrester",
+			"Emilbk"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -212,6 +213,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Sideinnstillinger",
 	"visualeditor-dialogbutton-reference-full-label": "Standardform",
 	"visualeditor-dialogbutton-reference-tooltip": "Enkel",
+	"visualeditor-dialogbutton-reference-title": "Referanse",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Referanseliste",
 	"visualeditor-dialogbutton-template-tooltip": "Mal",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transklusjon",
@@ -234,6 +236,8 @@
 	"visualeditor-linkinspector-illegal-title": "Ugyldig sidetittel",
 	"visualeditor-linknodeinspector-add-label": "Legg til etikett",
 	"visualeditor-linknodeinspector-title": "Enkel lenke",
+	"visualeditor-loaderror-message": "Feil ved lasting av data fra server: $1.",
+	"visualeditor-loaderror-title": "Redigeringsprogrammet kunne ikke lastes",
 	"visualeditor-loadwarning": "Det oppsto en feil ved henting av data fra serveren: $1. Vil du prøve på nytt?",
 	"visualeditor-loadwarning-token": "Det oppsto en feil ved lesing av data fra serveren: $1. Vil du prøve igjen?",
 	"visualeditor-mainnamespacepagelink": "Project:Navnerom",

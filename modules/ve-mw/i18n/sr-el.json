@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Milicevic01",
-			"Msannakoval"
+			"Msannakoval",
+			"Srdjan m"
 		]
 	},
 	"tooltip-ca-createsource": "Napravite izvorni kod ove stranice",
 	"tooltip-ca-editsource": "Uredite izvorni kod ove stranice",
-	"tooltip-ca-ve-edit": "Uredite ovu stranicu Vizuelnim uređivačem",
+	"tooltip-ca-ve-edit": "Uredi ovu stranicu",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",
 	"visualeditor-annotationbutton-linknode-tooltip": "Prosta veza",
 	"visualeditor-beta-appendix": "beta",

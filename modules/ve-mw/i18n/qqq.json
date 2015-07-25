@@ -231,7 +231,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
 	"visualeditor-dialogbutton-reference-full-label": "Full length label for the button to choose the basic reference",
 	"visualeditor-dialogbutton-reference-tooltip": "An item in the citation menu for a plain reference without any citation template. This should be an adjective for the word \"citation\" or \"reference\". The term should be in contrast to the easier and more powerful citations available when using a template.\n\n{{Identical|Basic}}",
-	"visualeditor-dialogbutton-reference-title": "Full title for a context item showing a basic reference. As this does not have the context of other reference types it should just be the word for \"reference\".",
+	"visualeditor-dialogbutton-reference-title": "Full title for a context item showing a basic reference. As this does not have the context of other reference types it should just be the word for \"reference\".\n{{Identical|Reference}}",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Tooltip for button for dialog that inserts the references list object (<code><nowiki>References list</nowiki></code>).\n{{Identical|References list}}",
 	"visualeditor-dialogbutton-template-tooltip": "{{Identical|Template}}",
 	"visualeditor-dialogbutton-transclusion-tooltip": "{{Identical|Transclusion}}",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Saimawnkham"
+			"Saimawnkham",
+			"Saosukham"
 		]
 	},
 	"tooltip-ca-ve-edit": "ၸႂ်ႉ VisualEditor သေၵေႃႈ မႄးထတ်းၼႃႈလိၵ်ႈၼႆႉ",
@@ -9,5 +10,6 @@
 	"visualeditor-ca-createsource": "ၵေႃႇသၢင်ႈငဝ်ႈငႃႇ",
 	"visualeditor-ca-editsource": "မႄးထတ်းငဝ်ႈငႃႇ",
 	"visualeditor-ca-editsource-section": "မႄးထတ်းငဝ်ႈငႃႇ",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor"
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialogbutton-reference-title": "ၽိုၼ်ဢိင်"
 }
