@@ -8,7 +8,8 @@
 			"Gloria sah",
 			"Danutz",
 			"Amire80",
-			"ImGelu"
+			"ImGelu",
+			"Wintereu"
 		]
 	},
 	"apihelp-visualeditor-param-oldid": "Numărul versiunii de utilizat (implicit la cea mai recentă versiune).",
@@ -194,6 +195,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Setări pagină",
 	"visualeditor-dialogbutton-reference-full-label": "Formular simplu",
 	"visualeditor-dialogbutton-reference-tooltip": "De bază",
+	"visualeditor-dialogbutton-reference-title": "Referință",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Listă de referințe",
 	"visualeditor-dialogbutton-template-tooltip": "Format",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transcludere",

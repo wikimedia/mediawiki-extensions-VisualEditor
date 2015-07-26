@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sovichet"
+			"Sovichet",
+			"គីមស៊្រុន"
 		]
 	},
 	"tooltip-ca-createsource": "បង្កើត​កូដ​នៃ​ទំព័រ​នេះ",
 	"tooltip-ca-editsource": "កែ​កូដ​នៃ​ទំព័រ​នេះ",
-	"tooltip-ca-ve-edit": "កែ​ទំព័រ​នេះ​ជាមួយ VisualEditor",
+	"tooltip-ca-ve-edit": "កែ​ប្រែទំព័រ​នេះ​",
 	"visualeditor-advancedsettings-tool": "ការ​កំណត់​កម្រិត​ខ្ពស់",
 	"visualeditor-beta-appendix": "បេតា",
 	"visualeditor-beta-label": "បេតា",
@@ -121,14 +122,10 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "ក្បាល​រង ៤",
 	"visualeditor-languages-tool": "ភាសា",
 	"visualeditor-linkinspector-illegal-title": "ចំណង​ជើង​ទំព័រ​មិន​ត្រឹម​ត្រូវ",
-	"visualeditor-linkinspector-suggest-external-link": "តំណ​ខាង​ក្រៅ",
-	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|ទំព័រ​ត្រូវ​គ្នា|ទំព័រ​ត្រូវ​គ្នា}}",
-	"visualeditor-linkinspector-suggest-new-page": "ទំព័រ​ថ្មី",
 	"visualeditor-loadwarning": "មាន​កំហុស​ពេល​ផ្ទុក​ទិន្នន័យ​ពី​ម៉ាស៊ីន​មេ: $1 ។ តើ​អ្នក​ចង់​ព្យាយាម​ម្ដង​ទៀត​ទេ?",
 	"visualeditor-mainnamespacepagelink": "Project:Main namespace",
 	"visualeditor-media-input-placeholder": "ស្វែង​រក​មេឌា",
 	"visualeditor-meta-tool": "ជម្រើស",
-	"visualeditor-mwalienextensioninspector-title": "កម្មវិធី​បន្ថែម MediaWiki",
 	"visualeditor-mweditmodesource-title": "ប្ដូរ​ទៅ​ការ​កែ​ប្រែ​កូដ​ដើម",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|ការ​អធិប្បាយ​សម្រាប់​រូបភាព",
 	"visualeditor-mwgalleryinspector-title": "វិចិត្រសាល",
@@ -140,7 +137,6 @@
 	"visualeditor-preference-core-description": "បើក VisualEditor។ វា​នឹង​មិន​មាន​វត្តមាន​លើ​ទំព័រ​ពិភាក្សា និង​ទំព័រ​លំហ​ឈ្មោះ​មួយ​ចំនួន​ឡើយ។",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "បើក VisualEditor។ វា​នឹង​មិន​មាន​វត្តមាន​លើ​ទំព័រ​ពិភាក្សា និង​ទំព័រ​លំហ​ឈ្មោះ​មួយ​ចំនួន​ឡើយ។",
-	"visualeditor-preference-language-label": "ឧបករណ៍​ភាសា VisualEditor",
 	"visualeditor-reference-input-placeholder": "តើ​អ្នក​ចង់​យោង​អ្វី?",
 	"visualeditor-referenceslist-isempty": "មិន​មាន​សេចក្ដី​យោង​ក្នុង​ក្រុម \"$1\" លើ​ទំព័រ​នេះ ដើម្បី​បញ្ចូល​ក្នុង​បញ្ជី​នេះ​ទេ។",
 	"visualeditor-referenceslist-isempty-default": "មិន​មាន​សេចក្ដី​យោង​លើ​ទំព័រ​នេះ ដើម្បី​បញ្ចូល​ក្នុង​បញ្ជី​នេះ​ទេ។",
@@ -163,7 +159,7 @@
 	"visualeditor-settings-tool": "ការកំណត់​ទំព័រ",
 	"visualeditor-toolbar-savedialog": "រក្សា​ទុក​ទំព័រ",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
+	"visualeditor-version-label": "កំណែ",
 	"visualeditor-viewpage-savewarning": "តើ​អ្នក​ពិត​ជា​ត្រឡប់​ទៅ​មើល​អត្ថបទ ដោយ​មិន​រក្សា​ទុក​ជា​មុន មែនទេ?",
-	"visualeditor-wikitext-warning-link": "Help:Wiki markup",
 	"visualeditor-wikitext-warning-title": "បាន​រក​ឃើញ​អក្សរ​កូដ​វិគី"
 }
