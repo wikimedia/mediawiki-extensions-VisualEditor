@@ -571,7 +571,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
-	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub
+	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub, modules, jsconfigvars
 ) {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
@@ -616,6 +616,12 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 			} );
 			this.revid = newid;
 		}
+
+		// Update module JS config values and notify ResourceLoader of any new
+		// modules needed to be added to the page
+		mw.config.set( jsconfigvars );
+		mw.loader.load( modules );
+
 		this.saveDialog.reset();
 		this.replacePageContent(
 			html,

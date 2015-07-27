@@ -452,7 +452,9 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
 			data.isRedirect,
 			data.displayTitleHtml,
 			data.lastModified,
-			data.contentSub
+			data.contentSub,
+			data.modules,
+			data.jsconfigvars
 		);
 	}
 };
@@ -469,6 +471,8 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
  * @param {Object} lastModified Object containing user-formatted date
  *  and time strings, or undefined if we made no change.
  * @param {string} contentSub HTML to show as the content subtitle
+ * @param {Array} modules The modules to be loaded on the page
+ * @param {Object} jsconfigvars The mw.config values needed on the page
  * @fires save
  */
 ve.init.mw.Target.prototype.saveComplete = function () {

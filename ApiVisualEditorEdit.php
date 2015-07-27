@@ -65,7 +65,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'action' => 'parse',
 			'page' => $title->getPrefixedDBkey(),
 			'oldid' => $newRevId,
-			'prop' => 'text|revid|categorieshtml|displaytitle',
+			'prop' => 'text|revid|categorieshtml|displaytitle|modules|jsconfigvars',
 		);
 		$api = new ApiMain(
 			new DerivativeRequest(
@@ -94,6 +94,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
 		$displaytitle = isset( $result['parse']['displaytitle'] ) ?
 			$result['parse']['displaytitle'] : false;
+		$modules = isset( $result['parse']['modules'] ) ? $result['parse']['modules'] : array();
+		$jsconfigvars = isset( $result['parse']['jsconfigvars'] ) ?
+			$result['parse']['jsconfigvars'] : array();
 
 		if ( $content === false || ( strlen( $content ) && $revision === null ) ) {
 			return false;
@@ -110,7 +113,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'categorieshtml' => $categorieshtml,
 			'basetimestamp' => $timestamp,
 			'starttimestamp' => wfTimestampNow(),
-			'displayTitleHtml' => $displaytitle
+			'displayTitleHtml' => $displaytitle,
+			'modules' => $modules,
+			'jsconfigvars' => $jsconfigvars
 		);
 	}
 
