@@ -2,19 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Ajdar",
-			"Derslek"
+			"Derslek",
+			"Ильнар"
 		]
 	},
 	"tooltip-ca-createsource": "Чыганак код мөхәррирендә бит ясау",
 	"tooltip-ca-editsource": "Битең чыганак кодын үзгәртү",
-	"tooltip-ca-ve-edit": "Әлеге битне визуаль мөхәррир ярдәмендә үзгәртү",
+	"tooltip-ca-ve-edit": "Бу битне үзгәртү",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета версиясе",
 	"visualeditor-browserwarning": "Сез кулланган браузерда VisualEditor эшли алмый.",
 	"visualeditor-ca-createlocaldescriptionsource": "Локаль тасвирлама өстәргә",
 	"visualeditor-ca-createsource": "Чыганак код рәвешендә ясау",
-	"visualeditor-ca-editsource": "Чыганак текстны үзгәртү",
-	"visualeditor-ca-editsource-section": "чыганак текстны үзгәртү",
+	"visualeditor-ca-editsource": "Вики-текстны үзгәртү",
+	"visualeditor-ca-editsource-section": "вики-текстны үзгәртү",
 	"visualeditor-ca-ve-create": "Визуаль мөхәррир",
 	"visualeditor-ca-ve-edit": "Визуаль мөхәррир",
 	"visualeditor-ca-ve-edit-section": "Визуаль мөхәррир",
@@ -58,6 +59,7 @@
 	"visualeditor-dialogbutton-media-tooltip": "Медиа-файл",
 	"visualeditor-dialogbutton-meta-tooltip": "Битнең көйләнмәләре",
 	"visualeditor-dialogbutton-reference-tooltip": "Искәрмә",
+	"visualeditor-dialogbutton-reference-title": "Искәрмә",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Искәрмәләр исемлеге",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Кушылма",
 	"visualeditor-diff-nochanges": "Төзәтмәләр инкарь ителде, чөнки сез текстка бернинди дә үзгәртүләр кертмәдегез.",
