@@ -109,7 +109,7 @@ ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
  */
 
 /**
- * Add entries to the cache.
+ * Add entries to the cache. Does not overwrite already-set entries.
  *
  * @param {Object} entries Object keyed by page title, with the values being data objects
  * @fires add
@@ -117,9 +117,13 @@ ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
 ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
 	var name;
 	for ( name in entries ) {
-		this.deferreds[name] = $.Deferred();
-		this.deferreds[name].resolve( entries[name] );
-		this.cacheValues[name] = entries[name];
+		if ( !Object.prototype.hasOwnProperty.call( this.deferreds, name ) ) {
+			this.deferreds[name] = $.Deferred();
+		}
+		if ( this.deferreds[name].state() === 'pending' ) {
+			this.deferreds[name].resolve( entries[name] );
+			this.cacheValues[name] = entries[name];
+		}
 	}
 	this.emit( 'add', Object.keys( entries ) );
 };
