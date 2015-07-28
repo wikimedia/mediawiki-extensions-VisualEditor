@@ -20,7 +20,12 @@
  */
 ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 	// Parent constructor
-	ve.init.Target.call( this, { shadow: true, actions: true, floatable: true } );
+	ve.init.Target.call( this, {
+		shadow: true,
+		actions: true,
+		floatable: true,
+		scrollOffset: mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 )
+	} );
 
 	// Properties
 	this.pageName = pageName;
