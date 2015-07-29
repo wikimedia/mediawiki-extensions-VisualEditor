@@ -40,8 +40,11 @@
 	padding: 0;
 }
 
-.ve-init-mw-target-surface .ve-ui-surface-placeholder {
-	margin-top: -0.45em;
+.mw-body .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
+	/* Fix margin overlap */
+	margin-top: 0;
+	/* Placeholder doesn't need a border as well */
+	border: 0;
 }
 
 .ve-init-target > .ve-ui-debugBar {
