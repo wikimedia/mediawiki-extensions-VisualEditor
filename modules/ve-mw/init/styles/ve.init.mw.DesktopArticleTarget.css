@@ -7,8 +7,8 @@
 
 /* Toolbar */
 
-.ve-activating .ve-init-mw-desktopArticleTarget-toolbar,
-.ve-deactivating .ve-init-mw-desktopArticleTarget-toolbar {
+.ve-activating .ve-init-mw-target-toolbar,
+.ve-deactivating .ve-init-mw-target-toolbar {
 	overflow: hidden;
 	transition: height 0.4s ease;
 }

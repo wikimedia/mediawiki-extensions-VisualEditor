@@ -9,7 +9,7 @@
 	box-shadow: inset 0 -1px 0 #a7d7f9;
 }
 
-.ve-init-mw-desktopArticleTarget-surface {
+.ve-init-mw-target-surface {
 	/*
 	In order to allow placing the text cursor to the start or end of the text by
 	clicking in the margin area, we expand the outer boundary of the surface
@@ -23,8 +23,8 @@
 	margin: 1em -1.25em 0 -1.25em;
 }
 
-.ve-init-mw-desktopArticleTarget-surface .ve-ce-documentNode,
-.ve-init-mw-desktopArticleTarget-surface .ve-ui-surface-placeholder {
+.ve-init-mw-target-surface .ve-ce-documentNode,
+.ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	padding: 0 1.143em; /* surface-margin-left (1em) / (mw-body-content font-size) 0.875em */
 }
 
@@ -40,14 +40,14 @@
 	font-size: 1.09375em; /* 0.875/0.8 */
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar {
+.ve-init-mw-target-toolbar {
 	/* 1/0.8 */
 	margin: -1.25em -1.25em 1.25em -1.25em;
 	position: relative;
 	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
+.ve-init-mw-target-toolbar > .oo-ui-toolbar-bar {
 	/* Upstream OOjs UI has 2px. We split this between 1px here
 	   and 1px on the container to allow a smooth collapse transition
 	   where the bottom pixel line sweeps it up. */
@@ -95,17 +95,17 @@
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and (min-width: 982px) {
-	.ve-init-mw-desktopArticleTarget-surface {
+	.ve-init-mw-target-surface {
 		/* 0.8/0.8, 1.5/0.8 */
 		margin: 1em -1.875em 0 -1.875em;
 	}
 
-	.ve-init-mw-desktopArticleTarget-surface .ve-ce-documentNode,
-	.ve-init-mw-desktopArticleTarget-surface .ve-ui-surface-placeholder {
+	.ve-init-mw-target-surface .ve-ce-documentNode,
+	.ve-init-mw-target-surface .ve-ui-surface-placeholder {
 		padding: 0 1.714em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
 	}
 
-	.ve-init-mw-desktopArticleTarget-toolbar {
+	.ve-init-mw-target-toolbar {
 		/* 1.25/0.8, 1.5/0.8 */
 		margin: -1.5625em -1.875em 1.875em -1.875em;
 	}

@@ -14,12 +14,12 @@
 	font-size: 0.8em;
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar {
+.ve-init-mw-target-toolbar {
 	margin: -0.6em -3em 0.8em -3em;
 	position: relative;
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar .oo-ui-toolbar-bar {
+.ve-init-mw-target-toolbar .oo-ui-toolbar-bar {
 	line-height: 1.5em;
 }
 

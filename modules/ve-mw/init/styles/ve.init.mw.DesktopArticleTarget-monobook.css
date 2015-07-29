@@ -22,12 +22,12 @@
 	font-size: 0.992187499998em; /* 1/1.00787401575 */
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar {
+.ve-init-mw-target-toolbar {
 	/* 0.6/0.8, 0.8/0.8, 1/0.6 */
 	margin: -0.75em -1em 1.25em -1em;
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
+.ve-init-mw-target-toolbar > .oo-ui-toolbar-bar {
 	top: -3px;
 }
 
@@ -35,12 +35,12 @@
 	border-top: 1px solid #ccc;
 }
 
-.ve-init-mw-desktopArticleTarget-surface .ve-ce-documentNode,
-.ve-init-mw-desktopArticleTarget-surface .ve-ui-surface-placeholder {
+.ve-init-mw-target-surface .ve-ce-documentNode,
+.ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	padding: 0;
 }
 
-.ve-init-mw-desktopArticleTarget-surface .ve-ui-surface-placeholder {
+.ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	margin-top: -0.45em;
 }
 

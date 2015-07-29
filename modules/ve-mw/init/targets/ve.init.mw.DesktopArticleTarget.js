@@ -214,7 +214,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 		this.toolbar.$element
 			// Set 0 before attach (expanded in #setupToolbar)
 			.css( 'height', '0' )
-			.addClass( 've-init-mw-desktopArticleTarget-toolbar' );
+			.addClass( 've-init-mw-target-toolbar' );
 		this.$element.prepend( this.toolbar.$element );
 	}
 };

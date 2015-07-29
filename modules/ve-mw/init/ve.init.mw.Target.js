@@ -1283,7 +1283,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			ve.track( 'trace.createSurface.exit' );
 
 			surface.$element
-				.addClass( 've-init-mw-desktopArticleTarget-surface' )
+				.addClass( 've-init-mw-target-surface' )
 				.addClass( target.protectedClasses )
 				.appendTo( target.$element );
 
