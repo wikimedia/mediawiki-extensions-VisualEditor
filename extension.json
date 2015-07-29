@@ -330,14 +330,6 @@
 				"visualeditor-saveerror-titleblacklist"
 			]
 		},
-		"ext.visualEditor.mobileViewTarget": {
-			"dependencies": [
-				"ext.visualEditor.mobileArticleTarget"
-			],
-			"targets": [
-				"mobile"
-			]
-		},
 		"ext.visualEditor.mobileArticleTarget": {
 			"scripts": [
 				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js"
