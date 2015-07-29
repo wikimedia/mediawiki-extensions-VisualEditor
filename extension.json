@@ -952,6 +952,7 @@
 				"mediawiki.widgets"
 			],
 			"messages": [
+				"visualeditor-backbutton-tooltip",
 				"visualeditor-beta-label",
 				"visualeditor-beta-warning",
 				"visualeditor-browserwarning",
@@ -998,6 +999,7 @@
 				"visualeditor-recreate",
 				"visualeditor-toolbar-cite-label",
 				"visualeditor-toolbar-savedialog",
+				"visualeditor-toolbar-savedialog-short",
 				"visualeditor-version-label",
 				"visualeditor-viewpage-savewarning",
 				"visualeditor-viewpage-savewarning-discard",

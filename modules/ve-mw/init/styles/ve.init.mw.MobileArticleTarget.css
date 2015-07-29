@@ -9,3 +9,8 @@
 	/* enough to cover .overlay-header-container with z-index: 5 */
 	z-index: 6;
 }
+
+.ve-init-mw-target-surface .ve-ce-documentNode,
+.ve-init-mw-target-surface .ve-ui-surface-placeholder {
+	padding: 0;
+}
