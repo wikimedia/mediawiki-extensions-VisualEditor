@@ -228,6 +228,7 @@
 	"visualeditor-linknodeinspector-title": "Cullegamento semprice-semprice",
 	"visualeditor-loaderror-message": "Errore carrecann' 'e date 'a 'o server: $1.",
 	"visualeditor-loaderror-title": "L'editore nun ha pututo carrecà",
+	"visualeditor-loadwarning": "Errore carrecanno date r' 'o server: $1. Vulite pruvà n'ata vota?",
 	"visualeditor-mainnamespacepagelink": "Project:Namespace prencepale",
 	"visualeditor-media-input-placeholder": "Ricerca file multimediale",
 	"visualeditor-meta-tool": "Opzione",
@@ -273,6 +274,8 @@
 	"visualeditor-version-label": "Verzione",
 	"visualeditor-viewpage-savewarning": "Site sicuro/a ca vulite turnà arreto ô modo 'e veré surtanto senza sarvà primma?",
 	"visualeditor-viewpage-savewarning-discard": "Lassa perde 'e cagnamiente",
-	"visualeditor-wikitext-warning": "Si ausando VisualEditor - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, arape 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-viewpage-savewarning-keep": "Cuntinuà a cagnà",
+	"visualeditor-viewpage-savewarning-title": "Site sicuro/a?",
+	"visualeditor-wikitext-warning": "Si ausando l'editore visuale - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, arape 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }

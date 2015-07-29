@@ -16,7 +16,8 @@
 			"Ahdan",
 			"Marwan Mohamad",
 			"Amire80",
-			"Macofe"
+			"Macofe",
+			"Mirws"
 		]
 	},
 	"apihelp-visualeditor-description": "Mengembalikan HTML5 untuk halaman yang berasal dari layanan parsoid.",
@@ -217,6 +218,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Pengaturan halaman",
 	"visualeditor-dialogbutton-reference-full-label": "Bentuk dasar",
 	"visualeditor-dialogbutton-reference-tooltip": "Dasar",
+	"visualeditor-dialogbutton-reference-title": "Referensi",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "Daftar referensi",
 	"visualeditor-dialogbutton-template-tooltip": "Templat",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transklusi",
