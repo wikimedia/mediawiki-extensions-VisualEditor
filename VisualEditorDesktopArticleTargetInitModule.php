@@ -1,6 +1,6 @@
 <?php
 /**
- * ResourceLoader module for the 'ext.visualEditor.viewPageTarget.init'
+ * ResourceLoader module for the 'ext.visualEditor.desktopArticleTarget.init'
  * module. Necessary to incorporate the VisualEditorTabMessages
  * configuration setting.
  *
@@ -10,7 +10,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-class VisualEditorViewPageTargetInitModule extends ResourceLoaderFileModule {
+class VisualEditorDesktopArticleTargetInitModule extends ResourceLoaderFileModule {
 
 	public function __construct(
 		$options = array(),

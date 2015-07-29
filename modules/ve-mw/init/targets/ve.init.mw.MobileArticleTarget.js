@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MediaWiki Initialization MobileViewTarget class.
+ * VisualEditor MediaWiki Initialization MobileArticleTarget class.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -16,7 +16,7 @@
  * @cfg {number} [section] Number of the section target should scroll to
  * @cfg {boolean} [isIos=false] Whether the platform is an iOS device
  */
-ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( config ) {
+ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) {
 	var currentUri = new mw.Uri();
 	config = config || {};
 
@@ -36,11 +36,11 @@ ve.init.mw.MobileViewTarget = function VeInitMwMobileViewTarget( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.init.mw.MobileViewTarget, ve.init.mw.Target );
+OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.Target );
 
 /* Static Properties */
 
-ve.init.mw.MobileViewTarget.static.toolbarGroups = [
+ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	// Style
 	{ include: [ 'bold', 'italic' ] },
 	// Link
@@ -56,14 +56,14 @@ ve.init.mw.MobileViewTarget.static.toolbarGroups = [
 	}
 ];
 
-ve.init.mw.MobileViewTarget.static.name = 'mobile';
+ve.init.mw.MobileArticleTarget.static.name = 'mobile';
 
 /* Methods */
 
 /**
  * Once surface is ready ready, init UI.
  */
-ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
+ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 	this.restoreEditSection();
 	this.events.trackActivationComplete();
 };
@@ -76,14 +76,14 @@ ve.init.mw.MobileViewTarget.prototype.onSurfaceReady = function () {
  * @param {Object} [config] Configuration options
  * @returns {ve.ui.MobileSurface}
  */
-ve.init.mw.MobileViewTarget.prototype.createSurface = function ( dmDoc, config ) {
+ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
 	return new ve.ui.MobileSurface( dmDoc, config );
 };
 
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.setupToolbar = function ( surface ) {
+ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
 
@@ -94,7 +94,7 @@ ve.init.mw.MobileViewTarget.prototype.setupToolbar = function ( surface ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.attachToolbar = function () {
+ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to the overlay header
 	this.toolbar.$element.appendTo( '.overlay-header > .toolbar' );
 };
@@ -102,14 +102,14 @@ ve.init.mw.MobileViewTarget.prototype.attachToolbar = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.goToHeading = function ( headingNode ) {
+ve.init.mw.MobileArticleTarget.prototype.goToHeading = function ( headingNode ) {
 	this.scrollToHeading( headingNode );
 };
 
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode ) {
+ve.init.mw.MobileArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 	var position,
 		target = this;
 
@@ -118,7 +118,7 @@ ve.init.mw.MobileViewTarget.prototype.scrollToHeading = function ( headingNode )
 			position = headingNode.$element.offset().top - target.toolbar.$element.height();
 			target.surface.$element.closest( '.overlay-content' ).scrollTop( position );
 		} else {
-			ve.init.mw.MobileViewTarget.super.prototype.scrollToHeading.call( target, headingNode );
+			ve.init.mw.MobileArticleTarget.super.prototype.scrollToHeading.call( target, headingNode );
 		}
 	} );
 };

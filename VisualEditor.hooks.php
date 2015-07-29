@@ -53,10 +53,10 @@ class VisualEditorHooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
 		$output->addModules( array(
-			'ext.visualEditor.viewPageTarget.init',
+			'ext.visualEditor.desktopArticleTarget.init',
 			'ext.visualEditor.targetLoader'
 		) );
-		$output->addModuleStyles( array( 'ext.visualEditor.viewPageTarget.noscript' ) );
+		$output->addModuleStyles( array( 'ext.visualEditor.desktopArticleTarget.noscript' ) );
 		// add scroll offset js variable to output
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$skinsToolbarScrollOffset = $veConfig->get( 'VisualEditorSkinToolbarScrollOffset' );
@@ -586,7 +586,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ui/actions/ve.ui.ListAction.test.js',
 				// VisualEditor initialization Tests
 				'lib/ve/tests/init/ve.init.Platform.test.js',
-				'modules/ve-mw/tests/init/targets/ve.init.mw.ViewPageTarget.test.js',
+				'modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js',
 				// IME tests
 				'lib/ve/tests/ce/ve.ce.TestRunner.js',
 				'lib/ve/tests/ce/ve.ce.imetests.test.js',
@@ -636,8 +636,8 @@ class VisualEditorHooks {
 				'ext.visualEditor.mwtransclusion',
 				'ext.visualEditor.mwalienextension',
 				'ext.visualEditor.experimental',
-				'ext.visualEditor.viewPageTarget.init',
-				'ext.visualEditor.viewPageTarget',
+				'ext.visualEditor.desktopArticleTarget.init',
+				'ext.visualEditor.desktopArticleTarget',
 			),
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'VisualEditor',

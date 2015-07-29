@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MediaWiki ViewPageTarget init.
+ * VisualEditor MediaWiki DesktopArticleTarget init.
  *
  * This file must remain as widely compatible as the base compatibility
  * for MediaWiki itself (see mediawiki/core:/resources/startup.js).
@@ -14,7 +14,7 @@
  * actual MediaWiki integration and VisualEditor library.
  *
  * @class mw.libs.ve
- * @alternateClassName ve.init.mw.ViewPageTarget.init
+ * @alternateClassName ve.init.mw.DesktopArticleTarget.init
  * @singleton
  */
 ( function () {
@@ -32,10 +32,10 @@
 	function showLoading() {
 		if ( !init.$loading ) {
 			init.$loading = $(
-				'<div class="ve-init-mw-viewPageTarget-loading-overlay">' +
-					'<div class="ve-init-mw-viewPageTarget-progress">' +
+				'<div class="ve-init-mw-desktopArticleTarget-loading-overlay">' +
+					'<div class="ve-init-mw-desktopArticleTarget-progress">' +
 						// Stylesheets might not have processed yet, so manually set starting width to 0
-						'<div class="ve-init-mw-viewPageTarget-progress-bar" style="width: 0;"></div>' +
+						'<div class="ve-init-mw-desktopArticleTarget-progress-bar" style="width: 0;"></div>' +
 					'</div>' +
 				'</div>'
 			);
@@ -65,7 +65,7 @@
 	}
 
 	function setLoadingProgress( target, duration ) {
-		var $bar = init.$loading.find( '.ve-init-mw-viewPageTarget-progress-bar' ).stop();
+		var $bar = init.$loading.find( '.ve-init-mw-desktopArticleTarget-progress-bar' ).stop();
 		$bar.css( 'transition', 'width ' + duration + 'ms ease-in' );
 		setTimeout( function () {
 			$bar.css( 'width', target + '%' );
@@ -105,7 +105,7 @@
 					// Note: it's safe to use .forEach() (ES5) here, because this code will
 					// never be called if the browser doesn't support ES5
 					[
-						'ext.visualEditor.viewPageTarget',
+						'ext.visualEditor.desktopArticleTarget',
 						'ext.visualEditor.mwgallery',
 						'ext.visualEditor.mwimage',
 						'ext.visualEditor.mwmeta'
@@ -117,9 +117,9 @@
 				} )
 				.then( function () {
 					// Transfer methods
-					ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
+					ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
 
-					var target = new ve.init.mw.ViewPageTarget();
+					var target = new ve.init.mw.DesktopArticleTarget();
 					$( '#content' ).append( target.$element );
 					return target;
 				}, function ( e ) {
@@ -156,7 +156,7 @@
 				return mw.libs.ve.targetLoader.requestPageData(
 					mw.config.get( 'wgRelevantPageName' ),
 					uri.query.oldid,
-					'mwTarget' // ve.init.mw.ViewPageTarget.static.name
+					'mwTarget' // ve.init.mw.DesktopArticleTarget.static.name
 				);
 			} )
 			.done( function () {
@@ -481,7 +481,7 @@
 				if ( history.pushState ) {
 					// Replace the current state with one that is tagged as ours, to prevent the
 					// back button from breaking when used to exit VE. FIXME: there should be a better
-					// way to do this. See also similar code in the ViewPageTarget constructor.
+					// way to do this. See also similar code in the DesktopArticleTarget constructor.
 					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
 					// Set veaction to edit
 					history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
@@ -507,7 +507,7 @@
 			if ( history.pushState && uri.query.veaction !== 'edit' ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
 				// back button from breaking when used to exit VE. FIXME: there should be a better
-				// way to do this. See also similar code in the ViewPageTarget constructor.
+				// way to do this. See also similar code in the DesktopArticleTarget constructor.
 				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
 				// Change the state to the href of the section link that was clicked. This saves
 				// us from having to figure out the section number again.

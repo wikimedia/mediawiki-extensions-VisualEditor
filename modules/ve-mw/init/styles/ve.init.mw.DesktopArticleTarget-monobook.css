@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MediaWiki Initialization ViewPageTarget Monobook skin high-definition styles.
+ * VisualEditor MediaWiki Initialization DesktopArticleTarget Monobook skin high-definition styles.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -22,12 +22,12 @@
 	font-size: 0.992187499998em; /* 1/1.00787401575 */
 }
 
-.ve-init-mw-viewPageTarget-toolbar {
+.ve-init-mw-desktopArticleTarget-toolbar {
 	/* 0.6/0.8, 0.8/0.8, 1/0.6 */
 	margin: -0.75em -1em 1.25em -1em;
 }
 
-.ve-init-mw-viewPageTarget-toolbar > .oo-ui-toolbar-bar {
+.ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
 	top: -3px;
 }
 
@@ -35,12 +35,12 @@
 	border-top: 1px solid #ccc;
 }
 
-.ve-init-mw-viewPageTarget-surface .ve-ce-documentNode,
-.ve-init-mw-viewPageTarget-surface .ve-ui-surface-placeholder {
+.ve-init-mw-desktopArticleTarget-surface .ve-ce-documentNode,
+.ve-init-mw-desktopArticleTarget-surface .ve-ui-surface-placeholder {
 	padding: 0;
 }
 
-.ve-init-mw-viewPageTarget-surface .ve-ui-surface-placeholder {
+.ve-init-mw-desktopArticleTarget-surface .ve-ui-surface-placeholder {
 	margin-top: -0.45em;
 }
 

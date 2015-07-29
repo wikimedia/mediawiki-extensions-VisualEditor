@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MediaWiki ViewPageTarget init styles.
+ * VisualEditor MediaWiki DesktopArticleTarget init styles.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -10,10 +10,10 @@
 
 /*!
  * State                | <html> classes
- * - mw.ViewPageTarget.init.css is loaded
+ * - mw.DesktopArticleTarget.init.css is loaded
  * Reading              | ve-available
  * Loading editor       | ve-available ve-activated ve-loading
- * - mw.ViewPageTarget.css is loaded
+ * - mw.DesktopArticleTarget.css is loaded
  * Activate editor      | ve-available ve-activated ve-activating
  * Active               | ve-available ve-activated ve-active
  * Deactivate editor    | ve-available ve-deactivating
@@ -55,7 +55,7 @@
 	position: relative;
 }
 
-.ve-init-mw-viewPageTarget-loading-overlay {
+.ve-init-mw-desktopArticleTarget-loading-overlay {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -63,7 +63,7 @@
 	margin-top: -0.5em;
 }
 
-.ve-init-mw-viewPageTarget-progress {
+.ve-init-mw-desktopArticleTarget-progress {
 	border: 1px solid #347bff;
 	background: #fff;
 	height: 0.75em;
@@ -72,7 +72,7 @@
 	margin: 0 25%;
 }
 
-.ve-init-mw-viewPageTarget-progress-bar {
+.ve-init-mw-desktopArticleTarget-progress-bar {
 	width: 0;
 	height: 0.75em;
 	background: #347bff;

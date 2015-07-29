@@ -238,10 +238,10 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.viewPageTarget.init": {
-			"class": "VisualEditorViewPageTargetInitModule",
-			"scripts": "modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.init.js",
-			"styles": "modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.init.css",
+		"ext.visualEditor.desktopArticleTarget.init": {
+			"class": "VisualEditorDesktopArticleTargetInitModule",
+			"scripts": "modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
+			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init.css",
 			"dependencies": [
 				"jquery.client",
 				"mediawiki.page.startup",
@@ -267,9 +267,9 @@
 			],
 			"position": "top"
 		},
-		"ext.visualEditor.viewPageTarget.noscript": {
+		"ext.visualEditor.desktopArticleTarget.noscript": {
 			"position": "top",
-			"styles": "modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.noscript.css"
+			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.css"
 		},
 		"ext.visualEditor.targetLoader": {
 			"scripts": "modules/ve-mw/init/ve.init.mw.TargetLoader.js",
@@ -286,25 +286,25 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.viewPageTarget": {
+		"ext.visualEditor.desktopArticleTarget": {
 			"scripts": [
-				"modules/ve-mw/init/targets/ve.init.mw.ViewPageTarget.js"
+				"modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget.css"
+				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css",
-					"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-shared.css",
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
 				],
 				"apex": [
-					"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css",
-					"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-apex.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-shared.css",
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-apex.css"
 				],
 				"monobook": [
-					"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-shared.css",
-					"modules/ve-mw/init/styles/ve.init.mw.ViewPageTarget-monobook.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-shared.css",
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
 				]
 			},
 			"dependencies": [
@@ -331,11 +331,19 @@
 			]
 		},
 		"ext.visualEditor.mobileViewTarget": {
+			"dependencies": [
+				"ext.visualEditor.mobileArticleTarget"
+			],
+			"targets": [
+				"mobile"
+			]
+		},
+		"ext.visualEditor.mobileArticleTarget": {
 			"scripts": [
-				"modules/ve-mw/init/targets/ve.init.mw.MobileViewTarget.js"
+				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.MobileViewTarget.css"
+				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.base",
@@ -1551,7 +1559,7 @@
 		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
 		"VisualEditorHooks": "VisualEditor.hooks.php",
 		"VisualEditorDataModule": "VisualEditorDataModule.php",
-		"VisualEditorViewPageTargetInitModule": "VisualEditorViewPageTargetInitModule.php"
+		"VisualEditorDesktopArticleTargetInitModule": "VisualEditorDesktopArticleTargetInitModule.php"
 	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"

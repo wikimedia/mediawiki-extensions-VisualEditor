@@ -1,12 +1,12 @@
 /*!
- * VisualEditor MediaWiki Initialization ViewPageTarget tests.
+ * VisualEditor MediaWiki Initialization DesktopArticleTarget tests.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /*global mw */
-QUnit.module( 've.init.mw.ViewPageTarget', ve.test.utils.mwEnvironment );
+QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'compatibility', function ( assert ) {
 	var i, profile, list, matches, compatibility,
@@ -174,7 +174,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 		];
 
 	compatibility = {
-		whitelist: ve.init.mw.ViewPageTarget.compatibility.whitelist,
+		whitelist: ve.init.mw.DesktopArticleTarget.compatibility.whitelist,
 		// TODO: Fix this mess when we split ve.init from ve.platform
 		blacklist: mw.libs.ve.blacklist
 	};

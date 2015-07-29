@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MediaWiki Initialization ViewPageTarget class.
+ * VisualEditor MediaWiki Initialization DesktopArticleTarget class.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -15,7 +15,7 @@
  *
  * @constructor
  */
-ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
+ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget() {
 	// A workaround, as default URI does not get updated after pushState (bug 72334)
 	var currentUri = new mw.Uri( location.href );
 
@@ -99,7 +99,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.init.mw.ViewPageTarget, ve.init.mw.Target );
+OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.Target );
 
 /* Events */
 
@@ -115,7 +115,7 @@ OO.inheritClass( ve.init.mw.ViewPageTarget, ve.init.mw.Target );
  * @static
  * @property
  */
-ve.init.mw.ViewPageTarget.compatibility = {
+ve.init.mw.DesktopArticleTarget.compatibility = {
 	// The key is the browser name returned by jQuery.client
 	// The value is either null (match all versions) or a list of tuples
 	// containing an inequality (<,>,<=,>=) and a version number
@@ -158,14 +158,14 @@ ve.init.mw.ViewPageTarget.compatibility = {
  * @param {Mixed} popState From PopStateEvent#state
  * @return {boolean}
  */
-ve.init.mw.ViewPageTarget.prototype.verifyPopState = function ( popState ) {
+ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState ) {
 	return popState && popState.tag === 'visualeditor';
 };
 
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
+ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var toolbar,
 		wasSetup = !!this.toolbar,
 		target = this;
@@ -207,14 +207,14 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbar = function ( surface ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.attachToolbar = function () {
+ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to top of target, before heading etc.
 	// Avoid re-attaching as it breaks CSS animations
 	if ( !this.toolbar.$element.parent().is( this.$element ) ) {
 		this.toolbar.$element
 			// Set 0 before attach (expanded in #setupToolbar)
 			.css( 'height', '0' )
-			.addClass( 've-init-mw-viewPageTarget-toolbar' );
+			.addClass( 've-init-mw-desktopArticleTarget-toolbar' );
 		this.$element.prepend( this.toolbar.$element );
 	}
 };
@@ -223,7 +223,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbar = function () {
  * Set up notices for things like unknown browsers.
  * Needs to be done on each activation because localNoticeMessages is cleared in clearState.
  */
-ve.init.mw.ViewPageTarget.prototype.setupLocalNoticeMessages = function () {
+ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function () {
 	if ( mw.config.get( 'wgTranslatePageTranslation' ) === 'source' ) {
 		// Warn users if they're on a source of the Page Translation feature
 		this.localNoticeMessages.push( 'visualeditor-pagetranslationwarning' );
@@ -231,7 +231,7 @@ ve.init.mw.ViewPageTarget.prototype.setupLocalNoticeMessages = function () {
 
 	if ( !(
 		'vewhitelist' in this.currentUri.query ||
-		$.client.test( ve.init.mw.ViewPageTarget.compatibility.whitelist, null, true )
+		$.client.test( ve.init.mw.DesktopArticleTarget.compatibility.whitelist, null, true )
 	) ) {
 		// Show warning in unknown browsers that pass the support test
 		// Continue at own risk.
@@ -244,7 +244,7 @@ ve.init.mw.ViewPageTarget.prototype.setupLocalNoticeMessages = function () {
  * @param {jQuery.Event} e Event object whih triggered the event
  * @param {string} actionPerformed 'watch' or 'unwatch'
  */
-ve.init.mw.ViewPageTarget.prototype.onWatchToggle = function ( e, actionPerformed ) {
+ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( e, actionPerformed ) {
 	if ( !this.active && !this.activating ) {
 		return;
 	}
@@ -259,8 +259,8 @@ ve.init.mw.ViewPageTarget.prototype.onWatchToggle = function ( e, actionPerforme
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.bindHandlers = function () {
-	ve.init.mw.ViewPageTarget.super.prototype.bindHandlers.call( this );
+ve.init.mw.DesktopArticleTarget.prototype.bindHandlers = function () {
+	ve.init.mw.DesktopArticleTarget.super.prototype.bindHandlers.call( this );
 	if ( this.onWatchToggleHandler ) {
 		$( '#ca-watch, #ca-unwatch' ).on( 'watchpage.mw', this.onWatchToggleHandler );
 	}
@@ -269,8 +269,8 @@ ve.init.mw.ViewPageTarget.prototype.bindHandlers = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.unbindHandlers = function () {
-	ve.init.mw.ViewPageTarget.super.prototype.unbindHandlers.call( this );
+ve.init.mw.DesktopArticleTarget.prototype.unbindHandlers = function () {
+	ve.init.mw.DesktopArticleTarget.super.prototype.unbindHandlers.call( this );
 	if ( this.onWatchToggleHandler ) {
 		$( '#ca-watch, #ca-unwatch' ).off( 'watchpage.mw', this.onWatchToggleHandler );
 	}
@@ -283,7 +283,7 @@ ve.init.mw.ViewPageTarget.prototype.unbindHandlers = function () {
  *   mw.libs.ve.targetLoader#requestPageData, if any
  * @return {jQuery.Promise}
  */
-ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
+ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 	var surface,
 		pageTarget = this;
 
@@ -344,7 +344,7 @@ ve.init.mw.ViewPageTarget.prototype.activate = function ( dataPromise ) {
  * @param {boolean} [noDialog] Do not display a dialog
  * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
  */
-ve.init.mw.ViewPageTarget.prototype.deactivate = function ( noDialog, trackMechanism ) {
+ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trackMechanism ) {
 	var target = this;
 	if ( this.deactivating || ( !this.active && !this.activating ) ) {
 		return;
@@ -375,7 +375,7 @@ ve.init.mw.ViewPageTarget.prototype.deactivate = function ( noDialog, trackMecha
  *
  * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
  */
-ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
+ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 	var abortType,
 		target = this,
 		promises = [];
@@ -460,7 +460,7 @@ ve.init.mw.ViewPageTarget.prototype.cancel = function ( trackMechanism ) {
  * @param {string} errorTypeText
  * @param {string} error
  */
-ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( errorText, error ) {
+ve.init.mw.DesktopArticleTarget.prototype.onLoadError = function ( errorText, error ) {
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
 	if (
@@ -505,7 +505,7 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( errorText, error ) 
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
 	var surfaceReadyTime = ve.now(),
 		target = this;
 
@@ -553,9 +553,9 @@ ve.init.mw.ViewPageTarget.prototype.onSurfaceReady = function () {
  * Handle Escape key presses.
  * @param {jQuery.Event} e Keydown event
  */
-ve.init.mw.ViewPageTarget.prototype.onDocumentKeyDown = function ( e ) {
+ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 	// Parent method
-	ve.init.mw.ViewPageTarget.super.prototype.onDocumentKeyDown.apply( this, arguments );
+	ve.init.mw.DesktopArticleTarget.super.prototype.onDocumentKeyDown.apply( this, arguments );
 
 	var target = this;
 
@@ -578,7 +578,7 @@ ve.init.mw.ViewPageTarget.prototype.onDocumentKeyDown = function ( e ) {
  * @method
  * @param {jQuery.Event} e Mouse click event
  */
-ve.init.mw.ViewPageTarget.prototype.onViewTabClick = function ( e ) {
+ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 	if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
 		return;
 	}
@@ -598,7 +598,7 @@ ve.init.mw.ViewPageTarget.prototype.onViewTabClick = function ( e ) {
  * @param {Object} lastModified Object containing user-formatted date
     and time strings, or undefined if we made no change.
  */
-ve.init.mw.ViewPageTarget.prototype.onSave = function (
+ve.init.mw.DesktopArticleTarget.prototype.onSave = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub
 ) {
 	var newUrlParams, watchChecked;
@@ -673,9 +673,9 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 /**
  * @inheritdoc
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveError = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveError = function () {
 	this.pageDeletedWarning = false;
-	ve.init.mw.ViewPageTarget.super.prototype.onSaveError.apply( this, arguments );
+	ve.init.mw.DesktopArticleTarget.super.prototype.onSaveError.apply( this, arguments );
 };
 
 /**
@@ -683,7 +683,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveError = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorEmpty = function () {
 	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
 };
 
@@ -693,7 +693,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorEmpty = function () {
  * @method
  * @param {Object} editApi
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editApi ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorSpamBlacklist = function ( editApi ) {
 	this.showSaveError(
 		$( $.parseHTML( editApi.sberrorparsed ) ),
 		false // prevents reapply
@@ -706,7 +706,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorSpamBlacklist = function ( editAp
  * @method
  * @param {Object} editApi
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorAbuseFilter = function ( editApi ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorAbuseFilter = function ( editApi ) {
 	this.showSaveError( $( $.parseHTML( editApi.warning ) ) );
 	// Don't disable the save button. If the action is not disallowed the user may save the
 	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
@@ -718,7 +718,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorAbuseFilter = function ( editApi 
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorTitleBlacklist = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorTitleBlacklist = function () {
 	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
 };
 
@@ -728,7 +728,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorTitleBlacklist = function () {
  * @method
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( username ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorNewUser = function ( username ) {
 	var badToken, userMsg;
 	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
 	// mediawiki.jqueryMsg has a bug with [[User:$1|$1]] (bug 51388)
@@ -748,7 +748,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorNewUser = function ( username ) {
  * @method
  * @param {Object} editApi
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
 	var $captchaDiv = $( '<div>' ),
 		$captchaParagraph = $( '<p>' );
 
@@ -803,7 +803,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
  * @param {Object} editApi
  * @param {Object|null} data API response data
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, data ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorUnknown = function ( editApi, data ) {
 	this.showSaveError(
 		$( document.createTextNode(
 			( editApi && editApi.info ) ||
@@ -821,7 +821,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorUnknown = function ( editApi, dat
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveErrorPageDeleted = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorPageDeleted = function () {
 	var continueLabel = mw.msg( 'ooui-dialog-process-continue' );
 
 	this.pageDeletedWarning = true;
@@ -832,7 +832,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveErrorPageDeleted = function () {
  * Handle MWSaveDialog retry events
  * So we can handle trying to save again after page deletion warnings
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveRetry = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveRetry = function () {
 	if ( this.pageDeletedWarning ) {
 		this.recreating = true;
 		this.pageExists = false;
@@ -849,7 +849,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveRetry = function () {
  *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
  * @param {boolean} [warning=false] Whether or not this is a warning.
  */
-ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
+ve.init.mw.DesktopArticleTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
 	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
 };
 
@@ -859,7 +859,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveError = function ( msg, allowReapply
  * @method
  * @param {string} diffHtml
  */
-ve.init.mw.ViewPageTarget.prototype.onShowChanges = function ( diffHtml ) {
+ve.init.mw.DesktopArticleTarget.prototype.onShowChanges = function ( diffHtml ) {
 	// Invalidate the viewer diff on next change
 	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
@@ -874,7 +874,7 @@ ve.init.mw.ViewPageTarget.prototype.onShowChanges = function ( diffHtml ) {
  * @param {Object} jqXHR
  * @param {string} status Text status message
  */
-ve.init.mw.ViewPageTarget.prototype.onShowChangesError = function ( jqXHR, status ) {
+ve.init.mw.DesktopArticleTarget.prototype.onShowChangesError = function ( jqXHR, status ) {
 	alert( ve.msg( 'visualeditor-differror', status ) );
 	this.saveDialog.popPending();
 };
@@ -886,7 +886,7 @@ ve.init.mw.ViewPageTarget.prototype.onShowChangesError = function ( jqXHR, statu
  * @param {jqXHR|null} jqXHR
  * @param {string} status Text status message
  */
-ve.init.mw.ViewPageTarget.prototype.onSerializeError = function ( jqXHR, status ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSerializeError = function ( jqXHR, status ) {
 	alert( ve.msg( 'visualeditor-serializeerror', status ) );
 
 	this.getSurface().getDialogs().closeWindow( 'wikitextswitchconfirm' );
@@ -903,7 +903,7 @@ ve.init.mw.ViewPageTarget.prototype.onSerializeError = function ( jqXHR, status 
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onEditConflict = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onEditConflict = function () {
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'conflict' );
 };
@@ -913,7 +913,7 @@ ve.init.mw.ViewPageTarget.prototype.onEditConflict = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onNoChanges = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onNoChanges = function () {
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'nochanges' );
 	this.saveDialog.getActions().setAbilities( { approve: true } );
@@ -925,7 +925,7 @@ ve.init.mw.ViewPageTarget.prototype.onNoChanges = function () {
  * @method
  * @param {jQuery.Event} e Mouse click event
  */
-ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onToolbarSaveButtonClick = function () {
 	if ( this.edited || this.restoring ) {
 		this.showSaveDialog();
 	}
@@ -937,14 +937,14 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
  * @method
  * @param {jQuery.Event} e Mouse click event
  */
-ve.init.mw.ViewPageTarget.prototype.onToolbarMetaButtonClick = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function () {
 	this.getSurface().getDialogs().openWindow( 'meta' );
 };
 
 /**
  * Re-evaluate whether the toolbar save button should be disabled or not.
  */
-ve.init.mw.ViewPageTarget.prototype.updateToolbarSaveButtonState = function () {
+ve.init.mw.DesktopArticleTarget.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
 	this.edited = this.getSurface().getModel().hasBeenModified();
@@ -960,7 +960,7 @@ ve.init.mw.ViewPageTarget.prototype.updateToolbarSaveButtonState = function () {
  * @method
  * @fires saveReview
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogReview = function () {
 	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.getActions().setAbilities( { approve: false } );
@@ -982,7 +982,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReview = function () {
  * @method
  * @param {string} wikitext
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	// Invalidate the viewer wikitext on next change
 	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
@@ -996,7 +996,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogReviewComplete = function ( wiki
  * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
  *  succeeds/fails.
  */
-ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
+ve.init.mw.DesktopArticleTarget.prototype.saveDocument = function ( saveDeferred ) {
 	if ( this.deactivating ) {
 		return false;
 	}
@@ -1035,7 +1035,7 @@ ve.init.mw.ViewPageTarget.prototype.saveDocument = function ( saveDeferred ) {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.editSource = function () {
+ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 	if ( !this.getSurface().getModel().hasBeenModified() ) {
 		this.switchToWikitextEditor( true );
 		return;
@@ -1051,7 +1051,7 @@ ve.init.mw.ViewPageTarget.prototype.editSource = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveDialogResolveConflict = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogResolveConflict = function () {
 	// Get Wikitext from the DOM, and set up a submit call when it's done
 	this.serialize(
 		this.docToSave,
@@ -1063,7 +1063,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogResolveConflict = function () {
  * Get save form fields from the save dialog form.
  * @returns {Object} Form data for submission to the MediaWiki action=edit UI
  */
-ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
+ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
 	var fields = {};
 	this.$checkboxes
 		.each( function () {
@@ -1091,7 +1091,7 @@ ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
  * @param {string} wikitext Wikitext to submit
  * @returns {boolean} Whether submission was started
  */
-ve.init.mw.ViewPageTarget.prototype.submitWithSaveFields = function ( fields, wikitext ) {
+ve.init.mw.DesktopArticleTarget.prototype.submitWithSaveFields = function ( fields, wikitext ) {
 	return this.submit( wikitext, $.extend( this.getSaveFields(), fields ) );
 };
 
@@ -1099,7 +1099,7 @@ ve.init.mw.ViewPageTarget.prototype.submitWithSaveFields = function ( fields, wi
  * Get edit API options from the save dialog form.
  * @returns {Object} Save options for submission to the MediaWiki API
  */
-ve.init.mw.ViewPageTarget.prototype.getSaveOptions = function () {
+ve.init.mw.DesktopArticleTarget.prototype.getSaveOptions = function () {
 	var key, options = this.getSaveFields(),
 		fieldMap = {
 			wpSummary: 'summary',
@@ -1124,7 +1124,7 @@ ve.init.mw.ViewPageTarget.prototype.getSaveOptions = function () {
  *
  * @return {jQuery.Promise} Promise resolved when surface is torn down
  */
-ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
+ve.init.mw.DesktopArticleTarget.prototype.tearDownSurface = function () {
 	var target = this,
 		promises = [];
 
@@ -1155,11 +1155,11 @@ ve.init.mw.ViewPageTarget.prototype.tearDownSurface = function () {
 
 /**
  * Modify tabs in the skin to support in-place editing.
- * Edit tab is bound outside the module in mw.ViewPageTarget.init.
+ * Edit tab is bound outside the module in mw.DesktopArticleTarget.init.
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
+ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 	var target = this;
 	if ( this.isViewPage ) {
 		// Allow instant switching back to view mode, without refresh
@@ -1189,12 +1189,12 @@ ve.init.mw.ViewPageTarget.prototype.setupSkinTabs = function () {
  * Dummy replaced by init.js so that we can call it again from #onSave after
  * replacing the page contents with the new html.
  */
-ve.init.mw.ViewPageTarget.prototype.setupSectionEditLinks = null;
+ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = null;
 
 /**
  * Add content and event bindings to toolbar save button.
  */
-ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
+ve.init.mw.DesktopArticleTarget.prototype.setupToolbarSaveButton = function () {
 	this.toolbarSaveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
 		flags: [ 'progressive', 'primary' ],
@@ -1219,7 +1219,7 @@ ve.init.mw.ViewPageTarget.prototype.setupToolbarSaveButton = function () {
 /**
  * Add the save button to the user interface.
  */
-ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
+ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () {
 	this.actionsToolbar = new ve.ui.TargetToolbar( this );
 
 	this.actionsToolbar.setup( [
@@ -1243,7 +1243,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarSaveButton = function () {
  *
  * @fires saveWorkflowBegin
  */
-ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
+ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
 	var target = this;
 	this.emit( 'saveWorkflowBegin' );
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
@@ -1291,7 +1291,7 @@ ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
  *
  * @fires saveWorkflowEnd
  */
-ve.init.mw.ViewPageTarget.prototype.onSaveDialogClose = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogClose = function () {
 	var target = this;
 
 	function clear() {
@@ -1313,14 +1313,14 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogClose = function () {
 /**
  * Remember the window's scroll position.
  */
-ve.init.mw.ViewPageTarget.prototype.saveScrollPosition = function () {
+ve.init.mw.DesktopArticleTarget.prototype.saveScrollPosition = function () {
 	this.scrollTop = $( window ).scrollTop();
 };
 
 /**
  * Restore the window's scroll position.
  */
-ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
+ve.init.mw.DesktopArticleTarget.prototype.restoreScrollPosition = function () {
 	if ( this.scrollTop ) {
 		$( window ).scrollTop( this.scrollTop );
 		this.scrollTop = null;
@@ -1332,7 +1332,7 @@ ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
  *
  * @return {jQuery.Promise} Promise which resolves when toolbar is hidden
  */
-ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
+ve.init.mw.DesktopArticleTarget.prototype.tearDownToolbar = function () {
 	var target = this,
 		deferred = $.Deferred();
 	this.toolbar.$element.css( 'height', this.toolbar.$bar.outerHeight() );
@@ -1352,7 +1352,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownToolbar = function () {
  *
  * @return {jQuery.Promise} Promise which resolves when debug bar is hidden
  */
-ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
+ve.init.mw.DesktopArticleTarget.prototype.tearDownDebugBar = function () {
 	var target = this;
 	if ( this.debugBar ) {
 		return this.debugBar.$element.slideUp( 'fast' ).promise().then( function () {
@@ -1366,7 +1366,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownDebugBar = function () {
 /**
  * Change the document title to state that we are now editing.
  */
-ve.init.mw.ViewPageTarget.prototype.changeDocumentTitle = function () {
+ve.init.mw.DesktopArticleTarget.prototype.changeDocumentTitle = function () {
 	var pageName = mw.config.get( 'wgPageName' ),
 		title = mw.Title.newFromText( pageName );
 	if ( title ) {
@@ -1381,14 +1381,14 @@ ve.init.mw.ViewPageTarget.prototype.changeDocumentTitle = function () {
 /**
  * Restore the original document title.
  */
-ve.init.mw.ViewPageTarget.prototype.restoreDocumentTitle = function () {
+ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
 	document.title = this.originalDocumentTitle;
 };
 
 /**
  * Page modifications for switching to edit mode.
  */
-ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
+ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	var uri;
 
 	// Deselect current mode (e.g. "view" or "history"). In skins like monobook that don't have
@@ -1416,7 +1416,7 @@ ve.init.mw.ViewPageTarget.prototype.transformPage = function () {
 /**
  * Page modifications for switching back to view mode.
  */
-ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
+ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	var uri, keys;
 
 	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
@@ -1454,7 +1454,7 @@ ve.init.mw.ViewPageTarget.prototype.restorePage = function () {
 /**
  * @param {Event} e Native event object
  */
-ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
+ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	var newUri;
 
 	if ( !this.verifyPopState( e.state ) ) {
@@ -1486,7 +1486,7 @@ ve.init.mw.ViewPageTarget.prototype.onWindowPopState = function ( e ) {
     and time strings, or undefined if we made no change.
  * @param {string} contentSub What HTML to show as the content subtitle
  */
-ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
+ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
 	var $editableContent, $imgContent,
@@ -1539,7 +1539,7 @@ ve.init.mw.ViewPageTarget.prototype.replacePageContent = function (
  * @method
  * @param {HTMLElement} heading Heading element of section
  */
-ve.init.mw.ViewPageTarget.prototype.getEditSection = function ( heading ) {
+ve.init.mw.DesktopArticleTarget.prototype.getEditSection = function ( heading ) {
 	var $page = $( '#mw-content-text' ),
 		section = 0;
 	$page.find( 'h1, h2, h3, h4, h5, h6' ).not( '#toc h2' ).each( function () {
@@ -1557,7 +1557,7 @@ ve.init.mw.ViewPageTarget.prototype.getEditSection = function ( heading ) {
  * @method
  * @param {HTMLElement} heading Heading element of section
  */
-ve.init.mw.ViewPageTarget.prototype.saveEditSection = function ( heading ) {
+ve.init.mw.DesktopArticleTarget.prototype.saveEditSection = function ( heading ) {
 	this.section = this.getEditSection( heading );
 };
 
@@ -1566,7 +1566,7 @@ ve.init.mw.ViewPageTarget.prototype.saveEditSection = function ( heading ) {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.setupUnloadHandlers = function () {
+ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
 	// Remember any already set beforeunload handler
 	this.onBeforeUnloadFallback = window.onbeforeunload;
 	// Attach our handlers
@@ -1578,7 +1578,7 @@ ve.init.mw.ViewPageTarget.prototype.setupUnloadHandlers = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.tearDownUnloadHandlers = function () {
+ve.init.mw.DesktopArticleTarget.prototype.tearDownUnloadHandlers = function () {
 	// Restore whatever previous onbeforeunload hook existed
 	window.onbeforeunload = this.onBeforeUnloadFallback;
 	this.onBeforeUnloadFallback = null;
@@ -1588,7 +1588,7 @@ ve.init.mw.ViewPageTarget.prototype.tearDownUnloadHandlers = function () {
 /**
  * Show the beta dialog as needed
  */
-ve.init.mw.ViewPageTarget.prototype.maybeShowWelcomeDialog = function () {
+ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 	var usePrefs, prefSaysShow, urlSaysHide, windowManager,
 		target = this;
 
@@ -1598,8 +1598,8 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowWelcomeDialog = function () {
 		// Set up a temporary window manager
 		windowManager = new OO.ui.WindowManager( {
 			classes: [
-				've-init-mw-viewPageTarget-windowManager',
-				've-init-mw-viewPageTarget-windowManager-welcome'
+				've-init-mw-desktopArticleTarget-windowManager',
+				've-init-mw-desktopArticleTarget-windowManager-welcome'
 			]
 		} );
 		$( 'body' ).append( windowManager.$element );
@@ -1667,7 +1667,7 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowWelcomeDialog = function () {
 /**
  * Show the meta dialog as needed on load.
  */
-ve.init.mw.ViewPageTarget.prototype.maybeShowMetaDialog = function () {
+ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 	var target = this;
 
 	this.welcomeDialogPromise
@@ -1689,7 +1689,7 @@ ve.init.mw.ViewPageTarget.prototype.maybeShowMetaDialog = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 	var fallbackResult;
 	// Check if someone already set on onbeforeunload hook
 	if ( this.onBeforeUnloadFallback ) {
@@ -1712,7 +1712,7 @@ ve.init.mw.ViewPageTarget.prototype.onBeforeUnload = function () {
  *
  * @method
  */
-ve.init.mw.ViewPageTarget.prototype.onUnload = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
 	if ( !this.submitting ) {
 		ve.track( 'mwedit.abort', {
 			type: this.edited ? 'unknown-edited' : 'unknown',
@@ -1726,7 +1726,7 @@ ve.init.mw.ViewPageTarget.prototype.onUnload = function () {
  *
  * @param {boolean} [discardChanges] Whether to discard changes or not.
  */
-ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardChanges ) {
+ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges ) {
 	var target = this;
 	if ( discardChanges ) {
 		ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
@@ -1749,6 +1749,6 @@ ve.init.mw.ViewPageTarget.prototype.switchToWikitextEditor = function ( discardC
 /**
  * Resets the document opacity when we've decided to cancel switching to the wikitext editor.
  */
-ve.init.mw.ViewPageTarget.prototype.resetDocumentOpacity = function () {
+ve.init.mw.DesktopArticleTarget.prototype.resetDocumentOpacity = function () {
 	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
 };
