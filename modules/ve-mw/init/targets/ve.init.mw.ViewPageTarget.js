@@ -889,6 +889,8 @@ ve.init.mw.ViewPageTarget.prototype.onShowChangesError = function ( jqXHR, statu
 ve.init.mw.ViewPageTarget.prototype.onSerializeError = function ( jqXHR, status ) {
 	alert( ve.msg( 'visualeditor-serializeerror', status ) );
 
+	this.getSurface().getDialogs().closeWindow( 'wikitextswitchconfirm' );
+
 	// It's possible to get here while the save dialog has never been opened (if the user uses
 	// the switch to source mode option)
 	if ( this.saveDialog ) {
