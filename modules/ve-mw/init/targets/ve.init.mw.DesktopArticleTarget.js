@@ -285,7 +285,7 @@ ve.init.mw.DesktopArticleTarget.prototype.unbindHandlers = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 	var surface,
-		pageTarget = this;
+		target = this;
 
 	if ( !this.active && !this.activating ) {
 		this.activating = true;
@@ -300,7 +300,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 			// We have to focus the page after hiding the original content, otherwise
 			// in firefox the contentEditable container was below the view page, and
 			// 'focus' scrolled the screen down.
-			pageTarget.getSurface().getView().focus();
+			target.getSurface().getView().focus();
 		} ).fail( function () {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
