@@ -46,7 +46,17 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	// Link
 	{ include: [ 'back' ] },
 	// Style
-	{ include: [ 'bold', 'italic' ] },
+	{
+		classes: [ 've-test-toolbar-style' ],
+		type: 'list',
+		icon: 'textStyle',
+		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		forceExpand: [ 'bold', 'italic', 'clear' ],
+		promote: [ 'bold', 'italic' ],
+		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
+	},
 	// Link
 	{ include: [ 'link' ] },
 	// Cite
