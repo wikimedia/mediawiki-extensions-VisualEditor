@@ -220,7 +220,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 		this.toolbar.$element
 			// Set 0 before attach (expanded in #setupToolbar)
 			.css( 'height', '0' )
-			.addClass( 've-init-mw-target-toolbar' );
+			.addClass( 've-init-mw-desktopArticleTarget-toolbar' );
 		this.$element.prepend( this.toolbar.$element );
 	}
 };
@@ -1011,7 +1011,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveDocument = function ( saveDeferred
  * away if the document is unmodified. If we open the dialog, the document opacity will be set to
  * half, which can be reset with the resetDocumentOpacity function.
  *
- * @method
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 	if ( !this.getSurface().getModel().hasBeenModified() ) {

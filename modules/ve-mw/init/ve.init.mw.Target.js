@@ -939,6 +939,14 @@ ve.init.mw.Target.prototype.clearState = function () {
 };
 
 /**
+ * Switch to edit source mode
+ *
+ * @abstract
+ * @method
+ */
+ve.init.mw.Target.prototype.editSource = null;
+
+/**
  * Serialize the current document and store the result in the serialization cache on the server.
  *
  * This function returns a promise that is resolved once serialization is complete, with the

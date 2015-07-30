@@ -47,18 +47,10 @@
 	font-size: 1.09375em; /* 0.875/0.8 */
 }
 
-.ve-init-mw-target-toolbar {
+.ve-init-mw-desktopArticleTarget-toolbar {
 	/* 1/0.8 */
 	margin: -1.25em -1.25em 1.25em -1.25em;
 	position: relative;
-	border-bottom: 1px solid rgba(0,0,0,0.15);
-}
-
-.ve-init-mw-target-toolbar > .oo-ui-toolbar-bar {
-	/* Upstream OOjs UI has 2px. We split this between 1px here
-	   and 1px on the container to allow a smooth collapse transition
-	   where the bottom pixel line sweeps it up. */
-	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .ve-init-target > .ve-ui-debugBar {
@@ -112,7 +104,7 @@
 		padding: 0 1.714em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
 	}
 
-	.ve-init-mw-target-toolbar {
+	.ve-init-mw-desktopArticleTarget-toolbar {
 		/* 1.25/0.8, 1.5/0.8 */
 		margin: -1.5625em -1.875em 1.875em -1.875em;
 	}
