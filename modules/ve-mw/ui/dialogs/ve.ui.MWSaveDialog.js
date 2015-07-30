@@ -505,6 +505,7 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'save' ) {
 		return new OO.ui.Process( function () {
 			var saveDeferred = $.Deferred();
+			this.swapPanel( 'save' );
 			this.emit( 'save', saveDeferred );
 			return saveDeferred.promise();
 		}, this );
