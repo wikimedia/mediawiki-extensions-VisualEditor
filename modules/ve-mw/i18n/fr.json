@@ -326,6 +326,7 @@
 	"visualeditor-timeout": "Il semble que cet éditeur n’est pas disponible pour le moment. Voulez-vous modifier avec l’éditeur de wikicode à la place ?",
 	"visualeditor-toolbar-cite-label": "Citer",
 	"visualeditor-toolbar-savedialog": "Enregistrer la page",
+	"visualeditor-toolbar-savedialog-short": "Enregistrer",
 	"visualeditor-usernamespacepagelink": "Project:Espace de noms utilisateur",
 	"visualeditor-version-label": "Version",
 	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer ?",
