@@ -196,7 +196,9 @@ ve.ui.MWSettingsPage.prototype.onTableOfContentsFieldChange = function () {
 ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 	this.redirectTargetInput.setDisabled( !value );
 	this.enableStaticRedirectInput.setDisabled( !value );
-	if ( !value ) {
+	if ( value ) {
+		this.redirectTargetInput.focus();
+	} else {
 		this.redirectTargetInput.setValue( '' );
 		this.enableStaticRedirectInput.setSelected( false );
 	}
