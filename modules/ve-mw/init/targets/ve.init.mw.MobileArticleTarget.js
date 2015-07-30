@@ -18,15 +18,19 @@
  */
 ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) {
 	var currentUri = new mw.Uri();
+
 	config = config || {};
 
 	// Parent constructor
 	ve.init.mw.Target.call(
-		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid
+		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid, config
 	);
 
 	this.section = config.section;
 	this.isIos = !!config.isIos;
+
+	// Initialization
+	this.$element.addClass( 've-init-mw-mobileArticleTarget' );
 };
 
 /* Inheritance */

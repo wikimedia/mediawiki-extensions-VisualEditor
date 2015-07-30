@@ -14,13 +14,16 @@
  * @extends ve.init.mw.Target
  *
  * @constructor
+ * @param {Object} config Configuration options
  */
-ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget() {
+ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config ) {
 	// A workaround, as default URI does not get updated after pushState (bug 72334)
 	var currentUri = new mw.Uri( location.href );
 
 	// Parent constructor
-	ve.init.mw.Target.call( this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid );
+	ve.init.mw.DesktopArticleTarget.super.call(
+		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid, config
+	);
 
 	// Parent constructor bound key event handlers, but we don't want them bound until
 	// we activate; so unbind them again
@@ -83,6 +86,9 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget() {
 		noChanges: 'onNoChanges',
 		serializeError: 'onSerializeError'
 	} );
+
+	// Initialization
+	this.$element.addClass( 've-init-mw-desktopArticleTarget' );
 
 	if ( history.replaceState ) {
 		// We replace the current state with one that's marked with our tag. This way, when users

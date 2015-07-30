@@ -15,17 +15,21 @@
  *
  * @constructor
  * @param {string} pageName Name of target page
- * @param {number} [revisionId] If the editor should load a revision of the page, pass the
+ * @param {string} [revisionId] If the editor should load a revision of the page, pass the
  *  revision id here. Defaults to loading the latest version (see #load).
+ * @param {Object} [config] Configuration options
  */
-ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
-	// Parent constructor
-	ve.init.Target.call( this, {
+ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
+	config = config || {};
+	config.toolbarConfig = $.extend( {
 		shadow: true,
 		actions: true,
 		floatable: true,
 		scrollOffset: mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 )
-	} );
+	}, config.toolbarConfig );
+
+	// Parent constructor
+	ve.init.mw.Target.super.call( this, config );
 
 	// Properties
 	this.pageName = pageName;
@@ -45,6 +49,9 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId ) {
 	this.preparedCacheKeyPromise = null;
 	this.clearState();
 	this.generateCitationFeatures();
+
+	// Initialization
+	this.$element.addClass( 've-init-mw-target' );
 
 	// Events
 	this.connect( this, {
