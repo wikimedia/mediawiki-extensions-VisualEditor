@@ -278,6 +278,9 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	// Data initialisation
 	data = data || {};
+	if ( data.action !== 'apply' ) {
+		return;
+	}
 
 	var // Table of Contents items
 		tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' ),

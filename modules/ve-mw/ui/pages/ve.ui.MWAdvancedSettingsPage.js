@@ -258,6 +258,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 	// Data initialization
 	data = data || {};
+	if ( data.action !== 'apply' ) {
+		return;
+	}
 
 	var // Indexing items
 		currentIndexingItem = this.getMetaItem( 'mwIndex' ),

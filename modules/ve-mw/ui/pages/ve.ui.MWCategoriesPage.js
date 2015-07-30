@@ -264,14 +264,21 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 
 /**
  * Tear down the page. This is called when the MWMetaDialog is torn down.
+ *
+ * @param {Object} [data] Dialog tear down data
  */
-ve.ui.MWCategoriesPage.prototype.teardown = function () {
+ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 	var currentDefaultSortKeyItem = this.getDefaultSortKeyItem(),
 		newDefaultSortKey = this.defaultSortInput.getValue(),
 		newDefaultSortKeyData = {
 			type: 'mwDefaultSort',
 			attributes: { content: newDefaultSortKey }
 		};
+
+	data = data || {};
+	if ( data.action !== 'apply' ) {
+		return;
+	}
 
 	// Alter the default sort key iff it's been touched & is actually different
 	if ( this.defaultSortKeyTouched ) {
