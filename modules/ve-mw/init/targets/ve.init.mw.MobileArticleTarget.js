@@ -44,6 +44,11 @@ OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.Target );
  * Leave the editor
  */
 
+/**
+ * @event editSource
+ * Switch to edit source mode
+ */
+
 /* Static Properties */
 
 ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
@@ -117,8 +122,9 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
+	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
 	// Append the context to the toolbar
-	this.toolbar.$element.append( surface.context.$element );
+	this.toolbar.$bar.append( surface.context.$element );
 };
 
 /**
@@ -127,6 +133,33 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to the overlay header
 	this.toolbar.$element.appendTo( '.overlay-header > .toolbar' );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
+	this.actionsToolbar = new ve.ui.TargetToolbar( this );
+
+	this.actionsToolbar.setup( [
+		{
+			type: 'list',
+			icon: 'menu',
+			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+			include: [ 'editModeSource' ]
+		}
+	], this.getSurface() );
+
+	this.actionsToolbar.emit( 'updateState' );
+
+	this.toolbar.$actions.append( this.actionsToolbar.$element, this.toolbarSaveButton.$element );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.editSource = function () {
+	this.emit( 'editSource' );
 };
 
 /**

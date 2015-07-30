@@ -22,12 +22,12 @@
 	font-size: 0.992187499998em; /* 1/1.00787401575 */
 }
 
-.ve-init-mw-target-toolbar {
+.ve-init-mw-desktopArticleTarget-toolbar {
 	/* 0.6/0.8, 0.8/0.8, 1/0.6 */
 	margin: -0.75em -1em 1.25em -1em;
 }
 
-.ve-init-mw-target-toolbar > .oo-ui-toolbar-bar {
+.ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
 	top: -3px;
 }
 
