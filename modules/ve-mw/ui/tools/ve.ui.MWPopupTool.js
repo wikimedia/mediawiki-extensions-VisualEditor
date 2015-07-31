@@ -221,7 +221,7 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
  */
 ve.ui.MWHelpPopupTool.prototype.onKeyboardShortcutsClick = function () {
 	this.popup.toggle( false );
-	ve.ui.commandRegistry.lookup( 'commandHelp' ).execute( this.toolbar.getSurface() );
+	ve.init.target.commandRegistry.lookup( 'commandHelp' ).execute( this.toolbar.getSurface() );
 };
 
 /* Registration */
