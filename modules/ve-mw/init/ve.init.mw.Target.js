@@ -300,27 +300,26 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
 	) );
 };
 
+/* Methods */
+
 /**
  * Handle response to a successful load request.
  *
  * This method is called within the context of a target instance. If successful the DOM from the
  * server will be parsed, stored in {this.doc} and then {this.onReady} will be called.
  *
- * @static
  * @method
  * @param {Object} response API response data
  * @param {string} status Text status message
  * @fires loadError
  */
-ve.init.mw.Target.onLoad = function ( response ) {
+ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 	var i, len, linkData, aboutDoc, docRevIdMatches,
 		docRevId = 0,
 		data = response ? response.visualeditor : null;
 
 	if ( typeof data.content !== 'string' ) {
-		ve.init.mw.Target.onLoadError.call(
-			this, 've-api', 'No HTML content in response from server'
-		);
+		this.loadFail( 've-api', 'No HTML content in response from server' );
 	} else {
 		ve.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
@@ -358,8 +357,7 @@ ve.init.mw.Target.onLoad = function ( response ) {
 		if ( docRevId !== this.revid ) {
 			if ( this.retriedRevIdConflict ) {
 				// Retried already, just error the second time.
-				ve.init.mw.Target.onLoadError.call(
-					this,
+				this.loadFail(
 					've-api',
 					'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
 						'returned by server do not match'
@@ -425,7 +423,7 @@ ve.init.mw.Target.prototype.onReady = function () {
 	this.loading = false;
 	this.edited = false;
 	this.setupSurface( this.doc, function () {
-		// onLoad() may have called setAssumeExistence( true );
+		// loadSuccess() may have called setAssumeExistence( true );
 		ve.init.platform.linkCache.setAssumeExistence( false );
 		target.getSurface().getModel().connect( target, {
 			history: 'updateToolbarSaveButtonState'
@@ -450,13 +448,12 @@ ve.init.mw.Target.prototype.onSurfaceReady = function () {
  *
  * This method is called within the context of a target instance.
  *
- * @static
  * @method
  * @param {string} errorTypeText Error type text from mw.Api
  * @param {Object} error Object containing xhr, textStatus and exception keys
  * @fires loadError
  */
-ve.init.mw.Target.onLoadError = function ( errorText, error ) {
+ve.init.mw.Target.prototype.loadFail = function ( errorText, error ) {
 	this.loading = false;
 	this.emit( 'loadError', errorText, error );
 };
@@ -466,7 +463,6 @@ ve.init.mw.Target.onLoadError = function ( errorText, error ) {
  *
  * This method is called within the context of a target instance.
  *
- * @static
  * @method
  * @param {HTMLDocument} doc HTML document we tried to save
  * @param {Object} saveData Options that were used
@@ -475,7 +471,7 @@ ve.init.mw.Target.onLoadError = function ( errorText, error ) {
  * @fires editConflict
  * @fires save
  */
-ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
+ve.init.mw.Target.prototype.onSave = function ( doc, saveData, response ) {
 	this.saving = false;
 	var data = response.visualeditoredit;
 	if ( !data ) {
@@ -491,7 +487,6 @@ ve.init.mw.Target.onSave = function ( doc, saveData, response ) {
 			data.content,
 			data.categorieshtml,
 			data.newrevid,
-			data.isRedirect,
 			data.displayTitleHtml,
 			data.lastModified,
 			data.contentSub
@@ -643,29 +638,28 @@ ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, statu
 /**
  * Handle a successful show changes request.
  *
- * @static
  * @method
  * @param {Object} response API response data
  * @param {string} status Text status message
  * @fires showChanges
  * @fires noChanges
  */
-ve.init.mw.Target.onShowChanges = function ( response ) {
+ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
 	var data = response.visualeditor;
 	this.diffing = false;
 	if ( !data && !response.error ) {
-		ve.init.mw.Target.onShowChangesError.call( this, null, 'Invalid response from server', null );
+		this.showChangesFail( null, 'Invalid response from server', null );
 	} else if ( response.error ) {
-		ve.init.mw.Target.onShowChangesError.call(
-			this, null, 'Unsuccessful request: ' + response.error.info, null
+		this.showChangesFail(
+			null, 'Unsuccessful request: ' + response.error.info, null
 		);
 	} else if ( data.result === 'nochanges' ) {
 		this.emit( 'noChanges' );
 	} else if ( data.result !== 'success' ) {
-		ve.init.mw.Target.onShowChangesError.call( this, null, 'Failed request: ' + data.result, null );
+		this.showChangesFail( null, 'Failed request: ' + data.result, null );
 	} else if ( typeof data.diff !== 'string' ) {
-		ve.init.mw.Target.onShowChangesError.call(
-			this, null, 'Invalid HTML content in response from server', null
+		this.showChangesFail(
+			null, 'Invalid HTML content in response from server', null
 		);
 	} else {
 		this.emit( 'showChanges', data.diff );
@@ -675,7 +669,6 @@ ve.init.mw.Target.onShowChanges = function ( response ) {
 /**
  * Handle errors during showChanges action.
  *
- * @static
  * @method
  * @this ve.init.mw.Target
  * @param {Object} jqXHR
@@ -683,7 +676,7 @@ ve.init.mw.Target.onShowChanges = function ( response ) {
  * @param {Mixed} error HTTP status text
  * @fires showChangesError
  */
-ve.init.mw.Target.onShowChangesError = function ( jqXHR, status, error ) {
+ve.init.mw.Target.prototype.showChangesFail = function ( jqXHR, status, error ) {
 	this.diffing = false;
 	this.emit( 'showChangesError', jqXHR, status, error );
 };
@@ -699,20 +692,20 @@ ve.init.mw.Target.onShowChangesError = function ( jqXHR, status, error ) {
  * @param {string} status Text status message
  * @fires serializeComplete
  */
-ve.init.mw.Target.onSerialize = function ( response ) {
+ve.init.mw.Target.prototype.onSerialize = function ( response ) {
 	this.serializing = false;
 	var data = response.visualeditor;
 	if ( !data && !response.error ) {
-		ve.init.mw.Target.onSerializeError.call( this, null, 'Invalid response from server', null );
+		this.onSerializeError( null, 'Invalid response from server', null );
 	} else if ( response.error ) {
-		ve.init.mw.Target.onSerializeError.call(
-			this, null, 'Unsuccessful request: ' + response.error.info, null
+		this.onSerializeError(
+			null, 'Unsuccessful request: ' + response.error.info, null
 		);
 	} else if ( data.result === 'error' ) {
-		ve.init.mw.Target.onSerializeError.call( this, null, 'Server error', null );
+		this.onSerializeError( null, 'Server error', null );
 	} else if ( typeof data.content !== 'string' ) {
-		ve.init.mw.Target.onSerializeError.call(
-			this, null, 'No Wikitext content in response from server', null
+		this.onSerializeError(
+			null, 'No Wikitext content in response from server', null
 		);
 	} else {
 		if ( typeof this.serializeCallback === 'function' ) {
@@ -728,19 +721,16 @@ ve.init.mw.Target.onSerialize = function ( response ) {
  *
  * This method is called within the context of a target instance.
  *
- * @static
  * @method
  * @param {jqXHR|null} jqXHR
  * @param {string} status Text status message
  * @param {Mixed|null} error HTTP status text
  * @fires serializeError
  */
-ve.init.mw.Target.onSerializeError = function ( jqXHR, status, error ) {
+ve.init.mw.Target.prototype.onSerializeError = function ( jqXHR, status, error ) {
 	this.serializing = false;
 	this.emit( 'serializeError', jqXHR, status, error );
 };
-
-/* Methods */
 
 /**
  * Add reference insertion tools from on-wiki data.
@@ -912,8 +902,8 @@ ve.init.mw.Target.prototype.load = function ( dataPromise ) {
 		this.constructor.name
 	);
 	this.loading
-		.done( ve.init.mw.Target.onLoad.bind( this ) )
-		.fail( ve.init.mw.Target.onLoadError.bind( this ) );
+		.done( this.loadSuccess.bind( this ) )
+		.fail( this.loadFail.bind( this ) );
 
 	return true;
 };
@@ -1192,8 +1182,8 @@ ve.init.mw.Target.prototype.showChanges = function ( doc ) {
 		page: this.pageName,
 		oldid: this.revid
 	}, 'diff' )
-		.done( ve.init.mw.Target.onShowChanges.bind( this ) )
-		.fail( ve.init.mw.Target.onShowChangesError.bind( this ) );
+		.done( this.showChangesSuccess.bind( this ) )
+		.fail( this.showChangesFail.bind( this ) );
 
 	return true;
 };

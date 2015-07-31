@@ -174,7 +174,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 		];
 
 	compatibility = {
-		whitelist: ve.init.mw.DesktopArticleTarget.compatibility.whitelist,
+		whitelist: ve.init.mw.DesktopArticleTarget.static.compatibility.whitelist,
 		// TODO: Fix this mess when we split ve.init from ve.platform
 		blacklist: mw.libs.ve.blacklist
 	};
