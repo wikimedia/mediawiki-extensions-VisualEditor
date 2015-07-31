@@ -17,7 +17,8 @@
 			"Macofe",
 			"Toniher",
 			"Maceleiro",
-			"F3RaN"
+			"F3RaN",
+			"SenyorFontal"
 		]
 	},
 	"apihelp-visualeditor-description": "Torna a HTML5 per a una pàgina des del servei Parsoid.",
@@ -40,6 +41,7 @@
 	"tooltip-ca-ve-edit": "Modifica aquesta pàgina",
 	"visualeditor-advancedsettings-tool": "Configuració avançada",
 	"visualeditor-annotationbutton-linknode-tooltip": "Enllaç senzill",
+	"visualeditor-backbutton-tooltip": "Torna",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "L'editor visual està en fase \"beta\". Per canviar a l'editor font en qualsevol moment sense perdre els canvis, obriu el menú desplegable al costat de «{{int:visualeditor-toolbar-savedialog}}» i seleccioneu «{{int:visualeditor-mweditmodesource-tool}}».",
