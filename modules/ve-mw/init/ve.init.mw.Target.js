@@ -1405,8 +1405,15 @@ ve.init.mw.Target.prototype.updateToolbarSaveButtonState = function () {
  */
 ve.init.mw.Target.prototype.onToolbarSaveButtonClick = function () {
 	if ( this.edited || this.restoring ) {
+		this.showSaveDialog();
 		this.emit( 'saveBegin' );
 	}
+};
+
+/**
+ * Show a save dialog
+ */
+ve.init.mw.Target.prototype.showSaveDialog = function () {
 };
 
 /**

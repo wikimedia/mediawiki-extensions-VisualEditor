@@ -12,7 +12,7 @@
  * noted otherwise.
  *
  * @class
- * @extends OO.ui.ProcessDialog
+ * @extends ve.ui.FragmentDialog
  *
  * @constructor
  * @param {Object} [config] Config options
@@ -26,11 +26,12 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	this.restoring = false;
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
+	this.target = null;
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWSaveDialog, OO.ui.ProcessDialog );
+OO.inheritClass( ve.ui.MWSaveDialog, ve.ui.FragmentDialog );
 
 /* Static Properties */
 
@@ -470,6 +471,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			this.target = data.target;
+			this.setEditSummary( data.editSummary );
+			this.setupCheckboxes( data.$checkboxes );
 			// Old messages should not persist
 			this.clearAllMessages();
 			this.swapPanel( 'save' );
@@ -495,6 +499,17 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			this.editSummaryInput.focus();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
+		.next( function () {
+			this.emit( 'close' );
+			this.target = null;
 		}, this );
 };
 

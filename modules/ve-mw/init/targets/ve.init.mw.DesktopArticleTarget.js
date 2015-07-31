@@ -68,7 +68,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 	// Events
 	this.connect( this, {
-		saveBegin: 'showSaveDialog',
 		save: 'onSave',
 		saveErrorEmpty: 'onSaveErrorEmpty',
 		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
@@ -1038,6 +1037,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogResolveConflict = function
 
 /**
  * Get save form fields from the save dialog form.
+ *
  * @returns {Object} Form data for submission to the MediaWiki action=edit UI
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
@@ -1064,6 +1064,7 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
 
 /**
  * Invoke #submit with the data from #getSaveFields
+ *
  * @param {Object} fields Fields to add in addition to those from #getSaveFields
  * @param {string} wikitext Wikitext to submit
  * @returns {boolean} Whether submission was started
@@ -1074,10 +1075,12 @@ ve.init.mw.DesktopArticleTarget.prototype.submitWithSaveFields = function ( fiel
 
 /**
  * Get edit API options from the save dialog form.
+ *
  * @returns {Object} Save options for submission to the MediaWiki API
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveOptions = function () {
-	var key, options = this.getSaveFields(),
+	var key,
+		options = this.getSaveFields(),
 		fieldMap = {
 			wpSummary: 'summary',
 			wpMinoredit: 'minor',
@@ -1191,28 +1194,23 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
 };
 
 /**
- * Show the save dialog.
- *
+ * @inheritdoc
  * @fires saveWorkflowBegin
  */
 ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
-	var target = this;
+	var target = this,
+		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+
 	this.emit( 'saveWorkflowBegin' );
+
+	// Preload the serialization
+	if ( !this.docToSave ) {
+		this.docToSave = this.getSurface().getDom();
+	}
+	this.prepareCacheKey( this.docToSave );
+
+	// Connect events to save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
-		var currentWindow = target.getSurface().getContext().getInspectors().getCurrentWindow();
-		target.origSelection = target.getSurface().getModel().getSelection();
-
-		// Make sure any open inspectors are closed
-		if ( currentWindow ) {
-			currentWindow.close();
-		}
-
-		// Preload the serialization
-		if ( !target.docToSave ) {
-			target.docToSave = target.getSurface().getDom();
-		}
-		target.prepareCacheKey( target.docToSave );
-
 		if ( !target.saveDialog ) {
 			target.saveDialog = win;
 
@@ -1221,21 +1219,19 @@ ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
 				save: 'saveDocument',
 				review: 'onSaveDialogReview',
 				resolve: 'onSaveDialogResolveConflict',
-				retry: 'onSaveRetry'
+				retry: 'onSaveRetry',
+				close: 'onSaveDialogClose'
 			} );
-			// Setup edit summary and checkboxes
-			target.saveDialog.setEditSummary( target.initialEditSummary );
-			target.saveDialog.setupCheckboxes( target.$checkboxes );
 		}
-
-		target.getSurface().getDialogs().openWindow(
-			target.saveDialog,
-			{ dir: target.getSurface().getModel().getDocument().getLang() }
-		).done( function ( opened ) {
-			// Call onSaveDialogClose() when the save dialog starts closing
-			opened.always( target.onSaveDialogClose.bind( target ) );
-		} );
 	} );
+
+	// Open the dialog
+	windowAction.open( 'mwSave', {
+		target: this,
+		editSummary: this.initialEditSummary,
+		$checkboxes: this.$checkboxes
+	} );
+
 };
 
 /**
@@ -1258,7 +1254,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogClose = function () {
 		clear();
 	}
 
-	this.getSurface().getModel().setSelection( this.origSelection );
 	this.emit( 'saveWorkflowEnd' );
 };
 
