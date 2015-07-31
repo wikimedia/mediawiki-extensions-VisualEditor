@@ -32,7 +32,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.onWatchToggleHandler = this.onWatchToggle.bind( this );
 
 	// Properties
-	this.toolbarSaveButton = null;
 	this.saveDialog = null;
 	this.onBeforeUnloadFallback = null;
 	this.onUnloadHandler = this.onUnload.bind( this );

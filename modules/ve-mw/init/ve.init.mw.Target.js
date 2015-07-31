@@ -32,6 +32,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	ve.init.mw.Target.super.call( this, config );
 
 	// Properties
+	this.toolbarSaveButton = null;
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgArticleId', 0 ) !== 0;
 
