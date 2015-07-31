@@ -278,11 +278,8 @@ class ApiVisualEditor extends ApiBase {
 
 		$isSafeAction = in_array( $params['paction'], self::$SAFE_ACTIONS, true );
 
-		$availableNamespaces = $this->veConfig->get( 'VisualEditorAvailableNamespaces' );
-		if ( !$isSafeAction && (
-			!isset( $availableNamespaces[$title->getNamespace()] ) ||
-			!$availableNamespaces[$title->getNamespace()]
-		) ) {
+		if ( !$isSafeAction &&
+			!in_array( $title->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
 
 			$this->dieUsage( "VisualEditor is not enabled in namespace " .
 				$title->getNamespace(), 'novenamespace' );

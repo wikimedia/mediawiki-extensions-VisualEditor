@@ -97,8 +97,8 @@
 		"VisualEditorNewAccountEnableProportion": false,
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorAutoAccountEnable": false,
-		"VisualEditorAvailableNamespaces": { "2": true },
 		"VisualEditorSkinToolbarScrollOffset": [],
+		"VisualEditorNamespaces": [],
 		"VisualEditorParsoidTimeout": 100
 	},
 	"APIModules": {

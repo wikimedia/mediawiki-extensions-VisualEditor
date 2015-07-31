@@ -21,17 +21,21 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Initialise the 'VisualEditorAvailableNamespaces' setting, and add content
-	 * namespaces to it. This will run after LocalSettings.php is processed.
+	 * Initialise the 'VisualEditorNamespaces' setting, and add content namespaces
+	 * and NS_USER to it. This will run after LocalSettings.php is processed.
 	 */
 	public static function onRegistration() {
-		global $wgVisualEditorAvailableNamespaces, $wgContentNamespaces;
+		global $wgVisualEditorNamespaces, $wgContentNamespaces;
 
-		foreach ( $wgContentNamespaces as $contentNamespace ) {
-			if ( !isset( $wgVisualEditorAvailableNamespaces[$contentNamespace] ) ) {
-				$wgVisualEditorAvailableNamespaces[$contentNamespace] = true;
-			}
+		if ( !isset( $wgVisualEditorNamespaces ) ) {
+			$wgVisualEditorNamespaces = array();
 		}
+
+		$wgVisualEditorNamespaces = array_merge(
+			$wgVisualEditorNamespaces,
+			$wgContentNamespaces,
+			array( NS_USER )
+		);
 
 	}
 
@@ -293,8 +297,7 @@ class VisualEditorHooks {
 		if ( !class_exists( 'BetaFeatures' ) ) {
 			$namespaces = ConfigFactory::getDefaultInstance()
 				->makeConfig( 'visualeditor' )
-				->get( 'VisualEditorAvailableNamespaces' );
-			$onNamespaces = array_keys( array_filter( $namespaces ) );
+				->get( 'VisualEditorNamespaces' );
 
 			$preferences['visualeditor-enable'] = array(
 				'type' => 'toggle',
@@ -302,9 +305,9 @@ class VisualEditorHooks {
 					'visualeditor-preference-enable',
 					$wgLang->commaList( array_map(
 						array( 'self', 'convertNs' ),
-						$onNamespaces
+						$namespaces
 					) ),
-					count( $onNamespaces )
+					count( $namespaces )
 				),
 				'section' => 'editing/editor'
 			);
@@ -381,13 +384,11 @@ class VisualEditorHooks {
 		$defaultUserOptions = $coreConfig->get( 'DefaultUserOptions' );
 		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
-		$onNamespaces = array_keys( array_filter( $availableNamespaces ) );
 
 		$vars['wgVisualEditorConfig'] = array(
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
-			'namespaces' => $onNamespaces,
+			'namespaces' => $veConfig->get( 'VisualEditorNamespaces' ),
 			'pluginModules' => array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
 				$veConfig->get( 'VisualEditorPluginModules' ) // @todo deprecate the global setting

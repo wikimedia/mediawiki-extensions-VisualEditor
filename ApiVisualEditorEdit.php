@@ -121,9 +121,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		if ( !$page ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
-		$availableNamespaces = $this->veConfig->get( 'VisualEditorAvailableNamespaces' );
-		if ( !isset( $availableNamespaces[$page->getNamespace()] ) ||
-			!$availableNamespaces[$page->getNamespace()] ) {
+		if ( !in_array( $page->getNamespace(), $this->veConfig->get( 'VisualEditorNamespaces' ) ) ) {
 			$this->dieUsage( "VisualEditor is not enabled in namespace " .
 				$page->getNamespace(), 'novenamespace' );
 		}
