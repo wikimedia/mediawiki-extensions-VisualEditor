@@ -352,7 +352,7 @@
 					$caEditLink.text( mw.msg( tabMessages[action + 'localdescriptionsource'] ) );
 				}
 			} else {
-				if ( tabMessages[action + 'source'] !== null && $caEditLink.text() === mw.msg( 'edit' ) ) {
+				if ( tabMessages[action + 'source'] !== null ) {
 					$caEditLink.text( mw.msg( tabMessages[action + 'source'] ) );
 				}
 			}
