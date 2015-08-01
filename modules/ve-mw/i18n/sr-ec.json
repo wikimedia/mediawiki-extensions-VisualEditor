@@ -5,7 +5,8 @@
 			"Nikola Smolenski",
 			"Милан Јелисавчић",
 			"Rancher",
-			"Amire80"
+			"Amire80",
+			"Srdjan m"
 		]
 	},
 	"tooltip-ca-createsource": "Направите изворни код ове странице",
@@ -17,7 +18,7 @@
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
 	"visualeditor-beta-warning": "Овај уређивач је у „бета“ фази. У сваком тренутку можете да се пребаците на изворно уређивање без губитка измена, отворите падајући мени поред дугмета „{{int:visualeditor-toolbar-savedialog}}“ и изаберите „{{int:visualeditor-mweditmodesource-tool}}“.",
-	"visualeditor-browserwarning": "Користите веб прегледач који Визуелни уређивач званично не подржава.",
+	"visualeditor-browserwarning": "Користите веб прегледач који овај уређивач званично не подржава.",
 	"visualeditor-ca-createlocaldescriptionsource": "Додај локални опис (изворно)",
 	"visualeditor-ca-createsource": "Направи извор",
 	"visualeditor-ca-editlocaldescriptionsource": "Уреди локални опис (изворно)",
@@ -206,7 +207,7 @@
 	"visualeditor-mwgalleryinspector-placeholder": "Primer.jpg|Опис слике",
 	"visualeditor-mwgalleryinspector-title": "Галерија",
 	"visualeditor-pagemenu-tooltip": "Опције странице",
-	"visualeditor-pagetranslationwarning": "Уређујете страницу коју је могуће превести. Уређивање оваквих страница у Визуелном уређивачу није још увек званично подржано.",
+	"visualeditor-pagetranslationwarning": "Уређујете страницу коју је могуће превести. Уређивање оваквих страница у овом уређивачу није још увек званично подржано.",
 	"visualeditor-parameter-input-placeholder": "Назив параметра",
 	"visualeditor-parameter-search-more": "Прикажи још {{PLURAL:$1|једно поље|$1 поља}}",
 	"visualeditor-parameter-search-no-unused": "Нема некоришћених поља",
