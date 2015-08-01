@@ -79,7 +79,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		saveErrorUnknown: 'onSaveErrorUnknown',
 		saveErrorPageDeleted: 'onSaveErrorPageDeleted',
 		saveErrorTitleBlacklist: 'onSaveErrorTitleBlacklist',
-		loadError: 'onLoadError',
 		editConflict: 'onEditConflict',
 		showChanges: 'onShowChanges',
 		showChangesError: 'onShowChangesError',
@@ -121,7 +120,7 @@ OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.Target );
  * @static
  * @property
  */
-ve.init.mw.DesktopArticleTarget.compatibility = {
+ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	// The key is the browser name returned by jQuery.client
 	// The value is either null (match all versions) or a list of tuples
 	// containing an inequality (<,>,<=,>=) and a version number
@@ -237,7 +236,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
 
 	if ( !(
 		'vewhitelist' in this.currentUri.query ||
-		$.client.test( ve.init.mw.DesktopArticleTarget.compatibility.whitelist, null, true )
+		$.client.test( this.constructor.static.compatibility.whitelist, null, true )
 	) ) {
 		// Show warning in unknown browsers that pass the support test
 		// Continue at own risk.
@@ -466,7 +465,10 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
  * @param {string} errorTypeText
  * @param {string} error
  */
-ve.init.mw.DesktopArticleTarget.prototype.onLoadError = function ( errorText, error ) {
+ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.call( this, errorText, error );
+
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
 	if (
