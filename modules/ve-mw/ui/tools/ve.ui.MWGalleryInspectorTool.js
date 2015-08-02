@@ -26,3 +26,10 @@ ve.ui.MWGalleryInspectorTool.static.title =
 ve.ui.MWGalleryInspectorTool.static.modelClasses = [ ve.dm.MWGalleryNode ];
 ve.ui.MWGalleryInspectorTool.static.commandName = 'gallery';
 ve.ui.toolFactory.register( ve.ui.MWGalleryInspectorTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'gallery', 'window', 'open',
+		{ args: [ 'gallery' ], supportedSelections: [ 'linear' ] }
+	)
+);

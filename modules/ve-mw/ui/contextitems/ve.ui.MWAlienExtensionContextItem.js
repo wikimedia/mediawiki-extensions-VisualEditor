@@ -47,3 +47,10 @@ ve.ui.MWAlienExtensionContextItem.static.commandName = 'alienExtension';
 /* Registration */
 
 ve.ui.contextItemFactory.register( ve.ui.MWAlienExtensionContextItem );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'alienExtension', 'window', 'open',
+		{ args: [ 'alienExtension' ], supportedSelections: [ 'linear' ] }
+	)
+);

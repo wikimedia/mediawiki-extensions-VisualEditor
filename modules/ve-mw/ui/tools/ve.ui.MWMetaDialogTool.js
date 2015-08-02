@@ -28,6 +28,13 @@ ve.ui.MWMetaDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWMetaDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWMetaDialogTool );
 
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'meta', 'window', 'open',
+		{ args: [ 'meta' ] }
+	)
+);
+
 /**
  * MediaWiki UserInterface page settings tool.
  *
@@ -50,6 +57,13 @@ ve.ui.MWPageSettingsDialogTool.static.commandName = 'meta/settings';
 ve.ui.MWPageSettingsDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWPageSettingsDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWPageSettingsDialogTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'meta/settings', 'window', 'open',
+		{ args: [ 'meta', { page: 'settings' } ] }
+	)
+);
 
 /**
  * MediaWiki UserInterface advanced page settings tool.
@@ -74,6 +88,13 @@ ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWAdvancedPageSettingsDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWAdvancedPageSettingsDialogTool );
 
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'meta/advanced', 'window', 'open',
+		{ args: [ 'meta', { page: 'advancedSettings' } ] }
+	)
+);
+
 /**
  * MediaWiki UserInterface categories tool.
  *
@@ -97,6 +118,13 @@ ve.ui.MWCategoriesDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWCategoriesDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWCategoriesDialogTool );
 
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'meta/categories', 'window', 'open',
+		{ args: [ 'meta', { page: 'categories' } ] }
+	)
+);
+
 /**
  * MediaWiki UserInterface languages tool.
  *
@@ -119,3 +147,10 @@ ve.ui.MWLanguagesDialogTool.static.commandName = 'meta/languages';
 ve.ui.MWLanguagesDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWLanguagesDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWLanguagesDialogTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'meta/languages', 'window', 'open',
+		{ args: [ 'meta', { page: 'languages' } ] }
+	)
+);

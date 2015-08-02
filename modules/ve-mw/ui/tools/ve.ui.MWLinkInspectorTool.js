@@ -34,3 +34,9 @@ ve.ui.MWLinkInspectorTool.static.modelClasses =
 ve.ui.MWLinkInspectorTool.static.associatedWindows = [ 'link', 'linkNode' ];
 
 ve.ui.toolFactory.register( ve.ui.MWLinkInspectorTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'link', 'mwlink', 'open', { supportedSelections: [ 'linear' ] }
+	)
+);

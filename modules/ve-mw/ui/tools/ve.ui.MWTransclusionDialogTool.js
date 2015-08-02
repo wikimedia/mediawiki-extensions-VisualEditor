@@ -67,3 +67,10 @@ ve.ui.MWTransclusionDialogTool.static.isCompatibleWith = function ( model ) {
 /* Registration */
 
 ve.ui.toolFactory.register( ve.ui.MWTransclusionDialogTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'transclusion', 'window', 'open',
+		{ args: [ 'transclusion' ], supportedSelections: [ 'linear' ] }
+	)
+);

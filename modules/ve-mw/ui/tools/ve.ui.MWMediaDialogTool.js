@@ -28,3 +28,10 @@ ve.ui.MWMediaDialogTool.static.commandName = 'media';
 ve.ui.MWMediaDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWMediaDialogTool.static.autoAddToGroup = false;
 ve.ui.toolFactory.register( ve.ui.MWMediaDialogTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'media', 'window', 'open',
+		{ args: [ 'media' ], supportedSelections: [ 'linear' ] }
+	)
+);

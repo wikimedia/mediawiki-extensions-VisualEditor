@@ -52,6 +52,13 @@ ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToGroup = false;
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToCatchall = false;
 ve.ui.toolFactory.register( ve.ui.MWUseExistingReferenceDialogTool );
 
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'reference', 'window', 'open',
+		{ args: [ 'reference' ], supportedSelections: [ 'linear' ] }
+	)
+);
+
 /**
  * MediaWiki UserInterface references list tool.
  *
