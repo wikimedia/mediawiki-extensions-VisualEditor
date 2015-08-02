@@ -435,34 +435,15 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
  * @throws {Error} Unknown image node type
  */
 ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
-	var editAttributes, captionDoc,
-		offset,
-		contentToInsert = [],
+	var captionDoc, offset, contentToInsert,
 		nodeType = this.getImageNodeType(),
-		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
 		surfaceModel = fragment.getSurface();
 
 	if ( !( fragment.getSelection() instanceof ve.dm.LinearSelection ) ) {
 		return fragment;
 	}
 
-	editAttributes = $.extend( originalAttrs, this.getUpdatedAttributes() );
-
-	// Remove old classes
-	delete editAttributes.originalClasses;
-	delete editAttributes.unrecognizedClasses;
-	// Newly created images must have valid URLs, so remove the error attribute
-	if ( this.isChangedImageSource() ) {
-		delete editAttributes.isError;
-	}
-
-	contentToInsert = [
-		{
-			type: nodeType,
-			attributes: editAttributes
-		},
-		{ type: '/' + nodeType }
-	];
+	contentToInsert = this.getData();
 
 	switch ( nodeType ) {
 		case 'mwInlineImage':
@@ -475,7 +456,6 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			return fragment;
 
 		case 'mwBlockImage':
-			contentToInsert.splice( 1, 0, { type: 'mwImageCaption' }, { type: '/mwImageCaption' } );
 			// Try to put the image in front of the structural node
 			offset = fragment.getDocument().data.getNearestStructuralOffset( fragment.getSelection().getRange().start, -1 );
 			if ( offset > -1 ) {
@@ -499,6 +479,38 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 		default:
 			throw new Error( 'Unknown image node type ' + nodeType );
 	}
+};
+
+/**
+ * Get linear data representation of the image
+ * @return {Array} Linear data
+ */
+ve.dm.MWImageModel.prototype.getData = function () {
+	var data,
+		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
+		editAttributes = $.extend( originalAttrs, this.getUpdatedAttributes() ),
+		nodeType = this.getImageNodeType();
+
+	// Remove old classes
+	delete editAttributes.originalClasses;
+	delete editAttributes.unrecognizedClasses;
+	// Newly created images must have valid URLs, so remove the error attribute
+	if ( this.isChangedImageSource() ) {
+		delete editAttributes.isError;
+	}
+
+	data = [
+		{
+			type: nodeType,
+			attributes: editAttributes
+		},
+		{ type: '/' + nodeType }
+	];
+
+	if ( nodeType === 'mwBlockImage' ) {
+		data.splice( 1, 0, { type: 'mwImageCaption' }, { type: '/mwImageCaption' } );
+	}
+	return data;
 };
 
 /**
