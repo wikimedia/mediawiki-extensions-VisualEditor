@@ -1244,33 +1244,30 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 					this.captionTarget.getSurface().getModel().getDocument()
 				);
 
-				// TODO: Simplify this condition
-				if ( this.imageModel ) {
-					if (
-						// There was an initial node
-						this.selectedNode &&
-						// And we didn't change the image type block/inline or vise versa
-						this.selectedNode.type === this.imageModel.getImageNodeType() &&
-						// And we didn't change the image itself
-						this.selectedNode.getAttribute( 'src' ) ===
-							this.imageModel.getImageSource()
-					) {
-						// We only need to update the attributes of the current node
-						this.imageModel.updateImageNode( this.selectedNode, surfaceModel );
-					} else {
-						// Replacing an image or inserting a brand new one
+				if (
+					// There was an initial node
+					this.selectedNode &&
+					// And we didn't change the image type block/inline or vise versa
+					this.selectedNode.type === this.imageModel.getImageNodeType() &&
+					// And we didn't change the image itself
+					this.selectedNode.getAttribute( 'src' ) ===
+						this.imageModel.getImageSource()
+				) {
+					// We only need to update the attributes of the current node
+					this.imageModel.updateImageNode( this.selectedNode, surfaceModel );
+				} else {
+					// Replacing an image or inserting a brand new one
 
-						// If there was a previous node, remove it first
-						if ( this.selectedNode ) {
-							// Remove the old image
-							this.fragment = this.getFragment().clone(
-								new ve.dm.LinearSelection( this.fragment.getDocument(), this.selectedNode.getOuterRange() )
-							);
-							this.fragment.removeContent();
-						}
-						// Insert the new image
-						this.fragment = this.imageModel.insertImageNode( this.getFragment() );
+					// If there was a previous node, remove it first
+					if ( this.selectedNode ) {
+						// Remove the old image
+						this.fragment = this.getFragment().clone(
+							new ve.dm.LinearSelection( this.fragment.getDocument(), this.selectedNode.getOuterRange() )
+						);
+						this.fragment.removeContent();
 					}
+					// Insert the new image
+					this.fragment = this.imageModel.insertImageNode( this.getFragment() );
 				}
 
 				this.close( { action: action } );
