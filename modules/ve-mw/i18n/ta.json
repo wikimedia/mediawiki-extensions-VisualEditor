@@ -8,12 +8,13 @@
 			"கௌசிக் பிரபு",
 			"Kalyanasundar",
 			"ElangoRamanujam",
-			"Info-farmer"
+			"Info-farmer",
+			"Dineshkumar Ponnusamy"
 		]
 	},
 	"apihelp-visualeditor-param-cachekey": "வரிசைப்படுத்த / வேறுபடுத்த, இவ்விசையால் முன் பதுக்ககவரிசையால் வேண்டிய முடிவைப் பயன்படுத்து.$1html கட்டுப்பாடு நீங்குகிறது.",
 	"tooltip-ca-createsource": "இந்த பக்கத்தின் மூல நிரலை உருவாக்கவும்",
-	"tooltip-ca-editsource": "இப்பக்க மூலகத்தைத் தொகு",
+	"tooltip-ca-editsource": "இப்பக்க மூலத்தைத் தொகு",
 	"tooltip-ca-edit": "இப்பக்கத்தை, விக்கியுரைக் கொண்டுத் தொகு",
 	"tooltip-ca-ve-edit": "இப்பக்கத்தைத் தொகு",
 	"visualeditor-advancedsettings-tool": "நுட்பமான அமைப்புகள்",
