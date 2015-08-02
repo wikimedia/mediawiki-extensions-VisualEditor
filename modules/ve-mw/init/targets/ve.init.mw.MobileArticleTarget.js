@@ -22,7 +22,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 	config = config || {};
 
 	// Parent constructor
-	ve.init.mw.Target.call(
+	ve.init.mw.MobileArticleTarget.super.call(
 		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid, config
 	);
 

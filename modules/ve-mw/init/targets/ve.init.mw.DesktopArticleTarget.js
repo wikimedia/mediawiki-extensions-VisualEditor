@@ -176,7 +176,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	ve.track( 'trace.setupToolbar.enter' );
 
 	// Parent method
-	ve.init.mw.Target.prototype.setupToolbar.call( this, surface );
+	ve.init.mw.DesktopArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
 	toolbar = this.getToolbar();
 
