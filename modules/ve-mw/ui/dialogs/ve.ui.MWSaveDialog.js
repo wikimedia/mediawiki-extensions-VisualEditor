@@ -414,7 +414,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$reviewEditSummary = $( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
 	this.$reviewActions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-actions' );
 	this.reviewPanel.$element.append(
-		$( '<br>' ),
 		$( '<div>' )
 			.addClass( 'mw-summary-preview' )
 			.text( ve.msg( 'summary-preview' ) )
