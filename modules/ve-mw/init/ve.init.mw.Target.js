@@ -1160,7 +1160,7 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
 	} );
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
-		.done( ve.init.mw.Target.onSave.bind( this, doc, data ) )
+		.done( this.onSave.bind( this, doc, data ) )
 		.fail( this.onSaveError.bind( this, doc, data ) );
 
 	return true;
