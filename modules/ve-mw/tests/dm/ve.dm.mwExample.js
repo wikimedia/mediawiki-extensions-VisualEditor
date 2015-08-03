@@ -1954,5 +1954,103 @@ ve.dm.mwExample.domToDataCases = {
 			model.data.data[7][1].push( model.getStore().index( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
+	},
+	'mwHeading with no content': {
+		data: [
+			{ type: 'mwHeading', attributes: { level: 1 } },
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		normalizedBody: '<p></p>'
+	},
+	'mwHeading with whitespace content': {
+		data: [
+			{ type: 'mwHeading', attributes: { level: 2 } },
+			' ', ' ', '\t', ' ',
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		normalizedBody: '<p>  \t </p>'
+	},
+	'mwHeading containing metadata': {
+		data: [
+			{ type: 'mwHeading', attributes: { level: 3 } },
+			{ type: 'alienMeta', originalDomElements: $( '<meta />' ).toArray() },
+			{ type: '/alienMeta' },
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		normalizedBody: '<p><meta /></p>'
+	},
+	'mwHeading containing alienated text': {
+		data: [
+			{
+				type: 'mwHeading',
+				attributes: { level: 4 }
+			},
+			{ type: 'alienInline', originalDomElements: $( '<span rel="ve:Alien">Alien</span>' ).toArray() },
+			{ type: '/alienInline' },
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		body: '<h4><span rel="ve:Alien">Alien</span></h4>'
+	},
+	'existing empty mwHeading is not converted to paragraph': {
+		data: [
+			{
+				type: 'mwHeading',
+				attributes: {
+					level: 5,
+					noconvert: true
+				}
+			},
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		body: '<h5></h5>'
+	},
+	'adding whitespace to existing empty mwHeading does not convert to paragraph': {
+		data: [
+			{
+				type: 'mwHeading',
+				attributes: {
+					level: 6,
+					noconvert: true
+				}
+			},
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		modify: function ( doc ) {
+			doc.data.data.splice( 1, 0, ' ' );
+		},
+		body: '<h6></h6>',
+		normalizedBody: '<h6> </h6>'
+	},
+	'emptying existing meta-only mwHeading does not convert to paragraph': {
+		data: [
+			{
+				type: 'mwHeading',
+				attributes: {
+					level: 1,
+					noconvert: true
+				}
+			},
+			{ type: 'alienMeta', originalDomElements: $( '<meta />' ).toArray() },
+			{ type: '/alienMeta' },
+			{ type: '/mwHeading' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		modify: function ( doc ) {
+			doc.metadata.data[1].splice( 0, 1 );
+		},
+		normalizedBody: '<h1></h1>'
 	}
 };
