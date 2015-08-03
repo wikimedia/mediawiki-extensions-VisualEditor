@@ -1259,8 +1259,8 @@ ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
 		page: this.pageName,
 		oldid: this.revid
 	}, 'serialize' )
-		.done( ve.init.mw.Target.onSerialize.bind( this ) )
-		.fail( ve.init.mw.Target.onSerializeError.bind( this ) );
+		.done( ve.init.mw.Target.prototype.onSerialize.bind( this ) )
+		.fail( ve.init.mw.Target.prototype.onSerializeError.bind( this ) );
 	return true;
 };
 
