@@ -29,7 +29,8 @@
 			"JensRiskin",
 			"MedShot",
 			"Esketti",
-			"FabianRM"
+			"FabianRM",
+			"Mbch331"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -254,7 +255,7 @@
 	"visualeditor-linkinspector-illegal-title": "Ongeldige paginanaam",
 	"visualeditor-linknodeinspector-add-label": "Label toevoegen",
 	"visualeditor-linknodeinspector-title": "Eenvoudige koppeling",
-	"visualeditor-loaderror-message": "Er is een fout opgetreden tijdens het laden: $1.",
+	"visualeditor-loaderror-message": "Er is een fout opgetreden tijdens het ophalen van gegevens van de server: $1.",
 	"visualeditor-loaderror-title": "De editor kon niet worden geladen",
 	"visualeditor-loadwarning": "Fout tijdens het laden van gegevens van de server: $1. Wilt u het opnieuw proberen?",
 	"visualeditor-loadwarning-token": "Fout tijdens het laden van een token van server: $1. Wilt u het opnieuw proberen?",
@@ -270,7 +271,7 @@
 	"visualeditor-mwgalleryinspector-placeholder": "Voorbeeld.jpg|Bijschrift voor afbeelding",
 	"visualeditor-mwgalleryinspector-title": "Galerij",
 	"visualeditor-pagemenu-tooltip": "Pagina-instellingen",
-	"visualeditor-pagetranslationwarning": "U probeert een te vertalen pagina te bewerken. Het bewerken van deze pagina is niet mogelijk in deze tekstverwerker.",
+	"visualeditor-pagetranslationwarning": "U probeert een te vertalen pagina te bewerken. Het bewerken van deze pagina's wordt officieel nog niet ondersteund.",
 	"visualeditor-parameter-input-placeholder": "Veldnaam",
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|Eén ander veld|$1 andere velden}} weergeven",
 	"visualeditor-parameter-search-no-unused": "Geen ongebruikte velden",

@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"ОйЛ"
+			"ОйЛ",
+			"Илья Драконов"
 		]
 	},
 	"tooltip-ca-createsource": "си страницѧ источьна обраꙁа сътворѥниѥ",
 	"tooltip-ca-editsource": "си страницѧ источьна обраꙁа исправлѥниѥ",
+	"visualeditor-backbutton-tooltip": "Назъд",
 	"visualeditor-beta-appendix": "вита",
 	"visualeditor-beta-label": "вита",
+	"visualeditor-beta-warning": "Визуальный редактор находится в бета-версии, чтобы переключиться на исходный текст, не потеряв ваши изменения, откройте \"{{int:visualeditor-toolbar-savedialog}}\" и выберите {{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-ca-editsource": "исправи источьнъ обраꙁъ",
 	"visualeditor-ca-editsource-section": "исправи источьнъ обраꙁъ",
 	"visualeditor-categories-tool": "катигорїѩ",
@@ -45,6 +48,7 @@
 	"visualeditor-dialog-transclusion-placeholder": "обраꙁьца доложєниѥ",
 	"visualeditor-dialogbutton-media-tooltip": "срѣдьства",
 	"visualeditor-dialogbutton-meta-tooltip": "страницѧ строи",
+	"visualeditor-dialogbutton-reference-title": "Источник",
 	"visualeditor-dialogbutton-template-tooltip": "обраꙁьць",
 	"visualeditor-editsummary": "чьто жє иꙁмѣнєно бѣ с҄ьдє напьши",
 	"visualeditor-formatdropdown-format-mw-heading1": "страницѧ имѧ",
@@ -52,6 +56,7 @@
 	"visualeditor-mainnamespacepagelink": "Project:Главьнъ имєнъ просторъ",
 	"visualeditor-meta-tool": "строи",
 	"visualeditor-pagemenu-tooltip": "страницѧ строи",
+	"visualeditor-preference-core-label": "Вiзуальный редактор",
 	"visualeditor-savedialog-identify-user": "Твоѥ польꙃєватєльско имѧ [[User:$1|$1]] ѥстъ ⁙ Ащє мѣноу съхраниши · онажє въ твоꙗ польꙃєватєльскꙑ дѣꙗниꙗ вънєсєна бѫдєтъ",
 	"visualeditor-savedialog-label-create": "cъꙁижди страницѧ",
 	"visualeditor-savedialog-label-error": "блаꙁна",
@@ -61,6 +66,7 @@
 	"visualeditor-savedialog-title-save": "твоѩ мѣнъ съхранѥниѥ",
 	"visualeditor-settings-tool": "страницѧ строи",
 	"visualeditor-toolbar-savedialog": "съхранѥниѥ",
+	"visualeditor-toolbar-savedialog-short": "Съхранити",
 	"visualeditor-usernamespacepagelink": "Project:Польꙃєватєльскъ имєнъ просторъ",
 	"visualeditor-version-label": "обраꙁъ"
 }
