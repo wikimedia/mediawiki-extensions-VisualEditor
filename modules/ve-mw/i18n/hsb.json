@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"J budissin",
-			"Michawiki"
+			"Michawiki",
+			"Mikławš"
 		]
 	},
 	"tooltip-ca-createsource": "Žórłowy kod tuteje strony wutworić",
 	"tooltip-ca-editsource": "Žórłowy kod tuteje strony wobdźěłać",
-	"tooltip-ca-ve-edit": "Tutu stronu z VisualEditor wobdźěłać",
+	"tooltip-ca-ve-edit": "VisualEditor k wobdźěłanju strony",
 	"visualeditor-advancedsettings-tool": "Rozšěrjene nastajenja",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "Beta",
@@ -155,7 +156,6 @@
 	"visualeditor-preference-core-description": "VisualEditor zmóžnić. Njebudźe na diskusijnych stronach a w druhich mjenowych rumach k dispoziciji stać.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "VisualEditor zmóžnić. Je w {{PLURAL:$2|slědowacym mjenowym rumje|slědowacymaj mjenowymaj rumomaj|slědowacych mjenowych rumach}} k dispoziciji: $1",
-	"visualeditor-preference-mwalienextension-label": "Wobdźěłowanje rozšěrjenskeho elementa VisualEditor",
 	"visualeditor-reference-input-placeholder": "Što chceš referencować?",
 	"visualeditor-referenceslist-isempty": "Referency ze skupinu \"$1\" za zapřijimanje do tuteje lisćiny njejsu.",
 	"visualeditor-referenceslist-isempty-default": "Njejsu referency na tuej stronje, kotrež hodźa so do tuteje lisćiny zapřijeć.",

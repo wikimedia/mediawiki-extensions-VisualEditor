@@ -74,6 +74,7 @@
 	"tooltip-ca-ve-edit": "Modifier cette page",
 	"visualeditor-advancedsettings-tool": "Paramètres avancés",
 	"visualeditor-annotationbutton-linknode-tooltip": "Lien simple",
+	"visualeditor-backbutton-tooltip": "Revenir en arrière",
 	"visualeditor-beta-appendix": "bêta",
 	"visualeditor-beta-label": "bêta",
 	"visualeditor-beta-warning": "L’éditeur visuel est en version bêta. Pour revenir à tout moment à l’édition du wikicode sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-savedialog}} » et sélectionnez « {{int:visualeditor-mweditmodesource-tool}} ».",

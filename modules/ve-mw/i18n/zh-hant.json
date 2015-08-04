@@ -169,7 +169,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "重新導向此頁面至",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "重新導向的目標頁面",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "您可以避免此重新導向頁面在目標被移動時自動更新，這項設定在非常特殊的情況下才會需要使用。",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "目標頁面移動時，避免更新此重新導向頁面。",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "目標頁面移動時，防止同時更新此重定向頁面。",
 	"visualeditor-dialog-meta-settings-section": "頁面設定",
 	"visualeditor-dialog-meta-settings-toc-default": "如果需要",
 	"visualeditor-dialog-meta-settings-toc-disable": "從不",
