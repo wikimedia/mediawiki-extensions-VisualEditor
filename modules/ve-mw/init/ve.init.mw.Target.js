@@ -42,6 +42,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	this.revid = revisionId || mw.config.get( 'wgCurRevisionId' );
 
 	this.restoring = !!revisionId;
+	this.pageDeletedWarning = false;
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
 		.extend( { action: 'submit' } );
@@ -72,29 +73,14 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
 /**
  * @event save
- * @param {string} html Rendered page HTML from server
- * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {number} [newid] New revision id, undefined if unchanged
- * @param {boolean} isRedirect Whether this page is now a redirect or not.
  */
 
 /**
  * @event showChanges
- * @param {string} diff
  */
 
 /**
  * @event noChanges
- */
-
-/**
- * @event saveAsyncBegin
- * Fired when we're waiting for network
- */
-
-/**
- * @event saveAsyncComplete
- * Fired when we're no longer waiting for network
  */
 
 /**
@@ -105,13 +91,11 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 /**
  * @event saveErrorSpamBlacklist
  * Fired when save is considered spam or blacklisted
- * @param {Object} editApi
  */
 
 /**
  * @event saveErrorAbuseFilter
  * Fired when AbuseFilter throws warnings
- * @param {Object} editApi
  */
 
 /**
@@ -123,20 +107,16 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 /**
  * @event saveErrorNewUser
  * Fired when user is logged in as a new user
- * @param {string|null} username Name of newly logged-in user, or null if anonymous
  */
 
 /**
  * @event saveErrorCaptcha
  * Fired when saveError indicates captcha field is required
- * @param {Object} editApi
  */
 
 /**
  * @event saveErrorUnknown
  * Fired for any other type of save error
- * @param {Object} editApi
- * @param {Object|null} data API response data
  */
 
 /**
@@ -151,29 +131,14 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
 /**
  * @event loadError
- * @param {string} errorTypeText
- * @param {Object|string} error
- */
-
-/**
- * @event saveError
- * @param {jqXHR|null} jqXHR
- * @param {string} status Text status message
- * @param {Object|null} data API response data
  */
 
 /**
  * @event showChangesError
- * @param {jqXHR|null} jqXHR
- * @param {string} status Text status message
- * @param {Mixed|null} error HTTP status text
  */
 
 /**
  * @event serializeError
- * @param {jqXHR|null} jqXHR
- * @param {string} status Text status message
- * @param {Mixed|null} error HTTP status text
  */
 
 /**
@@ -312,7 +277,6 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
  * @method
  * @param {Object} response API response data
  * @param {string} status Text status message
- * @fires loadError
  */
 ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 	var i, len, linkData, aboutDoc, docRevIdMatches,
@@ -454,9 +418,9 @@ ve.init.mw.Target.prototype.onSurfaceReady = function () {
  * @param {Object} error Object containing xhr, textStatus and exception keys
  * @fires loadError
  */
-ve.init.mw.Target.prototype.loadFail = function ( errorText, error ) {
+ve.init.mw.Target.prototype.loadFail = function () {
 	this.loading = false;
-	this.emit( 'loadError', errorText, error );
+	this.emit( 'loadError' );
 };
 
 /**
@@ -469,8 +433,6 @@ ve.init.mw.Target.prototype.loadFail = function ( errorText, error ) {
  * @param {Object} saveData Options that were used
  * @param {Object} response Response data
  * @param {string} status Text status message
- * @fires editConflict
- * @fires save
  */
 ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
 	this.saving = false;
@@ -483,8 +445,7 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
 	} else if ( typeof data.content !== 'string' ) {
 		this.saveFail( doc, saveData, null, 'Invalid HTML content in response from server', response );
 	} else {
-		this.emit(
-			'save',
+		this.saveComplete(
 			data.content,
 			data.categorieshtml,
 			data.newrevid,
@@ -497,6 +458,24 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
 };
 
 /**
+ * Handle successful DOM save event.
+ *
+ * @method
+ * @param {string} html Rendered page HTML from server
+ * @param {string} categoriesHtml Rendered categories HTML from server
+ * @param {number} newid New revision id, undefined if unchanged
+ * @param {boolean} isRedirect Whether this page is a redirect or not
+ * @param {string} displayTitle What HTML to show as the page title
+ * @param {Object} lastModified Object containing user-formatted date
+ *  and time strings, or undefined if we made no change.
+ * @param {string} contentSub HTML to show as the content subtitle
+ * @fires save
+ */
+ve.init.mw.Target.prototype.saveComplete = function () {
+	this.emit( 'save' );
+};
+
+/**
  * Handle an unsuccessful save request.
  *
  * @method
@@ -505,22 +484,17 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
  * @param {Object} jqXHR
  * @param {string} status Text status message
  * @param {Object|null} data API response data
- * @fires saveErrorEmpty
- * @fires saveErrorSpamBlacklist
- * @fires saveErrorAbuseFilter
- * @fires saveErrorBadToken
- * @fires saveErrorNewUser
- * @fires saveErrorCaptcha
- * @fires saveErrorUnknown
  */
 ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, data ) {
 	var api, editApi,
 		target = this;
+
 	this.saving = false;
+	this.pageDeletedWarning = false;
 
 	// Handle empty response
 	if ( !data ) {
-		this.emit( 'saveErrorEmpty' );
+		this.saveErrorEmpty();
 		return;
 	}
 
@@ -528,14 +502,14 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 
 	// Handle spam blacklist error (either from core or from Extension:SpamBlacklist)
 	if ( editApi && editApi.spamblacklist ) {
-		this.emit( 'saveErrorSpamBlacklist', editApi );
+		this.saveErrorSpamBlacklist( editApi );
 		return;
 	}
 
 	// Handle warnings/errors from Extension:AbuseFilter
 	// TODO: Move this to a plugin
 	if ( editApi && editApi.info && editApi.info.indexOf( 'Hit AbuseFilter:' ) === 0 && editApi.warning ) {
-		this.emit( 'saveErrorAbuseFilter', editApi );
+		this.saveErrorAbuseFilter( editApi );
 		return;
 	}
 
@@ -556,7 +530,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 			intoken: 'edit'
 		} )
 			.always( function () {
-				target.emit( 'saveErrorBadToken' );
+				target.saveErrorBadToken();
 			} )
 			.done( function ( data ) {
 				var userMsg,
@@ -588,7 +562,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 								// functions like mw.user.isAnon rely on this.
 								wgUserName: null
 							} );
-							target.emit( 'saveErrorNewUser', null );
+							target.saveErrorNewUser( null );
 						} else {
 							// New session is a different user
 							mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
@@ -598,20 +572,20 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 								mw.messages.get( 'visualeditor-savedialog-identify-user' )
 									.replace( /\$1/g, userInfo.name )
 							);
-							target.emit( 'saveErrorNewUser', userInfo.name );
+							target.saveErrorNewUser( userInfo.name );
 						}
 					}
 				}
 			} );
 		return;
 	} else if ( data.error && data.error.code === 'editconflict' ) {
-		this.emit( 'editConflict' );
+		this.editConflict();
 		return;
 	} else if ( data.error && data.error.code === 'pagedeleted' ) {
-		this.emit( 'saveErrorPageDeleted' );
+		this.saveErrorPageDeleted();
 		return;
 	} else if ( data.error && data.error.code === 'titleblacklist-forbidden-edit' ) {
-		this.emit( 'saveErrorTitleBlacklist' );
+		this.saveErrorTitleBlacklist();
 		return;
 	}
 
@@ -629,12 +603,12 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 		editApi.captcha.type === 'math' ||
 		editApi.captcha.type === 'question'
 	) ) {
-		this.emit( 'saveErrorCaptcha', editApi );
+		this.saveErrorCaptcha( editApi );
 		return;
 	}
 
 	// Handle (other) unknown and/or unrecoverable errors
-	this.emit( 'saveErrorUnknown', editApi, data );
+	this.saveErrorUnknown( editApi, data );
 };
 
 /**
@@ -643,8 +617,6 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
  * @method
  * @param {Object} response API response data
  * @param {string} status Text status message
- * @fires showChanges
- * @fires noChanges
  */
 ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
 	var data = response.visualeditor;
@@ -656,7 +628,7 @@ ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
 			null, 'Unsuccessful request: ' + response.error.info, null
 		);
 	} else if ( data.result === 'nochanges' ) {
-		this.emit( 'noChanges' );
+		this.noChanges();
 	} else if ( data.result !== 'success' ) {
 		this.showChangesFail( null, 'Failed request: ' + data.result, null );
 	} else if ( typeof data.diff !== 'string' ) {
@@ -664,8 +636,18 @@ ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
 			null, 'Invalid HTML content in response from server', null
 		);
 	} else {
-		this.emit( 'showChanges', data.diff );
+		this.showChangesDiff( data.diff );
 	}
+};
+
+/**
+ * Show changes diff HTML
+ *
+ * @param {string} diffHtml Diff HTML
+ * @fires showChanges
+ */
+ve.init.mw.Target.prototype.showChangesDiff = function () {
+	this.emit( 'showChanges' );
 };
 
 /**
@@ -678,9 +660,171 @@ ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
  * @param {Mixed} error HTTP status text
  * @fires showChangesError
  */
-ve.init.mw.Target.prototype.showChangesFail = function ( jqXHR, status, error ) {
+ve.init.mw.Target.prototype.showChangesFail = function () {
 	this.diffing = false;
-	this.emit( 'showChangesError', jqXHR, status, error );
+	this.emit( 'showChangesError' );
+};
+
+/**
+ * Show an save process error message
+ *
+ * @method
+ * @param {string|jQuery|Node[]} msg Message content (string of HTML, jQuery object or array of
+ *  Node objects)
+ * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
+ *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
+ * @param {boolean} [warning=false] Whether or not this is a warning.
+ */
+ve.init.mw.Target.prototype.showSaveError = function () {
+};
+
+/**
+ * Handle general save error
+ *
+ * @method
+ * @fires saveErrorEmpty
+ */
+ve.init.mw.Target.prototype.saveErrorEmpty = function () {
+	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
+	this.emit( 'saveErrorEmpty' );
+};
+
+/**
+ * Handle spam blacklist error
+ *
+ * @method
+ * @param {Object} editApi
+ * @fires saveErrorSpamBlacklist
+ */
+ve.init.mw.Target.prototype.saveErrorSpamBlacklist = function ( editApi ) {
+	this.showSaveError(
+		$( $.parseHTML( editApi.sberrorparsed ) ),
+		false // prevents reapply
+	);
+	this.emit( 'saveErrorSpamBlacklist' );
+};
+
+/**
+ * Handel abuse filter error
+ *
+ * @method
+ * @param {Object} editApi
+ * @fires saveErrorAbuseFilter
+ */
+ve.init.mw.Target.prototype.saveErrorAbuseFilter = function ( editApi ) {
+	this.showSaveError( $( $.parseHTML( editApi.warning ) ) );
+	// Don't disable the save button. If the action is not disallowed the user may save the
+	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
+	// between filter triggers that are and aren't disallowing the action.
+	this.emit( 'saveErrorAbuseFilter' );
+};
+
+/**
+ * Handle title blacklist save error
+ *
+ * @method
+ * @fires saveErrorTitleBlacklist
+ */
+ve.init.mw.Target.prototype.saveErrorTitleBlacklist = function () {
+	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
+	this.emit( 'saveErrorTitleBlacklist' );
+};
+
+/**
+ * Handle token fetch indicating another user is logged in
+ *
+ * @method
+ * @param {string|null} username Name of newly logged-in user, or null if anonymous
+ * @fires saveErrorNewUser
+ */
+ve.init.mw.Target.prototype.saveErrorNewUser = function ( username ) {
+	var badToken, userMsg;
+	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
+	// mediawiki.jqueryMsg has a bug with [[User:$1|$1]] (bug 51388)
+	if ( username === null ) {
+		userMsg = 'visualeditor-savedialog-identify-anon';
+	} else {
+		userMsg = 'visualeditor-savedialog-identify-user---' + username;
+	}
+	this.showSaveError(
+		$( badToken ).add( $.parseHTML( mw.message( userMsg ).parse() ) )
+	);
+	this.emit( 'saveErrorNewUser' );
+};
+
+/**
+ * Handle unknown save error
+ *
+ * @method
+ * @param {Object} editApi
+ * @param {Object|null} data API response data
+ * @fires onSaveErrorUnknown
+ */
+ve.init.mw.Target.prototype.saveErrorUnknown = function ( editApi, data ) {
+	this.showSaveError(
+		$( document.createTextNode(
+			( editApi && editApi.info ) ||
+			( data.error && data.error.info ) ||
+			( editApi && editApi.code ) ||
+			( data.error && data.error.code ) ||
+			'Unknown error'
+		) ),
+		false // prevents reapply
+	);
+	this.emit( 'onSaveErrorUnknown' );
+};
+
+/**
+ * Handle a bad token
+ *
+ * @method
+ * @fires saveErrorBadToken
+ */
+ve.init.mw.Target.prototype.saveErrorBadToken = function () {
+	this.emit( 'saveErrorBadToken' );
+};
+
+/**
+ * Handle captcha error
+ *
+ * @method
+ * @param {Object} editApi
+ * @fires saveErrorCaptcha
+ */
+ve.init.mw.Target.prototype.saveErrorCaptcha = function () {
+	this.emit( 'saveErrorCaptcha' );
+};
+
+/**
+ * Handle page deleted error
+ *
+ * @method
+ * @fires saveErrorPageDeleted
+ */
+ve.init.mw.Target.prototype.saveErrorPageDeleted = function () {
+	this.pageDeletedWarning = true;
+	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true, true );
+	this.emit( 'saveErrorPageDeleted' );
+};
+
+/**
+ * Handle an edit conflict
+ *
+ * @method
+ * @fires editConflict
+ */
+ve.init.mw.Target.prototype.editConflict = function () {
+	this.emit( 'editConflict' );
+};
+
+/**
+ * Handle no changes in diff
+ *
+ * @method
+ * @fires noChanges
+ */
+ve.init.mw.Target.prototype.noChanges = function () {
+	this.emit( 'noChanges' );
 };
 
 /**
@@ -694,19 +838,19 @@ ve.init.mw.Target.prototype.showChangesFail = function ( jqXHR, status, error ) 
  * @param {string} status Text status message
  * @fires serializeComplete
  */
-ve.init.mw.Target.prototype.onSerialize = function ( response ) {
+ve.init.mw.Target.prototype.serializeSuccess = function ( response ) {
 	this.serializing = false;
 	var data = response.visualeditor;
 	if ( !data && !response.error ) {
-		this.onSerializeError( null, 'Invalid response from server', null );
+		this.serializeFail( null, 'Invalid response from server', null );
 	} else if ( response.error ) {
-		this.onSerializeError(
+		this.serializeFail(
 			null, 'Unsuccessful request: ' + response.error.info, null
 		);
 	} else if ( data.result === 'error' ) {
-		this.onSerializeError( null, 'Server error', null );
+		this.serializeFail( null, 'Server error', null );
 	} else if ( typeof data.content !== 'string' ) {
-		this.onSerializeError(
+		this.serializeFail(
 			null, 'No Wikitext content in response from server', null
 		);
 	} else {
@@ -729,9 +873,9 @@ ve.init.mw.Target.prototype.onSerialize = function ( response ) {
  * @param {Mixed|null} error HTTP status text
  * @fires serializeError
  */
-ve.init.mw.Target.prototype.onSerializeError = function ( jqXHR, status, error ) {
+ve.init.mw.Target.prototype.serializeFail = function () {
 	this.serializing = false;
-	this.emit( 'serializeError', jqXHR, status, error );
+	this.emit( 'serializeError' );
 };
 
 /**
@@ -1130,6 +1274,28 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 };
 
 /**
+ * Prepare to save the article
+ *
+ * @fires saveInitiated
+ */
+ve.init.mw.Target.prototype.startSave = function () {
+	this.emit( 'saveInitiated' );
+	if ( !this.docToSave ) {
+		this.docToSave = this.getSurface().getDom();
+	}
+	this.save( this.docToSave, this.getSaveOptions() );
+};
+
+/**
+ * Get edit API options from the save dialog form.
+ *
+ * @returns {Object} Save options for submission to the MediaWiki API
+ */
+ve.init.mw.Target.prototype.getSaveOptions = function () {
+	return {};
+};
+
+/**
  * Post DOM data to the Parsoid API.
  *
  * This method performs an asynchronous action and uses a callback function to handle the result.
@@ -1260,8 +1426,8 @@ ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
 		page: this.pageName,
 		oldid: this.revid
 	}, 'serialize' )
-		.done( ve.init.mw.Target.prototype.onSerialize.bind( this ) )
-		.fail( ve.init.mw.Target.prototype.onSerializeError.bind( this ) );
+		.done( ve.init.mw.Target.prototype.serializeSuccess.bind( this ) )
+		.fail( ve.init.mw.Target.prototype.serializeFail.bind( this ) );
 	return true;
 };
 
@@ -1391,20 +1557,26 @@ ve.init.mw.Target.prototype.updateToolbarSaveButtonState = function () {
 
 /**
  * Handle clicks on the save button in the toolbar.
- *
- * @fires saveBegin
  */
 ve.init.mw.Target.prototype.onToolbarSaveButtonClick = function () {
 	if ( this.edited || this.restoring ) {
 		this.showSaveDialog();
-		this.emit( 'saveBegin' );
 	}
 };
 
 /**
  * Show a save dialog
+ *
+ * @fires saveWorkflowBegin
  */
 ve.init.mw.Target.prototype.showSaveDialog = function () {
+	this.emit( 'saveWorkflowBegin' );
+
+	// Preload the serialization
+	if ( !this.docToSave ) {
+		this.docToSave = this.getSurface().getDom();
+	}
+	this.prepareCacheKey( this.docToSave );
 };
 
 /**

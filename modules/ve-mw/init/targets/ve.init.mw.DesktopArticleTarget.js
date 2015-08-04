@@ -8,7 +8,7 @@
 /*global confirm, alert */
 
 /**
- * Initialization MediaWiki view page target.
+ * MediaWiki desktop article target.
  *
  * @class
  * @extends ve.init.mw.Target
@@ -44,6 +44,8 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.toolbarSetupDeferred = null;
 	this.welcomeDialog = null;
 	this.welcomeDialogPromise = null;
+	this.captcha = null;
+	this.docToSave = null;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -65,24 +67,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	);
 	this.originalDocumentTitle = document.title;
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
-
-	// Events
-	this.connect( this, {
-		save: 'onSave',
-		saveErrorEmpty: 'onSaveErrorEmpty',
-		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
-		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
-		saveErrorNewUser: 'onSaveErrorNewUser',
-		saveErrorCaptcha: 'onSaveErrorCaptcha',
-		saveErrorUnknown: 'onSaveErrorUnknown',
-		saveErrorPageDeleted: 'onSaveErrorPageDeleted',
-		saveErrorTitleBlacklist: 'onSaveErrorTitleBlacklist',
-		editConflict: 'onEditConflict',
-		showChanges: 'onShowChanges',
-		showChangesError: 'onShowChangesError',
-		noChanges: 'onNoChanges',
-		serializeError: 'onSerializeError'
-	} );
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-desktopArticleTarget' );
@@ -457,15 +441,11 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 };
 
 /**
- * Handle failed DOM load event.
- *
- * @method
- * @param {string} errorTypeText
- * @param {string} error
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error ) {
 	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.call( this, errorText, error );
+	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
@@ -507,9 +487,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 };
 
 /**
- * Once surface is ready ready, init UI
- *
- * @method
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
 	var surfaceReadyTime = ve.now(),
@@ -590,20 +568,14 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 };
 
 /**
- * Handle successful DOM save event.
- *
- * @method
- * @param {string} html Rendered page HTML from server
- * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {number} newid New revision id, undefined if unchanged
- * @param {boolean} isRedirect Whether this page is a redirect or not
- * @param {string} displayTitle What HTML to show as the page title
- * @param {Object} lastModified Object containing user-formatted date
-    and time strings, or undefined if we made no change.
+ * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onSave = function (
+ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub
 ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
+
 	var newUrlParams, watchChecked;
 	this.saveDeferred.resolve();
 	if ( !this.pageExists || this.restoring ) {
@@ -676,82 +648,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onSave = function (
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.saveFail = function () {
-	this.pageDeletedWarning = false;
-	ve.init.mw.DesktopArticleTarget.super.prototype.saveFail.apply( this, arguments );
-};
-
-/**
- * Update save dialog message on general error
- *
- * @method
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorEmpty = function () {
-	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
-};
-
-/**
- * Update save dialog message on spam blacklist error
- *
- * @method
- * @param {Object} editApi
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorSpamBlacklist = function ( editApi ) {
-	this.showSaveError(
-		$( $.parseHTML( editApi.sberrorparsed ) ),
-		false // prevents reapply
-	);
-};
-
-/**
- * Update save dialog message on abuse filter error
- *
- * @method
- * @param {Object} editApi
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorAbuseFilter = function ( editApi ) {
-	this.showSaveError( $( $.parseHTML( editApi.warning ) ) );
-	// Don't disable the save button. If the action is not disallowed the user may save the
-	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
-	// between filter triggers that are and aren't disallowing the action.
-};
-
-/**
- * Update save dialog message on title blacklist error
- *
- * @method
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorTitleBlacklist = function () {
-	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
-};
-
-/**
- * Update save dialog when token fetch indicates another user is logged in
- *
- * @method
- * @param {string|null} username Name of newly logged-in user, or null if anonymous
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorNewUser = function ( username ) {
-	var badToken, userMsg;
-	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
-	// mediawiki.jqueryMsg has a bug with [[User:$1|$1]] (bug 51388)
-	if ( username === null ) {
-		userMsg = 'visualeditor-savedialog-identify-anon';
-	} else {
-		userMsg = 'visualeditor-savedialog-identify-user---' + username;
-	}
-	this.showSaveError(
-		$( badToken ).add( $.parseHTML( mw.message( userMsg ).parse() ) )
-	);
-};
-
-/**
- * Update save dialog on captcha error
- *
- * @method
- * @param {Object} editApi
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorCaptcha = function ( editApi ) {
+ve.init.mw.DesktopArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
 	var $captchaDiv = $( '<div>' ),
 		$captchaParagraph = $( '<p>' );
 
@@ -800,38 +697,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorCaptcha = function ( editAp
 };
 
 /**
- * Update save dialog message on unknown error
- *
- * @method
- * @param {Object} editApi
- * @param {Object|null} data API response data
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorUnknown = function ( editApi, data ) {
-	this.showSaveError(
-		$( document.createTextNode(
-			( editApi && editApi.info ) ||
-			( data.error && data.error.info ) ||
-			( editApi && editApi.code ) ||
-			( data.error && data.error.code ) ||
-			'Unknown error'
-		) ),
-		false // prevents reapply
-	);
-};
-
-/**
- * Update save dialog message on page deleted error
- *
- * @method
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveErrorPageDeleted = function () {
-	var continueLabel = mw.msg( 'ooui-dialog-process-continue' );
-
-	this.pageDeletedWarning = true;
-	this.showSaveError( mw.msg( 'visualeditor-recreate', continueLabel ), true, true );
-};
-
-/**
  * Handle MWSaveDialog retry events
  * So we can handle trying to save again after page deletion warnings
  */
@@ -843,26 +708,19 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveRetry = function () {
 };
 
 /**
- * Update save dialog api-save-error message
- *
- * @method
- * @param {string|jQuery|Node[]} msg Message content (string of HTML, jQuery object or array of
- *  Node objects)
- * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
- *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
- * @param {boolean} [warning=false] Whether or not this is a warning.
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
 	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
 };
 
 /**
- * Handle Show changes event.
- *
- * @method
- * @param {string} diffHtml
+ * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onShowChanges = function ( diffHtml ) {
+ve.init.mw.DesktopArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.showChangesDiff.apply( this, arguments );
+
 	// Invalidate the viewer diff on next change
 	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
@@ -871,25 +729,23 @@ ve.init.mw.DesktopArticleTarget.prototype.onShowChanges = function ( diffHtml ) 
 };
 
 /**
- * Handle failed show changes event.
- *
- * @method
- * @param {Object} jqXHR
- * @param {string} status Text status message
+ * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onShowChangesError = function ( jqXHR, status ) {
+ve.init.mw.DesktopArticleTarget.prototype.showChangesFail = function ( jqXHR, status ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.showChangesFail.apply( this, arguments );
+
 	alert( ve.msg( 'visualeditor-differror', status ) );
 	this.saveDialog.popPending();
 };
 
 /**
- * Called if a call to target.serialize() failed.
- *
- * @method
- * @param {jqXHR|null} jqXHR
- * @param {string} status Text status message
+ * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onSerializeError = function ( jqXHR, status ) {
+ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, status ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.serializeFail.apply( this, arguments );
+
 	alert( ve.msg( 'visualeditor-serializeerror', status ) );
 
 	this.getSurface().getDialogs().closeWindow( 'wikitextswitchconfirm' );
@@ -902,21 +758,17 @@ ve.init.mw.DesktopArticleTarget.prototype.onSerializeError = function ( jqXHR, s
 };
 
 /**
- * Handle edit conflict event.
- *
- * @method
+ * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onEditConflict = function () {
+ve.init.mw.DesktopArticleTarget.prototype.editConflict = function () {
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'conflict' );
 };
 
 /**
- * Handle failed show changes event.
- *
- * @method
+ * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onNoChanges = function () {
+ve.init.mw.DesktopArticleTarget.prototype.noChanges = function () {
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'nochanges' );
 	this.saveDialog.getActions().setAbilities( { approve: true } );
@@ -944,7 +796,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogReview = function () {
 		this.saveDialog.getActions().setAbilities( { approve: false } );
 		this.saveDialog.pushPending();
 		if ( this.pageExists ) {
-			// Has no callback, handled via target.onShowChanges
+			// Has no callback, handled via target.showChangesDiff
 			this.showChanges( this.docToSave );
 		} else {
 			this.serialize( this.docToSave, this.onSaveDialogReviewComplete.bind( this ) );
@@ -969,24 +821,22 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogReviewComplete = function 
 };
 
 /**
- * Try to save the current document.
- * @fires saveInitiated
+ * @inheritdoc
  * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
  *  succeeds/fails.
  */
-ve.init.mw.DesktopArticleTarget.prototype.saveDocument = function ( saveDeferred ) {
+ve.init.mw.DesktopArticleTarget.prototype.startSave = function ( saveDeferred ) {
 	if ( this.deactivating ) {
 		return false;
 	}
-
-	var saveOptions = this.getSaveOptions();
-	this.emit( 'saveInitiated' );
 
 	// Reset any old captcha data
 	if ( this.captcha ) {
 		this.saveDialog.clearMessage( 'captcha' );
 		delete this.captcha;
 	}
+
+	var saveOptions = this.getSaveOptions();
 
 	if (
 		+mw.user.options.get( 'forceeditsummary' ) &&
@@ -1001,7 +851,8 @@ ve.init.mw.DesktopArticleTarget.prototype.saveDocument = function ( saveDeferred
 		);
 		this.saveDialog.popPending();
 	} else {
-		this.save( this.docToSave, saveOptions );
+		// Parent method
+		ve.init.mw.DesktopArticleTarget.super.prototype.startSave.call( this );
 		this.saveDeferred = saveDeferred;
 	}
 };
@@ -1076,9 +927,7 @@ ve.init.mw.DesktopArticleTarget.prototype.submitWithSaveFields = function ( fiel
 };
 
 /**
- * Get edit API options from the save dialog form.
- *
- * @returns {Object} Save options for submission to the MediaWiki API
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveOptions = function () {
 	var key,
@@ -1197,19 +1046,13 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
 
 /**
  * @inheritdoc
- * @fires saveWorkflowBegin
  */
 ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.showSaveDialog.call( this );
+
 	var target = this,
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
-
-	this.emit( 'saveWorkflowBegin' );
-
-	// Preload the serialization
-	if ( !this.docToSave ) {
-		this.docToSave = this.getSurface().getDom();
-	}
-	this.prepareCacheKey( this.docToSave );
 
 	// Connect events to save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
@@ -1218,7 +1061,7 @@ ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
 
 			// Connect to save dialog
 			target.saveDialog.connect( target, {
-				save: 'saveDocument',
+				save: 'startSave',
 				review: 'onSaveDialogReview',
 				resolve: 'onSaveDialogResolveConflict',
 				retry: 'onSaveRetry',
@@ -1430,10 +1273,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
  * @method
  * @param {string} html Rendered HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {string} displayTitle What HTML to show as the page title
+ * @param {string} displayTitle HTML to show as the page title
  * @param {Object} lastModified Object containing user-formatted date
-    and time strings, or undefined if we made no change.
- * @param {string} contentSub What HTML to show as the content subtitle
+ *  and time strings, or undefined if we made no change.
+ * @param {string} contentSub HTML to show as the content subtitle
  */
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
