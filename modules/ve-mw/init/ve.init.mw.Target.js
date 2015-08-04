@@ -488,6 +488,7 @@ ve.init.mw.Target.prototype.onSave = function ( doc, saveData, response ) {
 			data.content,
 			data.categorieshtml,
 			data.newrevid,
+			data.isRedirect,
 			data.displayTitleHtml,
 			data.lastModified,
 			data.contentSub

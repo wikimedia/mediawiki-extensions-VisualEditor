@@ -68,7 +68,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 	// Events
 	this.connect( this, {
-		save: 'onSave',
+		save: 'onSaveEvent',
 		saveErrorEmpty: 'onSaveErrorEmpty',
 		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
 		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
@@ -601,7 +601,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @param {Object} lastModified Object containing user-formatted date
     and time strings, or undefined if we made no change.
  */
-ve.init.mw.DesktopArticleTarget.prototype.onSave = function (
+ve.init.mw.DesktopArticleTarget.prototype.onSaveEvent = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub
 ) {
 	var newUrlParams, watchChecked;
