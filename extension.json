@@ -750,10 +750,22 @@
 				"lib/ve/src/ui/styles/ve.ui.Surface.css",
 				"lib/ve/src/ui/styles/ve.ui.Toolbar.css",
 				"lib/ve/src/ui/styles/ve.ui.TableContext.css",
-				"lib/ve/src/ui/styles/ve.ui.DebugBar.css",
-				"lib/ve/src/themes/mediawiki/dialogs.css",
-				"lib/ve/src/themes/mediawiki/widgets.css"
+				"lib/ve/src/ui/styles/ve.ui.DebugBar.css"
 			],
+			"skinStyles": {
+				"vector": [
+					"lib/ve/src/themes/mediawiki/dialogs.css",
+					"lib/ve/src/themes/mediawiki/widgets.css"
+				],
+				"apex": [
+					"lib/ve/src/themes/apex/dialogs.css",
+					"lib/ve/src/themes/apex/widgets.css"
+				],
+				"monobook": [
+					"lib/ve/src/themes/apex/dialogs.css",
+					"lib/ve/src/themes/apex/widgets.css"
+				]
+			},
 			"dependencies": [
 				"unicodejs",
 				"rangefix",
