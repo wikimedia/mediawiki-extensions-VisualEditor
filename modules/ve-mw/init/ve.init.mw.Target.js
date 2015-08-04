@@ -472,16 +472,16 @@ ve.init.mw.Target.prototype.loadFail = function ( errorText, error ) {
  * @fires editConflict
  * @fires save
  */
-ve.init.mw.Target.prototype.onSave = function ( doc, saveData, response ) {
+ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
 	this.saving = false;
 	var data = response.visualeditoredit;
 	if ( !data ) {
-		this.onSaveError( doc, saveData, null, 'Invalid response from server', response );
+		this.saveFail( doc, saveData, null, 'Invalid response from server', response );
 	} else if ( data.result !== 'success' ) {
 		// Note, this could be any of db failure, hookabort, badtoken or even a captcha
-		this.onSaveError( doc, saveData, null, 'Save failure', response );
+		this.saveFail( doc, saveData, null, 'Save failure', response );
 	} else if ( typeof data.content !== 'string' ) {
-		this.onSaveError( doc, saveData, null, 'Invalid HTML content in response from server', response );
+		this.saveFail( doc, saveData, null, 'Invalid HTML content in response from server', response );
 	} else {
 		this.emit(
 			'save',
@@ -513,7 +513,7 @@ ve.init.mw.Target.prototype.onSave = function ( doc, saveData, response ) {
  * @fires saveErrorCaptcha
  * @fires saveErrorUnknown
  */
-ve.init.mw.Target.prototype.onSaveError = function ( doc, saveData, jqXHR, status, data ) {
+ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, data ) {
 	var api, editApi,
 		target = this;
 	this.saving = false;
@@ -1161,8 +1161,8 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
 	} );
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
-		.done( this.onSave.bind( this, doc, data ) )
-		.fail( this.onSaveError.bind( this, doc, data ) );
+		.done( this.saveSuccess.bind( this, doc, data ) )
+		.fail( this.saveFail.bind( this, doc, data ) );
 
 	return true;
 };

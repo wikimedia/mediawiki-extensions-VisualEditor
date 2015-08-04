@@ -68,7 +68,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 	// Events
 	this.connect( this, {
-		save: 'onSaveEvent',
+		save: 'onSave',
 		saveErrorEmpty: 'onSaveErrorEmpty',
 		saveErrorSpamBlacklist: 'onSaveErrorSpamBlacklist',
 		saveErrorAbuseFilter: 'onSaveErrorAbuseFilter',
@@ -601,7 +601,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @param {Object} lastModified Object containing user-formatted date
     and time strings, or undefined if we made no change.
  */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveEvent = function (
+ve.init.mw.DesktopArticleTarget.prototype.onSave = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub
 ) {
 	var newUrlParams, watchChecked;
@@ -676,9 +676,9 @@ ve.init.mw.DesktopArticleTarget.prototype.onSaveEvent = function (
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveError = function () {
+ve.init.mw.DesktopArticleTarget.prototype.saveFail = function () {
 	this.pageDeletedWarning = false;
-	ve.init.mw.DesktopArticleTarget.super.prototype.onSaveError.apply( this, arguments );
+	ve.init.mw.DesktopArticleTarget.super.prototype.saveFail.apply( this, arguments );
 };
 
 /**
@@ -1168,7 +1168,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 
 /**
  * Modify page content to make section edit links activate the editor.
- * Dummy replaced by init.js so that we can call it again from #onSave after
+ * Dummy replaced by init.js so that we can call it again from #saveSuccess after
  * replacing the page contents with the new html.
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = null;
