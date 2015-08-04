@@ -6,12 +6,12 @@
  */
 
 /**
+ * MediaWiki mobile article target.
  *
  * @class
  * @extends ve.init.mw.Target
  *
  * @constructor
- * @param {jQuery} $container Container to render target into
  * @param {Object} [config] Configuration options
  * @cfg {number} [section] Number of the section target should scroll to
  * @cfg {boolean} [isIos=false] Whether the platform is an iOS device
@@ -36,18 +36,6 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 /* Inheritance */
 
 OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.Target );
-
-/* Events */
-
-/**
- * @event back
- * Leave the editor
- */
-
-/**
- * @event editSource
- * Switch to edit source mode
- */
 
 /* Static Properties */
 
@@ -84,7 +72,7 @@ ve.init.mw.MobileArticleTarget.static.name = 'mobile';
 /* Methods */
 
 /**
- * Once surface is ready ready, init UI.
+ * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 	// Parent method
@@ -94,12 +82,7 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 };
 
 /**
- * Create a surface.
- *
- * @method
- * @param {ve.dm.Document} dmDoc Document model
- * @param {Object} [config] Configuration options
- * @returns {ve.ui.MobileSurface}
+ * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
 	return new ve.ui.MobileSurface( dmDoc, config );
@@ -158,13 +141,6 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.editSource = function () {
-	this.emit( 'editSource' );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.MobileArticleTarget.prototype.goToHeading = function ( headingNode ) {
 	this.scrollToHeading( headingNode );
 };
@@ -187,6 +163,12 @@ ve.init.mw.MobileArticleTarget.prototype.scrollToHeading = function ( headingNod
 };
 
 /**
+ * Close the mobile editor
+ */
+ve.init.mw.MobileArticleTarget.prototype.close = function () {
+};
+
+/**
  * Back tool
  */
 ve.ui.MWBackTool = function VeUiMwBackTool() {
@@ -195,7 +177,7 @@ ve.ui.MWBackTool = function VeUiMwBackTool() {
 };
 OO.inheritClass( ve.ui.MWBackTool, ve.ui.Tool );
 ve.ui.MWBackTool.static.name = 'back';
-ve.ui.MWBackTool.static.group = 'history';
+ve.ui.MWBackTool.static.group = 'navigation';
 ve.ui.MWBackTool.static.icon = 'previous';
 ve.ui.MWBackTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
@@ -211,6 +193,6 @@ ve.ui.MWBackCommand = function VeUiMwBackCommmand() {
 };
 OO.inheritClass( ve.ui.MWBackCommand, ve.ui.Command );
 ve.ui.MWBackCommand.prototype.execute = function () {
-	ve.init.target.emit( 'back' );
+	ve.init.target.close();
 };
 ve.ui.commandRegistry.register( new ve.ui.MWBackCommand() );
