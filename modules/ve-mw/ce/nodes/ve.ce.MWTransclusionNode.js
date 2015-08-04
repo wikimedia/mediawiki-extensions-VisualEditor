@@ -11,9 +11,10 @@
  * @class
  * @abstract
  * @extends ve.ce.LeafNode
- * @mixins ve.ce.FocusableNode
  * @mixins OO.ui.mixin.IconElement
  * @mixins ve.ce.GeneratedContentNode
+ * @mixins ve.ce.FocusableNode
+ * @mixins ve.ce.TableCellableNode
  *
  * @constructor
  * @param {ve.dm.MWTransclusionNode} model Model to observe
@@ -21,21 +22,23 @@
  */
 ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 	// Parent constructor
-	ve.ce.LeafNode.call( this, model, config );
+	ve.ce.MWTransclusionNode.super.call( this, model, config );
 
 	// Mixin constructors
-	ve.ce.FocusableNode.call( this );
 	OO.ui.mixin.IconElement.call( this, config );
 	ve.ce.GeneratedContentNode.call( this );
+	ve.ce.FocusableNode.call( this );
+	ve.ce.TableCellableNode.call( this );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
-OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
-OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, OO.ui.mixin.IconElement );
+OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
+OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.TableCellableNode );
 
 /* Static Properties */
 
@@ -205,7 +208,7 @@ ve.ce.MWTransclusionNode.prototype.onParseError = function ( deferred ) {
  */
 ve.ce.MWTransclusionBlockNode = function VeCeMWTransclusionBlockNode( model ) {
 	// Parent constructor
-	ve.ce.MWTransclusionNode.call( this, model );
+	ve.ce.MWTransclusionBlockNode.super.call( this, model );
 };
 
 /* Inheritance */
@@ -228,7 +231,7 @@ ve.ce.MWTransclusionBlockNode.static.tagName = 'div';
  */
 ve.ce.MWTransclusionInlineNode = function VeCeMWTransclusionInlineNode( model ) {
 	// Parent constructor
-	ve.ce.MWTransclusionNode.call( this, model );
+	ve.ce.MWTransclusionInlineNode.super.call( this, model );
 };
 
 /* Inheritance */

@@ -73,6 +73,21 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 	);
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
+	var surfaceModel = this.context.getSurface().getModel(),
+		selection = surfaceModel.getSelection();
+
+	if ( selection instanceof ve.dm.TableSelection ) {
+		surfaceModel.setLinearSelection( selection.getOuterRanges()[0] );
+	}
+
+	// Parent method
+	ve.ui.MWTransclusionContextItem.super.prototype.onEditButtonClick.apply( this, arguments );
+};
+
 /* Registration */
 
 ve.ui.contextItemFactory.register( ve.ui.MWTransclusionContextItem );

@@ -13,6 +13,7 @@
  * @extends ve.dm.LeafNode
  * @mixins ve.dm.GeneratedContentNode
  * @mixins ve.dm.FocusableNode
+ * @mixins ve.dm.TableCellableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -24,6 +25,7 @@ ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
 	ve.dm.FocusableNode.call( this );
+	ve.dm.TableCellableNode.call( this );
 
 	// Properties
 	this.partsList = null;
@@ -39,6 +41,8 @@ OO.inheritClass( ve.dm.MWTransclusionNode, ve.dm.LeafNode );
 OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.GeneratedContentNode );
 
 OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.FocusableNode );
+
+OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.TableCellableNode );
 
 /* Static members */
 
@@ -67,12 +71,30 @@ ve.dm.MWTransclusionNode.static.getHashObject = function ( dataElement ) {
 	};
 };
 
+/**
+ * Node type to use when the transclusion is inline
+ *
+ * @static
+ * @property {string}
+ * @inheritable
+ */
+ve.dm.MWTransclusionNode.static.inlineType = 'mwTransclusionInline';
+
+/**
+ * Node type to use when the transclusion is a block
+ *
+ * @static
+ * @property {string}
+ * @inheritable
+ */
+ve.dm.MWTransclusionNode.static.blockType = 'mwTransclusionBlock';
+
 ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, index,
 		mwDataJSON = domElements[0].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		isInline = this.isHybridInline( domElements, converter ),
-		type = isInline ? 'mwTransclusionInline' : 'mwTransclusionBlock';
+		type = isInline ? this.inlineType : this.blockType;
 
 	dataElement = {
 		type: type,
@@ -81,6 +103,11 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 			originalMw: mwDataJSON
 		}
 	};
+
+	if ( domElements.length === 1 && [ 'td', 'th' ].indexOf( domElements[0].nodeName.toLowerCase() ) !== -1 ) {
+		dataElement.attributes.cellable = true;
+		ve.dm.TableCellableNode.static.setAttributes( dataElement.attributes, domElements );
+	}
 
 	if ( !domElements[0].getAttribute( 'data-ve-no-generated-contents' ) ) {
 		index = this.storeGeneratedContents( dataElement, domElements, converter.getStore() );
@@ -242,6 +269,13 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
 	if ( key === 'mw' ) {
 		this.partsList = null;
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.MWTransclusionNode.prototype.isCellable = function () {
+	return !!this.getAttribute( 'cellable' );
 };
 
 /**
