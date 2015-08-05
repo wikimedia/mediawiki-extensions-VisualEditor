@@ -1546,6 +1546,12 @@
 				"desktop",
 				"mobile"
 			]
+		},
+		"ext.visualEditor.viewPageTarget.init": {
+			"dependencies": [ "ext.visualEditor.desktopArticleTarget.init" ]
+		},
+		"ext.visualEditor.viewPageTarget.noscript": {
+			"dependencies": [ "ext.visualEditor.desktopArticleTarget.noscript" ]
 		}
 	},
 	"ResourceFileModulePaths": {
