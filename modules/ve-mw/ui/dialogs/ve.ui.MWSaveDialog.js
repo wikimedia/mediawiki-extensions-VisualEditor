@@ -17,7 +17,7 @@
  * @constructor
  * @param {Object} [config] Config options
  */
-ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
+ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	// Parent constructor
 	ve.ui.MWSaveDialog.super.call( this, config );
 
@@ -27,6 +27,9 @@ ve.ui.MWSaveDialog = function VeUiMWSaveDialog( config ) {
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
 	this.target = null;
+
+	// Initialization
+	this.$element.addClass( 've-ui-mwSaveDialog' );
 };
 
 /* Inheritance */

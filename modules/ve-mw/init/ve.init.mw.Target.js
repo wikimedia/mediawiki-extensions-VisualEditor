@@ -32,6 +32,10 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	ve.init.mw.Target.super.call( this, config );
 
 	// Properties
+	this.saveDialog = null;
+	this.saveDeferred = null;
+	this.captcha = null;
+	this.docToSave = null;
 	this.toolbarSaveButton = null;
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgArticleId', 0 ) !== 0;
@@ -295,18 +299,6 @@ ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
-		this.$checkboxes = $( ve.getObjectValues( data.checkboxes ).join( '' ) );
-		// Populate checkboxes with default values for minor and watch
-		this.$checkboxes
-			.filter( '#wpMinoredit' )
-				.prop( 'checked', mw.user.options.get( 'minordefault' ) )
-			.end()
-			.filter( '#wpWatchthis' )
-				.prop( 'checked',
-					mw.user.options.get( 'watchdefault' ) ||
-					( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
-					data.watched === ''
-				);
 
 		this.baseTimeStamp = data.basetimestamp;
 		this.startTimeStamp = data.starttimestamp;
@@ -476,6 +468,7 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
  * @fires save
  */
 ve.init.mw.Target.prototype.saveComplete = function () {
+	this.saveDeferred.resolve();
 	this.emit( 'save' );
 };
 
@@ -679,7 +672,8 @@ ve.init.mw.Target.prototype.showChangesFail = function () {
  *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
  * @param {boolean} [warning=false] Whether or not this is a warning.
  */
-ve.init.mw.Target.prototype.showSaveError = function () {
+ve.init.mw.Target.prototype.showSaveError = function ( msg, allowReapply, warning ) {
+	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
 };
 
 /**
@@ -795,7 +789,52 @@ ve.init.mw.Target.prototype.saveErrorBadToken = function () {
  * @param {Object} editApi
  * @fires saveErrorCaptcha
  */
-ve.init.mw.Target.prototype.saveErrorCaptcha = function () {
+ve.init.mw.Target.prototype.saveErrorCaptcha = function ( editApi ) {
+	var $captchaDiv = $( '<div>' ),
+		$captchaParagraph = $( '<p>' );
+
+	this.captcha = {
+		input: new OO.ui.TextInputWidget(),
+		id: editApi.captcha.id
+	};
+	$captchaDiv.append( $captchaParagraph );
+	$captchaParagraph.append(
+		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
+		document.createTextNode( mw.msg( 'colon-separator' ) )
+	);
+	if ( editApi.captcha.url ) { // FancyCaptcha
+		mw.loader.load( 'ext.confirmEdit.fancyCaptcha' );
+		$captchaParagraph.append(
+			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
+				.filter( 'a' ).attr( 'target', '_blank' ).end()
+		);
+		$captchaDiv.append(
+			$( '<img>' ).attr( 'src', editApi.captcha.url ).addClass( 'fancycaptcha-image' ),
+			' ',
+			$( '<a>' ).addClass( 'fancycaptcha-reload' ).text( mw.msg( 'fancycaptcha-reload-text' ) )
+		);
+	} else if ( editApi.captcha.type === 'simple' || editApi.captcha.type === 'math' ) {
+		// SimpleCaptcha and MathCaptcha
+		$captchaParagraph.append(
+			mw.message( 'captcha-edit' ).parse(),
+			'<br>',
+			document.createTextNode( editApi.captcha.question )
+		);
+	} else if ( editApi.captcha.type === 'question' ) {
+		// QuestyCaptcha
+		$captchaParagraph.append(
+			mw.message( 'questycaptcha-edit' ).parse(),
+			'<br>',
+			editApi.captcha.question
+		);
+	}
+
+	$captchaDiv.append( this.captcha.input.$element );
+
+	// ProcessDialog's error system isn't great for this yet.
+	this.saveDialog.clearMessage( 'api-save-error' );
+	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
+	this.saveDialog.popPending();
 	this.emit( 'saveErrorCaptcha' );
 };
 
@@ -880,6 +919,89 @@ ve.init.mw.Target.prototype.serializeSuccess = function ( response ) {
 ve.init.mw.Target.prototype.serializeFail = function () {
 	this.serializing = false;
 	this.emit( 'serializeError' );
+};
+
+/**
+ * Handle clicks on the review button in the save dialog.
+ *
+ * @method
+ * @fires saveReview
+ */
+ve.init.mw.Target.prototype.onSaveDialogReview = function () {
+	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
+		this.emit( 'saveReview' );
+		this.saveDialog.getActions().setAbilities( { approve: false } );
+		this.saveDialog.pushPending();
+		if ( this.pageExists ) {
+			// Has no callback, handled via target.showChangesDiff
+			this.showChanges( this.docToSave );
+		} else {
+			this.serialize( this.docToSave, this.onSaveDialogReviewComplete.bind( this ) );
+		}
+	} else {
+		this.saveDialog.swapPanel( 'review' );
+	}
+};
+
+/**
+ * Handle completed serialize request for diff views for new page creations.
+ *
+ * @method
+ * @param {string} wikitext
+ */
+ve.init.mw.Target.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
+	// Invalidate the viewer wikitext on next change
+	this.getSurface().getModel().getDocument().once( 'transact',
+		this.saveDialog.clearDiff.bind( this.saveDialog )
+	);
+	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
+};
+
+/**
+ * Handle clicks on the resolve conflict button in the conflict dialog.
+ *
+ * @method
+ */
+ve.init.mw.Target.prototype.onSaveDialogResolveConflict = function () {
+	// Get Wikitext from the DOM, and set up a submit call when it's done
+	this.serialize(
+		this.docToSave,
+		this.submitWithSaveFields.bind( this, { wpSave: 1 } )
+	);
+};
+
+/**
+ * Handle dialog retry events
+ * So we can handle trying to save again after page deletion warnings
+ */
+ve.init.mw.Target.prototype.onSaveDialogRetry = function () {
+	if ( this.pageDeletedWarning ) {
+		this.recreating = true;
+		this.pageExists = false;
+	}
+};
+
+/**
+ * Handle dialog close events.
+ *
+ * @fires saveWorkflowEnd
+ */
+ve.init.mw.Target.prototype.onSaveDialogClose = function () {
+	var target = this;
+
+	function clear() {
+		target.docToSave = null;
+		target.clearPreparedCacheKey();
+	}
+
+	// Clear the cached HTML and cache key once the document changes
+	if ( this.getSurface() ) {
+		this.getSurface().getModel().getDocument().once( 'transact', clear );
+	} else {
+		clear();
+	}
+
+	this.emit( 'saveWorkflowEnd' );
 };
 
 /**
@@ -1073,7 +1195,6 @@ ve.init.mw.Target.prototype.clearState = function () {
 	this.doc = null;
 	this.originalHtml = null;
 	this.editNotices = null;
-	this.$checkboxes = null;
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
 };
@@ -1280,14 +1401,71 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 /**
  * Prepare to save the article
  *
+ * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
+ *  succeeds/fails.
  * @fires saveInitiated
  */
-ve.init.mw.Target.prototype.startSave = function () {
-	this.emit( 'saveInitiated' );
-	if ( !this.docToSave ) {
-		this.docToSave = this.getSurface().getDom();
+ve.init.mw.Target.prototype.startSave = function ( saveDeferred ) {
+	if ( this.deactivating ) {
+		return false;
 	}
-	this.save( this.docToSave, this.getSaveOptions() );
+
+	// Reset any old captcha data
+	if ( this.captcha ) {
+		this.saveDialog.clearMessage( 'captcha' );
+		delete this.captcha;
+	}
+
+	var saveOptions = this.getSaveOptions();
+
+	if (
+		+mw.user.options.get( 'forceeditsummary' ) &&
+		saveOptions.summary === '' &&
+		!this.saveDialog.messages.missingsummary
+	) {
+		this.saveDialog.showMessage(
+			'missingsummary',
+			// Wrap manually since this core message already includes a bold "Warning:" label
+			$( '<p>' ).append( ve.init.platform.getParsedMessage( 'missingsummary' ) ),
+			{ wrap: false }
+		);
+		this.saveDialog.popPending();
+	} else {
+		this.emit( 'saveInitiated' );
+		if ( !this.docToSave ) {
+			this.docToSave = this.getSurface().getDom();
+		}
+		this.save( this.docToSave, this.getSaveOptions() );
+		this.saveDeferred = saveDeferred;
+	}
+};
+
+/**
+ * Get save form fields from the save dialog form.
+ *
+ * @returns {Object} Form data for submission to the MediaWiki action=edit UI
+ */
+ve.init.mw.Target.prototype.getSaveFields = function () {
+	var fields = {
+		wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
+		wpCaptchaId: this.captcha && this.captcha.id,
+		wpCaptchaWord: this.captcha && this.captcha.input.getValue()
+	};
+	if ( this.recreating ) {
+		fields.wpRecreate = true;
+	}
+	return fields;
+};
+
+/**
+ * Invoke #submit with the data from #getSaveFields
+ *
+ * @param {Object} fields Fields to add in addition to those from #getSaveFields
+ * @param {string} wikitext Wikitext to submit
+ * @returns {boolean} Whether submission was started
+ */
+ve.init.mw.Target.prototype.submitWithSaveFields = function ( fields, wikitext ) {
+	return this.submit( wikitext, $.extend( this.getSaveFields(), fields ) );
 };
 
 /**
@@ -1296,7 +1474,24 @@ ve.init.mw.Target.prototype.startSave = function () {
  * @returns {Object} Save options for submission to the MediaWiki API
  */
 ve.init.mw.Target.prototype.getSaveOptions = function () {
-	return {};
+	var key,
+		options = this.getSaveFields(),
+		fieldMap = {
+			wpSummary: 'summary',
+			wpMinoredit: 'minor',
+			wpWatchthis: 'watch',
+			wpCaptchaId: 'captchaid',
+			wpCaptchaWord: 'captchaword'
+		};
+
+	for ( key in fieldMap ) {
+		if ( options[key] !== undefined ) {
+			options[fieldMap[key]] = options[key];
+			delete options[key];
+		}
+	}
+
+	return options;
 };
 
 /**
@@ -1581,6 +1776,36 @@ ve.init.mw.Target.prototype.showSaveDialog = function () {
 		this.docToSave = this.getSurface().getDom();
 	}
 	this.prepareCacheKey( this.docToSave );
+
+	var target = this;
+
+	// Connect events to save dialog
+	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
+		if ( !target.saveDialog ) {
+			target.saveDialog = win;
+
+			// Connect to save dialog
+			target.saveDialog.connect( target, {
+				save: 'startSave',
+				review: 'onSaveDialogReview',
+				resolve: 'onSaveDialogResolveConflict',
+				retry: 'onSaveDialogRetry',
+				close: 'onSaveDialogClose'
+			} );
+		}
+	} );
+
+	this.openSaveDialog();
+};
+
+/**
+ * Open the save dialog
+ */
+ve.init.mw.Target.prototype.openSaveDialog = function () {
+	var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+
+	// Open the dialog
+	windowAction.open( 'mwSave', { target: this } );
 };
 
 /**
