@@ -574,7 +574,7 @@
 	// Most of mw.libs.ve is considered subject to change and private.  The exception is that
 	// mw.libs.ve.isAvailable is public, and indicates whether the VE editor itself can be loaded
 	// on this page. See above for why it may be false.
-	mw.libs.ve = init;
+	mw.libs.ve = $.extend( mw.libs.ve || {}, init );
 
 	if ( init.isAvailable && userPrefEnabled ) {
 		$( 'html' ).addClass( 've-available' );
