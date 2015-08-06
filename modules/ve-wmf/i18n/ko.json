@@ -10,11 +10,11 @@
 			"Amire80"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|보이는편집기]]",
-	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|보이는편집기]]를 사용한 편집",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|보이는편집기: 확인 필요]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|시각편집기]]",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|시각편집기]]를 사용한 편집",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|시각편집기: 확인 필요]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|보이는 편집기]]를 사용해 편집하는 동안 의도하지 않은 바뀜을 갖는 위키텍스트를 시스템이 발견했습니다.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|보이는편집기: 전환됨]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|시각편집기: 전환됨]]",
 	"tag-visualeditor-switched-description": "사용자가 보이는 편집기를 사용하던 도중 위키텍스트 편집기로 변경했습니다.",
 	"visualeditor-feedback-link": "Project:보이는편집기/피드백",
 	"visualeditor-feedback-tool": "이 소프트웨어에 대한 피드백 남기기",

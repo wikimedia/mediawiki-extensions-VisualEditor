@@ -17,7 +17,8 @@
 			"Elseweyr",
 			"McSalama",
 			"Alluk.",
-			"Macofe"
+			"Macofe",
+			"Pitke"
 		]
 	},
 	"apihelp-visualeditor-description": "Hakee sivun HTML5-lähdekoodin Parsoid-palvelusta.",
@@ -39,6 +40,7 @@
 	"tooltip-ca-ve-edit": "Muokkaa tätä sivua",
 	"visualeditor-advancedsettings-tool": "Lisäasetukset",
 	"visualeditor-annotationbutton-linknode-tooltip": "Yksinkertainen linkki",
+	"visualeditor-backbutton-tooltip": "Siirry takaisin",
 	"visualeditor-beta-appendix": "beeta",
 	"visualeditor-beta-label": "beeta",
 	"visualeditor-beta-warning": "Tämä muokkain on beetavaiheessa. Voit palata perinteiseen wikitekstin muokkaustilaan muokkauksia menettämättä avaamalla ”{{int:visualeditor-toolbar-savedialog}}” -painikkeen vieressä oleva alasvetovalikko ja valitse ”{{int:visualeditor-mweditmodesource-tool}}”.",
@@ -280,6 +282,7 @@
 	"visualeditor-timeout": "Näyttää siltä, että tämä muokkain ei ole tällä hetkellä käytettävissä. Haluaisitko muokata wikitekstitilassa?",
 	"visualeditor-toolbar-cite-label": "Viite",
 	"visualeditor-toolbar-savedialog": "Tallenna sivu",
+	"visualeditor-toolbar-savedialog-short": "Tallenna",
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
 	"visualeditor-version-label": "Versio",
 	"visualeditor-viewpage-savewarning": "Oletko varma, että haluat palata katselutilaan tallentamatta ensin?",

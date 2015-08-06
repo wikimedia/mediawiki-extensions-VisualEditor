@@ -12,7 +12,8 @@
 			"SkyDaisy9",
 			"Sujiniku",
 			"2nd-player",
-			"Jdforrester"
+			"Jdforrester",
+			"Sudachi"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -43,6 +44,7 @@
 	"tooltip-ca-ve-edit": "このページをビジュアルエディターで編集する",
 	"visualeditor-advancedsettings-tool": "高度な設定",
 	"visualeditor-annotationbutton-linknode-tooltip": "単純なリンク",
+	"visualeditor-backbutton-tooltip": "戻る",
 	"visualeditor-beta-appendix": "ベータ版",
 	"visualeditor-beta-label": "ベータ",
 	"visualeditor-beta-warning": "このエディターは「ベータ版」です。「{{int:visualeditor-toolbar-savedialog}}」の隣のドロップダウンを開いて「{{int:visualeditor-mweditmodesource-tool}}」を選択することで、編集内容を保持したまま、いつでもソース編集に戻せます。",
@@ -291,6 +293,7 @@
 	"visualeditor-timeout": "このエディターは現在利用できないようです。代わりにソース モードで編集しますか?",
 	"visualeditor-toolbar-cite-label": "参照",
 	"visualeditor-toolbar-savedialog": "ページを保存",
+	"visualeditor-toolbar-savedialog-short": "保存",
 	"visualeditor-usernamespacepagelink": "Project:利用者名前空間",
 	"visualeditor-version-label": "バージョン",
 	"visualeditor-viewpage-savewarning": "まだ保存していませんが、閲覧モードに本当に戻りますか?",
