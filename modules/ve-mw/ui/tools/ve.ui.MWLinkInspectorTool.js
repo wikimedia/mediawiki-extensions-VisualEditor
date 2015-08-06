@@ -13,12 +13,13 @@
  *
  * @class
  * @extends ve.ui.LinkInspectorTool
+ *
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkInspectorTool = function VeUiMWLinkInspectorTool( toolGroup, config ) {
-	ve.ui.LinkInspectorTool.call( this, toolGroup, config );
+ve.ui.MWLinkInspectorTool = function VeUiMwLinkInspectorTool() {
+	ve.ui.MWLinkInspectorTool.super.apply( this, arguments );
 };
 
 OO.inheritClass( ve.ui.MWLinkInspectorTool, ve.ui.LinkInspectorTool );

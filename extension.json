@@ -429,11 +429,13 @@
 			"scripts": [
 				"modules/ve-mw/ui/ve.ui.MWMobileContext.js",
 				"modules/ve-mw/ui/ve.ui.MWMobileSurface.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js"
+				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
 			],
 			"dependencies": [
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.mwcore",
+				"ext.visualEditor.mwlink",
 				"ext.visualEditor.core.mobile"
 			],
 			"targets": [

@@ -36,7 +36,7 @@ ve.ui.MWEditModeTool.static.autoAddToGroup = false;
 /** */
 ve.ui.MWEditModeTool.prototype.onUpdateState = function () {
 	// Parent method
-	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+	ve.ui.MWEditModeTool.super.prototype.onUpdateState.apply( this, arguments );
 
 	this.setActive( false );
 	this.setDisabled( false );
@@ -51,8 +51,8 @@ ve.ui.MWEditModeTool.prototype.onUpdateState = function () {
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Config options
  */
-ve.ui.MWEditModeSourceTool = function VeUiMWEditModeSourceTool( toolGroup, config ) {
-	ve.ui.MWEditModeTool.call( this, toolGroup, config );
+ve.ui.MWEditModeSourceTool = function VeUiMWEditModeSourceTool() {
+	ve.ui.MWEditModeSourceTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWEditModeSourceTool, ve.ui.MWEditModeTool );
 ve.ui.MWEditModeSourceTool.static.name = 'editModeSource';

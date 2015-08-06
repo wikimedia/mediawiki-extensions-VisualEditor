@@ -40,11 +40,62 @@
 	display: none;
 }
 
-/* Hide right border on last tool */
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools .oo-ui-toolGroup:last-child {
+.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-actions {
+	float: none;
+	display: table;
+}
+
+.ve-init-mw-mobileArticleTarget-title-container,
+.ve-init-mw-mobileArticleTarget-toolbar .ve-ui-toolbar,
+.ve-init-mw-mobileArticleTarget-toolbar .ve-ui-toolbar-saveButton {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.ve-init-mw-mobileArticleTarget-title-container {
+	width: 100%;
+	position: relative;
+}
+
+.ve-init-mw-mobileArticleTarget-title {
+	padding: 0 0.5em;
+	line-height: 3.164em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools {
+	display: table;
+	width: 100%;
+}
+
+.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup {
+	display: table-cell;
+}
+
+.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup-empty {
+	display: none;
+}
+
+.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup:last-child {
 	border-right: 0;
 }
 
-.oo-ui-toolbar-actions {
+.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup > .oo-ui-toolGroup-tools
+> .oo-ui-tool {
 	border-left: 1px solid #ddd;
+	width: 100%;
+}
+
+@media (max-width: 479px) {
+	.ve-init-mw-mobileArticleTarget-toolbar
+	.oo-ui-barToolGroup > .oo-ui-toolGroup-tools > .oo-ui-tool.oo-ui-iconElement.oo-ui-tool-with-label > .oo-ui-tool-link .oo-ui-tool-title {
+		display: none;
+	}
 }

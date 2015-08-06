@@ -40,8 +40,8 @@ OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.Target );
 /* Static Properties */
 
 ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
-	// Link
-	{ include: [ 'back' ] },
+	// History
+	{ include: [ 'undo' ] },
 	// Style
 	{
 		classes: [ 've-test-toolbar-style' ],
@@ -64,7 +64,9 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		icon: 'reference',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
 		include: [ { group: 'cite' }, 'reference/existing' ]
-	}
+	},
+	// Done with editing toolbar
+	{ include: [ 'done' ] }
 ];
 
 ve.init.mw.MobileArticleTarget.static.name = 'mobile';
@@ -78,7 +80,24 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
 
+	this.getSurface().getModel().connect( this, { select: 'onSurfaceSelect' } );
+	this.onSurfaceSelect();
+
 	this.events.trackActivationComplete();
+};
+
+/**
+ * Handle surface select events
+ */
+ve.init.mw.MobileArticleTarget.prototype.onSurfaceSelect = function () {
+	var toolbar = this.getToolbar();
+	if ( this.getSurface().getModel().getSelection().isNull() ) {
+		toolbar.$group.addClass( 'oo-ui-element-hidden' );
+		toolbar.$actions.removeClass( 'oo-ui-element-hidden' );
+	} else {
+		toolbar.$group.removeClass( 'oo-ui-element-hidden' );
+		toolbar.$actions.addClass( 'oo-ui-element-hidden' );
+	}
 };
 
 /**
@@ -129,13 +148,21 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 			type: 'list',
 			icon: 'menu',
 			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
-			include: [ 'editModeSource' ]
+			include: [ 'back', 'editModeSource' ]
 		}
 	], this.getSurface() );
 
 	this.actionsToolbar.emit( 'updateState' );
 
-	this.toolbar.$actions.append( this.actionsToolbar.$element, this.toolbarSaveButton.$element );
+	this.toolbar.$actions.append(
+		this.actionsToolbar.$element,
+		$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
+			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
+				new mw.Title( ve.init.target.pageName ).getMainText()
+			)
+		),
+		this.toolbarSaveButton.$element
+	);
 };
 
 /**
@@ -169,6 +196,13 @@ ve.init.mw.MobileArticleTarget.prototype.close = function () {
 };
 
 /**
+ * Done with the editing toolbar
+ */
+ve.init.mw.MobileArticleTarget.prototype.done = function () {
+	this.getSurface().getView().blur();
+};
+
+/**
  * Back tool
  */
 ve.ui.MWBackTool = function VeUiMwBackTool() {
@@ -182,6 +216,16 @@ ve.ui.MWBackTool.static.icon = 'previous';
 ve.ui.MWBackTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
 ve.ui.MWBackTool.static.commandName = 'back';
+
+/** */
+ve.ui.MWBackTool.prototype.onUpdateState = function () {
+	// Parent method
+	ve.ui.MWBackTool.super.prototype.onUpdateState.apply( this, arguments );
+
+	this.setActive( false );
+	this.setDisabled( false );
+};
+
 ve.ui.toolFactory.register( ve.ui.MWBackTool );
 
 /**
@@ -196,3 +240,32 @@ ve.ui.MWBackCommand.prototype.execute = function () {
 	ve.init.target.close();
 };
 ve.ui.commandRegistry.register( new ve.ui.MWBackCommand() );
+
+/**
+ * Done tool
+ */
+ve.ui.MWDoneTool = function VeUiMWDoneTool() {
+	// Parent constructor
+	ve.ui.MWDoneTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.MWDoneTool, ve.ui.Tool );
+ve.ui.MWDoneTool.static.name = 'done';
+ve.ui.MWDoneTool.static.group = 'navigation';
+ve.ui.MWDoneTool.static.icon = 'check';
+ve.ui.MWDoneTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-donebutton-tooltip' );
+ve.ui.MWDoneTool.static.commandName = 'done';
+ve.ui.toolFactory.register( ve.ui.MWDoneTool );
+
+/**
+ * Done command
+ */
+ve.ui.MWDoneCommand = function VeUiMwDoneCommmand() {
+	// Parent constructor
+	ve.ui.MWDoneCommand.super.call( this, 'done' );
+};
+OO.inheritClass( ve.ui.MWDoneCommand, ve.ui.Command );
+ve.ui.MWDoneCommand.prototype.execute = function () {
+	ve.init.target.done();
+};
+ve.ui.commandRegistry.register( new ve.ui.MWDoneCommand() );
