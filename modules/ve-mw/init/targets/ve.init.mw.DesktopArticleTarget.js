@@ -32,7 +32,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.onWatchToggleHandler = this.onWatchToggle.bind( this );
 
 	// Properties
-	this.saveDialog = null;
 	this.onBeforeUnloadFallback = null;
 	this.onUnloadHandler = this.onUnload.bind( this );
 	this.active = false;
@@ -44,8 +43,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.toolbarSetupDeferred = null;
 	this.welcomeDialog = null;
 	this.welcomeDialogPromise = null;
-	this.captcha = null;
-	this.docToSave = null;
+	this.$checkboxes = null;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -223,6 +221,30 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
 		// Show warning in unknown browsers that pass the support test
 		// Continue at own risk.
 		this.localNoticeMessages.push( 'visualeditor-browserwarning' );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.loadSuccess.apply( this, arguments );
+
+	var data = response ? response.visualeditor : {};
+	if ( data.checkboxes ) {
+		this.$checkboxes = $( ve.getObjectValues( data.checkboxes ).join( '' ) );
+		// Populate checkboxes with default values for minor and watch
+		this.$checkboxes
+			.filter( '#wpMinoredit' )
+				.prop( 'checked', mw.user.options.get( 'minordefault' ) )
+			.end()
+			.filter( '#wpWatchthis' )
+				.prop( 'checked',
+					mw.user.options.get( 'watchdefault' ) ||
+					( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
+					data.watched === ''
+				);
 	}
 };
 
@@ -410,9 +432,9 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 
 	// Check we got as far as setting up the surface
 	if ( this.active ) {
-		this.tearDownUnloadHandlers();
+		this.teardownUnloadHandlers();
 		// If we got as far as setting up the surface, tear that down
-		promises.push( this.tearDownSurface() );
+		promises.push( this.teardownSurface() );
 	} else if ( this.toolbar ) {
 		// If a dummy toolbar was created, destroy it
 		this.toolbar.destroy();
@@ -577,10 +599,9 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
 	var newUrlParams, watchChecked;
-	this.saveDeferred.resolve();
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
-		this.tearDownUnloadHandlers();
+		this.teardownUnloadHandlers();
 		newUrlParams = newid === undefined ? {} : { venotify: this.restoring ? 'restored' : 'created' };
 
 		if ( isRedirect ) {
@@ -592,7 +613,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		// User logged in if module loaded.
 		// Just checking for mw.page.watch is not enough because in Firefox
 		// there is Object.prototype.watch...
-		if ( mw.page.watch && mw.page.watch.updateWatchLink ) {
+		if ( mw.page.hasOwnProperty( 'watch' ) ) {
 			watchChecked = this.saveDialog.$saveOptions
 				.find( '.ve-ui-mwSaveDialog-checkboxes' )
 					.find( '#wpWatchthis' )
@@ -649,75 +670,6 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 			} );
 		}
 	}
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
-	var $captchaDiv = $( '<div>' ),
-		$captchaParagraph = $( '<p>' );
-
-	this.captcha = {
-		input: new OO.ui.TextInputWidget(),
-		id: editApi.captcha.id
-	};
-	$captchaDiv.append( $captchaParagraph );
-	$captchaParagraph.append(
-		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
-		document.createTextNode( mw.msg( 'colon-separator' ) )
-	);
-	if ( editApi.captcha.url ) { // FancyCaptcha
-		mw.loader.load( 'ext.confirmEdit.fancyCaptcha' );
-		$captchaParagraph.append(
-			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
-				.filter( 'a' ).attr( 'target', '_blank' ).end()
-		);
-		$captchaDiv.append(
-			$( '<img>' ).attr( 'src', editApi.captcha.url ).addClass( 'fancycaptcha-image' ),
-			' ',
-			$( '<a>' ).addClass( 'fancycaptcha-reload' ).text( mw.msg( 'fancycaptcha-reload-text' ) )
-		);
-	} else if ( editApi.captcha.type === 'simple' || editApi.captcha.type === 'math' ) {
-		// SimpleCaptcha and MathCaptcha
-		$captchaParagraph.append(
-			mw.message( 'captcha-edit' ).parse(),
-			'<br>',
-			document.createTextNode( editApi.captcha.question )
-		);
-	} else if ( editApi.captcha.type === 'question' ) {
-		// QuestyCaptcha
-		$captchaParagraph.append(
-			mw.message( 'questycaptcha-edit' ).parse(),
-			'<br>',
-			editApi.captcha.question
-		);
-	}
-
-	$captchaDiv.append( this.captcha.input.$element );
-
-	// ProcessDialog's error system isn't great for this yet.
-	this.saveDialog.clearMessage( 'api-save-error' );
-	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
-	this.saveDialog.popPending();
-};
-
-/**
- * Handle MWSaveDialog retry events
- * So we can handle trying to save again after page deletion warnings
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveRetry = function () {
-	if ( this.pageDeletedWarning ) {
-		this.recreating = true;
-		this.pageExists = false;
-	}
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
-	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
 };
 
 /**
@@ -791,79 +743,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
 };
 
 /**
- * Handle clicks on the review button in the save dialog.
- *
- * @method
- * @fires saveReview
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogReview = function () {
-	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
-		this.emit( 'saveReview' );
-		this.saveDialog.getActions().setAbilities( { approve: false } );
-		this.saveDialog.pushPending();
-		if ( this.pageExists ) {
-			// Has no callback, handled via target.showChangesDiff
-			this.showChanges( this.docToSave );
-		} else {
-			this.serialize( this.docToSave, this.onSaveDialogReviewComplete.bind( this ) );
-		}
-	} else {
-		this.saveDialog.swapPanel( 'review' );
-	}
-};
-
-/**
- * Handle completed serialize request for diff views for new page creations.
- *
- * @method
- * @param {string} wikitext
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
-	// Invalidate the viewer wikitext on next change
-	this.getSurface().getModel().getDocument().once( 'transact',
-		this.saveDialog.clearDiff.bind( this.saveDialog )
-	);
-	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
-};
-
-/**
- * @inheritdoc
- * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
- *  succeeds/fails.
- */
-ve.init.mw.DesktopArticleTarget.prototype.startSave = function ( saveDeferred ) {
-	if ( this.deactivating ) {
-		return false;
-	}
-
-	// Reset any old captcha data
-	if ( this.captcha ) {
-		this.saveDialog.clearMessage( 'captcha' );
-		delete this.captcha;
-	}
-
-	var saveOptions = this.getSaveOptions();
-
-	if (
-		+mw.user.options.get( 'forceeditsummary' ) &&
-		saveOptions.summary === '' &&
-		!this.saveDialog.messages.missingsummary
-	) {
-		this.saveDialog.showMessage(
-			'missingsummary',
-			// Wrap manually since this core message already includes a bold "Warning:" label
-			$( '<p>' ).append( ve.init.platform.getParsedMessage( 'missingsummary' ) ),
-			{ wrap: false }
-		);
-		this.saveDialog.popPending();
-	} else {
-		// Parent method
-		ve.init.mw.DesktopArticleTarget.super.prototype.startSave.call( this );
-		this.saveDeferred = saveDeferred;
-	}
-};
-
-/**
  * Open the dialog to switch to edit source mode with the current wikitext, or just do it straight
  * away if the document is unmodified. If we open the dialog, the document opacity will be set to
  * half, which can be reset with the resetDocumentOpacity function.
@@ -882,78 +761,25 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 };
 
 /**
- * Handle clicks on the resolve conflict button in the conflict dialog.
- *
- * @method
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogResolveConflict = function () {
-	// Get Wikitext from the DOM, and set up a submit call when it's done
-	this.serialize(
-		this.docToSave,
-		this.submitWithSaveFields.bind( this, { wpSave: 1 } )
-	);
-};
-
-/**
- * Get save form fields from the save dialog form.
- *
- * @returns {Object} Form data for submission to the MediaWiki action=edit UI
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
-	var fields = {};
+	var checkboxFields = {};
+
 	this.$checkboxes
 		.each( function () {
 			var $this = $( this );
 			// We can't just use $this.val() because .val() always returns the value attribute of
 			// a checkbox even when it's unchecked
 			if ( $this.prop( 'name' ) && ( $this.prop( 'type' ) !== 'checkbox' || $this.prop( 'checked' ) ) ) {
-				fields[$this.prop( 'name' )] = $this.val();
+				checkboxFields[$this.prop( 'name' )] = $this.val();
 			}
 		} );
-	ve.extendObject( fields, {
-		wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
-		wpCaptchaId: this.captcha && this.captcha.id,
-		wpCaptchaWord: this.captcha && this.captcha.input.getValue()
-	} );
-	if ( this.recreating ) {
-		fields.wpRecreate = true;
-	}
-	return fields;
-};
 
-/**
- * Invoke #submit with the data from #getSaveFields
- *
- * @param {Object} fields Fields to add in addition to those from #getSaveFields
- * @param {string} wikitext Wikitext to submit
- * @returns {boolean} Whether submission was started
- */
-ve.init.mw.DesktopArticleTarget.prototype.submitWithSaveFields = function ( fields, wikitext ) {
-	return this.submit( wikitext, $.extend( this.getSaveFields(), fields ) );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.getSaveOptions = function () {
-	var key,
-		options = this.getSaveFields(),
-		fieldMap = {
-			wpSummary: 'summary',
-			wpMinoredit: 'minor',
-			wpWatchthis: 'watch',
-			wpCaptchaId: 'captchaid',
-			wpCaptchaWord: 'captchaword'
-		};
-
-	for ( key in fieldMap ) {
-		if ( options[key] !== undefined ) {
-			options[fieldMap[key]] = options[key];
-			delete options[key];
-		}
-	}
-
-	return options;
+	return ve.extendObject(
+		checkboxFields,
+		ve.init.mw.DesktopArticleTarget.super.prototype.getSaveFields.call( this )
+	);
 };
 
 /**
@@ -961,12 +787,12 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveOptions = function () {
  *
  * @return {jQuery.Promise} Promise resolved when surface is torn down
  */
-ve.init.mw.DesktopArticleTarget.prototype.tearDownSurface = function () {
+ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 	var target = this,
 		promises = [];
 
 	// Update UI
-	promises.push( this.tearDownToolbar(), this.tearDownDebugBar() );
+	promises.push( this.teardownToolbar(), this.teardownDebugBar() );
 	this.restoreDocumentTitle();
 	if ( this.getSurface().mwTocWidget ) {
 		this.getSurface().mwTocWidget.teardown();
@@ -1053,28 +879,8 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.showSaveDialog.call( this );
-
-	var target = this,
-		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
-
-	// Connect events to save dialog
-	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
-		if ( !target.saveDialog ) {
-			target.saveDialog = win;
-
-			// Connect to save dialog
-			target.saveDialog.connect( target, {
-				save: 'startSave',
-				review: 'onSaveDialogReview',
-				resolve: 'onSaveDialogResolveConflict',
-				retry: 'onSaveRetry',
-				close: 'onSaveDialogClose'
-			} );
-		}
-	} );
+ve.init.mw.DesktopArticleTarget.prototype.openSaveDialog = function () {
+	var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
 	// Open the dialog
 	windowAction.open( 'mwSave', {
@@ -1082,30 +888,6 @@ ve.init.mw.DesktopArticleTarget.prototype.showSaveDialog = function () {
 		editSummary: this.initialEditSummary,
 		$checkboxes: this.$checkboxes
 	} );
-
-};
-
-/**
- * Handle dialog close events.
- *
- * @fires saveWorkflowEnd
- */
-ve.init.mw.DesktopArticleTarget.prototype.onSaveDialogClose = function () {
-	var target = this;
-
-	function clear() {
-		target.docToSave = null;
-		target.clearPreparedCacheKey();
-	}
-
-	// Clear the cached HTML and cache key once the document changes
-	if ( this.getSurface() ) {
-		this.getSurface().getModel().getDocument().once( 'transact', clear );
-	} else {
-		clear();
-	}
-
-	this.emit( 'saveWorkflowEnd' );
 };
 
 /**
@@ -1130,7 +912,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreScrollPosition = function () {
  *
  * @return {jQuery.Promise} Promise which resolves when toolbar is hidden
  */
-ve.init.mw.DesktopArticleTarget.prototype.tearDownToolbar = function () {
+ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 	var target = this,
 		deferred = $.Deferred();
 	this.toolbar.$element.css( 'height', this.toolbar.$bar.outerHeight() );
@@ -1150,7 +932,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tearDownToolbar = function () {
  *
  * @return {jQuery.Promise} Promise which resolves when debug bar is hidden
  */
-ve.init.mw.DesktopArticleTarget.prototype.tearDownDebugBar = function () {
+ve.init.mw.DesktopArticleTarget.prototype.teardownDebugBar = function () {
 	var target = this;
 	if ( this.debugBar ) {
 		return this.debugBar.$element.slideUp( 'fast' ).promise().then( function () {
@@ -1360,7 +1142,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveEditSection = function ( heading )
 };
 
 /**
- * Add onunload and onbeforeunload handlesr.
+ * Add onunload and onbeforeunload handlers.
  *
  * @method
  */
@@ -1376,7 +1158,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
  *
  * @method
  */
-ve.init.mw.DesktopArticleTarget.prototype.tearDownUnloadHandlers = function () {
+ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
 	// Restore whatever previous onbeforeunload hook existed
 	window.onbeforeunload = this.onBeforeUnloadFallback;
 	this.onBeforeUnloadFallback = null;

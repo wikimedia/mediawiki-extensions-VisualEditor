@@ -428,10 +428,12 @@
 		"ext.visualEditor.mediawiki.mobile": {
 			"scripts": [
 				"modules/ve-mw/ui/ve.ui.MWMobileContext.js",
-				"modules/ve-mw/ui/ve.ui.MWMobileSurface.js"
+				"modules/ve-mw/ui/ve.ui.MWMobileSurface.js",
+				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js"
 			],
 			"dependencies": [
 				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.mwcore",
 				"ext.visualEditor.core.mobile"
 			],
 			"targets": [
