@@ -73,18 +73,18 @@ ve.ui.MWMediaDialog.static.actions = [
 	{
 		action: 'cancelchoose',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
-		flags: 'safe',
+		flags: [ 'safe', 'back' ],
 		modes: [ 'info' ]
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: 'safe',
+		flags: [ 'safe', 'back' ],
 		modes: [ 'edit', 'insert', 'select' ]
 	},
 	{
 		action: 'back',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
-		flags: 'safe',
+		flags: [ 'safe', 'back' ],
 		modes: [ 'change' ]
 	}
 ];

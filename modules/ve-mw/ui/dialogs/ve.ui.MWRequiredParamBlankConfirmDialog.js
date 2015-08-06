@@ -42,7 +42,7 @@ ve.ui.MWRequiredParamBlankConfirmDialog.static.actions = [
 	{
 		action: 'cancel',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-required-parameter-dialog-cancel' ),
-		flags: 'safe'
+		flags: [ 'safe', 'back' ]
 	}
 ];
 

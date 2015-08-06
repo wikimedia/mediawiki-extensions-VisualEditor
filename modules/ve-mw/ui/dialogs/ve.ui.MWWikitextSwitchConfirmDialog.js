@@ -43,7 +43,7 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
 	{
 		action: 'cancel',
 		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-cancel' ),
-		flags: 'safe'
+		flags: [ 'safe', 'back' ]
 	},
 	{
 		action: 'switch',

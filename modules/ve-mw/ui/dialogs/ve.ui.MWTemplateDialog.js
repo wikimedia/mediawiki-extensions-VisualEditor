@@ -57,7 +57,7 @@ ve.ui.MWTemplateDialog.static.actions = [
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: 'safe',
+		flags: [ 'safe', 'back' ],
 		modes: [ 'insert', 'edit' ]
 	}
 ];
