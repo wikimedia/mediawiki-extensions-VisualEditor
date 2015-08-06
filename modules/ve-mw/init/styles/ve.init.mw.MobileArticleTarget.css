@@ -30,6 +30,11 @@
 	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.15) inset;
 }
 
+.ve-ui-debugBar-selectionLabel {
+	min-width: auto;
+	width: 100%;
+}
+
 /* Hide toolbar shortcuts, no use on mobile */
 .oo-ui-popupToolGroup .oo-ui-tool-link .oo-ui-tool-accel {
 	display: none;
