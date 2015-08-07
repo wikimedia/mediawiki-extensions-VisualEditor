@@ -78,24 +78,32 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
 
-	this.getSurface().getModel().connect( this, { select: 'onSurfaceSelect' } );
-	this.onSurfaceSelect();
+	var surfaceModel = this.getSurface().getModel();
+	surfaceModel.connect( this, {
+		blur: 'onSurfaceBlur',
+		focus: 'onSurfaceFocus'
+	} );
+	this[surfaceModel.getSelection().isNull() ? 'onSurfaceBlur' : 'onSurfaceFocus']();
 
 	this.events.trackActivationComplete();
 };
 
 /**
- * Handle surface select events
+ * Handle surface blur events
  */
-ve.init.mw.MobileArticleTarget.prototype.onSurfaceSelect = function () {
+ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 	var toolbar = this.getToolbar();
-	if ( this.getSurface().getModel().getSelection().isNull() ) {
-		toolbar.$group.addClass( 'oo-ui-element-hidden' );
-		toolbar.$actions.removeClass( 'oo-ui-element-hidden' );
-	} else {
-		toolbar.$group.removeClass( 'oo-ui-element-hidden' );
-		toolbar.$actions.addClass( 'oo-ui-element-hidden' );
-	}
+	toolbar.$group.addClass( 'oo-ui-element-hidden' );
+	toolbar.$actions.removeClass( 'oo-ui-element-hidden' );
+};
+
+/**
+ * Handle surface focus events
+ */
+ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
+	var toolbar = this.getToolbar();
+	toolbar.$group.removeClass( 'oo-ui-element-hidden' );
+	toolbar.$actions.addClass( 'oo-ui-element-hidden' );
 };
 
 /**
