@@ -127,7 +127,7 @@ ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, response ) {
 	var contentNodes;
 
-	if ( !response || response.error || !response.visualeditor || response.visualeditor.result !== 'success' ) {
+	if ( ve.getProp( response, 'visualeditor', 'result' ) !== 'success' ) {
 		return this.onParseError.call( this, deferred );
 	}
 

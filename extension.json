@@ -950,6 +950,7 @@
 				"modules/ve-mw/ui/ve.ui.MWCommandRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWSequenceRegistry.js",
 				"modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js",
+				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTargetWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js",
