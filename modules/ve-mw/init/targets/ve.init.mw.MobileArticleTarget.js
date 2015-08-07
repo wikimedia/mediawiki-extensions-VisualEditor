@@ -14,7 +14,6 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @cfg {number} [section] Number of the section target should scroll to
- * @cfg {boolean} [isIos=false] Whether the platform is an iOS device
  */
 ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) {
 	var currentUri = new mw.Uri();
@@ -27,7 +26,6 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 	);
 
 	this.section = config.section;
-	this.isIos = !!config.isIos;
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget' );
@@ -180,7 +178,7 @@ ve.init.mw.MobileArticleTarget.prototype.scrollToHeading = function ( headingNod
 		target = this;
 
 	setTimeout( function () {
-		if ( target.isIos ) {
+		if ( ve.init.platform.constructor.static.isIos() ) {
 			position = headingNode.$element.offset().top - target.toolbar.$element.height();
 			target.surface.$element.closest( '.overlay-content' ).scrollTop( position );
 		} else {
