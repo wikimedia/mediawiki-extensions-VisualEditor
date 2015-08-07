@@ -46,7 +46,7 @@ ve.ui.MWSaveDialog.static.title =
 ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'save',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
+		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-save' ),
 		flags: [ 'primary', 'constructive' ],
 		modes: [ 'save', 'review' ],
 		accessKey: 's'
