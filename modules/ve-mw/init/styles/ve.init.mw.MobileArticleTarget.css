@@ -5,9 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-overlay {
-	/* enough to cover .overlay-header-container with z-index: 5 */
-	z-index: 6;
+.oo-ui-panelLayout-scrollable {
+	-webkit-overflow-scrolling: touch;
 }
 
 .ve-init-mw-target-surface .ve-ce-documentNode,
@@ -40,7 +39,7 @@
 	display: none;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-actions {
+.ve-init-mw-mobileArticleTarget-actions {
 	float: none;
 	display: table;
 }
@@ -70,26 +69,31 @@
 	right: 0;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools {
+.ve-init-mw-mobileArticleTarget-tools {
 	display: table;
 	width: 100%;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup {
+.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup {
 	display: table-cell;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup-empty {
+.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup-empty {
 	display: none;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup:last-child {
+.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup:last-child {
 	border-right: 0;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools > .oo-ui-toolGroup > .oo-ui-toolGroup-tools
+.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup > .oo-ui-toolGroup-tools
 > .oo-ui-tool {
 	width: 100%;
+}
+
+.ve-init-mw-mobileArticleTarget-tools-hidden,
+.ve-init-mw-mobileArticleTarget-actions-hidden {
+	display: none;
 }
 
 @media (max-width: 479px) {

@@ -93,8 +93,8 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 	var toolbar = this.getToolbar();
-	toolbar.$group.addClass( 'oo-ui-element-hidden' );
-	toolbar.$actions.removeClass( 'oo-ui-element-hidden' );
+	toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-tools-hidden' );
+	toolbar.$actions.removeClass( 've-init-mw-mobileArticleTarget-actions-hidden' );
 };
 
 /**
@@ -102,8 +102,8 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
 	var toolbar = this.getToolbar();
-	toolbar.$group.removeClass( 'oo-ui-element-hidden' );
-	toolbar.$actions.addClass( 'oo-ui-element-hidden' );
+	toolbar.$group.removeClass( 've-init-mw-mobileArticleTarget-tools-hidden' );
+	toolbar.$actions.addClass( 've-init-mw-mobileArticleTarget-actions-hidden' );
 };
 
 /**
@@ -132,7 +132,7 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
 	// Append the context to the toolbar
-	this.toolbar.$bar.append( surface.context.$element );
+	this.toolbar.$bar.append( surface.getContext().$element );
 };
 
 /**
@@ -160,15 +160,20 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 
 	this.actionsToolbar.emit( 'updateState' );
 
-	this.toolbar.$actions.append(
-		this.actionsToolbar.$element,
-		$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
-			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
-				new mw.Title( ve.init.target.pageName ).getMainText()
-			)
-		),
-		this.toolbarSaveButton.$element
-	);
+	this.toolbar.$group
+		.addClass( 've-init-mw-mobileArticleTarget-tools' );
+
+	this.toolbar.$actions
+		.addClass( 've-init-mw-mobileArticleTarget-actions' )
+		.append(
+			this.actionsToolbar.$element,
+			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
+				$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
+					new mw.Title( ve.init.target.pageName ).getMainText()
+				)
+			),
+			this.toolbarSaveButton.$element
+		);
 };
 
 /**
