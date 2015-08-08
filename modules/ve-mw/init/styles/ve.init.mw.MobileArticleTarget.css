@@ -76,6 +76,20 @@
 
 .ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup {
 	display: table-cell;
+	text-align: center;
+}
+
+.ve-init-mw-mobileArticleTarget-tools .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon {
+	left: 50%;
+	margin-left: -1.875em;
+}
+
+.ve-init-mw-mobileArticleTarget-tools .oo-ui-popupToolGroup-handle .oo-ui-indicatorElement-indicator {
+	left: 50%;
+}
+
+.ve-init-mw-mobileArticleTarget-tools .oo-ui-popupToolGroup .oo-ui-toolGroup-tools {
+	text-align: left;
 }
 
 .ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup-empty {
