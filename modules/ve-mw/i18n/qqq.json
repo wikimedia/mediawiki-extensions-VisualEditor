@@ -295,7 +295,7 @@
 	"visualeditor-savedialog-label-report": "Label for button to trigger report",
 	"visualeditor-savedialog-label-resolve-conflict": "Label for button to start resoliving an edit conflict",
 	"visualeditor-savedialog-label-restore": "Label text for save button when the user is editing a previous revision.\n{{Identical|Restore page}}",
-	"visualeditor-savedialog-label-restore-short": "Short label text for save button when the user is editing a previous revision on width-restricted devices.",
+	"visualeditor-savedialog-label-restore-short": "Short label text for save button when the user is editing a previous revision on width-restricted devices.\n{{Identical|Restore}}",
 	"visualeditor-savedialog-label-resume-editing": "Label for button to exit the save dialog without saving, and return to editing.",
 	"visualeditor-savedialog-label-review": "Label for button to go to the review dialog to review the diff",
 	"visualeditor-savedialog-label-review-good": "Label for button to go back to the save form",
