@@ -43,7 +43,8 @@
 			"Zebulon84",
 			"Mattho69",
 			"Wladek92",
-			"Harmonia Amanda"
+			"Harmonia Amanda",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -309,10 +310,12 @@
 	"visualeditor-savedialog-label-report": "Signaler un problème",
 	"visualeditor-savedialog-label-resolve-conflict": "Résoudre le conflit",
 	"visualeditor-savedialog-label-restore": "Restaurer la page",
+	"visualeditor-savedialog-label-restore-short": "Restaurer",
 	"visualeditor-savedialog-label-resume-editing": "Continuer",
 	"visualeditor-savedialog-label-review": "Relire vos modifications",
 	"visualeditor-savedialog-label-review-good": "Retour",
 	"visualeditor-savedialog-label-save": "Enregistrer",
+	"visualeditor-savedialog-label-save-short": "Enregistrer",
 	"visualeditor-savedialog-label-warning": "Avertissement",
 	"visualeditor-savedialog-title-conflict": "Conflit",
 	"visualeditor-savedialog-title-nochanges": "Aucun changement à relire",
