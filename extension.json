@@ -1401,12 +1401,11 @@
 			],
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/ui/themes/apex/pages/ve.ui.MWParameterPage.css",
-					"modules/ve-mw/ui/themes/apex/pages/ve.ui.MWTemplatePage.css"
+					"modules/ve-mw/ui/themes/default/pages/ve.ui.MWParameterPage.css",
+					"modules/ve-mw/ui/themes/default/pages/ve.ui.MWTemplatePage.css"
 				],
 				"minerva": [
-					"modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWParameterPage.css",
-					"modules/ve-mw/ui/themes/minerva/ve.ui.MobileWindowManager.css"
+					"modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWParameterPage.css"
 				]
 			},
 			"dependencies": [
