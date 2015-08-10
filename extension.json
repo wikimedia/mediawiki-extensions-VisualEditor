@@ -446,7 +446,8 @@
 			"scripts": [
 				"lib/ve/src/init/sa/ve.init.sa.js",
 				"lib/ve/src/init/sa/ve.init.sa.Platform.js",
-				"lib/ve/src/init/sa/ve.init.sa.Target.js"
+				"lib/ve/src/init/sa/ve.init.sa.Target.js",
+				"lib/ve/src/init/sa/ve.init.sa.DesktopTarget.js"
 			],
 			"styles": [
 				"lib/ve/src/init/sa/styles/ve.init.sa.css"
