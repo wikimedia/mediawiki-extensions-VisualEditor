@@ -141,6 +141,7 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to the overlay header
 	this.toolbar.$element.appendTo( '.overlay-header > .toolbar' );
+	this.toolbar.initialize();
 };
 
 /**

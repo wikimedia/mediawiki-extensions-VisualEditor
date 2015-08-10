@@ -24,8 +24,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	config.toolbarConfig = $.extend( {
 		shadow: true,
 		actions: true,
-		floatable: true,
-		scrollOffset: mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 )
+		floatable: true
 	}, config.toolbarConfig );
 
 	// Parent constructor
@@ -39,6 +38,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	this.toolbarSaveButton = null;
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgArticleId', 0 ) !== 0;
+	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
