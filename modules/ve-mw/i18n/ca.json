@@ -18,7 +18,8 @@
 			"Toniher",
 			"Maceleiro",
 			"F3RaN",
-			"SenyorFontal"
+			"SenyorFontal",
+			"Eduardo Martinez"
 		]
 	},
 	"apihelp-visualeditor-description": "Torna a HTML5 per a una pàgina des del servei Parsoid.",
@@ -258,10 +259,12 @@
 	"visualeditor-savedialog-label-report": "Informeu sobre un problema",
 	"visualeditor-savedialog-label-resolve-conflict": "Resoleu el conflicte",
 	"visualeditor-savedialog-label-restore": "Restaura la pàgina",
+	"visualeditor-savedialog-label-restore-short": "Restaura",
 	"visualeditor-savedialog-label-resume-editing": "Continua editant",
 	"visualeditor-savedialog-label-review": "Revisa els canvis",
 	"visualeditor-savedialog-label-review-good": "Retorna al diàleg per desar",
 	"visualeditor-savedialog-label-save": "Desa la pàgina",
+	"visualeditor-savedialog-label-save-short": "Desa",
 	"visualeditor-savedialog-label-warning": "Advertència",
 	"visualeditor-savedialog-title-conflict": "Conflicte",
 	"visualeditor-savedialog-title-nochanges": "Sense canvis per revisar",
