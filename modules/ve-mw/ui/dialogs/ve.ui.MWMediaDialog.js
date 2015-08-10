@@ -162,8 +162,6 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
 
-	this.$spinner = $( '<div>' ).addClass( 've-specialchar-spinner' );
-
 	this.panels = new OO.ui.StackLayout();
 
 	// Set up the booklet layout
@@ -198,8 +196,6 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Define the media search page
 	this.search = new ve.ui.MWMediaSearchWidget();
-
-	this.$body.append( this.search.$spinner );
 
 	// Define fieldsets for image settings
 
@@ -317,7 +313,6 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		this.sizeErrorLabel.$element
 	);
 	this.sizeFieldset.$element.append(
-		this.$spinner,
 		this.$sizeWidgetElements
 	);
 
