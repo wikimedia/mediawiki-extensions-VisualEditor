@@ -987,13 +987,10 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.setSize( 'large' );
 			// Set the edit panel
 			this.panels.setItem( this.bookletLayout );
-
 			// Focus the general settings page
 			this.bookletLayout.setPage( 'general' );
 			// Hide/show buttons
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
-			// HACK: OO.ui.Dialog needs an API for this
-			this.$content.removeClass( 'oo-ui-dialog-content-footless' );
 			// Focus the caption surface
 			this.captionTarget.focus();
 			break;
@@ -1004,14 +1001,9 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 				this.search.getQuery().setValue( dialog.pageTitle );
 				this.search.getQuery().focus().select();
 			}
-
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
 			this.actions.setMode( this.imageModel ? 'change' : 'select' );
-
-			// HACK: OO.ui.Dialog needs an API for this
-			this.$content.toggleClass( 'oo-ui-dialog-content-footless', !this.imageModel );
-
 			// Layout pending items
 			this.search.runLayoutQueue();
 			break;
