@@ -664,6 +664,7 @@
 				"lib/ve/src/ui/actions/ve.ui.ListAction.js",
 				"lib/ve/src/ui/actions/ve.ui.TableAction.js",
 				"lib/ve/src/ui/actions/ve.ui.WindowAction.js",
+				"lib/ve/src/ui/contextitems/ve.ui.AlienContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.AlignableContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.CommentContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.LanguageContextItem.js",
