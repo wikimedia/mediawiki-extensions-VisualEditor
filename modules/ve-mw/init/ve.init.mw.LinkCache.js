@@ -140,12 +140,12 @@ ve.init.mw.LinkCache.prototype.get = function ( title ) {
 ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
 	return new mw.Api().get( {
 		action: 'query',
-		gpslimit: 10,
 		prop: 'info|pageprops|pageimages|pageterms',
 		pithumbsize: 80,
 		pilimit: 10,
 		wbptterms: 'description',
 		ppprop: 'disambiguation',
-		titles: subqueue.join( '|' )
+		titles: subqueue.join( '|' ),
+		continue: ''
 	} );
 };
