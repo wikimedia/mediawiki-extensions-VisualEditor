@@ -101,7 +101,7 @@ class VisualEditorHooks {
 	 * @return boolean
 	 */
 	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
-		// Only do this if the user has VE enabled
+		// Exit if the user doesn't have VE enabled
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
 			$skin->getUser()->getOption( 'visualeditor-betatempdisable' )
@@ -111,14 +111,23 @@ class VisualEditorHooks {
 
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
+		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
-			// There's no edit link, nothing to do
 			return true;
 		}
+
+		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 		$title = $skin->getRelevantTitle();
+		// Exit if we're not in a VE-enabled namespace
+		if ( !$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
+			return true;
+		}
+
+		// HACK: Exit if we're in the Education Program namespace (even though it's content)
 		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
 			return true;
 		}
+
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
@@ -228,18 +237,31 @@ class VisualEditorHooks {
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
 		$tooltip, &$result, $lang
 	) {
-		// Only do this if the user has VE enabled
-		// (and we're not in parserTests)
-		// (and we're not on a foreign file description page)
+		// Exit if we're in parserTests
+		if ( isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ) {
+			return true;
+		}
+
+		// Exit if the user doesn't have VE enabled
 		if (
-			isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ||
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
-			(
-				$title->inNamespace( NS_FILE ) &&
-				WikiPage::factory( $title ) instanceof WikiFilePage &&
-				!WikiPage::factory( $title )->isLocal()
-			)
+			$skin->getUser()->getOption( 'visualeditor-betatempdisable' )
+		) {
+			return true;
+		}
+
+		$availableNamespaces = ConfigFactory::getDefaultInstance()
+			->makeConfig( 'visualeditor' )->get( 'VisualEditorAvailableNamespaces' );
+		// Exit if we're not in a VE-enabled namespace
+		if ( !$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
+			return true;
+		}
+
+		// Exit if we're on a foreign file description page
+		if (
+			$title->inNamespace( NS_FILE ) &&
+			WikiPage::factory( $title ) instanceof WikiFilePage &&
+			!WikiPage::factory( $title )->isLocal()
 		) {
 			return true;
 		}
