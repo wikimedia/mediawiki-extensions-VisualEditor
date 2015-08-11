@@ -23,7 +23,8 @@
 			"Mpiva",
 			"Stefania.scaramuzzi",
 			"Jdforrester",
-			"Purodha"
+			"Purodha",
+			"Statix64"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -54,6 +55,7 @@
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
 	"visualeditor-annotationbutton-linknode-tooltip": "Collegamento semplice",
+	"visualeditor-backbutton-tooltip": "Indietro",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Questo editor è in 'beta'. Per ritornare alla modifica sorgente in ogni momento senza perdere le tue modifiche, apri il menù a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezione \"{{int:visualeditor-mweditmodesource-tool}}\".",
@@ -305,6 +307,7 @@
 	"visualeditor-timeout": "Sembra che questo editor non sia attualmente disponibile. Vorresti invece modificare in modalità sorgente?",
 	"visualeditor-toolbar-cite-label": "Cita",
 	"visualeditor-toolbar-savedialog": "Salva la pagina",
+	"visualeditor-toolbar-savedialog-short": "Salva",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
 	"visualeditor-version-label": "Versione",
 	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",

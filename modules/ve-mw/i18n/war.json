@@ -5,5 +5,7 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Igliwat ini nga pakli",
-	"visualeditor-ca-editsource-section": "pagliwat han source"
+	"visualeditor-ca-createsource": "Himua an titikangan",
+	"visualeditor-ca-editsource-section": "pagliwat han source",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
