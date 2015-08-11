@@ -888,6 +888,7 @@ ve.init.mw.DesktopArticleTarget.prototype.openSaveDialog = function () {
 		editSummary: this.initialEditSummary,
 		$checkboxes: this.$checkboxes
 	} );
+	this.initialEditSummary = undefined;
 };
 
 /**
