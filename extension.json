@@ -138,6 +138,9 @@
 		"GetPreferences": [
 			"VisualEditorHooks::onGetPreferences"
 		],
+		"PreferencesFormPreSave": [
+			"VisualEditorHooks::onPreferencesFormPreSave"
+		],
 		"ListDefinedTags": [
 			"VisualEditorHooks::onListDefinedTags"
 		],
@@ -1600,7 +1603,8 @@
 		"visualeditor-betatempdisable": 0,
 		"visualeditor-enable-experimental": 0,
 		"visualeditor-enable-language": 0,
-		"visualeditor-hidebetawelcome": 0
+		"visualeditor-hidebetawelcome": 0,
+		"visualeditor-autodisable": 0
 	},
 	"ExtensionFunctions": [
 		"VisualEditorHooks::onSetup"
