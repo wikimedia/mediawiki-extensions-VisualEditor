@@ -693,6 +693,7 @@
 				"lib/ve/src/ui/datatransferhandlers/ve.ui.DSVFileTransferHandler.js",
 				"lib/ve/src/ui/datatransferhandlers/ve.ui.PlainTextFileTransferHandler.js",
 				"lib/ve/src/ui/datatransferhandlers/ve.ui.HTMLFileTransferHandler.js",
+				"lib/ve/src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
 				"lib/ve/src/ui/windowmanagers/ve.ui.ToolbarDialogWindowManager.js",
 				"lib/ve/src/ui/widgets/ve.ui.AlignWidget.js",
 				"lib/ve/src/ui/widgets/ve.ui.TargetWidget.js",
