@@ -71,7 +71,7 @@
 	"visualeditor-dialog-beta-welcome-content": "Toto je náš nový, jednodušší způsob editace. Funguje stále ve verzi beta, což znamená, že narazíte na některé needitovatelné části stránky nebo se setkáte s problémy, které bude třeba opravit. Doporučujeme vám zkontrolovat provedené změny a uvítáme hlášení o jakýchkoli problémech, na které při užívání VisualEditoru narazíte (můžete nám dát vědět kliknutím na tlačítko „{{int:visualeditor-help-tool}}“). Kdykoli se můžete přepnout na editor wikitextu kliknutím na záložku „$1“, přičemž vám zůstanou všechny provedené změny.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Vítejte}} ve VisualEditoru",
 	"visualeditor-dialog-media-alttext-section": "Alternativní text",
-	"visualeditor-dialog-media-alttext-section-help": "Pomocí tohoto můžete poskytnout textový popis, který se bude používat pro lidi, kteří nemohou položku vidět. Popis by měl být dostatečný k tomu, aby pochopili účel a informace, které tato mediální položka poskytuje. Je to zásadní pro nevidomé uživatele a další uživatele používající čtečky obrazovky nebo čistě textové prohlížeče.",
+	"visualeditor-dialog-media-alttext-section-help": "Pomocí tohoto můžete zadat textový popis pro lidi, kteří nemohou položku vidět. Popis by měl být dostatečný k tomu, aby pochopili účel a informace, které tato mediální položka poskytuje. Je to zásadní pro nevidomé uživatele a další uživatele používající čtečky obrazovky nebo čistě textové prohlížeče.",
 	"visualeditor-dialog-media-change-image": "Vybrat jiný obrázek",
 	"visualeditor-dialog-media-choose-image": "Vložit tento obrázek",
 	"visualeditor-dialog-media-content-filename": "Název souboru",

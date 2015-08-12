@@ -6,7 +6,8 @@
 			"The Discoverer",
 			"Arbhatt",
 			"Dsvyas",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Nisargjhaveri"
 		]
 	},
 	"apihelp-visualeditor-description": "Returns HTML5 for a page from the Parsoid service.",
@@ -197,9 +198,11 @@
 	"visualeditor-savedialog-label-report": "મુશ્કેલીનો અહેવાલ મોકલો",
 	"visualeditor-savedialog-label-resolve-conflict": "સંઘર્ષ નિવારણ કરો",
 	"visualeditor-savedialog-label-restore": "પાનું ફરી લાવો",
+	"visualeditor-savedialog-label-restore-short": "પાછું લાવો",
 	"visualeditor-savedialog-label-review": "તમારા ફેરફારો ચકાસો",
 	"visualeditor-savedialog-label-review-good": "ફોર્મ સાચવવા પર પાછા ફરો",
 	"visualeditor-savedialog-label-save": "પાનું સાચવો",
+	"visualeditor-savedialog-label-save-short": "સાચવો",
 	"visualeditor-savedialog-label-warning": "ચેતવણી",
 	"visualeditor-savedialog-title-conflict": "સંઘર્ષ",
 	"visualeditor-savedialog-title-nochanges": "ફેરતપાસણી માટેના કોઈ ફેરફારો નથી",

@@ -68,7 +68,7 @@
 	"visualeditor-dialog-beta-welcome-content": "これは私たちの新しい、今までより簡単な編集方法です。しかし、まだベータ版であるため、ページの一部が編集できない可能性があるかもしれませんし、修正が必要な問題に遭遇するかもしれません。あなたが加えた変更内容を確認することをお勧めします、またビジュアルエディター使用中に発生したどんな問題でも報告してくださることを歓迎します。(フィードバックするには「{{int:visualeditor-help-tool}}」ボタンをクリックしてください)。「$1」タブをクリックすると、あなたがすでに行った変更内容を保持したまま、従来通りのウィキテキスト エディターに切り替えることもできます。",
 	"visualeditor-dialog-beta-welcome-title": "ビジュアルエディターへ{{GENDER:$1|ようこそ}}",
 	"visualeditor-dialog-media-alttext-section": "代替テキスト",
-	"visualeditor-dialog-media-alttext-section-help": "アイテムが見えない人のためのテキストの説明を付与するためにこれを利用できます。この説明は、このメディアアイテムの目的と、それによって与えられる情報が、見えない人にとって理解するのに十分なものである必要があります。目が見えない人や、スクリーンリーダーソフトウェアやテキストのみのブラウザーを利用する他の人たちにとって、これは非常に重要です。",
+	"visualeditor-dialog-media-alttext-section-help": "アイテムが見えない人のためのテキストの説明を記述するためにこれを利用できます。この説明は、このメディアアイテムによって与えられる目的と情報が、理解するために十分なものである必要があります。目が見えない人や、スクリーンリーダー・ソフトウェアやテキストのみのブラウザーを利用する他の人たちにとって、これは非常に重要です。",
 	"visualeditor-dialog-media-change-image": "画像を変更",
 	"visualeditor-dialog-media-choose-image": "この画像を使用",
 	"visualeditor-dialog-media-content-filename": "ファイル名",

@@ -279,6 +279,7 @@
 	"visualeditor-timeout": "Sembla que l'editor visual no està disponible en aquest moment. T'agradaria editar en mode codi?",
 	"visualeditor-toolbar-cite-label": "Referència",
 	"visualeditor-toolbar-savedialog": "Desa la pàgina",
+	"visualeditor-toolbar-savedialog-short": "Desa",
 	"visualeditor-usernamespacepagelink": "Project:Espai d'usuari",
 	"visualeditor-version-label": "Versió",
 	"visualeditor-viewpage-savewarning": "Esteu segur que voleu tornar a la pàgina sense desar abans?",
