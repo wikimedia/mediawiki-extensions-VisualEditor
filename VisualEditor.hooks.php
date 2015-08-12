@@ -605,6 +605,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ui/actions/ve.ui.FormatAction.test.js',
 				'modules/ve-mw/tests/ui/actions/ve.ui.FormatAction.test.js',
 				'lib/ve/tests/ui/actions/ve.ui.IndentationAction.test.js',
+				'lib/ve/tests/ui/actions/ve.ui.LinkAction.test.js',
 				'lib/ve/tests/ui/actions/ve.ui.ListAction.test.js',
 				// VisualEditor initialization Tests
 				'lib/ve/tests/init/ve.init.Platform.test.js',

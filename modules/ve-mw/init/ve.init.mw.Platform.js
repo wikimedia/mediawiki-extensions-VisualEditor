@@ -21,6 +21,9 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 	this.externalLinkUrlProtocolsRegExp = new RegExp(
 		'^(' + mw.config.get( 'wgUrlProtocols' ) + ')'
 	);
+	this.unanchoredExternalLinkUrlProtocolsRegExp = new RegExp(
+		'(' + mw.config.get( 'wgUrlProtocols' ) + ')'
+	);
 	this.parsedMessages = {};
 	this.linkCache = new ve.init.mw.LinkCache();
 	this.imageInfoCache = new ve.init.mw.ImageInfoCache();
@@ -35,6 +38,11 @@ OO.inheritClass( ve.init.mw.Platform, ve.init.Platform );
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.getExternalLinkUrlProtocolsRegExp = function () {
 	return this.externalLinkUrlProtocolsRegExp;
+};
+
+/** @inheritdoc */
+ve.init.mw.Platform.prototype.getUnanchoredExternalLinkUrlProtocolsRegExp = function () {
+	return this.unanchoredExternalLinkUrlProtocolsRegExp;
 };
 
 /** @inheritdoc */

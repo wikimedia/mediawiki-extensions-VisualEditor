@@ -10,22 +10,20 @@
  * Opens either MWLinkAnnotationInspector or MWLinkNodeInspector depending on what is selected.
  *
  * @class
- * @extends ve.ui.Action
+ * @extends ve.ui.LinkAction
  * @constructor
  * @param {ve.ui.Surface} surface Surface to act on
  */
 ve.ui.MWLinkAction = function VeUiMWLinkAction( surface ) {
 	// Parent constructor
-	ve.ui.Action.call( this, surface );
+	ve.ui.MWLinkAction.super.call( this, surface );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWLinkAction, ve.ui.Action );
+OO.inheritClass( ve.ui.MWLinkAction, ve.ui.LinkAction );
 
 /* Static Properties */
-
-ve.ui.MWLinkAction.static.name = 'mwlink';
 
 /**
  * List of allowed methods for the action.
@@ -33,9 +31,21 @@ ve.ui.MWLinkAction.static.name = 'mwlink';
  * @static
  * @property
  */
-ve.ui.MWLinkAction.static.methods = [ 'open' ];
+ve.ui.MWLinkAction.static.methods = ve.ui.MWLinkAction.super.static.methods.concat( [ 'open' ] );
 
 /* Methods */
+
+/**
+ * @method
+ * @inheritdoc
+ * @return {ve.dm.MWExternalLinkAnnotation} The annotation to use.
+ */
+ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( href ) {
+	return new ve.dm.MWExternalLinkAnnotation( {
+		type: 'link/mwExternal',
+		attributes: { href: href }
+	} );
+};
 
 /**
  * Open either the 'link' or 'linkNode' window, depending on what is selected.

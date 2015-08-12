@@ -661,6 +661,7 @@
 				"lib/ve/src/ui/actions/ve.ui.FormatAction.js",
 				"lib/ve/src/ui/actions/ve.ui.HistoryAction.js",
 				"lib/ve/src/ui/actions/ve.ui.IndentationAction.js",
+				"lib/ve/src/ui/actions/ve.ui.LinkAction.js",
 				"lib/ve/src/ui/actions/ve.ui.ListAction.js",
 				"lib/ve/src/ui/actions/ve.ui.TableAction.js",
 				"lib/ve/src/ui/actions/ve.ui.WindowAction.js",

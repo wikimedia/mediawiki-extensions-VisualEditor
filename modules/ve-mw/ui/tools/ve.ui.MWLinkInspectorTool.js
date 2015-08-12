@@ -38,6 +38,6 @@ ve.ui.toolFactory.register( ve.ui.MWLinkInspectorTool );
 
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'link', 'mwlink', 'open', { supportedSelections: [ 'linear' ] }
+		'link', 'link', 'open', { supportedSelections: [ 'linear' ] }
 	)
 );
