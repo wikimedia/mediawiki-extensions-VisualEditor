@@ -51,14 +51,46 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 };
 
 /**
+ * Build a ve.dm.MWInternalLinkAnnotation from a given mw.Title.
+ *
+ * @param {mw.Title} title The title to link to.
+ * @return {ve.dm.MWInternalLinkAnnotation} The annotation.
+ */
+ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title ) {
+	var target = title.toText();
+
+	if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
+		// File: or Category: link
+		// We have to prepend a colon so this is interpreted as a link
+		// rather than an image inclusion or categorization
+		target = ':' + target;
+	}
+
+	return new ve.dm.MWInternalLinkAnnotation( {
+		type: 'link/mwInternal',
+		attributes: {
+			title: target,
+			normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( title ),
+			lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( title )
+		}
+	} );
+};
+
+/**
  * Parse URL to get title it points to.
  *
  * @param {string} href
  * @param {HTMLDocument|string} doc Document whose base URL to use, or base URL as a string.
- * @return {Object} Plain object with 'title' and 'hrefPrefix' keys.
+ * @return {Object} Information about the given href
+ * @return {string} return.title
+ *    The title of the internal link, else the original href if href is external
+ * @return {string} return.hrefPrefix
+ *    Any ./ or ../ prefixes on a relative link
+ * @return {boolean} return.isInternal
+ *    True if the href pointed to the local wiki, false if href is external
  */
 ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, doc ) {
-	var relativeBase, relativeBaseRegex, relativeHref, matches;
+	var relativeBase, relativeBaseRegex, relativeHref, isInternal, matches;
 
 	function regexEscape( str ) {
 		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
@@ -69,19 +101,22 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) );
 	// Protocol relative href
 	relativeHref = href.replace( /^https?:/, '' );
+	// Paths without a host portion are assumed to be internal
+	isInternal = !/^\/\//.test( relativeHref );
 	// Check if this matches the server's article path
 	matches = relativeHref.match( relativeBaseRegex );
 
 	if ( matches ) {
 		// Take the relative path
 		href = matches[ 1 ];
+		isInternal = true;
 	}
 
 	// The href is simply the title, unless we're dealing with a page that has slashes in its name
 	// in which case it's preceded by one or more instances of "./" or "../", so strip those
 	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
 
-	return { title: matches[ 2 ], hrefPrefix: matches[ 1 ] };
+	return { title: matches[ 2 ], hrefPrefix: matches[ 1 ], isInternal: isInternal };
 };
 
 ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
@@ -111,11 +146,11 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
  * Normalize title for comparison purposes.
  * E.g. capitalisation and underscores.
  *
- * @param {string} original Original title
- * @return {string} Normalized title, or the original if it is invalid
+ * @param {string|mw.Title} original Original title
+ * @return {string} Normalized title, or the original string if it is invalid
  */
 ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
-	var title = mw.Title.newFromText( original );
+	var title = original instanceof mw.Title ? original : mw.Title.newFromText( original );
 	if ( !title ) {
 		return original;
 	}
@@ -125,11 +160,11 @@ ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
 /**
  * Normalize title for lookup (search suggestion, existence) purposes.
  *
- * @param {string} original Original title
- * @return {string} Normalized title, or the original if it is invalid
+ * @param {string|mw.Title} original Original title
+ * @return {string} Normalized title, or the original string if it is invalid
  */
 ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
-	var title = mw.Title.newFromText( original );
+	var title = original instanceof mw.Title ? original : mw.Title.newFromText( original );
 	if ( !title ) {
 		return original;
 	}
