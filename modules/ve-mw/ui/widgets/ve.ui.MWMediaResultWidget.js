@@ -112,8 +112,8 @@ ve.ui.MWMediaResultWidget.prototype.calculateSizing = function ( originalDimensi
 		imageDimensions = ve.dm.MWImageNode.static.resizeToBoundingBox(
 			// Image original dimensions
 			{
-				width: originalDimensions.width,
-				height: originalDimensions.height
+				width: originalDimensions.width || originalDimensions.thumbwidth,
+				height: originalDimensions.height || originalDimensions.thumbwidth
 			},
 			// Bounding box
 			{
