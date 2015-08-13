@@ -27,6 +27,7 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
 	this.target = null;
+	this.checkboxesByName = null;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwSaveDialog' );
@@ -292,8 +293,9 @@ ve.ui.MWSaveDialog.prototype.reset = function () {
 	// Reset summary input
 	this.editSummaryInput.setValue( '' );
 	// Uncheck minoredit
-	this.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
-		.find( '#wpMinoredit' ).prop( 'checked', false );
+	if ( this.checkboxesByName.wpMinoredit ) {
+		this.checkboxesByName.wpMinoredit.setSelected( false );
+	}
 	// Clear the diff
 	this.$reviewViewer.empty();
 };
@@ -303,19 +305,14 @@ ve.ui.MWSaveDialog.prototype.reset = function () {
  *
  * This method is safe to call even when the dialog hasn't been initialized yet.
  *
- * @param {jQuery} $checkboxes jQuery collection of checkboxes
+ * @param {OO.ui.FieldLayout[]} checkboxFields Checkbox fields
  */
-ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( $checkboxes ) {
+ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( checkboxFields ) {
 	var dialog = this;
 	this.setupDeferred.done( function () {
-		dialog.$saveOptions.find( '.ve-ui-mwSaveDialog-checkboxes' )
-			.empty()
-			.append( $checkboxes )
-			.find( 'a' )
-				.attr( 'target', '_blank' )
-				.end()
-			.find( 'input' )
-				.prop( 'tabIndex', 0 );
+		checkboxFields.forEach( function ( field ) {
+			dialog.$saveCheckboxes.append( field.$element );
+		} );
 	} );
 };
 
@@ -388,8 +385,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		);
 	} );
 
+	this.$saveCheckboxes = $( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' );
 	this.$saveOptions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
-		$( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' ),
+		this.$saveCheckboxes,
 		this.editSummaryCountLabel.$element
 	);
 	this.$saveMessages = $( '<div>' );
@@ -477,7 +475,8 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			if ( data.editSummary !== undefined ) {
 				this.setEditSummary( data.editSummary );
 			}
-			this.setupCheckboxes( data.$checkboxes );
+			this.setupCheckboxes( data.checkboxFields );
+			this.checkboxesByName = data.checkboxesByName || {};
 			// Old messages should not persist
 			this.clearAllMessages();
 			this.swapPanel( 'save' );

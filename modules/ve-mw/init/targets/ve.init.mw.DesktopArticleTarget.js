@@ -43,7 +43,9 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.toolbarSetupDeferred = null;
 	this.welcomeDialog = null;
 	this.welcomeDialogPromise = null;
-	this.$checkboxes = null;
+	this.checkboxFields = null;
+	this.checkboxesByName = null;
+	this.$otherFields = null;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -231,25 +233,68 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadSuccess.apply( this, arguments );
 
-	var data = response ? response.visualeditor : {};
+	var $checkboxes, defaults,
+		target = this,
+		data = response ? response.visualeditor : {};
+
+	this.checkboxFields = [];
+	this.checkboxesByName = {};
+	this.$otherFields = $( [] );
+
 	if ( data.checkboxes ) {
-		this.$checkboxes = $( ve.getObjectValues( data.checkboxes ).join( '' ) );
-		// Populate checkboxes with default values for minor and watch
-		this.$checkboxes
-			.filter( '#wpMinoredit' )
-				.prop( 'checked', mw.user.options.get( 'minordefault' ) )
-			.end()
-			.filter( '#wpWatchthis' )
-				.prop( 'checked',
-					mw.user.options.get( 'watchdefault' ) ||
-					( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
-					data.watched === ''
-				);
+		defaults = {
+			wpMinoredit: !!mw.user.options.get( 'minordefault' ),
+			wpWatchthis: !!mw.user.options.get( 'watchdefault' ) ||
+				( !!mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
+				data.watched === ''
+		};
+
+		$checkboxes = $( '<div>' ).html( ve.getObjectValues( data.checkboxes ).join( '' ) );
+		$checkboxes.find( 'input[type=checkbox]' ).each( function () {
+			var $label, title, checkbox,
+				$this = $( this ),
+				name = $this.attr( 'name' ),
+				id = $this.attr( 'id' );
+
+			if ( !name ) {
+				// This really shouldn't happen..
+				return;
+			}
+
+			// Label with for=id
+			if ( id ) {
+				$label = $checkboxes.find( 'label[for=' + id + ']' );
+			}
+			// Label wrapped input
+			if ( !$label ) {
+				$label = $this.closest( 'label' );
+			}
+			if ( $label ) {
+				title = $label.attr( 'title' );
+				$label.find( 'a' ).attr( 'target', '_blank' );
+			}
+			checkbox = new OO.ui.CheckboxInputWidget( {
+				value: $this.attr( 'value' ),
+				selected: name && defaults[name]
+			} );
+			// HACK: CheckboxInputWidget doesn't support access keys
+			checkbox.$input.attr( 'accesskey', $( this ).attr( 'accesskey' ) );
+			target.checkboxFields.push(
+				new OO.ui.FieldLayout( checkbox, {
+					align: 'inline',
+					label: $label ? $label.contents() : undefined,
+					title: title
+				} )
+			);
+			target.checkboxesByName[name] = checkbox;
+		} );
+		this.$otherFields = $checkboxes.find( 'input[type!=checkbox]' );
 	}
 };
 
 /**
  * Handle the watch button being toggled on/off.
+ *
  * @param {jQuery.Event} e Event object whih triggered the event
  * @param {string} actionPerformed 'watch' or 'unwatch'
  */
@@ -257,12 +302,13 @@ ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( e, actionPe
 	if ( !this.active && !this.activating ) {
 		return;
 	}
-	this.$checkboxes.filter( '#wpWatchthis' )
-		.prop( 'checked',
-			mw.user.options.get( 'watchdefault' ) ||
-			( mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
+	if ( this.checkboxesByName.wpWatchthis ) {
+		this.checkboxesByName.wpWatchthis.setSelected(
+			!!mw.user.options.get( 'watchdefault' ) ||
+			( !!mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
 			actionPerformed === 'watch'
 		);
+	}
 };
 
 /**
@@ -614,10 +660,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		// Just checking for mw.page.watch is not enough because in Firefox
 		// there is Object.prototype.watch...
 		if ( mw.page.hasOwnProperty( 'watch' ) ) {
-			watchChecked = this.saveDialog.$saveOptions
-				.find( '.ve-ui-mwSaveDialog-checkboxes' )
-					.find( '#wpWatchthis' )
-					.prop( 'checked' );
+			watchChecked = this.checkboxesByName.wpWatchthis && this.checkboxesByName.wpWatchthis.isSelected();
 			mw.page.watch.updateWatchLink(
 				$( '#ca-watch a, #ca-unwatch a' ),
 				watchChecked ? 'unwatch' : 'watch'
@@ -764,20 +807,23 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
-	var checkboxFields = {};
+	var name, fieldValues = {};
 
-	this.$checkboxes
-		.each( function () {
-			var $this = $( this );
-			// We can't just use $this.val() because .val() always returns the value attribute of
-			// a checkbox even when it's unchecked
-			if ( $this.prop( 'name' ) && ( $this.prop( 'type' ) !== 'checkbox' || $this.prop( 'checked' ) ) ) {
-				checkboxFields[$this.prop( 'name' )] = $this.val();
-			}
-		} );
+	for ( name in this.checkboxesByName ) {
+		if ( this.checkboxesByName[name].isSelected() ) {
+			fieldValues[name] = this.checkboxesByName[name].getValue();
+		}
+	}
+	this.$otherFields.each( function () {
+		var $this = $( this ),
+			name = $this.prop( 'name' );
+		if ( name ) {
+			fieldValues[name] = $this.val();
+		}
+	} );
 
 	return ve.extendObject(
-		checkboxFields,
+		fieldValues,
 		ve.init.mw.DesktopArticleTarget.super.prototype.getSaveFields.call( this )
 	);
 };
@@ -886,7 +932,8 @@ ve.init.mw.DesktopArticleTarget.prototype.openSaveDialog = function () {
 	windowAction.open( 'mwSave', {
 		target: this,
 		editSummary: this.initialEditSummary,
-		$checkboxes: this.$checkboxes
+		checkboxFields: this.checkboxFields,
+		checkboxesByName: this.checkboxesByName
 	} );
 	this.initialEditSummary = undefined;
 };
