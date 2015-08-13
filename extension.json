@@ -343,6 +343,10 @@
 				"ext.visualEditor.core.mobile",
 				"ext.visualEditor.mwimage.core"
 			],
+			"messages" : [
+				"visualeditor-backbutton-tooltip",
+				"visualeditor-donebutton-tooltip"
+			],
 			"targets": [
 				"mobile"
 			]
@@ -978,7 +982,6 @@
 				"mediawiki.widgets"
 			],
 			"messages": [
-				"visualeditor-backbutton-tooltip",
 				"visualeditor-beta-label",
 				"visualeditor-beta-warning",
 				"visualeditor-browserwarning",
