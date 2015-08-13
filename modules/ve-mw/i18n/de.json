@@ -220,6 +220,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Vorlageneinbindung",
 	"visualeditor-diff-nochanges": "Die Überprüfung konnte nicht gestartet werden, da deine Version der aktuellen Seitenversion entspricht.",
 	"visualeditor-differror": "Fehler beim Laden der Daten vom Server: $1.",
+	"visualeditor-donebutton-tooltip": "Bearbeitung abschließen",
 	"visualeditor-editconflict": "Deine Änderungen konnten aufgrund eines Bearbeitungskonflikts nicht gespeichert werden. Willst {{GENDER:|du}} den Konflikt manuell beheben?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Eine Notiz|$1 Notizen}}",
 	"visualeditor-editnotices-tooltip": "Bearbeitungsnotizen",
