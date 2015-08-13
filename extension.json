@@ -1194,7 +1194,8 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWLinkInspectorTool.js",
-				"modules/ve-mw/ui/contextitems/ve.ui.MWInternalLinkContextItem.js"
+				"modules/ve-mw/ui/contextitems/ve.ui.MWInternalLinkContextItem.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWNumberedExternalLinkNodeContextItem.js"
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css",
