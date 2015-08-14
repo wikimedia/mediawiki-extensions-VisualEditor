@@ -232,6 +232,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "嵌入",
 	"visualeditor-diff-nochanges": "您无法开始检查，因为您没有更改任何内容。",
 	"visualeditor-differror": "从服务器加载数据时出错：$1。",
+	"visualeditor-donebutton-tooltip": "完成编辑",
 	"visualeditor-editconflict": "您的更改因为编辑冲突无法保存。{{GENDER:|您}}希望手动解决冲突吗？",
 	"visualeditor-editnotices-tool": "$1{{PLURAL:$1|个警告}}",
 	"visualeditor-editnotices-tooltip": "编辑警告",

@@ -182,6 +182,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "An dëser Säit dran",
 	"visualeditor-diff-nochanges": "Et konnt net mam Nokucken ugefaange ginn, well Är Versioun d'selwecht ass wéi déi lescht Versioun vun dëser Säit.",
 	"visualeditor-differror": "Feeler beim Luede vun den Donnéeë vum Server: $1",
+	"visualeditor-donebutton-tooltip": "Fäerdeg mat Änneren",
 	"visualeditor-editconflict": "Är Ännerunge konnte wéinst engem Ännerungskonflikt net gespäichert ginn. Wëllt {{Gender:|Dir}} de Konflikt manuell léisen?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Eng  Notiz|$1 Notizen}}",
 	"visualeditor-editnotices-tooltip": "Ännerungsnotizen",

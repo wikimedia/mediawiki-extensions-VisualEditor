@@ -214,6 +214,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Превметнување",
 	"visualeditor-diff-nochanges": "Не можев да ја започнам проверката бидејќи вашата преработка се совпаѓа со последната преработка на страницава.",
 	"visualeditor-differror": "Грешка при вчитувањето на податоците од опслужувачот: $1.",
+	"visualeditor-donebutton-tooltip": "Уредувањето е завршено",
 	"visualeditor-editconflict": "Не можев да ги зачувам вашите промени поради спротиставеност во уредувања. Дали {{GENDER:|би}} сакале да го решите ова рачно?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|известување|известувања}}",
 	"visualeditor-editnotices-tooltip": "Уреди известувања",

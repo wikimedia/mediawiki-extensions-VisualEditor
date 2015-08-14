@@ -215,6 +215,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Tresclusión",
 	"visualeditor-diff-nochanges": "Nun pudo aniciase la revisión porque la so revisión coincide cola última versión d'esta páxina.",
 	"visualeditor-differror": "Error al cargar los datos del sirvidor: $1.",
+	"visualeditor-donebutton-tooltip": "Edición acabada",
 	"visualeditor-editconflict": "Nun pudieron guardase los cambios por un conflictu d'edición. ¿{{GENDER:|Quies}} resolver el conflictu de mou manual?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avisu|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos d'edición",

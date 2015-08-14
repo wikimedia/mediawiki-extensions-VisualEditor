@@ -224,6 +224,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "הכללה",
 	"visualeditor-diff-nochanges": "לא ניתן להתחיל את הסקירה, כי הגרסה שלך זהה לגרסה האחרונה של הדף.",
 	"visualeditor-differror": "שגיאה בטעינת נתונים מהשרת: $1",
+	"visualeditor-donebutton-tooltip": "סיימתי את העריכה",
 	"visualeditor-editconflict": "השינויים שלך לא נשמרו בגלל התנגשות עריכה. האם {{GENDER:|תרצה|תרצי}} לפתור את ההתנגשות ידנית?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|הודעה אחת|$1 הודעות}}",
 	"visualeditor-editnotices-tooltip": "הודעות לעורכים",

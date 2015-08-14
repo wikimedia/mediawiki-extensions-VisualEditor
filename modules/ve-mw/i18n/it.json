@@ -232,6 +232,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Inclusione",
 	"visualeditor-diff-nochanges": "Non può essere avviata la verifica perché la tua versione corrisponde all'ultima della pagina.",
 	"visualeditor-differror": "Errore durante il caricamento dei dati dal server: $1.",
+	"visualeditor-donebutton-tooltip": "Modifica completata",
 	"visualeditor-editconflict": "Le modifiche apportate non possono essere salvate a causa di un conflitto di edizione. {{GENDER:|Vuoi}} risolvere il conflitto manualmente?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notifica|notifiche}}",
 	"visualeditor-editnotices-tooltip": "Avvisi per le modifiche",

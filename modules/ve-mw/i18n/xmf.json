@@ -5,7 +5,7 @@
 			"David1010"
 		]
 	},
-	"tooltip-ca-ve-edit": "ხასჷლაშ რედაქტირაფა ვიზუალური რედაქტორიშ დოხვარაფათ",
+	"tooltip-ca-ve-edit": "თე ხასჷლაშ რედაქტირაფა",
 	"visualeditor-ca-createlocaldescriptionsource": "ლოკალური ეჭარუაშ წყუშ გეძინა",
 	"visualeditor-ca-createsource": "წყუშ გოჭყაფა",
 	"visualeditor-ca-editlocaldescriptionsource": "ლოკალური აღწერის რედაქტირება",
@@ -84,5 +84,8 @@
 	"visualeditor-dialog-meta-settings-label": "გვერდის პარამეტრები",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "სტანდარტული",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "არა",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "ქო"
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "ქო",
+	"visualeditor-donebutton-tooltip": "რედაქტირაფაშ თება",
+	"visualeditor-savedialog-label-restore-short": "ახალშო ეკონწყუალა",
+	"visualeditor-savedialog-label-save-short": "ჩუალა"
 }
