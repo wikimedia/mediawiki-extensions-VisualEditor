@@ -19,10 +19,12 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 
 	// Properties
 	this.externalLinkUrlProtocolsRegExp = new RegExp(
-		'^(' + mw.config.get( 'wgUrlProtocols' ) + ')'
+		'^(' + mw.config.get( 'wgUrlProtocols' ) + ')',
+		'i'
 	);
 	this.unanchoredExternalLinkUrlProtocolsRegExp = new RegExp(
-		'(' + mw.config.get( 'wgUrlProtocols' ) + ')'
+		'(' + mw.config.get( 'wgUrlProtocols' ) + ')',
+		'i'
 	);
 	this.parsedMessages = {};
 	this.linkCache = new ve.init.mw.LinkCache();
