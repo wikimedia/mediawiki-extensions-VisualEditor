@@ -204,6 +204,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Inclusió",
 	"visualeditor-diff-nochanges": "No s'ha pogut començar la revisió perquè la vostra edició coincideix amb la darrera versió d'aquesta pàgina.",
 	"visualeditor-differror": "Error en carregar dades des del servidor: $1.",
+	"visualeditor-donebutton-tooltip": "He acabat d'editar",
 	"visualeditor-editconflict": "Els canvis no s'han pogut desar a causa d'un conflicte d'edició. {{GENDER:|Voleu}} resoldre el conflicte manualment?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avís|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos d'edició",

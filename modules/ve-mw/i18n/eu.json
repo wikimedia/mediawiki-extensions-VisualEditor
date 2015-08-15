@@ -61,7 +61,7 @@
 	"visualeditor-dialog-beta-welcome-content": "Hau da editatzeko gure modu berria, errazagoa. Oraindik beta fasean da; beraz, beharbada orriko zatiren bat ezingo duzu editatu, edo konpontzeke dugun arazoren bat aurkituko duzu. Mesedez, berrikus itzazu zeure aldaketak, eta jakinaraz iezaguzu ikusizko editorea erabiltzean sortzen zaizu edozein arazo (klika ezazu «{{int:visualeditor-help-tool}}» botoia, zeure oharrak guri bidaltzeko). Wikitestuaren editorea erabiltzera pasatzeko, klika ezazu «$1» fitxa; egin dituzun aldaketak mantenduko dira.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Ongi etorri}} ikusizko editorera",
 	"visualeditor-dialog-media-alttext-section": "Testu alternatiboa",
-	"visualeditor-dialog-media-alttext-section-help": "Hau erabili dezakezu testu-deskripzio bat emateko elementua ikusi ezin duten pertsonentzat. Deskripzioa haiek argazkiaren informazioa eta asmoa ulertzeko egokia izan behar du. Hau funtsezkoa da lankide itsuentzat eta pantaila irakurleak eta testu hutsezko nabigatzaileak erabiltzen dituzten pertsona guztientzat.",
+	"visualeditor-dialog-media-alttext-section-help": "Hau erabili dezakezu testu-deskripzio bat idazteko elementua ikusi ezin duten pertsonentzat. Deskripzioa haiek argazkiaren informazioa eta asmoa ulertzeko egokia izan behar du. Hau funtsezkoa da lankide itsuentzat eta pantaila irakurleak eta testu hutsezko nabigatzaileak erabiltzen dituzten pertsona guztientzat.",
 	"visualeditor-dialog-media-change-image": "Aldatu irudia",
 	"visualeditor-dialog-media-choose-image": "Erabili irudi hau",
 	"visualeditor-dialog-media-content-filename": "Fitxategiaren izena",

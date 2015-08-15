@@ -4,6 +4,8 @@
 			"Leeheonjin"
 		]
 	},
-	"visualeditor-linkinspector-description-new-page": "Ala yu pa ing bulung (page)",
-	"visualeditor-linkinspector-description-redirect": "I-redirekta king/kang $1"
+	"visualeditor-backbutton-tooltip": "Mibalik",
+	"visualeditor-savedialog-label-restore-short": "Ibálik yang pasibayu",
+	"visualeditor-savedialog-label-save-short": "Isikap (save)",
+	"visualeditor-toolbar-savedialog-short": "Isikap (save)"
 }
