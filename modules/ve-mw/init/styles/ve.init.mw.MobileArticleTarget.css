@@ -39,21 +39,10 @@
 	display: none;
 }
 
-.ve-init-mw-mobileArticleTarget-actions {
-	float: none;
-	display: table;
-}
-
-.ve-init-mw-mobileArticleTarget-title-container,
-.ve-init-mw-mobileArticleTarget-toolbar .ve-ui-toolbar,
-.ve-init-mw-mobileArticleTarget-toolbar .ve-ui-toolbar-saveButton {
-	display: table-cell;
-	vertical-align: top;
-}
-
 .ve-init-mw-mobileArticleTarget-title-container {
 	width: 100%;
 	position: relative;
+	border-right: 1px solid #ddd;
 }
 
 .ve-init-mw-mobileArticleTarget-title {
@@ -69,44 +58,54 @@
 	right: 0;
 }
 
-.ve-init-mw-mobileArticleTarget-tools {
+.ve-init-mw-mobileArticleTarget-pageTools,
+.ve-init-mw-mobileArticleTarget-editTools {
 	display: table;
+}
+
+/* Edit tools has no 100% width cells */
+.ve-init-mw-mobileArticleTarget-editTools {
 	width: 100%;
 }
 
-.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup {
+.ve-init-mw-mobileArticleTarget-pageTools > .oo-ui-toolGroup,
+.ve-init-mw-mobileArticleTarget-pageTools > .ve-init-mw-mobileArticleTarget-title-container,
+.ve-init-mw-mobileArticleTarget-editTools > .oo-ui-toolGroup {
 	display: table-cell;
+}
+
+.ve-init-mw-mobileArticleTarget-editTools > .oo-ui-toolGroup {
 	text-align: center;
 }
 
-.ve-init-mw-mobileArticleTarget-tools .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon {
+.ve-init-mw-mobileArticleTarget-editTools .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon {
 	left: 50%;
 	margin-left: -1.875em;
 }
 
-.ve-init-mw-mobileArticleTarget-tools .oo-ui-popupToolGroup-handle .oo-ui-indicatorElement-indicator {
+.ve-init-mw-mobileArticleTarget-editTools .oo-ui-popupToolGroup-handle .oo-ui-indicatorElement-indicator {
 	left: 50%;
 }
 
-.ve-init-mw-mobileArticleTarget-tools .oo-ui-popupToolGroup .oo-ui-toolGroup-tools {
+.ve-init-mw-mobileArticleTarget-editTools .oo-ui-popupToolGroup .oo-ui-toolGroup-tools {
 	text-align: left;
 }
 
-.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup-empty {
+.ve-init-mw-mobileArticleTarget-editTools > .oo-ui-toolGroup-empty {
 	display: none;
 }
 
-.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup:last-child {
+.ve-init-mw-mobileArticleTarget-editTools > .oo-ui-toolGroup:last-child {
 	border-right: 0;
 }
 
-.ve-init-mw-mobileArticleTarget-tools > .oo-ui-toolGroup > .oo-ui-toolGroup-tools
+.ve-init-mw-mobileArticleTarget-editTools > .oo-ui-toolGroup > .oo-ui-toolGroup-tools
 > .oo-ui-tool {
 	width: 100%;
 }
 
-.ve-init-mw-mobileArticleTarget-tools-hidden,
-.ve-init-mw-mobileArticleTarget-actions-hidden {
+.ve-init-mw-mobileArticleTarget-editTools-hidden,
+.ve-init-mw-mobileArticleTarget-pageToolbar-hidden {
 	display: none;
 }
 

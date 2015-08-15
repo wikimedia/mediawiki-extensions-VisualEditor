@@ -19,6 +19,9 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 	var currentUri = new mw.Uri();
 
 	config = config || {};
+	config.toolbarConfig = $.extend( {
+		actions: false
+	}, config.toolbarConfig );
 
 	// Parent constructor
 	ve.init.mw.MobileArticleTarget.super.call(
@@ -93,8 +96,8 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 	var toolbar = this.getToolbar();
-	toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-tools-hidden' );
-	toolbar.$actions.removeClass( 've-init-mw-mobileArticleTarget-actions-hidden' );
+	toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
+	this.pageToolbar.$element.removeClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
 };
 
 /**
@@ -102,8 +105,8 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
 	var toolbar = this.getToolbar();
-	toolbar.$group.removeClass( 've-init-mw-mobileArticleTarget-tools-hidden' );
-	toolbar.$actions.addClass( 've-init-mw-mobileArticleTarget-actions-hidden' );
+	toolbar.$group.removeClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
+	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
 };
 
 /**
@@ -148,33 +151,38 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
-	this.actionsToolbar = new ve.ui.TargetToolbar( this );
+	this.pageToolbar = new ve.ui.TargetToolbar( this, { actions: true } );
 
-	this.actionsToolbar.setup( [
+	this.pageToolbar.setup( [
+		// Back
+		{ include: [ 'back' ] },
 		{
 			type: 'list',
-			icon: 'menu',
+			icon: 'advanced',
 			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
-			include: [ 'back', 'editModeSource' ]
+			include: [ 'editModeSource' ]
 		}
 	], this.getSurface() );
 
-	this.actionsToolbar.emit( 'updateState' );
+	this.pageToolbar.emit( 'updateState' );
 
-	this.toolbar.$group
-		.addClass( 've-init-mw-mobileArticleTarget-tools' );
+	$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
+		$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
+			new mw.Title( ve.init.target.pageName ).getMainText()
+		)
+	)
+		// Insert title between 'back' and 'advanced'
+		.insertAfter( this.pageToolbar.items[0].$element );
 
-	this.toolbar.$actions
-		.addClass( 've-init-mw-mobileArticleTarget-actions' )
-		.append(
-			this.actionsToolbar.$element,
-			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
-				$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
-					new mw.Title( ve.init.target.pageName ).getMainText()
-				)
-			),
-			this.toolbarSaveButton.$element
-		);
+	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar' );
+	this.pageToolbar.$actions.append(
+		this.toolbarSaveButton.$element
+	);
+
+	this.toolbar.$element.append( this.pageToolbar.$element );
+
+	this.pageToolbar.$group.addClass( 've-init-mw-mobileArticleTarget-pageTools' );
+	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
 };
 
 /**
