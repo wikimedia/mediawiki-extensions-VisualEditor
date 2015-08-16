@@ -229,6 +229,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Включення",
 	"visualeditor-diff-nochanges": "Не вдалося запустити перегляд, бо ваша редакція відповідає останній версії цієї сторінки.",
 	"visualeditor-differror": "Помилка при завантаженні даних із сервера: $1.",
+	"visualeditor-donebutton-tooltip": "Редагування завершено",
 	"visualeditor-editconflict": "Ваші зміни не вдалось зберегти через конфлікт редагувань. Чи хочете {{GENDER:|Ви}} вирішити конфлікт власноруч?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сповіщення|сповіщення|сповіщень}}",
 	"visualeditor-editnotices-tooltip": "Замітки по редагуванню",
