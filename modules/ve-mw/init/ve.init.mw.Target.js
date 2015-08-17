@@ -835,6 +835,9 @@ ve.init.mw.Target.prototype.saveErrorCaptcha = function ( editApi ) {
 	this.saveDialog.clearMessage( 'api-save-error' );
 	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
 	this.saveDialog.popPending();
+
+	this.captcha.input.focus();
+
 	this.emit( 'saveErrorCaptcha' );
 };
 
