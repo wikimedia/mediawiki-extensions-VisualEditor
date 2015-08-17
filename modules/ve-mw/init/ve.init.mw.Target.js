@@ -1410,13 +1410,13 @@ ve.init.mw.Target.prototype.startSave = function ( saveDeferred ) {
 		return false;
 	}
 
+	var saveOptions = this.getSaveOptions();
+
 	// Reset any old captcha data
 	if ( this.captcha ) {
 		this.saveDialog.clearMessage( 'captcha' );
 		delete this.captcha;
 	}
-
-	var saveOptions = this.getSaveOptions();
 
 	if (
 		+mw.user.options.get( 'forceeditsummary' ) &&
@@ -1435,7 +1435,7 @@ ve.init.mw.Target.prototype.startSave = function ( saveDeferred ) {
 		if ( !this.docToSave ) {
 			this.docToSave = this.getSurface().getDom();
 		}
-		this.save( this.docToSave, this.getSaveOptions() );
+		this.save( this.docToSave, saveOptions );
 		this.saveDeferred = saveDeferred;
 	}
 };
