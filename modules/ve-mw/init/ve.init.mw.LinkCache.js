@@ -142,7 +142,7 @@ ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
 		action: 'query',
 		prop: 'info|pageprops|pageimages|pageterms',
 		pithumbsize: 80,
-		pilimit: 10,
+		pilimit: subqueue.length,
 		wbptterms: 'description',
 		ppprop: 'disambiguation',
 		titles: subqueue.join( '|' ),
