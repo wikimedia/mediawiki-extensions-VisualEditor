@@ -36,6 +36,18 @@ ve.ui.MWLinkAction.static.methods = ve.ui.MWLinkAction.super.static.methods.conc
 /* Methods */
 
 /**
+ * Match the trailing punctuation set used for autolinks in wikitext.
+ * Closing parens are only stripped if open parens are missing from the
+ * candidate text, so that URLs with embedded matched parentheses (like
+ * wiki articles with disambiguation text) autolink nicely.
+ * @method
+ * @inheritdoc
+ */
+ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
+	return /\(/.test( candidate ) ? /[,;.:!?]+$/ : /[,;.:!?)]+$/;
+};
+
+/**
  * @method
  * @inheritdoc
  * @return {ve.dm.MWExternalLinkAnnotation} The annotation to use.
