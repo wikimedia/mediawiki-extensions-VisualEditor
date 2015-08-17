@@ -255,6 +255,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Modèle",
 	"visualeditor-diff-nochanges": "Impossible de commencer la relecture car votre révision correspond à la dernière version de cette page.",
 	"visualeditor-differror": "Erreur lors du chargement des données depuis le serveur : $1.",
+	"visualeditor-donebutton-tooltip": "Modification effectuée",
 	"visualeditor-editconflict": "Vos modifications n’ont pas pu être enregistrées à cause d’un conflit d'édition. Voulez-vous résoudre ce conflit manuellement ?",
 	"visualeditor-editnotices-tool": "$1 avertissement{{PLURAL:$1||s}}",
 	"visualeditor-editnotices-tooltip": "Avertissements",
