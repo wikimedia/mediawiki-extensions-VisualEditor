@@ -62,6 +62,17 @@ ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, 
 	return [ domElement ];
 };
 
+/* Methods */
+
+/**
+ * Convenience wrapper for .getHref() on the current element.
+ *
+ * @return {string} Link href
+ */
+ve.dm.MWNumberedExternalLinkNode.prototype.getHref = function () {
+	return this.element.attributes.href;
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWNumberedExternalLinkNode );
