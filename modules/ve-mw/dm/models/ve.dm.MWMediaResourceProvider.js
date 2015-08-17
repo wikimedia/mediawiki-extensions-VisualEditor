@@ -24,7 +24,7 @@ ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( apiurl, co
 
 	// Fetching configuration
 	this.scriptDirUrl = config.scriptDirUrl;
-	this.isLocal = ( 'local' in config );
+	this.isLocal = config.local !== undefined;
 
 	if ( this.isLocal ) {
 		this.setAjaxSettings( {
