@@ -222,7 +222,6 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusión",
 	"visualeditor-diff-nochanges": "Non se puido iniciar a corrección porque a súa revisión coincide coa última versión da páxina.",
 	"visualeditor-differror": "Erro ao cargar os datos desde o servidor: $1.",
-	"visualeditor-donebutton-tooltip": "Edición rematada",
 	"visualeditor-editconflict": "Non se puideron gardar os cambios debido a un conflito de edición. {{GENDER:|Quere}} resolver o conflito manualmente?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|aviso|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos de edición",

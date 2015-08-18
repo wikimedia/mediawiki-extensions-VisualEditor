@@ -244,6 +244,7 @@
 	"visualeditor-editnotices-tooltip": "Text of tooltip for the tool in the toolbar that shows edit notices (i.e. “messages about the editing”), e.g. the “you are not currently logged in” notice",
 	"visualeditor-editsummary": "Label for the edit summary box",
 	"visualeditor-editsummary-bytes-remaining": "Tooltip for the number of bytes remaining in the edit summary",
+	"visualeditor-feedback-defaultmessage": "Default message text for the feedback dialog.\nParameters:\n\n* $1 - URL of the page",
 	"visualeditor-formatdropdown-format-mw-heading1": "Item in the MediaWiki formatting dropdown for a level 1 heading (page title).\n{{Related|Visualeditor-formatdropdown}}\n{{Identical|Page title}}",
 	"visualeditor-formatdropdown-format-mw-heading2": "Item in the MediaWiki formatting dropdown for a level 2 heading (section).\n{{Related|Visualeditor-formatdropdown}}\n{{Identical|Heading}}",
 	"visualeditor-formatdropdown-format-mw-heading3": "Item in the MediaWiki formatting dropdown for a level 3 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
