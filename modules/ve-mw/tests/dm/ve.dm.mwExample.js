@@ -1458,7 +1458,7 @@ ve.dm.mwExample.domToDataCases = {
 			'typeof="mw:Extension/ref"></span></p>',
 		clipboardBody: '<p><span typeof="mw:Extension/ref" ' +
 			'data-mw="{&quot;attrs&quot;:{},&quot;body&quot;:' +
-			'{&quot;html&quot;:&quot;Foo<span rel=\\&quot;ve:Comment\\&quot; data-ve-comment=\\&quot; bar \\&quot;></span>&quot;},&quot;name&quot;:&quot;ref&quot;}" ' +
+			'{&quot;html&quot;:&quot;Foo<span rel=\\&quot;ve:Comment\\&quot; data-ve-comment=\\&quot; bar \\&quot;>&amp;nbsp;</span>&quot;},&quot;name&quot;:&quot;ref&quot;}" ' +
 			'>' +
 			'<sup>[1]</sup></span></p>',
 		head: '<base href="http://example.com" />',
@@ -1717,10 +1717,10 @@ ve.dm.mwExample.domToDataCases = {
 			'<meta property="mw:bar" content="baz" /><!--barbaz-->' +
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
-		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" No content conversion "></span><meta property="mw:ThisIsAnAlien" /><p>Foo' +
+		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" No content conversion ">&nbsp;</span><meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
-			'<meta property="mw:foo" content="bar" />Ba<span rel="ve:Comment" data-ve-comment=" inline "></span>z</p>' +
-			'<meta property="mw:bar" content="baz" /><span rel="ve:Comment" data-ve-comment="barbaz"></span>' +
+			'<meta property="mw:foo" content="bar" />Ba<span rel="ve:Comment" data-ve-comment=" inline ">&nbsp;</span>z</p>' +
+			'<meta property="mw:bar" content="baz" /><span rel="ve:Comment" data-ve-comment="barbaz">&nbsp;</span>' +
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		head: '<base href="http://example.com" />',
