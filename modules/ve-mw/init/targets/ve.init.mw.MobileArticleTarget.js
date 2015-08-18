@@ -251,7 +251,7 @@ ve.ui.toolFactory.register( ve.ui.MWBackTool );
 /**
  * Back command
  */
-ve.ui.MWBackCommand = function VeUiMwBackCommmand() {
+ve.ui.MWBackCommand = function VeUiMWBackCommand() {
 	// Parent constructor
 	ve.ui.MWBackCommand.super.call( this, 'back' );
 };
@@ -280,7 +280,7 @@ ve.ui.toolFactory.register( ve.ui.MWDoneTool );
 /**
  * Done command
  */
-ve.ui.MWDoneCommand = function VeUiMwDoneCommmand() {
+ve.ui.MWDoneCommand = function VeUiMwDoneCommand() {
 	// Parent constructor
 	ve.ui.MWDoneCommand.super.call( this, 'done' );
 };

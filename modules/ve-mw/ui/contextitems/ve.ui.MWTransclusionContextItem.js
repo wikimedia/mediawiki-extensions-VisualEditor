@@ -15,7 +15,7 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWTransclusionContextItem = function VeMWTransclusionContextItem() {
+ve.ui.MWTransclusionContextItem = function VeUiMWTransclusionContextItem() {
 	// Parent constructor
 	ve.ui.MWTransclusionContextItem.super.apply( this, arguments );
 
