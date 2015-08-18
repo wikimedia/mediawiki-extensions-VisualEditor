@@ -235,6 +235,7 @@
 	"visualeditor-editnotices-tooltip": "Edit notices",
 	"visualeditor-editsummary": "Describe what you changed",
 	"visualeditor-editsummary-bytes-remaining": "The number of bytes remaining",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Page title",
 	"visualeditor-formatdropdown-format-mw-heading2": "Heading",
 	"visualeditor-formatdropdown-format-mw-heading3": "Sub-heading 1",

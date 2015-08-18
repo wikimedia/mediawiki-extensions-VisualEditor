@@ -212,7 +212,9 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 		} );
 	}
 	this.feedbackPromise.done( function ( feedback ) {
-		feedback.launch();
+		feedback.launch( {
+			message: ve.msg( 'visualeditor-feedback-defaultmessage', location.toString() )
+		} );
 	} );
 };
 
