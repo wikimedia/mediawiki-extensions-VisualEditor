@@ -15,7 +15,7 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWAlienExtensionContextItem = function VeMWAlienExtensionContextItem( context, model ) {
+ve.ui.MWAlienExtensionContextItem = function VeUiMWAlienExtensionContextItem( context, model ) {
 	// Parent constructor
 	ve.ui.MWAlienExtensionContextItem.super.apply( this, arguments );
 

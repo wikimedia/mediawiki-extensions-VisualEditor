@@ -13,7 +13,7 @@
  * @constructor
  * @param {ve.init.mw.Target} target Target class to log events for
  */
-ve.init.mw.TargetEvents = function ( target ) {
+ve.init.mw.TargetEvents = function VeInitMwTargetEvents( target ) {
 	this.target = target;
 	this.timings = { saveRetries: 0 };
 	// Events

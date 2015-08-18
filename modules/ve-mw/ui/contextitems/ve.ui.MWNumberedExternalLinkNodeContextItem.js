@@ -15,7 +15,7 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWNumberedExternalLinkNodeContextItem = function VeMWNumberedExternalLinkNodeContextItem() {
+ve.ui.MWNumberedExternalLinkNodeContextItem = function VeUiMWNumberedExternalLinkNodeContextItem() {
 	// Parent constructor
 	ve.ui.MWNumberedExternalLinkNodeContextItem.super.apply( this, arguments );
 

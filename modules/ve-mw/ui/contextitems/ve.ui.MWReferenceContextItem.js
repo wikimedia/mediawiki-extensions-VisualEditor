@@ -15,7 +15,7 @@
  * @param {ve.dm.Model} model Model item is related to
  * @param {Object} config Configuration options
  */
-ve.ui.MWReferenceContextItem = function VeMWReferenceContextItem() {
+ve.ui.MWReferenceContextItem = function VeUiMWReferenceContextItem() {
 	// Parent constructor
 	ve.ui.MWReferenceContextItem.super.apply( this, arguments );
 	this.view = null;

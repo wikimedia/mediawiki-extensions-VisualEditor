@@ -15,7 +15,7 @@
  * @param {Object} [config] Configuration options
  * @cfg {string} emptyGroupName Label of the placeholder item
  */
-ve.ui.MWReferenceGroupInputWidget = function VeUiMWReferenceGroupInput( config ) {
+ve.ui.MWReferenceGroupInputWidget = function VeUiMWReferenceGroupInputWidget( config ) {
 	config = config || {};
 
 	this.emptyGroupName = config.emptyGroupName;
