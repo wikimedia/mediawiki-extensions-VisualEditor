@@ -8,7 +8,7 @@
  * Context item for a MWAlienExtension.
  *
  * @class
- * @extends ve.ui.ContextItem
+ * @extends ve.ui.LinearContextItem
  *
  * @constructor
  * @param {ve.ui.Context} context Context item is in
@@ -27,7 +27,7 @@ ve.ui.MWAlienExtensionContextItem = function VeUiMWAlienExtensionContextItem( co
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWAlienExtensionContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.MWAlienExtensionContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

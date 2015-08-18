@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwInternalLinkContextItem .ve-ui-contextItem-body {
+.ve-ui-mwInternalLinkContextItem .ve-ui-linearContextItem-body {
 	overflow: auto;
 	white-space: normal;
 }

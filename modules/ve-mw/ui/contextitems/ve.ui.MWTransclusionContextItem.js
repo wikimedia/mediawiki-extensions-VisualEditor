@@ -8,7 +8,7 @@
  * Context item for a MWTransclusion.
  *
  * @class
- * @extends ve.ui.ContextItem
+ * @extends ve.ui.LinearContextItem
  *
  * @constructor
  * @param {ve.ui.Context} context Context item is in
@@ -28,7 +28,7 @@ ve.ui.MWTransclusionContextItem = function VeUiMWTransclusionContextItem() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTransclusionContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.MWTransclusionContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

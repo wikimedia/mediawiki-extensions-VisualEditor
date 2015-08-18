@@ -8,7 +8,7 @@
  * Context item for a MWReferencesList.
  *
  * @class
- * @extends ve.ui.ContextItem
+ * @extends ve.ui.LinearContextItem
  *
  * @constructor
  * @param {ve.ui.Context} context Context item is in
@@ -25,7 +25,7 @@ ve.ui.MWReferencesListContextItem = function VeUiMWReferencesListContextItem() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWReferencesListContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.MWReferencesListContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 
