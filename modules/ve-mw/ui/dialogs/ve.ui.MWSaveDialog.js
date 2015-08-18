@@ -475,7 +475,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			if ( data.editSummary !== undefined ) {
 				this.setEditSummary( data.editSummary );
 			}
-			this.setupCheckboxes( data.checkboxFields );
+			this.setupCheckboxes( data.checkboxFields || [] );
 			this.checkboxesByName = data.checkboxesByName || {};
 			// Old messages should not persist
 			this.clearAllMessages();
