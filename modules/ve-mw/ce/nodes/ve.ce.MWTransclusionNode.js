@@ -51,9 +51,13 @@ ve.ce.MWTransclusionNode.static.primaryCommandName = 'transclusion';
 /* Static Methods */
 
 /**
- * @inheritdoc
+ * Get a list of descriptions of template parts in a transclusion node
+ *
+ * @static
+ * @param {ve.dm.Node} model Node model
+ * @return {string[]} List of template part descriptions
  */
-ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
+ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions = function ( model ) {
 	var i, len, part,
 		parts = model.getPartsList(),
 		words = [];
@@ -65,11 +69,18 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 		}
 	}
 
-	return words
+	return words;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
+	return this.getTemplatePartDescriptions( model )
 		.map( function ( template ) {
 			var title = mw.Title.newFromText( template, mw.config.get( 'wgNamespaceIds' ).template );
 			if ( title ) {
-				return title.getRelativeText( 10 );
+				return title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
 			} else {
 				return template;
 			}
