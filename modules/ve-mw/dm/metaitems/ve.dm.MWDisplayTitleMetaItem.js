@@ -33,7 +33,7 @@ ve.dm.MWDisplayTitleMetaItem.static.matchTagNames = [ 'meta' ];
 ve.dm.MWDisplayTitleMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/displaytitle' ];
 
 ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
-	var content = domElements[0].getAttribute( 'content' );
+	var content = domElements[ 0 ].getAttribute( 'content' );
 	return {
 		type: this.name,
 		attributes: {

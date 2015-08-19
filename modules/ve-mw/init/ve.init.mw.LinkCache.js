@@ -115,7 +115,7 @@ ve.init.mw.LinkCache.prototype.setAssumeExistence = function ( assume ) {
 ve.init.mw.LinkCache.prototype.setMissing = function ( entries ) {
 	var name, missingEntries = {};
 	for ( name in entries ) {
-		missingEntries['_missing/' + name] = entries[name];
+		missingEntries[ '_missing/' + name ] = entries[ name ];
 	}
 	this.set( missingEntries );
 };
@@ -126,7 +126,7 @@ ve.init.mw.LinkCache.prototype.setMissing = function ( entries ) {
 ve.init.mw.LinkCache.prototype.get = function ( title ) {
 	var data = {};
 	if ( this.assumeExistence ) {
-		data[this.constructor.static.normalizeTitle( title )] = { missing: false };
+		data[ this.constructor.static.normalizeTitle( title ) ] = { missing: false };
 		this.setMissing( data );
 	}
 

@@ -195,7 +195,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 
 	this.annotationInput.text.setValue( text ).focus();
 	// Firefox moves the cursor to the beginning
-	this.annotationInput.text.$input[0].setSelectionRange( end, end );
+	this.annotationInput.text.$input[ 0 ].setSelectionRange( end, end );
 
 	if ( !isExternal ) {
 		this.annotationInput.text.populateLookupMenu();

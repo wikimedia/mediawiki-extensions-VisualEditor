@@ -61,7 +61,7 @@ ve.dm.MWExtensionNode.static.getMatchRdfaTypes = function () {
 
 ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, index,
-		mwDataJSON = domElements[0].getAttribute( 'data-mw' ),
+		mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 
 	dataElement = {

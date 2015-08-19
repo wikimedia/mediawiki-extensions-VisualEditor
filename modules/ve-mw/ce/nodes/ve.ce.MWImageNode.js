@@ -115,8 +115,8 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 ve.ce.MWImageNode.prototype.onParseSuccess = function ( deferred, response ) {
 	var id, src, pages = ve.getProp( response, 'query', 'pages' );
 	for ( id in pages ) {
-		if ( pages[id].imageinfo ) {
-			src = pages[id].imageinfo[0].thumburl;
+		if ( pages[ id ].imageinfo ) {
+			src = pages[ id ].imageinfo[ 0 ].thumburl;
 		}
 	}
 	if ( src ) {

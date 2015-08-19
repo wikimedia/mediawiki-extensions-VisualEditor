@@ -106,8 +106,8 @@ QUnit.test( 'getWikitext', function ( assert ) {
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
 		node = new ve.dm.MWTransclusionNode(
-			{ type: 'mwTransclusion', attributes: { mw: cases[i].mw } }
+			{ type: 'mwTransclusion', attributes: { mw: cases[ i ].mw } }
 		);
-		assert.deepEqual( node.getWikitext(), cases[i].wikitext, cases[i].msg );
+		assert.deepEqual( node.getWikitext(), cases[ i ].wikitext, cases[ i ].msg );
 	}
 } );

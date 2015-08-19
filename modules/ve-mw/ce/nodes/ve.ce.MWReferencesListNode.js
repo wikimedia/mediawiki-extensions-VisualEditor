@@ -169,11 +169,11 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 	} else {
 		n = 0;
 		for ( i = 0, iLen = nodes.indexOrder.length; i < iLen; i++ ) {
-			index = nodes.indexOrder[i];
-			firstNode = nodes.firstNodes[index];
+			index = nodes.indexOrder[ i ];
+			firstNode = nodes.firstNodes[ index ];
 
-			key = internalList.keys[index];
-			keyedNodes = nodes.keyedNodes[key];
+			key = internalList.keys[ index ];
+			keyedNodes = nodes.keyedNodes[ key ];
 			/*jshint loopfunc:true */
 			keyedNodes = keyedNodes.filter( function ( node ) {
 				// Exclude placeholder references

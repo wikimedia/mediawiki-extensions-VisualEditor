@@ -467,14 +467,14 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 
 	// Clean data from the API responses
 	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
-		field = apiDataKeysConfig[i].name;
+		field = apiDataKeysConfig[ i ].name;
 		// Skip empty fields and those that are specifically configured to be skipped
-		if ( apiDataKeysConfig[i].data.skipProcessing ) {
-			apiData[field] = apiDataKeysConfig[i].value;
+		if ( apiDataKeysConfig[ i ].data.skipProcessing ) {
+			apiData[ field ] = apiDataKeysConfig[ i ].value;
 		} else {
 			// Store a clean information from the API.
-			if ( apiDataKeysConfig[i].value ) {
-				apiData[field] = this.cleanAPIresponse( apiDataKeysConfig[i].value, apiDataKeysConfig[i].data );
+			if ( apiDataKeysConfig[ i ].value ) {
+				apiData[ field ] = this.cleanAPIresponse( apiDataKeysConfig[ i ].value, apiDataKeysConfig[ i ].data );
 			}
 		}
 	}
@@ -505,12 +505,12 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 
 	// Attach all fields in order
 	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
-		field = apiDataKeysConfig[i].name;
-		if ( apiData[field] ) {
-			$section = apiDataKeysConfig[i].view.primary ? $main : $details;
+		field = apiDataKeysConfig[ i ].name;
+		if ( apiData[ field ] ) {
+			$section = apiDataKeysConfig[ i ].view.primary ? $main : $details;
 
-			fields[field] = new ve.ui.MWMediaInfoFieldWidget( apiData[field], apiDataKeysConfig[i].view );
-			$section.append( fields[field].$element );
+			fields[ field ] = new ve.ui.MWMediaInfoFieldWidget( apiData[ field ], apiDataKeysConfig[ i ].view );
+			$section.append( fields[ field ].$element );
 		}
 	}
 
@@ -584,7 +584,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 
 	// Initialize fields
 	for ( field in fields ) {
-		fields[field].initialize();
+		fields[ field ].initialize();
 	}
 	// Let the scrollbar appear naturally if it should
 	this.mediaImageInfoPanel.$element.css( 'overflow', '' );
@@ -607,8 +607,8 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 		};
 
 	// Check cache first
-	if ( this.searchCache[imageName] ) {
-		return $.Deferred().resolve( this.searchCache[imageName] );
+	if ( this.searchCache[ imageName ] ) {
+		return $.Deferred().resolve( this.searchCache[ imageName ] );
 	}
 
 	if ( dimensions.width ) {
@@ -620,13 +620,13 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 	return new mw.Api().get( apiObj )
 		.then( function ( response ) {
 			var thumburl = ve.getProp(
-				response.query.pages[response.query.pageids[0]],
+				response.query.pages[ response.query.pageids[ 0 ] ],
 				'imageinfo',
 				0,
 				'thumburl'
 			);
 			// Cache
-			dialog.searchCache[imageName] = thumburl;
+			dialog.searchCache[ imageName ] = thumburl;
 			return thumburl;
 		} );
 };

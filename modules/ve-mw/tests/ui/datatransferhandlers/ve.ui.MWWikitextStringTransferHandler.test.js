@@ -228,6 +228,6 @@ QUnit.test( 'convert', function ( assert ) {
 
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
-		runWikitextStringHandlerTest( assert, this.server, cases[i].pasteString, cases[i].pasteType, cases[i].parsoidResponse, cases[i].expectedData, cases[i].annotations, cases[i].msg );
+		runWikitextStringHandlerTest( assert, this.server, cases[ i ].pasteString, cases[ i ].pasteType, cases[ i ].parsoidResponse, cases[ i ].expectedData, cases[ i ].annotations, cases[ i ].msg );
 	}
 } );

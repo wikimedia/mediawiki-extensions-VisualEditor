@@ -101,7 +101,7 @@
 
 		if ( Array.isArray( data.parts ) ) {
 			for ( i = 0, len = data.parts.length; i < len; i++ ) {
-				part = data.parts[i];
+				part = data.parts[ i ];
 				if ( part.template ) {
 					deferred = $.Deferred();
 					promises.push( deferred.promise() );
@@ -137,12 +137,12 @@
 
 		for ( i = 0, len = queue.length; i < len; i++ ) {
 			remove = 0;
-			item = queue[i];
+			item = queue[ i ];
 
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
 				title = item.add.getTitle();
-				if ( hasOwn.call( specCache, title ) && specCache[title] ) {
-					item.add.getSpec().extend( specCache[title] );
+				if ( hasOwn.call( specCache, title ) && specCache[ title ] ) {
+					item.add.getSpec().extend( specCache[ title ] );
 				}
 			}
 
@@ -188,7 +188,7 @@
 		// Otherwise we get silly situations like a single change event being
 		// guaranteed after the transclusion loaded promise gets resolved.
 		for ( i = 0; i < resolveQueue.length; i++ ) {
-			resolveQueue[i].resolve();
+			resolveQueue[ i ].resolve();
 		}
 	};
 
@@ -208,7 +208,7 @@
 
 		// Get unique list of template titles that aren't already loaded
 		for ( i = 0, len = queue.length; i < len; i++ ) {
-			item = queue[i];
+			item = queue[ i ];
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
 				title = item.add.getTitle();
 				if (
@@ -252,7 +252,7 @@
 		if ( data && data.pages ) {
 			// Keep spec data on hand for future use
 			for ( id in data.pages ) {
-				specs[data.pages[id].title] = data.pages[id];
+				specs[ data.pages[ id ].title ] = data.pages[ id ];
 			}
 			// Follow redirects
 			if ( data.redirects ) {
@@ -266,16 +266,16 @@
 			for ( i = 0, len = aliasMap.length; i < len; i++ ) {
 				// Only define the alias if the target exists, otherwise
 				// we create a new property with an invalid "undefined" value.
-				if ( hasOwn.call( specs, aliasMap[i].to ) ) {
-					specs[aliasMap[i].from] = specs[aliasMap[i].to];
+				if ( hasOwn.call( specs, aliasMap[ i ].to ) ) {
+					specs[ aliasMap[ i ].from ] = specs[ aliasMap[ i ].to ];
 				}
 			}
 
 			// Prevent asking again for templates that have no specs
 			for ( i = 0, len = titles.length; i < len; i++ ) {
-				title = titles[i];
-				if ( !specs[title] ) {
-					specs[title] = null;
+				title = titles[ i ];
+				if ( !specs[ title ] ) {
+					specs[ title ] = null;
 				}
 			}
 
@@ -300,7 +300,7 @@
 		var i, len;
 
 		for ( i = 0, len = this.requests.length; i < len; i++ ) {
-			this.requests[i].abort();
+			this.requests[ i ].abort();
 		}
 		this.requests.length = 0;
 	};
@@ -315,7 +315,7 @@
 			obj = { parts: [] };
 
 		for ( i = 0, len = this.parts.length; i < len; i++ ) {
-			part = this.parts[i];
+			part = this.parts[ i ];
 			serialization = part.serialize();
 			if ( serialization !== undefined && serialization !== '' ) {
 				obj.parts.push( serialization );
@@ -339,7 +339,7 @@
 			wikitext = '';
 
 		for ( i = 0, len = this.parts.length; i < len; i++ ) {
-			wikitext += this.parts[i].getWikitext();
+			wikitext += this.parts[ i ].getWikitext();
 		}
 
 		return wikitext;
@@ -444,11 +444,11 @@
 		var i, len,
 			// For ids from ve.dm.MWParameterModel, compare against the part id
 			// of the parameter instead of the entire model id (e.g. "part_1" instead of "part_1/foo").
-			partId = id.split( '/' )[0];
+			partId = id.split( '/' )[ 0 ];
 
 		for ( i = 0, len = this.parts.length; i < len; i++ ) {
-			if ( this.parts[i].getId() === partId ) {
-				return this.parts[i];
+			if ( this.parts[ i ].getId() === partId ) {
+				return this.parts[ i ];
 			}
 		}
 		return null;
@@ -468,7 +468,7 @@
 			index = 0;
 
 		for ( i = 0, iLen = parts.length; i < iLen; i++ ) {
-			part = parts[i];
+			part = parts[ i ];
 			if ( part === model ) {
 				return index;
 			}
@@ -476,7 +476,7 @@
 			if ( part instanceof ve.dm.MWTemplateModel ) {
 				names = part.getParameterNames();
 				for ( j = 0, jLen = names.length; j < jLen; j++ ) {
-					if ( part.getParameter( names[j] ) === model ) {
+					if ( part.getParameter( names[ j ] ) === model ) {
 						return index;
 					}
 					index++;

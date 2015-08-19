@@ -47,7 +47,7 @@ ve.dm.TableRowNode.static.childNodeTypes.push( 'mwTransclusionTableCell' );
 ve.dm.MWTableNode.static.toDataElement = function ( domElements ) {
 	var attributes = {},
 		dataElement = { type: this.name },
-		classAttr = domElements[0].getAttribute( 'class' );
+		classAttr = domElements[ 0 ].getAttribute( 'class' );
 
 	this.setClassAttributes( attributes, classAttr );
 

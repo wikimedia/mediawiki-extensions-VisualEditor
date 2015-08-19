@@ -169,13 +169,13 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 	}
 
 	for ( i = 0, len = items.length; i < len; i++ ) {
-		title = new mw.Title( items[i].title ).getMainText();
+		title = new mw.Title( items[ i ].title ).getMainText();
 		// Do not insert duplicates
 		if ( !Object.prototype.hasOwnProperty.call( this.itemCache, title ) ) {
-			this.itemCache[title] = true;
+			this.itemCache[ title ] = true;
 			resultWidgets.push(
 				new ve.ui.MWMediaResultWidget( {
-					data: items[i],
+					data: items[ i ],
 					rowHeight: this.rowHeight,
 					maxWidth: this.results.$element.width() / 3,
 					minWidth: 30,
@@ -248,10 +248,10 @@ ve.ui.MWMediaSearchWidget.prototype.lazyLoadResults = function () {
 
 	// Lazy-load results
 	for ( i = 0; i < items.length; i++ ) {
-		elementTop = items[i].$element.position().top;
-		if ( elementTop <= position && !items[i].hasSrc() ) {
+		elementTop = items[ i ].$element.position().top;
+		if ( elementTop <= position && !items[ i ].hasSrc() ) {
 			// Load the image
-			items[i].lazyLoad();
+			items[ i ].lazyLoad();
 		}
 	}
 };
@@ -264,7 +264,7 @@ ve.ui.MWMediaSearchWidget.prototype.resetRows = function () {
 	var i, len;
 
 	for ( i = 0, len = this.rows.length; i < len; i++ ) {
-		this.rows[i].$element.remove();
+		this.rows[ i ].$element.remove();
 	}
 
 	this.rows = [];
@@ -286,9 +286,9 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 		row = this.rows.length - 1;
 	}
 
-	if ( !this.rows[row] ) {
+	if ( !this.rows[ row ] ) {
 		// Create new row
-		this.rows[row] = {
+		this.rows[ row ] = {
 			isFull: false,
 			width: 0,
 			items: [],
@@ -301,11 +301,11 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 					.attr( 'data-full', false )
 		};
 		// Append to results
-		this.results.$element.append( this.rows[row].$element );
-	} else if ( this.rows[row].isFull ) {
+		this.results.$element.append( this.rows[ row ].$element );
+	} else if ( this.rows[ row ].isFull ) {
 		row++;
 		// Create new row
-		this.rows[row] = {
+		this.rows[ row ] = {
 			isFull: false,
 			width: 0,
 			items: [],
@@ -318,7 +318,7 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 				.attr( 'data-full', false )
 		};
 		// Append to results
-		this.results.$element.append( this.rows[row].$element );
+		this.results.$element.append( this.rows[ row ].$element );
 	}
 
 	return row;
@@ -343,25 +343,25 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
 		// Go over the added items
 		row = search.getAvailableRow();
 		for ( i = 0, ilen = items.length; i < ilen; i++ ) {
-			itemWidth = items[i].$element.outerWidth( true );
+			itemWidth = items[ i ].$element.outerWidth( true );
 
 			// Add items to row until it is full
-			if ( search.rows[row].width + itemWidth >= maxRowWidth ) {
+			if ( search.rows[ row ].width + itemWidth >= maxRowWidth ) {
 				// Mark this row as full
-				search.rows[row].isFull = true;
-				search.rows[row].$element.attr( 'data-full', true );
+				search.rows[ row ].isFull = true;
+				search.rows[ row ].$element.attr( 'data-full', true );
 
 				// Find the resize factor
-				effectiveWidth = search.rows[row].width;
+				effectiveWidth = search.rows[ row ].width;
 				resizeFactor = maxRowWidth / effectiveWidth;
 
-				search.rows[row].$element.attr( 'data-effectiveWidth', effectiveWidth );
-				search.rows[row].$element.attr( 'data-resizeFactor', resizeFactor );
-				search.rows[row].$element.attr( 'data-row', row );
+				search.rows[ row ].$element.attr( 'data-effectiveWidth', effectiveWidth );
+				search.rows[ row ].$element.attr( 'data-resizeFactor', resizeFactor );
+				search.rows[ row ].$element.attr( 'data-row', row );
 
 				// Resize all images in the row to fit the width
-				for ( j = 0, jlen = search.rows[row].items.length; j < jlen; j++ ) {
-					search.rows[row].items[j].resizeThumb( resizeFactor );
+				for ( j = 0, jlen = search.rows[ row ].items.length; j < jlen; j++ ) {
+					search.rows[ row ].items[ j ].resizeThumb( resizeFactor );
 				}
 
 				// find another row
@@ -369,14 +369,14 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
 			}
 
 			// Add the commulative
-			search.rows[row].width += itemWidth;
+			search.rows[ row ].width += itemWidth;
 
 			// Store reference to the item and to the row
-			search.rows[row].items.push( items[i] );
-			items[i].setRow( row );
+			search.rows[ row ].items.push( items[ i ] );
+			items[ i ].setRow( row );
 
 			// Append the item
-			search.rows[row].$element.append( items[i].$element );
+			search.rows[ row ].$element.append( items[ i ].$element );
 		}
 
 		// If we have less than 4 rows, call for more images

@@ -308,7 +308,7 @@ ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 		if ( aboutDoc ) {
 			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
 			if ( docRevIdMatches.length >= 2 ) {
-				docRevId = parseInt( docRevIdMatches[1] );
+				docRevId = parseInt( docRevIdMatches[ 1 ] );
 			}
 		}
 		if ( docRevId !== this.revid ) {
@@ -343,14 +343,14 @@ ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 			// Format expected by LinkCache: { title: { missing: true|false } }
 			linkData = {};
 			for ( i = 0, len = data.links.missing.length; i < len; i++ ) {
-				linkData[data.links.missing[i]] = { missing: true };
+				linkData[ data.links.missing[ i ] ] = { missing: true };
 			}
 			if ( data.links.known === 1 ) {
 				// Set back to false by onReady()
 				ve.init.platform.linkCache.setAssumeExistence( true );
 			} else {
 				for ( i = 0, len = data.links.known.length; i < len; i++ ) {
-					linkData[data.links.known[i]] = { missing: false };
+					linkData[ data.links.known[ i ] ] = { missing: false };
 				}
 			}
 			ve.init.platform.linkCache.setMissing( linkData );
@@ -533,7 +533,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 				var userMsg,
 					userInfo = data.query && data.query.userinfo,
 					pageInfo = data.query && data.query.pages && data.query.pageids &&
-						data.query.pageids[0] && data.query.pages[ data.query.pageids[0] ],
+						data.query.pageids[ 0 ] && data.query.pages[ data.query.pageids[ 0 ] ],
 					editToken = pageInfo && pageInfo.edittoken,
 					isAnon = mw.user.isAnon();
 
@@ -1041,7 +1041,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
 
 	if ( Array.isArray( tools ) ) {
 		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
-			item = tools[i];
+			item = tools[ i ];
 			data = { template: item.template };
 
 			// Generate citation tool
@@ -1111,13 +1111,13 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
 	function copyAttributes( from, to ) {
 		var i, len;
 		for ( i = 0, len = from.attributes.length; i < len; i++ ) {
-			to.setAttribute( from.attributes[i].name, from.attributes[i].value );
+			to.setAttribute( from.attributes[ i ].name, from.attributes[ i ].value );
 		}
 	}
 
 	// Copy the head from the old document
 	for ( i = 0, len = oldDoc.head.childNodes.length; i < len; i++ ) {
-		newDoc.head.appendChild( oldDoc.head.childNodes[i].cloneNode( true ) );
+		newDoc.head.appendChild( oldDoc.head.childNodes[ i ].cloneNode( true ) );
 	}
 	// Copy attributes from the old document for the html, head and body
 	copyAttributes( oldDoc.documentElement, newDoc.documentElement );
@@ -1488,9 +1488,9 @@ ve.init.mw.Target.prototype.getSaveOptions = function () {
 		};
 
 	for ( key in fieldMap ) {
-		if ( options[key] !== undefined ) {
-			options[fieldMap[key]] = options[key];
-			delete options[key];
+		if ( options[ key ] !== undefined ) {
+			options[ fieldMap[ key ] ] = options[ key ];
+			delete options[ key ];
 		}
 	}
 
@@ -1591,7 +1591,7 @@ ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
 		}, fields );
 	// Add params as hidden fields
 	for ( key in params ) {
-		$form.append( $( '<input>' ).attr( { type: 'hidden', name: key, value: params[key] } ) );
+		$form.append( $( '<input>' ).attr( { type: 'hidden', name: key, value: params[ key ] } ) );
 	}
 	// Submit the form, mimicking a traditional edit
 	// Firefox requires the form to be attached
@@ -1856,7 +1856,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 	while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
 		lastHeadingLevel = offsetNode.getModel().getAttribute( 'level' );
 		// Next sibling
-		nextNode = offsetNode.parent.children[offsetNode.parent.children.indexOf( offsetNode ) + 1];
+		nextNode = offsetNode.parent.children[ offsetNode.parent.children.indexOf( offsetNode ) + 1 ];
 		if ( !nextNode ) {
 			break;
 		}
@@ -1871,7 +1871,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
 		surfaceModel.setLinearSelection( new ve.Range( offset ) );
 		// Focussing the document triggers showSelection which calls scrollIntoView
 		// which uses a jQuery animation, so make sure this is aborted.
-		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[0] ) ).stop( true );
+		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[ 0 ] ) ).stop( true );
 		target.scrollToHeading( headingNode );
 	} );
 };

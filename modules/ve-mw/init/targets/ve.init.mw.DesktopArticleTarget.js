@@ -275,7 +275,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 			}
 			checkbox = new OO.ui.CheckboxInputWidget( {
 				value: $this.attr( 'value' ),
-				selected: name && defaults[name]
+				selected: name && defaults[ name ]
 			} );
 			// HACK: CheckboxInputWidget doesn't support access keys
 			checkbox.$input.attr( 'accesskey', $( this ).attr( 'accesskey' ) );
@@ -286,7 +286,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 					title: title
 				} )
 			);
-			target.checkboxesByName[name] = checkbox;
+			target.checkboxesByName[ name ] = checkbox;
 		} );
 		this.$otherFields = $checkboxes.find( 'input[type!=checkbox]' );
 	}
@@ -810,15 +810,15 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
 	var name, fieldValues = {};
 
 	for ( name in this.checkboxesByName ) {
-		if ( this.checkboxesByName[name].isSelected() ) {
-			fieldValues[name] = this.checkboxesByName[name].getValue();
+		if ( this.checkboxesByName[ name ].isSelected() ) {
+			fieldValues[ name ] = this.checkboxesByName[ name ].getValue();
 		}
 	}
 	this.$otherFields.each( function () {
 		var $this = $( this ),
 			name = $this.prop( 'name' );
 		if ( name ) {
-			fieldValues[name] = $this.val();
+			fieldValues[ name ] = $this.val();
 		}
 	} );
 
@@ -1070,7 +1070,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		// If there are any other query parameters left, re-use that uri object.
 		// Otherwise use the canonical style view url (T44553, T102363).
 		keys = Object.keys( uri.query );
-		if ( !keys.length || ( keys.length === 1 && keys[0] === 'title' ) ) {
+		if ( !keys.length || ( keys.length === 1 && keys[ 0 ] === 'title' ) ) {
 			history.pushState( this.popState, document.title, this.viewUri );
 		} else {
 			history.pushState( this.popState, document.title, uri );

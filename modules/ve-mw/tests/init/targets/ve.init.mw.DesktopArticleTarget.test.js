@@ -181,14 +181,14 @@ QUnit.test( 'compatibility', function ( assert ) {
 
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
-		profile = $.client.profile( { userAgent: cases[i].userAgent, platform: '' } );
+		profile = $.client.profile( { userAgent: cases[ i ].userAgent, platform: '' } );
 		matches = [];
 		for ( list in compatibility ) {
-			if ( $.client.test( compatibility[list], profile, true ) ) {
+			if ( $.client.test( compatibility[ list ], profile, true ) ) {
 				matches.push( list );
 			}
 		}
-		assert.deepEqual( matches, cases[i].matches,
-			cases[i].msg + ': ' + ( cases[i].matches.length ? cases[i].matches.join() : 'greylist (no matches)' ) );
+		assert.deepEqual( matches, cases[ i ].matches,
+			cases[ i ].msg + ': ' + ( cases[ i ].matches.length ? cases[ i ].matches.join() : 'greylist (no matches)' ) );
 	}
 } );

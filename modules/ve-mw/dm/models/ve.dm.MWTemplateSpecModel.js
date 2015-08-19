@@ -56,16 +56,16 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 	if ( ve.isPlainObject( data.params ) ) {
 		for ( key in data.params ) {
 			// Pre-fill spec
-			if ( !this.params[key] ) {
-				this.params[key] = this.getDefaultParameterSpec( key );
+			if ( !this.params[ key ] ) {
+				this.params[ key ] = this.getDefaultParameterSpec( key );
 			}
-			param = this.params[key];
+			param = this.params[ key ];
 			// Extend existing spec
-			ve.extendObject( true, this.params[key], data.params[key] );
+			ve.extendObject( true, this.params[ key ], data.params[ key ] );
 			// Add aliased references
 			if ( param.aliases.length ) {
 				for ( i = 0, len = param.aliases.length; i < len; i++ ) {
-					this.params[ param.aliases[i] ] = param;
+					this.params[ param.aliases[ i ] ] = param;
 				}
 			}
 		}
@@ -87,8 +87,8 @@ ve.dm.MWTemplateSpecModel.prototype.fill = function () {
 	var key;
 
 	for ( key in this.template.getParameters() ) {
-		if ( key && !this.params[key] ) {
-			this.params[key] = this.getDefaultParameterSpec( key );
+		if ( key && !this.params[ key ] ) {
+			this.params[ key ] = this.getDefaultParameterSpec( key );
 		}
 	}
 };
@@ -164,7 +164,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterOrder = function () {
  * @returns {boolean} Parameter name is known
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterKnown = function ( name ) {
-	return this.params[name] !== undefined;
+	return this.params[ name ] !== undefined;
 };
 
 /**
@@ -174,7 +174,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterKnown = function ( name ) {
  * @returns {boolean} Parameter name is an alias
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
-	return this.params[name] !== undefined && this.params[name].name !== name;
+	return this.params[ name ] !== undefined && this.params[ name ].name !== name;
 };
 
 /**
@@ -185,7 +185,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
  * @returns {string} Parameter label
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) {
-	var value = this.params[name].label || name;
+	var value = this.params[ name ].label || name;
 	return ve.isPlainObject( value ) ? OO.ui.getLocalValue( value, lang ) : value;
 };
 
@@ -197,7 +197,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) 
  * @returns {string|null} Parameter description
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, lang ) {
-	var value = this.params[name].description;
+	var value = this.params[ name ].description;
 	return ve.isPlainObject( value ) ? OO.ui.getLocalValue( value, lang ) : value;
 };
 
@@ -208,7 +208,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, l
  * @returns {string} Default parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
-	return this.params[name].default;
+	return this.params[ name ].default;
 };
 
 /**
@@ -219,7 +219,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
  * @returns {string} Example parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, lang ) {
-	var value = this.params[name].example;
+	var value = this.params[ name ].example;
 	return ve.isPlainObject( value ) ? OO.ui.getLocalValue( value, lang ) : value;
 };
 
@@ -230,7 +230,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
  * @returns {string} Auto-value for the parameter
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
-	return this.params[name].autovalue;
+	return this.params[ name ].autovalue;
 };
 
 /**
@@ -240,7 +240,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
  * @returns {string} Parameter type
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
-	return this.params[name].type;
+	return this.params[ name ].type;
 };
 
 /**
@@ -250,7 +250,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
  * @returns {string[]} Alternate parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
-	return this.params[name].aliases;
+	return this.params[ name ].aliases;
 };
 
 /**
@@ -262,7 +262,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
  * @returns {string} Parameter name
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterName = function ( name ) {
-	return this.params[name].name;
+	return this.params[ name ].name;
 };
 
 /**
@@ -272,7 +272,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterName = function ( name ) {
  * @returns {boolean} Parameter is required
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
-	return !!this.params[name].required;
+	return !!this.params[ name ].required;
 };
 
 /**
@@ -282,7 +282,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
  * @returns {boolean} Parameter is suggested
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
-	return !!this.params[name].suggested;
+	return !!this.params[ name ].suggested;
 };
 
 /**
@@ -292,7 +292,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
  * @returns {boolean} Parameter is deprecated
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
-	return this.params[name].deprecated !== false;
+	return this.params[ name ].deprecated !== false;
 };
 
 /**
@@ -303,8 +303,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
  *   deprecated or no description has been specified
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = function ( name ) {
-	return typeof this.params[name].deprecated === 'string' ?
-		this.params[name].deprecated : '';
+	return typeof this.params[ name ].deprecated === 'string' ?
+		this.params[ name ].deprecated : '';
 };
 
 /**
@@ -317,7 +317,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
 		names = [];
 
 	for ( name in this.params ) {
-		if ( this.params[name].name === name ) {
+		if ( this.params[ name ].name === name ) {
 			names.push( name );
 		}
 	}

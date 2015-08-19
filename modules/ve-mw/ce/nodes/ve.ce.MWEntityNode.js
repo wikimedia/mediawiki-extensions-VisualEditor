@@ -51,7 +51,7 @@ ve.ce.MWEntityNode.prototype.onUpdate = function () {
 		whitespaceHtmlChars = ve.ce.TextNode.whitespaceHtmlCharacters,
 		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();
 	if ( !significantWhitespace && Object.prototype.hasOwnProperty.call( whitespaceHtmlChars, chr ) ) {
-		chr = whitespaceHtmlChars[chr];
+		chr = whitespaceHtmlChars[ chr ];
 	}
 	this.$element.text( chr );
 };

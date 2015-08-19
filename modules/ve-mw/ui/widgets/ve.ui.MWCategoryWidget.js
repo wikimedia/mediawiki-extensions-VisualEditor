@@ -37,7 +37,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.popup = new ve.ui.MWCategoryPopupWidget();
 	this.input = new ve.ui.MWCategoryInputWidget( this, { $overlay: config.$overlay } );
 	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( 14 ) === -1;
-	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )['14'] + ':';
+	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )[ '14' ] + ':';
 
 	// Events
 	this.input.connect( this, { choose: 'onInputChoose' } );
@@ -103,9 +103,9 @@ ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 			// Remove existing items by name
 			var toRemove = mw.Title.newFromText( categoryItem.name ).getMainText();
 			if ( Object.prototype.hasOwnProperty.call( widget.categories, toRemove ) ) {
-				widget.categories[toRemove].metaItem.remove();
+				widget.categories[ toRemove ].metaItem.remove();
 			}
-			categoryItem.name = normalisedTitles[categoryItem.name] || categoryItem.name;
+			categoryItem.name = normalisedTitles[ categoryItem.name ] || categoryItem.name;
 			widget.emit( 'newCategory', categoryItem );
 		} );
 	}
@@ -148,9 +148,9 @@ ve.ui.MWCategoryWidget.prototype.getCategoryItemFromValue = function ( value ) {
 ve.ui.MWCategoryWidget.prototype.onReorder = function ( item, newIndex ) {
 	// Compute afterCategory before removing, otherwise newIndex
 	// could be off by one
-	var afterCategory = this.items[newIndex] && this.items[newIndex].metaItem;
+	var afterCategory = this.items[ newIndex ] && this.items[ newIndex ].metaItem;
 	if ( Object.prototype.hasOwnProperty.call( this.categories, item.value ) ) {
-		this.categories[item.value].metaItem.remove();
+		this.categories[ item.value ].metaItem.remove();
 	}
 
 	this.emit( 'newCategory', item, afterCategory );
@@ -163,8 +163,8 @@ ve.ui.MWCategoryWidget.prototype.onReorder = function ( item, newIndex ) {
  * @param {string} name category name
  */
 ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
-	this.categories[name].metaItem.remove();
-	delete this.categories[name];
+	this.categories[ name ].metaItem.remove();
+	delete this.categories[ name ];
 };
 
 /**
@@ -175,8 +175,8 @@ ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
  * @param {string} value
  */
 ve.ui.MWCategoryWidget.prototype.onUpdateSortkey = function ( name, value ) {
-	this.categories[name].sortKey = value;
-	this.emit( 'updateSortkey', this.categories[name] );
+	this.categories[ name ].sortKey = value;
+	this.emit( 'updateSortkey', this.categories[ name ] );
 };
 
 /**
@@ -263,7 +263,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 			normalisedTitles = {};
 		if ( result && result.query && result.query.pages ) {
 			$.each( result.query.pages, function ( index, pageInfo ) {
-				linkCacheUpdate[pageInfo.title] = {
+				linkCacheUpdate[ pageInfo.title ] = {
 					missing: Object.prototype.hasOwnProperty.call( pageInfo, 'missing' ),
 					hidden: pageInfo.pageprops &&
 						Object.prototype.hasOwnProperty.call( pageInfo.pageprops, 'hiddencat' )
@@ -272,14 +272,14 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 		}
 		if ( result && result.query && result.query.redirects ) {
 			$.each( result.query.redirects, function ( index, redirectInfo ) {
-				categoryWidget.categoryRedirects[redirectInfo.from] = redirectInfo.to;
+				categoryWidget.categoryRedirects[ redirectInfo.from ] = redirectInfo.to;
 			} );
 		}
 		ve.init.platform.linkCache.set( linkCacheUpdate );
 
 		if ( result.query && result.query.normalized ) {
 			$.each( result.query.normalized, function ( index, normalisation ) {
-				normalisedTitles[normalisation.from] = normalisation.to;
+				normalisedTitles[ normalisation.from ] = normalisation.to;
 			} );
 		}
 
@@ -311,8 +311,8 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			};
 
 		for ( i = 0, len = items.length; i < len; i++ ) {
-			item = items[i];
-			item.name = normalisedTitles[item.name] || item.name;
+			item = items[ i ];
+			item.name = normalisedTitles[ item.name ] || item.name;
 
 			itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category );
 			// Create a widget using the item data
@@ -321,10 +321,10 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			};
 			if ( Object.prototype.hasOwnProperty.call( categoryWidget.categoryRedirects, itemTitle.getPrefixedText() ) ) {
 				config.redirectTo = new mw.Title(
-					categoryWidget.categoryRedirects[itemTitle.getPrefixedText()],
+					categoryWidget.categoryRedirects[ itemTitle.getPrefixedText() ],
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
-				cachedData = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[itemTitle.getPrefixedText()] );
+				cachedData = ve.init.platform.linkCache.getCached( categoryWidget.categoryRedirects[ itemTitle.getPrefixedText() ] );
 			} else {
 				cachedData = ve.init.platform.linkCache.getCached( item.name );
 			}
@@ -338,13 +338,13 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			} );
 
 			// Index item
-			categoryWidget.categories[itemTitle.getMainText()] = categoryItem;
+			categoryWidget.categories[ itemTitle.getMainText() ] = categoryItem;
 			// Copy sortKey from old item when "moving"
 			existingCategoryItems = $.grep( categoryWidget.items, checkValueMatches );
 			if ( existingCategoryItems.length ) {
 				// There should only be one element in existingCategoryItems
-				categoryItem.sortKey = existingCategoryItems[0].sortKey;
-				categoryWidget.removeItems( [ existingCategoryItems[0] ] );
+				categoryItem.sortKey = existingCategoryItems[ 0 ].sortKey;
+				categoryWidget.removeItems( [ existingCategoryItems[ 0 ] ] );
 			}
 
 			categoryItems.push( categoryItem );
@@ -363,11 +363,11 @@ ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
 	var i, len, categoryItem;
 
 	for ( i = 0, len = items.length; i < len; i++ ) {
-		categoryItem = items[i];
+		categoryItem = items[ i ];
 		if ( categoryItem ) {
 			categoryItem.disconnect( this );
 			items.push( categoryItem );
-			delete this.categories[categoryItem.value];
+			delete this.categories[ categoryItem.value ];
 		}
 	}
 

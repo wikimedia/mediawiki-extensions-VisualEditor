@@ -33,14 +33,14 @@ ve.dm.MWHeadingNode.static.suggestedParentNodeTypes = [ 'document', 'tableCell' 
 ve.dm.MWHeadingNode.static.handlesOwnChildren = true;
 
 ve.dm.MWHeadingNode.static.toDataElement = function ( domElements, converter ) {
-	var shouldConvert = this.shouldConvertToParagraph( domElements[0] ),
+	var shouldConvert = this.shouldConvertToParagraph( domElements[ 0 ] ),
 		parentResult = ve.dm.MWHeadingNode.super.static.toDataElement.apply( this, arguments );
 	parentResult.type = this.name;
 	if ( shouldConvert ) {
 		ve.setProp( parentResult, 'attributes', 'noconvert', true );
 	}
 	return converter.getDataFromDomSubtree(
-		domElements[0],
+		domElements[ 0 ],
 		parentResult,
 		new ve.dm.AnnotationSet( converter.getStore() )
 	);
@@ -48,19 +48,19 @@ ve.dm.MWHeadingNode.static.toDataElement = function ( domElements, converter ) {
 
 ve.dm.MWHeadingNode.static.toDomElements = function ( dataElements, doc, converter ) {
 	var paragraph,
-		parentResult = ve.dm.MWHeadingNode.super.static.toDomElements.call( this, dataElements[0], doc, converter );
-	converter.getDomSubtreeFromData( dataElements.slice( 1, -1 ), parentResult[0] );
+		parentResult = ve.dm.MWHeadingNode.super.static.toDomElements.call( this, dataElements[ 0 ], doc, converter );
+	converter.getDomSubtreeFromData( dataElements.slice( 1, -1 ), parentResult[ 0 ] );
 
 	if (
-		( !dataElements[0].attributes || !dataElements[0].attributes.noconvert ) &&
-		this.shouldConvertToParagraph( parentResult[0] )
+		( !dataElements[ 0 ].attributes || !dataElements[ 0 ].attributes.noconvert ) &&
+		this.shouldConvertToParagraph( parentResult[ 0 ] )
 	) {
 		// Change parentResult[0] to a paragraph
 		paragraph = doc.createElement( 'p' );
-		while ( parentResult[0].firstChild ) {
-			paragraph.appendChild( parentResult[0].firstChild );
+		while ( parentResult[ 0 ].firstChild ) {
+			paragraph.appendChild( parentResult[ 0 ].firstChild );
 		}
-		parentResult[0] = paragraph;
+		parentResult[ 0 ] = paragraph;
 	}
 
 	return parentResult;
@@ -83,7 +83,7 @@ ve.dm.MWHeadingNode.static.shouldConvertToParagraph = function ( headingElement 
 	function containsNonWhitespace( el ) {
 		var i, len, childNode;
 		for ( i = 0, len = el.childNodes.length; i < len; i++ ) {
-			childNode = el.childNodes[i];
+			childNode = el.childNodes[ i ];
 			if (
 				childNode.nodeType === Node.TEXT_NODE &&
 				childNode.data.match( /\S/ )

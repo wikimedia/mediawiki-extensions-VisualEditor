@@ -63,9 +63,9 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			if ( attributes && !ve.isEmptyObject( attributes ) ) {
 				for ( key in attributes ) {
 					attributeInput = new OO.ui.TextInputWidget( {
-						value: attributes[key]
+						value: attributes[ key ]
 					} );
-					this.attributeInputs[key] = attributeInput;
+					this.attributeInputs[ key ] = attributeInput;
 					field = new OO.ui.FieldLayout(
 						attributeInput,
 						{
@@ -103,7 +103,7 @@ ve.ui.MWAlienExtensionInspector.prototype.updateMwData = function ( mwData ) {
 		// Make sure we have an attrs object to populate
 		mwData.attrs = mwData.attrs || {};
 		for ( key in this.attributeInputs ) {
-			mwData.attrs[key] = this.attributeInputs[key].getValue();
+			mwData.attrs[ key ] = this.attributeInputs[ key ].getValue();
 		}
 	}
 };

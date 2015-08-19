@@ -93,7 +93,7 @@ ve.ui.MWExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			if ( this.selectedNode ) {
 				this.input.setValueAndWhitespace( this.selectedNode.getAttribute( 'mw' ).body.extsrc );
 			} else {
-				if ( !this.constructor.static.modelClasses[0].static.isContent ) {
+				if ( !this.constructor.static.modelClasses[ 0 ].static.isContent ) {
 					// New nodes should use linebreaks for blocks
 					this.input.setWhitespace( [ '\n', '\n' ] );
 				}
@@ -142,7 +142,7 @@ ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 ve.ui.MWExtensionInspector.prototype.getNewElement = function () {
 	// Extension inspectors which create elements should either match
 	// a single modelClass or override this method.
-	var modelClass = this.constructor.static.modelClasses[0];
+	var modelClass = this.constructor.static.modelClasses[ 0 ];
 	return {
 		type: modelClass.static.name,
 		attributes: {
@@ -206,5 +206,5 @@ ve.ui.MWExtensionInspector.prototype.updateMwData = function ( mwData ) {
 	// Prevent that by escaping the first angle bracket '<' to '&lt;'. (bug 57429)
 	value = value.replace( new RegExp( '<(/' + tagName + '\\s*>)', 'gi' ), '&lt;$1' );
 
-	mwData.body.extsrc = this.whitespace[0] + value + this.whitespace[1];
+	mwData.body.extsrc = this.whitespace[ 0 ] + value + this.whitespace[ 1 ];
 };

@@ -65,7 +65,7 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
 
 	for ( key in data.params ) {
 		template.addParameter(
-			new ve.dm.MWParameterModel( template, key, data.params[key].wt )
+			new ve.dm.MWParameterModel( template, key, data.params[ key ].wt )
 		);
 	}
 
@@ -146,7 +146,7 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
  * @returns {ve.dm.MWParameterModel} Parameter
  */
 ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
-	return this.params[name];
+	return this.params[ name ];
 };
 
 /**
@@ -159,7 +159,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	var i, len, primaryName, names;
 
 	// Check if name (which may be an alias) is present in the template
-	if ( this.params[name] ) {
+	if ( this.params[ name ] ) {
 		return true;
 	}
 
@@ -167,13 +167,13 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	if ( this.spec.isParameterKnown( name ) ) {
 		primaryName = this.spec.getParameterName( name );
 		// Check for primary name (may be the same as name)
-		if ( this.params[primaryName] ) {
+		if ( this.params[ primaryName ] ) {
 			return true;
 		}
 		// Check for other aliases (may include name)
 		names = this.spec.getParameterAliases( primaryName );
 		for ( i = 0, len = names.length; i < len; i++ ) {
-			if ( this.params[names[i]] ) {
+			if ( this.params[ names[ i ] ] ) {
 				return true;
 			}
 		}
@@ -200,9 +200,9 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 		this.sequence = [];
 		// Known parameters first
 		for ( i = 0, len = paramOrder.length; i < len; i++ ) {
-			index = paramNames.indexOf( paramOrder[i] );
+			index = paramNames.indexOf( paramOrder[ i ] );
 			if ( index !== -1 ) {
-				this.sequence.push( paramOrder[i] );
+				this.sequence.push( paramOrder[ i ] );
 				paramNames.splice( index, 1 );
 			}
 		}
@@ -246,8 +246,8 @@ ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
 	var name;
 
 	for ( name in this.params ) {
-		if ( this.params[name].getId() === id ) {
-			return this.params[name];
+		if ( this.params[ name ].getId() === id ) {
+			return this.params[ name ];
 		}
 	}
 
@@ -263,7 +263,7 @@ ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	var name = param.getName();
 	this.sequence = null;
-	this.params[name] = param;
+	this.params[ name ] = param;
 	this.spec.fill();
 	param.connect( this, { change: [ 'emit', 'change' ] } );
 	this.emit( 'add', param );
@@ -279,7 +279,7 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
 	if ( param ) {
 		this.sequence = null;
-		delete this.params[param.getName()];
+		delete this.params[ param.getName() ];
 		param.disconnect( this );
 		this.emit( 'remove', param );
 		this.emit( 'change' );
@@ -299,13 +299,13 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 
 	for ( i = 0, len = names.length; i < len; i++ ) {
 		if (
-				!this.params[name] &&
+				!this.params[ name ] &&
 				(
-					spec.isParameterRequired( names[i] ) ||
-					spec.isParameterSuggested( names[i] )
+					spec.isParameterRequired( names[ i ] ) ||
+					spec.isParameterSuggested( names[ i ] )
 				)
 			) {
-			this.addParameter( new ve.dm.MWParameterModel( this, names[i] ) );
+			this.addParameter( new ve.dm.MWParameterModel( this, names[ i ] ) );
 			addedCount++;
 		}
 	}
@@ -336,11 +336,11 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		if ( name === '' ) {
 			continue;
 		}
-		origName = params[name].getOriginalName();
-		template.params[origName] = ve.extendObject(
+		origName = params[ name ].getOriginalName();
+		template.params[ origName ] = ve.extendObject(
 			{},
-			origParams[origName],
-			{ wt: params[name].getValue() }
+			origParams[ origName ],
+			{ wt: params[ name ].getValue() }
 		);
 
 	}
@@ -364,7 +364,7 @@ ve.dm.MWTemplateModel.prototype.getWikitext = function () {
 			continue;
 		}
 		wikitext += '|' + param + '=' +
-			ve.dm.MWTransclusionNode.static.escapeParameter( params[param].getValue() );
+			ve.dm.MWTransclusionNode.static.escapeParameter( params[ param ].getValue() );
 	}
 
 	return '{{' + wikitext + '}}';

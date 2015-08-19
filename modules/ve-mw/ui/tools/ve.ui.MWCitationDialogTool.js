@@ -51,10 +51,10 @@ ve.ui.MWCitationDialogTool.static.isCompatibleWith = function ( model ) {
 		// this.template
 		internalItem = model.getInternalItem();
 		branches = internalItem.getChildren();
-		if ( branches.length === 1 && branches[0].canContainContent() ) {
-			leaves = branches[0].getChildren();
-			if ( leaves.length === 1 && leaves[0] instanceof ve.dm.MWTransclusionNode ) {
-				return leaves[0].isSingleTemplate( this.template );
+		if ( branches.length === 1 && branches[ 0 ].canContainContent() ) {
+			leaves = branches[ 0 ].getChildren();
+			if ( leaves.length === 1 && leaves[ 0 ] instanceof ve.dm.MWTransclusionNode ) {
+				return leaves[ 0 ].isSingleTemplate( this.template );
 			}
 		}
 		return false;

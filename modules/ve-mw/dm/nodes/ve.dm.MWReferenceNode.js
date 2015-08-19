@@ -65,7 +65,7 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 	}
 
 	var dataElement,
-		mwDataJSON = domElements[0].getAttribute( 'data-mw' ),
+		mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		reflistItemId = mwData.body && mwData.body.id,
 		body = ( mwData.body && mwData.body.html ) ||
@@ -118,7 +118,7 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 
 	keyedNodes = converter.internalList
 		.getNodeGroup( dataElement.attributes.listGroup )
-		.keyedNodes[dataElement.attributes.listKey];
+		.keyedNodes[ dataElement.attributes.listKey ];
 
 	if ( setContents ) {
 		// Check if a previous node has already set the content. If so, we don't overwrite this
@@ -126,10 +126,10 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		contentsAlreadySet = false;
 		if ( keyedNodes ) {
 			for ( i = 0, iLen = keyedNodes.length; i < iLen; i++ ) {
-				if ( keyedNodes[i].element === dataElement ) {
+				if ( keyedNodes[ i ].element === dataElement ) {
 					break;
 				}
-				if ( keyedNodes[i].element.attributes.contentsUsed ) {
+				if ( keyedNodes[ i ].element.attributes.contentsUsed ) {
 					contentsAlreadySet = true;
 					break;
 				}
@@ -140,12 +140,12 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		// then we attach the contents to the first reference with this key
 
 		// Check that this is the first reference with its key
-		if ( keyedNodes && dataElement === keyedNodes[0].element ) {
+		if ( keyedNodes && dataElement === keyedNodes[ 0 ].element ) {
 			setContents = true;
 			// Check no other reference originally defined the contents
 			// As this is keyedNodes[0] we can start at 1
 			for ( i = 1, iLen = keyedNodes.length; i < iLen; i++ ) {
-				if ( keyedNodes[i].element.attributes.contentsUsed ) {
+				if ( keyedNodes[ i ].element.attributes.contentsUsed ) {
 					setContents = false;
 					break;
 				}
@@ -172,7 +172,7 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 
 	// Generate name
 	listKeyParts = dataElement.attributes.listKey.match( this.listKeyRegex );
-	if ( listKeyParts[1] === 'auto' ) {
+	if ( listKeyParts[ 1 ] === 'auto' ) {
 		// Only render a name if this key was reused
 		if ( keyedNodes.length > 1 ) {
 			// Allocate a unique list key, then strip the 'literal/'' prefix
@@ -187,7 +187,7 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		}
 	} else {
 		// Use literal name
-		name = listKeyParts[2];
+		name = listKeyParts[ 2 ];
 	}
 	// Set name
 	if ( name !== undefined ) {
@@ -226,11 +226,11 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 ve.dm.MWReferenceNode.static.remapInternalListIndexes = function ( dataElement, mapping, internalList ) {
 	var listKeyParts;
 	// Remap listIndex
-	dataElement.attributes.listIndex = mapping[dataElement.attributes.listIndex];
+	dataElement.attributes.listIndex = mapping[ dataElement.attributes.listIndex ];
 
 	// Remap listKey if it was automatically generated
 	listKeyParts = dataElement.attributes.listKey.match( this.listKeyRegex );
-	if ( listKeyParts[1] === 'auto' ) {
+	if ( listKeyParts[ 1 ] === 'auto' ) {
 		dataElement.attributes.listKey = 'auto/' + internalList.getNextUniqueNumber();
 	}
 };

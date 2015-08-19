@@ -194,7 +194,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.onIndexingOptionChange = function () {
  * @returns {Object|null} Meta item, if any
  */
 ve.ui.MWAdvancedSettingsPage.prototype.getMetaItem = function ( name ) {
-	return this.metaList.getItemsInGroup( name )[0] || null;
+	return this.metaList.getItemsInGroup( name )[ 0 ] || null;
 };
 
 /* New edit section link option methods */

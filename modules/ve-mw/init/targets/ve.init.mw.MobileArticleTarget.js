@@ -86,7 +86,7 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 		blur: 'onSurfaceBlur',
 		focus: 'onSurfaceFocus'
 	} );
-	this[surfaceModel.getSelection().isNull() ? 'onSurfaceBlur' : 'onSurfaceFocus']();
+	this[ surfaceModel.getSelection().isNull() ? 'onSurfaceBlur' : 'onSurfaceFocus' ]();
 
 	this.events.trackActivationComplete();
 };
@@ -173,7 +173,7 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 		)
 	)
 		// Insert title between 'back' and 'advanced'
-		.insertAfter( this.pageToolbar.items[0].$element );
+		.insertAfter( this.pageToolbar.items[ 0 ].$element );
 
 	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar' );
 	this.pageToolbar.$actions.append(

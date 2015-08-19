@@ -37,7 +37,7 @@
 		prefValue = mw.user.options.get( prefName );
 		// Check "0" (T89513)
 		if ( prefValue && prefValue !== '0' ) {
-			modules.push( conf.preferenceModules[prefName] );
+			modules.push( conf.preferenceModules[ prefName ] );
 		}
 	}
 

@@ -59,7 +59,7 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 		words = [];
 
 	for ( i = 0, len = parts.length; i < len; i++ ) {
-		part = parts[i];
+		part = parts[ i ];
 		if ( part.template ) {
 			words.push( part.template );
 		}
@@ -136,8 +136,8 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 	// HACK: if $content consists of a single paragraph, unwrap it.
 	// We have to do this because the PHP parser wraps everything in <p>s, and inline templates
 	// will render strangely when wrapped in <p>s.
-	if ( contentNodes.length === 1 && contentNodes[0].nodeName.toLowerCase() === 'p' ) {
-		contentNodes = Array.prototype.slice.apply( contentNodes[0].childNodes );
+	if ( contentNodes.length === 1 && contentNodes[ 0 ].nodeName.toLowerCase() === 'p' ) {
+		contentNodes = Array.prototype.slice.apply( contentNodes[ 0 ].childNodes );
 	}
 
 	deferred.resolve( contentNodes );

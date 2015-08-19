@@ -81,11 +81,11 @@ ve.init.mw.ApiResponseCache.prototype.get = function ( title ) {
 	}
 	title = this.constructor.static.normalizeTitle( title );
 	if ( !Object.prototype.hasOwnProperty.call( this.deferreds, title ) ) {
-		this.deferreds[title] = $.Deferred();
+		this.deferreds[ title ] = $.Deferred();
 		this.queue.push( title );
 		this.schedule();
 	}
-	return this.deferreds[title].promise();
+	return this.deferreds[ title ].promise();
 };
 
 /**
@@ -97,7 +97,7 @@ ve.init.mw.ApiResponseCache.prototype.get = function ( title ) {
  */
 ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
 	if ( Object.prototype.hasOwnProperty.call( this.cacheValues, name ) ) {
-		return this.cacheValues[name];
+		return this.cacheValues[ name ];
 	}
 };
 
@@ -118,11 +118,11 @@ ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
 	var name;
 	for ( name in entries ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.deferreds, name ) ) {
-			this.deferreds[name] = $.Deferred();
+			this.deferreds[ name ] = $.Deferred();
 		}
-		if ( this.deferreds[name].state() === 'pending' ) {
-			this.deferreds[name].resolve( entries[name] );
-			this.cacheValues[name] = entries[name];
+		if ( this.deferreds[ name ].state() === 'pending' ) {
+			this.deferreds[ name ].resolve( entries[ name ] );
+			this.cacheValues[ name ] = entries[ name ];
 		}
 	}
 	this.emit( 'add', Object.keys( entries ) );
@@ -151,7 +151,7 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 	function rejectSubqueue( rejectQueue ) {
 		var i, len;
 		for ( i = 0, len = rejectQueue.length; i < len; i++ ) {
-			cache.deferreds[rejectQueue[i]].reject();
+			cache.deferreds[ rejectQueue[ i ] ].reject();
 		}
 	}
 
@@ -162,10 +162,10 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 
 		if ( pages ) {
 			for ( pageid in pages ) {
-				page = pages[pageid];
+				page = pages[ pageid ];
 				processedPage = cache.constructor.static.processPage( page );
 				if ( processedPage !== undefined ) {
-					processed[page.title] = processedPage;
+					processed[ page.title ] = processedPage;
 				}
 			}
 			cache.set( processed );

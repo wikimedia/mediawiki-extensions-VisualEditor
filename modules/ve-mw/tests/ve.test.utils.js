@@ -45,20 +45,20 @@ ve.test.utils.mwEnvironment = ( function () {
 	function setupOverrides() {
 		var i;
 		for ( i = 0; i < overrides.length; i++ ) {
-			ve.dm.modelRegistry.register( overrides[i] );
+			ve.dm.modelRegistry.register( overrides[ i ] );
 		}
 		for ( i = 0; i < overridden.length; i++ ) {
-			ve.dm.modelRegistry.unregister( overridden[i] );
+			ve.dm.modelRegistry.unregister( overridden[ i ] );
 		}
 	}
 
 	function teardownOverrides() {
 		var i;
 		for ( i = 0; i < overrides.length; i++ ) {
-			ve.dm.modelRegistry.unregister( overrides[i] );
+			ve.dm.modelRegistry.unregister( overrides[ i ] );
 		}
 		for ( i = 0; i < overridden.length; i++ ) {
-			ve.dm.modelRegistry.register( overridden[i] );
+			ve.dm.modelRegistry.register( overridden[ i ] );
 		}
 	}
 

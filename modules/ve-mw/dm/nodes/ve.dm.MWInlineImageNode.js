@@ -60,7 +60,7 @@ ve.dm.MWInlineImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, attributes,
-		$span = $( domElements[0] ),
+		$span = $( domElements[ 0 ] ),
 		$firstChild = $span.children().first(), // could be <span> or <a>
 		$img = $firstChild.children().first(),
 		typeofAttrs = $span.attr( 'typeof' ).split( ' ' ),
@@ -75,7 +75,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	}
 
 	attributes = {
-		type: this.rdfaToType[typeofAttrs[0]],
+		type: this.rdfaToType[ typeofAttrs[ 0 ] ],
 		src: $img.attr( 'src' ),
 		resource: $img.attr( 'resource' ),
 		originalClasses: classes
@@ -165,11 +165,11 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	if ( !this.typeToRdfa ) {
 		this.typeToRdfa = {};
 		for ( rdfa in this.rdfaToType ) {
-			this.typeToRdfa[this.rdfaToType[rdfa]] = rdfa;
+			this.typeToRdfa[ this.rdfaToType[ rdfa ] ] = rdfa;
 		}
 	}
 
-	span.setAttribute( 'typeof', this.typeToRdfa[data.attributes.type] );
+	span.setAttribute( 'typeof', this.typeToRdfa[ data.attributes.type ] );
 
 	if ( data.attributes.defaultSize ) {
 		classes.push( 'mw-default-size' );

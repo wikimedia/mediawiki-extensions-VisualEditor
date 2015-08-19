@@ -152,7 +152,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
 	var item;
 
 	if ( metaItem.element.type === 'mwCategory' ) {
-		item = this.categoryWidget.categories[this.getCategoryItemFromMetaListItem( metaItem ).value];
+		item = this.categoryWidget.categories[ this.getCategoryItemFromMetaListItem( metaItem ).value ];
 		this.categoryWidget.removeItems( [ item ] );
 	}
 };
@@ -163,7 +163,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
  * @returns {string} Default sort key item
  */
 ve.ui.MWCategoriesPage.prototype.getDefaultSortKeyItem = function () {
-	return this.metaList.getItemsInGroup( 'mwDefaultSort' )[0] || null;
+	return this.metaList.getItemsInGroup( 'mwDefaultSort' )[ 0 ] || null;
 };
 
 /**
@@ -178,7 +178,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItems = function () {
 
 	// Loop through MwCategories and build out items
 	for ( i = 0; i < categories.length; i++ ) {
-		items.push( this.getCategoryItemFromMetaListItem( categories[i] ) );
+		items.push( this.getCategoryItemFromMetaListItem( categories[ i ] ) );
 	}
 	return items;
 };
