@@ -30,6 +30,8 @@
 		plugins = [];
 
 	function showLoading() {
+		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle;
+
 		if ( !init.$loading ) {
 			init.$loading = $(
 				'<div class="ve-init-mw-desktopArticleTarget-loading-overlay">' +
@@ -40,13 +42,14 @@
 				'</div>'
 			);
 		}
-		var $content = $( '#content' ),
-			contentRect = $content[ 0 ].getBoundingClientRect(),
-			offsetTop = $content.offset().top,
-			windowHeight = $( window ).height(),
-			top = Math.max( contentRect.top, 0 ),
-			bottom = Math.min( contentRect.bottom, windowHeight ),
-			middle = ( top + bottom ) / 2;
+
+		$content = $( '#content' );
+		contentRect = $content[ 0 ].getBoundingClientRect();
+		offsetTop = $content.offset().top;
+		windowHeight = $( window ).height();
+		top = Math.max( contentRect.top, 0 );
+		bottom = Math.min( contentRect.bottom, windowHeight );
+		middle = ( top + bottom ) / 2;
 
 		init.$loading.css( 'top', middle - offsetTop );
 
@@ -116,10 +119,12 @@
 					return mw.libs.ve.targetLoader.loadModules();
 				} )
 				.then( function () {
+					var target;
+
 					// Transfer methods
 					ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
 
-					var target = new ve.init.mw.DesktopArticleTarget();
+					target = new ve.init.mw.DesktopArticleTarget();
 					$( '#content' ).append( target.$element );
 					return target;
 				}, function ( e ) {
@@ -278,14 +283,6 @@
 		},
 
 		setupTabs: function () {
-			// HACK: Remove this when the Education Program offers a proper way to detect and disable.
-			if (
-				// HACK: Work around jscs.requireCamelCaseOrUpperCaseIdentifiers
-				mw.config.get( 'wgNamespaceIds' )[ true && 'education_program' ] === mw.config.get( 'wgNamespaceNumber' )
-			) {
-				return;
-			}
-
 			var caVeEdit,
 				action = pageExists ? 'edit' : 'create',
 				pTabsId = $( '#p-views' ).length ? 'p-views' : 'p-cactions',
@@ -296,7 +293,19 @@
 				$caVeEditLink = $caVeEdit.find( 'a' ),
 				reverseTabOrder = $( 'body' ).hasClass( 'rtl' ) && pTabsId === 'p-views',
 				/*jshint bitwise:false */
-				caVeEditNextnode = ( reverseTabOrder ^ conf.tabPosition === 'before' ) ? $caEdit.get( 0 ) : $caEdit.next().get( 0 );
+				caVeEditNextnode =
+					( reverseTabOrder ^ conf.tabPosition === 'before' ) ?
+						/*jshint bitwise:true */
+						$caEdit.get( 0 ) :
+						$caEdit.next().get( 0 );
+
+			// HACK: Remove this when the Education Program offers a proper way to detect and disable.
+			if (
+				// HACK: Work around jscs.requireCamelCaseOrUpperCaseIdentifiers
+				mw.config.get( 'wgNamespaceIds' )[ true && 'education_program' ] === mw.config.get( 'wgNamespaceNumber' )
+			) {
+				return;
+			}
 
 			if ( !$caVeEdit.length ) {
 				// The below duplicates the functionality of VisualEditorHooks::onSkinTemplateNavigation()

@@ -6,12 +6,15 @@
  */
 
 ve.test.utils.createSurfaceFromDocument = function ( doc ) {
+	var target, mwTarget;
+
 	// Prevent the target from setting up the surface immediately
 	ve.init.platform.initialized = $.Deferred();
+
 	// HACK: MW targets are async and heavy, use an SA target but
 	// override the global registration
-	var target = new ve.init.sa.Target(),
-		mwTarget = new ve.init.mw.Target();
+	target = new ve.init.sa.Target();
+	mwTarget = new ve.init.mw.Target();
 
 	$( '#qunit-fixture' ).append( target.$element );
 	target.addSurface( doc );

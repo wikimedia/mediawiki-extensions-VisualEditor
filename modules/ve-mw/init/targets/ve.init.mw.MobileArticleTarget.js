@@ -78,10 +78,12 @@ ve.init.mw.MobileArticleTarget.static.name = 'mobile';
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
+	var surfaceModel;
+
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
 
-	var surfaceModel = this.getSurface().getModel();
+	surfaceModel = this.getSurface().getModel();
 	surfaceModel.connect( this, {
 		blur: 'onSurfaceBlur',
 		focus: 'onSurfaceFocus'

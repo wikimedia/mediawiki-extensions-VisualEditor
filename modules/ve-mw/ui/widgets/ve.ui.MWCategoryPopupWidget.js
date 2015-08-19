@@ -128,10 +128,11 @@ ve.ui.MWCategoryPopupWidget.prototype.openPopup = function ( item ) {
  * @method
  */
 ve.ui.MWCategoryPopupWidget.prototype.onToggle = function ( show ) {
+	var newSortkey;
 	if ( show ) {
 		return;
 	}
-	var newSortkey = this.sortKeyInput.$input.val();
+	newSortkey = this.sortKeyInput.$input.val();
 	if ( !this.removed && newSortkey !== ( this.origSortkey || '' ) ) {
 		this.emit( 'updateSortkey', this.category, this.sortKeyInput.$input.val() );
 	}

@@ -213,31 +213,30 @@ ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = functi
  * @param {Object} [data] Dialog setup data
  */
 ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
-	this.metaList = metaList;
-
-	var // Indexing items
-		indexingField = this.indexing.getField(),
-		indexingOption = this.getMetaItem( 'mwIndex' ),
-		indexingType = indexingOption && indexingOption.element.type || 'default',
-
-		// New section edit link items
-		newSectionEditField = this.newEditSectionLink.getField(),
-		newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' ),
-		newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default',
-
-		displayTitleItem = this.getMetaItem( 'mwDisplayTitle' ),
-		displayTitle = displayTitleItem && displayTitleItem.getAttribute( 'content' ) || '',
-
+	var indexingField, indexingOption, indexingType,
+		newSectionEditField, newSectionEditLinkOption, newSectionEditLinkType,
+		displayTitleItem, displayTitle,
 		advancedSettingsPage = this;
 
+	this.metaList = metaList;
+
 	// Indexing items
+	indexingField = this.indexing.getField();
+	indexingOption = this.getMetaItem( 'mwIndex' );
+	indexingType = indexingOption && indexingOption.element.type || 'default';
 	indexingField.selectItemByData( indexingType );
 	this.indexingOptionTouched = false;
 
 	// New section edit link items
+	newSectionEditField = this.newEditSectionLink.getField();
+	newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' );
+	newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default';
 	newSectionEditField.selectItemByData( newSectionEditLinkType );
 	this.newSectionEditLinkOptionTouched = false;
 
+	// Display title items
+	displayTitleItem = this.getMetaItem( 'mwDisplayTitle' );
+	displayTitle = displayTitleItem && displayTitleItem.getAttribute( 'content' ) || '';
 	this.enableDisplayTitleCheckbox.setSelected( !!displayTitleItem );
 	this.displayTitleInput.setValue( displayTitle );
 	this.displayTitleInput.setDisabled( !displayTitle );
@@ -256,25 +255,20 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
+	var currentIndexingItem, newIndexingData,
+		currentNewSectionEditLinkItem, newNewSectionEditLinkOptionData,
+		currentDisplayTitleItem, newDisplayTitle, newDisplayTitleItemData,
+		advancedSettingsPage = this;
+
 	// Data initialization
 	data = data || {};
 	if ( data.action !== 'apply' ) {
 		return;
 	}
 
-	var // Indexing items
-		currentIndexingItem = this.getMetaItem( 'mwIndex' ),
-		newIndexingData = this.indexing.getField().getSelectedItem(),
-
-		// New section edit link items
-		currentNewSectionEditLinkItem = this.getMetaItem( 'mwNewSectionEdit' ),
-		newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem(),
-
-		currentDisplayTitleItem = this.getMetaItem( 'mwDisplayTitle' ),
-		newDisplayTitle = this.displayTitleInput.getValue(),
-		newDisplayTitleItemData = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } },
-
-		advancedSettingsPage = this;
+	// Indexing items
+	currentIndexingItem = this.getMetaItem( 'mwIndex' );
+	newIndexingData = this.indexing.getField().getSelectedItem();
 
 	// Alter the indexing option flag iff it's been touched & is actually different
 	if ( this.indexingOptionTouched ) {
@@ -296,6 +290,10 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
+	// New section edit link items
+	currentNewSectionEditLinkItem = this.getMetaItem( 'mwNewSectionEdit' );
+	newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem();
+
 	// Alter the new section edit option flag iff it's been touched & is actually different
 	if ( this.newSectionEditLinkOptionTouched ) {
 		if ( newNewSectionEditLinkOptionData.data === 'default' ) {
@@ -316,6 +314,12 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
+	// Display title items
+	currentDisplayTitleItem = this.getMetaItem( 'mwDisplayTitle' );
+	newDisplayTitle = this.displayTitleInput.getValue();
+	newDisplayTitleItemData = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } };
+
+	// Alter the display title flag iff it's been touched & is actually different
 	if ( this.displayTitleTouched ) {
 		if ( currentDisplayTitleItem ) {
 			if ( newDisplayTitle ) {

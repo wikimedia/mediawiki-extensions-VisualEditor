@@ -123,8 +123,9 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		originalMw = dataElement.attributes.originalMw;
 
 	function wrapTextNode( node ) {
+		var wrapper;
 		if ( node.nodeType === Node.TEXT_NODE ) {
-			var wrapper = doc.createElement( 'span' );
+			wrapper = doc.createElement( 'span' );
 			wrapper.appendChild( node );
 			return wrapper;
 		}
@@ -285,12 +286,13 @@ ve.dm.MWTransclusionNode.prototype.isCellable = function () {
  * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
 ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
+	var i, len, partsList = this.getPartsList();
+
 	function normalizeTitle( name ) {
 		var title = mw.Title.newFromText( name );
 		return title ? title.getPrefixedText() : name;
 	}
 
-	var i, len, partsList = this.getPartsList();
 	if ( partsList.length !== 1 ) {
 		return false;
 	}

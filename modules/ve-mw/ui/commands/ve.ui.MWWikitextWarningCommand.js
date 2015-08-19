@@ -30,10 +30,10 @@ OO.inheritClass( ve.ui.MWWikitextWarningCommand, ve.ui.Command );
  * @inheritdoc
  */
 ve.ui.MWWikitextWarningCommand.prototype.execute = function () {
+	var command = this;
 	if ( this.warning && this.warning.isOpen ) {
 		return false;
 	}
-	var command = this;
 	mw.notify(
 		$( $.parseHTML( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) ) )
 			.filter( 'a' ).attr( 'target', '_blank' ).end(),

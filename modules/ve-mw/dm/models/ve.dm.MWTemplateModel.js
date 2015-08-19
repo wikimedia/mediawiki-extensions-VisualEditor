@@ -208,14 +208,15 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 		}
 		// Unknown parameters in alpha-numeric order second, empty string at the very end
 		paramNames.sort( function ( a, b ) {
+			var aIsNaN = isNaN( a ),
+				bIsNaN = isNaN( b );
+
 			if ( a === '' ) {
 				return 1;
 			}
 			if ( b === '' ) {
 				return -1;
 			}
-			var aIsNaN = isNaN( a ),
-				bIsNaN = isNaN( b );
 			if ( aIsNaN && bIsNaN ) {
 				// Two strings
 				return a < b ? -1 : a === b ? 0 : 1;

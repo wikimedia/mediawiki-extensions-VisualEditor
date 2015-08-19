@@ -16,13 +16,15 @@
  * @cfg {boolean} [showExisting] Show 're-use existing reference' as an option
  */
 ve.ui.MWReferenceSourceSelectWidget = function VeUiMWReferenceSourceSelectWidget( config ) {
+	var i, len, tools, item, limit,
+		items = [];
+
 	config = config || {};
 
 	// Parent constructor
 	ve.ui.MWReferenceSourceSelectWidget.super.call( this, config );
 
-	var i, len, tools, item, items = [],
-		limit = ve.init.target.constructor.static.citationToolsLimit;
+	limit = ve.init.target.constructor.static.citationToolsLimit;
 
 	try {
 		// Must use mw.message to avoid JSON being parsed as Wikitext

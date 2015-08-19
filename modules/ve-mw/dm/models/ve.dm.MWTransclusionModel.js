@@ -194,14 +194,15 @@
 
 	/** */
 	ve.dm.MWTransclusionModel.prototype.fetch = function () {
+		var i, len, item, title, queue,
+			titles = [],
+			specs = {};
+
 		if ( !this.queue.length ) {
 			return;
 		}
 
-		var i, len, item, title,
-			titles = [],
-			specs = {},
-			queue = this.queue.slice();
+		queue = this.queue.slice();
 
 		// Clear shared queue for future calls
 		this.queue.length = 0;
