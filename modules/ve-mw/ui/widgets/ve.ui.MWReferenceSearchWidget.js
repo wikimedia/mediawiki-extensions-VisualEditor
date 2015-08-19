@@ -116,13 +116,13 @@ ve.ui.MWReferenceSearchWidget.prototype.onListNodeUpdate = function () {
  * @method
  */
 ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
-	if ( this.built ) {
-		return;
-	}
-
 	var n, i, iLen, j, jLen, refModel, group, groupName, groupNames, view, text, firstNodes, indexOrder,
 		refGroup, refNode, matches, name, citation,
 		groups = this.internalList.getNodeGroups();
+
+	if ( this.built ) {
+		return;
+	}
 
 	function extractAttrs() {
 		text += ' ' + this.getAttribute( 'href' );

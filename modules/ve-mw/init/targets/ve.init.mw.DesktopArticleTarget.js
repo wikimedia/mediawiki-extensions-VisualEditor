@@ -230,12 +230,13 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
+	var $checkboxes, defaults, data,
+		target = this;
+
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadSuccess.apply( this, arguments );
 
-	var $checkboxes, defaults,
-		target = this,
-		data = response ? response.visualeditor : {};
+	data = response ? response.visualeditor : {};
 
 	this.checkboxFields = [];
 	this.checkboxesByName = {};
@@ -603,10 +604,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
  * @param {jQuery.Event} e Keydown event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
+	var target = this;
+
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.onDocumentKeyDown.apply( this, arguments );
-
-	var target = this;
 
 	if ( e.which === OO.ui.Keys.ESCAPE ) {
 		setTimeout( function () {
@@ -641,10 +642,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub, modules, jsconfigvars
 ) {
+	var newUrlParams, watchChecked;
+
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
-	var newUrlParams, watchChecked;
 	if ( !this.pageExists || this.restoring ) {
 		// This is a page creation or restoration, refresh the page
 		this.teardownUnloadHandlers();

@@ -57,17 +57,19 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
  * @returns {Object} Plain object with 'title' and 'hrefPrefix' keys.
  */
 ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, doc ) {
+	var relativeBase, relativeBaseRegex, relativeHref, matches;
+
 	function regexEscape( str ) {
 		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
 	}
 
-	var // Protocol relative base
-		relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/, '' ),
-		relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) ),
-		// Protocol relative href
-		relativeHref = href.replace( /^https?:/, '' ),
-		// Check if this matches the server's article path
-		matches = relativeHref.match( relativeBaseRegex );
+	// Protocol relative base
+	relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/, '' );
+	relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) );
+	// Protocol relative href
+	relativeHref = href.replace( /^https?:/, '' );
+	// Check if this matches the server's article path
+	matches = relativeHref.match( relativeBaseRegex );
 
 	if ( matches ) {
 		// Take the relative path

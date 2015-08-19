@@ -79,6 +79,10 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 };
 
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
+	var dataElement, newDimensions, attributes,
+		figure, imgWrapper, img, caption,
+		classAttr, typeofAttrs, errorIndex, width, height, altText;
+
 	// Workaround for jQuery's .children() being expensive due to
 	// https://github.com/jquery/sizzle/issues/311
 	function findChildren( parent, nodeNames ) {
@@ -87,17 +91,16 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		} );
 	}
 
-	var dataElement, newDimensions, attributes,
-		figure = domElements[ 0 ],
-		imgWrapper = findChildren( figure, [ 'a', 'span' ] )[ 0 ] || null,
-		img = imgWrapper && findChildren( imgWrapper, [ 'img' ] )[ 0 ] || null,
-		caption = findChildren( figure, [ 'figcaption' ] )[ 0 ] || null,
-		classAttr = figure.getAttribute( 'class' ),
-		typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' ),
-		errorIndex = typeofAttrs.indexOf( 'mw:Error' ),
-		width = img && img.getAttribute( 'width' ),
-		height = img && img.getAttribute( 'height' ),
-		altText = img && img.getAttribute( 'alt' );
+	figure = domElements[ 0 ];
+	imgWrapper = findChildren( figure, [ 'a', 'span' ] )[ 0 ] || null;
+	img = imgWrapper && findChildren( imgWrapper, [ 'img' ] )[ 0 ] || null;
+	caption = findChildren( figure, [ 'figcaption' ] )[ 0 ] || null;
+	classAttr = figure.getAttribute( 'class' );
+	typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' );
+	errorIndex = typeofAttrs.indexOf( 'mw:Error' );
+	width = img && img.getAttribute( 'width' );
+	height = img && img.getAttribute( 'height' );
+	altText = img && img.getAttribute( 'alt' );
 
 	if ( errorIndex !== -1 ) {
 		typeofAttrs.splice( errorIndex, 1 );

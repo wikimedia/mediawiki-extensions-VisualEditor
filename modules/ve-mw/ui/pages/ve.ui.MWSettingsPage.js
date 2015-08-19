@@ -236,26 +236,24 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
  * @param {Object} [data] Dialog setup data
  */
 ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
-	this.metaList = metaList;
-
-	var // Table of Contents items
-		tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' ),
-		tableOfContentsField = this.tableOfContents.getField(),
-		tableOfContentsMode = tableOfContentsMetaItem &&
-			tableOfContentsMetaItem.getType() || 'default',
-
-		// Redirect items
-		redirectTargetItem = this.getMetaItem( 'mwRedirect' ),
-		redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '',
-		redirectStatic = this.getMetaItem( 'mwStaticRedirect' ),
-
+	var tableOfContentsMetaItem, tableOfContentsField, tableOfContentsMode,
+		redirectTargetItem, redirectTarget, redirectStatic,
 		settingsPage = this;
 
+	this.metaList = metaList;
+
 	// Table of Contents items
+	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
+	tableOfContentsField = this.tableOfContents.getField();
+	tableOfContentsMode = tableOfContentsMetaItem &&
+		tableOfContentsMetaItem.getType() || 'default';
 	tableOfContentsField.selectItemByData( tableOfContentsMode );
 	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)
+	redirectTargetItem = this.getMetaItem( 'mwRedirect' );
+	redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '';
+	redirectStatic = this.getMetaItem( 'mwStaticRedirect' );
 	this.enableRedirectInput.setSelected( !!redirectTargetItem );
 	this.redirectTargetInput.setValue( redirectTarget );
 	this.redirectTargetInput.setDisabled( !redirectTargetItem );
@@ -276,26 +274,29 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
+	var tableOfContentsMetaItem, tableOfContentsSelectedItem, tableOfContentsValue,
+		currentRedirectTargetItem, newRedirectData, newRedirectItemData,
+		currentStaticRedirectItem, newStaticRedirectState,
+		settingsPage = this;
+
 	// Data initialisation
 	data = data || {};
 	if ( data.action !== 'apply' ) {
 		return;
 	}
 
-	var // Table of Contents items
-		tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' ),
-		tableOfContentsSelectedItem = this.tableOfContents.getField().getSelectedItem(),
-		tableOfContentsValue = tableOfContentsSelectedItem && tableOfContentsSelectedItem.getData(),
+	// Table of Contents items
+	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
+	tableOfContentsSelectedItem = this.tableOfContents.getField().getSelectedItem();
+	tableOfContentsValue = tableOfContentsSelectedItem && tableOfContentsSelectedItem.getData();
 
-		// Redirect items
-		currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' ),
-		newRedirectData = this.redirectTargetInput.getValue(),
-		newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } },
+	// Redirect items
+	currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
+	newRedirectData = this.redirectTargetInput.getValue();
+	newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } };
 
-		currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' ),
-		newStaticRedirectState = this.enableStaticRedirectInput.isSelected(),
-
-		settingsPage = this;
+	currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' );
+	newStaticRedirectState = this.enableStaticRedirectInput.isSelected();
 
 	// Alter the TOC option flag iff it's been touched & is actually different
 	if ( this.tableOfContentsTouched ) {

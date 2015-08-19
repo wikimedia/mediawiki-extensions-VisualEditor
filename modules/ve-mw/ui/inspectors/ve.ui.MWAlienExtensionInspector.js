@@ -94,10 +94,10 @@ ve.ui.MWAlienExtensionInspector.prototype.getTeardownProcess = function ( data )
 
 /** */
 ve.ui.MWAlienExtensionInspector.prototype.updateMwData = function ( mwData ) {
+	var key;
+
 	// Parent method
 	ve.ui.MWAlienExtensionInspector.super.prototype.updateMwData.call( this, mwData );
-
-	var key;
 
 	if ( !ve.isEmptyObject( this.attributeInputs ) ) {
 		// Make sure we have an attrs object to populate

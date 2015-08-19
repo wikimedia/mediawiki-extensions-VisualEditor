@@ -60,7 +60,8 @@ ve.init.mw.Platform.prototype.getMessage = mw.msg.bind( mw );
 
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
-	for ( var key in messages ) {
+	var key;
+	for ( key in messages ) {
 		this.parsedMessages[ key ] = messages[ key ];
 	}
 };

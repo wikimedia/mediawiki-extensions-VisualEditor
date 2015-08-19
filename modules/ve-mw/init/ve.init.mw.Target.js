@@ -427,8 +427,8 @@ ve.init.mw.Target.prototype.loadFail = function () {
  * @param {string} status Text status message
  */
 ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
-	this.saving = false;
 	var data = response.visualeditoredit;
+	this.saving = false;
 	if ( !data ) {
 		this.saveFail( doc, saveData, null, 'Invalid response from server', response );
 	} else if ( data.result !== 'success' ) {
@@ -885,8 +885,8 @@ ve.init.mw.Target.prototype.noChanges = function () {
  * @fires serializeComplete
  */
 ve.init.mw.Target.prototype.serializeSuccess = function ( response ) {
-	this.serializing = false;
 	var data = response.visualeditor;
+	this.serializing = false;
 	if ( !data && !response.error ) {
 		this.serializeFail( null, 'Invalid response from server', null );
 	} else if ( response.error ) {
@@ -1409,11 +1409,13 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
  * @fires saveInitiated
  */
 ve.init.mw.Target.prototype.startSave = function ( saveDeferred ) {
+	var saveOptions;
+
 	if ( this.deactivating ) {
 		return false;
 	}
 
-	var saveOptions = this.getSaveOptions();
+	saveOptions = this.getSaveOptions();
 
 	// Reset any old captcha data
 	if ( this.captcha ) {
@@ -1572,23 +1574,24 @@ ve.init.mw.Target.prototype.showChanges = function ( doc ) {
  * @returns {boolean} Submitting has been started
 */
 ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
+	var key, $form, params;
+
 	// Prevent duplicate requests
 	if ( this.submitting ) {
 		return false;
 	}
 	// Save DOM
 	this.submitting = true;
-	var key,
-		$form = $( '<form method="post" enctype="multipart/form-data" style="display: none;"></form>' ),
-		params = ve.extendObject( {
-			format: 'text/x-wiki',
-			model: 'wikitext',
-			oldid: this.requestedRevId,
-			wpStarttime: this.startTimeStamp,
-			wpEdittime: this.baseTimeStamp,
-			wpTextbox1: wikitext,
-			wpEditToken: this.editToken
-		}, fields );
+	$form = $( '<form method="post" enctype="multipart/form-data" style="display: none;"></form>' );
+	params = ve.extendObject( {
+		format: 'text/x-wiki',
+		model: 'wikitext',
+		oldid: this.requestedRevId,
+		wpStarttime: this.startTimeStamp,
+		wpEdittime: this.baseTimeStamp,
+		wpTextbox1: wikitext,
+		wpEditToken: this.editToken
+	}, fields );
 	// Add params as hidden fields
 	for ( key in params ) {
 		$form.append( $( '<input>' ).attr( { type: 'hidden', name: key, value: params[ key ] } ) );
@@ -1655,8 +1658,9 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
+		var dmDoc;
 		ve.track( 'trace.convertModelFromDom.enter' );
-		var dmDoc = ve.dm.converter.getModelFromDom( doc, {
+		dmDoc = ve.dm.converter.getModelFromDom( doc, {
 			lang: mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 			dir: mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 		} );
@@ -1666,14 +1670,15 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		dmDoc.buildNodeTree();
 		ve.track( 'trace.buildModelTree.exit' );
 		setTimeout( function () {
+			var surface, surfaceView, $documentNode;
 			// Clear dummy surfaces
 			target.clearSurfaces();
 
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			ve.track( 'trace.createSurface.enter' );
-			var surface = target.addSurface( dmDoc ),
-				surfaceView = surface.getView(),
-				$documentNode = surfaceView.getDocument().getDocumentNode().$element;
+			surface = target.addSurface( dmDoc );
+			surfaceView = surface.getView();
+			$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 			ve.track( 'trace.createSurface.exit' );
 
 			surface.$element
@@ -1772,6 +1777,7 @@ ve.init.mw.Target.prototype.onToolbarSaveButtonClick = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.Target.prototype.showSaveDialog = function () {
+	var target = this;
 	this.emit( 'saveWorkflowBegin' );
 
 	// Preload the serialization
@@ -1779,8 +1785,6 @@ ve.init.mw.Target.prototype.showSaveDialog = function () {
 		this.docToSave = this.getSurface().getDom();
 	}
 	this.prepareCacheKey( this.docToSave );
-
-	var target = this;
 
 	// Connect events to save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
@@ -1818,11 +1822,13 @@ ve.init.mw.Target.prototype.openSaveDialog = function () {
  * @method
  */
 ve.init.mw.Target.prototype.restoreEditSection = function () {
+	var surfaceView, $documentNode, $section, headingNode;
+
 	if ( this.section !== undefined && this.section > 0 ) {
-		var surfaceView = this.getSurface().getView(),
-			$documentNode = surfaceView.getDocument().getDocumentNode().$element,
-			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 ),
-			headingNode = $section.data( 'view' );
+		surfaceView = this.getSurface().getView();
+		$documentNode = surfaceView.getDocument().getDocumentNode().$element;
+		$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );
+		headingNode = $section.data( 'view' );
 
 		if ( $section.length && new mw.Uri().query.summary === undefined ) {
 			this.initialEditSummary = '/* ' +

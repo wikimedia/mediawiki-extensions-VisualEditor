@@ -45,7 +45,8 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				method: 'autolinkUrl',
 				expectedRange: new ve.Range( 52, 52 ),
 				expectedData: function ( data ) {
-					for ( var i = 1; i < 51; i++ ) {
+					var i;
+					for ( i = 1; i < 51; i++ ) {
 						data[ i ] = [ data[ i ], [ 0 ] ];
 					}
 				},
