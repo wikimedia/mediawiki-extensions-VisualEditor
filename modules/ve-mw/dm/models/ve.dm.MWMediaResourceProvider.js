@@ -89,7 +89,7 @@ ve.dm.MWMediaResourceProvider.prototype.loadSiteInfo = function () {
  * Override parent method and get results from the source
  *
  * @param {number} [howMany] The number of items to pull from the API
- * @returns {jQuery.Promise} Promise that is resolved into an array
+ * @return {jQuery.Promise} Promise that is resolved into an array
  * of available results, or is rejected if no results are available.
  */
 ve.dm.MWMediaResourceProvider.prototype.getResults = function ( howMany ) {
@@ -212,7 +212,7 @@ ve.dm.MWMediaResourceProvider.prototype.setName = function ( name ) {
 /**
  * Get name
  *
- * @returns {string} name
+ * @return {string} name
  */
 ve.dm.MWMediaResourceProvider.prototype.getName = function () {
 	return this.name;
@@ -269,7 +269,7 @@ ve.dm.MWMediaResourceProvider.prototype.setImageSizes = function ( sizes ) {
 /**
  * Get thumb sizes
  *
- * @returns {number[]} sizes Available thumbnail sizes
+ * @return {number[]} sizes Available thumbnail sizes
  */
 ve.dm.MWMediaResourceProvider.prototype.getThumbSizes = function () {
 	return this.thumbSizes;
@@ -278,7 +278,7 @@ ve.dm.MWMediaResourceProvider.prototype.getThumbSizes = function () {
 /**
  * Get image sizes
  *
- * @returns {number[]} sizes Available image sizes
+ * @return {number[]} sizes Available image sizes
  */
 ve.dm.MWMediaResourceProvider.prototype.getImageSizes = function () {
 	return this.imageSizes;

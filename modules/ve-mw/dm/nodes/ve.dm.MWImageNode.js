@@ -91,7 +91,7 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
  * Translate the image dimensions into new ones according to the bounding box.
  * @param {Object} imageDimension Width and height of the image
  * @param {Object} boundingBox The limit of the bounding box
- * @returns {Object} The new width and height of the scaled image.
+ * @return {Object} The new width and height of the scaled image.
  */
 ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox ) {
 	var newDimensions = ve.copy( imageDimensions ),
@@ -161,7 +161,7 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 /**
  * Get the scalable promise which fetches original dimensions from the API
  * @param {string} filename The image filename whose details the scalable will represent
- * @returns {jQuery.Promise} Promise which resolves after the image size details are fetched from the API
+ * @return {jQuery.Promise} Promise which resolves after the image size details are fetched from the API
  */
 ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
 	// On the first call set off an async call to update the scalable's
@@ -199,7 +199,7 @@ ve.dm.MWImageNode.prototype.onAttributeChange = function ( key, from, to ) {
 /**
  * Get the normalised filename of the image
  *
- * @returns {string} Filename
+ * @return {string} Filename
  */
 ve.dm.MWImageNode.prototype.getFilename = function () {
 	// Strip ./ stuff and decode URI encoding
@@ -212,7 +212,7 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
 /**
  * Get the store hash for the original dimensions of the image
  *
- * @returns {string} Store hash
+ * @return {string} Store hash
  */
 ve.dm.MWImageNode.prototype.getSizeHash = function () {
 	return 'MWImageOriginalSize:' + this.getFilename();

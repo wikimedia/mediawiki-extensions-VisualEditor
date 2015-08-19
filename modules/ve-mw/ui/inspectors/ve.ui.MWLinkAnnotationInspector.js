@@ -209,7 +209,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
  *
  * @method
  * @param {ve.dm.SurfaceFragment} fragment Current selection
- * @returns {ve.dm.MWInternalLinkAnnotation|ve.dm.MWExternalLinkAnnotation|null}
+ * @return {ve.dm.MWInternalLinkAnnotation|ve.dm.MWExternalLinkAnnotation|null}
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function ( fragment ) {
 	var target = fragment.getText(),

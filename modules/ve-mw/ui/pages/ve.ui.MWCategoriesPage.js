@@ -160,7 +160,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
 /**
  * Get default sort key item.
  *
- * @returns {string} Default sort key item
+ * @return {string} Default sort key item
  */
 ve.ui.MWCategoriesPage.prototype.getDefaultSortKeyItem = function () {
 	return this.metaList.getItemsInGroup( 'mwDefaultSort' )[ 0 ] || null;
@@ -169,7 +169,7 @@ ve.ui.MWCategoriesPage.prototype.getDefaultSortKeyItem = function () {
 /**
  * Get array of category items from meta list
  *
- * @returns {Object[]} items
+ * @return {Object[]} items
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItems = function () {
 	var i,
@@ -187,7 +187,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItems = function () {
  * Gets category item from meta list item
  *
  * @param {ve.dm.MWCategoryMetaItem} metaItem
- * @returns {Object} item
+ * @return {Object} item
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItemFromMetaListItem = function ( metaItem ) {
 	var title = mw.Title.newFromText( metaItem.element.attributes.category ),
@@ -207,7 +207,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemFromMetaListItem = function ( me
  *
  * @param {Object} item category widget item
  * @param {Object} [oldData] Metadata object that was previously associated with this item, if any
- * @returns {Object} metaBase
+ * @return {Object} metaBase
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, oldData ) {
 	var newData = {

@@ -192,7 +192,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
  *
  * @static
  * @param {string} param Parameter value
- * @returns {string} Escaped parameter value
+ * @return {string} Escaped parameter value
  */
 ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 	var match, needsNowiki,
@@ -316,7 +316,7 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
 /**
  * Get a simplified description of the transclusion's parts.
  *
- * @returns {Object[]} List of objects with either template or content properties
+ * @return {Object[]} List of objects with either template or content properties
  */
 ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 	var i, len, part, content;
@@ -341,7 +341,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
  * Get the wikitext for this transclusion.
  *
  * @method
- * @returns {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+ * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
  */
 ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
 	var i, len, part, template, param,

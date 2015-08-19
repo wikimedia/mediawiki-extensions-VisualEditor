@@ -50,7 +50,7 @@ ve.dm.MWExternalLinkAnnotation.static.toDomElements = function ( dataElement ) {
 /* Methods */
 
 /**
- * @returns {Object}
+ * @return {Object}
  */
 ve.dm.MWExternalLinkAnnotation.prototype.getComparableObject = function () {
 	return {

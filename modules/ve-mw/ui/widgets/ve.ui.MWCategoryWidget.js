@@ -115,7 +115,7 @@ ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
  * Get a category item.
  *
  * @param {string} value Category name
- * @returns {Object} Category item with name, value and metaItem properties
+ * @return {Object} Category item with name, value and metaItem properties
  */
 ve.ui.MWCategoryWidget.prototype.getCategoryItemFromValue = function ( value ) {
 	var title;

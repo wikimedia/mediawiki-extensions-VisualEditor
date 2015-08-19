@@ -57,7 +57,7 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  *
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion template is in
  * @param {Object} data Template data
- * @returns {ve.dm.MWTemplateModel} New template model
+ * @return {ve.dm.MWTemplateModel} New template model
  */
 ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
 	var key,
@@ -82,7 +82,7 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
  *
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion template is in
  * @param {string|mw.Title} name Template name
- * @returns {ve.dm.MWTemplateModel|null} New template model
+ * @return {ve.dm.MWTemplateModel|null} New template model
  */
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 	var href, title,
@@ -106,7 +106,7 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 /**
  * Get template target.
  *
- * @returns {Object} Template target
+ * @return {Object} Template target
  */
 ve.dm.MWTemplateModel.prototype.getTarget = function () {
 	return this.target;
@@ -115,7 +115,7 @@ ve.dm.MWTemplateModel.prototype.getTarget = function () {
 /**
  * Get template title.
  *
- * @returns {string|null} Template title, if available
+ * @return {string|null} Template title, if available
  */
 ve.dm.MWTemplateModel.prototype.getTitle = function () {
 	return this.title;
@@ -124,7 +124,7 @@ ve.dm.MWTemplateModel.prototype.getTitle = function () {
 /**
  * Get template specification.
  *
- * @returns {ve.dm.MWTemplateSpecModel} Template specification
+ * @return {ve.dm.MWTemplateSpecModel} Template specification
  */
 ve.dm.MWTemplateModel.prototype.getSpec = function () {
 	return this.spec;
@@ -133,7 +133,7 @@ ve.dm.MWTemplateModel.prototype.getSpec = function () {
 /**
  * Get all params.
  *
- * @returns {Object.<string,ve.dm.MWParameterModel>} Parameters keyed by name
+ * @return {Object.<string,ve.dm.MWParameterModel>} Parameters keyed by name
  */
 ve.dm.MWTemplateModel.prototype.getParameters = function () {
 	return this.params;
@@ -143,7 +143,7 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
  * Get a parameter.
  *
  * @param {string} name Parameter name
- * @returns {ve.dm.MWParameterModel} Parameter
+ * @return {ve.dm.MWParameterModel} Parameter
  */
 ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
 	return this.params[ name ];
@@ -153,7 +153,7 @@ ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
  * Check if a parameter exists.
  *
  * @param {string} name Parameter name
- * @returns {boolean} Parameter exists
+ * @return {boolean} Parameter exists
  */
 ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	var i, len, primaryName, names;
@@ -188,7 +188,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  * Numeric names, whether strings or real numbers, are placed at the begining, followed by
  * alphabetically sorted names.
  *
- * @returns {string[]} List of parameter names
+ * @return {string[]} List of parameter names
  */
 ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 	var i, len, index, paramOrder, paramNames;
@@ -241,7 +241,7 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
  * Get parameter from its ID.
  *
  * @param {string} id Parameter ID
- * @returns {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
+ * @return {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
  */
 ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
 	var name;
@@ -291,7 +291,7 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * Add all non-existing required and suggested parameters, if any.
  *
  * @method
- * @returns {number} Number of parameters added
+ * @return {number} Number of parameters added
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 	var i, len, addedCount = 0,
@@ -317,7 +317,7 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 /**
  * Set original data, to be used as a base for serialization.
  *
- * @returns {Object} Template data
+ * @return {Object} Template data
  */
 ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
 	this.originalData = data;

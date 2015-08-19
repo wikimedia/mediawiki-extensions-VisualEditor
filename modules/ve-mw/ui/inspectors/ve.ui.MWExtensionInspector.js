@@ -72,7 +72,7 @@ ve.ui.MWExtensionInspector.prototype.initialize = function () {
 /**
  * Get the placeholder text for the content input area.
  *
- * @returns {string} Placeholder text
+ * @return {string} Placeholder text
  */
 ve.ui.MWExtensionInspector.prototype.getInputPlaceholder = function () {
 	return '';
@@ -137,7 +137,7 @@ ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 /**
  * Create an new data element for the model class associated with this inspector
  *
- * @returns {Object} Element data
+ * @return {Object} Element data
  */
 ve.ui.MWExtensionInspector.prototype.getNewElement = function () {
 	// Extension inspectors which create elements should either match

@@ -305,7 +305,7 @@ ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
  * Get the label of a template or template placeholder.
  *
  * @param {ve.dm.MWTemplateModel|ve.dm.MWTemplatePlaceholderModel} part Part to check
- * @returns {string} Label of template or template placeholder
+ * @return {string} Label of template or template placeholder
  */
 ve.ui.MWTemplateDialog.prototype.getTemplatePartLabel = function ( part ) {
 	return part instanceof ve.dm.MWTemplateModel ?
@@ -379,7 +379,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
  * If no required parameters were left blank, or if they were but the user decided to go ahead
  *  anyway, the returned deferred will be resolved.
  * Otherwise, the returned deferred will be rejected.
- * @returns {jQuery.Deferred}
+ * @return {jQuery.Deferred}
  */
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 	var blankRequired = [],

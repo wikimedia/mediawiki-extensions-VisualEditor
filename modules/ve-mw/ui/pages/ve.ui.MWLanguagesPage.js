@@ -123,7 +123,7 @@ ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred,
  * Gets language item from meta list item
  *
  * @param {ve.dm.MWLanguageMetaItem} metaItem
- * @returns {Object} item
+ * @return {Object} item
  */
 ve.ui.MWLanguagesPage.prototype.getLanguageItemFromMetaListItem = function ( metaItem ) {
 	// TODO: get real values from metaItem once Parsoid actually provides them - bug 48970
@@ -138,7 +138,7 @@ ve.ui.MWLanguagesPage.prototype.getLanguageItemFromMetaListItem = function ( met
 /**
  * Get array of language items from meta list
  *
- * @returns {Object[]} items
+ * @return {Object[]} items
  */
 ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
 	var i,
@@ -157,7 +157,7 @@ ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
 /**
  * Get array of language items from meta list
  *
- * @returns {jQuery.Promise}
+ * @return {jQuery.Promise}
  */
 ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 	var deferred = $.Deferred();

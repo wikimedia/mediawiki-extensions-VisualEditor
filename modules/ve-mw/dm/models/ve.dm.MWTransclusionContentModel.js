@@ -38,7 +38,7 @@ OO.inheritClass( ve.dm.MWTransclusionContentModel, ve.dm.MWTransclusionPartModel
 /**
  * Get content value.
  *
- * @returns {string} Content value
+ * @return {string} Content value
  */
 ve.dm.MWTransclusionContentModel.prototype.getValue = function () {
 	return this.value;

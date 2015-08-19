@@ -193,7 +193,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 /**
  * Check whether buildIndex will create an empty index based on the current internalList.
  *
- * @returns {boolean} Index is empty
+ * @return {boolean} Index is empty
  */
 ve.ui.MWReferenceSearchWidget.prototype.isIndexEmpty = function () {
 	return this.indexEmpty;

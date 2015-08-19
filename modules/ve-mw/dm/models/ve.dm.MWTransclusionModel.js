@@ -87,7 +87,7 @@
 	 * Load from transclusion data, and fetch spec from server.
 	 *
 	 * @param {Object} data Transclusion data
-	 * @returns {jQuery.Promise} Promise, resolved when spec is loaded
+	 * @return {jQuery.Promise} Promise, resolved when spec is loaded
 	 */
 	ve.dm.MWTransclusionModel.prototype.load = function ( data ) {
 		var i, len, part, deferred,
@@ -309,7 +309,7 @@
 	/**
 	 * Get plain object representation of template transclusion.
 	 *
-	 * @returns {Object|null} Plain object representation, or null if empty
+	 * @return {Object|null} Plain object representation, or null if empty
 	 */
 	ve.dm.MWTransclusionModel.prototype.getPlainObject = function () {
 		var i, len, part, serialization,
@@ -333,7 +333,7 @@
 	/**
 	 * Get the wikitext for this transclusion.
 	 *
-	 * @returns {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+	 * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
 	 */
 	ve.dm.MWTransclusionModel.prototype.getWikitext = function () {
 		var i, len,
@@ -351,7 +351,7 @@
 	 *
 	 * This is used to give parts unique IDs, and returns a different value each time it's called.
 	 *
-	 * @returns {number} Unique ID
+	 * @return {number} Unique ID
 	 */
 	ve.dm.MWTransclusionModel.prototype.getUniquePartId = function () {
 		return this.uid++;
@@ -366,7 +366,7 @@
 	 * @param {ve.dm.MWTransclusionPartModel} add Part to add
 	 * @throws {Error} If part to remove is not valid
 	 * @throws {Error} If part to add is not valid
-	 * @returns {jQuery.Promise} Promise, resolved when part is added
+	 * @return {jQuery.Promise} Promise, resolved when part is added
 	 */
 	ve.dm.MWTransclusionModel.prototype.replacePart = function ( remove, add ) {
 		var deferred = $.Deferred();
@@ -393,7 +393,7 @@
 	 * @param {ve.dm.MWTransclusionPartModel} part Part to add
 	 * @param {number} [index] Specific index to add content at, defaults to the end
 	 * @throws {Error} If part is not valid
-	 * @returns {jQuery.Promise} Promise, resolved when part is added
+	 * @return {jQuery.Promise} Promise, resolved when part is added
 	 */
 	ve.dm.MWTransclusionModel.prototype.addPart = function ( part, index ) {
 		var deferred = $.Deferred();
@@ -427,7 +427,7 @@
 	/**
 	 * Get all parts.
 	 *
-	 * @returns {ve.dm.MWTransclusionPartModel[]} Parts in transclusion
+	 * @return {ve.dm.MWTransclusionPartModel[]} Parts in transclusion
 	 */
 	ve.dm.MWTransclusionModel.prototype.getParts = function () {
 		return this.parts;
@@ -439,7 +439,7 @@
 	 * Matching is performed against the first section of the `id`, delimited by a '/'.
 	 *
 	 * @param {string} id Part ID
-	 * @returns {ve.dm.MWTransclusionPartModel|null} Part with matching ID, if found
+	 * @return {ve.dm.MWTransclusionPartModel|null} Part with matching ID, if found
 	 */
 	ve.dm.MWTransclusionModel.prototype.getPartFromId = function ( id ) {
 		var i, len,
@@ -461,7 +461,7 @@
 	 * Indexes are linear depth-first addresses in the transclusion tree.
 	 *
 	 * @param {ve.dm.MWTransclusionPartModel|ve.dm.MWParameterModel} model Part or parameter
-	 * @returns {number} Page index of model
+	 * @return {number} Page index of model
 	 */
 	ve.dm.MWTransclusionModel.prototype.getIndex = function ( model ) {
 		var i, iLen, j, jLen, part, names,

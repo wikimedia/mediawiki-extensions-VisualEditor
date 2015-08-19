@@ -144,7 +144,7 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  * Swap state in the save dialog.
  *
  * @param {string} panel One of 'save', 'review', 'conflict' or 'nochanges'
- * @returns {jQuery} The now active panel
+ * @return {jQuery} The now active panel
  * @throws {Error} Unknown saveDialog panel
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {

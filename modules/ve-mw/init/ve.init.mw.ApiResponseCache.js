@@ -70,7 +70,7 @@ ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
  * returns an already-resolved promise. Otherwise, it returns a pending promise and schedules
  * an request to retrieve the data.
  * @param {string} title Title
- * @returns {jQuery.Promise} Promise that will be resolved with the data once it's available
+ * @return {jQuery.Promise} Promise that will be resolved with the data once it's available
  */
 ve.init.mw.ApiResponseCache.prototype.get = function ( title ) {
 	if ( typeof title !== 'string' ) {
@@ -93,7 +93,7 @@ ve.init.mw.ApiResponseCache.prototype.get = function ( title ) {
  * this returns that data. Otherwise, it returns undefined.
  *
  * @param {string} name Normalized page title
- * @returns {Object|undefined} Cache data for this name.
+ * @return {Object|undefined} Cache data for this name.
  */
 ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
 	if ( Object.prototype.hasOwnProperty.call( this.cacheValues, name ) ) {
