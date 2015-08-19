@@ -203,6 +203,7 @@ ve.ui.MWCategoryWidget.prototype.onSavePopupState = function () {
 
 /**
  * Toggles popup menu per category item
+ *
  * @param {Object} item
  */
 ve.ui.MWCategoryWidget.prototype.onTogglePopupMenu = function ( item ) {

@@ -83,6 +83,7 @@
 
 	/**
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
+	 *
 	 * @private
 	 * @return {jQuery.Promise}
 	 */

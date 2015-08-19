@@ -601,6 +601,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
 
 /**
  * Handle Escape key presses.
+ *
  * @param {jQuery.Event} e Keydown event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {

@@ -379,6 +379,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
  * If no required parameters were left blank, or if they were but the user decided to go ahead
  *  anyway, the returned deferred will be resolved.
  * Otherwise, the returned deferred will be rejected.
+ *
  * @return {jQuery.Deferred}
  */
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {

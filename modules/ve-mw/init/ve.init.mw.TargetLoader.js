@@ -87,6 +87,7 @@
 
 		/**
 		 * Request the page HTML and various metadata from the MediaWiki API and Parsoid.
+		 *
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( pageName, oldid, targetName ) {

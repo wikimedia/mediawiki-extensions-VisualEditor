@@ -40,6 +40,7 @@ ve.ui.MWLinkAction.static.methods = ve.ui.MWLinkAction.super.static.methods.conc
  * Closing parens are only stripped if open parens are missing from the
  * candidate text, so that URLs with embedded matched parentheses (like
  * wiki articles with disambiguation text) autolink nicely.
+ *
  * @method
  * @inheritdoc
  */

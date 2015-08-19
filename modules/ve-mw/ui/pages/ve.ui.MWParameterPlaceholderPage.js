@@ -67,6 +67,7 @@ OO.inheritClass( ve.ui.MWParameterPlaceholderPage, OO.ui.PageLayout );
 
 /**
  * Respond to the parameter search widget showAll event
+ *
  * @fires showAll
  */
 ve.ui.MWParameterPlaceholderPage.prototype.onParameterShowAll = function () {

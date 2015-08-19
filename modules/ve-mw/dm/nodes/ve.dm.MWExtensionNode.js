@@ -123,6 +123,7 @@ ve.dm.MWExtensionNode.static.getExtensionName = function () {
 
 /**
  * Get the extension's name
+ *
  * @method
  * @return {string} Extension name
  */

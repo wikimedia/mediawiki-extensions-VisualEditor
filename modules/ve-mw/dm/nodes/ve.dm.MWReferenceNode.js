@@ -249,6 +249,7 @@ ve.dm.MWReferenceNode.static.remapInternalListKeys = function ( dataElement, int
 
 /**
  * Gets the index for the reference
+ *
  * @static
  * @param {Object} dataElement Element data
  * @param {ve.dm.InternalList} internalList Internal list
@@ -264,6 +265,7 @@ ve.dm.MWReferenceNode.static.getIndex = function ( dataElement, internalList ) {
 
 /**
  * Gets the group for the reference
+ *
  * @static
  * @param {Object} dataElement Element data
  * @return {string} Group
@@ -274,6 +276,7 @@ ve.dm.MWReferenceNode.static.getGroup = function ( dataElement ) {
 
 /**
  * Gets the index label for the reference
+ *
  * @static
  * @param {Object} dataElement Element data
  * @param {ve.dm.InternalList} internalList Internal list

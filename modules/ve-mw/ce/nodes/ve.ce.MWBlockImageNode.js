@@ -111,6 +111,7 @@ ve.ce.MWBlockImageNode.static.cssClasses = {
 /**
  * Set up an object that converts from the type to rdfa, based
  *  on the rdfaToType object in the model.
+ *
  * @return {Object.<string,string>} A type to Rdfa conversion object
  */
 ve.ce.MWBlockImageNode.prototype.getTypeToRdfa = function () {

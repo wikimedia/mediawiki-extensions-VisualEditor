@@ -7,6 +7,7 @@
 
 /**
  * Caches information about titles.
+ *
  * @class
  * @extends ve.init.mw.ApiResponseCache
  * @constructor

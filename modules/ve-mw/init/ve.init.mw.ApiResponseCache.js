@@ -69,6 +69,7 @@ ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
  * Look up data about a title. If the data about this title is already in the cache, this
  * returns an already-resolved promise. Otherwise, it returns a pending promise and schedules
  * an request to retrieve the data.
+ *
  * @param {string} title Title
  * @return {jQuery.Promise} Promise that will be resolved with the data once it's available
  */

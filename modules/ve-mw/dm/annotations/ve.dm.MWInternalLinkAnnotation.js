@@ -52,6 +52,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 
 /**
  * Parse URL to get title it points to.
+ *
  * @param {string} href
  * @param {HTMLDocument|string} doc Document whose base URL to use, or base URL as a string.
  * @return {Object} Plain object with 'title' and 'hrefPrefix' keys.
@@ -109,6 +110,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 /**
  * Normalize title for comparison purposes.
  * E.g. capitalisation and underscores.
+ *
  * @param {string} title Original title
  * @return {string} Normalized title, or the original if it is invalid
  */
@@ -122,6 +124,7 @@ ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
 
 /**
  * Normalize title for lookup (search suggestion, existence) purposes.
+ *
  * @param {string} title Original title
  * @return {string} Normalized title, or the original if it is invalid
  */
