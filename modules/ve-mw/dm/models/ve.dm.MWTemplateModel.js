@@ -316,8 +316,6 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 
 /**
  * Set original data, to be used as a base for serialization.
- *
- * @return {Object} Template data
  */
 ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
 	this.originalData = data;
