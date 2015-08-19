@@ -424,7 +424,7 @@ ve.ui.MWMediaSearchWidget.prototype.setLang = function ( lang ) {
 
 /**
  * Get language for the search results.
- * @returns {string} lang Language
+ * @return {string} lang Language
  */
 ve.ui.MWMediaSearchWidget.prototype.getLang = function () {
 	return this.lang;

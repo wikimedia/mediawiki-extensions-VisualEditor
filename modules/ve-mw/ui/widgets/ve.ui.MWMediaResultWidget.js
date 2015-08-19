@@ -201,7 +201,7 @@ ve.ui.MWMediaResultWidget.prototype.calculateWrapperPadding = function ( thumbDi
 /**
  * Set the row height for all size calculations
  *
- * @returns {number} rowHeight Row height
+ * @return {number} rowHeight Row height
  */
 ve.ui.MWMediaResultWidget.prototype.getRowHeight = function () {
 	return this.rowHeight;
@@ -241,7 +241,7 @@ ve.ui.MWMediaResultWidget.prototype.getRow = function () {
 
 /**
  * Check if the image has a src attribute already
- * @returns {boolean} Thumbnail has its source attribute set
+ * @return {boolean} Thumbnail has its source attribute set
  */
 ve.ui.MWMediaResultWidget.prototype.hasSrc = function () {
 	return !!this.src;

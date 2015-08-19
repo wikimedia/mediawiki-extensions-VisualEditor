@@ -191,7 +191,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 /**
  * Checks if transclusion only contains a single template or template placeholder.
  *
- * @returns {boolean} Transclusion only contains a single template or template placeholder
+ * @return {boolean} Transclusion only contains a single template or template placeholder
  */
 ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();

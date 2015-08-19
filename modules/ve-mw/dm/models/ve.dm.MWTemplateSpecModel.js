@@ -97,7 +97,7 @@ ve.dm.MWTemplateSpecModel.prototype.fill = function () {
  * Get the default spec for a parameter.
  *
  * @param {string} name Parameter name
- * @returns {Object} Parameter spec
+ * @return {Object} Parameter spec
  */
 ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) {
 	return {
@@ -116,7 +116,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) 
 /**
  * Get template label.
  *
- * @returns {string} Template label
+ * @return {string} Template label
  */
 ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 	var titleObj,
@@ -138,7 +138,7 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
  * Get template description.
  *
  * @param {string} [lang] Language to get description in
- * @returns {string|null} Template description or null if not available
+ * @return {string|null} Template description or null if not available
  */
 ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
 	var value = this.description;
@@ -149,7 +149,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
  * Get parameter order.
  *
  * @method
- * @returns {string[]} Canonically ordered parameter names
+ * @return {string[]} Canonically ordered parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterOrder = function () {
 	return this.paramOrder.slice();
@@ -161,7 +161,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterOrder = function () {
  * Could be a primary name or alias.
  *
  * @param {string} name Parameter name
- * @returns {boolean} Parameter name is known
+ * @return {boolean} Parameter name is known
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterKnown = function ( name ) {
 	return this.params[ name ] !== undefined;
@@ -171,7 +171,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterKnown = function ( name ) {
  * Check if a parameter name is an alias.
  *
  * @param {string} name Parameter name
- * @returns {boolean} Parameter name is an alias
+ * @return {boolean} Parameter name is an alias
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
 	return this.params[ name ] !== undefined && this.params[ name ].name !== name;
@@ -182,7 +182,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
  *
  * @param {string} name Parameter name
  * @param {string} [lang] Language to get label in
- * @returns {string} Parameter label
+ * @return {string} Parameter label
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) {
 	var value = this.params[ name ].label || name;
@@ -194,7 +194,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) 
  *
  * @param {string} name Parameter name
  * @param {string} [lang] Language to get description
- * @returns {string|null} Parameter description
+ * @return {string|null} Parameter description
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, lang ) {
 	var value = this.params[ name ].description;
@@ -205,7 +205,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, l
  * Get a parameter value.
  *
  * @param {string} name Parameter name
- * @returns {string} Default parameter value
+ * @return {string} Default parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
 	return this.params[ name ].default;
@@ -216,7 +216,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
  *
  * @param {string} name Parameter name
  * @param {string} [lang] Language to get description
- * @returns {string} Example parameter value
+ * @return {string} Example parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, lang ) {
 	var value = this.params[ name ].example;
@@ -227,7 +227,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
  * Get a parameter auto value.
  *
  * @param {string} name Parameter name
- * @returns {string} Auto-value for the parameter
+ * @return {string} Auto-value for the parameter
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
 	return this.params[ name ].autovalue;
@@ -237,7 +237,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
  * Get a parameter type.
  *
  * @param {string} name Parameter name
- * @returns {string} Parameter type
+ * @return {string} Parameter type
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
 	return this.params[ name ].type;
@@ -247,7 +247,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
  * Get parameter aliases.
  *
  * @param {string} name Parameter name
- * @returns {string[]} Alternate parameter names
+ * @return {string[]} Alternate parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
 	return this.params[ name ].aliases;
@@ -259,7 +259,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
  * If a parameter is not an alias of another, the output will be the same as the input.
  *
  * @param {string} name Parameter alias
- * @returns {string} Parameter name
+ * @return {string} Parameter name
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterName = function ( name ) {
 	return this.params[ name ].name;
@@ -269,7 +269,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterName = function ( name ) {
  * Check if parameter is required.
  *
  * @param {string} name Parameter name
- * @returns {boolean} Parameter is required
+ * @return {boolean} Parameter is required
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
 	return !!this.params[ name ].required;
@@ -279,7 +279,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
  * Check if parameter is suggsted.
  *
  * @param {string} name Parameter name
- * @returns {boolean} Parameter is suggested
+ * @return {boolean} Parameter is suggested
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
 	return !!this.params[ name ].suggested;
@@ -289,7 +289,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
  * Check if parameter is deprecated.
  *
  * @param {string} name Parameter name
- * @returns {boolean} Parameter is deprecated
+ * @return {boolean} Parameter is deprecated
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
 	return this.params[ name ].deprecated !== false;
@@ -299,7 +299,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
  * Get parameter deprecation description.
  *
  * @param {string} name Parameter name
- * @returns {string} Explaining of why parameter is deprecated, empty if parameter is either not
+ * @return {string} Explaining of why parameter is deprecated, empty if parameter is either not
  *   deprecated or no description has been specified
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = function ( name ) {
@@ -310,7 +310,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
 /**
  * Get all primary parameter names.
  *
- * @returns {string[]} Parameter names
+ * @return {string[]} Parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
 	var name,
@@ -328,7 +328,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
 /**
  * Get parameter sets.
  *
- * @returns {Object[]} Lists of parameter set descriptors
+ * @return {Object[]} Lists of parameter set descriptors
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
 	return this.sets;

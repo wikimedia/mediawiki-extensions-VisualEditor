@@ -228,7 +228,7 @@ ve.ui.MWCategoryInputWidget.prototype.onLookupMenuItemChoose = function ( item )
  *
  * @method
  * @param {string} name Category name
- * @returns {OO.ui.MenuOptionWidget} Menu item widget to be shown
+ * @return {OO.ui.MenuOptionWidget} Menu item widget to be shown
  */
 ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( name ) {
 	var cachedData = ve.init.platform.linkCache.getCached(

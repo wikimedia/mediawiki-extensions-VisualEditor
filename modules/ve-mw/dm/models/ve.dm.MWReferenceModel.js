@@ -183,7 +183,7 @@ ve.dm.MWReferenceModel.prototype.insertReferenceNode = function ( surfaceFragmen
 /**
  * Get the key of a reference in the references list.
  *
- * @returns {string} Reference's list key
+ * @return {string} Reference's list key
  */
 ve.dm.MWReferenceModel.prototype.getListKey = function () {
 	return this.listKey;
@@ -192,7 +192,7 @@ ve.dm.MWReferenceModel.prototype.getListKey = function () {
 /**
  * Get the name of the group a references list is in.
  *
- * @returns {string} References list's group
+ * @return {string} References list's group
  */
 ve.dm.MWReferenceModel.prototype.getListGroup = function () {
 	return this.listGroup;
@@ -201,7 +201,7 @@ ve.dm.MWReferenceModel.prototype.getListGroup = function () {
 /**
  * Get the index of reference in the references list.
  *
- * @returns {string} Reference's index
+ * @return {string} Reference's index
  */
 ve.dm.MWReferenceModel.prototype.getListIndex = function () {
 	return this.listIndex;
@@ -210,7 +210,7 @@ ve.dm.MWReferenceModel.prototype.getListIndex = function () {
 /**
  * Get the name of the group a reference is in.
  *
- * @returns {string} Reference's group
+ * @return {string} Reference's group
  */
 ve.dm.MWReferenceModel.prototype.getGroup = function () {
 	return this.group;
@@ -263,7 +263,7 @@ ve.dm.MWReferenceModel.prototype.setDir = function ( dir ) {
 
 /**
  * Get the directionality of the reference document
- * @returns {string} Document directionality
+ * @return {string} Document directionality
  */
 ve.dm.MWReferenceModel.prototype.getDir = function () {
 	return this.dir;
@@ -279,7 +279,7 @@ ve.dm.MWReferenceModel.prototype.setLang = function ( lang ) {
 
 /**
  * Get the language of the reference document
- * @returns {string} Document language
+ * @return {string} Document language
  */
 ve.dm.MWReferenceModel.prototype.getLang = function () {
 	return this.lang;

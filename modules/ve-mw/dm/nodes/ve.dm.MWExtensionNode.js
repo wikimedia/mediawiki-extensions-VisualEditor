@@ -113,7 +113,7 @@ ve.dm.MWExtensionNode.static.getHashObject = function ( dataElement ) {
  *
  * @static
  * @param {Object} dataElement Data element
- * @returns {string} Extension name
+ * @return {string} Extension name
  */
 ve.dm.MWExtensionNode.static.getExtensionName = function () {
 	return this.extensionName;
@@ -124,7 +124,7 @@ ve.dm.MWExtensionNode.static.getExtensionName = function () {
 /**
  * Get the extension's name
  * @method
- * @returns {string} Extension name
+ * @return {string} Extension name
  */
 ve.dm.MWExtensionNode.prototype.getExtensionName = function () {
 	return this.constructor.static.getExtensionName( this.element );

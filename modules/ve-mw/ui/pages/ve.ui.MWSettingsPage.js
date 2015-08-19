@@ -223,7 +223,7 @@ ve.ui.MWSettingsPage.prototype.onEnableStaticRedirectChange = function () {
  * Get the first meta item of a given name
  *
  * @param {string} name Name of the meta item
- * @returns {Object|null} Meta item, if any
+ * @return {Object|null} Meta item, if any
  */
 ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
 	return this.metaList.getItemsInGroup( name )[ 0 ] || null;
