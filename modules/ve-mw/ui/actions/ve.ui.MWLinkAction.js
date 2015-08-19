@@ -45,7 +45,15 @@ ve.ui.MWLinkAction.static.methods = ve.ui.MWLinkAction.super.static.methods.conc
  * @inheritdoc
  */
 ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
-	return /\(/.test( candidate ) ? /[,;.:!?]+$/ : /[,;.:!?)]+$/;
+	// This is:
+	// * the "trailing punctuation" character set from
+	//   Parse.php::makeFreeExternalLink(): [,;.:!?] and sometimes [)]
+	// * extended with characters banned by EXT_LINK_URL_CLASS: []<>"
+	// * further extended with international close quotes: "'”’›»“‘‹«」』
+	//   https://en.wikipedia.org/wiki/Quotation_mark
+	return /\(/.test( candidate ) ?
+		/[,;.:!?\[\]<>\"\'”’›»“‘‹«」』]+$/ :
+		/[,;.:!?\[\]<>\"\'”’›»“‘‹«」』)]+$/;
 };
 
 /**
