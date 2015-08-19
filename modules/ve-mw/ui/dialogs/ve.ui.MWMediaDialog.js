@@ -792,7 +792,7 @@ ve.ui.MWMediaDialog.prototype.onImageModelAlignmentChange = function ( alignment
 /**
  * Handle image model type change
  *
- * @param {string} alignment Image alignment
+ * @param {string} type Image type
  */
 ve.ui.MWMediaDialog.prototype.onImageModelTypeChange = function ( type ) {
 	this.typeSelect.selectItemByData( type );

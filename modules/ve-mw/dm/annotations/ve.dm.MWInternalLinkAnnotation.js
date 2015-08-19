@@ -111,7 +111,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
  * Normalize title for comparison purposes.
  * E.g. capitalisation and underscores.
  *
- * @param {string} title Original title
+ * @param {string} original Original title
  * @return {string} Normalized title, or the original if it is invalid
  */
 ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
@@ -125,7 +125,7 @@ ve.dm.MWInternalLinkAnnotation.static.normalizeTitle = function ( original ) {
 /**
  * Normalize title for lookup (search suggestion, existence) purposes.
  *
- * @param {string} title Original title
+ * @param {string} original Original title
  * @return {string} Normalized title, or the original if it is invalid
  */
 ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {

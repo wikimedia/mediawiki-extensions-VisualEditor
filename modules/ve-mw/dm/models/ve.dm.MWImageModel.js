@@ -626,7 +626,7 @@ ve.dm.MWImageModel.prototype.storeInitialHash = function ( hash ) {
  *
  * Example values: "BITMAP" for JPEG or PNG images; "DRAWING" for SVG graphics
  *
- * @param {string|undefined} Symbolic media type name, or undefined if empty
+ * @param {string|undefined} type Symbolic media type name, or undefined if empty
  */
 ve.dm.MWImageModel.prototype.setMediaType = function ( type ) {
 	this.mediaType = type;
@@ -678,6 +678,7 @@ ve.dm.MWImageModel.prototype.isAligned = function ( align ) {
  * We explicitly repeat tests so to avoid recursively calling
  * the other methods.
  *
+ * @param {string} [imageType] Type of the image.
  * @param {string} [align] Optional alignment value to test against.
  * Supplying this parameter would test whether this align parameter
  * would mean the image is aligned to its default position.
@@ -1153,7 +1154,7 @@ ve.dm.MWImageModel.prototype.getImageHref = function () {
  * Attach a new scalable object to the model and request the
  * information from the API.
  *
- * @param {ve.dm.Scalable} Scalable object
+ * @param {ve.dm.Scalable} scalable Scalable object
  */
 ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 	var imageName = this.getResourceName().replace( /^(\.+\/)*/, '' ),
@@ -1247,7 +1248,7 @@ ve.dm.MWImageModel.prototype.updateScalableDetails = function ( originalDimensio
 /**
  * Set image caption document.
  *
- * @param {ve.dm.Document} Image caption document
+ * @param {ve.dm.Document} doc Image caption document
  */
 ve.dm.MWImageModel.prototype.setCaptionDocument = function ( doc ) {
 	this.captionDoc = doc;

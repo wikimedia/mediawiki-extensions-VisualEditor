@@ -157,7 +157,7 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 /**
  * Insert reference at the end of a surface fragment.
  *
- * @param {ve.dm.SurfaceFragment} surfaceModel Surface fragment to insert at
+ * @param {ve.dm.SurfaceFragment} surfaceFragment Surface fragment to insert at
  * @param {boolean} [placeholder] Reference is a placeholder for staging purposes
  */
 ve.dm.MWReferenceModel.prototype.insertReferenceNode = function ( surfaceFragment, placeholder ) {
@@ -292,7 +292,7 @@ ve.dm.MWReferenceModel.prototype.getLang = function () {
 /**
  * Set key of reference in list.
  *
- * @param {string} Reference's list key
+ * @param {string} listKey Reference's list key
  */
 ve.dm.MWReferenceModel.prototype.setListKey = function ( listKey ) {
 	this.listKey = listKey;
@@ -301,7 +301,7 @@ ve.dm.MWReferenceModel.prototype.setListKey = function ( listKey ) {
 /**
  * Set name of the group a references list is in.
  *
- * @param {string} References list's group
+ * @param {string} listGroup References list's group
  */
 ve.dm.MWReferenceModel.prototype.setListGroup = function ( listGroup ) {
 	this.listGroup = listGroup;
@@ -310,7 +310,7 @@ ve.dm.MWReferenceModel.prototype.setListGroup = function ( listGroup ) {
 /**
  * Set the index of reference in list.
  *
- * @param {string} Reference's list index
+ * @param {string} listIndex Reference's list index
  */
 ve.dm.MWReferenceModel.prototype.setListIndex = function ( listIndex ) {
 	this.listIndex = listIndex;
@@ -328,7 +328,7 @@ ve.dm.MWReferenceModel.prototype.setGroup = function ( group ) {
 /**
  * Set the reference document.
  *
- * @param {ve.dm.Document} Reference document
+ * @param {ve.dm.Document} doc Reference document
  */
 ve.dm.MWReferenceModel.prototype.setDocument = function ( doc ) {
 	this.doc = doc;

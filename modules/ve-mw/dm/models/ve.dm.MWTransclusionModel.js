@@ -50,7 +50,7 @@
 	/**
 	 * Insert transclusion at the end of a surface fragment.
 	 *
-	 * @param {ve.dm.SurfaceFragment} surfaceModel Surface fragment to insert at
+	 * @param {ve.dm.SurfaceFragment} surfaceFragment Surface fragment to insert at
 	 */
 	ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment ) {
 		surfaceFragment

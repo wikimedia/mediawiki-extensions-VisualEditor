@@ -82,7 +82,6 @@ ve.ce.MWAlienExtensionNode.static.getDescription = function ( model ) {
  * @mixins ve.ce.MWAlienExtensionNode
  *
  * @constructor
- * @param {ve.dm.MWAlienInlineExtensionNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWAlienInlineExtensionNode = function VeCeMWAlienInlineExtensionNode( config ) {
