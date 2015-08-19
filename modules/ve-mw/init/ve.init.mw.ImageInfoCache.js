@@ -7,6 +7,7 @@
 
 /**
  * Get information about images.
+ *
  * @class
  * @extends ve.init.mw.ApiResponseCache
  * @constructor

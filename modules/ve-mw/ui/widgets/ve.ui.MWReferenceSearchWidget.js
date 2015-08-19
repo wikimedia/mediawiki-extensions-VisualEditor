@@ -54,6 +54,7 @@ ve.ui.MWReferenceSearchWidget.prototype.onQueryChange = function () {
 
 /**
  * Set the internal list and check if it contains any references
+ *
  * @param {ve.dm.InternalList} internalList Internal list
  */
 ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalList ) {

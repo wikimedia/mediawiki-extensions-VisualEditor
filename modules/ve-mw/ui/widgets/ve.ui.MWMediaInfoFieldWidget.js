@@ -149,6 +149,7 @@ ve.ui.MWMediaInfoFieldWidget.prototype.onReadMoreClick = function () {
 
 /**
  * Get field type; 'attribute' or 'description'
+ *
  * @return {string} Field type
  */
 ve.ui.MWMediaInfoFieldWidget.prototype.getType = function () {

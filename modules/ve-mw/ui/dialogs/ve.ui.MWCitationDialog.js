@@ -144,6 +144,7 @@ ve.ui.MWCitationDialog.prototype.onAddParameterBeforeLoad = function ( page ) {
 
 /**
  * Works out whether there are any set parameters that aren't just placeholders
+ *
  * @return boolean
  */
 ve.ui.MWCitationDialog.prototype.hasUsefulParameter = function () {

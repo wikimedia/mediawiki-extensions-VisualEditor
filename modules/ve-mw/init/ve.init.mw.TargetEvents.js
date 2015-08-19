@@ -91,6 +91,7 @@ ve.init.mw.TargetEvents.prototype.onSaveInitated = function () {
 
 /**
  * Track when the save is complete
+ *
  * @param {string} content
  * @param {string} categoriesHtml
  * @param {number} newRevId
@@ -156,6 +157,7 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 
 /**
  * Record activation having started.
+ *
  * @param {number} [startTime] Timestamp activation started. Defaults to current time
  */
 ve.init.mw.TargetEvents.prototype.trackActivationStart = function ( startTime ) {

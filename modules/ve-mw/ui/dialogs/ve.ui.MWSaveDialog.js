@@ -267,6 +267,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 
 /**
  * Remove a message from the save dialog.
+ *
  * @param {string} name Message's unique name
  */
 ve.ui.MWSaveDialog.prototype.clearMessage = function ( name ) {

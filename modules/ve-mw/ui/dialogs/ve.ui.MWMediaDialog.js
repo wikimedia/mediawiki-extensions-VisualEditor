@@ -592,6 +592,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 
 /**
  * Fetch a bigger image thumbnail from the API.
+ *
  * @param {string} imageName Image source
  * @param {Object} dimensions Image dimensions
  * @return {jQuery.Promise} Thumbnail promise that resolves with new thumb url
@@ -633,6 +634,7 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 
 /**
  * Clean the API responses and return it in plaintext. If needed, truncate.
+ *
  * @param {string} rawResponse Raw response from the API
  * @param {Object} config Configuration options
  * @return {string} Plaintext clean response
@@ -660,6 +662,7 @@ ve.ui.MWMediaDialog.prototype.cleanAPIresponse = function ( rawResponse, config 
 
 /**
  * Get the file type from the suffix of the url
+ *
  * @param {string} url Full file url
  * @return {string} File type
  */
@@ -676,6 +679,7 @@ ve.ui.MWMediaDialog.prototype.getFileType = function ( url ) {
 /**
  * Get the proper icon for the license if it is recognized
  * or general info icon if it is not recognized.
+ *
  * @param {string} license License short name
  * @return {string} Icon name
  */
@@ -884,6 +888,7 @@ ve.ui.MWMediaDialog.prototype.onTypeSelectChoose = function ( item ) {
 
 /**
  * Respond to change in alternate text
+ *
  * @param {string} text New alternate text
  */
 ve.ui.MWMediaDialog.prototype.onAlternateTextChange = function ( text ) {
@@ -977,6 +982,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 /**
  * Switch between the edit and insert/search panels
+ *
  * @param {string} panel Panel name
  * @param {boolean} [stopSearchRequery] Do not re-query the API for the search panel
  */

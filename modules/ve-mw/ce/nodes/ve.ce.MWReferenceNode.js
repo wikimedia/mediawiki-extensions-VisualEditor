@@ -62,6 +62,7 @@ ve.ce.MWReferenceNode.static.primaryCommandName = 'reference';
 
 /**
  * Handle setup event.
+ *
  * @method
  */
 ve.ce.MWReferenceNode.prototype.onSetup = function () {
@@ -71,6 +72,7 @@ ve.ce.MWReferenceNode.prototype.onSetup = function () {
 
 /**
  * Handle teardown event.
+ *
  * @method
  */
 ve.ce.MWReferenceNode.prototype.onTeardown = function () {

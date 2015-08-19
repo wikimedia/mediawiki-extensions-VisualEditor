@@ -152,6 +152,7 @@ ve.ui.MWSettingsPage.static.extraMetaCheckboxes = [];
 
 /**
  * Add a checkbox to the list of changeable page settings
+ *
  * @param {string} metaName The name of the DM meta item
  * @param {string} label The label to show next to the checkbox
  */

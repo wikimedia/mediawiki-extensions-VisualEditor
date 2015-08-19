@@ -64,6 +64,7 @@ ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
 
 /**
  * Take the given dimensions and scale them to thumbnail size.
+ *
  * @param {Object} dimensions Width and height of the image
  * @param {string} [mediaType] Media type 'DRAWING' or 'BITMAP'
  * @return {Object} The new width and height of the scaled image
@@ -89,6 +90,7 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
 
 /**
  * Translate the image dimensions into new ones according to the bounding box.
+ *
  * @param {Object} imageDimension Width and height of the image
  * @param {Object} boundingBox The limit of the bounding box
  * @return {Object} The new width and height of the scaled image.
@@ -160,6 +162,7 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 
 /**
  * Get the scalable promise which fetches original dimensions from the API
+ *
  * @param {string} filename The image filename whose details the scalable will represent
  * @return {jQuery.Promise} Promise which resolves after the image size details are fetched from the API
  */

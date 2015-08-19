@@ -97,6 +97,7 @@ ve.dm.MWMediaResourceQueue.prototype.getFileRepos = function () {
 
 /**
  * Get the search query
+ *
  * @return {string} API search query
  */
 ve.dm.MWMediaResourceQueue.prototype.getSearchQuery = function () {
@@ -106,6 +107,7 @@ ve.dm.MWMediaResourceQueue.prototype.getSearchQuery = function () {
 
 /**
  * Get image maximum height
+ *
  * @return {string} Image max height
  */
 ve.dm.MWMediaResourceQueue.prototype.getMaxHeight = function () {

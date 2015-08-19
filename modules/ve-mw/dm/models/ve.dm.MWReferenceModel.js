@@ -255,6 +255,7 @@ ve.dm.MWReferenceModel.prototype.getDocument = function () {
 
 /**
  * Set the directionality of the reference document
+ *
  * @param {string} dir Document directionality
  */
 ve.dm.MWReferenceModel.prototype.setDir = function ( dir ) {
@@ -263,6 +264,7 @@ ve.dm.MWReferenceModel.prototype.setDir = function ( dir ) {
 
 /**
  * Get the directionality of the reference document
+ *
  * @return {string} Document directionality
  */
 ve.dm.MWReferenceModel.prototype.getDir = function () {
@@ -271,6 +273,7 @@ ve.dm.MWReferenceModel.prototype.getDir = function () {
 
 /**
  * Set the language of the reference document
+ *
  * @param {string} lang Document language
  */
 ve.dm.MWReferenceModel.prototype.setLang = function ( lang ) {
@@ -279,6 +282,7 @@ ve.dm.MWReferenceModel.prototype.setLang = function ( lang ) {
 
 /**
  * Get the language of the reference document
+ *
  * @return {string} Document language
  */
 ve.dm.MWReferenceModel.prototype.getLang = function () {

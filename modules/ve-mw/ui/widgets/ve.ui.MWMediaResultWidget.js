@@ -144,6 +144,7 @@ ve.ui.MWMediaResultWidget.prototype.lazyLoad = function () {
 
 /**
  * Retrieve the store dimensions object
+ *
  * @return {Object} Thumb dimensions
  */
 ve.ui.MWMediaResultWidget.prototype.getDimensions = function () {
@@ -225,6 +226,7 @@ ve.ui.MWMediaResultWidget.prototype.getImageMaxWidth = function () {
 
 /**
  * Set the row this result is in.
+ *
  * @param {number} row Row number
  */
 ve.ui.MWMediaResultWidget.prototype.setRow = function ( row ) {
@@ -233,6 +235,7 @@ ve.ui.MWMediaResultWidget.prototype.setRow = function ( row ) {
 
 /**
  * Get the row this result is in.
+ *
  * @return {number} row Row number
  */
 ve.ui.MWMediaResultWidget.prototype.getRow = function () {
@@ -241,6 +244,7 @@ ve.ui.MWMediaResultWidget.prototype.getRow = function () {
 
 /**
  * Check if the image has a src attribute already
+ *
  * @return {boolean} Thumbnail has its source attribute set
  */
 ve.ui.MWMediaResultWidget.prototype.hasSrc = function () {

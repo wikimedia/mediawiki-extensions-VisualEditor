@@ -286,6 +286,7 @@ ve.dm.MWMediaResourceProvider.prototype.getImageSizes = function () {
 
 /**
  * Check if this source is valid and ready for search.
+ *
  * @return {boolean} Source is valid
  */
 ve.dm.MWMediaResourceProvider.prototype.isValid = function () {

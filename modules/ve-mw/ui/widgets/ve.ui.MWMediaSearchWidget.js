@@ -328,6 +328,7 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
  * Respond to add results event in the results widget.
  * Override the way SelectWidget and GroupElement append the items
  * into the group so we can append them in groups of rows.
+ *
  * @param {ve.ui.MWMediaResultWidget[]} items An array of item elements
  */
 ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
@@ -403,6 +404,7 @@ ve.ui.MWMediaSearchWidget.prototype.runLayoutQueue = function () {
 /**
  * Respond to removing results event in the results widget.
  * Clear the relevant rows.
+ *
  * @param {OO.ui.OptionWidget[]} items Removed items
  */
 ve.ui.MWMediaSearchWidget.prototype.onResultsRemove = function ( items ) {
@@ -416,6 +418,7 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsRemove = function ( items ) {
 
 /**
  * Set language for the search results.
+ *
  * @param {string} lang Language
  */
 ve.ui.MWMediaSearchWidget.prototype.setLang = function ( lang ) {
@@ -424,6 +427,7 @@ ve.ui.MWMediaSearchWidget.prototype.setLang = function ( lang ) {
 
 /**
  * Get language for the search results.
+ *
  * @return {string} lang Language
  */
 ve.ui.MWMediaSearchWidget.prototype.getLang = function () {
