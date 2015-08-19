@@ -12,7 +12,7 @@
  * @abstract
  * @extends OO.ui.PopupTool
  * @constructor
- * @param {String} title Title
+ * @param {string} title Title
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config]
  */

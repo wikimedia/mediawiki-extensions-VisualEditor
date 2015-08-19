@@ -253,7 +253,7 @@ ve.dm.MWReferenceNode.static.remapInternalListKeys = function ( dataElement, int
  * @static
  * @param {Object} dataElement Element data
  * @param {ve.dm.InternalList} internalList Internal list
- * @return {Number} Index
+ * @return {number} Index
  */
 ve.dm.MWReferenceNode.static.getIndex = function ( dataElement, internalList ) {
 	var listIndex = dataElement.attributes.listIndex,
@@ -313,7 +313,7 @@ ve.dm.MWReferenceNode.prototype.getInternalItem = function () {
 /**
  * Gets the index for the reference
  *
- * @return {Number} Index
+ * @return {number} Index
  */
 ve.dm.MWReferenceNode.prototype.getIndex = function () {
 	return this.constructor.static.getIndex( this.element, this.getDocument().getInternalList() );
