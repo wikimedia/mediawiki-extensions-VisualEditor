@@ -220,6 +220,7 @@
 	"visualeditor-editnotices-tooltip": "Уреди известувања",
 	"visualeditor-editsummary": "Опишете ги направените измени",
 	"visualeditor-editsummary-bytes-remaining": "Број на преостанати бајти",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Наслов на страницата",
 	"visualeditor-formatdropdown-format-mw-heading2": "Наслов",
 	"visualeditor-formatdropdown-format-mw-heading3": "Поднаслов 1",

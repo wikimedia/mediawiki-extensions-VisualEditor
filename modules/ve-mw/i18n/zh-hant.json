@@ -233,6 +233,7 @@
 	"visualeditor-editnotices-tooltip": "編輯說明",
 	"visualeditor-editsummary": "描述您所變更的內容",
 	"visualeditor-editsummary-bytes-remaining": "尚可使用的位元組數",
+	"visualeditor-feedback-defaultmessage": "URL：$1",
 	"visualeditor-formatdropdown-format-mw-heading1": "頁面標題",
 	"visualeditor-formatdropdown-format-mw-heading2": "標題",
 	"visualeditor-formatdropdown-format-mw-heading3": "副標題 1",

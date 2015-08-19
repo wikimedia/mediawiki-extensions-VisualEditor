@@ -230,6 +230,7 @@
 	"visualeditor-editnotices-tooltip": "הודעות לעורכים",
 	"visualeditor-editsummary": "נא לתאר מה שינית",
 	"visualeditor-editsummary-bytes-remaining": "מספר הבתים שנותרו",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "כותרת דף",
 	"visualeditor-formatdropdown-format-mw-heading2": "כותרת",
 	"visualeditor-formatdropdown-format-mw-heading3": "כותרת־משנה 1",
