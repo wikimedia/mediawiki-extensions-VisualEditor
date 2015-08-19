@@ -10,6 +10,7 @@
 				"see": true
 			}
 		},
+		"checkTypes": "strictNativeCase",
 		"checkParamNames": true,
 		"checkRedundantAccess": true,
 		"checkRedundantReturns": true,
