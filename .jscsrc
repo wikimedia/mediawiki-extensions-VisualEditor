@@ -11,6 +11,8 @@
 			}
 		},
 		"checkParamNames": true,
+		"checkRedundantAccess": true,
+		"checkRedundantReturns": true,
 		"requireNewlineAfterDescription": true
 	}
 }
