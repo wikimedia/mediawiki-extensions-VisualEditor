@@ -99,7 +99,7 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 
 	this.index.length = 0;
 	for ( i = 0, len = knownParams.length; i < len; i++ ) {
-		name = knownParams[i];
+		name = knownParams[ i ];
 		// Skip parameters already in use
 		if ( this.template.hasParameter( name ) ) {
 			continue;
@@ -140,7 +140,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 	this.results.clearItems();
 
 	for ( i = 0, len = this.index.length; i < len; i++ ) {
-		item = this.index[i];
+		item = this.index[ i ];
 		if ( hasQuery ) {
 			textMatch = item.text.indexOf( query ) >= 0;
 			nameMatch = item.names.indexOf( query ) >= 0;

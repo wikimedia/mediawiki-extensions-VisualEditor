@@ -61,7 +61,7 @@
 	}
 
 	ve.trackSubscribe( 'mwedit.', function ( topic, data, timeStamp ) {
-		var action = topic.split( '.' )[1],
+		var action = topic.split( '.' )[ 1 ],
 			event;
 
 		timeStamp = timeStamp || this.timeStamp;  // I8e82acc12 back-compat
@@ -109,13 +109,13 @@
 		}, data );
 
 		if ( mw.user.isAnon() ) {
-			event['user.class'] = 'IP';
+			event[ 'user.class' ] = 'IP';
 		}
 
-		event['action.' + action + '.type'] = event.type;
-		event['action.' + action + '.mechanism'] = event.mechanism;
-		event['action.' + action + '.timing'] = Math.round( computeDuration( action, event, timeStamp ) );
-		event['action.' + action + '.message'] = event.message;
+		event[ 'action.' + action + '.type' ] = event.type;
+		event[ 'action.' + action + '.mechanism' ] = event.mechanism;
+		event[ 'action.' + action + '.timing' ] = Math.round( computeDuration( action, event, timeStamp ) );
+		event[ 'action.' + action + '.message' ] = event.message;
 
 		// Remove renamed properties
 		delete event.type;
@@ -126,7 +126,7 @@
 		if ( action === 'abort' ) {
 			timing = {};
 		} else {
-			timing[action] = timeStamp;
+			timing[ action ] = timeStamp;
 		}
 
 		mw.track( 'event.Edit', event );

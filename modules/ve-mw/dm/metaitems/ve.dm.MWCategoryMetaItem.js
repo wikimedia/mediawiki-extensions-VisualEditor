@@ -33,16 +33,16 @@ ve.dm.MWCategoryMetaItem.static.matchTagNames = [ 'link' ];
 ve.dm.MWCategoryMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/Category' ];
 
 ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements ) {
-	var href = domElements[0].getAttribute( 'href' ),
+	var href = domElements[ 0 ].getAttribute( 'href' ),
 		/*jshint regexp:false */
 		matches = href.match( /^((?:\.\.?\/)*)(.*?)(?:#(.*))?$/ ),
-		rawSortkey = matches[3] || '';
+		rawSortkey = matches[ 3 ] || '';
 	return {
 		type: this.name,
 		attributes: {
-			hrefPrefix: matches[1],
-			category: ve.safeDecodeURIComponent( matches[2] ).replace( /_/g, ' ' ),
-			origCategory: matches[2],
+			hrefPrefix: matches[ 1 ],
+			category: ve.safeDecodeURIComponent( matches[ 2 ] ).replace( /_/g, ' ' ),
+			origCategory: matches[ 2 ],
 			sortkey: ve.safeDecodeURIComponent( rawSortkey ).replace( /_/g, ' ' ),
 			origSortkey: rawSortkey
 		}

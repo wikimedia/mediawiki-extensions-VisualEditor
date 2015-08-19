@@ -33,7 +33,7 @@ ve.ui.MWReferenceSourceSelectWidget = function VeUiMWReferenceSourceSelectWidget
 
 	// Go over available tools
 	for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
-		item = tools[i];
+		item = tools[ i ];
 		items.push( new OO.ui.DecoratedOptionWidget( {
 			icon: item.icon,
 			label: item.title,

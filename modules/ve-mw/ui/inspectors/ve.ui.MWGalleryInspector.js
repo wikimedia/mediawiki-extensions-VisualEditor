@@ -43,7 +43,7 @@ ve.ui.MWGalleryInspector.static.modelClasses = [ ve.dm.MWGalleryNode ];
 /** */
 ve.ui.MWGalleryInspector.prototype.getInputPlaceholder = function () {
 	// 'File:' is always in content language
-	return mw.config.get( 'wgFormattedNamespaces' )['6'] + ':' +
+	return mw.config.get( 'wgFormattedNamespaces' )[ '6' ] + ':' +
 		ve.msg( 'visualeditor-mwgalleryinspector-placeholder' );
 };
 

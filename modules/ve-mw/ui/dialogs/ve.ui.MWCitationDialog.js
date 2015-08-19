@@ -62,12 +62,12 @@ ve.ui.MWCitationDialog.prototype.getSelectedNode = function () {
 		branches = referenceNode.getInternalItem().getChildren();
 		leaves = branches &&
 			branches.length === 1 &&
-			branches[0].canContainContent() &&
-			branches[0].getChildren();
+			branches[ 0 ].canContainContent() &&
+			branches[ 0 ].getChildren();
 		transclusionNode = leaves &&
 			leaves.length === 1 &&
-			leaves[0] instanceof ve.dm.MWTransclusionNode &&
-			leaves[0];
+			leaves[ 0 ] instanceof ve.dm.MWTransclusionNode &&
+			leaves[ 0 ];
 	}
 
 	return transclusionNode || null;
@@ -204,7 +204,7 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 							// item covers the entire paragraph so we have to get the range of it's
 							// first (and empty) child
 							dialog.getFragment().clone(
-								new ve.dm.LinearSelection( doc, item.getChildren()[0].getRange() )
+								new ve.dm.LinearSelection( doc, item.getChildren()[ 0 ].getRange() )
 							)
 						);
 					}

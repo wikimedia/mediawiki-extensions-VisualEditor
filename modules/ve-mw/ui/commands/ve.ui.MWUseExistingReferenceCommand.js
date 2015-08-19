@@ -39,7 +39,7 @@ ve.ui.MWUseExistingReferenceCommand.prototype.isExecutable = function ( fragment
 		groups = fragment.getDocument().getInternalList().getNodeGroups();
 
 	for ( groupName in groups ) {
-		if ( groupName.lastIndexOf( 'mwReference/' ) === 0 && groups[groupName].indexOrder.length ) {
+		if ( groupName.lastIndexOf( 'mwReference/' ) === 0 && groups[ groupName ].indexOrder.length ) {
 			return true;
 		}
 	}

@@ -22,7 +22,7 @@ function runMWAutolinkTest( assert, html, method, range, expectedRange, expected
 		expectedOriginalData( originalData );
 	}
 	surface.getModel().setLinearSelection( range );
-	status = linkAction[method]();
+	status = linkAction[ method ]();
 	assert.equal( status, !expectFail, msg + ': action return value' );
 
 	assert.equalLinearData( surface.getModel().getDocument().getFullData(), data, msg + ': data models match' );
@@ -46,7 +46,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				expectedRange: new ve.Range( 52, 52 ),
 				expectedData: function ( data ) {
 					for ( var i = 1; i < 51; i++ ) {
-						data[i] = [ data[i], [ 0 ] ];
+						data[ i ] = [ data[ i ], [ 0 ] ];
 					}
 				},
 				msg: 'Strip trailing punctuation (but not matched parens)'
@@ -55,6 +55,6 @@ QUnit.test( 'MW autolink', function ( assert ) {
 
 	QUnit.expect( cases.length * 5 );
 	for ( i = 0; i < cases.length; i++ ) {
-		runMWAutolinkTest( assert, cases[i].html, cases[i].method, cases[i].range, cases[i].expectedRange, cases[i].expectedData, cases[i].expectedOriginalData, cases[i].msg );
+		runMWAutolinkTest( assert, cases[ i ].html, cases[ i ].method, cases[ i ].range, cases[ i ].expectedRange, cases[ i ].expectedData, cases[ i ].expectedOriginalData, cases[ i ].msg );
 	}
 } );

@@ -37,13 +37,13 @@ ve.dm.MWExternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:ExtLink' ];
 
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements ) {
 	var parentResult = ve.dm.LinkAnnotation.static.toDataElement.apply( this, arguments );
-	parentResult.attributes.rel = domElements[0].getAttribute( 'rel' );
+	parentResult.attributes.rel = domElements[ 0 ].getAttribute( 'rel' );
 	return parentResult;
 };
 
 ve.dm.MWExternalLinkAnnotation.static.toDomElements = function ( dataElement ) {
 	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.apply( this, arguments );
-	parentResult[0].setAttribute( 'rel', dataElement.attributes.rel || 'mw:ExtLink' );
+	parentResult[ 0 ].setAttribute( 'rel', dataElement.attributes.rel || 'mw:ExtLink' );
 	return parentResult;
 };
 

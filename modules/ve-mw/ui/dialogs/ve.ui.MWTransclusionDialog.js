@@ -197,8 +197,8 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () 
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
 	return parts && parts.length === 1 && (
-		parts[0] instanceof ve.dm.MWTemplateModel ||
-		parts[0] instanceof ve.dm.MWTemplatePlaceholderModel
+		parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
+		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
 	);
 };
 
@@ -226,12 +226,12 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 
 	if ( this.transclusionModel ) {
 		parts = this.transclusionModel.getParts();
-		part = parts.length && parts[0];
+		part = parts.length && parts[ 0 ];
 		if ( mode === 'auto' ) {
 			mode = this.isSingleTemplateTransclusion() ? 'single' : 'multiple';
 		}
 	}
-	if ( !modeCssClasses[mode] ) {
+	if ( !modeCssClasses[ mode ] ) {
 		mode = 'multiple';
 	}
 
@@ -240,7 +240,7 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 		single = mode === 'single';
 		if ( this.$content ) {
 			for ( name in modeCssClasses ) {
-				this.$content.toggleClass( modeCssClasses[name], name === mode );
+				this.$content.toggleClass( modeCssClasses[ name ], name === mode );
 			}
 		}
 		this.setSize( single ? 'medium' : 'large' );

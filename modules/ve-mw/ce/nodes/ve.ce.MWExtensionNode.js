@@ -59,8 +59,8 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 
 	// undefined means omit the attribute, not convert it to string 'undefined'
 	for ( attr in mwData.attrs ) {
-		if ( mwData.attrs[attr] === undefined ) {
-			delete mwData.attrs[attr];
+		if ( mwData.attrs[ attr ] === undefined ) {
+			delete mwData.attrs[ attr ];
 		}
 	}
 
@@ -145,8 +145,8 @@ ve.ce.MWInlineExtensionNode.prototype.onParseSuccess = function ( deferred, resp
 		contentNodes = $( data.content ).get();
 
 	// Inline nodes will come back in wrapper paragraphs, so unwrap them.
-	if ( contentNodes[0] && contentNodes[0].childNodes ) {
-		contentNodes = Array.prototype.slice.apply( contentNodes[0].childNodes );
+	if ( contentNodes[ 0 ] && contentNodes[ 0 ].childNodes ) {
+		contentNodes = Array.prototype.slice.apply( contentNodes[ 0 ].childNodes );
 	}
 	deferred.resolve( contentNodes );
 };

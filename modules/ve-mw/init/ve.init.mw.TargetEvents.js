@@ -145,11 +145,11 @@ ve.init.mw.TargetEvents.prototype.trackSaveError = function ( type ) {
 	} );
 
 	data = {
-		type: typeMap[type] || 'responseUnknown',
+		type: typeMap[ type ] || 'responseUnknown',
 		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 )
 	};
-	if ( type === 'unknown' && failureArguments[1].error && failureArguments[1].error.code ) {
-		data.message = failureArguments[1].error.code;
+	if ( type === 'unknown' && failureArguments[ 1 ].error && failureArguments[ 1 ].error.code ) {
+		data.message = failureArguments[ 1 ].error.code;
 	}
 	ve.track( 'mwedit.saveFailure', data );
 };

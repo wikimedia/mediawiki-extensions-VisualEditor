@@ -41,7 +41,7 @@
 			);
 		}
 		var $content = $( '#content' ),
-			contentRect = $content[0].getBoundingClientRect(),
+			contentRect = $content[ 0 ].getBoundingClientRect(),
 			offsetTop = $content.offset().top,
 			windowHeight = $( window ).height(),
 			top = Math.max( contentRect.top, 0 ),
@@ -54,8 +54,8 @@
 	}
 
 	function incrementLoadingProgress() {
-		var step = progressSteps[progressStep];
-		setLoadingProgress( step[0], step[1] );
+		var step = progressSteps[ progressStep ];
+		setLoadingProgress( step[ 0 ], step[ 1 ] );
 		progressStep++;
 	}
 
@@ -314,7 +314,7 @@
 						// 2) when onEditTabClick is not bound (!isViewPage) it will
 						// just work.
 						veEditUri,
-						tabMessages[action] !== null ? mw.msg( tabMessages[action] ) : $caEditLink.text(),
+						tabMessages[ action ] !== null ? mw.msg( tabMessages[ action ] ) : $caEditLink.text(),
 						'ca-ve-edit',
 						mw.msg( 'tooltip-ca-ve-edit' ),
 						mw.msg( 'accesskey-ca-ve-edit' ),
@@ -328,16 +328,16 @@
 				// Make the state of the page consistent with the config if needed
 				/*jshint bitwise:false */
 				if ( reverseTabOrder ^ conf.tabPosition === 'before' ) {
-					if ( $caEdit[0].nextSibling === $caVeEdit[0] ) {
+					if ( $caEdit[ 0 ].nextSibling === $caVeEdit[ 0 ] ) {
 						$caVeEdit.after( $caEdit );
 					}
 				} else {
-					if ( $caVeEdit[0].nextSibling === $caEdit[0] ) {
+					if ( $caVeEdit[ 0 ].nextSibling === $caEdit[ 0 ] ) {
 						$caEdit.after( $caVeEdit );
 					}
 				}
-				if ( tabMessages[action] !== null ) {
-					$caVeEditLink.text( mw.msg( tabMessages[action] ) );
+				if ( tabMessages[ action ] !== null ) {
+					$caVeEditLink.text( mw.msg( tabMessages[ action ] ) );
 				}
 			}
 
@@ -348,12 +348,12 @@
 
 			// Alter the edit tab (#ca-edit)
 			if ( $( '#ca-view-foreign' ).length ) {
-				if ( tabMessages[action + 'localdescriptionsource'] !== null ) {
-					$caEditLink.text( mw.msg( tabMessages[action + 'localdescriptionsource'] ) );
+				if ( tabMessages[ action + 'localdescriptionsource' ] !== null ) {
+					$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
 				}
 			} else {
-				if ( tabMessages[action + 'source'] !== null ) {
-					$caEditLink.text( mw.msg( tabMessages[action + 'source'] ) );
+				if ( tabMessages[ action + 'source' ] !== null ) {
+					$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
 				}
 			}
 
@@ -364,18 +364,18 @@
 			}
 
 			// Process appendix messages
-			if ( tabMessages[action + 'appendix'] !== null ) {
+			if ( tabMessages[ action + 'appendix' ] !== null ) {
 				$caVeEditLink.append(
 					$( '<span>' )
 						.addClass( 've-tabmessage-appendix' )
-						.text( mw.msg( tabMessages[action + 'appendix'] ) )
+						.text( mw.msg( tabMessages[ action + 'appendix' ] ) )
 				);
 			}
-			if ( tabMessages[action + 'sourceappendix'] !== null ) {
+			if ( tabMessages[ action + 'sourceappendix' ] !== null ) {
 				$caEditLink.append(
 					$( '<span>' )
 						.addClass( 've-tabmessage-appendix' )
-						.text( mw.msg( tabMessages[action + 'sourceappendix'] ) )
+						.text( mw.msg( tabMessages[ action + 'sourceappendix' ] ) )
 				);
 			}
 

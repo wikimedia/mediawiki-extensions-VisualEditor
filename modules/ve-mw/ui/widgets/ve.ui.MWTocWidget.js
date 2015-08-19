@@ -119,11 +119,11 @@ ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
 		len = items.length;
 	if ( len > 0 ) {
 		for ( ; i < len; i++ ) {
-			if ( items[i] instanceof ve.dm.MWTOCForceMetaItem ) {
+			if ( items[ i ] instanceof ve.dm.MWTOCForceMetaItem ) {
 				this.mwTOCForce = true;
 			}
 			// Needs testing
-			if ( items[i] instanceof ve.dm.MWTOCDisableMetaItem ) {
+			if ( items[ i ] instanceof ve.dm.MWTOCDisableMetaItem ) {
 				this.mwTOCDisable = true;
 			}
 		}
@@ -164,8 +164,8 @@ ve.ui.MWTocWidget.prototype.rebuild = ve.debounce( function () {
 ve.ui.MWTocWidget.prototype.teardownItems = function () {
 	var item;
 	for ( item in this.items ) {
-		this.items[item].remove();
-		delete this.items[item];
+		this.items[ item ].remove();
+		delete this.items[ item ];
 	}
 	this.items = {};
 };
@@ -201,13 +201,13 @@ ve.ui.MWTocWidget.prototype.build = function () {
 		headingOuterRange,
 		ceNode;
 	for ( ; i < nodes.length; i++ ) {
-		if ( nodes[i].node.parent === previousHeadingNode ) {
+		if ( nodes[ i ].node.parent === previousHeadingNode ) {
 			// Duplicate heading
 			continue;
 		}
-		if ( nodes[i].node.parent.getType() === 'mwHeading' ) {
+		if ( nodes[ i ].node.parent.getType() === 'mwHeading' ) {
 			tocIndex++;
-			headingLevel = nodes[i].node.parent.getAttribute( 'level' );
+			headingLevel = nodes[ i ].node.parent.getAttribute( 'level' );
 			// MW TOC Generation
 			// The first heading will always be be a zero level topic, even heading levels > 2
 			// If heading level is 1 then it is definitely a zero level topic
@@ -245,7 +245,7 @@ ve.ui.MWTocWidget.prototype.build = function () {
 					} else if ( headingLevel < previousHeadingLevel && tocLevel !== 1 ) {
 						tocLevel--;
 						sectionPrefix.pop();
-						tocNumber = sectionPrefix[sectionPrefix.length - 1] + 1;
+						tocNumber = sectionPrefix[ sectionPrefix.length - 1 ] + 1;
 						sectionPrefix.pop();
 						sectionPrefix.push( tocNumber );
 					}
@@ -256,14 +256,14 @@ ve.ui.MWTocWidget.prototype.build = function () {
 			parentSectionArray.pop();
 			if ( parentSectionArray.length > 0 ) {
 				key = parentSectionArray.join( '.' );
-				parent = this.items[key];
+				parent = this.items[ key ];
 			} else {
 				// Topic level is zero
 				parent = this.topics;
 			}
 			// TODO: Cleanup config generation, merge local vars into config object
 			// Get CE node for the heading
-			headingOuterRange = nodes[i].nodeOuterRange;
+			headingOuterRange = nodes[ i ].nodeOuterRange;
 			ceNode = this.surface.getView().getDocument().getBranchNodeFromOffset( headingOuterRange.end );
 			config = {
 				node: ceNode,
@@ -272,13 +272,13 @@ ve.ui.MWTocWidget.prototype.build = function () {
 				tocLevel: tocLevel,
 				tocSection: tocSection,
 				sectionPrefix: sectionPrefix.join( '.' ),
-				insertIndex: sectionPrefix[sectionPrefix.length - 1]
+				insertIndex: sectionPrefix[ sectionPrefix.length - 1 ]
 			};
 			// Add item
-			this.items[sectionPrefix.join( '.' )] = new ve.ui.MWTocItemWidget( config );
-			config.parent.addItems( [ this.items[sectionPrefix.join( '.' )] ], config.insertIndex );
+			this.items[ sectionPrefix.join( '.' ) ] = new ve.ui.MWTocItemWidget( config );
+			config.parent.addItems( [ this.items[ sectionPrefix.join( '.' ) ] ], config.insertIndex );
 			previousHeadingLevel = headingLevel;
-			previousHeadingNode = nodes[i].node.parent;
+			previousHeadingNode = nodes[ i ].node.parent;
 		}
 	}
 	this.initialized = true;

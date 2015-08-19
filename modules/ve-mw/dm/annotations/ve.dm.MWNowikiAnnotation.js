@@ -34,7 +34,7 @@ ve.dm.MWNowikiAnnotation.static.matchRdfaTypes = [ 'mw:Nowiki' ];
 ve.dm.MWNowikiAnnotation.static.toDomElements = function ( dataElement, doc, converter, childDomElements ) {
 	var i, len,
 		originalDomElements = dataElement.originalDomElements,
-		originalChildren = originalDomElements && originalDomElements[0] && originalDomElements[0].childNodes,
+		originalChildren = originalDomElements && originalDomElements[ 0 ] && originalDomElements[ 0 ].childNodes,
 		contentsChanged = false,
 		domElement = document.createElement( 'span' );
 
@@ -43,7 +43,7 @@ ve.dm.MWNowikiAnnotation.static.toDomElements = function ( dataElement, doc, con
 		contentsChanged = true;
 	} else {
 		for ( i = 0, len = originalChildren.length; i < len; i++ ) {
-			if ( !originalChildren[i].isEqualNode( childDomElements[i] ) ) {
+			if ( !originalChildren[ i ].isEqualNode( childDomElements[ i ] ) ) {
 				contentsChanged = true;
 				break;
 			}

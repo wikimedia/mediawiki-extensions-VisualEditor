@@ -125,9 +125,9 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 	if ( this.listGroup !== listGroup ) {
 		// Get all reference nodes with the same group and key
 		group = internalList.getNodeGroup( this.listGroup );
-		refNodes = group.keyedNodes[this.listKey] ?
-			group.keyedNodes[this.listKey].slice() :
-			[ group.firstNodes[this.listIndex] ];
+		refNodes = group.keyedNodes[ this.listKey ] ?
+			group.keyedNodes[ this.listKey ].slice() :
+			[ group.firstNodes[ this.listIndex ] ];
 		// Check for name collision when moving items between groups
 		keyIndex = internalList.getKeyIndex( this.listGroup, this.listKey );
 		if ( keyIndex !== undefined ) {
@@ -139,7 +139,7 @@ ve.dm.MWReferenceModel.prototype.updateInternalItem = function ( surfaceModel ) 
 		for ( i = 0, len = refNodes.length; i < len; i++ ) {
 			txs.push( ve.dm.Transaction.newFromAttributeChanges(
 				doc,
-				refNodes[i].getOuterRange().start,
+				refNodes[ i ].getOuterRange().start,
 				{ refGroup: this.group, listGroup: listGroup }
 			) );
 		}

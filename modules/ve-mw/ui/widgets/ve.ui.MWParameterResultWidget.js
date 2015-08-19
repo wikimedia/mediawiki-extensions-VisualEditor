@@ -55,7 +55,7 @@ ve.ui.MWParameterResultWidget.prototype.buildLabel = function () {
 		$names.append(
 			$( '<span>' )
 				.addClass( 've-ui-mwParameterResultWidget-name' )
-				.text( this.data.aliases[i] )
+				.text( this.data.aliases[ i ] )
 		);
 	}
 

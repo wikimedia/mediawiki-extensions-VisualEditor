@@ -69,11 +69,11 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 
 	groupNames = Object.keys( groups );
 	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
-		groupName = groupNames[i];
+		groupName = groupNames[ i ];
 		if ( groupName.lastIndexOf( 'mwReference/' ) !== 0 ) {
 			continue;
 		}
-		if ( groups[groupName].indexOrder.length ) {
+		if ( groups[ groupName ].indexOrder.length ) {
 			this.indexEmpty = false;
 			return;
 		}
@@ -92,7 +92,7 @@ ve.ui.MWReferenceSearchWidget.prototype.setInternalList = function ( internalLis
 ve.ui.MWReferenceSearchWidget.prototype.onInternalListUpdate = function ( groupsChanged ) {
 	var i, len;
 	for ( i = 0, len = groupsChanged.length; i < len; i++ ) {
-		if ( groupsChanged[i].indexOf( 'mwReference/' ) === 0 ) {
+		if ( groupsChanged[ i ].indexOf( 'mwReference/' ) === 0 ) {
 			this.built = false;
 			break;
 		}
@@ -132,17 +132,17 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 	groupNames = Object.keys( groups ).sort();
 
 	for ( i = 0, iLen = groupNames.length; i < iLen; i++ ) {
-		groupName = groupNames[i];
+		groupName = groupNames[ i ];
 		if ( groupName.lastIndexOf( 'mwReference/' ) !== 0 ) {
 			continue;
 		}
-		group = groups[groupName];
+		group = groups[ groupName ];
 		firstNodes = group.firstNodes;
 		indexOrder = group.indexOrder;
 
 		n = 0;
 		for ( j = 0, jLen = indexOrder.length; j < jLen; j++ ) {
-			refNode = firstNodes[indexOrder[j]];
+			refNode = firstNodes[ indexOrder[ j ] ];
 			// Exclude placeholder references
 			if ( refNode.getAttribute( 'placeholder' ) ) {
 				continue;
@@ -157,7 +157,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 			refGroup = refModel.getGroup();
 			citation = ( refGroup && refGroup.length ? refGroup + ' ' : '' ) + n;
 			matches = refModel.getListKey().match( /^literal\/(.*)$/ );
-			name = matches && matches[1] || '';
+			name = matches && matches[ 1 ] || '';
 			// Hide previously auto-generated reference names
 			if ( name.match( /^:[0-9]+$/ ) ) {
 				name = '';
@@ -211,7 +211,7 @@ ve.ui.MWReferenceSearchWidget.prototype.addResults = function () {
 		items = [];
 
 	for ( i = 0, len = this.index.length; i < len; i++ ) {
-		item = this.index[i];
+		item = this.index[ i ];
 		if ( item.text.indexOf( query ) >= 0 ) {
 			$citation = $( '<div>' )
 				.addClass( 've-ui-mwReferenceSearchWidget-citation' )

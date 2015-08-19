@@ -50,7 +50,7 @@ ve.dm.MWNumberedExternalLinkNode.static.toDataElement = function ( domElements )
 	return {
 		type: this.name,
 		attributes: {
-			href: domElements[0].getAttribute( 'href' )
+			href: domElements[ 0 ].getAttribute( 'href' )
 		}
 	};
 };

@@ -33,7 +33,7 @@ ve.dm.MWDefaultSortMetaItem.static.matchTagNames = [ 'meta' ];
 ve.dm.MWDefaultSortMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/categorydefaultsort' ];
 
 ve.dm.MWDefaultSortMetaItem.static.toDataElement = function ( domElements ) {
-	var content = domElements[0].getAttribute( 'content' );
+	var content = domElements[ 0 ].getAttribute( 'content' );
 	return {
 		type: this.name,
 		attributes: {

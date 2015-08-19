@@ -34,8 +34,8 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
-			assert, cases[i].html, cases[i].range, cases[i].operations,
-			cases[i].expectedData, cases[i].expectedSelection, cases[i].msg
+			assert, cases[ i ].html, cases[ i ].range, cases[ i ].operations,
+			cases[ i ].expectedData, cases[ i ].expectedSelection, cases[ i ].msg
 		);
 	}
 } );

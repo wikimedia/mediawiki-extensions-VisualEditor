@@ -150,7 +150,7 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	var currentEditSummaryWikitext,
 		dialog = this,
-		panelObj = dialog[panel + 'Panel'];
+		panelObj = dialog[ panel + 'Panel' ];
 
 	if ( ( [ 'save', 'review', 'conflict', 'nochanges' ].indexOf( panel ) ) === -1 ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
@@ -175,7 +175,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
 				// FIXME we need to add features to OO.ui.TextInputWidget so we don't need to access .$input
-				ve.selectEnd( dialog.editSummaryInput.$input[0] );
+				ve.selectEnd( dialog.editSummaryInput.$input[ 0 ] );
 			} );
 			break;
 		case 'conflict':
@@ -204,10 +204,10 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 						action: 'parse',
 						summary: currentEditSummaryWikitext
 					} ).done( function ( result ) {
-						if ( result.parse.parsedsummary['*'] === '' ) {
+						if ( result.parse.parsedsummary[ '*' ] === '' ) {
 							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						} else {
-							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary['*'] ) );
+							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
 						}
 					} ).fail( function () {
 						dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
@@ -242,7 +242,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
  */
 ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 	var $message;
-	if ( !this.messages[name] ) {
+	if ( !this.messages[ name ] ) {
 		options = options || {};
 		if ( options.wrap === undefined ) {
 			options.wrap = 'warning';
@@ -261,7 +261,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 		}
 		this.$saveMessages.append( $message );
 
-		this.messages[name] = $message;
+		this.messages[ name ] = $message;
 	}
 };
 
@@ -270,9 +270,9 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
  * @param {string} name Message's unique name
  */
 ve.ui.MWSaveDialog.prototype.clearMessage = function ( name ) {
-	if ( this.messages[name] ) {
-		this.messages[name].remove();
-		delete this.messages[name];
+	if ( this.messages[ name ] ) {
+		this.messages[ name ].remove();
+		delete this.messages[ name ];
 	}
 };
 

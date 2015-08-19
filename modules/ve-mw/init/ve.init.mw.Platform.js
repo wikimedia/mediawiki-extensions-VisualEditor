@@ -61,7 +61,7 @@ ve.init.mw.Platform.prototype.getMessage = mw.msg.bind( mw );
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
 	for ( var key in messages ) {
-		this.parsedMessages[key] = messages[key];
+		this.parsedMessages[ key ] = messages[ key ];
 	}
 };
 
@@ -69,7 +69,7 @@ ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
 ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
 	if ( Object.prototype.hasOwnProperty.call( this.parsedMessages, key ) ) {
 		// Prefer parsed results from VisualEditorDataModule if available.
-		return this.parsedMessages[key];
+		return this.parsedMessages[ key ];
 	}
 	// Fallback to regular messages, with mw.message html escaping applied.
 	return mw.message( key ).escaped();
@@ -87,7 +87,7 @@ ve.init.mw.Platform.prototype.getLanguageCodes = function () {
 ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
 	var languageNames = mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
 		$.uls.data.getAutonyms();
-	return languageNames[code] || '';
+	return languageNames[ code ] || '';
 };
 
 /**
@@ -118,7 +118,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 
 	if ( otherMsg !== '<visualeditor-quick-access-characters.json>' ) {
 		try {
-			characters[otherGroupName] = JSON.parse( otherMsg );
+			characters[ otherGroupName ] = JSON.parse( otherMsg );
 		} catch ( err ) {
 			ve.log( 've.init.mw.Platform: Could not parse the Special Character list.' );
 			ve.log( err );
@@ -130,14 +130,14 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 		$.each( groupCharacters, function ( charKey, charVal ) {
 			// VE has a different format and it would be a pain to change it now
 			if ( typeof charVal === 'string' ) {
-				groupObject[charVal] = charVal;
+				groupObject[ charVal ] = charVal;
 			} else if ( typeof charVal === 'object' && 0 in charVal && 1 in charVal ) {
-				groupObject[charVal[0]] = charVal[1];
+				groupObject[ charVal[ 0 ] ] = charVal[ 1 ];
 			} else {
-				groupObject[charVal.label] = charVal;
+				groupObject[ charVal.label ] = charVal;
 			}
 		} );
-		characters[mw.msg( 'special-characters-group-' + groupName )] = groupObject;
+		characters[ mw.msg( 'special-characters-group-' + groupName ) ] = groupObject;
 	} );
 
 	// This implementation always resolves instantly

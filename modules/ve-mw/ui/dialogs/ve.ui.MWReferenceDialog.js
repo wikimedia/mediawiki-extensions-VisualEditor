@@ -215,7 +215,7 @@ ve.ui.MWReferenceDialog.prototype.getBodyHeight = function () {
 		400,
 		Math.max(
 			300,
-			Math.ceil( this.panels.getCurrentItem().$element[0].scrollHeight )
+			Math.ceil( this.panels.getCurrentItem().$element[ 0 ].scrollHeight )
 		)
 	);
 };
@@ -269,11 +269,11 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 
 	group = this.getFragment().getDocument().getInternalList()
 		.getNodeGroup( this.referenceModel.getListGroup() );
-	if ( group && group.keyedNodes[this.referenceModel.getListKey()].length > 1 ) {
+	if ( group && group.keyedNodes[ this.referenceModel.getListKey() ].length > 1 ) {
 		this.$reuseWarning.removeClass( 'oo-ui-element-hidden' );
 		this.$reuseWarningText.text( mw.msg(
 			'visualeditor-dialog-reference-editing-reused',
-			group.keyedNodes[this.referenceModel.getListKey()].length
+			group.keyedNodes[ this.referenceModel.getListKey() ].length
 		) );
 	} else {
 		this.$reuseWarning.addClass( 'oo-ui-element-hidden' );
@@ -370,7 +370,7 @@ ve.ui.MWReferenceDialog.prototype.getActionProcess = function ( action ) {
 	} else if ( action === 'back' ) {
 		this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 		this.panels.setItem( this.editPanel );
-		this.editPanel.$element.find( '.ve-ce-documentNode' )[0].focus();
+		this.editPanel.$element.find( '.ve-ce-documentNode' )[ 0 ].focus();
 	} else if ( action === 'select' || action === 'insert-select' ) {
 		this.useExistingReference( action );
 	}

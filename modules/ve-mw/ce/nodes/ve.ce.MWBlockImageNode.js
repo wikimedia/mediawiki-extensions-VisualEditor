@@ -117,7 +117,7 @@ ve.ce.MWBlockImageNode.prototype.getTypeToRdfa = function () {
 	var rdfa, obj = {};
 
 	for ( rdfa in this.model.constructor.static.rdfaToType ) {
-		obj[ this.model.constructor.static.rdfaToType[rdfa] ] = rdfa;
+		obj[ this.model.constructor.static.rdfaToType[ rdfa ] ] = rdfa;
 	}
 	return obj;
 };
@@ -137,7 +137,7 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
 	if ( this.captionVisible ) {
 		// Only create a caption if we need it
 		if ( !this.$caption ) {
-			model = this.model.children[0];
+			model = this.model.children[ 0 ];
 			view = ve.ce.nodeFactory.create( model.getType(), model );
 			model.connect( this, { update: 'onModelUpdate' } );
 			this.children.push( view );
@@ -243,7 +243,7 @@ ve.ce.MWBlockImageNode.prototype.getCssClass = function ( type, alignment ) {
 			return 'mw-halign-right';
 		}
 	} else {
-		return this.constructor.static.cssClasses[type][alignment];
+		return this.constructor.static.cssClasses[ type ][ alignment ];
 	}
 };
 

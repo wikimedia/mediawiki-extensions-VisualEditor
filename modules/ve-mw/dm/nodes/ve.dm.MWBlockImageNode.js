@@ -88,10 +88,10 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	}
 
 	var dataElement, newDimensions, attributes,
-		figure = domElements[0],
-		imgWrapper = findChildren( figure, [ 'a', 'span' ] )[0] || null,
-		img = imgWrapper && findChildren( imgWrapper, [ 'img' ] )[0] || null,
-		caption = findChildren( figure, [ 'figcaption' ] )[0] || null,
+		figure = domElements[ 0 ],
+		imgWrapper = findChildren( figure, [ 'a', 'span' ] )[ 0 ] || null,
+		img = imgWrapper && findChildren( imgWrapper, [ 'img' ] )[ 0 ] || null,
+		caption = findChildren( figure, [ 'figcaption' ] )[ 0 ] || null,
 		classAttr = figure.getAttribute( 'class' ),
 		typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' ),
 		errorIndex = typeofAttrs.indexOf( 'mw:Error' ),
@@ -103,7 +103,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		typeofAttrs.splice( errorIndex, 1 );
 	}
 	attributes = {
-		type: this.rdfaToType[typeofAttrs[0]],
+		type: this.rdfaToType[ typeofAttrs[ 0 ] ],
 		href: imgWrapper && imgWrapper.getAttribute( 'href' ) || '',
 		src: img && img.getAttribute( 'src' ),
 		resource: img && img.getAttribute( 'resource' )
@@ -169,7 +169,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 // should be more conditional.
 ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) {
 	var rdfa, width, height,
-		dataElement = data[0],
+		dataElement = data[ 0 ],
 		figure = doc.createElement( 'figure' ),
 		imgWrapper = doc.createElement( dataElement.attributes.href !== '' ? 'a' : 'span' ),
 		img = doc.createElement( 'img' ),
@@ -180,12 +180,12 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	if ( !this.typeToRdfa ) {
 		this.typeToRdfa = {};
 		for ( rdfa in this.rdfaToType ) {
-			this.typeToRdfa[this.rdfaToType[rdfa]] = rdfa;
+			this.typeToRdfa[ this.rdfaToType[ rdfa ] ] = rdfa;
 		}
 	}
 
 	// Type
-	figure.setAttribute( 'typeof', this.typeToRdfa[dataElement.attributes.type] );
+	figure.setAttribute( 'typeof', this.typeToRdfa[ dataElement.attributes.type ] );
 
 	if ( classAttr ) {
 		figure.className = classAttr;
@@ -238,7 +238,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
  * @returns {ve.dm.MWImageCaptionNode|null} Caption node, if present
  */
 ve.dm.MWBlockImageNode.prototype.getCaptionNode = function () {
-	var node = this.children[0];
+	var node = this.children[ 0 ];
 	return node instanceof ve.dm.MWImageCaptionNode ? node : null;
 };
 

@@ -43,11 +43,11 @@ ve.dm.MWMediaResourceQueue.prototype.setup = function () {
 			// Set up the providers
 			for ( i = 0, len = sources.length; i < len; i++ ) {
 				queue.providers.push( new ve.dm.MWMediaResourceProvider(
-					sources[i].apiurl,
+					sources[ i ].apiurl,
 					{
-						name: sources[i].name,
-						local: sources[i].local,
-						scriptDirUrl: sources[i].scriptDirUrl,
+						name: sources[ i ].name,
+						local: sources[ i ].local,
+						scriptDirUrl: sources[ i ].scriptDirUrl,
 						userParams: {
 							gsrsearch: queue.getSearchQuery()
 						},

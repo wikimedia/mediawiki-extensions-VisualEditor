@@ -82,7 +82,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 
 	$.each( query.pages || [], function ( pageId, categoryPage ) {
 		result.push( mw.Title.newFromText( categoryPage.title ).getMainText() );
-		linkCacheUpdate[categoryPage.title] = {
+		linkCacheUpdate[ categoryPage.title ] = {
 			missing: categoryPage.hasOwnProperty( 'missing' ),
 			hidden: categoryPage.categoryinfo && categoryPage.categoryinfo.hasOwnProperty( 'hidden' )
 		};
@@ -90,16 +90,16 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 
 	$.each( query.redirects || [], function ( index, redirect ) {
 		if ( !linkCacheUpdate.hasOwnProperty( redirect.to ) ) {
-			linkCacheUpdate[redirect.to] = ve.init.platform.linkCache.getCached( redirect.to ) ||
+			linkCacheUpdate[ redirect.to ] = ve.init.platform.linkCache.getCached( redirect.to ) ||
 				{ missing: false, redirectFrom: [ redirect.from ] };
 		}
 		if (
-			linkCacheUpdate[redirect.to].redirectFrom &&
-			linkCacheUpdate[redirect.to].redirectFrom.indexOf( redirect.from ) === -1
+			linkCacheUpdate[ redirect.to ].redirectFrom &&
+			linkCacheUpdate[ redirect.to ].redirectFrom.indexOf( redirect.from ) === -1
 		) {
-			linkCacheUpdate[redirect.to].redirectFrom.push( redirect.from );
+			linkCacheUpdate[ redirect.to ].redirectFrom.push( redirect.from );
 		} else {
-			linkCacheUpdate[redirect.to].redirectFrom = [ redirect.from ];
+			linkCacheUpdate[ redirect.to ].redirectFrom = [ redirect.from ];
 		}
 	} );
 
@@ -144,7 +144,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 			exactMatch = true;
 		}
 		if ( !suggestedCacheEntry ) {
-			linkCacheUpdate[suggestedCategoryTitle] = { missing: false };
+			linkCacheUpdate[ suggestedCategoryTitle ] = { missing: false };
 		}
 		if (
 			existingCategories.indexOf( suggestedCategory ) === -1
@@ -171,7 +171,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	// New category
 	if ( !exactMatch && canonicalQueryValue ) {
 		newCategoryItems.push( canonicalQueryValue );
-		linkCacheUpdate[prefixedCanonicalQueryValue] = { missing: true };
+		linkCacheUpdate[ prefixedCanonicalQueryValue ] = { missing: true };
 	}
 
 	ve.init.platform.linkCache.set( linkCacheUpdate );
@@ -239,7 +239,7 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 			data: name,
 			autoFitLabel: false,
 			label: $( '<span>' )
-				.text( mw.Title.newFromText( cachedData.redirectFrom[0] ).getMainText() )
+				.text( mw.Title.newFromText( cachedData.redirectFrom[ 0 ] ).getMainText() )
 				.append( '<br>↳ ' )
 				.append( $( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
 		} );

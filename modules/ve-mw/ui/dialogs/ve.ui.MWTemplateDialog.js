@@ -112,8 +112,8 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 		if ( removed instanceof ve.dm.MWTemplateModel ) {
 			params = removed.getParameters();
 			for ( name in params ) {
-				removePages.push( this.bookletLayout.getPage( params[name].getId() ) );
-				delete this.expandedParamList[params[name].getId()];
+				removePages.push( this.bookletLayout.getPage( params[ name ].getId() ) );
+				delete this.expandedParamList[ params[ name ].getId() ];
 			}
 			removed.disconnect( this );
 		}
@@ -139,12 +139,12 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				// Prevent selection changes
 				this.preventReselection = true;
 				for ( i = 0, len = names.length; i < len; i++ ) {
-					this.onAddParameter( params[names[i]] );
+					this.onAddParameter( params[ names[ i ] ] );
 				}
 				this.preventReselection = false;
 				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
 				if ( names.length ) {
-					this.setPageByName( params[names[0]].getId() );
+					this.setPageByName( params[ names[ 0 ] ].getId() );
 				}
 			}
 
@@ -157,7 +157,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				names = added.getParameterNames();
 				params = added.getParameters();
 				if ( names.length ) {
-					this.setPageByName( params[names[0]].getId() );
+					this.setPageByName( params[ names[ 0 ] ].getId() );
 				} else if ( addedCount === 0 ) {
 					page.onAddButtonFocus();
 				}
@@ -267,7 +267,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
-	if ( parts.length && !( parts[0] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
+	if ( parts.length && !( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
 		this.actions.setAbilities( { apply: this.altered, insert: true } );
 	} else {
 		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
@@ -351,8 +351,8 @@ ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
 	this.title.setLabel(
-		parts && parts.length === 1 && parts[0] ?
-			this.getTemplatePartLabel( parts[0] ) :
+		parts && parts.length === 1 && parts[ 0 ] ?
+			this.getTemplatePartLabel( parts[ 0 ] ) :
 			ve.msg( 'visualeditor-dialog-transclusion-loading' )
 	);
 };
@@ -509,8 +509,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
 	var i, parts = this.transclusionModel.getParts();
 	for ( i = 0; i < parts.length; i++ ) {
-		if ( parts[i] instanceof ve.dm.MWTemplateModel ) {
-			parts[i].addPromptedParameters();
+		if ( parts[ i ] instanceof ve.dm.MWTemplateModel ) {
+			parts[ i ].addPromptedParameters();
 		}
 	}
 };

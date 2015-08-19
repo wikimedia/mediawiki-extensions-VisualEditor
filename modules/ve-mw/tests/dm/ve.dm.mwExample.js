@@ -905,7 +905,7 @@ ve.dm.mwExample.domToDataCases = {
 			ve.dm.mwExample.MWTransclusion.blockStoreItems
 		],
 		modify: function ( model ) {
-			model.data.data[0].attributes.mw.parts[0].template.params['1'].wt = 'Hello, globe!';
+			model.data.data[ 0 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = 'Hello, globe!';
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified,
@@ -942,7 +942,7 @@ ve.dm.mwExample.domToDataCases = {
 			ve.dm.mwExample.MWTransclusion.inlineStoreItems
 		],
 		modify: function ( model ) {
-			model.data.data[1].attributes.mw.parts[0].template.params['1'].wt = '5,678';
+			model.data.data[ 1 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = '5,678';
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose,
@@ -1108,7 +1108,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			model.data.data[0].attributes.mw.attrs.lang = 'php5';
+			model.data.data[ 0 ].attributes.mw.attrs.lang = 'php5';
 		}
 	},
 	'mw:AlienInlineExtension': {
@@ -1147,7 +1147,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			model.data.data[1].attributes.mw.body.extsrc = '\\relative c\' { d d d e e e }';
+			model.data.data[ 1 ].attributes.mw.body.extsrc = '\\relative c\' { d d d e e e }';
 		}
 	},
 	'mw:Reference': {
@@ -1944,14 +1944,14 @@ ve.dm.mwExample.domToDataCases = {
 	'mw:Nowiki unwraps when text modified': {
 		data: ve.dm.mwExample.mwNowiki,
 		modify: function ( model ) {
-			model.data.data[7][0] = 'z';
+			model.data.data[ 7 ][ 0 ] = 'z';
 		},
 		normalizedBody: '<p>Foo[[Bzr]]Baz</p>'
 	},
 	'mw:Nowiki unwraps when annotations modified': {
 		data: ve.dm.mwExample.mwNowiki,
 		modify: function ( model ) {
-			model.data.data[7][1].push( model.getStore().index( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
+			model.data.data[ 7 ][ 1 ].push( model.getStore().index( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	},
@@ -2049,7 +2049,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( doc ) {
-			doc.metadata.data[1].splice( 0, 1 );
+			doc.metadata.data[ 1 ].splice( 0, 1 );
 		},
 		normalizedBody: '<h1></h1>'
 	}

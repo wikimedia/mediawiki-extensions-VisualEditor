@@ -41,7 +41,7 @@ ve.ui.MWInternalLinkAnnotationWidget.static.getAnnotationFromText = function ( v
 		if (
 			title &&
 			( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) &&
-			target[0] !== ':'
+			target[ 0 ] !== ':'
 		) {
 			// Prepend links to File and Category namespace with a colon
 			target = ':' + target;

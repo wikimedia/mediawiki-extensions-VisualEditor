@@ -14,7 +14,7 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 	QUnit.expect( ve.test.utils.countGetModelFromDomTests( cases ) );
 
 	for ( msg in cases ) {
-		caseItem = ve.copy( cases[msg] );
+		caseItem = ve.copy( cases[ msg ] );
 		if ( caseItem.mwConfig ) {
 			mw.config.set( caseItem.mwConfig );
 		}
@@ -30,7 +30,7 @@ QUnit.test( 'getDomFromModel', function ( assert ) {
 	QUnit.expect( 3 * Object.keys( cases ).length );
 
 	for ( msg in cases ) {
-		caseItem = ve.copy( cases[msg] );
+		caseItem = ve.copy( cases[ msg ] );
 		if ( caseItem.mwConfig ) {
 			mw.config.set( caseItem.mwConfig );
 		}

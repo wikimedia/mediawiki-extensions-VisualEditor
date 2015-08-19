@@ -34,7 +34,7 @@ ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:WikiLink' ];
 
 ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
 	var targetData = this.getTargetDataFromHref(
-		domElements[0].getAttribute( 'href' ),
+		domElements[ 0 ].getAttribute( 'href' ),
 		converter.getTargetHtmlDocument()
 	);
 
@@ -71,19 +71,19 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 
 	if ( matches ) {
 		// Take the relative path
-		href = matches[1];
+		href = matches[ 1 ];
 	}
 
 	// The href is simply the title, unless we're dealing with a page that has slashes in its name
 	// in which case it's preceded by one or more instances of "./" or "../", so strip those
 	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
 
-	return { title: matches[2], hrefPrefix: matches[1] };
+	return { title: matches[ 2 ], hrefPrefix: matches[ 1 ] };
 };
 
 ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
 	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.apply( this, arguments );
-	parentResult[0].setAttribute( 'rel', 'mw:WikiLink' );
+	parentResult[ 0 ].setAttribute( 'rel', 'mw:WikiLink' );
 	return parentResult;
 };
 

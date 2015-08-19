@@ -81,7 +81,7 @@ ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 		selection = surfaceModel.getSelection();
 
 	if ( selection instanceof ve.dm.TableSelection ) {
-		surfaceModel.setLinearSelection( selection.getOuterRanges()[0] );
+		surfaceModel.setLinearSelection( selection.getOuterRanges()[ 0 ] );
 	}
 
 	// Parent method

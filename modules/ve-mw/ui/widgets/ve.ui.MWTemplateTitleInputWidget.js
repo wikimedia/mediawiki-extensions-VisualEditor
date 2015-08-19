@@ -58,7 +58,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					titles = [];
 
 				for ( index in pages ) {
-					titles.push( pages[index].title );
+					titles.push( pages[ index ].title );
 				}
 
 				originalResponse = response;
@@ -81,9 +81,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					pages = ( templateDataResponse && templateDataResponse.pages ) || {};
 				// Look for descriptions and cache them
 				for ( index in pages ) {
-					page = pages[index];
+					page = pages[ index ];
 					// Cache descriptions
-					widget.descriptions[page.title] = page.description;
+					widget.descriptions[ page.title ] = page.description;
 				}
 				// Return the original response
 				return originalResponse;
@@ -101,6 +101,6 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 ve.ui.MWTemplateTitleInputWidget.prototype.getOptionWidgetData = function ( title ) {
 	return ve.extendObject(
 		ve.ui.MWTemplateTitleInputWidget.super.prototype.getOptionWidgetData.apply( this, arguments ),
-		{ description: this.descriptions[title] }
+		{ description: this.descriptions[ title ] }
 	);
 };
