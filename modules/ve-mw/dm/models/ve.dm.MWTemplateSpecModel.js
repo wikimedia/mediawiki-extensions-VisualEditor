@@ -208,7 +208,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, l
  * @returns {string} Default parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
-	return this.params[name]['default'];
+	return this.params[name].default;
 };
 
 /**

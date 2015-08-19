@@ -166,9 +166,9 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 				return [];
 			}
 
-			if ( data[ 'continue' ] ) {
+			if ( data.continue ) {
 				// Update the offset for next time
-				provider.setOffset( data[ 'continue' ].gsroffset );
+				provider.setOffset( data.continue.gsroffset );
 			} else {
 				// This is the last available set of results. Mark as depleted!
 				provider.toggleDepleted( true );
