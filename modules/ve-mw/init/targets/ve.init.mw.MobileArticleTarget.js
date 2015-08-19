@@ -159,6 +159,7 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 		{
 			type: 'list',
 			icon: 'advanced',
+			indicator: 'down',
 			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 			include: [ 'editModeSource' ]
 		}
