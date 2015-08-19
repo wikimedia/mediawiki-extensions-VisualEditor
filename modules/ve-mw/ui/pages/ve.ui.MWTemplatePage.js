@@ -12,7 +12,7 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.dm.MWTemplateModel} parameter Template
+ * @param {ve.dm.MWTemplateModel} template Template model
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  */

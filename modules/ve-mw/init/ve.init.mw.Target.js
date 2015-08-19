@@ -880,7 +880,7 @@ ve.init.mw.Target.prototype.noChanges = function () {
  *
  * @static
  * @method
- * @param {Object} data API response data
+ * @param {Object} response API response data
  * @param {string} status Text status message
  * @fires serializeComplete
  */

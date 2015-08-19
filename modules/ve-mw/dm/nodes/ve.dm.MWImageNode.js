@@ -91,7 +91,7 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
 /**
  * Translate the image dimensions into new ones according to the bounding box.
  *
- * @param {Object} imageDimension Width and height of the image
+ * @param {Object} imageDimensions Width and height of the image
  * @param {Object} boundingBox The limit of the bounding box
  * @return {Object} The new width and height of the scaled image.
  */

@@ -14,6 +14,7 @@
  * @mixins OO.ui.mixin.TitledElement
  *
  * @constructor
+ * @param {Object} content API response data from which to build the display
  * @param {Object} [config] Configuration options
  * @cfg {string} [href] A url encapsulating the field text. If a label is attached it will include the label.
  * @cfg {string} [label] A ve.msg() label string for the field.
