@@ -10,19 +10,19 @@ end
 
 Given(/^I go to "(.+)" page which has references$/) do |page_title|
   wikitext = 'VisualEditor is a MediaWiki extension.<ref>[http://www.mediawiki.org/wiki/Extension:VisualEditor Extension:VisualEditor]</ref>'
-  on(APIPage).create page_title, wikitext
+  api.create_page page_title, wikitext
   step "I go to the #{page_title} page for screenshot"
   step 'I click in the editable part'
 end
 
 Given(/^I go to the "(.*?)" page with source content "(.*?)"$/) do |page_title, page_content|
-  on(APIPage).create page_title, page_content
+  api.create_page page_title, page_content
   step "I go to the #{page_title} page for screenshot"
 end
 
 Given(/^I go to the (.*?) page for screenshot$/) do |page_name|
   step "I am on the #{page_name} page"
-  @browser.goto "#{@browser.url}&uselang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
+  browser.goto "#{browser.url}&uselang=#{lookup(:language_screenshot_code)}"
 end
 
 Given(/^I am editing the language screenshots page$/) do
@@ -78,8 +78,8 @@ end
 When(/^I click on Page settings option$/) do
   Screenshot.highlight(@current_page, @current_page.page_settings_item_element)
   Screenshot.capture(
-    @browser,
-    "VisualEditor_page_settings_item-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_page_settings_item-#{lookup(:language_screenshot_code)}.png",
     [@current_page.hamburger_menu_element, @current_page.page_option_menu_element],
     3
   )
@@ -115,8 +115,8 @@ When(/^I click on category in hamburger menu$/) do
 
   Screenshot.highlight(@current_page, @current_page.category_item_element)
   Screenshot.capture(
-    @browser,
-    "VisualEditor_category_item-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_category_item-#{lookup(:language_screenshot_code)}.png",
     [@current_page.hamburger_menu_element, @current_page.page_option_menu_element],
     3
   )
@@ -136,7 +136,7 @@ end
 
 When(/^I go to random page for screenshot$/) do
   step 'I am at a random page'
-  @browser.goto "#{@browser.url}?setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
+  browser.goto "#{browser.url}?setlang=#{lookup(:language_screenshot_code)}"
 end
 
 When(/^I click on References list in Insert menu$/) do
@@ -162,8 +162,8 @@ end
 When(/^I add Category "(.*?)" in category dialog box$/) do |category|
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "VisualEditor_category_editing-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_category_editing-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element],
     3
   )
@@ -178,18 +178,18 @@ Then(/^I should see delete button in category info box$/) do
   expect(on(VisualEditorPage).category_remove_element.when_present).to be_visible
   Screenshot.highlight(@current_page, @current_page.category_remove_element)
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.category_popup_element, @current_page.category_add_area_element],
     3
-    )
+  )
 end
 
 Then(/^I should see category recommendation drop down$/) do
   expect(on(VisualEditorPage).category_recommendation_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.category_recommendation_element, @current_page.category_add_area_element],
     3
   )
@@ -202,8 +202,8 @@ end
 
 Then(/^I take screenshot of Headings pull-down menu$/) do
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.format_indicator_element, @current_page.heading_dropdown_menus_element],
     3
   )
@@ -217,8 +217,8 @@ end
 Then(/^I take screenshot of Formatting pull-down menu$/) do
   step 'I click on More in the pull-down menu'
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.ve_text_style_button_element, @current_page.formatting_option_menus_element],
     3
   )
@@ -227,8 +227,8 @@ end
 Then(/^I should see pull-down menu containing Page Settings$/) do
   expect(on(VisualEditorPage).page_settings_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.disabled_save_button_element, @current_page.page_option_menu_element],
     3
   )
@@ -242,8 +242,8 @@ end
 Then(/^I take screenshot of insert pull-down menu$/) do
   step 'I click on More in the pull-down menu'
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.insert_button_element, @current_page.insert_pull_down_element],
     3
   )
@@ -251,8 +251,8 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.highlight(@current_page, @current_page.media_insert_menu_element)
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Media_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Media_Insert_Menu-#{lookup(:language_screenshot_code)}.png",
     [@current_page.insert_button_element, @current_page.insert_pull_down_element],
     3
   )
@@ -261,8 +261,8 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.highlight(@current_page, @current_page.template_insert_menu_element)
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Template_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Template_Insert_Menu-#{lookup(:language_screenshot_code)}.png",
     [@current_page.insert_button_element, @current_page.insert_pull_down_element],
     3
   )
@@ -271,8 +271,8 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.highlight(@current_page, @current_page.ref_list_insert_menu_element)
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_References_List_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_References_List_Insert_Menu-#{lookup(:language_screenshot_code)}.png",
     [@current_page.insert_button_element, @current_page.insert_pull_down_element],
     3
   )
@@ -281,8 +281,8 @@ Then(/^I take screenshot of insert pull-down menu$/) do
   Screenshot.highlight(@current_page, @current_page.formula_insert_menu_element)
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Formula_Insert_Menu-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Formula_Insert_Menu-#{lookup(:language_screenshot_code)}.png",
     [@current_page.insert_button_element, @current_page.insert_pull_down_element],
     3
   )
@@ -295,20 +295,20 @@ end
 Then(/^I should see Special character Insertion window$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
-  Screenshot.zoom_browser(@browser, -2)
+  Screenshot.zoom_browser(browser, -2)
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.toolbar_element, @current_page.window_frame_element]
   )
 end
 
 Then(/^I should see save changes dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
-  Screenshot.zoom_browser(@browser, -2)
+  Screenshot.zoom_browser(browser, -2)
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element],
     3
   )
@@ -318,37 +318,37 @@ Then(/^I should see Page settings dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element],
     3
   )
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Page_Settings_Redirects-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Page_Settings_Redirects-#{lookup(:language_screenshot_code)}.png",
     [@current_page.enable_redirect_element, @current_page.prevent_redirect_element],
     3
   )
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Page_Settings_TOC-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Page_Settings_TOC-#{lookup(:language_screenshot_code)}.png",
     [@current_page.table_of_contents_element],
     3
   )
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Page_Settings_Edit_Links-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Page_Settings_Edit_Links-#{lookup(:language_screenshot_code)}.png",
     [@current_page.page_settings_editlinks_element],
     3
   )
 
-  Screenshot.zoom_browser(@browser, 3)
+  Screenshot.zoom_browser(browser, 3)
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Apply_Changes-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Apply_Changes-#{lookup(:language_screenshot_code)}.png",
     [@current_page.settings_apply_button_element]
   )
 end
@@ -357,8 +357,8 @@ Then(/^I should see list and indentation dropdown$/) do
   expect(on(VisualEditorPage).indentation_pull_down_element.when_present).to be_visible
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.indentation_button_element, @current_page.indentation_pull_down_element],
     3
   )
@@ -368,8 +368,8 @@ Then(/^I should see link Content box with dropdown options$/) do
   expect(on(VisualEditorPage).link_list_element.when_present(5)).to be_visible
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.link_list_element, @current_page.window_frame_element, @current_page.new_link_element],
     3
   )
@@ -378,8 +378,8 @@ end
 Then(/^I should see link icon$/) do
   expect(on(VisualEditorPage).popup_icon_element.when_present(5)).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.popup_icon_element, @current_page.internal_link_element]
   )
 end
@@ -387,8 +387,8 @@ end
 Then(/^I should see media editing dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element]
   )
 end
@@ -397,14 +397,14 @@ Then(/^I should see media caption dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element]
   )
 
   Screenshot.capture(
-    @browser,
-    "VisualEditor_Media_alternative_text-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "VisualEditor_Media_alternative_text-#{lookup(:language_screenshot_code)}.png",
     [@current_page.media_alternative_block_element]
   )
 end
@@ -413,8 +413,8 @@ Then(/^I should see media advanced settings dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element]
   )
 end
@@ -422,18 +422,18 @@ end
 Then(/^I should see media in VisualEditor$/) do
   expect(on(VisualEditorPage).media_image_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.media_image_element, @current_page.media_caption_element]
   )
 end
 
 Then(/^I should see the Cite button$/) do
   expect(on(VisualEditorPage).cite_button_element.when_present).to be_visible
-  Screenshot.zoom_browser(@browser, 3)
+  Screenshot.zoom_browser(browser, 3)
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.cite_button_element],
     3
   )
@@ -442,8 +442,8 @@ end
 Then(/^I should see Reference icon$/) do
   expect(on(VisualEditorPage).popup_icon_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.popup_icon_element, @current_page.first_reference_element]
   )
 end
@@ -451,8 +451,8 @@ end
 Then(/^I should see Basic Reference dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element]
   )
 end
@@ -468,8 +468,8 @@ Then(/^I should see the Edit tab at the top of the page$/) do
   end
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.top_editing_tabs_element],
     3
   )
@@ -482,8 +482,8 @@ Then(/^I should see the VisualEditor tool-bar$/) do
   end
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.top_editing_tabs_element, @current_page.left_navigation_element, @current_page.toolbar_element]
   )
 end
@@ -495,8 +495,8 @@ Then(/^I should see the formula insertion menu$/) do
   end
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element, @current_page.formula_image_element],
     3
   )
@@ -509,8 +509,8 @@ Then(/^I should see action buttons in the end of the VisualEditor toolbar$/) do
   end
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.toolbar_actions_element]
   )
 end
@@ -519,13 +519,13 @@ Then(/^I should see References list dialog box$/) do
   expect(on(VisualEditorPage).window_frame_element.when_present).to be_visible
 
   Screenshot.capture(
-    @browser,
-    "#{@scenario.name}-#{ENV['LANGUAGE_SCREENSHOT_CODE']}.png",
+    browser,
+    "#{@scenario.name}-#{lookup(:language_screenshot_code)}.png",
     [@current_page.window_frame_element]
   )
 end
 
 When(/^I go to language screenshot page$/) do
   step 'I am on the Language Screenshot page'
-  @browser.goto "#{@browser.url}&setlang=#{ENV['LANGUAGE_SCREENSHOT_CODE']}"
+  browser.goto "#{browser.url}&setlang=#{lookup(:language_screenshot_code)}"
 end

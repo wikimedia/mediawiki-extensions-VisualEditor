@@ -4,7 +4,7 @@ Given(/^I go to a page that has references$/) do
 ==References==
 <references />"
 
-  on(APIPage).create 'Reference VisualEditor Test', wikitext
+  api.create_page 'Reference VisualEditor Test', wikitext
   step 'I am on the Reference VisualEditor Test page'
 end
 
