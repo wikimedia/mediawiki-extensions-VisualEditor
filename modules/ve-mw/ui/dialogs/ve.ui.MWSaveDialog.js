@@ -174,8 +174,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 			this.actions.setMode( 'save' );
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
-				// FIXME we need to add features to OO.ui.TextInputWidget so we don't need to access .$input
-				ve.selectEnd( dialog.editSummaryInput.$input[ 0 ] );
+				dialog.editSummaryInput.moveCursorToEnd();
 			} );
 			break;
 		case 'conflict':
