@@ -261,6 +261,7 @@
 	"visualeditor-editnotices-tooltip": "Avertissements",
 	"visualeditor-editsummary": "Décrivez ce que vous avez modifié",
 	"visualeditor-editsummary-bytes-remaining": "Le nombre d’octets restant",
+	"visualeditor-feedback-defaultmessage": "URL : $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titre de la page",
 	"visualeditor-formatdropdown-format-mw-heading2": "Titre de section",
 	"visualeditor-formatdropdown-format-mw-heading3": "Sous-titre 1",

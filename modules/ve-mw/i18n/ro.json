@@ -208,6 +208,7 @@
 	"visualeditor-editnotices-tooltip": "Notificări privind modificarea",
 	"visualeditor-editsummary": "Descrieți modificările pe care le-ați adus",
 	"visualeditor-editsummary-bytes-remaining": "Numărul de octeți rămași",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titlu de pagină",
 	"visualeditor-formatdropdown-format-mw-heading2": "Titlu",
 	"visualeditor-formatdropdown-format-mw-heading3": "Subtitlu 1",

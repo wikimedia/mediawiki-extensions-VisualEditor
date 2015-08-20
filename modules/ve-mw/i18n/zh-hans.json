@@ -238,6 +238,7 @@
 	"visualeditor-editnotices-tooltip": "编辑警告",
 	"visualeditor-editsummary": "描述您的更改",
 	"visualeditor-editsummary-bytes-remaining": "剩余字节数",
+	"visualeditor-feedback-defaultmessage": "URL：$1",
 	"visualeditor-formatdropdown-format-mw-heading1": "页面标题",
 	"visualeditor-formatdropdown-format-mw-heading2": "标题",
 	"visualeditor-formatdropdown-format-mw-heading3": "子标题1",
