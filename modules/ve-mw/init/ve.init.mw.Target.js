@@ -1384,7 +1384,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
 					}
 					// This cache key is evidently bad, clear it
 					target.clearPreparedCacheKey();
-					if ( !isRetried ) {
+					if ( !isRetried && errorName === 'badcachekey' ) {
 						// Try again without a cache key
 						return ajaxRequest( null, true );
 					} else {
