@@ -54,10 +54,20 @@ ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
  * @return {ve.dm.MWExternalLinkAnnotation} The annotation to use.
  */
 ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( href ) {
-	return new ve.dm.MWExternalLinkAnnotation( {
-		type: 'link/mwExternal',
-		attributes: { href: href }
-	} );
+	var title,
+		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+			href,
+			this.surface.getModel().getDocument().getHtmlDocument()
+		);
+	if ( targetData.isInternal ) {
+		title = mw.Title.newFromText( targetData.title );
+	}
+	return title ?
+		ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title ) :
+		new ve.dm.MWExternalLinkAnnotation( {
+			type: 'link/mwExternal',
+			attributes: { href: href }
+		} );
 };
 
 /**
