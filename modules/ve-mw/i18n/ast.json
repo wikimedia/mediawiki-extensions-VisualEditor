@@ -221,6 +221,7 @@
 	"visualeditor-editnotices-tooltip": "Avisos d'edición",
 	"visualeditor-editsummary": "Describi lo que camudasti",
 	"visualeditor-editsummary-bytes-remaining": "El númberu de bytes que queden",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Títulu de la páxina",
 	"visualeditor-formatdropdown-format-mw-heading2": "Cabecera",
 	"visualeditor-formatdropdown-format-mw-heading3": "Cabecera secundaria 1",
