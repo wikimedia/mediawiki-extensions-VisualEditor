@@ -92,7 +92,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
  * @param {ve.dm.MWInternalLinkAnnotation} annotation Annotation
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( annotation ) {
-	var title,
+	var targetData,
 		href = annotation ? annotation.getAttribute( 'title' ) : '',
 		// Have to check that this.getFragment() is defined because parent class's teardown
 		// invokes setAnnotation( null ) which calls this code after fragment is unset
@@ -101,12 +101,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 	if ( htmlDoc && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href ) ) {
 		// Check if the 'external' link is in fact a page on the same wiki
 		// e.g. http://en.wikipedia.org/wiki/Target -> Target
-		title = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
 			href,
 			htmlDoc
-		).title;
-		if ( title !== href ) {
-			this.internalAnnotationInput.text.setValue( title );
+		);
+		if ( targetData.isInternal ) {
+			this.internalAnnotationInput.text.setValue( targetData.title );
 			return;
 		}
 	}
@@ -226,23 +226,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 		} );
 	} else if ( title ) {
 		// Internal link
-
-		if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
-			// File: or Category: link
-			// We have to prepend a colon so this is interpreted as a link
-			// rather than an image inclusion or categorization
-			target = ':' + target;
-		}
-
-		return new ve.dm.MWInternalLinkAnnotation( {
-			type: 'link/mwInternal',
-			attributes: {
-				title: target,
-				// bug 62816: we really need a builder for this stuff
-				normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
-				lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
-			}
-		} );
+		return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
 	} else {
 		// Doesn't look like an external link and mw.Title considered it an illegal value,
 		// for an internal link.
