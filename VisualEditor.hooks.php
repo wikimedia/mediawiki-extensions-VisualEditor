@@ -613,6 +613,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ui/datatransferhandlers/ve.ui.DSVFileTransferHandler.test.js',
 				'lib/ve/tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js',
 				'modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.test.js',
+				'modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js',
 				// VisualEditor initialization Tests
 				'lib/ve/tests/init/ve.init.Platform.test.js',
 				'modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js',

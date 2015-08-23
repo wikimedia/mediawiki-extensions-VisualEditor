@@ -192,6 +192,13 @@ ve.dm.MWInternalLinkAnnotation.prototype.getComparableHtmlAttributes = function 
 	return {};
 };
 
+/**
+ * @inheritdoc
+ */
+ve.dm.MWInternalLinkAnnotation.prototype.getDisplayTitle = function () {
+	return this.getAttribute( 'normalizedTitle' );
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWInternalLinkAnnotation );
