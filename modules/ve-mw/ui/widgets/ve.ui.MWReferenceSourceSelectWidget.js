@@ -50,7 +50,8 @@ ve.ui.MWReferenceSourceSelectWidget = function VeUiMWReferenceSourceSelectWidget
 	this.refBasic = new OO.ui.DecoratedOptionWidget( {
 		icon: 'reference',
 		label: ve.msg( 'visualeditor-dialogbutton-reference-full-label' ),
-		data: { windowName: 'reference' }
+		data: { windowName: 'reference' },
+		classes: [ 've-ui-mwReferenceSourceSelectWidget-basic' ]
 	} );
 	items.push( this.refBasic );
 
@@ -61,12 +62,17 @@ ve.ui.MWReferenceSourceSelectWidget = function VeUiMWReferenceSourceSelectWidget
 			data: {
 				windowName: 'reference',
 				dialogData: { useExisting: true }
-			}
+			},
+			classes: [ 've-ui-mwReferenceSourceSelectWidget-reuse' ]
 		} );
 		items.push( this.refExisting );
 	}
 
 	this.addItems( items );
+
+	$( '<div>' )
+		.addClass( 've-ui-mwReferenceSourceSelectWidget-separator' )
+		.insertBefore( this.refBasic.$element );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwReferenceSourceSelectWidget' );
