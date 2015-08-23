@@ -43,7 +43,7 @@ ve.ui.MWWikitextStringTransferHandler.static.handlesPaste = true;
  * which occur on a single line of max 80 characters.
  */
 ve.ui.MWWikitextStringTransferHandler.static.matchRegExp =
-	/(^\s*(={2,6})[^=\r\n]{1,80}\1\s*$)|\[\[.{1,80}\]\]|\{\{.{1,80}\}\}/m;
+	/(^\s*(={2,6})[^=\r\n]{1,80}\2\s*$)|\[\[.{1,80}\]\]|\{\{.{1,80}\}\}/m;
 
 ve.ui.MWWikitextStringTransferHandler.static.matchFunction = function ( item ) {
 	var text = item.getAsString();
