@@ -26,6 +26,9 @@ function runWikitextStringHandlerTest( assert, server, string, mimeType, expecte
 						return doc;
 					}
 				};
+			},
+			createProgress: function () {
+				return $.Deferred().promise();
 			}
 		};
 

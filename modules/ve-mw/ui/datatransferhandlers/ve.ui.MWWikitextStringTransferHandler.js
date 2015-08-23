@@ -18,6 +18,9 @@
 ve.ui.MWWikitextStringTransferHandler = function VeUiMWWikitextStringTransferHandler() {
 	// Parent constructor
 	ve.ui.MWWikitextStringTransferHandler.super.apply( this, arguments );
+
+	// Properties
+	this.parsoidRequest = null;
 };
 
 /* Inheritance */
@@ -74,8 +77,7 @@ ve.ui.MWWikitextStringTransferHandler.static.matchFunction = function ( item ) {
  * @inheritdoc
  */
 ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
-	var xhr,
-		handler = this,
+	var handler = this,
 		wikitext = this.item.getAsString();
 
 	function failure() {
@@ -85,12 +87,15 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 	}
 
 	// Convert wikitext to html using Parsoid.
-	xhr = new mw.Api().post( {
+	this.parsoidRequest = new mw.Api().post( {
 		action: 'visualeditor',
 		paction: 'parsefragment',
 		page: mw.config.get( 'wgRelevantPageName' ),
 		wikitext: wikitext
-	} ).then( function ( response ) {
+	} );
+
+	// Don't immediately chain, as this.parsoidRequest must be abortable
+	this.parsoidRequest.then( function ( response ) {
 		var doc, surface;
 		if ( ve.getProp( response, 'visualeditor', 'result' ) !== 'success' ) {
 			return failure();
@@ -112,9 +117,24 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 			// Sometimes there are multiple <p> tags in the output.
 			// That's okay: ignore the error and paste what we've got.
 		}
-
 		handler.resolve( doc );
 	}, failure );
+
+	this.createProgress( this.parsoidRequest, ve.msg( 'visualeditor-wikitext-progress' ) );
+	// Indeterminate progress
+	this.setProgress( null );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWWikitextStringTransferHandler.prototype.abort = function () {
+	// Parent method
+	ve.ui.MWWikitextStringTransferHandler.super.prototype.abort.apply( this, arguments );
+
+	if ( this.parsoidRequest ) {
+		this.parsoidRequest.abort();
+	}
 };
 
 /* Registration */
