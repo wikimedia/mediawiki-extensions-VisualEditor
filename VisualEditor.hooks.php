@@ -495,6 +495,7 @@ class VisualEditorHooks {
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',
+				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSourceSelectWidget.css',
 			),
 			'dependencies' => array(
 				'ext.visualEditor.mwreference.core',

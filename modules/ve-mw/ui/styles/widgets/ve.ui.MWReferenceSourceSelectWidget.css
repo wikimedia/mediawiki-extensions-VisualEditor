@@ -1,0 +1,10 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWReferenceSearchWidget styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwReferenceSourceSelectWidget-separator {
+	border-top: 1px solid #ccc;
+}
