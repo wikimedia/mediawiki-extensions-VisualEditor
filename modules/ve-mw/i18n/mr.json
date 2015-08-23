@@ -13,7 +13,7 @@
 	},
 	"tooltip-ca-createsource": "या पानाचा स्रोत संकेत (कोड) तयार करा",
 	"tooltip-ca-editsource": "लेखपान मूळस्वरूपात संपादीत करा,तेथे मराठी टायपींगसाठी युएलएस कार्यान्वित करू शकता.",
-	"tooltip-ca-ve-edit": "हे पान यथादृश्यसंपादक वापरून संपादीत करा,येथे सध्या मराठी टायपींगसाठी केवळ तुमचे स्वत:चे युनिकोड साधन वापरता येते.युएलएस मराठी टायपींगचे पाठबळ मिळवण्याकरता संपन्नसंपादन कडे जा.",
+	"tooltip-ca-ve-edit": "या पानाचे संपादन करा",
 	"visualeditor-advancedsettings-tool": "प्रगत मांडण्या",
 	"visualeditor-annotationbutton-linknode-tooltip": "साधारण दुवा",
 	"visualeditor-beta-appendix": "बीटा(चाचणी)",

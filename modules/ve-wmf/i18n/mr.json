@@ -11,7 +11,7 @@
 			"아라"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:Visualeditor-descriptionpagelink}}|यथादृश्यसंपादक]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्यसंपादक]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:Visualeditor-descriptionpagelink}}|यथादृश्यसंपादक]] वापरून केलेले संपादन",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:Visualeditor-descriptionpagelink}}|यथादृश्यसंपादक: तपासा]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:Visualeditor-descriptionpagelink}}|यथादृश्यसंपादक]] वापरून केलेल्या संपादनात,अभिप्रेत नसलेला विकिटेक्स्ट दिसल्याचे, प्रणालीने शोधले आहे.",
