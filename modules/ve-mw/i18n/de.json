@@ -304,6 +304,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Bearbeitungen verwerfen",
 	"visualeditor-viewpage-savewarning-keep": "Weiter bearbeiten",
 	"visualeditor-viewpage-savewarning-title": "Bist du sicher?",
+	"visualeditor-wikitext-progress": "Konvertiere Wikitext",
 	"visualeditor-wikitext-warning": "Du benutzt den visuellen Editor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zu wechseln, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus. Verlustfrei zum visuellen Editor zurückzuwechseln ist derzeit nicht möglich.",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }

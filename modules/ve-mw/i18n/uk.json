@@ -236,6 +236,7 @@
 	"visualeditor-editnotices-tooltip": "Замітки по редагуванню",
 	"visualeditor-editsummary": "Опишіть Ваші зміни",
 	"visualeditor-editsummary-bytes-remaining": "Кількість байт, що залишилися",
+	"visualeditor-feedback-defaultmessage": "URL-адреса: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Заголовок сторінки",
 	"visualeditor-formatdropdown-format-mw-heading2": "Заголовок",
 	"visualeditor-formatdropdown-format-mw-heading3": "Підзаголовок 1",
