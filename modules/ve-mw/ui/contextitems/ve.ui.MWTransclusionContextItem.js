@@ -69,7 +69,8 @@ ve.ui.MWTransclusionContextItem.static.isCompatibleWith =
 ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 	return ve.msg(
 		'visualeditor-dialog-transclusion-contextitem-description',
-		ve.ce.MWTransclusionNode.static.getDescription( this.model )
+		ve.ce.MWTransclusionNode.static.getDescription( this.model ),
+		ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions( this.model ).length
 	);
 };
 
