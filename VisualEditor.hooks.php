@@ -118,9 +118,14 @@ class VisualEditorHooks {
 
 		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 		$title = $skin->getRelevantTitle();
-		// Don't exit if this namespace isn't VE-enabled, since we should still
-		// change "Edit" to "Edit source" (especially for NS_MEDIAWIKI).
 		$namespaceEnabled = $title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) );
+		$pageContentModel = $title->getContentModel();
+		// Don't exit if this page isn't VE-enabled, since we should still
+		// change "Edit" to "Edit source".
+		$isAvailable = (
+			$namespaceEnabled &&
+			$pageContentModel === CONTENT_MODEL_WIKITEXT
+		);
 
 		// HACK: Exit if we're in the Education Program namespace (even though it's content)
 		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
@@ -168,7 +173,7 @@ class VisualEditorHooks {
 				if ( $editTabMessage !== null ) {
 					$editTab['text'] = $skin->msg( $editTabMessage )->text();
 				}
-				if ( $namespaceEnabled ) {
+				if ( $isAvailable ) {
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
 						$editTab['class'] .= ' collapsible';
