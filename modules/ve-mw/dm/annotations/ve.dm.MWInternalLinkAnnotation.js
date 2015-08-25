@@ -137,7 +137,8 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 			href = dataElement.attributes.hrefPrefix + href;
 		}
 	} else {
-		href = encodeURIComponent( title );
+		// Don't escape slashes in the title; they represent subpages.
+		href = title.split( '/' ).map( encodeURIComponent ).join( '/' );
 	}
 	return href;
 };

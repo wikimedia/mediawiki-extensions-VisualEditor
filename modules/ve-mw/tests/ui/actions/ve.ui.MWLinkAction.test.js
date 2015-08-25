@@ -114,7 +114,8 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				expectedRange: new ve.Range( 21, 21 ),
 				expectedData: function ( data, makeAnnotation ) {
 					var i,
-						a = makeAnnotation( './Special:BookSources/9780596517748' );
+						conf = mw.config.get( 'wgVisualEditorConfig' ),
+						a = makeAnnotation( './' + conf.specialBooksources + '/9780596517748' );
 					for ( i = 1; i < 20; i++ ) {
 						data[ i ] = [ data[ i ], [ a ] ];
 					}

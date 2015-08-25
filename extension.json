@@ -1190,9 +1190,11 @@
 		},
 		"ext.visualEditor.mwlink": {
 			"scripts": [
+				"modules/ve-mw/dm/nodes/ve.dm.MWMagicLinkNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWNumberedExternalLinkNode.js",
 				"modules/ve-mw/dm/annotations/ve.dm.MWExternalLinkAnnotation.js",
 				"modules/ve-mw/dm/annotations/ve.dm.MWInternalLinkAnnotation.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWMagicLinkNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWNumberedExternalLinkNode.js",
 				"modules/ve-mw/ce/annotations/ve.ce.MWExternalLinkAnnotation.js",
 				"modules/ve-mw/ce/annotations/ve.ce.MWInternalLinkAnnotation.js",
@@ -1200,8 +1202,10 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWExternalLinkAnnotationWidget.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLinkAnnotationInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLinkNodeInspector.js",
+				"modules/ve-mw/ui/inspectors/ve.ui.MWMagicLinkNodeInspector.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWLinkInspectorTool.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWInternalLinkContextItem.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWMagicLinkNodeContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWNumberedExternalLinkNodeContextItem.js"
 			],
 			"styles": [
@@ -1213,11 +1217,21 @@
 			],
 			"messages": [
 				"visualeditor-annotationbutton-linknode-tooltip",
+				"visualeditor-annotationbutton-magiclinknode-tooltip-isbn",
+				"visualeditor-annotationbutton-magiclinknode-tooltip-pmid",
+				"visualeditor-annotationbutton-magiclinknode-tooltip-rfc",
 				"visualeditor-linkinspector-button-link-external",
 				"visualeditor-linkinspector-button-link-internal",
+				"visualeditor-linkinspector-convert-link-isbn",
+				"visualeditor-linkinspector-convert-link-pmid",
+				"visualeditor-linkinspector-convert-link-rfc",
 				"visualeditor-linkinspector-illegal-title",
 				"visualeditor-linknodeinspector-add-label",
-				"visualeditor-linknodeinspector-title"
+				"visualeditor-linknodeinspector-title",
+				"visualeditor-magiclinknodeinspector-convert-link",
+				"visualeditor-magiclinknodeinspector-title-isbn",
+				"visualeditor-magiclinknodeinspector-title-pmid",
+				"visualeditor-magiclinknodeinspector-title-rfc"
 			],
 			"targets": [
 				"desktop",
