@@ -296,6 +296,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Lassa perde 'e cagnamiente",
 	"visualeditor-viewpage-savewarning-keep": "Cuntinuà a cagnà",
 	"visualeditor-viewpage-savewarning-title": "Site sicuro/a?",
+	"visualeditor-wikitext-progress": "Cunvertenno wikitesto",
 	"visualeditor-wikitext-warning": "Si ausando l'editore visuale - 'o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] nun funzziona ccà. Pe' passà a 'a modifeca surgente 'n qualsiase mumiento senza perdere 'e cagnamiente, arape 'o menu a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e selezziunà \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }

@@ -298,6 +298,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Отфрли уредувања",
 	"visualeditor-viewpage-savewarning-keep": "Продолжи со уредување",
 	"visualeditor-viewpage-savewarning-title": "Дали сте сигурни?",
+	"visualeditor-wikitext-progress": "Го претворам викитекстот",
 	"visualeditor-wikitext-warning": "Го користите визуелниот уредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-savedialog}}“ и изберете „{{int:visualeditor-mweditmodesource-title}}“.",
 	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст"
 }

@@ -339,6 +339,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
 	"visualeditor-viewpage-savewarning-keep": "Continuer à modifier",
 	"visualeditor-viewpage-savewarning-title": "Êtes-vous sûr ?",
+	"visualeditor-wikitext-progress": "Conversion du wikitexte",
 	"visualeditor-wikitext-warning": "Vous utilisez l’éditeur visuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikicode]] ne fonctionne pas ici. Pour basculer à tout moment vers l’édition en wikicode sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-savedialog}} » et sélectionnez « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-wikitext-warning-title": "Balisage wikicode détecté"
 }

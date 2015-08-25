@@ -22,7 +22,8 @@
 			"Rezonansowy",
 			"Peter Bowman",
 			"Devwebtel",
-			"Jdforrester"
+			"Jdforrester",
+			"The Polish"
 		]
 	},
 	"apihelp-visualeditor-description": "Zwraca kod HTML5 na stronę za pośrednictwem usługi Parsoid.",
@@ -66,7 +67,7 @@
 	"visualeditor-dialog-beta-welcome-content": "To jest nasz nowy, łatwiejszy sposób na edytowanie stron. Nadal jest w wersji beta, co oznacza, że możesz natrafić na części strony, których nie będziesz mógł zmienić, lub napotkać problemy wymagające naprawy. Zachęcamy Cię do przeglądania swoich zmian i zgłaszania wszystkich problemów napotkanych podczas używania VisualEditora (kliknij przycisk '{{int:visualeditor-help-tool}}' aby wysłać opinię). Możesz też w dowolnym momencie przełączyć się na zwykły edytor wikitekstowy klikając na zakładkę „$1”, zachowując przy tym wszystkie wcześniej wykonane zmiany.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Witamy}} w VisualEditorze",
 	"visualeditor-dialog-media-alttext-section": "Tekst alternatywny",
-	"visualeditor-dialog-media-alttext-section-help": "Możesz podać opis użyteczny dla osób, które nie widzą pliku multimedialnego. Opis powinien zawierać informacje, które daje plik multimedialny. Jest to bardzo ważne dla osób używających oprogramowania odczytującego zawartość ekranu, w tym dla niewidomych, a także dla korzystających z przeglądarek ładujących wyłącznie tekst.",
+	"visualeditor-dialog-media-alttext-section-help": "Możesz napisać opis użyteczny dla osób, które nie widzą pliku multimedialnego. Opis powinien zawierać informacje, które daje plik multimedialny. Jest to bardzo ważne dla osób używających oprogramowania odczytującego zawartość ekranu, w tym dla niewidomych, a także dla korzystających z przeglądarek ładujących wyłącznie tekst.",
 	"visualeditor-dialog-media-change-image": "Zmień obrazek",
 	"visualeditor-dialog-media-choose-image": "Użyj tej ilustracji",
 	"visualeditor-dialog-media-content-filename": "Nazwa pliku",
@@ -222,6 +223,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Szablon",
 	"visualeditor-diff-nochanges": "Nie można uruchomić przeglądania zmian, ponieważ twoja wersja jest tożsama z ostatnią zapisaną wersją tej strony.",
 	"visualeditor-differror": "Błąd podczas ładowania danych z serwera: $1.",
+	"visualeditor-donebutton-tooltip": "Edycja wykonana",
 	"visualeditor-editconflict": "Twoje zmiany nie mogły zostać zapisane z powodu wystąpienia konfliktu edycji. Czy {{GENDER:|chcesz}} rozwiązać go ręcznie?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|komunikat|komunikaty|komunikatów}}",
 	"visualeditor-editnotices-tooltip": "Komunikaty",
@@ -304,6 +306,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Odrzuć zmiany",
 	"visualeditor-viewpage-savewarning-keep": "Kontynuuj edycję",
 	"visualeditor-viewpage-savewarning-title": "Na pewno?",
+	"visualeditor-wikitext-progress": "Konwertowanie wikitekstu",
 	"visualeditor-wikitext-warning": "Używasz teraz edytora wizualnego – a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego. Aby przełączyć, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i kliknij „{{int:visualeditor-mweditmodesource-title}}”.",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego"
 }

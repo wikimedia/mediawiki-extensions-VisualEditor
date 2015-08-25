@@ -305,6 +305,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Atsisakyti pakeitimų",
 	"visualeditor-viewpage-savewarning-keep": "Tęsti koregavimą",
 	"visualeditor-viewpage-savewarning-title": "Ar tikrai?",
+	"visualeditor-wikitext-progress": "Vikitekstas konvertuojamas",
 	"visualeditor-wikitext-warning": "Jūs naudojate vizualų redaktorių, todėl [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikisintaksė]] čia neveikia. Bet kuriuo metu galite persijungti į išeities teksto redaktorių neprarasdami pakeitimų, spauskite iškleidžiamą meniu prie \"{{int:visualeditor-toolbar-savedialog}}\" ir pasirinkite \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Aptikta vikisintaksė"
 }

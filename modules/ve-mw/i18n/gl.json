@@ -228,6 +228,7 @@
 	"visualeditor-editnotices-tooltip": "Avisos de edición",
 	"visualeditor-editsummary": "Describa os seus cambios",
 	"visualeditor-editsummary-bytes-remaining": "O número de bytes restantes",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Título da páxina",
 	"visualeditor-formatdropdown-format-mw-heading2": "Cabeceira",
 	"visualeditor-formatdropdown-format-mw-heading3": "Subcabeceira 1",
@@ -305,6 +306,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Desbotar as edicións",
 	"visualeditor-viewpage-savewarning-keep": "Continuar editando",
 	"visualeditor-viewpage-savewarning-title": "Está seguro?",
+	"visualeditor-wikitext-progress": "Convertendo o texto wiki",
 	"visualeditor-wikitext-warning": "Está usando o editor visual; o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|texto wiki]] non funciona aquí. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Detectouse texto wiki"
 }
