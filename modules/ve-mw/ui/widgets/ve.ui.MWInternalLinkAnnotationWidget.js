@@ -29,34 +29,12 @@ OO.inheritClass( ve.ui.MWInternalLinkAnnotationWidget, ve.ui.LinkAnnotationWidge
  * @inheritdoc
  */
 ve.ui.MWInternalLinkAnnotationWidget.static.getAnnotationFromText = function ( value ) {
-	var title,
-		target = value.trim();
+	var title = mw.Title.newFromText( value.trim() );
 
-	// Keep annotation in sync with value
-	if ( target === '' ) {
+	if ( !title ) {
 		return null;
-	} else {
-		title = mw.Title.newFromText( target );
-
-		if (
-			title &&
-			( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) &&
-			target[ 0 ] !== ':'
-		) {
-			// Prepend links to File and Category namespace with a colon
-			target = ':' + target;
-		}
-
-		return new ve.dm.MWInternalLinkAnnotation( {
-			type: 'link/mwInternal',
-			attributes: {
-				title: target,
-				// bug 62816: we really need a builder for this stuff
-				normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( target ),
-				lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( target )
-			}
-		} );
 	}
+	return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
 };
 
 /**
