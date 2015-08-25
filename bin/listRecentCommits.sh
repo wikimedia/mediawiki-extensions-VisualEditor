@@ -38,7 +38,6 @@ do
 	then
 		CHANGEHASH=`cut -f1 -d' ' <<< $CHANGE`
 
-		# Sub-iterate over lines matching "Update OOjs" (which covers OOjs and OOjs UI)
 		SUBCHANGES=`git log --format=%B -n1 $CHANGEHASH -- |
 			sed -n -e '/New changes/,/^$/p' |
 			tail -n +2 |
@@ -47,26 +46,6 @@ do
 		while read -r SUBCHANGE
 		do
 			printf "\t$SUBCHANGE\n"
-
-			if [[ $SUBCHANGE == *"Update OOjs"* ]]
-			then
-				cd lib/ve
-
-				SUBCHANGEHASH=`cut -f1 -d' ' <<< $SUBCHANGE`
-
-				SUBSUBCHANGES=`git log --format=%B -n1 $SUBCHANGEHASH -- |
-					sed -n -e '/New changes/,/^$/p' |
-					tail -n +2 |
-					sed -e '$ d' |
-					grep --color=never -v 'translatewiki'`
-
-				while read -r SUBSUBCHANGE
-				do
-					printf "\t\t$SUBSUBCHANGE\n"
-				done <<< "$SUBSUBCHANGES"
-
-				cd ../..
-			fi
 		done <<< "$SUBCHANGES"
 
 		# Extra new-line between sub-module pulls for clarity
