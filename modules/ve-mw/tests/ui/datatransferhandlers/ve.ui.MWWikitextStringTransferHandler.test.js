@@ -15,7 +15,7 @@ QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
 /* Tests */
 
 function runWikitextStringHandlerTest( assert, server, string, mimeType, expectedResponse, expectedData, annotations, msg ) {
-	var handler, i, j,
+	var handler, i, j, name,
 		done = assert.async(),
 		item = ve.ui.DataTransferItem.static.newFromString( string, mimeType ),
 		doc = ve.dm.example.createExampleDocument(),
@@ -43,6 +43,10 @@ function runWikitextStringHandlerTest( assert, server, string, mimeType, expecte
 		}
 	}
 
+	// Check we match the wikitext string handler
+	name = ve.ui.dataTransferHandlerFactory.getHandlerNameForItem( item );
+	assert.strictEqual( name, 'wikitextString', msg + ': triggers match function' );
+
 	// Invoke the handler
 	handler = ve.ui.dataTransferHandlerFactory.create( 'wikitextString', mockSurface, item );
 
@@ -68,9 +72,12 @@ QUnit.test( 'convert', function ( assert ) {
 		cases = [
 			{
 				msg: 'Simple link',
-				pasteString: '[[Foo]]',
+				// Put link in the middle of text to verify that the
+				// start-of-line and end-or-line anchors on the heading
+				// identification pattern don't affect link identification
+				pasteString: 'some [[Foo]] text',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body data-parsoid=\'{"dsr":[0,7,0,0]}\' lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p data-parsoid=\'{"dsr":[0,7,0,0]}\'><a rel="mw:WikiLink" href="./Foo" title="Foo" data-parsoid=\'{"stx":"simple","a":{"href":"./Foo"},"sa":{"href":"Foo"},"dsr":[0,7,2,2]}\'>Foo</a></p></body>',
+				parsoidResponse: '<body data-parsoid=\'{"dsr":[0,17,0,0]}\' lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p data-parsoid=\'{"dsr":[0,17,0,0]}\'>some <a rel="mw:WikiLink" href="./Foo" title="Foo" data-parsoid=\'{"stx":"simple","a":{"href":"./Foo"},"sa":{"href":"Foo"},"dsr":[5,12,2,2]}\'>Foo</a> text</p></body>',
 				annotations: [ {
 					type: 'link/mwInternal',
 					attributes: {
@@ -82,9 +89,19 @@ QUnit.test( 'convert', function ( assert ) {
 					}
 				} ],
 				expectedData: [
+					's',
+					'o',
+					'm',
+					'e',
+					' ',
 					[ 'F', [ 0 ] ],
 					[ 'o', [ 0 ] ],
 					[ 'o', [ 0 ] ],
+					' ',
+					't',
+					'e',
+					'x',
+					't',
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				]
@@ -229,7 +246,7 @@ QUnit.test( 'convert', function ( assert ) {
 			}
 		];
 
-	QUnit.expect( cases.length );
+	QUnit.expect( cases.length * 2 );
 	for ( i = 0; i < cases.length; i++ ) {
 		runWikitextStringHandlerTest( assert, this.server, cases[ i ].pasteString, cases[ i ].pasteType, cases[ i ].parsoidResponse, cases[ i ].expectedData, cases[ i ].annotations, cases[ i ].msg );
 	}
