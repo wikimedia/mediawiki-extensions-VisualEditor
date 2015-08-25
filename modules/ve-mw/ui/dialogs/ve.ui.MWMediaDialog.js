@@ -359,7 +359,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	var i, newDimensions, field, isPortrait, $info, $section, windowWidth,
 		contentDirection = this.getFragment().getDocument().getDir(),
 		imageTitle = new OO.ui.LabelWidget( {
-			label: new mw.Title( imageinfo.title ).getNameText()
+			label: mw.Title.newFromText( imageinfo.title ).getNameText()
 		} ),
 		metadata = imageinfo.extmetadata,
 		// Field configuration (in order)
@@ -724,18 +724,21 @@ ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
-	var obj = {},
+	var title,
+		obj = {},
 		info = this.selectedImageInfo;
 
 	if ( info ) {
+		// Run title through mw.Title so the File: prefix is localised
+		title = mw.Title.newFromText( info.title ).getPrefixedText();
 		if ( !this.imageModel ) {
 			// Create a new image model based on default attributes
 			this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
 				{
 					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
-					href: './' + info.title,
+					href: './' + title,
 					src: info.url,
-					resource: './' + info.title,
+					resource: './' + title,
 					width: info.thumbwidth,
 					height: info.thumbheight,
 					mediaType: info.mediatype,
@@ -753,9 +756,9 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 			this.imageModel.changeImageSource(
 				{
 					mediaType: info.mediatype,
-					href: './' + info.title,
+					href: './' + title,
 					src: info.url,
-					resource: './' + info.title
+					resource: './' + title
 				},
 				info
 			);
