@@ -118,10 +118,9 @@ class VisualEditorHooks {
 
 		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 		$title = $skin->getRelevantTitle();
-		// Exit if we're not in a VE-enabled namespace
-		if ( !$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
-			return true;
-		}
+		// Don't exit if this namespace isn't VE-enabled, since we should still
+		// change "Edit" to "Edit source" (especially for NS_MEDIAWIKI).
+		$namespaceEnabled = $title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) );
 
 		// HACK: Exit if we're in the Education Program namespace (even though it's content)
 		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
@@ -169,16 +168,20 @@ class VisualEditorHooks {
 				if ( $editTabMessage !== null ) {
 					$editTab['text'] = $skin->msg( $editTabMessage )->text();
 				}
-
-				// Inject the VE tab before or after the edit tab
-				if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
-					$editTab['class'] .= ' collapsible';
-					$newViews['ve-edit'] = $veTab;
-					$newViews['edit'] = $editTab;
+				if ( $namespaceEnabled ) {
+					// Inject the VE tab before or after the edit tab
+					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
+						$editTab['class'] .= ' collapsible';
+						$newViews['ve-edit'] = $veTab;
+						$newViews['edit'] = $editTab;
+					} else {
+						$veTab['class'] .= ' collapsible';
+						$newViews['edit'] = $editTab;
+						$newViews['ve-edit'] = $veTab;
+					}
 				} else {
-					$veTab['class'] .= ' collapsible';
+					// Don't add ve-edit, but do update the edit tab (e.g. "Edit source").
 					$newViews['edit'] = $editTab;
-					$newViews['ve-edit'] = $veTab;
 				}
 			} else {
 				// Just pass through
