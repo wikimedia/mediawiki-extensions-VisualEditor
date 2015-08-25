@@ -367,10 +367,12 @@
 				}
 			}
 
-			if ( conf.tabPosition === 'before' ) {
-				$caEdit.addClass( 'collapsible' );
-			} else {
-				$caVeEdit.addClass( 'collapsible' );
+			if ( init.isAvailable ) {
+				if ( conf.tabPosition === 'before' ) {
+					$caEdit.addClass( 'collapsible' );
+				} else {
+					$caVeEdit.addClass( 'collapsible' );
+				}
 			}
 
 			// Process appendix messages
