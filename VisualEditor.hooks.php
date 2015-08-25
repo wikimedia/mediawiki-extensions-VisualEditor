@@ -101,15 +101,16 @@ class VisualEditorHooks {
 	 * @return boolean
 	 */
 	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+
 		// Exit if the user doesn't have VE enabled
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-betatempdisable' )
+			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
+			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
 		) {
 			return true;
 		}
-
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
