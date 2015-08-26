@@ -210,6 +210,7 @@
 	"visualeditor-editnotices-tooltip": "Avisos d'edició",
 	"visualeditor-editsummary": "Descriviu el que heu canviat",
 	"visualeditor-editsummary-bytes-remaining": "El nombre de bytes restants",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Títol de la pàgina",
 	"visualeditor-formatdropdown-format-mw-heading2": "Encapçalament",
 	"visualeditor-formatdropdown-format-mw-heading3": "Encapçalament de nivell 1",

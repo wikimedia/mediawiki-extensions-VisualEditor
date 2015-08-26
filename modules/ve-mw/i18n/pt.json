@@ -215,6 +215,7 @@
 	"visualeditor-editnotices-tooltip": "Avisos de edição",
 	"visualeditor-editsummary": "Por favor, descreva o que você mudou",
 	"visualeditor-editsummary-bytes-remaining": "Número de bytes restantes",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Título da página",
 	"visualeditor-formatdropdown-format-mw-heading2": "Cabeçalho",
 	"visualeditor-formatdropdown-format-mw-heading3": "Sub-título 1",
