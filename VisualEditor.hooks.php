@@ -489,8 +489,6 @@ class VisualEditorHooks {
 				'modules/ve-mw/ui/dialogs/ve.ui.MWReferencesListDialog.js',
 				'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
 
-				'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSourceSelectWidget.js',
-
 				'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
 				'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
 
@@ -504,7 +502,6 @@ class VisualEditorHooks {
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
 				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',
-				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSourceSelectWidget.css',
 			),
 			'dependencies' => array(
 				'ext.visualEditor.mwreference.core',
