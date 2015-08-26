@@ -97,12 +97,20 @@ ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response )
 
 /** */
 ve.ce.MWExtensionNode.prototype.afterRender = function () {
-	var node = this;
-	// Rerender after images load
-	// TODO: ignore shields, and count multiple images
-	this.$element.find( 'img' ).on( 'load', function () {
-		node.emit( 'rerender' );
-	} );
+	var node = this,
+		$images = this.$element.find( 'img:not([width]),img:not([height])' );
+
+	// Images missing a dimension change size after load
+	// TODO: Ignore images which have dimensions defined in CSS, if performant
+	if ( $images.length ) {
+		$images.on( 'load', function () {
+			// Mixin method
+			ve.ce.GeneratedContentNode.prototype.afterRender.call( node );
+		} );
+	} else {
+		// Mixin method
+		ve.ce.GeneratedContentNode.prototype.afterRender.call( this );
+	}
 };
 
 /**
