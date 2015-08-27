@@ -171,6 +171,12 @@ ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, conver
 		}
 	}
 
+	// If we have no internal item data for this reference, don't let it get pasted into
+	// another VE document. T110479
+	if ( isForClipboard && itemNodeRange.isCollapsed() ) {
+		el.setAttribute( 'data-ve-ignore', 'true' );
+	}
+
 	// Generate name
 	listKeyParts = dataElement.attributes.listKey.match( this.listKeyRegex );
 	if ( listKeyParts[ 1 ] === 'auto' ) {
