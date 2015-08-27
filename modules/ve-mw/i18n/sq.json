@@ -8,7 +8,8 @@
 			"Kushtrim",
 			"Elioqoshi",
 			"GretaDoci",
-			"Techlik"
+			"Techlik",
+			"Liridon"
 		]
 	},
 	"apihelp-visualeditor-description": "Kthen një faqe HTML5 prej një shërbimi Parsoid.",
@@ -16,7 +17,7 @@
 	"apihelp-visualeditor-param-cachekey": "Për serializim ose diferencim, përdorni rezultatin e një serializimi të kaluar për kërkesën me këtë çelës. Mbishkruan $1html.",
 	"tooltip-ca-createsource": "Krijo tekstin burimor të kësaj faqeje",
 	"tooltip-ca-editsource": "Redakto tekstin burimor të kësaj faqeje",
-	"tooltip-ca-ve-edit": "Redakto faqen duke përdorur VisualEditor",
+	"tooltip-ca-ve-edit": "Redakto këtë faqe",
 	"visualeditor-advancedsettings-tool": "Konfigurimet e avancuara",
 	"visualeditor-beta-appendix": "provë",
 	"visualeditor-beta-label": "provë",

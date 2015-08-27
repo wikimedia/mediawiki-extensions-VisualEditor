@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Умар"
+			"Умар",
+			"Исмаил Садуев"
 		]
 	},
 	"tooltip-ca-createsource": "Кхолла агӀо чухулара тадар чохь",
@@ -143,7 +144,7 @@
 	"visualeditor-differror": "Чуйохккхуш серверан гӀалат даьлла: $1",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|1=хаам|хаамаш}}",
 	"visualeditor-editnotices-tooltip": "Тадаран билгалонаш",
-	"visualeditor-editsummary": "ДӀаязде хьой динарг",
+	"visualeditor-editsummary": "ДӀаязде айхьа хийцинарг",
 	"visualeditor-editsummary-bytes-remaining": "Йисина байтийн дукхалла",
 	"visualeditor-formatdropdown-format-mw-heading1": "АгӀона корта",
 	"visualeditor-formatdropdown-format-mw-heading2": "Корта",
