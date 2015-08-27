@@ -12,8 +12,9 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
+ * @param {ve.dm.Document} parentDoc Document that contains or will contain the reference
  */
-ve.dm.MWReferenceModel = function VeDmMWReferenceModel() {
+ve.dm.MWReferenceModel = function VeDmMWReferenceModel( parentDoc ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
@@ -23,9 +24,8 @@ ve.dm.MWReferenceModel = function VeDmMWReferenceModel() {
 	this.listIndex = null;
 	this.group = '';
 	this.doc = null;
+	this.parentDoc = parentDoc;
 	this.deferDoc = null;
-	this.dir = null;
-	this.lang = null;
 };
 
 /* Inheritance */
@@ -44,14 +44,12 @@ ve.dm.MWReferenceModel.static.newFromReferenceNode = function ( node ) {
 	var doc = node.getDocument(),
 		internalList = doc.getInternalList(),
 		attr = node.getAttributes(),
-		ref = new ve.dm.MWReferenceModel();
+		ref = new ve.dm.MWReferenceModel( doc );
 
 	ref.setListKey( attr.listKey );
 	ref.setListGroup( attr.listGroup );
 	ref.setListIndex( attr.listIndex );
 	ref.setGroup( attr.refGroup );
-	ref.setDir( doc.getDir() );
-	ref.setLang( doc.getLang() );
 	ref.deferDoc = function () {
 		// cloneFromRange is very expensive, so lazy evaluate it
 		return doc.cloneFromRange( internalList.getItemNode( attr.listIndex ).getRange() );
@@ -236,7 +234,7 @@ ve.dm.MWReferenceModel.prototype.getDocument = function () {
 					{ type: '/internalList' }
 				],
 				// htmlDocument
-				null,
+				this.parentDoc.getHtmlDocument(),
 				// parentDocument
 				null,
 				// internalList
@@ -244,49 +242,13 @@ ve.dm.MWReferenceModel.prototype.getDocument = function () {
 				// innerWhitespace
 				null,
 				// lang
-				this.getLang(),
+				this.parentDoc.getLang(),
 				// dir
-				this.getDir()
+				this.parentDoc.getDir()
 			);
 		}
 	}
 	return this.doc;
-};
-
-/**
- * Set the directionality of the reference document
- *
- * @param {string} dir Document directionality
- */
-ve.dm.MWReferenceModel.prototype.setDir = function ( dir ) {
-	this.dir = dir;
-};
-
-/**
- * Get the directionality of the reference document
- *
- * @return {string} Document directionality
- */
-ve.dm.MWReferenceModel.prototype.getDir = function () {
-	return this.dir;
-};
-
-/**
- * Set the language of the reference document
- *
- * @param {string} lang Document language
- */
-ve.dm.MWReferenceModel.prototype.setLang = function ( lang ) {
-	this.lang = lang;
-};
-
-/**
- * Get the language of the reference document
- *
- * @return {string} Document language
- */
-ve.dm.MWReferenceModel.prototype.getLang = function () {
-	return this.lang;
 };
 
 /**
