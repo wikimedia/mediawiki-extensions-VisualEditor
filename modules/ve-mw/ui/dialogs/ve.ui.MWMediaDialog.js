@@ -746,8 +746,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 					align: 'default',
 					defaultSize: true
 				},
-				this.getFragment().getDocument().getDir(),
-				this.getFragment().getDocument().getLang()
+				this.getFragment().getDocument()
 			);
 			this.attachImageModel();
 			this.resetCaption();
@@ -954,11 +953,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			if ( this.selectedNode ) {
 				this.isInsertion = false;
 				// Create image model
-				this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
-					this.selectedNode.getAttributes(),
-					this.selectedNode.getDocument().getDir(),
-					this.selectedNode.getDocument().getLang()
-				);
+				this.imageModel = ve.dm.MWImageModel.static.newFromImageNode( this.selectedNode );
 				this.attachImageModel();
 
 				if ( !this.imageModel.isDefaultSize() ) {

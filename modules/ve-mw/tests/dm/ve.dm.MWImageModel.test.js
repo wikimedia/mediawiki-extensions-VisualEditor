@@ -10,7 +10,7 @@ QUnit.module( 've.dm.MWImageModel', ve.test.utils.mwEnvironment );
 /* Tests */
 
 QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
-	var i, imageType, imageModel, value, result, expected, expectedAlignment, method, dir,
+	var i, imageType, imageModel, value, result, expected, expectedAlignment, method, dir, dummyDoc,
 		expect = 0,
 		imageNode = {},
 		images = {
@@ -148,9 +148,10 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 		// Run tests
 		for ( i = 0; i < images[ imageType ].tests.length; i++ ) {
 			dir = images[ imageType ].dir;
+			dummyDoc = new ve.dm.Document( [], null, null, null, null, 'en', images[ imageType ].dir );
 
 			// Start from original details
-			imageModel = ve.dm.MWImageModel.static.newFromImageAttributes( images[ imageType ].attrs, dir );
+			imageModel = ve.dm.MWImageModel.static.newFromImageAttributes( images[ imageType ].attrs, dummyDoc );
 
 			// Run attributes
 			for ( method in images[ imageType ].tests[ i ].methods ) {

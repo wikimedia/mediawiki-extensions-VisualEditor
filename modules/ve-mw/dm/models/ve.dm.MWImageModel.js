@@ -12,13 +12,14 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
+ * @param {ve.dm.Document} parentDoc Document that contains or will contain the image
  * @param {Object} [config] Configuration options
  * @cfg {string} [resourceName] The resource name of the given media file
  * @cfg {Object} [currentDimensions] Current dimensions, width & height
  * @cfg {Object} [minDimensions] Minimum dimensions, width & height
  * @cfg {boolean} [isDefaultSize] Object is using its default size dimensions
  */
-ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
+ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 	var scalable, currentDimensions, minDimensions;
 
 	config = config || {};
@@ -30,6 +31,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.attributesCache = null;
 
 	// Image properties
+	this.parentDoc = parentDoc;
 	this.captionDoc = null;
 	this.caption = null;
 	this.mediaType = null;
@@ -40,8 +42,6 @@ ve.dm.MWImageModel = function VeDmMWImageModel( config ) {
 	this.sizeType = null;
 	this.border = false;
 	this.borderable = false;
-	this.dir = null;
-	this.lang = null;
 	this.defaultDimensions = null;
 	this.changedImageSource = false;
 
@@ -157,21 +157,21 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  * Load from image data with scalable information.
  *
  * @param {Object} attrs Image node attributes
- * @param {string} [dir] Document direction
- * @param {string} [lang] Document language
- * @param {string} [caption] Existing image caption HTML
+ * @param {ve.dm.Document} parentDoc Document that contains or will contain the image
  * @return {ve.dm.MWImageModel} Image model
  */
-ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, caption ) {
-	var captionDomTree,
-		imgModel = new ve.dm.MWImageModel( {
-			resourceName: attrs.resource,
-			currentDimensions: {
-				width: attrs.width,
-				height: attrs.height
-			},
-			defaultSize: !!attrs.defaultSize
-		} );
+ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc ) {
+	var imgModel = new ve.dm.MWImageModel(
+			parentDoc,
+			{
+				resourceName: attrs.resource,
+				currentDimensions: {
+					width: attrs.width,
+					height: attrs.height
+				},
+				defaultSize: !!attrs.defaultSize
+			}
+		);
 
 	// Cache the attributes so we can create a new image without
 	// losing any existing information
@@ -190,9 +190,6 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, 
 	// Collect all the information
 	imgModel.toggleBorder( !!attrs.borderImage );
 	imgModel.setAltText( attrs.alt || '' );
-
-	imgModel.setDir( dir );
-	imgModel.setLang( lang );
 
 	imgModel.setType( attrs.type );
 
@@ -213,12 +210,17 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, dir, lang, 
 		'custom'
 	);
 
-	// If a caption is given, use it in the document
-	if ( caption ) {
-		captionDomTree = ve.createDocumentFromHtml( caption );
-		imgModel.setCaptionDocument( ve.dm.converter.getModelFromDom( captionDomTree ) );
-	}
 	return imgModel;
+};
+
+/**
+ * Load from existing image node.
+ *
+ * @param {ve.dm.MWImageNode} node Image node
+ * @return {ve.dm.MWImageModel} Image model
+ */
+ve.dm.MWImageModel.static.newFromImageNode = function ( node ) {
+	return ve.dm.MWImageModel.static.newFromImageAttributes( node.getAttributes(), node.getDocument() );
 };
 
 /* Methods */
@@ -686,7 +688,7 @@ ve.dm.MWImageModel.prototype.isAligned = function ( align ) {
  */
 ve.dm.MWImageModel.prototype.isDefaultAligned = function ( imageType, align ) {
 	var alignment = align || this.getAlignment(),
-		defaultAlignment = ( this.getDir() === 'rtl' ) ? 'left' : 'right';
+		defaultAlignment = ( this.parentDoc.getDir() === 'rtl' ) ? 'left' : 'right';
 
 	imageType = imageType || this.getType();
 	// No alignment specified means defeault alignment always
@@ -827,7 +829,7 @@ ve.dm.MWImageModel.prototype.getCaptionDocument = function () {
 				{ type: '/internalList' }
 			],
 			// htmlDocument
-			null,
+			this.parentDoc.getHtmlDocument(),
 			// parentDocument
 			null,
 			// internalList
@@ -835,9 +837,9 @@ ve.dm.MWImageModel.prototype.getCaptionDocument = function () {
 			// innerWhitespace
 			null,
 			// lang
-			this.getLang(),
+			this.parentDoc.getLang(),
 			// dir
-			this.getDir()
+			this.parentDoc.getDir()
 		);
 	}
 	return this.captionDoc;
@@ -1064,53 +1066,13 @@ ve.dm.MWImageModel.prototype.setVerticalAlignment = function ( valign ) {
 ve.dm.MWImageModel.prototype.getDefaultDir = function ( imageNodeType ) {
 	imageNodeType = imageNodeType || this.getImageNodeType();
 
-	if ( this.getDir() === 'rtl' ) {
+	if ( this.parentDoc.getDir() === 'rtl' ) {
 		// Assume position is 'left'
 		return ( imageNodeType === 'mwBlockImage' ) ? 'left' : 'none';
 	} else {
 		// Assume position is 'right'
 		return ( imageNodeType === 'mwBlockImage' ) ? 'right' : 'none';
 	}
-};
-
-/**
- * Get the directionality of the image, especially important for
- * default alignment.
- *
- * @return {string} Current document direction 'rtl' or 'ltr'
- */
-ve.dm.MWImageModel.prototype.getDir = function () {
-	return this.dir;
-};
-
-/**
- * Set the directionality of the image, especially important for
- * default alignment.
- *
- * @param {string} dir 'rtl' or 'ltr'
- */
-ve.dm.MWImageModel.prototype.setDir = function ( dir ) {
-	this.dir = dir;
-};
-
-/**
- * Get the language of the image document. Specifically relevant
- * for the caption document.
- *
- * @return {string} Document language
- */
-ve.dm.MWImageModel.prototype.getLang = function () {
-	return this.lang;
-};
-
-/**
- * Set the language of the image document. Specifically relevant
- * for the caption document.
- *
- * @param {string} lang Document language
- */
-ve.dm.MWImageModel.prototype.setLang = function ( lang ) {
-	this.lang = lang;
 };
 
 /**
