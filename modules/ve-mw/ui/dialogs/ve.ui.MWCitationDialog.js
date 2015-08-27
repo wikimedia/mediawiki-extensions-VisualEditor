@@ -182,9 +182,7 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 				if ( !dialog.referenceModel ) {
 					// Collapse returns a new fragment, so update dialog.fragment
 					dialog.fragment = dialog.getFragment().collapseToEnd();
-					dialog.referenceModel = new ve.dm.MWReferenceModel();
-					dialog.referenceModel.setDir( doc.getDir() );
-					dialog.referenceModel.setLang( doc.getLang() );
+					dialog.referenceModel = new ve.dm.MWReferenceModel( doc );
 					dialog.referenceModel.insertInternalItem( surfaceModel );
 					dialog.referenceModel.insertReferenceNode( dialog.getFragment() );
 				}
