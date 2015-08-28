@@ -266,6 +266,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Ännerungen ignoréieren",
 	"visualeditor-viewpage-savewarning-keep": "Virufuere mat Änneren",
 	"visualeditor-viewpage-savewarning-title": "Sidd Dir sécher?",
+	"visualeditor-wikitext-progress": "Wikitext ëmwandelen",
 	"visualeditor-wikitext-warning": "Dir benotzt de visuellen Editeur - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Fir all Ament an d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren, maacht den Dropdown-Menü niewent \"{{int:visualeditor-toolbar-savedialog}}\" op a gitt op \"{{int:visualeditor-mweditmodesource-title}}\"",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }

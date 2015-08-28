@@ -22,7 +22,7 @@
 	"visualeditor-beta-appendix": "beeta",
 	"visualeditor-beta-label": "beeta",
 	"visualeditor-beta-warning": "Selle toimeti arendus on beetajärgus. Et lülitada ümber lähteteksti toimetamisele ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-savedialog}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-tool}}\".",
-	"visualeditor-browserwarning": "Kasutad võrgulehitsejat, mida see toimeti ametlikult ei toeta.",
+	"visualeditor-browserwarning": "Kasutad veebilehitsejat, mida see toimeti ametlikult ei toeta.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lisa kohaliku kirjelduse lähtetekst",
 	"visualeditor-ca-createsource": "Loo lähtetekst",
 	"visualeditor-ca-editlocaldescriptionsource": "Redigeeri kohaliku kirjelduse lähteteksti",
@@ -274,6 +274,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Loobu muudatustest",
 	"visualeditor-viewpage-savewarning-keep": "Jätka redigeerimist",
 	"visualeditor-viewpage-savewarning-title": "Kas oled kindel?",
+	"visualeditor-wikitext-progress": "Vikiteksti teisendamine",
 	"visualeditor-wikitext-warning": "Kasutad visuaaltoimetit. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Vikitekst]] siin ei tööta. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, ava nupu \"{{int:visualeditor-toolbar-savedialog}}\" kõrval rippmenüü ja vali \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Tuvastatud vikiteksti märgistus"
 }
