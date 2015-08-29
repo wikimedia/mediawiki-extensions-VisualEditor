@@ -29,6 +29,7 @@
 	"apihelp-visualeditor-param-oldid": "El número de revisió que s'utilitzarà (per defecte s'utilitza la darrera revisió).",
 	"apihelp-visualeditor-param-paction": "Acció a realitzar.",
 	"apihelp-visualeditor-param-page": "La pàgina per realitzar-hi accions.",
+	"apihelp-visualeditoredit-description": "Desa una pàgina HTML5 a MediaWiki (convertit a wikitext amb el servei Parsoid)",
 	"apihelp-visualeditoredit-param-captchaid": "ID del captcha (en desar amb una resposta de captcha),",
 	"apihelp-visualeditoredit-param-captchaword": "Resposta al captcha (en desar amb una resposta de captcha).",
 	"apihelp-visualeditoredit-param-html": "HTML per enviar al Parsoid a canvi de wikitext.",
@@ -144,6 +145,7 @@
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "No converteixis el contingut entre variants lingüístiques",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Desactiva els enllaços de modificació en els encapçalaments d'aquesta pàgina.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Desactiva la galeria",
+	"visualeditor-dialog-meta-settings-notitleconvert-help": "Podeu evitar que el títol de la pàgina es converteixi automàticament en altres scripts.",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "No converteixis el títol entre variants lingüístiques",
 	"visualeditor-dialog-meta-settings-redirect-label": "Redirigeix aquesta pàgina",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Pàgina destinació de la redirecció",
@@ -288,6 +290,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Descarta les edicions",
 	"visualeditor-viewpage-savewarning-keep": "Continua editant",
 	"visualeditor-viewpage-savewarning-title": "N'esteu segur?",
+	"visualeditor-wikitext-progress": "S'està convertint el wikitext",
 	"visualeditor-wikitext-warning": "Esteu utilitzant l'Editor Visual. El [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] no funciona aquí. Per canviar a l'editor de wikitexts sense perdre els canvis obriu el menú desplegable del costat de \"{{int:visualeditor-toolbar-savedialog}}\" i seleccioneu \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "S'ha detectat sintaxi wiki"
 }
