@@ -21,8 +21,13 @@
 			"Macofe"
 		]
 	},
+	"apihelp-visualeditor-description": "Retorna HTML5 para uma página a partir do serviço Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Ao salvar, define-se a data e hora da revisão editada. Utiliza-se para detectar conflitos de edição.",
 	"apihelp-visualeditor-param-oldid": "O número da edição de utilização (por omissão, a versão mais recente).",
 	"apihelp-visualeditor-param-paction": "Ação a executar.",
+	"apihelp-visualeditor-param-page": "A página para executar acções.",
+	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (ao salvar com uma resposta captcha).",
+	"apihelp-visualeditoredit-param-captchaword": "Resposta ao captcha (ao salvar com uma resposta captcha).",
 	"apihelp-visualeditoredit-param-minor": "Sinalização para edição menor.",
 	"apihelp-visualeditoredit-param-summary": "Edita o resumo.",
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
@@ -55,7 +60,7 @@
 	"visualeditor-dialog-beta-welcome-content": "Esta é a nossa nova maneira de editar, mais fácil. Está ainda em fase experimental, o que significa que pode encontrar partes da página em que não poderá editar, ou encontrar problemas que precisam de ser corrigidos. Nós encorajamos que reveja as suas alterações, e são bem-vindos relatórios sobre problemas que possam vir a surgir durante o uso do Editor Visual (clique no botão \"{{int:visualeditor-help-tool}}\" para enviar o relatório). Pode ainda trocar para o editor de código-fonte a qualquer altura, bastando clicar no botão \"$1\" e mantendo as alterações que ainda não foram guardadas.",
 	"visualeditor-dialog-beta-welcome-title": "{{GENDER:$1|Bem-vindo|Bem-vinda}} ao Editor Visual",
 	"visualeditor-dialog-media-alttext-section": "Texto alternativo",
-	"visualeditor-dialog-media-alttext-section-help": "Pode utilizar esta função para fornecer uma descrição textual que é usada para as pessoas que não conseguem visualizar o item. Esta deve ser suficientemente boa para o entendimento e informações dadas pelo item multimédia. Isto é vital para utilizadores cegos e outras pessoas que utilizem programas de leitura de ecrã ou navegadores de texto.",
+	"visualeditor-dialog-media-alttext-section-help": "Pode utilizar esta função para escrever uma descrição textual para as pessoas que não conseguem visualizar o item. Esta deve ser suficiente para o entendimento e informações dadas pelo item multimédia. Isto é vital para utilizadores cegos e outras pessoas que utilizem programas de leitura de ecrã ou navegadores de texto.",
 	"visualeditor-dialog-media-change-image": "Alterar imagem",
 	"visualeditor-dialog-media-choose-image": "Usar esta imagem",
 	"visualeditor-dialog-media-content-filename": "Nome do ficheiro",
@@ -210,6 +215,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusão",
 	"visualeditor-diff-nochanges": "A sua revisão não pode ser iniciada porque é idêntica a última versão desta página.",
 	"visualeditor-differror": "Erro ao carregar dados do servidor: $1.",
+	"visualeditor-donebutton-tooltip": "Edição concluída",
 	"visualeditor-editconflict": "As suas alterações não puderam ser gravadas devido a um conflito de edição. Gostaria de resolver o conflito manualmente?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|aviso|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos de edição",
@@ -293,6 +299,7 @@
 	"visualeditor-viewpage-savewarning-discard": "Ignorar alterações",
 	"visualeditor-viewpage-savewarning-keep": "Continuar a editar",
 	"visualeditor-viewpage-savewarning-title": "Tem a certeza?",
+	"visualeditor-wikitext-progress": "A converter wikitexto",
 	"visualeditor-wikitext-warning": "Está a utilizar o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|códigos wiki]] não funcionam aqui. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado"
 }
