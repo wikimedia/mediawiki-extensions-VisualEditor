@@ -23,10 +23,7 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( mode
 	ve.ce.FocusableNode.call( this );
 
 	// DOM changes
-	this.$element
-		.addClass( 've-ce-mwNumberedExternalLinkNode' )
-		// Need CE=false to prevent selection issues
-		.prop( 'contentEditable', 'false' );
+	this.$element.addClass( 've-ce-mwNumberedExternalLinkNode' );
 
 	// Add link
 	this.$link = $( '<a>' )

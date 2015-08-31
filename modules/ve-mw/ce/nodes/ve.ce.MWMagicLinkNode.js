@@ -23,14 +23,10 @@ ve.ce.MWMagicLinkNode = function VeCeMWMagicLinkNode( model, config ) {
 	ve.ce.FocusableNode.call( this );
 
 	// DOM changes
-	this.$element
-		.addClass( 've-ce-mwMagicLinkNode' )
-		// Need CE=false to prevent selection issues
-		.prop( 'contentEditable', 'false' );
+	this.$element.addClass( 've-ce-mwMagicLinkNode' );
 
 	// Add link
-	this.$link = $( '<a>' )
-		.appendTo( this.$element );
+	this.$link = $( '<a>' ).appendTo( this.$element );
 
 	// Events
 	this.model.connect( this, { update: 'onUpdate' } );
