@@ -348,6 +348,12 @@ class VisualEditorHooks {
 		$preferences['visualeditor-hidebetawelcome'] = array(
 			'type' => 'api'
 		);
+		$preferences['visualeditor-findAndReplace-regex'] = array(
+			'type' => 'api'
+		);
+		$preferences['visualeditor-findAndReplace-matchCase'] = array(
+			'type' => 'api'
+		);
 		return true;
 	}
 
