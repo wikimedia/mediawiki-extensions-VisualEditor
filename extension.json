@@ -407,6 +407,7 @@
 				"jquery.byteLength",
 				"jquery.client",
 				"mediawiki.api",
+				"mediawiki.api.options",
 				"mediawiki.language",
 				"mediawiki.Title",
 				"mediawiki.Uri",
