@@ -92,7 +92,8 @@ ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
 };
 
 /**
- * Autolink the selected RFC/PMID/ISBN, which may have trailing whitespace.
+ * Autolink the selected RFC/PMID/ISBN, which may have trailing punctuation
+ * followed by whitespace.
  *
  * @see ve.ui.LinkAction#autolinkUrl
  * @method
@@ -143,5 +144,7 @@ ve.ui.commandRegistry.register(
 ve.ui.sequenceRegistry.register(
 	// This regexp doesn't have to be precise; we'll validate the magic
 	// link in #autolinkMagicLink above.
-	new ve.ui.Sequence( 'autolinkMagicLink', 'autolinkMagicLink', /\b(RFC|PMID|ISBN)\s+[0-9]([- 0-9]*[0-9Xx])?(\s|\n\n)$/, 0, true )
+	// The trailing \S* covers any trailing punctuation, which will be
+	// stripped before validating the link.
+	new ve.ui.Sequence( 'autolinkMagicLink', 'autolinkMagicLink', /\b(RFC|PMID|ISBN)\s+[0-9]([- 0-9]*[0-9Xx])?\S*(\s|\n\n)$/, 0, true )
 );
