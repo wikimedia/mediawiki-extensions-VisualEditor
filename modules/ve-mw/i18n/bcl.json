@@ -7,7 +7,7 @@
 	},
 	"tooltip-ca-createsource": "Muknaon an kodigong gikanan kaining pahina",
 	"tooltip-ca-editsource": "Liwaton an kodigong gikanan kaining pahina",
-	"tooltip-ca-ve-edit": "Liwaton ining pahina na gamit an Biswal-na-Paraliwat",
+	"tooltip-ca-ve-edit": "Liwata ining pahina",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Ining paraliwat yaon pa sa 'beta'. Sa pagribay pasiring sa ginikanan kaining pagliliwat sa arinman na pagkakataon na dae mawawara an saimong mga kaliwatan, bukasi na pahulog na lista sunod sa \"{{int:visualeditor-toolbar-savedialog}}\" asin pilion an \"{{int:visualeditor-mweditmodesource-tool}}\".",
