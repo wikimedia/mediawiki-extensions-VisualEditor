@@ -111,7 +111,7 @@
 	"visualeditor-dialog-media-size-choosefull": "Set to full size",
 	"visualeditor-dialog-media-size-originalsize-error": "Could not retrieve original file size.",
 	"visualeditor-dialog-media-size-section": "Image size",
-	"visualeditor-dialog-media-size-section-help": "You can set how large the media item appears on the page. This should almost always be the normal size, as a custom size will interfere with the layout of the page for readers and make them inconsistent.",
+	"visualeditor-dialog-media-size-section-help": "You can set how large the media item appears on the page. This should almost always be the normal size, as a custom size will interfere with the layout of the page for readers and make it inconsistent.",
 	"visualeditor-dialog-media-thumbdimensions": "Thumbnail dimensions",
 	"visualeditor-dialog-media-title": "Media settings",
 	"visualeditor-dialog-media-type-border": "Border",
