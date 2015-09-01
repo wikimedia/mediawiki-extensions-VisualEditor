@@ -59,7 +59,7 @@ ve.ui.MWWikitextStringTransferHandler.static.matchFunction = function ( item ) {
 
 	// Detect autolink opportunities for magic words.
 	// (The link should be the only contents of paste to match this heuristic)
-	if ( /^\s*(RFC|ISBN|PMID)[-\s0-9]+[Xx]?\s*$/.test( text ) ) {
+	if ( ve.dm.MWMagicLinkNode.static.validateContent( text.trim() ) ) {
 		return true;
 	}
 

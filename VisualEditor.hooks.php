@@ -440,6 +440,7 @@ class VisualEditorHooks {
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
+			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
 		);
 

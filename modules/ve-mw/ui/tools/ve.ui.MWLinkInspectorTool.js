@@ -24,15 +24,27 @@ ve.ui.MWLinkInspectorTool = function VeUiMwLinkInspectorTool() {
 
 OO.inheritClass( ve.ui.MWLinkInspectorTool, ve.ui.LinkInspectorTool );
 
-// FIXME should eventually vary title based on link type
-// Use message visualeditor-annotationbutton-linknode-tooltip
-
 ve.ui.MWLinkInspectorTool.static.modelClasses =
 	ve.ui.MWLinkInspectorTool.super.static.modelClasses.concat( [
-		ve.dm.MWNumberedExternalLinkNode
+		ve.dm.MWNumberedExternalLinkNode,
+		ve.dm.MWMagicLinkNode
 	] );
 
-ve.ui.MWLinkInspectorTool.static.associatedWindows = [ 'link', 'linkNode' ];
+ve.ui.MWLinkInspectorTool.static.associatedWindows = [ 'link', 'linkNode', 'linkMagicNode' ];
+
+ve.ui.MWLinkInspectorTool.prototype.onUpdateState = function ( fragment ) {
+	// Vary title based on link type.
+	var node = fragment instanceof ve.dm.SurfaceFragment ?
+			fragment.getSelectedNode() : null,
+		type = node instanceof ve.dm.MWMagicLinkNode ?
+			'magiclinknode-tooltip-' + node.getMagicType().toLowerCase() :
+			node instanceof ve.dm.MWNumberedExternalLinkNode ?
+			'linknode-tooltip' : null,
+		title = type ?
+			OO.ui.deferMsg( 'visualeditor-annotationbutton-' + type ) :
+			ve.ui.MWLinkInspectorTool.static.title;
+	this.setTitle( title  );
+};
 
 ve.ui.toolFactory.register( ve.ui.MWLinkInspectorTool );
 

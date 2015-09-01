@@ -62,33 +62,27 @@ ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
  * @return {ve.dm.MWExternalLinkAnnotation} The annotation to use.
  */
 ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
-	var title, targetData, m,
+	var title, targetData,
 		href = linktext;
-	// The link has been validated in #autolinkMagicLink and/or
-	// #autolinkUrl, so we can use a quick and dirty regexp here to pull
-	// apart the magic link.
-	m = /^(RFC|PMID|ISBN)\s+(\S.*)$/.exec( linktext );
-	if ( m && m[ 1 ] === 'RFC' ) {
-		href = '//tools.ietf.org/html/rfc' + m[ 2 ];
-	} else if ( m && m[ 1 ] === 'PMID' ) {
-		href = '//www.ncbi.nlm.nih.gov/pubmed/' + m[ 2 ] + '?dopt=Abstract';
-	} else if ( m && m[ 1 ] === 'ISBN' ) {
-		title = mw.Title.newFromText( 'Special:BookSources/' + m[ 2 ].replace( /[^0-9Xx]/g, '' ) );
-	} else {
-		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
-			href,
-			this.surface.getModel().getDocument().getHtmlDocument()
-		);
-		if ( targetData.isInternal ) {
-			title = mw.Title.newFromText( targetData.title );
-		}
+
+	// Is this a "magic link"?
+	if ( ve.dm.MWMagicLinkNode.static.validateContent( linktext ) ) {
+		return ve.dm.MWMagicLinkNode.static.annotationFromContent( linktext );
 	}
-	return title ?
-		ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title ) :
-		new ve.dm.MWExternalLinkAnnotation( {
-			type: 'link/mwExternal',
-			attributes: { href: href }
-		} );
+	// Is this an internal link?
+	targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+		href,
+		this.surface.getModel().getDocument().getHtmlDocument()
+	);
+	if ( targetData.isInternal ) {
+		title = mw.Title.newFromText( targetData.title );
+		return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
+	}
+	// It's an external link.
+	return new ve.dm.MWExternalLinkAnnotation( {
+		type: 'link/mwExternal',
+		attributes: { href: href }
+	} );
 };
 
 /**
@@ -103,13 +97,7 @@ ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
  */
 ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
 	return this.autolink( function ( linktext ) {
-		if ( /^(RFC|PMID) [0-9]+$/.test( linktext ) ) {
-			return true; // Valid RFC/PMID
-		}
-		if ( /^ISBN (97[89][- ]?)?([0-9][- ]?){9}[0-9Xx]$/.test( linktext ) ) {
-			return true; // Valid ISBN
-		}
-		return false;
+		return ve.dm.MWMagicLinkNode.static.validateContent( linktext );
 	} );
 };
 
@@ -121,10 +109,13 @@ ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
  */
 ve.ui.MWLinkAction.prototype.open = function () {
 	var fragment = this.surface.getModel().getFragment(),
+		selectedNode = fragment.getSelectedNode(),
 		windowName = 'link';
 
-	if ( fragment.getSelectedNode() instanceof ve.dm.MWNumberedExternalLinkNode ) {
+	if ( selectedNode instanceof ve.dm.MWNumberedExternalLinkNode ) {
 		windowName = 'linkNode';
+	} else if ( selectedNode instanceof ve.dm.MWMagicLinkNode ) {
+		windowName = 'linkMagicNode';
 	}
 	this.surface.execute( 'window', 'open', windowName );
 	return true;

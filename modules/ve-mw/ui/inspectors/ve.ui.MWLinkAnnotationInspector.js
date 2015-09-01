@@ -32,6 +32,14 @@ ve.ui.MWLinkAnnotationInspector.static.modelClasses = [
 	ve.dm.MWInternalLinkAnnotation
 ];
 
+ve.ui.MWLinkAnnotationInspector.static.actions = ve.ui.MWLinkAnnotationInspector.static.actions.concat( [
+	{
+		action: 'convert',
+		label: null, // see #updateActions
+		modes: [ 'edit', 'insert' ]
+	}
+] );
+
 /* Methods */
 
 /**
@@ -132,6 +140,38 @@ ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkChange = function () {
 /**
  * @inheritdoc
  */
+ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
+	var content, annotation, href, type,
+		msg = null;
+
+	ve.ui.MWLinkAnnotationInspector.super.prototype.updateActions.call( this );
+
+	// show/hide convert action
+	content = this.fragment ? this.fragment.getText() : '';
+	annotation = this.annotationInput.getAnnotation();
+	href = annotation && annotation.getHref();
+	if ( href && ve.dm.MWMagicLinkNode.static.validateHref( content, href ) ) {
+		type = ve.dm.MWMagicLinkType.static.fromContent( content ).type;
+		msg = 'visualeditor-linkinspector-convert-link-' + type.toLowerCase();
+	}
+
+	// Once we toggle the visibility of the ActionWidget, we can't filter
+	// it with `get` any more.  So we have to use `forEach`:
+	this.actions.forEach( null, function ( action ) {
+		if ( action.getAction() === 'convert' ) {
+			if ( msg ) {
+				action.setLabel( OO.ui.deferMsg( msg ) );
+				action.toggle( true );
+			} else {
+				action.toggle( false );
+			}
+		}
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
 	return this.isExternal() ? this.externalAnnotationInput : this.internalAnnotationInput;
 };
@@ -162,9 +202,44 @@ ve.ui.MWLinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWLinkAnnotationInspector.prototype.getActionProcess = function ( action ) {
+	if ( action === 'convert' ) {
+		return new OO.ui.Process( function () {
+			this.close( { action: 'done', convert: true } );
+		}, this );
+	}
+	return ve.ui.MWLinkAnnotationInspector.super.prototype.getActionProcess.call( this, action );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
+	var fragment;
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			// Save the original fragment for later.
+			fragment = this.getFragment();
+		}, this )
 		.next( function () {
+			var selection = fragment && fragment.getSelection();
+
+			// Handle conversion to magic link.
+			if ( data.convert && selection instanceof ve.dm.LinearSelection ) {
+				fragment.insertContent( [
+					{
+						type: 'link/mwMagic',
+						attributes: {
+							content: fragment.getText()
+						}
+					},
+					{
+						type: '/link/mwMagic'
+					}
+				], true );
+			}
+
+			// Clear dialog state.
 			this.allowProtocolInInternal = false;
 			// Make sure both inputs are cleared
 			this.internalAnnotationInput.setAnnotation( null );

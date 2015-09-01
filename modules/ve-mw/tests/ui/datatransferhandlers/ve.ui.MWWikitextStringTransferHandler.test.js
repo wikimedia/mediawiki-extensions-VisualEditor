@@ -166,22 +166,19 @@ QUnit.test( 'convert', function ( assert ) {
 				pasteString: 'RFC 1234',
 				pasteType: 'text/plain',
 				parsoidResponse: '<body data-parsoid=\'{"dsr":[0,8,0,0]}\' lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p data-parsoid=\'{"dsr":[0,8,0,0]}\'><a href="//tools.ietf.org/html/rfc1234" rel="mw:ExtLink" data-parsoid=\'{"stx":"magiclink","dsr":[0,8,0,0]}\'>RFC 1234</a></p></body>',
-				annotations: [ {
-					type: 'link/mwExternal',
-					attributes: {
-						href: '//tools.ietf.org/html/rfc1234',
-						rel: 'mw:ExtLink'
-					}
-				} ],
+				annotations: [],
 				expectedData: [
-					[ 'R', [ 0 ] ],
-					[ 'F', [ 0 ] ],
-					[ 'C', [ 0 ] ],
-					[ ' ', [ 0 ] ],
-					[ '1', [ 0 ] ],
-					[ '2', [ 0 ] ],
-					[ '3', [ 0 ] ],
-					[ '4', [ 0 ] ],
+					{
+						type: 'link/mwMagic',
+						attributes: {
+							content: 'RFC 1234',
+							origText: 'RFC 1234',
+							origHtml: 'RFC 1234'
+						}
+					},
+					{
+						type: '/link/mwMagic'
+					},
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				]
@@ -191,23 +188,19 @@ QUnit.test( 'convert', function ( assert ) {
 				pasteString: 'PMID 1234',
 				pasteType: 'text/plain',
 				parsoidResponse: '<body data-parsoid=\'{"dsr":[0,9,0,0]}\' lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p data-parsoid=\'{"dsr":[0,9,0,0]}\'><a href="//www.ncbi.nlm.nih.gov/pubmed/1234?dopt=Abstract" rel="mw:ExtLink" data-parsoid=\'{"stx":"magiclink","dsr":[0,9,0,0]}\'>PMID 1234</a></p></body>',
-				annotations: [ {
-					type: 'link/mwExternal',
-					attributes: {
-						href: '//www.ncbi.nlm.nih.gov/pubmed/1234?dopt=Abstract',
-						rel: 'mw:ExtLink'
-					}
-				} ],
+				annotations: [],
 				expectedData: [
-					[ 'P', [ 0 ] ],
-					[ 'M', [ 0 ] ],
-					[ 'I', [ 0 ] ],
-					[ 'D', [ 0 ] ],
-					[ ' ', [ 0 ] ],
-					[ '1', [ 0 ] ],
-					[ '2', [ 0 ] ],
-					[ '3', [ 0 ] ],
-					[ '4', [ 0 ] ],
+					{
+						type: 'link/mwMagic',
+						attributes: {
+							content: 'PMID 1234',
+							origText: 'PMID 1234',
+							origHtml: 'PMID 1234'
+						}
+					},
+					{
+						type: '/link/mwMagic'
+					},
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				]
@@ -217,29 +210,19 @@ QUnit.test( 'convert', function ( assert ) {
 				pasteString: 'ISBN 123456789X',
 				pasteType: 'text/plain',
 				parsoidResponse: '<body data-parsoid=\'{"dsr":[0,15,0,0]}\' lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p data-parsoid=\'{"dsr":[0,15,0,0]}\'><a href="./Special:BookSources/123456789X" rel="mw:ExtLink" data-parsoid=\'{"stx":"magiclink","dsr":[0,15,0,0]}\'>ISBN 123456789X</a></p></body>',
-				annotations: [ {
-					type: 'link/mwExternal',
-					attributes: {
-						href: './Special:BookSources/123456789X',
-						rel: 'mw:ExtLink'
-					}
-				} ],
+				annotations: [],
 				expectedData: [
-					[ 'I', [ 0 ] ],
-					[ 'S', [ 0 ] ],
-					[ 'B', [ 0 ] ],
-					[ 'N', [ 0 ] ],
-					[ ' ', [ 0 ] ],
-					[ '1', [ 0 ] ],
-					[ '2', [ 0 ] ],
-					[ '3', [ 0 ] ],
-					[ '4', [ 0 ] ],
-					[ '5', [ 0 ] ],
-					[ '6', [ 0 ] ],
-					[ '7', [ 0 ] ],
-					[ '8', [ 0 ] ],
-					[ '9', [ 0 ] ],
-					[ 'X', [ 0 ] ],
+					{
+						type: 'link/mwMagic',
+						attributes: {
+							content: 'ISBN 123456789X',
+							origText: 'ISBN 123456789X',
+							origHtml: 'ISBN 123456789X'
+						}
+					},
+					{
+						type: '/link/mwMagic'
+					},
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				]
