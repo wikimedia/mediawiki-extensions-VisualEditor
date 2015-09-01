@@ -528,6 +528,8 @@ class VisualEditorHooks {
 				'visualeditor-dialog-referenceslist-contextitem-description-general',
 				'visualeditor-dialog-referenceslist-contextitem-description-named',
 				'visualeditor-dialog-referenceslist-title',
+				'visualeditor-dialogbutton-citation-educationpopup-title',
+				'visualeditor-dialogbutton-citation-educationpopup-text',
 				'visualeditor-dialogbutton-reference-full-label',
 				'visualeditor-dialogbutton-reference-tooltip',
 				'visualeditor-dialogbutton-reference-title',

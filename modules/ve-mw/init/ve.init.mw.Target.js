@@ -1707,6 +1707,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 				'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir
 			);
 
+			target.dummyToolbar = false;
 			target.setSurface( surface );
 
 			setTimeout( function () {

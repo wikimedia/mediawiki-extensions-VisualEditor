@@ -1,0 +1,57 @@
+/*!
+ * VisualEditor MediaWiki UserInterface education popup tool styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-pulsatingdot {
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background: #347bff;
+	position: absolute;
+	border: 0px;
+	opacity: 1;
+	animation: pulse 3s ease-out;
+	animation-iteration-count: infinite;
+}
+
+.oo-ui-widget-disabled .ve-ui-pulsatingdot {
+	display: none;
+}
+
+.ve-ui-educationpopup-dismiss {
+	margin-top: 1em;
+}
+
+.ve-ui-educationpopup-header {
+	margin-bottom: 1em;
+}
+
+.ve-ui-educationpopup .oo-ui-popupWidget-body {
+	line-height: 1.2em;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0);
+		opacity: 0.0;
+	}
+	25% {
+		transform: scale(0);
+		opacity: 0.1;
+	}
+	50% {
+		transform: scale(0.1);
+		opacity: 0.3;
+	}
+	75% {
+		transform: scale(0.5);
+		opacity: 0.5;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0.0;
+	}
+}
