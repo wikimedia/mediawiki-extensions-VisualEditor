@@ -225,7 +225,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 			var selection = fragment && fragment.getSelection();
 
 			// Handle conversion to magic link.
-			if ( data.convert && selection instanceof ve.dm.LinearSelection ) {
+			if ( data && data.convert && selection instanceof ve.dm.LinearSelection ) {
 				fragment.insertContent( [
 					{
 						type: 'link/mwMagic',
