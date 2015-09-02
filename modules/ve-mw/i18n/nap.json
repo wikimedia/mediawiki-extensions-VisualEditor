@@ -4,7 +4,8 @@
 			"Chelin",
 			"Chrisportelli",
 			"PiRSquared17",
-			"C.R."
+			"C.R.",
+			"Candalua"
 		]
 	},
 	"apihelp-visualeditor-description": "Tuorna HTML5 pe na pàggena 'a 'o servizio Parsoid.",
@@ -35,6 +36,9 @@
 	"tooltip-ca-ve-edit": "Càgna chista paggena",
 	"visualeditor-advancedsettings-tool": "Mpustaziune avanzate",
 	"visualeditor-annotationbutton-linknode-tooltip": "Cullegamento semprice-semprice",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-isbn": "Collegamiento ISBN",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "Collegamiento PMID",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "Collegamiento RFC",
 	"visualeditor-backbutton-tooltip": "Torna arreto",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
@@ -102,7 +106,7 @@
 	"visualeditor-dialog-media-type-frameless": "Senza frame",
 	"visualeditor-dialog-media-type-none": "Base",
 	"visualeditor-dialog-media-type-section": "Tipo 'e fiùra",
-	"visualeditor-dialog-media-type-section-help": "Vuje putite mpustà comme n'item multimediale cumpare ncopp' 'a paggena. Chesto avarria essere 'n furmatto miniatura pe' ve putè cumparì cunzistente assiemm'a ll'ati paggene 'n tutt' 'e ccase.",
+	"visualeditor-dialog-media-type-section-help": "Vuje putite mpustà comme n'item multimediale cumpare ncopp' 'a paggena. Chesto avarria essere 'n furmato miniatura pe' ve putè cumparì cunzistente assiemm'a ll'ati paggene 'n tutt' 'e ccase.",
 	"visualeditor-dialog-media-type-thumb": "Miniatura",
 	"visualeditor-dialog-meta-advancedsettings-label": "Mpustaziune avanzate",
 	"visualeditor-dialog-meta-advancedsettings-section": "Mpustaziune avanzate",
@@ -236,6 +240,9 @@
 	"visualeditor-loadwarning": "Errore carrecanno date r' 'o server: $1. Vulite pruvà n'ata vota?",
 	"visualeditor-loadwarning-token": "Errore a carrecà 'o token r' 'o server: $1. Vulite ripruvà?",
 	"visualeditor-mainnamespacepagelink": "Project:Namespace prencepale",
+	"visualeditor-magiclinknodeinspector-title-isbn": "Collegamiento ISBN",
+	"visualeditor-magiclinknodeinspector-title-pmid": "Collegamiento PMID",
+	"visualeditor-magiclinknodeinspector-title-rfc": "Collegamiento RFC",
 	"visualeditor-media-input-placeholder": "Ricerca file multimediale",
 	"visualeditor-meta-tool": "Opzione",
 	"visualeditor-mweditmodesource-title": "Vulite passà a \"{{int:visualeditor-ca-editsource}}\" ?",

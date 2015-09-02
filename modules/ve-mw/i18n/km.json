@@ -5,6 +5,7 @@
 			"គីមស៊្រុន"
 		]
 	},
+	"apihelp-visualeditoredit-param-minor": "សញ្ញាសំគាល់សម្រាប់កំណែប្រែតិចតួច។",
 	"apihelp-visualeditoredit-param-summary": "កែប្រែចំណារពន្យល់។",
 	"tooltip-ca-createsource": "បង្កើត​កូដ​នៃ​ទំព័រ​នេះ",
 	"tooltip-ca-editsource": "កែ​កូដ​នៃ​ទំព័រ​នេះ",
@@ -12,6 +13,9 @@
 	"tooltip-ca-ve-edit": "កែ​ប្រែទំព័រ​នេះ​",
 	"visualeditor-advancedsettings-tool": "ការ​កំណត់​កម្រិត​ខ្ពស់",
 	"visualeditor-annotationbutton-linknode-tooltip": "តំណភ្ជាប់សាមញ្ញ",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-isbn": "តំណភ្ជាប់ ISBN",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "តំណភ្ជាប់ PMID",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "តំណភ្ជាប់ RFC",
 	"visualeditor-backbutton-tooltip": "បកក្រោយ",
 	"visualeditor-beta-appendix": "បេតា",
 	"visualeditor-beta-label": "បេតា",
