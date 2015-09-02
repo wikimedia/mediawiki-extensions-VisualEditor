@@ -124,12 +124,14 @@ ve.ui.MWExtensionInspector.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
-			if ( this.constructor.static.allowedEmpty || this.input.getInnerValue() !== '' ) {
-				this.insertOrUpdateNode();
-			} else if ( this.selectedNode && !this.constructor.static.allowedEmpty ) {
-				// Content has been emptied on a node which isn't allowed to
-				// be empty, so delete it.
-				this.removeNode();
+			if ( data && data.action === 'done' ) {
+				if ( this.constructor.static.allowedEmpty || this.input.getInnerValue() !== '' ) {
+					this.insertOrUpdateNode();
+				} else if ( this.selectedNode && !this.constructor.static.allowedEmpty ) {
+					// Content has been emptied on a node which isn't allowed to
+					// be empty, so delete it.
+					this.removeNode();
+				}
 			}
 		}, this );
 };

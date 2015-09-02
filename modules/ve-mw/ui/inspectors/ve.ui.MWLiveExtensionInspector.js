@@ -64,6 +64,9 @@ ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) 
 	return ve.ui.MWLiveExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			this.input.off( 'change', this.onChangeHandler );
+			if ( data === undefined ) { // cancel
+				this.getFragment().getSurface().popStaging();
+			}
 		}, this );
 };
 
