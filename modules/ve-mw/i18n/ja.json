@@ -13,7 +13,8 @@
 			"Sujiniku",
 			"2nd-player",
 			"Jdforrester",
-			"Sudachi"
+			"Sudachi",
+			"Otokoume"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -44,6 +45,9 @@
 	"tooltip-ca-ve-edit": "このページをビジュアルエディターで編集する",
 	"visualeditor-advancedsettings-tool": "高度な設定",
 	"visualeditor-annotationbutton-linknode-tooltip": "単純なリンク",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-isbn": "ISBN リンク",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "PMID リンク",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "RFC リンク",
 	"visualeditor-backbutton-tooltip": "戻る",
 	"visualeditor-beta-appendix": "ベータ版",
 	"visualeditor-beta-label": "ベータ",
@@ -103,7 +107,7 @@
 	"visualeditor-dialog-media-size-choosefull": "フルサイズに設定",
 	"visualeditor-dialog-media-size-originalsize-error": "元のファイル サイズを取得できませんでした。",
 	"visualeditor-dialog-media-size-section": "画像サイズ",
-	"visualeditor-dialog-media-size-section-help": "ページ内のメディアがどのくらいの大きさで表示されるか設定します。カスタムサイズにした場合、ページのレイアウトを破壊したり、一貫性がなくなったりするので、ほとんどの場合においては標準のサイズに指定してください。",
+	"visualeditor-dialog-media-size-section-help": "ページ内のメディアがどのくらいの大きさで表示されるか設定します。カスタムサイズにした場合、ページのレイアウトを破壊したり、それに一貫性がなくなったりするので、ほとんどの場合においては標準のサイズに指定してください。",
 	"visualeditor-dialog-media-thumbdimensions": "サムネイルの寸法",
 	"visualeditor-dialog-media-title": "メディアの設定",
 	"visualeditor-dialog-media-type-border": "境界線",
@@ -234,6 +238,9 @@
 	"visualeditor-languages-tool": "他言語",
 	"visualeditor-linkinspector-button-link-external": "外部リンク",
 	"visualeditor-linkinspector-button-link-internal": "ページを検索",
+	"visualeditor-linkinspector-convert-link-isbn": "ISBN リンクに変換",
+	"visualeditor-linkinspector-convert-link-pmid": "PMID リンクに変換",
+	"visualeditor-linkinspector-convert-link-rfc": "RFC リンクに変換",
 	"visualeditor-linkinspector-illegal-title": "無効なページ名",
 	"visualeditor-linknodeinspector-add-label": "ラベルを追加",
 	"visualeditor-linknodeinspector-title": "単純なリンク",
@@ -242,6 +249,9 @@
 	"visualeditor-loadwarning": "サーバーからデータを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-loadwarning-token": "サーバーから編集トークンを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-mainnamespacepagelink": "Project:標準名前空間",
+	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN リンク",
+	"visualeditor-magiclinknodeinspector-title-pmid": "PMID リンク",
+	"visualeditor-magiclinknodeinspector-title-rfc": "RFC リンク",
 	"visualeditor-media-input-placeholder": "検索するメディア",
 	"visualeditor-meta-tool": "オプション",
 	"visualeditor-mweditmodesource-title": "ソースの編集に切り替えますか?",
@@ -300,6 +310,7 @@
 	"visualeditor-viewpage-savewarning-discard": "編集内容を破棄",
 	"visualeditor-viewpage-savewarning-keep": "編集を続行",
 	"visualeditor-viewpage-savewarning-title": "本当によろしいですか?",
+	"visualeditor-wikitext-progress": "ウィキテキストを変換中",
 	"visualeditor-wikitext-warning": "ビジュアルエディターを使用中です。[[{{MediaWiki:visualeditor-wikitext-warning-link}}|ウィキテキスト]]はここでは使用できません。「{{int:visualeditor-toolbar-savedialog}}」の隣のドロップダウン メニューを開いて「{{int:visualeditor-mweditmodesource-title}}」を選択することで、編集内容を保持したままいつでもソース編集に切り替えられます。",
 	"visualeditor-wikitext-warning-title": "ウィキテキスト記法を検出しました"
 }
