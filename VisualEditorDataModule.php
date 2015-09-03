@@ -67,8 +67,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	}
 
 	protected function getMessageInfo() {
-		$msgKeys = array();
-
 		// Messages that just require simple parsing
 		$msgArgs = array(
 			'minoredit' => array( 'minoredit' ),
@@ -101,23 +99,13 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		$title = Title::newFromText( 'Dwimmerlaik' );
 		Hooks::run( 'EditPageCopyrightWarning', array( $title, &$copywarnMsg ) );
 
-		// Keys used in copyright warning
-		$msgKeys[] = 'copyrightpage';
-		$msgKeys[] = $copywarnMsg[0];
 		// Normalise to 'copyrightwarning' so we have a consistent key in the front-end.
 		$msgArgs[ 'copyrightwarning' ] = $copywarnMsg;
 
 		// Citation tools
 		$msgVals['visualeditor-cite-tool-definition.json'] = json_encode( self::getCitationTools() );
 
-		$msgKeys = array_values( array_unique( array_merge(
-			$msgKeys,
-			array_keys( $msgArgs ),
-			array_keys( $msgVals )
-		) ) );
-
 		return array(
-			'keys' => $msgKeys,
 			'args' => $msgArgs,
 			'vals' => $msgVals,
 		);
@@ -140,7 +128,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 				if ( !isset( $tool->title ) ) {
 					$tool->title =
 						wfMessage( 'visualeditor-cite-tool-name-' . $tool->name )->text();
-					$msgKeys[] = $tool->title;
 				}
 				$citationTools[] = $tool;
 			}
