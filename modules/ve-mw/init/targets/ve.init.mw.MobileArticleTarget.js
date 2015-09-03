@@ -72,6 +72,9 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 
 ve.init.mw.MobileArticleTarget.static.name = 'mobile';
 
+// FIXME Some of these users will be on tablets, check for this
+ve.init.mw.MobileArticleTarget.static.platformType = 'phone';
+
 /* Methods */
 
 /**

@@ -115,6 +115,8 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	}
 };
 
+ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
+
 /* Events */
 
 /**
