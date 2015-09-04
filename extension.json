@@ -1549,7 +1549,8 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWGalleryInspectorTool.js"
 			],
 			"dependencies": [
-				"ext.visualEditor.mwcore"
+				"ext.visualEditor.mwcore",
+				"mediawiki.page.gallery.styles"
 			],
 			"messages": [
 				"visualeditor-mwgalleryinspector-placeholder",
