@@ -797,7 +797,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
  */
 ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 	if ( !this.getSurface().getModel().hasBeenModified() ) {
-		this.switchToWikitextEditor( true );
+		this.switchToWikitextEditor( true, false );
 		return;
 	}
 
@@ -1356,11 +1356,16 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  * Switches to the wikitext editor, either keeping (default) or discarding changes.
  *
  * @param {boolean} [discardChanges] Whether to discard changes or not.
+ * @param {boolean} [modified] Whether there were any changes at all.
  */
-ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges ) {
+ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
 	var target = this;
 	if ( discardChanges ) {
-		ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
+		if ( modified ) {
+			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
+		} else {
+			ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate' } );
+		}
 		this.submitting = true;
 		location.href = this.viewUri.clone().extend( {
 			action: 'edit',

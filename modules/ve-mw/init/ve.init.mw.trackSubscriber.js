@@ -52,6 +52,7 @@
 					case 'nochange':
 					case 'switchwith':
 					case 'switchwithout':
+					case 'switchnochange':
 					case 'abandon':
 						return timeStamp - timing.ready;
 					case 'abandonMidsave':
@@ -103,7 +104,6 @@
 			'page.title': mw.config.get( 'wgPageName' ),
 			'page.ns': mw.config.get( 'wgNamespaceNumber' ),
 			'page.revid': mw.config.get( 'wgRevisionId' ),
-			'page.length': -1, // FIXME
 			editingSessionId: editingSessionId,
 			'user.id': mw.user.getId(),
 			'user.editCount': mw.config.get( 'wgUserEditCount', 0 ),
