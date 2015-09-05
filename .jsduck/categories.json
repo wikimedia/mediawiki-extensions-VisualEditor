@@ -139,6 +139,7 @@
 					"ve.ui.*Tool",
 					"ve.ui.*Widget",
 					"ve.ui.*WindowManager",
+					"ve.ui.NodeWindow",
 					"ve.ui.*Dialog",
 					"ve.ui.*Inspector"
 				]
