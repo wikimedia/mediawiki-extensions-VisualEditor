@@ -84,6 +84,8 @@ ve.ui.MWLiveExtensionInspector.prototype.insertOrUpdateNode = function () {
  */
 ve.ui.MWLiveExtensionInspector.prototype.removeNode = function () {
 	this.getFragment().getSurface().popStaging();
+
+	// Parent method
 	ve.ui.MWLiveExtensionInspector.super.prototype.removeNode.call( this );
 };
 

@@ -13,7 +13,8 @@
 			{
 				"name": "User Interface",
 				"classes": [
-					"ve.ui.MW*Page"
+					"ve.ui.MW*Page",
+					"ve.ui.MW*Window"
 				]
 			},
 			{

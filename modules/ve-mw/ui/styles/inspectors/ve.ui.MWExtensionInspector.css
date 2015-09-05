@@ -4,10 +4,10 @@
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-.ve-ui-mwExtensionInspector-input {
+.ve-ui-mwExtensionInspector .ve-ui-mwExtensionWindow-input {
 	width: 100%;
 }
 
-.ve-ui-mwExtensionInspector-input textarea {
+.ve-ui-mwExtensionInspector .ve-ui-mwExtensionWindow-input textarea {
 	height: 8em;
 }
