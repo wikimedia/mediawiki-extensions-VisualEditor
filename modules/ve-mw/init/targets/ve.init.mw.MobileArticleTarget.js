@@ -183,6 +183,7 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 	);
 
 	this.toolbar.$element.append( this.pageToolbar.$element );
+	this.pageToolbar.initialize();
 
 	this.pageToolbar.$group.addClass( 've-init-mw-mobileArticleTarget-pageTools' );
 	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
