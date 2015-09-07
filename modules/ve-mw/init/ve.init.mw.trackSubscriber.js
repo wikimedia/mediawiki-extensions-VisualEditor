@@ -98,7 +98,7 @@
 			version: 1,
 			action: action,
 			editor: 'visualeditor',
-			platform: 'desktop', // FIXME
+			platform: ve.init && ve.init.target && ve.init.target.constructor.static.platformType || 'other',
 			integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
 			'page.id': mw.config.get( 'wgArticleId' ),
 			'page.title': mw.config.get( 'wgPageName' ),
