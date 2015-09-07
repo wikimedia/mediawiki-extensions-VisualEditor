@@ -922,6 +922,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
 	], this.getSurface() );
 
 	this.toolbar.$actions.append( this.actionsToolbar.$element, this.toolbarSaveButton.$element );
+	this.actionsToolbar.initialize();
 	// Make the toolbar recalculate its sizes for narrow/wide switching.
 	// This really should not be necessary.
 	this.toolbar.narrowThreshold = this.toolbar.$group.width() + this.toolbar.$actions.width();
