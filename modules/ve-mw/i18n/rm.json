@@ -91,9 +91,6 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Terza sutsecziun",
 	"visualeditor-formatdropdown-format-mw-heading6": "Quarta sutsecziun",
 	"visualeditor-languages-tool": "Linguas",
-	"visualeditor-linkinspector-suggest-external-link": "Colliaziun externa",
-	"visualeditor-linkinspector-suggest-matching-page": "{{PLURAL:$1|Pagina correspundenta|Paginas correspundentas}}",
-	"visualeditor-linkinspector-suggest-new-page": "Nova pagina",
 	"visualeditor-parameter-search-unknown": "Parameter nunenconuschent",
 	"visualeditor-preference-core-label": "VisualEditor"
 }
