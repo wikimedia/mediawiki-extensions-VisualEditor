@@ -70,16 +70,11 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Aneuk nan 4",
 	"visualeditor-languages-tool": "Bahsa",
 	"visualeditor-linkinspector-illegal-title": "Nan laman hana sah",
-	"visualeditor-linkinspector-suggest-external-link": "Peunawôt luwa",
-	"visualeditor-linkinspector-suggest-matching-page": "Laman nyang paih",
-	"visualeditor-linkinspector-suggest-new-page": "Laman barô",
 	"visualeditor-mainnamespacepagelink": "Project:Ruweuëng nan utama",
 	"visualeditor-media-input-placeholder": "Mita mèdia",
 	"visualeditor-meta-tool": "Atô laman",
-	"visualeditor-mwalienextensioninspector-title": "Ekstensi MediaWiki",
 	"visualeditor-parameter-input-placeholder": "Nan paramètèr",
 	"visualeditor-parameter-search-no-unused": "Hana paramètèr nyang hana geungui",
 	"visualeditor-parameter-search-unknown": "Parameter hana geuturi",
-	"visualeditor-preference-core-label": "VisualEditor",
-	"visualeditor-preference-language-label": "Peukakah bahsa VisualEditor"
+	"visualeditor-preference-core-label": "VisualEditor"
 }

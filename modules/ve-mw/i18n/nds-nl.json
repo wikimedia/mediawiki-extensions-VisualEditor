@@ -120,8 +120,6 @@
 	"visualeditor-parameter-search-unknown": "Onbekende parameter",
 	"visualeditor-preference-betatempdisable": "Schakel de visuele tekstverwarker tiejelik uut terwiel t in bèta is",
 	"visualeditor-preference-enable": "Visuele tekstverwarker anzetten. Disse tekstverwarker is niet beschikbaor op overlegziejen en wele aandere naamruumten.",
-	"visualeditor-preference-mwalienextension-description": "Voegt experimentele funksies toe an de visuele tekstverwarker veur t bewarken van uutbreidingsetiketten, zo as galderiejen of bronkodeblokken. Kiek joew wiezigingen altied effen nao veurda'j ze opslaon a'j experimentele funksies gebruken.",
-	"visualeditor-preference-mwalienextension-label": "Uutbreidingsetiket bewarken mit visuele tekstverwarker",
 	"visualeditor-reference-input-placeholder": "Waor wi'j an refereren?",
 	"visualeditor-referenceslist-isempty": "Der bin gien referensies mit de groep \"$1\" op disse zied um bie disse lieste te doon.",
 	"visualeditor-referenceslist-missingref": "Disse referensie steet in n mal of n aander soort egenereerd blok, en ku'j veurlopig allinnig mer in de bronkode bewarken.",
