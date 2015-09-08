@@ -5,9 +5,13 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Hem pan bodol",
+	"visualeditor-backbutton-tooltip": "Fattim voch",
 	"visualeditor-ca-createlocaldescriptionsource": "Thollavem vornonachem strot zod",
 	"visualeditor-ca-createsource": "Strot roch",
 	"visualeditor-ca-editsource": "Mull bodol",
 	"visualeditor-ca-editsource-section": "mull bodol",
-	"visualeditor-descriptionpagelink": "Project:DispiSompadok"
+	"visualeditor-descriptionpagelink": "Project:DispiSompadok",
+	"visualeditor-dialog-reference-title": "Sondorbh",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Fattim voch",
+	"visualeditor-savedialog-label-save-short": "Samball"
 }

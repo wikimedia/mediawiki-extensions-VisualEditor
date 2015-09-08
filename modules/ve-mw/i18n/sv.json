@@ -243,6 +243,7 @@
 	"visualeditor-linkinspector-button-link-external": "Extern länk",
 	"visualeditor-linkinspector-button-link-internal": "Sök sidor",
 	"visualeditor-linkinspector-convert-link-isbn": "Konvertera till ISBN-länk",
+	"visualeditor-linkinspector-convert-link-pmid": "Konvertera till PMID-länk",
 	"visualeditor-linkinspector-convert-link-rfc": "Konvertera till RFC-länk",
 	"visualeditor-linkinspector-illegal-title": "Ogiltig sidtitel",
 	"visualeditor-linknodeinspector-add-label": "Lägg till etikett",
