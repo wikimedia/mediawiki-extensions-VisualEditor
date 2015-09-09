@@ -90,7 +90,7 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 		( originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) ) )
 	) {
 		// The object in the store is also used for CE rendering so return a copy
-		return ve.copyDomElements( dataElement.originalDomElements, doc );
+		els = ve.copyDomElements( dataElement.originalDomElements, doc );
 	} else {
 		if ( converter.isForClipboard() && index !== null ) {
 			// For the clipboard use the current DOM contents so the user has something
@@ -102,8 +102,15 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 			el.setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
 			els = [ el ];
 		}
-		return els;
 	}
+	if ( converter.isForClipboard() ) {
+		// Resolve image sources
+		$( els ).find( 'img' ).addBack( 'img' ).each( function () {
+			var $this = $( this );
+			$this.attr( 'src', ve.resolveUrl( $this.attr( 'src' ), doc ) );
+		} );
+	}
+	return els;
 };
 
 ve.dm.MWExtensionNode.static.getHashObject = function ( dataElement ) {
