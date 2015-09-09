@@ -321,13 +321,11 @@
 				"parentheses",
 				"redirectpagesub",
 				"summary-preview",
-				"fancycaptcha-reload-text",
 				"visualeditor-loadwarning",
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-user",
-				"visualeditor-timeout",
-				"visualeditor-saveerror-titleblacklist"
+				"visualeditor-timeout"
 			]
 		},
 		"ext.visualEditor.mobileArticleTarget": {
@@ -1036,6 +1034,7 @@
 				"visualeditor-savedialog-title-save",
 				"visualeditor-savedialog-warning-dirty",
 				"visualeditor-saveerror",
+				"visualeditor-saveerror-titleblacklist",
 				"visualeditor-serializeerror",
 				"visualeditor-recreate",
 				"visualeditor-toolbar-cite-label",
@@ -1057,6 +1056,7 @@
 				"captcha-label",
 				"colon-separator",
 				"fancycaptcha-edit",
+				"fancycaptcha-reload-text",
 				"questycaptcha-edit"
 			],
 			"targets": [
