@@ -97,6 +97,7 @@ ve.ui.MWReferenceDialog.static.excludeCommands = [
 	// References
 	'reference',
 	'reference/existing',
+	'citefromid',
 	'referencesList'
 ];
 
@@ -227,7 +228,8 @@ ve.ui.MWReferenceDialog.prototype.getBodyHeight = function () {
  * @chainable
  */
 ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
-	var group;
+	var group, citeCommands;
+
 	// Properties
 	if ( ref instanceof ve.dm.MWReferenceModel ) {
 		// Use an existing reference
@@ -242,13 +244,17 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 		this.referenceTarget.destroy();
 	}
 
+	citeCommands = Object.keys( ve.init.target.commandRegistry.registry ).filter( function ( command ) {
+		return command.indexOf( 'cite-' ) !== -1;
+	} );
+
 	// Properties
 	this.referenceTarget = new ve.ui.MWTargetWidget(
 		this.referenceModel.getDocument(),
 		{
 			tools: ve.copy( ve.init.mw.Target.static.toolbarGroups ),
 			includeCommands: this.constructor.static.includeCommands,
-			excludeCommands: this.constructor.static.excludeCommands,
+			excludeCommands: this.constructor.static.excludeCommands.concat( citeCommands ),
 			importRules: this.constructor.static.getImportRules(),
 			inDialog: this.constructor.static.name
 		}
