@@ -9,7 +9,8 @@
 			"Elioqoshi",
 			"GretaDoci",
 			"Techlik",
-			"Liridon"
+			"Liridon",
+			"Ammartivari"
 		]
 	},
 	"apihelp-visualeditor-description": "Kthen një faqe HTML5 prej një shërbimi Parsoid.",
@@ -206,7 +207,7 @@
 	"visualeditor-parameter-search-unknown": "Parametër i panjohur",
 	"visualeditor-preference-betatempdisable": "Çaktivizo përkohësisht VisualEditor për sa kohë është në fazën e provës",
 	"visualeditor-preference-core-description": "Aktivizo VisualEditor. Mund të mos jetë në dispozicion në faqet e diskutimit dhe në disa hapësira të tjera.",
-	"visualeditor-preference-core-label": "VisualEditor",
+	"visualeditor-preference-core-label": "Redaktim vizual",
 	"visualeditor-preference-enable": "Aktivizo VisualEditor. Nuk do të jetë e disponueshme ne faqet e bisedës dhe disa faqe të tjera.",
 	"visualeditor-recreate": "Kjo faqe është fshirë qysh prej se keni filluar ju editimin. Shtypni \"$1\" për ta rikthtyer.",
 	"visualeditor-reference-input-placeholder": "Kërkoni brenda burimeve të tanishme.",
