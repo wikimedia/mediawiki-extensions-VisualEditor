@@ -79,7 +79,7 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 };
 
 ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var el,
+	var el, els,
 		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
 		originalMw = dataElement.attributes.originalMw;
 
@@ -92,10 +92,17 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 		// The object in the store is also used for CE rendering so return a copy
 		return ve.copyDomElements( dataElement.originalDomElements, doc );
 	} else {
-		el = doc.createElement( this.tagName );
-		el.setAttribute( 'typeof', 'mw:Extension/' + this.getExtensionName( dataElement ) );
-		el.setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
-		return [ el ];
+		if ( converter.isForClipboard() && index !== null ) {
+			// For the clipboard use the current DOM contents so the user has something
+			// meaningful to paste into external applications
+			els = ve.copyDomElements( converter.getStore().value( index ), doc );
+		} else {
+			el = doc.createElement( this.tagName );
+			el.setAttribute( 'typeof', 'mw:Extension/' + this.getExtensionName( dataElement ) );
+			el.setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
+			els = [ el ];
+		}
+		return els;
 	}
 };
 
