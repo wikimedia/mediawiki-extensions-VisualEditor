@@ -183,6 +183,12 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			els[ i ] = wrapTextNode( els[ i ] );
 			els[ i ].setAttribute( 'data-ve-ignore', 'true' );
 		}
+
+		// Resolve image sources
+		$( els ).find( 'img' ).addBack( 'img' ).each( function () {
+			var $this = $( this );
+			$this.attr( 'src', ve.resolveUrl( $this.attr( 'src' ), doc ) );
+		} );
 	}
 	return els;
 };
