@@ -37,6 +37,7 @@
 			"blueprint"
 		],
 		"VisualEditorParsoidPrefix": "localhost",
+		"VisualEditorParsoidDomain": "localhost",
 		"VisualEditorDisableForAnons": false,
 		"VisualEditorPluginModules": [],
 		"VisualEditorParsoidForwardCookies": false,
