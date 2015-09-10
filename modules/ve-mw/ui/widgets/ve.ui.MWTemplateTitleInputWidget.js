@@ -51,18 +51,42 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 
 	if ( this.showTemplateDescriptions ) {
 		return promise
-			// Also get descriptions
 			.then( function ( response ) {
-				var xhr, index, params,
-					pages = ( response.query && response.query.pages ) || {},
+				var xhr, pageId, index, params, indexFound, redirIndex,
+					redirects = ( response.query && response.query.redirects ) || {},
+					origPages = ( response.query && response.query.pages ) || {},
+					newPages = [],
 					titles = [];
 
-				for ( index in pages ) {
-					titles.push( pages[ index ].title );
+				// Build a new array to replace response.query.pages, ensuring everything goes into
+				// the order defined by the page's index key, instead of whatever random order the
+				// browser would let you iterate over the old object in.
+				for ( pageId in origPages ) {
+					indexFound = false;
+					if ( 'index' in origPages[ pageId ] ) {
+						newPages[ origPages[ pageId ].index - 1 ] = origPages[ pageId ];
+						indexFound = true;
+					} else {
+						// Watch out for cases where the index is specified on the redirect object
+						// rather than the page object.
+						for ( redirIndex in redirects ) {
+							if ( redirects[ redirIndex ].to === origPages[ pageId ].title ) {
+								newPages[ redirects[ redirIndex ].index - 1 ] = origPages[ pageId ];
+								indexFound = true;
+								break;
+							}
+						}
+					}
 				}
 
-				originalResponse = response;
+				for ( index in newPages ) {
+					titles.push( newPages[ index ].title );
+				}
 
+				response.query.pages = newPages;
+				originalResponse = response; // lie!
+
+				// Also get descriptions
 				if ( titles.length > 0 ) {
 					params = {
 						action: 'templatedata',
