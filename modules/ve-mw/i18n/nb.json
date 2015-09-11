@@ -11,7 +11,8 @@
 			"Kingu",
 			"Nghtwlkr",
 			"Jdforrester",
-			"Emilbk"
+			"Emilbk",
+			"Cocu"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -219,7 +220,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transklusjon",
 	"visualeditor-diff-nochanges": "Kunne ikke starte gjennomgangen siden din versjon er helt lik den forrige versjonen av denne siden.",
 	"visualeditor-differror": "Det oppsto en feil ved henting av data fra tjeneren: $1.",
-	"visualeditor-editconflict": "Endringene dine kunne ikke lagres på grunn av en redigeringskonflikt. Vil {{GENDER:|du}} løse konflikten manuelt?",
+	"visualeditor-editconflict": "Endringene dine kunne ikke lagres på grunn av en redigeringskollisjon. Vil {{GENDER:|du}} løse konflikten manuelt?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|varsel|varsler}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsvarsler",
 	"visualeditor-editsummary": "Beskriv hva du endret",
@@ -272,7 +273,7 @@
 	"visualeditor-savedialog-label-create": "Opprett side",
 	"visualeditor-savedialog-label-error": "Feil",
 	"visualeditor-savedialog-label-report": "Meld fra om et problem",
-	"visualeditor-savedialog-label-resolve-conflict": "Løs redigeringskonflikt",
+	"visualeditor-savedialog-label-resolve-conflict": "Løs redigeringskollisjon",
 	"visualeditor-savedialog-label-restore": "Gjenopprett side",
 	"visualeditor-savedialog-label-resume-editing": "Fortsett å redigere",
 	"visualeditor-savedialog-label-review": "Gjennomgå endringene dine",

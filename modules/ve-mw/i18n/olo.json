@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ilja.mos"
+			"Ilja.mos",
+			"Mashoi7"
 		]
 	},
 	"tooltip-ca-ve-edit": "Korjua tädä sivuu",
+	"visualeditor-ca-createlocaldescriptionsource": "Ližiä paikalline kuvavuslähteh",
+	"visualeditor-ca-createsource": "Luaji lähteh",
 	"visualeditor-ca-editsource": "Korjua tekstua",
 	"visualeditor-ca-editsource-section": "Korjua tekstua",
 	"visualeditor-descriptionpagelink": "Project:Vizualine redaktoru"
