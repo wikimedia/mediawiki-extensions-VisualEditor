@@ -33,10 +33,3 @@
 	margin-left: 0.25em;
 	color: #555;
 }
-
-/* Must have the same, or higher, specificity (4x class/pseudo-class) as the rule above */
-.client-js.ve-not-available .mw-content-ltr .mw-editsection-bracket,
-.client-js.ve-not-available .mw-content-rtl .mw-editsection-bracket {
-	margin-left: 0;
-	margin-right: 0;
-}
