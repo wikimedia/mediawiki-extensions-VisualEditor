@@ -7,9 +7,14 @@
 	},
 	"tooltip-ca-ve-edit": "Korjua tädä sivuu",
 	"visualeditor-annotationbutton-magiclinknode-tooltip-isbn": "ISBN-linku",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "PMID-linku",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "RFC-linku",
 	"visualeditor-ca-createlocaldescriptionsource": "Ližiä paikalline kuvavuslähteh",
 	"visualeditor-ca-createsource": "Luaji lähteh",
 	"visualeditor-ca-editsource": "Korjua tekstua",
 	"visualeditor-ca-editsource-section": "Korjua tekstua",
-	"visualeditor-descriptionpagelink": "Project:Vizualine redaktoru"
+	"visualeditor-descriptionpagelink": "Project:Vizualine redaktoru",
+	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-linku",
+	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-linku",
+	"visualeditor-magiclinknodeinspector-title-rfc": "RFC-linku"
 }
