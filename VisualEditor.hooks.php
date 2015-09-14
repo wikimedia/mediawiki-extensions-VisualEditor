@@ -246,6 +246,8 @@ class VisualEditorHooks {
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
 		$tooltip, &$result, $lang
 	) {
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+
 		// Exit if we're in parserTests
 		if ( isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ) {
 			return true;
@@ -254,13 +256,13 @@ class VisualEditorHooks {
 		// Exit if the user doesn't have VE enabled
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-betatempdisable' )
+			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
+			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
 		) {
 			return true;
 		}
 
-		$availableNamespaces = ConfigFactory::getDefaultInstance()
-			->makeConfig( 'visualeditor' )->get( 'VisualEditorAvailableNamespaces' );
+		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 		// Exit if we're not in a VE-enabled namespace
 		if ( !$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
 			return true;
@@ -275,7 +277,6 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		$veEditSection = $tabMessages['editsection'] !== null ?
 			$tabMessages['editsection'] : 'editsection';
