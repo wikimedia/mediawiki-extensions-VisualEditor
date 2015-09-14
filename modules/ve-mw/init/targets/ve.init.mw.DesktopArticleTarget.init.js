@@ -181,6 +181,9 @@
 				target.on( 'deactivate', function () {
 					active = false;
 				} );
+				target.on( 'loadError', function () {
+					resetLoadingProgress();
+				} );
 				return target.activate( dataPromise );
 			} )
 			.then( function () {
