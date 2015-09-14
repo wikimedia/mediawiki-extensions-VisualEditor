@@ -1,6 +1,6 @@
 <?php
 /**
- * Parsoid API wrapper.
+ * Parsoid/RESTBase+MediaWiki API wrapper.
  *
  * @file
  * @ingroup Extensions
@@ -151,7 +151,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		} else {
 			$wikitext = $this->postHTML( $page, $html, $parserParams );
 			if ( $wikitext === false ) {
-				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+				$this->dieUsage( 'Error contacting the Parsoid/RESTbase server', 'docserver' );
 			}
 		}
 
@@ -191,7 +191,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			// frontend can update the page rendering without a refresh.
 			$result = $this->parseWikitext( $page, $newRevId );
 			if ( $result === false ) {
-				$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+				$this->dieUsage( 'Error contacting the Parsoid/RESTBase server', 'docserver' );
 			}
 
 			$result['isRedirect'] = $page->isRedirect();
@@ -302,6 +302,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @deprecated since MediaWiki core 1.25
 	 */
 	public function getDescription() {
-		return 'Save an HTML5 page to MediaWiki (converted to wikitext via the Parsoid service).';
+		return 'Save an HTML5 page to MediaWiki (converted to wikitext via RESTBase or the ' .
+			'Parsoid service).';
 	}
 }

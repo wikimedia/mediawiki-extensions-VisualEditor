@@ -1,6 +1,6 @@
 <?php
 /**
- * Parsoid API wrapper.
+ * Parsoid/RESTBase+MediaWiki API wrapper.
  *
  * @file
  * @ingroup Extensions
@@ -109,9 +109,9 @@ class ApiVisualEditor extends ApiBase {
 				$resp->header( 'X-Cache: ' . $rp );
 			}
 		} elseif ( $response['error'] !== '' ) {
-			$this->dieUsage( 'parsoidserver-http-error: ' . $response['error'], $response['error'] );
+			$this->dieUsage( 'docserver-http-error: ' . $response['error'], $response['error'] );
 		} else { // error null, code not 200
-			$this->dieUsage( 'parsoidserver-http: HTTP ' . $response['code'], $response['code'] );
+			$this->dieUsage( 'docserver-http: HTTP ' . $response['code'], $response['code'] );
 		}
 		return $response['body'];
 	}
@@ -347,7 +347,7 @@ class ApiVisualEditor extends ApiBase {
 							array()
 						);
 						if ( $content === false ) {
-							$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+							$this->dieUsage( 'Error contacting the document server', 'docserver' );
 						}
 					}
 
@@ -549,7 +549,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 				$content = $this->parseWikitextFragment( $title, $wikitext );
 				if ( $content === false ) {
-					$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+					$this->dieUsage( 'Error contacting the document server', 'docserver' );
 				} else {
 					$result = array(
 						'result' => 'success',
@@ -570,7 +570,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 					$content = $this->postHTML( $title, $html, $parserParams );
 					if ( $content === false ) {
-						$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
 				}
 				$result = array( 'result' => 'success', 'content' => $content );
@@ -585,7 +585,7 @@ class ApiVisualEditor extends ApiBase {
 				} else {
 					$wikitext = $this->postHTML( $title, $html, $parserParams );
 					if ( $wikitext === false ) {
-						$this->dieUsage( 'Error contacting the Parsoid server', 'parsoidserver' );
+						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
 				}
 
@@ -608,7 +608,7 @@ class ApiVisualEditor extends ApiBase {
 			case 'getlanglinks':
 				$langlinks = $this->getLangLinks( $title );
 				if ( $langlinks === false ) {
-					$this->dieUsage( 'Error querying MediaWiki API', 'parsoidserver' );
+					$this->dieUsage( 'Error querying MediaWiki API', 'api-langlinks-error' );
 				} else {
 					$result = array( 'result' => 'success', 'langlinks' => $langlinks );
 				}
@@ -710,6 +710,6 @@ class ApiVisualEditor extends ApiBase {
 	 * @deprecated since MediaWiki core 1.25
 	 */
 	public function getDescription() {
-		return 'Returns HTML5 for a page from the parsoid service.';
+		return 'Returns HTML5 for a page from RESTBase or the Parsoid service.';
 	}
 }

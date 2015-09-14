@@ -86,7 +86,8 @@
 		},
 
 		/**
-		 * Request the page HTML and various metadata from the MediaWiki API and Parsoid.
+		 * Request the page HTML and various metadata from the MediaWiki API (which will use
+		 * Parsoid or RESTBase).
 		 *
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
