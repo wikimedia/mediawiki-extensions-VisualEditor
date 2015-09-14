@@ -20,3 +20,18 @@ $wgEnableJavaScriptTest = true;
 
 Then open `http://URL_OF_MEDIAWIKI/index.php/Special:JavaScriptTest/qunit`
 (for example, <http://localhost/w/index.php/Special:JavaScriptTest/qunit>).
+
+Node-based code linting tests can be run locally using npm – run:
+
+<pre lang="bash">
+npm install && npm test
+</pre>
+
+
+## Pre-commit hook
+
+A pre-commit git hook script exists which will help flag up any issues and avoid irritating code review steps for you and reviewers. Simply do:
+
+<pre lang="bash">
+ln -s bin/pre-commit.sh ../.git/hooks/pre-commit
+</pre>
