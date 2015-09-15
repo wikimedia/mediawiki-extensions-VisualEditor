@@ -105,7 +105,7 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 	}
 	if ( converter.isForClipboard() ) {
 		// Resolve attributes
-		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.computedAttributes );
+		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.static.computedAttributes );
 	}
 	return els;
 };

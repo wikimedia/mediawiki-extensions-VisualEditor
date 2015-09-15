@@ -185,7 +185,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		}
 
 		// Resolve attributes
-		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.computedAttributes );
+		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.static.computedAttributes );
 	}
 	return els;
 };
