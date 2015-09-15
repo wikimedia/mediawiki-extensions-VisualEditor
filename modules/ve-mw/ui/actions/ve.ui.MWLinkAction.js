@@ -98,6 +98,18 @@ ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
 ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
 	return this.autolink( function ( linktext ) {
 		return ve.dm.MWMagicLinkNode.static.validateContent( linktext );
+	}, function ( doc, range, linktext ) {
+		return ve.dm.Transaction.newFromReplacement( doc, range, [
+			{
+				type: 'link/mwMagic',
+				attributes: {
+					content: linktext
+				}
+			},
+			{
+				type: '/link/mwMagic'
+			}
+		] );
 	} );
 };
 
