@@ -5,8 +5,13 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 .visualeditor-welcomedialog-content {
-	margin-top: 1em;
 	background: url(images/welcomeSplash-ltr.png) 50% 100% no-repeat;
-	background-size: 35%;
+	background-size: 50%;
 	height: 200px;
+	text-align: center;
+}
+
+.visualeditor-welcomedialog-content-text {
+	display: inline-block;
+	margin-top: 12em;
 }

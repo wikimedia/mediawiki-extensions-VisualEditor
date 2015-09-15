@@ -48,7 +48,15 @@ ve.ui.MWWelcomeDialog.prototype.getSetupProcess = function ( data ) {
 	data = $.extend( {
 		title: ve.msg( 'visualeditor-welcomedialog-title', mw.user, mw.config.get( 'wgSiteName' ) ),
 		message: $( '<div>' ).addClass( 'visualeditor-welcomedialog-content' )
-			.append( ve.msg( 'visualeditor-welcomedialog-content' ) )
+			.append(
+				$( '<span>' )
+					.addClass( 'visualeditor-welcomedialog-content-text' )
+					.text(
+						ve.msg( 'visualeditor-welcomedialog-content' ) +
+						'<br />' +
+						ve.msg( 'visualeditor-welcomedialog-content-thanks' )
+					)
+			)
 	}, data );
 
 	return ve.ui.MWWelcomeDialog.super.prototype.getSetupProcess.call( this, data );
