@@ -39,7 +39,7 @@
 	"visualeditor-backbutton-tooltip": "Regressar",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Este editor está em fase experimental. Pode deparar-se com problemas no ''software'', e não ser capaz de editar algumas partes da página. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, abra o menu suspenso perto de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Pode regressar ao modo de edição do código a qualquer momento, sem perder as suas alterações, ao clicar na aba \"$1\". Se encontrar algum erro, por favor, informe abaixo.",
 	"visualeditor-browserwarning": "Está a utilizar um navegador que não é oficialmente suportado por este editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Adicionar fonte da descrição do local",
 	"visualeditor-ca-createsource": "Criar código-fonte",

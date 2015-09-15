@@ -49,7 +49,7 @@
 	"visualeditor-backbutton-tooltip": "Zurück gehen",
 	"visualeditor-beta-appendix": "Beta",
 	"visualeditor-beta-label": "Beta",
-	"visualeditor-beta-warning": "Dieser Editor ist in der Beta. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zu wechseln, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-tool}}“ aus.",
+	"visualeditor-beta-warning": "Du kannst zu jeder Zeit durch das Anklicken der Registerkarte „$1“ zum Wikitext-Editor wechseln. Deine bisher durchgeführten Änderungen bleiben dabei erhalten. Falls du irgendwelche Fehler entdeckst, berichte sie bitte unten.",
 	"visualeditor-browserwarning": "Du verwendest einen Browser, der von diesem Editor nicht offiziell unterstützt wird.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lokalen Beschreibungsquelltext hinzufügen",
 	"visualeditor-ca-createsource": "Quelltext erstellen",

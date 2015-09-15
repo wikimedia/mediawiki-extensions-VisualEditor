@@ -51,7 +51,7 @@
 	"visualeditor-backbutton-tooltip": "戻る",
 	"visualeditor-beta-appendix": "ベータ版",
 	"visualeditor-beta-label": "ベータ",
-	"visualeditor-beta-warning": "このエディターは「ベータ版」です。「{{int:visualeditor-toolbar-savedialog}}」の隣のドロップダウンを開いて「{{int:visualeditor-mweditmodesource-tool}}」を選択することで、編集内容を保持したまま、いつでもソース編集に戻せます。",
+	"visualeditor-beta-warning": "あなたはウィキテキスト・エディターをスイッチできます。「$1」タブをクリックすることで編集できます、もしあなたが問題に遭遇したら、以下に報告してください。",
 	"visualeditor-browserwarning": "このエディターは、ご使用中のブラウザーに正式には対応していません。",
 	"visualeditor-ca-createlocaldescriptionsource": "ローカルの解説を作成",
 	"visualeditor-ca-createsource": "ソースを作成",

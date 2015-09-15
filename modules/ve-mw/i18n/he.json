@@ -53,7 +53,7 @@
 	"visualeditor-backbutton-tooltip": "חזרה",
 	"visualeditor-beta-appendix": "בטא",
 	"visualeditor-beta-label": "בטא",
-	"visualeditor-beta-warning": "העורך הזה הוא \"בטא\". כדי לעבור לעריכת קוד מקור בכל זמן בלי לאבד את השינויים שלך, יש לפתוח את התפריט ליד \"{{int:visualeditor-toolbar-savedialog}}\" ולבחור באפשרות \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "אפשר לעבור לעריכת קוד ויקי בכל זמן באמצעות לחיצה על הלשונית \"$1\", וזה ישמור על כל השינויים שעשית. אם מצאת בעיות כלשהן, נא לדווח אותן להלן.",
 	"visualeditor-browserwarning": "העורך הזה אינו נתמך באופן רשמי בדפדפן שלך.",
 	"visualeditor-ca-createlocaldescriptionsource": "הוספת מקור תיאור מקומי",
 	"visualeditor-ca-createsource": "יצירת קוד מקור",

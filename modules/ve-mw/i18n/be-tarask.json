@@ -29,7 +29,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "Простая спасылка",
 	"visualeditor-beta-appendix": "бэта",
 	"visualeditor-beta-label": "бэта",
-	"visualeditor-beta-warning": "Гэты рэдактар знаходзіцца ў статусе бэта-вэрсіі. Каб перайсьці да рэдагаваньня крыніцы ў любы момант бяз страты вашых зьменаў, адкрыйце выпадны сьпіс побач з «{{int:visualeditor-toolbar-savedialog}}» і абярыце «{{int:visualeditor-mweditmodesource-tool}}».",
+	"visualeditor-beta-warning": "Вы можаце перайсьці да рэдагаваньня вікітэксту ў любы момант бяз страты вашых зьменаў, калі націсьніце на ўкладку «$1». У выпадку ўзьнікненьня праблемаў, калі ласка, паведамляйце пра іх.",
 	"visualeditor-browserwarning": "Вы карыстаецеся браўзэрам, які не падтрымліваецца афіцыйна гэтым рэдактарам.",
 	"visualeditor-ca-createlocaldescriptionsource": "Дадаць крыніцу лякальнага апісаньня",
 	"visualeditor-ca-createsource": "Стварыць крыніцу",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bachounda",
-			"Oldstoneage"
+			"Oldstoneage",
+			"Hussam"
 		]
 	},
 	"tooltip-ca-createsource": "اصنع الكود المصدري لهذه الباجة",
@@ -12,6 +13,7 @@
 	"visualeditor-annotationbutton-linknode-tooltip": "وصلة بسيطة",
 	"visualeditor-beta-appendix": "بيتا",
 	"visualeditor-beta-label": "بيتا",
+	"visualeditor-beta-warning": "teqder tḥawel l lwikitext editor fi ay waqt ki tekliki ɛla $1, bech tḥafed ɛla tebdal li dertah. ila jawek ay machakil madabik tkhabarna taḥt.",
 	"visualeditor-browserwarning": "المحرر المرئي ما يدعمش رسميا البروزر الي تخدم بيه.",
 	"visualeditor-ca-createlocaldescriptionsource": "زيد توصاف مبلّد",
 	"visualeditor-ca-createsource": "أصنع المصدر",

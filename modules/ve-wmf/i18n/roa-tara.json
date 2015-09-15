@@ -9,11 +9,14 @@
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Cangiamende fatte ausanne 'u [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Condrolle]]",
-	"tag-visualeditor-needcheck-description": "Cangiamende fatte ausanne 'u [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] addò 'u sisteme ave acchiate uicchiteste ca pò essere ca ha state cangiate none indenzionalmende.",
+	"tag-visualeditor-needcheck-description": "Cangiamende fatte ausanne 'u [[{{MediaWiki:visualeditor-descriptionpagelink}}|cangiatore visuale]] addò 'u sisteme ave acchiate uicchiteste ca pò essere ca ha state cangiate none indenzionalmende.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Scambiate]]",
-	"tag-visualeditor-switched-description": "L'utende ha accumenzate a cangià ausanne VisualEditor e pò ha passate a 'u cangiatore uicchiteste.",
+	"tag-visualeditor-switched-description": "L'utende ha accumenzate a cangià ausanne 'u cangiatore visuale e pò ha passate a 'u cangiatore uicchiteste.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Segnalazione",
 	"visualeditor-feedback-tool": "Lasse 'na segnalazione sus a stu software",
 	"visualeditor-help-label": "Ligge 'a guide de l'utende",
-	"visualeditor-help-title": "Guide pe cumme ausà 'u cangiatore"
+	"visualeditor-help-title": "Guide pe cumme ausà 'u cangiatore",
+	"visualeditor-welcomedialog-action": "Accuminze a cangià",
+	"visualeditor-welcomedialog-content": "Cengate pò cangià, e ogne miglioramende aijute. Grazie pe l'aijute, 'u munne se scopre de cchiù!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bovègne}} jndr'à $2"
 }

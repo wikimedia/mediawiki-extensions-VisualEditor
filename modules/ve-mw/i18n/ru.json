@@ -45,7 +45,7 @@
 	"visualeditor-backbutton-tooltip": "Вернуться назад",
 	"visualeditor-beta-appendix": "бета-версия",
 	"visualeditor-beta-label": "бета-версия",
-	"visualeditor-beta-warning": "Этот редактор находится в статусе бета-версии. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-savedialog}}» и выберите «{{int:visualeditor-mweditmodesource-tool}}».",
+	"visualeditor-beta-warning": "Вы можете в любой момент переключить редактор в режим вики-текста нажатием на вкладку «$1», сохранив все внесённые изменения. Если у вас возникнут какие-либо проблемы, пожалуйста, сообщите о них ниже.",
 	"visualeditor-browserwarning": "Вы используете браузер, официально не поддерживаемый этим редактором.",
 	"visualeditor-ca-createlocaldescriptionsource": "Добавить источник локального описания",
 	"visualeditor-ca-createsource": "Создать как исходный текст",

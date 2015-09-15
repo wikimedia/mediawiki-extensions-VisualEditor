@@ -48,7 +48,7 @@
 	"visualeditor-backbutton-tooltip": "Volver",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "O editor está en fase experimental. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, abra o menú despregable que está ao carón de \"{{int:visualeditor-toolbar-savedialog}}\" e seleccione \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Pode cambiar ao modo de edición de texto wiki en calquera momento premendo na lapela \"$1\", mantendo todos os cambios que teña feitos. Se atopa calquera problema, por favor, informe deles abaixo.",
 	"visualeditor-browserwarning": "Está utilizando un navegador que non está soportado oficialmente por este editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Engadir a fonte dunha descrición local",
 	"visualeditor-ca-createsource": "Crear a fonte",

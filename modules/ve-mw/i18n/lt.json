@@ -47,7 +47,7 @@
 	"visualeditor-backbutton-tooltip": "Grįžti atgal",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Šis redaktorius kol kas tik bandomas. Galite bet kuriuo metu persijungti į išeities teksto redaktorių neprarasdami pakeitimų, atverkite išskleidžiamą meniu šalia \"{{int:visualeditor-toolbar-savedialog}}\" ir pasirinkite \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Galite bet kuriuo metu persijungti į vikiteksto redaktorių, paspausdami \"$1\" etiketę, neprarasdami atliktų pakeitimų. Jeigu iškils kokių nors problemų, prašome pranešti apie jas žemiau.",
 	"visualeditor-browserwarning": "Jūs naudojate naršyklę, kuri nėra oficialiai palaikoma šio redaktoriaus.",
 	"visualeditor-ca-createlocaldescriptionsource": "Pridėti vietinio aprašymo šaltinį",
 	"visualeditor-ca-createsource": "Redaguoti išeities kodą",

@@ -16,5 +16,8 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Atsiliepimai",
 	"visualeditor-feedback-tool": "Pateikti atsiliepimą apie šią programinę įrangą",
 	"visualeditor-help-label": "Skaityti vartotojo vadovą",
-	"visualeditor-help-title": "Instrukcijos kaip naudotis redaktoriumi"
+	"visualeditor-help-title": "Instrukcijos kaip naudotis redaktoriumi",
+	"visualeditor-welcomedialog-action": "Pradėti redagavimą",
+	"visualeditor-welcomedialog-content": "Bet kas gali redaguoti ir kiekvienas pagerinimas padeda. Ačiū, kad padedate pasauliui atrasti daugiau!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Sveiki atvykę}} į $2"
 }
