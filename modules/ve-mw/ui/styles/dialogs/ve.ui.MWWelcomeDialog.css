@@ -6,7 +6,7 @@
  */
 .visualeditor-welcomedialog-content {
 	margin-top: 1em;
-	background: url(images/welcomeSplash.png) 50% 100% no-repeat;
+	background: url(images/welcomeSplash-ltr.png) 50% 100% no-repeat;
 	background-size: 35%;
 	height: 200px;
 }
