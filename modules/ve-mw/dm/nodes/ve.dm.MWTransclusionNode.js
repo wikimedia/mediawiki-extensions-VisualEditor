@@ -184,11 +184,8 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			els[ i ].setAttribute( 'data-ve-ignore', 'true' );
 		}
 
-		// Resolve image sources
-		$( els ).find( 'img' ).addBack( 'img' ).each( function () {
-			var $this = $( this );
-			$this.attr( 'src', ve.resolveUrl( $this.attr( 'src' ), doc ) );
-		} );
+		// Resolve attributes
+		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.computedAttributes );
 	}
 	return els;
 };
