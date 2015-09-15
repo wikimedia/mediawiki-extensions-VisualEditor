@@ -234,11 +234,18 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 			fragment = this.getFragment();
 		}, this )
 		.next( function () {
-			var selection = fragment && fragment.getSelection();
+			var annotations, data,
+				selection = fragment && fragment.getSelection();
 
 			// Handle conversion to magic link.
 			if ( data && data.convert && selection instanceof ve.dm.LinearSelection ) {
-				fragment.insertContent( [
+				annotations = fragment.getDocument().data
+					.getAnnotationsFromRange( selection.getRange() )
+					// Remove link annotations
+					.filter( function ( annotation ) {
+						return !/^link/.test( annotation.name );
+					} );
+				data = new ve.dm.ElementLinearData( annotations.store, [
 					{
 						type: 'link/mwMagic',
 						attributes: {
@@ -248,7 +255,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 					{
 						type: '/link/mwMagic'
 					}
-				], true );
+				] );
+				data.setAnnotationsAtOffset( 0, annotations );
+				data.setAnnotationsAtOffset( 1, annotations );
+				fragment.insertContent( data.getData(), true );
 			}
 
 			// Clear dialog state.

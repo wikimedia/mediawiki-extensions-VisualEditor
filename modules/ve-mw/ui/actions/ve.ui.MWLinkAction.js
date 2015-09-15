@@ -99,17 +99,26 @@ ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
 	return this.autolink( function ( linktext ) {
 		return ve.dm.MWMagicLinkNode.static.validateContent( linktext );
 	}, function ( doc, range, linktext ) {
-		return ve.dm.Transaction.newFromReplacement( doc, range, [
-			{
-				type: 'link/mwMagic',
-				attributes: {
-					content: linktext
+		var annotations = doc.data.getAnnotationsFromRange( range ),
+			data = new ve.dm.ElementLinearData( annotations.store, [
+				{
+					type: 'link/mwMagic',
+					attributes: {
+						content: linktext
+					}
+				},
+				{
+					type: '/link/mwMagic'
 				}
-			},
-			{
-				type: '/link/mwMagic'
-			}
-		] );
+			] );
+		// Apply annotations which covered the range.
+		// Before we get here #autolink has guaranteed that the annotations
+		// do not contain any link annotations.
+		data.setAnnotationsAtOffset( 0, annotations );
+		data.setAnnotationsAtOffset( 1, annotations );
+		return ve.dm.Transaction.newFromReplacement(
+			doc, range, data.getData()
+		);
 	} );
 };
 

@@ -20,6 +20,7 @@ function runMWAutolinkTest( assert, html, method, range, expectedRange, expected
 			return linkAction.getLinkAnnotation( linktext ).element;
 		};
 
+	ve.dm.example.postprocessAnnotations( data, surface.getModel().getDocument().getStore() );
 	expectedData( data, makeLinkAnnotation );
 	if ( expectedOriginalData ) {
 		expectedOriginalData( originalData );
@@ -46,7 +47,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 		cases = [
 			{
 				msg: 'Strip trailing punctuation (but not matched parens)',
-				html: '<p>https://en.wikipedia.org/wiki/Red_(disambiguation) xyz</p>',
+				html: '<p><b>https://en.wikipedia.org/wiki/Red_(disambiguation) xyz</b></p>',
 				range: new ve.Range( 1, 52 ),
 				method: 'autolinkUrl',
 				expectedRange: new ve.Range( 52, 52 ),
@@ -54,13 +55,13 @@ QUnit.test( 'MW autolink', function ( assert ) {
 					var i,
 						a = makeAnnotation( 'https://en.wikipedia.org/wiki/Red_(disambiguation)' );
 					for ( i = 1; i < 51; i++ ) {
-						data[ i ] = [ data[ i ], [ a ] ];
+						data[ i ][ 1 ].push( a );
 					}
 				}
 			},
 			{
 				msg: 'Autolink valid RFC',
-				html: '<p>RFC 1234 xyz</p>',
+				html: '<p><b>RFC 1234 xyz</b></p>',
 				range: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
 				expectedRange: new ve.Range( 4, 4 ),
@@ -70,15 +71,17 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						type: 'link/mwMagic',
 						attributes: {
 							content: 'RFC 1234'
-						}
+						},
+						annotations: data[ 1 ][ 1 ]
 					}, {
-						type: '/link/mwMagic'
+						type: '/link/mwMagic',
+						annotations: data[ 1 ][ 1 ]
 					} );
 				}
 			},
 			{
 				msg: 'Don\'t autolink invalid RFC',
-				html: '<p>RFC 123x xyz</p>',
+				html: '<p><b>RFC 123x xyz</b></p>',
 				range: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
 				expectedRange: new ve.Range( 1, 10 ),
@@ -88,7 +91,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			},
 			{
 				msg: 'Autolink valid PMID',
-				html: '<p>PMID 1234 xyz</p>',
+				html: '<p><b>PMID 1234 xyz</b></p>',
 				range: new ve.Range( 1, 11 ),
 				method: 'autolinkMagicLink',
 				expectedRange: new ve.Range( 4, 4 ),
@@ -98,15 +101,17 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						type: 'link/mwMagic',
 						attributes: {
 							content: 'PMID 1234'
-						}
+						},
+						annotations: data[ 1 ][ 1 ]
 					}, {
-						type: '/link/mwMagic'
+						type: '/link/mwMagic',
+						annotations: data[ 1 ][ 1 ]
 					} );
 				}
 			},
 			{
 				msg: 'Don\'t autolink invalid PMID',
-				html: '<p>PMID 123x xyz</p>',
+				html: '<p><b>PMID 123x xyz</b></p>',
 				range: new ve.Range( 1, 11 ),
 				method: 'autolinkMagicLink',
 				expectedRange: new ve.Range( 1, 11 ),
@@ -116,7 +121,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			},
 			{
 				msg: 'Autolink valid ISBN',
-				html: '<p>ISBN 978-0596517748 xyz</p>',
+				html: '<p><b>ISBN 978-0596517748 xyz</b></p>',
 				range: new ve.Range( 1, 21 ),
 				method: 'autolinkMagicLink',
 				expectedRange: new ve.Range( 4, 4 ),
@@ -126,15 +131,17 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						type: 'link/mwMagic',
 						attributes: {
 							content: 'ISBN 978-0596517748'
-						}
+						},
+						annotations: data[ 1 ][ 1 ]
 					}, {
-						type: '/link/mwMagic'
+						type: '/link/mwMagic',
+						annotations: data[ 1 ][ 1 ]
 					} );
 				}
 			},
 			{
 				msg: 'Don\'t autolink invalid ISBN',
-				html: '<p>ISBN 978-059651774 xyz</p>',
+				html: '<p><b>ISBN 978-059651774 xyz</b></p>',
 				range: new ve.Range( 1, 20 ),
 				method: 'autolinkMagicLink',
 				expectedRange: new ve.Range( 1, 20 ),
