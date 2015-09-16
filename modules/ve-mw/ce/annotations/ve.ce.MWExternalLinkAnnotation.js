@@ -20,7 +20,7 @@ ve.ce.MWExternalLinkAnnotation = function VeCeMWExternalLinkAnnotation() {
 	ve.ce.MWExternalLinkAnnotation.super.apply( this, arguments );
 
 	// DOM changes
-	this.$element.addClass( 'external' );
+	this.$anchor.addClass( 'external' );
 };
 
 /* Inheritance */

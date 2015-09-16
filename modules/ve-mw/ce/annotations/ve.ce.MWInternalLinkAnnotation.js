@@ -21,10 +21,10 @@ ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation() {
 	ve.ce.MWInternalLinkAnnotation.super.apply( this, arguments );
 
 	// DOM changes
-	this.$element.addClass( 've-ce-mwInternalLinkAnnotation' );
+	this.$anchor.addClass( 've-ce-mwInternalLinkAnnotation' );
 
 	// Style based on link cache information
-	ve.init.platform.linkCache.styleElement( this.model.getAttribute( 'lookupTitle' ), annotation.$element );
+	ve.init.platform.linkCache.styleElement( this.model.getAttribute( 'lookupTitle' ), annotation.$anchor );
 };
 
 /* Inheritance */
