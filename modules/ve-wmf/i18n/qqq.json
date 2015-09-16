@@ -33,5 +33,6 @@
 	"visualeditor-help-title": "Title (hover) text for the link to the user guide",
 	"visualeditor-welcomedialog-action": "Label for the 'Start editing' button used to close the welcome dialog and start using the editor.\n{{Identical|Start editing}}",
 	"visualeditor-welcomedialog-content": "Text welcoming the user to editing.",
+	"visualeditor-welcomedialog-content-thanks": "Text thanking the user for any edits they might make.",
 	"visualeditor-welcomedialog-title": "Title of the welcome dialog. Parameters:\n* $1 - username or empty string, for GENDER support\n* $2 - value of the SITENAME parser function."
 }
