@@ -24,6 +24,7 @@
 	"visualeditor-help-label": "Lies das Benutzerhandbuch",
 	"visualeditor-help-title": "Handbuch für die Verwendung dieses Editors",
 	"visualeditor-welcomedialog-action": "Mit dem Bearbeiten anfangen",
-	"visualeditor-welcomedialog-content": "Jeder kann bearbeiten und jede Verbesserung hilft. Danke für deine Hilfe, die Welt mehr zu entdecken!",
+	"visualeditor-welcomedialog-content": "Jeder kann bearbeiten und jede Verbesserung hilft.",
+	"visualeditor-welcomedialog-content-thanks": "Danke für deine Hilfe, die Welt mehr zu entdecken!",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Willkommen}} bei $2"
 }

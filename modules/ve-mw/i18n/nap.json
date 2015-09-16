@@ -42,7 +42,7 @@
 	"visualeditor-backbutton-tooltip": "Torna arreto",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "St'editore è  na 'beta'. Pe' turnà arret a 'o cagnamiento 'e source a nu cierto mumento, senza perde cagnamiénte, arape 'o menu a perziana vicin'a \"{{int:visualeditor-toolbar-savedialog}}\" e scegliere \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Vuje putite turnà arret a l'editore 'e wikitesto clickanno ncopp' 'o tab 'e \"$1\", astipannove 'e cagnam iente c'avite fatto. Si truvate cocche prubblema, pe' piacere facite na segnalazione ccà abbascio.",
 	"visualeditor-browserwarning": "State ausanno nu browser ca nun è suppurtato ufficialmente 'a st'editore.",
 	"visualeditor-ca-createlocaldescriptionsource": "Azzecca na fonte 'e descrizione lucale",
 	"visualeditor-ca-createsource": "Cria surgente",

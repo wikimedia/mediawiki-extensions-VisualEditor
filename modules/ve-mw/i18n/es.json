@@ -62,7 +62,7 @@
 	"visualeditor-backbutton-tooltip": "Regresar",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Este editor está en 'beta'. Para cambiar a la edición de fuente en cualquier momento sin perder tus cambios abre el desplegable junto a \"{{int:visualeditor-toolbar-savedialog}}\" y selecciona \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Puedes cambiar al editor de wikitexto en cualquier momento haciendo clic en la pestaña \"$1\", conservando todos los cambios que hayas hecho. Si encuentras algún problema, infórmalo a continuación.",
 	"visualeditor-browserwarning": "Estás utilizando un navegador que no es oficialmente compatible con este editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Añadir fuente de la descripción local",
 	"visualeditor-ca-createsource": "Crear fuente",

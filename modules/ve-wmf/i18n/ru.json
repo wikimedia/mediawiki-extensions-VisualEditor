@@ -29,5 +29,7 @@
 	"visualeditor-feedback-tool": "Оставить отзыв об этом ПО",
 	"visualeditor-help-label": "Прочтите руководство пользователя",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
-	"visualeditor-help-title": "Руководство по использованию редактора"
+	"visualeditor-help-title": "Руководство по использованию редактора",
+	"visualeditor-welcomedialog-action": "Начать редактирование",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро пожаловать}} на сайт $2"
 }
