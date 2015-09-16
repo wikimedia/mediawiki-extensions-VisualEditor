@@ -97,10 +97,10 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	}
 
 	// Protocol relative base
-	relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/, '' );
+	relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/i, '' );
 	relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) );
 	// Protocol relative href
-	relativeHref = href.replace( /^https?:/, '' );
+	relativeHref = href.replace( /^https?:/i, '' );
 	// Paths without a host portion are assumed to be internal
 	isInternal = !/^\/\//.test( relativeHref );
 	// Check if this matches the server's article path
