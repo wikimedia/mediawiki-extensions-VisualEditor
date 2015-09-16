@@ -51,7 +51,7 @@ ve.ui.MWWelcomeDialog.prototype.getSetupProcess = function ( data ) {
 			.append(
 				$( '<span>' )
 					.addClass( 'visualeditor-welcomedialog-content-text' )
-					.text(
+					.html(
 						ve.msg( 'visualeditor-welcomedialog-content' ) +
 						'<br />' +
 						ve.msg( 'visualeditor-welcomedialog-content-thanks' )
