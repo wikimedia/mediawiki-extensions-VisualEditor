@@ -259,6 +259,7 @@
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
 	"visualeditor-loadwarning-token": "Errore durante il caricamento del token di modifica dal server: $1. Riprovare?",
 	"visualeditor-mainnamespacepagelink": "Project:Namespace principale",
+	"visualeditor-magiclinknodeinspector-convert-link": "Converti in collegamento semplice",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Collegamento ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Collegamento PMID",
 	"visualeditor-magiclinknodeinspector-title-rfc": "Collegamento RFC",

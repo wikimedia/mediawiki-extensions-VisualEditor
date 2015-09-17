@@ -18,6 +18,7 @@
 	"visualeditor-help-label": "Liegge 'a guida utente",
 	"visualeditor-help-title": "Guida pe' l'autilizzo 'e ll'editor",
 	"visualeditor-welcomedialog-action": "Accummencia a cagnà",
-	"visualeditor-welcomedialog-content": "Ogneduno pò cagnà, e ogne migliuramento fosse n'aiuto. Grazie pe' aiutà 'o munno a scummiglià sempe cchiù ccose!",
+	"visualeditor-welcomedialog-content": "Ogneduno pò cagnà, e ogne migliuramento fosse n'aiuto.",
+	"visualeditor-welcomedialog-content-thanks": "Grazie pe' aiutà 'o munno a scummiglià sempe cchiù ccose!",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bemmenuto|Bemmenuta}} int'a $2"
 }

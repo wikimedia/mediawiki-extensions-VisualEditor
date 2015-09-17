@@ -18,7 +18,8 @@
 			"아라",
 			"Mpiva",
 			"Fringio",
-			"Alexmar983"
+			"Alexmar983",
+			"Jdforrester"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -32,5 +33,6 @@
 	"visualeditor-help-label": "Leggi la guida utente",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guida per l'utilizzo dell'editor",
-	"visualeditor-welcomedialog-content": "Ognuno può contribuire, e ogni miglioramento è di aiuto. Grazie per aiutare il mondo a scoprire sempre più cose!"
+	"visualeditor-welcomedialog-content": "Ognuno può contribuire, e ogni miglioramento è di aiuto.",
+	"visualeditor-welcomedialog-content-thanks": "Grazie per aiutare il mondo a scoprire sempre più cose!"
 }

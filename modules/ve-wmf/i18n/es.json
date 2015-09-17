@@ -31,6 +31,7 @@
 	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/es",
 	"visualeditor-help-title": "Guía para utilizar el editor",
 	"visualeditor-welcomedialog-action": "Empezar a editar",
-	"visualeditor-welcomedialog-content": "Cualquiera puede editar, y cada mejora ayuda. ¡Gracias por ayudar al mundo a descubrir más!",
+	"visualeditor-welcomedialog-content": "Cualquiera puede editar, y cada mejora ayuda.",
+	"visualeditor-welcomedialog-content-thanks": "¡Gracias por ayudar al mundo a descubrir más!",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bienvenido|Bienvenida}} a $2"
 }

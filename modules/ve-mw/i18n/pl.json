@@ -49,7 +49,7 @@
 	"visualeditor-backbutton-tooltip": "Wróć",
 	"visualeditor-beta-appendix": "BETA",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Ten edytor jest na razie w fazie beta. Aby przełączyć się do edytora kodu źródłowego, w dowolnym momencie bez utraty zmian, otwórz rozwijalne menu obok „{{int:visualeditor-toolbar-savedialog}}” i wybierz „{{int:visualeditor-mweditmodesource-tool}}”.",
+	"visualeditor-beta-warning": "W każdej chwili możesz przejść do edytora wikitekstu klikając w zakładkę „$1”, nie tracąc dokonanych przez siebie zmian. Jeśli napotkasz jakieś problemy, możesz zgłosić je poniżej.",
 	"visualeditor-browserwarning": "Używasz przeglądarki, która nie jest oficjalnie wspierana przez ten edytor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Utwórz kod źródłowy lokalnego opisu",
 	"visualeditor-ca-createsource": "Utwórz kod źródłowy",

@@ -81,7 +81,7 @@
 	"visualeditor-backbutton-tooltip": "Revenir en arrière",
 	"visualeditor-beta-appendix": "bêta",
 	"visualeditor-beta-label": "bêta",
-	"visualeditor-beta-warning": "L’éditeur visuel est en version bêta. Pour revenir à tout moment à l’édition du wikicode sans perdre vos modifications, ouvrez la liste déroulante près de « {{int:visualeditor-toolbar-savedialog}} » et sélectionnez « {{int:visualeditor-mweditmodesource-tool}} ».",
+	"visualeditor-beta-warning": "Vous pouvez revenir à tout moment à l’éditeur de wikicode sans perdre vos modifications, en cliquant sur « $1 ». Si vous rencontrez un problème, veuillez le signaler ci-dessous.",
 	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement supporté par cet éditeur.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ajouter une description locale (wikicode)",
 	"visualeditor-ca-createsource": "Créer le wikicode",
