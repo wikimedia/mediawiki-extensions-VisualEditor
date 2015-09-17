@@ -262,12 +262,6 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
-		// Exit if we're not in a VE-enabled namespace
-		if ( !$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
-			return true;
-		}
-
 		// Exit if we're on a foreign file description page
 		if (
 			$title->inNamespace( NS_FILE ) &&
@@ -278,30 +272,35 @@ class VisualEditorHooks {
 		}
 
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
-		$veEditSection = $tabMessages['editsection'] !== null ?
-			$tabMessages['editsection'] : 'editsection';
 		$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
 			$tabMessages['editsectionsource'] : 'editsection';
 
 		$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
 
-		$veLink = array(
-			'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
-			'targetTitle' => $title,
-			'attribs' => $result['editsection']['attribs'] + array(
-				'class' => 'mw-editsection-visualeditor'
-			),
-			'query' => array( 'veaction' => 'edit', 'vesection' => $section ),
-			'options' => array( 'noclasses', 'known' )
-		);
+		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 
-		$result['veeditsection'] = $veLink;
-		if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
-			krsort( $result );
-			// TODO: This will probably cause weird ordering if any other extensions added something already.
-			// ... wfArrayInsertBefore?
+		// add VE edit section in VE available namespaces
+		if ( $title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
+			$veEditSection = $tabMessages['editsection'] !== null ?
+				$tabMessages['editsection'] : 'editsection';
+			$veLink = array(
+				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
+				'targetTitle' => $title,
+				'attribs' => $result['editsection']['attribs'] + array(
+					'class' => 'mw-editsection-visualeditor'
+				),
+				'query' => array( 'veaction' => 'edit', 'vesection' => $section ),
+				'options' => array( 'noclasses', 'known' )
+			);
+
+			$result['veeditsection'] = $veLink;
+			if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
+				krsort( $result );
+				// TODO: This will probably cause weird ordering if any other extensions added something
+				// already.
+				// ... wfArrayInsertBefore?
+			}
 		}
-
 		return true;
 	}
 
