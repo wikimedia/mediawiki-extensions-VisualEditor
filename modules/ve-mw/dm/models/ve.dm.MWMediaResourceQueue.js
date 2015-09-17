@@ -57,7 +57,7 @@ ve.dm.MWMediaResourceQueue.prototype.setup = function () {
 							generator: 'search',
 							gsrnamespace: 6,
 							continue: '',
-							iiprop: 'dimensions|url|mediatype|extmetadata|timestamp',
+							iiprop: 'dimensions|url|mediatype|extmetadata|timestamp|user',
 							prop: 'imageinfo'
 						}
 					} )
