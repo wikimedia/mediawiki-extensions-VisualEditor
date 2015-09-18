@@ -10,5 +10,7 @@
 	"visualeditor-feedback-tool": "Jivv_en Röckmäldong övver heh di ẞoffwäer",
 	"visualeditor-help-label": "Liss de Aanleijdong för der Jebruch",
 	"visualeditor-welcomedialog-action": "Mem Änndere aanfange",
+	"visualeditor-welcomedialog-content": "Jehde kann jädd_änndere un jehde verbäßerong hellef.",
+	"visualeditor-welcomedialog-content-thanks": "Mer danke doför, dat de Wält mih erusfenge kann!",
 	"visualeditor-welcomedialog-title": "Wellkumme {{ucfirst:{{GRAMMAR:em|{{ucfirst:$2}}}}}}{{GENDER:$1|}}"
 }

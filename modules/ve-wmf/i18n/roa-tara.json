@@ -17,6 +17,7 @@
 	"visualeditor-help-label": "Ligge 'a guide de l'utende",
 	"visualeditor-help-title": "Guide pe cumme ausà 'u cangiatore",
 	"visualeditor-welcomedialog-action": "Accuminze a cangià",
-	"visualeditor-welcomedialog-content": "Cengate pò cangià, e ogne miglioramende aijute. Grazie pe l'aijute, 'u munne se scopre de cchiù!",
+	"visualeditor-welcomedialog-content": "Cengate pò cangià, e ogne miglioramende aijute.",
+	"visualeditor-welcomedialog-content-thanks": "Grazie pe l'aijute, 'u munne se scopre de cchiù!",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bovègne}} jndr'à $2"
 }

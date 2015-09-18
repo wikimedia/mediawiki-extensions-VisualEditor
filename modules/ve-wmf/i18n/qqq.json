@@ -17,7 +17,8 @@
 			"Shirayuki",
 			"Siebrand",
 			"Trevor Parscal",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Guillom"
 		]
 	},
 	"tag-visualeditor": "Short description of the visualeditor tag.\n\nShown on lists of changes (history, recentchanges, etc.) for each edit made using VisualEditor.\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-needcheck}}\n{{Related|Tag-visualeditor}}\n{{Identical|VisualEditor}}",
@@ -33,6 +34,6 @@
 	"visualeditor-help-title": "Title (hover) text for the link to the user guide",
 	"visualeditor-welcomedialog-action": "Label for the 'Start editing' button used to close the welcome dialog and start using the editor.\n{{Identical|Start editing}}",
 	"visualeditor-welcomedialog-content": "Text welcoming the user to editing.",
-	"visualeditor-welcomedialog-content-thanks": "Text thanking the user for any edits they might make.",
+	"visualeditor-welcomedialog-content-thanks": "This message expresses gratitude for the user's upcoming edit. It may be translated in the context of \"Thank you for this action which helps others discover new things\" or \"(By doing this) you're helping readers learn new things\".",
 	"visualeditor-welcomedialog-title": "Title of the welcome dialog. Parameters:\n* $1 - username or empty string, for GENDER support\n* $2 - value of the SITENAME parser function."
 }

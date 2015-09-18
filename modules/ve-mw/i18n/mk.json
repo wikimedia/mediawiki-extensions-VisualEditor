@@ -40,7 +40,7 @@
 	"visualeditor-backbutton-tooltip": "Назад",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "Овој уредник е во „бета“. За да се вратите на изворно уредување во секое време, без да ги изгубите направените измени, отворете го паѓачкото мени веднаш до „{{int:visualeditor-toolbar-savedialog}}“ и изберете „{{int:visualeditor-mweditmodesource-tool}}“.",
+	"visualeditor-beta-warning": "Можете да се префрлите на уредникот на викитекст во секое време со стискање на јазичето „$1“, притоа задржувајќи ги дотогаш направените промени. Ако наидете на проблеми, би ве замолиле да ги пријавите подолу.",
 	"visualeditor-browserwarning": "Користите прелистувач што не е официјално поддржан од овој уредник.",
 	"visualeditor-ca-createlocaldescriptionsource": "Додај изворен месен опис",
 	"visualeditor-ca-createsource": "Создај извор",
