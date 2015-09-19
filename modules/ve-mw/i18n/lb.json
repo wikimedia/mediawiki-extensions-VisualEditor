@@ -26,7 +26,7 @@
 	"visualeditor-backbutton-tooltip": "Zréck goen",
 	"visualeditor-beta-appendix": "Beta",
 	"visualeditor-beta-label": "Beta",
-	"visualeditor-beta-warning": "Dësen Editeur ass eng Betaversioun.\nFir zu all Ament op d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren, maacht den 'Dropdown'-Menü niewent \"{{int:visualeditor-toolbar-savedialog}}\" op a wielt \"{{int:visualeditor-mweditmodesource-tool}}\" eraus.",
+	"visualeditor-beta-warning": "Dir kënnt zu all Ament op d'Ännere vum Quellcode wiesselen andeem Dir op den \"$1\" Tab klickt, ouni Är Ännerungen ze verléieren. Wann Dir dobäi Problemer fannt, da mellt se w.e.g. hei drënner",
 	"visualeditor-browserwarning": "Dir benotzt e Browser deen net offiziell vun dësem Editeur ënnerstëtzt gëtt.",
 	"visualeditor-ca-createlocaldescriptionsource": "Quell vun der lokaler Beschreiwung derbäisetzen",
 	"visualeditor-ca-createsource": "Quell uleeën",

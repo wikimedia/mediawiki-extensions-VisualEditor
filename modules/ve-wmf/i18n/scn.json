@@ -4,7 +4,8 @@
 			"Gazeb",
 			"Gmelfi",
 			"HalanTul",
-			"Pippinu"
+			"Pippinu",
+			"Sarvaturi"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -14,5 +15,5 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Cummenta",
 	"visualeditor-feedback-tool": "Lassa nu cummentu",
 	"visualeditor-help-label": "Si liggissi la guida utenti",
-	"visualeditor-help-title": "Guida pi' comu s'adòpira l'editor"
+	"visualeditor-help-title": "Guida pi comu s'adòpira l'editor"
 }

@@ -7,7 +7,8 @@
 			"Elitre",
 			"Elitre82",
 			"Gloria sah",
-			"Pippinu"
+			"Pippinu",
+			"Sarvaturi"
 		]
 	},
 	"tooltip-ca-createsource": "Crea lu codici surgenti di sta pàggina",
@@ -15,7 +16,7 @@
 	"tooltip-ca-ve-edit": "Cancia sta pàggina",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor è n virsioni 'beta'. Putissitu ncuntrari errura ntô software, e certi parti dâ pàggina putissiru non arrisurtari canciàbbili. Pi' turnari a' canciari direttamenti lu surgenti quannu voi voi, senza pèrdiri li canciamenti, apri u menu a' scìnniri a' latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghî \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "VisualEditor è n virsioni 'beta'. Putìssitu ncuntrari erruri ntô software, e certi parti dâ pàggina putìssiru non arrisurtari canciàbbili. Pi turnari a canciari direttamenti la surgenti quannu voi voi, senza pèrdiri li canciamenti, grapi lu menù a scìnniri a latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghi \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Stai usannu nu browser ca nun è suppurtatu ufficiarmenti di VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Agghiunci na discrizzioni lucali tràmiti surgenti",
 	"visualeditor-ca-createsource": "Crea surgenti",
@@ -39,7 +40,7 @@
 	"visualeditor-dialog-meta-categories-input-placeholder": "Junci na catigurìa",
 	"visualeditor-dialog-meta-categories-options": "Opzioni",
 	"visualeditor-dialog-meta-categories-section": "Catigurìi",
-	"visualeditor-dialog-meta-categories-sortkey-label": "Òrdina sta pàggina comu si' si chiamassi",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Òrdina sta pàggina comu siddu si chiamassi",
 	"visualeditor-dialog-meta-languages-code-label": "Codici dâ lingua",
 	"visualeditor-dialog-meta-languages-label": "Lingui",
 	"visualeditor-dialog-meta-languages-link-label": "Pàggina culligata",
@@ -60,7 +61,7 @@
 	"visualeditor-dialog-reference-useexisting-label": "Usa nu rifirimentu esistenti",
 	"visualeditor-dialog-referenceslist-title": "Elencu rifirimenti",
 	"visualeditor-dialog-transclusion-add-content": "Junci lu cuntinutu",
-	"visualeditor-dialog-transclusion-add-param": "Agghiunci autri nfurmazzioni",
+	"visualeditor-dialog-transclusion-add-param": "Agghiunci àutri nfurmazzioni",
 	"visualeditor-dialog-transclusion-add-template": "Junci lu template",
 	"visualeditor-dialog-transclusion-content": "Cuntinutu",
 	"visualeditor-dialog-transclusion-loading": "Caricamentu...",
@@ -94,8 +95,8 @@
 	"visualeditor-mainnamespacepagelink": "Project:Namespace principali",
 	"visualeditor-media-input-placeholder": "Ricerca file multimidiali",
 	"visualeditor-meta-tool": "Mpustazzioni dâ pàggina",
-	"visualeditor-mweditmodesource-title": "Passari ô canciamentu dû surgenti?",
-	"visualeditor-mweditmodesource-warning": "Stai passannu ô canciamentu dû surgenti.\nEventuali canciamenti fatti nta stu documentu vènunu mantinuti, ma ppoi nun poi arriturnari cchiu' ô VisualEditor senza sarvari o ricarricari la pàggina.\nVoi cuntinuari?",
+	"visualeditor-mweditmodesource-title": "Passari ô canciamentu dâ surgenti?",
+	"visualeditor-mweditmodesource-warning": "Stai passannu ô canciamentu dâ surgenti.\nEvintuali canciamenti fatti nta stu documentu vèninu mantinuti, ma appoi nun poi arriturnari cchiù ô VisualEditor senza sarvari o arricarricari la pàggina.\nVoi cuntinuari?",
 	"visualeditor-parameter-input-placeholder": "Nomu dû campu",
 	"visualeditor-parameter-search-no-unused": "Nuddu campu senza adupiratu",
 	"visualeditor-parameter-search-unknown": "Campu scanusciutu",
@@ -131,6 +132,6 @@
 	"visualeditor-usernamespacepagelink": "Project:Namespace utenti",
 	"visualeditor-version-label": "Virsioni",
 	"visualeditor-viewpage-savewarning": "Vossia è sicuru ca voli arriturnari â mudalitati littura senza arriggistrari?",
-	"visualeditor-wikitext-warning": "Stai adupirannu lu VisualEditor - cca lu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitestu]] nun funziona. Pi' passari a' canciari lu surgenti quannnu voi voi, senza pèrdiri li to canciamenti, apri lu menù a' scinnuta a' latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghî \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Stai adupirannu lu VisualEditor - lu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitestu]] nun funziona. Pi passari a canciari la surgenti quannnu voi voi, senza pèrdiri li tò canciamenti, grapi lu menù a scinnuta a latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghi \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Wikitestu rilivatu"
 }
