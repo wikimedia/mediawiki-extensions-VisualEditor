@@ -110,7 +110,6 @@
 					// never be called if the browser doesn't support ES5
 					[
 						'ext.visualEditor.desktopArticleTarget',
-						'ext.visualEditor.mwgallery',
 						'ext.visualEditor.mwimage',
 						'ext.visualEditor.mwmeta'
 					].forEach( mw.libs.ve.targetLoader.addPlugin );
