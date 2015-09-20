@@ -92,6 +92,10 @@
 	margin: 0.5em 0;
 }
 
+.mw-body .external.ve-ce-linkAnnotation-active {
+	margin-right: 0;
+}
+
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and (min-width: 982px) {
 	.ve-init-mw-target-surface {

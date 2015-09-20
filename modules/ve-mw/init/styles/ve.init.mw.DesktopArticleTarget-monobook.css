@@ -47,6 +47,12 @@
 	border: 0;
 }
 
+.mw-body a.external.ve-ce-linkAnnotation-active {
+	margin-right: 0;
+	/* Monobook sets a background:url(); rule which overrides the colour. TODO: Fix upstream */
+	background-color: #E6F1FF;
+}
+
 .ve-init-target > .ve-ui-debugBar {
 	/* 0.8/0.8 */
 	padding: 1em;
