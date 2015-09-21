@@ -56,6 +56,10 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	} )
 		.connect( this, { click: 'onRemoveButtonClick' } );
 
+	if ( this.placeholder.getTransclusion().parts.length === 1 ) {
+		this.removeButton.toggle( false );
+	}
+
 	addTemplateActionFieldLayout = new OO.ui.ActionFieldLayout(
 		this.addTemplateInput,
 		this.addTemplateButton
