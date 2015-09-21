@@ -212,6 +212,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 						dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 					} ).always( function () {
 						dialog.$reviewEditSummary.parent().removeClass( 'mw-ajax-loader' );
+						dialog.updateSize();
 					} );
 				}
 			}
@@ -223,6 +224,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	// Show the target panel
 	this.panels.setItem( panelObj );
+	this.updateSize();
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
 
@@ -343,6 +345,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Properties
 	this.panels = new OO.ui.StackLayout( { scrollable: true } );
 	this.savePanel = new OO.ui.PanelLayout( {
+		expanded: false,
 		scrollable: true,
 		padded: true,
 		classes: [ 've-ui-mwSaveDialog-savePanel' ]
@@ -408,6 +411,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// Review panel
 	this.reviewPanel = new OO.ui.PanelLayout( {
+		expanded: false,
 		scrollable: true,
 		padded: true
 	} );
@@ -425,6 +429,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// Conflict panel
 	this.conflictPanel = new OO.ui.PanelLayout( {
+		expanded: false,
 		scrollable: true,
 		padded: true
 	} );
@@ -435,6 +440,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// No changes panel
 	this.nochangesPanel = new OO.ui.PanelLayout( {
+		expanded: false,
 		scrollable: true,
 		padded: true
 	} );
@@ -547,7 +553,7 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
  */
 ve.ui.MWSaveDialog.prototype.getBodyHeight = function () {
 	// Don't vary the height when the foot is made visible or not
-	return 350 - this.$foot.outerHeight( true );
+	return this.panels.getCurrentItem().$element.outerHeight( true );
 };
 
 /**
