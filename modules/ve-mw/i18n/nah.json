@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Neil P. Quinn"
+			"Neil P. Quinn",
+			"Taresi"
 		]
 	},
+	"tooltip-ca-ve-edit": "Ticpatlaz in tlaīxtli",
+	"visualeditor-ca-createsource": "Ticchīhuaz mēyalli",
+	"visualeditor-ca-editsource": "Ticpatlaz mēyalli",
+	"visualeditor-ca-editsource-section": "ticpatlaz mēyalli",
 	"visualeditor-toolbar-cite-label": "Titlahtolcuepaz"
 }

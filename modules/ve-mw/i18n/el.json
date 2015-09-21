@@ -46,7 +46,7 @@
 	"visualeditor-backbutton-tooltip": "Πήγαινε πίσω",
 	"visualeditor-beta-appendix": "Δοκιμαστική έκδοση",
 	"visualeditor-beta-label": "Δοκιμαστική έκδοση",
-	"visualeditor-beta-warning": "Αυτός ο επεξεργαστής είναι σε δοκιμαστική έκδοση (beta). Για να επιστρέψετε στην επεξεργασία κώδικα οποιαδήποτε στιγμή χωρίς να χάσετε τις αλλαγές σας, ανοίξτε το πτυσσόμενο μενού δίπλα από το \"{{int:visualeditor-toolbar-savedialog}}\" και επιλέξτε \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Μπορείτε να επιστρέψετε στην επεξεργασία κώδικα οποιαδήποτε στιγμή πατώντας στην καρτέλα \"$1\", χωρίς να χάσετε τις αλλαγές σας. Αν συναντήσετε προβλήματα, παρακαλούμε αναφέρετέ τα παρακάτω.",
 	"visualeditor-browserwarning": "Χρησιμοποιείτε πρόγραμμα περιήγησης που δεν υποστηρίζεται επίσημα από αυτόν τον επεξεργαστή.",
 	"visualeditor-ca-createlocaldescriptionsource": "Προσθήκη τοπικής περιγραφής πηγής",
 	"visualeditor-ca-createsource": "Δημιουργία πηγαίου κώδικα",
