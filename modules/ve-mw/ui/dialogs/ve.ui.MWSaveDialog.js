@@ -55,7 +55,7 @@ ve.ui.MWSaveDialog.static.actions = [
 	{
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resume-editing' ),
 		flags: [ 'safe', 'back' ],
-		modes: [ 'save', 'conflict' ]
+		modes: [ 'save', 'review', 'conflict' ]
 	},
 	{
 		action: 'review',
@@ -149,14 +149,13 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	var currentEditSummaryWikitext,
+		size = 'medium',
 		dialog = this,
 		panelObj = dialog[ panel + 'Panel' ];
 
 	if ( ( [ 'save', 'review', 'conflict', 'nochanges' ].indexOf( panel ) ) === -1 ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
-
-	this.setSize( 'medium' );
 
 	// Update the window title
 	// The following messages can be used here:
@@ -168,6 +167,10 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
 	this.actions.setAbilities( { save: true } );
+
+	// On panels without inputs, ensure the dialog is focused so events
+	// are captured, e.g. 'Esc' to close
+	this.$content[ 0 ].focus();
 
 	switch ( panel ) {
 		case 'save':
@@ -183,7 +186,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 				.setMode( 'conflict' );
 			break;
 		case 'review':
-			this.setSize( 'larger' );
+			size = 'larger';
 			currentEditSummaryWikitext = this.editSummaryInput.getValue();
 			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 				if ( this.editSummaryXhr ) {
@@ -224,7 +227,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	// Show the target panel
 	this.panels.setItem( panelObj );
-	this.updateSize();
+	this.setSize( size );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
 
