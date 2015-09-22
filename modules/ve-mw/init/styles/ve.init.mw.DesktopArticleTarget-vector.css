@@ -41,6 +41,11 @@
 	font-size: 0.8em;
 }
 
+.ve-init-target .firstHeading {
+	/* Restore 1.8em font size of page title */
+	font-size: 2.25em; /* 1.8/0.8 */
+}
+
 .ve-init-target .mw-body-content,
 .ve-ui-overlay-global .mw-body-content {
 	/* Match skin's font-size for the surface content */
