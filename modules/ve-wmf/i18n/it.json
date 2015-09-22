@@ -33,6 +33,8 @@
 	"visualeditor-help-label": "Leggi la guida utente",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guida per l'utilizzo dell'editor",
+	"visualeditor-welcomedialog-action": "Inizia a modificare",
 	"visualeditor-welcomedialog-content": "Ognuno può contribuire, e ogni miglioramento è di aiuto.",
-	"visualeditor-welcomedialog-content-thanks": "Grazie per aiutare il mondo a scoprire sempre più cose!"
+	"visualeditor-welcomedialog-content-thanks": "Grazie per aiutare il mondo a scoprire sempre più cose!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Benvenuto}} a $2"
 }

@@ -19,7 +19,7 @@
 	"visualeditor-backbutton-tooltip": "Pojdi nazaj",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Ta editor je v 'beta' razvoju. Da kadarkoli preklopite v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-tool}}«.",
+	"visualeditor-beta-warning": "V urejevalnik wikikode lahko preklopite kadar koli s klikom na zavihek »$1«; pri tem boste ohranili spremembe, ki ste jih naredili. Če naletite na kakršne koli težave, jih sporočite spodaj.",
 	"visualeditor-browserwarning": "Uporabljate brskalnik, ki ga ta editor uradno ne podpira.",
 	"visualeditor-ca-createlocaldescriptionsource": "Dodaj vir lokalnega opisa",
 	"visualeditor-ca-createsource": "Ustvari kodo",

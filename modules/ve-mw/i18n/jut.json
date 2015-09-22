@@ -4,5 +4,10 @@
 			"Jyllanj"
 		]
 	},
-	"visualeditor-ca-editsource-section": "redigiir wikikode"
+	"tooltip-ca-ve-edit": "Redigiir siden",
+	"visualeditor-ca-createlocaldescriptionsource": "Tilfye lokal beskriiwels mä wikitekst",
+	"visualeditor-ca-createsource": "Oprett tjelj",
+	"visualeditor-ca-editsource": "Redigiir teljtekst",
+	"visualeditor-ca-editsource-section": "redigiir wikikode",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }

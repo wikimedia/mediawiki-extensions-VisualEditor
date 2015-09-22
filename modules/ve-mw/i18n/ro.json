@@ -31,7 +31,7 @@
 	"visualeditor-backbutton-tooltip": "Înapoi",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Acest editor este în stadiul „beta”. Pentru a comuta în orice moment la editarea codului sursă fără a pierde modificările, deschideți meniul de lângă „{{int:visualeditor-toolbar-savedialog}}” și selectați „{{int:visualeditor-mweditmodesource-tool}}”.",
+	"visualeditor-beta-warning": "Puteți comuta la editorul de text wiki în orice moment făcând clic pe fila „$1”, fără a pierde modificările. Dacă întâmpinați vreo problemă, raportați-o mai jos.",
 	"visualeditor-browserwarning": "Folosiți un navigator care nu este oficial acceptat de acest editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Adăugare sursă descriere locală",
 	"visualeditor-ca-createsource": "Creare sursă",
