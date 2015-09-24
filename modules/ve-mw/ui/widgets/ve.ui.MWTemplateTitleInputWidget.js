@@ -83,7 +83,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					titles.push( newPages[ index ].title );
 				}
 
-				response.query.pages = newPages;
+				ve.setProp( response, 'query', 'pages', newPages );
 				originalResponse = response; // lie!
 
 				// Also get descriptions
