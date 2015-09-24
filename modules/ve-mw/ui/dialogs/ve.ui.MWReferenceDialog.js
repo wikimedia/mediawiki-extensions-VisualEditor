@@ -273,7 +273,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 
 	group = this.getFragment().getDocument().getInternalList()
 		.getNodeGroup( this.referenceModel.getListGroup() );
-	if ( group && group.keyedNodes[ this.referenceModel.getListKey() ].length > 1 ) {
+	if ( ve.getProp( group, 'keyedNodes', this.referenceModel.getListKey(), 'length' ) > 1 ) {
 		this.$reuseWarning.removeClass( 'oo-ui-element-hidden' );
 		this.$reuseWarningText.text( mw.msg(
 			'visualeditor-dialog-reference-editing-reused',
