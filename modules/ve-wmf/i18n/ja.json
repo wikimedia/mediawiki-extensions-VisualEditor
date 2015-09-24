@@ -24,5 +24,5 @@
 	"visualeditor-help-title": "エディターの使用法についてのガイド",
 	"visualeditor-welcomedialog-action": "編集の開始",
 	"visualeditor-welcomedialog-content": "誰でも編集できて、すべての改善が助ける。",
-	"visualeditor-welcomedialog-title": "ようこそ$2へ"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|ようこそ}}$2へ"
 }
