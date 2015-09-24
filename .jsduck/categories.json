@@ -132,6 +132,7 @@
 					"ve.ui.*Action",
 					"ve.ui.*Command",
 					"ve.ui.*ContextItem",
+					"ve.ui.*Element",
 					"ve.ui.*Factory",
 					"ve.ui.*Page",
 					"ve.ui.*Registry",
