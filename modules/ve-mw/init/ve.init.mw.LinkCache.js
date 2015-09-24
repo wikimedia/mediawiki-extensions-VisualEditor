@@ -85,8 +85,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
 			if ( data.redirect ) {
 				$element.addClass( 'mw-redirect' );
 			}
-			// Should be provided by the Disambiguator extension, but no one has yet written a suitably
-			// performant patch to do it. It is instead implemented in JavaScript in on-wiki gadgets.
+			// Provided by the Disambiguator extension, no styles by default.
 			if ( data.disambiguation ) {
 				$element.addClass( 'mw-disambig' );
 			}
