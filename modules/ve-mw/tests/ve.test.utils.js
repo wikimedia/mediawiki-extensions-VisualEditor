@@ -75,3 +75,30 @@ ve.test.utils.mwEnvironment = ( function () {
 		teardown: teardownOverrides
 	} );
 } )();
+
+( function () {
+	var getDomElementSummaryCore = ve.getDomElementSummary;
+
+	/**
+	 * Override getDomElementSummary to extract HTML from data-mw/body.html
+	 * and make it comparable.
+	 *
+	 * @method
+	 * @inheritdoc ve#getDomElementSummary
+	 */
+	ve.getDomElementSummary = function ( element, includeHtml ) {
+		// "Parent" method
+		return getDomElementSummaryCore( element, includeHtml, function ( name, value ) {
+			var obj, html;
+			if ( name === 'data-mw' ) {
+				obj = JSON.parse( value );
+				html = ve.getProp( obj, 'body', 'html' );
+				if ( html ) {
+					obj.body.html = ve.getDomElementSummary( $( '<div>' ).html( html )[ 0 ] );
+				}
+				return obj;
+			}
+			return value;
+		} );
+	};
+} )();
