@@ -46,14 +46,9 @@ ve.ui.MWLinkAnnotationInspector.static.actions = ve.ui.MWLinkAnnotationInspector
  * @inheritdoc
  */
 ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
-	var overlay = this.manager.getOverlay();
-
 	// Properties
 	this.allowProtocolInInternal = false;
-	this.internalAnnotationInput = new ve.ui.MWInternalLinkAnnotationWidget( {
-		// Sub-classes may want to know where to position overlays
-		$overlay: overlay ? overlay.$element : this.$frame
-	} );
+	this.internalAnnotationInput = new ve.ui.MWInternalLinkAnnotationWidget();
 	this.externalAnnotationInput = new ve.ui.MWExternalLinkAnnotationWidget();
 
 	this.linkTypeSelect = new OO.ui.TabSelectWidget( {
@@ -76,6 +71,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.linkTypeSelect.connect( this, { select: 'onLinkTypeSelectSelect' } );
 	this.internalAnnotationInput.connect( this, { change: 'onInternalLinkChange' } );
 	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
+
+	this.internalAnnotationInput.input.results.connect( this, {
+		add: 'onInternalLinkChangeResultsChange'
+		// Listening to remove causes a flicker, and is not required
+		// as 'add' is always trigger on a change too
+	} );
 
 	// Parent method
 	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
@@ -126,6 +127,16 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 		this.linkTypeSelect.selectItemByData( 'external' );
 	}
 	this.updateActions();
+};
+
+/**
+ * Handle list change events ('add') from the interal link's result widget
+ *
+ * @param {OO.ui.OptionWidget[]} items Added items
+ * @param {number} index Index of insertion point
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChangeResultsChange = function () {
+	this.updateSize();
 };
 
 /**
@@ -186,16 +197,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
-		}, this );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWLinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
-	return ve.ui.MWLinkAnnotationInspector.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
-			this.internalAnnotationInput.getTextInputWidget().populateLookupMenu();
 		}, this );
 };
 
@@ -263,6 +264,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 	this.annotationInput = this.createAnnotationInput();
 	this.form.$element.append( this.annotationInput.$element );
 
+	this.updateSize();
+
 	// If the user manually switches to internal links with an external link in the input, remember this
 	if ( !isExternal && inputHasProtocol ) {
 		this.allowProtocolInInternal = true;
@@ -271,10 +274,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 	this.annotationInput.getTextInputWidget().setValue( text ).focus();
 	// Firefox moves the cursor to the beginning
 	this.annotationInput.getTextInputWidget().$input[ 0 ].setSelectionRange( end, end );
-
-	if ( !isExternal ) {
-		this.annotationInput.getTextInputWidget().populateLookupMenu();
-	}
 
 	this.updateActions();
 };
