@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dinkawiki"
+			"Dinkawiki",
+			"Amire80"
 		]
 	},
 	"tooltip-ca-ve-edit": "Cok abakë-yic",
 	"visualeditor-ca-createsource": "Cak tënëyök",
 	"visualeditor-ca-editsource": "Cok tënëyökic",
 	"visualeditor-ca-editsource-section": "cok tënëyökic",
-	"visualeditor-descriptionpagelink": "Kalooi:Dugärënyin"
+	"visualeditor-descriptionpagelink": "Project:Dugärënyin"
 }

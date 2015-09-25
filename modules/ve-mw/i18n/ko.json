@@ -18,7 +18,8 @@
 			"Infinity",
 			"SeoJeongHo",
 			"Alex00728",
-			"콩가루"
+			"콩가루",
+			"Hwangjy9"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid 서비스에서 문서를 위해 HTML5를 반환합니다.",
@@ -197,6 +198,7 @@
 	"visualeditor-editnotices-tooltip": "편집 알림",
 	"visualeditor-editsummary": "바꾼 내용 설명",
 	"visualeditor-editsummary-bytes-remaining": "남은 바이트 수",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "문서 제목",
 	"visualeditor-formatdropdown-format-mw-heading2": "문단 제목",
 	"visualeditor-formatdropdown-format-mw-heading3": "1단계 하위 문단 제목",
@@ -214,6 +216,9 @@
 	"visualeditor-loadwarning": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1 다시 시도하겠습니까?",
 	"visualeditor-loadwarning-token": "서버에서 편집 토큰을 불러오는 중 오류가 났습니다: $1. 다시 시도하겠습니까?",
 	"visualeditor-mainnamespacepagelink": "Project:표준 이름공간",
+	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN 링크",
+	"visualeditor-magiclinknodeinspector-title-pmid": "PMID 링크",
+	"visualeditor-magiclinknodeinspector-title-rfc": "RFC 링크",
 	"visualeditor-media-input-placeholder": "미디어 검색",
 	"visualeditor-meta-tool": "선택 사항",
 	"visualeditor-mweditmodesource-title": "원본 편집으로 전환하겠습니까?",

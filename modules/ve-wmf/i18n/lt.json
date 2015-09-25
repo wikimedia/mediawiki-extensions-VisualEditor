@@ -4,7 +4,8 @@
 			"Audriusa",
 			"Eitvys200",
 			"Hugo.arg",
-			"Albertas"
+			"Albertas",
+			"Zygimantus"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -18,7 +19,7 @@
 	"visualeditor-help-label": "Skaityti vartotojo vadovą",
 	"visualeditor-help-title": "Instrukcijos kaip naudotis redaktoriumi",
 	"visualeditor-welcomedialog-action": "Pradėti redagavimą",
-	"visualeditor-welcomedialog-content": "Bet kas gali redaguoti ir kiekvienas pagerinimas padeda.",
+	"visualeditor-welcomedialog-content": "Kiekvienas gali redaguoti ir kiekvienas patobulinimas padeda.",
 	"visualeditor-welcomedialog-content-thanks": "Dėkojame, kad padedate pasauliui atrasti daugiau!",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Sveiki atvykę}} į $2"
 }
