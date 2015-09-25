@@ -79,7 +79,7 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
-    screenshot (0.0.6)
+    screenshot (0.0.7)
       chunky_png (~> 1.3.3)
     selenium-webdriver (2.47.1)
       childprocess (~> 0.5)
@@ -103,4 +103,4 @@ DEPENDENCIES
   commons_upload (~> 0.0.4)
   mediawiki_selenium (~> 1.5.0)
   rubocop
-  screenshot (~> 0.0.6)
+  screenshot (~> 0.0.7)
