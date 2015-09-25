@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global EasyDeflate */
+/*global EasyDeflate, alert */
 
 /**
  * Initialization MediaWiki target.
@@ -653,8 +653,14 @@ ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
  * @param {string} diffHtml Diff HTML
  * @fires showChanges
  */
-ve.init.mw.Target.prototype.showChangesDiff = function () {
+ve.init.mw.Target.prototype.showChangesDiff = function ( diffHtml ) {
 	this.emit( 'showChanges' );
+
+	// Invalidate the viewer diff on next change
+	this.getSurface().getModel().getDocument().once( 'transact',
+		this.saveDialog.clearDiff.bind( this.saveDialog )
+	);
+	this.saveDialog.setDiffAndReview( diffHtml );
 };
 
 /**
@@ -667,9 +673,12 @@ ve.init.mw.Target.prototype.showChangesDiff = function () {
  * @param {Mixed} error HTTP status text
  * @fires showChangesError
  */
-ve.init.mw.Target.prototype.showChangesFail = function () {
+ve.init.mw.Target.prototype.showChangesFail = function ( jqXHR, status ) {
 	this.diffing = false;
 	this.emit( 'showChangesError' );
+
+	alert( ve.msg( 'visualeditor-differror', status ) );
+	this.saveDialog.popPending();
 };
 
 /**
@@ -871,6 +880,8 @@ ve.init.mw.Target.prototype.saveErrorPageDeleted = function () {
  */
 ve.init.mw.Target.prototype.editConflict = function () {
 	this.emit( 'editConflict' );
+	this.saveDialog.popPending();
+	this.saveDialog.swapPanel( 'conflict' );
 };
 
 /**
@@ -881,6 +892,9 @@ ve.init.mw.Target.prototype.editConflict = function () {
  */
 ve.init.mw.Target.prototype.noChanges = function () {
 	this.emit( 'noChanges' );
+	this.saveDialog.popPending();
+	this.saveDialog.swapPanel( 'nochanges' );
+	this.saveDialog.getActions().setAbilities( { approve: true } );
 };
 
 /**

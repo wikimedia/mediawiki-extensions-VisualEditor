@@ -723,31 +723,6 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.showChangesDiff.apply( this, arguments );
-
-	// Invalidate the viewer diff on next change
-	this.getSurface().getModel().getDocument().once( 'transact',
-		this.saveDialog.clearDiff.bind( this.saveDialog )
-	);
-	this.saveDialog.setDiffAndReview( diffHtml );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.showChangesFail = function ( jqXHR, status ) {
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.showChangesFail.apply( this, arguments );
-
-	alert( ve.msg( 'visualeditor-differror', status ) );
-	this.saveDialog.popPending();
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, status ) {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.serializeFail.apply( this, arguments );
@@ -761,23 +736,6 @@ ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, stat
 	if ( this.saveDialog ) {
 		this.saveDialog.popPending();
 	}
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.editConflict = function () {
-	this.saveDialog.popPending();
-	this.saveDialog.swapPanel( 'conflict' );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.noChanges = function () {
-	this.saveDialog.popPending();
-	this.saveDialog.swapPanel( 'nochanges' );
-	this.saveDialog.getActions().setAbilities( { approve: true } );
 };
 
 /**

@@ -29,10 +29,6 @@ ve.ui.MWMobileSaveDialog = function VeUiMwMobileSaveDialog( config ) {
 
 OO.inheritClass( ve.ui.MWMobileSaveDialog, ve.ui.MWSaveDialog );
 
-/* Static Properties */
-
-ve.ui.MWMobileSaveDialog.static.actions = ve.ui.MWMobileSaveDialog.static.actions.slice( 0, 2 );
-
 /* Methods */
 ve.ui.MWMobileSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMobileSaveDialog.super.prototype.getSetupProcess.call( this, data )

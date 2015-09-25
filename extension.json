@@ -321,7 +321,6 @@
 				"lastmodifiedat",
 				"parentheses",
 				"redirectpagesub",
-				"summary-preview",
 				"visualeditor-loadwarning",
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
@@ -1060,6 +1059,7 @@
 				"colon-separator",
 				"fancycaptcha-edit",
 				"fancycaptcha-reload-text",
+				"summary-preview",
 				"questycaptcha-edit"
 			],
 			"targets": [
