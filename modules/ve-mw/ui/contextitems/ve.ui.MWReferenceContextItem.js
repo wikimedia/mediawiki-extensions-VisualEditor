@@ -51,7 +51,7 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 	var refModel;
 	if ( this.model.isEditable() ) {
 		refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model );
-		this.view = new ve.ui.PreviewWidget(
+		this.view = new ve.ui.PreviewElement(
 			refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
 		);
 

@@ -151,7 +151,7 @@ ve.ui.MWReferenceSearchWidget.prototype.buildIndex = function () {
 			// Only increment counter for real references
 			n++;
 			refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( refNode );
-			view = new ve.ui.PreviewWidget(
+			view = new ve.ui.PreviewElement(
 				refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
 			);
 
