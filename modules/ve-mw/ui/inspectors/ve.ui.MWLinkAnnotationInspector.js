@@ -114,7 +114,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 			htmlDoc
 		);
 		if ( targetData.isInternal ) {
-			this.internalAnnotationInput.text.setValue( targetData.title );
+			this.internalAnnotationInput.getTextInputWidget().setValue( targetData.title );
 			return;
 		}
 	}
@@ -195,7 +195,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWLinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			this.internalAnnotationInput.text.populateLookupMenu();
+			this.internalAnnotationInput.getTextInputWidget().populateLookupMenu();
 		}, this );
 };
 
@@ -253,7 +253,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
  * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
-	var text = this.annotationInput.text.getValue(),
+	var text = this.annotationInput.getTextInputWidget().getValue(),
 		end = text.length,
 		isExternal = this.isExternal(),
 		inputHasProtocol = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( text );
@@ -268,12 +268,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 		this.allowProtocolInInternal = true;
 	}
 
-	this.annotationInput.text.setValue( text ).focus();
+	this.annotationInput.getTextInputWidget().setValue( text ).focus();
 	// Firefox moves the cursor to the beginning
-	this.annotationInput.text.$input[ 0 ].setSelectionRange( end, end );
+	this.annotationInput.getTextInputWidget().$input[ 0 ].setSelectionRange( end, end );
 
 	if ( !isExternal ) {
-		this.annotationInput.text.populateLookupMenu();
+		this.annotationInput.getTextInputWidget().populateLookupMenu();
 	}
 };
 
