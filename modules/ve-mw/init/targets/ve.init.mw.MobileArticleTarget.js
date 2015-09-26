@@ -93,6 +93,10 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
 	} );
 	this[ surfaceModel.getSelection().isNull() ? 'onSurfaceBlur' : 'onSurfaceFocus' ]();
 
+	if ( ve.init.platform.constructor.static.isIos() ) {
+		this.getSurface().$element.css( 'padding-bottom', this.$element.height() - this.getToolbar().$element.height() );
+	}
+
 	this.events.trackActivationComplete();
 };
 
