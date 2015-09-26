@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Euriditi",
-			"Amire80"
+			"Amire80",
+			"Kosovastar"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
@@ -13,6 +14,6 @@
 	"tag-visualeditor-switched-description": "Përdoruesi ka filluar editimin me VisualEditor pastai ka ndryshuar në wikitest editor.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Komente",
 	"visualeditor-feedback-tool": "Lër një koment",
-	"visualeditor-help-label": "Lexo guidën e përdoruesit",
+	"visualeditor-help-label": "Lexoni udhëzuesin e përdoruesit",
 	"visualeditor-help-title": "Lexo guidën e përdoruesit për të mësuar se si të përdorni redaktorin"
 }
