@@ -9,17 +9,6 @@
  */
 
 class VisualEditorHooks {
-	public static function onSetup() {
-		// This prevents VisualEditor from being run in environments that don't
-		// have the dependent code in core; this should be updated as a part of
-		// when additional dependencies are created and pushed into MediaWiki's
-		// core. The most direct effect of this is to avoid confusing any third
-		// parties who attempt to install VisualEditor onto non-alpha wikis, as
-		// this should have no impact on deploying to Wikimedia's wiki cluster;
-		// is fine for release tarballs because 1.22wmf11 < 1.22alpha < 1.22.0.
-		wfUseMW( '1.26wmf21' );
-	}
-
 	/**
 	 * Initialise the 'VisualEditorAvailableNamespaces' setting, and add content
 	 * namespaces to it. This will run after LocalSettings.php is processed.

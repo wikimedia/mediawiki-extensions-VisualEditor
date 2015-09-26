@@ -21,6 +21,9 @@
 	"descriptionmsg": "visualeditor-desc",
 	"license-name": "MIT",
 	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.26.0"
+	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
 		"VisualEditorPreferenceModules": {
@@ -1605,9 +1608,6 @@
 		"visualeditor-enable-language": 0,
 		"visualeditor-hidebetawelcome": 0
 	},
-	"ExtensionFunctions": [
-		"VisualEditorHooks::onSetup"
-	],
 	"AutoloadClasses": {
 		"ApiVisualEditor": "ApiVisualEditor.php",
 		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
