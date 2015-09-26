@@ -9,7 +9,7 @@ QUnit.module( 've.ui.MWLinkAction' );
 
 /* Tests */
 
-function runMWAutolinkTest( assert, html, method, range, expectedRange, expectedData, expectedOriginalData, msg ) {
+function runMWAutolinkTest( assert, html, method, range, expectedRange, expectedRangeAfterUndo, expectedData, expectedOriginalData, msg ) {
 	var status, actualData,
 		expectFail = /^Don't/.test( msg ),
 		surface = ve.test.utils.createModelOnlySurfaceFromHtml( html || ve.dm.example.html ),
@@ -38,7 +38,7 @@ function runMWAutolinkTest( assert, html, method, range, expectedRange, expected
 	}
 
 	assert.equalLinearData( surface.getModel().getDocument().getFullData(), originalData, msg + ' (undo): data models match' );
-	assert.equalRange( surface.getModel().getSelection().getRange(), expectedRange, msg + ' (undo): ranges match' );
+	assert.equalRange( surface.getModel().getSelection().getRange(), expectedRangeAfterUndo || expectedRange, msg + ' (undo): ranges match' );
 }
 
 QUnit.test( 'MW autolink', function ( assert ) {
@@ -63,13 +63,17 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				html: '<p>RFC 1234 xyz</p>',
 				range: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 10, 10 ),
-				expectedData: function ( data, makeAnnotation ) {
-					var i,
-						a = makeAnnotation( '//tools.ietf.org/html/rfc1234' );
-					for ( i = 1; i < 9; i++ ) {
-						data[ i ] = [ data[ i ], [ a ] ];
-					}
+				expectedRange: new ve.Range( 4, 4 ),
+				expectedRangeAfterUndo: new ve.Range( 10, 10 ),
+				expectedData: function ( data /*, makeAnnotation */ ) {
+					data.splice( 1, 8, {
+						type: 'link/mwMagic',
+						attributes: {
+							content: 'RFC 1234'
+						}
+					}, {
+						type: '/link/mwMagic'
+					} );
 				}
 			},
 			{
@@ -87,13 +91,17 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				html: '<p>PMID 1234 xyz</p>',
 				range: new ve.Range( 1, 11 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 11, 11 ),
-				expectedData: function ( data, makeAnnotation ) {
-					var i,
-						a = makeAnnotation( '//www.ncbi.nlm.nih.gov/pubmed/1234?dopt=Abstract' );
-					for ( i = 1; i < 10; i++ ) {
-						data[ i ] = [ data[ i ], [ a ] ];
-					}
+				expectedRange: new ve.Range( 4, 4 ),
+				expectedRangeAfterUndo: new ve.Range( 11, 11 ),
+				expectedData: function ( data /*, makeAnnotation */ ) {
+					data.splice( 1, 9, {
+						type: 'link/mwMagic',
+						attributes: {
+							content: 'PMID 1234'
+						}
+					}, {
+						type: '/link/mwMagic'
+					} );
 				}
 			},
 			{
@@ -111,14 +119,17 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				html: '<p>ISBN 978-0596517748 xyz</p>',
 				range: new ve.Range( 1, 21 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 21, 21 ),
-				expectedData: function ( data, makeAnnotation ) {
-					var i,
-						conf = mw.config.get( 'wgVisualEditorConfig' ),
-						a = makeAnnotation( './' + conf.specialBooksources + '/9780596517748' );
-					for ( i = 1; i < 20; i++ ) {
-						data[ i ] = [ data[ i ], [ a ] ];
-					}
+				expectedRange: new ve.Range( 4, 4 ),
+				expectedRangeAfterUndo: new ve.Range( 21, 21 ),
+				expectedData: function ( data /*, makeAnnotation */ ) {
+					data.splice( 1, 19, {
+						type: 'link/mwMagic',
+						attributes: {
+							content: 'ISBN 978-0596517748'
+						}
+					}, {
+						type: '/link/mwMagic'
+					} );
 				}
 			},
 			{
@@ -135,6 +146,6 @@ QUnit.test( 'MW autolink', function ( assert ) {
 
 	QUnit.expect( cases.length * 5 );
 	for ( i = 0; i < cases.length; i++ ) {
-		runMWAutolinkTest( assert, cases[ i ].html, cases[ i ].method, cases[ i ].range, cases[ i ].expectedRange, cases[ i ].expectedData, cases[ i ].expectedOriginalData, cases[ i ].msg );
+		runMWAutolinkTest( assert, cases[ i ].html, cases[ i ].method, cases[ i ].range, cases[ i ].expectedRange, cases[ i ].expectedRangeAfterUndo, cases[ i ].expectedData, cases[ i ].expectedOriginalData, cases[ i ].msg );
 	}
 } );
