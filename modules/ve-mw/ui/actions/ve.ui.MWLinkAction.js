@@ -149,5 +149,5 @@ ve.ui.sequenceRegistry.register(
 	// link in #autolinkMagicLink above.
 	// The trailing \S* covers any trailing punctuation, which will be
 	// stripped before validating the link.
-	new ve.ui.Sequence( 'autolinkMagicLink', 'autolinkMagicLink', /\b(RFC|PMID|ISBN)\s+[0-9]([- 0-9]*[0-9Xx])?\S*(\s|\n\n)$/, 0, true )
+	new ve.ui.Sequence( 'autolinkMagicLink', 'autolinkMagicLink', /\b(RFC|PMID|ISBN)\s+[0-9]([- 0-9]*[0-9Xx])?\S*(\s|\n+)$/, 0, true )
 );
