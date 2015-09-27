@@ -275,6 +275,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
 	if ( !isExternal ) {
 		this.annotationInput.getTextInputWidget().populateLookupMenu();
 	}
+
+	this.updateActions();
 };
 
 /**
