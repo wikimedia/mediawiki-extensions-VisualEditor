@@ -14,7 +14,11 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелни уређивач: Искључен]]",
 	"tag-visualeditor-switched-description": "Уређивање почето Визуелним уређивачем па пређено на изворно уређивање",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
-	"visualeditor-feedback-tool": "Оставите повратну информацију о овом софтверу",
+	"visualeditor-feedback-tool": "Оставите повратну информацију",
 	"visualeditor-help-label": "Прочитајте кориснички водич",
-	"visualeditor-help-title": "Водич за употребу уређивача"
+	"visualeditor-help-title": "Водич за употребу уређивача",
+	"visualeditor-welcomedialog-action": "Почни уређивање",
+	"visualeditor-welcomedialog-content": "Сви могу да уређују и свако унапређење помаже.",
+	"visualeditor-welcomedialog-content-thanks": "Пуно Вам хвала!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на $2"
 }

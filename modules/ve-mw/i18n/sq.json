@@ -10,7 +10,8 @@
 			"GretaDoci",
 			"Techlik",
 			"Liridon",
-			"Ammartivari"
+			"Ammartivari",
+			"Kosovastar"
 		]
 	},
 	"apihelp-visualeditor-description": "Kthen një faqe HTML5 prej një shërbimi Parsoid.",
@@ -117,7 +118,7 @@
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Çaktivizo linçet redaktuese të gjdo titulli në këtë faqe.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Çaktivizoni galerinë",
 	"visualeditor-dialog-meta-settings-redirect-label": "Ridrejto këtë faqe në",
-	"visualeditor-dialog-meta-settings-redirect-placeholder": "Caktoje faqen per ridrejtim",
+	"visualeditor-dialog-meta-settings-redirect-placeholder": "Faqe objektiv për ridrejtim",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Mos lejo që të rifreskohet ridrejtimi pasi faqja të jetë lëvizur",
 	"visualeditor-dialog-meta-settings-section": "Konfigurimet e faqes",
 	"visualeditor-dialog-meta-settings-toc-default": "Nëse është e nevojshme",

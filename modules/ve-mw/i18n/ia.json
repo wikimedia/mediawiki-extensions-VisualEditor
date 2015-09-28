@@ -4,6 +4,9 @@
 			"McDutchie"
 		]
 	},
+	"apihelp-visualeditor-param-oldid": "Le numero del version a usar (predefinite le ultime version).",
+	"apihelp-visualeditor-param-paction": "Action a exequer.",
+	"apihelp-visualeditor-param-page": "Le pagina sur le qual exequer actiones.",
 	"tooltip-ca-createsource": "Crear le codice fonte de iste pagina",
 	"tooltip-ca-editsource": "Modificar le codice fonte de iste pagina",
 	"tooltip-ca-ve-edit": "Modificar iste pagina",
