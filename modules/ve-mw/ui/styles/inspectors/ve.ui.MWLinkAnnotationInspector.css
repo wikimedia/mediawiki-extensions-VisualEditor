@@ -8,3 +8,23 @@
 .ve-ui-mwLinkAnnotationInspector-linkTypeSelect {
 	margin: -0.75em -0.75em 0.75em -0.75em;
 }
+
+.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget {
+	position: relative;
+}
+
+.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query {
+	padding: 0;
+	height: auto;
+	border: 0;
+}
+
+.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query .oo-ui-textInputWidget {
+	margin: 0;
+}
+
+.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-results {
+	position: relative;
+	top: 0;
+	padding: 3em 0 0 0;
+}

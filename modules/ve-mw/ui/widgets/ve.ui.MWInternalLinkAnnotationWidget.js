@@ -53,13 +53,19 @@ ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( a
  * @return {OO.ui.TextInputWidget} Text input widget
  */
 ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
-	return new mw.widgets.TitleInputWidget( {
-		$overlay: config.$overlay,
+	return new mw.widgets.TitleSearchWidget( ve.extendObject( {
 		icon: 'search',
 		showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
 		showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
 		cache: ve.init.platform.linkCache
-	} );
+	}, config ) );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWInternalLinkAnnotationWidget.prototype.getTextInputWidget = function () {
+	return this.input.query;
 };
 
 /**
