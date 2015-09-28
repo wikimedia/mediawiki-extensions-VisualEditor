@@ -19,7 +19,7 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage,
-		init, support, targetPromise, enable, tempdisable, userPrefEnabled,
+		init, support, targetPromise, enable, tempdisable, autodisable, userPrefEnabled,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -546,6 +546,7 @@
 	// Cast "0" (T89513)
 	enable = Number( mw.user.options.get( 'visualeditor-enable' ) );
 	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
+	autodisable = Number( mw.user.options.get( 'visualeditor-autodisable' ) );
 
 	userPrefEnabled = (
 		// Allow disabling for anonymous users separately from changing the
@@ -554,7 +555,8 @@
 
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
-		enable && !tempdisable
+		// User has 'visualeditor-autodisable' preference disabled
+		enable && !tempdisable && !autodisable
 	);
 
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,

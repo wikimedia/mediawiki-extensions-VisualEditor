@@ -96,6 +96,7 @@ class VisualEditorHooks {
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
 			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
+			$skin->getUser()->getOption( 'visualeditor-autodisable' ) ||
 			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
 		) {
 			return true;
@@ -246,6 +247,7 @@ class VisualEditorHooks {
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
 			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
+			$skin->getUser()->getOption( 'visualeditor-autodisable' ) ||
 			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
 		) {
 			return true;
@@ -316,7 +318,7 @@ class VisualEditorHooks {
 				->get( 'VisualEditorAvailableNamespaces' );
 			$onNamespaces = array_keys( array_filter( $namespaces ) );
 
-			$preferences['visualeditor-enable'] = array(
+			$enablePreference = array(
 				'type' => 'toggle',
 				'label-message' => array(
 					'visualeditor-preference-enable',
@@ -328,11 +330,18 @@ class VisualEditorHooks {
 				),
 				'section' => 'editing/editor'
 			);
+			if ( $user->getOption( 'visualeditor-autodisable' ) ) {
+				$enablePreference['default'] = false;
+			}
+			$preferences['visualeditor-enable'] = $enablePreference;
 		}
 		$preferences['visualeditor-betatempdisable'] = array(
 			'type' => 'toggle',
 			'label-message' => 'visualeditor-preference-betatempdisable',
 			'section' => 'editing/editor'
+		);
+		$preferences['visualeditor-autodisable'] = array(
+			'type' => 'api'
 		);
 		$preferences['visualeditor-hidebetawelcome'] = array(
 			'type' => 'api'
@@ -367,6 +376,23 @@ class VisualEditorHooks {
 				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			)
 		);
+	}
+
+	/**
+	 * Implements the PreferencesFormPreSave hook, to remove the 'autodisable' flag
+	 * when the user it was set on explicitly enables VE.
+	 * @param array $data User-submitted data
+	 * @param PreferencesForm $form A ContextSource
+	 * @param User $user User with new preferences already set
+	 * @param bool &$result Success or failure
+	 */
+	public static function onPreferencesFormPreSave( $data, $form, $user, &$result ) {
+		if (
+			$user->getOption( 'visualeditor-autodisable' ) &&
+			$user->getOption( 'visualeditor-enable' )
+		) {
+			$user->setOption( 'visualeditor-autodisable', false );
+		}
 	}
 
 	/**
