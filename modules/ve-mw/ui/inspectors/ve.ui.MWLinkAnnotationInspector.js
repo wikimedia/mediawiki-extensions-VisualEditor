@@ -51,26 +51,32 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.internalAnnotationInput = new ve.ui.MWInternalLinkAnnotationWidget();
 	this.externalAnnotationInput = new ve.ui.MWExternalLinkAnnotationWidget();
 
-	this.linkTypeSelect = new OO.ui.TabSelectWidget( {
-		classes: [ 've-ui-mwLinkAnnotationInspector-linkTypeSelect' ],
-		items: [
-			new OO.ui.TabOptionWidget( {
-				data: 'internal',
-				classes: [ 've-test-internal-link-tab' ],
-				label: ve.msg( 'visualeditor-linkinspector-button-link-internal' )
-			} ),
-			new OO.ui.TabOptionWidget( {
-				data: 'external',
-				classes: [ 've-test-external-link-tab' ],
-				label: ve.msg( 'visualeditor-linkinspector-button-link-external' )
-			} )
-		]
+	this.linkTypeIndex = new OO.ui.IndexLayout( {
+		expanded: false
 	} );
 
+	this.linkTypeIndex.addCards( [
+		new OO.ui.CardLayout( 'internal', {
+			label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ),
+			expanded: false,
+			scrollable: false,
+			padded: true
+		} ),
+		new OO.ui.CardLayout( 'external', {
+			label: ve.msg( 'visualeditor-linkinspector-button-link-external' ),
+			expanded: false,
+			scrollable: false,
+			padded: true
+		} )
+	] );
+
 	// Events
-	this.linkTypeSelect.connect( this, { select: 'onLinkTypeSelectSelect' } );
+	this.linkTypeIndex.connect( this, { set: 'onLinkTypeIndexSet' } );
 	this.internalAnnotationInput.connect( this, { change: 'onInternalLinkChange' } );
 	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
+	// Form submit only auto triggers on enter when there is one input
+	this.internalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
+	this.externalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
 
 	this.internalAnnotationInput.input.results.connect( this, {
 		add: 'onInternalLinkChangeResultsChange'
@@ -82,7 +88,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
 
 	// Initialization
-	this.form.$element.prepend( this.linkTypeSelect.$element );
+	// HACK: IndexLayout is absolutely positioned, so place actions inside it
+	this.linkTypeIndex.$content.append( this.$otherActions );
+	this.linkTypeIndex.getCard( 'internal' ).$element.append( this.internalAnnotationInput.$element );
+	this.linkTypeIndex.getCard( 'external' ).$element.append( this.externalAnnotationInput.$element );
+	this.form.$element.append( this.linkTypeIndex.$element );
+	this.onLinkTypeIndexSet();
 };
 
 /**
@@ -91,8 +102,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
  * @return {boolean} Input mode is for external links
  */
 ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
-	var item = this.linkTypeSelect.getSelectedItem();
-	return item && item.getData() === 'external';
+	return this.linkTypeIndex.getCurrentCardName() === 'external';
 };
 
 /**
@@ -124,7 +134,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 		!this.allowProtocolInInternal &&
 		ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href )
 	) {
-		this.linkTypeSelect.selectItemByData( 'external' );
+		this.linkTypeIndex.setCard( 'external' );
 	}
 	this.updateActions();
 };
@@ -193,7 +203,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
 ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			this.linkTypeSelect.selectItemByData(
+			this.linkTypeIndex.setCard(
 				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
@@ -249,20 +259,17 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 };
 
 /**
- * Handle select events from the linkTypeSelect widget
+ * Handle set events from the linkTypeIndex layout
  *
- * @param {OO.ui.MenuOptionWidget} item Selected item
+ * @param {OO.ui.CardLayout} card Current card
  */
-ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeSelectSelect = function () {
+ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	var text = this.annotationInput.getTextInputWidget().getValue(),
 		end = text.length,
 		isExternal = this.isExternal(),
 		inputHasProtocol = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( text );
 
-	this.annotationInput.$element.detach();
-
-	this.annotationInput = this.createAnnotationInput();
-	this.form.$element.append( this.annotationInput.$element );
+	this.annotationInput = isExternal ? this.externalAnnotationInput : this.internalAnnotationInput;
 
 	this.updateSize();
 
