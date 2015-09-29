@@ -150,10 +150,10 @@ OO.inheritClass( ve.ce.MWInlineExtensionNode, ve.ce.MWExtensionNode );
  */
 ve.ce.MWInlineExtensionNode.prototype.onParseSuccess = function ( deferred, response ) {
 	var data = response.visualeditor,
-		contentNodes = $( data.content ).get();
+		contentNodes = $.parseHTML( data.content );
 
-	// Inline nodes will come back in wrapper paragraphs, so unwrap them.
-	if ( contentNodes[ 0 ] && contentNodes[ 0 ].childNodes ) {
+	// Inline nodes may come back in a wrapper paragraph; in that case, unwrap it
+	if ( contentNodes.length === 1 && contentNodes[ 0 ].nodeType === 'P' ) {
 		contentNodes = Array.prototype.slice.apply( contentNodes[ 0 ].childNodes );
 	}
 	deferred.resolve( contentNodes );
