@@ -153,7 +153,7 @@ ve.ce.MWInlineExtensionNode.prototype.onParseSuccess = function ( deferred, resp
 		contentNodes = $.parseHTML( data.content );
 
 	// Inline nodes may come back in a wrapper paragraph; in that case, unwrap it
-	if ( contentNodes.length === 1 && contentNodes[ 0 ].nodeType === 'P' ) {
+	if ( contentNodes.length === 1 && contentNodes[ 0 ].nodeName === 'P' ) {
 		contentNodes = Array.prototype.slice.apply( contentNodes[ 0 ].childNodes );
 	}
 	deferred.resolve( contentNodes );
