@@ -338,7 +338,9 @@ class VisualEditorHooks {
 		$preferences['visualeditor-betatempdisable'] = array(
 			'type' => 'toggle',
 			'label-message' => 'visualeditor-preference-betatempdisable',
-			'section' => 'editing/editor'
+			'section' => 'editing/editor',
+			'default' => $user->getOption( 'visualeditor-betatempdisable' ) ||
+				$user->getOption( 'visualeditor-autodisable' )
 		);
 		$preferences['visualeditor-autodisable'] = array(
 			'type' => 'api'
@@ -387,11 +389,26 @@ class VisualEditorHooks {
 	 * @param bool &$result Success or failure
 	 */
 	public static function onPreferencesFormPreSave( $data, $form, $user, &$result ) {
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		// On a wiki where enable is hidden and set to 1, if user sets betatempdisable=0
+		// then set autodisable=0
+		// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=1
+		// then set autodisable=0
 		if (
 			$user->getOption( 'visualeditor-autodisable' ) &&
-			$user->getOption( 'visualeditor-enable' )
+			$user->getOption( 'visualeditor-enable' ) &&
+			!$user->getOption( 'visualeditor-betatempdisable' )
 		) {
 			$user->setOption( 'visualeditor-autodisable', false );
+		} elseif (
+			// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=0,
+			// then set autodisable=1
+			$veConfig->get( 'VisualEditorTransitionDefault' ) &&
+			!$user->getOption( 'visualeditor-betatempdisable' ) &&
+			!$user->getOption( 'visualeditor-enable' ) &&
+			!$user->getOption( 'visualeditor-autodisable' )
+		) {
+			$user->setOption( 'visualeditor-autodisable', true );
 		}
 	}
 
