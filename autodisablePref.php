@@ -48,13 +48,14 @@ class VEAutodisablePref extends Maintenance {
 			);
 			foreach ( $results as $userRow ) {
 				$user = User::newFromId( $userRow->user_id );
+				$user->load( User::READ_LATEST );
 				$user->setOption( 'visualeditor-autodisable', true );
 				$user->saveSettings();
 				$lastUserId = $userRow->user_id;
 			}
 			$this->output( "Added preference for " . $results->numRows() . " users.\n" );
 			wfWaitForSlaves();
-		} while ( $results->numRows() );
+		} while ( $results->numRows() == $this->mBatchSize );
 		$this->output( "done.\n" );
 	}
 }
