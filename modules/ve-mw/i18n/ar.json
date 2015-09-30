@@ -284,6 +284,7 @@
 	"visualeditor-savedialog-label-review": "راجع تعديلاتك",
 	"visualeditor-savedialog-label-review-good": "ارجع لصندوق الحفظ",
 	"visualeditor-savedialog-label-save": "احفظ الصفحة",
+	"visualeditor-savedialog-label-save-short": "احفظ",
 	"visualeditor-savedialog-label-warning": "تحذير",
 	"visualeditor-savedialog-title-conflict": "تضارب",
 	"visualeditor-savedialog-title-nochanges": "لا تعديلات للمراجعة",
@@ -298,12 +299,14 @@
 	"visualeditor-timeout": "المحرر غير متوفر حاليا. أتود تعديل المصدر مباشرة؟",
 	"visualeditor-toolbar-cite-label": "مرجع",
 	"visualeditor-toolbar-savedialog": "احفظ الصفحة",
+	"visualeditor-toolbar-savedialog-short": "احفظ",
 	"visualeditor-usernamespacepagelink": "Project:نطاق المستخدم",
 	"visualeditor-version-label": "نسخة",
 	"visualeditor-viewpage-savewarning": "هل أنت متأكد من أنك تريد العودة إلى وضع العرض دون الحفظ أولا؟",
 	"visualeditor-viewpage-savewarning-discard": "ألغ التعديلات",
 	"visualeditor-viewpage-savewarning-keep": "واصل التعديل",
 	"visualeditor-viewpage-savewarning-title": "متأكد؟",
+	"visualeditor-wikitext-progress": "جار تحويل نص الويكي",
 	"visualeditor-wikitext-warning": "أنت تستخدم المحرر المرئي، و[[{{MediaWiki:visualeditor-wikitext-warning-link}}|نص الويكي]] لا يعمل هنا. للاحتفاظ بتعديلاتك وإكمال التحرير عن طريق المصدر، افتح المنسدلة بجانب \"{{int:visualeditor-toolbar-savedialog}}\" واختر \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "يوجد نص ويكي"
 }

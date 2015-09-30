@@ -18,7 +18,7 @@
 	"visualeditor-backbutton-tooltip": "Назад",
 	"visualeditor-beta-appendix": "бета",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "Овај уређивач је у „бета“ фази. У сваком тренутку можете да се пребаците на изворно уређивање без губитка измена, отворите падајући мени поред дугмета „{{int:visualeditor-toolbar-savedialog}}“ и изаберите „{{int:visualeditor-mweditmodesource-tool}}“.",
+	"visualeditor-beta-warning": "У сваком тренутку можете да се пребаците на изворно уређивање без губитка измена, кликом на „$1“.",
 	"visualeditor-browserwarning": "Користите веб-прегледач који овај уређивач званично не подржава.",
 	"visualeditor-ca-createlocaldescriptionsource": "Додај локални опис (изворно)",
 	"visualeditor-ca-createsource": "Направи извор",
