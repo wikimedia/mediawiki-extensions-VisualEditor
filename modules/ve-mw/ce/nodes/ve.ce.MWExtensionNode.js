@@ -100,6 +100,9 @@ ve.ce.MWExtensionNode.prototype.afterRender = function () {
 	var node = this,
 		$images = this.$element.find( 'img:not([width]),img:not([height])' );
 
+	// Mixin method
+	ve.ce.GeneratedContentNode.prototype.afterRender.call( this );
+
 	// Images missing a dimension change size after load
 	// TODO: Ignore images which have dimensions defined in CSS, if performant
 	if ( $images.length ) {
@@ -107,9 +110,6 @@ ve.ce.MWExtensionNode.prototype.afterRender = function () {
 			// Mixin method
 			ve.ce.GeneratedContentNode.prototype.afterRender.call( node );
 		} );
-	} else {
-		// Mixin method
-		ve.ce.GeneratedContentNode.prototype.afterRender.call( this );
 	}
 };
 
