@@ -52,7 +52,7 @@ class VEAutodisablePref extends Maintenance {
 				$user->saveSettings();
 				$lastUserId = $userRow->user_id;
 			}
-			$this->output( "Added preference for " . count( $results ) . " users." );
+			$this->output( "Added preference for " . $results->numRows() . " users.\n" );
 			wfWaitForSlaves();
 		} while ( $results->numRows() );
 		$this->output( "done.\n" );
