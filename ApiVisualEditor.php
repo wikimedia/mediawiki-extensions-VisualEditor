@@ -183,7 +183,7 @@ class ApiVisualEditor extends ApiBase {
 			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
 			array(
 				'wikitext' => $wikitext,
-				'bodyOnly' => 1,
+				'body_only' => 1,
 			)
 		);
 	}
