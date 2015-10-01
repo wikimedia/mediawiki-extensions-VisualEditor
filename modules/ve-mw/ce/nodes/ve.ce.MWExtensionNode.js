@@ -52,15 +52,15 @@ ve.ce.MWExtensionNode.static.rendersEmpty = false;
 ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 	var xhr, attr, wikitext,
 		deferred = $.Deferred(),
-		mwData = this.getModel().getAttribute( 'mw' ),
+		mwData = ve.copy( this.getModel().getAttribute( 'mw' ) ),
 		extsrc = config && config.extsrc !== undefined ? config.extsrc : mwData.body.extsrc,
 		attrs = config && config.attrs || mwData.attrs,
 		tagName = this.getModel().getExtensionName();
 
 	// undefined means omit the attribute, not convert it to string 'undefined'
-	for ( attr in mwData.attrs ) {
-		if ( mwData.attrs[ attr ] === undefined ) {
-			delete mwData.attrs[ attr ];
+	for ( attr in attrs ) {
+		if ( attrs[ attr ] === undefined ) {
+			delete attrs[ attr ];
 		}
 	}
 
