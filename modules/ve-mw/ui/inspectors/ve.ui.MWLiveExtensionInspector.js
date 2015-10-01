@@ -76,6 +76,7 @@ ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) 
 ve.ui.MWLiveExtensionInspector.prototype.insertOrUpdateNode = function () {
 	// No need to call parent method as changes have already been made
 	// to the model in staging, just need to apply them.
+	this.updatePreview();
 	this.getFragment().getSurface().applyStaging();
 };
 
