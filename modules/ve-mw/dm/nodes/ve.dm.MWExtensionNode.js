@@ -113,7 +113,7 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 ve.dm.MWExtensionNode.static.getHashObject = function ( dataElement ) {
 	return {
 		type: dataElement.type,
-		mw: dataElement.attributes.mw
+		mw: ve.copy( dataElement.attributes.mw )
 	};
 };
 
