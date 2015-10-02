@@ -78,6 +78,8 @@ ve.ui.MWLiveExtensionInspector.prototype.insertOrUpdateNode = function () {
 	// to the model in staging, just need to apply them.
 	this.updatePreview();
 	this.getFragment().getSurface().applyStaging();
+	// Force the selected node to re-render after staging has finished
+	this.selectedNode.emit( 'update', false );
 };
 
 /**
