@@ -98,7 +98,9 @@ ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response )
 /** */
 ve.ce.MWExtensionNode.prototype.afterRender = function () {
 	var node = this,
-		$images = this.$element.find( 'img:not([width]),img:not([height])' );
+		$images = this.$element
+			.find( 'img:not([width]),img:not([height])' )
+			.addBack( 'img:not([width]),img:not([height])' );
 
 	// Mixin method
 	ve.ce.GeneratedContentNode.prototype.afterRender.call( this );
