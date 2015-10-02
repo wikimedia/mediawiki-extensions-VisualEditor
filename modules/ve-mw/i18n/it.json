@@ -271,7 +271,7 @@
 	"visualeditor-mweditmodesource-warning": "Stai per passare a \"{{int:visualeditor-ca-editsource}}\". Le tue modifiche a questa voce possono essere mantenute, ma non potrai tornare a questo editor senza salvare o ricaricare la pagina. Vuoi continuare?",
 	"visualeditor-mweditmodesource-warning-cancel": "Annulla",
 	"visualeditor-mweditmodesource-warning-switch": "Mantieni modifiche",
-	"visualeditor-mweditmodesource-warning-switch-discard": "Ignorare modifiche",
+	"visualeditor-mweditmodesource-warning-switch-discard": "Ignora modifiche",
 	"visualeditor-mwgalleryinspector-placeholder": "Esempio.jpg|Didascalia dell'immagine",
 	"visualeditor-mwgalleryinspector-title": "Galleria",
 	"visualeditor-pagemenu-tooltip": "Opzioni pagina",
