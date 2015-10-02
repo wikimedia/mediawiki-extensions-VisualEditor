@@ -67,6 +67,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	);
 	this.originalDocumentTitle = document.title;
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
+	this.events = new ve.init.mw.TargetEvents( this );
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-desktopArticleTarget' );

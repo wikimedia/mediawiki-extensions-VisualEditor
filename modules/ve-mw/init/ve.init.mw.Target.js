@@ -50,7 +50,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
 		.extend( { action: 'submit' } );
-	this.events = new ve.init.mw.TargetEvents( this );
+	this.events = { track: $.noop, trackActivationStart: $.noop, trackActivationComplete: $.noop };
 
 	this.preparedCacheKeyPromise = null;
 	this.clearState();
