@@ -27,7 +27,7 @@
    in ve-init-target (sibling of #bodyContent). However, we can't hide it
    completely as subs should remain visible (for persistence with read mode),
    and ve-ui-mwTocWidget is also part of #bodyContent. */
-.ve-active #bodyContent > :not(#siteSub):not(#contentSub):not(.ve-ui-mwTocWidget),
+.ve-active #bodyContent > :not( #siteSub ):not( #contentSub ):not( .ve-ui-mwTocWidget ),
 .ve-activated #t-print,
 .ve-activated #t-permalink,
 .ve-activated #p-coll-print_export,

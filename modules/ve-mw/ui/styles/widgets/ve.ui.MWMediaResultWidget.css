@@ -62,7 +62,7 @@
 
 .ve-ui-mwMediaResultWidget-error .ve-ui-mwMediaResultWidget-thumbnail {
 	/* @embed */
-	background-image: url(images/broken-image.png);
+	background-image: url( images/broken-image.png );
 	background-size: auto;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -78,13 +78,13 @@
 	color: #fff;
 	text-shadow: 1px 1px #000;
 	line-height: 1.125em;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba( 0, 0, 0, 0.5 );
 	text-overflow: ellipsis;
 	text-align: left;
 }
 
 .ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted .ve-ui-mwMediaResultWidget-nameLabel {
-	background-color: rgba(0,0,0,0.75);
+	background-color: rgba( 0, 0, 0, 0.75 );
 }
 
 .ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected .ve-ui-mwMediaResultWidget-nameLabel {

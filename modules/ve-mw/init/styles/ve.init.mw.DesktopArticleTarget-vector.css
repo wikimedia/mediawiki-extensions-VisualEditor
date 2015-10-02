@@ -66,7 +66,7 @@
 
 .ve-ui-debugBar {
 	border-top: 1px solid #ccc;
-	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
 }
 
 .ve-ui-debugBar ol {

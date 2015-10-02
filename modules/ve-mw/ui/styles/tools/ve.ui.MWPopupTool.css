@@ -15,8 +15,8 @@
 	line-height: 1.6em;
 }
 
-.ve-ui-mwNoticesPopupTool-items > div:not(:first-child),
-.ve-ui-mwHelpPopupTool-item:not(:first-child) {
+.ve-ui-mwNoticesPopupTool-items > div:not( :first-child ),
+.ve-ui-mwHelpPopupTool-item:not( :first-child ) {
 	border-top: solid 1px #ddd;
 	padding-top: 0.8em;
 	margin-top: 0.8em;
