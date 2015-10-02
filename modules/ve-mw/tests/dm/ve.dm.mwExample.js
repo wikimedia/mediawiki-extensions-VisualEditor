@@ -150,8 +150,7 @@ ve.dm.mwExample.MWTransclusion.blockData = {
 				}
 			]
 		},
-		originalMw: '{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, world!"}},"i":0}}]}',
-		originalIndex: 0
+		originalMw: '{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, world!"}},"i":0}}]}'
 	}
 };
 ve.dm.mwExample.MWTransclusion.inlineData = {
@@ -175,8 +174,7 @@ ve.dm.mwExample.MWTransclusion.inlineData = {
 				}
 			]
 		},
-		originalMw: '{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"1,234"}},"i":0}}]}',
-		originalIndex: 0
+		originalMw: '{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"1,234"}},"i":0}}]}'
 	}
 };
 ve.dm.mwExample.MWTransclusion.mixedDataOpen = {
@@ -200,8 +198,7 @@ ve.dm.mwExample.MWTransclusion.mixedDataOpen = {
 				}
 			]
 		},
-		originalMw: '{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"5,678"}},"i":0}}]}',
-		originalIndex: 0
+		originalMw: '{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"5,678"}},"i":0}}]}'
 	}
 };
 ve.dm.mwExample.MWTransclusion.mixedDataClose = { type: '/mwTransclusionInline' };
@@ -974,8 +971,7 @@ ve.dm.mwExample.domToDataCases = {
 							}
 						]
 					},
-					originalMw: '{"parts":[{"template":{"target":{"wt":"echo","href":"./Template:Echo"},"params":{"1":{"wt":"foo"}},"i":0}}]}',
-					originalIndex: 0
+					originalMw: '{"parts":[{"template":{"target":{"wt":"echo","href":"./Template:Echo"},"params":{"1":{"wt":"foo"}},"i":0}}]}'
 				}
 			},
 			{ type: '/mwTransclusionBlock' },
@@ -1000,8 +996,7 @@ ve.dm.mwExample.domToDataCases = {
 							}
 						]
 					},
-					originalMw: '{"parts":[{"template":{"target":{"wt":"echo","href":"./Template:Echo"},"params":{"1":{"wt":"foo"}},"i":0}}]}',
-					originalIndex: 0
+					originalMw: '{"parts":[{"template":{"target":{"wt":"echo","href":"./Template:Echo"},"params":{"1":{"wt":"foo"}},"i":0}}]}'
 				}
 			},
 			{ type: '/mwTransclusionBlock' },
@@ -1041,7 +1036,6 @@ ve.dm.mwExample.domToDataCases = {
 							}
 						} ]
 					},
-					originalIndex: 0,
 					originalMw: '{\"parts\":[{\"template\":{\"target\":{\"wt\":\"Template:Echo\",\"href\":\"./Template:Echo\"},\"params\":{\"1\":{\"wt\":\"[[Category:Page]]\\n[[Category:Book]]\"}},\"i\":0}}]}'
 				}
 			},
@@ -1059,7 +1053,6 @@ ve.dm.mwExample.domToDataCases = {
 				type: 'mwTransclusionInline',
 				attributes: {
 					mw: {},
-					originalIndex: 0,
 					originalMw: '{}'
 				},
 				originalDomElements: $( '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}">content</span>' ).toArray()
@@ -1098,7 +1091,6 @@ ve.dm.mwExample.domToDataCases = {
 							extsrc: '\n$foo = bar;\n'
 						}
 					},
-					originalIndex: 0,
 					originalMw: '{"name":"syntaxhighlight","attrs":{"lang":"php"},"body":{"extsrc":"\\n$foo = bar;\\n"}}'
 				},
 				originalDomElements: $( '<div about="#mwt1" data-parsoid="1"></div>' ).toArray()
@@ -1136,7 +1128,6 @@ ve.dm.mwExample.domToDataCases = {
 							extsrc: '\\relative c\' { e d c d e e e }'
 						}
 					},
-					originalIndex: 0,
 					originalMw: '{"name":"score","attrs":{},"body":{"extsrc":"\\\\relative c\' { e d c d e e e }"}}'
 				},
 				originalDomElements: $( '<img src="Foo" width="100" height="20" alt="Bar" about="#mwt1" data-parsoid="1"></img>' ).toArray()

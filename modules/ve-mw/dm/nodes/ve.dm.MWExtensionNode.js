@@ -60,7 +60,7 @@ ve.dm.MWExtensionNode.static.getMatchRdfaTypes = function () {
 };
 
 ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter ) {
-	var dataElement, index,
+	var dataElement,
 		mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 
@@ -72,30 +72,32 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 		}
 	};
 
-	index = this.storeGeneratedContents( dataElement, domElements, converter.getStore() );
-	dataElement.attributes.originalIndex = index;
+	this.storeGeneratedContents( dataElement, domElements, converter.getStore() );
 
 	return dataElement;
 };
 
 ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var el, els,
-		index = converter.getStore().indexOfHash( OO.getHash( [ this.getHashObject( dataElement ), undefined ] ) ),
+	var el, els, index,
+		store = converter.getStore(),
 		originalMw = dataElement.attributes.originalMw;
 
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
 	if (
-		index === dataElement.attributes.originalIndex ||
 		( originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) ) )
 	) {
-		// The object in the store is also used for CE rendering so return a copy
+		// originalDomElements is also used for CE rendering so return a copy
 		els = ve.copyDomElements( dataElement.originalDomElements, doc );
 	} else {
-		if ( converter.isForClipboard() && index !== null ) {
+		if (
+			converter.isForClipboard() &&
+			// Use getHashObjectForRendering to get the rendering from the store
+			( index = store.indexOfHash( OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) !== null
+		) {
 			// For the clipboard use the current DOM contents so the user has something
 			// meaningful to paste into external applications
-			els = ve.copyDomElements( converter.getStore().value( index ), doc );
+			els = ve.copyDomElements( store.value( index ), doc );
 		} else {
 			el = doc.createElement( this.tagName );
 			el.setAttribute( 'typeof', 'mw:Extension/' + this.getExtensionName( dataElement ) );
