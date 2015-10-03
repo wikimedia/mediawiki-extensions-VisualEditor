@@ -183,10 +183,20 @@ OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
 
 /* Methods */
 
+/**
+ * Check if the parameter is empty
+ *
+ * @return {boolean} The parameter is empty
+ */
 ve.ui.MWParameterPage.prototype.isEmpty = function () {
 	return this.valueInput.getValue() === '' && this.defaultValue === '';
 };
 
+/**
+ * Handle change events from the value input
+ *
+ * @param {string} value Value
+ */
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	var value = this.valueInput.getValue();
 
@@ -197,15 +207,26 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	}
 };
 
+/**
+ * Handle click events from the remove button
+ */
 ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
 };
 
+/**
+ * Handle click events from the add button
+ */
 ve.ui.MWParameterPage.prototype.onAddButtonFocus = function () {
 	var template = this.parameter.getTemplate();
 	template.addParameter( new ve.dm.MWParameterModel( template ) );
 };
 
+/**
+ * Handle click events from the label element
+ *
+ * @param {jQuery.Event} e Click event
+ */
 ve.ui.MWParameterPage.prototype.onLabelClick = function () {
 	this.valueInput.simulateLabelClick();
 };
@@ -241,4 +262,11 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
 				);
 		}
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWParameterPage.prototype.focus = function () {
+	this.valueInput.focus();
 };
