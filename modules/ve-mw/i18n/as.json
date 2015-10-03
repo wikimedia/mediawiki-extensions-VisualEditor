@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gitartha.bordoloi",
-			"Dibya Dutta"
+			"Dibya Dutta",
+			"IKHazarika"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "সম্পাদনা সাৰাংশ।",
@@ -12,6 +13,8 @@
 	"tooltip-ca-ve-edit": "এই পৃষ্ঠাখন সম্পাদনা কৰক",
 	"visualeditor-advancedsettings-tool": "উচ্চতৰ ছেটিং",
 	"visualeditor-annotationbutton-linknode-tooltip": "সৰল লিংক",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-isbn": "ISBN সংযোগ",
+	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "PMID সংযোগ",
 	"visualeditor-beta-appendix": "বিটা",
 	"visualeditor-beta-label": "বিটা",
 	"visualeditor-beta-warning": "এই এডিটৰ 'বিটা' অৱস্থাত আছে। আপোনাৰ সালসলনি নেহেৰোৱাকৈ ৱিকিপাঠ্য ৰূপলৈ ঘূৰি যোৱাৰ বাবে \"{{int:visualeditor-toolbar-savedialog}}\"ৰ কাষত থকা ড্ৰপ্‌ডাউন খোলক কৰক আৰু \"{{int:visualeditor-mweditmodesource-tool}}\" বাছনি কৰক।",
