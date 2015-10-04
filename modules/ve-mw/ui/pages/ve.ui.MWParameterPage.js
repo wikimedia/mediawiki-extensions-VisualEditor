@@ -110,7 +110,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.focus( this.onAddButtonFocus.bind( this ) );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
-		.append( this.$info, this.$actions, this.$field, this.$more );
+		.append( this.$info, this.$field, this.$actions, this.$more );
 	this.$description
 		.addClass( 've-ui-mwParameterPage-description' )
 		.append( $( '<p>' ).text( this.spec.getParameterDescription( paramName ) || '' ) );
