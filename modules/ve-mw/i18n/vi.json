@@ -147,7 +147,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Mặc định",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Ẩn",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Hiện",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Bạn có thể bắt trang này phải hiển thị hoặc đàn áp thẻ bên cạnh “$1” để dễ dàng thêm một phần mới.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Bạn có thể bắt trang này phải hiển thị hoặc ẩn thẻ bên cạnh “$1” để dễ dàng thêm một phần mới.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Hiện nút trên trang để thêm phần mới",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Bạn có thể ngăn ngừa nội dung của trang này được chuyển tự.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Không tự động chuyển đổi nội dung giữa các biến thể ngôn ngữ",
