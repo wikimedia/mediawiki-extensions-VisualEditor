@@ -32,6 +32,35 @@ OO.inheritClass( ve.ui.MWLiveExtensionInspector, ve.ui.MWExtensionInspector );
 /**
  * @inheritdoc
  */
+ve.ui.MWLiveExtensionInspector.prototype.initialize = function () {
+	// Parent method
+	ve.ui.MWLiveExtensionInspector.super.prototype.initialize.call( this );
+
+	// Elements for displaying errors
+	this.$generatedContentsErrorContainer = $( '<div>', {
+		'class': 've-ui-mwLiveExtensionInspector-error-container-hidden'
+	} );
+	this.generatedContentsErrorLabel = new OO.ui.LabelWidget( {
+		classes: [
+			've-ui-mwLiveExtensionInspector-error ve-ui-mwLiveExtensionInspector-error-collapsed'
+		]
+	} );
+	this.generatedContentsErrorButton = new OO.ui.ButtonWidget( {
+		framed: false,
+		classes: [ 've-ui-mwLiveExtensionInspector-error-button' ],
+		icon: 'expand'
+	} );
+
+	this.$generatedContentsErrorContainer.append(
+		this.generatedContentsErrorButton.$element,
+		this.generatedContentsErrorLabel.$element
+	);
+	this.form.$element.append( this.$generatedContentsErrorContainer );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLiveExtensionInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
@@ -46,7 +75,8 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 					element,
 					{ type: '/' + element.type }
 				] );
-				// Check if the node was inserted at a structural offset and wrapped in a paragraph
+				// Check if the node was inserted at a structural offset and
+				// wrapped in a paragraph
 				if ( this.getFragment().getSelection().getRange().getLength() === 4 ) {
 					this.fragment = this.getFragment().adjustLinearSelection( 1, -1 );
 				}
@@ -54,6 +84,9 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 				this.selectedNode = this.getFragment().getSelectedNode();
 			}
 			this.input.on( 'change', this.onChangeHandler );
+			this.selectedNode.connect( this, {
+				generatedContentsError: this.renderGeneratedContentsError
+			} );
 		}, this );
 };
 
@@ -63,7 +96,9 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWLiveExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
+			this.removeGeneratedContentsError();
 			this.input.off( 'change', this.onChangeHandler );
+			this.selectedNode.disconnect( this );
 			if ( data === undefined ) { // cancel
 				this.getFragment().getSurface().popStaging();
 			}
@@ -98,7 +133,67 @@ ve.ui.MWLiveExtensionInspector.prototype.updatePreview = function () {
 
 	this.updateMwData( mwData );
 
+	this.removeGeneratedContentsError();
+
 	if ( this.visible ) {
 		this.getFragment().changeAttributes( { mw: mwData } );
 	}
+};
+
+/**
+ * Show the error container and set the error label to contain the error.
+ *
+ * @param {jQuery} $element Element containing the error
+ */
+ve.ui.MWLiveExtensionInspector.prototype.renderGeneratedContentsError = function ( $element ) {
+	// Display the error
+	this.$generatedContentsErrorContainer
+		.removeClass( 've-ui-mwLiveExtensionInspector-error-container-hidden' );
+	this.generatedContentsErrorLabel.setLabel( this.formatGeneratedContentsError( $element ) );
+	this.updateSize();
+
+	this.generatedContentsErrorButton.connect( this, { click: 'toggleGeneratedContentsError' } );
+};
+
+/**
+ * Hide the error and collapse the error container.
+ */
+ve.ui.MWLiveExtensionInspector.prototype.removeGeneratedContentsError = function () {
+	this.$generatedContentsErrorContainer
+		.addClass( 've-ui-mwLiveExtensionInspector-error-container-hidden' );
+	this.generatedContentsErrorButton.setIcon( 'expand' ).disconnect( this );
+	this.generatedContentsErrorLabel.setLabel( null );
+	this.toggleGeneratedContentsError( true );
+};
+
+/**
+ * Format the error.
+ *
+ * Default behaviour returns the error with no modification.
+ *
+ * @param {jQuery} $element Element containing the error
+ * @return {jQuery} $element Element containing the error
+ */
+ve.ui.MWLiveExtensionInspector.prototype.formatGeneratedContentsError = function ( $element ) {
+	return $element;
+};
+
+/**
+ * Toggle the error between collapsed and expanded.
+ *
+ * @param {boolean} expanded Treat the error as expanded without checking
+ */
+ve.ui.MWLiveExtensionInspector.prototype.toggleGeneratedContentsError = function ( expanded ) {
+	// Set the correct icon on the expand/collapse button
+	expanded = expanded || this.generatedContentsErrorButton.getIcon() === 'collapse';
+	this.generatedContentsErrorButton.setIcon( expanded ? 'expand' : 'collapse' );
+
+	// Expand or collapse the error message
+	this.generatedContentsErrorLabel.$element
+		.removeClass(
+			've-ui-mwLiveExtensionInspector-error-expanded ve-ui-mwLiveExtensionInspector-error-collapsed'
+		)
+		.addClass( 've-ui-mwLiveExtensionInspector-error-' + ( expanded ? 'collapsed' : 'expanded' ) );
+
+	this.updateSize();
 };
