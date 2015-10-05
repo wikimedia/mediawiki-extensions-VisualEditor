@@ -8,6 +8,7 @@
 .ve-ui-mwParameterPage.oo-ui-pageLayout {
 	padding-top: 0;
 	padding-bottom: 0;
+	position: relative;
 }
 
 .ve-ui-mwParameterPage.oo-ui-pageLayout:last-of-type {
@@ -29,9 +30,10 @@
 }
 
 .ve-ui-mwParameterPage-actions {
-	float: right;
 	cursor: default;
-	padding-right: 2.5em;
+	position: absolute;
+	top: 0;
+	right: 4em; /* 1.5em for PanelLayout's padding + 2.5em */
 	width: 20%;
 	text-align: right;
 	-webkit-box-sizing: border-box;
