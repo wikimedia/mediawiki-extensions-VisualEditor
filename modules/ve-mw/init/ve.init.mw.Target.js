@@ -206,7 +206,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		indicator: 'down',
 		include: '*',
 		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
-		promote: [ 'media', 'transclusion' ]
+		promote: [ 'media', 'transclusion', 'insertTable' ]
 	},
 	// Table
 	{
