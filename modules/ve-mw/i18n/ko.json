@@ -286,6 +286,7 @@
 	"visualeditor-viewpage-savewarning-discard": "편집 버리기",
 	"visualeditor-viewpage-savewarning-keep": "편집 계속",
 	"visualeditor-viewpage-savewarning-title": "확실합니까?",
+	"visualeditor-wikitext-progress": "위키텍스트로 변환 중",
 	"visualeditor-wikitext-warning": "시각편집기를 사용하고 있습니다 - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|위키텍스트]]는 여기서 작동하지 않습니다. 편집한 내용을 잃지 않고 원본 편집으로 언제든지 전환하려면 \"{{int:visualeditor-toolbar-savedialog}}\" 옆의 드롭다운 메뉴를 열어 \"{{int:visualeditor-mweditmodesource-tool}}\"을 선택하세요.",
 	"visualeditor-wikitext-warning-title": "위키텍스트 문법이 감지됨"
 }
