@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 .visualeditor-welcomedialog-content {
-	background: url(images/welcomeSplash-ltr.png) 50% 100% no-repeat;
+	background: url( images/welcomeSplash-ltr.png ) 50% 100% no-repeat;
 	background-size: 50%;
 	height: 200px;
 	text-align: center;
