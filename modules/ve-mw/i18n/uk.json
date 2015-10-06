@@ -202,7 +202,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Поле застаріло. $1",
 	"visualeditor-dialog-transclusion-loading": "Завантаження…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Показати параметри",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Ви додаєте}} шаблон «$1» на цю сторінку. У нього ще немає опису, але може є якась інформація на <a $2>сторінці шаблону</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Ви додаєте}} шаблон «$1» на цю сторінку. У нього ще немає опису, але може є якась інформація на [[{{ns:template}}:$1|сторінці шаблону]].",
 	"visualeditor-dialog-transclusion-options": "Параметри",
 	"visualeditor-dialog-transclusion-param-default": "Типове значення: $1",
 	"visualeditor-dialog-transclusion-param-example": "Приклад значення: $1",

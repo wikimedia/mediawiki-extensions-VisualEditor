@@ -185,7 +185,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "'O campo è obsoleto. $1",
 	"visualeditor-dialog-transclusion-loading": "Carrecanno...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mmusta ll'ozzione",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|State azzeccanno}} 'o template \"$1\" a sta pagina. Non tene descrizione ancora, ma putessero cumparì cocche nfurmaziune dint' 'a <a $2>paggena d' 'o template</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|State azzeccanno}} 'o template \"$1\" a sta pagina. Non tene descrizione ancora, ma putessero cumparì cocche nfurmaziune dint' 'a [[{{ns:template}}:$1|paggena d' 'o template]].",
 	"visualeditor-dialog-transclusion-options": "Opzione",
 	"visualeditor-dialog-transclusion-param-default": "Valore predefinito: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valore 'esempio: $1",

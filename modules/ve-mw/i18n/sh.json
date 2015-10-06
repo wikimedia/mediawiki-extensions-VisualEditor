@@ -178,7 +178,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Polje se više ne koristi. $1",
 	"visualeditor-dialog-transclusion-loading": "Učitavanje...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Pokaži opcije",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Dodajete}} šablon \"$1\" na ovu stranicu. Šablon još uvijek nema opis, ali je moguće da postoje neke informacije na <a $2>stranici šablona</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Dodajete}} šablon \"$1\" na ovu stranicu. Šablon još uvijek nema opis, ali je moguće da postoje neke informacije na [[{{ns:template}}:$1|stranici šablona]].",
 	"visualeditor-dialog-transclusion-options": "Opcije",
 	"visualeditor-dialog-transclusion-param-default": "Zadana vrijednost: $1",
 	"visualeditor-dialog-transclusion-param-example": "Primjer vrijednosti: $1",

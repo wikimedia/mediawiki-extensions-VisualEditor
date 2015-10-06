@@ -186,7 +186,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Полето е застарено. $1",
 	"visualeditor-dialog-transclusion-loading": "Вчитувам...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Прикажи нагодувања",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Го додавате}} шаблонот „$1“. Засега нема опис, но може ќе најдете некои информации на <a $2>шаблонската страница</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Го додавате}} шаблонот „$1“. Засега нема опис, но може ќе најдете некои информации на [[{{ns:template}}:$1|шаблонската страница]].",
 	"visualeditor-dialog-transclusion-options": "Нагодувања",
 	"visualeditor-dialog-transclusion-param-default": "Стандардна вредност: $1",
 	"visualeditor-dialog-transclusion-param-example": "Примерна вредност: $1",

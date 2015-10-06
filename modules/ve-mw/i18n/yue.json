@@ -156,7 +156,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "呢個參數已經停用。$1",
 	"visualeditor-dialog-transclusion-loading": "載入緊…",
 	"visualeditor-dialog-transclusion-multiple-mode": "睇選項",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|你|妳|你}}而家加緊《$1》模落呢版。個模仲未有解說，不過個模嘅<a $2>模頁</a>上面可能有啲有用嘅資料。",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|你|妳|你}}而家加緊《$1》模落呢版。個模仲未有解說，不過個模嘅[[{{ns:template}}:$1|模頁]]上面可能有啲有用嘅資料。",
 	"visualeditor-dialog-transclusion-options": "選項",
 	"visualeditor-dialog-transclusion-param-default": "預設值：$1",
 	"visualeditor-dialog-transclusion-param-example": "示例值：$1",

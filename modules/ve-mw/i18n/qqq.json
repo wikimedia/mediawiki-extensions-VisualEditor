@@ -210,7 +210,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Label describing that a parameter is deprecated.\n\nParameters:\n* $1 - Description given in TemplateData for why parameter is deprecated, which may be empty.",
 	"visualeditor-dialog-transclusion-loading": "Title for the transclusion dialog while its contents are loading.\n{{Identical|Loading}}",
 	"visualeditor-dialog-transclusion-multiple-mode": "Label for button that shows advanced options in transclusion dialog",
-	"visualeditor-dialog-transclusion-no-template-description": "Message to user that no template information is available for the template.\n\nParameters:\n* $1 - the title of the template\n* $2 - contains attributes for the link to the template's page. e.g. 'target=\"_blank\" href=\"...\"'\n* $3 - user object for GENDER.",
+	"visualeditor-dialog-transclusion-no-template-description": "Message to user that no template information is available for the template.\n\nParameters:\n* $1 - the title of the template\n* $2 - user object for GENDER.",
 	"visualeditor-dialog-transclusion-options": "Label for section with options for templates, content or parameters.\n{{Identical|Options}}",
 	"visualeditor-dialog-transclusion-param-default": "Label for parameter's default value in the template dialog. $1 - Parameter's default value.",
 	"visualeditor-dialog-transclusion-param-example": "Label for parameter's example value in the template dialog. $1 - Parameter's example value.",

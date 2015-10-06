@@ -192,7 +192,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Feld ist veraltet. $1",
 	"visualeditor-dialog-transclusion-loading": "Laden …",
 	"visualeditor-dialog-transclusion-multiple-mode": "Optionen anzeigen",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Du}} fügst dieser Seite die Vorlage „$1“ hinzu. Die Vorlage hat noch keine Beschreibung, aber vielleicht gibt es einige Informationen auf der <a $2>Vorlagenseite</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Du}} fügst dieser Seite die Vorlage „$1“ hinzu. Die Vorlage hat noch keine Beschreibung, aber vielleicht gibt es einige Informationen auf der [[{{ns:template}}:$1|Vorlagenseite]].",
 	"visualeditor-dialog-transclusion-options": "Optionen",
 	"visualeditor-dialog-transclusion-param-default": "Standardwert: $1",
 	"visualeditor-dialog-transclusion-param-example": "Beispielwert: $1",

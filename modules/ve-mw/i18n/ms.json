@@ -161,7 +161,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parameter telah dilupuskan. $1",
 	"visualeditor-dialog-transclusion-loading": "Memuatkan...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Tunjukkan pilihan",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Anda sedang meletakkan}} templat \"$1\" kepada halaman ini. Ia belum mempunyai huraian, tetapi mungkin terdapat sedikit maklumat di <a $2>halaman templat</a> berkenaan.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Anda sedang meletakkan}} templat \"$1\" kepada halaman ini. Ia belum mempunyai huraian, tetapi mungkin terdapat sedikit maklumat di [[{{ns:template}}:$1|halaman templat]] berkenaan.",
 	"visualeditor-dialog-transclusion-options": "Pilihan",
 	"visualeditor-dialog-transclusion-param-default": "Nilai asali: $1",
 	"visualeditor-dialog-transclusion-param-example": "Nilai contoh: $1",

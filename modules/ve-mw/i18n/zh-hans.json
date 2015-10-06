@@ -204,7 +204,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "字段已弃用。$1",
 	"visualeditor-dialog-transclusion-loading": "正在载入...",
 	"visualeditor-dialog-transclusion-multiple-mode": "显示选项",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|您正在}}将“$1”模板添加至该页面。它还没有说明，但在<a $2>模板页面</a>上可能有一些信息。",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|您正在}}将“$1”模板添加至该页面。它还没有说明，但在[[{{ns:template}}:$1|模板页面]]上可能有一些信息。",
 	"visualeditor-dialog-transclusion-options": "选项",
 	"visualeditor-dialog-transclusion-param-default": "默认值：$1",
 	"visualeditor-dialog-transclusion-param-example": "示例值：$1",

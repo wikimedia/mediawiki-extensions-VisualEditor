@@ -109,7 +109,7 @@
 	"visualeditor-dialog-transclusion-content": "Cynnwys",
 	"visualeditor-dialog-transclusion-loading": "Llwytho...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Dewisiadau...",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Rydych}} chi'n ychwanegu'r templed \"$1\" i'r dudalen. Nid oes disgrifiad ohono eto, ond gallai fod yna wybodaeth ar <a $2>dudalen y templed</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Rydych}} chi'n ychwanegu'r templed \"$1\" i'r dudalen. Nid oes disgrifiad ohono eto, ond gallai fod yna wybodaeth ar [[{{ns:template}}:$1|dudalen y templed]].",
 	"visualeditor-dialog-transclusion-options": "Dewisiadau",
 	"visualeditor-dialog-transclusion-param-info": "Disgrifiad y maes",
 	"visualeditor-dialog-transclusion-param-info-missing": "Dim disgrifiad maes ar gael",

@@ -187,7 +187,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "El campu ta anticuáu. $1",
 	"visualeditor-dialog-transclusion-loading": "Cargando...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Ver opciones",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Vas amestar}} la plantía «$1» a esta páxina. Inda nun tien una descripción, pero pue haber algo d'información na <a $2>páxina de la plantía</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Vas amestar}} la plantía «$1» a esta páxina. Inda nun tien una descripción, pero pue haber algo d'información na [[{{ns:template}}:$1|páxina de la plantía]].",
 	"visualeditor-dialog-transclusion-options": "Opciones",
 	"visualeditor-dialog-transclusion-param-default": "Valor predetermináu: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valor d'exemplu: $1",

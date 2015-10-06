@@ -117,7 +117,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Гура ширабелла бу. $1",
 	"visualeditor-dialog-transclusion-loading": "Чуйолуш…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Гайта параметраш",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Ахьа хӀокху агӀона тӀетухуш ю кеп}} «$1». Цунах лаьцна хӀинца а хаам бац, амма <a $2>кепан агӀонгахь</a> цхьа хаам хила мега.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Ахьа хӀокху агӀона тӀетухуш ю кеп}} «$1». Цунах лаьцна хӀинца а хаам бац, амма [[{{ns:template}}:$1|кепан агӀонгахь]] цхьа хаам хила мега.",
 	"visualeditor-dialog-transclusion-options": "Параметраш",
 	"visualeditor-dialog-transclusion-param-info": "Гурах лаьцна",
 	"visualeditor-dialog-transclusion-param-info-missing": "Гурах лаьцна дерг тӀекхочехь дац",

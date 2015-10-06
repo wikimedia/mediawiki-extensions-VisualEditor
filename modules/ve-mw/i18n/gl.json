@@ -194,7 +194,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "O campo está obsoleto. $1",
 	"visualeditor-dialog-transclusion-loading": "Cargando...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostrar as opcións",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Está engadindo}} o modelo \"$1\" a esta páxina. Aínda non ten descrición, pero poida que haxa algo de información na <a $2>páxina do modelo</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Está engadindo}} o modelo \"$1\" a esta páxina. Aínda non ten descrición, pero poida que haxa algo de información na [[{{ns:template}}:$1|páxina do modelo]].",
 	"visualeditor-dialog-transclusion-options": "Opcións",
 	"visualeditor-dialog-transclusion-param-default": "Valor por defecto: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valor de exemplo: $1",

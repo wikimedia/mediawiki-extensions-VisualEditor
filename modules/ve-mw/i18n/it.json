@@ -205,7 +205,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Il campo è obsoleto. $1",
 	"visualeditor-dialog-transclusion-loading": "Caricamento...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostra opzioni",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Stai aggiungendo}} il template \"$1\" a questa pagina. Non ha ancora una descrizione, ma potrebbero esserci alcune informazioni nella <a $2>pagina del template</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Stai aggiungendo}} il template \"$1\" a questa pagina. Non ha ancora una descrizione, ma potrebbero esserci alcune informazioni nella [[{{ns:template}}:$1|pagina del template]].",
 	"visualeditor-dialog-transclusion-options": "Opzioni",
 	"visualeditor-dialog-transclusion-param-default": "Valore predefinito: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valore di esempio: $1",
