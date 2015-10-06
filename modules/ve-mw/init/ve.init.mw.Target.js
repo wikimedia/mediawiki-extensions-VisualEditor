@@ -540,7 +540,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 				target.saveErrorBadToken();
 			} )
 			.done( function ( data ) {
-				var userMsg,
+				var
 					userInfo = data.query && data.query.userinfo,
 					pageInfo = data.query && data.query.pages && data.query.pageids &&
 						data.query.pageids[ 0 ] && data.query.pages[ data.query.pageids[ 0 ] ],
@@ -573,12 +573,6 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 						} else {
 							// New session is a different user
 							mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
-							userMsg = 'visualeditor-savedialog-identify-user---' + userInfo.name;
-							mw.messages.set(
-								userMsg,
-								mw.messages.get( 'visualeditor-savedialog-identify-user' )
-									.replace( /\$1/g, userInfo.name )
-							);
 							target.saveErrorNewUser( userInfo.name );
 						}
 					}
@@ -757,14 +751,13 @@ ve.init.mw.Target.prototype.saveErrorTitleBlacklist = function () {
 ve.init.mw.Target.prototype.saveErrorNewUser = function ( username ) {
 	var badToken, userMsg;
 	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
-	// mediawiki.jqueryMsg has a bug with [[User:$1|$1]] (bug 51388)
 	if ( username === null ) {
 		userMsg = 'visualeditor-savedialog-identify-anon';
 	} else {
-		userMsg = 'visualeditor-savedialog-identify-user---' + username;
+		userMsg = 'visualeditor-savedialog-identify-user';
 	}
 	this.showSaveError(
-		$( badToken ).add( $.parseHTML( mw.message( userMsg ).parse() ) )
+		$( badToken ).add( $.parseHTML( mw.message( userMsg, username ).parse() ) )
 	);
 	this.emit( 'saveErrorNewUser' );
 };
