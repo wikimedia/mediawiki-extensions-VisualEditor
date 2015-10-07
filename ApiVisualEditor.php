@@ -162,7 +162,7 @@ class ApiVisualEditor extends ApiBase {
 			$path,
 			array(
 				'html' => $html,
-				'scrubWikitext' => 1,
+				'scrub_wikitext' => 1,
 			)
 		);
 	}
