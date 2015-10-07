@@ -18,7 +18,8 @@
 			"McSalama",
 			"Alluk.",
 			"Macofe",
-			"Pitke"
+			"Pitke",
+			"Pyscowicz"
 		]
 	},
 	"apihelp-visualeditor-description": "Hakee sivun HTML5-lähdekoodin Parsoid-palvelusta.",
@@ -92,6 +93,9 @@
 	"visualeditor-dialog-media-position-right": "Oikea",
 	"visualeditor-dialog-media-position-section": "Sijainti",
 	"visualeditor-dialog-media-position-section-help": "Voit asettaa, missä tämä mediakohde näkyy sivulla. Tätä käytetään joskus katkaisemaan pitkät kuvista koostuvat rivit toisella puolella sivua.",
+	"visualeditor-dialog-media-save": "Tallenna",
+	"visualeditor-dialog-media-search-tab-search": "Etsi",
+	"visualeditor-dialog-media-search-tab-upload": "Lataa",
 	"visualeditor-dialog-media-searchselect": "Valitse",
 	"visualeditor-dialog-media-size-choosecustom": "Aseta mukautettu koko",
 	"visualeditor-dialog-media-size-choosedefault": "Aseta oletuskoko",
@@ -108,6 +112,7 @@
 	"visualeditor-dialog-media-type-section": "Kuvan tyyppi",
 	"visualeditor-dialog-media-type-section-help": "Voit asettaa, miten kohde näkyy sivulla. Tämän pitäisi lähes aina olla pienoiskuva, jotta se olisi yhdenmukainen muiden sivujen kanssa.",
 	"visualeditor-dialog-media-type-thumb": "Pienoiskuva",
+	"visualeditor-dialog-media-upload": "Lataa",
 	"visualeditor-dialog-meta-advancedsettings-label": "Lisäasetukset",
 	"visualeditor-dialog-meta-advancedsettings-section": "Lisäasetukset",
 	"visualeditor-dialog-meta-categories-category": "Luokka",
