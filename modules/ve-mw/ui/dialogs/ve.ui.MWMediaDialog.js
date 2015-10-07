@@ -1088,7 +1088,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			if ( data.file ) {
 				this.searchTabs.setCard( 'upload' );
-				this.mediaUploadBooklet.selectFileWidget.setValue( data.file );
+				this.mediaUploadBooklet.setFile( data.file );
 			}
 
 			// Reset upload booklet
