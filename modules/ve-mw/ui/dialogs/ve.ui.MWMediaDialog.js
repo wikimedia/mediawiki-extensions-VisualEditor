@@ -809,7 +809,7 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
  * @param {ve.ui.MWMediaResultWidget} item Chosen item
  */
 ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
-	this.chooseImageInfo( item.getData );
+	this.chooseImageInfo( item.getData() );
 };
 
 /**
