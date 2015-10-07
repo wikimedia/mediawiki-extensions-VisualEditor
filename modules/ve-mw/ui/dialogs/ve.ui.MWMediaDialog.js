@@ -71,6 +71,18 @@ ve.ui.MWMediaDialog.static.actions = [
 		modes: [ 'info' ]
 	},
 	{
+		action: 'upload',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-upload' ),
+		flags: [ 'primary', 'progressive' ],
+		modes: [ 'upload-upload' ]
+	},
+	{
+		action: 'save',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-save' ),
+		flags: [ 'primary', 'progressive' ],
+		modes: [ 'upload-info' ]
+	},
+	{
 		action: 'cancelchoose',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
 		flags: [ 'safe', 'back' ],
@@ -79,7 +91,7 @@ ve.ui.MWMediaDialog.static.actions = [
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		flags: [ 'safe', 'back' ],
-		modes: [ 'edit', 'insert', 'select' ]
+		modes: [ 'edit', 'insert', 'select', 'search', 'upload-upload', 'upload-info' ]
 	},
 	{
 		action: 'back',
@@ -175,6 +187,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		scrollable: true
 	} );
 
+	this.mediaUploadBooklet = new mw.ForeignStructuredUpload.BookletLayout( { $overlay: this.$overlay } );
+
 	this.mediaImageInfoPanel = new OO.ui.PanelLayout( {
 		classes: [ 've-ui-mwMediaDialog-panel-imageinfo' ],
 		scrollable: false
@@ -195,6 +209,18 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		.setLabel( ve.msg( 'visualeditor-dialog-media-page-advanced' ) );
 
 	// Define the media search page
+	this.searchTabs = new OO.ui.IndexLayout();
+
+	this.searchTabs.addCards( [
+		new OO.ui.CardLayout( 'search', {
+			label: ve.msg( 'visualeditor-dialog-media-search-tab-search' )
+		} ),
+		new OO.ui.CardLayout( 'upload', {
+			label: ve.msg( 'visualeditor-dialog-media-search-tab-upload' ),
+			content: [ this.mediaUploadBooklet ]
+		} )
+	] );
+
 	this.search = new ve.ui.MWMediaSearchWidget();
 
 	// Define fieldsets for image settings
@@ -323,9 +349,18 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.typeSelect.connect( this, { choose: 'onTypeSelectChoose' } );
 	this.search.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
+	this.searchTabs.connect( this, {
+		set: 'onSearchTabsSet'
+	} );
+	this.mediaUploadBooklet.connect( this, {
+		set: 'onMediaUploadBooketSet',
+		uploadValid: 'onUploadValid',
+		infoValid: 'onInfoValid'
+	} );
 
 	// Initialization
-	this.mediaSearchPanel.$element.append( this.search.$element );
+	this.searchTabs.getCard( 'search' ).$element.append( this.search.$element );
+	this.mediaSearchPanel.$element.append( this.searchTabs.$element );
 	this.generalSettingsPage.$element.append(
 		this.filenameFieldset.$element,
 		this.captionFieldset.$element,
@@ -348,6 +383,70 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 };
 
 /**
+ * Handle set events from the search tabs
+ *
+ * @param {OO.ui.CardLayout} card Current card
+ */
+ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( card ) {
+	var name = card.getName();
+
+	this.actions.setMode( name );
+
+	switch ( name ) {
+		case 'search':
+			this.setSize( 'larger' );
+			break;
+
+		case 'upload':
+			this.setSize( 'medium' );
+			this.mediaUploadBooklet.initialize();
+			this.uploadPageNameSet( 'upload' );
+			break;
+	}
+};
+
+/**
+ * Handle panelNameSet events from the upload stack
+ *
+ * @param {OO.ui.PageLayout} page Current page
+ */
+ve.ui.MWMediaDialog.prototype.onMediaUploadBooketSet = function ( page ) {
+	this.uploadPageNameSet( page.getName() );
+};
+
+/**
+ * The upload booklet's page name has changed
+ *
+ * @param {string} pageName Page name
+ */
+ve.ui.MWMediaDialog.prototype.uploadPageNameSet = function ( pageName ) {
+	if ( pageName === 'insert' ) {
+		this.chooseImageInfo( this.mediaUploadBooklet.upload.getImageInfo() );
+	} else {
+		this.actions.setMode( 'upload-' + pageName );
+		this.actions.setAbilities( { upload: false, save: false } );
+	}
+};
+
+/**
+ * Handle uploadValid events
+ *
+ * @param {boolean} isValid The panel is complete and valid
+ */
+ve.ui.MWMediaDialog.prototype.onUploadValid = function ( isValid ) {
+	this.actions.setAbilities( { upload: isValid } );
+};
+
+/**
+ * Handle infoValid events
+ *
+ * @param {boolean} isValid The panel is complete and valid
+ */
+ve.ui.MWMediaDialog.prototype.onInfoValid = function ( isValid ) {
+	this.actions.setAbilities( { save: isValid } );
+};
+
+/**
  * Build the image info panel from the information in the API.
  * Use the metadata info if it exists.
  * Note: Some information in the metadata object needs to be safely
@@ -358,8 +457,9 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	var i, newDimensions, field, isPortrait, $info, $section, windowWidth,
 		contentDirection = this.getFragment().getDocument().getDir(),
+		imageTitleText = imageinfo.title || imageinfo.canonicaltitle,
 		imageTitle = new OO.ui.LabelWidget( {
-			label: mw.Title.newFromText( imageinfo.title ).getNameText()
+			label: mw.Title.newFromText( imageTitleText ).getNameText()
 		} ),
 		metadata = imageinfo.extmetadata,
 		// Field configuration (in order)
@@ -568,7 +668,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	} );
 
 	// Call for a bigger image
-	this.fetchThumbnail( imageinfo.title, newDimensions )
+	this.fetchThumbnail( imageTitleText, newDimensions )
 		.done( function ( thumburl ) {
 			if ( thumburl ) {
 				$image.prop( 'src', thumburl );
@@ -709,7 +809,15 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
  * @param {ve.ui.MWMediaResultWidget} item Chosen item
  */
 ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
-	var info = item.getData();
+	this.chooseImageInfo( item.getData );
+};
+
+/**
+ * Choose image info for editing
+ *
+ * @param {Object} info Image info
+ */
+ve.ui.MWMediaDialog.prototype.chooseImageInfo = function ( info ) {
 	this.$infoPanelWrapper.empty();
 	// Switch panels
 	this.selectedImageInfo = info;
@@ -724,13 +832,14 @@ ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
  * @param {ve.ui.MWMediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
-	var title,
+	var title, imageTitleText,
 		obj = {},
 		info = this.selectedImageInfo;
 
 	if ( info ) {
+		imageTitleText = info.title || info.canonicaltitle;
 		// Run title through mw.Title so the File: prefix is localised
-		title = mw.Title.newFromText( info.title ).getPrefixedText();
+		title = mw.Title.newFromText( imageTitleText ).getPrefixedText();
 		if ( !this.imageModel ) {
 			// Create a new image model based on default attributes
 			this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
@@ -768,7 +877,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 		}
 
 		// Cache
-		obj[ info.title ] = info;
+		obj[ imageTitleText ] = info;
 		ve.init.platform.imageInfoCache.set( obj );
 
 		this.checkChanged();
@@ -1007,6 +1116,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			}
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
+			this.searchTabs.setCard( 'search' );
 			this.actions.setMode( this.imageModel ? 'change' : 'select' );
 			// Layout pending items
 			this.search.runLayoutQueue();
@@ -1225,6 +1335,10 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 				this.switchPanels( 'search', true );
 			};
 			break;
+		case 'upload':
+			return new OO.ui.Process( this.mediaUploadBooklet.uploadFile() );
+		case 'save':
+			return new OO.ui.Process( this.mediaUploadBooklet.saveFile() );
 		case 'apply':
 		case 'insert':
 			handler = function () {

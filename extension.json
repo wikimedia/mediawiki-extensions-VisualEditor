@@ -1149,7 +1149,8 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaInfoFieldWidget.css"
 			],
 			"dependencies": [
-				"ext.visualEditor.mwimage.core"
+				"ext.visualEditor.mwimage.core",
+				"mediawiki.ForeignStructuredUpload.BookletLayout"
 			],
 			"messages": [
 				"visualeditor-dialog-media-alttext-section",
@@ -1185,6 +1186,9 @@
 				"visualeditor-dialog-media-position-right",
 				"visualeditor-dialog-media-position-section",
 				"visualeditor-dialog-media-position-section-help",
+				"visualeditor-dialog-media-save",
+				"visualeditor-dialog-media-search-tab-search",
+				"visualeditor-dialog-media-search-tab-upload",
 				"visualeditor-dialog-media-searchselect",
 				"visualeditor-dialog-media-size-originalsize-error",
 				"visualeditor-dialog-media-size-section",
@@ -1198,12 +1202,12 @@
 				"visualeditor-dialog-media-type-section",
 				"visualeditor-dialog-media-type-section-help",
 				"visualeditor-dialog-media-type-thumb",
+				"visualeditor-dialog-media-upload",
 				"visualeditor-dialogbutton-media-tooltip",
 				"visualeditor-media-input-placeholder"
 			],
 			"targets": [
-				"desktop",
-				"mobile"
+				"desktop"
 			]
 		},
 		"ext.visualEditor.mwlink": {
