@@ -1086,6 +1086,11 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 
+			if ( data.file ) {
+				this.searchTabs.setCard( 'upload' );
+				this.mediaUploadBooklet.selectFileWidget.setValue( data.file );
+			}
+
 			// Reset upload booklet
 			this.mediaUploadBooklet.initialize();
 		}, this );
