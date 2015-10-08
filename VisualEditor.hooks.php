@@ -469,6 +469,7 @@ class VisualEditorHooks {
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
+			'fullRestbaseUrl' => $coreConfig->get( 'VisualEditorFullRestbaseURL' ),
 		);
 
 		return true;

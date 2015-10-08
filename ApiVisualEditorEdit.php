@@ -149,7 +149,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
 			}
 		} else {
-			$wikitext = $this->postHTML( $page, $html, $parserParams );
+			$wikitext = $this->postHTML( $page, $html, $parserParams, $params['etag'] );
 			if ( $wikitext === false ) {
 				$this->dieUsage( 'Error contacting the Parsoid/RESTbase server', 'docserver' );
 			}
@@ -253,6 +253,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'minor' => null,
 			'watch' => null,
 			'html' => null,
+			'etag' => null,
 			'summary' => null,
 			'captchaid' => null,
 			'captchaword' => null,
@@ -285,6 +286,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'oldid' => 'The revision number to use. Defaults to latest revision. Use 0 for new page.',
 			'minor' => 'Flag for minor edit.',
 			'html' => 'HTML to send to Parsoid in exchange for wikitext',
+			'etag' => 'ETag to send',
 			'summary' => 'Edit summary',
 			'basetimestamp' => 'When saving, set this to the timestamp of the revision that was'
 				. ' edited. Used to detect edit conflicts.',

@@ -85,7 +85,7 @@ class ApiVisualEditor extends ApiBase {
 		return new $class( $params );
 	}
 
-	private function requestRestbase( $method, $path, $params ) {
+	private function requestRestbase( $method, $path, $params, $reqheaders = array() ) {
 		$request = array(
 			'method' => $method,
 			'url' => '/restbase/local/v1/' . $path
@@ -95,6 +95,7 @@ class ApiVisualEditor extends ApiBase {
 		} else {
 			$request['body'] = $params;
 		}
+		$request['headers'] = $reqheaders;
 		$response = $this->serviceClient->run( $request );
 		if ( $response['code'] === 200 && $response['error'] === "" ) {
 			// If response was served directly from Varnish, use the response
@@ -116,11 +117,11 @@ class ApiVisualEditor extends ApiBase {
 		return $response['body'];
 	}
 
-	protected function storeInSerializationCache( $title, $oldid, $html ) {
+	protected function storeInSerializationCache( $title, $oldid, $html, $etag ) {
 		global $wgMemc;
 
 		// Convert the VE HTML to wikitext
-		$text = $this->postHTML( $title, $html, array( 'oldid' => $oldid ) );
+		$text = $this->postHTML( $title, $html, array( 'oldid' => $oldid ), $etag );
 		if ( $text === false ) {
 			return false;
 		}
@@ -149,7 +150,7 @@ class ApiVisualEditor extends ApiBase {
 		return $wgMemc->get( $key );
 	}
 
-	protected function postHTML( $title, $html, $parserParams ) {
+	protected function postHTML( $title, $html, $parserParams, $etag ) {
 		if ( $parserParams['oldid'] === 0 ) {
 			$parserParams['oldid'] = '';
 		}
@@ -163,7 +164,8 @@ class ApiVisualEditor extends ApiBase {
 			array(
 				'html' => $html,
 				'scrub_wikitext' => 1,
-			)
+			),
+			array( 'If-Match' => $etag )
 		);
 	}
 
@@ -568,7 +570,7 @@ class ApiVisualEditor extends ApiBase {
 					if ( $params['html'] === null ) {
 						$this->dieUsageMsg( 'missingparam', 'html' );
 					}
-					$content = $this->postHTML( $title, $html, $parserParams );
+					$content = $this->postHTML( $title, $html, $parserParams, $params['etag'] );
 					if ( $content === false ) {
 						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
@@ -583,7 +585,7 @@ class ApiVisualEditor extends ApiBase {
 						$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
 					}
 				} else {
-					$wikitext = $this->postHTML( $title, $html, $parserParams );
+					$wikitext = $this->postHTML( $title, $html, $parserParams, $params['etag'] );
 					if ( $wikitext === false ) {
 						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
@@ -601,7 +603,12 @@ class ApiVisualEditor extends ApiBase {
 				if ( !isset( $parserParams['oldid'] ) ) {
 					$parserParams['oldid'] = Revision::newFromTitle( $title )->getId();
 				}
-				$key = $this->storeInSerializationCache( $title, $parserParams['oldid'], $html );
+				$key = $this->storeInSerializationCache(
+					$title,
+					$parserParams['oldid'],
+					$html,
+					$params['etag']
+				);
 				$result = array( 'result' => 'success', 'cachekey' => $key );
 				break;
 
@@ -669,6 +676,7 @@ class ApiVisualEditor extends ApiBase {
 			'wikitext' => null,
 			'oldid' => null,
 			'html' => null,
+			'etag' => null,
 			'cachekey' => null,
 			'pst' => false,
 		);

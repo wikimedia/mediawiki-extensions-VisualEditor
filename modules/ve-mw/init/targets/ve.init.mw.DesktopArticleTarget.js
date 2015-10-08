@@ -60,7 +60,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.initialEditSummary = currentUri.query.summary;
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
-	this.veEditUri = this.viewUri.clone().extend( { veaction: 'edit' } );
+	this.veEditUri = this.viewUri.clone().extend( { veaction: 'edit', action: null } );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
 		currentUri.query.diff === undefined
@@ -758,7 +758,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
-	if ( !this.getSurface().getModel().hasBeenModified() ) {
+	if ( !this.getSurface().getModel().hasBeenModified() && !this.fromEditedState ) {
 		this.switchToWikitextEditor( true, false );
 		return;
 	}
@@ -848,7 +848,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 			if ( target.getSurface() && !target.deactivating ) {
 				target.editSource();
 
-				if ( target.getSurface().getModel().hasBeenModified() ) {
+				if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
 					e.preventDefault();
 				}
 			}
@@ -1001,6 +1001,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		// Set the current URL
 		uri = this.currentUri;
 		uri.query.veaction = 'edit';
+		delete uri.query.action;
 
 		history.pushState( this.popState, document.title, uri );
 	}
@@ -1031,6 +1032,9 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		}
 		if ( 'vesection' in uri.query ) {
 			delete uri.query.vesection;
+		}
+		if ( 'action' in uri.query ) {
+			delete uri.query.action;
 		}
 
 		// If there are any other query parameters left, re-use that uri object.
