@@ -98,6 +98,7 @@
 	"visualeditor-dialog-media-position-right": "右",
 	"visualeditor-dialog-media-position-section": "位置",
 	"visualeditor-dialog-media-position-section-help": "ページ内のどこにメディアが表示されるかをセットします。ページの片方に、画像が連なっているのを改行するのに使われることがあります。",
+	"visualeditor-dialog-media-save": "保存",
 	"visualeditor-dialog-media-search-tab-search": "検索",
 	"visualeditor-dialog-media-search-tab-upload": "アップロード",
 	"visualeditor-dialog-media-searchselect": "選択",
