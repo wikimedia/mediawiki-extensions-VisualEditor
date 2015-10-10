@@ -422,6 +422,8 @@ ve.ui.MWMediaDialog.prototype.uploadPageNameSet = function ( pageName ) {
 	if ( pageName === 'insert' ) {
 		this.chooseImageInfo( this.mediaUploadBooklet.upload.getImageInfo() );
 	} else {
+		// Hide the tabs after the first page
+		this.searchTabs.toggleMenu( pageName === 'upload' );
 		this.actions.setMode( 'upload-' + pageName );
 		this.actions.setAbilities( { upload: false, save: false } );
 	}
@@ -1119,6 +1121,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
 			this.searchTabs.setCard( 'search' );
+			this.searchTabs.toggleMenu( true );
 			this.actions.setMode( this.imageModel ? 'change' : 'select' );
 			// Layout pending items
 			this.search.runLayoutQueue();
