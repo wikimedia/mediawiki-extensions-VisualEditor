@@ -177,7 +177,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.panels = new OO.ui.StackLayout();
 
 	// Set up the booklet layout
-	this.bookletLayout = new OO.ui.BookletLayout( {
+	this.mediaSettingsBooklet = new OO.ui.BookletLayout( {
 		classes: [ 've-ui-mwMediaDialog-panel-settings' ],
 		outlined: true
 	} );
@@ -198,7 +198,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	this.generalSettingsPage = new OO.ui.PageLayout( 'general' );
 	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced' );
-	this.bookletLayout.addPages( [
+	this.mediaSettingsBooklet.addPages( [
 		this.generalSettingsPage, this.advancedSettingsPage
 	] );
 	this.generalSettingsPage.getOutlineItem()
@@ -376,7 +376,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.panels.addItems( [
 		this.mediaSearchPanel,
 		this.mediaImageInfoPanel,
-		this.bookletLayout
+		this.mediaSettingsBooklet
 	] );
 
 	this.$body.append( this.panels.$element );
@@ -1099,9 +1099,9 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 		case 'edit':
 			this.setSize( 'large' );
 			// Set the edit panel
-			this.panels.setItem( this.bookletLayout );
+			this.panels.setItem( this.mediaSettingsBooklet );
 			// Focus the general settings page
-			this.bookletLayout.setPage( 'general' );
+			this.mediaSettingsBooklet.setPage( 'general' );
 			// Hide/show buttons
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 			// Focus the caption surface
