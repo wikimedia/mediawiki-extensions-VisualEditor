@@ -399,7 +399,6 @@ ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( card ) {
 
 		case 'upload':
 			this.setSize( 'medium' );
-			this.mediaUploadBooklet.initialize();
 			this.uploadPageNameSet( 'upload' );
 			break;
 	}
@@ -1084,6 +1083,9 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			this.actions.setAbilities( { insert: false, apply: false } );
 
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
+
+			// Reset upload booklet
+			this.mediaUploadBooklet.initialize();
 		}, this );
 };
 
