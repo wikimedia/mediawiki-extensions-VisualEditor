@@ -6,7 +6,8 @@
 			"Милан Јелисавчић",
 			"Rancher",
 			"Amire80",
-			"Srdjan m"
+			"Srdjan m",
+			"Сербијана"
 		]
 	},
 	"tooltip-ca-createsource": "Направите изворни код ове странице",
@@ -62,6 +63,7 @@
 	"visualeditor-dialog-media-position-section": "Позиција",
 	"visualeditor-dialog-media-save": "Сачувај",
 	"visualeditor-dialog-media-search-tab-search": "Претрага",
+	"visualeditor-dialog-media-search-tab-upload": "Отпреми",
 	"visualeditor-dialog-media-searchselect": "Изабери",
 	"visualeditor-dialog-media-size-choosecustom": "Постави прилагођену величину",
 	"visualeditor-dialog-media-size-choosedefault": "Постави на подразумевану величину",
@@ -76,6 +78,7 @@
 	"visualeditor-dialog-media-type-none": "Основна",
 	"visualeditor-dialog-media-type-section": "Врста слике",
 	"visualeditor-dialog-media-type-thumb": "Минијатура",
+	"visualeditor-dialog-media-upload": "Отпреми",
 	"visualeditor-dialog-meta-advancedsettings-label": "Напредне поставке",
 	"visualeditor-dialog-meta-advancedsettings-section": "Напредна подешавања",
 	"visualeditor-dialog-meta-categories-category": "Категорија",
