@@ -79,9 +79,6 @@ module.exports = function ( grunt ) {
 			all: 'modules/**/*.css'
 		},
 		banana: {
-			options: {
-				disallowDuplicateTranslations: false
-			},
 			all: [
 				'modules/ve-{mw,wmf}/i18n/',
 				'modules/ve-mw/tests/browser/i18n'
