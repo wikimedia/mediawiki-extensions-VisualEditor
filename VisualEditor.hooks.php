@@ -342,18 +342,13 @@ class VisualEditorHooks {
 			'default' => $user->getOption( 'visualeditor-betatempdisable' ) ||
 				$user->getOption( 'visualeditor-autodisable' )
 		);
-		$preferences['visualeditor-autodisable'] = array(
-			'type' => 'api'
-		);
-		$preferences['visualeditor-hidebetawelcome'] = array(
-			'type' => 'api'
-		);
-		$preferences['visualeditor-findAndReplace-regex'] = array(
-			'type' => 'api'
-		);
-		$preferences['visualeditor-findAndReplace-matchCase'] = array(
-			'type' => 'api'
-		);
+		$api = array( 'type' => 'api' );
+		$preferences['visualeditor-autodisable'] = $api;
+		$preferences['visualeditor-hidebetawelcome'] = $api;
+		$preferences['visualeditor-findAndReplace-findText'] = $api;
+		$preferences['visualeditor-findAndReplace-replaceText'] = $api;
+		$preferences['visualeditor-findAndReplace-regex'] = $api;
+		$preferences['visualeditor-findAndReplace-matchCase'] = $api;
 		return true;
 	}
 
