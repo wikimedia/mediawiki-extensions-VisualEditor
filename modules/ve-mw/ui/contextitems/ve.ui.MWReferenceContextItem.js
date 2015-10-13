@@ -48,12 +48,9 @@ ve.ui.MWReferenceContextItem.static.commandName = 'reference';
  * @return {jQuery} DOM rendering of reference
  */
 ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
-	var refModel;
-	if ( this.model.isEditable() ) {
-		refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model );
-		this.view = new ve.ui.PreviewElement(
-			refModel.getDocument().getInternalList().getItemNode( refModel.getListIndex() )
-		);
+	var refNode = this.getReferenceNode();
+	if ( refNode ) {
+		this.view = new ve.ui.PreviewElement( refNode );
 
 		// The $element property may be rendered into asynchronously, update the context's size when the
 		// rendering is complete if that's the case
@@ -65,6 +62,23 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 			.addClass( 've-ui-mwReferenceContextItem-muted' )
 			.text( ve.msg( 'visualeditor-referenceslist-missingref' ) );
 	}
+};
+
+/**
+ * Get the reference node in the containing document (not the internal list document)
+ *
+ * @return {ve.dm.Node} Reference node
+ */
+ve.ui.MWReferenceContextItem.prototype.getReferenceNode = function () {
+	var refModel;
+	if ( !this.model.isEditable() ) {
+		return null;
+	}
+	if ( !this.referenceNode ) {
+		refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model );
+		this.referenceNode = this.getFragment().getDocument().getInternalList().getItemNode( refModel.getListIndex() );
+	}
+	return this.referenceNode;
 };
 
 /**
