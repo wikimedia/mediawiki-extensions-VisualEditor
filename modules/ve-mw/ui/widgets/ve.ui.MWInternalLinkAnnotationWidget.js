@@ -55,6 +55,7 @@ ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( a
 ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
 	return new mw.widgets.TitleSearchWidget( ve.extendObject( {
 		icon: 'search',
+		showRedlink: true,
 		showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
 		showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
 		cache: ve.init.platform.linkCache
