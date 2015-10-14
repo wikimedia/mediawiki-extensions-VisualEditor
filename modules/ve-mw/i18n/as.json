@@ -147,7 +147,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ক্ষেত্ৰ অবচিত হৈছে। $1",
 	"visualeditor-dialog-transclusion-loading": "ল'ড হৈ আছে…",
 	"visualeditor-dialog-transclusion-multiple-mode": "বিকল্পসমূহ দেখুৱাওক",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|আপুনি}} এই পৃষ্ঠাত \"$1\" সাঁচটো যোগ দিব খুজিছে। এতিয়া ইয়াৰ কোনো বিৱৰণ নাই, কিন্তু <a $2>সাঁচৰ পৃষ্ঠাত</a> অলপ তথ্য থাকিব পাৰে।",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|আপুনি}} এই পৃষ্ঠাত \"$1\" সাঁচটো যোগ দিব খুজিছে। এতিয়া ইয়াৰ কোনো বিৱৰণ নাই, কিন্তু [[{{ns:template}}:$1|সাঁচৰ পৃষ্ঠাত]] অলপ তথ্য থাকিব পাৰে।",
 	"visualeditor-dialog-transclusion-options": "বিকল্পসমূহ",
 	"visualeditor-dialog-transclusion-param-default": "পূৰ্ববনিৰ্ধাৰিত মান: $1",
 	"visualeditor-dialog-transclusion-param-example": "উদাহৰণৰ মান: $1",

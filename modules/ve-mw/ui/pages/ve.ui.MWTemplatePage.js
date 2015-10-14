@@ -67,12 +67,12 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		if ( title ) {
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.append( ve.msg(
+				.html( mw.message(
 					'visualeditor-dialog-transclusion-no-template-description',
 					title.getRelativeText( 10 ),
-					ve.getHtmlAttributes( { target: '_blank', href: title.getUrl() } ),
 					mw.user
-				) );
+				).parse() )
+				.find( 'a' ).attr( 'target', '_blank' );
 		}
 	}
 

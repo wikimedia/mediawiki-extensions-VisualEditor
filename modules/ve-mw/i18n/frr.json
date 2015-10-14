@@ -102,7 +102,7 @@
 	"visualeditor-dialog-transclusion-content": "Auersicht",
 	"visualeditor-dialog-transclusion-loading": "Loose ...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mögelkhaiden wise",
-	"visualeditor-dialog-transclusion-no-template-description": "Dü heest üüb detheer sidj det föörlaag „$1“ brükt. Detdiar föörlaag hää noch nian beskriiwang, man ferlicht stäänt wat üüb det <a $2>föörlaagensidj</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "Dü heest üüb detheer sidj det föörlaag „$1“ brükt. Detdiar föörlaag hää noch nian beskriiwang, man ferlicht stäänt wat üüb det [[{{ns:template}}:$1|föörlaagensidj]].",
 	"visualeditor-dialog-transclusion-options": "Iinstelangen",
 	"visualeditor-dialog-transclusion-placeholder": "Nei föörlaag",
 	"visualeditor-dialog-transclusion-remove-content": "Tekst wechnem",

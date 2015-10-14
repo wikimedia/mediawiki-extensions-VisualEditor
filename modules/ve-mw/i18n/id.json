@@ -193,7 +193,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Bidang telah usang. $1",
 	"visualeditor-dialog-transclusion-loading": "Memuat...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Tampilkan opsi",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Anda menambahkan}} templat \"$1\" ke halaman ini. Templat tersebut belum memiliki keterangan, namun mungkin ada beberapa informasi pada <a $2>halaman templat tersebut</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Anda menambahkan}} templat \"$1\" ke halaman ini. Templat tersebut belum memiliki keterangan, namun mungkin ada beberapa informasi pada [[{{ns:template}}:$1|halaman templat tersebut]].",
 	"visualeditor-dialog-transclusion-options": "Opsi",
 	"visualeditor-dialog-transclusion-param-default": "Nilai baku: $1",
 	"visualeditor-dialog-transclusion-param-example": "Nilai contoh: $1",

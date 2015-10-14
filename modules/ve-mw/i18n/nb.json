@@ -197,7 +197,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Feltet er utdatert. $1",
 	"visualeditor-dialog-transclusion-loading": "Laster…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Vis innstillinger",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Du}} redigerer malen «$1» på denne siden. Den mangler foreløpig en beskrivelse, men det kan finnes mer informasjon på <a $2>malsiden</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Du}} redigerer malen «$1» på denne siden. Den mangler foreløpig en beskrivelse, men det kan finnes mer informasjon på [[{{ns:template}}:$1|malsiden]].",
 	"visualeditor-dialog-transclusion-options": "Valg",
 	"visualeditor-dialog-transclusion-param-default": "Standardverdi: $1",
 	"visualeditor-dialog-transclusion-param-example": "Eksempelverdi: $1",

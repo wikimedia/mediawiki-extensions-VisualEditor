@@ -145,7 +145,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Жолаққа тыйым салынған. $1",
 	"visualeditor-dialog-transclusion-loading": "Жүктеуде…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Параметрлерді көрсету",
-	"visualeditor-dialog-transclusion-no-template-description": "Бұл бетке \"$1\" үлгісін {{GENDER:$3|қоспақшысыз}}. Онда сипаттамасы жоқ, бірақ <a $2>үлгі бетінде</a> кейбір ақпараттар бар болу мүмкін.",
+	"visualeditor-dialog-transclusion-no-template-description": "Бұл бетке \"$1\" үлгісін {{GENDER:$2|қоспақшысыз}}. Онда сипаттамасы жоқ, бірақ [[{{ns:template}}:$1|үлгі бетінде]] кейбір ақпараттар бар болу мүмкін.",
 	"visualeditor-dialog-transclusion-options": "Параметрлер",
 	"visualeditor-dialog-transclusion-param-default": "Әдепкі мән: $1",
 	"visualeditor-dialog-transclusion-param-example": "Мысал мән: $1",

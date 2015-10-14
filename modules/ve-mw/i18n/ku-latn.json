@@ -99,7 +99,7 @@
 	"visualeditor-dialog-transclusion-content": "Naverok",
 	"visualeditor-dialog-transclusion-loading": "Tê barkirin...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Vebijarkan nîşan bide",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Tu}} niha şablona \"§1§ tevlî vê rûpelê dikî. Hê danasîna vê tune ye, lê dibe ku hin agahî li ser \"rûpela şablonê\" hebin.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Tu}} niha şablona \"§1§ tevlî vê rûpelê dikî. Hê danasîna vê tune ye, lê dibe ku hin agahî li ser \"rûpela şablonê\" hebin.",
 	"visualeditor-dialog-transclusion-options": "Vebijark",
 	"visualeditor-dialog-transclusion-param-example": "Bihayê mînak:$1",
 	"visualeditor-dialog-transclusion-placeholder": "Şablonekê lê zêde bike",

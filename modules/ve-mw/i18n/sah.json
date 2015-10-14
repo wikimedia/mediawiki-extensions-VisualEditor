@@ -160,7 +160,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Хонуу эргэрбит. $1",
 	"visualeditor-dialog-transclusion-loading": "Хачайдана турар...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Нарылыыр кээмэйдэри көрдөр",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Эн халыыбы}} «$1» сирэйгэ эбэн эрэҕин. Ойуулааһына суох эбит, ол эрээри, баҕар,  <a $2>халыып бэйэтин сирэйигэр</a> баара буолуо.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Эн халыыбы}} «$1» сирэйгэ эбэн эрэҕин. Ойуулааһына суох эбит, ол эрээри, баҕар,  [[{{ns:template}}:$1|халыып бэйэтин сирэйигэр]] баара буолуо.",
 	"visualeditor-dialog-transclusion-options": "Туруоруулар",
 	"visualeditor-dialog-transclusion-param-default": "Анаан туруоруллубатах буоллаҕына: $1",
 	"visualeditor-dialog-transclusion-param-example": "Туруоруу холобура: $1",

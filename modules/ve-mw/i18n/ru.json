@@ -183,7 +183,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Поле является устаревшим. $1",
 	"visualeditor-dialog-transclusion-loading": "Загрузка…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Показать параметры",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Вы добавляете шаблон}} «$1» на эту страницу. У него ещё нет описания, но может быть есть какая-то информация на <a $2>странице шаблона</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Вы добавляете шаблон}} «$1» на эту страницу. У него ещё нет описания, но может быть есть какая-то информация на [[{{ns:template}}:$1|странице шаблона]].",
 	"visualeditor-dialog-transclusion-options": "Параметры",
 	"visualeditor-dialog-transclusion-param-default": "Значение по умолчанию: $1",
 	"visualeditor-dialog-transclusion-param-example": "Пример значения: $1",

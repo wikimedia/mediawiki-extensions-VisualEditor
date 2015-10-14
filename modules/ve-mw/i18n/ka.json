@@ -189,7 +189,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ველი მოძველდა. $1",
 	"visualeditor-dialog-transclusion-loading": "იტვირთება...",
 	"visualeditor-dialog-transclusion-multiple-mode": "პარამეტრების ჩვენება",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|თქვენ ამატებთ თარგს}} „$1“ ამ გვერდზე. მას ჯერ არ აქვს აღწერა, მაგრამ შესაძლოა აქვს რამე ინფორმაცია <a $2>თარგის გვერდზე</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|თქვენ ამატებთ თარგს}} „$1“ ამ გვერდზე. მას ჯერ არ აქვს აღწერა, მაგრამ შესაძლოა აქვს რამე ინფორმაცია [[{{ns:template}}:$1|თარგის გვერდზე]].",
 	"visualeditor-dialog-transclusion-options": "პარამეტრები",
 	"visualeditor-dialog-transclusion-param-default": "საწყისი მნიშვნელობა: $1",
 	"visualeditor-dialog-transclusion-param-example": "მნიშვნელობის მაგალითი: $1",

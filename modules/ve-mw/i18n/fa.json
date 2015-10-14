@@ -203,7 +203,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "بخش زشت شده. $1",
 	"visualeditor-dialog-transclusion-loading": "در حال بارگیری...",
 	"visualeditor-dialog-transclusion-multiple-mode": "نمایش گزینه‌ها",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|شما در حال اضافه کردن}} الگوی \"$1 \" به این صفحه هستید. این هنوز توضیح ندارد اما ممکن است برخی اطلاعات بر روی <a $2>صفحهٔ الگو </a> وجود داشته باشد.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|شما در حال اضافه کردن}} الگوی \"$1 \" به این صفحه هستید. این هنوز توضیح ندارد اما ممکن است برخی اطلاعات بر روی [[{{ns:template}}:$1|صفحهٔ الگو ]] وجود داشته باشد.",
 	"visualeditor-dialog-transclusion-options": "گزینه‌ها",
 	"visualeditor-dialog-transclusion-param-default": "مقدار پیش‌فرض:$1",
 	"visualeditor-dialog-transclusion-param-example": "مقدار مثال:$1",

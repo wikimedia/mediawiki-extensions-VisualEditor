@@ -132,7 +132,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parameter je zastaraný. $1",
 	"visualeditor-dialog-transclusion-loading": "Načítava sa...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Zobraziť možnosti",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Pridávate}} na túto stránku šablónu „$1“. Nemá zatiaľ popis, nejaké informácie sa ale môžu nachádzať na <a $2>jej stránke</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Pridávate}} na túto stránku šablónu „$1“. Nemá zatiaľ popis, nejaké informácie sa ale môžu nachádzať na [[{{ns:template}}:$1|jej stránke]].",
 	"visualeditor-dialog-transclusion-options": "Možnosti",
 	"visualeditor-dialog-transclusion-param-default": "Predvolená hodnota: $1",
 	"visualeditor-dialog-transclusion-param-info": "Popis parametra",

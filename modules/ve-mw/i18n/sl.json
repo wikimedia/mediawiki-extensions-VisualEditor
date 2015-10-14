@@ -142,7 +142,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parameter je nezaželen. $1",
 	"visualeditor-dialog-transclusion-loading": "Nalaganje ...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Prikaži možnosti",
-	"visualeditor-dialog-transclusion-no-template-description": "Na to stran {{GENDER:$3|dodajate}} predlogo \"$1\". Ta še nima opisa, toda mogoče obstajajo informacije na <a $2>strani predloge</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "Na to stran {{GENDER:$2|dodajate}} predlogo \"$1\". Ta še nima opisa, toda mogoče obstajajo informacije na [[{{ns:template}}:$1|strani predloge]].",
 	"visualeditor-dialog-transclusion-options": "Možnosti",
 	"visualeditor-dialog-transclusion-param-default": "Privzeta vrednost: $1",
 	"visualeditor-dialog-transclusion-param-example": "Zgled vrednosti: $1",

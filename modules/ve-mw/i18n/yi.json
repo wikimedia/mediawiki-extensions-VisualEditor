@@ -142,7 +142,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "פעלד איז פארעלטערט. $1",
 	"visualeditor-dialog-transclusion-loading": "לאָדט…",
 	"visualeditor-dialog-transclusion-multiple-mode": "ווײַזן אפציעס",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|איר לייגט צו}} דעם \"$1\" מוסטער צו דעם בלאט. ער האט נאך נישט קיין באשרײַבונג, ס׳איז אבער מעגלעך  פאראן אינפארמאציע אויפן <a $2>מוסטער-בלאט</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|איר לייגט צו}} דעם \"$1\" מוסטער צו דעם בלאט. ער האט נאך נישט קיין באשרײַבונג, ס׳איז אבער מעגלעך  פאראן אינפארמאציע אויפן [[{{ns:template}}:$1|מוסטער-בלאט]].",
 	"visualeditor-dialog-transclusion-options": "ברירות",
 	"visualeditor-dialog-transclusion-param-default": "גרונט־ווערט: $1",
 	"visualeditor-dialog-transclusion-param-example": "ביישפיל־ווערט: $1",

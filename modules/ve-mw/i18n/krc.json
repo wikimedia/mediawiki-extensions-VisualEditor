@@ -153,7 +153,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Къыр эскиленнгенди. $1",
 	"visualeditor-dialog-transclusion-loading": "Джюклениу...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Параметрлени кёргюз",
-	"visualeditor-dialog-transclusion-no-template-description": "«$1» шаблонну сиз бу бетге {{GENDER:$3|саласыз}}. Аны алкъын айгъакълауу джокъду, алай а <a $2>шаблонну бети</a>нде къаллай болса да иформация болургъа боллукъду.",
+	"visualeditor-dialog-transclusion-no-template-description": "«$1» шаблонну сиз бу бетге {{GENDER:$2|саласыз}}. Аны алкъын айгъакълауу джокъду, алай а [[{{ns:template}}:$1|шаблонну бети]]нде къаллай болса да иформация болургъа боллукъду.",
 	"visualeditor-dialog-transclusion-options": "Параметрле",
 	"visualeditor-dialog-transclusion-param-default": "Тынгылау бла магъанасы: $1",
 	"visualeditor-dialog-transclusion-param-example": "Магъана юлгю: $1",

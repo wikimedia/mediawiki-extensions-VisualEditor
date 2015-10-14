@@ -172,7 +172,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "필드는 사용되지 않습니다. $1",
 	"visualeditor-dialog-transclusion-loading": "불러오는 중...",
 	"visualeditor-dialog-transclusion-multiple-mode": "옵션 보기",
-	"visualeditor-dialog-transclusion-no-template-description": "이 문서에 \"$1\" 틀을 {{GENDER:$3|추가하고 있습니다}}. 아직 설명은 없지만, <a $2>틀 문서</a>에 어떤 정보가 있을 수 있습니다.",
+	"visualeditor-dialog-transclusion-no-template-description": "이 문서에 \"$1\" 틀을 {{GENDER:$2|추가하고 있습니다}}. 아직 설명은 없지만, [[{{ns:template}}:$1|틀 문서]]에 어떤 정보가 있을 수 있습니다.",
 	"visualeditor-dialog-transclusion-options": "선택 사항",
 	"visualeditor-dialog-transclusion-param-default": "기본 값: $1",
 	"visualeditor-dialog-transclusion-param-example": "예제 값: $1",

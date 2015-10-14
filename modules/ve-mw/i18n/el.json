@@ -189,7 +189,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Το πεδίο έχει καταργηθεί.$1",
 	"visualeditor-dialog-transclusion-loading": "Φόρτωση...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Εμφάνιση επιλογών",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Προσθέτετε}} το πρότυπο \"$1\" σε αυτή τη σελίδα. Δεν έχει ακόμη περιγραφή, αλλά μπορεί να υπάρχουν κάποιες πληροφορίες στη <a $2>σελίδα του προτύπου</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Προσθέτετε}} το πρότυπο \"$1\" σε αυτή τη σελίδα. Δεν έχει ακόμη περιγραφή, αλλά μπορεί να υπάρχουν κάποιες πληροφορίες στη [[{{ns:template}}:$1|σελίδα του προτύπου]].",
 	"visualeditor-dialog-transclusion-options": "Επιλογές",
 	"visualeditor-dialog-transclusion-param-default": "Προεπιλεγμένη τιμή: $1",
 	"visualeditor-dialog-transclusion-param-example": "Ενδεικτική τιμή: $1",

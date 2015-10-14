@@ -185,7 +185,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "A mező elavult. $1",
 	"visualeditor-dialog-transclusion-loading": "Betöltés…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Opciók megjelenítése",
-	"visualeditor-dialog-transclusion-no-template-description": "Éppen a(z) „$1” sablont {{GENDER:$3|adod hozzá}} ehhez a laphoz. Még nincs leírása, de a <a $2>leírólapja</a> további információkkal szolgálhat.",
+	"visualeditor-dialog-transclusion-no-template-description": "Éppen a(z) „$1” sablont {{GENDER:$2|adod hozzá}} ehhez a laphoz. Még nincs leírása, de a [[{{ns:template}}:$1|leírólapja]] további információkkal szolgálhat.",
 	"visualeditor-dialog-transclusion-options": "Beállítások",
 	"visualeditor-dialog-transclusion-param-default": "Alapértelmezett érték: $1",
 	"visualeditor-dialog-transclusion-param-example": "Példaérték: $1",

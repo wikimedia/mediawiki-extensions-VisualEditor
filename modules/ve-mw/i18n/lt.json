@@ -197,7 +197,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Laukas yra nebenaudotinas. $1",
 	"visualeditor-dialog-transclusion-loading": "Įkeliama...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Rodyti parinktis",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Jūs pridedate}} \"$1\" šabloną prie šio puslapio. Jis kol kas neturi aprašymo, bet gali būti truputis informacijos <a $2>šablono puslapyje</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Jūs pridedate}} \"$1\" šabloną prie šio puslapio. Jis kol kas neturi aprašymo, bet gali būti truputis informacijos [[{{ns:template}}:$1|šablono puslapyje]].",
 	"visualeditor-dialog-transclusion-options": "Parinktys",
 	"visualeditor-dialog-transclusion-param-default": "Numatytoji reikšmė: $1",
 	"visualeditor-dialog-transclusion-param-example": "Pavyzdinė reikšmė: $1",

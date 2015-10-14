@@ -169,7 +169,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Väli on iganenud. $1",
 	"visualeditor-dialog-transclusion-loading": "Laadimine...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Näita suvandeid",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Lisad}} sellele leheküljele malli \"$1\". Mallil pole veel kirjeldust, aga malli kohta võib üht-teist leiduda <a $2>malli leheküljel</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Lisad}} sellele leheküljele malli \"$1\". Mallil pole veel kirjeldust, aga malli kohta võib üht-teist leiduda [[{{ns:template}}:$1|malli leheküljel]].",
 	"visualeditor-dialog-transclusion-options": "Suvandid",
 	"visualeditor-dialog-transclusion-param-default": "Vaikeväärtus: $1",
 	"visualeditor-dialog-transclusion-param-example": "Näidisväärtus: $1",

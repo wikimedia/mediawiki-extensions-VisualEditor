@@ -153,7 +153,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Поље се више не користи. $1",
 	"visualeditor-dialog-transclusion-loading": "Учитавање…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Прикажи опције",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Додајете}} шаблон „$1“ на ову страницу. Шаблон још увек нема опис, али је могуће да постоје неке информације на <a $2>страници шаблона</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Додајете}} шаблон „$1“ на ову страницу. Шаблон још увек нема опис, али је могуће да постоје неке информације на [[{{ns:template}}:$1|страници шаблона]].",
 	"visualeditor-dialog-transclusion-options": "Опције",
 	"visualeditor-dialog-transclusion-param-info": "Опис поља",
 	"visualeditor-dialog-transclusion-param-info-missing": "Опис није доступан.",

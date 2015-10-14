@@ -194,7 +194,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Câmpul este învechit. $1",
 	"visualeditor-dialog-transclusion-loading": "Se încarcă...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Arată opțiunile",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$3|Sunteți în curs de adăugare}} a formatului „$1” în această pagină. Acesta nu are încă o descriere, dar ar putea exista câteva informații pe <a $2>pagina formatului</a>.",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Sunteți în curs de adăugare}} a formatului „$1” în această pagină. Acesta nu are încă o descriere, dar ar putea exista câteva informații pe [[{{ns:template}}:$1|pagina formatului]].",
 	"visualeditor-dialog-transclusion-options": "Opțiuni",
 	"visualeditor-dialog-transclusion-param-default": "Valoare implicită: $1",
 	"visualeditor-dialog-transclusion-param-example": "Exemplu de valoare: $1",
