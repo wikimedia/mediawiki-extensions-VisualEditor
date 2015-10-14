@@ -32,7 +32,6 @@ Feature: VisualEditor Options
       And I check the option for Enable display title
       And I type "automated test" for display title textbox
       And I click Apply Changes button
-    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then the options set in Advanced Settings panel should appear in diff view
@@ -46,7 +45,6 @@ Feature: VisualEditor Options
       And I check the option for Disable edit links next to each heading on this page
       And I check the option for This is a Disambiguation page
       And I click Apply Changes button
-    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then the options set in Page Settings panel should appear in diff view

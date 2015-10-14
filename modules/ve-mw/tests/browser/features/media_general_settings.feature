@@ -13,7 +13,6 @@ Feature: VisualEditor Media Interface
       And I fill up the Caption field with "caption"
       And I fill up the Alternative text with "alt text"
       And I click Insert
-    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then diff view should show media file with caption and alt text

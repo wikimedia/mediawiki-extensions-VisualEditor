@@ -11,7 +11,6 @@ Feature: VisualEditor Media Interface
       And I select an Image
       And I click Use this image
       And I click Insert
-    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then  diff view should show correct markup

@@ -8,7 +8,6 @@ Feature: VisualEditor general text markup features
   Scenario Outline: VisualEditor general markup
     When I click the text style menu
       And I click the <type_of_markup> menu option
-    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then <expected_markup_text> should appear in the diff view
@@ -23,7 +22,6 @@ Feature: VisualEditor general text markup features
     When I click the text style menu
       And I click the More option
       And I click the <type_of_markup> menu option
-    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then <expected_markup_text> should appear in the diff view
