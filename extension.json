@@ -978,7 +978,8 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js",
-				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js"
+				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWEducationPopupTool.js"
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
@@ -986,7 +987,8 @@
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWWelcomeDialog.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css",
+				"modules/ve-mw/ui/styles/tools/ve.ui.MWEducationPopupTool.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
@@ -1011,6 +1013,7 @@
 				"visualeditor-editnotices-tooltip",
 				"visualeditor-editsummary",
 				"visualeditor-editsummary-bytes-remaining",
+				"visualeditor-educationpopup-dismiss",
 				"visualeditor-feedback-tool",
 				"visualeditor-feedback-defaultmessage",
 				"visualeditor-help-label",
@@ -1233,7 +1236,8 @@
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css",
-				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.css"
+				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.css",
+				"modules/ve-mw/ui/styles/tools/ve.ui.MWLinkInspectorTool.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
@@ -1248,6 +1252,8 @@
 				"visualeditor-linkinspector-convert-link-isbn",
 				"visualeditor-linkinspector-convert-link-pmid",
 				"visualeditor-linkinspector-convert-link-rfc",
+				"visualeditor-linkinspector-educationpopup-title",
+				"visualeditor-linkinspector-educationpopup-text",
 				"visualeditor-linkinspector-illegal-title",
 				"visualeditor-linknodeinspector-add-label",
 				"visualeditor-linknodeinspector-title",
