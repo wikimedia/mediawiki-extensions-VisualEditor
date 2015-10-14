@@ -14,7 +14,6 @@ When(/^I enter external link (.+) into link Content box$/) do |link_content|
   on(VisualEditorPage) do |page|
     page.link_textfield_element.when_present
     page.link_textfield_element.send_keys(link_content)
-    page.link_overlay_external_link_element.when_present
   end
 end
 
