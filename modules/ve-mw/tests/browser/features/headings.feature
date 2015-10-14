@@ -8,6 +8,7 @@ Feature: VisualEditor Headings
   Scenario Outline: Cycle through headings values
     When I click the down arrow on the Headings menu
       And I click <headings_interface_name>
+    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then <headings_string> should appear in the diff view
