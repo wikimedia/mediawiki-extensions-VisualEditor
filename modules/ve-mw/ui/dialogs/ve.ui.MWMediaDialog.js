@@ -1086,13 +1086,13 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 
+			// Reset upload booklet
+			this.mediaUploadBooklet.initialize();
+
 			if ( data.file ) {
 				this.searchTabs.setCard( 'upload' );
 				this.mediaUploadBooklet.setFile( data.file );
 			}
-
-			// Reset upload booklet
-			this.mediaUploadBooklet.initialize();
 		}, this );
 };
 
