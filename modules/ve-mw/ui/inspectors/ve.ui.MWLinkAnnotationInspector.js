@@ -74,7 +74,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.linkTypeIndex.connect( this, { set: 'onLinkTypeIndexSet' } );
 	this.internalAnnotationInput.connect( this, { change: 'onInternalLinkChange' } );
 	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
-	this.internalAnnotationInput.getResults().connect( this, { choose: 'onFormSubmit' } );
+	this.internalAnnotationInput.input.getResults().connect( this, { choose: 'onFormSubmit' } );
 	// Form submit only auto triggers on enter when there is one input
 	this.internalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
 	this.externalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
