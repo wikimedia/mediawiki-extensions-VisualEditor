@@ -964,7 +964,6 @@
 				"modules/ve-mw/ui/ve.ui.MWSequenceRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWExtensionWindow.js",
 				"modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js",
-				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWImageTransferHandler.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTargetWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js",
@@ -1140,6 +1139,7 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaSearchWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaResultWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaInfoFieldWidget.js",
+				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWMediaTransferHandler.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMediaDialog.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWMediaDialogTool.js"
 			],
