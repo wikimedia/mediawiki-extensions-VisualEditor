@@ -57,8 +57,6 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 		width: 300
 	} );
 
-	this.popup.setClippableContainer( null ); // Ugh, see https://gerrit.wikimedia.org/r/232850
-
 	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingdot' );
 	this.$element
 		.addClass( 've-ui-educationpopup' )
@@ -96,7 +94,10 @@ ve.ui.MWEducationPopupTool.prototype.onSelect = function () {
 	var usePrefs = !mw.user.isAnon(),
 		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' );
 
-	if ( this.$pulsatingDot.is( ':visible' ) ) {
+	// Beware: this method is called even if the constructor bailed after checking
+	// the user preference / cookie / localStorage. In that case, this.$pulsatingDot,
+	// this.popup and other properties will not be set.
+	if ( this.$pulsatingDot && this.$pulsatingDot.is( ':visible' ) ) {
 		if ( ve.init.target.openEducationPopupTool ) {
 			ve.init.target.openEducationPopupTool.popup.toggle( false );
 			ve.init.target.openEducationPopupTool.setActive( false );
@@ -120,7 +121,7 @@ ve.ui.MWEducationPopupTool.prototype.onSelect = function () {
 				$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
 			}
 		}
-	} else if ( !this.popup.isVisible() ) {
+	} else if ( !this.popup || !this.popup.isVisible() ) {
 		return this.constructor.super.prototype.onSelect.apply( this, arguments );
 	}
 };
