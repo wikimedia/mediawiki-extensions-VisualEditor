@@ -8,6 +8,7 @@ Feature: VisualEditor
 
   Scenario Outline: Edit with strings
     When I edit the page with <input_string>
+    Then Save page should be visible
       And I click Save page
       And I click This is a minor edit
       And I click Review your changes

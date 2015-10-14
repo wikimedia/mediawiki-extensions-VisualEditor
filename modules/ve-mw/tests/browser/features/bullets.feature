@@ -7,6 +7,7 @@ Feature: VisualEditor Bullets, Numbering
 
   Scenario Outline: check strings for bullets and numbering
     When I click <control>
+    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then a <character> is added in front of input string in the diff view
@@ -19,6 +20,7 @@ Feature: VisualEditor Bullets, Numbering
   Scenario Outline: check increase indent for bullets and numbering
     When I click <control>
       And I click Increase indentation
+    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then a <character> is added in front of input string in the diff view
@@ -33,6 +35,7 @@ Feature: VisualEditor Bullets, Numbering
   Scenario Outline: check decrease indent for bullets and numbering
     When I click <control>
       And I click Decrease indentation
+    Then Save page should be visible
       And I click Save page
       And I click Review your changes
     Then nothing is added in front of input string in the diff view

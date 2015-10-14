@@ -7,11 +7,12 @@ Feature: VisualEditor general text markup features
 
   Scenario Outline: VisualEditor general markup
     When I click the text style menu
-    And I click the <type_of_markup> menu option
-    And I click Save page
-    And I click Review your changes
+      And I click the <type_of_markup> menu option
+    Then Save page should be visible
+      And I click Save page
+      And I click Review your changes
     Then <expected_markup_text> should appear in the diff view
-    And I can click the X on the save box
+      And I can click the X on the save box
   Examples:
     | type_of_markup | expected_markup_text                          |
     | Bold           | '''General Markup VisualEditor Test'''        |
@@ -21,11 +22,12 @@ Feature: VisualEditor general text markup features
   Scenario Outline: VisualEditor more general markup
     When I click the text style menu
       And I click the More option
-    And I click the <type_of_markup> menu option
-    And I click Save page
-    And I click Review your changes
+      And I click the <type_of_markup> menu option
+    Then Save page should be visible
+      And I click Save page
+      And I click Review your changes
     Then <expected_markup_text> should appear in the diff view
-    And I can click the X on the save box
+      And I can click the X on the save box
   Examples:
     | type_of_markup | expected_markup_text                          |
     | Computer Code  | <code>General Markup VisualEditor Test</code> |
