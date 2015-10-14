@@ -16,4 +16,4 @@ Feature: VisualEditor Media Interface
     Then  diff view should show correct markup
   Examples:
   | search_term           |
-  | bug                   |
+  | Apollo 11 bootprint   |

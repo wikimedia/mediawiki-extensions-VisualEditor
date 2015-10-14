@@ -11,6 +11,6 @@ Then(/^diff view should show media file with caption and alt text$/) do
     page.wait_until(15) do
       page.diff_view_element.exists?
     end
-    expect(page.diff_view).to match(/\[\[File:A Bug.JPG\|alt=alt text\|thumb\|caption\]\]/)
+    expect(page.diff_view).to match(/\[\[File:Apollo 11 bootprint.jpg\|alt=alt text\|thumb\|caption\]\]/)
   end
 end

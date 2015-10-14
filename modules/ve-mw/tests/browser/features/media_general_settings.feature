@@ -7,7 +7,7 @@ Feature: VisualEditor Media Interface
 
   Scenario: VisualEditor insert new media
     Given I click Media
-      And I enter bug into media Search box
+      And I enter Apollo 11 bootprint into media Search box
       And I select an Image
       And I click Use this image
       And I fill up the Caption field with "caption"

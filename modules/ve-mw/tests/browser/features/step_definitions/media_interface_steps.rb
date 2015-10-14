@@ -8,8 +8,6 @@ end
 When(/^I enter (.+) into media Search box$/) do |content|
   on(VisualEditorPage) do |page|
     sleep 1
-    page.media_search_element.when_present.click
-    page.media_search_element.send_keys('')
     page.media_search_element.when_present.send_keys(content)
   end
 end
@@ -31,6 +29,6 @@ Then(/^diff view should show correct markup$/) do
     page.wait_until(15) do
       page.diff_view_element.exists?
     end
-    expect(page.diff_view).to match(/\[\[File:A Bug.JPG\|thumb\]\]/)
+    expect(page.diff_view).to match(/\[\[File:Apollo 11 bootprint.jpg\|thumb\]\]/)
   end
 end
