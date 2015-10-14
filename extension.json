@@ -959,6 +959,28 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.switching": {
+			"scripts": [
+				"modules/ve-mw/ui/dialogs/ve.ui.MWVESwitchConfirmDialog.js"
+			],
+			"dependencies": [
+				"oojs",
+				"oojs-ui",
+				"ext.visualEditor.core"
+			],
+			"messages": [
+				"visualeditor-mweditmodeve-title",
+				"visualeditor-mweditmodeve-tool",
+				"visualeditor-mweditmodeve-warning",
+				"visualeditor-mweditmodesource-warning-cancel",
+				"visualeditor-mweditmodesource-warning-switch",
+				"visualeditor-mweditmodesource-warning-switch-discard"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.mwcore": {
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js",
@@ -1022,7 +1044,8 @@
 				"jquery.byteLimit",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.language.specialCharacters",
-				"mediawiki.widgets"
+				"mediawiki.widgets",
+				"ext.visualEditor.switching"
 			],
 			"messages": [
 				"visualeditor-beta-label",

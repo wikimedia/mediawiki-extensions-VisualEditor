@@ -18,8 +18,9 @@
  * @singleton
  */
 ( function () {
-	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage,
+	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, pageCanLoadVE,
 		init, support, targetPromise, enable, tempdisable, autodisable, userPrefEnabled,
+		initialWikitext,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -143,6 +144,25 @@
 		return targetPromise;
 	}
 
+	function activatePageTarget() {
+		trackActivateStart( { type: 'page', mechanism: 'click' } );
+
+		if ( !active ) {
+			if ( history.pushState ) {
+				// Replace the current state with one that is tagged as ours, to prevent the
+				// back button from breaking when used to exit VE. FIXME: there should be a better
+				// way to do this. See also similar code in the DesktopArticleTarget constructor.
+				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+				// Set veaction to edit
+				history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+			}
+
+			// Update mw.Uri instance
+			uri = veEditUri;
+
+			activateTarget();
+		}
+	}
 	/**
 	 * Load and activate the target.
 	 *
@@ -203,16 +223,15 @@
 	uri = new mw.Uri();
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
-	isViewPage = (
-		mw.config.get( 'wgIsArticle' ) &&
-		!( 'diff' in uri.query )
-	) || (
+	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
+	pageCanLoadVE = (
+		isViewPage ||
 		mw.config.get( 'wgAction' ) === 'edit' ||
 		mw.config.get( 'wgAction' ) === 'submit'
 	);
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
-	veEditUri = ( isViewPage ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
+	veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
 
 	support = {
 		es5: !!(
@@ -326,7 +345,7 @@
 						// Use url instead of '#'.
 						// So that 1) one can always open it in a new tab, even when
 						// onEditTabClick is bound.
-						// 2) when onEditTabClick is not bound (!isViewPage) it will
+						// 2) when onEditTabClick is not bound (!pageCanLoadVE) it will
 						// just work.
 						veEditUri,
 						tabMessages[ action ] !== null ? mw.msg( tabMessages[ action ] ) : $caEditLink.text(),
@@ -396,7 +415,7 @@
 				);
 			}
 
-			if ( isViewPage ) {
+			if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.click( init.onEditTabClick );
 			}
@@ -470,7 +489,7 @@
 					);
 			}
 
-			if ( isViewPage ) {
+			if ( pageCanLoadVE ) {
 				// Only init without refresh if we're on a view page. Though section edit links
 				// are rarely shown on non-view pages, they appear in one other case, namely
 				// when on a diff against the latest version of a page. In that case we mustn't
@@ -484,6 +503,10 @@
 		},
 
 		onEditTabClick: function ( e ) {
+			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext,
+				windowManager = new OO.ui.WindowManager(),
+				switchWindow;
+
 			// Default mouse button is normalised by jQuery to key code 1.
 			// Only do our handling if no keys are pressed, mouse button is 1
 			// (e.g. not middle click or right click) and no modifier keys
@@ -492,22 +515,26 @@
 				return;
 			}
 
-			trackActivateStart( { type: 'page', mechanism: 'click' } );
+			if ( !isViewPage && ( mw.config.get( 'wgAction' ) === 'submit' || wikitextModified ) ) {
+				// Prompt if either we're on action=submit (the user has previewed) or
+				// the wikitext hash is different to the value observed upon page load.
 
-			if ( !active ) {
-				if ( history.pushState ) {
-					// Replace the current state with one that is tagged as ours, to prevent the
-					// back button from breaking when used to exit VE. FIXME: there should be a better
-					// way to do this. See also similar code in the DesktopArticleTarget constructor.
-					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
-					// Set veaction to edit
-					history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
-				}
-
-				// Update mw.Uri instance
-				uri = veEditUri;
-
-				activateTarget();
+				$( 'body' ).append( windowManager.$element );
+				switchWindow = new ve.ui.MWVESwitchConfirmDialog();
+				windowManager.addWindows( [ switchWindow ] );
+				windowManager.openWindow( switchWindow ).done( function ( opened ) {
+					opened.done( function ( closing ) {
+						closing.done( function ( data ) {
+							if ( data && data.action === 'keep' ) {
+								activatePageTarget();
+							} else if ( data && data.action === 'discard' ) {
+								location.href = veEditUri;
+							}
+						} );
+					} );
+				} );
+			} else {
+				activatePageTarget();
 			}
 
 			e.preventDefault();
@@ -607,8 +634,12 @@
 		var currentUri = new mw.Uri( location.href ),
 			isSection;
 
+		if ( currentUri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
+			initialWikitext = $( '#wpTextbox1' ).val();
+		}
+
 		if ( init.isAvailable ) {
-			if ( isViewPage && uri.query.veaction === 'edit' ) {
+			if ( pageCanLoadVE && uri.query.veaction === 'edit' ) {
 				isSection = uri.query.vesection !== undefined;
 
 				trackActivateStart( { type: isSection ? 'section' : 'page', mechanism: 'url' } );

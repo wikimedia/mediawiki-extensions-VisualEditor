@@ -45,6 +45,9 @@ class VisualEditorHooks {
 			'ext.visualEditor.desktopArticleTarget.init',
 			'ext.visualEditor.targetLoader'
 		) );
+		if ( in_array( Action::getActionName( RequestContext::getMain() ), array( 'edit', 'submit' ) ) ) {
+			$output->addModules( 'ext.visualEditor.switching' );
+		}
 		$output->addModuleStyles( array( 'ext.visualEditor.desktopArticleTarget.noscript' ) );
 		// add scroll offset js variable to output
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
