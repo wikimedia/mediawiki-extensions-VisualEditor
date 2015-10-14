@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sindhu"
+			"Sindhu",
+			"Aursani"
 		]
 	},
-	"tooltip-ca-ve-edit": "هن صفحي کي وزيوئل ايڊيٽر ذريعي ترميم ڪريو",
+	"tooltip-ca-ve-edit": "هيءُ صفحو سنواريو",
+	"visualeditor-ca-createlocaldescriptionsource": "مقامي تشريحي ذريعو ڏيو",
+	"visualeditor-ca-createsource": "ذريعو سرجيو",
 	"visualeditor-ca-editsource": "وسيلي جي ترميم ڪريو",
-	"visualeditor-ca-editsource-section": "وسيلي جي ترميم ڪريو"
+	"visualeditor-ca-editsource-section": "وسيلي جي ترميم ڪريو",
+	"visualeditor-descriptionpagelink": "Project:وزيوئل‌ايڊيٽر"
 }
