@@ -21,7 +21,6 @@
 ve.ui.MWLinkInspectorTool = function VeUiMwLinkInspectorTool() {
 	ve.ui.MWLinkInspectorTool.super.apply( this, arguments );
 	ve.ui.MWEducationPopupTool.call( this, {
-		// TODO: Image for .oo-ui-tool-name-link .oo-ui-popupWidget-body
 		title: ve.msg( 'visualeditor-linkinspector-educationpopup-title' ),
 		text: ve.msg( 'visualeditor-linkinspector-educationpopup-text' )
 	} );
