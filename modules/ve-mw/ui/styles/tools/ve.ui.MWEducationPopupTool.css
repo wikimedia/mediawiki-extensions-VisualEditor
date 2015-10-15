@@ -6,17 +6,26 @@
  */
 
 .ve-ui-pulsatingDot {
-	width: 1em;
-	height: 1em;
-	border-radius: 0.5em;
-	background: #347bff;
+	width: 2.5em;
+	height: 2.5em;
+	border-radius: 50%;
+	background-color: #347bff;
 	position: absolute;
 	opacity: 1;
 	animation: pulse 3s ease-out;
 	animation-iteration-count: infinite;
 }
 
-.oo-ui-widget-disabled .ve-ui-pulsatingdot {
+.ve-ui-stillDot {
+	width: 0.8em;
+	height: 0.8em;
+	border-radius: 50%;
+	background-color: #347bff;
+	position: absolute;
+}
+
+.oo-ui-widget-disabled .ve-ui-pulsatingDot,
+.oo-ui-widget-disabled .ve-ui-stillDot {
 	display: none;
 }
 
