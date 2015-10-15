@@ -5,7 +5,6 @@ Feature: VisualEditor
     Given I go to the "Anonymous Edit Test" page with content "Anonymous Edit Test"
     When I edit the page with Editing with
       And I see the IP warning signs
-    Then Save page should be visible
       And I click Save page
       And I do not see This is a minor edit
       And I click Review your changes
