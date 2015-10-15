@@ -24,7 +24,8 @@
 			"Grebenkov",
 			"Nirovulf",
 			"Striking Blue",
-			"Дмитрий"
+			"Дмитрий",
+			"Краснорядцева Елена"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -201,6 +202,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Вы уверены, что хотите продолжить без заполнения {{PLURAL:$2|параметра|параметров}} «$1»?",
 	"visualeditor-dialog-transclusion-single-mode": "Скрыть параметры",
 	"visualeditor-dialog-transclusion-title": "Включение",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "Цитаты",
+	"visualeditor-dialogbutton-citation-educationpopup-text": "Улучшайте свой контент, добавляя туда список источников информации. Вы можете цитировать книги, газеты и веб-сайты.",
 	"visualeditor-dialogbutton-media-tooltip": "Медиафайл",
 	"visualeditor-dialogbutton-meta-tooltip": "Параметры страницы",
 	"visualeditor-dialogbutton-reference-full-label": "Простая форма",
@@ -217,6 +220,7 @@
 	"visualeditor-editnotices-tooltip": "Заметки по редактированию",
 	"visualeditor-editsummary": "Опишите внесённые изменения",
 	"visualeditor-editsummary-bytes-remaining": "Количество оставшихся байт",
+	"visualeditor-educationpopup-dismiss": "Ок, понятно",
 	"visualeditor-feedback-defaultmessage": "URL-адрес: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Заголовок страницы",
 	"visualeditor-formatdropdown-format-mw-heading2": "Заголовок",
@@ -230,6 +234,8 @@
 	"visualeditor-linkinspector-convert-link-isbn": "Превратить в ISBN-ссылку",
 	"visualeditor-linkinspector-convert-link-pmid": "Превратить в PMID-ссылку",
 	"visualeditor-linkinspector-convert-link-rfc": "Превратить в RFC-ссылку",
+	"visualeditor-linkinspector-educationpopup-title": "Ссылки",
+	"visualeditor-linkinspector-educationpopup-text": "Создавайте wiki-ссылки на другие статьи и сайты для важных слов. Это поможет читателям легче понять контекст.",
 	"visualeditor-linkinspector-illegal-title": "Недопустимый заголовок страницы",
 	"visualeditor-linknodeinspector-add-label": "Добавить подпись",
 	"visualeditor-linknodeinspector-title": "Простая ссылка",

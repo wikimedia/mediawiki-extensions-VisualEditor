@@ -21,7 +21,8 @@
 			"Impersonator 1",
 			"Duolaimi",
 			"Byfserag",
-			"Linforest"
+			"Linforest",
+			"Cwek"
 		]
 	},
 	"apihelp-visualeditor-description": "从Parsoid服务为页面返回HTML5。",
@@ -226,6 +227,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "您确信不需要填写$1个{{PLURAL:$2|参数}}就继续么？",
 	"visualeditor-dialog-transclusion-single-mode": "隐藏选项",
 	"visualeditor-dialog-transclusion-title": "嵌入",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "引用",
 	"visualeditor-dialogbutton-media-tooltip": "媒体文件",
 	"visualeditor-dialogbutton-meta-tooltip": "页面设置",
 	"visualeditor-dialogbutton-reference-full-label": "基本表格",
@@ -255,6 +257,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "转换为ISBN链接",
 	"visualeditor-linkinspector-convert-link-pmid": "转换为PMID链接",
 	"visualeditor-linkinspector-convert-link-rfc": "转换为RFC链接",
+	"visualeditor-linkinspector-educationpopup-title": "链接",
 	"visualeditor-linkinspector-illegal-title": "无效的页面标题",
 	"visualeditor-linknodeinspector-add-label": "添加标签",
 	"visualeditor-linknodeinspector-title": "简单链接",

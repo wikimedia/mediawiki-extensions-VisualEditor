@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Sindhu",
-			"Aursani"
+			"Aursani",
+			"Mehtab ahmed"
 		]
 	},
 	"tooltip-ca-ve-edit": "هيءُ صفحو سنواريو",
@@ -10,5 +11,8 @@
 	"visualeditor-ca-createsource": "ذريعو سرجيو",
 	"visualeditor-ca-editsource": "وسيلي جي ترميم ڪريو",
 	"visualeditor-ca-editsource-section": "وسيلي جي ترميم ڪريو",
-	"visualeditor-descriptionpagelink": "Project:وزيوئل‌ايڊيٽر"
+	"visualeditor-descriptionpagelink": "Project:وزيوئل‌ايڊيٽر",
+	"visualeditor-educationpopup-dismiss": "ٺيڪ، سمجهه ۾ اچي ويو",
+	"visualeditor-linkinspector-educationpopup-title": "ڳنڍڻا",
+	"visualeditor-linkinspector-educationpopup-text": "اهم لفظن کي ٻين وڪي مضمونن يا ڀلي ٻين ويب سائيٽس سان ڳنڍيو. اهو پڙهندڙن کي عبارت سمجھڻ ۾ مدد ڪندو."
 }
