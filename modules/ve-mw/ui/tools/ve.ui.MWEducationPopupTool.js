@@ -15,10 +15,10 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
-	var usePrefs = !mw.user.isAnon(),
+	var popupCloseButton, $popupContent,
+		usePrefs = !mw.user.isAnon(),
 		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' ),
-		tool = this,
-		popupCloseButton, $popupContent;
+		tool = this;
 
 	config = config || {};
 
@@ -39,15 +39,13 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	popupCloseButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-educationpopup-dismiss' ),
 		flags: [ 'progressive', 'primary' ],
-		classes: [ 've-ui-educationpopup-dismiss' ]
+		classes: [ 've-ui-educationPopup-dismiss' ]
 	} );
 	popupCloseButton.connect( this, { click: 'onPopupCloseButtonClick' } );
-	$popupContent = $( '<p>' ).append(
-		$( '<div>' ).addClass( 've-ui-educationpopup-header' ),
-		$( '<b>' ).text( config.title ),
-		'<br>',
-		$( '<span>' ).text( config.text ),
-		'<br>',
+	$popupContent = $( '<div>' ).append(
+		$( '<div>' ).addClass( 've-ui-educationPopup-header' ),
+		$( '<h3>' ).text( config.title ),
+		$( '<p>' ).text( config.text ),
 		popupCloseButton.$element
 	);
 
@@ -57,9 +55,9 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 		width: 300
 	} );
 
-	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingdot' );
+	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
 	this.$element
-		.addClass( 've-ui-educationpopup' )
+		.addClass( 've-ui-educationPopup' )
 		.append( this.popup.$element )
 		.append( this.$pulsatingDot );
 
