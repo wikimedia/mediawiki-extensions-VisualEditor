@@ -265,7 +265,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "Button label for converting a simple link to a ISBN magic link.",
 	"visualeditor-linkinspector-convert-link-pmid": "Button label for converting a simple link to a PMID magic link.",
 	"visualeditor-linkinspector-convert-link-rfc": "Button label for converting a simple link to a RFC magic link.",
-	"visualeditor-linkinspector-educationpopup-title": "Title shown at the top of education popup for the link inspector tool.",
+	"visualeditor-linkinspector-educationpopup-title": "Title shown at the top of education popup for the link inspector tool.\n{{Identical|Link}}",
 	"visualeditor-linkinspector-educationpopup-text": "Text shown in education popup for the link inspector tool.",
 	"visualeditor-linkinspector-illegal-title": "Warning that the entered text is not a valid page title.",
 	"visualeditor-linknodeinspector-add-label": "Label of button that converts an auto-numbered, external, labelless link into a labeled external link",

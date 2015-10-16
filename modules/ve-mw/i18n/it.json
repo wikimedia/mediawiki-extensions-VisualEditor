@@ -328,7 +328,7 @@
 	"visualeditor-version-label": "Versione",
 	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
-	"visualeditor-viewpage-savewarning-keep": "Prosegui nella modifica",
+	"visualeditor-viewpage-savewarning-keep": "Continuare a modificare",
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
 	"visualeditor-wikitext-progress": "Conversione wikitesto",
 	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, apri il menù a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e seleziona \"{{int:visualeditor-mweditmodesource-title}}\".",

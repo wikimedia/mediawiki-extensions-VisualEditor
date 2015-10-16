@@ -19,7 +19,8 @@
 			"SeoJeongHo",
 			"Alex00728",
 			"콩가루",
-			"Hwangjy9"
+			"Hwangjy9",
+			"IRTC1015"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid 서비스에서 문서를 위해 HTML5를 반환합니다.",
@@ -59,7 +60,7 @@
 	"visualeditor-cite-tool-name-news": "뉴스",
 	"visualeditor-cite-tool-name-web": "웹사이트",
 	"visualeditor-desc": "미디어위키를 위한 시각편집기",
-	"visualeditor-descriptionpagelink": "Project:보이는편집기",
+	"visualeditor-descriptionpagelink": "Project:시각편집기",
 	"visualeditor-dialog-media-alttext-section": "대체 텍스트",
 	"visualeditor-dialog-media-change-image": "그림 바꾸기",
 	"visualeditor-dialog-media-choose-image": "이 그림 사용",
@@ -190,6 +191,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|변수}}를 채우지 않고 계속하겠습니까?",
 	"visualeditor-dialog-transclusion-single-mode": "옵션 숨기기",
 	"visualeditor-dialog-transclusion-title": "틀",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "인용",
 	"visualeditor-dialogbutton-media-tooltip": "미디어",
 	"visualeditor-dialogbutton-meta-tooltip": "문서 설정",
 	"visualeditor-dialogbutton-reference-full-label": "기본 양식",
@@ -218,6 +220,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "ISBN 링크로 변환",
 	"visualeditor-linkinspector-convert-link-pmid": "PMID 링크로 변환",
 	"visualeditor-linkinspector-convert-link-rfc": "RFC 링크로 변환",
+	"visualeditor-linkinspector-educationpopup-title": "링크",
 	"visualeditor-linkinspector-illegal-title": "잘못된 문서 제목",
 	"visualeditor-linknodeinspector-add-label": "라벨 추가",
 	"visualeditor-linknodeinspector-title": "간단 링크",

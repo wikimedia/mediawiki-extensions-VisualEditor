@@ -221,6 +221,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Určitě chcete pokračovat bez vyplnění {{PLURAL:$2|parametru|parametrů}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Skrýt možnosti",
 	"visualeditor-dialog-transclusion-title": "Vložení",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "Citace",
 	"visualeditor-dialogbutton-media-tooltip": "Média",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavení stránky",
 	"visualeditor-dialogbutton-reference-full-label": "Základní podoba",
