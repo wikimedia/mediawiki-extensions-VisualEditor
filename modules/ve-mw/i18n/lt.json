@@ -10,7 +10,8 @@
 			"Reedy",
 			"Hugo.arg",
 			"Pofka",
-			"Albertas"
+			"Albertas",
+			"Zygimantus"
 		]
 	},
 	"apihelp-visualeditor-description": "Grąžina puslapio HTML5 iš Parsoid paslaugos.",
@@ -215,6 +216,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ar tikrai norite tęsti neužpildę $1 {{PLURAL:$2|parametro|parametrų}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Paslėpti parinktis",
 	"visualeditor-dialog-transclusion-title": "Intarpas",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "Citatos",
 	"visualeditor-dialogbutton-media-tooltip": "Failas",
 	"visualeditor-dialogbutton-meta-tooltip": "Puslapio nustatymai",
 	"visualeditor-dialogbutton-reference-full-label": "Pagrindinė forma",
@@ -231,6 +233,7 @@
 	"visualeditor-editnotices-tooltip": "Redaguoti pastabas",
 	"visualeditor-editsummary": "Aprašykite, ką pakeitėte",
 	"visualeditor-editsummary-bytes-remaining": "Likęs baitų skaičius",
+	"visualeditor-educationpopup-dismiss": "Gerai, turite jį",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Puslapio pavadinimas",
 	"visualeditor-formatdropdown-format-mw-heading2": "Antraštė",
@@ -244,6 +247,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "Konvertuoti į ISBN nuorodą",
 	"visualeditor-linkinspector-convert-link-pmid": "Konvertuoti į PMID nuorodą",
 	"visualeditor-linkinspector-convert-link-rfc": "Konvertuoti į RFC nuorodą",
+	"visualeditor-linkinspector-educationpopup-title": "Nuorodos",
 	"visualeditor-linkinspector-illegal-title": "Neleistinas puslapio pavadinimas",
 	"visualeditor-linknodeinspector-add-label": "Pridėti žymę",
 	"visualeditor-linknodeinspector-title": "Paprasta nuoroda",

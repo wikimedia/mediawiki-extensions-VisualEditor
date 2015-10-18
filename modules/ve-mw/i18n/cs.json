@@ -236,7 +236,7 @@
 	"visualeditor-editconflict": "Vaše změny nelze uložit kvůli editačnímu konfliktu. {{GENDER:|Chcete}} editační konflikt vyřešit ručně?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|oznámení}}",
 	"visualeditor-editnotices-tooltip": "Editační upozornění",
-	"visualeditor-editsummary": "Popište Vaše změny",
+	"visualeditor-editsummary": "Popište své změny",
 	"visualeditor-editsummary-bytes-remaining": "Zbývající počet bajtů",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulek stránky",

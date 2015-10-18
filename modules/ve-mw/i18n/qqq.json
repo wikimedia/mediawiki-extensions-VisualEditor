@@ -233,7 +233,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Label for the confirmation dialog opened if the user tries to insert/edit a template without filling all required fields.\n\nParameters:\n* $1 - Parameters missing, as a list using {{msg-mw|and}}, {{msg-mw|comma-separator}} and {{msg-mw|word-separator}}.\n* $2 - Number of parameters missing, for PLURAL support.",
 	"visualeditor-dialog-transclusion-single-mode": "Label for button that hides advanced options in transclusion dialog",
 	"visualeditor-dialog-transclusion-title": "{{Identical|Transclusion}}",
-	"visualeditor-dialogbutton-citation-educationpopup-title": "Title shown at the top of education popup for the citation dialog tool.",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "Title shown at the top of education popup for the citation dialog tool.\n{{Identical|Citation}}",
 	"visualeditor-dialogbutton-citation-educationpopup-text": "Text shown in education popup for the citation dialog tool.",
 	"visualeditor-dialogbutton-media-tooltip": "{{Identical|Media}}",
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
