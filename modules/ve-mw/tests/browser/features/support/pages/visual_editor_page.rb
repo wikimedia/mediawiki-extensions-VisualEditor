@@ -5,9 +5,10 @@ class VisualEditorPage
   page_url 'User:<%= env.user %>/<%= env.browser_name %>?vehidebetadialog=true&veaction=edit'
 
   def self.translate(string)
-    file = File.read "../../i18n/#{ENV['LANGUAGE_SCREENSHOT_CODE']}.json"
-    json = JSON.parse(file)
-    json[string]
+    language = ENV['LANGUAGE_SCREENSHOT_CODE']
+    file_name = (File.exist?("../../i18n/#{language}.json")) ? "../../i18n/#{language}.json" : '../../i18n/en.json'
+    json = JSON.parse(File.read(file_name))
+    json[string] || ''
   end
 
   div(:add_a_template_title, class: 'oo-ui-processDialog-location', text: /Add a template/)
