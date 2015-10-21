@@ -1,0 +1,22 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWAceEditorWidget styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwAceEditorWidget .ace_editor {
+	border: 1px solid #ccc;
+	margin: 1px;
+	font-family: monospace, Courier;
+	font-size: inherit;
+	line-height: 1.5;
+}
+
+.ve-ui-mwAceEditorWidget .ace_focus {
+	/* TODO: Move to mediawiki theme only */
+	border-color: #347bff;
+	/* HACK: Make border grow out as inset doesn't overlap absolute positioned children */
+	border-width: 2px;
+	margin: 0;
+}
