@@ -53,9 +53,9 @@ ve.ui.MWExtensionWindow.static.dir = null;
 ve.ui.MWExtensionWindow.prototype.initialize = function () {
 	this.input = new ve.ui.WhitespacePreservingTextInputWidget( {
 		limit: 1,
-		multiline: true
+		multiline: true,
+		classes: [ 've-ui-mwExtensionWindow-input' ]
 	} );
-	this.input.$element.addClass( 've-ui-mwExtensionWindow-input' );
 };
 
 /**
