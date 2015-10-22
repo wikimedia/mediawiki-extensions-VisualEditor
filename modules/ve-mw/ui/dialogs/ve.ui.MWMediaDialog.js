@@ -353,7 +353,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		set: 'onSearchTabsSet'
 	} );
 	this.mediaUploadBooklet.connect( this, {
-		set: 'onMediaUploadBooketSet',
+		set: 'onMediaUploadBookletSet',
 		uploadValid: 'onUploadValid',
 		infoValid: 'onInfoValid'
 	} );
@@ -409,7 +409,7 @@ ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( card ) {
  *
  * @param {OO.ui.PageLayout} page Current page
  */
-ve.ui.MWMediaDialog.prototype.onMediaUploadBooketSet = function ( page ) {
+ve.ui.MWMediaDialog.prototype.onMediaUploadBookletSet = function ( page ) {
 	this.uploadPageNameSet( page.getName() );
 };
 
