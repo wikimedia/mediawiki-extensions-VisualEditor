@@ -74,3 +74,7 @@ ve.ui.commandRegistry.register(
 		'link', 'link', 'open', { supportedSelections: [ 'linear' ] }
 	)
 );
+
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextLink', 'link', '[[', 2 )
+);

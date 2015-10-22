@@ -74,3 +74,7 @@ ve.ui.commandRegistry.register(
 		{ args: [ 'transclusion' ], supportedSelections: [ 'linear' ] }
 	)
 );
+
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextTemplate', 'transclusion', '{{', 2 )
+);
