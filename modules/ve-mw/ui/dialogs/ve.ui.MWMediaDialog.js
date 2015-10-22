@@ -1082,12 +1082,14 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.resetCaption();
 
+			// Reset upload booklet
+			// The first time this is called, it will try to switch panels,
+			// so the this.switchPanels() call has to be later.
+			this.mediaUploadBooklet.initialize();
+
 			this.actions.setAbilities( { insert: false, apply: false } );
 
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
-
-			// Reset upload booklet
-			this.mediaUploadBooklet.initialize();
 
 			if ( data.file ) {
 				this.searchTabs.setCard( 'upload' );
