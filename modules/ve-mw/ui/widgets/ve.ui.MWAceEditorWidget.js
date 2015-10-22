@@ -119,7 +119,7 @@ ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
 ve.ui.MWAceEditorWidget.prototype.toggleLineNumbers = function ( visible ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
-		widget.editor.renderer.setShowGutter( visible );
+		widget.editor.renderer.setOption( 'showLineNumbers', visible );
 	} );
 };
 
