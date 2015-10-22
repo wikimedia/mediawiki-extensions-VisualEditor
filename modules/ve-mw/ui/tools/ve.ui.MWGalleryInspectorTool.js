@@ -33,3 +33,7 @@ ve.ui.commandRegistry.register(
 		{ args: [ 'gallery' ], supportedSelections: [ 'linear' ] }
 	)
 );
+
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextGallery', 'gallery', '<gallery', 8 )
+);
