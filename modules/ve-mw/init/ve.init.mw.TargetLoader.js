@@ -23,7 +23,6 @@
 			'ext.visualEditor.mwlink',
 			'ext.visualEditor.mwformatting',
 			'ext.visualEditor.data',
-			'ext.visualEditor.mwreference',
 			'ext.visualEditor.mwtransclusion',
 			'ext.visualEditor.mwgallery',
 			'ext.visualEditor.mwalienextension',
@@ -32,6 +31,13 @@
 		]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules );
+
+	// HACK: Check if Cite is installed by looking for ext.cite.styles before
+	// loading ext.visualEditor.mwreference. Really ext.visualEditor.mwreference
+	// should be defined in the Cite extension.
+	if ( mw.loader.moduleRegistry.hasOwnProperty( 'ext.cite.styles' ) ) {
+		modules.splice( 3, 0, 'ext.visualEditor.mwreference' );
+	}
 
 	// Add preference modules
 	for ( prefName in conf.preferenceModules ) {
