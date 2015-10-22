@@ -419,8 +419,12 @@ ve.ui.MWMediaDialog.prototype.onMediaUploadBookletSet = function ( page ) {
  * @param {string} pageName Page name
  */
 ve.ui.MWMediaDialog.prototype.uploadPageNameSet = function ( pageName ) {
+	var imageInfo;
 	if ( pageName === 'insert' ) {
-		this.chooseImageInfo( this.mediaUploadBooklet.upload.getImageInfo() );
+		imageInfo = this.mediaUploadBooklet.upload.getImageInfo();
+		// Reset upload booklet, in case the user goes back to previous step
+		this.mediaUploadBooklet.initialize();
+		this.chooseImageInfo( imageInfo );
 	} else {
 		// Hide the tabs after the first page
 		this.searchTabs.toggleMenu( pageName === 'upload' );
