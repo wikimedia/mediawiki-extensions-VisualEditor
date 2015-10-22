@@ -26,3 +26,9 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextDescription', 'blockquote',  [ { type: 'paragraph' }, ':' ], 1 )
 );
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextTable', 'insertTable',  '{|', 2 )
+);
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextComment', 'comment',  '<!--', 4 )
+);
