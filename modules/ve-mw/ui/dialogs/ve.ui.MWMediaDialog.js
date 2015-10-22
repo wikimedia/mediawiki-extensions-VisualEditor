@@ -424,8 +424,8 @@ ve.ui.MWMediaDialog.prototype.uploadPageNameSet = function ( pageName ) {
 	} else {
 		// Hide the tabs after the first page
 		this.searchTabs.toggleMenu( pageName === 'upload' );
+
 		this.actions.setMode( 'upload-' + pageName );
-		this.actions.setAbilities( { upload: false, save: false } );
 	}
 };
 
@@ -1086,8 +1086,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			// The first time this is called, it will try to switch panels,
 			// so the this.switchPanels() call has to be later.
 			this.mediaUploadBooklet.initialize();
-
-			this.actions.setAbilities( { insert: false, apply: false } );
+			this.actions.setAbilities( { upload: false, save: false, insert: false, apply: false } );
 
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 
