@@ -9,6 +9,7 @@
 	border: 1px solid #ccc;
 	background: #fff;
 	border-radius: 0.25em;
+	box-shadow: 0 0.1em 0.5em rgba(0, 0, 0, 0.15)
 }
 
 .ve-init-mw-desktopArticleTarget-progress-bar {
