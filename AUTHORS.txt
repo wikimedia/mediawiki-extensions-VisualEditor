@@ -3,6 +3,7 @@ Principal Authors (major contributors, alphabetically)
 Alex Monk <krenair@wikimedia.org>
 Bartosz Dziewoński <matmarex@wikimedia.org>
 Christian Williams <orbit@framezero.com>
+C. Scott Ananian <cananian@wikimedia.org>
 David Chan <dchan@wikimedia.org>
 Ed Sanders <esanders@wikimedia.org>
 Inez Korczyński <inez@wikia-inc.com>
@@ -26,7 +27,6 @@ Antoine Musso <hashar@free.fr>
 Audrey Tang <audreyt@audreyt.org>
 Brad Jorsch <bjorsch@wikimedia.org>
 Brion Vibber <brion@wikimedia.org>
-C. Scott Ananian <cananian@wikimedia.org>
 Carl Fürstenberg <azatoth@gmail.com>
 Chris McMahon <cmcmahon@wikimedia.org>
 Dan Duvall <dduvall@wikimedia.org>
@@ -35,6 +35,8 @@ Elena Tonkovidova <etonkovidova@wikimedia.org>
 Erick Guan <fantasticfears@gmail.com>
 Erik Moeller <erik@wikimedia.org>
 Federico Leva <federicoleva@tiscali.it>
+Florian <florian.schmidt.stargatewissen@gmail.com>
+Frédéric Bolduc <fbolduc@wikimedia.org>
 Gabriel Wicke <gwicke@wikimedia.org>
 Helder <he7d3r@gmail.com>
 Jamison Lofthouse <jamison.lofthouse@gmail.com>
@@ -46,6 +48,7 @@ Juliusz Gonera <jgonera@gmail.com>
 Kaity Hammerstein <khammerstein@wikimedia.org>
 Kunal Mehta <legoktm@gmail.com>
 Kyle Florence <kyle.florence@gmail.com>
+Marc Ordinas i Llopis <marcoil@wikimedia.org>
 Marielle Volz <marielle.volz@gmail.com>
 Mark A. Hershberger <mah@everybody.org>
 Mark Holmquist <mtraceur@member.fsf.org>
@@ -67,7 +70,7 @@ Seb35 <seb35wikipedia@gmail.com>
 Siebrand Mazeland <siebrand@kitano.nl>
 Steven Zhang <cro0016@gmail.com>
 Subramanya Sastry <ssastry@wikimedia.org>
-Thalia Chan <thalia@cantorion.org>
+Thalia Chan <thalia.e.chan@googlemail.com>
 This, that and the other <at.light@live.com.au>
 Tim Starling <tstarling@wikimedia.org>
 Tongbo Sui <beanixster@gmail.com>
