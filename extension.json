@@ -253,6 +253,14 @@
 			"class": "VisualEditorDesktopArticleTargetInitModule",
 			"scripts": "modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init.css",
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-vector.css"
+				],
+				"monobook": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-monobook.css"
+				]
+			},
 			"dependencies": [
 				"jquery.client",
 				"mediawiki.page.startup",

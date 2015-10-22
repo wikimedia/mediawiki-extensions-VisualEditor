@@ -1,0 +1,18 @@
+/*!
+ * VisualEditor MediaWiki DesktopArticleTarget Vector init styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-desktopArticleTarget-progress {
+	height: 0.75em;
+	border: 1px solid #347bff;
+	background: #fff;
+	border-radius: 2px;
+}
+
+.ve-init-mw-desktopArticleTarget-progress-bar {
+	height: 0.75em;
+	background: #347bff;
+}
