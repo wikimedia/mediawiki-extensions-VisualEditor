@@ -23,28 +23,35 @@ ve.ui.MWCommandHelpDialog = function VeUiMWCommandHelpDialog( config ) {
 
 OO.inheritClass( ve.ui.MWCommandHelpDialog, ve.ui.CommandHelpDialog );
 
-/* Static methods */
-
-/**
- * @inheritdoc
- */
-ve.ui.MWCommandHelpDialog.static.getCommandGroups = function () {
-	var commandGroups = ve.ui.MWCommandHelpDialog.super.static.getCommandGroups.call( this ),
-		accessKeyPrefix = mw.util.tooltipAccessKeyPrefix.toUpperCase().replace( /-/g, ' + ' ),
-		save = ve.msg( 'accesskey-save' );
-
-	if ( save !== '-' && save !== '' ) {
-		commandGroups.other.commands.push(
-			{
-				shortcuts: [ accessKeyPrefix + save.toUpperCase() ],
-				msg: 'visualeditor-savedialog-label-save'
-			}
-		);
-	}
-
-	return commandGroups;
-};
-
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
+
+( function () {
+	var accessKeyPrefix = mw.util.tooltipAccessKeyPrefix.toUpperCase().replace( /-/g, ' + ' ),
+		save = ve.msg( 'accesskey-save' );
+
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'textStyle', 'link', { sequence: [ 'wikitextLink' ] } );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'formatting', 'blockquote', { sequence: [ 'wikitextDescription' ] } );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'formatting', 'listNumber', { sequence: [ 'numberHash' ] } );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'formatting', 'heading2', {
+		sequence: [ 'wikitextHeading' ],
+		msg: 'visualeditor-formatdropdown-format-heading2'
+	} );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'other', 'template', {
+		sequence: [ 'wikitextTemplate' ],
+		msg: 'visualeditor-dialog-transclusion-add-template'
+	} );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'other', 'ref', {
+		sequence: [ 'wikitextRef' ],
+		msg: 'visualeditor-dialog-reference-title'
+	} );
+
+	if ( save !== '-' && save !== '' ) {
+		ve.ui.MWCommandHelpDialog.static.registerCommand( 'other', 'save', {
+			shortcuts: [ accessKeyPrefix + save.toUpperCase() ],
+			msg: 'visualeditor-savedialog-label-save',
+			demote: true
+		} );
+	}
+} )();
