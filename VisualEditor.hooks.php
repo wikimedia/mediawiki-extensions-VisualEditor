@@ -59,6 +59,54 @@ class VisualEditorHooks {
 	}
 
 	/**
+	 * Decide whether to bother showing the wikitext editor at all.
+	 * If not, we expect the VE initialisation JS to activate.
+	 * @param $article Article
+	 * @param $user User
+	 * @return bool Whether to show the wikitext editor or not.
+	 */
+	public static function onCustomEditor( Article $article, User $user ) {
+		$req = RequestContext::getMain()->getRequest();
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+
+		if (
+			!$user->getOption( 'visualeditor-enable' ) ||
+			$user->getOption( 'visualeditor-betatempdisable' ) ||
+			$user->getOption( 'visualeditor-autodisable' ) ||
+			$user->getOption( 'visualeditor-tabs' ) === 'preferwt' ||
+			( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() ) ||
+			false // TODO: Detect incompatibility - P2373
+		) {
+			return true;
+		}
+
+		$title = $article->getTitle();
+
+		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
+
+		$params = $req->getValueNames();
+
+		if ( $user->isAnon() ) {
+			$editor = $req->getCookie(
+				'VEE',
+				'',
+				User::getDefaultOption( 'visualeditor-editor' )
+			);
+		} else {
+			$editor = $user->getOption( 'visualeditor-editor' );
+		}
+		return $req->getVal( 'action' ) !== 'edit' ||
+			!$veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
+			$editor === 'wikitext' ||
+			!$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ||
+			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
+			// check for parameters that VE does not handle
+			in_array( 'preload', $params ) ||
+			in_array( 'editintro', $params ) ||
+			in_array( 'veswitched', $params );
+	}
+
+	/**
 	 * Convert the content model of messages that are actually JSON to JSON.
 	 * This only affects validation and UI when saving and editing, not
 	 * loading the content.
@@ -92,6 +140,42 @@ class VisualEditorHooks {
 	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
+		// Exit if there's no edit link for whatever reason (e.g. protected page)
+		if ( !isset( $links['views']['edit'] ) ) {
+			return true;
+		}
+
+		// Exit if we're using the single edit tab.
+		if (
+			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			$skin->getUser()->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
+		) {
+			$dbr = wfGetDB( DB_SLAVE );
+			$user = RequestContext::getMain()->getUser();
+			if (
+				$config->get( 'VisualEditorUseSingleEditTab' ) &&
+				!$user->isAnon() &&
+				!$user->getOption( 'visualeditor-hidetabdialog' ) &&
+				$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+				$dbr->select(
+					'revision',
+					'1',
+					array(
+						'rev_user' => $user->getId(),
+						'rev_timestamp < ' . $dbr->addQuotes(
+							$config->get( 'VisualEditorSingleEditTabSwitchTime' )
+						)
+					),
+					__METHOD__,
+					array( 'LIMIT' => 1 )
+				)->numRows() === 1
+			) {
+				wfDebugLog( 'debug', 'ok' );
+				$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
+			}
+			return true;
+		}
+
 		// Exit if the user doesn't have VE enabled
 		if (
 			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
@@ -99,11 +183,6 @@ class VisualEditorHooks {
 			$skin->getUser()->getOption( 'visualeditor-autodisable' ) ||
 			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
 		) {
-			return true;
-		}
-
-		// Exit if there's no edit link for whatever reason (e.g. protected page)
-		if ( !isset( $links['views']['edit'] ) ) {
 			return true;
 		}
 
@@ -238,6 +317,14 @@ class VisualEditorHooks {
 	) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
+		// Exit if we're using the single edit tab.
+		if (
+			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			$skin->getUser()->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
+		) {
+			return true;
+		}
+
 		// Exit if we're in parserTests
 		if ( isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ) {
 			return true;
@@ -342,9 +429,27 @@ class VisualEditorHooks {
 			'default' => $user->getOption( 'visualeditor-betatempdisable' ) ||
 				$user->getOption( 'visualeditor-autodisable' )
 		);
+
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		if ( $config->get( 'VisualEditorUseSingleEditTab' ) ) {
+			$preferences['visualeditor-tabs'] = array(
+				'type' => 'select',
+				'label-message' => 'visualeditor-preference-tabs',
+				'section' => 'editing/editor',
+				'options' => array(
+					wfMessage( 'visualeditor-preference-tabs-remember-last' )->escaped() => 'remember-last',
+					wfMessage( 'visualeditor-preference-tabs-prefer-ve' )->escaped() => 'prefer-ve',
+					wfMessage( 'visualeditor-preference-tabs-prefer-wt' )->escaped() => 'prefer-wt',
+					wfMessage( 'visualeditor-preference-tabs-multi-tab' )->escaped() => 'multi-tab'
+				)
+			);
+		}
+
 		$api = array( 'type' => 'api' );
 		$preferences['visualeditor-autodisable'] = $api;
+		$preferences['visualeditor-editor'] = $api;
 		$preferences['visualeditor-hidebetawelcome'] = $api;
+		$preferences['visualeditor-hidetabdialog'] = $api;
 		$preferences['visualeditor-hideusered'] = $api;
 		$preferences['visualeditor-findAndReplace-findText'] = $api;
 		$preferences['visualeditor-findAndReplace-replaceText'] = $api;
@@ -467,6 +572,7 @@ class VisualEditorHooks {
 			'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
+			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),

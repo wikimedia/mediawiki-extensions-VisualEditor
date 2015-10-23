@@ -108,7 +108,9 @@
 			"_merge_strategy": "array_plus"
 		},
 		"VisualEditorSkinToolbarScrollOffset": [],
-		"VisualEditorParsoidTimeout": 100
+		"VisualEditorParsoidTimeout": 100,
+		"VisualEditorUseSingleEditTab": false,
+		"VisualEditorSingleEditTabSwitchTime": 20160101000000
 	},
 	"APIModules": {
 		"visualeditor": {
@@ -187,6 +189,9 @@
 		],
 		"AuthPluginAutoCreate": [
 			"VisualEditorHooks::onAuthPluginAutoCreate"
+		],
+		"CustomEditor": [
+			"VisualEditorHooks::onCustomEditor"
 		]
 	},
 	"ResourceModules": {
@@ -268,6 +273,7 @@
 				"mediawiki.Title",
 				"mediawiki.Uri",
 				"mediawiki.util",
+				"mediawiki.api.options",
 				"user.options",
 				"ext.visualEditor.track"
 			],
@@ -975,7 +981,8 @@
 		},
 		"ext.visualEditor.switching": {
 			"scripts": [
-				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js"
+				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js",
+				"modules/ve-mw/init/ve.init.MWEditingTabDialog.js"
 			],
 			"styles": "modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog.css",
 			"skinStyles": {
@@ -997,7 +1004,13 @@
 				"visualeditor-mweditmodeve-warning",
 				"visualeditor-mweditmodesource-warning-cancel",
 				"visualeditor-mweditmodesource-warning-switch",
-				"visualeditor-mweditmodesource-warning-switch-discard"
+				"visualeditor-mweditmodesource-warning-switch-discard",
+				"visualeditor-editingtabdialog-body",
+				"visualeditor-editingtabdialog-ok",
+				"visualeditor-editingtabdialog-title",
+				"visualeditor-preference-tabs-prefer-ve",
+				"visualeditor-preference-tabs-prefer-wt",
+				"visualeditor-preference-tabs-multi-tab"
 			],
 			"targets": [
 				"desktop",
@@ -1722,7 +1735,10 @@
 		"visualeditor-enable-experimental": 0,
 		"visualeditor-enable-language": 0,
 		"visualeditor-hidebetawelcome": 0,
-		"visualeditor-autodisable": 0
+		"visualeditor-autodisable": 0,
+		"visualeditor-tabs": "remember-last",
+		"visualeditor-editor": "wikitext",
+		"visualeditor-hidetabdialog": 0
 	},
 	"AutoloadClasses": {
 		"ApiVisualEditor": "ApiVisualEditor.php",

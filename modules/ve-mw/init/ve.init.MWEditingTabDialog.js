@@ -1,0 +1,86 @@
+/*!
+ * VisualEditor user interface MWEditingTabDialog class.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+mw.libs.ve = mw.libs.ve || {};
+/**
+ * Dialog for allowing new users to change editing tab preferences to VisualEditor.
+ *
+ * @class
+ * @extends OO.ui.MessageDialog
+ *
+ * @constructor
+ * @param {Object} [config] Configuration options
+ */
+mw.libs.ve.EditingTabDialog = function MWLibsVEMWEditingTabDialog( config ) {
+	// Parent constructor
+	mw.libs.ve.EditingTabDialog.super.call( this, config );
+};
+
+/* Inheritance */
+
+OO.inheritClass( mw.libs.ve.EditingTabDialog, OO.ui.MessageDialog );
+
+/* Static Properties */
+
+mw.libs.ve.EditingTabDialog.static.name = 'editingtab';
+
+mw.libs.ve.EditingTabDialog.static.size = 'medium';
+
+mw.libs.ve.EditingTabDialog.static.verbose = true;
+
+mw.libs.ve.EditingTabDialog.static.icon = 'help';
+
+mw.libs.ve.EditingTabDialog.static.title = mw.msg( 'visualeditor-editingtabdialog-title' );
+
+mw.libs.ve.EditingTabDialog.static.actions = [
+
+	{
+		action: 'prefer-wt',
+		label: mw.msg( 'visualeditor-preference-tabs-prefer-wt' )
+	},
+	{
+		action: 'prefer-ve',
+		label: mw.msg( 'visualeditor-preference-tabs-prefer-ve' )
+	},
+	{
+		action: 'multi-tab',
+		label: mw.msg( 'visualeditor-preference-tabs-multi-tab' )
+	},
+	{
+		label: mw.msg( 'visualeditor-editingtabdialog-ok' ),
+		flags: [ 'progressive', 'primary' ]
+	}
+];
+
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+mw.libs.ve.EditingTabDialog.prototype.getSetupProcess = function ( action ) {
+	return mw.libs.ve.EditingTabDialog.super.prototype.getSetupProcess.call( this, action )
+		.next( function () {
+			new mw.Api().saveOption( 'visualeditor-hidetabdialog', 1 );
+			mw.user.options.set( 'visualeditor-hidetabdialog', 1 );
+		} );
+};
+
+/**
+ * @inheritdoc
+ */
+mw.libs.ve.EditingTabDialog.prototype.getActionProcess = function ( action ) {
+	if ( action ) {
+		return new OO.ui.Process( function () {
+			new mw.Api().saveOption( 'visualeditor-tabs', action );
+			mw.user.options.set( 'visualeditor-tabs', action );
+			this.close( { action: action } );
+		}, this );
+	} else {
+		// Parent method
+		return mw.libs.ve.EditingTabDialog.super.prototype.getActionProcess.call( this, action );
+	}
+};
