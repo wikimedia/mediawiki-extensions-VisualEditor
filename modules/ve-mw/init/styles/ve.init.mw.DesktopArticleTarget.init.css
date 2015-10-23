@@ -38,11 +38,13 @@
 }
 
 .ve-activated #bodyContent,
-.ve-activated #firstHeading,
-.ve-activated #siteSub,
-.ve-activated #contentSub {
+.ve-activated #firstHeading {
 	opacity: 0.6;
 	pointer-events: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .ve-activated #firstHeading {
