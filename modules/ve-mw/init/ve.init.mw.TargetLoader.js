@@ -35,8 +35,8 @@
 	// HACK: Check if Cite is installed by looking for ext.cite.styles before
 	// loading ext.visualEditor.mwreference. Really ext.visualEditor.mwreference
 	// should be defined in the Cite extension.
-	if ( mw.loader.moduleRegistry.hasOwnProperty( 'ext.cite.styles' ) ) {
-		modules.splice( 3, 0, 'ext.visualEditor.mwreference' );
+	if ( mw.loader.getState( 'ext.cite.styles' ) ) {
+		modules.push( 'ext.visualEditor.mwreference' );
 	}
 
 	// Add preference modules
