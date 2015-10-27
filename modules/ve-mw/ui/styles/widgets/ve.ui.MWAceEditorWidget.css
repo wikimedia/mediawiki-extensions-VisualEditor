@@ -20,3 +20,7 @@
 	border-width: 2px;
 	margin: 0;
 }
+
+.ve-ui-mwAceEditorWidget.oo-ui-widget-enabled.oo-ui-flaggedElement-invalid .ace_editor {
+	border-color: red;
+}

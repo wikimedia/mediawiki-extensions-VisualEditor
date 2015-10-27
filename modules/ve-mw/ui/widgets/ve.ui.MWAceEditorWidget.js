@@ -101,6 +101,7 @@ ve.ui.MWAceEditorWidget.prototype.setValue = function ( value ) {
 	} ).fail( function () {
 		ve.ui.MWAceEditorWidget.super.prototype.setValue.call( widget, value );
 	} );
+	return this;
 };
 
 /**
@@ -115,24 +116,28 @@ ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
  * Toggle the visibility of line numbers
  *
  * @param {boolean} visible Visible
+ * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.toggleLineNumbers = function ( visible ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
 		widget.editor.renderer.setOption( 'showLineNumbers', visible );
 	} );
+	return this;
 };
 
 /**
  * Set the language mode of the editor (programming language)
  *
  * @param {string} lang Language
+ * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.setLanguage = function ( lang ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
 		widget.editor.getSession().setMode( 'ace/mode/' + ( require( 'ace/mode/' + lang ) ? lang : 'text' ) );
 	} );
+	return this;
 };
 
 /**
