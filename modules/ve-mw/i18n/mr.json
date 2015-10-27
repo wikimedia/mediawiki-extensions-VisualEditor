@@ -155,6 +155,7 @@
 	"visualeditor-parameter-search-no-unused": "न वापरलेली क्षेत्रे नाहीत",
 	"visualeditor-parameter-search-unknown": "अनोळखी क्षेत्र",
 	"visualeditor-preference-betatempdisable": "यथादृश्यसंपादकास,तो चाचणी स्थितीत असल्यामुळे, तात्पुरते अक्षम करा",
+	"visualeditor-preference-core-description": "हा यथादृश्यसंपादक सक्षम करा. तो चर्चा-पानांवर व काही इतर नामविश्वात उपलब्ध राहणार नाही.",
 	"visualeditor-preference-core-label": "यथादृश्यसंपादक",
 	"visualeditor-preference-enable": "यथादृश्यसंपादक कार्यान्वित करा.तो चर्चापाने व काही नामविश्वात उपलब्ध असणार नाही.",
 	"visualeditor-reference-input-placeholder": "आपण कोणता संदर्भ नमुद करू इच्छिता ?",
