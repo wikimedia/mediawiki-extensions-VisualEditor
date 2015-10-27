@@ -567,9 +567,6 @@
 		// Only in supported skins
 		$.inArray( mw.config.get( 'skin' ), conf.skins ) !== -1 &&
 
-		// Only where wgRelevantPageName is present (should be everywhere, but see T116693)
-		mw.config.get( 'wgRelevantPageName' ) !== null &&
-
 		// Only in enabled namespaces
 		$.inArray(
 			new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId(),
