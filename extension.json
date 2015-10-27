@@ -1000,6 +1000,14 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWEducationPopupTool.css"
 			],
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/themes/mediawiki/widgets.css"
+				],
+				"monobook": [
+					"modules/ve-mw/themes/apex/widgets.css"
+				]
+			},
 			"dependencies": [
 				"ext.visualEditor.core",
 				"mediawiki.Title",
