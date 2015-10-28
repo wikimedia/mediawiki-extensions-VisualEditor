@@ -35,5 +35,5 @@
 	"visualeditor-welcomedialog-action": "Почати редагування",
 	"visualeditor-welcomedialog-content": "Кожен може редагувати, і кожне поліпшення є допомогою.",
 	"visualeditor-welcomedialog-content-thanks": "Дякуємо Вам за допомогу більше дізнаватися про світ!",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|Ласкаво просимо}} на {{GRAMMAR:Accusative|$2}}"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Ласкаво просимо}} на сайт «$2»"
 }

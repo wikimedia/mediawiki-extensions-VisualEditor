@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"రహ్మానుద్దీన్"
 		]
 	},
-	"tooltip-ca-ve-edit": "ಈ ಪುಟೊನು ದೃಶ್ಯ ಸಂಪಾದಕದ ಮೂಲಕ ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
+	"tooltip-ca-ve-edit": "ಈ ಪಾಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
 	"visualeditor-ca-createlocaldescriptionsource": "ಸ್ಥಳೀಯ ವಿವರಣೆಯ ಮೂಲೊನು ಸೇರಾಲೆ",
 	"visualeditor-ca-createsource": "ಮೂಲೊನು ಸೃಷ್ಟಿಸಾಲೆ",
 	"visualeditor-ca-editsource": "ಮೂಲೊನು ಸಂಪಾದನೆ ಮಲ್ಪು",
