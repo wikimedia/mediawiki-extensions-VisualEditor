@@ -422,8 +422,6 @@ ve.ui.MWMediaDialog.prototype.uploadPageNameSet = function ( pageName ) {
 	var imageInfo;
 	if ( pageName === 'insert' ) {
 		imageInfo = this.mediaUploadBooklet.upload.getImageInfo();
-		// Reset upload booklet, in case the user goes back to previous step
-		this.mediaUploadBooklet.initialize();
 		this.chooseImageInfo( imageInfo );
 	} else {
 		// Hide the tabs after the first page
@@ -1049,7 +1047,9 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var pageTitle = mw.config.get( 'wgTitle' ),
+			var
+				dialog = this,
+				pageTitle = mw.config.get( 'wgTitle' ),
 				namespace = mw.config.get( 'wgNamespaceNumber' ),
 				namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
 
@@ -1089,15 +1089,16 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			// Reset upload booklet
 			// The first time this is called, it will try to switch panels,
 			// so the this.switchPanels() call has to be later.
-			this.mediaUploadBooklet.initialize();
-			this.actions.setAbilities( { upload: false, save: false, insert: false, apply: false } );
+			return this.mediaUploadBooklet.initialize().then( function () {
+				dialog.actions.setAbilities( { upload: false, save: false, insert: false, apply: false } );
 
-			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
+				dialog.switchPanels( dialog.selectedNode ? 'edit' : 'search' );
 
-			if ( data.file ) {
-				this.searchTabs.setCard( 'upload' );
-				this.mediaUploadBooklet.setFile( data.file );
-			}
+				if ( data.file ) {
+					dialog.searchTabs.setCard( 'upload' );
+					dialog.mediaUploadBooklet.setFile( data.file );
+				}
+			} );
 		}, this );
 };
 
@@ -1348,6 +1349,8 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 		case 'cancelchoose':
 			handler = function () {
 				this.switchPanels( 'search', true );
+				// Reset upload booklet, in case we got here by uploading a file
+				return this.mediaUploadBooklet.initialize();
 			};
 			break;
 		case 'upload':
