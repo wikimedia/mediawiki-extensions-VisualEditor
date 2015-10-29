@@ -191,11 +191,14 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 						}
 						newObj = raw[ page ].imageinfo[ 0 ];
 						newObj.title = raw[ page ].title;
+						newObj.index = raw[ page ].index;
 						results.push( newObj );
 					}
 				}
 			}
-			return results;
+			return results.sort( function ( a, b ) {
+				return a.index - b.index;
+			} );
 		} )
 		.promise( { abort: xhr.abort } );
 };
