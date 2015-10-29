@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"VASANTH S.N.",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"Bharathesha Alasandemajalu"
 		]
 	},
 	"tooltip-ca-ve-edit": "ಈ ಪಾಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
@@ -10,5 +11,6 @@
 	"visualeditor-ca-createsource": "ಮೂಲೊನು ಸೃಷ್ಟಿಸಾಲೆ",
 	"visualeditor-ca-editsource": "ಮೂಲೊನು ಸಂಪಾದನೆ ಮಲ್ಪು",
 	"visualeditor-ca-editsource-section": "ಮೂಲೊನು ಸಂಪಾದನೆ ಮಲ್ಪು",
-	"visualeditor-descriptionpagelink": "Project:ದೃಶ್ಯ ಸಂಪಾದಕ"
+	"visualeditor-descriptionpagelink": "Project:ದೃಶ್ಯ ಸಂಪಾದಕ",
+	"visualeditor-educationpopup-dismiss": "ಸರಿ, ತಿಕ್ಕ್ಂಡ್"
 }
