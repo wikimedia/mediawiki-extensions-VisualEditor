@@ -345,6 +345,7 @@ class VisualEditorHooks {
 		$api = array( 'type' => 'api' );
 		$preferences['visualeditor-autodisable'] = $api;
 		$preferences['visualeditor-hidebetawelcome'] = $api;
+		$preferences['visualeditor-hideusered'] = $api;
 		$preferences['visualeditor-findAndReplace-findText'] = $api;
 		$preferences['visualeditor-findAndReplace-replaceText'] = $api;
 		$preferences['visualeditor-findAndReplace-regex'] = $api;
