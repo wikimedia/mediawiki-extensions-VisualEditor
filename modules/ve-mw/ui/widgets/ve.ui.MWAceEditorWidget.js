@@ -96,8 +96,12 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 ve.ui.MWAceEditorWidget.prototype.setValue = function ( value ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
-		widget.editor.setValue( value );
-		widget.editor.selection.moveTo( 0, 0 );
+		var selectionState;
+		if ( value !== widget.editor.getValue() ) {
+			selectionState = widget.editor.session.selection.toJSON();
+			widget.editor.setValue( value );
+			widget.editor.session.selection.fromJSON( selectionState );
+		}
 	} ).fail( function () {
 		ve.ui.MWAceEditorWidget.super.prototype.setValue.call( widget, value );
 	} );
