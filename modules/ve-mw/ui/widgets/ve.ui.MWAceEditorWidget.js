@@ -7,7 +7,17 @@
 /* global ace, require */
 
 /**
- * Text input widget which hides but preserves leading and trailing whitespace
+ * Text input widget which use an Ace editor instance when available
+ *
+ * For the most part this can be treated just like a TextInputWidget with
+ * a few extra considerations:
+ *
+ * - For performance it is recommended to destroy the editor when
+ *   you are finished with it, using #teardown. If you need to use
+ *   the widget again let the editor can be restored with #setup.
+ * - After setting an initial value the undo stack can be reset
+ *   using clearUndoStack so that you can't undo past the initial
+ *   state.
  *
  * @class
  * @extends ve.ui.WhitespacePreservingTextInputWidget
@@ -125,6 +135,21 @@ ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
  */
 ve.ui.MWAceEditorWidget.prototype.onEditorResize = function () {
 	this.emit.bind( this, 'resize' );
+};
+
+/**
+ * Clear the editor's undo stack
+ *
+ * @chainable
+ */
+ve.ui.MWAceEditorWidget.prototype.clearUndoStack = function () {
+	var widget = this;
+	this.loadingPromise.done( function () {
+		widget.editor.session.setUndoManager(
+			new ace.UndoManager()
+		);
+	} );
+	return this;
 };
 
 /**
