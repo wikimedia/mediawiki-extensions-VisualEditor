@@ -151,7 +151,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Reiturinn er úreltur. $1",
 	"visualeditor-dialog-transclusion-loading": "Hleður…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Sýna valkosti",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Þú bætir}} sniðinu „$1“ við þessa síðu. Það hefur ekki enn lýsingu, en það gætu verið einhverjar upplýsingar [[{{ns:template}}:$1|síðu sniðsins]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Þú bættir}} sniðinu „$1“ við þessa síðu. Það hefur ekki enn lýsingu, en það gætu verið einhverjar upplýsingar á [[{{ns:template}}:$1|síðu sniðsins]].",
 	"visualeditor-dialog-transclusion-options": "Valkostir",
 	"visualeditor-dialog-transclusion-param-default": "Sjálfgefið gildi: $1",
 	"visualeditor-dialog-transclusion-param-example": "Dæmigert gildi: $1",

@@ -30,6 +30,7 @@
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
 	"apihelp-visualeditor-param-html": "HTML для отправки в Parsoid, чтобы конвертировать в вики-текст.",
+	"apihelp-visualeditor-param-oldid": "Номер версии для использованиея (по умолчанию — последняя версия).",
 	"apihelp-visualeditor-param-paction": "Действие, которое необходимо выполнить.",
 	"apihelp-visualeditor-param-page": "Страница, на которой необходимо выполнить действие.",
 	"apihelp-visualeditoredit-param-minor": "Флаг для малой правки.",
