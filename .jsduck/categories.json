@@ -112,6 +112,8 @@
 					"ve.ce.SurfaceObserver",
 					"ve.ce.RangeState",
 					"ve.ce.*Annotation",
+					"ve.ce.*Factory",
+					"ve.ce.*KeyDownHandler",
 					"ve.ce.Document",
 					"ve.ce.*Node"
 				]
@@ -127,11 +129,11 @@
 					"ve.ui.TargetToolbar",
 					"ve.ui.DebugBar",
 					"ve.ui.Trigger",
-					"ve.ui.*TransferHandler",
-					"ve.ui.DataTransferItem",
 					"ve.ui.*Action",
 					"ve.ui.*Command",
 					"ve.ui.*ContextItem",
+					"ve.ui.*TransferHandler",
+					"ve.ui.DataTransferItem",
 					"ve.ui.*Element",
 					"ve.ui.*Factory",
 					"ve.ui.*Page",

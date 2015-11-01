@@ -51,9 +51,14 @@ QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 					{
 						type: 'replace',
 						remove: complexDoc.getData( new ve.Range( 0, 7 ) ),
-						insert: [],
+						insert: [
+							{ type: 'paragraph' },
+							{ type: '/paragraph' }
+						],
 						removeMetadata: complexDoc.getMetadata( new ve.Range( 0, 7 ) ),
-						insertMetadata: []
+						insertMetadata: [ undefined, undefined ],
+						insertedDataLength: 2,
+						insertedDataOffset: 0
 					},
 					{ type: 'retain', length: 26 }
 				],
@@ -74,7 +79,7 @@ QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 							.concat( [ [ comment ] ] )
 							.concat( complexDoc.getMetadata( new ve.Range( 5, 7 ) ) )
 					},
-					{ type: 'retain', length: 1 },
+					{ type: 'retain', length: 3 },
 					{
 						type: 'replace',
 						remove: complexDoc.getData( new ve.Range( 8, 32 ) ),
