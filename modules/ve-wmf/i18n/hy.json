@@ -16,5 +16,8 @@
 	"visualeditor-feedback-link": "Նախագիծ:ՎիզուալԽմբագրիչ/Ֆիդբեք",
 	"visualeditor-feedback-tool": "Կարծիք հայտնել",
 	"visualeditor-help-label": "Օգտագործողի ձեռնարկ",
-	"visualeditor-help-title": "ՎիքիԽմբագրիչի օգտագործման ուղեցույց"
+	"visualeditor-help-title": "ՎիքիԽմբագրիչի օգտագործման ուղեցույց",
+	"visualeditor-welcomedialog-action": "Սկսել խմբագրել",
+	"visualeditor-welcomedialog-content": "Յուրաքանչյուր ոք կարող է խմբագրել, ցանկացած բարելավում օգնում է",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Բարի գալուստ}} $2"
 }

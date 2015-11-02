@@ -4,7 +4,8 @@
 			"Gleki",
 			"NoiX180",
 			"Pras",
-			"Jadinegara"
+			"Jadinegara",
+			"Meursault2004"
 		]
 	},
 	"tooltip-ca-ve-edit": "Sunting kaca punika ngangge VisualEditor",
@@ -13,6 +14,6 @@
 	"visualeditor-desc": "Pangowah visual kanggo MediaWiki",
 	"visualeditor-descriptionpagelink": "Proyek:VisualEditor",
 	"visualeditor-loadwarning": "Kasulayan nalika ngemot data saka sasana: $1. Sampéyan pingin njajal manèh?",
-	"visualeditor-saveerror": "Kasulayan nalika nyimpen data ning sasana: $1.",
-	"visualeditor-viewpage-savewarning": "Sira yakin arêp mbalik mênyang tata panyawangan tanpa nyimpên dhisik?"
+	"visualeditor-saveerror": "Kasulayan nalika nyimpen data menyang sasana: $1.",
+	"visualeditor-viewpage-savewarning": "Sampéyan yakin arep bali menyang tata panyawangan tanpa nyimpen dhisik?"
 }

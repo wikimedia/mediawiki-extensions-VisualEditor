@@ -3,14 +3,15 @@
 		"authors": [
 			"VASANTH S.N.",
 			"రహ్మానుద్దీన్",
-			"Bharathesha Alasandemajalu"
+			"Bharathesha Alasandemajalu",
+			"Vishwanatha Badikana"
 		]
 	},
-	"tooltip-ca-ve-edit": "ಈ ಪಾಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
-	"visualeditor-ca-createlocaldescriptionsource": "ಸ್ಥಳೀಯ ವಿವರಣೆಯ ಮೂಲೊನು ಸೇರಾಲೆ",
-	"visualeditor-ca-createsource": "ಮೂಲೊನು ಸೃಷ್ಟಿಸಾಲೆ",
+	"tooltip-ca-ve-edit": "ಈ ಪುಟೊನು ಸಂಪೊಲಿಪುಲೆ",
+	"visualeditor-ca-createlocaldescriptionsource": "ಕೈತಲ್ದ್ ವಿವರಣೆದ ಮೂಲೊನು ಸೇರಲೆ",
+	"visualeditor-ca-createsource": "ಮೂಲೊನು ಸ್ರಿಸ್ಟಿಸಲೆ",
 	"visualeditor-ca-editsource": "ಮೂಲೊನು ಸಂಪಾದನೆ ಮಲ್ಪು",
-	"visualeditor-ca-editsource-section": "ಮೂಲೊನು ಸಂಪಾದನೆ ಮಲ್ಪು",
-	"visualeditor-descriptionpagelink": "Project:ದೃಶ್ಯ ಸಂಪಾದಕ",
+	"visualeditor-ca-editsource-section": "ಮೂಲೊನು ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
+	"visualeditor-descriptionpagelink": "Project:ದೃಸ್ಯೊ ಸಂಪಾದಕೆರ್",
 	"visualeditor-educationpopup-dismiss": "ಸರಿ, ತಿಕ್ಕ್ಂಡ್"
 }
