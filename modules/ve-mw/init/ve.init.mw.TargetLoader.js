@@ -99,10 +99,11 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( pageName, oldid, targetName ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl,
+				fromEditedState = false,
 				data = {
 					action: 'visualeditor',
-					paction: conf.restbaseUrl ? 'metadata' : 'parse',
+					paction: ( conf.fullRestbaseUrl || conf.restbaseUrl ) ? 'metadata' : 'parse',
 					page: pageName,
 					uselang: mw.config.get( 'wgUserLanguage' )
 				};
@@ -130,14 +131,34 @@
 				return data;
 			} );
 
-			if ( conf.restbaseUrl ) {
+			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
 				ve.track( 'trace.restbaseLoad.enter' );
-				restbaseXhr = $.ajax( {
-					url: conf.restbaseUrl + encodeURIComponent( pageName ) +
-						( oldid === undefined ? '' : '/' + oldid ),
-					type: 'GET',
-					dataType: 'text'
-				} );
+				if ( conf.fullRestbaseUrl && $( '#wpTextbox1' ).length ) {
+					fromEditedState = true;
+					restbaseXhr = $.post(
+						conf.fullRestbaseUrl + 'v1/transform/wikitext/to/html/' +
+							encodeURIComponent( pageName ) +
+							( oldid === undefined ? '' : '/' + oldid ),
+						{
+							title: pageName,
+							oldid: oldid,
+							wikitext: $( '#wpTextbox1' ).val(),
+							stash: 'true'
+						}
+					);
+				} else {
+					if ( conf.fullRestbaseUrl ) {
+						pageHtmlUrl = conf.fullRestbaseUrl + 'v1/page/html/';
+					} else {
+						pageHtmlUrl = conf.restbaseUrl;
+					}
+					restbaseXhr = $.ajax( {
+						url: pageHtmlUrl + encodeURIComponent( pageName ) +
+							( oldid === undefined ? '' : '/' + oldid ),
+						type: 'GET',
+						dataType: 'text'
+					} );
+				}
 				restbasePromise = restbaseXhr.then(
 					function ( data, status, jqxhr ) {
 						ve.track( 'trace.restbaseLoad.exit' );
@@ -146,7 +167,7 @@
 							duration: ve.now() - start,
 							targetName: targetName
 						} );
-						return data;
+						return [ data, jqxhr.getResponseHeader( 'etag' ) ];
 					},
 					function ( response ) {
 						if ( response.status === 404 ) {
@@ -161,9 +182,11 @@
 				);
 
 				dataPromise = $.when( apiPromise, restbasePromise )
-					.then( function ( apiData, restbaseHtml ) {
+					.then( function ( apiData, restbaseData ) {
 						if ( apiData.visualeditor ) {
-							apiData.visualeditor.content = restbaseHtml;
+							apiData.visualeditor.content = restbaseData[ 0 ];
+							apiData.visualeditor.etag = restbaseData[ 1 ];
+							apiData.visualeditor.fromEditedState = fromEditedState;
 						}
 						return apiData;
 					} )

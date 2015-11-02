@@ -30,6 +30,7 @@
 			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
 		},
 		"VisualEditorRestbaseURL": false,
+		"VisualEditorFullRestbaseURL": false,
 		"VisualEditorSerializationCacheTimeout": 3600,
 		"VisualEditorUseChangeTagging": true,
 		"VisualEditorSupportedSkins": [

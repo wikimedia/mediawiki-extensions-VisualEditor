@@ -160,7 +160,7 @@
 			.then( function () {
 				return mw.libs.ve.targetLoader.requestPageData(
 					mw.config.get( 'wgRelevantPageName' ),
-					uri.query.oldid,
+					uri.query.oldid || $( 'input[name=parentRevId]' ).val(),
 					'mwTarget' // ve.init.mw.DesktopArticleTarget.static.name
 				);
 			} )
@@ -206,6 +206,9 @@
 	isViewPage = (
 		mw.config.get( 'wgIsArticle' ) &&
 		!( 'diff' in uri.query )
+	) || (
+		mw.config.get( 'wgAction' ) === 'edit' ||
+		mw.config.get( 'wgAction' ) === 'submit'
 	);
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri

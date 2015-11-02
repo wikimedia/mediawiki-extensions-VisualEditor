@@ -293,8 +293,7 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
  * @param {string} status Text status message
  */
 ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevIdMatches,
-		docRevId = 0,
+	var i, len, linkData, aboutDoc, docRevId, docRevIdMatches,
 		data = response ? response.visualeditor : null;
 
 	if ( typeof data.content !== 'string' ) {
@@ -302,6 +301,8 @@ ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 	} else {
 		ve.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
+		this.etag = data.etag;
+		this.fromEditedState = data.fromEditedState;
 		this.doc = ve.parseXhtml( this.originalHtml );
 
 		// Fix relative or missing base URL if needed
@@ -321,7 +322,7 @@ ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
 				docRevId = parseInt( docRevIdMatches[ 1 ] );
 			}
 		}
-		if ( docRevId !== this.revid ) {
+		if ( docRevId && docRevId !== this.revid ) {
 			if ( this.retriedRevIdConflict ) {
 				// Retried already, just error the second time.
 				this.loadFail(
@@ -388,7 +389,7 @@ ve.init.mw.Target.prototype.onReady = function () {
 	);
 
 	this.loading = false;
-	this.edited = false;
+	this.edited = this.fromEditedState;
 	this.setupSurface( this.doc, function () {
 		// loadSuccess() may have called setAssumeExistence( true );
 		ve.init.platform.linkCache.setAssumeExistence( false );
@@ -1264,7 +1265,8 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
 					paction: 'serializeforcache',
 					html: deflatedHtml,
 					page: target.pageName,
-					oldid: target.revid
+					oldid: target.revid,
+					etag: target.etag
 				},
 				{ contentType: 'multipart/form-data' }
 			);
@@ -1544,7 +1546,8 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
 		oldid: this.revid,
 		basetimestamp: this.baseTimeStamp,
 		starttimestamp: this.startTimeStamp,
-		token: this.editToken
+		token: this.editToken,
+		etag: this.etag
 	} );
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
@@ -1569,7 +1572,8 @@ ve.init.mw.Target.prototype.showChanges = function ( doc ) {
 		action: 'visualeditor',
 		paction: 'diff',
 		page: this.pageName,
-		oldid: this.revid
+		oldid: this.revid,
+		etag: this.etag
 	}, 'diff' )
 		.done( this.showChangesSuccess.bind( this ) )
 		.fail( this.showChangesFail.bind( this ) );
@@ -1646,7 +1650,8 @@ ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
 		action: 'visualeditor',
 		paction: 'serialize',
 		page: this.pageName,
-		oldid: this.revid
+		oldid: this.revid,
+		etag: this.etag
 	}, 'serialize' )
 		.done( ve.init.mw.Target.prototype.serializeSuccess.bind( this ) )
 		.fail( ve.init.mw.Target.prototype.serializeFail.bind( this ) );
@@ -1773,7 +1778,7 @@ ve.init.mw.Target.prototype.attachToolbarSaveButton = function () {
 ve.init.mw.Target.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
-	this.edited = this.getSurface().getModel().hasBeenModified();
+	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState;
 	// Disable the save button if we have no history
 	isDisabled = !this.edited && !this.restoring;
 	this.toolbarSaveButton.setDisabled( isDisabled );
