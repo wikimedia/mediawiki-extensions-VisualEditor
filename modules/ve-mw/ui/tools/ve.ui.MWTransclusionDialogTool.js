@@ -75,6 +75,18 @@ ve.ui.commandRegistry.register(
 	)
 );
 
-ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextTemplate', 'transclusion', '{{', 2 )
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'transclusionFromSequence', 'window', 'open',
+		{ args: [ 'transclusion', { cancelCommand: 'undo' } ], supportedSelections: [ 'linear' ] }
+	)
 );
+
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'wikitextTemplate', 'transclusionFromSequence', '{{', 2 )
+);
+
+ve.ui.commandHelpRegistry.register( 'insert', 'template', {
+	sequence: [ 'wikitextTemplate' ],
+	msg: 'visualeditor-dialog-template-title'
+} );

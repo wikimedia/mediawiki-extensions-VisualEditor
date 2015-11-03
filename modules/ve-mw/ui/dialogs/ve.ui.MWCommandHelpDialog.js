@@ -41,30 +41,6 @@ ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().toUpperCase().replace( /-/g, ' + ' ),
 		save = ve.msg( 'accesskey-save' );
 
-	ve.ui.commandHelpRegistry.register( 'textStyle', 'link', { sequence: [ 'wikitextLink' ] } );
-	ve.ui.commandHelpRegistry.register( 'formatting', 'blockquote', { sequence: [ 'wikitextDescription' ] } );
-	ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequence: [ 'numberHash' ] } );
-	ve.ui.commandHelpRegistry.register( 'formatting', 'heading2', {
-		sequence: [ 'wikitextHeading' ],
-		msg: 'visualeditor-formatdropdown-format-heading2'
-	} );
-	ve.ui.commandHelpRegistry.register( 'insert', 'template', {
-		sequence: [ 'wikitextTemplate' ],
-		msg: 'visualeditor-dialog-template-title'
-	} );
-	ve.ui.commandHelpRegistry.register( 'insert', 'ref', {
-		sequence: [ 'wikitextRef' ],
-		msg: 'visualeditor-dialog-reference-title'
-	} );
-	ve.ui.commandHelpRegistry.register( 'insert', 'table', {
-		sequence: [ 'wikitextTable' ],
-		msg: 'visualeditor-table-insert-table'
-	} );
-	ve.ui.commandHelpRegistry.register( 'insert', 'comment', {
-		sequence: [ 'wikitextComment' ],
-		msg: 'visualeditor-commentinspector-title'
-	} );
-
 	if ( save !== '-' && save !== '' ) {
 		ve.ui.commandHelpRegistry.register( 'other', 'save', {
 			shortcuts: [ accessKeyPrefix + save.toUpperCase() ],

@@ -32,3 +32,20 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextComment', 'comment',  '<!--', 4 )
 );
+
+/* Help registrations */
+
+ve.ui.commandHelpRegistry.register( 'formatting', 'heading2', {
+	sequence: [ 'wikitextHeading' ],
+	msg: 'visualeditor-formatdropdown-format-heading2'
+} );
+ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequence: [ 'numberHash' ] } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'blockquote', { sequence: [ 'wikitextDescription' ] } );
+ve.ui.commandHelpRegistry.register( 'insert', 'table', {
+	sequence: [ 'wikitextTable' ],
+	msg: 'visualeditor-table-insert-table'
+} );
+ve.ui.commandHelpRegistry.register( 'insert', 'comment', {
+	sequence: [ 'wikitextComment' ],
+	msg: 'visualeditor-commentinspector-title'
+} );

@@ -59,10 +59,15 @@ ve.ui.commandRegistry.register(
 	)
 );
 
-/* If Citoid is installed this will be overridden */
+/* If Citoid is installed these will be overridden */
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextRef', 'reference', '<ref', 4 )
 );
+
+ve.ui.commandHelpRegistry.register( 'insert', 'ref', {
+	sequence: [ 'wikitextRef' ],
+	msg: 'visualeditor-dialog-reference-title'
+} );
 
 /**
  * MediaWiki UserInterface references list tool.
