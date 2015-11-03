@@ -78,14 +78,16 @@ ve.ui.MWVESwitchConfirmDialog.prototype.getSetupProcess = function () {
 ve.ui.MWVESwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'keep' ) {
 		return new OO.ui.Process( function () {
-			this.getActions().setAbilities( { cancel: false, discard: false } );
-			this.getActions().get()[ 1 ].pushPending();
+			this.getActions()
+				.setAbilities( { cancel: false, discard: false } )
+				.get( { actions: 'keep' } )[ 0 ].pushPending();
 			this.close( { action: 'keep' } );
 		}, this );
 	} else if ( action === 'discard' ) {
 		return new OO.ui.Process( function () {
-			this.getActions().setAbilities( { cancel: false, keep: false } );
-			this.getActions().get()[ 2 ].pushPending();
+			this.getActions()
+				.setAbilities( { cancel: false, keep: false } )
+				.get( { actions: 'discard' } )[ 0 ].pushPending();
 			this.close( { action: 'discard' } );
 		}, this );
 	} else if ( action === 'cancel' ) {
