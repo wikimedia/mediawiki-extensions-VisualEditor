@@ -43,12 +43,20 @@ ve.ui.MWVESwitchConfirmDialog.static.actions = [
 	{
 		action: 'cancel',
 		label: mw.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
-		flags: [ 'safe', 'back' ]
+		flags: [ 'safe', 'back' ],
+		modes: [ 'restbase', 'simple' ]
 	},
 	{
 		action: 'discard',
 		label: mw.msg( 'visualeditor-mweditmodesource-warning-switch-discard' ),
-		flags: 'destructive'
+		flags: 'destructive',
+		modes: [ 'restbase', 'simple' ]
+	},
+	{
+		action: 'keep',
+		label: mw.msg( 'visualeditor-mweditmodesource-warning-switch' ),
+		flags: [ 'progressive', 'primary' ],
+		modes: [ 'restbase' ]
 	}
 ];
 
@@ -58,16 +66,9 @@ ve.ui.MWVESwitchConfirmDialog.static.actions = [
  * @inheritdoc
  */
 ve.ui.MWVESwitchConfirmDialog.prototype.getSetupProcess = function () {
-	return ve.ui.MWVESwitchConfirmDialog.super.prototype.getSetupProcess
-		.apply( this, arguments )
+	return ve.ui.MWVESwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
 		.next( function () {
-			if ( mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl ) {
-				this.getActions().add( [ new OO.ui.ActionWidget( {
-					action: 'keep',
-					label: mw.msg( 'visualeditor-mweditmodesource-warning-switch' ),
-					flags: [ 'progressive', 'primary' ]
-				} ) ] );
-			}
+			this.actions.setMode( mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl ? 'restbase' : 'simple' );
 		}, this );
 };
 
