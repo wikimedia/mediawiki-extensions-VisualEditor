@@ -23,6 +23,17 @@ ve.ui.MWCommandHelpDialog = function VeUiMWCommandHelpDialog( config ) {
 
 OO.inheritClass( ve.ui.MWCommandHelpDialog, ve.ui.CommandHelpDialog );
 
+/* Static properties */
+
+ve.ui.MWCommandHelpDialog.static.commandGroups = ve.extendObject( ve.ui.CommandHelpDialog.static.commandGroups, {
+	insert: {
+		title: 'visualeditor-shortcuts-insert',
+		commands: {},
+		promote: [],
+		demote: []
+	}
+} );
+
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
@@ -38,13 +49,21 @@ ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 		sequence: [ 'wikitextHeading' ],
 		msg: 'visualeditor-formatdropdown-format-heading2'
 	} );
-	ve.ui.MWCommandHelpDialog.static.registerCommand( 'other', 'template', {
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'insert', 'template', {
 		sequence: [ 'wikitextTemplate' ],
-		msg: 'visualeditor-dialog-transclusion-add-template'
+		msg: 'visualeditor-dialog-template-title'
 	} );
-	ve.ui.MWCommandHelpDialog.static.registerCommand( 'other', 'ref', {
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'insert', 'ref', {
 		sequence: [ 'wikitextRef' ],
 		msg: 'visualeditor-dialog-reference-title'
+	} );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'insert', 'table', {
+		sequence: [ 'wikitextTable' ],
+		msg: 'visualeditor-table-insert-table'
+	} );
+	ve.ui.MWCommandHelpDialog.static.registerCommand( 'insert', 'comment', {
+		sequence: [ 'wikitextComment' ],
+		msg: 'visualeditor-commentinspector-title'
 	} );
 
 	if ( save !== '-' && save !== '' ) {

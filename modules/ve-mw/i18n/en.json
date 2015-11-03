@@ -325,6 +325,7 @@
 	"visualeditor-saveerror-titleblacklist": "Error saving page: This page's title is blacklisted",
 	"visualeditor-serializeerror": "Error loading data from server: $1.",
 	"visualeditor-settings-tool": "Page settings",
+	"visualeditor-shortcuts-insert": "Insert",
 	"visualeditor-special-characters-group-other": "Often used",
 	"visualeditor-timeout":"It looks like this editor is currently unavailable. Would you like to edit in source mode instead?",
 	"visualeditor-toolbar-cite-label": "Cite",
