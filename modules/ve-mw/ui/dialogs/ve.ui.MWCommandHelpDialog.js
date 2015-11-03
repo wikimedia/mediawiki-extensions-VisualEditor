@@ -28,7 +28,7 @@ OO.inheritClass( ve.ui.MWCommandHelpDialog, ve.ui.CommandHelpDialog );
 ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 
 ( function () {
-	var accessKeyPrefix = mw.util.tooltipAccessKeyPrefix.toUpperCase().replace( /-/g, ' + ' ),
+	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().toUpperCase().replace( /-/g, ' + ' ),
 		save = ve.msg( 'accesskey-save' );
 
 	ve.ui.MWCommandHelpDialog.static.registerCommand( 'textStyle', 'link', { sequence: [ 'wikitextLink' ] } );
