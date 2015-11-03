@@ -56,16 +56,20 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	} );
 
 	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
+	this.$stillDot = $( '<div>' ).addClass( 've-ui-stillDot' );
 	this.$element
 		.addClass( 've-ui-educationPopup' )
-		.append( this.popup.$element )
-		.append( this.$pulsatingDot );
+		.append( this.popup.$element, this.$stillDot, this.$pulsatingDot );
 
 	setTimeout( function () {
 		var radius = tool.$pulsatingDot.width() / 2;
 		tool.$pulsatingDot.css( {
 			left: tool.$element.width() / 2 - radius,
 			top: tool.$element.height() - radius
+		} );
+		tool.$stillDot.css( {
+			left: tool.$element.width() / 2 - radius / 3,
+			top: tool.$element.height() - radius / 3
 		} );
 	}, 0 );
 };
