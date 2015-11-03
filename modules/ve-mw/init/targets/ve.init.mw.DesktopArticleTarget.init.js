@@ -18,8 +18,8 @@
  * @singleton
  */
 ( function () {
-	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, pageCanLoadVE,
-		init, support, targetPromise, enable, tempdisable, autodisable, userPrefEnabled,
+	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, pageCanLoadVE, init,
+		support, targetPromise, enable, tempdisable, autodisable, userPrefEnabled,
 		initialWikitext,
 		active = false,
 		progressStep = 0,
@@ -223,9 +223,8 @@
 	uri = new mw.Uri();
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
-	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
 	pageCanLoadVE = (
-		isViewPage ||
+		( mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query ) ) ||
 		mw.config.get( 'wgAction' ) === 'edit' ||
 		mw.config.get( 'wgAction' ) === 'submit'
 	);
@@ -514,7 +513,10 @@
 				return;
 			}
 
-			if ( !isViewPage && ( mw.config.get( 'wgAction' ) === 'submit' || wikitextModified ) ) {
+			if (
+				mw.config.get( 'wgAction' ) === 'submit' ||
+				( mw.config.get( 'wgAction' ) === 'edit' && wikitextModified )
+			) {
 				mw.loader.using( 'ext.visualEditor.switching' )
 					.done( function () {
 						var windowManager = new OO.ui.WindowManager(),
