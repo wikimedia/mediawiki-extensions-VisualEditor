@@ -1,0 +1,17 @@
+/*!
+ * VisualEditor Apex theme widget customizations.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+/* ve.ui.MWSaveDialog summary */
+
+.ve-ui-mwSaveDialog-summary textarea {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.ve-ui-mwSaveDialog-options {
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
