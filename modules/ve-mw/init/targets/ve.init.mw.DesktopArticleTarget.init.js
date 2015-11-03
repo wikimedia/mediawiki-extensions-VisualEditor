@@ -417,6 +417,7 @@
 
 			if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
+				mw.loader.load( 'ext.visualEditor.switching' );
 				$caVeEdit.click( init.onEditTabClick );
 			}
 		},
@@ -503,8 +504,7 @@
 		},
 
 		onEditTabClick: function ( e ) {
-			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext,
-				windowManager, switchWindow;
+			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext;
 
 			// Default mouse button is normalised by jQuery to key code 1.
 			// Only do our handling if no keys are pressed, mouse button is 1
@@ -515,24 +515,27 @@
 			}
 
 			if ( !isViewPage && ( mw.config.get( 'wgAction' ) === 'submit' || wikitextModified ) ) {
-				// Prompt if either we're on action=submit (the user has previewed) or
-				// the wikitext hash is different to the value observed upon page load.
+				mw.loader.using( 'ext.visualEditor.switching' )
+					.done( function () {
+						var windowManager = new OO.ui.WindowManager(),
+							switchWindow = new mw.libs.ve.SwitchConfirmDialog();
+						// Prompt if either we're on action=submit (the user has previewed) or
+						// the wikitext hash is different to the value observed upon page load.
 
-				windowManager = new OO.ui.WindowManager();
-				$( 'body' ).append( windowManager.$element );
-				switchWindow = new ve.ui.MWVESwitchConfirmDialog();
-				windowManager.addWindows( [ switchWindow ] );
-				windowManager.openWindow( switchWindow ).done( function ( opened ) {
-					opened.done( function ( closing ) {
-						closing.done( function ( data ) {
-							if ( data && data.action === 'keep' ) {
-								activatePageTarget();
-							} else if ( data && data.action === 'discard' ) {
-								location.href = veEditUri;
-							}
+						$( 'body' ).append( windowManager.$element );
+						windowManager.addWindows( [ switchWindow ] );
+						windowManager.openWindow( switchWindow ).done( function ( opened ) {
+							opened.done( function ( closing ) {
+								closing.done( function ( data ) {
+									if ( data && data.action === 'keep' ) {
+										activatePageTarget();
+									} else if ( data && data.action === 'discard' ) {
+										location.href = veEditUri;
+									}
+								} );
+							} );
 						} );
 					} );
-				} );
 			} else {
 				activatePageTarget();
 			}

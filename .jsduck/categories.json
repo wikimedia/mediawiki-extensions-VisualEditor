@@ -11,6 +11,12 @@
 				]
 			},
 			{
+				"name": "Switching",
+				"classes": [
+					"mw.libs.ve.SwitchConfirmDialog"
+				]
+			},
+			{
 				"name": "User Interface",
 				"classes": [
 					"ve.ui.MW*Page",

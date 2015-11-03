@@ -5,6 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+mw.libs.ve = mw.libs.ve || {};
 /**
  * Dialog for letting the user choose how to switch to wikitext mode.
  *
@@ -14,32 +15,32 @@
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWVESwitchConfirmDialog = function VeUiMWVESwitchConfirmDialog( config ) {
+mw.libs.ve.SwitchConfirmDialog = function MWLibsVESwitchConfirmDialog( config ) {
 	// Parent constructor
-	ve.ui.MWVESwitchConfirmDialog.super.call( this, config );
+	mw.libs.ve.SwitchConfirmDialog.super.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWVESwitchConfirmDialog, OO.ui.MessageDialog );
+OO.inheritClass( mw.libs.ve.SwitchConfirmDialog, OO.ui.MessageDialog );
 
 /* Static Properties */
 
-ve.ui.MWVESwitchConfirmDialog.static.name = 'veswitchconfirm';
+mw.libs.ve.SwitchConfirmDialog.static.name = 'veswitchconfirm';
 
-ve.ui.MWVESwitchConfirmDialog.static.verbose = true;
+mw.libs.ve.SwitchConfirmDialog.static.verbose = true;
 
-ve.ui.MWVESwitchConfirmDialog.static.size = 'small';
+mw.libs.ve.SwitchConfirmDialog.static.size = 'small';
 
-ve.ui.MWVESwitchConfirmDialog.static.icon = 'help';
+mw.libs.ve.SwitchConfirmDialog.static.icon = 'help';
 
-ve.ui.MWVESwitchConfirmDialog.static.title =
+mw.libs.ve.SwitchConfirmDialog.static.title =
 	mw.msg( 'visualeditor-mweditmodeve-title' );
 
-ve.ui.MWVESwitchConfirmDialog.static.message =
+mw.libs.ve.SwitchConfirmDialog.static.message =
 	mw.msg( 'visualeditor-mweditmodeve-warning' );
 
-ve.ui.MWVESwitchConfirmDialog.static.actions = [
+mw.libs.ve.SwitchConfirmDialog.static.actions = [
 	{
 		action: 'cancel',
 		label: mw.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
@@ -65,8 +66,8 @@ ve.ui.MWVESwitchConfirmDialog.static.actions = [
 /**
  * @inheritdoc
  */
-ve.ui.MWVESwitchConfirmDialog.prototype.getSetupProcess = function () {
-	return ve.ui.MWVESwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
+mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function () {
+	return mw.libs.ve.SwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
 		.next( function () {
 			this.actions.setMode( mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl ? 'restbase' : 'simple' );
 		}, this );
@@ -75,7 +76,7 @@ ve.ui.MWVESwitchConfirmDialog.prototype.getSetupProcess = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWVESwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
+mw.libs.ve.SwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'keep' ) {
 		return new OO.ui.Process( function () {
 			this.getActions()
@@ -97,9 +98,5 @@ ve.ui.MWVESwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
 	}
 
 	// Parent method
-	return ve.ui.MWVESwitchConfirmDialog.super.prototype.getActionProcess.call( this, action );
+	return mw.libs.ve.SwitchConfirmDialog.super.prototype.getActionProcess.call( this, action );
 };
-
-/* Registration */
-
-ve.ui.windowFactory.register( ve.ui.MWVESwitchConfirmDialog );

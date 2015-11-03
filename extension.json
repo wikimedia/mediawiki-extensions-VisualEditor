@@ -970,12 +970,11 @@
 		},
 		"ext.visualEditor.switching": {
 			"scripts": [
-				"modules/ve-mw/ui/dialogs/ve.ui.MWVESwitchConfirmDialog.js"
+				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js"
 			],
 			"dependencies": [
 				"oojs",
-				"oojs-ui",
-				"ext.visualEditor.core"
+				"oojs-ui"
 			],
 			"messages": [
 				"visualeditor-mweditmodeve-title",
