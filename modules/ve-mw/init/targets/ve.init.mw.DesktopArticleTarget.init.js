@@ -504,8 +504,7 @@
 
 		onEditTabClick: function ( e ) {
 			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext,
-				windowManager = new OO.ui.WindowManager(),
-				switchWindow;
+				windowManager, switchWindow;
 
 			// Default mouse button is normalised by jQuery to key code 1.
 			// Only do our handling if no keys are pressed, mouse button is 1
@@ -519,6 +518,7 @@
 				// Prompt if either we're on action=submit (the user has previewed) or
 				// the wikitext hash is different to the value observed upon page load.
 
+				windowManager = new OO.ui.WindowManager();
 				$( 'body' ).append( windowManager.$element );
 				switchWindow = new ve.ui.MWVESwitchConfirmDialog();
 				windowManager.addWindows( [ switchWindow ] );
