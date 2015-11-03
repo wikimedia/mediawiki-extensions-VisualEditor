@@ -77,6 +77,8 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
 
 /**
  * Setup the Ace editor
+ *
+ * @fires resize
  */
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	this.$input.addClass( 'oo-ui-element-hidden' );
@@ -86,7 +88,7 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 		maxLines: this.autosize ? this.maxRows : this.minRows || 3
 	} );
 	this.editor.getSession().on( 'change', this.onEditorChange.bind( this ) );
-	this.editor.renderer.on( 'resize', this.emit.bind( this, 'resize' ) );
+	this.editor.renderer.on( 'resize', this.onEditorResize.bind( this ) );
 	this.editor.resize();
 };
 
@@ -114,6 +116,15 @@ ve.ui.MWAceEditorWidget.prototype.setValue = function ( value ) {
 ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
 	// Call setValue on the parent to keep the value property in sync with the editor
 	ve.ui.MWAceEditorWidget.super.prototype.setValue.call( this, this.editor.getValue() );
+};
+
+/**
+ * Handle resize events from the Ace editor
+ *
+ * @fires resize
+ */
+ve.ui.MWAceEditorWidget.prototype.onEditorResize = function () {
+	this.emit.bind( this, 'resize' );
 };
 
 /**
@@ -158,22 +169,13 @@ ve.ui.MWAceEditorWidget.prototype.focus = function () {
 
 /**
  * @inheritdoc
- * TODO Move this upstream to OOUI
  */
 ve.ui.MWAceEditorWidget.prototype.adjustSize = function () {
-	var styleHeight,
-		widget = this;
-
-	// Parent method
-	ve.ui.MWAceEditorWidget.super.prototype.adjustSize.call( this );
-
-	// Implement resize events for plain TextWidget
+	var widget = this;
+	// If the editor has loaded, resize events are emitted from #onEditorResize
+	// so do nothing here, otherwise call the parent method.
 	this.loadingPromise.fail( function () {
-		styleHeight = widget.$input[ 0 ].style.height;
-
-		if ( styleHeight !== widget.styleHeight ) {
-			widget.styleHeight = styleHeight;
-			widget.emit( 'resize' );
-		}
+		// Parent method
+		ve.ui.MWAceEditorWidget.super.prototype.adjustSize.call( widget );
 	} );
 };
