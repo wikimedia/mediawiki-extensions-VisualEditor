@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Agilight"
+			"Agilight",
+			"Монгуш Салим"
 		]
 	},
 	"tooltip-ca-createsource": "Үндезин сөзүглелдер \"эдикчизи\"-биле арынны чаяар",
 	"tooltip-ca-editsource": "Арынның үндезин сөзүглелин эдер",
-	"tooltip-ca-ve-edit": "Ук арынны визуалдыг(?) эдикчи-биле эдер",
+	"tooltip-ca-ve-edit": "Бо арынны эдер",
 	"visualeditor-annotationbutton-linknode-tooltip": "Бөдүүн айтыг",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Чаяар",
-	"visualeditor-ca-editsource": "Үндезин сөзүглелин эдер",
-	"visualeditor-ca-editsource-section": "Үндезин сөзүглелин эдер",
+	"visualeditor-ca-editsource": "вики-сөзүглелди эдер",
+	"visualeditor-ca-editsource-section": "вики-сөзүглелди эдер",
 	"visualeditor-ca-ve-edit": "Визуалдыг эдикчи",
 	"visualeditor-ca-ve-edit-section": "Визуалдыг эдикчи",
 	"visualeditor-categories-tool": "Аңгылалдар",

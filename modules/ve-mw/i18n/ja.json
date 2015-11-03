@@ -263,7 +263,7 @@
 	"visualeditor-meta-tool": "オプション",
 	"visualeditor-mweditmodesource-title": "ソースの編集に切り替えますか?",
 	"visualeditor-mweditmodesource-tool": "ソースの編集に切り替える",
-	"visualeditor-mweditmodesource-warning": "ソースの編集に切り替えようとしています。\nこの文書の変更点はすべて保持されますが、ページの保存または再読み込みをしない限り、このビジュアルエディターには戻れません。\n本当に続行しますか?",
+	"visualeditor-mweditmodesource-warning": "ソースの編集に切り替えようとしています。\n本当に続行しますか?",
 	"visualeditor-mweditmodesource-warning-cancel": "キャンセル",
 	"visualeditor-mweditmodesource-warning-switch": "編集内容を保持",
 	"visualeditor-mweditmodesource-warning-switch-discard": "変更内容を破棄",
