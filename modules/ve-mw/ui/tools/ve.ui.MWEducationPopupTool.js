@@ -15,7 +15,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
-	var popupCloseButton, $popupContent,
+	var popupCloseButton, $popupContent, $shield,
 		usePrefs = !mw.user.isAnon(),
 		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' ),
 		tool = this;
@@ -55,11 +55,31 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 		width: 300
 	} );
 
+	this.shownEducationPopup = false;
 	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
 	this.$stillDot = $( '<div>' ).addClass( 've-ui-stillDot' );
+	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' ).click( function () {
+		if ( !tool.shownEducationPopup ) {
+			if ( ve.init.target.openEducationPopupTool ) {
+				ve.init.target.openEducationPopupTool.popup.toggle( false );
+				ve.init.target.openEducationPopupTool.setActive( false );
+				ve.init.target.openEducationPopupTool.$pulsatingDot.show();
+				ve.init.target.openEducationPopupTool.$stillDot.show();
+			}
+			ve.init.target.openEducationPopupTool = tool;
+			tool.$pulsatingDot.hide();
+			tool.$stillDot.hide();
+			tool.popup.toggle( true );
+			tool.popup.$element.css( {
+				left: tool.$element.width() / 2,
+				top: tool.$element.height()
+			} );
+			$shield.remove();
+		}
+	} );
 	this.$element
 		.addClass( 've-ui-educationPopup' )
-		.append( this.popup.$element, this.$stillDot, this.$pulsatingDot );
+		.append( $shield, this.popup.$element, this.$stillDot, this.$pulsatingDot );
 
 	setTimeout( function () {
 		var radius = tool.$pulsatingDot.width() / 2;
@@ -84,48 +104,22 @@ OO.initClass( ve.ui.MWEducationPopupTool );
  * Click handler for the popup close button
  */
 ve.ui.MWEducationPopupTool.prototype.onPopupCloseButtonClick = function () {
-	this.popup.toggle( false );
-	this.setActive( false );
-	ve.init.target.openEducationPopupTool = undefined;
-};
-
-/**
- * Overrides Tool's onSelect to bring up popup where necessary
- */
-ve.ui.MWEducationPopupTool.prototype.onSelect = function () {
 	var usePrefs = !mw.user.isAnon(),
 		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' );
 
-	// Beware: this method is called even if the constructor bailed after checking
-	// the user preference / cookie / localStorage. In that case, this.$pulsatingDot,
-	// this.popup and other properties will not be set.
-	if ( this.$pulsatingDot && this.$pulsatingDot.is( ':visible' ) ) {
-		if ( ve.init.target.openEducationPopupTool ) {
-			ve.init.target.openEducationPopupTool.popup.toggle( false );
-			ve.init.target.openEducationPopupTool.setActive( false );
-			ve.init.target.openEducationPopupTool.$pulsatingDot.show();
-			ve.init.target.openEducationPopupTool.$stillDot.show();
-		}
-		ve.init.target.openEducationPopupTool = this;
-		this.$pulsatingDot.hide();
-		this.$stillDot.hide();
-		this.popup.toggle( true );
-		this.popup.$element.css( {
-			left: this.$element.width() / 2,
-			top: this.$element.height()
-		} );
+	this.shownEducationPopup = true;
+	this.popup.toggle( false );
+	this.setActive( false );
+	ve.init.target.openEducationPopupTool = undefined;
 
-		if ( prefSaysShow ) {
-			new mw.Api().saveOption( 'visualeditor-hideusered', 1 );
-			mw.user.options.set( 'visualeditor-hideusered', 1 );
-		} else if ( !usePrefs ) {
-			try {
-				localStorage.setItem( 've-hideusered', 1 );
-			} catch ( e ) {
-				$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
-			}
+	if ( prefSaysShow ) {
+		new mw.Api().saveOption( 'visualeditor-hideusered', 1 );
+		mw.user.options.set( 'visualeditor-hideusered', 1 );
+	} else if ( !usePrefs ) {
+		try {
+			localStorage.setItem( 've-hideusered', 1 );
+		} catch ( e ) {
+			$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
 		}
-	} else if ( !this.popup || !this.popup.isVisible() ) {
-		return this.constructor.super.prototype.onSelect.apply( this, arguments );
 	}
 };

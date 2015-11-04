@@ -24,6 +24,14 @@
 	position: absolute;
 }
 
+.ve-ui-educationPopup-shield {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
 .oo-ui-widget-disabled .ve-ui-pulsatingDot,
 .oo-ui-widget-disabled .ve-ui-stillDot {
 	display: none;
