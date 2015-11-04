@@ -172,7 +172,7 @@
 					function ( response ) {
 						if ( response.status === 404 ) {
 							// Page does not exist, so let the user start with a blank document.
-							return $.Deferred().resolve( '' ).promise();
+							return $.Deferred().resolve( [ '', undefined ] ).promise();
 						} else {
 							window.alert( mw.msg( 'visualeditor-loaderror-message', 'HTTP ' + response.status ) );
 
