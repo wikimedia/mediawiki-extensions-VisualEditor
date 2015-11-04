@@ -674,6 +674,7 @@
 				"lib/ve/src/ui/ve.ui.ToolFactory.js",
 				"lib/ve/src/ui/ve.ui.Command.js",
 				"lib/ve/src/ui/ve.ui.CommandRegistry.js",
+				"lib/ve/src/ui/ve.ui.CommandHelpRegistry.js",
 				"lib/ve/src/ui/ve.ui.Trigger.js",
 				"lib/ve/src/ui/ve.ui.TriggerRegistry.js",
 				"lib/ve/src/ui/ve.ui.Sequence.js",
