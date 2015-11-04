@@ -876,8 +876,9 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
 			type: 'list',
 			icon: 'menu',
 			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
-			include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'editModeSource', 'findAndReplace' ]
-		}
+			include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'findAndReplace' ]
+		},
+		{ include: [ 'editModeSource' ] }
 	], this.getSurface() );
 
 	this.toolbar.$actions.append( this.actionsToolbar.$element, this.toolbarSaveButton.$element );

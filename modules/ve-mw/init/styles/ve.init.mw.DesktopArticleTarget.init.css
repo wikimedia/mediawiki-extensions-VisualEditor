@@ -49,6 +49,15 @@
 	cursor: default;
 }
 
+.ve-init-mw-desktopArticleTarget-editSwitch {
+	float: right;
+	margin: 0;
+}
+
+.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-iconElement-icon {
+	opacity: 0.8;
+}
+
 /* Progress bar mimicking OOUI */
 
 .ve-activated #content {

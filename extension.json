@@ -974,7 +974,8 @@
 			],
 			"dependencies": [
 				"oojs",
-				"oojs-ui"
+				"oojs-ui",
+				"oojs-ui.styles.icons-editing-core"
 			],
 			"messages": [
 				"visualeditor-mweditmodeve-title",
