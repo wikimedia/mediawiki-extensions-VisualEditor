@@ -418,6 +418,16 @@
 				// Allow instant switching to edit mode, without refresh
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$caVeEdit.click( init.onEditTabClick );
+				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
+					$( '.wikiEditor-ui-toolbar' ).prepend(
+						new OO.ui.ButtonWidget( {
+							framed: false,
+							icon: 'edit',
+							title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
+							classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
+						} ).on( 'click', init.activateVe ).$element
+					);
+				} );
 			}
 		},
 
@@ -503,8 +513,6 @@
 		},
 
 		onEditTabClick: function ( e ) {
-			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext;
-
 			// Default mouse button is normalised by jQuery to key code 1.
 			// Only do our handling if no keys are pressed, mouse button is 1
 			// (e.g. not middle click or right click) and no modifier keys
@@ -512,6 +520,12 @@
 			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
 				return;
 			}
+			e.preventDefault();
+			init.activateVe();
+		},
+
+		activateVe: function () {
+			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext;
 
 			if (
 				mw.config.get( 'wgAction' ) === 'submit' ||
@@ -541,8 +555,6 @@
 			} else {
 				activatePageTarget();
 			}
-
-			e.preventDefault();
 		},
 
 		onEditSectionLinkClick: function ( e ) {

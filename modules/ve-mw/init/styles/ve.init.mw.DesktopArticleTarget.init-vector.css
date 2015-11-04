@@ -17,3 +17,11 @@
 	height: 0.75em;
 	background: #347bff;
 }
+
+.ve-init-mw-desktopArticleTarget-editSwitch {
+	font-size: 0.9143em;
+}
+
+.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-buttonElement-button {
+	padding: 0.3em;
+}
