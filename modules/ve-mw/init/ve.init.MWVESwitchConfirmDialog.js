@@ -69,7 +69,14 @@ mw.libs.ve.SwitchConfirmDialog.static.actions = [
 mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function () {
 	return mw.libs.ve.SwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
 		.next( function () {
-			this.actions.setMode( mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl ? 'restbase' : 'simple' );
+			if (
+				mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl &&
+				!$( 'input[name=wpSection]' ).val()
+			) {
+				this.actions.setMode( 'restbase' );
+			} else {
+				this.actions.setMode( 'simple' );
+			}
 		}, this );
 };
 
