@@ -86,7 +86,7 @@
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Користи се за сортирање странице у оквиру категорија. Обично се користи код чланака о особама када се врши сортирање по презимену особе а не имену.",
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Сортирај ову страницу подразумевано као",
 	"visualeditor-dialog-meta-categories-hidden": "Ова категорија је подешена да се не приказује на страницама на којима је додата.",
-	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Сакривене категорије",
+	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Скривене категорије",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Подударне категорије",
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Премештање дате категорије овде",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Нова категорија",

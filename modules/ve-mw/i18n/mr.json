@@ -179,6 +179,7 @@
 	"visualeditor-savedialog-warning-dirty": "आपले संपादन बिघडल्याची शक्यता दिसते-कृपया जतन करण्यापूर्वी झलक पहा",
 	"visualeditor-saveerror": "विदा (डाटा) विदागारावर (सर्व्हरवर) जतन करण्यात त्रुटी: $1.",
 	"visualeditor-serializeerror": "विदागाराकडून (सर्व्हर) विदा (डाटा) चढवण्यात त्रुटी: $1.",
+	"visualeditor-shortcuts-insert": "समाविष्ट करा",
 	"visualeditor-toolbar-savedialog": "लेखपान जतन करा",
 	"visualeditor-usernamespacepagelink": "Project:सदस्य नामविश्व",
 	"visualeditor-version-label": "आवृत्ती",

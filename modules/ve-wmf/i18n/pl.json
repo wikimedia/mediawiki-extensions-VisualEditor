@@ -20,7 +20,7 @@
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "Edycja z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditora]]",
+	"tag-visualeditor-description": "Edycja z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizualnego]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: do sprawdzenia]]",
 	"tag-visualeditor-needcheck-description": "Edycja wykonana z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizulanego]], w której system wykrył prawdopodobnie niezamierzone uszkodzenie kodu źródłowego.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: przełączono]]",

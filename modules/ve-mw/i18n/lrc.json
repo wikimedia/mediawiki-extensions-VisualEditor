@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Mogoeilor",
-			"Bonevarluri"
+			"Bonevarluri",
+			"Macofe"
 		]
 	},
 	"tooltip-ca-ve-edit": "ای بلگه نه وا انجوما ویرایشتکن ویرایشت بک",
@@ -10,7 +11,7 @@
 	"visualeditor-ca-createsource": "راس کردن سرچشمه",
 	"visualeditor-ca-editsource": "ویرایشت سرچشمه",
 	"visualeditor-ca-editsource-section": "ویرایشت سرچشمه",
-	"visualeditor-descriptionpagelink": "پروجه:انجوما ویرایشتکار",
+	"visualeditor-descriptionpagelink": "Project:انجوما ویرایشتکار",
 	"visualeditor-dialog-meta-settings-section": "تنظیمات بلگه",
 	"visualeditor-dialog-meta-settings-toc-disable": "هیژوخت نشو نیئه",
 	"visualeditor-dialog-meta-title": "گزينه يا هنی:",

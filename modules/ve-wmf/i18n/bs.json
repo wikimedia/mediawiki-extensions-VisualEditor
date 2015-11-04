@@ -6,12 +6,12 @@
 			"Semso98"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditora]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Provjerite]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje]]",
+	"tag-visualeditor-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualnog uređivača]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje: potrebna provjera]]",
 	"tag-visualeditor-needcheck-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualnog uređivača]] gdje je sistem detektirao wikitekst s mogućim neželjenim izmjenama.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualni uređivač: Prebačeno]]",
-	"tag-visualeditor-switched-description": "Korisnik je počeo uređivati koristeći se vizualnim uređivačem, te se onda prebacio u uređivač wikiteksta.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje: prebačeno]]",
+	"tag-visualeditor-switched-description": "Korisnik je počeo uređivati koristeći vizualni uređivač, pa se prebacio na izvorno uređivanje wikiteksta.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Povratna informacija",
 	"visualeditor-feedback-tool": "Ostavite povratnu informaciju",
 	"visualeditor-help-label": "Pročitajte korisnički vodič",

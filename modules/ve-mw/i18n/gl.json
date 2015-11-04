@@ -316,6 +316,7 @@
 	"visualeditor-saveerror-titleblacklist": "Erro ao gardar a páxina: O título desta páxina está na lista negra",
 	"visualeditor-serializeerror": "Erro ao cargar os datos desde o servidor: $1.",
 	"visualeditor-settings-tool": "Configuración da páxina",
+	"visualeditor-shortcuts-insert": "Inserir",
 	"visualeditor-special-characters-group-other": "Usado frecuentemente",
 	"visualeditor-timeout": "Semella que este editor non está dispoñible nestes intres. Quere editar no modo fonte?",
 	"visualeditor-toolbar-cite-label": "Citar",

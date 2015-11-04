@@ -318,6 +318,7 @@
 	"visualeditor-saveerror-titleblacklist": "שגיאה בשמירת הדף: כותרת הדף הזה נמצאת ברשימה שחורה",
 	"visualeditor-serializeerror": "שגיאה בטעינת נתונים מהשרת: $1.",
 	"visualeditor-settings-tool": "הגדרות דף",
+	"visualeditor-shortcuts-insert": "הוספה",
 	"visualeditor-special-characters-group-other": "נפוצים",
 	"visualeditor-timeout": "נראה שהעורך הזה אינו זמין כעת. האם ברצונך לערוך במצב עריכת קוד מקור?",
 	"visualeditor-toolbar-cite-label": "ציטוט",

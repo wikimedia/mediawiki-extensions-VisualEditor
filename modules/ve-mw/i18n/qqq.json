@@ -335,7 +335,7 @@
 	"visualeditor-saveerror-titleblacklist": "Text shown when the editor fails to save properly due to the TitleBlacklist extension.",
 	"visualeditor-serializeerror": "Text shown when the editor fails to load the wikitext for saving.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-settings-tool": "Text of tool in the toolbar the lets users set specific page settings.\n{{Identical|Page settings}}",
-	"visualeditor-shortcuts-insert": "Heading for insertion shortcuts",
+	"visualeditor-shortcuts-insert": "Heading for insertion shortcuts\n{{Identical|Insert}}",
 	"visualeditor-special-characters-group-other": "Label of the special character group shown if the wiki has visualeditor-quick-access-characters.json set up.",
 	"visualeditor-timeout": "Text (JavaScript confirm()) shown when the editor fails to load properly due to a 504 Gateway Timeout error.",
 	"visualeditor-toolbar-cite-label": "Label text for the toolbar button for inserting customized references.\n{{Identical|Cite}}",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jduranboger",
-			"Vikytinta"
+			"Vikytinta",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 ukar kutt'añataki ma pajinataki parsoid servicio ukataki.",
@@ -29,7 +30,7 @@
 	"visualeditor-cite-tool-name-news": "Yatiyäwinaka",
 	"visualeditor-cite-tool-name-web": "Sityu Web",
 	"visualeditor-desc": "MediaWiky-tak uñjañ askichiri",
-	"visualeditor-descriptionpagelink": "Proyecto:Uñjañ Askichiri",
+	"visualeditor-descriptionpagelink": "Project:Uñjañ Askichiri",
 	"visualeditor-dialog-media-alttext-section": "Qillqat",
 	"visualeditor-dialog-media-change-image": "Jamuq turkaña",
 	"visualeditor-dialog-media-content-section": "Liyinta",
