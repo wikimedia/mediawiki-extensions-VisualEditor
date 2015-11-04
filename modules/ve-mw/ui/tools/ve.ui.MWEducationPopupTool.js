@@ -104,9 +104,11 @@ ve.ui.MWEducationPopupTool.prototype.onSelect = function () {
 			ve.init.target.openEducationPopupTool.popup.toggle( false );
 			ve.init.target.openEducationPopupTool.setActive( false );
 			ve.init.target.openEducationPopupTool.$pulsatingDot.show();
+			ve.init.target.openEducationPopupTool.$stillDot.show();
 		}
 		ve.init.target.openEducationPopupTool = this;
 		this.$pulsatingDot.hide();
+		this.$stillDot.hide();
 		this.popup.toggle( true );
 		this.popup.$element.css( {
 			left: this.$element.width() / 2,
