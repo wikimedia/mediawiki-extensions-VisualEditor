@@ -60,7 +60,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.initialEditSummary = currentUri.query.summary;
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
-	this.veEditUri = this.viewUri.clone().extend( { veaction: 'edit', action: null } );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
 		currentUri.query.diff === undefined
@@ -1002,6 +1001,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		uri = this.currentUri;
 		uri.query.veaction = 'edit';
 		delete uri.query.action;
+		mw.config.set( 'wgAction', 'view' );
 
 		history.pushState( this.popState, document.title, uri );
 	}
@@ -1035,6 +1035,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		}
 		if ( 'action' in uri.query ) {
 			delete uri.query.action;
+			mw.config.set( 'wgAction', 'view' );
 		}
 
 		// If there are any other query parameters left, re-use that uri object.
