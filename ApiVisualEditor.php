@@ -430,10 +430,11 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Permission notice
-				if ( !$title->userCan( 'create' ) && !$title->exists() ) {
+				$permErrors = $title->getUserPermissionsErrors( 'create', $user );
+				if ( $permErrors && !$title->exists() ) {
 					$notices[] = $this->msg(
 						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
-					) . "<br>" . $this->msg( 'nocreatetext' )->parse();
+					) . "<br>" . call_user_func_array( array( $this, 'msg' ), $permErrors[0] )->parse();
 				}
 
 				// Show notice when editing user / user talk page of a user that doesn't exist
