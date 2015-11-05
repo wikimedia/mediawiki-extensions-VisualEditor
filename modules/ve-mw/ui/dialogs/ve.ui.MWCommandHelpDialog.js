@@ -27,7 +27,7 @@ OO.inheritClass( ve.ui.MWCommandHelpDialog, ve.ui.CommandHelpDialog );
 
 ve.ui.MWCommandHelpDialog.static.commandGroups = ve.extendObject( ve.ui.CommandHelpDialog.static.commandGroups, {
 	insert: {
-		title: 'visualeditor-shortcuts-insert',
+		title: OO.ui.deferMsg( 'visualeditor-shortcuts-insert' ),
 		promote: [],
 		demote: []
 	}
@@ -44,7 +44,7 @@ ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 	if ( save !== '-' && save !== '' ) {
 		ve.ui.commandHelpRegistry.register( 'other', 'save', {
 			shortcuts: [ accessKeyPrefix + save.toUpperCase() ],
-			msg: 'visualeditor-savedialog-label-save',
+			label: OO.ui.deferMsg( 'visualeditor-savedialog-label-save' ),
 			demote: true
 		} );
 	}

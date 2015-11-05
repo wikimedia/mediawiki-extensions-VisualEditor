@@ -79,4 +79,4 @@ ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextLink', 'link', '[[', 2 )
 );
 
-ve.ui.commandHelpRegistry.register( 'textStyle', 'link', { sequence: [ 'wikitextLink' ] } );
+ve.ui.commandHelpRegistry.register( 'textStyle', 'link', { sequences: [ 'wikitextLink' ] } );

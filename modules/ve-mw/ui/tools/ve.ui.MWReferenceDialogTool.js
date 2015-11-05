@@ -65,8 +65,8 @@ ve.ui.sequenceRegistry.register(
 );
 
 ve.ui.commandHelpRegistry.register( 'insert', 'ref', {
-	sequence: [ 'wikitextRef' ],
-	msg: 'visualeditor-dialog-reference-title'
+	sequences: [ 'wikitextRef' ],
+	label: OO.ui.deferMsg( 'visualeditor-dialog-reference-title' )
 } );
 
 /**

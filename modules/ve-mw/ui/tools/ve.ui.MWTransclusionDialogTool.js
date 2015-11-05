@@ -87,6 +87,6 @@ ve.ui.sequenceRegistry.register(
 );
 
 ve.ui.commandHelpRegistry.register( 'insert', 'template', {
-	sequence: [ 'wikitextTemplate' ],
-	msg: 'visualeditor-dialog-template-title'
+	sequences: [ 'wikitextTemplate' ],
+	label: OO.ui.deferMsg( 'visualeditor-dialog-template-title' )
 } );

@@ -36,16 +36,16 @@ ve.ui.sequenceRegistry.register(
 /* Help registrations */
 
 ve.ui.commandHelpRegistry.register( 'formatting', 'heading2', {
-	sequence: [ 'wikitextHeading' ],
-	msg: 'visualeditor-formatdropdown-format-heading2'
+	sequences: [ 'wikitextHeading' ],
+	label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-heading2' )
 } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequence: [ 'numberHash' ] } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'blockquote', { sequence: [ 'wikitextDescription' ] } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequences: [ 'numberHash' ] } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'blockquote', { sequences: [ 'wikitextDescription' ] } );
 ve.ui.commandHelpRegistry.register( 'insert', 'table', {
-	sequence: [ 'wikitextTable' ],
-	msg: 'visualeditor-table-insert-table'
+	sequences: [ 'wikitextTable' ],
+	label: OO.ui.deferMsg( 'visualeditor-table-insert-table' )
 } );
 ve.ui.commandHelpRegistry.register( 'insert', 'comment', {
-	sequence: [ 'wikitextComment' ],
-	msg: 'visualeditor-commentinspector-title'
+	sequences: [ 'wikitextComment' ],
+	label: OO.ui.deferMsg( 'visualeditor-commentinspector-title' )
 } );
