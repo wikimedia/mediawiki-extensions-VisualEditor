@@ -316,6 +316,7 @@
 	"visualeditor-saveerror-titleblacklist": "儲存頁面錯誤：此頁面標題已被列入封鎖清單。",
 	"visualeditor-serializeerror": "讀取伺服器資料發生錯誤：$1 。",
 	"visualeditor-settings-tool": "頁面設定",
+	"visualeditor-shortcuts-insert": "插入",
 	"visualeditor-special-characters-group-other": "經常使用",
 	"visualeditor-timeout": "目前無法使用此編輯器，您是否要改用原始碼編輯模式？",
 	"visualeditor-toolbar-cite-label": "引用",

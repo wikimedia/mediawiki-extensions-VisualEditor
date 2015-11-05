@@ -12,7 +12,7 @@
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальная праўка]]",
 	"tag-visualeditor-description": "Праўка зробленая празь [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуальны рэдактар]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Праверыць]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальная праўка: праверыць]]",
 	"tag-visualeditor-needcheck-description": "Праўка была зроблена [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуальным рэдактарам]], і сыстэма заўважыла патэнцыйна непажаданыя зьмены ў вікітэксьце.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальны рэдактар: пераключана]]",
 	"tag-visualeditor-switched-description": "Удзельнік пачаў рэдагаваць з дапамогай візуальнага рэдактару, а потым пераключыўся на рэдактар вікітэксту.",
