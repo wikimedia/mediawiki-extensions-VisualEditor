@@ -586,7 +586,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 	} else if ( data.error && data.error.code === 'pagedeleted' ) {
 		this.saveErrorPageDeleted();
 		return;
-	} else if ( data.error && data.error.code === 'titleblacklist-forbidden-edit' ) {
+	} else if ( data.error && data.error.code === 'titleblacklist-forbidden' ) {
 		this.saveErrorTitleBlacklist();
 		return;
 	}
