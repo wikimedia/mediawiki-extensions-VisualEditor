@@ -238,6 +238,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "تحويل إلى الرابط ISBN",
 	"visualeditor-linkinspector-convert-link-rfc": "تحويل إلى الرابط RFC",
 	"visualeditor-linkinspector-educationpopup-title": "وصلات",
+	"visualeditor-linkinspector-educationpopup-text": "اربط كلمة في المقالة بالمقالة المخصصة لها أو بموقع آخر، لتمكين القارئ من فهم مرادها.",
 	"visualeditor-linkinspector-illegal-title": "عنوان الصفحة غير صحيح",
 	"visualeditor-linknodeinspector-add-label": "إضافة تسمية",
 	"visualeditor-linknodeinspector-title": "وصلة بسيطة",
