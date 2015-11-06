@@ -377,6 +377,20 @@
 			// If the edit tab is hidden, remove it.
 			if ( !( init.isAvailable && userPrefEnabled ) ) {
 				$caVeEdit.remove();
+			} else if ( pageCanLoadVE ) {
+				// Allow instant switching to edit mode, without refresh
+				mw.loader.load( 'ext.visualEditor.switching' );
+				$caVeEdit.click( init.onEditTabClick );
+				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
+					$( '.wikiEditor-ui-toolbar' ).prepend(
+						new OO.ui.ButtonWidget( {
+							framed: false,
+							icon: 'edit',
+							title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
+							classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
+						} ).on( 'click', init.activateVe ).$element
+					);
+				} );
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -412,22 +426,6 @@
 						.addClass( 've-tabmessage-appendix' )
 						.text( mw.msg( tabMessages[ action + 'sourceappendix' ] ) )
 				);
-			}
-
-			if ( pageCanLoadVE ) {
-				// Allow instant switching to edit mode, without refresh
-				mw.loader.load( 'ext.visualEditor.switching' );
-				$caVeEdit.click( init.onEditTabClick );
-				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
-					$( '.wikiEditor-ui-toolbar' ).prepend(
-						new OO.ui.ButtonWidget( {
-							framed: false,
-							icon: 'edit',
-							title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-							classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
-						} ).on( 'click', init.activateVe ).$element
-					);
-				} );
 			}
 		},
 
