@@ -382,14 +382,16 @@
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$caVeEdit.click( init.onEditTabClick );
 				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
-					$( '.wikiEditor-ui-toolbar' ).prepend(
-						new OO.ui.ButtonWidget( {
-							framed: false,
-							icon: 'edit',
-							title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-							classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
-						} ).on( 'click', init.activateVe ).$element
-					);
+					mw.loader.using( 'oojs-ui', function () {
+						$( '.wikiEditor-ui-toolbar' ).prepend(
+							new OO.ui.ButtonWidget( {
+								framed: false,
+								icon: 'edit',
+								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
+								classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
+							} ).on( 'click', init.activateVe ).$element
+						);
+					} );
 				} );
 			}
 

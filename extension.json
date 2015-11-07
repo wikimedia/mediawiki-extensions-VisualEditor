@@ -283,7 +283,8 @@
 				"visualeditor-ca-editsource-section",
 				"postedit-confirmation-created",
 				"postedit-confirmation-restored",
-				"postedit-confirmation-saved"
+				"postedit-confirmation-saved",
+				"visualeditor-mweditmodeve-tool"
 			],
 			"position": "top"
 		},
