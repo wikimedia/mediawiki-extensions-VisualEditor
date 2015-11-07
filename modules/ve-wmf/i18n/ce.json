@@ -11,7 +11,12 @@
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран тадаран]] гӀоьнца дина нисдар, цунна чохь ситемин карина нийса боцу вики-йозан хийцамаш.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран тадар: Юхалатина]]",
 	"tag-visualeditor-switched-description": "Декъашхо VisualEditor-ца болх болийнера, амма тӀакха чухулара тадар чохь болх би цо.",
+	"visualeditor-feedback-link": "Project:БӀаьран тадерг/Хетарш",
 	"visualeditor-feedback-tool": "Язде хьайна хетарг",
 	"visualeditor-help-label": "Деша декъашхочун куьйгалла дар",
-	"visualeditor-help-title": "Тадар лело декъашхочун куьйгалла дар"
+	"visualeditor-help-title": "Тадар лело декъашхочун куьйгалла дар",
+	"visualeditor-welcomedialog-action": "Доладе тадар",
+	"visualeditor-welcomedialog-content": "Муьлха луучо кхузахь хийцам бан йиш.",
+	"visualeditor-welcomedialog-content-thanks": "Баркалла, дуьнена дукху хӀумнаш хаа гӀодарна!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Марша догӀийла}} $2"
 }

@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mashoi7"
+			"Mashoi7",
+			"Ilja.mos"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualnoiEditoru]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizual'niu kohendamine]]",
 	"tag-visualeditor-description": "Kohendettu [[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualizen editoranke]]",
 	"visualeditor-feedback-link": "Project:Vizualine editoru/Työndö",
 	"visualeditor-feedback-tool": "Anna työndyö täs programmas",

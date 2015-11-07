@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gleki"
+			"Gleki",
+			"Xbony2"
 		]
 	},
+	"tooltip-ca-ve-edit": "stika ti noi papri",
 	"visualeditor-ca-editsource": "stika lo krasi",
 	"visualeditor-ca-editsource-section": "stika lo krasi",
-	"visualeditor-cite-tool-name-news": "nuzba"
+	"visualeditor-cite-tool-name-news": "nuzba",
+	"visualeditor-descriptionpagelink": "Project:vintik"
 }

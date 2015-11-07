@@ -8,7 +8,7 @@
 			"Zygimantus"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualus redagavimas]]",
 	"tag-visualeditor-description": "Redaguota su [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Tikrinti]]",
 	"tag-visualeditor-needcheck-description": "Redaguota su [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualiu redaktoriumi]], kai sistema aptiko galimai nenorėtų vikiteksto pakeitimų.",
