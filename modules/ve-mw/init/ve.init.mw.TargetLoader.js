@@ -135,6 +135,8 @@
 				ve.track( 'trace.restbaseLoad.enter' );
 				if ( conf.fullRestbaseUrl && $( '#wpTextbox1' ).length ) {
 					fromEditedState = true;
+					window.onbeforeunload = null;
+					$( window ).off( 'beforeunload' );
 					restbaseXhr = $.post(
 						conf.fullRestbaseUrl + 'v1/transform/wikitext/to/html/' +
 							encodeURIComponent( pageName ) +
