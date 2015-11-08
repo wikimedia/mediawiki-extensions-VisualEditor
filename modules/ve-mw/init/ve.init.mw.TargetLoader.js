@@ -39,6 +39,11 @@
 		modules.push( 'ext.visualEditor.mwreference' );
 	}
 
+	// Allow signing posts in select namespaces
+	if ( conf.signatureNamespaces.length ) {
+		modules.push( 'ext.visualEditor.mwsignature' );
+	}
+
 	// Add preference modules
 	for ( prefName in conf.preferenceModules ) {
 		prefValue = mw.user.options.get( prefName );

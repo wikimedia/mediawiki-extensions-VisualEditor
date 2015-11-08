@@ -1656,6 +1656,27 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.mwsignature": {
+			"scripts": [
+				"modules/ve-mw/dm/nodes/ve.dm.MWSignatureNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWSignatureNode.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWSignatureTool.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWSignatureContextItem.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.core",
+				"ext.visualEditor.mwtransclusion",
+				"mediawiki.api",
+				"oojs-ui.styles.icons-alerts"
+			],
+			"messages": [
+				"visualeditor-mwsignature-tool"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.experimental": {
 			"dependencies": [
 				"ext.visualEditor.language"

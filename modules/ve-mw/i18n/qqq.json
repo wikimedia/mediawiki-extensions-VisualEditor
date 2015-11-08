@@ -294,6 +294,7 @@
 	"visualeditor-mweditmodesource-warning-switch-discard": "Label for the discard changes button on the confirmation dialog for switching to source editing.",
 	"visualeditor-mwgalleryinspector-placeholder": "Placeholder text for the gallery inspector demonstrating how gallery syntax works.",
 	"visualeditor-mwgalleryinspector-title": "Used as title for the gallery inspector.\n{{Identical|Gallery}}",
+	"visualeditor-mwsignature-tool": "Used as name of the tool for inserting signatures.",
 	"visualeditor-pagemenu-tooltip": "Tooltip text for the page menu which has the following items:\n* {{msg-mw|visualeditor-meta-tool}}\n* {{msg-mw|visualeditor-settings-tool}}\n* {{msg-mw|visualeditor-advancedsettings-tool}}\n* {{msg-mw|visualeditor-categories-tool}}\n* {{msg-mw|visualeditor-languages-tool}}\n* {{msg-mw|visualeditor-mweditmodesource-title}}\n* {{msg-mw|visualeditor-dialog-command-help-title}}",
 	"visualeditor-pagetranslationwarning": "Edit notice shown when VisualEditor loads, warning users editing a translated page that it is not officially supported.",
 	"visualeditor-parameter-input-placeholder": "Placeholder text label for an input for adding a parameter to a template.\n{{Identical|Field name}}",

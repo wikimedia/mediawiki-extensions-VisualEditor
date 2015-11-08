@@ -12,9 +12,6 @@ ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextNowiki', 'mwWikitextWarning', '<nowiki' )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextSig', 'mwWikitextWarning', '~~~' )
-);
-ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextHeading', 'heading2', [ { type: 'paragraph' }, '=', '=' ], 2 )
 );
 ve.ui.sequenceRegistry.register(
