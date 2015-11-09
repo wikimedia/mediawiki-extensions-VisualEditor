@@ -529,7 +529,9 @@
 		},
 
 		activateVe: function () {
-			var wikitextModified = $( '#wpTextbox1' ).val() !== initialWikitext;
+			var
+				wikitext = $( '#wpTextbox1' ).val(),
+				wikitextModified = wikitext !== initialWikitext;
 
 			if (
 				mw.config.get( 'wgAction' ) === 'submit' ||
@@ -556,8 +558,10 @@
 							} );
 						} );
 					} );
-			} else {
+			} else if ( wikitext ) {
 				activatePageTarget();
+			} else {
+				location.href = veEditUri;
 			}
 		},
 
