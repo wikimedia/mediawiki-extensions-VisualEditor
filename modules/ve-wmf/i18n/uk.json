@@ -22,10 +22,10 @@
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор]]",
-	"tag-visualeditor-description": "Редагування виконано з використанням [[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуального редактора]]",
+	"tag-visualeditor-description": "Редагування виконано з використанням [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуального редактора]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор: Перевірити]]",
 	"tag-visualeditor-needcheck-description": "Редагування з допомогою [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуального редактора]], у якому система виявила, ймовірно, ненавмисно змінену вікірозмітку.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор: перемкнуто ]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор: перемкнуто]]",
 	"tag-visualeditor-switched-description": "Користувач почав редагувати за допомогою візуального редактора, а потім перемкнувся на редактор вікірозмітки.",
 	"visualeditor-feedback-link": "Project:Візуальний редактор/Відгуки",
 	"visualeditor-feedback-tool": "Залишити відгук про це програмне забезпечення",

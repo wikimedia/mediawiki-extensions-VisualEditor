@@ -8,7 +8,8 @@
 			"Dinhxuanduyet",
 			"KhangND",
 			"Anh88",
-			"Quenhitran"
+			"Quenhitran",
+			"Nguyên Lê"
 		]
 	},
 	"apihelp-visualeditor-description": "Trả về mã HTML5 cho một trang từ dịch vụ Parsoid.",
@@ -254,7 +255,10 @@
 	"visualeditor-meta-tool": "Tùy chọn",
 	"visualeditor-mweditmodesource-title": "Có muốn sửa đổi mã nguồn?",
 	"visualeditor-mweditmodesource-tool": "Sửa đổi mã nguồn",
-	"visualeditor-mweditmodesource-warning": "Bạn đang chuyển sang chế độ sửa đổi mã nguồn.\nBạn có thể giữ các thay đổi của bạn, nhưng bạn sẽ phải lưu hoặc tải lại trang để chuyển lại trình soạn thảo này.\nBạn có muốn tiếp tục chuyển không?",
+	"visualeditor-mweditmodesource-warning": "Bạn đang chuyển sang chế độ sửa đổi mã nguồn. Bạn có muốn tiếp tục không?",
+	"visualeditor-mweditmodeve-title": "Chuyển sang Trình soạn thảo trực quan?",
+	"visualeditor-mweditmodeve-tool": "Chuyển sang Trình soạn thảo trực quan",
+	"visualeditor-mweditmodeve-warning": "Bạn đang chuyển sang trình soạn thảo trực quan. Bạn có muốn tiếp tục không?",
 	"visualeditor-mweditmodesource-warning-cancel": "Hủy bỏ",
 	"visualeditor-mweditmodesource-warning-switch": "Giữ các thay đổi",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Bỏ các thay đổi",
@@ -299,6 +303,7 @@
 	"visualeditor-saveerror-titleblacklist": "Lỗi khi lưu trang: tên trang này bị liệt vào danh sách đen",
 	"visualeditor-serializeerror": "Lỗi khi tải dữ liệu từ máy chủ: $1.",
 	"visualeditor-settings-tool": "Tùy chọn trang",
+	"visualeditor-shortcuts-insert": "Chèn",
 	"visualeditor-special-characters-group-other": "Sử dụng thường xuyên",
 	"visualeditor-timeout": "Hình như chế độ sửa đổi này hiện không khả dụng. Bạn có muốn sử dụng chế độ sửa đổi mã nguồn thay thế?",
 	"visualeditor-toolbar-cite-label": "Chú thích nguồn",

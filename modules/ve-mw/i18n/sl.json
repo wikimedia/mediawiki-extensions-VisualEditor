@@ -197,7 +197,7 @@
 	"visualeditor-meta-tool": "Možnosti",
 	"visualeditor-mweditmodesource-title": "Preklopim na urejanje vira?",
 	"visualeditor-mweditmodesource-tool": "Preklopi na urejanje vira",
-	"visualeditor-mweditmodesource-warning": "Preklopljate se na urejanje kode.\nVaše spremembe, ki jih boste naredili v dokumentu, bomo obdržali, vendar se ne potem morete preklopiti nazaj na ta editor brez da bi stran shranili ali jo osvežili.\nŽelite nadaljevati?",
+	"visualeditor-mweditmodesource-warning": "Preklapljate na urejanje izvorne kode.\nŽelite nadaljevati?",
 	"visualeditor-mweditmodesource-warning-cancel": "Prekliči",
 	"visualeditor-mweditmodesource-warning-switch": "Obdrži spremembe",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Zavrzi spremembe",

@@ -202,7 +202,7 @@
 	"visualeditor-meta-tool": "অপশন",
 	"visualeditor-mweditmodesource-title": "উৎস সম্পাদনায় যাবেন?",
 	"visualeditor-mweditmodesource-tool": "উৎস সম্পাদনায় যান",
-	"visualeditor-mweditmodesource-warning": "আপনি উৎস সম্পাদনায় যাচ্ছেন। এই নথিতে আপনার করা পরিবর্তনগুলো রাখা যেতে পারে, কিন্তু আপনি পাতা সংরক্ষণ বা পুনরায় লোড না করা ছাড়া এই সম্পাদকে ফিরতে পারবেন না। আপনি কি চালিয়ে যেতে চান?",
+	"visualeditor-mweditmodesource-warning": "আপনি উৎস সম্পাদনায় যাচ্ছেন।\nআপনি কি চালিয়ে যেতে চান?",
 	"visualeditor-mweditmodesource-warning-cancel": "বাতিল",
 	"visualeditor-mweditmodesource-warning-switch": "পরিবর্তন বজায় রাখুন",
 	"visualeditor-mweditmodesource-warning-switch-discard": "পরিবর্তন বাতিল করুন",
