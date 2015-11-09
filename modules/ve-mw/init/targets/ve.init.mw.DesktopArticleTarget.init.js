@@ -231,6 +231,7 @@
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
 	veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
+	delete veEditUri.query.action;
 
 	support = {
 		es5: !!(
