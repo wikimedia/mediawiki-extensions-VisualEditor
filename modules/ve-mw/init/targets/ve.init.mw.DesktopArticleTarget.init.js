@@ -742,15 +742,56 @@
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
 					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
-						var windowManager, editingTabDialog;
-						$( '.wikiEditor-ui-toolbar' ).prepend(
-							new OO.ui.ButtonWidget( {
+						var $content, windowManager, editingTabDialog, showAgainCheckbox, showAgainLayout, switchButton,
+							showPopup = uri.query.veswitched && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' );
+
+						if ( showPopup ) {
+							$content = $( '<p>' ).text( mw.msg( 'visualeditor-mweditmodeve-popup-body' ) );
+
+							if ( !mw.user.isAnon() ) {
+								showAgainCheckbox = new OO.ui.CheckboxInputWidget()
+									.on( 'change', function ( value ) {
+										var configValue = value ? '1' : '';
+										new mw.Api().saveOption( 'visualeditor-hidesourceswitchpopup', configValue );
+										mw.user.options.set( 'visualeditor-hidesourceswitchpopup', configValue );
+									} );
+
+								showAgainLayout = new OO.ui.FieldLayout( showAgainCheckbox, { align: 'inline', label: mw.msg( 'visualeditor-mweditmodeve-showagain' ) } );
+								$content = $content.add( showAgainLayout.$element );
+							}
+
+							switchButton = new OO.ui.PopupButtonWidget( {
+								framed: false,
+								icon: 'edit',
+								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
+								classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ],
+								popup: {
+									label: mw.msg( 'visualeditor-mweditmodeve-popup-title' ),
+									$content: $content,
+									padded: true,
+									head: true
+								}
+							} );
+
+							// HACK: Disable the toggle behaviour
+							switchButton.disconnect( switchButton, { click: 'onAction' } );
+						} else {
+							switchButton = new OO.ui.ButtonWidget( {
 								framed: false,
 								icon: 'edit',
 								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
 								classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
-							} ).on( 'click', init.activateVe ).$element
-						);
+							} );
+						}
+
+						switchButton.on( 'click', init.activateVe );
+
+						$( '.wikiEditor-ui-toolbar' ).prepend( switchButton.$element );
+
+						if ( showPopup ) {
+							// Show the popup after appending
+							switchButton.getPopup().toggle( true );
+						}
 
 						// Duplicate of this code in ve.init.mw.DesktopArticleTarget.js
 						if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
