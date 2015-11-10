@@ -19,7 +19,7 @@
 			"아라"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальный редактор]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальное редактирование]]",
 	"tag-visualeditor-description": "Правка сделана с использованием [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуального редактора]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальный редактор]]: проверить",
 	"tag-visualeditor-needcheck-description": "Правка с помощью [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуального редактора]], в которой система обнаружила, возможно, непреднамеренно изменённую вики-разметку.",

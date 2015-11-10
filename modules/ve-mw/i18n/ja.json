@@ -14,7 +14,8 @@
 			"2nd-player",
 			"Jdforrester",
 			"Sudachi",
-			"Otokoume"
+			"Otokoume",
+			"Vigorous action"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -264,8 +265,8 @@
 	"visualeditor-mweditmodesource-title": "ソースの編集に切り替えますか?",
 	"visualeditor-mweditmodesource-tool": "ソースの編集に切り替える",
 	"visualeditor-mweditmodesource-warning": "ソースの編集に切り替えようとしています。\n本当に続行しますか?",
-	"visualeditor-mweditmodeve-title": "ビジュアル編集に切り替えますか？",
-	"visualeditor-mweditmodeve-tool": "ビジュアル編集に切り替え",
+	"visualeditor-mweditmodeve-title": "ビジュアルエディターに切り替えますか？",
+	"visualeditor-mweditmodeve-tool": "ビジュアルエディターに切り替え",
 	"visualeditor-mweditmodesource-warning-cancel": "キャンセル",
 	"visualeditor-mweditmodesource-warning-switch": "編集内容を保持",
 	"visualeditor-mweditmodesource-warning-switch-discard": "変更内容を破棄",

@@ -18,7 +18,8 @@
 			"Bachounda",
 			"Mervat Salman",
 			"Hiba Alshawi",
-			"فلورانس"
+			"فلورانس",
+			"PhiberOptik"
 		]
 	},
 	"apihelp-visualeditor-description": "يرجع الأيش تي أم أل 5 لصفحة من الخدمة بارسويد (Parsoid ).",
@@ -213,7 +214,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "أتريد المتابعة بدون إعطاء {{PLURAL:$2|المدخل|المدخلات}} $1؟",
 	"visualeditor-dialog-transclusion-single-mode": "إخفاء الخيارات",
 	"visualeditor-dialog-transclusion-title": "تضمين",
-	"visualeditor-dialogbutton-citation-educationpopup-title": "الاستشهادات",
+	"visualeditor-dialogbutton-citation-educationpopup-title": "الإقتباسات",
 	"visualeditor-dialogbutton-media-tooltip": "ملفات",
 	"visualeditor-dialogbutton-meta-tooltip": "إعدادات الصفحة",
 	"visualeditor-dialogbutton-reference-full-label": "الصيغة الأساسية",
@@ -241,7 +242,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "تحويل إلى الرابط ISBN",
 	"visualeditor-linkinspector-convert-link-rfc": "تحويل إلى الرابط RFC",
 	"visualeditor-linkinspector-educationpopup-title": "وصلات",
-	"visualeditor-linkinspector-educationpopup-text": "اربط كلمة في المقالة بالمقالة المخصصة لها أو بموقع آخر، لتمكين القارئ من فهم مرادها.",
+	"visualeditor-linkinspector-educationpopup-text": "اربط الكلمات المهمة بمقالات اخرى في ويكيبيديا أو حتى بموقع آخر، لتمكين القارئ من فهم مرادها.",
 	"visualeditor-linkinspector-illegal-title": "عنوان الصفحة غير صحيح",
 	"visualeditor-linknodeinspector-add-label": "إضافة تسمية",
 	"visualeditor-linknodeinspector-title": "وصلة بسيطة",
