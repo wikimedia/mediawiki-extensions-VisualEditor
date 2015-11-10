@@ -135,25 +135,21 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		return $citationTools;
 	}
 
-	public function getDependencies( ResourceLoaderContext $context = null ) {
-		return array(
-			'ext.visualEditor.base',
-			'ext.visualEditor.mediawiki',
-		);
-	}
-
-	public function getDefinitionSummary( ResourceLoaderContext $context ) {
-		$summary = parent::getDefinitionSummary( $context );
-		$summary[] = array(
-			'script' => $this->getScript( $context ),
-		);
-		return $summary;
-	}
-
 	protected function getGitHeadHash() {
 		if ( $this->gitHeadHash === null ) {
 			$this->gitHeadHash = $this->gitInfo->getHeadSHA1();
 		}
 		return $this->gitHeadHash;
+	}
+
+	public function enableModuleContentVersion() {
+		return true;
+	}
+
+	public function getDependencies( ResourceLoaderContext $context = null ) {
+		return array(
+			'ext.visualEditor.base',
+			'ext.visualEditor.mediawiki',
+		);
 	}
 }
