@@ -22,11 +22,3 @@
 	background-image: -o-linear-gradient(top, #eaf4fa 0%, #b0d9ee 100%);
 	background-image: linear-gradient(to bottom, #eaf4fa 0%, #b0d9ee 100%);
 }
-
-.ve-init-mw-desktopArticleTarget-editSwitch {
-	font-size: 1.0079em;
-}
-
-.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-buttonElement-button {
-	padding: 0.35em;
-}

@@ -975,6 +975,15 @@
 			"scripts": [
 				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js"
 			],
+			"styles": "modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog.css",
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog-vector.css"
+				],
+				"monobook": [
+					"modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog-monobook.css"
+				]
+			},
 			"dependencies": [
 				"oojs",
 				"oojs-ui",
