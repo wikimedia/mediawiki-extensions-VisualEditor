@@ -13,14 +13,11 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	/* Protected Members */
 
 	protected $origin = self::ORIGIN_USER_SITEWIDE;
-	protected $gitInfo;
-	protected $gitHeadHash;
 	protected $targets = array( 'desktop', 'mobile' );
 
 	/* Methods */
 
 	public function __construct() {
-		$this->gitInfo = new GitInfo( __DIR__ );
 	}
 
 	public function getScript( ResourceLoaderContext $context ) {
@@ -40,10 +37,11 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		// Version information
 		$language = Language::factory( $context->getLanguage() );
 
-		$hash = $this->getGitHeadHash();
-		$id = $hash ? substr( $this->getGitHeadHash(), 0, 7 ) : false;
-		$url = $this->gitInfo->getHeadViewUrl();
-		$date = $this->gitInfo->getHeadCommitDate();
+		$gitInfo = new GitInfo( __DIR__ );
+		$hash = $gitInfo->getHeadSHA1();
+		$id = $hash ? substr( $hash, 0, 7 ) : false;
+		$url = $gitInfo->getHeadViewUrl();
+		$date = $gitInfo->getHeadCommitDate();
 		$dateString = $date ? $language->timeanddate( $date, true ) : '';
 
 		return
@@ -133,13 +131,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			}
 		}
 		return $citationTools;
-	}
-
-	protected function getGitHeadHash() {
-		if ( $this->gitHeadHash === null ) {
-			$this->gitHeadHash = $this->gitInfo->getHeadSHA1();
-		}
-		return $this->gitHeadHash;
 	}
 
 	public function enableModuleContentVersion() {
