@@ -55,6 +55,7 @@
 					"ve.EventSequencer",
 					"ve.Filibuster",
 					"ve.TriggerListener",
+					"ve.Scheduler",
 					"ve.Node",
 					"ve.BranchNode",
 					"ve.LeafNode",

@@ -490,6 +490,7 @@
 				"lib/ve/src/ve.LeafNode.js",
 				"lib/ve/src/ve.Document.js",
 				"lib/ve/src/ve.EventSequencer.js",
+				"lib/ve/src/ve.Scheduler.js",
 				"lib/ve/src/dm/ve.dm.js",
 				"lib/ve/src/dm/ve.dm.Model.js",
 				"lib/ve/src/dm/ve.dm.ModelRegistry.js",
