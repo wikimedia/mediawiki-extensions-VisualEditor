@@ -101,9 +101,13 @@
 		 * Request the page HTML and various metadata from the MediaWiki API (which will use
 		 * Parsoid or RESTBase).
 		 *
+		 * @param {string} pageName Page name to request
+		 * @param {string} [oldid] Old revision ID, current if omitted
+		 * @param {string} [targetName] Optional target name for tracking
+		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestPageData: function ( pageName, oldid, targetName ) {
+		requestPageData: function ( pageName, oldid, targetName, modified ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl,
 				fromEditedState = false,
 				data = {
@@ -139,7 +143,7 @@
 			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
 				ve.track( 'trace.restbaseLoad.enter' );
 				if ( conf.fullRestbaseUrl && $( '#wpTextbox1' ).length ) {
-					fromEditedState = true;
+					fromEditedState = modified;
 					window.onbeforeunload = null;
 					$( window ).off( 'beforeunload' );
 					restbaseXhr = $.post(

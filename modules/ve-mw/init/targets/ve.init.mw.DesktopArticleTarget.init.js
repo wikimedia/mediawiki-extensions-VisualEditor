@@ -144,7 +144,7 @@
 		return targetPromise;
 	}
 
-	function activatePageTarget() {
+	function activatePageTarget( modified ) {
 		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
 		if ( !active ) {
@@ -166,7 +166,7 @@
 				uri = veEditUri;
 			}
 
-			activateTarget();
+			activateTarget( null, modified );
 		}
 	}
 	/**
@@ -178,8 +178,9 @@
 	 *
 	 * @private
 	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.Target
+	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
-	function activateTarget( targetPromise ) {
+	function activateTarget( targetPromise, modified ) {
 		// The TargetLoader module is loaded in the bottom queue, so it should have been
 		// requested already but it might not have finished loading yet
 		var dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
@@ -187,7 +188,8 @@
 				return mw.libs.ve.targetLoader.requestPageData(
 					mw.config.get( 'wgRelevantPageName' ),
 					uri.query.oldid || $( 'input[name=parentRevId]' ).val(),
-					'mwTarget' // ve.init.mw.DesktopArticleTarget.static.name
+					'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
+					modified
 				);
 			} )
 			.done( function () {
@@ -569,7 +571,7 @@
 							opened.done( function ( closing ) {
 								closing.done( function ( data ) {
 									if ( data && data.action === 'keep' ) {
-										activatePageTarget();
+										activatePageTarget( true );
 									} else if ( data && data.action === 'discard' ) {
 										location.href = veEditUri;
 									}
@@ -578,7 +580,7 @@
 						} );
 					} );
 			} else if ( isViewPage || wikitext ) {
-				activatePageTarget();
+				activatePageTarget( false );
 			} else {
 				location.href = veEditUri;
 			}
