@@ -44,7 +44,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		.connect( this, { click: 'onRemoveButtonClick' } );
 	this.valueFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-content' ),
-		icon: 'source',
+		icon: 'wikiText',
 		$content: this.textInput.$element
 	} );
 

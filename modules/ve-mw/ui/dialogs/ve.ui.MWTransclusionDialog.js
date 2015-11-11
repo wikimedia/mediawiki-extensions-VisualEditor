@@ -331,7 +331,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	} );
 	this.addContentButton = new OO.ui.ButtonWidget( {
 		framed: false,
-		icon: 'source',
+		icon: 'wikiText',
 		title: ve.msg( 'visualeditor-dialog-transclusion-add-content' )
 	} );
 	this.addParameterButton = new OO.ui.ButtonWidget( {
