@@ -289,6 +289,7 @@
 	"visualeditor-saveerror-titleblacklist": "Errorea orria gordetzen: Orriaren titulua zerrenda beltzean dago.",
 	"visualeditor-serializeerror": "Errorea zerbitzaritik datuak kargatzean: $1.",
 	"visualeditor-settings-tool": "Orrialde-konfigurazioa",
+	"visualeditor-shortcuts-insert": "Txertatu",
 	"visualeditor-special-characters-group-other": "Maiz erabiliak",
 	"visualeditor-timeout": "Badirudi editorea ez dabilela orain. Nahi al duzu aldaketak iturburu kodean egin?",
 	"visualeditor-toolbar-cite-label": "Aipatu",
