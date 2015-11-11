@@ -29,7 +29,7 @@ OO.inheritClass( ve.ui.MWGalleryInspector, ve.ui.MWExtensionInspector );
 
 ve.ui.MWGalleryInspector.static.name = 'gallery';
 
-ve.ui.MWGalleryInspector.static.icon = 'gallery';
+ve.ui.MWGalleryInspector.static.icon = 'imageGallery';
 
 ve.ui.MWGalleryInspector.static.size = 'large';
 

@@ -42,7 +42,7 @@ ve.ui.MWMediaDialog.static.name = 'media';
 ve.ui.MWMediaDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-media-title' );
 
-ve.ui.MWMediaDialog.static.icon = 'picture';
+ve.ui.MWMediaDialog.static.icon = 'image';
 
 ve.ui.MWMediaDialog.static.size = 'large';
 
@@ -228,7 +228,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Filename
 	this.filenameFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-content-filename' ),
-		icon: 'picture'
+		icon: 'image'
 	} );
 
 	// Caption
@@ -482,7 +482,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			{
 				name: 'fileDetails',
 				data: { skipProcessing: true },
-				view: { icon: 'picture' }
+				view: { icon: 'image' }
 			},
 			{
 				name: 'LicenseShortName',

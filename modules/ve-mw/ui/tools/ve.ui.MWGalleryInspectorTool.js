@@ -20,7 +20,7 @@ ve.ui.MWGalleryInspectorTool = function VeUiMWGalleryInspectorTool( toolGroup, c
 OO.inheritClass( ve.ui.MWGalleryInspectorTool, ve.ui.InspectorTool );
 ve.ui.MWGalleryInspectorTool.static.name = 'gallery';
 ve.ui.MWGalleryInspectorTool.static.group = 'object';
-ve.ui.MWGalleryInspectorTool.static.icon = 'gallery';
+ve.ui.MWGalleryInspectorTool.static.icon = 'imageGallery';
 ve.ui.MWGalleryInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-mwgalleryinspector-title' );
 ve.ui.MWGalleryInspectorTool.static.modelClasses = [ ve.dm.MWGalleryNode ];

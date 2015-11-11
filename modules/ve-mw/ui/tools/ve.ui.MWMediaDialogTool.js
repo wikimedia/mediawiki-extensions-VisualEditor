@@ -20,7 +20,7 @@ ve.ui.MWMediaDialogTool = function VeUiMWMediaDialogTool( toolGroup, config ) {
 OO.inheritClass( ve.ui.MWMediaDialogTool, ve.ui.DialogTool );
 ve.ui.MWMediaDialogTool.static.name = 'media';
 ve.ui.MWMediaDialogTool.static.group = 'object';
-ve.ui.MWMediaDialogTool.static.icon = 'picture';
+ve.ui.MWMediaDialogTool.static.icon = 'image';
 ve.ui.MWMediaDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-media-tooltip' );
 ve.ui.MWMediaDialogTool.static.modelClasses = [ ve.dm.MWBlockImageNode, ve.dm.MWInlineImageNode ];

@@ -11,22 +11,6 @@
 	background-image: url( images/icons/alienextension.svg );
 }
 
-/* @noflip */
-.ve-ui-dir-block-rtl .oo-ui-icon-gallery,
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-gallery,
-/* HACK */ .oo-ui-rtl .oo-ui-icon-gallery {
-	/* @embed */
-	background-image: url( images/icons/gallery-rtl.svg );
-}
-
-/* @noflip */
-.ve-ui-dir-block-ltr .oo-ui-icon-gallery,
-/* HACK */ .ve-ui-surface-dir-ltr .oo-ui-icon-gallery,
-/* HACK */ .oo-ui-ltr .oo-ui-icon-gallery {
-	/* @embed */
-	background-image: url( images/icons/gallery-ltr.svg );
-}
-
 .oo-ui-icon-image-none {
 	/* @embed */
 	background-image: url( images/icons/image-none.svg );
