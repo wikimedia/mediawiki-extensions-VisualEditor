@@ -104,7 +104,7 @@
 	"visualeditor-dialog-media-size-choosecustom": "Bruk egendefinert størrelse",
 	"visualeditor-dialog-media-size-choosedefault": "Bruk standardstørrelse",
 	"visualeditor-dialog-media-size-choosefull": "Bruk full størrelse",
-	"visualeditor-dialog-media-size-originalsize-error": "Kunne ikke hente den opprinnelige filstørrelsen",
+	"visualeditor-dialog-media-size-originalsize-error": "Klarte ikke finne den opprinnelige filstørrelsen.",
 	"visualeditor-dialog-media-size-section": "Bildestørrelse",
 	"visualeditor-dialog-media-size-section-help": "Du kan velge hvor stort medieobjektet skal fremstå på siden. I de aller fleste tilfeller bør imidlertid standardstørrelse velges, siden en tilpasset størrelse kan gi siden et inkonsekvent og rotete uttrykk for leseren.",
 	"visualeditor-dialog-media-thumbdimensions": "Miniatyrbildestørrelse",

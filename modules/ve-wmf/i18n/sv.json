@@ -17,7 +17,7 @@
 			"Warrakkk"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell redigering]]",
 	"tag-visualeditor-description": "Redigering gjord med hjälp av [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Kontrollera]]",
 	"tag-visualeditor-needcheck-description": "Redigering gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|den visuella redigeraren]] där systemet upptäckte att wikitexten möjligen hade oavsiktliga ändringar.",

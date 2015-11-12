@@ -16,10 +16,11 @@
 			"Jacenty359",
 			"Amire80",
 			"Krol111",
-			"아라"
+			"아라",
+			"The Polish"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Wizualna edycja]]",
 	"tag-visualeditor-description": "Edycja z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizualnego]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: do sprawdzenia]]",
 	"tag-visualeditor-needcheck-description": "Edycja wykonana z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizulanego]], w której system wykrył prawdopodobnie niezamierzone uszkodzenie kodu źródłowego.",

@@ -11,15 +11,16 @@
 			"Thomsen",
 			"Sarrus",
 			"Amire80",
-			"아라"
+			"아라",
+			"Ribewiki"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "Redigeret ved hjælp af [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Tjek]]",
-	"tag-visualeditor-needcheck-description": "Redigering foretaget ved hjælp af [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] hvor systemet har registreret at wikiteksten muligvis har utilsigtede ændringer.",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering]]",
+	"tag-visualeditor-description": "Redigeret ved hjælp af [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuel redigering]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering: Tjek]]",
+	"tag-visualeditor-needcheck-description": "Redigering gjort med [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuel redigering]], hvor systemet har registreret at wikiteksten muligvis har utilsigtede ændringer.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
-	"visualeditor-feedback-tool": "Giv feedback",
+	"visualeditor-feedback-tool": "Giv tilbagemelding om denne software",
 	"visualeditor-help-label": "Læs brugervejledningen",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Vejledning til hvordan du bruger editoren"

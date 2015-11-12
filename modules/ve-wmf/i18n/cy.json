@@ -7,9 +7,9 @@
 			"DChan (WMF)"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "Golygwyd gyda'r [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor:Angen gwirio]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Golygu gyda'r llygad]]",
+	"tag-visualeditor-description": "Golygwyd gyda'r  [[{{MediaWiki:visualeditor-descriptionpagelink}}|golygydd gweladwy]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Check]]\n\n[[{{MediaWiki:visualeditor-descriptionpagelink}}|Golygwch:Angen gwirio]]",
 	"tag-visualeditor-needcheck-description": "Golygwyd gyda'r [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] pan adnabu'r sustem y gallai'r gystrawen wici arwain at newidiadau anfwriadol.",
 	"tag-visualeditor-switched-description": "Dechreuodd y defnyddiwr golygu yn VisualEditor, yna newid i'r golygydd wicitestun.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Adborth",
