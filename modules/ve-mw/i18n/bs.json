@@ -307,7 +307,7 @@
 	"visualeditor-serializeerror": "Greška prilikom učitavanja podataka sa servera: $1.",
 	"visualeditor-settings-tool": "Postavke stranice",
 	"visualeditor-shortcuts-insert": "Unesi",
-	"visualeditor-special-characters-group-other": "Često korišteni",
+	"visualeditor-special-characters-group-other": "često korišteni",
 	"visualeditor-timeout": "Izgleda da ovaj uređivač trenutno nije dostupan. Želite li uređivati izvorni kôd?",
 	"visualeditor-toolbar-cite-label": "Referenca",
 	"visualeditor-toolbar-savedialog": "Sačuvaj stranicu",
