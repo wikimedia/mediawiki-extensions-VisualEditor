@@ -134,7 +134,8 @@ ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
  * @fires resize
  */
 ve.ui.MWAceEditorWidget.prototype.onEditorResize = function () {
-	this.emit.bind( this, 'resize' );
+	// On the first setup the editor doesn't resize until the end of the cycle
+	setTimeout( this.emit.bind( this, 'resize' ) );
 };
 
 /**
