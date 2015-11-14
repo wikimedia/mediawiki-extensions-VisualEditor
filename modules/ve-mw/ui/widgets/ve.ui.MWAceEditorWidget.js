@@ -134,6 +134,40 @@ ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWAceEditorWidget.prototype.getRange = function () {
+	var selection, range, lines, start, end, isBackwards;
+
+	function posToOffset( row, col ) {
+		var r, offset = 0;
+
+		for ( r = 0; r < row; r++ ) {
+			offset += lines[ r ].length;
+			offset++; // for the newline character
+		}
+		return offset + col;
+	}
+
+	if ( this.editor ) {
+		lines = this.editor.getSession().getDocument().getAllLines();
+
+		selection = this.editor.getSelection();
+		isBackwards = selection.isBackwards();
+		range = selection.getRange();
+		start = posToOffset( range.start.row, range.start.column );
+		end = posToOffset( range.end.row, range.end.column );
+
+		return {
+			from: isBackwards ? end : start,
+			to: isBackwards ? start : end
+		};
+	} else {
+		return ve.ui.MWAceEditorWidget.super.prototype.getRange.call( this );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
