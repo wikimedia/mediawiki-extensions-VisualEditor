@@ -132,6 +132,46 @@ ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
+	var widget = this;
+	this.loadingPromise.done( function () {
+		var fromOffset, toOffset, selection, range,
+			doc = widget.editor.getSession().getDocument(),
+			lines = doc.getAllLines();
+
+		to = to || from;
+
+		function offsetToPos( offset ) {
+			var row = 0,
+				col = 0,
+				pos = 0;
+
+			while ( row < lines.length && pos + lines[ row ].length < offset ) {
+				pos += lines[ row ].length;
+				pos++; // for the newline character
+				row++;
+			}
+			col = offset - pos;
+			return { row: row, column: col };
+		}
+
+		fromOffset = offsetToPos( from );
+		toOffset = offsetToPos( to );
+
+		selection = widget.editor.getSelection();
+		range = selection.getRange();
+		range.setStart( fromOffset.row, fromOffset.column );
+		range.setEnd( toOffset.row, toOffset.column );
+		selection.setSelectionRange( range );
+	} ).fail( function () {
+		ve.ui.MWAceEditorWidget.super.prototype.selectRange.call( widget, from, to );
+	} );
+	return this;
+};
+
+/**
  * Handle change events from the Ace editor
  */
 ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
