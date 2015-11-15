@@ -225,6 +225,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "تضمين",
 	"visualeditor-diff-nochanges": "لم نتمكن من عرض أية تعديلات لأن نسختك تتطابق مع النسخة الأخيرة من هذه الصفحة.",
 	"visualeditor-differror": "خطأ في تحميل البيانات من الخادوم: $1.",
+	"visualeditor-donebutton-tooltip": "انتهيت من التعديل",
 	"visualeditor-editconflict": "تعذر حفظ التغييرات الخاصة لوجود تضارب تحرير. أتود{{GENDER:||ين}} تصويب التضارب يدويا؟",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|لا ملاحظات|ملاحظة واحدة|ملاحظتان|$1 ملاحظات|$1 ملاحظة}}",
 	"visualeditor-editnotices-tooltip": "تبصرات التحرير",

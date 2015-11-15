@@ -4,6 +4,8 @@
 			"Hangmanwa7id"
 		]
 	},
+	"tooltip-ca-ve-edit": "Changer cette page",
+	"visualeditor-ca-createsource": "Créer le wikicode",
 	"visualeditor-ca-editsource": "Changer le wikicode",
 	"visualeditor-ca-editsource-section": "changer le wikicode",
 	"visualeditor-dialog-media-change-image": "Changer image",
