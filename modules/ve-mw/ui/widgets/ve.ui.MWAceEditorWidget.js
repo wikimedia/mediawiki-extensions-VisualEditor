@@ -206,11 +206,17 @@ ve.ui.MWAceEditorWidget.prototype.focus = function () {
 
 /**
  * @inheritdoc
+ * @param {boolean} force Force a resize call on Ace editor
  */
-ve.ui.MWAceEditorWidget.prototype.adjustSize = function () {
+ve.ui.MWAceEditorWidget.prototype.adjustSize = function ( force ) {
 	var widget = this;
 	// If the editor has loaded, resize events are emitted from #onEditorResize
-	// so do nothing here, otherwise call the parent method.
+	// so do nothing here unless this is a user triggered resize, otherwise call the parent method.
+	if ( force ) {
+		this.loadingPromise.done( function () {
+			widget.editor.resize();
+		} );
+	}
 	this.loadingPromise.fail( function () {
 		// Parent method
 		ve.ui.MWAceEditorWidget.super.prototype.adjustSize.call( widget );
