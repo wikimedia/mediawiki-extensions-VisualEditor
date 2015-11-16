@@ -700,6 +700,7 @@
 				"lib/ve/src/ui/actions/ve.ui.TableAction.js",
 				"lib/ve/src/ui/actions/ve.ui.WindowAction.js",
 				"lib/ve/src/ui/contextitems/ve.ui.LinearContextItem.js",
+				"lib/ve/src/ui/contextitems/ve.ui.AnnotationContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.TableContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.AlienContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.AlignableContextItem.js",
