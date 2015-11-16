@@ -8,14 +8,18 @@
 			"Tacsipacsi"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "A szerkesztés a [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]ral készült.",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Ellenőrizendő]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuális szerkesztés]]",
+	"tag-visualeditor-description": "A szerkesztés a [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuális szerkesztővel]] készült.",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuális szerkesztés: Ellenőrizendő]]",
 	"tag-visualeditor-needcheck-description": "A szerkesztés a [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuális szerkesztővel]] készült, és a rendszer észlelte, hogy a wikiszövegben nem kívánt módosítások történhettek.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Átváltott]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuális szerkesztés: Átváltott]]",
 	"tag-visualeditor-switched-description": "A felhasználó a vizuális szerkesztővel kezdett el szerkeszteni, majd átváltott a wikiszöveg-szerkesztőre.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Visszajelzés",
 	"visualeditor-feedback-tool": "Visszajelzés erről a szoftverről",
 	"visualeditor-help-label": "Felhasználói útmutató elolvasása",
-	"visualeditor-help-title": "Útmutató a szerkesztő használatához"
+	"visualeditor-help-title": "Útmutató a szerkesztő használatához",
+	"visualeditor-welcomedialog-action": "Szerkesztés elkezdése",
+	"visualeditor-welcomedialog-content": "Mindenki szerkeszthet, és minden javítás segít.",
+	"visualeditor-welcomedialog-content-thanks": "Köszönjük, hogy segítesz a világnak még többet felfedezni!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Üdvözlünk}} a(z) $2 wikin"
 }
