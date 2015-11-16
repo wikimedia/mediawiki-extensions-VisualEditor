@@ -99,6 +99,7 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	} );
 	this.editor.getSession().on( 'change', this.onEditorChange.bind( this ) );
 	this.editor.renderer.on( 'resize', this.onEditorResize.bind( this ) );
+	this.setEditorValue( this.getValue() );
 	this.editor.resize();
 };
 
@@ -106,18 +107,28 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
  * @inheritdoc
  */
 ve.ui.MWAceEditorWidget.prototype.setValue = function ( value ) {
-	var widget = this;
-	this.loadingPromise.done( function () {
-		var selectionState;
-		if ( value !== widget.editor.getValue() ) {
-			selectionState = widget.editor.session.selection.toJSON();
-			widget.editor.setValue( value );
-			widget.editor.session.selection.fromJSON( selectionState );
-		}
-	} ).fail( function () {
-		ve.ui.MWAceEditorWidget.super.prototype.setValue.call( widget, value );
-	} );
+	// Always do something synchronously so that getValue can be used immediately.
+	// setEditorValue is called once when the loadingPromise resolves in setupEditor.
+	if ( this.loadingPromise.state() === 'resolved' ) {
+		this.setEditorValue( value );
+	} else {
+		ve.ui.MWAceEditorWidget.super.prototype.setValue.call( this, value );
+	}
 	return this;
+};
+
+/**
+ * Set the value of the Ace editor widget
+ *
+ * @param {string} value Value
+ */
+ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
+	var selectionState;
+	if ( value !== this.editor.getValue() ) {
+		selectionState = this.editor.session.selection.toJSON();
+		this.editor.setValue( value );
+		this.editor.session.selection.fromJSON( selectionState );
+	}
 };
 
 /**
