@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global moment */
+
 /**
  * MWMediaInfoFieldWidget widget for displaying media information from the API.
  *
