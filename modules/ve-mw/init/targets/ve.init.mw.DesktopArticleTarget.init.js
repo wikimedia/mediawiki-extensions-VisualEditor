@@ -383,8 +383,9 @@
 				$caVeEdit.click( init.onEditTabClick );
 
 				if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
-					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
-						$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
+					mw.loader.load( 'ext.visualEditor.switching' );
+					$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
+						mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
 							$( '.wikiEditor-ui-toolbar' ).prepend(
 								new OO.ui.ButtonWidget( {
 									framed: false,
