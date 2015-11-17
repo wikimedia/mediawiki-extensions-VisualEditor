@@ -18,7 +18,8 @@
 			"Arystanbek",
 			"Uğurkent",
 			"Kincki",
-			"McAang"
+			"McAang",
+			"HakanIST"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -232,11 +233,14 @@
 	"visualeditor-mweditmodesource-title": "Kaynağı değiştire geçiş yap",
 	"visualeditor-mweditmodesource-tool": "Kaynağı düzenlemeye geçiş yap",
 	"visualeditor-mweditmodesource-warning": "Kaynak biçiminde düzenlemeye geçmek üzeresiniz.\nBu belgeye yaptığınız değişiklikleriniz korunabilir, fakat Görsel Düzenleyiciye değişiklikleri kaydetmeden ya da sayfayı yenilemeden geçiş yapamayacaksınız.\nDevam etmek istiyor musunuz?",
+	"visualeditor-mweditmodeve-title": "Görsel düzenleyiciye geç?",
+	"visualeditor-mweditmodeve-tool": "Görsel düzenleyiciye geç",
 	"visualeditor-mweditmodesource-warning-cancel": "İptal",
 	"visualeditor-mweditmodesource-warning-switch": "Değişiklikleri koru",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Değişiklikleri çıkar",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Görüntü başlığı",
 	"visualeditor-mwgalleryinspector-title": "Galeri",
+	"visualeditor-mwsignature-tool": "İmzanız",
 	"visualeditor-pagemenu-tooltip": "Sayfa seçenekleri",
 	"visualeditor-pagetranslationwarning": "Çevirilebilir bir sayfayı düzenliyorsunuz. Görsel Düzenleyici bu düzenlemeyi resmen desteklememektedir.",
 	"visualeditor-parameter-input-placeholder": "Alan adı",

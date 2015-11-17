@@ -14,7 +14,7 @@
 			"Stam.nikos"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Οπτική επεξεργασία]]",
 	"tag-visualeditor-description": "Επεξεργασία που έγινε με χρήση του [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Check]]",
 	"tag-visualeditor-needcheck-description": "Επεξεργασία που έγινε μέσω του [[{{MediaWiki:visualeditor-descriptionpagelink}}|οπτικού επεξεργαστή]], όπου το σύστημα ανίχνευσε πιθανές μη ηθελημένες αλλαγές στον κώδικα wiki.",

@@ -295,7 +295,7 @@
 	"visualeditor-savedialog-identify-user": "Bạn hiện đăng nhập vào tài khoản [[User:$1|$1]]. Nếu bạn lưu sửa đổi này, tài khoản của bạn sẽ được ghi công trong lịch sử trang.",
 	"visualeditor-savedialog-label-create": "Tạo trang",
 	"visualeditor-savedialog-label-error": "Lỗi",
-	"visualeditor-savedialog-label-report": "Báo cáo vấn đề",
+	"visualeditor-savedialog-label-report": "Báo vấn đề",
 	"visualeditor-savedialog-label-resolve-conflict": "Giải quyết mâu thuẫn",
 	"visualeditor-savedialog-label-restore": "Phục hồi trang",
 	"visualeditor-savedialog-label-restore-short": "Phục hồi",

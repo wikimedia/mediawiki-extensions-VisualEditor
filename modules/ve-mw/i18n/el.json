@@ -12,7 +12,8 @@
 			"Elitre",
 			"Protnet",
 			"Stam.nikos",
-			"Macofe"
+			"Macofe",
+			"SucreRouge"
 		]
 	},
 	"apihelp-visualeditor-description": "Επιστρέφει HTML5 για μια σελίδα από την υπηρεσία Parsoid.",
@@ -249,6 +250,7 @@
 	"visualeditor-mweditmodesource-warning-switch-discard": "Απόρριψη αλλαγών",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Λεζάντα εικόνας",
 	"visualeditor-mwgalleryinspector-title": "Γκαλερί",
+	"visualeditor-mwsignature-tool": "Η υπογραφή σας",
 	"visualeditor-pagemenu-tooltip": "Επιλογές σελίδας",
 	"visualeditor-pagetranslationwarning": "Επεξεργάζεστε μια μεταφράσιμη σελίδα. Η επεξεργασία αυτών των σελίδων σε αυτόν τον επεξεργαστή δεν υποστηρίζεται επίσημα ακόμα.",
 	"visualeditor-parameter-input-placeholder": "Όνομα πεδίου",
