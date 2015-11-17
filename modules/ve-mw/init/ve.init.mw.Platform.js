@@ -158,13 +158,17 @@ ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
  * @method
  * @inheritdoc
  */
-ve.init.mw.Platform.prototype.getLanguageAutonym = $.uls.data.getAutonym;
+ve.init.mw.Platform.prototype.getLanguageAutonym = function () {
+	return $.uls.data.getAutonym();
+};
 
 /**
  * @method
  * @inheritdoc
  */
-ve.init.mw.Platform.prototype.getLanguageDirection = $.uls.data.getDir;
+ve.init.mw.Platform.prototype.getLanguageDirection = function () {
+	return $.uls.data.getDir();
+};
 
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.getUserLanguages = function () {
