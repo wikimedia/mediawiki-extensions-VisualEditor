@@ -432,8 +432,7 @@
 				"user.tokens",
 				"ext.visualEditor.base",
 				"ext.visualEditor.track",
-				"ext.visualEditor.targetLoader",
-				"jquery.uls.data"
+				"ext.visualEditor.targetLoader"
 			],
 			"messages": [
 				"visualeditor-quick-access-characters.json",
@@ -1597,7 +1596,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
-				"mediawiki.language.names"
+				"mediawiki.language.names",
+				"jquery.uls.data"
 			],
 			"messages": [
 				"visualeditor-annotationbutton-language-tooltip",
