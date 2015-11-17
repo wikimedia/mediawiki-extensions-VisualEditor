@@ -447,12 +447,15 @@ class VisualEditorHooks {
 		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
-		$onNamespaces = array_keys( array_filter( $availableNamespaces ) );
+		$enabledNamespaces = array_keys( array_filter( $availableNamespaces ) );
 
 		$vars['wgVisualEditorConfig'] = array(
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
-			'namespaces' => $onNamespaces,
+			'namespaces' => $enabledNamespaces,
+			'signatureNamespaces' => array_values(
+				array_filter( $enabledNamespaces, 'MWNamespace::wantSignatures' )
+			),
 			'pluginModules' => array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
 				$veConfig->get( 'VisualEditorPluginModules' ) // @todo deprecate the global setting
