@@ -1025,6 +1025,7 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocItemWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionDialog.js",
+				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionPreviewDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWWelcomeDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js",
