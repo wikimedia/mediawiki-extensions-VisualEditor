@@ -1223,6 +1223,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwimage.core",
+				"oojs-ui.styles.icons-media",
 				"mediawiki.ForeignStructuredUpload.BookletLayout",
 				"moment"
 			],
@@ -1649,6 +1650,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
+				"oojs-ui.styles.icons-media",
 				"mediawiki.page.gallery.styles"
 			],
 			"messages": [
