@@ -268,6 +268,8 @@ ve.ui.MWAceEditorWidget.prototype.setLanguage = function ( lang ) {
 
 /**
  * Focus the editor
+ *
+ * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.focus = function () {
 	var widget = this;
@@ -276,6 +278,7 @@ ve.ui.MWAceEditorWidget.prototype.focus = function () {
 	} ).fail( function () {
 		ve.ui.MWAceEditorWidget.super.prototype.focus.call( widget );
 	} );
+	return this;
 };
 
 /**
