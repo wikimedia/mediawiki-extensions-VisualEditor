@@ -49,7 +49,8 @@ if ( allowsSignatures ) {
 				false,
 				// collapseToEnd
 				true
-			]
+			],
+			supportedSelections: [ 'linear' ]
 		} )
 	);
 	ve.ui.sequenceRegistry.register(
