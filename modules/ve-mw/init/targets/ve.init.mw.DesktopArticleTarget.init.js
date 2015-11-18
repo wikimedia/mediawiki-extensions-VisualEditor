@@ -529,9 +529,13 @@
 		},
 
 		activateVe: function () {
-			var
-				wikitext = $( '#wpTextbox1' ).val(),
+			var wikitext = $( '#wpTextbox1' ).val(),
 				wikitextModified = wikitext !== initialWikitext;
+
+			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
+			if ( $.fn.dialog ) {
+				$( '.ui-dialog-content' ).dialog( 'close' );
+			}
 
 			if (
 				mw.config.get( 'wgAction' ) === 'submit' ||
