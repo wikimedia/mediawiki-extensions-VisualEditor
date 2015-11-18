@@ -17,10 +17,11 @@
 			"Amire80",
 			"Krol111",
 			"아라",
-			"The Polish"
+			"The Polish",
+			"Doctore"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Wizualna edycja]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edycja w VE]]",
 	"tag-visualeditor-description": "Edycja z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizualnego]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: do sprawdzenia]]",
 	"tag-visualeditor-needcheck-description": "Edycja wykonana z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizulanego]], w której system wykrył prawdopodobnie niezamierzone uszkodzenie kodu źródłowego.",

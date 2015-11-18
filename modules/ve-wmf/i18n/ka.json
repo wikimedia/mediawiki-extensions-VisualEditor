@@ -12,7 +12,7 @@
 			"아라"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორი]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტირება]]",
 	"tag-visualeditor-description": "რედაქტირება შესრულებულია [[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორის]] საშუალებით",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორი: შემოწმება]]",
 	"tag-visualeditor-needcheck-description": "რედაქტირება შესრულებულია [[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორის]] საშუალებით, რომელშიც სისტემამ აღმოაჩინა, შესაძლოა უნებლიეთ შეცვლილი ვიკი-ტექსტი.",
