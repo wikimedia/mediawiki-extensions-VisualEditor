@@ -106,6 +106,10 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 			null // No sanitization, since HTML is from Parsoid
 		);
 
+		if ( !doc.data.hasContent() ) {
+			return failure();
+		}
+
 		// Attempt to undo outermost p-wrapping if possible
 		surface = new ve.dm.Surface( doc );
 		try {
