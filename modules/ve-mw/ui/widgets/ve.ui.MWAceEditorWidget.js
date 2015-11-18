@@ -253,6 +253,20 @@ ve.ui.MWAceEditorWidget.prototype.toggleLineNumbers = function ( visible ) {
 };
 
 /**
+ * Toggle the visibility of the print margin
+ *
+ * @param {boolean} visible Visible
+ * @chainable
+ */
+ve.ui.MWAceEditorWidget.prototype.togglePrintMargin = function ( visible ) {
+	var widget = this;
+	this.loadingPromise.done( function () {
+		widget.editor.renderer.setShowPrintMargin( visible );
+	} );
+	return this;
+};
+
+/**
  * Set the language mode of the editor (programming language)
  *
  * @param {string} lang Language
