@@ -66,8 +66,11 @@ OO.inheritClass( ve.ui.MWAceEditorWidget, ve.ui.WhitespacePreservingTextInputWid
 ve.ui.MWAceEditorWidget.prototype.setup = function () {
 	if ( !this.loadingPromise ) {
 		this.loadingPromise = mw.loader.getState( 'ext.codeEditor.ace.modes' ) ?
-			mw.loader.using( 'ext.codeEditor.ace.modes' ).then( this.setupEditor.bind( this ) ) :
+			mw.loader.using( 'ext.codeEditor.ace.modes' ) :
 			$.Deferred().reject().promise();
+		// Resolved promises will run synchronously, so ensure #setupEditor
+		// runs after this.loadingPromise is stored.
+		this.loadingPromise.done( this.setupEditor.bind( this ) );
 	}
 };
 
