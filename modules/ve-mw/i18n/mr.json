@@ -188,6 +188,6 @@
 	"visualeditor-usernamespacepagelink": "Project:सदस्य नामविश्व",
 	"visualeditor-version-label": "आवृत्ती",
 	"visualeditor-viewpage-savewarning": "संपादन प्रथम जतन न करता, 'वाचा' कडेच जाण्याबद्दल आपला हा निर्णय नक्की आहे ना ?",
-	"visualeditor-wikitext-warning": "आपण दृश्य-संपादक वापरत आहात - येथे [[{{MediaWiki:Visualeditor-wikitext-warning-link}}|विकिविन्यास]] काम करत नाही.आपले बदल न उडविता कधीही, स्रोतसंपादन पद्धतीने लेखपान संपादीत करण्यासाठी, \"{{int:visualeditor-toolbar-savedialog}}\" च्या शेजारी असलेला निपतन मेन्यू उघडा व हे \"{{int:visualeditor-mweditmodesource-title}}\" निवडा.",
+	"visualeditor-wikitext-warning": "आपण दृश्य-संपादक वापरत आहात - येथे [[{{MediaWiki:visualeditor-wikitext-warning-link}}|विकिविन्यास]] काम करत नाही.आपले बदल न उडविता कधीही, स्रोतसंपादन पद्धतीने लेखपान संपादीत करण्यासाठी, \"{{int:visualeditor-toolbar-savedialog}}\" च्या शेजारी असलेला निपतन मेन्यू उघडा व हे \"{{int:visualeditor-mweditmodesource-title}}\" निवडा.",
 	"visualeditor-wikitext-warning-title": "विकिटेक्स्ट मार्कअप सापडला"
 }
