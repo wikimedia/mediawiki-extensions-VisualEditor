@@ -170,6 +170,7 @@ ve.ui.MWAceEditorWidget.prototype.getRange = function () {
  */
 ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 	var widget = this;
+	this.focus();
 	this.loadingPromise.done( function () {
 		var fromOffset, toOffset, selection, range,
 			doc = widget.editor.getSession().getDocument(),
