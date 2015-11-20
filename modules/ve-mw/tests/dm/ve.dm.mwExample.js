@@ -824,6 +824,67 @@ ve.dm.mwExample.domToDataCases = {
 		fromDataBody: '<b>a</b><b data-parsoid="1">bx</b><b data-parsoid="2">c</b> ' +
 			'<b>dd</b>'
 	},
+	'adjacent annotations (RESTBase ids)': {
+		preserveAnnotationDomElements: true,
+		body: '<b>a</b><b id="mwAB">b</b><b id="mwCD">c</b> ' +
+			'<b>d</b><b>d</b>',
+		data: [
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			[
+				'a',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b>a</b>' ).toArray()
+				} ]
+			],
+			[
+				'b',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b id="mwAB">b</b>' ).toArray()
+				} ]
+			],
+			[
+				'c',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b id="mwCD">c</b>' ).toArray()
+				} ]
+			],
+			' ',
+			[
+				'd',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b>a</b>' ).toArray()
+				} ]
+			],
+			[
+				'd',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b>a</b>' ).toArray()
+				} ]
+			],
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		modify: function ( model ) {
+			var data = [ 'x', [ ve.dm.example.bold ] ],
+				linearData = ve.dm.example.preprocessAnnotations( [ data ], model.getStore() );
+			model.data.data.splice( 3, 0, linearData.data[ 0 ] );
+		},
+		normalizedBody: '<b>a</b><b id="mwAB">bx</b><b id="mwCD">c</b> ' +
+			'<b>dd</b>',
+		fromDataBody: '<b>a</b><b id="mwAB">bx</b><b id="mwCD">c</b> ' +
+			'<b>dd</b>'
+	},
 	mwImage: {
 		body: '<p>' + ve.dm.mwExample.MWInlineImage.html + '</p>',
 		data: [
