@@ -194,7 +194,7 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
  * @param {string} value New value
  */
 ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
-	var trimmed = $.trim( value );
+	var trimmed = value.trim();
 
 	if ( trimmed === this.searchValue ) {
 		return;
