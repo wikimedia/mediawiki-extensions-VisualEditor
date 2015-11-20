@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ilja.mos"
+			"Ilja.mos",
+			"Mashoi7"
 		]
 	},
+	"tooltip-ca-ve-edit": "Kohentele tätä šivuu",
 	"visualeditor-ca-editsource-section": "korjuamine"
 }

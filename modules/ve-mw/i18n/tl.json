@@ -5,7 +5,8 @@
 			"Sky Harbor",
 			"Jojit fb",
 			"Jewel457",
-			"Amire80"
+			"Amire80",
+			"Leeheonjin"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kapag nagtatala, itakda ito sa panandang-oras ng rebisyong ibinago. Ginagamit upang matuklas ang mga alitan sa pagbabago.",
@@ -196,6 +197,7 @@
 	"visualeditor-mweditmodesource-warning-switch-discard": "Balewalain ang mga pagbabago",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Kapsiyon para sa larawan",
 	"visualeditor-mwgalleryinspector-title": "Galeriya",
+	"visualeditor-mwsignature-tool": "Ang iyong lagda",
 	"visualeditor-pagemenu-tooltip": "Mga kagustuhan ng pahina",
 	"visualeditor-pagetranslationwarning": "Binabago mo ang isang pahinang maaaring isalin.  Hindi pa opisyal na sinusuportahan ang pamamatnugot nito sa editor na ito.",
 	"visualeditor-parameter-input-placeholder": "Pangalan ng hanay",
@@ -232,6 +234,7 @@
 	"visualeditor-saveerror": "Kamalian sa pagtala ng datos sa serbidor: $1.",
 	"visualeditor-serializeerror": "Kamalian sa pagkarga ng datos mula sa serbidor: $1",
 	"visualeditor-settings-tool": "Mga kagustuhan ng pahina",
+	"visualeditor-shortcuts-insert": "Isingit",
 	"visualeditor-special-characters-group-other": "Kalimitang ginagamit",
 	"visualeditor-timeout": "Mukhang kasalukuyang hindi magagamit ang editor na ito.  Nais mo ba na lang bang mamatnugot gamit ang paraang batayan?",
 	"visualeditor-toolbar-cite-label": "Isangguni",
