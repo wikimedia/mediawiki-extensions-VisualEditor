@@ -763,62 +763,66 @@ ve.dm.mwExample.complexInternalData.internalItems = [
 ve.dm.mwExample.complexInternalData.internalListNextUniqueNumber = 1;
 
 ve.dm.mwExample.domToDataCases = {
-	'adjacent annotations': {
-		body:
-			'<b>a</b><b data-parsoid="1">b</b><b>c</b><b data-parsoid="2">d</b> ' +
-			'<b>a</b><b>b</b> ' +
-			'<b data-parsoid="3">ab</b><b data-parsoid="4">c</b>',
+	'adjacent annotations (data-parsoid)': {
+		preserveAnnotationDomElements: true,
+		body: '<b>a</b><b data-parsoid="1">b</b><b data-parsoid="2">c</b> ' +
+			'<b>d</b><b>d</b>',
 		data: [
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
-			[ 'a', [ ve.dm.example.bold ] ],
-			[
-				'b',
-				[ {
-					type: 'textStyle/bold',
-					attributes: { nodeName: 'b' }
-				} ]
-			],
-			[ 'c', [ ve.dm.example.bold ] ],
-			[
-				'd',
-				[ {
-					type: 'textStyle/bold',
-					attributes: { nodeName: 'b' }
-				} ]
-			],
-			' ',
-			[ 'a', [ ve.dm.example.bold ] ],
-			[ 'b', [ ve.dm.example.bold ] ],
-			' ',
 			[
 				'a',
 				[ {
 					type: 'textStyle/bold',
-					attributes: { nodeName: 'b' }
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b>a</b>' ).toArray()
 				} ]
 			],
 			[
 				'b',
 				[ {
 					type: 'textStyle/bold',
-					attributes: { nodeName: 'b' }
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b data-parsoid="1">b</b>' ).toArray()
 				} ]
 			],
 			[
 				'c',
 				[ {
 					type: 'textStyle/bold',
-					attributes: { nodeName: 'b' }
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b data-parsoid="2">c</b>' ).toArray()
+				} ]
+			],
+			' ',
+			[
+				'd',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b>a</b>' ).toArray()
+				} ]
+			],
+			[
+				'd',
+				[ {
+					type: 'textStyle/bold',
+					attributes: { nodeName: 'b' },
+					originalDomElements: $( '<b>a</b>' ).toArray()
 				} ]
 			],
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		normalizedBody: '<b>a</b><b data-parsoid="1">b</b><b>c</b><b data-parsoid="2">d</b> ' +
-			'<b>ab</b> ' +
-			'<b data-parsoid="3">ab</b><b data-parsoid="4">c</b>',
-		fromDataBody: '<b>abcd</b> <b>ab</b> <b>abc</b>'
+		modify: function ( model ) {
+			var data = [ 'x', [ ve.dm.example.bold ] ],
+				linearData = ve.dm.example.preprocessAnnotations( [ data ], model.getStore() );
+			model.data.data.splice( 3, 0, linearData.data[ 0 ] );
+		},
+		normalizedBody: '<b>a</b><b data-parsoid="1">bx</b><b data-parsoid="2">c</b> ' +
+			'<b>dd</b>',
+		fromDataBody: '<b>a</b><b data-parsoid="1">bx</b><b data-parsoid="2">c</b> ' +
+			'<b>dd</b>'
 	},
 	mwImage: {
 		body: '<p>' + ve.dm.mwExample.MWInlineImage.html + '</p>',
