@@ -115,7 +115,7 @@ ve.ui.MWExtensionWindow.prototype.getTeardownProcess = function ( data, process 
 ve.ui.MWExtensionWindow.prototype.getActionProcess = function ( action, process ) {
 	return process.first( function () {
 		if ( action === 'done' ) {
-			if ( this.constructor.static.allowedEmpty || this.input.getInnerValue() !== '' ) {
+			if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
 				this.insertOrUpdateNode();
 			} else if ( this.selectedNode && !this.constructor.static.allowedEmpty ) {
 				// Content has been emptied on a node which isn't allowed to
@@ -191,12 +191,12 @@ ve.ui.MWExtensionWindow.prototype.removeNode = function () {
  */
 ve.ui.MWExtensionWindow.prototype.updateMwData = function ( mwData ) {
 	var tagName = mwData.name,
-		value = this.input.getValue();
+		value = this.input.getValueAndWhitespace();
 
 	// XML-like tags in wikitext are not actually XML and don't expect their contents to be escaped.
 	// This means that it is not possible for a tag '<foo>…</foo>' to contain the string '</foo>'.
 	// Prevent that by escaping the first angle bracket '<' to '&lt;'. (bug 57429)
 	value = value.replace( new RegExp( '<(/' + tagName + '\\s*>)', 'gi' ), '&lt;$1' );
 
-	mwData.body.extsrc = this.whitespace[ 0 ] + value + this.whitespace[ 1 ];
+	mwData.body.extsrc = value;
 };
