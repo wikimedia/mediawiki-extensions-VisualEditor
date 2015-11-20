@@ -535,7 +535,10 @@
 
 			if (
 				mw.config.get( 'wgAction' ) === 'submit' ||
-				( mw.config.get( 'wgAction' ) === 'edit' && wikitextModified )
+				( mw.config.get( 'wgAction' ) === 'edit' && wikitextModified ) ||
+				// switching from section editing must prompt because we can't
+				// keep changes from that (yet?)
+				$( 'input[name=wpSection]' ).val()
 			) {
 				mw.loader.using( 'ext.visualEditor.switching' )
 					.done( function () {
