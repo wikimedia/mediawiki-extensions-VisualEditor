@@ -102,6 +102,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWLinkNodeInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			var content, annotation, annotations,
+				surfaceView = this.manager.getSurface().getView(),
 				surfaceModel = this.getFragment().getSurface(),
 				doc = surfaceModel.getDocument(),
 				nodeRange = this.selectedNode.getOuterRange(),
@@ -134,6 +135,18 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				surfaceModel.change(
 					ve.dm.Transaction.newFromReplacement( doc, nodeRange, content )
 				);
+				setTimeout( function () {
+					// This just removed the node and turned it into an annotation. Thus, this inspector
+					// is about to go away. It'll be replaced by a context popup for the new annotation,
+					// because the cursor will still be contained within it. Before it goes away, adjust
+					// the selection to make _sure_ that if the user just starts typing, it won't delete
+					// the entire link. We need to manually fiddle the selection a little, because
+					// annotations mean that the LinearSelection can't granularly say whether the
+					// selection starts inside or outside of the node.
+					// If you can think of a test function for "the selection has stabilised", this could
+					// be moved to ve.scheduler.
+					surfaceView.selectActiveLinkContents();
+				} );
 			} else {
 				surfaceModel.change(
 					ve.dm.Transaction.newFromAttributeChanges(
