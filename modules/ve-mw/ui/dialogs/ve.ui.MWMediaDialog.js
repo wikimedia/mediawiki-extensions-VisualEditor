@@ -526,7 +526,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 					ignoreCharLimit: true
 				},
 				view: {
-					icon: 'time',
+					icon: 'clock',
 					label: 'visualeditor-dialog-media-info-uploaded',
 					isDate: true
 				}
@@ -536,7 +536,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 				value: ve.getProp( metadata, 'DateTimeOriginal', 'value' ),
 				data: {},
 				view: {
-					icon: 'time',
+					icon: 'clock',
 					label: 'visualeditor-dialog-media-info-created'
 				}
 			},
