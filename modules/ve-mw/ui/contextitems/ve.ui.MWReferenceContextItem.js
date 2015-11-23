@@ -50,7 +50,7 @@ ve.ui.MWReferenceContextItem.static.commandName = 'reference';
 ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 	var refNode = this.getReferenceNode();
 	if ( refNode ) {
-		this.view = new ve.ui.PreviewElement( refNode );
+		this.view = new ve.ui.MWPreviewElement( refNode );
 
 		// The $element property may be rendered into asynchronously, update the context's size when the
 		// rendering is complete if that's the case

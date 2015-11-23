@@ -1032,6 +1032,7 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCancelConfirmDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWWikitextSwitchConfirmDialog.js",
 				"modules/ve-mw/ui/elements/ve.ui.MWExpandableErrorElement.js",
+				"modules/ve-mw/ui/elements/ve.ui.MWPreviewElement.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js",

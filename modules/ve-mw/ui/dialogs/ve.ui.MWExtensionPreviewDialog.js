@@ -38,7 +38,7 @@ ve.ui.MWExtensionPreviewDialog.prototype.initialize = function () {
 
 	// Properties
 	this.previewNode = null;
-	this.previewElement = new ve.ui.PreviewElement();
+	this.previewElement = new ve.ui.MWPreviewElement();
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwExtensionPreviewDialog' );
