@@ -14,6 +14,10 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo Asaye: Arıste ke]]",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo Asaye: Vurna]]",
 	"visualeditor-feedback-link": "Project:Vinleg vırnayoğ/Peydrışten",
-	"visualeditor-feedback-tool": "Peydrışten vırad",
-	"visualeditor-help-label": "Klavuza karberi bıwan"
+	"visualeditor-feedback-tool": "Semedi ena nuşte peydrışten vırad",
+	"visualeditor-help-label": "Klavuza karberi bıwan",
+	"visualeditor-welcomedialog-action": "Dest bıke vırnayış",
+	"visualeditor-welcomedialog-content": "Heme çi şeni bıvurne, u herg çi dekeri de.",
+	"visualeditor-welcomedialog-content-thanks": "Semedi keşfa dınyay u destegi re teşekür kenim",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Weş ameyi}}  $2"
 }

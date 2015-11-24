@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"tooltip-ca-ve-edit": "Modiffica sta paggina.",
+	"visualeditor-ca-createlocaldescriptionsource": "Azonzi descrission locale con sorgente",
+	"visualeditor-ca-createsource": "Crea sorgente",
+	"visualeditor-ca-editsource": "modiffica wikitesto",
+	"visualeditor-ca-editsource-section": "modifica wikitesto",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
+}

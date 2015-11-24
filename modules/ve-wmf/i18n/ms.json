@@ -4,10 +4,11 @@
 			"Anakmalaysia",
 			"Aurora",
 			"Amire80",
-			"아라"
+			"아라",
+			"Kurniasan"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Suntingan visual]]",
 	"tag-visualeditor-description": "Disunting dengan menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor:Semak]]",
 	"tag-visualeditor-needcheck-description": "Suntingan dilakukan dengan menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] di mana sistem telah mengesan wikiteks yang mungkin mengalami perubahan yang tidak diingini.",
