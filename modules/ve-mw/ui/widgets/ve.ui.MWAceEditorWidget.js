@@ -24,10 +24,15 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @cfg {string} [autocomplete='none'] Symbolic name of autocomplete
+ * mode: 'none', 'basic' (requires the user to press Ctrl-Space) or
+ * 'live' (shows a list of suggestions as the user types)
  */
 ve.ui.MWAceEditorWidget = function VeUiMWAceEditorWidget( config ) {
 	// Configuration
 	config = config || {};
+
+	this.autocomplete = config.autocomplete || 'none';
 
 	this.$ace = $( '<div dir="ltr">' );
 	this.editor = null;
@@ -98,13 +103,32 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	this.editor = ace.edit( this.$ace[ 0 ] );
 	this.editor.setOptions( {
 		minLines: this.minRows || 3,
-		maxLines: this.autosize ? this.maxRows : this.minRows || 3
+		maxLines: this.autosize ? this.maxRows : this.minRows || 3,
+		enableBasicAutocompletion: this.autocomplete !== 'none' ? true : false,
+		enableLiveAutocompletion: this.autocomplete === 'live' ? true : false
 	} );
 	this.editor.getSession().on( 'change', this.onEditorChange.bind( this ) );
 	this.editor.renderer.on( 'resize', this.onEditorResize.bind( this ) );
 	this.setEditorValue( this.getValue() );
 	this.editor.resize();
 };
+
+/**
+ * Set the autocomplete property
+ *
+ * @param {string} mode Symbolic name of autocomplete mode
+ */
+ ve.ui.MWAceEditorWidget.prototype.setAutocomplete = function ( mode ) {
+	var widget = this;
+	this.autocomplete = mode;
+	this.loadingPromise.done( function () {
+		widget.editor.renderer.setOptions( {
+			enableBasicAutocompletion: widget.autocomplete !== 'none' ? true : false,
+			enableLiveAutocompletion: widget.autocomplete === 'live' ? true : false
+		} );
+	} );
+	return this;
+ };
 
 /**
  * @inheritdoc
