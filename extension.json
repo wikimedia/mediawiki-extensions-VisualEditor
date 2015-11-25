@@ -1225,6 +1225,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwimage.core",
+				"oojs-ui.styles.icons-interactions",
 				"oojs-ui.styles.icons-media",
 				"mediawiki.ForeignStructuredUpload.BookletLayout",
 				"moment"
