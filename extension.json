@@ -1660,6 +1660,7 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWCommentInspector.js"
 			],
 			"styles": [
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWEntityNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWIncludesNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTableNode.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWPreDialog.css",
@@ -1727,6 +1728,7 @@
 				"visualeditor-includes-onlyinclude-description",
 				"visualeditor-includes-includeonly-description",
 				"visualeditor-includes-documentation",
+				"visualeditor-tooltip-non-breaking-space",
 				"visualeditor-wikitext-progress",
 				"visualeditor-wikitext-warning-title"
 			],
