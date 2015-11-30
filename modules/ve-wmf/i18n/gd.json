@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"GunChleoc"
+			"GunChleoc",
+			"Akerbeltz"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|DeasaicheLèirsinneach]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Deasachadh lèirsinneach]]",
 	"visualeditor-feedback-link": "Project:Deasaiche lèirsinneach/Beachdan",
 	"visualeditor-feedback-tool": "Cuir beachd thugainn",
 	"visualeditor-help-label": "Leugh treòir nan cleachdaichean",
