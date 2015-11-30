@@ -91,23 +91,23 @@
             <path id="rect120-7" fill="#9c9c9d" d="M154.5 48.333h-10v10h10z"/>
         </g>
     </g>
-    <g id="g122-1">
+    <g id="g122-1" fill="#9c9c9d">
         <g id="g124-1">
             <g id="Line-3">
-                <path id="rect127-7" fill="#010101" d="M162.531 106.734h-2v8.1h2z"/>
+                <path id="rect127-7" d="M162.531 106.734h-2v8.1h2z"/>
             </g>
             <g id="Line2-3">
-                <path id="rect130-8" fill="#010101" d="M162.531 104.834h-2v2h2z"/>
+                <path id="rect130-8" d="M162.531 104.834h-2v2h2z"/>
             </g>
             <g id="Line3-5">
-                <path id="rect133-9" fill="#010101" d="M162.531 113.834h-2v2h2z"/>
+                <path id="rect133-9" d="M162.531 113.834h-2v2h2z"/>
             </g>
         </g>
         <g id="g135-4">
-            <path id="rect137-1" fill="#010101" d="M163.989 104.834h-4.917v2h4.917z"/>
+            <path id="rect137-1" d="M163.989 104.834h-4.917v2h4.917z"/>
         </g>
         <g id="g139-0">
-            <path id="rect141-0" fill="#010101" d="M164.021 113.834h-4.917v2h4.917z"/>
+            <path id="rect141-0" d="M164.021 113.834h-4.917v2h4.917z"/>
         </g>
     </g>
 </svg>
