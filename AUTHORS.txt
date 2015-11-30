@@ -1,43 +1,49 @@
 Principal Authors (major contributors, alphabetically)
 
-Alex Monk <krenair@wikimedia.org>
-Bartosz Dziewoński <matmarex@wikimedia.org>
+Alex Monk <krenair@gmail.com>
+Bartosz Dziewoński <matma.rex@gmail.com>
 Christian Williams <orbit@framezero.com>
-C. Scott Ananian <cananian@wikimedia.org>
-David Chan <dchan@wikimedia.org>
 Ed Sanders <esanders@wikimedia.org>
-Inez Korczyński <inez@wikia-inc.com>
+Inez Korczyński <inez@wikia-inc.com>
 James D. Forrester <jforrester@wikimedia.org>
 Moriel Schottlender <mschottlender@wikimedia.org>
-Roan Kattouw <roan@wikimedia.org>
-Rob Moen <rmoen@wikimedia.org>
-Sucheta Ghoshal <sghoshal@wikimedia.org>
+Roan Kattouw <roan.kattouw@gmail.com>
+Rob Moen <rob.moen@gmail.com>
 Timo Tijhof <krinklemail@gmail.com>
-Trevor Parscal <trevor@wikimedia.org>
+Trevor Parscal <trevorparscal@gmail.com>
 
 
 Patch Contributors (minor contributors, alphabetically)
 
 Aaron Schulz <aschulz@wikimedia.org>
 Adam Wight <spam@ludd.net>
+addshore <addshorewiki@gmail.com>
 Alexander Emsenhuber <ialex.wiki@gmail.com>
 Amir E. Aharoni <amir.aharoni@mail.huji.ac.il>
 Andrew Garrett <agarrett@wikimedia.org>
+Andrew Green <andrew.green.df@gmail.com>
+ankita-ks <kumariankita002@gmail.com>
 Antoine Musso <hashar@free.fr>
 Audrey Tang <audreyt@audreyt.org>
 Brad Jorsch <bjorsch@wikimedia.org>
 Brion Vibber <brion@wikimedia.org>
+C. Scott Ananian <cscott@cscott.net>
 Carl Fürstenberg <azatoth@gmail.com>
-Chris McMahon <cmcmahon@wikimedia.org>
 Dan Duvall <dduvall@wikimedia.org>
+David Chan <david@troi.org>
+David Lynch <dlynch@wikimedia.org>
 Derk-Jan Hartman <hartman.wiki@gmail.com>
+Douglas Gardner <douglas@chippy.ch>
+ecotg <ecokpo@gmail.com>
 Elena Tonkovidova <etonkovidova@wikimedia.org>
+eranroz <eranroz89@gmail.com>
 Erick Guan <fantasticfears@gmail.com>
 Erik Moeller <erik@wikimedia.org>
 Federico Leva <federicoleva@tiscali.it>
 Florian <florian.schmidt.stargatewissen@gmail.com>
-Frédéric Bolduc <fbolduc@wikimedia.org>
-Gabriel Wicke <gwicke@wikimedia.org>
+Frédéric Bolduc <bolducfrederic@gmail.com>
+Gilles Dubuc <gdubuc@wikimedia.org>
+Glaisher <glaisher.wiki@gmail.com>
 Helder <he7d3r@gmail.com>
 Jamison Lofthouse <jamison.lofthouse@gmail.com>
 Jeff Hall <jeffreyehall@gmail.com>
@@ -48,41 +54,43 @@ Juliusz Gonera <jgonera@gmail.com>
 Kaity Hammerstein <khammerstein@wikimedia.org>
 Kunal Mehta <legoktm@gmail.com>
 Kyle Florence <kyle.florence@gmail.com>
+lokal-profil <lokal.profil@gmail.com>
 Marc Ordinas i Llopis <marcoil@wikimedia.org>
 Marielle Volz <marielle.volz@gmail.com>
-Mark A. Hershberger <mah@everybody.org>
 Mark Holmquist <mtraceur@member.fsf.org>
 Marko Obrovac <mobrovac@wikimedia.org>
 Matthew Flaschen <mflaschen@wikimedia.org>
 Matthias Mullie <git@mullie.eu>
+maurelio <strigiwm@gmail.com>
+mayankmadan <maddiemadan@gmail.com>
 Neil Kandalgaonkar <neilk@users.mediawiki.org>
 Niklas Laxström <niklas.laxstrom@gmail.com>
 Ori Livneh <ori@wikimedia.org>
+palerdot <palerdot@gmail.com>
 Pavel Selitskas <p.selitskas@gmail.com>
 Peter Coti <petercoti@gmail.com>
+Prateek Saxena <prtksxna@gmail.com>
 Quim Gil <quimgil@gmail.com>
+rachel99 <rachelqa99@gmail.com>
 Raimond Spekking <raimond.spekking@gmail.com>
+Ritsyy <richarupela95@gmail.com>
+Robert Vogel <vogel@hallowelt.biz>
 Rummana Yasmeen <ryasmeen@wikimedia.org>
 Ryan Kaldari <rkaldari@wikimedia.org>
 Sam Reed <reedy@wikimedia.org>
 Sam Smith <git@samsmith.io>
 Seb35 <seb35wikipedia@gmail.com>
-Siebrand Mazeland <siebrand@kitano.nl>
+shirayuki <shirayuking@gmail.com>
+Siebrand Mazeland <s.mazeland@xs4all.nl>
 Steven Zhang <cro0016@gmail.com>
-Subramanya Sastry <ssastry@wikimedia.org>
+Sucheta Ghoshal <sghoshal@wikimedia.org>
 Thalia Chan <thalia.e.chan@googlemail.com>
 This, that and the other <at.light@live.com.au>
 Tim Starling <tstarling@wikimedia.org>
 Tongbo Sui <beanixster@gmail.com>
 Vikas S Yaligar <vikasyaligar.it@gmail.com>
 Yuki Shira <shirayuking@gmail.com>
-Željko Filipin <zfilipin@wikimedia.org>
-addshore <addshorewiki@gmail.com>
-lokal-profil <lokal.profil@gmail.com>
-mayankmadan <maddiemadan@gmail.com>
-palerdot <palerdot@gmail.com>
-rachel99 <rachelqa99@gmail.com>
-shirayuki <shirayuking@gmail.com>
+Željko Filipin <zeljko.filipin@gmail.com>
 
 
 Libraries used (alphabetically)
