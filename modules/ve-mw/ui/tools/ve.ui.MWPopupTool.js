@@ -153,28 +153,6 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 				.append( this.keyboardShortcutsButton.$element )
 				.append( this.feedbackButton.$element )
 		);
-	if ( ve.version.id !== false ) {
-		this.$items
-			.append( $( '<div>' )
-				.addClass( 've-ui-mwHelpPopupTool-item' )
-				.append( $( '<span>' )
-					.addClass( 've-ui-mwHelpPopupTool-version-label' )
-					.text( ve.msg( 'visualeditor-version-label' ) )
-				)
-				.append( ' ' )
-				.append( $( '<a>' )
-					.addClass( 've-ui-mwHelpPopupTool-version-link' )
-					.attr( 'target', '_blank' )
-					.attr( 'href', ve.version.url )
-					.text( ve.version.id )
-				)
-				.append( ' ' )
-				.append( $( '<span>' )
-					.addClass( 've-ui-mwHelpPopupTool-version-date' )
-					.text( ve.version.dateString )
-				)
-			);
-	}
 	this.$items.find( 'a' ).attr( 'target', '_blank' );
 	this.popup.$body.append( this.$items );
 };
@@ -224,6 +202,58 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 ve.ui.MWHelpPopupTool.prototype.onKeyboardShortcutsClick = function () {
 	this.popup.toggle( false );
 	ve.init.target.commandRegistry.lookup( 'commandHelp' ).execute( this.toolbar.getSurface() );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWHelpPopupTool.prototype.onSelect = function () {
+	var $version;
+
+	// Parent method
+	ve.ui.MWHelpPopupTool.super.prototype.onSelect.apply( this, arguments );
+
+	if ( !this.versionPromise && this.popup.isVisible() ) {
+		$version = $( '<div>' ).addClass( 've-ui-mwHelpPopupTool-item oo-ui-pendingElement-pending' ).text( '\u00a0' );
+		this.$items.append( $version );
+		this.versionPromise = new mw.Api().get( {
+			action: 'query',
+			meta: 'siteinfo',
+			format: 'json',
+			siprop: 'extensions'
+		} )
+		.then( function ( response ) {
+			var extension = response.query.extensions.filter( function ( ext ) {
+				return ext.name === 'VisualEditor';
+			} )[ 0 ];
+
+			if ( extension && extension[ 'vcs-version' ] ) {
+				$version
+					.removeClass( 'oo-ui-pendingElement-pending' )
+					.empty()
+					.append( $( '<span>' )
+						.addClass( 've-ui-mwHelpPopupTool-version-label' )
+						.text( ve.msg( 'visualeditor-version-label' ) )
+					)
+					.append( ' ' )
+					.append( $( '<a>' )
+						.addClass( 've-ui-mwHelpPopupTool-version-link' )
+						.attr( 'target', '_blank' )
+						.attr( 'href',  extension[ 'vcs-url' ] )
+						.text( extension[ 'vcs-version' ].slice( 0, 7 ) )
+					)
+					.append( ' ' )
+					.append( $( '<span>' )
+						.addClass( 've-ui-mwHelpPopupTool-version-date' )
+						.text( extension[ 'vcs-date' ] )
+					);
+			} else {
+				$version.remove();
+			}
+		}, function () {
+			$version.remove();
+		} );
+	}
 };
 
 /* Registration */

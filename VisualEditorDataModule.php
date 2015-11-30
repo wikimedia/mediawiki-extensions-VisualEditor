@@ -34,16 +34,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			$messages[ $msgKey ] = $msgVal;
 		}
 
-		// Version information
-		$language = Language::factory( $context->getLanguage() );
-
-		$gitInfo = new GitInfo( __DIR__ );
-		$hash = $gitInfo->getHeadSHA1();
-		$id = $hash ? substr( $hash, 0, 7 ) : false;
-		$url = $gitInfo->getHeadViewUrl();
-		$date = $gitInfo->getHeadCommitDate();
-		$dateString = $date ? $language->timeanddate( $date, true ) : '';
-
 		return
 			've.init.platform.addParsedMessages(' . FormatJson::encode(
 				$parsedMessages,
@@ -52,16 +42,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			've.init.platform.addMessages(' . FormatJson::encode(
 				$messages,
 				ResourceLoader::inDebugMode()
-			) . ');'.
-			// Documented in .docs/external.json
-			've.version = ' . FormatJson::encode(
-				array(
-					'id' => $id,
-					'url' => $url,
-					'timestamp' => $date,
-					'dateString' => $dateString,
-				), ResourceLoader::inDebugMode()
-			) . ';';
+			) . ');';
 	}
 
 	protected function getMessageInfo() {
