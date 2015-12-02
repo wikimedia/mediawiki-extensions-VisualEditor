@@ -612,6 +612,7 @@
 				"lib/ve/src/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.js",
 				"lib/ve/src/ce/keydownhandlers/ve.ce.TableDeleteKeyDownHandler.js",
 				"lib/ve/src/ce/keydownhandlers/ve.ce.TableEnterKeyDownHandler.js",
+				"lib/ve/src/ce/keydownhandlers/ve.ce.LinearTabKeyDownHandler.js",
 				"lib/ve/src/ce/nodes/ve.ce.GeneratedContentNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.AlienNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.BlockquoteNode.js",
