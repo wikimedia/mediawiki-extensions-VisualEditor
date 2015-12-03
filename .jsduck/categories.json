@@ -118,6 +118,8 @@
 					"ve.ce.SurfaceObserver",
 					"ve.ce.*Selection",
 					"ve.ce.RangeState",
+					"ve.ce.TextState",
+					"ve.ce.TextStateChunk",
 					"ve.ce.*Annotation",
 					"ve.ce.*Factory",
 					"ve.ce.*KeyDownHandler",

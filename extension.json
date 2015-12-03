@@ -582,6 +582,8 @@
 				"lib/ve/src/dm/metaitems/ve.dm.AlienMetaItem.js",
 				"lib/ve/src/dm/metaitems/ve.dm.CommentMetaItem.js",
 				"lib/ve/src/ce/ve.ce.js",
+				"lib/ve/src/ce/ve.ce.TextStateChunk.js",
+				"lib/ve/src/ce/ve.ce.TextState.js",
 				"lib/ve/src/ce/ve.ce.RangeState.js",
 				"lib/ve/src/ce/ve.ce.AnnotationFactory.js",
 				"lib/ve/src/ce/ve.ce.NodeFactory.js",
