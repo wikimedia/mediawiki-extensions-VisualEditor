@@ -315,6 +315,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-type-border' )
 	} );
 
+	borderField.$element.addClass( 've-ui-mwMediaDialog-borderCheckbox' );
+
 	// Build type fieldset
 	this.typeFieldset.$element.append(
 		this.typeSelect.$element,

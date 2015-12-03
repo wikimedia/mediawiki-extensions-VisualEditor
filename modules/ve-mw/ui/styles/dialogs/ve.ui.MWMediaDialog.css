@@ -72,3 +72,7 @@
 .ve-ui-mwMediaDialog-caption-fielset.oo-ui-labelElement.oo-ui-fieldsetLayout {
 	margin-top: 0;
 }
+
+.ve-ui-mwMediaDialog-borderCheckbox {
+	margin-top: 0.4em;
+}
