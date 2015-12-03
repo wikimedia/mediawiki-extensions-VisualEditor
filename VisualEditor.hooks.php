@@ -350,6 +350,7 @@ class VisualEditorHooks {
 		$preferences['visualeditor-findAndReplace-replaceText'] = $api;
 		$preferences['visualeditor-findAndReplace-regex'] = $api;
 		$preferences['visualeditor-findAndReplace-matchCase'] = $api;
+		$preferences['visualeditor-findAndReplace-word'] = $api;
 		return true;
 	}
 
