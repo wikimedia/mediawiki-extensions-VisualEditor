@@ -57,9 +57,10 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
  * @return {ve.dm.MWInternalLinkAnnotation} The annotation.
  */
 ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title ) {
-	var target = title.toText();
+	var target = title.toText(),
+		namespaceIds = mw.config.get( 'wgNamespaceIds' );
 
-	if ( title.getNamespaceId() === 6 || title.getNamespaceId() === 14 ) {
+	if ( title.getNamespaceId() === namespaceIds.file || title.getNamespaceId() === namespaceIds.category ) {
 		// File: or Category: link
 		// We have to prepend a colon so this is interpreted as a link
 		// rather than an image inclusion or categorization
