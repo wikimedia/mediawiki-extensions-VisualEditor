@@ -4,10 +4,11 @@
 			"Happy5214",
 			"KuboF",
 			"Shirayuki",
-			"Yekrats"
+			"Yekrats",
+			"Robin van der Vliet"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VidRedaktilo]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vida redakto]]",
 	"tag-visualeditor-description": "Redakto farita per [[{{MediaWiki:visualeditor-descriptionpagelink}}|VidRedaktilo]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VidRedaktilo:Kontroli]]",
 	"tag-visualeditor-needcheck-description": "Redakto farita per [[{{MediaWiki:visualeditor-descriptionpagelink}}|vida redaktilo]] kie sistemo detektis eblajn neintencajn ŝanĝojn de vikiteksto.",

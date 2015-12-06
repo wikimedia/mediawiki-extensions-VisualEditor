@@ -5,10 +5,11 @@
 			"Hristofor.mirchev",
 			"පසිඳු කාවින්ද",
 			"Mitzev",
-			"StanProg"
+			"StanProg",
+			"Лорд Бъмбъри"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ВизуаленРедактор]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуален редактор]]",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Switched]]",
 	"tag-visualeditor-switched-description": "Потребителят започва да редактира чрез VisualEditor и след това преминава към уикитекст редактора.",
 	"visualeditor-feedback-tool": "Обратна връзка",
