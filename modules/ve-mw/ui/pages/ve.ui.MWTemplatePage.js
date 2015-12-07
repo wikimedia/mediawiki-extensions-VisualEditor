@@ -70,6 +70,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 				.html( mw.message(
 					'visualeditor-dialog-transclusion-no-template-description',
 					title.getRelativeText( 10 ),
+					// FIXME: Drop this no-longer needed second parameter after January 2016
 					mw.user
 				).parse() )
 				.find( 'a' ).attr( 'target', '_blank' );

@@ -207,7 +207,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Field is deprecated. $1",
 	"visualeditor-dialog-transclusion-loading": "Loading...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Show options",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|You are adding}} the \"$1\" template to this page. It doesn't yet have a description, but there might be some information on the [[{{ns:template}}:$1|template's page]].",
+	"visualeditor-dialog-transclusion-no-template-description": "The \"$1\" template doesn't yet have a description, but there might be some information on the [[{{ns:template}}:$1|template's page]].",
 	"visualeditor-dialog-transclusion-options": "Options",
 	"visualeditor-dialog-transclusion-param-default": "Default value: $1",
 	"visualeditor-dialog-transclusion-param-example": "Example value: $1",
