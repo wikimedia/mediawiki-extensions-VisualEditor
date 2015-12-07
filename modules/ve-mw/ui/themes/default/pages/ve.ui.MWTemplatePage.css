@@ -18,6 +18,7 @@
 	color: #555;
 }
 
+.ve-ui-mwTemplatePage-description-extra,
 .ve-ui-mwTemplatePage-description-missing {
 	font-style: italic;
 }

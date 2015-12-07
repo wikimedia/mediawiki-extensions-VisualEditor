@@ -17,7 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var title;
+	var title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null;
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -56,14 +56,21 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.$description.addClass( 've-ui-mwTemplatePage-description' );
 	if ( this.spec.getDescription() ) {
 		this.$description.text( this.spec.getDescription() );
+		if ( title ) {
+			this.$description.append(
+				$( '<hr>' ),
+				$( '<span>' )
+					.addClass( 've-ui-mwTemplatePage-description-extra' )
+					.html( mw.message(
+						'visualeditor-dialog-transclusion-more-template-description',
+						title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template )
+					).parse() )
+			);
+		}
 	} else {
-		title = this.template.getTitle();
 		// The transcluded page may be dynamically generated or unspecified in the DOM
 		// for other reasons (bug 66724). In that case we can't tell the user what
 		// the template is called nor link to the template page.
-		if ( title ) {
-			title = mw.Title.newFromText( title );
-		}
 		if ( title ) {
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
