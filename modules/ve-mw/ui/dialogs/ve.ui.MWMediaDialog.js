@@ -334,7 +334,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
 	} );
 
-	this.sizeWidget = new ve.ui.MediaSizeWidget( {} );
+	this.sizeWidget = new ve.ui.MediaSizeWidget();
 
 	this.$sizeWidgetElements = $( '<div>' ).append(
 		this.sizeWidget.$element,
