@@ -9,15 +9,15 @@
  * MediaWiki UserInterface gallery tool.
  *
  * @class
- * @extends ve.ui.InspectorTool
+ * @extends ve.ui.FragmentInspectorTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWGalleryInspectorTool = function VeUiMWGalleryInspectorTool( toolGroup, config ) {
-	ve.ui.InspectorTool.call( this, toolGroup, config );
+ve.ui.MWGalleryInspectorTool = function VeUiMWGalleryInspectorTool() {
+	ve.ui.MWGalleryInspectorTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWGalleryInspectorTool, ve.ui.InspectorTool );
+OO.inheritClass( ve.ui.MWGalleryInspectorTool, ve.ui.FragmentInspectorTool );
 ve.ui.MWGalleryInspectorTool.static.name = 'gallery';
 ve.ui.MWGalleryInspectorTool.static.group = 'object';
 ve.ui.MWGalleryInspectorTool.static.icon = 'imageGallery';

@@ -9,18 +9,18 @@
  * MediaWiki UserInterface transclusion tool.
  *
  * @class
- * @extends ve.ui.DialogTool
+ * @extends ve.ui.WindowTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTransclusionDialogTool = function VeUiMWTransclusionDialogTool( toolGroup, config ) {
-	ve.ui.DialogTool.call( this, toolGroup, config );
+	ve.ui.WindowTool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTransclusionDialogTool, ve.ui.DialogTool );
+OO.inheritClass( ve.ui.MWTransclusionDialogTool, ve.ui.WindowTool );
 
 /* Static Properties */
 
@@ -55,7 +55,7 @@ ve.ui.MWTransclusionDialogTool.static.isCompatibleWith = function ( model ) {
 	var compatible;
 
 	// Parent method
-	compatible = ve.ui.DialogTool.static.isCompatibleWith.call( this, model );
+	compatible = ve.ui.WindowTool.static.isCompatibleWith.call( this, model );
 
 	if ( compatible && this.template ) {
 		return model.isSingleTemplate( this.template );

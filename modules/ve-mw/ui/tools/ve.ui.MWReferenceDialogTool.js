@@ -9,15 +9,15 @@
  * MediaWiki UserInterface reference tool.
  *
  * @class
- * @extends ve.ui.DialogTool
+ * @extends ve.ui.FragmentWindowTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferenceDialogTool = function VeUiMWReferenceDialogTool( toolGroup, config ) {
-	ve.ui.DialogTool.call( this, toolGroup, config );
+ve.ui.MWReferenceDialogTool = function VeUiMWReferenceDialogTool() {
+	ve.ui.MWReferenceDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWReferenceDialogTool, ve.ui.DialogTool );
+OO.inheritClass( ve.ui.MWReferenceDialogTool, ve.ui.FragmentWindowTool );
 ve.ui.MWReferenceDialogTool.static.name = 'reference';
 ve.ui.MWReferenceDialogTool.static.group = 'object';
 ve.ui.MWReferenceDialogTool.static.icon = 'reference';
@@ -32,21 +32,20 @@ ve.ui.toolFactory.register( ve.ui.MWReferenceDialogTool );
  * MediaWiki UserInterface use existing reference tool.
  *
  * @class
- * @extends ve.ui.DialogTool
+ * @extends ve.ui.WindowTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWUseExistingReferenceDialogTool = function VeUiMWUseExistingReferenceDialogTool( toolGroup, config ) {
-	ve.ui.DialogTool.call( this, toolGroup, config );
+ve.ui.MWUseExistingReferenceDialogTool = function VeUiMWUseExistingReferenceDialogTool() {
+	ve.ui.MWUseExistingReferenceDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWUseExistingReferenceDialogTool, ve.ui.DialogTool );
+OO.inheritClass( ve.ui.MWUseExistingReferenceDialogTool, ve.ui.WindowTool );
 ve.ui.MWUseExistingReferenceDialogTool.static.name = 'reference/existing';
 ve.ui.MWUseExistingReferenceDialogTool.static.group = 'object';
 ve.ui.MWUseExistingReferenceDialogTool.static.icon = 'reference-existing';
 ve.ui.MWUseExistingReferenceDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-reference-useexisting-tool' );
-ve.ui.MWUseExistingReferenceDialogTool.static.modelClasses = [];
 ve.ui.MWUseExistingReferenceDialogTool.static.commandName = 'reference/existing';
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToGroup = false;
 ve.ui.MWUseExistingReferenceDialogTool.static.autoAddToCatchall = false;
@@ -73,15 +72,15 @@ ve.ui.commandHelpRegistry.register( 'insert', 'ref', {
  * MediaWiki UserInterface references list tool.
  *
  * @class
- * @extends ve.ui.DialogTool
+ * @extends ve.ui.FragmentWindowTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWReferencesListDialogTool = function VeUiMWReferencesListDialogTool( toolGroup, config ) {
-	ve.ui.DialogTool.call( this, toolGroup, config );
+ve.ui.MWReferencesListDialogTool = function VeUiMWReferencesListDialogTool() {
+	ve.ui.MWReferencesListDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWReferencesListDialogTool, ve.ui.DialogTool );
+OO.inheritClass( ve.ui.MWReferencesListDialogTool, ve.ui.FragmentWindowTool );
 ve.ui.MWReferencesListDialogTool.static.name = 'referencesList';
 ve.ui.MWReferencesListDialogTool.static.group = 'object';
 ve.ui.MWReferencesListDialogTool.static.icon = 'references';

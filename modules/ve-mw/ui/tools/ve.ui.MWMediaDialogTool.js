@@ -9,15 +9,15 @@
  * MediaWiki UserInterface media edit tool.
  *
  * @class
- * @extends ve.ui.DialogTool
+ * @extends ve.ui.FragmentWindowTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWMediaDialogTool = function VeUiMWMediaDialogTool( toolGroup, config ) {
-	ve.ui.DialogTool.call( this, toolGroup, config );
+ve.ui.MWMediaDialogTool = function VeUiMWMediaDialogTool() {
+	ve.ui.MWMediaDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWMediaDialogTool, ve.ui.DialogTool );
+OO.inheritClass( ve.ui.MWMediaDialogTool, ve.ui.FragmentWindowTool );
 ve.ui.MWMediaDialogTool.static.name = 'media';
 ve.ui.MWMediaDialogTool.static.group = 'object';
 ve.ui.MWMediaDialogTool.static.icon = 'image';
