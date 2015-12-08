@@ -202,7 +202,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "השדה מיושן. $1",
 	"visualeditor-dialog-transclusion-loading": "טעינה...",
 	"visualeditor-dialog-transclusion-multiple-mode": "הצגת אפשרויות",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|אתה מוסיף|את מוסיפה}} את התבנית \"$1\" לדף הזה. עדיין אין לה תיאור, אבל ייתכן שאפשר למצוא מידע כלשהו ב[[{{ns:template}}:$1|דף של התבנית]].",
+	"visualeditor-dialog-transclusion-no-template-description": "לתבנית \"$1\" עדיין אין תיאור, אבל ייתכן שאפשר למצוא מידע כלשהו ב[[{{ns:template}}:$1|דף של התבנית]].",
 	"visualeditor-dialog-transclusion-options": "אפשרויות",
 	"visualeditor-dialog-transclusion-param-default": "בררת מחדל: $1",
 	"visualeditor-dialog-transclusion-param-example": "ערך לדוגמה: $1",

@@ -91,6 +91,7 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Премештање дате категорије овде",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Нова категорија",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Додај категорију",
+	"visualeditor-dialog-meta-categories-missing": "Ова категорија нема описну страницу.",
 	"visualeditor-dialog-meta-categories-options": "Опције",
 	"visualeditor-dialog-meta-categories-section": "Категорије",
 	"visualeditor-dialog-meta-categories-sortkey-label": "Сортирај ову страницу по називу",

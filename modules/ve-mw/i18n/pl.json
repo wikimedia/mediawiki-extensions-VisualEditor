@@ -200,7 +200,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Pole jest niezalecane. $1",
 	"visualeditor-dialog-transclusion-loading": "Ładowanie...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Pokaż opcje",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Dodajesz}} do strony szablon „$1”. Na razie nie ma on opisu, ale być może jakieś pomocne informacje znajdują się na [[{{ns:template}}:$1|jego stronie]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Szablon „$1” nie ma jeszcze opisu, ale być może jakieś pomocne informacje znajdziesz na [[{{ns:template}}:$1|jego stronie]].",
 	"visualeditor-dialog-transclusion-options": "Opcje",
 	"visualeditor-dialog-transclusion-param-default": "Wartość domyślna: $1",
 	"visualeditor-dialog-transclusion-param-example": "Przykładowa wartość: $1",

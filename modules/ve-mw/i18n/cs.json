@@ -205,7 +205,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Pole je zastaralé. $1",
 	"visualeditor-dialog-transclusion-loading": "Načítá se…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Zobrazit možnosti",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Přidáváte}} na tuto stránku šablonu „$1“. Zatím nemá popis, ale nějaké informace by se mohly nacházet na [[{{ns:template}}:$1|její stránce]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablona „$1“ zatím nemá popis, ale nějaké informace by se mohly nacházet na [[{{ns:template}}:$1|její stránce]].",
 	"visualeditor-dialog-transclusion-options": "Možnosti",
 	"visualeditor-dialog-transclusion-param-default": "Výchozí hodnota: $1",
 	"visualeditor-dialog-transclusion-param-example": "Příklad hodnoty: $1",
