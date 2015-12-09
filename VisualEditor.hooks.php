@@ -155,6 +155,8 @@ class VisualEditorHooks {
 			if (
 				$config->get( 'VisualEditorUseSingleEditTab' ) &&
 				!$user->isAnon() &&
+				!$user->getOption( 'visualeditor-autodisable' ) &&
+				!$user->getOption( 'visualeditor-betatempdisable' ) &&
 				!$user->getOption( 'visualeditor-hidetabdialog' ) &&
 				$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
 				$dbr->select(
@@ -431,7 +433,11 @@ class VisualEditorHooks {
 		);
 
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-		if ( $config->get( 'VisualEditorUseSingleEditTab' ) ) {
+		if (
+			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			!$user->getOption( 'visualeditor-autodisable' ) &&
+			!$user->getOption( 'visualeditor-betatempdisable' )
+		) {
 			$preferences['visualeditor-tabs'] = array(
 				'type' => 'select',
 				'label-message' => 'visualeditor-preference-tabs',
