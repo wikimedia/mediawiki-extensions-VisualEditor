@@ -33,17 +33,15 @@ ve.ui.MWNumberedExternalLinkNodeContextItem.static.name = 'link/mwNumberedExtern
 
 ve.ui.MWNumberedExternalLinkNodeContextItem.static.modelClasses = [ ve.dm.MWNumberedExternalLinkNode ];
 
+ve.ui.MWNumberedExternalLinkNodeContextItem.static.clearable = false;
+
+ve.ui.MWNumberedExternalLinkNodeContextItem.static.deletable = true;
+
 /* Methods */
 
-/**
- * @inheritdoc
- */
-ve.ui.MWNumberedExternalLinkNodeContextItem.prototype.onClearButtonClick = function () {
-	// Getting around the inheritance chain a bit here... this is a subclass of attribute
-	// context, but in practice it's a regular node context. So, for consistency with other
-	// links we still want the "clear attribute" button, but we want it to behave like the
-	// remove-the-node button.
-	return this.onDeleteButtonClick();
+ve.ui.MWNumberedExternalLinkNodeContextItem.prototype.isDeletable = function () {
+	// We don't care about whether the context wants to show delete buttons, so override the check.
+	return this.constructor.static.deletable;
 };
 
 /* Registration */
