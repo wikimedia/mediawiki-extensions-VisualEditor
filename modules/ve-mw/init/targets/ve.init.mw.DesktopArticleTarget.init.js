@@ -692,16 +692,16 @@
 					(
 						isEditPage &&
 						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt' &&
-						mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+						mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
+						(
+							(
+								mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' &&
+								mw.config.get( 'wgAction' ) !== 'submit'
+							) || getLastEditor() !== 'wikitext'
+						)
 					)
 				) &&
-				uri.query.veswitched === undefined && // TODO: other params too?
-				(
-					(
-						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' &&
-						mw.config.get( 'wgAction' ) !== 'submit'
-					) || getLastEditor() !== 'wikitext'
-				)
+				uri.query.veswitched === undefined // TODO: other params too?
 			) {
 				trackActivateStart( {
 					type: uri.query.vesection === undefined ? 'page' : 'section',
