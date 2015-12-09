@@ -860,9 +860,9 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 	if ( this.isViewPage ) {
 		// Allow instant switching back to view mode, without refresh
 		$( '#ca-view a, #ca-nstab-visualeditor a' )
-			.click( this.onViewTabClick.bind( this ) );
+			.on( 'click', this.onViewTabClick.bind( this ) );
 
-		$( '#ca-viewsource, #ca-edit' ).click( function ( e ) {
+		$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
 			if ( !target.active || e.which !== 1 || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
 				return;
 			}

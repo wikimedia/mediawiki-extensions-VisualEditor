@@ -58,7 +58,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	this.shownEducationPopup = false;
 	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
 	this.$stillDot = $( '<div>' ).addClass( 've-ui-stillDot' );
-	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' ).click( function () {
+	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' ).on( 'click', function () {
 		if ( !tool.shownEducationPopup ) {
 			if ( ve.init.target.openEducationPopupTool ) {
 				ve.init.target.openEducationPopupTool.popup.toggle( false );
