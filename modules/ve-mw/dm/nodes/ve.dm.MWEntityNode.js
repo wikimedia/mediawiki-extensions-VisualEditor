@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel MediaWiki entitiy node.
+ * DataModel MediaWiki entity node.
  *
  * @class
  * @extends ve.dm.LeafNode

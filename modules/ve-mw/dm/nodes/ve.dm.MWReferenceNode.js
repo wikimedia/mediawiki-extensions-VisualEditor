@@ -351,7 +351,7 @@ ve.dm.MWReferenceNode.prototype.onRoot = function () {
 };
 
 /**
- * Handle the node being detatched from the root
+ * Handle the node being detached from the root
  */
 ve.dm.MWReferenceNode.prototype.onUnroot = function () {
 	this.removeFromInternalList();

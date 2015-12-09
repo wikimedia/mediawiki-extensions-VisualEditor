@@ -236,7 +236,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		icon: 'parameter',
-		classes: [ 've-ui-mwMediaDialog-caption-fielset' ]
+		classes: [ 've-ui-mwMediaDialog-caption-fieldset' ]
 	} );
 
 	// Alt text
@@ -1373,7 +1373,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 				if (
 					// There was an initial node
 					this.selectedNode &&
-					// And we didn't change the image type block/inline or vise versa
+					// And we didn't change the image type block/inline or vice versa
 					this.selectedNode.type === this.imageModel.getImageNodeType() &&
 					// And we didn't change the image itself
 					this.selectedNode.getAttribute( 'src' ) ===

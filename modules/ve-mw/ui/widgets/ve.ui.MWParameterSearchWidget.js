@@ -87,7 +87,7 @@ ve.ui.MWParameterSearchWidget.prototype.onSearchResultsChoose = function ( item 
 };
 
 /**
- * Build a serchable index of parameters.
+ * Build a searchable index of parameters.
  *
  * @method
  * @param {ve.dm.MWTemplateSpecModel} spec Template specification

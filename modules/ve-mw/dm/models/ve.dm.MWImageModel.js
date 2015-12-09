@@ -320,7 +320,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 	} else {
 		// Call for updated scalable if we don't have dimensions from the API info
 		if ( this.getFilename() ) {
-			// Update anyways
+			// Update anyway
 			ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( function ( info ) {
 				imageModel.scalable.setOriginalDimensions( {
 					width: info.width,
@@ -691,7 +691,7 @@ ve.dm.MWImageModel.prototype.isDefaultAligned = function ( imageType, align ) {
 		defaultAlignment = ( this.parentDoc.getDir() === 'rtl' ) ? 'left' : 'right';
 
 	imageType = imageType || this.getType();
-	// No alignment specified means defeault alignment always
+	// No alignment specified means default alignment always
 	// Inline images have no align attribute; during the initialization
 	// stage of the model we have to account for that option. Later the
 	// model creates a faux alignment for inline images ('none' for default)
@@ -938,7 +938,7 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 
 	this.type = type;
 
-	// If we're switching between inline and block or vise versa,
+	// If we're switching between inline and block or vice versa,
 	// check if the old type image was default aligned
 	if ( isDefaultAligned && this.imageCurrentType !== this.type ) {
 		if ( this.type === 'none' || this.type === 'frameless' ) {

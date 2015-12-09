@@ -369,7 +369,7 @@ ve.ui.MWMediaSearchWidget.prototype.onResultsAdd = function ( items ) {
 				row = search.getAvailableRow();
 			}
 
-			// Add the commulative
+			// Add the cumulative
 			search.rows[ row ].width += itemWidth;
 
 			// Store reference to the item and to the row

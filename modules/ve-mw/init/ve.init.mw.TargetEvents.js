@@ -20,7 +20,7 @@ ve.init.mw.TargetEvents = function VeInitMwTargetEvents( target ) {
 	this.target.connect( this, {
 		saveWorkflowBegin: 'onSaveWorkflowBegin',
 		saveWorkflowEnd: 'onSaveWorkflowEnd',
-		saveInitiated: 'onSaveInitated',
+		saveInitiated: 'onSaveInitiated',
 		save: 'onSaveComplete',
 		saveReview: 'onSaveReview',
 		saveErrorEmpty: [ 'trackSaveError', 'empty' ],
@@ -80,7 +80,7 @@ ve.init.mw.TargetEvents.prototype.onSaveWorkflowEnd = function () {
 /**
  * Track when document save is initiated
  */
-ve.init.mw.TargetEvents.prototype.onSaveInitated = function () {
+ve.init.mw.TargetEvents.prototype.onSaveInitiated = function () {
 	this.timings.saveInitiated = ve.now();
 	this.timings.saveRetries++;
 	this.track( 'behavior.saveDialogOpenTillSave', {
@@ -216,14 +216,14 @@ ve.init.mw.TargetEvents.prototype.onNoChanges = function () {
 };
 
 /**
- * Track whe serilization is complete in review workflow
+ * Track when serialization is complete in review workflow
  */
 ve.init.mw.TargetEvents.prototype.onSerializeComplete = function () {
 	this.track( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
- * Track when there is a serlization error
+ * Track when there is a serialization error
  */
 ve.init.mw.TargetEvents.prototype.onSerializeError = function () {
 	if ( this.timings.saveWorkflowBegin ) {

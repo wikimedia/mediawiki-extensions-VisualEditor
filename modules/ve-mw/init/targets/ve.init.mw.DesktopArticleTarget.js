@@ -321,7 +321,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 /**
  * Handle the watch button being toggled on/off.
  *
- * @param {jQuery.Event} e Event object whih triggered the event
+ * @param {jQuery.Event} e Event object which triggered the event
  * @param {string} actionPerformed 'watch' or 'unwatch'
  */
 ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( e, actionPerformed ) {

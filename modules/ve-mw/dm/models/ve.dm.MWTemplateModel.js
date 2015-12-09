@@ -185,7 +185,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 /**
  * Get ordered list of parameter names.
  *
- * Numeric names, whether strings or real numbers, are placed at the begining, followed by
+ * Numeric names, whether strings or real numbers, are placed at the beginning, followed by
  * alphabetically sorted names.
  *
  * @return {string[]} List of parameter names

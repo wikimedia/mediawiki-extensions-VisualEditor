@@ -240,7 +240,7 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 						.append( viewNode.$element )
 				);
 				// HACK: See bug 62682 - We happen to know that destroy doesn't abort async
-				// rendering for generated content nodes, but we really can't gaurantee that in the
+				// rendering for generated content nodes, but we really can't guarantee that in the
 				// future - if you are here, debugging, because something isn't rendering properly,
 				// it's likely that something has changed and these assumptions are no longer valid
 				viewNode.destroy();

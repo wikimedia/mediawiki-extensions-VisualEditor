@@ -79,7 +79,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 /**
  * Fill from template.
  *
- * Filling is passive, so existing information is never overwitten. The spec should be re-filled
+ * Filling is passive, so existing information is never overwritten. The spec should be re-filled
  * after a parameter is added to ensure it's still complete, and this is safe because existing data
  * is never overwritten.
  */
@@ -276,7 +276,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
 };
 
 /**
- * Check if parameter is suggsted.
+ * Check if parameter is suggested.
  *
  * @param {string} name Parameter name
  * @return {boolean} Parameter is suggested

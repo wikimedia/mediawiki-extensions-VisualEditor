@@ -51,7 +51,7 @@ ve.ce.MWAlienExtensionNode.prototype.onAlienSetup = function () {
  * @inheritdoc ve.ce.MWExtensionNode
  */
 ve.ce.MWAlienExtensionNode.prototype.render = function ( generatedContents ) {
-	// Since render is trigerred before onSetup, we need to make sure that the
+	// Since render is triggered before onSetup, we need to make sure that the
 	// icon is detached only when it is defined and is not null
 	if ( this.$icon ) {
 		this.$icon.detach();

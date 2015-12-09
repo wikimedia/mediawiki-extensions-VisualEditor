@@ -111,7 +111,7 @@ ve.ui.MWTocWidget.prototype.onMetaListRemove = function ( metaItem ) {
 };
 
 /**
- * Initialize TOC based on the presense of magic words
+ * Initialize TOC based on the presence of magic words
  */
 ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
 	var i = 0,

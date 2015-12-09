@@ -133,7 +133,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 			attributes.type === 'thumb' ||
 			attributes.type === 'frameless'
 		) {
-			// We're gonna change .width and .height, store the original
+			// We're going to change .width and .height, store the original
 			// values so we can restore them later.
 			// FIXME "just" don't modify .width and .height instead
 			attributes.originalWidth = attributes.width;

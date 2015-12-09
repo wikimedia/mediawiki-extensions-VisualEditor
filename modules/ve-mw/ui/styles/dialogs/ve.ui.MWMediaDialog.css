@@ -69,7 +69,7 @@
 }
 
 /* HACK: Override ooui specific 2em top margin */
-.ve-ui-mwMediaDialog-caption-fielset.oo-ui-labelElement.oo-ui-fieldsetLayout {
+.ve-ui-mwMediaDialog-caption-fieldset.oo-ui-labelElement.oo-ui-fieldsetLayout {
 	margin-top: 0;
 }
 

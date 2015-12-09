@@ -638,7 +638,7 @@ ve.dm.mwExample.references = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwReferencesList',
-		// orginalDomElements: HTML,
+		// originalDomElements: HTML,
 		attributes: {
 			mw: {
 				name: 'references',

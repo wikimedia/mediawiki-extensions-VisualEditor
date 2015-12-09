@@ -28,7 +28,7 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	// Properties
 	this.$figure = $figure;
 	this.$image = $image;
-	// Parent constructor triggers render so this must preceed it
+	// Parent constructor triggers render so this must precede it
 	this.renderedDimensions = null;
 
 	// Parent constructor
@@ -129,7 +129,7 @@ ve.ce.MWImageNode.prototype.onParseSuccess = function ( deferred, response ) {
 /** */
 ve.ce.MWImageNode.prototype.render = function ( generatedContents ) {
 	this.$image.attr( 'src', generatedContents );
-	// As we only re-render when the image is larger than last renedered size
+	// As we only re-render when the image is larger than last rendered size
 	// this will always be the largest ever rendering
 	this.renderedDimensions = ve.copy( this.model.getScalable().getCurrentDimensions() );
 	if ( this.live ) {

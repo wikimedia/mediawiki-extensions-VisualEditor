@@ -553,7 +553,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
 
 					if (
 						( isAnon && userInfo.anon !== undefined ) ||
-							// Comparing id instead of name to pretect against possible
+							// Comparing id instead of name to protect against possible
 							// normalisation and against case where the user got renamed.
 							mw.config.get( 'wgUserId' ) === userInfo.id
 					) {
@@ -1029,7 +1029,7 @@ ve.init.mw.Target.prototype.onSaveDialogClose = function () {
  * Add reference insertion tools from on-wiki data.
  *
  * By adding a definition in JSON to MediaWiki:Visualeditor-cite-tool-definition, the cite menu can
- * be populated with tools that create refrences containing a specific templates. The content of the
+ * be populated with tools that create references containing a specific templates. The content of the
  * definition should be an array containing a series of objects, one for each tool. Each object must
  * contain a `name`, `icon` and `template` property. An optional `title` property can also be used
  * to define the tool title in plain text. The `name` property is a unique identifier for the tool,

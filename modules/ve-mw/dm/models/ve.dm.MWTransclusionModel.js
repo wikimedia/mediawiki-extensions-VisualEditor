@@ -360,7 +360,7 @@
 	/**
 	 * Replace part.
 	 *
-	 * Replace asynchonously.
+	 * Replace asynchronously.
 	 *
 	 * @param {ve.dm.MWTransclusionPartModel} remove Part to remove
 	 * @param {ve.dm.MWTransclusionPartModel} add Part to add
