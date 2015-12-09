@@ -15,6 +15,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-jscs' );
+	grunt.loadNpmTasks( 'grunt-tyops' );
 	grunt.loadTasks( 'lib/ve/build/tasks' );
 	grunt.loadTasks( 'build/tasks' );
 
@@ -50,6 +51,18 @@ module.exports = function ( grunt ) {
 				pathPrefix: 'lib/ve/',
 				indent: '\t\t'
 			}
+		},
+		tyops: {
+			options: {
+				typos: 'build/typos.json'
+			},
+			src: [
+				'**/*.{js,json,less,css,txt}',
+				'!build/typos.json',
+				'!lib/**',
+				'!{docs,node_modules,vendor}/**',
+				'!.git/**'
+			]
 		},
 		jshint: {
 			options: {
@@ -129,7 +142,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
