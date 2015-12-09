@@ -232,11 +232,34 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
-	var $checkboxes, defaults, data,
+	var $checkboxes, defaults, data, windowManager, editingTabDialog,
 		target = this;
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadSuccess.apply( this, arguments );
+
+	// Duplicate of this code in ve.init.mw.DesktopArticleTarget.init.js
+	if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
+		// Set up a temporary window manager
+		windowManager = new OO.ui.WindowManager();
+		$( 'body' ).append( windowManager.$element );
+		editingTabDialog = new mw.libs.ve.EditingTabDialog();
+		windowManager.addWindows( [ editingTabDialog ] );
+		windowManager.openWindow( editingTabDialog, { message: mw.msg(
+			'visualeditor-editingtabdialog-body',
+			$( '#ca-edit' ).text()
+		) } )
+			.then( function ( opened ) { return opened; } )
+			.then( function ( closing ) { return closing; } )
+			.then( function ( data ) {
+				// Detach the temporary window manager
+				windowManager.destroy();
+
+				if ( data && data.action === 'prefer-wt' ) {
+					target.switchToWikitextEditor( true, false );
+				}
+			} );
+	}
 
 	data = response ? response.visualeditor : {};
 
@@ -989,6 +1012,12 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// separate tab sections for content actions and namespaces the below is a no-op.
 	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
 	$( '#ca-ve-edit' ).addClass( 'selected' );
+	if (
+		mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+	) {
+		$( '#ca-edit' ).addClass( 'selected' );
+	}
 
 	mw.hook( 've.activate' ).fire();
 
@@ -997,12 +1026,23 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)
-	if ( !this.actFromPopState && history.pushState && this.currentUri.query.veaction !== 'edit' ) {
+	if (
+		!this.actFromPopState &&
+		history.pushState &&
+		this.currentUri.query.veaction !== 'edit' &&
+		this.currentUri.query.action !== 'edit'
+	) {
 		// Set the current URL
 		uri = this.currentUri;
-		uri.query.veaction = 'edit';
-		delete uri.query.action;
-		mw.config.set( 'wgAction', 'view' );
+
+		if ( mw.config.get( 'wgVisualEditorConfig' ).singleEditTab ) {
+			uri.query.action = 'edit';
+			mw.config.set( 'wgAction', 'edit' );
+		} else {
+			uri.query.veaction = 'edit';
+			delete uri.query.action;
+			mw.config.set( 'wgAction', 'view' );
+		}
 
 		history.pushState( this.popState, document.title, uri );
 	}
@@ -1019,6 +1059,12 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
 	// In skins having #ca-view (like Vector), select that.
 	$( '#ca-ve-edit' ).removeClass( 'selected' );
+	if (
+		mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+	) {
+		$( '#ca-edit' ).removeClass( 'selected' );
+	}
 	$( '#ca-view' ).addClass( 'selected' );
 
 	mw.hook( 've.deactivate' ).fire();
@@ -1329,6 +1375,9 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
 	var target = this;
+	$.cookie( 'VEE', 'wikitext', { path: '/', expires: 30 } );
+	new mw.Api().saveOption( 'visualeditor-editor', 'wikitext' );
+	mw.user.options.set( 'visualeditor-editor', 'wikitext' );
 	if ( discardChanges ) {
 		if ( modified ) {
 			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );

@@ -18,9 +18,9 @@
  * @singleton
  */
 ( function () {
-	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, pageCanLoadVE,
-		init, support, targetPromise, enable, tempdisable, autodisable, userPrefEnabled,
-		initialWikitext,
+	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
+		pageCanLoadVE, init, support, targetPromise, enable, tempdisable, autodisable,
+		userPrefEnabled, initialWikitext,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -148,17 +148,23 @@
 		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
 		if ( !active ) {
-			if ( history.pushState ) {
-				// Replace the current state with one that is tagged as ours, to prevent the
-				// back button from breaking when used to exit VE. FIXME: there should be a better
-				// way to do this. See also similar code in the DesktopArticleTarget constructor.
-				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
-				// Set veaction to edit
-				history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+			if ( $( '#ca-edit a' ).data( 'original-text' ) ) {
+				$( '#ca-edit a' ).text( $( '#ca-edit a' ).data( 'original-text' ) );
 			}
 
-			// Update mw.Uri instance
-			uri = veEditUri;
+			if ( uri.query.action !== 'edit' ) {
+				if ( history.pushState ) {
+					// Replace the current state with one that is tagged as ours, to prevent the
+					// back button from breaking when used to exit VE. FIXME: there should be a better
+					// way to do this. See also similar code in the DesktopArticleTarget constructor.
+					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+					// Set veaction to edit
+					history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+				}
+
+				// Update mw.Uri instance
+				uri = veEditUri;
+			}
 
 			activateTarget();
 		}
@@ -187,6 +193,10 @@
 			.done( function () {
 				incrementLoadingProgress();
 			} );
+
+		$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
+		new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
+		mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
 		showLoading();
@@ -218,6 +228,14 @@
 		mw.libs.ve.activationStart = ve.now();
 	}
 
+	function getLastEditor() {
+		var editor = $.cookie( 'VEE' );
+		if ( !mw.user.isAnon() || !editor ) {
+			editor = mw.user.options.get( 'visualeditor-editor' );
+		}
+		return editor;
+	}
+
 	conf = mw.config.get( 'wgVisualEditorConfig' );
 	tabMessages = conf.tabMessages;
 	uri = new mw.Uri();
@@ -229,10 +247,19 @@
 		mw.config.get( 'wgAction' ) === 'edit' ||
 		mw.config.get( 'wgAction' ) === 'submit'
 	);
+	isEditPage = conf.singleEditTab && (
+		uri.query.action === 'edit' ||
+		uri.query.action === 'submit'
+	);
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
-	veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
-	delete veEditUri.query.action;
+	if ( conf.singleEditTab ) {
+		veEditUri = viewUri.clone().extend( { action: 'edit' } );
+		delete veEditUri.query.veaction;
+	} else {
+		veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
+		delete veEditUri.query.action;
+	}
 
 	support = {
 		es5: !!(
@@ -382,22 +409,6 @@
 			} else if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.click( init.onEditTabClick );
-
-				if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
-					mw.loader.load( 'ext.visualEditor.switching' );
-					$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
-						mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
-							$( '.wikiEditor-ui-toolbar' ).prepend(
-								new OO.ui.ButtonWidget( {
-									framed: false,
-									icon: 'edit',
-									title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-									classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
-								} ).on( 'click', init.activateVe ).$element
-							);
-						} );
-					} );
-				}
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -636,6 +647,9 @@
 			conf.namespaces
 		) !== -1 &&
 
+		// Not on pages like Special:RevisionDelete
+		mw.config.get( 'wgNamespaceNumber' ) !== -1 &&
+
 		// Not on pages which are outputs of the Page Translation feature
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
@@ -664,36 +678,134 @@
 	}
 
 	$( function () {
-		var currentUri = new mw.Uri( location.href ),
-			isSection;
-
-		if ( currentUri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
+		var key;
+		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).val();
 		}
 
 		if ( init.isAvailable ) {
-			if ( pageCanLoadVE && uri.query.veaction === 'edit' ) {
-				isSection = uri.query.vesection !== undefined;
-
-				trackActivateStart( { type: isSection ? 'section' : 'page', mechanism: 'url' } );
+			if (
+				(
+					( isViewPage && uri.query.veaction === 'edit' ) ||
+					(
+						isEditPage &&
+						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt' &&
+						mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+					)
+				) &&
+				uri.query.veswitched === undefined && // TODO: other params too?
+				(
+					(
+						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' &&
+						mw.config.get( 'wgAction' ) !== 'submit'
+					) || getLastEditor() !== 'wikitext'
+				)
+			) {
+				trackActivateStart( {
+					type: uri.query.vesection === undefined ? 'page' : 'section',
+					mechanism: 'url'
+				} );
 				activateTarget();
+			}
+
+			if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
+				mw.loader.load( 'ext.visualEditor.switching' );
+				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
+					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
+						var windowManager, editingTabDialog;
+						$( '.wikiEditor-ui-toolbar' ).prepend(
+							new OO.ui.ButtonWidget( {
+								framed: false,
+								icon: 'edit',
+								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
+								classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
+							} ).on( 'click', init.activateVe ).$element
+						);
+
+						// Duplicate of this code in ve.init.mw.DesktopArticleTarget.js
+						if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
+							// Set up a temporary window manager
+							windowManager = new OO.ui.WindowManager();
+							$( 'body' ).append( windowManager.$element );
+							editingTabDialog = new mw.libs.ve.EditingTabDialog();
+							windowManager.addWindows( [ editingTabDialog ] );
+							windowManager.openWindow( editingTabDialog, { message: mw.msg(
+								'visualeditor-editingtabdialog-body',
+								$( '#ca-edit' ).text()
+							) } )
+								.then( function ( opened ) { return opened; } )
+								.then( function ( closing ) { return closing; } )
+								.then( function ( data ) {
+									// Detach the temporary window manager
+									windowManager.destroy();
+
+									if ( data && data.action === 'prefer-ve' ) {
+										location.href = veEditUri;
+									}
+								} );
+						}
+					} );
+				} );
+			}
+			if (
+				conf.singleEditTab &&
+				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
+				userPrefEnabled
+			) {
+				// Allow instant switching to edit mode, without refresh
+				$( '#ca-edit' ).click( function ( e ) {
+					if (
+						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
+						(
+							getLastEditor() !== 'wikitext' &&
+							mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
+						)
+					) {
+						trackActivateStart( { type: 'page', mechanism: 'click' } );
+						activateTarget();
+						e.preventDefault();
+					}
+				} );
+			} else if ( userPrefEnabled ) {
+				init.setupSkin();
 			}
 		}
 
-		if ( userPrefEnabled ) {
-			init.setupSkin();
+		if (
+			conf.singleEditTab &&
+			mw.user.options.get( 'visualeditor-tabs' ) === 'multi-tab' &&
+			userPrefEnabled &&
+			(
+				init.isAvailable &&
+				!mw.user.isAnon() &&
+				getLastEditor() === 'wikitext'
+			) || (
+				!init.isAvailable &&
+				mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve'
+			)
+		) {
+			key = pageExists ? 'edit' : 'create';
+			if ( $( '#ca-view-foreign' ).length ) {
+				key += 'localdescription';
+			}
+			key += 'source';
+			if ( tabMessages[ key ] !== null ) {
+				$( '#ca-edit a' )
+					.data( 'original-text', $( '#ca-edit a' ).text() )
+					.text( mw.msg( tabMessages[ key ] ) );
+			}
 		}
 
-		if ( currentUri.query.venotify ) {
+		if ( uri.query.venotify ) {
 			// The following messages can be used here:
 			// postedit-confirmation-saved
 			// postedit-confirmation-created
 			// postedit-confirmation-restored
 			mw.hook( 'postEdit' ).fire( {
-				message: mw.msg( 'postedit-confirmation-' + currentUri.query.venotify, mw.user )
+				message: mw.msg( 'postedit-confirmation-' + uri.query.venotify, mw.user )
 			} );
 
-			delete currentUri.query.venotify;
+			delete uri.query.venotify;
 		}
 	} );
 }() );
