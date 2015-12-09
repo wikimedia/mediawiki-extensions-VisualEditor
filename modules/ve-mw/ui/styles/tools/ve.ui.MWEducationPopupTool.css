@@ -45,6 +45,11 @@
 	margin-bottom: 1em;
 }
 
+.ve-ui-educationPopup .oo-ui-popupWidget {
+	/* Appear above local dialogs, e.g. toolbar dialog */
+	z-index: 3;
+}
+
 .ve-ui-educationPopup .oo-ui-popupWidget-body {
 	padding: 1em;
 }
