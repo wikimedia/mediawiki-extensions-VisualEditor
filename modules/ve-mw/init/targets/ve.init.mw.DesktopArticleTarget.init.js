@@ -752,6 +752,8 @@
 				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
 				userPrefEnabled
 			) {
+				// Handle section edit link clicks
+				$( '.mw-editsection a' ).on( 'click', init.onEditSectionLinkClick );
 				// Allow instant switching to edit mode, without refresh
 				$( '#ca-edit' ).click( function ( e ) {
 					if (
