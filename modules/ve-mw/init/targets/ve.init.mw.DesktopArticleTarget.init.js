@@ -408,7 +408,7 @@
 				$caVeEdit.remove();
 			} else if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
-				$caVeEdit.click( init.onEditTabClick );
+				$caVeEdit.on( 'click', init.onEditTabClick );
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -523,7 +523,7 @@
 				// and would preserve the wrong DOM with a diff on top.
 				$editsections
 					.find( '.mw-editsection-visualeditor' )
-						.click( init.onEditSectionLinkClick )
+						.on( 'click', init.onEditSectionLinkClick )
 				;
 			}
 		},
@@ -755,7 +755,7 @@
 				// Handle section edit link clicks
 				$( '.mw-editsection a' ).on( 'click', init.onEditSectionLinkClick );
 				// Allow instant switching to edit mode, without refresh
-				$( '#ca-edit' ).click( function ( e ) {
+				$( '#ca-edit' ).on( 'click', function ( e ) {
 					if (
 						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
 						(
