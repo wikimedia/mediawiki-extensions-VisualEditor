@@ -4,7 +4,8 @@
 			"DzWiki",
 			"KWiki",
 			"Srdjan m",
-			"Semso98"
+			"Semso98",
+			"Palapa"
 		]
 	},
 	"apihelp-visualeditor-description": "Prikazuje HTML5 za stranicu koristeći uslugu Parsoid.",
@@ -191,7 +192,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parametar je zastarjeo. $1",
 	"visualeditor-dialog-transclusion-loading": "Učitavanje...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Pokaži opcije",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Dodajete}} šablon \"$1\" na ovu stranicu. Šablon još uvijek nema opis, ali je moguće da postoje neke informacije na [[{{ns:template}}:$1|stranici šablona]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablon \"$1\" još uvijek nema opis, ali je moguće da postoje neke informacije na [[{{ns:template}}:$1|stranici šablona]].",
 	"visualeditor-dialog-transclusion-options": "Opcije",
 	"visualeditor-dialog-transclusion-param-default": "Predodređena vrijednost: $1",
 	"visualeditor-dialog-transclusion-param-example": "Primjer: $1",
