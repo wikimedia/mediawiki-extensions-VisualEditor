@@ -145,11 +145,20 @@
 	}
 
 	function activatePageTarget( modified ) {
+		var key;
 		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
 		if ( !active ) {
-			if ( $( '#ca-edit a' ).data( 'original-text' ) ) {
-				$( '#ca-edit a' ).text( $( '#ca-edit a' ).data( 'original-text' ) );
+			if (
+				mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+				mw.user.options.get( 'visualeditor-tabs' ) === 'remember-last'
+			) {
+				key = pageExists ? 'edit' : 'create';
+				if ( $( '#ca-view-foreign' ).length ) {
+					key += '-local';
+				}
+
+				$( '#ca-edit a' ).text( mw.msg( key ) );
 			}
 
 			if ( uri.query.action !== 'edit' ) {
@@ -698,7 +707,6 @@
 	}
 
 	$( function () {
-		var key;
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).val();
 		}
@@ -802,31 +810,6 @@
 				}
 			} else if ( userPrefEnabled ) {
 				init.setupSkin();
-			}
-		}
-
-		if (
-			conf.singleEditTab &&
-			mw.user.options.get( 'visualeditor-tabs' ) === 'multi-tab' &&
-			userPrefEnabled &&
-			(
-				init.isAvailable &&
-				!mw.user.isAnon() &&
-				getLastEditor() === 'wikitext'
-			) || (
-				!init.isAvailable &&
-				mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve'
-			)
-		) {
-			key = pageExists ? 'edit' : 'create';
-			if ( $( '#ca-view-foreign' ).length ) {
-				key += 'localdescription';
-			}
-			key += 'source';
-			if ( tabMessages[ key ] !== null ) {
-				$( '#ca-edit a' )
-					.data( 'original-text', $( '#ca-edit a' ).text() )
-					.text( mw.msg( tabMessages[ key ] ) );
 			}
 		}
 

@@ -86,18 +86,9 @@ class VisualEditorHooks {
 
 		$params = $req->getValueNames();
 
-		if ( $user->isAnon() ) {
-			$editor = $req->getCookie(
-				'VEE',
-				'',
-				User::getDefaultOption( 'visualeditor-editor' )
-			);
-		} else {
-			$editor = $user->getOption( 'visualeditor-editor' );
-		}
 		return $req->getVal( 'action' ) !== 'edit' ||
 			!$veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
-			$editor === 'wikitext' ||
+			self::getUserEditor( $user, $req ) === 'wikitext' ||
 			!$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ||
 			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
 			// check for parameters that VE does not handle
@@ -109,6 +100,40 @@ class VisualEditorHooks {
 			in_array( 'preloadtitle', $params ) ||
 			in_array( 'preloadparams', $params );
 			// Known-good parameters: edit, veaction, section, vesection, veswitched
+	}
+
+	private static function getUserEditor( User $user, WebRequest $req ) {
+		if ( $user->isAnon() ) {
+			return $req->getCookie(
+				'VEE',
+				'',
+				User::getDefaultOption( 'visualeditor-editor' )
+			);
+		} else {
+			return $user->getOption( 'visualeditor-editor' );
+		}
+	}
+
+	/**
+	 * Convert the content model of messages that are actually JSON to JSON.
+	 * This only affects validation and UI when saving and editing, not
+	 * loading the content.
+	 *
+	 * @param Title $title
+	 * @param string $model
+	 * @return bool
+	 */
+	public static function onContentHandlerDefaultModelFor( Title $title, &$model ) {
+		$messages = array(
+			'Visualeditor-cite-tool-definition.json',
+			'Visualeditor-quick-access-characters.json'
+		);
+
+		if ( $title->inNamespace( NS_MEDIAWIKI ) && in_array( $title->getText(), $messages ) ) {
+			$model = CONTENT_MODEL_JSON;
+		}
+
+		return true;
 	}
 
 	/**
@@ -128,15 +153,20 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		// Exit if we're using the single edit tab.
+		$user = $skin->getUser();
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
-			$skin->getUser()->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
+			$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt'
+		) {
+			return true;
+		}
+
+		if (
+			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			$user->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
 		) {
 			$dbr = wfGetDB( DB_SLAVE );
-			$user = RequestContext::getMain()->getUser();
 			if (
-				$config->get( 'VisualEditorUseSingleEditTab' ) &&
 				!$user->isAnon() &&
 				!$user->getOption( 'visualeditor-autodisable' ) &&
 				!$user->getOption( 'visualeditor-betatempdisable' ) &&
@@ -155,18 +185,16 @@ class VisualEditorHooks {
 					array( 'LIMIT' => 1 )
 				)->numRows() === 1
 			) {
-				wfDebugLog( 'debug', 'ok' );
 				$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
 			}
-			return true;
 		}
 
 		// Exit if the user doesn't have VE enabled
 		if (
-			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-autodisable' ) ||
-			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
+			!$user->getOption( 'visualeditor-enable' ) ||
+			$user->getOption( 'visualeditor-betatempdisable' ) ||
+			$user->getOption( 'visualeditor-autodisable' ) ||
+			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
 		) {
 			return true;
 		}
@@ -228,7 +256,28 @@ class VisualEditorHooks {
 				if ( $editTabMessage !== null ) {
 					$editTab['text'] = $skin->msg( $editTabMessage )->text();
 				}
-				if ( $isAvailable ) {
+
+				$editor = self::getUserEditor( $user, RequestContext::getMain()->getRequest() );
+				if (
+					$isAvailable &&
+					$config->get( 'VisualEditorUseSingleEditTab' ) &&
+					(
+						$user->getOption( 'visualeditor-tabs' ) === 'prefer-ve' ||
+						(
+							$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+							$editor === 'visualeditor'
+						)
+					)
+				) {
+					$editTab['text'] = $veTabText;
+					$newViews['edit'] = $editTab;
+				} elseif (
+					$isAvailable &&
+					(
+						!$config->get( 'VisualEditorUseSingleEditTab' ) ||
+						$user->getOption( 'visualeditor-tabs' ) === 'multi-tab'
+					)
+				) {
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
 						$editTab['class'] .= ' collapsible';
@@ -239,9 +288,19 @@ class VisualEditorHooks {
 						$newViews['edit'] = $editTab;
 						$newViews['ve-edit'] = $veTab;
 					}
-				} else {
+				} elseif (
+					!$config->get( 'VisualEditorUseSingleEditTab' ) ||
+					!$isAvailable ||
+					$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
+					(
+						$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+						$editor === 'wikitext'
+					)
+				) {
 					// Don't add ve-edit, but do update the edit tab (e.g. "Edit source").
 					$newViews['edit'] = $editTab;
+				} else {
+					// This should not happen.
 				}
 			} else {
 				// Just pass through

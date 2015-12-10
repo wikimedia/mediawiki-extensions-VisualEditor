@@ -287,7 +287,11 @@
 				"postedit-confirmation-created",
 				"postedit-confirmation-restored",
 				"postedit-confirmation-saved",
-				"visualeditor-mweditmodeve-tool"
+				"visualeditor-mweditmodeve-tool",
+				"edit",
+				"create",
+				"edit-local",
+				"create-local"
 			],
 			"position": "top"
 		},
