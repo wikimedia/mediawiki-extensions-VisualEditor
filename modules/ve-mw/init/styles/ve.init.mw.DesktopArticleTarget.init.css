@@ -89,13 +89,3 @@
 .mw-editsection-divider {
 	color: #555;
 }
-
-.ve-tabmessage-appendix {
-	font-size: 0.7em;
-	vertical-align: top;
-	line-height: 1.43em;
-	padding-left: 0.5em;
-	/* Use !important to override div.vectorTabs span */
-	background-image: none !important;
-	display: inline !important;
-}
