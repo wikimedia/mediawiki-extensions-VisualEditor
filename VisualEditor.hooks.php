@@ -101,9 +101,14 @@ class VisualEditorHooks {
 			!$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ||
 			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
 			// check for parameters that VE does not handle
-			in_array( 'preload', $params ) ||
+			// TODO: other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
+			in_array( 'veswitched', $params ) ||
+			in_array( 'undo', $params ) ||
+			in_array( 'undoafter', $params ) ||
 			in_array( 'editintro', $params ) ||
-			in_array( 'veswitched', $params );
+			in_array( 'preload', $params ) ||
+			in_array( 'preloadtitle', $params ) ||
+			in_array( 'preloadparams', $params );
 	}
 
 	/**

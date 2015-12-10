@@ -701,7 +701,14 @@
 						)
 					)
 				) &&
-				uri.query.veswitched === undefined // TODO: other params too?
+				uri.query.veswitched === undefined &&
+				uri.query.undo === undefined &&
+				uri.query.undoafter === undefined &&
+				uri.query.editintro === undefined &&
+				uri.query.preload === undefined &&
+				uri.query.preloadtitle === undefined &&
+				uri.query.preloadparams === undefined
+				// TODO: other params too? See identical list in VisualEditor.hooks.php
 			) {
 				trackActivateStart( {
 					type: uri.query.vesection === undefined ? 'page' : 'section',
