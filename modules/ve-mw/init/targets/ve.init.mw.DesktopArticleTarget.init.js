@@ -779,8 +779,7 @@
 							editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
 							windowManager.openWindow( editingTabDialog, { message: mw.msg(
-								'visualeditor-editingtabdialog-body',
-								$( '#ca-edit' ).text()
+								'visualeditor-editingtabdialog-body'
 							) } )
 								.then( function ( opened ) { return opened; } )
 								.then( function ( closing ) { return closing; } )
