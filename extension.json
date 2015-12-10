@@ -61,7 +61,7 @@
 			"editsectionappendix": null,
 			"editsectionsourceappendix": null
 		},
-		"VisualEditorShowBetaWelcome": false,
+		"VisualEditorShowBetaWelcome": true,
 		"VisualEditorParsoidHTTPProxy": false,
 		"VisualEditorBrowserBlacklist": {
 			"msie": [
