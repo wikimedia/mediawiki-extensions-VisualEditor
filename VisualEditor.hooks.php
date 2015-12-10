@@ -587,6 +587,8 @@ class VisualEditorHooks {
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
 			'fullRestbaseUrl' => $coreConfig->get( 'VisualEditorFullRestbaseURL' ),
+			'feedbackApiUrl' =>  $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
+			'feedbackTitle' =>  $veConfig->get( 'VisualEditorFeedbackTitle' ),
 		);
 
 		return true;
