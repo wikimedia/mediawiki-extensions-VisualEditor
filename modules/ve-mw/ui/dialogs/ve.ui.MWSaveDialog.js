@@ -65,7 +65,6 @@ ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'approve',
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review-good' ),
-		flags: [ 'progressive', 'primary' ],
 		modes: 'review'
 	},
 	{
