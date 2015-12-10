@@ -223,6 +223,7 @@
 	"visualeditor-differror": "Errore carrecann' 'e date 'a 'o server: $1.",
 	"visualeditor-donebutton-tooltip": "Cagnamiente fatte",
 	"visualeditor-editconflict": "'E cagnamiente vuoste nun ponno essere riggistrate pecche nce sta nu cunflitt' 'e cagnamiente. {{GENDER:|Vuje}} vulite arricettà stu cunflitto a mmano?",
+	"visualeditor-editingtabdialog-ok": "OK",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|nutifica|nutifiche}}",
 	"visualeditor-editnotices-tooltip": "Mmasciate 'avviso p' 'e cagnamiente",
 	"visualeditor-editsummary": "Descrive ch'avite cagnato",

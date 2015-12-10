@@ -190,6 +190,7 @@
 	"visualeditor-differror": "Feeler beim Luede vun den Donnéeë vum Server: $1",
 	"visualeditor-donebutton-tooltip": "Fäerdeg mat Änneren",
 	"visualeditor-editconflict": "Är Ännerunge konnte wéinst engem Ännerungskonflikt net gespäichert ginn. Wëllt {{Gender:|Dir}} de Konflikt manuell léisen?",
+	"visualeditor-editingtabdialog-ok": "OK",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Eng  Notiz|$1 Notizen}}",
 	"visualeditor-editnotices-tooltip": "Ännerungsnotizen",
 	"visualeditor-editsummary": "Beschreift wat dir geännert hutt",
