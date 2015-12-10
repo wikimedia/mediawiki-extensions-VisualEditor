@@ -179,14 +179,26 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 	this.popup.toggle( false );
 	if ( !this.feedbackPromise ) {
 		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( function () {
+			var feedbackConfig, veConfig;
+
 			// This can't be constructed until the editor has loaded as it uses special messages
-			return new mw.Feedback( {
-				title: new mw.Title( ve.msg( 'visualeditor-feedback-link' ) ),
+			feedbackConfig = {
 				bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/create/?projects=VisualEditor' ),
 				bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' ),
 				showUseragentCheckbox: true,
 				useragentCheckboxMandatory: true
-			} );
+			};
+
+			// If so configured, tell mw.feedback that we're posting to a remote wiki and set the title
+			veConfig = mw.config.get( 'wgVisualEditorConfig' );
+			if ( veConfig.feedbackApiUrl ) {
+				feedbackConfig.apiUrl = veConfig.feedbackApiUrl;
+				feedbackConfig.title = new mw.Title( veConfig.feedbackTitle );
+			} else {
+				feedbackConfig.title = new mw.Title( ve.msg( 'visualeditor-feedback-link' ) );
+			}
+
+			return new mw.Feedback( feedbackConfig );
 		} );
 	}
 	this.feedbackPromise.done( function ( feedback ) {

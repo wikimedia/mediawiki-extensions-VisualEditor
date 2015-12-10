@@ -29,6 +29,8 @@
 		},
 		"VisualEditorRestbaseURL": false,
 		"VisualEditorFullRestbaseURL": false,
+		"VisualEditorFeedbackAPIURL": false,
+		"VisualEditorFeedbackTitle": false,
 		"VisualEditorSerializationCacheTimeout": 3600,
 		"VisualEditorUseChangeTagging": true,
 		"VisualEditorSupportedSkins": [
