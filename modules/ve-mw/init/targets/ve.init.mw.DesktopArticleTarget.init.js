@@ -177,7 +177,7 @@
 	 * E.g. `activateTarget( getTarget().then( function( target ) { target.doAThing(); } ) );`
 	 *
 	 * @private
-	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.Target
+	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
 	function activateTarget( targetPromise, modified ) {

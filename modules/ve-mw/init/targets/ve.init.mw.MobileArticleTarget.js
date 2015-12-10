@@ -9,7 +9,7 @@
  * MediaWiki mobile article target.
  *
  * @class
- * @extends ve.init.mw.Target
+ * @extends ve.init.mw.ArticleTarget
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -36,7 +36,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 
 /* Inheritance */
 
-OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.Target );
+OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.ArticleTarget );
 
 /* Static Properties */
 

@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MediaWiki Initialization Target class.
+ * VisualEditor MediaWiki Initialization ArticleTarget class.
  *
  * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -8,7 +8,7 @@
 /*global EasyDeflate, alert */
 
 /**
- * Initialization MediaWiki target.
+ * Initialization MediaWiki article target.
  *
  * @class
  * @extends ve.init.Target
@@ -19,7 +19,7 @@
  *  revision id here. Defaults to loading the latest version (see #load).
  * @param {Object} [config] Configuration options
  */
-ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
+ve.init.mw.ArticleTarget = function VeInitArticleMwTarget( pageName, revisionId, config ) {
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		shadow: true,
@@ -28,7 +28,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	}, config.toolbarConfig );
 
 	// Parent constructor
-	ve.init.mw.Target.super.call( this, config );
+	ve.init.mw.ArticleTarget.super.call( this, config );
 
 	// Properties
 	this.saveDialog = null;
@@ -57,7 +57,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 	this.generateCitationFeatures();
 
 	// Initialization
-	this.$element.addClass( 've-init-mw-target' );
+	this.$element.addClass( 've-init-mw-articleTarget' );
 
 	// Events
 	this.connect( this, {
@@ -67,7 +67,7 @@ ve.init.mw.Target = function VeInitMwTarget( pageName, revisionId, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.init.mw.Target, ve.init.Target );
+OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.Target );
 
 /* Events */
 
@@ -152,9 +152,9 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
 /* Static Properties */
 
-ve.init.mw.Target.static.citationToolsLimit = 5;
+ve.init.mw.ArticleTarget.static.citationToolsLimit = 5;
 
-ve.init.mw.Target.static.toolbarGroups = [
+ve.init.mw.ArticleTarget.static.toolbarGroups = [
 	// History
 	{ include: [ 'undo', 'redo' ] },
 	// Format
@@ -221,7 +221,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{ include: [ 'specialCharacter' ] }
 ];
 
-ve.init.mw.Target.static.importRules = {
+ve.init.mw.ArticleTarget.static.importRules = {
 	external: {
 		blacklist: [
 			// Annotations
@@ -241,7 +241,7 @@ ve.init.mw.Target.static.importRules = {
  * @property {string}
  * @inheritable
  */
-ve.init.mw.Target.static.name = 'mwTarget';
+ve.init.mw.ArticleTarget.static.name = 'mwTarget';
 
 /**
  * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.
@@ -250,7 +250,7 @@ ve.init.mw.Target.static.name = 'mwTarget';
  * @property {string}
  * @inheritable
  */
-ve.init.mw.Target.static.integrationType = 'page';
+ve.init.mw.ArticleTarget.static.integrationType = 'page';
 
 /**
  * Type of platform. Used by ve.init.mw.trackSubscriber.js for event tracking.
@@ -259,7 +259,7 @@ ve.init.mw.Target.static.integrationType = 'page';
  * @property {string}
  * @inheritable
  */
-ve.init.mw.Target.static.platformType = 'other';
+ve.init.mw.ArticleTarget.static.platformType = 'other';
 
 /* Static Methods */
 
@@ -271,7 +271,7 @@ ve.init.mw.Target.static.platformType = 'other';
  *
  * @param {HTMLDocument} doc Parsoid document
  */
-ve.init.mw.Target.static.fixBase = function ( doc ) {
+ve.init.mw.ArticleTarget.static.fixBase = function ( doc ) {
 	ve.fixBase( doc, document, ve.resolveUrl(
 		// Don't replace $1 with the page name, because that'll break if
 		// the page name contains a slash
@@ -292,7 +292,7 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
  * @param {Object} response API response data
  * @param {string} status Text status message
  */
-ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
+ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	var i, len, linkData, aboutDoc, docRevId, docRevIdMatches,
 		data = response ? response.visualeditor : null;
 
@@ -378,7 +378,7 @@ ve.init.mw.Target.prototype.loadSuccess = function ( response ) {
  *
  * @fires surfaceReady
  */
-ve.init.mw.Target.prototype.onReady = function () {
+ve.init.mw.ArticleTarget.prototype.onReady = function () {
 	var target = this;
 
 	// We need to wait until onReady as local notices may require special messages
@@ -405,7 +405,7 @@ ve.init.mw.Target.prototype.onReady = function () {
  *
  * @method
  */
-ve.init.mw.Target.prototype.onSurfaceReady = function () {
+ve.init.mw.ArticleTarget.prototype.onSurfaceReady = function () {
 	this.setupToolbarSaveButton();
 	this.attachToolbarSaveButton();
 	this.restoreEditSection();
@@ -421,7 +421,7 @@ ve.init.mw.Target.prototype.onSurfaceReady = function () {
  * @param {Object} error Object containing xhr, textStatus and exception keys
  * @fires loadError
  */
-ve.init.mw.Target.prototype.loadFail = function () {
+ve.init.mw.ArticleTarget.prototype.loadFail = function () {
 	this.loading = false;
 	this.emit( 'loadError' );
 };
@@ -437,7 +437,7 @@ ve.init.mw.Target.prototype.loadFail = function () {
  * @param {Object} response Response data
  * @param {string} status Text status message
  */
-ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
+ve.init.mw.ArticleTarget.prototype.saveSuccess = function ( doc, saveData, response ) {
 	var data = response.visualeditoredit;
 	this.saving = false;
 	if ( !data ) {
@@ -478,7 +478,7 @@ ve.init.mw.Target.prototype.saveSuccess = function ( doc, saveData, response ) {
  * @param {Object} jsconfigvars The mw.config values needed on the page
  * @fires save
  */
-ve.init.mw.Target.prototype.saveComplete = function () {
+ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
 	this.saveDeferred.resolve();
 	this.emit( 'save' );
 };
@@ -493,7 +493,7 @@ ve.init.mw.Target.prototype.saveComplete = function () {
  * @param {string} status Text status message
  * @param {Object|null} data API response data
  */
-ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, data ) {
+ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, status, data ) {
 	var api, editApi,
 		target = this;
 
@@ -620,7 +620,7 @@ ve.init.mw.Target.prototype.saveFail = function ( doc, saveData, jqXHR, status, 
  * @param {Object} response API response data
  * @param {string} status Text status message
  */
-ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
+ve.init.mw.ArticleTarget.prototype.showChangesSuccess = function ( response ) {
 	var data = response.visualeditor;
 	this.diffing = false;
 	if ( !data && !response.error ) {
@@ -648,7 +648,7 @@ ve.init.mw.Target.prototype.showChangesSuccess = function ( response ) {
  * @param {string} diffHtml Diff HTML
  * @fires showChanges
  */
-ve.init.mw.Target.prototype.showChangesDiff = function ( diffHtml ) {
+ve.init.mw.ArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
 	this.emit( 'showChanges' );
 
 	// Invalidate the viewer diff on next change
@@ -662,13 +662,13 @@ ve.init.mw.Target.prototype.showChangesDiff = function ( diffHtml ) {
  * Handle errors during showChanges action.
  *
  * @method
- * @this ve.init.mw.Target
+ * @this ve.init.mw.ArticleTarget
  * @param {Object} jqXHR
  * @param {string} status Text status message
  * @param {Mixed} error HTTP status text
  * @fires showChangesError
  */
-ve.init.mw.Target.prototype.showChangesFail = function ( jqXHR, status ) {
+ve.init.mw.ArticleTarget.prototype.showChangesFail = function ( jqXHR, status ) {
 	this.diffing = false;
 	this.emit( 'showChangesError' );
 
@@ -686,7 +686,7 @@ ve.init.mw.Target.prototype.showChangesFail = function ( jqXHR, status ) {
  *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
  * @param {boolean} [warning=false] Whether or not this is a warning.
  */
-ve.init.mw.Target.prototype.showSaveError = function ( msg, allowReapply, warning ) {
+ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
 	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
 };
 
@@ -696,7 +696,7 @@ ve.init.mw.Target.prototype.showSaveError = function ( msg, allowReapply, warnin
  * @method
  * @fires saveErrorEmpty
  */
-ve.init.mw.Target.prototype.saveErrorEmpty = function () {
+ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
 	this.emit( 'saveErrorEmpty' );
 };
@@ -708,7 +708,7 @@ ve.init.mw.Target.prototype.saveErrorEmpty = function () {
  * @param {Object} editApi
  * @fires saveErrorSpamBlacklist
  */
-ve.init.mw.Target.prototype.saveErrorSpamBlacklist = function ( editApi ) {
+ve.init.mw.ArticleTarget.prototype.saveErrorSpamBlacklist = function ( editApi ) {
 	this.showSaveError(
 		$( $.parseHTML( editApi.sberrorparsed ) ),
 		false // prevents reapply
@@ -723,7 +723,7 @@ ve.init.mw.Target.prototype.saveErrorSpamBlacklist = function ( editApi ) {
  * @param {Object} editApi
  * @fires saveErrorAbuseFilter
  */
-ve.init.mw.Target.prototype.saveErrorAbuseFilter = function ( editApi ) {
+ve.init.mw.ArticleTarget.prototype.saveErrorAbuseFilter = function ( editApi ) {
 	this.showSaveError( $( $.parseHTML( editApi.warning ) ) );
 	// Don't disable the save button. If the action is not disallowed the user may save the
 	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
@@ -737,7 +737,7 @@ ve.init.mw.Target.prototype.saveErrorAbuseFilter = function ( editApi ) {
  * @method
  * @fires saveErrorTitleBlacklist
  */
-ve.init.mw.Target.prototype.saveErrorTitleBlacklist = function () {
+ve.init.mw.ArticleTarget.prototype.saveErrorTitleBlacklist = function () {
 	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
 	this.emit( 'saveErrorTitleBlacklist' );
 };
@@ -749,7 +749,7 @@ ve.init.mw.Target.prototype.saveErrorTitleBlacklist = function () {
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
  * @fires saveErrorNewUser
  */
-ve.init.mw.Target.prototype.saveErrorNewUser = function ( username ) {
+ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
 	var badToken, userMsg;
 	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
 	if ( username === null ) {
@@ -771,7 +771,7 @@ ve.init.mw.Target.prototype.saveErrorNewUser = function ( username ) {
  * @param {Object|null} data API response data
  * @fires onSaveErrorUnknown
  */
-ve.init.mw.Target.prototype.saveErrorUnknown = function ( editApi, data ) {
+ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data ) {
 	this.showSaveError(
 		$( document.createTextNode(
 			( editApi && editApi.info ) ||
@@ -791,7 +791,7 @@ ve.init.mw.Target.prototype.saveErrorUnknown = function ( editApi, data ) {
  * @method
  * @fires saveErrorBadToken
  */
-ve.init.mw.Target.prototype.saveErrorBadToken = function () {
+ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
 	this.emit( 'saveErrorBadToken' );
 };
 
@@ -802,7 +802,7 @@ ve.init.mw.Target.prototype.saveErrorBadToken = function () {
  * @param {Object} editApi
  * @fires saveErrorCaptcha
  */
-ve.init.mw.Target.prototype.saveErrorCaptcha = function ( editApi ) {
+ve.init.mw.ArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
 	var $captchaDiv = $( '<div>' ),
 		$captchaParagraph = $( '<p>' );
 
@@ -860,7 +860,7 @@ ve.init.mw.Target.prototype.saveErrorCaptcha = function ( editApi ) {
  * @method
  * @fires saveErrorPageDeleted
  */
-ve.init.mw.Target.prototype.saveErrorPageDeleted = function () {
+ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 	this.pageDeletedWarning = true;
 	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true, true );
 	this.emit( 'saveErrorPageDeleted' );
@@ -872,7 +872,7 @@ ve.init.mw.Target.prototype.saveErrorPageDeleted = function () {
  * @method
  * @fires editConflict
  */
-ve.init.mw.Target.prototype.editConflict = function () {
+ve.init.mw.ArticleTarget.prototype.editConflict = function () {
 	this.emit( 'editConflict' );
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'conflict' );
@@ -884,7 +884,7 @@ ve.init.mw.Target.prototype.editConflict = function () {
  * @method
  * @fires noChanges
  */
-ve.init.mw.Target.prototype.noChanges = function () {
+ve.init.mw.ArticleTarget.prototype.noChanges = function () {
 	this.emit( 'noChanges' );
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'nochanges' );
@@ -902,7 +902,7 @@ ve.init.mw.Target.prototype.noChanges = function () {
  * @param {string} status Text status message
  * @fires serializeComplete
  */
-ve.init.mw.Target.prototype.serializeSuccess = function ( response ) {
+ve.init.mw.ArticleTarget.prototype.serializeSuccess = function ( response ) {
 	var data = response.visualeditor;
 	this.serializing = false;
 	if ( !data && !response.error ) {
@@ -937,7 +937,7 @@ ve.init.mw.Target.prototype.serializeSuccess = function ( response ) {
  * @param {Mixed|null} error HTTP status text
  * @fires serializeError
  */
-ve.init.mw.Target.prototype.serializeFail = function () {
+ve.init.mw.ArticleTarget.prototype.serializeFail = function () {
 	this.serializing = false;
 	this.emit( 'serializeError' );
 };
@@ -948,7 +948,7 @@ ve.init.mw.Target.prototype.serializeFail = function () {
  * @method
  * @fires saveReview
  */
-ve.init.mw.Target.prototype.onSaveDialogReview = function () {
+ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.getActions().setAbilities( { approve: false } );
@@ -970,7 +970,7 @@ ve.init.mw.Target.prototype.onSaveDialogReview = function () {
  * @method
  * @param {string} wikitext
  */
-ve.init.mw.Target.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
+ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	// Invalidate the viewer wikitext on next change
 	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
@@ -983,7 +983,7 @@ ve.init.mw.Target.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
  *
  * @method
  */
-ve.init.mw.Target.prototype.onSaveDialogResolveConflict = function () {
+ve.init.mw.ArticleTarget.prototype.onSaveDialogResolveConflict = function () {
 	// Get Wikitext from the DOM, and set up a submit call when it's done
 	this.serialize(
 		this.docToSave,
@@ -995,7 +995,7 @@ ve.init.mw.Target.prototype.onSaveDialogResolveConflict = function () {
  * Handle dialog retry events
  * So we can handle trying to save again after page deletion warnings
  */
-ve.init.mw.Target.prototype.onSaveDialogRetry = function () {
+ve.init.mw.ArticleTarget.prototype.onSaveDialogRetry = function () {
 	if ( this.pageDeletedWarning ) {
 		this.recreating = true;
 		this.pageExists = false;
@@ -1007,7 +1007,7 @@ ve.init.mw.Target.prototype.onSaveDialogRetry = function () {
  *
  * @fires saveWorkflowEnd
  */
-ve.init.mw.Target.prototype.onSaveDialogClose = function () {
+ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
 	var target = this;
 
 	function clear() {
@@ -1041,7 +1041,7 @@ ve.init.mw.Target.prototype.onSaveDialogClose = function () {
  * [ { "name": "web", "icon": "cite-web", "template": "Cite web" }, ... ]
  *
  */
-ve.init.mw.Target.prototype.generateCitationFeatures = function () {
+ve.init.mw.ArticleTarget.prototype.generateCitationFeatures = function () {
 	var i, len, item, name, data, tool, tools, dialog, contextItem,
 		limit = this.constructor.static.citationToolsLimit;
 
@@ -1123,7 +1123,7 @@ ve.init.mw.Target.prototype.generateCitationFeatures = function () {
  * @param {HTMLDocument} newDoc Document generated by ve.dm.Converter. Will be modified.
  * @return {string} Full HTML document
  */
-ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
+ve.init.mw.ArticleTarget.prototype.getHtml = function ( newDoc ) {
 	var i, len, oldDoc = this.doc;
 
 	function copyAttributes( from, to ) {
@@ -1164,7 +1164,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc ) {
  * @return {jQuery.Promise} Promise resolved with deflated HTML
  * @see #getHtml
  */
-ve.init.mw.Target.prototype.deflateHtml = function ( newDoc ) {
+ve.init.mw.ArticleTarget.prototype.deflateHtml = function ( newDoc ) {
 	var html = this.getHtml( newDoc );
 	return mw.loader.using( 'easy-deflate.deflate' )
 		.then( function () {
@@ -1181,7 +1181,7 @@ ve.init.mw.Target.prototype.deflateHtml = function ( newDoc ) {
  * @param {jQuery.Promise} [dataPromise] Promise for pending request, if any
  * @return {boolean} Loading has been started
 */
-ve.init.mw.Target.prototype.load = function ( dataPromise ) {
+ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	// Prevent duplicate requests
 	if ( this.loading ) {
 		return false;
@@ -1204,7 +1204,7 @@ ve.init.mw.Target.prototype.load = function ( dataPromise ) {
 /**
  * Clear the state of this target, preparing it to be reactivated later.
  */
-ve.init.mw.Target.prototype.clearState = function () {
+ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.clearPreparedCacheKey();
 	this.loading = false;
 	this.saving = false;
@@ -1226,7 +1226,7 @@ ve.init.mw.Target.prototype.clearState = function () {
  * @abstract
  * @method
  */
-ve.init.mw.Target.prototype.editSource = null;
+ve.init.mw.ArticleTarget.prototype.editSource = null;
 
 /**
  * Serialize the current document and store the result in the serialization cache on the server.
@@ -1242,7 +1242,7 @@ ve.init.mw.Target.prototype.editSource = null;
  * @param {HTMLDocument} doc Document to serialize
  * @return {jQuery.Promise} Abortable promise, resolved with the cache key.
  */
-ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
+ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 	var xhr, deflated,
 		aborted = false,
 		start = ve.now(),
@@ -1308,7 +1308,7 @@ ve.init.mw.Target.prototype.prepareCacheKey = function ( doc ) {
  * @param {HTMLDocument} doc Document to serialize
  * @return {jQuery.Promise} Abortable promise, resolved with the cache key.
  */
-ve.init.mw.Target.prototype.getPreparedCacheKey = function ( doc ) {
+ve.init.mw.ArticleTarget.prototype.getPreparedCacheKey = function ( doc ) {
 	var deferred;
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
 		return this.preparedCacheKeyPromise;
@@ -1321,7 +1321,7 @@ ve.init.mw.Target.prototype.getPreparedCacheKey = function ( doc ) {
 /**
  * Clear the promise for the prepared wikitext cache key, and abort it if it's still in progress.
  */
-ve.init.mw.Target.prototype.clearPreparedCacheKey = function () {
+ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
 	if ( this.preparedCacheKeyPromise ) {
 		this.preparedCacheKeyPromise.abort();
 		this.preparedCacheKeyPromise = null;
@@ -1340,7 +1340,7 @@ ve.init.mw.Target.prototype.clearPreparedCacheKey = function () {
  *  depending on whether or not a cache key was used.
  * @return {jQuery.Promise}
  */
-ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
+ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
 	var data,
 		preparedCacheKey = this.getPreparedCacheKey( doc ),
 		target = this;
@@ -1427,7 +1427,7 @@ ve.init.mw.Target.prototype.tryWithPreparedCacheKey = function ( doc, options, e
  *  succeeds/fails.
  * @fires saveInitiated
  */
-ve.init.mw.Target.prototype.startSave = function ( saveDeferred ) {
+ve.init.mw.ArticleTarget.prototype.startSave = function ( saveDeferred ) {
 	var saveOptions;
 
 	if ( this.deactivating ) {
@@ -1469,7 +1469,7 @@ ve.init.mw.Target.prototype.startSave = function ( saveDeferred ) {
  *
  * @return {Object} Form data for submission to the MediaWiki action=edit UI
  */
-ve.init.mw.Target.prototype.getSaveFields = function () {
+ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
 	var fields = {
 		wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
 		wpCaptchaId: this.captcha && this.captcha.id,
@@ -1488,7 +1488,7 @@ ve.init.mw.Target.prototype.getSaveFields = function () {
  * @param {string} wikitext Wikitext to submit
  * @return {boolean} Whether submission was started
  */
-ve.init.mw.Target.prototype.submitWithSaveFields = function ( fields, wikitext ) {
+ve.init.mw.ArticleTarget.prototype.submitWithSaveFields = function ( fields, wikitext ) {
 	return this.submit( wikitext, $.extend( this.getSaveFields(), fields ) );
 };
 
@@ -1497,7 +1497,7 @@ ve.init.mw.Target.prototype.submitWithSaveFields = function ( fields, wikitext )
  *
  * @return {Object} Save options for submission to the MediaWiki API
  */
-ve.init.mw.Target.prototype.getSaveOptions = function () {
+ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
 	var key,
 		options = this.getSaveFields(),
 		fieldMap = {
@@ -1533,7 +1533,7 @@ ve.init.mw.Target.prototype.getSaveOptions = function () {
  *  - {boolean} watch Watch the page
  * @return {boolean} Saving has been started
 */
-ve.init.mw.Target.prototype.save = function ( doc, options ) {
+ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 	var data;
 	// Prevent duplicate requests
 	if ( this.saving ) {
@@ -1564,7 +1564,7 @@ ve.init.mw.Target.prototype.save = function ( doc, options ) {
  * @param {HTMLDocument} doc Document to compare against (via wikitext)
  * @return {boolean} Diffing has been started
 */
-ve.init.mw.Target.prototype.showChanges = function ( doc ) {
+ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
 	if ( this.diffing ) {
 		return false;
 	}
@@ -1594,7 +1594,7 @@ ve.init.mw.Target.prototype.showChanges = function ( doc ) {
  *  save the wikitext, add { wpSave: 1 }. To go to the diff view, add { wpDiff: 1 }.
  * @return {boolean} Submitting has been started
 */
-ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
+ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 	var key, $form, params;
 
 	// Prevent duplicate requests
@@ -1640,7 +1640,7 @@ ve.init.mw.Target.prototype.submit = function ( wikitext, fields ) {
  * @param {Function} callback Function to call when complete, accepts error and wikitext arguments
  * @return {boolean} Serializing has been started
 */
-ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
+ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 	// Prevent duplicate requests
 	if ( this.serializing ) {
 		return false;
@@ -1653,8 +1653,8 @@ ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
 		oldid: this.revid,
 		etag: this.etag
 	}, 'serialize' )
-		.done( ve.init.mw.Target.prototype.serializeSuccess.bind( this ) )
-		.fail( ve.init.mw.Target.prototype.serializeFail.bind( this ) );
+		.done( ve.init.mw.ArticleTarget.prototype.serializeSuccess.bind( this ) )
+		.fail( ve.init.mw.ArticleTarget.prototype.serializeFail.bind( this ) );
 	return true;
 };
 
@@ -1663,7 +1663,7 @@ ve.init.mw.Target.prototype.serialize = function ( doc, callback ) {
  *
  * @return {Object|null} List of edit notices or null if none are loaded
  */
-ve.init.mw.Target.prototype.getEditNotices = function () {
+ve.init.mw.ArticleTarget.prototype.getEditNotices = function () {
 	return this.editNotices;
 };
 
@@ -1676,7 +1676,7 @@ ve.init.mw.Target.prototype.getEditNotices = function () {
  * @param {HTMLDocument} doc HTML DOM to edit
  * @param {Function} [callback] Callback to call when done
  */
-ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
+ve.init.mw.ArticleTarget.prototype.setupSurface = function ( doc, callback ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
@@ -1743,7 +1743,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
  *
  * @param {Object} [config] Configuration options for the button
  */
-ve.init.mw.Target.prototype.setupToolbarSaveButton = function ( config ) {
+ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = function ( config ) {
 	this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
 		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
 		flags: [ 'progressive', 'primary' ],
@@ -1768,14 +1768,14 @@ ve.init.mw.Target.prototype.setupToolbarSaveButton = function ( config ) {
 /**
  * Add the save button to the user interface.
  */
-ve.init.mw.Target.prototype.attachToolbarSaveButton = function () {
+ve.init.mw.ArticleTarget.prototype.attachToolbarSaveButton = function () {
 	this.toolbar.$actions.append( this.toolbarSaveButton.$element );
 };
 
 /**
  * Re-evaluate whether the toolbar save button should be disabled or not.
  */
-ve.init.mw.Target.prototype.updateToolbarSaveButtonState = function () {
+ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
 	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState;
@@ -1788,7 +1788,7 @@ ve.init.mw.Target.prototype.updateToolbarSaveButtonState = function () {
 /**
  * Handle clicks on the save button in the toolbar.
  */
-ve.init.mw.Target.prototype.onToolbarSaveButtonClick = function () {
+ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
 	if ( this.edited || this.restoring ) {
 		this.showSaveDialog();
 	}
@@ -1799,7 +1799,7 @@ ve.init.mw.Target.prototype.onToolbarSaveButtonClick = function () {
  *
  * @fires saveWorkflowBegin
  */
-ve.init.mw.Target.prototype.showSaveDialog = function () {
+ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
 	var target = this;
 	this.emit( 'saveWorkflowBegin' );
 
@@ -1831,7 +1831,7 @@ ve.init.mw.Target.prototype.showSaveDialog = function () {
 /**
  * Open the save dialog
  */
-ve.init.mw.Target.prototype.openSaveDialog = function () {
+ve.init.mw.ArticleTarget.prototype.openSaveDialog = function () {
 	var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
 	// Open the dialog
@@ -1844,7 +1844,7 @@ ve.init.mw.Target.prototype.openSaveDialog = function () {
  *
  * @method
  */
-ve.init.mw.Target.prototype.restoreEditSection = function () {
+ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var surfaceView, $documentNode, $section, headingNode;
 
 	if ( this.section !== undefined && this.section > 0 ) {
@@ -1872,7 +1872,7 @@ ve.init.mw.Target.prototype.restoreEditSection = function () {
  * @method
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
-ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
+ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 	var nextNode, offset,
 		target = this,
 		offsetNode = headingNode,
@@ -1911,7 +1911,7 @@ ve.init.mw.Target.prototype.goToHeading = function ( headingNode ) {
  * @method
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
-ve.init.mw.Target.prototype.scrollToHeading = function ( headingNode ) {
+ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 	var $window = $( OO.ui.Element.static.getWindow( this.$element ) );
 
 	$window.scrollTop( headingNode.$element.offset().top - this.getToolbar().$element.height() );

@@ -297,7 +297,7 @@
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.css"
 		},
 		"ext.visualEditor.targetLoader": {
-			"scripts": "modules/ve-mw/init/ve.init.mw.TargetLoader.js",
+			"scripts": "modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js",
 			"dependencies": [
 				"ext.visualEditor.track",
 				"mediawiki.api"
@@ -415,12 +415,12 @@
 				"modules/ve-mw/init/ve.init.mw.ImageInfoCache.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.init.js",
-				"modules/ve-mw/init/ve.init.mw.Target.js",
-				"modules/ve-mw/init/ve.init.mw.TargetEvents.js",
+				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
+				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/init/ve.init.mw.trackSubscriber.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.Target.css"
+				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css"
 			],
 			"dependencies": [
 				"jquery.byteLength",

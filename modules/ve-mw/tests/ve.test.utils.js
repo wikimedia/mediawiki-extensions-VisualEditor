@@ -14,7 +14,7 @@ ve.test.utils.createSurfaceFromDocument = function ( doc ) {
 	// HACK: MW targets are async and heavy, use an SA target but
 	// override the global registration
 	target = new ve.init.sa.Target();
-	mwTarget = new ve.init.mw.Target();
+	mwTarget = new ve.init.mw.ArticleTarget();
 
 	$( '#qunit-fixture' ).append( target.$element );
 	target.addSurface( doc );

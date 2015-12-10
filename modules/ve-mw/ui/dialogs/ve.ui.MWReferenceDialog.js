@@ -252,7 +252,7 @@ ve.ui.MWReferenceDialog.prototype.useReference = function ( ref ) {
 	this.referenceTarget = new ve.ui.MWTargetWidget(
 		this.referenceModel.getDocument(),
 		{
-			tools: ve.copy( ve.init.mw.Target.static.toolbarGroups ),
+			tools: ve.copy( ve.init.target.constructor.static.toolbarGroups ),
 			includeCommands: this.constructor.static.includeCommands,
 			excludeCommands: this.constructor.static.excludeCommands.concat( citeCommands ),
 			importRules: this.constructor.static.getImportRules(),

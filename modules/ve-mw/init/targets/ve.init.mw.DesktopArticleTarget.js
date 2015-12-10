@@ -11,7 +11,7 @@
  * MediaWiki desktop article target.
  *
  * @class
- * @extends ve.init.mw.Target
+ * @extends ve.init.mw.ArticleTarget
  *
  * @constructor
  * @param {Object} config Configuration options
@@ -66,7 +66,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	);
 	this.originalDocumentTitle = document.title;
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
-	this.events = new ve.init.mw.TargetEvents( this );
+	this.events = new ve.init.mw.ArticleTargetEvents( this );
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-desktopArticleTarget' );
@@ -86,7 +86,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 /* Inheritance */
 
-OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.Target );
+OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.ArticleTarget );
 
 /* Events */
 
