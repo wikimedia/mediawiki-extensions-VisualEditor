@@ -558,31 +558,29 @@
 				// keep changes from that (yet?)
 				$( 'input[name=wpSection]' ).val()
 			) {
-				mw.loader.using( 'ext.visualEditor.switching' )
-					.done( function () {
-						var windowManager = new OO.ui.WindowManager(),
-							switchWindow = new mw.libs.ve.SwitchConfirmDialog();
-						// Prompt if either we're on action=submit (the user has previewed) or
-						// the wikitext hash is different to the value observed upon page load.
+				mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
+					var windowManager = new OO.ui.WindowManager(),
+						switchWindow = new mw.libs.ve.SwitchConfirmDialog();
+					// Prompt if either we're on action=submit (the user has previewed) or
+					// the wikitext hash is different to the value observed upon page load.
 
-						$( 'body' ).append( windowManager.$element );
-						windowManager.addWindows( [ switchWindow ] );
-						windowManager.openWindow( switchWindow ).done( function ( opened ) {
-							opened.done( function ( closing ) {
-								closing.done( function ( data ) {
-									if ( data && data.action === 'keep' ) {
-										activatePageTarget( true );
-									} else if ( data && data.action === 'discard' ) {
-										$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
-										new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
-										mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
+					$( 'body' ).append( windowManager.$element );
+					windowManager.addWindows( [ switchWindow ] );
+					windowManager.openWindow( switchWindow )
+						.then( function ( opened ) { return opened; } )
+						.then( function ( closing ) { return closing; } )
+						.then( function ( data ) {
+							if ( data && data.action === 'keep' ) {
+								activatePageTarget( true );
+							} else if ( data && data.action === 'discard' ) {
+								$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
+								new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
+								mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
 
-										location.href = veEditUri;
-									}
-								} );
-							} );
+								location.href = veEditUri;
+							}
 						} );
-					} );
+				} );
 			} else if ( isViewPage || wikitext ) {
 				activatePageTarget( false );
 			} else {
