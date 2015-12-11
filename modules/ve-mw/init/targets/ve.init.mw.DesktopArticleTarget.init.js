@@ -573,6 +573,10 @@
 									if ( data && data.action === 'keep' ) {
 										activatePageTarget( true );
 									} else if ( data && data.action === 'discard' ) {
+										$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
+										new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
+										mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
+
 										location.href = veEditUri;
 									}
 								} );
@@ -582,6 +586,10 @@
 			} else if ( isViewPage || wikitext ) {
 				activatePageTarget( false );
 			} else {
+				$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
+				new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
+				mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
+
 				location.href = veEditUri;
 			}
 		},
