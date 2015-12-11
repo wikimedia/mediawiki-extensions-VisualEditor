@@ -80,11 +80,11 @@ ve.init.mw.MobileArticleTarget.static.platformType = 'phone';
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.onSurfaceReady = function () {
+ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	var surfaceModel;
 
 	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
+	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	surfaceModel = this.getSurface().getModel();
 	surfaceModel.connect( this, {

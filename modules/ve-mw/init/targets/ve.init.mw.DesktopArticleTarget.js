@@ -584,7 +584,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
+ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	var surfaceReadyTime = ve.now(),
 		target = this;
 
@@ -614,7 +614,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onSurfaceReady = function () {
 	this.restoreScrollPosition();
 
 	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.onSurfaceReady.apply( this, arguments );
+	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	this.setupUnloadHandlers();
 	this.maybeShowMetaDialog();

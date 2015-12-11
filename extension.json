@@ -417,6 +417,7 @@
 				"modules/ve-mw/init/ve.init.mw.ImageInfoCache.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.init.js",
+				"modules/ve-mw/init/ve.init.mw.Target.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/init/ve.init.mw.trackSubscriber.js"
