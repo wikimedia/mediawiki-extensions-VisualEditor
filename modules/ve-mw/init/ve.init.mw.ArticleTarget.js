@@ -11,7 +11,7 @@
  * Initialization MediaWiki article target.
  *
  * @class
- * @extends ve.init.Target
+ * @extends ve.init.mw.Target
  *
  * @constructor
  * @param {string} pageName Name of target page
@@ -19,7 +19,7 @@
  *  revision id here. Defaults to loading the latest version (see #load).
  * @param {Object} [config] Configuration options
  */
-ve.init.mw.ArticleTarget = function VeInitArticleMwTarget( pageName, revisionId, config ) {
+ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId, config ) {
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		shadow: true,
@@ -54,20 +54,14 @@ ve.init.mw.ArticleTarget = function VeInitArticleMwTarget( pageName, revisionId,
 
 	this.preparedCacheKeyPromise = null;
 	this.clearState();
-	this.generateCitationFeatures();
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-articleTarget' );
-
-	// Events
-	this.connect( this, {
-		surfaceReady: 'onSurfaceReady'
-	} );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.Target );
+OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 
 /* Events */
 
@@ -152,90 +146,8 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.Target );
 
 /* Static Properties */
 
-ve.init.mw.ArticleTarget.static.citationToolsLimit = 5;
-
-ve.init.mw.ArticleTarget.static.toolbarGroups = [
-	// History
-	{ include: [ 'undo', 'redo' ] },
-	// Format
-	{
-		classes: [ 've-test-toolbar-format' ],
-		type: 'menu',
-		indicator: 'down',
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
-		include: [ { group: 'format' } ],
-		promote: [ 'paragraph' ],
-		demote: [ 'preformatted', 'blockquote', 'heading1' ]
-	},
-	// Style
-	{
-		classes: [ 've-test-toolbar-style' ],
-		type: 'list',
-		icon: 'textStyle',
-		indicator: 'down',
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		include: [ { group: 'textStyle' }, 'language', 'clear' ],
-		forceExpand: [ 'bold', 'italic', 'clear' ],
-		promote: [ 'bold', 'italic' ],
-		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
-	},
-	// Link
-	{ include: [ 'link' ] },
-	// Cite
-	{
-		classes: [ 've-test-toolbar-cite' ],
-		type: 'list',
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		indicator: 'down',
-		include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
-		demote: [ 'reference', 'reference/existing' ]
-	},
-	// Structure
-	{
-		classes: [ 've-test-toolbar-structure' ],
-		type: 'list',
-		icon: 'listBullet',
-		indicator: 'down',
-		include: [ { group: 'structure' } ],
-		demote: [ 'outdent', 'indent' ]
-	},
-	// Insert
-	{
-		classes: [ 've-test-toolbar-insert' ],
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		indicator: 'down',
-		include: '*',
-		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
-		promote: [ 'media', 'transclusion', 'insertTable' ]
-	},
-	// Table
-	{
-		header: OO.ui.deferMsg( 'visualeditor-toolbar-table' ),
-		type: 'list',
-		icon: 'table',
-		indicator: 'down',
-		include: [ { group: 'table' } ],
-		demote: [ 'deleteTable' ]
-	},
-	// SpecialCharacter
-	{ include: [ 'specialCharacter' ] }
-];
-
-ve.init.mw.ArticleTarget.static.importRules = {
-	external: {
-		blacklist: [
-			// Annotations
-			'link', 'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language',
-			// Nodes
-			'div', 'alienInline', 'alienBlock', 'comment'
-		],
-		removeOriginalDomElements: true
-	},
-	all: null
-};
-
 /**
- * Name of target class. Used by TargetEvents to identify which target we are tracking.
+ * Name of target class. Used by ArticleTargetEvents to identify which target we are tracking.
  *
  * @static
  * @property {string}
@@ -244,41 +156,14 @@ ve.init.mw.ArticleTarget.static.importRules = {
 ve.init.mw.ArticleTarget.static.name = 'mwTarget';
 
 /**
- * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.
- *
- * @static
- * @property {string}
- * @inheritable
+ * @inheritdoc
  */
 ve.init.mw.ArticleTarget.static.integrationType = 'page';
 
 /**
- * Type of platform. Used by ve.init.mw.trackSubscriber.js for event tracking.
- *
- * @static
- * @property {string}
- * @inheritable
+ * @inheritdoc
  */
 ve.init.mw.ArticleTarget.static.platformType = 'other';
-
-/* Static Methods */
-
-/**
- * Fix the base URL from Parsoid if necessary.
- *
- * Absolutizes the base URL if it's relative, and sets a base URL based on wgArticlePath
- * if there was no base URL at all.
- *
- * @param {HTMLDocument} doc Parsoid document
- */
-ve.init.mw.ArticleTarget.static.fixBase = function ( doc ) {
-	ve.fixBase( doc, document, ve.resolveUrl(
-		// Don't replace $1 with the page name, because that'll break if
-		// the page name contains a slash
-		mw.config.get( 'wgArticlePath' ).replace( '$1', '' ),
-		document
-	) );
-};
 
 /* Methods */
 
@@ -303,10 +188,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.originalHtml = data.content;
 		this.etag = data.etag;
 		this.fromEditedState = data.fromEditedState;
-		this.doc = ve.parseXhtml( this.originalHtml );
-
-		// Fix relative or missing base URL if needed
-		this.constructor.static.fixBase( this.doc );
+		this.doc = this.parseHtml( this.originalHtml );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
@@ -369,18 +251,14 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 
 		ve.track( 'trace.parseResponse.exit' );
 		// Everything worked, the page was loaded, continue initializing the editor
-		this.onReady();
+		this.documentReady( this.doc );
 	}
 };
 
 /**
- * Handle both DOM and modules being loaded and ready.
- *
- * @fires surfaceReady
+ * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.onReady = function () {
-	var target = this;
-
+ve.init.mw.ArticleTarget.prototype.documentReady = function () {
 	// We need to wait until onReady as local notices may require special messages
 	this.editNotices = this.remoteNotices.concat(
 		this.localNoticeMessages.map( function ( msgKey ) {
@@ -390,25 +268,26 @@ ve.init.mw.ArticleTarget.prototype.onReady = function () {
 
 	this.loading = false;
 	this.edited = this.fromEditedState;
-	this.setupSurface( this.doc, function () {
-		// loadSuccess() may have called setAssumeExistence( true );
-		ve.init.platform.linkCache.setAssumeExistence( false );
-		target.getSurface().getModel().connect( target, {
-			history: 'updateToolbarSaveButtonState'
-		} );
-		target.emit( 'surfaceReady' );
-	} );
+
+	// Parent method
+	ve.init.mw.ArticleTarget.super.prototype.documentReady.apply( this, arguments );
 };
 
 /**
- * Once surface is ready ready, init UI
- *
- * @method
+ * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.onSurfaceReady = function () {
+ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
+	// loadSuccess() may have called setAssumeExistence( true );
+	ve.init.platform.linkCache.setAssumeExistence( false );
+	this.getSurface().getModel().connect( this, {
+		history: 'updateToolbarSaveButtonState'
+	} );
 	this.setupToolbarSaveButton();
 	this.attachToolbarSaveButton();
 	this.restoreEditSection();
+
+	// Parent method
+	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 };
 
 /**
@@ -1026,138 +905,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
 };
 
 /**
- * Add reference insertion tools from on-wiki data.
- *
- * By adding a definition in JSON to MediaWiki:Visualeditor-cite-tool-definition, the cite menu can
- * be populated with tools that create references containing a specific templates. The content of the
- * definition should be an array containing a series of objects, one for each tool. Each object must
- * contain a `name`, `icon` and `template` property. An optional `title` property can also be used
- * to define the tool title in plain text. The `name` property is a unique identifier for the tool,
- * and also provides a fallback title for the tool by being transformed into a message key. The name
- * is prefixed with `visualeditor-cite-tool-name-`, and messages can be defined on Wiki. Some common
- * messages are pre-defined for tool names such as `web`, `book`, `news` and `journal`.
- *
- * Example:
- * [ { "name": "web", "icon": "cite-web", "template": "Cite web" }, ... ]
- *
- */
-ve.init.mw.ArticleTarget.prototype.generateCitationFeatures = function () {
-	var i, len, item, name, data, tool, tools, dialog, contextItem,
-		limit = this.constructor.static.citationToolsLimit;
-
-	if ( !ve.ui.MWCitationDialog ) {
-		// Citation module isn't loaded, so skip this
-		return;
-	}
-
-	/*jshint loopfunc:true */
-
-	try {
-		// Must use mw.message to avoid JSON being parsed as Wikitext
-		tools = JSON.parse( mw.message( 'visualeditor-cite-tool-definition.json' ).plain() );
-	} catch ( e ) { }
-
-	if ( Array.isArray( tools ) ) {
-		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
-			item = tools[ i ];
-			data = { template: item.template };
-
-			// Generate citation tool
-			name = 'cite-' + item.name;
-			if ( !ve.ui.toolFactory.lookup( name ) ) {
-				tool = function GeneratedMWCitationDialogTool( toolbar, config ) {
-					ve.ui.MWCitationDialogTool.call( this, toolbar, config );
-				};
-				OO.inheritClass( tool, ve.ui.MWCitationDialogTool );
-				tool.static.group = 'cite';
-				tool.static.name = name;
-				tool.static.icon = item.icon;
-				tool.static.title = item.title;
-				tool.static.commandName = name;
-				tool.static.template = item.template;
-				tool.static.autoAddToCatchall = false;
-				tool.static.autoAddToGroup = true;
-				tool.static.associatedWindows = [ name ];
-				ve.ui.toolFactory.register( tool );
-				ve.ui.commandRegistry.register(
-					new ve.ui.Command(
-						name, 'mwcite', 'open', { args: [ name, data ], supportedSelections: [ 'linear' ] }
-					)
-				);
-			}
-
-			// Generate citation context item
-			if ( !ve.ui.contextItemFactory.lookup( name ) ) {
-				contextItem = function GeneratedMWCitationContextItem( toolbar, config ) {
-					ve.ui.MWCitationContextItem.call( this, toolbar, config );
-				};
-				OO.inheritClass( contextItem, ve.ui.MWCitationContextItem );
-				contextItem.static.name = name;
-				contextItem.static.icon = item.icon;
-				contextItem.static.label = item.title;
-				contextItem.static.commandName = name;
-				contextItem.static.template = item.template;
-				ve.ui.contextItemFactory.register( contextItem );
-			}
-
-			// Generate dialog
-			if ( !ve.ui.windowFactory.lookup( name ) ) {
-				dialog = function GeneratedMWCitationDialog( config ) {
-					ve.ui.MWCitationDialog.call( this, config );
-				};
-				OO.inheritClass( dialog, ve.ui.MWCitationDialog );
-				dialog.static.name = name;
-				dialog.static.icon = item.icon;
-				dialog.static.title = item.title;
-				ve.ui.windowFactory.register( dialog );
-			}
-		}
-	}
-};
-
-/**
- * Get HTML to send to Parsoid. This takes a document generated by the converter and
- * transplants the head tag from the old document into it, as well as the attributes on the
- * html and body tags.
- *
- * @param {HTMLDocument} newDoc Document generated by ve.dm.Converter. Will be modified.
- * @return {string} Full HTML document
- */
-ve.init.mw.ArticleTarget.prototype.getHtml = function ( newDoc ) {
-	var i, len, oldDoc = this.doc;
-
-	function copyAttributes( from, to ) {
-		var i, len;
-		for ( i = 0, len = from.attributes.length; i < len; i++ ) {
-			to.setAttribute( from.attributes[ i ].name, from.attributes[ i ].value );
-		}
-	}
-
-	// Copy the head from the old document
-	for ( i = 0, len = oldDoc.head.childNodes.length; i < len; i++ ) {
-		newDoc.head.appendChild( oldDoc.head.childNodes[ i ].cloneNode( true ) );
-	}
-	// Copy attributes from the old document for the html, head and body
-	copyAttributes( oldDoc.documentElement, newDoc.documentElement );
-	copyAttributes( oldDoc.head, newDoc.head );
-	copyAttributes( oldDoc.body, newDoc.body );
-	$( newDoc )
-		.find(
-			'script, ' + // T54884, T65229, T96533, T103430
-			'object, ' + // T65229
-			'style, ' + // T55252
-			'embed, ' + // T53521, T54791, T65121
-			'div[id="myEventWatcherDiv"], ' + // T53423
-			'div[id="sendToInstapaperResults"], ' + // T63776
-			'div[id="kloutify"], ' + // T69006
-			'div[id^="mittoHidden"]' // T70900
-		)
-		.remove();
-	// Add doctype manually
-	return '<!doctype html>' + ve.serializeXhtml( newDoc );
-};
-
-/**
  * Get deflated HTML. This function is async because easy-deflate may not have finished loading yet.
  *
  * @param {HTMLDocument} newDoc Document to get HTML for
@@ -1165,7 +912,7 @@ ve.init.mw.ArticleTarget.prototype.getHtml = function ( newDoc ) {
  * @see #getHtml
  */
 ve.init.mw.ArticleTarget.prototype.deflateHtml = function ( newDoc ) {
-	var html = this.getHtml( newDoc );
+	var html = this.getHtml( newDoc, this.doc );
 	return mw.loader.using( 'easy-deflate.deflate' )
 		.then( function () {
 			return EasyDeflate.deflate( html );
@@ -1670,72 +1417,29 @@ ve.init.mw.ArticleTarget.prototype.getEditNotices = function () {
 // FIXME: split out view specific functionality, emit to subclass
 
 /**
- * Switch to editing mode.
- *
- * @method
- * @param {HTMLDocument} doc HTML DOM to edit
- * @param {Function} [callback] Callback to call when done
+ * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.setupSurface = function ( doc, callback ) {
-	var target = this;
-	setTimeout( function () {
-		// Build model
-		var dmDoc;
-		ve.track( 'trace.convertModelFromDom.enter' );
-		dmDoc = ve.dm.converter.getModelFromDom( doc, {
-			lang: mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
-			dir: mw.config.get( 'wgVisualEditor' ).pageLanguageDir
-		} );
-		ve.track( 'trace.convertModelFromDom.exit' );
-		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
-		ve.track( 'trace.buildModelTree.enter' );
-		dmDoc.buildNodeTree();
-		ve.track( 'trace.buildModelTree.exit' );
-		setTimeout( function () {
-			var surface, surfaceView, $documentNode;
-			// Clear dummy surfaces
-			target.clearSurfaces();
+ve.init.mw.ArticleTarget.prototype.track = function ( name ) {
+	ve.track( name );
+};
 
-			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
-			ve.track( 'trace.createSurface.enter' );
-			surface = target.addSurface( dmDoc );
-			surfaceView = surface.getView();
-			$documentNode = surfaceView.getDocument().getDocumentNode().$element;
-			ve.track( 'trace.createSurface.exit' );
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.prototype.createSurface = function () {
+	// Parent method
+	var surface = ve.init.mw.ArticleTarget.super.prototype.createSurface.apply( this, arguments );
 
-			surface.$element
-				.addClass( 've-init-mw-target-surface' )
-				.addClass( target.protectedClasses )
-				.appendTo( target.$element );
+	surface.$element.addClass( this.protectedClasses );
 
-			// Apply mw-body-content to the view (ve-ce-surface).
-			// Not to surface (ve-ui-surface), since that contains both the view
-			// and the overlay container, and we don't want inspectors to
-			// inherit skin typography styles for wikipage content.
-			surfaceView.$element.addClass( 'mw-body-content' );
-			surface.$placeholder.addClass( 'mw-body-content' );
-			$documentNode.addClass(
-				// Add appropriately mw-content-ltr or mw-content-rtl class
-				'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir
-			);
+	// Apply mw-body-content to the view (ve-ce-surface).
+	// Not to surface (ve-ui-surface), since that contains both the view
+	// and the overlay container, and we don't want inspectors to
+	// inherit skin typography styles for wikipage content.
+	surface.getView().$element.addClass( 'mw-body-content' );
+	surface.$placeholder.addClass( 'mw-body-content' );
 
-			target.dummyToolbar = false;
-			target.setSurface( surface );
-
-			setTimeout( function () {
-				// Initialize surface
-				ve.track( 'trace.initializeSurface.enter' );
-				surface.getContext().toggle( false );
-
-				target.active = true;
-				// Now that the surface is attached to the document and ready,
-				// let it initialize itself
-				surface.initialize();
-				ve.track( 'trace.initializeSurface.exit' );
-				setTimeout( callback );
-			} );
-		} );
-	} );
+	return surface;
 };
 
 /**
