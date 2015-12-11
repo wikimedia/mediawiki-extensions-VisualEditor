@@ -96,6 +96,17 @@ OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.ArticleTarget );
 
 /* Static Properties */
 
+ve.init.mw.DesktopArticleTarget.static.actionGroups = [
+	{ include: [ 'help', 'notices' ] },
+	{
+		type: 'list',
+		icon: 'menu',
+		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+		include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'findAndReplace' ]
+	},
+	{ include: [ 'editModeSource' ] }
+];
+
 /**
  * Compatibility map used with jQuery.client to black-list incompatible browsers.
  *
@@ -891,21 +902,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = null;
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () {
-	this.actionsToolbar = new ve.ui.TargetToolbar( this );
-
-	this.actionsToolbar.setup( [
-		{ include: [ 'help', 'notices' ] },
-		{
-			type: 'list',
-			icon: 'menu',
-			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
-			include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'findAndReplace' ]
-		},
-		{ include: [ 'editModeSource' ] }
-	], this.getSurface() );
-
-	this.toolbar.$actions.append( this.actionsToolbar.$element, this.toolbarSaveButton.$element );
-	this.actionsToolbar.initialize();
+	this.toolbar.$actions.append( this.toolbarSaveButton.$element );
 	// Make the toolbar recalculate its sizes for narrow/wide switching.
 	// This really should not be necessary.
 	this.toolbar.narrowThreshold = this.toolbar.$group.width() + this.toolbar.$actions.width();
