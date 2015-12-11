@@ -6,6 +6,13 @@
 			"Lakzon"
 		]
 	},
+	"apihelp-visualeditor-description": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
+	"apihelp-visualeditor-param-basetimestamp": "هنگام ذخیره کردن، زمان نسخهٔ ویرایش شده را برای این مورد تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
+	"apihelp-visualeditor-param-cachekey": "برای پیوند تفاوت، از نتیجه درخواست تفاوت پیشین به کمک این کلید استفاده کنید. بازنویسی $1html.",
+	"apihelp-visualeditor-param-html": "HTML برای ارسال به پارسوید برای تبدیل به متن ویکی.",
+	"apihelp-visualeditor-param-etag": "ای‌تگ برای ارسال.",
+	"apihelp-visualeditor-param-oldid": "تعداد نسخه‌ها برای استفاده (آخرین نسخه به عنوان پیش‌فرض)",
+	"apihelp-visualeditor-param-paction": "عمل برای انجام‌دادن.",
 	"tooltip-ca-ve-edit": "ئئ وةڵگۀ دةسکاری کةن",
 	"visualeditor-backbutton-tooltip": "بوو دؤما/ عقب",
 	"visualeditor-beta-appendix": "آزمایشی",
@@ -55,7 +62,7 @@
 	"visualeditor-dialog-meta-languages-section": "زوونۀل",
 	"visualeditor-dialog-meta-settings-index-disable": "نۀ-نۀخئر",
 	"visualeditor-dialog-meta-settings-index-force": "أرێ-بةلئ",
-	"visualeditor-dialog-meta-settings-label": " تنظیمۀل وۀلگۀ",
+	"visualeditor-dialog-meta-settings-label": " تنظیمۀل وةڵگة",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "پیش‌فرض",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "نۀ-نۀخئر",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "أرێ-بةلئ",

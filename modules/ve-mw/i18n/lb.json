@@ -246,6 +246,7 @@
 	"visualeditor-preference-core-description": "De visuellen Editeur aschalten. Et ass net op Diskussiounssäiten an an e puer anere Nummräim disponibel.",
 	"visualeditor-preference-core-label": "Visuell änneren",
 	"visualeditor-preference-enable": "De visuellen Editeur aktivéieren. En an{{PLURAL:$2|dësem Nummraum| dësen Nummraim}} disponibel: $1",
+	"visualeditor-preference-tabs-remember-last": "Mäi leschten Auteur verhalen",
 	"visualeditor-recreate": "D'Säit gouf geläscht zanter datt Dir ugefaang hutt se z'änneren. Klickt op \"$1\" fir se nees unzeleeën.",
 	"visualeditor-reference-input-placeholder": "An den aktuellen Zitater sichen",
 	"visualeditor-referenceslist-isempty": "Et gëtt keng Referenze mam Grupp \"$1\" op dëser Säit fir an dës Lëscht opzehuelen.",
