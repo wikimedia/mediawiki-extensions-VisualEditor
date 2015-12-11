@@ -680,7 +680,7 @@
 	}
 
 	$( function () {
-		var key;
+		var key, loadVEInPage;
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).val();
 		}
@@ -761,17 +761,20 @@
 				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
 				userPrefEnabled
 			) {
+				loadVEInPage = mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
+					(
+						getLastEditor() !== 'wikitext' &&
+						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
+					);
 				// Handle section edit link clicks
-				$( '.mw-editsection a' ).on( 'click', init.onEditSectionLinkClick );
+				$( '.mw-editsection a' ).on( 'click', function ( e ) {
+					if ( loadVEInPage ) {
+						init.onEditSectionLinkClick( e );
+					}
+				} );
 				// Allow instant switching to edit mode, without refresh
 				$( '#ca-edit' ).on( 'click', function ( e ) {
-					if (
-						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
-						(
-							getLastEditor() !== 'wikitext' &&
-							mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
-						)
-					) {
+					if ( loadVEInPage ) {
 						trackActivateStart( { type: 'page', mechanism: 'click' } );
 						activateTarget();
 						e.preventDefault();
