@@ -1215,7 +1215,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.startTimeStamp = null;
 	this.doc = null;
 	this.originalHtml = null;
-	this.editNotices = null;
+	this.editNotices = [];
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
 };
@@ -1661,7 +1661,7 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 /**
  * Get list of edit notices.
  *
- * @return {Object|null} List of edit notices or null if none are loaded
+ * @return {Array} List of edit notices
  */
 ve.init.mw.ArticleTarget.prototype.getEditNotices = function () {
 	return this.editNotices;
