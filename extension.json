@@ -133,9 +133,6 @@
 		"BeforePageDisplay": [
 			"VisualEditorHooks::onBeforePageDisplay"
 		],
-		"ContentHandlerDefaultModelFor": [
-			"VisualEditorHooks::onContentHandlerDefaultModelFor"
-		],
 		"SkinEditSectionLinks": [
 			"VisualEditorHooks::onSkinEditSectionLinks"
 		],
