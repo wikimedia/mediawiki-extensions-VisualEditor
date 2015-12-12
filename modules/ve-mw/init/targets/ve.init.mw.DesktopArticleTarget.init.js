@@ -169,6 +169,7 @@
 			activateTarget( null, modified );
 		}
 	}
+
 	/**
 	 * Load and activate the target.
 	 *
@@ -196,9 +197,7 @@
 				incrementLoadingProgress();
 			} );
 
-		$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
-		new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
-		mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
+		setEditorPreference( 'visualeditor' );
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
 		showLoading();
@@ -228,6 +227,16 @@
 		ve.track( 'trace.activate.enter' );
 		ve.track( 'mwedit.init', initData );
 		mw.libs.ve.activationStart = ve.now();
+	}
+
+	function setEditorPreference( editor ) {
+		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
+			throw new Error( 'setEditorPreference called with invalid option: ', editor );
+		}
+
+		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
+		new mw.Api().saveOption( 'visualeditor-editor', editor );
+		mw.user.options.set( 'visualeditor-editor', editor );
 	}
 
 	function getLastEditor() {
@@ -573,10 +582,7 @@
 							if ( data && data.action === 'keep' ) {
 								activatePageTarget( true );
 							} else if ( data && data.action === 'discard' ) {
-								$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
-								new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
-								mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
-
+								setEditorPreference( 'visualeditor' );
 								location.href = veEditUri;
 							}
 						} );
@@ -584,10 +590,7 @@
 			} else if ( isViewPage || wikitext ) {
 				activatePageTarget( false );
 			} else {
-				$.cookie( 'VEE', 'visualeditor', { path: '/', expires: 30 } );
-				new mw.Api().saveOption( 'visualeditor-editor', 'visualeditor' );
-				mw.user.options.set( 'visualeditor-editor', 'visualeditor' );
-
+				setEditorPreference( 'visualeditor' );
 				location.href = veEditUri;
 			}
 		},
@@ -664,6 +667,9 @@
 		// Only for pages with a wikitext content model
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
+
+	// FIXME: We should do this more elegantly
+	init.setEditorPreference = setEditorPreference;
 
 	// Note: Though VisualEditor itself only needs this exposure for a very small reason
 	// (namely to access init.blacklist from the unit tests...) this has become one of the nicest

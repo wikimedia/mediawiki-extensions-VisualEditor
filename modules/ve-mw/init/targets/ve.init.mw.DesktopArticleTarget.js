@@ -1372,9 +1372,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
 	var target = this;
-	$.cookie( 'VEE', 'wikitext', { path: '/', expires: 30 } );
-	new mw.Api().saveOption( 'visualeditor-editor', 'wikitext' );
-	mw.user.options.set( 'visualeditor-editor', 'wikitext' );
+	mw.libs.ve.init.setEditorPreference( 'wikitext' );
+
 	if ( discardChanges ) {
 		if ( modified ) {
 			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
