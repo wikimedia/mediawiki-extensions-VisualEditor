@@ -75,7 +75,7 @@ class VisualEditorHooks {
 			$user->getOption( 'visualeditor-autodisable' ) ||
 			$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt' ||
 			( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() ) ||
-			false // TODO: Detect incompatibility - P2373
+			false // TODO: Detect incompatibility - T121298, P2373
 		) {
 			return true;
 		}
@@ -102,13 +102,13 @@ class VisualEditorHooks {
 			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
 			// check for parameters that VE does not handle
 			// TODO: other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
-			in_array( 'veswitched', $params ) ||
 			in_array( 'undo', $params ) ||
 			in_array( 'undoafter', $params ) ||
 			in_array( 'editintro', $params ) ||
 			in_array( 'preload', $params ) ||
 			in_array( 'preloadtitle', $params ) ||
 			in_array( 'preloadparams', $params );
+			// Known-good parameters: edit, veaction, section, vesection, veswitched
 	}
 
 	/**
