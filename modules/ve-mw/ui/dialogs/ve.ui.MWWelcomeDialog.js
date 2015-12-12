@@ -35,6 +35,11 @@ ve.ui.MWWelcomeDialog.static.icon = 'help';
 
 ve.ui.MWWelcomeDialog.static.actions = [
 	{
+		action: 'switch',
+		label: OO.ui.deferMsg( 'visualeditor-welcomedialog-switch' )
+	},
+	{
+		action: 'accept',
 		label: OO.ui.deferMsg( 'visualeditor-welcomedialog-action' ),
 		flags: [ 'progressive', 'primary' ]
 	}
@@ -60,6 +65,20 @@ ve.ui.MWWelcomeDialog.prototype.getSetupProcess = function ( data ) {
 	}, data );
 
 	return ve.ui.MWWelcomeDialog.super.prototype.getSetupProcess.call( this, data );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWWelcomeDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === 'switch' ) {
+		return new OO.ui.Process( function () {
+			this.close( { action: 'switch' } );
+		}, this );
+	}
+
+	// Parent method
+	return ve.ui.MWWelcomeDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 /* Registration */

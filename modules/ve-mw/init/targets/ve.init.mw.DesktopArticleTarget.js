@@ -1277,10 +1277,13 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				.then( function ( closing ) {
 					return closing;
 				} )
-				.then( function () {
+				.then( function ( data ) {
 					// Detach the temporary window manager
 					windowManager.destroy();
 					target.welcomeDialogPromise.resolve();
+					if ( data && data.action === 'switch' ) {
+						target.switchToWikitextEditor( true, true );
+					}
 				} );
 		} else {
 			this.welcomeDialogPromise.resolve();
