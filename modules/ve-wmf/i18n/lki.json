@@ -4,5 +4,6 @@
 			"Hosseinblue"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایش‌گر دیداری]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایش‌گر دیداری]]",
+	"visualeditor-welcomedialog-action": "ویرایش را آغاز کنید"
 }

@@ -232,6 +232,7 @@
 	"visualeditor-differror": "Klaida įkeliant duomenis iš serverio:  $1.",
 	"visualeditor-donebutton-tooltip": "Užbaigti redagavimą",
 	"visualeditor-editconflict": "Jūsų pakeitimai negali būti išsaugoti dėl redagavimo konflikto. Ar {{GENDER:|jūs}} norite išspręsti konfliktą rankiniu būdu?",
+	"visualeditor-editingtabdialog-ok": "Gerai",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|pranešimas|pranešimai}}",
 	"visualeditor-editnotices-tooltip": "Redaguoti pranešimus",
 	"visualeditor-editsummary": "Aprašykite, ką pakeitėte",

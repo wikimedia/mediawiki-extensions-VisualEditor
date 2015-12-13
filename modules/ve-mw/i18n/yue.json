@@ -4,7 +4,8 @@
 			"Deryck Chan",
 			"William915",
 			"CRCHF",
-			"Ktchankt"
+			"Ktchankt",
+			"Yueman"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "保存嗰陣，將爾個設成編輯嘅版本嘅時間戳。用來檢測編輯衝突。",
@@ -185,6 +186,7 @@
 	"visualeditor-differror": "由伺服器攞數據嗰陣出錯：$1",
 	"visualeditor-donebutton-tooltip": "做完改動",
 	"visualeditor-editconflict": "由於編輯衝突，{{GENDER:|你|妳|你}}嘅修改記唔低。{{GENDER:|你|妳|你}}想唔想人手解決呢個衝突？",
+	"visualeditor-editingtabdialog-ok": "OK",
 	"visualeditor-editnotices-tool": "$1{{PLURAL:$1|張告示}}",
 	"visualeditor-editnotices-tooltip": "編輯通告",
 	"visualeditor-editsummary": "講吓你改咗啲乜",
