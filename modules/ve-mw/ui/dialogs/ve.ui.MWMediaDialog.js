@@ -162,7 +162,7 @@ ve.ui.MWMediaDialog.static.getImportRules = function () {
  */
 ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
 	// FIXME: This should vary on panel.
-	return 500;
+	return 600;
 };
 
 /**
