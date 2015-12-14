@@ -1372,7 +1372,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
 	var target = this;
-	mw.libs.ve.init.setEditorPreference( 'wikitext' );
+	mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( discardChanges ) {
 		if ( modified ) {
