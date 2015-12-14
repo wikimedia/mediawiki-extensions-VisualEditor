@@ -773,11 +773,13 @@
 				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
 				userPrefEnabled
 			) {
-				loadVEInPage = mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
+				loadVEInPage = pageCanLoadVE && (
+					mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
 					(
 						getLastEditor() !== 'wikitext' &&
 						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
-					);
+					)
+				);
 				// Handle section edit link clicks
 				$( '.mw-editsection a' ).on( 'click', function ( e ) {
 					if ( loadVEInPage ) {
