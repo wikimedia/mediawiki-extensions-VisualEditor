@@ -241,6 +241,7 @@
 
 	function getLastEditor() {
 		var editor = $.cookie( 'VEE' );
+		// TODO: Check validity?
 		if ( !mw.user.isAnon() || !editor ) {
 			editor = mw.user.options.get( 'visualeditor-editor' );
 		}
@@ -692,7 +693,7 @@
 	}
 
 	$( function () {
-		var key, loadVEInPage;
+		var key;
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).val();
 		}
@@ -768,31 +769,28 @@
 					} );
 				} );
 			}
+
 			if (
 				conf.singleEditTab &&
 				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
-				userPrefEnabled
-			) {
-				loadVEInPage = pageCanLoadVE && (
+				userPrefEnabled &&
+				pageCanLoadVE && (
 					mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
 					(
 						getLastEditor() !== 'wikitext' &&
 						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
 					)
-				);
+				)
+			) {
 				// Handle section edit link clicks
 				$( '.mw-editsection a' ).on( 'click', function ( e ) {
-					if ( loadVEInPage ) {
-						init.onEditSectionLinkClick( e );
-					}
+					init.onEditSectionLinkClick( e );
 				} );
 				// Allow instant switching to edit mode, without refresh
 				$( '#ca-edit' ).on( 'click', function ( e ) {
-					if ( loadVEInPage ) {
-						trackActivateStart( { type: 'page', mechanism: 'click' } );
-						activateTarget();
-						e.preventDefault();
-					}
+					trackActivateStart( { type: 'page', mechanism: 'click' } );
+					activateTarget();
+					e.preventDefault();
 				} );
 			} else if ( userPrefEnabled ) {
 				init.setupSkin();
