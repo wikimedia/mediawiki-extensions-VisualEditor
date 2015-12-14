@@ -125,6 +125,7 @@
 	"visualeditor-dialogbutton-referenceslist-tooltip": "మూలాల జాబితా",
 	"visualeditor-dialogbutton-template-tooltip": "మూస",
 	"visualeditor-differror": "సర్వర్ నుండి సమాచారం దిగుమతిలో తప్పిదం: $1",
+	"visualeditor-editingtabdialog-ok": "సరే",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|గమనిక|గమనికలు}}",
 	"visualeditor-editsummary": "మీరు ఏమి మార్చారో వివరించండి",
 	"visualeditor-editsummary-bytes-remaining": "మిగిలిఉన్న బైట్లు",

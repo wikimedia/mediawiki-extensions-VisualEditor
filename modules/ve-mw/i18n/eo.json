@@ -5,7 +5,8 @@
 			"KuboF",
 			"Shirayuki",
 			"Yekrats",
-			"Kvardek du"
+			"Kvardek du",
+			"Robin van der Vliet"
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "Flago por redakteto.",
@@ -150,6 +151,7 @@
 	"visualeditor-dialogbutton-template-tooltip": "Ŝablono",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Ŝablono",
 	"visualeditor-differror": "Eraro dum ŝutado de datumoj de servilo: $1.",
+	"visualeditor-editingtabdialog-ok": "Bone",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|atentigo|atentigoj}}",
 	"visualeditor-editsummary": "Priskribu vian ŝanĝon",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titolo de paĝo",

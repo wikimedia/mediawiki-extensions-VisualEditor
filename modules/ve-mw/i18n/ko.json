@@ -114,7 +114,7 @@
 	"visualeditor-dialog-meta-categories-hidden": "이 분류는 추가된 문서에 보이지 않도록 설정되어 있습니다.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "숨은 분류",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "일치하는 분류",
-	"visualeditor-dialog-meta-categories-input-movecategorylabel": "지정된 분류를 이 위치에 옮기기",
+	"visualeditor-dialog-meta-categories-input-movecategorylabel": "지정된 분류를 이 위치에 이동",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "새 분류",
 	"visualeditor-dialog-meta-categories-input-placeholder": "분류 추가",
 	"visualeditor-dialog-meta-categories-missing": "이 분류는 설명 문서가 빠져있습니다.",
