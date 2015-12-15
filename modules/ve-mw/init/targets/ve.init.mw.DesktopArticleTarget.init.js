@@ -235,8 +235,13 @@
 		}
 
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
-		new mw.Api().saveOption( 'visualeditor-editor', editor );
-		mw.user.options.set( 'visualeditor-editor', editor );
+		if ( mw.user.isAnon() ) {
+			return $.Deferred().resolve();
+		} else {
+			return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
+				mw.user.options.set( 'visualeditor-editor', editor );
+			} );
+		}
 	}
 
 	function getLastEditor() {
@@ -714,13 +719,13 @@
 						)
 					)
 				) &&
-				uri.query.veswitched === undefined &&
 				uri.query.undo === undefined &&
 				uri.query.undoafter === undefined &&
 				uri.query.editintro === undefined &&
 				uri.query.preload === undefined &&
 				uri.query.preloadtitle === undefined &&
 				uri.query.preloadparams === undefined
+				// Known-good parameters: edit, veaction, section, vesection, veswitched
 				// TODO: other params too? See identical list in VisualEditor.hooks.php
 			) {
 				trackActivateStart( {

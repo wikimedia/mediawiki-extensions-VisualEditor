@@ -1371,8 +1371,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  * @param {boolean} [modified] Whether there were any changes at all.
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
-	var target = this;
-	mw.libs.ve.setEditorPreference( 'wikitext' );
+	var target = this,
+		prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( discardChanges ) {
 		if ( modified ) {
@@ -1381,10 +1381,12 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 			ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate' } );
 		}
 		this.submitting = true;
-		location.href = this.viewUri.clone().extend( {
-			action: 'edit',
-			veswitched: 1
-		} ).toString();
+		prefPromise.done( function () {
+			location.href = target.viewUri.clone().extend( {
+				action: 'edit',
+				veswitched: 1
+			} ).toString();
+		} );
 	} else {
 		this.serialize(
 			this.docToSave || this.getSurface().getDom(),
