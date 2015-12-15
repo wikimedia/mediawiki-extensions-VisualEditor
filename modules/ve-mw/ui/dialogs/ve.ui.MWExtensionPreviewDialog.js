@@ -52,7 +52,7 @@ ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			var doc, element;
 			if ( this.selectedNode ) {
-				doc = this.selectedNode.getDocument().cloneSliceFromRange( this.selectedNode.getOuterRange() );
+				doc = this.selectedNode.getDocument().cloneFromRange( this.selectedNode.getOuterRange() );
 			} else {
 				element = this.getNewElement();
 				doc = new ve.dm.Document( [
