@@ -773,25 +773,28 @@
 			if (
 				conf.singleEditTab &&
 				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
-				userPrefEnabled &&
-				pageCanLoadVE && (
-					mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
-					(
-						getLastEditor() !== 'wikitext' &&
-						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
-					)
-				)
+				userPrefEnabled
 			) {
-				// Handle section edit link clicks
-				$( '.mw-editsection a' ).on( 'click', function ( e ) {
-					init.onEditSectionLinkClick( e );
-				} );
-				// Allow instant switching to edit mode, without refresh
-				$( '#ca-edit' ).on( 'click', function ( e ) {
-					trackActivateStart( { type: 'page', mechanism: 'click' } );
-					activateTarget();
-					e.preventDefault();
-				} );
+				if (
+					pageCanLoadVE && (
+						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
+						(
+							getLastEditor() !== 'wikitext' &&
+							mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
+						)
+					)
+				) {
+					// Handle section edit link clicks
+					$( '.mw-editsection a' ).on( 'click', function ( e ) {
+						init.onEditSectionLinkClick( e );
+					} );
+					// Allow instant switching to edit mode, without refresh
+					$( '#ca-edit' ).on( 'click', function ( e ) {
+						trackActivateStart( { type: 'page', mechanism: 'click' } );
+						activateTarget();
+						e.preventDefault();
+					} );
+				}
 			} else if ( userPrefEnabled ) {
 				init.setupSkin();
 			}
