@@ -19,5 +19,6 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor:మార్చబడింది]]",
 	"tag-visualeditor-switched-description": "వాడుకరి VisualEditor ను వాడుతూ దిద్దుబాటు మొదలుపెట్టి, తరువాత wikitext ఎడిటరుకు మారారు.",
 	"visualeditor-feedback-link": "ప్రాజేక్ట్:విజువల్ ఎడిటర్/సూచనలు",
-	"visualeditor-feedback-tool": "సూచనలివ్వండి"
+	"visualeditor-feedback-tool": "సూచనలివ్వండి",
+	"visualeditor-welcomedialog-title": " $2‌కి {{GENDER:$1|స్వాగతం}}"
 }

@@ -20,7 +20,8 @@
 			"Leyth",
 			"MRG90",
 			"الناز",
-			"فلورانس"
+			"فلورانس",
+			"Huji"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
@@ -59,7 +60,7 @@
 	"visualeditor-backbutton-tooltip": "بازگشت به عقب",
 	"visualeditor-beta-appendix": "آزمایشی",
 	"visualeditor-beta-label": "آزمایشی",
-	"visualeditor-beta-warning": "این ویرایشگر هنوز «بتا» است. برای رفتن به ویرایش کد در هر زمانی بدون از دست دادن تغییراتتان، منوی به پایین‌روندهٔ «{{int:visualeditor-toolbar-savedialog}}» و «{{int:visualeditor-mweditmodesource-tool}}» را انتخاب کنید.",
+	"visualeditor-beta-warning": "برای رفتن به ویرایش ویکی‌متن در هر زمانی بدون از دست دادن تغییراتتان، روی زبانهٔ «$1» کلیک کنید. اگر به هر مشکلی برخوردید پایینتر گزارش کنید.",
 	"visualeditor-browserwarning": "شما از مرورگری استفاده می‌کنید که در این ویرایشگر به طور رسمی پشتیبانی نمی‌شود.",
 	"visualeditor-ca-createlocaldescriptionsource": "افزودن توضیحات محلی",
 	"visualeditor-ca-createsource": "ایجاد متن مبدأ",
@@ -209,7 +210,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "بخش زشت شده. $1",
 	"visualeditor-dialog-transclusion-loading": "در حال بارگیری...",
 	"visualeditor-dialog-transclusion-multiple-mode": "نمایش گزینه‌ها",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|شما در حال اضافه کردن}} الگوی \"$1 \" به این صفحه هستید. این هنوز توضیح ندارد اما ممکن است برخی اطلاعات بر روی [[{{ns:template}}:$1|صفحهٔ الگو ]] وجود داشته باشد.",
+	"visualeditor-dialog-transclusion-no-template-description": "الگوی «$1» هنوز توضیحاتی ندارد، اما ممکن است برخی اطلاعات در [[{{ns:template}}:$1|صفحهٔ الگو]] وجود داشته باشد.",
 	"visualeditor-dialog-transclusion-options": "گزینه‌ها",
 	"visualeditor-dialog-transclusion-param-default": "مقدار پیش‌فرض:$1",
 	"visualeditor-dialog-transclusion-param-example": "مقدار مثال:$1",
@@ -275,7 +276,7 @@
 	"visualeditor-meta-tool": "تنظیمات صفحه",
 	"visualeditor-mweditmodesource-title": "پرش به ویرایش مبدأ؟",
 	"visualeditor-mweditmodesource-tool": "پرش به ویرایش مبدأ",
-	"visualeditor-mweditmodesource-warning": "در حال پرش به ویرایش کد هستید.\nهر تغییر که به این سند اعمال کنید باقی خواهد ماند ولی شما قابلیت بازگشت به ویرایشگر دیداری را بدون ذخیره یا بازآوری صفحه را ندارد.\nآیا می‌خواهید دهید؟",
+	"visualeditor-mweditmodesource-warning": "در حال پرش به ویرایش منبع هستید.\nآیا می‌خواهید دهید؟",
 	"visualeditor-mweditmodeve-title": "پرش به ویرایش دیداری؟",
 	"visualeditor-mweditmodeve-tool": "پرش به ویرایش دیداری",
 	"visualeditor-mweditmodesource-warning-cancel": "انصراف",

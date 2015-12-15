@@ -13,14 +13,15 @@
 			"Armin1392",
 			"Amire80",
 			"아라",
-			"Leyth"
+			"Leyth",
+			"Huji"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایش‌گر دیداری]]",
-	"tag-visualeditor-description": "ویرایش با استفاده از [[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایش‌گر دیداری]] صورت گرفته‌است",
+	"tag-visualeditor-description": "ویرایش توسط [[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداری]] انجام شده‌است.",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداری: بررسی]]",
 	"tag-visualeditor-needcheck-description": "ویرایش انجام‌شده با [[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداری]] که در آن سامانه احتمال وقوع تغییرات ناخواسته در ویکی‌متن را شناسایی کرد.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداریːتغییر جهت داده شده]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداریːبه ویرایش منبع تغییر داده شده]]",
 	"tag-visualeditor-switched-description": "کاربر شروع به ویرایش با استفاده از ویرایشگر دیداری کرد سپس به ویرایشگر متن ویکی تغییر داده شد.",
 	"visualeditor-feedback-link": "Project:ویرایشگر دیداری/بازخورد",
 	"visualeditor-feedback-tool": "گذاشتن بازخورد در مورد این نرم‌افزار",
