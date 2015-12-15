@@ -74,6 +74,7 @@ class VisualEditorHooks {
 			$user->getOption( 'visualeditor-betatempdisable' ) ||
 			$user->getOption( 'visualeditor-autodisable' ) ||
 			$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt' ||
+			$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
 			( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() ) ||
 			false // TODO: Detect incompatibility - T121298, P2373
 		) {
