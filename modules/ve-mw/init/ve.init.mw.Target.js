@@ -347,9 +347,7 @@ ve.init.mw.Target.prototype.createSurface = function () {
 	surfaceView = surface.getView();
 	$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 
-	surface.$element
-		.addClass( 've-init-mw-target-surface' )
-		.addClass( this.protectedClasses );
+	surface.$element.addClass( this.protectedClasses );
 
 	$documentNode.addClass(
 		// Add appropriately mw-content-ltr or mw-content-rtl class
@@ -393,6 +391,9 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 			target.track( 'trace.createSurface.enter' );
 			surface = target.addSurface( dmDoc );
+			// Add classes specific to surfaces attached directly to the target,
+			// as opposed to TargetWidget surfaces
+			surface.$element.addClass( 've-init-mw-target-surface' );
 			target.track( 'trace.createSurface.exit' );
 
 			target.$element.append( surface.$element );
