@@ -59,6 +59,45 @@ class VisualEditorHooks {
 	}
 
 	/**
+	 * Detect incompatibile browsers which we can't expect to load VE
+	 *
+	 * @param WebRequest $req The web request to check the details of
+	 * @param Config $config VE config object
+	 * @param boolean
+	 */
+	private static function isUABlacklisted( WebRequest $req, $config ) {
+		if ( $req->getVal( 'vewhitelist' ) ) {
+			return false;
+		}
+		$blacklist = $config->get( 'VisualEditorBrowserBlacklist' );
+		$ua = strtolower( $req->getHeader( 'User-Agent' ) );
+		foreach ( $blacklist as $uaSubstr => $rules ) {
+			if ( !strpos( $ua, $uaSubstr ) ) {
+				continue;
+			}
+			if ( !is_array( $rules ) ) {
+				return true;
+			}
+
+			$uaParts = preg_split( '/' . $uaSubstr . '\//', $ua ); // PHP 5.3 compat
+			$version = $uaParts[ 1 ];
+			foreach ( $rules as $rule ) {
+				list( $op, $matchVersion ) = $rule;
+				if (
+					( $op === '<' && $version < $matchVersion ) ||
+					( $op === '>' && $version > $matchVersion ) ||
+					( $op === '<=' && $version <= $matchVersion ) ||
+					( $op === '>=' && $version >= $matchVersion )
+				) {
+					return true;
+				}
+			}
+
+		}
+		return false;
+	}
+
+	/**
 	 * Decide whether to bother showing the wikitext editor at all.
 	 * If not, we expect the VE initialisation JS to activate.
 	 * @param $article Article
@@ -76,7 +115,7 @@ class VisualEditorHooks {
 			$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt' ||
 			$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
 			( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() ) ||
-			false // TODO: Detect incompatibility - T121298, P2373
+			self::isUABlacklisted( $req, $veConfig )
 		) {
 			return true;
 		}
