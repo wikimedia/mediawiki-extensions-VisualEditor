@@ -109,7 +109,7 @@ class VisualEditorHooks {
 	 * @return bool Whether to show the wikitext editor or not.
 	 */
 	public static function onCustomEditor( Article $article, User $user ) {
-		$req = RequestContext::getMain()->getRequest();
+		$req = $article->getContext()->getRequest();
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
 		if (
@@ -128,23 +128,40 @@ class VisualEditorHooks {
 
 		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
 
-		$params = $req->getValueNames();
+		$params = $req->getValues();
 
-		return $req->getVal( 'action' ) !== 'edit' ||
+		if ( isset( $params['venoscript'] ) ) {
+			$req->response()->setCookie( 'VEE', 'wikitext', 0, array( 'prefix' => '' ) );
+			$user->setOption( 'visualeditor-editor', 'wikitext' );
+			$user->saveSettings();
+			return true;
+		}
+
+		$ret = $req->getVal( 'action' ) !== 'edit' ||
 			!$veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
 			self::getUserEditor( $user, $req ) === 'wikitext' ||
 			!$title->userCan( 'edit' ) ||
 			!$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ||
 			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
-			// check for parameters that VE does not handle
-			// TODO: other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
-			in_array( 'undo', $params ) ||
-			in_array( 'undoafter', $params ) ||
-			in_array( 'editintro', $params ) ||
-			in_array( 'preload', $params ) ||
-			in_array( 'preloadtitle', $params ) ||
-			in_array( 'preloadparams', $params );
+			// Known parameters that VE does not handle
+			// TODO: Other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
+			isset( $params['undo'] ) ||
+			isset( $params['undoafter'] ) ||
+			isset( $params['editintro'] ) ||
+			isset( $params['preload'] ) ||
+			isset( $params['preloadtitle'] ) ||
+			isset( $params['preloadparams'] );
 			// Known-good parameters: edit, veaction, section, vesection, veswitched
+
+		if ( !$ret ) {
+			$params['venoscript'] = '1';
+			$url = htmlspecialchars( wfScript() . '?' . wfArrayToCgi( $params ) );
+			$article->getContext()->getOutput()->addHeadItem(
+				've-noscript-fallback',
+				"<noscript><meta http-equiv=\"refresh\" content=\"0; url=$url\"></noscript>"
+			);
+		}
+		return $ret;
 	}
 
 	private static function getUserEditor( User $user, WebRequest $req ) {
