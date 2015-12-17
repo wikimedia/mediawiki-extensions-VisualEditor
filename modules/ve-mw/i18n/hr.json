@@ -19,7 +19,7 @@
 	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "RFC poveznica",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "VisualEditor je u razvoju. Možda ćete naići na probleme i možda postoje dijelovi članka koje nećete moći uređivati. Da biste u bilo kojem trenutku prebacili natrag na uređivanje koda bez gubitka promjena, otvorite padajući popis pokraj \"{{int:visualeditor-toolbar-savedialog}}\" i odaberite \"{{int:visualeditor-mweditmodesource-tool}}\".",
+	"visualeditor-beta-warning": "Možete bilo kada prebaciti na uređivač wikiteksta klikom na karticu \"$1\", sačuvavši pri tome učinjene izmjene. U slučaju problema, molimo prijavite ih.",
 	"visualeditor-browserwarning": "Koristite preglednik koji VisualEditor ne podržava.",
 	"visualeditor-ca-createlocaldescriptionsource": "dodaj izvor lokalnog opisa",
 	"visualeditor-ca-createsource": "Započni kôd",
