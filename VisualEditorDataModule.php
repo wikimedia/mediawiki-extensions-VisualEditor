@@ -104,7 +104,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		$citationTools = array();
 		if ( is_array( $citationDefinition ) ) {
 			foreach ( $citationDefinition as $tool ) {
-				if ( !isset( $tool->title ) ) {
+				if ( !isset( $tool->title ) && isset( $tool->name ) ) {
 					$tool->title =
 						wfMessage( 'visualeditor-cite-tool-name-' . $tool->name )->text();
 				}
