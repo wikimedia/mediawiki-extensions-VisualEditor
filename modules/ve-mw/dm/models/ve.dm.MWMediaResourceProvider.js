@@ -57,6 +57,23 @@ OO.inheritClass( ve.dm.MWMediaResourceProvider, ve.dm.APIResultsProvider );
 /* Methods */
 
 /**
+ * @inheritdoc
+ */
+ve.dm.MWMediaResourceProvider.prototype.getStaticParams = function () {
+	return $.extend(
+		{},
+		// Parent method
+		ve.dm.MWMediaResourceProvider.super.prototype.getStaticParams.call( this ),
+		{
+			action: 'query',
+			iiprop: 'dimensions|url|mediatype|extmetadata|timestamp|user',
+			iiextmetadatalanguage: this.getLang(),
+			prop: 'imageinfo'
+		}
+	);
+};
+
+/**
  * Initialize the source and get the site info.
  *
  * Connect to the api url and retrieve the siteinfo parameters
@@ -128,6 +145,34 @@ ve.dm.MWMediaResourceProvider.prototype.getResults = function ( howMany ) {
 };
 
 /**
+ * Get continuation API data
+ *
+ * @param {number} howMany The number of results to retrieve
+ * @return {Object} API request data
+ */
+ve.dm.MWMediaResourceProvider.prototype.getContinueData = function () {
+	return {};
+};
+
+/**
+ * Set continuation data for the next page
+ *
+ * @param {Object} continueData Continuation data
+ */
+ve.dm.MWMediaResourceProvider.prototype.setContinue = function () {
+};
+
+/**
+ * Sort the results
+ *
+ * @param {Object[]} results API results
+ * @return {Object[]} Sorted results
+ */
+ve.dm.MWMediaResourceProvider.prototype.sort = function ( results ) {
+	return results;
+};
+
+/**
  * Call the API for search results.
  *
  * @param {number} howMany The number of results to retrieve
@@ -137,17 +182,7 @@ ve.dm.MWMediaResourceProvider.prototype.getResults = function ( howMany ) {
 ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 	var xhr,
 		ajaxOptions = {},
-		provider = this,
-		apiCallConfig = $.extend(
-			{},
-			this.getUserParams(),
-			{
-				gsroffset: this.getOffset(),
-				iiextmetadatalanguage: provider.getLang()
-			} );
-
-	// Number of images
-	apiCallConfig.gsrlimit = howMany || this.getDefaultFetchLimit();
+		provider = this;
 
 	if ( !this.isValid() ) {
 		return $.Deferred().reject().promise( { abort: $.noop } );
@@ -155,7 +190,7 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 
 	ajaxOptions = this.getAjaxSettings();
 
-	xhr = new mw.Api().get( $.extend( this.getStaticParams(), apiCallConfig ), ajaxOptions );
+	xhr = new mw.Api().get( $.extend( {}, this.getStaticParams(), this.getUserParams(), this.getContinueData( howMany ) ), ajaxOptions );
 	return xhr
 		.then( function ( data ) {
 			var page, newObj, raw,
@@ -168,7 +203,7 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 
 			if ( data.continue ) {
 				// Update the offset for next time
-				provider.setOffset( data.continue.gsroffset );
+				provider.setContinue( data.continue );
 			} else {
 				// This is the last available set of results. Mark as depleted!
 				provider.toggleDepleted( true );
@@ -196,9 +231,7 @@ ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
 					}
 				}
 			}
-			return results.sort( function ( a, b ) {
-				return a.index - b.index;
-			} );
+			return provider.sort( results );
 		} )
 		.promise( { abort: xhr.abort } );
 };
@@ -288,18 +321,14 @@ ve.dm.MWMediaResourceProvider.prototype.getImageSizes = function () {
 };
 
 /**
- * Check if this source is valid and ready for search.
+ * Check if this source is valid.
  *
  * @return {boolean} Source is valid
  */
 ve.dm.MWMediaResourceProvider.prototype.isValid = function () {
-	var params = this.getUserParams();
-	return params.gsrsearch &&
-		(
-			this.isLocal ||
-			// If we don't have either 'apiurl' or 'scriptDirUrl'
-			// the source is invalid, and we will skip it
-			this.apiurl !== undefined ||
-			this.scriptDirUrl !== undefined
-		);
+	return this.isLocal ||
+		// If we don't have either 'apiurl' or 'scriptDirUrl'
+		// the source is invalid, and we will skip it
+		this.apiurl !== undefined ||
+		this.scriptDirUrl !== undefined;
 };
