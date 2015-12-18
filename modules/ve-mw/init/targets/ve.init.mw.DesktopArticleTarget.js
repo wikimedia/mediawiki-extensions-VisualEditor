@@ -1371,7 +1371,9 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  * @param {boolean} [modified] Whether there were any changes at all.
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
-	var target = this,
+	var uri,
+		oldid = this.currentUri.query.oldid || $( 'input[name=parentRevId]' ).val(),
+		target = this,
 		prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( discardChanges ) {
@@ -1382,10 +1384,14 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 		}
 		this.submitting = true;
 		prefPromise.done( function () {
-			location.href = target.viewUri.clone().extend( {
+			uri = target.viewUri.clone().extend( {
 				action: 'edit',
 				veswitched: 1
-			} ).toString();
+			} );
+			if ( oldid ) {
+				uri.extend( { oldid: oldid } );
+			}
+			location.href = uri.toString();
 		} );
 	} else {
 		this.serialize(
