@@ -20,7 +20,7 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
 		pageCanLoadVE, init, support, targetPromise, enable, tempdisable, autodisable,
-		userPrefEnabled, initialWikitext, multipleSectionEditLinks,
+		userPrefEnabled, initialWikitext, oldid, multipleSectionEditLinks,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -197,7 +197,7 @@
 			.then( function () {
 				return mw.libs.ve.targetLoader.requestPageData(
 					mw.config.get( 'wgRelevantPageName' ),
-					uri.query.oldid || $( 'input[name=parentRevId]' ).val(),
+					oldid,
 					'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
 					modified
 				);
@@ -267,6 +267,7 @@
 	conf = mw.config.get( 'wgVisualEditorConfig' );
 	tabMessages = conf.tabMessages;
 	uri = new mw.Uri();
+	oldid = uri.query.oldid || $( 'input[name=parentRevId]' ).val();
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
 	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
@@ -287,6 +288,9 @@
 	} else {
 		veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
 		delete veEditUri.query.action;
+	}
+	if ( oldid ) {
+		veEditUri.extend( { oldid: oldid } );
 	}
 
 	support = {
