@@ -340,4 +340,5 @@ ve.ui.MWAceEditorWidget.prototype.adjustSize = function ( force ) {
 		// Parent method
 		ve.ui.MWAceEditorWidget.super.prototype.adjustSize.call( widget );
 	} );
+	return this;
 };
