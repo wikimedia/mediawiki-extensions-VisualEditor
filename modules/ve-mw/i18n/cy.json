@@ -5,19 +5,21 @@
 			"Lloffiwr",
 			"Robin Owain",
 			"ОйЛ",
-			"DChan (WMF)"
+			"DChan (WMF)",
+			"Diafol"
 		]
 	},
 	"apihelp-visualeditoredit-param-etag": "ETag i ddanfon.",
 	"tooltip-ca-createsource": "Creu cod ffynhonnell y dudalen",
 	"tooltip-ca-editsource": "Golygu cod ffynhonnel y dudalen",
-	"tooltip-ca-ve-edit": "Golygu'r dudalen gyda'r VisualEditor",
+	"tooltip-ca-ve-edit": "Golygu'r dudalen hon",
 	"visualeditor-advancedsettings-tool": "Gosodiadau Uwch",
 	"visualeditor-annotationbutton-linknode-tooltip": "Cyswllt syml",
 	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Fersiwn 'beta' o VisualEditor yw hwn. Mae'n bosibl na fydd modd golygu pob rhan o'r dudalen.",
 	"visualeditor-browserwarning": "Rydych yn defnyddio porwr nad yw VisualEditor yn ei gynnal, yn swyddogol.",
+	"visualeditor-ca-createlocaldescriptionsource": "Ychwanegu tarddiad disgrifiad lleol",
 	"visualeditor-ca-createsource": "Creu tudalen",
 	"visualeditor-ca-editsource": "Golygu cod y dudalen",
 	"visualeditor-ca-editsource-section": "golygu cod y dudalen",

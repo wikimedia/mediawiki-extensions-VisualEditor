@@ -19,7 +19,8 @@
 			"Mervat Salman",
 			"Hiba Alshawi",
 			"فلورانس",
-			"PhiberOptik"
+			"PhiberOptik",
+			"Shbib Al-Subaie"
 		]
 	},
 	"apihelp-visualeditor-description": "يرجع الأيش تي أم أل 5 لصفحة من الخدمة بارسويد (Parsoid ).",
@@ -227,6 +228,7 @@
 	"visualeditor-differror": "خطأ في تحميل البيانات من الخادوم: $1.",
 	"visualeditor-donebutton-tooltip": "انتهيت من التعديل",
 	"visualeditor-editconflict": "تعذر حفظ التغييرات الخاصة لوجود تضارب تحرير. أتود{{GENDER:||ين}} تصويب التضارب يدويا؟",
+	"visualeditor-editingtabdialog-ok": "موافق",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|لا ملاحظات|ملاحظة واحدة|ملاحظتان|$1 ملاحظات|$1 ملاحظة}}",
 	"visualeditor-editnotices-tooltip": "تبصرات التحرير",
 	"visualeditor-editsummary": "صف ما غيرته",

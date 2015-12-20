@@ -4,7 +4,8 @@
 			"Amir a57",
 			"Koroğlu",
 			"Mousa",
-			"Ebrahimi-amir"
+			"Ebrahimi-amir",
+			"Alp Er Tunqa"
 		]
 	},
 	"tooltip-ca-ve-edit": "بۇ صفحه‌‌نی دَییشدیر",
@@ -12,5 +13,8 @@
 	"visualeditor-ca-createsource": "یازی کوکون یارات",
 	"visualeditor-ca-editsource": "قایناغی دَییشدیر",
 	"visualeditor-ca-editsource-section": "قایناغی دَییشدیر",
-	"visualeditor-descriptionpagelink": "Project:گورمک دَییشدیرمه سی"
+	"visualeditor-descriptionpagelink": "Project:گورمک دَییشدیرمه سی",
+	"visualeditor-dialog-meta-languages-label": "دیل‌لر",
+	"visualeditor-dialog-meta-languages-section": "دیل‌لر",
+	"visualeditor-languages-tool": "دیل‌لر"
 }

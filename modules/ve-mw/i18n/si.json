@@ -8,7 +8,8 @@
 			"Indunil Chamara",
 			"Susith Chandira Gts",
 			"Thirsty",
-			"හරිත"
+			"හරිත",
+			"SusithCM"
 		]
 	},
 	"tooltip-ca-createsource": "මෙම පිටුවේ ප්‍රභව කේතයන් නිර්මාණය කරන්න",
@@ -84,6 +85,7 @@
 	"visualeditor-dialogbutton-reference-tooltip": "සමුද්දේශ",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "සමුද්දේශ ලැයිස්තුව",
 	"visualeditor-differror": "ස'වරය වෙතින් දත්ත පූරණය කිරීමේ දෝෂය: $1.",
+	"visualeditor-editingtabdialog-ok": "හරි",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|නිවේදන}} $1 කි",
 	"visualeditor-editnotices-tooltip": "නිවේදන සංස්කරණය",
 	"visualeditor-editsummary": "ඔබ විසින් කළ වෙනස කුමක්දැයි පහදන්න",
