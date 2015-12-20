@@ -159,6 +159,22 @@ ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
 };
 
 /**
+ * Set the minimum number of rows in the Ace editor widget
+ *
+ * @param {number} minRows The minimum number of rows
+ */
+ve.ui.MWAceEditorWidget.prototype.setMinRows = function ( minRows ) {
+	var widget = this;
+	this.loadingPromise.done( function () {
+		widget.editor.setOptions( {
+			minLines: minRows
+		} );
+	} );
+	// TODO: Implement minRows setter for OO.ui.TextInputWidget
+	// and call it here in loadingPromise.fail
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWAceEditorWidget.prototype.getRange = function () {
