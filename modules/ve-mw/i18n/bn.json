@@ -185,6 +185,7 @@
 	"visualeditor-differror": "সার্ভার থেকে ডাটা লোডে ত্রুটি: $1।",
 	"visualeditor-donebutton-tooltip": "সম্পাদনা সম্পন্ন",
 	"visualeditor-editconflict": "আপনার পরিবর্তনগুলো সম্পাদনা দ্বন্দ্বের কারণে সংরক্ষণ করা যায়নি। {{GENDER:|আপনি}} ম্যানুয়ালি এই দ্বন্দ্ব সমাধান করতে ইচ্ছুক?",
+	"visualeditor-editingtabdialog-ok": "ঠিক আছে",
 	"visualeditor-editnotices-tool": "$1টি {{PLURAL:$1|বিজ্ঞপ্তি}}",
 	"visualeditor-editnotices-tooltip": "সম্পাদনা বিজ্ঞপ্তি",
 	"visualeditor-editsummary": "আপনার পরবর্তনের বিবরণ দিন",

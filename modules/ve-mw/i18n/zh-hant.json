@@ -19,7 +19,8 @@
 			"LNDDYL",
 			"Deryck Chan",
 			"Cwek",
-			"Zhxy 519"
+			"Zhxy 519",
+			"Bowleerin"
 		]
 	},
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
@@ -277,6 +278,7 @@
 	"visualeditor-mweditmodesource-warning-switch-discard": "放棄變更",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|圖片標題",
 	"visualeditor-mwgalleryinspector-title": "圖庫",
+	"visualeditor-mwsignature-tool": "您的簽名",
 	"visualeditor-pagemenu-tooltip": "頁面選項",
 	"visualeditor-pagetranslationwarning": "您正在編輯翻譯頁面，此編輯器目前尚未完全支援編輯翻譯頁面。",
 	"visualeditor-parameter-input-placeholder": "參數名稱",
@@ -287,6 +289,10 @@
 	"visualeditor-preference-core-description": "開啟視覺化編輯器，目前尚未支援對話頁面及其他命名空間。",
 	"visualeditor-preference-core-label": "視覺化編輯",
 	"visualeditor-preference-enable": "開啟視覺化編輯器，將可於以下{{PLURAL:$2|命名空間}}使用：$1",
+	"visualeditor-preference-tabs": "編輯標籤",
+	"visualeditor-preference-tabs-multi-tab": "對我顯示兩種編輯器標籤",
+	"visualeditor-preference-tabs-prefer-ve": "如可能，請讓我使用視覺化編輯器",
+	"visualeditor-preference-tabs-prefer-wt": "總是讓我使用Wiki語言編輯器",
 	"visualeditor-recreate": "此頁面在您編輯的這段期間已被刪除，請點選 \"$1\" 重新建立頁面。",
 	"visualeditor-reference-input-placeholder": "搜尋目前的引用",
 	"visualeditor-referenceslist-isempty": "此頁面中無群組為 \"$1\" 的參考文獻可加入引用清單。",

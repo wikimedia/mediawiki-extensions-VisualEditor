@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Baloch Afghanistan"
+			"Baloch Afghanistan",
+			"Ibrahim khashrowdi"
 		]
 	},
 	"tooltip-ca-ve-edit": "ای دیمی ایڈیٹ کورتین گۆ دیدارین ایڈیٹ ئا.",
@@ -9,5 +10,6 @@
 	"visualeditor-ca-createsource": "بُن ئی متن جۆڑ کورتین",
 	"visualeditor-ca-editsource": "بُن زهی ایڈیٹ",
 	"visualeditor-ca-editsource-section": "بُنزهی ئی ایڈیٹ کورتین",
-	"visualeditor-descriptionpagelink": "Project:دیدارین ایڈیٹگر"
+	"visualeditor-descriptionpagelink": "Project:دیدارین ایڈیٹگر",
+	"visualeditor-dialog-template-title": "تراشوان"
 }

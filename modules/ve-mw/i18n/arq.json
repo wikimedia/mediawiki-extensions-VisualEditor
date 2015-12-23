@@ -3,12 +3,13 @@
 		"authors": [
 			"Bachounda",
 			"Oldstoneage",
-			"Hussam"
+			"Hussam",
+			"GeekEmad"
 		]
 	},
 	"tooltip-ca-createsource": "اصنع الكود المصدري لهذه الباجة",
 	"tooltip-ca-editsource": "بدل الكود المصدري لهاذ الباجة",
-	"tooltip-ca-ve-edit": "غير هاد الباجة بالمحرر المرئي",
+	"tooltip-ca-ve-edit": "بدّل هاد الـصفحه",
 	"visualeditor-advancedsettings-tool": "إعدادات متقدمة",
 	"visualeditor-annotationbutton-linknode-tooltip": "وصلة بسيطة",
 	"visualeditor-beta-appendix": "بيتا",
