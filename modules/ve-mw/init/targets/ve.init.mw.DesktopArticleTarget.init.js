@@ -226,10 +226,12 @@
 				return target.activate( dataPromise );
 			} )
 			.then( function () {
-				resetLoadingProgress();
 				ve.track( 'mwedit.ready' );
 			} )
-			.always( hideLoading );
+			.always( function () {
+				hideLoading();
+				resetLoadingProgress();
+			} );
 	}
 
 	function trackActivateStart( initData ) {

@@ -492,8 +492,12 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 		} );
 	}
 
+	// Cancel activating, start deactivating
 	this.deactivating = true;
+	this.activating = false;
+	this.activatingDeferred.reject();
 	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active' );
+
 	// User interface changes
 	if ( this.elementsThatHadOurAccessKey ) {
 		this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
@@ -515,9 +519,10 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 	}
 
 	// Check we got as far as setting up the surface
-	if ( this.active ) {
-		this.teardownUnloadHandlers();
-		// If we got as far as setting up the surface, tear that down
+	if ( this.getSurface() ) {
+		if ( this.active ) {
+			this.teardownUnloadHandlers();
+		}
 		promises.push( this.teardownSurface() );
 	} else if ( this.toolbar ) {
 		// If a dummy toolbar was created, destroy it
@@ -535,8 +540,6 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 		target.initialEditSummary = new mw.Uri().query.summary;
 
 		target.deactivating = false;
-		target.activating = false;
-		target.activatingDeferred.reject();
 		$( 'html' ).removeClass( 've-deactivating' );
 
 		// Move remaining elements back out of the target
@@ -836,7 +839,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 		promises = [];
 
 	// Update UI
-	promises.push( this.teardownToolbar(), this.teardownDebugBar() );
+	promises.push( this.teardownToolbar() );
 	this.restoreDocumentTitle();
 	if ( this.getSurface().mwTocWidget ) {
 		this.getSurface().mwTocWidget.teardown();
@@ -959,22 +962,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 		} );
 	} );
 	return deferred.promise();
-};
-
-/**
- * Hide the debug bar.
- *
- * @return {jQuery.Promise} Promise which resolves when debug bar is hidden
- */
-ve.init.mw.DesktopArticleTarget.prototype.teardownDebugBar = function () {
-	var target = this;
-	if ( this.debugBar ) {
-		return this.debugBar.$element.slideUp( 'fast' ).promise().then( function () {
-			target.debugBar.$element.remove();
-			target.debugBar = null;
-		} );
-	}
-	return $.Deferred().resolve().promise();
 };
 
 /**
