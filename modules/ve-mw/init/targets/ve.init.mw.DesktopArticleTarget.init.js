@@ -20,7 +20,7 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
 		pageCanLoadVE, init, support, targetPromise, enable, tempdisable, autodisable,
-		userPrefEnabled, initialWikitext,
+		userPrefEnabled, initialWikitext, multipleSectionEditLinks,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -479,6 +479,14 @@
 			var $editsections = $( '#mw-content-text .mw-editsection' ),
 				bodyDir = $( 'body' ).css( 'direction' );
 
+			if ( !multipleSectionEditLinks ) {
+				// More horrible stuff to prevent the weird caller in
+				// ve.init.mw.DesktopArticleTarget.prototype.saveComplete
+				// from having any effect when we wouldn't normally get
+				// called at all.
+				return;
+			}
+
 			// Match direction of the user interface
 			// TODO: Why is this needed? It seems to work fine without.
 			if ( $editsections.css( 'direction' ) !== bodyDir ) {
@@ -790,6 +798,7 @@
 				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
 				userPrefEnabled
 			) {
+				multipleSectionEditLinks = false;
 				if (
 					pageCanLoadVE && (
 						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
@@ -811,6 +820,7 @@
 					} );
 				}
 			} else if ( userPrefEnabled ) {
+				multipleSectionEditLinks = true;
 				init.setupSkin();
 			}
 		}
