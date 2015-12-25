@@ -8,7 +8,8 @@
 			"Mitzev",
 			"StanProg",
 			"Spiritia",
-			"Лорд Бъмбъри"
+			"Лорд Бъмбъри",
+			"Vodnokon4e"
 		]
 	},
 	"tooltip-ca-createsource": "Създаване на изходния код на страницата",
@@ -21,7 +22,7 @@
 	"visualeditor-ca-editsource": "Редактиране на кода",
 	"visualeditor-ca-editsource-section": "редактиране на кода",
 	"visualeditor-categories-tool": "Категории",
-	"visualeditor-descriptionpagelink": "Project:ВизуаленРедактор",
+	"visualeditor-descriptionpagelink": "Project:Визуален редактор",
 	"visualeditor-dialog-media-content-section": "Надпис",
 	"visualeditor-dialog-media-position-left": "Ляво",
 	"visualeditor-dialog-media-position-none": "Няма",
