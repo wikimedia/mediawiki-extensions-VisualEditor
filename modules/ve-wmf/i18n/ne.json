@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"सरोज कुमार ढकाल"
+			"सरोज कुमार ढकाल",
+			"बिप्लब आनन्द"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|भिजुअल एडिटर]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|भिजुअल एडिट]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|भिजुअल एडिटर]] प्रयोग गरेर सम्पादन गरिएको",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|भिजुअल एडिटर: जाँच्नुहोस्]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|भिजुअल एडिटर]] प्रयोग गरेर सम्पादन गरिएको जहाँ प्रणालीले विकिपाठ संभवतः अनायास परिवर्तन भइरहेको पत्ता लगायो।",

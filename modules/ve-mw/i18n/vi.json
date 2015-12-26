@@ -198,7 +198,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Trường bị phản đối. $1",
 	"visualeditor-dialog-transclusion-loading": "Đang tải…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Hiện tùy chọn",
-	"visualeditor-dialog-transclusion-no-template-description": "Bạn {{GENDER:$2}}đang đưa bản mẫu “$1” vào trang này. Nó chưa có lời miêu tả, nhưng [[{{ns:template}}:$1|trang của bản mẫu]] có thể có thông tin về nó.",
+	"visualeditor-dialog-transclusion-no-template-description": "Bản mẫu “$1” chưa có lời miêu tả, nhưng [[{{ns:template}}:$1|trang của bản mẫu]] có thể có thông tin về nó.",
 	"visualeditor-dialog-transclusion-options": "Tùy chọn",
 	"visualeditor-dialog-transclusion-param-default": "Giá trị mặc định: $1",
 	"visualeditor-dialog-transclusion-param-example": "Giá trị mẫu: $1",
