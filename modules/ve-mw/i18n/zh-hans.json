@@ -306,7 +306,7 @@
 	"visualeditor-preference-tabs-multi-tab": "向我显示两个编辑器标签",
 	"visualeditor-preference-tabs-prefer-ve": "如果可能，总是让我使用可视化编辑器",
 	"visualeditor-preference-tabs-prefer-wt": "总是让我使用wiki文本编辑器",
-	"visualeditor-preference-tabs-remember-last": "记住我最近一次编辑",
+	"visualeditor-preference-tabs-remember-last": "记住我上次使用的编辑器",
 	"visualeditor-recreate": "此页面自从您开始编辑以来已被删除。请点击“$1”以重新创建。",
 	"visualeditor-reference-input-placeholder": "在当前引用中搜索",
 	"visualeditor-referenceslist-isempty": "本页面没有可包含在该列表中的组为“$1”的参考文献。",
