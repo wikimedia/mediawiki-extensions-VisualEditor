@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Leeheonjin"
+			"Leeheonjin",
+			"Amiel Guanlao"
 		]
 	},
 	"visualeditor-backbutton-tooltip": "Mibalik",
-	"visualeditor-editingtabdialog-ok": "Sigi",
+	"visualeditor-editingtabdialog-ok": "Sulung",
 	"visualeditor-mwsignature-tool": "Ing kekang lagda",
 	"visualeditor-savedialog-label-restore-short": "Ibálik yang pasibayu",
 	"visualeditor-savedialog-label-save-short": "Isikap (save)",
