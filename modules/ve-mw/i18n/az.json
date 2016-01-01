@@ -115,6 +115,7 @@
 	"visualeditor-editconflict": "Sizin dəyişikliklər redaktə münaqişəsinə görə yadda saxlanıla bilmir. {{GENDER:|Siz}} münaqişəni əllə həll etmək istəyirsinizmi?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notice|notices}}",
 	"visualeditor-editsummary": "Edilən dəyişikliklərin izahı",
+	"visualeditor-editsummary-bytes-remaining": "Qalan baytların sayı",
 	"visualeditor-formatdropdown-format-mw-heading1": "Səhifənin adı",
 	"visualeditor-formatdropdown-format-mw-heading2": "Başlıq",
 	"visualeditor-formatdropdown-format-mw-heading3": "Alt başlığı 1",
