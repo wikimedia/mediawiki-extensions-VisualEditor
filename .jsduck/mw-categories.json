@@ -25,7 +25,8 @@
 			{
 				"name": "Data Model",
 				"classes": [
-					"ve.dm.MWMediaResource*"
+					"ve.dm.MW*Provider",
+					"ve.dm.MW*Queue"
 				]
 			}
 		]

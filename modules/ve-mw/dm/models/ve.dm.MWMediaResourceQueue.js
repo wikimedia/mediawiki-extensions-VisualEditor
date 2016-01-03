@@ -21,51 +21,12 @@ ve.dm.MWMediaResourceQueue = function VeDmMWMediaResourceQueue( config ) {
 
 	// Parent constructor
 	ve.dm.MWMediaResourceQueue.super.call( this, config );
-	this.searchQuery = '';
+
 	this.maxHeight = config.maxHeight || 200;
 };
 
 /* Inheritance */
 OO.inheritClass( ve.dm.MWMediaResourceQueue, ve.dm.APIResultsQueue );
-
-/**
- * Override parent method to set up the providers according to
- * the file repos
- *
- * @return {jQuery.Promise} Promise that resolves when the resources are set up
- */
-ve.dm.MWMediaResourceQueue.prototype.setup = function () {
-	var i, len,
-		queue = this;
-
-	return this.getFileRepos().then( function ( sources ) {
-		if ( queue.providers.length === 0 ) {
-			// Set up the providers
-			for ( i = 0, len = sources.length; i < len; i++ ) {
-				queue.providers.push( new ve.dm.MWMediaResourceProvider(
-					sources[ i ].apiurl,
-					{
-						name: sources[ i ].name,
-						local: sources[ i ].local,
-						scriptDirUrl: sources[ i ].scriptDirUrl,
-						userParams: {
-							gsrsearch: queue.getSearchQuery()
-						},
-						staticParams: {
-							action: 'query',
-							iiurlheight: queue.getMaxHeight(),
-							generator: 'search',
-							gsrnamespace: 6,
-							continue: '',
-							iiprop: 'dimensions|url|mediatype|extmetadata|timestamp|user',
-							prop: 'imageinfo'
-						}
-					} )
-				);
-			}
-		}
-	} );
-};
 
 /**
  * Fetch the file repos.
@@ -93,16 +54,6 @@ ve.dm.MWMediaResourceQueue.prototype.getFileRepos = function () {
 	}
 
 	return this.fileRepoPromise;
-};
-
-/**
- * Get the search query
- *
- * @return {string} API search query
- */
-ve.dm.MWMediaResourceQueue.prototype.getSearchQuery = function () {
-	var params = this.getParams();
-	return params.gsrsearch;
 };
 
 /**

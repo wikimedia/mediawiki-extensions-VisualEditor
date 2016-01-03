@@ -27,9 +27,9 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	// Properties
 	this.providers = {};
 	this.searchValue = '';
-	this.resourceQueue = new ve.dm.MWMediaResourceQueue( {
-		limit: 20,
-		threshold: 10
+	this.searchQueue = new ve.dm.MWMediaSearchQueue( {
+		limit: this.constructor.static.limit,
+		threshold: this.constructor.static.threshold
 	} );
 
 	this.queryTimeout = null;
@@ -41,7 +41,6 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	// Masonry fit properties
 	this.rows = [];
 	this.rowHeight = config.rowHeight || 200;
-	this.queryMediaQueueCallback = this.queryMediaQueue.bind( this );
 	this.layoutQueue = [];
 	this.numItems = 0;
 	this.currentItemCache = [];
@@ -73,6 +72,12 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWMediaSearchWidget, OO.ui.SearchWidget );
+
+/* Static properties */
+
+ve.ui.MWMediaSearchWidget.static.limit = 10;
+
+ve.ui.MWMediaSearchWidget.static.threshold = 5;
 
 /* Methods */
 
@@ -119,6 +124,7 @@ ve.ui.MWMediaSearchWidget.prototype.teardown = function () {
 ve.ui.MWMediaSearchWidget.prototype.setup = function () {
 	$( window ).on( 'resize', this.resizeHandler );
 };
+
 /**
  * Query all sources for media.
  *
@@ -135,8 +141,8 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 	this.query.pushPending();
 	search.noItemsMessage.toggle( false );
 
-	this.resourceQueue.setParams( { gsrsearch: value } );
-	this.resourceQueue.get( 20 )
+	this.searchQueue.setSearchQuery( value );
+	this.searchQueue.get( this.constructor.static.limit )
 		.then( function ( items ) {
 			if ( items.length > 0 ) {
 				search.processQueueResults( items, value );
@@ -162,7 +168,7 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 	var i, len, title,
 		resultWidgets = [],
 		inputSearchQuery = this.query.getValue(),
-		queueSearchQuery = this.resourceQueue.getSearchQuery();
+		queueSearchQuery = this.searchQueue.getSearchQuery();
 
 	if ( inputSearchQuery === '' || queueSearchQuery !== inputSearchQuery ) {
 		return;
@@ -213,11 +219,11 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 	this.layoutQueue = [];
 
 	// Change resource queue query
-	this.resourceQueue.setParams( { gsrsearch: this.searchValue } );
+	this.searchQueue.setSearchQuery( this.searchValue );
 
 	// Queue
 	clearTimeout( this.queryTimeout );
-	this.queryTimeout = setTimeout( this.queryMediaQueueCallback, 350 );
+	this.queryTimeout = setTimeout( this.queryMediaQueue.bind( this ), 350 );
 };
 
 /**
@@ -293,12 +299,12 @@ ve.ui.MWMediaSearchWidget.prototype.getAvailableRow = function () {
 			width: 0,
 			items: [],
 			$element: $( '<div>' )
-					.addClass( 've-ui-mwMediaResultWidget-row' )
-					.css( {
-						overflow: 'hidden'
-					} )
-					.data( 'row', row )
-					.attr( 'data-full', false )
+				.addClass( 've-ui-mwMediaResultWidget-row' )
+				.css( {
+					overflow: 'hidden'
+				} )
+				.data( 'row', row )
+				.attr( 'data-full', false )
 		};
 		// Append to results
 		this.results.$element.append( this.rows[ row ].$element );
