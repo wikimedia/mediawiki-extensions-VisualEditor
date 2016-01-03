@@ -248,6 +248,8 @@
 	"visualeditor-preference-core-label": "Visuell änneren",
 	"visualeditor-preference-enable": "De visuellen Editeur aktivéieren. En an{{PLURAL:$2|dësem Nummraum| dësen Nummraim}} disponibel: $1",
 	"visualeditor-preference-tabs-multi-tab": "Déi zwee Ännerungs-Tabs weisen",
+	"visualeditor-preference-tabs-prefer-ve": "De visuellen Editeur ëmmer benotze wann et méiglech ass",
+	"visualeditor-preference-tabs-prefer-wt": "De Wikitext-Editeur ëmmer benotzen",
 	"visualeditor-preference-tabs-remember-last": "Mäi leschten Auteur verhalen",
 	"visualeditor-recreate": "D'Säit gouf geläscht zanter datt Dir ugefaang hutt se z'änneren. Klickt op \"$1\" fir se nees unzeleeën.",
 	"visualeditor-reference-input-placeholder": "An den aktuellen Zitater sichen",
