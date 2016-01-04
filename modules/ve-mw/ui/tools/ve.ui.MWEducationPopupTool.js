@@ -23,6 +23,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	config = config || {};
 
 	if (
+		!( ve.init.mw.DesktopArticleTarget && ve.init.target instanceof ve.init.mw.DesktopArticleTarget ) ||
 		ve.init.target.dummyToolbar ||
 		(
 			!prefSaysShow &&
