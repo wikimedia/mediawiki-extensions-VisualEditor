@@ -6,7 +6,8 @@
 			"Bouron",
 			"Nasir8891",
 			"Aalam",
-			"Satdeep gill"
+			"Satdeep gill",
+			"Mangat sagar"
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "ਛੋਟੀ ਸੋਧ ਦਾ ਨਿਸ਼ਾਨ",
@@ -109,6 +110,8 @@
 	"visualeditor-dialogbutton-reference-title": "ਹਵਾਲਾ",
 	"visualeditor-dialogbutton-referenceslist-tooltip": "ਹਵਾਲਾ ਸੂਚੀ",
 	"visualeditor-dialogbutton-template-tooltip": "ਫਰਮਾ",
+	"visualeditor-editingtabdialog-body": "{{SITENAME}} ਤੁਹਾਡਾ ਪਸੰਦੀਦਾ ਸੰਪਾਦਕ ਕਿਹੜਾ ਹੈ ਹੁਣ ਯਾਦ ਰੱਖੇਗਾ।",
+	"visualeditor-editingtabdialog-ok": "ਮੇਰੀ ਆਪਣੀ ਪਿਛਲੀ ਸੋਧ ਵਿੱਚ ਵਰਤੇ ਸੰਪਾਦਕ ਦੀ ਵਰਤੋਂ ਕਰੋ",
 	"visualeditor-feedback-defaultmessage": "ਯੂਆਰਐਲ: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "ਸਫ਼ਾ ਸਿਰਲੇਖ",
 	"visualeditor-formatdropdown-format-mw-heading2": "ਸਿਰਨਾਵਾਂ",

@@ -234,7 +234,7 @@
 	"visualeditor-differror": "Błąd podczas ładowania danych z serwera: $1.",
 	"visualeditor-donebutton-tooltip": "Edycja wykonana",
 	"visualeditor-editconflict": "Twoje zmiany nie mogły zostać zapisane z powodu wystąpienia konfliktu edycji. Czy {{GENDER:|chcesz}} rozwiązać go ręcznie?",
-	"visualeditor-editingtabdialog-body": "{{SITENAME}} teraz pamięta jakiego edytora użyłeś ostatni raz po naciśnięciu na zakładkę \"$1\".",
+	"visualeditor-editingtabdialog-body": "{{SITENAME}} pamięta teraz, jaki edytor preferujesz.",
 	"visualeditor-editingtabdialog-ok": "OK",
 	"visualeditor-editingtabdialog-title": "Zakładki edycji",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|komunikat|komunikaty|komunikatów}}",

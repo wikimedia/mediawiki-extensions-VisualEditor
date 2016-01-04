@@ -114,7 +114,7 @@
 	"visualeditor-diff-nochanges": "Төзәтмәләр инкарь ителде, чөнки сез текстка бернинди дә үзгәртүләр кертмәдегез.",
 	"visualeditor-differror": "Сервердан мәгълүматлар йөкләү хатасы:$1",
 	"visualeditor-editconflict": "Сезнең үзгәртүләрне саклый алмадык, чөнки мөхәррирләү конфликты килеп чыкты. {{GENDER:|Сез}} низагны кулдан гына чишергә телисезме?",
-	"visualeditor-editingtabdialog-ok": "OK",
+	"visualeditor-editingtabdialog-ok": "Соңгы үзгәртүдә кулланылган мөхәррирне куллану",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|искәрмә}}",
 	"visualeditor-editsummary": "Кертелгән үзгәртүләрне тасвирлагыз",
 	"visualeditor-feedback-defaultmessage": "URL-адрес: $1",
