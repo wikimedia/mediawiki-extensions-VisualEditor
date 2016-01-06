@@ -26,7 +26,8 @@
 			"Striking Blue",
 			"Дмитрий",
 			"Краснорядцева Елена",
-			"Iniquity"
+			"Iniquity",
+			"Ядерный Трамвай"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -223,6 +224,7 @@
 	"visualeditor-differror": "Ошибка при загрузке данных с сервера: $1",
 	"visualeditor-donebutton-tooltip": "Редактирование завершено",
 	"visualeditor-editconflict": "Ваши изменения не удалось сохранить, потому что произошёл конфликт редактирования. Хотите ли {{GENDER:|вы}} разрешить конфликт вручную?",
+	"visualeditor-editingtabdialog-body": "{{SITENAME}} теперь помнит, какой редактор вы предпочитаете.",
 	"visualeditor-editingtabdialog-ok": "Пользоваться редактором, который я использовал при последней правке",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сообщение|сообщения|сообщений}}",
 	"visualeditor-editnotices-tooltip": "Заметки по редактированию",

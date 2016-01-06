@@ -231,7 +231,7 @@
 	"visualeditor-donebutton-tooltip": "編集を終了する",
 	"visualeditor-editconflict": "編集競合のため、編集内容を保存できませんでした。{{GENDER:|}}この競合を手動で解決しますか?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} は、「$1」タブをクリックした際に最後に使用したエディタを記憶します。",
-	"visualeditor-editingtabdialog-ok": "OK",
+	"visualeditor-editingtabdialog-ok": "最後に使用したエディターを使う",
 	"visualeditor-editingtabdialog-title": "編集中のタブ",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|件のお知らせ}}",
 	"visualeditor-editnotices-tooltip": "通知を編集",
