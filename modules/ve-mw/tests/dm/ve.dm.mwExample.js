@@ -256,7 +256,7 @@ ve.dm.mwExample.MWInternalSectionLink.absoluteData = {
 ve.dm.mwExample.MWBlockImage = {
 	html:
 		'<figure typeof="mw:Image/Thumb" class="mw-halign-right foobar">' +
-			'<a href="Foo"><img src="Bar" width="1" height="2" resource="FooBar"></a>' +
+			'<a href="Foo"><img src="' + ve.ce.minImgDataUri + '" width="1" height="2" resource="FooBar"></a>' +
 			'<figcaption>abc</figcaption>' +
 		'</figure>',
 	data: [
@@ -266,7 +266,7 @@ ve.dm.mwExample.MWBlockImage = {
 				type: 'thumb',
 				align: 'right',
 				href: 'Foo',
-				src: 'Bar',
+				src: ve.ce.minImgDataUri,
 				width: 1,
 				height: 2,
 				resource: 'FooBar',
@@ -1171,7 +1171,7 @@ ve.dm.mwExample.domToDataCases = {
 	'mw:AlienInlineExtension': {
 		body:
 			'<p>' +
-				'<img src="Foo" width="100" height="20" alt="Bar" typeof="mw:Extension/score"' +
+				'<img src="' + ve.ce.minImgDataUri + '" width="100" height="20" alt="Bar" typeof="mw:Extension/score"' +
 					' data-mw="{&quot;name&quot;:&quot;score&quot;,&quot;attrs&quot;:{},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\\\relative c&#39; { e d c d e e e }&quot;}}" ' +
 					' data-parsoid="1" about="#mwt1" />' +
 			'</p>',
@@ -1179,7 +1179,7 @@ ve.dm.mwExample.domToDataCases = {
 			'<p>' +
 				'<span typeof="mw:Extension/score"' +
 					' data-mw="{&quot;name&quot;:&quot;score&quot;,&quot;attrs&quot;:{},&quot;body&quot;:{&quot;extsrc&quot;:&quot;\\\\relative c&#39; { d d d e e e }&quot;}}" ' +
-					' src="Foo" width="100" height="20" alt="Bar" data-parsoid="1" about="#mwt1" />' +
+					' src="' + ve.ce.minImgDataUri + '" width="100" height="20" alt="Bar" data-parsoid="1" about="#mwt1" />' +
 			'</p>',
 		data: [
 			{ type: 'paragraph' },
@@ -1195,7 +1195,7 @@ ve.dm.mwExample.domToDataCases = {
 					},
 					originalMw: '{"name":"score","attrs":{},"body":{"extsrc":"\\\\relative c\' { e d c d e e e }"}}'
 				},
-				originalDomElements: $( '<img src="Foo" width="100" height="20" alt="Bar" about="#mwt1" data-parsoid="1"></img>' ).toArray()
+				originalDomElements: $( '<img src="' + ve.ce.minImgDataUri + '" width="100" height="20" alt="Bar" about="#mwt1" data-parsoid="1"></img>' ).toArray()
 			},
 			{ type: '/mwAlienInlineExtension' },
 			{ type: '/paragraph' },
@@ -1913,7 +1913,7 @@ ve.dm.mwExample.domToDataCases = {
 		body:
 			'<figure typeof="mw:Image/Thumb" data-parsoid="{}">' +
 				'<a href="Foo" data-parsoid="{}">' +
-					'<img src="Bar" width="1" height="2" resource="FooBar" data-parsoid="{}">' +
+					'<img src="' + ve.ce.minImgDataUri + '" width="1" height="2" resource="FooBar" data-parsoid="{}">' +
 				'</a>' +
 				'<figcaption data-parsoid="{}">' +
 				' foo <a rel="mw:WikiLink" href="./Bar" data-parsoid="{}">bar</a> baz' +
@@ -1922,7 +1922,7 @@ ve.dm.mwExample.domToDataCases = {
 		fromDataBody:
 			'<figure typeof="mw:Image/Thumb">' +
 				'<a href="Foo">' +
-					'<img src="Bar" width="1" height="2" resource="FooBar">' +
+					'<img src="' + ve.ce.minImgDataUri + '" width="1" height="2" resource="FooBar">' +
 				'</a>' +
 				'<figcaption>' +
 				' foo <a rel="mw:WikiLink" href="./Bar">bar</a> baz' +
@@ -1936,7 +1936,7 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'thumb',
 					align: 'default',
 					href: 'Foo',
-					src: 'Bar',
+					src: ve.ce.minImgDataUri,
 					width: 1,
 					height: 2,
 					resource: 'FooBar'
