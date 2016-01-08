@@ -2,9 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Sanlinnaing",
-			"Zawthet"
+			"Zawthet",
+			"Ninjastrikers"
 		]
 	},
+	"tooltip-ca-ve-edit": "ဤစာမျက်နှာကို တည်းဖြတ်ရန်",
+	"visualeditor-ca-createsource": "ရင်းမြစ် ဖန်တီးရန်",
+	"visualeditor-ca-editsource": "ရင်းမြစ်ကို တည်းဖြတ်ရန်",
+	"visualeditor-ca-editsource-section": "ရင်းမြစ်ကို တည်းဖြတ်ရန်",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-meta-categories-missing": "ဒီခေါင်းစီးအောက်မှာ ဖော်ပြချက်စာမျက်နှာ မပါရှိပါ။",
-	"visualeditor-dialogbutton-reference-title": "ရည်ညွှန်း"
+	"visualeditor-dialog-meta-languages-label": "ဘာသာစကားများ",
+	"visualeditor-dialogbutton-reference-title": "ရည်ညွှန်း",
+	"visualeditor-languages-tool": "ဘာသာစကားများ"
 }
