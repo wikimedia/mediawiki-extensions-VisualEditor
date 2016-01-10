@@ -246,6 +246,8 @@
 	"visualeditor-differror": "Error al cargar datos del servidor: $1.",
 	"visualeditor-donebutton-tooltip": "Edición finalizada",
 	"visualeditor-editconflict": "No se pudieron guardar tus cambios debido a un conflicto de edición. {{GENDER:|¿Deseas}} resolver el conflicto manualmente?",
+	"visualeditor-editingtabdialog-body": "Ahora {{SITENAME}} recuerda qué editor prefieres.",
+	"visualeditor-editingtabdialog-ok": "Utilizar el editor que usé en mi última edición",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|aviso|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos de edición",
 	"visualeditor-editsummary": "Describe lo que has cambiado",

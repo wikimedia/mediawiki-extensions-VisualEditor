@@ -156,6 +156,7 @@
 	"visualeditor-savedialog-label-resolve-conflict": "Конфликтны чишү",
 	"visualeditor-savedialog-label-restore": "Битне кире кайтару",
 	"visualeditor-savedialog-label-restore-short": "Торгызу",
+	"visualeditor-savedialog-label-resume-editing": "Үзгәртүне дәвам итү",
 	"visualeditor-savedialog-label-review": "Кертелгән үзгәртүләрне тикшерү",
 	"visualeditor-savedialog-label-review-good": "Саклау формасына кайту",
 	"visualeditor-savedialog-label-save": "Битне сакларга",
@@ -175,6 +176,7 @@
 	"visualeditor-usernamespacepagelink": "Project:Шәхси киңлек",
 	"visualeditor-version-label": "Юрама",
 	"visualeditor-viewpage-savewarning": "Сез чыннан да үзгәртүләрне сакламыйча гына карау режимына кайтырга телисезме?",
+	"visualeditor-viewpage-savewarning-keep": "Үзгәртүне дәвам итү",
 	"visualeditor-viewpage-savewarning-title": "Сез ризамы?",
 	"visualeditor-wikitext-warning-title": "Вики-билгеләр табылды"
 }
