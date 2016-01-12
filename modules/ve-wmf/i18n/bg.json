@@ -6,13 +6,17 @@
 			"පසිඳු කාවින්ද",
 			"Mitzev",
 			"StanProg",
-			"Лорд Бъмбъри"
+			"Лорд Бъмбъри",
+			"Vodnokon4e"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуален редактор]]",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Switched]]",
-	"tag-visualeditor-switched-description": "Потребителят започва да редактира чрез VisualEditor и след това преминава към уикитекст редактора.",
-	"visualeditor-feedback-tool": "Обратна връзка",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуално редактиране: Превключено]]",
+	"tag-visualeditor-switched-description": "Потребителят започва да редактира чрез визуалния редактор и след това преминава към уикитекст редактора.",
+	"visualeditor-feedback-tool": "Оставете обратна връзка за този софтуер",
 	"visualeditor-help-label": "Прочитане на наръчника",
-	"visualeditor-help-title": "Наръчник за употреба на редактора"
+	"visualeditor-help-title": "Наръчник за употреба на редактора",
+	"visualeditor-welcomedialog-action": "Започнете да редактирате",
+	"visualeditor-welcomedialog-content": "Всеки може да редактира, и всяко подобрение е полезно.",
+	"visualeditor-welcomedialog-content-thanks": "Благодарим ви, че помагате на света да научи повече!"
 }
