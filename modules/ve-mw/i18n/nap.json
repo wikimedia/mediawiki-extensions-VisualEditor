@@ -223,7 +223,7 @@
 	"visualeditor-differror": "Errore carrecann' 'e date 'a 'o server: $1.",
 	"visualeditor-donebutton-tooltip": "Cagnamiente fatte",
 	"visualeditor-editconflict": "'E cagnamiente vuoste nun ponno essere riggistrate pecche nce sta nu cunflitt' 'e cagnamiente. {{GENDER:|Vuje}} vulite arricettà stu cunflitto a mmano?",
-	"visualeditor-editingtabdialog-body": "{{SITENAME}} mo' se ricurdasse 'e quale editore avite ausato ll'urdema vota quanno facite clic ncopp' 'a scheda \"$1\".",
+	"visualeditor-editingtabdialog-body": "{{SITENAME}} mo' se ricurdasse 'e quale editore preferite.",
 	"visualeditor-editingtabdialog-ok": "Ausa l'editore c'aggio ausato io dint'a ll'urdemo cagnamiento",
 	"visualeditor-editingtabdialog-title": "Editanno schede",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|nutifica|nutifiche}}",

@@ -30,7 +30,8 @@
 			"MedShot",
 			"Esketti",
 			"FabianRM",
-			"Mbch331"
+			"Mbch331",
+			"Robin van der Vliet"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -284,7 +285,7 @@
 	"visualeditor-meta-tool": "Opties",
 	"visualeditor-mweditmodesource-title": "Naar broncodemodus schakelen?",
 	"visualeditor-mweditmodesource-tool": "Naar broncodemodus schakelen",
-	"visualeditor-mweditmodesource-warning": "U schakelt over naar broncodebewerking.\nUw wijzigingen aan dit document worden behouden, maar u kunt niet teruggaan naar deze tekstverwerker zonder op te slaan en de pagina opnieuw te laden.\nWilt u doorgaan?",
+	"visualeditor-mweditmodesource-warning": "U schakelt over naar broncodebewerking.\nWilt u doorgaan?",
 	"visualeditor-mweditmodesource-warning-cancel": "Annuleren",
 	"visualeditor-mweditmodesource-warning-switch": "Wijzigingen behouden",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Wijzigingen annuleren",
@@ -330,6 +331,7 @@
 	"visualeditor-saveerror-titleblacklist": "Fout tijdens het opslaan van de pagina: deze pagina staat op de zwarte lijst",
 	"visualeditor-serializeerror": "Fout tijdens het laden van gegevens van de server: $1",
 	"visualeditor-settings-tool": "Pagina-instellingen",
+	"visualeditor-shortcuts-insert": "Invoegen",
 	"visualeditor-special-characters-group-other": "Vaak gebruikt",
 	"visualeditor-timeout": "De visuele tekstverwerker is op dit moment niet beschikbaar. Wilt u in bronmodus bewerken?",
 	"visualeditor-toolbar-cite-label": "Citeren",

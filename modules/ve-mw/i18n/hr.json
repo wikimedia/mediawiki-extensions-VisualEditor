@@ -242,7 +242,7 @@
 	"visualeditor-parameter-search-no-unused": "Nema nekorištenih parametara",
 	"visualeditor-parameter-search-unknown": "Nepoznato polje",
 	"visualeditor-preference-betatempdisable": "Privremeno onemogući VisualEditor (dok je u beta stanju)",
-	"visualeditor-preference-core-description": "Omogući VisualEditor. Uređivanje VisualEditorom neće biti moguće na stranicama za razgovor i u nekim drugim imenskim prostorima.",
+	"visualeditor-preference-core-description": "Omogućavanje VisualEditora. Uređivanje VisualEditorom neće biti moguće na stranicama za razgovor i u nekim drugim imenskim prostorima.",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-preference-enable": "Omogući VisualEditor. Bit će dostupan u sljedećim imenskim prostorima: $1",
 	"visualeditor-recreate": "Stranica je izbrisana nakon što ste počeli s uređivanjem. Pritisnite \"$1\" da biste je ponovno stvorili.",
