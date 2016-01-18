@@ -43,7 +43,6 @@
 	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "PMID 링크",
 	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "RFC 링크",
 	"visualeditor-backbutton-tooltip": "돌아가기",
-	"visualeditor-beta-appendix": "베타",
 	"visualeditor-beta-label": "베타",
 	"visualeditor-beta-warning": "이 편집기는 '베타'입니다. 편집한 내용을 잃지 않고 원본 편집으로 언제든지 전환하려면 \"{{int:visualeditor-toolbar-savedialog}}\" 옆의 드롭다운 메뉴를 열어 \"{{int:visualeditor-mweditmodesource-tool}}\"을 선택하세요.",
 	"visualeditor-browserwarning": "이 편집기가 공식적으로 지원하지 않는 브라우저를 사용하고 있습니다.",

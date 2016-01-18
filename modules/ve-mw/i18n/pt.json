@@ -40,7 +40,6 @@
 	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "Ligação PMID",
 	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "Ligação RFC",
 	"visualeditor-backbutton-tooltip": "Regressar",
-	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Pode regressar ao modo de edição do código a qualquer momento, sem perder as suas alterações, ao clicar na aba \"$1\". Se encontrar algum erro, por favor, informe abaixo.",
 	"visualeditor-browserwarning": "Está a utilizar um navegador que não é oficialmente suportado por este editor.",

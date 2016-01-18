@@ -9,7 +9,6 @@
 	"tooltip-ca-editsource": "си страницѧ источьна обраꙁа исправлѥниѥ",
 	"tooltip-ca-ve-edit": "си страницѧ исправлѥниѥ",
 	"visualeditor-backbutton-tooltip": "Назъд",
-	"visualeditor-beta-appendix": "вита",
 	"visualeditor-beta-label": "вита",
 	"visualeditor-beta-warning": "Визуальный редактор находится в бета-версии, чтобы переключиться на исходный текст, не потеряв ваши изменения, откройте \"{{int:visualeditor-toolbar-savedialog}}\" и выберите {{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-ca-createsource": "сътворѥниѥ источьна обраꙁа",

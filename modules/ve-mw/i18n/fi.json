@@ -45,7 +45,6 @@
 	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "PMID-linkki",
 	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "RFC-linkki",
 	"visualeditor-backbutton-tooltip": "Siirry takaisin",
-	"visualeditor-beta-appendix": "beeta",
 	"visualeditor-beta-label": "beeta",
 	"visualeditor-beta-warning": "Tämä ohjelmisto on vielä kehitysvaiheessa. Voit palata perinteiseen wikitekstin muokkaustilaan muokkauksia menettämättä napsauttamalla $1 -välilehteä. Ilmoita kohtaamistasi ongelmista napsauttamalla alta löytyvää linkkiä.",
 	"visualeditor-browserwarning": "Tämä muokkausohjelma ei välttämättä toimi oikein tällä selaimella.",

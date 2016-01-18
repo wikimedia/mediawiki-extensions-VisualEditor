@@ -50,7 +50,6 @@
 	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "odnośnik PMID",
 	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "odnośnik RFC",
 	"visualeditor-backbutton-tooltip": "Wróć",
-	"visualeditor-beta-appendix": "BETA",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "W każdej chwili możesz przejść do edytora wikitekstu klikając w zakładkę „$1”, nie tracąc dokonanych przez siebie zmian. Jeśli napotkasz jakieś problemy, możesz zgłosić je poniżej.",
 	"visualeditor-browserwarning": "Używasz przeglądarki, która nie jest oficjalnie wspierana przez ten edytor.",

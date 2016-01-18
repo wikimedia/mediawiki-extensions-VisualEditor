@@ -81,7 +81,6 @@
 	"visualeditor-annotationbutton-magiclinknode-tooltip-pmid": "lien PMID",
 	"visualeditor-annotationbutton-magiclinknode-tooltip-rfc": "lien RFC",
 	"visualeditor-backbutton-tooltip": "Revenir en arrière",
-	"visualeditor-beta-appendix": "bêta",
 	"visualeditor-beta-label": "bêta",
 	"visualeditor-beta-warning": "Vous pouvez revenir à tout moment à l’éditeur de wikicode sans perdre vos modifications, en cliquant sur « $1 ». Si vous rencontrez un problème, veuillez le signaler ci-dessous.",
 	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement supporté par cet éditeur.",
