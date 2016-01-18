@@ -20,7 +20,7 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
 		pageCanLoadVE, init, support, targetPromise, enable, tempdisable, autodisable,
-		userPrefEnabled, initialWikitext, oldid, multipleSectionEditLinks,
+		tabPreference, userPrefEnabled, initialWikitext, oldid, multipleSectionEditLinks,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -151,7 +151,7 @@
 		if ( !active ) {
 			if (
 				mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-				mw.user.options.get( 'visualeditor-tabs' ) === 'remember-last'
+				tabPreference === 'remember-last'
 			) {
 				key = pageExists ? 'edit' : 'create';
 				if ( $( '#ca-view-foreign' ).length ) {
@@ -627,6 +627,7 @@
 	enable = Number( mw.user.options.get( 'visualeditor-enable' ) );
 	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
 	autodisable = Number( mw.user.options.get( 'visualeditor-autodisable' ) );
+	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
 	userPrefEnabled = (
 		// Allow disabling for anonymous users separately from changing the
@@ -636,7 +637,10 @@
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable
+		enable && !tempdisable && !autodisable &&
+
+		// If in two-edit-tab mode, or the user doesn't prefer wikitext always
+		( !conf.singleEditTab || tabPreference !== 'prefer-wt' )
 	);
 
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
@@ -692,18 +696,24 @@
 		}
 
 		if ( init.isAvailable ) {
+			// Load the editor …
 			if (
 				(
+					// … if on a ?veaction=edit page
 					( isViewPage && uri.query.veaction === 'edit' ) ||
+					// … or if on ?action=edit in single edit mode and the user wants it
 					(
 						isEditPage &&
-						mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt' &&
-						mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
+						tabPreference !== 'multi-tab' &&
 						(
 							(
-								mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' &&
+								tabPreference === 'prefer-ve' &&
 								mw.config.get( 'wgAction' ) !== 'submit'
-							) || getLastEditor() !== 'wikitext'
+							) ||
+							(
+								tabPreference === 'remember-last' &&
+								getLastEditor() !== 'wikitext'
+							)
 						)
 					)
 				) &&
@@ -723,6 +733,7 @@
 				activateTarget();
 			}
 
+			// Add the switch button to wikitext ?action=edit or ?action=submit pages
 			if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
@@ -762,35 +773,39 @@
 				} );
 			}
 
+			// Set up the tabs appropriately if the user has VE on
 			if (
-				conf.singleEditTab &&
-				mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
 				userPrefEnabled
 			) {
-				multipleSectionEditLinks = false;
-				if (
-					pageCanLoadVE && (
-						mw.user.options.get( 'visualeditor-tabs' ) === 'prefer-ve' ||
-						(
-							getLastEditor() !== 'wikitext' &&
-							mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
+				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
+				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
+					// … set the skin up with both tabs and both section edit links.
+					multipleSectionEditLinks = true;
+					init.setupSkin();
+				} else {
+					multipleSectionEditLinks = false;
+					// … on single-edit-tab wikis, where VE is the user's preferred editor
+					if (
+						pageCanLoadVE && (
+							tabPreference === 'prefer-ve' ||
+							(
+								tabPreference === 'remember-last' &&
+								getLastEditor() !== 'wikitext'
+							)
 						)
-					)
-				) {
-					// Handle section edit link clicks
-					$( '.mw-editsection a' ).on( 'click', function ( e ) {
-						init.onEditSectionLinkClick( e );
-					} );
-					// Allow instant switching to edit mode, without refresh
-					$( '#ca-edit' ).on( 'click', function ( e ) {
-						trackActivateStart( { type: 'page', mechanism: 'click' } );
-						activateTarget();
-						e.preventDefault();
-					} );
+					) {
+						// Handle section edit link clicks
+						$( '.mw-editsection a' ).on( 'click', function ( e ) {
+							init.onEditSectionLinkClick( e );
+						} );
+						// Allow instant switching to edit mode, without refresh
+						$( '#ca-edit' ).on( 'click', function ( e ) {
+							trackActivateStart( { type: 'page', mechanism: 'click' } );
+							activateTarget();
+							e.preventDefault();
+						} );
+					}
 				}
-			} else if ( userPrefEnabled ) {
-				multipleSectionEditLinks = true;
-				init.setupSkin();
 			}
 		}
 
