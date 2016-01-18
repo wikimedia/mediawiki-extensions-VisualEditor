@@ -461,22 +461,6 @@
 					$caVeEdit.addClass( 'collapsible' );
 				}
 			}
-
-			// Process appendix messages
-			if ( tabMessages[ action + 'appendix' ] !== null ) {
-				$caVeEditLink.append(
-					$( '<span>' )
-						.addClass( 've-tabmessage-appendix' )
-						.text( mw.msg( tabMessages[ action + 'appendix' ] ) )
-				);
-			}
-			if ( tabMessages[ action + 'sourceappendix' ] !== null ) {
-				$caEditLink.append(
-					$( '<span>' )
-						.addClass( 've-tabmessage-appendix' )
-						.text( mw.msg( tabMessages[ action + 'sourceappendix' ] ) )
-				);
-			}
 		},
 
 		setupSectionLinks: function () {
@@ -535,24 +519,6 @@
 						}
 					}
 				} );
-			}
-
-			// Process appendix messages
-			if ( tabMessages.editsectionappendix ) {
-				$editsections.find( '.mw-editsection-visualeditor' )
-					.append(
-						$( '<span>' )
-							.addClass( 've-tabmessage-appendix' )
-							.text( mw.msg( tabMessages.editsectionappendix ) )
-					);
-			}
-			if ( tabMessages.editsectionsourceappendix ) {
-				$editsections.find( 'a:not(.mw-editsection-visualeditor)' )
-					.append(
-						$( '<span>' )
-							.addClass( 've-tabmessage-appendix' )
-							.text( mw.msg( tabMessages.editsectionsourceappendix ) )
-					);
 			}
 
 			if ( pageCanLoadVE ) {
