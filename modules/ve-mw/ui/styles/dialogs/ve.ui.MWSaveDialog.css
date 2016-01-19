@@ -35,7 +35,7 @@
 
 .ve-ui-mwSaveDialog-checkboxes {
 	margin-right: 3.25em; /* Hack to prevent overlap on edit summary count */
-	padding: 0.25em 0.75em 0 0.75em;
+	padding: 0.55em 0.75em 0 0.75em;
 }
 
 .ve-ui-mwSaveDialog-checkboxes .oo-ui-fieldLayout {
