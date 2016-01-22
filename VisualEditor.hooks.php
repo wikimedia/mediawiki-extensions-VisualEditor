@@ -72,15 +72,19 @@ class VisualEditorHooks {
 		$blacklist = $config->get( 'VisualEditorBrowserBlacklist' );
 		$ua = strtolower( $req->getHeader( 'User-Agent' ) );
 		foreach ( $blacklist as $uaSubstr => $rules ) {
-			if ( !strpos( $ua, $uaSubstr ) ) {
+			if ( !strpos( $ua, $uaSubstr . '/' ) ) {
 				continue;
 			}
 			if ( !is_array( $rules ) ) {
 				return true;
 			}
 
-			$uaParts = preg_split( '/' . $uaSubstr . '\//', $ua ); // PHP 5.3 compat
-			$version = $uaParts[ 1 ];
+			$matches = array();
+			$ret = preg_match( '/' . $uaSubstr . '\/([0-9\.]*) ?/i', $ua, $matches );
+			if ( $ret !== 1 ) {
+				continue;
+			}
+			$version = $matches[1];
 			foreach ( $rules as $rule ) {
 				list( $op, $matchVersion ) = $rule;
 				if (
