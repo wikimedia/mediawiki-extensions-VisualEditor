@@ -940,6 +940,31 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'table is created as wikitable on paste': {
+		body: '<table><tr><td>Foo</td></tr></table>',
+		fromClipboard: true,
+		data: [
+			{
+				type: 'mwTable',
+				attributes: {
+					wikitable: true
+				}
+			},
+			{ type: 'tableSection', attributes: { style: 'body' } },
+			{ type: 'tableRow' },
+			{ type: 'tableCell', attributes: { style: 'data' } },
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			'F', 'o', 'o',
+			{ type: '/paragraph' },
+			{ type: '/tableCell' },
+			{ type: '/tableRow' },
+			{ type: '/tableSection' },
+			{ type: '/mwTable' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		normalizedBody: '<table class="wikitable"><tr><td>Foo</td></tr></table>'
+	},
 	'mw:Transclusion (block level)': {
 		body: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
 		data: [
