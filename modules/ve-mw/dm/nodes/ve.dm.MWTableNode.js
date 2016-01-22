@@ -44,12 +44,17 @@ ve.dm.TableSectionNode.static.parentNodeTypes.push( 'mwTable' );
 ve.dm.TableCaptionNode.static.parentNodeTypes.push( 'mwTable' );
 ve.dm.TableRowNode.static.childNodeTypes.push( 'mwTransclusionTableCell' );
 
-ve.dm.MWTableNode.static.toDataElement = function ( domElements ) {
+ve.dm.MWTableNode.static.toDataElement = function ( domElements, converter ) {
 	var attributes = {},
 		dataElement = { type: this.name },
 		classAttr = domElements[ 0 ].getAttribute( 'class' );
 
 	this.setClassAttributes( attributes, classAttr );
+
+	// Default to wikitable when pasting
+	if ( converter.isFromClipboard() ) {
+		attributes.wikitable = true;
+	}
 
 	if ( !ve.isEmptyObject( attributes ) ) {
 		dataElement.attributes = attributes;
