@@ -153,19 +153,26 @@ class VisualEditorHooks {
 			isset( $params['preloadparams'] );
 			// Known-good parameters: edit, veaction, section, vesection, veswitched
 
+		$params['venoscript'] = '1';
+		$url = wfScript() . '?' . wfArrayToCgi( $params );
+		$out = $article->getContext()->getOutput();
 		if ( !$ret ) {
-			$out = $article->getContext()->getOutput();
-
-			$params['venoscript'] = '1';
-			$url = htmlspecialchars( wfScript() . '?' . wfArrayToCgi( $params ) );
+			$escapedUrl = htmlspecialchars( $url );
 			$out->addHeadItem(
 				've-noscript-fallback',
-				"<noscript><meta http-equiv=\"refresh\" content=\"0; url=$url\"></noscript>"
+				"<noscript><meta http-equiv=\"refresh\" content=\"0; url=$escapedUrl\"></noscript>"
 			);
 
 			$titleMsg = $title->exists() ? 'editing' : 'creating';
 			$out->setPageTitle( wfMessage( $titleMsg, $title->getPrefixedText() ) );
 		}
+		$out->addScript( Html::inlineScript(
+			"(window.NORLQ=window.NORLQ||[]).push(" .
+				"function(){" .
+					"location.href=\"$url\";" .
+				"}" .
+			");"
+		) );
 		return $ret;
 	}
 
