@@ -12,5 +12,9 @@
 	"visualeditor-feedback-link": "Project:Визуаль мөхәррир/Фикерләр",
 	"visualeditor-feedback-tool": "Программалы тәэмин ителешкә бәяләмә калдыру",
 	"visualeditor-help-label": "Кулланманы укыгыз",
-	"visualeditor-help-title": "Мөхәррир белән эшләү буенча кулланма"
+	"visualeditor-help-title": "Мөхәррир белән эшләү буенча кулланма",
+	"visualeditor-welcomedialog-action": "Үзгәртүне башлау",
+	"visualeditor-welcomedialog-content": "Барсы да төзәтмәләр кертә ала һәм аларның барысыда иң кирәклесе.",
+	"visualeditor-welcomedialog-content-thanks": "Рәхмәт, сез дөньяны күбрәк белергә ярдәм итәсез!",
+	"visualeditor-welcomedialog-title": "$2 сәхифәсенә {{GENDER:$1|рәхим итегез}}"
 }
