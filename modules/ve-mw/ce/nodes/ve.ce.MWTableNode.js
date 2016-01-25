@@ -10,6 +10,7 @@
  *
  * @class
  * @extends ve.ce.TableNode
+ * @mixins ve.ce.ClassAttributeNode
  *
  * @constructor
  * @param {ve.dm.MWTableNode} model Model to observe
@@ -19,29 +20,19 @@ ve.ce.MWTableNode = function VeCeMWTableNode() {
 	// Parent constructor
 	ve.ce.MWTableNode.super.apply( this, arguments );
 
-	this.model.connect( this, { attributeChange: 'onAttributeChange' } );
+	// Mixin constructors
+	ve.ce.ClassAttributeNode.call( this );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ce.MWTableNode, ve.ce.TableNode );
 
+OO.mixinClass( ve.ce.MWTableNode, ve.ce.ClassAttributeNode );
+
 /* Static Properties */
 
 ve.ce.MWTableNode.static.name = 'mwTable';
-
-/* Methods */
-
-ve.ce.MWTableNode.prototype.onAttributeChange = function ( key, from, to ) {
-	switch ( key ) {
-		case 'wikitable':
-			this.$element.toggleClass( 'wikitable', !!to );
-			break;
-		case 'sortable':
-			this.$element.toggleClass( 'sortable', !!to );
-			break;
-	}
-};
 
 /* Registration */
 
