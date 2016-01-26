@@ -91,7 +91,9 @@ ve.ui.MWReferenceDialog.static.excludeCommands = [
 	'tableCellData',
 	// No structure
 	'bullet',
+	'bulletWrapOnce',
 	'number',
+	'numberWrapOnce',
 	'indent',
 	'outdent',
 	// References

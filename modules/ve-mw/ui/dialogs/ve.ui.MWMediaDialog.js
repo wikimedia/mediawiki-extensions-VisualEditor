@@ -121,7 +121,9 @@ ve.ui.MWMediaDialog.static.excludeCommands = [
 	'tableCellData',
 	// No structure
 	'bullet',
+	'bulletWrapOnce',
 	'number',
+	'numberWrapOnce',
 	'indent',
 	'outdent'
 ];
