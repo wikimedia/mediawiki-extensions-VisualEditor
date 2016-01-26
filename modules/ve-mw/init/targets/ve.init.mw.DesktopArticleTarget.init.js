@@ -705,6 +705,7 @@
 					(
 						isEditPage &&
 						tabPreference !== 'multi-tab' &&
+						userPrefEnabled &&
 						(
 							(
 								tabPreference === 'prefer-ve' &&
