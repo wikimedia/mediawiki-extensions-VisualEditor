@@ -133,6 +133,7 @@ class VisualEditorHooks {
 		return $req->getVal( 'action' ) !== 'edit' ||
 			!$veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
 			self::getUserEditor( $user, $req ) === 'wikitext' ||
+			!$title->userCan( 'edit' ) ||
 			!$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ||
 			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
 			// check for parameters that VE does not handle

@@ -706,6 +706,8 @@
 						isEditPage &&
 						tabPreference !== 'multi-tab' &&
 						userPrefEnabled &&
+						// If it's a view-source situation, we don't want to show VE on-load
+						!$( '#ca-viewsource' ).length &&
 						(
 							(
 								tabPreference === 'prefer-ve' &&
