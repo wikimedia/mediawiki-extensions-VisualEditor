@@ -26,5 +26,6 @@
 	"visualeditor-welcomedialog-action": "Mit dem Bearbeiten anfangen",
 	"visualeditor-welcomedialog-content": "Jeder kann bearbeiten und jede Verbesserung hilft.",
 	"visualeditor-welcomedialog-content-thanks": "Danke für deine Hilfe, die Welt mehr zu entdecken!",
+	"visualeditor-welcomedialog-switch": "Zum Quelltext-Editor wechseln",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Willkommen}} bei $2"
 }

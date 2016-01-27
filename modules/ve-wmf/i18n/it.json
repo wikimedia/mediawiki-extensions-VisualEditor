@@ -36,5 +36,6 @@
 	"visualeditor-welcomedialog-action": "Inizia a modificare",
 	"visualeditor-welcomedialog-content": "Ognuno può contribuire, e ogni miglioramento è di aiuto.",
 	"visualeditor-welcomedialog-content-thanks": "Grazie per aiutare il mondo a scoprire sempre più cose!",
+	"visualeditor-welcomedialog-switch": "Passa all'editor sorgente",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Benvenuto|Benvenuta|Benvenuto/a}} su $2"
 }
