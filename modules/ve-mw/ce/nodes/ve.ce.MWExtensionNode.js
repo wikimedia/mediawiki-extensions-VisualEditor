@@ -46,6 +46,8 @@ OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.GeneratedContentNode );
  */
 ve.ce.MWExtensionNode.static.rendersEmpty = false;
 
+ve.ce.MWExtensionNode.static.iconWhenInvisible = 'alienextension';
+
 /* Methods */
 
 /** */

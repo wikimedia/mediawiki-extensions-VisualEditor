@@ -11,7 +11,6 @@
  * @class
  * @abstract
  * @extends ve.ce.LeafNode
- * @mixins OO.ui.mixin.IconElement
  * @mixins ve.ce.GeneratedContentNode
  * @mixins ve.ce.FocusableNode
  * @mixins ve.ce.TableCellableNode
@@ -25,7 +24,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 	ve.ce.MWTransclusionNode.super.call( this, model, config );
 
 	// Mixin constructors
-	OO.ui.mixin.IconElement.call( this, config );
 	ve.ce.GeneratedContentNode.call( this );
 	ve.ce.FocusableNode.call( this );
 	ve.ce.TableCellableNode.call( this );
@@ -35,7 +33,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 
 OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
-OO.mixinClass( ve.ce.MWTransclusionNode, OO.ui.mixin.IconElement );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.TableCellableNode );
@@ -47,6 +44,8 @@ ve.ce.MWTransclusionNode.static.name = 'mwTransclusion';
 ve.ce.MWTransclusionNode.static.renderHtmlAttributes = false;
 
 ve.ce.MWTransclusionNode.static.primaryCommandName = 'transclusion';
+
+ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'template';
 
 /* Static Methods */
 
@@ -89,27 +88,6 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 };
 
 /* Methods */
-
-/**
- * @inheritdoc
- */
-ve.ce.MWTransclusionNode.prototype.onSetup = function () {
-	// Parent method
-	ve.ce.MWTransclusionNode.super.prototype.onSetup.call( this );
-
-	if ( !this.isVisible() ) {
-		// We have to reset the icon when it is reappended, because
-		// setIcon also affects the classes attached to this.$element
-		this.setIcon( 'template' );
-		// Reattach icon
-		this.$element.first().prepend( this.$icon );
-	} else {
-		// We have to clear the icon because if the icon's symbolic name
-		// has not changed since the last time we rendered, this.setIcon()
-		// above will internally short circuit.
-		this.setIcon( null );
-	}
-};
 
 /**
  * @inheritdoc
@@ -158,19 +136,14 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
  * Extend the ve.ce.GeneratedContentNode render method to check for hidden templates.
  *
  * Check if the final result of the imported template is empty.
- * If it is empty, set the icon to be the template icon so that it can
- * be accessible to users (either to remove or edit)
  *
  * @see ve.ce.GeneratedContentNode#render
  */
 ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
-	// Detach the icon
-	this.$icon.detach();
 	// Call parent mixin
 	ve.ce.GeneratedContentNode.prototype.render.call( this, generatedContents );
 
-	// Since render replaces this.$element with a new node, we need to make sure
-	// our iconElement is defined again to be this.$element
+	// Render replaces this.$element with a new node so re-add classes
 	this.$element.addClass( 've-ce-mwTransclusionNode' );
 };
 
