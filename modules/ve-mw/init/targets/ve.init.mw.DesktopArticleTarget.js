@@ -878,20 +878,20 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 		$( '#ca-view a, #ca-nstab-visualeditor a' )
 			.on( 'click', this.onViewTabClick.bind( this ) );
 
-		$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
-			if ( !target.active || e.which !== 1 || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
-				return;
-			}
-
-			if ( target.getSurface() && !target.deactivating ) {
-				target.editSource();
-
-				if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
-					e.preventDefault();
-				}
-			}
-		} );
 	}
+	$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
+		if ( !target.active || e.which !== 1 || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+			return;
+		}
+
+		if ( target.getSurface() && !target.deactivating ) {
+			target.editSource();
+
+			if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
+				e.preventDefault();
+			}
+		}
+	} );
 
 	mw.hook( 've.skinTabSetupComplete' ).fire();
 };
