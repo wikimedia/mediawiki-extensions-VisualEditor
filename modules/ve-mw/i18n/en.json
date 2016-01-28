@@ -341,7 +341,7 @@
 	"visualeditor-toolbar-savedialog-short": "Save",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-version-label": "Version",
-	"visualeditor-viewpage-savewarning": "Are you sure you want to go back to view mode without saving first?",
+	"visualeditor-viewpage-savewarning": "Are you sure you want to leave editing mode without saving first?",
 	"visualeditor-viewpage-savewarning-discard": "Discard edits",
 	"visualeditor-viewpage-savewarning-keep": "Continue editing",
 	"visualeditor-viewpage-savewarning-title": "Are you sure?",
