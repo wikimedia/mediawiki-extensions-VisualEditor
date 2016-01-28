@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"OC Ripper"
+			"OC Ripper",
+			"Sf"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditora]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Check]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualni uređivač: potrebna provjera]]",
 	"tag-visualeditor-needcheck-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditora]] gdje je sistem detektirao wikitekst s mogućim neželjenim izmjenama.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualni uređivač: Prebačeno]]",
 	"tag-visualeditor-switched-description": "Korisnik je počeo uređivati koristeći se vizualnim uređivačem, te se onda prebacio u wikitext uređivač.",

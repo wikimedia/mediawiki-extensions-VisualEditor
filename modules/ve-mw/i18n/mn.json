@@ -3,7 +3,8 @@
 		"authors": [
 			"Mongol",
 			"Wisdom",
-			"Sembuk"
+			"Sembuk",
+			"Munkhzaya.E"
 		]
 	},
 	"tooltip-ca-ve-edit": "Энэ хуудсыг VisualEditor-р засварлах",
@@ -15,5 +16,6 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Сонголтуудыг харуулах",
 	"visualeditor-dialog-transclusion-placeholder": "template нэмэх",
 	"visualeditor-dialog-transclusion-single-mode": "Сонголтуудыг нуух",
-	"visualeditor-dialogbutton-referenceslist-tooltip": "Ном зүйн жагсаалт"
+	"visualeditor-dialogbutton-referenceslist-tooltip": "Ном зүйн жагсаалт",
+	"visualeditor-viewpage-savewarning": "Чи хийсэн ажлаа хадгалалгүй засварлах хэсгийг орхих гэж байгаадаа итгэлтэй байна уу?"
 }

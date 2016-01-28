@@ -365,7 +365,7 @@
 	"visualeditor-toolbar-savedialog-short": "Enregistrer",
 	"visualeditor-usernamespacepagelink": "Project:Espace de noms utilisateur",
 	"visualeditor-version-label": "Version",
-	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir retourner au mode lecture sans enregistrer ?",
+	"visualeditor-viewpage-savewarning": "Êtes-vous sûr de vouloir quitter le mode de modification sans enregistrer d’abord ?",
 	"visualeditor-viewpage-savewarning-discard": "Ignorer les modifications",
 	"visualeditor-viewpage-savewarning-keep": "Continuer à modifier",
 	"visualeditor-viewpage-savewarning-title": "Êtes-vous sûr ?",

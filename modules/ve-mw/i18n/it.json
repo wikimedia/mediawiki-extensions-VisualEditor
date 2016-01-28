@@ -343,7 +343,7 @@
 	"visualeditor-toolbar-savedialog-short": "Salva",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
 	"visualeditor-version-label": "Versione",
-	"visualeditor-viewpage-savewarning": "Tornare alla modalità visualizzazione senza salvare prima?",
+	"visualeditor-viewpage-savewarning": "Sei sicuro di voler lasciare la modalità di modifica senza salvare prima?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Continuare a modificare",
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",

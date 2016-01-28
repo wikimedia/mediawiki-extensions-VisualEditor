@@ -31,5 +31,6 @@
 	"visualeditor-welcomedialog-action": "להתחיל לערוך",
 	"visualeditor-welcomedialog-content": "כל אחד יכול לערוך, וכל שיפור עוזר.",
 	"visualeditor-welcomedialog-content-thanks": "תודה על רצונך לעזור לעולם לגלות יותר!",
+	"visualeditor-welcomedialog-switch": "מעבר לעורך קוד מקור",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|ברוך הבא|ברוכה הבאה|ברוך בואך}} ל{{GRAMMAR:תחילית|$2}}"
 }
