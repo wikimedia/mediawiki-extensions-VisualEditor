@@ -44,17 +44,12 @@ ve.dm.TableSectionNode.static.parentNodeTypes.push( 'mwTable' );
 ve.dm.TableCaptionNode.static.parentNodeTypes.push( 'mwTable' );
 ve.dm.TableRowNode.static.childNodeTypes.push( 'mwTransclusionTableCell' );
 
-ve.dm.MWTableNode.static.toDataElement = function ( domElements, converter ) {
+ve.dm.MWTableNode.static.toDataElement = function ( domElements ) {
 	var attributes = {},
 		dataElement = { type: this.name },
 		classAttr = domElements[ 0 ].getAttribute( 'class' );
 
 	this.setClassAttributes( attributes, classAttr );
-
-	// Default to wikitable when pasting
-	if ( converter.isFromClipboard() ) {
-		attributes.wikitable = true;
-	}
 
 	if ( !ve.isEmptyObject( attributes ) ) {
 		dataElement.attributes = attributes;
@@ -71,6 +66,13 @@ ve.dm.MWTableNode.static.toDomElements = function ( dataElement, doc ) {
 	}
 
 	return [ element ];
+};
+
+ve.dm.MWTableNode.static.sanitize = function ( dataElement ) {
+	// Mixin method
+	ve.dm.ClassAttributeNode.static.sanitize.call( this, dataElement );
+
+	ve.setProp( dataElement, 'attributes', 'wikitable', true );
 };
 
 /* Registration */

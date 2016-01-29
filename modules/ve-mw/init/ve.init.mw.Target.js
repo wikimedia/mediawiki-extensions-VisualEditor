@@ -113,7 +113,8 @@ ve.init.mw.Target.static.importRules = {
 			// Nodes
 			'div', 'alienInline', 'alienBlock', 'comment'
 		],
-		removeOriginalDomElements: true
+		removeOriginalDomElements: true,
+		nodeSanitization: true
 	},
 	all: null
 };
