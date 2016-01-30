@@ -35,5 +35,6 @@
 	"visualeditor-welcomedialog-action": "Rozpocznij edycję",
 	"visualeditor-welcomedialog-content": "Każdy może edytować, a każda poprawka się liczy.",
 	"visualeditor-welcomedialog-content-thanks": "Dziękujemy, że pomagasz światu odkrywać wiedzę!",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|Witaj}} w {{GRAMMAR:MS.lp|{{SITENAME}}}}"
+	"visualeditor-welcomedialog-switch": "Przełącz na edytor kodu źródłowego",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Witaj}} w {{GRAMMAR:MS.lp|$2}}"
 }
