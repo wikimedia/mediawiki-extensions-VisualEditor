@@ -18,8 +18,6 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 	// Parent constructor
 	ve.init.mw.Target.super.call( this, config );
 
-	this.generateCitationFeatures();
-
 	// Initialization
 	this.$element.addClass( 've-init-mw-target' );
 };
@@ -35,8 +33,6 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
  */
 
 /* Static Properties */
-
-ve.init.mw.Target.static.citationToolsLimit = 5;
 
 ve.init.mw.Target.static.toolbarGroups = [
 	// History
@@ -65,15 +61,6 @@ ve.init.mw.Target.static.toolbarGroups = [
 	},
 	// Link
 	{ include: [ 'link' ] },
-	// Cite
-	{
-		classes: [ 've-test-toolbar-cite' ],
-		type: 'list',
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		indicator: 'down',
-		include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
-		demote: [ 'reference', 'reference/existing' ]
-	},
 	// Structure
 	{
 		classes: [ 've-test-toolbar-structure' ],
@@ -181,96 +168,6 @@ ve.init.mw.Target.prototype.documentReady = function ( doc ) {
  */
 ve.init.mw.Target.prototype.surfaceReady = function () {
 	this.emit( 'surfaceReady' );
-};
-
-/**
- * Add reference insertion tools from on-wiki data.
- *
- * By adding a definition in JSON to MediaWiki:Visualeditor-cite-tool-definition, the cite menu can
- * be populated with tools that create references containing a specific templates. The content of the
- * definition should be an array containing a series of objects, one for each tool. Each object must
- * contain a `name`, `icon` and `template` property. An optional `title` property can also be used
- * to define the tool title in plain text. The `name` property is a unique identifier for the tool,
- * and also provides a fallback title for the tool by being transformed into a message key. The name
- * is prefixed with `visualeditor-cite-tool-name-`, and messages can be defined on Wiki. Some common
- * messages are pre-defined for tool names such as `web`, `book`, `news` and `journal`.
- *
- * Example:
- * [ { "name": "web", "icon": "cite-web", "template": "Cite web" }, ... ]
- *
- */
-ve.init.mw.Target.prototype.generateCitationFeatures = function () {
-	var i, len, item, name, data, tool, tools, dialog, contextItem,
-		limit = this.constructor.static.citationToolsLimit;
-
-	if ( !ve.ui.MWCitationDialog ) {
-		// Citation module isn't loaded, so skip this
-		return;
-	}
-
-	/*jshint loopfunc:true */
-
-	try {
-		// Must use mw.message to avoid JSON being parsed as Wikitext
-		tools = JSON.parse( mw.message( 'visualeditor-cite-tool-definition.json' ).plain() );
-	} catch ( e ) { }
-
-	if ( Array.isArray( tools ) ) {
-		for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
-			item = tools[ i ];
-			data = { template: item.template };
-
-			// Generate citation tool
-			name = 'cite-' + item.name;
-			if ( !ve.ui.toolFactory.lookup( name ) ) {
-				tool = function GeneratedMWCitationDialogTool( toolbar, config ) {
-					ve.ui.MWCitationDialogTool.call( this, toolbar, config );
-				};
-				OO.inheritClass( tool, ve.ui.MWCitationDialogTool );
-				tool.static.group = 'cite';
-				tool.static.name = name;
-				tool.static.icon = item.icon;
-				tool.static.title = item.title;
-				tool.static.commandName = name;
-				tool.static.template = item.template;
-				tool.static.autoAddToCatchall = false;
-				tool.static.autoAddToGroup = true;
-				tool.static.associatedWindows = [ name ];
-				ve.ui.toolFactory.register( tool );
-				ve.ui.commandRegistry.register(
-					new ve.ui.Command(
-						name, 'mwcite', 'open', { args: [ name, data ], supportedSelections: [ 'linear' ] }
-					)
-				);
-			}
-
-			// Generate citation context item
-			if ( !ve.ui.contextItemFactory.lookup( name ) ) {
-				contextItem = function GeneratedMWCitationContextItem( toolbar, config ) {
-					ve.ui.MWCitationContextItem.call( this, toolbar, config );
-				};
-				OO.inheritClass( contextItem, ve.ui.MWCitationContextItem );
-				contextItem.static.name = name;
-				contextItem.static.icon = item.icon;
-				contextItem.static.label = item.title;
-				contextItem.static.commandName = name;
-				contextItem.static.template = item.template;
-				ve.ui.contextItemFactory.register( contextItem );
-			}
-
-			// Generate dialog
-			if ( !ve.ui.windowFactory.lookup( name ) ) {
-				dialog = function GeneratedMWCitationDialog( config ) {
-					ve.ui.MWCitationDialog.call( this, config );
-				};
-				OO.inheritClass( dialog, ve.ui.MWCitationDialog );
-				dialog.static.name = name;
-				dialog.static.icon = item.icon;
-				dialog.static.title = item.title;
-				ve.ui.windowFactory.register( dialog );
-			}
-		}
-	}
 };
 
 /**
