@@ -196,6 +196,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "List of general references",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "List of references for group \"$1\"",
 	"visualeditor-dialog-referenceslist-title": "References list",
+	"visualeditor-dialog-table-sortable": "Sortable",
+	"visualeditor-dialog-table-wikitable": "Styled (wikitable)",
 	"visualeditor-dialog-template-title": "Template",
 	"visualeditor-dialog-transclusion-add-content": "Add content",
 	"visualeditor-dialog-transclusion-add-param": "Add more information",

@@ -206,6 +206,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "Message shown to an editor when they click on a reference list without a group, explaining to them that the item will list all \"general\" references on the page.",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "Message shown to an editor when they click on a reference list with a group, explaining to them that the item will list all references on the page with that particular group.\n\n* $1 – the name of the group of references (user-entered)",
 	"visualeditor-dialog-referenceslist-title": "{{Identical|References list}}",
+	"visualeditor-dialog-table-sortable": "Label for toggle to make a table sortable",
+	"visualeditor-dialog-table-wikitable": "Label for toggle to make a table a wikitable",
 	"visualeditor-dialog-template-title": "{{Identical|Template}}",
 	"visualeditor-dialog-transclusion-add-content": "Label for button that adds parameter content to a transclusion.",
 	"visualeditor-dialog-transclusion-add-param": "Label for button that adds a parameter to a transcluded template.",
