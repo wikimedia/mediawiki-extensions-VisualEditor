@@ -53,7 +53,13 @@
 			"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
 			"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
 			"editsection": null,
-			"editsectionsource": "visualeditor-ca-editsource-section"
+			"editsectionsource": "visualeditor-ca-editsource-section",
+			"editappendix": null,
+			"editsourceappendix": null,
+			"createappendix": null,
+			"createsourceappendix": null,
+			"editsectionappendix": null,
+			"editsectionsourceappendix": null
 		},
 		"VisualEditorShowBetaWelcome": true,
 		"VisualEditorParsoidHTTPProxy": false,
