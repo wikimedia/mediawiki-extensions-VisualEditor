@@ -23,10 +23,11 @@
 			"Byfserag",
 			"Linforest",
 			"Cwek",
-			"EagerLin"
+			"EagerLin",
+			"Yejianfei"
 		]
 	},
-	"apihelp-visualeditor-description": "从Parsoid服务为页面返回HTML5。",
+	"apihelp-visualeditor-description": "从Parsoid服务返回页面的HTML5。",
 	"apihelp-visualeditor-param-basetimestamp": "在保存时，将此设置为编辑该修订版本时的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditor-param-cachekey": "对于序列化或版本差异，使用之前的serializeforcache请求与此密钥产生的结果。覆盖$1html。",
 	"apihelp-visualeditor-param-html": "要发送至Parsoid以转换成wiki文本的HTML。",
