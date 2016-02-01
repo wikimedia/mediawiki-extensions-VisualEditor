@@ -19,5 +19,6 @@
 	"visualeditor-welcomedialog-action": "Principiar a editar",
 	"visualeditor-welcomedialog-content": "Tol mundu pué editar, y cada ameyoramientu ayuda.",
 	"visualeditor-welcomedialog-content-thanks": "¡Gracies por ayudar al mundu a descubrir más!",
+	"visualeditor-welcomedialog-switch": "Cambiar al editor de códigu fonte",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bienveníu|Bienvenida}} a $2"
 }
