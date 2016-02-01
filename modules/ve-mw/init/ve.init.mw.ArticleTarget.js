@@ -1132,10 +1132,11 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 					return jqxhr;
 				},
 				function ( errorName, errorObject ) {
-					var eventData;
-					if ( errorObject && errorObject.xhr ) {
+					var responseText = ve.getProp( errorObject, 'xhr', 'responseText' ),
+						eventData;
+					if ( responseText ) {
 						eventData = {
-							bytes: $.byteLength( errorObject.xhr.responseText ),
+							bytes: $.byteLength( responseText ),
 							duration: ve.now() - start
 						};
 
