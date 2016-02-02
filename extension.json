@@ -776,7 +776,6 @@
 				"lib/ve/src/ve.Filibuster.js"
 			],
 			"styles": [
-				"lib/ve/src/ce/styles/nodes/ve.ce.CommentNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.FocusableNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.AlienNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.BranchNode.css",
