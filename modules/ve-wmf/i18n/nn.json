@@ -5,7 +5,7 @@
 			"Njardarlogar"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring]]",
 	"tag-visualeditor-description": "Endring gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Kontroller]]",
 	"tag-visualeditor-needcheck-description": "Endring gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] der systemet fann at wikiteksten kan ha umeinte endringar.",

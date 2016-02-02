@@ -28,6 +28,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Zwraca kod HTML5 na stronę za pośrednictwem usługi Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została edytowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditor-param-html": "Kod HTML wysyłany do usługi Parsoid, konwertowany na wikikod.",
 	"apihelp-visualeditor-param-oldid": "Numer wersji, którą chcesz użyć (domyślnie to numer aktualnej wersji).",
 	"apihelp-visualeditor-param-paction": "Zadanie do wykonania.",
@@ -191,6 +192,7 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "Lista ogólnych (niezgrupowanych) przypisów",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "Lista przypisów należących do grupy „$1”",
 	"visualeditor-dialog-referenceslist-title": "Lista przypisów",
+	"visualeditor-dialog-table-sortable": "Sortowanie",
 	"visualeditor-dialog-template-title": "Szablon",
 	"visualeditor-dialog-transclusion-add-content": "Dodaj treść",
 	"visualeditor-dialog-transclusion-add-param": "Dodaj więcej informacji",

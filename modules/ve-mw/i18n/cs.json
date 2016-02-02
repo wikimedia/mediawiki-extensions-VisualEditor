@@ -194,6 +194,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "Seznam obecných referencí",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "Seznam referencí pro skupinu „$1“",
 	"visualeditor-dialog-referenceslist-title": "Seznam referencí",
+	"visualeditor-dialog-table-sortable": "Tabulka s řazením",
+	"visualeditor-dialog-table-wikitable": "Styl Wikitable",
 	"visualeditor-dialog-template-title": "Šablona",
 	"visualeditor-dialog-transclusion-add-content": "Přidat obsah",
 	"visualeditor-dialog-transclusion-add-param": "Přidat více údajů",

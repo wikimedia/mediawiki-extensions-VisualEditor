@@ -202,6 +202,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "一般参考文献列表",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "用于组“$1”的参考文献列表",
 	"visualeditor-dialog-referenceslist-title": "参考文献列表",
+	"visualeditor-dialog-table-sortable": "可排序",
+	"visualeditor-dialog-table-wikitable": "风格化（wiki表格）",
 	"visualeditor-dialog-template-title": "模板",
 	"visualeditor-dialog-transclusion-add-content": "添加内容",
 	"visualeditor-dialog-transclusion-add-param": "添加更多信息",

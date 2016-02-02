@@ -44,7 +44,8 @@
 			"Mattho69",
 			"Wladek92",
 			"Harmonia Amanda",
-			"Macofe"
+			"Macofe",
+			"Litlok"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -222,6 +223,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "Liste de références générales",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "Liste de références pour le groupe « $1 »",
 	"visualeditor-dialog-referenceslist-title": "Liste des références",
+	"visualeditor-dialog-table-sortable": "Triable",
+	"visualeditor-dialog-table-wikitable": "Stylé (wikitable)",
 	"visualeditor-dialog-template-title": "Modèle",
 	"visualeditor-dialog-transclusion-add-content": "Ajouter le contenu",
 	"visualeditor-dialog-transclusion-add-param": "Ajouter plus d’informations",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yejianfei"
+			"Yejianfei",
+			"唐吉訶德的侍從"
 		]
 	},
 	"apihelp-visualeditor-description": "趁Parsoid服務返回頁面其HTML5。",
@@ -13,5 +14,7 @@
 	"apihelp-visualeditor-param-paction": "著執行的操作。",
 	"apihelp-visualeditor-param-page": "著執行操作其頁面。",
 	"apihelp-visualeditor-param-pst": "發送遘Parsoid之前預保存著轉換其Wiki文本（paction=parsefragment）。",
-	"apihelp-visualeditor-param-starttimestamp": "保存其辰候，將伊設置成頁面加載辰候其時間戳。廮𡅏檢測編輯衝突。"
+	"apihelp-visualeditor-param-starttimestamp": "保存其辰候，將伊設置成頁面加載辰候其時間戳。廮𡅏檢測編輯衝突。",
+	"visualeditor-ca-editsource": "改源代碼",
+	"visualeditor-ca-editsource-section": "改源代碼"
 }

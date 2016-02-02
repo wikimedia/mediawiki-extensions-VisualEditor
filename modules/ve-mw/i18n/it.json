@@ -25,7 +25,8 @@
 			"Jdforrester",
 			"Purodha",
 			"Statix64",
-			"Supernino"
+			"Supernino",
+			"Wikitoni"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -200,6 +201,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "Elenco di note generali",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "Lista di note per il gruppo \"$1\"",
 	"visualeditor-dialog-referenceslist-title": "Elenco riferimenti",
+	"visualeditor-dialog-table-sortable": "Ordinabile",
+	"visualeditor-dialog-table-wikitable": "Stile (wikitable)",
 	"visualeditor-dialog-template-title": "Template",
 	"visualeditor-dialog-transclusion-add-content": "Aggiungi contenuto",
 	"visualeditor-dialog-transclusion-add-param": "Aggiungi ulteriori informazioni",
