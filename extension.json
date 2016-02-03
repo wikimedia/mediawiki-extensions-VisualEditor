@@ -266,6 +266,7 @@
 			},
 			"dependencies": [
 				"jquery.client",
+				"jquery.cookie",
 				"mediawiki.page.startup",
 				"mediawiki.Title",
 				"mediawiki.Uri",
@@ -336,6 +337,7 @@
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
+				"jquery.cookie",
 				"mediawiki.jqueryMsg",
 				"mediawiki.util"
 			],
@@ -1101,6 +1103,7 @@
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
+				"jquery.cookie",
 				"jquery.byteLimit",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.language.specialCharacters",
