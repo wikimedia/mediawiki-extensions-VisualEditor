@@ -33,5 +33,6 @@
 	"visualeditor-welcomedialog-action": "Начать редактирование",
 	"visualeditor-welcomedialog-content": "Любой человек может вносить изменения, и каждое улучшение полезно.",
 	"visualeditor-welcomedialog-content-thanks": "Спасибо, что помогаете миру узнать больше!",
+	"visualeditor-welcomedialog-switch": "Переключиться в редактор исходного кода",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро пожаловать}} на сайт $2"
 }

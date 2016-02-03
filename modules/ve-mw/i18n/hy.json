@@ -181,6 +181,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "Ընդհանուր ծանոթագրությունների ցուցակ",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "$1 խմբի ծանոթագրությունների ցուցակ",
 	"visualeditor-dialog-referenceslist-title": "Ծանոթագրությունների ցանկ",
+	"visualeditor-dialog-table-sortable": "Դասավորվող",
+	"visualeditor-dialog-table-wikitable": "Ոճով (wikitable)",
 	"visualeditor-dialog-template-title": "Կաղապար",
 	"visualeditor-dialog-transclusion-add-content": "Ավելացնել բովանդակություն",
 	"visualeditor-dialog-transclusion-add-param": "Ավելացնել պարամետր",

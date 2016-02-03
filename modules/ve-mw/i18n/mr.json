@@ -8,7 +8,8 @@
 			"Ydyashad",
 			"संतोष दहिवळ",
 			"अभय नातू",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Cherishsantosh"
 		]
 	},
 	"tooltip-ca-createsource": "या पानाचा स्रोत संकेत (कोड) तयार करा",
@@ -16,7 +17,6 @@
 	"tooltip-ca-ve-edit": "या पानाचे संपादन करा",
 	"visualeditor-advancedsettings-tool": "प्रगत मांडण्या",
 	"visualeditor-annotationbutton-linknode-tooltip": "साधारण दुवा",
-	"visualeditor-beta-appendix": "बीटा(चाचणी)",
 	"visualeditor-beta-label": "'चाचणी स्थिती'(बीटा)",
 	"visualeditor-beta-warning": "जुन्या संपादन पद्धतीकडे जाण्यासाठी आपण केलेले बदल तसेच ठेऊन व \"$1\" टिचकून, आपण तेथे कधीही जाऊ शकता.आपणास काही समस्या आल्यास त्याचा अहवाल खाली द्या.",
 	"visualeditor-browserwarning": "आपण वापरत असलेला न्याहाळक, अधिकृतरित्या यथादृश्यसंपादक वापरू शकत नाही.",
@@ -105,6 +105,7 @@
 	"visualeditor-dialog-reference-useexisting-label": "सध्या उपलब्ध संदर्भातून संदर्भ वापरा",
 	"visualeditor-dialog-reference-useexisting-tool": "पुनरुपयोग",
 	"visualeditor-dialog-referenceslist-title": "संदर्भ यादी",
+	"visualeditor-dialog-table-sortable": "क्रमबद्ध",
 	"visualeditor-dialog-template-title": "साचा",
 	"visualeditor-dialog-transclusion-add-content": "मजकुर जोडा",
 	"visualeditor-dialog-transclusion-add-param": "इतर माहिती",
@@ -154,9 +155,9 @@
 	"visualeditor-meta-tool": "विकल्प",
 	"visualeditor-mweditmodesource-title": "स्रोत संपादनाकडे चला",
 	"visualeditor-mweditmodesource-warning": "आपण स्रोत संपादनाकडे बदलत आहात.\nआपणास पुढे जावयाचे आहे काय?",
+	"visualeditor-mweditmodesource-warning-cancel": "रद्द करा",
 	"visualeditor-mweditmodeve-title": "दृश्य संपादनाकडे बदलावयाचे काय?",
 	"visualeditor-mweditmodeve-tool": "दृश्य संपादकास बदला",
-	"visualeditor-mweditmodesource-warning-cancel": "रद्द करा",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|चित्रमथळा",
 	"visualeditor-mwgalleryinspector-title": "दिर्घिका",
 	"visualeditor-mwsignature-tool": "आपली सही",

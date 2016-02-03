@@ -21,5 +21,6 @@
 	"visualeditor-welcomedialog-action": "Pradėti redagavimą",
 	"visualeditor-welcomedialog-content": "Kiekvienas gali redaguoti ir kiekvienas patobulinimas padeda.",
 	"visualeditor-welcomedialog-content-thanks": "Dėkojame, kad padedate pasauliui atrasti daugiau!",
+	"visualeditor-welcomedialog-switch": "Pereiti prie šaltinio redaktoriaus",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Sveiki atvykę}} į $2"
 }

@@ -23,5 +23,6 @@
 	"visualeditor-welcomedialog-action": "Comezar a editar",
 	"visualeditor-welcomedialog-content": "Todo o mundo pode editar, e todas as melloras axudan.",
 	"visualeditor-welcomedialog-content-thanks": "¡Grazas por axudar ó mundo a descubrir máis!",
+	"visualeditor-welcomedialog-switch": "Cambiar para o editor de código",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Benvido|Benvida}} a $2"
 }
