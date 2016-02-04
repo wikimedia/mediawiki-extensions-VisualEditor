@@ -16,7 +16,8 @@
 			"Thehelpfulone",
 			"Macofe",
 			"Amire80",
-			"아라"
+			"아라",
+			"YoViajo"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edición visual]]",
@@ -33,5 +34,6 @@
 	"visualeditor-welcomedialog-action": "Empezar a editar",
 	"visualeditor-welcomedialog-content": "Cualquiera puede editar, y cada mejora ayuda.",
 	"visualeditor-welcomedialog-content-thanks": "¡Gracias por ayudar al mundo a descubrir más!",
+	"visualeditor-welcomedialog-switch": "Cambiar al editor de fuente",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bienvenido|Bienvenida}} a $2"
 }

@@ -333,7 +333,7 @@
 	"visualeditor-savedialog-label-restore-short": "Short label text for save button when the user is editing a previous revision on width-restricted devices.\n{{Identical|Restore}}",
 	"visualeditor-savedialog-label-resume-editing": "Label for button to exit the save dialog without saving, and return to editing.",
 	"visualeditor-savedialog-label-review": "Label for button to go to the review dialog to review the diff",
-	"visualeditor-savedialog-label-review-good": "返回到某页面以便于保存表格的按钮上面的标签",
+	"visualeditor-savedialog-label-review-good": "Label for button to go back to the save form",
 	"visualeditor-savedialog-label-save": "Label text for save button when the user is editing a current revision of an extant page.\n{{Identical|Save page}}",
 	"visualeditor-savedialog-label-save-short": "Short label text for save button when the user is editing a current revision of an extant page on width-restricted devices.\n{{Identical|Save}}",
 	"visualeditor-savedialog-label-warning": "Label in front of a save dialog warning sentence, separated by {{msg-mw|colon-separator}}.\n{{Identical|Warning}}",
