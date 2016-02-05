@@ -32,13 +32,6 @@
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules );
 
-	// HACK: Check if Cite is installed by looking for ext.cite.styles before
-	// loading ext.visualEditor.mwreference. Really ext.visualEditor.mwreference
-	// should be defined in the Cite extension.
-	if ( mw.loader.getState( 'ext.cite.styles' ) ) {
-		modules.push( 'ext.visualEditor.mwreference' );
-	}
-
 	// Allow signing posts in select namespaces
 	if ( conf.signatureNamespaces.length ) {
 		modules.push( 'ext.visualEditor.mwsignature' );

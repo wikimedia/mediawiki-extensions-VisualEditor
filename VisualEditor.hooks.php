@@ -177,7 +177,7 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Convert the content model of messages that are actually JSON to JSON.
+	 * Convert the content model of a message that is actually JSON to JSON.
 	 * This only affects validation and UI when saving and editing, not
 	 * loading the content.
 	 *
@@ -186,12 +186,10 @@ class VisualEditorHooks {
 	 * @return bool
 	 */
 	public static function onContentHandlerDefaultModelFor( Title $title, &$model ) {
-		$messages = array(
-			'Visualeditor-cite-tool-definition.json',
-			'Visualeditor-quick-access-characters.json'
-		);
-
-		if ( $title->inNamespace( NS_MEDIAWIKI ) && in_array( $title->getText(), $messages ) ) {
+		if (
+			$title->inNamespace( NS_MEDIAWIKI ) &&
+			$title->getText() === 'Visualeditor-quick-access-characters.json'
+		) {
 			$model = CONTENT_MODEL_JSON;
 		}
 
@@ -729,72 +727,6 @@ class VisualEditorHooks {
 			) ) );
 		}
 
-		// Register ext.visualEditor.mwreference here, as it depends on the new
-		// Cite CSS style module ext.cite.style only if the Cite extension is
-		// present.
-		// This is a temporary hack, once the Cite extension uses the new CSS
-		// for everything (and it takes care of loading ext.cite.style itself),
-		// it can be removed from here and put back in extension.json.
-		$mwreferenceModule = $veResourceTemplate + array(
-			'scripts' => array(
-				'modules/ve-mw/ui/widgets/ve.ui.MWReferenceGroupInputWidget.js',
-				'modules/ve-mw/ui/widgets/ve.ui.MWReferenceSearchWidget.js',
-				'modules/ve-mw/ui/widgets/ve.ui.MWReferenceResultWidget.js',
-
-				'modules/ve-mw/ui/commands/ve.ui.MWUseExistingReferenceCommand.js',
-
-				'modules/ve-mw/ui/dialogs/ve.ui.MWCitationDialog.js',
-				'modules/ve-mw/ui/dialogs/ve.ui.MWReferencesListDialog.js',
-				'modules/ve-mw/ui/dialogs/ve.ui.MWReferenceDialog.js',
-
-				'modules/ve-mw/ui/tools/ve.ui.MWReferenceDialogTool.js',
-				'modules/ve-mw/ui/tools/ve.ui.MWCitationDialogTool.js',
-
-				'modules/ve-mw/ui/contextitems/ve.ui.MWReferenceContextItem.js',
-				'modules/ve-mw/ui/contextitems/ve.ui.MWReferencesListContextItem.js',
-				'modules/ve-mw/ui/contextitems/ve.ui.MWCitationContextItem.js',
-				'modules/ve-mw/ui/actions/ve.ui.MWCitationAction.js',
-			),
-			'styles' => array(
-				'modules/ve-mw/ui/styles/contextitems/ve.ui.MWReferenceContextItem.css',
-				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceGroupInputWidget.css',
-				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceResultWidget.css',
-				'modules/ve-mw/ui/styles/widgets/ve.ui.MWReferenceSearchWidget.css',
-			),
-			'dependencies' => array(
-				'ext.visualEditor.mwreference.core',
-				'ext.visualEditor.mwtransclusion',
-				'ext.visualEditor.mediawiki'
-			),
-			'messages' => array(
-				'visualeditor-dialog-reference-editing-reused',
-				'visualeditor-dialog-reference-options-group-label',
-				'visualeditor-dialog-reference-options-group-placeholder',
-				'visualeditor-dialog-reference-options-name-label',
-				'visualeditor-dialog-reference-options-section',
-				'visualeditor-dialog-reference-title',
-				'visualeditor-dialog-reference-useexisting-full-label',
-				'visualeditor-dialog-reference-useexisting-label',
-				'visualeditor-dialog-reference-useexisting-tool',
-				'visualeditor-dialog-referenceslist-contextitem-description-general',
-				'visualeditor-dialog-referenceslist-contextitem-description-named',
-				'visualeditor-dialog-referenceslist-title',
-				'visualeditor-dialogbutton-citation-educationpopup-title',
-				'visualeditor-dialogbutton-citation-educationpopup-text',
-				'visualeditor-dialogbutton-reference-full-label',
-				'visualeditor-dialogbutton-reference-tooltip',
-				'visualeditor-dialogbutton-reference-title',
-				'visualeditor-dialogbutton-referenceslist-tooltip',
-				'visualeditor-reference-input-placeholder',
-			),
-			'targets' => array( 'desktop', 'mobile' ),
-		);
-
-		if ( isset( $resourceModules['ext.cite.style'] ) ||
-				$resourceLoader->isModuleRegistered( 'ext.cite.style' ) ) {
-			$mwreferenceModule['dependencies'][] = 'ext.cite.style';
-		}
-		$resourceLoader->register( array( 'ext.visualEditor.mwreference' => $mwreferenceModule ) );
 		return true;
 	}
 
@@ -930,7 +862,6 @@ class VisualEditorHooks {
 				'ext.visualEditor.mwgallery',
 				'ext.visualEditor.mwimage',
 				'ext.visualEditor.mwmeta',
-				'ext.visualEditor.mwreference',
 				'ext.visualEditor.mwtransclusion',
 				'ext.visualEditor.mwalienextension',
 				'ext.visualEditor.experimental',

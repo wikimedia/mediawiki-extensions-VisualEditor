@@ -1171,7 +1171,7 @@
 				"visualeditor-saveerror-titleblacklist",
 				"visualeditor-serializeerror",
 				"visualeditor-shortcuts-insert",
-				"visualeditor-toolbar-cite-label",
+				"visualeditor-recreate",
 				"visualeditor-toolbar-savedialog",
 				"visualeditor-toolbar-savedialog-short",
 				"visualeditor-version-label",
@@ -1491,32 +1491,6 @@
 				"visualeditor-languages-tool",
 				"visualeditor-meta-tool",
 				"visualeditor-settings-tool"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
-		"ext.visualEditor.mwreference.core": {
-			"scripts": [
-				"modules/ve-mw/dm/models/ve.dm.MWReferenceModel.js",
-				"modules/ve-mw/dm/nodes/ve.dm.MWReferencesListNode.js",
-				"modules/ve-mw/dm/nodes/ve.dm.MWReferenceNode.js",
-				"modules/ve-mw/ce/nodes/ve.ce.MWReferencesListNode.js",
-				"modules/ve-mw/ce/nodes/ve.ce.MWReferenceNode.js",
-				"modules/ve-mw/ui/commands/ve.ui.MWReferencesListCommand.js"
-			],
-			"styles": [
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWReferencesListNode.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWReferenceNode.css"
-			],
-			"dependencies": [
-				"ext.visualEditor.mwcore"
-			],
-			"messages": [
-				"visualeditor-referenceslist-isempty",
-				"visualeditor-referenceslist-isempty-default",
-				"visualeditor-referenceslist-missingref"
 			],
 			"targets": [
 				"desktop",

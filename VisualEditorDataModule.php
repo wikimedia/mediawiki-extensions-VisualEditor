@@ -81,37 +81,10 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		// Normalise to 'copyrightwarning' so we have a consistent key in the front-end.
 		$msgArgs[ 'copyrightwarning' ] = $copywarnMsg;
 
-		// Citation tools
-		$msgVals['visualeditor-cite-tool-definition.json'] = json_encode( self::getCitationTools() );
-
 		return array(
 			'args' => $msgArgs,
 			'vals' => $msgVals,
 		);
-	}
-
-	/**
-	 * Retrieve the list of citation templates that we want to make available in the
-	 * VisualEditor toolbar (via the Cite dropdown). These are defined on-wiki at
-	 * MediaWiki:Visualeditor-cite-tool-definition.json.
-	 *
-	 * @return array
-	 */
-	public static function getCitationTools() {
-		$citationDefinition = json_decode(
-			wfMessage( 'visualeditor-cite-tool-definition.json' )->plain()
-		);
-		$citationTools = array();
-		if ( is_array( $citationDefinition ) ) {
-			foreach ( $citationDefinition as $tool ) {
-				if ( !isset( $tool->title ) && isset( $tool->name ) ) {
-					$tool->title =
-						wfMessage( 'visualeditor-cite-tool-name-' . $tool->name )->text();
-				}
-				$citationTools[] = $tool;
-			}
-		}
-		return $citationTools;
 	}
 
 	public function enableModuleContentVersion() {
