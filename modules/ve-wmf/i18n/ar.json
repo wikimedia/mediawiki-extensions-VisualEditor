@@ -27,5 +27,6 @@
 	"visualeditor-help-label": "اقرأ دليل المستخدم",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "دليل المستخدم لكيفية استخدام المحرر",
-	"visualeditor-welcomedialog-action": "بدء التعديل"
+	"visualeditor-welcomedialog-action": "بدء التعديل",
+	"visualeditor-welcomedialog-switch": "تحول إلى محرر المصدر"
 }

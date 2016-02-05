@@ -22,6 +22,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "Kiam konservanta, asignas tiun al tempindiko de la paĝŝarga dato. Tio estas uzata por rekoni konflikojn pri redakto.",
 	"apihelp-visualeditor-param-wikitext": "La vikiteksto sendendas al Parsoid por HTMLigado (<code>paction=parsefragment</code>, sintaksanalizago=sintakspeco).",
 	"apihelp-visualeditoredit-description": "Konservi HTML5an pâgon al MediaWiki (tradukita al vikiteksto per servico de Parsoid).",
+	"apihelp-visualeditoredit-param-html": "La HTMLa kodo sendendas al Parsoid interŝanĝe por vikiteksto.",
 	"apihelp-visualeditoredit-param-minor": "Flago por redakteto.",
 	"apihelp-visualeditoredit-param-needcheck": "Flago pri redakteto.",
 	"apihelp-visualeditoredit-param-summary": "Redakta resumo.",

@@ -188,6 +188,8 @@
 	"visualeditor-dialog-referenceslist-contextitem-description-general": "მთავარი სქოლიოს სია",
 	"visualeditor-dialog-referenceslist-contextitem-description-named": "ჯგუფი „$1“-ის სქოლიოს სია",
 	"visualeditor-dialog-referenceslist-title": "სქოლიოს სია",
+	"visualeditor-dialog-table-sortable": "სორტირებადი",
+	"visualeditor-dialog-table-wikitable": "სტილიზებური (ვიკიმაგიდა)",
 	"visualeditor-dialog-template-title": "თარგი",
 	"visualeditor-dialog-transclusion-add-content": "შინაარსის დამატება",
 	"visualeditor-dialog-transclusion-add-param": "მეტი ინფორმაციის დამატება",
