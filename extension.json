@@ -37,11 +37,8 @@
 		"VisualEditorFeedbackTitle": false,
 		"VisualEditorSerializationCacheTimeout": 3600,
 		"VisualEditorUseChangeTagging": true,
-		"VisualEditorParsoidPrefix": "localhost",
-		"VisualEditorParsoidDomain": "localhost",
 		"VisualEditorDisableForAnons": false,
 		"VisualEditorPluginModules": [],
-		"VisualEditorParsoidForwardCookies": false,
 		"VisualEditorTabMessages": {
 			"edit": null,
 			"editsource": "visualeditor-ca-editsource",
@@ -53,7 +50,6 @@
 			"editsectionsource": "visualeditor-ca-editsource-section"
 		},
 		"VisualEditorShowBetaWelcome": true,
-		"VisualEditorParsoidHTTPProxy": false,
 		"VisualEditorBrowserBlacklist": {
 			"android": [
 				[
@@ -89,7 +85,6 @@
 			"silk": null
 		},
 		"VisualEditorTabPosition": "before",
-		"VisualEditorParsoidURL": "http://localhost:8000",
 		"VisualEditorNewAccountEnableProportion": false,
 		"VisualEditorEnableTocWidget": false,
 		"VisualEditorEnableWikitext": false,
@@ -106,7 +101,6 @@
 			"_merge_strategy": "array_plus"
 		},
 		"VisualEditorSkinToolbarScrollOffset": [],
-		"VisualEditorParsoidTimeout": 100,
 		"VisualEditorUseSingleEditTab": false,
 		"VisualEditorSingleEditTabSwitchTime": 20160101000000
 	},

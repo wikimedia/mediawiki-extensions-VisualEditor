@@ -43,7 +43,7 @@ class ApiVisualEditor extends ApiBase {
 		// the VRS class to use, defaults to Parsoid
 		$class = ParsoidVirtualRESTService::class;
 		$config = $this->veConfig;
-		// the global virtual rest service config object, if any
+		// The global virtual rest service config object, if any
 		$vrs = $this->getConfig()->get( 'VirtualRestConfig' );
 		if ( isset( $vrs['modules'] ) && isset( $vrs['modules']['restbase'] ) ) {
 			// if restbase is available, use it
@@ -56,16 +56,12 @@ class ApiVisualEditor extends ApiBase {
 			$params = $vrs['modules']['parsoid'];
 			$params['restbaseCompat'] = true;
 		} else {
-			// no global modules defined, fall back to old defaults
-			$params = [
-				'URL' => $config->get( 'VisualEditorParsoidURL' ),
-				'prefix' => $config->get( 'VisualEditorParsoidPrefix' ),
-				'domain' => $config->get( 'VisualEditorParsoidDomain' ),
-				'timeout' => $config->get( 'VisualEditorParsoidTimeout' ),
-				'HTTPProxy' => $config->get( 'VisualEditorParsoidHTTPProxy' ),
-				'forwardCookies' => $config->get( 'VisualEditorParsoidForwardCookies' ),
-				'restbaseCompat' => true
-			];
+			// No global modules defined, so no way to contact the document server.
+			$this->dieUsage(
+				'The VirtualRESTService for the document server is not defined; see ' .
+					'https://www.mediawiki.org/wiki/Extension:VisualEditor',
+				'no_vrs'
+			);
 		}
 		// merge the global and service-specific params
 		if ( isset( $vrs['global'] ) ) {
