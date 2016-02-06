@@ -315,6 +315,16 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.desktopTarget": {
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-vector.css"
+				],
+				"monobook": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-monobook.css"
+				]
+			}
+		},
 		"ext.visualEditor.desktopArticleTarget": {
 			"scripts": [
 				"modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.js"
@@ -337,6 +347,7 @@
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
+				"ext.visualEditor.desktopTarget",
 				"jquery.cookie",
 				"mediawiki.jqueryMsg",
 				"mediawiki.util"
