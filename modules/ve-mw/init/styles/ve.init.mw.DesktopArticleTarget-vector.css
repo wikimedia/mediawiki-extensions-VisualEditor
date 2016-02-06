@@ -41,10 +41,6 @@
 	font-size: 0.8em;
 }
 
-.ve-ui-overlay-global {
-	z-index: 101; /* #p-personal is z-index 100 in vector :( */
-}
-
 .ve-init-mw-desktopArticleTarget .firstHeading {
 	/* Restore 1.8em font size of page title */
 	font-size: 2.25em; /* 1.8/0.8 */
