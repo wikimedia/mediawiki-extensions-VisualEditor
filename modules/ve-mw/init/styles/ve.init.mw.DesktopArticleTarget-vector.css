@@ -35,18 +35,22 @@
 	border: 0;
 }
 
-.ve-init-target,
+.ve-init-mw-desktopArticleTarget,
 .ve-ui-overlay-global {
 	/* Enforce different font-size for all UI elements of VisualEditor */
 	font-size: 0.8em;
 }
 
-.ve-init-target .firstHeading {
+.ve-ui-overlay-global {
+	z-index: 101; /* #p-personal is z-index 100 in vector :( */
+}
+
+.ve-init-mw-desktopArticleTarget .firstHeading {
 	/* Restore 1.8em font size of page title */
 	font-size: 2.25em; /* 1.8/0.8 */
 }
 
-.ve-init-target .mw-body-content,
+.ve-init-mw-desktopArticleTarget .mw-body-content,
 .ve-ui-overlay-global .mw-body-content {
 	/* Match skin's font-size for the surface content */
 	font-size: 1.09375em; /* 0.875/0.8 */
@@ -58,12 +62,14 @@
 	position: relative;
 }
 
-.ve-init-target > .ve-ui-debugBar {
+/* Main document debug bar */
+.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
 	/* 1/0.8 */
 	padding: 1.25em;
 	margin: 1.25em -1.25em -1.25em -1.25em;
 }
 
+/* All debug bars (includes target widgets) */
 .ve-ui-debugBar {
 	border-top: 1px solid #ccc;
 	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
@@ -71,10 +77,6 @@
 
 .ve-ui-debugBar ol {
 	margin-left: 0;
-}
-
-.ve-ui-overlay-global {
-	z-index: 101; /* #p-personal is z-index 100 in vector :( */
 }
 
 .oo-ui-actionWidget a:hover {
@@ -98,6 +100,7 @@
 }
 
 .mw-body .external.ve-ce-linkAnnotation-active {
+	/* Reset -2px from VE-core */
 	margin-right: 0;
 }
 
@@ -118,7 +121,8 @@
 		margin: -1.5625em -1.875em 1.875em -1.875em;
 	}
 
-	.ve-init-target > .ve-ui-debugBar {
+	/* Main document debug bar */
+	.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
 		/* 1/0.8, 1.5/0.8 */
 		padding: 1.875em;
 		margin: 1.25em -1.875em -1.875em -1.875em;
