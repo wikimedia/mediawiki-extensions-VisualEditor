@@ -154,12 +154,17 @@ class VisualEditorHooks {
 			// Known-good parameters: edit, veaction, section, vesection, veswitched
 
 		if ( !$ret ) {
+			$out = $article->getContext()->getOutput();
+
 			$params['venoscript'] = '1';
 			$url = htmlspecialchars( wfScript() . '?' . wfArrayToCgi( $params ) );
-			$article->getContext()->getOutput()->addHeadItem(
+			$out->addHeadItem(
 				've-noscript-fallback',
 				"<noscript><meta http-equiv=\"refresh\" content=\"0; url=$url\"></noscript>"
 			);
+
+			$titleMsg = $title->exists() ? 'editing' : 'creating';
+			$out->setPageTitle( wfMessage( $titleMsg, $title->getPrefixedText() ) );
 		}
 		return $ret;
 	}
