@@ -803,7 +803,8 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 
 	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
 
-	this.getSurface().getDialogs().openWindow( 'wikitextswitchconfirm', { target: this } );
+	ve.ui.actionFactory.create( 'window', this.getSurface() )
+		.open( 'wikitextswitchconfirm', { target: this } );
 };
 
 /**
