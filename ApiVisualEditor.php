@@ -698,27 +698,4 @@ class ApiVisualEditor extends ApiBase {
 	public function isWriteMode() {
 		return true;
 	}
-
-	/**
-	 * @deprecated since MediaWiki core 1.25
-	 */
-	public function getParamDescription() {
-		return array(
-			'page' => 'The page to perform actions on.',
-			'paction' => 'Action to perform',
-			'oldid' => 'The revision number to use (defaults to latest version).',
-			'html' => 'HTML to send to Parsoid to convert to wikitext',
-			'wikitext' => 'Wikitext to send to Parsoid to convert to HTML (paction=parsefragment)',
-			'pst' => 'Pre-save transform wikitext before sending it to Parsoid (paction=parsefragment)',
-			'cachekey' => 'For serialize or diff, use the result of a previous serializeforcache'
-				. ' request with this key. Overrides html.',
-		);
-	}
-
-	/**
-	 * @deprecated since MediaWiki core 1.25
-	 */
-	public function getDescription() {
-		return 'Returns HTML5 for a page from RESTBase or the Parsoid service.';
-	}
 }

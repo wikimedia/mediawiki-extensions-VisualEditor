@@ -276,35 +276,4 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	public function isWriteMode() {
 		return true;
 	}
-
-	/**
-	 * @deprecated since MediaWiki core 1.25
-	 */
-	public function getParamDescription() {
-		return array(
-			'page' => 'The page to perform actions on.',
-			'oldid' => 'The revision number to use. Defaults to latest revision. Use 0 for new page.',
-			'minor' => 'Flag for minor edit.',
-			'html' => 'HTML to send to Parsoid in exchange for wikitext',
-			'etag' => 'ETag to send',
-			'summary' => 'Edit summary',
-			'basetimestamp' => 'When saving, set this to the timestamp of the revision that was'
-				. ' edited. Used to detect edit conflicts.',
-			'starttimestamp' => 'When saving, set this to the timestamp of when the page was loaded.'
-				. ' Used to detect edit conflicts.',
-			'token' => 'Edit token',
-			'captchaid' => 'Captcha ID (when saving with a captcha response).',
-			'captchaword' => 'Answer to the captcha (when saving with a captcha response).',
-			'cachekey' => 'Use the result of a previous serializeforcache request with this key.'
-				. 'Overrides html.',
-		);
-	}
-
-	/**
-	 * @deprecated since MediaWiki core 1.25
-	 */
-	public function getDescription() {
-		return 'Save an HTML5 page to MediaWiki (converted to wikitext via RESTBase or the ' .
-			'Parsoid service).';
-	}
 }
