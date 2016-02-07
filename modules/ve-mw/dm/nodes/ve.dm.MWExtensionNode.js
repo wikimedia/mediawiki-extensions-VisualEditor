@@ -77,6 +77,24 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 	return dataElement;
 };
 
+/** */
+ve.dm.MWExtensionNode.static.cloneElement = function () {
+	// TODO: This is the same as ve.dm.MWTransclusionnode.static.cloneElement, find a way
+	// to de-duplicate this method.
+	var i, len,
+		// Parent method
+		clone = ve.dm.MWExtensionNode.super.static.cloneElement.apply( this, arguments );
+
+	delete clone.attributes.originalMw;
+	// Remove about attribute to prevent about grouping of duplicated transclusions
+	if ( clone.originalDomElements ) {
+		for ( i = 0, len = clone.originalDomElements.length; i < len; i++ ) {
+			clone.originalDomElements[ i ].removeAttribute( 'about' );
+		}
+	}
+	return clone;
+};
+
 ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var el, els, index,
 		store = converter.getStore(),

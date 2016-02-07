@@ -20,7 +20,7 @@
  */
 ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 	// Parent constructor
-	ve.dm.LeafNode.apply( this, arguments );
+	ve.dm.MWTransclusionNode.super.apply( this, arguments );
 
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
@@ -189,6 +189,22 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.static.computedAttributes );
 	}
 	return els;
+};
+
+/** */
+ve.dm.MWTransclusionNode.static.cloneElement = function () {
+	var i, len,
+		// Parent method
+		clone = ve.dm.MWTransclusionNode.super.static.cloneElement.apply( this, arguments );
+
+	delete clone.attributes.originalMw;
+	// Remove about attribute to prevent about grouping of duplicated transclusions
+	if ( clone.originalDomElements ) {
+		for ( i = 0, len = clone.originalDomElements.length; i < len; i++ ) {
+			clone.originalDomElements[ i ].removeAttribute( 'about' );
+		}
+	}
+	return clone;
 };
 
 /**
@@ -374,19 +390,6 @@ ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
 		}
 	}
 	return wikitext;
-};
-
-/** */
-ve.dm.MWTransclusionNode.prototype.getClonedElement = function () {
-	var i, len, clone = ve.dm.LeafNode.prototype.getClonedElement.call( this );
-	delete clone.attributes.originalMw;
-	// Remove about attribute to prevent about grouping of duplicated transclusions
-	if ( clone.originalDomElements ) {
-		for ( i = 0, len = clone.originalDomElements.length; i < len; i++ ) {
-			clone.originalDomElements.removeAttribute( 'about' );
-		}
-	}
-	return clone;
 };
 
 /* Concrete subclasses */
