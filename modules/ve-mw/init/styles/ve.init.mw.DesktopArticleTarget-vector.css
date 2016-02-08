@@ -35,8 +35,7 @@
 	border: 0;
 }
 
-.ve-init-mw-desktopArticleTarget,
-.ve-ui-overlay-global {
+.ve-init-mw-desktopArticleTarget {
 	/* Enforce different font-size for all UI elements of VisualEditor */
 	font-size: 0.8em;
 }
@@ -85,20 +84,6 @@
 	margin: 0;
 }
 /*csslint ids:true */
-
-/* Slug animation needs more specific rules and skin-specific target margins */
-.mw-body p.ve-ce-branchNode-newSlug {
-	margin: -0.3em 0 -0.1em 0;
-}
-
-.mw-body p.ve-ce-branchNode-newSlug-open {
-	margin: 0.5em 0;
-}
-
-.mw-body .external.ve-ce-linkAnnotation-active {
-	/* Reset -2px from VE-core */
-	margin-right: 0;
-}
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and (min-width: 982px) {

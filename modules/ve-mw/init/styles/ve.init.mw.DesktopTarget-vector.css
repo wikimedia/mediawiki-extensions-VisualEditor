@@ -1,0 +1,25 @@
+/*!
+ * VisualEditor MediaWiki Initialization desktop target Vector skin styles.
+ *
+ * @copyright 2011-2016 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-overlay-global {
+	/* Enforce different font-size for all UI elements of VisualEditor */
+	font-size: 0.8em;
+}
+
+/* Slug animation needs more specific rules and skin-specific target margins */
+.mw-body p.ve-ce-branchNode-newSlug {
+	margin: -0.3em 0 -0.1em 0;
+}
+
+.mw-body p.ve-ce-branchNode-newSlug-open {
+	margin: 0.5em 0;
+}
+
+.mw-body .external.ve-ce-linkAnnotation-active {
+	/* Reset -2px from VE-core */
+	margin-right: 0;
+}
