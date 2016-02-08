@@ -102,7 +102,7 @@
 	"visualeditor-dialog-media-size-choosefull": "Auf volle Größe festlegen",
 	"visualeditor-dialog-media-size-originalsize-error": "Die Originaldateigröße konnte nicht abgerufen werden.",
 	"visualeditor-dialog-media-size-section": "Bildgröße",
-	"visualeditor-dialog-media-size-section-help": "Du kannst festlegen, wie groß das Medienelement auf der Seite erscheinen soll. Dies sollte fast immer die normale Größe sein, da eine benutzerdefinierte Größe die Seitengestaltung für Leser beeinflusst und sie sie inkonsistent macht.",
+	"visualeditor-dialog-media-size-section-help": "Du kannst festlegen, wie groß das Medienelement auf der Seite erscheinen soll. Dies sollte fast immer die normale Größe sein, da eine benutzerdefinierte Größe die Seitengestaltung für Leser beeinflusst und sie inkonsistent macht.",
 	"visualeditor-dialog-media-thumbdimensions": "Abmessungen des Vorschaubildes",
 	"visualeditor-dialog-media-title": "Medieneinstellungen",
 	"visualeditor-dialog-media-type-border": "Umrandung",

@@ -19,5 +19,6 @@
 	"visualeditor-welcomedialog-action": "Počni uređivati",
 	"visualeditor-welcomedialog-content": "Bilo ko može uređivati i svako poboljšanje nam pomaže.",
 	"visualeditor-welcomedialog-content-thanks": "Ovim pomažete čitaocima da nauče nove stvari. Hvala Vam!",
+	"visualeditor-welcomedialog-switch": "Prebaci me na uređivač koda",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobro došli}} na {{GRAMMAR:akuzativ|$2}}"
 }
