@@ -998,7 +998,7 @@ ve.dm.MWImageModel.prototype.resetDefaultDimensions = function () {
 			this.scalable.setDefaultDimensions( originalDimensions );
 		}
 	} else {
-		this.scalable.setDefaultDimensions( {} );
+		this.scalable.clearDefaultDimensions();
 	}
 };
 
