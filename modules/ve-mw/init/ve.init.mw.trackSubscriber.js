@@ -131,7 +131,11 @@
 			timing[ action ] = timeStamp;
 		}
 
-		mw.track( 'event.Edit', event );
+		// Sample at 6.25%
+		if ( event.editingSessionId && event.editingSessionId[ 0 ] === '0' ) {
+			mw.track( 'event.Edit', event );
+		}
+
 	} );
 
 	ve.trackSubscribe( 'mwtiming.', function ( topic, data ) {
