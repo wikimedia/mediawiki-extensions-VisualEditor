@@ -270,6 +270,7 @@
 				"mediawiki.page.startup",
 				"mediawiki.Title",
 				"mediawiki.Uri",
+				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.api.options",
 				"user.options",
