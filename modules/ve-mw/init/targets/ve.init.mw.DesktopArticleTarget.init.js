@@ -250,7 +250,7 @@
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
 		if ( mw.user.isAnon() ) {
 			return $.Deferred().resolve();
-		} else {
+		} else if ( mw.user.options.get( 'visualeditor-editor' ) !== editor ) {
 			return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
 				mw.user.options.set( 'visualeditor-editor', editor );
 			} );
