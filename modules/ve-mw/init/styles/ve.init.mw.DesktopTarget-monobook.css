@@ -11,8 +11,3 @@
 	/* Monobook sets a background:url(); rule which overrides the colour. TODO: Fix upstream */
 	background-color: #E6F1FF;
 }
-
-.ve-ui-overlay-global {
-	/* So that the overlay always appears over the site logo, search box and personal tools */
-	z-index: 4;
-}
