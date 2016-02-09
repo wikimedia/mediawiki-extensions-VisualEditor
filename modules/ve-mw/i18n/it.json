@@ -26,7 +26,8 @@
 			"Purodha",
 			"Statix64",
 			"Supernino",
-			"Wikitoni"
+			"Wikitoni",
+			"Malore"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -319,7 +320,7 @@
 	"visualeditor-toolbar-savedialog-short": "Salva",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",
 	"visualeditor-version-label": "Versione",
-	"visualeditor-viewpage-savewarning": "Sei sicuro di voler lasciare la modalità di modifica senza salvare prima?",
+	"visualeditor-viewpage-savewarning": "Sei sicuro di voler lasciare la modalità di modifica senza prima salvare?",
 	"visualeditor-viewpage-savewarning-discard": "Annulla le modifiche",
 	"visualeditor-viewpage-savewarning-keep": "Continuare a modificare",
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
