@@ -33,6 +33,7 @@
 	function showLoading() {
 		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle;
 
+		$( 'html' ).addClass( 've-activated ve-loading' );
 		if ( !init.$loading ) {
 			init.$loading = $(
 				'<div class="ve-init-mw-desktopArticleTarget-loading-overlay">' +
@@ -77,6 +78,7 @@
 	}
 
 	function hideLoading() {
+		$( 'html' ).removeClass( 've-activated ve-loading' );
 		if ( init.$loading ) {
 			init.$loading.detach();
 		}
@@ -202,13 +204,18 @@
 					modified
 				);
 			} )
-			.done( function () {
-				incrementLoadingProgress();
-			} );
+			.then(
+				function () {
+					incrementLoadingProgress();
+				},
+				function () {
+					hideLoading();
+					resetLoadingProgress();
+				}
+			);
 
 		setEditorPreference( 'visualeditor' );
 
-		$( 'html' ).addClass( 've-activated ve-loading' );
 		showLoading();
 		incrementLoadingProgress();
 		active = true;
