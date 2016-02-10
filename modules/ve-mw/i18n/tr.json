@@ -170,8 +170,6 @@
 	"visualeditor-dialog-reference-useexisting-full-label": "Yeniden kullanım zaten bu sayfa üzerinde var olan bir alıntı",
 	"visualeditor-dialog-reference-useexisting-label": "Mevcut bir kaynak kullanın",
 	"visualeditor-dialog-reference-useexisting-tool": "Tekrar kullan",
-	"visualeditor-dialog-referenceslist-contextitem-description-general": "Genel referans listesi",
-	"visualeditor-dialog-referenceslist-contextitem-description-named": "Başvuru listesi için Grup \"$1\"",
 	"visualeditor-dialog-referenceslist-title": "Kaynak listesi",
 	"visualeditor-dialog-template-title": "Şablon",
 	"visualeditor-dialog-transclusion-add-content": "İçerik ekle",
