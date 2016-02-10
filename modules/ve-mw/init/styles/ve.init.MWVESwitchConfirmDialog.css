@@ -13,3 +13,15 @@
 .ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-iconElement-icon {
 	opacity: 0.8;
 }
+
+.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-popupWidget-head {
+	font-weight: bold;
+}
+
+.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-popupWidget-body > :first-child {
+	margin-top: 0;
+}
+
+.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-popupWidget-body > :last-child {
+	margin-bottom: 1em;
+}

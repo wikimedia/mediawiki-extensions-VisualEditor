@@ -570,6 +570,7 @@ class VisualEditorHooks {
 		$preferences['visualeditor-editor'] = $api;
 		$preferences['visualeditor-hidebetawelcome'] = $api;
 		$preferences['visualeditor-hidetabdialog'] = $api;
+		$preferences['visualeditor-hidesourceswitchpopup'] = $api;
 		$preferences['visualeditor-hideusered'] = $api;
 		$preferences['visualeditor-findAndReplace-findText'] = $api;
 		$preferences['visualeditor-findAndReplace-replaceText'] = $api;

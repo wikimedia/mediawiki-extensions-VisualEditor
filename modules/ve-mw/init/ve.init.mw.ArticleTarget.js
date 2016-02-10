@@ -49,7 +49,10 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.pageDeletedWarning = false;
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
-		.extend( { action: 'submit' } );
+		.extend( {
+			action: 'submit',
+			veswitched: 1
+		} );
 	this.events = { track: $.noop, trackActivationStart: $.noop, trackActivationComplete: $.noop };
 
 	this.preparedCacheKeyPromise = null;
