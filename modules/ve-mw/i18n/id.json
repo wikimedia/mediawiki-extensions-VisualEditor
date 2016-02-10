@@ -180,8 +180,6 @@
 	"visualeditor-dialog-reference-useexisting-full-label": "Pakai ulang kutipan yang telah ada di halaman ini",
 	"visualeditor-dialog-reference-useexisting-label": "Gunakan referensi yang ada",
 	"visualeditor-dialog-reference-useexisting-tool": "Pakai ulang",
-	"visualeditor-dialog-referenceslist-contextitem-description-general": "Daftar referensi umum",
-	"visualeditor-dialog-referenceslist-contextitem-description-named": "Daftar referensi untuk kelompok \"$1\"",
 	"visualeditor-dialog-referenceslist-title": "Daftar referensi",
 	"visualeditor-dialog-template-title": "Templat",
 	"visualeditor-dialog-transclusion-add-content": "Tambah konten",

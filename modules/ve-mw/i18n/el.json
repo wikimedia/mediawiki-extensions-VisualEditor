@@ -177,8 +177,6 @@
 	"visualeditor-dialog-reference-useexisting-full-label": "Ξαναχρησιμοποιήστε μια παραπομπή που υπάρχει ήδη σε αυτή τη σελίδα",
 	"visualeditor-dialog-reference-useexisting-label": "Χρήση υπάρχουσας παραπομπής",
 	"visualeditor-dialog-reference-useexisting-tool": "Επαναχρησιμοποίηση",
-	"visualeditor-dialog-referenceslist-contextitem-description-general": "Λίστα με γενικές αναφορές",
-	"visualeditor-dialog-referenceslist-contextitem-description-named": "Λίστα αναφορών για την ομάδα \"$1\"",
 	"visualeditor-dialog-referenceslist-title": "Κατάλογος παραπομπών",
 	"visualeditor-dialog-template-title": "Πρότυπο",
 	"visualeditor-dialog-transclusion-add-content": "Προσθήκη περιεχομένου",
