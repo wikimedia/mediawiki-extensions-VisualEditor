@@ -1,4 +1,3 @@
-@firefox @production
 Feature: VisualEditor on production wikis
 
   Verify that VisualEditor is available as

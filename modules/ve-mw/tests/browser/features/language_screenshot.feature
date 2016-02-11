@@ -1,4 +1,3 @@
-@firefox @login
 Feature: Language Screenshot
 
   @language_screenshot

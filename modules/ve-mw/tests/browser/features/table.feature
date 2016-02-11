@@ -1,3 +1,4 @@
+@en.wikipedia.beta.wmflabs.org @firefox
 Feature: Table
 
   Scenario: Insert table

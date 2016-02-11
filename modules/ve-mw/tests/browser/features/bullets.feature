@@ -1,4 +1,3 @@
-@chrome @en.wikipedia.beta.wmflabs.org @firefox @internet_explorer_10 @internet_explorer_11 @login @safari @test2.wikipedia.org
 Feature: VisualEditor Bullets, Numbering
 
   Background:
