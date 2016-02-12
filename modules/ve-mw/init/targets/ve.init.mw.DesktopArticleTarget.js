@@ -1067,7 +1067,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		if ( 'vesection' in uri.query ) {
 			delete uri.query.vesection;
 		}
-		if ( 'action' in uri.query ) {
+		if ( 'action' in uri.query && $( '#wpTextbox1' ).length === 0 ) {
 			delete uri.query.action;
 			mw.config.set( 'wgAction', 'view' );
 		}
