@@ -150,8 +150,9 @@ class VisualEditorHooks {
 			isset( $params['editintro'] ) ||
 			isset( $params['preload'] ) ||
 			isset( $params['preloadtitle'] ) ||
-			isset( $params['preloadparams'] );
-			// Known-good parameters: edit, veaction, section, vesection, veswitched
+			isset( $params['preloadparams'] ) ||
+			isset( $params['veswitched'] );
+			// Known-good parameters: edit, veaction, section, vesection
 
 		$params['venoscript'] = '1';
 		$url = wfScript() . '?' . wfArrayToCgi( $params );
