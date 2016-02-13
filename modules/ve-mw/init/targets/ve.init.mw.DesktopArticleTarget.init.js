@@ -206,15 +206,13 @@
 					modified
 				);
 			} )
-			.then(
-				function () {
-					incrementLoadingProgress();
-				},
-				function () {
-					hideLoading();
-					resetLoadingProgress();
-				}
-			);
+			.done( function () {
+				incrementLoadingProgress();
+			} )
+			.fail( function () {
+				hideLoading();
+				resetLoadingProgress();
+			} );
 
 		setEditorPreference( 'visualeditor' );
 
