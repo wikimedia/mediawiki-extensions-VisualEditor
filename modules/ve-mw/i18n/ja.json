@@ -249,6 +249,8 @@
 	"visualeditor-mweditmodesource-warning-switch": "編集内容を保持",
 	"visualeditor-mweditmodesource-warning-switch-discard": "変更内容を破棄",
 	"visualeditor-mweditmodeve-popup-body": "このアイコンをクリックすることで、いつでもビジュアルエディターに戻すことができます。",
+	"visualeditor-mweditmodeve-popup-title": "ソース編集に切り替えました",
+	"visualeditor-mweditmodeve-showagain": "今後このメッセージを表示しない",
 	"visualeditor-mweditmodeve-title": "ビジュアルエディターに切り替えますか？",
 	"visualeditor-mweditmodeve-tool": "ビジュアルエディターに切り替え",
 	"visualeditor-mweditmodeve-warning": "あなたはビジュアルエディターの編集に切り替えようとしています。続けますか？",

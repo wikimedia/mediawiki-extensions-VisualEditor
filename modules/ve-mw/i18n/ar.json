@@ -158,7 +158,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "حول الصفحة إلى",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "العنوان المحول إليه",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "منع تحديث هذه التحويلة تلقائيا عندما تصبح الصفحة المحول إليها تحويلة بدورها (للحالات النادرة).",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "لا تغير هذه التحويلة إلى تغير العنوان المحول إليه",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "امنع تحديث هذه التحويلة عند نقل الصفحة المحول إليها.",
 	"visualeditor-dialog-meta-settings-section": "إعدادات الصفحة",
 	"visualeditor-dialog-meta-settings-toc-default": "أظهر إن لزم الأمر",
 	"visualeditor-dialog-meta-settings-toc-disable": "لا تظهر مطلقا",
