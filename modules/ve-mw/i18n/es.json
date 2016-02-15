@@ -262,6 +262,7 @@
 	"visualeditor-mweditmodesource-warning-cancel": "Cancelar",
 	"visualeditor-mweditmodesource-warning-switch": "Conservar los cambios",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Descartar los cambios",
+	"visualeditor-mweditmodeve-popup-body": "Puedes volver a la edición visual en cualquier momento haciendo clic en este icono.",
 	"visualeditor-mweditmodeve-title": "¿Cambiar al editor visual?",
 	"visualeditor-mweditmodeve-tool": "Cambiar a la edición visual",
 	"visualeditor-mweditmodeve-warning": "Estás por cambiar a la edición visual.\n¿Quieres continuar?",

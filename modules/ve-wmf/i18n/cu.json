@@ -4,5 +4,6 @@
 			"ОйЛ"
 		]
 	},
-	"visualeditor-help-label": "ꙁьри помощи страницѫ"
+	"visualeditor-help-label": "ꙁьри помощи страницѫ",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|добрѣ прити}} въ {{GRAMMAR:acusative|$2}}"
 }

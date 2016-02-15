@@ -6,7 +6,8 @@
 			"GeoO",
 			"Դավիթ Սարոյան",
 			"Vahe Gharakhanyan",
-			"Աշոտ1997"
+			"Աշոտ1997",
+			"Aram1985"
 		]
 	},
 	"apihelp-visualeditor-description": "Էջի համար Parsoid-ի համակարգից վերադարձնում է HTML5-ը:",
@@ -243,6 +244,7 @@
 	"visualeditor-mweditmodesource-warning-cancel": "Չեղարկել",
 	"visualeditor-mweditmodesource-warning-switch": "Պահպանել փոփոխությունները",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Չեղարկել փոփոխությունները",
+	"visualeditor-mweditmodeve-showagain": "Այլևս չցուցադրել այս հաղորդագրությունը",
 	"visualeditor-mweditmodeve-title": "Անցնե՞լ ելատեքստի խմբագրմանը։",
 	"visualeditor-mweditmodeve-tool": "Անցնել ելատեքստի խմբագրմանը",
 	"visualeditor-mweditmodeve-warning": "Դուք պատրաստվում եք անցնել վիզուալ խմբագրմանը։\n\nՑանկանո՞ւմ եք շարունակել։",
@@ -261,7 +263,7 @@
 	"visualeditor-preference-enable": "Միացնել ՎիզուալԽմբագրիչը: Այն հասանելի կլինի հետևյալ {{PLURAL:$2|անվանատարածքում|անվանատարածքներում}}՝ $1",
 	"visualeditor-preference-tabs": "Խմբագրման ներդիրներ",
 	"visualeditor-preference-tabs-multi-tab": "Ցույց տալ երկու ներդիրը",
-	"visualeditor-preference-tabs-prefer-ve": "Միշտ ցույց տալ վիզուալ խմբագրիչը եթե հնարավոր է",
+	"visualeditor-preference-tabs-prefer-ve": "Ըստ հնարավորության միշտ ցույց տալ վիզուալ խմբագրիչը",
 	"visualeditor-preference-tabs-prefer-wt": "Միշտ ցույց տալ վիքիտեքստի խմբագրիչը",
 	"visualeditor-preference-tabs-remember-last": "Հիշել իմ վերջին խմբագիրը",
 	"visualeditor-recreate": "Այս էջը ջնջվել է ձեր խմբագրման ընթացքում: Սեղմեք «$1», որպեսզի վերաստեղծեք էջը:",
