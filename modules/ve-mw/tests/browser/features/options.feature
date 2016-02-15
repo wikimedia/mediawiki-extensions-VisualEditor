@@ -5,20 +5,24 @@ Feature: VisualEditor Options
       And I click in the editable part
       And I click the hamburger menu
 
+  @en.wikipedia.beta.wmflabs.org @firefox
   Scenario: Options
     When I click Options
     Then I should see the options overlay
 
+  @en.wikipedia.beta.wmflabs.org @firefox
   Scenario: Advanced Settings
     When I click Advanced Settings
     Then I should see the options overlay
       And the options overlay should display Advanced Settings
 
+  @en.wikipedia.beta.wmflabs.org @firefox
   Scenario: Page Settings
     When I click Page Settings
     Then I should see the options overlay
       And the options overlay should display Page Settings
 
+  @en.wikipedia.beta.wmflabs.org @firefox
   Scenario: Categories
     When I click Categories
     Then I should see the options overlay

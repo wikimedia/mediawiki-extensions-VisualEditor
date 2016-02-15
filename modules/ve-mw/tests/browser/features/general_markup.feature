@@ -16,7 +16,6 @@ Feature: VisualEditor general text markup features
     | Bold           | '''General Markup VisualEditor Test'''        |
     | Italics        | ''General Markup VisualEditor Test''          |
 
-
   Scenario Outline: VisualEditor more general markup
     When I click the text style menu
       And I click the More option

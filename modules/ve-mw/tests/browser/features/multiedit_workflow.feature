@@ -10,7 +10,8 @@ Feature: VisualEditor multi-edit workflow
   to test multiple page edits within a single session.
 
   Scenario: Make multiple edits to the same article
-    Given I enter and save the first edit
+    Given I am on the Multiple edits page
+    And I enter and save the first edit
     And I enter and save a second edit
     And I enter and save a third edit
     Then the saved page should contain all three edits.
