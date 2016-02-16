@@ -68,6 +68,7 @@
 					"ve.init",
 					"ve.init.Platform",
 					"ve.init.Target",
+					"window.VisualEditorSupportCheck",
 					"ve.init.sa*"
 				]
 			},

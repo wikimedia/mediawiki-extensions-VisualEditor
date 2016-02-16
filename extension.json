@@ -246,6 +246,13 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.supportCheck": {
+			"scripts": "lib/ve/src/init/ve.init.SupportCheck.js",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.desktopArticleTarget.init": {
 			"class": "VisualEditorDesktopArticleTargetInitModule",
 			"scripts": "modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
@@ -268,6 +275,7 @@
 				"mediawiki.util",
 				"mediawiki.api.options",
 				"user.options",
+				"ext.visualEditor.supportCheck",
 				"ext.visualEditor.track"
 			],
 			"messages": [
@@ -845,7 +853,8 @@
 				"rangefix",
 				"papaparse",
 				"jquery.client",
-				"ext.visualEditor.base"
+				"ext.visualEditor.base",
+				"ext.visualEditor.supportCheck"
 			],
 			"messages": [
 				"visualeditor",

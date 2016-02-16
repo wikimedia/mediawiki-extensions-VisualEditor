@@ -21,7 +21,7 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
-		pageCanLoadVE, init, support, targetPromise, enable, tempdisable, autodisable,
+		pageCanLoadVE, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, userPrefEnabled, initialWikitext, oldid, multipleSectionEditLinks,
 		active = false,
 		progressStep = 0,
@@ -303,36 +303,7 @@
 		veEditUri.extend( { oldid: oldid } );
 	}
 
-	support = {
-		es5: !!(
-			// It would be much easier to do a quick inline function that asserts "use strict"
-			// works, but since IE9 doesn't support strict mode (and we don't use strict mode) we
-			// have to instead list all the ES5 features we do use.
-			Array.isArray &&
-			Array.prototype.filter &&
-			Array.prototype.indexOf &&
-			Array.prototype.map &&
-			Date.now &&
-			Date.prototype.toJSON &&
-			Object.create &&
-			Object.keys &&
-			String.prototype.trim &&
-			window.JSON &&
-			JSON.parse &&
-			JSON.stringify &&
-			Function.prototype.bind
-		),
-		contentEditable: 'contentEditable' in document.createElement( 'div' ),
-		svg: !!(
-			document.createElementNS &&
-			document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ).createSVGRect
-		)
-	};
-
 	init = {
-
-		support: support,
-
 		blacklist: conf.blacklist,
 
 		/**
@@ -628,11 +599,6 @@
 		}
 	};
 
-	support.visualEditor = support.es5 &&
-		support.contentEditable &&
-		support.svg &&
-		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) );
-
 	// Cast "0" (T89513)
 	enable = Number( mw.user.options.get( 'visualeditor-enable' ) );
 	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
@@ -656,7 +622,9 @@
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
 	init.isAvailable = (
-		support.visualEditor &&
+		window.VisualEditorSupportCheck() &&
+
+		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
 
 		// Only in supported skins
 		$.inArray( mw.config.get( 'skin' ), conf.skins ) !== -1 &&
