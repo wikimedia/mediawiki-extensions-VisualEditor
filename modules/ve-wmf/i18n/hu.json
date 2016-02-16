@@ -21,5 +21,6 @@
 	"visualeditor-welcomedialog-action": "Szerkesztés elkezdése",
 	"visualeditor-welcomedialog-content": "Mindenki szerkeszthet, és minden javítás segít.",
 	"visualeditor-welcomedialog-content-thanks": "Köszönjük, hogy segítesz a világnak még többet felfedezni!",
+	"visualeditor-welcomedialog-switch": "Váltás forráskód szerkesztésére",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Üdvözlünk}} a(z) $2 wikin"
 }
