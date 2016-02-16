@@ -86,6 +86,15 @@
 		}
 	}
 
+	function handleLoadFailure() {
+		resetLoadingProgress();
+		if ( $( '#wpTextbox1' ).length || mw.config.get( 'wgAction' ) !== 'edit' ) {
+			hideLoading();
+		} else {
+			location.href = viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
+		}
+	}
+
 	/**
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
 	 *
@@ -206,13 +215,8 @@
 					modified
 				);
 			} )
-			.done( function () {
-				incrementLoadingProgress();
-			} )
-			.fail( function () {
-				hideLoading();
-				resetLoadingProgress();
-			} );
+			.done( incrementLoadingProgress )
+			.fail( handleLoadFailure );
 
 		setEditorPreference( 'visualeditor' );
 
@@ -227,9 +231,7 @@
 				target.on( 'deactivate', function () {
 					active = false;
 				} );
-				target.on( 'loadError', function () {
-					resetLoadingProgress();
-				} );
+				target.on( 'loadError', handleLoadFailure );
 				return target.activate( dataPromise );
 			} )
 			.then( function () {
