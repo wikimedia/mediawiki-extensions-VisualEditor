@@ -80,7 +80,7 @@
 	}
 
 	function hideLoading() {
-		$( 'html' ).removeClass( 've-activated ve-loading' );
+		$( 'html' ).removeClass( 've-loading' );
 		if ( init.$loading ) {
 			init.$loading.detach();
 		}
@@ -89,6 +89,7 @@
 	function handleLoadFailure() {
 		resetLoadingProgress();
 		if ( $( '#wpTextbox1' ).length || mw.config.get( 'wgAction' ) !== 'edit' ) {
+			$( 'html' ).removeClass( 've-activated' );
 			hideLoading();
 		} else {
 			location.href = viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
