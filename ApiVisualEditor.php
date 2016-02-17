@@ -11,9 +11,9 @@
 class ApiVisualEditor extends ApiBase {
 	// These are safe even if VE is not enabled on the page.
 	// This is intended for other VE interfaces, such as Flow's.
-	protected static $SAFE_ACTIONS = array(
+	protected static $SAFE_ACTIONS = [
 		'parsefragment',
-	);
+	];
 
 	/**
 	 * @var Config
@@ -28,7 +28,7 @@ class ApiVisualEditor extends ApiBase {
 	public function __construct( ApiMain $main, $name, Config $config ) {
 		parent::__construct( $main, $name );
 		$this->veConfig = $config;
-		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( array() ) );
+		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( [] ) );
 		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
 	}
 
@@ -44,7 +44,7 @@ class ApiVisualEditor extends ApiBase {
 	 */
 	private function getVRSObject() {
 		// the params array to create the service object with
-		$params = array();
+		$params = [];
 		// the VRS class to use, defaults to Parsoid
 		$class = 'ParsoidVirtualRESTService';
 		$config = $this->veConfig;
@@ -61,7 +61,7 @@ class ApiVisualEditor extends ApiBase {
 			$params['restbaseCompat'] = true;
 		} else {
 			// no global modules defined, fall back to old defaults
-			$params = array(
+			$params = [
 				'URL' => $config->get( 'VisualEditorParsoidURL' ),
 				'prefix' => $config->get( 'VisualEditorParsoidPrefix' ),
 				'domain' => $config->get( 'VisualEditorParsoidDomain' ),
@@ -69,7 +69,7 @@ class ApiVisualEditor extends ApiBase {
 				'HTTPProxy' => $config->get( 'VisualEditorParsoidHTTPProxy' ),
 				'forwardCookies' => $config->get( 'VisualEditorParsoidForwardCookies' ),
 				'restbaseCompat' => true
-			);
+			];
 		}
 		// merge the global and service-specific params
 		if ( isset( $vrs['global'] ) ) {
@@ -85,11 +85,11 @@ class ApiVisualEditor extends ApiBase {
 		return new $class( $params );
 	}
 
-	private function requestRestbase( $method, $path, $params, $reqheaders = array() ) {
-		$request = array(
+	private function requestRestbase( $method, $path, $params, $reqheaders = [] ) {
+		$request = [
 			'method' => $method,
 			'url' => '/restbase/local/v1/' . $path
-		);
+		];
 		if ( $method === 'GET' ) {
 			$request['query'] = $params;
 		} else {
@@ -121,7 +121,7 @@ class ApiVisualEditor extends ApiBase {
 		global $wgMemc;
 
 		// Convert the VE HTML to wikitext
-		$text = $this->postHTML( $title, $html, array( 'oldid' => $oldid ), $etag );
+		$text = $this->postHTML( $title, $html, [ 'oldid' => $oldid ], $etag );
 		if ( $text === false ) {
 			return false;
 		}
@@ -161,11 +161,11 @@ class ApiVisualEditor extends ApiBase {
 		return $this->requestRestbase(
 			'POST',
 			$path,
-			array(
+			[
 				'html' => $html,
 				'scrub_wikitext' => 1,
-			),
-			array( 'If-Match' => $etag )
+			],
+			[ 'If-Match' => $etag ]
 		);
 	}
 
@@ -183,20 +183,20 @@ class ApiVisualEditor extends ApiBase {
 		return $this->requestRestbase(
 			'POST',
 			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
-			array(
+			[
 				'wikitext' => $wikitext,
 				'body_only' => 1,
-			)
+			]
 		);
 	}
 
 	protected function diffWikitext( $title, $wikitext ) {
-		$apiParams = array(
+		$apiParams = [
 			'action' => 'query',
 			'prop' => 'revisions',
 			'titles' => $title->getPrefixedDBkey(),
 			'rvdifftotext' => $this->pstWikitext( $title, $wikitext )
-		);
+		];
 		$api = new ApiMain(
 			new DerivativeRequest(
 				$this->getRequest(),
@@ -207,15 +207,15 @@ class ApiVisualEditor extends ApiBase {
 		);
 		$api->execute();
 		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData( null, array(
-				'BC' => array(), // Transform content nodes to '*'
-				'Types' => array(), // Add back-compat subelements
-			) );
+			$result = $api->getResult()->getResultData( null, [
+				'BC' => [], // Transform content nodes to '*'
+				'Types' => [], // Add back-compat subelements
+			] );
 		} else {
 			$result = $api->getResultData();
 		}
 		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
-			return array( 'result' => 'fail' );
+			return [ 'result' => 'fail' ];
 		}
 		$diffRows = $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'];
 
@@ -223,27 +223,27 @@ class ApiVisualEditor extends ApiBase {
 			$context = new DerivativeContext( $this->getContext() );
 			$context->setTitle( $title );
 			$engine = new DifferenceEngine( $context );
-			return array(
+			return [
 				'result' => 'success',
 				'diff' => $engine->addHeader(
 					$diffRows,
 					$context->msg( 'currentrev' )->parse(),
 					$context->msg( 'yourtext' )->parse()
 				)
-			);
+			];
 		} else {
-			return array( 'result' => 'nochanges' );
+			return [ 'result' => 'nochanges' ];
 		}
 	}
 
 	protected function getLangLinks( $title ) {
-		$apiParams = array(
+		$apiParams = [
 			'action' => 'query',
 			'prop' => 'langlinks',
 			'lllimit' => 500,
 			'titles' => $title->getPrefixedDBkey(),
 			'indexpageids' => 1,
-		);
+		];
 		$api = new ApiMain(
 			new DerivativeRequest(
 				$this->getRequest(),
@@ -255,11 +255,11 @@ class ApiVisualEditor extends ApiBase {
 
 		$api->execute();
 		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData( null, array(
-				'BC' => array(), // Backwards-compatible structure transformations
-				'Types' => array(), // Backwards-compatible structure transformations
+			$result = $api->getResult()->getResultData( null, [
+				'BC' => [], // Backwards-compatible structure transformations
+				'Types' => [], // Backwards-compatible structure transformations
 				'Strip' => 'all', // Remove any metadata keys from the langlinks array
-			) );
+			] );
 		} else {
 			$result = $api->getResultData();
 		}
@@ -295,7 +295,7 @@ class ApiVisualEditor extends ApiBase {
 				$title->getNamespace(), 'novenamespace' );
 		}
 
-		$parserParams = array();
+		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
 			$parserParams['oldid'] = $params['oldid'];
 		}
@@ -346,7 +346,7 @@ class ApiVisualEditor extends ApiBase {
 						$content = $this->requestRestbase(
 							'GET',
 							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid,
-							array()
+							[]
 						);
 						if ( $content === false ) {
 							$this->dieUsage( 'Error contacting the document server', 'docserver' );
@@ -394,8 +394,8 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Look at protection status to set up notices + surface class(es)
-				$protectedClasses = array();
-				if ( MWNamespace::getRestrictionLevels( $title->getNamespace() ) !== array( '' ) ) {
+				$protectedClasses = [];
+				if ( MWNamespace::getRestrictionLevels( $title->getNamespace() ) !== [ '' ] ) {
 					// Page protected from editing
 					if ( $title->isProtected( 'edit' ) ) {
 						# Is the title semi-protected?
@@ -434,7 +434,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( $permErrors && !$title->exists() ) {
 					$notices[] = $this->msg(
 						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
-					) . "<br>" . call_user_func_array( array( $this, 'msg' ), $permErrors[0] )->parse();
+					) . "<br>" . call_user_func_array( [ $this, 'msg' ], $permErrors[0] )->parse();
 				}
 
 				// Show notice when editing user / user talk page of a user that doesn't exist
@@ -463,7 +463,7 @@ class ApiVisualEditor extends ApiBase {
 				// Blocked user notice
 				if ( $user->isBlockedFrom( $title ) && $user->getBlock()->prevents( 'edit' ) !== false ) {
 					$notices[] = call_user_func_array(
-						array( $this, 'msg' ),
+						[ $this, 'msg' ],
 						$user->getBlock()->getPermissionsError( $this->getContext() )
 					)->parseAsBlock();
 				}
@@ -476,7 +476,7 @@ class ApiVisualEditor extends ApiBase {
 					);
 					if ( count( $error ) ) {
 						$notices[] = call_user_func_array(
-							array( $this, 'msg' ),
+							[ $this, 'msg' ],
 							$error
 						)->parseAsBlock();
 					}
@@ -489,24 +489,24 @@ class ApiVisualEditor extends ApiBase {
 				$req->setVal( 'format', 'text/x-wiki' );
 				$ep->importFormData( $req ); // By reference for some reason (bug 52466)
 				$tabindex = 0;
-				$states = array( 'minor' => false, 'watch' => false );
+				$states = [ 'minor' => false, 'watch' => false ];
 				$checkboxes = $ep->getCheckboxes( $tabindex, $states );
 
 				// HACK: Find out which red links are on the page
 				// We do the lookup for the current version. This might not be entirely complete
 				// if we're loading an oldid, but it'll probably be close enough, and LinkCache
 				// will automatically request any additional data it needs.
-				$links = array();
+				$links = [];
 				$wikipage = WikiPage::factory( $title );
 				$popts = $wikipage->makeParserOptions( 'canonical' );
 				$cached = ParserCache::singleton()->get( $article, $popts, true );
-				$links = array(
+				$links = [
 					// Array of linked pages that are missing
-					'missing' => array(),
+					'missing' => [],
 					// For current revisions: 1 (treat all non-missing pages as known)
 					// For old revisions: array of linked pages that are known
-					'known' => $restoring || !$cached ? array() : 1,
-				);
+					'known' => $restoring || !$cached ? [] : 1,
+				];
 				if ( $cached ) {
 					foreach ( $cached->getLinks() as $namespace => $cachedTitles ) {
 						foreach ( $cachedTitles as $cachedTitleText => $exists ) {
@@ -528,7 +528,7 @@ class ApiVisualEditor extends ApiBase {
 
 				// On parser cache miss, just don't bother populating red link data
 
-				$result = array(
+				$result = [
 					'result' => 'success',
 					'notices' => $notices,
 					'checkboxes' => $checkboxes,
@@ -539,7 +539,7 @@ class ApiVisualEditor extends ApiBase {
 					'starttimestamp' => wfTimestampNow(),
 					'oldid' => $oldid,
 
-				);
+				];
 				if ( $params['paction'] === 'parse' ) {
 					$result['content'] = $content;
 				}
@@ -554,10 +554,10 @@ class ApiVisualEditor extends ApiBase {
 				if ( $content === false ) {
 					$this->dieUsage( 'Error contacting the document server', 'docserver' );
 				} else {
-					$result = array(
+					$result = [
 						'result' => 'success',
 						'content' => $content
-					);
+					];
 				}
 				break;
 
@@ -576,7 +576,7 @@ class ApiVisualEditor extends ApiBase {
 						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
 				}
-				$result = array( 'result' => 'success', 'content' => $content );
+				$result = [ 'result' => 'success', 'content' => $content ];
 				break;
 
 			case 'diff':
@@ -610,7 +610,7 @@ class ApiVisualEditor extends ApiBase {
 					$html,
 					$params['etag']
 				);
-				$result = array( 'result' => 'success', 'cachekey' => $key );
+				$result = [ 'result' => 'success', 'cachekey' => $key ];
 				break;
 
 			case 'getlanglinks':
@@ -618,7 +618,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( $langlinks === false ) {
 					$this->dieUsage( 'Error querying MediaWiki API', 'api-langlinks-error' );
 				} else {
-					$result = array( 'result' => 'success', 'langlinks' => $langlinks );
+					$result = [ 'result' => 'success', 'langlinks' => $langlinks ];
 				}
 				break;
 		}
@@ -645,26 +645,26 @@ class ApiVisualEditor extends ApiBase {
 		return $lp->getBody() . Linker::link(
 			SpecialPage::getTitleFor( 'Log' ),
 			$this->msg( 'log-fulllog' )->escaped(),
-			array(),
-			array(
+			[],
+			[
 				'page' => $title->getPrefixedDBkey(),
 				'type' => is_string( $types ) ? $types : null
-			)
+			]
 		);
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'page' => array(
+		return [
+			'page' => [
 				ApiBase::PARAM_REQUIRED => true,
-			),
-			'format' => array(
+			],
+			'format' => [
 				ApiBase::PARAM_DFLT => 'jsonfm',
-				ApiBase::PARAM_TYPE => array( 'json', 'jsonfm' ),
-			),
-			'paction' => array(
+				ApiBase::PARAM_TYPE => [ 'json', 'jsonfm' ],
+			],
+			'paction' => [
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_TYPE => array(
+				ApiBase::PARAM_TYPE => [
 					'parse',
 					'metadata',
 					'parsefragment',
@@ -672,15 +672,15 @@ class ApiVisualEditor extends ApiBase {
 					'serializeforcache',
 					'diff',
 					'getlanglinks',
-				),
-			),
+				],
+			],
 			'wikitext' => null,
 			'oldid' => null,
 			'html' => null,
 			'etag' => null,
 			'cachekey' => null,
 			'pst' => false,
-		);
+		];
 	}
 
 	public function needsToken() {

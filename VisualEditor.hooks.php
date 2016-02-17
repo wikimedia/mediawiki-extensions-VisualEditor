@@ -30,7 +30,6 @@ class VisualEditorHooks {
 		return new $class( $main, $name, $config );
 	}
 
-
 	/**
 	 * Adds VisualEditor JS to the output.
 	 *
@@ -41,11 +40,11 @@ class VisualEditorHooks {
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
-		$output->addModules( array(
+		$output->addModules( [
 			'ext.visualEditor.desktopArticleTarget.init',
 			'ext.visualEditor.targetLoader'
-		) );
-		$output->addModuleStyles( array( 'ext.visualEditor.desktopArticleTarget.noscript' ) );
+		] );
+		$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
 		// add scroll offset js variable to output
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$skinsToolbarScrollOffset = $veConfig->get( 'VisualEditorSkinToolbarScrollOffset' );
@@ -79,7 +78,7 @@ class VisualEditorHooks {
 				return true;
 			}
 
-			$matches = array();
+			$matches = [];
 			$ret = preg_match( '/' . $uaSubstr . '\/([0-9\.]*) ?/i', $ua, $matches );
 			if ( $ret !== 1 ) {
 				continue;
@@ -131,7 +130,7 @@ class VisualEditorHooks {
 		$params = $req->getValues();
 
 		if ( isset( $params['venoscript'] ) ) {
-			$req->response()->setCookie( 'VEE', 'wikitext', 0, array( 'prefix' => '' ) );
+			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			$user->setOption( 'visualeditor-editor', 'wikitext' );
 			$user->saveSettings();
 			return true;
@@ -248,14 +247,14 @@ class VisualEditorHooks {
 				$dbr->select(
 					'revision',
 					'1',
-					array(
+					[
 						'rev_user' => $user->getId(),
 						'rev_timestamp < ' . $dbr->addQuotes(
 							$config->get( 'VisualEditorSingleEditTabSwitchTime' )
 						)
-					),
+					],
 					__METHOD__,
-					array( 'LIMIT' => 1 )
+					[ 'LIMIT' => 1 ]
 				)->numRows() === 1
 			) {
 				$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
@@ -292,7 +291,7 @@ class VisualEditorHooks {
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
 		// us to splice into the middle of an associative array.
-		$newViews = array();
+		$newViews = [];
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
 				// Build the VisualEditor tab
@@ -307,12 +306,12 @@ class VisualEditorHooks {
 				$veTabMessage = $tabMessages[$action];
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					$skin->msg( $veTabMessage )->text();
-				$veTab = array(
+				$veTab = [
 					'href' => $title->getLocalURL( $veParams ),
 					'text' => $veTabText,
 					'primary' => true,
 					'class' => '',
-				);
+				];
 
 				// Alter the edit tab
 				$editTab = $data;
@@ -395,7 +394,7 @@ class VisualEditorHooks {
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
 		$request = $output->getRequest();
 		if ( $request->getBool( 'veswitched' ) ) {
-			$output->addHTML( Xml::input( 'veswitched', false, '1', array( 'type' => 'hidden' ) ) );
+			$output->addHTML( Xml::input( 'veswitched', false, '1', [ 'type' => 'hidden' ] ) );
 		}
 		return true;
 	}
@@ -478,15 +477,15 @@ class VisualEditorHooks {
 		if ( $title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
 			$veEditSection = $tabMessages['editsection'] !== null ?
 				$tabMessages['editsection'] : 'editsection';
-			$veLink = array(
+			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
 				'targetTitle' => $title,
-				'attribs' => $result['editsection']['attribs'] + array(
+				'attribs' => $result['editsection']['attribs'] + [
 					'class' => 'mw-editsection-visualeditor'
-				),
-				'query' => array( 'veaction' => 'edit', 'vesection' => $section ),
-				'options' => array( 'noclasses', 'known' )
-			);
+				],
+				'query' => [ 'veaction' => 'edit', 'vesection' => $section ],
+				'options' => [ 'noclasses', 'known' ]
+			];
 
 			$result['veeditsection'] = $veLink;
 			if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
@@ -522,30 +521,30 @@ class VisualEditorHooks {
 				->get( 'VisualEditorAvailableNamespaces' );
 			$onNamespaces = array_keys( array_filter( $namespaces ) );
 
-			$enablePreference = array(
+			$enablePreference = [
 				'type' => 'toggle',
-				'label-message' => array(
+				'label-message' => [
 					'visualeditor-preference-enable',
 					$wgLang->commaList( array_map(
-						array( 'self', 'convertNs' ),
+						[ 'self', 'convertNs' ],
 						$onNamespaces
 					) ),
 					count( $onNamespaces )
-				),
+				],
 				'section' => 'editing/editor'
-			);
+			];
 			if ( $user->getOption( 'visualeditor-autodisable' ) ) {
 				$enablePreference['default'] = false;
 			}
 			$preferences['visualeditor-enable'] = $enablePreference;
 		}
-		$preferences['visualeditor-betatempdisable'] = array(
+		$preferences['visualeditor-betatempdisable'] = [
 			'type' => 'toggle',
 			'label-message' => 'visualeditor-preference-betatempdisable',
 			'section' => 'editing/editor',
 			'default' => $user->getOption( 'visualeditor-betatempdisable' ) ||
 				$user->getOption( 'visualeditor-autodisable' )
-		);
+		];
 
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		if (
@@ -553,20 +552,20 @@ class VisualEditorHooks {
 			!$user->getOption( 'visualeditor-autodisable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' )
 		) {
-			$preferences['visualeditor-tabs'] = array(
+			$preferences['visualeditor-tabs'] = [
 				'type' => 'select',
 				'label-message' => 'visualeditor-preference-tabs',
 				'section' => 'editing/editor',
-				'options' => array(
+				'options' => [
 					wfMessage( 'visualeditor-preference-tabs-remember-last' )->escaped() => 'remember-last',
 					wfMessage( 'visualeditor-preference-tabs-prefer-ve' )->escaped() => 'prefer-ve',
 					wfMessage( 'visualeditor-preference-tabs-prefer-wt' )->escaped() => 'prefer-wt',
 					wfMessage( 'visualeditor-preference-tabs-multi-tab' )->escaped() => 'multi-tab'
-				)
-			);
+				]
+			];
 		}
 
-		$api = array( 'type' => 'api' );
+		$api = [ 'type' => 'api' ];
 		$preferences['visualeditor-autodisable'] = $api;
 		$preferences['visualeditor-editor'] = $api;
 		$preferences['visualeditor-hidebetawelcome'] = $api;
@@ -586,22 +585,22 @@ class VisualEditorHooks {
 		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor";
 
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-		$preferences['visualeditor-enable'] = array(
+		$preferences['visualeditor-enable'] = [
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-core-label',
 			'desc-message' => 'visualeditor-preference-core-description',
-			'screenshot' => array(
+			'screenshot' => [
 				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-ltr.svg",
 				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-rtl.svg",
-			),
+			],
 			'info-message' => 'visualeditor-preference-core-info-link',
 			'discussion-message' => 'visualeditor-preference-core-discussion-link',
-			'requirements' => array(
+			'requirements' => [
 				'javascript' => true,
 				'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
 				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -656,12 +655,12 @@ class VisualEditorHooks {
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$pageLanguage = $out->getTitle()->getPageLanguage();
 
-		$vars['wgVisualEditor'] = array(
+		$vars['wgVisualEditor'] = [
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'usePageImages' => defined( 'PAGE_IMAGES_INSTALLED' ),
 			'usePageDescriptions' => defined( 'WBC_VERSION' ),
-		);
+		];
 
 		return true;
 	}
@@ -677,7 +676,7 @@ class VisualEditorHooks {
 		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
 		$enabledNamespaces = array_keys( array_filter( $availableNamespaces ) );
 
-		$vars['wgVisualEditorConfig'] = array(
+		$vars['wgVisualEditorConfig'] = [
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $enabledNamespaces,
@@ -688,9 +687,9 @@ class VisualEditorHooks {
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
 				$veConfig->get( 'VisualEditorPluginModules' ) // @todo deprecate the global setting
 			),
-			'defaultUserOptions' => array(
+			'defaultUserOptions' => [
 				'defaultthumbsize' => $thumbLimits[ $defaultUserOptions['thumbsize'] ]
-			),
+			],
 			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
 			'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
@@ -705,7 +704,7 @@ class VisualEditorHooks {
 			'fullRestbaseUrl' => $coreConfig->get( 'VisualEditorFullRestbaseURL' ),
 			'feedbackApiUrl' =>  $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' =>  $veConfig->get( 'VisualEditorFeedbackTitle' ),
-		);
+		];
 
 		return true;
 	}
@@ -720,10 +719,10 @@ class VisualEditorHooks {
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
 
-		$veResourceTemplate = array(
+		$veResourceTemplate = [
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'VisualEditor',
-		);
+		];
 
 		// Only pull in VisualEditor core's local version of jquery.uls.data if it hasn't been
 		// installed locally already (presumably, by the UniversalLanguageSelector extension).
@@ -731,14 +730,14 @@ class VisualEditorHooks {
 			!isset( $resourceModules[ 'jquery.uls.data' ] ) &&
 			!$resourceLoader->isModuleRegistered( 'jquery.uls.data' )
 		) {
-			$resourceLoader->register( array(
-				'jquery.uls.data' => $veResourceTemplate + array(
-					'scripts' => array(
+			$resourceLoader->register( [
+				'jquery.uls.data' => $veResourceTemplate + [
+					'scripts' => [
 						'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
 						'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
-					),
-					'targets' => array( 'desktop', 'mobile' ),
-			) ) );
+					],
+					'targets' => [ 'desktop', 'mobile' ],
+			] ] );
 		}
 
 		return true;
@@ -748,12 +747,12 @@ class VisualEditorHooks {
 		array &$testModules,
 		ResourceLoader &$resourceLoader
 	) {
-		$testModules['qunit']['ext.visualEditor.test'] = array(
-			'styles' => array(
+		$testModules['qunit']['ext.visualEditor.test'] = [
+			'styles' => [
 				// jsdifflib
 				'lib/ve/lib/jsdifflib/diffview.css',
-			),
-			'scripts' => array(
+			],
+			'scripts' => [
 				// MW config preload
 				'modules/ve-mw/tests/mw-preload.js',
 				// jsdifflib
@@ -865,8 +864,8 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/imetests/leftarrow-chromium-ubuntu-none.js',
 				'lib/ve/tests/ce/imetests/leftarrow-firefox-ubuntu-none.js',
 				'lib/ve/tests/ce/imetests/leftarrow-ie9-win7-none.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'unicodejs',
 				'ext.visualEditor.standalone',
 				'ext.visualEditor.core',
@@ -881,10 +880,10 @@ class VisualEditorHooks {
 				'ext.visualEditor.experimental',
 				'ext.visualEditor.desktopArticleTarget.init',
 				'ext.visualEditor.desktopArticleTarget',
-			),
+			],
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'VisualEditor',
-		);
+		];
 
 		return true;
 	}
@@ -965,6 +964,5 @@ class VisualEditorHooks {
 		}
 		return true;
 	}
-
 
 }

@@ -27,24 +27,24 @@ class VEAutodisablePref extends Maintenance {
 		$lastUserId = -1;
 		do {
 			$results = $dbr->select(
-				array( 'user', 'user_properties' ),
+				[ 'user', 'user_properties' ],
 				'user_id',
-				array(
+				[
 					'user_id > ' . $dbr->addQuotes( $lastUserId ),
 					'up_value IS NULL', // only select users with no entry in user_properties
 					'user_editcount > 0'
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'LIMIT' => $this->mBatchSize,
 					'ORDER BY' => 'user_id'
-				),
-				array(
-					'user_properties' => array(
+				],
+				[
+					'user_properties' => [
 						'LEFT OUTER JOIN',
 						'user_id = up_user and up_property = "visualeditor-enable"'
-					)
-				)
+					]
+				]
 			);
 			foreach ( $results as $userRow ) {
 				$user = User::newFromId( $userRow->user_id );
