@@ -183,7 +183,7 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 
 			// This can't be constructed until the editor has loaded as it uses special messages
 			feedbackConfig = {
-				bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/create/?projects=VisualEditor' ),
+				bugsLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projects=VisualEditor' ),
 				bugsListLink: new mw.Uri( 'https://phabricator.wikimedia.org/maniphest/query/eSHgNozkIsuv/' ),
 				showUseragentCheckbox: true,
 				useragentCheckboxMandatory: true
