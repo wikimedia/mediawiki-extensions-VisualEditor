@@ -19,6 +19,8 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
+	var categoryNamespace = mw.config.get( 'wgNamespaceIds' ).category;
+
 	// Config initialization
 	config = config || {};
 
@@ -36,8 +38,8 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.savedPopupState = false;
 	this.popup = new ve.ui.MWCategoryPopupWidget();
 	this.input = new ve.ui.MWCategoryInputWidget( this, { $overlay: config.$overlay } );
-	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( 14 ) === -1;
-	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )[ '14' ] + ':';
+	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( categoryNamespace ) === -1;
+	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )[ categoryNamespace ] + ':';
 
 	// Events
 	this.input.connect( this, { choose: 'onInputChoose' } );
