@@ -6,18 +6,7 @@
  */
 
 .ve-ui-mwCategoryItemWidget {
-	position: relative;
-	float: left;
-	/* Override OOUI's inline spacing */
-	margin-right: 0;
-}
-
-.ve-ui-mwCategoryItemWidget > .oo-ui-buttonElement-button {
-	margin: 0 0.25em 0.5em 0.25em;
-}
-
-.ve-ui-mwCategoryItemWidget:last-child > .oo-ui-buttonElement-button {
-	margin-right: 0.5em;
+	margin: 0 0.5em 0.5em 0;
 }
 
 .ve-ui-mwCategoryItemWidget .oo-ui-labelElement-label.new {

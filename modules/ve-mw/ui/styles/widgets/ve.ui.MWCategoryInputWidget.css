@@ -6,11 +6,15 @@
  */
 
 .ve-ui-mwCategoryInputWidget {
-	float: left;
 	width: 15em;
-	margin: 0 -1px 0.5em 0;
+	margin-bottom: 0.5em;
+	display: inline-block;
 }
 
 .ve-ui-mwCategoryInputWidget input {
 	line-height: 1.35em;
+}
+
+.ve-ui-mwCategoryWidget.oo-ui-draggableGroupElement-dragging .ve-ui-mwCategoryInputWidget {
+	opacity: 0.5;
 }

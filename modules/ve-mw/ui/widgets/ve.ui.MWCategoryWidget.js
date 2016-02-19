@@ -51,13 +51,16 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 		updateSortkey: 'onUpdateSortkey',
 		hide: 'onPopupHide'
 	} );
-	this.connect( this, { reorder: 'onReorder' } );
+	this.connect( this, {
+		drag: 'onDrag'
+	} );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwCategoryWidget' )
 		.append(
-			this.$group.addClass( 've-ui-mwCategoryWidget-items' ),
-			this.input.$element,
+			this.$group.addClass( 've-ui-mwCategoryWidget-items' ).append(
+				this.input.$element
+			),
 			this.popup.$element,
 			$( '<div>' ).css( 'clear', 'both' )
 		);
@@ -78,7 +81,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
  * @param {string} item.name Fully prefixed category name
  * @param {string} item.value Category value (name without prefix)
  * @param {Object} item.metaItem Category meta item
- * @param {ve.dm.MetaItem} [afterCategory] Insert after this category; if unset, insert at the end
+ * @param {ve.dm.MetaItem} [beforeCategory] Insert after this category; if unset, insert at the end
  */
 
 /**
@@ -147,18 +150,40 @@ ve.ui.MWCategoryWidget.prototype.getCategoryItemFromValue = function ( value ) {
 };
 
 /**
+ * Focus the widget
+ */
+ve.ui.MWCategoryWidget.prototype.focus = function () {
+	this.input.$input[ 0 ].focus();
+};
+
+/**
  * @param {ve.ui.MWCategoryItemWidget} item Item that was moved
  * @param {number} newIndex The new index of the item
  */
-ve.ui.MWCategoryWidget.prototype.onReorder = function ( item, newIndex ) {
-	// Compute afterCategory before removing, otherwise newIndex
+ve.ui.MWCategoryWidget.prototype.onDrag = function () {
+	this.fitInput();
+};
+
+/**
+ * @inheritdoc OO.ui.mixin.DraggableGroupElement
+ */
+ve.ui.MWCategoryWidget.prototype.reorder = function ( item, newIndex ) {
+	// Compute beforeCategory before removing, otherwise newIndex
 	// could be off by one
-	var afterCategory = this.items[ newIndex ] && this.items[ newIndex ].metaItem;
+	var beforeCategory,
+		originalIndex = this.items.indexOf( item );
+
+	if ( newIndex === originalIndex ) {
+		// TODO: This check should be upstream
+		return;
+	}
+
+	beforeCategory = this.items[ newIndex ] && this.items[ newIndex ].metaItem;
 	if ( Object.prototype.hasOwnProperty.call( this.categories, item.value ) ) {
 		this.categories[ item.value ].metaItem.remove();
 	}
 
-	this.emit( 'newCategory', item, afterCategory );
+	this.emit( 'newCategory', item, beforeCategory );
 };
 
 /**
@@ -313,7 +338,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
-	var i, len, item, categoryItem,
+	var i, len, item, categoryItem, hadFocus,
 		categoryItems = [],
 		existingCategoryItems = [],
 		categoryNames = $.map( items, function ( item ) {
@@ -369,6 +394,12 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 
 		OO.ui.mixin.DraggableGroupElement.prototype.addItems.call( widget, categoryItems, index );
 
+		// Ensure the input remains the last item in the list, and preserve focus
+		hadFocus = widget.getElementDocument().activeElement === widget.input.$input[ 0 ];
+		widget.$group.append( widget.input.$element );
+		if ( hadFocus ) {
+			widget.input.$input[ 0 ].focus();
+		}
 		widget.fitInput();
 	} );
 };
@@ -399,24 +430,23 @@ ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
  * @method
  */
 ve.ui.MWCategoryWidget.prototype.fitInput = function () {
-	var gap, min, $lastItem,
+	var availableSpace, inputWidth, $lastItem,
 		$input = this.input.$element;
 
-	if ( !$input.is( ':visible' ) ) {
+	if ( !this.items.length || !$input.is( ':visible' ) ) {
 		return;
 	}
 
-	$input.css( { width: 'inherit' } );
-	min = $input.outerWidth();
+	// Measure the input's natural size
+	$input.css( 'width', '' );
+	inputWidth = $input.outerWidth( true );
 
-	$input.css( { width: '100%' } );
-	$lastItem = this.$element.find( '.ve-ui-mwCategoryItemWidget:last' );
-	if ( $lastItem.length ) {
-		// Try to fit to the right of the last item
-		gap = ( $input.offset().left + $input.outerWidth() ) -
-				( $lastItem.offset().left + $lastItem.outerWidth() );
-		if ( gap >= min ) {
-			$input.css( { width: gap } );
-		}
+	// this.items hasn't been updated if this was triggered by a drag event,
+	// so look at document order
+	$lastItem = this.$group.find( '.ve-ui-mwCategoryItemWidget' ).last();
+	// Try to fit to the right of the last item
+	availableSpace = Math.floor( this.$group.width() - ( $lastItem.position().left + $lastItem.outerWidth( true ) ) );
+	if ( availableSpace > inputWidth ) {
+		$input.css( 'width', availableSpace );
 	}
 };

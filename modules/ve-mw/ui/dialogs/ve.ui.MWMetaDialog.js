@@ -129,6 +129,7 @@ ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data ) {
 			// Call setPage in ready as setPage triggers PageLayout#focus
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
 				this.bookletLayout.setPage( data.page );
+				this.bookletLayout.getPage( data.page ).focus();
 			}
 
 			// Let each page set itself up ('languages' page doesn't need this yet)

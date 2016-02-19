@@ -263,6 +263,13 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWCategoriesPage.prototype.focus = function () {
+	this.categoryWidget.focus();
+};
+
+/**
  * Tear down the page. This is called when the MWMetaDialog is torn down.
  *
  * @param {Object} [data] Dialog tear down data

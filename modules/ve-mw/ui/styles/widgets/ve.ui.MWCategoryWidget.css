@@ -6,8 +6,8 @@
  */
 
 .ve-ui-mwCategoryWidget {
-	margin-left: -0.25em;
-	margin-right: -0.25em;
+	/* So we can measure relative offsets of the category items */
+	position: relative;
 }
 
 .ve-ui-mwCategoryWidget-items {
@@ -21,3 +21,4 @@
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 }
+
