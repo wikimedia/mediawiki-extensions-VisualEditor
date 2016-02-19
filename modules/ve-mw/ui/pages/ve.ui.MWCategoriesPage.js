@@ -256,10 +256,10 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 	);
 	this.defaultSortKeyTouched = false;
 
-	// Update input position once visible
+	// Update input position after transition
 	setTimeout( function () {
 		page.categoryWidget.fitInput();
-	} );
+	}, 250 );
 };
 
 /**

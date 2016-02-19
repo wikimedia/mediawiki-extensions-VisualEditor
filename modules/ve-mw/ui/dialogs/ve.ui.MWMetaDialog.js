@@ -112,12 +112,24 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			var surfaceModel = this.getFragment().getSurface();
 
+			// Force all previous transactions to be separate from this history state
+			surfaceModel.pushStaging();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data ) {
+	data = data || {};
+	return ve.ui.MWMetaDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			var surfaceModel = this.getFragment().getSurface();
+
+			// Call setPage in ready as setPage triggers PageLayout#focus
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
 				this.bookletLayout.setPage( data.page );
 			}
-
-			// Force all previous transactions to be separate from this history state
-			surfaceModel.pushStaging();
 
 			// Let each page set itself up ('languages' page doesn't need this yet)
 			this.settingsPage.setup( surfaceModel.metaList, data );
