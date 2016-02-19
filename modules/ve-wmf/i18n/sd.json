@@ -5,6 +5,13 @@
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
+	"visualeditor-feedback-link": "رٿا:وزيوئل ايڊيٽر/پذيرائي",
+	"visualeditor-feedback-tool": "ھن سافٽويئر بابت پذيرائي ڇڏيو",
+	"visualeditor-help-label": "يوزر رھنما پڙھو",
+	"visualeditor-help-title": "ايڊيٽر ڪيئن استعمال ڪجي لاءِ رھنما",
 	"visualeditor-welcomedialog-action": "سڌارڻ شروع ڪريو",
-	"visualeditor-welcomedialog-content": "هر ڪوئي سنواري سگھي ٿو، ۽ هر بهتري مدد ڪري ٿي."
+	"visualeditor-welcomedialog-content": "هر ڪوئي سنواري سگھي ٿو، ۽ هر بهتري مدد ڪري ٿي.",
+	"visualeditor-welcomedialog-content-thanks": "دنيا کي وڌيڪ کوجنا ڪرڻ ۾ مدد ڪرڻ لاءِ توھان جي مھرباني!",
+	"visualeditor-welcomedialog-switch": "ذريعو سرجيندڙ طرف وڃو",
+	"visualeditor-welcomedialog-title": "$2 ڏانھن {{GENDER:$1|ڀليڪار}}"
 }
