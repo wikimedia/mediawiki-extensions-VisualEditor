@@ -1304,7 +1304,8 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
  * Show the meta dialog as needed on load.
  */
 ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
-	var target = this;
+	var windowAction,
+		target = this;
 
 	this.welcomeDialogPromise
 		.always( function () {
@@ -1313,10 +1314,9 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 		} );
 
 	if ( this.getSurface().getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
-		this.getSurface().getDialogs().openWindow( 'meta', {
-			page: 'settings',
-			fragment: this.getSurface().getModel().getFragment()
-		} );
+		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+
+		windowAction.open( 'meta', { page: 'settings' } );
 	}
 };
 
