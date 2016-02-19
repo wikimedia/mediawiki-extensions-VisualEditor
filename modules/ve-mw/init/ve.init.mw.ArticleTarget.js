@@ -55,6 +55,9 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 		} );
 	this.events = { track: $.noop, trackActivationStart: $.noop, trackActivationComplete: $.noop };
 
+	this.welcomeDialog = null;
+	this.welcomeDialogPromise = null;
+
 	this.preparedCacheKeyPromise = null;
 	this.clearState();
 
@@ -1623,4 +1626,79 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 	var $window = $( OO.ui.Element.static.getWindow( this.$element ) );
 
 	$window.scrollTop( headingNode.$element.offset().top - this.getToolbar().$element.height() );
+};
+
+/**
+ * Show the beta dialog as needed
+ */
+ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
+	var usePrefs, prefSaysShow, urlSaysHide,
+		windowManager = this.getSurface().dialogs,
+		target = this;
+
+	this.welcomeDialogPromise = $.Deferred();
+
+	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
+		// Only use the preference value if the user is logged-in.
+		// If the user is anonymous, we can't save the preference
+		// after showing the dialog. And we don't intend to use this
+		// preference to influence anonymous users (use the config
+		// variable for that; besides the pref value would be stale if
+		// the wiki uses static html caching).
+		usePrefs = !mw.user.isAnon();
+		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hidebetawelcome' );
+		urlSaysHide = 'vehidebetadialog' in new mw.Uri( location.href ).query;
+
+		if (
+			!urlSaysHide &&
+			(
+				prefSaysShow ||
+				(
+					!usePrefs &&
+					localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
+					$.cookie( 've-beta-welcome-dialog' ) === null
+				)
+			)
+		) {
+			windowManager.openWindow(
+				'welcome',
+				{ targetName: this.constructor.static.name }
+			)
+				.then( function ( opened ) {
+					return opened;
+				} )
+				.then( function ( closing ) {
+					return closing;
+				} )
+				.then( function ( data ) {
+					target.welcomeDialogPromise.resolve();
+					target.welcomeDialog = null;
+					if ( data && data.action === 'switch' ) {
+						// TODO: Make this work on mobile - right now we can only
+						// get away with it because the button which triggers this
+						// action is hidden on mobile
+						target.switchToWikitextEditor( true, true );
+					}
+				} );
+			this.welcomeDialog = windowManager.windows.welcome; // ew :/
+		} else {
+			this.welcomeDialogPromise.resolve();
+		}
+
+		if ( prefSaysShow ) {
+			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+
+		// No need to set a cookie every time for logged-in users that have already
+		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
+		// view of the page via the hiding GET parameter.
+		} else if ( !usePrefs && !urlSaysHide ) {
+			try {
+				localStorage.setItem( 've-beta-welcome-dialog', 1 );
+			} catch ( e ) {
+				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+			}
+		}
+	} else {
+		this.welcomeDialogPromise.reject();
+	}
 };

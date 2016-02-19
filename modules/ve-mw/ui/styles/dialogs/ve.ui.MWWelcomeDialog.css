@@ -11,6 +11,10 @@
 	text-align: center;
 }
 
+.ve-ui-mobileWindowManager .visualeditor-welcomedialog-content {
+	background-size: 11em;
+}
+
 .visualeditor-welcomedialog-content-text {
 	display: inline-block;
 	margin-top: 12em;
