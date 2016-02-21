@@ -1195,7 +1195,7 @@ ve.init.mw.ArticleTarget.prototype.startSave = function ( saveDeferred ) {
 
 	if (
 		+mw.user.options.get( 'forceeditsummary' ) &&
-		saveOptions.summary === '' &&
+		( saveOptions.summary === '' || saveOptions.summary === this.initialEditSummary ) &&
 		!this.saveDialog.messages.missingsummary
 	) {
 		this.saveDialog.showMessage(

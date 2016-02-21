@@ -28,6 +28,7 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.setupDeferred = $.Deferred();
 	this.target = null;
 	this.checkboxesByName = null;
+	this.changedEditSummary = false;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwSaveDialog' );
@@ -382,6 +383,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Limit byte length, and display the remaining bytes
 	this.editSummaryInput.$input.byteLimit( this.editSummaryByteLimit );
 	this.editSummaryInput.on( 'change', function () {
+		dialog.changedEditSummary = true;
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers
 		// Users likely assume characters but then it seems to count down quicker
 		// than expected. Facing users with the word "byte" is bad? (bug 40035)
@@ -480,7 +482,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			this.target = data.target;
-			if ( data.editSummary !== undefined ) {
+			if ( !this.changedEditSummary ) {
 				this.setEditSummary( data.editSummary );
 			}
 			this.setupCheckboxes( data.checkboxFields || [] );
