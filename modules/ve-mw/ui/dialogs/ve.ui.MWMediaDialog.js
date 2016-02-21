@@ -879,7 +879,14 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 			);
 			// Update filename
 			this.filenameFieldset.setLabel(
-				this.imageModel.getFilename()
+				$( '<span>' ).append(
+					document.createTextNode( this.imageModel.getFilename() + ' ' ),
+					$( '<a>' )
+						.addClass( 'visualeditor-dialog-media-content-description-link' )
+						.attr( 'href', mw.util.getUrl( title ) )
+						.attr( 'target', '_blank' )
+						.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
+				)
 			);
 		}
 
@@ -1176,7 +1183,14 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 
 	// Filename
 	this.filenameFieldset.setLabel(
-		this.imageModel.getFilename()
+		$( '<span>' ).append(
+			document.createTextNode( this.imageModel.getFilename() + ' ' ),
+			$( '<a>' )
+				.addClass( 'visualeditor-dialog-media-content-description-link' )
+				.attr( 'href', mw.util.getUrl( this.imageModel.getResourceName() ) )
+				.attr( 'target', '_blank' )
+				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
+		)
 	);
 
 	// Size widget
