@@ -1287,6 +1287,7 @@
 				"ext.visualEditor.mwimage.core",
 				"oojs-ui.styles.icons-interactions",
 				"oojs-ui.styles.icons-media",
+				"oojs-ui.styles.icons-wikimedia",
 				"mediawiki.ForeignStructuredUpload.BookletLayout",
 				"moment"
 			],

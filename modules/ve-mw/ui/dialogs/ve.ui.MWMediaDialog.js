@@ -804,7 +804,7 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
 	if ( normalized.match( /^((cc )?pd|public domain)/ ) ) {
 		return 'public-domain';
 	} else if ( normalized.match( /^cc (by|sa)?/ ) ) {
-		return 'creative-commons';
+		return 'logoCC';
 	} else {
 		return 'info';
 	}
