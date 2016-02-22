@@ -456,7 +456,8 @@
 				"user.tokens",
 				"ext.visualEditor.base",
 				"ext.visualEditor.track",
-				"ext.visualEditor.targetLoader"
+				"ext.visualEditor.targetLoader",
+				"jquery.uls.data"
 			],
 			"messages": [
 				"visualeditor-quick-access-characters.json",
@@ -1442,8 +1443,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
-				"ext.visualEditor.mwlink",
-				"jquery.uls.data"
+				"ext.visualEditor.mwlink"
 			],
 			"messages": [
 				"visualeditor-advancedsettings-tool",
