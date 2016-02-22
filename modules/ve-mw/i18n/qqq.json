@@ -81,6 +81,7 @@
 	"visualeditor-dialog-media-change-image": "Label for the button to change the current image in the media edit dialog.",
 	"visualeditor-dialog-media-choose-image": "Label for the button to use the selected image in the media edit dialog.",
 	"visualeditor-dialog-media-content-filename": "Label for the image filename.\n{{Identical|Filename}}",
+	"visualeditor-dialog-media-content-description-link": "Label for the image description page link.",
 	"visualeditor-dialog-media-content-section": "Label for the image content sub-section.\n{{Identical|Caption}}",
 	"visualeditor-dialog-media-content-section-help": "Message displayed as contextual help about the caption box to editors in the media editing dialog.",
 	"visualeditor-dialog-media-goback": "Label for the button to go back to edit settings in the media dialog.\n{{Identical|Back}}",

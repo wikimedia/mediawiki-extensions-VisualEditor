@@ -1297,6 +1297,7 @@
 				"visualeditor-dialog-media-change-image",
 				"visualeditor-dialog-media-choose-image",
 				"visualeditor-dialog-media-content-filename",
+				"visualeditor-dialog-media-content-description-link",
 				"visualeditor-dialog-media-content-section",
 				"visualeditor-dialog-media-content-section-help",
 				"visualeditor-dialog-media-goback",
