@@ -129,7 +129,9 @@ ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
 	}
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
 	if ( Object.prototype.hasOwnProperty.call( this.parsedMessages, key ) ) {
 		// Prefer parsed results from VisualEditorDataModule if available.
@@ -139,7 +141,9 @@ ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
 	return mw.message( key ).escaped();
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.mw.Platform.prototype.getLanguageCodes = function () {
 	return Object.keys(
 		mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
@@ -147,7 +151,9 @@ ve.init.mw.Platform.prototype.getLanguageCodes = function () {
 	);
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
 	var languageNames = mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
 		$.uls.data.getAutonyms();
@@ -158,22 +164,19 @@ ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
  * @method
  * @inheritdoc
  */
-ve.init.mw.Platform.prototype.getLanguageAutonym = function () {
-	return $.uls.data.getAutonym();
-};
+ve.init.mw.Platform.prototype.getLanguageAutonym = $.uls.data.getAutonym;
 
 /**
  * @method
  * @inheritdoc
  */
-ve.init.mw.Platform.prototype.getLanguageDirection = function () {
-	return $.uls.data.getDir();
-};
+ve.init.mw.Platform.prototype.getLanguageDirection = $.uls.data.getDir;
 
-/** @inheritdoc */
-ve.init.mw.Platform.prototype.getUserLanguages = function () {
-	return mw.language.getFallbackLanguageChain();
-};
+/**
+ * @method
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.getUserLanguages = mw.language.getFallbackLanguageChain;
 
 /**
  * @inheritdoc
