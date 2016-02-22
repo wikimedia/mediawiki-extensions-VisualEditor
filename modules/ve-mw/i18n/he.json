@@ -186,7 +186,7 @@
 	"visualeditor-dialog-transclusion-no-template-description": "לתבנית \"$1\" עדיין אין תיאור, אבל ייתכן שאפשר למצוא מידע כלשהו ב[[{{ns:template}}:$1|דף של התבנית]].",
 	"visualeditor-dialog-transclusion-options": "אפשרויות",
 	"visualeditor-dialog-transclusion-param-default": "בררת מחדל: $1",
-	"visualeditor-dialog-transclusion-param-example": "ערך לדוגמה: $1",
+	"visualeditor-dialog-transclusion-param-example": "דוגמה: $1",
 	"visualeditor-dialog-transclusion-param-info": "תיאור השדה",
 	"visualeditor-dialog-transclusion-param-info-missing": "תיאור השדה אינו זמין",
 	"visualeditor-dialog-transclusion-placeholder": "הוספת תבנית",
