@@ -51,11 +51,6 @@
 	background-image: url( images/icons/public-domain.svg );
 }
 
-.oo-ui-icon-creative-commons {
-	/* @embed */
-	background-image: url( images/icons/creative-commons.svg );
-}
-
 .oo-ui-icon-profile {
 	/* @embed */
 	background-image: url( images/icons/profile.svg );
