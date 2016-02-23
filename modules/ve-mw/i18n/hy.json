@@ -43,7 +43,7 @@
 	"visualeditor-beta-label": "փորձնական",
 	"visualeditor-beta-warning": "Դուք կարող եք արագ անցնել վիքի կոդով խմբագրելուն՝ սեղմելով «$1» բաժնին։ Ձեր կատարած բոլոր փոփոխությունները կպահպանվեն։ Եթե բախվեք ինչ որ սխալի, խնդրում ենք տեղեկացնել մեզ։",
 	"visualeditor-browserwarning": "Դուք օգտագործում եք վեբդիտարկիչ, որը ՎիզուալԽմբագրիչը պաշտոնապես չի աջակցում։",
-	"visualeditor-ca-createlocaldescriptionsource": "Ավելացնել տեղային նկարագիր",
+	"visualeditor-ca-createlocaldescriptionsource": "Ավելացնել տեղային նկարագիր (կոդ)",
 	"visualeditor-ca-createsource": "Ստեղծել կոդ",
 	"visualeditor-ca-editlocaldescriptionsource": "Խմբագրել տեղային նկարագրության կոդը",
 	"visualeditor-ca-editsource": "Խմբագրել կոդը",

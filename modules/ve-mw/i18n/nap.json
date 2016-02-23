@@ -5,7 +5,8 @@
 			"Chrisportelli",
 			"PiRSquared17",
 			"C.R.",
-			"Candalua"
+			"Candalua",
+			"Macofe"
 		]
 	},
 	"apihelp-visualeditor-description": "Tuorna HTML5 pe na pàggena 'a 'o servizio Parsoid.",
@@ -174,7 +175,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Mmusta ll'ozzione",
 	"visualeditor-dialog-transclusion-no-template-description": "'O template \"$1\" nun tene descrizione ancora, ma putessero cumparì cocche nfurmaziune dint' 'a [[{{ns:template}}:$1|paggena d' 'o template]].",
 	"visualeditor-dialog-transclusion-options": "Opzione",
-	"visualeditor-dialog-transclusion-param-default": "Valore predefinito: $1",
+	"visualeditor-dialog-transclusion-param-default": "Predefinito: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valore 'esempio: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descrizione d' 'o campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nisciuna descrizione 'e campo a disposizione",

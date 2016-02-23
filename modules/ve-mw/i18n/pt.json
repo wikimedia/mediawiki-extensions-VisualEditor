@@ -173,7 +173,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostrar opções",
 	"visualeditor-dialog-transclusion-no-template-description": "A predefinição \"$1\" não possui ainda nenhuma descrição, mas poderá encontrar alguma informação na [[{{ns:template}}:$1|documentação da predefinição]].",
 	"visualeditor-dialog-transclusion-options": "Opções",
-	"visualeditor-dialog-transclusion-param-default": "Valor padrão: $1",
+	"visualeditor-dialog-transclusion-param-default": "Padrão: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valor de exemplo: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descrição do campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Não está disponível nenhuma descrição para o campo",

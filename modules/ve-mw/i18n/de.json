@@ -64,6 +64,7 @@
 	"visualeditor-dialog-media-change-image": "Bild ändern",
 	"visualeditor-dialog-media-choose-image": "Dieses Bild weiterverwenden",
 	"visualeditor-dialog-media-content-filename": "Dateiname",
+	"visualeditor-dialog-media-content-description-link": "(Beschreibungsseite)",
 	"visualeditor-dialog-media-content-section": "Beschriftung",
 	"visualeditor-dialog-media-content-section-help": "Du kannst dies verwenden, um eine Bezeichnung anzuzeigen, die neben dem Element für alle Leser angezeigt wird. Dies wird oft verwendet, um zu erklären, warum das Element für den Kontext relevant ist, in dem es angezeigt wird. Sie sollte knapp und informativ sein.",
 	"visualeditor-dialog-media-goback": "Zurück",

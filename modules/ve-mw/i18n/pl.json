@@ -66,6 +66,7 @@
 	"visualeditor-dialog-media-change-image": "Zmień obrazek",
 	"visualeditor-dialog-media-choose-image": "Użyj tej ilustracji",
 	"visualeditor-dialog-media-content-filename": "Nazwa pliku",
+	"visualeditor-dialog-media-content-description-link": "(strona opisu)",
 	"visualeditor-dialog-media-content-section": "Podpis",
 	"visualeditor-dialog-media-content-section-help": "Możesz podać podpis pliku multimedialnego, który widzą wszyscy czytelnicy. Podpis jest często używany do wyjaśnienia, co dany plik ma wspólnego z omawianym hasłem. Powinien być krótki i treściwy.",
 	"visualeditor-dialog-media-goback": "Wstecz",
