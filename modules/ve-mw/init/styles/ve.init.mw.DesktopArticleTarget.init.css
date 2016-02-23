@@ -32,9 +32,16 @@
 .ve-activated #t-permalink,
 .ve-activated #p-coll-print_export,
 .ve-activated #t-cite,
-.ve-activating .ve-ui-surface,
 .ve-deactivating .ve-ui-surface {
 	display: none;
+}
+
+/* The surface needs to be measurable while being setup
+   as some nodes render based on their dimensions, e.g.
+   ve.ce.FocusableNode#updateInvisibleIcon */
+.ve-activating .ve-ui-surface {
+	height: 0;
+	overflow: hidden;
 }
 
 .ve-activated #bodyContent,
