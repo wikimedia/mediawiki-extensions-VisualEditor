@@ -200,16 +200,31 @@ class VisualEditorPage
   div(:media_alternative_block, class: 'oo-ui-layout oo-ui-iconElement oo-ui-labelElement oo-ui-fieldsetLayout', index: 2)
   div(:media_advanced_settings, class: 'oo-ui-outlineOptionWidget-level-0', index: 1)
 
+  def visual_editor_element(script)
+    Timeout.timeout(5) do
+      loop do
+        begin
+          browser.execute_script script
+        rescue Selenium::WebDriver::Error::JavascriptError => e
+        else
+          e = nil
+        end
+        break unless e.class == Selenium::WebDriver::Error::JavascriptError
+      end
+    end
+    browser.execute_script script
+  end
+
   def ve_bold_text_element
-    @browser.execute_script('return ve.init.target.getToolbar().items[2].tools.bold.$link[0]')
+    visual_editor_element('return ve.init.target.getToolbar().items[2].tools.bold.$link[0]')
   end
 
   def ve_italics_element
-    @browser.execute_script('return ve.init.target.getToolbar().items[2].tools.italic.$link[0]')
+    visual_editor_element('return ve.init.target.getToolbar().items[2].tools.italic.$link[0]')
   end
 
   def content_element
-    @browser.execute_script('return ve.init.target.surface.view.documentView.documentNode.$element[0]')
+    visual_editor_element('return ve.init.target.surface.view.documentView.documentNode.$element[0]')
   end
 
   def tools_menu_element

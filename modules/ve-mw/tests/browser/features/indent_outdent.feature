@@ -1,3 +1,4 @@
+@en.wikipedia.beta.wmflabs.org @firefox
 Feature: VisualEditor Indent, Outdent
 
   Background:
