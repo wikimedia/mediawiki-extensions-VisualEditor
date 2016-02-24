@@ -77,6 +77,7 @@
 	"visualeditor-dialog-media-change-image": "Cambiar imagen",
 	"visualeditor-dialog-media-choose-image": "Usar esta imagen",
 	"visualeditor-dialog-media-content-filename": "Nombre del archivo",
+	"visualeditor-dialog-media-content-description-link": "(página de descripción)",
 	"visualeditor-dialog-media-content-section": "Leyenda",
 	"visualeditor-dialog-media-content-section-help": "Puedes usar esto para mostrar una etiqueta que se muestra junto al elemento para todos los lectores. Esto se utiliza a menudo para explicar por qué el elemento es relevante para el contexto en el que se muestra. Debe ser conciso e informativo.",
 	"visualeditor-dialog-media-goback": "Regresar",
