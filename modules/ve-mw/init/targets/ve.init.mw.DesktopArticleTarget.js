@@ -927,7 +927,6 @@ ve.init.mw.DesktopArticleTarget.prototype.openSaveDialog = function () {
 		checkboxFields: this.checkboxFields,
 		checkboxesByName: this.checkboxesByName
 	} );
-	this.initialEditSummary = undefined;
 };
 
 /**
