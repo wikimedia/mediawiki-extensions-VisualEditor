@@ -170,15 +170,7 @@ ve.ui.MWCategoryWidget.prototype.onDrag = function () {
 ve.ui.MWCategoryWidget.prototype.reorder = function ( item, newIndex ) {
 	// Compute beforeCategory before removing, otherwise newIndex
 	// could be off by one
-	var beforeCategory,
-		originalIndex = this.items.indexOf( item );
-
-	if ( newIndex === originalIndex ) {
-		// TODO: This check should be upstream
-		return;
-	}
-
-	beforeCategory = this.items[ newIndex ] && this.items[ newIndex ].metaItem;
+	var beforeCategory = this.items[ newIndex ] && this.items[ newIndex ].metaItem;
 	if ( Object.prototype.hasOwnProperty.call( this.categories, item.value ) ) {
 		this.categories[ item.value ].metaItem.remove();
 	}
