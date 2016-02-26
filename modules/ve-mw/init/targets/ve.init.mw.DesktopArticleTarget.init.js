@@ -622,7 +622,7 @@
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
 	init.isAvailable = (
-		window.VisualEditorSupportCheck() &&
+		VisualEditorSupportCheck() &&
 
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
 
