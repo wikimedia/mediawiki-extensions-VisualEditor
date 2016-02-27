@@ -202,7 +202,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Label for button that shows advanced options in transclusion dialog",
 	"visualeditor-dialog-transclusion-no-template-description": "Message to user that no template information is available for the template.\n\nParameters:\n* $1 - the title of the template",
 	"visualeditor-dialog-transclusion-options": "Label for section with options for templates, content or parameters.\n{{Identical|Options}}",
-	"visualeditor-dialog-transclusion-param-default": "Label for parameter's default value in the template dialog. $1 - Parameter's default value.",
+	"visualeditor-dialog-transclusion-param-default": "Label for parameter's default value in the template dialog. $1 - Parameter's default value.\n{{Identical|Default}}",
 	"visualeditor-dialog-transclusion-param-example": "Label for parameter's example value in the template dialog. $1 - Parameter's example value.",
 	"visualeditor-dialog-transclusion-param-info": "Title of button that hides and shows parameter descriptions",
 	"visualeditor-dialog-transclusion-param-info-missing": "Title of button that hides and shows parameter descriptions when no description is available",

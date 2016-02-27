@@ -144,7 +144,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Optioune weisen",
 	"visualeditor-dialog-transclusion-no-template-description": "D'Schabloun \"$1\" op huet nach keng Beschreiwung, awer e puer Informatioune kënnen op der [[{{ns:template}}:$1|Säit vun der Schabloun]] disponibel sinn.",
 	"visualeditor-dialog-transclusion-options": "Optiounen",
-	"visualeditor-dialog-transclusion-param-default": "Standardwäert: $1",
+	"visualeditor-dialog-transclusion-param-default": "Standard: $1",
 	"visualeditor-dialog-transclusion-param-example": "z. Bsp. $1",
 	"visualeditor-dialog-transclusion-param-info": "Beschreiwung vum Feld",
 	"visualeditor-dialog-transclusion-param-info-missing": "Keng Beschreiwung vum Feld disponibel",

@@ -197,7 +197,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "显示选项",
 	"visualeditor-dialog-transclusion-no-template-description": "“$1”模板还没有说明，但在[[{{ns:template}}:$1|模板页面]]上可能有一些信息。",
 	"visualeditor-dialog-transclusion-options": "选项",
-	"visualeditor-dialog-transclusion-param-default": "默认值：$1",
+	"visualeditor-dialog-transclusion-param-default": "默认：$1",
 	"visualeditor-dialog-transclusion-param-example": "例如$1",
 	"visualeditor-dialog-transclusion-param-info": "字段说明",
 	"visualeditor-dialog-transclusion-param-info-missing": "没有可用的字段说明",

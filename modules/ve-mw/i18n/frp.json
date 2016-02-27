@@ -5,8 +5,9 @@
 			"Amire80"
 		]
 	},
-	"tooltip-ca-ve-edit": "Changiér ceta pâge avouéc VisualEditor",
-	"visualeditor-ca-editsource": "Changiér la sôrsa",
+	"tooltip-ca-ve-edit": "Changiér cela pâge",
+	"visualeditor-ca-editsource": "Changiér lo tèxto sôrsa",
+	"visualeditor-ca-editsource-section": "changiér lo tèxto sôrsa",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-desc": "Èditor visuâl por MediaWiki",
