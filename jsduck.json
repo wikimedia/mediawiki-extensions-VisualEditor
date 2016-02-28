@@ -8,7 +8,7 @@
 	"--warnings-exit-nonzero": true,
 	"--builtin-classes": true,
 	"--external": "HTMLDocument,Window,Node,Text,Set,Range,Selection,ClientRect,File,Blob,DataTransfer,DataTransferItem,KeyboardEvent,MouseEvent",
-	"--warnings": ["-nodoc(class,public)"],
+	"--warnings": ["-nodoc(class,public)", "-global"],
 	"--": [
 		".jsduck/external.js",
 		"lib/ve/.jsduck/external.js",
