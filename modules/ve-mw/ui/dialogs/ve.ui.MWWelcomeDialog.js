@@ -17,6 +17,10 @@
 ve.ui.MWWelcomeDialog = function VeUiMWWelcomeDialog( config ) {
 	// Parent constructor
 	ve.ui.MWWelcomeDialog.super.call( this, config );
+
+	this.$element
+		.addClass( 've-init-mw-desktopArticleTarget-windowManager' )
+		.addClass( 've-init-mw-desktopArticleTarget-windowManager-welcome' );
 };
 
 /* Inheritance */
@@ -64,7 +68,22 @@ ve.ui.MWWelcomeDialog.prototype.getSetupProcess = function ( data ) {
 			)
 	}, data );
 
+	if ( data.targetName === 'mobile' ) {
+		this.mobile = true;
+	}
+
 	return ve.ui.MWWelcomeDialog.super.prototype.getSetupProcess.call( this, data );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWWelcomeDialog.prototype.getReadyProcess = function () {
+	if ( this.mobile ) {
+		this.actions.remove( this.actions.get( { actions: 'switch' } ) ); // ew
+	}
+
+	return ve.ui.MWWelcomeDialog.super.prototype.getReadyProcess.apply( this, arguments );
 };
 
 /**

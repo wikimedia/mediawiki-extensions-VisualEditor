@@ -41,8 +41,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.recreating = false;
 	this.activatingDeferred = null;
 	this.toolbarSetupDeferred = null;
-	this.welcomeDialog = null;
-	this.welcomeDialogPromise = null;
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
 	this.$otherFields = null;
@@ -386,8 +384,6 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.activatingDeferred = $.Deferred();
 		this.toolbarSetupDeferred = $.Deferred();
 
-		this.maybeShowWelcomeDialog();
-
 		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
@@ -633,6 +629,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	this.setupUnloadHandlers();
+	this.maybeShowWelcomeDialog();
 	this.maybeShowMetaDialog();
 
 	this.activatingDeferred.resolve();
@@ -1215,88 +1212,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
 	window.onbeforeunload = this.onBeforeUnloadFallback;
 	this.onBeforeUnloadFallback = null;
 	window.removeEventListener( 'unload', this.onUnloadHandler );
-};
-
-/**
- * Show the beta dialog as needed
- */
-ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
-	var usePrefs, prefSaysShow, urlSaysHide, windowManager,
-		target = this;
-
-	this.welcomeDialogPromise = $.Deferred();
-
-	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
-		// Set up a temporary window manager
-		windowManager = new OO.ui.WindowManager( {
-			classes: [
-				've-init-mw-desktopArticleTarget-windowManager',
-				've-init-mw-desktopArticleTarget-windowManager-welcome'
-			]
-		} );
-		$( 'body' ).append( windowManager.$element );
-		this.welcomeDialog = new ve.ui.MWWelcomeDialog();
-		windowManager.addWindows( [ this.welcomeDialog ] );
-
-		// Only use the preference value if the user is logged-in.
-		// If the user is anonymous, we can't save the preference
-		// after showing the dialog. And we don't intend to use this
-		// preference to influence anonymous users (use the config
-		// variable for that; besides the pref value would be stale if
-		// the wiki uses static html caching).
-		usePrefs = !mw.user.isAnon();
-		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hidebetawelcome' );
-		urlSaysHide = 'vehidebetadialog' in this.currentUri.query;
-
-		if (
-			!urlSaysHide &&
-			(
-				prefSaysShow ||
-				(
-					!usePrefs &&
-					localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
-					$.cookie( 've-beta-welcome-dialog' ) === null
-				)
-			)
-		) {
-			windowManager.openWindow( this.welcomeDialog )
-				.then( function ( opened ) {
-					return opened;
-				} )
-				.then( function ( closing ) {
-					return closing;
-				} )
-				.then( function ( data ) {
-					// Detach the temporary window manager
-					windowManager.destroy();
-					target.welcomeDialogPromise.resolve();
-					if ( data && data.action === 'switch' ) {
-						target.switchToWikitextEditor( true, true );
-					}
-				} );
-		} else {
-			this.welcomeDialogPromise.resolve();
-		}
-
-		if ( prefSaysShow ) {
-			new mw.Api().postWithToken( 'options', {
-				action: 'options',
-				change: 'visualeditor-hidebetawelcome=1'
-			} );
-
-		// No need to set a cookie every time for logged-in users that have already
-		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
-		// view of the page via the hiding GET parameter.
-		} else if ( !usePrefs && !urlSaysHide ) {
-			try {
-				localStorage.setItem( 've-beta-welcome-dialog', 1 );
-			} catch ( e ) {
-				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
-			}
-		}
-	} else {
-		this.welcomeDialogPromise.reject();
-	}
 };
 
 /**
