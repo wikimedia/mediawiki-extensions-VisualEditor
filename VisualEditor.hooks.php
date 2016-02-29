@@ -165,6 +165,7 @@ class VisualEditorHooks {
 
 			$titleMsg = $title->exists() ? 'editing' : 'creating';
 			$out->setPageTitle( wfMessage( $titleMsg, $title->getPrefixedText() ) );
+			$out->addWikiMsg( 'visualeditor-toload', wfExpandUrl( $url ) );
 		}
 		$out->addScript( Html::inlineScript(
 			"(window.NORLQ=window.NORLQ||[]).push(" .

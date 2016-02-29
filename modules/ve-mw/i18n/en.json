@@ -312,6 +312,7 @@
 	"visualeditor-shortcuts-insert": "Insert",
 	"visualeditor-special-characters-group-other": "Often used",
 	"visualeditor-timeout":"It looks like this editor is currently unavailable. Would you like to edit in source mode instead?",
+	"visualeditor-toload": "The editor will now load. If you still see this message after a few seconds, please [$1 reload the page].",
 	"visualeditor-toolbar-savedialog": "Save page",
 	"visualeditor-toolbar-savedialog-short": "Save",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
