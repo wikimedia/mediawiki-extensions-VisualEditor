@@ -891,7 +891,14 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 		}
 
 		// Cache
-		obj[ imageTitleText ] = info;
+		// We're trimming the stored data down to be consistent with what
+		// ImageInfoCache.getRequestPromise fetches.
+		obj[ imageTitleText ] = {
+			size: info.size,
+			width: info.width,
+			height: info.height,
+			mediatype: info.mediatype
+		};
 		ve.init.platform.imageInfoCache.set( obj );
 
 		this.checkChanged();

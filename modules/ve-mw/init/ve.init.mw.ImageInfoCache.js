@@ -37,6 +37,8 @@ ve.init.mw.ImageInfoCache.static.processPage = function ( page ) {
  * @inheritdoc
  */
 ve.init.mw.ImageInfoCache.prototype.getRequestPromise = function ( subqueue ) {
+	// If you change what `iiprop`s are being fetched, update
+	// ve.ui.MWMediaDialog to add the same ones to the cache.
 	return new mw.Api().get(
 		{
 			action: 'query',
