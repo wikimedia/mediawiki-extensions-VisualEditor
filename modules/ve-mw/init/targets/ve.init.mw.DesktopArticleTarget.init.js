@@ -559,7 +559,7 @@
 								activatePageTarget( true );
 							} else if ( data && data.action === 'discard' ) {
 								setEditorPreference( 'visualeditor' );
-								location.href = veEditUri;
+								location.href = veEditUri.clone().extend( { wteswitched: 1 } );
 							}
 						} );
 				} );
@@ -682,18 +682,23 @@
 					// … or if on ?action=edit in single edit mode and the user wants it
 					(
 						isEditPage &&
-						tabPreference !== 'multi-tab' &&
-						userPrefEnabled &&
-						// If it's a view-source situation, we don't want to show VE on-load
-						!$( '#ca-viewsource' ).length &&
 						(
+							uri.query.wteswitched === '1' ||
 							(
-								tabPreference === 'prefer-ve' &&
-								mw.config.get( 'wgAction' ) !== 'submit'
-							) ||
-							(
-								tabPreference === 'remember-last' &&
-								getLastEditor() !== 'wikitext'
+								tabPreference !== 'multi-tab' &&
+								userPrefEnabled &&
+								// If it's a view-source situation, we don't want to show VE on-load
+								!$( '#ca-viewsource' ).length &&
+								(
+									(
+										tabPreference === 'prefer-ve' &&
+										mw.config.get( 'wgAction' ) !== 'submit'
+									) ||
+									(
+										tabPreference === 'remember-last' &&
+										getLastEditor() !== 'wikitext'
+									)
+								)
 							)
 						)
 					)
