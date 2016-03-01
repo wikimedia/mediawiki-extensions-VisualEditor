@@ -95,6 +95,8 @@ class ApiVisualEditor extends ApiBase {
 		} else {
 			$request['body'] = $params;
 		}
+		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
+		$reqheaders['Accept'] = 'text/html;profile=mediawiki.org/specs/html/1.2.0';
 		$request['headers'] = $reqheaders;
 		$response = $this->serviceClient->run( $request );
 		if ( $response['code'] === 200 && $response['error'] === "" ) {

@@ -139,17 +139,21 @@
 					fromEditedState = modified;
 					window.onbeforeunload = null;
 					$( window ).off( 'beforeunload' );
-					restbaseXhr = $.post(
-						conf.fullRestbaseUrl + 'v1/transform/wikitext/to/html/' +
+					restbaseXhr = $.ajax( {
+						url: conf.fullRestbaseUrl + 'v1/transform/wikitext/to/html/' +
 							encodeURIComponent( pageName ) +
 							( oldid === undefined ? '' : '/' + oldid ),
-						{
+						type: 'POST',
+						data: {
 							title: pageName,
 							oldid: oldid,
 							wikitext: $( '#wpTextbox1' ).val(),
 							stash: 'true'
-						}
-					);
+						},
+						// Should be synchronised with ApiVisualEditor.php
+						headers: { Accept: 'text/html;profile=mediawiki.org/specs/html/1.2.0' },
+						dataType: 'text'
+					} );
 				} else {
 					if ( conf.fullRestbaseUrl ) {
 						pageHtmlUrl = conf.fullRestbaseUrl + 'v1/page/html/';
@@ -160,6 +164,8 @@
 						url: pageHtmlUrl + encodeURIComponent( pageName ) +
 							( oldid === undefined ? '' : '/' + oldid ),
 						type: 'GET',
+						// Should be synchronised with ApiVisualEditor.php
+						headers: { Accept: 'text/html;profile=mediawiki.org/specs/html/1.2.0' },
 						dataType: 'text'
 					} );
 				}
