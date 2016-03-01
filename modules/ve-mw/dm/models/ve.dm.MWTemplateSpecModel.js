@@ -127,7 +127,7 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 		try {
 			// Normalize and remove namespace prefix if in the Template: namespace
 			titleObj = new mw.Title( title );
-			title = titleObj.getRelativeText( 10 );
+			title = titleObj.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
 		} catch ( e ) { }
 	}
 
