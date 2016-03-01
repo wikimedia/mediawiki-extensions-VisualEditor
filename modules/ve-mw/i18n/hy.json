@@ -175,7 +175,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Դաշտը հնացած է: $1",
 	"visualeditor-dialog-transclusion-loading": "Բեռնում…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Ցույց տալ կարգավորումները",
-	"visualeditor-dialog-transclusion-no-template-description": "Դու ավելացնում ես «$1» կաղապարը: Այն դեռևս նկարագրություն չունի, բայց հնարավոր է որոշակի տեղեկատվության առկայություն [[{{ns:template}}:$1|կաղապարի էջում]]:",
+	"visualeditor-dialog-transclusion-no-template-description": "Դու ավելացնում ես «$1» կաղապարը: Այն դեռևս նկարագրություն չունի, բայց հնարավոր է որոշակի տեղեկատվության առկայություն [[$1|կաղապարի էջում]]:",
 	"visualeditor-dialog-transclusion-options": "Ընտրանքներ",
 	"visualeditor-dialog-transclusion-param-default": "Հիմնական արժեքը` $1",
 	"visualeditor-dialog-transclusion-param-example": "Արժեքի օրինակ` $1",

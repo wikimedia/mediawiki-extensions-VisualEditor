@@ -176,7 +176,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Ti pagikabilan ket saanen a maus-usar. $1",
 	"visualeditor-dialog-transclusion-loading": "Agkarkarga...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Ipakita dagiti pagpilian",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Agnaynayonka}} ti plantilia \"$1\" iti daytoy a panid. Awan pay ti dekripsionna daytoy, ngem mabalin nga adda met pakaamo idiay [[{{ns:template}}:$1|panid ti plantilia]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Agnaynayonka}} ti plantilia \"$1\" iti daytoy a panid. Awan pay ti dekripsionna daytoy, ngem mabalin nga adda met pakaamo idiay [[$1|panid ti plantilia]].",
 	"visualeditor-dialog-transclusion-options": "Dagiti pagpilian",
 	"visualeditor-dialog-transclusion-param-default": "Kasisigud a pateg: $1",
 	"visualeditor-dialog-transclusion-param-example": "Pagarigan a pateg: $1",

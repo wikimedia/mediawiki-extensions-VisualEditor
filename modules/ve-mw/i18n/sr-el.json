@@ -135,7 +135,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Polje se više ne koristi. $1",
 	"visualeditor-dialog-transclusion-loading": "Učitavanje...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Prikaži opcije",
-	"visualeditor-dialog-transclusion-no-template-description": "Šablon „$1“ još uvek nema opis, ali je moguće da postoje neke informacije na [[{{ns:template}}:$1|stranici šablona]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablon „$1“ još uvek nema opis, ali je moguće da postoje neke informacije na [[$1|stranici šablona]].",
 	"visualeditor-dialog-transclusion-options": "Opcije",
 	"visualeditor-dialog-transclusion-param-default": "Podrazumevana vrednost: $1",
 	"visualeditor-dialog-transclusion-param-example": "Primer vrednosti: $1",

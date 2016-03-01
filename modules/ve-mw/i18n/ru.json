@@ -174,7 +174,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Устаревшее поле. $1",
 	"visualeditor-dialog-transclusion-loading": "Загрузка…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Показать параметры",
-	"visualeditor-dialog-transclusion-no-template-description": "У шаблона «$1» ещё нет описания, но, может быть, есть какая-то информация на [[{{ns:template}}:$1|странице шаблона]].",
+	"visualeditor-dialog-transclusion-no-template-description": "У шаблона «$1» ещё нет описания, но, может быть, есть какая-то информация на [[$1|странице шаблона]].",
 	"visualeditor-dialog-transclusion-options": "Параметры",
 	"visualeditor-dialog-transclusion-param-default": "По умолчанию: $1",
 	"visualeditor-dialog-transclusion-param-example": "Например: $1",

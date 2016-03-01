@@ -137,7 +137,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Kenty on vahnennuh. $1",
 	"visualeditor-dialog-transclusion-loading": "Ladavuu...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Ozuta azetukset",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Olet ližiämäs}} sivule šablonua \"$1\". Sil ei ole vie kuvavustu, no midätah tieduo voibi olla [[{{ns:template}}:$1|šablonan sivul]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Olet ližiämäs}} sivule šablonua \"$1\". Sil ei ole vie kuvavustu, no midätah tieduo voibi olla [[$1|šablonan sivul]].",
 	"visualeditor-dialog-transclusion-options": "Azetukset",
 	"visualeditor-dialog-transclusion-param-info": "Kentän kuvavus",
 	"visualeditor-dialog-transclusion-placeholder": "Ližiä šablon",

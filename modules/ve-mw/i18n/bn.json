@@ -162,7 +162,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ক্ষেত্র অবচিত হয়েছে। $1",
 	"visualeditor-dialog-transclusion-loading": "লোড হচ্ছে...",
 	"visualeditor-dialog-transclusion-multiple-mode": "বিকল্প দেখাও",
-	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" টেমপ্লেটে এখনো কোন বিবরণ নেই, কিন্তু [[{{ns:template}}:$1|টেমপ্লেটের পাতায়]] কিছু তথ্য হয়তো থাকতে পারে।",
+	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" টেমপ্লেটে এখনো কোন বিবরণ নেই, কিন্তু [[$1|টেমপ্লেটের পাতায়]] কিছু তথ্য হয়তো থাকতে পারে।",
 	"visualeditor-dialog-transclusion-options": "অপশন",
 	"visualeditor-dialog-transclusion-param-default": "পূর্বনির্ধারিত: $1",
 	"visualeditor-dialog-transclusion-param-example": "উদা: $1",

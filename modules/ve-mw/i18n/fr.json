@@ -216,7 +216,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Le champ est obsolète. $1",
 	"visualeditor-dialog-transclusion-loading": "Chargement en cours…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Afficher les options",
-	"visualeditor-dialog-transclusion-no-template-description": "Le modèle « $1 » n’a pas encore de description, mais il peut y avoir des informations sur la [[{{ns:template}}:$1|page du modèle]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Le modèle « $1 » n’a pas encore de description, mais il peut y avoir des informations sur la [[$1|page du modèle]].",
 	"visualeditor-dialog-transclusion-options": "Options",
 	"visualeditor-dialog-transclusion-param-default": "Par défaut : $1",
 	"visualeditor-dialog-transclusion-param-example": "par ex. $1",

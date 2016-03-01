@@ -142,7 +142,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "The field is ootdatit. $1",
 	"visualeditor-dialog-transclusion-loading": "Laidin...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Shaw opties",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Ye'r eikin}} the \"$1\" template tae this page. It disna hae ae descreeption yet, but thaur micht be some information oan the [[{{ns:template}}:$1|template's page]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Ye'r eikin}} the \"$1\" template tae this page. It disna hae ae descreeption yet, but thaur micht be some information oan the [[$1|template's page]].",
 	"visualeditor-dialog-transclusion-options": "Opties",
 	"visualeditor-dialog-transclusion-param-default": "Ordinar value: $1",
 	"visualeditor-dialog-transclusion-param-example": "Ensaumple value: $1",

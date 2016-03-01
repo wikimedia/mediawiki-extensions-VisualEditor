@@ -189,7 +189,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Kenttä on vanhentunut. $1",
 	"visualeditor-dialog-transclusion-loading": "Ladataan...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Näytä valinnat",
-	"visualeditor-dialog-transclusion-no-template-description": "Mallineella \"$1\" ei ole vielä kuvausta, mutta jotain tietoa saattaa olla [[{{ns:template}}:$1|mallineen sivulla]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Mallineella \"$1\" ei ole vielä kuvausta, mutta jotain tietoa saattaa olla [[$1|mallineen sivulla]].",
 	"visualeditor-dialog-transclusion-options": "Asetukset",
 	"visualeditor-dialog-transclusion-param-default": "Oletusarvo: $1",
 	"visualeditor-dialog-transclusion-param-example": "Esimerkkiarvo: $1",

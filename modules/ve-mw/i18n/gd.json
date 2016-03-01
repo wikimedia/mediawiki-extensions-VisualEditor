@@ -114,7 +114,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Cha mholar an raon seo tuilleadh. $1",
 	"visualeditor-dialog-transclusion-loading": "'Ga luchdadh...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Seall na roghainnean",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|}} Tha thu a' cur na teamplaid \"$1\" ris an duilleag seo. Chan eil tuairisgeul aice fhathast ach dh'fhaoidte gu bheil fiosrachadh air [[{{ns:template}}:$1|duilleag na teamplaid]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|}} Tha thu a' cur na teamplaid \"$1\" ris an duilleag seo. Chan eil tuairisgeul aice fhathast ach dh'fhaoidte gu bheil fiosrachadh air [[$1|duilleag na teamplaid]].",
 	"visualeditor-dialog-transclusion-options": "Roghainnean",
 	"visualeditor-dialog-transclusion-param-info": "Tuairisgeul an raoin",
 	"visualeditor-dialog-transclusion-param-info-missing": "Chan eil tuairisgeul an raoin ri fhaighinn",
