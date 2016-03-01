@@ -120,6 +120,8 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 		iceweasel: [ [ '>=', 10 ] ],
 		safari: [ [ '>=', 7 ] ],
 		chrome: [ [ '>=', 19 ] ],
+		msie: [ [ '>=', 10 ] ],
+		edge: [ [ '>=', 12 ] ],
 		opera: [ [ '>=', 15 ] ]
 	}
 };

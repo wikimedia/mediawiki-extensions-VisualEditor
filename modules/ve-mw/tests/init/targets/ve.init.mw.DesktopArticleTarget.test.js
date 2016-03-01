@@ -34,12 +34,17 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'IE10',
 				userAgent: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
-				matches: []
+				matches: [ 'whitelist' ]
 			},
 			{
 				msg: 'IE11',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko',
-				matches: []
+				matches: [ 'whitelist' ]
+			},
+			{
+				msg: 'Edge 12',
+				userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
+				matches: [ 'whitelist' ]
 			},
 			{
 				msg: 'Firefox 10',
