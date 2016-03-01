@@ -188,7 +188,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "മണ്ഡലം ഒഴിവാക്കിയിരിക്കുന്നു. $1",
 	"visualeditor-dialog-transclusion-loading": "ശേഖരിക്കുന്നു...",
 	"visualeditor-dialog-transclusion-multiple-mode": "ഐച്ഛികങ്ങൾ പ്രദർശിപ്പിക്കുക",
-	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" ഫലകത്തിന് വിവരണമൊന്നുമില്ല, എങ്കിലും [[{{ns:template}}:$1|ഫലകത്തിന്റെ താളിൽ]] വിവരമെന്തെങ്കിലും ഉണ്ടാകാതിരിക്കില്ല.",
+	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" ഫലകത്തിന് വിവരണമൊന്നുമില്ല, എങ്കിലും [[$1|ഫലകത്തിന്റെ താളിൽ]] വിവരമെന്തെങ്കിലും ഉണ്ടാകാതിരിക്കില്ല.",
 	"visualeditor-dialog-transclusion-options": "ഐച്ഛികങ്ങൾ",
 	"visualeditor-dialog-transclusion-param-default": "സ്വതേയുള്ള വില: $1",
 	"visualeditor-dialog-transclusion-param-example": "ഉദാഹരണമായുള്ള വില: $1",

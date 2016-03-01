@@ -200,7 +200,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Veld is verouderd: $1",
 	"visualeditor-dialog-transclusion-loading": "Bezig met laden…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Opties weergeven",
-	"visualeditor-dialog-transclusion-no-template-description": "De sjabloon \"$1\" heeft nog geen beschrijving, maar mogelijk is er informatie op de [[{{ns:template}}:$1|sjabloonpagina]].",
+	"visualeditor-dialog-transclusion-no-template-description": "De sjabloon \"$1\" heeft nog geen beschrijving, maar mogelijk is er informatie op de [[$1|sjabloonpagina]].",
 	"visualeditor-dialog-transclusion-options": "Opties",
 	"visualeditor-dialog-transclusion-param-default": "Standaardwaarde: $1",
 	"visualeditor-dialog-transclusion-param-example": "Voorbeeldwaarde: $1",

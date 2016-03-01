@@ -146,7 +146,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ველქ მიჯვეშუ. $1",
 	"visualeditor-dialog-transclusion-loading": "იხარგუაფუ...",
 	"visualeditor-dialog-transclusion-multiple-mode": "პარამეტრეფიშ ძირაფა",
-	"visualeditor-dialog-transclusion-no-template-description": "თანგის „$1“ დიო ხოლო ვაუღუ ეჭარუა, მარა შილებე დოგორათ მუდგაინი ინფორმაცია [[{{ns:template}}:$1|თანგიშ ხასჷლას]].",
+	"visualeditor-dialog-transclusion-no-template-description": "თანგის „$1“ დიო ხოლო ვაუღუ ეჭარუა, მარა შილებე დოგორათ მუდგაინი ინფორმაცია [[$1|თანგიშ ხასჷლას]].",
 	"visualeditor-dialog-transclusion-options": "პარამეტრეფი",
 	"visualeditor-dialog-transclusion-param-default": "დუდგაწყაფუ შანულობა: $1",
 	"visualeditor-dialog-transclusion-param-example": "შანულობაშ სამანგა: $1",

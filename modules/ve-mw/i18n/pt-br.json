@@ -186,7 +186,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "O campo está obsoleto. $1",
 	"visualeditor-dialog-transclusion-loading": "Carregando...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostrar opções",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Você está adicionando}} a predefinição \"$1\" a esta página. No entanto, ela não possui uma descrição, mas pode haver um pouco de informação na [[{{ns:template}}:$1|página da predefinição]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Você está adicionando}} a predefinição \"$1\" a esta página. No entanto, ela não possui uma descrição, mas pode haver um pouco de informação na [[$1|página da predefinição]].",
 	"visualeditor-dialog-transclusion-options": "Opções",
 	"visualeditor-dialog-transclusion-param-default": "Padrão: $1",
 	"visualeditor-dialog-transclusion-param-example": "Valor de exemplo: $1",

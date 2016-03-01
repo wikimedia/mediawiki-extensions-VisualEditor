@@ -108,7 +108,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Le campo es obsolete. $1",
 	"visualeditor-dialog-transclusion-loading": "Cargamento...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Monstrar optiones",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Tu es sur le puncto de adder}} le patrono \"$1\" a iste pagina. Illo non ha ancora un description, ma il pote haber information in le [[{{ns:template}}:$1|pagina del patrono]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Tu es sur le puncto de adder}} le patrono \"$1\" a iste pagina. Illo non ha ancora un description, ma il pote haber information in le [[$1|pagina del patrono]].",
 	"visualeditor-dialog-transclusion-options": "Optiones",
 	"visualeditor-dialog-transclusion-param-info": "Description del campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nulle description del campo es disponibile.",

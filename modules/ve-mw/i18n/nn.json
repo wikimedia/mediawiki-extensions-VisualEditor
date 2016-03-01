@@ -95,7 +95,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Felter er utdatert. $1",
 	"visualeditor-dialog-transclusion-loading": "Lastar …",
 	"visualeditor-dialog-transclusion-multiple-mode": "Vis val",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Du legg til}} malen «$1» på sida. Han har ikkje noka skildring enno, men det kan vera informasjon om han på [[{{ns:template}}:$1|malsida]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Du legg til}} malen «$1» på sida. Han har ikkje noka skildring enno, men det kan vera informasjon om han på [[$1|malsida]].",
 	"visualeditor-dialog-transclusion-options": "Val",
 	"visualeditor-dialog-transclusion-param-info": "Feltskildring",
 	"visualeditor-dialog-transclusion-param-info-missing": "Inga feltskildring er tilgjengeleg",

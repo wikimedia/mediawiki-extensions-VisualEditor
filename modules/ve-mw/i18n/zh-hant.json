@@ -184,7 +184,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "參數已停用。$1",
 	"visualeditor-dialog-transclusion-loading": "讀取中…",
 	"visualeditor-dialog-transclusion-multiple-mode": "顯示選項",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|您正在}}此頁面加入模板 \"$1\"。此模板目前尚無任何內容描述，但您可自 [[{{ns:template}}:$1|模板頁面]] 取得一些有用的資訊。",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|您正在}}此頁面加入模板 \"$1\"。此模板目前尚無任何內容描述，但您可自 [[$1|模板頁面]] 取得一些有用的資訊。",
 	"visualeditor-dialog-transclusion-options": "選項",
 	"visualeditor-dialog-transclusion-param-default": "預設：$1",
 	"visualeditor-dialog-transclusion-param-example": "範例值：$1",

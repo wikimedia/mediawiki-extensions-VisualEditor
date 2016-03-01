@@ -106,7 +106,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Al càmp 'l è vèć. $1",
 	"visualeditor-dialog-transclusion-loading": "Drē a carghèr...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Fer vèder dal siélti",
-	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Uèt'r a î śuntê}} al mudèl « $1 » a cla pàgina chè. A n'gh'è mìa ancòr na descrisiòun, mo i prèvenès'r-egh dagli infurmasiòun in sìm'a la [[{{ns:template}}:$1|pàgina dal mudèl]].",
+	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Uèt'r a î śuntê}} al mudèl « $1 » a cla pàgina chè. A n'gh'è mìa ancòr na descrisiòun, mo i prèvenès'r-egh dagli infurmasiòun in sìm'a la [[$1|pàgina dal mudèl]].",
 	"visualeditor-dialog-transclusion-options": "Al sernidûri",
 	"visualeditor-dialog-transclusion-param-info": "Descrisiòun dal càmp",
 	"visualeditor-dialog-transclusion-param-info-missing": "A n'gh'è dispunìbil nisùna descrisiòun dal càmp",

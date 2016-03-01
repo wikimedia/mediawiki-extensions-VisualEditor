@@ -179,7 +179,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "以下の理由によりこのフィールドは推奨されません。$1",
 	"visualeditor-dialog-transclusion-loading": "読み込み中...",
 	"visualeditor-dialog-transclusion-multiple-mode": "オプションを表示",
-	"visualeditor-dialog-transclusion-no-template-description": "「$1」テンプレートにはまだ説明がありませんが、[[{{ns:template}}:$1|テンプレートのページ]]には何か情報があるかもしれません。",
+	"visualeditor-dialog-transclusion-no-template-description": "「$1」テンプレートにはまだ説明がありませんが、[[$1|テンプレートのページ]]には何か情報があるかもしれません。",
 	"visualeditor-dialog-transclusion-options": "オプション",
 	"visualeditor-dialog-transclusion-param-default": "既定値: $1",
 	"visualeditor-dialog-transclusion-param-example": "値の例: $1",
