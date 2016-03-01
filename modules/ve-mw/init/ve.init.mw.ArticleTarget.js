@@ -177,7 +177,7 @@ ve.init.mw.ArticleTarget.static.platformType = 'other';
  * Handle response to a successful load request.
  *
  * This method is called within the context of a target instance. If successful the DOM from the
- * server will be parsed, stored in {this.doc} and then {this.onReady} will be called.
+ * server will be parsed, stored in {this.doc} and then {this.documentReady} will be called.
  *
  * @method
  * @param {Object} response API response data
@@ -245,7 +245,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 				linkData[ data.links.missing[ i ] ] = { missing: true };
 			}
 			if ( data.links.known === 1 ) {
-				// Set back to false by onReady()
+				// Set back to false by documentReady()
 				ve.init.platform.linkCache.setAssumeExistence( true );
 			} else {
 				for ( i = 0, len = data.links.known.length; i < len; i++ ) {
@@ -265,7 +265,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.documentReady = function () {
-	// We need to wait until onReady as local notices may require special messages
+	// We need to wait until documentReady as local notices may require special messages
 	this.editNotices = this.remoteNotices.concat(
 		this.localNoticeMessages.map( function ( msgKey ) {
 			return '<p>' + ve.init.platform.getParsedMessage( msgKey ) + '</p>';
