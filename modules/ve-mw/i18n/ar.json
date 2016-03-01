@@ -20,7 +20,8 @@
 			"Hiba Alshawi",
 			"فلورانس",
 			"PhiberOptik",
-			"Shbib Al-Subaie"
+			"Shbib Al-Subaie",
+			"Maroen1990"
 		]
 	},
 	"apihelp-visualeditor-description": "يرجع الأيش تي أم أل 5 لصفحة من الخدمة بارسويد (Parsoid ).",
@@ -75,6 +76,7 @@
 	"visualeditor-dialog-media-info-artist": "رُفع بواسطة $1",
 	"visualeditor-dialog-media-info-audiofile": "ملف صوتي",
 	"visualeditor-dialog-media-info-created": "أنشأ بواسطة: $1",
+	"visualeditor-dialog-media-info-credit": "رصيد",
 	"visualeditor-dialog-media-info-imagedescription": "الوصف الكامل",
 	"visualeditor-dialog-media-info-licenseshortname": "الرخصة",
 	"visualeditor-dialog-media-info-meta-artist": "الفنان: $1",

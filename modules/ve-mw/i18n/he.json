@@ -305,6 +305,7 @@
 	"visualeditor-shortcuts-insert": "הוספה",
 	"visualeditor-special-characters-group-other": "נפוצים",
 	"visualeditor-timeout": "נראה שהעורך הזה אינו זמין כעת. האם ברצונך לערוך במצב עריכת קוד מקור?",
+	"visualeditor-toload": "העורך ייטען עכשיו. אם ההודעה הזאת עדיין מופיעה אחרי כמה שניות, [$1 נא לרענן את הדף].",
 	"visualeditor-toolbar-savedialog": "שמירת דף",
 	"visualeditor-toolbar-savedialog-short": "שמירה",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",

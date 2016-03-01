@@ -27,7 +27,8 @@
 			"Statix64",
 			"Supernino",
 			"Wikitoni",
-			"Malore"
+			"Malore",
+			"Elitre (WMF)"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -222,7 +223,7 @@
 	"visualeditor-donebutton-tooltip": "Modifica completata",
 	"visualeditor-editconflict": "Le modifiche apportate non possono essere salvate a causa di un conflitto di edizione. {{GENDER:|Vuoi}} risolvere il conflitto manualmente?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} ora ricorda quale editor preferisci.",
-	"visualeditor-editingtabdialog-ok": "Usa l'editor che ho utilizzato nella mia ultima modifica",
+	"visualeditor-editingtabdialog-ok": "Usa l'editor che ho utilizzato per ultimo",
 	"visualeditor-editingtabdialog-title": "Schede di modifica",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notifica|notifiche}}",
 	"visualeditor-editnotices-tooltip": "Avvisi per le modifiche",
@@ -284,7 +285,7 @@
 	"visualeditor-preference-core-label": "Modifica visuale",
 	"visualeditor-preference-enable": "Abilita l'editor visuale. È disponibile nei seguenti {{PLURAL:$2|namespace|namespaces}}: $1",
 	"visualeditor-preference-tabs": "Schede di modifica",
-	"visualeditor-preference-tabs-multi-tab": "Mostrami entrambi le schede di modifica",
+	"visualeditor-preference-tabs-multi-tab": "Mostrami entrambe le schede di modifica",
 	"visualeditor-preference-tabs-prefer-ve": "Usa sempre l'editor visuale, se possibile",
 	"visualeditor-preference-tabs-prefer-wt": "Usa sempre l'editor wikitesto",
 	"visualeditor-preference-tabs-remember-last": "Ricorda il mio ultimo editor",
@@ -316,6 +317,7 @@
 	"visualeditor-shortcuts-insert": "Inserisci",
 	"visualeditor-special-characters-group-other": "Usato spesso",
 	"visualeditor-timeout": "Sembra che questo editor non sia attualmente disponibile. Vorresti invece modificare in modalità sorgente?",
+	"visualeditor-toload": "Verrà caricato l'editor. Se vedi ancora questo messaggio dopo alcuni secondi, [$1 ricarica la pagina].",
 	"visualeditor-toolbar-savedialog": "Salva la pagina",
 	"visualeditor-toolbar-savedialog-short": "Salva",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utente",

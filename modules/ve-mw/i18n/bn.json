@@ -283,6 +283,7 @@
 	"visualeditor-shortcuts-insert": "যোগ করো",
 	"visualeditor-special-characters-group-other": "প্রায়ই ব্যবহৃত",
 	"visualeditor-timeout": "এই সম্পাদক বর্তমানে অনুপলব্ধ মনে হচ্ছে। আপনি কি এর পরিবর্তে উৎস মোডে সম্পাদনা করতে চান?",
+	"visualeditor-toload": "সম্পাদকটি এখন লোড হবে। আপনি যদি কয়েক সেকেন্ড পরেও এই বার্তাটি দেখতে পারেন, তাহলে দয়া করে [$1 পাতাটি পুনঃলোড করুন]।",
 	"visualeditor-toolbar-savedialog": "পাতা সংরক্ষণ",
 	"visualeditor-toolbar-savedialog-short": "সংরক্ষণ",
 	"visualeditor-usernamespacepagelink": "Project:ব্যবহারকারী নামস্থান",
