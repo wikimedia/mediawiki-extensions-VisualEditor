@@ -205,11 +205,11 @@ class VisualEditorPage
       loop do
         begin
           browser.execute_script script
-        rescue Selenium::WebDriver::Error::JavascriptError => e
+        rescue Selenium::WebDriver::Error::JavascriptError, Selenium::WebDriver::Error::UnknownError => e
         else
           e = nil
         end
-        break unless e.class == Selenium::WebDriver::Error::JavascriptError
+        break unless (e.class == Selenium::WebDriver::Error::JavascriptError) || (e.class == Selenium::WebDriver::Error::UnknownError)
       end
     end
     browser.execute_script script
