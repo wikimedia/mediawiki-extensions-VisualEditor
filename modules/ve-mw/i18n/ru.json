@@ -64,6 +64,7 @@
 	"visualeditor-dialog-media-change-image": "Изменить изображение",
 	"visualeditor-dialog-media-choose-image": "Использовать это изображение",
 	"visualeditor-dialog-media-content-filename": "Имя файла",
+	"visualeditor-dialog-media-content-description-link": "(страница описания)",
 	"visualeditor-dialog-media-content-section": "Подпись",
 	"visualeditor-dialog-media-goback": "Назад",
 	"visualeditor-dialog-media-info-artist": "Загружено: $1",
