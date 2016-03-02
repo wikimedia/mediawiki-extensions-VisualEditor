@@ -55,7 +55,11 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.scrollTop = null;
 	this.currentUri = currentUri;
 	this.section = currentUri.query.vesection;
-	this.initialEditSummary = currentUri.query.summary;
+	if ( $( '#wpSummary' ).length ) {
+		this.initialEditSummary = $( '#wpSummary' ).val();
+	} else {
+		this.initialEditSummary = currentUri.query.summary;
+	}
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
 	this.isViewPage = (
@@ -285,6 +289,9 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 				( !!mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
 				data.watched === ''
 		};
+		$( '.editCheckboxes input' ).each( function () {
+			defaults[ this.name ] = this.checked;
+		} );
 
 		$checkboxes = $( '<div>' ).html( ve.getObjectValues( data.checkboxes ).join( '' ) );
 		$checkboxes.find( 'input[type=checkbox]' ).each( function () {
