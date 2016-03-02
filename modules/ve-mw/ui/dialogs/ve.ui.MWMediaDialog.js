@@ -1289,7 +1289,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	this.store = doc.getStore();
 
 	// Set up the caption target
-	this.captionTarget = new ve.ui.MWTargetWidget(
+	this.captionTarget = ve.init.target.createTargetWidget(
 		captionDocument,
 		{
 			tools: ve.init.target.constructor.static.toolbarGroups,

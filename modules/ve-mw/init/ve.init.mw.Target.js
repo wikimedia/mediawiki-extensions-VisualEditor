@@ -227,6 +227,13 @@ ve.init.mw.Target.prototype.track = function () {};
 /**
  * @inheritdoc
  */
+ve.init.Target.prototype.createTargetWidget = function ( dmDoc, config ) {
+	return new ve.ui.MWTargetWidget( dmDoc, config );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.Target.prototype.createSurface = function () {
 	var surface, surfaceView, $documentNode;
 
