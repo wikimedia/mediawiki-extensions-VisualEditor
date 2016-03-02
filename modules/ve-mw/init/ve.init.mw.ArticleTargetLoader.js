@@ -151,7 +151,7 @@
 							stash: 'true'
 						},
 						// Should be synchronised with ApiVisualEditor.php
-						headers: { Accept: 'text/html;profile=mediawiki.org/specs/html/1.2.0' },
+						headers: { Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"' },
 						dataType: 'text'
 					} );
 				} else {
@@ -165,7 +165,7 @@
 							( oldid === undefined ? '' : '/' + oldid ),
 						type: 'GET',
 						// Should be synchronised with ApiVisualEditor.php
-						headers: { Accept: 'text/html;profile=mediawiki.org/specs/html/1.2.0' },
+						headers: { Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"' },
 						dataType: 'text'
 					} );
 				}
