@@ -48,11 +48,13 @@ ve.ce.MWEntityNode.static.name = 'mwEntity';
 ve.ce.MWEntityNode.prototype.onUpdate = function () {
 	var
 		chr = this.model.getAttribute( 'character' ),
-		whitespaceHtmlChars = ve.ce.TextNode.whitespaceHtmlCharacters,
+		whitespaceHtmlChars = ve.ce.nodeFactory.lookup( 'text' ).static.whitespaceHtmlCharacters,
 		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();
+
 	if ( !significantWhitespace && Object.prototype.hasOwnProperty.call( whitespaceHtmlChars, chr ) ) {
 		chr = whitespaceHtmlChars[ chr ];
 	}
+
 	this.$element.text( chr );
 };
 
