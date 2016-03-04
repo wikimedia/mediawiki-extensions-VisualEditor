@@ -1,3 +1,4 @@
+@firefox
 Feature: Language Screenshot
 
   @language_screenshot
@@ -12,7 +13,6 @@ Feature: Language Screenshot
     When I click the text style menu
     Then I should see Formatting pull-down menu
 
-  @language_screenshot
   Scenario: VisualEditor_More_Settings
     Given I am editing the language screenshots page
     When I click the hamburger menu
@@ -24,13 +24,11 @@ Feature: Language Screenshot
     When I click on the Insert menu
     Then I should see Insert pull-down menu
 
-  @language_screenshot
   Scenario: VisualEditor_Toolbar_SpecialCharacters
     Given I am editing the language screenshots page
     When I click on the Special character option in the toolbar
     Then I should see Special character Insertion window
 
-  @language_screenshot
   Scenario: VisualEditor_save_dialog
     Given I am logged in
       And I edit language screenshot page with Testing Save
@@ -44,14 +42,12 @@ Feature: Language Screenshot
     When I click on Page settings option
     Then I should see Page settings dialog box
 
-  @language_screenshot
   Scenario: VisualEditor_Toolbar_Lists_and_indentation
     Given I go to the "Indent Outdent Screenshot" page with source content "Indent Outdent Screenshot"
       And I make the text "Indent Outdent" be selected
     When I click on list and indentation button
     Then I should see list and indentation dropdown
 
-  @language_screenshot
   Scenario: VisualEditor_Internal_link
     Given I go to the "Links VisualEditor Screenshot" page with source content "Hello World" for language screenshot
       And I click in the editable part
@@ -59,7 +55,6 @@ Feature: Language Screenshot
       And I click the Link button
     Then I should see link Content box with dropdown options
 
-  @language_screenshot
   Scenario: VisualEditor_External_link
     Given I go to the "Links VisualEditor Screenshot" page with source content "Hello World" for language screenshot
       And I click in the editable part
@@ -69,7 +64,6 @@ Feature: Language Screenshot
       When I enter external link "http://www.example.com" into external link Content box
     Then I should see link Content box with dropdown options
 
-  @language_screenshot
   Scenario: VisualEditor_Internal_selected_link
     Given I go to the "Links VisualEditor Screenshot" page with source content "Hello World" for language screenshot
       And I click in the editable part
@@ -132,7 +126,6 @@ Feature: Language Screenshot
     When I click on Basic Reference in Cite menu dropdown
     Then I should see Basic Reference dialog box
 
-  @language_screenshot
   Scenario: VisualEditor_edit_tab
     Given I am logged in
     When I go to language screenshot page
@@ -145,7 +138,6 @@ Feature: Language Screenshot
       And I am editing the language screenshots page
     Then I should see the VisualEditor tool-bar
 
-  @language_screenshot
   Scenario: VisualEditor_category_addition
     Given I am editing the language screenshots page with category "Earth"
     And I click on category in hamburger menu
@@ -159,14 +151,12 @@ Feature: Language Screenshot
     When I click on first category
     Then I should see delete button in category info box
 
-  @language_screenshot
   Scenario: VisualEditor_formula
     Given I go to the "Formula Screenshot" page with source content ""
     When I click on Formula option in Insert menu
       And I type a formula
     Then I should see the formula insertion menu
 
-  @language_screenshot
   Scenario: VisualEditor_toolbar_actions
     Given I am logged in
     When I edit language screenshot page with Testing toolbar
