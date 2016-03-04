@@ -16,6 +16,7 @@
 	"apihelp-visualeditor-param-html": "HTML дзеля адпраўкі ў Parsoid і канвэртаваньня ў вікітэкст.",
 	"apihelp-visualeditor-param-oldid": "Нумар вэрсіі для выкарыстаньня (дапомна — апошняя вэрсія).",
 	"apihelp-visualeditor-param-paction": "Дзеяньне, якое неабходна выканаць.",
+	"apihelp-visualeditor-param-page": "Старонка для выкананьня дзеяньня.",
 	"apihelp-visualeditoredit-param-basetimestamp": "Пры захаваньні ўсталёўвае тут час вэрсіі, якая рэдагавалася. Выкарыстоўваецца дзеля выяўленьня канфліктаў рэдагаваньня.",
 	"apihelp-visualeditoredit-param-captchaid": "ID капчы (пры захаваньні з запытам капчы).",
 	"apihelp-visualeditoredit-param-captchaword": "Адказ на капчу (пры захаваньні з запытам капчы).",

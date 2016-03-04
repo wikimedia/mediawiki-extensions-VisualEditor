@@ -268,7 +268,7 @@
 	"visualeditor-preference-core-description": "Den visuellen Editor aktivieren. Der Editor ist auf Diskussionsseiten und in einigen anderen Namensräumen nicht verfügbar.",
 	"visualeditor-preference-core-label": "Visuelles Bearbeiten",
 	"visualeditor-preference-enable": "Den visuellen Editor aktivieren. Der Editor ist verfügbar {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}}: $1",
-	"visualeditor-preference-tabs": "Bearbeitungs-Registerkarten",
+	"visualeditor-preference-tabs": "Bearbeitungs-Registerkarten:",
 	"visualeditor-preference-tabs-multi-tab": "Beide Editoren anbieten",
 	"visualeditor-preference-tabs-prefer-ve": "Den visuellen Editor anbieten, falls möglich",
 	"visualeditor-preference-tabs-prefer-wt": "Den Wikitext-Editor anbieten",
