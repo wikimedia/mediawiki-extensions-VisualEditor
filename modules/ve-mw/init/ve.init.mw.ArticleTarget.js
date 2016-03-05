@@ -104,8 +104,9 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 
 /**
  * @event saveErrorBadToken
- * Fired on save if we have to fetch a new edit token
- *  this is mainly for analytical purposes.
+ * @param {boolean} willRetry Whether an automatic retry will occur
+ * Fired on save if we have to fetch a new edit token.
+ * This is mainly for analytical purposes.
  */
 
 /**
@@ -423,9 +424,6 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 			indexpageids: '',
 			intoken: 'edit'
 		} )
-			.always( function () {
-				target.saveErrorBadToken();
-			} )
 			.done( function ( data ) {
 				var
 					userInfo = data.query && data.query.userinfo,
@@ -443,7 +441,8 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 							// normalisation and against case where the user got renamed.
 							mw.config.get( 'wgUserId' ) === userInfo.id
 					) {
-						// New session is the same user still
+						// New session is the same user still; retry
+						target.emit( 'saveErrorBadToken', true );
 						target.save( doc, saveData );
 					} else {
 						// The now current session is a different user
@@ -456,14 +455,17 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 								// functions like mw.user.isAnon rely on this.
 								wgUserName: null
 							} );
-							target.saveErrorNewUser( null );
+							target.saveErrorBadToken( null, false );
 						} else {
 							// New session is a different user
 							mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
-							target.saveErrorNewUser( userInfo.name );
+							target.saveErrorBadToken( userInfo.name, false );
 						}
 					}
 				}
+			} )
+			.fail( function () {
+				target.saveErrorBadToken( null, true );
 			} );
 		return;
 	} else if ( data.error && data.error.code === 'editconflict' ) {
@@ -629,24 +631,31 @@ ve.init.mw.ArticleTarget.prototype.saveErrorTitleBlacklist = function () {
 };
 
 /**
- * Handle token fetch indicating another user is logged in
+ * Handle token fetch indicating another user is logged in, and token fetch errors.
  *
  * @method
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
+ * @param {boolean} [error=false] Whether there was an error trying to figure out who we're logged in as
+ * @fires saveErrorBadToken
  * @fires saveErrorNewUser
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
-	var badToken, userMsg;
-	badToken = document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' );
-	if ( username === null ) {
-		userMsg = 'visualeditor-savedialog-identify-anon';
+ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, error ) {
+	var userMsg,
+		$msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) );
+
+	if ( error ) {
+		this.emit( 'saveErrorBadToken', false );
+		$msg = $msg.add( document.createTextNode( mw.msg( 'visualeditor-savedialog-identify-trylogin' ) ) );
 	} else {
-		userMsg = 'visualeditor-savedialog-identify-user';
+		this.emit( 'saveErrorNewUser' );
+		if ( username === null ) {
+			userMsg = 'visualeditor-savedialog-identify-anon';
+		} else {
+			userMsg = 'visualeditor-savedialog-identify-user';
+		}
+		$msg = $msg.add( $.parseHTML( mw.message( userMsg, username ).parse() ) );
 	}
-	this.showSaveError(
-		$( badToken ).add( $.parseHTML( mw.message( userMsg, username ).parse() ) )
-	);
-	this.emit( 'saveErrorNewUser' );
+	this.showSaveError( $msg );
 };
 
 /**
@@ -669,16 +678,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data )
 		false // prevents reapply
 	);
 	this.emit( 'saveErrorUnknown', errorMsg );
-};
-
-/**
- * Handle a bad token
- *
- * @method
- * @fires saveErrorBadToken
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
-	this.emit( 'saveErrorBadToken' );
 };
 
 /**
