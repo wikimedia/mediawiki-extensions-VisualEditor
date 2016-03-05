@@ -120,6 +120,7 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 
 /**
  * @event saveErrorUnknown
+ * @param {string} errorMsg Error message shown to the user
  * Fired for any other type of save error
  */
 
@@ -654,20 +655,20 @@ ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
  * @method
  * @param {Object} editApi
  * @param {Object|null} data API response data
- * @fires onSaveErrorUnknown
+ * @fires saveErrorUnknown
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data ) {
+	var errorMsg = ( editApi && editApi.info ) ||
+		( data && data.error && data.error.info ) ||
+		( editApi && editApi.code ) ||
+		( data && data.error && data.error.code ) ||
+		'Unknown error';
+
 	this.showSaveError(
-		$( document.createTextNode(
-			( editApi && editApi.info ) ||
-			( data.error && data.error.info ) ||
-			( editApi && editApi.code ) ||
-			( data.error && data.error.code ) ||
-			'Unknown error'
-		) ),
+		$( document.createTextNode( errorMsg ) ),
 		false // prevents reapply
 	);
-	this.emit( 'onSaveErrorUnknown' );
+	this.emit( 'saveErrorUnknown', errorMsg );
 };
 
 /**
