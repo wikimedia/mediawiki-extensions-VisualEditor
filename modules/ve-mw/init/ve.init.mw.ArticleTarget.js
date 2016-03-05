@@ -412,24 +412,14 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 	if ( data.error && data.error.code === 'badtoken' ) {
 		api = new mw.Api();
 		api.get( {
-			// action=query&meta=userinfo and action=tokens&type=edit can't be combined
-			// but action=query&meta=userinfo and action=query&prop=info can, however
-			// that means we have to give it titles and deal with page ids.
 			action: 'query',
-			meta: 'userinfo',
-			prop: 'info',
-			// Try to send the normalised form so that it is less likely we get extra data like
-			// data.normalised back that we don't need.
-			titles: new mw.Title( target.pageName ).toText(),
-			indexpageids: '',
-			intoken: 'edit'
+			meta: 'tokens|userinfo',
+			type: 'csrf'
 		} )
 			.done( function ( data ) {
 				var
 					userInfo = data.query && data.query.userinfo,
-					pageInfo = data.query && data.query.pages && data.query.pageids &&
-						data.query.pageids[ 0 ] && data.query.pages[ data.query.pageids[ 0 ] ],
-					editToken = pageInfo && pageInfo.edittoken,
+					editToken = data.query && data.query.tokens && data.query.tokens.csrftoken,
 					isAnon = mw.user.isAnon();
 
 				if ( userInfo && editToken ) {
