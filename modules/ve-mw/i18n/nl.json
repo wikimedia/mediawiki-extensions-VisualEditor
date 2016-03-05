@@ -227,7 +227,7 @@
 	"visualeditor-donebutton-tooltip": "Klaar met bewerken",
 	"visualeditor-editconflict": "Uw wijzigingen konden niet opgeslagen worden vanwege een bewerkingsconflict. Wilt {{GENDER:|u}} het conflict handmatig oplossen?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} herinnert zich nu welke tekstverwerker uw voorkeur heeft.",
-	"visualeditor-editingtabdialog-ok": "Gebruik te tekstverwerker van mijn laatste bewerking",
+	"visualeditor-editingtabdialog-ok": "Gebruik de tekstverwerker van mijn laatste bewerking",
 	"visualeditor-editingtabdialog-title": "Bewerkingstabbladen",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|melding|meldingen}}",
 	"visualeditor-editnotices-tooltip": "Meldingen over bewerken",
