@@ -234,32 +234,28 @@ class VisualEditorHooks {
 			return true;
 		}
 
+		$dbr = wfGetDB( DB_SLAVE );
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
-			$user->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
+			!$user->isAnon() &&
+			!$user->getOption( 'visualeditor-autodisable' ) &&
+			!$user->getOption( 'visualeditor-betatempdisable' ) &&
+			!$user->getOption( 'visualeditor-hidetabdialog' ) &&
+			$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+			$dbr->select(
+				'revision',
+				'1',
+				[
+					'rev_user' => $user->getId(),
+					'rev_timestamp < ' . $dbr->addQuotes(
+						$config->get( 'VisualEditorSingleEditTabSwitchTime' )
+					)
+				],
+				__METHOD__,
+				[ 'LIMIT' => 1 ]
+			)->numRows() === 1
 		) {
-			$dbr = wfGetDB( DB_SLAVE );
-			if (
-				!$user->isAnon() &&
-				!$user->getOption( 'visualeditor-autodisable' ) &&
-				!$user->getOption( 'visualeditor-betatempdisable' ) &&
-				!$user->getOption( 'visualeditor-hidetabdialog' ) &&
-				$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
-				$dbr->select(
-					'revision',
-					'1',
-					[
-						'rev_user' => $user->getId(),
-						'rev_timestamp < ' . $dbr->addQuotes(
-							$config->get( 'VisualEditorSingleEditTabSwitchTime' )
-						)
-					],
-					__METHOD__,
-					[ 'LIMIT' => 1 ]
-				)->numRows() === 1
-			) {
-				$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
-			}
+			$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
 		}
 
 		// Exit if the user doesn't have VE enabled
