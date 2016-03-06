@@ -10,59 +10,23 @@
  *
  * @class
  * @abstract
- * @mixins OO.ui.mixin.IconElement
  *
  * @constructor
- * @param {Object} [config] Configuration options
  */
-ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode( config ) {
-	// Mixin constructors
-	OO.ui.mixin.IconElement.call( this, config );
-
-	// Events
-	this.connect( this, { setup: 'onAlienSetup' } );
+ve.ce.MWAlienExtensionNode = function VeCeMWAlienExtensionNode() {
 };
 
 /* Inheritance */
 
 OO.initClass( ve.ce.MWAlienExtensionNode );
 
-OO.mixinClass( ve.ce.MWAlienExtensionNode, OO.ui.mixin.IconElement );
-
 /* Static members */
 
 ve.ce.MWAlienExtensionNode.static.primaryCommandName = 'alienExtension';
 
+ve.ce.MWAlienExtensionNode.static.iconWhenInvisible = 'alienextension';
+
 /* Methods */
-
-/**
- * Handle setup events
- */
-ve.ce.MWAlienExtensionNode.prototype.onAlienSetup = function () {
-	if ( !this.isVisible() ) {
-		this.setIcon( 'alienextension' );
-		this.$element.first().prepend( this.$icon );
-	} else {
-		this.setIcon( null );
-	}
-};
-
-/**
- * @inheritdoc ve.ce.MWExtensionNode
- */
-ve.ce.MWAlienExtensionNode.prototype.render = function ( generatedContents ) {
-	// Since render is triggered before onSetup, we need to make sure that the
-	// icon is detached only when it is defined and is not null
-	if ( this.$icon ) {
-		this.$icon.detach();
-	}
-	// Call parent mixin
-	ve.ce.GeneratedContentNode.prototype.render.call( this, generatedContents );
-
-	// Since render replaces this.$element with a new node, we need to make sure
-	// our iconElement is defined again to be this.$element
-	this.$element.addClass( 've-ce-mwAlienExtensionNode' );
-};
 
 /* Static methods */
 

@@ -1668,8 +1668,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWAlienExtensionContextItem.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWAlienExtensionNode.css"
+				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
