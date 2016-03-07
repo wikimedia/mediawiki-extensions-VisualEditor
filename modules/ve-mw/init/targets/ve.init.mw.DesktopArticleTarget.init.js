@@ -796,6 +796,9 @@
 						}
 					} );
 				} );
+
+				// Remember that the user wanted wikitext, at least this time
+				mw.libs.ve.setEditorPreference( 'wikitext' );
 			}
 
 			// Set up the tabs appropriately if the user has VE on
