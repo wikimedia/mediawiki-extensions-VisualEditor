@@ -279,7 +279,7 @@
 	"visualeditor-preference-core-info-link": "\/\/mediawiki.org\/wiki\/Special:MyLanguage\/VisualEditor\/Beta_Features\/General",
 	"visualeditor-preference-core-label": "Visual editing",
 	"visualeditor-preference-enable": "Enable the visual editor. It will be available in the following {{PLURAL:$2|namespace|namespaces}}: $1",
-	"visualeditor-preference-tabs": "Editing tabs",
+	"visualeditor-preference-tabs": "Editing mode",
 	"visualeditor-preference-tabs-multi-tab": "Show me both editor tabs",
 	"visualeditor-preference-tabs-prefer-ve": "Always give me the visual editor if possible",
 	"visualeditor-preference-tabs-prefer-wt": "Always give me the wikitext editor",
