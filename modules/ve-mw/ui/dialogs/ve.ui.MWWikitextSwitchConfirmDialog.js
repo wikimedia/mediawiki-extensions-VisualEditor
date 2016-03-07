@@ -49,11 +49,6 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
 		action: 'switch',
 		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch' ),
 		flags: [ 'progressive', 'primary' ]
-	},
-	{
-		action: 'discard',
-		label: OO.ui.deferMsg( 'visualeditor-mweditmodesource-warning-switch-discard' ),
-		flags: 'destructive'
 	}
 ];
 
@@ -65,15 +60,9 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.actions = [
 ve.ui.MWWikitextSwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'switch' ) {
 		return new OO.ui.Process( function () {
-			this.getActions().setAbilities( { cancel: false, discard: false } );
+			this.getActions().setAbilities( { cancel: false } );
 			this.getActions().get()[ 1 ].pushPending();
 			this.target.switchToWikitextEditor( false, true );
-		}, this );
-	} else if ( action === 'discard' ) {
-		return new OO.ui.Process( function () {
-			this.getActions().setAbilities( { cancel: false, switch: false } );
-			this.getActions().get()[ 2 ].pushPending();
-			this.target.switchToWikitextEditor( true, true );
 		}, this );
 	} else if ( action === 'cancel' ) {
 		return new OO.ui.Process( function () {
@@ -104,7 +93,7 @@ ve.ui.MWWikitextSwitchConfirmDialog.prototype.getTeardownProcess = function ( da
 	return ve.ui.MWWikitextSwitchConfirmDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			// EVIL HACK - we shouldn't be reaching into the manager for these promises
-			if ( data.action === 'switch' || data.action === 'discard' ) {
+			if ( data.action === 'switch' ) {
 				this.manager.closing.resolve( data );
 			} else {
 				this.manager.closing.reject( data );
