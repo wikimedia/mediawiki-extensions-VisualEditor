@@ -267,8 +267,15 @@
 
 	function getLastEditor() {
 		var editor = $.cookie( 'VEE' );
-		// TODO: Check validity?
-		if ( !mw.user.isAnon() || !editor ) {
+		// Set editor to user's preference or site's default if …
+		if (
+			// … user is logged in,
+			!mw.user.isAnon() ||
+			// … no cookie is set, or
+			!editor ||
+			// value is invalid.
+			!( editor === 'visualeditor' || editor === 'wikitext' )
+		) {
 			editor = mw.user.options.get( 'visualeditor-editor' );
 		}
 		return editor;
