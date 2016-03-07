@@ -1073,6 +1073,7 @@
 				"modules/ve-mw/ui/ve.ui.MWCommandRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWSequenceRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWExtensionWindow.js",
+				"modules/ve-mw/ui/ve.ui.MWWikitextTransferRegistry.js",
 				"modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWAceEditorWidget.js",
