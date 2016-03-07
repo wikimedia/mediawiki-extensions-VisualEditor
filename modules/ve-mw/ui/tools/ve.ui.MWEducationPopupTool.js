@@ -59,7 +59,11 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	this.shownEducationPopup = false;
 	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
 	this.$stillDot = $( '<div>' ).addClass( 've-ui-stillDot' );
-	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' ).on( 'click', function () {
+	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' );
+	this.$element
+		.addClass( 've-ui-educationPopup' )
+		.append( $shield, this.popup.$element, this.$stillDot, this.$pulsatingDot );
+	this.$element.children().not( this.popup.$element ).on( 'click', function () {
 		if ( !tool.shownEducationPopup ) {
 			if ( ve.init.target.openEducationPopupTool ) {
 				ve.init.target.openEducationPopupTool.popup.toggle( false );
@@ -78,9 +82,6 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			$shield.remove();
 		}
 	} );
-	this.$element
-		.addClass( 've-ui-educationPopup' )
-		.append( $shield, this.popup.$element, this.$stillDot, this.$pulsatingDot );
 
 	setTimeout( function () {
 		var radius = tool.$pulsatingDot.width() / 2;
