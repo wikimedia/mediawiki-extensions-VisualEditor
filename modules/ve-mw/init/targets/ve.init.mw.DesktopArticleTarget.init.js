@@ -563,11 +563,8 @@
 							}
 						} );
 				} );
-			} else if ( isViewPage || wikitext ) {
-				activatePageTarget( false );
 			} else {
-				setEditorPreference( 'visualeditor' );
-				location.href = veEditUri;
+				activatePageTarget( false );
 			}
 		},
 
