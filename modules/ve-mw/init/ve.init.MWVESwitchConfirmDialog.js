@@ -51,7 +51,7 @@ mw.libs.ve.SwitchConfirmDialog.static.actions = [
 		action: 'discard',
 		label: mw.msg( 'visualeditor-mweditmodesource-warning-switch-discard' ),
 		flags: 'destructive',
-		modes: [ 'restbase', 'simple' ]
+		modes: [ 'simple' ]
 	},
 	{
 		action: 'keep',
