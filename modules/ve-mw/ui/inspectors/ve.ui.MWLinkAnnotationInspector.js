@@ -94,7 +94,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.linkTypeIndex.getCard( 'internal' ).$element.append( this.internalAnnotationInput.$element );
 	this.linkTypeIndex.getCard( 'external' ).$element.append( this.externalAnnotationInput.$element );
 	this.form.$element.append( this.linkTypeIndex.$element );
-	this.onLinkTypeIndexSet();
 };
 
 /**
