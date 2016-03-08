@@ -10,7 +10,8 @@
 			"Kishajnalka",
 			"Macofe",
 			"Nyuszika7H",
-			"Tgr"
+			"Tgr",
+			"R-Joe"
 		]
 	},
 	"apihelp-visualeditor-description": "A Parsoid szolgáltatástól kapott oldalból HTML5 oldalt készít.",
@@ -264,7 +265,7 @@
 	"visualeditor-preference-core-description": "A vizuális szerkesztő engedélyezése. A vitalapokon és néhány egyéb névtérben nem elérhető.",
 	"visualeditor-preference-core-label": "Vizuális szerkesztés",
 	"visualeditor-preference-enable": "A vizuális szerkesztő engedélyezése. A következő {{PLURAL:$2|névtérben|névterekben}} lesz elérhető: $1",
-	"visualeditor-preference-tabs": "Alapértelmezett szerkesztőfelület",
+	"visualeditor-preference-tabs": "Szerkesztési mód",
 	"visualeditor-preference-tabs-multi-tab": "Mindkettőre legyen link",
 	"visualeditor-preference-tabs-prefer-ve": "Mindig a vizuálisat",
 	"visualeditor-preference-tabs-prefer-wt": "Mindig a wikikódot",
