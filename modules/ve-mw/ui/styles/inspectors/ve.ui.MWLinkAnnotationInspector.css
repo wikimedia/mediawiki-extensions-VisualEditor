@@ -7,9 +7,11 @@
 
 .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget {
 	position: relative;
+	min-height: 2.4em;
 }
 
 .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query {
+	position: static;
 	padding: 0;
 	height: auto;
 	border: 0;
@@ -20,7 +22,11 @@
 }
 
 .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-results {
-	position: relative;
+	position: static;
 	top: 0;
-	padding: 3em 0 0 0;
+	padding: 0;
+}
+
+.ve-ui-linkAnnotationWidget .mw-widget-titleWidget-menu:not( :empty ) {
+	margin-top: 0.75em;
 }
