@@ -1728,8 +1728,13 @@
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWGalleryNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryNode.js",
-				"modules/ve-mw/ui/inspectors/ve.ui.MWGalleryInspector.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWGalleryInspectorTool.js"
+				"modules/ve-mw/ui/dialogs/ve.ui.MWGalleryDialog.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWGalleryDialogTool.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWGalleryGroupWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWGalleryItemWidget.js"
+			],
+			"styles": [
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWGalleryDialog.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
@@ -1737,8 +1742,28 @@
 				"mediawiki.page.gallery.styles"
 			],
 			"messages": [
-				"visualeditor-mwgalleryinspector-placeholder",
-				"visualeditor-mwgalleryinspector-title"
+				"visualeditor-mwgallerydialog-caption-field-label",
+				"visualeditor-mwgallerydialog-caption-input-placeholder",
+				"visualeditor-mwgallerydialog-card-images",
+				"visualeditor-mwgallerydialog-card-options",
+				"visualeditor-mwgallerydialog-classes-field-label",
+				"visualeditor-mwgallerydialog-classes-input-placeholder",
+				"visualeditor-mwgallerydialog-empty-gallery-message",
+				"visualeditor-mwgallerydialog-heights-field-label",
+				"visualeditor-mwgallerydialog-mode-dropdown-label-nolines",
+				"visualeditor-mwgallerydialog-mode-dropdown-label-packed",
+				"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover",
+				"visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay",
+				"visualeditor-mwgallerydialog-mode-dropdown-label-traditional",
+				"visualeditor-mwgallerydialog-mode-field-label",
+				"visualeditor-mwgallerydialog-remove-button-label",
+				"visualeditor-mwgallerydialog-perrow-field-label",
+				"visualeditor-mwgallerydialog-search-button-label",
+				"visualeditor-mwgallerydialog-styles-field-label",
+				"visualeditor-mwgallerydialog-styles-input-placeholder",
+				"visualeditor-mwgallerydialog-show-filename-field-label",
+				"visualeditor-mwgallerydialog-title",
+				"visualeditor-mwgallerydialog-widths-field-label"
 			],
 			"targets": [
 				"desktop",
