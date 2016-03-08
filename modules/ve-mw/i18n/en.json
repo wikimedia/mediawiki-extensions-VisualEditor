@@ -52,7 +52,7 @@
 	"visualeditor-advancedsettings-tool": "Advanced settings",
 	"visualeditor-backbutton-tooltip": "Go back",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "You can switch to the wikitext editor at any time by clicking on the \"$1\" tab, keeping any changes you have made. If you encounter any issues, please report them below.",
+	"visualeditor-beta-warning": "You can switch to the wikitext editor at any time by clicking on the switch button. If you encounter any issues, please report them below.",
 	"visualeditor-browserwarning": "You are using a browser which is not officially supported by this editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Add local description source",
 	"visualeditor-ca-createsource": "Create source",
