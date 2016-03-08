@@ -53,13 +53,19 @@ ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( a
  * @return {OO.ui.TextInputWidget} Text input widget
  */
 ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
-	return new mw.widgets.TitleSearchWidget( ve.extendObject( {
+	var input = new mw.widgets.TitleSearchWidget( ve.extendObject( {
 		icon: 'search',
 		showRedlink: true,
 		showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
 		showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
 		cache: ve.init.platform.linkCache
 	}, config ) );
+
+	// Put query first in DOM
+	// TODO: Consider upstreaming this to SearchWidget
+	input.$element.prepend( input.$query );
+
+	return input;
 };
 
 /**
