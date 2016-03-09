@@ -44,6 +44,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
 	this.$otherFields = null;
+	this.suppressWelcomeDialog = false;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -273,6 +274,18 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 					target.switchToWikitextEditor( true, false );
 				}
 			} );
+
+		// Pretend the user saw the welcome dialog before suppressing it.
+		if ( mw.user.isAnon() ) {
+			try {
+				localStorage.setItem( 've-beta-welcome-dialog', 1 );
+			} catch ( e ) {
+				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+			}
+		} else {
+			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+		}
+		this.suppressWelcomeDialog = true;
 	}
 
 	data = response ? response.visualeditor : {};
@@ -638,7 +651,9 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	this.setupUnloadHandlers();
-	this.maybeShowWelcomeDialog();
+	if ( !this.suppressWelcomeDialog ) {
+		this.maybeShowWelcomeDialog();
+	}
 	this.maybeShowMetaDialog();
 
 	this.activatingDeferred.resolve();
@@ -1230,11 +1245,13 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 	var windowAction,
 		target = this;
 
-	this.welcomeDialogPromise
-		.always( function () {
-			// Pop out the notices when the welcome dialog is closed
-			target.actionsToolbar.tools.notices.getPopup().toggle( true );
-		} );
+	if ( this.welcomeDialogPromise ) {
+		this.welcomeDialogPromise
+			.always( function () {
+				// Pop out the notices when the welcome dialog is closed
+				target.actionsToolbar.tools.notices.getPopup().toggle( true );
+			} );
+	}
 
 	if ( this.getSurface().getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
