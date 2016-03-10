@@ -5,9 +5,9 @@
 		"checkAnnotations": {
 			"preset": "jsduck5",
 			"extra": {
-				"this": true,
-				"source": true,
-				"see": true
+				"this": "some",
+				"source": "some",
+				"see": "some"
 			}
 		},
 		"checkTypes": "strictNativeCase",
