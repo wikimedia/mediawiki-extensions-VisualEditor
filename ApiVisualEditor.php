@@ -381,6 +381,10 @@ class ApiVisualEditor extends ApiBase {
 					$notices[] = $this->msg( 'editingold' )->parseAsBlock();
 				}
 
+				if ( wfReadOnly() ) {
+					$notices[] = $this->msg( 'readonlywarning', wfReadOnlyReason() );
+				}
+
 				// New page notices
 				if ( !$title->exists() ) {
 					$notices[] = $this->msg(
@@ -698,6 +702,6 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	public function isWriteMode() {
-		return true;
+		return false;
 	}
 }
