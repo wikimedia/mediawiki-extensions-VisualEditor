@@ -31,6 +31,7 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
 		saveErrorPageDeleted: [ 'trackSaveError', 'pagedeleted' ],
 		saveErrorTitleBlacklist: [ 'trackSaveError', 'titleblacklist' ],
 		saveErrorCaptcha: [ 'trackSaveError', 'captcha' ],
+		saveErrorReadOnly: [ 'trackSaveError', 'unknown' ],
 		saveErrorUnknown: [ 'trackSaveError', 'unknown' ],
 		editConflict: [ 'trackSaveError', 'editconflict' ],
 		surfaceReady: 'onSurfaceReady',

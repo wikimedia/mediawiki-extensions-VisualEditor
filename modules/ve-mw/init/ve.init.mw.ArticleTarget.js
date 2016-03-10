@@ -136,6 +136,11 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
  */
 
 /**
+ * @event saveErrorReadOnly
+ * Fired when the user tries to save page but the database is locked
+ */
+
+/**
  * @event loadError
  */
 
@@ -467,6 +472,9 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 	} else if ( data.error && data.error.code === 'titleblacklist-forbidden' ) {
 		this.saveErrorTitleBlacklist();
 		return;
+	} else if ( data.error && data.error.code === 'readonly' ) {
+		this.saveErrorReadOnly( data.error.readonlyreason );
+		return;
 	}
 
 	// Handle captcha
@@ -739,6 +747,18 @@ ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 	this.pageDeletedWarning = true;
 	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true, true );
 	this.emit( 'saveErrorPageDeleted' );
+};
+
+/**
+ * Handle read only error
+ *
+ * @method
+ * @param {string} reason The reason given by the system administrator.
+ * @fires saveErrorReadOnly
+ */
+ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function ( reason ) {
+	this.showSaveError( $( $.parseHTML( mw.message( 'readonlywarning', reason ).parse() ) ), true, true );
+	this.emit( 'saveErrorReadOnly' );
 };
 
 /**
