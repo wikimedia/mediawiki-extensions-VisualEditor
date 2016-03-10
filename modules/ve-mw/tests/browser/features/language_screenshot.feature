@@ -18,7 +18,6 @@ Feature: Language Screenshot
     When I click the hamburger menu
     Then I should see pull-down menu containing Page Settings
 
-  @language_screenshot
   Scenario: VisualEditor_Insert_Menu
     Given I am editing the language screenshots page
     When I click on the Insert menu
