@@ -150,8 +150,8 @@ ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( type ) {
 		type: typeMap[ type ] || 'responseUnknown',
 		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 )
 	};
-	if ( type === 'unknown' && failureArguments[ 1 ] ) {
-		data.message = failureArguments[ 1 ];
+	if ( type === 'unknown' && failureArguments[ 0 ] ) {
+		data.message = failureArguments[ 0 ];
 	}
 	ve.track( 'mwedit.saveFailure', data );
 };
