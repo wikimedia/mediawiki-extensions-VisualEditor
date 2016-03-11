@@ -271,6 +271,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 
 				if ( data && data.action === 'prefer-wt' ) {
 					target.switchToWikitextEditor( true, false );
+				} else if ( data && data.action === 'multi-tab' ) {
+					location.reload();
 				}
 			} );
 	}

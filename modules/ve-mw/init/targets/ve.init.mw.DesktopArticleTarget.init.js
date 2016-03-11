@@ -800,6 +800,8 @@
 
 									if ( data && data.action === 'prefer-ve' ) {
 										location.href = veEditUri;
+									} else if ( data && data.action === 'multi-tab' ) {
+										location.reload();
 									}
 								} );
 						}
