@@ -665,17 +665,14 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, erro
  * @fires saveErrorUnknown
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data ) {
-	var errorMsg = ( editApi && editApi.info ) ||
-		( data && data.error && data.error.info ) ||
-		( editApi && editApi.code ) ||
-		( data && data.error && data.error.code ) ||
-		'Unknown error';
+	var errorMsg = ( editApi && editApi.info ) || ( data && data.error && data.error.info ),
+		errorCode = ( editApi && editApi.code ) || ( data && data.error && data.error.code );
 
 	this.showSaveError(
-		$( document.createTextNode( errorMsg ) ),
+		$( document.createTextNode( errorMsg || errorCode || 'Unknown error' ) ),
 		false // prevents reapply
 	);
-	this.emit( 'saveErrorUnknown', errorMsg );
+	this.emit( 'saveErrorUnknown', errorCode || errorMsg || 'Unknown error' );
 };
 
 /**
