@@ -25,7 +25,7 @@ OO.inheritClass( ve.ui.MWCommandHelpDialog, ve.ui.CommandHelpDialog );
 
 /* Static properties */
 
-ve.ui.MWCommandHelpDialog.static.commandGroups = ve.extendObject( ve.ui.CommandHelpDialog.static.commandGroups, {
+ve.ui.MWCommandHelpDialog.static.commandGroups = ve.extendObject( {}, ve.ui.MWCommandHelpDialog.static.commandGroups, {
 	insert: {
 		title: OO.ui.deferMsg( 'visualeditor-shortcuts-insert' ),
 		promote: [],
