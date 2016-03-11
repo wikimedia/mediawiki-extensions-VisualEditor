@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"عثمان منصور انصاري"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "د ترسره کولو کړنه.",
@@ -134,13 +135,13 @@
 	"visualeditor-dialogbutton-media-tooltip": "رسنۍ",
 	"visualeditor-dialogbutton-meta-tooltip": "مخ امستنې",
 	"visualeditor-dialogbutton-template-tooltip": "کينډۍ",
-	"visualeditor-donebutton-tooltip": "سمونونه وشول",
+	"visualeditor-donebutton-tooltip": "اېډېټ وشوو",
 	"visualeditor-editingtabdialog-ok": "ښه",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|يادښت|يادښتونه}}",
 	"visualeditor-editnotices-tooltip": "يادښتونه سمول",
 	"visualeditor-editsummary": "ووايۍ کوم بدلونونه مو راوستل",
 	"visualeditor-educationpopup-dismiss": "ښه، وپوهېدم",
-	"visualeditor-feedback-defaultmessage": "يو ار اېل: $1",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "مخ سرليک",
 	"visualeditor-formatdropdown-format-mw-heading2": "سرليک",
 	"visualeditor-formatdropdown-format-mw-heading3": "څېرمه سرليک 1",
@@ -167,7 +168,7 @@
 	"visualeditor-mweditmodesource-warning-cancel": "ناگارل",
 	"visualeditor-mweditmodesource-warning-switch": "بدلونونه ساتل",
 	"visualeditor-mweditmodesource-warning-switch-discard": "بدلونونه غورځول",
-	"visualeditor-mweditmodeve-tool": "ليدنيز سمونگر ته ور اړول",
+	"visualeditor-mweditmodeve-tool": "ویژول اېډېټر ته ور اړول",
 	"visualeditor-mwgalleryinspector-title": "انځورتون",
 	"visualeditor-mwsignature-tool": "ستاسې لاسليک",
 	"visualeditor-pagemenu-tooltip": "د مخ خوښنې",
