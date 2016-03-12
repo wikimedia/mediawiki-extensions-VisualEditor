@@ -1382,10 +1382,6 @@
 				"ext.visualEditor.mwcore"
 			],
 			"messages": [
-				"visualeditor-annotationbutton-linknode-tooltip",
-				"visualeditor-annotationbutton-magiclinknode-tooltip-isbn",
-				"visualeditor-annotationbutton-magiclinknode-tooltip-pmid",
-				"visualeditor-annotationbutton-magiclinknode-tooltip-rfc",
 				"visualeditor-linkinspector-button-link-external",
 				"visualeditor-linkinspector-button-link-internal",
 				"visualeditor-linkinspector-convert-link-isbn",
