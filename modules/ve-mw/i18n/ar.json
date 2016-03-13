@@ -226,6 +226,7 @@
 	"visualeditor-linkinspector-button-link-external": "وصلة خارجية",
 	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحة",
 	"visualeditor-linkinspector-convert-link-isbn": "تحويل إلى الرابط ISBN",
+	"visualeditor-linkinspector-convert-link-pmid": "حول إلى وصلة PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "تحويل إلى الرابط RFC",
 	"visualeditor-linkinspector-educationpopup-text": "اربط الكلمات المهمة بمقالات اخرى في ويكيبيديا أو حتى بموقع آخر، لتمكين القارئ من فهم مرادها.",
 	"visualeditor-linkinspector-educationpopup-title": "وصلات",

@@ -18,7 +18,8 @@
 			"He7d3r",
 			"Amire80",
 			"Imperadeiro90",
-			"Macofe"
+			"Macofe",
+			"Diniscoelho"
 		]
 	},
 	"apihelp-visualeditor-description": "Retorna HTML5 para uma página a partir do serviço Parsoid.",
@@ -37,7 +38,7 @@
 	"visualeditor-advancedsettings-tool": "Configurações avançadas",
 	"visualeditor-backbutton-tooltip": "Regressar",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Pode regressar ao modo de edição do código a qualquer momento, sem perder as suas alterações, ao clicar no botão de troca. Se encontrar algum erro, por favor, informe abaixo.",
+	"visualeditor-beta-warning": "Pode regressar ao modo de edição do código a qualquer momento, sem perder as suas alterações, ao clicar no botão de troca. Se encontrar algum erro, por favor, reporte-o abaixo.",
 	"visualeditor-browserwarning": "Está a utilizar um navegador que não é oficialmente suportado por este editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Adicionar fonte da descrição do local",
 	"visualeditor-ca-createsource": "Criar código-fonte",
