@@ -17,73 +17,66 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 	/* Methods */
 
-	public function __construct() {
-	}
-
 	public function getScript( ResourceLoaderContext $context ) {
-		// Messages
-		$msgInfo = $this->getMessageInfo();
+		$msgInfo = $this->getMessageInfo( $context );
 		$parsedMessages = [];
-		$messages = [];
-		foreach ( $msgInfo['args'] as $msgKey => $msgArgs ) {
-			$parsedMessages[ $msgKey ] = call_user_func_array( 'wfMessage', $msgArgs )
-				->inLanguage( $context->getLanguage() )
-				->parse();
+		$textMessages = [];
+		foreach ( $msgInfo['parse'] as $msgKey => $msgObj ) {
+			$parsedMessages[ $msgKey ] = $msgObj->parse();
 		}
-		foreach ( $msgInfo['vals'] as $msgKey => $msgVal ) {
-			$messages[ $msgKey ] = $msgVal;
+		foreach ( $msgInfo['text'] as $msgKey => $msgObj ) {
+			$textMessages[ $msgKey ] = $msgObj->text();
 		}
 
-		return
-			've.init.platform.addParsedMessages(' . FormatJson::encode(
+		return 've.init.platform.addParsedMessages(' . FormatJson::encode(
 				$parsedMessages,
 				ResourceLoader::inDebugMode()
 			) . ');'.
 			've.init.platform.addMessages(' . FormatJson::encode(
-				$messages,
+				$textMessages,
 				ResourceLoader::inDebugMode()
 			) . ');';
 	}
 
-	protected function getMessageInfo() {
-		// Messages that just require simple parsing
-		$msgArgs = [
-			'minoredit' => [ 'minoredit' ],
-			'missingsummary' => [ 'missingsummary' ],
-			'summary' => [ 'summary' ],
-			'watchthis' => [ 'watchthis' ],
-			'visualeditor-browserwarning' => [ 'visualeditor-browserwarning' ],
-			'visualeditor-wikitext-warning' => [ 'visualeditor-wikitext-warning' ],
-		];
-
-		// Override message value
-		$msgVals = [
-			'visualeditor-feedback-link' => wfMessage( 'visualeditor-feedback-link' )
-				->inContentLanguage()
-				->text(),
+	protected function getMessageInfo( ResourceLoaderContext $context ) {
+		// Messages to be exported as parsed html
+		$parseMsgs = [
+			'minoredit' => $context->msg( 'minoredit' ),
+			'missingsummary' => $context->msg( 'missingsummary' ),
+			'summary' => $context->msg( 'summary' ),
+			'watchthis' => $context->msg( 'watchthis' ),
+			'visualeditor-browserwarning' => $context->msg( 'visualeditor-browserwarning' ),
+			'visualeditor-wikitext-warning' => $context->msg( 'visualeditor-wikitext-warning' ),
 		];
 
 		// Copyright warning (based on EditPage::getCopyrightWarning)
 		$rightsText = $this->config->get( 'RightsText' );
 		if ( $rightsText ) {
-			$copywarnMsg = [ 'copyrightwarning',
-				'[[' . wfMessage( 'copyrightpage' )->inContentLanguage()->text() . ']]',
+			$copywarnMsgArgs = [ 'copyrightwarning',
+				'[[' . $context->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]',
 				$rightsText ];
 		} else {
-			$copywarnMsg = [ 'copyrightwarning2',
-				'[[' . wfMessage( 'copyrightpage' )->inContentLanguage()->text() . ']]' ];
+			$copywarnMsgArgs = [ 'copyrightwarning2',
+				'[[' . $context->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]' ];
 		}
-		// EditPage supports customisation based on title, we can't support that here
-		// since these messages are cached on a site-level. $wgTitle is likely set to null.
+		// EditPage supports customisation based on title, we can't support that
 		$title = Title::newFromText( 'Dwimmerlaik' );
-		Hooks::run( 'EditPageCopyrightWarning', [ $title, &$copywarnMsg ] );
+		Hooks::run( 'EditPageCopyrightWarning', [ $title, &$copywarnMsgArgs ] );
+		// Normalise to 'copyrightwarning' so we have a consistent key in the front-end
+		$parseMsgs[ 'copyrightwarning' ] = call_user_func_array(
+			[ $context, 'msg' ],
+			$copywarnMsgArgs
+		);
 
-		// Normalise to 'copyrightwarning' so we have a consistent key in the front-end.
-		$msgArgs[ 'copyrightwarning' ] = $copywarnMsg;
+		// Messages to be exported as text
+		$textMsgs = [
+			'visualeditor-feedback-link' => $context->msg( 'visualeditor-feedback-link' )
+				->inContentLanguage(),
+		];
 
 		return [
-			'args' => $msgArgs,
-			'vals' => $msgVals,
+			'parse' => $parseMsgs,
+			'text' => $textMsgs,
 		];
 	}
 
