@@ -4,7 +4,7 @@
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global ace, require */
+/* global ace */
 
 /**
  * Text input widget which use an Ace editor instance when available
@@ -319,6 +319,8 @@ ve.ui.MWAceEditorWidget.prototype.togglePrintMargin = function ( visible ) {
 ve.ui.MWAceEditorWidget.prototype.setLanguage = function ( lang ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
+		// TODO: Just use ace.require once T127643 is resolved
+		var require = ace.require || require;
 		widget.editor.getSession().setMode( 'ace/mode/' + ( require( 'ace/mode/' + lang ) ? lang : 'text' ) );
 	} );
 	return this;
