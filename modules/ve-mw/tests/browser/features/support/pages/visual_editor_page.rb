@@ -201,7 +201,7 @@ class VisualEditorPage
   div(:media_advanced_settings, class: 'oo-ui-outlineOptionWidget-level-0', index: 1)
 
   def visual_editor_element(script)
-    Timeout.timeout(5) do
+    Timeout.timeout(10) do
       loop do
         begin
           browser.execute_script script
