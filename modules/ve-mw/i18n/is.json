@@ -3,7 +3,8 @@
 		"authors": [
 			"Maxí",
 			"Snævar",
-			"Sveinki"
+			"Sveinki",
+			"Sveinn í Felli"
 		]
 	},
 	"apihelp-visualeditor-description": "Skilar HTML5 fyrir síðu frá Parsoid þjónustunni.",
@@ -14,7 +15,7 @@
 	"visualeditor-advancedsettings-tool": "Ítarlegar stillingar",
 	"visualeditor-backbutton-tooltip": "Til baka",
 	"visualeditor-beta-label": "prufuútgáfa",
-	"visualeditor-beta-warning": "Þú getur skipt yfir í wikitexta ritilinn hvenær sem er með því að smella á \"$1\" flipann. Þú munt halda öllum breytingunum sem þú hefur gert. Ef þú lendir í einhverjum vandræðum, vinsamlegast tilkynntu þau fyrir neðan.",
+	"visualeditor-beta-warning": "Þú getur skipt yfir í wikitexta-ritilinn hvenær sem er með því að smella á skiptihnappinn. Ef þú lendir í einhverjum vandræðum, vinsamlegast tilkynntu þau hér fyrir neðan.",
 	"visualeditor-browserwarning": "Þú ert að nota vafra sem þessi ritill styður ekki opinberlega.",
 	"visualeditor-ca-createlocaldescriptionsource": "Bæta við staðbundinni lýsingu með wikitexta",
 	"visualeditor-ca-createsource": "Skapa frumkóða",
@@ -143,8 +144,8 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Sýna valkosti",
 	"visualeditor-dialog-transclusion-no-template-description": "Sniðið „$1“ hefur ekki ennþá lýsingu, en það gætu verið einhverjar upplýsingar á [[$1|síðu sniðsins]].",
 	"visualeditor-dialog-transclusion-options": "Valkostir",
-	"visualeditor-dialog-transclusion-param-default": "Sjálfgefið gildi: $1",
-	"visualeditor-dialog-transclusion-param-example": "Dæmigert gildi: $1",
+	"visualeditor-dialog-transclusion-param-default": "Sjálfgefið: $1",
+	"visualeditor-dialog-transclusion-param-example": "t.d. $1",
 	"visualeditor-dialog-transclusion-param-info": "Lýsing á reitnum",
 	"visualeditor-dialog-transclusion-param-info-missing": "Lýsinga á reitnum vantar",
 	"visualeditor-dialog-transclusion-placeholder": "Bæta við sniði",

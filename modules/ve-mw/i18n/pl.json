@@ -48,7 +48,7 @@
 	"visualeditor-advancedsettings-tool": "Zaawansowane",
 	"visualeditor-backbutton-tooltip": "Wróć",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "W każdej chwili możesz przejść do edytora wikikodu, klikając w zakładkę „$1”, nie tracąc dokonanych przez siebie zmian. Jeśli napotkasz problemy, możesz zgłosić je poniżej.",
+	"visualeditor-beta-warning": "W każdej chwili możesz przejść do edytora wikikodu, klikając w odpowiedni przycisk. Jeśli napotkasz problemy, możesz zgłosić je poniżej.",
 	"visualeditor-browserwarning": "Używasz przeglądarki, która nie jest oficjalnie wspierana przez ten edytor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Utwórz kod źródłowy lokalnego opisu",
 	"visualeditor-ca-createsource": "Utwórz kod źródłowy",

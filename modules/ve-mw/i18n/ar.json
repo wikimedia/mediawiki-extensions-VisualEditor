@@ -207,7 +207,7 @@
 	"visualeditor-differror": "خطأ في تحميل البيانات من الخادوم: $1.",
 	"visualeditor-donebutton-tooltip": "انتهيت من التعديل",
 	"visualeditor-editconflict": "تعذر حفظ التغييرات الخاصة لوجود تضارب تحرير. أتود{{GENDER:||ين}} تصويب التضارب يدويا؟",
-	"visualeditor-editingtabdialog-body": "تتذكر {{SITENAME}} الآن أي محرر تفضل.يمكنك التبديل تحرير وسائط كما كنت عدلتها وتغيير تفضيلاتك في وقت لاحق.",
+	"visualeditor-editingtabdialog-body": "تتذكر {{SITENAME}} الآن أي محرر تفضل. يمكنك التبديل بين وضعيتي التحرير أثناء تعديلك، ويمكنك تغيير تفضيلك لاحقًا.",
 	"visualeditor-editingtabdialog-ok": "استعمل المحرر الذي عدلت به آخر مرة",
 	"visualeditor-editingtabdialog-title": "تبويبة التعديل",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|لا ملاحظات|ملاحظة واحدة|ملاحظتان|$1 ملاحظات|$1 ملاحظة}}",
