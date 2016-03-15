@@ -44,7 +44,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
 	this.$otherFields = null;
-	this.suppressWelcomeDialog = false;
+	this.suppressNormalStartupDialogs = false;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -285,7 +285,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 		} else {
 			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
 		}
-		this.suppressWelcomeDialog = true;
+		this.suppressNormalStartupDialogs = true;
 	}
 
 	data = response ? response.visualeditor : {};
@@ -651,10 +651,10 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	this.setupUnloadHandlers();
-	if ( !this.suppressWelcomeDialog ) {
+	if ( !this.suppressNormalStartupDialogs ) {
 		this.maybeShowWelcomeDialog();
+		this.maybeShowMetaDialog();
 	}
-	this.maybeShowMetaDialog();
 
 	this.activatingDeferred.resolve();
 	this.events.trackActivationComplete();
