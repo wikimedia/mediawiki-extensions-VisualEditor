@@ -125,7 +125,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	} );
 	this.keyboardShortcutsButton = new OO.ui.ButtonWidget( {
 		framed: false,
-		icon: 'help',
+		icon: 'keyboard',
 		label: ve.msg( 'visualeditor-dialog-command-help-title' )
 	} );
 	this.feedbackButton = new OO.ui.ButtonWidget( {
