@@ -30,6 +30,7 @@ ve.test.utils.createSurfaceFromDocument = function ( doc ) {
 ve.dm.modelRegistry.unregister( ve.dm.MWHeadingNode );
 ve.dm.modelRegistry.unregister( ve.dm.MWPreformattedNode );
 ve.dm.modelRegistry.unregister( ve.dm.MWTableNode );
+ve.dm.modelRegistry.unregister( ve.dm.MWExternalLinkAnnotation );
 // Re-register unregistered nodes.
 ve.dm.modelRegistry.register( ve.dm.InlineImageNode );
 ve.dm.modelRegistry.register( ve.dm.BlockImageNode );
@@ -38,7 +39,8 @@ ve.test.utils.mwEnvironment = ( function () {
 	var overrides = [
 			ve.dm.MWHeadingNode,
 			ve.dm.MWPreformattedNode,
-			ve.dm.MWTableNode
+			ve.dm.MWTableNode,
+			ve.dm.MWExternalLinkAnnotation
 		],
 		overridden = [
 			ve.dm.InlineImageNode,

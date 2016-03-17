@@ -33,18 +33,26 @@ OO.inheritClass( ve.dm.MWExternalLinkAnnotation, ve.dm.LinkAnnotation );
 
 ve.dm.MWExternalLinkAnnotation.static.name = 'link/mwExternal';
 
-ve.dm.MWExternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:ExtLink' ];
+ve.dm.MWExternalLinkAnnotation.static.matchFunction = function ( domElement ) {
+	var rel = domElement.getAttribute( 'rel' );
+	// Match explicity mw:ExtLink, or plain RDFa-less links (e.g. from external paste)
+	return !rel || rel === 'mw:ExtLink';
+};
 
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements ) {
-	var parentResult = ve.dm.LinkAnnotation.static.toDataElement.apply( this, arguments );
-	parentResult.attributes.rel = domElements[ 0 ].getAttribute( 'rel' );
-	return parentResult;
+	// Parent method
+	var dataElement = ve.dm.MWExternalLinkAnnotation.super.static.toDataElement.apply( this, arguments );
+
+	dataElement.attributes.rel = domElements[ 0 ].getAttribute( 'rel' );
+	return dataElement;
 };
 
 ve.dm.MWExternalLinkAnnotation.static.toDomElements = function ( dataElement ) {
-	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.apply( this, arguments );
-	parentResult[ 0 ].setAttribute( 'rel', dataElement.attributes.rel || 'mw:ExtLink' );
-	return parentResult;
+	// Parent method
+	var domElements = ve.dm.MWExternalLinkAnnotation.super.static.toDomElements.apply( this, arguments );
+
+	domElements[ 0 ].setAttribute( 'rel', dataElement.attributes.rel || 'mw:ExtLink' );
+	return domElements;
 };
 
 /* Methods */
