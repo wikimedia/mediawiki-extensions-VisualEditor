@@ -2,9 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Alison",
-			"Kscanne"
+			"Kscanne",
+			"Tem"
 		]
 	},
+	"visualeditor-ca-editsource": "Cuir vicithéacs in eagar",
+	"visualeditor-ca-editsource-section": "cuir vicithéacs in eagar",
 	"visualeditor-ca-ve-create": "EagarthóirAmhairc",
 	"visualeditor-ca-ve-edit": "EagarthóirAmhairc",
 	"visualeditor-ca-ve-edit-section": "EagarthóirAmhairc",
@@ -13,8 +16,6 @@
 	"visualeditor-dialog-meta-categories-options": "Roghanna",
 	"visualeditor-dialog-meta-categories-section": "Catagóirí",
 	"visualeditor-dialog-meta-languages-label": "Teangacha",
-	"visualeditor-dialog-reference-options-section": "Roghanna",
-	"visualeditor-dialog-referenceslist-title": "Liosta tagairtí",
 	"visualeditor-dialog-transclusion-options": "Roghanna",
 	"visualeditor-dialogbutton-media-tooltip": "Meáin",
 	"visualeditor-preference-core-label": "EagarthóirAmhairc",
