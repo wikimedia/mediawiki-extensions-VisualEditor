@@ -21,3 +21,20 @@
 .ve-active .ve-ui-toolbar-floating .oo-ui-toolbar-bar {
 	transform: translateY( 0 );
 }
+
+/*!
+ * ve-redirect-header is added just outside of the surface, which has its own
+ * hiding style during activation.
+ */
+.ve-activating .ve-redirect-header {
+	height: 0;
+	overflow: hidden;
+}
+
+.ve-init-mw-desktopArticleTarget .ve-redirect-header {
+	cursor: pointer;
+}
+
+.ve-init-mw-desktopArticleTarget .redirectMsg a:hover {
+	text-decoration: none;
+}

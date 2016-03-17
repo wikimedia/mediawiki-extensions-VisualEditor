@@ -645,6 +645,11 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		} );
 	} );
 
+	this.getSurface().getModel().getMetaList().connect( this, {
+		insert: 'onMetaItemInserted',
+		remove: 'onMetaItemRemoved'
+	} );
+
 	// Update UI
 	this.changeDocumentTitle();
 	this.restoreScrollPosition();
@@ -662,6 +667,65 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	this.events.trackActivationComplete();
 
 	mw.hook( 've.activationComplete' ).fire();
+};
+
+/**
+ * Add the redirect header when a redirect is inserted into the page.
+ *
+ * @param {ve.dm.MetaItem} metaItem Item that was inserted
+ */
+ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem ) {
+	var title, target, $link;
+	if ( metaItem.getType() === 'mwRedirect' ) {
+		target = this;
+		title = metaItem.getAttribute( 'title' );
+		$link = $( '<a>' )
+			.attr( 'title', mw.msg( 'visualeditor-redirect-description', title ) )
+			.text( title );
+		ve.init.platform.linkCache.styleElement( title, $link );
+
+		// Add redirect target header
+		if ( !$( '#redirectsub' ).length ) {
+			$( '#contentSub' ).append(
+				$( '<span>' )
+					.text( mw.msg( 'redirectpagesub' ) )
+					.attr( 'id', 'redirectsub' ),
+				$( '<br>' )
+			);
+		}
+		this.$element.children( '.redirectMsg' ).remove();
+		this.$element.find( '.ve-init-mw-target-surface' ).before( $( '<div>' )
+			// Bit of a hack: Make sure any redirect note is styled
+			.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
+
+			.addClass( 've-redirect-header' )
+			.append(
+				$( '<p>' ).text( mw.msg( 'redirectto' ) ),
+				$( '<ul>' )
+					.addClass( 'redirectText' )
+					.append( $( '<li>' ).append( $link ) )
+			)
+			.click( function ( e ) {
+				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+				windowAction.open( 'meta', { page: 'settings' } );
+				e.preventDefault();
+			} )
+		);
+	}
+};
+
+/**
+ * Remove the redirect header when a redirect is removed from the page.
+ *
+ * @param {ve.dm.MetaItem} metaItem Item that was removed
+ * @param {number} offset Linear model offset that the item was at
+ * @param {number} index Index within that offset the item was at
+ */
+ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaItem ) {
+	if ( metaItem.getType() === 'mwRedirect' ) {
+		this.$element.children( '.redirectMsg' ).remove();
+		$( '#contentSub #redirectsub, #contentSub #redirectsub + br' ).remove();
+	}
 };
 
 /**
@@ -1076,6 +1140,9 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	}
 	$( '#ca-view' ).addClass( 'selected' );
 
+	// Remove any VE-added redirectMsg
+	$( '.ve-redirect-header' ).remove();
+
 	mw.hook( 've.deactivate' ).fire();
 	this.emit( 'deactivate' );
 
@@ -1180,12 +1247,20 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		$editableContent = $( '#mw-content-text' );
 	}
 
+	// Remove any VE-added redirectMsg
+	$( '.redirectMsg' ).remove();
+
 	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
 		$( '#content #firstHeading' ).html( displayTitle );
 	}
 	$( '#catlinks' ).replaceWith( categoriesHtml );
 	$( '#contentSub' ).html( contentSub );
+
+	// Bit of a hack: Make sure any redirect note is styled
+	$( '.redirectMsg' )
+		.addClass( 'mw-content-' + $( 'html' ).attr( 'dir' ) )
+		.addClass( 've-redirect-header' );
 };
 
 /**
@@ -1244,7 +1319,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
  * Show the meta dialog as needed on load.
  */
 ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
-	var windowAction,
+	var windowAction, redirectMetaItems,
 		target = this;
 
 	if ( this.welcomeDialogPromise ) {
@@ -1255,7 +1330,10 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 			} );
 	}
 
-	if ( this.getSurface().getModel().metaList.getItemsInGroup( 'mwRedirect' ).length ) {
+	redirectMetaItems = this.getSurface().getModel().getMetaList().getItemsInGroup( 'mwRedirect' );
+	if ( redirectMetaItems.length ) {
+		this.onMetaItemInserted( redirectMetaItems[ 0 ] );
+
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
 		windowAction.open( 'meta', { page: 'settings' } );

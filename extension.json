@@ -1442,9 +1442,12 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
-				"ext.visualEditor.mwlink"
+				"ext.visualEditor.mwlink",
+				"mediawiki.action.view.redirectPage"
 			],
 			"messages": [
+				"redirectto",
+
 				"visualeditor-advancedsettings-tool",
 				"visualeditor-categories-tool",
 				"visualeditor-dialog-meta-advancedsettings-label",
@@ -1508,6 +1511,7 @@
 				"visualeditor-dialogbutton-meta-tooltip",
 				"visualeditor-languages-tool",
 				"visualeditor-meta-tool",
+				"visualeditor-redirect-description",
 				"visualeditor-settings-tool"
 			],
 			"targets": [
