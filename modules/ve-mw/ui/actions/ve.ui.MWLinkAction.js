@@ -33,6 +33,39 @@ OO.inheritClass( ve.ui.MWLinkAction, ve.ui.LinkAction );
  */
 ve.ui.MWLinkAction.static.methods = ve.ui.MWLinkAction.super.static.methods.concat( [ 'open', 'autolinkMagicLink' ] );
 
+/* Static methods */
+
+/**
+ * Get a link annotation from specified link text
+ *
+ * This is a static version of the method that can be used in the converter.
+ *
+ * @static
+ * @param {string} linktext Link text
+ * @param {HTMLDocument} doc Document
+ * @return {ve.dm.MWExternalLinkAnnotation|ve.dm.MWInternalLinkAnnotation} The annotation to use
+ */
+ve.ui.MWLinkAction.static.getLinkAnnotation = function ( linktext, doc ) {
+	var title, targetData,
+		href = linktext;
+
+	// Is this a "magic link"?
+	if ( ve.dm.MWMagicLinkNode.static.validateContent( linktext ) ) {
+		return ve.dm.MWMagicLinkNode.static.annotationFromContent( linktext );
+	}
+	// Is this an internal link?
+	targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, doc );
+	if ( targetData.isInternal ) {
+		title = mw.Title.newFromText( targetData.title );
+		return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
+	}
+	// It's an external link.
+	return new ve.dm.MWExternalLinkAnnotation( {
+		type: 'link/mwExternal',
+		attributes: { href: href }
+	} );
+};
+
 /* Methods */
 
 /**
@@ -59,30 +92,10 @@ ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
 /**
  * @method
  * @inheritdoc
- * @return {ve.dm.MWExternalLinkAnnotation} The annotation to use.
+ * @return {ve.dm.MWExternalLinkAnnotation|ve.dm.MWInternalLinkAnnotation} The annotation to use
  */
 ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
-	var title, targetData,
-		href = linktext;
-
-	// Is this a "magic link"?
-	if ( ve.dm.MWMagicLinkNode.static.validateContent( linktext ) ) {
-		return ve.dm.MWMagicLinkNode.static.annotationFromContent( linktext );
-	}
-	// Is this an internal link?
-	targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
-		href,
-		this.surface.getModel().getDocument().getHtmlDocument()
-	);
-	if ( targetData.isInternal ) {
-		title = mw.Title.newFromText( targetData.title );
-		return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
-	}
-	// It's an external link.
-	return new ve.dm.MWExternalLinkAnnotation( {
-		type: 'link/mwExternal',
-		attributes: { href: href }
-	} );
+	return this.constructor.static.getLinkAnnotation( linktext, this.surface.getModel().getDocument().getHtmlDocument() );
 };
 
 /**

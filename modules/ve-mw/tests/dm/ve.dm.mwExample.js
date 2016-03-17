@@ -1516,8 +1516,8 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: '<h1></h1>'
 	},
-	'Plain links (e.g. on paste) are converted to link/mwExternal': {
-		body: 'Foo<a href="Bar">bar</a>',
+	'Plain external links (e.g. on paste) are converted to link/mwExternal': {
+		body: '<a href="http://www.mediawiki.org/">ab</a>',
 		data: [
 			{
 				type: 'paragraph',
@@ -1525,34 +1525,21 @@ ve.dm.mwExample.domToDataCases = {
 					generated: 'wrapper'
 				}
 			},
-			'F', 'o', 'o',
-			[
-				'b',
-				[ {
-					type: 'link/mwExternal',
-					attributes: {
-						href: 'Bar',
-						rel: null
-					}
-				} ]
-			],
 			[
 				'a',
 				[ {
 					type: 'link/mwExternal',
 					attributes: {
-						href: 'Bar',
-						rel: null
+						href: 'http://www.mediawiki.org/'
 					}
 				} ]
 			],
 			[
-				'r',
+				'b',
 				[ {
 					type: 'link/mwExternal',
 					attributes: {
-						href: 'Bar',
-						rel: null
+						href: 'http://www.mediawiki.org/'
 					}
 				} ]
 			],
@@ -1566,6 +1553,52 @@ ve.dm.mwExample.domToDataCases = {
 				type: '/internalList'
 			}
 		],
-		normalizedBody: 'Foo<a href="Bar" rel="mw:ExtLink">bar</a>'
+		normalizedBody: '<a href="http://www.mediawiki.org/" rel="mw:ExtLink">ab</a>'
+	},
+	'Plain internal links (e.g. on paste) are converted to link/mwInternal': {
+		body: '<a href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">ab</a>',
+		data: [
+			{
+				type: 'paragraph',
+				internal: {
+					generated: 'wrapper'
+				}
+			},
+			[
+				'a',
+				[ {
+					type: 'link/mwInternal',
+					attributes: {
+						title: 'Foo/Bar',
+						normalizedTitle: 'Foo/Bar',
+						lookupTitle: 'Foo/Bar'
+					}
+				} ]
+			],
+			[
+				'b',
+				[ {
+					type: 'link/mwInternal',
+					attributes: {
+						title: 'Foo/Bar',
+						normalizedTitle: 'Foo/Bar',
+						lookupTitle: 'Foo/Bar'
+					}
+				} ]
+			],
+			{
+				type: '/paragraph'
+			},
+			{
+				type: 'internalList'
+			},
+			{
+				type: '/internalList'
+			}
+		],
+		normalizedBody: '<a href="Foo/Bar" rel="mw:WikiLink">ab</a>',
+		mwConfig: {
+			wgArticlePath: '/wiki/$1'
+		}
 	}
 };

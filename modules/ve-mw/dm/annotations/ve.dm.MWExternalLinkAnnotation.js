@@ -39,11 +39,20 @@ ve.dm.MWExternalLinkAnnotation.static.matchFunction = function ( domElement ) {
 	return !rel || rel === 'mw:ExtLink';
 };
 
-ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements ) {
-	// Parent method
-	var dataElement = ve.dm.MWExternalLinkAnnotation.super.static.toDataElement.apply( this, arguments );
+ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
+	var dataElement, annotation,
+		rel = domElements[ 0 ].getAttribute( 'rel' );
 
-	dataElement.attributes.rel = domElements[ 0 ].getAttribute( 'rel' );
+	// If a plain link is pasted, auto-convert it to the correct type (internal/external)
+	if ( !rel ) {
+		annotation = ve.ui.MWLinkAction.static.getLinkAnnotation( domElements[ 0 ].getAttribute( 'href' ), converter.getHtmlDocument() );
+		return annotation.element;
+	}
+
+	// Parent method
+	dataElement = ve.dm.MWExternalLinkAnnotation.super.static.toDataElement.apply( this, arguments );
+
+	dataElement.attributes.rel = rel;
 	return dataElement;
 };
 
