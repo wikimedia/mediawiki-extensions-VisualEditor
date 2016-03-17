@@ -16,7 +16,7 @@
     "grunt-contrib-copy": "1.0.0",
     "grunt-contrib-csslint": "1.0.0",
     "grunt-contrib-jshint": "1.0.0",
-    "grunt-contrib-watch": "0.6.1",
+    "grunt-contrib-watch": "1.0.0",
     "grunt-jscs": "2.8.0",
     "grunt-tyops": "0.1.0"
   }
