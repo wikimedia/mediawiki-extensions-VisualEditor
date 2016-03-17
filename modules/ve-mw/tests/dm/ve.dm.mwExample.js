@@ -1515,5 +1515,57 @@ ve.dm.mwExample.domToDataCases = {
 			doc.metadata.data[ 1 ].splice( 0, 1 );
 		},
 		normalizedBody: '<h1></h1>'
+	},
+	'Plain links (e.g. on paste) are converted to link/mwExternal': {
+		body: 'Foo<a href="Bar">bar</a>',
+		data: [
+			{
+				type: 'paragraph',
+				internal: {
+					generated: 'wrapper'
+				}
+			},
+			'F', 'o', 'o',
+			[
+				'b',
+				[ {
+					type: 'link/mwExternal',
+					attributes: {
+						href: 'Bar',
+						rel: null
+					}
+				} ]
+			],
+			[
+				'a',
+				[ {
+					type: 'link/mwExternal',
+					attributes: {
+						href: 'Bar',
+						rel: null
+					}
+				} ]
+			],
+			[
+				'r',
+				[ {
+					type: 'link/mwExternal',
+					attributes: {
+						href: 'Bar',
+						rel: null
+					}
+				} ]
+			],
+			{
+				type: '/paragraph'
+			},
+			{
+				type: 'internalList'
+			},
+			{
+				type: '/internalList'
+			}
+		],
+		normalizedBody: 'Foo<a href="Bar" rel="mw:ExtLink">bar</a>'
 	}
 };

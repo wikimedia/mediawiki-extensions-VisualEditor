@@ -41,9 +41,9 @@ ve.dm.MWNumberedExternalLinkNode.static.matchRdfaTypes = [ 'mw:ExtLink' ];
 
 ve.dm.MWNumberedExternalLinkNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
-ve.dm.MWNumberedExternalLinkNode.static.matchFunction = function ( element ) {
+ve.dm.MWNumberedExternalLinkNode.static.matchFunction = function ( domElement ) {
 	// Must be empty
-	return element.childNodes.length === 0;
+	return domElement.childNodes.length === 0;
 };
 
 ve.dm.MWNumberedExternalLinkNode.static.toDataElement = function ( domElements ) {
