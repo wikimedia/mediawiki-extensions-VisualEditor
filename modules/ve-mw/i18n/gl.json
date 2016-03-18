@@ -276,6 +276,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Sempre mostrarme o editor de wikitexto",
 	"visualeditor-preference-tabs-remember-last": "Lembrar o último editor usado",
 	"visualeditor-recreate": "Alguén borrou a páxina desde que comezou a editala. Prema en \"$1\" para creala de novo.",
+	"visualeditor-redirect-description": "Redirixir a $1",
 	"visualeditor-savedialog-error-badtoken": "Non se puido gardar a súa edición porque a sesión expirou.",
 	"visualeditor-savedialog-identify-anon": "Quere gardar esta páxina como usuario anónimo? O seu enderezo IP quedará rexistrado no historial de edicións da páxina.",
 	"visualeditor-savedialog-identify-trylogin": "A súa sesión expirou. Por favor, inicie a sesión de novo dende outra lapela e volva a intentalo.",

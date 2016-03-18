@@ -275,6 +275,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Den Wikitext-Editor anbieten",
 	"visualeditor-preference-tabs-remember-last": "Den zuletzt genutzten Editor merken und anbieten",
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem du zum Bearbeiten angefangen hast. Wähle „$1“, um sie neu zu erstellen.",
+	"visualeditor-redirect-description": "Weiterleitung auf $1",
 	"visualeditor-savedialog-error-badtoken": "Deine Bearbeitung konnte nicht gespeichert werden, da die Sitzung nicht mehr gültig war.",
 	"visualeditor-savedialog-identify-anon": "Willst du stattdessen diese Seite als anonymer Benutzer speichern? Deine IP-Adresse wird in der Versionsgeschichte dieser Seite aufgezeichnet.",
 	"visualeditor-savedialog-identify-trylogin": "Du bist nicht mehr angemeldet. Bitte melde dich auf einer anderen Registerkarte wieder an und versuche es erneut.",

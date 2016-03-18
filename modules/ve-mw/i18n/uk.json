@@ -19,7 +19,8 @@
 			"Piramidion",
 			"Alex Blokha",
 			"A1",
-			"Dars"
+			"Dars",
+			"Green Zero"
 		]
 	},
 	"apihelp-visualeditor-description": "Повертає HTML5 для сторінки від сервісу Parsoid.",
@@ -284,6 +285,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Завжди відкривати редактор вікірозмітки",
 	"visualeditor-preference-tabs-remember-last": "Пам'ятати мій останній редактор",
 	"visualeditor-recreate": "Сторінка, яку Ви редагуєте, була вилучена в процесі редагування. Натисніть \"$1\" для того, аби створити її ще раз.",
+	"visualeditor-redirect-description": "Перенаправлення на $1",
 	"visualeditor-savedialog-error-badtoken": "Ми не змогли зберегти Ваші зміни, оскільки сесія вже недійсна.",
 	"visualeditor-savedialog-identify-anon": "Ви бажаєте зберегти цю сторінку як анонімний користувач? Ваша IP-адреса буде записана в історію редагування цієї сторінки.",
 	"visualeditor-savedialog-identify-trylogin": "Ви вже не перебуваєте в системі. Будь ласка, повторно увійдіть в систему з іншої вкладки і спробуйте ще раз.",

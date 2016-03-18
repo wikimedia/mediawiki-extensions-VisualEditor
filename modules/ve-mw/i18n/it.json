@@ -290,6 +290,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Usa sempre l&apos;editor wikitesto",
 	"visualeditor-preference-tabs-remember-last": "Ricorda il mio ultimo editor",
 	"visualeditor-recreate": "Questa pagina è stata eliminata dopo che hai iniziato a modificarla. Premi \"$1\" per ricrearla.",
+	"visualeditor-redirect-description": "Reindirizzamento a $1",
 	"visualeditor-savedialog-error-badtoken": "Non è possibile salvare la tua modifica poiché la sessione non è più valida.",
 	"visualeditor-savedialog-identify-anon": "Vuoi salvare questa pagina come utente anonimo? Il tuo indirizzo IP sarà registrato nella cronologia della pagina.",
 	"visualeditor-savedialog-identify-trylogin": "Non sei più connesso. Accedi nuovamente da una diversa scheda e riprova.",

@@ -281,6 +281,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Vždy mi dejte editor wikitextu",
 	"visualeditor-preference-tabs-remember-last": "Pamatujte si můj poslední editor",
 	"visualeditor-recreate": "Zatímco tuto stránku editujete, byla smazána. Pokud ji chcete znovu založit, klikněte na „$1“.",
+	"visualeditor-redirect-description": "Přesměrování na $1",
 	"visualeditor-savedialog-error-badtoken": "Vaši editaci jsme nemohli zpracovat, protože vypršela vaše relace.",
 	"visualeditor-savedialog-identify-anon": "Chcete stránku uložit jako anonymní uživatel? Vaše IP adresa bude zveřejněna v historii této stránky.",
 	"visualeditor-savedialog-identify-trylogin": "Již nejste přihlášeni. Prosím opět se přihlaste na jiné záložce a zkuste to znovu.",
