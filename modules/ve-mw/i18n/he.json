@@ -278,6 +278,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "תמיד תנו לי את עורך קוד הוויקי",
 	"visualeditor-preference-tabs-remember-last": "זכרו את העורך האחרון שלי",
 	"visualeditor-recreate": "הדף הזה נמחק מאז שהתחלת לערוך. לחיצה על \"$1\" תיצור את הדף מחדש.",
+	"visualeditor-redirect-description": "הפניה ל{{GRAMMAR:תחילית|$1}}",
 	"visualeditor-savedialog-error-badtoken": "לא הצלחנו לשמור את העריכה שלך, כי השיחה איננה תקפה עוד.",
 	"visualeditor-savedialog-identify-anon": "האם ברצונך לשמור את הדף הזה כמשתמש אלמוני? כתובת ה־IP שלך תישמר בהיסטוריית העריכות של הדף הזה.",
 	"visualeditor-savedialog-identify-trylogin": "לא נכנסת לחשבון. נא להיכנס שוב לחשבון בלשונית אחרת ולנסות שוב.",
