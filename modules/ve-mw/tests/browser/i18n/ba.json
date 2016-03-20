@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Янмурза Баки"
+			"Янмурза Баки",
+			"Азат Хәлилов"
 		]
 	},
-	"visualeditor-languagescreenshot-hello-world-text": "Һаумы, Ғаләм!",
+	"visualeditor-languagescreenshot-hello-world-text": "Һаумы, донъя!",
 	"visualeditor-languagescreenshot-world-text": "Донъя",
 	"visualeditor-languagescreenshot-category-earth-text": "Категория:Ер"
 }

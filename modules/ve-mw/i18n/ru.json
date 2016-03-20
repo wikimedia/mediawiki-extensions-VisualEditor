@@ -280,6 +280,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Всегда открывать редактор викитекста, если это возможно",
 	"visualeditor-preference-tabs-remember-last": "Помнить мой последний редактор",
 	"visualeditor-recreate": "Эта страница была удалена с тех пор, как вы начали её редактировать. Нажмите «$1», чтобы создать её заново.",
+	"visualeditor-redirect-description": "Перенаправление на $1",
 	"visualeditor-savedialog-error-badtoken": "Нам не удалось сохранить вашу правку, поскольку сессия больше не действительна.",
 	"visualeditor-savedialog-identify-anon": "Вы хотите сохранить эту страницу как анонимный пользователь? Ваш IP-адрес будет записан в историю редактирования этой страницы.",
 	"visualeditor-savedialog-identify-user": "Теперь вы вошли как [[User:$1|$1]]. Ваши изменения будут связаны с этой учётной записью, если вы их сохраните.",
