@@ -289,6 +289,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Siempre usar el editor de wikitexto",
 	"visualeditor-preference-tabs-remember-last": "Recordar mi último editor",
 	"visualeditor-recreate": "La página fue borrada después de que comenzaste a editarla. Pulsa en «$1» para crearla de nuevo.",
+	"visualeditor-redirect-description": "Redirigir a $1",
 	"visualeditor-savedialog-error-badtoken": "No pudimos procesar tu edición porque la sesión ha expirado.",
 	"visualeditor-savedialog-identify-anon": "¿Quieres guardar esta página como usuario anónimo? Tu dirección IP se registrará en el historial de edición de esta página.",
 	"visualeditor-savedialog-identify-user": "Has iniciado sesión como [[User:$1|$1]]. Si guardas esta edición, se asociará con esta cuenta.",
