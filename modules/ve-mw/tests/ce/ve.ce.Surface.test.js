@@ -16,11 +16,11 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 			// This asserts that getRelativeRange (via getRelativeOffset) doesn't try to
 			// enter a handleOwnChildren node
 			{
-				html:
+				htmlOrDoc:
 					ve.dm.mwExample.MWBlockImage.html +
 					'<ul><li><p>Foo</p></li><li><p>Bar</p></li></ul>',
-				range: new ve.Range( blocklength + 3 ),
-				operations: [ 'backspace' ],
+				rangeOrSelection: new ve.Range( blocklength + 3 ),
+				keys: [ 'BACKSPACE' ],
 				expectedData: function ( data ) {
 					// remove the first list item, and replace its wrapped paragraph outside
 					// the start of the list
@@ -32,18 +32,15 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 						{ type: 'list', attributes: { style: 'bullet' } }
 					);
 				},
-				expectedSelection: {
-					type: 'linear',
-					range: new ve.Range( blocklength + 1 )
-				},
+				expectedRangeOrSelection: new ve.Range( blocklength + 1 ),
 				msg: 'Backspace in a list next to a block image doesn\'t merge into the caption'
 			},
 			{
-				html:
+				htmlOrDoc:
 					ve.dm.mwExample.MWBlockImage.html +
 					'<ul><li><p></p></li></ul>',
-				range: new ve.Range( blocklength + 3 ),
-				operations: [ 'backspace' ],
+				rangeOrSelection: new ve.Range( blocklength + 3 ),
+				keys: [ 'BACKSPACE' ],
 				expectedData: function ( data ) {
 					data.splice(
 						blocklength, 6,
@@ -51,10 +48,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 						{ type: '/paragraph' }
 					);
 				},
-				expectedSelection: {
-					type: 'linear',
-					range: new ve.Range( blocklength + 1 )
-				},
+				expectedRangeOrSelection: new ve.Range( blocklength + 1 ),
 				msg: 'Backspace in an empty list next to a block image removes the list'
 			}
 		];
@@ -63,8 +57,8 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
-			assert, cases[ i ].html, cases[ i ].range, cases[ i ].operations,
-			cases[ i ].expectedData, cases[ i ].expectedSelection, cases[ i ].msg
+			assert, cases[ i ].htmlOrDoc, cases[ i ].rangeOrSelection, cases[ i ].keys,
+			cases[ i ].expectedData, cases[ i ].expectedRangeOrSelection, cases[ i ].msg
 		);
 	}
 } );

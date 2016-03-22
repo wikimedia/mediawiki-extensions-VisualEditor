@@ -747,7 +747,6 @@
 				"lib/ve/src/ui/commands/ve.ui.HistoryCommand.js",
 				"lib/ve/src/ui/commands/ve.ui.IndentationCommand.js",
 				"lib/ve/src/ui/commands/ve.ui.MergeCellsCommand.js",
-				"lib/ve/src/ui/commands/ve.ui.TableCaptionCommand.js",
 				"lib/ve/src/ui/dialogs/ve.ui.FragmentDialog.js",
 				"lib/ve/src/ui/dialogs/ve.ui.NodeDialog.js",
 				"lib/ve/src/ui/dialogs/ve.ui.ToolbarDialog.js",
