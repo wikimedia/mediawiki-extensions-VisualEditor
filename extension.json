@@ -1126,7 +1126,6 @@
 				"jquery.cookie",
 				"jquery.byteLimit",
 				"mediawiki.skinning.content.parsoid",
-				"mediawiki.language.specialCharacters",
 				"mediawiki.widgets",
 				"ext.visualEditor.switching"
 			],

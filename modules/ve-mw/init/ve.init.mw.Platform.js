@@ -182,35 +182,36 @@ ve.init.mw.Platform.prototype.getUserLanguages = mw.language.getFallbackLanguage
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
-	var characters = {},
-		otherGroupName = mw.msg( 'visualeditor-special-characters-group-other' ),
-		otherMsg = mw.msg( 'visualeditor-quick-access-characters.json' ),
-		groupObject;
+	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( function () {
+		var characters = {},
+			otherGroupName = mw.msg( 'visualeditor-special-characters-group-other' ),
+			otherMsg = mw.msg( 'visualeditor-quick-access-characters.json' ),
+			groupObject;
 
-	if ( otherMsg !== '<visualeditor-quick-access-characters.json>' ) {
-		try {
-			characters[ otherGroupName ] = JSON.parse( otherMsg );
-		} catch ( err ) {
-			ve.log( 've.init.mw.Platform: Could not parse the Special Character list.' );
-			ve.log( err );
-		}
-	}
-
-	$.each( mw.language.specialCharacters, function ( groupName, groupCharacters ) {
-		groupObject = {}; // button label => character data to insert
-		$.each( groupCharacters, function ( charKey, charVal ) {
-			// VE has a different format and it would be a pain to change it now
-			if ( typeof charVal === 'string' ) {
-				groupObject[ charVal ] = charVal;
-			} else if ( typeof charVal === 'object' && 0 in charVal && 1 in charVal ) {
-				groupObject[ charVal[ 0 ] ] = charVal[ 1 ];
-			} else {
-				groupObject[ charVal.label ] = charVal;
+		if ( otherMsg !== '<visualeditor-quick-access-characters.json>' ) {
+			try {
+				characters[ otherGroupName ] = JSON.parse( otherMsg );
+			} catch ( err ) {
+				ve.log( 've.init.mw.Platform: Could not parse the Special Character list.' );
+				ve.log( err );
 			}
-		} );
-		characters[ mw.msg( 'special-characters-group-' + groupName ) ] = groupObject;
-	} );
+		}
 
-	// This implementation always resolves instantly
-	return $.Deferred().resolve( characters ).promise();
+		$.each( mw.language.specialCharacters, function ( groupName, groupCharacters ) {
+			groupObject = {}; // button label => character data to insert
+			$.each( groupCharacters, function ( charKey, charVal ) {
+				// VE has a different format and it would be a pain to change it now
+				if ( typeof charVal === 'string' ) {
+					groupObject[ charVal ] = charVal;
+				} else if ( typeof charVal === 'object' && 0 in charVal && 1 in charVal ) {
+					groupObject[ charVal[ 0 ] ] = charVal[ 1 ];
+				} else {
+					groupObject[ charVal.label ] = charVal;
+				}
+			} );
+			characters[ mw.msg( 'special-characters-group-' + groupName ) ] = groupObject;
+		} );
+
+		return characters;
+	} );
 };
