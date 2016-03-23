@@ -45,6 +45,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.checkboxesByName = null;
 	this.$otherFields = null;
 	this.suppressNormalStartupDialogs = false;
+	this.editingTabDialog = null;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -248,7 +249,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
-	var $checkboxes, defaults, data, windowManager, editingTabDialog,
+	var $checkboxes, defaults, data, windowManager,
 		target = this;
 
 	// Parent method
@@ -259,9 +260,9 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 		// Set up a temporary window manager
 		windowManager = new OO.ui.WindowManager();
 		$( 'body' ).append( windowManager.$element );
-		editingTabDialog = new mw.libs.ve.EditingTabDialog();
-		windowManager.addWindows( [ editingTabDialog ] );
-		windowManager.openWindow( editingTabDialog, { message: mw.msg(
+		this.editingTabDialog = new mw.libs.ve.EditingTabDialog();
+		windowManager.addWindows( [ this.editingTabDialog ] );
+		windowManager.openWindow( this.editingTabDialog, { message: mw.msg(
 			'visualeditor-editingtabdialog-body'
 		) } )
 			.then( function ( opened ) { return opened; } )
@@ -411,10 +412,12 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
-			// We have to focus the page after hiding the original content, otherwise
-			// in firefox the contentEditable container was below the view page, and
-			// 'focus' scrolled the screen down.
-			target.getSurface().getView().focus();
+			if ( !target.editingTabDialog ) {
+				// We have to focus the page after hiding the original content, otherwise
+				// in firefox the contentEditable container was below the view page, and
+				// 'focus' scrolled the screen down.
+				target.getSurface().getView().focus();
+			}
 		} ).fail( function () {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
@@ -469,6 +472,7 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 	if ( this.welcomeDialog ) {
 		this.welcomeDialog.close();
 	}
+	this.editingTabDialog = null;
 
 	if ( noDialog || this.activating || !this.edited ) {
 		this.cancel( trackMechanism );
