@@ -11,7 +11,8 @@
 			"Янмурза Баки",
 			"Айсар",
 			"Вильданова Гюзель",
-			"Айбикә"
+			"Айбикә",
+			"Лилиә"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает  для страницы со сервиса \nParsoid сервисынан бит өсөн HTML5-ға ҡайтара",
@@ -31,6 +32,7 @@
 	"apihelp-visualeditoredit-param-etag": "Ебәреү өсөн ETag.",
 	"apihelp-visualeditoredit-param-html": "\n\nвики- текста конвертларға Parsoid ебәреү өсөн HTML",
 	"apihelp-visualeditoredit-param-minor": "Бәләкәй үҙгәртеүгә флаг.",
+	"apihelp-visualeditoredit-param-needcheck": "Байҡау проблема бирһә, һаҡлағанда ошо параметрҙы бирегеҙ. Үҙгәртеүҙәрҙә билдәләр",
 	"apihelp-visualeditoredit-param-oldid": "Ҡулланған версияның номеры. Һуңғы версияла һайланмайынса. Яңы биткә 0 ҡулланығыҙ.",
 	"apihelp-visualeditoredit-param-page": "Мотлаҡ эште башҡарыу өсөн бит.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Һаҡлаған саҡта үҙгәртеү ваҡытын ҡуйығыҙ. Был мөхәриррләгәндә конфликттарҙы күреү өсөн ҡулланыла.",
@@ -84,6 +86,7 @@
 	"visualeditor-dialog-media-position-none": "Юҡ",
 	"visualeditor-dialog-media-position-right": "Уңға",
 	"visualeditor-dialog-media-position-section": "Урынлашыу",
+	"visualeditor-dialog-media-position-section-help": "Биттә медиа күренһә, һеҙ уның элементын ҡуя алаһығыҙ. Был һүрәттең линияһы бер биткә һыймаһа, уны бүлер өсөн файҙаланыла",
 	"visualeditor-dialog-media-save": "Һаҡларға",
 	"visualeditor-dialog-media-search-tab-search": "Эҙләү",
 	"visualeditor-dialog-media-search-tab-upload": "Тейәргә",

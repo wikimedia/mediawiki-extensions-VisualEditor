@@ -35,5 +35,6 @@
 	"visualeditor-welcomedialog-action": "開始編輯",
 	"visualeditor-welcomedialog-content": "任何人可編輯，每個改進都可以協助我們。",
 	"visualeditor-welcomedialog-content-thanks": "感謝您協助世界探索!",
+	"visualeditor-welcomedialog-switch": "切換至原始碼編輯器",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|歡迎光臨}} $2"
 }
