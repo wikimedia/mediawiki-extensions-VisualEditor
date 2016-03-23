@@ -1180,13 +1180,15 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 };
 
 /**
- * Prepare to save the article
+ * Handle the save dialog's save event
+ *
+ * Validates the inputs then starts the save process
  *
  * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
  *  succeeds/fails.
  * @fires saveInitiated
  */
-ve.init.mw.ArticleTarget.prototype.startSave = function ( saveDeferred ) {
+ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) {
 	var saveOptions;
 
 	if ( this.deactivating ) {
@@ -1215,12 +1217,21 @@ ve.init.mw.ArticleTarget.prototype.startSave = function ( saveDeferred ) {
 		this.saveDialog.popPending();
 	} else {
 		this.emit( 'saveInitiated' );
-		if ( !this.docToSave ) {
-			this.docToSave = this.getSurface().getDom();
-		}
-		this.save( this.docToSave, saveOptions );
+		this.startSave( saveOptions );
 		this.saveDeferred = saveDeferred;
 	}
+};
+
+/**
+ * Start the save process
+ *
+ * @param {Object} saveOptions Save options
+ */
+ve.init.mw.ArticleTarget.prototype.startSave = function ( saveOptions ) {
+	if ( !this.docToSave ) {
+		this.docToSave = this.getSurface().getDom();
+	}
+	this.save( this.docToSave, saveOptions );
 };
 
 /**
@@ -1532,7 +1543,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
 
 			// Connect to save dialog
 			target.saveDialog.connect( target, {
-				save: 'startSave',
+				save: 'onSaveDialogSave',
 				review: 'onSaveDialogReview',
 				resolve: 'onSaveDialogResolveConflict',
 				retry: 'onSaveDialogRetry',
