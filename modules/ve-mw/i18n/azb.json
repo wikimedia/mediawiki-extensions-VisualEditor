@@ -5,7 +5,8 @@
 			"Koroğlu",
 			"Mousa",
 			"Ebrahimi-amir",
-			"Alp Er Tunqa"
+			"Alp Er Tunqa",
+			"Sadiqr"
 		]
 	},
 	"tooltip-ca-ve-edit": "بۇ صفحه‌‌نی دَییشدیر",
@@ -13,7 +14,13 @@
 	"visualeditor-ca-createsource": "یازی کوکون یارات",
 	"visualeditor-ca-editsource": "قایناغی دَییشدیر",
 	"visualeditor-ca-editsource-section": "قایناغی دَییشدیر",
+	"visualeditor-ca-ve-create": "گؤرسل‌ائدیتوْر",
+	"visualeditor-ca-ve-edit": "گؤرسل‌ائدیتوْر",
+	"visualeditor-ca-ve-edit-section": "گؤرسل‌ائدیتوْر",
+	"visualeditor-categories-tool": "بؤلوم‌لر",
 	"visualeditor-descriptionpagelink": "Project:گورمک دَییشدیرمه سی",
+	"visualeditor-dialog-media-content-filename": "فایل آدی",
+	"visualeditor-dialog-media-upload": "یوکله",
 	"visualeditor-dialog-meta-languages-label": "دیل‌لر",
 	"visualeditor-dialog-meta-languages-section": "دیل‌لر",
 	"visualeditor-languages-tool": "دیل‌لر"
