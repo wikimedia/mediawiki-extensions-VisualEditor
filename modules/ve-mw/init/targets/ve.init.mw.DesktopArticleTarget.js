@@ -297,7 +297,9 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 	this.checkboxesByName = {};
 	this.$otherFields = $( [] );
 	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
-		$( '#content #firstHeading' ).text( mw.config.get( 'wgTitle' ) );
+		$( '#content #firstHeading' ).text(
+			mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText()
+		);
 	}
 
 	if ( data.checkboxes ) {
