@@ -101,9 +101,8 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	this.$input.addClass( 'oo-ui-element-hidden' );
 	this.editor = ace.edit( this.$ace[ 0 ] );
+	this.setMinRows( this.minRows );
 	this.editor.setOptions( {
-		minLines: this.minRows || 3,
-		maxLines: this.autosize ? this.maxRows : this.minRows || 3,
 		enableBasicAutocompletion: this.autocomplete !== 'none' ? true : false,
 		enableLiveAutocompletion: this.autocomplete === 'live' ? true : false
 	} );
@@ -165,9 +164,11 @@ ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
  */
 ve.ui.MWAceEditorWidget.prototype.setMinRows = function ( minRows ) {
 	var widget = this;
+	this.minRows = minRows;
 	this.loadingPromise.done( function () {
 		widget.editor.setOptions( {
-			minLines: minRows
+			minLines: widget.minRows || 3,
+			maxLines: widget.autosize ? widget.maxRows : widget.minRows || 3
 		} );
 	} );
 	// TODO: Implement minRows setter for OO.ui.TextInputWidget
