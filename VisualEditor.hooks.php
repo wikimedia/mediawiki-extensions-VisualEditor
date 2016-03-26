@@ -132,7 +132,9 @@ class VisualEditorHooks {
 		if ( isset( $params['venoscript'] ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			$user->setOption( 'visualeditor-editor', 'wikitext' );
-			$user->saveSettings();
+			DeferredUpdates::addCallableUpdate( function () use ( $user ) {
+				$user->saveSettings();
+			} );
 			return true;
 		}
 
