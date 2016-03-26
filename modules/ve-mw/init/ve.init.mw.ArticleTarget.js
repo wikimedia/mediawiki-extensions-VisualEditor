@@ -42,10 +42,12 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
+	revisionId = Number.parseInt( revisionId );
 	this.requestedRevId = revisionId;
-	this.revid = revisionId || mw.config.get( 'wgCurRevisionId' );
+	this.currentRevisionId = mw.config.get( 'wgCurRevisionId' );
+	this.revid = revisionId || this.currentRevisionId;
 
-	this.restoring = !!revisionId;
+	this.restoring = !!revisionId && revisionId !== this.currentRevisionId;
 	this.pageDeletedWarning = false;
 	this.editToken = mw.user.tokens.get( 'editToken' );
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
