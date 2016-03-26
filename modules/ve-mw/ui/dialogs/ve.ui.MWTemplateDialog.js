@@ -428,7 +428,8 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 					dialog.transclusionModel.insertTransclusionNode( dialog.getFragment() );
 				}
 
-				dialog.close( { action: action } );
+				dialog.pushPending();
+				dialog.close( { action: action } ).always( dialog.popPending.bind( dialog ) );
 			} ).always( deferred.resolve );
 
 			return deferred;
