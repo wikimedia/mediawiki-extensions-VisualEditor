@@ -93,6 +93,7 @@
 	"visualeditor-dialog-media-position-none": "بدون",
 	"visualeditor-dialog-media-position-right": "يمين",
 	"visualeditor-dialog-media-position-section": "موضع",
+	"visualeditor-dialog-media-position-section-help": "يمكن تعيين موضع عنصر الوسائط هذا في الصفحة. وهذا يُستخدم في بعض الأحيان لتقسيم صف طويل من الصور المعروضة على جانب واحد من الصفحة.",
 	"visualeditor-dialog-media-save": "احفظ",
 	"visualeditor-dialog-media-search-tab-search": "بحث",
 	"visualeditor-dialog-media-search-tab-upload": "ارفع",
