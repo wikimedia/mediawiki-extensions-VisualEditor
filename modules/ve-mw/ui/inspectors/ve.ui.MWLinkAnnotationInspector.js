@@ -289,8 +289,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	}
 
 	this.annotationInput.getTextInputWidget().setValue( text ).focus();
-	// Firefox moves the cursor to the beginning
-	this.annotationInput.getTextInputWidget().$input[ 0 ].setSelectionRange( end, end );
+	// Select entire link when switching, for ease of replacing entire contents.
+	// Most common case:
+	// 1. Inspector opened, internal-link shown with the selected-word prefilled
+	// 2. User clicks external link tab (unnecessary, because we'd auto-switch, but the user doesn't know that)
+	// 3. User pastes a link, intending to replace the existing prefilled link
+	this.annotationInput.getTextInputWidget().$input[ 0 ].setSelectionRange( 0, end );
 
 	this.updateActions();
 };
