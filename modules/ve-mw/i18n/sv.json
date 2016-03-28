@@ -279,6 +279,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Ge mig alltid wikitexteditorn",
 	"visualeditor-preference-tabs-remember-last": "Kom ihåg min senaste redigerare",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",
+	"visualeditor-redirect-description": "Omdirigerar till $1",
 	"visualeditor-savedialog-error-badtoken": "Vi kunde inte spara din redigering eftersom sessionen inte längre var giltig.",
 	"visualeditor-savedialog-identify-anon": "Vill du spara denna sida som en anonym användare istället? Din IP-adress registreras i sidans redigeringshistorik.",
 	"visualeditor-savedialog-identify-trylogin": "Du är inte längre inloggad. Vänligen logga in från en annan flik och försök igen.",
