@@ -61,7 +61,9 @@ function runWikitextStringHandlerTest( assert, server, string, mimeType, expecte
 		server.respond( [ 200, { 'Content-Type': 'application/json' }, JSON.stringify( {
 			visualeditor: {
 				result: 'success',
-				content: expectedResponse
+				content: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr">' +
+					expectedResponse +
+					'</body>'
 			}
 		} ) ] );
 	}
@@ -77,7 +79,7 @@ QUnit.test( 'convert', function ( assert ) {
 				// identification pattern don't affect link identification
 				pasteString: 'some [[Foo]] text',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p>some <a rel="mw:WikiLink" href="./Foo" title="Foo">Foo</a> text</p></body>',
+				parsoidResponse: '<p>some <a rel="mw:WikiLink" href="./Foo" title="Foo">Foo</a> text</p>',
 				annotations: [ {
 					type: 'link/mwInternal',
 					attributes: {
@@ -110,7 +112,7 @@ QUnit.test( 'convert', function ( assert ) {
 				msg: 'Simple link with no p-wrapping',
 				pasteString: '*[[Foo]]',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><ul><li><a rel="mw:WikiLink" href="./Foo" title="Foo">Foo</a></li></ul></body>',
+				parsoidResponse: '<ul><li><a rel="mw:WikiLink" href="./Foo" title="Foo">Foo</a></li></ul>',
 				annotations: [ {
 					type: 'link/mwInternal',
 					attributes: {
@@ -145,7 +147,7 @@ QUnit.test( 'convert', function ( assert ) {
 				msg: 'Heading',
 				pasteString: '==heading==',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><h2>heading</h2></body>',
+				parsoidResponse: '<h2>heading</h2>',
 				annotations: [],
 				expectedData: [
 					{ type: 'heading', attributes: { level: 2 } },
@@ -165,7 +167,7 @@ QUnit.test( 'convert', function ( assert ) {
 				msg: 'Magic link (RFC)',
 				pasteString: 'RFC 1234',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p><a href="//tools.ietf.org/html/rfc1234" rel="mw:ExtLink">RFC 1234</a></p></body>',
+				parsoidResponse: '<p><a href="//tools.ietf.org/html/rfc1234" rel="mw:ExtLink">RFC 1234</a></p>',
 				annotations: [],
 				expectedData: [
 					{
@@ -187,7 +189,7 @@ QUnit.test( 'convert', function ( assert ) {
 				msg: 'Magic link (PMID)',
 				pasteString: 'PMID 1234',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p><a href="//www.ncbi.nlm.nih.gov/pubmed/1234?dopt=Abstract" rel="mw:ExtLink">PMID 1234</a></p></body>',
+				parsoidResponse: '<p><a href="//www.ncbi.nlm.nih.gov/pubmed/1234?dopt=Abstract" rel="mw:ExtLink">PMID 1234</a></p>',
 				annotations: [],
 				expectedData: [
 					{
@@ -209,7 +211,7 @@ QUnit.test( 'convert', function ( assert ) {
 				msg: 'Magic link (ISBN)',
 				pasteString: 'ISBN 123456789X',
 				pasteType: 'text/plain',
-				parsoidResponse: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr"><p><a href="./Special:BookSources/123456789X" rel="mw:ExtLink">ISBN 123456789X</a></p></body>',
+				parsoidResponse: '<p><a href="./Special:BookSources/123456789X" rel="mw:ExtLink">ISBN 123456789X</a></p>',
 				annotations: [],
 				expectedData: [
 					{
