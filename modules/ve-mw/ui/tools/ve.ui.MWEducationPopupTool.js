@@ -124,4 +124,6 @@ ve.ui.MWEducationPopupTool.prototype.onPopupCloseButtonClick = function () {
 			$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
 		}
 	}
+
+	this.onSelect();
 };
