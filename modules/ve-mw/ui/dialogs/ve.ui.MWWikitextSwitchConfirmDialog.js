@@ -31,8 +31,6 @@ ve.ui.MWWikitextSwitchConfirmDialog.static.verbose = true;
 
 ve.ui.MWWikitextSwitchConfirmDialog.static.size = 'small';
 
-ve.ui.MWWikitextSwitchConfirmDialog.static.icon = 'help';
-
 ve.ui.MWWikitextSwitchConfirmDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-mweditmodesource-title' );
 

@@ -27,8 +27,6 @@ OO.inheritClass( ve.ui.MWMagicLinkNodeInspector, ve.ui.NodeInspector );
 
 ve.ui.MWMagicLinkNodeInspector.static.name = 'linkMagicNode';
 
-ve.ui.MWMagicLinkNodeInspector.static.icon = 'link';
-
 ve.ui.MWMagicLinkNodeInspector.static.title = null; // see #getSetupProcess
 
 ve.ui.MWMagicLinkNodeInspector.static.modelClasses = [ ve.dm.MWMagicLinkNode ];

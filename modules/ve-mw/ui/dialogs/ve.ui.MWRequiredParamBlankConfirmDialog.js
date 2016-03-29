@@ -31,8 +31,6 @@ ve.ui.MWRequiredParamBlankConfirmDialog.static.verbose = true;
 
 ve.ui.MWRequiredParamBlankConfirmDialog.static.size = 'medium';
 
-ve.ui.MWRequiredParamBlankConfirmDialog.static.icon = 'help';
-
 ve.ui.MWRequiredParamBlankConfirmDialog.static.actions = [
 	{
 		action: 'ok',
