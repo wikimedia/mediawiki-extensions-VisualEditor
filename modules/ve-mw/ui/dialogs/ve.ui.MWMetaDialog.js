@@ -30,8 +30,6 @@ ve.ui.MWMetaDialog.static.name = 'meta';
 ve.ui.MWMetaDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-meta-title' );
 
-ve.ui.MWMetaDialog.static.icon = 'window';
-
 ve.ui.MWMetaDialog.static.size = 'large';
 
 ve.ui.MWMetaDialog.static.actions = [

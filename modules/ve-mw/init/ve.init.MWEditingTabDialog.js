@@ -32,8 +32,6 @@ mw.libs.ve.EditingTabDialog.static.size = 'small';
 
 mw.libs.ve.EditingTabDialog.static.verbose = true;
 
-mw.libs.ve.EditingTabDialog.static.icon = 'help';
-
 mw.libs.ve.EditingTabDialog.static.title = mw.msg( 'visualeditor-editingtabdialog-title' );
 
 mw.libs.ve.EditingTabDialog.static.actions = [

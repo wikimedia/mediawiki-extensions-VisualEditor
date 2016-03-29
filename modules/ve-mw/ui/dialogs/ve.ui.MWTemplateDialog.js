@@ -38,8 +38,6 @@ OO.inheritClass( ve.ui.MWTemplateDialog, ve.ui.NodeDialog );
 
 /* Static Properties */
 
-ve.ui.MWTemplateDialog.static.icon = 'template';
-
 ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
 ve.ui.MWTemplateDialog.static.actions = [

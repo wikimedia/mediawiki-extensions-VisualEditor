@@ -42,8 +42,6 @@ ve.ui.MWMediaDialog.static.name = 'media';
 ve.ui.MWMediaDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-media-title' );
 
-ve.ui.MWMediaDialog.static.icon = 'image';
-
 ve.ui.MWMediaDialog.static.size = 'large';
 
 ve.ui.MWMediaDialog.static.actions = [

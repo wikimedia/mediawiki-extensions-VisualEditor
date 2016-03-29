@@ -31,8 +31,6 @@ ve.ui.MWCancelConfirmDialog.static.verbose = true;
 
 ve.ui.MWCancelConfirmDialog.static.size = 'small';
 
-ve.ui.MWCancelConfirmDialog.static.icon = 'help';
-
 ve.ui.MWCancelConfirmDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-viewpage-savewarning-title' );
 

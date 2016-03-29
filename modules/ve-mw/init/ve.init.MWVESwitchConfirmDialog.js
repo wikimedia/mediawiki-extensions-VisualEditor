@@ -32,8 +32,6 @@ mw.libs.ve.SwitchConfirmDialog.static.verbose = true;
 
 mw.libs.ve.SwitchConfirmDialog.static.size = 'small';
 
-mw.libs.ve.SwitchConfirmDialog.static.icon = 'help';
-
 mw.libs.ve.SwitchConfirmDialog.static.title =
 	mw.msg( 'visualeditor-mweditmodeve-title' );
 

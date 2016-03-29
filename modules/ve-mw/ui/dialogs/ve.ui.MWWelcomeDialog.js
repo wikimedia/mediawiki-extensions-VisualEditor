@@ -35,8 +35,6 @@ ve.ui.MWWelcomeDialog.static.size = 'medium';
 
 ve.ui.MWWelcomeDialog.static.verbose = true;
 
-ve.ui.MWWelcomeDialog.static.icon = 'help';
-
 ve.ui.MWWelcomeDialog.static.actions = [
 	{
 		action: 'switch',
