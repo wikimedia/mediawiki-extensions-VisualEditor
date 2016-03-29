@@ -67,6 +67,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		type: 'list',
 		icon: 'listBullet',
 		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
 		include: [ { group: 'structure' } ],
 		demote: [ 'outdent', 'indent' ]
 	},
@@ -75,6 +76,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		classes: [ 've-test-toolbar-insert' ],
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		include: '*',
 		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
 		promote: [ 'media', 'transclusion', 'insertTable' ]
