@@ -1006,8 +1006,7 @@
 			],
 			"styles": [
 				"lib/ve/src/ui/styles/ve.ui.MobileContext.css",
-				"lib/ve/src/ui/styles/ve.ui.MobileSurface.css",
-				"lib/ve/src/ui/styles/windowmanagers/ve.ui.MobileWindowManager.css"
+				"lib/ve/src/ui/styles/ve.ui.MobileSurface.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
