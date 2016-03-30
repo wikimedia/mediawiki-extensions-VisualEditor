@@ -1114,7 +1114,10 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		// Set the current URL
 		uri = this.currentUri;
 
-		if ( mw.config.get( 'wgVisualEditorConfig' ).singleEditTab ) {
+		if (
+			mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+			mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+		) {
 			uri.query.action = 'edit';
 			mw.config.set( 'wgAction', 'edit' );
 		} else {
