@@ -175,7 +175,7 @@
 				$( '#ca-edit a' ).text( mw.msg( key ) );
 			}
 
-			if ( uri.query.action !== 'edit' ) {
+			if ( uri.query.action !== 'edit' && uri.query.veaction !== 'edit' ) {
 				if ( history.pushState ) {
 					// Replace the current state with one that is tagged as ours, to prevent the
 					// back button from breaking when used to exit VE. FIXME: there should be a better
@@ -301,7 +301,10 @@
 	);
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
-	if ( conf.singleEditTab ) {
+	if (
+		conf.singleEditTab &&
+		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+	) {
 		veEditUri = viewUri.clone().extend( { action: 'edit' } );
 		delete veEditUri.query.veaction;
 	} else {
