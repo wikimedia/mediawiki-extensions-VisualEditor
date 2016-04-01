@@ -29,7 +29,7 @@ ve.dm.MWAlienExtensionNode.static.getMatchRdfaTypes = function () {
 
 ve.dm.MWAlienExtensionNode.static.toDataElement = function ( domElements, converter ) {
 	// 'Parent' method
-	var element = ve.dm.MWExtensionNode.static.toDataElement( domElements, converter ),
+	var element = ve.dm.MWExtensionNode.static.toDataElement.call( this, domElements, converter ),
 		isInline = this.isHybridInline( domElements, converter );
 
 	element.type = isInline ? 'mwAlienInlineExtension' : 'mwAlienBlockExtension';
