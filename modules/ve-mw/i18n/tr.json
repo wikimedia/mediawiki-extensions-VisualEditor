@@ -20,7 +20,8 @@
 			"Kincki",
 			"McAang",
 			"HakanIST",
-			"JackUKElliott"
+			"JackUKElliott",
+			"Hbseren"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -49,7 +50,7 @@
 	"tooltip-ca-ve-edit": "Bu sayfayı düzenleyin",
 	"visualeditor-advancedsettings-tool": "Gelişmiş ayarlar",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Görsel Düzenleyici 'beta' aşamasındadır. Yazılım sorunlarıyla karşılaşabilir veya sayfanın bazı bölümlerini düzenleyemeyebilirsiniz. Değişikliklerinizi kaybetmeden herhangi bir zamanda kaynak düzenlemesine geri dönebilmek için, \"{{int:visualeditor-toolbar-savedialog}}\" yanındaki açılır menüyü açın ve \"{{int:visualeditor-mweditmodesource-tool}}\" seçin.",
+	"visualeditor-beta-warning": "Değiştirme düğmesine tıklayarak herhangi bir anda kaynak düzenleyiciye geri dönebilirsiniz. Lütfen karşılaştığınız herhangi bir sorunu aşağıda bildirin.",
 	"visualeditor-browserwarning": "Görsel Düzenleyici tarafından resmi olarak desteklenmeyen bir tarayıcı kullanıyorsunuz.",
 	"visualeditor-ca-createlocaldescriptionsource": "Yerel açıklama kaynağı ekle",
 	"visualeditor-ca-createsource": "Kaynak oluştur",
@@ -243,7 +244,7 @@
 	"visualeditor-preference-core-label": "Görsel Düzenleyici",
 	"visualeditor-preference-enable": "Görsel Düzenleyiciyi etkinleştirin. Aşağıdaki {{PLURAL:$2|ad alanı|ad alanlarında}} kullanılacaktır: $1",
 	"visualeditor-preference-tabs-prefer-ve": "Mümkün olan her zaman görsel düzenleyiciyi kullan",
-	"visualeditor-preference-tabs-prefer-wt": "Her zaman vikimetin düzenleyiciyi kullan",
+	"visualeditor-preference-tabs-prefer-wt": "Her zaman kaynak düzenleyiciyi kullan",
 	"visualeditor-preference-tabs-remember-last": "Son düzenleyicimi hatırla",
 	"visualeditor-recreate": "Bu sayfa siz düzenlemeye başladıktan sonra silindi. Basın \"$1\" için yeniden oluşturun.",
 	"visualeditor-savedialog-error-badtoken": "Düzenlemenizi işleyemedik çünkü oturumunuz artık geçerli değil.",

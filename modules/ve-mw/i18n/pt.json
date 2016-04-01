@@ -264,7 +264,7 @@
 	"visualeditor-preference-tabs": "Modo de edição",
 	"visualeditor-preference-tabs-multi-tab": "Mostrar-me ambos os separadores de edição",
 	"visualeditor-preference-tabs-prefer-ve": "Usar sempre que possível o editor visual",
-	"visualeditor-preference-tabs-prefer-wt": "Usar sempre o editor de wikitexto",
+	"visualeditor-preference-tabs-prefer-wt": "Usar sempre o editor de código-fonte",
 	"visualeditor-preference-tabs-remember-last": "Relembrar o meu último editor",
 	"visualeditor-recreate": "A página que começou a editar foi eliminada entretanto. Pressione \"$1\" para recriá-la.",
 	"visualeditor-redirect-description": "Redirecionar para $1",

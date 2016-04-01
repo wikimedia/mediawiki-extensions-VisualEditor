@@ -25,6 +25,7 @@
 	"apihelp-visualeditoredit-param-html": "HTML дзеля адпраўкі ў Parsoid у абмен на вікітэкст.",
 	"apihelp-visualeditoredit-param-minor": "Сьцяг для дробнага рэдагаваньня.",
 	"apihelp-visualeditoredit-param-oldid": "Нумар вэрсіі для выкарыстаньня. Дапомна — апошняя вэрсія. 0 — новая старонка.",
+	"apihelp-visualeditoredit-param-page": "Старонка для выкананьня дзеяньняў.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Пры захаваньні ўсталёўвае тут час вэрсіі, калі старонка была загружаная. Выкарыстоўваецца дзеля выяўленьня канфліктаў рэдагаваньня.",
 	"apihelp-visualeditoredit-param-summary": "Апісаньне зьменаў.",
 	"tooltip-ca-createsource": "Стварыць крынічны код гэтай старонкі",
