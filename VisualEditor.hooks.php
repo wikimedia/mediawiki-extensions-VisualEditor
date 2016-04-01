@@ -956,6 +956,7 @@ class VisualEditorHooks {
 	public static function onAuthPluginAutoCreate( $user ) {
 		if (
 			RequestContext::getMain()->getConfig()->get( 'VisualEditorAutoAccountEnable' ) &&
+			!User::getDefaultOption( 'visualeditor-editor' ) &&
 			$user->isLoggedin()
 		) {
 			$user->setOption( 'visualeditor-enable', 1 );
