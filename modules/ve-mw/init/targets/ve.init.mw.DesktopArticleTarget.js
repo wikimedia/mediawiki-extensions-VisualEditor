@@ -1259,6 +1259,16 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	// Remove any VE-added redirectMsg
 	$( '.redirectMsg' ).remove();
 
+	// Re-set any single-editor edit section handlers
+	if (
+		$content.find( '.mw-editsection' ).length &&
+		!$content.find( '.mw-editsection-visualeditor' ).length
+	) {
+		$content
+			.find( '.mw-editsection a' )
+			.on( 'click', mw.libs.ve.onEditSectionLinkClick );
+	}
+
 	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
 		$( '#content #firstHeading' ).html( displayTitle );
