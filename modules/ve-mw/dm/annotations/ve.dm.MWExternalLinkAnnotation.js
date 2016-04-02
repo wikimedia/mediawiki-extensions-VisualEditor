@@ -35,8 +35,8 @@ ve.dm.MWExternalLinkAnnotation.static.name = 'link/mwExternal';
 
 ve.dm.MWExternalLinkAnnotation.static.matchFunction = function ( domElement ) {
 	var rel = domElement.getAttribute( 'rel' );
-	// Match explicity mw:ExtLink, or plain RDFa-less links (e.g. from external paste)
-	return !rel || rel === 'mw:ExtLink';
+	// Match explicity mw:ExtLink, or plain RDFa-less links with an href (e.g. from external paste)
+	return ( !rel && domElement.hasAttribute( 'href' ) ) || rel === 'mw:ExtLink';
 };
 
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
