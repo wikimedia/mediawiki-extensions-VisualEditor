@@ -251,7 +251,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 				linkData[ data.links.missing[ i ] ] = { missing: true };
 			}
 			if ( data.links.known === 1 ) {
-				// Set back to false by documentReady()
+				// Set back to false by surfaceReady()
 				ve.init.platform.linkCache.setAssumeExistence( true );
 			} else {
 				for ( i = 0, len = data.links.known.length; i < len; i++ ) {
