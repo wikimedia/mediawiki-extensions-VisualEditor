@@ -497,7 +497,12 @@ class ApiVisualEditor extends ApiBase {
 				$req->setVal( 'format', 'text/x-wiki' );
 				$ep->importFormData( $req ); // By reference for some reason (bug 52466)
 				$tabindex = 0;
-				$states = [ 'minor' => false, 'watch' => false ];
+				$states = [
+					'minor' => $user->getOption( 'minordefault' ) && $title->exists(),
+					'watch' => $user->getOption( 'watchdefault' ) ||
+						( $user->getOption( 'watchcreations' ) && !$title->exists() ) ||
+						$user->isWatched( $title ),
+				];
 				$checkboxes = $ep->getCheckboxes( $tabindex, $states );
 
 				// HACK: Find out which red links are on the page
@@ -542,7 +547,6 @@ class ApiVisualEditor extends ApiBase {
 					'checkboxes' => $checkboxes,
 					'links' => $links,
 					'protectedClasses' => implode( ' ', $protectedClasses ),
-					'watched' => $user->isWatched( $title ),
 					'basetimestamp' => $baseTimestamp,
 					'starttimestamp' => wfTimestampNow(),
 					'oldid' => $oldid,
