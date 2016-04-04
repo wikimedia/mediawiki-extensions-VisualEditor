@@ -202,6 +202,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.originalHtml = data.content;
 		this.etag = data.etag;
 		this.fromEditedState = data.fromEditedState;
+		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
 		this.doc = this.parseHtml( this.originalHtml );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );

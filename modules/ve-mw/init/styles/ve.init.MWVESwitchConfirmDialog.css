@@ -5,23 +5,28 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-init-mw-desktopArticleTarget-editSwitch {
+.ve-init-mw-editSwitch {
 	float: right;
 	margin: 0;
 }
 
-.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-iconElement-icon {
+.ve-init-mw-editSwitch .oo-ui-iconElement-icon {
 	opacity: 0.8;
 }
 
-.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-popupWidget-head {
+.ve-init-mw-editSwitch .oo-ui-popupWidget-head {
 	font-weight: bold;
 }
 
-.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-popupWidget-body > :first-child {
+.ve-init-mw-editSwitch .oo-ui-popupWidget-body > :first-child {
 	margin-top: 0;
 }
 
-.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-popupWidget-body > :last-child {
+.ve-init-mw-editSwitch .oo-ui-popupWidget-body > :last-child {
 	margin-bottom: 1em;
+}
+
+.oo-ui-tool-name-editModeSource .ve-init-mw-editSwitch {
+	padding: 0.5em 1em 0;
+	line-height: 1.6;
 }

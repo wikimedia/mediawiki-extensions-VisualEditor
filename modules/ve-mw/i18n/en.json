@@ -265,6 +265,8 @@
 	"visualeditor-mweditmodeve-title": "Switch to visual editing?",
 	"visualeditor-mweditmodeve-tool": "Switch to visual editing",
 	"visualeditor-mweditmodeve-warning": "You are switching to visual editing.\nDo you want to continue?",
+	"visualeditor-mweditmodewt-popup-body": "You can switch back to source editing at any time by clicking on this icon.",
+	"visualeditor-mweditmodewt-popup-title": "You have switched to visual editing",
 	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Caption for image",
 	"visualeditor-mwgalleryinspector-title": "Gallery",
 	"visualeditor-mwsignature-tool": "Your signature",

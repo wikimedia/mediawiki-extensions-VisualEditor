@@ -102,6 +102,7 @@
 		 */
 		requestPageData: function ( pageName, oldid, targetName, modified ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl,
+				switched = false,
 				fromEditedState = false,
 				data = {
 					action: 'visualeditor',
@@ -140,6 +141,7 @@
 					$( '#wpTextbox1' ).val() &&
 					!$( '[name=wpSection]' ).val()
 				) {
+					switched = true;
 					fromEditedState = modified;
 					window.onbeforeunload = null;
 					$( window ).off( 'beforeunload' );
@@ -200,6 +202,7 @@
 						if ( apiData.visualeditor ) {
 							apiData.visualeditor.content = restbaseData[ 0 ];
 							apiData.visualeditor.etag = restbaseData[ 1 ];
+							apiData.visualeditor.switched = switched;
 							apiData.visualeditor.fromEditedState = fromEditedState;
 						}
 						return apiData;
