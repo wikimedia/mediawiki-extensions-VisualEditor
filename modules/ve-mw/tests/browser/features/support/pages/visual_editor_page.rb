@@ -6,7 +6,12 @@ class VisualEditorPage
 
   def self.translate(string)
     language = ENV['LANGUAGE_SCREENSHOT_CODE']
-    file_name = (File.exist?("../../i18n/#{language}.json")) ? "../../i18n/#{language}.json" : '../../i18n/en.json'
+
+    file_name = File.expand_path("../../../i18n/#{language}.json", __dir__)
+    unless File.exist?(file_name)
+      file_name = File.expand_path('../../../i18n/en.json', __dir__)
+    end
+
     json = JSON.parse(File.read(file_name))
     json[string] || ''
   end
