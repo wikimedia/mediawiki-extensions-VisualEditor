@@ -286,6 +286,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "همیشه از ویرایشگر متنی استفاده می‌کنم",
 	"visualeditor-preference-tabs-remember-last": "آخرین ویرایشگری که استفاده کردم را به خاطر بسپار",
 	"visualeditor-recreate": "صفحه از زمانی که شما مشغول ویرایش شدید حذف شد. برای ساخت مجدد صفحه \"$1\" را فشار دهید.",
+	"visualeditor-redirect-description": "تغییرمسیر به $1",
 	"visualeditor-savedialog-error-badtoken": "ذخیرهٔ ویرایش شما مقدور نیست چون بخش مورد نظر وجود ندارد.",
 	"visualeditor-savedialog-identify-anon": "آیا می‌خواهید این صفحه را به عنوان کاربر گمنام ذخیره شود؟ شناسهد آی‌پی شما در تاریخچهٔ صفحه ذخیره خواهد شد.",
 	"visualeditor-savedialog-identify-trylogin": "مدتی است که با حساب کاربریتان به سامانه وصل نیستید. لطفاً با یک زبانهٔ دیگر مرورگر به صفحهٔ قبلی بازگردید و از نو تلاش کنید.",
