@@ -71,11 +71,19 @@ mw.libs.ve.EditingTabDialog.prototype.getSetupProcess = function ( action ) {
  * @inheritdoc
  */
 mw.libs.ve.EditingTabDialog.prototype.getActionProcess = function ( action ) {
-	if ( action ) {
+	var dialog = this,
+		act = action;
+	if ( act ) {
 		return new OO.ui.Process( function () {
-			new mw.Api().saveOption( 'visualeditor-tabs', action );
-			mw.user.options.set( 'visualeditor-tabs', action );
-			this.close( { action: action } );
+			var action = this.getActions().get( { actions: act } )[ 0 ];
+			action.pushPending();
+			dialog.pushPending();
+
+			new mw.Api().saveOption( 'visualeditor-tabs', act ).done( function () {
+				action.popPending();
+				mw.user.options.set( 'visualeditor-tabs', act );
+				dialog.close( { action: act } );
+			} );
 		}, this );
 	} else {
 		// Parent method
