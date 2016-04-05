@@ -567,11 +567,14 @@
 						.then( function ( opened ) { return opened; } )
 						.then( function ( closing ) { return closing; } )
 						.then( function ( data ) {
+							var oldUri;
 							if ( data && data.action === 'keep' ) {
 								activatePageTarget( true );
 							} else if ( data && data.action === 'discard' ) {
 								setEditorPreference( 'visualeditor' );
-								location.href = veEditUri.clone().extend( { wteswitched: 1 } );
+								oldUri = veEditUri.clone();
+								delete oldUri.query.veswitched;
+								location.href = oldUri.extend( { wteswitched: 1 } );
 							}
 						} );
 				} );
