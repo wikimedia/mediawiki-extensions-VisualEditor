@@ -1,3 +1,4 @@
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: VisualEditor general text markup features
 
   Background:

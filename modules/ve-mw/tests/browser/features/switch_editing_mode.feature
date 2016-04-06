@@ -1,3 +1,4 @@
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: Switching between wikitext and Visual Editor modes
 
   Test for both pathways that allow switching between Visual Editor and wikitext editing modes.

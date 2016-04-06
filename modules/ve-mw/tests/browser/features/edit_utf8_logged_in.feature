@@ -1,4 +1,5 @@
 # encoding: UTF-8
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: VisualEditor
 
   Background:

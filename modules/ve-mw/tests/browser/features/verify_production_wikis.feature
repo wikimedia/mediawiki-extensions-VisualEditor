@@ -1,3 +1,4 @@
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: VisualEditor on production wikis
 
   Verify that VisualEditor is available as

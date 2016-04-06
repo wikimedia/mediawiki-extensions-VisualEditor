@@ -1,10 +1,10 @@
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: VisualEditor Bullets, Numbering
 
   Background:
     Given I go to the "Bullets VisualEditor Test" page with content "Bullets VisualEditor Test"
       And I make the text "Bullets VisualEditor Test" be selected
 
-  @en.wikipedia.beta.wmflabs.org @firefox
   Scenario Outline: check strings for bullets and numbering
     When I click <control>
       And I click Save page
@@ -30,7 +30,6 @@ Feature: VisualEditor Bullets, Numbering
     | Numbering | ##        |
     | Bullets   | **        |
 
-  @en.wikipedia.beta.wmflabs.org @firefox
   Scenario Outline: check decrease indent for bullets and numbering
     When I click <control>
       And I click Decrease indentation

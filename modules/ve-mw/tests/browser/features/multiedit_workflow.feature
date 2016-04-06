@@ -1,4 +1,5 @@
 # encoding: UTF-8
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: VisualEditor multi-edit workflow
 
   Goal of the test is to make sure the "Save" and "Review Changes"
