@@ -15,7 +15,8 @@
 			"Лилиә",
 			"Lizalizaufa",
 			"Банат Валеева-Яубасарова",
-			"Гульчатай"
+			"Гульчатай",
+			"Ләйсән"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает  для страницы со сервиса \nParsoid сервисынан бит өсөн HTML5-ға ҡайтара",
@@ -49,7 +50,7 @@
 	"visualeditor-advancedsettings-tool": "Өҫтәмә көйләүҙәр",
 	"visualeditor-backbutton-tooltip": "Кире ҡайтырға",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "Күҙләгес мөхәррир 'beta' хәләндә. Һеҙ программаны тәьмин итеүҙә ҡыйынлыҡтар тояһығыҙ, һәм текстың айырым өлөштәрен мөхәррирләй алмайһығыҙ.Викитесҡа күсеү өсөн \"{{int:visualeditor-ca-editsource}}\" төймәһенә баҫығыҙ – һаҡланмаған үҙгәрештәр юғаласаҡ.",
+	"visualeditor-beta-warning": "Күҙләгес мөхәррир 'beta' хәлендә. Һеҙ программаны тәьмин итеүҙә ҡыйынлыҡтар тояһығыҙ, һәм текстың айырым өлөштәрен мөхәррирләй алмайһығыҙ.Викитесҡа күсеү өсөн \"{{int:visualeditor-ca-editsource}}\" төймәһенә баҫығыҙ – һаҡланмаған үҙгәрештәр юғаласаҡ.",
 	"visualeditor-browserwarning": "Һеҙ Күҙләгес мөхәррирҙе рәсми танымаған браузерҙа ҡулланаһығыҙ.",
 	"visualeditor-ca-createlocaldescriptionsource": "Локалль тасурилама сығанағын өҫтәргә",
 	"visualeditor-ca-createsource": "Сығанаҡ код булдырырға",
@@ -273,7 +274,7 @@
 	"visualeditor-preference-tabs": "Мөхәррирләү режимы",
 	"visualeditor-preference-tabs-multi-tab": "Ҡушымталар мөхәррирен миңә күрһәтеү",
 	"visualeditor-preference-tabs-prefer-ve": "Мөмкин булһа, күҙләгес мөхәррирҙе һәр саҡ аса алаһығыҙ",
-	"visualeditor-preference-tabs-prefer-wt": "Мөмкин булһа, викитекст мөхәррирен һәр саҡ асырға",
+	"visualeditor-preference-tabs-prefer-wt": "Тәү текст мөхәррирен һәр саҡ асырға",
 	"visualeditor-preference-tabs-remember-last": "Һуңғы мөхәрриремде онотмаҫҡа",
 	"visualeditor-recreate": "Был бит, һеҙ мөхәррирләү башлағас та, юйылды. Яңынан башларға теләһәгеҙ, «$1»-ға баҫығыҙ.",
 	"visualeditor-redirect-description": "$1-гә йүнәлтеү",
