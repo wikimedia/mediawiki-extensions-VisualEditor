@@ -222,6 +222,7 @@
 	"visualeditor-preference-core-label": "Визуелни уређивач",
 	"visualeditor-preference-enable": "Укључује Визуелни уређивач. Биће доступан у следећим {{PLURAL:$2|именским просторима}}: $1",
 	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
+	"visualeditor-redirect-description": "Преусмерено на $1",
 	"visualeditor-savedialog-error-badtoken": "Нисмо могли обрадити вашу измену зато што сесија више није важећа.",
 	"visualeditor-savedialog-identify-anon": "Желите ли сачувати ову страницу као анониман корисник? Ваша ИП адреса ће бити забележена у историји измена ове стране.",
 	"visualeditor-savedialog-identify-user": "Сада сте пријављени као [[User:$1|$1]]. Ваше измене ће бити повезане са овим налогом ако сачувате ову измену.",

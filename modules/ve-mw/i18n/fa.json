@@ -27,7 +27,7 @@
 	"apihelp-visualeditor-description": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
 	"apihelp-visualeditor-param-basetimestamp": "هنگام ذخیره کردن، زمان نسخهٔ ویرایش شده را برای این مورد تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditor-param-cachekey": "برای پیوند تفاوت، از نتیجه درخواست تفاوت پیشین به کمک این کلید استفاده کنید. بازنویسی $1html.",
-	"apihelp-visualeditor-param-etag": "ای‌تگ برای ارسال.",
+	"apihelp-visualeditor-param-etag": "ئی‌تگ برای ارسال.",
 	"apihelp-visualeditor-param-html": "HTML برای ارسال به پارسوید برای تبدیل به متن ویکی.",
 	"apihelp-visualeditor-param-oldid": "تعداد نسخه‌ها برای استفاده (آخرین نسخه به عنوان پیش‌فرض)",
 	"apihelp-visualeditor-param-paction": "عمل برای انجام‌دادن.",
