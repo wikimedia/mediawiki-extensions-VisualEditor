@@ -44,6 +44,21 @@ ve.ui.MWExternalLinkAnnotationWidget.static.getAnnotationFromText = function ( v
 	}
 };
 
+/**
+ * Create an external link input widget.
+ *
+ * @param {Object} [config] Configuration options
+ * @return {OO.ui.TextInputWidget} Text input widget
+ */
+ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget = function ( config ) {
+	return new OO.ui.TextInputWidget( $.extend( {}, config, {
+		icon: 'linkExternal',
+		validate: function ( text ) {
+			return !!ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( text.trim() );
+		}
+	} ) );
+};
+
 /* Methods */
 
 /**
@@ -52,11 +67,6 @@ ve.ui.MWExternalLinkAnnotationWidget.static.getAnnotationFromText = function ( v
  * @param {Object} [config] Configuration options
  * @return {OO.ui.TextInputWidget} Text input widget
  */
-ve.ui.MWExternalLinkAnnotationWidget.prototype.createInputWidget = function () {
-	return new OO.ui.TextInputWidget( {
-		icon: 'linkExternal',
-		validate: function ( text ) {
-			return !!ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( text.trim() );
-		}
-	} );
+ve.ui.MWExternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
+	return this.constructor.static.createExternalLinkInputWidget( config );
 };

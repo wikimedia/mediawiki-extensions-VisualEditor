@@ -207,6 +207,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Title of button that hides and shows parameter descriptions",
 	"visualeditor-dialog-transclusion-param-info-missing": "Title of button that hides and shows parameter descriptions when no description is available",
 	"visualeditor-dialog-transclusion-placeholder": "Label for section with options for adding a new template to a multi part transclusion.\n{{Identical|Add template}}",
+	"visualeditor-dialog-transclusion-raw-fallback": "Label of the button that converts complex validation-required type-based inputs back into plain wikitext inputs.",
 	"visualeditor-dialog-transclusion-remove-content": "Label for button that removes content between transclusion parts",
 	"visualeditor-dialog-transclusion-remove-param": "Label for button that removes a parameter from a template",
 	"visualeditor-dialog-transclusion-remove-template": "Label for button that removes a template from a transclusion.\n{{Identical|Remove template}}",

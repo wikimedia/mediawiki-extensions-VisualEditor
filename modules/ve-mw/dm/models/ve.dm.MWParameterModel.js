@@ -145,6 +145,15 @@ ve.dm.MWParameterModel.prototype.getAutoValue = function () {
 };
 
 /**
+ * Get parameter type.
+ *
+ * @return {string} Parameter type
+ */
+ve.dm.MWParameterModel.prototype.getType = function () {
+	return this.template.getSpec().getParameterType( this.name );
+};
+
+/**
  * Set parameter value.
  *
  * @param {string} value Parameter value

@@ -1547,6 +1547,7 @@
 				"modules/ve-mw/dm/models/ve.dm.MWTemplateModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTemplatePlaceholderModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWParameterModel.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWParameterCheckboxInputWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWParameterSearchWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWParameterResultWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWMoreParametersResultWidget.js",
@@ -1569,6 +1570,7 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterSearchWidget.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css",
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css"
 			],
 			"skinStyles": {
@@ -1583,7 +1585,8 @@
 			"dependencies": [
 				"ext.visualEditor.mwtransclusion.core",
 				"mediawiki.jqueryMsg",
-				"mediawiki.language"
+				"mediawiki.language",
+				"mediawiki.widgets.UserInputWidget"
 			],
 			"messages": [
 				"quotation-marks",
@@ -1604,6 +1607,7 @@
 				"visualeditor-dialog-transclusion-param-info",
 				"visualeditor-dialog-transclusion-param-info-missing",
 				"visualeditor-dialog-transclusion-placeholder",
+				"visualeditor-dialog-transclusion-raw-fallback",
 				"visualeditor-dialog-transclusion-remove-content",
 				"visualeditor-dialog-transclusion-remove-param",
 				"visualeditor-dialog-transclusion-remove-template",
