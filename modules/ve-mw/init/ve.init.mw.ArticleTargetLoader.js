@@ -162,7 +162,7 @@
 					}
 					restbaseXhr = $.ajax( {
 						url: pageHtmlUrl + encodeURIComponent( pageName ) +
-							( oldid === undefined ? '' : '/' + oldid ),
+							( oldid === undefined ? '' : '/' + oldid ) + '?redirect=false',
 						type: 'GET',
 						// Should be synchronised with ApiVisualEditor.php
 						headers: { Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"' },
