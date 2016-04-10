@@ -188,6 +188,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Beschreibung des Feldes",
 	"visualeditor-dialog-transclusion-param-info-missing": "Keine Feldbeschreibung verfügbar",
 	"visualeditor-dialog-transclusion-placeholder": "Eine Vorlage hinzufügen",
+	"visualeditor-dialog-transclusion-raw-fallback": "Zurück zu einfachem Wikitext",
 	"visualeditor-dialog-transclusion-remove-content": "Inhalt entfernen",
 	"visualeditor-dialog-transclusion-remove-param": "Feld entfernen",
 	"visualeditor-dialog-transclusion-remove-template": "Vorlage entfernen",

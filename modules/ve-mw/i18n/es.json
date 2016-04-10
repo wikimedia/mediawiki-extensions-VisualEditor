@@ -25,7 +25,8 @@
 			"Macofe",
 			"Themasterriot",
 			"Vikytinta",
-			"Ncontinanza"
+			"Ncontinanza",
+			"Guillermo2149"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -202,6 +203,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Descripción del campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "El campo no tiene ninguna descripción",
 	"visualeditor-dialog-transclusion-placeholder": "Añadir una plantilla",
+	"visualeditor-dialog-transclusion-raw-fallback": "Caer de nuevo a wikitexto plano",
 	"visualeditor-dialog-transclusion-remove-content": "Eliminar el contenido",
 	"visualeditor-dialog-transclusion-remove-param": "Eliminar el campo",
 	"visualeditor-dialog-transclusion-remove-template": "Eliminar la plantilla",

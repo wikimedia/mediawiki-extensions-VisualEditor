@@ -202,6 +202,7 @@
 	"visualeditor-dialog-transclusion-param-info": "字段说明",
 	"visualeditor-dialog-transclusion-param-info-missing": "没有可用的字段说明",
 	"visualeditor-dialog-transclusion-placeholder": "加入一个模板",
+	"visualeditor-dialog-transclusion-raw-fallback": "退回至纯wiki文本",
 	"visualeditor-dialog-transclusion-remove-content": "删除内容",
 	"visualeditor-dialog-transclusion-remove-param": "移除字段",
 	"visualeditor-dialog-transclusion-remove-template": "删除模板",

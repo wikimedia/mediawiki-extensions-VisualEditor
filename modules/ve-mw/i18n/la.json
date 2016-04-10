@@ -8,7 +8,8 @@
 			"Викиней",
 			"Andrew Dalby",
 			"Jdforrester",
-			"Laurentianus"
+			"Laurentianus",
+			"Guillermo2149"
 		]
 	},
 	"tooltip-ca-createsource": "Fontem huius paginae creare",
@@ -77,5 +78,10 @@
 	"visualeditor-parameter-search-unknown": "Parametrum ignotum",
 	"visualeditor-preference-core-label": "Editor visualis",
 	"visualeditor-savedialog-label-create": "Paginam creare",
-	"visualeditor-savedialog-label-save": "Paginam servare"
+	"visualeditor-savedialog-label-save": "Paginam servare",
+	"visualeditor-savedialog-label-save-short": "Servare",
+	"visualeditor-toolbar-savedialog-short": "Servare",
+	"visualeditor-version-label": "Versio",
+	"visualeditor-viewpage-savewarning-discard": "Abrogare",
+	"visualeditor-wikitext-progress": "Convertere vicitextum"
 }

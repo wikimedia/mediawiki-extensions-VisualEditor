@@ -223,6 +223,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Description du champ",
 	"visualeditor-dialog-transclusion-param-info-missing": "Aucune description disponible pour le champ",
 	"visualeditor-dialog-transclusion-placeholder": "Ajouter un modèle",
+	"visualeditor-dialog-transclusion-raw-fallback": "Retour au texte wiki de base",
 	"visualeditor-dialog-transclusion-remove-content": "Supprimer le contenu",
 	"visualeditor-dialog-transclusion-remove-param": "Supprimer le champ",
 	"visualeditor-dialog-transclusion-remove-template": "Supprimer le modèle",

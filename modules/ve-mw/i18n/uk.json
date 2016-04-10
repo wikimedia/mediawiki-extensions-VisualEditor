@@ -198,6 +198,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Опис поля",
 	"visualeditor-dialog-transclusion-param-info-missing": "Немає опису поля",
 	"visualeditor-dialog-transclusion-placeholder": "Додати шаблон",
+	"visualeditor-dialog-transclusion-raw-fallback": "Відступити до простої вікірозмітки",
 	"visualeditor-dialog-transclusion-remove-content": "Вилучити вміст",
 	"visualeditor-dialog-transclusion-remove-param": "Вилучити поле",
 	"visualeditor-dialog-transclusion-remove-template": "Вилучити шаблон",

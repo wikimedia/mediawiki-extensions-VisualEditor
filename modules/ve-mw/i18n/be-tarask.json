@@ -166,6 +166,7 @@
 	"visualeditor-dialog-transclusion-param-default": "Па змоўчаньні: $1",
 	"visualeditor-dialog-transclusion-param-example": "напрыклад, $1",
 	"visualeditor-dialog-transclusion-param-info": "Апісаньне поля",
+	"visualeditor-dialog-transclusion-param-info-missing": "Апісаньне поля адсутнічае",
 	"visualeditor-dialog-transclusion-placeholder": "Дадаць шаблён",
 	"visualeditor-dialog-transclusion-remove-content": "Выдаліць зьмест",
 	"visualeditor-dialog-transclusion-remove-param": "Выдаліць поле",

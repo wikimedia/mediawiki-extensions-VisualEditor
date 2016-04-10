@@ -110,6 +110,7 @@
 	"visualeditor-dialog-transclusion-contextitem-description": "Generated from: $1\n<!-- \nhttps://translatewiki.net/wiki/Thread:Support/About_MediaWiki:Visualeditor-dialog-transclusion-contextitem-description/en\n-->",
 	"visualeditor-dialog-transclusion-param-default": "Schtandatt: $1",
 	"visualeditor-dialog-transclusion-param-example": "För e Beijschpell: $1",
+	"visualeditor-dialog-transclusion-raw-fallback": "Retour op der einfache Wikitäx",
 	"visualeditor-dialogbutton-template-tooltip": "Schablohn",
 	"visualeditor-editingtabdialog-body": "Et Wikki märk sesch jäz, womet mer Ännderonge beärrbeidt.",
 	"visualeditor-editingtabdialog-ok": "Nemm et sällve Wärkzüsch, wi beim läzde Mohl jädd Änndere.",
