@@ -135,7 +135,11 @@
 
 			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
 				ve.track( 'trace.restbaseLoad.enter' );
-				if ( conf.fullRestbaseUrl && $( '#wpTextbox1' ).val() ) {
+				if (
+					conf.fullRestbaseUrl &&
+					$( '#wpTextbox1' ).val() &&
+					!$( '[name=wpSection]' ).val()
+				) {
 					fromEditedState = modified;
 					window.onbeforeunload = null;
 					$( window ).off( 'beforeunload' );
