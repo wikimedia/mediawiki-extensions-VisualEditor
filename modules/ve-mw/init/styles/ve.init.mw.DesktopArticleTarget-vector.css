@@ -20,7 +20,17 @@
 	of content editable.
 	*/
 	/* 0.8/0.8, 1/0.8 */
-	margin: 1em -1.25em 0 -1.25em;
+	margin: 0 -1.25em -1.25em -1.25em;
+	padding-bottom: 1.25em;
+}
+
+.ve-init-mw-desktopArticleTarget-originalContent {
+	padding-top: 1.25em;
+}
+
+.ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
+	padding-left: 1.25em;
+	padding-right: 1.25em;
 }
 
 .ve-init-mw-target-surface .ve-ce-documentNode,
@@ -53,7 +63,7 @@
 
 .ve-init-mw-desktopArticleTarget-toolbar {
 	/* 1/0.8 */
-	margin: -1.25em -1.25em 1.25em -1.25em;
+	margin: -1.25em -1.25em 0 -1.25em;
 	position: relative;
 }
 
@@ -89,7 +99,17 @@
 @media screen and (min-width: 982px) {
 	.ve-init-mw-target-surface {
 		/* 0.8/0.8, 1.5/0.8 */
-		margin: 1em -1.875em 0 -1.875em;
+		margin: 0 -1.875em -1.875em -1.875em;
+		padding-bottom: 1.875em;
+	}
+
+	.ve-init-mw-desktopArticleTarget-originalContent {
+		padding-top: 1.875em;
+	}
+
+	.ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
+		padding-left: 1.875em;
+		padding-right: 1.875em;
 	}
 
 	.ve-init-mw-target-surface .ve-ce-documentNode,
@@ -99,14 +119,14 @@
 
 	.ve-init-mw-desktopArticleTarget-toolbar {
 		/* 1.25/0.8, 1.5/0.8 */
-		margin: -1.5625em -1.875em 1.875em -1.875em;
+		margin: -1.5625em -1.875em 0 -1.875em;
 	}
 
 	/* Main document debug bar */
 	.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
 		/* 1/0.8, 1.5/0.8 */
 		padding: 1.875em;
-		margin: 1.25em -1.875em -1.875em -1.875em;
+		margin: 1.875em -1.875em -1.875em -1.875em;
 	}
 }
 

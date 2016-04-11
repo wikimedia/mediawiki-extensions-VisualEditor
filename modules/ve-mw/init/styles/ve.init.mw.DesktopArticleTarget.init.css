@@ -54,10 +54,6 @@
 	user-select: none;
 }
 
-.ve-activated #firstHeading {
-	cursor: default;
-}
-
 /* Progress bar mimicking OOUI */
 
 .ve-activated #content {
