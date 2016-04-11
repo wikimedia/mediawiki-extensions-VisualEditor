@@ -349,7 +349,7 @@ class ApiVisualEditor extends ApiBase {
 					if ( $params['paction'] === 'parse' ) {
 						$content = $this->requestRestbase(
 							'GET',
-							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid,
+							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid . '?redirect=false',
 							[]
 						);
 						if ( $content === false ) {
