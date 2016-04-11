@@ -711,6 +711,7 @@
 				"lib/ve/src/ui/ve.ui.Tool.js",
 				"lib/ve/src/ui/ve.ui.Toolbar.js",
 				"lib/ve/src/ui/ve.ui.TargetToolbar.js",
+				"lib/ve/src/ui/ve.ui.PositionedTargetToolbar.js",
 				"lib/ve/src/ui/ve.ui.ToolFactory.js",
 				"lib/ve/src/ui/ve.ui.Command.js",
 				"lib/ve/src/ui/ve.ui.CommandRegistry.js",
