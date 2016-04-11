@@ -30,7 +30,8 @@
 			"Ядерный Трамвай",
 			"Jackie",
 			"Perevod16",
-			"Лилиә"
+			"Лилиә",
+			"Sealle"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -282,8 +283,8 @@
 	"visualeditor-preference-core-description": "Включить визуальный редактор. Он будет недоступен на страницах обсуждения и в некоторых других пространствах имён.",
 	"visualeditor-preference-core-label": "Визуальное редактирование",
 	"visualeditor-preference-enable": "Включить визуальный редактор. Он будет доступен в {{PLURAL:$2|следующем пространстве|следующих пространствах}} имён: $1",
-	"visualeditor-preference-tabs": "мөхәррирләү тәртибе",
-	"visualeditor-preference-tabs-multi-tab": "Ҡушымталар мөхәррирләүен бергә күрһәтергә",
+	"visualeditor-preference-tabs": "Способ редактирования",
+	"visualeditor-preference-tabs-multi-tab": "Показывать мне оба варианта редактора",
 	"visualeditor-preference-tabs-prefer-ve": "Всегда открывать визуальный редактор, если это возможно",
 	"visualeditor-preference-tabs-prefer-wt": "Всегда открывать редактор исходного текста",
 	"visualeditor-preference-tabs-remember-last": "Помнить мой последний редактор",

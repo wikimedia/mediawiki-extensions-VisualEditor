@@ -9,7 +9,9 @@
 			"Macofe"
 		]
 	},
-	"tooltip-ca-ve-edit": "Sunting kaca punika ngangge VisualEditor",
+	"tooltip-ca-ve-edit": "Besut kaca iki",
+	"visualeditor-ca-createlocaldescriptionsource": "Tambah sumber mawa wedharan enggon-enggonan",
+	"visualeditor-ca-createsource": "Gawé sumber",
 	"visualeditor-ca-editsource": "Besut sumber",
 	"visualeditor-ca-editsource-section": "besut sumber",
 	"visualeditor-desc": "Pangowah visual kanggo MediaWiki",
