@@ -268,6 +268,7 @@
 	}
 
 	function getLastEditor() {
+		// This logic matches VisualEditorHooks::getUserEditor
 		var editor = $.cookie( 'VEE' );
 		// Set editor to user's preference or site's default if …
 		if (
