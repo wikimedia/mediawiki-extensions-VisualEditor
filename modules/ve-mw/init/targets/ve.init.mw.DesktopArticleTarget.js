@@ -71,9 +71,12 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.originalDocumentTitle = document.title;
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
+	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
 
 	// Initialization
-	this.$element.addClass( 've-init-mw-desktopArticleTarget' );
+	this.$element
+		.addClass( 've-init-mw-desktopArticleTarget' )
+		.append( this.$originalContent );
 
 	if ( history.replaceState ) {
 		// We replace the current state with one that's marked with our tag. This way, when users
@@ -414,6 +417,8 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
 			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
+			// Move original content inside the surface for viewport calculations
+			target.getSurface().$element.prepend( target.$originalContent );
 			if ( !target.editingTabDialog ) {
 				// We have to focus the page after hiding the original content, otherwise
 				// in firefox the contentEditable container was below the view page, and
@@ -546,6 +551,9 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 		this.getToolbar().$actions.empty();
 	}
 
+	// Move original content back out of the surface
+	this.$element.prepend( this.$originalContent );
+
 	// Check we got as far as setting up the surface
 	if ( this.getSurface() ) {
 		if ( this.active ) {
@@ -570,8 +578,8 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 		target.deactivating = false;
 		$( 'html' ).removeClass( 've-deactivating' );
 
-		// Move remaining elements back out of the target
-		target.$element.parent().append( target.$element.children() );
+		// Move original content back out of the target
+		target.$element.parent().append( target.$originalContent.children() );
 
 		mw.hook( 've.deactivationComplete' ).fire( target.edited );
 	} );
@@ -699,8 +707,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 				$( '<br>' )
 			);
 		}
-		this.$element.children( '.redirectMsg' ).remove();
-		this.$element.find( '.ve-init-mw-target-surface' ).before( $( '<div>' )
+		this.$originalContent.find( '.redirectMsg' ).remove();
+		this.$originalContent.append( $( '<div>' )
 			// Bit of a hack: Make sure any redirect note is styled
 			.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
 
@@ -729,7 +737,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
  */
 ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaItem ) {
 	if ( metaItem.getType() === 'mwRedirect' ) {
-		this.$element.children( '.redirectMsg' ).remove();
+		this.$originalContent.find( '.redirectMsg' ).remove();
 		$( '#contentSub #redirectsub, #contentSub #redirectsub + br' ).remove();
 	}
 };
@@ -1101,7 +1109,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	mw.hook( 've.activate' ).fire();
 
 	// Move all native content inside the target
-	this.$element.append( this.$element.siblings() );
+	this.$originalContent.append( this.$element.siblings() );
 
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)

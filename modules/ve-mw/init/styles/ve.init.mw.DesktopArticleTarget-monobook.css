@@ -19,16 +19,17 @@
 .ve-init-mw-desktopArticleTarget .mw-body-content,
 .ve-ui-overlay-global .mw-body-content {
 	/* Match skin's font-size for the surface content */
-	font-size: 0.992187499998em; /* 1/1.00787401575 */
+	font-size: 0.9921875em; /* 1/1.00787401575 */
 }
 
 .ve-init-mw-desktopArticleTarget-toolbar {
-	/* 0.6/0.8, 0.8/0.8, 1/0.6 */
-	margin: -0.75em -1em 1.25em -1em;
+	/* 1/1.00787401575 */
+	margin: -0.9921875em;
+	margin-bottom: 0;
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
-	top: -3px;
+.ve-init-mw-desktopArticleTarget-originalContent {
+	padding-top: 0.9921875em;
 }
 
 /* Main document debug bar */
@@ -37,6 +38,11 @@
 	/* 0.8/0.8 */
 	padding: 1em;
 	margin: 1em -1em -1em -1em;
+}
+
+.ve-init-mw-target-surface {
+	margin-bottom: -0.9921875em;
+	padding-bottom: 0.9921875em;
 }
 
 .ve-init-mw-target-surface .ve-ce-documentNode,
