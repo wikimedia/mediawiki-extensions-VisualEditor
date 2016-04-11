@@ -306,12 +306,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 	}
 
 	if ( data.checkboxes ) {
-		defaults = {
-			wpMinoredit: !!mw.user.options.get( 'minordefault' ),
-			wpWatchthis: !!mw.user.options.get( 'watchdefault' ) ||
-				( !!mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
-				data.watched === ''
-		};
+		defaults = {};
 		$( '.editCheckboxes input' ).each( function () {
 			defaults[ this.name ] = this.checked;
 		} );
@@ -342,7 +337,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 			}
 			checkbox = new OO.ui.CheckboxInputWidget( {
 				value: $this.attr( 'value' ),
-				selected: name && defaults[ name ]
+				selected: defaults[ name ] !== undefined ? defaults[ name ] : $this.prop( 'checked' )
 			} );
 			// HACK: CheckboxInputWidget doesn't support access keys
 			checkbox.$input.attr( 'accesskey', $( this ).attr( 'accesskey' ) );
