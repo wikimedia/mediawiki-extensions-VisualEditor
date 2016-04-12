@@ -189,6 +189,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Descrición do campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Non hai ningunha descrición dispoñible para o campo.",
 	"visualeditor-dialog-transclusion-placeholder": "Engadir un modelo",
+	"visualeditor-dialog-transclusion-raw-fallback": "Volver ó wikitexto plano",
 	"visualeditor-dialog-transclusion-remove-content": "Eliminar o contido",
 	"visualeditor-dialog-transclusion-remove-param": "Eliminar o campo",
 	"visualeditor-dialog-transclusion-remove-template": "Eliminar o modelo",

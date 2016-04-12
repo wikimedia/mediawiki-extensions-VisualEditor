@@ -17,7 +17,8 @@
 			"Jenniesarina",
 			"Dan Koehl",
 			"Rockyfelle",
-			"Warrakkk"
+			"Warrakkk",
+			"Thurs"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
@@ -270,7 +271,7 @@
 	"visualeditor-parameter-search-no-unused": "Inga oanvända fält",
 	"visualeditor-parameter-search-unknown": "Okänt fält",
 	"visualeditor-preference-betatempdisable": "Avaktivera den visuella redigeraren tillfälligt medan den är i betaversion",
-	"visualeditor-preference-core-description": "Aktivera den visuella redigeraren. Det kommer inte att vara tillgängliga på tal sidor och några andra namnrymder.",
+	"visualeditor-preference-core-description": "Aktivera den visuella redigeraren. Den kommer inte att vara tillgänglig på diskussionssidor och några andra namnrymder.",
 	"visualeditor-preference-core-label": "Visuell redigering",
 	"visualeditor-preference-enable": "Aktivera den visuella redigeraren. Den kommer att vara tillgänglig i följande {{PLURAL:$2|namnrymd|namnrymder}}: $1",
 	"visualeditor-preference-tabs": "Redigeringsläge",
