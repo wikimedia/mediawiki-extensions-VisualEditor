@@ -10,6 +10,10 @@ module VisualEditorHelper
 
   def i18n_file
     language = lookup(:language_screenshot_code)
-    (File.exist?("i18n/#{language}.json")) ? "i18n/#{language}.json" : 'i18n/en.json'
+    file_name = File.expand_path("../../i18n/#{language}.json", __dir__)
+    unless File.exist?(file_name)
+      file_name = File.expand_path('../../i18n/en.json', __dir__)
+    end
+    file_name
   end
 end
