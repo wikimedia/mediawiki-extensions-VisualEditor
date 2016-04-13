@@ -470,9 +470,12 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 		return;
 	}
 
-	// Just in case this wasn't closed before
+	// Just in case these weren't closed before
 	if ( this.welcomeDialog ) {
 		this.welcomeDialog.close();
+	}
+	if ( this.editingTabDialog ) {
+		this.editingTabDialog.close();
 	}
 	this.editingTabDialog = null;
 
