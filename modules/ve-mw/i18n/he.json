@@ -275,7 +275,7 @@
 	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא יהיה זמין {{PLURAL:$2|במרחב השם הבא|במרחבי השם הבאים}}: $1",
 	"visualeditor-preference-tabs": "מצב עריכה",
 	"visualeditor-preference-tabs-multi-tab": "הציגו לי את שתי לשוניות העריכה",
-	"visualeditor-preference-tabs-prefer-ve": "תמיד תנו לי את העורך החזותי אם אפשר",
+	"visualeditor-preference-tabs-prefer-ve": "תנו לי תמיד את העורך החזותי אם אפשר",
 	"visualeditor-preference-tabs-prefer-wt": "תמיד תנו לי את עורך קוד המקור",
 	"visualeditor-preference-tabs-remember-last": "זכרו את העורך האחרון שלי",
 	"visualeditor-recreate": "הדף הזה נמחק מאז שהתחלת לערוך. לחיצה על \"$1\" תיצור את הדף מחדש.",
