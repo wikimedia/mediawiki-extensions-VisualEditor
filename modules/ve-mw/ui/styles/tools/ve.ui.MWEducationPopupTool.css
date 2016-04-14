@@ -11,7 +11,7 @@
 	border-radius: 50%;
 	background-color: #347bff;
 	position: absolute;
-	opacity: 1;
+	opacity: 0;
 	-webkit-animation: pulse 3s ease-out;
 	   -moz-animation: pulse 3s ease-out;
 	        animation: pulse 3s ease-out;
