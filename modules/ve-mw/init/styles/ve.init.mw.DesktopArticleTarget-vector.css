@@ -24,11 +24,11 @@
 	padding-bottom: 1.25em;
 }
 
-.ve-init-mw-desktopArticleTarget-originalContent {
+.ve-active .ve-init-mw-desktopArticleTarget-originalContent {
 	padding-top: 1.25em;
 }
 
-.ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
+.ve-active .ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
 	padding-left: 1.25em;
 	padding-right: 1.25em;
 }
@@ -103,11 +103,11 @@
 		padding-bottom: 1.875em;
 	}
 
-	.ve-init-mw-desktopArticleTarget-originalContent {
+	.ve-active .ve-init-mw-desktopArticleTarget-originalContent {
 		padding-top: 1.875em;
 	}
 
-	.ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
+	.ve-active .ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
 		padding-left: 1.875em;
 		padding-right: 1.875em;
 	}
