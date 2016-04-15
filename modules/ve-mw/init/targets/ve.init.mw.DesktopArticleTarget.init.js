@@ -22,7 +22,8 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
 		pageCanLoadVE, init, targetPromise, enable, tempdisable, autodisable,
-		tabPreference, userPrefEnabled, initialWikitext, oldid, multipleSectionEditLinks,
+		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
+		onlyTabIsVE,
 		active = false,
 		progressStep = 0,
 		progressSteps = [
@@ -136,10 +137,27 @@
 				.then( function () {
 					var target;
 
-					// Transfer methods
-					ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
-
 					target = ve.init.mw.targetFactory.create( 'article' );
+					target.connect( this, {
+						transformPage: function () {
+							if ( onlyTabIsVE ) {
+								$( '#ca-edit' ).addClass( 'selected' );
+							}
+						},
+						restorePage: function () {
+							if ( onlyTabIsVE ) {
+								$( '#ca-edit' ).removeClass( 'selected' );
+							}
+						},
+						deactivate: function () {
+							if (
+								userPrefPreferShow &&
+								( !conf.singleEditTab || tabPreference === 'multi-tab' )
+							) {
+								init.setupSectionLinks();
+							}
+						}
+					} );
 					$( '#content' ).append( target.$element );
 					return target;
 				}, function ( e ) {
@@ -299,21 +317,6 @@
 		uri.query.action === 'edit' ||
 		uri.query.action === 'submit'
 	);
-	// On a view page, extend the current URI so parameters like oldid are carried over
-	// On a non-view page, use viewUri
-	if (
-		conf.singleEditTab &&
-		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
-	) {
-		veEditUri = viewUri.clone().extend( { action: 'edit' } );
-		delete veEditUri.query.veaction;
-	} else {
-		veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
-		delete veEditUri.query.action;
-	}
-	if ( oldid ) {
-		veEditUri.extend( { oldid: oldid } );
-	}
 
 	init = {
 		blacklist: conf.blacklist,
@@ -429,7 +432,7 @@
 			}
 
 			// If the edit tab is hidden, remove it.
-			if ( !( init.isAvailable && userPrefEnabled ) ) {
+			if ( !( init.isAvailable && userPrefPreferShow ) ) {
 				$caVeEdit.remove();
 			} else if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
@@ -459,14 +462,6 @@
 		setupSectionLinks: function () {
 			var $editsections = $( '#mw-content-text .mw-editsection' ),
 				bodyDir = $( 'body' ).css( 'direction' );
-
-			if ( !multipleSectionEditLinks ) {
-				// More horrible stuff to prevent the weird caller in
-				// ve.init.mw.DesktopArticleTarget.prototype.saveComplete
-				// from having any effect when we wouldn't normally get
-				// called at all.
-				return;
-			}
 
 			// Match direction of the user interface
 			// TODO: Why is this needed? It seems to work fine without.
@@ -616,6 +611,25 @@
 	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
 	autodisable = Number( mw.user.options.get( 'visualeditor-autodisable' ) );
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
+	onlyTabIsVE = mw.config.get( 'wgVisualEditorConfig' ).singleEditTab && (
+		tabPreference === 'prefer-ve' || (
+			tabPreference === 'remember-last' &&
+			getLastEditor() !== 'wikitext'
+		)
+	);
+
+	// On a view page, extend the current URI so parameters like oldid are carried over
+	// On a non-view page, use viewUri
+	if ( onlyTabIsVE ) {
+		veEditUri = viewUri.clone().extend( { action: 'edit' } );
+		delete veEditUri.query.veaction;
+	} else {
+		veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
+		delete veEditUri.query.action;
+	}
+	if ( oldid ) {
+		veEditUri.extend( { oldid: oldid } );
+	}
 
 	userPrefEnabled = (
 		// Allow disabling for anonymous users separately from changing the
@@ -625,7 +639,10 @@
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable &&
+		enable && !tempdisable && !autodisable
+	);
+	userPrefPreferShow = (
+		userPrefEnabled &&
 
 		// If in two-edit-tab mode, or the user doesn't prefer wikitext always
 		( !conf.singleEditTab || tabPreference !== 'prefer-wt' )
@@ -670,7 +687,7 @@
 	// on this page. See above for why it may be false.
 	mw.libs.ve = $.extend( mw.libs.ve || {}, init );
 
-	if ( init.isAvailable && userPrefEnabled ) {
+	if ( init.isAvailable && userPrefPreferShow ) {
 		$( 'html' ).addClass( 've-available' );
 	} else {
 		$( 'html' ).addClass( 've-not-available' );
@@ -686,7 +703,17 @@
 		if ( init.isAvailable ) {
 			// Load the editor …
 			if (
-				(
+				uri.query.undo === undefined &&
+				uri.query.undoafter === undefined &&
+				uri.query.editintro === undefined &&
+				uri.query.preload === undefined &&
+				uri.query.preloadtitle === undefined &&
+				uri.query.preloadparams === undefined &&
+				uri.query.veswitched === undefined
+				// Known-good parameters: edit, veaction, section, vesection
+				// TODO: other params too? See identical list in VisualEditor.hooks.php)
+			) {
+				if (
 					// … if on a ?veaction=edit page
 					( isViewPage && uri.query.veaction === 'edit' ) ||
 					// … or if on ?action=edit in single edit mode and the user wants it
@@ -696,7 +723,7 @@
 							uri.query.wteswitched === '1' ||
 							(
 								tabPreference !== 'multi-tab' &&
-								userPrefEnabled &&
+								userPrefPreferShow &&
 								// If it's a view-source situation, we don't want to show VE on-load
 								!$( '#ca-viewsource' ).length &&
 								(
@@ -712,22 +739,20 @@
 							)
 						)
 					)
-				) &&
-				uri.query.undo === undefined &&
-				uri.query.undoafter === undefined &&
-				uri.query.editintro === undefined &&
-				uri.query.preload === undefined &&
-				uri.query.preloadtitle === undefined &&
-				uri.query.preloadparams === undefined &&
-				uri.query.veswitched === undefined
-				// Known-good parameters: edit, veaction, section, vesection
-				// TODO: other params too? See identical list in VisualEditor.hooks.php
-			) {
-				trackActivateStart( {
-					type: uri.query.vesection === undefined ? 'page' : 'section',
-					mechanism: 'url'
-				} );
-				activateTarget();
+				) {
+					trackActivateStart( {
+						type: uri.query.vesection === undefined ? 'page' : 'section',
+						mechanism: 'url'
+					} );
+					activateTarget();
+				} else if ( pageCanLoadVE && userPrefEnabled ) {
+					// Page can be edited in VE, parameters are good, user prefs are mostly good
+					// but have visualeditor-tabs=prefer-wt? Add a keyboard shortcut to go to
+					// VE.
+					$( 'body' ).append(
+						$( '<a>' ).attr( { accesskey: 'v', href: veEditUri } ).hide()
+					);
+				}
 			}
 
 			// Add the switch button to wikitext ?action=edit or ?action=submit pages
@@ -818,37 +843,23 @@
 			}
 
 			// Set up the tabs appropriately if the user has VE on
-			if (
-				userPrefEnabled
-			) {
+			if ( userPrefPreferShow ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
 				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
 					// … set the skin up with both tabs and both section edit links.
-					multipleSectionEditLinks = true;
 					init.setupSkin();
-				} else {
-					multipleSectionEditLinks = false;
+				} else if ( pageCanLoadVE && onlyTabIsVE ) {
 					// … on single-edit-tab wikis, where VE is the user's preferred editor
-					if (
-						pageCanLoadVE && (
-							tabPreference === 'prefer-ve' ||
-							(
-								tabPreference === 'remember-last' &&
-								getLastEditor() !== 'wikitext'
-							)
-						)
-					) {
-						// Handle section edit link clicks
-						$( '.mw-editsection a' ).on( 'click', function ( e ) {
-							init.onEditSectionLinkClick( e );
-						} );
-						// Allow instant switching to edit mode, without refresh
-						$( '#ca-edit' ).on( 'click', function ( e ) {
-							trackActivateStart( { type: 'page', mechanism: 'click' } );
-							activateTarget();
-							e.preventDefault();
-						} );
-					}
+					// Handle section edit link clicks
+					$( '.mw-editsection a' ).on( 'click', function ( e ) {
+						init.onEditSectionLinkClick( e );
+					} );
+					// Allow instant switching to edit mode, without refresh
+					$( '#ca-edit' ).on( 'click', function ( e ) {
+						trackActivateStart( { type: 'page', mechanism: 'click' } );
+						activateTarget();
+						e.preventDefault();
+					} );
 				}
 			}
 		}

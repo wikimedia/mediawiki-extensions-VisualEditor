@@ -95,12 +95,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.ArticleTarget );
 
-/* Events */
-
-/**
- * @event deactivate
- */
-
 /* Static Properties */
 
 ve.init.mw.DesktopArticleTarget.static.actionGroups = [
@@ -138,6 +132,18 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
 
 /* Events */
+
+/**
+ * @event deactivate
+ */
+
+/**
+ * @event transformPage
+ */
+
+/**
+ * @event restorePage
+ */
 
 /**
  * @event saveWorkflowBegin
@@ -486,12 +492,14 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 	this.editingTabDialog = null;
 
 	if ( noDialog || this.activating || !this.edited ) {
+		this.emit( 'deactivate' );
 		this.cancel( trackMechanism );
 	} else {
 		this.getSurface().dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
 			opened.then( function ( closing ) {
 				closing.then( function ( data ) {
 					if ( data && data.action === 'discard' ) {
+						this.emit( 'deactivate' );
 						target.cancel( trackMechanism );
 					}
 				} );
@@ -857,7 +865,6 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 			} );
 		}
 
-		this.setupSectionEditLinks();
 		// Tear down the target now that we're done saving
 		// Not passing trackMechanism because this isn't an abort action
 		this.deactivate( true );
@@ -1007,13 +1014,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 };
 
 /**
- * Modify page content to make section edit links activate the editor.
- * Dummy replaced by init.js so that we can call it again from #saveSuccess after
- * replacing the page contents with the new html.
- */
-ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = null;
-
-/**
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () {
@@ -1107,13 +1107,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// separate tab sections for content actions and namespaces the below is a no-op.
 	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
 	$( '#ca-ve-edit' ).addClass( 'selected' );
-	if (
-		mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
-		mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
-	) {
-		$( '#ca-edit' ).addClass( 'selected' );
-	}
+	this.emit( 'transformPage' );
 
 	mw.hook( 've.activate' ).fire();
 
@@ -1158,19 +1152,13 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
 	// In skins having #ca-view (like Vector), select that.
 	$( '#ca-ve-edit' ).removeClass( 'selected' );
-	if (
-		mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
-	) {
-		$( '#ca-edit' ).removeClass( 'selected' );
-	}
 	$( '#ca-view' ).addClass( 'selected' );
 
 	// Remove any VE-added redirectMsg
 	$( '.ve-redirect-header' ).remove();
 
 	mw.hook( 've.deactivate' ).fire();
-	this.emit( 'deactivate' );
+	this.emit( 'restorePage' );
 
 	// Push article url into history
 	if ( !this.actFromPopState && history.pushState ) {
