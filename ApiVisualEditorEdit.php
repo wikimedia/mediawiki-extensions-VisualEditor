@@ -199,15 +199,20 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			if ( class_exists( 'FlaggablePageView' ) ) {
 				$view = FlaggablePageView::singleton();
 
+				$originalRequest = $view->getContext()->getRequest();
+				$originalTitle = RequestContext::getMain()->getTitle();
 				// Defeat !$this->isPageView( $request ) || $request->getVal( 'oldid' ) check in setPageContent
-				$view->getContext()->setRequest( new DerivativeRequest(
+				$newRequest = new DerivativeRequest(
 					$this->getRequest(),
 					[
 						'diff' => null,
 						'oldid' => '',
+						'title' => $page->getPrefixedText(),
 						'action' => 'view'
 					] + $this->getRequest()->getValues()
-				) );
+				);
+				$view->getContext()->setRequest( $newRequest );
+				RequestContext::getMain()->setTitle( $page );
 
 				// The two parameters here are references but we don't care
 				// about what FlaggedRevs does with them.
@@ -215,6 +220,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$useParserCache = null;
 				$view->setPageContent( $outputDone, $useParserCache );
 				$view->displayTag();
+				$view->getContext()->setRequest( $originalRequest );
+				RequestContext::getMain()->setTitle( $originalTitle );
 			}
 			$result['contentSub'] = $this->getOutput()->getSubtitle();
 			$lang = $this->getLanguage();
