@@ -265,9 +265,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 		$( 'body' ).append( windowManager.$element );
 		this.editingTabDialog = new mw.libs.ve.EditingTabDialog();
 		windowManager.addWindows( [ this.editingTabDialog ] );
-		windowManager.openWindow( this.editingTabDialog, { message: mw.msg(
-			'visualeditor-editingtabdialog-body'
-		) } )
+		windowManager.openWindow( this.editingTabDialog )
 			.then( function ( opened ) { return opened; } )
 			.then( function ( closing ) { return closing; } )
 			.then( function ( data ) {

@@ -795,9 +795,7 @@
 							$( 'body' ).append( windowManager.$element );
 							editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
-							windowManager.openWindow( editingTabDialog, { message: mw.msg(
-								'visualeditor-editingtabdialog-body'
-							) } )
+							windowManager.openWindow( editingTabDialog )
 								.then( function ( opened ) { return opened; } )
 								.then( function ( closing ) { return closing; } )
 								.then( function ( data ) {
