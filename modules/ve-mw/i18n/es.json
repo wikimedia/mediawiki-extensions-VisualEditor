@@ -26,7 +26,8 @@
 			"Themasterriot",
 			"Vikytinta",
 			"Ncontinanza",
-			"Guillermo2149"
+			"Guillermo2149",
+			"Lemondoge"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -186,6 +187,7 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Mostrar tabla de contenidos",
 	"visualeditor-dialog-meta-title": "Opciones",
 	"visualeditor-dialog-table-sortable": "Ordenable",
+	"visualeditor-dialog-table-wikitable": "De estilo (wikitable)",
 	"visualeditor-dialog-template-title": "Plantilla",
 	"visualeditor-dialog-transclusion-add-content": "Añadir contenido",
 	"visualeditor-dialog-transclusion-add-param": "Añadir más información",
@@ -294,6 +296,7 @@
 	"visualeditor-redirect-description": "Redirigir a $1",
 	"visualeditor-savedialog-error-badtoken": "No pudimos guardar tu edición porque la sesión ya no es válida.",
 	"visualeditor-savedialog-identify-anon": "¿Quieres guardar esta página como usuario anónimo? Tu dirección IP se registrará en el historial de edición de esta página.",
+	"visualeditor-savedialog-identify-trylogin": "Usted ya no se registran en. Por favor, vuelva a iniciar la sesión de una ficha diferente y probar de nuevo.",
 	"visualeditor-savedialog-identify-user": "Has iniciado sesión como [[User:$1|$1]]. Si guardas esta edición, se asociará con esta cuenta.",
 	"visualeditor-savedialog-label-create": "Crear página",
 	"visualeditor-savedialog-label-error": "Error",
