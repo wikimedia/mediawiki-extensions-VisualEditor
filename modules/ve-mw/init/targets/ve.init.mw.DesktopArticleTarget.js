@@ -1096,7 +1096,8 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	$( '#ca-ve-edit' ).addClass( 'selected' );
 	if (
 		mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
+		mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab' &&
+		mw.user.options.get( 'visualeditor-tabs' ) !== 'prefer-wt'
 	) {
 		$( '#ca-edit' ).addClass( 'selected' );
 	}
