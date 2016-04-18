@@ -188,6 +188,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|заўвага|заўвагі|заўваг}}",
 	"visualeditor-editnotices-tooltip": "Заўвагі да рэдагаваньня",
 	"visualeditor-editsummary": "Апішыце вашыя зьмены",
+	"visualeditor-editsummary-bytes-remaining": "Колькасьць байтаў, што засталася",
 	"visualeditor-educationpopup-dismiss": "Добра, зразумела",
 	"visualeditor-feedback-defaultmessage": "URL-адрас: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Загаловак старонкі",

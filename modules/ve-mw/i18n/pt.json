@@ -181,6 +181,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Descrição do campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Não está disponível nenhuma descrição para o campo",
 	"visualeditor-dialog-transclusion-placeholder": "Adicionar predefinição",
+	"visualeditor-dialog-transclusion-raw-fallback": "Regressar ao modo de wikitexto",
 	"visualeditor-dialog-transclusion-remove-content": "Remover conteúdo",
 	"visualeditor-dialog-transclusion-remove-param": "Remover campo",
 	"visualeditor-dialog-transclusion-remove-template": "Remover predefinição",
