@@ -282,6 +282,7 @@
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.api.options",
+				"mediawiki.action.view.postEdit",
 				"user.options",
 				"ext.visualEditor.supportCheck",
 				"ext.visualEditor.track"
