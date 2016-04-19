@@ -223,7 +223,7 @@
 	"visualeditor-editconflict": "Ваши изменения не удалось сохранить, потому что произошёл конфликт редактирования. Хотите ли {{GENDER:|вы}} разрешить конфликт вручную?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} теперь помнит, какой редактор вы предпочитаете.  Вы можете переключать режимы во время редактирования или изменить свои настройки позже.",
 	"visualeditor-editingtabdialog-ok": "Пользоваться редактором, который я использовал при последней правке",
-	"visualeditor-editingtabdialog-title": "Ҡушымталарҙы мөхәррирләү",
+	"visualeditor-editingtabdialog-title": "Вкладки правки",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сообщение|сообщения|сообщений}}",
 	"visualeditor-editnotices-tooltip": "Заметки по редактированию",
 	"visualeditor-editsummary": "Опишите внесённые изменения",
