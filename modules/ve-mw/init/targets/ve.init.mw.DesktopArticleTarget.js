@@ -662,7 +662,11 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 
 	// Update UI
 	this.changeDocumentTitle();
-	this.restoreScrollPosition();
+	// Support: IE<=11
+	// IE requires us to defer before restoring the scroll position
+	setTimeout( function () {
+		target.restoreScrollPosition();
+	} );
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
@@ -1037,7 +1041,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveScrollPosition = function () {
  * Restore the window's scroll position.
  */
 ve.init.mw.DesktopArticleTarget.prototype.restoreScrollPosition = function () {
-	if ( this.scrollTop ) {
+	if ( this.scrollTop !== null ) {
 		$( window ).scrollTop( this.scrollTop );
 		this.scrollTop = null;
 	}
