@@ -269,7 +269,7 @@
 	"visualeditor-parameter-search-more": "להציג {{PLURAL:$1|עוד שדה|עוד $1 שדות}}",
 	"visualeditor-parameter-search-no-unused": "אין שדות שאינם בשימוש",
 	"visualeditor-parameter-search-unknown": "שדה לא ידוע",
-	"visualeditor-preference-betatempdisable": "כיבוי זמני של העורך החזותי בזמן שהוא בגרסת בטא",
+	"visualeditor-preference-betatempdisable": "ביטול זמני של העורך החזותי בזמן שהוא בגרסת בטא",
 	"visualeditor-preference-core-description": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
 	"visualeditor-preference-core-label": "עריכה חזותית",
 	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא יהיה זמין {{PLURAL:$2|במרחב השם הבא|במרחבי השם הבאים}}: $1",
