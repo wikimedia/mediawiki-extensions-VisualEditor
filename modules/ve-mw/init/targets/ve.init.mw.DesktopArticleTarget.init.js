@@ -634,18 +634,16 @@
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
 	init.isAvailable = (
+		// Support check asserts that Array.prototype.indexOf is available so we can use it below
 		VisualEditorSupportCheck() &&
 
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
 
 		// Only in supported skins
-		$.inArray( mw.config.get( 'skin' ), conf.skins ) !== -1 &&
+		conf.skins.indexOf( mw.config.get( 'skin' ) ) !== -1 &&
 
 		// Only in enabled namespaces
-		$.inArray(
-			new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId(),
-			conf.namespaces
-		) !== -1 &&
+		conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
 
 		// Not on pages like Special:RevisionDelete
 		mw.config.get( 'wgNamespaceNumber' ) !== -1 &&
