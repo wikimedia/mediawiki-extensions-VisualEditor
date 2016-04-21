@@ -103,6 +103,7 @@
 			"Category": true,
 			"_merge_strategy": "array_plus"
 		},
+		"VisualEditorAvailableContentModels": [ "wikitext" ],
 		"VisualEditorSkinToolbarScrollOffset": [],
 		"VisualEditorParsoidTimeout": 100,
 		"VisualEditorUseSingleEditTab": false,
