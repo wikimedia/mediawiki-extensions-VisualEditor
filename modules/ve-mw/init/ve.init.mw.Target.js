@@ -34,6 +34,15 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
 /* Static Properties */
 
+/**
+ * Symbolic name for this target class.
+ *
+ * @static
+ * @property {string}
+ * @inheritable
+ */
+ve.init.mw.Target.static.name = null;
+
 ve.init.mw.Target.static.toolbarGroups = [
 	// History
 	{ include: [ 'undo', 'redo' ] },

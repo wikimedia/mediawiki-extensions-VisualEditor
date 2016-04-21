@@ -11,4 +11,6 @@
  * @class
  * @singleton
  */
-ve.init.mw = {};
+ve.init.mw = {
+	targetFactory: new OO.Factory()
+};

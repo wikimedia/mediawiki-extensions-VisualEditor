@@ -161,13 +161,18 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 /* Static Properties */
 
 /**
- * Name of target class. Used by ArticleTargetEvents to identify which target we are tracking.
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.static.name = 'article';
+
+/**
+ * Tracking name of target class. Used by ArticleTargetEvents to identify which target we are tracking.
  *
  * @static
  * @property {string}
  * @inheritable
  */
-ve.init.mw.ArticleTarget.static.name = 'mwTarget';
+ve.init.mw.ArticleTarget.static.trackingName = 'mwTarget';
 
 /**
  * @inheritdoc
@@ -1679,7 +1684,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		) {
 			windowManager.openWindow(
 				'welcome',
-				{ targetName: this.constructor.static.name }
+				{ targetName: this.constructor.static.trackingName }
 			)
 				.then( function ( opened ) {
 					return opened;
