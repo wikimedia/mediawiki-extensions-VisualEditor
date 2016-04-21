@@ -61,7 +61,7 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	{ include: [ 'done' ] }
 ];
 
-ve.init.mw.MobileArticleTarget.static.name = 'mobile';
+ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
 
 // FIXME Some of these users will be on tablets, check for this
 ve.init.mw.MobileArticleTarget.static.platformType = 'phone';
@@ -223,6 +223,10 @@ ve.init.mw.MobileArticleTarget.prototype.close = function () {
 ve.init.mw.MobileArticleTarget.prototype.done = function () {
 	this.getSurface().getView().blur();
 };
+
+/* Registration */
+
+ve.init.mw.targetFactory.register( ve.init.mw.MobileArticleTarget );
 
 /**
  * Back tool

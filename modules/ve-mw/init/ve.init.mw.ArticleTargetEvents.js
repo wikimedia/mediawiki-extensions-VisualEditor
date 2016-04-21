@@ -50,7 +50,7 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
  * @param {Object} data Additional data describing the event, encoded as an object
  */
 ve.init.mw.ArticleTargetEvents.prototype.track = function ( topic, data ) {
-	data.targetName = this.target.constructor.static.name;
+	data.targetName = this.target.constructor.static.trackingName;
 	ve.track( 'mwtiming.' + topic, data );
 
 	if ( topic.indexOf( 'performance.system.serializeforcache' ) === 0 ) {

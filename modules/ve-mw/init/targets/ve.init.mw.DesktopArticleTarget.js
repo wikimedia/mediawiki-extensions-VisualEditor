@@ -651,7 +651,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	this.surface.getModel().getDocument().once( 'transact', function () {
 		ve.track( 'mwtiming.behavior.firstTransaction', {
 			duration: ve.now() - surfaceReadyTime,
-			targetName: target.constructor.static.name
+			targetName: target.constructor.static.trackingName
 		} );
 	} );
 
@@ -1451,3 +1451,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 ve.init.mw.DesktopArticleTarget.prototype.resetDocumentOpacity = function () {
 	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
 };
+
+/* Registration */
+
+ve.init.mw.targetFactory.register( ve.init.mw.DesktopArticleTarget );

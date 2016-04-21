@@ -139,7 +139,7 @@
 					// Transfer methods
 					ve.init.mw.DesktopArticleTarget.prototype.setupSectionEditLinks = init.setupSectionLinks;
 
-					target = new ve.init.mw.DesktopArticleTarget();
+					target = ve.init.mw.targetFactory.create( 'article' );
 					$( '#content' ).append( target.$element );
 					return target;
 				}, function ( e ) {
