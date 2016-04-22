@@ -409,15 +409,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 
 		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
-			$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
-			// Move original content inside the surface for viewport calculations
-			target.getSurface().$element.prepend( target.$originalContent );
-			if ( !target.editingTabDialog ) {
-				// We have to focus the page after hiding the original content, otherwise
-				// in firefox the contentEditable container was below the view page, and
-				// 'focus' scrolled the screen down.
-				target.getSurface().getView().focus();
-			}
+			target.afterActivate();
 		} ).fail( function () {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
@@ -449,6 +441,22 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.load( dataPromise );
 	}
 	return this.activatingDeferred.promise();
+};
+
+/**
+ * Edit mode has finished activating
+ */
+ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
+	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
+	// Move original content inside the surface for viewport calculations
+	this.getSurface().$element.prepend( this.$originalContent );
+	if ( !this.editingTabDialog ) {
+		// We have to focus the page after hiding the original content, otherwise
+		// in firefox the contentEditable container was below the view page, and
+		// 'focus' scrolled the screen down.
+		// Support: Firefox
+		this.getSurface().getView().focus();
+	}
 };
 
 /**
