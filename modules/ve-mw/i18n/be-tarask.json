@@ -207,6 +207,7 @@
 	"visualeditor-linknodeinspector-title": "Простая спасылка",
 	"visualeditor-loadwarning": "Памылка ў час загрузкі зьвестак з сэрвэру: $1. Жадаеце паўтарыць?",
 	"visualeditor-loadwarning-token": "Памылка ў час загрузкі токена рэдагаваньня з сэрвэра: $1. Жадаеце паўтарыць?",
+	"visualeditor-magiclinknodeinspector-convert-link": "Ператварыць у простую спасылку",
 	"visualeditor-mainnamespacepagelink": "Project:Асноўная прастора",
 	"visualeditor-media-input-placeholder": "Пошук мэдыяў",
 	"visualeditor-meta-tool": "Налады",
