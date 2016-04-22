@@ -5,6 +5,11 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-overlay-global {
+	/* Enforce different font-size for all UI elements of VisualEditor */
+	font-size: 1.28em; /* 0.8em / x-small */
+}
+
 .mw-body a.external.ve-ce-linkAnnotation-active {
 	/* Reset -2px from VE-core */
 	margin-right: 0;

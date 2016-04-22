@@ -5,11 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-overlay-global {
-	/* Enforce different font-size for all UI elements of VisualEditor */
-	font-size: 1.28em; /* 0.8em / x-small */
-}
-
 .ve-init-mw-desktopArticleTarget {
 	/* Enforce different font-size for all UI elements of VisualEditor. The difference is tiny, but
 	   enough to make the icon containers 23.813px rather than 24px and thus the icons blurry */
