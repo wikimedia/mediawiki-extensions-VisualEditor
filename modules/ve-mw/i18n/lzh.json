@@ -4,7 +4,8 @@
 			"StephDC",
 			"LNDDYL",
 			"Jason924tw",
-			"飞舞回堂前"
+			"飞舞回堂前",
+			"SolidBlock"
 		]
 	},
 	"tooltip-ca-ve-edit": "纂是頁",
@@ -12,8 +13,7 @@
 	"visualeditor-ca-editsource": "纂碼",
 	"visualeditor-ca-editsource-section": "纂碼",
 	"visualeditor-categories-tool": "類",
-	"visualeditor-cite-tool-name-book": "書",
-	"visualeditor-cite-tool-name-news": "事",
+	"visualeditor-descriptionpagelink": "Project:呈纂",
 	"visualeditor-dialog-media-noresults": "詢中無結",
 	"visualeditor-dialog-media-position-none": "無",
 	"visualeditor-dialog-media-type-thumb": "縮",
