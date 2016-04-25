@@ -248,6 +248,7 @@
 	"visualeditor-usernamespacepagelink": "Project:Старонка ўдзельніка",
 	"visualeditor-version-label": "Вэрсія",
 	"visualeditor-viewpage-savewarning": "Вы ўпэўненыя, што жадаеце выйсьці з рэжыму рэдагаваньня без папярэдняга захаваньня?",
+	"visualeditor-viewpage-savewarning-title": "Вы ўпэўненыя?",
 	"visualeditor-wikitext-warning": "Вы карыстаецеся візуальным рэдактарам — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікітэкст]] тут не працуе. Каб пераключыцца на рэдагаваньне вікітэксту ў любы момант бяз страты зьменаў, адкрыйце выпаднае мэню побач з «{{int:visualeditor-toolbar-savedialog}}» і абярыце «{{int:visualeditor-mweditmodesource-title}}».",
 	"visualeditor-wikitext-warning-title": "Выяўленае ўжываньне вікітэксту"
 }
