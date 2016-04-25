@@ -1066,6 +1066,8 @@
 				"visualeditor-mweditmodeve-title",
 				"visualeditor-mweditmodeve-tool",
 				"visualeditor-mweditmodeve-warning",
+				"visualeditor-mweditmodewt-popup-body",
+				"visualeditor-mweditmodewt-popup-title",
 				"visualeditor-preference-tabs-multi-tab",
 				"visualeditor-preference-tabs-prefer-ve",
 				"visualeditor-preference-tabs-prefer-wt"
@@ -1106,8 +1108,8 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWTableDialog.js",
 				"modules/ve-mw/ui/elements/ve.ui.MWExpandableErrorElement.js",
 				"modules/ve-mw/ui/elements/ve.ui.MWPreviewElement.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",

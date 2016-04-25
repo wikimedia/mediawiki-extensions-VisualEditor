@@ -749,7 +749,10 @@
 										mw.user.options.set( 'visualeditor-hidesourceswitchpopup', configValue );
 									} );
 
-								showAgainLayout = new OO.ui.FieldLayout( showAgainCheckbox, { align: 'inline', label: mw.msg( 'visualeditor-mweditmodeve-showagain' ) } );
+								showAgainLayout = new OO.ui.FieldLayout( showAgainCheckbox, {
+									align: 'inline',
+									label: mw.msg( 'visualeditor-mweditmodeve-showagain' )
+								} );
 								$content = $content.add( showAgainLayout.$element );
 							}
 
@@ -757,7 +760,7 @@
 								framed: false,
 								icon: 'edit',
 								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-								classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ],
+								classes: [ 've-init-mw-editSwitch' ],
 								popup: {
 									label: mw.msg( 'visualeditor-mweditmodeve-popup-title' ),
 									$content: $content,
@@ -773,7 +776,7 @@
 								framed: false,
 								icon: 'edit',
 								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-								classes: [ 've-init-mw-desktopArticleTarget-editSwitch' ]
+								classes: [ 've-init-mw-editSwitch' ]
 							} );
 						}
 

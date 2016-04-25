@@ -5,10 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-init-mw-desktopArticleTarget-editSwitch {
+.wikiEditor-ui-toolbar .ve-init-mw-editSwitch {
 	font-size: 1.0079em;
 }
 
-.ve-init-mw-desktopArticleTarget-editSwitch .oo-ui-buttonElement-button {
+.ve-init-mw-editSwitch .oo-ui-buttonElement-button {
 	padding: 0.35em;
 }

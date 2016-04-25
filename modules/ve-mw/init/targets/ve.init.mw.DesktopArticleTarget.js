@@ -1362,7 +1362,14 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 		this.welcomeDialogPromise
 			.always( function () {
 				// Pop out the notices when the welcome dialog is closed
-				target.actionsToolbar.tools.notices.getPopup().toggle( true );
+				if (
+					target.switched &&
+					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
+				) {
+					target.actionsToolbar.tools.editModeSource.getPopup().toggle( true );
+				} else {
+					target.actionsToolbar.tools.notices.getPopup().toggle( true );
+				}
 			} );
 	}
 

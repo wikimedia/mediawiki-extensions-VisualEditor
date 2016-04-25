@@ -10,18 +10,44 @@
  *
  * @class
  * @abstract
- * @extends ve.ui.Tool
+ * @extends ve.ui.MWPopupTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Config options
  */
 ve.ui.MWEditModeTool = function VeUiMWEditModeTool( toolGroup, config ) {
-	ve.ui.Tool.call( this, toolGroup, config );
+	var tool = this,
+		$content = $( '<p>' ).text( mw.msg( 'visualeditor-mweditmodewt-popup-body' ) ),
+		showAgainLayout, showAgainCheckbox;
+	ve.ui.MWPopupTool.call( this, mw.msg( 'visualeditor-mweditmodewt-popup-title' ), toolGroup, config );
+
+	if ( !mw.user.isAnon() ) {
+		showAgainCheckbox = new OO.ui.CheckboxInputWidget()
+			.on( 'change', function ( value ) {
+				var configValue = value ? '1' : '';
+				new mw.Api().saveOption( 'visualeditor-hidevisualswitchpopup', configValue );
+				mw.user.options.set( 'visualeditor-hidevisualswitchpopup', configValue );
+			} );
+
+		showAgainLayout = new OO.ui.FieldLayout( showAgainCheckbox, {
+			align: 'inline',
+			label: mw.msg( 'visualeditor-mweditmodeve-showagain' )
+		} );
+		$content = $content.add( showAgainLayout.$element );
+	}
+
+	this.popup.$body
+		.addClass( 've-init-mw-editSwitch' )
+		.append( $content );
+	this.popup.$element.click( function () {
+		tool.getPopup().toggle( false );
+	} );
+	this.$element.append( this.popup.$element );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWEditModeTool, ve.ui.Tool );
+OO.inheritClass( ve.ui.MWEditModeTool, ve.ui.MWPopupTool );
 
 /* Static Properties */
 
@@ -34,6 +60,11 @@ ve.ui.MWEditModeTool.static.autoAddToGroup = false;
 /* Methods */
 
 /** */
+ve.ui.MWEditModeTool.prototype.onSelect = function () {
+	// Bypass OO.ui.PopupTool.prototype.onSelect
+	OO.ui.Tool.prototype.onSelect.apply( this, arguments );
+};
+
 ve.ui.MWEditModeTool.prototype.onUpdateState = function () {
 	// Parent method
 	ve.ui.MWEditModeTool.super.prototype.onUpdateState.apply( this, arguments );
