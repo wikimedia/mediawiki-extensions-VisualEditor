@@ -29,7 +29,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'IE9',
 				userAgent: 'Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)',
-				matches: [ 'blacklist' ]
+				matches: []
 			},
 			{
 				msg: 'IE10',
