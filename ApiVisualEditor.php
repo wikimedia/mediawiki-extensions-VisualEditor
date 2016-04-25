@@ -477,17 +477,11 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Blocked user notice for global blocks
-				if ( class_exists( 'GlobalBlocking' ) ) {
-					$error = GlobalBlocking::getUserBlockErrors(
-						$user,
-						$this->getRequest()->getIP()
-					);
-					if ( count( $error ) ) {
-						$notices[] = call_user_func_array(
-							[ $this, 'msg' ],
-							$error
-						)->parseAsBlock();
-					}
+				if ( $user->isBlockedGlobally() ) {
+					$notices[] = call_user_func_array(
+						[ $this, 'msg' ],
+						$user->getGlobalBlock()->getPermissionsError( $this->getContext() )
+					)->parseAsBlock();
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
