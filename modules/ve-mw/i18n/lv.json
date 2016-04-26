@@ -129,6 +129,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Apakšvirsraksts 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Apakšvirsraksts 4",
 	"visualeditor-languages-tool": "Valodas",
+	"visualeditor-linkinspector-button-link-external": "Ārējā saite",
 	"visualeditor-linkinspector-button-link-internal": "Meklēt lapas",
 	"visualeditor-linkinspector-illegal-title": "Nederīgs lapas nosaukums",
 	"visualeditor-linknodeinspector-title": "Vienkārša saite",
@@ -149,7 +150,10 @@
 	"visualeditor-mweditmodeve-popup-body": "Uz vizuālās labošanas skatu jebkurā brīdī var pārslēgties atpakaļ, klikšķinot uz šīs ikonas.",
 	"visualeditor-mweditmodeve-popup-title": "Veikta pārslēgšanās uz vikikoda labošanu",
 	"visualeditor-mweditmodeve-showagain": "Nerādīt vairs šo ziņojumu",
+	"visualeditor-mweditmodeve-title": "Pārslēgties uz vizuālo labošanu?",
+	"visualeditor-mweditmodeve-tool": "Pārslēgties uz vizuālo labošanu",
 	"visualeditor-mwgalleryinspector-title": "Galerija",
+	"visualeditor-mwsignature-tool": "Tavs paraksts",
 	"visualeditor-pagemenu-tooltip": "Lapas iespējas",
 	"visualeditor-parameter-input-placeholder": "Lauka nosaukums",
 	"visualeditor-parameter-search-more": "Rādīt vēl $1 {{PLURAL:$1|laukus|lauku|laukus}}",
@@ -189,7 +193,9 @@
 	"visualeditor-usernamespacepagelink": "Project:Lietotāja nosaukumvieta",
 	"visualeditor-version-label": "Versija",
 	"visualeditor-viewpage-savewarning": "Vai esat pārliecināts, ka vēlaties doties atpakaļ uz skatīšanas režīmu bez izmaiņu saglabāšanas?",
+	"visualeditor-viewpage-savewarning-discard": "Atmest labojumus",
 	"visualeditor-viewpage-savewarning-keep": "Turpināt labošanu",
+	"visualeditor-wikitext-progress": "Pārveido vikitekstu",
 	"visualeditor-wikitext-warning": "Jūs lietojat vizuālo redaktoru - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] šeit nedarbosies. Lai labotu lapu wikitext režīmā, nospiediet \"{{int:visualeditor-ca-editsource}}\" - nesaglabātas izmaiņas tiks pazaudētas.",
 	"visualeditor-wikitext-warning-title": "Atklātas wikitext iezīmes"
 }

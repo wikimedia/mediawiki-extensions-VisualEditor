@@ -257,6 +257,8 @@
 	"visualeditor-mweditmodeve-title": "Zur visuellen Bearbeitung wechseln?",
 	"visualeditor-mweditmodeve-tool": "Zur visuellen Bearbeitung wechseln",
 	"visualeditor-mweditmodeve-warning": "Du wechselst zur visuellen Bearbeitung.\nMöchtest du fortfahren?",
+	"visualeditor-mweditmodewt-popup-body": "Du kannst jederzeit zur Quelltextbearbeitung zurückkehren, indem du dieses Symbol anklickst.",
+	"visualeditor-mweditmodewt-popup-title": "Du hast zur visuellen Bearbeitung gewechselt",
 	"visualeditor-mwgalleryinspector-placeholder": "Beispiel.jpg|Beschreibung für das Bild",
 	"visualeditor-mwgalleryinspector-title": "Galerie",
 	"visualeditor-mwsignature-tool": "Deine Unterschrift",
