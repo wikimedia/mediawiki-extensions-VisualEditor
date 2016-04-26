@@ -1,3 +1,4 @@
+@en.wikipedia.beta.wmflabs.org @firefox @skip
 Feature: VisualEditor Media Interface
 
   Background:
