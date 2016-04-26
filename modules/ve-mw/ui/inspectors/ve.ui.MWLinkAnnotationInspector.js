@@ -135,6 +135,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( anno
 		ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href )
 	) {
 		this.linkTypeIndex.setCard( 'external' );
+		// Changing card focuses and selects the input, so collapse the cursor back to the end.
+		this.externalAnnotationInput.getTextInputWidget().moveCursorToEnd();
 	}
 	this.updateActions();
 };
