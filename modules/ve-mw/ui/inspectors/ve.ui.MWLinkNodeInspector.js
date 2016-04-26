@@ -143,7 +143,12 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 					// selection starts inside or outside of the node.
 					// If you can think of a test function for "the selection has stabilised", this could
 					// be moved to ve.scheduler.
-					surfaceView.selectActiveLinkContents();
+					// Note: we can't rely on surfaceView.activeLink, because the selection-focus created
+					// by the transaction might be outside the link node. As such, get the node immediately
+					// after the offset where we inserted the annotation, and then get the closest link
+					// annotation to it.
+					var node = surfaceView.getDocument().getNodeAndOffset( nodeRange.start + 1 ).node;
+					surfaceView.selectNodeContents( $( node ).closest( '.ve-ce-linkAnnotation' )[ 0 ] );
 				} );
 			} else {
 				surfaceModel.change(
