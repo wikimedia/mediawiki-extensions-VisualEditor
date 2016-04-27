@@ -274,6 +274,8 @@
 	"visualeditor-mweditmodeve-title": "¿Cambiar al editor visual?",
 	"visualeditor-mweditmodeve-tool": "Cambiar a la edición visual",
 	"visualeditor-mweditmodeve-warning": "Estás por cambiar a la edición visual.\n¿Quieres continuar?",
+	"visualeditor-mweditmodewt-popup-body": "Puedes volver a la edición de código en cualquier momento haciendo clic en este icono.",
+	"visualeditor-mweditmodewt-popup-title": "Has cambiado a la edición visual",
 	"visualeditor-mwgalleryinspector-placeholder": "Ejemplo.jpg|Leyenda de imagen",
 	"visualeditor-mwgalleryinspector-title": "Galería",
 	"visualeditor-mwsignature-tool": "Tu firma",
