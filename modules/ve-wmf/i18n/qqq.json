@@ -35,6 +35,7 @@
 	"visualeditor-welcomedialog-action": "Label for the 'Start editing' button used to close the welcome dialog and start using the editor.\n{{Identical|Start editing}}",
 	"visualeditor-welcomedialog-content": "Text welcoming the user to editing.",
 	"visualeditor-welcomedialog-content-thanks": "This message expresses gratitude for the user's upcoming edit. It may be translated in the context of \"Thank you for this action which helps others discover new things\" or \"(By doing this) you're helping readers learn new things\".",
-	"visualeditor-welcomedialog-switch": "Label for the button to switch from the visual editor to the wikitext editor.",
+	"visualeditor-welcomedialog-switch": "Label for the button to switch from the visual editor to the wikitext editor in the welcome dialog.",
+	"visualeditor-welcomedialog-switch-ve": "Label for the button to switch from the wikitext editor to the visualeditor editor in the welcome dialog.",
 	"visualeditor-welcomedialog-title": "Title of the welcome dialog. Parameters:\n* $1 - username or empty string, for GENDER support\n* $2 - value of the SITENAME parser function."
 }

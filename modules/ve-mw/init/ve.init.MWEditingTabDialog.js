@@ -7,7 +7,7 @@
 
 mw.libs.ve = mw.libs.ve || {};
 /**
- * Dialog for allowing new users to change editing tab preferences to VisualEditor.
+ * Dialog for allowing new users to change editing tab preferences.
  *
  * @class
  * @extends OO.ui.MessageDialog

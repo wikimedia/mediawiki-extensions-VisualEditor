@@ -31,5 +31,6 @@
 	"visualeditor-welcomedialog-content": "Anyone can edit, and every improvement helps.",
 	"visualeditor-welcomedialog-content-thanks": "Thank you for helping the world discover more!",
 	"visualeditor-welcomedialog-switch": "Switch to the source editor",
+	"visualeditor-welcomedialog-switch-ve": "Switch to the visual editor",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Welcome}} to $2"
 }

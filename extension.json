@@ -1034,6 +1034,30 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.welcome": {
+			"scripts": [
+				"modules/ve-mw/init/ve.init.MWWelcomeDialog.js"
+			],
+			"styles": [
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWWelcomeDialog.css"
+			],
+			"dependencies": [
+				"oojs",
+				"oojs-ui"
+			],
+			"messages": [
+				"visualeditor-welcomedialog-action",
+				"visualeditor-welcomedialog-content",
+				"visualeditor-welcomedialog-content-thanks",
+				"visualeditor-welcomedialog-switch",
+				"visualeditor-welcomedialog-switch-ve",
+				"visualeditor-welcomedialog-title"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.switching": {
 			"scripts": [
 				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js",
@@ -1101,7 +1125,6 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionPreviewDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWWelcomeDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCancelConfirmDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWWikitextSwitchConfirmDialog.js",
@@ -1118,7 +1141,6 @@
 			"styles": [
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLiveExtensionInspector.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWWelcomeDialog.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.css",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
@@ -1145,7 +1167,8 @@
 				"jquery.byteLimit",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.widgets",
-				"ext.visualEditor.switching"
+				"ext.visualEditor.switching",
+				"ext.visualEditor.welcome"
 			],
 			"messages": [
 				"captcha-edit",
@@ -1216,11 +1239,6 @@
 				"visualeditor-viewpage-savewarning-discard",
 				"visualeditor-viewpage-savewarning-keep",
 				"visualeditor-viewpage-savewarning-title",
-				"visualeditor-welcomedialog-action",
-				"visualeditor-welcomedialog-content",
-				"visualeditor-welcomedialog-content-thanks",
-				"visualeditor-welcomedialog-switch",
-				"visualeditor-welcomedialog-title",
 				"visualeditor-wikitext-progress",
 				"visualeditor-wikitext-warning-title"
 			],

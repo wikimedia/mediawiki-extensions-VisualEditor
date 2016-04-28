@@ -563,6 +563,7 @@
 						.then( function ( closing ) { return closing; } )
 						.then( function ( data ) {
 							var oldUri;
+							// TODO: windowManager.destroy()?
 							if ( data && data.action === 'keep' ) {
 								activatePageTarget( true );
 							} else if ( data && data.action === 'discard' ) {
@@ -696,6 +697,11 @@
 	}
 
 	$( function () {
+		var showWikitextWelcome = true,
+			isLoggedIn = !mw.user.isAnon(),
+			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
+			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query;
+
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).val();
 		}
@@ -740,6 +746,7 @@
 						)
 					)
 				) {
+					showWikitextWelcome = false;
 					trackActivateStart( {
 						type: uri.query.vesection === undefined ? 'page' : 'section',
 						mechanism: 'url'
@@ -862,6 +869,54 @@
 					} );
 				}
 			}
+		}
+
+		if (
+			showWikitextWelcome &&
+			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
+			[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
+			!urlSaysHideWelcome &&
+			(
+				prefSaysShowWelcome ||
+				(
+					!isLoggedIn &&
+					localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
+					$.cookie( 've-beta-welcome-dialog' ) === null
+				)
+			)
+		) {
+			mw.loader.using( 'ext.visualEditor.welcome' ).done( function () {
+				var windowManager = new OO.ui.WindowManager(),
+					welcomeDialog = new mw.libs.ve.WelcomeDialog();
+				$( 'body' ).append( windowManager.$element );
+				windowManager.addWindows( [ welcomeDialog ] );
+				windowManager.openWindow(
+					welcomeDialog,
+					{
+						switchable: init.isAvailable,
+						editor: 'wte'
+					}
+				)
+					.then( function ( opened ) { return opened; } )
+					.then( function ( closing ) { return closing; } )
+					.then( function ( data ) {
+						windowManager.destroy();
+						if ( data && data.action === 'switch-ve' ) {
+							init.activateVe();
+						}
+					} );
+
+				if ( prefSaysShowWelcome ) {
+					new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+					mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
+				} else if ( !isLoggedIn && !urlSaysHideWelcome ) {
+					try {
+						localStorage.setItem( 've-beta-welcome-dialog', 1 );
+					} catch ( e ) {
+						$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+					}
+				}
+			} );
 		}
 
 		if ( uri.query.venotify ) {
