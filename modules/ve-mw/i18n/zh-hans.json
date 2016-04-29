@@ -286,7 +286,7 @@
 	"visualeditor-preference-core-description": "启用可视化编辑器。它不能用于讨论页和某些其他名字空间。",
 	"visualeditor-preference-core-label": "可视化编辑",
 	"visualeditor-preference-enable": "启用可视化编辑器。它将在以下{{PLURAL:$2|名字空间}}可用：$1",
-	"visualeditor-preference-tabs": "编辑模式",
+	"visualeditor-preference-tabs": "编辑模式：",
 	"visualeditor-preference-tabs-multi-tab": "向我显示两个编辑器标签",
 	"visualeditor-preference-tabs-prefer-ve": "如果可能，总是让我使用可视化编辑器",
 	"visualeditor-preference-tabs-prefer-wt": "总是让我使用源代码编辑器",

@@ -13,7 +13,8 @@
 			"Se4598",
 			"Tomabrafix",
 			"Umherirrender",
-			"Kurt Jansson"
+			"Kurt Jansson",
+			"Saehrimnir"
 		]
 	},
 	"apihelp-visualeditor-description": "Gibt HTML5 für eine Seite von dem Parsoid-Dienst zurück.",
@@ -272,7 +273,7 @@
 	"visualeditor-preference-core-description": "Den visuellen Editor aktivieren. Der Editor ist auf Diskussionsseiten und in einigen anderen Namensräumen nicht verfügbar.",
 	"visualeditor-preference-core-label": "Visuelles Bearbeiten",
 	"visualeditor-preference-enable": "Den visuellen Editor aktivieren. Der Editor ist verfügbar {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}}: $1",
-	"visualeditor-preference-tabs": "Bearbeitungsmodus",
+	"visualeditor-preference-tabs": "Bearbeitungsmodus:",
 	"visualeditor-preference-tabs-multi-tab": "Beide Editoren anbieten",
 	"visualeditor-preference-tabs-prefer-ve": "Den visuellen Editor anbieten, falls möglich",
 	"visualeditor-preference-tabs-prefer-wt": "Immer den Quelltext-Editor anbieten",
@@ -301,7 +302,7 @@
 	"visualeditor-savedialog-title-save": "Änderungen speichern",
 	"visualeditor-savedialog-warning-dirty": "Deine Bearbeitung ist eventuell beschädigt. Bitte vor dem Speichern überprüfen.",
 	"visualeditor-saveerror": "Fehler beim Speichern der Daten auf dem Server: $1.",
-	"visualeditor-saveerror-titleblacklist": "Fehler beim Speichern der Seite: Der Seitentitel ist schwarzgelistet",
+	"visualeditor-saveerror-titleblacklist": "Fehler beim Speichern der Seite: Der Seitentitel ist auf der schwarzen Liste.",
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",
 	"visualeditor-settings-tool": "Seiteneinstellungen",
 	"visualeditor-shortcuts-insert": "Einfügen",
@@ -317,6 +318,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Weiter bearbeiten",
 	"visualeditor-viewpage-savewarning-title": "Bist du sicher?",
 	"visualeditor-wikitext-progress": "Konvertiere Wikitext",
-	"visualeditor-wikitext-warning": "Du benutzt den visuellen Editor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zu wechseln, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus. Verlustfrei zum visuellen Editor zurückzuwechseln ist derzeit nicht möglich.",
+	"visualeditor-wikitext-warning": "Du benutzt den visuellen Editor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zu wechseln, öffne das Dropdown-Menü neben „{{int:visualeditor-toolbar-savedialog}}“ und wähle „{{int:visualeditor-mweditmodesource-title}}“ aus.",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }

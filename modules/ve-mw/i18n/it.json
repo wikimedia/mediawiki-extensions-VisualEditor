@@ -286,7 +286,7 @@
 	"visualeditor-preference-core-description": "Abilita l'editor visuale. Potrebbe non essere disponibile nelle pagine di discussione e in alcuni altri namespace.",
 	"visualeditor-preference-core-label": "Modifica visuale",
 	"visualeditor-preference-enable": "Abilita l'editor visuale. È disponibile nei seguenti {{PLURAL:$2|namespace|namespaces}}: $1",
-	"visualeditor-preference-tabs": "Modalità di modifica",
+	"visualeditor-preference-tabs": "Modalità di modifica:",
 	"visualeditor-preference-tabs-multi-tab": "Mostrami entrambe le schede di modifica",
 	"visualeditor-preference-tabs-prefer-ve": "Usa sempre l'editor visuale, se possibile",
 	"visualeditor-preference-tabs-prefer-wt": "Usa sempre l'editor sorgente",

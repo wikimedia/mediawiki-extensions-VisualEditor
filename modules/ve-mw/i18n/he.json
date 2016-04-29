@@ -275,7 +275,7 @@
 	"visualeditor-preference-core-description": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
 	"visualeditor-preference-core-label": "עריכה חזותית",
 	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא יהיה זמין {{PLURAL:$2|במרחב השם הבא|במרחבי השם הבאים}}: $1",
-	"visualeditor-preference-tabs": "מצב עריכה",
+	"visualeditor-preference-tabs": "מצב עריכה:",
 	"visualeditor-preference-tabs-multi-tab": "הציגו לי את שתי לשוניות העריכה",
 	"visualeditor-preference-tabs-prefer-ve": "הציגו לי תמיד את העורך החזותי אם אפשר",
 	"visualeditor-preference-tabs-prefer-wt": "הציגו לי תמיד את עורך קוד המקור",
