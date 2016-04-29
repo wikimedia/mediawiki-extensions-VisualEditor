@@ -122,16 +122,12 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	public function execute() {
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
-		$page = Title::newFromText( $params['page'] );
-		if ( !$page ) {
+		$title = Title::newFromText( $params['page'] );
+		if ( !$title ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
-		$availableNamespaces = $this->veConfig->get( 'VisualEditorAvailableNamespaces' );
-		if ( !isset( $availableNamespaces[$page->getNamespace()] ) ||
-			!$availableNamespaces[$page->getNamespace()] ) {
-			$this->dieUsage( "VisualEditor is not enabled in namespace " .
-				$page->getNamespace(), 'novenamespace' );
-		}
+
+		$this->checkAllowedNamespace( $title->getNamespace() );
 
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
@@ -149,13 +145,13 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
 			}
 		} else {
-			$wikitext = $this->postHTML( $page, $html, $parserParams, $params['etag'] );
+			$wikitext = $this->postHTML( $title, $html, $parserParams, $params['etag'] );
 			if ( $wikitext === false ) {
 				$this->dieUsage( 'Error contacting the Parsoid/RESTbase server', 'docserver' );
 			}
 		}
 
-		$saveresult = $this->saveWikitext( $page, $wikitext, $params );
+		$saveresult = $this->saveWikitext( $title, $wikitext, $params );
 		$editStatus = $saveresult['edit']['result'];
 
 		// Error
@@ -184,17 +180,17 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					} );
 				}
 			} else {
-				$newRevId = $page->getLatestRevId();
+				$newRevId = $title->getLatestRevId();
 			}
 
 			// Return result of parseWikitext instead of saveWikitext so that the
 			// frontend can update the page rendering without a refresh.
-			$result = $this->parseWikitext( $page, $newRevId );
+			$result = $this->parseWikitext( $title, $newRevId );
 			if ( $result === false ) {
 				$this->dieUsage( 'Error contacting the Parsoid/RESTBase server', 'docserver' );
 			}
 
-			$result['isRedirect'] = $page->isRedirect();
+			$result['isRedirect'] = $title->isRedirect();
 
 			if ( class_exists( 'FlaggablePageView' ) ) {
 				$view = FlaggablePageView::singleton();
@@ -207,12 +203,12 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					[
 						'diff' => null,
 						'oldid' => '',
-						'title' => $page->getPrefixedText(),
+						'title' => $title->getPrefixedText(),
 						'action' => 'view'
 					] + $this->getRequest()->getValues()
 				);
 				$view->getContext()->setRequest( $newRequest );
-				RequestContext::getMain()->setTitle( $page );
+				RequestContext::getMain()->setTitle( $title );
 
 				// The two parameters here are references but we don't care
 				// about what FlaggedRevs does with them.

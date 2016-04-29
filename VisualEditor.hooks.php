@@ -125,8 +125,6 @@ class VisualEditorHooks {
 
 		$title = $article->getTitle();
 
-		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
-
 		$params = $req->getValues();
 
 		if ( isset( $params['venoscript'] ) ) {
@@ -144,7 +142,7 @@ class VisualEditorHooks {
 			!$veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
 			self::getUserEditor( $user, $req ) === 'wikitext' ||
 			!$title->quickUserCan( 'edit' ) ||
-			!$title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ||
+			!ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) ||
 			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
 			// Known parameters that VE does not handle
 			// TODO: Other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
@@ -272,9 +270,8 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 		$title = $skin->getRelevantTitle();
-		$namespaceEnabled = $title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) );
+		$namespaceEnabled = ApiVisualEditor::isAllowedNamespace( $config, $title->getNamespace() );
 		$pageContentModel = $title->getContentModel();
 		// Don't exit if this page isn't VE-enabled, since we should still
 		// change "Edit" to "Edit source".
@@ -472,10 +469,8 @@ class VisualEditorHooks {
 
 		$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
 
-		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
-
 		// add VE edit section in VE available namespaces
-		if ( $title->inNamespaces( array_keys( array_filter( $availableNamespaces ) ) ) ) {
+		if ( ApiVisualEditor::isAllowedNamespace( $config, $title->getNamespace() ) ) {
 			$veEditSection = $tabMessages['editsection'] !== null ?
 				$tabMessages['editsection'] : 'editsection';
 			$veLink = [
@@ -676,7 +671,12 @@ class VisualEditorHooks {
 		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
-		$enabledNamespaces = array_keys( array_filter( $availableNamespaces ) );
+		$enabledNamespaces = array_map( function ( $namespace ) {
+			// Convert canonical namespace names to IDs
+			return is_numeric( $namespace ) ?
+				$namespace :
+				MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
+		}, array_keys( array_filter( $availableNamespaces ) ) );
 
 		$vars['wgVisualEditorConfig'] = [
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
