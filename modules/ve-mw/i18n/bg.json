@@ -12,6 +12,7 @@
 			"Vodnokon4e"
 		]
 	},
+	"apihelp-visualeditor-description": "Връща HTML5 за страница от услугата Parsoid.",
 	"tooltip-ca-createsource": "Създаване на изходния код на страницата",
 	"tooltip-ca-editsource": "Редактиране на изходния код на страницата",
 	"tooltip-ca-ve-edit": "Редактиране на страницата",
@@ -55,10 +56,6 @@
 	"visualeditor-dialog-meta-settings-toc-disable": "Никога",
 	"visualeditor-dialog-meta-settings-toc-force": "Винаги",
 	"visualeditor-dialog-meta-title": "Настройки",
-	"visualeditor-dialog-reference-options-section": "Настройки",
-	"visualeditor-dialog-reference-title": "Източник",
-	"visualeditor-dialog-reference-useexisting-label": "Използване на съществуващ източник",
-	"visualeditor-dialog-referenceslist-title": "Списък с източници",
 	"visualeditor-dialog-template-title": "Шаблон",
 	"visualeditor-dialog-transclusion-add-content": "Добавяне на съдържание",
 	"visualeditor-dialog-transclusion-add-param": "Добавяне на повече информация",
@@ -75,9 +72,6 @@
 	"visualeditor-dialog-transclusion-title": "Включване",
 	"visualeditor-dialogbutton-media-tooltip": "Медия",
 	"visualeditor-dialogbutton-meta-tooltip": "Настройки на страницата",
-	"visualeditor-dialogbutton-reference-tooltip": "Източник",
-	"visualeditor-dialogbutton-reference-title": "Източник",
-	"visualeditor-dialogbutton-referenceslist-tooltip": "Списък с източници",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Включване",
 	"visualeditor-editnotices-tooltip": "Известия за редактиране",

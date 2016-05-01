@@ -288,7 +288,7 @@
 	"visualeditor-preference-core-description": "Visuele tekstverwerker inschakelen. Deze tekstverwerker is niet beschikbaar op overlegpagina's en sommige andere naamruimten.",
 	"visualeditor-preference-core-label": "Visueel bewerken",
 	"visualeditor-preference-enable": "Visuele tekstverwerker inschakelen. Deze is beschikbaar in de volgende {{PLURAL:$2|naamruimte|naamruimten}}: $1",
-	"visualeditor-preference-tabs": "Bewerkingsmodus",
+	"visualeditor-preference-tabs": "Bewerkingsmodus:",
 	"visualeditor-preference-tabs-multi-tab": "Beide bewerkingstabbladen weergeven",
 	"visualeditor-preference-tabs-prefer-ve": "Waar mogelijk de visuele tekstverwerker gebruiken",
 	"visualeditor-preference-tabs-prefer-wt": "Altijd wikitekst bewerken",

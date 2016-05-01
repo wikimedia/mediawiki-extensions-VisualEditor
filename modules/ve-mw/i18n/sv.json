@@ -274,7 +274,7 @@
 	"visualeditor-preference-core-description": "Aktivera den visuella redigeraren. Den kommer inte att vara tillgänglig på diskussionssidor och några andra namnrymder.",
 	"visualeditor-preference-core-label": "Visuell redigering",
 	"visualeditor-preference-enable": "Aktivera den visuella redigeraren. Den kommer att vara tillgänglig i följande {{PLURAL:$2|namnrymd|namnrymder}}: $1",
-	"visualeditor-preference-tabs": "Redigeringsläge",
+	"visualeditor-preference-tabs": "Redigeringsläge:",
 	"visualeditor-preference-tabs-multi-tab": "Visa mig båda redigeringsflikarna",
 	"visualeditor-preference-tabs-prefer-ve": "Ge mig alltid den visuella redigeraren om möjligt",
 	"visualeditor-preference-tabs-prefer-wt": "Ge mig alltid wikitexteditorn",
