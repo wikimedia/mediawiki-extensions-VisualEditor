@@ -265,7 +265,7 @@
 	"visualeditor-preference-core-description": "Appiccia l'editore visuale. Nun è a disposizione dint' 'e paggene 'e chiacchiera e n'at'autre namespace.",
 	"visualeditor-preference-core-label": "Cagnamiento visuale",
 	"visualeditor-preference-enable": "Appiccia 'o visual editor. Sarrà a disposizione dint' {{PLURAL:$2|'o namespace|'e namespace}} ccà: $1",
-	"visualeditor-preference-tabs": "Modalità 'e cagnamiento",
+	"visualeditor-preference-tabs": "Modalità 'e cagnamiento:",
 	"visualeditor-preference-tabs-multi-tab": "Famme vedé tutte dduje schede 'editore",
 	"visualeditor-preference-tabs-prefer-ve": "Damme sempe 'o visual editor si è possibile",
 	"visualeditor-preference-tabs-prefer-wt": "Damme sempe l'editore codece fonte si è possibile",

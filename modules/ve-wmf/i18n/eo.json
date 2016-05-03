@@ -17,5 +17,6 @@
 	"visualeditor-feedback-link": "Project:VidRedaktilo/Rimarkoj",
 	"visualeditor-feedback-tool": "Provizu rimarkojn pri tiu ĉi programo",
 	"visualeditor-help-label": "Legu gvidilon por uzantoj",
-	"visualeditor-help-title": "Gvidilo pri uzado de la redaktilo"
+	"visualeditor-help-title": "Gvidilo pri uzado de la redaktilo",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bonvenon}} al $2"
 }

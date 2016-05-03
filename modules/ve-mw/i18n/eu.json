@@ -239,7 +239,7 @@
 	"visualeditor-preference-core-description": "Gaitu Ikusizko Editorea. Ez da erabilgarri egongo eztabaida orrietan eta beste namespacetan.",
 	"visualeditor-preference-core-label": "Ikusizko edizioa",
 	"visualeditor-preference-enable": "Gaitu Ikusizko Editorea. Eskuragarri egongo da {{PLURAL:$2|namespace|orri izen}}hauetan: $1",
-	"visualeditor-preference-tabs": "Edizio modua",
+	"visualeditor-preference-tabs": "Edizio modua:",
 	"visualeditor-recreate": "Orria ezabatua izan da aldatzen hasi zinenetik. Sakatu \"$1\" berriro sortzeko.",
 	"visualeditor-savedialog-error-badtoken": "Ezin izan dugu zure edizioa gorde, saioa dagoeneko ez zelako baliozkoa.",
 	"visualeditor-savedialog-identify-anon": "Orria lankide anonimo bezala gorde nahi al duzu? Zure IP helbidea orriaren aldaketa historian gordeko da.",

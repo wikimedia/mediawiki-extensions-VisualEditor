@@ -289,7 +289,7 @@
 	"visualeditor-preference-core-description": "Activar el editor visual. No estará disponible en páginas de discusión y en algunos otros espacios de nombres.",
 	"visualeditor-preference-core-label": "Edición visual",
 	"visualeditor-preference-enable": "Activar el editor visual. Estará disponible en {{PLURAL:$2|el siguiente espacio|los siguientes espacios}} de nombres: $1",
-	"visualeditor-preference-tabs": "Modo de edición",
+	"visualeditor-preference-tabs": "Modo de edición:",
 	"visualeditor-preference-tabs-multi-tab": "Mostrarme ambas pestañas de edición",
 	"visualeditor-preference-tabs-prefer-ve": "Siempre que sea posible, usar el editor visual",
 	"visualeditor-preference-tabs-prefer-wt": "Siempre usar el editor de código",
