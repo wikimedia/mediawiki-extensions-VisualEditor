@@ -79,19 +79,9 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 
 /** */
 ve.dm.MWExtensionNode.static.cloneElement = function () {
-	// TODO: This is the same as ve.dm.MWTransclusionnode.static.cloneElement, find a way
-	// to de-duplicate this method.
-	var i, len,
-		// Parent method
-		clone = ve.dm.MWExtensionNode.super.static.cloneElement.apply( this, arguments );
-
+	// Parent method
+	var clone = ve.dm.MWExtensionNode.super.static.cloneElement.apply( this, arguments );
 	delete clone.attributes.originalMw;
-	// Remove about attribute to prevent about grouping of duplicated transclusions
-	if ( clone.originalDomElements ) {
-		for ( i = 0, len = clone.originalDomElements.length; i < len; i++ ) {
-			clone.originalDomElements[ i ].removeAttribute( 'about' );
-		}
-	}
 	return clone;
 };
 
@@ -103,7 +93,8 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
 	if (
-		( originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) ) )
+		dataElement.originalDomElements &&
+		originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) )
 	) {
 		// originalDomElements is also used for CE rendering so return a copy
 		els = ve.copyDomElements( dataElement.originalDomElements, doc );

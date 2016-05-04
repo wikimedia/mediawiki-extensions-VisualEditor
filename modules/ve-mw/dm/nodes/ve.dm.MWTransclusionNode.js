@@ -193,17 +193,9 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 
 /** */
 ve.dm.MWTransclusionNode.static.cloneElement = function () {
-	var i, len,
-		// Parent method
-		clone = ve.dm.MWTransclusionNode.super.static.cloneElement.apply( this, arguments );
-
+	// Parent method
+	var clone = ve.dm.MWTransclusionNode.super.static.cloneElement.apply( this, arguments );
 	delete clone.attributes.originalMw;
-	// Remove about attribute to prevent about grouping of duplicated transclusions
-	if ( clone.originalDomElements ) {
-		for ( i = 0, len = clone.originalDomElements.length; i < len; i++ ) {
-			clone.originalDomElements[ i ].removeAttribute( 'about' );
-		}
-	}
 	return clone;
 };
 
