@@ -221,7 +221,7 @@
 	"visualeditor-preference-core-description": "Omogoči VisualEditor. Na voljo ne bo na pogovornih straneh in v nekaterih drugih imenskih prostorih.",
 	"visualeditor-preference-core-label": "Urejanje z VisualEditorjem",
 	"visualeditor-preference-enable": "Omogoči VisualEditor. Na voljo bo v {{PLURAL:$2|naslednjem imenskem prostoru|naslednjih imenskih prostorih}}: $1.",
-	"visualeditor-preference-tabs": "Urejevalni način",
+	"visualeditor-preference-tabs": "Urejevalni način:",
 	"visualeditor-preference-tabs-multi-tab": "Pokaži mi zavihka obeh urejevalnikov",
 	"visualeditor-preference-tabs-prefer-ve": "Vedno mi pokaži vizualni urejevalnik, če je možno",
 	"visualeditor-preference-tabs-prefer-wt": "Vedno mi pokaži urejevalnik vira",

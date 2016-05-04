@@ -5,7 +5,7 @@
 			"Jagwar"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:Visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Suntiangan manggunoan [[{{MediaWiki:Visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"visualeditor-feedback-link": "Project:VisualEditor/Umpan baliak",
 	"visualeditor-feedback-tool": "Tinggaan umpan baliak"
