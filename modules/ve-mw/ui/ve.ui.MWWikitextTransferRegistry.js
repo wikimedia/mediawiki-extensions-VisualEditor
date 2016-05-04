@@ -20,10 +20,21 @@ ve.ui.mwWikitextTransferRegistry.register(
 );
 
 ve.ui.mwWikitextTransferRegistry.register(
-	'link',
+	'internalLink',
 	// [[...]] on a single line of max 80 characters
 	/\[\[.{1,80}\]\]/m
 );
+
+ve.init.platform.getInitializedPromise().done( function () {
+	ve.ui.mwWikitextTransferRegistry.register(
+		'externalLink',
+			// [url label]
+			new RegExp(
+				'\\[' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + '\\S+ [^\\]]+\\]',
+				'i'
+			)
+	);
+} );
 
 ve.ui.mwWikitextTransferRegistry.register(
 	'template',
