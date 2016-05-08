@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yekrats"
+			"Yekrats",
+			"Renardo"
 		]
 	},
-	"visualeditor-languagescreenshot-hello-world-text": "Saluton mondo",
+	"visualeditor-languagescreenshot-hello-world-text": "Saluton al ĉiuj!",
 	"visualeditor-languagescreenshot-world-text": "Mondo",
 	"visualeditor-languagescreenshot-category-earth-text": "Kategorio:Tero"
 }
