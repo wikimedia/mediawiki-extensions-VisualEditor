@@ -17,8 +17,10 @@
  * @param {Object} config Configuration options
  */
 ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config ) {
-	// A workaround, as default URI does not get updated after pushState (bug 72334)
-	var currentUri = new mw.Uri( location.href );
+	var $content,
+		// A workaround, as default URI does not get updated after pushState (bug 72334)
+		currentUri = new mw.Uri( location.href ),
+		namespaceIds = mw.config.get( 'wgNamespaceIds' );
 
 	// Parent constructor
 	ve.init.mw.DesktopArticleTarget.super.call(
@@ -73,9 +75,32 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
 
+	if ( mw.config.get( 'wgAction' ) === 'view' ) {
+		switch ( mw.config.get( 'wgNamespaceNumber' ) ) {
+			case namespaceIds[ '' ]:
+				this.$editableContent = $( '#mw-content-text' );
+				break;
+			case namespaceIds.category:
+				// Put contents in a single wrapper
+				// TODO: Fix upstream
+				$content = $( '#mw-content-text > :not( .mw-category-generated )' );
+				this.$editableContent = $( '<div>' ).prependTo( $( '#mw-content-text' ) ).append( $content );
+				break;
+			case namespaceIds.file:
+				this.$editableContent = $( '#mw-imagepage-content' );
+				break;
+		}
+	} else {
+		// TODO: Load view page content if switching from edit source
+		this.$editableContent = $( '#mw-content-text' );
+	}
+	this.$editableContent.addClass( 've-init-mw-desktopArticleTarget-editableContent' );
+
 	// Initialization
 	this.$element
 		.addClass( 've-init-mw-desktopArticleTarget' )
+		// The following classes can be used here:
+		.addClass( 've-init-mw-desktopArticleTarget-ns-' + ( mw.config.get( 'wgCanonicalNamespace' ).toLowerCase() || 'main' ) )
 		.append( this.$originalContent );
 
 	if ( history.replaceState ) {
@@ -166,6 +191,16 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
  */
 
 /* Methods */
+
+/**
+ * Set the container for the target, appending the target to it
+ *
+ * @param {jQuery} $container Container
+ */
+ve.init.mw.DesktopArticleTarget.prototype.setContainer  = function ( $container ) {
+	$container.append( this.$element );
+	this.$container = $container;
+};
 
 /**
  * Verify that a PopStateEvent correlates to a state we created.
@@ -455,8 +490,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
  */
 ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
-	// Move original content inside the surface for viewport calculations
-	this.getSurface().$element.prepend( this.$originalContent );
+	this.$editableContent.after( this.getSurface().$element );
 	if ( !this.editingTabDialog ) {
 		// We have to focus the page after hiding the original content, otherwise
 		// in firefox the contentEditable container was below the view page, and
@@ -564,9 +598,6 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 		this.getToolbar().$actions.empty();
 	}
 
-	// Move original content back out of the surface
-	this.$element.prepend( this.$originalContent );
-
 	// Check we got as far as setting up the surface
 	if ( this.getSurface() ) {
 		if ( this.active ) {
@@ -593,6 +624,9 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 
 		// Move original content back out of the target
 		target.$element.parent().append( target.$originalContent.children() );
+		$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
+			.off( '.ve-target' )
+			.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
 		mw.hook( 've.deactivationComplete' ).fire( target.edited );
 	} );
@@ -1102,7 +1136,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
  * Page modifications for switching to edit mode.
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
-	var uri;
+	var uri, $content;
 
 	// Deselect current mode (e.g. "view" or "history"). In skins like monobook that don't have
 	// separate tab sections for content actions and namespaces the below is a no-op.
@@ -1114,6 +1148,16 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 
 	// Move all native content inside the target
 	this.$originalContent.append( this.$element.siblings() );
+
+	// Mark every non-direct ancestor between editableContent and the container as uneditable
+	$content = this.$editableContent;
+	while ( $content && !$content.parent().is( this.$container ) ) {
+		$content.prevAll().addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		$content.nextAll().addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		$content = $content.parent();
+	}
+	// Support IE9: Disable links
+	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function () { return false; } );
 
 	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
 	// permalink then it will be there already and the constructor called #activate)
@@ -1226,8 +1270,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
-	var $editableContent, $imgContent,
-		$content = $( $.parseHTML( html ) );
+	var $content = $( $.parseHTML( html ) );
 
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
@@ -1245,23 +1288,6 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	$imgContent = $( '#mw-imagepage-content' );
-	if ( $imgContent.length ) {
-		// On file pages, we only want to replace the (local) description.
-		$editableContent = $imgContent;
-	} else if ( $( '#mw-pages' ).length ) {
-		// It would be nice if MW core did this for us...
-		if ( !$( '#ve-cat-description' ).length ) {
-			$( '#mw-content-text > :not(div:has(#mw-pages))' ).wrapAll(
-				$( '<div>' )
-					.attr( 'id', 've-cat-description' )
-			);
-		}
-		$editableContent = $( '#ve-cat-description' );
-	} else {
-		$editableContent = $( '#mw-content-text' );
-	}
-
 	// Remove any VE-added redirectMsg
 	$( '.redirectMsg' ).remove();
 
@@ -1275,7 +1301,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 			.on( 'click', mw.libs.ve.onEditSectionLinkClick );
 	}
 
-	mw.hook( 'wikipage.content' ).fire( $editableContent.empty().append( $content ) );
+	mw.hook( 'wikipage.content' ).fire( this.$editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
 		$( '#content #firstHeading' ).html( displayTitle );
 	}

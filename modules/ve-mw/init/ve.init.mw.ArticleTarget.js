@@ -1462,13 +1462,6 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
 
 	surface.$element.addClass( this.protectedClasses );
 
-	// Apply mw-body-content to the view (ve-ce-surface).
-	// Not to surface (ve-ui-surface), since that contains both the view
-	// and the overlay container, and we don't want inspectors to
-	// inherit skin typography styles for wikipage content.
-	surface.getView().$element.addClass( 'mw-body-content' );
-	surface.$placeholder.addClass( 'mw-body-content' );
-
 	return surface;
 };
 

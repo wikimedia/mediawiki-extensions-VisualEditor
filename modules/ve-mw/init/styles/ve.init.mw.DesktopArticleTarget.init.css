@@ -22,16 +22,12 @@
 .ve-activated #toc,
 .ve-activated #siteNotice,
 .ve-activated .mw-indicators,
-/* Most of bodyContent can be hidden as VE has an equivalent of most children
-   in ve-init-target (sibling of #bodyContent). However, we can't hide it
-   completely as subs should remain visible (for persistence with read mode),
-   and ve-ui-mwTocWidget is also part of #bodyContent. */
-.ve-active #bodyContent > :not( #siteSub ):not( #contentSub ):not( .ve-ui-mwTocWidget ),
 .ve-activated #t-print,
 .ve-activated #t-permalink,
 .ve-activated #p-coll-print_export,
 .ve-activated #t-cite,
-.ve-deactivating .ve-ui-surface {
+.ve-deactivating .ve-ui-surface,
+.ve-active .ve-init-mw-desktopArticleTarget-editableContent {
 	display: none;
 }
 
@@ -43,11 +39,13 @@
 	overflow: hidden;
 }
 
-.ve-activated #bodyContent,
-.ve-activated #firstHeading {
-	opacity: 0.6;
-	/* TODO: Support IE9 with JS events */
+/* While loading, everything except the progress bar */
+.ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-loading-overlay ),
+/* Once activated, everything except the progress bar and the edit target */
+.ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent {
+	/* IE9 is supported with JS events */
 	/* stylelint-disable no-unsupported-browser-features */
+	opacity: 0.5;
 	pointer-events: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;

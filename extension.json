@@ -99,6 +99,8 @@
 		"VisualEditorTransitionDefault": false,
 		"VisualEditorAvailableNamespaces": {
 			"User": true,
+			"File": true,
+			"Category": true,
 			"_merge_strategy": "array_plus"
 		},
 		"VisualEditorSkinToolbarScrollOffset": [],
