@@ -80,6 +80,7 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
 ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
 	this.loaded = true;
 	this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+	this.$body.append( this.bookletLayout.$element );
 	this.popPending();
 	this.bookletLayout.focus( 1 );
 };
@@ -347,13 +348,11 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	ve.ui.MWTemplateDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout();
 	this.bookletLayout = new OO.ui.BookletLayout( this.constructor.static.bookletLayoutConfig );
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );
-	this.$body.append( this.panels.$element );
-	this.panels.addItems( [ this.bookletLayout ] );
+	// bookletLayout is appended after the form has been built in onTransclusionReady for performance
 };
 
 /**
@@ -456,6 +455,9 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				replace: 'onReplacePart',
 				change: 'onTransclusionModelChange'
 			} );
+
+			// Detach the form while building for performance
+			this.bookletLayout.$element.detach();
 
 			// Initialization
 			if ( !this.selectedNode ) {
