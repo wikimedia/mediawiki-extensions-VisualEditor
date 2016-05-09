@@ -289,14 +289,8 @@ class ApiVisualEditor extends ApiBase {
 
 		$isSafeAction = in_array( $params['paction'], self::$SAFE_ACTIONS, true );
 
-		$availableNamespaces = $this->veConfig->get( 'VisualEditorAvailableNamespaces' );
-		if ( !$isSafeAction && (
-			!isset( $availableNamespaces[$title->getNamespace()] ) ||
-			!$availableNamespaces[$title->getNamespace()]
-		) ) {
-
-			$this->dieUsage( "VisualEditor is not enabled in namespace " .
-				$title->getNamespace(), 'novenamespace' );
+		if ( !$isSafeAction ) {
+			$this->checkAllowedNamespace( $title->getNamespace() );
 		}
 
 		$parserParams = [];
@@ -630,6 +624,34 @@ class ApiVisualEditor extends ApiBase {
 		}
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
+	}
+
+	/**
+	 * Check if the request is allowed to proceed in the current namespace, and abort if not
+	 *
+	 * @param int $namespaceId Namespace ID
+	 */
+	public function checkAllowedNamespace( $namespaceId ) {
+		if ( !self::isAllowedNamespace( $this->veConfig, $namespaceId ) ) {
+			$this->dieUsage( "VisualEditor is not enabled in '" .
+				MWNamespace::getCanonicalName( $namespaceId ) . "' namespace ",
+			'novenamespace' );
+		}
+	}
+
+	/**
+	 * Check if the configured allowed namespaces include the specified namespace
+	 *
+	 * @param Config $config Configuration object
+	 * @param int $namespaceId Namespace ID
+	 * @return boolean
+	 */
+	public static function isAllowedNamespace( Config $config, $namespaceId ) {
+		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
+		$canonicalName = MWNamespace::getCanonicalName( $namespaceId );
+		return ( isset( $availableNamespaces[$namespaceId] ) && $availableNamespaces[$namespaceId] ) ||
+			 ( isset( $availableNamespaces[$canonicalName] ) && $availableNamespaces[$canonicalName] );
+
 	}
 
 	/**
