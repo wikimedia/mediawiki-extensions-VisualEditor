@@ -499,7 +499,7 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 			opened.then( function ( closing ) {
 				closing.then( function ( data ) {
 					if ( data && data.action === 'discard' ) {
-						this.emit( 'deactivate' );
+						target.emit( 'deactivate' );
 						target.cancel( trackMechanism );
 					}
 				} );
