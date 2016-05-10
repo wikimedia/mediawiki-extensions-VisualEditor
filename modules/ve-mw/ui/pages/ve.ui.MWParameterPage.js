@@ -105,8 +105,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		);
 	this.$more
 		.addClass( 've-ui-mwParameterPage-more' )
-		.append( this.addButton.$element )
-		.focus( this.onAddButtonFocus.bind( this ) );
+		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$info, this.$field, this.$actions, this.$more );
