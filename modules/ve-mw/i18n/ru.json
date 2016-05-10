@@ -286,7 +286,7 @@
 	"visualeditor-preference-core-description": "Включить визуальный редактор. Он будет недоступен на страницах обсуждения и в некоторых других пространствах имён.",
 	"visualeditor-preference-core-label": "Визуальное редактирование",
 	"visualeditor-preference-enable": "Включить визуальный редактор. Он будет доступен в {{PLURAL:$2|следующем пространстве|следующих пространствах}} имён: $1",
-	"visualeditor-preference-tabs": "Способ редактирования",
+	"visualeditor-preference-tabs": "Режим редактирования:",
 	"visualeditor-preference-tabs-multi-tab": "Показывать мне оба варианта редактора",
 	"visualeditor-preference-tabs-prefer-ve": "Всегда открывать визуальный редактор, если это возможно",
 	"visualeditor-preference-tabs-prefer-wt": "Всегда открывать редактор исходного текста",

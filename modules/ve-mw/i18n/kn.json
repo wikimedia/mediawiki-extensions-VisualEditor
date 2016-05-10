@@ -7,7 +7,8 @@
 			"Omshivaprakash",
 			"Yogesh",
 			"Shushruth",
-			"Ananth subray"
+			"Ananth subray",
+			"Vikashegde"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid ಸೇವೆಯಿಂದ ಪುಟವೊಂದಕ್ಕೆ HTML5 ಹಿಂದಿರುಗಿಸುತ್ತದೆ.",
@@ -137,7 +138,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "ಸೇರ್ಪಡೆ",
 	"visualeditor-differror": "ಪರಿಚಾರಕದ೦ದ ದೆಟಾ ಬರುವಾಗ ಎನೊ ತಪ್ಪುವಾಗಿದೆ: $1",
 	"visualeditor-editnotices-tooltip": "ಸೂಚನೆಗಳನ್ನು ಸಂಪಾದಿಸು",
-	"visualeditor-editsummary": "ನೀಮ್ಮ ಬದಲಾವಣೆಗಳನ್ನು ವೀವರಿಸಿ",
+	"visualeditor-editsummary": "ನೀವು ಏನು ಬದಲಾವಣೆ ಮಾಡಿದಿರಿ ಎಂದು ವಿವರಿಸಿ",
 	"visualeditor-formatdropdown-format-mw-heading1": "ಪುಟದ ಶೀರ್ಷಿಕೆ",
 	"visualeditor-formatdropdown-format-mw-heading2": "ತಲೆಬರಹ",
 	"visualeditor-formatdropdown-format-mw-heading3": "ಉಪ ಶಿರೋನಾಮೆ ೧",
