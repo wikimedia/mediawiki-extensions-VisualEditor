@@ -35,5 +35,6 @@
 	"visualeditor-welcomedialog-content": "人人皆可编辑，并且任何改进都有帮助。",
 	"visualeditor-welcomedialog-content-thanks": "感谢您帮助世界发现更多！",
 	"visualeditor-welcomedialog-switch": "切换为源代码编辑器",
+	"visualeditor-welcomedialog-switch-ve": "切换为可视化编辑器",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|欢迎}}来到$2"
 }
