@@ -9,64 +9,31 @@ QUnit.module( 've.ui.MWLinkAction' );
 
 /* Tests */
 
-function runMWAutolinkTest( assert, html, method, range, expectedRange, expectedRangeAfterUndo, expectedData, expectedOriginalData, msg ) {
-	var status, actualData,
-		expectFail = /^Don't/.test( msg ),
-		surface = ve.test.utils.createModelOnlySurfaceFromHtml( html || ve.dm.example.html ),
-		linkAction = new ve.ui.MWLinkAction( surface ),
-		data = ve.copy( surface.getModel().getDocument().getFullData() ),
-		originalData = ve.copy( data ),
-		makeLinkAnnotation = function ( linktext ) {
-			return linkAction.getLinkAnnotation( linktext ).element;
-		};
-
-	ve.dm.example.postprocessAnnotations( data, surface.getModel().getDocument().getStore() );
-	expectedData( data, makeLinkAnnotation );
-	if ( expectedOriginalData ) {
-		expectedOriginalData( originalData );
-	}
-	surface.getModel().setLinearSelection( range );
-	status = linkAction[ method ]();
-	assert.equal( status, !expectFail, msg + ': action return value' );
-
-	actualData = surface.getModel().getDocument().getFullData();
-	ve.dm.example.postprocessAnnotations( actualData, surface.getModel().getDocument().getStore() );
-	assert.equalLinearData( actualData, data, msg + ': data models match' );
-	assert.equalRange( surface.getModel().getSelection().getRange(), expectedRange, msg + ': ranges match' );
-
-	if ( status ) {
-		surface.getModel().undo();
-	}
-
-	assert.equalLinearData( surface.getModel().getDocument().getFullData(), originalData, msg + ' (undo): data models match' );
-	assert.equalRange( surface.getModel().getSelection().getRange(), expectedRangeAfterUndo || expectedRange, msg + ' (undo): ranges match' );
-}
-
 QUnit.test( 'MW autolink', function ( assert ) {
 	var i,
 		cases = [
 			{
 				msg: 'Strip trailing punctuation (but not matched parens)',
 				html: '<p><b>https://en.wikipedia.org/wiki/Red_(disambiguation) xyz</b></p>',
-				range: new ve.Range( 1, 52 ),
+				rangeOrSelection: new ve.Range( 1, 52 ),
 				method: 'autolinkUrl',
-				expectedRange: new ve.Range( 52, 52 ),
-				expectedData: function ( data, makeAnnotation ) {
+				expectedRangeOrSelection: new ve.Range( 52 ),
+				expectedData: function ( data, action ) {
 					var i,
-						a = makeAnnotation( 'https://en.wikipedia.org/wiki/Red_(disambiguation)' );
+						a = action.getLinkAnnotation( 'https://en.wikipedia.org/wiki/Red_(disambiguation)' );
 					for ( i = 1; i < 51; i++ ) {
-						data[ i ][ 1 ].push( a );
+						data[ i ][ 1 ].push( a.element );
 					}
 				}
 			},
 			{
 				msg: 'Autolink valid RFC',
 				html: '<p><b>RFC 1234 xyz</b></p>',
-				range: new ve.Range( 1, 10 ),
+				rangeOrSelection: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 4, 4 ),
-				expectedRangeAfterUndo: new ve.Range( 10, 10 ),
-				expectedData: function ( data /*, makeAnnotation */ ) {
+				expectedRangeOrSelection: new ve.Range( 4, 4 ),
+				expectedOriginalRangeOrSelection: new ve.Range( 10 ),
+				expectedData: function ( data ) {
 					data.splice( 1, 8, {
 						type: 'link/mwMagic',
 						attributes: {
@@ -77,26 +44,27 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						type: '/link/mwMagic',
 						annotations: data[ 1 ][ 1 ]
 					} );
-				}
+				},
+				undo: true
 			},
 			{
 				msg: 'Don\'t autolink invalid RFC',
 				html: '<p><b>RFC 123x xyz</b></p>',
-				range: new ve.Range( 1, 10 ),
+				rangeOrSelection: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 1, 10 ),
-				expectedData: function ( /*data, makeAnnotation*/ ) {
+				expectedRangeOrSelection: new ve.Range( 1, 10 ),
+				expectedData: function () {
 					/* no change, no link */
 				}
 			},
 			{
 				msg: 'Autolink valid PMID',
 				html: '<p><b>PMID 1234 xyz</b></p>',
-				range: new ve.Range( 1, 11 ),
+				rangeOrSelection: new ve.Range( 1, 11 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 4, 4 ),
-				expectedRangeAfterUndo: new ve.Range( 11, 11 ),
-				expectedData: function ( data /*, makeAnnotation */ ) {
+				expectedRangeOrSelection: new ve.Range( 4 ),
+				expectedOriginalRangeOrSelection: new ve.Range( 11 ),
+				expectedData: function ( data ) {
 					data.splice( 1, 9, {
 						type: 'link/mwMagic',
 						attributes: {
@@ -107,26 +75,27 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						type: '/link/mwMagic',
 						annotations: data[ 1 ][ 1 ]
 					} );
-				}
+				},
+				undo: true
 			},
 			{
 				msg: 'Don\'t autolink invalid PMID',
 				html: '<p><b>PMID 123x xyz</b></p>',
-				range: new ve.Range( 1, 11 ),
+				rangeOrSelection: new ve.Range( 1, 11 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 1, 11 ),
-				expectedData: function ( /*data, makeAnnotation*/ ) {
+				expectedRangeOrSelection: new ve.Range( 1, 11 ),
+				expectedData: function () {
 					/* no change, no link */
 				}
 			},
 			{
 				msg: 'Autolink valid ISBN',
 				html: '<p><b>ISBN 978-0596517748 xyz</b></p>',
-				range: new ve.Range( 1, 21 ),
+				rangeOrSelection: new ve.Range( 1, 21 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 4, 4 ),
-				expectedRangeAfterUndo: new ve.Range( 21, 21 ),
-				expectedData: function ( data /*, makeAnnotation */ ) {
+				expectedRangeOrSelection: new ve.Range( 4 ),
+				expectedOriginalRangeOrSelection: new ve.Range( 21 ),
+				expectedData: function ( data ) {
 					data.splice( 1, 19, {
 						type: 'link/mwMagic',
 						attributes: {
@@ -137,22 +106,31 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						type: '/link/mwMagic',
 						annotations: data[ 1 ][ 1 ]
 					} );
-				}
+				},
+				undo: true
 			},
 			{
 				msg: 'Don\'t autolink invalid ISBN',
 				html: '<p><b>ISBN 978-059651774 xyz</b></p>',
-				range: new ve.Range( 1, 20 ),
+				rangeOrSelection: new ve.Range( 1, 20 ),
 				method: 'autolinkMagicLink',
-				expectedRange: new ve.Range( 1, 20 ),
-				expectedData: function ( /*data, makeAnnotation*/ ) {
+				expectedRangeOrSelection: new ve.Range( 1, 20 ),
+				expectedData: function () {
 					/* no change, no link */
 				}
 			}
 		];
 
-	QUnit.expect( cases.length * 5 );
+	QUnit.expect( ve.test.utils.countActionTests( cases ) );
 	for ( i = 0; i < cases.length; i++ ) {
-		runMWAutolinkTest( assert, cases[ i ].html, cases[ i ].method, cases[ i ].range, cases[ i ].expectedRange, cases[ i ].expectedRangeAfterUndo, cases[ i ].expectedData, cases[ i ].expectedOriginalData, cases[ i ].msg );
+		ve.test.utils.runActionTest(
+			'link', assert, cases[ i ].html, false, cases[ i ].method, [], cases[ i ].rangeOrSelection, cases[ i ].msg,
+			{
+				expectedData: cases[ i ].expectedData,
+				expectedRangeOrSelection: cases[ i ].expectedRangeOrSelection,
+				expectedOriginalRangeOrSelection: cases[ i ].expectedOriginalRangeOrSelection,
+				undo: cases[ i ].undo
+			}
+		);
 	}
 } );
