@@ -4,5 +4,7 @@
 			"The Discoverer"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Dispi sompadon]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Dispi sompadon]]",
+	"visualeditor-welcomedialog-action": "Sompadon chalu kor",
+	"visualeditor-welcomedialog-title": "$2 -ant {{GENDER:$1|ievkar}}"
 }

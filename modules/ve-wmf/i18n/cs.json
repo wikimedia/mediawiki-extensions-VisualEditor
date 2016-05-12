@@ -34,5 +34,6 @@
 	"visualeditor-welcomedialog-content": "Editovat může kdokoli a každé vylepšení pomáhá.",
 	"visualeditor-welcomedialog-content-thanks": "Děkujeme, že světu pomáháte objevovat!",
 	"visualeditor-welcomedialog-switch": "Přepnout na editaci zdrojového kódu",
+	"visualeditor-welcomedialog-switch-ve": "Přepnout do vizuálního editoru",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Vítejte}} na {{GRAMMAR:6sg|$2}}"
 }
