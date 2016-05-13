@@ -5,14 +5,15 @@
 			"KuboF",
 			"Shirayuki",
 			"Yekrats",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Psychoslave"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vida redakto]]",
-	"tag-visualeditor-description": "Redakto farita per [[{{MediaWiki:visualeditor-descriptionpagelink}}|VidRedaktilo]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VidRedaktilo:Kontroli]]",
+	"tag-visualeditor-description": "Redakto farita per [[{{MediaWiki:visualeditor-descriptionpagelink}}|vida redaktilo]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vida redaktilo:Kontroli]]",
 	"tag-visualeditor-needcheck-description": "Redakto farita per [[{{MediaWiki:visualeditor-descriptionpagelink}}|vida redaktilo]] kie sistemo detektis eblajn neintencajn ŝanĝojn de vikiteksto.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VidRedaktilo: Komutita]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vida redaktilo: Komutita]]",
 	"tag-visualeditor-switched-description": "Uzanto komenci redakti uzante la vidan redaktilon kaj poste ŝanĝis al vikiteksta redaktilo.",
 	"visualeditor-feedback-link": "Project:VidRedaktilo/Rimarkoj",
 	"visualeditor-feedback-tool": "Provizu rimarkojn pri tiu ĉi programo",
