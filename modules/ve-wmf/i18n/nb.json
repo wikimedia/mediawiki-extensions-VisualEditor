@@ -9,7 +9,8 @@
 			"Amire80",
 			"아라",
 			"Kingu",
-			"Tarjeimo"
+			"Tarjeimo",
+			"Telaneo"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell redigering]]",
@@ -27,5 +28,6 @@
 	"visualeditor-welcomedialog-content": "Alle kan redigere, og enhver forbedring monner.",
 	"visualeditor-welcomedialog-content-thanks": "Takk for at du hjelper til!",
 	"visualeditor-welcomedialog-switch": "Bytt til kilderedigering",
+	"visualeditor-welcomedialog-switch-ve": "Bytt til visuell redigering",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Velkommen}} til $2"
 }

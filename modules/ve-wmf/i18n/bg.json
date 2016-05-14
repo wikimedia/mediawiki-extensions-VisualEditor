@@ -7,16 +7,24 @@
 			"Mitzev",
 			"StanProg",
 			"Лорд Бъмбъри",
-			"Vodnokon4e"
+			"Vodnokon4e",
+			"Spiritia"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуален редактор]]",
+	"tag-visualeditor-description": "Редакция, направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуална редакция за проверка]]",
+	"tag-visualeditor-needcheck-description": "Редакция, направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]], за която системата откри възможно нежелани промени по уикикода.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуално редактиране: Превключено]]",
 	"tag-visualeditor-switched-description": "Потребителят започва да редактира чрез визуалния редактор и след това преминава към уикитекст редактора.",
+	"visualeditor-feedback-link": "Project:Визуален редактор/Мнения",
 	"visualeditor-feedback-tool": "Оставете обратна връзка за този софтуер",
 	"visualeditor-help-label": "Прочитане на наръчника",
 	"visualeditor-help-title": "Наръчник за употреба на редактора",
 	"visualeditor-welcomedialog-action": "Започнете да редактирате",
 	"visualeditor-welcomedialog-content": "Всеки може да редактира, и всяко подобрение е полезно.",
-	"visualeditor-welcomedialog-content-thanks": "Благодарим ви, че помагате на света да научи повече!"
+	"visualeditor-welcomedialog-content-thanks": "Благодарим ви, че помагате на света да научи повече!",
+	"visualeditor-welcomedialog-switch": "Превключете към редактора на уикикод",
+	"visualeditor-welcomedialog-switch-ve": "Превключете към визуалния редактор",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добре дошли}} в $2"
 }

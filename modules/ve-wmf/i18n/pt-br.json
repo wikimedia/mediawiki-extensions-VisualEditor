@@ -17,12 +17,12 @@
 			"TheGabrielZaum"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual]]",
-	"tag-visualeditor-description": "Edição feita utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual: Verificar]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual]]",
+	"tag-visualeditor-description": "Edição feita utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual: Verificar]]",
 	"tag-visualeditor-needcheck-description": "Edição feita utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] em que o sistema detectou possíveis mudanças não-intencionais ao wikitexto.",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual: Alternado]]",
-	"tag-visualeditor-switched-description": "O usuário começou a editar usando o Editor Visual, e depois alternou para o editor de código-fonte.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual: Alternada]]",
+	"tag-visualeditor-switched-description": "O(A) usuário(a) começou a editar usando o editor visual, e depois alternou para o editor de código-fonte.",
 	"visualeditor-feedback-link": "Project:Editor Visual/Comentários",
 	"visualeditor-feedback-tool": "Deixar comentários sobre este software",
 	"visualeditor-help-label": "Ler o guia do usuário",
@@ -31,5 +31,7 @@
 	"visualeditor-welcomedialog-action": "Começar a editar",
 	"visualeditor-welcomedialog-content": "Todos podem editar, cada ajuda conta.",
 	"visualeditor-welcomedialog-content-thanks": "Obrigado por ajudar o mundo a saber mais!",
+	"visualeditor-welcomedialog-switch": "Alternar para o editor de código-fonte",
+	"visualeditor-welcomedialog-switch-ve": "Alternar para o editor visual",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bem-vindo|Bem-vinda}} ao site $2"
 }

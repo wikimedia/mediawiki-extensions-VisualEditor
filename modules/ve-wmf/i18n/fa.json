@@ -32,5 +32,6 @@
 	"visualeditor-welcomedialog-content": "همه می توانند ویرایش و کمک کنند.",
 	"visualeditor-welcomedialog-content-thanks": "از بابت کمکتان برای شناخت بیشتر جهان ممنون هستیم!",
 	"visualeditor-welcomedialog-switch": "تغییر حالت به ویرایشگر متنی",
+	"visualeditor-welcomedialog-switch-ve": "رفتن به ویرایشگر دیداری",
 	"visualeditor-welcomedialog-title": "به $2 {{GENDER:$1|خوش‌آمدید}}"
 }

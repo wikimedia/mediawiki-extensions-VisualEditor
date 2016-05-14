@@ -33,5 +33,7 @@
 	"visualeditor-welcomedialog-action": "Aloita muokkaaminen",
 	"visualeditor-welcomedialog-content": "Jokainen saa muokata. Jokaisesta parannuksesta on jollekin hyötyä.",
 	"visualeditor-welcomedialog-content-thanks": "Kiitos, että autat maailmaa löytämään enemmän!",
+	"visualeditor-welcomedialog-switch": "Vaihda wikitekstimuokkaimeen",
+	"visualeditor-welcomedialog-switch-ve": "Vaihda visuaaliseen muokkaimeen",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Tervetuloa}} sivustolle $2"
 }
