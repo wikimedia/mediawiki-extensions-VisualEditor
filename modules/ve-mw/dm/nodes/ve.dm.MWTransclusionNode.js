@@ -268,6 +268,41 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 	return output;
 };
 
+/**
+ * Get the wikitext for this transclusion.
+ *
+ * @static
+ * @param {Object} content MW data content
+ * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+ */
+ve.dm.MWTransclusionNode.static.getWikitext = function ( content ) {
+	var i, len, part, template, param,
+		wikitext = '';
+
+	// Normalize to multi template format
+	if ( content.params ) {
+		content = { parts: [ { template: content } ] };
+	}
+	// Build wikitext from content
+	for ( i = 0, len = content.parts.length; i < len; i++ ) {
+		part = content.parts[ i ];
+		if ( part.template ) {
+			// Template
+			template = part.template;
+			wikitext += '{{' + template.target.wt;
+			for ( param in template.params ) {
+				wikitext += '|' + param + '=' +
+					this.escapeParameter( template.params[ param ].wt );
+			}
+			wikitext += '}}';
+		} else {
+			// Plain wikitext
+			wikitext += part;
+		}
+	}
+	return wikitext;
+};
+
 /* Methods */
 
 /**
@@ -350,38 +385,13 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 };
 
 /**
- * Get the wikitext for this transclusion.
+ * Wrapper for static method
  *
  * @method
  * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
  */
 ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
-	var i, len, part, template, param,
-		content = this.getAttribute( 'mw' ),
-		wikitext = '';
-
-	// Normalize to multi template format
-	if ( content.params ) {
-		content = { parts: [ { template: content } ] };
-	}
-	// Build wikitext from content
-	for ( i = 0, len = content.parts.length; i < len; i++ ) {
-		part = content.parts[ i ];
-		if ( part.template ) {
-			// Template
-			template = part.template;
-			wikitext += '{{' + template.target.wt;
-			for ( param in template.params ) {
-				wikitext += '|' + param + '=' +
-					this.constructor.static.escapeParameter( template.params[ param ].wt );
-			}
-			wikitext += '}}';
-		} else {
-			// Plain wikitext
-			wikitext += part;
-		}
-	}
-	return wikitext;
+	return this.constructor.static.getWikitext( this.getAttribute( 'mw' ) );
 };
 
 /* Concrete subclasses */

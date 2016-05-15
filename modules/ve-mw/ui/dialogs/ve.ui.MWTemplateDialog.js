@@ -414,19 +414,25 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 		return new OO.ui.Process( function () {
 			var deferred = $.Deferred();
 			dialog.checkRequiredParameters().done( function () {
-				var surfaceModel = dialog.getFragment().getSurface(),
+				var modelPromise,
+					surfaceModel = dialog.getFragment().getSurface(),
 					obj = dialog.transclusionModel.getPlainObject();
+
+				dialog.pushPending();
 
 				if ( dialog.selectedNode instanceof ve.dm.MWTransclusionNode ) {
 					dialog.transclusionModel.updateTransclusionNode( surfaceModel, dialog.selectedNode );
+					// TODO: updating the node could result in the inline/block state change
+					modelPromise = $.Deferred().resolve().promise();
 				} else if ( obj !== null ) {
 					// Collapse returns a new fragment, so update dialog.fragment
 					dialog.fragment = dialog.getFragment().collapseToEnd();
-					dialog.transclusionModel.insertTransclusionNode( dialog.getFragment() );
+					modelPromise = dialog.transclusionModel.insertTransclusionNode( dialog.getFragment() );
 				}
 
-				dialog.pushPending();
-				dialog.close( { action: action } ).always( dialog.popPending.bind( dialog ) );
+				return modelPromise.then( function () {
+					dialog.close( { action: action } ).always( dialog.popPending.bind( dialog ) );
+				} );
 			} ).always( deferred.resolve );
 
 			return deferred;
