@@ -11,7 +11,8 @@
 			"Sayginer",
 			"Arystanbek",
 			"Meelo",
-			"McAang"
+			"McAang",
+			"Coolland"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici]]",
@@ -19,9 +20,14 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici: Doğrula]]",
 	"tag-visualeditor-needcheck-description": "Sistem [[{{MediaWiki:visualeditor-descriptionpagelink}}|görsel düzenleyici]] ile düzenleyemeyeceğiniz, ancak kaynağı değiştir bağlantısıyla editör ile yapabileceğiniz değişiklik yaptığınızı tespit etti.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici: Değiştirildi]]",
-	"tag-visualeditor-switched-description": "Kullanıcı düzenlemek için VisualEditor viki editöre sonra değişti kullanmaya başladı.",
+	"tag-visualeditor-switched-description": "Kullanıcı görsel düzenleyici ile düzenlemeye başladı, daha sonra kaynak düzenleyiciye geçti.",
 	"visualeditor-feedback-link": "Project:Görsel Düzenleyici/Geri bildirim",
 	"visualeditor-feedback-tool": "Bu yazılım hakkında geri bildirim bırakın",
 	"visualeditor-help-label": "Kullanıcı kılavuzunu okuyun",
-	"visualeditor-help-title": "Editörü nasıl kullanacağınız hakkındaki kılavuz"
+	"visualeditor-help-title": "Editörü nasıl kullanacağınız hakkındaki kılavuz",
+	"visualeditor-welcomedialog-action": "Düzenlemeye başla",
+	"visualeditor-welcomedialog-content": "Herkes değişiklik yapabilir ve her iyileştirme yardımcı olmaktadır.",
+	"visualeditor-welcomedialog-content-thanks": "Dünyanın daha fazla şey keşfetmesine yardımcı olduğunuz için teşekkürler!",
+	"visualeditor-welcomedialog-switch": "Kaynak düzenleyiciye geç",
+	"visualeditor-welcomedialog-switch-ve": "Görsel düzenleyiciye geç"
 }

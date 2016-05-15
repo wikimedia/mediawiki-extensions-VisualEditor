@@ -15,7 +15,8 @@
 			"Amire80",
 			"아라",
 			"Warrakkk",
-			"LittleGun"
+			"LittleGun",
+			"NH"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell redigering]]",
@@ -32,7 +33,7 @@
 	"visualeditor-welcomedialog-action": "Börja redigera",
 	"visualeditor-welcomedialog-content": "Vem som helst kan redigera och varje förbättring är en hjälp.",
 	"visualeditor-welcomedialog-content-thanks": "Tack för att du hjälper världen att upptäcka mer!",
-	"visualeditor-welcomedialog-switch": "Växla till wikitext-redigeraren",
-	"visualeditor-welcomedialog-switch-ve": "Växla till den visuell redigeraren",
+	"visualeditor-welcomedialog-switch": "Växla till wikitextläge",
+	"visualeditor-welcomedialog-switch-ve": "Växla till visuellt redigeringsläge",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Välkommen}} till $2"
 }

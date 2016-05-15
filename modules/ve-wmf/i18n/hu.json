@@ -5,7 +5,8 @@
 			"Einstein2",
 			"Misibacsi",
 			"ViDam",
-			"Tacsipacsi"
+			"Tacsipacsi",
+			"Tgr"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuális szerkesztés]]",
@@ -22,5 +23,6 @@
 	"visualeditor-welcomedialog-content": "Mindenki szerkeszthet, és minden javítás segít.",
 	"visualeditor-welcomedialog-content-thanks": "Köszönjük, hogy segítesz a világnak még többet felfedezni!",
 	"visualeditor-welcomedialog-switch": "Váltás forráskód szerkesztésére",
+	"visualeditor-welcomedialog-switch-ve": "Váltás vizuális szerkesztésre",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Üdvözlünk}} a(z) $2 wikin"
 }

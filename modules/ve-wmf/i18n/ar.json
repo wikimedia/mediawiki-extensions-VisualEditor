@@ -32,5 +32,6 @@
 	"visualeditor-welcomedialog-content": "يمكن لأي شخص تحرير، وكل التحسن يساعد.",
 	"visualeditor-welcomedialog-content-thanks": "شكرا لكم لمساعدة العالم على اكتشاف المزيد!",
 	"visualeditor-welcomedialog-switch": "تحول إلى محرر المصدر",
+	"visualeditor-welcomedialog-switch-ve": "انتقل إلى المحرر المرئي",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|مرحبًا بك}} في $2"
 }

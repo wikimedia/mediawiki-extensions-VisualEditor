@@ -25,9 +25,9 @@
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "エディターの使用法についてのガイド",
 	"visualeditor-welcomedialog-action": "編集の開始",
-	"visualeditor-welcomedialog-content": "誰でも編集できて、すべての改善が助ける。",
+	"visualeditor-welcomedialog-content": "誰でも編集できて、すべての改善が役に立つ。",
 	"visualeditor-welcomedialog-content-thanks": "読者がより多くのことを発見する手助けをしてくださりありがとうございます！",
-	"visualeditor-welcomedialog-switch": "ソースの編集に切り替え",
+	"visualeditor-welcomedialog-switch": "ソースの編集に切り替える",
 	"visualeditor-welcomedialog-switch-ve": "ビジュアルエディターに切り替える",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|ようこそ}}$2へ"
 }
