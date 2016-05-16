@@ -3,15 +3,24 @@
 		"authors": [
 			"Supasate",
 			"Taweetham",
-			"Horus"
+			"Horus",
+			"Pilarbini"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
 	"tag-visualeditor-description": "แก้ไขโดยใช้ [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: ตรวจสอบ]]",
 	"tag-visualeditor-needcheck-description": "การแก้ไขโดยใช้ [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] ระบบตรวจพบ wikitext ที่อาจถูกเปลี่ยนแปลงโดยไม่ได้ตั้งใจ",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor:เปลี่ยน]]",
+	"tag-visualeditor-switched-description": "ผู้ใช้เริ่มแก้ไขโดยใช้ VisualEditor จากนั้นจึงเปลี่ยนเป็น wikitext editor",
 	"visualeditor-feedback-link": "Project:VisualEditor/ความคิดเห็น",
-	"visualeditor-feedback-tool": "ฝากคำติชม",
+	"visualeditor-feedback-tool": "ฝากคำติชมเกี่ยวกับซอฟต์แวร์นี้",
 	"visualeditor-help-label": "อ่านคู่มือการใช้งาน",
-	"visualeditor-help-title": "คู่มือสำหรับวิธีการใช้ตัวแก้ไข"
+	"visualeditor-help-title": "คู่มือสำหรับวิธีการใช้ตัวแก้ไข",
+	"visualeditor-welcomedialog-action": "เริ่มแก้ไข",
+	"visualeditor-welcomedialog-content": "ทุกคนสามารถแก้ไขได้ และทุกการปรับปรุงมีความสำคัญ",
+	"visualeditor-welcomedialog-content-thanks": "ขอบคุณที่ช่วยแบ่งปันความรู้แก่ผู้อ่านท่านอื่น !",
+	"visualeditor-welcomedialog-switch": "เปลี่ยนไปใช้ตัวแก้ไขต้นฉบับ",
+	"visualeditor-welcomedialog-switch-ve": "เปลี่ยนไปใช้ VisualEditor",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|ยินดีต้อนรับ}} สู่ $2"
 }

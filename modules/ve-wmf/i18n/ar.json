@@ -20,7 +20,7 @@
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|تحرير مرئي]]",
 	"tag-visualeditor-description": "أجر التعديل باستخدام [[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي: تحقق]]",
-	"tag-visualeditor-needcheck-description": "تعديل [[{{MediaWiki:visualeditor-descriptionpagelink}}|بالمحرر المرئي]] وخطأ محتمل في النص الويكي.",
+	"tag-visualeditor-needcheck-description": "تعديل تمّ [[{{MediaWiki:visualeditor-descriptionpagelink}}|بالمحرر المرئي]] حيث اكتشف النظام تغييرات ربما تكون غير مقصودة على نص الويكي.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي: تبديل]]",
 	"tag-visualeditor-switched-description": "بدأ المستخدم بالتحرير باستخدام المحرر المرئي ثم انتقل إلى محرر نص الويكي.",
 	"visualeditor-feedback-link": "Project:المحرر المرئي/تعليقات",
@@ -29,9 +29,9 @@
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "دليل المستخدم لكيفية استخدام المحرر",
 	"visualeditor-welcomedialog-action": "بدء التعديل",
-	"visualeditor-welcomedialog-content": "يمكن لأي شخص تحرير، وكل التحسن يساعد.",
-	"visualeditor-welcomedialog-content-thanks": "شكرا لكم لمساعدة العالم على اكتشاف المزيد!",
-	"visualeditor-welcomedialog-switch": "تحول إلى محرر المصدر",
-	"visualeditor-welcomedialog-switch-ve": "انتقل إلى المحرر المرئي",
+	"visualeditor-welcomedialog-content": "بإمكان الجميع التحرير، وكل تحسين يُساعد.",
+	"visualeditor-welcomedialog-content-thanks": "شكرًا لك لمساعدة العالم على اكتشاف المزيد!",
+	"visualeditor-welcomedialog-switch": "بدّل إلى محرر المصدر",
+	"visualeditor-welcomedialog-switch-ve": "بدّل إلى المحرر المرئي",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|مرحبًا بك}} في $2"
 }

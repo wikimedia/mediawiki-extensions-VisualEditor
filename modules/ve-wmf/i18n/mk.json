@@ -23,5 +23,6 @@
 	"visualeditor-welcomedialog-content": "Секој може да уредува и секое подобрување е корисно.",
 	"visualeditor-welcomedialog-content-thanks": "Ви благодариме што му помогнавте на светот да осознае повеќе!",
 	"visualeditor-welcomedialog-switch": "Префрли на изворниот уредник",
+	"visualeditor-welcomedialog-switch-ve": "Префрли на визуелниот уредник",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добре дојдовте}} на $2"
 }
