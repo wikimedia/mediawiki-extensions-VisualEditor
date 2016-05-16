@@ -23,7 +23,7 @@
 .ve-ui-mwLanguagesPage-languages-table th,
 .ve-ui-mwLanguagesPage-languages-table td {
 	padding: 0.75em 1em;
-	border-bottom: solid 1px white;
+	border-bottom: 1px solid #fff;
 }
 
 .ve-ui-mwLanguagesPage-languages-table tr td:first-child {
@@ -31,9 +31,9 @@
 }
 
 .ve-ui-mwLanguagesPage-languages-table tr:nth-child( odd ) td {
-	background: #F0F0F0;
+	background: #f0f0f0;
 }
 
 .ve-ui-mwLanguagesPage-languages-table tr:nth-child( even ) td {
-	background: #F8F8F8;
+	background: #f8f8f8;
 }

@@ -20,6 +20,11 @@
 	opacity: 0.4;
 }
 
+.ve-ui-mwInternalLinkContextItem-hasImage {
+	background-color: transparent;
+	background-size: cover;
+}
+
 .ve-ui-mwInternalLinkContextItem-withImage .ve-ui-mwInternalLinkContextItem-hasImage {
 	border: 0;
 	background-size: cover;
@@ -45,9 +50,4 @@
 
 .ve-ui-mwInternalLinkContextItem-withDescription .ve-ui-mwInternalLinkContextItem-link {
 	font-weight: bold;
-}
-
-.ve-ui-mwInternalLinkContextItem-hasImage {
-	background-color: transparent;
-	background-size: cover;
 }
