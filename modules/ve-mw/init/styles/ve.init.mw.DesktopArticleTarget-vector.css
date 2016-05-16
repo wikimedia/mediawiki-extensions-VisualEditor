@@ -67,13 +67,6 @@
 	position: relative;
 }
 
-/* Main document debug bar */
-.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
-	/* 1/0.8 */
-	padding: 1.25em;
-	margin: 1.25em -1.25em -1.25em -1.25em;
-}
-
 /* All debug bars (includes target widgets) */
 .ve-ui-debugBar {
 	border-top: 1px solid #ccc;
@@ -88,6 +81,13 @@
 	text-decoration: none;
 }
 
+/* Main document debug bar */
+.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
+	/* 1/0.8 */
+	padding: 1.25em;
+	margin: 1.25em -1.25em -1.25em -1.25em;
+}
+
 /* ve.ce.TableCellnode.css's margin replaced by more specific rule in Vector (div#content p) */
 /*csslint ids:false */
 #content .ve-ce-tableCellNode .ve-ce-paragraphNode {
@@ -96,7 +96,7 @@
 /*csslint ids:true */
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
-@media screen and (min-width: 982px) {
+@media screen and ( min-width: 982px ) {
 	.ve-init-mw-target-surface {
 		/* 0.8/0.8, 1.5/0.8 */
 		margin: 0 -1.875em -1.875em -1.875em;

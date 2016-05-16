@@ -15,8 +15,8 @@
 	text-align: center;
 }
 
-.ve-ui.mwMediaResultWidget-eol:after {
-	content: ".";
+.ve-ui.mwMediaResultWidget-eol::after {
+	content: '.';
 	display: block;
 	height: 0;
 	clear: both;
@@ -57,7 +57,7 @@
 
 .ve-ui-mwMediaResultWidget.oo-ui-optionWidget-highlighted,
 .ve-ui-mwMediaResultWidget.oo-ui-optionWidget-selected {
-	box-shadow: 0 0 0.3em #a7dcff, 0 0 0 white;
+	box-shadow: 0 0 0.3em #a7dcff, 0 0 0 #fff;
 }
 
 .ve-ui-mwMediaResultWidget-error .ve-ui-mwMediaResultWidget-thumbnail {

@@ -28,7 +28,7 @@
 	background: linear-gradient( to bottom, rgba( 255, 255, 255, 0 ) 0, #fff 50% );
 }
 
-.ve-ui-mwMediaInfoFieldWidget.oo-ui-iconElement .oo-ui-labelElement-label  {
+.ve-ui-mwMediaInfoFieldWidget.oo-ui-iconElement .oo-ui-labelElement-label {
 	display: block;
 	padding: 0.3em 0 0.1em 2.2em;
 	line-height: 1.25em;

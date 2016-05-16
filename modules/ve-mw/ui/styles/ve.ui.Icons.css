@@ -60,70 +60,70 @@
 
 /* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-page-disambiguation,
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-page-disambiguation {
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-disambiguation /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-disambiguation-rtl.svg );
 }
 
 /* @noflip */
 .ve-ui-dir-block-ltr .oo-ui-icon-page-disambiguation,
-/* HACK */ .ve-ui-surface-dir-ltr .oo-ui-icon-page-disambiguation {
+.ve-ui-surface-dir-ltr .oo-ui-icon-page-disambiguation /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-disambiguation-ltr.svg );
 }
 
 /* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-page-existing,
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-page-existing {
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-existing /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-existing-rtl.svg );
 }
 
 /* @noflip */
 .ve-ui-dir-block-ltr .oo-ui-icon-page-existing,
-/* HACK */ .ve-ui-surface-dir-ltr .oo-ui-icon-page-existing {
+.ve-ui-surface-dir-ltr .oo-ui-icon-page-existing /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-existing-ltr.svg );
 }
 
 /* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-page-not-found,
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found {
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-not-found-rtl.svg );
 }
 
 /* @noflip */
+.ve-ui-dir-block-ltr .oo-ui-icon-page-not-found,
+.ve-ui-surface-dir-ltr .oo-ui-icon-page-not-found /* HACK */ {
+	/* @embed */
+	background-image: url( images/icons/page-not-found-ltr.svg );
+}
+
+/* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-page-not-found:lang(he),
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang(he) {
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang(he) /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-not-found-he-yi.svg );
 }
 
 /* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-page-not-found:lang(yi),
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang(yi) {
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang(yi) /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-not-found-he-yi.svg );
 }
 
 /* @noflip */
-.ve-ui-dir-block-ltr .oo-ui-icon-page-not-found,
-/* HACK */ .ve-ui-surface-dir-ltr .oo-ui-icon-page-not-found {
-	/* @embed */
-	background-image: url( images/icons/page-not-found-ltr.svg );
-}
-
-/* @noflip */
 .ve-ui-dir-block-rtl .oo-ui-icon-page-redirect,
-/* HACK */ .ve-ui-surface-dir-rtl .oo-ui-icon-page-redirect {
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-redirect /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-redirect-rtl.svg );
 }
 
 /* @noflip */
 .ve-ui-dir-block-ltr .oo-ui-icon-page-redirect,
-/* HACK */ .ve-ui-surface-dir-ltr .oo-ui-icon-page-redirect {
+.ve-ui-surface-dir-ltr .oo-ui-icon-page-redirect /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-redirect-ltr.svg );
 }

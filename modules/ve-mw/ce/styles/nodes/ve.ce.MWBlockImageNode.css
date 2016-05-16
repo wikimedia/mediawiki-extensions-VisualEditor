@@ -8,5 +8,5 @@
 
 /* Override paragraph margins inside of captions */
 .ve-ce-mwBlockImageNode figcaption p {
-	margin: 0 !important;
+	margin: 0 !important; /* stylelint-disable-line declaration-no-important */
 }

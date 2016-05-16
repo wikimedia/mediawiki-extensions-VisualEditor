@@ -14,5 +14,5 @@
 	/* Reset -2px from VE-core */
 	margin-right: 0;
 	/* Monobook sets a background:url(); rule which overrides the colour. TODO: Fix upstream */
-	background-color: #E6F1FF;
+	background-color: #e6f1ff;
 }

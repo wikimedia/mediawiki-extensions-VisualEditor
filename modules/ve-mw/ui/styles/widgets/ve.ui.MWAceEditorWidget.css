@@ -8,7 +8,7 @@
 .ve-ui-mwAceEditorWidget .ace_editor {
 	border: 1px solid #ccc;
 	margin: 1px;
-	font-family: monospace, Courier;
+	font-family: monospace, 'Courier';
 	font-size: inherit;
 	line-height: 1.5;
 }
@@ -22,5 +22,5 @@
 }
 
 .ve-ui-mwAceEditorWidget.oo-ui-widget-enabled.oo-ui-flaggedElement-invalid .ace_editor {
-	border-color: red;
+	border-color: #f00;
 }

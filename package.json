@@ -9,15 +9,16 @@
     "postdoc": "grunt copy:jsduck"
   },
   "devDependencies": {
+    "babel-polyfill": "6.8.0",
     "grunt": "1.0.1",
-    "grunt-cli": "1.2.0",
-    "grunt-jsonlint": "1.0.7",
     "grunt-banana-checker": "0.5.0",
+    "grunt-cli": "1.2.0",
     "grunt-contrib-copy": "1.0.0",
-    "grunt-contrib-csslint": "1.0.0",
     "grunt-contrib-jshint": "1.0.0",
     "grunt-contrib-watch": "1.0.0",
     "grunt-jscs": "2.8.0",
-    "grunt-tyops": "0.1.0"
+    "grunt-jsonlint": "1.0.7",
+    "grunt-tyops": "0.1.0",
+    "stylelint": "6.3.3"
   }
 }

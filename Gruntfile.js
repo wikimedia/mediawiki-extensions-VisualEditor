@@ -4,12 +4,13 @@
  * @package VisualEditor
  */
 
+require( 'babel-polyfill' );
+
 /*jshint node:true */
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' );
 
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
@@ -85,11 +86,18 @@ module.exports = function ( grunt ) {
 				src: '<%= jshint.all %>'
 			}
 		},
-		csslint: {
+		stylelint: {
 			options: {
-				csslintrc: '.csslintrc'
+				stylelintrc: 'lib/ve/.stylelintrc'
 			},
-			all: 'modules/**/*.css'
+			src: [
+				'**/*.css',
+				'!coverage/**',
+				'!dist/**',
+				'!docs/**',
+				'!lib/**',
+				'!node_modules/**'
+			]
 		},
 		banana: {
 			all: [
@@ -116,7 +124,7 @@ module.exports = function ( grunt ) {
 			files: [
 				'.{csslintrc,jscsrc,jshintignore,jshintrc}',
 				'<%= jshint.all %>',
-				'<%= csslint.all %>'
+				'<%= stylelint.all %>'
 			],
 			tasks: 'test'
 		}
@@ -143,7 +151,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'stylelint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
