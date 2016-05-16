@@ -50,19 +50,63 @@
 	/**
 	 * Insert transclusion at the end of a surface fragment.
 	 *
-	 * @param {ve.dm.SurfaceFragment} surfaceFragment Surface fragment to insert at
+	 * If forceType is not specified and this is used in async mode, users of this method
+	 * should ensure the surface is not accessible while the type is being evaluated.
+	 *
+	 * @param {ve.dm.SurfaceFragment} surfaceFragment Surface fragment after which to insert.
+	 * @param {boolean|undefined} [forceType] Force the type to 'inline' or 'block'. If not
+	 *   specified it will be evaluated asynchronously.
+	 * @return {jQuery.Promise} Promise which resolves when the node has been inserted. If
+	 *   forceType was specified this will be instant.
 	 */
-	ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment ) {
-		surfaceFragment
-			.insertContent( [
-				{
-					type: 'mwTransclusionInline',
-					attributes: {
-						mw: this.getPlainObject()
+	ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment, forceType ) {
+		var model = this,
+			deferred = $.Deferred(),
+			nodeClass = ve.dm.MWTransclusionNode;
+
+		function insertNode( isInline ) {
+			var type = isInline ? nodeClass.static.inlineType : nodeClass.static.blockType;
+			surfaceFragment
+				.insertContent( [
+					{
+						type: type,
+						attributes: {
+							mw: model.getPlainObject()
+						}
+					},
+					{ type: '/' + type }
+				] );
+			deferred.resolve();
+		}
+
+		if ( forceType ) {
+			insertNode( forceType === 'inline' );
+		} else {
+			new mw.Api().post( {
+					action: 'visualeditor',
+					paction: 'parsefragment',
+					page: mw.config.get( 'wgRelevantPageName' ),
+					wikitext: nodeClass.static.getWikitext( this.getPlainObject() ),
+					pst: 1
+				} )
+				.then( function ( response ) {
+					var contentNodes;
+
+					if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
+						contentNodes = $.parseHTML( response.visualeditor.content, surfaceFragment.getDocument().getHtmlDocument() ) || [];
+						contentNodes = ve.ce.MWTransclusionNode.static.filterRendering( contentNodes );
+						insertNode(
+							nodeClass.static.isHybridInline( contentNodes, ve.dm.converter )
+						);
+					} else {
+						// Request failed - just assume inline
+						insertNode( true );
 					}
-				},
-				{ type: '/mwTransclusionInline' }
-			] );
+				}, function () {
+					insertNode( true );
+				} );
+		}
+		return deferred.promise();
 	};
 
 	/**
