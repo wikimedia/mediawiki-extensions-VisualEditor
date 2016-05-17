@@ -122,7 +122,7 @@ module.exports = function ( grunt ) {
 		},
 		watch: {
 			files: [
-				'.{csslintrc,jscsrc,jshintignore,jshintrc}',
+				'.{stylelintrc,jscsrc,jshintignore,jshintrc}',
 				'<%= jshint.all %>',
 				'<%= stylelint.all %>'
 			],

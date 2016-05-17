@@ -89,11 +89,9 @@
 }
 
 /* ve.ce.TableCellnode.css's margin replaced by more specific rule in Vector (div#content p) */
-/*csslint ids:false */
 #content .ve-ce-tableCellNode .ve-ce-paragraphNode {
 	margin: 0;
 }
-/*csslint ids:true */
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
