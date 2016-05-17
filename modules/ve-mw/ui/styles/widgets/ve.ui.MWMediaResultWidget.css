@@ -34,7 +34,7 @@
 	-webkit-transition: opacity 400ms;
 	-moz-transition: opacity 400ms;
 	transition: opacity 400ms;
-	/* stylelint-enable */
+	/* stylelint-enable no-unsupported-browser-features */
 }
 
 .ve-ui-mwMediaResultWidget-done .ve-ui-mwMediaResultWidget-thumbnail,

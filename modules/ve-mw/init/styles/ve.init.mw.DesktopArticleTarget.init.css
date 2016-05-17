@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* Bug: https://github.com/stubbornella/csslint/issues/436 */
+/* stylelint-disable selector-no-id */
 
 /*!
  * State                | <html> classes
@@ -53,7 +53,7 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	/* stylelint-enable */
+	/* stylelint-enable no-unsupported-browser-features */
 }
 
 /* Progress bar mimicking OOUI */
@@ -61,6 +61,7 @@
 .ve-activated #content {
 	position: relative;
 }
+/* stylelint-enable selector-no-id */
 
 .ve-init-mw-desktopArticleTarget-loading-overlay {
 	position: absolute;

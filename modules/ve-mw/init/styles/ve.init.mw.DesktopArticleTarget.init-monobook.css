@@ -21,5 +21,5 @@
 	background-image: -webkit-linear-gradient( top, #eaf4fa 0%, #b0d9ee 100% );
 	background-image: -moz-linear-gradient( top, #eaf4fa 0%, #b0d9ee 100% );
 	background-image: linear-gradient( to bottom, #eaf4fa 0%, #b0d9ee 100% );
-	/* stylelint-enable */
+	/* stylelint-enable no-unsupported-browser-features */
 }

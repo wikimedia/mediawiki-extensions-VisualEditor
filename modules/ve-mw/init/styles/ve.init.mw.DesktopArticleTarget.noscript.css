@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* stylelint-disable selector-no-id */
+
 /* Hide VE edit tab and section edit things for noscript users.
  * For script users they're always visible unless and until ve-not-available is added.
  */
@@ -16,6 +18,8 @@
 .ve-not-available .mw-editsection-visualeditor {
 	display: none;
 }
+
+/* stylelint-enable selector-no-id */
 
 /* For script users, expand brackets by default, unless and until ve-not-available is added */
 

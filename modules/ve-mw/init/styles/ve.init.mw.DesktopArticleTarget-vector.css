@@ -89,7 +89,7 @@
 }
 
 /* ve.ce.TableCellnode.css's margin replaced by more specific rule in Vector (div#content p) */
-#content .ve-ce-tableCellNode .ve-ce-paragraphNode {
+#content .ve-ce-tableCellNode .ve-ce-paragraphNode { /* stylelint-disable-line selector-no-id */
 	margin: 0;
 }
 
