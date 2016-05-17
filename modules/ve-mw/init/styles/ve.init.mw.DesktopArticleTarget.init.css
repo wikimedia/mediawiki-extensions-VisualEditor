@@ -47,11 +47,14 @@
 .ve-activated #bodyContent,
 .ve-activated #firstHeading {
 	opacity: 0.6;
+	/* TODO: Support IE9 with JS events */
+	/* stylelint-disable no-unsupported-browser-features */
 	pointer-events: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	/* stylelint-enable */
 }
 
 /* Progress bar mimicking OOUI */

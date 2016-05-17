@@ -19,6 +19,6 @@
 	height: 1.25em;
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-size: 24px 24px;
+	background-size: 24px 24px; /* stylelint-disable-line no-unsupported-browser-features */
 	opacity: 0.5;
 }

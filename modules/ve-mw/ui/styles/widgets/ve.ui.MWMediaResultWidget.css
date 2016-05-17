@@ -30,10 +30,11 @@
 .ve-ui-mwMediaResultWidget-thumbnail {
 	opacity: 0;
 	display: inline-block;
+	/* stylelint-disable no-unsupported-browser-features */
 	-webkit-transition: opacity 400ms;
 	-moz-transition: opacity 400ms;
-	-o-transition: opacity 400ms;
 	transition: opacity 400ms;
+	/* stylelint-enable */
 }
 
 .ve-ui-mwMediaResultWidget-done .ve-ui-mwMediaResultWidget-thumbnail,
@@ -42,7 +43,7 @@
 }
 
 .ve-ui-mwMediaResultWidget-crop {
-	background-size: cover;
+	background-size: cover; /* stylelint-disable-line no-unsupported-browser-features */
 	background-position: center center;
 }
 
@@ -63,7 +64,7 @@
 .ve-ui-mwMediaResultWidget-error .ve-ui-mwMediaResultWidget-thumbnail {
 	/* @embed */
 	background-image: url( images/broken-image.png );
-	background-size: auto;
+	background-size: auto; /* stylelint-disable-line no-unsupported-browser-features */
 	background-position: center center;
 	background-repeat: no-repeat;
 }
@@ -76,7 +77,7 @@
 	overflow: hidden;
 	padding: 0.5em;
 	color: #fff;
-	text-shadow: 1px 1px #000;
+	text-shadow: 1px 1px #000; /* stylelint-disable-line no-unsupported-browser-features */
 	line-height: 1.125em;
 	background-color: rgba( 0, 0, 0, 0.5 );
 	text-overflow: ellipsis;

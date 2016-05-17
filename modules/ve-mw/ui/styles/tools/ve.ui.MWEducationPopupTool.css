@@ -12,12 +12,14 @@
 	background-color: #347bff;
 	position: absolute;
 	opacity: 0;
+	/* stylelint-disable no-unsupported-browser-features */
 	-webkit-animation: pulse 3s ease-out;
 	-moz-animation: pulse 3s ease-out;
 	animation: pulse 3s ease-out;
 	-webkit-animation-iteration-count: infinite;
 	-moz-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
+	/* stylelint-enable */
 }
 
 .ve-ui-stillDot {

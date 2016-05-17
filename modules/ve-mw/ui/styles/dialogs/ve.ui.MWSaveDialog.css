@@ -16,7 +16,7 @@
 
 .ve-ui-mwSaveDialog-summary textarea {
 	display: block;
-	resize: none;
+	resize: none; /* stylelint-disable-line no-unsupported-browser-features */
 	height: 4em;
 	background-color: transparent;
 }

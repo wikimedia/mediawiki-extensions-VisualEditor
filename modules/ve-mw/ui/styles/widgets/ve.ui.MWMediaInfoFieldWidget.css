@@ -16,7 +16,11 @@
 .ve-ui-mwMediaInfoFieldWidget-text {
 	word-wrap: break-word;
 	overflow: hidden;
+	/* stylelint-disable no-unsupported-browser-features */
+	-webkit-transition: max-height 0.5s ease-in;
+	-moz-transition: max-height 0.5s ease-in;
 	transition: max-height 0.5s ease-in;
+	/* stylelint-enable */
 }
 
 .ve-ui-mwMediaInfoFieldWidget-readmore {
@@ -24,8 +28,10 @@
 	width: 100%;
 	padding-top: 1em;
 	margin-top: -2em;
+	/* stylelint-disable no-unsupported-browser-features */
 	background: -webkit-linear-gradient( top, rgba( 255, 255, 255, 0 ) 0, #fff 50% );
 	background: linear-gradient( to bottom, rgba( 255, 255, 255, 0 ) 0, #fff 50% );
+	/* stylelint-enable */
 }
 
 .ve-ui-mwMediaInfoFieldWidget.oo-ui-iconElement .oo-ui-labelElement-label {
