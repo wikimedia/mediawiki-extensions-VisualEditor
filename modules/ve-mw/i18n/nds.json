@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zylbath"
+			"Zylbath",
+			"Servien"
 		]
 	},
 	"tooltip-ca-createsource": "Bornkood för düsse Sied opstellen",
 	"tooltip-ca-editsource": "Bornkoood vun düsse Sied ännern",
-	"tooltip-ca-ve-edit": "Düsse Sied mit den VisualEditor ännern",
-	"visualeditor-beta-appendix": "beta",
+	"tooltip-ca-ve-edit": "Disse Siet ännern",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor is een Beta-Verschoon. Dat mag Weekwoorfehlers geven un du warrst Delen vun de Sied nich ännern könen. Klick op \"{{int:visualeditor-ca-editsource}}\", üm in den Wikitextmodus to kamen. Daarbi gaht nich spiekerte Ännern verlustig.",
 	"visualeditor-browserwarning": "Du bruukst een Browser, de vun'n VisualEditor nich apentlich stütt warrt.",
@@ -38,12 +38,6 @@
 	"visualeditor-dialog-meta-languages-readonlynote": "Dit is een Liest vun de Sieden in anner Spraken, de op düsse Sied verlenkt sünd. Se köönt opstunns bloot in'n Borntextmodus or op Wikidata ännert warrn.",
 	"visualeditor-dialog-meta-languages-section": "Spraken",
 	"visualeditor-dialog-meta-settings-label": "Siedeninstellen",
-	"visualeditor-dialog-reference-options-group-label": "Düsse Grupp bruken",
-	"visualeditor-dialog-reference-options-name-label": "Düssen Naam wiederbruken",
-	"visualeditor-dialog-reference-options-section": "Optschonen",
-	"visualeditor-dialog-reference-title": "Enkelnawies",
-	"visualeditor-dialog-reference-useexisting-label": "Een vörhannen Enkelnawies bruken",
-	"visualeditor-dialog-referenceslist-title": "Liest vun Enkelnawiesen",
 	"visualeditor-dialog-transclusion-add-content": "Inhold tofögen",
 	"visualeditor-dialog-transclusion-add-param": "Parameter tofögen",
 	"visualeditor-dialog-transclusion-add-template": "Vörlaag tofögen",
@@ -56,8 +50,6 @@
 	"visualeditor-dialog-transclusion-title": "Vörlaaginbinnen",
 	"visualeditor-dialogbutton-media-tooltip": "Medien",
 	"visualeditor-dialogbutton-meta-tooltip": "Siedeninstellen",
-	"visualeditor-dialogbutton-reference-tooltip": "Enkelnawies",
-	"visualeditor-dialogbutton-referenceslist-tooltip": "Liest vun Enkelnawiesen",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Vörlaaginbinnen",
 	"visualeditor-diff-nochanges": "De Överpröven kunn nich start warrn, wiel dien Verschoon de lieke is as de aktuelle Siedenverschoon.",
 	"visualeditor-differror": "Fehler bi't Laden vun de Daten vun'n Server: $1.",

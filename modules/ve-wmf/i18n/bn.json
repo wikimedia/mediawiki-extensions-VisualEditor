@@ -25,5 +25,6 @@
 	"visualeditor-welcomedialog-content": "যে কেউ সম্পাদনা করতে পারে, এবং প্রতিটি উন্নতি করতে সাহায্য করে।",
 	"visualeditor-welcomedialog-content-thanks": "বিশ্বকে আরও আবিষ্কার করতে সাহায্য করার জন্য আপনাকে ধন্যবাদ!",
 	"visualeditor-welcomedialog-switch": "উৎস সম্পাদকে যান",
+	"visualeditor-welcomedialog-switch-ve": "চাক্ষুষ সম্পাদকে যান",
 	"visualeditor-welcomedialog-title": "$2-এ {{GENDER:$1|স্বাগতম}}"
 }
