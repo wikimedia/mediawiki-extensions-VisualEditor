@@ -16,6 +16,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-jscs' );
+	grunt.loadNpmTasks( 'grunt-stylelint' );
 	grunt.loadNpmTasks( 'grunt-tyops' );
 	grunt.loadTasks( 'lib/ve/build/tasks' );
 	grunt.loadTasks( 'build/tasks' );
@@ -87,9 +88,6 @@ module.exports = function ( grunt ) {
 			}
 		},
 		stylelint: {
-			options: {
-				stylelintrc: 'lib/ve/.stylelintrc'
-			},
 			src: [
 				'**/*.css',
 				'!coverage/**',
