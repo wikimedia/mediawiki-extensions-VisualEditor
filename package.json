@@ -20,6 +20,6 @@
     "grunt-jsonlint": "1.0.7",
     "grunt-stylelint": "0.2.0",
     "grunt-tyops": "0.1.0",
-    "stylelint": "6.3.3"
+    "stylelint-config-wikimedia": "0.1.0"
   }
 }
