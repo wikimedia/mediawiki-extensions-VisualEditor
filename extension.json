@@ -175,11 +175,8 @@
 		"BeforeInitialize": [
 			"VisualEditorHooks::onBeforeInitialize"
 		],
-		"AddNewAccount": [
-			"VisualEditorHooks::onAddNewAccount"
-		],
-		"AuthPluginAutoCreate": [
-			"VisualEditorHooks::onAuthPluginAutoCreate"
+		"LocalUserCreated": [
+			"VisualEditorHooks::onLocalUserCreated"
 		],
 		"CustomEditor": [
 			"VisualEditorHooks::onCustomEditor"
