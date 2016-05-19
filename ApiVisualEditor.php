@@ -162,6 +162,9 @@ class ApiVisualEditor extends ApiBase {
 		if ( $parserParams['oldid'] ) {
 			$path .= '/' . $parserParams['oldid'];
 		}
+		if ( !is_string( $etag ) || $etag === '' ) {
+			wfDebugLog( 'AdHocDebug', 'VisualEditr T135171 - bad etag: ' . var_export( $etag, true ) );
+		}
 		return $this->requestRestbase(
 			'POST',
 			$path,
