@@ -18,7 +18,7 @@
     "grunt-contrib-watch": "1.0.0",
     "grunt-jscs": "2.8.0",
     "grunt-jsonlint": "1.0.7",
-    "grunt-stylelint": "0.2.0",
+    "grunt-stylelint": "0.3.0",
     "grunt-tyops": "0.1.0",
     "stylelint-config-wikimedia": "0.1.0"
   }
