@@ -88,7 +88,7 @@ module.exports = function ( grunt ) {
 			}
 		},
 		stylelint: {
-			src: [
+			all: [
 				'**/*.css',
 				'!coverage/**',
 				'!dist/**',
