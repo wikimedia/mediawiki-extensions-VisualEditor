@@ -823,6 +823,7 @@
 
 						// Duplicate of this code in ve.init.mw.DesktopArticleTarget.js
 						if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
+							$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 							// Set up a temporary window manager
 							windowManager = new OO.ui.WindowManager();
 							$( 'body' ).append( windowManager.$element );
