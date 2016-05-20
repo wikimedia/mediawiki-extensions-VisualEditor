@@ -19,7 +19,8 @@
 			"Mpiva",
 			"Fringio",
 			"Alexmar983",
-			"Jdforrester"
+			"Jdforrester",
+			"Nemo bis"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale]]",
@@ -35,7 +36,7 @@
 	"visualeditor-help-title": "Guida per l'utilizzo dell'editor",
 	"visualeditor-welcomedialog-action": "Inizia a modificare",
 	"visualeditor-welcomedialog-content": "Ognuno può contribuire, e ogni miglioramento è di aiuto.",
-	"visualeditor-welcomedialog-content-thanks": "Grazie per aiutare il mondo a scoprire sempre più cose!",
+	"visualeditor-welcomedialog-content-thanks": "Grazie dell'aiuto nel far apprendere sempre di più al mondo!",
 	"visualeditor-welcomedialog-switch": "Passa all'editor sorgente",
 	"visualeditor-welcomedialog-switch-ve": "Passa all'editor visuale",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Benvenuto|Benvenuta|Benvenuto/a}} su $2"
