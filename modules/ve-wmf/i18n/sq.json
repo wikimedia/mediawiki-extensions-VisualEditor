@@ -3,10 +3,11 @@
 		"authors": [
 			"Euriditi",
 			"Amire80",
-			"Kosovastar"
+			"Kosovastar",
+			"Liridon"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
 	"tag-visualeditor-description": "Redaktim i kryer duke përdorur [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Kontrollo]]",
 	"tag-visualeditor-needcheck-description": "Redaktim i kryer duke përdorur [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] ku sistemi zbuloi wikitekst i cili ndoshta ka ndryshime të padëshiruara.",
