@@ -267,7 +267,7 @@
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/Talk:VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-label": "यथादृश्य संपादिका",
 	"visualeditor-preference-enable": "यथादृश्य संपादिका सक्षम करें। यह निम्नलिखित {{PLURAL:$2|नामस्थान|नामस्थानों}} में उपलब्ध हो जाएगा : $1",
-	"visualeditor-preference-tabs": "सम्पादन तरीका",
+	"visualeditor-preference-tabs": "सम्पादन तरीका:",
 	"visualeditor-preference-tabs-multi-tab": "मुझे दोनों संपादक टैब दिखाएँ",
 	"visualeditor-preference-tabs-prefer-ve": "मुझे हमेशा यथादृश्य संपादिका दिखाएँ",
 	"visualeditor-preference-tabs-prefer-wt": "मुझे हमेशा स्रोत संपादक ही दें",

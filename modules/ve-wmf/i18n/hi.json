@@ -11,7 +11,7 @@
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका]] के प्रयोग से किया गया सम्पादन",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका: जाँच आवश्यक]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका: जाँचें]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका]] के प्रयोग से किये गए सम्पादन जिनमें सिस्टम ने पाया है कि विकिपाठ में अनपेक्षित बदलाव हो सकते हैं।",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका: अंतरित किया]]",
 	"tag-visualeditor-switched-description": "सदस्य ने यथादृश्य संपादिका की सहायता से सम्पादन कार्य आरम्भ किया और उसके बाद स्रोत सम्पादित करने के विकल्प को चुना।",
