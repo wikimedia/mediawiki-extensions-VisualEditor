@@ -9,7 +9,8 @@
 			"NoiX180",
 			"Pras",
 			"Amire80",
-			"아라"
+			"아라",
+			"Otogi"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტირება]]",
@@ -25,7 +26,8 @@
 	"visualeditor-help-title": "რედაქტორის გამოყენების სახელმძღვანელო",
 	"visualeditor-welcomedialog-action": "დაიწყე რედაქტირება",
 	"visualeditor-welcomedialog-content": "რედაქტირება ყველას შეუძლია.",
-	"visualeditor-welcomedialog-content-thanks": "გმადლობთ ტქვენი წვლილისათვის!",
+	"visualeditor-welcomedialog-content-thanks": "გმადლობთ თქვენი წვლილისათვის!",
 	"visualeditor-welcomedialog-switch": "წყაროს რედაქტირებაზე გადართვა",
+	"visualeditor-welcomedialog-switch-ve": "ვიზუალურ რედაქტორზე გადასვლა",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|კეთილი იყოს თქვენი მობრძანება}} $2-ზე"
 }
