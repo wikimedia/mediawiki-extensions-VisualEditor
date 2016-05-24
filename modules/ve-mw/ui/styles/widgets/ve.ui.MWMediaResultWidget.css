@@ -15,7 +15,7 @@
 	text-align: center;
 }
 
-.ve-ui.mwMediaResultWidget-eol::after {
+.ve-ui.mwMediaResultWidget-eol:after {
 	content: '.';
 	display: block;
 	height: 0;

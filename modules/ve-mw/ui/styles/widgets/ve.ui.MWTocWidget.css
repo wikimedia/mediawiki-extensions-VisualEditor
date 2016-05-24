@@ -12,14 +12,14 @@
 .ve-ui-mwTocWidget .toctoggle {
 	margin: 0.25em;
 }
-.ve-ui-mwTocWidget .toctoggle::before {
+.ve-ui-mwTocWidget .toctoggle:before {
 	content: ' [';
 }
-.ve-ui-mwTocWidget .toctoggle::after {
+.ve-ui-mwTocWidget .toctoggle:after {
 	content: '] ';
 }
 
-.ve-ui-mwTocWidget .tocnumber::after {
+.ve-ui-mwTocWidget .tocnumber:after {
 	content: ' ';
 }
 
