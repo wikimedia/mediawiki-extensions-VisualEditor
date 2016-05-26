@@ -36,6 +36,7 @@
    ve.ce.FocusableNode#updateInvisibleIcon */
 .ve-activating .ve-ui-surface {
 	height: 0;
+	padding: 0 !important; /* stylelint-disable-line declaration-no-important */
 	overflow: hidden;
 }
 
