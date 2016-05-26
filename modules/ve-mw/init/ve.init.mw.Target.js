@@ -303,9 +303,8 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 			surface.$element.addClass( 've-init-mw-target-surface' );
 			target.track( 'trace.createSurface.exit' );
 
-			target.$element.append( surface.$element );
-
 			target.dummyToolbar = false;
+
 			target.setSurface( surface );
 
 			setTimeout( function () {
@@ -316,9 +315,26 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 				// Now that the surface is attached to the document and ready,
 				// let it initialize itself
 				surface.initialize();
+				if ( surface.debugBar ) {
+					// Move debug bar to end of target if the surface is nested
+					target.$element.append( surface.debugBar.$element );
+				}
+
 				target.track( 'trace.initializeSurface.exit' );
 				setTimeout( callback );
 			} );
 		} );
 	} );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Target.prototype.setSurface = function ( surface ) {
+	if ( !surface.$element.parent().length ) {
+		this.$element.append( surface.$element );
+	}
+
+	// Parent method
+	ve.init.mw.Target.super.prototype.setSurface.apply( this, arguments );
 };

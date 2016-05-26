@@ -300,8 +300,6 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	this.getSurface().getModel().connect( this, {
 		history: 'updateToolbarSaveButtonState'
 	} );
-	this.setupToolbarSaveButton();
-	this.attachToolbarSaveButton();
 	this.restoreEditSection();
 
 	// Parent method
@@ -1466,30 +1464,42 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
+	// Parent method
+	ve.init.mw.ArticleTarget.super.prototype.setupToolbar.apply( this, arguments );
+
+	this.setupToolbarSaveButton();
+	this.attachToolbarSaveButton();
+};
+
+/**
  * Add content and event bindings to toolbar save button.
  *
  * @param {Object} [config] Configuration options for the button
  */
 ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = function ( config ) {
-	this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
-		label: ve.msg( 'visualeditor-toolbar-savedialog' ),
-		flags: [ 'progressive', 'primary' ],
-		disabled: !this.restoring
-	}, config ) );
+	if ( !this.toolbarSaveButton ) {
+		this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
+			label: ve.msg( 'visualeditor-toolbar-savedialog' ),
+			flags: [ 'progressive', 'primary' ],
+			disabled: !this.restoring
+		}, config ) );
 
-	// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
-	// tour to attach a guider to the "Save page" button.
-	this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
+		// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
+		// tour to attach a guider to the "Save page" button.
+		this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
 
-	if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
-		// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
-		this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
-		this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+		if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
+			// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
+			this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
+			this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+		}
+
+		this.toolbarSaveButton.connect( this, { click: 'onToolbarSaveButtonClick' } );
 	}
-
 	this.updateToolbarSaveButtonState();
-
-	this.toolbarSaveButton.connect( this, { click: 'onToolbarSaveButtonClick' } );
 };
 
 /**
