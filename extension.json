@@ -95,6 +95,7 @@
 		"VisualEditorParsoidURL": "http://localhost:8000",
 		"VisualEditorNewAccountEnableProportion": false,
 		"VisualEditorEnableTocWidget": false,
+		"VisualEditorEnableWikitext": false,
 		"VisualEditorAutoAccountEnable": false,
 		"VisualEditorTransitionDefault": false,
 		"VisualEditorAvailableNamespaces": {
@@ -1726,6 +1727,34 @@
 			"targets": [
 				"desktop",
 				"mobile"
+			]
+		},
+		"ext.visualEditor.mwwikitext": {
+			"scripts": [
+				"modules/ve-mw/init/targets/ve.init.mw.DesktopWikitextArticleTarget.js",
+				"modules/ve-mw/dm/ve.dm.MWWikitextSurface.js",
+				"modules/ve-mw/dm/ve.dm.MWWikitextSurfaceFragment.js",
+				"modules/ve-mw/ce/ve.ce.MWWikitextSurface.js",
+				"modules/ve-mw/ui/ve.ui.MWWikitextCommandRegistry.js",
+				"modules/ve-mw/ui/ve.ui.MWWikitextSequenceRegistry.js",
+				"modules/ve-mw/ui/ve.ui.MWWikitextDataTransferHandlerFactory.js",
+				"modules/ve-mw/ui/ve.ui.MWDesktopWikitextSurface.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWWikitextAction.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWWikitextWindowAction.js",
+				"modules/ve-mw/ui/inspectors/ve.ui.MWWikitextLinkAnnotationInspector.js"
+			],
+			"styles": [
+				"modules/ve-mw/ui/styles/ve.ui.MWDesktopWikitextSurface.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.mwlink",
+				"ext.visualEditor.mwcore"
+			],
+			"messages": [
+				"visualeditor-generating-wikitext-progress"
+			],
+			"targets": [
+				"desktop"
 			]
 		},
 		"ext.visualEditor.mwgallery": {

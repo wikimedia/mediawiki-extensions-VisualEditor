@@ -705,6 +705,7 @@ class VisualEditorHooks {
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
+			'enableWikitext' => $veConfig->get( 'VisualEditorEnableWikitext' ),
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),

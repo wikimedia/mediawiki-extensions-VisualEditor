@@ -231,6 +231,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Sub-heading 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Sub-heading 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sub-heading 4",
+	"visualeditor-generating-wikitext-progress": "Generating wikitext",
 	"visualeditor-languages-tool": "Languages",
 	"visualeditor-linkinspector-button-link-external": "External link",
 	"visualeditor-linkinspector-button-link-internal": "Search pages",

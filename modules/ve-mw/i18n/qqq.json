@@ -242,6 +242,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Item in the MediaWiki formatting dropdown for a level 4 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading5": "Item in the MediaWiki formatting dropdown for a level 5 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading6": "Item in the MediaWiki formatting dropdown for a level 6 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
+	"visualeditor-generating-wikitext-progress": "Label for progress bar shown while generating wikitext.",
 	"visualeditor-languages-tool": "Tool for opening the languages links section of the meta dialog.\n{{Identical|Language}}",
 	"visualeditor-linkinspector-button-link-external": "Button label for entering an external link.\n{{Identical|External link}}",
 	"visualeditor-linkinspector-button-link-internal": "Button label for entering an internal link.",

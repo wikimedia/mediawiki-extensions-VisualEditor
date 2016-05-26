@@ -320,6 +320,7 @@ class ApiVisualEditor extends ApiBase {
 		wfDebugLog( 'visualeditor', "called on '$title' with paction: '{$params['paction']}'" );
 		switch ( $params['paction'] ) {
 			case 'parse':
+			case 'wikitext':
 			case 'metadata':
 				// Dirty hack to provide the correct context for edit notices
 				global $wgTitle; // FIXME NOOOOOOOOES
@@ -354,6 +355,29 @@ class ApiVisualEditor extends ApiBase {
 							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid . '?redirect=false',
 							[]
 						);
+						if ( $content === false ) {
+							$this->dieUsage( 'Error contacting the document server', 'docserver' );
+						}
+					} elseif ( $params['paction'] === 'wikitext' ) {
+						$apiParams = [
+							'action' => 'query',
+							'titles' => $title->getPrefixedDBkey(),
+							'prop' => 'revisions',
+							'rvprop' => 'content'
+						];
+						$api = new ApiMain(
+							new DerivativeRequest(
+								$this->getRequest(),
+								$apiParams,
+								false // was posted?
+							),
+							true // enable write?
+						);
+						$api->execute();
+						$result = $api->getResultData();
+						$content = isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['*'] ) ?
+							$result['query']['pages'][$title->getArticleID()]['revisions'][0]['*'] :
+							false;
 						if ( $content === false ) {
 							$this->dieUsage( 'Error contacting the document server', 'docserver' );
 						}
@@ -552,7 +576,7 @@ class ApiVisualEditor extends ApiBase {
 					'oldid' => $oldid,
 
 				];
-				if ( $params['paction'] === 'parse' ) {
+				if ( $params['paction'] === 'parse' || $params['paction'] === 'wikitext' ) {
 					$result['content'] = $content;
 				}
 				break;
@@ -594,20 +618,23 @@ class ApiVisualEditor extends ApiBase {
 				break;
 
 			case 'diff':
-				if ( $params['cachekey'] !== null ) {
-					$wikitext = $this->trySerializationCache( $params['cachekey'] );
-					if ( !is_string( $wikitext ) ) {
-						$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
-					}
-				} else {
-					if ( $params['html'] === null ) {
-						$this->dieUsageMsg( 'missingparam', 'html' );
-					}
-					$wikitext = $this->postHTML(
-						$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
-					);
-					if ( $wikitext === false ) {
-						$this->dieUsage( 'Error contacting the document server', 'docserver' );
+				$wikitext = $params['wikitext'];
+				if ( !$wikitext ) {
+					if ( $params['cachekey'] !== null ) {
+						$wikitext = $this->trySerializationCache( $params['cachekey'] );
+						if ( !is_string( $wikitext ) ) {
+							$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
+						}
+					} else {
+						if ( $params['html'] === null ) {
+							$this->dieUsageMsg( 'missingparam', 'html' );
+						}
+						$wikitext = $this->postHTML(
+							$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+						);
+						if ( $wikitext === false ) {
+							$this->dieUsage( 'Error contacting the document server', 'docserver' );
+						}
 					}
 				}
 
@@ -751,6 +778,7 @@ class ApiVisualEditor extends ApiBase {
 				ApiBase::PARAM_TYPE => [
 					'parse',
 					'metadata',
+					'wikitext',
 					'parsefragment',
 					'serialize',
 					'serializeforcache',

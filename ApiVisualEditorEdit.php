@@ -134,17 +134,21 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$parserParams['oldid'] = $params['oldid'];
 		}
 
-		if ( $params['cachekey'] !== null ) {
-			$wikitext = $this->trySerializationCache( $params['cachekey'] );
-			if ( !is_string( $wikitext ) ) {
-				$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
-			}
-		} else {
-			$wikitext = $this->postHTML(
-				$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
-			);
-			if ( $wikitext === false ) {
-				$this->dieUsage( 'Error contacting the Parsoid/RESTbase server', 'docserver' );
+		$wikitext = $params['wikitext'];
+
+		if ( !$wikitext ) {
+			if ( $params['cachekey'] !== null ) {
+				$wikitext = $this->trySerializationCache( $params['cachekey'] );
+				if ( !is_string( $wikitext ) ) {
+					$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
+				}
+			} else {
+				$wikitext = $this->postHTML(
+					$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+				);
+				if ( $wikitext === false ) {
+					$this->dieUsage( 'Error contacting the Parsoid/RESTbase server', 'docserver' );
+				}
 			}
 		}
 

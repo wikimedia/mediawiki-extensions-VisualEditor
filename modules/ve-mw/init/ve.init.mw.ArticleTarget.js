@@ -39,6 +39,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
+	this.mode = config.mode || 'visual';
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
@@ -185,6 +186,19 @@ ve.init.mw.ArticleTarget.static.integrationType = 'page';
 ve.init.mw.ArticleTarget.static.platformType = 'other';
 
 /* Methods */
+
+/**
+ * Set editing mode
+ *
+ * @param {string} mode Editing mode, 'visual' or 'source'
+ */
+ve.init.mw.ArticleTarget.prototype.setMode = function ( mode ) {
+	if ( mode !== this.mode ) {
+		$( '#ca-ve-edit' ).toggleClass( 'selected', mode === 'visual' );
+		$( '#ca-edit' ).toggleClass( 'selected', mode === 'source' );
+		this.mode = mode;
+	}
+};
 
 /**
  * Handle response to a successful load request.
@@ -958,6 +972,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	mw.libs.ve.activationStart = null;
 
 	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData(
+		this.mode,
 		this.pageName,
 		this.requestedRevId,
 		this.constructor.name

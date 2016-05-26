@@ -1201,6 +1201,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		!this.actFromPopState &&
 		history.pushState &&
 		this.currentUri.query.veaction !== 'edit' &&
+		this.currentUri.query.veaction !== 'editsource' &&
 		this.currentUri.query.action !== 'edit'
 	) {
 		// Set the current URL

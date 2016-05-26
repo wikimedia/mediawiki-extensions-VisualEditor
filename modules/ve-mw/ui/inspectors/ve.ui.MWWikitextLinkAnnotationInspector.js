@@ -1,0 +1,107 @@
+/*!
+ * VisualEditor UserInterface MWWikitextLinkAnnotationInspector class.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
+ * Inspector for applying and editing labeled MediaWiki internal and external links.
+ *
+ * @class
+ * @extends ve.ui.MWLinkAnnotationInspector
+ *
+ * @constructor
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MWWikitextLinkAnnotationInspector = function VeUiMWWikitextLinkAnnotationInspector( config ) {
+	// Parent constructor
+	ve.ui.MWWikitextLinkAnnotationInspector.super.call( this, config );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MWWikitextLinkAnnotationInspector, ve.ui.MWLinkAnnotationInspector );
+
+/* Static properties */
+
+ve.ui.MWWikitextLinkAnnotationInspector.static.name = 'link';
+
+ve.ui.MWWikitextLinkAnnotationInspector.static.modelClasses = [];
+
+ve.ui.MWWikitextLinkAnnotationInspector.static.handlesWikitext = true;
+
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.FragmentInspector.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			var fragment = this.getFragment();
+
+			// Initialize range
+			if ( this.previousSelection instanceof ve.dm.LinearSelection ) {
+				if (
+					fragment.getSelection().isCollapsed() &&
+					fragment.getDocument().data.isContentOffset( fragment.getSelection().getRange().start )
+				) {
+					// Expand to nearest word
+					if ( !data.noExpand ) {
+						fragment = fragment.expandLinearSelection( 'word' );
+					}
+				} else {
+					// Trim whitespace
+					fragment = fragment.trimLinearSelection();
+				}
+			}
+
+			// Update selection
+			fragment.select();
+			this.initialSelection = fragment.getSelection();
+
+			this.fragment = fragment;
+
+			this.actions.setMode( this.getMode() );
+
+			this.initialAnnotation = this.getAnnotationFromFragment( fragment );
+			this.annotationInput.setAnnotation( this.initialAnnotation );
+			this.updateActions();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
+	data = data || {};
+	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
+		.first( function () {
+			var annotation = this.getAnnotation(),
+				surfaceModel = this.fragment.getSurface();
+
+			if ( data && data.action === 'done' && annotation ) {
+				this.getFragment().annotateContent( 'set', annotation );
+			} else if ( !data.action ) {
+				// Restore selection to what it was before we expanded it
+				surfaceModel.setSelection( this.previousSelection );
+			}
+		}, this )
+		.next( function () {
+			// Reset state
+			this.initialSelection = null;
+			this.initialAnnotation = null;
+		}, this );
+};
+
+/* Registration */
+
+ve.ui.windowFactory.register( ve.ui.MWWikitextLinkAnnotationInspector );
+
+ve.ui.wikitextCommandRegistry.register(
+	new ve.ui.Command(
+		'link', 'window', 'open',
+		{ args: [ 'link' ], supportedSelections: [ 'linear' ] }
+	)
+);

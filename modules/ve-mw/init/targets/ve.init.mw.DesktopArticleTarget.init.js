@@ -20,7 +20,7 @@
  * @singleton
  */
 ( function () {
-	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, isViewPage, isEditPage,
+	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
 		pageCanLoadVE, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
 		onlyTabIsVE,
@@ -103,9 +103,10 @@
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
 	 *
 	 * @private
+	 * @param {string} mode Target mode: 'visual' or 'source'
 	 * @return {jQuery.Promise}
 	 */
-	function getTarget() {
+	function getTarget( mode ) {
 		if ( !targetPromise ) {
 			// The TargetLoader module is loaded in the bottom queue, so it should have been
 			// requested already but it might not have finished loading yet
@@ -162,36 +163,37 @@
 				} );
 		}
 
-		targetPromise.then( function () {
+		targetPromise.then( function ( target ) {
 			// Enqueue the loading of deferred modules (that is, modules which provide
 			// functionality that is not needed for loading the editor).
 			setTimeout( function () {
 				mw.loader.load( 'easy-deflate.deflate' );
 			}, 500 );
+			target.setMode( mode );
 		} );
 
 		return targetPromise;
 	}
 
-	function activatePageTarget( modified ) {
+	function activatePageTarget( mode, modified ) {
 		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
 		if ( !active ) {
-			if ( uri.query.action !== 'edit' && uri.query.veaction !== 'edit' ) {
+			if ( uri.query.action !== 'edit' && uri.query.veaction !== 'edit' && uri.query.veaction !== 'editsource' ) {
 				if ( history.pushState ) {
 					// Replace the current state with one that is tagged as ours, to prevent the
 					// back button from breaking when used to exit VE. FIXME: there should be a better
 					// way to do this. See also similar code in the DesktopArticleTarget constructor.
 					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
 					// Set veaction to edit
-					history.pushState( { tag: 'visualeditor' }, document.title, veEditUri );
+					history.pushState( { tag: 'visualeditor' }, document.title, mode === 'source' ? veEditSourceUri : veEditUri );
 				}
 
 				// Update mw.Uri instance
 				uri = veEditUri;
 			}
 
-			activateTarget( null, modified );
+			activateTarget( mode, null, modified );
 		}
 	}
 
@@ -203,10 +205,11 @@
 	 * E.g. `activateTarget( getTarget().then( function( target ) { target.doAThing(); } ) );`
 	 *
 	 * @private
+	 * @param {string} mode Target mode: 'visual' or 'source'
 	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
-	function activateTarget( targetPromise, modified ) {
+	function activateTarget( mode, targetPromise, modified ) {
 		var dataPromise;
 		// Only call requestPageData early if the target object isn't there yet.
 		// If the target object is there, this is a second or subsequent load, and the
@@ -217,6 +220,7 @@
 			dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
 				.then( function () {
 					return mw.libs.ve.targetLoader.requestPageData(
+						mode,
 						mw.config.get( 'wgRelevantPageName' ),
 						oldid,
 						'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
@@ -233,7 +237,7 @@
 		incrementLoadingProgress();
 		active = true;
 
-		targetPromise = targetPromise || getTarget();
+		targetPromise = targetPromise || getTarget( mode );
 		targetPromise
 			.then( function ( target ) {
 				var activatePromise;
@@ -453,6 +457,9 @@
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.on( 'click', init.onEditTabClick );
 			}
+			if ( conf.enableWikitext ) {
+				$caEdit.on( 'click', init.onEditSourceTabClick );
+			}
 
 			// Alter the edit tab (#ca-edit)
 			if ( $( '#ca-view-foreign' ).length ) {
@@ -542,10 +549,18 @@
 				return;
 			}
 			e.preventDefault();
-			init.activateVe();
+			init.activateVe( 'visual' );
 		},
 
-		activateVe: function () {
+		onEditSourceTabClick: function ( e ) {
+			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+				return;
+			}
+			e.preventDefault();
+			init.activateVe( 'source' );
+		},
+
+		activateVe: function ( mode ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 
 			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
@@ -578,7 +593,7 @@
 							var oldUri;
 							// TODO: windowManager.destroy()?
 							if ( data && data.action === 'keep' ) {
-								activatePageTarget( true );
+								activatePageTarget( mode, true );
 							} else if ( data && data.action === 'discard' ) {
 								setEditorPreference( 'visualeditor' );
 								oldUri = veEditUri.clone();
@@ -588,7 +603,7 @@
 						} );
 				} );
 			} else {
-				activatePageTarget( false );
+				activatePageTarget( mode, false );
 			}
 		},
 
@@ -600,7 +615,7 @@
 
 			trackActivateStart( { type: 'section', mechanism: 'click' } );
 
-			if ( history.pushState && uri.query.veaction !== 'edit' ) {
+			if ( history.pushState && uri.query.veaction !== 'edit' && uri.query.veaction !== 'editsource' ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
 				// back button from breaking when used to exit VE. FIXME: there should be a better
 				// way to do this. See also similar code in the DesktopArticleTarget constructor.
@@ -612,11 +627,11 @@
 
 			e.preventDefault();
 
-			targetPromise = getTarget().then( function ( target ) {
+			targetPromise = getTarget( 'visual' ).then( function ( target ) {
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
 				return target;
 			} );
-			activateTarget( targetPromise );
+			activateTarget( 'visual', targetPromise );
 		}
 	};
 
@@ -639,7 +654,9 @@
 		delete veEditUri.query.veaction;
 	} else {
 		veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
+		veEditSourceUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'editsource' } );
 		delete veEditUri.query.action;
+		delete veEditSourceUri.query.action;
 	}
 	if ( oldid ) {
 		veEditUri.extend( { oldid: oldid } );
@@ -734,7 +751,7 @@
 			) {
 				if (
 					// … if on a ?veaction=edit page
-					( isViewPage && uri.query.veaction === 'edit' ) ||
+					( isViewPage && ( uri.query.veaction === 'edit' || uri.query.veaction === 'editsource' ) ) ||
 					// … or if on ?action=edit in single edit mode and the user wants it
 					(
 						isEditPage &&
@@ -764,7 +781,7 @@
 						type: uri.query.vesection === undefined ? 'page' : 'section',
 						mechanism: 'url'
 					} );
-					activateTarget();
+					activateTarget( uri.query.veaction === 'editsource' ? 'source' : 'visual' );
 				} else if ( pageCanLoadVE && userPrefEnabled ) {
 					// Page can be edited in VE, parameters are good, user prefs are mostly good
 					// but have visualeditor-tabs=prefer-wt? Add a keyboard shortcut to go to
@@ -825,7 +842,7 @@
 							} );
 						}
 
-						switchButton.on( 'click', init.activateVe );
+						switchButton.on( 'click', init.activateVe.bind( this, 'visual' ) );
 
 						$( '.wikiEditor-ui-toolbar' ).prepend( switchButton.$element );
 
@@ -878,7 +895,7 @@
 					// Allow instant switching to edit mode, without refresh
 					$( '#ca-edit' ).on( 'click', function ( e ) {
 						trackActivateStart( { type: 'page', mechanism: 'click' } );
-						activateTarget();
+						activateTarget( 'visual' );
 						e.preventDefault();
 					} );
 				}
@@ -916,7 +933,7 @@
 					.then( function ( data ) {
 						windowManager.destroy();
 						if ( data && data.action === 'switch-ve' ) {
-							init.activateVe();
+							init.activateVe( 'visual' );
 						}
 					} );
 

@@ -32,6 +32,10 @@
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
+	if ( conf.enableWikitext ) {
+		modules.push( 'ext.visualEditor.mwwikitext' );
+	}
+
 	// Allow signing posts in select namespaces
 	if ( conf.signatureNamespaces.length ) {
 		modules.push( 'ext.visualEditor.mwsignature' );
@@ -94,13 +98,22 @@
 		 * Request the page HTML and various metadata from the MediaWiki API (which will use
 		 * Parsoid or RESTBase).
 		 *
+		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {string} pageName Page name to request
 		 * @param {string} [oldid] Old revision ID, current if omitted
 		 * @param {string} [targetName] Optional target name for tracking
 		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestPageData: function ( pageName, oldid, targetName, modified ) {
+		requestPageData: function ( mode, pageName, oldid, targetName, modified ) {
+			if ( mode === 'source' ) {
+				return this.requestWikitext( pageName, oldid, targetName, modified );
+			} else {
+				return this.requestParsoidData( pageName, oldid, targetName, modified );
+			}
+		},
+
+		requestParsoidData: function ( pageName, oldid, targetName, modified ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl,
 				switched = false,
 				fromEditedState = false,
@@ -219,6 +232,21 @@
 			}
 
 			return dataPromise;
+		},
+
+		requestWikitext: function ( pageName, oldid /*, targetName */ ) {
+			var data = {
+					action: 'visualeditor',
+					paction: 'wikitext',
+					page: pageName,
+					uselang: mw.config.get( 'wgUserLanguage' )
+				};
+
+			if ( oldid !== undefined ) {
+				data.oldid = oldid;
+			}
+
+			return new mw.Api().get( data );
 		}
 	};
 }() );

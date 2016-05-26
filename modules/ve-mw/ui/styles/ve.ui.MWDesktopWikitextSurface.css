@@ -1,0 +1,16 @@
+/*!
+ * VisualEditor MediaWiki Initialization DesktopWikitextArticleTarget styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwDesktopWikitextSurface .ve-ce-documentNode {
+	font-family: monospace;
+	font-size: 13.3333px;
+}
+
+.ve-ui-mwDesktopWikitextSurface .ve-ce-paragraphNode {
+	line-height: 20px;
+	margin: 0;
+}
