@@ -5,9 +5,17 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-overlay-global {
+.ve-init-mw-desktopArticleTarget-toolbar,
+.ve-ui-debugBar,
+.ve-ui-overlay {
 	/* Enforce different font-size for all UI elements of VisualEditor */
 	font-size: 0.8em;
+}
+
+/* Fix font styles for overlays inside mw-body-content */
+.mw-body-content .ve-ui-overlay {
+	font-size: 0.914286em; /* 0.8/0.875 */
+	line-height: normal;
 }
 
 /* Slug animation needs more specific rules and skin-specific target margins */

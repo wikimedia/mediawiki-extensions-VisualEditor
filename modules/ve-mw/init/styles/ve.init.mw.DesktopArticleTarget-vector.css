@@ -19,23 +19,19 @@
 	part of it instead of its parent, thus making it treat the area as part
 	of content editable.
 	*/
-	/* 0.8/0.8, 1/0.8 */
-	margin: 0 -1.25em -1.25em -1.25em;
-	padding-bottom: 1.25em;
+	/* 1/0.875 */
+	margin: 0 -1.14286em -1.14286em -1.14286em;
+	padding-bottom: 1.14286em;
 }
 
-.ve-active .ve-init-mw-desktopArticleTarget-originalContent {
-	padding-top: 1.25em;
-}
-
-.ve-active .ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
-	padding-left: 1.25em;
-	padding-right: 1.25em;
+.ve-deactivating .ve-init-mw-desktopArticleTarget-originalContent,
+.ve-activated .ve-init-mw-desktopArticleTarget-originalContent {
+	padding-top: 1em;
 }
 
 .ve-init-mw-target-surface .ve-ce-documentNode,
 .ve-init-mw-target-surface .ve-ui-surface-placeholder {
-	padding: 0 1.143em; /* surface-margin-left (1em) / (mw-body-content font-size) 0.875em */
+	padding: 0 1.14286em; /* 1/0.875 */
 }
 
 .mw-body .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
@@ -45,19 +41,8 @@
 	border: 0;
 }
 
-.ve-init-mw-desktopArticleTarget {
-	/* Enforce different font-size for all UI elements of VisualEditor */
-	font-size: 0.8em;
-}
-
-.ve-init-mw-desktopArticleTarget .firstHeading {
-	/* Restore 1.8em font size of page title */
-	font-size: 2.25em; /* 1.8/0.8 */
-}
-
-.ve-init-mw-desktopArticleTarget .mw-body-content,
-.ve-ui-overlay-global .mw-body-content {
-	/* Match skin's font-size for the surface content */
+.ve-ui-overlay .mw-body-content {
+	/* Fix font-size for surfaces inside UI overlays */
 	font-size: 1.09375em; /* 0.875/0.8 */
 }
 
@@ -96,23 +81,19 @@
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
 	.ve-init-mw-target-surface {
-		/* 0.8/0.8, 1.5/0.8 */
-		margin: 0 -1.875em -1.875em -1.875em;
-		padding-bottom: 1.875em;
+		/* 1.5/0.875 */
+		margin: 0 -1.71429em -1.71429em -1.71429em;
+		padding-bottom: 1.71429em;
 	}
 
-	.ve-active .ve-init-mw-desktopArticleTarget-originalContent {
-		padding-top: 1.875em;
-	}
-
-	.ve-active .ve-init-mw-target-surface .ve-init-mw-desktopArticleTarget-originalContent {
-		padding-left: 1.875em;
-		padding-right: 1.875em;
+	.ve-deactivating .ve-init-mw-desktopArticleTarget-originalContent,
+	.ve-activated .ve-init-mw-desktopArticleTarget-originalContent {
+		padding-top: 1.25em;
 	}
 
 	.ve-init-mw-target-surface .ve-ce-documentNode,
 	.ve-init-mw-target-surface .ve-ui-surface-placeholder {
-		padding: 0 1.714em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
+		padding: 0 1.71429em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
 	}
 
 	.ve-init-mw-desktopArticleTarget-toolbar {

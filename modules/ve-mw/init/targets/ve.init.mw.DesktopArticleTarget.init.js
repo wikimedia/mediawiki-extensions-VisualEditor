@@ -158,7 +158,7 @@
 							}
 						}
 					} );
-					$( '#content' ).append( target.$element );
+					target.setContainer( $( '#content' ) );
 					return target;
 				}, function ( e ) {
 					mw.log.warn( 'VisualEditor failed to load: ' + e );
