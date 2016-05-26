@@ -89,6 +89,8 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 			case namespaceIds.file:
 				this.$editableContent = $( '#mw-imagepage-content' );
 				break;
+			default:
+				this.$editableContent = $( '#mw-content-text' );
 		}
 	} else {
 		// TODO: Load view page content if switching from edit source
