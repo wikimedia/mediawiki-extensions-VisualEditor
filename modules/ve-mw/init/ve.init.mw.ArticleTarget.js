@@ -913,6 +913,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
 	// Clear the cached HTML and cache key once the document changes
 	if ( this.getSurface() ) {
 		this.getSurface().getModel().getDocument().once( 'transact', clear );
+		this.getSurface().once( 'destroy', clear );
 	} else {
 		clear();
 	}
@@ -1472,6 +1473,11 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 
 	this.setupToolbarSaveButton();
 	this.attachToolbarSaveButton();
+
+	if ( this.saveDialog ) {
+		this.saveDialog.disconnect( this );
+		this.saveDialog = null;
+	}
 };
 
 /**
