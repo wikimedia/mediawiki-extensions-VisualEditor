@@ -65,24 +65,28 @@
 			nodeClass = ve.dm.MWTransclusionNode;
 
 		function insertNode( isInline ) {
-			// Generate a replacement transaction instead of using surfaceFragment.insert (which
-			// generates a removal and insertion) as blanking the reference triggers T135127.
-			// TODO: Once T135127 is fixed, revert to using surfaceFragment.insert.
 			var type = isInline ? nodeClass.static.inlineType : nodeClass.static.blockType,
-				tx = ve.dm.Transaction.newFromReplacement(
-					surfaceFragment.getDocument(),
-					surfaceFragment.getSelection().getCoveringRange(),
-					[
-						{
-							type: type,
-							attributes: {
-								mw: model.getPlainObject()
-							}
-						},
-						{ type: '/' + type }
-					]
+				range = surfaceFragment.getSelection().getCoveringRange(),
+				data = [
+					{
+						type: type,
+						attributes: {
+							mw: model.getPlainObject()
+						}
+					},
+					{ type: '/' + type }
+				];
+
+			if ( range.isCollapsed() ) {
+				surfaceFragment.insertContent( data );
+			} else {
+				// Generate a replacement transaction instead of using surfaceFragment.insertContent
+				// (which generates a removal and insertion) as blanking a reference triggers T135127.
+				// TODO: Once T135127 is fixed, revert to using surfaceFragment.insert.
+				surfaceFragment.getSurface().change(
+					ve.dm.Transaction.newFromReplacement( surfaceFragment.getDocument(), range, data )
 				);
-			surfaceFragment.getSurface().change( tx );
+			}
 			deferred.resolve();
 		}
 
