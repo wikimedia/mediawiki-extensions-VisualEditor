@@ -183,6 +183,9 @@
 							duration: ve.now() - start,
 							targetName: targetName
 						} );
+						mw.track( 'event.VET135171', {
+							msg: 'getResponseHeader: ' + jqxhr.getResponseHeader( 'etag' )
+						} );
 						return [ data, jqxhr.getResponseHeader( 'etag' ) ];
 					},
 					function ( response ) {
