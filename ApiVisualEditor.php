@@ -140,10 +140,11 @@ class ApiVisualEditor extends ApiBase {
 		$page = WikiPage::factory( $title );
 		$content = ContentHandler::makeContent( $text, $title, CONTENT_MODEL_WIKITEXT );
 
-		$res = ApiStashEdit::parseAndStash( $page, $content, $this->getUser() );
-		if ( $res === ApiStashEdit::ERROR_NONE ) {
+		$status = ApiStashEdit::parseAndStash( $page, $content, $this->getUser() );
+		if ( $status === ApiStashEdit::ERROR_NONE ) {
 			wfDebugLog( 'StashEdit', "Cached parser output for VE content key '$key'." );
 		}
+		$this->getStats()->increment( "editstash.ve_cache_stores.$status" );
 
 		return $hash;
 	}
