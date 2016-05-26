@@ -168,7 +168,7 @@
 	"visualeditor-differror": "Грешка приликом учитавања података са сервера: $1.",
 	"visualeditor-donebutton-tooltip": "Уређивање завршено",
 	"visualeditor-editconflict": "Промене не могу бити сачуване због сукоба измена. Да ли {{GENDER:|желите}} да ручно решите проблем?",
-	"visualeditor-editingtabdialog-ok": "У реду",
+	"visualeditor-editingtabdialog-ok": "Користи уређивач који сам користио у последњој измени",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|напомена|напомене}}",
 	"visualeditor-editnotices-tooltip": "Напомене",
 	"visualeditor-editsummary": "Опишите ваше измене",
