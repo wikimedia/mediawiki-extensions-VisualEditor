@@ -77,9 +77,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 	if ( mw.config.get( 'wgAction' ) === 'view' ) {
 		switch ( mw.config.get( 'wgNamespaceNumber' ) ) {
-			case namespaceIds[ '' ]:
-				this.$editableContent = $( '#mw-content-text' );
-				break;
 			case namespaceIds.category:
 				// Put contents in a single wrapper
 				// TODO: Fix upstream
