@@ -490,7 +490,6 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
  */
 ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
-	this.$editableContent.after( this.getSurface().$element );
 	if ( !this.editingTabDialog ) {
 		// We have to focus the page after hiding the original content, otherwise
 		// in firefox the contentEditable container was below the view page, and
@@ -498,6 +497,18 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 		// Support: Firefox
 		this.getSurface().getView().focus();
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
+	if ( surface !== this.surface ) {
+		this.$editableContent.after( surface.$element );
+	}
+
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.setSurface.apply( this, arguments );
 };
 
 /**
