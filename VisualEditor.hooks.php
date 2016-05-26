@@ -929,42 +929,47 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Sets user preference to enable the VisualEditor account if the account's
-	 * userID is matches modulo $wgVisualEditorNewAccountEnableProportion, if set.
-	 * If set to '1', all new accounts would have VisualEditor enabled; at '2',
-	 * 50% would; at '20', 5% would, and so on.
+	 * Set user preferences for new and auto-created accounts if so configured.
 	 *
-	 * To be removed once no longer needed.
-	 */
-	public static function onAddNewAccount( $user, $byEmail ) {
-		$x = RequestContext::getMain()->getConfig()->get( 'VisualEditorNewAccountEnableProportion' );
-
-		if (
-			$x &&
-			$user->isLoggedin() &&
-			( ( $user->getId() % $x ) === 0 )
-		) {
-			$user->setOption( 'visualeditor-enable', 1 );
-			$user->saveSettings();
-		}
-		return true;
-	}
-
-	/**
 	 * Sets user preference to enable the VisualEditor account for new auto-
 	 * created ('auth') accounts, if $wgVisualEditorAutoAccountEnable is set.
 	 *
+	 * Sets user preference to enable the VisualEditor account for new non-auto-
+	 * created accounts, if the account's userID matches, modulo the value of
+	 * $wgVisualEditorNewAccountEnableProportion, if set. If set to '1', all new
+	 * accounts would have VisualEditor enabled; at '2', 50% would; at '20',
+	 * 5% would, and so on.
+	 *
 	 * To be removed once no longer needed.
 	 */
-	public static function onAuthPluginAutoCreate( $user ) {
+	public static function onLocalUserCreated( $user, $autocreated ) {
+		$config = RequestContext::getMain()->getConfig();
+		$enableProportion = $config->get( 'VisualEditorNewAccountEnableProportion' );
+
 		if (
-			RequestContext::getMain()->getConfig()->get( 'VisualEditorAutoAccountEnable' ) &&
-			!User::getDefaultOption( 'visualeditor-editor' ) &&
-			$user->isLoggedin()
+			// Only act on actual accounts (avoid race condition bugs)
+			$user->isLoggedin() &&
+			// Only act if the default isn't already set
+			!User::getDefaultOption( 'visualeditor-enable' ) &&
+			// Act if either …
+			(
+				// … this is an auto-created account and we're configured so to do
+				(
+					$autocreated &&
+					$config->get( 'VisualEditorAutoAccountEnable' )
+				) ||
+				// … this is a real new account that matches the modulo and we're configured so to do
+				(
+					!$autocreated &&
+					$enableProportion &&
+					( ( $user->getId() % $enableProportion ) === 0 )
+				)
+			)
 		) {
 			$user->setOption( 'visualeditor-enable', 1 );
 			$user->saveSettings();
 		}
+
 		return true;
 	}
 
