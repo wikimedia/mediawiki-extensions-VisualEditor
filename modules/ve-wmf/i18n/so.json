@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abshirdheere"
+		]
+	},
+	"visualeditor-welcomedialog-action": "Biloow bedelidda",
+	"visualeditor-welcomedialog-content": "Qof kasta wuu ka qayb qaadan karaa, habayn kasta waa kaalmo.",
+	"visualeditor-welcomedialog-content-thanks": "Waad ku mahadsantahay kaalmada aad adduunyada ku caawisay helitaan dheeraad ah!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Ku}} soo dhawoow $2"
+}

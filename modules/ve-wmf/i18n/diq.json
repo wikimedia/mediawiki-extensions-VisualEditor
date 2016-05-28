@@ -6,7 +6,8 @@
 			"Kghbln",
 			"Marmase",
 			"Mirzali",
-			"Se4598"
+			"Se4598",
+			"Kumkumuk"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo asaye]]",
@@ -19,5 +20,6 @@
 	"visualeditor-welcomedialog-action": "Dest ra vurnayışi ke",
 	"visualeditor-welcomedialog-content": "Heme kes şeno bıvurno, û her raştkerdış yarmetiye keno.",
 	"visualeditor-welcomedialog-content-thanks": "Semedê keşıfê dınya ra û destegê to rê teşekur kenime!",
+	"visualeditor-welcomedialog-switch-ve": "Ravêr Vurnayoğo Asaye",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Xeyr ameyê}}  $2"
 }
