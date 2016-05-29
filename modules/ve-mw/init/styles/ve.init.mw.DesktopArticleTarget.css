@@ -38,3 +38,10 @@
 .ve-init-mw-desktopArticleTarget .redirectMsg a:hover {
 	text-decoration: none;
 }
+
+/*!
+ * Increase z-index of surface container so it appears above the debug bar
+ */
+.ve-init-mw-desktopArticleTarget #bodyContent { /* stylelint-disable-line selector-no-id */
+	z-index: 1;
+}
