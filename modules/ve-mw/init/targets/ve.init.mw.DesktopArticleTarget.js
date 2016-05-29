@@ -98,8 +98,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	// Initialization
 	this.$element
 		.addClass( 've-init-mw-desktopArticleTarget' )
-		// The following classes can be used here:
-		.addClass( 've-init-mw-desktopArticleTarget-ns-' + ( mw.config.get( 'wgCanonicalNamespace' ).toLowerCase() || 'main' ) )
 		.append( this.$originalContent );
 
 	if ( history.replaceState ) {
