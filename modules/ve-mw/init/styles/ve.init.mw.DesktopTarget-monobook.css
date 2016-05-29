@@ -6,7 +6,7 @@
  */
 
 .ve-init-mw-desktopArticleTarget-toolbar,
-.ve-ui-debugBar,
+.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar,
 .ve-ui-overlay-global {
 	/* Enforce different font-size for all UI elements of VisualEditor. The difference is tiny, but
 	   enough to make the icon containers 23.813px rather than 24px and thus the icons blurry */
