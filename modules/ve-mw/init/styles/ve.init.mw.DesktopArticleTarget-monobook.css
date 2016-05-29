@@ -22,12 +22,17 @@
 	padding-top: 0.9921875em;
 }
 
-/* Main document debug bar */
-.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
+.ve-ui-debugBar {
 	border-top: 1px solid #ccc;
+}
+
+/* Main document debug bar */
+.ve-init-mw-target-surface > .ve-ui-debugBar {
 	/* 0.8/0.8 */
 	padding: 1em;
-	margin: 1em -1em -1em -1em;
+	padding-bottom: 0;
+	margin: 1em -1em 0 -1em;
+	font-size: 1.007874em;
 }
 
 .ve-init-mw-target-surface {

@@ -20,8 +20,7 @@
 	of content editable.
 	*/
 	/* 1/0.875 */
-	margin: 0 -1.14286em -1.14286em -1.14286em;
-	padding-bottom: 1.14286em;
+	margin: 0 -1.14286em;
 }
 
 .ve-deactivating .ve-init-mw-desktopArticleTarget-originalContent,
@@ -67,10 +66,11 @@
 }
 
 /* Main document debug bar */
-.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
+.ve-init-mw-target-surface > .ve-ui-debugBar {
 	/* 1/0.8 */
 	padding: 1.25em;
-	margin: 1.25em -1.25em -1.25em -1.25em;
+	padding-bottom: 0;
+	margin-top: 1.25em;
 }
 
 /* ve.ce.TableCellnode.css's margin replaced by more specific rule in Vector (div#content p) */
@@ -82,8 +82,7 @@
 @media screen and ( min-width: 982px ) {
 	.ve-init-mw-target-surface {
 		/* 1.5/0.875 */
-		margin: 0 -1.71429em -1.71429em -1.71429em;
-		padding-bottom: 1.71429em;
+		margin: 0 -1.71429em;
 	}
 
 	.ve-deactivating .ve-init-mw-desktopArticleTarget-originalContent,
@@ -102,10 +101,11 @@
 	}
 
 	/* Main document debug bar */
-	.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar {
+	.ve-init-mw-target-surface > .ve-ui-debugBar {
 		/* 1/0.8, 1.5/0.8 */
 		padding: 1.875em;
-		margin: 1.875em -1.875em -1.875em -1.875em;
+		padding-bottom: 0;
+		margin-top: 1.875em;
 	}
 }
 
