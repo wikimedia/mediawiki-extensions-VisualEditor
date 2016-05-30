@@ -55,7 +55,8 @@ ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 				doc = this.selectedNode.getDocument().cloneFromRange( this.selectedNode.getOuterRange() );
 			} else {
 				element = this.getNewElement();
-				doc = new ve.dm.Document( [
+				// We assume that WindowAction pass
+				doc = data.fragment.getDocument().cloneWithData( [
 					element,
 					{ type: '/' + element.type },
 					{ type: 'internalList' },
