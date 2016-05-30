@@ -1271,17 +1271,12 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	if ( this.imageModel ) {
 		captionDocument = this.imageModel.getCaptionDocument();
 	} else {
-		captionDocument = new ve.dm.Document( [
+		captionDocument = doc.cloneWithData( [
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		],
-		// The ve.dm.Document constructor expects
-		// ( data, htmlDocument, parentDocument, internalList, innerWhitespace, lang, dir )
-		// as parameters. We are only interested in setting up language, hence the
-		// multiple 'null' values.
-		null, null, null, null, doc.getLang(), doc.getDir() );
+		] );
 	}
 
 	this.store = doc.getStore();
