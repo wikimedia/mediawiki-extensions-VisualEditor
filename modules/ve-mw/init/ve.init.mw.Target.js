@@ -315,10 +315,6 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 				// Now that the surface is attached to the document and ready,
 				// let it initialize itself
 				surface.initialize();
-				if ( surface.debugBar ) {
-					// Move debug bar to end of target if the surface is nested
-					target.$element.append( surface.debugBar.$element );
-				}
 
 				target.track( 'trace.initializeSurface.exit' );
 				setTimeout( callback );

@@ -13,7 +13,8 @@
 }
 
 /* Fix font styles for overlays inside mw-body-content */
-.mw-body-content .ve-ui-overlay {
+.mw-body-content .ve-ui-overlay,
+.mw-body-content .ve-ui-debugBar {
 	font-size: 0.914286em; /* 0.8/0.875 */
 	line-height: normal;
 }
