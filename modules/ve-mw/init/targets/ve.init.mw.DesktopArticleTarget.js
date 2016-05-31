@@ -17,7 +17,7 @@
  * @param {Object} config Configuration options
  */
 ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config ) {
-	var $content,
+	var $content, $before,
 		// A workaround, as default URI does not get updated after pushState (bug 72334)
 		currentUri = new mw.Uri( location.href ),
 		namespaceIds = mw.config.get( 'wgNamespaceIds' );
@@ -85,6 +85,17 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 				break;
 			case namespaceIds.file:
 				this.$editableContent = $( '#mw-imagepage-content' );
+				if ( !this.$editableContent.length ) {
+					// No image content, file doesn't exist, or is on Commons?
+					this.$editableContent = $( '<div id="mw-imagepage-content">' );
+					$before = $( '.sharedUploadNotice, #mw-imagepage-nofile' );
+					if ( $before.length ) {
+						$before.first().after( this.$editableContent );
+					} else {
+						// Nothing to anchor to, just prepend inside #mw-content-text
+						$( '#mw-content-text' ).prepend( this.$editableContent );
+					}
+				}
 				break;
 			default:
 				this.$editableContent = $( '#mw-content-text' );
