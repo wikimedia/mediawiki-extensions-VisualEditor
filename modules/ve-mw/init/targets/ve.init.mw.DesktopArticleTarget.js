@@ -152,7 +152,7 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	// The value is either null (match all versions) or a list of tuples
 	// containing an inequality (<,>,<=,>=) and a version number
 	whitelist: {
-		firefox: [ [ '>=', 15 ] ],
+		firefox: [ [ '>=', 12 ] ],
 		iceweasel: [ [ '>=', 10 ] ],
 		safari: [ [ '>=', 7 ] ],
 		chrome: [ [ '>=', 19 ] ],

@@ -59,17 +59,17 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'Firefox 12',
 				userAgent: 'Mozilla/5.0 (compatible; Windows; U; Windows NT 6.2; WOW64; en-US; rv:12.0) Gecko/20120403211507 Firefox/12.0',
-				matches: [ 'blacklist' ]
+				matches: [ 'whitelist' ]
 			},
 			{
 				msg: 'Firefox 13',
 				userAgent: 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:13.0) Gecko/20100101 Firefox/13.0',
-				matches: [ 'blacklist' ]
+				matches: [ 'whitelist' ]
 			},
 			{
 				msg: 'Firefox 14',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20120403211507 Firefox/14.0.1',
-				matches: [ 'blacklist' ]
+				matches: [ 'whitelist' ]
 			},
 			{
 				msg: 'Firefox 15',
