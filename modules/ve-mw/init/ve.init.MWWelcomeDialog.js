@@ -51,7 +51,7 @@ mw.libs.ve.WelcomeDialog.static.actions = [
 		action: 'accept',
 		label: OO.ui.deferMsg( 'visualeditor-welcomedialog-action' ),
 		flags: [ 'progressive', 'primary' ],
-		modes: [ 've', 'wte' ]
+		modes: [ 've', 'wte', 'noswitch' ]
 	}
 ];
 
@@ -84,12 +84,7 @@ mw.libs.ve.WelcomeDialog.prototype.getSetupProcess = function ( data ) {
  * @inheritdoc
  */
 mw.libs.ve.WelcomeDialog.prototype.getReadyProcess = function () {
-	if ( !this.switchable ) {
-		// ew
-		this.actions.remove( this.actions.get( { actions: 'switch-wte' } ) );
-		this.actions.remove( this.actions.get( { actions: 'switch-ve' } ) );
-	}
-	this.actions.setMode( this.editor );
+	this.actions.setMode( this.switchable ? this.editor : 'noswitch' );
 
 	return mw.libs.ve.WelcomeDialog.super.prototype.getReadyProcess.apply( this, arguments );
 };
