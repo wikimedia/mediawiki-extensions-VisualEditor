@@ -137,6 +137,9 @@
 	"visualeditor-loadwarning": "Mearachd le luchdadh an dàta on fhrithealaiche: $1. A bheil thu airson feuchainn ris a-rithist?",
 	"visualeditor-loadwarning-token": "Mearachd le luchdadh tòcan deasachaidh on fhrithealaiche: $1. A bheil thu airson feuchainn ris a-rithist?",
 	"visualeditor-mainnamespacepagelink": "Project:Prìomh ainm-spàs",
+	"visualeditor-savedialog-label-save": "Sàbhail an duilleag",
+	"visualeditor-toolbar-savedialog": "Sàbhail an duilleag",
 	"visualeditor-usernamespacepagelink": "Project:Ainm-spàs cleachdaiche",
-	"visualeditor-version-label": "Tionndadh"
+	"visualeditor-version-label": "Tionndadh",
+	"visualeditor-wikitext-warning": "Tha thu a' cleachdadh an deasaiche lèirsinneach - chan obraich [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] an-seo. 'S urrainn dut leum a ghearradh gu deasachadh an tùis uair sam bith gun a bhith a' call na dh'atharraich thu. Gus seo a dhèanamh, fosgail an clàr-taice teàrnaidh ri taobh \"{{int:visualeditor-toolbar-savedialog}}\" agus tagh \"{{int:visualeditor-mweditmodesource-title}}\"."
 }
