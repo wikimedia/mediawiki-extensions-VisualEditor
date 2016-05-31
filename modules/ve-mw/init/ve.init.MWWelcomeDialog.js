@@ -84,15 +84,12 @@ mw.libs.ve.WelcomeDialog.prototype.getSetupProcess = function ( data ) {
  * @inheritdoc
  */
 mw.libs.ve.WelcomeDialog.prototype.getReadyProcess = function () {
-	var dialog = this;
 	if ( !this.switchable ) {
 		// ew
 		this.actions.remove( this.actions.get( { actions: 'switch-wte' } ) );
 		this.actions.remove( this.actions.get( { actions: 'switch-ve' } ) );
 	}
-	setTimeout( function () {
-		dialog.actions.setMode( dialog.editor );
-	}, 0 );
+	this.actions.setMode( this.editor );
 
 	return mw.libs.ve.WelcomeDialog.super.prototype.getReadyProcess.apply( this, arguments );
 };
