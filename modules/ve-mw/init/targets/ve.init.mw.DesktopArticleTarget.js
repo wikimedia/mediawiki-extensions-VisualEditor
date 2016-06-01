@@ -609,12 +609,7 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 	this.originalEditondbclick = undefined;
 
 	if ( this.toolbarSaveButton ) {
-		// If deactivate is called before a successful load, then the save button has not yet been
-		// fully set up so disconnecting it would throw an error when trying call methods on the
-		// button property (bug 46456)
-		this.toolbarSaveButton.disconnect( this );
-		this.toolbarSaveButton.$element.detach();
-		this.getToolbar().$actions.empty();
+		this.toolbarSaveButton = null;
 	}
 
 	// Check we got as far as setting up the surface
