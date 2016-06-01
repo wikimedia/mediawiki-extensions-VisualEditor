@@ -272,7 +272,7 @@ class VisualEditorHooks {
 		$title = $skin->getRelevantTitle();
 		$namespaceEnabled = ApiVisualEditor::isAllowedNamespace( $config, $title->getNamespace() );
 		$pageContentModel = $title->getContentModel();
-		$contentModelEnabled = ApiVisualEditor::isAllowedContentType( $veConfig, $pageContentModel );
+		$contentModelEnabled = ApiVisualEditor::isAllowedContentType( $config, $pageContentModel );
 		// Don't exit if this page isn't VE-enabled, since we should still
 		// change "Edit" to "Edit source".
 		$isAvailable = $namespaceEnabled && $contentModelEnabled;
