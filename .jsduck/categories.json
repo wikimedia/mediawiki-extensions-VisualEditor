@@ -141,6 +141,7 @@
 					"ve.ui.*Toolbar",
 					"ve.ui.DebugBar",
 					"ve.ui.Trigger",
+					"ve.ui.TabIndexScope",
 					"ve.ui.*Action",
 					"ve.ui.*Command",
 					"ve.ui.*ContextItem",
