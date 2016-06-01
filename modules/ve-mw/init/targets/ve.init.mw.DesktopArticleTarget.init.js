@@ -246,12 +246,18 @@
 		targetPromise = targetPromise || getTarget();
 		targetPromise
 			.then( function ( target ) {
+				var activatePromise;
 				incrementLoadingProgress();
 				target.on( 'deactivate', function () {
 					active = false;
 				} );
 				target.on( 'loadError', handleLoadFailure );
-				return target.activate( dataPromise );
+				// Detach the loading bar for activation so it doesn't get moved around
+				// and altered, re-attach immediately after
+				init.$loading.detach();
+				activatePromise = target.activate( dataPromise );
+				$( '#content' ).prepend( init.$loading );
+				return activatePromise;
 			} )
 			.then( function () {
 				ve.track( 'mwedit.ready' );

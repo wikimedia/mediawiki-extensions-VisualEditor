@@ -13,7 +13,7 @@
  * Reading              | ve-available
  * Loading editor       | ve-available ve-activated ve-loading
  * - mw.DesktopArticleTarget.css is loaded
- * Activate editor      | ve-available ve-activated ve-activating
+ * Activate editor      | ve-available ve-activated ve-loading ve-activating
  * Active               | ve-available ve-activated ve-active
  * Deactivate editor    | ve-available ve-deactivating
  * Deactivated          | ve-available
