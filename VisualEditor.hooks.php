@@ -124,7 +124,6 @@ class VisualEditorHooks {
 		}
 
 		$title = $article->getTitle();
-
 		$params = $req->getValues();
 
 		if ( isset( $params['venoscript'] ) ) {
@@ -143,7 +142,7 @@ class VisualEditorHooks {
 			self::getUserEditor( $user, $req ) === 'wikitext' ||
 			!$title->quickUserCan( 'edit' ) ||
 			!ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) ||
-			$title->getContentModel() !== CONTENT_MODEL_WIKITEXT ||
+			!ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() ) ||
 			// Known parameters that VE does not handle
 			// TODO: Other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
 			isset( $params['undo'] ) ||
@@ -273,12 +272,10 @@ class VisualEditorHooks {
 		$title = $skin->getRelevantTitle();
 		$namespaceEnabled = ApiVisualEditor::isAllowedNamespace( $config, $title->getNamespace() );
 		$pageContentModel = $title->getContentModel();
+		$contentModelEnabled = ApiVisualEditor::isAllowedContentType( $veConfig, $pageContentModel );
 		// Don't exit if this page isn't VE-enabled, since we should still
 		// change "Edit" to "Edit source".
-		$isAvailable = (
-			$namespaceEnabled &&
-			$pageContentModel === CONTENT_MODEL_WIKITEXT
-		);
+		$isAvailable = $namespaceEnabled && $contentModelEnabled;
 
 		// HACK: Exit if we're in the Education Program namespace (even though it's content)
 		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
@@ -682,6 +679,7 @@ class VisualEditorHooks {
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $enabledNamespaces,
+			'contentModels' => $veConfig->get( 'VisualEditorAvailableContentModels' ),
 			'signatureNamespaces' => array_values(
 				array_filter( $enabledNamespaces, 'MWNamespace::wantSignatures' )
 			),

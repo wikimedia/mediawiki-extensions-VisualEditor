@@ -669,8 +669,8 @@
 		// Not on pages which are outputs of the Page Translation feature
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
-		// Only for pages with a wikitext content model
-		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
+		// Only for pages with a supported content model
+		conf.contentModels.indexOf( mw.config.get( 'wgPageContentModel' ) ) !== -1
 	);
 
 	// FIXME: We should do this more elegantly

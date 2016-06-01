@@ -655,7 +655,18 @@ class ApiVisualEditor extends ApiBase {
 		$canonicalName = MWNamespace::getCanonicalName( $namespaceId );
 		return ( isset( $availableNamespaces[$namespaceId] ) && $availableNamespaces[$namespaceId] ) ||
 			 ( isset( $availableNamespaces[$canonicalName] ) && $availableNamespaces[$canonicalName] );
+	}
 
+	/**
+	 * Check if the configured allowed content models include the specified content model
+	 *
+	 * @param Config $config Configuration object
+	 * @param string $contentModel Content model ID
+	 * @return boolean
+	 */
+	public static function isAllowedContentType( Config $config, $contentModel ) {
+		$availableContentModels = $config->get( 'VisualEditorAvailableContentModels' );
+		return isset( $availableContentModels[ $contentModel ] );
 	}
 
 	/**
