@@ -17,10 +17,8 @@
  * @param {Object} config Configuration options
  */
 ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config ) {
-	var $content, $before,
-		// A workaround, as default URI does not get updated after pushState (bug 72334)
-		currentUri = new mw.Uri( location.href ),
-		namespaceIds = mw.config.get( 'wgNamespaceIds' );
+	// A workaround, as default URI does not get updated after pushState (bug 72334)
+	var currentUri = new mw.Uri( location.href );
 
 	// Parent constructor
 	ve.init.mw.DesktopArticleTarget.super.call(
@@ -74,37 +72,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
-
-	if ( mw.config.get( 'wgAction' ) === 'view' ) {
-		switch ( mw.config.get( 'wgNamespaceNumber' ) ) {
-			case namespaceIds.category:
-				// Put contents in a single wrapper
-				// TODO: Fix upstream
-				$content = $( '#mw-content-text > :not( .mw-category-generated )' );
-				this.$editableContent = $( '<div>' ).prependTo( $( '#mw-content-text' ) ).append( $content );
-				break;
-			case namespaceIds.file:
-				this.$editableContent = $( '#mw-imagepage-content' );
-				if ( !this.$editableContent.length ) {
-					// No image content, file doesn't exist, or is on Commons?
-					this.$editableContent = $( '<div id="mw-imagepage-content">' );
-					$before = $( '.sharedUploadNotice, #mw-imagepage-nofile' );
-					if ( $before.length ) {
-						$before.first().after( this.$editableContent );
-					} else {
-						// Nothing to anchor to, just prepend inside #mw-content-text
-						$( '#mw-content-text' ).prepend( this.$editableContent );
-					}
-				}
-				break;
-			default:
-				this.$editableContent = $( '#mw-content-text' );
-		}
-	} else {
-		// TODO: Load view page content if switching from edit source
-		this.$editableContent = $( '#mw-content-text' );
-	}
-	this.$editableContent.addClass( 've-init-mw-desktopArticleTarget-editableContent' );
+	this.$editableContent = this.getEditableContent().addClass( 've-init-mw-desktopArticleTarget-editableContent' );
 
 	// Initialization
 	this.$element
@@ -201,11 +169,53 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
 /* Methods */
 
 /**
+ * Get the editable part of the page
+ *
+ * @return {jQuery} Editable DOM selection
+ */
+ve.init.mw.DesktopArticleTarget.prototype.getEditableContent = function () {
+	var $editableContent, $content, $before,
+		namespaceIds = mw.config.get( 'wgNamespaceIds' );
+
+	if ( mw.config.get( 'wgAction' ) === 'view' ) {
+		switch ( mw.config.get( 'wgNamespaceNumber' ) ) {
+			case namespaceIds.category:
+				// Put contents in a single wrapper
+				// TODO: Fix upstream
+				$content = $( '#mw-content-text > :not( .mw-category-generated )' );
+				$editableContent = $( '<div>' ).prependTo( $( '#mw-content-text' ) ).append( $content );
+				break;
+			case namespaceIds.file:
+				$editableContent = $( '#mw-imagepage-content' );
+				if ( !$editableContent.length ) {
+					// No image content, file doesn't exist, or is on Commons?
+					$editableContent = $( '<div id="mw-imagepage-content">' );
+					$before = $( '.sharedUploadNotice, #mw-imagepage-nofile' );
+					if ( $before.length ) {
+						$before.first().after( $editableContent );
+					} else {
+						// Nothing to anchor to, just prepend inside #mw-content-text
+						$( '#mw-content-text' ).prepend( $editableContent );
+					}
+				}
+				break;
+			default:
+				$editableContent = $( '#mw-content-text' );
+		}
+	} else {
+		// TODO: Load view page content if switching from edit source
+		$editableContent = $( '#mw-content-text' );
+	}
+
+	return $editableContent;
+};
+
+/**
  * Set the container for the target, appending the target to it
  *
  * @param {jQuery} $container Container
  */
-ve.init.mw.DesktopArticleTarget.prototype.setContainer  = function ( $container ) {
+ve.init.mw.DesktopArticleTarget.prototype.setContainer = function ( $container ) {
 	$container.append( this.$element );
 	this.$container = $container;
 };
