@@ -674,12 +674,14 @@ class VisualEditorHooks {
 				$namespace :
 				MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
 		}, array_keys( array_filter( $availableNamespaces ) ) );
+		$availableContentModels = $veConfig->get( 'VisualEditorAvailableContentModels' );
+		$enabledContentModels = array_keys( array_filter( $availableContentModels ) );
 
 		$vars['wgVisualEditorConfig'] = [
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $enabledNamespaces,
-			'contentModels' => $veConfig->get( 'VisualEditorAvailableContentModels' ),
+			'contentModels' => $enabledContentModels,
 			'signatureNamespaces' => array_values(
 				array_filter( $enabledNamespaces, 'MWNamespace::wantSignatures' )
 			),
