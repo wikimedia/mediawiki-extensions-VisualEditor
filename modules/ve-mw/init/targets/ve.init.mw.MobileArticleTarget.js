@@ -113,7 +113,7 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
-	return new ve.ui.MobileSurface( dmDoc, config );
+	return new ve.ui.MobileSurface( dmDoc, this.getSurfaceConfig( config ) );
 };
 
 /**
