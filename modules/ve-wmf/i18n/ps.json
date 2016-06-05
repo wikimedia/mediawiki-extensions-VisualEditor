@@ -12,6 +12,8 @@
 	"visualeditor-help-label": "کارن لارښود ولولئ",
 	"visualeditor-help-title": "د سمونگر د کارولو لارښود",
 	"visualeditor-welcomedialog-action": "سمون پيلول",
+	"visualeditor-welcomedialog-content": "هر څوک يې سمولی شي، او هر پرمختگ مرسته کوي.",
+	"visualeditor-welcomedialog-content-thanks": "د نړۍ سره د ډېر نور څه پېژندلو په مرسته کې له تاسې څخه مننه کوو!",
 	"visualeditor-welcomedialog-switch": "د سرچينې سمونگر ته ور اړول",
 	"visualeditor-welcomedialog-title": "$2 ته {{GENDER:$1|ښه راغلې}}"
 }
