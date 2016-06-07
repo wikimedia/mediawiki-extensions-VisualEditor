@@ -234,6 +234,6 @@
 	"visualeditor-viewpage-savewarning-discard": "אוועקווארפן רעדאקטירונגען",
 	"visualeditor-viewpage-savewarning-keep": "רעדאקטירן ווײַטער",
 	"visualeditor-viewpage-savewarning-title": "איר זענט זיכער?",
-	"visualeditor-wikitext-warning": "איר ניצט דעם וויזועלן רעדאקטירער - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|וויקיטעקסט]] ארבעט נישט דא.  כדי אריבערצוגיין צו קוואלטעקסט־רעדאקטירונג נאר ווען, אן צו פארלירן אײַערע ענדערונגען, עפנט דעם אראפלאז-מעניו לעבן \"{{int:visualeditor-toolbar-savedialog}}\" און קלויבט \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "איר ניצט דעם וויזועלן רעדאקטירער - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|וויקיטעקסט]] ארבעט נישט דא.  כדי אריבערצוגיין צו קוואלטעקסט־רעדאקטירונג נאר ווען, אן צו פארלירן אײַערע ענדערונגען, קליקט אויפן אריבערגיין קנעפל.",
 	"visualeditor-wikitext-warning-title": "וויקי־קאד געטראפֿן"
 }
