@@ -117,7 +117,7 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
  *
  * @param {string} mode Symbolic name of autocomplete mode
  */
- ve.ui.MWAceEditorWidget.prototype.setAutocomplete = function ( mode ) {
+ve.ui.MWAceEditorWidget.prototype.setAutocomplete = function ( mode ) {
 	var widget = this;
 	this.autocomplete = mode;
 	this.loadingPromise.done( function () {
@@ -127,7 +127,7 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 		} );
 	} );
 	return this;
- };
+};
 
 /**
  * @inheritdoc

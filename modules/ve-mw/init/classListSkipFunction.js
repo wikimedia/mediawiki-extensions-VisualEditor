@@ -6,9 +6,9 @@
  * Adapted from http://purl.eligrey.com/github/classList.js/blob/master/classList.js
  */
 return !!(
-        'classList' in document.createElement( '_' ) &&
-        !(
-            document.createElementNS &&
-            !( 'classList' in document.createElementNS( 'http://www.w3.org/2000/svg', 'g' ) )
-        )
-    );
+	'classList' in document.createElement( '_' ) &&
+	!(
+		document.createElementNS &&
+		!( 'classList' in document.createElementNS( 'http://www.w3.org/2000/svg', 'g' ) )
+	)
+);

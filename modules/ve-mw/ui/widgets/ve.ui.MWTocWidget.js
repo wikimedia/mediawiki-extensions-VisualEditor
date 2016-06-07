@@ -84,7 +84,7 @@ OO.inheritClass( ve.ui.MWTocWidget, OO.ui.Widget );
  *
  * @param {ve.dm.MetaItem} metaItem
  */
- ve.ui.MWTocWidget.prototype.onMetaListInsert = function ( metaItem ) {
+ve.ui.MWTocWidget.prototype.onMetaListInsert = function ( metaItem ) {
 	// Responsible for adding UI components
 	if ( metaItem instanceof ve.dm.MWTOCForceMetaItem ) {
 		// show
