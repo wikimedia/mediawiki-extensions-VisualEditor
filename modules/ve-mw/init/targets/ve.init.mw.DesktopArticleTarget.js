@@ -467,7 +467,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.activatingDeferred = $.Deferred();
 		this.toolbarSetupDeferred = $.Deferred();
 
-		$( 'html' ).removeClass( 've-loading' ).addClass( 've-activating' );
+		$( 'html' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
 			target.afterActivate();
 		} ).fail( function () {
