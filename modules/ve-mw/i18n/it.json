@@ -331,6 +331,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Continuare a modificare",
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
 	"visualeditor-wikitext-progress": "Conversione wikitesto",
-	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, apri il menù a tendina vicino a \"{{int:visualeditor-toolbar-savedialog}}\" e seleziona \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, clicca il pulsante di commutazione.",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }
