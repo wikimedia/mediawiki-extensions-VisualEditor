@@ -17,5 +17,9 @@
 		"requireNewlineAfterDescription": true,
 		"requireParamTypes": true,
 		"requireReturnTypes": true
-	}
+	},
+
+	"excludeFiles": [
+		"modules/ve-mw/init/classListSkipFunction.js"
+	]
 }

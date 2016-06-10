@@ -1724,9 +1724,9 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		if ( prefSaysShow ) {
 			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
 
-		// No need to set a cookie every time for logged-in users that have already
-		// set the hidebetawelcome=1 preference, but only if this isn't a one-off
-		// view of the page via the hiding GET parameter.
+			// No need to set a cookie every time for logged-in users that have already
+			// set the hidebetawelcome=1 preference, but only if this isn't a one-off
+			// view of the page via the hiding GET parameter.
 		} else if ( !usePrefs && !urlSaysHide ) {
 			try {
 				localStorage.setItem( 've-beta-welcome-dialog', 1 );
