@@ -217,12 +217,15 @@
 	"visualeditor-mweditmodewt-popup-title": "Dir hutt op d'Visuell-Ännere gewiesselt",
 	"visualeditor-mwgallerydialog-card-images": "Biller",
 	"visualeditor-mwgallerydialog-card-options": "Optiounen",
+	"visualeditor-mwgallerydialog-classes-field-label": "CSS-Klassen",
 	"visualeditor-mwgallerydialog-empty-gallery-message": "D'Galerie ass eidel.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Héicht vum Bild",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "Traditionell",
 	"visualeditor-mwgallerydialog-remove-button-label": "Ewechhuelen",
 	"visualeditor-mwgallerydialog-perrow-field-label": "Biller pro Rei",
 	"visualeditor-mwgallerydialog-search-button-label": "Neit Bild derbäisetzen",
+	"visualeditor-mwgallerydialog-styles-field-label": "CSS-Stiler",
+	"visualeditor-mwgallerydialog-show-filename-field-label": "Nimm vun de Fichiere weisen",
 	"visualeditor-mwgallerydialog-title": "Gallerie",
 	"visualeditor-mwgallerydialog-widths-field-label": "Breet vum Bild",
 	"visualeditor-mwsignature-tool": "Är Ënnerschrëft",
@@ -278,6 +281,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Virufuere mat Änneren",
 	"visualeditor-viewpage-savewarning-title": "Sidd Dir sécher?",
 	"visualeditor-wikitext-progress": "Wikitext ëmwandelen",
-	"visualeditor-wikitext-warning": "Dir benotzt de visuellen Editeur - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Fir all Ament an d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren, maacht den Dropdown-Menü niewent \"{{int:visualeditor-toolbar-savedialog}}\" op a gitt op \"{{int:visualeditor-mweditmodesource-title}}\"",
+	"visualeditor-wikitext-warning": "Dir benotzt de visuellen Editeur - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Fir all Ament an d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren,klickt op de Knäppche Wiesselen",
 	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
 }
