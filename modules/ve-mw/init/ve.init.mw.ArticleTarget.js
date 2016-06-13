@@ -1429,8 +1429,8 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 		oldid: this.revid,
 		etag: this.etag
 	}, 'serialize' )
-		.done( ve.init.mw.ArticleTarget.prototype.serializeSuccess.bind( this ) )
-		.fail( ve.init.mw.ArticleTarget.prototype.serializeFail.bind( this ) );
+		.done( this.serializeSuccess.bind( this ) )
+		.fail( this.serializeFail.bind( this ) );
 	return true;
 };
 
