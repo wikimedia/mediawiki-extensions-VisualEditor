@@ -100,7 +100,7 @@ ve.init.mw.Target.static.importRules = {
 			// Annotations
 			'link/mwExternal', 'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language',
 			// Nodes
-			'div', 'alienInline', 'alienBlock', 'comment'
+			'article', 'section', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
 		removeOriginalDomElements: true,
 		nodeSanitization: true
