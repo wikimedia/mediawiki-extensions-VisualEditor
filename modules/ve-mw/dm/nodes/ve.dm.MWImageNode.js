@@ -209,7 +209,7 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
 	var resource = this.getAttribute( 'resource' ) || '',
 		filename = resource.replace( /^(\.+\/)*/, '' );
 
-	return ve.safeDecodeURIComponent( filename );
+	return ve.decodeURIComponentIntoArticleTitle( filename, true );
 };
 
 /**
