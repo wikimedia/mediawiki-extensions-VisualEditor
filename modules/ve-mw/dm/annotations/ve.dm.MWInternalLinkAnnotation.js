@@ -117,7 +117,15 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	// in which case it's preceded by one or more instances of "./" or "../", so strip those
 	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
 
-	return { title: matches[ 2 ], hrefPrefix: matches[ 1 ], isInternal: isInternal };
+	// Percent-encoded characters are forbidden in titles... but if we're
+	// copy/pasting URLs around, they're likely to wind up encoded at this
+	// point. So decode them, otherwise this is going to cause failures
+	// elsewhere.
+	return {
+		title: ve.safeDecodeURIComponent( matches[ 2 ] ),
+		hrefPrefix: matches[ 1 ],
+		isInternal: isInternal
+	};
 };
 
 ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
