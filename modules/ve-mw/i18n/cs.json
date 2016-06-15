@@ -16,7 +16,8 @@
 			"Vojtěch Dostál",
 			"Aktron",
 			"Cvanca",
-			"Kusavica"
+			"Kusavica",
+			"Dvorapa"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
@@ -268,8 +269,8 @@
 	"visualeditor-mwgallerydialog-caption-field-label": "Popis galerie",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "Titulek pro celou galerii",
 	"visualeditor-mwgallerydialog-card-images": "Obrázky",
-	"visualeditor-mwgallerydialog-card-options": "Nastavení",
-	"visualeditor-mwgallerydialog-classes-field-label": "CSS třídy",
+	"visualeditor-mwgallerydialog-card-options": "Volby",
+	"visualeditor-mwgallerydialog-classes-field-label": "Třídy CSS",
 	"visualeditor-mwgallerydialog-classes-input-placeholder": "Názvy tříd oddělené mezerou",
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Galerie je prázdná.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Výška obrázku",

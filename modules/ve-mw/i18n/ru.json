@@ -273,8 +273,7 @@
 	"visualeditor-mweditmodeve-tool": "Перейти к визуальному редактированию",
 	"visualeditor-mweditmodeve-warning": "Вы переходите к визуальному редактированию.\nВы хотите продолжить?",
 	"visualeditor-mweditmodewt-popup-title": "Вы переключились в режим визуального редактирования",
-	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Подпись к изображению",
-	"visualeditor-mwgalleryinspector-title": "Галерея",
+	"visualeditor-mwgallerydialog-title": "Галерея",
 	"visualeditor-mwsignature-tool": "Ваша подпись",
 	"visualeditor-pagemenu-tooltip": "Параметры страницы",
 	"visualeditor-pagetranslationwarning": "Вы редактируете переводимую страницу. Её редактирование в этом редакторе пока ещё официально не поддерживается.",
@@ -331,6 +330,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Продолжить редактирование",
 	"visualeditor-viewpage-savewarning-title": "Вы уверены?",
 	"visualeditor-wikitext-progress": "Преобразование вики-текста",
-	"visualeditor-wikitext-warning": "Вы используете визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, откройте раскрывающийся список рядом с «{{int:visualeditor-toolbar-savedialog}}» и выберите «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-wikitext-warning": "Вы используете визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, нажмите на кнопку переключателя.",
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка"
 }
