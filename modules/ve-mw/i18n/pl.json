@@ -89,7 +89,7 @@
 	"visualeditor-dialog-media-page-general": "Ustawienia podstawowe",
 	"visualeditor-dialog-media-position-center": "Wyśrodkowane",
 	"visualeditor-dialog-media-position-checkbox": "Tekst ma opływać ten obiekt",
-	"visualeditor-dialog-media-position-checkbox-help": "Możesz ustawić, by ten element nie był otoczony przez tekst, a zamiast tego żeby był położony z nim w linii. Powinno się rzadko używać tej opcji, ponieważ jej zaznaczenie przerywa bieg tekstu.",
+	"visualeditor-dialog-media-position-checkbox-help": "Możesz ustawić, by ten element nie był otoczony przez tekst, lecz położony z nim w linii. Powinno się unikać tej opcji, ponieważ jej zaznaczenie przerywa bieg tekstu.",
 	"visualeditor-dialog-media-position-left": "Po lewej",
 	"visualeditor-dialog-media-position-none": "Brak",
 	"visualeditor-dialog-media-position-right": "Po prawej",

@@ -31,5 +31,6 @@
 	"visualeditor-welcomedialog-content": "Qualquer pessoa pode editar e todas as melhorias são bem-vindas.",
 	"visualeditor-welcomedialog-content-thanks": "Obrigado por ajudar o mundo a descobrir mais!",
 	"visualeditor-welcomedialog-switch": "Mudar para o editor de código",
+	"visualeditor-welcomedialog-switch-ve": "Mudar para o editor visual",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bem-vindo|Bem-vinda|Bem-vindo(a)}} a $2"
 }

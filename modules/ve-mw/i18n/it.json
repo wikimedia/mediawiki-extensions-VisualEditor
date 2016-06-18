@@ -28,7 +28,8 @@
 			"Supernino",
 			"Wikitoni",
 			"Malore",
-			"Elitre (WMF)"
+			"Elitre (WMF)",
+			"Einreiher"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -348,6 +349,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Continuare a modificare",
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
 	"visualeditor-wikitext-progress": "Conversione wikitesto",
-	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, clicca il pulsante di commutazione.",
+	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, clicca il pulsante commutativo.",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
 }

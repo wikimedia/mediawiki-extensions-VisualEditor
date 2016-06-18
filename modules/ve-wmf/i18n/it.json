@@ -20,7 +20,8 @@
 			"Fringio",
 			"Alexmar983",
 			"Jdforrester",
-			"Nemo bis"
+			"Nemo bis",
+			"Einreiher"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale]]",
@@ -30,7 +31,7 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale: commutato]]",
 	"tag-visualeditor-switched-description": "L'utente ha iniziato a modificare utilizzando l'editor visuale, poi è passato all'editor di wikitesto.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Commenti",
-	"visualeditor-feedback-tool": "Lascia un feedback su questo software",
+	"visualeditor-feedback-tool": "Dai un commento su questo software",
 	"visualeditor-help-label": "Leggi la guida utente",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guida per l'utilizzo dell'editor",

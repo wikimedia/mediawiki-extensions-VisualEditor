@@ -1,15 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"HalanTul"
+			"HalanTul",
+			"София"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Тута көрөн уларытыы]]",
 	"tag-visualeditor-description": "Көннөрүү [[{{MediaWiki:visualeditor-descriptionpagelink}}|Көрөн уларытааччы эрэдээктэр]] көмөтүнэн оҥоһуллубут",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Көрөн уларытар эрэдээктэр]]: тургут",
+	"tag-visualeditor-needcheck-description": "Көннөрүү[[{{MediaWiki:visualeditor-descriptionpagelink}}|көрөн уларытар эрэдээктэр көмөтүнэн]], систиэмэ бука алҕас уларытыллыбыт биики-разметканы булла.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Тута көрөн уларытыы]]",
 	"tag-visualeditor-switched-description": "Бастаан Көрөн уларытар эрэдээктэр көмөтүнэн саҕалаабыт, онтон төрүт тиэкиһи уларытар эрэдээктэргэ көспүт.",
 	"visualeditor-feedback-link": "Project:Көрөн уларытар эрэдээктэр/Дьон туох диирэ",
 	"visualeditor-feedback-tool": "Бу баайым туһунан санааҕын эт",
 	"visualeditor-help-label": "Ыйыыны-кэрдиини аах",
-	"visualeditor-help-title": "Эрэдээктэри туһаныы туһунан"
+	"visualeditor-help-title": "Эрэдээктэри туһаныы туһунан",
+	"visualeditor-welcomedialog-action": "Уларытыыны саҕалаа",
+	"visualeditor-welcomedialog-content": "Ким баҕар уларытыы киллэриэн сөп, онон хас биирдии тупсарыы туһалаах.",
+	"visualeditor-welcomedialog-content-thanks": "Сир элбэҕи билэригэр көмөҕүт иһин, махтал!",
+	"visualeditor-welcomedialog-switch": "Төрүт код эрэдээктэригэр көс",
+	"visualeditor-welcomedialog-switch-ve": "Көрөн уларытар эрэдээктэргэ көс",
+	"visualeditor-welcomedialog-title": "$2 сайтка {{$1|Үтүөтэ оҥор}}"
 }

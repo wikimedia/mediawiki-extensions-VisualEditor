@@ -269,8 +269,7 @@
 	"visualeditor-mweditmodeve-warning": "Ви переходите до візуального редагування.\nХочете продовжити?",
 	"visualeditor-mweditmodewt-popup-body": "Ви можете перемкнутися назад у будь-який час, натиснувши на цю кнопку.",
 	"visualeditor-mweditmodewt-popup-title": "Ви перемкнулись на візуальне редагування",
-	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Підпис зображення",
-	"visualeditor-mwgalleryinspector-title": "Галерея",
+	"visualeditor-mwgallerydialog-title": "Галерея",
 	"visualeditor-mwsignature-tool": "Ваш підпис",
 	"visualeditor-pagemenu-tooltip": "Параметри сторінки",
 	"visualeditor-pagetranslationwarning": "Ви редагуєте сторінку для перекладу. Її редагування у цьому редакторі поки ще офіційно не підтримується.",
@@ -327,6 +326,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Продовжити редагування",
 	"visualeditor-viewpage-savewarning-title": "Ви впевнені?",
 	"visualeditor-wikitext-progress": "Перетворення вікі-тексту",
-	"visualeditor-wikitext-warning": "Ви використовуєте візуальний редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікірозмітка]] тут не працює. Щоб у будь-який час перемкнутися на редагування коду без втрати своїх змін, відкрийте випадне меню поряд із «{{int:visualeditor-toolbar-savedialog}}» і оберіть «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-wikitext-warning": "Ви використовуєте візуальний редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікірозмітка]] тут не працює. Щоб у будь-який час перемкнутися на редагування коду без втрати своїх змін, натисніть на кнопку перемикача.",
 	"visualeditor-wikitext-warning-title": "Виявлена вікірозмітка"
 }
