@@ -319,6 +319,7 @@
 	"visualeditor-shortcuts-insert": "Inserir",
 	"visualeditor-special-characters-group-other": "Utilizados frequentemente",
 	"visualeditor-timeout": "Parece que o editor está indisponível de momento. Gostaria de editar antes o código-fonte?",
+	"visualeditor-toload": "O editor será agora carregado. Se continuar a ver esta mensagem depois de alguns segundos, por favor [$1 atualize a página].",
 	"visualeditor-toolbar-savedialog": "Gravar página",
 	"visualeditor-toolbar-savedialog-short": "Gravar",
 	"visualeditor-usernamespacepagelink": "Project:Página de usuário",
