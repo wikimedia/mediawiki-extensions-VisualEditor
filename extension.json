@@ -186,6 +186,9 @@
 		],
 		"CustomEditor": [
 			"VisualEditorHooks::onCustomEditor"
+		],
+		"UserLoggedIn": [
+			"VisualEditorHooks::onUserLoggedIn"
 		]
 	},
 	"ResourceModules": {
