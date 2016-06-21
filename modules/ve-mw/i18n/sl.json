@@ -208,8 +208,7 @@
 	"visualeditor-mweditmodeve-title": "Preklopim na vizualno urejanje?",
 	"visualeditor-mweditmodeve-tool": "Preklopi na vizualno urejanje",
 	"visualeditor-mweditmodeve-warning": "Preklapljate na vizualno urejanje.\nŽelite nadaljevati?",
-	"visualeditor-mwgalleryinspector-placeholder": "Primer.jpg|Napis slike",
-	"visualeditor-mwgalleryinspector-title": "Galerija",
+	"visualeditor-mwgallerydialog-title": "Galerija",
 	"visualeditor-mwsignature-tool": "Vaš podpis",
 	"visualeditor-pagemenu-tooltip": "Možnosti strani",
 	"visualeditor-pagetranslationwarning": "Urejate prevedljivo stran. V tem editorju takšno urejanje še ni uradno podprto.",
@@ -263,6 +262,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Nadaljuj z urejanjem",
 	"visualeditor-viewpage-savewarning-title": "Ste prepričani?",
 	"visualeditor-wikitext-progress": "Pretvarjanje wikibesedila",
-	"visualeditor-wikitext-warning": "Uporabljate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikibesedilo]] tukaj ne deluje. Da kadar koli preklopite v način urejanja kode brez izgub sprememb, odprite spustni meni ob »{{int:visualeditor-toolbar-savedialog}}« in izberite »{{int:visualeditor-mweditmodesource-title}}«.",
+	"visualeditor-wikitext-warning": "Uporabljate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikibesedilo]] tukaj ne deluje. Da preklopite v način urejanja kode brez izgub sprememb, lahko kadar koli kliknete gumb za preklop.",
 	"visualeditor-wikitext-warning-title": "Zaznali smo označevanje wikibesedila"
 }
