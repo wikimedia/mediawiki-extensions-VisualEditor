@@ -138,7 +138,7 @@
 				ve.track( 'trace.restbaseLoad.enter' );
 				if (
 					conf.fullRestbaseUrl &&
-					$( '#wpTextbox1' ).val() &&
+					$( '#wpTextbox1' ).textSelection( 'getContents' ) &&
 					!$( '[name=wpSection]' ).val()
 				) {
 					switched = true;
@@ -153,7 +153,7 @@
 						data: {
 							title: pageName,
 							oldid: oldid,
-							wikitext: $( '#wpTextbox1' ).val(),
+							wikitext: $( '#wpTextbox1' ).textSelection( 'getContents' ),
 							stash: 'true'
 						},
 						// Should be synchronised with ApiVisualEditor.php

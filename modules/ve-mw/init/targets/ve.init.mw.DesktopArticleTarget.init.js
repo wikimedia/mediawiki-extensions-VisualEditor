@@ -550,8 +550,7 @@
 		},
 
 		activateVe: function () {
-			var wikitext = $( '#wpTextbox1' ).val(),
-				wikitextModified = wikitext !== initialWikitext;
+			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 
 			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
 			if ( $.fn.dialog ) {
@@ -560,7 +559,10 @@
 
 			if (
 				mw.config.get( 'wgAction' ) === 'submit' ||
-				( mw.config.get( 'wgAction' ) === 'edit' && wikitextModified ) ||
+				(
+					mw.config.get( 'wgAction' ) === 'edit' &&
+					wikitext !== initialWikitext
+				) ||
 				// switching from section editing must prompt because we can't
 				// keep changes from that (yet?)
 				$( 'input[name=wpSection]' ).val()
@@ -718,7 +720,7 @@
 			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query;
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
-			initialWikitext = $( '#wpTextbox1' ).val();
+			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 		}
 
 		if ( init.isAvailable ) {
