@@ -508,11 +508,9 @@ class VisualEditorHooks {
 
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		if ( !class_exists( 'BetaFeatures' ) ) {
-			$namespaces = ConfigFactory::getDefaultInstance()
-				->makeConfig( 'visualeditor' )
-				->get( 'VisualEditorAvailableNamespaces' );
-			$onNamespaces = array_keys( array_filter( $namespaces ) );
+			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $config );
 
 			$enablePreference = [
 				'type' => 'toggle',
@@ -520,9 +518,9 @@ class VisualEditorHooks {
 					'visualeditor-preference-enable',
 					$wgLang->commaList( array_map(
 						[ 'self', 'convertNs' ],
-						$onNamespaces
+						$namespaces
 					) ),
-					count( $onNamespaces )
+					count( $namespaces )
 				],
 				'section' => 'editing/editor'
 			];
@@ -539,7 +537,6 @@ class VisualEditorHooks {
 				$user->getOption( 'visualeditor-autodisable' )
 		];
 
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			!$user->getOption( 'visualeditor-autodisable' ) &&
@@ -667,23 +664,21 @@ class VisualEditorHooks {
 		$defaultUserOptions = $coreConfig->get( 'DefaultUserOptions' );
 		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-		$availableNamespaces = $veConfig->get( 'VisualEditorAvailableNamespaces' );
-		$enabledNamespaces = array_map( function ( $namespace ) {
-			// Convert canonical namespace names to IDs
-			return is_numeric( $namespace ) ?
-				$namespace :
-				MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
-		}, array_keys( array_filter( $availableNamespaces ) ) );
-		$availableContentModels = $veConfig->get( 'VisualEditorAvailableContentModels' );
-		$enabledContentModels = array_keys( array_filter( $availableContentModels ) );
+		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
+		$availableContentModels = array_keys( array_filter(
+			array_merge(
+				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
+				$veConfig->get( 'VisualEditorAvailableContentModels' )
+			)
+		) );
 
 		$vars['wgVisualEditorConfig'] = [
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
-			'namespaces' => $enabledNamespaces,
-			'contentModels' => $enabledContentModels,
+			'namespaces' => $availableNamespaces,
+			'contentModels' => $availableContentModels,
 			'signatureNamespaces' => array_values(
-				array_filter( $enabledNamespaces, 'MWNamespace::wantSignatures' )
+				array_filter( $availableNamespaces, 'MWNamespace::wantSignatures' )
 			),
 			'pluginModules' => array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),

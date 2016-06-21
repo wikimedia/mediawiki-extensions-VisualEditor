@@ -651,10 +651,27 @@ class ApiVisualEditor extends ApiBase {
 	 * @return boolean
 	 */
 	public static function isAllowedNamespace( Config $config, $namespaceId ) {
-		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
-		$canonicalName = MWNamespace::getCanonicalName( $namespaceId );
-		return ( isset( $availableNamespaces[$namespaceId] ) && $availableNamespaces[$namespaceId] ) ||
-			 ( isset( $availableNamespaces[$canonicalName] ) && $availableNamespaces[$canonicalName] );
+		$availableNamespaces = self::getAvailableNamespaceIds( $config );
+		return in_array( $namespaceId, $availableNamespaces );
+	}
+
+	/**
+	 * Get a list of allowed namespace IDs
+	 *
+	 * @param Config $config Configuration object
+	 * @return array
+	 */
+	public static function getAvailableNamespaceIds( Config $config ) {
+		$availableNamespaces = array_merge(
+			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' ),
+			$config->get( 'VisualEditorAvailableNamespaces' )
+		);
+		return array_map( function ( $namespace ) {
+			// Convert canonical namespace names to IDs
+			return is_numeric( $namespace ) ?
+				$namespace :
+				MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
+		}, array_keys( array_filter( $availableNamespaces ) ) );
 	}
 
 	/**
@@ -665,8 +682,13 @@ class ApiVisualEditor extends ApiBase {
 	 * @return boolean
 	 */
 	public static function isAllowedContentType( Config $config, $contentModel ) {
-		$availableContentModels = $config->get( 'VisualEditorAvailableContentModels' );
-		return isset( $availableContentModels[ $contentModel ] );
+		$availableContentModels = array_merge(
+			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
+			$config->get( 'VisualEditorAvailableContentModels' )
+		);
+		return
+			isset( $availableContentModels[ $contentModel ] ) &&
+			$availableContentModels[ $contentModel ];
 	}
 
 	/**
