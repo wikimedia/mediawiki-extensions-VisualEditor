@@ -56,10 +56,29 @@ module.exports = function ( grunt ) {
 			}
 		},
 		mochaTest: {
-			screenshots: {
+			'screenshots-en': {
 				options: {
 					reporter: 'spec',
-					timeout: 20000
+					timeout: 20000,
+					require: [
+						function () {
+							/* jshint undef:false */
+							langs = [ 'en' ];
+						}
+					]
+				},
+				src: [ 'build/screenshots.js' ]
+			},
+			'screenshots-all': {
+				options: {
+					reporter: 'spec',
+					timeout: 20000,
+					require: [
+						function () {
+							/* jshint undef:false */
+							langs = require( './build/tasks/screenshotLangs.json' ).langs;
+						}
+					]
 				},
 				src: [ 'build/screenshots.js' ]
 			}
@@ -163,7 +182,8 @@ module.exports = function ( grunt ) {
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
-	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots' ] );
+	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en' ] );
+	grunt.registerTask( 'screenshots-all', [ 'mochaTest:screenshots-all' ] );
 	grunt.registerTask( 'default', 'test' );
 
 	if ( process.env.JENKINS_HOME ) {
