@@ -12,16 +12,10 @@ function runTests( lang ) {
 
 		test.beforeEach( function () {
 			driver = new chrome.Driver();
+
 			driver.manage().timeouts().setScriptTimeout( 20000 );
 			driver.manage().window().setSize( 1200, 800 );
-		} );
 
-		test.afterEach( function () {
-			driver.quit();
-		} );
-
-		function runScreenshotTest( name, clientScript, padding ) {
-			var filename = './screenshots/' + name + '-' + lang + '.png';
 			driver.get( 'http://en.wikipedia.beta.wmflabs.org/wiki/PageDoesNotExist?veaction=edit&uselang=' + lang );
 			driver.wait(
 				driver.executeAsyncScript(
@@ -53,6 +47,18 @@ function runTests( lang ) {
 									boundingRect.height = boundingRect.bottom - boundingRect.top;
 								}
 								return boundingRect;
+							},
+							collapseToolbar: function () {
+								ve.init.target.toolbar.items.forEach( function ( group ) {
+									if ( group.setActive ) {
+										group.setActive( false );
+									}
+								} );
+								ve.init.target.actionsToolbar.items.forEach( function ( group ) {
+									if ( group.setActive ) {
+										group.setActive( false );
+									}
+								} );
 							}
 						};
 
@@ -74,17 +80,26 @@ function runTests( lang ) {
 							} );
 						} );
 					}
-				).then( function () {
-					return driver.executeAsyncScript( clientScript ).then( function ( rect ) {
-						return driver.takeScreenshot().then( function ( base64Image ) {
-							var imageBuffer;
-							if ( rect ) {
-								imageBuffer = new Buffer( base64Image, 'base64' );
-								return cropScreenshot( filename, imageBuffer, rect, padding );
-							} else {
-								fs.writeFile( filename, base64Image, 'base64' );
-							}
-						} );
+				)
+			);
+		} );
+
+		test.afterEach( function () {
+			driver.quit();
+		} );
+
+		function runScreenshotTest( name, clientScript, padding ) {
+			var filename = './screenshots/' + name + '-' + lang + '.png';
+			driver.wait(
+				driver.executeAsyncScript( clientScript ).then( function ( rect ) {
+					return driver.takeScreenshot().then( function ( base64Image ) {
+						var imageBuffer;
+						if ( rect ) {
+							imageBuffer = new Buffer( base64Image, 'base64' );
+							return cropScreenshot( filename, imageBuffer, rect, padding );
+						} else {
+							fs.writeFile( filename, base64Image, 'base64' );
+						}
 					} );
 				} ),
 				20000
@@ -108,7 +123,7 @@ function runTests( lang ) {
 			} );
 		}
 
-		test.it( 'Toolbar', function () {
+		test.it( 'Toolbar & action tools', function () {
 			runScreenshotTest( 'VisualEditor_toolbar',
 				// This function is converted to a string and executed in the browser
 				function () {
@@ -117,6 +132,18 @@ function runTests( lang ) {
 						seleniumUtils.getBoundingRect( [
 							ve.init.target.toolbar.$element[ 0 ],
 							$( '#ca-nstab-main' )[ 0 ]
+						] )
+					);
+				},
+				0
+			);
+			runScreenshotTest( 'VisualEditor_toolbar_actions',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ];
+					done(
+						seleniumUtils.getBoundingRect( [
+							ve.init.target.toolbar.$actions[ 0 ]
 						] )
 					);
 				},
@@ -141,13 +168,16 @@ function runTests( lang ) {
 				}
 			);
 		} );
-		test.it( 'Headings tool list', function () {
+		test.it( 'Tool groups (headings/text style/indentation/page settings)', function () {
 			runScreenshotTest( 'VisualEditor_Toolbar_Headings',
 				// This function is converted to a string and executed in the browser
 				function () {
 					var done = arguments[ arguments.length - 1 ],
 						toolGroup = ve.init.target.toolbar.tools.paragraph.toolGroup;
+
+					seleniumUtils.collapseToolbar();
 					toolGroup.setActive( true );
+
 					setTimeout( function () {
 						done(
 							seleniumUtils.getBoundingRect( [
@@ -155,18 +185,19 @@ function runTests( lang ) {
 								toolGroup.$group[ 0 ]
 							] )
 						);
-					}, 500 );
+					} );
 				}
 			);
-		} );
-		test.it( 'Text style tool list', function () {
 			runScreenshotTest( 'VisualEditor_Toolbar_Formatting',
 				// This function is converted to a string and executed in the browser
 				function () {
 					var done = arguments[ arguments.length - 1 ],
 						toolGroup = ve.init.target.toolbar.tools.bold.toolGroup;
+
+					seleniumUtils.collapseToolbar();
 					toolGroup.setActive( true );
 					toolGroup.getExpandCollapseTool().onSelect();
+
 					setTimeout( function () {
 						done(
 							seleniumUtils.getBoundingRect( [
@@ -174,17 +205,18 @@ function runTests( lang ) {
 								toolGroup.$group[ 0 ]
 							] )
 						);
-					}, 500 );
+					} );
 				}
 			);
-		} );
-		test.it( 'Indentation tool list', function () {
 			runScreenshotTest( 'VisualEditor_Toolbar_List_and_indentation',
 				// This function is converted to a string and executed in the browser
 				function () {
 					var done = arguments[ arguments.length - 1 ],
 						toolGroup = ve.init.target.toolbar.tools.bullet.toolGroup;
+
+					seleniumUtils.collapseToolbar();
 					toolGroup.setActive( true );
+
 					setTimeout( function () {
 						done(
 							seleniumUtils.getBoundingRect( [
@@ -192,17 +224,18 @@ function runTests( lang ) {
 								toolGroup.$group[ 0 ]
 							] )
 						);
-					}, 500 );
+					} );
 				}
 			);
-		} );
-		test.it( 'Page options list', function () {
 			runScreenshotTest( 'VisualEditor_More_Settings',
 				// This function is converted to a string and executed in the browser
 				function () {
 					var done = arguments[ arguments.length - 1 ],
 						toolGroup = ve.init.target.actionsToolbar.tools.advancedSettings.toolGroup;
+
+					seleniumUtils.collapseToolbar();
 					toolGroup.setActive( true );
+
 					setTimeout( function () {
 						done(
 							seleniumUtils.getBoundingRect( [
@@ -212,22 +245,8 @@ function runTests( lang ) {
 								ve.init.target.toolbarSaveButton.$element[ 0 ]
 							] )
 						);
-					}, 500 );
+					} );
 				}
-			);
-		} );
-		test.it( 'Toolbar actions', function () {
-			runScreenshotTest( 'VisualEditor_toolbar_actions',
-				// This function is converted to a string and executed in the browser
-				function () {
-					var done = arguments[ arguments.length - 1 ];
-					done(
-						seleniumUtils.getBoundingRect( [
-							ve.init.target.toolbar.$actions[ 0 ]
-						] )
-					);
-				},
-				0
 			);
 		} );
 		test.it( 'Save dialog', function () {
