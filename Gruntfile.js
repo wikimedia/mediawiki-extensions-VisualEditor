@@ -15,6 +15,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
+	grunt.loadNpmTasks( 'grunt-mocha-test' );
 	grunt.loadNpmTasks( 'grunt-jscs' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
 	grunt.loadNpmTasks( 'grunt-tyops' );
@@ -52,6 +53,15 @@ module.exports = function ( grunt ) {
 				load: [ 'visualEditor.desktop.standalone' ],
 				pathPrefix: 'lib/ve/',
 				indent: '\t\t'
+			}
+		},
+		mochaTest: {
+			screenshots: {
+				options: {
+					reporter: 'spec',
+					timeout: 20000
+				},
+				src: [ 'build/screenshots.js' ]
 			}
 		},
 		tyops: {
@@ -153,6 +163,7 @@ module.exports = function ( grunt ) {
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
+	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots' ] );
 	grunt.registerTask( 'default', 'test' );
 
 	if ( process.env.JENKINS_HOME ) {
