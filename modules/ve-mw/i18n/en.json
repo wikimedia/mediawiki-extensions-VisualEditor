@@ -307,6 +307,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "Always give me the visual editor if possible",
 	"visualeditor-preference-tabs-prefer-wt": "Always give me the source editor",
 	"visualeditor-preference-tabs-remember-last": "Remember my last editor",
+	"visualeditor-quick-access-characters.json": "null",
 	"visualeditor-recreate": "The page has been deleted since you started editing. Press \"$1\" to recreate it.",
 	"visualeditor-redirect-description": "Redirect to $1",
 	"visualeditor-savedialog-error-badtoken": "We could not save your edit because the session was no longer valid.",
