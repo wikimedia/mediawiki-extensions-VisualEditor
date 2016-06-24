@@ -220,7 +220,7 @@
 	"visualeditor-mweditmodeve-popup-body": "Вы можаце вярнуцца да візуальнага рэдагаваньня ў любы момант, калі націсьніце на гэты значак.",
 	"visualeditor-mweditmodeve-popup-title": "Вы перайшлі да рэдагаваньня вікітэксту",
 	"visualeditor-mweditmodeve-tool": "Пераключыць на візуальнае рэдагаваньне",
-	"visualeditor-mwgalleryinspector-title": "Галерэя",
+	"visualeditor-mwgallerydialog-title": "Галерэя",
 	"visualeditor-mwsignature-tool": "Ваш подпіс",
 	"visualeditor-pagemenu-tooltip": "Налады старонкі",
 	"visualeditor-parameter-input-placeholder": "Назва поля",
@@ -255,6 +255,6 @@
 	"visualeditor-version-label": "Вэрсія",
 	"visualeditor-viewpage-savewarning": "Вы ўпэўненыя, што жадаеце выйсьці з рэжыму рэдагаваньня без папярэдняга захаваньня?",
 	"visualeditor-viewpage-savewarning-title": "Вы ўпэўненыя?",
-	"visualeditor-wikitext-warning": "Вы карыстаецеся візуальным рэдактарам — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікітэкст]] тут не працуе. Каб пераключыцца на рэдагаваньне вікітэксту ў любы момант бяз страты зьменаў, адкрыйце выпаднае мэню побач з «{{int:visualeditor-toolbar-savedialog}}» і абярыце «{{int:visualeditor-mweditmodesource-title}}».",
+	"visualeditor-wikitext-warning": "Вы карыстаецеся візуальным рэдактарам — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікітэкст]] тут не працуе. Каб пераключыцца на рэдагаваньне вікітэксту ў любы момант бяз страты зьменаў, націсьніце кнопку пераключэньня.",
 	"visualeditor-wikitext-warning-title": "Выяўленае ўжываньне вікітэксту"
 }

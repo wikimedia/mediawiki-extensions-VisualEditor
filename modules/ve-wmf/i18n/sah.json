@@ -20,5 +20,5 @@
 	"visualeditor-welcomedialog-content-thanks": "Дьон-сэргэ билиитэ хаҥыырыгар көмөҥ иһин махтал!",
 	"visualeditor-welcomedialog-switch": "Төрүт куод эрэдээктэригэр көс",
 	"visualeditor-welcomedialog-switch-ve": "Көрөн уларытар эрэдээктэргэ көс",
-	"visualeditor-welcomedialog-title": "$2 сайтка {{$1|Үтүөтэ оҥор}}"
+	"visualeditor-welcomedialog-title": "$2 сиргэ {{GENDER:$1|киирбиккинэн}}"
 }
