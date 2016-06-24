@@ -665,12 +665,12 @@ class VisualEditorHooks {
 		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
-		$availableContentModels = array_keys( array_filter(
+		$availableContentModels = array_filter(
 			array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
 				$veConfig->get( 'VisualEditorAvailableContentModels' )
 			)
-		) );
+		);
 
 		$vars['wgVisualEditorConfig'] = [
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),

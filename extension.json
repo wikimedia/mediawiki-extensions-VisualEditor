@@ -104,7 +104,7 @@
 			"_merge_strategy": "array_plus"
 		},
 		"VisualEditorAvailableContentModels": {
-			"wikitext": true,
+			"wikitext": "article",
 			"_merge_strategy": "array_plus"
 		},
 		"VisualEditorSkinToolbarScrollOffset": [],

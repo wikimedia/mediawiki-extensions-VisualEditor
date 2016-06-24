@@ -137,7 +137,9 @@
 				.then( function () {
 					var target;
 
-					target = ve.init.mw.targetFactory.create( 'article' );
+					target = ve.init.mw.targetFactory.create(
+						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ]
+					);
 					target.connect( this, {
 						transformPage: function () {
 							if ( onlyTabIsVE ) {
@@ -676,7 +678,7 @@
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
 		// Only for pages with a supported content model
-		conf.contentModels.indexOf( mw.config.get( 'wgPageContentModel' ) ) !== -1
+		conf.contentModels.hasOwnProperty( mw.config.get( 'wgPageContentModel' ) )
 	);
 
 	// FIXME: We should do this more elegantly
