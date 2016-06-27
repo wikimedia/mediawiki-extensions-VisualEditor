@@ -214,7 +214,7 @@
 	"visualeditor-donebutton-tooltip": "Klar med redigeringen",
 	"visualeditor-editconflict": "Dina ändringar kunde inte sparas på grund av en redigeringskonflikt. Vill {{GENDER:|du}} lösa konflikten manuellt?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} kommer nu ihåg vilken redigerare du föredrar. Du kan växla redigeringsläge samtidigt som du redigerar och ändra dina inställningar senare.",
-	"visualeditor-editingtabdialog-ok": "Använd editorn som jag använde i mitt senaste redigering",
+	"visualeditor-editingtabdialog-ok": "Använd redigeringsalternativet som jag använde i mitt senaste redigering",
 	"visualeditor-editingtabdialog-title": "Redigeringsflikar",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notis|notiser}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsnotiser",

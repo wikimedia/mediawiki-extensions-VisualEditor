@@ -289,7 +289,7 @@
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|Ein weiteres Feld|$1 weitere Felder}} anzeigen",
 	"visualeditor-parameter-search-no-unused": "Keine unbenutzten Felder",
 	"visualeditor-parameter-search-unknown": "Unbekanntes Feld",
-	"visualeditor-preference-betatempdisable": "Den visuellen Editor während der Beta-Phase vorübergehend deaktivieren",
+	"visualeditor-preference-betatempdisable": "Visuellen Editor während der Beta-Phase deaktivieren",
 	"visualeditor-preference-core-description": "Den visuellen Editor aktivieren. Der Editor ist auf Diskussionsseiten und in einigen anderen Namensräumen nicht verfügbar.",
 	"visualeditor-preference-core-label": "Visuelles Bearbeiten",
 	"visualeditor-preference-enable": "Den visuellen Editor aktivieren. Der Editor ist verfügbar {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}}: $1",
