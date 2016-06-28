@@ -1106,7 +1106,8 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		]
+		],
+		clipboardBody: '<p>Foo<a rel="mw:ExtLink" href="http://www.example.com">[1]</a>Bar</p>'
 	},
 	'URL link': {
 		body: '<p><a rel="mw:ExtLink" href="http://www.mediawiki.org/">mw</a></p>',

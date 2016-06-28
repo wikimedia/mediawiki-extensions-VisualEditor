@@ -55,8 +55,27 @@ ve.dm.MWNumberedExternalLinkNode.static.toDataElement = function ( domElements )
 	};
 };
 
-ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, doc ) {
-	var domElement = doc.createElement( 'a' );
+ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, doc, converter ) {
+	var counter, offset,
+		node = this,
+		domElement = doc.createElement( 'a' );
+
+	// Ensure there is a text version of the counter in the clipboard
+	// as external documents may not have the same stylesheet - and Firefox
+	// discards empty tags on copy.
+	if ( converter.isForClipboard() ) {
+		counter = 1;
+		offset = converter.documentData.indexOf( dataElement );
+
+		if ( offset !== -1 ) {
+			converter.documentData.slice( 0, offset ).forEach( function ( el ) {
+				if ( el.type && el.type === node.name ) {
+					counter++;
+				}
+			} );
+		}
+		domElement.appendChild( doc.createTextNode( '[' + counter + ']' ) );
+	}
 	domElement.setAttribute( 'href', dataElement.attributes.href );
 	domElement.setAttribute( 'rel', 'mw:ExtLink' );
 	return [ domElement ];
