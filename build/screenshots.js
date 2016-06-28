@@ -282,6 +282,33 @@ function runTests( lang ) {
 				}
 			);
 		} );
+		test.it( 'Math dialog', function () {
+			runScreenshotTest( 'VisualEditor_formula',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var win,
+						done = arguments[ arguments.length - 1 ],
+						surface = ve.init.target.surface;
+
+					surface.dialogs.once( 'opening', function ( win, opening ) {
+						opening.then( function () {
+							win.previewElement.once( 'render', function () {
+								win.previewElement.$element.find( 'img' ).on( 'load', function () {
+									done(
+										seleniumUtils.getBoundingRect( [
+											win.$frame[ 0 ]
+										]
+									) );
+								} );
+							} );
+							win.input.setValue( 'E = mc^2' ).moveCursorToEnd();
+						} );
+					}, 1000 );
+					surface.executeCommand( 'mathDialog' );
+					win = surface.dialogs.currentWindow;
+				}
+			);
+		} );
 	} );
 }
 
