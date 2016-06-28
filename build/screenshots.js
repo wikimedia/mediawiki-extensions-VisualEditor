@@ -1,6 +1,6 @@
 /* jshint node: true */
 /* global seleniumUtils, langs */
-var i, l,
+var i, l, clientSize,
 	chrome = require( 'selenium-webdriver/chrome' ),
 	test = require( 'selenium-webdriver/testing' ),
 	fs = require( 'fs' ),
@@ -76,11 +76,15 @@ function runTests( lang ) {
 							surfaceView.once( 'focus', function () {
 								target.surface.getModel().getFragment().insertContent( ' ' ).collapseToStart().select();
 								// Wait for save button fade
-								setTimeout( done, 100 );
+								setTimeout( function () {
+									done( { width: window.innerWidth, height: window.innerHeight } );
+								}, 100 );
 							} );
 						} );
 					}
-				)
+				).then( function ( cs ) {
+					clientSize = cs;
+				} )
 			);
 		} );
 
@@ -107,22 +111,23 @@ function runTests( lang ) {
 		}
 
 		function cropScreenshot( filename, imageBuffer, rect, padding ) {
+			var left, top, right, bottom;
+
 			if ( padding === undefined ) {
 				padding = 5;
 			}
 
+			left = Math.max( 0, rect.left - padding );
+			top = Math.max( 0, rect.top - padding );
+			right = Math.min( clientSize.width, rect.left + rect.width + padding );
+			bottom = Math.min( clientSize.height, rect.top + rect.height + padding );
+
 			return Jimp.read( imageBuffer ).then( function ( jimpImage ) {
 				jimpImage
-					.crop(
-						rect.left - padding,
-						rect.top - padding,
-						rect.width + ( padding * 2 ),
-						rect.height + ( padding * 2 )
-					)
+					.crop( left, top, right - left, bottom - top )
 					.write( filename );
 			} );
 		}
-
 		test.it( 'Toolbar & action tools', function () {
 			runScreenshotTest( 'VisualEditor_toolbar',
 				// This function is converted to a string and executed in the browser
