@@ -14,7 +14,7 @@ function runTests( lang ) {
 			driver = new chrome.Driver();
 
 			driver.manage().timeouts().setScriptTimeout( 20000 );
-			driver.manage().window().setSize( 1200, 800 );
+			driver.manage().window().setSize( 1200, 1000 );
 
 			driver.get( 'http://en.wikipedia.beta.wmflabs.org/wiki/PageDoesNotExist?veaction=edit&uselang=' + lang );
 			driver.wait(
@@ -94,6 +94,7 @@ function runTests( lang ) {
 
 		function runScreenshotTest( name, clientScript, padding ) {
 			var filename = './screenshots/' + name + '-' + lang + '.png';
+
 			driver.wait(
 				driver.executeAsyncScript( clientScript ).then( function ( rect ) {
 					return driver.takeScreenshot().then( function ( base64Image ) {
@@ -159,16 +160,16 @@ function runTests( lang ) {
 			runScreenshotTest( 'VisualEditor_Citoid_Inspector',
 				// This function is converted to a string and executed in the browser
 				function () {
-					var done = arguments[ arguments.length - 1 ];
+					var done = arguments[ arguments.length - 1 ],
+						surface = ve.init.target.surface;
 					ve.init.target.toolbar.tools.citefromid.onSelect();
 					setTimeout( function () {
-						var rect = ve.init.target.surface.context.inspectors.currentWindow.$element[ 0 ].getBoundingClientRect();
-						done( {
-							top: rect.top - 20,
-							left: rect.left,
-							width: rect.width,
-							height: rect.height + 20
-						} );
+						done(
+							seleniumUtils.getBoundingRect( [
+								surface.$element.find( '.ve-ce-mwReferenceNode' )[ 0 ],
+								surface.context.inspectors.currentWindow.$element[ 0 ]
+							] )
+						);
 					}, 500 );
 				}
 			);
@@ -330,6 +331,36 @@ function runTests( lang ) {
 					} );
 				},
 				0
+			);
+		} );
+		test.it( 'Link inspector', function () {
+			runScreenshotTest( 'VisualEditor-link_tool-search_results',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ],
+						surface = ve.init.target.surface;
+
+					surface.getModel().getFragment()
+						// TODO: i18n this message, the linked word, and the API endpoint of the link inspector
+						.insertContent( 'World literature is literature that is read by many people all over' )
+						.collapseToStart().select();
+
+					surface.context.inspectors.once( 'opening', function ( win, opening ) {
+						opening.then( function () {
+							ve.init.target.surface.context.inspectors.windows.link.annotationInput.input.requestRequest.then( function () {
+								setTimeout( function () {
+									done(
+										seleniumUtils.getBoundingRect( [
+											surface.$element.find( '.ve-ce-linkAnnotation' )[ 0 ],
+											surface.context.inspectors.currentWindow.$element[ 0 ]
+										] )
+									);
+								}, 500 );
+							} );
+						} );
+					} );
+					ve.init.target.surface.executeCommand( 'link' );
+				}
 			);
 		} );
 	} );
