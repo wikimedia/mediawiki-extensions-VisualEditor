@@ -968,4 +968,17 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	/**
+	 * On login, if user has a VEE cookie, set their preference equal to it.
+	 * @param $user User
+	 * @return bool true
+	 */
+	public static function onUserLoggedIn( $user ) {
+		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
+		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
+			$user->setOption( 'visualeditor-editor', $cookie );
+			$user->saveSettings();
+		}
+		return true;
+	}
 }
