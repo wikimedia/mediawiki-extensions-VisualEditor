@@ -190,7 +190,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$this->dieUsage( 'Error contacting the Parsoid/RESTBase server', 'docserver' );
 			}
 
-			$result['isRedirect'] = $title->isRedirect();
+			$result['isRedirect'] = (string) $title->isRedirect();
 
 			if ( class_exists( 'FlaggablePageView' ) ) {
 				$view = FlaggablePageView::singleton();
