@@ -669,10 +669,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @return array
 	 */
 	public static function getAvailableNamespaceIds( Config $config ) {
-		$availableNamespaces = array_merge(
-			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' ),
-			$config->get( 'VisualEditorAvailableNamespaces' )
-		);
+		$availableNamespaces = $config->get( 'VisualEditorAvailableNamespaces' );
 		return array_map( function ( $namespace ) {
 			// Convert canonical namespace names to IDs
 			return is_numeric( $namespace ) ?
