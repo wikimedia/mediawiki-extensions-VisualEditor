@@ -224,7 +224,7 @@ function runTests( lang ) {
 					} );
 				}
 			);
-			runScreenshotTest( 'VisualEditor_Toolbar_List_and_indentation',
+			runScreenshotTest( 'VisualEditor_Toolbar_Lists_and_indentation',
 				// This function is converted to a string and executed in the browser
 				function () {
 					var done = arguments[ arguments.length - 1 ],
