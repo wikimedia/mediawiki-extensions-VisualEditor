@@ -69,7 +69,7 @@ function runTests( lang ) {
 								$element.css( 'outline', '3px solid #347bff' );
 								$lastHighlighted = $element;
 							},
-							runMenuTask: function ( done, tool, expanded, highlight ) {
+							runMenuTask: function ( done, tool, expanded, highlight, extraElements ) {
 								var toolGroup = tool.toolGroup;
 
 								seleniumUtils.collapseToolbar();
@@ -88,7 +88,7 @@ function runTests( lang ) {
 										seleniumUtils.getBoundingRect( [
 											toolGroup.$element[ 0 ],
 											toolGroup.$group[ 0 ]
-										] )
+										].concat( extraElements || [] ) )
 									);
 								} );
 							}
@@ -264,7 +264,9 @@ function runTests( lang ) {
 			runScreenshotTest( 'VisualEditor_More_Settings',
 				// This function is converted to a string and executed in the browser
 				function () {
-					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.advancedSettings );
+					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.advancedSettings, false, false,
+						[ ve.init.target.toolbarSaveButton.$element[ 0 ] ]
+					);
 				}
 			);
 			runScreenshotTest( 'VisualEditor_page_settings_item',
