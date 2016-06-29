@@ -219,7 +219,18 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				$view->getContext()->setRequest( $originalRequest );
 				RequestContext::getMain()->setTitle( $originalTitle );
 			}
-			$result['contentSub'] = $this->getOutput()->getSubtitle();
+
+			$context = new RequestContext;
+			$context->setTitle( $page );
+			$tempOut = new OutputPage( $context );
+			$tempOut->setArticleFlag( true );
+
+			$subpagestr = $this->getSkin()->subPageSubtitle( $tempOut );
+			if ( $subpagestr !== '' ) {
+				$subpagestr = '<span class="subpages">' . $subpagestr . '</span>';
+			}
+			$result['contentSub'] = $subpagestr . $this->getOutput()->getSubtitle();
+
 			$lang = $this->getLanguage();
 
 			if ( isset( $saveresult['edit']['newtimestamp'] ) ) {
