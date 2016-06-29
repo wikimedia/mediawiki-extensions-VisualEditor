@@ -360,6 +360,10 @@ class ApiVisualEditor extends ApiBase {
 
 				} else {
 					$content = '';
+					Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+					if ( $content !== '' ) {
+						$content = $this->parseWikitextFragment( $title, $content );
+					}
 					$baseTimestamp = wfTimestampNow();
 					$oldid = 0;
 					$restoring = false;
