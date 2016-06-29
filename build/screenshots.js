@@ -309,6 +309,24 @@ function runTests( lang ) {
 				}
 			);
 		} );
+		test.it( 'Cite button', function () {
+			runScreenshotTest( 'VisualEditor_citoid_Cite_button',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ];
+
+					ve.init.target.$element.css( 'font-size', '250%' );
+					setTimeout( function () {
+						done(
+							seleniumUtils.getBoundingRect( [
+								ve.init.target.toolbar.tools.citefromid.$element[ 0 ]
+							] )
+						);
+					} );
+				},
+				0
+			);
+		} );
 	} );
 }
 
