@@ -78,6 +78,8 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
  * Handle the transclusion being ready to use.
  */
 ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
+	// Add missing required and suggested parameters to each transclusion.
+	this.transclusionModel.addPromptedParameters();
 	this.loaded = true;
 	this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 	this.$body.append( this.bookletLayout.$element );
