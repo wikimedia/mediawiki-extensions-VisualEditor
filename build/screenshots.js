@@ -21,7 +21,8 @@ function runTests( lang ) {
 				driver.executeAsyncScript(
 					// This function is converted to a string and executed in the browser
 					function () {
-						var done = arguments[ arguments.length - 1 ];
+						var $lastHighlighted,
+							done = arguments[ arguments.length - 1 ];
 
 						window.seleniumUtils = {
 							getBoundingRect: function ( elements ) {
@@ -59,6 +60,14 @@ function runTests( lang ) {
 										group.setActive( false );
 									}
 								} );
+							},
+							highlight: function ( element ) {
+								var $element = $( element );
+								if ( $lastHighlighted ) {
+									$lastHighlighted.css( 'outline', '' );
+								}
+								$element.css( 'outline', '3px solid #347bff' );
+								$lastHighlighted = $element;
 							}
 						};
 
@@ -174,7 +183,7 @@ function runTests( lang ) {
 				}
 			);
 		} );
-		test.it( 'Tool groups (headings/text style/indentation/page settings)', function () {
+		test.it( 'Tool groups (headings/text style/indentation/insert/page settings)', function () {
 			runScreenshotTest( 'VisualEditor_Toolbar_Headings',
 				// This function is converted to a string and executed in the browser
 				function () {
@@ -202,7 +211,8 @@ function runTests( lang ) {
 
 					seleniumUtils.collapseToolbar();
 					toolGroup.setActive( true );
-					toolGroup.getExpandCollapseTool().onSelect();
+					toolGroup.expanded = true;
+					toolGroup.updateCollapsibleState();
 
 					setTimeout( function () {
 						done(
@@ -222,6 +232,126 @@ function runTests( lang ) {
 
 					seleniumUtils.collapseToolbar();
 					toolGroup.setActive( true );
+
+					setTimeout( function () {
+						done(
+							seleniumUtils.getBoundingRect( [
+								toolGroup.$element[ 0 ],
+								toolGroup.$group[ 0 ]
+							] )
+						);
+					} );
+				}
+			);
+			runScreenshotTest( 'VisualEditor_Media_Insert_Menu',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ],
+						tool = ve.init.target.toolbar.tools.media,
+						toolGroup = tool.toolGroup;
+
+					seleniumUtils.collapseToolbar();
+					toolGroup.setActive( true );
+					toolGroup.expanded = false;
+					toolGroup.updateCollapsibleState();
+
+					seleniumUtils.highlight( tool.$element[ 0 ] );
+
+					setTimeout( function () {
+						done(
+							seleniumUtils.getBoundingRect( [
+								toolGroup.$element[ 0 ],
+								toolGroup.$group[ 0 ]
+							] )
+						);
+					} );
+				}
+			);
+			runScreenshotTest( 'VisualEditor_Template_Insert_Menu',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ],
+						tool = ve.init.target.toolbar.tools.transclusion,
+						toolGroup = tool.toolGroup;
+
+					seleniumUtils.collapseToolbar();
+					toolGroup.setActive( true );
+					toolGroup.expanded = false;
+					toolGroup.updateCollapsibleState();
+
+					seleniumUtils.highlight( tool.$element[ 0 ] );
+
+					setTimeout( function () {
+						done(
+							seleniumUtils.getBoundingRect( [
+								toolGroup.$element[ 0 ],
+								toolGroup.$group[ 0 ]
+							] )
+						);
+					} );
+				}
+			);
+			runScreenshotTest( 'VisualEditor_insert_table',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ],
+						tool = ve.init.target.toolbar.tools.insertTable,
+						toolGroup = tool.toolGroup;
+
+					seleniumUtils.collapseToolbar();
+					toolGroup.setActive( true );
+					toolGroup.expanded = false;
+					toolGroup.updateCollapsibleState();
+
+					seleniumUtils.highlight( tool.$element[ 0 ] );
+
+					setTimeout( function () {
+						done(
+							seleniumUtils.getBoundingRect( [
+								toolGroup.$element[ 0 ],
+								toolGroup.$group[ 0 ]
+							] )
+						);
+					} );
+				}
+			);
+			runScreenshotTest( 'VisualEditor_Formula_Insert_Menu',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ],
+						tool = ve.init.target.toolbar.tools.math,
+						toolGroup = tool.toolGroup;
+
+					seleniumUtils.collapseToolbar();
+					toolGroup.setActive( true );
+					toolGroup.expanded = true;
+					toolGroup.updateCollapsibleState();
+
+					seleniumUtils.highlight( tool.$element[ 0 ] );
+
+					setTimeout( function () {
+						done(
+							seleniumUtils.getBoundingRect( [
+								toolGroup.$element[ 0 ],
+								toolGroup.$group[ 0 ]
+							] )
+						);
+					} );
+				}
+			);
+			runScreenshotTest( 'VisualEditor_References_List_Insert_Menu',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var done = arguments[ arguments.length - 1 ],
+						tool = ve.init.target.toolbar.tools.referencesList,
+						toolGroup = tool.toolGroup;
+
+					seleniumUtils.collapseToolbar();
+					toolGroup.setActive( true );
+					toolGroup.expanded = true;
+					toolGroup.updateCollapsibleState();
+
+					seleniumUtils.highlight( tool.$element[ 0 ] );
 
 					setTimeout( function () {
 						done(
