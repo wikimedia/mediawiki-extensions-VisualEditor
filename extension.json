@@ -1112,6 +1112,7 @@
 		},
 		"ext.visualEditor.mwcore": {
 			"scripts": [
+				"modules/ve-mw/ve.MWutils.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWExtensionNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWTableNode.js",

@@ -42,7 +42,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 		type: this.name,
 		attributes: {
 			hrefPrefix: targetData.hrefPrefix,
-			title: ve.safeDecodeURIComponent( targetData.title ).replace( /_/g, ' ' ),
+			title: ve.decodeURIComponentIntoArticleTitle( targetData.title ),
 			normalizedTitle: this.normalizeTitle( targetData.title ),
 			lookupTitle: this.getLookupTitle( targetData.title ),
 			origTitle: targetData.title
@@ -138,7 +138,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 	var href,
 		title = dataElement.attributes.title,
 		origTitle = dataElement.attributes.origTitle;
-	if ( origTitle !== undefined && ve.safeDecodeURIComponent( origTitle ).replace( /_/g, ' ' ) === title ) {
+	if ( origTitle !== undefined && ve.decodeURIComponentIntoArticleTitle( origTitle ) === title ) {
 		// Restore href from origTitle
 		href = origTitle;
 		// Only use hrefPrefix if restoring from origTitle
