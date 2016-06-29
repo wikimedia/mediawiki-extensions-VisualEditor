@@ -373,7 +373,9 @@ function runTests( lang ) {
 
 					surface.context.inspectors.once( 'opening', function ( win, opening ) {
 						opening.then( function () {
-							ve.init.target.surface.context.inspectors.windows.link.annotationInput.input.requestRequest.then( function () {
+							surface.context.inspectors.windows.link.annotationInput.input.requestRequest.then( function () {
+								// Wait a while for the images to load using a time guesstimate - as they're background
+								// images it's quite tricky to get load events.
 								setTimeout( function () {
 									done(
 										seleniumUtils.getBoundingRect( [
@@ -381,7 +383,7 @@ function runTests( lang ) {
 											surface.context.inspectors.currentWindow.$element[ 0 ]
 										] )
 									);
-								}, 500 );
+								}, 2500 );
 							} );
 						} );
 					} );
