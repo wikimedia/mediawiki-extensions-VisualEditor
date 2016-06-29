@@ -309,8 +309,34 @@ function runTests( lang ) {
 							} );
 							win.input.setValue( 'E = mc^2' ).moveCursorToEnd();
 						} );
-					}, 1000 );
+					} );
 					surface.executeCommand( 'mathDialog' );
+					win = surface.dialogs.currentWindow;
+				}
+			);
+		} );
+		test.it( 'Reference list dialog', function () {
+			runScreenshotTest( 'VisualEditor_references_list',
+				// This function is converted to a string and executed in the browser
+				function () {
+					var win,
+						done = arguments[ arguments.length - 1 ],
+						surface = ve.init.target.surface;
+
+					surface.dialogs.once( 'opening', function ( win, opening ) {
+						opening.then( function () {
+							setTimeout( function () {
+								done(
+									seleniumUtils.getBoundingRect( [
+										win.$frame[ 0 ]
+									]
+								) );
+							}, 500 );
+						} );
+					} );
+					surface.executeCommand( 'referencesList' );
+					// The first command inserts a reference list instantly, so run again to open the window
+					surface.executeCommand( 'referencesList' );
 					win = surface.dialogs.currentWindow;
 				}
 			);
