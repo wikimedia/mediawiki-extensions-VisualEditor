@@ -783,7 +783,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 			);
 		}
 		this.$originalContent.find( '.redirectMsg' ).remove();
-		this.$originalContent.append( $( '<div>' )
+		$( '<div>' )
 			// Bit of a hack: Make sure any redirect note is styled
 			.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
 
@@ -799,7 +799,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 				windowAction.open( 'meta', { page: 'settings' } );
 				e.preventDefault();
 			} )
-		);
+			.insertAfter( $( '.mw-jump' ) );
 	}
 };
 
@@ -913,7 +913,8 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 			categoriesHtml,
 			displayTitle,
 			lastModified,
-			contentSub
+			contentSub,
+			!!isRedirect
 		);
 
 		if ( newid !== undefined ) {
@@ -1225,7 +1226,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	$( '#ca-view' ).addClass( 'selected' );
 
 	// Remove any VE-added redirectMsg
-	$( '.ve-redirect-header' ).remove();
+	$( '.mw-body-content > .ve-redirect-header' ).remove();
 
 	mw.hook( 've.deactivate' ).fire();
 	this.emit( 'restorePage' );
@@ -1291,9 +1292,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
  * @param {Object} lastModified Object containing user-formatted date
  *  and time strings, or undefined if we made no change.
  * @param {string} contentSub HTML to show as the content subtitle
+ * @param {boolean} isRedirect Whether the page is a redirect or not.
  */
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, displayTitle, lastModified, contentSub
+	html, categoriesHtml, displayTitle, lastModified, contentSub, isRedirect
 ) {
 	var $content = $( $.parseHTML( html ) ),
 		$veSectionLinks;
@@ -1313,9 +1315,8 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 			lastModified.time
 		) );
 	}
-
-	// Remove any VE-added redirectMsg
-	$( '.redirectMsg' ).remove();
+	// Remove any VE-added ve-redirect-header
+	$( '.redirectMsg' ).removeClass( 've-redirect-header' );
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	if (
@@ -1337,6 +1338,15 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	}
 	$( '#catlinks' ).replaceWith( categoriesHtml );
 	$( '#contentSub' ).html( contentSub );
+
+	if ( isRedirect ) {
+		$( '#contentSub' ).append(
+			$( '<span>' )
+				.text( mw.msg( 'redirectpagesub' ) )
+				.attr( 'id', 'redirectsub' ),
+			$( '<br>' )
+		);
+	}
 
 	// Bit of a hack: Make sure any redirect note is styled
 	$( '.redirectMsg' )
