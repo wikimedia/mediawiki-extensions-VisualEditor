@@ -225,6 +225,12 @@ function runTests( lang ) {
 					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.bullet );
 				}
 			);
+			runScreenshotTest( 'VisualEditor_Insert_Menu',
+				// This function is converted to a string and executed in the browser
+				function () {
+					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.media, true );
+				}
+			);
 			runScreenshotTest( 'VisualEditor_Media_Insert_Menu',
 				// This function is converted to a string and executed in the browser
 				function () {
