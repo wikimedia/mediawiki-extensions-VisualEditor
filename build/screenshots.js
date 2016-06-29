@@ -261,6 +261,18 @@ function runTests( lang ) {
 					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.advancedSettings );
 				}
 			);
+			runScreenshotTest( 'VisualEditor_page_settings_item',
+				// This function is converted to a string and executed in the browser
+				function () {
+					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.settings, false, true );
+				}
+			);
+			runScreenshotTest( 'VisualEditor_category_item',
+				// This function is converted to a string and executed in the browser
+				function () {
+					seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.categories, false, true );
+				}
+			);
 		} );
 		test.it( 'Save dialog', function () {
 			runScreenshotTest( 'VisualEditor_save_dialog',
