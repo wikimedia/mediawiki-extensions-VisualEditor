@@ -16,7 +16,7 @@ function runTests( lang ) {
 			driver.manage().timeouts().setScriptTimeout( 20000 );
 			driver.manage().window().setSize( 1200, 1000 );
 
-			driver.get( 'http://en.wikipedia.beta.wmflabs.org/wiki/PageDoesNotExist?veaction=edit&uselang=' + lang );
+			driver.get( 'https://en.wikipedia.org/wiki/PageDoesNotExist?veaction=edit&uselang=' + lang );
 			driver.wait(
 				driver.executeAsyncScript(
 					// This function is converted to a string and executed in the browser
