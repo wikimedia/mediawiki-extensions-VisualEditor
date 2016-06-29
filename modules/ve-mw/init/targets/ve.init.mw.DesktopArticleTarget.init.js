@@ -150,14 +150,6 @@
 							if ( onlyTabIsVE ) {
 								$( '#ca-edit' ).removeClass( 'selected' );
 							}
-						},
-						deactivate: function () {
-							if (
-								userPrefPreferShow &&
-								( !conf.singleEditTab || tabPreference === 'multi-tab' )
-							) {
-								init.setupSectionLinks();
-							}
 						}
 					} );
 					target.setContainer( $( '#content' ) );
