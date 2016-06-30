@@ -700,7 +700,12 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/mwTable' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		]
+		],
+		modify: function ( model ) {
+			model.data.data[ 0 ].attributes.wikitable = false;
+			model.data.data[ 0 ].attributes.sortable = false;
+		},
+		normalizedBody: '<table><tr><td>Foo</td></tr></table>'
 	},
 	'mw:Transclusion (block level)': {
 		body: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
