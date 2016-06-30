@@ -171,22 +171,9 @@
 	}
 
 	function activatePageTarget( modified ) {
-		var key;
 		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
 		if ( !active ) {
-			if (
-				mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-				tabPreference === 'remember-last'
-			) {
-				key = pageExists ? 'edit' : 'create';
-				if ( $( '#ca-view-foreign' ).length ) {
-					key += '-local';
-				}
-
-				$( '#ca-edit a' ).text( mw.msg( key ) );
-			}
-
 			if ( uri.query.action !== 'edit' && uri.query.veaction !== 'edit' ) {
 				if ( history.pushState ) {
 					// Replace the current state with one that is tagged as ours, to prevent the
@@ -269,8 +256,27 @@
 	}
 
 	function setEditorPreference( editor ) {
+		var key = pageExists ? 'edit' : 'create',
+			sectionKey = 'editsection';
+
 		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
 			throw new Error( 'setEditorPreference called with invalid option: ', editor );
+		}
+
+		if (
+			mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+			tabPreference === 'remember-last'
+		) {
+			if ( $( '#ca-view-foreign' ).length ) {
+				key += 'localdescription';
+			}
+			if ( editor === 'wikitext' ) {
+				key += 'source';
+				sectionKey += 'source';
+			}
+
+			$( '#ca-edit a' ).text( mw.msg( tabMessages[ key ] || 'edit' ) );
+			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] || 'editsection' ) );
 		}
 
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
