@@ -1097,16 +1097,17 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.openSaveDialog = function () {
-	var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
-
-	// Open the dialog
-	windowAction.open( 'mwSave', {
-		target: this,
-		editSummary: this.initialEditSummary,
-		checkboxFields: this.checkboxFields,
-		checkboxesByName: this.checkboxesByName
-	} );
+ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
+	return ve.extendObject(
+		{},
+		// Parent method
+		ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.call( this ),
+		{
+			editSummary: this.initialEditSummary,
+			checkboxFields: this.checkboxFields,
+			checkboxesByName: this.checkboxesByName
+		}
+	);
 };
 
 /**
