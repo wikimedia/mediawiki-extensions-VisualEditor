@@ -1190,6 +1190,8 @@
 				"colon-separator",
 				"hidetoc",
 				"ooui-dialog-process-continue",
+				"publishchanges",
+				"publishpage",
 				"savearticle",
 				"savechanges",
 				"showtoc",

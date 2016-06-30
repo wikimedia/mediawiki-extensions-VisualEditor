@@ -320,6 +320,7 @@
 	"visualeditor-savedialog-identify-user": "You are now logged in as [[User:$1|$1]]. Your edit will be associated with this account if you save this edit.",
 	"visualeditor-savedialog-label-create": "Create page",
 	"visualeditor-savedialog-label-error": "Error",
+	"visualeditor-savedialog-label-publish-short": "Publish",
 	"visualeditor-savedialog-label-report": "Report problem",
 	"visualeditor-savedialog-label-resolve-conflict": "Resolve conflict",
 	"visualeditor-savedialog-label-resume-editing": "Resume editing",

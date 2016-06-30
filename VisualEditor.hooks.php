@@ -54,6 +54,11 @@ class VisualEditorHooks {
 			$toolbarScrollOffset = $skinsToolbarScrollOffset[$skinName];
 		}
 		$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
+
+		$output->addJsConfigVars(
+			'wgEditButtonPublishNotSave',
+			$veConfig->get( 'EditButtonPublishNotSave' )
+		);
 		return true;
 	}
 

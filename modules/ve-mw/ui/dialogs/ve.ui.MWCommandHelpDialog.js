@@ -44,7 +44,7 @@ ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 	if ( saveShortcut !== '-' && saveShortcut !== '' ) {
 		ve.ui.commandHelpRegistry.register( 'other', 'save', {
 			shortcuts: [ accessKeyPrefix + saveShortcut.toUpperCase() ],
-			label: OO.ui.deferMsg( 'savechanges' ),
+			label: function () { return ve.init.target.getSaveButtonLabel(); },
 			demote: true
 		} );
 	}
