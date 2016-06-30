@@ -673,12 +673,12 @@ class ApiVisualEditor extends ApiBase {
 			// Note: existing numeric keys might exist, and so array_merge cannot be used
 			(array) $config->get( 'VisualEditorAvailableNamespaces' ) +
 			(array) ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
-		return array_unique( array_map( function ( $namespace ) {
+		return array_values( array_unique( array_map( function ( $namespace ) {
 			// Convert canonical namespace names to IDs
 			return is_numeric( $namespace ) ?
 				$namespace :
 				MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
-		}, array_keys( array_filter( $availableNamespaces ) ) ) );
+		}, array_keys( array_filter( $availableNamespaces ) ) ) ) );
 	}
 
 	/**
