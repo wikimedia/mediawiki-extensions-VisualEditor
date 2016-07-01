@@ -1,9 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"AlnashPiyash2"
+			"AlnashPiyash2",
+			"Kaganer"
 		]
 	},
+	"tooltip-ca-ve-edit": "Та бамез тупатъяно",
+	"visualeditor-ca-createsource": "Кылдытоно инъет текстэз сямен",
 	"visualeditor-ca-editsource": "Вики-текстэз тупатыны",
-	"visualeditor-ca-editsource-section": "Вики-текстэз тупатоно"
+	"visualeditor-ca-editsource-section": "Вики-текстэз тупатоно",
+	"visualeditor-dialog-meta-languages-label": "Кылъёс",
+	"visualeditor-dialog-meta-languages-section": "Кылъёс",
+	"visualeditor-languages-tool": "Кылъёс",
+	"visualeditor-savedialog-label-save": "Бамез гожтоно",
+	"visualeditor-toolbar-savedialog": "Бамез гожтоно"
 }

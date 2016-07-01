@@ -31,7 +31,8 @@
 			"Jackie",
 			"Perevod16",
 			"Лилиә",
-			"Sealle"
+			"Sealle",
+			"Mailman"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -94,7 +95,7 @@
 	"visualeditor-dialog-media-info-licenseshortname": "Лицензия",
 	"visualeditor-dialog-media-info-meta-artist": "Художник: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Подробнее",
-	"visualeditor-dialog-media-info-readmore": "Читать ещё",
+	"visualeditor-dialog-media-info-readmore": "Подробнее",
 	"visualeditor-dialog-media-info-uploaded": "Загружено: $1",
 	"visualeditor-dialog-media-noresults": "Ничего не найдено.",
 	"visualeditor-dialog-media-originaldimensions": "Оригинальные размеры",

@@ -8,7 +8,8 @@
 			"PeterisP",
 			"Edgars2007",
 			"Jdforrester",
-			"Silraks"
+			"Silraks",
+			"Zuiks"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "Veicamā darbība",
@@ -183,7 +184,7 @@
 	"visualeditor-preference-tabs-remember-last": "Atcerēties manu pēdējo redaktoru",
 	"visualeditor-savedialog-error-badtoken": "Mēs nevarējām apstrādāt jūsu labojumu, jo jūsu pārlūka sesija ir izbeigusies.",
 	"visualeditor-savedialog-identify-anon": "Vai jūs gribat saglabāt šo lapu kā anonīms lietotājs? Šīs lapas labojumu sarakstā tiks saglabāta jūsu IP adrese.",
-	"visualeditor-savedialog-identify-user": "Jūs esat ielogojies kā [[User:$1|$1]]. Ja saglabāsiet, šis labojums tiks saistīts ar šo lietotāja kontu.",
+	"visualeditor-savedialog-identify-user": "Jūs esat ielogojies kā [[User:$1|$1]]. Ja saglabāsiet, šis labojums tiks saistīts ar šo dalībnieka kontu.",
 	"visualeditor-savedialog-label-create": "Izveidot lapu",
 	"visualeditor-savedialog-label-error": "Kļūda",
 	"visualeditor-savedialog-label-report": "Ziņot par problēmu",
