@@ -282,26 +282,23 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 			attributes: { content: newDefaultSortKey }
 		};
 
-	data = data || {};
-	if ( data.action !== 'apply' ) {
-		return;
-	}
-
-	// Alter the default sort key iff it's been touched & is actually different
-	if ( this.defaultSortKeyTouched ) {
-		if ( newDefaultSortKey === '' ) {
-			if ( currentDefaultSortKeyItem ) {
-				currentDefaultSortKeyItem.remove();
-			}
-		} else {
-			if ( !currentDefaultSortKeyItem ) {
-				this.metaList.insertMeta( newDefaultSortKeyData );
-			} else if ( currentDefaultSortKeyItem.getAttribute( 'content' ) !== newDefaultSortKey ) {
-				currentDefaultSortKeyItem.replaceWith(
-					ve.extendObject( true, {},
-						currentDefaultSortKeyItem.getElement(),
-						newDefaultSortKeyData
-				) );
+	if ( data && data.action === 'apply' ) {
+		// Alter the default sort key iff it's been touched & is actually different
+		if ( this.defaultSortKeyTouched ) {
+			if ( newDefaultSortKey === '' ) {
+				if ( currentDefaultSortKeyItem ) {
+					currentDefaultSortKeyItem.remove();
+				}
+			} else {
+				if ( !currentDefaultSortKeyItem ) {
+					this.metaList.insertMeta( newDefaultSortKeyData );
+				} else if ( currentDefaultSortKeyItem.getAttribute( 'content' ) !== newDefaultSortKey ) {
+					currentDefaultSortKeyItem.replaceWith(
+						ve.extendObject( true, {},
+							currentDefaultSortKeyItem.getElement(),
+							newDefaultSortKeyData
+					) );
+				}
 			}
 		}
 	}
