@@ -16,5 +16,9 @@
 	"visualeditor-feedback-link": "Project:VisualEditor/Komente",
 	"visualeditor-feedback-tool": "Lër një koment",
 	"visualeditor-help-label": "Lexoni udhëzuesin e përdoruesit",
-	"visualeditor-help-title": "Lexo guidën e përdoruesit për të mësuar se si të përdorni redaktorin"
+	"visualeditor-help-title": "Lexo guidën e përdoruesit për të mësuar se si të përdorni redaktorin",
+	"visualeditor-welcomedialog-action": "Fillo redaktimin",
+	"visualeditor-welcomedialog-switch": "Kaloni në editorin burimor",
+	"visualeditor-welcomedialog-switch-ve": "Kaloni në editorin vizual",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Mirë se vini}} në $2"
 }
