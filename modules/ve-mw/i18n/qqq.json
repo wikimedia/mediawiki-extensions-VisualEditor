@@ -292,7 +292,7 @@
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay": "Label for the packed-overlay option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "Label for the traditional option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-field-label": "Label for the mode field of the gallery dialog",
-	"visualeditor-mwgallerydialog-remove-button-label": "Label for the remove button of the gallery dialog\n{{Identical|Remove}}",
+	"visualeditor-mwgallerydialog-remove-button-label": "Label for the remove image button of the gallery dialog\n{{Identical|Remove}}",
 	"visualeditor-mwgallerydialog-perrow-field-label": "Label for the perrow field of the gallery dialog",
 	"visualeditor-mwgallerydialog-search-button-label": "Label for the show search panel button of the gallery dialog",
 	"visualeditor-mwgallerydialog-styles-field-label": "Label for the styles field of the gallery dialog",
