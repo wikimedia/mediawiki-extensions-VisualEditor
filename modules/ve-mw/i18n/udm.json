@@ -12,6 +12,9 @@
 	"visualeditor-dialog-meta-languages-label": "Кылъёс",
 	"visualeditor-dialog-meta-languages-section": "Кылъёс",
 	"visualeditor-languages-tool": "Кылъёс",
+	"visualeditor-preference-core-label": "Визуальной тупатон",
+	"visualeditor-savedialog-label-resume-editing": "Тупатъянэз азьланьтоно",
 	"visualeditor-savedialog-label-save": "Бамез гожтоно",
-	"visualeditor-toolbar-savedialog": "Бамез гожтоно"
+	"visualeditor-toolbar-savedialog": "Бамез гожтоно",
+	"visualeditor-viewpage-savewarning-keep": "Тупатъянэз азьланьтоно"
 }
