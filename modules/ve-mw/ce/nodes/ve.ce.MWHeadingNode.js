@@ -46,7 +46,7 @@ ve.ce.MWHeadingNode.prototype.onTeardown = function () {
 };
 
 ve.ce.MWHeadingNode.prototype.rebuildToc = function () {
-	if ( this.surface.mwTocWidget ) {
+	if ( this.surface && this.surface.mwTocWidget ) {
 		this.surface.mwTocWidget.rebuild();
 	}
 };
