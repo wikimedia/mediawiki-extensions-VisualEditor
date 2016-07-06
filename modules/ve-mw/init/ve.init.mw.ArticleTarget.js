@@ -1637,15 +1637,22 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 	offset = surfaceModel.getDocument().data.getNearestContentOffset(
 		offsetNode.getModel().getOffset(), 1
 	);
-	// onDocumentFocus is debounced, so wait for that to happen before setting
-	// the model selection, otherwise it will get reset
-	surfaceView.once( 'focus', function () {
+
+	function scrollAndSetSelection() {
 		surfaceModel.setLinearSelection( new ve.Range( offset ) );
 		// Focussing the document triggers showSelection which calls scrollIntoView
 		// which uses a jQuery animation, so make sure this is aborted.
 		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[ 0 ] ) ).stop( true );
 		target.scrollToHeading( headingNode );
-	} );
+	}
+
+	if ( surfaceView.isFocused() ) {
+		scrollAndSetSelection();
+	} else {
+		// onDocumentFocus is debounced, so wait for that to happen before setting
+		// the model selection, otherwise it will get reset
+		surfaceView.once( 'focus', scrollAndSetSelection );
+	}
 };
 
 /**
