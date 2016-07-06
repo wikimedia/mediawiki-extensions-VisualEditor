@@ -707,7 +707,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
-	var surfaceReadyTime = ve.now(),
+	var surface = this.getSurface(),
+		surfaceReadyTime = ve.now(),
 		target = this;
 
 	if ( !this.activating ) {
@@ -720,18 +721,19 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
-		this.getSurface().mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
+		surface.mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
+		surface.$element.before( surface.mwTocWidget.$element );
 	}
 
 	// Track how long it takes for the first transaction to happen
-	this.surface.getModel().getDocument().once( 'transact', function () {
+	surface.getModel().getDocument().once( 'transact', function () {
 		ve.track( 'mwtiming.behavior.firstTransaction', {
 			duration: ve.now() - surfaceReadyTime,
 			targetName: target.constructor.static.trackingName
 		} );
 	} );
 
-	this.getSurface().getModel().getMetaList().connect( this, {
+	surface.getModel().getMetaList().connect( this, {
 		insert: 'onMetaItemInserted',
 		remove: 'onMetaItemRemoved'
 	} );
@@ -1022,9 +1024,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 	// Update UI
 	promises.push( this.teardownToolbar() );
 	this.restoreDocumentTitle();
-	if ( this.getSurface().mwTocWidget ) {
-		this.getSurface().mwTocWidget.teardown();
-	}
 
 	if ( this.saveDialog ) {
 		if ( this.saveDialog.isOpened() ) {
@@ -1036,9 +1035,14 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 	}
 
 	return $.when.apply( null, promises ).then( function () {
+		var surface;
 		// Destroy surface
 		while ( target.surfaces.length ) {
-			target.surfaces.pop().destroy();
+			surface = target.surfaces.pop();
+			surface.destroy();
+			if ( surface.mwTocWidget ) {
+				surface.mwTocWidget.$element.remove();
+			}
 		}
 		target.active = false;
 	} );

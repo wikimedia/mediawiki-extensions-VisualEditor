@@ -16,7 +16,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
-	var widget = this;
 
 	// Parent constructor
 	OO.ui.Widget.call( this, config );
@@ -26,46 +25,24 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	this.doc = surface.getModel().getDocument();
 	this.metaList = surface.getModel().metaList;
 	// Topic level 0 lives inside of a toc item
-	this.topics = new ve.ui.MWTocItemWidget();
-	// Place for a cloned previous toc to live while rebuilding.
-	this.$tempTopics = $( '<ul>' );
-	// Section keyed item map
-	this.items = {};
+	this.rootLength = 0;
 	this.initialized = false;
 	// Page settings cache
 	this.mwTOCForce = false;
 	this.mwTOCDisable = false;
 
-	// TODO: fix i18n
-	this.tocToggle = {
-		hideMsg: ve.msg( 'hidetoc' ),
-		showMsg: ve.msg( 'showtoc' ),
-		$link: $( '<a class="internal" id="togglelink"></a>' ).text( ve.msg( 'hidetoc' ) ),
-		open: true
-	};
+	this.$tocList = $( '<ul>' );
 	this.$element.addClass( 'toc ve-ui-mwTocWidget' ).append(
-		$( '<div>' ).attr( 'id', 'toctitle' ).append(
-			$( '<h2>' ).text( ve.msg( 'toc' ) ),
-			$( '<span>' ).addClass( 'toctoggle' ).append( this.tocToggle.$link )
+		$( '<div>' ).addClass( 'toctitle' ).append(
+			$( '<h2>' ).text( ve.msg( 'toc' ) )
 		),
-		this.topics.$group, this.$tempTopics
+		this.$tocList
 	);
-	// Place in bodyContent element, which is close to where the TOC normally lives in the dom
-	// Integration ignores hiding the TOC widget, though continues to hide the real page TOC
-	$( '#bodyContent' ).append( this.$element );
 
-	this.tocToggle.$link.on( 'click', function () {
-		if ( widget.tocToggle.open ) {
-			widget.tocToggle.$link.text( widget.tocToggle.showMsg );
-			widget.tocToggle.open = false;
-		} else {
-			widget.tocToggle.$link.text( widget.tocToggle.hideMsg );
-			widget.tocToggle.open = true;
-		}
-		// FIXME: We should really use CSS here
-		widget.topics.$group.add( widget.$tempTopics ).slideToggle();
-	} );
+	// Setup toggle link
+	mw.hook( 'wikipage.content' ).fire( this.$element );
 
+	// Events
 	this.metaList.connect( this, {
 		insert: 'onMetaListInsert',
 		remove: 'onMetaListRemove'
@@ -93,7 +70,7 @@ ve.ui.MWTocWidget.prototype.onMetaListInsert = function ( metaItem ) {
 		// hide
 		this.mwTOCDisable = true;
 	}
-	this.hideOrShow();
+	this.updateVisibility();
 };
 
 /**
@@ -107,7 +84,7 @@ ve.ui.MWTocWidget.prototype.onMetaListRemove = function ( metaItem ) {
 	} else if ( metaItem instanceof ve.dm.MWTOCDisableMetaItem ) {
 		this.mwTOCDisable = false;
 	}
-	this.hideOrShow();
+	this.updateVisibility();
 };
 
 /**
@@ -127,160 +104,109 @@ ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
 				this.mwTOCDisable = true;
 			}
 		}
-		this.hideOrShow();
+		this.updateVisibility();
 	}
 };
 
 /**
  * Hides or shows the TOC based on page and default settings
  */
-ve.ui.MWTocWidget.prototype.hideOrShow = function () {
+ve.ui.MWTocWidget.prototype.updateVisibility = function () {
 	// In MediaWiki if __FORCETOC__ is anywhere TOC is always displayed
 	// ... Even if there is a __NOTOC__ in the article
-	this.toggle( !this.mwTOCDisable && ( this.mwTOCForce || this.topics.items.length >= 3 ) );
+	this.toggle( !this.mwTOCDisable && ( this.mwTOCForce || this.rootLength >= 3 ) );
 };
 
 /**
  * Rebuild TOC on ve.ce.MWHeadingNode teardown or setup
+ *
  * Rebuilds on both teardown and setup of a node, so rebuild is debounced
  */
 ve.ui.MWTocWidget.prototype.rebuild = ve.debounce( function () {
-	var widget = this;
-	// Only rebuild when initialized
-	if ( this.surface.mwTocWidget.initialized ) {
-		this.$tempTopics.append( this.topics.$group.children().clone() );
-		this.teardownItems();
-		// Build after transactions
-		setTimeout( function () {
-			widget.build();
-			widget.$tempTopics.empty();
-		}, 0 );
+	if ( this.initialized ) {
+		// Wait for transactions to process
+		this.build();
 	}
-}, 0 );
+} );
 
 /**
- * Teardown all of the TOC items
+ * Update the text content of a specific heading node
+ *
+ * @param {ve.ce.MWHeadingNode} viewNode Heading node
  */
-ve.ui.MWTocWidget.prototype.teardownItems = function () {
-	var item;
-	for ( item in this.items ) {
-		this.items[ item ].remove();
-		delete this.items[ item ];
+ve.ui.MWTocWidget.prototype.updateNode = function ( viewNode ) {
+	if ( viewNode.$tocText ) {
+		viewNode.$tocText.text( viewNode.$element.text() );
 	}
-	this.items = {};
-};
-
-/**
- * Teardown the widget and remove it from the dom
- */
-ve.ui.MWTocWidget.prototype.teardown = function () {
-	this.teardownItems();
-	this.$element.remove();
 };
 
 /**
  * Build TOC from mwHeading dm nodes
+ *
+ * Based on generateTOC in Linker.php
  */
 ve.ui.MWTocWidget.prototype.build = function () {
-	var nodes = this.doc.selectNodes( new ve.Range( 0, this.doc.getDocumentNode().getLength() ), 'leaves' ),
-		i = 0,
-		headingLevel = 0,
-		previousHeadingNode = null,
-		previousHeadingLevel = 0,
-		parentHeadingLevel = 0,
-		levelSkipped = false,
-		tocNumber = 0,
-		tocLevel = 0,
-		tocSection = 0,
-		tocIndex = 0,
-		sectionPrefix = [],
-		parentSectionArray,
-		key,
-		parent,
-		config,
-		headingOuterRange,
-		ceNode;
-	for ( ; i < nodes.length; i++ ) {
-		if ( nodes[ i ].node.parent === previousHeadingNode ) {
-			// Duplicate heading
-			continue;
-		}
-		if ( nodes[ i ].node.parent.getType() === 'mwHeading' ) {
-			tocIndex++;
-			headingLevel = nodes[ i ].node.parent.getAttribute( 'level' );
-			// MW TOC Generation
-			// The first heading will always be be a zero level topic, even heading levels > 2
-			// If heading level is 1 then it is definitely a zero level topic
-			// If heading level is 2 then it is a zero level topic, unless a child of a 1 level
-			// If heading went up and skipped a number, the following headings of the skipped number are in the same level
-			if ( this.topics.items.length === 0 || headingLevel === 1 || ( headingLevel === 2 && parentHeadingLevel !== 1 ) ) {
-				tocSection++;
-				sectionPrefix = [ tocSection ];
-				tocLevel = 0;
-				// reset t
-				levelSkipped = false;
-				parent = this.topics;
-				parentHeadingLevel = headingLevel;
-			} else {
-				// If previously skipped a level, place this heading in the same level as the previous higher one
-				if ( headingLevel === previousHeadingLevel || headingLevel < previousHeadingLevel && levelSkipped ) {
-					tocNumber++;
-					sectionPrefix.pop();
-					sectionPrefix.push( tocNumber );
-					// Only remove the flag if the heading level has dropped but we skipped to a higher number previously
-					if ( headingLevel < previousHeadingLevel ) {
-						levelSkipped = false;
-					}
-				} else {
-					tocNumber = 1;
-					// Heading not the same as before
-					if ( headingLevel > previousHeadingLevel ) {
-						// Did we skip a level? Flag in case we drop down a number
-						if ( headingLevel - previousHeadingLevel > 1 ) {
-							levelSkipped = true;
-						}
-						tocLevel++;
-						sectionPrefix.push( tocNumber );
-					// Step to lower level unless we are at 1
-					} else if ( headingLevel < previousHeadingLevel && tocLevel !== 1 ) {
-						tocLevel--;
-						sectionPrefix.pop();
-						tocNumber = sectionPrefix[ sectionPrefix.length - 1 ] + 1;
-						sectionPrefix.pop();
-						sectionPrefix.push( tocNumber );
-					}
-				}
-			}
-			// Determine parent
-			parentSectionArray = sectionPrefix.slice( 0 );
-			parentSectionArray.pop();
-			if ( parentSectionArray.length > 0 ) {
-				key = parentSectionArray.join( '.' );
-				parent = this.items[ key ];
-			} else {
-				// Topic level is zero
-				parent = this.topics;
-			}
-			// TODO: Cleanup config generation, merge local vars into config object
-			// Get CE node for the heading
-			headingOuterRange = nodes[ i ].nodeOuterRange;
-			ceNode = this.surface.getView().getDocument().getBranchNodeFromOffset( headingOuterRange.end );
-			config = {
-				node: ceNode,
-				tocIndex: tocIndex,
-				parent: parent,
-				tocLevel: tocLevel,
-				tocSection: tocSection,
-				sectionPrefix: sectionPrefix.join( '.' ),
-				insertIndex: sectionPrefix[ sectionPrefix.length - 1 ]
-			};
-			// Add item
-			this.items[ sectionPrefix.join( '.' ) ] = new ve.ui.MWTocItemWidget( config );
-			config.parent.addItems( [ this.items[ sectionPrefix.join( '.' ) ] ], config.insertIndex );
-			previousHeadingLevel = headingLevel;
-			previousHeadingNode = nodes[ i ].node.parent;
-		}
+	var i, l, level, levelDiff, tocNumber, modelNode, viewNode,
+		$list, $text, $item, $link,
+		$newTocList = $( '<ul>' ),
+		nodes = this.doc.getNodesByType( 'mwHeading', true ),
+		documentView = this.surface.getView().getDocument(),
+		lastLevel = 0,
+		stack = [];
+
+	function getItemIndex( $list, n ) {
+		return $list.children( 'li' ).length + ( n === stack.length - 1 ? 1 : 0 );
 	}
+
+	function linkClickHandler( heading ) {
+		ve.init.target.goToHeading( heading );
+		return false;
+	}
+
+	for ( i = 0, l = nodes.length; i < l; i++ ) {
+		modelNode = nodes[ i ];
+		level = modelNode.getAttribute( 'level' );
+
+		if ( level > lastLevel ) {
+			if ( stack.length ) {
+				$list = $( '<ul>' );
+				stack[ stack.length - 1 ].children().last().append( $list );
+			} else {
+				$list = $newTocList;
+			}
+			stack.push( $list );
+		} else if ( level < lastLevel ) {
+			levelDiff = lastLevel - level;
+			while ( levelDiff > 0 && stack.length > 1 ) {
+				stack.pop();
+				levelDiff--;
+			}
+		}
+
+		tocNumber = stack.map( getItemIndex ).join( '.' );
+		viewNode = documentView.getBranchNodeFromOffset( modelNode.getRange().start );
+		$item = $( '<li>' ).addClass( 'toclevel-' + stack.length ).addClass( 'tocsection-' + ( i + 1 ) );
+		$link = $( '<a href="#">' ).append( '<span class="tocnumber">' + tocNumber + '</span> ' );
+		$text = $( '<span>' ).addClass( 'toctext' );
+
+		viewNode.$tocText = $text;
+		this.updateNode( viewNode );
+
+		stack[ stack.length - 1 ].append( $item.append( $link.append( $text ) ) );
+		$link.on( 'click', linkClickHandler.bind( this, viewNode ) );
+
+		lastLevel = level;
+	}
+
+	this.$tocList.replaceWith( $newTocList );
+	this.$tocList = $newTocList;
+
+	if ( nodes.length ) {
+		this.rootLength = stack[ 0 ].children().length;
+	} else {
+		this.rootLength = 0;
+	}
+
 	this.initialized = true;
-	this.hideOrShow();
+	this.updateVisibility();
 };
