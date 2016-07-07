@@ -221,7 +221,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			}
 
 			$context = new RequestContext;
-			$context->setTitle( $page );
+			$context->setTitle( $title );
 			$tempOut = new OutputPage( $context );
 			$tempOut->setArticleFlag( true );
 
