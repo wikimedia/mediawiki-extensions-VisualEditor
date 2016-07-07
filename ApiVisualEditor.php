@@ -8,8 +8,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-use MediaWiki\Logger\LoggerFactory;
-
 class ApiVisualEditor extends ApiBase {
 	// These are safe even if VE is not enabled on the page.
 	// This is intended for other VE interfaces, such as Flow's.
@@ -144,8 +142,7 @@ class ApiVisualEditor extends ApiBase {
 
 		$status = ApiStashEdit::parseAndStash( $page, $content, $this->getUser(), '' );
 		if ( $status === ApiStashEdit::ERROR_NONE ) {
-			$logger = LoggerFactory::getInstance( 'StashEdit' );
-			$logger->debug( 'StashEdit', "Cached parser output for VE content key '$key'." );
+			wfDebugLog( 'StashEdit', "Cached parser output for VE content key '$key'." );
 		}
 		$this->getStats()->increment( "editstash.ve_cache_stores.$status" );
 
