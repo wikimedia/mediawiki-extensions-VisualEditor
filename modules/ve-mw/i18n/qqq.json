@@ -290,6 +290,7 @@
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Label for the packed option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Label for the packed-hover option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay": "Label for the packed-overlay option in the mode dropdown of the gallery dialog",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "Label for the slideshow option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "Label for the traditional option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-field-label": "Label for the mode field of the gallery dialog",
 	"visualeditor-mwgallerydialog-remove-button-label": "Label for the remove image button of the gallery dialog\n{{Identical|Remove}}",
