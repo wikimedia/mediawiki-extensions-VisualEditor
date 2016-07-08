@@ -2,8 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Pras",
-			"Anggoro"
+			"Anggoro",
+			"NoiX180"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEdit]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEdit]]",
+	"visualeditor-welcomedialog-action": "Wiwit mbesut",
+	"visualeditor-welcomedialog-content": "Sapa waé kena mbesut lan apa waé sing dibeneraké iku migunani.",
+	"visualeditor-welcomedialog-content-thanks": "Matur nuwun wis mbiyantu wong sadonya ngerti!",
+	"visualeditor-welcomedialog-switch": "Ganti nganggo piranti besut sumber",
+	"visualeditor-welcomedialog-switch-ve": "Ganti nganggo piranti besut visual",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Sugeng rawuh}} ing $2"
 }
