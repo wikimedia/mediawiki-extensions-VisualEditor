@@ -1982,7 +1982,13 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 			section = this.section.toString().indexOf( 'T-' ) === 0 ? +this.section.slice( 2 ) : this.section;
 			surfaceView = surface.getView();
 			$documentNode = surfaceView.getDocument().getDocumentNode().$element;
-			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( section - 1 );
+			// Find all headings including those inside templates, not just HeadingNodes
+			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' )
+				// Ignore headings inside TOC
+				.filter( function () {
+					return $( this ).closest( '.ve-ui-mwTocWidget' ).length === 0;
+				} )
+				.eq( section - 1 );
 			headingNode = $section.data( 'view' );
 
 			if ( $section.length && new mw.Uri().query.summary === undefined ) {

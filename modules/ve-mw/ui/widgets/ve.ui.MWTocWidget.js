@@ -32,12 +32,12 @@ ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 	this.mwTOCDisable = false;
 
 	this.$tocList = $( '<ul>' );
-	this.$element.addClass( 'toc ve-ui-mwTocWidget' ).append(
+	this.$element.addClass( 'toc ve-ui-mwTocWidget ve-ce-focusableNode' ).append(
 		$( '<div>' ).addClass( 'toctitle' ).append(
 			$( '<h2>' ).text( ve.msg( 'toc' ) )
 		),
 		this.$tocList
-	);
+	).prop( 'contentEditable', 'false' );
 
 	// Setup toggle link
 	mw.hook( 'wikipage.content' ).fire( this.$element );
@@ -152,19 +152,22 @@ ve.ui.MWTocWidget.prototype.updateNode = function ( viewNode ) {
  * Based on generateTOC in Linker.php
  */
 ve.ui.MWTocWidget.prototype.build = function () {
-	var i, l, level, levelDiff, tocNumber, modelNode, viewNode,
+	var i, l, level, levelDiff, tocNumber, modelNode, viewNode, tocBeforeNode,
 		$list, $text, $item, $link,
 		$newTocList = $( '<ul>' ),
 		nodes = this.doc.getNodesByType( 'mwHeading', true ),
-		documentView = this.surface.getView().getDocument(),
+		surfaceView = this.surface.getView(),
+		documentView = surfaceView.getDocument(),
 		lastLevel = 0,
-		stack = [];
+		stack = [],
+		uri = new mw.Uri();
 
 	function getItemIndex( $list, n ) {
 		return $list.children( 'li' ).length + ( n === stack.length - 1 ? 1 : 0 );
 	}
 
 	function linkClickHandler( heading ) {
+		surfaceView.focus();
 		ve.init.target.goToHeading( heading );
 		return false;
 	}
@@ -191,8 +194,10 @@ ve.ui.MWTocWidget.prototype.build = function () {
 
 		tocNumber = stack.map( getItemIndex ).join( '.' );
 		viewNode = documentView.getBranchNodeFromOffset( modelNode.getRange().start );
+		uri.query.section = ( i + 1 ).toString();
 		$item = $( '<li>' ).addClass( 'toclevel-' + stack.length ).addClass( 'tocsection-' + ( i + 1 ) );
-		$link = $( '<a href="#">' ).append( '<span class="tocnumber">' + tocNumber + '</span> ' );
+		$link = $( '<a>' ).attr( 'href', uri )
+			.append( '<span class="tocnumber">' + tocNumber + '</span> ' );
 		$text = $( '<span>' ).addClass( 'toctext' );
 
 		viewNode.$tocText = $text;
@@ -204,11 +209,12 @@ ve.ui.MWTocWidget.prototype.build = function () {
 		lastLevel = level;
 	}
 
-	this.$tocList.replaceWith( $newTocList );
-	this.$tocList = $newTocList;
+	this.$tocList.empty().append( $newTocList.children() );
 
 	if ( nodes.length ) {
-		this.rootLength = stack[ 0 ].children().length;
+		this.rootLength = this.$tocList.children().length;
+		tocBeforeNode = documentView.getBranchNodeFromOffset( nodes[ 0 ].getRange().start );
+		tocBeforeNode.$element.before( this.$element );
 	} else {
 		this.rootLength = 0;
 	}

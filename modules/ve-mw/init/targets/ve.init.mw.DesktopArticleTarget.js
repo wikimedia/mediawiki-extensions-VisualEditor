@@ -760,7 +760,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
 		surface.mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
-		surface.$element.before( surface.mwTocWidget.$element );
 	}
 
 	this.transformCategoryLinks( $( '#catlinks' ) );
