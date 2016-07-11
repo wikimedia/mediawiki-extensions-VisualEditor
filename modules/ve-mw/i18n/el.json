@@ -13,7 +13,8 @@
 			"Protnet",
 			"Stam.nikos",
 			"Macofe",
-			"SucreRouge"
+			"SucreRouge",
+			"Ανώνυμος Βικιπαιδιστής"
 		]
 	},
 	"apihelp-visualeditor-description": "Επιστρέφει HTML5 για μια σελίδα από την υπηρεσία Parsoid.",
@@ -257,8 +258,8 @@
 	"visualeditor-mweditmodeve-warning": "Αλλάζετε σε οπτική επεξεργασία.\nΘέλετε να συνεχίσετε;",
 	"visualeditor-mweditmodewt-popup-body": "Μπορείτε να επιστρέψετε στην επεξεργασία κώδικα ανά πάσα στιγμή, κάνοντας κλικ σε αυτό το εικονίδιο.",
 	"visualeditor-mweditmodewt-popup-title": "Έχετε αλλάξει σε οπτική επεξεργασία",
-	"visualeditor-mwgalleryinspector-placeholder": "Example.jpg|Λεζάντα εικόνας",
-	"visualeditor-mwgalleryinspector-title": "Γκαλερί",
+	"visualeditor-mwgallerydialog-remove-button-label": "Αφαίρεση εικόνας",
+	"visualeditor-mwgallerydialog-title": "Γκαλερί",
 	"visualeditor-mwsignature-tool": "Η υπογραφή σας",
 	"visualeditor-pagemenu-tooltip": "Επιλογές σελίδας",
 	"visualeditor-pagetranslationwarning": "Επεξεργάζεστε μια μεταφράσιμη σελίδα. Η επεξεργασία αυτών των σελίδων σε αυτόν τον επεξεργαστή δεν υποστηρίζεται επίσημα ακόμα.",
