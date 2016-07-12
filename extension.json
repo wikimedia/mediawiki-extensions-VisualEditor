@@ -1178,17 +1178,13 @@
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.widgets",
 				"ext.visualEditor.switching",
-				"ext.visualEditor.welcome"
+				"ext.visualEditor.welcome",
+				"ext.visualEditor.mwextensionmessages"
 			],
 			"messages": [
-				"captcha-edit",
-				"captcha-label",
 				"colon-separator",
-				"fancycaptcha-edit",
-				"fancycaptcha-reload-text",
 				"hidetoc",
 				"ooui-dialog-process-continue",
-				"questycaptcha-edit",
 				"showtoc",
 				"summary-preview",
 				"toc",
