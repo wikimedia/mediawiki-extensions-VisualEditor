@@ -259,7 +259,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 	// Update input position after transition
 	setTimeout( function () {
 		page.categoryWidget.fitInput();
-	}, 250 );
+	}, OO.ui.theme.getDialogTransitionDuration() );
 };
 
 /**
