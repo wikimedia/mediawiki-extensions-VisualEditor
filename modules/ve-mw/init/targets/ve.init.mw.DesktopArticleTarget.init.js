@@ -48,15 +48,16 @@
 			);
 		}
 
+		// Center within visible part of the target
 		$content = $( '#content' );
 		contentRect = $content[ 0 ].getBoundingClientRect();
-		offsetTop = $content.offset().top;
 		windowHeight = $( window ).height();
 		top = Math.max( contentRect.top, 0 );
 		bottom = Math.min( contentRect.bottom, windowHeight );
-		middle = ( top + bottom ) / 2;
+		middle = ( bottom  - top ) / 2;
+		offsetTop = Math.max( -contentRect.top, 0 );
 
-		init.$loading.css( 'top', middle - offsetTop );
+		init.$loading.css( 'top', middle + offsetTop );
 
 		$content.prepend( init.$loading );
 	}
