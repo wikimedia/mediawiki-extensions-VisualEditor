@@ -30,7 +30,7 @@
 			'ext.visualEditor.icons'
 		]
 			// Add modules from $wgVisualEditorPluginModules
-			.concat( conf.pluginModules );
+			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
 	// Allow signing posts in select namespaces
 	if ( conf.signatureNamespaces.length ) {
