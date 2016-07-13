@@ -274,6 +274,8 @@
 	"visualeditor-mweditmodeve-tool": "Перейти к визуальному редактированию",
 	"visualeditor-mweditmodeve-warning": "Вы переходите к визуальному редактированию.\nВы хотите продолжить?",
 	"visualeditor-mweditmodewt-popup-title": "Вы переключились в режим визуального редактирования",
+	"visualeditor-mwgallerydialog-caption-field-label": "Подпись к галерее",
+	"visualeditor-mwgallerydialog-caption-input-placeholder": "Подпись ко всей галерее",
 	"visualeditor-mwgallerydialog-card-images": "Изображения",
 	"visualeditor-mwgallerydialog-card-options": "Параметры",
 	"visualeditor-mwgallerydialog-classes-field-label": "Классы CSS",
