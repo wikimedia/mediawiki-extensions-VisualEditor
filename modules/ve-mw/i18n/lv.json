@@ -215,6 +215,7 @@
 	"visualeditor-viewpage-savewarning": "Vai esat pārliecināts, ka vēlaties doties atpakaļ uz skatīšanas režīmu bez izmaiņu saglabāšanas?",
 	"visualeditor-viewpage-savewarning-discard": "Atmest labojumus",
 	"visualeditor-viewpage-savewarning-keep": "Turpināt labošanu",
+	"visualeditor-viewpage-savewarning-title": "Vai esi pārliecināts?",
 	"visualeditor-wikitext-progress": "Pārveido vikitekstu",
 	"visualeditor-wikitext-warning": "Jūs lietojat vizuālo redaktoru - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] šeit nedarbosies. Lai labotu lapu wikitext režīmā, nospiediet \"{{int:visualeditor-ca-editsource}}\" - nesaglabātas izmaiņas tiks pazaudētas.",
 	"visualeditor-wikitext-warning-title": "Atklātas wikitext iezīmes"
