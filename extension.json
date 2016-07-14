@@ -300,6 +300,7 @@
 				"create",
 				"create-local",
 				"edit",
+				"editsection",
 				"edit-local",
 				"pipe-separator",
 				"postedit-confirmation-created",

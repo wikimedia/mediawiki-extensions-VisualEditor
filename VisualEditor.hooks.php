@@ -428,14 +428,6 @@ class VisualEditorHooks {
 	) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
-		// Exit if we're using the single edit tab.
-		if (
-			$config->get( 'VisualEditorUseSingleEditTab' ) &&
-			$skin->getUser()->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
-		) {
-			return true;
-		}
-
 		// Exit if we're in parserTests
 		if ( isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ) {
 			return true;
@@ -460,11 +452,29 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$tabMessages = $config->get( 'VisualEditorTabMessages' );
-		$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
-			$tabMessages['editsectionsource'] : 'editsection';
+		$editor = self::getUserEditor( $skin->getUser(), RequestContext::getMain()->getRequest() );
+		if (
+			!$config->get( 'VisualEditorUseSingleEditTab' ) ||
+			$skin->getUser()->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
+			(
+				$skin->getUser()->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+				$editor === 'wikitext'
+			)
+		) {
+			// Don't add ve-edit, but do update the edit tab (e.g. "Edit source").
+			$tabMessages = $config->get( 'VisualEditorTabMessages' );
+			$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
+				$tabMessages['editsectionsource'] : 'editsection';
+			$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
+		}
 
-		$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
+		// Exit if we're using the single edit tab.
+		if (
+			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			$skin->getUser()->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
+		) {
+			return true;
+		}
 
 		// add VE edit section in VE available namespaces
 		if ( ApiVisualEditor::isAllowedNamespace( $config, $title->getNamespace() ) ) {
