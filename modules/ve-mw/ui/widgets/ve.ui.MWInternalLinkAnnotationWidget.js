@@ -82,3 +82,26 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.getHref = function () {
 	var title = ve.ui.MWInternalLinkAnnotationWidget.super.prototype.getHref.call( this );
 	return mw.util.getUrl( title );
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWInternalLinkAnnotationWidget.prototype.onTextChange = function ( value ) {
+	var targetData,
+		htmlDoc = this.getElementDocument();
+	// Specific thing we want to check: has a valid URL for an internal page
+	// been pasted into here, in which case we want to convert it to just the
+	// page title. This has to happen /here/ because a URL can reference a
+	// valid page while not being a valid Title (e.g. if it contains a "%").
+	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( value ) ) {
+		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+			value,
+			htmlDoc
+		);
+		if ( targetData.isInternal ) {
+			value = targetData.title;
+			this.input.query.setValue( targetData.title );
+		}
+	}
+	return ve.ui.MWInternalLinkAnnotationWidget.super.prototype.onTextChange.call( this, value );
+};
