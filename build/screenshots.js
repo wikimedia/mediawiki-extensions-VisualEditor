@@ -1,17 +1,32 @@
 /* jshint node: true */
 /* global seleniumUtils, langs */
 var i, l, clientSize,
+	accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
 	chrome = require( 'selenium-webdriver/chrome' ),
-	test = require( 'selenium-webdriver/testing' ),
 	fs = require( 'fs' ),
-	Jimp = require( 'jimp' );
+	Jimp = require( 'jimp' ),
+	test = require( 'selenium-webdriver/testing' ),
+	username = process.env.SAUCE_ONDEMAND_USERNAME,
+	webdriver = require( 'selenium-webdriver' );
 
 function runTests( lang ) {
 	test.describe( 'Screenshots: ' + lang, function () {
 		var driver;
 
 		test.beforeEach( function () {
-			driver = new chrome.Driver();
+			// Use Sauce Labs when running on Jenins
+			if ( process.env.JENKINS_URL ) {
+				driver = new webdriver.Builder().withCapabilities( {
+						browserName: process.env.BROWSER,
+						platform: process.env.PLATFORM,
+						username: username,
+						accessKey: accessKey
+					} ).usingServer( 'http://' + username + ':' + accessKey +
+						'@ondemand.saucelabs.com:80/wd/hub' ).build();
+			} else {
+				// If not running on Jenkins, use local browser
+				driver = new chrome.Driver();
+			}
 
 			driver.manage().timeouts().setScriptTimeout( 20000 );
 			driver.manage().window().setSize( 1200, 1000 );
