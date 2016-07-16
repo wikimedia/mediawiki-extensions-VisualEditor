@@ -198,8 +198,7 @@
 	"visualeditor-mweditmodeve-title": "Prebacivanje na Vizuelni uređivač.",
 	"visualeditor-mweditmodeve-tool": "Prebaci me na Vizuelni uređivač",
 	"visualeditor-mweditmodeve-warning": "Prebacujete se na Vizuelni uređivač.\nŽelite li da nastavite?",
-	"visualeditor-mwgalleryinspector-placeholder": "Primer.jpg|Opis slike",
-	"visualeditor-mwgalleryinspector-title": "Galerija",
+	"visualeditor-mwgallerydialog-title": "Galerija",
 	"visualeditor-mwsignature-tool": "Vaš potpis",
 	"visualeditor-pagemenu-tooltip": "Opcije stranice",
 	"visualeditor-pagetranslationwarning": "Uređujete stranicu koju je moguće prevesti. Uređivanje ovakvih stranica u Vizuelnom uređivaču nije još uvek zvanično podržano.",
@@ -245,6 +244,6 @@
 	"visualeditor-viewpage-savewarning-discard": "Zanemari izmene",
 	"visualeditor-viewpage-savewarning-keep": "Nastavi sa uređivanjem",
 	"visualeditor-viewpage-savewarning-title": "Jeste li sigurni?",
-	"visualeditor-wikitext-warning": "Koristite Vizuelni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikitekst]] ovde ne radi. U svakom trenutku možete da se prebacite na izvorno uređivanje bez gubitka izmena, otvorite padajući meni pored dugmeta „{{int:visualeditor-toolbar-savedialog}}“ i izaberite „{{int:visualeditor-mweditmodesource-tool}}“.",
+	"visualeditor-wikitext-warning": "Koristite Vizuelni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikitekst]] ovde ne radi. U svakom trenutku možete da se prebacite na izvorno uređivanje bez gubitka izmena klikom na odgovarajuće dugme.",
 	"visualeditor-wikitext-warning-title": "Detektovan vikitekst"
 }
