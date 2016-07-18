@@ -8,7 +8,8 @@
 			"Kvardek du",
 			"Robin van der Vliet",
 			"Psychoslave",
-			"Renardo"
+			"Renardo",
+			"Orikrin1998"
 		]
 	},
 	"apihelp-visualeditor-description": "Liveras HTML5an kodon por paĝo el la servo de Parsoid.",
@@ -195,6 +196,7 @@
 	"visualeditor-media-input-placeholder": "Serĉi aŭdvidaĵojn",
 	"visualeditor-meta-tool": "Opcioj",
 	"visualeditor-mweditmodesource-warning-cancel": "Nuligi",
+	"visualeditor-mwgallerydialog-remove-button-label": "Forigi bildon",
 	"visualeditor-mwgallerydialog-title": "Galerio",
 	"visualeditor-mwsignature-tool": "Via subskribo",
 	"visualeditor-pagemenu-tooltip": "Paĝaj opcioj",

@@ -168,7 +168,7 @@
 	"visualeditor-differror": "Feeler beim Luede vun den Donnéeë vum Server: $1",
 	"visualeditor-donebutton-tooltip": "Fäerdeg mat Änneren",
 	"visualeditor-editconflict": "Är Ännerunge konnte wéinst engem Ännerungskonflikt net gespäichert ginn. Wëllt {{Gender:|Dir}} de Konflikt manuell léisen?",
-	"visualeditor-editingtabdialog-body": "{{SITENAME}} erënnert sech elo wat fir een Editeur Dir am léifsten hutt.",
+	"visualeditor-editingtabdialog-body": "{{SITENAME}} erënnert sech elo wat fir een Editeur Dir am léifsten hutt. Dir kënnt iwwer dem Änneren tëscht de Mode wiesselen an Är Astellunge méi spéit änneren.",
 	"visualeditor-editingtabdialog-ok": "Den Editeur benotzen deen ech déi leschte Kéier benotzt hunn",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Eng  Notiz|$1 Notizen}}",
 	"visualeditor-editnotices-tooltip": "Ännerungsnotizen",
