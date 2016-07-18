@@ -486,7 +486,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.saveScrollPosition();
 
 		// Create dummy surface to show toolbar while loading
-		surface = this.addSurface( [] );
+		surface = this.addSurface( new ve.dm.Document( [ { type: 'internalList' }, { type: '/internalList' } ] ) );
 		surface.disable();
 		// setSurface creates dummy toolbar
 		this.dummyToolbar = true;
