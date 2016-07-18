@@ -111,24 +111,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
  * @param {ve.dm.MWInternalLinkAnnotation} annotation Annotation
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( annotation ) {
-	var targetData,
-		href = annotation ? annotation.getAttribute( 'title' ) : '',
-		// Have to check that this.getFragment() is defined because parent class's teardown
-		// invokes setAnnotation( null ) which calls this code after fragment is unset
-		htmlDoc = this.getFragment() && this.getFragment().getDocument().getHtmlDocument();
-
-	if ( htmlDoc && ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( href ) ) {
-		// Check if the 'external' link is in fact a page on the same wiki
-		// e.g. http://en.wikipedia.org/wiki/Target -> Target
-		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
-			href,
-			htmlDoc
-		);
-		if ( targetData.isInternal ) {
-			this.internalAnnotationInput.getTextInputWidget().setValue( targetData.title );
-			return;
-		}
-	}
+	var href = annotation ? annotation.getAttribute( 'title' ) : '';
 
 	if (
 		!this.allowProtocolInInternal &&
