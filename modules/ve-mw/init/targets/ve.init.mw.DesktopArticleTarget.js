@@ -395,7 +395,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 			}
 			checkbox = new OO.ui.CheckboxInputWidget( {
 				value: $this.attr( 'value' ),
-				selected: defaults[ name ] !== undefined ? defaults[ name ] : $this.prop( 'checked' )
+				selected: defaults[ name ] !== undefined ? defaults[ name ] : $this.prop( 'checked' ),
+				classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
 			} );
 			// HACK: CheckboxInputWidget doesn't support access keys
 			checkbox.$input.attr( 'accesskey', $( this ).attr( 'accesskey' ) );
