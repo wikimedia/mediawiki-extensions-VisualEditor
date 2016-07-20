@@ -8,6 +8,9 @@
 			"Liuxinyu970226"
 		]
 	},
+	"tooltip-ca-createsource": "创建该只页面个源码",
+	"tooltip-ca-edit": "用维基文本编辑该只页面",
+	"tooltip-ca-editsource": "编辑该只页面个源码",
 	"tooltip-ca-ve-edit": "编辑箇页",
 	"visualeditor-beta-warning": "侬随时好点击切换揿钮换成源码编辑器。如果侬碰着啥问题，请勒下底回报。",
 	"visualeditor-ca-createlocaldescriptionsource": "添加本地说明源码",
@@ -15,6 +18,7 @@
 	"visualeditor-ca-editsource": "编辑源码",
 	"visualeditor-ca-editsource-section": "编辑源码",
 	"visualeditor-descriptionpagelink": "Project:可视化编辑器",
+	"visualeditor-dialog-media-goback": "转去",
 	"visualeditor-mweditmodeve-popup-body": "侬随时好点击该只图标切换回可视化编辑。",
 	"visualeditor-mweditmodeve-popup-title": "侬已经换成源码编辑哉",
 	"visualeditor-mweditmodewt-popup-body": "侬随时好点击该只图标切换回源码编辑。",
