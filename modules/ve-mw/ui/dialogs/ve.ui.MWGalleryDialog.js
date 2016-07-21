@@ -145,6 +145,10 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 				new OO.ui.OptionWidget( {
 					data: 'packed-hover',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover' )
+				} ),
+				new OO.ui.OptionWidget( {
+					data: 'slideshow',
+					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-slideshow' )
 				} )
 			]
 		}
@@ -510,7 +514,12 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
  */
 ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
 	var mode = this.modeDropdown.getMenu().getSelectedItem().getData(),
-		disabled = mode === 'packed' || mode === 'packed-overlay' || mode === 'packed-hover';
+		disabled = (
+			mode === 'packed' ||
+			mode === 'packed-overlay' ||
+			mode === 'packed-hover' ||
+			mode === 'slideshow'
+		);
 
 	this.widthsInput.setDisabled( disabled );
 	this.perrowInput.setDisabled( disabled );
