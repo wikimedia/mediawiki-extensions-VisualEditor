@@ -306,6 +306,7 @@
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Entouré",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Entouré avec des titres au survol",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay": "Entouré avec des titres superposés",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "Diaporama",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "Traditionnel",
 	"visualeditor-mwgallerydialog-mode-field-label": "Mode d’affichage",
 	"visualeditor-mwgallerydialog-remove-button-label": "Supprimer l'image",
