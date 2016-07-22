@@ -280,6 +280,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "이 갤러리는 비어 있습니다.",
 	"visualeditor-mwgallerydialog-heights-field-label": "그림 높이",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "일반 (외곽선 없음)",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "슬라이드쇼",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "일반",
 	"visualeditor-mwgallerydialog-mode-field-label": "디스플레이 모드",
 	"visualeditor-mwgallerydialog-remove-button-label": "그림 제거",
