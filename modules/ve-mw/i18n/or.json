@@ -5,7 +5,8 @@
 			"Psubhashish",
 			"ଶିତିକଣ୍ଠ ଦାଶ",
 			"Jnanaranjan Sahu",
-			"MKar"
+			"MKar",
+			"DareDevil"
 		]
 	},
 	"tooltip-ca-createsource": "ଏହି ପୃଷ୍ଠା ପାଇଁ ମୂଳ କୋଡ଼ (source code) ଲେଖନ୍ତୁ",
@@ -41,6 +42,8 @@
 	"visualeditor-dialogbutton-meta-tooltip": "ପୃଷ୍ଠା ସେଟିଂ",
 	"visualeditor-formatdropdown-format-mw-heading1": "ପୃଷ୍ଠା ଶିରୋନାମା",
 	"visualeditor-formatdropdown-format-mw-heading2": "ଶିରୋନାମ",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "ସ୍ଲାଇଡ ସୋ",
+	"visualeditor-mwgallerydialog-remove-button-label": "ଚିତ୍ରଟି ବାହାର  କରାଯାଉ",
 	"visualeditor-savedialog-label-create": "ପୃଷ୍ଠାଟିଏ ତିଆରିବା",
 	"visualeditor-savedialog-label-error": "ଭୁଲ",
 	"visualeditor-savedialog-label-warning": "ସାବଧାନ",
