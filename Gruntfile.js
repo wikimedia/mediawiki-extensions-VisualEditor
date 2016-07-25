@@ -128,8 +128,7 @@ module.exports = function ( grunt ) {
 		},
 		banana: {
 			all: [
-				'modules/ve-{mw,wmf}/i18n/',
-				'modules/ve-mw/tests/browser/i18n'
+				'modules/ve-{mw,wmf}/i18n/'
 			]
 		},
 		jsonlint: {
