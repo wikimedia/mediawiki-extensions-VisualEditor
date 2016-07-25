@@ -250,6 +250,7 @@
 	/** */
 	ve.dm.MWTransclusionModel.prototype.fetch = function () {
 		var i, len, item, title, queue,
+			templateNamespaceId = mw.config.get( 'wgNamespaceIds' ).template,
 			titles = [],
 			specs = {};
 
@@ -271,7 +272,10 @@
 					// Skip titles that don't have a resolvable href
 					title &&
 					// Skip titles outside the template namespace
-					title.charAt( 0 ) !== ':' &&
+					mw.Title.newFromText(
+						title,
+						templateNamespaceId
+					).namespace === templateNamespaceId &&
 					// Skip already cached data
 					!hasOwn.call( specCache, title ) &&
 					// Skip duplicate titles in the same batch
