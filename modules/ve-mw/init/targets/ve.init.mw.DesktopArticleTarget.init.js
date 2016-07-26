@@ -25,6 +25,7 @@
 		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
 		onlyTabIsVE,
 		active = false,
+		targetLoaded = false,
 		progressStep = 0,
 		progressSteps = [
 			[ 30, 3000 ],
@@ -154,6 +155,7 @@
 						}
 					} );
 					target.setContainer( $( '#content' ) );
+					targetLoaded = true;
 					return target;
 				}, function ( e ) {
 					mw.log.warn( 'VisualEditor failed to load: ' + e );
@@ -205,19 +207,25 @@
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
 	function activateTarget( targetPromise, modified ) {
-		// The TargetLoader module is loaded in the bottom queue, so it should have been
-		// requested already but it might not have finished loading yet
-		var dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
-			.then( function () {
-				return mw.libs.ve.targetLoader.requestPageData(
-					mw.config.get( 'wgRelevantPageName' ),
-					oldid,
-					'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
-					modified
-				);
-			} )
-			.done( incrementLoadingProgress )
-			.fail( handleLoadFailure );
+		var dataPromise;
+		// Only call requestPageData early if the target object isn't there yet.
+		// If the target object is there, this is a second or subsequent load, and the
+		// internal state of the target object can influence the load request.
+		if ( !targetLoaded ) {
+			// The TargetLoader module is loaded in the bottom queue, so it should have been
+			// requested already but it might not have finished loading yet
+			dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
+				.then( function () {
+					return mw.libs.ve.targetLoader.requestPageData(
+						mw.config.get( 'wgRelevantPageName' ),
+						oldid,
+						'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
+						modified
+					);
+				} )
+				.done( incrementLoadingProgress )
+				.fail( handleLoadFailure );
+		}
 
 		setEditorPreference( 'visualeditor' );
 

@@ -892,8 +892,12 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		// If we were explicitly editing an older version, make sure we won't
 		// load the same old version again, now that we've saved the next edit
 		// will be against the latest version.
-		// TODO: What about oldid in the url?
+		// If there is an ?oldid= parameter in the URL, this will cause restorePage() to remove it.
 		this.restoring = false;
+
+		// Clear requestedRevId in case it was set by a retry or something; after saving
+		// we don't want to go back into oldid mode anyway
+		this.requestedRevId = undefined;
 
 		if ( newid !== undefined ) {
 			mw.config.set( {
@@ -901,6 +905,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 				wgRevisionId: newid
 			} );
 			this.revid = newid;
+			this.currentRevisionId = newid;
 		}
 
 		// Update module JS config values and notify ResourceLoader of any new
@@ -1245,6 +1250,10 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		if ( 'action' in uri.query && $( '#wpTextbox1' ).length === 0 ) {
 			delete uri.query.action;
 			mw.config.set( 'wgAction', 'view' );
+		}
+		if ( 'oldid' in uri.query && !this.restoring ) {
+			// We have an oldid in the query string but it's the most recent one, so remove it
+			delete uri.query.oldid;
 		}
 
 		// If there are any other query parameters left, re-use that uri object.
