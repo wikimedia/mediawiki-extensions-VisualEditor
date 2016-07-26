@@ -50,21 +50,25 @@ ve.ui.MWExtensionPreviewDialog.prototype.initialize = function () {
 ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExtensionPreviewDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var doc, element;
+			var doc, element, rootNode, linearData;
 			if ( this.selectedNode ) {
-				doc = this.selectedNode.getDocument().cloneFromRange( this.selectedNode.getOuterRange() );
+				element = this.selectedNode.getClonedElement();
 			} else {
 				element = this.getNewElement();
-				// We assume that WindowAction pass
-				doc = data.fragment.getDocument().cloneWithData( [
-					element,
-					{ type: '/' + element.type },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
-				] );
 			}
-			this.previewNode = doc.getDocumentNode().children[ 0 ];
-			this.previewElement.setModel( this.previewNode );
+			linearData = [ element, { type: '/' + element.type } ];
+			if ( ve.dm.nodeFactory.isNodeContent( element.type ) ) {
+				linearData = [ { type: 'paragraph' } ].concat( linearData, { type: '/paragraph' } );
+			}
+			// We assume that WindowAction pass
+			doc = data.fragment.getDocument().cloneWithData( linearData.concat( [
+				{ type: 'internalList' },
+				{ type: '/internalList' }
+			] ) );
+
+			rootNode = doc.getDocumentNode().children[ 0 ];
+			this.previewNode = doc.getNodesByType( element.type )[ 0 ];
+			this.previewElement.setModel( rootNode );
 		}, this );
 };
 
