@@ -747,6 +747,27 @@ class VisualEditorHooks {
 			] ] );
 		}
 
+		$extensionMessages = [];
+		if ( class_exists( 'ConfirmEditHooks' ) ) {
+			$extensionMessages[] = 'captcha-edit';
+			$extensionMessages[] = 'captcha-label';
+
+			if ( class_exists( 'QuestyCaptcha' ) ) {
+				$extensionMessages[] = 'questycaptcha-edit';
+			}
+
+			if ( class_exists( 'FancyCaptcha' ) ) {
+				$extensionMessages[] = 'fancycaptcha-edit';
+				$extensionMessages[] = 'fancycaptcha-reload-text';
+			}
+		}
+		$resourceLoader->register( [
+			'ext.visualEditor.mwextensionmessages' => $veResourceTemplate + [
+				'messages' => $extensionMessages,
+				'targets' => [ 'desktop', 'mobile' ],
+			]
+		] );
+
 		return true;
 	}
 
