@@ -76,6 +76,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
 	this.internalAnnotationInput.input.getResults().connect( this, { choose: 'onFormSubmit' } );
 	// Form submit only auto triggers on enter when there is one input
+	this.internalAnnotationInput.getTextInputWidget().connect( this, { change: 'onInternalLinkInputChange' } );
 	this.internalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
 	this.externalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
 
@@ -110,27 +111,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
  *
  * @param {ve.dm.MWInternalLinkAnnotation} annotation Annotation
  */
-ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function ( annotation ) {
-	var href = annotation ? annotation.getAttribute( 'title' ) : '';
-
-	// If this looks like an external link, switch to the correct card.
-	// Note: We don't care here if it's a *valid* link, so we just
-	// check whether it looks like a URI -- i.e. whether it starts with
-	// something that appears to be a schema per RFC1630. Later the external
-	// link inspector will use getExternalLinkUrlProtocolsRegExp for validity
-	// checking.
-	// Note 2: RFC1630 might be too broad in practice. You don't really see
-	// schemas that use the full set of allowed characters, and we might get
-	// more false positives by checking for them.
-	// Note 3: We allow protocol-relative URIs here.
-	if (
-		!this.allowProtocolInInternal &&
-		/^(?:[a-z][a-z0-9\$\-_@\.&!\*"'\(\),]*:)?\/\//i.test( href )
-	) {
-		this.linkTypeIndex.setCard( 'external' );
-		// Changing card focuses and selects the input, so collapse the cursor back to the end.
-		this.externalAnnotationInput.getTextInputWidget().moveCursorToEnd();
-	}
+ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function () {
 	this.updateActions();
 };
 
@@ -183,6 +164,32 @@ ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
 			}
 		}
 	} );
+};
+
+/**
+ * Handle change events on the internal link widget's input
+ *
+ * @param {string} value Current value of input widget
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function ( value ) {
+	// If this looks like an external link, switch to the correct card.
+	// Note: We don't care here if it's a *valid* link, so we just
+	// check whether it looks like a URI -- i.e. whether it starts with
+	// something that appears to be a schema per RFC1630. Later the external
+	// link inspector will use getExternalLinkUrlProtocolsRegExp for validity
+	// checking.
+	// Note 2: RFC1630 might be too broad in practice. You don't really see
+	// schemas that use the full set of allowed characters, and we might get
+	// more false positives by checking for them.
+	// Note 3: We allow protocol-relative URIs here.
+	if (
+		!this.allowProtocolInInternal &&
+		/^(?:[a-z][a-z0-9\$\-_@\.&!\*"'\(\),]*:)?\/\//i.test( value.trim() )
+	) {
+		this.linkTypeIndex.setCard( 'external' );
+		// Changing card focuses and selects the input, so collapse the cursor back to the end.
+		this.externalAnnotationInput.getTextInputWidget().moveCursorToEnd();
+	}
 };
 
 /**
