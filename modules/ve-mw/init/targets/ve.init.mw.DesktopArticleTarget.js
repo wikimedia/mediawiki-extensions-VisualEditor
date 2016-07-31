@@ -661,6 +661,7 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error ) {
+	var errorInfo, confirmPromptMessage;
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
@@ -671,46 +672,33 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 		Object.prototype.hasOwnProperty.call( error, 'error' ) &&
 		Object.prototype.hasOwnProperty.call( error.error, 'info' )
 	) {
-		error = error.error.info;
+		errorInfo = error.error.info;
 	}
 
-	if (
-		errorText === 'http' &&
-		( error.statusText !== 'abort' || error.xhr.status !== 504 ) &&
-		(
-			(
-				error.xhr.status &&
-				confirm( ve.msg( 'visualeditor-loadwarning', 'HTTP ' + error.xhr.status ) )
-			) ||
-			(
-				!error.xhr.status &&
-				confirm( ve.msg(
+	if ( !error || error.statusText !== 'abort' ) {
+		if ( errorText === 'http' ) {
+			if ( error && error.xhr.status ) {
+				confirmPromptMessage = ve.msg(
+					'visualeditor-loadwarning',
+					'HTTP ' + error.xhr.status
+				);
+			} else {
+				confirmPromptMessage = ve.msg(
 					'visualeditor-loadwarning',
 					ve.msg( 'visualeditor-loadwarning-noconnect' )
-				) )
-			)
-		)
-	) {
-		this.load();
-	} else if (
-		errorText === 'http' && error.xhr.status === 504 &&
-		confirm( ve.msg( 'visualeditor-timeout' ) )
-	) {
-		if ( 'veaction' in this.currentUri.query ) {
-			delete this.currentUri.query.veaction;
+				);
+			}
+		} else if ( errorInfo ) {
+			confirmPromptMessage = ve.msg( 'visualeditor-loadwarning', errorText + ': ' + errorInfo );
+		} else {
+			// At least give the devs something to work from
+			confirmPromptMessage = JSON.stringify( error );
 		}
-		this.currentUri.query.action = 'edit';
-		location.href = this.currentUri.toString();
-	} else if (
-		errorText !== 'http' &&
-		typeof error === 'string' &&
-		confirm( ve.msg( 'visualeditor-loadwarning', errorText + ': ' + error ) )
-	) {
+	}
+
+	if ( confirmPromptMessage && confirm( confirmPromptMessage ) ) {
 		this.load();
 	} else {
-		// Something weird happened? Deactivate
-		// Not passing trackMechanism because we don't know what happened
-		// and this is not a user action
 		this.deactivate( true );
 	}
 };

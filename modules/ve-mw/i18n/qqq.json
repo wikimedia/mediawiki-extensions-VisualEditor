@@ -360,7 +360,6 @@
 	"visualeditor-settings-tool": "Text of tool in the toolbar the lets users set specific page settings.\n{{Identical|Page settings}}",
 	"visualeditor-shortcuts-insert": "Heading for insertion shortcuts\n{{Identical|Insert}}",
 	"visualeditor-special-characters-group-other": "Label of the special character group shown if the wiki has visualeditor-quick-access-characters.json set up.",
-	"visualeditor-timeout": "Text (JavaScript confirm()) shown when the editor fails to load properly due to a 504 Gateway Timeout error.",
 	"visualeditor-toload": "Text shown to the user in place of the wikitext editor on action=edit/submit when VisualEditor is expected to load.\n\nParameters\n* $1 is the URL which points to a page with a fallback to the wikitext editor if necessary.",
 	"visualeditor-toolbar-savedialog": "Label text for button to open save dialog.\n\nUsed in:\n* {{msg-mw|Guidedtour-tour-gettingstartedtasktoolbarve-click-save-description}}.\n{{Identical|Save page}}",
 	"visualeditor-toolbar-savedialog-short": "Short label text for button to open save dialog on width-restricted devices\n{{Identical|Save}}",
