@@ -119,6 +119,19 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
 /**
  * @inheritdoc
  */
+ve.ce.MWTransclusionNode.prototype.createInvisibleIcon = function () {
+	var icon = new OO.ui.ButtonWidget( {
+		classes: [ 've-ce-focusableNode-invisibleIcon' ],
+		framed: false,
+		icon: this.constructor.static.iconWhenInvisible,
+		label: this.constructor.static.getDescription( this.getModel() )
+	} );
+	return icon.$element;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
 	xhr = new mw.Api().post( {
@@ -162,6 +175,14 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
 	// Call parent mixin
 	ve.ce.GeneratedContentNode.prototype.render.call( this, generatedContents );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWTransclusionNode.prototype.onSetup = function () {
+	// Parent method
+	ve.ce.MWTransclusionNode.super.prototype.onSetup.apply( this, arguments );
 
 	// Render replaces this.$element with a new node so re-add classes
 	this.$element.addClass( 've-ce-mwTransclusionNode' );
