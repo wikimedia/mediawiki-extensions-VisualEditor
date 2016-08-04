@@ -34,8 +34,12 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 
 	// Mixin constructors
 	OO.ui.mixin.DraggableElement.call( this, ve.extendObject( { $handle: this.$element }, this.config ) );
+	OO.ui.mixin.TabIndexedElement.call( this, config );
 
-	this.$element.on( 'click', this.onItemClick.bind( this ) );
+	this.$element.on( {
+		click: this.onItemClick.bind( this ),
+		keypress: this.onItemKeyPress.bind( this )
+	} );
 };
 
 /* Inheritance */
@@ -43,6 +47,7 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 OO.inheritClass( ve.ui.MWGalleryItemWidget, OO.ui.Widget );
 
 OO.mixinClass( ve.ui.MWGalleryItemWidget, OO.ui.mixin.DraggableElement );
+OO.mixinClass( ve.ui.MWGalleryItemWidget, OO.ui.mixin.TabIndexedElement );
 
 /* Events */
 
@@ -57,6 +62,18 @@ OO.mixinClass( ve.ui.MWGalleryItemWidget, OO.ui.mixin.DraggableElement );
  */
 ve.ui.MWGalleryItemWidget.prototype.onItemClick = function () {
 	this.emit( 'edit', this );
+};
+
+/**
+ * Handle key press events
+ *
+ * @param {jQuery.Event} e Key press event
+ */
+ve.ui.MWGalleryItemWidget.prototype.onItemKeyPress = function ( e ) {
+	if ( e.which === OO.ui.Keys.ENTER ) {
+		this.emit( 'edit', this );
+		return false;
+	}
 };
 
 /**
