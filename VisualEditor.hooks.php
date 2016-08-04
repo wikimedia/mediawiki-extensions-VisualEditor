@@ -697,6 +697,7 @@ class VisualEditorHooks {
 			'defaultUserOptions' => [
 				'defaultthumbsize' => $thumbLimits[ $defaultUserOptions['thumbsize'] ]
 			],
+			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
 			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
 			'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),

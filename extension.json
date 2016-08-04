@@ -1753,6 +1753,7 @@
 				"visualeditor-mwgallerydialog-classes-input-placeholder",
 				"visualeditor-mwgallerydialog-empty-gallery-message",
 				"visualeditor-mwgallerydialog-heights-field-label",
+				"visualeditor-mwgallerydialog-heights-input-placeholder",
 				"visualeditor-mwgallerydialog-mode-dropdown-label-nolines",
 				"visualeditor-mwgallerydialog-mode-dropdown-label-packed",
 				"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover",
@@ -1767,7 +1768,8 @@
 				"visualeditor-mwgallerydialog-styles-input-placeholder",
 				"visualeditor-mwgallerydialog-show-filename-field-label",
 				"visualeditor-mwgallerydialog-title",
-				"visualeditor-mwgallerydialog-widths-field-label"
+				"visualeditor-mwgallerydialog-widths-field-label",
+				"visualeditor-mwgallerydialog-widths-input-placeholder"
 			],
 			"targets": [
 				"desktop",
