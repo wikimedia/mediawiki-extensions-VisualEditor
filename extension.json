@@ -282,6 +282,7 @@
 			"dependencies": [
 				"jquery.client",
 				"jquery.cookie",
+				"jquery.textSelection",
 				"mediawiki.page.startup",
 				"mediawiki.Title",
 				"mediawiki.Uri",
@@ -323,6 +324,7 @@
 			"scripts": "modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js",
 			"dependencies": [
 				"ext.visualEditor.track",
+				"jquery.textSelection",
 				"mediawiki.api"
 			],
 			"messages": [
