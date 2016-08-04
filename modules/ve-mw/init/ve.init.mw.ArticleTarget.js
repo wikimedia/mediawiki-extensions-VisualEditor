@@ -698,8 +698,12 @@ ve.init.mw.ArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
 		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
 		document.createTextNode( mw.msg( 'colon-separator' ) )
 	);
-	if ( editApi.captcha.url ) { // FancyCaptcha
+	if ( editApi.captcha.url ) {
+		// FancyCaptcha
+		// Based on FancyCaptcha::getFormInformation() (https://git.io/v6mml) and
+		// ext.confirmEdit.fancyCaptcha.js in the ConfirmEdit extension.
 		mw.loader.load( 'ext.confirmEdit.fancyCaptcha' );
+		$captchaDiv.addClass( 'fancycaptcha-captcha-container' );
 		$captchaParagraph.append(
 			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end()
