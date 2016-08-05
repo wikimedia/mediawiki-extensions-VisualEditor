@@ -53,6 +53,9 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.highlightedItem = null;
 	this.searchPanelVisible = false;
 
+	// Default settings
+	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
+
 	// Images and options cards
 	indexLayout = new OO.ui.IndexLayout( {
 		scrollable: false,
@@ -158,11 +161,17 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 	this.widthsInput = new OO.ui.NumberInputWidget( {
 		min: 0,
-		showButtons: false
+		showButtons: false,
+		input: {
+			placeholder: ve.msg( 'visualeditor-mwgallerydialog-widths-input-placeholder', this.defaults.imageWidth )
+		}
 	} );
 	this.heightsInput = new OO.ui.NumberInputWidget( {
 		min: 0,
-		showButtons: false
+		showButtons: false,
+		input: {
+			placeholder: ve.msg( 'visualeditor-mwgallerydialog-heights-input-placeholder', this.defaults.imageHeight )
+		}
 	} );
 	this.perrowInput = new OO.ui.NumberInputWidget( {
 		min: 0,
@@ -307,7 +316,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			// Options card
 
 			// Set options
-			mode = attributes && attributes.mode || 'traditional';
+			mode = attributes && attributes.mode || this.defaults.mode;
 			caption = attributes && attributes.caption || '';
 			widths = attributes && parseInt( attributes.widths ) || '';
 			heights = attributes && parseInt( attributes.heights ) || '';
@@ -588,8 +597,6 @@ ve.ui.MWGalleryDialog.prototype.updateActions = function () {
 ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
 	var i, ilen, mode, caption, widths, heights, perrow,
 		showFilename, classes, styles,
-		selectedNode = this.selectedNode,
-		oldMode = selectedNode && selectedNode.getAttribute( 'mw' ).attrs.mode,
 		extsrc = '',
 		items = this.galleryGroup.items;
 
@@ -604,9 +611,6 @@ ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
 
 	// Get data from options card
 	mode = this.modeDropdown.getMenu().getSelectedItem().getData();
-	if ( oldMode === undefined && mode === 'traditional' ) {
-		mode = undefined;
-	}
 	caption = this.captionInput.getValue();
 	widths = this.widthsInput.getValue();
 	heights = this.heightsInput.getValue();
@@ -619,12 +623,15 @@ ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
 	mwData.body.extsrc = extsrc + '\n';
 	mwData.attrs.mode = mode || undefined;
 	mwData.attrs.caption = caption || undefined;
-	mwData.attrs.widths = widths ? widths + 'px' : undefined;
-	mwData.attrs.heights = heights ? heights + 'px' : undefined;
+	mwData.attrs.widths = widths || undefined;
+	mwData.attrs.heights = heights || undefined;
 	mwData.attrs.perrow = perrow || undefined;
 	mwData.attrs.showfilename = showFilename ? 'yes' : undefined;
 	mwData.attrs.classes = classes || undefined;
 	mwData.attrs.styles = styles || undefined;
+
+	// Unset mode attribute if it is the same as the default
+	mwData.attrs.mode = mode === this.defaults.mode ? undefined : mode;
 };
 
 /* Registration */
