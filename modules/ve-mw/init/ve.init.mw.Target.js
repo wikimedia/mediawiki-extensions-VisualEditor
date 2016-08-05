@@ -66,7 +66,7 @@ ve.init.mw.Target.static.toolbarGroups = [
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
 		forceExpand: [ 'bold', 'italic', 'clear' ],
 		promote: [ 'bold', 'italic' ],
-		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
+		demote: [ 'strikethrough', 'code', 'underline', 'language', 'big', 'small', 'clear' ]
 	},
 	// Link
 	{ include: [ 'link' ] },
