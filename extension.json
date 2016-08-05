@@ -565,6 +565,7 @@
 				"lib/ve/src/dm/ve.dm.Selection.js",
 				"lib/ve/src/dm/ve.dm.Surface.js",
 				"lib/ve/src/dm/ve.dm.SurfaceFragment.js",
+				"lib/ve/src/dm/ve.dm.SourceSurfaceFragment.js",
 				"lib/ve/src/dm/ve.dm.DataString.js",
 				"lib/ve/src/dm/ve.dm.Document.js",
 				"lib/ve/src/dm/ve.dm.DocumentSlice.js",
