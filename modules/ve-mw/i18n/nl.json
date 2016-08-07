@@ -31,7 +31,8 @@
 			"Esketti",
 			"FabianRM",
 			"Mbch331",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"MrLeopold"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -283,6 +284,7 @@
 	"visualeditor-mwgallerydialog-classes-field-label": "CSS-klassen",
 	"visualeditor-mwgallerydialog-empty-gallery-message": "De galerij is leeg.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Afbeeldingshoogte",
+	"visualeditor-mwgallerydialog-heights-input-placeholder": "Standaardhoogte: $1 px",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Traditioneel zonder contouren",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Compact",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay": "Compact met bijschriften over afbeelding heen",
@@ -295,6 +297,7 @@
 	"visualeditor-mwgallerydialog-show-filename-field-label": "Bestandsnamen weergeven",
 	"visualeditor-mwgallerydialog-title": "Galerij",
 	"visualeditor-mwgallerydialog-widths-field-label": "Afbeeldingsbreedte",
+	"visualeditor-mwgallerydialog-widths-input-placeholder": "Standaardbreedte: $1 px",
 	"visualeditor-mwsignature-tool": "Uw handtekening",
 	"visualeditor-pagemenu-tooltip": "Pagina-instellingen",
 	"visualeditor-pagetranslationwarning": "U probeert een te vertalen pagina te bewerken. Het bewerken van deze pagina's wordt nog niet ondersteund.",
