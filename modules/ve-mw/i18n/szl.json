@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Krol111"
+			"Krol111",
+			"Uostofchuodnego"
 		]
 	},
-	"tooltip-ca-ve-edit": "Sprowjej ta zajta bez hilfa werkcojga VisualEditor",
+	"tooltip-ca-ve-edit": "Edytuj tã zajtã",
 	"visualeditor-ca-createlocaldescriptionsource": "Bajstlůj kod lokalnygo uopisu",
 	"visualeditor-ca-createsource": "Bajstlůj kod",
 	"visualeditor-ca-editsource": "Sprowjej zdrzůdłowy tekst",
