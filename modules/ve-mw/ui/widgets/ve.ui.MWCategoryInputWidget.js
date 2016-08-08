@@ -231,22 +231,28 @@ ve.ui.MWCategoryInputWidget.prototype.onLookupMenuItemChoose = function ( item )
  * @return {OO.ui.MenuOptionWidget} Menu item widget to be shown
  */
 ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( name ) {
-	var cachedData = ve.init.platform.linkCache.getCached(
-		mw.Title.newFromText( name, mw.config.get( 'wgNamespaceIds' ).category ).getPrefixedText()
-	);
+	var cachedData = ve.init.platform.linkCache.getCached( mw.Title.newFromText(
+			name,
+			mw.config.get( 'wgNamespaceIds' ).category
+		).getPrefixedText() ),
+		optionWidget, labelText;
 	if ( cachedData && cachedData.redirectFrom ) {
-		return new OO.ui.MenuOptionWidget( {
+		labelText = mw.Title.newFromText( cachedData.redirectFrom[ 0 ] ).getMainText();
+		optionWidget = OO.ui.MenuOptionWidget( {
 			data: name,
 			autoFitLabel: false,
 			label: $( '<span>' )
-				.text( mw.Title.newFromText( cachedData.redirectFrom[ 0 ] ).getMainText() )
+				.text( labelText )
 				.append( '<br>↳ ' )
 				.append( $( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
 		} );
 	} else {
-		return new OO.ui.MenuOptionWidget( {
+		labelText = name;
+		optionWidget = new OO.ui.MenuOptionWidget( {
 			data: name,
 			label: name
 		} );
 	}
+	optionWidget.$element.attr( 'title', labelText );
+	return optionWidget;
 };
