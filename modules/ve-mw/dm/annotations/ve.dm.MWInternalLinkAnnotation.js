@@ -66,6 +66,9 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title ) {
 		// rather than an image inclusion or categorization
 		target = ':' + target;
 	}
+	if ( title.getFragment() ) {
+		target += '#' + title.getFragment();
+	}
 
 	return new ve.dm.MWInternalLinkAnnotation( {
 		type: 'link/mwInternal',
@@ -147,7 +150,13 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 		}
 	} else {
 		// Don't escape slashes in the title; they represent subpages.
-		href = title.split( '/' ).map( encodeURIComponent ).join( '/' );
+		href = title.split( /(\/|#)/ ).map( function ( part ) {
+			if ( part === '/' || part === '#' ) {
+				return part;
+			} else {
+				return encodeURIComponent( part );
+			}
+		} ).join( '' );
 	}
 	return href;
 };
