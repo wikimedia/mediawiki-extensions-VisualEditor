@@ -11,6 +11,9 @@
 			"Gırd"
 		]
 	},
+	"apihelp-visualeditoredit-param-etag": "ETag'a ke bırışê yo.",
+	"apihelp-visualeditoredit-param-minor": "Yu desmala werkek timar kerê",
+	"apihelp-visualeditoredit-param-oldid": "Numrey revizyoni bıkarnê. Peyên  beno hesıbyaye revizyon. Qandé perda newi 0 i bıploğnê",
 	"tooltip-ca-ve-edit": "Ena pele bıvurne",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-browserwarning": "Rovıtero ke şıma karnenê tereftê Vurnayışê Asayi ra resmi desteg nêvine no.",
@@ -129,6 +132,8 @@
 	"visualeditor-donebutton-tooltip": "Vuryayışi qeyd ke",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|not|noti}}",
 	"visualeditor-editsummary": "Menına vırnayışa",
+	"visualeditor-educationpopup-dismiss": "Temam,  mı fahm ke",
+	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Sernamey perer",
 	"visualeditor-formatdropdown-format-mw-heading2": "sername",
 	"visualeditor-formatdropdown-format-mw-heading3": "Bınname 1",
@@ -136,6 +141,9 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Bınname 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Bınname 4",
 	"visualeditor-languages-tool": "Zıwani",
+	"visualeditor-linkinspector-button-link-external": "Gırêy teberi",
+	"visualeditor-linkinspector-button-link-internal": "Peran bıvin",
+	"visualeditor-linkinspector-convert-link-isbn": "ISBN linki açarn",
 	"visualeditor-linkinspector-educationpopup-title": "Gırey",
 	"visualeditor-linkinspector-illegal-title": "Ğırab sernameya perer",
 	"visualeditor-linknodeinspector-add-label": "Etiket ser ke",

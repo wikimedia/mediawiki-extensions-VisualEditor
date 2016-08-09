@@ -12,7 +12,8 @@
 			"Arystanbek",
 			"Meelo",
 			"McAang",
-			"Coolland"
+			"Coolland",
+			"Kumkumuk"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici]]",
@@ -29,5 +30,6 @@
 	"visualeditor-welcomedialog-content": "Herkes değişiklik yapabilir ve her iyileştirme yardımcı olmaktadır.",
 	"visualeditor-welcomedialog-content-thanks": "Dünyanın daha fazla şey keşfetmesine yardımcı olduğunuz için teşekkürler!",
 	"visualeditor-welcomedialog-switch": "Kaynak düzenleyiciye geç",
-	"visualeditor-welcomedialog-switch-ve": "Görsel düzenleyiciye geç"
+	"visualeditor-welcomedialog-switch-ve": "Görsel düzenleyiciye geç",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Hoş geldin}} $2"
 }
