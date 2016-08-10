@@ -124,6 +124,7 @@
 	"visualeditor-mwsignature-tool": "Вашият подпис",
 	"visualeditor-pagemenu-tooltip": "Настройки на страницата",
 	"visualeditor-parameter-search-more": "Показване на {{PLURAL:$1|още едно поле|още $1 полета}}",
+	"visualeditor-preference-betatempdisable": "Временно изключване на визуалния редактор, докато е бета версия",
 	"visualeditor-preference-core-description": "Активира се визуалният редактор. Тази функционалност не е достъпна в беседите и някои други именни пространства.",
 	"visualeditor-preference-core-label": "Визуален редактор",
 	"visualeditor-preference-enable": "Активиране на визуалния редактор. Той е наличен в  {{PLURAL:$2|следното именно пространство|следните именни пространства}}: $1",
