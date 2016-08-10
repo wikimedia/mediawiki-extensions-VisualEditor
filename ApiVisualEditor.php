@@ -123,24 +123,22 @@ class ApiVisualEditor extends ApiBase {
 		return $response['body'];
 	}
 
-	protected function storeInSerializationCache( $title, $oldid, $html, $etag ) {
+	protected function storeInSerializationCache( $title, $wikitext ) {
 		global $wgMemc;
 
-		// Convert the VE HTML to wikitext
-		$text = $this->postHTML( $title, $html, [ 'oldid' => $oldid ], $etag );
-		if ( $text === false ) {
+		if ( $wikitext === false ) {
 			return false;
 		}
 
 		// Store the corresponding wikitext, referenceable by a new key
-		$hash = md5( $text );
+		$hash = md5( $wikitext );
 		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
-		$wgMemc->set( $key, $text,
+		$wgMemc->set( $key, $wikitext,
 			$this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
 
 		// Also parse and prepare the edit in case it might be saved later
 		$page = WikiPage::factory( $title );
-		$content = ContentHandler::makeContent( $text, $title, CONTENT_MODEL_WIKITEXT );
+		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
 
 		$status = ApiStashEdit::parseAndStash( $page, $content, $this->getUser(), '' );
 		if ( $status === ApiStashEdit::ERROR_NONE ) {
@@ -167,7 +165,7 @@ class ApiVisualEditor extends ApiBase {
 			$path .= '/' . $parserParams['oldid'];
 		}
 		if ( !is_string( $etag ) || $etag === '' ) {
-			wfDebugLog( 'AdHocDebug', 'VisualEditr T135171 - bad etag: ' . var_export( $etag, true ) );
+			wfDebugLog( 'AdHocDebug', 'VisualEditor T135171 - bad etag: ' . var_export( $etag, true ) );
 		}
 		return $this->requestRestbase(
 			'POST',
@@ -285,6 +283,20 @@ class ApiVisualEditor extends ApiBase {
 		return $langlinks;
 	}
 
+	protected function tryDeflate( $content ) {
+		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
+			$deflated = base64_decode( substr( $content, 11 ) );
+			wfSuppressWarnings();
+			$inflated = gzinflate( $deflated );
+			wfRestoreWarnings();
+			if ( $deflated === $inflated || $inflated === false ) {
+				$this->dieUsage( "Content provided is not properly deflated", 'invaliddeflate' );
+			}
+			return $inflated;
+		}
+		return $content;
+	}
+
 	public function execute() {
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
@@ -303,17 +315,6 @@ class ApiVisualEditor extends ApiBase {
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
 			$parserParams['oldid'] = $params['oldid'];
-		}
-
-		$html = $params['html'];
-		if ( substr( $html, 0, 11 ) === 'rawdeflate,' ) {
-			$deflated = base64_decode( substr( $html, 11 ) );
-			wfSuppressWarnings();
-			$html = gzinflate( $deflated );
-			wfRestoreWarnings();
-			if ( $deflated === $html || $html === false ) {
-				$this->dieUsage( "HTML provided is not properly deflated", 'invaliddeflate' );
-			}
 		}
 
 		wfDebugLog( 'visualeditor', "called on '$title' with paction: '{$params['paction']}'" );
@@ -582,7 +583,9 @@ class ApiVisualEditor extends ApiBase {
 					if ( $params['html'] === null ) {
 						$this->dieUsageMsg( 'missingparam', 'html' );
 					}
-					$content = $this->postHTML( $title, $html, $parserParams, $params['etag'] );
+					$content = $this->postHTML(
+						$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+					);
 					if ( $content === false ) {
 						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
@@ -597,7 +600,12 @@ class ApiVisualEditor extends ApiBase {
 						$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
 					}
 				} else {
-					$wikitext = $this->postHTML( $title, $html, $parserParams, $params['etag'] );
+					if ( $params['html'] === null ) {
+						$this->dieUsageMsg( 'missingparam', 'html' );
+					}
+					$wikitext = $this->postHTML(
+						$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+					);
 					if ( $wikitext === false ) {
 						$this->dieUsage( 'Error contacting the document server', 'docserver' );
 					}
@@ -615,11 +623,15 @@ class ApiVisualEditor extends ApiBase {
 				if ( !isset( $parserParams['oldid'] ) ) {
 					$parserParams['oldid'] = Revision::newFromTitle( $title )->getId();
 				}
+				if ( $params['html'] === null ) {
+					$this->dieUsageMsg( 'missingparam', 'html' );
+				}
+				$wikitext = $this->postHTML(
+					$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+				);
 				$key = $this->storeInSerializationCache(
 					$title,
-					$parserParams['oldid'],
-					$html,
-					$params['etag']
+					$wikitext
 				);
 				$result = [ 'result' => 'success', 'cachekey' => $key ];
 				break;
