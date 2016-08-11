@@ -851,7 +851,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
-	if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+	if ( !ve.isUnmodifiedLeftClick( e ) ) {
 		return;
 	}
 	this.deactivate( false, 'navigate-read' );
@@ -1068,7 +1068,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 
 	}
 	$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
-		if ( !target.active || e.which !== 1 || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+		if ( !target.active || !ve.isUnmodifiedLeftClick( e ) ) {
 			return;
 		}
 
