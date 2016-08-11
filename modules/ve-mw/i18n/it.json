@@ -294,6 +294,7 @@
 	"visualeditor-mwgallerydialog-show-filename-field-label": "Mostra nomi dei file",
 	"visualeditor-mwgallerydialog-title": "Galleria",
 	"visualeditor-mwgallerydialog-widths-field-label": "Larghezza immagine",
+	"visualeditor-mwgallerydialog-widths-input-placeholder": "Larghezza predefinita: $1 px",
 	"visualeditor-mwsignature-tool": "La tua firma",
 	"visualeditor-pagemenu-tooltip": "Opzioni pagina",
 	"visualeditor-pagetranslationwarning": "Stai modificando una pagina traducibile. La modifica di queste pagine con questo editor non è ancora ufficialmente supportata.",
