@@ -538,11 +538,7 @@
 		},
 
 		onEditTabClick: function ( e ) {
-			// Default mouse button is normalised by jQuery to key code 1.
-			// Only do our handling if no keys are pressed, mouse button is 1
-			// (e.g. not middle click or right click) and no modifier keys
-			// (e.g. cmd-click to open in new tab).
-			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+			if ( !ve.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
 			e.preventDefault();
@@ -598,7 +594,7 @@
 
 		onEditSectionLinkClick: function ( e ) {
 			var targetPromise;
-			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+			if ( !ve.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
 
