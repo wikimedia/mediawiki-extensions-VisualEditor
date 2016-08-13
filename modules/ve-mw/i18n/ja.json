@@ -222,6 +222,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "小見出し 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "小見出し 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "小見出し 4",
+	"visualeditor-generating-wikitext-progress": "ウィキテキストを生成中",
 	"visualeditor-languages-tool": "他言語",
 	"visualeditor-linkinspector-button-link-external": "外部リンク",
 	"visualeditor-linkinspector-button-link-internal": "ページを検索",

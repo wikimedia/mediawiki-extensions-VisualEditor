@@ -258,6 +258,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Sous-titre 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Sous-titre 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sous-titre 4",
+	"visualeditor-generating-wikitext-progress": "Génération du code wiki",
 	"visualeditor-languages-tool": "Langues",
 	"visualeditor-linkinspector-button-link-external": "Lien externe",
 	"visualeditor-linkinspector-button-link-internal": "Chercher des pages",

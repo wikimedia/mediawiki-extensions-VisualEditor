@@ -235,6 +235,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "2단계 하위 문단 제목",
 	"visualeditor-formatdropdown-format-mw-heading5": "3단계 하위 문단 제목",
 	"visualeditor-formatdropdown-format-mw-heading6": "4단계 하위 문단 제목",
+	"visualeditor-generating-wikitext-progress": "위키텍스트를 만드는 중",
 	"visualeditor-languages-tool": "언어",
 	"visualeditor-linkinspector-button-link-external": "바깥 링크",
 	"visualeditor-linkinspector-button-link-internal": "문서 검색",
