@@ -1470,7 +1470,13 @@ ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 		}
 	}
 	// Check if there's been an edit
-	if ( this.getSurface() && this.edited && !this.submitting && mw.user.options.get( 'useeditwarning' ) ) {
+	if (
+		this.getSurface() &&
+		$.contains( document, this.getSurface().$element.get( 0 ) ) &&
+		this.edited &&
+		!this.submitting &&
+		mw.user.options.get( 'useeditwarning' )
+	) {
 		// Return our message
 		return ve.msg( 'visualeditor-viewpage-savewarning' );
 	}
