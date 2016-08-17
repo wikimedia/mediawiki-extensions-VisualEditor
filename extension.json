@@ -261,6 +261,13 @@
 				"mobile"
 			]
 		},
+		"spark-md5": {
+			"scripts": "lib/ve/lib/spark-md5/spark-md5.js",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.supportCheck": {
 			"scripts": "lib/ve/src/init/ve.init.SupportCheck.js",
 			"targets": [
@@ -882,6 +889,7 @@
 			"dependencies": [
 				"unicodejs",
 				"rangefix",
+				"spark-md5",
 				"papaparse",
 				"dom-classlist-shim",
 				"jquery.client",

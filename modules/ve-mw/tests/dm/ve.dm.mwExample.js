@@ -204,22 +204,19 @@ ve.dm.mwExample.MWTransclusion.mixedDataOpen = {
 ve.dm.mwExample.MWTransclusion.mixedDataClose = { type: '/mwTransclusionInline' };
 
 ve.dm.mwExample.MWTransclusion.blockParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.blockData ), undefined ] );
-ve.dm.mwExample.MWTransclusion.blockStoreItems = {
-	hash: ve.dm.mwExample.MWTransclusion.blockParamsHash,
-	value: $( ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent ).toArray()
-};
+ve.dm.mwExample.MWTransclusion.blockStoreItems = {};
+ve.dm.mwExample.MWTransclusion.blockStoreItems[ ve.dm.IndexValueStore.prototype.indexOfValue( null, ve.dm.mwExample.MWTransclusion.blockParamsHash ) ] =
+	$( ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent ).toArray();
 
 ve.dm.mwExample.MWTransclusion.inlineParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.inlineData ), undefined ] );
-ve.dm.mwExample.MWTransclusion.inlineStoreItems = {
-	hash: ve.dm.mwExample.MWTransclusion.inlineParamsHash,
-	value: $( ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose ).toArray()
-};
+ve.dm.mwExample.MWTransclusion.inlineStoreItems = {};
+ve.dm.mwExample.MWTransclusion.inlineStoreItems[ ve.dm.IndexValueStore.prototype.indexOfValue( null, ve.dm.mwExample.MWTransclusion.inlineParamsHash ) ] =
+	$( ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose ).toArray();
 
 ve.dm.mwExample.MWTransclusion.mixedParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.mixedDataOpen ), undefined ] );
-ve.dm.mwExample.MWTransclusion.mixedStoreItems = {
-	hash: ve.dm.mwExample.MWTransclusion.mixedParamsHash,
-	value: $( ve.dm.mwExample.MWTransclusion.mixed ).toArray()
-};
+ve.dm.mwExample.MWTransclusion.mixedStoreItems = {};
+ve.dm.mwExample.MWTransclusion.mixedStoreItems[ ve.dm.IndexValueStore.prototype.indexOfValue( null, ve.dm.mwExample.MWTransclusion.mixedParamsHash ) ] =
+	$( ve.dm.mwExample.MWTransclusion.mixed ).toArray();
 
 ve.dm.mwExample.MWInternalLink = {
 	absoluteHref: ve.resolveUrl( '/wiki/Foo/Bar', ve.dm.example.base )
@@ -281,12 +278,9 @@ ve.dm.mwExample.MWBlockImage = {
 		{ type: '/mwImageCaption' },
 		{ type: '/mwBlockImage' }
 	],
-	storeItems: [
-		{
-			hash: '[{"height":2,"resource":"FooBar","type":"mwBlockImage","width":1},null]',
-			value: 'Bar'
-		}
-	]
+	storeItems: {
+		heedc6ea02e1424e1: ve.ce.minImgDataUri
+	}
 };
 
 ve.dm.mwExample.MWInlineImage = {
@@ -311,12 +305,9 @@ ve.dm.mwExample.MWInlineImage = {
 			unrecognizedClasses: [ 'foo' ]
 		}
 	},
-	storeItems: [
-		{
-			hash: '[{"height":155,"resource":"./File:Wiki.png","type":"mwInlineImage","width":135},null]',
-			value: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
-		}
-	]
+	storeItems: {
+		h9e4c46abce8374a6: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
+	}
 };
 
 ve.dm.mwExample.mwNowikiAnnotation = {
@@ -656,7 +647,8 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		]
+		],
+		storeItems: ve.dm.mwExample.MWInlineImage.storeItems
 	},
 	'mwHeading and mwPreformatted nodes': {
 		body: '<h2>Foo</h2><pre>Bar</pre>',
@@ -715,9 +707,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeItems: [
-			ve.dm.mwExample.MWTransclusion.blockStoreItems
-		],
+		storeItems: ve.dm.mwExample.MWTransclusion.blockStoreItems,
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromData,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenClipboard + ve.dm.mwExample.MWTransclusion.blockContentClipboard
@@ -730,9 +720,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeItems: [
-			ve.dm.mwExample.MWTransclusion.blockStoreItems
-		],
+		storeItems: ve.dm.mwExample.MWTransclusion.blockStoreItems,
 		modify: function ( model ) {
 			model.data.data[ 0 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = 'Hello, globe!';
 		},
@@ -750,9 +738,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeItems: [
-			ve.dm.mwExample.MWTransclusion.inlineStoreItems
-		],
+		storeItems: ve.dm.mwExample.MWTransclusion.inlineStoreItems,
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromData + ve.dm.mwExample.MWTransclusion.inlineClose,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenClipboard + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose
@@ -767,9 +753,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeItems: [
-			ve.dm.mwExample.MWTransclusion.inlineStoreItems
-		],
+		storeItems: ve.dm.mwExample.MWTransclusion.inlineStoreItems,
 		modify: function ( model ) {
 			model.data.data[ 1 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = '5,678';
 		},
@@ -835,12 +819,9 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeItems: [
-			{
-				hash: '[{"mw":{"parts":[{"template":{"i":0,"params":{"1":{"wt":"foo"}},"target":{"href":"./Template:Echo","wt":"echo"}}}]},"type":"mwTransclusionBlock"},null]',
-				value: $( '<p about="#mwt1" typeof="mw:Transclusion" data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}" data-parsoid="1">foo</p>' ).toArray()
-			}
-		]
+		storeItems: {
+			hd2ff771ac84b229d: $( '<p about="#mwt1" typeof="mw:Transclusion" data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}" data-parsoid="1">foo</p>' ).toArray()
+		}
 	},
 	'mw:Transclusion containing only meta data': {
 		body: ve.dm.mwExample.MWTransclusion.meta,
@@ -1207,9 +1188,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeItems: [
-			ve.dm.mwExample.MWTransclusion.mixedStoreItems
-		]
+		storeItems: ve.dm.mwExample.MWTransclusion.mixedStoreItems
 	},
 	'mw:Entity': {
 		body: '<p>a<span typeof="mw:Entity">¢</span>b<span typeof="mw:Entity">¥</span><span typeof="mw:Entity">™</span></p>',
@@ -1320,7 +1299,8 @@ ve.dm.mwExample.domToDataCases = {
 		data: ve.dm.mwExample.MWBlockImage.data.concat( [
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		] )
+		] ),
+		storeItems: ve.dm.mwExample.MWBlockImage.storeItems
 	},
 	'attribute preservation does not crash due to text node split': {
 		body:

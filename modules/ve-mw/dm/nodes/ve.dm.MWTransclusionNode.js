@@ -117,9 +117,10 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var els, i, len, span, index,
+	var els, i, len, span, value,
 		store = converter.getStore(),
-		originalMw = dataElement.attributes.originalMw;
+		originalMw = dataElement.attributes.originalMw,
+		originalDomElements = store.value( dataElement.originalDomElementsIndex );
 
 	function wrapTextNode( node ) {
 		var wrapper;
@@ -134,23 +135,23 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
 	if (
-		dataElement.originalDomElements &&
+		originalDomElements &&
 		originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) )
 	) {
 		// originalDomElements is also used for CE rendering so return a copy
-		els = ve.copyDomElements( dataElement.originalDomElements, doc );
+		els = ve.copyDomElements( originalDomElements, doc );
 	} else {
 		if (
 			converter.isForClipboard() &&
 			// Use getHashObjectForRendering to get the rendering from the store
-			( index = store.indexOfHash( OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) !== null
+			( value = store.value( store.indexOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
 		) {
 			// For the clipboard use the current DOM contents so the user has something
 			// meaningful to paste into external applications
-			els = ve.copyDomElements( store.value( index ), doc );
+			els = ve.copyDomElements( value, doc );
 			els[ 0 ] = wrapTextNode( els[ 0 ] );
-		} else if ( dataElement.originalDomElements ) {
-			els = [ doc.createElement( dataElement.originalDomElements[ 0 ].nodeName ) ];
+		} else if ( originalDomElements ) {
+			els = [ doc.createElement( originalDomElements[ 0 ].nodeName ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
 		}

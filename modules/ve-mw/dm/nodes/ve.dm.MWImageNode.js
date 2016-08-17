@@ -213,15 +213,6 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
 };
 
 /**
- * Get the store hash for the original dimensions of the image
- *
- * @return {string} Store hash
- */
-ve.dm.MWImageNode.prototype.getSizeHash = function () {
-	return 'MWImageOriginalSize:' + this.getFilename();
-};
-
-/**
  * @inheritdoc
  */
 ve.dm.MWImageNode.prototype.getScalable = function () {
