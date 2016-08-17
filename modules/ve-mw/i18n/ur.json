@@ -6,7 +6,8 @@
 			"عثمان خان شاہ",
 			"Syedalinaqinaqvi",
 			"عرفان ارشد",
-			"Obaid Raza"
+			"Obaid Raza",
+			"Muhammad Shuaib"
 		]
 	},
 	"tooltip-ca-ve-edit": "صفحہ میں ترمیم کریں",
@@ -14,6 +15,24 @@
 	"visualeditor-ca-createsource": "مسودہ بنائے",
 	"visualeditor-ca-editsource": "مسودے میں ترمیم کریں",
 	"visualeditor-ca-editsource-section": "مسودے میں ترمیم کریں",
-	"visualeditor-descriptionpagelink": "Project:ویژوئل ایڈیٹر",
-	"visualeditor-serializeerror": "نقص ہے ڈیٹا اثقال کرنے میں :  $1 ۔"
+	"visualeditor-ca-ve-create": "بصری خانہ ترمیم",
+	"visualeditor-ca-ve-edit": "بصری خانہ ترمیم",
+	"visualeditor-ca-ve-edit-section": "بصری خانہ ترمیم",
+	"visualeditor-categories-tool": "زمرہ جات",
+	"visualeditor-desc": "بصری خانہ ترمیم برائے میڈیاویکی",
+	"visualeditor-descriptionpagelink": "Project:بصری خانہ ترمیم",
+	"visualeditor-dialog-media-alttext-section": "متبادل متن",
+	"visualeditor-dialog-media-change-image": "تصویر تبدیل کریں",
+	"visualeditor-dialog-media-choose-image": "اس تصویر کو استعمال کریں",
+	"visualeditor-dialog-media-content-filename": "فائل کا نام",
+	"visualeditor-dialog-media-content-description-link": "(صفحہ وضاحت)",
+	"visualeditor-dialog-media-content-section": "عنوان",
+	"visualeditor-savedialog-title-save": "اپنی تبدیلیاں محفوظ کریں",
+	"visualeditor-serializeerror": "نقص ہے ڈیٹا اثقال کرنے میں :  $1 ۔",
+	"visualeditor-shortcuts-insert": "درج کریں",
+	"visualeditor-toolbar-savedialog": "صفحہ محفوظ کریں",
+	"visualeditor-toolbar-savedialog-short": "محفوظ کریں",
+	"visualeditor-usernamespacepagelink": "Project:صارف نام فضا",
+	"visualeditor-version-label": "نسخہ",
+	"visualeditor-viewpage-savewarning-title": "واقعی؟"
 }

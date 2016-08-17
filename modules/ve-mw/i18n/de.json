@@ -48,7 +48,7 @@
 	"visualeditor-advancedsettings-tool": "Erweiterte Einstellungen",
 	"visualeditor-backbutton-tooltip": "Zurück gehen",
 	"visualeditor-beta-label": "Beta",
-	"visualeditor-beta-warning": "Du kannst zu jeder Zeit durch das Anklicken der Schaltfläche „Wechseln“ zum Quelltext-Editor wechseln. Falls du irgendwelche Fehler entdeckst, berichte sie bitte unten.",
+	"visualeditor-beta-warning": "Falls du irgendwelche technischen Fehler entdeckst, berichte sie bitte.",
 	"visualeditor-browserwarning": "Du verwendest einen Browser, der von diesem Editor nicht offiziell unterstützt wird.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lokalen Beschreibungsquelltext hinzufügen",
 	"visualeditor-ca-createsource": "Quelltext erstellen",
