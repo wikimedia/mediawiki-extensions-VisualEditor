@@ -173,20 +173,27 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.createSurface = function ( dmD
  * Get a wikitext fragment from a document
  *
  * @param {ve.dm.Document} doc Document
+ * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
-ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFragment = function ( doc ) {
-	var promise,
-		xhr = new mw.Api().post(
-			{
-				action: 'visualeditor',
-				paction: 'serialize',
-				html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
-				page: this.pageName,
-				oldid: this.revid
-			},
-			{ contentType: 'multipart/form-data' }
-		);
+ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFragment = function ( doc, useRevision ) {
+	var promise, xhr,
+		params = {
+			action: 'visualeditor',
+			paction: 'serialize',
+			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+			page: this.pageName
+		};
+
+	if ( useRevision === undefined || useRevision ) {
+		params.oldid = this.revid;
+		params.etag = this.etag;
+	}
+
+	xhr = new mw.Api().post(
+		params,
+		{ contentType: 'multipart/form-data' }
+	);
 
 	promise = xhr.then( function ( response ) {
 		if ( response.visualeditor ) {

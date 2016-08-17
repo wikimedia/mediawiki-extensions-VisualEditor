@@ -93,7 +93,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertDocument = function ( doc ) {
 		return $.Deferred().reject().promise();
 	}
 
-	wikitextPromise = ve.init.target.getWikitextFragment( doc );
+	wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
 
 	// TODO: Emit an event to trigger the progress bar
 	ve.init.target.getSurface().createProgress(
