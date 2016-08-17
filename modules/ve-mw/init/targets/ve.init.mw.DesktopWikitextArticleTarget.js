@@ -250,7 +250,7 @@ OO.inheritClass( ve.ui.MWEditModeVisualTool, ve.ui.MWEditModeTool );
 ve.ui.MWEditModeVisualTool.static.name = 'editModeVisual';
 ve.ui.MWEditModeVisualTool.static.icon = 'edit';
 ve.ui.MWEditModeVisualTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-mweditmodevisual-tool' );
+	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool' );
 /**
  * @inheritdoc
  */
