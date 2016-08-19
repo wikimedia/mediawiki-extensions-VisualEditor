@@ -25,7 +25,8 @@
 			"Cwek",
 			"EagerLin",
 			"Yejianfei",
-			"飞舞回堂前"
+			"飞舞回堂前",
+			"Hanyanbo98"
 		]
 	},
 	"apihelp-visualeditor-description": "从Parsoid服务返回页面的HTML5。",
@@ -59,7 +60,7 @@
 	"visualeditor-advancedsettings-tool": "高级设置",
 	"visualeditor-backbutton-tooltip": "返回",
 	"visualeditor-beta-label": "测试",
-	"visualeditor-beta-warning": "您可以随时通过点击切换按钮切换为源代码编辑器。如果您遭遇任何问题，请在下方报告。",
+	"visualeditor-beta-warning": "请报告您在编辑时遇到的任何技术问题。",
 	"visualeditor-browserwarning": "此编辑器不支持您正在使用的浏览器。",
 	"visualeditor-ca-createlocaldescriptionsource": "添加本地说明源代码",
 	"visualeditor-ca-createsource": "创建源代码",

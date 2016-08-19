@@ -18,7 +18,8 @@
 			"Cvanca",
 			"Kusavica",
 			"Dvorapa",
-			"Walter Klosse"
+			"Walter Klosse",
+			"Marek Pavlica"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
@@ -52,7 +53,7 @@
 	"visualeditor-advancedsettings-tool": "Pokročilá nastavení",
 	"visualeditor-backbutton-tooltip": "Zpět",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Kliknutím na „Přepnout“ se můžete bez ztráty provedených změn přepnout do režimu editace zdroje. Pokud narazíte na jakékoli problémy, nahlaste je prosím níže.",
+	"visualeditor-beta-warning": "Pokud při editaci narazíte na jakékoli technické problémy, nahlaste je prosím.",
 	"visualeditor-browserwarning": "Používáte prohlížeč, který není tímto editorem oficiálně podporován.",
 	"visualeditor-ca-createlocaldescriptionsource": "Přidat zdroj místního popisu",
 	"visualeditor-ca-createsource": "Založit zdroj",
@@ -231,6 +232,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Podnadpis 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Podnadpis 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Podnadpis 4",
+	"visualeditor-generating-wikitext-progress": "Generuji wikitextu",
 	"visualeditor-languages-tool": "Jazyky",
 	"visualeditor-linkinspector-button-link-external": "Externí odkaz",
 	"visualeditor-linkinspector-button-link-internal": "Hledání stránek",

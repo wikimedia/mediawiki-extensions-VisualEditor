@@ -306,7 +306,7 @@
 	"visualeditor-preference-core-description": "فعال‌سازی این ویرایشگر. در صفحه‌های بحث و سایر فضای نام‌ها ممکن است موجود نباشد.",
 	"visualeditor-preference-core-label": "ویرایشگر دیداری",
 	"visualeditor-preference-enable": "فعال‌سازی این ویرایشگر. {{PLURAL:$2|فضای نام|فضای نام‌های}} زیر فعال خواهد بود: $1",
-	"visualeditor-preference-tabs": "ویرایش حالت:",
+	"visualeditor-preference-tabs": "حالت ویرایش:",
 	"visualeditor-preference-tabs-multi-tab": "به من هر دو زبانهٔ ویرایش را نشان بده",
 	"visualeditor-preference-tabs-prefer-ve": "در صورت امکان، همیشه از ویرایشگر دیداری استفاده می‌کنم",
 	"visualeditor-preference-tabs-prefer-wt": "همیشه از ویرایشگر متنی استفاده می‌کنم",

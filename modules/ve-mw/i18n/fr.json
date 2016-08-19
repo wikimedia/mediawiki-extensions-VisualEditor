@@ -79,7 +79,7 @@
 	"visualeditor-advancedsettings-tool": "Paramètres avancés",
 	"visualeditor-backbutton-tooltip": "Revenir en arrière",
 	"visualeditor-beta-label": "bêta",
-	"visualeditor-beta-warning": "Vous pouvez basculer à tout moment vers l’éditeur en mode source en cliquant sur le bouton de bascule. Si vous rencontrez des problèmes, veuillez les signaler ci-dessous.",
+	"visualeditor-beta-warning": "Si vous rencontrez des problèmes techniques en cours d’édition, veuillez les signaler.",
 	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement supporté par cet éditeur.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ajouter une description locale (wikicode)",
 	"visualeditor-ca-createsource": "Créer le wikicode",

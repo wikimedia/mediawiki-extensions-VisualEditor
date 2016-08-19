@@ -50,7 +50,7 @@
 	"visualeditor-advancedsettings-tool": "הגדרות מתקדמות",
 	"visualeditor-backbutton-tooltip": "חזרה",
 	"visualeditor-beta-label": "בטא",
-	"visualeditor-beta-warning": "אפשר לעבור לעריכת קוד מקור בכל זמן באמצעות לחיצה על כפתור המעבר. אם מצאת בעיות כלשהן, נא לדווח אותן להלן.",
+	"visualeditor-beta-warning": "אם {{GENDER:|אתה נתקל|את נתקלת|אתם נתקלים}} בבעיות טכניות כלשהן בזמן העריכה, אנא {{GENDER:|דווח|דווחי|דווחו}} עליהן.",
 	"visualeditor-browserwarning": "העורך הזה אינו נתמך באופן רשמי בדפדפן שלך.",
 	"visualeditor-ca-createlocaldescriptionsource": "הוספת מקור תיאור מקומי",
 	"visualeditor-ca-createsource": "יצירת קוד מקור",
