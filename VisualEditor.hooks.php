@@ -1009,9 +1009,17 @@ class VisualEditorHooks {
 	public static function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
 		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
-			$user->setOption( 'visualeditor-editor', $cookie );
-			$user->saveSettings();
+			DeferredUpdates::addUpdate( new AtomicSectionUpdate(
+				wfGetDB( DB_MASTER ),
+				__METHOD__,
+				function () use ( $user, $cookie ) {
+					$uLatest = $user->getInstanceForUpdate();
+					$uLatest->setOption( 'visualeditor-editor', $cookie );
+					$uLatest->saveSettings();
+				}
+			) );
 		}
+
 		return true;
 	}
 }
