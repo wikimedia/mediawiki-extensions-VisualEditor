@@ -2,4 +2,4 @@ BROWSER:
   - chrome
 
 PLATFORM:
-  - Linux
+  - Windows 10
