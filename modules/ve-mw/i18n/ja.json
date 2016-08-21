@@ -15,7 +15,8 @@
 			"Jdforrester",
 			"Sudachi",
 			"Otokoume",
-			"Vigorous action"
+			"Vigorous action",
+			"Suchichi02"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -47,7 +48,7 @@
 	"visualeditor-advancedsettings-tool": "高度な設定",
 	"visualeditor-backbutton-tooltip": "戻る",
 	"visualeditor-beta-label": "ベータ",
-	"visualeditor-beta-warning": "スイッチボタンをクリックすることで、いつでもソースエディターに切り替えられます。もし問題に遭遇したら、以下に報告してください。",
+	"visualeditor-beta-warning": "もし編集中、技術的問題に遭遇したら、報告してください。",
 	"visualeditor-browserwarning": "このエディターは、ご使用中のブラウザーに正式には対応していません。",
 	"visualeditor-ca-createlocaldescriptionsource": "ローカルの解説を作成",
 	"visualeditor-ca-createsource": "ソースを作成",
