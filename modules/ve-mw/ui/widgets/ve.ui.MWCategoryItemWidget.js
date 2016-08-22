@@ -25,7 +25,7 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	config = ve.extendObject( { indicator: 'down' }, config );
 
 	// Parent constructor
-	OO.ui.ButtonWidget.call( this, config );
+	ve.ui.MWCategoryItemWidget.super.call( this, config );
 
 	// Mixin constructors
 	OO.ui.mixin.DraggableElement.call( this, config );

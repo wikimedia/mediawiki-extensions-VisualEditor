@@ -14,8 +14,8 @@
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHeading1FormatTool = function VeUiMWHeading1FormatTool( toolGroup, config ) {
-	ve.ui.Heading1FormatTool.call( this, toolGroup, config );
+ve.ui.MWHeading1FormatTool = function VeUiMWHeading1FormatTool() {
+	ve.ui.MWHeading1FormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWHeading1FormatTool, ve.ui.Heading1FormatTool );
 ve.ui.MWHeading1FormatTool.static.title =
@@ -32,8 +32,8 @@ ve.ui.toolFactory.register( ve.ui.MWHeading1FormatTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHeading2FormatTool = function VeUiMWHeading2FormatTool( toolGroup, config ) {
-	ve.ui.Heading2FormatTool.call( this, toolGroup, config );
+ve.ui.MWHeading2FormatTool = function VeUiMWHeading2FormatTool() {
+	ve.ui.MWHeading2FormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWHeading2FormatTool, ve.ui.Heading2FormatTool );
 ve.ui.MWHeading2FormatTool.static.title =
@@ -50,8 +50,8 @@ ve.ui.toolFactory.register( ve.ui.MWHeading2FormatTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHeading3FormatTool = function VeUiMWHeading3FormatTool( toolGroup, config ) {
-	ve.ui.Heading3FormatTool.call( this, toolGroup, config );
+ve.ui.MWHeading3FormatTool = function VeUiMWHeading3FormatTool() {
+	ve.ui.MWHeading3FormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWHeading3FormatTool, ve.ui.Heading3FormatTool );
 ve.ui.MWHeading3FormatTool.static.title =
@@ -68,8 +68,8 @@ ve.ui.toolFactory.register( ve.ui.MWHeading3FormatTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHeading4FormatTool = function VeUiMWHeading4FormatTool( toolGroup, config ) {
-	ve.ui.Heading4FormatTool.call( this, toolGroup, config );
+ve.ui.MWHeading4FormatTool = function VeUiMWHeading4FormatTool() {
+	ve.ui.MWHeading4FormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWHeading4FormatTool, ve.ui.Heading4FormatTool );
 ve.ui.MWHeading4FormatTool.static.title =
@@ -86,8 +86,8 @@ ve.ui.toolFactory.register( ve.ui.MWHeading4FormatTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHeading5FormatTool = function VeUiMWHeading5FormatTool( toolGroup, config ) {
-	ve.ui.Heading5FormatTool.call( this, toolGroup, config );
+ve.ui.MWHeading5FormatTool = function VeUiMWHeading5FormatTool() {
+	ve.ui.MWHeading5FormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWHeading5FormatTool, ve.ui.Heading5FormatTool );
 ve.ui.MWHeading5FormatTool.static.title =
@@ -104,8 +104,8 @@ ve.ui.toolFactory.register( ve.ui.MWHeading5FormatTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWHeading6FormatTool = function VeUiMWHeading6FormatTool( toolGroup, config ) {
-	ve.ui.Heading6FormatTool.call( this, toolGroup, config );
+ve.ui.MWHeading6FormatTool = function VeUiMWHeading6FormatTool() {
+	ve.ui.MWHeading6FormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWHeading6FormatTool, ve.ui.Heading6FormatTool );
 ve.ui.MWHeading6FormatTool.static.title =
@@ -134,8 +134,8 @@ ve.ui.toolFactory.register( ve.ui.MWHeading6FormatTool );
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWPreformattedFormatTool = function VeUiMWPreformattedFormatTool( toolGroup, config ) {
-	ve.ui.FormatTool.call( this, toolGroup, config );
+ve.ui.MWPreformattedFormatTool = function VeUiMWPreformattedFormatTool() {
+	ve.ui.MWPreformattedFormatTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWPreformattedFormatTool, ve.ui.PreformattedFormatTool );
 ve.ui.MWPreformattedFormatTool.static.format = { type: 'mwPreformatted' };

@@ -17,7 +17,7 @@
  */
 ve.dm.MWTransclusionContentModel = function VeDmMWTransclusionContentModel( transclusion, value ) {
 	// Parent constructor
-	ve.dm.MWTransclusionPartModel.call( this, transclusion );
+	ve.dm.MWTransclusionContentModel.super.call( this, transclusion );
 
 	// Properties
 	this.value = value || '';

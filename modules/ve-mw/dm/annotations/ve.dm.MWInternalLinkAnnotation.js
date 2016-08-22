@@ -17,9 +17,9 @@
  * @constructor
  * @param {Object} element
  */
-ve.dm.MWInternalLinkAnnotation = function VeDmMWInternalLinkAnnotation( element ) {
+ve.dm.MWInternalLinkAnnotation = function VeDmMWInternalLinkAnnotation() {
 	// Parent constructor
-	ve.dm.LinkAnnotation.call( this, element );
+	ve.dm.MWInternalLinkAnnotation.super.apply( this, arguments );
 };
 
 /* Inheritance */

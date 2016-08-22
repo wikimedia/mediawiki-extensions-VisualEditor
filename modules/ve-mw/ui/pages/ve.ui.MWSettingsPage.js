@@ -20,7 +20,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	var settingsPage = this;
 
 	// Parent constructor
-	OO.ui.PageLayout.call( this, name, config );
+	ve.ui.MWSettingsPage.super.apply( this, arguments );
 
 	// Properties
 	this.metaList = null;
@@ -167,9 +167,9 @@ ve.ui.MWSettingsPage.static.addMetaCheckbox = function ( metaName, label ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWSettingsPage.prototype.setOutlineItem = function ( outlineItem ) {
+ve.ui.MWSettingsPage.prototype.setOutlineItem = function () {
 	// Parent method
-	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+	ve.ui.MWSettingsPage.super.prototype.setOutlineItem.apply( this, arguments );
 
 	if ( this.outlineItem ) {
 		this.outlineItem

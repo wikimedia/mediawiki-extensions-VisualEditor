@@ -19,7 +19,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	config = ve.extendObject( { autoClose: true }, config );
 
 	// Parent constructor
-	OO.ui.PopupWidget.call( this, config );
+	ve.ui.MWCategoryPopupWidget.super.call( this, config );
 
 	// Properties
 	this.category = null;

@@ -16,9 +16,9 @@
  * @constructor
  * @param {Object} [element] Reference to element in linear model
  */
-ve.dm.MWSignatureNode = function VeDmMWSignatureNode( element ) {
+ve.dm.MWSignatureNode = function VeDmMWSignatureNode() {
 	// Parent constructor
-	ve.dm.MWTransclusionInlineNode.call( this, element );
+	ve.dm.MWSignatureNode.super.apply( this, arguments );
 };
 
 /* Inheritance */

@@ -16,7 +16,7 @@
  */
 ve.dm.MWGalleryNode = function VeDmMWGalleryNode() {
 	// Parent constructor
-	ve.dm.MWBlockExtensionNode.apply( this, arguments );
+	ve.dm.MWGalleryNode.super.apply( this, arguments );
 };
 
 /* Inheritance */

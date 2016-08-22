@@ -22,7 +22,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 	}, config );
 
 	// Parent constructor
-	OO.ui.SearchWidget.call( this, config );
+	ve.ui.MWMediaSearchWidget.super.call( this, config );
 
 	// Properties
 	this.providers = {};
@@ -208,7 +208,7 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 	this.searchValue = trimmed;
 
 	// Parent method
-	OO.ui.SearchWidget.prototype.onQueryChange.apply( this, arguments );
+	ve.ui.MWMediaSearchWidget.super.prototype.onQueryChange.apply( this, arguments );
 
 	// Reset
 	this.itemCache = {};

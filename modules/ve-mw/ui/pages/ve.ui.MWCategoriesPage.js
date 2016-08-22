@@ -21,7 +21,7 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 	config = config || {};
 
 	// Parent constructor
-	OO.ui.PageLayout.call( this, name, config );
+	ve.ui.MWCategoriesPage.super.apply( this, arguments );
 
 	// Properties
 	this.metaList = null;
@@ -77,9 +77,9 @@ OO.inheritClass( ve.ui.MWCategoriesPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWCategoriesPage.prototype.setOutlineItem = function ( outlineItem ) {
+ve.ui.MWCategoriesPage.prototype.setOutlineItem = function () {
 	// Parent method
-	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+	ve.ui.MWCategoriesPage.super.prototype.setOutlineItem.apply( this, arguments );
 
 	if ( this.outlineItem ) {
 		this.outlineItem

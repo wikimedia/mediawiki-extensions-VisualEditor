@@ -25,7 +25,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}, config );
 
 	// Parent constructor
-	OO.ui.PageLayout.call( this, name, config );
+	ve.ui.MWParameterPage.super.apply( this, arguments );
 
 	// Properties
 	this.edited = false;
@@ -341,9 +341,9 @@ ve.ui.MWParameterPage.prototype.onLabelClick = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWParameterPage.prototype.setOutlineItem = function ( outlineItem ) {
+ve.ui.MWParameterPage.prototype.setOutlineItem = function () {
 	// Parent method
-	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+	ve.ui.MWParameterPage.super.prototype.setOutlineItem.apply( this, arguments );
 
 	if ( this.outlineItem ) {
 		this.outlineItem

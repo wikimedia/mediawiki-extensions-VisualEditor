@@ -13,9 +13,9 @@
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
  */
-ve.dm.MWNewSectionEditDisableMetaItem = function VeDmMWNewSectionEditDisableMetaItem( element ) {
+ve.dm.MWNewSectionEditDisableMetaItem = function VeDmMWNewSectionEditDisableMetaItem() {
 	// Parent constructor
-	ve.dm.MetaItem.call( this, element );
+	ve.dm.MWNewSectionEditDisableMetaItem.super.apply( this, arguments );
 };
 
 /* Inheritance */

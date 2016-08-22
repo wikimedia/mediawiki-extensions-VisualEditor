@@ -14,9 +14,9 @@
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWLinkNodeInspector = function VeUiMWLinkNodeInspector( config ) {
+ve.ui.MWLinkNodeInspector = function VeUiMWLinkNodeInspector() {
 	// Parent constructor
-	ve.ui.NodeInspector.call( this, config );
+	ve.ui.MWLinkNodeInspector.super.apply( this, arguments );
 };
 
 /* Inheritance */

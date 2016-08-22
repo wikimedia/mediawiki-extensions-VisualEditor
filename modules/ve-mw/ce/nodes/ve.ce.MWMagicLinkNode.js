@@ -15,9 +15,9 @@
  * @param {ve.dm.MWMagicLinkNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWMagicLinkNode = function VeCeMWMagicLinkNode( model, config ) {
+ve.ce.MWMagicLinkNode = function VeCeMWMagicLinkNode() {
 	// Parent constructor
-	ve.ce.LeafNode.call( this, model, config );
+	ve.ce.MWMagicLinkNode.super.apply( this, arguments );
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );

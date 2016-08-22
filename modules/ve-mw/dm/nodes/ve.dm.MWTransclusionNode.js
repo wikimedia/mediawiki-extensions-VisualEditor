@@ -407,7 +407,7 @@ ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
  */
 ve.dm.MWTransclusionBlockNode = function VeDmMWTransclusionBlockNode() {
 	// Parent constructor
-	ve.dm.MWTransclusionNode.apply( this, arguments );
+	ve.dm.MWTransclusionBlockNode.super.apply( this, arguments );
 };
 
 OO.inheritClass( ve.dm.MWTransclusionBlockNode, ve.dm.MWTransclusionNode );
@@ -427,7 +427,7 @@ ve.dm.MWTransclusionBlockNode.static.name = 'mwTransclusionBlock';
  */
 ve.dm.MWTransclusionInlineNode = function VeDmMWTransclusionInlineNode() {
 	// Parent constructor
-	ve.dm.MWTransclusionNode.apply( this, arguments );
+	ve.dm.MWTransclusionInlineNode.super.apply( this, arguments );
 };
 
 OO.inheritClass( ve.dm.MWTransclusionInlineNode, ve.dm.MWTransclusionNode );

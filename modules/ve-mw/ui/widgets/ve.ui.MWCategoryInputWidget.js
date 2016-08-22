@@ -23,7 +23,7 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 	}, config );
 
 	// Parent constructor
-	OO.ui.TextInputWidget.call( this, config );
+	ve.ui.MWCategoryInputWidget.super.call( this, config );
 
 	// Mixin constructors
 	OO.ui.mixin.LookupElement.call( this, config );

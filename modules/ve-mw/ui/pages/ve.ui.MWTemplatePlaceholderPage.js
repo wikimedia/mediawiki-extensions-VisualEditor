@@ -25,7 +25,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	}, config );
 
 	// Parent constructor
-	OO.ui.PageLayout.call( this, name, config );
+	ve.ui.MWTemplatePlaceholderPage.super.call( this, name, config );
 
 	// Properties
 	this.placeholder = placeholder;
@@ -87,9 +87,9 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function ( outlineItem ) {
+ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 	// Parent method
-	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+	ve.ui.MWTemplatePlaceholderPage.super.prototype.setOutlineItem.apply( this, arguments );
 
 	if ( this.outlineItem ) {
 		this.outlineItem

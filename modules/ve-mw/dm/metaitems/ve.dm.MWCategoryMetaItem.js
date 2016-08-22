@@ -13,9 +13,9 @@
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
  */
-ve.dm.MWCategoryMetaItem = function VeDmMWCategoryMetaItem( element ) {
+ve.dm.MWCategoryMetaItem = function VeDmMWCategoryMetaItem() {
 	// Parent constructor
-	ve.dm.MetaItem.call( this, element );
+	ve.dm.MWCategoryMetaItem.super.apply( this, arguments );
 };
 
 /* Inheritance */

@@ -14,9 +14,9 @@
  * @constructor
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion
  */
-ve.dm.MWTemplatePlaceholderModel = function VeDmMWTemplatePlaceholderModel( transclusion ) {
+ve.dm.MWTemplatePlaceholderModel = function VeDmMWTemplatePlaceholderModel() {
 	// Parent constructor
-	ve.dm.MWTransclusionPartModel.call( this, transclusion );
+	ve.dm.MWTemplatePlaceholderModel.super.apply( this, arguments );
 };
 
 /* Inheritance */

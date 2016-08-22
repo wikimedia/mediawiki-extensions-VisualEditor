@@ -16,7 +16,7 @@
  */
 ve.dm.MWEntityNode = function VeDmMWEntityNode() {
 	// Parent constructor
-	ve.dm.LeafNode.apply( this, arguments );
+	ve.dm.MWEntityNode.super.apply( this, arguments );
 };
 
 /* Inheritance */

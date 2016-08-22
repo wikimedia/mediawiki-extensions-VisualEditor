@@ -13,9 +13,9 @@
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
  */
-ve.dm.MWDefaultSortMetaItem = function VeDmMWDefaultSortMetaItem( element ) {
+ve.dm.MWDefaultSortMetaItem = function VeDmMWDefaultSortMetaItem() {
 	// Parent constructor
-	ve.dm.MetaItem.call( this, element );
+	ve.dm.MWDefaultSortMetaItem.super.apply( this, arguments );
 };
 
 /* Inheritance */
