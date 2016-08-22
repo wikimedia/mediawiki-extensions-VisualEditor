@@ -28,7 +28,7 @@ function runTests( lang ) {
 				driver = new chrome.Driver();
 			}
 
-			driver.manage().timeouts().setScriptTimeout( 20000 );
+			driver.manage().timeouts().setScriptTimeout( 30000 );
 			driver.manage().window().setSize( 1200, 1000 );
 
 			driver.get( 'https://en.wikipedia.org/wiki/PageDoesNotExist?veaction=edit&uselang=' + lang );
@@ -154,7 +154,7 @@ function runTests( lang ) {
 						}
 					} );
 				} ),
-				20000
+				30000
 			);
 		}
 
