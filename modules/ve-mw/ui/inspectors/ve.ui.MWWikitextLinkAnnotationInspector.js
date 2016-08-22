@@ -78,11 +78,16 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 	data = data || {};
 	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
-			var annotation = this.getAnnotation(),
-				surfaceModel = this.fragment.getSurface();
+			var insertion,
+				annotation = this.getAnnotation(),
+				fragment = this.getFragment(),
+				surfaceModel = fragment.getSurface();
 
 			if ( data && data.action === 'done' && annotation ) {
-				this.getFragment().annotateContent( 'set', annotation );
+				if ( this.initialSelection.isCollapsed() && ( insertion = this.getInsertionData() ).length ) {
+					fragment.insertContent( insertion );
+				}
+				fragment.annotateContent( 'set', annotation );
 			} else if ( !data.action ) {
 				// Restore selection to what it was before we expanded it
 				surfaceModel.setSelection( this.previousSelection );
