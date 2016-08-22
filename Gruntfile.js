@@ -59,7 +59,7 @@ module.exports = function ( grunt ) {
 			'screenshots-en': {
 				options: {
 					reporter: 'spec',
-					timeout: 20000,
+					timeout: 30000,
 					require: [
 						function () {
 							/* jshint undef:false */
@@ -72,7 +72,7 @@ module.exports = function ( grunt ) {
 			'screenshots-all': {
 				options: {
 					reporter: 'spec',
-					timeout: 20000,
+					timeout: 30000,
 					require: [
 						function () {
 							/* jshint undef:false */
