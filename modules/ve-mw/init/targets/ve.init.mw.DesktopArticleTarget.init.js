@@ -544,8 +544,22 @@
 			}
 		},
 
+		/**
+		 * Check whether a jQuery event represents a plain left click, without
+		 * any modifiers
+		 *
+		 * This is a duplicate of a function in ve.utils, because this file runs
+		 * before any of VE core or OOui has been loaded.
+		 *
+		 * @param {jQuery.Event} e The jQuery event object
+		 * @return {boolean} Whether it was an unmodified left click
+		 */
+		isUnmodifiedLeftClick: function ( e ) {
+			return e && e.which && e.which === 1 && !( e.shiftKey || e.altKey || e.ctrlKey || e.metaKey );
+		},
+
 		onEditTabClick: function ( e ) {
-			if ( !ve.isUnmodifiedLeftClick( e ) ) {
+			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
 			e.preventDefault();
@@ -553,7 +567,7 @@
 		},
 
 		onEditSourceTabClick: function ( e ) {
-			if ( ( e.which && e.which !== 1 ) || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey ) {
+			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
 			e.preventDefault();
@@ -609,7 +623,7 @@
 
 		onEditSectionLinkClick: function ( e ) {
 			var targetPromise;
-			if ( !ve.isUnmodifiedLeftClick( e ) ) {
+			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
 
