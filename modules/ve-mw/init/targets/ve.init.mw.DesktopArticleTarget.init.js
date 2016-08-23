@@ -23,7 +23,7 @@
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
 		pageCanLoadVE, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
-		onlyTabIsVE,
+		onlyTabIsVE, isLoading,
 		active = false,
 		targetLoaded = false,
 		progressStep = 0,
@@ -36,6 +36,12 @@
 
 	function showLoading() {
 		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle;
+
+		if ( isLoading ) {
+			return;
+		}
+
+		isLoading = true;
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
 		if ( !init.$loading ) {
@@ -65,8 +71,10 @@
 
 	function incrementLoadingProgress() {
 		var step = progressSteps[ progressStep ];
-		setLoadingProgress( step[ 0 ], step[ 1 ] );
-		progressStep++;
+		if ( step ) {
+			setLoadingProgress( step[ 0 ], step[ 1 ] );
+			progressStep++;
+		}
 	}
 
 	function resetLoadingProgress() {
@@ -83,6 +91,7 @@
 	}
 
 	function hideLoading() {
+		isLoading = false;
 		$( 'html' ).removeClass( 've-loading' );
 		if ( init.$loading ) {
 			init.$loading.detach();
@@ -563,6 +572,9 @@
 				return;
 			}
 			e.preventDefault();
+			if ( isLoading ) {
+				return;
+			}
 			init.activateVe( 'visual' );
 		},
 
@@ -571,6 +583,9 @@
 				return;
 			}
 			e.preventDefault();
+			if ( isLoading ) {
+				return;
+			}
 			init.activateVe( 'source' );
 		},
 
@@ -626,6 +641,10 @@
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
+			e.preventDefault();
+			if ( isLoading ) {
+				return;
+			}
 
 			trackActivateStart( { type: 'section', mechanism: 'click' } );
 
@@ -638,8 +657,6 @@
 				// us from having to figure out the section number again.
 				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
-
-			e.preventDefault();
 
 			targetPromise = getTarget( 'visual' ).then( function ( target ) {
 				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
@@ -908,9 +925,12 @@
 					} );
 					// Allow instant switching to edit mode, without refresh
 					$( '#ca-edit' ).on( 'click', function ( e ) {
+						e.preventDefault();
+						if ( isLoading ) {
+							return;
+						}
 						trackActivateStart( { type: 'page', mechanism: 'click' } );
 						activateTarget( 'visual' );
-						e.preventDefault();
 					} );
 				}
 			}
