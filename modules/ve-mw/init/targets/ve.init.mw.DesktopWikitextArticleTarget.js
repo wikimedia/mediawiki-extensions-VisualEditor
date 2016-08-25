@@ -75,11 +75,28 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
 	this.reloadSurface( dataPromise );
 };
 
+/**
+ * Switch to the visual editor.
+ */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = function () {
+	var dataPromise;
+
 	this.setMode( 'visual' );
-	this.reloadSurface();
+
+	dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
+		this.pageName,
+		this.requestedRevId,
+		this.constructor.name,
+		this.edited,
+		this.getWikitextFromDocument( this.getSurface().getDom() )
+	);
+
+	this.reloadSurface( dataPromise );
 };
 
+/**
+ * Reload the target surface in the new editor mode
+ */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.reloadSurface = function ( dataPromise ) {
 	var target = this;
 	// Create progress - will be discarded when surface is destroyed.
@@ -228,13 +245,23 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.tryWithPreparedCacheKey = func
 	if ( this.mode === 'source' ) {
 		data = ve.extendObject( {}, options, { format: 'json' } );
 
-		data.wikitext = Array.prototype.map.call( doc.body.children, function ( p ) { return p.innerText; } ).join( '\n' );
+		data.wikitext = this.getWikitextFromDocument( doc );
 
 		return new mw.Api().post( data, { contentType: 'multipart/form-data' } );
 	} else {
 		// Parent method
 		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.tryWithPreparedCacheKey.apply( this, arguments );
 	}
+};
+
+/**
+ * Get wikitext for the whole document
+ *
+ * @param {ve.dm.Document} doc Document
+ * @return {string} Wikitext
+ */
+ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFromDocument = function ( doc ) {
+	return Array.prototype.map.call( doc.body.children, function ( p ) { return p.innerText; } ).join( '\n' );
 };
 
 /* Registration */
