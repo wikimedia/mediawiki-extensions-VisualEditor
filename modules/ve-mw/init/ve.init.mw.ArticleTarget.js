@@ -1500,11 +1500,15 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 };
 
 /**
- * Getting the message for the toolbar / save dialog save button
+ * Getting the message for the toolbar / save dialog save / publish button
  *
  * @return {Function|string} An i18n message or resolveable function
  */
 ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function () {
+	if ( mw.config.get( 'wgEditButtonPublishNotSave' ) ) {
+		return OO.ui.deferMsg( !this.pageExists ? 'publishpage' : 'publishchanges' );
+	}
+
 	return OO.ui.deferMsg( !this.pageExists ? 'savearticle' : 'savechanges' );
 };
 
