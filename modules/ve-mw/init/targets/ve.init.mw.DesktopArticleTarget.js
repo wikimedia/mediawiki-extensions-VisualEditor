@@ -1173,12 +1173,9 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
  * Page modifications for switching to edit mode.
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
-	var uri, $content;
+	var $content;
 
-	// Deselect current mode (e.g. "view" or "history"). In skins like monobook that don't have
-	// separate tab sections for content actions and namespaces the below is a no-op.
-	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
-	$( '#ca-ve-edit' ).addClass( 'selected' );
+	this.updateTabs( true );
 	this.emit( 'transformPage' );
 
 	mw.hook( 've.activate' ).fire();
@@ -1196,13 +1193,22 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// Support IE9: Disable links
 	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function () { return false; } );
 
-	// Push veaction=edit url in history (if not already. If we got here by a veaction=edit
+	this.updateHistoryState();
+};
+
+/**
+ * Update the history state based on the editor mode
+ */
+ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
+	var uri,
+		veaction = this.mode === 'visual' ? 'edit' : 'editsource';
+
+	// Push veaction=edit(source) url in history (if not already. If we got here by a veaction=edit(source)
 	// permalink then it will be there already and the constructor called #activate)
 	if (
 		!this.actFromPopState &&
 		history.pushState &&
-		this.currentUri.query.veaction !== 'edit' &&
-		this.currentUri.query.veaction !== 'editsource' &&
+		this.currentUri.query.veaction !== veaction &&
 		this.currentUri.query.action !== 'edit'
 	) {
 		// Set the current URL
@@ -1215,7 +1221,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 			uri.query.action = 'edit';
 			mw.config.set( 'wgAction', 'edit' );
 		} else {
-			uri.query.veaction = 'edit';
+			uri.query.veaction = veaction;
 			delete uri.query.action;
 			mw.config.set( 'wgAction', 'view' );
 		}
@@ -1234,8 +1240,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
 	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
 	// In skins having #ca-view (like Vector), select that.
-	$( '#ca-ve-edit' ).removeClass( 'selected' );
-	$( '#ca-view' ).addClass( 'selected' );
+	this.updateTabs( false );
 
 	// Remove any VE-added redirectMsg
 	$( '.mw-body-content > .ve-redirect-header' ).remove();
@@ -1271,14 +1276,13 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			history.pushState( this.popState, document.title, uri );
 		}
 	}
-	this.actFromPopState = false;
 };
 
 /**
  * @param {Event} e Native event object
  */
 ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
-	var newUri;
+	var newUri, veaction;
 
 	if ( !this.verifyPopState( e.state ) ) {
 		// Ignore popstate events fired for states not created by us
@@ -1287,12 +1291,13 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	}
 
 	newUri = this.currentUri = new mw.Uri( location.href );
+	veaction = newUri.query.veaction;
 
-	if ( !this.active && newUri.query.veaction === 'edit' ) {
+	if ( !this.active && ( veaction === 'edit' || veaction === 'editsource' ) ) {
 		this.actFromPopState = true;
 		this.activate();
 	}
-	if ( this.active && newUri.query.veaction !== 'edit' ) {
+	if ( this.active && veaction !== 'edit' && veaction !== 'editsource' ) {
 		this.actFromPopState = true;
 		this.deactivate( false, 'navigate-back' );
 	}

@@ -43,16 +43,6 @@ ve.init.mw.DesktopWikitextArticleTarget.static.importRules = ve.extendObject( {}
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopWikitextArticleTarget.prototype.restorePage = function () {
-	$( '#ca-edit' ).removeClass( 'selected' );
-
-	// Parent method
-	ve.init.mw.DesktopWikitextArticleTarget.super.prototype.restorePage.apply( this, arguments );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
 	var dataPromise,
 		target = this;
@@ -95,6 +85,33 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = functio
 };
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopWikitextArticleTarget.prototype.onWindowPopState = function ( e ) {
+	var veaction, mode;
+
+	if ( !this.verifyPopState( e.state ) ) {
+		return;
+	}
+
+	// Parent method
+	ve.init.mw.DesktopWikitextArticleTarget.super.prototype.onWindowPopState.apply( this, arguments );
+
+	veaction = this.currentUri.query.veaction;
+	mode = veaction === 'editsource' ? 'source' : 'visual';
+
+	if ( this.active ) {
+		if ( veaction === 'editsource' && this.mode === 'visual' ) {
+			this.actFromPopState = true;
+			this.switchToWikitextEditor();
+		} else if ( veaction === 'edit' && this.mode === 'source' ) {
+			this.actFromPopState = true;
+			this.switchToVisualEditor();
+		}
+	}
+};
+
+/**
  * Reload the target surface in the new editor mode
  */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.reloadSurface = function ( dataPromise ) {
@@ -105,6 +122,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.reloadSurface = function ( dat
 	this.activatingDeferred = $.Deferred();
 	this.load( dataPromise );
 	this.activatingDeferred.done( function () {
+		target.updateHistoryState();
 		target.afterActivate();
 		target.setupTriggerListeners();
 	} );
