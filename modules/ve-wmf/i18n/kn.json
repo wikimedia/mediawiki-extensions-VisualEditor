@@ -3,7 +3,8 @@
 		"authors": [
 			"Vikassy",
 			"Omshivaprakash",
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"Yogesh"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ದೃಶ್ಯ ಸಂಪಾದಕ]]",
@@ -20,5 +21,6 @@
 	"visualeditor-welcomedialog-content": "ಯಾರು ಬೇಕಾದರೂ ಸಂಪಾದಿಸಬಹುದು,ಮತ್ತು ಪ್ರತಿಯೊಂದು ಸುಧಾರಣೆಯೂ ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
 	"visualeditor-welcomedialog-content-thanks": "ಪ್ರಪಂಚದ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ತಿಳಿವನ್ನು ಹೊಂದಲು ಸಹಾಯಮಾಡುತ್ತಿರುವುದಕ್ಕೆ ದನ್ಯವಾದಗಳು!",
 	"visualeditor-welcomedialog-switch": "ಮೂಲ ಸಂಪಾದಕಕ್ಕೆ ಬದಲಾಯಿಸು",
+	"visualeditor-welcomedialog-switch-ve": "ದೃಶ್ಯ ಸಂಪಾದನೆಗೆ ಬದಲಿಸಿ",
 	"visualeditor-welcomedialog-title": "$2 ಗೆ {{GENDER:$1|ಸುಸ್ವಾಗತ}}"
 }
