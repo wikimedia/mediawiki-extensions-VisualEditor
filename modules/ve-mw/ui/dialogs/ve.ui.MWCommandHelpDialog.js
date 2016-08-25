@@ -39,12 +39,12 @@ ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 
 ( function () {
 	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().toUpperCase().replace( /-/g, ' + ' ),
-		save = ve.msg( 'accesskey-save' );
+		saveShortcut = ve.msg( 'accesskey-save' );
 
-	if ( save !== '-' && save !== '' ) {
+	if ( saveShortcut !== '-' && saveShortcut !== '' ) {
 		ve.ui.commandHelpRegistry.register( 'other', 'save', {
-			shortcuts: [ accessKeyPrefix + save.toUpperCase() ],
-			label: OO.ui.deferMsg( 'visualeditor-savedialog-label-save' ),
+			shortcuts: [ accessKeyPrefix + saveShortcut.toUpperCase() ],
+			label: OO.ui.deferMsg( 'savechanges' ),
 			demote: true
 		} );
 	}

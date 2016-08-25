@@ -48,7 +48,8 @@ ve.ui.MWSaveDialog.static.title =
 ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'save',
-		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-save' ),
+		// May be overridden by config.saveButtonLabel
+		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
 		flags: [ 'primary', 'constructive' ],
 		modes: [ 'save', 'review' ],
 		accessKey: 's'
@@ -477,11 +478,12 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 /**
  * @inheritdoc
+ * @param {Object} [data]
+ * @param {Function|string} [data.saveButtonLabel] Label for the save button
  */
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			this.target = data.target;
 			if ( !this.changedEditSummary ) {
 				this.setEditSummary( data.editSummary );
 			}
@@ -491,17 +493,11 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			this.clearAllMessages();
 			this.swapPanel( 'save' );
 			// Update save button label
-			this.actions.forEach( { actions: 'save' }, function ( action ) {
-				action.setLabel(
-					ve.msg(
-						// TODO: Actually populate this.restoring with information. Right now it is
-						// always false because of an oversight when migrating this code from init.
-						// Possible messages:
-						// visualeditor-savedialog-label-restore, visualeditor-savedialog-label-save
-						'visualeditor-savedialog-label-' + ( this.restoring ? 'restore' : 'save' )
-					)
-				);
-			} );
+			if ( data.saveButtonLabel ) {
+				this.actions.forEach( { actions: 'save' }, function ( action ) {
+					action.setLabel( data.saveButtonLabel );
+				} );
+			}
 		}, this );
 };
 

@@ -119,11 +119,8 @@ ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, confi
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.setupToolbarSaveButton = function () {
-	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbarSaveButton.call( this, {
-		label: ve.msg( 'visualeditor-toolbar-savedialog-short' )
-	} );
+ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function () {
+	return OO.ui.deferMsg( 'visualeditor-savedialog-label-save-short' );
 };
 
 /**

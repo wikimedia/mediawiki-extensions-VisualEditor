@@ -37,7 +37,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.docToSave = null;
 	this.toolbarSaveButton = null;
 	this.pageName = pageName;
-	this.pageExists = mw.config.get( 'wgArticleId', 0 ) !== 0;
+	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.mode = config.mode || 'visual';
 
@@ -1500,6 +1500,15 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 };
 
 /**
+ * Getting the message for the toolbar / save dialog save button
+ *
+ * @return {Function|string} An i18n message or resolveable function
+ */
+ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function () {
+	return OO.ui.deferMsg( !this.pageExists ? 'savearticle' : 'savechanges' );
+};
+
+/**
  * Add content and event bindings to toolbar save button.
  *
  * @param {Object} [config] Configuration options for the button
@@ -1507,7 +1516,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = function ( config ) {
 	if ( !this.toolbarSaveButton ) {
 		this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
-			label: ve.msg( 'visualeditor-toolbar-savedialog' ),
+			label: this.getSaveButtonLabel(),
 			flags: [ 'progressive', 'primary' ],
 			disabled: !this.restoring
 		}, config ) );
@@ -1562,7 +1571,9 @@ ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
-	var target = this;
+	var target = this,
+		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+
 	this.emit( 'saveWorkflowBegin' );
 
 	// Preload the serialization
@@ -1587,17 +1598,17 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
 		}
 	} );
 
-	this.openSaveDialog();
+	// Open the dialog
+	windowAction.open( 'mwSave', this.getSaveDialogOpeningData() );
 };
 
 /**
- * Open the save dialog
+ * Get opening data to pass to the save dialog
  */
-ve.init.mw.ArticleTarget.prototype.openSaveDialog = function () {
-	var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
-
-	// Open the dialog
-	windowAction.open( 'mwSave', { target: this } );
+ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
+	return {
+		saveButtonLabel: this.getSaveButtonLabel()
+	};
 };
 
 /**
