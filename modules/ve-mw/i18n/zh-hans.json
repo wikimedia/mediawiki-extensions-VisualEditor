@@ -325,6 +325,7 @@
 	"visualeditor-savedialog-identify-user": "您现在正以[[User:$1|$1]]的身份登录。如果您保存该编辑，该编辑将与您的账户关联。",
 	"visualeditor-savedialog-label-create": "创建页面",
 	"visualeditor-savedialog-label-error": "出错",
+	"visualeditor-savedialog-label-publish-short": "发布",
 	"visualeditor-savedialog-label-report": "报告问题",
 	"visualeditor-savedialog-label-resolve-conflict": "解决冲突",
 	"visualeditor-savedialog-label-resume-editing": "继续编辑",

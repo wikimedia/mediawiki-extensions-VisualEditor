@@ -310,6 +310,7 @@
 	"visualeditor-savedialog-identify-user": "Du bist jetzt als [[User:$1|$1]] angemeldet. Wenn du speicherst, wird deine Bearbeitung diesem Benutzerkonto zugeordnet.",
 	"visualeditor-savedialog-label-create": "Seite erstellen",
 	"visualeditor-savedialog-label-error": "Fehler",
+	"visualeditor-savedialog-label-publish-short": "Veröffentlichen",
 	"visualeditor-savedialog-label-report": "Problem melden",
 	"visualeditor-savedialog-label-resolve-conflict": "Konflikt lösen",
 	"visualeditor-savedialog-label-resume-editing": "Bearbeitung fortsetzen",

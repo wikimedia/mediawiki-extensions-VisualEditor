@@ -222,7 +222,7 @@
 	"visualeditor-preference-tabs-multi-tab": "Afichar los dos onglets de modificacion",
 	"visualeditor-preference-tabs-prefer-wt": "Totjorn utilizar l’editor en mòde font",
 	"visualeditor-preference-tabs-remember-last": "Se remembrar del darrièr editor utilizat",
-	"visualeditor-savedialog-error-badtoken": "Avèm pas pogut enregistrar vòstres cambiaments que la session èra pas mai valedoira.",
+	"visualeditor-savedialog-error-badtoken": "Avèm pas pogut enregistrar vòstra modificacion perque la session èra pas mai valida.",
 	"visualeditor-savedialog-identify-anon": "Volètz far pr'aquò l'enregistrament coma utilizaire anonim? Vòstra adreça IP serà enregistrada dins l'istoric de las modificacions d'aquela pagina.",
 	"visualeditor-savedialog-identify-user": "Sètz connectat (-ada) coma [[User:$1|$1]]. Vòstras modificacions seràn enregistradas jos aquel nom.",
 	"visualeditor-savedialog-label-create": "Crear la pagina",
@@ -254,6 +254,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Contunhar de modificar",
 	"visualeditor-viewpage-savewarning-title": "Sètz segur ?",
 	"visualeditor-wikitext-progress": "Conversion del wikitèxte",
-	"visualeditor-wikitext-warning": "Utilizatz l'EditorVisual - lo [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikicòde]] fonciona pas aicí. Per bascular a tot moment cap a l’edicion en wikicòde sens pèrdre vòstras modificacions, dobrissètz la liste desenrotlanta prèp de « {{int:visualeditor-toolbar-savedialog}} » e seleccionatz « {{int:visualeditor-mweditmodesource-title}} ».",
+	"visualeditor-wikitext-warning": "Utilizatz l'Editor Visual - lo [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikicòdi]] fonciona pas aicí. Per bascular a tot moment cap a l’edicion en wikicòdi sens pèrdre vòstras modificacions, dobrissètz la lista desenrotlanta prèp de « {{int:visualeditor-toolbar-savedialog}} » e seleccionatz « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-wikitext-warning-title": "Balisatge de Wikitèxte detectat"
 }

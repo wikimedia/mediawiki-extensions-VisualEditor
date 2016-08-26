@@ -320,6 +320,7 @@
 	"visualeditor-savedialog-identify-user": "Hai effettuato l'accesso come [[User:$1|$1]]. Se salvi, la tua modifica sarà associata a questa utenza.",
 	"visualeditor-savedialog-label-create": "Crea pagina",
 	"visualeditor-savedialog-label-error": "Errore",
+	"visualeditor-savedialog-label-publish-short": "Pubblica",
 	"visualeditor-savedialog-label-report": "Segnala un problema",
 	"visualeditor-savedialog-label-resolve-conflict": "Risolvi il conflitto",
 	"visualeditor-savedialog-label-resume-editing": "Riprendi a modificare",

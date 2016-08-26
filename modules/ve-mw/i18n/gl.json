@@ -310,6 +310,7 @@
 	"visualeditor-savedialog-identify-user": "Agora está rexistrado como [[User:$1|$1]]. A súa edición quedará asociada a esta conta se a garda.",
 	"visualeditor-savedialog-label-create": "Crear a páxina",
 	"visualeditor-savedialog-label-error": "Erro",
+	"visualeditor-savedialog-label-publish-short": "Publicar",
 	"visualeditor-savedialog-label-report": "Informar sobre un problema",
 	"visualeditor-savedialog-label-resolve-conflict": "Resolver o conflito",
 	"visualeditor-savedialog-label-resume-editing": "Continuar a edición",

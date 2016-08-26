@@ -16,7 +16,8 @@
 			"Sudachi",
 			"Otokoume",
 			"Vigorous action",
-			"Suchichi02"
+			"Suchichi02",
+			"Kanashimi"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -300,6 +301,7 @@
 	"visualeditor-savedialog-identify-user": "[[User:$1|$1]] としてログインしています。この編集内容を保存すると、編集内容はこのアカウントと関連付けられます。",
 	"visualeditor-savedialog-label-create": "ページを作成",
 	"visualeditor-savedialog-label-error": "エラー",
+	"visualeditor-savedialog-label-publish-short": "投稿",
 	"visualeditor-savedialog-label-report": "問題点を報告",
 	"visualeditor-savedialog-label-resolve-conflict": "競合を解決",
 	"visualeditor-savedialog-label-resume-editing": "編集を再開",

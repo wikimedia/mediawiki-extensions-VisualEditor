@@ -22,7 +22,8 @@
 			"Zhxy 519",
 			"Bowleerin",
 			"578985s",
-			"A2093064"
+			"A2093064",
+			"Kanashimi"
 		]
 	},
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
@@ -315,14 +316,12 @@
 	"visualeditor-savedialog-identify-user": "您目前以 [[User:$1|$1]] 的身份登入。 若您儲存本次的編輯，修訂歷史記錄將會記錄此帳號。",
 	"visualeditor-savedialog-label-create": "建立頁面",
 	"visualeditor-savedialog-label-error": "錯誤",
+	"visualeditor-savedialog-label-publish-short": "發布",
 	"visualeditor-savedialog-label-report": "回報問題",
 	"visualeditor-savedialog-label-resolve-conflict": "解決衝突",
-	"visualeditor-savedialog-label-restore": "還原頁面",
-	"visualeditor-savedialog-label-restore-short": "還原",
 	"visualeditor-savedialog-label-resume-editing": "繼續編輯",
 	"visualeditor-savedialog-label-review": "複核您的變更",
 	"visualeditor-savedialog-label-review-good": "返回至儲存表單",
-	"visualeditor-savedialog-label-save": "儲存頁面",
 	"visualeditor-savedialog-label-save-short": "儲存",
 	"visualeditor-savedialog-label-warning": "警告",
 	"visualeditor-savedialog-title-conflict": "衝突",

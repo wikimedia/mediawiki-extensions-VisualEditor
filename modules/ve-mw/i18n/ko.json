@@ -318,6 +318,7 @@
 	"visualeditor-savedialog-identify-user": "지금 [[User:$1|$1]]님으로 로그인되어 있습니다. 이 편집을 저장하면 당신의 편집이 이 계정으로 연결됩니다.",
 	"visualeditor-savedialog-label-create": "문서 만들기",
 	"visualeditor-savedialog-label-error": "오류",
+	"visualeditor-savedialog-label-publish-short": "게시",
 	"visualeditor-savedialog-label-report": "문제점 보고",
 	"visualeditor-savedialog-label-resolve-conflict": "편집 충돌 해결",
 	"visualeditor-savedialog-label-resume-editing": "편집 재개",

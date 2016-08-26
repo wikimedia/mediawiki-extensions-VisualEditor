@@ -344,6 +344,7 @@
 	"visualeditor-savedialog-identify-user": "Vous êtes maintenant connecté en tant que [[User:$1|$1]]. Votre modification sera associée avec ce compte si vous l’enregistrez.",
 	"visualeditor-savedialog-label-create": "Créer la page",
 	"visualeditor-savedialog-label-error": "Erreur",
+	"visualeditor-savedialog-label-publish-short": "Publier",
 	"visualeditor-savedialog-label-report": "Signaler un problème",
 	"visualeditor-savedialog-label-resolve-conflict": "Résoudre le conflit",
 	"visualeditor-savedialog-label-resume-editing": "Continuer",

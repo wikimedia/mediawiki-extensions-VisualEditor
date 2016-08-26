@@ -290,6 +290,7 @@
 	"visualeditor-savedialog-identify-user": "আপনি এইমাত্র [[User:$1|$1]] হিসেবে প্রবেশ করেছেন। আপনার সম্পাদনা এই অ্যাকাউন্টের সঙ্গে যুক্ত করা হবে যদি আপনি এই সম্পাদনাটি সংরক্ষণ করেন।",
 	"visualeditor-savedialog-label-create": "পাতা তৈরি করুন",
 	"visualeditor-savedialog-label-error": "ত্রুটি",
+	"visualeditor-savedialog-label-publish-short": "প্রকাশ করুন",
 	"visualeditor-savedialog-label-report": "সমস্যার কথা জানান",
 	"visualeditor-savedialog-label-resolve-conflict": "দ্বন্দ্ব সমাধান",
 	"visualeditor-savedialog-label-resume-editing": "সম্পাদনা পুনরায় আরম্ভ করুন",
