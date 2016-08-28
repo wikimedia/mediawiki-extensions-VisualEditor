@@ -255,6 +255,7 @@
 	"visualeditor-savedialog-identify-user": "Dir sidd elo als [[User:$1|$1]] ageloggt. Är Ännerung gëtt mat dësem Benotzerkont associéiert wann Dir dës Ännerung elo späichert.",
 	"visualeditor-savedialog-label-create": "Säit uleeën",
 	"visualeditor-savedialog-label-error": "Feeler",
+	"visualeditor-savedialog-label-publish-short": "Verëffentlechen",
 	"visualeditor-savedialog-label-report": "Problem mellen",
 	"visualeditor-savedialog-label-resolve-conflict": "Konflikt léisen",
 	"visualeditor-savedialog-label-resume-editing": "Virufuere mat Änneren",
