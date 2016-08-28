@@ -468,7 +468,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Permission notice
-				$permErrors = $title->getUserPermissionsErrors( 'create', $user );
+				$permErrors = $title->getUserPermissionsErrors( 'create', $user, 'quick' );
 				if ( $permErrors && !$title->exists() ) {
 					$notices[] = $this->msg(
 						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
