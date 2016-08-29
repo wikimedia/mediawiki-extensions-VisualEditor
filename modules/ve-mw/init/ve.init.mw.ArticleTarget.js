@@ -1505,7 +1505,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
  * @return {Function|string} An i18n message or resolveable function
  */
 ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function () {
-	if ( mw.config.get( 'wgEditButtonPublishNotSave' ) ) {
+	if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
 		return OO.ui.deferMsg( !this.pageExists ? 'publishpage' : 'publishchanges' );
 	}
 

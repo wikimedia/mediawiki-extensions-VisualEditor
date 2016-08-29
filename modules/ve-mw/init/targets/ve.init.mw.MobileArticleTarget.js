@@ -120,7 +120,7 @@ ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, confi
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function () {
-	if ( mw.config.get( 'wgEditButtonPublishNotSave' ) ) {
+	if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
 		return OO.ui.deferMsg( 'visualeditor-savedialog-label-publish-short' );
 	}
 

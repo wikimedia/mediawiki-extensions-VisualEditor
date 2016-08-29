@@ -56,8 +56,8 @@ class VisualEditorHooks {
 		$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
 
 		$output->addJsConfigVars(
-			'wgEditButtonPublishNotSave',
-			$veConfig->get( 'EditButtonPublishNotSave' )
+			'wgEditSubmitButtonLabelPublish',
+			$veConfig->get( 'EditSubmitButtonLabelPublish' )
 		);
 		return true;
 	}
