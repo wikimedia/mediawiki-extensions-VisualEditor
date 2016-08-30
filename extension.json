@@ -1182,7 +1182,7 @@
 			"dependencies": [
 				"ext.visualEditor.core",
 				"mediawiki.Title",
-				"mediawiki.action.history.diff",
+				"mediawiki.diff.styles",
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
