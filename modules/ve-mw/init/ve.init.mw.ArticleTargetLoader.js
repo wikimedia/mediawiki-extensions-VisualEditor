@@ -113,7 +113,7 @@
 			}
 		},
 
-		requestParsoidData: function ( pageName, oldid, targetName, modified ) {
+		requestParsoidData: function ( pageName, oldid, targetName, modified, wikitext ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl,
 				switched = false,
 				fromEditedState = false,
@@ -151,7 +151,7 @@
 				ve.track( 'trace.restbaseLoad.enter' );
 				if (
 					conf.fullRestbaseUrl &&
-					$( '#wpTextbox1' ).textSelection( 'getContents' ) &&
+					( wikitext || ( wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ) ) ) &&
 					!$( '[name=wpSection]' ).val()
 				) {
 					switched = true;
@@ -166,7 +166,7 @@
 						data: {
 							title: pageName,
 							oldid: oldid,
-							wikitext: $( '#wpTextbox1' ).textSelection( 'getContents' ),
+							wikitext: wikitext,
 							stash: 'true'
 						},
 						// Should be synchronised with ApiVisualEditor.php
