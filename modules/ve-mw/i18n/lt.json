@@ -300,6 +300,7 @@
 	"visualeditor-savedialog-identify-user": "Esate prisijungęs kaip [[User:$1|$1]]. Jei išsaugosite pakeitimus, jie bus susieti su šia paskyra.",
 	"visualeditor-savedialog-label-create": "Kurti puslapį",
 	"visualeditor-savedialog-label-error": "Klaida",
+	"visualeditor-savedialog-label-publish-short": "Skelbti",
 	"visualeditor-savedialog-label-report": "Pranešti apie problemą",
 	"visualeditor-savedialog-label-resolve-conflict": "Išspręsti konfliktą",
 	"visualeditor-savedialog-label-resume-editing": "Tęsti redagavimą",

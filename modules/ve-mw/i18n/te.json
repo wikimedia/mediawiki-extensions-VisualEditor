@@ -137,7 +137,6 @@
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "డిఫాల్టు ఎత్తు: $1 px",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "డిఫాల్టు వెడల్పు: $1 px",
 	"visualeditor-pagemenu-tooltip": "పేజీ ఎంపికలు",
-	"visualeditor-savedialog-label-save": "పేజీని భద్రపరచు",
 	"visualeditor-savedialog-label-save-short": "భద్రపరచు",
 	"visualeditor-savedialog-label-warning": "హెచ్చరిక",
 	"visualeditor-savedialog-title-conflict": "సంఘర్షణ",
@@ -146,6 +145,7 @@
 	"visualeditor-savedialog-title-save": "మీ మార్పులను భద్రపరచండి",
 	"visualeditor-settings-tool": "పేజీ అమరికలు",
 	"visualeditor-special-characters-group-other": "తరచూ వాడేవి",
+	"visualeditor-toload": "ఇప్పుడు ఎడిటరు లోడవుతుంది. కొన్ని సెకండ్ల తరువాత కూడా ఈ సందేశం కనబడుతూంటే, [$1 పేజీని మళ్ళీ లోడు చెయ్యండి].",
 	"visualeditor-toolbar-savedialog": "పేజీని భద్రపరచు",
 	"visualeditor-toolbar-savedialog-short": "భద్రపరచు",
 	"visualeditor-version-label": "సంచిక"
