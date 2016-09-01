@@ -1870,6 +1870,7 @@
 	"DefaultUserOptions": {
 		"visualeditor-enable": 0,
 		"visualeditor-betatempdisable": 0,
+		"visualeditor-newwikitext": 0,
 		"visualeditor-enable-experimental": 0,
 		"visualeditor-enable-language": 0,
 		"visualeditor-hidebetawelcome": 0,
