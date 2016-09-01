@@ -765,8 +765,9 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
  * Add the redirect header when a redirect is inserted into the page.
  *
  * @param {ve.dm.MetaItem} metaItem Item that was inserted
+ * @param {boolean} [loading=false] Whether VE is loading.
  */
-ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem ) {
+ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem, loading ) {
 	var title, target, $link;
 	if ( metaItem.getType() === 'mwRedirect' ) {
 		target = this;
@@ -776,6 +777,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 			.text( title );
 		ve.init.platform.linkCache.styleElement( title, $link );
 
+		if ( loading ) {
+			this.$originalRedirectMsg = $( '.redirectMsg' ).clone();
+			this.$originalRedirectSub = $( '#redirectsub, #redirectsub + br' ).clone();
+		}
 		// Add redirect target header
 		if ( !$( '#redirectsub' ).length ) {
 			$( '#contentSub' ).append(
@@ -785,7 +790,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 				$( '<br>' )
 			);
 		}
-		this.$originalContent.find( '.redirectMsg' ).remove();
 		$( '<div>' )
 			// Bit of a hack: Make sure any redirect note is styled
 			.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
@@ -1238,7 +1242,18 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	$( '#ca-view' ).addClass( 'selected' );
 
 	// Remove any VE-added redirectMsg
-	$( '.mw-body-content > .ve-redirect-header' ).remove();
+	if ( $( '.mw-body-content > .ve-redirect-header' ).length ) {
+		$( '.mw-body-content > .ve-redirect-header' ).remove();
+		$( '#contentSub #redirectSub, #contentSub #redirectSub + br' ).remove();
+	}
+
+	// Restore any previous redirectMsg/redirectsub
+	if ( this.$originalRedirectMsg ) {
+		this.$originalRedirectMsg.prependTo( $( '#mw-content-text' ) );
+		this.$originalRedirectSub.prependTo( $( '#contentSub' ) );
+		this.$originalRedirectMsg = undefined;
+		this.$originalRedirectSub = undefined;
+	}
 
 	mw.hook( 've.deactivate' ).fire();
 	this.emit( 'restorePage' );
@@ -1333,6 +1348,8 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	}
 	// Remove any VE-added ve-redirect-header
 	$( '.redirectMsg' ).removeClass( 've-redirect-header' );
+	this.$originalRedirectMsg = undefined;
+	this.$originalRedirectSub = undefined;
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	if (
@@ -1446,7 +1463,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 
 	redirectMetaItems = this.getSurface().getModel().getMetaList().getItemsInGroup( 'mwRedirect' );
 	if ( redirectMetaItems.length ) {
-		this.onMetaItemInserted( redirectMetaItems[ 0 ] );
+		this.onMetaItemInserted( redirectMetaItems[ 0 ], true );
 
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
