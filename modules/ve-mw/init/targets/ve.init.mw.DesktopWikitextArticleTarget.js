@@ -85,7 +85,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = functio
 
 	dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
 		this.pageName,
-		this.requestedRevId,
+		this.revid,
 		this.constructor.name,
 		this.edited,
 		this.getWikitextFromDocument( this.getSurface().getDom() )
