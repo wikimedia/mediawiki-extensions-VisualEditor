@@ -19,9 +19,9 @@ var allowsSignatures = $.inArray(
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.MWSignatureTool = function VeUiMWSignatureTool( toolGroup, config ) {
+ve.ui.MWSignatureTool = function VeUiMWSignatureTool() {
 	// Parent constructor
-	ve.ui.MWTransclusionDialogTool.call( this, toolGroup, config );
+	ve.ui.MWSignatureTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWSignatureTool, ve.ui.MWTransclusionDialogTool );
 

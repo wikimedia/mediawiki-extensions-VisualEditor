@@ -13,9 +13,9 @@
  * @constructor
  * @param {ve.ui.Surface} surface Surface to act on
  */
-ve.ui.MWWikitextAction = function VeUiMWWikitextAction( surface ) {
+ve.ui.MWWikitextAction = function VeUiMWWikitextAction() {
 	// Parent constructor
-	ve.ui.Action.call( this, surface );
+	ve.ui.MWWikitextAction.super.apply( this, arguments );
 };
 
 /* Inheritance */

@@ -20,9 +20,9 @@
  * @constructor
  * @param {Object} element
  */
-ve.dm.MWExternalLinkAnnotation = function VeDmMWExternalLinkAnnotation( element ) {
+ve.dm.MWExternalLinkAnnotation = function VeDmMWExternalLinkAnnotation() {
 	// Parent constructor
-	ve.dm.LinkAnnotation.call( this, element );
+	ve.dm.MWExternalLinkAnnotation.super.apply( this, arguments );
 };
 
 /* Inheritance */

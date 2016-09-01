@@ -43,7 +43,7 @@ ve.ui.MWAlienExtensionInspector.static.modelClasses = [
  */
 ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 	// Parent method
-	ve.ui.MWExtensionInspector.prototype.initialize.apply( this, arguments );
+	ve.ui.MWAlienExtensionInspector.super.prototype.initialize.apply( this, arguments );
 
 	this.$attributes = $( '<div>' ).addClass( 've-ui-mwAlienExtensionInspector-attributes' );
 	this.form.$element.append( this.$attributes );

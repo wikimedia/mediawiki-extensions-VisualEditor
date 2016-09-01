@@ -13,9 +13,9 @@
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
  */
-ve.dm.MWHiddenCategoryMetaItem = function VeDmMWHiddenCategoryMetaItem( element ) {
+ve.dm.MWHiddenCategoryMetaItem = function VeDmMWHiddenCategoryMetaItem() {
 	// Parent constructor
-	ve.dm.MetaItem.call( this, element );
+	ve.dm.MWHiddenCategoryMetaItem.super.apply( this, arguments );
 };
 
 /* Inheritance */

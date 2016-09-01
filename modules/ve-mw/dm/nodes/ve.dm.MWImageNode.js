@@ -238,7 +238,7 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 			}
 		} );
 	}
-	// Parent method
+	// Mixin method
 	return ve.dm.ResizableNode.prototype.getScalable.call( this );
 };
 

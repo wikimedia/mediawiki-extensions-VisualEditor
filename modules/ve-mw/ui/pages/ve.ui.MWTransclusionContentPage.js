@@ -23,7 +23,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 	}, config );
 
 	// Parent constructor
-	OO.ui.PageLayout.call( this, name, config );
+	ve.ui.MWTransclusionContentPage.super.call( this, name, config );
 
 	// Properties
 	this.content = content;
@@ -63,9 +63,9 @@ OO.inheritClass( ve.ui.MWTransclusionContentPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function ( outlineItem ) {
+ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function () {
 	// Parent method
-	OO.ui.PageLayout.prototype.setOutlineItem.call( this, outlineItem );
+	ve.ui.MWTransclusionContentPage.super.prototype.setOutlineItem.apply( this, arguments );
 
 	if ( this.outlineItem ) {
 		this.outlineItem

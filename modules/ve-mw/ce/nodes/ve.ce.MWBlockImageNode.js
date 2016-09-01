@@ -16,11 +16,11 @@
  * @param {ve.dm.MWBlockImageNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode( model, config ) {
+ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	var type, align, isError;
 
 	// Parent constructor
-	ve.ce.BranchNode.call( this, model, config );
+	ve.ce.MWBlockImageNode.super.apply( this, arguments );
 
 	type = this.model.getAttribute( 'type' );
 	align = this.model.getAttribute( 'align' );
@@ -256,7 +256,7 @@ ve.ce.MWBlockImageNode.prototype.getCssClass = function ( type, alignment ) {
  */
 ve.ce.MWBlockImageNode.prototype.onSetup = function () {
 	// Parent method
-	ve.ce.BranchNode.prototype.onSetup.call( this );
+	ve.ce.MWBlockImageNode.super.prototype.onSetup.call( this );
 
 	this.updateClasses();
 };

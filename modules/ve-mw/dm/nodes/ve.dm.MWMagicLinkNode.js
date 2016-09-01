@@ -17,7 +17,7 @@
  */
 ve.dm.MWMagicLinkNode = function VeDmMWMagicLinkNode() {
 	// Parent constructor
-	ve.dm.LeafNode.apply( this, arguments );
+	ve.dm.MWMagicLinkNode.super.apply( this, arguments );
 
 	// Mixin constructors
 	ve.dm.FocusableNode.call( this );

@@ -17,7 +17,7 @@
  */
 ve.dm.MWNumberedExternalLinkNode = function VeDmMWNumberedExternalLinkNode() {
 	// Parent constructor
-	ve.dm.LeafNode.apply( this, arguments );
+	ve.dm.MWNumberedExternalLinkNode.super.apply( this, arguments );
 
 	// Mixin constructors
 	ve.dm.FocusableNode.call( this );

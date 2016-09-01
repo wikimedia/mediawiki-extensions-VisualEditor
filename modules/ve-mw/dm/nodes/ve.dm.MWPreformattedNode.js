@@ -17,7 +17,7 @@
  */
 ve.dm.MWPreformattedNode = function VeDmMWPreformattedNode() {
 	// Parent constructor
-	ve.dm.PreformattedNode.apply( this, arguments );
+	ve.dm.MWPreformattedNode.super.apply( this, arguments );
 };
 
 /* Inheritance */

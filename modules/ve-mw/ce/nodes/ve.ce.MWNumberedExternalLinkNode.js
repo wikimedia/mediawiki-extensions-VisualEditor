@@ -15,9 +15,9 @@
  * @param {ve.dm.MWNumberedExternalLinkNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode( model, config ) {
+ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode() {
 	// Parent constructor
-	ve.ce.LeafNode.call( this, model, config );
+	ve.ce.MWNumberedExternalLinkNode.super.apply( this, arguments );
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );

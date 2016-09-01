@@ -13,9 +13,9 @@
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
  */
-ve.dm.MWIndexForceMetaItem = function VeDmMWIndexForceMetaItem( element ) {
+ve.dm.MWIndexForceMetaItem = function VeDmMWIndexForceMetaItem() {
 	// Parent constructor
-	ve.dm.MetaItem.call( this, element );
+	ve.dm.MWIndexForceMetaItem.super.apply( this, arguments );
 };
 
 /* Inheritance */

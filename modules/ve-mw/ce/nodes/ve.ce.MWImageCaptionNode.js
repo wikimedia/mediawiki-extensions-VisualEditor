@@ -14,9 +14,9 @@
  * @param {ve.dm.MWImageCaptionNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWImageCaptionNode = function VeCeMWImageCaptionNode( model, config ) {
+ve.ce.MWImageCaptionNode = function VeCeMWImageCaptionNode() {
 	// Parent constructor
-	ve.ce.BranchNode.call( this, model, config );
+	ve.ce.MWImageCaptionNode.super.apply( this, arguments );
 };
 
 /* Inheritance */
@@ -46,7 +46,7 @@ ve.ce.MWImageCaptionNode.prototype.onSplice = function () {
 	}
 
 	// Parent method
-	ve.ce.BranchNode.prototype.onSplice.apply( this, arguments );
+	ve.ce.MWImageCaptionNode.super.prototype.onSplice.apply( this, arguments );
 
 	// Reset the magnify icon, prepend it to the caption
 	this.$magnify.prependTo( this.$element );

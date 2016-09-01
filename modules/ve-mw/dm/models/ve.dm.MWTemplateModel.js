@@ -19,7 +19,7 @@
  */
 ve.dm.MWTemplateModel = function VeDmMWTemplateModel( transclusion, target ) {
 	// Parent constructor
-	ve.dm.MWTransclusionPartModel.call( this, transclusion );
+	ve.dm.MWTemplateModel.super.call( this, transclusion );
 
 	// Properties
 	this.target = target;

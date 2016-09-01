@@ -18,7 +18,7 @@
 ve.ui.MWTocWidget = function VeUiMWTocWidget( surface, config ) {
 
 	// Parent constructor
-	OO.ui.Widget.call( this, config );
+	ve.ui.MWTocWidget.super.call( this, config );
 
 	// Properties
 	this.surface = surface;

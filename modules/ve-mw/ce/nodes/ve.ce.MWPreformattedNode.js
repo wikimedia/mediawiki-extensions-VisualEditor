@@ -14,9 +14,9 @@
  * @param {ve.dm.MWPreformattedNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWPreformattedNode = function VeCeMWPreformattedNode( model, config ) {
+ve.ce.MWPreformattedNode = function VeCeMWPreformattedNode() {
 	// Parent constructor
-	ve.ce.PreformattedNode.call( this, model, config );
+	ve.ce.MWPreformattedNode.super.apply( this, arguments );
 };
 
 /* Inheritance */

@@ -25,7 +25,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	config = config || {};
 
 	// Parent constructor
-	OO.ui.Widget.call( this, config );
+	ve.ui.MWCategoryWidget.super.call( this, config );
 
 	// Mixin constructors
 	OO.ui.mixin.GroupElement.call( this, config );
