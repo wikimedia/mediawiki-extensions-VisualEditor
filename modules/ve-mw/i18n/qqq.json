@@ -343,6 +343,7 @@
 	"visualeditor-savedialog-label-warning": "Label in front of a save dialog warning sentence, separated by {{msg-mw|colon-separator}}.\n{{Identical|Warning}}",
 	"visualeditor-savedialog-title-conflict": "Title for save dialog slide if there is an edit conflict\n{{Identical|Conflict}}",
 	"visualeditor-savedialog-title-nochanges": "Title for save dialog slide for the wikitext diff if there are no changes",
+	"visualeditor-savedialog-title-preview": "Title for save dialog slide for the HTML preview from wikitext mode",
 	"visualeditor-savedialog-title-review": "Title for save dialog slide for the wikitext diff",
 	"visualeditor-savedialog-title-save": "Title for save dialog slide for the final save step. Appears between the buttons {{msg-mw|visualeditor-toolbar-savedialog}} and {{msg-mw|visualeditor-dialog-action-cancel}}.",
 	"visualeditor-savedialog-warning-dirty": "Note displayed to users in the save dialog if VisualEditor believes that it may have corrupted the page.",

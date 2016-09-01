@@ -903,6 +903,37 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 };
 
 /**
+ * Handle clicks on the show preview button in the save dialog.
+ *
+ * @method
+ * @fires savePreview
+ */
+ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
+	var target = this;
+	if ( !this.saveDialog.$previewViewer.children().length ) {
+		this.emit( 'savePreview' );
+		this.saveDialog.getActions().setAbilities( { approve: false } );
+		this.saveDialog.pushPending();
+		new mw.Api().post( {
+			action: 'visualeditor',
+			paction: 'parsefragment',
+			page: mw.config.get( 'wgRelevantPageName' ),
+			wikitext: this.getDocToSave()
+		} ).always( function ( response, details ) {
+			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
+				target.saveDialog.showPreview( response.visualeditor.content );
+			} else {
+				target.saveDialog.showPreview( $( '<em>' ).text(
+					ve.msg( 'visualeditor-loaderror-message', ve.getProp( details, 'error', 'info' ) || 'Failed to connect' )
+				).html() );
+			}
+		} );
+	} else {
+		this.saveDialog.swapPanel( 'preview' );
+	}
+};
+
+/**
  * Handle completed serialize request for diff views for new page creations.
  *
  * @method
@@ -1636,6 +1667,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
 			target.saveDialog.connect( target, {
 				save: 'onSaveDialogSave',
 				review: 'onSaveDialogReview',
+				preview: 'onSaveDialogPreview',
 				resolve: 'onSaveDialogResolveConflict',
 				retry: 'onSaveDialogRetry',
 				close: 'onSaveDialogClose'
