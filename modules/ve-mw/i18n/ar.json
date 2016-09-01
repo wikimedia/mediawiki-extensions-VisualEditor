@@ -24,7 +24,7 @@
 			"Maroen1990"
 		]
 	},
-	"apihelp-visualeditor-description": "يرجع الأيش تي أم أل 5 لصفحة من الخدمة بارسويد (Parsoid ).",
+	"apihelp-visualeditor-description": "يرجع HTML5 لصفحة من الخدمة بارسويد (Parsoid).",
 	"apihelp-visualeditor-param-basetimestamp": "عندما تحفظ، وتعيين هذا إلى الطابع الزمني للمراجعة التي تم تحريرها. تستخدم لكشف الصراعات تحرير.",
 	"apihelp-visualeditor-param-cachekey": "لتسلسل أو فرق، استخدم نتيجة لتسلسل السابق لطلب مخبأ مع هذا المفتاح. يتجاوز  $1html.",
 	"apihelp-visualeditor-param-html": "HTML لإرسالها إلى Parsoid لتحويل لنصوص ويكي WikiText.",
@@ -206,7 +206,7 @@
 	"visualeditor-dialogbutton-template-tooltip": "قالب",
 	"visualeditor-dialogbutton-transclusion-tooltip": "تضمين",
 	"visualeditor-diff-nochanges": "لم نتمكن من عرض أية تعديلات لأن نسختك تتطابق مع النسخة الأخيرة من هذه الصفحة.",
-	"visualeditor-differror": "خطأ في تحميل البيانات من الخادوم: $1.",
+	"visualeditor-differror": "خطأ في تحميل البيانات من الخادم: $1.",
 	"visualeditor-donebutton-tooltip": "انتهيت من التعديل",
 	"visualeditor-editconflict": "تعذر حفظ التغييرات الخاصة لوجود تضارب تحرير. أتود{{GENDER:||ين}} تصويب التضارب يدويا؟",
 	"visualeditor-editingtabdialog-body": "تتذكر {{SITENAME}} الآن أي محرر تفضل. يمكنك التبديل بين وضعيتي التحرير أثناء تعديلك، ويمكنك تغيير تفضيلك لاحقًا.",
