@@ -194,10 +194,35 @@ ve.init.mw.ArticleTarget.static.platformType = 'other';
  */
 ve.init.mw.ArticleTarget.prototype.setMode = function ( mode ) {
 	if ( mode !== this.mode ) {
-		$( '#ca-ve-edit' ).toggleClass( 'selected', mode === 'visual' );
-		$( '#ca-edit' ).toggleClass( 'selected', mode === 'source' );
 		this.mode = mode;
+		this.updateTabs( true );
 	}
+};
+
+/**
+ * Update state of editing tabs
+ */
+ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
+	var selectVe = false,
+		selectEdit = false;
+
+	// Deselect current mode (e.g. "view" or "history"). In skins like monobook that don't have
+	// separate tab sections for content actions and namespaces the below is a no-op.
+	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
+
+	if ( editing ) {
+		if ( $( '#ca-ve-edit' ).length ) {
+			selectVe = this.mode === 'visual';
+			selectEdit = this.mode === 'source';
+		} else {
+			// Single edit tab
+			selectEdit = true;
+		}
+	} else {
+		$( '#ca-view' ).addClass( 'selected' );
+	}
+	$( '#ca-ve-edit' ).toggleClass( 'selected', selectVe );
+	$( '#ca-edit' ).toggleClass( 'selected', selectEdit );
 };
 
 /**

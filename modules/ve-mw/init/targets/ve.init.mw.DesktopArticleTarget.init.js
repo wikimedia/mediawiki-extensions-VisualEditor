@@ -152,18 +152,6 @@
 					target = ve.init.mw.targetFactory.create(
 						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ]
 					);
-					target.connect( this, {
-						transformPage: function () {
-							if ( onlyTabIsVE ) {
-								$( '#ca-edit' ).addClass( 'selected' );
-							}
-						},
-						restorePage: function () {
-							if ( onlyTabIsVE ) {
-								$( '#ca-edit' ).removeClass( 'selected' );
-							}
-						}
-					} );
 					target.setContainer( $( '#content' ) );
 					targetLoaded = true;
 					return target;
