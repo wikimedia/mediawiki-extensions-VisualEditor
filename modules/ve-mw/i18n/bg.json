@@ -99,6 +99,8 @@
 	"visualeditor-linkinspector-illegal-title": "Невалидно заглавие на страница",
 	"visualeditor-media-input-placeholder": "Търсене на мултимедия",
 	"visualeditor-meta-tool": "Настройки",
+	"visualeditor-mweditmodesource-title": "Превключване към редактиране на кода?",
+	"visualeditor-mweditmodesource-warning": "Превключвате към редактиране на кода. Искате ли да продължите?",
 	"visualeditor-mweditmodesource-warning-cancel": "Отказване",
 	"visualeditor-mweditmodesource-warning-switch": "Превключване",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Отмяна на промените и превключване",
