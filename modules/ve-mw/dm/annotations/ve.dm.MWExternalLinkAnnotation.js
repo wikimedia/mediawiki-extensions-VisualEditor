@@ -34,9 +34,9 @@ OO.inheritClass( ve.dm.MWExternalLinkAnnotation, ve.dm.LinkAnnotation );
 ve.dm.MWExternalLinkAnnotation.static.name = 'link/mwExternal';
 
 ve.dm.MWExternalLinkAnnotation.static.matchFunction = function ( domElement ) {
-	var rel = domElement.getAttribute( 'rel' );
+	var type = domElement.getAttribute( 'rel' ) || domElement.getAttribute( 'typeof' ) || domElement.getAttribute( 'property' );
 	// Match explicity mw:ExtLink, or plain RDFa-less links with an href (e.g. from external paste)
-	return ( !rel && domElement.hasAttribute( 'href' ) ) || rel === 'mw:ExtLink';
+	return ( !type && domElement.hasAttribute( 'href' ) ) || type === 'mw:ExtLink';
 };
 
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
