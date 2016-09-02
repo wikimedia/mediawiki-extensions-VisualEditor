@@ -117,7 +117,11 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.onWindowPopState = function ( 
 ve.init.mw.DesktopWikitextArticleTarget.prototype.reloadSurface = function ( dataPromise ) {
 	var target = this;
 	// Create progress - will be discarded when surface is destroyed.
-	this.getSurface().createProgress( $.Deferred().promise() );
+	this.getSurface().createProgress(
+		$.Deferred().promise(),
+		ve.msg( this.mode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
+		true /* non-cancellable */
+	);
 	this.activating = true;
 	this.activatingDeferred = $.Deferred();
 	this.load( dataPromise );
