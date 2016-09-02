@@ -641,7 +641,6 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 		}
 
 		target.clearState();
-		target.docToSave = null;
 		target.initialEditSummary = new mw.Uri().query.summary;
 
 		target.deactivating = false;
@@ -1550,7 +1549,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 		} );
 	} else {
 		this.serialize(
-			this.docToSave || this.getSurface().getDom(),
+			this.getDocToSave(),
 			function ( wikitext ) {
 				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
 				target.submitWithSaveFields( { wpDiff: 1, wpAutoSummary: '' }, wikitext );
