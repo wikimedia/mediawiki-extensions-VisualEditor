@@ -24,6 +24,9 @@
 		pageCanLoadVE, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
 		onlyTabIsVE, isLoading,
+		editModes = {
+			edit: 'visual'
+		},
 		active = false,
 		targetLoaded = false,
 		progressStep = 0,
@@ -33,6 +36,10 @@
 			[ 100, 1000 ]
 		],
 		plugins = [];
+
+	if ( mw.config.get( 'wgVisualEditorConfig' ).enableWikitext ) {
+		editModes.editsource = 'source';
+	}
 
 	function showLoading() {
 		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle;
@@ -176,7 +183,7 @@
 		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
 		if ( !active ) {
-			if ( uri.query.action !== 'edit' && uri.query.veaction !== 'edit' && uri.query.veaction !== 'editsource' ) {
+			if ( uri.query.action !== 'edit' && !( uri.query.veaction in editModes ) ) {
 				if ( history.pushState ) {
 					// Replace the current state with one that is tagged as ours, to prevent the
 					// back button from breaking when used to exit VE. FIXME: there should be a better
@@ -636,7 +643,7 @@
 
 			trackActivateStart( { type: 'section', mechanism: 'click' } );
 
-			if ( history.pushState && uri.query.veaction !== 'edit' && uri.query.veaction !== 'editsource' ) {
+			if ( history.pushState && !( uri.query.veaction in editModes ) ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
 				// back button from breaking when used to exit VE. FIXME: there should be a better
 				// way to do this. See also similar code in the DesktopArticleTarget constructor.
@@ -770,7 +777,7 @@
 			) {
 				if (
 					// … if on a ?veaction=edit page
-					( isViewPage && ( uri.query.veaction === 'edit' || uri.query.veaction === 'editsource' ) ) ||
+					( isViewPage && uri.query.veaction in editModes ) ||
 					// … or if on ?action=edit in single edit mode and the user wants it
 					(
 						isEditPage &&
@@ -800,7 +807,7 @@
 						type: uri.query.vesection === undefined ? 'page' : 'section',
 						mechanism: 'url'
 					} );
-					activateTarget( uri.query.veaction === 'editsource' ? 'source' : 'visual' );
+					activateTarget( editModes[ uri.query.veaction ] );
 				} else if ( pageCanLoadVE && userPrefEnabled ) {
 					// Page can be edited in VE, parameters are good, user prefs are mostly good
 					// but have visualeditor-tabs=prefer-wt? Add a keyboard shortcut to go to
