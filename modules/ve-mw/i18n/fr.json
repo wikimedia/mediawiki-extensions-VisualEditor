@@ -80,7 +80,7 @@
 	"visualeditor-backbutton-tooltip": "Revenir en arrière",
 	"visualeditor-beta-label": "bêta",
 	"visualeditor-beta-warning": "Si vous rencontrez des problèmes techniques en cours d’édition, veuillez les signaler.",
-	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement supporté par cet éditeur.",
+	"visualeditor-browserwarning": "Vous utilisez un navigateur qui n’est pas officiellement pris en charge par cet éditeur.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ajouter une description locale (wikicode)",
 	"visualeditor-ca-createsource": "Créer le wikicode",
 	"visualeditor-ca-editlocaldescriptionsource": "Modifier la description locale (wikicode)",
