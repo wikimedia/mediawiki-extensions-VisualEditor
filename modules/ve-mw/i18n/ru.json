@@ -65,7 +65,7 @@
 	"visualeditor-advancedsettings-tool": "Дополнительные настройки",
 	"visualeditor-backbutton-tooltip": "Вернуться назад",
 	"visualeditor-beta-label": "бета-версия",
-	"visualeditor-beta-warning": "Вы можете в любой момент переключить редактор в режим исходного текста нажатием на кнопку переключения. Если у вас возникнут какие-либо проблемы, пожалуйста, сообщите о них ниже.",
+	"visualeditor-beta-warning": "Если при редактировании у вас возникают какие-либо технические проблемы, пожалуйста, сообщите нам о них.",
 	"visualeditor-browserwarning": "Вы используете браузер, официально не поддерживаемый этим редактором.",
 	"visualeditor-ca-createlocaldescriptionsource": "Добавить источник локального описания",
 	"visualeditor-ca-createsource": "Создать как вики-текст",

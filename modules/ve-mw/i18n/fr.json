@@ -322,7 +322,7 @@
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Largeur par défaut : $1 px",
 	"visualeditor-mwsignature-tool": "Votre signature",
 	"visualeditor-pagemenu-tooltip": "Options de page",
-	"visualeditor-pagetranslationwarning": "Vous êtes en train de modifier une page qui peut être traduite. Les modifications faites dans cet éditeur ne sont pas encore officiellement supportées.",
+	"visualeditor-pagetranslationwarning": "Vous êtes en train de modifier une page qui peut être traduite. Les modifications faites dans cet éditeur ne sont pas encore officiellement prises en charge.",
 	"visualeditor-parameter-input-placeholder": "Nom du champ",
 	"visualeditor-parameter-search-more": "Afficher {{PLURAL:$1|un autre champ|$1 autres champs}}",
 	"visualeditor-parameter-search-no-unused": "Aucun champ inutilisé",
