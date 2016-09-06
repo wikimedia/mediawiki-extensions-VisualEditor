@@ -66,19 +66,40 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
  * Switch to the visual editor.
  */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = function () {
-	var dataPromise;
+	var dataPromise, windowManager, switchWindow,
+		target = this;
 
-	dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
-		this.pageName,
-		this.revid,
-		this.constructor.name,
-		this.edited,
-		this.getDocToSave()
-	);
+	if ( this.section !== null ) {
+		// WT -> VE switching is not yet supported in sections, so
+		// show a discard-only confirm dialog, then reload the whole page.
+		windowManager = new OO.ui.WindowManager();
+		switchWindow = new mw.libs.ve.SwitchConfirmDialog();
+		$( 'body' ).append( windowManager.$element );
+		windowManager.addWindows( [ switchWindow ] );
+		windowManager.openWindow( switchWindow, { mode: 'simple' } )
+			.then( function ( opened ) {
+				return opened;
+			} )
+			.then( function ( closing ) { return closing; } )
+			.then( function ( data ) {
+				if ( data && data.action === 'discard' ) {
+					target.setMode( 'visual' );
+					target.reloadSurface();
+				}
+				windowManager.destroy();
+			} );
+	} else {
+		dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
+			this.pageName,
+			this.revid,
+			this.constructor.name,
+			this.edited,
+			this.getDocToSave()
+		);
 
-	this.setMode( 'visual' );
-
-	this.reloadSurface( dataPromise );
+		this.setMode( 'visual' );
+		this.reloadSurface( dataPromise );
+	}
 };
 
 /**
@@ -206,6 +227,16 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.createSurface = function ( dmD
 };
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopWikitextArticleTarget.prototype.restoreEditSection = function () {
+	if ( this.mode !== 'source' ) {
+		// Parent method
+		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.restoreEditSection.apply( this, arguments );
+	}
+};
+
+/**
  * Get a wikitext fragment from a document
  *
  * @param {ve.dm.Document} doc Document
@@ -309,11 +340,17 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.createDocToSave = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options ) {
+	var data;
 	if ( this.mode === 'source' ) {
-		return new mw.Api().post( ve.extendObject( {}, options, {
-				wikitext: doc,
-				format: 'json'
-			} ),
+		data = {
+			wikitext: doc,
+			format: 'json'
+		};
+		if ( this.section !== null ) {
+			data.section = this.section;
+		}
+		return new mw.Api().post(
+			ve.extendObject( {}, options, data ),
 			{ contentType: 'multipart/form-data' }
 		);
 	} else {

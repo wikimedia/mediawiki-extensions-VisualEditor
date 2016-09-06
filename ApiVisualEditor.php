@@ -190,13 +190,15 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
-	protected function diffWikitext( $title, $wikitext ) {
+	protected function diffWikitext( $title, $wikitext, $section = null ) {
 		$apiParams = [
 			'action' => 'query',
 			'prop' => 'revisions',
 			'titles' => $title->getPrefixedDBkey(),
-			'rvdifftotext' => $this->pstWikitext( $title, $wikitext )
+			'rvdifftotext' => $this->pstWikitext( $title, $wikitext ),
+			'rvsection' => $section
 		];
+
 		$api = new ApiMain(
 			new DerivativeRequest(
 				$this->getRequest(),
@@ -345,6 +347,11 @@ class ApiVisualEditor extends ApiBase {
 							'prop' => 'revisions',
 							'rvprop' => 'content'
 						];
+
+						if ( isset( $params['section'] ) ) {
+							$apiParams['rvsection'] = $params['section'];
+						}
+
 						$api = new ApiMain(
 							new DerivativeRequest(
 								$this->getRequest(),
@@ -623,7 +630,8 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				$diff = $this->diffWikitext( $title, $wikitext );
+				$section = isset( $params['section'] ) ? $params['section'] : null;
+				$diff = $this->diffWikitext( $title, $wikitext, $section );
 				if ( $diff['result'] === 'fail' ) {
 					$this->dieUsage( 'Diff failed', 'difffailed' );
 				}
@@ -759,6 +767,7 @@ class ApiVisualEditor extends ApiBase {
 				],
 			],
 			'wikitext' => null,
+			'section' => null,
 			'oldid' => null,
 			'html' => null,
 			'etag' => null,

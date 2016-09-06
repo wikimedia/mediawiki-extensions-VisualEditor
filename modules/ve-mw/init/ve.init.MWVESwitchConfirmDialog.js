@@ -64,10 +64,12 @@ mw.libs.ve.SwitchConfirmDialog.static.actions = [
 /**
  * @inheritdoc
  */
-mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function () {
+mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function ( data ) {
 	return mw.libs.ve.SwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
 		.next( function () {
-			if (
+			if ( data && data.mode ) {
+				this.actions.setMode( data.mode );
+			} else if (
 				mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl &&
 				!$( 'input[name=wpSection]' ).val()
 			) {
