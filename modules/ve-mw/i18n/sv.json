@@ -259,6 +259,7 @@
 	"visualeditor-mweditmodesource-warning-switch-discard": "Överge mina ändringar och växla",
 	"visualeditor-mweditmodeve-popup-body": "Du kan växla tillbaka till visuell redigering när som helst genom att klicka på denna ikon.",
 	"visualeditor-mweditmodeve-popup-title": "Du har växlat till redigering i wikitext-läge",
+	"visualeditor-mweditmodeve-progress": "Växlar till visuell redigering...",
 	"visualeditor-mweditmodeve-showagain": "Visa inte det här meddelandet igen",
 	"visualeditor-mweditmodeve-title": "Växla till visuell redigering?",
 	"visualeditor-mweditmodeve-tool": "Växla till visuell redigering",
