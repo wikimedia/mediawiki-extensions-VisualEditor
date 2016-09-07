@@ -893,9 +893,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 		this.saveDialog.pushPending();
 		if ( this.pageExists ) {
 			// Has no callback, handled via target.showChangesDiff
-			this.showChanges( this.docToSave );
+			this.showChanges( this.getDocToSave() );
 		} else {
-			this.serialize( this.docToSave, this.onSaveDialogReviewComplete.bind( this ) );
+			this.serialize( this.getDocToSave(), this.onSaveDialogReviewComplete.bind( this ) );
 		}
 	} else {
 		this.saveDialog.swapPanel( 'review' );
@@ -924,7 +924,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 ve.init.mw.ArticleTarget.prototype.onSaveDialogResolveConflict = function () {
 	// Get Wikitext from the DOM, and set up a submit call when it's done
 	this.serialize(
-		this.docToSave,
+		this.getDocToSave(),
 		this.submitWithSaveFields.bind( this, { wpSave: 1 } )
 	);
 };
@@ -946,21 +946,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogRetry = function () {
  * @fires saveWorkflowEnd
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
-	var target = this;
-
-	function clear() {
-		target.docToSave = null;
-		target.clearPreparedCacheKey();
-	}
-
-	// Clear the cached HTML and cache key once the document changes
-	if ( this.getSurface() ) {
-		this.getSurface().getModel().getDocument().once( 'transact', clear );
-		this.getSurface().once( 'destroy', clear );
-	} else {
-		clear();
-	}
-
 	this.emit( 'saveWorkflowEnd' );
 };
 
@@ -1035,6 +1020,43 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
  * @method
  */
 ve.init.mw.ArticleTarget.prototype.editSource = null;
+
+/**
+ * Get a document to save, cached until the surface is modified
+ *
+ * The default implementation returns an HTMLDocument, but other targets
+ * may use a different document model (e.g. plain text for source mode).
+ *
+ * @return {Object} Document to save
+ */
+ve.init.mw.ArticleTarget.prototype.getDocToSave = function () {
+	var surface;
+	if ( !this.docToSave ) {
+		this.docToSave = this.createDocToSave();
+		// Cache clearing events
+		surface = this.getSurface();
+		surface.getModel().getDocument().once( 'transact', this.clearDocToSave.bind( this ) );
+		surface.once( 'destroy', this.clearDocToSave.bind( this ) );
+	}
+	return this.docToSave;
+};
+
+/**
+ * Create a document to save
+ *
+ * @return {Object} Document to save
+ */
+ve.init.mw.ArticleTarget.prototype.createDocToSave = function () {
+	return this.getSurface().getDom();
+};
+
+/**
+ * Clear the document to save from the cache
+ */
+ve.init.mw.ArticleTarget.prototype.clearDocToSave = function () {
+	this.docToSave = null;
+	this.clearPreparedCacheKey();
+};
 
 /**
  * Serialize the current document and store the result in the serialization cache on the server.
@@ -1278,10 +1300,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
  * @param {Object} saveOptions Save options
  */
 ve.init.mw.ArticleTarget.prototype.startSave = function ( saveOptions ) {
-	if ( !this.docToSave ) {
-		this.docToSave = this.getSurface().getDom();
-	}
-	this.save( this.docToSave, saveOptions );
+	this.save( this.getDocToSave(), saveOptions );
 };
 
 /**
@@ -1606,10 +1625,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
 	this.emit( 'saveWorkflowBegin' );
 
 	// Preload the serialization
-	if ( !this.docToSave ) {
-		this.docToSave = this.getSurface().getDom();
-	}
-	this.prepareCacheKey( this.docToSave );
+	this.prepareCacheKey( this.getDocToSave() );
 
 	// Connect events to save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {

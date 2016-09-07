@@ -47,7 +47,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
 	var dataPromise,
 		target = this;
 
-	this.serialize( this.docToSave || this.getSurface().getDom() );
+	this.serialize( this.getDocToSave() );
 	dataPromise = this.serializing.then( function ( response ) {
 		// HACK
 		var data = response.visualeditor;
@@ -71,15 +71,15 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
 ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = function () {
 	var dataPromise;
 
-	this.setMode( 'visual' );
-
 	dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
 		this.pageName,
 		this.revid,
 		this.constructor.name,
 		this.edited,
-		this.getWikitextFromDocument( this.getSurface().getDom() )
+		this.getDocToSave()
 	);
+
+	this.setMode( 'visual' );
 
 	this.reloadSurface( dataPromise );
 };
@@ -262,28 +262,42 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.prepareCacheKey = function () 
 /**
  * @inheritdoc
  */
+ve.init.mw.DesktopWikitextArticleTarget.prototype.createDocToSave = function () {
+	var i, l, text, data;
+
+	if ( this.mode !== 'source' ) {
+		// Parent method
+		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.createDocToSave.apply( this, arguments );
+	}
+
+	text = '';
+	data = this.getSurface().getModel().getDocument().data.data;
+	for ( i = 0, l = data.length; i < l; i++ ) {
+		if ( data[ i ].type === '/paragraph' && data[ i + 1 ].type === 'paragraph' ) {
+			text += '\n';
+		} else if ( !data[ i ].type ) {
+			text += data[ i ];
+		}
+	}
+
+	return text;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options ) {
-	var data;
 	if ( this.mode === 'source' ) {
-		data = ve.extendObject( {}, options, { format: 'json' } );
-
-		data.wikitext = this.getWikitextFromDocument( doc );
-
-		return new mw.Api().post( data, { contentType: 'multipart/form-data' } );
+		return new mw.Api().post( ve.extendObject( {}, options, {
+				wikitext: doc,
+				format: 'json'
+			} ),
+			{ contentType: 'multipart/form-data' }
+		);
 	} else {
 		// Parent method
 		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.tryWithPreparedCacheKey.apply( this, arguments );
 	}
-};
-
-/**
- * Get wikitext for the whole document
- *
- * @param {ve.dm.Document} doc Document
- * @return {string} Wikitext
- */
-ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFromDocument = function ( doc ) {
-	return Array.prototype.map.call( doc.body.children, function ( p ) { return p.innerText; } ).join( '\n' );
 };
 
 /* Registration */
