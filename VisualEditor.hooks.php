@@ -240,7 +240,7 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			!$user->isAnon() &&
