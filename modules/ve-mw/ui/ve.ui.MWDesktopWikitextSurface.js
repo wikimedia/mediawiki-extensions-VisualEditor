@@ -20,7 +20,12 @@ ve.ui.MWDesktopWikitextSurface = function VeUiMWDesktopWikitextSurface() {
 	ve.ui.MWDesktopWikitextSurface.super.apply( this, arguments );
 
 	// Initialization
-	this.$element.addClass( 've-ui-mwDesktopWikitextSurface' );
+	// The following classes can be used here:
+	// * mw-editfont-default
+	// * mw-editfont-monospace
+	// * mw-editfont-sans-serif
+	// * mw-editfont-serif
+	this.$element.addClass( 've-ui-mwDesktopWikitextSurface mw-editfont-' + mw.user.options.get( 'editfont' ) );
 };
 
 /* Inheritance */
