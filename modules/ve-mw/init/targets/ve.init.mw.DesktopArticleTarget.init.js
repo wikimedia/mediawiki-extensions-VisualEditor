@@ -570,7 +570,15 @@
 			if ( isLoading ) {
 				return;
 			}
-			init.activateVe( 'visual' );
+			if ( active ) {
+				targetPromise.done( function ( target ) {
+					if ( target.mode === 'source' ) {
+						target.switchToVisualEditor();
+					}
+				} );
+			} else {
+				init.activateVe( 'visual' );
+			}
 		},
 
 		onEditSourceTabClick: function ( e ) {
