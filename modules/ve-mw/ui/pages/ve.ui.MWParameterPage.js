@@ -25,7 +25,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}, config );
 
 	// Parent constructor
-	ve.ui.MWParameterPage.super.apply( this, arguments );
+	ve.ui.MWParameterPage.super.call( this, name, config );
 
 	// Properties
 	this.edited = false;
