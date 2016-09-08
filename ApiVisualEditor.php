@@ -487,7 +487,8 @@ class ApiVisualEditor extends ApiBase {
 						$notices[] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) ) .
 							"\n</div>";
-					} elseif ( $targetUser->isBlocked() ) { // Show log extract if the user is currently blocked
+					} elseif ( $targetUser->isBlocked() ) {
+						// Show log extract if the user is currently blocked
 						$notices[] = $this->msg(
 							'blocked-notice-logextract',
 							$targetUser->getName() // Support GENDER in notice
@@ -496,7 +497,9 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Blocked user notice
-				if ( $user->isBlockedFrom( $title ) && $user->getBlock()->prevents( 'edit' ) !== false ) {
+				if ( $user->isBlockedFrom( $title, true )
+					&& $user->getBlock()->prevents( 'edit' ) !== false
+				) {
 					$notices[] = call_user_func_array(
 						[ $this, 'msg' ],
 						$user->getBlock()->getPermissionsError( $this->getContext() )
