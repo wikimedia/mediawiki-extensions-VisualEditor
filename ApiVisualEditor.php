@@ -238,7 +238,6 @@ class ApiVisualEditor extends ApiBase {
 			'prop' => 'langlinks',
 			'lllimit' => 500,
 			'titles' => $title->getPrefixedDBkey(),
-			'indexpageids' => 1,
 		];
 		$api = new ApiMain(
 			new DerivativeRequest(
@@ -255,10 +254,14 @@ class ApiVisualEditor extends ApiBase {
 			'Types' => [], // Backwards-compatible structure transformations
 			'Strip' => 'all', // Remove any metadata keys from the langlinks array
 		] );
-		if ( !isset( $result['query']['pages'][$title->getArticleID()]['langlinks'] ) ) {
+		if ( !isset( $result['query']['pages'][$title->getArticleID()] ) ) {
 			return false;
 		}
-		$langlinks = $result['query']['pages'][$title->getArticleID()]['langlinks'];
+		$page = $result['query']['pages'][$title->getArticleID()];
+		if ( !isset( $page['langlinks'] ) ) {
+			return [];
+		}
+		$langlinks = $page['langlinks'];
 		$langnames = Language::fetchLanguageNames();
 		foreach ( $langlinks as $i => $lang ) {
 			$langlinks[$i]['langname'] = $langnames[$langlinks[$i]['lang']];
