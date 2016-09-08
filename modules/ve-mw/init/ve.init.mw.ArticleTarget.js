@@ -556,7 +556,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
  * @param {string} status Text status message
  */
 ve.init.mw.ArticleTarget.prototype.showChangesSuccess = function ( response ) {
-	var data = response.visualeditor;
+	var data = response.visualeditoredit;
 	this.diffing = false;
 	if ( !data && !response.error ) {
 		this.showChangesFail( null, 'Invalid response from server', null );
@@ -848,7 +848,7 @@ ve.init.mw.ArticleTarget.prototype.noChanges = function () {
  * @fires serializeComplete
  */
 ve.init.mw.ArticleTarget.prototype.serializeSuccess = function ( response ) {
-	var data = response.visualeditor;
+	var data = response.visualeditoredit;
 	this.serializing = false;
 	if ( !data && !response.error ) {
 		this.serializeFail( null, 'Invalid response from server', null );
@@ -1130,9 +1130,9 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 			if ( aborted ) {
 				return $.Deferred().reject();
 			}
-			xhr = new mw.Api().post(
+			xhr = new mw.Api().postWithToken( 'csrf',
 				{
-					action: 'visualeditor',
+					action: 'visualeditoredit',
 					paction: 'serializeforcache',
 					html: deflatedHtml,
 					page: target.pageName,
@@ -1144,9 +1144,9 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 			return xhr.then(
 				function ( response ) {
 					var trackData = { duration: ve.now() - start };
-					if ( response.visualeditor && typeof response.visualeditor.cachekey === 'string' ) {
+					if ( response.visualeditoredit && typeof response.visualeditoredit.cachekey === 'string' ) {
 						target.events.track( 'performance.system.serializeforcache', trackData );
-						return response.visualeditor.cachekey;
+						return response.visualeditoredit.cachekey;
 					} else {
 						target.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
 						return $.Deferred().reject();
@@ -1204,6 +1204,11 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * HTML directly if there is no cache key present or pending, or if the request for the cache key
  * fails, or if using the cache key fails with a badcachekey error.
  *
+ * If options.token is set, this function will use mw.Api#post and let the caller handle badtoken
+ * errors. If options.token is not set, this function will use mw.Api#postWithToken which retries
+ * automatically when encountering a badtoken error. If you do not want the automatic retry behavior
+ * and want to control badtoken retries, you have to set options.token.
+ *
  * @param {HTMLDocument} doc Document to submit
  * @param {Object} options POST parameters to send. Do not include 'html', 'cachekey' or 'format'.
  * @param {string} [eventName] If set, log an event when the request completes successfully. The
@@ -1238,7 +1243,10 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 		}
 		return deflatePromise
 			.then( function () {
-				return new mw.Api().post( data, { contentType: 'multipart/form-data' } );
+				if ( data.token ) {
+					return new mw.Api().post( data, { contentType: 'multipart/form-data' } );
+				}
+				return new mw.Api().postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
 			} )
 			.then(
 				function ( response, jqxhr ) {
@@ -1422,12 +1430,14 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 
 	data = ve.extendObject( {}, options, {
 		action: 'visualeditoredit',
+		paction: 'save',
 		page: this.pageName,
 		oldid: this.revid,
 		basetimestamp: this.baseTimeStamp,
 		starttimestamp: this.startTimeStamp,
-		token: this.editToken,
-		etag: this.etag
+		etag: this.etag,
+		// Pass in token to prevent automatic badtoken retries
+		token: this.editToken
 	} );
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
@@ -1449,7 +1459,7 @@ ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
 		return false;
 	}
 	this.diffing = this.tryWithPreparedCacheKey( doc, {
-		action: 'visualeditor',
+		action: 'visualeditoredit',
 		paction: 'diff',
 		page: this.pageName,
 		oldid: this.revid,
@@ -1527,7 +1537,7 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 	}
 	this.serializeCallback = callback;
 	this.serializing = this.tryWithPreparedCacheKey( doc, {
-		action: 'visualeditor',
+		action: 'visualeditoredit',
 		paction: 'serialize',
 		page: this.pageName,
 		oldid: this.revid,

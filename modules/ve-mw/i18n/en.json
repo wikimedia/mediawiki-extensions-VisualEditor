@@ -41,6 +41,7 @@
 	"apihelp-visualeditoredit-param-minor": "Flag for minor edit.",
 	"apihelp-visualeditoredit-param-needcheck": "When saving, set this parameter if the revision might have roundtrip problems. This will result in the edit being tagged.",
 	"apihelp-visualeditoredit-param-oldid": "The revision number to use. Defaults to latest revision. Use 0 for a new page.",
+	"apihelp-visualeditoredit-param-paction": "Action to perform.",
 	"apihelp-visualeditoredit-param-page": "The page to perform actions on.",
 	"apihelp-visualeditoredit-param-section": "The section on which to act.",
 	"apihelp-visualeditoredit-param-starttimestamp": "When saving, set this to the timestamp of when the page was loaded. Used to detect edit conflicts.",

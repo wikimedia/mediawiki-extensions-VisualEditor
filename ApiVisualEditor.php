@@ -8,8 +8,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-use \MediaWiki\Logger\LoggerFactory;
-
 class ApiVisualEditor extends ApiBase {
 	/**
 	 * @var Config
@@ -81,7 +79,7 @@ class ApiVisualEditor extends ApiBase {
 		return new $class( $params );
 	}
 
-	private function requestRestbase( $method, $path, $params, $reqheaders = [] ) {
+	protected function requestRestbase( $method, $path, $params, $reqheaders = [] ) {
 		global $wgVersion;
 		$request = [
 			'method' => $method,
@@ -117,58 +115,6 @@ class ApiVisualEditor extends ApiBase {
 		return $response['body'];
 	}
 
-	protected function storeInSerializationCache( $title, $wikitext ) {
-		global $wgMemc;
-
-		if ( $wikitext === false ) {
-			return false;
-		}
-
-		// Store the corresponding wikitext, referenceable by a new key
-		$hash = md5( $wikitext );
-		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
-		$wgMemc->set( $key, $wikitext,
-			$this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
-
-		// Also parse and prepare the edit in case it might be saved later
-		$page = WikiPage::factory( $title );
-		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
-
-		$status = ApiStashEdit::parseAndStash( $page, $content, $this->getUser(), '' );
-		if ( $status === ApiStashEdit::ERROR_NONE ) {
-			$logger = LoggerFactory::getInstance( 'StashEdit' );
-			$logger->debug( "Cached parser output for VE content key '$key'." );
-		}
-		$this->getStats()->increment( "editstash.ve_cache_stores.$status" );
-
-		return $hash;
-	}
-
-	protected function trySerializationCache( $hash ) {
-		global $wgMemc;
-		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
-		return $wgMemc->get( $key );
-	}
-
-	protected function postHTML( $title, $html, $parserParams, $etag ) {
-		if ( $parserParams['oldid'] === 0 ) {
-			$parserParams['oldid'] = '';
-		}
-		$path = 'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() );
-		if ( $parserParams['oldid'] ) {
-			$path .= '/' . $parserParams['oldid'];
-		}
-		return $this->requestRestbase(
-			'POST',
-			$path,
-			[
-				'html' => $html,
-				'scrub_wikitext' => 1,
-			],
-			[ 'If-Match' => $etag ]
-		);
-	}
-
 	protected function pstWikitext( $title, $wikitext ) {
 		return ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT )
 			->preSaveTransform(
@@ -188,50 +134,6 @@ class ApiVisualEditor extends ApiBase {
 				'body_only' => 1,
 			]
 		);
-	}
-
-	protected function diffWikitext( $title, $wikitext, $section = null ) {
-		$apiParams = [
-			'action' => 'query',
-			'prop' => 'revisions',
-			'titles' => $title->getPrefixedDBkey(),
-			'rvdifftotext' => $this->pstWikitext( $title, $wikitext ),
-			'rvsection' => $section
-		];
-
-		$api = new ApiMain(
-			new DerivativeRequest(
-				$this->getRequest(),
-				$apiParams,
-				false // was posted?
-			),
-			false // enable write?
-		);
-		$api->execute();
-		$result = $api->getResult()->getResultData( null, [
-			'BC' => [], // Transform content nodes to '*'
-			'Types' => [], // Add back-compat subelements
-		] );
-		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
-			return [ 'result' => 'fail' ];
-		}
-		$diffRows = $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'];
-
-		if ( $diffRows !== '' ) {
-			$context = new DerivativeContext( $this->getContext() );
-			$context->setTitle( $title );
-			$engine = new DifferenceEngine( $context );
-			return [
-				'result' => 'success',
-				'diff' => $engine->addHeader(
-					$diffRows,
-					$context->msg( 'currentrev' )->parse(),
-					$context->msg( 'yourtext' )->parse()
-				)
-			];
-		} else {
-			return [ 'result' => 'nochanges' ];
-		}
 	}
 
 	protected function getLangLinks( $title ) {
@@ -269,20 +171,6 @@ class ApiVisualEditor extends ApiBase {
 			$langlinks[$i]['langname'] = $langnames[$langlinks[$i]['lang']];
 		}
 		return $langlinks;
-	}
-
-	protected function tryDeflate( $content ) {
-		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
-			$deflated = base64_decode( substr( $content, 11 ) );
-			wfSuppressWarnings();
-			$inflated = gzinflate( $deflated );
-			wfRestoreWarnings();
-			if ( $deflated === $inflated || $inflated === false ) {
-				$this->dieUsage( "Content provided is not properly deflated", 'invaliddeflate' );
-			}
-			return $inflated;
-		}
-		return $content;
 	}
 
 	public function execute() {
@@ -589,73 +477,6 @@ class ApiVisualEditor extends ApiBase {
 				}
 				break;
 
-			case 'serialize':
-				if ( $params['cachekey'] !== null ) {
-					$content = $this->trySerializationCache( $params['cachekey'] );
-					if ( !is_string( $content ) ) {
-						$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
-					}
-				} else {
-					if ( $params['html'] === null ) {
-						$this->dieUsageMsg( 'missingparam', 'html' );
-					}
-					$content = $this->postHTML(
-						$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
-					);
-					if ( $content === false ) {
-						$this->dieUsage( 'Error contacting the document server', 'docserver' );
-					}
-				}
-				$result = [ 'result' => 'success', 'content' => $content ];
-				break;
-
-			case 'diff':
-				$wikitext = $params['wikitext'];
-				if ( !$wikitext ) {
-					if ( $params['cachekey'] !== null ) {
-						$wikitext = $this->trySerializationCache( $params['cachekey'] );
-						if ( !is_string( $wikitext ) ) {
-							$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
-						}
-					} else {
-						if ( $params['html'] === null ) {
-							$this->dieUsageMsg( 'missingparam', 'html' );
-						}
-						$wikitext = $this->postHTML(
-							$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
-						);
-						if ( $wikitext === false ) {
-							$this->dieUsage( 'Error contacting the document server', 'docserver' );
-						}
-					}
-				}
-
-				$section = isset( $params['section'] ) ? $params['section'] : null;
-				$diff = $this->diffWikitext( $title, $wikitext, $section );
-				if ( $diff['result'] === 'fail' ) {
-					$this->dieUsage( 'Diff failed', 'difffailed' );
-				}
-				$result = $diff;
-
-				break;
-
-			case 'serializeforcache':
-				if ( !isset( $parserParams['oldid'] ) ) {
-					$parserParams['oldid'] = Revision::newFromTitle( $title )->getId();
-				}
-				if ( $params['html'] === null ) {
-					$this->dieUsageMsg( 'missingparam', 'html' );
-				}
-				$wikitext = $this->postHTML(
-					$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
-				);
-				$key = $this->storeInSerializationCache(
-					$title,
-					$wikitext
-				);
-				$result = [ 'result' => 'success', 'cachekey' => $key ];
-				break;
-
 			case 'getlanglinks':
 				$langlinks = $this->getLangLinks( $title );
 				if ( $langlinks === false ) {
@@ -760,18 +581,12 @@ class ApiVisualEditor extends ApiBase {
 					'metadata',
 					'wikitext',
 					'parsefragment',
-					'serialize',
-					'serializeforcache',
-					'diff',
 					'getlanglinks',
 				],
 			],
 			'wikitext' => null,
 			'section' => null,
 			'oldid' => null,
-			'html' => null,
-			'etag' => null,
-			'cachekey' => null,
 			'pst' => false,
 		];
 	}

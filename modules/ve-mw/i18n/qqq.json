@@ -54,6 +54,7 @@
 	"apihelp-visualeditoredit-param-minor": "{{doc-apihelp-param|visualeditoredit|minor}}",
 	"apihelp-visualeditoredit-param-needcheck": "{{doc-apihelp-param|visualeditoredit|needcheck}}",
 	"apihelp-visualeditoredit-param-oldid": "{{doc-apihelp-param|visualeditoredit|oldid}}",
+	"apihelp-visualeditoredit-param-paction": "{{doc-apihelp-param|visualeditoredit|paction}}",
 	"apihelp-visualeditoredit-param-page": "{{doc-apihelp-param|visualeditoredit|page}}",
 	"apihelp-visualeditoredit-param-section": "{{doc-apihelp-param|visualeditoredit|section}}",
 	"apihelp-visualeditoredit-param-starttimestamp": "{{doc-apihelp-param|visualeditoredit|starttimestamp}}",
