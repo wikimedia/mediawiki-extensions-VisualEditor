@@ -1578,24 +1578,10 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.mwtransclusion.core": {
-			"scripts": [
-				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js",
-				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js"
-			],
-			"styles": [
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css"
-			],
-			"dependencies": [
-				"ext.visualEditor.mwcore"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
 		"ext.visualEditor.mwtransclusion": {
 			"scripts": [
+				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTransclusionModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTransclusionPartModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTransclusionContentModel.js",
@@ -1621,6 +1607,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js"
 			],
 			"styles": [
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterResultWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMoreParametersResultWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css",
@@ -1639,7 +1626,7 @@
 				]
 			},
 			"dependencies": [
-				"ext.visualEditor.mwtransclusion.core",
+				"ext.visualEditor.mwcore",
 				"mediawiki.jqueryMsg",
 				"mediawiki.language",
 				"mediawiki.widgets.UserInputWidget"
