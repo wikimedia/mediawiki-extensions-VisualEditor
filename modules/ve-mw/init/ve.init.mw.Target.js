@@ -215,6 +215,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 	$( newDoc )
 		.find(
 			'script, ' + // T54884, T65229, T96533, T103430
+			'noscript, ' + // T144891
 			'object, ' + // T65229
 			'style, ' + // T55252
 			'embed, ' + // T53521, T54791, T65121
