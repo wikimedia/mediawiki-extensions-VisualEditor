@@ -333,6 +333,7 @@
 	"visualeditor-savedialog-label-warning": "Attenzione",
 	"visualeditor-savedialog-title-conflict": "Conflitto",
 	"visualeditor-savedialog-title-nochanges": "Nessuna modifica da rivedere",
+	"visualeditor-savedialog-title-preview": "Anteprima delle modifiche",
 	"visualeditor-savedialog-title-review": "Rivedi le modifiche",
 	"visualeditor-savedialog-title-save": "Salva le modifiche",
 	"visualeditor-savedialog-warning-dirty": "La modifica potrebbe essere stata danneggiata - si prega di rivederla prima di salvare.",
