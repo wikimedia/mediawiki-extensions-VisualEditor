@@ -324,6 +324,7 @@
 	"visualeditor-savedialog-label-warning": "אזהרה",
 	"visualeditor-savedialog-title-conflict": "התנגשות",
 	"visualeditor-savedialog-title-nochanges": "אין שינויים שאפשר לסקור",
+	"visualeditor-savedialog-title-preview": "תצוגה מקדימה של השינויים שלך",
 	"visualeditor-savedialog-title-review": "סקירת השינויים שלך",
 	"visualeditor-savedialog-title-save": "שמירת השינויים שלך",
 	"visualeditor-savedialog-warning-dirty": "ייתכן שהעריכה שלך התקלקלה – נא לסקור לפני שמירה.",
