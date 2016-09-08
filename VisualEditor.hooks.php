@@ -868,7 +868,6 @@ class VisualEditorHooks {
 				'modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.test.js',
 				'modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js',
 				// VisualEditor initialization Tests
-				'lib/ve/tests/init/ve.init.Platform.test.js',
 				'modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js',
 				// IME tests
 				'lib/ve/tests/ce/ve.ce.TestRunner.js',
@@ -911,7 +910,6 @@ class VisualEditorHooks {
 			],
 			'dependencies' => [
 				'unicodejs',
-				'ext.visualEditor.standalone',
 				'ext.visualEditor.core',
 				'ext.visualEditor.mwcore',
 				'ext.visualEditor.mwformatting',

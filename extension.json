@@ -545,22 +545,6 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.standalone": {
-			"scripts": [
-				"lib/ve/src/init/sa/ve.init.sa.js",
-				"lib/ve/src/init/sa/ve.init.sa.Platform.js",
-				"lib/ve/src/init/sa/ve.init.sa.Target.js",
-				"lib/ve/src/init/sa/ve.init.sa.DesktopTarget.js"
-			],
-			"styles": [
-				"lib/ve/src/init/sa/styles/ve.init.sa.css"
-			],
-			"dependencies": [
-				"ext.visualEditor.base",
-				"jquery.i18n",
-				"jquery.uls.data"
-			]
-		},
 		"ext.visualEditor.data": {
 			"class": "VisualEditorDataModule"
 		},
