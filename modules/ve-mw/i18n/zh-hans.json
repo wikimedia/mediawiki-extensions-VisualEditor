@@ -337,6 +337,7 @@
 	"visualeditor-savedialog-label-warning": "警告",
 	"visualeditor-savedialog-title-conflict": "冲突",
 	"visualeditor-savedialog-title-nochanges": "没有要检查的更改",
+	"visualeditor-savedialog-title-preview": "预览您的更改",
 	"visualeditor-savedialog-title-review": "检查您的更改",
 	"visualeditor-savedialog-title-save": "保存您的更改",
 	"visualeditor-savedialog-warning-dirty": "您的编辑可能已经损坏。请在保存前检查。",
