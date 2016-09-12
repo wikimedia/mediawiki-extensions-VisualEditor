@@ -36,6 +36,13 @@ ve.ui.MWMediaTransferHandler.static.types = [ 'image/jpeg', 'image/png', 'image/
 
 ve.ui.MWMediaTransferHandler.static.extensions = [ 'jpg', 'jpeg', 'png', 'gif', 'svg' ];
 
+ve.ui.MWMediaTransferHandler.static.matchFunction = function ( item ) {
+	var file = item.getAsFile();
+	// If file is null, return true as the data is not available yet from the browser.
+	// If file is a non-File (pasted Blob), return false as this is not yet supported.
+	return !file || file instanceof File;
+};
+
 /* Methods */
 
 /**
@@ -45,11 +52,9 @@ ve.ui.MWMediaTransferHandler.prototype.process = function () {
 	var action,
 		file = this.item.getAsFile();
 
-	// File upload doesn't support pasted Blobs yet
-	if ( file instanceof File ) {
-		action = ve.ui.actionFactory.create( 'window', this.surface );
-		action.open( 'media', { file: file } );
-	}
+	action = ve.ui.actionFactory.create( 'window', this.surface );
+	action.open( 'media', { file: file } );
+
 	this.insertableDataDeferred.reject();
 };
 
