@@ -278,6 +278,8 @@
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "الارتفاع الافتراضي:$1 بكسل",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "تقليدي من دون خطوط خارجية",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "مضغوط",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "معبأ مع شرح عندالحوم",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay": "معبأ مع شرح مضاف",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "عرض شرائح",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "تقليدي",
 	"visualeditor-mwgallerydialog-mode-field-label": "وضع العرض",

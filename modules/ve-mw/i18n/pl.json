@@ -319,6 +319,7 @@
 	"visualeditor-savedialog-label-warning": "Ostrzeżenie",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
 	"visualeditor-savedialog-title-nochanges": "Brak zmian do skontrolowania",
+	"visualeditor-savedialog-title-preview": "Pokaż podgląd zmian",
 	"visualeditor-savedialog-title-review": "Kontrola zmian",
 	"visualeditor-savedialog-title-save": "Zapisywanie zmian",
 	"visualeditor-savedialog-warning-dirty": "Twoja edycja mogła zostać uszkodzona - przejrzyj ją przed zapisaniem.",

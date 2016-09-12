@@ -332,6 +332,7 @@
 	"visualeditor-savedialog-label-warning": "Advertencia",
 	"visualeditor-savedialog-title-conflict": "Conflicto",
 	"visualeditor-savedialog-title-nochanges": "Sin cambios para revisar",
+	"visualeditor-savedialog-title-preview": "Vista previa de los cambios",
 	"visualeditor-savedialog-title-review": "Revisa tus cambios",
 	"visualeditor-savedialog-title-save": "Guardar tus cambios",
 	"visualeditor-savedialog-warning-dirty": "Tu edición puede haber sido corrompida. Revisa antes de guardar.",
