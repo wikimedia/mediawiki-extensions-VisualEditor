@@ -32,7 +32,8 @@
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
-	if ( conf.enableWikitext ) {
+	// Provide the new wikitext editor
+	if ( conf.enableWikitext && mw.user.options.get( 'visualeditor-newwikitext' ) ) {
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 

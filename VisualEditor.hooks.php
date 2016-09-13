@@ -607,6 +607,24 @@ class VisualEditorHooks {
 				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			]
 		];
+
+		$preferences['visualeditor-newwikitext'] = [
+			'version' => '1.0',
+			'label-message' => 'visualeditor-preference-newwikitexteditor-label',
+			'desc-message' => 'visualeditor-preference-newwikitexteditor-description',
+			'screenshot' => [
+				'ltr' => "$iconpath/betafeatures-icon-WikitextEditor-ltr.svg",
+				'rtl' => "$iconpath/betafeatures-icon-WikitextEditor-rtl.svg",
+			],
+			'info-message' => 'visualeditor-preference-newwikitexteditor-info-link',
+			'discussion-message' => 'visualeditor-preference-newwikitexteditor-discussion-link',
+			'requirements' => [
+				'javascript' => true,
+				'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
+			]
+		];
+
 	}
 
 	/**

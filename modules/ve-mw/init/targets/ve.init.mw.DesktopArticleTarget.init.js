@@ -461,7 +461,7 @@
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.on( 'click', init.onEditTabClick );
 			}
-			if ( conf.enableWikitext ) {
+			if ( conf.enableWikitext && mw.user.options.get( 'visualeditor-newwikitext' ) ) {
 				$caEdit.on( 'click', init.onEditSourceTabClick );
 			}
 
