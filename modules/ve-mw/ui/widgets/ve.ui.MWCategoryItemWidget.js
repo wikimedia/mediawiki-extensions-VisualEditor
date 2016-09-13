@@ -38,11 +38,6 @@ ve.ui.MWCategoryItemWidget = function VeUiMWCategoryItemWidget( config ) {
 	this.isHidden = config.hidden;
 	this.isMissing = config.missing;
 
-	// Events
-	this.$button.on( {
-		mousedown: this.onMouseDown.bind( this )
-	} );
-
 	// Initialization
 	this.setLabel( config.redirectTo || this.value );
 	if ( config.redirectTo ) {
@@ -66,10 +61,6 @@ OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.mixin.DraggableElement );
 /* Events */
 
 /**
- * @event savePopupState
- */
-
-/**
  * @event togglePopupMenu
  * @param {ve.ui.MWCategoryItemWidget} item Item to load into popup
  */
@@ -77,25 +68,11 @@ OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.mixin.DraggableElement );
 /* Methods */
 
 /**
- * Handle mouse down events.
- *
- * @method
- * @param {jQuery.Event} e Mouse down event
- * @fires savePopupState on mousedown.
- */
-ve.ui.MWCategoryItemWidget.prototype.onMouseDown = function () {
-	this.emit( 'savePopupState' );
-
-	// Parent method
-	return ve.ui.MWCategoryItemWidget.super.prototype.onMouseDown.apply( this, arguments );
-};
-
-/**
  * Handle mouse click events.
  *
  * @method
  * @param {jQuery.Event} e Mouse click event
- * @fires togglePopupMenu on mousedown.
+ * @fires togglePopupMenu on click.
  */
 ve.ui.MWCategoryItemWidget.prototype.onClick = function () {
 	this.emit( 'togglePopupMenu', this );

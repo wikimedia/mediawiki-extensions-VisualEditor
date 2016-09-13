@@ -164,6 +164,7 @@ ve.ui.MWCategoryPopupWidget.prototype.loadCategoryIntoPopup = function ( item ) 
 ve.ui.MWCategoryPopupWidget.prototype.closePopup = function () {
 	this.toggle( false );
 	this.popupOpen = false;
+	this.category = null;
 };
 
 /**
