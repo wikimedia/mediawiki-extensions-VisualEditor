@@ -332,6 +332,7 @@
 	"visualeditor-preference-betatempdisable": "Désactiver temporairement l'ÉditeurVisuel tant qu’il est en version bêta",
 	"visualeditor-preference-core-description": "Activer l’éditeur visuel. Il ne sera pas disponible sur les pages de discussion et quelques autres espaces de noms.",
 	"visualeditor-preference-core-label": "Édition visuelle",
+	"visualeditor-preference-newwikitexteditor-label": "Nouvel éditeur de texte wiki",
 	"visualeditor-preference-enable": "Activer l’éditeur visuel. Il sera disponible pour {{PLURAL:$2|l’espace de nom suivant|les espaces de nom suivants}} : $1",
 	"visualeditor-preference-tabs": "Mode d’édition :",
 	"visualeditor-preference-tabs-multi-tab": "Afficher les deux onglets de modification",

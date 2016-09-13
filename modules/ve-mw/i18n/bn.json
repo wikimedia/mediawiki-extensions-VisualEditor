@@ -278,6 +278,8 @@
 	"visualeditor-preference-betatempdisable": "ভিজ্যুয়াল এডিটর বেটা থাকাকালীন অবস্থায় সাময়িকভাবে এটি নিষ্ক্রিয় করো",
 	"visualeditor-preference-core-description": "চাক্ষুষ সম্পাদক সক্রিয় করুন। এটি আলাপ পাতায় এবং অন্যান্য কিছু নামস্থানে উপলব্ধ হবে না।",
 	"visualeditor-preference-core-label": "চাক্ষুষ সম্পাদনা",
+	"visualeditor-preference-newwikitexteditor-description": "নতুন উইকিটেক্সট সম্পাদক সক্রিয় করুন। চাক্ষুষ সম্পাদকের মত অনুরূপ নকশা এবং অনেক সরঞ্জাম এতে উপস্থিত রয়েছে, এবং দুটির মধ্যে পাল্টা-পাল্টি করার ভাল সুবিধা দেয়।",
+	"visualeditor-preference-newwikitexteditor-label": "নতুন উইকিটেক্সট সম্পাদক",
 	"visualeditor-preference-enable": "ভিজ্যুয়াল এডিটর সক্রিয় করো। এটি নিন্মোক্ত {{PLURAL:$2|নামস্থানে|নামস্থানসমূহে}} উপলব্ধ হবে: $1",
 	"visualeditor-preference-tabs": "সম্পাদনা মোড:",
 	"visualeditor-preference-tabs-multi-tab": "আমাকে উভয় সম্পাদক ট্যাব দেখান",

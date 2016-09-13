@@ -287,6 +287,7 @@
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/Talk:VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-label": "Visuaalinen muokkaaminen",
+	"visualeditor-preference-newwikitexteditor-label": "Uusi wikitext-muokkain",
 	"visualeditor-preference-enable": "Ota käyttöön visuaalinen muokkain. Se on käytössä {{PLURAL:$2|seuraavassa nimiavaruudessa|seuraavissa nimiavaruuksissa}}: $1",
 	"visualeditor-preference-tabs": "Muokkaustila:",
 	"visualeditor-preference-tabs-multi-tab": "Näytä minulle molemmat muokkausvälilehdet",

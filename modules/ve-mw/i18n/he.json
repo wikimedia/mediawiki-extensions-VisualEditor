@@ -300,6 +300,8 @@
 	"visualeditor-preference-betatempdisable": "ביטול זמני של העורך החזותי בזמן שהוא בגרסת בטא",
 	"visualeditor-preference-core-description": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
 	"visualeditor-preference-core-label": "עריכה חזותית",
+	"visualeditor-preference-newwikitexteditor-description": "הפעלת עורך קוד המקור החדש. יש לו מראה וכלים רבים שדומים לעורך החזותי, והוא מאפשר לעבור יותר בקלות בין שני העורכים.",
+	"visualeditor-preference-newwikitexteditor-label": "עורך קוד מקור חדש",
 	"visualeditor-preference-enable": "הפעלת העורך החזותי. הוא יהיה זמין {{PLURAL:$2|במרחב השם הבא|במרחבי השם הבאים}}: $1",
 	"visualeditor-preference-tabs": "מצב עריכה:",
 	"visualeditor-preference-tabs-multi-tab": "הציגו לי את שתי לשוניות העריכה",
