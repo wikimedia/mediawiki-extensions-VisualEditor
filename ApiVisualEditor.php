@@ -497,8 +497,9 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Blocked user notice
-				if ( $user->isBlockedFrom( $title, true )
-					&& $user->getBlock()->prevents( 'edit' ) !== false
+				if (
+					$user->isBlockedFrom( $title, true ) &&
+					$user->getBlock()->prevents( 'edit' ) !== false
 				) {
 					$notices[] = call_user_func_array(
 						[ $this, 'msg' ],
