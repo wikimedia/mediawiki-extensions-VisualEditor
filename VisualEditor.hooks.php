@@ -622,7 +622,8 @@ class VisualEditorHooks {
 				'javascript' => true,
 				'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
 				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
-			]
+			],
+			'exempt-from-auto-enrollment' => true
 		];
 
 	}
