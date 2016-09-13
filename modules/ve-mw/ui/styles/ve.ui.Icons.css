@@ -5,56 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.oo-ui-icon-alienextension {
-	/* @embed */
-	background-image: url( images/icons/alienextension.svg );
-}
-
-.oo-ui-icon-image-none {
-	/* @embed */
-	background-image: url( images/icons/image-none.svg );
-}
-
-.oo-ui-icon-image-frame {
-	/* @embed */
-	background-image: url( images/icons/image-frame.svg );
-}
-
-.oo-ui-icon-image-frameless {
-	/* @embed */
-	background-image: url( images/icons/image-frameless.svg );
-}
-
-.oo-ui-icon-image-thumbnail {
-	/* @embed */
-	background-image: url( images/icons/image-thumbnail.svg );
-}
-
-.oo-ui-icon-parameter {
-	/* @embed */
-	background-image: url( images/icons/parameter-ltr.svg );
-}
-
-.oo-ui-icon-parameter-set {
-	/* @embed */
-	background-image: url( images/icons/parameter-set-ltr.svg );
-}
-
-.oo-ui-icon-template {
-	/* @embed */
-	background-image: url( images/icons/template.svg );
-}
-
-.oo-ui-icon-public-domain {
-	/* @embed */
-	background-image: url( images/icons/public-domain.svg );
-}
-
-.oo-ui-icon-profile {
-	/* @embed */
-	background-image: url( images/icons/profile.svg );
-}
-
 /* Link inspector icons */
 
 /* @noflip */

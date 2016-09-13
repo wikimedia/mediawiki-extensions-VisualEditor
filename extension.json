@@ -1851,16 +1851,35 @@
 			]
 		},
 		"ext.visualEditor.icons": {
-			"styles": [
-				"modules/ve-mw/ui/styles/ve.ui.Icons.css"
-			],
 			"dependencies": [
 				"oojs-ui.styles.icons-editing-advanced",
 				"oojs-ui.styles.icons-editing-core",
 				"oojs-ui.styles.icons-editing-styling",
 				"oojs-ui.styles.icons-editing-list",
 				"oojs-ui.styles.indicators",
-				"oojs-ui.styles.textures"
+				"oojs-ui.styles.textures",
+				"ext.visualEditor.moduleIcons",
+				"ext.visualEditor.hackyIcons"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.moduleIcons": {
+			"class": "ResourceLoaderOOUIImageModule",
+			"name": "ve.ui.Icons",
+			"rootPath": "modules/ve-mw/ui/styles",
+			"selectorWithoutVariant": ".oo-ui-icon-{name}",
+			"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.hackyIcons": {
+			"styles": [
+				"modules/ve-mw/ui/styles/ve.ui.Icons.css"
 			],
 			"targets": [
 				"desktop",
