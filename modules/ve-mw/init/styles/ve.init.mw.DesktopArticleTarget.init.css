@@ -40,19 +40,25 @@
 	overflow: hidden;
 }
 
+/* Once activated, everything except the progress bar, the edit target, and the category footer */
+.ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent :not([id='catlinks']),
 /* While loading, everything except the progress bar */
-.ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-loading-overlay ),
-/* Once activated, everything except the progress bar and the edit target */
-.ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent {
+.ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-loading-overlay ) {
 	/* IE9 is supported with JS events */
 	/* stylelint-disable no-unsupported-browser-features */
-	opacity: 0.5;
 	pointer-events: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 	/* stylelint-enable no-unsupported-browser-features */
+}
+
+/* While loading, everything except the progress bar */
+.ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-loading-overlay ),
+/* Once activated, everything except the progress bar and the edit target */
+.ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent {
+	opacity: 0.5;
 }
 
 /* Progress bar mimicking OOUI */
