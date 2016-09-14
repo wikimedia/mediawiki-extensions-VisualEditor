@@ -158,5 +158,9 @@
 	"visualeditor-special-characters-group-other": "Често използвани",
 	"visualeditor-toolbar-savedialog": "Съхраняване на страницата",
 	"visualeditor-toolbar-savedialog-short": "Съхраняване",
-	"visualeditor-version-label": "Версия"
+	"visualeditor-version-label": "Версия",
+	"visualeditor-viewpage-savewarning": "Сигурни ли сте, че искате да напуснете режима за редактиране без да запишете статията преди това?",
+	"visualeditor-viewpage-savewarning-discard": "Откажете редакциите",
+	"visualeditor-viewpage-savewarning-keep": "Продължете редактирането",
+	"visualeditor-viewpage-savewarning-title": "Сигурни ли сте?"
 }

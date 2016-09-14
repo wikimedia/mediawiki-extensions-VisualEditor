@@ -313,6 +313,8 @@
 	"visualeditor-preference-betatempdisable": "暂时禁用正在测试中的可视化编辑器",
 	"visualeditor-preference-core-description": "启用可视化编辑器。它不能用于讨论页和某些其他名字空间。",
 	"visualeditor-preference-core-label": "可视化编辑",
+	"visualeditor-preference-newwikitexteditor-description": "启用新版wiki文本编辑器。它具有和可视化编辑器类似的设计，提供了可视化编辑器中提供的很多工具，并允许更好地在两个编辑器之间切换。",
+	"visualeditor-preference-newwikitexteditor-label": "新版wiki文本编辑器",
 	"visualeditor-preference-enable": "启用可视化编辑器。它将在以下{{PLURAL:$2|名字空间}}可用：$1",
 	"visualeditor-preference-tabs": "编辑模式：",
 	"visualeditor-preference-tabs-multi-tab": "向我显示两个编辑器标签",

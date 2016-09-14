@@ -7,6 +7,11 @@
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Besutan visual]]",
+	"tag-visualeditor-description": "Besutan sarana [[{{MediaWiki:visualeditor-descriptionpagelink}}|piranti besut visual]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Besutan visual: Priksa]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Besutan visual: Ganti]]",
+	"visualeditor-help-label": "Wacaa panuntun marang panganggo",
+	"visualeditor-help-title": "Panuntun cara nganggo piranti besut",
 	"visualeditor-welcomedialog-action": "Wiwit mbesut",
 	"visualeditor-welcomedialog-content": "Sapa waé kena mbesut lan apa waé sing dibeneraké iku migunani.",
 	"visualeditor-welcomedialog-content-thanks": "Matur nuwun wis mbiyantu wong sadonya ngerti!",

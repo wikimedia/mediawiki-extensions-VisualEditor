@@ -11,7 +11,8 @@
 			"Info-farmer",
 			"Dineshkumar Ponnusamy",
 			"Maathavan",
-			"AntanO"
+			"AntanO",
+			"Rakeshonwiki"
 		]
 	},
 	"apihelp-visualeditor-param-cachekey": "வரிசைப்படுத்த / வேறுபடுத்த, இவ்விசையால் முன் பதுக்ககவரிசையால் வேண்டிய முடிவைப் பயன்படுத்து.$1html கட்டுப்பாடு நீங்குகிறது.",
@@ -62,9 +63,10 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "உப தலைப்பு 4",
 	"visualeditor-linknodeinspector-add-label": "அடையாள சீட்டை சேர்க்கவும்",
 	"visualeditor-meta-tool": "விருப்பத்தேர்வுகள்",
+	"visualeditor-preference-newwikitexteditor-description": "விக்கி தொகுப்பை இயற்றி காட்சி தொகுப்பிலுள்ள பெரும்பாலான கருவிகளை போன்ற வசதியை பெறுக. மேலும் இதன் மூலம் காட்சி தொகுப்பு மற்றும் விக்கி தொகுப்பு இவற்றுக்கிடையில் மாறுவது எளிது.",
+	"visualeditor-preference-newwikitexteditor-label": "புதிய விக்கி டெக்ஸ்ட்  தொகுப்பான்",
 	"visualeditor-savedialog-label-create": "பக்கத்தை உருவாக்கு",
 	"visualeditor-savedialog-label-error": "பிழை",
-	"visualeditor-savedialog-label-save": "பக்கத்தைச் சேமி",
 	"visualeditor-savedialog-label-warning": "எச்சரிக்கை",
 	"visualeditor-toolbar-savedialog": "பக்கத்தைச் சேமி",
 	"visualeditor-viewpage-savewarning-title": "உறுதியாகவா?"
