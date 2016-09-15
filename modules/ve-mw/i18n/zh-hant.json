@@ -326,6 +326,7 @@
 	"visualeditor-savedialog-label-warning": "警告",
 	"visualeditor-savedialog-title-conflict": "衝突",
 	"visualeditor-savedialog-title-nochanges": "沒有可複核的變更",
+	"visualeditor-savedialog-title-preview": "預覽您的更改",
 	"visualeditor-savedialog-title-review": "複核您的變更",
 	"visualeditor-savedialog-title-save": "儲存您的變更",
 	"visualeditor-savedialog-warning-dirty": "您的編輯可能已損毀，在儲存前請先複核。",
