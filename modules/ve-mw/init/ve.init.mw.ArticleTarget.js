@@ -1812,7 +1812,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				this.welcomeDialog,
 				{
 					switchable: this.constructor.static.trackingName !== 'mobile',
-					editor: 've'
+					editor: this.mode
 				}
 			)
 				.then( function ( opened ) {
@@ -1824,11 +1824,15 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				.then( function ( data ) {
 					target.welcomeDialogPromise.resolve();
 					target.welcomeDialog = null;
+					// switchToWikitextEditor and switchToVisualEditor are actually
+					// only defined in subclasses :/
 					if ( data && data.action === 'switch-wte' ) {
 						// TODO: Make this work on mobile - right now we can only
 						// get away with it because the button which triggers this
 						// action is hidden on mobile
 						target.switchToWikitextEditor( true, true );
+					} else if ( data && data.action === 'switch-ve' ) {
+						target.switchToVisualEditor();
 					}
 				} );
 		} else {
