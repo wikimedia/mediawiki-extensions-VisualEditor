@@ -309,7 +309,7 @@ class VisualEditorHooks {
 					$editTab['text'] = $skin->msg( $editTabMessage )->text();
 				}
 
-				$editor = self::getUserEditor( $user, RequestContext::getMain()->getRequest() );
+				$editor = self::getUserEditor( $user, $skin->getRequest() );
 				if (
 					$isAvailable &&
 					$config->get( 'VisualEditorUseSingleEditTab' ) &&
