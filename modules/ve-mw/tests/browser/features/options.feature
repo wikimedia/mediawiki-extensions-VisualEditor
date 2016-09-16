@@ -10,16 +10,19 @@ Feature: VisualEditor Options
     When I click Options
     Then I should see the options overlay
 
+  @skip
   Scenario: Advanced Settings
     When I click Advanced Settings
     Then I should see the options overlay
       And the options overlay should display Advanced Settings
 
+  @skip
   Scenario: Page Settings
     When I click Page Settings
     Then I should see the options overlay
       And the options overlay should display Page Settings
 
+  @skip
   Scenario: Categories
     When I click Categories
     Then I should see the options overlay
