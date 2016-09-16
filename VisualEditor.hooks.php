@@ -196,26 +196,6 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Convert the content model of a message that is actually JSON to JSON.
-	 * This only affects validation and UI when saving and editing, not
-	 * loading the content.
-	 *
-	 * @param Title $title
-	 * @param string $model
-	 * @return bool
-	 */
-	public static function onContentHandlerDefaultModelFor( Title $title, &$model ) {
-		if (
-			$title->inNamespace( NS_MEDIAWIKI ) &&
-			$title->getText() === 'Visualeditor-quick-access-characters.json'
-		) {
-			$model = CONTENT_MODEL_JSON;
-		}
-
-		return true;
-	}
-
-	/**
 	 * Changes the Edit tab and adds the VisualEditor tab.
 	 *
 	 * This is attached to the MediaWiki 'SkinTemplateNavigation' hook.
