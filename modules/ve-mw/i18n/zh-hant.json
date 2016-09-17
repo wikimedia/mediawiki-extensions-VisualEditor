@@ -57,7 +57,7 @@
 	"visualeditor-advancedsettings-tool": "進階設定",
 	"visualeditor-backbutton-tooltip": "返回",
 	"visualeditor-beta-label": "測試版",
-	"visualeditor-beta-warning": "您可以隨時點選切換按鈕切換至原始碼編輯器。 若您遇到任何問題，請於下方回報問題。",
+	"visualeditor-beta-warning": "若您在編輯時遇到任何技術問題，請回報它們。",
 	"visualeditor-browserwarning": "此編輯器不支援您目前使用的瀏覽器。",
 	"visualeditor-ca-createlocaldescriptionsource": "加入本地描述原始碼",
 	"visualeditor-ca-createsource": "建立原始碼",
