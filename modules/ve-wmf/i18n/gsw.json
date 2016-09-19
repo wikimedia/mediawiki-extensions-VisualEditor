@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Als-Holder",
-			80686
+			80686,
+			"Terfili"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|visuelli Bearbeitig]]",
 	"tag-visualeditor-description": "Gänderet mit em [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Iberpriefig]]",
 	"tag-visualeditor-needcheck-description": "Änderig, wu mit em [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] gmacht woren isch, wu s Syschtem villicht Änderige im Wikitäxt entdeckt het, wu nit beabsichtigt gsii sin.",

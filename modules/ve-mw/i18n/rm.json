@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kazu89"
+			"Kazu89",
+			"Terfili"
 		]
 	},
 	"tooltip-ca-createsource": "Crear il code da funtauna da questa pagina",
 	"tooltip-ca-editsource": "Modifitgar il code da funtauna da questa pagina",
-	"tooltip-ca-ve-edit": "Modifitgar questa pagina cun VisualEditor",
+	"tooltip-ca-ve-edit": "Modifitgar questa pagina",
 	"visualeditor-advancedsettings-tool": "Configuraziun avanzada",
-	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor è anc en la fasa d'emprova ('beta'). Igl è pussaivel che ti fruntas sin problems tecnics u che ti na pos betg modifitgar parts da la pagina. Clicca sin \"{{int:visualeditor-ca-editsource}}\" per midar al modus da wikitext. Modificaziuns betg memorisadas vegnan ad ir a perder.",
 	"visualeditor-browserwarning": "Ti dovras in navigatur che na vegn betg sustegnì uffizialmain da VisualEditor.",
@@ -56,12 +56,6 @@
 	"visualeditor-dialog-meta-languages-readonlynote": "Quai è ina glista da paginas en autras linguas ch'èn colliadas cun questa pagina. Per il mument èsi be pussaivel da la modifitgar en il modus da code da funtauna u sin Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Linguas",
 	"visualeditor-dialog-meta-settings-label": "Configuraziun da la pagina",
-	"visualeditor-dialog-reference-options-group-label": "Utilisar questa gruppa",
-	"visualeditor-dialog-reference-options-name-label": "Reutilisar cun quest num",
-	"visualeditor-dialog-reference-options-section": "Opziuns",
-	"visualeditor-dialog-reference-title": "Annotaziun",
-	"visualeditor-dialog-reference-useexisting-label": "Utilisar in'annotaziun existenta",
-	"visualeditor-dialog-referenceslist-title": "Glista d'annotaziuns",
 	"visualeditor-dialog-transclusion-add-content": "Angiunscher cuntegn",
 	"visualeditor-dialog-transclusion-add-param": "Agiunscher in parameter",
 	"visualeditor-dialog-transclusion-add-template": "Agiunscher in model",
@@ -74,8 +68,6 @@
 	"visualeditor-dialog-transclusion-title": "Integraziun da models",
 	"visualeditor-dialogbutton-media-tooltip": "Medias",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuraziun da la pagina",
-	"visualeditor-dialogbutton-reference-tooltip": "Annotaziun",
-	"visualeditor-dialogbutton-referenceslist-tooltip": "Glista d'annotaziuns",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Integraziun da models",
 	"visualeditor-diff-nochanges": "I n'è betg stà pussaivel da cumenzar la repassada perquai che tia revisiun correspunda la davosa versiun da questa pagina.",
 	"visualeditor-differror": "Errur cun chargiar las datas dal server: $1.",
