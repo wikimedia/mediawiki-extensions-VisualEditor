@@ -15,7 +15,7 @@
 
 .ve-ui-mwAceEditorWidget .ace_focus {
 	/* TODO: Move to mediawiki theme only */
-	border-color: #347bff;
+	border-color: #36c;
 	/* HACK: Make border grow out as inset doesn't overlap absolute positioned children */
 	border-width: 2px;
 	margin: 0;

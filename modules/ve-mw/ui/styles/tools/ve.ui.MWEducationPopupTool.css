@@ -9,7 +9,7 @@
 	width: 2.5em;
 	height: 2.5em;
 	border-radius: 50%;
-	background-color: #347bff;
+	background-color: #36c;
 	position: absolute;
 	opacity: 0;
 	/* stylelint-disable no-unsupported-browser-features */
@@ -26,7 +26,7 @@
 	width: 0.8em;
 	height: 0.8em;
 	border-radius: 50%;
-	background-color: #347bff;
+	background-color: #36c;
 	position: absolute;
 }
 

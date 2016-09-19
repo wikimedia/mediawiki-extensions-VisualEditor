@@ -7,7 +7,7 @@
 
 .ve-init-mw-desktopArticleTarget-progress {
 	height: 0.75em;
-	border: 1px solid #347bff;
+	border: 1px solid #36c;
 	background: #fff;
 	border-radius: 2px;
 	box-shadow: 0 0.1em 0 0 rgba( 0, 0, 0, 0.15 );
@@ -15,5 +15,5 @@
 
 .ve-init-mw-desktopArticleTarget-progress-bar {
 	height: 0.75em;
-	background: #347bff;
+	background: #36c;
 }
