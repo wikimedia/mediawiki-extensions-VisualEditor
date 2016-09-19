@@ -962,7 +962,7 @@
 					welcomeDialog,
 					{
 						switchable: init.isAvailable,
-						editor: 'wte'
+						editor: 'source'
 					}
 				)
 					.then( function ( opened ) { return opened; } )

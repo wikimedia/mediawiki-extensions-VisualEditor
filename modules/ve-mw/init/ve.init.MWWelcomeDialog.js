@@ -40,18 +40,18 @@ mw.libs.ve.WelcomeDialog.static.actions = [
 	{
 		action: 'switch-wte',
 		label: OO.ui.deferMsg( 'visualeditor-welcomedialog-switch' ),
-		modes: [ 've' ]
+		modes: [ 'visual' ]
 	},
 	{
 		action: 'switch-ve',
 		label: OO.ui.deferMsg( 'visualeditor-welcomedialog-switch-ve' ),
-		modes: [ 'wte' ]
+		modes: [ 'source' ]
 	},
 	{
 		action: 'accept',
 		label: OO.ui.deferMsg( 'visualeditor-welcomedialog-action' ),
 		flags: [ 'progressive', 'primary' ],
-		modes: [ 've', 'wte', 'noswitch' ]
+		modes: [ 'visual', 'source', 'noswitch' ]
 	}
 ];
 
