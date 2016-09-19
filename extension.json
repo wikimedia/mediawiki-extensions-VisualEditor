@@ -1762,7 +1762,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwlink",
-				"ext.visualEditor.mwcore"
+				"ext.visualEditor.mwcore",
+				"ext.visualEditor.desktopArticleTarget"
 			],
 			"messages": [
 				"visualeditor-generating-wikitext-progress"
