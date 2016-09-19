@@ -480,11 +480,12 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
 
+		// Save the scroll position; will be restored by surfaceReady()
+		this.saveScrollPosition();
+
 		// User interface changes
 		this.transformPage();
 		this.setupLocalNoticeMessages();
-
-		this.saveScrollPosition();
 
 		// Create dummy surface to show toolbar while loading
 		surface = this.addSurface( new ve.dm.Document( [ { type: 'internalList' }, { type: '/internalList' } ] ) );
