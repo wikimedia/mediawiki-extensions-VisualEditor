@@ -764,7 +764,8 @@
 		var showWikitextWelcome = true,
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
-			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query;
+			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,
+			action = 'edit';
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
@@ -784,7 +785,7 @@
 				// TODO: other params too? See identical list in VisualEditor.hooks.php)
 			) {
 				if (
-					// … if on a ?veaction=edit page
+					// … if on a ?veaction=edit/editsource page
 					( isViewPage && uri.query.veaction in editModes ) ||
 					// … or if on ?action=edit in single edit mode and the user wants it
 					(
@@ -802,8 +803,19 @@
 										mw.config.get( 'wgAction' ) !== 'submit'
 									) ||
 									(
+										tabPreference === 'prefer-wte' &&
+										conf.enableWikitext &&
+										mw.user.options.get( 'visualeditor-newwikitext' )
+									) ||
+									(
 										tabPreference === 'remember-last' &&
-										getLastEditor() !== 'wikitext'
+										(
+											getLastEditor() !== 'wikitext' ||
+											(
+												conf.enableWikitext &&
+												mw.user.options.get( 'visualeditor-newwikitext' )
+											)
+										)
 									)
 								)
 							)
@@ -815,7 +827,24 @@
 						type: uri.query.vesection === undefined ? 'page' : 'section',
 						mechanism: 'url'
 					} );
-					activateTarget( editModes[ uri.query.veaction ] );
+					if ( isViewPage && uri.query.veaction in editModes ) {
+						activateTarget( editModes[ uri.query.veaction ] );
+					} else {
+						if (
+							conf.enableWikitext &&
+							mw.user.options.get( 'visualeditor-newwikitext' ) &&
+							(
+								tabPreference === 'prefer-ve' ||
+								(
+									tabPreference === 'remember-last' &&
+									getLastEditor() === 'wikitext'
+								)
+							)
+						) {
+							action = 'editsource';
+						}
+						activateTarget( editModes[ action ] );
+					}
 				} else if ( pageCanLoadVE && userPrefEnabled ) {
 					// Page can be edited in VE, parameters are good, user prefs are mostly good
 					// but have visualeditor-tabs=prefer-wt? Add a keyboard shortcut to go to
