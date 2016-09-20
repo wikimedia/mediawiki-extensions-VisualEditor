@@ -455,7 +455,7 @@
 			}
 
 			// If the edit tab is hidden, remove it.
-			if ( !( init.isAvailable && userPrefPreferShow ) ) {
+			if ( !( init.isVisualAvailable && userPrefPreferShow ) ) {
 				$caVeEdit.remove();
 			} else if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
@@ -476,7 +476,7 @@
 				}
 			}
 
-			if ( init.isAvailable ) {
+			if ( init.isVisualAvailable ) {
 				if ( conf.tabPosition === 'before' ) {
 					$caEdit.addClass( 'collapsible' );
 				} else {
@@ -724,11 +724,14 @@
 		// Only in supported skins
 		conf.skins.indexOf( mw.config.get( 'skin' ) ) !== -1 &&
 
+		// Not on pages like Special:RevisionDelete
+		mw.config.get( 'wgNamespaceNumber' ) !== -1
+	);
+	init.isVisualAvailable = (
+		init.isAvailable &&
+
 		// Only in enabled namespaces
 		conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
-
-		// Not on pages like Special:RevisionDelete
-		mw.config.get( 'wgNamespaceNumber' ) !== -1 &&
 
 		// Not on pages which are outputs of the Page Translation feature
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
@@ -747,12 +750,12 @@
 	// The VE global was once available always, but now that platform integration initialisation
 	// is properly separated, it doesn't exist until the platform loads VisualEditor core.
 	//
-	// Most of mw.libs.ve is considered subject to change and private.  The exception is that
-	// mw.libs.ve.isAvailable is public, and indicates whether the VE editor itself can be loaded
+	// Most of mw.libs.ve is considered subject to change and private.  An exception is that
+	// mw.libs.ve.isVisualAvailable is public, and indicates whether the VE editor itself can be loaded
 	// on this page. See above for why it may be false.
 	mw.libs.ve = $.extend( mw.libs.ve || {}, init );
 
-	if ( init.isAvailable && userPrefPreferShow ) {
+	if ( init.isVisualAvailable && userPrefPreferShow ) {
 		$( 'html' ).addClass( 've-available' );
 	} else {
 		$( 'html' ).addClass( 've-not-available' );
@@ -786,7 +789,14 @@
 			) {
 				if (
 					// … if on a ?veaction=edit/editsource page
-					( isViewPage && uri.query.veaction in editModes ) ||
+					(
+						isViewPage &&
+						uri.query.veaction in editModes &&
+						(
+							uri.query.veaction === 'editsource' ||
+							init.isVisualAvailable
+						)
+					) ||
 					// … or if on ?action=edit in single edit mode and the user wants it
 					(
 						isEditPage &&
@@ -800,7 +810,8 @@
 								(
 									(
 										tabPreference === 'prefer-ve' &&
-										mw.config.get( 'wgAction' ) !== 'submit'
+										mw.config.get( 'wgAction' ) !== 'submit' &&
+										init.isVisualAvailable
 									) ||
 									(
 										tabPreference === 'prefer-wte' &&
@@ -810,7 +821,10 @@
 									(
 										tabPreference === 'remember-last' &&
 										(
-											getLastEditor() !== 'wikitext' ||
+											(
+												getLastEditor() !== 'wikitext' &&
+												init.isVisualAvailable
+											) ||
 											(
 												conf.enableWikitext &&
 												mw.user.options.get( 'visualeditor-newwikitext' )
@@ -845,7 +859,11 @@
 						}
 						activateTarget( editModes[ action ] );
 					}
-				} else if ( pageCanLoadVE && userPrefEnabled ) {
+				} else if (
+					init.isVisualAvailable &&
+					pageCanLoadVE &&
+					userPrefEnabled
+				) {
 					// Page can be edited in VE, parameters are good, user prefs are mostly good
 					// but have visualeditor-tabs=prefer-wt? Add a keyboard shortcut to go to
 					// VE.
@@ -856,7 +874,10 @@
 			}
 
 			// Add the switch button to wikitext ?action=edit or ?action=submit pages
-			if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
+			if (
+				init.isVisualAvailable &&
+				[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1
+			) {
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
 					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
@@ -944,7 +965,7 @@
 			}
 
 			// Set up the tabs appropriately if the user has VE on
-			if ( userPrefPreferShow ) {
+			if ( init.isVisualAvailable && userPrefPreferShow ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
 				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
 					// … set the skin up with both tabs and both section edit links.
@@ -990,7 +1011,7 @@
 				windowManager.openWindow(
 					welcomeDialog,
 					{
-						switchable: init.isAvailable,
+						switchable: init.isVisualAvailable,
 						editor: 'source'
 					}
 				)

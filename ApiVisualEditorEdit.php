@@ -119,8 +119,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
 		}
 
-		$this->checkAllowedNamespace( $title->getNamespace() );
-
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
 			$parserParams['oldid'] = $params['oldid'];

@@ -11,12 +11,6 @@
 use \MediaWiki\Logger\LoggerFactory;
 
 class ApiVisualEditor extends ApiBase {
-	// These are safe even if VE is not enabled on the page.
-	// This is intended for other VE interfaces, such as Flow's.
-	protected static $SAFE_ACTIONS = [
-		'parsefragment',
-	];
-
 	/**
 	 * @var Config
 	 */
@@ -293,12 +287,6 @@ class ApiVisualEditor extends ApiBase {
 		$title = Title::newFromText( $params['page'] );
 		if ( !$title ) {
 			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
-		}
-
-		$isSafeAction = in_array( $params['paction'], self::$SAFE_ACTIONS, true );
-
-		if ( !$isSafeAction ) {
-			$this->checkAllowedNamespace( $title->getNamespace() );
 		}
 
 		$parserParams = [];
@@ -667,19 +655,6 @@ class ApiVisualEditor extends ApiBase {
 		}
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
-	}
-
-	/**
-	 * Check if the request is allowed to proceed in the current namespace, and abort if not
-	 *
-	 * @param int $namespaceId Namespace ID
-	 */
-	public function checkAllowedNamespace( $namespaceId ) {
-		if ( !self::isAllowedNamespace( $this->veConfig, $namespaceId ) ) {
-			$this->dieUsage( "VisualEditor is not enabled in '" .
-				MWNamespace::getCanonicalName( $namespaceId ) . "' namespace ",
-			'novenamespace' );
-		}
 	}
 
 	/**
