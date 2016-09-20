@@ -918,7 +918,8 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			action: 'visualeditor',
 			paction: 'parsefragment',
 			page: mw.config.get( 'wgRelevantPageName' ),
-			wikitext: this.getDocToSave()
+			wikitext: this.getDocToSave(),
+			pst: true
 		} ).always( function ( response, details ) {
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
 				target.saveDialog.showPreview( response.visualeditor.content );
