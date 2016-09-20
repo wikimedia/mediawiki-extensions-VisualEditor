@@ -212,14 +212,10 @@ class ApiVisualEditor extends ApiBase {
 			false // enable write?
 		);
 		$api->execute();
-		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData( null, [
-				'BC' => [], // Transform content nodes to '*'
-				'Types' => [], // Add back-compat subelements
-			] );
-		} else {
-			$result = $api->getResultData();
-		}
+		$result = $api->getResult()->getResultData( null, [
+			'BC' => [], // Transform content nodes to '*'
+			'Types' => [], // Add back-compat subelements
+		] );
 		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
 			return [ 'result' => 'fail' ];
 		}
@@ -260,15 +256,11 @@ class ApiVisualEditor extends ApiBase {
 		);
 
 		$api->execute();
-		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData( null, [
-				'BC' => [], // Backwards-compatible structure transformations
-				'Types' => [], // Backwards-compatible structure transformations
-				'Strip' => 'all', // Remove any metadata keys from the langlinks array
-			] );
-		} else {
-			$result = $api->getResultData();
-		}
+		$result = $api->getResult()->getResultData( null, [
+			'BC' => [], // Backwards-compatible structure transformations
+			'Types' => [], // Backwards-compatible structure transformations
+			'Strip' => 'all', // Remove any metadata keys from the langlinks array
+		] );
 		if ( !isset( $result['query']['pages'][$title->getArticleID()]['langlinks'] ) ) {
 			return false;
 		}

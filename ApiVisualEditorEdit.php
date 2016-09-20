@@ -53,11 +53,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 		$api->execute();
 
-		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			return $api->getResult()->getResultData();
-		} else {
-			return $api->getResultData();
-		}
+		return $api->getResult()->getResultData();
 	}
 
 	protected function parseWikitext( $title, $newRevId ) {
@@ -77,15 +73,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		);
 
 		$api->execute();
-		if ( defined( 'ApiResult::META_CONTENT' ) ) {
-			$result = $api->getResult()->getResultData( null, [
-				'BC' => [], // Transform content nodes to '*'
-				'Types' => [], // Add back-compat subelements
-				'Strip' => 'all', // Remove any metadata keys from the links array
-			] );
-		} else {
-			$result = $api->getResultData();
-		}
+		$result = $api->getResult()->getResultData( null, [
+			'BC' => [], // Transform content nodes to '*'
+			'Types' => [], // Add back-compat subelements
+			'Strip' => 'all', // Remove any metadata keys from the links array
+		] );
 		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
 		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
 			$result['parse']['categorieshtml']['*'] : false;
@@ -278,10 +270,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 	public function needsToken() {
 		return 'csrf';
-	}
-
-	public function getTokenSalt() {
-		return '';
 	}
 
 	public function mustBePosted() {
