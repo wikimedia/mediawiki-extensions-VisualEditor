@@ -1177,7 +1177,8 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
  * Page modifications for switching to edit mode.
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
-	var $content;
+	var target = this,
+		$content;
 
 	this.updateTabs( true );
 	this.emit( 'transformPage' );
@@ -1194,8 +1195,16 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content.nextAll().addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 		$content = $content.parent();
 	}
-	// Support IE9: Disable links
-	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function () { return false; } );
+	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function () {
+		var windowAction;
+		if ( $( this ).attr( 'id' ) === 'catlinks' ) {
+			windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+			windowAction.open( 'meta', { page: 'categories' } );
+			return false;
+		}
+		// Support IE9: Disable links
+		return false;
+	} );
 
 	this.updateHistoryState();
 };
