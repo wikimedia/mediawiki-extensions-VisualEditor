@@ -832,6 +832,7 @@ class VisualEditorHooks {
 				'modules/ve-mw/tests/dm/ve.dm.mwExample.js',
 				'modules/ve-mw/tests/dm/ve.dm.Converter.test.js',
 				'modules/ve-mw/tests/dm/ve.dm.MWImageModel.test.js',
+				'modules/ve-mw/tests/dm/ve.dm.MWInternalLinkAnnotation.test.js',
 				// VisualEditor ContentEditable Tests
 				'lib/ve/tests/ce/ve.ce.test.js',
 				'lib/ve/tests/ce/ve.ce.Document.test.js',
