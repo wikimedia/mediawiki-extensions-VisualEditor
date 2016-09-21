@@ -23,3 +23,9 @@
 .ve-init-target-ie .ve-ce-surface h6 {
 	overflow: visible;
 }
+
+/* HACK: Fix border color from MW theme, will be fixed in next OO-UI release */
+.oo-ui-toolbar-actions .oo-ui-toolGroup,
+.oo-ui-toolbar-actions > .oo-ui-toolbar:not( :last-child ) {
+	border-color: #c8ccd1;
+}
