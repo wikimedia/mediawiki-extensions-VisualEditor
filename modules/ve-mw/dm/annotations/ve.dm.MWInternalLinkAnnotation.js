@@ -42,10 +42,10 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 		type: this.name,
 		attributes: {
 			hrefPrefix: targetData.hrefPrefix,
-			title: ve.decodeURIComponentIntoArticleTitle( targetData.title ),
+			title: targetData.title,
 			normalizedTitle: this.normalizeTitle( targetData.title ),
 			lookupTitle: this.getLookupTitle( targetData.title ),
-			origTitle: targetData.title
+			origTitle: targetData.rawTitle
 		}
 	};
 };
@@ -88,6 +88,8 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title ) {
  * @return {Object} Information about the given href
  * @return {string} return.title
  *    The title of the internal link, else the original href if href is external
+ * @return {string} return.rawTitle
+ *    The title without URL decoding and underscore normalization applied
  * @return {string} return.hrefPrefix
  *    Any ./ or ../ prefixes on a relative link
  * @return {boolean} return.isInternal
@@ -125,7 +127,8 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	// point. So decode them, otherwise this is going to cause failures
 	// elsewhere.
 	return {
-		title: ve.safeDecodeURIComponent( matches[ 2 ] ),
+		title: ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] ),
+		rawTitle: matches[ 2 ],
 		hrefPrefix: matches[ 1 ],
 		isInternal: isInternal
 	};

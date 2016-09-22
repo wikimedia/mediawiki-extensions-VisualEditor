@@ -1076,6 +1076,29 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'internal link with special characters': {
+		body: '<p><a rel="mw:WikiLink" href="./Foo%3F+%25&Bar">x</a></p>',
+		head: '<base href="http://example.com" />',
+		data: [
+			{ type: 'paragraph' },
+			[
+				'x',
+				[ {
+					type: 'link/mwInternal',
+					attributes: {
+						title: 'Foo?+%&Bar',
+						origTitle: 'Foo%3F+%25&Bar',
+						normalizedTitle: 'Foo?+%&Bar',
+						lookupTitle: 'Foo?+%&Bar',
+						hrefPrefix: './'
+					}
+				} ]
+			],
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
 	'numbered external link (empty mw:Extlink)': {
 		body: '<p>Foo<a rel="mw:ExtLink" href="http://www.example.com"></a>Bar</p>',
 		data: [

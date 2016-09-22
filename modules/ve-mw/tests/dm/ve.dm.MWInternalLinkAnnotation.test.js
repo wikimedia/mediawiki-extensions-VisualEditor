@@ -39,7 +39,7 @@ QUnit.test( 'toDataElement', function ( assert ) {
 						hrefPrefix: '',
 						lookupTitle: 'Foo?',
 						normalizedTitle: 'Foo?',
-						origTitle: 'Foo?',
+						origTitle: 'Foo%3F',
 						title: 'Foo?'
 					}
 				}
