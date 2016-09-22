@@ -182,6 +182,9 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 	// schemas that use the full set of allowed characters, and we might get
 	// more false positives by checking for them.
 	// Note 3: We allow protocol-relative URIs here.
+	if ( this.internalAnnotationInput.getTextInputWidget().getValue() !== value ) {
+		return;
+	}
 	if (
 		!this.allowProtocolInInternal &&
 		/^(?:[a-z][a-z0-9\$\-_@\.&!\*"'\(\),]*:)?\/\//i.test( value.trim() )
