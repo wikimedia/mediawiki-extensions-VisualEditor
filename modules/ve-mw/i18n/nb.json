@@ -13,7 +13,8 @@
 			"Jdforrester",
 			"Emilbk",
 			"Cocu",
-			"Tarjeimo"
+			"Tarjeimo",
+			"Jon Harald Søby"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",

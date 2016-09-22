@@ -32,7 +32,8 @@
 			"Perevod16",
 			"Лилиә",
 			"Sealle",
-			"Mailman"
+			"Mailman",
+			"Туллук"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -304,6 +305,7 @@
 	"visualeditor-preference-betatempdisable": "Временно отключить визуальный редактор, пока он находится в бета-версии",
 	"visualeditor-preference-core-description": "Включить визуальный редактор. Он будет недоступен на страницах обсуждения и в некоторых других пространствах имён.",
 	"visualeditor-preference-core-label": "Визуальное редактирование",
+	"visualeditor-preference-newwikitexteditor-label": "Новый текстовый редактор вики",
 	"visualeditor-preference-enable": "Включить визуальный редактор. Он будет доступен в {{PLURAL:$2|следующем пространстве|следующих пространствах}} имён: $1",
 	"visualeditor-preference-tabs": "Режим редактирования:",
 	"visualeditor-preference-tabs-multi-tab": "Показывать мне оба варианта редактора",

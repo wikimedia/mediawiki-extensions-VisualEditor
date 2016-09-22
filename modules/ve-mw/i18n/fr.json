@@ -45,7 +45,8 @@
 			"Wladek92",
 			"Harmonia Amanda",
 			"Macofe",
-			"Litlok"
+			"Litlok",
+			"Pols12"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -169,7 +170,7 @@
 	"visualeditor-dialog-meta-languages-readonlynote": "Voici une liste de pages en d’autres langues qui sont liées à celle-ci . Pour le moment, elle ne peut être modifiée qu’avec l’éditeur de wikicode ou sur Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Langues",
 	"visualeditor-dialog-meta-settings-displaytitle": "Afficher le titre",
-	"visualeditor-dialog-meta-settings-displaytitle-enable": "Autoriser l'affichage du titre",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Modifier le titre affiché",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Vous pouvez écraser la manière dont le titre de cette page est affiché en positionnant un libellé différent à afficher.",
 	"visualeditor-dialog-meta-settings-hiddencat-help": "Vous pouvez empêcher cette catégorie d’être affichée dans la liste des catégories d’une page qui en est membre. C’est utile pour les catégories qui ont un intérêt pour les éditeurs, mais pas pour la plupart des lecteurs, comme les pages qui ont besoin d’une illustration.",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Catégorie cachée",

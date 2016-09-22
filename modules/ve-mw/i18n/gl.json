@@ -298,6 +298,7 @@
 	"visualeditor-preference-betatempdisable": "Desactivar temporalmente o editor visual mentres estea en fase experimental",
 	"visualeditor-preference-core-description": "Activar o editor visual. Non estará dispoñible nas páxinas de conversa e noutros espazos de nomes.",
 	"visualeditor-preference-core-label": "Edición visual",
+	"visualeditor-preference-newwikitexteditor-description": "Activar o novo editor de wikitexto. Ten un deseño similar e moitas das ferramentas presentes no editor visual, permitindo unha mellor alternancia entre os dous.",
 	"visualeditor-preference-newwikitexteditor-label": "Novo editor de texto wiki",
 	"visualeditor-preference-enable": "Activar o editor visual. Estará dispoñible {{PLURAL:$2|no seguinte espazo|nos seguintes espazos}} de nomes: $1",
 	"visualeditor-preference-tabs": "Modo de edición:",
