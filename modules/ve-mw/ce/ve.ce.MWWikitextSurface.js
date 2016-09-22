@@ -67,5 +67,3 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		} );
 	}
 };
-
-ve.ui.dataTransferHandlerFactory.unregister( ve.ui.MWWikitextStringTransferHandler );

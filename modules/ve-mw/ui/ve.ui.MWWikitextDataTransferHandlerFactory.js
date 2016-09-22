@@ -65,3 +65,5 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 /* Initialization */
 
 ve.ui.wikitextDataTransferHandlerFactory = new ve.ui.MWWikitextDataTransferHandlerFactory();
+
+ve.ui.wikitextDataTransferHandlerFactory.unregister( ve.ui.MWWikitextStringTransferHandler );
