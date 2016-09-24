@@ -226,7 +226,7 @@
 	"visualeditor-preference-tabs-remember-last": "Atcerēties manu pēdējo redaktoru",
 	"visualeditor-redirect-description": "Pāradresēt uz $1",
 	"visualeditor-savedialog-error-badtoken": "Mēs nevarējām saglabāt tavu labojumu, jo pārlūka sesija ir izbeigusies.",
-	"visualeditor-savedialog-identify-anon": "Vai jūs gribat saglabāt šo lapu kā anonīms lietotājs? Šīs lapas labojumu sarakstā tiks saglabāta jūsu IP adrese.",
+	"visualeditor-savedialog-identify-anon": "Vai jūs gribat saglabāt šo lapu kā anonīms dalībnieks? Šīs lapas labojumu sarakstā tiks saglabāta jūsu IP adrese.",
 	"visualeditor-savedialog-identify-user": "Jūs esat ielogojies kā [[User:$1|$1]]. Ja saglabāsiet, šis labojums tiks saistīts ar šo dalībnieka kontu.",
 	"visualeditor-savedialog-label-create": "Izveidot lapu",
 	"visualeditor-savedialog-label-error": "Kļūda",

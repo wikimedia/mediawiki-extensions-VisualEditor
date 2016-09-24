@@ -21,5 +21,6 @@
 	"visualeditor-welcomedialog-content": "Vsakdo lahko ureja in vsaka izboljšava pomaga.",
 	"visualeditor-welcomedialog-content-thanks": "Hvala, da pomagate svetu odkriti več!",
 	"visualeditor-welcomedialog-switch": "Preklopi na urejevalnik izvorne kode",
+	"visualeditor-welcomedialog-switch-ve": "Preklopi na vizualni urejevalnik",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobrodošli}} na $2"
 }
