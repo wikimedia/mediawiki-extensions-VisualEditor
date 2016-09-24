@@ -149,7 +149,11 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.setupToolbar = function ( surf
 			actionGroups[ 1 ].include,
 			[ 'meta', 'settings', 'advancedSettings', 'categories', 'languages' ]
 		);
-		actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
+		if ( mw.libs.ve.isVisualAvailable ) {
+			actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
+		} else {
+			actionGroups[ 2 ].include = [];
+		}
 		this.getActions().setup( actionGroups, surface );
 	}
 };
