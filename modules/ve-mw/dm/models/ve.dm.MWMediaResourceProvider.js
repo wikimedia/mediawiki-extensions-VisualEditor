@@ -27,13 +27,25 @@ ve.dm.MWMediaResourceProvider = function VeDmMWMediaResourceProvider( apiurl, co
 	this.isLocal = config.local !== undefined;
 
 	if ( this.isLocal ) {
-		this.setAPIurl( mw.util.wikiScript( 'api' ) );
+		this.setAjaxSettings( {
+			url: mw.util.wikiScript( 'api' ),
+			// If the url is local use json
+			dataType: 'json'
+		} );
 	} else {
-		// If 'apiurl' is set, use that. Otherwise, build the url
-		// from scriptDirUrl and /api.php suffix
-		this.setAPIurl( this.getAPIurl() || ( this.scriptDirUrl + '/api.php' ) );
+		this.setAjaxSettings( {
+			// If 'apiurl' is set, use that. Otherwise, build the url
+			// from scriptDirUrl and /api.php suffix
+			url: this.getAPIurl() || ( this.scriptDirUrl + '/api.php' ),
+			// If the url is not the same origin use jsonp
+			dataType: 'jsonp',
+			// JSON-P requests are not cached by default and get a &_=random trail.
+			// While setting cache=true will still bypass cache in most case due to the
+			// callback parameter, at least drop the &_=random trail which triggers
+			// an API warning (invalid parameter).
+			cache: true
+		} );
 	}
-
 	this.siteInfoPromise = null;
 	this.thumbSizes = [];
 	this.imageSizes = [];
@@ -168,15 +180,17 @@ ve.dm.MWMediaResourceProvider.prototype.sort = function ( results ) {
  *  the fetched data.
  */
 ve.dm.MWMediaResourceProvider.prototype.fetchAPIresults = function ( howMany ) {
-	var xhr, api,
+	var xhr,
+		ajaxOptions = {},
 		provider = this;
 
 	if ( !this.isValid() ) {
 		return $.Deferred().reject().promise( { abort: $.noop } );
 	}
 
-	api = this.isLocal ? new mw.Api() : new mw.ForeignApi( this.getAPIurl(), { anonymous: true } );
-	xhr = api.get( $.extend( {}, this.getStaticParams(), this.getUserParams(), this.getContinueData( howMany ) ) );
+	ajaxOptions = this.getAjaxSettings();
+
+	xhr = new mw.Api().get( $.extend( {}, this.getStaticParams(), this.getUserParams(), this.getContinueData( howMany ) ), ajaxOptions );
 	return xhr
 		.then( function ( data ) {
 			var page, newObj, raw,
