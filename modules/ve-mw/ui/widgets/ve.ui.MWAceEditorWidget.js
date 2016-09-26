@@ -100,7 +100,7 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
  */
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	var basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
-	if ( basePath.substring( 0, 2 ) === '//' ) {
+	if ( basePath.slice( 0, 2 ) === '//' ) {
 		// ACE uses web workers, which have importScripts, which don't like relative links.
 		basePath = window.location.protocol + basePath;
 	}
