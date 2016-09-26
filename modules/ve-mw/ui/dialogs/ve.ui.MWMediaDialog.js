@@ -87,9 +87,15 @@ ve.ui.MWMediaDialog.static.actions = [
 		modes: [ 'info' ]
 	},
 	{
+		action: 'cancelupload',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-media-goback' ),
+		flags: [ 'safe', 'back' ],
+		modes: [ 'upload-info' ]
+	},
+	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		flags: [ 'safe', 'back' ],
-		modes: [ 'edit', 'insert', 'select', 'search', 'upload-upload', 'upload-info' ]
+		modes: [ 'edit', 'insert', 'select', 'search', 'upload-upload' ]
 	},
 	{
 		action: 'back',
@@ -1368,6 +1374,13 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 			handler = function () {
 				this.switchPanels( 'search', true );
 				// Reset upload booklet, in case we got here by uploading a file
+				return this.mediaUploadBooklet.initialize();
+			};
+			break;
+		case 'cancelupload':
+			handler = function () {
+				this.searchTabs.setCard( 'upload' );
+				this.searchTabs.toggleMenu( true );
 				return this.mediaUploadBooklet.initialize();
 			};
 			break;
