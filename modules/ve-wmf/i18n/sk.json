@@ -11,10 +11,17 @@
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Úprava vykonaná pomocou [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: na kontrolu]]",
-	"tag-visualeditor-needcheck-description": "Úprava vykonaná pomocou [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editoru]], pri ktorej systém odhalil možné nezamýšľané zmeny wikitextu.",
+	"tag-visualeditor-needcheck-description": "Úprava pomocou [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]], pri ktorej systém odhalil možné nezamýšľané zmeny wikitextu.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: prepnuté]]",
+	"tag-visualeditor-switched-description": "Používateľ začal editovať pomocou VisualEditoru, potom sa prepol do režimu editácie wikitextu.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Názory",
 	"visualeditor-feedback-tool": "Zanechať spätnú väzbu",
 	"visualeditor-help-label": "Prečítajte si návod",
-	"visualeditor-help-title": "Návod na používanie editoru"
+	"visualeditor-help-title": "Návod na používanie editoru",
+	"visualeditor-welcomedialog-action": "Začať editovať",
+	"visualeditor-welcomedialog-content": "Editovať môže ktokoľvek a každé vylepšenie pomáha.",
+	"visualeditor-welcomedialog-content-thanks": "Ďakujeme, že pomáhate svetu objavovať!",
+	"visualeditor-welcomedialog-switch": "Prepnúť na editáciu zdrojového kódu",
+	"visualeditor-welcomedialog-switch-ve": "Prepnúť do VisualEditoru",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Vitajte}} na {{GRAMMAR:6sg|$2}}"
 }
