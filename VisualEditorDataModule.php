@@ -53,7 +53,9 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		$parsedMsgs = [
 			'copyrightwarning' => EditPage::getCopyrightWarning(
 				// Use a dummy title
-				Title::newFromText( 'Dwimmerlaik' ), 'parse'
+				Title::newFromText( 'Dwimmerlaik' ),
+				'parse',
+				$context->getLanguage()
 			),
 		];
 
