@@ -14,6 +14,17 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextHeading', 'heading2', [ { type: 'paragraph' }, '=', '=' ], 2 )
 );
+( function () {
+	var level;
+	for ( level = 3; level <= 6; level++ ) {
+		ve.ui.sequenceRegistry.register(
+			new ve.ui.Sequence(
+				'wikitextHeadingLevel' + level, 'heading' + level,
+				[ { type: 'mwHeading', attributes: { level: level - 1 } }, '=' ], 1
+			)
+		);
+	}
+} )();
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'numberHash', 'numberWrapOnce', [ { type: 'paragraph' }, '#', ' ' ], 2 )
 );
