@@ -240,6 +240,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Подзаголовок 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Подзаголовок 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Подзаголовок 4",
+	"visualeditor-generating-wikitext-progress": "Генерация вики-текста",
 	"visualeditor-languages-tool": "Языки",
 	"visualeditor-linkinspector-button-link-external": "Внешняя ссылка",
 	"visualeditor-linkinspector-button-link-internal": "Поиск страницы",
