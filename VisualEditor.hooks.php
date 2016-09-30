@@ -330,6 +330,17 @@ class VisualEditorHooks {
 						$user->getOption( 'visualeditor-tabs' ) === 'multi-tab'
 					)
 				) {
+					if (
+						$config->get( 'VisualEditorEnableWikitext' ) &&
+						$user->getOption( 'visualeditor-newwikitext' )
+					) {
+						$parsed = wfParseUrl( wfExpandUrl( $editTab['href'] ) );
+						$q = wfCgiToArray( $parsed['query'] );
+						unset( $q['action'] );
+						$q['veaction'] = 'editsource';
+						$parsed['query'] = wfArrayToCgi( $q );
+						$editTab['href'] = wfAssembleUrl( $parsed );
+					}
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
 						$editTab['class'] .= ' collapsible';
