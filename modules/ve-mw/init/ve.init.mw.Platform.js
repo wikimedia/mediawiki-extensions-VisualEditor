@@ -29,6 +29,7 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 	this.parsedMessages = {};
 	this.linkCache = new ve.init.mw.LinkCache();
 	this.imageInfoCache = new ve.init.mw.ImageInfoCache();
+	this.galleryImageInfoCache = new ve.init.mw.GalleryImageInfoCache();
 };
 
 /* Inheritance */

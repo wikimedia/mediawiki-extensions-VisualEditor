@@ -87,7 +87,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				if ( titles.length > 0 ) {
 					params = {
 						action: 'templatedata',
-						titles: titles.join( '|' ),
+						titles: titles,
 						lang: mw.config.get( 'wgUserLanguage' )
 					};
 					if ( widget.showRedirects ) {

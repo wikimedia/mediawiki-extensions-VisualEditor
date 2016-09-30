@@ -298,7 +298,7 @@
 	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, specs, queue ) {
 		var xhr = new mw.Api().get( {
 			action: 'templatedata',
-			titles: titles.join( '|' ),
+			titles: titles,
 			lang: mw.config.get( 'wgUserLanguage' ),
 			redirects: '1'
 		} ).done( this.fetchRequestDone.bind( this, titles, specs ) );

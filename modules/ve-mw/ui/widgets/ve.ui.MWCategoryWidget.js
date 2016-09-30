@@ -274,7 +274,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 	return new mw.Api().get( {
 		action: 'query',
 		prop: 'pageprops',
-		titles: categoryNamesToQuery.join( '|' ),
+		titles: categoryNamesToQuery,
 		ppprop: 'hiddencat',
 		redirects: ''
 	} ).then( function ( result ) {

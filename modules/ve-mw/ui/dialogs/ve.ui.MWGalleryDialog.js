@@ -279,7 +279,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var titlesString, title, titleText, imageTitles, mode,
+			var title, titleText, imageTitles, mode,
 				caption, widths, heights, perrow,
 				showFilename, classes, styles,
 				namespaceIds = mw.config.get( 'wgNamespaceIds' ),
@@ -290,7 +290,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			// If editing an existing gallery, populate with the images...
 			if ( this.selectedNode ) {
 				imageTitles = [];
-
 				// Get image and caption data
 				// TODO: Can be multiple pipes. See parser.php -> renderImageGallery in MediaWiki
 				$.trim( this.selectedNode.getAttribute( 'mw' ).body.extsrc )
@@ -322,9 +321,8 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				);
 
 				// Populate menu and edit panels
-				titlesString = imageTitles.join( '|' );
 				this.imagesPromise = this.requestImages( {
-					titlesString: titlesString
+					titles: imageTitles
 				} ).done( function () {
 					dialog.onHighlightItem();
 				} );
@@ -421,34 +419,34 @@ ve.ui.MWGalleryDialog.prototype.getBodyHeight = function () {
  * @param {Object} options Options for the request
  */
 ve.ui.MWGalleryDialog.prototype.requestImages = function ( options ) {
-	return new mw.Api().get( {
-		action: 'query',
-		prop: 'imageinfo',
-		iiprop: 'url',
-		iiurlwidth: options.width || 200,
-		// Matches height of this.$highlightedImage
-		iiurlheight: options.height || 200,
-		titles: options.titlesString
-	} ).done( this.onRequestImagesSuccess.bind( this ) );
+	var i, len,
+		dialog = this,
+		promises = [];
+	for ( i = 0, len = options.titles.length; i < len; i++ ) {
+		promises.push( ve.init.platform.galleryImageInfoCache.get( options.titles[ i ] ) );
+	}
+	return $.when.apply( $, promises )
+		.done( function () {
+			var resp = {};
+			for ( i = 0; i < len; i++ ) {
+				resp[ options.titles[ i ] ] = arguments[ i ];
+			}
+			dialog.onRequestImagesSuccess( resp );
+		} );
 };
 
 /**
  * Create items for the returned images and add them to the gallery group
  *
- * @param {Object} deferred jQuery deferred object
  * @param {Object} response jQuery response object
  */
-ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( deferred, response ) {
-	var index, title,
+ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
+	var title,
 		thumbUrls = {},
-		items = [],
-		pages = response.responseJSON.query.pages;
+		items = [];
 
-	// Store object of titles to thumbUrls
-	for ( index in pages ) {
-		if ( pages[ index ].imageinfo ) {
-			thumbUrls[ pages[ index ].title ] = pages[ index ].imageinfo[ 0 ].thumburl;
-		}
+	for ( title in response ) {
+		thumbUrls[ title ] = response[ title ].thumburl;
 	}
 
 	if ( this.initialImageData.length > 0 ) {
@@ -489,7 +487,7 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 
 	// Request image
 	this.requestImages( {
-		titlesString: title
+		titles: [ title ]
 	} ).done( function () {
 
 		// populate edit panel with the new image

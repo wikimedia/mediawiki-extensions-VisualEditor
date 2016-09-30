@@ -45,7 +45,7 @@ ve.init.mw.ImageInfoCache.prototype.getRequestPromise = function ( subqueue ) {
 			prop: 'imageinfo',
 			indexpageids: '1',
 			iiprop: 'size|mediatype',
-			titles: subqueue.join( '|' )
+			titles: subqueue
 		},
 		{ type: 'POST' }
 	);
