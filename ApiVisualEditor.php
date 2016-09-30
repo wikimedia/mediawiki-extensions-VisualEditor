@@ -351,9 +351,10 @@ class ApiVisualEditor extends ApiBase {
 							true // enable write?
 						);
 						$api->execute();
-						$result = $api->getResultData();
-						$content = isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['*'] ) ?
-							$result['query']['pages'][$title->getArticleID()]['revisions'][0]['*'] :
+						$result = $api->getResult()->getResultData();
+						$pid = $title->getArticleID();
+						$content = isset( $result['query']['pages'][$pid]['revisions']['0']['content'] ) ?
+							$result['query']['pages'][$pid]['revisions']['0']['content'] :
 							false;
 						if ( $content === false ) {
 							$this->dieUsage( 'Error contacting the document server', 'docserver' );
