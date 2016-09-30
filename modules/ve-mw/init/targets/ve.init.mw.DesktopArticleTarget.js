@@ -1195,15 +1195,20 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content.nextAll().addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 		$content = $content.parent();
 	}
-	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function () {
-		var windowAction;
-		if ( $( this ).attr( 'id' ) === 'catlinks' ) {
-			windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+
+	// Un-disable the catlinks wrapper, but not the links
+	$( '.catlinks' )
+		.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
+		.on( 'click.ve-target', function () {
+			var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 			windowAction.open( 'meta', { page: 'categories' } );
 			return false;
-		}
-		// Support IE9: Disable links
-		return false;
+		} )
+		.find( 'a' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+
+	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function ( e ) {
+		// Support IE9: Prevent default, but don't stop propagation
+		e.preventDefault();
 	} );
 
 	this.updateHistoryState();
