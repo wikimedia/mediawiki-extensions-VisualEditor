@@ -22,6 +22,49 @@ ve.dm.MWWikitextSurfaceFragment = function VeDmMwWikitextSurfaceFragment() {
 
 OO.inheritClass( ve.dm.MWWikitextSurfaceFragment, ve.dm.SourceSurfaceFragment );
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type, attributes ) {
+	var i, len, text, command,
+		nodes = this.getSelectedLeafNodes(),
+		all = !!nodes.length;
+
+	nodes = this.getSelectedLeafNodes();
+	all = !!nodes.length;
+	for ( i = 0, len = nodes.length; i < len; i++ ) {
+		text = this.document.data.getText( false, nodes[ i ].getRange() );
+		// TODO: Use a registry to do this matching
+		switch ( type ) {
+			case 'paragraph':
+				all = !text.match( /^ |^=|^<blockquote>/ );
+				break;
+			case 'mwPreformatted':
+				all = text.slice( 0, 1 ) === ' ';
+				break;
+			case 'blockquote':
+				all = text.slice( 0, 12 ) === '<blockquote>';
+				break;
+			case 'mwHeading':
+				command = ve.ui.wikitextCommandRegistry.lookup( 'heading' + attributes.level );
+				if ( text.indexOf( command.args[ 0 ] ) !== 0 || text.indexOf( command.args[ 1 ] ) !== text.length - command.args[ 1 ].length ) {
+					all = false;
+				}
+				break;
+			default:
+				all = false;
+				break;
+		}
+		if ( !all ) {
+			break;
+		}
+	}
+
+	return all;
+};
+
 /**
  * Wrap a text selection.
  *
