@@ -120,18 +120,6 @@ ve.ui.wikitextCommandRegistry.register(
 		{ args: [ '<sup>', '</sup>', OO.ui.deferMsg( 'visualeditor-annotationbutton-superscript-tooltip' ) ], supportedSelections: [ 'linear' ] }
 	)
 );
-ve.ui.wikitextCommandRegistry.register(
-	new ve.ui.Command(
-		'number', 'mwWikitext', 'wrapLine',
-		{ args: [ '# ', '', OO.ui.deferMsg( 'visualeditor-listbutton-number-tooltip' ) ], supportedSelections: [ 'linear' ] }
-	)
-);
-ve.ui.wikitextCommandRegistry.register(
-	new ve.ui.Command(
-		'bullet', 'mwWikitext', 'wrapLine',
-		{ args: [ '* ', '', OO.ui.deferMsg( 'visualeditor-listbutton-bullet-tooltip' ) ], supportedSelections: [ 'linear' ] }
-	)
-);
 
 ( function () {
 	var i, heading = '';
@@ -186,6 +174,27 @@ ve.ui.wikitextCommandRegistry.register(
 			{ args: [ '<blockquote>', '</blockquote>', OO.ui.deferMsg( 'visualeditor-formatdropdown-format-blockquote' ), unformat ], supportedSelections: [ 'linear' ] }
 		)
 	);
+
+	function unlist( keepType, text ) {
+		var matches;
+		if ( ( matches = text.match( /^[*#] */ ) ) && text.slice( 0, 1 ) !== keepType ) {
+			return [ matches[ 0 ].length, 0 ];
+		}
+	}
+
+	ve.ui.wikitextCommandRegistry.register(
+		new ve.ui.Command(
+			'number', 'mwWikitext', 'wrapLine',
+			{ args: [ '# ', '', OO.ui.deferMsg( 'visualeditor-listbutton-number-tooltip' ), unlist.bind( this, '#' ) ], supportedSelections: [ 'linear' ] }
+		)
+	);
+	ve.ui.wikitextCommandRegistry.register(
+		new ve.ui.Command(
+			'bullet', 'mwWikitext', 'wrapLine',
+			{ args: [ '* ', '', OO.ui.deferMsg( 'visualeditor-listbutton-bullet-tooltip' ), unlist.bind( this, '*' ) ], supportedSelections: [ 'linear' ] }
+		)
+	);
+
 } )();
 
 ve.ui.wikitextCommandRegistry.register(
