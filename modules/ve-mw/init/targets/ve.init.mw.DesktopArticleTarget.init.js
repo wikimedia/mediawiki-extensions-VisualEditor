@@ -965,7 +965,7 @@
 			}
 
 			// Set up the tabs appropriately if the user has VE on
-			if ( init.isVisualAvailable && userPrefPreferShow ) {
+			if ( init.isAvailable && userPrefPreferShow ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
 				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
 					// … set the skin up with both tabs and both section edit links.
