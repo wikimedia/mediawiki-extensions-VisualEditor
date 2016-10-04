@@ -103,8 +103,8 @@
 	"visualeditor-preference-betatempdisable": "Stâca p'r adèsa l' editor vişuêl mèinter l'é in beta",
 	"visualeditor-preference-core-description": "Dà 'l permès a l'editor vuşuêl. Gh'é 'l chêş ch' an pôsa mìa druvêr int al pàgini 'd discusiòun e in soquânt êter namespace.",
 	"visualeditor-preference-core-label": "Mudéfica vişuêla",
-	"visualeditor-preference-enable": "Invéia VisualEditor. Al srà prûnt int i spâsi dal nòm: $1",
-	"visualeditor-savedialog-error-badtoken": "An n'é mìa pusébil lavurêr la tó mudéfica perchè la sesiòun an n'é mìa pió vâlida.",
+	"visualeditor-preference-enable": "Fà partîr l’editōr vişuêl. L’è prûnt ché{{PLURAL:$2|namespace|namespaces}}: $1",
+	"visualeditor-savedialog-error-badtoken": "An n'é mìa pusébil salvêr la tó mudéfica perchè la sesiòun an n'é mìa pió vâlida.",
 	"visualeditor-savedialog-identify-anon": "Vōt salvêr cla pàgina ché cme utèint sèinsa nòm? Al tó indirés IP al srà registrê int la stòria 'd la pàgina.",
 	"visualeditor-savedialog-identify-user": "T'é gnû dèinter cme [[User:$1|$1]]. S'ét sêlov, la tó mudéfica la srà unîda a cl'utèinsa ché.",
 	"visualeditor-savedialog-label-create": "Invèinta la pàgina.",
@@ -125,7 +125,7 @@
 	"visualeditor-toolbar-savedialog": "Sêlva la pàgina",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utèint",
 	"visualeditor-version-label": "Versiòun",
-	"visualeditor-viewpage-savewarning": "Turnêr al môd a vésta sèinsa préma salvêr?",
-	"visualeditor-wikitext-warning": "T'é drē druvê al VisualEditor – al [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitèst]] ché al funsiòuna mìa. Per pasêr a \"{{int:visualeditor-ca-editsource}}\" in ògni mumèint sèinsa pêrder al mudéfichi, arvîr l'elench a tendèina aşvèin a \"{{int:visualeditor-toolbar-savedialog}}\"  e  sernîr \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-viewpage-savewarning": "Ét sicûr ed vrèir lasêr còl che t'é mudifichê sèinsa préma salvêr?",
+	"visualeditor-wikitext-warning": "T'é drē druvêr l'editōr vişuêl – al [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitèst]] che 'l funsiòuna mìa. Per pasêr a la mudéfica surgînt in ògni mumèint sèinsa pêrder al tō mudéfichi, cléca al ptòun scambiadōr.",
 	"visualeditor-wikitext-warning-title": "Nutê wikitèst"
 }

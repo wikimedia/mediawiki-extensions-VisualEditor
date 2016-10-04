@@ -290,6 +290,8 @@
 	"visualeditor-preference-betatempdisable": "Привремено исклучи го визуелниот уредник додека е во бета",
 	"visualeditor-preference-core-description": "Овозможи го визуелниот уредник. Нема да се појавува во страници за разговор и некои други именски простори.",
 	"visualeditor-preference-core-label": "Визуелно уредување",
+	"visualeditor-preference-newwikitexteditor-description": "Вклучи го новиот уредник на викитекст. Изгледа слично на визуелниот уредник и има многу од неговите алатки, но дава подобро префрлање од текстуално на визуелно уредување и обратно.",
+	"visualeditor-preference-newwikitexteditor-label": "Нов уредник на викитекст",
 	"visualeditor-preference-enable": "Овозможи го визуелниот уредник. Ќе биде достапен во {{PLURAL:$2|следниов именски простор|следниве именски простори}}: $1",
 	"visualeditor-preference-tabs": "Режим на уредување:",
 	"visualeditor-preference-tabs-multi-tab": "Дај ги двете уреднички јазичиња",
