@@ -255,6 +255,31 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFragment = function
 /**
  * @inheritdoc
  */
+ve.init.mw.DesktopWikitextArticleTarget.prototype.createModelFromDom = function ( doc ) {
+	var i, l, conf, children, data;
+
+	if ( this.mode !== 'source' ) {
+		// Parent method
+		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.createModelFromDom.apply( this, arguments );
+	}
+
+	conf = mw.config.get( 'wgVisualEditor' );
+	children = doc.body.children;
+	data = [];
+
+	// Wikitext documents are just plain text paragraphs, so we can just do a simple manual conversion.
+	for ( i = 0, l = children.length; i < l; i++ ) {
+		data.push( { type: 'paragraph' } );
+		data.push.apply( data, children[ i ].textContent.split( '' ) );
+		data.push( { type: '/paragraph' } );
+	}
+	data.push( { type: 'internalList' }, { type: '/internalList' } );
+	return new ve.dm.Document( data, doc, null, null, null, conf.pageLanguageCode, conf.pageLanguageDir );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.prepareCacheKey = function () {
 	if ( this.mode !== 'source' ) {
 		// Parent method

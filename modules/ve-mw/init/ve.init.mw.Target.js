@@ -266,6 +266,20 @@ ve.init.mw.Target.prototype.createSurface = function () {
 };
 
 /**
+ * Create a document model from an HTML document.
+ *
+ * @param {HTMLDocument} doc HTML document
+ * @return {ve.dm.Document} Document model
+ */
+ve.init.mw.Target.prototype.createModelFromDom = function ( doc ) {
+	var conf = mw.config.get( 'wgVisualEditor' );
+	return ve.dm.converter.getModelFromDom( doc, {
+		lang: conf.pageLanguageCode,
+		dir: conf.pageLanguageDir
+	} );
+};
+
+/**
  * Switch to editing mode.
  *
  * @method
@@ -276,14 +290,10 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
-		var dmDoc,
-			conf = mw.config.get( 'wgVisualEditor' );
+		var dmDoc;
 
 		target.track( 'trace.convertModelFromDom.enter' );
-		dmDoc = ve.dm.converter.getModelFromDom( doc, {
-			lang: conf.pageLanguageCode,
-			dir: conf.pageLanguageDir
-		} );
+		dmDoc = target.createModelFromDom( doc );
 		target.track( 'trace.convertModelFromDom.exit' );
 
 		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
