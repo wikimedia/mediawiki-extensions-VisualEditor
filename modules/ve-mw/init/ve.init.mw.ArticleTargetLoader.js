@@ -33,7 +33,13 @@
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
 	// Provide the new wikitext editor
-	if ( conf.enableWikitext && mw.user.options.get( 'visualeditor-newwikitext' ) ) {
+	if (
+		conf.enableWikitext &&
+		(
+			mw.user.options.get( 'visualeditor-newwikitext' ) ||
+			new mw.Uri().query.veaction === 'editsource'
+		)
+	) {
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
