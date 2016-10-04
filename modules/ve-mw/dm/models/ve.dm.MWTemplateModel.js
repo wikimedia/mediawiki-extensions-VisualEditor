@@ -291,14 +291,23 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
-	var i, len, name,
+	var i, len, name, j, aliases, aliasLen, foundAlias,
 		addedCount = 0,
 		spec = this.getSpec(),
 		names = spec.getParameterNames();
 
 	for ( i = 0, len = names.length; i < len; i++ ) {
 		name = names[ i ];
+		aliases = spec.getParameterAliases( name );
+		foundAlias = false;
+		for ( j = 0, aliasLen = aliases.length; j < aliasLen; j++ ) {
+			if ( Object.prototype.hasOwnProperty.call( this.params, aliases[ j ] ) ) {
+				foundAlias = true;
+				break;
+			}
+		}
 		if (
+			!foundAlias &&
 			!this.params[ name ] &&
 			(
 				spec.isParameterRequired( name ) ||
