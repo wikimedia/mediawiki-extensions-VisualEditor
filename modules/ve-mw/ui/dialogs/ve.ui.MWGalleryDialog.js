@@ -260,10 +260,22 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			var titlesString, title, titleText, imageTitles, mode,
 				caption, widths, heights, perrow,
 				showFilename, classes, styles,
+				pageTitle, namespace, namespacesWithSubpages,
 				dialog = this,
 				attributes = this.selectedNode && this.selectedNode.getAttribute( 'mw' ).attrs;
 
 			// Images card
+
+			// First set the search widget input value to the page title
+			pageTitle = mw.config.get( 'wgTitle' );
+			namespace = mw.config.get( 'wgNamespaceNumber' );
+			namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
+
+			if ( namespacesWithSubpages[ namespace ] ) {
+				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
+			}
+
+			this.searchWidget.getQuery().setValue( pageTitle );
 
 			// If editing an existing gallery, populate with the images...
 			if ( this.selectedNode ) {
@@ -353,7 +365,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			this.searchWidget.getQuery().focus();
+			this.searchWidget.getQuery().focus().select();
 			return this.imagesPromise;
 		}, this );
 };
@@ -567,7 +579,7 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 	if ( !visible ) {
 		this.highlightedCaptionInput.focus();
 	} else {
-		this.searchWidget.getQuery().focus();
+		this.searchWidget.getQuery().focus().select();
 	}
 };
 
