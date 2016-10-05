@@ -149,11 +149,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.setupToolbar = function ( surf
 			actionGroups[ 1 ].include,
 			[ 'meta', 'settings', 'advancedSettings', 'categories', 'languages' ]
 		);
-		if ( mw.libs.ve.isVisualAvailable ) {
-			actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
-		} else {
-			actionGroups[ 2 ].include = [];
-		}
+		actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
 		this.getActions().setup( actionGroups, surface );
 	}
 };
@@ -356,5 +352,14 @@ ve.ui.MWEditModeVisualTool.static.title =
 ve.ui.MWEditModeVisualTool.prototype.onSelect = function () {
 	this.toolbar.getTarget().switchToVisualEditor();
 	this.setActive( false );
+};
+/**
+ * @inheritdoc
+ */
+ve.ui.MWEditModeVisualTool.prototype.onUpdateState = function () {
+	// Parent method
+	ve.ui.MWEditModeVisualTool.super.prototype.onUpdateState.apply( this, arguments );
+
+	this.setDisabled( !mw.libs.ve.isVisualAvailable );
 };
 ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
