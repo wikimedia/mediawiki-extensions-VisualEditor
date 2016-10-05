@@ -24,7 +24,8 @@
 			"Liuxinyu970226",
 			"Matma Rex",
 			"Umherirrender",
-			"Yejianfei"
+			"Yejianfei",
+			"Metalhead64"
 		]
 	},
 	"accesskey-ca-editsource": "{{doc-accesskey}}",
@@ -258,7 +259,7 @@
 	"visualeditor-loaderror-message-noconnect": "Error message used in {{mw-msg|visualeditor-loaderror-message}} when the editor fails to load properly due to a RESTBase call failing due to not being able to connect.",
 	"visualeditor-loaderror-title": "Text shown as the title of a message box when the editor fails to load properly for some reason.",
 	"visualeditor-loadwarning": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server, in English. e.g. \"docserver-http-error\"",
-	"visualeditor-loadwarning-noconnect": "Error shown in {{mw-msg|visualeditor-loadwarning}} when the editor fails to load due to a connection issue.",
+	"visualeditor-loadwarning-noconnect": "Error shown in {{msg-mw|visualeditor-loadwarning}} when the editor fails to load due to a connection issue.",
 	"visualeditor-loadwarning-token": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server.",
 	"visualeditor-magiclinknodeinspector-convert-link": "Label of button that converts a magic link into a normal labeled link",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Title of inspector for editing ISBN magic links.\n\nSee also:\n* {{msg-mw|Visualeditor-annotationbutton-magiclinknode-tooltip-isbn}}",
