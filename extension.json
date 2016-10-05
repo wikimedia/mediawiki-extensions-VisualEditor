@@ -337,6 +337,7 @@
 			],
 			"messages": [
 				"visualeditor-loaderror-message",
+				"visualeditor-loaderror-message-noconnect",
 				"visualeditor-loaderror-title"
 			],
 			"targets": [
@@ -389,6 +390,7 @@
 				"readonlywarning",
 				"redirectpagesub",
 				"visualeditor-loadwarning",
+				"visualeditor-loadwarning-noconnect",
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-trylogin",

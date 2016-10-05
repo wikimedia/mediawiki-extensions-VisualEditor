@@ -677,7 +677,19 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 	if (
 		errorText === 'http' &&
 		( error.statusText !== 'abort' || error.xhr.status !== 504 ) &&
-		confirm( ve.msg( 'visualeditor-loadwarning', 'HTTP ' + error.xhr.status ) )
+		(
+			(
+				error.xhr.status &&
+				confirm( ve.msg( 'visualeditor-loadwarning', 'HTTP ' + error.xhr.status ) )
+			) ||
+			(
+				!error.xhr.status &&
+				confirm( ve.msg(
+					'visualeditor-loadwarning',
+					ve.msg( 'visualeditor-loadwarning-noconnect' )
+				) )
+			)
+		)
 	) {
 		this.load();
 	} else if (
