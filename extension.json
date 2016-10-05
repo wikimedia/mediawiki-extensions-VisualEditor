@@ -837,6 +837,7 @@
 				"lib/ve/src/ce/styles/nodes/ve.ce.DocumentNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.GeneratedContentNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.HorizontalRuleNode.css",
+				"lib/ve/src/ce/styles/nodes/ve.ce.CommentNode.css",
 				"lib/ve/src/ce/styles/annotations/ve.ce.LanguageAnnotation.css",
 				"lib/ve/src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.ResizableNode.css",
