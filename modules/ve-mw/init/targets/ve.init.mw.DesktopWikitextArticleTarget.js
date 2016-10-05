@@ -44,21 +44,30 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
 	var dataPromise,
 		target = this;
 
-	this.serialize( this.getDocToSave() );
-	dataPromise = this.serializing.then( function ( response ) {
-		// HACK
-		var data = response.visualeditor;
-		data.etag = target.etag;
-		data.fromEditedState = modified;
-		data.notices = target.remoteNotices;
-		data.protectedClasses = target.protectedClasses;
-		data.basetimestamp = target.baseTimeStamp;
-		data.starttimestamp = target.startTimeStamp;
-		data.oldid = target.revid;
-		return response;
-	} );
+	if ( discardChanges ) {
+		dataPromise = mw.libs.ve.targetLoader.requestPageData(
+			'source',
+			this.pageName,
+			this.requestedRevId,
+			this.constructor.name
+		).then(
+			function ( response ) { return response; },
+			function () {
+				// TODO: Some sort of progress bar?
+				ve.init.mw.DesktopWikitextArticleTarget.super.prototype.switchToWikitextEditor.call(
+					target,
+					discardChanges,
+					modified
+				);
+				// Keep everything else waiting so our error handler can do its business
+				return $.Deferred().promise();
+			}
+		);
+	} else {
+		this.serialize( this.getDocToSave() );
+		dataPromise = this.serializing;
+	}
 	this.setMode( 'source' );
-
 	this.reloadSurface( dataPromise );
 };
 
