@@ -164,7 +164,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.parseHtml = function ( content
 
 		content.split( '\n' ).forEach( function ( line ) {
 			var p = doc.createElement( 'p' );
-			p.innerText = line;
+			p.appendChild( doc.createTextNode( line ) );
 			doc.body.appendChild( p );
 		} );
 
