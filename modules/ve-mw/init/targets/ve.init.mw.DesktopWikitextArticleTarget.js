@@ -266,7 +266,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.createModelFromDom = function 
 	// Wikitext documents are just plain text paragraphs, so we can just do a simple manual conversion.
 	for ( i = 0, l = children.length; i < l; i++ ) {
 		data.push( { type: 'paragraph' } );
-		data.push.apply( data, children[ i ].textContent.split( '' ) );
+		ve.batchPush( data, children[ i ].textContent.split( '' ) );
 		data.push( { type: '/paragraph' } );
 	}
 	data.push( { type: 'internalList' }, { type: '/internalList' } );
