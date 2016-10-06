@@ -246,7 +246,6 @@
 	"visualeditor-linknodeinspector-add-label": "Add label",
 	"visualeditor-linknodeinspector-title": "Simple link",
 	"visualeditor-loaderror-message": "Error loading data from server: $1.",
-	"visualeditor-loaderror-message-noconnect": "Could not connect to the server",
 	"visualeditor-loaderror-title": "The editor could not load",
 	"visualeditor-loadwarning": "Error loading data from server: $1. Would you like to retry?",
 	"visualeditor-loadwarning-noconnect": "Could not connect to the server",

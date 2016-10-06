@@ -259,7 +259,6 @@
 	"visualeditor-linknodeinspector-add-label": "Label of button that converts an auto-numbered, external, labelless link into a labeled external link",
 	"visualeditor-linknodeinspector-title": "Title of inspector for editing auto-numbered, external, labelless links.\n\nSee also:\n* {{msg-mw|Visualeditor-annotationbutton-linknode-tooltip}}",
 	"visualeditor-loaderror-message": "Text shown in a message box when the editor fails to load properly due to a RESTBase call failing.\n\nParameters:\n* $1 - an error message",
-	"visualeditor-loaderror-message-noconnect": "Error message used in {{msg-mw|visualeditor-loaderror-message}} when the editor fails to load properly due to a RESTBase call failing due to not being able to connect.",
 	"visualeditor-loaderror-title": "Text shown as the title of a message box when the editor fails to load properly for some reason.",
 	"visualeditor-loadwarning": "Text (JavaScript confirm()) shown when the editor fails to load properly.\n\nParameters:\n* $1 - the error message from the server, in English. e.g. \"docserver-http-error\"",
 	"visualeditor-loadwarning-noconnect": "Error shown in {{msg-mw|visualeditor-loadwarning}} when the editor fails to load due to a connection issue.",
