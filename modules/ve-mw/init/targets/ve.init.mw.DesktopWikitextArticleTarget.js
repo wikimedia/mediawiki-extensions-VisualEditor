@@ -16,9 +16,6 @@
 ve.init.mw.DesktopWikitextArticleTarget = function VeInitMwDesktopWikitextArticleTarget( config ) {
 	// Parent constructor
 	ve.init.mw.DesktopWikitextArticleTarget.super.call( this, config );
-
-	// Initialization
-	this.$element.addClass( 've-init-mw-desktopWikitextArticleTarget' );
 };
 
 /* Inheritance */
