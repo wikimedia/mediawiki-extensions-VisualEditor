@@ -25,7 +25,7 @@ ve.ui.MWDesktopWikitextSurface = function VeUiMWDesktopWikitextSurface() {
 	// * mw-editfont-monospace
 	// * mw-editfont-sans-serif
 	// * mw-editfont-serif
-	this.$element.addClass( 've-ui-mwDesktopWikitextSurface mw-editfont-' + mw.user.options.get( 'editfont' ) );
+	this.getView().$element.addClass( 've-ui-mwDesktopWikitextSurface mw-editfont-' + mw.user.options.get( 'editfont' ) );
 };
 
 /* Inheritance */
