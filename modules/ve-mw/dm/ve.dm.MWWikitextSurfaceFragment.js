@@ -28,7 +28,7 @@ OO.inheritClass( ve.dm.MWWikitextSurfaceFragment, ve.dm.SourceSurfaceFragment );
  * @inheritdoc
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type, attributes ) {
-	var i, len, text, command,
+	var i, len, text,
 		nodes = this.getSelectedLeafNodes(),
 		all = !!nodes.length;
 
@@ -48,10 +48,8 @@ ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type,
 				all = text.slice( 0, 12 ) === '<blockquote>';
 				break;
 			case 'mwHeading':
-				command = ve.ui.wikitextCommandRegistry.lookup( 'heading' + attributes.level );
-				if ( text.indexOf( command.args[ 0 ] ) !== 0 || text.indexOf( command.args[ 1 ] ) !== text.length - command.args[ 1 ].length ) {
-					all = false;
-				}
+				all = text.match( new RegExp( '^={' + attributes.level + '}[^=]' ) ) &&
+					text.match( new RegExp( '[^=]={' + attributes.level + '}$' ) );
 				break;
 			default:
 				all = false;
