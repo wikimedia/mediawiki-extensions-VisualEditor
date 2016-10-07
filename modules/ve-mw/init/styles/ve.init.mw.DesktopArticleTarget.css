@@ -40,6 +40,10 @@
 	text-decoration: none;
 }
 
+.ve-init-mw-articleTarget-source .catlinks {
+	display: none;
+}
+
 /*!
  * Increase z-index of surface container so it appears above the debug bar
  */

@@ -194,6 +194,12 @@ ve.init.mw.ArticleTarget.static.platformType = 'other';
  */
 ve.init.mw.ArticleTarget.prototype.setMode = function ( mode ) {
 	if ( mode !== this.mode ) {
+		// The follow classes are used here:
+		// * ve-init-mw-articleTarget-visual
+		// * ve-init-mw-articleTarget-source
+		this.$element
+			.removeClass( 've-init-mw-articleTarget-' + this.mode )
+			.addClass( 've-init-mw-articleTarget-' + mode );
 		this.mode = mode;
 		this.updateTabs( true );
 	}
