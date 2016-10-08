@@ -120,6 +120,18 @@ ve.ui.wikitextCommandRegistry.register(
 		{ args: [ '<sup>', '</sup>', OO.ui.deferMsg( 'visualeditor-annotationbutton-superscript-tooltip' ) ], supportedSelections: [ 'linear' ] }
 	)
 );
+ve.ui.wikitextCommandRegistry.register(
+	new ve.ui.Command(
+		'big', 'mwWikitext', 'toggleWrapSelection',
+		{ args: [ '<big>', '</big>', OO.ui.deferMsg( 'visualeditor-annotationbutton-big-tooltip' ) ], supportedSelections: [ 'linear' ] }
+	)
+);
+ve.ui.wikitextCommandRegistry.register(
+	new ve.ui.Command(
+		'small', 'mwWikitext', 'toggleWrapSelection',
+		{ args: [ '<small>', '</small>', OO.ui.deferMsg( 'visualeditor-annotationbutton-small-tooltip' ) ], supportedSelections: [ 'linear' ] }
+	)
+);
 
 ( function () {
 	var i, heading = '';
