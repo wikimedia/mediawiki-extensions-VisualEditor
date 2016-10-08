@@ -333,7 +333,8 @@
 			"dependencies": [
 				"ext.visualEditor.track",
 				"jquery.textSelection",
-				"mediawiki.api"
+				"mediawiki.api",
+				"mediawiki.Uri"
 			],
 			"messages": [
 				"visualeditor-loaderror-message",
