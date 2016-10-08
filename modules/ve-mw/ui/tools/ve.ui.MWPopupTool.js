@@ -43,7 +43,10 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 	var tool = this,
 		items = toolGroup.getToolbar().getTarget().getEditNotices(),
 		count = items.length,
-		title = ve.msg( 'visualeditor-editnotices-tool', count );
+		title = ve.msg(
+			'visualeditor-editnotices-tool',
+			mw.language.convertNumber( count )
+		);
 
 	// Parent constructor
 	ve.ui.MWNoticesPopupTool.super.call( this, title, toolGroup, config );
