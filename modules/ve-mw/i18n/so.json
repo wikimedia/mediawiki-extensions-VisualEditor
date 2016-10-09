@@ -7,7 +7,6 @@
 	"tooltip-ca-createsource": "Sameey xogta furaha ee boggaan",
 	"tooltip-ca-editsource": "Wax ka bedel xofta fura ee boggaan",
 	"tooltip-ca-ve-edit": "Ku bedel boggaan VisualEditor",
-	"visualeditor-beta-appendix": "beta",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor wuxuu ku jiraa tijaabo. Waxaa laga yaabaa inaad kala kulanto mashaakil xagga borogaraamka, ama aad awoodi wayso wax ka bedelka qaybo ka mid ah bogga. Guji \"{{int:visualeditor-ca-editsource}}\" si uu unoqdo hab qoraal wiki – bedelka aan la kaydin wuu lumi doonaa.",
 	"visualeditor-browserwarning": "VisualEditor ma kaabayo boroserka aad adeegsato.",
@@ -21,5 +20,6 @@
 	"visualeditor-desc": "Visual editor ee MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|ma jirto wargalin|hal wargalin|laba wargalinood|$1 wargalinno|$1 wargalin}}",
+	"visualeditor-preference-betatempdisable": "Iga jooji tifaftir-muuqaalka si ku meel gaar ah inta aan ku guda jiro beta.",
 	"visualeditor-toolbar-savedialog": "Kaydi bogga"
 }

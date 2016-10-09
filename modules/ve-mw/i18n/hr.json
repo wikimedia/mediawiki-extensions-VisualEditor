@@ -8,7 +8,8 @@
 			"Milicevic01",
 			"Teoo3",
 			"Srdjan m",
-			"Ex13"
+			"Ex13",
+			"Ivi104"
 		]
 	},
 	"tooltip-ca-createsource": "Napravi izvorni kod ove stranice",
@@ -151,7 +152,7 @@
 	"visualeditor-dialog-transclusion-multiple-mode": "Prikaži mogućnosti",
 	"visualeditor-dialog-transclusion-no-template-description": "{{GENDER:$2|Dodajete}} predložak \"$1\" ovoj stranici. Predložak još nema opis, ali je moguće da postoje neke informacije na [[$1|stranici predloška]].",
 	"visualeditor-dialog-transclusion-options": "Mogućnosti",
-	"visualeditor-dialog-transclusion-param-default": "Predodređeno: $1",
+	"visualeditor-dialog-transclusion-param-default": "Zadano: $1",
 	"visualeditor-dialog-transclusion-param-example": "npr. $1",
 	"visualeditor-dialog-transclusion-param-info": "Opis polja",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nema opisa parametra",

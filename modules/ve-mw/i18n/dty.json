@@ -3,7 +3,8 @@
 		"authors": [
 			"रमेश सिंह बोहरा",
 			"जनक राज भट्ट",
-			"Nirajan pant"
+			"Nirajan pant",
+			"राम प्रसाद जोशी"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "सम्पादन टिप्पणी",
@@ -51,7 +52,7 @@
 	"visualeditor-dialog-meta-settings-toc-disable": "कभैई नाई",
 	"visualeditor-dialog-meta-settings-toc-force": "सधैं",
 	"visualeditor-dialog-template-title": "ढाँचा",
-	"visualeditor-dialog-transclusion-options": "विकल्पहरु",
+	"visualeditor-dialog-transclusion-options": "विकल्पहरू",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "पाछा फर्कन्या",
 	"visualeditor-dialogbutton-meta-tooltip": "पाना सेटिङ्गहरू",
 	"visualeditor-dialogbutton-template-tooltip": "ढाँचा",
@@ -64,7 +65,7 @@
 	"visualeditor-languages-tool": "भाषा",
 	"visualeditor-linkinspector-button-link-external": "भाइरका लिंक",
 	"visualeditor-linkinspector-button-link-internal": "खोजपानाहरु",
-	"visualeditor-meta-tool": "विकल्पहरु",
+	"visualeditor-meta-tool": "विकल्पहरू",
 	"visualeditor-mweditmodesource-progress": "स्रोत सम्पादनमी जन्नाछ़...",
 	"visualeditor-mweditmodesource-warning-cancel": "रद्द",
 	"visualeditor-mweditmodeve-progress": "दृष्यात्मक सम्पादनमी जन्नाछ़...",
