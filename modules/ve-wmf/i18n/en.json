@@ -20,6 +20,8 @@
 	"tag-visualeditor-description": "Edit made using the [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Check]]",
 	"tag-visualeditor-needcheck-description": "Edit made using the [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]] where the system detected the wikitext possibly having unintended changes.",
+	"tag-visualeditor-wikitext": "2017 source edit",
+	"tag-visualeditor-wikitext-description": "Edit made using the 2017 wikitext editor",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Switched]]",
 	"tag-visualeditor-switched-description": "User started to edit using the visual editor, then changed to the wikitext editor.",
 	"visualeditor-feedback-link": "Project:VisualEditor\/Feedback",

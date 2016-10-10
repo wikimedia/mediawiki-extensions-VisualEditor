@@ -166,8 +166,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				if ( $this->veConfig->get( 'VisualEditorUseChangeTagging' ) ) {
 					// Defer till after the RC row is inserted
 					// @TODO: doEditContent should let callers specify desired tags
-					DeferredUpdates::addCallableUpdate( function() use ( $newRevId ) {
-						ChangeTags::addTags( 'visualeditor', null, $newRevId, null );
+					$tag = $params['wikitext'] ? 'visualeditor-wikitext' : 'visualeditor';
+					DeferredUpdates::addCallableUpdate( function() use ( $tag, $newRevId ) {
+						ChangeTags::addTags( $tag, null, $newRevId, null );
 					} );
 				}
 			} else {
