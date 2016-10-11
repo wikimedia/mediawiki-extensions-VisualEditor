@@ -970,7 +970,7 @@
 				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupSkin();
-				} else if ( pageCanLoadVE && onlyTabIsVE ) {
+				} else if ( init.isVisualAvailable && pageCanLoadVE && onlyTabIsVE ) {
 					// … on single-edit-tab wikis, where VE is the user's preferred editor
 					// Handle section edit link clicks
 					$( '.mw-editsection a' ).on( 'click', function ( e ) {
