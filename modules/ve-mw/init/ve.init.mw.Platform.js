@@ -47,6 +47,17 @@ ve.init.mw.Platform.prototype.getUnanchoredExternalLinkUrlProtocolsRegExp = func
 	return this.unanchoredExternalLinkUrlProtocolsRegExp;
 };
 
+/**
+ * Regular expression matching RESTBase IDs
+ *
+ * This isn't perfect, see T147607
+ *
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.getMetadataIdRegExp = function () {
+	return /^mw[a-zA-Z0-9\-_]{2,6}$/;
+};
+
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.addMessages = function ( messages ) {
 	return mw.messages.set( messages );
