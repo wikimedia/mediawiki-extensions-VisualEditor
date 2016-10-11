@@ -51,6 +51,7 @@ ve.init.mw.LinkCache.static.getIconForLink = function ( linkData ) {
 ve.init.mw.LinkCache.static.processPage = function ( page ) {
 	return {
 		missing: page.missing !== undefined,
+		known: page.known !== undefined,
 		redirect: page.redirect !== undefined,
 		disambiguation: ve.getProp( page, 'pageprops', 'disambiguation' ) !== undefined,
 		imageUrl: ve.getProp( page, 'thumbnail', 'source' ),
@@ -78,7 +79,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
 	}
 
 	promise.done( function ( data ) {
-		if ( data.missing ) {
+		if ( data.missing && !data.known ) {
 			$element.addClass( 'new' );
 		} else {
 			// Provided by core MediaWiki, no styles by default.
