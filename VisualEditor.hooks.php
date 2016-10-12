@@ -663,6 +663,7 @@ class VisualEditorHooks {
 		$tags[] = 'visualeditor';
 		$tags[] = 'visualeditor-needcheck'; // No longer in active use
 		$tags[] = 'visualeditor-switched';
+		$tags[] = 'visualeditor-wikitext';
 		return true;
 	}
 
