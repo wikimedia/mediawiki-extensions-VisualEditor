@@ -42,7 +42,7 @@ ve.ui.MWGalleryDialog.static.modelClasses = [ ve.dm.MWGalleryNode ];
  * @inheritdoc
  */
 ve.ui.MWGalleryDialog.prototype.initialize = function () {
-	var indexLayout, imagesCard, optionsCard, menuLayout, menuPanel,
+	var imagesCard, optionsCard, menuLayout, menuPanel,
 		modeField, captionField, widthsField, heightsField,
 		perrowField, showFilenameField, classesField, stylesField;
 
@@ -57,7 +57,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
 
 	// Images and options cards
-	indexLayout = new OO.ui.IndexLayout( {
+	this.indexLayout = new OO.ui.IndexLayout( {
 		scrollable: false,
 		expanded: true
 	} );
@@ -244,11 +244,11 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		classesField.$element,
 		stylesField.$element
 	);
-	indexLayout.addCards( [
+	this.indexLayout.addCards( [
 		imagesCard,
 		optionsCard
 	] );
-	this.$body.append( indexLayout.$element );
+	this.$body.append( this.indexLayout.$element );
 };
 
 /**
@@ -348,6 +348,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.stylesInput.setValue( styles );
 
 			// Add event handlers
+			this.indexLayout.connect( this, { set: 'updateDialogSize' } );
 			this.searchWidget.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 			this.showSearchPanelButton.connect( this, { click: 'onShowSearchPanelButtonClick' } );
 			this.galleryGroup.connect( this, { editItem: 'onHighlightItem' } );
@@ -383,6 +384,7 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.searchPanelVisible = false;
 
 			// Disconnect events
+			this.indexLayout.disconnect( this );
 			this.searchWidget.getResults().disconnect( this );
 			this.showSearchPanelButton.disconnect( this );
 			this.galleryGroup.disconnect( this );
@@ -580,6 +582,18 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 		this.highlightedCaptionInput.focus();
 	} else {
 		this.searchWidget.getQuery().focus().select();
+	}
+	this.updateDialogSize();
+};
+
+/**
+ * Resize the dialog according to which panel is focused
+ */
+ve.ui.MWGalleryDialog.prototype.updateDialogSize = function () {
+	if ( this.searchPanelVisible && this.indexLayout.currentCardName === 'images' ) {
+		this.setSize( 'larger' );
+	} else {
+		this.setSize( 'large' );
 	}
 };
 
