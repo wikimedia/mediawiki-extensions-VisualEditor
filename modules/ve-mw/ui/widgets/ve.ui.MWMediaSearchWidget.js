@@ -199,7 +199,12 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
  * @return {string} Query value
  */
 ve.ui.MWMediaSearchWidget.prototype.getQueryValue = function () {
-	return this.query.getValue().trim();
+	var queryValue = this.query.getValue().trim();
+
+	if ( queryValue.match( ve.init.platform.getExternalLinkUrlProtocolsRegExp() ) ) {
+		queryValue = queryValue.match( /.+\/([^\/]+)/ )[ 1 ];
+	}
+	return queryValue;
 };
 
 /**
