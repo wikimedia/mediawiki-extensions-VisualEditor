@@ -849,7 +849,7 @@
 						mechanism: 'url'
 					} );
 					if ( isViewPage && uri.query.veaction in editModes ) {
-						activateTarget( editModes[ uri.query.veaction ] );
+						activateTarget( editModes[ uri.query.veaction ], section );
 					} else {
 						if (
 							conf.enableWikitext &&
