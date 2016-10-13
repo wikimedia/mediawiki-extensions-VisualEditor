@@ -18,6 +18,8 @@
 	"tag-visualeditor-description": "Bearbeitet mit dem [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuellen Editor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuelle Bearbeitung: Überprüfung]]",
 	"tag-visualeditor-needcheck-description": "Mit dem [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuellen Editor]] vorgenommene Bearbeitung, bei der das System möglicherweise ungewollte Änderungen im Wikitext entdeckt hat.",
+	"tag-visualeditor-wikitext": "2017-Quelltext-Bearbeitung",
+	"tag-visualeditor-wikitext-description": "Bearbeitung ausgeführt mit dem Wikitext-Editor von 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuelle Bearbeitung: Gewechselt]]",
 	"tag-visualeditor-switched-description": "Mit dem Bearbeiten mithilfe des visuellen Editors angefangen und dann auf den Wikitext-Editor gewechselt.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Rückmeldungen",

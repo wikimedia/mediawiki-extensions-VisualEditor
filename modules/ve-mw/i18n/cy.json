@@ -7,7 +7,8 @@
 			"ОйЛ",
 			"DChan (WMF)",
 			"Diafol",
-			"Jdforrester"
+			"Jdforrester",
+			"Ed g2s"
 		]
 	},
 	"apihelp-visualeditoredit-param-etag": "ETag i ddanfon.",
@@ -41,6 +42,8 @@
 	"visualeditor-dialog-media-position-right": "De",
 	"visualeditor-dialog-media-position-section": "Safle",
 	"visualeditor-dialog-media-save": "Cadw",
+	"visualeditor-dialog-media-search-tab-search": "Chwilio",
+	"visualeditor-dialog-media-search-tab-upload": "Uwchlwytho",
 	"visualeditor-dialog-media-size-choosecustom": "Gosod maint cyfaddas",
 	"visualeditor-dialog-media-size-choosedefault": "Maint rhagosodedig",
 	"visualeditor-dialog-media-size-choosefull": "Maint llawn",
@@ -53,6 +56,7 @@
 	"visualeditor-dialog-media-type-none": "Sylfaenol",
 	"visualeditor-dialog-media-type-section": "Math y ddelwedd",
 	"visualeditor-dialog-media-type-thumb": "Mân-lun",
+	"visualeditor-dialog-media-upload": "Uwchlwytho",
 	"visualeditor-dialog-meta-advancedsettings-label": "Gosodiadau uwch",
 	"visualeditor-dialog-meta-advancedsettings-section": "Gosodiadau uwch",
 	"visualeditor-dialog-meta-categories-category": "Categori",
@@ -136,6 +140,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Isbennawd 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Isbennawd 4",
 	"visualeditor-languages-tool": "Ieithoedd",
+	"visualeditor-linkinspector-button-link-external": "Dolen allanol",
 	"visualeditor-linkinspector-illegal-title": "Teitl tudalen annilys",
 	"visualeditor-loadwarning": "Gwall wrth lwytho'r data o'r gweinydd: $1. Hoffech chi geisio eto?",
 	"visualeditor-loadwarning-token": "Gwall wrth lwytho'r tocyn golygu o'r gweinydd: $1. Hoffech chi geisio eto?",
@@ -144,6 +149,8 @@
 	"visualeditor-meta-tool": "Opsiynau",
 	"visualeditor-mweditmodesource-title": "Newid i'r golygydd cod ffynhonnell",
 	"visualeditor-mweditmodesource-warning": "Rydych ar fin newid i'r golygydd cod ffynhonnell.\nYdych chi am fwrw ymlaen?",
+	"visualeditor-mweditmodesource-warning-cancel": "Diddymu",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "Sioe sleidiau",
 	"visualeditor-mwgallerydialog-title": "Oriel",
 	"visualeditor-pagemenu-tooltip": "Dewisiadau tudalen",
 	"visualeditor-pagetranslationwarning": "Rydych chi'n golygu tudalen wedi'i chyfieithu. Ni chynhelir hynny yn swyddogol eto.",

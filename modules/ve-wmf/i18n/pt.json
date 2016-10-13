@@ -20,6 +20,8 @@
 	"tag-visualeditor-description": "Edição realizada utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual: Verificar]]",
 	"tag-visualeditor-needcheck-description": "Edição feita com o [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual]] em que o sistema detectou que o código wiki possivelmente teve alterações não intencionais.",
+	"tag-visualeditor-wikitext": "modificação de código 2017",
+	"tag-visualeditor-wikitext-description": "Edição feita com o editor de texto wiki 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual: Trocado]]",
 	"tag-visualeditor-switched-description": "O utilizador iniciou a edição com o Editor Visual e depois mudou para o editor de texto wiki.",
 	"visualeditor-feedback-link": "Project:Editor Visual/Comentários",

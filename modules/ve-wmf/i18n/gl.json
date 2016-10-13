@@ -13,6 +13,8 @@
 	"tag-visualeditor-description": "Edición feita mediante o [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual: Comprobar]]",
 	"tag-visualeditor-needcheck-description": "Edición feita mediante o [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] na que o sistema detectou que o texto wiki posiblemente teña modificacións non intencionadas.",
+	"tag-visualeditor-wikitext": "edición de fonte 2017",
+	"tag-visualeditor-wikitext-description": "Edición feita usando o editor visual de wikitexto 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual: Cambio]]",
 	"tag-visualeditor-switched-description": "O usuario empezou editando mediante o editor visual e logo cambiou ao editor de texto wiki.",
 	"visualeditor-feedback-link": "Project:Editor visual/Comentarios",
