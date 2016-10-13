@@ -131,7 +131,7 @@ ve.ui.MWMediaSearchWidget.prototype.setup = function () {
  */
 ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 	var search = this,
-            value = this.getQueryValue();
+		value = this.getQueryValue();
 
 	if ( value === '' ) {
 		return;
