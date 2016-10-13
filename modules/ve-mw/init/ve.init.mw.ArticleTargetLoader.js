@@ -107,14 +107,15 @@
 		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {string} pageName Page name to request
+		 * @param {number} [section] Section to edit (currently just source mode)
 		 * @param {string} [oldid] Old revision ID, current if omitted
 		 * @param {string} [targetName] Optional target name for tracking
 		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestPageData: function ( mode, pageName, oldid, targetName, modified ) {
+		requestPageData: function ( mode, pageName, section, oldid, targetName, modified ) {
 			if ( mode === 'source' ) {
-				return this.requestWikitext( pageName, oldid, targetName, modified );
+				return this.requestWikitext( pageName, section, oldid, targetName, modified );
 			} else {
 				return this.requestParsoidData( pageName, oldid, targetName, modified );
 			}
@@ -245,13 +246,18 @@
 			return dataPromise;
 		},
 
-		requestWikitext: function ( pageName, oldid /*, targetName */ ) {
+		requestWikitext: function ( pageName, section, oldid /*, targetName */ ) {
 			var data = {
 					action: 'visualeditor',
 					paction: 'wikitext',
 					page: pageName,
 					uselang: mw.config.get( 'wgUserLanguage' )
 				};
+
+			// section should never really be undefined, but check just in case
+			if ( section !== null && section !== undefined ) {
+				data.section = section;
+			}
 
 			if ( oldid !== undefined ) {
 				data.oldid = oldid;

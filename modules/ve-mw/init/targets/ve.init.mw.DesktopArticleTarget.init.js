@@ -197,7 +197,7 @@
 				uri = veEditUri;
 			}
 
-			activateTarget( mode, null, modified );
+			activateTarget( mode, null, undefined, modified );
 		}
 	}
 
@@ -210,10 +210,11 @@
 	 *
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
+	 * @param {number} [section] Section to edit (currently just source mode)
 	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
-	function activateTarget( mode, targetPromise, modified ) {
+	function activateTarget( mode, section, targetPromise, modified ) {
 		var dataPromise;
 		// Only call requestPageData early if the target object isn't there yet.
 		// If the target object is there, this is a second or subsequent load, and the
@@ -226,6 +227,7 @@
 					return mw.libs.ve.targetLoader.requestPageData(
 						mode,
 						mw.config.get( 'wgRelevantPageName' ),
+						section,
 						oldid,
 						'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
 						modified
@@ -459,10 +461,10 @@
 				$caVeEdit.remove();
 			} else if ( pageCanLoadVE ) {
 				// Allow instant switching to edit mode, without refresh
-				$caVeEdit.on( 'click', init.onEditTabClick );
+				$caVeEdit.on( 'click', init.onEditTabClick.bind( init, 'visual' ) );
 			}
 			if ( conf.enableWikitext && mw.user.options.get( 'visualeditor-newwikitext' ) ) {
-				$caEdit.on( 'click', init.onEditSourceTabClick );
+				$caEdit.on( 'click', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -526,6 +528,7 @@
 								} );
 							} )
 							.addClass( 'mw-editsection-visualeditor' );
+
 						if ( conf.tabPosition === 'before' ) {
 							$editSourceLink.before( $editLink, $divider );
 						} else {
@@ -543,8 +546,13 @@
 				// and would preserve the wrong DOM with a diff on top.
 				$editsections
 					.find( '.mw-editsection-visualeditor' )
-						.on( 'click', init.onEditSectionLinkClick )
-				;
+						.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) );
+				if ( conf.enableWikitext ) {
+					$editsections
+						// TOOD: Make this less fragile
+						.find( 'a:not( .mw-editsection-visualeditor )' )
+							.on( 'click', init.onEditSectionLinkClick.bind( init, 'source' ) );
+				}
 			}
 		},
 
@@ -562,7 +570,7 @@
 			return e && e.which && e.which === 1 && !( e.shiftKey || e.altKey || e.ctrlKey || e.metaKey );
 		},
 
-		onEditTabClick: function ( e ) {
+		onEditTabClick: function ( mode, e ) {
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
@@ -577,19 +585,8 @@
 					}
 				} );
 			} else {
-				init.activateVe( 'visual' );
+				init.activateVe( mode );
 			}
-		},
-
-		onEditSourceTabClick: function ( e ) {
-			if ( !init.isUnmodifiedLeftClick( e ) ) {
-				return;
-			}
-			e.preventDefault();
-			if ( isLoading ) {
-				return;
-			}
-			init.activateVe( 'source' );
 		},
 
 		activateVe: function ( mode ) {
@@ -639,8 +636,8 @@
 			}
 		},
 
-		onEditSectionLinkClick: function ( e ) {
-			var targetPromise;
+		onEditSectionLinkClick: function ( mode, e ) {
+			var section, targetPromise;
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
@@ -661,11 +658,20 @@
 				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
 
-			targetPromise = getTarget( 'visual' ).then( function ( target ) {
-				target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-				return target;
-			} );
-			activateTarget( 'visual', targetPromise );
+			targetPromise = getTarget( mode );
+			if ( mode === 'visual' ) {
+				targetPromise = targetPromise.then( function ( target ) {
+					target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
+					return target;
+				} );
+			} else {
+				section = +( new mw.Uri( e.target.href ).query.section );
+				targetPromise = targetPromise.then( function ( target ) {
+					target.section = section;
+					return target;
+				} );
+			}
+			activateTarget( mode, section, targetPromise );
 		}
 	};
 
@@ -765,6 +771,7 @@
 
 	$( function () {
 		var showWikitextWelcome = true,
+			section = uri.query.vesection !== undefined ? uri.query.vesection : null,
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
 			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,
@@ -838,7 +845,7 @@
 				) {
 					showWikitextWelcome = false;
 					trackActivateStart( {
-						type: uri.query.vesection === undefined ? 'page' : 'section',
+						type: section === null ? 'page' : 'section',
 						mechanism: 'url'
 					} );
 					if ( isViewPage && uri.query.veaction in editModes ) {
@@ -857,7 +864,7 @@
 						) {
 							action = 'editsource';
 						}
-						activateTarget( editModes[ action ] );
+						activateTarget( editModes[ action ], section );
 					}
 				} else if (
 					init.isVisualAvailable &&

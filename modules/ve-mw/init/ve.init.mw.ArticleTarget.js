@@ -40,6 +40,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.mode = config.mode || 'visual';
+	this.section = null;
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
@@ -1022,6 +1023,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData(
 		this.mode,
 		this.pageName,
+		this.section,
 		this.requestedRevId,
 		this.constructor.name
 	);
@@ -1046,6 +1048,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.startTimeStamp = null;
 	this.doc = null;
 	this.originalHtml = null;
+	this.section = null;
 	this.editNotices = [];
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
@@ -1704,7 +1707,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var surfaceView, $documentNode, $section, headingNode;
 
-	if ( this.section !== undefined && this.section > 0 ) {
+	if ( this.section !== null && this.section > 0 ) {
 		surfaceView = this.getSurface().getView();
 		$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 		$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );
@@ -1718,8 +1721,6 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		if ( headingNode ) {
 			this.goToHeading( headingNode );
 		}
-
-		this.section = undefined;
 	}
 };
 

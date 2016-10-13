@@ -253,6 +253,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				ApiBase::PARAM_REQUIRED => true,
 			],
 			'wikitext' => null,
+			'section' => null,
 			'basetimestamp' => null,
 			'starttimestamp' => null,
 			'oldid' => null,
