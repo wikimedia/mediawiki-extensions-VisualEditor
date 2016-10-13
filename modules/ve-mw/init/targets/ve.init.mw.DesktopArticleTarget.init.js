@@ -821,7 +821,7 @@
 										init.isVisualAvailable
 									) ||
 									(
-										tabPreference === 'prefer-wte' &&
+										tabPreference === 'prefer-wt' &&
 										conf.enableWikitext &&
 										mw.user.options.get( 'visualeditor-newwikitext' )
 									) ||
