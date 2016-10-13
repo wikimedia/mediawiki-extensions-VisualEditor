@@ -26,7 +26,7 @@ ve.ui.MWMediaSearchWidget = function VeUiMWMediaSearchWidget( config ) {
 
 	// Properties
 	this.providers = {};
-	this.searchValue = '';
+	this.lastQueryValue = '';
 	this.searchQueue = new ve.dm.MWMediaSearchQueue( {
 		limit: this.constructor.static.limit,
 		threshold: this.constructor.static.threshold
@@ -86,8 +86,7 @@ ve.ui.MWMediaSearchWidget.static.threshold = 5;
  * be updated.
  */
 ve.ui.MWMediaSearchWidget.prototype.afterResultsResize = function () {
-	var items = this.currentItemCache,
-		value = this.query.getValue();
+	var items = this.currentItemCache;
 
 	if (
 		items.length > 0 &&
@@ -98,7 +97,7 @@ ve.ui.MWMediaSearchWidget.prototype.afterResultsResize = function () {
 	) {
 		this.resetRows();
 		this.itemCache = {};
-		this.processQueueResults( items, value );
+		this.processQueueResults( items );
 		if ( this.results.getItems().length > 0 ) {
 			this.lazyLoadResults();
 		}
@@ -132,7 +131,7 @@ ve.ui.MWMediaSearchWidget.prototype.setup = function () {
  */
 ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 	var search = this,
-		value = this.query.getValue();
+            value = this.getQueryValue();
 
 	if ( value === '' ) {
 		return;
@@ -145,7 +144,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 	this.searchQueue.get( this.constructor.static.limit )
 		.then( function ( items ) {
 			if ( items.length > 0 ) {
-				search.processQueueResults( items, value );
+				search.processQueueResults( items );
 				search.currentItemCache = search.currentItemCache.concat( items );
 			}
 
@@ -167,7 +166,7 @@ ve.ui.MWMediaSearchWidget.prototype.queryMediaQueue = function () {
 ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 	var i, len, title,
 		resultWidgets = [],
-		inputSearchQuery = this.query.getValue(),
+		inputSearchQuery = this.getQueryValue(),
 		queueSearchQuery = this.searchQueue.getSearchQuery();
 
 	if ( inputSearchQuery === '' || queueSearchQuery !== inputSearchQuery ) {
@@ -195,17 +194,26 @@ ve.ui.MWMediaSearchWidget.prototype.processQueueResults = function ( items ) {
 };
 
 /**
+ * Get the sanitized query value from the input
+ *
+ * @return {string} Query value
+ */
+ve.ui.MWMediaSearchWidget.prototype.getQueryValue = function () {
+	return this.query.getValue().trim();
+};
+
+/**
  * Handle search value change
  *
  * @param {string} value New value
  */
-ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
-	var trimmed = value.trim();
+ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function () {
+	// Get the sanitized query value
+	var queryValue = this.getQueryValue();
 
-	if ( trimmed === this.searchValue ) {
+	if ( queryValue === this.lastQueryValue ) {
 		return;
 	}
-	this.searchValue = trimmed;
 
 	// Parent method
 	ve.ui.MWMediaSearchWidget.super.prototype.onQueryChange.apply( this, arguments );
@@ -219,7 +227,8 @@ ve.ui.MWMediaSearchWidget.prototype.onQueryChange = function ( value ) {
 	this.layoutQueue = [];
 
 	// Change resource queue query
-	this.searchQueue.setSearchQuery( this.searchValue );
+	this.searchQueue.setSearchQuery( queryValue );
+	this.lastQueryValue = queryValue;
 
 	// Queue
 	clearTimeout( this.queryTimeout );
