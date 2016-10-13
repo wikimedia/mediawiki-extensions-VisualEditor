@@ -428,12 +428,13 @@ class VisualEditorHooks {
 			return true;
 		}
 
+		$user = $skin->getUser();
 		// Exit if the user doesn't have VE enabled
 		if (
-			!$skin->getUser()->getOption( 'visualeditor-enable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-betatempdisable' ) ||
-			$skin->getUser()->getOption( 'visualeditor-autodisable' ) ||
-			( $config->get( 'VisualEditorDisableForAnons' ) && $skin->getUser()->isAnon() )
+			!$user->getOption( 'visualeditor-enable' ) ||
+			$user->getOption( 'visualeditor-betatempdisable' ) ||
+			$user->getOption( 'visualeditor-autodisable' ) ||
+			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
 		) {
 			return true;
 		}
@@ -447,12 +448,12 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$editor = self::getUserEditor( $skin->getUser(), RequestContext::getMain()->getRequest() );
+		$editor = self::getUserEditor( $user, RequestContext::getMain()->getRequest() );
 		if (
 			!$config->get( 'VisualEditorUseSingleEditTab' ) ||
-			$skin->getUser()->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
+			$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
 			(
-				$skin->getUser()->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+				$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
 				$editor === 'wikitext'
 			)
 		) {
@@ -463,10 +464,29 @@ class VisualEditorHooks {
 			$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
 		}
 
+		if (
+			$config->get( 'VisualEditorEnableWikitext' ) &&
+			$user->getOption( 'visualeditor-newwikitext' ) &&
+			(
+				!$config->get( 'VisualEditorUseSingleEditTab' ) ||
+				$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt' ||
+				$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
+				(
+					$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
+					$editor === 'wikitext'
+				)
+			)
+		) {
+			$result['editsection']['query'] = [
+				'veaction' => 'editsource',
+				'vesection' => $section
+			];
+		}
+
 		// Exit if we're using the single edit tab.
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
-			$skin->getUser()->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
+			$user->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
 		) {
 			return true;
 		}
