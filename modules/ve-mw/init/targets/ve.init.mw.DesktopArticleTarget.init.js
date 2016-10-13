@@ -237,7 +237,11 @@
 				.fail( handleLoadFailure );
 		}
 
-		setEditorPreference( 'visualeditor' );
+		if ( mode === 'visual' ) {
+			setEditorPreference( 'visualeditor' );
+		} else {
+			setEditorPreference( 'wikitext' );
+		}
 
 		showLoading();
 		incrementLoadingProgress();
