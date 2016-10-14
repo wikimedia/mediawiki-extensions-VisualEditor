@@ -1058,6 +1058,10 @@
 			} );
 
 			delete uri.query.venotify;
+			// Get rid of the ?venotify= from the URL
+			if ( history.replaceState ) {
+				history.replaceState( null, document.title, uri );
+			}
 		}
 	} );
 }() );
