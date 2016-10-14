@@ -395,8 +395,7 @@
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-trylogin",
-				"visualeditor-savedialog-identify-user",
-				"visualeditor-timeout"
+				"visualeditor-savedialog-identify-user"
 			]
 		},
 		"ext.visualEditor.mobileArticleTarget": {
