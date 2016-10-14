@@ -62,3 +62,41 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
+	var i, expected = 0,
+		cases = [
+			{
+				documentHtml: '<p></p>',
+				rangeOrSelection: new ve.Range( 1 ),
+				pasteHtml: '<span typeof="mw:Entity" id="mwAB">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span>',
+				fromVe: true,
+				expectedRangeOrSelection: new ve.Range( 5 ),
+				expectedHtml: '<p><span typeof="mw:Entity">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span></p>',
+				msg: 'RESTBase IDs stripped'
+			}
+		];
+
+	for ( i = 0; i < cases.length; i++ ) {
+		if ( cases[ i ].expectedOps ) {
+			expected++;
+		}
+		if ( cases[ i ].expectedRangeOrSelection ) {
+			expected++;
+		}
+		if ( cases[ i ].expectedHtml ) {
+			expected++;
+		}
+	}
+	QUnit.expect( expected );
+
+	for ( i = 0; i < cases.length; i++ ) {
+		ve.test.utils.runSurfacePasteTest(
+			assert, cases[ i ].documentHtml,
+			cases[ i ].pasteHtml, cases[ i ].internalSourceRangeOrSelection, cases[ i ].fromVe, cases[ i ].useClipboardData,
+			cases[ i ].pasteTargetHtml, cases[ i ].rangeOrSelection, cases[ i ].pasteSpecial,
+			cases[ i ].expectedOps, cases[ i ].expectedRangeOrSelection, cases[ i ].expectedHtml,
+			cases[ i ].store, false, cases[ i ].msg
+		);
+	}
+} );

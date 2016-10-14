@@ -36,7 +36,8 @@ ve.dm.modelRegistry.register( ve.dm.InlineImageNode );
 ve.dm.modelRegistry.register( ve.dm.BlockImageNode );
 
 ve.test.utils.mwEnvironment = ( function () {
-	var overrides = [
+	var mwPlatform, corePlatform,
+		overrides = [
 			ve.dm.MWHeadingNode,
 			ve.dm.MWPreformattedNode,
 			ve.dm.MWTableNode,
@@ -47,6 +48,13 @@ ve.test.utils.mwEnvironment = ( function () {
 			ve.dm.BlockImageNode
 		];
 
+	corePlatform = ve.init.platform;
+	mwPlatform = new ve.init.mw.Platform();
+	// Disable some API requests from platform
+	mwPlatform.imageInfoCache = null;
+	// Unregister mwPlatform
+	ve.init.platform = corePlatform;
+
 	function setupOverrides() {
 		var i;
 		for ( i = 0; i < overrides.length; i++ ) {
@@ -55,6 +63,7 @@ ve.test.utils.mwEnvironment = ( function () {
 		for ( i = 0; i < overridden.length; i++ ) {
 			ve.dm.modelRegistry.unregister( overridden[ i ] );
 		}
+		ve.init.platform = mwPlatform;
 	}
 
 	function teardownOverrides() {
@@ -65,6 +74,7 @@ ve.test.utils.mwEnvironment = ( function () {
 		for ( i = 0; i < overridden.length; i++ ) {
 			ve.dm.modelRegistry.register( overridden[ i ] );
 		}
+		ve.init.platform = corePlatform;
 	}
 
 	// On load, teardown overrides so the first core tests run correctly
