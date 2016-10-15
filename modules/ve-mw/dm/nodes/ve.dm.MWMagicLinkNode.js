@@ -386,7 +386,7 @@ ve.dm.MWMagicLinkPmidType = function VeDmMWMagicLinkPmidType( content ) {
 OO.inheritClass( ve.dm.MWMagicLinkPmidType, ve.dm.MWMagicLinkType );
 
 ve.dm.MWMagicLinkPmidType.prototype.getHref = function () {
-	return '//www.ncbi.nlm.nih.gov/pubmed/' + this.code + '?dopt=Abstract';
+	return mw.msg( 'pubmedurl', this.code );
 };
 
 /**
@@ -407,7 +407,7 @@ ve.dm.MWMagicLinkRfcType = function VeDmMWMagicLinkRfcType( content ) {
 OO.inheritClass( ve.dm.MWMagicLinkRfcType, ve.dm.MWMagicLinkType );
 
 ve.dm.MWMagicLinkRfcType.prototype.getHref = function () {
-	return '//tools.ietf.org/html/rfc' + this.code;
+	return mw.msg( 'rfcurl', this.code );
 };
 
 /* Registration */

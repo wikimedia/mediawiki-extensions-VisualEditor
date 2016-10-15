@@ -1457,7 +1457,9 @@
 				"visualeditor-magiclinknodeinspector-convert-link",
 				"visualeditor-magiclinknodeinspector-title-isbn",
 				"visualeditor-magiclinknodeinspector-title-pmid",
-				"visualeditor-magiclinknodeinspector-title-rfc"
+				"visualeditor-magiclinknodeinspector-title-rfc",
+				"rfcurl",
+				"pubmedurl"
 			],
 			"targets": [
 				"desktop",
