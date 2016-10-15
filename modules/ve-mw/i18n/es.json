@@ -344,7 +344,6 @@
 	"visualeditor-settings-tool": "Configuración de página",
 	"visualeditor-shortcuts-insert": "Insertar",
 	"visualeditor-special-characters-group-other": "Usado a menudo",
-	"visualeditor-timeout": "Parece que este editor no está disponible actualmente. ¿Te gustaría editar en modo de fuente?",
 	"visualeditor-toload": "El editor se cargará ahora. Si sigue apareciendo este mensaje después de unos segundos, [$1 recarga la página].",
 	"visualeditor-toolbar-savedialog": "Guardar página",
 	"visualeditor-toolbar-savedialog-short": "Guardar",

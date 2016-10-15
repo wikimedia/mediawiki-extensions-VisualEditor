@@ -329,7 +329,6 @@
 	"visualeditor-settings-tool": "Oldalbeállítások",
 	"visualeditor-shortcuts-insert": "Beillesztés",
 	"visualeditor-special-characters-group-other": "Gyakran használt",
-	"visualeditor-timeout": "Úgy tűnik, hogy a szerkesztő jelenleg nem elérhető. Szeretnél helyette forráskód módban szerkeszteni?",
 	"visualeditor-toload": "A szerkesztő most be fog tölteni. Ha még pár másodperc múlva is ezt az üzenetet látod, [$1 töltsd újra a lapot].",
 	"visualeditor-toolbar-savedialog": "Oldal mentése",
 	"visualeditor-toolbar-savedialog-short": "Mentés",
