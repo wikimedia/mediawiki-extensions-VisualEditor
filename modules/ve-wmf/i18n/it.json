@@ -21,13 +21,15 @@
 			"Alexmar983",
 			"Jdforrester",
 			"Nemo bis",
-			"Einreiher"
+			"Einreiher",
+			"Anto"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale]]",
 	"tag-visualeditor-description": "Modifica eseguita usando l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visuale]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale: controllare]]",
 	"tag-visualeditor-needcheck-description": "Modifica eseguita utilizzando l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visuale]] dove il sistema ha rilevato possibili modifiche non volute nel wikitesto.",
+	"tag-visualeditor-wikitext-description": "Modifica effettuata utilizzando l'editor wikitesto 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale: commutato]]",
 	"tag-visualeditor-switched-description": "L'utente ha iniziato a modificare utilizzando l'editor visuale, poi è passato all'editor di wikitesto.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Commenti",

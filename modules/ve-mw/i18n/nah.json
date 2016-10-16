@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Neil P. Quinn",
-			"Taresi"
+			"Taresi",
+			"Akapochtli"
 		]
 	},
-	"tooltip-ca-ve-edit": "Xicpatla inīn tlaīxtli",
+	"tooltip-ca-ve-edit": "Xicpatla inin tlahcuilolli",
 	"visualeditor-ca-createsource": "Ticchīhuaz mēyalli",
 	"visualeditor-ca-editsource": "Xicpatla mēyalli",
-	"visualeditor-ca-editsource-section": "ticpatlaz mēyalli",
-	"visualeditor-toolbar-cite-label": "Titlahtolcuepaz"
+	"visualeditor-ca-editsource-section": "ticpatlaz mēyalli"
 }
