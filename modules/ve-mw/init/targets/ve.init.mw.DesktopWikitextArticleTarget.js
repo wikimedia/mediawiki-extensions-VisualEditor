@@ -125,6 +125,16 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = functio
 /**
  * @inheritdoc
  */
+ve.init.mw.DesktopWikitextArticleTarget.prototype.editSource = function () {
+	// Don't bother with a confirm dialog when switching to the new wikitext editor.
+	// Second argument (modified) is never checked if we are keeping changes, so
+	// don't bother computing it.
+	this.switchToWikitextEditor( false );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.onWindowPopState = function ( e ) {
 	var veaction, mode;
 
