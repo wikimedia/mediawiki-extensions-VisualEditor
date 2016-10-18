@@ -22,7 +22,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|עריכה חזותית: נא לבדוק]]",
 	"tag-visualeditor-needcheck-description": "עריכה שנעשתה באמצעות [[{{MediaWiki:visualeditor-descriptionpagelink}}|העורך החזותי]] ושהמערכת זיהתה שבקוד שלה אולי יש שינויים שלא היו אמורים להיעשות.",
 	"tag-visualeditor-wikitext": "עריכת קוד מקור 2017",
-	"tag-visualeditor-wikitext-description": "עריכה שנעשתה באמצעות עורך קוד המקור החדש של 2017",
+	"tag-visualeditor-wikitext-description": "עריכה שנעשתה באמצעות עורך קוד המקור החדש של שנת 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|עריכה חזותית: הועבר לעריכת קוד מקור]]",
 	"tag-visualeditor-switched-description": "משתמש התחיל לערוך באמצעות העורך החזותי ואז שינה לעורך קוד ויקי.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",

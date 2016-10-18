@@ -15,6 +15,8 @@
 	"tag-visualeditor-description": "Labots ar [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuālo redaktoru]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuālais labojums: pārbaudiet]]",
 	"tag-visualeditor-needcheck-description": "Labojums veikts ar [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuālo redaktoru]], un sistēma konstatēja iespējamas netīšas izmaiņas wikitext saturā.",
+	"tag-visualeditor-wikitext": "2017. gada vikikoda labojums",
+	"tag-visualeditor-wikitext-description": "Labojums veikts ar 2017. gada vikikoda redaktoru",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuālais labojums: Pārslēdzās]]",
 	"tag-visualeditor-switched-description": "Lietotājs sāka labot vizuālajā redaktorā un pārslēdzās uz vikiteksta redaktoru.",
 	"visualeditor-feedback-link": "VizuālaisRedaktors/Atsauksmes",
