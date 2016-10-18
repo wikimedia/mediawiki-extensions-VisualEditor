@@ -70,8 +70,8 @@ OO.inheritClass( ve.ui.MWAceEditorWidget, ve.ui.WhitespacePreservingTextInputWid
  */
 ve.ui.MWAceEditorWidget.prototype.setup = function () {
 	if ( !this.loadingPromise ) {
-		this.loadingPromise = mw.loader.getState( 'ext.codeEditor.ace.modes' ) ?
-			mw.loader.using( 'ext.codeEditor.ace.modes' ) :
+		this.loadingPromise = mw.loader.getState( 'ext.codeEditor.ace' ) ?
+			mw.loader.using( 'ext.codeEditor.ace' ) :
 			$.Deferred().reject().promise();
 		// Resolved promises will run synchronously, so ensure #setupEditor
 		// runs after this.loadingPromise is stored.
@@ -327,9 +327,12 @@ ve.ui.MWAceEditorWidget.prototype.togglePrintMargin = function ( visible ) {
 ve.ui.MWAceEditorWidget.prototype.setLanguage = function ( lang ) {
 	var widget = this;
 	this.loadingPromise.done( function () {
-		// TODO: Just use ace.require once T127643 is resolved
-		var require = ace.require || require;
-		widget.editor.getSession().setMode( 'ace/mode/' + ( require( 'ace/mode/' + lang ) ? lang : 'text' ) );
+		ace.config.loadModule( 'ace/ext/modelist', function ( modelist ) {
+			if ( !modelist || !modelist.modesByName[ lang ] ) {
+				lang = 'text';
+			}
+			widget.editor.getSession().setMode( 'ace/mode/' + lang );
+		} );
 	} );
 	return this;
 };
