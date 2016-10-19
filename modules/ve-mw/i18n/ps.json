@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
-			"عثمان منصور انصاري"
+			"عثمان منصور انصاري",
+			"Irus"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "د ترسره کولو کړنه.",
@@ -163,6 +164,7 @@
 	"visualeditor-linkinspector-illegal-title": "ناسم سرليک",
 	"visualeditor-linknodeinspector-add-label": "لېبل ورگډول",
 	"visualeditor-linknodeinspector-title": "ساده تړنه",
+	"visualeditor-loaderror-message-noconnect": "تېروتنه: پالنگر سره اړيکه جوړه نه شوه.",
 	"visualeditor-loadwarning": "د پالنگر څخه د اومتوک د رابرسېرولو ستونزه: $1. آيا بيا پرې هڅه کوئ؟",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN تړنه",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID تړنه",

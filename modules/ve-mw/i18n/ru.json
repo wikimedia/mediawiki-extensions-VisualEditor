@@ -33,7 +33,8 @@
 			"Лилиә",
 			"Sealle",
 			"Mailman",
-			"Туллук"
+			"Туллук",
+			"Irus"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -253,8 +254,10 @@
 	"visualeditor-linknodeinspector-add-label": "Добавить подпись",
 	"visualeditor-linknodeinspector-title": "Простая ссылка",
 	"visualeditor-loaderror-message": "Ошибка при загрузке данных с сервера: $1",
+	"visualeditor-loaderror-message-noconnect": "Не удалось подключиться к серверу",
 	"visualeditor-loaderror-title": "Редактор не может загрузиться",
 	"visualeditor-loadwarning": "Ошибка при загрузке данных: $1. Попробовать снова?",
+	"visualeditor-loadwarning-noconnect": "Не удалось подключиться к серверу",
 	"visualeditor-loadwarning-token": "Ошибка при загрузке токена для редактирования с сервера: $1. Попробовать снова?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Превратить в простую ссылку",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-ссылка",
@@ -340,7 +343,6 @@
 	"visualeditor-settings-tool": "Параметры страницы",
 	"visualeditor-shortcuts-insert": "Вставить",
 	"visualeditor-special-characters-group-other": "Часто используемые",
-	"visualeditor-timeout": "Похоже, что этот редактор в настоящее время недоступен. Вы хотели бы вместо этого перейти к редактированию в режиме правки исходного текста?",
 	"visualeditor-toload": "Редактор сейчас загрузится. Если через несколько секунд вы будете по-прежнему видеть это сообщение, пожалуйста, [$1 перезагрузите страницу].",
 	"visualeditor-toolbar-savedialog": "Записать страницу",
 	"visualeditor-toolbar-savedialog-short": "Сохранить",

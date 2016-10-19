@@ -16,7 +16,8 @@
 			"Lizalizaufa",
 			"Банат Валеева-Яубасарова",
 			"Гульчатай",
-			"Ләйсән"
+			"Ләйсән",
+			"Irus"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает  для страницы со сервиса \nParsoid сервисынан бит өсөн HTML5-ға ҡайтара",
@@ -238,8 +239,10 @@
 	"visualeditor-linknodeinspector-add-label": "Ҡултамға ҡуйыу",
 	"visualeditor-linknodeinspector-title": "Ябай һылтанма",
 	"visualeditor-loaderror-message": "Серверҙан мәғлүмәт алыу ваҡытында хата: $1",
+	"visualeditor-loaderror-message-noconnect": "Сервер менән бәйләнеш булдырып булманы",
 	"visualeditor-loaderror-title": "Мөхәррир йөкләнмәй",
 	"visualeditor-loadwarning": "Мәғлүмәт алыу ваҡытында хата: $1. Ҡабаттан ҡарарға теләйһегеҙме?",
+	"visualeditor-loadwarning-noconnect": "Сервер менән бәйләнеш булдырып булманы",
 	"visualeditor-loadwarning-token": "Серверҙан токенды тейәү хатаһы: $1. Ҡабатлап ҡарарғамы?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Ябай һылтанмаға алмаштыр",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN һылтама",

@@ -17,13 +17,16 @@
 			"Yury Katkov",
 			"Умар",
 			"아라",
-			"Александр Сигачёв"
+			"Александр Сигачёв",
+			"Irus"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальное редактирование]]",
 	"tag-visualeditor-description": "Правка сделана с использованием [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуального редактора]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальное редактирование: Проверить]]",
 	"tag-visualeditor-needcheck-description": "Правка с помощью [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуального редактора]], в которой система обнаружила, возможно, непреднамеренно изменённую вики-разметку.",
+	"tag-visualeditor-wikitext": "2017 править исходный",
+	"tag-visualeditor-wikitext-description": "Редактировать сделанные с помощью 2017 редакторе Вики-текста",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуальное редактирование: Переключено]]",
 	"tag-visualeditor-switched-description": "Участник начал редактировать с помощью визуального редактора, а затем переключился в редактор викитекста.",
 	"visualeditor-feedback-link": "Project:Визуальный редактор/Отзывы",
