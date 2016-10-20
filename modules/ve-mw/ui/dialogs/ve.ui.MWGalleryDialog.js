@@ -52,6 +52,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// States
 	this.highlightedItem = null;
 	this.searchPanelVisible = false;
+	this.imageCaptions = {};
 
 	// Default settings
 	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
@@ -280,7 +281,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			// If editing an existing gallery, populate with the images...
 			if ( this.selectedNode ) {
 				imageTitles = [];
-				this.imageData = [];
 
 				// Get image and caption data
 				// TODO: Can be multiple pipes. See parser.php -> renderImageGallery in MediaWiki
@@ -300,10 +300,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 							if ( title ) {
 								titleText = title.getPrefixedText();
 								imageTitles.push( titleText );
-								dialog.imageData.push( {
-									title: titleText,
-									caption: matches[ 3 ]
-								} );
+								dialog.imageCaptions[ titleText ] = matches[ 3 ];
 							}
 						}
 					}
@@ -424,7 +421,7 @@ ve.ui.MWGalleryDialog.prototype.requestImages = function ( options ) {
  * @param {Object} response jQuery response object
  */
 ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( deferred, response ) {
-	var index,
+	var index, title,
 		thumbUrls = {},
 		items = [],
 		pages = response.responseJSON.query.pages;
@@ -436,11 +433,16 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( deferred, re
 		}
 	}
 
-	// Make items for every image in imageData
-	this.imageData.forEach( function ( image ) {
-		image.thumbUrl = thumbUrls[ image.title ];
-		items.push( new ve.ui.MWGalleryItemWidget( image ) );
-	} );
+	for ( title in this.imageCaptions ) {
+		if ( Object.prototype.hasOwnProperty.call( thumbUrls, title ) ) {
+			items.push( new ve.ui.MWGalleryItemWidget( {
+				title: title,
+				caption: this.imageCaptions[ title ],
+				thumbUrl: thumbUrls[ title ]
+			} ) );
+			delete this.imageCaptions[ title ];
+		}
+	}
 	this.galleryGroup.addItems( items );
 
 	// Gallery is no longer empty
@@ -457,11 +459,8 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( deferred, re
 ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 	var dialog = this;
 
-	// Reset this.imageData, for onRequestImagesSuccess
-	this.imageData = [ {
-		title: title,
-		caption: ''
-	} ];
+	// Reset this.imageCaptions, for onRequestImagesSuccess
+	this.imageCaptions[ title ] = '';
 
 	// Request image
 	this.requestImages( {
@@ -472,7 +471,6 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 		var items = dialog.galleryGroup.items;
 		dialog.onHighlightItem( items[ items.length - 1 ] );
 		dialog.highlightedCaptionInput.focus();
-
 	} );
 };
 
@@ -482,7 +480,10 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
  * @param {ve.ui.MWMediaResultWidget} item Chosen item
  */
 ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
-	this.addNewImage( item.getData().title );
+	var title = item.getData().title;
+	if ( !Object.prototype.hasOwnProperty( this.imageCaptions, title ) ) {
+		this.addNewImage( title );
+	}
 };
 
 /**
