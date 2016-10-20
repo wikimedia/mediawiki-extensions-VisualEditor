@@ -338,7 +338,6 @@
 			],
 			"messages": [
 				"visualeditor-loaderror-message",
-				"visualeditor-loaderror-message-noconnect",
 				"visualeditor-loaderror-title"
 			],
 			"targets": [

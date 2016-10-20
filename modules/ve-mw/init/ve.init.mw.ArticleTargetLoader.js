@@ -211,16 +211,8 @@
 							// Page does not exist, so let the user start with a blank document.
 							return $.Deferred().resolve( [ '', undefined ] ).promise();
 						} else {
-							if ( response.status ) {
-								window.alert( mw.msg( 'visualeditor-loaderror-message', 'HTTP ' + response.status ) );
-							} else {
-								window.alert( mw.msg(
-									'visualeditor-loaderror-message',
-									mw.msg( 'visualeditor-loaderror-message-noconnect' )
-								) );
-							}
-
 							mw.log.warn( 'RESTBase load failed: ' + response.statusText );
+							return response;
 						}
 					}
 				);

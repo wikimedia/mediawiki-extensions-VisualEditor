@@ -247,7 +247,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		data = response ? response.visualeditor : null;
 
 	if ( typeof data.content !== 'string' ) {
-		this.loadFail( 've-api', 'No HTML content in response from server' );
+		this.loadFail( 'No HTML content in response from server', 've-api' );
 	} else {
 		ve.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
@@ -274,9 +274,9 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 			if ( this.retriedRevIdConflict ) {
 				// Retried already, just error the second time.
 				this.loadFail(
-					've-api',
 					'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
-						'returned by server do not match'
+						'returned by server do not match',
+					've-api'
 				);
 			} else {
 				this.retriedRevIdConflict = true;
@@ -358,8 +358,8 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
  * This method is called within the context of a target instance.
  *
  * @method
- * @param {string} errorTypeText Error type text from mw.Api
  * @param {Object} error Object containing xhr, textStatus and exception keys
+ * @param {string} errorTypeText Error type text from mw.Api
  * @fires loadError
  */
 ve.init.mw.ArticleTarget.prototype.loadFail = function () {

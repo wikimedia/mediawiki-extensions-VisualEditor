@@ -660,7 +660,7 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error ) {
+ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText ) {
 	var errorInfo, confirmPromptMessage;
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
@@ -676,11 +676,11 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 	}
 
 	if ( !error || error.statusText !== 'abort' ) {
-		if ( errorText === 'http' ) {
-			if ( error && error.xhr.status ) {
+		if ( errorText === 'http' || errorText === 'error' ) {
+			if ( error && ( error.status || ( error.xhr && error.xhr.status ) ) ) {
 				confirmPromptMessage = ve.msg(
 					'visualeditor-loadwarning',
-					'HTTP ' + error.xhr.status
+					'HTTP ' + ( error.status || error.xhr.status )
 				);
 			} else {
 				confirmPromptMessage = ve.msg(
@@ -696,14 +696,21 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 		}
 	}
 
-	if ( confirmPromptMessage && confirm( confirmPromptMessage ) ) {
-		this.load();
-	} else if ( !$( '#wpTextbox1' ).length ) {
-		// TODO: Some sort of progress bar?
-		this.switchToWikitextEditor( true, false );
+	if ( confirmPromptMessage ) {
+		if ( confirm( confirmPromptMessage ) ) {
+			this.load();
+		} else if ( !$( '#wpTextbox1' ).length ) {
+			// TODO: Some sort of progress bar?
+			this.switchToWikitextEditor( true, false );
+		} else {
+			// If we're switching from the wikitext editor, just deactivate
+			// don't try to switch back to it fully, that'd discard changes.
+			this.deactivate( true );
+		}
 	} else {
-		// If we're switching from the wikitext editor, just deactivate
-		// don't try to switch back to it fully, that'd discard changes.
+		if ( error.statusText !== 'abort' ) {
+			mw.log.warn( 'Failed to find error message', errorText, error );
+		}
 		this.deactivate( true );
 	}
 };
