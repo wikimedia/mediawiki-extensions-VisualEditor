@@ -698,7 +698,12 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( errorText, error
 
 	if ( confirmPromptMessage && confirm( confirmPromptMessage ) ) {
 		this.load();
+	} else if ( !$( '#wpTextbox1' ).length ) {
+		// TODO: Some sort of progress bar?
+		this.switchToWikitextEditor( true, false );
 	} else {
+		// If we're switching from the wikitext editor, just deactivate
+		// don't try to switch back to it fully, that'd discard changes.
 		this.deactivate( true );
 	}
 };
