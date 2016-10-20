@@ -584,7 +584,7 @@
 			}
 			if ( active ) {
 				targetPromise.done( function ( target ) {
-					if ( target.mode === 'source' ) {
+					if ( mode === 'visual' && target.mode === 'source' ) {
 						target.switchToVisualEditor();
 					}
 				} );

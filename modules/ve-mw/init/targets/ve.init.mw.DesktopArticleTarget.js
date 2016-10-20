@@ -1076,7 +1076,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 			return;
 		}
 
-		if ( target.getSurface() && !target.deactivating ) {
+		if ( target.getSurface() && !target.deactivating && target.mode !== 'source' ) {
 			target.editSource();
 
 			if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
