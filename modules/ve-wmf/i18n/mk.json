@@ -12,6 +12,8 @@
 	"tag-visualeditor-description": "Уредувањето е направено со  [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелниот уредник]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелен уредник: Проверка]]",
 	"tag-visualeditor-needcheck-description": "Уредување направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелниот уредник]] при кое системот утврдил дека викитекстот може да има ненамерни измени.",
+	"tag-visualeditor-wikitext": "Изворно уредување 2017",
+	"tag-visualeditor-wikitext-description": "Уредувањето е направено со уредникот на викитекст од 2017 г.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелен уредник: Префрлено]]",
 	"tag-visualeditor-switched-description": "Корисникот почнал да уредува со визуелниот уредник, но потоа се префрлил на уредникот на викитекст.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Мислења",

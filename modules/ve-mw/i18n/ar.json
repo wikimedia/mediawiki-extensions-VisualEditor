@@ -247,7 +247,6 @@
 	"visualeditor-linknodeinspector-add-label": "إضافة تسمية",
 	"visualeditor-linknodeinspector-title": "وصلة بسيطة",
 	"visualeditor-loaderror-message": "حدث خطأ في تحميل البيانات من الخادم: $1.",
-	"visualeditor-loaderror-message-noconnect": "لم يمكن الاتصال بالخادم",
 	"visualeditor-loaderror-title": "لم يتمكن المحرر من التحميل",
 	"visualeditor-loadwarning": "خطأ في تحميل البيانات من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
 	"visualeditor-loadwarning-noconnect": "لم يمكن الاتصال بالخادم",

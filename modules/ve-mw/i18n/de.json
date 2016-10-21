@@ -239,7 +239,6 @@
 	"visualeditor-linknodeinspector-add-label": "Beschriftung hinzufügen",
 	"visualeditor-linknodeinspector-title": "Einfacher Link",
 	"visualeditor-loaderror-message": "Fehler beim Laden der Daten vom Server: $1.",
-	"visualeditor-loaderror-message-noconnect": "Es konnte keine Verbindung mit dem Server hergestellt werden",
 	"visualeditor-loaderror-title": "Der Editor konnte nicht geladen werden",
 	"visualeditor-loadwarning": "Fehler beim Laden der Daten vom Server: $1. Soll der Vorgang erneut durchgeführt werden?",
 	"visualeditor-loadwarning-noconnect": "Es konnte keine Verbindung mit dem Server hergestellt werden",

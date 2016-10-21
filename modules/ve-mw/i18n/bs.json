@@ -229,7 +229,6 @@
 	"visualeditor-linknodeinspector-add-label": "Dodaj oznaku",
 	"visualeditor-linknodeinspector-title": "Jednostavni link",
 	"visualeditor-loaderror-message": "Greška prilikom učitavanja podataka sa servera: $1.",
-	"visualeditor-loaderror-message-noconnect": "Ne mogu se spojiti na server",
 	"visualeditor-loaderror-title": "Uređivač se ne može učitati",
 	"visualeditor-loadwarning": "Greška prilikom učitavаnja podataka sa servera: $1. Da li želite da pokušate ponovo?",
 	"visualeditor-loadwarning-noconnect": "Ne mogu se spojiti na server",

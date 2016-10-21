@@ -233,7 +233,6 @@
 	"visualeditor-linknodeinspector-add-label": "Amestar etiqueta",
 	"visualeditor-linknodeinspector-title": "Enllaz simple",
 	"visualeditor-loaderror-message": "Error al cargar los datos del sirvidor: $1.",
-	"visualeditor-loaderror-message-noconnect": "Nun se pudo coneutar col sirvidor",
 	"visualeditor-loaderror-title": "L'editor nun pudo cargase",
 	"visualeditor-loadwarning": "Error al cargar los datos dende'l sirvidor: $1. ¿Quies volver a intentalo?",
 	"visualeditor-loadwarning-noconnect": "Nun se pudo coneutar col sirvidor",

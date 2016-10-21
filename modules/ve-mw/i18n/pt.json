@@ -245,7 +245,6 @@
 	"visualeditor-linknodeinspector-add-label": "Adicionar etiqueta",
 	"visualeditor-linknodeinspector-title": "Ligação simples",
 	"visualeditor-loaderror-message": "Erro ao carregar dados do servidor: $1.",
-	"visualeditor-loaderror-message-noconnect": "Não foi possível estabelecer a ligação ao servidor",
 	"visualeditor-loaderror-title": "Não foi possível carregar o editor",
 	"visualeditor-loadwarning": "Erro ao carregar dados do servidor:  $1. Gostaria de tentar novamente?",
 	"visualeditor-loadwarning-noconnect": "Não foi possível estabelecer a ligação ao servidor",

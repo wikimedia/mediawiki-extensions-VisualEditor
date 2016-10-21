@@ -217,7 +217,6 @@
 	"visualeditor-linknodeinspector-add-label": "লেভেল যোগ",
 	"visualeditor-linknodeinspector-title": "সরল লিঙ্ক",
 	"visualeditor-loaderror-message": "সার্ভার থেকে ডাটা লোডে ত্রুটি: $1।",
-	"visualeditor-loaderror-message-noconnect": "সার্ভারের সাথে সংযোগ করা যায় নি",
 	"visualeditor-loaderror-title": "সম্পাদক লোড করা যায়নি",
 	"visualeditor-loadwarning": "সার্ভার থেকে ডাটা লোডে ত্রুটি: $1। আপনি কি পুনরায় চেষ্টা করতে ইচ্ছুক?",
 	"visualeditor-loadwarning-noconnect": "সার্ভারের সাথে সংযোগ করা যায় নি",

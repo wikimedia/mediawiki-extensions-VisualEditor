@@ -197,7 +197,6 @@
 	"visualeditor-linknodeinspector-add-label": "Etikett derbäisetzen",
 	"visualeditor-linknodeinspector-title": "Einfache Link",
 	"visualeditor-loaderror-message": "Feeler beim Luede vun den Donnéeë vum Server: $1.",
-	"visualeditor-loaderror-message-noconnect": "Konnt net mam Server verbannen",
 	"visualeditor-loaderror-title": "Den Editeur konnt net geluede ginn",
 	"visualeditor-loadwarning": "Feeler beim Luede vun Date vum Server: $1. Wëllt Dir nach eng Kéier probéieren?",
 	"visualeditor-loadwarning-noconnect": "Konnt net mam Server verbannen",

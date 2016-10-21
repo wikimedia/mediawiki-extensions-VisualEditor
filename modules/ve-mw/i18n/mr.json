@@ -193,7 +193,6 @@
 	"visualeditor-linknodeinspector-add-label": "लेबल जोडा",
 	"visualeditor-linknodeinspector-title": "साधारण दुवा",
 	"visualeditor-loaderror-message": "विदागाराकडून (सर्व्हर) विदा (डाटा) चढवण्यात त्रुटी: $1.",
-	"visualeditor-loaderror-message-noconnect": "विदागाराशी अनुबंध करु शकलो नाही",
 	"visualeditor-loaderror-title": "संपादक भारीत झाला नाही",
 	"visualeditor-loadwarning": "विदादाता (सर्व्हर) कडून विदा (डाटा) चढवण्यात त्रुटी: $1. आपण पुन्हा प्रयत्न करू इच्छिता ?",
 	"visualeditor-loadwarning-noconnect": "विदागाराशी अनुबंध करु शकलो नाही",

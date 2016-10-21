@@ -254,7 +254,6 @@
 	"visualeditor-linknodeinspector-add-label": "Добавить подпись",
 	"visualeditor-linknodeinspector-title": "Простая ссылка",
 	"visualeditor-loaderror-message": "Ошибка при загрузке данных с сервера: $1",
-	"visualeditor-loaderror-message-noconnect": "Не удалось подключиться к серверу",
 	"visualeditor-loaderror-title": "Редактор не может загрузиться",
 	"visualeditor-loadwarning": "Ошибка при загрузке данных: $1. Попробовать снова?",
 	"visualeditor-loadwarning-noconnect": "Не удалось подключиться к серверу",

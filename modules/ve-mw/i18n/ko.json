@@ -248,7 +248,6 @@
 	"visualeditor-linknodeinspector-add-label": "라벨 추가",
 	"visualeditor-linknodeinspector-title": "간단 링크",
 	"visualeditor-loaderror-message": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1",
-	"visualeditor-loaderror-message-noconnect": "서버에 연결할 수 없습니다",
 	"visualeditor-loaderror-title": "편집기를 불러올 수 없음",
 	"visualeditor-loadwarning": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1 다시 시도하겠습니까?",
 	"visualeditor-loadwarning-noconnect": "서버에 연결할 수 없습니다",

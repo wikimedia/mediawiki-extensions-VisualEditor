@@ -239,7 +239,6 @@
 	"visualeditor-linknodeinspector-add-label": "Engadir unha etiqueta",
 	"visualeditor-linknodeinspector-title": "Ligazón simple",
 	"visualeditor-loaderror-message": "Erro ao cargar os datos desde o servidor: $1.",
-	"visualeditor-loaderror-message-noconnect": "Non se puido conectar co servidor",
 	"visualeditor-loaderror-title": "Non se puido cargar o editor",
 	"visualeditor-loadwarning": "Erro ao cargar os datos desde o servidor: $1. Quéreo intentar de novo?",
 	"visualeditor-loadwarning-noconnect": "Non se puido conectar co servidor",

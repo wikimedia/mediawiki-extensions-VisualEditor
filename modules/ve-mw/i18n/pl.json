@@ -239,7 +239,6 @@
 	"visualeditor-linknodeinspector-add-label": "Dodaj etykietę",
 	"visualeditor-linknodeinspector-title": "Prosty link",
 	"visualeditor-loaderror-message": "Błąd podczas pobierania danych z serwera: $1.",
-	"visualeditor-loaderror-message-noconnect": "Nie można połączyć się z serwerem",
 	"visualeditor-loaderror-title": "Edytor nie może zostać uruchomiony",
 	"visualeditor-loadwarning": "Błąd podczas ładowania danych z serwera: $1. Ponowić próbę?",
 	"visualeditor-loadwarning-noconnect": "Nie można połączyć się z serwerem",

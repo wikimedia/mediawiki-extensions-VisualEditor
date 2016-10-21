@@ -254,7 +254,6 @@
 	"visualeditor-linknodeinspector-add-label": "Aggiungi etichetta",
 	"visualeditor-linknodeinspector-title": "Collegamento semplice",
 	"visualeditor-loaderror-message": "Errore durante il caricamento dei dati dal server: $1.",
-	"visualeditor-loaderror-message-noconnect": "Impossibile connettersi al server",
 	"visualeditor-loaderror-title": "L'editor non è riuscito a caricarsi",
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
 	"visualeditor-loadwarning-noconnect": "Impossibile connettersi al server",

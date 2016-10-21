@@ -241,7 +241,6 @@
 	"visualeditor-linknodeinspector-add-label": "הוספת תווית",
 	"visualeditor-linknodeinspector-title": "קישור פשוט",
 	"visualeditor-loaderror-message": "שגיאה בטעינת נתונים מהשרת: $1.",
-	"visualeditor-loaderror-message-noconnect": "לא ניתן היה להתחבר לשרת",
 	"visualeditor-loaderror-title": "לא היה אפשר לטעון את העורך",
 	"visualeditor-loadwarning": "שגיאה בטעינת מידע מהשרת: $1. האם לנסות שוב?",
 	"visualeditor-loadwarning-noconnect": "לא ניתן היה להתחבר לשרת",

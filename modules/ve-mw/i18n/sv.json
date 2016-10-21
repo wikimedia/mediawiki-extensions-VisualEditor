@@ -243,7 +243,6 @@
 	"visualeditor-linknodeinspector-add-label": "Lägg till etikett",
 	"visualeditor-linknodeinspector-title": "Enkel länk",
 	"visualeditor-loaderror-message": "Fel vid inläsning av data från servern: $1.",
-	"visualeditor-loaderror-message-noconnect": "Kunde inte ansluta till servern",
 	"visualeditor-loaderror-title": "Redigeraren kunde inte starta",
 	"visualeditor-loadwarning": "Fel uppstod vid inläsning av data från server: $1. Vill du försöka igen?",
 	"visualeditor-loadwarning-noconnect": "Kunde inte ansluta till servern",

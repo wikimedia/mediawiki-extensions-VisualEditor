@@ -274,7 +274,6 @@
 	"visualeditor-linknodeinspector-add-label": "Ajouter un libellé",
 	"visualeditor-linknodeinspector-title": "Lien simple",
 	"visualeditor-loaderror-message": "Erreur lors du chargement des données depuis le serveur : $1.",
-	"visualeditor-loaderror-message-noconnect": "Impossible de se connecter au serveur",
 	"visualeditor-loaderror-title": "L'éditeur n'a pas pu charger",
 	"visualeditor-loadwarning": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-loadwarning-noconnect": "Impossible de se connecter au serveur",

@@ -196,7 +196,6 @@
 	"visualeditor-linknodeinspector-add-label": "Dodaj oznaku",
 	"visualeditor-linknodeinspector-title": "Jednostavna poveznica",
 	"visualeditor-loaderror-message": "Pogrješka prilikom učitavanja podataka sa servera: $1.",
-	"visualeditor-loaderror-message-noconnect": "Spajanje na poslužitelj nije moguće",
 	"visualeditor-loaderror-title": "Nije bilo moguće učitavanje uređivača",
 	"visualeditor-loadwarning": "Pogrješka prilikom učitavаnja podataka sa servera $1. Želite li pokušati ponovo?",
 	"visualeditor-loadwarning-noconnect": "Spajanje na poslužitelj nije moguće",
