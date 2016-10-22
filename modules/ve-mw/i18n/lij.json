@@ -9,5 +9,6 @@
 	"visualeditor-ca-createsource": "Crea sorgente",
 	"visualeditor-ca-editsource": "modiffica wikitesto",
 	"visualeditor-ca-editsource-section": "modifica wikitesto",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor"
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-preference-betatempdisable": "Disattiva tempoanniamente l'editor vixuâ mentr'o l'è in beta"
 }

@@ -28,6 +28,7 @@
 	"apihelp-visualeditoredit-param-minor": "Ознака за ситно уредување.",
 	"apihelp-visualeditoredit-param-needcheck": "Кога зачувувате, задајте го овој параметар ако преработката има кружноповратни проблеми. Со ова означувањето ќе биде означено.",
 	"apihelp-visualeditoredit-param-oldid": "Бројот на преработката што ќе се користи. По основно: најновата преработка. Користет 0 за нова страница.",
+	"apihelp-visualeditoredit-param-paction": "Дејство за вршење.",
 	"apihelp-visualeditoredit-param-page": "Страницата врз која треба да се извршат дејствата.",
 	"apihelp-visualeditoredit-param-section": "На кој поднаслов да се дејствува.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Кога зачувувате, на ова задајте му го датумот и времето на вчитувањето на страницата. Се користи за утврдување на спротиставености во уредувањето.",
