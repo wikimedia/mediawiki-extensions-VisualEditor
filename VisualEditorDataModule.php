@@ -61,7 +61,11 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 		// Messages to be exported as text
 		$textMsgs = [
-			'visualeditor-feedback-link' => $context->msg( 'visualeditor-feedback-link' )
+			'visualeditor-feedback-link' =>
+				$context->msg( 'visualeditor-feedback-link' )
+				->inContentLanguage(),
+			'visualeditor-quick-access-characters.json' =>
+				$context->msg( 'visualeditor-quick-access-characters.json' )
 				->inContentLanguage(),
 		];
 
