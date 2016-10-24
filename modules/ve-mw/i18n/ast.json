@@ -30,6 +30,7 @@
 	"apihelp-visualeditoredit-param-minor": "Marca d'edición menor.",
 	"apihelp-visualeditoredit-param-needcheck": "Al guardar, definir esti parámetru si la revisión pue tener problemes de «roundtrip». Esto va facer que la edición quede etiquetada.",
 	"apihelp-visualeditoredit-param-oldid": "Númberu de revisión a usar. De mou predetermináu, la última revisión. Usa 0 pa una páxina nueva.",
+	"apihelp-visualeditoredit-param-paction": "Aición a facer.",
 	"apihelp-visualeditoredit-param-page": "La páxina onde facer les aiciones.",
 	"apihelp-visualeditoredit-param-section": "La sección onde actuar.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Al guardar,establez esto como la marca horaria de cuando se cargó la páxina. Utilizao pa detectar conflictos d'edición.",

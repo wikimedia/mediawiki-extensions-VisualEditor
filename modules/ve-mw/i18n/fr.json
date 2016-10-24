@@ -71,6 +71,7 @@
 	"apihelp-visualeditoredit-param-minor": "Marquage d’édition mineure.",
 	"apihelp-visualeditoredit-param-needcheck": "Lors de l’enregistrement, régler ce paramètre si la version pourrait rencontrer des problèmes (roundtrip problems). Cela résultera en un balisage de l’édition.",
 	"apihelp-visualeditoredit-param-oldid": "Le numéro de version à utiliser. Par défaut celui de la dernière version. Utilisez 0 pour une nouvelle page.",
+	"apihelp-visualeditoredit-param-paction": "Action à effectuer.",
 	"apihelp-visualeditoredit-param-page": "La page sur laquelle les modifications doivent être effectuées.",
 	"apihelp-visualeditoredit-param-section": "La section sur laquelle agir.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Lors de l’enregistrement, règle ceci avec l’horodatage du moment où la page a été chargée. Utilisé pour détecter les conflits d’édition.",
