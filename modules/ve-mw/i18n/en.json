@@ -58,6 +58,7 @@
 	"apierror-visualeditor-docserver-http-error": "$1",
 	"apierror-visualeditor-invaliddeflate": "Content provided is not properly deflated",
 	"apierror-visualeditor-latestnotfound": "Could not find latest revision for title",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Create the source code of this page",
 	"tooltip-ca-edit": "Edit this page using wikitext",
 	"tooltip-ca-editsource": "Edit the source code of this page",
