@@ -47,6 +47,7 @@
 	"apihelp-visualeditoredit-param-minor": "العلم لتغيير طفيف.",
 	"apihelp-visualeditoredit-param-needcheck": "عند حفظ، تعيين هذه المعلمة إذا كان التعديل قد تواجه مشاكل ذهابا وإيابا. وهذا يؤدي إلى تحرير يجري الموسومة.",
 	"apihelp-visualeditoredit-param-oldid": "رقم المراجعة للاستخدام. افتراضات إلى التنقيح الأخير. استخدام 0 لصفحة جديدة.",
+	"apihelp-visualeditoredit-param-paction": "الفعل للعمل.",
 	"apihelp-visualeditoredit-param-page": "الصفحة لتنفيذ الأفعال عليها.",
 	"apihelp-visualeditoredit-param-section": "القسم للعمل عليه.",
 	"apihelp-visualeditoredit-param-starttimestamp": "عندما تحفظ ، وتعيين هذا إلى الطابع الزمني عندما تم تحميل الصفحة. تستخدم لكشف تضاربات التحرير.",
