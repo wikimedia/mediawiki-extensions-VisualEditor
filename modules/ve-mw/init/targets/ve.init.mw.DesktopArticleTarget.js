@@ -248,11 +248,14 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	ve.track( 'trace.setupToolbar.exit' );
 	if ( !wasSetup ) {
 		setTimeout( function () {
-			var height = toolbar.$bar.outerHeight();
-			toolbar.$element.css( 'height', height );
+			toolbar.$element
+				.css( 'height', toolbar.$bar.outerHeight() )
+				.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
 			setTimeout( function () {
 				// Clear to allow growth during use and when resizing window
-				toolbar.$element.css( 'height', '' );
+				toolbar.$element
+					.css( 'height', '' )
+					.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
 				target.toolbarSetupDeferred.resolve();
 			}, 400 );
 		} );
@@ -1153,7 +1156,10 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 		deferred = $.Deferred();
 	this.toolbar.$element.css( 'height', this.toolbar.$bar.outerHeight() );
 	setTimeout( function () {
-		target.toolbar.$element.css( 'height', '0' );
+		target.toolbar.$element
+			.css( 'height', '0' )
+			.removeClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
+			.removeClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
 		setTimeout( function () {
 			target.toolbar.destroy();
 			target.toolbar = null;
