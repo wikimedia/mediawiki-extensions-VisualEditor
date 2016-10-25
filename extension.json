@@ -334,7 +334,8 @@
 				"ext.visualEditor.track",
 				"jquery.textSelection",
 				"mediawiki.api",
-				"mediawiki.Uri"
+				"mediawiki.Uri",
+				"user.options"
 			],
 			"messages": [
 				"visualeditor-loaderror-message",
