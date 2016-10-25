@@ -48,6 +48,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
 		dataPromise = mw.libs.ve.targetLoader.requestPageData(
 			'source',
 			this.pageName,
+			null, // We may have this.section but VE is always full page at the moment
 			this.requestedRevId,
 			this.constructor.name
 		).then(
