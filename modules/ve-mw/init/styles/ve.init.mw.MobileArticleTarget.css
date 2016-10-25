@@ -109,8 +109,7 @@
 }
 
 @media ( max-width: 479px ) {
-	.ve-init-mw-mobileArticleTarget-toolbar
-	.oo-ui-barToolGroup > .oo-ui-toolGroup-tools > .oo-ui-tool.oo-ui-iconElement.oo-ui-tool-with-label > .oo-ui-tool-link .oo-ui-tool-title {
+	.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-barToolGroup > .oo-ui-toolGroup-tools > .oo-ui-tool.oo-ui-iconElement.oo-ui-tool-with-label > .oo-ui-tool-link .oo-ui-tool-title {
 		display: none;
 	}
 }
