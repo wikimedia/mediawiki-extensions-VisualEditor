@@ -267,7 +267,8 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.restoreEditSection = function 
 ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFragment = function ( doc, useRevision ) {
 	var promise, xhr,
 		params = {
-			action: 'visualeditor',
+			action: 'visualeditoredit',
+			token: this.editToken,
 			paction: 'serialize',
 			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
 			page: this.pageName
@@ -284,10 +285,10 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.getWikitextFragment = function
 	);
 
 	promise = xhr.then( function ( response ) {
-		if ( response.visualeditor ) {
-			return response.visualeditor.content;
+		if ( response.visualeditoredit ) {
+			return response.visualeditoredit.content;
 		}
-		return $.Deferred.reject();
+		return $.Deferred().reject();
 	} );
 
 	promise.abort = function () {
