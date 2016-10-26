@@ -244,9 +244,9 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
  */
 ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	var i, len, linkData, aboutDoc, docRevId, docRevIdMatches,
-		data = response ? response.visualeditor : null;
+		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
-	if ( typeof data.content !== 'string' ) {
+	if ( !data || typeof data.content !== 'string' ) {
 		this.loadFail( 'No HTML content in response from server', 've-api' );
 	} else {
 		ve.track( 'trace.parseResponse.enter' );

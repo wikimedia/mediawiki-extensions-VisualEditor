@@ -352,7 +352,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.suppressNormalStartupDialogs = true;
 	}
 
-	data = response ? response.visualeditor : {};
+	data = response ? ( response.visualeditor || response.visualeditoredit ) : {};
 
 	this.checkboxFields = [];
 	this.checkboxesByName = {};

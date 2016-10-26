@@ -65,7 +65,18 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToWikitextEditor = funct
 		);
 	} else {
 		this.serialize( this.getDocToSave() );
-		dataPromise = this.serializing;
+		dataPromise = this.serializing.then( function ( response ) {
+			// HACK - add parameters the API doesn't provide for a VE->WT switch
+			var data = response.visualeditoredit;
+			data.etag = target.etag;
+			data.fromEditedState = modified;
+			data.notices = target.remoteNotices;
+			data.protectedClasses = target.protectedClasses;
+			data.basetimestamp = target.baseTimeStamp;
+			data.starttimestamp = target.startTimeStamp;
+			data.oldid = target.revid;
+			return response;
+		} );
 	}
 	this.setMode( 'source' );
 	this.reloadSurface( dataPromise );
