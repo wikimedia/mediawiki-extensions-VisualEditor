@@ -669,7 +669,7 @@
 					return target;
 				} );
 			} else {
-				section = +( new mw.Uri( e.target.href ).query.section );
+				section = +( new mw.Uri( e.target.href ).query.vesection );
 				targetPromise = targetPromise.then( function ( target ) {
 					target.section = section;
 					return target;
