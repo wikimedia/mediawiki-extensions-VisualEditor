@@ -50,15 +50,15 @@
 }
 
 /* @noflip */
-.ve-ui-dir-block-rtl .oo-ui-icon-page-not-found:lang(he),
-.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang(he) /* HACK */ {
+.ve-ui-dir-block-rtl .oo-ui-icon-page-not-found:lang( he ),
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang( he ) /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-not-found-he-yi.svg );
 }
 
 /* @noflip */
-.ve-ui-dir-block-rtl .oo-ui-icon-page-not-found:lang(yi),
-.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang(yi) /* HACK */ {
+.ve-ui-dir-block-rtl .oo-ui-icon-page-not-found:lang( yi ),
+.ve-ui-surface-dir-rtl .oo-ui-icon-page-not-found:lang( yi ) /* HACK */ {
 	/* @embed */
 	background-image: url( images/icons/page-not-found-he-yi.svg );
 }
