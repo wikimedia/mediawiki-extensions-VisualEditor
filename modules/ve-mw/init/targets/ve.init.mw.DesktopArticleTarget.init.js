@@ -37,10 +37,6 @@
 		],
 		plugins = [];
 
-	if ( mw.config.get( 'wgVisualEditorConfig' ).enableWikitext ) {
-		editModes.editsource = 'source';
-	}
-
 	function showLoading() {
 		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle;
 
@@ -467,7 +463,7 @@
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.on( 'click', init.onEditTabClick.bind( init, 'visual' ) );
 			}
-			if ( conf.enableWikitext && mw.user.options.get( 'visualeditor-newwikitext' ) ) {
+			if ( init.isWikitextAvailable ) {
 				$caEdit.on( 'click', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
@@ -551,7 +547,7 @@
 				$editsections
 					.find( '.mw-editsection-visualeditor' )
 						.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) );
-				if ( conf.enableWikitext ) {
+				if ( init.isWikitextAvailable ) {
 					$editsections
 						// TOOD: Make this less fragile
 						.find( 'a:not( .mw-editsection-visualeditor )' )
@@ -737,6 +733,7 @@
 		// Not on pages like Special:RevisionDelete
 		mw.config.get( 'wgNamespaceNumber' ) !== -1
 	);
+
 	init.isVisualAvailable = (
 		init.isAvailable &&
 
@@ -749,6 +746,23 @@
 		// Only for pages with a supported content model
 		conf.contentModels.hasOwnProperty( mw.config.get( 'wgPageContentModel' ) )
 	);
+
+	init.isWikitextAvailable = (
+		init.isAvailable &&
+
+		// Enabled on site
+		conf.enableWikitext &&
+
+		// User preference
+		mw.user.options.get( 'visualeditor-newwikitext' ) &&
+
+		// Only on wikitext pages
+		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
+	);
+
+	if ( init.isWikitextAvailable ) {
+		editModes.editsource = 'source';
+	}
 
 	// FIXME: We should do this more elegantly
 	init.setEditorPreference = setEditorPreference;
@@ -826,8 +840,7 @@
 									) ||
 									(
 										tabPreference === 'prefer-wt' &&
-										conf.enableWikitext &&
-										mw.user.options.get( 'visualeditor-newwikitext' )
+										init.isWikitextAvailable
 									) ||
 									(
 										tabPreference === 'remember-last' &&
@@ -836,10 +849,7 @@
 												getLastEditor() !== 'wikitext' &&
 												init.isVisualAvailable
 											) ||
-											(
-												conf.enableWikitext &&
-												mw.user.options.get( 'visualeditor-newwikitext' )
-											)
+											init.isWikitextAvailable
 										)
 									)
 								)
@@ -856,8 +866,7 @@
 						activateTarget( editModes[ uri.query.veaction ], section );
 					} else {
 						if (
-							conf.enableWikitext &&
-							mw.user.options.get( 'visualeditor-newwikitext' ) &&
+							init.isWikitextAvailable
 							(
 								tabPreference === 'prefer-ve' ||
 								(
