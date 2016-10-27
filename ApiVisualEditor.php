@@ -40,7 +40,7 @@ class ApiVisualEditor extends ApiBase {
 		// the params array to create the service object with
 		$params = [];
 		// the VRS class to use, defaults to Parsoid
-		$class = 'ParsoidVirtualRESTService';
+		$class = ParsoidVirtualRESTService::class;
 		$config = $this->veConfig;
 		// the global virtual rest service config object, if any
 		$vrs = $this->getConfig()->get( 'VirtualRestConfig' );
@@ -48,7 +48,7 @@ class ApiVisualEditor extends ApiBase {
 			// if restbase is available, use it
 			$params = $vrs['modules']['restbase'];
 			$params['parsoidCompat'] = false; // backward compatibility
-			$class = 'RestbaseVirtualRESTService';
+			$class = RestbaseVirtualRESTService::class;
 		} elseif ( isset( $vrs['modules'] ) && isset( $vrs['modules']['parsoid'] ) ) {
 			// there's a global parsoid config, use it next
 			$params = $vrs['modules']['parsoid'];
