@@ -39,7 +39,6 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
-	this.mode = config.mode || 'visual';
 	this.section = null;
 
 	// Sometimes we actually don't want to send a useful oldid
@@ -189,19 +188,14 @@ ve.init.mw.ArticleTarget.static.platformType = 'other';
 /* Methods */
 
 /**
- * Set editing mode
- *
- * @param {string} mode Editing mode, 'visual' or 'source'
+ * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.setMode = function ( mode ) {
-	if ( mode !== this.mode ) {
-		// The follow classes are used here:
-		// * ve-init-mw-articleTarget-visual
-		// * ve-init-mw-articleTarget-source
-		this.$element
-			.removeClass( 've-init-mw-articleTarget-' + this.mode )
-			.addClass( 've-init-mw-articleTarget-' + mode );
-		this.mode = mode;
+ve.init.mw.ArticleTarget.prototype.setMode = function () {
+	var oldMode = this.mode;
+	// Parent method
+	ve.init.mw.ArticleTarget.super.prototype.setMode.apply( this, arguments );
+
+	if ( this.mode !== oldMode ) {
 		this.updateTabs( true );
 	}
 };

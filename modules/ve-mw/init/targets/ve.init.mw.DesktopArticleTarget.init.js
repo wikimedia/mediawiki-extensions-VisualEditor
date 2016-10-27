@@ -150,10 +150,22 @@
 					return mw.libs.ve.targetLoader.loadModules();
 				} )
 				.then( function () {
-					var target;
+					var target,
+						modes = [];
+
+					if ( init.isVisualAvailable ) {
+						modes.push( 'visual' );
+					}
+
+					if ( init.isWikitextAvailable ) {
+						modes.push( 'source' );
+					}
 
 					target = ve.init.mw.targetFactory.create(
-						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ]
+						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ], {
+							modes: modes,
+							mode: mode
+						}
 					);
 					target.setContainer( $( '#content' ) );
 					targetLoaded = true;
@@ -163,13 +175,12 @@
 				} );
 		}
 
-		targetPromise.then( function ( target ) {
+		targetPromise.then( function () {
 			// Enqueue the loading of deferred modules (that is, modules which provide
 			// functionality that is not needed for loading the editor).
 			setTimeout( function () {
 				mw.loader.load( 'easy-deflate.deflate' );
 			}, 500 );
-			target.setMode( mode );
 		} );
 
 		return targetPromise;

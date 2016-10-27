@@ -424,6 +424,6 @@ ve.ui.MWEditModeVisualTool.prototype.onUpdateState = function () {
 	// Parent method
 	ve.ui.MWEditModeVisualTool.super.prototype.onUpdateState.apply( this, arguments );
 
-	this.setDisabled( !mw.libs.ve.isVisualAvailable );
+	this.setDisabled( ve.init.target.modes.indexOf( 'visual' ) === -1 );
 };
 ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
