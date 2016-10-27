@@ -93,6 +93,7 @@ class ApiVisualEditor extends ApiBase {
 		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
 		$reqheaders['Accept'] = 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"';
 		$reqheaders['User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
+		$reqheaders['Api-User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
 		$request['headers'] = $reqheaders;
 		$response = $this->serviceClient->run( $request );
 		if ( $response['code'] === 200 && $response['error'] === "" ) {

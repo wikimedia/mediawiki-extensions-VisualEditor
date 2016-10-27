@@ -122,7 +122,7 @@
 		},
 
 		requestParsoidData: function ( pageName, oldid, targetName, modified, wikitext ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers,
 				switched = false,
 				fromEditedState = false,
 				data = {
@@ -157,6 +157,13 @@
 
 			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
 				ve.track( 'trace.restbaseLoad.enter' );
+
+				// Should be synchronised with ApiVisualEditor.php
+				headers = {
+					Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"',
+					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
+				};
+
 				if (
 					conf.fullRestbaseUrl &&
 					( wikitext || ( wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ) ) ) &&
@@ -177,8 +184,7 @@
 							wikitext: wikitext,
 							stash: 'true'
 						},
-						// Should be synchronised with ApiVisualEditor.php
-						headers: { Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"' },
+						headers: headers,
 						dataType: 'text'
 					} );
 				} else {
@@ -191,8 +197,7 @@
 						url: pageHtmlUrl + encodeURIComponent( pageName ) +
 							( oldid === undefined ? '' : '/' + oldid ) + '?redirect=false',
 						type: 'GET',
-						// Should be synchronised with ApiVisualEditor.php
-						headers: { Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"' },
+						headers: headers,
 						dataType: 'text'
 					} );
 				}
