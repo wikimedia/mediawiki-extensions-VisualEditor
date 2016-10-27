@@ -174,6 +174,7 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	var currentEditSummaryWikitext,
+		mode = panel,
 		size = 'medium',
 		dialog = this,
 		panelObj = dialog[ panel + 'Panel' ];
@@ -200,19 +201,15 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	switch ( panel ) {
 		case 'save':
-			this.actions.setMode( 'save' );
 			// HACK: FF needs *another* defer
 			setTimeout( function () {
 				dialog.editSummaryInput.moveCursorToEnd();
 			} );
 			break;
 		case 'conflict':
-			this.actions
-				.setAbilities( { save: false } )
-				.setMode( 'conflict' );
+			this.actions.setAbilities( { save: false } );
 			break;
 		case 'preview':
-			this.actions.setMode( 'preview' );
 			size = 'full';
 			break;
 		case 'review':
@@ -249,20 +246,23 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 					} );
 				}
 			}
-			/* falls through */
+			break;
 		case 'nochanges':
-			this.actions.setMode( 'review' );
+			mode = 'review';
 			break;
 	}
+
+	// Show the target panel
+	this.panels.setItem( panelObj );
+	this.setSize( size );
+
+	// Set mode after setting size so that the footer is measured correctly
+	this.actions.setMode( mode );
 
 	// Only show preview in source mode
 	this.actions.forEach( { actions: 'preview' }, function ( action ) {
 		action.toggle( ve.init.target.mode === 'source' );
 	} );
-
-	// Show the target panel
-	this.panels.setItem( panelObj );
-	this.setSize( size );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
 
