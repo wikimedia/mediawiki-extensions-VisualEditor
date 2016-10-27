@@ -192,12 +192,9 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.setupToolbar = function ( surf
 	ve.init.mw.DesktopWikitextArticleTarget.super.prototype.setupToolbar.apply( this, arguments );
 
 	if ( this.mode === 'source' ) {
-		/* HACK: Hide meta dialog tools as they aren't supported (yet?) */
+		// HACK: Replace source button with VE button. This should be via the registry,
+		// or we should have a toggle tool.
 		actionGroups = ve.copy( this.constructor.static.actionGroups );
-		actionGroups[ 1 ].include = OO.simpleArrayDifference(
-			actionGroups[ 1 ].include,
-			[ 'meta', 'settings', 'advancedSettings', 'categories', 'languages' ]
-		);
 		actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
 		this.getActions().setup( actionGroups, surface );
 	}
