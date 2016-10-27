@@ -372,7 +372,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.createDocToSave = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options ) {
-	var data;
+	var data, postData;
 	if ( this.mode === 'source' ) {
 		data = {
 			wikitext: doc,
@@ -381,10 +381,11 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.tryWithPreparedCacheKey = func
 		if ( this.section !== null ) {
 			data.section = this.section;
 		}
-		return new mw.Api().post(
-			ve.extendObject( {}, options, data ),
-			{ contentType: 'multipart/form-data' }
-		);
+		postData = ve.extendObject( {}, options, data );
+		if ( data.token ) {
+			return new mw.Api().post( postData, { contentType: 'multipart/form-data' } );
+		}
+		return new mw.Api().postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
 	} else {
 		// Parent method
 		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.tryWithPreparedCacheKey.apply( this, arguments );
