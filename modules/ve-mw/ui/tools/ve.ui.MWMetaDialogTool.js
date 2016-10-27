@@ -6,10 +6,30 @@
  */
 
 /**
+ * MediaWiki UserInterface VE only dialog tool.
+ *
+ * @class
+ * @abstract
+ * @extends ve.ui.WindowTool
+ * @constructor
+ */
+ve.ui.MWVeOnlyDialogTool = function VeUiMWMetaDialogTool() {
+	ve.ui.MWVeOnlyDialogTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.MWVeOnlyDialogTool, ve.ui.WindowTool );
+ve.ui.MWVeOnlyDialogTool.prototype.onUpdateState = function () {
+	// Parent method
+	ve.ui.MWVeOnlyDialogTool.super.prototype.onUpdateState.apply( this, arguments );
+
+	// Meta tools are not supported in source mode (yet?)
+	this.setDisabled( ve.init.target.mode === 'source' );
+};
+
+/**
  * MediaWiki UserInterface meta dialog tool.
  *
  * @class
- * @extends ve.ui.WindowTool
+ * @extends ve.ui.MWVeOnlyDialogTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options
@@ -17,7 +37,7 @@
 ve.ui.MWMetaDialogTool = function VeUiMWMetaDialogTool() {
 	ve.ui.MWMetaDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWMetaDialogTool, ve.ui.WindowTool );
+OO.inheritClass( ve.ui.MWMetaDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWMetaDialogTool.static.name = 'meta';
 ve.ui.MWMetaDialogTool.static.group = 'utility';
 ve.ui.MWMetaDialogTool.static.icon = 'window';
@@ -39,7 +59,7 @@ ve.ui.commandRegistry.register(
  * MediaWiki UserInterface page settings tool.
  *
  * @class
- * @extends ve.ui.WindowTool
+ * @extends ve.ui.MWVeOnlyDialogTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options
@@ -47,7 +67,7 @@ ve.ui.commandRegistry.register(
 ve.ui.MWPageSettingsDialogTool = function VeUiMWPageSettingsDialogTool() {
 	ve.ui.MWPageSettingsDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWPageSettingsDialogTool, ve.ui.WindowTool );
+OO.inheritClass( ve.ui.MWPageSettingsDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWPageSettingsDialogTool.static.name = 'settings';
 ve.ui.MWPageSettingsDialogTool.static.group = 'utility';
 ve.ui.MWPageSettingsDialogTool.static.icon = 'settings';
@@ -69,7 +89,7 @@ ve.ui.commandRegistry.register(
  * MediaWiki UserInterface advanced page settings tool.
  *
  * @class
- * @extends ve.ui.WindowTool
+ * @extends ve.ui.MWVeOnlyDialogTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options
@@ -77,7 +97,7 @@ ve.ui.commandRegistry.register(
 ve.ui.MWAdvancedPageSettingsDialogTool = function VeUiMWAdvancedPageSettingsDialogTool() {
 	ve.ui.MWAdvancedPageSettingsDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWAdvancedPageSettingsDialogTool, ve.ui.WindowTool );
+OO.inheritClass( ve.ui.MWAdvancedPageSettingsDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWAdvancedPageSettingsDialogTool.static.name = 'advancedSettings';
 ve.ui.MWAdvancedPageSettingsDialogTool.static.group = 'utility';
 ve.ui.MWAdvancedPageSettingsDialogTool.static.icon = 'advanced';
@@ -99,7 +119,7 @@ ve.ui.commandRegistry.register(
  * MediaWiki UserInterface categories tool.
  *
  * @class
- * @extends ve.ui.WindowTool
+ * @extends ve.ui.MWVeOnlyDialogTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options
@@ -107,7 +127,7 @@ ve.ui.commandRegistry.register(
 ve.ui.MWCategoriesDialogTool = function VeUiMWCategoriesDialogTool() {
 	ve.ui.MWCategoriesDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWCategoriesDialogTool, ve.ui.WindowTool );
+OO.inheritClass( ve.ui.MWCategoriesDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWCategoriesDialogTool.static.name = 'categories';
 ve.ui.MWCategoriesDialogTool.static.group = 'utility';
 ve.ui.MWCategoriesDialogTool.static.icon = 'tag';
@@ -129,7 +149,7 @@ ve.ui.commandRegistry.register(
  * MediaWiki UserInterface languages tool.
  *
  * @class
- * @extends ve.ui.WindowTool
+ * @extends ve.ui.MWVeOnlyDialogTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options
@@ -137,7 +157,7 @@ ve.ui.commandRegistry.register(
 ve.ui.MWLanguagesDialogTool = function VeUiMWLanguagesDialogTool() {
 	ve.ui.MWLanguagesDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWLanguagesDialogTool, ve.ui.WindowTool );
+OO.inheritClass( ve.ui.MWLanguagesDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWLanguagesDialogTool.static.name = 'languages';
 ve.ui.MWLanguagesDialogTool.static.group = 'utility';
 ve.ui.MWLanguagesDialogTool.static.icon = 'textLanguage';
