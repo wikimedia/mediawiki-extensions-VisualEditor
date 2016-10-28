@@ -232,6 +232,7 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
  *
  * @param {string} type 'none' or 'default'
  * @param {string} alignment 'left', 'right', 'center', 'none' or 'default'
+ * @return {string} CSS class
  */
 ve.ce.MWBlockImageNode.prototype.getCssClass = function ( type, alignment ) {
 	// TODO use this.model.getAttribute( 'type' ) etc., see bug 52065
@@ -312,7 +313,9 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 	}
 };
 
-/** */
+/**
+ * @param {Object} dimensions New dimensions
+ */
 ve.ce.MWBlockImageNode.prototype.onResizableResizing = function ( dimensions ) {
 	if ( !this.outline ) {
 		ve.ce.ResizableNode.prototype.onResizableResizing.call( this, dimensions );

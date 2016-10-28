@@ -80,7 +80,9 @@ ve.ce.MWImageNode.static.getDescription = function ( model ) {
  */
 ve.ce.MWImageNode.prototype.onAttributeChange = function () {};
 
-/** */
+/**
+ * @inheritdoc ve.ce.GeneratedContentNode
+ */
 ve.ce.MWImageNode.prototype.generateContents = function () {
 	var xhr,
 		width = this.getModel().getAttribute( 'width' ),
@@ -126,7 +128,9 @@ ve.ce.MWImageNode.prototype.onParseSuccess = function ( deferred, response ) {
 	}
 };
 
-/** */
+/**
+ * @inheritdoc ve.ce.GeneratedContentNode
+ */
 ve.ce.MWImageNode.prototype.render = function ( generatedContents ) {
 	this.$image.attr( 'src', generatedContents );
 	// As we only re-render when the image is larger than last rendered size

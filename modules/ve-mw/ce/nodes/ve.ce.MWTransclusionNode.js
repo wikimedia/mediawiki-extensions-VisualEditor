@@ -170,7 +170,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
  *
  * Check if the final result of the imported template is empty.
  *
- * @see ve.ce.GeneratedContentNode#render
+ * @inheritdoc ve.ce.GeneratedContentNode
  */
 ve.ce.MWTransclusionNode.prototype.render = function ( generatedContents ) {
 	// Call parent mixin

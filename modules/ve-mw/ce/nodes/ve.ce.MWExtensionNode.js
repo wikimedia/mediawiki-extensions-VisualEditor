@@ -48,7 +48,9 @@ ve.ce.MWExtensionNode.static.rendersEmpty = false;
 
 /* Methods */
 
-/** */
+/**
+ * @inheritdoc ve.ce.GeneratedContentNode
+ */
 ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 	var xhr, attr, wikitext,
 		deferred = $.Deferred(),

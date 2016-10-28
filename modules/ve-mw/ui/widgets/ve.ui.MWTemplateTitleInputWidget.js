@@ -118,6 +118,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 
 /**
  * See the parent documentation at <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.widgets.TitleInputWidget>
+ *
+ * @param {string} title
+ * @return {Object}
  */
 ve.ui.MWTemplateTitleInputWidget.prototype.getOptionWidgetData = function ( title ) {
 	return ve.extendObject(

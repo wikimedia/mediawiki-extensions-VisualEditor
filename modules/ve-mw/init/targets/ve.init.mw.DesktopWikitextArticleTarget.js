@@ -162,6 +162,8 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.onWindowPopState = function ( 
 
 /**
  * Reload the target surface in the new editor mode
+ *
+ * @param {jQuery.Promise} [dataPromise] Data promise, if any
  */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.reloadSurface = function ( dataPromise ) {
 	var target = this;
