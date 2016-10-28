@@ -94,28 +94,28 @@
 			insertNode( forceType === 'inline' );
 		} else {
 			new mw.Api().post( {
-					action: 'visualeditor',
-					paction: 'parsefragment',
-					page: mw.config.get( 'wgRelevantPageName' ),
-					wikitext: nodeClass.static.getWikitext( this.getPlainObject() ),
-					pst: 1
-				} )
-				.then( function ( response ) {
-					var contentNodes;
+				action: 'visualeditor',
+				paction: 'parsefragment',
+				page: mw.config.get( 'wgRelevantPageName' ),
+				wikitext: nodeClass.static.getWikitext( this.getPlainObject() ),
+				pst: 1
+			} )
+			.then( function ( response ) {
+				var contentNodes;
 
-					if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
-						contentNodes = $.parseHTML( response.visualeditor.content, surfaceFragment.getDocument().getHtmlDocument() ) || [];
-						contentNodes = ve.ce.MWTransclusionNode.static.filterRendering( contentNodes );
-						insertNode(
-							nodeClass.static.isHybridInline( contentNodes, ve.dm.converter )
-						);
-					} else {
-						// Request failed - just assume inline
-						insertNode( true );
-					}
-				}, function () {
+				if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
+					contentNodes = $.parseHTML( response.visualeditor.content, surfaceFragment.getDocument().getHtmlDocument() ) || [];
+					contentNodes = ve.ce.MWTransclusionNode.static.filterRendering( contentNodes );
+					insertNode(
+						nodeClass.static.isHybridInline( contentNodes, ve.dm.converter )
+					);
+				} else {
+					// Request failed - just assume inline
 					insertNode( true );
-				} );
+				}
+			}, function () {
+				insertNode( true );
+			} );
 		}
 		return deferred.promise();
 	};

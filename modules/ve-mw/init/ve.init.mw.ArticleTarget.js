@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global EasyDeflate, alert */
+/* global EasyDeflate, alert */
 
 /**
  * Initialization MediaWiki article target.
@@ -202,6 +202,8 @@ ve.init.mw.ArticleTarget.prototype.setMode = function () {
 
 /**
  * Update state of editing tabs
+ *
+ * @param {boolean} editing Whether the editor is loaded.
  */
 ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
 	var selectVe = false,
@@ -1307,7 +1309,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 	var saveOptions;
 
 	if ( this.deactivating ) {
-		return false;
+		return;
 	}
 
 	saveOptions = this.getSaveOptions();

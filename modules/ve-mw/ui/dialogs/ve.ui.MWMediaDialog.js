@@ -593,7 +593,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	// Add sizing info for non-audio images
 	if ( imageinfo.mediatype === 'AUDIO' ) {
 		// Label this file as an audio
-		apiData.fileDetails =  $( '<span>' )
+		apiData.fileDetails = $( '<span>' )
 			.append( ve.msg( 'visualeditor-dialog-media-info-audiofile' ) );
 	} else {
 		// Build the display for image size and type

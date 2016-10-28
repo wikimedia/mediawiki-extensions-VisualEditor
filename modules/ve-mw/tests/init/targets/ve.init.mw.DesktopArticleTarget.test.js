@@ -5,7 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/*global mw */
 QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'compatibility', function ( assert ) {

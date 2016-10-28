@@ -30,10 +30,11 @@ ve.init.mw.DesktopWikitextArticleTarget.static.trackingName = 'desktopWikitext';
 
 ve.init.mw.DesktopWikitextArticleTarget.static.importRules = ve.extendObject( {},
 	ve.init.mw.DesktopWikitextArticleTarget.static.importRules, {
-	all: {
-		keepEmptyContentBranches: true
+		all: {
+			keepEmptyContentBranches: true
+		}
 	}
-} );
+);
 
 /* Methods */
 
@@ -137,7 +138,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.editSource = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopWikitextArticleTarget.prototype.onWindowPopState = function ( e ) {
-	var veaction, mode;
+	var veaction;
 
 	if ( !this.verifyPopState( e.state ) ) {
 		return;
@@ -147,7 +148,6 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.onWindowPopState = function ( 
 	ve.init.mw.DesktopWikitextArticleTarget.super.prototype.onWindowPopState.apply( this, arguments );
 
 	veaction = this.currentUri.query.veaction;
-	mode = veaction === 'editsource' ? 'source' : 'visual';
 
 	if ( this.active ) {
 		if ( veaction === 'editsource' && this.mode === 'visual' ) {
@@ -246,7 +246,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.createSurface = function ( dmD
 		// Parent method
 		return ve.init.mw.DesktopWikitextArticleTarget.super.prototype.createSurface.apply( this, arguments );
 	} else {
-		return new ve.ui.MWDesktopWikitextSurface( dmDoc,  this.getSurfaceConfig( {
+		return new ve.ui.MWDesktopWikitextSurface( dmDoc, this.getSurfaceConfig( {
 			commandRegistry: ve.ui.wikitextCommandRegistry,
 			sequenceRegistry: ve.ui.wikitextSequenceRegistry,
 			dataTransferHandlerFactory: ve.ui.wikitextDataTransferHandlerFactory

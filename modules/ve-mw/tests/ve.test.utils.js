@@ -6,6 +6,7 @@
  */
 
 ve.test.utils.createSurfaceFromDocument = function ( doc ) {
+	// eslint-disable-next-line no-unused-vars
 	var target, mwTarget;
 
 	// Prevent the target from setting up the surface immediately

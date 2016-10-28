@@ -103,7 +103,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) 
 	return {
 		label: name,
 		description: null,
-		default: '',
+		'default': '',
 		type: 'string',
 		aliases: [],
 		name: name,

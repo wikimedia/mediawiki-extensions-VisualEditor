@@ -35,9 +35,9 @@ OO.inheritClass( ve.dm.MWMediaResourceQueue, ve.dm.APIResultsQueue );
  */
 ve.dm.MWMediaResourceQueue.prototype.getFileRepos = function () {
 	var defaultSource = [ {
-			url: mw.util.wikiScript( 'api' ),
-			local: ''
-		} ];
+		url: mw.util.wikiScript( 'api' ),
+		local: ''
+	} ];
 
 	if ( !this.fileRepoPromise ) {
 		this.fileRepoPromise = new mw.Api().get( {

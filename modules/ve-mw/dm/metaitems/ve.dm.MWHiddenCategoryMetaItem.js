@@ -32,7 +32,7 @@ ve.dm.MWHiddenCategoryMetaItem.static.matchTagNames = [ 'meta' ];
 
 ve.dm.MWHiddenCategoryMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/hiddencat' ];
 
-ve.dm.MWHiddenCategoryMetaItem.static.toDataElement = function ( ) {
+ve.dm.MWHiddenCategoryMetaItem.static.toDataElement = function () {
 	return { type: this.name };
 };
 

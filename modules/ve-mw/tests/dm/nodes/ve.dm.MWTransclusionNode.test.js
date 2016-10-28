@@ -101,8 +101,7 @@ QUnit.test( 'getWikitext', function ( assert ) {
 				}
 			},
 			wikitext: '{{foo|bar=[[baz|quux]]}}'
-		}
-	];
+		} ];
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
 		node = new ve.dm.MWTransclusionNode(

@@ -32,7 +32,7 @@ ve.dm.MWIndexDisableMetaItem.static.matchTagNames = [ 'meta' ];
 
 ve.dm.MWIndexDisableMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/noindex' ];
 
-ve.dm.MWIndexDisableMetaItem.static.toDataElement = function ( ) {
+ve.dm.MWIndexDisableMetaItem.static.toDataElement = function () {
 	return { type: this.name };
 };
 

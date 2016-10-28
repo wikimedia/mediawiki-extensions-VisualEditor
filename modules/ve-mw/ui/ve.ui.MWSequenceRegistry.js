@@ -29,16 +29,16 @@ ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'numberHash', 'numberWrapOnce', [ { type: 'paragraph' }, '#', ' ' ], 2 )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextDefinition', 'mwWikitextWarning',  [ { type: 'paragraph' }, ';' ] )
+	new ve.ui.Sequence( 'wikitextDefinition', 'mwWikitextWarning', [ { type: 'paragraph' }, ';' ] )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextDescription', 'blockquote',  [ { type: 'paragraph' }, ':' ], 1 )
+	new ve.ui.Sequence( 'wikitextDescription', 'blockquote', [ { type: 'paragraph' }, ':' ], 1 )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextTable', 'insertTable',  '{|', 2 )
+	new ve.ui.Sequence( 'wikitextTable', 'insertTable', '{|', 2 )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextComment', 'comment',  '<!--', 4 )
+	new ve.ui.Sequence( 'wikitextComment', 'comment', '<!--', 4 )
 );
 
 /* Help registrations */
