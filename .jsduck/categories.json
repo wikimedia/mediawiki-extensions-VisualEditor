@@ -40,6 +40,20 @@
 		]
 	},
 	{
+		"name": "VisualEditor (core) unused parts",
+		"groups": [
+			{
+				"name": "Visual Diffing",
+				"classes": [
+					"ve.dm.VisualDiff",
+					"ve.DiffTreeNode",
+					"ve.ui.DiffDialog",
+					"ve.ui.DiffElement"
+				]
+			}
+		]
+	},
+	{
 		"name": "Upstream (MediaWiki)",
 		"groups": [
 			{
@@ -180,90 +194,6 @@
 		]
 	},
 	{
-		"name": "UnicodeJS",
-		"groups": [
-			{
-				"name": "UnicodeJS",
-				"classes": [
-					"unicodeJS",
-					"unicodeJS.TextString",
-					"unicodeJS.wordbreak",
-					"unicodeJS.graphemebreak",
-					"unicodeJS.characterclass"
-				]
-			}
-		]
-	},
-	{
-		"name": "OOjs UI",
-		"groups": [
-			{
-				"name": "General",
-				"classes": [
-					"OO.ui",
-					"OO.ui.Element",
-					"OO.ui.HtmlSnippet",
-					"OO.ui.Toolbar",
-					"OO.ui.Window",
-					"OO.ui.Dialog",
-					"OO.ui.WindowManager",
-					"OO.ui.Process",
-					"OO.ui.Error",
-					"OO.ui.ActionSet"
-				]
-			},
-			{
-				"name": "Factories",
-				"classes": [
-					"OO.ui.*Factory"
-				]
-			},
-			{
-				"name": "Tools",
-				"classes": [
-					"OO.ui.*Tool"
-				]
-			},
-			{
-				"name": "Mixins",
-				"classes": [
-					"OO.ui.mixin",
-					"OO.ui.mixin.*"
-				]
-			},
-			{
-				"name": "Layouts",
-				"classes": [
-					"OO.ui.*Layout"
-				]
-			},
-			{
-				"name": "Tool groups",
-				"classes": [
-					"OO.ui.*ToolGroup"
-				]
-			},
-			{
-				"name": "Widgets",
-				"classes": [
-					"OO.ui.*Widget"
-				]
-			},
-			{
-				"name": "Dialogs",
-				"classes": [
-					"OO.ui.*Dialog"
-				]
-			},
-			{
-				"name": "Themes",
-				"classes": [
-					"OO.ui.*Theme"
-				]
-			}
-		]
-	},
-	{
 		"name": "Upstream",
 		"groups": [
 			{
@@ -278,6 +208,80 @@
 				]
 			},
 			{
+				"name": "UnicodeJS",
+				"classes": [
+					"unicodeJS",
+					"unicodeJS.TextString",
+					"unicodeJS.wordbreak",
+					"unicodeJS.graphemebreak",
+					"unicodeJS.characterclass"
+				]
+			},
+			{
+				"name": "OOjs UI General",
+				"classes": [
+					"OO.ui",
+					"OO.ui.Element",
+					"OO.ui.HtmlSnippet",
+					"OO.ui.Toolbar",
+					"OO.ui.Window",
+					"OO.ui.Dialog",
+					"OO.ui.WindowManager",
+					"OO.ui.Process",
+					"OO.ui.Error",
+					"OO.ui.ActionSet"
+				]
+			},
+			{
+				"name": "OOjs UI Mixins",
+				"classes": [
+					"OO.ui.mixin",
+					"OO.ui.mixin.*"
+				]
+			},
+			{
+				"name": "OOjs UI Factories",
+				"classes": [
+					"OO.ui.*Factory"
+				]
+			},
+			{
+				"name": "OOjs UI Layouts",
+				"classes": [
+					"OO.ui.*Layout"
+				]
+			},
+			{
+				"name": "OOjs UI Tool groups",
+				"classes": [
+					"OO.ui.*ToolGroup"
+				]
+			},
+			{
+				"name": "OOjs UI Tools",
+				"classes": [
+					"OO.ui.*Tool"
+				]
+			},
+			{
+				"name": "OOjs UI Widgets",
+				"classes": [
+					"OO.ui.*Widget"
+				]
+			},
+			{
+				"name": "OOjs UI Dialogs",
+				"classes": [
+					"OO.ui.*Dialog"
+				]
+			},
+			{
+				"name": "OOjs UI Themes",
+				"classes": [
+					"OO.ui.*Theme"
+				]
+			},
+			{
 				"name": "jQuery",
 				"classes": [
 					"jQuery",
@@ -286,6 +290,14 @@
 					"jQuery.Deferred",
 					"jQuery.jqXHR",
 					"QUnit"
+				]
+			},
+			{
+				"name": "treeDiffer",
+				"classes": [
+					"treeDiffer.Differ",
+					"treeDiffer.Tree",
+					"treeDiffer.TreeNode"
 				]
 			},
 			{

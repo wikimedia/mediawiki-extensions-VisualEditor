@@ -15,6 +15,7 @@
 		"lib/ve/lib/oojs",
 		"lib/ve/lib/oojs-ui",
 		"lib/ve/lib/unicodejs",
+		"lib/ve/lib/treeDiffer",
 		"lib/ve/src",
 		"lib/ve/tests",
 		"modules/ve-mw"

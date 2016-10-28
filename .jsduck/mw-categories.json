@@ -40,6 +40,24 @@
 		]
 	},
 	{
+		"name": "VisualEditor (core) unused parts",
+		"groups": [
+			{
+				"name": "Standalone",
+				"classes": [
+					"ve.init.sa*"
+				],
+				"name": "Visual Diffing",
+				"classes": [
+					"ve.dm.VisualDiff",
+					"ve.DiffTreeNode",
+					"ve.ui.DiffDialog",
+					"ve.ui.DiffElement"
+				]
+			}
+		]
+	},
+	{
 		"name": "Upstream (MediaWiki)",
 		"groups": [
 			{
