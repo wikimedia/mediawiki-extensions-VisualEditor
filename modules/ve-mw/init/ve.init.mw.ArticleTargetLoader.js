@@ -243,13 +243,13 @@
 			return dataPromise;
 		},
 
-		requestWikitext: function ( pageName, section, oldid /*, targetName */ ) {
+		requestWikitext: function ( pageName, section, oldid /* , targetName */ ) {
 			var data = {
-					action: 'visualeditor',
-					paction: 'wikitext',
-					page: pageName,
-					uselang: mw.config.get( 'wgUserLanguage' )
-				};
+				action: 'visualeditor',
+				paction: 'wikitext',
+				page: pageName,
+				uselang: mw.config.get( 'wgUserLanguage' )
+			};
 
 			// section should never really be undefined, but check just in case
 			if ( section !== null && section !== undefined ) {

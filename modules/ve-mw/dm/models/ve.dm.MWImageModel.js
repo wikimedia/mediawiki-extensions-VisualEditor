@@ -162,16 +162,16 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
  */
 ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc ) {
 	var imgModel = new ve.dm.MWImageModel(
-			parentDoc,
-			{
-				resourceName: attrs.resource,
-				currentDimensions: {
-					width: attrs.width,
-					height: attrs.height
-				},
-				defaultSize: !!attrs.defaultSize
-			}
-		);
+		parentDoc,
+		{
+			resourceName: attrs.resource,
+			currentDimensions: {
+				width: attrs.width,
+				height: attrs.height
+			},
+			defaultSize: !!attrs.defaultSize
+		}
+	);
 
 	// Cache the attributes so we can create a new image without
 	// losing any existing information

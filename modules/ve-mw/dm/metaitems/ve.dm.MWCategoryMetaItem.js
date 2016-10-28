@@ -34,7 +34,6 @@ ve.dm.MWCategoryMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/Category' ];
 
 ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements ) {
 	var href = domElements[ 0 ].getAttribute( 'href' ),
-		/*jshint regexp:false */
 		matches = href.match( /^((?:\.\.?\/)*)(.*?)(?:#(.*))?$/ ),
 		rawSortkey = matches[ 3 ] || '';
 	return {

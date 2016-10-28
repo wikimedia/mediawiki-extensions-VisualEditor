@@ -221,12 +221,10 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
  * @param {string} [mode='multiple'] Symbolic name of dialog mode, `multiple`, `single` or 'auto'
  */
 ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
-	var name, parts, part, single,
+	var name, single,
 		modeCssClasses = ve.ui.MWTransclusionDialog.static.modeCssClasses;
 
 	if ( this.transclusionModel ) {
-		parts = this.transclusionModel.getParts();
-		part = parts.length && parts[ 0 ];
 		if ( mode === 'auto' ) {
 			mode = this.isSingleTemplateTransclusion() ? 'single' : 'multiple';
 		}

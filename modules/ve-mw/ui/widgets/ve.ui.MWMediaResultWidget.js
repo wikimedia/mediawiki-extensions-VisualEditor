@@ -186,10 +186,10 @@ ve.ui.MWMediaResultWidget.prototype.resizeThumb = function ( resizeFactor ) {
  */
 ve.ui.MWMediaResultWidget.prototype.calculateWrapperPadding = function ( thumbDimensions ) {
 	var css = {
-			height: this.rowHeight,
-			width: thumbDimensions.width,
-			lineHeight: this.getRowHeight() + 'px'
-		};
+		height: this.rowHeight,
+		width: thumbDimensions.width,
+		lineHeight: this.getRowHeight() + 'px'
+	};
 
 	// Check if the image is too thin so we can make a bit of space around it
 	if ( thumbDimensions.width < this.minWidth ) {

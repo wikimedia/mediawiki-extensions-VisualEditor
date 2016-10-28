@@ -147,6 +147,6 @@ ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
 		wbptterms: 'description',
 		ppprop: 'disambiguation',
 		titles: subqueue.join( '|' ),
-		continue: ''
+		'continue': ''
 	} );
 };

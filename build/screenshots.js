@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 /* global seleniumUtils, langs */
 var i, l, clientSize,
 	accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
@@ -17,12 +17,12 @@ function runTests( lang ) {
 			// Use Sauce Labs when running on Jenins
 			if ( process.env.JENKINS_URL ) {
 				driver = new webdriver.Builder().withCapabilities( {
-						browserName: process.env.BROWSER,
-						platform: process.env.PLATFORM,
-						username: username,
-						accessKey: accessKey
-					} ).usingServer( 'http://' + username + ':' + accessKey +
-						'@ondemand.saucelabs.com:80/wd/hub' ).build();
+					browserName: process.env.BROWSER,
+					platform: process.env.PLATFORM,
+					username: username,
+					accessKey: accessKey
+				} ).usingServer( 'http://' + username + ':' + accessKey +
+					'@ondemand.saucelabs.com:80/wd/hub' ).build();
 			} else {
 				// If not running on Jenkins, use local browser
 				driver = new chrome.Driver();
@@ -139,6 +139,25 @@ function runTests( lang ) {
 			driver.quit();
 		} );
 
+		function cropScreenshot( filename, imageBuffer, rect, padding ) {
+			var left, top, right, bottom;
+
+			if ( padding === undefined ) {
+				padding = 5;
+			}
+
+			left = Math.max( 0, rect.left - padding );
+			top = Math.max( 0, rect.top - padding );
+			right = Math.min( clientSize.width, rect.left + rect.width + padding );
+			bottom = Math.min( clientSize.height, rect.top + rect.height + padding );
+
+			return Jimp.read( imageBuffer ).then( function ( jimpImage ) {
+				jimpImage
+					.crop( left, top, right - left, bottom - top )
+					.write( filename );
+			} );
+		}
+
 		function runScreenshotTest( name, clientScript, padding ) {
 			var filename = './screenshots/' + name + '-' + lang + '.png';
 
@@ -158,24 +177,6 @@ function runTests( lang ) {
 			);
 		}
 
-		function cropScreenshot( filename, imageBuffer, rect, padding ) {
-			var left, top, right, bottom;
-
-			if ( padding === undefined ) {
-				padding = 5;
-			}
-
-			left = Math.max( 0, rect.left - padding );
-			top = Math.max( 0, rect.top - padding );
-			right = Math.min( clientSize.width, rect.left + rect.width + padding );
-			bottom = Math.min( clientSize.height, rect.top + rect.height + padding );
-
-			return Jimp.read( imageBuffer ).then( function ( jimpImage ) {
-				jimpImage
-					.crop( left, top, right - left, bottom - top )
-					.write( filename );
-			} );
-		}
 		test.it( 'Toolbar & action tools', function () {
 			runScreenshotTest( 'VisualEditor_toolbar',
 				// This function is converted to a string and executed in the browser
@@ -334,8 +335,7 @@ function runTests( lang ) {
 			runScreenshotTest( 'VisualEditor_formula',
 				// This function is converted to a string and executed in the browser
 				function () {
-					var win,
-						done = arguments[ arguments.length - 1 ],
+					var done = arguments[ arguments.length - 1 ],
 						surface = ve.init.target.surface;
 
 					surface.dialogs.once( 'opening', function ( win, opening ) {
@@ -353,7 +353,6 @@ function runTests( lang ) {
 						} );
 					} );
 					surface.executeCommand( 'mathDialog' );
-					win = surface.dialogs.currentWindow;
 				}
 			);
 		} );
@@ -361,8 +360,7 @@ function runTests( lang ) {
 			runScreenshotTest( 'VisualEditor_references_list',
 				// This function is converted to a string and executed in the browser
 				function () {
-					var win,
-						done = arguments[ arguments.length - 1 ],
+					var done = arguments[ arguments.length - 1 ],
 						surface = ve.init.target.surface;
 
 					surface.dialogs.once( 'opening', function ( win, opening ) {
@@ -379,7 +377,6 @@ function runTests( lang ) {
 					surface.executeCommand( 'referencesList' );
 					// The first command inserts a reference list instantly, so run again to open the window
 					surface.executeCommand( 'referencesList' );
-					win = surface.dialogs.currentWindow;
 				}
 			);
 		} );

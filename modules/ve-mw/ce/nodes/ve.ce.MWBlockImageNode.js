@@ -17,13 +17,12 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
-	var type, align, isError;
+	var type, isError;
 
 	// Parent constructor
 	ve.ce.MWBlockImageNode.super.apply( this, arguments );
 
 	type = this.model.getAttribute( 'type' );
-	align = this.model.getAttribute( 'align' );
 	isError = this.model.getAttribute( 'isError' );
 
 	// Properties
@@ -92,7 +91,7 @@ ve.ce.MWBlockImageNode.static.renderHtmlAttributes = false;
 ve.ce.MWBlockImageNode.static.transition = false;
 
 ve.ce.MWBlockImageNode.static.cssClasses = {
-	default: {
+	'default': {
 		left: 'mw-halign-left',
 		right: 'mw-halign-right',
 		center: 'mw-halign-center',

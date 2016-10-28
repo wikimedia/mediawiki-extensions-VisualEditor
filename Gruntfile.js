@@ -6,17 +6,16 @@
 
 require( 'babel-polyfill' );
 
-/*jshint node:true */
+/* eslint-env node */
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' );
 
-	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-eslint' );
+	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-mocha-test' );
-	grunt.loadNpmTasks( 'grunt-jscs' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
 	grunt.loadNpmTasks( 'grunt-tyops' );
 	grunt.loadTasks( 'lib/ve/build/tasks' );
@@ -62,7 +61,7 @@ module.exports = function ( grunt ) {
 					timeout: 40000,
 					require: [
 						function () {
-							/* jshint undef:false */
+							// eslint-disable-next-line no-undef
 							langs = [ 'en' ];
 						}
 					]
@@ -75,7 +74,7 @@ module.exports = function ( grunt ) {
 					timeout: 40000,
 					require: [
 						function () {
-							/* jshint undef:false */
+							// eslint-disable-next-line no-undef
 							langs = require( './build/tasks/screenshotLangs.json' ).langs;
 						}
 					]
@@ -95,26 +94,20 @@ module.exports = function ( grunt ) {
 				'!.git/**'
 			]
 		},
-		jshint: {
-			options: {
-				jshintrc: true
-			},
-			all: [
-				'*.js',
-				'{.jsduck,build}/**/*.js',
-				'modules/**/*.js'
-			]
-		},
-		jscs: {
+		eslint: {
 			fix: {
 				options: {
 					fix: true
 				},
-				src: '<%= jshint.all %>'
+				src: [
+					'<%= eslint.all %>'
+				]
 			},
-			main: {
-				src: '<%= jshint.all %>'
-			}
+			all: [
+				'*.js',
+				'{build,modules}/**/*.js',
+				'!modules/ve-mw/init/classListSkipFunction.js'
+			]
 		},
 		stylelint: {
 			all: [
@@ -134,6 +127,7 @@ module.exports = function ( grunt ) {
 		jsonlint: {
 			all: [
 				'*.json',
+				'.eslintrc.json',
 				'**/*.json',
 				'!**/node_modules/**',
 				'!lib/**'
@@ -148,8 +142,8 @@ module.exports = function ( grunt ) {
 		},
 		watch: {
 			files: [
-				'.{stylelintrc,jscsrc,jshintignore,jshintrc}',
-				'<%= jshint.all %>',
+				'.{stylelintrc,eslintrc.json}',
+				'<%= eslint.all %>',
 				'<%= stylelint.all %>'
 			],
 			tasks: 'test'
@@ -177,8 +171,8 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'stylelint', 'jsonlint', 'banana' ] );
-	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
+	grunt.registerTask( 'lint', [ 'tyops', 'eslint:all', 'stylelint', 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'fix', [ 'eslint:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
 	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en' ] );

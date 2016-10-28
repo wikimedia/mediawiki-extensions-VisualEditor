@@ -254,7 +254,7 @@ ve.ui.MWHelpPopupTool.prototype.onSelect = function () {
 					.append( $( '<a>' )
 						.addClass( 've-ui-mwHelpPopupTool-version-link' )
 						.attr( 'target', '_blank' )
-						.attr( 'href',  extension[ 'vcs-url' ] )
+						.attr( 'href', extension[ 'vcs-url' ] )
 						.text( extension[ 'vcs-version' ].slice( 0, 7 ) )
 					)
 					.append( ' ' )

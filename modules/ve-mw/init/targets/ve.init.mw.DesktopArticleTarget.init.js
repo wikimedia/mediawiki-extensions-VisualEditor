@@ -9,7 +9,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* jshint esversion: 3 */
+/* eslint-ecmaVersion 3 */
 
 /**
  * Platform preparation for the MediaWiki view page. This loads (when user needs it) the
@@ -64,12 +64,20 @@
 		windowHeight = $( window ).height();
 		top = Math.max( contentRect.top, 0 );
 		bottom = Math.min( contentRect.bottom, windowHeight );
-		middle = ( bottom  - top ) / 2;
+		middle = ( bottom - top ) / 2;
 		offsetTop = Math.max( -contentRect.top, 0 );
 
 		init.$loading.css( 'top', middle + offsetTop );
 
 		$content.prepend( init.$loading );
+	}
+
+	function setLoadingProgress( target, duration ) {
+		var $bar = init.$loading.find( '.ve-init-mw-desktopArticleTarget-progress-bar' ).stop();
+		$bar.css( 'transition', 'width ' + duration + 'ms ease-in' );
+		setTimeout( function () {
+			$bar.css( 'width', target + '%' );
+		} );
 	}
 
 	function incrementLoadingProgress() {
@@ -83,14 +91,6 @@
 	function resetLoadingProgress() {
 		progressStep = 0;
 		setLoadingProgress( 0, 0 );
-	}
-
-	function setLoadingProgress( target, duration ) {
-		var $bar = init.$loading.find( '.ve-init-mw-desktopArticleTarget-progress-bar' ).stop();
-		$bar.css( 'transition', 'width ' + duration + 'ms ease-in' );
-		setTimeout( function () {
-			$bar.css( 'width', target + '%' );
-		} );
 	}
 
 	function hideLoading() {
@@ -186,26 +186,46 @@
 		return targetPromise;
 	}
 
-	function activatePageTarget( mode, modified ) {
-		trackActivateStart( { type: 'page', mechanism: 'click' } );
+	function trackActivateStart( initData ) {
+		ve.track( 'trace.activate.enter' );
+		ve.track( 'mwedit.init', initData );
+		mw.libs.ve.activationStart = ve.now();
+	}
 
-		if ( !active ) {
-			if ( uri.query.action !== 'edit' && !( uri.query.veaction in editModes ) ) {
-				if ( history.pushState ) {
-					// Replace the current state with one that is tagged as ours, to prevent the
-					// back button from breaking when used to exit VE. FIXME: there should be a better
-					// way to do this. See also similar code in the DesktopArticleTarget constructor.
-					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
-					// Set veaction to edit
-					history.pushState( { tag: 'visualeditor' }, document.title, mode === 'source' ? veEditSourceUri : veEditUri );
-				}
+	function setEditorPreference( editor ) {
+		var key = pageExists ? 'edit' : 'create',
+			sectionKey = 'editsection';
 
-				// Update mw.Uri instance
-				uri = veEditUri;
+		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
+			throw new Error( 'setEditorPreference called with invalid option: ', editor );
+		}
+
+		if (
+			mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+			tabPreference === 'remember-last'
+		) {
+			if ( $( '#ca-view-foreign' ).length ) {
+				key += 'localdescription';
+			}
+			if ( editor === 'wikitext' ) {
+				key += 'source';
+				sectionKey += 'source';
 			}
 
-			activateTarget( mode, null, undefined, modified );
+			$( '#ca-edit a' ).text( mw.msg( tabMessages[ key ] || 'edit' ) );
+			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] || 'editsection' ) );
 		}
+
+		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
+		if ( mw.user.isAnon() ) {
+			return $.Deferred().resolve();
+		}
+		if ( mw.user.options.get( 'visualeditor-editor' ) === editor ) {
+			return $.Deferred().resolve();
+		}
+		return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
+			mw.user.options.set( 'visualeditor-editor', editor );
+		} );
 	}
 
 	/**
@@ -279,46 +299,26 @@
 			} );
 	}
 
-	function trackActivateStart( initData ) {
-		ve.track( 'trace.activate.enter' );
-		ve.track( 'mwedit.init', initData );
-		mw.libs.ve.activationStart = ve.now();
-	}
+	function activatePageTarget( mode, modified ) {
+		trackActivateStart( { type: 'page', mechanism: 'click' } );
 
-	function setEditorPreference( editor ) {
-		var key = pageExists ? 'edit' : 'create',
-			sectionKey = 'editsection';
+		if ( !active ) {
+			if ( uri.query.action !== 'edit' && !( uri.query.veaction in editModes ) ) {
+				if ( history.pushState ) {
+					// Replace the current state with one that is tagged as ours, to prevent the
+					// back button from breaking when used to exit VE. FIXME: there should be a better
+					// way to do this. See also similar code in the DesktopArticleTarget constructor.
+					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+					// Set veaction to edit
+					history.pushState( { tag: 'visualeditor' }, document.title, mode === 'source' ? veEditSourceUri : veEditUri );
+				}
 
-		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
-			throw new Error( 'setEditorPreference called with invalid option: ', editor );
-		}
-
-		if (
-			mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-			tabPreference === 'remember-last'
-		) {
-			if ( $( '#ca-view-foreign' ).length ) {
-				key += 'localdescription';
-			}
-			if ( editor === 'wikitext' ) {
-				key += 'source';
-				sectionKey += 'source';
+				// Update mw.Uri instance
+				uri = veEditUri;
 			}
 
-			$( '#ca-edit a' ).text( mw.msg( tabMessages[ key ] || 'edit' ) );
-			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] || 'editsection' ) );
+			activateTarget( mode, null, undefined, modified );
 		}
-
-		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
-		if ( mw.user.isAnon() ) {
-			return $.Deferred().resolve();
-		}
-		if ( mw.user.options.get( 'visualeditor-editor' ) === editor ) {
-			return $.Deferred().resolve();
-		}
-		return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
-			mw.user.options.set( 'visualeditor-editor', editor );
-		} );
 	}
 
 	function getLastEditor() {
@@ -409,17 +409,15 @@
 				$caEditLink = $caEdit.find( 'a' ),
 				$caVeEditLink = $caVeEdit.find( 'a' ),
 				reverseTabOrder = $( 'body' ).hasClass( 'rtl' ) && pTabsId === 'p-views',
-				/*jshint bitwise:false */
 				caVeEditNextnode =
+					// eslint-disable-next-line no-bitwise
 					( reverseTabOrder ^ conf.tabPosition === 'before' ) ?
-						/*jshint bitwise:true */
 						$caEdit.get( 0 ) :
 						$caEdit.next().get( 0 );
 
 			// HACK: Remove this when the Education Program offers a proper way to detect and disable.
 			if (
-				// HACK: Work around jscs.requireCamelCaseOrUpperCaseIdentifiers
-				mw.config.get( 'wgNamespaceIds' )[ true && 'education_program' ] === mw.config.get( 'wgNamespaceNumber' )
+				mw.config.get( 'wgNamespaceIds' ).education_program === mw.config.get( 'wgNamespaceNumber' )
 			) {
 				return;
 			}
@@ -452,7 +450,7 @@
 				}
 			} else if ( $caEdit.length && $caVeEdit.length ) {
 				// Make the state of the page consistent with the config if needed
-				/*jshint bitwise:false */
+				// eslint-disable-next-line no-bitwise
 				if ( reverseTabOrder ^ conf.tabPosition === 'before' ) {
 					if ( $caEdit[ 0 ].nextSibling === $caVeEdit[ 0 ] ) {
 						$caVeEdit.after( $caEdit );
@@ -462,6 +460,7 @@
 						$caEdit.after( $caVeEdit );
 					}
 				}
+				// eslint-enable no-bitwise
 				if ( tabMessages[ action ] !== null ) {
 					$caVeEditLink.text( mw.msg( tabMessages[ action ] ) );
 				}

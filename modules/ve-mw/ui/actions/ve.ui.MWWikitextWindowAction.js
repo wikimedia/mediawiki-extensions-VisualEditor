@@ -43,7 +43,7 @@ ve.ui.MWWikitextWindowAction.prototype.open = function ( name, data, action ) {
 		fragment = surface.getModel().getFragment( undefined, true ),
 		dir = surface.getView().getSelection().getDirection();
 
-	if ( !( this.surface.getModel() instanceof ve.dm.MWWikitextSurface ) ||  ve.ui.windowFactory.lookup( name ).static.handlesWikitext ) {
+	if ( !( this.surface.getModel() instanceof ve.dm.MWWikitextSurface ) || ve.ui.windowFactory.lookup( name ).static.handlesWikitext ) {
 		return ve.ui.MWWikitextWindowAction.super.prototype.open.apply( this, arguments );
 	}
 
