@@ -877,7 +877,7 @@
 						activateTarget( editModes[ uri.query.veaction ], section );
 					} else {
 						if (
-							init.isWikitextAvailable
+							init.isWikitextAvailable &&
 							(
 								tabPreference === 'prefer-ve' ||
 								(
