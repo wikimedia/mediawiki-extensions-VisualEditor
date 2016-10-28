@@ -30,7 +30,7 @@
 	"visualeditor-welcomedialog-action": "Comença a editar",
 	"visualeditor-welcomedialog-content": "Tothom pot editar, i cada millora hi ajuda.",
 	"visualeditor-welcomedialog-content-thanks": "Gràcies per ajudar el món!",
-	"visualeditor-welcomedialog-switch": "Canvia a l'editor visual",
+	"visualeditor-welcomedialog-switch": "Canvia a l'editor de codi",
 	"visualeditor-welcomedialog-switch-ve": "Canvia a l'editor visual",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Benvingut|Benvinguda}} a $2"
 }
