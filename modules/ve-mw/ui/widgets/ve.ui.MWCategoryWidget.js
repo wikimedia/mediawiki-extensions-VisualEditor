@@ -221,7 +221,11 @@ ve.ui.MWCategoryWidget.prototype.onTogglePopupMenu = function ( item ) {
 	}
 };
 
-/** */
+/**
+ * Set the default sort key.
+ *
+ * @param {string} value Default sort key value
+ */
 ve.ui.MWCategoryWidget.prototype.setDefaultSortKey = function ( value ) {
 	this.popup.setDefaultSortKey( value );
 };
@@ -230,7 +234,7 @@ ve.ui.MWCategoryWidget.prototype.setDefaultSortKey = function ( value ) {
  * Get list of category names.
  *
  * @method
- * @param {string[]} List of category names
+ * @return {string[]} List of category names
  */
 ve.ui.MWCategoryWidget.prototype.getCategories = function () {
 	return Object.keys( this.categories );

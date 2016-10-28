@@ -63,6 +63,8 @@ ve.ui.MWMagicLinkNodeInspector.prototype.initialize = function () {
  * appropriate type.
  *
  * @private
+ * @param {string} str String to validate
+ * @return {boolean} String is valid
  */
 ve.ui.MWMagicLinkNodeInspector.prototype.validate = function ( str ) {
 	var node = this.getFragment().getSelectedNode();

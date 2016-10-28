@@ -42,7 +42,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
  * @param {string} [data.description] Template description
  * @param {string[]} [data.paramOrder] Canonically ordered parameter names
  * @param {Object} [data.params] Template param specs keyed by param name
- * @param {string[][]} [data.sets] Lists of param sets
+ * @param {Array} [data.sets] Lists of param sets
  */
 ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 	var key, param, i, len;

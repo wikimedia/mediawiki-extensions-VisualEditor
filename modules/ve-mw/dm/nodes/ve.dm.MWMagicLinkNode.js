@@ -44,6 +44,7 @@ ve.dm.MWMagicLinkNode.static.blacklistedAnnotationTypes = [ 'link' ];
 /**
  * Determine whether the given `element` is a magic link.
  *
+ * @param {HTMLElement} element Element
  * @return {boolean} True if the element is a magic link
  */
 ve.dm.MWMagicLinkNode.static.matchFunction = function ( element ) {
@@ -113,6 +114,7 @@ ve.dm.MWMagicLinkNode.static.validateHref = function ( content, href ) {
  * with the given content into a simple link, or `null` if the given
  * content is not a valid magic link.
  *
+ * @param {string} content Content
  * @return {ve.dm.MWExternalLinkAnnotation|ve.dm.MWInternalLinkAnnotation|null}
  */
 ve.dm.MWMagicLinkNode.static.annotationFromContent = function ( content ) {

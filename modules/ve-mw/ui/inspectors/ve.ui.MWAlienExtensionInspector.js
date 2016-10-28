@@ -90,7 +90,9 @@ ve.ui.MWAlienExtensionInspector.prototype.getTeardownProcess = function ( data )
 		}, this );
 };
 
-/** */
+/**
+ * @inheritdoc ve.ui.MWExtensionWindow
+ */
 ve.ui.MWAlienExtensionInspector.prototype.updateMwData = function ( mwData ) {
 	var key;
 

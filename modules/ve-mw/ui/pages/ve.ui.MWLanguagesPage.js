@@ -102,6 +102,9 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 
 /**
  * Handle language items being loaded.
+ *
+ * @param {jQuery.Deferred} deferred Deferred to resolve with language data
+ * @param {Object} response API response
  */
 ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred, response ) {
 	var i, iLen, languages = [],
