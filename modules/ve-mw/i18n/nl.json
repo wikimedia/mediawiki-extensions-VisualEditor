@@ -32,7 +32,8 @@
 			"FabianRM",
 			"Mbch331",
 			"Robin van der Vliet",
-			"MrLeopold"
+			"MrLeopold",
+			"Hex"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -56,6 +57,7 @@
 	"apihelp-visualeditoredit-param-minor": "Als kleine bewerking markeren.",
 	"apihelp-visualeditoredit-param-needcheck": "Stel deze parameter in tijdens het opslaan als de versie mogelijk roundtripproblemen heeft. Dit resulteert in het labelen van de bewerking.",
 	"apihelp-visualeditoredit-param-oldid": "Het te gebruiken versienummer. Standaard de laatste versie. Gebruik 0 voor een nieuwe pagina.",
+	"apihelp-visualeditoredit-param-paction": "Actie om uit te voeren.",
 	"apihelp-visualeditoredit-param-page": "De pagina waarop handelingen worden uitgevoerd.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Stel dit tijdens het opslaan in op de tijd waarop de pagina is geladen. Wordt gebruikt om bewerkingsconflicten te detecteren.",
 	"apihelp-visualeditoredit-param-summary": "Bewerkingssamenvatting.",
@@ -344,7 +346,6 @@
 	"visualeditor-settings-tool": "Pagina-instellingen",
 	"visualeditor-shortcuts-insert": "Invoegen",
 	"visualeditor-special-characters-group-other": "Vaak gebruikt",
-	"visualeditor-timeout": "De visuele tekstverwerker is op dit moment niet beschikbaar. Wilt u in bronmodus bewerken?",
 	"visualeditor-toolbar-savedialog": "Pagina opslaan",
 	"visualeditor-toolbar-savedialog-short": "Opslaan",
 	"visualeditor-usernamespacepagelink": "Project:Gebruikersnaamruimte",

@@ -210,7 +210,7 @@
 	"visualeditor-dialog-transclusion-raw-fallback": "退回至纯wiki文本",
 	"visualeditor-dialog-transclusion-remove-content": "删除内容",
 	"visualeditor-dialog-transclusion-remove-param": "移除字段",
-	"visualeditor-dialog-transclusion-remove-template": "删除模板",
+	"visualeditor-dialog-transclusion-remove-template": "移除模板",
 	"visualeditor-dialog-transclusion-required-parameter": "必填字段",
 	"visualeditor-dialog-transclusion-required-parameter-description": "必填字段。",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "返回",
