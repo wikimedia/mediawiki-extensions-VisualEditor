@@ -1589,6 +1589,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 	this.attachToolbarSaveButton();
 
 	if ( this.saveDialog ) {
+		this.initialEditSummary = this.saveDialog.editSummaryInput.getValue();
 		this.saveDialog.disconnect( this );
 		this.saveDialog = null;
 	}
