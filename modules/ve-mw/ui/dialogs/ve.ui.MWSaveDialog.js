@@ -30,6 +30,7 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.changedEditSummary = false;
 	this.canReview = false;
 	this.canPreview = false;
+	this.hasDiff = false;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwSaveDialog' );
@@ -117,11 +118,27 @@ ve.ui.MWSaveDialog.static.actions = [
 /**
  * Set review content and show review panel.
  *
- * @param {string} content Diff HTML or wikitext
+ * @param {string} wikitextDiff Diff HTML or wikitext
+ * @param {ve.dm.VisualDiff} [visualDiff] Visual diff
  */
-ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
-	this.$reviewViewer.empty().append( content );
+ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiff ) {
+	this.$reviewVisualDiff.empty();
+	if ( visualDiff ) {
+		this.diffElement = new ve.ui.DiffElement( visualDiff );
+		this.diffElement.$document.addClass( 'mw-body-content' );
+		// TODO: Remove when fixed upstream in Parsoid (T58756)
+		this.diffElement.$element.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
+		this.$reviewVisualDiff.append( this.diffElement.$element );
+		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( false );
+	} else {
+		// TODO: Support visual diffs in source mode (epic)
+		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( true );
+		this.reviewModeButtonSelect.selectItemByData( 'source' );
+	}
+
+	this.$reviewWikitextDiff.empty().append( wikitextDiff );
 	this.actions.setAbilities( { approve: true } );
+	this.hasDiff = true;
 	this.popPending();
 	this.swapPanel( 'review' );
 };
@@ -164,8 +181,9 @@ ve.ui.MWSaveDialog.prototype.popPending = function () {
  * Clear the diff displayed in the review panel, if any.
  */
 ve.ui.MWSaveDialog.prototype.clearDiff = function () {
-	this.$reviewViewer.empty();
+	this.$reviewWikitextDiff.empty();
 	this.$previewViewer.empty();
+	this.hasDiff = false;
 };
 
 /**
@@ -173,7 +191,6 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  *
  * @param {string} panel One of 'save', 'review', 'conflict' or 'nochanges'
  * @param {boolean} [noFocus] Don't attempt to focus anything (e.g. while setting up)
- * @return {jQuery} The now active panel
  * @throws {Error} Unknown saveDialog panel
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
@@ -233,7 +250,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 
 				if ( !currentEditSummaryWikitext || currentEditSummaryWikitext.trim() === '' ) {
 					// Don't bother with an API request for an empty summary
-					this.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
+					this.$reviewEditSummary.text( ve.msg( 'visualeditor-savedialog-review-nosummary' ) );
 				} else {
 					this.$reviewEditSummary.parent()
 						.removeClass( 'oo-ui-element-hidden' )
@@ -256,6 +273,9 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 					} );
 				}
 			}
+			setTimeout( function () {
+				dialog.updateReviewMode();
+			} );
 			break;
 		case 'nochanges':
 			mode = 'review';
@@ -280,8 +300,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 	} );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
-
-	return dialog;
 };
 
 /**
@@ -483,15 +501,31 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		scrollable: true,
 		padded: true
 	} );
-	this.$reviewViewer = $( '<div>' ).addClass( 've-ui-mwSaveDialog-viewer' );
+
+	this.$reviewVisualDiff = $( '<div>' ).addClass( 've-ui-mwSaveDialog-viewer' );
+	this.$reviewWikitextDiff = $( '<div>' ).addClass( 've-ui-mwSaveDialog-viewer' );
+
+	this.reviewModeButtonSelect = new OO.ui.ButtonSelectWidget( {
+		items: [
+			new OO.ui.ButtonOptionWidget( { data: 'visual', icon: 'eye', label: ve.msg( 'visualeditor-savedialog-review-visual' ) } ),
+			new OO.ui.ButtonOptionWidget( { data: 'source', icon: 'wikiText', label: ve.msg( 'visualeditor-savedialog-review-wikitext' ) } )
+		],
+		classes: [ 've-ui-mwSaveDialog-reviewMode' ]
+	} );
+	this.reviewModeButtonSelect.connect( this, { select: 'updateReviewMode' } );
+	// TODO: Make 'visual' the default
+	this.reviewModeButtonSelect.selectItemByData( 'source' );
+
 	this.$reviewEditSummary = $( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
 	this.$reviewActions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-actions' );
 	this.reviewPanel.$element.append(
+		this.reviewModeButtonSelect.$element,
 		$( '<div>' )
 			.addClass( 'mw-summary-preview' )
 			.text( ve.msg( 'summary-preview' ) )
 			.append( $( '<br>' ), this.$reviewEditSummary ),
-		this.$reviewViewer,
+		this.$reviewVisualDiff,
+		this.$reviewWikitextDiff,
 		this.$reviewActions
 	);
 
@@ -550,6 +584,17 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$body.append( this.panels.$element );
 
 	this.setupDeferred.resolve();
+};
+
+ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
+	var isVisual = this.reviewModeButtonSelect.getSelectedItem().getData() === 'visual';
+	this.$reviewVisualDiff.toggleClass( 'oo-ui-element-hidden', !isVisual );
+	this.$reviewWikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
+	this.updateSize();
+	if ( isVisual ) {
+		this.diffElement.positionDescriptions();
+		this.updateSize();
+	}
 };
 
 /**

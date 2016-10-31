@@ -74,3 +74,13 @@
 .ve-ui-mwSaveDialog-messages:empty {
 	display: none;
 }
+
+.ve-ui-mwSaveDialog-reviewMode {
+	float: right;
+	margin: 0 0 0 1em;
+}
+
+.ve-ui-mwSaveDialog-viewer {
+	margin-top: 1em;
+	clear: both;
+}

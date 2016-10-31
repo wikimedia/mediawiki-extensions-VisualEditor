@@ -29,6 +29,18 @@ ve.ui.MWMobileSaveDialog = function VeUiMwMobileSaveDialog() {
 
 OO.inheritClass( ve.ui.MWMobileSaveDialog, ve.ui.MWSaveDialog );
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMobileSaveDialog.prototype.initialize = function () {
+	// Parent method
+	ve.ui.MWMobileSaveDialog.super.prototype.initialize.call( this );
+
+	this.$reviewVisualDiff.addClass( 'content' );
+};
+
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWMobileSaveDialog );
