@@ -127,6 +127,29 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $content;
 	}
 
+	protected function getWikitext( $title, $params, $parserParams ) {
+		if ( $params['cachekey'] !== null ) {
+			$wikitext = $this->trySerializationCache( $params['cachekey'] );
+			if ( !is_string( $wikitext ) ) {
+				$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
+			}
+		} else {
+			$wikitext = $this->getWikitextNoCache( $title, $params, $parserParams );
+		}
+		return $wikitext;
+	}
+
+	protected function getWikitextNoCache( $title, $params, $parserParams ) {
+		$this->requireOnlyOneParameter( $params, 'html' );
+		$wikitext = $this->postHTML(
+			$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+		);
+		if ( $wikitext === false ) {
+			$this->dieUsage( 'Error contacting the document server', 'docserver' );
+		}
+		return $wikitext;
+	}
+
 	protected function storeInSerializationCache( $title, $wikitext ) {
 		global $wgMemc;
 
@@ -160,22 +183,24 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $wgMemc->get( $key );
 	}
 
-	protected function postHTML( $title, $html, $parserParams, $etag ) {
+	protected function postData( $path, $title, $data, $parserParams, $etag ) {
 		if ( $parserParams['oldid'] === 0 ) {
 			$parserParams['oldid'] = '';
 		}
-		$path = 'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() );
+		$path .= urlencode( $title->getPrefixedDBkey() );
 		if ( $parserParams['oldid'] ) {
 			$path .= '/' . $parserParams['oldid'];
 		}
 		return $this->requestRestbase(
-			'POST',
-			$path,
-			[
-				'html' => $html,
-				'scrub_wikitext' => 1,
-			],
+			'POST', $path, $data,
 			[ 'If-Match' => $etag ]
+		);
+	}
+
+	protected function postHTML( $title, $html, $parserParams, $etag ) {
+		return $this->postData(
+			'transform/html/to/wikitext/', $title,
+			[ 'html' => $html, 'scrub_wikitext' => 1 ], $parserParams, $etag
 		);
 	}
 
@@ -236,30 +261,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$parserParams['oldid'] = $params['oldid'];
 		}
 
-		if (
-			$params['paction'] !== 'serialize' &&
-			$params['paction'] !== 'serializeforcache' &&
-			$params['wikitext'] !== null
-		) {
-			// Get wikitext from param
-			$wikitext = $params['wikitext'];
-		} elseif ( $params['paction'] !== 'serializeforcache' && $params['cachekey'] !== null ) {
-			// Get wikitext from cachekey
-			$wikitext = $this->trySerializationCache( $params['cachekey'] );
-			if ( !is_string( $wikitext ) ) {
-				$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
-			}
-		} else {
-			// Get wikitext by parsing HTML
-			if ( $params['html'] === null ) {
-				$this->dieUsageMsg( 'missingparam', 'html' );
-			}
-			$wikitext = $this->postHTML(
-				$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
-			);
-			if ( $wikitext === false ) {
-				$this->dieUsage( 'Error contacting the Parsoid/RESTbase server', 'docserver' );
-			}
+		$wikitext = $params['wikitext'];
+		if ( !$wikitext ) {
+			$wikitext = $this->getWikitext( $title, $params, $parserParams );
 		}
 
 		if ( $params['paction'] === 'serialize' ) {
