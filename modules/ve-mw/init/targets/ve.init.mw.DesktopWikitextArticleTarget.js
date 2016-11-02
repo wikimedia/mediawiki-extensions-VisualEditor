@@ -105,6 +105,7 @@ ve.init.mw.DesktopWikitextArticleTarget.prototype.switchToVisualEditor = functio
 			.then( function ( closing ) { return closing; } )
 			.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
+					target.section = null;
 					target.setMode( 'visual' );
 					target.reloadSurface();
 				}
