@@ -1821,7 +1821,6 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWSignatureContextItem.js"
 			],
 			"dependencies": [
-				"ext.visualEditor.core",
 				"ext.visualEditor.mwtransclusion",
 				"mediawiki.api",
 				"oojs-ui.styles.icons-alerts"
@@ -1835,9 +1834,6 @@
 			]
 		},
 		"ext.visualEditor.experimental": {
-			"dependencies": [
-				"ext.visualEditor.language"
-			],
 			"targets": [
 				"desktop",
 				"mobile"
