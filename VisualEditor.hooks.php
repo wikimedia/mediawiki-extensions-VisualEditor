@@ -184,15 +184,21 @@ class VisualEditorHooks {
 	}
 
 	private static function getUserEditor( User $user, WebRequest $req ) {
-		if ( $user->isAnon() ) {
-			return $req->getCookie(
-				'VEE',
-				'',
-				User::getDefaultOption( 'visualeditor-editor' )
-			);
-		} else {
-			return $user->getOption( 'visualeditor-editor' );
+		// This logic matches getLastEditor in:
+		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
+		$editor = $req->getCookie( 'VEE', '' );
+		// Set editor to user's preference or site's default if …
+		if (
+			// … user is logged in,
+			!$user->isAnon() ||
+			// … no cookie is set, or
+			!$editor ||
+			// value is invalid.
+			!( $editor === 'visualeditor' || $editor === 'wikitext' )
+		) {
+			$editor = $user->getOption( 'visualeditor-editor' );
 		}
+		return $editor;
 	}
 
 	/**
