@@ -21,9 +21,9 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
-		pageCanLoadVE, init, targetPromise, enable, tempdisable, autodisable,
+		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
-		onlyTabIsVE, isLoading,
+		isLoading,
 		editModes = {
 			edit: 'visual'
 		},
@@ -344,7 +344,7 @@
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
 	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
-	pageCanLoadVE = (
+	pageCanLoadEditor = (
 		isViewPage ||
 		mw.config.get( 'wgAction' ) === 'edit' ||
 		mw.config.get( 'wgAction' ) === 'submit'
@@ -435,7 +435,7 @@
 						// Use url instead of '#'.
 						// So that 1) one can always open it in a new tab, even when
 						// onEditTabClick is bound.
-						// 2) when onEditTabClick is not bound (!pageCanLoadVE) it will
+						// 2) when onEditTabClick is not bound (!pageCanLoadEditor) it will
 						// just work.
 						veEditUri,
 						tabMessages[ action ] !== null ? mw.msg( tabMessages[ action ] ) : $caEditLink.text(),
@@ -469,11 +469,11 @@
 			// If the edit tab is hidden, remove it.
 			if ( !( init.isVisualAvailable && userPrefPreferShow ) ) {
 				$caVeEdit.remove();
-			} else if ( pageCanLoadVE ) {
+			} else if ( pageCanLoadEditor ) {
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.on( 'click', init.onEditTabClick.bind( init, 'visual' ) );
 			}
-			if ( init.isWikitextAvailable ) {
+			if ( pageCanLoadEditor && init.isWikitextAvailable ) {
 				$caEdit.on( 'click', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
@@ -548,7 +548,7 @@
 				} );
 			}
 
-			if ( pageCanLoadVE ) {
+			if ( pageCanLoadEditor ) {
 				// Only init without refresh if we're on a view page. Though section edit links
 				// are rarely shown on non-view pages, they appear in one other case, namely
 				// when on a diff against the latest version of a page. In that case we mustn't
@@ -690,21 +690,33 @@
 	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
 	autodisable = Number( mw.user.options.get( 'visualeditor-autodisable' ) );
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
-	onlyTabIsVE = mw.config.get( 'wgVisualEditorConfig' ).singleEditTab && (
-		tabPreference === 'prefer-ve' || (
-			tabPreference === 'remember-last' &&
-			getLastEditor() !== 'wikitext'
-		)
-	);
+
+	function isOnlyTabVE() {
+		return conf.singleEditTab && (
+			tabPreference === 'prefer-ve' || (
+				tabPreference === 'remember-last' &&
+				getLastEditor() !== 'wikitext'
+			)
+		);
+	}
+
+	function isOnlyTabWikitext() {
+		return conf.singleEditTab && (
+			tabPreference === 'prefer-wt' || (
+				tabPreference === 'remember-last' &&
+				getLastEditor() === 'wikitext'
+			)
+		);
+	}
 
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
-	if ( onlyTabIsVE ) {
+	if ( isOnlyTabVE() ) {
 		veEditUri = viewUri.clone().extend( { action: 'edit' } );
 		delete veEditUri.query.veaction;
 	} else {
-		veEditUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
-		veEditSourceUri = ( pageCanLoadVE ? uri : viewUri ).clone().extend( { veaction: 'editsource' } );
+		veEditUri = ( pageCanLoadEditor ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
+		veEditSourceUri = ( pageCanLoadEditor ? uri : viewUri ).clone().extend( { veaction: 'editsource' } );
 		delete veEditUri.query.action;
 		delete veEditSourceUri.query.action;
 	}
@@ -891,7 +903,7 @@
 					}
 				} else if (
 					init.isVisualAvailable &&
-					pageCanLoadVE &&
+					pageCanLoadEditor &&
 					userPrefEnabled
 				) {
 					// Page can be edited in VE, parameters are good, user prefs are mostly good
@@ -1000,11 +1012,17 @@
 				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupSkin();
-				} else if ( init.isVisualAvailable && pageCanLoadVE && onlyTabIsVE ) {
+				} else if (
+					pageCanLoadEditor && (
+						( init.isVisualAvailable && isOnlyTabVE() ) ||
+						( init.isWikitextAvailable && isOnlyTabWikitext() )
+					)
+				) {
 					// … on single-edit-tab wikis, where VE is the user's preferred editor
 					// Handle section edit link clicks
 					$( '.mw-editsection a' ).on( 'click', function ( e ) {
-						init.onEditSectionLinkClick( 'visual', e );
+						// isOnlyTabVE is computed on click as it may have changed since load
+						init.onEditSectionLinkClick( isOnlyTabVE() ? 'visual' : 'source', e );
 					} );
 					// Allow instant switching to edit mode, without refresh
 					$( '#ca-edit' ).on( 'click', function ( e ) {
@@ -1013,7 +1031,7 @@
 							return;
 						}
 						trackActivateStart( { type: 'page', mechanism: 'click' } );
-						activateTarget( 'visual' );
+						activateTarget( isOnlyTabVE() ? 'visual' : 'source' );
 					} );
 				}
 			}
