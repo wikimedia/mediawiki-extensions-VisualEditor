@@ -1004,7 +1004,7 @@
 					// … on single-edit-tab wikis, where VE is the user's preferred editor
 					// Handle section edit link clicks
 					$( '.mw-editsection a' ).on( 'click', function ( e ) {
-						init.onEditSectionLinkClick( e );
+						init.onEditSectionLinkClick( 'visual', e );
 					} );
 					// Allow instant switching to edit mode, without refresh
 					$( '#ca-edit' ).on( 'click', function ( e ) {
