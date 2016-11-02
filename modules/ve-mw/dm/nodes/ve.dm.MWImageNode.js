@@ -29,8 +29,6 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 	// Use 'bitmap' as default media type until we can
 	// fetch the actual media type from the API
 	this.mediaType = 'BITMAP';
-	// Get wiki defaults
-	this.svgMaxSize = mw.config.get( 'wgVisualEditorConfig' ).svgMaxSize;
 
 	// Initialize
 	this.constructor.static.syncScalableToType(
@@ -155,9 +153,13 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 		} else {
 			scalable.setEnforcedMax( false );
 		}
+	} else {
+		// EnforcedMax may have previously been set to true
+		scalable.setEnforcedMax( false );
 	}
 	// TODO: Some day, when svgMaxSize works properly in MediaWiki
-	// we can add it back as max dimension consideration.
+	// we can add it back as max dimension consideration:
+	// mw.config.get( 'wgVisualEditorConfig' ).svgMaxSize
 };
 
 /**
