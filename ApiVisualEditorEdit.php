@@ -120,7 +120,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$inflated = gzinflate( $deflated );
 			wfRestoreWarnings();
 			if ( $deflated === $inflated || $inflated === false ) {
-				$this->dieUsage( "Content provided is not properly deflated", 'invaliddeflate' );
+				$this->dieWithError( 'apierror-visualeditor-invaliddeflate', 'invaliddeflate' );
 			}
 			return $inflated;
 		}
@@ -131,7 +131,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		if ( $params['cachekey'] !== null ) {
 			$wikitext = $this->trySerializationCache( $params['cachekey'] );
 			if ( !is_string( $wikitext ) ) {
-				$this->dieUsage( 'No cached serialization found with that key', 'badcachekey' );
+				$this->dieWithError( 'apierror-visualeditor-badcachekey', 'badcachekey' );
 			}
 		} else {
 			$wikitext = $this->getWikitextNoCache( $title, $params, $parserParams );
@@ -145,7 +145,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
 		);
 		if ( $wikitext === false ) {
-			$this->dieUsage( 'Error contacting the document server', 'docserver' );
+			$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 		}
 		return $wikitext;
 	}
@@ -253,7 +253,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$params = $this->extractRequestParams();
 		$title = Title::newFromText( $params['page'] );
 		if ( !$title ) {
-			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
+			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
 		}
 
 		$parserParams = [];
@@ -278,7 +278,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$section = isset( $params['section'] ) ? $params['section'] : null;
 			$diff = $this->diffWikitext( $title, $wikitext, $section );
 			if ( $diff['result'] === 'fail' ) {
-				$this->dieUsage( 'Diff failed', 'difffailed' );
+				$this->dieWithError( 'apierror-visualeditor-difffailed', 'difffailed' );
 			}
 			$result = $diff;
 		} elseif ( $params['paction'] === 'save' ) {
@@ -319,7 +319,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				// frontend can update the page rendering without a refresh.
 				$result = $this->parseWikitext( $title, $newRevId );
 				if ( $result === false ) {
-					$this->dieUsage( 'Error contacting the Parsoid/RESTBase server', 'docserver' );
+					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				}
 
 				$result['isRedirect'] = (string) $title->isRedirect();
