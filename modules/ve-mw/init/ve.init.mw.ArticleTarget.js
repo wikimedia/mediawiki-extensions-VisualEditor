@@ -41,6 +41,10 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.section = null;
 
+	this.checkboxFields = null;
+	this.checkboxesByName = null;
+	this.$otherFields = null;
+
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
 	this.requestedRevId = revisionId && parseInt( revisionId );
@@ -243,7 +247,8 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
  * @param {string} status Text status message
  */
 ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevId, docRevIdMatches,
+	var i, len, linkData, aboutDoc, docRevId, docRevIdMatches, $checkboxes, defaults,
+		target = this,
 		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data || typeof data.content !== 'string' ) {
@@ -316,6 +321,67 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		ve.track( 'trace.parseResponse.exit' );
 		// Everything worked, the page was loaded, continue initializing the editor
 		this.documentReady( this.doc );
+	}
+
+
+	data = response ? ( response.visualeditor || response.visualeditoredit ) : {};
+
+	this.checkboxFields = [];
+	this.checkboxesByName = {};
+	this.$otherFields = $( [] );
+	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
+		$( '#content #firstHeading' ).text(
+			mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText()
+		);
+	}
+
+	if ( data.checkboxes ) {
+		defaults = {};
+		$( '.editCheckboxes input' ).each( function () {
+			defaults[ this.name ] = this.checked;
+		} );
+
+		$checkboxes = $( '<div>' ).html( ve.getObjectValues( data.checkboxes ).join( '' ) );
+		$checkboxes.find( 'input[type=checkbox]' ).each( function () {
+			var $label, title, checkbox,
+				$this = $( this ),
+				name = $this.attr( 'name' ),
+				id = $this.attr( 'id' );
+
+			if ( !name ) {
+				// This really shouldn't happen..
+				return;
+			}
+
+			// Label with for=id
+			if ( id ) {
+				$label = $checkboxes.find( 'label[for=' + id + ']' );
+			}
+			// Label wrapped input
+			if ( !$label ) {
+				$label = $this.closest( 'label' );
+			}
+			if ( $label ) {
+				title = $label.attr( 'title' );
+				$label.find( 'a' ).attr( 'target', '_blank' );
+			}
+			checkbox = new OO.ui.CheckboxInputWidget( {
+				value: $this.attr( 'value' ),
+				selected: defaults[ name ] !== undefined ? defaults[ name ] : $this.prop( 'checked' ),
+				classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
+			} );
+			// HACK: CheckboxInputWidget doesn't support access keys
+			checkbox.$input.attr( 'accesskey', $( this ).attr( 'accesskey' ) );
+			target.checkboxFields.push(
+				new OO.ui.FieldLayout( checkbox, {
+					align: 'inline',
+					label: $label ? $label.contents() : undefined,
+					title: title
+				} )
+			);
+			target.checkboxesByName[ name ] = checkbox;
+		} );
+		this.$otherFields = $checkboxes.find( 'input[type!=checkbox]' );
 	}
 };
 
@@ -1358,14 +1424,29 @@ ve.init.mw.ArticleTarget.prototype.startSave = function ( saveOptions ) {
  * @return {Object} Form data for submission to the MediaWiki action=edit UI
  */
 ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
-	var fields = {
-		wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
-		wpCaptchaId: this.captcha && this.captcha.id,
-		wpCaptchaWord: this.captcha && this.captcha.input.getValue()
-	};
+	var name,
+		fields = {
+			wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
+			wpCaptchaId: this.captcha && this.captcha.id,
+			wpCaptchaWord: this.captcha && this.captcha.input.getValue()
+		};
 	if ( this.recreating ) {
 		fields.wpRecreate = true;
 	}
+
+	for ( name in this.checkboxesByName ) {
+		if ( this.checkboxesByName[ name ].isSelected() ) {
+			fields[ name ] = this.checkboxesByName[ name ].getValue();
+		}
+	}
+	this.$otherFields.each( function () {
+		var $this = $( this ),
+			name = $this.prop( 'name' );
+		if ( name ) {
+			fields[ name ] = $this.val();
+		}
+	} );
+
 	return fields;
 };
 
@@ -1705,7 +1786,9 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
  */
 ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 	return {
-		saveButtonLabel: this.getSaveButtonLabel()
+		saveButtonLabel: this.getSaveButtonLabel(),
+		checkboxFields: this.checkboxFields,
+		checkboxesByName: this.checkboxesByName
 	};
 };
 
