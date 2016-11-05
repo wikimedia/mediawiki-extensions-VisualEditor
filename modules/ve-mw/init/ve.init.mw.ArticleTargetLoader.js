@@ -38,7 +38,8 @@
 		(
 			mw.user.options.get( 'visualeditor-newwikitext' ) ||
 			new mw.Uri().query.veaction === 'editsource'
-		)
+		) &&
+		mw.loader.getState( 'ext.visualEditor.mwwikitext' )
 	) {
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
