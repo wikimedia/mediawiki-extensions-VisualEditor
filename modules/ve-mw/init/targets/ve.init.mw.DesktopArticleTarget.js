@@ -56,7 +56,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	};
 	this.scrollTop = null;
 	this.currentUri = currentUri;
-	this.section = currentUri.query.vesection !== undefined ? +currentUri.query.vesection : null;
+	this.section = currentUri.query.section !== undefined ? +currentUri.query.section : null;
 	if ( $( '#wpSummary' ).length ) {
 		this.initialEditSummary = $( '#wpSummary' ).val();
 	} else {
@@ -1302,8 +1302,8 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		if ( 'veaction' in uri.query ) {
 			delete uri.query.veaction;
 		}
-		if ( 'vesection' in uri.query ) {
-			delete uri.query.vesection;
+		if ( 'section' in uri.query ) {
+			delete uri.query.section;
 		}
 		if ( 'action' in uri.query && $( '#wpTextbox1' ).length === 0 ) {
 			delete uri.query.action;

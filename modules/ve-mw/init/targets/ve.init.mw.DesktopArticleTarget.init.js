@@ -533,11 +533,7 @@
 					// (bug 54259)
 					if ( !$( '#ca-view-foreign' ).length ) {
 						$editLink
-							.attr( 'href', function ( i, val ) {
-								return new mw.Uri( veEditUri ).extend( {
-									vesection: new mw.Uri( val ).query.section
-								} );
-							} )
+							.attr( 'href', new mw.Uri( veEditUri ) )
 							.addClass( 'mw-editsection-visualeditor' );
 
 						if ( conf.tabPosition === 'before' ) {
@@ -676,7 +672,7 @@
 					return target;
 				} );
 			} else {
-				section = +( new mw.Uri( e.target.href ).query.vesection );
+				section = +( new mw.Uri( e.target.href ).query.section );
 				targetPromise = targetPromise.then( function ( target ) {
 					target.section = section;
 					return target;
@@ -812,7 +808,7 @@
 
 	$( function () {
 		var showWikitextWelcome = true,
-			section = uri.query.vesection !== undefined ? uri.query.vesection : null,
+			section = uri.query.section !== undefined ? uri.query.section : null,
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
 			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,
@@ -832,7 +828,7 @@
 				uri.query.preloadtitle === undefined &&
 				uri.query.preloadparams === undefined &&
 				uri.query.veswitched === undefined
-				// Known-good parameters: edit, veaction, section, vesection
+				// Known-good parameters: edit, veaction, section
 				// TODO: other params too? See identical list in VisualEditor.hooks.php)
 			) {
 				if (
