@@ -17,7 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode() {
-	var isError;
+	var isError, $image;
 	// Parent constructor
 	ve.ce.MWInlineImageNode.super.apply( this, arguments );
 
@@ -27,20 +27,20 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode() {
 		this.$element = $( '<a>' )
 			.addClass( 'new' )
 			.text( this.model.getFilename() );
-		this.$image = $( '<img>' );
+		$image = $( [] );
 	} else {
 		if ( this.model.getAttribute( 'isLinked' ) ) {
 			this.$element = $( '<a>' ).addClass( 'image' );
-			this.$image = $( '<img>' ).appendTo( this.$element );
+			$image = $( '<img>' ).appendTo( this.$element );
 		} else {
-			this.$element = this.$image = $( '<img>' ).appendTo( this.$element );
+			this.$element = $image = $( '<img>' ).appendTo( this.$element );
 		}
 	}
 
 	// Mixin constructors
-	ve.ce.MWImageNode.call( this, this.$element, this.$image );
+	ve.ce.MWImageNode.call( this, this.$element, $image );
 
-	this.$image
+	$image
 		.attr( 'src', this.getResolvedAttribute( 'src' ) )
 		.attr( 'width', this.model.getAttribute( 'width' ) )
 		.attr( 'height', this.model.getAttribute( 'height' ) );
@@ -95,6 +95,9 @@ ve.ce.MWInlineImageNode.prototype.updateClasses = function () {
  * @inheritdoc
  */
 ve.ce.MWInlineImageNode.prototype.onAttributeChange = function ( key, from, to ) {
+	// Mixin method
+	ve.ce.MWImageNode.prototype.onAttributeChange.apply( this, arguments );
+
 	if ( key === 'height' || key === 'width' ) {
 		to = parseInt( to, 10 );
 	}

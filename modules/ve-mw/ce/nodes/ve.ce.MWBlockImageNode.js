@@ -17,7 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
-	var type, isError;
+	var type, isError, $image;
 
 	// Parent constructor
 	ve.ce.MWBlockImageNode.super.apply( this, arguments );
@@ -35,19 +35,20 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	//       <img> this.$image
 	//     <figcaption> this.caption.view.$element
 
-	// Build DOM:
-	this.$image = $( '<img>' )
-		.attr( 'src', this.getResolvedAttribute( 'src' ) );
 
+	// Build DOM:
 	if ( isError ) {
+		$image = $( [] );
 		this.$a = $( '<a>' )
 			.addClass( 'new' )
 			.text( this.model.getFilename() );
 	} else {
+		$image = $( '<img>' )
+			.attr( 'src', this.getResolvedAttribute( 'src' ) );
 		this.$a = $( '<a>' )
 			.addClass( 'image' )
 			.attr( 'href', this.getResolvedAttribute( 'href' ) )
-			.append( this.$image );
+			.append( $image );
 	}
 
 	this.$element
@@ -63,12 +64,12 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 		// type. The model deals with converting it
 		.attr( 'typeof', this.typeToRdfa[ type ] );
 
+	// Mixin constructors
+	ve.ce.MWImageNode.call( this, this.$element, $image );
+
 	this.updateCaption();
 
 	this.updateSize();
-
-	// Mixin constructors
-	ve.ce.MWImageNode.call( this, this.$element, this.$image );
 };
 
 /* Inheritance */
@@ -265,6 +266,9 @@ ve.ce.MWBlockImageNode.prototype.onSetup = function () {
  * @inheritdoc
  */
 ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) {
+	// Mixin method
+	ve.ce.MWImageNode.prototype.onAttributeChange.apply( this, arguments );
+
 	if ( key === 'height' || key === 'width' ) {
 		to = parseInt( to, 10 );
 	}
