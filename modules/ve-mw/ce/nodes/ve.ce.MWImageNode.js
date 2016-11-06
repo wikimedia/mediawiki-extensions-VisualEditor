@@ -79,7 +79,17 @@ ve.ce.MWImageNode.static.getDescription = function ( model ) {
  * @param {string} from Old value
  * @param {string} to New value
  */
-ve.ce.MWImageNode.prototype.onAttributeChange = function () {};
+ve.ce.MWImageNode.prototype.onAttributeChange = function () {
+	this.update();
+};
+
+/**
+ * @inheritdoc ve.ce.GeneratedContentNode
+ */
+ve.ce.MWImageNode.prototype.onGeneratedContentNodeUpdate = function () {
+	// Do nothing to avoid re-rendering every time the caption is changed.
+	// Call update inside onAttributeChange instead.
+};
 
 /**
  * @inheritdoc ve.ce.GeneratedContentNode

@@ -17,7 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
-	var type, isError, $image;
+	var type, isError, $image, $focusable;
 
 	// Parent constructor
 	ve.ce.MWBlockImageNode.super.apply( this, arguments );
@@ -40,6 +40,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 		this.$a = $( '<a>' )
 			.addClass( 'new' )
 			.text( this.model.getFilename() );
+		$focusable = this.$a;
 	} else {
 		$image = $( '<img>' )
 			.attr( 'src', this.getResolvedAttribute( 'src' ) );
@@ -47,6 +48,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 			.addClass( 'image' )
 			.attr( 'href', this.getResolvedAttribute( 'href' ) )
 			.append( $image );
+		$focusable = $image;
 	}
 
 	this.$element
@@ -63,7 +65,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 		.attr( 'typeof', this.model.getRdfa() );
 
 	// Mixin constructors
-	ve.ce.MWImageNode.call( this, this.$element, $image );
+	ve.ce.MWImageNode.call( this, $focusable, $image );
 
 	this.updateCaption();
 

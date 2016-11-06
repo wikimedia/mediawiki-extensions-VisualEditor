@@ -6,6 +6,11 @@
  */
 
 /* Override paragraph margins inside of captions */
-.ve-ce-mwBlockImageNode figcaption p {
+.ve-ce-mwBlockImageNode > figcaption p {
 	margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.ve-ce-mwBlockImageNode > figcaption > .magnify {
+	cursor: default;
+	pointer-events: none;
 }
