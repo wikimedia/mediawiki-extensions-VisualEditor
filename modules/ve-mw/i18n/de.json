@@ -145,7 +145,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Standard",
 	"visualeditor-dialog-meta-settings-index-disable": "Nein",
 	"visualeditor-dialog-meta-settings-index-force": "Ja",
-	"visualeditor-dialog-meta-settings-index-help": "Du kannst Suchmaschinen zwingen, diese Seite in ihren relevanten Ergebnissen aufzulisten oder nicht.",
+	"visualeditor-dialog-meta-settings-index-help": "Du kannst Suchmaschinen zwingen, diese Seite in ihren relevanten Ergebnissen aufzulisten oder nicht. Diese Option beeinflusst nicht die Suche in der Website.",
 	"visualeditor-dialog-meta-settings-index-label": "Diese Seite von Suchmaschinen indexieren lassen",
 	"visualeditor-dialog-meta-settings-label": "Seiteneinstellungen",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Standard",

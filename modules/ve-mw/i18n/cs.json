@@ -19,7 +19,8 @@
 			"Kusavica",
 			"Dvorapa",
 			"Walter Klosse",
-			"Marek Pavlica"
+			"Marek Pavlica",
+			"Teslaton"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
@@ -232,7 +233,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Podnadpis 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Podnadpis 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Podnadpis 4",
-	"visualeditor-generating-wikitext-progress": "Generuji wikitextu",
+	"visualeditor-generating-wikitext-progress": "Generuji wikitext",
 	"visualeditor-languages-tool": "Jazyky",
 	"visualeditor-linkinspector-button-link-external": "Externí odkaz",
 	"visualeditor-linkinspector-button-link-internal": "Hledání stránek",
@@ -332,7 +333,6 @@
 	"visualeditor-settings-tool": "Nastavení stránky",
 	"visualeditor-shortcuts-insert": "Vložit",
 	"visualeditor-special-characters-group-other": "Často používané",
-	"visualeditor-timeout": "Zdá se, že tento editor není momentálně dostupný. Chcete místo toho editovat zdrojový kód?",
 	"visualeditor-toload": "Editor se nyní načte. Pokud tuto zprávu stále vidíte po několika sekundách, prosím [$1 obnovte stránku].",
 	"visualeditor-toolbar-savedialog": "Uložit stránku",
 	"visualeditor-toolbar-savedialog-short": "Uložit",
