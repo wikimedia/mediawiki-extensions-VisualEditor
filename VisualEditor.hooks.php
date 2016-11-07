@@ -336,17 +336,6 @@ class VisualEditorHooks {
 						$user->getOption( 'visualeditor-tabs' ) === 'multi-tab'
 					)
 				) {
-					if (
-						$config->get( 'VisualEditorEnableWikitext' ) &&
-						$user->getOption( 'visualeditor-newwikitext' )
-					) {
-						$parsed = wfParseUrl( wfExpandUrl( $editTab['href'] ) );
-						$q = wfCgiToArray( $parsed['query'] );
-						unset( $q['action'] );
-						$q['veaction'] = 'editsource';
-						$parsed['query'] = wfArrayToCgi( $q );
-						$editTab['href'] = wfAssembleUrl( $parsed );
-					}
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
 						$editTab['class'] .= ' collapsible';
@@ -468,25 +457,6 @@ class VisualEditorHooks {
 			$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
 				$tabMessages['editsectionsource'] : 'editsection';
 			$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
-		}
-
-		if (
-			$config->get( 'VisualEditorEnableWikitext' ) &&
-			$user->getOption( 'visualeditor-newwikitext' ) &&
-			(
-				!$config->get( 'VisualEditorUseSingleEditTab' ) ||
-				$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt' ||
-				$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
-				(
-					$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
-					$editor === 'wikitext'
-				)
-			)
-		) {
-			$result['editsection']['query'] = [
-				'veaction' => 'editsource',
-				'section' => $section
-			];
 		}
 
 		// Exit if we're using the single edit tab.

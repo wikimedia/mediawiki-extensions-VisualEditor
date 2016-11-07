@@ -1003,6 +1003,16 @@
 				mw.libs.ve.setEditorPreference( 'wikitext' );
 			}
 
+			// NWE
+			if ( init.isWikitextAvailable && isOnlyTabWikitext() ) {
+				$( '.mw-editsection a, #ca-edit a' ).each( function () {
+					var uri = new mw.Uri( $( this ).attr( 'href' ) );
+					delete uri.query.action;
+					uri.query.veaction = 'editsource';
+					$( this ).attr( 'href', uri.toString() );
+				} );
+			}
+
 			// Set up the tabs appropriately if the user has VE on
 			if ( init.isAvailable && userPrefPreferShow ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
