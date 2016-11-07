@@ -152,7 +152,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Default",
 	"visualeditor-dialog-meta-settings-index-disable": "No",
 	"visualeditor-dialog-meta-settings-index-force": "Yes",
-	"visualeditor-dialog-meta-settings-index-help": "You can force search engines to list this page in their relevant results, or force them to not do so.",
+	"visualeditor-dialog-meta-settings-index-help": "You can force search engines to list this page in their relevant results, or force them to not do so. This option does not affect in-site search.",
 	"visualeditor-dialog-meta-settings-index-label": "Let this page be indexed by search engines",
 	"visualeditor-dialog-meta-settings-label": "Page settings",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Default",
