@@ -15,18 +15,17 @@
  * @mixins ve.ce.MWResizableNode
  *
  * @constructor
- * @param {jQuery} $figure Figure element
- * @param {jQuery} $image Image element
+ * @param {jQuery} $focusable Focusable part of the node
+ * @param {jQuery} $image Image part of the node
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
+ve.ce.MWImageNode = function VeCeMWImageNode( $focusable, $image, config ) {
 	config = ve.extendObject( {
 		enforceMax: false,
 		minDimensions: { width: 1, height: 1 }
 	}, config );
 
 	// Properties
-	this.$figure = $figure;
 	this.$image = $image;
 	// Parent constructor triggers render so this must precede it
 	this.renderedDimensions = null;
@@ -35,8 +34,10 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $figure, $image, config ) {
 	ve.ce.GeneratedContentNode.call( this );
 
 	// Mixin constructors
-	ve.ce.FocusableNode.call( this, this.$figure, config );
-	ve.ce.MWResizableNode.call( this, this.$image, config );
+	ve.ce.FocusableNode.call( this, $focusable, config );
+	if ( this.$image.length ) {
+		ve.ce.MWResizableNode.call( this, this.$image, config );
+	}
 
 	// Events
 	this.model.connect( this, { attributeChange: 'onAttributeChange' } );
