@@ -338,7 +338,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		} else {
 			if ( newDisplayTitle ) {
 				// There's no existing display title but there is a new one, so create
-				// HACK: Putting this at index 0, offset 0 so that it works – bug 61862
+				// HACK: Putting this at index 0, offset 0 so that it works – bug 61862
 				this.metaList.insertMeta( newDisplayTitleItemData, 0, 0 );
 			}
 		}
