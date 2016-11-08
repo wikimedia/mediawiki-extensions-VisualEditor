@@ -1023,12 +1023,7 @@
 					} );
 					// Allow instant switching to edit mode, without refresh
 					$( '#ca-edit' ).on( 'click', function ( e ) {
-						e.preventDefault();
-						if ( isLoading ) {
-							return;
-						}
-						trackActivateStart( { type: 'page', mechanism: 'click' } );
-						activateTarget( isOnlyTabVE() ? 'visual' : 'source' );
+						init.onEditTabClick( isOnlyTabVE() ? 'visual' : 'source', e );
 					} );
 				}
 			}
