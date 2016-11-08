@@ -157,7 +157,7 @@ class VisualEditorHooks {
 			isset( $params['preloadtitle'] ) ||
 			isset( $params['preloadparams'] ) ||
 			isset( $params['veswitched'] );
-			// Known-good parameters: edit, veaction, section, vesection
+			// Known-good parameters: edit, veaction, section
 
 		$params['venoscript'] = '1';
 		$url = wfScript() . '?' . wfArrayToCgi( $params );
@@ -485,7 +485,7 @@ class VisualEditorHooks {
 		) {
 			$result['editsection']['query'] = [
 				'veaction' => 'editsource',
-				'vesection' => $section
+				'section' => $section
 			];
 		}
 
@@ -507,7 +507,7 @@ class VisualEditorHooks {
 				'attribs' => $result['editsection']['attribs'] + [
 					'class' => 'mw-editsection-visualeditor'
 				],
-				'query' => [ 'veaction' => 'edit', 'vesection' => $section ],
+				'query' => [ 'veaction' => 'edit', 'section' => $section ],
 				'options' => [ 'noclasses', 'known' ]
 			];
 
@@ -976,7 +976,7 @@ class VisualEditorHooks {
 	 * @return bool Always true
 	 */
 	public static function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
-		array_push( $redirectParams, 'veaction', 'vesection' );
+		array_push( $redirectParams, 'veaction' );
 
 		return true;
 	}
