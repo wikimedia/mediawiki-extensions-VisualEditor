@@ -112,7 +112,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Vaikimisi",
 	"visualeditor-dialog-meta-settings-index-disable": "Ei",
 	"visualeditor-dialog-meta-settings-index-force": "Jah",
-	"visualeditor-dialog-meta-settings-index-help": "Saad nõuda, et otsimootorid näitaks või vastupidi ei näitaks seda lehekülge asjakohaste otsitulemuste hulgas.",
+	"visualeditor-dialog-meta-settings-index-help": "Saad nõuda, et otsimootorid näitaks või vastupidi ei näitaks seda lehekülge asjakohaste otsitulemuste hulgas. See suvand ei mõjuta saidisisest otsingut.",
 	"visualeditor-dialog-meta-settings-index-label": "Luba otsimootoritel seda lehekülge indekseerida",
 	"visualeditor-dialog-meta-settings-label": "Lehekülje sätted",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Vaikimisi",

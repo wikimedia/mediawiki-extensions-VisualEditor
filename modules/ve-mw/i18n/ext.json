@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Crucifunked"
+			"Crucifunked",
+			"Fitoschido"
 		]
 	},
+	"visualeditor-ca-editsource": "Eital coigu",
+	"visualeditor-ca-editsource-section": "eital coigu",
 	"visualeditor-descriptionpagelink": "Project:EitolVisual"
 }

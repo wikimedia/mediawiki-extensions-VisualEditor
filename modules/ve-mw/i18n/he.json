@@ -147,7 +147,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "בררת המחדל",
 	"visualeditor-dialog-meta-settings-index-disable": "לא",
 	"visualeditor-dialog-meta-settings-index-force": "כן",
-	"visualeditor-dialog-meta-settings-index-help": "אפשר לכפות על מנועי החיפוש להציג או לא להציג את הדף בתוצאות הרלוונטית.",
+	"visualeditor-dialog-meta-settings-index-help": "אפשר לכפות על מנועי החיפוש להציג או לא להציג את הדף בתוצאות הרלוונטיות. אפשרות זו אינה משפיעה על מנוע החיפוש הפנימי של האתר.",
 	"visualeditor-dialog-meta-settings-index-label": "לאפשר למנועי חיפוש למפתח את הדף הזה",
 	"visualeditor-dialog-meta-settings-label": "הגדרות דף",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "בררת המחדל",

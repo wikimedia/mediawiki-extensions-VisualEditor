@@ -180,7 +180,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Par défaut",
 	"visualeditor-dialog-meta-settings-index-disable": "Non",
 	"visualeditor-dialog-meta-settings-index-force": "Oui",
-	"visualeditor-dialog-meta-settings-index-help": "Vous pouvez forcer les moteurs de recherche à lister cette page dans leurs résultats significatifs ou les forcer à ne pas le faire.",
+	"visualeditor-dialog-meta-settings-index-help": "Vous pouvez forcer les moteurs de recherche à lister cette page dans leurs résultats significatifs ou les forcer à ne pas le faire. Cette option n’affecte pas la recherche interne au site.",
 	"visualeditor-dialog-meta-settings-index-label": "Laisser cette page être indexée par les moteurs de recherche",
 	"visualeditor-dialog-meta-settings-label": "Paramètres de la page",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Par défaut",

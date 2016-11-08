@@ -145,7 +145,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Por defecto",
 	"visualeditor-dialog-meta-settings-index-disable": "Non",
 	"visualeditor-dialog-meta-settings-index-force": "Si",
-	"visualeditor-dialog-meta-settings-index-help": "Pode forzar que os motores de busca listen esta páxina nos seus resultados relevantes; tamén pode forzalos a que non fagan tal cousa.",
+	"visualeditor-dialog-meta-settings-index-help": "Pode forzar que os motores de busca listen esta páxina nos seus resultados relevantes; tamén pode forzalos a que non fagan tal cousa. Esta opción non afecta á busca interna do sitio.",
 	"visualeditor-dialog-meta-settings-index-label": "Permitir a indexación desta páxina por parte dos motores de procuras",
 	"visualeditor-dialog-meta-settings-label": "Configuración da páxina",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Por defecto",

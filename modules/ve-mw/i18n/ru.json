@@ -34,7 +34,8 @@
 			"Sealle",
 			"Mailman",
 			"Туллук",
-			"Irus"
+			"Irus",
+			"Kareyac"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы со сервиса Parsoid.",
@@ -159,7 +160,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "По умолчанию",
 	"visualeditor-dialog-meta-settings-index-disable": "Нет",
 	"visualeditor-dialog-meta-settings-index-force": "Да",
-	"visualeditor-dialog-meta-settings-index-help": "Вы можете принудительно указать поисковым движкам, чтобы они включали эту страницу в свои результаты по релевантным запросам, или наоборот, не делали этого.",
+	"visualeditor-dialog-meta-settings-index-help": "Вы можете принудительно указать поисковым движкам, чтобы они включали эту страницу в свои результаты по релевантным запросам, или наоборот, не делали этого. Этот параметр не влияет на поиск по сайту.",
 	"visualeditor-dialog-meta-settings-index-label": "Разрешить поисковым системам индексировать эту страницу",
 	"visualeditor-dialog-meta-settings-label": "Параметры страницы",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "По умолчанию",
