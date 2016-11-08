@@ -197,7 +197,10 @@ ve.init.mw.ArticleTarget.prototype.setMode = function () {
 
 	if ( this.mode !== oldMode ) {
 		this.updateTabs( true );
-		mw.libs.ve.setEditorPreference( this.mode === 'visual' ? 'visualeditor' : 'wikitext' );
+		if ( mw.libs.ve.setEditorPreference ) {
+			// only set up by DAT.init
+			mw.libs.ve.setEditorPreference( this.mode === 'visual' ? 'visualeditor' : 'wikitext' );
+		}
 	}
 };
 
