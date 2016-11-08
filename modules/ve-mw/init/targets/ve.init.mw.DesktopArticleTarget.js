@@ -41,9 +41,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.recreating = false;
 	this.activatingDeferred = null;
 	this.toolbarSetupDeferred = null;
-	this.checkboxFields = null;
-	this.checkboxesByName = null;
-	this.$otherFields = null;
 	this.suppressNormalStartupDialogs = false;
 	this.editingTabDialog = null;
 
@@ -313,8 +310,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
-	var $checkboxes, defaults, data, windowManager,
+ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
+	var windowManager,
 		target = this;
 
 	// Parent method
@@ -353,66 +350,6 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function ( response ) {
 			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
 		}
 		this.suppressNormalStartupDialogs = true;
-	}
-
-	data = response ? ( response.visualeditor || response.visualeditoredit ) : {};
-
-	this.checkboxFields = [];
-	this.checkboxesByName = {};
-	this.$otherFields = $( [] );
-	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
-		$( '#content #firstHeading' ).text(
-			mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText()
-		);
-	}
-
-	if ( data.checkboxes ) {
-		defaults = {};
-		$( '.editCheckboxes input' ).each( function () {
-			defaults[ this.name ] = this.checked;
-		} );
-
-		$checkboxes = $( '<div>' ).html( ve.getObjectValues( data.checkboxes ).join( '' ) );
-		$checkboxes.find( 'input[type=checkbox]' ).each( function () {
-			var $label, title, checkbox,
-				$this = $( this ),
-				name = $this.attr( 'name' ),
-				id = $this.attr( 'id' );
-
-			if ( !name ) {
-				// This really shouldn't happen..
-				return;
-			}
-
-			// Label with for=id
-			if ( id ) {
-				$label = $checkboxes.find( 'label[for=' + id + ']' );
-			}
-			// Label wrapped input
-			if ( !$label ) {
-				$label = $this.closest( 'label' );
-			}
-			if ( $label ) {
-				title = $label.attr( 'title' );
-				$label.find( 'a' ).attr( 'target', '_blank' );
-			}
-			checkbox = new OO.ui.CheckboxInputWidget( {
-				value: $this.attr( 'value' ),
-				selected: defaults[ name ] !== undefined ? defaults[ name ] : $this.prop( 'checked' ),
-				classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
-			} );
-			// HACK: CheckboxInputWidget doesn't support access keys
-			checkbox.$input.attr( 'accesskey', $( this ).attr( 'accesskey' ) );
-			target.checkboxFields.push(
-				new OO.ui.FieldLayout( checkbox, {
-					align: 'inline',
-					label: $label ? $label.contents() : undefined,
-					title: title
-				} )
-			);
-			target.checkboxesByName[ name ] = checkbox;
-		} );
-		this.$otherFields = $checkboxes.find( 'input[type!=checkbox]' );
 	}
 };
 
@@ -1012,31 +949,6 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 };
 
 /**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.getSaveFields = function () {
-	var name, fieldValues = {};
-
-	for ( name in this.checkboxesByName ) {
-		if ( this.checkboxesByName[ name ].isSelected() ) {
-			fieldValues[ name ] = this.checkboxesByName[ name ].getValue();
-		}
-	}
-	this.$otherFields.each( function () {
-		var $this = $( this ),
-			name = $this.prop( 'name' );
-		if ( name ) {
-			fieldValues[ name ] = $this.val();
-		}
-	} );
-
-	return ve.extendObject(
-		fieldValues,
-		ve.init.mw.DesktopArticleTarget.super.prototype.getSaveFields.call( this )
-	);
-};
-
-/**
  * Switch to viewing mode.
  *
  * @return {jQuery.Promise} Promise resolved when surface is torn down
@@ -1117,16 +1029,9 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
-	return ve.extendObject(
-		{},
-		// Parent method
-		ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.call( this ),
-		{
-			editSummary: this.initialEditSummary,
-			checkboxFields: this.checkboxFields,
-			checkboxesByName: this.checkboxesByName
-		}
-	);
+	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.call( this );
+	data.editSummary = this.initialEditSummary;
+	return data;
 };
 
 /**
