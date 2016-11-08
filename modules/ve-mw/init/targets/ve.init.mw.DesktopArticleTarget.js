@@ -1003,7 +1003,9 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 
 /**
  * Modify tabs in the skin to support in-place editing.
- * Edit tab is bound outside the module in mw.DesktopArticleTarget.init.
+ *
+ * 'Read' and 'Edit source' (when not using single edit tab) bound here,
+ * 'Edit' and single edit tab are bound in mw.DesktopArticleTarget.init.
  *
  * @method
  */
@@ -1015,19 +1017,21 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 			.on( 'click', this.onViewTabClick.bind( this ) );
 
 	}
-	$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
-		if ( !target.active || !ve.isUnmodifiedLeftClick( e ) ) {
-			return;
-		}
-
-		if ( target.getSurface() && !target.deactivating && target.mode !== 'source' ) {
-			target.editSource();
-
-			if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
-				e.preventDefault();
+	if ( !mw.libs.ve.isSingleEditTab ) {
+		$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
+			if ( !target.active || !ve.isUnmodifiedLeftClick( e ) ) {
+				return;
 			}
-		}
-	} );
+
+			if ( target.getSurface() && !target.deactivating && target.mode !== 'source' ) {
+				target.editSource();
+
+				if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
+					e.preventDefault();
+				}
+			}
+		} );
+	}
 
 	mw.hook( 've.skinTabSetupComplete' ).fire();
 };

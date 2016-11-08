@@ -678,6 +678,8 @@
 	autodisable = Number( mw.user.options.get( 'visualeditor-autodisable' ) );
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
+	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
+
 	function isOnlyTabVE() {
 		return conf.singleEditTab && (
 			tabPreference === 'prefer-ve' || (
