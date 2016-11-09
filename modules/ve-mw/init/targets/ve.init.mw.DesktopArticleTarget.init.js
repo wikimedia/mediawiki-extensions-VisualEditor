@@ -395,12 +395,12 @@
 			plugins.push( plugin );
 		},
 
-		setupSkin: function () {
-			init.setupTabs();
-			init.setupSectionLinks();
+		setupMultiTabSkin: function () {
+			init.setupMultiTabs();
+			init.setupMultiSectionLinks();
 		},
 
-		setupTabs: function () {
+		setupMultiTabs: function () {
 			var caVeEdit,
 				action = pageExists ? 'edit' : 'create',
 				pTabsId = $( '#p-views' ).length ? 'p-views' : 'p-cactions',
@@ -498,7 +498,7 @@
 			}
 		},
 
-		setupSectionLinks: function () {
+		setupMultiSectionLinks: function () {
 			var $editsections = $( '#mw-content-text .mw-editsection' ),
 				bodyDir = $( 'body' ).css( 'direction' );
 
@@ -1008,7 +1008,7 @@
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
 				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
 					// … set the skin up with both tabs and both section edit links.
-					init.setupSkin();
+					init.setupMultiTabSkin();
 				} else if (
 					pageCanLoadEditor && (
 						( init.isVisualAvailable && isOnlyTabVE() ) ||
