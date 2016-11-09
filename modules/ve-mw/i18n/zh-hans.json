@@ -160,7 +160,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "默认",
 	"visualeditor-dialog-meta-settings-index-disable": "否",
 	"visualeditor-dialog-meta-settings-index-force": "是",
-	"visualeditor-dialog-meta-settings-index-help": "您可以强制搜索引擎在相关搜索结果列出此页面，或强制它们不要列出。",
+	"visualeditor-dialog-meta-settings-index-help": "您可以强制搜索引擎在相关搜索结果列出此页面，或强制它们不要列出。此选项不影响站内搜索。",
 	"visualeditor-dialog-meta-settings-index-label": "让该页面被搜索引擎索引",
 	"visualeditor-dialog-meta-settings-label": "页面设置",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "默认",
