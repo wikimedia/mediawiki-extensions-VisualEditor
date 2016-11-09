@@ -91,7 +91,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 		this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
 		dir = this.constructor.static.dir || data.dir;
-		this.input.setRTL( dir === 'rtl' );
+		this.input.setDir( dir );
 	}, this );
 };
 
