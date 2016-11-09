@@ -907,7 +907,7 @@ ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, stat
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.serializeFail.apply( this, arguments );
 
-	alert( ve.msg( 'visualeditor-serializeerror', status ) );
+	OO.ui.alert( ve.msg( 'visualeditor-serializeerror', status ) );
 
 	this.getSurface().getDialogs().closeWindow( 'wikitextswitchconfirm' );
 	this.resetDocumentOpacity();

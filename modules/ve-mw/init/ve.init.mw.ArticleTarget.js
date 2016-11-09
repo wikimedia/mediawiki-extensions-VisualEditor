@@ -673,7 +673,8 @@ ve.init.mw.ArticleTarget.prototype.showChangesFail = function ( jqXHR, status ) 
 	this.diffing = false;
 	this.emit( 'showChangesError' );
 
-	alert( ve.msg( 'visualeditor-differror', status ) );
+	OO.ui.alert( ve.msg( 'visualeditor-differror', status ) );
+
 	this.saveDialog.popPending();
 };
 
