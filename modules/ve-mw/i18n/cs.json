@@ -151,7 +151,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Výchozí",
 	"visualeditor-dialog-meta-settings-index-disable": "Ne",
 	"visualeditor-dialog-meta-settings-index-force": "Ano",
-	"visualeditor-dialog-meta-settings-index-help": "Můžete přinutit internetové vyhledávače, aby tuto stránku uváděli ve výsledcích vyhledávání, nebo jim to zakázat.",
+	"visualeditor-dialog-meta-settings-index-help": "Můžete přinutit internetové vyhledávače, aby tuto stránku uváděli ve výsledcích vyhledávání, nebo jim to zakázat. Toto však nemá vliv na místní vyhledávač.",
 	"visualeditor-dialog-meta-settings-index-label": "Dovolit vyhledávačům indexovat tuto stránku",
 	"visualeditor-dialog-meta-settings-label": "Nastavení stránky",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Výchozí",

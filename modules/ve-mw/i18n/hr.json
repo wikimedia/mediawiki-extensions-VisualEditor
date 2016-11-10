@@ -17,7 +17,7 @@
 	"tooltip-ca-ve-edit": "Uredi ovu stranicu",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",
 	"visualeditor-beta-label": "beta",
-	"visualeditor-beta-warning": "Možete bilo kada prebaciti na uređivač wikiteksta klikom na karticu \"$1\", sačuvavši pri tome učinjene izmjene. U slučaju problema, molimo prijavite ih.",
+	"visualeditor-beta-warning": "Ako prilikom uređivanja naiđete na bilo kakve tehničke poteškoće, molimo prijavite ih.",
 	"visualeditor-browserwarning": "Koristite preglednik koji VisualEditor ne podržava.",
 	"visualeditor-ca-createlocaldescriptionsource": "dodaj izvor lokalnog opisa",
 	"visualeditor-ca-createsource": "Započni kôd",
