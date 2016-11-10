@@ -102,6 +102,10 @@ ve.init.mw.Target.static.importRules = {
 			// Nodes
 			'article', 'section', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
+		htmlBlacklist: {
+			remove: [ 'sup.reference:not( [typeof] )' ],
+			unwrap: [ 'fieldset', 'legend' ]
+		},
 		removeOriginalDomElements: true,
 		nodeSanitization: true
 	},
