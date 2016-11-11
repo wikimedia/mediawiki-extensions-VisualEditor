@@ -1024,9 +1024,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () {
 	this.toolbar.$actions.append( this.toolbarSaveButton.$element );
-	// Make the toolbar recalculate its sizes for narrow/wide switching.
-	// This really should not be necessary.
-	this.toolbar.narrowThreshold = this.toolbar.$group.width() + this.toolbar.$actions.width();
 };
 
 /**
