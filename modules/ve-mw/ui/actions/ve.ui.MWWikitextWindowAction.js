@@ -51,7 +51,7 @@ ve.ui.MWWikitextWindowAction.prototype.open = function ( name, data, action ) {
 	originalFragment = fragment;
 	originalDocument = originalFragment.getDocument();
 	coveringRange = originalFragment.getSelection().getCoveringRange();
-	if ( coveringRange ) {
+	if ( coveringRange && !coveringRange.isCollapsed() ) {
 		tempDocument = surface.getModel().getDocument().shallowCloneFromRange( coveringRange );
 		rangeInDocument = tempDocument.originalRange;
 	} else {
