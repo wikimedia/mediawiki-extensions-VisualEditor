@@ -601,7 +601,9 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText ) {
-	var errorInfo, confirmPromptMessage;
+	var errorInfo, confirmPromptMessage,
+		target = this;
+
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
@@ -637,16 +639,18 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 	}
 
 	if ( confirmPromptMessage ) {
-		if ( confirm( confirmPromptMessage ) ) {
-			this.load();
-		} else if ( !$( '#wpTextbox1' ).length ) {
-			// TODO: Some sort of progress bar?
-			this.switchToWikitextEditor( true, false );
-		} else {
+		OO.ui.confirm( confirmPromptMessage ).done( function ( confirmed ) {
+			if ( confirmed ) {
+				target.load();
+			} else if ( !$( '#wpTextbox1' ).length ) {
+				// TODO: Some sort of progress bar?
+				target.switchToWikitextEditor( true, false );
+			} else {
 			// If we're switching from the wikitext editor, just deactivate
 			// don't try to switch back to it fully, that'd discard changes.
-			this.deactivate( true );
-		}
+				target.deactivate( true );
+			}
+		} );
 	} else {
 		if ( error.statusText !== 'abort' ) {
 			mw.log.warn( 'Failed to find error message', errorText, error );
