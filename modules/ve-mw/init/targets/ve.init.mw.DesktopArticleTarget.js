@@ -1066,8 +1066,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 			.removeClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
 			.removeClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
 		setTimeout( function () {
-			target.toolbar.destroy();
-			target.toolbar = null;
+			// Parent method
+			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( target );
 			deferred.resolve();
 		}, 400 );
 	} );
