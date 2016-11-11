@@ -145,7 +145,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Numatytasis",
 	"visualeditor-dialog-meta-settings-index-disable": "Ne",
 	"visualeditor-dialog-meta-settings-index-force": "Taip",
-	"visualeditor-dialog-meta-settings-index-help": "Jūs galite nustatyti, kad paieškos variklis pateiktų šį puslapį tarp aktualių rezultatų, arba kad nepateiktų.",
+	"visualeditor-dialog-meta-settings-index-help": "Jūs galite nustatyti, kad paieškos variklis pateiktų šį puslapį tarp aktualių rezultatų, arba kad nepateiktų. Šis pasirinkimas nepaveikia vidinės puslapio paieškos.",
 	"visualeditor-dialog-meta-settings-index-label": "Leisti paieškos varikliams indeksuoti šį puslapį",
 	"visualeditor-dialog-meta-settings-label": "Puslapio nustatymai",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Numatytasis",
