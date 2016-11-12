@@ -101,16 +101,6 @@
 		}
 	}
 
-	function handleLoadFailure() {
-		resetLoadingProgress();
-		if ( $( '#wpTextbox1' ).length || mw.config.get( 'wgAction' ) !== 'edit' ) {
-			$( 'html' ).removeClass( 've-activated' );
-			hideLoading();
-		} else {
-			location.href = viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
-		}
-	}
-
 	/**
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
 	 *
@@ -260,8 +250,7 @@
 						modified
 					);
 				} )
-				.done( incrementLoadingProgress )
-				.fail( handleLoadFailure );
+				.done( incrementLoadingProgress );
 		}
 
 		if ( mode === 'visual' ) {
@@ -282,7 +271,6 @@
 				target.on( 'deactivate', function () {
 					active = false;
 				} );
-				target.on( 'loadError', handleLoadFailure );
 				// Detach the loading bar for activation so it doesn't get moved around
 				// and altered, re-attach immediately after
 				init.$loading.detach();
