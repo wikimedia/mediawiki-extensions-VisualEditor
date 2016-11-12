@@ -48,4 +48,4 @@ ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
 			demote: true
 		} );
 	}
-} )();
+}() );

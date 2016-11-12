@@ -123,7 +123,7 @@ ve.ui.toolFactory.register( ve.ui.MWHeading6FormatTool );
 			)
 		);
 	}
-} )();
+}() );
 
 /**
  * MediaWiki UserInterface preformatted tool.

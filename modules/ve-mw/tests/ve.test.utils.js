@@ -85,7 +85,7 @@ ve.test.utils.mwEnvironment = ( function () {
 		setup: setupOverrides,
 		teardown: teardownOverrides
 	} );
-} )();
+}() );
 
 ( function () {
 	var getDomElementSummaryCore = ve.getDomElementSummary;
@@ -112,4 +112,4 @@ ve.test.utils.mwEnvironment = ( function () {
 			return value;
 		} );
 	};
-} )();
+}() );

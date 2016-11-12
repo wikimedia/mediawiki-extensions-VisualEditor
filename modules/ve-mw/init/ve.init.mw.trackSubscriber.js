@@ -149,4 +149,4 @@
 		mw.track( topic, data.duration );
 	} );
 
-} )();
+}() );
