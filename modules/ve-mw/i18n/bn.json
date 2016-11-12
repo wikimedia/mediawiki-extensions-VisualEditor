@@ -122,7 +122,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "পূর্বনির্ধারিত",
 	"visualeditor-dialog-meta-settings-index-disable": "না",
 	"visualeditor-dialog-meta-settings-index-force": "হ্যাঁ",
-	"visualeditor-dialog-meta-settings-index-help": "আপনি অনুসন্ধান ইঞ্জিনকে তাদের প্রাসঙ্গিক ফলাফলে এই পাতা দেখানোর জন্য জোর করতে পারেন,\nঅথবা তাদের না করার জন্য জোর করতে পারেন।",
+	"visualeditor-dialog-meta-settings-index-help": "আপনি অনুসন্ধান ইঞ্জিনকে তাদের প্রাসঙ্গিক ফলাফলে এই পাতা দেখানোর জন্য জোর করতে পারেন,\nঅথবা তাদের না করার জন্য জোর করতে পারেন। এই বিকল্পটি সাইটের অনুসন্ধানে প্রভাব ফেলে না।",
 	"visualeditor-dialog-meta-settings-index-label": "এই পাতাকে অনুসন্ধান ইঞ্জিন দ্বারা সূচীবদ্ধ করতে দিন",
 	"visualeditor-dialog-meta-settings-label": "পাতা সেটিং",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "পূর্বনির্ধারিত",
