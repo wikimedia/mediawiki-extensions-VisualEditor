@@ -207,7 +207,7 @@ ve.ui.wikitextCommandRegistry.register(
 		)
 	);
 
-} )();
+}() );
 
 ve.ui.wikitextCommandRegistry.register(
 	new ve.ui.Command(

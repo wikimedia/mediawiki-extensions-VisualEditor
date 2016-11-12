@@ -15,8 +15,7 @@
 		"mw": false
 	},
 	"rules": {
-		"dot-notation": 0,
-		"wrap-iife": 0,
+		"dot-notation": [ "error", { "allowKeywords": true } ],
 		"valid-jsdoc": 0,
 		"no-alert": "error"
 	}

@@ -24,7 +24,7 @@ ve.ui.sequenceRegistry.register(
 			)
 		);
 	}
-} )();
+}() );
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'numberHash', 'numberWrapOnce', [ { type: 'paragraph' }, '#', ' ' ], 2 )
 );
