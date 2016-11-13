@@ -8,7 +8,8 @@
 			"Mirzali",
 			"Se4598",
 			"Kumkumuk",
-			"Gırd"
+			"Gırd",
+			"1917 Ekim Devrimi"
 		]
 	},
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
@@ -20,6 +21,7 @@
 	"apihelp-visualeditor-param-paction": "Fiili kerdışi rê",
 	"apihelp-visualeditor-param-page": "Ena perer sero fiili kerdışi rê",
 	"apihelp-visualeditor-param-pst": "Verdê tasaruf da Parsoidi transforma wiki rışiyayış (=paction parsefragment).",
+	"apihelp-visualeditor-param-section": "Çewder kamci hereket dera",
 	"apihelp-visualeditor-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
 	"apihelp-visualeditor-param-wikitext": "Wikimetini bırış Parsoidi çerxê HTMLi kı",
 	"apihelp-visualeditoredit-description": "Perra MediaWiki HTML5i dı qeyd kı (serwisa Parsoidi dı wikinetin çerx biyo).",
@@ -32,7 +34,9 @@
 	"apihelp-visualeditoredit-param-minor": "Yu desmala werkek timar kerê",
 	"apihelp-visualeditoredit-param-needcheck": "Qeyd kersış dı,  aredê revizyonan dı problem zi beno. Ena parametreyer eyar kı. Ena etiket do nizama netice bo.",
 	"apihelp-visualeditoredit-param-oldid": "Numrey revizyoni bıkarnê. Peyên  beno hesıbyaye revizyon. Qandé perda newi 0 i bıploğnê",
+	"apihelp-visualeditoredit-param-paction": "Performansa hereketi",
 	"apihelp-visualeditoredit-param-page": "Ena perer sero fiili kerdışi rê",
+	"apihelp-visualeditoredit-param-section": "Çewdee kamci hereket dera",
 	"apihelp-visualeditoredit-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
 	"apihelp-visualeditoredit-param-summary": "Xulasay vurnayışi",
 	"tooltip-ca-createsource": "Çıme kodê ena perer bıvıraz",
@@ -233,6 +237,7 @@
 	"visualeditor-loaderror-message": "Rovıterê $1 ra data barkerdış dı xeta vıci yê.",
 	"visualeditor-loaderror-title": "Vurnayoğ bar nêbı",
 	"visualeditor-loadwarning": "Rovıteri ra data barkerdış de xeta vıci yê:$1. Wazenê fına bıcerebne?",
+	"visualeditor-loadwarning-noconnect": "Arderiya irtibat nêbı",
 	"visualeditor-loadwarning-token": "Rovıteri ra timara weynayışi  barkerdış de xeta vıci yê:$1. Wazenê fına bıcerebne?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Basit gırey açarne",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN link",
@@ -328,7 +333,6 @@
 	"visualeditor-settings-tool": "Eyarê pele",
 	"visualeditor-shortcuts-insert": "Cı ke",
 	"visualeditor-special-characters-group-other": "Sığ karnayen",
-	"visualeditor-timeout": "Ena timaryayış enewke nêkarêna. Herunda nay şıma qayılê vurnayışê çımey bıkarnê?",
 	"visualeditor-toload": "Editora beno bar. Eger kı ena mesac fına asena se,   [$1 perrer fına bar kı].",
 	"visualeditor-toolbar-savedialog": "Perer qeyd ke",
 	"visualeditor-toolbar-savedialog-short": "Qeyd ke",

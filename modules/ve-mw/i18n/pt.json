@@ -220,7 +220,7 @@
 	"visualeditor-differror": "Erro ao carregar dados do servidor: $1.",
 	"visualeditor-donebutton-tooltip": "Edição concluída",
 	"visualeditor-editconflict": "Não foi possível gravar as suas alterações devido a um conflito de edição. Quer resolver o conflito manualmente?",
-	"visualeditor-editingtabdialog-body": "A wiki {{SITENAME}} agora memoriza o seu editor preferido. Pode trocar os modos de edição à medida que faz alterações e mudar a preferência posteriormente.",
+	"visualeditor-editingtabdialog-body": "A wiki {{SITENAME}} agora memoriza o seu editor preferido. Pode alternar os modos de edição à medida que faz edições e mudar a preferência posteriormente.",
 	"visualeditor-editingtabdialog-ok": "Usar o editor que usei na minha última edição",
 	"visualeditor-editingtabdialog-title": "Separadores de edição",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|aviso|avisos}}",
