@@ -148,17 +148,27 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
 /* Methods */
 
 /**
- * Parse HTML into a document
+ * Parse document string into an HTML document
  *
- * @param {string} html HTML
+ * @param {string} documentString Document
  * @return {HTMLDocument} HTML document
  */
-ve.init.mw.Target.prototype.parseHtml = function ( html ) {
-	var doc = ve.parseXhtml( html );
+ve.init.mw.Target.prototype.parseDocument = function ( documentString ) {
+	var doc;
+	if ( this.mode === 'source' ) {
+		doc = ve.createDocumentFromHtml( '' );
 
-	// Fix relative or missing base URL if needed
-	this.constructor.static.fixBase( doc );
+		documentString.split( '\n' ).forEach( function ( line ) {
+			var p = doc.createElement( 'p' );
+			p.appendChild( doc.createTextNode( line ) );
+			doc.body.appendChild( p );
+		} );
+	} else {
+		doc = ve.parseXhtml( documentString );
 
+		// Fix relative or missing base URL if needed
+		this.constructor.static.fixBase( doc );
+	}
 	return doc;
 };
 
@@ -239,15 +249,38 @@ ve.init.mw.Target.prototype.track = function () {};
 /**
  * @inheritdoc
  */
-ve.init.Target.prototype.createTargetWidget = function ( dmDoc, config ) {
-	return new ve.ui.MWTargetWidget( dmDoc, config );
+ve.init.mw.Target.prototype.createTargetWidget = function ( dmDoc, config ) {
+	if ( this.mode === 'source' ) {
+		// Reset to visual mode for target widgets
+		return new ve.ui.MWTargetWidget( dmDoc, ve.extendObject( {
+			commandRegistry: ve.ui.commandRegistry,
+			sequenceRegistry: ve.ui.sequenceRegistry,
+			dataTransferHandlerFactory: ve.ui.dataTransferHandlerFactory
+		}, config ) );
+	} else {
+		return new ve.ui.MWTargetWidget( dmDoc, config );
+	}
 };
 
 /**
  * @inheritdoc
  */
-ve.init.mw.Target.prototype.createSurface = function () {
-	var surface, surfaceView, $documentNode;
+ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
+	var importRules, surface, surfaceView, $documentNode;
+
+	if ( this.mode === 'source' && !( config && config.inTargetWidget ) ) {
+		importRules = ve.copy( this.constructor.static.importRules );
+		importRules.all = importRules.all || {};
+		// Preserve empty linebreaks on paste in source editor
+		importRules.all.keepEmptyContentBranches = true;
+		config = this.getSurfaceConfig( {
+			commandRegistry: ve.ui.wikitextCommandRegistry,
+			sequenceRegistry: ve.ui.wikitextSequenceRegistry,
+			dataTransferHandlerFactory: ve.ui.wikitextDataTransferHandlerFactory,
+			importRules: importRules
+		} );
+		return new ve.ui.MWDesktopWikitextSurface( dmDoc, config );
+	}
 
 	// Parent method
 	surface = ve.init.mw.Target.super.prototype.createSurface.apply( this, arguments );
@@ -272,11 +305,27 @@ ve.init.mw.Target.prototype.createSurface = function () {
  * @return {ve.dm.Document} Document model
  */
 ve.init.mw.Target.prototype.createModelFromDom = function ( doc ) {
-	var conf = mw.config.get( 'wgVisualEditor' );
-	return ve.dm.converter.getModelFromDom( doc, {
-		lang: conf.pageLanguageCode,
-		dir: conf.pageLanguageDir
-	} );
+	var i, l, children, data,
+		conf = mw.config.get( 'wgVisualEditor' );
+
+	if ( this.mode === 'source' ) {
+		children = doc.body.children;
+		data = [];
+
+		// Wikitext documents are just plain text paragraphs, so we can just do a simple manual conversion.
+		for ( i = 0, l = children.length; i < l; i++ ) {
+			data.push( { type: 'paragraph' } );
+			ve.batchPush( data, children[ i ].textContent.split( '' ) );
+			data.push( { type: '/paragraph' } );
+		}
+		data.push( { type: 'internalList' }, { type: '/internalList' } );
+		return new ve.dm.Document( data, doc, null, null, null, conf.pageLanguageCode, conf.pageLanguageDir );
+	} else {
+		return ve.dm.converter.getModelFromDom( doc, {
+			lang: conf.pageLanguageCode,
+			dir: conf.pageLanguageDir
+		} );
+	}
 };
 
 /**

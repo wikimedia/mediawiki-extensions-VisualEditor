@@ -231,7 +231,7 @@ ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState )
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
-	var toolbar,
+	var toolbar, actionGroups,
 		wasSetup = !!this.toolbar,
 		target = this;
 
@@ -269,6 +269,14 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 				ve.track( 'trace.activate.exit' );
 			}
 		} );
+	}
+
+	if ( this.mode === 'source' ) {
+		// HACK: Replace source button with VE button. This should be via the registry,
+		// or we should have a toggle tool.
+		actionGroups = ve.copy( this.constructor.static.actionGroups );
+		actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
+		this.getActions().setup( actionGroups, surface );
 	}
 };
 
@@ -644,7 +652,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 		OO.ui.confirm( confirmPromptMessage ).done( function ( confirmed ) {
 			if ( confirmed ) {
 				target.load();
-			} else if ( $( '#wpTextbox1' ).length && !mw.libs.ve.isWikitextAvailable ) {
+			} else if ( $( '#wpTextbox1' ).length && !ve.init.target.isModeAvailable( 'source' ) ) {
 				// If we're switching from the wikitext editor, just deactivate
 				// don't try to switch back to it fully, that'd discard changes.
 				target.deactivate( true );
@@ -943,15 +951,18 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
-	if ( !this.getSurface().getModel().hasBeenModified() && !this.fromEditedState ) {
-		this.switchToWikitextEditor( true, false );
-		return;
+	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
+
+	if ( ve.init.target.isModeAvailable( 'source' ) ) {
+		this.switchToWikitextEditor( false, modified );
+	} else if ( !modified ) {
+		this.switchToWikitextEditor( true, modified );
+	} else {
+		this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
+
+		ve.ui.actionFactory.create( 'window', this.getSurface() )
+			.open( 'wikitextswitchconfirm', { target: this } );
 	}
-
-	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
-
-	ve.ui.actionFactory.create( 'window', this.getSurface() )
-		.open( 'wikitextswitchconfirm', { target: this } );
 };
 
 /**
@@ -1237,7 +1248,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
  * @param {Event} e Native event object
  */
 ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
-	var newUri, veaction;
+	var veaction;
 
 	if ( !this.verifyPopState( e.state ) ) {
 		// Ignore popstate events fired for states not created by us
@@ -1245,9 +1256,18 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 		return;
 	}
 
-	newUri = this.currentUri = new mw.Uri( location.href );
-	veaction = newUri.query.veaction;
+	this.currentUri = new mw.Uri( location.href );
+	veaction = this.currentUri.query.veaction;
 
+	if ( ve.init.target.isModeAvailable( 'source' ) && this.active ) {
+		if ( veaction === 'editsource' && this.mode === 'visual' ) {
+			this.actFromPopState = true;
+			this.switchToWikitextEditor();
+		} else if ( veaction === 'edit' && this.mode === 'source' ) {
+			this.actFromPopState = true;
+			this.switchToVisualEditor();
+		}
+	}
 	if ( !this.active && ( veaction === 'edit' || veaction === 'editsource' ) ) {
 		this.actFromPopState = true;
 		this.activate();
@@ -1464,39 +1484,184 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  *
  * @param {boolean} [discardChanges] Whether to discard changes or not.
  * @param {boolean} [modified] Whether there were any changes at all.
+ * @param {boolean} [leaveVE] Leave VE, even if source mode is available
  */
-ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
-	var uri,
-		oldid = this.currentUri.query.oldid || $( 'input[name=parentRevId]' ).val(),
-		target = this,
+ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified, leaveVE ) {
+	var uri, oldid, prefPromise, dataPromise,
+		target = this;
+
+	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
+		if ( discardChanges ) {
+			dataPromise = mw.libs.ve.targetLoader.requestPageData(
+				'source',
+				this.pageName,
+				null, // We may have this.section but VE is always full page at the moment
+				this.requestedRevId,
+				this.constructor.name
+			).then(
+				function ( response ) { return response; },
+				function () {
+					// TODO: Some sort of progress bar?
+					target.switchToWikitextEditor( discardChanges, modified, true );
+					// Keep everything else waiting so our error handler can do its business
+					return $.Deferred().promise();
+				}
+			);
+		} else {
+			this.serialize( this.getDocToSave() );
+			dataPromise = this.serializing.then( function ( response ) {
+				// HACK - add parameters the API doesn't provide for a VE->WT switch
+				var data = response.visualeditoredit;
+				data.etag = target.etag;
+				data.fromEditedState = modified;
+				data.notices = target.remoteNotices;
+				data.protectedClasses = target.protectedClasses;
+				data.basetimestamp = target.baseTimeStamp;
+				data.starttimestamp = target.startTimeStamp;
+				data.oldid = target.revid;
+				return response;
+			} );
+		}
+		this.setMode( 'source' );
+		this.reloadSurface( dataPromise );
+	} else {
+		oldid = this.currentUri.query.oldid || $( 'input[name=parentRevId]' ).val();
+		target = this;
 		prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
-	if ( discardChanges ) {
-		if ( modified ) {
-			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
-		} else {
-			ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate' } );
-		}
-		this.submitting = true;
-		prefPromise.done( function () {
-			uri = target.viewUri.clone().extend( {
-				action: 'edit',
-				veswitched: 1
+		if ( discardChanges ) {
+			if ( modified ) {
+				ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
+			} else {
+				ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate' } );
+			}
+			this.submitting = true;
+			prefPromise.done( function () {
+				uri = target.viewUri.clone().extend( {
+					action: 'edit',
+					veswitched: 1
+				} );
+				if ( oldid ) {
+					uri.extend( { oldid: oldid } );
+				}
+				location.href = uri.toString();
 			} );
-			if ( oldid ) {
-				uri.extend( { oldid: oldid } );
-			}
-			location.href = uri.toString();
-		} );
-	} else {
-		this.serialize(
-			this.getDocToSave(),
-			function ( wikitext ) {
-				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
-				target.submitWithSaveFields( { wpDiff: 1, wpAutoSummary: '' }, wikitext );
-			}
-		);
+		} else {
+			this.serialize(
+				this.getDocToSave(),
+				function ( wikitext ) {
+					ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
+					target.submitWithSaveFields( { wpDiff: 1, wpAutoSummary: '' }, wikitext );
+				}
+			);
+		}
 	}
+};
+
+/**
+ * Switch to the visual editor.
+ */
+ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
+	var dataPromise, windowManager, switchWindow,
+		target = this;
+
+	if ( this.section !== null ) {
+		// WT -> VE switching is not yet supported in sections, so
+		// show a discard-only confirm dialog, then reload the whole page.
+		windowManager = new OO.ui.WindowManager();
+		switchWindow = new mw.libs.ve.SwitchConfirmDialog();
+		$( 'body' ).append( windowManager.$element );
+		windowManager.addWindows( [ switchWindow ] );
+		windowManager.openWindow( switchWindow, { mode: 'simple' } )
+			.then( function ( opened ) {
+				return opened;
+			} )
+			.then( function ( closing ) { return closing; } )
+			.then( function ( data ) {
+				if ( data && data.action === 'discard' ) {
+					target.section = null;
+					target.setMode( 'visual' );
+					target.reloadSurface();
+				}
+				windowManager.destroy();
+			} );
+	} else {
+		dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
+			this.pageName,
+			this.revid,
+			this.constructor.name,
+			this.edited,
+			this.getDocToSave()
+		);
+
+		this.setMode( 'visual' );
+		this.reloadSurface( dataPromise );
+	}
+};
+
+/**
+ * Reload the target surface in the new editor mode
+ *
+ * @param {jQuery.Promise} [dataPromise] Data promise, if any
+ */
+ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( dataPromise ) {
+	var target = this;
+	// Create progress - will be discarded when surface is destroyed.
+	this.getSurface().createProgress(
+		$.Deferred().promise(),
+		ve.msg( this.mode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
+		true /* non-cancellable */
+	);
+	this.activating = true;
+	this.activatingDeferred = $.Deferred();
+	this.load( dataPromise );
+	this.activatingDeferred.done( function () {
+		target.updateHistoryState();
+		target.afterActivate();
+		target.setupTriggerListeners();
+	} );
+	this.toolbarSetupDeferred.resolve();
+};
+
+/**
+ * Get a wikitext fragment from a document
+ *
+ * @param {ve.dm.Document} doc Document
+ * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
+ * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
+ */
+ve.init.mw.DesktopArticleTarget.prototype.getWikitextFragment = function ( doc, useRevision ) {
+	var promise, xhr,
+		params = {
+			action: 'visualeditoredit',
+			token: this.editToken,
+			paction: 'serialize',
+			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+			page: this.pageName
+		};
+
+	if ( useRevision === undefined || useRevision ) {
+		params.oldid = this.revid;
+		params.etag = this.etag;
+	}
+
+	xhr = new mw.Api().post(
+		params,
+		{ contentType: 'multipart/form-data' }
+	);
+
+	promise = xhr.then( function ( response ) {
+		if ( response.visualeditoredit ) {
+			return response.visualeditoredit.content;
+		}
+		return $.Deferred().reject();
+	} );
+
+	promise.abort = function () {
+		xhr.abort();
+	};
+
+	return promise;
 };
 
 /**

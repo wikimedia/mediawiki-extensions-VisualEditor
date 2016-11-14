@@ -259,7 +259,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.etag = data.etag;
 		this.fromEditedState = data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
-		this.doc = this.parseHtml( this.originalHtml );
+		this.doc = this.parseDocument( this.originalHtml );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
@@ -1155,6 +1155,21 @@ ve.init.mw.ArticleTarget.prototype.getDocToSave = function () {
  * @return {Object} Document to save
  */
 ve.init.mw.ArticleTarget.prototype.createDocToSave = function () {
+	var i, l, text, data;
+
+	if ( this.mode === 'source' ) {
+		text = '';
+		data = this.getSurface().getModel().getDocument().data.data;
+		for ( i = 0, l = data.length; i < l; i++ ) {
+			if ( data[ i ].type === '/paragraph' && data[ i + 1 ].type === 'paragraph' ) {
+				text += '\n';
+			} else if ( !data[ i ].type ) {
+				text += data[ i ];
+			}
+		}
+
+		return text;
+	}
 	return this.getSurface().getDom();
 };
 
@@ -1178,13 +1193,16 @@ ve.init.mw.ArticleTarget.prototype.clearDocToSave = function () {
  * the same promise (which will already have been resolved) until clearPreparedCacheKey() is called.
  *
  * @param {HTMLDocument} doc Document to serialize
- * @return {jQuery.Promise} Abortable promise, resolved with the cache key.
  */
 ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 	var xhr, deflated,
 		aborted = false,
 		start = ve.now(),
 		target = this;
+
+	if ( this.mode === 'source' ) {
+		return;
+	}
 
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
 		return this.preparedCacheKeyPromise;
@@ -1236,7 +1254,6 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 			},
 			doc: doc
 		} );
-	return this.preparedCacheKeyPromise;
 };
 
 /**
@@ -1276,7 +1293,7 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * automatically when encountering a badtoken error. If you do not want the automatic retry behavior
  * and want to control badtoken retries, you have to set options.token.
  *
- * @param {HTMLDocument} doc Document to submit
+ * @param {HTMLDocument|string} doc Document to submit or string in source mode
  * @param {Object} options POST parameters to send. Do not include 'html', 'cachekey' or 'format'.
  * @param {string} [eventName] If set, log an event when the request completes successfully. The
  *  full event name used will be 'performance.system.{eventName}.withCacheKey' or .withoutCacheKey
@@ -1284,10 +1301,25 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * @return {jQuery.Promise}
  */
 ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
-	var data,
-		preparedCacheKey = this.getPreparedCacheKey( doc ),
+	var data, postData, preparedCacheKey,
 		target = this;
 
+	if ( this.mode === 'source' ) {
+		data = {
+			wikitext: doc,
+			format: 'json'
+		};
+		if ( this.section !== null ) {
+			data.section = this.section;
+		}
+		postData = ve.extendObject( {}, options, data );
+		if ( data.token ) {
+			return new mw.Api().post( postData, { contentType: 'multipart/form-data' } );
+		}
+		return new mw.Api().postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
+	}
+
+	preparedCacheKey = this.getPreparedCacheKey( doc ),
 	data = ve.extendObject( {}, options, { format: 'json' } );
 
 	function ajaxRequest( cachekey, isRetried ) {
@@ -1802,7 +1834,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var surfaceView, $documentNode, $section, headingNode;
 
-	if ( this.section !== null && this.section > 0 ) {
+	if ( this.mode === 'visual' && this.section !== null && this.section > 0 ) {
 		surfaceView = this.getSurface().getView();
 		$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 		$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );

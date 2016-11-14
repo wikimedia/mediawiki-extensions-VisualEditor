@@ -1737,7 +1737,6 @@
 		},
 		"ext.visualEditor.mwwikitext": {
 			"scripts": [
-				"modules/ve-mw/init/targets/ve.init.mw.DesktopWikitextArticleTarget.js",
 				"modules/ve-mw/dm/ve.dm.MWWikitextSurface.js",
 				"modules/ve-mw/dm/ve.dm.MWWikitextSurfaceFragment.js",
 				"modules/ve-mw/ce/ve.ce.MWWikitextSurface.js",
