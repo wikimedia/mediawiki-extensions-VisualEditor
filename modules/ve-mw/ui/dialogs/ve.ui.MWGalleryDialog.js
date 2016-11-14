@@ -655,7 +655,7 @@ ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
 	mwData.attrs.perrow = perrow || undefined;
 	mwData.attrs.showfilename = showFilename ? 'yes' : undefined;
 	mwData.attrs.classes = classes || undefined;
-	mwData.attrs.styles = styles || undefined;
+	mwData.attrs.style = styles || undefined;
 
 	// Unset mode attribute if it is the same as the default
 	mwData.attrs.mode = mode === this.defaults.mode ? undefined : mode;
