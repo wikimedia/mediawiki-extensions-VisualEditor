@@ -132,7 +132,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Па змоўчаньні",
 	"visualeditor-dialog-meta-settings-index-disable": "Не",
 	"visualeditor-dialog-meta-settings-index-force": "Так",
-	"visualeditor-dialog-meta-settings-index-help": "Вы можаце прымусова пазначыць, каб пошукавыя рухавікі ўключалі гэтую старонку ў вынікі па адпаведных запытах, ці наадварот, не рабілі гэтага.",
+	"visualeditor-dialog-meta-settings-index-help": "Вы можаце прымусова пазначыць, каб пошукавыя рухавікі ўключалі гэтую старонку ў вынікі па адпаведных запытах, ці наадварот, не рабілі гэтага. Гэтая налада не ўплывае на ўнутраны пошук сайту.",
 	"visualeditor-dialog-meta-settings-index-label": "Дазволіць індэксаваньне гэтай старонкі пошукавымі сыстэмамі",
 	"visualeditor-dialog-meta-settings-label": "Парамэтры старонкі",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Па змоўчаньні",
