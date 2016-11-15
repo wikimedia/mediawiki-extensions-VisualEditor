@@ -153,7 +153,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "افتراضي",
 	"visualeditor-dialog-meta-settings-index-disable": "لا",
 	"visualeditor-dialog-meta-settings-index-force": "نعم",
-	"visualeditor-dialog-meta-settings-index-help": "يمكن منع ظهور هذه الصفحة في نتائج محركات البحث، أو حملها على الظهور.",
+	"visualeditor-dialog-meta-settings-index-help": "يمكن منع ظهور هذه الصفحة في نتائج محركات البحث، أو حملها على الظهور. هذا الخيار لا يؤثر على البحث داخل الموقع.",
 	"visualeditor-dialog-meta-settings-index-label": "اسمح بفهرسة الصفحة بواسطة محركات البحث",
 	"visualeditor-dialog-meta-settings-label": "إعدادات الصفحة",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "افتراضي",

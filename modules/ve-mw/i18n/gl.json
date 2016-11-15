@@ -213,7 +213,7 @@
 	"visualeditor-donebutton-tooltip": "Edición rematada",
 	"visualeditor-editconflict": "Non se puideron gardar os cambios debido a un conflito de edición. {{GENDER:|Quere}} resolver o conflito manualmente?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} agora lembra que editor prefire. Pode cambia entre os modos de edición mentres edita, e cambiar a súa preferencia despois.",
-	"visualeditor-editingtabdialog-ok": "Usar o editor que usei na miña última edición",
+	"visualeditor-editingtabdialog-ok": "Utilizar o editor que usei na miña última edición",
 	"visualeditor-editingtabdialog-title": "Lapelas de edición",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|aviso|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos de edición",
