@@ -323,7 +323,6 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.documentReady( this.doc );
 	}
 
-
 	data = response ? ( response.visualeditor || response.visualeditoredit ) : {};
 
 	this.checkboxFields = [];

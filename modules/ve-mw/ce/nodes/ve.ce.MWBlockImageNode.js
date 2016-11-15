@@ -35,7 +35,6 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	//       <img> this.$image
 	//     <figcaption> this.caption.view.$element
 
-
 	// Build DOM:
 	if ( isError ) {
 		$image = $( [] );

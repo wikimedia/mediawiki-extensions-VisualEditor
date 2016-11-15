@@ -523,7 +523,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	this.toggleSearchPanel( false );
 
 	// Highlight new item
-	item = item ? item : this.galleryGroup.items[ 0 ];
+	item = item || this.galleryGroup.items[ 0 ];
 	item.toggleHighlighted( true );
 	this.highlightedItem = item;
 

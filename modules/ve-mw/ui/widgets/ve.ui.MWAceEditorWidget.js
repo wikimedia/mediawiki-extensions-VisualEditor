@@ -110,8 +110,8 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	this.editor = ace.edit( this.$ace[ 0 ] );
 	this.setMinRows( this.minRows );
 	this.editor.setOptions( {
-		enableBasicAutocompletion: this.autocomplete !== 'none' ? true : false,
-		enableLiveAutocompletion: this.autocomplete === 'live' ? true : false
+		enableBasicAutocompletion: this.autocomplete !== 'none',
+		enableLiveAutocompletion: this.autocomplete === 'live'
 	} );
 	this.editor.getSession().on( 'change', this.onEditorChange.bind( this ) );
 	this.editor.renderer.on( 'resize', this.onEditorResize.bind( this ) );
@@ -129,8 +129,8 @@ ve.ui.MWAceEditorWidget.prototype.setAutocomplete = function ( mode ) {
 	this.autocomplete = mode;
 	this.loadingPromise.done( function () {
 		widget.editor.renderer.setOptions( {
-			enableBasicAutocompletion: widget.autocomplete !== 'none' ? true : false,
-			enableLiveAutocompletion: widget.autocomplete === 'live' ? true : false
+			enableBasicAutocompletion: widget.autocomplete !== 'none',
+			enableLiveAutocompletion: widget.autocomplete === 'live'
 		} );
 	} );
 	return this;
