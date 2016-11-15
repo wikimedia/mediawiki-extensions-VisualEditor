@@ -480,7 +480,8 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
  * @param {ve.ui.MWMediaResultWidget} item Chosen item
  */
 ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
-	var title = item.getData().title;
+	var title = mw.Title.newFromText( item.getData().title ).getPrefixedText();
+
 	if ( !Object.prototype.hasOwnProperty( this.imageCaptions, title ) ) {
 		this.addNewImage( title );
 	}
