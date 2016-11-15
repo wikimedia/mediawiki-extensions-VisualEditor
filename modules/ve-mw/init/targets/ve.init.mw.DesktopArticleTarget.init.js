@@ -286,6 +286,8 @@
 				// Detach the loading bar for activation so it doesn't get moved around
 				// and altered, re-attach immediately after
 				init.$loading.detach();
+				// If target was already loaded, ensure the mode is correct
+				target.setMode( mode );
 				activatePromise = target.activate( dataPromise );
 				$( '#content' ).prepend( init.$loading );
 				return activatePromise;
