@@ -604,6 +604,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 	var errorInfo, confirmPromptMessage,
 		target = this;
 
+	this.activatingDeferred.reject();
+
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
@@ -642,13 +644,13 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 		OO.ui.confirm( confirmPromptMessage ).done( function ( confirmed ) {
 			if ( confirmed ) {
 				target.load();
-			} else if ( !$( '#wpTextbox1' ).length ) {
+			} else if ( $( '#wpTextbox1' ).length && !mw.libs.ve.isWikitextAvailable ) {
+				// If we're switching from the wikitext editor, just deactivate
+				// don't try to switch back to it fully, that'd discard changes.
+				target.deactivate( true );
+			} else {
 				// TODO: Some sort of progress bar?
 				target.switchToWikitextEditor( true, false );
-			} else {
-			// If we're switching from the wikitext editor, just deactivate
-			// don't try to switch back to it fully, that'd discard changes.
-				target.deactivate( true );
 			}
 		} );
 	} else {
