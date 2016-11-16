@@ -11,6 +11,7 @@
 
 .ve-ui-mwSaveDialog-summary {
 	width: 100%;
+	max-width: none;
 	background-color: #fff;
 }
 
