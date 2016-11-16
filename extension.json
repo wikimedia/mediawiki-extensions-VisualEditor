@@ -1328,15 +1328,34 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.mwimage": {
+		"ext.visualEditor.mwmediasearch": {
 			"scripts": [
-				"modules/ve-mw/dm/models/ve.dm.MWImageModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWMediaResourceProvider.js",
 				"modules/ve-mw/dm/models/ve.dm.MWMediaSearchProvider.js",
 				"modules/ve-mw/dm/models/ve.dm.MWMediaResourceQueue.js",
 				"modules/ve-mw/dm/models/ve.dm.MWMediaSearchQueue.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaSearchWidget.js",
-				"modules/ve-mw/ui/widgets/ve.ui.MWMediaResultWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWMediaResultWidget.js"
+			],
+			"styles": [
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaSearchWidget.css",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaResultWidget.css"
+			],
+			"dependencies": [
+				"mediawiki.ForeignApi"
+			],
+			"messages": [
+				"visualeditor-dialog-media-noresults",
+				"visualeditor-media-input-placeholder"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.mwimage": {
+			"scripts": [
+				"modules/ve-mw/dm/models/ve.dm.MWImageModel.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaInfoFieldWidget.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWMediaTransferHandler.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMediaDialog.js",
@@ -1344,12 +1363,11 @@
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaSearchWidget.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaResultWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaInfoFieldWidget.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwimage.core",
+				"ext.visualEditor.mwmediasearch",
 				"oojs-ui.styles.icons-interactions",
 				"oojs-ui.styles.icons-media",
 				"oojs-ui.styles.icons-wikimedia",
@@ -1379,7 +1397,6 @@
 				"visualeditor-dialog-media-info-readmore",
 				"visualeditor-dialog-media-info-separator",
 				"visualeditor-dialog-media-info-uploaded",
-				"visualeditor-dialog-media-noresults",
 				"visualeditor-dialog-media-originaldimensions",
 				"visualeditor-dialog-media-page-advanced",
 				"visualeditor-dialog-media-page-general",
@@ -1408,8 +1425,7 @@
 				"visualeditor-dialog-media-type-section-help",
 				"visualeditor-dialog-media-type-thumb",
 				"visualeditor-dialog-media-upload",
-				"visualeditor-dialogbutton-media-tooltip",
-				"visualeditor-media-input-placeholder"
+				"visualeditor-dialogbutton-media-tooltip"
 			],
 			"targets": [
 				"desktop"
@@ -1778,6 +1794,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
+				"ext.visualEditor.mwmediasearch",
 				"oojs-ui.styles.icons-media",
 				"mediawiki.page.gallery.styles"
 			],
