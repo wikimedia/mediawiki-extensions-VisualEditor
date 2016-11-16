@@ -122,7 +122,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 
 	// Search panel
-	this.searchWidget = new ve.ui.MWMediaSearchWidget();
+	this.searchWidget = new mw.widgets.MediaSearchWidget();
 
 	// Options card
 
@@ -477,7 +477,7 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 /**
  * Handle search results choose event.
  *
- * @param {ve.ui.MWMediaResultWidget} item Chosen item
+ * @param {mw.widgets.MediaResultWidget} item Chosen item
  */
 ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
 	var title = mw.Title.newFromText( item.getData().title ).getPrefixedText();

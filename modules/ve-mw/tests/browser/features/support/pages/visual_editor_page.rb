@@ -102,7 +102,7 @@ class VisualEditorPage
   figure(:media_image, index: 0)
   span(:media_insert_menu, class: 'oo-ui-tool-name-media')
   text_field(:media_search, css: 'div.oo-ui-textInputWidget > input')
-  div(:media_select, class: 've-ui-mwMediaResultWidget-overlay')
+  div(:media_select, class: 'mw-widget-mediaResultWidget-overlay')
   div(:medium_dialog, class: 'oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium')
   span(:use_image_button, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
   span(:media_insert_button, css: '.oo-ui-flaggedElement-constructive > a:nth-child(1) > span:nth-child(2)')
