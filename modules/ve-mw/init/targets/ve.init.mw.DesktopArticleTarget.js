@@ -317,6 +317,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadSuccess.apply( this, arguments );
 
+	this.wikitextFallbackLoading = false;
 	// Duplicate of this code in ve.init.mw.DesktopArticleTarget.init.js
 	if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
 		$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
@@ -609,6 +610,13 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
+	if ( this.wikitextFallbackLoading ) {
+		// Failed twice now
+		mw.log.warn( 'Failed to fall back to wikitext', errorText, error );
+		location.href = target.viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
+		return;
+	}
+
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
 	if (
@@ -650,6 +658,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 				target.deactivate( true );
 			} else {
 				// TODO: Some sort of progress bar?
+				target.wikitextFallbackLoading = true;
 				target.switchToWikitextEditor( true, false );
 			}
 		} );
