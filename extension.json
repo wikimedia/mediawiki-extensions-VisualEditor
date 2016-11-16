@@ -1342,6 +1342,7 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaResultWidget.css"
 			],
 			"dependencies": [
+				"ext.visualEditor.mwcore",
 				"mediawiki.ForeignApi"
 			],
 			"messages": [
