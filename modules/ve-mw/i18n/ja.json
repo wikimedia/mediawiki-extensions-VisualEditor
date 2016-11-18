@@ -17,7 +17,8 @@
 			"Otokoume",
 			"Vigorous action",
 			"Suchichi02",
-			"Kanashimi"
+			"Kanashimi",
+			"ネイ"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -143,7 +144,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "既定",
 	"visualeditor-dialog-meta-settings-index-disable": "いいえ",
 	"visualeditor-dialog-meta-settings-index-force": "はい",
-	"visualeditor-dialog-meta-settings-index-help": "強制的にこのページを検索エンジンの検索対象とし、それらの検索結果に表示されるようにすることができます。同様に、検索エンジンの検索対象から外すこともできます。",
+	"visualeditor-dialog-meta-settings-index-help": "強制的にこのページを検索エンジンの検索対象とし、それらの検索結果に表示されるようにすることができます。同様に、検索エンジンの検索対象から外すこともできます。この設定はサイト内検索に影響しません。",
 	"visualeditor-dialog-meta-settings-index-label": "検索エンジンがこのページを検索対象にすることを許可する",
 	"visualeditor-dialog-meta-settings-label": "ページの設定",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "既定",
@@ -320,7 +321,6 @@
 	"visualeditor-settings-tool": "ページの設定",
 	"visualeditor-shortcuts-insert": "挿入",
 	"visualeditor-special-characters-group-other": "よく使われるもの",
-	"visualeditor-timeout": "このエディターは現在利用できないようです。代わりにソース モードで編集しますか?",
 	"visualeditor-toload": "エディターがロードされます。数秒たっても画面が変わらない場合、[$1 キャッシュを破棄]してください。.",
 	"visualeditor-toolbar-savedialog": "ページを保存",
 	"visualeditor-toolbar-savedialog-short": "保存",
