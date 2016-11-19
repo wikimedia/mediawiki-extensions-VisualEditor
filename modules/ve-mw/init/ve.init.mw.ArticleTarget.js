@@ -1990,3 +1990,17 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		this.welcomeDialogPromise.reject();
 	}
 };
+
+// Register save button with command help dialog
+( function () {
+	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().toUpperCase().replace( /-/g, ' + ' ),
+		saveShortcut = ve.msg( 'accesskey-save' );
+
+	if ( saveShortcut !== '-' && saveShortcut !== '' ) {
+		ve.ui.commandHelpRegistry.register( 'other', 'save', {
+			shortcuts: [ accessKeyPrefix + saveShortcut.toUpperCase() ],
+			label: function () { return ve.init.target.getSaveButtonLabel(); },
+			demote: true
+		} );
+	}
+}() );
