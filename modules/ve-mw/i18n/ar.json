@@ -346,7 +346,7 @@
 	"visualeditor-settings-tool": "إعدادات الصفحة",
 	"visualeditor-shortcuts-insert": "إدراج",
 	"visualeditor-special-characters-group-other": "مستخدمة عادة",
-	"visualeditor-toload": "المحرر سوف يحماالان .إذا كنت لا تزال ترى هذه الرسالة بعد بضع ثوان، يرجى[$1 تحميل الصفحة].",
+	"visualeditor-toload": "المحرر سيُحمَّل الآن. إذا كنت لا تزال ترى هذه الرسالة بعد بضع ثوان، يرجى [$1 إعادة تحميل الصفحة].",
 	"visualeditor-toolbar-savedialog": "احفظ الصفحة",
 	"visualeditor-toolbar-savedialog-short": "احفظ",
 	"visualeditor-usernamespacepagelink": "Project:نطاق المستخدم",

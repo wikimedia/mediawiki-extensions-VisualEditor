@@ -154,7 +154,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "기본값",
 	"visualeditor-dialog-meta-settings-index-disable": "아니오",
 	"visualeditor-dialog-meta-settings-index-force": "예",
-	"visualeditor-dialog-meta-settings-index-help": "검색 엔진이 이 문서를 적절한 결과에 나열하도록 하거나 그렇게 하지 못하도록 강제할 수 있습니다.",
+	"visualeditor-dialog-meta-settings-index-help": "검색 엔진이 이 문서를 적절한 결과에 나열하도록 하거나 그렇게 하지 못하도록 강제할 수 있습니다. 이 옵션은 사이트 내부 검색에 영향을 주지 않습니다.",
 	"visualeditor-dialog-meta-settings-index-label": "검색 엔진이 이 문서를 색인할 수 있도록 합니다",
 	"visualeditor-dialog-meta-settings-label": "문서 설정",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "기본값",
