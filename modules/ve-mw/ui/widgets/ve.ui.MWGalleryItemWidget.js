@@ -19,7 +19,7 @@
 ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config ) {
 	this.imageTitle = imageInfo.title;
 	this.thumbUrl = imageInfo.thumbUrl;
-	this.caption = imageInfo.caption;
+	this.caption = imageInfo.caption || '';
 	this.highlighted = false;
 
 	// Configuration initialization
