@@ -30,7 +30,7 @@ ve.init.mw.GalleryImageInfoCache.prototype.getRequestPromise = function ( subque
 		{
 			action: 'query',
 			prop: 'imageinfo',
-			iiprop: 'url',
+			iiprop: 'url|size',
 			titles: subqueue,
 			iiurlwidth: 200,
 			iiurlheight: 200

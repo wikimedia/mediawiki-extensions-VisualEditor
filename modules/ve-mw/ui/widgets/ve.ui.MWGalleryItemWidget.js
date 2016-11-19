@@ -17,9 +17,13 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config ) {
-	this.imageTitle = imageInfo.title;
+	this.resource = imageInfo.resource;
+	this.altText = imageInfo.altText || '';
+	this.src = imageInfo.src;
+	this.height = imageInfo.height;
+	this.width = imageInfo.width;
 	this.thumbUrl = imageInfo.thumbUrl;
-	this.caption = imageInfo.caption || '';
+	this.captionDocument = imageInfo.captionDocument;
 	this.highlighted = false;
 
 	// Configuration initialization
@@ -77,12 +81,21 @@ ve.ui.MWGalleryItemWidget.prototype.onItemKeyPress = function ( e ) {
 };
 
 /**
- * Set the caption property
+ * Set the captionDocument property
  *
- * @param {string} caption The caption
+ * @param {ve.dm.Document} captionDocument The caption document
  */
-ve.ui.MWGalleryItemWidget.prototype.setCaption = function ( caption ) {
-	this.caption = caption.replace( '\n', ' ' );
+ve.ui.MWGalleryItemWidget.prototype.setCaptionDocument = function ( captionDocument ) {
+	this.captionDocument = captionDocument;
+};
+
+/**
+ * Set the altText property
+ *
+ * @param {string} altText The altText
+ */
+ve.ui.MWGalleryItemWidget.prototype.setAltText = function ( altText ) {
+	this.altText = altText;
 };
 
 /**

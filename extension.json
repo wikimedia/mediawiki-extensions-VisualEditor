@@ -2096,8 +2096,14 @@
 		},
 		"ext.visualEditor.mwgallery": {
 			"scripts": [
-				"modules/ve-mw/dm/nodes/ve.dm.MWGalleryNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryCaptionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryImageCaptionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryImageNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWGalleryCaptionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWGalleryImageCaptionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWGalleryImageNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWGalleryNode.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWGalleryDialog.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWGalleryDialogTool.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWGalleryGroupWidget.js",
@@ -2113,6 +2119,7 @@
 				"mediawiki.page.gallery.styles"
 			],
 			"messages": [
+				"visualeditor-dialog-media-alttext-section",
 				"visualeditor-dialog-media-content-filename",
 				"visualeditor-dialog-media-content-section",
 				"visualeditor-mwgallerydialog-caption-field-label",
