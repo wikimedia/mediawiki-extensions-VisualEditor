@@ -50,7 +50,7 @@ module.exports = function ( grunt ) {
 				template: '.jsduck/eg-iframe.html.template',
 				modules: modules,
 				load: [ 'visualEditor.desktop.standalone' ],
-				pathPrefix: '../lib/ve/',
+				pathPrefix: 'lib/ve/',
 				indent: '\t\t'
 			}
 		},
