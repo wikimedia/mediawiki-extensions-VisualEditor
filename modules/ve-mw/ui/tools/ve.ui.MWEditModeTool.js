@@ -101,3 +101,39 @@ ve.ui.MWEditModeSourceTool.prototype.onSelect = function () {
 	this.setActive( false );
 };
 ve.ui.toolFactory.register( ve.ui.MWEditModeSourceTool );
+
+/**
+ * MediaWiki UserInterface edit mode visual tool.
+ *
+ * @class
+ * @extends ve.ui.MWEditModeTool
+ * @constructor
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config] Config options
+ */
+ve.ui.MWEditModeVisualTool = function VeUiMWEditModeVisualTool() {
+	// Parent constructor
+	ve.ui.MWEditModeVisualTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.MWEditModeVisualTool, ve.ui.MWEditModeTool );
+ve.ui.MWEditModeVisualTool.static.name = 'editModeVisual';
+ve.ui.MWEditModeVisualTool.static.icon = 'edit';
+ve.ui.MWEditModeVisualTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool' );
+/**
+ * @inheritdoc
+ */
+ve.ui.MWEditModeVisualTool.prototype.onSelect = function () {
+	this.toolbar.getTarget().switchToVisualEditor();
+	this.setActive( false );
+};
+/**
+ * @inheritdoc
+ */
+ve.ui.MWEditModeVisualTool.prototype.onUpdateState = function () {
+	// Parent method
+	ve.ui.MWEditModeVisualTool.super.prototype.onUpdateState.apply( this, arguments );
+
+	this.setDisabled( !ve.init.target.isModeAvailable( 'visual' ) );
+};
+ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
