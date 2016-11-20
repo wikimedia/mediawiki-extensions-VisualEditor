@@ -134,7 +134,7 @@
 	"visualeditor-dialog-meta-settings-index-default": "Predodređeno",
 	"visualeditor-dialog-meta-settings-index-disable": "Ne",
 	"visualeditor-dialog-meta-settings-index-force": "Da",
-	"visualeditor-dialog-meta-settings-index-help": "Možete omogućiti ili onemogućiti pretraživačima indeksiranje ove stranice.",
+	"visualeditor-dialog-meta-settings-index-help": "Možete omogućiti ili onemogućiti pretraživačima indeksiranje ove stranice. Ova opcija ne utječe na tražilicu ovog sajta.",
 	"visualeditor-dialog-meta-settings-index-label": "Dozvoli pretraživačima indeksiranje stranice",
 	"visualeditor-dialog-meta-settings-label": "Postavke stranice",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Standardno",
