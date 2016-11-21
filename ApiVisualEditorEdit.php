@@ -261,8 +261,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$parserParams['oldid'] = $params['oldid'];
 		}
 
-		$wikitext = $params['wikitext'];
-		if ( !$wikitext ) {
+		if ( isset( $params['wikitext'] ) ) {
+			$wikitext = $params['wikitext'];
+		} else {
 			$wikitext = $this->getWikitext( $title, $params, $parserParams );
 		}
 
