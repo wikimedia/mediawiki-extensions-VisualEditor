@@ -34,7 +34,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	// Properties
 	this.onBeforeUnloadFallback = null;
 	this.onUnloadHandler = this.onUnload.bind( this );
-	this.active = false;
 	this.activating = false;
 	this.deactivating = false;
 	this.edited = false;
