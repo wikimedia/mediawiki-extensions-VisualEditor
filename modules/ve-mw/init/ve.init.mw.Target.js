@@ -18,6 +18,8 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 	// Parent constructor
 	ve.init.mw.Target.super.call( this, config );
 
+	this.active = false;
+
 	// Initialization
 	this.$element.addClass( 've-init-mw-target' );
 };
