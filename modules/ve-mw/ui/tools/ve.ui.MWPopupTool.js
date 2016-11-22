@@ -40,36 +40,13 @@ OO.inheritClass( ve.ui.MWPopupTool, OO.ui.PopupTool );
  * @param {Object} [config]
  */
 ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) {
-	var tool = this,
-		items = toolGroup.getToolbar().getTarget().getEditNotices(),
-		count = items.length,
-		title = ve.msg(
-			'visualeditor-editnotices-tool',
-			mw.language.convertNumber( count )
-		);
-
 	// Parent constructor
-	ve.ui.MWNoticesPopupTool.super.call( this, title, toolGroup, config );
-
-	// Properties
-	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
-
-	// Initialization
-	items.forEach( function ( itemHtml ) {
-		var $node = $( '<div>' )
-			.addClass( 've-ui-mwNoticesPopupTool-item' )
-			.append( $.parseHTML( itemHtml ) );
-
-		$node.find( 'a' ).attr( 'target', '_blank' );
-
-		tool.$items.append( $node );
-	} );
-
-	this.popup.$body.append( this.$items );
-
-	if ( !count ) {
-		this.$element = $( [] );
-	}
+	ve.ui.MWNoticesPopupTool.super.call(
+		this,
+		ve.msg( 'visualeditor-editnotices-tooltip' ),
+		toolGroup,
+		config
+	);
 };
 
 /* Inheritance */
@@ -86,6 +63,39 @@ ve.ui.MWNoticesPopupTool.static.autoAddToCatchall = false;
 ve.ui.MWNoticesPopupTool.static.autoAddToGroup = false;
 
 /* Methods */
+
+/**
+ * Set notices to display.
+ *
+ * @param {string[]} notices
+ */
+ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
+	var tool = this,
+		count = notices.length;
+
+	this.popup.setLabel( ve.msg(
+		'visualeditor-editnotices-tool',
+		mw.language.convertNumber( count )
+	) );
+
+	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
+
+	notices.forEach( function ( itemHtml ) {
+		var $node = $( '<div>' )
+			.addClass( 've-ui-mwNoticesPopupTool-item' )
+			.append( $.parseHTML( itemHtml ) );
+
+		$node.find( 'a' ).attr( 'target', '_blank' );
+
+		tool.$items.append( $node );
+	} );
+
+	this.popup.$body.append( this.$items );
+
+	if ( !count ) {
+		this.$element = $( [] );
+	}
+};
 
 /**
  * Get the tool title.
