@@ -1414,6 +1414,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 	if ( this.welcomeDialogPromise ) {
 		this.welcomeDialogPromise
 			.always( function () {
+				var noticesTool;
 				// Pop out the notices when the welcome dialog is closed
 				if (
 					target.switched &&
@@ -1421,7 +1422,9 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 				) {
 					target.actionsToolbar.tools.editModeSource.getPopup().toggle( true );
 				} else {
-					target.actionsToolbar.tools.notices.getPopup().toggle( true );
+					noticesTool = target.actionsToolbar.tools.notices;
+					noticesTool.setNotices( target.getEditNotices() );
+					noticesTool.getPopup().toggle( true );
 				}
 			} );
 	}
