@@ -93,7 +93,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	this.popup.$body.append( this.$items );
 
 	if ( !count ) {
-		this.$element = $( [] );
+		this.destroy();
 	}
 };
 
