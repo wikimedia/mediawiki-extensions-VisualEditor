@@ -261,7 +261,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			var titlesString, title, titleText, imageTitles, mode,
 				caption, widths, heights, perrow,
 				showFilename, classes, styles,
-				pageTitle, namespace, namespacesWithSubpages,
+				pageTitle, namespace, namespacesWithSubpages, namespaceIds,
 				dialog = this,
 				attributes = this.selectedNode && this.selectedNode.getAttribute( 'mw' ).attrs;
 
@@ -271,6 +271,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			pageTitle = mw.config.get( 'wgTitle' );
 			namespace = mw.config.get( 'wgNamespaceNumber' );
 			namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
+			namespaceIds = mw.config.get( 'wgNamespaceIds' );
 
 			if ( namespacesWithSubpages[ namespace ] ) {
 				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
@@ -294,7 +295,10 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 
 						// Ignore any empty lines
 						if ( matches ) {
-							title = mw.Title.newFromText( matches[ 1 ] );
+							// The "File:" prefix is optional in wikitext galleries. This will add
+							// the prefix if there is no prefix, but won't change an existing
+							// prefix (e.g. "Category:")
+							title = mw.Title.newFromText( matches[ 1 ], namespaceIds.file );
 							// Ignore any invalid titles
 							// (which will result in title being null)
 							if ( title ) {
