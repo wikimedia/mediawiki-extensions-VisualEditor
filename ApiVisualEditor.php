@@ -232,9 +232,9 @@ class ApiVisualEditor extends ApiBase {
 					} elseif ( $params['paction'] === 'wikitext' ) {
 						$apiParams = [
 							'action' => 'query',
-							'titles' => $title->getPrefixedDBkey(),
+							'revids' => $oldid,
 							'prop' => 'revisions',
-							'rvprop' => 'content'
+							'rvprop' => 'content|ids'
 						];
 
 						if ( isset( $params['section'] ) ) {
@@ -252,9 +252,14 @@ class ApiVisualEditor extends ApiBase {
 						$api->execute();
 						$result = $api->getResult()->getResultData();
 						$pid = $title->getArticleID();
-						$content = isset( $result['query']['pages'][$pid]['revisions']['0']['content'] ) ?
-							$result['query']['pages'][$pid]['revisions']['0']['content'] :
-							false;
+						$content = false;
+						if ( isset( $result['query']['pages'][$pid]['revisions'] ) ) {
+							foreach ( $result['query']['pages'][$pid]['revisions'] as $revArr ) {
+								if ( $revArr['revid'] === $oldid ) {
+									$content = $revArr['content'];
+								}
+							}
+						}
 						if ( $content === false ) {
 							$this->dieUsage( 'Error contacting the document server', 'docserver' );
 						}
