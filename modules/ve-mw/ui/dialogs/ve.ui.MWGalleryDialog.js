@@ -111,7 +111,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		.addClass( 've-ui-mwGalleryDialog-highlighted-image' );
 	// TODO: make into a ve.ui.MWTargetWidget once Parsoid handles galleries
 	this.highlightedCaptionInput = new OO.ui.TextInputWidget( {
-		placeholder: 'Image caption',
+		placeholder: ve.msg( 'visualeditor-mwgallerydialog-image-caption-placeholder' ),
 		multiline: true,
 		autosize: true
 	} );

@@ -283,6 +283,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "The gallery is empty.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Image height",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Default height: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Image caption",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Traditional with no outlines",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Packed",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Packed with captions on hover",

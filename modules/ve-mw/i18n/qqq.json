@@ -296,6 +296,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Empty gallery message for the gallery dialog",
 	"visualeditor-mwgallerydialog-heights-field-label": "Label for the heights field of the gallery dialog",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Placeholder for the heights input",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Placeholder for an image caption",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Label for the nolines option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Label for the packed option in the mode dropdown of the gallery dialog",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Label for the packed-hover option in the mode dropdown of the gallery dialog",
