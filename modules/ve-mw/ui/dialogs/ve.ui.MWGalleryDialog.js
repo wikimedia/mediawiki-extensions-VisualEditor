@@ -52,7 +52,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// States
 	this.highlightedItem = null;
 	this.searchPanelVisible = false;
-	this.imageCaptions = {};
+	this.selectedFilenames = {};
+	this.initialImageData = [];
 
 	// Default settings
 	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
@@ -304,7 +305,10 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 							if ( title ) {
 								titleText = title.getPrefixedText();
 								imageTitles.push( titleText );
-								dialog.imageCaptions[ titleText ] = matches[ 3 ];
+								dialog.initialImageData.push( {
+									title: titleText,
+									caption: matches[ 3 ]
+								} );
 							}
 						}
 					}
@@ -437,14 +441,21 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( deferred, re
 		}
 	}
 
-	for ( title in this.imageCaptions ) {
-		if ( Object.prototype.hasOwnProperty.call( thumbUrls, title ) ) {
-			items.push( new ve.ui.MWGalleryItemWidget( {
-				title: title,
-				caption: this.imageCaptions[ title ],
-				thumbUrl: thumbUrls[ title ]
-			} ) );
-			delete this.imageCaptions[ title ];
+	if ( this.initialImageData.length > 0 ) {
+		this.initialImageData.forEach( function ( image ) {
+			image.thumbUrl = thumbUrls[ image.title ];
+			items.push( new ve.ui.MWGalleryItemWidget( image ) );
+		} );
+		this.initialImageData = [];
+	} else {
+		for ( title in this.selectedFilenames ) {
+			if ( Object.prototype.hasOwnProperty.call( thumbUrls, title ) ) {
+				items.push( new ve.ui.MWGalleryItemWidget( {
+					title: title,
+					thumbUrl: thumbUrls[ title ]
+				} ) );
+				delete this.selectedFilenames[ title ];
+			}
 		}
 	}
 	this.galleryGroup.addItems( items );
@@ -463,8 +474,8 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( deferred, re
 ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 	var dialog = this;
 
-	// Reset this.imageCaptions, for onRequestImagesSuccess
-	this.imageCaptions[ title ] = '';
+	// Make list of unique pending images, for onRequestImagesSuccess
+	this.selectedFilenames[ title ] = true;
 
 	// Request image
 	this.requestImages( {
@@ -486,7 +497,7 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
 	var title = mw.Title.newFromText( item.getData().title ).getPrefixedText();
 
-	if ( !Object.prototype.hasOwnProperty( this.imageCaptions, title ) ) {
+	if ( !Object.prototype.hasOwnProperty( this.selectedFilenames, title ) ) {
 		this.addNewImage( title );
 	}
 };
