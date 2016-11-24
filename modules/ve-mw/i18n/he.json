@@ -278,6 +278,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "הגלריה ריקה.",
 	"visualeditor-mwgallerydialog-heights-field-label": "גובה התמונה",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "גובה ברירת המחדל: {{PLURAL:$1|פיקסל אחד|$1 פיקסלים}}",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "כיתוב התמונה",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "ללא קווי מתאר",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "ארוזה",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "ארוזה עם כותרת בריחוף",

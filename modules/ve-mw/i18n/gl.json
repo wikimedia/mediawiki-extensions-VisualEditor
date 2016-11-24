@@ -276,6 +276,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "A galería está baleira.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Altura da imaxe",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Altura predeterminada: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Lenda da imaxe",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Tradiciona sen contorno",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Arrodeado",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Arrodeado con títulos enriba",

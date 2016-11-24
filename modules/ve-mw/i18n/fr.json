@@ -311,6 +311,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "La galerie est vide.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Hauteur de l’image",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Hauteur par défaut : $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Légende de l'image",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Traditionnel, sans contours",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Entouré",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Entouré avec des titres au survol",

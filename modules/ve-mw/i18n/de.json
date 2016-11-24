@@ -276,6 +276,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Die Galerie ist leer.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Bildhöhe",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Standardhöhe: $1 Pixel",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Bildbeschreibung",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Traditionell ohne Konturen",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Gepackt",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Gepackt mit Beschriftungen beim Darüberfahren",

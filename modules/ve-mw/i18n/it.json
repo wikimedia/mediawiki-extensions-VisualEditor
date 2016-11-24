@@ -290,6 +290,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "La galleria è vuota.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Altezza immagine",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Altezza predefinita: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Didascalia dell'immagine",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Tradizionale senza contorni",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "Presentazione",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "Tradizionale",
