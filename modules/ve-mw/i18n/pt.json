@@ -284,6 +284,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "A galeria está vazia.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Altura da imagem",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Altura predefinida: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Legenda da imagem",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Tradicional sem contornos",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Completa",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Completar com legendas em foco",

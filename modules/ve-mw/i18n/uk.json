@@ -285,6 +285,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Галерея є порожньою",
 	"visualeditor-mwgallerydialog-heights-field-label": "Висота зображень",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Стандартна висота: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Підпис зображення",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Традиційний, без зовнішніх ліній",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Компактно",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Компактно з описами при наведенні",

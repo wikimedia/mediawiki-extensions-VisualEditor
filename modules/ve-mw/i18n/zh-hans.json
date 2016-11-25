@@ -291,6 +291,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "图库为空。",
 	"visualeditor-mwgallerydialog-heights-field-label": "图像高度",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "默认高度：$1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "图片说明",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "没有轮廓的传统",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "已包装",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "已与悬停时的标题一起包装",

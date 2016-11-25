@@ -280,6 +280,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Galleriet är tomt.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Bildhöjd",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Standardhöjd: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "Bildtext",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "Traditionella utan konturer",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "Kompakt",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "Kompakt med bildtexter vid pekning",

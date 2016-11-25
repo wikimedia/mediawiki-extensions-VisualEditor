@@ -253,6 +253,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "গ্যালারিটি ফাঁকা।",
 	"visualeditor-mwgallerydialog-heights-field-label": "চিত্রের উচ্চতা",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "ডিফল্ট উচ্চতা: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "চিত্রের বিবরণ",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "প্রান্তরেখা ছাড়া ঐতিহ্যবাহী",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "প্যাককৃত",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "ভাসানো ক্যাপশনসহ প্যাককৃত",
