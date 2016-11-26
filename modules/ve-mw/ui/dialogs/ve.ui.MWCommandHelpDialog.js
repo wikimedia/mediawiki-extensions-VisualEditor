@@ -36,16 +36,3 @@ ve.ui.MWCommandHelpDialog.static.commandGroups = ve.extendObject( {}, ve.ui.MWCo
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWCommandHelpDialog );
-
-( function () {
-	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().toUpperCase().replace( /-/g, ' + ' ),
-		saveShortcut = ve.msg( 'accesskey-save' );
-
-	if ( saveShortcut !== '-' && saveShortcut !== '' ) {
-		ve.ui.commandHelpRegistry.register( 'other', 'save', {
-			shortcuts: [ accessKeyPrefix + saveShortcut.toUpperCase() ],
-			label: function () { return ve.init.target.getSaveButtonLabel(); },
-			demote: true
-		} );
-	}
-}() );

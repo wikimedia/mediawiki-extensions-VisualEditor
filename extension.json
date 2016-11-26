@@ -305,7 +305,6 @@
 			"messages": [
 				"accesskey-ca-editsource",
 				"accesskey-ca-ve-edit",
-				"accesskey-save",
 				"create",
 				"create-local",
 				"edit",
@@ -378,6 +377,7 @@
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
+				"ext.visualEditor.articleTarget",
 				"ext.visualEditor.desktopTarget",
 				"jquery.cookie",
 				"mediawiki.jqueryMsg",
@@ -409,6 +409,7 @@
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki.mobile",
 				"ext.visualEditor.core.mobile",
+				"ext.visualEditor.articleTarget",
 				"ext.visualEditor.mwimage.core"
 			],
 			"messages" : [
@@ -465,12 +466,7 @@
 				"modules/ve-mw/init/ve.init.mw.Platform.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.init.js",
 				"modules/ve-mw/init/ve.init.mw.Target.js",
-				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
-				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/init/ve.init.mw.trackSubscriber.js"
-			],
-			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css"
 			],
 			"dependencies": [
 				"jquery.byteLength",
@@ -492,6 +488,28 @@
 			"messages": [
 				"visualeditor-quick-access-characters.json",
 				"visualeditor-special-characters-group-other"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.articleTarget": {
+			"scripts": [
+				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
+				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
+				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js"
+			],
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css",
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.core"
+			],
+			"messages": [
+				"accesskey-save"
 			],
 			"targets": [
 				"desktop",
@@ -1151,7 +1169,6 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionPreviewDialog.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCancelConfirmDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWWikitextSwitchConfirmDialog.js",
@@ -1168,7 +1185,6 @@
 			"styles": [
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLiveExtensionInspector.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.css",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.css",
