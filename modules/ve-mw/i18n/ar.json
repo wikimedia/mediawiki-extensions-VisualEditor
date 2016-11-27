@@ -284,6 +284,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "معرض الصور فارغ.",
 	"visualeditor-mwgallerydialog-heights-field-label": "ارتفاع الصورة",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "الارتفاع الافتراضي:$1 بكسل",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "تعليق الصورة",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "تقليدي من دون خطوط خارجية",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed": "مضغوط",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover": "معبأ مع شرح عندالحوم",
