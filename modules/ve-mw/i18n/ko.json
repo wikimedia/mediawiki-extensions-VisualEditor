@@ -285,6 +285,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "이 갤러리는 비어 있습니다.",
 	"visualeditor-mwgallerydialog-heights-field-label": "그림 높이",
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "기본 높이: $1 px",
+	"visualeditor-mwgallerydialog-image-caption-placeholder": "그림 제목",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-nolines": "일반 (외곽선 없음)",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "슬라이드쇼",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "일반",

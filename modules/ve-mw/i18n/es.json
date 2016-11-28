@@ -315,6 +315,8 @@
 	"visualeditor-preference-betatempdisable": "Desactivar temporalmente el editor visual mientras esté en beta",
 	"visualeditor-preference-core-description": "Activar el editor visual. No estará disponible en páginas de discusión y en algunos otros espacios de nombres.",
 	"visualeditor-preference-core-label": "Edición visual",
+	"visualeditor-preference-newwikitexteditor-description": "Activar el editor de código nuevo. Tiene un diseño semejante al del editor visual, cuenta con muchas de sus herramientas y permite una mejor alternancia entre los dos.",
+	"visualeditor-preference-newwikitexteditor-label": "Editor de código nuevo",
 	"visualeditor-preference-enable": "Activar el editor visual. Estará disponible en {{PLURAL:$2|el siguiente espacio|los siguientes espacios}} de nombres: $1",
 	"visualeditor-preference-tabs": "Modo de edición:",
 	"visualeditor-preference-tabs-multi-tab": "Mostrarme ambas pestañas de edición",
