@@ -307,7 +307,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 								imageTitles.push( titleText );
 								dialog.initialImageData.push( {
 									title: titleText,
-									caption: matches[ 3 ]
+									caption: matches[ 3 ] || ''
 								} );
 							}
 						}
@@ -649,7 +649,7 @@ ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
 	// Get titles and captions from gallery group
 	this.highlightedItem.setCaption( this.highlightedCaptionInput.getValue() );
 	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
-		extsrc += '\n' + items[ i ].imageTitle + '|' + items[ i ].caption;
+		extsrc += '\n' + items[ i ].imageTitle + ( items[ i ].caption ? '|' + items[ i ].caption : '' );
 	}
 
 	// Get data from options card
