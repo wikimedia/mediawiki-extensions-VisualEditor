@@ -255,16 +255,16 @@ ve.init.mw.Target.prototype.track = function () {};
 /**
  * @inheritdoc
  */
-ve.init.mw.Target.prototype.createTargetWidget = function ( dmDoc, config ) {
+ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 	if ( this.mode === 'source' ) {
 		// Reset to visual mode for target widgets
-		return new ve.ui.MWTargetWidget( dmDoc, ve.extendObject( {
+		return new ve.ui.MWTargetWidget( ve.extendObject( {
 			commandRegistry: ve.ui.commandRegistry,
 			sequenceRegistry: ve.ui.sequenceRegistry,
 			dataTransferHandlerFactory: ve.ui.dataTransferHandlerFactory
 		}, config ) );
 	} else {
-		return new ve.ui.MWTargetWidget( dmDoc, config );
+		return new ve.ui.MWTargetWidget( config );
 	}
 };
 

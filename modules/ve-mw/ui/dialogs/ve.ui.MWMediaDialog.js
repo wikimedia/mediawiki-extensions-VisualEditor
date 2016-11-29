@@ -20,7 +20,6 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 
 	// Properties
 	this.imageModel = null;
-	this.store = null;
 	this.fileRepoPromise = null;
 	this.pageTitle = '';
 	this.isSettingUpModel = false;
@@ -238,12 +237,20 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	} );
 
 	// Caption
+	// Set up the caption target
+	this.captionTarget = ve.init.target.createTargetWidget( {
+		tools: ve.init.target.constructor.static.toolbarGroups,
+		includeCommands: this.constructor.static.includeCommands,
+		excludeCommands: this.constructor.static.excludeCommands,
+		importRules: this.constructor.static.getImportRules()
+	} );
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		icon: 'parameter',
 		classes: [ 've-ui-mwMediaDialog-caption-fieldset' ]
 	} );
+	this.captionFieldset.$element.append( this.captionTarget.$element );
 
 	// Alt text
 	altTextFieldset = new OO.ui.FieldsetLayout( {
@@ -356,6 +363,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.positionSelect.connect( this, { choose: 'onPositionSelectChoose' } );
 	this.typeSelect.connect( this, { choose: 'onTypeSelectChoose' } );
 	this.search.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
+	this.captionTarget.connect( this, { change: 'checkChanged' } );
 	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
 	this.searchTabs.connect( this, {
 		set: 'onSearchTabsSet'
@@ -1041,9 +1049,7 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 	// Only check 'changed' status after the model has finished
 	// building itself
 	if ( !this.isSettingUpModel ) {
-		if ( this.captionTarget && this.captionTarget.getSurface() ) {
-			captionChanged = this.captionTarget.getSurface().getModel().hasBeenModified();
-		}
+		captionChanged = !!this.captionTarget && this.captionTarget.hasBeenModified();
 
 		if (
 			// Activate or deactivate the apply/insert buttons
@@ -1246,18 +1252,12 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
  * Reset the caption surface
  */
 ve.ui.MWMediaDialog.prototype.resetCaption = function () {
-	var captionDocument,
+	var captionNode, captionDocument,
 		doc = this.getFragment().getDocument();
 
-	if ( this.captionTarget ) {
-		// Reset the caption surface if it already exists
-		this.captionTarget.destroy();
-		this.captionTarget = null;
-		this.captionNode = null;
-	}
 	// Get existing caption. We only do this in setup, because the caption
 	// should not reset to original if the image is replaced or edited.
-
+	//
 	// If the selected node is a block image and the caption already exists,
 	// store the initial caption and set it as the caption document
 	if (
@@ -1266,10 +1266,10 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		this.selectedNode.getDocument() &&
 		this.selectedNode instanceof ve.dm.MWBlockImageNode
 	) {
-		this.captionNode = this.selectedNode.getCaptionNode();
-		if ( this.captionNode && this.captionNode.getLength() > 0 ) {
+		captionNode = this.selectedNode.getCaptionNode();
+		if ( captionNode && captionNode.getLength() > 0 ) {
 			this.imageModel.setCaptionDocument(
-				this.selectedNode.getDocument().cloneFromRange( this.captionNode.getRange() )
+				this.selectedNode.getDocument().cloneFromRange( captionNode.getRange() )
 			);
 		}
 	}
@@ -1285,27 +1285,9 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 		] );
 	}
 
-	this.store = doc.getStore();
-
-	// Set up the caption target
-	this.captionTarget = ve.init.target.createTargetWidget(
-		captionDocument,
-		{
-			tools: ve.init.target.constructor.static.toolbarGroups,
-			includeCommands: this.constructor.static.includeCommands,
-			excludeCommands: this.constructor.static.excludeCommands,
-			importRules: this.constructor.static.getImportRules()
-		}
-	);
-
-	// Initialization
-	this.captionFieldset.$element.append( this.captionTarget.$element );
+	// Set document
+	this.captionTarget.setDocument( captionDocument );
 	this.captionTarget.initialize();
-
-	// Events
-	this.captionTarget.getSurface().getModel().connect( this, {
-		history: this.checkChanged.bind( this )
-	} );
 };
 
 /**
@@ -1338,11 +1320,8 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			if ( this.imageModel ) {
 				this.imageModel.disconnect( this );
 				this.sizeWidget.disconnect( this );
-				this.captionTarget.getSurface().getModel().disconnect( this );
 			}
-			this.captionTarget.destroy();
-			this.captionTarget = null;
-			this.captionNode = null;
+			this.captionTarget.clear();
 			this.imageModel = null;
 		}, this );
 };
