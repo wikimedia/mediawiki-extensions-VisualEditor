@@ -262,24 +262,11 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			var titlesString, title, titleText, imageTitles, mode,
 				caption, widths, heights, perrow,
 				showFilename, classes, styles,
-				pageTitle, namespace, namespacesWithSubpages, namespaceIds,
+				namespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				dialog = this,
 				attributes = this.selectedNode && this.selectedNode.getAttribute( 'mw' ).attrs;
 
 			// Images card
-
-			// First set the search widget input value to the page title
-			pageTitle = mw.config.get( 'wgTitle' );
-			namespace = mw.config.get( 'wgNamespaceNumber' );
-			namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
-			namespaceIds = mw.config.get( 'wgNamespaceIds' );
-
-			if ( namespacesWithSubpages[ namespace ] ) {
-				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
-			}
-
-			this.searchWidget.getQuery().setValue( pageTitle );
-
 			// If editing an existing gallery, populate with the images...
 			if ( this.selectedNode ) {
 				imageTitles = [];
@@ -578,6 +565,8 @@ ve.ui.MWGalleryDialog.prototype.onShowSearchPanelButtonClick = function () {
  * @param {boolean} visible The search panel is visible
  */
 ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
+	var pageTitle, namespace, namespacesWithSubpages;
+
 	visible = visible !== undefined ? visible : !this.searchPanelVisible;
 
 	// If currently visible panel is an edit panel, store the caption
@@ -598,6 +587,20 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 	if ( !visible ) {
 		this.highlightedCaptionInput.focus();
 	} else {
+		if ( !this.searchWidget.getQuery().getValue() ) {
+			// Wait until the search panel is visible before setting a default query
+			// as this triggers a request and render.
+			pageTitle = mw.config.get( 'wgTitle' );
+			namespace = mw.config.get( 'wgNamespaceNumber' );
+			namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
+
+			if ( namespacesWithSubpages[ namespace ] ) {
+				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
+			}
+
+			this.searchWidget.getQuery().setValue( pageTitle );
+		}
+
 		this.searchWidget.getQuery().focus().select();
 	}
 	this.updateDialogSize();
