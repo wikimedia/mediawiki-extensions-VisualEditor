@@ -227,7 +227,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		} )
 	] );
 
-	this.search = new ve.ui.MWMediaSearchWidget();
+	this.search = new mw.widgets.MediaSearchWidget();
 
 	// Define fieldsets for image settings
 
@@ -817,7 +817,7 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
 /**
  * Handle search results choose event.
  *
- * @param {ve.ui.MWMediaResultWidget} item Chosen item
+ * @param {mw.widgets.MediaResultWidget} item Chosen item
  */
 ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
 	this.chooseImageInfo( item.getData() );
@@ -840,7 +840,7 @@ ve.ui.MWMediaDialog.prototype.chooseImageInfo = function ( info ) {
 /**
  * Handle new image being chosen.
  *
- * @param {ve.ui.MWMediaResultWidget|null} item Selected item
+ * @param {mw.widgets.MediaResultWidget|null} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 	var title, imageTitleText,

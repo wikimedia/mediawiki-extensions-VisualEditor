@@ -26,9 +26,7 @@
 				"name": "Data Model",
 				"classes": [
 					"ve.dm.MW*Surface",
-					"ve.dm.MW*SurfaceFragment",
-					"ve.dm.MW*Provider",
-					"ve.dm.MW*Queue"
+					"ve.dm.MW*SurfaceFragment"
 				]
 			},
 			{
@@ -64,7 +62,7 @@
 				"name": "MediaWiki",
 				"classes": [
 					"mw.Title",
-					"mw.widgets.TitleInputWidget"
+					"mw.widgets.*Widget"
 				]
 			}
 		]
