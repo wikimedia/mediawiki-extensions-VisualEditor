@@ -154,24 +154,15 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
 /* Methods */
 
 /**
- * Parse document string into an HTML document
- *
- * @param {string} documentString Document
- * @param {string} mode Editing mode
- * @return {HTMLDocument} HTML document
+ * @inheritdoc
  */
 ve.init.mw.Target.prototype.parseDocument = function ( documentString, mode ) {
 	var doc;
 	if ( mode === 'source' ) {
-		// Parse as plain text in source mode
-		doc = ve.createDocumentFromHtml( '' );
-
-		documentString.split( '\n' ).forEach( function ( line ) {
-			var p = doc.createElement( 'p' );
-			p.appendChild( doc.createTextNode( line ) );
-			doc.body.appendChild( p );
-		} );
+		// Parent method
+		doc = ve.init.mw.Target.super.prototype.parseDocument.apply( this, arguments );
 	} else {
+		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
 
 		// Fix relative or missing base URL if needed

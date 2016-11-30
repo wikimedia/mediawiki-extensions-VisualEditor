@@ -1151,28 +1151,10 @@ ve.init.mw.ArticleTarget.prototype.getDocToSave = function () {
 /**
  * Create a document to save
  *
- * TODO: Move this code to the surface?
- *
  * @return {Object} Document to save
  */
 ve.init.mw.ArticleTarget.prototype.createDocToSave = function () {
-	var i, l, text, data,
-		surface = this.getSurface();
-
-	if ( surface.getMode() === 'source' ) {
-		text = '';
-		data = surface.getModel().getDocument().data.data;
-		for ( i = 0, l = data.length; i < l; i++ ) {
-			if ( data[ i ].type === '/paragraph' && data[ i + 1 ].type === 'paragraph' ) {
-				text += '\n';
-			} else if ( !data[ i ].type ) {
-				text += data[ i ];
-			}
-		}
-
-		return text;
-	}
-	return surface.getDom();
+	return this.getSurface().getDom();
 };
 
 /**
