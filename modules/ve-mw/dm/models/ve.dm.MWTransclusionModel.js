@@ -84,7 +84,7 @@
 				// (which generates a removal and insertion) as blanking a reference triggers T135127.
 				// TODO: Once T135127 is fixed, revert to using surfaceFragment.insert.
 				surfaceFragment.getSurface().change(
-					ve.dm.Transaction.newFromReplacement( surfaceFragment.getDocument(), range, data )
+					ve.dm.TransactionBuilder.static.newFromReplacement( surfaceFragment.getDocument(), range, data )
 				);
 			}
 			deferred.resolve();

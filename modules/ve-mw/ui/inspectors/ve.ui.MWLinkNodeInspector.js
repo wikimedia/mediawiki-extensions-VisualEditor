@@ -117,7 +117,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 
 			if ( remove ) {
 				surfaceModel.change(
-					ve.dm.Transaction.newFromRemoval( doc, nodeRange )
+					ve.dm.TransactionBuilder.static.newFromRemoval( doc, nodeRange )
 				);
 			} else if ( convert ) {
 				annotation = new ve.dm.MWExternalLinkAnnotation( {
@@ -131,7 +131,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				content = value.split( '' );
 				ve.dm.Document.static.addAnnotationsToData( content, annotations );
 				surfaceModel.change(
-					ve.dm.Transaction.newFromReplacement( doc, nodeRange, content )
+					ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 				);
 				setTimeout( function () {
 					// This just removed the node and turned it into an annotation. Thus, this inspector
@@ -152,7 +152,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				} );
 			} else {
 				surfaceModel.change(
-					ve.dm.Transaction.newFromAttributeChanges(
+					ve.dm.TransactionBuilder.static.newFromAttributeChanges(
 						doc, nodeRange.start, { href: value }
 					)
 				);

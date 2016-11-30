@@ -82,7 +82,7 @@ ve.ui.MWExtensionPreviewDialog.prototype.updatePreview = function () {
 	this.updateMwData( mwData );
 
 	doc.commit(
-		ve.dm.Transaction.newFromAttributeChanges(
+		ve.dm.TransactionBuilder.static.newFromAttributeChanges(
 			doc, this.previewNode.getOuterRange().start, { mw: mwData }
 		)
 	);

@@ -159,7 +159,7 @@ ve.ui.MWExtensionWindow.prototype.insertOrUpdateNode = function () {
 		mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
 		this.updateMwData( mwData );
 		surfaceModel.change(
-			ve.dm.Transaction.newFromAttributeChanges(
+			ve.dm.TransactionBuilder.static.newFromAttributeChanges(
 				surfaceModel.getDocument(),
 				this.selectedNode.getOuterRange().start,
 				{ mw: mwData }
