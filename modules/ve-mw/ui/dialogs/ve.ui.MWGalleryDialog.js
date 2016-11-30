@@ -42,7 +42,8 @@ ve.ui.MWGalleryDialog.static.modelClasses = [ ve.dm.MWGalleryNode ];
  * @inheritdoc
  */
 ve.ui.MWGalleryDialog.prototype.initialize = function () {
-	var imagesCard, optionsCard, menuLayout, menuPanel,
+	var imagesCard, optionsCard, menuLayout,
+		innerMenuLayout, innerMenuPanel, innerContentPanel,
 		modeField, captionField, widthsField, heightsField,
 		perrowField, showFilenameField, classesField, stylesField;
 
@@ -79,11 +80,21 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// Images card
 
 	// General layout
-	menuLayout = new OO.ui.MenuLayout();
-	menuPanel = new OO.ui.PanelLayout( {
+	menuLayout = new OO.ui.MenuLayout( {
+		classes: [ 've-ui-mwGalleryDialog-menuLayout' ]
+	} );
+	innerMenuLayout = new OO.ui.MenuLayout( {
+		menuPosition: 'bottom',
+		classes: [ 've-ui-mwGalleryDialog-innerMenuLayout' ]
+	} );
+	innerMenuPanel = new OO.ui.PanelLayout( {
 		padded: true,
 		expanded: true,
 		scrollable: true
+	} );
+	innerContentPanel = new OO.ui.PanelLayout( {
+		padded: true,
+		expanded: true
 	} );
 	this.editPanel = new OO.ui.PanelLayout( {
 		padded: true,
@@ -216,12 +227,19 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 
 	// Append everything
-	menuLayout.$menu.append(
-		menuPanel.$element.append(
-			this.$emptyGalleryMessage,
-			this.galleryGroup.$element,
+	innerMenuLayout.$menu.append(
+		innerContentPanel.$element.append(
 			this.showSearchPanelButton.$element
 		)
+	);
+	innerMenuLayout.$content.append(
+		innerMenuPanel.$element.append(
+			this.$emptyGalleryMessage,
+			this.galleryGroup.$element
+		)
+	);
+	menuLayout.$menu.append(
+		innerMenuLayout.$element
 	);
 	menuLayout.$content.append(
 		this.editPanel.$element.append(
