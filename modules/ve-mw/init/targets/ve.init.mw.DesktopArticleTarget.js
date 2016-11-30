@@ -270,7 +270,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		} );
 	}
 
-	if ( this.mode === 'source' ) {
+	if ( surface.getMode() === 'source' ) {
 		// HACK: Replace source button with VE button. This should be via the registry,
 		// or we should have a toggle tool.
 		actionGroups = ve.copy( this.constructor.static.actionGroups );
@@ -1022,7 +1022,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 				return;
 			}
 
-			if ( target.getSurface() && !target.deactivating && target.mode !== 'source' ) {
+			if ( target.getSurface() && !target.deactivating && target.getDefaultMode() !== 'source' ) {
 				target.editSource();
 
 				if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
@@ -1159,7 +1159,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 	var uri,
-		veaction = this.mode === 'visual' ? 'edit' : 'editsource';
+		veaction = this.getDefaultMode() === 'visual' ? 'edit' : 'editsource';
 
 	// Push veaction=edit(source) url in history (if not already. If we got here by a veaction=edit(source)
 	// permalink then it will be there already and the constructor called #activate)
@@ -1263,10 +1263,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	veaction = this.currentUri.query.veaction;
 
 	if ( ve.init.target.isModeAvailable( 'source' ) && this.active ) {
-		if ( veaction === 'editsource' && this.mode === 'visual' ) {
+		if ( veaction === 'editsource' && this.getDefaultMode() === 'visual' ) {
 			this.actFromPopState = true;
 			this.switchToWikitextEditor();
-		} else if ( veaction === 'edit' && this.mode === 'source' ) {
+		} else if ( veaction === 'edit' && this.getDefaultMode() === 'source' ) {
 			this.actFromPopState = true;
 			this.switchToVisualEditor();
 		}
@@ -1528,7 +1528,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 				return response;
 			} );
 		}
-		this.setMode( 'source' );
+		this.setDefaultMode( 'source' );
 		this.reloadSurface( dataPromise );
 	} else {
 		oldid = this.currentUri.query.oldid || $( 'input[name=parentRevId]' ).val();
@@ -1586,7 +1586,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
 			.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
 					target.section = null;
-					target.setMode( 'visual' );
+					target.setDefaultMode( 'visual' );
 					target.reloadSurface();
 				}
 				windowManager.destroy();
@@ -1600,7 +1600,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
 			this.getDocToSave()
 		);
 
-		this.setMode( 'visual' );
+		this.setDefaultMode( 'visual' );
 		this.reloadSurface( dataPromise );
 	}
 };
@@ -1615,7 +1615,7 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( dataPromise
 	// Create progress - will be discarded when surface is destroyed.
 	this.getSurface().createProgress(
 		$.Deferred().promise(),
-		ve.msg( this.mode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
+		ve.msg( this.getSurface().getMode() === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
 		true /* non-cancellable */
 	);
 	this.activating = true;

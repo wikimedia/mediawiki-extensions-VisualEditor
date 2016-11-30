@@ -157,11 +157,13 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
  * Parse document string into an HTML document
  *
  * @param {string} documentString Document
+ * @param {string} mode Editing mode
  * @return {HTMLDocument} HTML document
  */
-ve.init.mw.Target.prototype.parseDocument = function ( documentString ) {
+ve.init.mw.Target.prototype.parseDocument = function ( documentString, mode ) {
 	var doc;
-	if ( this.mode === 'source' ) {
+	if ( mode === 'source' ) {
+		// Parse as plain text in source mode
 		doc = ve.createDocumentFromHtml( '' );
 
 		documentString.split( '\n' ).forEach( function ( line ) {
@@ -256,7 +258,7 @@ ve.init.mw.Target.prototype.track = function () {};
  * @inheritdoc
  */
 ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
-	if ( this.mode === 'source' ) {
+	if ( this.getSurface().getMode() === 'source' ) {
 		// Reset to visual mode for target widgets
 		return new ve.ui.MWTargetWidget( ve.extendObject( {
 			commandRegistry: ve.ui.commandRegistry,
@@ -274,17 +276,17 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 	var importRules, surface, surfaceView, $documentNode;
 
-	if ( this.mode === 'source' && !( config && config.inTargetWidget ) ) {
+	if ( config && config.mode === 'source' ) {
 		importRules = ve.copy( this.constructor.static.importRules );
 		importRules.all = importRules.all || {};
 		// Preserve empty linebreaks on paste in source editor
 		importRules.all.keepEmptyContentBranches = true;
-		config = this.getSurfaceConfig( {
+		config = this.getSurfaceConfig( ve.extendObject( {}, config, {
 			commandRegistry: ve.ui.wikitextCommandRegistry,
 			sequenceRegistry: ve.ui.wikitextSequenceRegistry,
 			dataTransferHandlerFactory: ve.ui.wikitextDataTransferHandlerFactory,
 			importRules: importRules
-		} );
+		} ) );
 		return new ve.ui.MWDesktopWikitextSurface( dmDoc, config );
 	}
 
@@ -308,13 +310,14 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
  * Create a document model from an HTML document.
  *
  * @param {HTMLDocument} doc HTML document
+ * @param {string} mode Editing mode
  * @return {ve.dm.Document} Document model
  */
-ve.init.mw.Target.prototype.createModelFromDom = function ( doc ) {
+ve.init.mw.Target.prototype.createModelFromDom = function ( doc, mode ) {
 	var i, l, children, data,
 		conf = mw.config.get( 'wgVisualEditor' );
 
-	if ( this.mode === 'source' ) {
+	if ( mode === 'source' ) {
 		children = doc.body.children;
 		data = [];
 
@@ -348,7 +351,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		var dmDoc;
 
 		target.track( 'trace.convertModelFromDom.enter' );
-		dmDoc = target.createModelFromDom( doc );
+		dmDoc = target.createModelFromDom( doc, target.getDefaultMode() );
 		target.track( 'trace.convertModelFromDom.exit' );
 
 		// Build DM tree now (otherwise it gets lazily built when building the CE tree)

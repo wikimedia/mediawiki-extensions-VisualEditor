@@ -275,7 +275,7 @@
 				// and altered, re-attach immediately after
 				init.$loading.detach();
 				// If target was already loaded, ensure the mode is correct
-				target.setMode( mode );
+				target.setDefaultMode( mode );
 				activatePromise = target.activate( dataPromise );
 				$( '#content' ).prepend( init.$loading );
 				return activatePromise;
@@ -577,7 +577,7 @@
 			}
 			if ( active ) {
 				targetPromise.done( function ( target ) {
-					if ( mode === 'visual' && target.mode === 'source' ) {
+					if ( mode === 'visual' && target.getDefaultMode() === 'source' ) {
 						target.switchToVisualEditor();
 					}
 				} );

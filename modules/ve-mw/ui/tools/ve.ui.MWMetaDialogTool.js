@@ -22,7 +22,7 @@ ve.ui.MWVeOnlyDialogTool.prototype.onUpdateState = function () {
 	ve.ui.MWVeOnlyDialogTool.super.prototype.onUpdateState.apply( this, arguments );
 
 	// Meta tools are not supported in source mode (yet?)
-	this.setDisabled( ve.init.target.mode === 'source' );
+	this.setDisabled( !this.toolbar.getSurface() || this.toolbar.getSurface().getMode() === 'source' );
 };
 
 /**

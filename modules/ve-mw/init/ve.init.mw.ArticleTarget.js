@@ -194,16 +194,16 @@ ve.init.mw.ArticleTarget.static.platformType = 'other';
 /**
  * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.setMode = function () {
-	var oldMode = this.mode;
+ve.init.mw.ArticleTarget.prototype.setDefaultMode = function () {
+	var oldDefaultMode = this.defaultMode;
 	// Parent method
-	ve.init.mw.ArticleTarget.super.prototype.setMode.apply( this, arguments );
+	ve.init.mw.ArticleTarget.super.prototype.setDefaultMode.apply( this, arguments );
 
-	if ( this.mode !== oldMode ) {
+	if ( this.defaultMode !== oldDefaultMode ) {
 		this.updateTabs( true );
 		if ( mw.libs.ve.setEditorPreference ) {
 			// only set up by DAT.init
-			mw.libs.ve.setEditorPreference( this.mode === 'visual' ? 'visualeditor' : 'wikitext' );
+			mw.libs.ve.setEditorPreference( this.defaultMode === 'visual' ? 'visualeditor' : 'wikitext' );
 		}
 	}
 };
@@ -223,8 +223,8 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
 
 	if ( editing ) {
 		if ( $( '#ca-ve-edit' ).length ) {
-			selectVe = this.mode === 'visual';
-			selectEdit = this.mode === 'source';
+			selectVe = this.getDefaultMode() === 'visual';
+			selectEdit = this.getDefaultMode() === 'source';
 		} else {
 			// Single edit tab
 			selectEdit = true;
@@ -259,7 +259,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.etag = data.etag;
 		this.fromEditedState = data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
-		this.doc = this.parseDocument( this.originalHtml );
+		this.doc = this.parseDocument( this.originalHtml, this.getDefaultMode() );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
@@ -1087,7 +1087,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	mw.libs.ve.activationStart = null;
 
 	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData(
-		this.mode,
+		this.getDefaultMode(),
 		this.pageName,
 		this.section,
 		this.requestedRevId,
@@ -1151,14 +1151,17 @@ ve.init.mw.ArticleTarget.prototype.getDocToSave = function () {
 /**
  * Create a document to save
  *
+ * TODO: Move this code to the surface?
+ *
  * @return {Object} Document to save
  */
 ve.init.mw.ArticleTarget.prototype.createDocToSave = function () {
-	var i, l, text, data;
+	var i, l, text, data,
+		surface = this.getSurface();
 
-	if ( this.mode === 'source' ) {
+	if ( surface.getMode() === 'source' ) {
 		text = '';
-		data = this.getSurface().getModel().getDocument().data.data;
+		data = surface.getModel().getDocument().data.data;
 		for ( i = 0, l = data.length; i < l; i++ ) {
 			if ( data[ i ].type === '/paragraph' && data[ i + 1 ].type === 'paragraph' ) {
 				text += '\n';
@@ -1169,7 +1172,7 @@ ve.init.mw.ArticleTarget.prototype.createDocToSave = function () {
 
 		return text;
 	}
-	return this.getSurface().getDom();
+	return surface.getDom();
 };
 
 /**
@@ -1199,7 +1202,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 		start = ve.now(),
 		target = this;
 
-	if ( this.mode === 'source' ) {
+	if ( this.getSurface().getMode() === 'source' ) {
 		return;
 	}
 
@@ -1303,7 +1306,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 	var data, postData, preparedCacheKey,
 		target = this;
 
-	if ( this.mode === 'source' ) {
+	if ( this.getSurface().getMode() === 'source' ) {
 		data = {
 			wikitext: doc,
 			format: 'json'
@@ -1831,10 +1834,11 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
  * @method
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
-	var surfaceView, $documentNode, $section, headingNode;
+	var surface = this.getSurface(),
+		surfaceView, $documentNode, $section, headingNode;
 
-	if ( this.mode === 'visual' && this.section !== null && this.section > 0 ) {
-		surfaceView = this.getSurface().getView();
+	if ( surface.getMode() === 'visual' && this.section !== null && this.section > 0 ) {
+		surfaceView = surface.getView();
 		$documentNode = surfaceView.getDocument().getDocumentNode().$element;
 		$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );
 		headingNode = $section.data( 'view' );
@@ -1946,7 +1950,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				this.welcomeDialog,
 				{
 					switchable: this.constructor.static.trackingName !== 'mobile',
-					editor: this.mode
+					editor: this.getDefaultMode()
 				}
 			)
 				.then( function ( opened ) {

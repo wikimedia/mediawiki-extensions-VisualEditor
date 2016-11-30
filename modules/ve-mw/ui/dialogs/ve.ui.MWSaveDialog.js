@@ -261,7 +261,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 
 	// Only show preview in source mode
 	this.actions.forEach( { actions: 'preview' }, function ( action ) {
-		action.toggle( ve.init.target.mode === 'source' );
+		action.toggle( ve.init.target.getSurface().mode === 'source' );
 	} );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
