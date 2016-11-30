@@ -93,7 +93,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					if ( widget.showRedirects ) {
 						params.redirects = '1';
 					}
-					xhr = new mw.Api().get( params );
+					xhr = this.getApi().get( params );
 					return xhr.promise( { abort: xhr.abort } );
 				}
 			} )
