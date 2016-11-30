@@ -21,8 +21,7 @@ ve.ui.mwWikitextTransferRegistry.register(
 
 ve.ui.mwWikitextTransferRegistry.register(
 	'internalLink',
-	// [[...]] on a single line of max 80 characters
-	/\[\[.{1,80}\]\]/m
+	'[['
 );
 
 ve.init.platform.getInitializedPromise().done( function () {
