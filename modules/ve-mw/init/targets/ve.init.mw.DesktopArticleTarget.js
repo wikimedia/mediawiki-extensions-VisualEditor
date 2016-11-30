@@ -1046,7 +1046,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
-	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.call( this );
+	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
 	data.editSummary = this.initialEditSummary;
 	return data;
 };

@@ -498,7 +498,8 @@
 			"scripts": [
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js"
+				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWSaveDialogAction.js"
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css",
@@ -506,7 +507,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mediawiki",
-				"ext.visualEditor.core"
+				"ext.visualEditor.core",
+				"ext.visualEditor.mwcore"
 			],
 			"messages": [
 				"accesskey-save"
