@@ -29,7 +29,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.static.name = 'link';
 
 ve.ui.MWWikitextLinkAnnotationInspector.static.modelClasses = [];
 
-ve.ui.MWWikitextLinkAnnotationInspector.static.handlesWikitext = true;
+ve.ui.MWWikitextLinkAnnotationInspector.static.handlesSource = true;
 
 /* Methods */
 

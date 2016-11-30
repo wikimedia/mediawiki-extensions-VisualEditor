@@ -1768,7 +1768,6 @@
 				"modules/ve-mw/ui/ve.ui.MWWikitextDataTransferHandlerFactory.js",
 				"modules/ve-mw/ui/ve.ui.MWDesktopWikitextSurface.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWWikitextAction.js",
-				"modules/ve-mw/ui/actions/ve.ui.MWWikitextWindowAction.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWWikitextLinkAnnotationInspector.js"
 			],
 			"styles": [
