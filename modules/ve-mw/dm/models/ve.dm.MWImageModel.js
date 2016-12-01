@@ -404,7 +404,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
 
 		// Remove contents of old caption
 		surfaceModel.change(
-			ve.dm.Transaction.newFromRemoval(
+			ve.dm.TransactionBuilder.static.newFromRemoval(
 				doc,
 				captionRange,
 				true
@@ -413,7 +413,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
 
 		// Add contents of new caption
 		surfaceModel.change(
-			ve.dm.Transaction.newFromDocumentInsertion(
+			ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
 				doc,
 				captionRange.start,
 				this.getCaptionDocument()
@@ -423,7 +423,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
 
 	// Update attributes
 	surfaceModel.change(
-		ve.dm.Transaction.newFromAttributeChanges(
+		ve.dm.TransactionBuilder.static.newFromAttributeChanges(
 			doc,
 			node.getOffset(),
 			this.getUpdatedAttributes()
@@ -473,7 +473,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			if ( captionDoc.data.hasContent() ) {
 				// Add contents of new caption
 				surfaceModel.change(
-					ve.dm.Transaction.newFromDocumentInsertion(
+					ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
 						surfaceModel.getDocument(),
 						fragment.getSelection().getRange().start + 2,
 						this.getCaptionDocument()

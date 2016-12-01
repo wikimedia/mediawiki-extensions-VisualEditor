@@ -152,7 +152,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 
 			if ( remove ) {
 				surfaceModel.change(
-					ve.dm.Transaction.newFromRemoval( doc, nodeRange )
+					ve.dm.TransactionBuilder.static.newFromRemoval( doc, nodeRange )
 				);
 			} else if ( convert ) {
 				annotation = ve.dm.MWMagicLinkNode.static.annotationFromContent(
@@ -164,12 +164,12 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 					content = value.split( '' );
 					ve.dm.Document.static.addAnnotationsToData( content, annotations );
 					surfaceModel.change(
-						ve.dm.Transaction.newFromReplacement( doc, nodeRange, content )
+						ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 					);
 				}
 			} else if ( done && this.validate( value ) ) {
 				surfaceModel.change(
-					ve.dm.Transaction.newFromAttributeChanges(
+					ve.dm.TransactionBuilder.static.newFromAttributeChanges(
 						doc, nodeRange.start, { content: value }
 					)
 				);
