@@ -127,7 +127,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.unwrapText = function ( before, after 
 /**
  * @inheritdoc
  */
-ve.dm.MWWikitextSurfaceFragment.prototype.convertDocument = function ( doc ) {
+ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	var wikitextPromise;
 
 	if ( !doc.data.hasContent() ) {
@@ -146,4 +146,31 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertDocument = function ( doc ) {
 	} );
 
 	return wikitextPromise;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source ) {
+	var parsePromise = new mw.Api().post( {
+		action: 'visualeditor',
+		paction: 'parsefragment',
+		page: mw.config.get( 'wgRelevantPageName' ),
+		wikitext: source
+	} ).then( function ( response ) {
+		return ve.dm.converter.getModelFromDom(
+			ve.createDocumentFromHtml( response.visualeditor.content )
+		);
+	} );
+
+	// TODO: Emit an event to trigger the progress bar
+	ve.init.target.getSurface().createProgress(
+		parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
+	).done( function ( progressBar, cancelPromise ) {
+		cancelPromise.fail( function () {
+			parsePromise.abort();
+		} );
+	} );
+
+	return parsePromise;
 };
