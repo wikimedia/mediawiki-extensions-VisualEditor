@@ -1001,6 +1001,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 					ve.msg( 'visualeditor-loaderror-message', ve.getProp( details, 'error', 'info' ) || 'Failed to connect' )
 				).html() );
 			}
+			target.getSurface().getModel().getDocument().once( 'transact',
+				target.saveDialog.clearDiff.bind( target.saveDialog )
+			);
 		} );
 	} else {
 		this.saveDialog.swapPanel( 'preview' );
