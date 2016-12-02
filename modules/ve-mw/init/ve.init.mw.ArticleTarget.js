@@ -1758,19 +1758,24 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
  * Handle clicks on the save button in the toolbar.
  */
 ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
-	if ( this.edited || this.restoring ) {
-		this.showSaveDialog();
-	}
+	this.showSaveDialog();
 };
 
 /**
  * Show a save dialog
  *
+ * @param {string} [action] Window action to trigger after opening
+ * @param {string} [initialPanel] Initial panel to show in the dialog
+ *
  * @fires saveWorkflowBegin
  */
-ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
+ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, initialPanel ) {
 	var target = this,
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+
+	if ( !( this.edited || this.restoring ) ) {
+		return;
+	}
 
 	this.emit( 'saveWorkflowBegin' );
 
@@ -1795,17 +1800,20 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function () {
 	} );
 
 	// Open the dialog
-	windowAction.open( 'mwSave', this.getSaveDialogOpeningData() );
+	windowAction.open( 'mwSave', this.getSaveDialogOpeningData( initialPanel ), action );
 };
 
 /**
  * Get opening data to pass to the save dialog
+ *
+ * @param {string} [initialPanel] Initial panel to show in the dialog
  */
-ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
+ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function ( initialPanel ) {
 	return {
 		saveButtonLabel: this.getSaveButtonLabel(),
 		checkboxFields: this.checkboxFields,
-		checkboxesByName: this.checkboxesByName
+		checkboxesByName: this.checkboxesByName,
+		initialPanel: initialPanel
 	};
 };
 
@@ -1976,17 +1984,3 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		this.welcomeDialogPromise.reject();
 	}
 };
-
-// Register save button with command help dialog
-( function () {
-	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().toUpperCase().replace( /-/g, ' + ' ),
-		saveShortcut = ve.msg( 'accesskey-save' );
-
-	if ( saveShortcut !== '-' && saveShortcut !== '' ) {
-		ve.ui.commandHelpRegistry.register( 'other', 'save', {
-			shortcuts: [ accessKeyPrefix + saveShortcut.toUpperCase() ],
-			label: function () { return ve.init.target.getSaveButtonLabel(); },
-			demote: true
-		} );
-	}
-}() );

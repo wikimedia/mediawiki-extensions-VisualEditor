@@ -534,7 +534,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			this.checkboxesByName = data.checkboxesByName || {};
 			// Old messages should not persist
 			this.clearAllMessages();
-			this.swapPanel( 'save' );
+			this.swapPanel( data.initialPanel || 'save' );
 			// Update save button label
 			if ( data.saveButtonLabel ) {
 				this.actions.forEach( { actions: 'save' }, function ( action ) {
