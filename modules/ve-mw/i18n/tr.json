@@ -22,7 +22,8 @@
 			"HakanIST",
 			"JackUKElliott",
 			"Hbseren",
-			"Sadrettin"
+			"Sadrettin",
+			"Alikaan"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -188,8 +189,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Alanlar gereklidir.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Geri dön",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Yine de devam et",
-	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Gerekli {{PLURAL:$1|parametre|parametre}} eksik",
-	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|değiştirgesi|değiştirgeleri}}'ni eklemeden devam etmek istediğinize emin misiniz?",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Gerekli {{PLURAL:$1|boşluk|boşlular}} eksik",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|boşluğunu|boşluklarını}} doldurmadan devam etmek istediğinize emin misiniz?",
 	"visualeditor-dialog-transclusion-single-mode": "Seçenekleri gizle",
 	"visualeditor-dialog-transclusion-title": "Şablon bütünleştirme",
 	"visualeditor-dialogbutton-media-tooltip": "Dosya",
@@ -220,7 +221,6 @@
 	"visualeditor-linknodeinspector-add-label": "Etiket ekle",
 	"visualeditor-linknodeinspector-title": "Basit bağlantı",
 	"visualeditor-loaderror-message": "$1 Sunucusundan veri yüklenirken hata oluştu.",
-	"visualeditor-loaderror-message-noconnect": "Sunucuya bağlanılamadı.",
 	"visualeditor-loaderror-title": "Editör yüklenemedi",
 	"visualeditor-loadwarning": "Sunucudan veri yüklenirken hata: $1. Yeniden denemek ister misiniz?",
 	"visualeditor-loadwarning-token": "Sunucudan düzenleme belirteci yüklenmesinde hata: $1. Yeniden denemek ister misiniz?",
@@ -250,6 +250,8 @@
 	"visualeditor-preference-betatempdisable": "Görsel Düzenleyici'yi devre dışı bırak",
 	"visualeditor-preference-core-description": "Görsel Düzenleyiciyi etkinleştirin. Mesaj sayfalarında ve bazı diğer ad alanlarında kullanılamayacaktır.",
 	"visualeditor-preference-core-label": "Görsel Düzenleyici",
+	"visualeditor-preference-newwikitexteditor-description": "Görsel editör içinde yeni viki modunu etkinleştir. Görsel editörde mevcut araçların çoğuna sahiptir, benzer bir tasarım kullanır ve ikisi arasında daha iyi bir geçiş sağlar.",
+	"visualeditor-preference-newwikitexteditor-label": "Yeni wikitext modu",
 	"visualeditor-preference-enable": "Görsel Düzenleyiciyi etkinleştirin. Aşağıdaki {{PLURAL:$2|ad alanı|ad alanlarında}} kullanılacaktır: $1",
 	"visualeditor-preference-tabs": "Düzenleme biçimi:",
 	"visualeditor-preference-tabs-prefer-ve": "Mümkün olan her zaman görsel düzenleyiciyi kullan",
