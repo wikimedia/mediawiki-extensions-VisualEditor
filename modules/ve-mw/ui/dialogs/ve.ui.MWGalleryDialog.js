@@ -339,6 +339,9 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.classesInput.setValue( classes );
 			this.stylesInput.setValue( styles );
 
+			// Disable fields depending on mode
+			this.onModeDropdownChange();
+
 			// Add event handlers
 			this.indexLayout.connect( this, { set: 'updateDialogSize' } );
 			this.searchWidget.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
@@ -550,6 +553,9 @@ ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
 
 	this.widthsInput.setDisabled( disabled );
 	this.perrowInput.setDisabled( disabled );
+
+	// heights is only ignored in slideshow mode
+	this.heightsInput.setDisabled( mode === 'slideshow' );
 };
 
 /**
