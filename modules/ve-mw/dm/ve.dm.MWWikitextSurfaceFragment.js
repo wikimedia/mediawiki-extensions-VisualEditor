@@ -163,14 +163,14 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 		);
 	} );
 
-	// TODO: Emit an event to trigger the progress bar
-	ve.init.target.getSurface().createProgress(
-		parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
-	).done( function ( progressBar, cancelPromise ) {
-		cancelPromise.fail( function () {
-			parsePromise.abort();
-		} );
-	} );
+	// TODO: Show progress bar without breaking WindowAction
+	// ve.init.target.getSurface().createProgress(
+	// 	parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
+	// ).done( function ( progressBar, cancelPromise ) {
+	// 	cancelPromise.fail( function () {
+	// 		parsePromise.abort();
+	// 	} );
+	// } );
 
 	return parsePromise;
 };
