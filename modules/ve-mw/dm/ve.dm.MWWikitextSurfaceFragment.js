@@ -152,16 +152,23 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
  * @inheritdoc
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source ) {
-	var parsePromise = new mw.Api().post( {
-		action: 'visualeditor',
-		paction: 'parsefragment',
-		page: mw.config.get( 'wgRelevantPageName' ),
-		wikitext: source
-	} ).then( function ( response ) {
-		return ve.dm.converter.getModelFromDom(
-			ve.createDocumentFromHtml( response.visualeditor.content )
-		);
-	} );
+	var parsePromise;
+	if ( !source ) {
+		parsePromise = $.Deferred().resolve(
+			this.getDocument().shallowCloneFromRange( new ve.Range( 0 ) )
+		).promise();
+	} else {
+		parsePromise = new mw.Api().post( {
+			action: 'visualeditor',
+			paction: 'parsefragment',
+			page: mw.config.get( 'wgRelevantPageName' ),
+			wikitext: source
+		} ).then( function ( response ) {
+			return ve.dm.converter.getModelFromDom(
+				ve.createDocumentFromHtml( response.visualeditor.content )
+			);
+		} );
+	}
 
 	// TODO: Show progress bar without breaking WindowAction
 	// ve.init.target.getSurface().createProgress(
