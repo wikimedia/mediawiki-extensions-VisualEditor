@@ -123,7 +123,9 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 
 	// Search panel
-	this.searchWidget = new mw.widgets.MediaSearchWidget();
+	this.searchWidget = new mw.widgets.MediaSearchWidget( {
+		rowHeight: 150
+	} );
 
 	// Options card
 
