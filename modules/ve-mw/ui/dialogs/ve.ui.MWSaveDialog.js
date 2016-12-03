@@ -12,7 +12,7 @@
  * noted otherwise.
  *
  * @class
- * @extends ve.ui.FragmentDialog
+ * @extends OO.ui.ProcessDialog
  *
  * @constructor
  * @param {Object} [config] Config options
@@ -36,7 +36,7 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWSaveDialog, ve.ui.FragmentDialog );
+OO.inheritClass( ve.ui.MWSaveDialog, OO.ui.ProcessDialog );
 
 /* Static Properties */
 
