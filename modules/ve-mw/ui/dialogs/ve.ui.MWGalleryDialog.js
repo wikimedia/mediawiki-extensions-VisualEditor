@@ -529,6 +529,9 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	item.toggleHighlighted( true );
 	this.highlightedItem = item;
 
+	// Scroll item into view in menu
+	OO.ui.Element.static.scrollIntoView( item.$element[ 0 ] );
+
 	// Populate edit panel
 	this.$highlightedImage
 		.css( 'background-image', 'url(' + item.thumbUrl + ')' );
