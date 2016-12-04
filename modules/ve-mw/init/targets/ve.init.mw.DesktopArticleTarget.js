@@ -1537,8 +1537,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 				return response;
 			} );
 		}
-		this.setDefaultMode( 'source' );
-		this.reloadSurface( dataPromise );
+		this.reloadSurface( 'source', dataPromise );
 	} else {
 		oldid = this.currentUri.query.oldid || $( 'input[name=parentRevId]' ).val();
 		target = this;
@@ -1595,8 +1594,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
 			.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
 					target.section = null;
-					target.setDefaultMode( 'visual' );
-					target.reloadSurface();
+					target.reloadSurface( 'visual' );
 				}
 				windowManager.destroy();
 			} );
@@ -1609,22 +1607,24 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
 			this.getDocToSave()
 		);
 
-		this.setDefaultMode( 'visual' );
-		this.reloadSurface( dataPromise );
+		this.reloadSurface( 'visual', dataPromise );
 	}
 };
 
 /**
  * Reload the target surface in the new editor mode
  *
+ * @param {string} newMode New mode
  * @param {jQuery.Promise} [dataPromise] Data promise, if any
  */
-ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( dataPromise ) {
+ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( newMode, dataPromise ) {
 	var target = this;
+
+	this.setDefaultMode( newMode );
 	// Create progress - will be discarded when surface is destroyed.
 	this.getSurface().createProgress(
 		$.Deferred().promise(),
-		ve.msg( this.getSurface().getMode() === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
+		ve.msg( newMode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
 		true /* non-cancellable */
 	);
 	this.activating = true;
