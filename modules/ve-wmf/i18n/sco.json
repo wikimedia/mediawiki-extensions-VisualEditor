@@ -4,12 +4,13 @@
 			"John Reid",
 			"Amire80",
 			"아라",
-			"Foxj"
+			"Foxj",
+			"Jdforrester"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VeesualEediter]]",
-	"tag-visualeditor-description": "Eedit dun uisin the [[{{MediaWiki:visualeditor-descriptionpagelink}}|VeesualEediter]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VeesualEediter: Check]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Veesual eedit]]",
+	"tag-visualeditor-description": "Eedit dun uisin the [[{{MediaWiki:visualeditor-descriptionpagelink}}|veesual eediter]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Veesual eedit: Check]]",
 	"tag-visualeditor-needcheck-description": "Eedit dun uisin the [[{{MediaWiki:visualeditor-descriptionpagelink}}|VeesualEediter]] whaur the system detectit the wikitex possiblie haein on-ettled-fer chynges.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VeesualEiditer: Switched]]",
 	"tag-visualeditor-switched-description": "Uiser stairted tae eidit uising VeesualEditer than chynged til the wikitex eiditer.",
