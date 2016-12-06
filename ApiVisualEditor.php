@@ -109,9 +109,15 @@ class ApiVisualEditor extends ApiBase {
 				$resp->header( 'X-Cache: ' . $rp );
 			}
 		} elseif ( $response['error'] !== '' ) {
-			$this->dieUsage( 'docserver-http-error: ' . $response['error'], $response['error'] );
+			$this->dieWithError(
+				[ 'apierror-visualeditor-docserver-http-error', wfEscapeWikiText( $response['error'] ) ],
+				$response['error']
+			);
 		} else { // error null, code not 200
-			$this->dieUsage( 'docserver-http: HTTP ' . $response['code'], $response['code'] );
+			$this->dieWithError(
+				[ 'apierror-visualeditor-docserver-http', $response['code'] ],
+				$response['code']
+			);
 		}
 		return $response['body'];
 	}
@@ -180,7 +186,7 @@ class ApiVisualEditor extends ApiBase {
 
 		$title = Title::newFromText( $params['page'] );
 		if ( !$title ) {
-			$this->dieUsageMsg( 'invalidtitle', $params['page'] );
+			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
 		}
 
 		$parserParams = [];
@@ -202,7 +208,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( $title->exists() ) {
 					$latestRevision = Revision::newFromTitle( $title );
 					if ( $latestRevision === null ) {
-						$this->dieUsage( 'Could not find latest revision for title', 'latestnotfound' );
+						$this->dieWithError( 'apierror-visualeditor-latestnotfound', 'latestnotfound' );
 					}
 					$revision = null;
 					if ( !isset( $parserParams['oldid'] ) || $parserParams['oldid'] === 0 ) {
@@ -211,7 +217,7 @@ class ApiVisualEditor extends ApiBase {
 					} else {
 						$revision = Revision::newFromId( $parserParams['oldid'] );
 						if ( $revision === null ) {
-							$this->dieUsage( 'Could not find revision ID ' . $parserParams['oldid'], 'oldidnotfound' );
+							$this->dieWithError( [ 'apierror-nosuchrevid', $parserParams['oldid'] ], 'oldidnotfound' );
 						}
 					}
 
@@ -227,7 +233,7 @@ class ApiVisualEditor extends ApiBase {
 							[]
 						);
 						if ( $content === false ) {
-							$this->dieUsage( 'Error contacting the document server', 'docserver' );
+							$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 						}
 					} elseif ( $params['paction'] === 'wikitext' ) {
 						$apiParams = [
@@ -261,7 +267,7 @@ class ApiVisualEditor extends ApiBase {
 							}
 						}
 						if ( $content === false ) {
-							$this->dieUsage( 'Error contacting the document server', 'docserver' );
+							$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 						}
 					}
 
@@ -474,7 +480,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 				$content = $this->parseWikitextFragment( $title, $wikitext );
 				if ( $content === false ) {
-					$this->dieUsage( 'Error contacting the document server', 'docserver' );
+					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				} else {
 					$result = [
 						'result' => 'success',
@@ -486,7 +492,7 @@ class ApiVisualEditor extends ApiBase {
 			case 'getlanglinks':
 				$langlinks = $this->getLangLinks( $title );
 				if ( $langlinks === false ) {
-					$this->dieUsage( 'Error querying MediaWiki API', 'api-langlinks-error' );
+					$this->dieWithError( 'apierror-visualeditor-api-langlinks-error', 'api-langlinks-error' );
 				} else {
 					$result = [ 'result' => 'success', 'langlinks' => $langlinks ];
 				}
