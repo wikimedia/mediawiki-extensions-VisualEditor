@@ -58,10 +58,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $api->getResult()->getResultData();
 	}
 
-	protected function parseWikitext( $title, $newRevId ) {
+	protected function parseWikitext( $newRevId ) {
 		$apiParams = [
 			'action' => 'parse',
-			'page' => $title->getPrefixedDBkey(),
 			'oldid' => $newRevId,
 			'prop' => 'text|revid|categorieshtml|displaytitle|modules|jsconfigvars',
 		];
@@ -318,7 +317,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 				// Return result of parseWikitext instead of saveWikitext so that the
 				// frontend can update the page rendering without a refresh.
-				$result = $this->parseWikitext( $title, $newRevId );
+				$result = $this->parseWikitext( $newRevId );
 				if ( $result === false ) {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				}
