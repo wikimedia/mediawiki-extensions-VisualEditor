@@ -597,6 +597,7 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 
 		// Move original content back out of the target
 		target.$element.parent().append( target.$originalContent.children() );
+		$( '#catlinks' ).replaceWith( target.$originalCategories );
 		$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 			.off( '.ve-target' )
 			.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -742,45 +743,51 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
  * @param {boolean} [loading=false] Whether VE is loading.
  */
 ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem, loading ) {
-	var title, target, $link;
-	if ( metaItem.getType() === 'mwRedirect' ) {
-		target = this;
-		title = metaItem.getAttribute( 'title' );
-		$link = $( '<a>' )
-			.attr( 'title', mw.msg( 'visualeditor-redirect-description', title ) )
-			.text( title );
-		ve.init.platform.linkCache.styleElement( title, $link );
+	var title, target, $link,
+		metaList = this.surface.getModel().getMetaList();
+	switch ( metaItem.getType() ) {
+		case 'mwRedirect':
+			target = this;
+			title = metaItem.getAttribute( 'title' );
+			$link = $( '<a>' )
+				.attr( 'title', mw.msg( 'visualeditor-redirect-description', title ) )
+				.text( title );
+			ve.init.platform.linkCache.styleElement( title, $link );
 
-		if ( loading ) {
-			this.$originalRedirectMsg = $( '.redirectMsg' ).clone();
-			this.$originalRedirectSub = $( '#redirectsub, #redirectsub + br' ).clone();
-		}
-		// Add redirect target header
-		if ( !$( '#redirectsub' ).length ) {
-			$( '#contentSub' ).append(
-				$( '<span>' )
-					.text( mw.msg( 'redirectpagesub' ) )
-					.attr( 'id', 'redirectsub' ),
-				$( '<br>' )
-			);
-		}
-		$( '<div>' )
-			// Bit of a hack: Make sure any redirect note is styled
-			.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
+			if ( loading ) {
+				this.$originalRedirectMsg = $( '.redirectMsg' ).clone();
+				this.$originalRedirectSub = $( '#redirectsub, #redirectsub + br' ).clone();
+			}
+			// Add redirect target header
+			if ( !$( '#redirectsub' ).length ) {
+				$( '#contentSub' ).append(
+					$( '<span>' )
+						.text( mw.msg( 'redirectpagesub' ) )
+						.attr( 'id', 'redirectsub' ),
+					$( '<br>' )
+				);
+			}
+			$( '<div>' )
+				// Bit of a hack: Make sure any redirect note is styled
+				.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
 
-			.addClass( 've-redirect-header' )
-			.append(
-				$( '<p>' ).text( mw.msg( 'redirectto' ) ),
-				$( '<ul>' )
-					.addClass( 'redirectText' )
-					.append( $( '<li>' ).append( $link ) )
-			)
-			.click( function ( e ) {
-				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
-				windowAction.open( 'meta', { page: 'settings' } );
-				e.preventDefault();
-			} )
-			.insertAfter( $( '.mw-jump' ) );
+				.addClass( 've-redirect-header' )
+				.append(
+					$( '<p>' ).text( mw.msg( 'redirectto' ) ),
+					$( '<ul>' )
+						.addClass( 'redirectText' )
+						.append( $( '<li>' ).append( $link ) )
+				)
+				.click( function ( e ) {
+					var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+					windowAction.open( 'meta', { page: 'settings' } );
+					e.preventDefault();
+				} )
+				.insertAfter( $( '.mw-jump' ) );
+			break;
+		case 'mwCategory':
+			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
+			break;
 	}
 };
 
@@ -792,10 +799,53 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
  * @param {number} index Index within that offset the item was at
  */
 ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaItem ) {
-	if ( metaItem.getType() === 'mwRedirect' ) {
-		this.$originalContent.find( '.redirectMsg' ).remove();
-		$( '#contentSub #redirectsub, #contentSub #redirectsub + br' ).remove();
+	var metaList = this.surface.getModel().getMetaList();
+	switch ( metaItem.getType() ) {
+		case 'mwRedirect':
+			this.$originalContent.find( '.redirectMsg' ).remove();
+			$( '#contentSub #redirectsub, #contentSub #redirectsub + br' ).remove();
+			break;
+		case 'mwCategory':
+			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
+			break;
 	}
+};
+
+/**
+ * Redisplay the category list on the page
+ *
+ * @param {ve.dm.MetaItem[]} categoryItems Array of category metaitems to display
+ */
+ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categoryItems ) {
+	var target = this;
+	// We need to fetch this from the API because the category list is skin-
+	// dependent, so the HTML output could be absolutely anything.
+	new mw.Api().post( {
+		formatversion: 2,
+		action: 'parse',
+		contentmodel: 'wikitext',
+		text: categoryItems.map( function ( categoryItem ) {
+			// TODO: wikitext-building is a bad smell here, but is done
+			// because there's no other API call that will get the category
+			// markup. Adding such an API, if other use cases for it emerge,
+			// might make sense.
+			if ( categoryItem.getAttribute( 'sortkey' ) ) {
+				return '[[' + categoryItem.getAttribute( 'category' ) + '|' + categoryItem.getAttribute( 'sortkey' ) + ']]';
+			}
+			return '[[' + categoryItem.getAttribute( 'category' ) + ']]';
+		} ).join( '\n' ),
+		prop: 'categorieshtml'
+	} ).then( function ( response ) {
+		var $categories;
+		if ( !response || !response.parse || !response.parse.categorieshtml ) {
+			return;
+		}
+		$categories = $( $.parseHTML( response.parse.categorieshtml ) );
+		target.transformCategoryLinks( $categories );
+		target.disableUneditableContent( $categories );
+		mw.hook( 'wikipage.categories' ).fire( $categories );
+		$( '#catlinks' ).replaceWith( $categories );
+	} );
 };
 
 /**
@@ -1126,8 +1176,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
  * Page modifications for switching to edit mode.
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
-	var target = this,
-		$content;
+	var $content;
 
 	this.updateTabs( true );
 	this.emit( 'transformPage' );
@@ -1136,6 +1185,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 
 	// Move all native content inside the target
 	this.$originalContent.append( this.$element.siblings() );
+	this.$originalCategories = $( '#catlinks' ).clone( true );
 
 	// Mark every non-direct ancestor between editableContent and the container as uneditable
 	$content = this.$editableContent;
@@ -1145,22 +1195,41 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content = $content.parent();
 	}
 
+	this.transformCategoryLinks( $( '.catlinks' ) );
+
+	this.disableUneditableContent();
+
+	this.updateHistoryState();
+};
+
+/**
+ * Category link section transformations for switching to edit mode. Broken out
+ * so it can be re-applied when displaying changes to the categories.
+ *
+ * @param {jQuery} $catlinks Category links container element
+ */
+ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $catlinks ) {
+	var target = this;
 	// Un-disable the catlinks wrapper, but not the links
-	$( '.catlinks' )
-		.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
+	$catlinks.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
 		.on( 'click.ve-target', function () {
 			var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 			windowAction.open( 'meta', { page: 'categories' } );
 			return false;
 		} )
 		.find( 'a' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+};
 
-	$( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).on( 'click.ve-target', function ( e ) {
+/**
+ * Disabling of non-editable content, in a given context
+ *
+ * @param {jQuery|string} [context] Context to disable in
+ */
+ve.init.mw.DesktopArticleTarget.prototype.disableUneditableContent = function ( context ) {
+	$( '.ve-init-mw-desktopArticleTarget-uneditableContent', context ).on( 'click.ve-target', function ( e ) {
 		// Support IE9: Prevent default, but don't stop propagation
 		e.preventDefault();
 	} );
-
-	this.updateHistoryState();
 };
 
 /**
@@ -1221,6 +1290,10 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		this.$originalRedirectSub.prependTo( $( '#contentSub' ) );
 		this.$originalRedirectMsg = undefined;
 		this.$originalRedirectSub = undefined;
+	}
+
+	if ( this.$originalCategories ) {
+		$( '#catlinks' ).replaceWith( this.$originalCategories );
 	}
 
 	mw.hook( 've.deactivate' ).fire();
@@ -1306,7 +1379,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub, isRedirect
 ) {
 	var $content = $( $.parseHTML( html ) ),
-		$veSectionLinks;
+		$veSectionLinks, $categories;
 
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
@@ -1346,7 +1419,9 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	if ( displayTitle ) {
 		$( '#content #firstHeading' ).html( displayTitle );
 	}
-	$( '#catlinks' ).replaceWith( categoriesHtml );
+	$categories = $( $.parseHTML( categoriesHtml ) );
+	mw.hook( 'wikipage.categories' ).fire( $categories );
+	$( '#catlinks' ).replaceWith( $categories );
 	$( '#contentSub' ).html( contentSub );
 
 	if ( isRedirect ) {
