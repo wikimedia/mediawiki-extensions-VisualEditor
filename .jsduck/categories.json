@@ -132,7 +132,8 @@
 					"ve.dm.TableNodeCellIterator",
 					"ve.dm.Change",
 					"ve.dm.RebaseServer",
-					"ve.dm.RebaseClient"
+					"ve.dm.RebaseClient",
+					"ve.dm.SurfaceSynchronizer"
 				]
 			},
 			{
