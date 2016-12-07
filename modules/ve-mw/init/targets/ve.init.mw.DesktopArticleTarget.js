@@ -597,7 +597,6 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 
 		// Move original content back out of the target
 		target.$element.parent().append( target.$originalContent.children() );
-		$( '#catlinks' ).replaceWith( target.$originalCategories );
 		$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 			.off( '.ve-target' )
 			.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -1291,7 +1290,6 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		this.$originalRedirectMsg = undefined;
 		this.$originalRedirectSub = undefined;
 	}
-
 	if ( this.$originalCategories ) {
 		$( '#catlinks' ).replaceWith( this.$originalCategories );
 	}
@@ -1419,9 +1417,12 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	if ( displayTitle ) {
 		$( '#content #firstHeading' ).html( displayTitle );
 	}
+
 	$categories = $( $.parseHTML( categoriesHtml ) );
 	mw.hook( 'wikipage.categories' ).fire( $categories );
 	$( '#catlinks' ).replaceWith( $categories );
+	this.$originalCategories = null;
+
 	$( '#contentSub' ).html( contentSub );
 
 	if ( isRedirect ) {
