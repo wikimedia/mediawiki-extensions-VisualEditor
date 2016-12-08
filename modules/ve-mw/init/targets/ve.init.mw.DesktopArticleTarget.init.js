@@ -101,6 +101,18 @@
 		}
 	}
 
+	function parseSection( section ) {
+		var parsedSection = section;
+		// Section must be 'new' (not yet supported) or a number
+		if ( section !== 'new' ) {
+			parsedSection = +section;
+			if ( isNaN( parsedSection ) ) {
+				parsedSection = null;
+			}
+		}
+		return parsedSection;
+	}
+
 	/**
 	 * Use deferreds to avoid loading and instantiating Target multiple times.
 	 *
@@ -108,7 +120,7 @@
 	 * @param {string} mode Target mode: 'visual' or 'source'
 	 * @return {jQuery.Promise}
 	 */
-	function getTarget( mode ) {
+	function getTarget( mode, section ) {
 		if ( !targetPromise ) {
 			// The TargetLoader module is loaded in the bottom queue, so it should have been
 			// requested already but it might not have finished loading yet
@@ -165,7 +177,8 @@
 				} );
 		}
 
-		targetPromise.then( function () {
+		targetPromise.then( function ( target ) {
+			target.section = section;
 			// Enqueue the loading of deferred modules (that is, modules which provide
 			// functionality that is not needed for loading the editor).
 			setTimeout( function () {
@@ -263,7 +276,7 @@
 		incrementLoadingProgress();
 		active = true;
 
-		targetPromise = targetPromise || getTarget( mode );
+		targetPromise = targetPromise || getTarget( mode, section );
 		targetPromise
 			.then( function ( target ) {
 				var activatePromise;
@@ -655,18 +668,18 @@
 				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
 
-			targetPromise = getTarget( mode );
 			if ( mode === 'visual' ) {
-				targetPromise = targetPromise.then( function ( target ) {
+				// Get section based on heading count (may differ from wikitext section count)
+				targetPromise = getTarget( mode ).then( function ( target ) {
 					target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
 					return target;
 				} );
 			} else {
-				section = +( new mw.Uri( e.target.href ).query.section );
-				targetPromise = targetPromise.then( function ( target ) {
-					target.section = section;
-					return target;
-				} );
+				// Use section from URL
+				if ( section === undefined ) {
+					section = parseSection( new mw.Uri( e.target.href ).query.section );
+				}
+				targetPromise = getTarget( mode, section );
 			}
 			activateTarget( mode, section, targetPromise );
 		}
@@ -800,7 +813,7 @@
 
 	$( function () {
 		var showWikitextWelcome = true,
-			section = uri.query.section !== undefined ? uri.query.section : null,
+			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null,
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
 			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,

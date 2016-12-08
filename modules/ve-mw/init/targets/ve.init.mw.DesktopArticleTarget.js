@@ -52,7 +52,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	};
 	this.scrollTop = null;
 	this.currentUri = currentUri;
-	this.section = currentUri.query.section !== undefined ? +currentUri.query.section : null;
+	this.section = null;
 	if ( $( '#wpSummary' ).length ) {
 		this.initialEditSummary = $( '#wpSummary' ).val();
 	} else {
