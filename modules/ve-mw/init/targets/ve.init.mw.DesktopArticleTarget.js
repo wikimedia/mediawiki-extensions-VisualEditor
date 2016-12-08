@@ -462,11 +462,15 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
 	if ( !this.editingTabDialog ) {
-		// We have to focus the page after hiding the original content, otherwise
-		// in firefox the contentEditable container was below the view page, and
-		// 'focus' scrolled the screen down.
-		// Support: Firefox
-		this.getSurface().getView().focus();
+		if ( this.sectionTitle ) {
+			this.sectionTitle.focus();
+		} else {
+			// We have to focus the page after hiding the original content, otherwise
+			// in firefox the contentEditable container was below the view page, and
+			// 'focus' scrolled the screen down.
+			// Support: Firefox
+			this.getSurface().getView().focus();
+		}
 	}
 };
 
@@ -475,11 +479,45 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
 	if ( surface !== this.surface ) {
+		this.setupNewSection( surface );
 		this.$editableContent.after( surface.$element );
 	}
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.setSurface.apply( this, arguments );
+};
+
+/**
+ * Setup new section inputs if required
+ *
+ * @param {ve.ui.Surface} surface Surface
+ */
+ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface ) {
+	if ( surface.getMode() === 'source' && this.section === 'new' ) {
+		if ( !this.sectionTitle ) {
+			this.sectionTitle = new OO.ui.TextInputWidget( {
+				classes: [ 've-ui-init-desktopArticleTarget-sectionTitle' ],
+				maxLength: 255,
+				placeholder: ve.msg( 'visualeditor-section-title-placeholder' )
+			} );
+			this.sectionTitle.connect( this, { change: 'updateToolbarSaveButtonState' } );
+		}
+		surface.setPlaceholder( ve.msg( 'visualeditor-section-body-placeholder' ) );
+		this.$editableContent.before( this.sectionTitle.$element );
+	}
+};
+
+/**
+ * Teardown new section inputs
+ */
+ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function () {
+	if ( this.getSurface() ) {
+		this.getSurface().setPlaceholder( '' );
+	}
+	if ( this.sectionTitle ) {
+		this.sectionTitle.$element.remove();
+		this.sectionTitle = null;
+	}
 };
 
 /**
@@ -506,6 +544,7 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 	if ( this.editingTabDialog ) {
 		this.editingTabDialog.close();
 	}
+	this.teardownNewSection();
 	this.editingTabDialog = null;
 
 	if ( noDialog || this.activating || !this.edited ) {

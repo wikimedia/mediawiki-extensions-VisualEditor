@@ -26,7 +26,6 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.restoring = false;
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
-	this.target = null;
 	this.checkboxesByName = null;
 	this.changedEditSummary = false;
 
@@ -262,6 +261,11 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	// Only show preview in source mode
 	this.actions.forEach( { actions: 'preview' }, function ( action ) {
 		action.toggle( ve.init.target.getSurface().mode === 'source' );
+	} );
+
+	// Diff API doesn't support section=new
+	this.actions.forEach( { actions: 'review' }, function ( action ) {
+		action.toggle( !( ve.init.target.getSurface().mode === 'source' && ve.init.target.section === 'new' ) );
 	} );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
@@ -527,7 +531,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			if ( !this.changedEditSummary ) {
+			if ( ve.init.target.sectionTitle ) {
+				this.setEditSummary( ve.msg( 'newsectionsummary', ve.init.target.sectionTitle.getValue() ) );
+				this.editSummaryInput.setDisabled( true );
+			} else if ( !this.changedEditSummary ) {
 				this.setEditSummary( data.editSummary );
 			}
 			this.setupCheckboxes( data.checkboxFields || [] );
@@ -561,7 +568,6 @@ ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
 			this.emit( 'close' );
-			this.target = null;
 		}, this );
 };
 

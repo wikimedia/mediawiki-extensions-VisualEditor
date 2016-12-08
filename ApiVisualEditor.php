@@ -244,30 +244,36 @@ class ApiVisualEditor extends ApiBase {
 						];
 
 						if ( isset( $params['section'] ) ) {
-							$apiParams['rvsection'] = $params['section'];
+							$section = $params['section'];
 						}
 
-						$api = new ApiMain(
-							new DerivativeRequest(
-								$this->getRequest(),
-								$apiParams,
-								false // was posted?
-							),
-							true // enable write?
-						);
-						$api->execute();
-						$result = $api->getResult()->getResultData();
-						$pid = $title->getArticleID();
-						$content = false;
-						if ( isset( $result['query']['pages'][$pid]['revisions'] ) ) {
-							foreach ( $result['query']['pages'][$pid]['revisions'] as $revArr ) {
-								if ( $revArr['revid'] === $oldid ) {
-									$content = $revArr['content'];
+						if ( $section === 'new' ) {
+							$content = '';
+						} else {
+							$apiParams['rvsection'] = $section;
+
+							$api = new ApiMain(
+								new DerivativeRequest(
+									$this->getRequest(),
+									$apiParams,
+									false // was posted?
+								),
+								true // enable write?
+							);
+							$api->execute();
+							$result = $api->getResult()->getResultData();
+							$pid = $title->getArticleID();
+							$content = false;
+							if ( isset( $result['query']['pages'][$pid]['revisions'] ) ) {
+								foreach ( $result['query']['pages'][$pid]['revisions'] as $revArr ) {
+									if ( $revArr['revid'] === $oldid ) {
+										$content = $revArr['content'];
+									}
 								}
 							}
-						}
-						if ( $content === false ) {
-							$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
+							if ( $content === false ) {
+								$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
+							}
 						}
 					}
 

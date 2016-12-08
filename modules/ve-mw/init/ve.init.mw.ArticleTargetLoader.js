@@ -108,7 +108,7 @@
 		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {string} pageName Page name to request
-		 * @param {number} [section] Section to edit (currently just source mode)
+		 * @param {number|string} [section] Section to edit, number or 'new' (currently just source mode)
 		 * @param {string} [oldid] Old revision ID, current if omitted
 		 * @param {string} [targetName] Optional target name for tracking
 		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)

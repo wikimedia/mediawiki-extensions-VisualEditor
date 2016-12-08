@@ -24,3 +24,8 @@
 	/* Monobook sets a background:url(); rule which overrides the colour. TODO: Fix upstream */
 	background-color: #e6f1ff;
 }
+
+.ve-ui-init-desktopArticleTarget-sectionTitle {
+	font-size: 150%;
+	border-bottom: 1px solid #aaa;
+}

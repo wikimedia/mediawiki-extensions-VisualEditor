@@ -40,6 +40,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.section = null;
+	this.sectionTitle = null;
 
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
@@ -985,16 +986,23 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
  * @fires savePreview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
-	var target = this;
+	var wikitext,
+		target = this;
 	if ( !this.saveDialog.$previewViewer.children().length ) {
 		this.emit( 'savePreview' );
 		this.saveDialog.getActions().setAbilities( { approve: false } );
 		this.saveDialog.pushPending();
+
+		wikitext = this.getDocToSave();
+		if ( this.sectionTitle && this.sectionTitle.getValue() ) {
+			wikitext = '== ' + this.sectionTitle.getValue() + ' ==\n\n' + wikitext;
+		}
+
 		new mw.Api().post( {
 			action: 'visualeditor',
 			paction: 'parsefragment',
 			page: mw.config.get( 'wgRelevantPageName' ),
-			wikitext: this.getDocToSave(),
+			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
@@ -1004,12 +1012,23 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 					ve.msg( 'visualeditor-loaderror-message', ve.getProp( details, 'error', 'info' ) || 'Failed to connect' )
 				).html() );
 			}
-			target.getSurface().getModel().getDocument().once( 'transact',
-				target.saveDialog.clearDiff.bind( target.saveDialog )
-			);
+			target.bindSaveDialogClearDiff();
 		} );
 	} else {
 		this.saveDialog.swapPanel( 'preview' );
+	}
+};
+
+/**
+ * Clear the save dialog's diff cache when the document changes
+ */
+ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
+	// Invalidate the viewer wikitext on next change
+	this.getSurface().getModel().getDocument().once( 'transact',
+		this.saveDialog.clearDiff.bind( this.saveDialog )
+	);
+	if ( this.sectionTitle ) {
+		this.sectionTitle.once( 'change', this.saveDialog.clearDiff.bind( this.saveDialog ) );
 	}
 };
 
@@ -1020,10 +1039,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
  * @param {string} wikitext
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
-	// Invalidate the viewer wikitext on next change
-	this.getSurface().getModel().getDocument().once( 'transact',
-		this.saveDialog.clearDiff.bind( this.saveDialog )
-	);
+	this.bindSaveDialogClearDiff();
 	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
 };
 
@@ -1299,11 +1315,15 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 			wikitext: doc,
 			format: 'json'
 		};
-		if ( this.section !== null ) {
-			data.section = this.section;
-		}
 		postData = ve.extendObject( {}, options, data );
-		if ( data.token ) {
+		if ( this.section !== null ) {
+			postData.section = this.section;
+		}
+		if ( this.sectionTitle ) {
+			postData.sectiontitle = this.sectionTitle.getValue();
+			postData.summary = undefined;
+		}
+		if ( postData.token ) {
 			return new mw.Api().post( postData, { contentType: 'multipart/form-data' } );
 		}
 		return new mw.Api().postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
@@ -1754,6 +1774,9 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
 	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState;
+	if ( this.sectionTitle ) {
+		this.edited = this.edited || this.sectionTitle.getValue() !== '';
+	}
 	// Disable the save button if we have no history
 	isDisabled = !this.edited && !this.restoring;
 	this.toolbarSaveButton.setDisabled( isDisabled );

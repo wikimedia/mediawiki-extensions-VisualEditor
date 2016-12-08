@@ -61,3 +61,18 @@
 .ve-init-mw-desktopArticleTarget #bodyContent { /* stylelint-disable-line selector-no-id */
 	z-index: 1;
 }
+
+.ve-ui-init-desktopArticleTarget-sectionTitle {
+	max-width: none;
+	margin: 1em 0 0.5em 0;
+}
+
+/* stylelint-disable declaration-no-important */
+.ve-ui-init-desktopArticleTarget-sectionTitle .oo-ui-inputWidget-input {
+	padding: 0 !important;
+	border: 0 !important;
+	outline: 0 !important;
+	box-shadow: none !important;
+	line-height: inherit;
+}
+/* stylelint-enable declaration-no-important */
