@@ -214,26 +214,29 @@ ve.init.mw.ArticleTarget.prototype.setDefaultMode = function () {
  * @param {boolean} editing Whether the editor is loaded.
  */
 ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
-	var selectVe = false,
-		selectEdit = false;
+	var tab;
 
 	// Deselect current mode (e.g. "view" or "history"). In skins like monobook that don't have
 	// separate tab sections for content actions and namespaces the below is a no-op.
 	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
 
 	if ( editing ) {
-		if ( $( '#ca-ve-edit' ).length ) {
-			selectVe = this.getDefaultMode() === 'visual';
-			selectEdit = this.getDefaultMode() === 'source';
+		if ( this.section === 'new' ) {
+			tab = 'addsection';
+		} else if ( $( 've-edit' ).length ) {
+			if ( this.getDefaultMode() === 've' ) {
+				tab = 've-edit';
+			} else {
+				tab = 'edit';
+			}
 		} else {
 			// Single edit tab
-			selectEdit = true;
+			tab = 'edit';
 		}
 	} else {
-		$( '#ca-view' ).addClass( 'selected' );
+		tab = 'view';
 	}
-	$( '#ca-ve-edit' ).toggleClass( 'selected', selectVe );
-	$( '#ca-edit' ).toggleClass( 'selected', selectEdit );
+	$( '#ca-' + tab ).addClass( 'selected' );
 };
 
 /**
