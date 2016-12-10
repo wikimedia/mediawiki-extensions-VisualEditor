@@ -440,7 +440,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 			{ type: 'paragraph' }, { type: '/paragraph' },
 			{ type: 'internalList' }, { type: '/internalList' }
 		] ) );
-		surface.disable();
+		surface.setDisabled( true );
 		// setSurface creates dummy toolbar
 		this.dummyToolbar = true;
 		this.setSurface( surface );
