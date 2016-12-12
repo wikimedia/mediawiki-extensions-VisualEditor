@@ -14,13 +14,16 @@
 			"Amire80",
 			"아라",
 			"TheEduGobi",
-			"TheGabrielZaum"
+			"TheGabrielZaum",
+			"!Silent"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual]]",
 	"tag-visualeditor-description": "Edição feita utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual: Verificar]]",
 	"tag-visualeditor-needcheck-description": "Edição feita utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] em que o sistema detectou possíveis mudanças não-intencionais ao wikitexto.",
+	"tag-visualeditor-wikitext": "editor de código 2017",
+	"tag-visualeditor-wikitext-description": "Edição feita com o editor de texto wiki 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual: Alternada]]",
 	"tag-visualeditor-switched-description": "O(A) usuário(a) começou a editar usando o editor visual, e depois alternou para o editor de código-fonte.",
 	"visualeditor-feedback-link": "Project:Editor Visual/Comentários",

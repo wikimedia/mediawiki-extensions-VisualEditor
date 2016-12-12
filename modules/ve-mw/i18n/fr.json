@@ -76,6 +76,7 @@
 	"apihelp-visualeditoredit-param-section": "La section sur laquelle agir.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Lors de l’enregistrement, règle ceci avec l’horodatage du moment où la page a été chargée. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditoredit-param-summary": "Modifier le résumé.",
+	"apierror-visualeditor-difffailed": "Erreur dans Diff",
 	"tooltip-ca-createsource": "Créer le wikicode de cette page",
 	"tooltip-ca-edit": "Modifier cette page en utilisant le wikitexte",
 	"tooltip-ca-editsource": "Modifier le wikicode de cette page",

@@ -19,6 +19,7 @@
 	"apihelp-visualeditoredit-param-paction": "Aktioun fir ze maachen.",
 	"apihelp-visualeditoredit-param-page": "D'Säit op där Aktioune gemaach soll ginn.",
 	"apihelp-visualeditoredit-param-summary": "Resumé änneren.",
+	"apierror-visualeditor-latestnotfound": "Déi lescht Versioun vum Titel gouf net fonnt",
 	"tooltip-ca-createsource": "De Quelltext vun dëser Säit uleeën",
 	"tooltip-ca-edit": "Dës Säit mat Wikitext änneren.",
 	"tooltip-ca-editsource": "De Quelltext vun dëser Säit änneren",
