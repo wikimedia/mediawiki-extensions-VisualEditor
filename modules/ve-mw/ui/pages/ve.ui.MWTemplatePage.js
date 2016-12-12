@@ -69,9 +69,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
 				.html( mw.message(
 					'visualeditor-dialog-transclusion-no-template-description',
-					title.getPrefixedText(),
-					// FIXME: Drop this no-longer needed second parameter after January 2016
-					mw.user
+					title.getPrefixedText()
 				).parse() )
 				.find( 'a' ).attr( 'target', '_blank' );
 		}
