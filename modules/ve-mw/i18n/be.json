@@ -105,7 +105,7 @@
 	"visualeditor-preference-enable": "Уключыць VisualEditor (толькі ў [[{{MediaWiki:Visualeditor-mainnamespacepagelink}}|асноўнай]] і [[{{MediaWiki:Visualeditor-usernamespacepagelink}}|асабістай]] прасторах імёнаў).",
 	"visualeditor-savedialog-label-create": "Стварыць старонку",
 	"visualeditor-savedialog-label-report": "Паведаміць пра праблему",
-	"visualeditor-savedialog-label-review-good": "Нядрэнна выглядае для мяне",
+	"visualeditor-savedialog-label-review-good": "Вярнуцца, каб захаваць форму",
 	"visualeditor-savedialog-title-review": "Праверце вашы праўкі",
 	"visualeditor-savedialog-title-save": "Захаваць змены",
 	"visualeditor-saveerror": "Памылка захавання дадзеных на сервер: $1.",
@@ -113,7 +113,7 @@
 	"visualeditor-toolbar-savedialog": "Захаваць старонку",
 	"visualeditor-usernamespacepagelink": "Project:Асабістая прастора",
 	"visualeditor-version-label": "Версія",
-	"visualeditor-viewpage-savewarning": "Вы сапраўды жадаеце вярнуцца ў рэжым прагляду, не захаваўшы змены?",
+	"visualeditor-viewpage-savewarning": "Вы сапраўды жадаеце выйсці з рэжыму рэдагавання, не захаваўшы змены?",
 	"visualeditor-viewpage-savewarning-discard": "Адмяніць змены",
 	"visualeditor-viewpage-savewarning-keep": "Працягнуць рэдагаванне"
 }

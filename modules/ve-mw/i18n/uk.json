@@ -20,7 +20,8 @@
 			"Alex Blokha",
 			"A1",
 			"Dars",
-			"Green Zero"
+			"Green Zero",
+			"Alex Khimich"
 		]
 	},
 	"apihelp-visualeditor-description": "Повертає HTML5 для сторінки від сервісу Parsoid.",
@@ -50,6 +51,8 @@
 	"apihelp-visualeditoredit-param-section": "Розділ, над яким вчинити дію.",
 	"apihelp-visualeditoredit-param-starttimestamp": "При збереженні, встановіть мітку часу, коли сторінка була завантажена. Використовується для виявлення конфліктів редагування.",
 	"apihelp-visualeditoredit-param-summary": "Опис редагування.",
+	"apierror-visualeditor-api-langlinks-error": "Помилка запиту до MediaWiki API",
+	"apierror-visualeditor-badcachekey": "Не знайдено кешованої серіалізованої інформації з таким ключем",
 	"tooltip-ca-createsource": "Створити вихідний код сторінки",
 	"tooltip-ca-edit": "Редагувати цю сторінку в редакторі вікірозмітки",
 	"tooltip-ca-editsource": "Редагувати вихідний код сторінки",
