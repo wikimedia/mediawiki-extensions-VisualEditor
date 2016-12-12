@@ -87,6 +87,8 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				if ( this.initialSelection.isCollapsed() && ( insertion = this.getInsertionData() ).length ) {
 					fragment.insertContent( insertion );
 				}
+				// Action is async, so we use auto select to ensure the content is selected
+				fragment.setAutoSelect( true );
 				fragment.annotateContent( 'set', annotation );
 			} else if ( !data.action ) {
 				// Restore selection to what it was before we expanded it
