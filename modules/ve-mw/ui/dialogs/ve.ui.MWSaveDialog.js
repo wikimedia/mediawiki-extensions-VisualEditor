@@ -28,6 +28,8 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.setupDeferred = $.Deferred();
 	this.checkboxesByName = null;
 	this.changedEditSummary = false;
+	this.canReview = false;
+	this.canPreview = false;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwSaveDialog' );
@@ -265,12 +267,12 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 
 	// Only show preview in source mode
 	this.actions.forEach( { actions: 'preview' }, function ( action ) {
-		action.toggle( ve.init.target.getSurface().mode === 'source' );
+		action.toggle( dialog.canPreview );
 	} );
 
 	// Diff API doesn't support section=new
 	this.actions.forEach( { actions: 'review' }, function ( action ) {
-		action.toggle( !( ve.init.target.getSurface().mode === 'source' && ve.init.target.section === 'new' ) );
+		action.toggle( dialog.canReview );
 	} );
 
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
@@ -531,19 +533,33 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 /**
  * @inheritdoc
  * @param {Object} [data]
- * @param {Function|string} [data.saveButtonLabel] Label for the save button
+ * @param {boolean} [data.canReview] User can review changes
+ * @param {boolean} [data.canPreview] User can preview changes
+ * @param {OO.ui.FieldLayout[]} [data.checkboxFields] Checkbox fields
+ * @param {Object} [data.checkboxesByName] Checkbox widgets, indexed by name
+ * @param {string} [data.sectionTitle] Section title, if in new section mode
+ * @param {string} [data.editSummary] Edit summary
+ * @param {string} [data.initialPanel='save'] Initial panel to show
+ * @param {jQuery|string|OO.ui.HtmlSnippet|Function|null} [data.saveButtonLabel] Label for the save button
  */
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			if ( ve.init.target.sectionTitle ) {
-				this.setEditSummary( ve.msg( 'newsectionsummary', ve.init.target.sectionTitle.getValue() ) );
-				this.editSummaryInput.setDisabled( true );
-			} else if ( !this.changedEditSummary ) {
-				this.setEditSummary( data.editSummary );
-			}
+			this.canReview = !!data.canReview;
+			this.canPreview = !!data.canPreview;
 			this.setupCheckboxes( data.checkboxFields || [] );
 			this.checkboxesByName = data.checkboxesByName || {};
+
+			if ( data.sectionTitle ) {
+				this.setEditSummary( ve.msg( 'newsectionsummary', data.sectionTitle ) );
+				this.editSummaryInput.setDisabled( true );
+			} else {
+				this.editSummaryInput.setDisabled( false );
+				if ( !this.changedEditSummary ) {
+					this.setEditSummary( data.editSummary );
+				}
+			}
+
 			// Old messages should not persist
 			this.clearAllMessages();
 			// Don't focus during setup to prevent scroll jumping (T153010)
