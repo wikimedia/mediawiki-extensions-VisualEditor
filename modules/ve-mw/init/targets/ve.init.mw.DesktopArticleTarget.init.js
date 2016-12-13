@@ -581,7 +581,7 @@
 		},
 
 		onEditTabClick: function ( mode, e ) {
-			var isNewSection;
+			var section;
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
@@ -590,18 +590,25 @@
 				return;
 			}
 
-			isNewSection = !!$( e.target ).closest( '#ca-addsection' ).length;
+			section = $( e.target ).closest( '#ca-addsection' ).length ? 'new' : null;
 
-			if ( isNewSection ) {
-				this.onEditSectionLinkClick( mode, e, 'new' );
-			} else if ( active ) {
+			if ( active ) {
 				targetPromise.done( function ( target ) {
 					if ( mode === 'visual' && target.getDefaultMode() === 'source' ) {
 						target.switchToVisualEditor();
+					} else if (
+						mode === 'source' && target.getDefaultMode() === 'source'
+					) {
+						// Requetsed section may have changed
+						target.switchToWikitextSection( section );
 					}
 				} );
 			} else {
-				init.activateVe( mode );
+				if ( section !== null ) {
+					this.onEditSectionLinkClick( mode, e, section );
+				} else {
+					init.activateVe( mode );
+				}
 			}
 		},
 
