@@ -64,7 +64,16 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		mw.config.get( 'wgAction' ) === 'view' &&
 		currentUri.query.diff === undefined
 	);
-	this.originalDocumentTitle = document.title;
+
+	if ( $( '#wpTextbox1' ).length ) {
+		// We're loading on top of the classic wikitext editor, so we don't
+		// know the "proper" page title. But we can fake it with information
+		// we have.
+		this.originalDocumentTitle = ve.msg( 'pagetitle', mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText() );
+	} else {
+		this.originalDocumentTitle = document.title;
+	}
+
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
