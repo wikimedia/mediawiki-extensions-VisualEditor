@@ -160,11 +160,7 @@ class ApiVisualEditor extends ApiBase {
 		);
 
 		$api->execute();
-		$result = $api->getResult()->getResultData( null, [
-			'BC' => [], // Backwards-compatible structure transformations
-			'Types' => [], // Backwards-compatible structure transformations
-			'Strip' => 'all', // Remove any metadata keys from the langlinks array
-		] );
+		$result = $api->getResult()->getResultData();
 		if ( !isset( $result['query']['pages'][$title->getArticleID()] ) ) {
 			return false;
 		}
