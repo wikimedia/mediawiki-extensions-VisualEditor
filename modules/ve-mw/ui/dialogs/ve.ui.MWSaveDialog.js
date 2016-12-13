@@ -50,7 +50,7 @@ ve.ui.MWSaveDialog.static.actions = [
 		// May be overridden by config.saveButtonLabel
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
 		flags: [ 'primary', 'constructive' ],
-		modes: [ 'save', 'review' ],
+		modes: [ 'save', 'review', 'preview' ],
 		accessKey: 's'
 	},
 	{
