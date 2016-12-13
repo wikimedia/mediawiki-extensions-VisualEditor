@@ -224,8 +224,8 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
 	if ( editing ) {
 		if ( this.section === 'new' ) {
 			tab = 'addsection';
-		} else if ( $( 've-edit' ).length ) {
-			if ( this.getDefaultMode() === 've' ) {
+		} else if ( $( '#ca-ve-edit' ).length ) {
+			if ( this.getDefaultMode() === 'visual' ) {
 				tab = 've-edit';
 			} else {
 				tab = 'edit';
