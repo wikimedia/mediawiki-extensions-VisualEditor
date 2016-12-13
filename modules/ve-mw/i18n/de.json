@@ -343,6 +343,8 @@
 	"visualeditor-savedialog-warning-dirty": "Deine Bearbeitung ist eventuell beschädigt. Bitte vor dem Speichern überprüfen.",
 	"visualeditor-saveerror": "Fehler beim Speichern der Daten auf dem Server: $1.",
 	"visualeditor-saveerror-titleblacklist": "Fehler beim Speichern der Seite: Der Seitentitel ist auf der schwarzen Liste.",
+	"visualeditor-section-body-placeholder": "Neuer Abschnitt",
+	"visualeditor-section-title-placeholder": "Betreff",
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",
 	"visualeditor-settings-tool": "Seiteneinstellungen",
 	"visualeditor-shortcuts-insert": "Einfügen",
