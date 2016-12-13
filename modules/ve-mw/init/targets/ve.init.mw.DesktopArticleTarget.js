@@ -1302,6 +1302,9 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 			delete uri.query.action;
 			mw.config.set( 'wgAction', 'view' );
 		}
+		if ( this.section !== null ) {
+			uri.query.section = this.section;
+		}
 
 		history.pushState( this.popState, document.title, uri );
 	}
