@@ -169,10 +169,11 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  * Swap state in the save dialog.
  *
  * @param {string} panel One of 'save', 'review', 'conflict' or 'nochanges'
+ * @param {boolean} [noFocus] Don't attempt to focus anything (e.g. while setting up)
  * @return {jQuery} The now active panel
  * @throws {Error} Unknown saveDialog panel
  */
-ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
+ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 	var currentEditSummaryWikitext,
 		mode = panel,
 		size = 'medium',
@@ -195,16 +196,20 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel ) {
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
 	this.actions.setAbilities( { save: true } );
 
-	// On panels without inputs, ensure the dialog is focused so events
-	// are captured, e.g. 'Esc' to close
-	this.$content[ 0 ].focus();
+	if ( !noFocus ) {
+		// On panels without inputs, ensure the dialog is focused so events
+		// are captured, e.g. 'Esc' to close
+		this.$content[ 0 ].focus();
+	}
 
 	switch ( panel ) {
 		case 'save':
-			// HACK: FF needs *another* defer
-			setTimeout( function () {
-				dialog.editSummaryInput.moveCursorToEnd();
-			} );
+			if ( !noFocus ) {
+				// HACK: FF needs *another* defer
+				setTimeout( function () {
+					dialog.editSummaryInput.moveCursorToEnd();
+				} );
+			}
 			break;
 		case 'conflict':
 			this.actions.setAbilities( { save: false } );
@@ -534,7 +539,8 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			this.checkboxesByName = data.checkboxesByName || {};
 			// Old messages should not persist
 			this.clearAllMessages();
-			this.swapPanel( data.initialPanel || 'save' );
+			// Don't focus during setup to prevent scroll jumping (T153010)
+			this.swapPanel( data.initialPanel || 'save', true );
 			// Update save button label
 			if ( data.saveButtonLabel ) {
 				this.actions.forEach( { actions: 'save' }, function ( action ) {
@@ -550,7 +556,8 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			this.editSummaryInput.focus();
+			// This includes a #focus call
+			this.editSummaryInput.moveCursorToEnd();
 		}, this );
 };
 
