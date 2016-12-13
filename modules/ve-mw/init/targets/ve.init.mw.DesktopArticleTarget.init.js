@@ -1022,8 +1022,15 @@
 			}
 
 			// NWE
-			if ( init.isWikitextAvailable && isOnlyTabWikitext() ) {
-				$( '.mw-editsection a, #ca-edit a' ).each( function () {
+			if ( init.isWikitextAvailable && !isOnlyTabVE() ) {
+				$(
+					// Edit section links, except VE ones when both editors visible
+					'.mw-editsection a:not( .mw-editsection-visualeditor ),' +
+					// Edit tab
+					'#ca-edit a,',
+					// Add section is currently a wikitext-only feature
+					'#ca-addsection a'
+				).each( function () {
 					var uri = new mw.Uri( $( this ).attr( 'href' ) );
 					delete uri.query.action;
 					uri.query.veaction = 'editsource';
