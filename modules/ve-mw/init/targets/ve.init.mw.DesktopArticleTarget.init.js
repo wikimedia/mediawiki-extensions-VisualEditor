@@ -919,13 +919,16 @@
 				} else if (
 					init.isVisualAvailable &&
 					pageCanLoadEditor &&
-					userPrefEnabled
+					init.isSingleEditTab
 				) {
-					// Page can be edited in VE, parameters are good, user prefs are mostly good
-					// but have visualeditor-tabs=prefer-wt? Add a keyboard shortcut to go to
-					// VE.
+					// In single edit tab mode we never have an edit tab
+					// with accesskey 'v' so create one
 					$( 'body' ).append(
-						$( '<a>' ).attr( { accesskey: 'v', href: veEditUri } ).hide()
+						$( '<a>' )
+							.attr( { accesskey: 'v', href: veEditUri } )
+							// Accesskey fires a click event
+							.on( 'click', init.onEditTabClick.bind( init, 'visual' ) )
+							.hide()
 					);
 				}
 			}
