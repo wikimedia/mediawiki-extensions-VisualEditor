@@ -1155,7 +1155,12 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function ()
  * Remember the window's scroll position.
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveScrollPosition = function () {
-	this.scrollTop = $( window ).scrollTop();
+	if ( this.getDefaultMode() === 'source' && this.section !== null ) {
+		// Reset scroll to top if doing real section editing
+		this.scrollTop = 0;
+	} else {
+		this.scrollTop = $( window ).scrollTop();
+	}
 };
 
 /**
