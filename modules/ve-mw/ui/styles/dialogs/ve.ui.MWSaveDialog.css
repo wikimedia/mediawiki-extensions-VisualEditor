@@ -16,10 +16,7 @@
 }
 
 .ve-ui-mwSaveDialog-summary textarea {
-	display: block;
-	resize: none; /* stylelint-disable-line no-unsupported-browser-features */
 	height: 4em;
-	background-color: transparent;
 }
 
 .ve-ui-mwSaveDialog-foot {
@@ -28,8 +25,8 @@
 
 .ve-ui-mwSaveDialog-options {
 	position: relative;
-	background-color: #f7f7f7;
-	border: solid 1px #ccc;
+	background-color: #f8f9fa;
+	border: solid 1px #c8ccd1;
 	border-top: 0;
 	min-height: 3em;
 }
@@ -49,10 +46,10 @@
 	right: 0;
 	top: 0;
 	bottom: 0;
-	border-left: solid 1px #eee;
+	border-left: solid 1px #eaecf0;
 	line-height: 3em;
 	padding: 0 1em;
-	color: #aaa;
+	color: #54595d;
 }
 
 .ve-ui-mwSaveDialog-license {
@@ -60,5 +57,5 @@
 	line-height: 1.4em;
 	padding: 0;
 	margin: 0;
-	color: #555;
+	color: #54595d;
 }
