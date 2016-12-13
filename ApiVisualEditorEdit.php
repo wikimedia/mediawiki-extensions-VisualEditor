@@ -405,6 +405,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			],
 			'wikitext' => null,
 			'section' => null,
+			'sectiontitle' => null,
 			'basetimestamp' => null,
 			'starttimestamp' => null,
 			'oldid' => null,

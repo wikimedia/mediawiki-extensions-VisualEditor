@@ -390,12 +390,15 @@
 				"parentheses",
 				"readonlywarning",
 				"redirectpagesub",
+				"subject",
 				"visualeditor-loadwarning",
 				"visualeditor-loadwarning-noconnect",
 				"visualeditor-loadwarning-token",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-trylogin",
-				"visualeditor-savedialog-identify-user"
+				"visualeditor-savedialog-identify-user",
+				"visualeditor-section-body-placeholder",
+				"visualeditor-section-title-placeholder"
 			]
 		},
 		"ext.visualEditor.mobileArticleTarget": {
@@ -512,7 +515,8 @@
 				"ext.visualEditor.mwcore"
 			],
 			"messages": [
-				"accesskey-save"
+				"accesskey-save",
+				"newsectionsummary"
 			],
 			"targets": [
 				"desktop",

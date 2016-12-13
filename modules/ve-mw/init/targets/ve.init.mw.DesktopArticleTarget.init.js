@@ -103,7 +103,7 @@
 
 	function parseSection( section ) {
 		var parsedSection = section;
-		// Section must be 'new' (not yet supported) or a number
+		// Section must be 'new' or a number
 		if ( section !== 'new' ) {
 			parsedSection = +section;
 			if ( isNaN( parsedSection ) ) {
@@ -240,7 +240,7 @@
 	 *
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
-	 * @param {number} [section] Section to edit (currently just source mode)
+	 * @param {number|string} [section] Section to edit (currently just source mode)
 	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
@@ -478,7 +478,7 @@
 				$caVeEdit.on( 'click', init.onEditTabClick.bind( init, 'visual' ) );
 			}
 			if ( pageCanLoadEditor && init.isWikitextAvailable ) {
-				$caEdit.on( 'click', init.onEditTabClick.bind( init, 'source' ) );
+				$caEdit.add( '#ca-addsection' ).on( 'click', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -581,6 +581,7 @@
 		},
 
 		onEditTabClick: function ( mode, e ) {
+			var isNewSection;
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
@@ -588,7 +589,12 @@
 			if ( isLoading ) {
 				return;
 			}
-			if ( active ) {
+
+			isNewSection = !!$( e.target ).closest( '#ca-addsection' ).length;
+
+			if ( isNewSection ) {
+				this.onEditSectionLinkClick( mode, e, 'new' );
+			} else if ( active ) {
 				targetPromise.done( function ( target ) {
 					if ( mode === 'visual' && target.getDefaultMode() === 'source' ) {
 						target.switchToVisualEditor();
@@ -646,8 +652,15 @@
 			}
 		},
 
-		onEditSectionLinkClick: function ( mode, e ) {
-			var section, targetPromise;
+		/**
+		 * Handle section edit links being clicked
+		 *
+		 * @param {string} mode Edit mode
+		 * @param {jQuery.Event} e Click event
+		 * @param {number|string} [section] Override edit section, taken from link URL if not specified
+		 */
+		onEditSectionLinkClick: function ( mode, e, section ) {
+			var targetPromise;
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
