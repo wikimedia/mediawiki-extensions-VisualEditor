@@ -1030,7 +1030,7 @@
 					// Edit section links, except VE ones when both editors visible
 					'.mw-editsection a:not( .mw-editsection-visualeditor ),' +
 					// Edit tab
-					'#ca-edit a,',
+					'#ca-edit a,' +
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
 				).each( function () {
