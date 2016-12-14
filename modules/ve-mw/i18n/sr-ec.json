@@ -253,6 +253,8 @@
 	"visualeditor-savedialog-title-save": "Чување измена",
 	"visualeditor-savedialog-warning-dirty": "Изгледа да постоји проблем са вашом изменом — молимо прегледајте је пре чувања.",
 	"visualeditor-saveerror": "Грешка приликом чувања података на сервер: $1.",
+	"visualeditor-section-body-placeholder": "Нови одељак",
+	"visualeditor-section-title-placeholder": "Наслов",
 	"visualeditor-serializeerror": "Грешка приликом учитавања података са сервера: $1.",
 	"visualeditor-settings-tool": "Подешавање странице",
 	"visualeditor-shortcuts-insert": "Убаци",

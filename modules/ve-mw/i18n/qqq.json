@@ -370,7 +370,7 @@
 	"visualeditor-saveerror": "Text shown when the editor fails to save properly.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-saveerror-titleblacklist": "Text shown when the editor fails to save properly due to the TitleBlacklist extension.",
 	"visualeditor-section-body-placeholder": "Placeholder for surface when adding a new section",
-	"visualeditor-section-title-placeholder": "Placeholder for title input when adding a new section",
+	"visualeditor-section-title-placeholder": "Placeholder for title input when adding a new section\n{{Identical|Subject}}",
 	"visualeditor-serializeerror": "Text shown when the editor fails to load the wikitext for saving.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-settings-tool": "Text of tool in the toolbar the lets users set specific page settings.\n{{Identical|Page settings}}",
 	"visualeditor-shortcuts-insert": "Heading for insertion shortcuts\n{{Identical|Insert}}",

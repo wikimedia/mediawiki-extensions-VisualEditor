@@ -33,15 +33,16 @@
 			"Framafan",
 			"Wladek92",
 			"Jdforrester",
-			"Pols12"
+			"Pols12",
+			"Trizek (WMF)"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel]]",
 	"tag-visualeditor-description": "Modification effectuée avec l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|éditeur visuel]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel : à vérifier]]",
 	"tag-visualeditor-needcheck-description": "Modification faite en utilisant l’[[{{MediaWiki:visualeditor-descriptionpagelink}}|éditeur visuel]], dans laquelle le système a détecté que le wikicode contient peut-être des modifications non voulues.",
-	"tag-visualeditor-wikitext": "modification de source 2017",
-	"tag-visualeditor-wikitext-description": "Modification faites en utilisant l’éditeur visuel de wikitexte 2017",
+	"tag-visualeditor-wikitext": "éditeur de source 2017",
+	"tag-visualeditor-wikitext-description": "Modification faite en utilisant l’éditeur de wikitexte 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel : basculé]]",
 	"tag-visualeditor-switched-description": "L’utilisateur a commencé à modifier en utilisant l’éditeur visuel puis est passé sur l’éditeur de wikicode.",
 	"visualeditor-feedback-link": "Project:ÉditeurVisuel/Avis",
