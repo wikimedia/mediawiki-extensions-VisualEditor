@@ -155,7 +155,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 	var parsePromise;
 	if ( !source ) {
 		parsePromise = $.Deferred().resolve(
-			this.getDocument().shallowCloneFromRange( new ve.Range( 0 ) )
+			this.getDocument().cloneFromRange( new ve.Range( 0 ) )
 		).promise();
 	} else {
 		parsePromise = new mw.Api().post( {
