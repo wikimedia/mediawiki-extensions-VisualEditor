@@ -1855,22 +1855,36 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function ( initial
  * @method
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
-	var surface = this.getSurface(),
+	var headingText,
+		surface = this.getSurface(),
+		mode = surface.getMode(),
 		surfaceView, $documentNode, $section, headingNode;
 
-	if ( surface.getMode() === 'visual' && this.section !== null && this.section > 0 ) {
-		surfaceView = surface.getView();
-		$documentNode = surfaceView.getDocument().getDocumentNode().$element;
-		$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );
-		headingNode = $section.data( 'view' );
+	if ( this.section !== null && this.section !== 'new' && this.section !== 0 ) {
+		if ( mode === 'visual' ) {
+			surfaceView = surface.getView();
+			$documentNode = surfaceView.getDocument().getDocumentNode().$element;
+			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );
+			headingNode = $section.data( 'view' );
 
-		if ( $section.length && new mw.Uri().query.summary === undefined ) {
-			this.initialEditSummary = '/* ' +
-				ve.graphemeSafeSubstring( $section.text(), 0, 244 ) + ' */ ';
+			if ( $section.length && new mw.Uri().query.summary === undefined ) {
+				headingText = $section.text();
+			}
+
+			if ( headingNode ) {
+				this.goToHeading( headingNode );
+			}
+		} else if ( mode === 'source' ) {
+			headingText = surface.getModel().getDocument().data.getText(
+				false,
+				surface.getModel().getDocument().getDocumentNode().children[ 0 ].getRange()
+			).replace( /^\s*=+\s*(.*?)\s*=+\s*$/, '$1' );
 		}
-
-		if ( headingNode ) {
-			this.goToHeading( headingNode );
+		if ( headingText ) {
+			this.initialEditSummary =
+				'/* ' +
+				ve.graphemeSafeSubstring( headingText, 0, 244 ) +
+				' */ ';
 		}
 	}
 };
