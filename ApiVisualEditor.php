@@ -412,7 +412,7 @@ class ApiVisualEditor extends ApiBase {
 				$article = new Article( $title ); // Deliberately omitting ,0 so oldid comes from request
 				$ep = new EditPage( $article );
 				$req = $this->getRequest();
-				$req->setVal( 'format', 'text/x-wiki' );
+				$req->setVal( 'format', $ep->contentFormat );
 				$ep->importFormData( $req ); // By reference for some reason (bug 52466)
 				$tabindex = 0;
 				$states = [
