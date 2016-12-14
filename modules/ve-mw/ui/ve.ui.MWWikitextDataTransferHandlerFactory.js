@@ -50,7 +50,11 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 		if ( typeof dataOrDoc === 'string' || ( Array.isArray( dataOrDoc ) && dataOrDoc.every( isPlain ) ) ) {
 			resolve( dataOrDoc );
 		} else {
-			doc = dataOrDoc instanceof ve.dm.Document ? dataOrDoc : new ve.dm.Document( dataOrDoc );
+			doc = dataOrDoc instanceof ve.dm.Document ?
+				dataOrDoc :
+				// The handler may have also written items to the store
+				new ve.dm.Document( new ve.dm.ElementLinearData( handler.surface.getModel().getDocument().getStore(), dataOrDoc ) );
+
 			ve.init.target.getWikitextFragment( doc, false )
 				.done( resolve )
 				.fail( function () {
