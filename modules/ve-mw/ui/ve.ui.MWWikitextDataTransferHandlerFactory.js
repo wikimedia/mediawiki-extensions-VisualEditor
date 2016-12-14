@@ -51,7 +51,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 			resolve( dataOrDoc );
 		} else {
 			doc = dataOrDoc instanceof ve.dm.Document ? dataOrDoc : new ve.dm.Document( dataOrDoc );
-			ve.init.target.getWikitextFragment( doc )
+			ve.init.target.getWikitextFragment( doc, false )
 				.done( resolve )
 				.fail( function () {
 					handler.abort();
