@@ -127,10 +127,10 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
 /**
  * Set preview content and show preview panel.
  *
- * @param {string} content Preview HTML
+ * @param {jQuery} content Preview content
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( content ) {
-	this.$previewViewer.html( content );
+	this.$previewViewer.empty().append( content );
 	mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
 	this.actions.setAbilities( { approve: true } );
 	this.popPending();

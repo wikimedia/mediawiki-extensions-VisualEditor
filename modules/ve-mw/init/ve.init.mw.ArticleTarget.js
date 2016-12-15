@@ -1007,12 +1007,18 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {
+			var doc, body;
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
-				target.saveDialog.showPreview( response.visualeditor.content );
+				doc = target.parseDocument( response.visualeditor.content, 'visual' );
+				body = doc.body;
+				// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
+				document.adoptNode( body );
+				ve.resolveAttributes( body, doc, ve.dm.Converter.static.computedAttributes );
+				target.saveDialog.showPreview( $( body ).contents() );
 			} else {
 				target.saveDialog.showPreview( $( '<em>' ).text(
 					ve.msg( 'visualeditor-loaderror-message', ve.getProp( details, 'error', 'info' ) || 'Failed to connect' )
-				).html() );
+				) );
 			}
 			target.bindSaveDialogClearDiff();
 		} );
