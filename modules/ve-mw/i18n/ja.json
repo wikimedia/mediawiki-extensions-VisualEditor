@@ -18,7 +18,8 @@
 			"Vigorous action",
 			"Suchichi02",
 			"Kanashimi",
-			"ネイ"
+			"ネイ",
+			"Darklanlan"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -288,6 +289,8 @@
 	"visualeditor-preference-betatempdisable": "ビジュアルエディターがベータ版である間は、一時的に無効にする",
 	"visualeditor-preference-core-description": "ビジュアルエディターを有効にする。これはトークページやその他の名前空間では利用できません。",
 	"visualeditor-preference-core-label": "ビジュアルエディター",
+	"visualeditor-preference-newwikitexteditor-description": "ビジュアルエディター内において新しいウィキテキストモードを有効にします。これは現在のビジュアルエディターにある多くのツールを搭載し、同様のデザインを採用しており、2つのモード間の切り替えがより良くなります。",
+	"visualeditor-preference-newwikitexteditor-label": "新しいウィキテキストモード",
 	"visualeditor-preference-enable": "ビジュアルエディターを有効にする。これは以下の{{PLURAL:$2|名前空間}}のみで利用できます: $1",
 	"visualeditor-preference-tabs": "編集モード：",
 	"visualeditor-preference-tabs-multi-tab": "両方のエディタータブを表示する",

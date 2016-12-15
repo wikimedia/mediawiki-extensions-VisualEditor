@@ -307,6 +307,8 @@
 	"visualeditor-preference-betatempdisable": "Dočasně zakázat vizuální editor, dokud je ve verzi „beta“",
 	"visualeditor-preference-core-description": "Povolit vizuální editor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
 	"visualeditor-preference-core-label": "Vizuální editace",
+	"visualeditor-preference-newwikitexteditor-description": "Povolí nový režim wikitextu uvnitř VisualEditoru. Obsahuje mnoho nástrojů z VisualEditoru, má podobný vzhled a umožňuje lepší přepínání mezi nimi.",
+	"visualeditor-preference-newwikitexteditor-label": "Nový režim wikitextu",
 	"visualeditor-preference-enable": "Povolit vizuální editor. Bude k dispozici v {{PLURAL:$2|následujícím jmenném prostoru|následujících jmenných prostorech}}: $1",
 	"visualeditor-preference-tabs": "Režim editace:",
 	"visualeditor-preference-tabs-multi-tab": "Ukažte mi obě editační záložky",

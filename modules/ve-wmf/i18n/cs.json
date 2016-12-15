@@ -17,15 +17,16 @@
 			"아라",
 			"Matěj Suchánek",
 			"Vojtěch Dostál",
-			"Dvorapa"
+			"Dvorapa",
+			"Martin Urbanec"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuální editace]]",
+	"tag-visualeditor": "editace z [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-description": "Editace provedená za použití [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuálního editoru]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuální editace: Zkontrolovat]]",
+	"tag-visualeditor-needcheck": "možná chyba ve [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-needcheck-description": "Editace provedená za použití [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuálního editoru]], u které systém detekoval možné nezamýšlené změny wikitextu.",
-	"tag-visualeditor-wikitext": "editace z editoru wikitextu 2017",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuální editace: Přepnuto]]",
+	"tag-visualeditor-wikitext": "editor wikitextu 2017",
+	"tag-visualeditor-switched": "přepnuto z [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-switched-description": "Uživatel začal editovat pomocí vizuálního editoru, načež se přepnul do editoru wikitextu.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Názory",
 	"visualeditor-feedback-tool": "Poslat názor na tento software",

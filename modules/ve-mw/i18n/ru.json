@@ -36,7 +36,8 @@
 			"Туллук",
 			"Irus",
 			"Kareyac",
-			"Julia kotlyarker"
+			"Julia kotlyarker",
+			"INS Pirat"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
@@ -312,8 +313,8 @@
 	"visualeditor-preference-betatempdisable": "Временно отключить визуальный редактор, пока он находится в бета-версии",
 	"visualeditor-preference-core-description": "Включить визуальный редактор. Он будет недоступен на страницах обсуждения и в некоторых других пространствах имён.",
 	"visualeditor-preference-core-label": "Визуальное редактирование",
-	"visualeditor-preference-newwikitexteditor-description": "Включитe новый wikitext режим визуального редактора. Он использует много инструментов вихуального редактора, аналогичный дизайн, и удобное переключение в режим и из него.",
-	"visualeditor-preference-newwikitexteditor-label": "Новый режим викитекста",
+	"visualeditor-preference-newwikitexteditor-description": "Включитe новый режим вики-текста в визуальном редакторе. В нём есть много инструментов, представленных в визуальном редакторе, используется похожий дизайн, и переключение между этими двумя редакторами происходит лучше.",
+	"visualeditor-preference-newwikitexteditor-label": "Новый режим вики-текста",
 	"visualeditor-preference-enable": "Включить визуальный редактор. Он будет доступен в {{PLURAL:$2|следующем пространстве|следующих пространствах}} имён: $1",
 	"visualeditor-preference-tabs": "Режим редактирования:",
 	"visualeditor-preference-tabs-multi-tab": "Показывать мне оба варианта редактора",
@@ -345,6 +346,7 @@
 	"visualeditor-saveerror": "Ошибка при сохранении данных: $1.",
 	"visualeditor-saveerror-titleblacklist": "Ошибка сохранения страницы: название этой страницы занесено в чёрный список",
 	"visualeditor-section-body-placeholder": "Новый раздел",
+	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",
 	"visualeditor-settings-tool": "Параметры страницы",
 	"visualeditor-shortcuts-insert": "Вставить",
