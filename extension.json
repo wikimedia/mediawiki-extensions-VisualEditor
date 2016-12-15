@@ -384,6 +384,7 @@
 				"mediawiki.util"
 			],
 			"messages": [
+				"pagetitle",
 				"creating",
 				"editing",
 				"lastmodifiedat",
