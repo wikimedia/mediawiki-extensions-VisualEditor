@@ -1631,12 +1631,15 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 	var uri, oldid, prefPromise, dataPromise,
 		target = this;
 
+	// We may have this.section but VE is always full page at the moment
+	this.section = null;
+
 	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
 		if ( discardChanges ) {
 			dataPromise = mw.libs.ve.targetLoader.requestPageData(
 				'source',
 				this.pageName,
-				null, // We may have this.section but VE is always full page at the moment
+				this.section,
 				this.requestedRevId,
 				this.constructor.name
 			).then(
