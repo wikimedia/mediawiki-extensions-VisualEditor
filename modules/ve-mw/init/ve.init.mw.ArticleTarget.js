@@ -1937,15 +1937,18 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var headingText,
+		section,
 		surface = this.getSurface(),
 		mode = surface.getMode(),
 		surfaceView, $documentNode, $section, headingNode;
 
-	if ( this.section !== null && this.section !== 'new' && this.section !== 0 ) {
+	if ( this.section !== null && this.section !== 'new' && this.section !== 0 && this.section !== 'T-0' ) {
 		if ( mode === 'visual' ) {
+			// Get numerical part of section (strip 'T-'' if present)
+			section = this.section.toString().indexOf( 'T-' ) === 0 ? +this.section.slice( 2 ) : this.section;
 			surfaceView = surface.getView();
 			$documentNode = surfaceView.getDocument().getDocumentNode().$element;
-			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( this.section - 1 );
+			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' ).eq( section - 1 );
 			headingNode = $section.data( 'view' );
 
 			if ( $section.length && new mw.Uri().query.summary === undefined ) {

@@ -103,8 +103,8 @@
 
 	function parseSection( section ) {
 		var parsedSection = section;
-		// Section must be 'new' or a number
-		if ( section !== 'new' ) {
+		// Section must be a number, 'new' or 'T-' prefixed
+		if ( section !== 'new' && section.indexOf( 'T-' ) !== 0 ) {
 			parsedSection = +section;
 			if ( isNaN( parsedSection ) ) {
 				parsedSection = null;
@@ -681,9 +681,16 @@
 		 * @param {number|string} [section] Override edit section, taken from link URL if not specified
 		 */
 		onEditSectionLinkClick: function ( mode, e, section ) {
-			var targetPromise;
+			var targetPromise,
+				uri = new mw.Uri( e.target.href ),
+				title = mw.Title.newFromText( uri.query.title || '' );
+
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
+			}
+			if ( title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText() ) {
+				// title param doesn't match current page, let default event happen (navigate to other page)
+				return true;
 			}
 			e.preventDefault();
 			if ( isLoading ) {
@@ -711,7 +718,7 @@
 			} else {
 				// Use section from URL
 				if ( section === undefined ) {
-					section = parseSection( new mw.Uri( e.target.href ).query.section );
+					section = parseSection( uri.query.section );
 				}
 				targetPromise = getTarget( mode, section );
 			}
