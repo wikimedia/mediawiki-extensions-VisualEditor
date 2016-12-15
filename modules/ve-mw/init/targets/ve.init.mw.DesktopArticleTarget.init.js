@@ -830,7 +830,8 @@
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
 			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,
-			action = 'edit';
+			action = 'edit',
+			welcomeDialogLocalStorageValue = null;
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
@@ -1067,6 +1068,9 @@
 			}
 		}
 
+		try {
+			welcomeDialogLocalStorageValue = localStorage.getItem( 've-beta-welcome-dialog' );
+		} catch ( e ) {}
 		if (
 			showWikitextWelcome &&
 			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
@@ -1076,7 +1080,7 @@
 				prefSaysShowWelcome ||
 				(
 					!isLoggedIn &&
-					localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
+					welcomeDialogLocalStorageValue === null &&
 					$.cookie( 've-beta-welcome-dialog' ) === null
 				)
 			)

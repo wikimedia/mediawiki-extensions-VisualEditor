@@ -1959,7 +1959,12 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 	var usePrefs, prefSaysShow, urlSaysHide,
 		windowManager = this.getSurface().dialogs,
-		target = this;
+		target = this,
+		welcomeDialogLocalStorageValue = null;
+
+	try {
+		welcomeDialogLocalStorageValue = localStorage.getItem( 've-beta-welcome-dialog' );
+	} catch ( e ) {}
 
 	this.welcomeDialogPromise = $.Deferred();
 
@@ -1980,7 +1985,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				prefSaysShow ||
 				(
 					!usePrefs &&
-					localStorage.getItem( 've-beta-welcome-dialog' ) === null &&
+					welcomeDialogLocalStorageValue === null &&
 					$.cookie( 've-beta-welcome-dialog' ) === null
 				)
 			)
