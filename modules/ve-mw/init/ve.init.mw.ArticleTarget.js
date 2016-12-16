@@ -785,13 +785,18 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, erro
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data ) {
 	var errorMsg = ( editApi && editApi.info ) || ( data && data.error && data.error.info ),
-		errorCode = ( editApi && editApi.code ) || ( data && data.error && data.error.code );
+		errorCode = ( editApi && editApi.code ) || ( data && data.error && data.error.code ),
+		unknown = 'Unknown error';
+
+	if ( data.xhr.status !== 200 ) {
+		unknown += ', HTTP status ' + data.xhr.status;
+	}
 
 	this.showSaveError(
-		$( document.createTextNode( errorMsg || errorCode || 'Unknown error' ) ),
+		$( document.createTextNode( errorMsg || errorCode || unknown ) ),
 		false // prevents reapply
 	);
-	this.emit( 'saveErrorUnknown', errorCode || errorMsg || 'Unknown error' );
+	this.emit( 'saveErrorUnknown', errorCode || errorMsg || unknown );
 };
 
 /**
