@@ -7,7 +7,8 @@
 			"Դավիթ Սարոյան",
 			"Vahe Gharakhanyan",
 			"Աշոտ1997",
-			"Aram1985"
+			"Aram1985",
+			"Kareyac"
 		]
 	},
 	"apihelp-visualeditor-description": "Էջի համար Parsoid-ի համակարգից վերադարձնում է HTML5-ը:",
@@ -289,11 +290,11 @@
 	"visualeditor-savedialog-warning-dirty": "Ձեր խմբագրումը ընդհատվել է. հիշելուց առաջ նախադիտեք էջը:",
 	"visualeditor-saveerror": "Խնդիր $1 սերվերից տեղեկություն պահպանելու ժամանակ:",
 	"visualeditor-saveerror-titleblacklist": "Խնդիր էջի պահպանման հետ. էջի անվանումն '''անթույլատրելի''' է:",
+	"visualeditor-section-body-placeholder": "Նոր բաժին",
 	"visualeditor-serializeerror": "Խնդիր $1 սերվերից տեղեկություն բեռնելու ժամանակ:",
 	"visualeditor-settings-tool": "Էջի կարգավորումներ",
 	"visualeditor-shortcuts-insert": "Ներդնել",
 	"visualeditor-special-characters-group-other": "Հաճախ օգտագործվող",
-	"visualeditor-timeout": "ՎիզուալԽմբագրիչը ժամանակավորապես անհասանելի է: Ցանկանո՞ւմ եք խմբագրել վիքիտեքստը:",
 	"visualeditor-toload": "Խմբագրիչը բեռնվում է։ Եթե մի քանի վայրկյան անց դուք դեռ տեսնում եք այս հաղորդագրությունը, ապա [$1 թարմացրեք էջը]",
 	"visualeditor-toolbar-savedialog": "Հիշել էջը",
 	"visualeditor-toolbar-savedialog-short": "Հիշել",

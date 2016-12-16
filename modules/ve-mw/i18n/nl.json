@@ -342,6 +342,8 @@
 	"visualeditor-savedialog-warning-dirty": "Uw bewerking is mogelijk beschadigd. Controleer deze voordat u opslaat.",
 	"visualeditor-saveerror": "Fout tijdens het opslaan van gegevens naar de server: $1.",
 	"visualeditor-saveerror-titleblacklist": "Fout tijdens het opslaan van de pagina: deze pagina staat op de zwarte lijst",
+	"visualeditor-section-body-placeholder": "Nieuw kopje",
+	"visualeditor-section-title-placeholder": "Onderwerp",
 	"visualeditor-serializeerror": "Fout tijdens het laden van gegevens van de server: $1",
 	"visualeditor-settings-tool": "Pagina-instellingen",
 	"visualeditor-shortcuts-insert": "Invoegen",
