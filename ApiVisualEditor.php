@@ -116,7 +116,7 @@ class ApiVisualEditor extends ApiBase {
 		} else { // error null, code not 200
 			$this->dieWithError(
 				[ 'apierror-visualeditor-docserver-http', $response['code'] ],
-				$response['code']
+				(string) $response['code']
 			);
 		}
 		return $response['body'];
