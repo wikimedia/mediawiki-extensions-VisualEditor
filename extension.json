@@ -516,6 +516,8 @@
 				"ext.visualEditor.mwcore"
 			],
 			"messages": [
+				"accesskey-diff",
+				"accesskey-preview",
 				"accesskey-save",
 				"newsectionsummary"
 			],

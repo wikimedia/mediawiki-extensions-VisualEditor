@@ -410,6 +410,10 @@ ve.init.mw.ArticleTarget.prototype.documentReady = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
+	var name, i, triggers,
+		accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
+		accessKeyModifiers = new ve.ui.Trigger( accessKeyPrefix + '-' ).modifiers;
+
 	// loadSuccess() may have called setAssumeExistence( true );
 	ve.init.platform.linkCache.setAssumeExistence( false );
 	this.getSurface().getModel().connect( this, {
@@ -417,8 +421,46 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	} );
 	this.restoreEditSection();
 
+	// Iterate over the trigger registry and resolve any access key conflicts
+	for ( name in ve.ui.triggerRegistry.registry ) {
+		triggers = ve.ui.triggerRegistry.registry[ name ];
+		for ( i = 0; i < triggers.length; i++ ) {
+			if ( ve.compare( triggers[ i ].modifiers, accessKeyModifiers ) ) {
+				this.disableAccessKey( triggers[ i ].primary );
+			}
+		}
+	}
+
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
+};
+
+/**
+ * Disable an access key by removing the attribute from any element containing it
+ *
+ * @param {string} key Access key
+ */
+ve.init.mw.ArticleTarget.prototype.disableAccessKey = function ( key ) {
+	$( '[accesskey=' + key + ']' ).each( function () {
+		var $this = $( this );
+
+		$this
+			.attr( 'data-old-accesskey', $this.attr( 'accesskey' ) )
+			.removeAttr( 'accesskey' );
+	} );
+};
+
+/**
+ * Re-enable all access keys
+ */
+ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
+	$( '[data-old-accesskey]' ).each( function () {
+		var $this = $( this );
+
+		$this
+			.attr( 'accesskey', $this.attr( 'data-old-accesskey' ) )
+			.removeAttr( 'data-old-accesskey' );
+	} );
 };
 
 /**
@@ -1134,6 +1176,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
  * Clear the state of this target, preparing it to be reactivated later.
  */
 ve.init.mw.ArticleTarget.prototype.clearState = function () {
+	this.restoreAccessKeys();
 	this.clearPreparedCacheKey();
 	this.loading = false;
 	this.saving = false;
@@ -1802,13 +1845,11 @@ ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
  * Show a save dialog
  *
  * @param {string} [action] Window action to trigger after opening
- * @param {string} [initialPanel] Initial panel to show in the dialog
  *
  * @fires saveWorkflowBegin
  */
-ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, initialPanel ) {
-	var target = this,
-		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action ) {
+	var target = this;
 
 	if ( !( this.edited || this.restoring ) ) {
 		return;
@@ -1819,8 +1860,11 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, initialPa
 	// Preload the serialization
 	this.prepareCacheKey( this.getDocToSave() );
 
-	// Connect events to save dialog
+	// Get the save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
+		var data,
+			windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+
 		if ( !target.saveDialog ) {
 			target.saveDialog = win;
 
@@ -1834,23 +1878,38 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, initialPa
 				close: 'onSaveDialogClose'
 			} );
 		}
-	} );
 
-	// Open the dialog
-	windowAction.open( 'mwSave', this.getSaveDialogOpeningData( initialPanel ), action );
+		data = target.getSaveDialogOpeningData();
+
+		if (
+			( action === 'review' && !data.canReview ) ||
+			( action === 'preview' && !data.canPreview )
+		) {
+			return;
+		}
+
+		// When calling review/preview action, switch to those panels immediately
+		if ( action === 'review' || action === 'preview' ) {
+			data.initialPanel = action;
+		}
+
+		// Open the dialog
+		windowAction.open( 'mwSave', data, action );
+	} );
 };
 
 /**
  * Get opening data to pass to the save dialog
- *
- * @param {string} [initialPanel] Initial panel to show in the dialog
  */
-ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function ( initialPanel ) {
+ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
+	var mode = this.getSurface().getMode();
 	return {
+		canPreview: mode === 'source',
+		canReview: !( mode === 'source' && this.section === 'new' ),
+		sectionTitle: this.sectionTitle && this.sectionTitle.getValue(),
 		saveButtonLabel: this.getSaveButtonLabel(),
 		checkboxFields: this.checkboxFields,
-		checkboxesByName: this.checkboxesByName,
-		initialPanel: initialPanel
+		checkboxesByName: this.checkboxesByName
 	};
 };
 
