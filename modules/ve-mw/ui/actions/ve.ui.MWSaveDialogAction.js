@@ -147,9 +147,14 @@ ve.ui.commandRegistry.register(
 	shortcuts.forEach( function ( shortcut ) {
 		var accessKey = ve.msg( shortcut.accessKey );
 		if ( accessKey !== '-' && accessKey !== '' ) {
-			ve.ui.triggerRegistry.register(
-				shortcut.command, new ve.ui.Trigger( accessKeyPrefix + accessKey )
-			);
+			try {
+				ve.ui.triggerRegistry.register(
+					shortcut.command, new ve.ui.Trigger( accessKeyPrefix + accessKey )
+				);
+			} catch ( e ) {
+				mw.log.warn( 'Invalid accesskey data? Failed to register ' + accessKeyPrefix + accessKey );
+				return;
+			}
 			ve.ui.commandHelpRegistry.register( 'other', shortcut.command, {
 				trigger: shortcut.command,
 				label: shortcut.label
@@ -157,5 +162,4 @@ ve.ui.commandRegistry.register(
 			ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote.push( shortcut.command );
 		}
 	} );
-
 }() );
