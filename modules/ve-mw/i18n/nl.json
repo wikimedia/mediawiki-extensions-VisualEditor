@@ -33,7 +33,8 @@
 			"Mbch331",
 			"Robin van der Vliet",
 			"MrLeopold",
-			"Hex"
+			"Hex",
+			"Mainframe98"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -64,7 +65,7 @@
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
 	"tooltip-ca-edit": "Deze pagina bewerken via wikitekst",
 	"tooltip-ca-editsource": "Broncode van deze pagina bewerken",
-	"tooltip-ca-ve-edit": "Pagina bewerken",
+	"tooltip-ca-ve-edit": "Deze pagina bewerken",
 	"visualeditor-advancedsettings-tool": "Geavanceerde instellingen",
 	"visualeditor-backbutton-tooltip": "Ga terug",
 	"visualeditor-beta-label": "beta",

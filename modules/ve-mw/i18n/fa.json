@@ -21,7 +21,8 @@
 			"MRG90",
 			"الناز",
 			"فلورانس",
-			"Huji"
+			"Huji",
+			"Arash.pt"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
@@ -335,6 +336,8 @@
 	"visualeditor-savedialog-warning-dirty": "ویرایش شما ممکن است خراب شده باشد – لطفاً پیش از ذخیره‌سازی بازبینی کنید.",
 	"visualeditor-saveerror": "خطا در ذخیره‌سازی داده‌ها روی کارساز: $1.",
 	"visualeditor-saveerror-titleblacklist": "خطا در ذخیرهٔ صفحه: نام این صفحه در فهرست سیاه است",
+	"visualeditor-section-body-placeholder": "بخش جدید",
+	"visualeditor-section-title-placeholder": "موضوع",
 	"visualeditor-serializeerror": "خطای بارگیری داده‌ها از کارساز: $1.",
 	"visualeditor-settings-tool": "تنظیمات صفحه",
 	"visualeditor-shortcuts-insert": "درج",

@@ -167,6 +167,8 @@
 	"visualeditor-preference-betatempdisable": "Цкъачунна дӀаяйа БӀаьран тадар, и дика таялца",
 	"visualeditor-preference-core-description": "Латае БӀаьран тадар. И лело йиш хира ю дийцаре агӀонашкахь а, кхин цӀерийн анашкахь а.",
 	"visualeditor-preference-core-label": "БӀаьран тадар",
+	"visualeditor-preference-newwikitexteditor-description": "Лата бе вики-йозан керла дӀахӀоттам. Оцу тӀехь бу дукха БӀаьра тадаран гӀирсаш.",
+	"visualeditor-preference-newwikitexteditor-label": "Вики-йозан керла дӀахӀоттам",
 	"visualeditor-preference-enable": "Латае БӀаьран тадар. И лело йиш хира ю цӀерийн {{PLURAL:$2|анахь|анашкахь}}: $1",
 	"visualeditor-redirect-description": "ДӀасахьажор тӀе $1",
 	"visualeditor-savedialog-label-create": "АгӀо кхолла",

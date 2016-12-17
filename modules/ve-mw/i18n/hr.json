@@ -293,6 +293,8 @@
 	"visualeditor-savedialog-warning-dirty": "Možda je došlo do problema s vašim uređivanjem – molimo vas provjerite prije spremanja.",
 	"visualeditor-saveerror": "Greška prilikom spremanja podataka na poslužitelj: $1.",
 	"visualeditor-saveerror-titleblacklist": "Pogrješka prilikom zapisivanja stranice: naslov stranice se nalazi na crnom popisu",
+	"visualeditor-section-body-placeholder": "Novi odlomak",
+	"visualeditor-section-title-placeholder": "Predmet",
 	"visualeditor-serializeerror": "Pogreška pri učitavanju podataka s poslužitelja: $1.",
 	"visualeditor-settings-tool": "Postavke stranice",
 	"visualeditor-shortcuts-insert": "Umetni",
