@@ -907,7 +907,12 @@
 					if ( isViewPage && uri.query.veaction in editModes ) {
 						mode = editModes[ uri.query.veaction ];
 					} else {
-						if ( init.isWikitextAvailable && getPreferredEditor() === 'wikitext' ) {
+						if ( init.isWikitextAvailable && (
+							getPreferredEditor() === 'wikitext' || (
+								!init.isVisualAvailable &&
+								[ 'edit', 'submit' ].indexOf( uri.query.action ) !== -1
+							)
+						) ) {
 							mode = 'source';
 						} else {
 							mode = 'visual';
