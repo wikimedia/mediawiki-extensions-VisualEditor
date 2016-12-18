@@ -239,9 +239,7 @@ class ApiVisualEditor extends ApiBase {
 							'rvprop' => 'content|ids'
 						];
 
-						if ( isset( $params['section'] ) ) {
-							$section = $params['section'];
-						}
+						$section = isset( $params['section'] ) ? $params['section'] : null;
 
 						if ( $section === 'new' ) {
 							$content = '';
