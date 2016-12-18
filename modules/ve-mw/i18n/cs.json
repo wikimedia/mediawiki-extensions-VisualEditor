@@ -20,7 +20,8 @@
 			"Dvorapa",
 			"Walter Klosse",
 			"Marek Pavlica",
-			"Teslaton"
+			"Teslaton",
+			"Martin Urbanec"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
@@ -339,6 +340,7 @@
 	"visualeditor-savedialog-warning-dirty": "Vaše editace byla možná poškozena – před uložením ji prosím zkontrolujte.",
 	"visualeditor-saveerror": "Chyba při ukládání dat na server: $1.",
 	"visualeditor-saveerror-titleblacklist": "Chyba při uložení stránky: Název stránky je na černé listině",
+	"visualeditor-section-title-placeholder": "Předmět",
 	"visualeditor-serializeerror": "Chyba při načítání dat ze serveru: $1.",
 	"visualeditor-settings-tool": "Nastavení stránky",
 	"visualeditor-shortcuts-insert": "Vložit",
