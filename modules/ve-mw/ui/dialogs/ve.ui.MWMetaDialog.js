@@ -70,6 +70,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage( 'advancedSettings' );
 	this.categoriesPage = new ve.ui.MWCategoriesPage( 'categories', { $overlay: this.$overlay } );
 	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages' );
+	this.templatesUsedPage = new ve.ui.MWTemplatesUsedPage( 'templatesUsed' );
 
 	// Initialization
 	this.$body.append( this.panels.$element );
@@ -78,7 +79,8 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		this.settingsPage,
 		this.advancedSettingsPage,
 		this.categoriesPage,
-		this.languagesPage
+		this.languagesPage,
+		this.templatesUsedPage
 	] );
 };
 
@@ -108,7 +110,18 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var surfaceModel = this.getFragment().getSurface();
+			var surfaceModel = this.getFragment().getSurface(),
+				selectWidget = this.bookletLayout.outlineSelectWidget,
+				visualOnlyPages = [ 'settings', 'advancedSettings', 'categories', 'languages' ],
+				isSource = ve.init.target.getSurface().getMode() === 'source';
+
+			visualOnlyPages.forEach( function ( page ) {
+				selectWidget.getItemFromData( page ).setDisabled( isSource );
+			} );
+
+			if ( isSource && visualOnlyPages.indexOf( data.page ) !== -1 ) {
+				data.page = 'templatesUsed';
+			}
 
 			// Force all previous transactions to be separate from this history state
 			surfaceModel.pushStaging();

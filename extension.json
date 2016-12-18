@@ -1528,6 +1528,7 @@
 				"modules/ve-mw/ui/pages/ve.ui.MWAdvancedSettingsPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWCategoriesPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWLanguagesPage.js",
+				"modules/ve-mw/ui/pages/ve.ui.MWTemplatesUsedPage.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMetaDialog.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWMetaDialogTool.js"
 			],
@@ -1606,12 +1607,14 @@
 				"visualeditor-dialog-meta-settings-toc-force",
 				"visualeditor-dialog-meta-settings-toc-help",
 				"visualeditor-dialog-meta-settings-toc-label",
+				"visualeditor-dialog-meta-templatesused-noresults",
 				"visualeditor-dialog-meta-title",
 				"visualeditor-dialogbutton-meta-tooltip",
 				"visualeditor-languages-tool",
 				"visualeditor-meta-tool",
 				"visualeditor-redirect-description",
-				"visualeditor-settings-tool"
+				"visualeditor-settings-tool",
+				"visualeditor-templatesused-tool"
 			],
 			"targets": [
 				"desktop",

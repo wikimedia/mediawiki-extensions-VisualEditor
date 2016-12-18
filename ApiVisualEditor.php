@@ -425,10 +425,10 @@ class ApiVisualEditor extends ApiBase {
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
 				$article = new Article( $title ); // Deliberately omitting ,0 so oldid comes from request
-				$ep = new EditPage( $article );
+				$editPage = new EditPage( $article );
 				$req = $this->getRequest();
-				$req->setVal( 'format', $ep->contentFormat );
-				$ep->importFormData( $req ); // By reference for some reason (bug 52466)
+				$req->setVal( 'format', $editPage->contentFormat );
+				$editPage->importFormData( $req ); // By reference for some reason (bug 52466)
 				$tabindex = 0;
 				$states = [
 					'minor' => $user->getOption( 'minordefault' ) && $title->exists(),
@@ -436,7 +436,8 @@ class ApiVisualEditor extends ApiBase {
 						( $user->getOption( 'watchcreations' ) && !$title->exists() ) ||
 						$user->isWatched( $title ),
 				];
-				$checkboxes = $ep->getCheckboxes( $tabindex, $states );
+				$checkboxes = $editPage->getCheckboxes( $tabindex, $states );
+				$templates = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 
 				// HACK: Find out which red links are on the page
 				// We do the lookup for the current version. This might not be entirely complete
@@ -478,6 +479,7 @@ class ApiVisualEditor extends ApiBase {
 					'result' => 'success',
 					'notices' => $notices,
 					'checkboxes' => $checkboxes,
+					'templates' => $templates,
 					'links' => $links,
 					'protectedClasses' => implode( ' ', $protectedClasses ),
 					'basetimestamp' => $baseTimestamp,

@@ -109,7 +109,7 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		type: 'list',
 		icon: 'menu',
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
-		include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'findAndReplace' ]
+		include: [ 'meta', 'settings', 'advancedSettings', 'categories', 'languages', 'templatesUsed', 'findAndReplace' ]
 	},
 	{ include: [ 'editModeSource' ] }
 ];

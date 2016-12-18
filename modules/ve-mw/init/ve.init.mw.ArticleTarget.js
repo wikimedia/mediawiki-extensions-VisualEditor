@@ -42,6 +42,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.section = null;
 	this.sectionTitle = null;
 
+	this.$templatesUsed = null;
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
 	this.$otherFields = null;
@@ -273,6 +274,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.revid = data.oldid;
 
 		this.checkboxes = data.checkboxes;
+		this.$templatesUsed = $( data.templates );
 
 		aboutDoc = this.doc.documentElement.getAttribute( 'about' );
 		if ( aboutDoc ) {

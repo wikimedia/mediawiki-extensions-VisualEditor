@@ -29,7 +29,7 @@ ve.ui.MWVeOnlyDialogTool.prototype.onUpdateState = function () {
  * MediaWiki UserInterface meta dialog tool.
  *
  * @class
- * @extends ve.ui.MWVeOnlyDialogTool
+ * @extends ve.ui.WindowTool
  * @constructor
  * @param {OO.ui.Toolbar} toolbar
  * @param {Object} [config] Configuration options
@@ -37,7 +37,7 @@ ve.ui.MWVeOnlyDialogTool.prototype.onUpdateState = function () {
 ve.ui.MWMetaDialogTool = function VeUiMWMetaDialogTool() {
 	ve.ui.MWMetaDialogTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWMetaDialogTool, ve.ui.MWVeOnlyDialogTool );
+OO.inheritClass( ve.ui.MWMetaDialogTool, ve.ui.WindowTool );
 ve.ui.MWMetaDialogTool.static.name = 'meta';
 ve.ui.MWMetaDialogTool.static.group = 'utility';
 ve.ui.MWMetaDialogTool.static.icon = 'window';
@@ -172,5 +172,35 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'meta/languages', 'window', 'open',
 		{ args: [ 'meta', { page: 'languages' } ] }
+	)
+);
+
+/**
+ * MediaWiki UserInterface TemplatesUsed tool.
+ *
+ * @class
+ * @extends ve.ui.WindowTool
+ * @constructor
+ * @param {OO.ui.Toolbar} toolbar
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MWTemplatesUsedDialogTool = function VeUiMWTemplatesUsedDialogTool() {
+	ve.ui.MWTemplatesUsedDialogTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.MWTemplatesUsedDialogTool, ve.ui.WindowTool );
+ve.ui.MWTemplatesUsedDialogTool.static.name = 'templatesUsed';
+ve.ui.MWTemplatesUsedDialogTool.static.group = 'utility';
+ve.ui.MWTemplatesUsedDialogTool.static.icon = 'template';
+ve.ui.MWTemplatesUsedDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-templatesused-tool' );
+ve.ui.MWTemplatesUsedDialogTool.static.commandName = 'meta/templatesUsed';
+ve.ui.MWTemplatesUsedDialogTool.static.autoAddToCatchall = false;
+ve.ui.MWTemplatesUsedDialogTool.static.autoAddToGroup = false;
+ve.ui.toolFactory.register( ve.ui.MWTemplatesUsedDialogTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'meta/templatesUsed', 'window', 'open',
+		{ args: [ 'meta', { page: 'templatesUsed' } ] }
 	)
 );
