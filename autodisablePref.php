@@ -17,6 +17,7 @@ require_once ( getenv( 'MW_INSTALL_PATH' ) !== false
 class VEAutodisablePref extends Maintenance {
 	public function __construct() {
 		parent::__construct();
+		$this->requireExtension( 'VisualEditor' );
 		$this->mDescription = "Sets the VisualEditor autodisable preference on appropriate users.";
 		$this->setBatchSize( 500 );
 	}
