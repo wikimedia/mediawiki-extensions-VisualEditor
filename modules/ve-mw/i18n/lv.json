@@ -266,6 +266,7 @@
 	"visualeditor-savedialog-warning-dirty": "Jūsu labojums, iespējams, ir bojāts - lūdzu pārskatiet vēlreiz pirms saglabāšanas.",
 	"visualeditor-saveerror": "Kļūda datu saglabāšanā: $1.",
 	"visualeditor-saveerror-titleblacklist": "Kļūda, saglabājot lapu: Šis lapas nosaukums ir melnajā sarakstā",
+	"visualeditor-section-title-placeholder": "Temats",
 	"visualeditor-serializeerror": "Kļūda datu ielādē no servera: $1.",
 	"visualeditor-settings-tool": "Lapas iestatījumi",
 	"visualeditor-shortcuts-insert": "Ievietot",
