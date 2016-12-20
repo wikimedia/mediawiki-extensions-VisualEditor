@@ -242,6 +242,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						if ( result.parse.parsedsummary[ '*' ] === '' ) {
 							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						} else {
+							// Intentionally treated as HTML
 							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
 						}
 					} ).fail( function () {
