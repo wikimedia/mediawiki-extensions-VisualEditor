@@ -61,10 +61,10 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 				$( '<hr>' ),
 				$( '<span>' )
 					.addClass( 've-ui-mwTemplatePage-description-extra' )
-					.html( mw.message(
+					.append( mw.message(
 						'visualeditor-dialog-transclusion-more-template-description',
 						title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template )
-					).parse() )
+					).parseDom() )
 			);
 		}
 	} else {
@@ -74,10 +74,10 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		if ( title ) {
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.html( mw.message(
+				.append( mw.message(
 					'visualeditor-dialog-transclusion-no-template-description',
 					title.getPrefixedText()
-				).parse() )
+				).parseDom() )
 				.find( 'a' ).attr( 'target', '_blank' );
 		}
 	}
