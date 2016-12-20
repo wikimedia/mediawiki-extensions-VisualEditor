@@ -25,7 +25,7 @@ OO.inheritClass( ve.ui.MWWikitextLinkAnnotationInspector, ve.ui.MWLinkAnnotation
 
 /* Static properties */
 
-ve.ui.MWWikitextLinkAnnotationInspector.static.name = 'link';
+ve.ui.MWWikitextLinkAnnotationInspector.static.name = 'wikitextLink';
 
 ve.ui.MWWikitextLinkAnnotationInspector.static.modelClasses = [];
 
@@ -109,6 +109,6 @@ ve.ui.windowFactory.register( ve.ui.MWWikitextLinkAnnotationInspector );
 ve.ui.wikitextCommandRegistry.register(
 	new ve.ui.Command(
 		'link', 'window', 'open',
-		{ args: [ 'link' ], supportedSelections: [ 'linear' ] }
+		{ args: [ 'wikitextLink' ], supportedSelections: [ 'linear' ] }
 	)
 );
