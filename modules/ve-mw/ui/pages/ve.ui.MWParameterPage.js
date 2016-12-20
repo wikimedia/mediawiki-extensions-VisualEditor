@@ -42,73 +42,17 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$more = $( '<div>' );
 	this.$description = $( '<div>' );
 
-	this.rawFallbackButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'wikiText',
-		title: ve.msg( 'visualeditor-dialog-transclusion-raw-fallback' )
-	} ).connect( this, { click: 'onRawFallbackButtonClick' } );
-
+	// Note: Calling createValueInput() sets some properties we rely on later in this function
 	this.valueInput = this.createValueInput()
 		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
-
-	this.removeButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'remove',
-		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-		flags: [ 'destructive' ],
-		classes: [ 've-ui-mwParameterPage-removeButton' ]
-	} )
-		.connect( this, { click: 'onRemoveButtonClick' } )
-		.toggle( !this.parameter.isRequired() );
-
-	this.infoButton = new OO.ui.PopupButtonWidget( {
-		framed: false,
-		icon: 'info',
-		title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
-		classes: [ 've-ui-mwParameterPage-infoButton' ]
-	} );
-
-	this.addButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'parameter',
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		tabIndex: -1
-	} )
-		.connect( this, { click: 'onAddButtonFocus' } );
 
 	this.statusIndicator = new OO.ui.IndicatorWidget( {
 		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
 	} );
 
-	// Events
-	this.$labelElement.on( 'click', this.onLabelClick.bind( this ) );
+	// Construct the description popup
 
-	// Initialization
-	this.$info
-		.addClass( 've-ui-mwParameterPage-info' )
-		.append( this.$labelElement, this.statusIndicator.$element );
-	this.$actions
-		.addClass( 've-ui-mwParameterPage-actions' )
-		.append(
-			this.rawFallbackButton.$element,
-			this.infoButton.$element,
-			this.removeButton.$element
-		);
-	this.$labelElement
-		.addClass( 've-ui-mwParameterPage-label' )
-		.text( this.spec.getParameterLabel( paramName ) );
-	this.$field
-		.addClass( 've-ui-mwParameterPage-field' )
-		.append(
-			this.valueInput.$element
-		);
-	this.$more
-		.addClass( 've-ui-mwParameterPage-more' )
-		.append( this.addButton.$element );
-	this.$element
-		.addClass( 've-ui-mwParameterPage' )
-		.append( this.$info, this.$field, this.$actions, this.$more );
 	this.$description
 		.addClass( 've-ui-mwParameterPage-description' )
 		.append( $( '<p>' ).text( this.spec.getParameterDescription( paramName ) || '' ) );
@@ -164,15 +108,85 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		);
 	}
 
-	if ( this.$description.text().trim() === '' ) {
-		this.infoButton
-			.setDisabled( true )
-			.setTitle(
-				ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' )
-			);
-	} else {
-		this.infoButton.getPopup().$body.append( this.$description );
+	// Construct the action buttons
+
+	if ( !this.rawValueInput ) {
+		this.rawFallbackButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'wikiText',
+			title: ve.msg( 'visualeditor-dialog-transclusion-raw-fallback' )
+		} )
+			.connect( this, { click: 'onRawFallbackButtonClick' } );
+
+		this.$actions.append( this.rawFallbackButton.$element );
 	}
+
+	if ( this.$description.text().trim() === '' ) {
+		this.infoButton = new OO.ui.ButtonWidget( {
+			disabled: true,
+			title: ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' ),
+			framed: false,
+			icon: 'info',
+			classes: [ 've-ui-mwParameterPage-infoButton' ]
+		} );
+	} else {
+		this.infoButton = new OO.ui.PopupButtonWidget( {
+			popup: {
+				$content: this.$description
+			},
+			title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
+			framed: false,
+			icon: 'info',
+			classes: [ 've-ui-mwParameterPage-infoButton' ]
+		} );
+	}
+
+	this.$actions.append( this.infoButton.$element );
+
+	if ( !this.parameter.isRequired() ) {
+		this.removeButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'remove',
+			title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+			flags: [ 'destructive' ],
+			classes: [ 've-ui-mwParameterPage-removeButton' ]
+		} )
+			.connect( this, { click: 'onRemoveButtonClick' } );
+
+		this.$actions.append( this.removeButton.$element );
+	}
+
+	this.addButton = new OO.ui.ButtonWidget( {
+		framed: false,
+		icon: 'parameter',
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		tabIndex: -1
+	} )
+		.connect( this, { click: 'onAddButtonFocus' } );
+
+	// Events
+	this.$labelElement.on( 'click', this.onLabelClick.bind( this ) );
+
+	// Initialization
+	this.$info
+		.addClass( 've-ui-mwParameterPage-info' )
+		.append( this.$labelElement, this.statusIndicator.$element );
+	this.$actions
+		.addClass( 've-ui-mwParameterPage-actions' );
+	this.$labelElement
+		.addClass( 've-ui-mwParameterPage-label' )
+		.text( this.spec.getParameterLabel( paramName ) );
+	this.$field
+		.addClass( 've-ui-mwParameterPage-field' )
+		.append(
+			this.valueInput.$element
+		);
+	this.$more
+		.addClass( 've-ui-mwParameterPage-more' )
+		.append( this.addButton.$element );
+	this.$element
+		.addClass( 've-ui-mwParameterPage' )
+		.append( this.$info, this.$field, this.$actions, this.$more );
 };
 
 /* Inheritance */
@@ -265,7 +279,6 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	} else if ( type !== 'line' ) {
 		this.rawValueInput = true;
 		valueInputConfig.multiline = true;
-		this.rawFallbackButton.$element.toggle( false );
 	}
 
 	return new OO.ui.TextInputWidget( valueInputConfig );
