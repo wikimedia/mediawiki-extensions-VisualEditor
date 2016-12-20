@@ -164,10 +164,10 @@ ve.init.mw.Target.prototype.parseDocument = function ( documentString, mode ) {
 	} else {
 		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
-
-		// Fix relative or missing base URL if needed
-		this.constructor.static.fixBase( doc );
 	}
+	// Fix relative or missing base URL if needed
+	this.constructor.static.fixBase( doc );
+
 	return doc;
 };
 
