@@ -669,7 +669,7 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText ) {
+ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetails ) {
 	var errorInfo, confirmPromptMessage,
 		target = this;
 
@@ -680,7 +680,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 
 	if ( this.wikitextFallbackLoading ) {
 		// Failed twice now
-		mw.log.warn( 'Failed to fall back to wikitext', errorText, error );
+		mw.log.warn( 'Failed to fall back to wikitext', code, errorDetails );
 		location.href = target.viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
 		return;
 	}
@@ -688,19 +688,21 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
 	if (
-		error &&
-		Object.prototype.hasOwnProperty.call( error, 'error' ) &&
-		Object.prototype.hasOwnProperty.call( error.error, 'info' )
+		errorDetails &&
+		Object.prototype.hasOwnProperty.call( errorDetails, 'error' ) &&
+		Object.prototype.hasOwnProperty.call( errorDetails.error, 'info' )
 	) {
-		errorInfo = error.error.info;
+		errorInfo = errorDetails.error.info;
+	} else {
+		errorInfo = errorDetails;
 	}
 
-	if ( !error || error.statusText !== 'abort' ) {
-		if ( errorText === 'http' || errorText === 'error' ) {
-			if ( error && ( error.status || ( error.xhr && error.xhr.status ) ) ) {
+	if ( !errorDetails || errorDetails.statusText !== 'abort' ) {
+		if ( code === 'http' || code === 'error' ) {
+			if ( errorDetails && ( errorDetails.status || ( errorDetails.xhr && errorDetails.xhr.status ) ) ) {
 				confirmPromptMessage = ve.msg(
 					'visualeditor-loadwarning',
-					'HTTP ' + ( error.status || error.xhr.status )
+					'HTTP ' + ( errorDetails.status || errorDetails.xhr.status )
 				);
 			} else {
 				confirmPromptMessage = ve.msg(
@@ -709,12 +711,12 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 				);
 			}
 		} else if ( errorInfo ) {
-			confirmPromptMessage = ve.msg( 'visualeditor-loadwarning', errorText + ': ' + errorInfo );
-		} else if ( typeof error === 'string' ) {
-			confirmPromptMessage = error;
+			confirmPromptMessage = ve.msg( 'visualeditor-loadwarning', code + ': ' + errorInfo );
+		} else if ( typeof errorDetails === 'string' ) {
+			confirmPromptMessage = errorDetails;
 		} else {
 			// At least give the devs something to work from
-			confirmPromptMessage = JSON.stringify( error );
+			confirmPromptMessage = JSON.stringify( errorDetails );
 		}
 	}
 
@@ -733,8 +735,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 			}
 		} );
 	} else {
-		if ( error.statusText !== 'abort' ) {
-			mw.log.warn( 'Failed to find error message', errorText, error );
+		if ( errorDetails.statusText !== 'abort' ) {
+			mw.log.warn( 'Failed to find error message', code, errorDetails );
 		}
 		this.deactivate( true );
 	}

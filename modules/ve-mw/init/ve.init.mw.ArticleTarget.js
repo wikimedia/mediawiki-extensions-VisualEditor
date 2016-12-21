@@ -256,7 +256,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data || typeof data.content !== 'string' ) {
-		this.loadFail( 'No HTML content in response from server', 've-api' );
+		this.loadFail( 've-api', 'No HTML content in response from server' );
 	} else {
 		ve.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
@@ -285,9 +285,9 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 			if ( this.retriedRevIdConflict ) {
 				// Retried already, just error the second time.
 				this.loadFail(
+					've-api',
 					'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
-						'returned by server do not match',
-					've-api'
+						'returned by server do not match'
 				);
 			} else {
 				this.retriedRevIdConflict = true;
@@ -469,8 +469,8 @@ ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
  * This method is called within the context of a target instance.
  *
  * @method
- * @param {Object} error Object containing xhr, textStatus and exception keys
- * @param {string} errorTypeText Error type text from mw.Api
+ * @param {string} code Error type text from mw.Api
+ * @param {Object|string} errorDetails Either an object containing xhr, textStatus and exception keys, or a string.
  * @fires loadError
  */
 ve.init.mw.ArticleTarget.prototype.loadFail = function () {

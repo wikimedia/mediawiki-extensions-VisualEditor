@@ -230,13 +230,13 @@
 						} );
 						return [ data, jqxhr.getResponseHeader( 'etag' ) ];
 					},
-					function ( response ) {
-						if ( response.status === 404 ) {
+					function ( xhr, code, _ ) {
+						if ( xhr.status === 404 ) {
 							// Page does not exist, so let the user start with a blank document.
 							return $.Deferred().resolve( [ '', undefined ] ).promise();
 						} else {
-							mw.log.warn( 'RESTBase load failed: ' + response.statusText );
-							return response;
+							mw.log.warn( 'RESTBase load failed: ' + xhr.statusText );
+							return $.Deferred().reject( code, xhr, _ ).promise();
 						}
 					}
 				);
