@@ -700,6 +700,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( error, errorText
 			}
 		} else if ( errorInfo ) {
 			confirmPromptMessage = ve.msg( 'visualeditor-loadwarning', errorText + ': ' + errorInfo );
+		} else if ( typeof error === 'string' ) {
+			confirmPromptMessage = error;
 		} else {
 			// At least give the devs something to work from
 			confirmPromptMessage = JSON.stringify( error );
