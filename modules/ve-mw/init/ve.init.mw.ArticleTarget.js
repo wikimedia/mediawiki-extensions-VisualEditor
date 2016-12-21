@@ -272,6 +272,8 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.startTimeStamp = data.starttimestamp;
 		this.revid = data.oldid;
 
+		this.checkboxes = data.checkboxes;
+
 		aboutDoc = this.doc.documentElement.getAttribute( 'about' );
 		if ( aboutDoc ) {
 			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
@@ -327,8 +329,6 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.documentReady( this.doc );
 	}
 
-	data = response ? ( response.visualeditor || response.visualeditoredit ) : {};
-
 	this.checkboxFields = [];
 	this.checkboxesByName = {};
 	this.$otherFields = $( [] );
@@ -338,13 +338,13 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		);
 	}
 
-	if ( data.checkboxes ) {
+	if ( this.checkboxes ) {
 		defaults = {};
 		$( '.editCheckboxes input' ).each( function () {
 			defaults[ this.name ] = this.checked;
 		} );
 
-		$checkboxes = $( '<div>' ).html( ve.getObjectValues( data.checkboxes ).join( '' ) );
+		$checkboxes = $( '<div>' ).html( ve.getObjectValues( this.checkboxes ).join( '' ) );
 		$checkboxes.find( 'input[type=checkbox]' ).each( function () {
 			var $label, title, checkbox,
 				$this = $( this ),
@@ -1190,6 +1190,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.submitting = false;
 	this.baseTimeStamp = null;
 	this.startTimeStamp = null;
+	this.checkboxes = null;
 	this.doc = null;
 	this.originalHtml = null;
 	this.section = null;

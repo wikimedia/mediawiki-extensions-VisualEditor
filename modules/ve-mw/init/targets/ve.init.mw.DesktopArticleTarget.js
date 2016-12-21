@@ -1672,6 +1672,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function ( di
 				data.basetimestamp = target.baseTimeStamp;
 				data.starttimestamp = target.startTimeStamp;
 				data.oldid = target.revid;
+				data.checkboxes = target.checkboxes;
 				return response;
 			} );
 		}
