@@ -1447,6 +1447,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 			);
 		}
 
+		// Intentionally treated as HTML
 		$( '#footer-info-lastmod' ).html( ' ' + mw.msg(
 			'lastmodifiedat',
 			lastModified.date,
