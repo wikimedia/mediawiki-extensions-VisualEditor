@@ -52,7 +52,7 @@
 	"apihelp-visualeditoredit-param-paction": "Działanie do wykonania.",
 	"apihelp-visualeditoredit-param-page": "Strona, na której wykonuje się działania.",
 	"apihelp-visualeditoredit-param-section": "Sekcja, na której wykonać działanie.",
-	"apihelp-visualeditoredit-param-sectiontitle": "Tytuł dla nowej sekcji.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Tytuł nowej sekcji.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
 	"apierror-visualeditor-api-langlinks-error": "Błąd podczas odpytywania API MediaWiki",

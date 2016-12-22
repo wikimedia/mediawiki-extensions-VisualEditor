@@ -195,6 +195,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "שדה מיושן",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "השדה מיושן. $1",
 	"visualeditor-dialog-transclusion-loading": "טעינה...",
+	"visualeditor-dialog-transclusion-more-template-description": "ייתכן שיש מידע נוסף על התבנית \"$1\" ב[[{{ns:template}}:$1|דף התיעוד שלה]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "הצגת אפשרויות",
 	"visualeditor-dialog-transclusion-no-template-description": "לתבנית \"$1\" עדיין אין תיאור, אבל ייתכן שאפשר למצוא מידע כלשהו ב[[$1|דף של התבנית]].",
 	"visualeditor-dialog-transclusion-options": "אפשרויות",
