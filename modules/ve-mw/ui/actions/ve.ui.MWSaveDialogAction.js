@@ -43,10 +43,11 @@ ve.ui.MWSaveDialogAction.static.methods = [ 'save', 'review', 'preview' ];
  * Open the save dialog
  *
  * @method
+ * @param {string} checkbox Checkbox to toggle after opening
  * @return {boolean} Action was executed
  */
-ve.ui.MWSaveDialogAction.prototype.save = function () {
-	ve.init.target.showSaveDialog();
+ve.ui.MWSaveDialogAction.prototype.save = function ( checkbox ) {
+	ve.init.target.showSaveDialog( null, checkbox );
 	return true;
 };
 
@@ -100,42 +101,61 @@ if ( mw.libs.ve.isWikitextAvailable ) {
 		);
 	} );
 }
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'saveMinoredit', 'mwSaveDialog', 'save',
+		{ args: [ 'wpMinoredit' ], supportedSelections: [ 'linear', 'table' ] }
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'saveWatchthis', 'mwSaveDialog', 'save',
+		{ args: [ 'wpWatchthis' ], supportedSelections: [ 'linear', 'table' ] }
+	)
+);
+
 ( function () {
 	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
-		saveShortcut = ve.msg( 'accesskey-save' ),
-		changesShortcut = ve.msg( 'accesskey-diff' ),
-		previewShortcut = ve.msg( 'accesskey-preview' );
+		shortcuts = [
+			{
+				command: 'showSave',
+				accessKey: 'accesskey-save',
+				label: function () { return ve.init.target.getSaveButtonLabel(); }
+			},
+			{
+				command: 'showChanges',
+				accessKey: 'accesskey-diff',
+				label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' )
+			},
+			{
+				command: 'showPreview',
+				accessKey: 'accesskey-preview',
+				label: OO.ui.deferMsg( 'showpreview' )
+			},
+			{
+				command: 'saveMinoredit',
+				accessKey: 'accesskey-minoredit',
+				label: OO.ui.deferMsg( 'tooltip-minoredit' )
+			},
+			{
+				command: 'saveWatchthis',
+				accessKey: 'accesskey-watch',
+				label: OO.ui.deferMsg( 'tooltip-watch' )
+			}
+		];
 
-	if ( saveShortcut !== '-' && saveShortcut !== '' ) {
-		ve.ui.triggerRegistry.register(
-			'showSave', new ve.ui.Trigger( accessKeyPrefix + saveShortcut )
-		);
-		ve.ui.commandHelpRegistry.register( 'other', 'showSave', {
-			trigger: 'showSave',
-			label: function () { return ve.init.target.getSaveButtonLabel(); }
-		} );
-		ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote.push( 'showSave' );
-	}
+	shortcuts.forEach( function ( shortcut ) {
+		var accessKey = ve.msg( shortcut.accessKey );
+		if ( accessKey !== '-' && accessKey !== '' ) {
+			ve.ui.triggerRegistry.register(
+				shortcut.command, new ve.ui.Trigger( accessKeyPrefix + accessKey )
+			);
+			ve.ui.commandHelpRegistry.register( 'other', shortcut.command, {
+				trigger: shortcut.command,
+				label: shortcut.label
+			} );
+			ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote.push( shortcut.command );
+		}
+	} );
 
-	if ( changesShortcut !== '-' && changesShortcut !== '' ) {
-		ve.ui.triggerRegistry.register(
-			'showChanges', new ve.ui.Trigger( accessKeyPrefix + changesShortcut )
-		);
-		ve.ui.commandHelpRegistry.register( 'other', 'showChanges', {
-			trigger: 'showChanges',
-			label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' )
-		} );
-		ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote.push( 'showChanges' );
-	}
-
-	if ( previewShortcut !== '-' && previewShortcut !== '' ) {
-		ve.ui.triggerRegistry.register(
-			'showPreview', new ve.ui.Trigger( accessKeyPrefix + previewShortcut )
-		);
-		ve.ui.commandHelpRegistry.register( 'other', 'showPreview', {
-			trigger: 'showPreview',
-			label: OO.ui.deferMsg( 'showpreview' )
-		} );
-		ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote.push( 'showPreview' );
-	}
 }() );

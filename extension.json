@@ -519,6 +519,10 @@
 				"accesskey-diff",
 				"accesskey-preview",
 				"accesskey-save",
+				"accesskey-minoredit",
+				"accesskey-watch",
+				"tooltip-minoredit",
+				"tooltip-watch",
 				"newsectionsummary"
 			],
 			"targets": [
