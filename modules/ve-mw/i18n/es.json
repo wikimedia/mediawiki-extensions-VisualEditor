@@ -27,7 +27,8 @@
 			"Vikytinta",
 			"Ncontinanza",
 			"Guillermo2149",
-			"Lemondoge"
+			"Lemondoge",
+			"Dgstranz"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -347,6 +348,8 @@
 	"visualeditor-savedialog-warning-dirty": "Tu edición puede haber sido corrompida. Revisa antes de guardar.",
 	"visualeditor-saveerror": "Error al guardar datos en el servidor: $1.",
 	"visualeditor-saveerror-titleblacklist": "Error al guardar la página: este título de página está en la lista negra",
+	"visualeditor-section-body-placeholder": "Nueva sección",
+	"visualeditor-section-title-placeholder": "Asunto",
 	"visualeditor-serializeerror": "Error al cargar datos del servidor: $1.",
 	"visualeditor-settings-tool": "Configuración de página",
 	"visualeditor-shortcuts-insert": "Insertar",
