@@ -20,7 +20,6 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 
 	// Properties
 	this.imageModel = null;
-	this.fileRepoPromise = null;
 	this.pageTitle = '';
 	this.isSettingUpModel = false;
 	this.isInsertion = false;
