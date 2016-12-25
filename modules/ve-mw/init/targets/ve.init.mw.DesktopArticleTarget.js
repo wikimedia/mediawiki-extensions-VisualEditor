@@ -1436,7 +1436,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub, isRedirect
 ) {
 	var $content = $( $.parseHTML( html ) ),
-		$veSectionLinks, $categories;
+		$veSectionLinks, $categories, $sections, editedSectionHeader;
 
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
@@ -1498,6 +1498,23 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	$( '.redirectMsg' )
 		.addClass( 'mw-content-' + $( 'html' ).attr( 'dir' ) )
 		.addClass( 've-redirect-header' );
+
+	// Scroll the page to the edited section, if any
+	if ( this.section !== null ) {
+		$sections = $( '#mw-content-text' )
+			.find( 'h1, h2, h3, h4, h5, h6' )
+			.not( '#toc h2' );
+		if ( this.section === 'new' ) {
+			editedSectionHeader = $sections.last().get( 0 );
+		} else if ( this.section > 0 ) {
+			editedSectionHeader = $sections.get( this.section - 1 );
+		}
+		if ( editedSectionHeader ) {
+			setTimeout( function () {
+				OO.ui.Element.static.scrollIntoView( editedSectionHeader );
+			}, 0 );
+		}
+	}
 };
 
 /**
