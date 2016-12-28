@@ -812,7 +812,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, erro
 		} else {
 			userMsg = 'visualeditor-savedialog-identify-user';
 		}
-		$msg = $msg.add( $.parseHTML( mw.message( userMsg, username ).parse() ) );
+		$msg = $msg.add( mw.message( userMsg, username ).parseDom() );
 	}
 	this.showSaveError( $msg );
 };
