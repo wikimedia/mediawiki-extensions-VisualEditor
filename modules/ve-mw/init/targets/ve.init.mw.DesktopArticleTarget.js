@@ -1318,10 +1318,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 		// Set the current URL
 		uri = this.currentUri;
 
-		if (
-			mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
-			mw.user.options.get( 'visualeditor-tabs' ) !== 'multi-tab'
-		) {
+		if ( mw.libs.ve.isSingleEditTab ) {
 			uri.query.action = 'edit';
 			mw.config.set( 'wgAction', 'edit' );
 		} else {
