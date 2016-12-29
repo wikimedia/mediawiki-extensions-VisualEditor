@@ -699,9 +699,9 @@
 	};
 
 	// Cast "0" (T89513)
-	enable = Number( mw.user.options.get( 'visualeditor-enable' ) );
-	tempdisable = Number( mw.user.options.get( 'visualeditor-betatempdisable' ) );
-	autodisable = Number( mw.user.options.get( 'visualeditor-autodisable' ) );
+	enable = +mw.user.options.get( 'visualeditor-enable' );
+	tempdisable = +mw.user.options.get( 'visualeditor-betatempdisable' );
+	autodisable = +mw.user.options.get( 'visualeditor-autodisable' );
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
 	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
