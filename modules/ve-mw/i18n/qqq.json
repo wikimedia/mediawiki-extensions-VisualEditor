@@ -34,6 +34,7 @@
 	"apihelp-visualeditor-description": "{{doc-apihelp-description|visualeditor}}",
 	"apihelp-visualeditor-param-basetimestamp": "{{doc-apihelp-param|visualeditor|basetimestamp}}",
 	"apihelp-visualeditor-param-cachekey": "In computer science, in the context of data storage, serialization is the process of translating data structures or object state into a format that can be stored (for example, in a file or memory buffer, or transmitted across a network connection link) and reconstructed later in the same or another computer environment.\n{{doc-apihelp-param|visualeditor|cachekey}}",
+	"apihelp-visualeditor-param-editintro": "{{doc-apihelp-param|visualeditor|editintro}}",
 	"apihelp-visualeditor-param-etag": "{{doc-apihelp-param|visualeditor|etag}}",
 	"apihelp-visualeditor-param-format": "{{doc-apihelp-param|visualeditor|format}}",
 	"apihelp-visualeditor-param-html": "{{doc-apihelp-param|visualeditor|html}}",
