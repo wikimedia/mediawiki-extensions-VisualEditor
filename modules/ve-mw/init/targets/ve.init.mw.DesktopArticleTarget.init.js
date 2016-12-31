@@ -842,7 +842,6 @@
 			if (
 				uri.query.undo === undefined &&
 				uri.query.undoafter === undefined &&
-				uri.query.editintro === undefined &&
 				uri.query.preload === undefined &&
 				uri.query.preloadtitle === undefined &&
 				uri.query.preloadparams === undefined &&

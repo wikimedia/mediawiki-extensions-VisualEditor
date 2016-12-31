@@ -152,7 +152,6 @@ class VisualEditorHooks {
 			// TODO: Other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
 			isset( $params['undo'] ) ||
 			isset( $params['undoafter'] ) ||
-			isset( $params['editintro'] ) ||
 			isset( $params['preload'] ) ||
 			isset( $params['preloadtitle'] ) ||
 			isset( $params['preloadparams'] ) ||
