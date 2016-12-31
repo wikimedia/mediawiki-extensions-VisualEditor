@@ -8,6 +8,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+use MediaWiki\MediaWikiServices;
+
 class ApiVisualEditor extends ApiBase {
 	/**
 	 * @var Config
@@ -350,7 +352,9 @@ class ApiVisualEditor extends ApiBase {
 						// Unfortunately there's no nice way to get only the pages which cause
 						// editing to be restricted
 						foreach ( $sources as $source ) {
-							$notice .= "<li>" . Linker::link( $source ) . "</li>";
+							$notice .= "<li>" .
+								MediaWikiServices::getInstance()->getLinkRenderer()->makeLink( $source ) .
+								"</li>";
 						}
 						$notice .= '</ul>';
 						$notices[] = $notice;
@@ -568,9 +572,9 @@ class ApiVisualEditor extends ApiBase {
 		);
 		$lp->mLimit = 1;
 
-		return $lp->getBody() . Linker::link(
+		return $lp->getBody() . MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
 			SpecialPage::getTitleFor( 'Log' ),
-			$this->msg( 'log-fulllog' )->escaped(),
+			$this->msg( 'log-fulllog' )->text(),
 			[],
 			[
 				'page' => $title->getPrefixedDBkey(),
