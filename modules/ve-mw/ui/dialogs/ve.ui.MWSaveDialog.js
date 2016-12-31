@@ -217,6 +217,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 			break;
 		case 'preview':
 			size = 'full';
+			this.previewPanel.$element[ 0 ].focus();
 			break;
 		case 'review':
 			size = 'larger';
@@ -484,7 +485,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		padded: true
 	} );
 	this.$previewViewer = $( '<div>' ).addClass( 'mw-body-content mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir );
-	this.previewPanel.$element.append( this.$previewViewer );
+	this.previewPanel.$element
+		// Make focusable for keyboard accessible scrolling
+		.prop( 'tabIndex', 0 )
+		.append( this.$previewViewer );
 
 	// Conflict panel
 	this.conflictPanel = new OO.ui.PanelLayout( {
