@@ -5,7 +5,8 @@
 			"Cedric31",
 			"Fitoschido",
 			"McDutchie",
-			"Macofe"
+			"Macofe",
+			"Nicolas Eynaud"
 		]
 	},
 	"apihelp-visualeditor-param-etag": "ETag de mandar.",
@@ -206,6 +207,8 @@
 	"visualeditor-mweditmodeve-showagain": "Afichar pas mai aqueste messatge",
 	"visualeditor-mweditmodeve-title": "Bascular cap a l’editor visual ?",
 	"visualeditor-mweditmodeve-tool": "Bascular cap a l’editor visual",
+	"visualeditor-mwgallerydialog-card-images": "Imatges",
+	"visualeditor-mwgallerydialog-card-options": "Opcions",
 	"visualeditor-mwgallerydialog-remove-button-label": "Suprimir l'imatge",
 	"visualeditor-mwgallerydialog-title": "Galariá",
 	"visualeditor-mwsignature-tool": "Vòstra signatura",
@@ -241,6 +244,8 @@
 	"visualeditor-savedialog-warning-dirty": "Vòstra modificacion poiriá èsser gastada - repassatz abans d'enregistrar.",
 	"visualeditor-saveerror": "Error al moment de l'enregistrament de las donadas sul servidor : $1.",
 	"visualeditor-saveerror-titleblacklist": "Error al moment de l’enregistrament de la pagina : lo títol d'aquesta pagina es dins la lista negra.",
+	"visualeditor-section-body-placeholder": "New seccion",
+	"visualeditor-section-title-placeholder": "Subjècte",
 	"visualeditor-serializeerror": "Error al moment del cargament de las donadas del servidor : $1.",
 	"visualeditor-settings-tool": "Paramètres de la pagina",
 	"visualeditor-shortcuts-insert": "Inserir",
