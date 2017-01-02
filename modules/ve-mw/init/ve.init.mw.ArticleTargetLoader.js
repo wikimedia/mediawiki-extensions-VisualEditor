@@ -103,7 +103,7 @@
 		},
 
 		/**
-		 * Request the page HTML and various metadata from the MediaWiki API (which will use
+		 * Request the page data and various metadata from the MediaWiki API (which will use
 		 * Parsoid or RESTBase).
 		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
@@ -122,6 +122,17 @@
 			}
 		},
 
+		/**
+		 * Request the page HTML and various metadata from the MediaWiki API (which will use
+		 * Parsoid or RESTBase).
+		 *
+		 * @param {string} pageName Page name to request
+		 * @param {string} [oldid] Old revision ID, current if omitted
+		 * @param {string} [targetName] Optional target name for tracking
+		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
+		 * @param {string} [wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
+		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
+		 */
 		requestParsoidData: function ( pageName, oldid, targetName, modified, wikitext ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers,
 				switched = false,
@@ -165,9 +176,14 @@
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
 
+				if ( wikitext === undefined ) {
+					wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
+				}
+
 				if (
 					conf.fullRestbaseUrl &&
-					( wikitext || ( wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ) ) ) &&
+					// wikitext can be an empty string
+					wikitext !== undefined &&
 					!$( '[name=wpSection]' ).val()
 				) {
 					switched = true;
@@ -244,7 +260,17 @@
 			return dataPromise;
 		},
 
-		requestWikitext: function ( pageName, section, oldid /* , targetName */ ) {
+		/**
+		 * Request the page wikitext and various metadata from the MediaWiki API.
+		 *
+		 * @param {string} pageName Page name to request
+		 * @param {number|string} [section] Section to edit, number or 'new' (currently just source mode)
+		 * @param {string} [oldid] Old revision ID, current if omitted
+		 * @param {string} [targetName] Optional target name for tracking
+		 * @param {boolean} [modified] The page was been modified before loading
+		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
+		 */
+		requestWikitext: function ( pageName, section, oldid ) {
 			var data = {
 				action: 'visualeditor',
 				paction: 'wikitext',
