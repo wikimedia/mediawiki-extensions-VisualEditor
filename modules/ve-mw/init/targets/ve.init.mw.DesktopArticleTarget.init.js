@@ -757,6 +757,10 @@
 		// Only in supported skins
 		conf.skins.indexOf( mw.config.get( 'skin' ) ) !== -1 &&
 
+		// Not on pages which are outputs of the Translate extensions
+		// TODO: Allow the Translate extension to do this itself
+		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
+
 		// Not on pages like Special:RevisionDelete
 		mw.config.get( 'wgNamespaceNumber' ) !== -1
 	);
@@ -766,9 +770,6 @@
 
 		// Only in enabled namespaces
 		conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
-
-		// Not on pages which are outputs of the Page Translation feature
-		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
 		// Only for pages with a supported content model
 		conf.contentModels.hasOwnProperty( mw.config.get( 'wgPageContentModel' ) )
