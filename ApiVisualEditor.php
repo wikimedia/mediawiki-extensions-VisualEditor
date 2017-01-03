@@ -298,6 +298,19 @@ class ApiVisualEditor extends ApiBase {
 					)->parseAsBlock();
 				}
 
+				// From EditPage#showCustomIntro
+				if ( $params['editintro'] ) {
+					$eiTitle = Title::newFromText( $params['editintro'] );
+					if ( $eiTitle instanceof Title && $eiTitle->exists() && $eiTitle->userCan( 'read' ) ) {
+						global $wgParser;
+						$notices[] = $wgParser->parse(
+							'<div class="mw-editintro">{{:' . $eiTitle->getFullText() . '}}</div>',
+							$title,
+							new ParserOptions()
+						)->getText();
+					}
+				}
+
 				// Old revision notice
 				if ( $restoring ) {
 					$notices[] = $this->msg( 'editingold' )->parseAsBlock();
@@ -603,6 +616,7 @@ class ApiVisualEditor extends ApiBase {
 			'wikitext' => null,
 			'section' => null,
 			'oldid' => null,
+			'editintro' => null,
 			'pst' => false,
 		];
 	}

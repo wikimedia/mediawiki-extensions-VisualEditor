@@ -16,6 +16,7 @@
  */
 ( function () {
 	var prefName, prefValue,
+		uri = new mw.Uri(),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
 		modules = [
@@ -37,7 +38,7 @@
 		conf.enableWikitext &&
 		(
 			mw.user.options.get( 'visualeditor-newwikitext' ) ||
-			new mw.Uri().query.veaction === 'editsource'
+			uri.query.veaction === 'editsource'
 		) &&
 		mw.loader.getState( 'ext.visualEditor.mwwikitext' )
 	) {
@@ -141,7 +142,8 @@
 					action: 'visualeditor',
 					paction: ( conf.fullRestbaseUrl || conf.restbaseUrl ) ? 'metadata' : 'parse',
 					page: pageName,
-					uselang: mw.config.get( 'wgUserLanguage' )
+					uselang: mw.config.get( 'wgUserLanguage' ),
+					editintro: uri.query.editintro
 				};
 
 			// Only request the API to explicitly load the currently visible revision if we're restoring
@@ -275,7 +277,8 @@
 				action: 'visualeditor',
 				paction: 'wikitext',
 				page: pageName,
-				uselang: mw.config.get( 'wgUserLanguage' )
+				uselang: mw.config.get( 'wgUserLanguage' ),
+				editintro: uri.query.editintro
 			};
 
 			// section should never really be undefined, but check just in case
