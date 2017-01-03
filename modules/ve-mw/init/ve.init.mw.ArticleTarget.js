@@ -1851,11 +1851,13 @@ ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
  * Show a save dialog
  *
  * @param {string} [action] Window action to trigger after opening
+ * @param {string} [checkboxName] Checkbox to toggle after opening
  *
  * @fires saveWorkflowBegin
  */
-ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action ) {
-	var target = this;
+ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxName ) {
+	var checkbox,
+		target = this;
 
 	if ( !( this.edited || this.restoring ) ) {
 		return;
@@ -1868,7 +1870,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action ) {
 
 	// Get the save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
-		var data,
+		var data, checked,
 			windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 
 		if ( !target.saveDialog ) {
@@ -1892,6 +1894,14 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action ) {
 			( action === 'preview' && !data.canPreview )
 		) {
 			return;
+		}
+
+		if ( checkboxName && ( checkbox = target.checkboxesByName[ checkboxName ] ) ) {
+			checked = !checkbox.isSelected();
+			// Wait for native access key change to happen
+			setTimeout( function () {
+				checkbox.setSelected( checked );
+			} );
 		}
 
 		// When calling review/preview action, switch to those panels immediately
