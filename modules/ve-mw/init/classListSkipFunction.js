@@ -2,7 +2,7 @@
  *
  * VisualEditor skip function for classList.js.
  *
- * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
+ * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
  * Adapted from http://purl.eligrey.com/github/classList.js/blob/master/classList.js
  */
 return !!(
