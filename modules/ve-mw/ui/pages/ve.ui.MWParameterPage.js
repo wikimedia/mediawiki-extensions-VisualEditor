@@ -265,7 +265,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	} else if ( type !== 'line' ) {
 		this.rawValueInput = true;
 		valueInputConfig.multiline = true;
-		this.rawFallbackButton.$element.detach();
+		this.rawFallbackButton.$element.toggle( false );
 	}
 
 	return new OO.ui.TextInputWidget( valueInputConfig );
