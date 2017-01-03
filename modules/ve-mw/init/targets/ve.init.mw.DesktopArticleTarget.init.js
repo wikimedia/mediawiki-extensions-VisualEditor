@@ -733,7 +733,7 @@
 
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
-	if ( isOnlyTabVE() ) {
+	if ( init.isSingleEditTab ) {
 		veEditUri = viewUri.clone().extend( { action: 'edit' } );
 		delete veEditUri.query.veaction;
 	} else {
@@ -745,23 +745,6 @@
 	if ( oldid ) {
 		veEditUri.extend( { oldid: oldid } );
 	}
-
-	userPrefEnabled = (
-		// Allow disabling for anonymous users separately from changing the
-		// default preference (bug 50000)
-		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
-
-		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
-		// User has 'visualeditor-betatempdisable' preference disabled
-		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable
-	);
-	userPrefPreferShow = (
-		userPrefEnabled &&
-
-		// If in two-edit-tab mode, or the user doesn't prefer wikitext always
-		( !conf.singleEditTab || tabPreference !== 'prefer-wt' )
-	);
 
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
@@ -807,6 +790,23 @@
 	if ( init.isWikitextAvailable ) {
 		editModes.editsource = 'source';
 	}
+
+	userPrefEnabled = (
+		// Allow disabling for anonymous users separately from changing the
+		// default preference (bug 50000)
+		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
+
+		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
+		// User has 'visualeditor-betatempdisable' preference disabled
+		// User has 'visualeditor-autodisable' preference disabled
+		enable && !tempdisable && !autodisable
+	);
+	userPrefPreferShow = (
+		userPrefEnabled &&
+
+		// Except when single edit tab for old wikitext
+		!( conf.singleEditTab && tabPreference === 'prefer-wt' && !init.isWikitextAvailable )
+	);
 
 	// FIXME: We should do this more elegantly
 	init.setEditorPreference = setEditorPreference;
@@ -1052,7 +1052,7 @@
 			// Set up the tabs appropriately if the user has VE on
 			if ( init.isAvailable && userPrefPreferShow ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
-				if ( !conf.singleEditTab || tabPreference === 'multi-tab' ) {
+				if ( !init.isSingleEditTab ) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupMultiTabSkin();
 				} else if (
