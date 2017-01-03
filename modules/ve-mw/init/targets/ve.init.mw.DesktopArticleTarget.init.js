@@ -341,6 +341,20 @@
 		return editor;
 	}
 
+	function getPreferredEditor() {
+		switch ( tabPreference ) {
+			case 'remember-last':
+				return getLastEditor();
+			case 'prefer-ve':
+				return 'visualeditor';
+			case 'prefer-wt':
+				return 'wikitext';
+			default:
+				// Two tabs, no preference
+				return null;
+		}
+	}
+
 	conf = mw.config.get( 'wgVisualEditorConfig' );
 	tabMessages = conf.tabMessages;
 	uri = new mw.Uri();
@@ -714,21 +728,11 @@
 	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
 
 	function isOnlyTabVE() {
-		return conf.singleEditTab && (
-			tabPreference === 'prefer-ve' || (
-				tabPreference === 'remember-last' &&
-				getLastEditor() !== 'wikitext'
-			)
-		);
+		return conf.singleEditTab && getPreferredEditor() === 'visualeditor';
 	}
 
 	function isOnlyTabWikitext() {
-		return conf.singleEditTab && (
-			tabPreference === 'prefer-wt' || (
-				tabPreference === 'remember-last' &&
-				getLastEditor() === 'wikitext'
-			)
-		);
+		return conf.singleEditTab && getPreferredEditor() === 'wikitext';
 	}
 
 	// On a view page, extend the current URI so parameters like oldid are carried over
@@ -833,12 +837,12 @@
 	}
 
 	$( function () {
-		var showWikitextWelcome = true,
+		var mode,
+			showWikitextWelcome = true,
 			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null,
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
 			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,
-			action = 'edit',
 			welcomeDialogLocalStorageValue = null;
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
@@ -909,22 +913,15 @@
 						mechanism: 'url'
 					} );
 					if ( isViewPage && uri.query.veaction in editModes ) {
-						activateTarget( editModes[ uri.query.veaction ], section );
+						mode = editModes[ uri.query.veaction ];
 					} else {
-						if (
-							init.isWikitextAvailable &&
-							(
-								tabPreference === 'prefer-ve' ||
-								(
-									tabPreference === 'remember-last' &&
-									getLastEditor() === 'wikitext'
-								)
-							)
-						) {
-							action = 'editsource';
+						if ( init.isWikitextAvailable && getPreferredEditor() === 'wikitext' ) {
+							mode = 'source';
+						} else {
+							mode = 'visual';
 						}
-						activateTarget( editModes[ action ], section );
 					}
+					activateTarget( mode, section );
 				} else if (
 					init.isVisualAvailable &&
 					pageCanLoadEditor &&
