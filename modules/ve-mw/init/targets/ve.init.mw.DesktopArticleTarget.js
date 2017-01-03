@@ -530,6 +530,16 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.clearSurfaces = function () {
+	this.teardownNewSection();
+
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.clearSurfaces.apply( this, arguments );
+};
+
+/**
  * Determines whether we want to switch to view mode or not (displaying a dialog if necessary)
  * Then, if we do, actually switches to view mode.
  *
@@ -1299,7 +1309,10 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 	if (
 		!this.actFromPopState &&
 		history.pushState &&
-		this.currentUri.query.veaction !== veaction &&
+		(
+			this.currentUri.query.veaction !== veaction ||
+			this.currentUri.query.section !== this.section
+		) &&
 		this.currentUri.query.action !== 'edit'
 	) {
 		// Set the current URL
@@ -1318,6 +1331,8 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 		}
 		if ( this.section !== null ) {
 			uri.query.section = this.section;
+		} else {
+			delete uri.query.section;
 		}
 
 		history.pushState( this.popState, document.title, uri );
@@ -1749,6 +1764,32 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
 
 		this.reloadSurface( 'visual', dataPromise );
 	}
+};
+
+/**
+ * Switch to a different wikitext section
+ *
+ * @param {number|string|null} section New section, number, 'new' or null (whole document)
+ * @param {boolean} noConfirm Swtich without prompting (changes will be lost either way)
+ */
+ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextSection = function ( section, noConfirm ) {
+	var promise,
+		target = this;
+	if ( section === this.section ) {
+		return;
+	}
+	if ( !noConfirm && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
+		promise = OO.ui.confirm( mw.msg( 'visualeditor-viewpage-savewarning' ) );
+	} else {
+		promise = $.Deferred().resolve( true ).promise();
+	}
+	promise.then( function ( confirmed ) {
+		if ( confirmed ) {
+			target.section = section;
+			target.reloadSurface( 'source' );
+			target.updateTabs( true );
+		}
+	} );
 };
 
 /**
