@@ -6,6 +6,7 @@
  */
 
 .ve-ui-mwParameterPage .ve-ui-mwParameter-wikitextFallbackInput {
-	font-family: monospace;
+	/* Specify a valid second value to fix size in Chrome/FF */
+	font-family: monospace, 'Courier';
 	background-color: #ddd;
 }
