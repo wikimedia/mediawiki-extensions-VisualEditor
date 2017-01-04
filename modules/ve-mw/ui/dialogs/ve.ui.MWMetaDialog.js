@@ -76,9 +76,9 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	this.$body.append( this.panels.$element );
 	this.panels.addItems( [ this.bookletLayout ] );
 	this.bookletLayout.addPages( [
+		this.categoriesPage,
 		this.settingsPage,
 		this.advancedSettingsPage,
-		this.categoriesPage,
 		this.languagesPage,
 		this.templatesUsedPage
 	] );
