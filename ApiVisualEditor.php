@@ -113,12 +113,12 @@ class ApiVisualEditor extends ApiBase {
 		} elseif ( $response['error'] !== '' ) {
 			$this->dieWithError(
 				[ 'apierror-visualeditor-docserver-http-error', wfEscapeWikiText( $response['error'] ) ],
-				$response['error']
+				'apierror-visualeditor-docserver-http-error'
 			);
 		} else { // error null, code not 200
 			$this->dieWithError(
 				[ 'apierror-visualeditor-docserver-http', $response['code'] ],
-				(string) $response['code']
+				'apierror-visualeditor-docserver-http'
 			);
 		}
 		return $response['body'];
