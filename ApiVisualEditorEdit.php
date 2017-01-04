@@ -183,11 +183,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	}
 
 	protected function postData( $path, $title, $data, $parserParams, $etag ) {
-		if ( $parserParams['oldid'] === 0 ) {
-			$parserParams['oldid'] = '';
-		}
 		$path .= urlencode( $title->getPrefixedDBkey() );
-		if ( $parserParams['oldid'] ) {
+		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
 			$path .= '/' . $parserParams['oldid'];
 		}
 		return $this->requestRestbase(
