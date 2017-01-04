@@ -52,6 +52,7 @@
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Lors de l’enregistrement, règlez ceci avec l’horodatage de la version éditée de la page. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditor-param-cachekey": "Pour le serialize ou le diff, utiliser le résultat d’une précédente requête serializeforcache  avec cette clé. Réécrase $1html.",
+	"apihelp-visualeditor-param-editintro": "Modifier l’intro pour ajouter des notifications.",
 	"apihelp-visualeditor-param-etag": "ETag à envoyer",
 	"apihelp-visualeditor-param-html": "HTML à envoyer à Parsoid pour être converti en wikicode.",
 	"apihelp-visualeditor-param-oldid": "Le numéro de version à utiliser (par défaut celui de la dernière version).",

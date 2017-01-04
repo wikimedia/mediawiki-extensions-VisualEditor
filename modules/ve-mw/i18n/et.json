@@ -6,7 +6,8 @@
 			"Boxmein",
 			"Amire80",
 			"Roland",
-			"Suwa"
+			"Suwa",
+			"Cumbril"
 		]
 	},
 	"apihelp-visualeditor-description": "Tagastab teenusest Parsoid lehekülje HTML5-koodi.",
@@ -266,7 +267,7 @@
 	"visualeditor-preference-betatempdisable": "Keela ajutiselt visuaaltoimeti, kuniks selle arendus on beetajärgus",
 	"visualeditor-preference-core-description": "Kasuta visuaaltoimetit. See ei ole kasutatav arutelulehekülgedel ega veel mõnes nimeruumis.",
 	"visualeditor-preference-core-label": "Visuaaltoimeti",
-	"visualeditor-preference-newwikitexteditor-description": "Kasuta uut vikiteksti režiimi, mis kuulub visuaaltoimeti juurde. See sisaldab suurt osa visuaaltoimetis olmasolevatest tööriistadest, sel on sarnane väljanägemine ning see võimaldab toimetamisrežiime paremini vahetada.",
+	"visualeditor-preference-newwikitexteditor-description": "Kasuta uut visuaaltoimeti juurde kuuluvat vikiteksti režiimi. See sisaldab suurt osa visuaaltoimetis olemasolevatest tööriistadest, sel on sarnane väljanägemine ning see võimaldab toimetamisrežiime paremini vahetada.",
 	"visualeditor-preference-newwikitexteditor-label": "Uus vikiteksti režiim",
 	"visualeditor-preference-enable": "Kasuta visuaaltoimetit. See on saadaval {{PLURAL:$2|järgmises nimeruumis|järgmistes nimeruumides}}: $1",
 	"visualeditor-preference-tabs": "Redigeerimisrežiim:",
