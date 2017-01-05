@@ -26,6 +26,7 @@
 	"tag-visualeditor-description": "Bewerking gemaakt met behulp van de [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuele tekstverwerker]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuele tekstverwerker: controleren]]",
 	"tag-visualeditor-needcheck-description": "Bewerking gemaakt met de [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuele tekstverwerker]] waarbij het systeem gedetecteerd heeft dat de wikitekst mogelijk onbedoelde veranderingen bevat.",
+	"tag-visualeditor-wikitext": "2017 broncode bewerking",
 	"tag-visualeditor-wikitext-description": "Bewerking gemaakt met de 2017 wikitekstbewerker",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuele tekstverwerker: omgeschakeld]]",
 	"tag-visualeditor-switched-description": "De gebruiker is begonnen met bewerken via de visuele tekstverwerker en is daarna omgeschakeld naar de wikitekstbewerker.",

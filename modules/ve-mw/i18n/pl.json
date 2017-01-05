@@ -189,6 +189,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Zawsze",
 	"visualeditor-dialog-meta-settings-toc-help": "Możesz ustawić wyświetlenie się spisu treści, jeżeli strona zawiera mniej niż trzy nagłówki, albo ustawić brak wyświetlania bez względu na liczbę nagłówków. Domyślnie spis treści wyświetla się, kiedy są przynajmniej trzy nagłówki.",
 	"visualeditor-dialog-meta-settings-toc-label": "Pokazywanie spisu treści",
+	"visualeditor-dialog-meta-templatesused-noresults": "Nie znaleziono szablonów.",
 	"visualeditor-dialog-meta-title": "Opcje",
 	"visualeditor-dialog-table-sortable": "Sortowanie",
 	"visualeditor-dialog-table-wikitable": "Standardowy styl",
