@@ -9,7 +9,8 @@
 			"Se4598",
 			"Kumkumuk",
 			"Gırd",
-			"1917 Ekim Devrimi"
+			"1917 Ekim Devrimi",
+			"Gambollar"
 		]
 	},
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
@@ -60,7 +61,7 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Çımeyê şınasnayışê meheli cı ke",
 	"visualeditor-ca-createsource": "Çımey vıraze",
 	"visualeditor-ca-editlocaldescriptionsource": "Lokal şınasiya çımi bıvurnê",
-	"visualeditor-ca-editsource": "Kod bıvurne",
+	"visualeditor-ca-editsource": "Çımey bıvırnı",
 	"visualeditor-ca-editsource-section": "Çımey timarn",
 	"visualeditor-ca-ve-create": "Vurnayoğê vênayışi",
 	"visualeditor-ca-ve-edit": "Vurnayoğê vênayışi",
