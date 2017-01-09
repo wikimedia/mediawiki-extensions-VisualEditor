@@ -60,8 +60,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Título de la sección nueva.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Al guardar, establece esto a la fecha y hora en que la página se cargó. Se utiliza para detectar conflictos de edición.",
 	"apihelp-visualeditoredit-param-summary": "Resumen de edición.",
-	"apierror-visualeditor-docserver-http": "docserver-http: HTTP $1",
-	"apierror-visualeditor-docserver-http-error": "docserver-http-error: $1",
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
 	"tooltip-ca-edit": "Editar esta página usando wikitexto",
 	"tooltip-ca-editsource": "Editar el código fuente de esta página",

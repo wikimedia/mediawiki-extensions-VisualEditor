@@ -82,8 +82,6 @@
 	"apierror-visualeditor-badcachekey": "Pas de mise en cache de sérialisation trouvé avec cette clé",
 	"apierror-visualeditor-difffailed": "Erreur dans Diff",
 	"apierror-visualeditor-docserver": "Erreur d'accès au serveur Parsoid/RESTbase",
-	"apierror-visualeditor-docserver-http": "docserver-http: HTTP $1",
-	"apierror-visualeditor-docserver-http-error": "docserver-http-error: $1",
 	"apierror-visualeditor-invaliddeflate": "Le contenu fourni n'a pas été développé proprement",
 	"apierror-visualeditor-latestnotfound": "Ne pouvait pas trouver la dernière révision pour le titre",
 	"tooltip-ca-createsource": "Créer le wikicode de cette page",

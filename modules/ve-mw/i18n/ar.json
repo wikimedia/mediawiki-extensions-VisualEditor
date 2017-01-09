@@ -58,8 +58,6 @@
 	"apierror-visualeditor-badcachekey": "لا cached serialization تم العثور عليه مع هذا المفتاح",
 	"apierror-visualeditor-difffailed": "فشل الفرق",
 	"apierror-visualeditor-docserver": "خطأ أثناء الاتصال بخادم Parsoid/RESTbase",
-	"apierror-visualeditor-docserver-http": "docserver-http: HTTP $1",
-	"apierror-visualeditor-docserver-http-error": "خطأ docserver-http: $1",
 	"apierror-visualeditor-invaliddeflate": "المحتوى الموفر لم يتم تفريغه بشكل صحيح",
 	"apierror-visualeditor-latestnotfound": "لم يمكن العثور على أحدث نسخة للعنوان",
 	"tooltip-ca-createsource": "إنشاء الكود المصدري لهذه الصفحة",

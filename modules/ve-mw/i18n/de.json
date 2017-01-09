@@ -50,8 +50,6 @@
 	"apierror-visualeditor-badcachekey": "Keine gecachte Serialisierung mit diesem Schlüssel gefunden",
 	"apierror-visualeditor-difffailed": "Unterschied fehlgeschlagen",
 	"apierror-visualeditor-docserver": "Fehler beim Kontaktieren des Parsoid-/RESTbase-Servers",
-	"apierror-visualeditor-docserver-http": "docserver-http: HTTP $1",
-	"apierror-visualeditor-docserver-http-error": "docserver-http-error: $1",
 	"apierror-visualeditor-invaliddeflate": "Der angegebene Inhalt wurde nicht ordnungsgemäß geleert",
 	"apierror-visualeditor-latestnotfound": "Die aktuellste Version für den Titel konnte nicht gefunden werden",
 	"tooltip-ca-createsource": "Den Quelltext dieser Seite erstellen",
