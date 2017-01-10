@@ -1203,7 +1203,8 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWEducationPopupTool.js"
+				"modules/ve-mw/ui/tools/ve.ui.MWEducationPopupTool.js",
+				"modules/ve-mw/ui/inspectors/ve.ui.MWCommentInspector.js"
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
