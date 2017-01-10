@@ -173,7 +173,9 @@ class ApiVisualEditor extends ApiBase {
 		$langlinks = $page['langlinks'];
 		$langnames = Language::fetchLanguageNames();
 		foreach ( $langlinks as $i => $lang ) {
-			$langlinks[$i]['langname'] = $langnames[$langlinks[$i]['lang']];
+			if ( isset( $langnames[$lang['lang']] ) ) {
+				$langlinks[$i]['langname'] = $langnames[$lang['lang']];
+			}
 		}
 		return $langlinks;
 	}
