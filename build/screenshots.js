@@ -81,7 +81,7 @@ function runTests( lang ) {
 								if ( $lastHighlighted ) {
 									$lastHighlighted.css( 'outline', '' );
 								}
-								$element.css( 'outline', '3px solid #347bff' );
+								$element.css( 'outline', '2px solid #36c' );
 								$lastHighlighted = $element;
 							},
 							runMenuTask: function ( done, tool, expanded, highlight, extraElements ) {
