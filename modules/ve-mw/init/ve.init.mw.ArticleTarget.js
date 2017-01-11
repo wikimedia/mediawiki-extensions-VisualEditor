@@ -144,6 +144,11 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
  */
 
 /**
+ * @event saveErrorHookAborted
+ * Fired when the user tries to save page in violation of an extension
+ */
+
+/**
  * @event saveErrorReadOnly
  * Fired when the user tries to save page but the database is locked
  */
@@ -634,6 +639,9 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 	} else if ( data.error && data.error.code === 'titleblacklist-forbidden' ) {
 		this.saveErrorTitleBlacklist();
 		return;
+	} else if ( data.error && data.error.code === 'hookaborted' ) {
+		this.saveErrorHookAborted();
+		return;
 	} else if ( data.error && data.error.code === 'readonly' ) {
 		this.saveErrorReadOnly( data.error.readonlyreason );
 		return;
@@ -789,6 +797,17 @@ ve.init.mw.ArticleTarget.prototype.saveErrorAbuseFilter = function ( editApi ) {
 ve.init.mw.ArticleTarget.prototype.saveErrorTitleBlacklist = function () {
 	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
 	this.emit( 'saveErrorTitleBlacklist' );
+};
+
+/**
+ * Handle hook abort save error
+ *
+ * @method
+ * @fires saveErrorHookAborted
+ */
+ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function () {
+	this.showSaveError( mw.msg( 'visualeditor-saveerror-hookaborted' ) );
+	this.emit( 'saveErrorHookAborted' );
 };
 
 /**

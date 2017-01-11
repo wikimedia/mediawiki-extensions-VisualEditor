@@ -371,6 +371,7 @@
 	"visualeditor-savedialog-title-save": "Title for save dialog slide for the final save step. Appears between the buttons {{msg-mw|visualeditor-toolbar-savedialog}} and {{msg-mw|visualeditor-dialog-action-cancel}}.",
 	"visualeditor-savedialog-warning-dirty": "Note displayed to users in the save dialog if VisualEditor believes that it may have corrupted the page.",
 	"visualeditor-saveerror": "Text shown when the editor fails to save properly.\n\nParameters:\n* $1 is an error message, in English.",
+	"visualeditor-saveerror-hookaborted": "Text shown when the editor fails to save properly due to an unknown extension abort.",
 	"visualeditor-saveerror-titleblacklist": "Text shown when the editor fails to save properly due to the TitleBlacklist extension.",
 	"visualeditor-section-body-placeholder": "Placeholder for surface when adding a new section",
 	"visualeditor-section-title-placeholder": "Placeholder for title input when adding a new section\n{{Identical|Subject}}",

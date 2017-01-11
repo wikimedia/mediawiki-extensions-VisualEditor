@@ -1300,6 +1300,7 @@
 				"visualeditor-savedialog-title-save",
 				"visualeditor-savedialog-warning-dirty",
 				"visualeditor-saveerror",
+				"visualeditor-saveerror-hookaborted",
 				"visualeditor-saveerror-titleblacklist",
 				"visualeditor-serializeerror",
 				"visualeditor-shortcuts-insert",

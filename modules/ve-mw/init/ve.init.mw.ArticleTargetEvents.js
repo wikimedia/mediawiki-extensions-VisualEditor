@@ -29,6 +29,7 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
 		saveErrorBadToken: [ 'trackSaveError', 'badtoken' ],
 		saveErrorNewUser: [ 'trackSaveError', 'newuser' ],
 		saveErrorPageDeleted: [ 'trackSaveError', 'pagedeleted' ],
+		saveErrorHookAborted: [ 'trackSaveError', 'responseUnknown' ], // FIXME: Make a specific one.
 		saveErrorTitleBlacklist: [ 'trackSaveError', 'titleblacklist' ],
 		saveErrorCaptcha: [ 'trackSaveError', 'captcha' ],
 		saveErrorReadOnly: [ 'trackSaveError', 'unknown', 'readonly' ],
