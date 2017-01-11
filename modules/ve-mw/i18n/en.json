@@ -358,6 +358,7 @@
 	"visualeditor-savedialog-title-save": "Save your changes",
 	"visualeditor-savedialog-warning-dirty": "Your edit may have been corrupted – please review before saving.",
 	"visualeditor-saveerror": "Error saving data to server: $1.",
+	"visualeditor-saveerror-hookaborted": "Error saving page: An extension on the server prevented you from saving.",
 	"visualeditor-saveerror-titleblacklist": "Error saving page: This page's title is blacklisted",
 	"visualeditor-section-body-placeholder": "New section",
 	"visualeditor-section-title-placeholder": "Subject",
