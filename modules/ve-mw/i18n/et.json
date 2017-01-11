@@ -152,6 +152,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Iganenud väli",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Väli on iganenud. $1",
 	"visualeditor-dialog-transclusion-loading": "Laadimine...",
+	"visualeditor-dialog-transclusion-more-template-description": "Malli \"$1\" [[{{ns:template}}:$1|leheküljel]] võib malli kohta olla lisateavet.",
 	"visualeditor-dialog-transclusion-multiple-mode": "Näita suvandeid",
 	"visualeditor-dialog-transclusion-no-template-description": "Mallil \"$1\" pole veel kirjeldust, aga malli kohta võib üht-teist leiduda [[$1|malli leheküljel]].",
 	"visualeditor-dialog-transclusion-options": "Suvandid",

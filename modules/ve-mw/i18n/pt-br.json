@@ -24,12 +24,14 @@
 			"TheEduGobi",
 			"TheGabrielZaum",
 			"Macofe",
-			"Jdforrester"
+			"Jdforrester",
+			"Eduardo Addad de Oliveira"
 		]
 	},
 	"apihelp-visualeditor-description": "Retorna código HTML5 a uma página através do serviço Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Ao salvar, define isto à data e hora da revisão que foi editada. Usado para detectar conflitos de edição.",
 	"apihelp-visualeditor-param-cachekey": "Para serializar ou comparar as revisões, usa o resultado de um pedido \"serializeforcache\" anterior com esta chave. Invalida $1html.",
+	"apihelp-visualeditor-param-editintro": "Edite a introdução para adicionar aos avisos.",
 	"apihelp-visualeditor-param-html": "HTML para enviar a Parsoid e converter em wikitexto.",
 	"apihelp-visualeditor-param-oldid": "O número de revisão para utilizar (a última revisão por padrão)",
 	"apihelp-visualeditor-param-paction": "Ação a realizar.",

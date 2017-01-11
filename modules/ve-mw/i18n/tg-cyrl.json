@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ibrahim"
+			"Ibrahim",
+			"AryanSogd"
 		]
 	},
 	"tooltip-ca-createsource": "Эҷоди манбаъ ба ин саҳифа",
@@ -83,9 +84,10 @@
 	"visualeditor-languages-tool": "Забонҳо",
 	"visualeditor-media-input-placeholder": "Ҷустуҷӯи расона",
 	"visualeditor-meta-tool": "Ихтиёрот",
-	"visualeditor-mwgalleryinspector-title": "Нигористон",
+	"visualeditor-mwgallerydialog-title": "Нигористон",
 	"visualeditor-pagemenu-tooltip": "Ихтиёроти саҳифа",
 	"visualeditor-preference-core-label": "ВироишгариВизуалӣ",
+	"visualeditor-preference-enable": "Дарҷи [[Википедиа:Вироишгари муоинашаванда|вироишгари муоинашаванда]] (танҳо дар фазои аслӣ ва шахсӣ)",
 	"visualeditor-savedialog-label-error": "Хато",
 	"visualeditor-savedialog-label-warning": "Ҳушдор",
 	"visualeditor-savedialog-title-conflict": "Бархурд",
