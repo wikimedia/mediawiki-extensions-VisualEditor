@@ -832,7 +832,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data )
 		errorCode = ( editApi && editApi.code ) || ( data && data.error && data.error.code ),
 		unknown = 'Unknown error';
 
-	if ( data.xhr.status !== 200 ) {
+	if ( data.xhr && data.xhr.status !== 200 ) {
 		unknown += ', HTTP status ' + data.xhr.status;
 	}
 
