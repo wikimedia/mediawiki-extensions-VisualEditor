@@ -25,6 +25,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'basetimestamp' => $params['basetimestamp'],
 			'starttimestamp' => $params['starttimestamp'],
 			'token' => $params['token'],
+			'errorformat' => 'html',
 		];
 
 		if ( $params['minor'] ) {
