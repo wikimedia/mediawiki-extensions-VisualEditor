@@ -27,12 +27,15 @@
  * @cfg {string} [autocomplete='none'] Symbolic name of autocomplete
  * mode: 'none', 'basic' (requires the user to press Ctrl-Space) or
  * 'live' (shows a list of suggestions as the user types)
+ * @cfg {Array} [autocompleteWordList=null] List of words to
+ * autocomplete to
  */
 ve.ui.MWAceEditorWidget = function VeUiMWAceEditorWidget( config ) {
 	// Configuration
 	config = config || {};
 
 	this.autocomplete = config.autocomplete || 'none';
+	this.autocompleteWordList = config.autocompleteWordList || null;
 
 	this.$ace = $( '<div dir="ltr">' );
 	this.editor = null;
@@ -99,7 +102,9 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
  * @fires resize
  */
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
-	var basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
+	var completer, widget = this,
+		basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
+
 	if ( basePath.slice( 0, 2 ) === '//' ) {
 		// ACE uses web workers, which have importScripts, which don't like relative links.
 		basePath = window.location.protocol + basePath;
@@ -109,10 +114,28 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	this.$input.addClass( 'oo-ui-element-hidden' );
 	this.editor = ace.edit( this.$ace[ 0 ] );
 	this.setMinRows( this.minRows );
+
+	// Autocompletion
 	this.editor.setOptions( {
 		enableBasicAutocompletion: this.autocomplete !== 'none',
 		enableLiveAutocompletion: this.autocomplete === 'live'
 	} );
+	if ( this.autocompleteWordList ) {
+		completer = {
+			getCompletions: function( editor, session, pos, prefix, callback ) {
+				var wordList = widget.autocompleteWordList;
+				callback( null, wordList.map( function( word ) {
+					return {
+						caption: word,
+						value: word,
+						meta: 'static'
+					};
+				} ) );
+			}
+		};
+		ace.require( 'ace/ext/language_tools' ).addCompleter( completer );
+	}
+
 	this.editor.getSession().on( 'change', this.onEditorChange.bind( this ) );
 	this.editor.renderer.on( 'resize', this.onEditorResize.bind( this ) );
 	this.setEditorValue( this.getValue() );
