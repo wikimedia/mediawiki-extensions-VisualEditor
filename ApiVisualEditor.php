@@ -445,34 +445,39 @@ class ApiVisualEditor extends ApiBase {
 				// We do the lookup for the current version. This might not be entirely complete
 				// if we're loading an oldid, but it'll probably be close enough, and LinkCache
 				// will automatically request any additional data it needs.
-				$links = [];
-				$wikipage = WikiPage::factory( $title );
-				$popts = $wikipage->makeParserOptions( 'canonical' );
-				$cached = ParserCache::singleton()->get( $article, $popts, true );
-				$links = [
-					// Array of linked pages that are missing
-					'missing' => [],
-					// For current revisions: 1 (treat all non-missing pages as known)
-					// For old revisions: array of linked pages that are known
-					'known' => $restoring || !$cached ? [] : 1,
-				];
-				if ( $cached ) {
-					foreach ( $cached->getLinks() as $namespace => $cachedTitles ) {
-						foreach ( $cachedTitles as $cachedTitleText => $exists ) {
-							$cachedTitle = Title::makeTitle( $namespace, $cachedTitleText );
-							if ( !$cachedTitle->isKnown() ) {
-								$links['missing'][] = $cachedTitle->getPrefixedText();
-							} elseif ( $links['known'] !== 1 ) {
-								$links['known'][] = $cachedTitle->getPrefixedText();
+				// We only do this for visual edits, as the wikitext editor doesn't need to know
+				// about redlinks on the page. If the user switches to VE, they will do a fresh
+				// metadata request at that point.
+				$links = null;
+				if ( $params['paction'] !== 'wikitext' ) {
+					$wikipage = WikiPage::factory( $title );
+					$popts = $wikipage->makeParserOptions( 'canonical' );
+					$cached = ParserCache::singleton()->get( $article, $popts, true );
+					$links = [
+						// Array of linked pages that are missing
+						'missing' => [],
+						// For current revisions: 1 (treat all non-missing pages as known)
+						// For old revisions: array of linked pages that are known
+						'known' => $restoring || !$cached ? [] : 1,
+					];
+					if ( $cached ) {
+						foreach ( $cached->getLinks() as $namespace => $cachedTitles ) {
+							foreach ( $cachedTitles as $cachedTitleText => $exists ) {
+								$cachedTitle = Title::makeTitle( $namespace, $cachedTitleText );
+								if ( !$cachedTitle->isKnown() ) {
+									$links['missing'][] = $cachedTitle->getPrefixedText();
+								} elseif ( $links['known'] !== 1 ) {
+									$links['known'][] = $cachedTitle->getPrefixedText();
+								}
 							}
 						}
 					}
-				}
-				// Add information about current page
-				if ( !$title->isKnown() ) {
-					$links['missing'][] = $title->getPrefixedText();
-				} elseif ( $links['known'] !== 1 ) {
-					$links['known'][] = $title->getPrefixedText();
+					// Add information about current page
+					if ( !$title->isKnown() ) {
+						$links['missing'][] = $title->getPrefixedText();
+					} elseif ( $links['known'] !== 1 ) {
+						$links['known'][] = $title->getPrefixedText();
+					}
 				}
 
 				// On parser cache miss, just don't bother populating red link data
