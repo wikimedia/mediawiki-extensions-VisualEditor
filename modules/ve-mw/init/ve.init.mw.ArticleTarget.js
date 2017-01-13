@@ -1081,7 +1081,12 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 				body = doc.body;
 				// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
 				document.adoptNode( body );
+				// TODO: This code is very similar to ve.ui.PreviewElement
 				ve.resolveAttributes( body, doc, ve.dm.Converter.static.computedAttributes );
+				// Make all links open in a new window (sync view)
+				Array.prototype.forEach.call( body.querySelectorAll( 'a[href]' ), function ( el ) {
+					el.setAttribute( 'target', '_blank' );
+				} );
 				target.saveDialog.showPreview( $( body ).contents() );
 			} else {
 				target.saveDialog.showPreview( $( '<em>' ).text(
