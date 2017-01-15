@@ -29,11 +29,11 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	this.captionVisible = false;
 	this.typeToRdfa = this.getTypeToRdfa();
 
-	// DOM Hierarchy for BlockImageNode:
+	// DOM Hierarchy for MWBlockImageNode:
 	//   <figure> this.$element (ve-ce-mwBlockImageNode-{type})
 	//     <a> this.$a
 	//       <img> this.$image
-	//     <figcaption> this.caption.view.$element
+	//     <figcaption> this.$caption
 
 	// Build DOM:
 	if ( isError ) {
