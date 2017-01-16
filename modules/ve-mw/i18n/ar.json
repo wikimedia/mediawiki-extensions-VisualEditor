@@ -352,6 +352,7 @@
 	"visualeditor-savedialog-title-save": "احفظ تعديلاتك",
 	"visualeditor-savedialog-warning-dirty": "ربما تعرض تحريرك للعطب – نرجو المراجعة قبل الحفظ.",
 	"visualeditor-saveerror": "حدث خطأ أثناء حفظ البيانات إلى الخادم: $1.",
+	"visualeditor-saveerror-hookaborted": "خطأ أثناء حفظ الصفحة: امتداد على الخادم منعك من الحفظ.",
 	"visualeditor-saveerror-titleblacklist": "خطأ في حفظ الصفحة: عنوان الصفحة في القائمة السوداء",
 	"visualeditor-section-body-placeholder": "قسم جديد",
 	"visualeditor-section-title-placeholder": "الموضوع",

@@ -379,6 +379,7 @@
 	"visualeditor-savedialog-title-save": "Contribution",
 	"visualeditor-savedialog-warning-dirty": "Votre modification peut avoir été corrompue — veuillez relire avant d’enregistrer.",
 	"visualeditor-saveerror": "Erreur lors de l’enregistrement des données sur le serveur : $1.",
+	"visualeditor-saveerror-hookaborted": "Erreur lors de l'enregistrement de la page: Une extension sur le serveur vous a empêché de sauvegarder.",
 	"visualeditor-saveerror-titleblacklist": "Erreur lors de l’enregistrement de la page : le titre de cette page est dans la liste noire.",
 	"visualeditor-section-body-placeholder": "Nouvelle section",
 	"visualeditor-section-title-placeholder": "Sujet",

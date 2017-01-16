@@ -215,7 +215,7 @@
 	"visualeditor-editingtabdialog-ok": "最後に使用したエディターを使う",
 	"visualeditor-editingtabdialog-title": "編集中のタブ",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|件のお知らせ}}",
-	"visualeditor-editnotices-tooltip": "通知を編集",
+	"visualeditor-editnotices-tooltip": "編集の通知",
 	"visualeditor-editsummary": "編集内容を説明してください",
 	"visualeditor-editsummary-bytes-remaining": "残りバイト数",
 	"visualeditor-educationpopup-dismiss": "わかりました",

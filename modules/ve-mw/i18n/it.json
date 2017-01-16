@@ -30,7 +30,8 @@
 			"Malore",
 			"Elitre (WMF)",
 			"Einreiher",
-			"Saracrovetto"
+			"Saracrovetto",
+			"Samuele2002"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -188,6 +189,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Sempre",
 	"visualeditor-dialog-meta-settings-toc-help": "Puoi forzare un indice che elenchi tutte le intestazioni nella pagina su pagine con meno di tre sezioni, o forzare che non appaia mai. Per impostazione predefinita, viene visualizzato se la pagina ha tre o più intestazioni.",
 	"visualeditor-dialog-meta-settings-toc-label": "Mostra l'indice",
+	"visualeditor-dialog-meta-templatesused-noresults": "Nessun template trovato.",
 	"visualeditor-dialog-meta-title": "Opzioni",
 	"visualeditor-dialog-table-sortable": "Ordinabile",
 	"visualeditor-dialog-table-wikitable": "Stile (wikitable)",
@@ -353,6 +355,7 @@
 	"visualeditor-settings-tool": "Impostazioni pagina",
 	"visualeditor-shortcuts-insert": "Inserisci",
 	"visualeditor-special-characters-group-other": "Usato spesso",
+	"visualeditor-templatesused-tool": "Template utilizzati",
 	"visualeditor-toload": "Verrà caricato l'editor. Se vedi ancora questo messaggio dopo alcuni secondi, [$1 ricarica la pagina].",
 	"visualeditor-toolbar-savedialog": "Salva la pagina",
 	"visualeditor-toolbar-savedialog-short": "Salva",
