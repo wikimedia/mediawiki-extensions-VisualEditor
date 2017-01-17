@@ -119,7 +119,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 				selectWidget.getItemFromData( page ).setDisabled( isSource );
 			} );
 
-			if ( isSource && visualOnlyPages.indexOf( data.page ) !== -1 ) {
+			if ( isSource && visualOnlyPages.indexOf( data.page || 'categories' ) !== -1 ) {
 				data.page = 'templatesUsed';
 			}
 
