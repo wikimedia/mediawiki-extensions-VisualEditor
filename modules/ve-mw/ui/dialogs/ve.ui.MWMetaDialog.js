@@ -63,12 +63,12 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	// Properties
 	this.panels = new OO.ui.StackLayout();
 	this.bookletLayout = new OO.ui.BookletLayout( { outlined: true } );
+	this.categoriesPage = new ve.ui.MWCategoriesPage( 'categories', { $overlay: this.$overlay } );
 	this.settingsPage = new ve.ui.MWSettingsPage(
 		'settings',
 		{ $overlay: this.$overlay }
 	);
 	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage( 'advancedSettings' );
-	this.categoriesPage = new ve.ui.MWCategoriesPage( 'categories', { $overlay: this.$overlay } );
 	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages' );
 	this.templatesUsedPage = new ve.ui.MWTemplatesUsedPage( 'templatesUsed' );
 
@@ -112,7 +112,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			var surfaceModel = this.getFragment().getSurface(),
 				selectWidget = this.bookletLayout.outlineSelectWidget,
-				visualOnlyPages = [ 'settings', 'advancedSettings', 'categories', 'languages' ],
+				visualOnlyPages = [ 'categories', 'settings', 'advancedSettings', 'languages' ],
 				isSource = ve.init.target.getSurface().getMode() === 'source';
 
 			visualOnlyPages.forEach( function ( page ) {
@@ -144,9 +144,9 @@ ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data ) {
 			}
 
 			// Let each page set itself up ('languages' page doesn't need this yet)
+			this.categoriesPage.setup( surfaceModel.metaList, data );
 			this.settingsPage.setup( surfaceModel.metaList, data );
 			this.advancedSettingsPage.setup( surfaceModel.metaList, data );
-			this.categoriesPage.setup( surfaceModel.metaList, data );
 		}, this );
 };
 
@@ -158,9 +158,9 @@ ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			// Let each page tear itself down ('languages' page doesn't need this yet)
+			this.categoriesPage.teardown( { action: data.action } );
 			this.settingsPage.teardown( { action: data.action } );
 			this.advancedSettingsPage.teardown( { action: data.action } );
-			this.categoriesPage.teardown( { action: data.action } );
 		}, this );
 };
 
