@@ -6,7 +6,7 @@
 
 /**
  * @class
- * @extends ve.ui.MobileSurface
+ * @extends ve.ui.Surface
  *
  * @constructor
  * @param {HTMLDocument|Array|ve.dm.LinearData|ve.dm.Document} dataOrDoc Document data to edit
@@ -19,7 +19,7 @@ ve.ui.MWMobileSurface = function VeUiMWMobileSurface() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWMobileSurface, ve.ui.MobileSurface );
+OO.inheritClass( ve.ui.MWMobileSurface, ve.ui.Surface );
 
 /* Methods */
 

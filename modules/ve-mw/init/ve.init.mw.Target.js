@@ -278,7 +278,7 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 			dataTransferHandlerFactory: ve.ui.wikitextDataTransferHandlerFactory,
 			importRules: importRules
 		} ) );
-		return new ve.ui.MWDesktopWikitextSurface( dmDoc, config );
+		return new ve.ui.MWWikitextSurface( dmDoc, config );
 	}
 
 	// Parent method

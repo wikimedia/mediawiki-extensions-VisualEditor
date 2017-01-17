@@ -1,16 +1,16 @@
 /*!
- * VisualEditor MediaWiki Initialization DesktopWikitextSurface styles.
+ * VisualEditor MediaWiki Initialization WikitextSurface styles.
  *
  * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwDesktopWikitextSurface .ve-ce-documentNode {
+.ve-ui-mwWikitextSurface .ve-ce-documentNode {
 	font-size: 13.3333px;
 	/* Inherit mw-editfont setting instead of default source mode setting */
 	font-family: inherit;
 }
 
-.ve-ui-mwDesktopWikitextSurface .ve-ce-paragraphNode {
+.ve-ui-mwWikitextSurface .ve-ce-paragraphNode {
 	line-height: 20px;
 }
