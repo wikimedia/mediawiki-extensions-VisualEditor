@@ -9,14 +9,15 @@
 			"Se4598",
 			"Kumkumuk",
 			"1917 Ekim Devrimi",
-			"Gambollar"
+			"Gambollar",
+			"Dılmıc"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo asaye]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo asayi]] kar kerdışa vırnayış bıkeré",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo Asaye: Araste kı]]",
 	"tag-visualeditor-needcheck-description": "Sistem [[{{MediaWiki:visualeditor-descriptionpagelink}}|vurnayışê asayi]] ya nêşenê ke timar kerê se,  lakin çıma vurnayışi ra normal editore ya ma tesbit kerdo ke şıma vurnayış kerd o.",
-	"tag-visualeditor-wikitext": "[[Wikipedia:2017 çıme vurnayış|2017 çıme vurnayış]]",
+	"tag-visualeditor-wikitext": "[[Wikipedia:2017 vırnayışê çımey|2017 vırnayışê çımey]]",
 	"tag-visualeditor-wikitext-description": "2017 vurnayoğê wikimetiniya vurnayışi bıkarnê",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vurnayışo Asaye: Vurna]]",
 	"tag-visualeditor-switched-description": "Karberi \"Vurnayışo asaye\"  ya vurnayışi kerd,  dıma ravêrd çıme vurnayışi.",
