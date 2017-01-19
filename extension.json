@@ -532,8 +532,6 @@
 		},
 		"ext.visualEditor.mediawiki.mobile": {
 			"scripts": [
-				"modules/ve-mw/ui/ve.ui.MWMobileContext.js",
-				"modules/ve-mw/ui/ve.ui.MWMobileSurface.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
 			],
