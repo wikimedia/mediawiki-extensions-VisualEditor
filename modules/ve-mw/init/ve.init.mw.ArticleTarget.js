@@ -2172,6 +2172,150 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 };
 
 /**
+ * Switches to the wikitext editor, either keeping (default) or discarding changes.
+ *
+ * @param {boolean} [discardChanges] Whether to discard changes or not.
+ * @param {boolean} [modified] Whether there were any changes at all.
+ * @param {boolean} [leaveVE] Leave VE, even if source mode is available
+ */
+ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified, leaveVE ) {
+	var dataPromise,
+		target = this;
+
+	// We may have this.section but VE is always full page at the moment
+	this.section = null;
+
+	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
+		if ( discardChanges ) {
+			dataPromise = mw.libs.ve.targetLoader.requestPageData(
+				'source',
+				this.pageName,
+				this.section,
+				this.requestedRevId,
+				this.constructor.name
+			).then(
+				function ( response ) { return response; },
+				function () {
+					// TODO: Some sort of progress bar?
+					target.switchToWikitextEditor( discardChanges, modified, true );
+					// Keep everything else waiting so our error handler can do its business
+					return $.Deferred().promise();
+				}
+			);
+		} else {
+			this.serialize( this.getDocToSave() );
+			dataPromise = this.serializing.then( function ( response ) {
+				// HACK - add parameters the API doesn't provide for a VE->WT switch
+				var data = response.visualeditoredit;
+				data.etag = target.etag;
+				data.fromEditedState = modified;
+				data.notices = target.remoteNotices;
+				data.protectedClasses = target.protectedClasses;
+				data.basetimestamp = target.baseTimeStamp;
+				data.starttimestamp = target.startTimeStamp;
+				data.oldid = target.revid;
+				data.checkboxes = target.checkboxes;
+				return response;
+			} );
+		}
+		this.reloadSurface( 'source', dataPromise );
+	} else {
+		this.switchToFallbackWikitextEditor( discardChanges, modified );
+	}
+};
+
+/**
+ * Switches to the fallback wikitext editor, either keeping (default) or discarding changes.
+ *
+ * @param {boolean} [discardChanges] Whether to discard changes or not.
+ * @param {boolean} [modified] Whether there were any changes at all.
+ */
+ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {
+};
+
+/**
+ * Switch to the visual editor.
+ */
+ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
+	var dataPromise, windowManager, switchWindow,
+		target = this;
+
+	if ( this.section !== null ) {
+		// WT -> VE switching is not yet supported in sections, so
+		// show a discard-only confirm dialog, then reload the whole page.
+		windowManager = new OO.ui.WindowManager();
+		switchWindow = new mw.libs.ve.SwitchConfirmDialog();
+		$( 'body' ).append( windowManager.$element );
+		windowManager.addWindows( [ switchWindow ] );
+		windowManager.openWindow( switchWindow, { mode: 'simple' } )
+			.then( function ( opened ) {
+				return opened;
+			} )
+			.then( function ( closing ) { return closing; } )
+			.then( function ( data ) {
+				if ( data && data.action === 'discard' ) {
+					target.section = null;
+					target.reloadSurface( 'visual' );
+				}
+				windowManager.destroy();
+			} );
+	} else {
+		dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
+			this.pageName,
+			this.revid,
+			this.constructor.name,
+			this.edited,
+			this.getDocToSave()
+		);
+
+		this.reloadSurface( 'visual', dataPromise );
+	}
+};
+
+/**
+ * Switch to a different wikitext section
+ *
+ * @param {number|string|null} section New section, number, 'new' or null (whole document)
+ * @param {boolean} noConfirm Swtich without prompting (changes will be lost either way)
+ */
+ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section, noConfirm ) {
+	var promise,
+		target = this;
+	if ( section === this.section ) {
+		return;
+	}
+	if ( !noConfirm && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
+		promise = OO.ui.confirm( mw.msg( 'visualeditor-viewpage-savewarning' ) );
+	} else {
+		promise = $.Deferred().resolve( true ).promise();
+	}
+	promise.then( function ( confirmed ) {
+		if ( confirmed ) {
+			target.section = section;
+			target.reloadSurface( 'source' );
+			target.updateTabs( true );
+		}
+	} );
+};
+
+/**
+ * Reload the target surface in the new editor mode
+ *
+ * @param {string} newMode New mode
+ * @param {jQuery.Promise} [dataPromise] Data promise, if any
+ */
+ve.init.mw.ArticleTarget.prototype.reloadSurface = function ( newMode, dataPromise ) {
+	this.setDefaultMode( newMode );
+	// Create progress - will be discarded when surface is destroyed.
+	this.getSurface().createProgress(
+		$.Deferred().promise(),
+		ve.msg( newMode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
+		true /* non-cancellable */
+	);
+	this.load( dataPromise );
+};
+
+/**
  * Get a wikitext fragment from a document
  *
  * @param {ve.dm.Document} doc Document

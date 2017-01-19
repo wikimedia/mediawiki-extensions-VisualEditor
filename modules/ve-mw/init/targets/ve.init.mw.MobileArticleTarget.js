@@ -144,7 +144,11 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
-	this.pageToolbar = new ve.ui.TargetToolbar( this, { actions: true } );
+	var surface = this.getSurface();
+
+	if ( !this.pageToolbar ) {
+		this.pageToolbar = new ve.ui.TargetToolbar( this, { actions: true } );
+	}
 
 	this.pageToolbar.setup( [
 		// Back
@@ -153,19 +157,22 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 			type: 'list',
 			icon: 'wikiText',
 			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-			include: [ 'editModeVisual', 'editModeSource' ]
+			include: [ surface.getMode() === 'visual' ? 'editModeSource' : 'editModeVisual' ]
 		}
-	], this.getSurface() );
+	], surface );
 
 	this.pageToolbar.emit( 'updateState' );
 
-	$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
-		$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
-			new mw.Title( ve.init.target.pageName ).getMainText()
-		)
-	)
-		// Insert title between 'back' and 'advanced'
-		.insertAfter( this.pageToolbar.items[ 0 ].$element );
+	if ( !this.$title ) {
+		this.$title = $( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
+			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
+				new mw.Title( ve.init.target.pageName ).getMainText()
+			)
+		);
+	}
+
+	// Insert title between 'back' and 'advanced'
+	this.$title.insertAfter( this.pageToolbar.items[ 0 ].$element );
 
 	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar' );
 	this.pageToolbar.$actions.append(
