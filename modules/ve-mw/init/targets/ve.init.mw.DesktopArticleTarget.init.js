@@ -166,7 +166,7 @@
 					target = ve.init.mw.targetFactory.create(
 						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ], {
 							modes: modes,
-							mode: mode
+							defaultMode: mode
 						}
 					);
 					target.setContainer( $( '#content' ) );
