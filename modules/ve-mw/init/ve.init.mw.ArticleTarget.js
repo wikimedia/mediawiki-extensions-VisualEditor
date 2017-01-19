@@ -2144,3 +2144,44 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		this.welcomeDialogPromise.reject();
 	}
 };
+
+/**
+ * Get a wikitext fragment from a document
+ *
+ * @param {ve.dm.Document} doc Document
+ * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
+ * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
+ */
+ve.init.mw.ArticleTarget.prototype.getWikitextFragment = function ( doc, useRevision ) {
+	var promise, xhr,
+		params = {
+			action: 'visualeditoredit',
+			token: this.editToken,
+			paction: 'serialize',
+			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+			page: this.pageName
+		};
+
+	if ( useRevision === undefined || useRevision ) {
+		params.oldid = this.revid;
+		params.etag = this.etag;
+	}
+
+	xhr = new mw.Api().post(
+		params,
+		{ contentType: 'multipart/form-data' }
+	);
+
+	promise = xhr.then( function ( response ) {
+		if ( response.visualeditoredit ) {
+			return response.visualeditoredit.content;
+		}
+		return $.Deferred().reject();
+	} );
+
+	promise.abort = function () {
+		xhr.abort();
+	};
+
+	return promise;
+};
