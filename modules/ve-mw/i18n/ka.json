@@ -10,7 +10,8 @@
 			"Pras",
 			"Tokoko",
 			"Otogi",
-			"Arystanbek"
+			"Arystanbek",
+			"Silovan"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5-ის დაბრუნება გვერდისთვის parsoid სერვისიდან.",
@@ -34,9 +35,12 @@
 	"apihelp-visualeditoredit-param-minor": "მცირე რედაქტირების დროშა.",
 	"apihelp-visualeditoredit-param-needcheck": "შენახვისას, თუკი რედაქციას ორმხრივი პრობლემა ექნება დააყენეთ ეს პარამეტრი. ეს გამოიწვევს ტეგებით რედაქტირებას.",
 	"apihelp-visualeditoredit-param-oldid": "გამოყენებული გადახედვის ნომერი. საწყისად ბოლო გადახედვა. ახალი გვერდისთვის გამოიყენეთ 0.",
+	"apihelp-visualeditoredit-param-paction": "ქმედება შესრულებისთვის.",
 	"apihelp-visualeditoredit-param-page": "გვერდი, რომელზეც განხორციელდება მოქმედებები.",
+	"apihelp-visualeditoredit-param-sectiontitle": "სათაური ახალი სექციისთვის",
 	"apihelp-visualeditoredit-param-starttimestamp": "შენახვისას, დააყენეთ გვერდის ჩატვირთვის დრო. გამოიყენება რედაქტირების კონფლიქტის აღმოსაჩენად.",
 	"apihelp-visualeditoredit-param-summary": "რედაქტირების რეზიუმე.",
+	"apierror-visualeditor-api-langlinks-error": "MediaWiki API-ს მოთხოვნის შეცდომა",
 	"tooltip-ca-createsource": "ამ გვერდის წყაროს კოდის შექმნა",
 	"tooltip-ca-edit": "ამ გვერდის ვიკიტექსტის გამოყენებით რედაქტირება",
 	"tooltip-ca-editsource": "ამ გვერდის წყაროს კოდის რედაქტირება",
