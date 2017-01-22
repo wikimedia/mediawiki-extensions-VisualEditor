@@ -9,6 +9,10 @@
 	-webkit-overflow-scrolling: touch;
 }
 
+.ve-init-mw-target-surface {
+	padding: 1em 0;
+}
+
 .ve-init-mw-target-surface .ve-ce-documentNode,
 .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	padding: 0;

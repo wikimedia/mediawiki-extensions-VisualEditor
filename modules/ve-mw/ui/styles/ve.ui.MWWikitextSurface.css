@@ -6,11 +6,11 @@
  */
 
 .ve-ui-mwWikitextSurface .ve-ce-documentNode {
-	font-size: 13.3333px;
+	font-size: 1.17216em; /*(13.3333/11.375)*/
 	/* Inherit mw-editfont setting instead of default source mode setting */
 	font-family: inherit;
 }
 
 .ve-ui-mwWikitextSurface .ve-ce-paragraphNode {
-	line-height: 20px;
+	line-height: 1.5em;
 }
