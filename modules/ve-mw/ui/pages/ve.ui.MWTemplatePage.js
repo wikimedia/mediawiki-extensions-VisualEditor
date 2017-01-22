@@ -57,15 +57,17 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	if ( this.spec.getDescription() ) {
 		this.$description.text( this.spec.getDescription() );
 		if ( title ) {
-			this.$description.append(
-				$( '<hr>' ),
-				$( '<span>' )
-					.addClass( 've-ui-mwTemplatePage-description-extra' )
-					.append( mw.message(
-						'visualeditor-dialog-transclusion-more-template-description',
-						title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template )
-					).parseDom() )
-			);
+			this.$description
+				.append(
+					$( '<hr>' ),
+					$( '<span>' )
+						.addClass( 've-ui-mwTemplatePage-description-extra' )
+						.append( mw.message(
+							'visualeditor-dialog-transclusion-more-template-description',
+							title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template )
+						).parseDom() )
+				)
+				.find( 'a' ).attr( 'target', '_blank' );
 		}
 	} else {
 		// The transcluded page may be dynamically generated or unspecified in the DOM
