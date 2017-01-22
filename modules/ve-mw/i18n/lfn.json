@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Katxis"
+			"Katxis",
+			"Cgboeree"
 		]
 	},
 	"tooltip-ca-ve-edit": "Cambia esta paje",
-	"visualeditor-ca-editsource-section": "Edita la fonte"
+	"visualeditor-ca-createlocaldescriptionsource": "Ajunta fonte local de descrive",
+	"visualeditor-ca-createsource": "Crea fonte",
+	"visualeditor-ca-editsource": "Edita fonte",
+	"visualeditor-ca-editsource-section": "Edita la fonte",
+	"visualeditor-descriptionpagelink": "Project:EditadorVidal"
 }
