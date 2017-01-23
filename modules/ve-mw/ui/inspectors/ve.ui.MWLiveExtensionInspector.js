@@ -19,8 +19,7 @@ ve.ui.MWLiveExtensionInspector = function VeUiMWLiveExtensionInspector() {
 	// Parent constructor
 	ve.ui.MWLiveExtensionInspector.super.apply( this, arguments );
 
-	// Late bind onChangeHandler to a debounced updatePreview
-	this.onChangeHandler = ve.debounce( this.updatePreview.bind( this ), 250 );
+	this.updatePreviewDebounced = ve.debounce( this.updatePreview.bind( this ), 250 );
 };
 
 /* Inheritance */
@@ -111,6 +110,16 @@ ve.ui.MWLiveExtensionInspector.prototype.removeNode = function () {
 
 	// Parent method
 	ve.ui.MWLiveExtensionInspector.super.prototype.removeNode.call( this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLiveExtensionInspector.prototype.onChange = function () {
+	// Parent method
+	ve.ui.MWLiveExtensionInspector.super.prototype.onChange.call( this );
+
+	this.updatePreviewDebounced();
 };
 
 /**

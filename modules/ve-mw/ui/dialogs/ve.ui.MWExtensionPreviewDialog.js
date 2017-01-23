@@ -19,8 +19,7 @@ ve.ui.MWExtensionPreviewDialog = function VeUiMWExtensionPreviewDialog() {
 	// Parent constructor
 	ve.ui.MWExtensionPreviewDialog.super.apply( this, arguments );
 
-	// Late bind onChangeHandler to a debounced updatePreview
-	this.onChangeHandler = ve.debounce( this.updatePreview.bind( this ), 250 );
+	this.updatePreviewDebounced = ve.debounce( this.updatePreview.bind( this ), 250 );
 };
 
 /* Inheritance */
@@ -70,6 +69,16 @@ ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 			this.previewNode = doc.getNodesByType( element.type )[ 0 ];
 			this.previewElement.setModel( rootNode );
 		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWExtensionPreviewDialog.prototype.onChange = function () {
+	// Parent method
+	ve.ui.MWExtensionPreviewDialog.super.prototype.onChange.call( this );
+
+	this.updatePreviewDebounced();
 };
 
 /**

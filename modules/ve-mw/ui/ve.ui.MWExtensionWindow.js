@@ -17,6 +17,9 @@
 ve.ui.MWExtensionWindow = function VeUiMWExtensionWindow() {
 	this.whitespace = null;
 	this.input = null;
+	this.originalMwData = null;
+
+	this.onChangeHandler = ve.debounce( this.onChange.bind( this ), 0 );
 };
 
 /* Inheritance */
@@ -80,6 +83,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 
 		if ( this.selectedNode ) {
 			this.input.setValueAndWhitespace( this.selectedNode.getAttribute( 'mw' ).body.extsrc );
+			this.originalMwData = this.selectedNode.getAttribute( 'mw' );
 		} else {
 			if ( !this.constructor.static.modelClasses[ 0 ].static.isContent ) {
 				// New nodes should use linebreaks for blocks
@@ -92,6 +96,9 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 
 		dir = this.constructor.static.dir || data.dir;
 		this.input.setDir( dir );
+
+		this.actions.setAbilities( { done: false } );
+		this.input.connect( this, { change: 'onChangeHandler' } );
 	}, this );
 };
 
@@ -124,6 +131,38 @@ ve.ui.MWExtensionWindow.prototype.getActionProcess = function ( action, process 
 			}
 		}
 	}, this );
+};
+
+/**
+ * Handle change event.
+ */
+ve.ui.MWExtensionWindow.prototype.onChange = function () {
+	this.updateActions();
+};
+
+/**
+ * Update the 'done' action according to whether there are changes
+ */
+ve.ui.MWExtensionWindow.prototype.updateActions = function () {
+	this.actions.setAbilities( { done: this.isModified() } );
+};
+
+/**
+ * Check if mwData would be modified if window contents were applied
+ *
+ * @return {boolean} mwData would be modified
+ */
+ve.ui.MWExtensionWindow.prototype.isModified = function () {
+	var mwDataCopy, modified;
+
+	if ( this.originalMwData ) {
+		mwDataCopy = ve.copy( this.originalMwData );
+		this.updateMwData( mwDataCopy );
+		modified = !ve.compare( this.originalMwData, mwDataCopy );
+	} else {
+		modified = true;
+	}
+	return modified;
 };
 
 /**
