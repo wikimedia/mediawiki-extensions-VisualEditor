@@ -84,26 +84,18 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
 	);
 
 	this.displayTitleTouched = false;
-	this.enableDisplayTitleCheckbox = new OO.ui.CheckboxInputWidget();
-	this.enableDisplayTitleCheckbox.connect( this, { change: 'onEnableDisplayTitleCheckboxChange' } );
-	this.enableDisplayTitleField = new OO.ui.FieldLayout(
-		this.enableDisplayTitleCheckbox,
-		{
-			align: 'inline',
-			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-enable' ),
-			help: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-help' )
-		}
-	);
-	this.displayTitleInput = new OO.ui.TextInputWidget( {
-		placeholder: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' )
-	} );
+	this.displayTitleInput = new OO.ui.TextInputWidget();
 	this.displayTitleInput.connect( this, { change: 'onDisplayTitleInputChange' } );
 	this.displayTitleField = new OO.ui.FieldLayout(
 		this.displayTitleInput,
-		{ align: 'inline' }
+		{
+			align: 'top',
+			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' ),
+			help: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-help' )
+		}
 	);
 
-	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink, this.enableDisplayTitleField, this.displayTitleField ] );
+	this.advancedSettingsFieldset.addItems( [ this.indexing, this.newEditSectionLink, this.displayTitleField ] );
 
 	this.metaItemCheckboxes = [];
 	if ( mw.config.get( 'wgVariantArticlePath' ) ) {
@@ -142,23 +134,9 @@ OO.inheritClass( ve.ui.MWAdvancedSettingsPage, OO.ui.PageLayout );
 /* Methods */
 
 /**
- * Handle redirect state change events.
+ * Handle display title input change events.
  *
- * @param {boolean} value Whether a redirect is to be set for this page
- */
-ve.ui.MWAdvancedSettingsPage.prototype.onEnableDisplayTitleCheckboxChange = function ( value ) {
-	this.displayTitleInput.setDisabled( !value );
-	if ( !value ) {
-		this.displayTitleInput.setValue( '' );
-		this.enableDisplayTitleCheckbox.setSelected( false );
-	}
-	this.displayTitleTouched = true;
-};
-
-/**
- * Handle redirect state change events.
- *
- * @param {boolean} value Whether a redirect is to be set for this page
+ * @param {string} value Current value of input widget
  */
 ve.ui.MWAdvancedSettingsPage.prototype.onDisplayTitleInputChange = function () {
 	this.displayTitleTouched = true;
@@ -237,9 +215,10 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	// Display title items
 	displayTitleItem = this.getMetaItem( 'mwDisplayTitle' );
 	displayTitle = displayTitleItem && displayTitleItem.getAttribute( 'content' ) || '';
-	this.enableDisplayTitleCheckbox.setSelected( !!displayTitleItem );
+	if ( !displayTitle ) {
+		displayTitle = mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText();
+	}
 	this.displayTitleInput.setValue( displayTitle );
-	this.displayTitleInput.setDisabled( !displayTitle );
 	this.displayTitleTouched = false;
 
 	// Simple checkbox items
@@ -317,6 +296,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 	// Display title items
 	currentDisplayTitleItem = this.getMetaItem( 'mwDisplayTitle' );
 	newDisplayTitle = this.displayTitleInput.getValue();
+	if ( newDisplayTitle === mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText() ) {
+		newDisplayTitle = '';
+	}
 	newDisplayTitleItemData = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } };
 
 	// Alter the display title flag iff it's been touched & is actually different
