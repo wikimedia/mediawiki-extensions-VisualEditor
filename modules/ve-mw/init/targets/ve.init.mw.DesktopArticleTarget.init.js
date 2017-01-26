@@ -685,7 +685,7 @@
 				uri = new mw.Uri( e.target.href ),
 				title = mw.Title.newFromText( uri.query.title || '' );
 
-			if ( !init.isUnmodifiedLeftClick( e ) ) {
+			if ( !init.isUnmodifiedLeftClick( e ) || !( 'action' in uri.query ) ) {
 				return;
 			}
 			if ( title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText() ) {
@@ -1051,10 +1051,12 @@
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
 				).each( function () {
-					var uri = new mw.Uri( $( this ).attr( 'href' ) );
-					delete uri.query.action;
-					uri.query.veaction = 'editsource';
-					$( this ).attr( 'href', uri.toString() );
+					var uri = new mw.Uri( this.href );
+					if ( 'action' in uri.query ) {
+						delete uri.query.action;
+						uri.query.veaction = 'editsource';
+						$( this ).attr( 'href', uri.toString() );
+					}
 				} );
 			}
 
