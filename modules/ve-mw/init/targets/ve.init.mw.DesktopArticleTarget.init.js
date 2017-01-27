@@ -772,6 +772,10 @@
 		// TODO: Allow the Translate extension to do this itself
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
+		// Not on the edit conflict page of the TwoColumnConflict extension see T156251
+		// TODO: Allow the TwoColumnConflict extension to do this itself
+		mw.config.get( 'wgTwoColConflict' ) !== 'true' &&
+
 		// Not on pages like Special:RevisionDelete
 		mw.config.get( 'wgNamespaceNumber' ) !== -1
 	);
