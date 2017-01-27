@@ -584,8 +584,14 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			// This includes a #focus call
-			this.editSummaryInput.moveCursorToEnd();
+			// Support: Firefox
+			// In Firefox, trying to focus a hidden input will throw an
+			// exception. This would happen when opening the preview via
+			// keyboard shortcut.
+			if ( this.panels.getCurrentItem() === this.savePanel ) {
+				// This includes a #focus call
+				this.editSummaryInput.moveCursorToEnd();
+			}
 		}, this );
 };
 
