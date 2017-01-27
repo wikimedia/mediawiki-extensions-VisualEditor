@@ -68,6 +68,7 @@ class VisualEditorHooks {
 	 * @param WebRequest $req The web request to check the details of
 	 * @param Config $config VE config object
 	 * @param boolean
+	 * @return boolean
 	 */
 	private static function isUABlacklisted( WebRequest $req, $config ) {
 		if ( $req->getVal( 'vewhitelist' ) ) {
