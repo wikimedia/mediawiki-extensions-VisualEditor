@@ -131,6 +131,7 @@
 					"ve.dm.TableMatrixCell",
 					"ve.dm.TableNodeCellIterator",
 					"ve.dm.Change",
+					"ve.dm.RebaseDocState",
 					"ve.dm.RebaseServer",
 					"ve.dm.RebaseClient",
 					"ve.dm.SurfaceSynchronizer"
