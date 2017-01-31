@@ -61,6 +61,7 @@
 	"apihelp-visualeditoredit-param-minor": "Флаг для малой правки.",
 	"apihelp-visualeditoredit-param-needcheck": "При сохранении установите этот параметр, если версия может иметь циклические проблемы. Это приведёт к тому, что правка будет помечена.",
 	"apihelp-visualeditoredit-param-oldid": "Номер используемой версии. По умолчанию в последней версии. Используйте 0 для новой страницы.",
+	"apihelp-visualeditoredit-param-paction": "Действие, которое необходимо выполнить.",
 	"apihelp-visualeditoredit-param-page": "Страница, на которой необходимо выполнить действие.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Заголовок для нового раздела.",
 	"apihelp-visualeditoredit-param-starttimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
