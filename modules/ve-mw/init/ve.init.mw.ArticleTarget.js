@@ -1512,7 +1512,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 
 	// Reset any old captcha data
 	if ( this.captcha ) {
-		this.saveDialog.clearMessage( 'captcha' );
 		delete this.captcha;
 	}
 
