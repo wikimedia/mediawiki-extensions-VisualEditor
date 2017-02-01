@@ -445,7 +445,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.editSummaryCountLabel.$element
 	);
 	this.$saveMessages = $( '<div>' );
-	this.$saveActions = $( '<div>' );
 	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append(
 		$( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
 			.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) )
@@ -456,7 +455,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.editSummaryInput.$element,
 		this.$saveOptions,
 		this.$saveMessages,
-		this.$saveActions,
 		this.$saveFoot
 	);
 
