@@ -313,6 +313,10 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 		}
 		this.$saveMessages.append( $message );
 
+		$message.slideDown( {
+			progress: this.updateSize.bind( this )
+		} );
+
 		this.messages[ name ] = $message;
 	}
 };
@@ -324,7 +328,9 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
  */
 ve.ui.MWSaveDialog.prototype.clearMessage = function ( name ) {
 	if ( this.messages[ name ] ) {
-		this.messages[ name ].remove();
+		this.messages[ name ].slideUp( {
+			progress: this.updateSize.bind( this )
+		} );
 		delete this.messages[ name ];
 	}
 };
@@ -444,7 +450,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$saveCheckboxes,
 		this.editSummaryCountLabel.$element
 	);
-	this.$saveMessages = $( '<div>' );
+	this.$saveMessages = $( '<div>' ).addClass( 've-ui-mwSaveDialog-messages' );
 	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append(
 		$( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
 			.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) )
@@ -454,8 +460,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$editSummaryLabel,
 		this.editSummaryInput.$element,
 		this.$saveOptions,
-		this.$saveMessages,
-		this.$saveFoot
+		this.$saveFoot,
+		this.$saveMessages
 	);
 
 	// Review panel
