@@ -127,10 +127,9 @@
 			targetPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
 				.then( function () {
 					mw.libs.ve.targetLoader.addPlugin( function () {
-						// If the user and site modules fail, we still want to continue
+						// Run VisualEditorPreloadModules, but if they fail, we still want to continue
 						// loading, so convert failure to success
-
-						return mw.loader.using( [ 'user', 'site' ] ).then(
+						return mw.loader.using( conf.preloadModules ).then(
 							null,
 							function () {
 								return $.Deferred().resolve();

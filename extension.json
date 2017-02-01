@@ -27,6 +27,10 @@
 		"VisualEditorPreferenceModules": {
 			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
 		},
+		"VisualEditorPreloadModules": [
+			"site",
+			"user"
+		],
 		"VisualEditorRestbaseURL": false,
 		"VisualEditorFullRestbaseURL": false,
 		"VisualEditorFeedbackAPIURL": false,
