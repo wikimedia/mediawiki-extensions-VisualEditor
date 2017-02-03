@@ -1240,6 +1240,8 @@
 				"visualeditor-beta-label",
 				"visualeditor-beta-warning",
 				"visualeditor-browserwarning",
+				"visualeditor-dialog-table-collapsed",
+				"visualeditor-dialog-table-collapsible",
 				"visualeditor-dialog-table-sortable",
 				"visualeditor-dialog-table-wikitable",
 				"visualeditor-diff-nochanges",

@@ -204,6 +204,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Prompt to let the user set the Table Of Contents (TOC) behaviour.",
 	"visualeditor-dialog-meta-templatesused-noresults": "Message displayed when no existing templates found on the page.",
 	"visualeditor-dialog-meta-title": "Text of the title for the meta dialog to set categories, language links and other page settings.\n{{Identical|Options}}",
+	"visualeditor-dialog-table-collapsed": "Label for toggle to make a table collapsed initially",
+	"visualeditor-dialog-table-collapsible": "Label for toggle to make a table collapsible",
 	"visualeditor-dialog-table-sortable": "Label for toggle to make a table sortable",
 	"visualeditor-dialog-table-wikitable": "Label for toggle to make a table a wikitable",
 	"visualeditor-dialog-template-title": "{{Identical|Template}}",
