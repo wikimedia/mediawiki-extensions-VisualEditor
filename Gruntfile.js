@@ -14,6 +14,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
+	grunt.loadNpmTasks( 'grunt-image' );
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-mocha-test' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
@@ -80,6 +81,23 @@ module.exports = function ( grunt ) {
 					]
 				},
 				src: [ 'build/screenshots.js' ]
+			}
+		},
+		image: {
+			options: {
+				zopflipng: true,
+				pngout: true,
+				optipng: true,
+				advpng: true,
+				pngcrush: true
+			},
+			'screenshots-en': {
+				expand: true,
+				src: 'screenshots/*-en.png'
+			},
+			'screenshots-all': {
+				expand: true,
+				src: 'screenshots/*.png'
 			}
 		},
 		tyops: {
@@ -175,8 +193,8 @@ module.exports = function ( grunt ) {
 	grunt.registerTask( 'fix', [ 'eslint:fix' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
-	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en' ] );
-	grunt.registerTask( 'screenshots-all', [ 'mochaTest:screenshots-all' ] );
+	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en', 'image:screenshots-en' ] );
+	grunt.registerTask( 'screenshots-all', [ 'mochaTest:screenshots-all', 'image:screenshots-all' ] );
 	grunt.registerTask( 'default', 'test' );
 
 	if ( process.env.JENKINS_HOME ) {
