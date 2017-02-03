@@ -147,7 +147,7 @@
 	"visualeditor-dialog-meta-languages-section": "Sprachen",
 	"visualeditor-dialog-meta-settings-displaytitle": "Anzeigetitel",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "Anzeigetitel aktivieren",
-	"visualeditor-dialog-meta-settings-displaytitle-help": "Du kannst überschreiben, wie der Titel dieser Seite angezeigt wird durch Festlegen einer anderen anzuzeigenden Bezeichnung.",
+	"visualeditor-dialog-meta-settings-displaytitle-help": "Du kannst durch eine andere Bezeichnung überschreiben, wie der Titel dieser Seite angezeigt wird.",
 	"visualeditor-dialog-meta-settings-hiddencat-help": "Du kannst verhindern, dass diese Kategorie in der Kategorieliste auf Mitgliedsseiten angezeigt wird. Dies ist nützlich für Kategorien, die für Autoren interessant sind, jedoch nicht für die meisten Leser, wie z.&nbsp;B. Seiten, die eine Illustration erfordern.",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Versteckte Kategorie",
 	"visualeditor-dialog-meta-settings-index-default": "Standard",
