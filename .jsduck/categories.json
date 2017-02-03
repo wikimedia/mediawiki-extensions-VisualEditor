@@ -43,8 +43,9 @@
 			{
 				"name": "Visual Diffing",
 				"classes": [
-					"ve.dm.VisualDiff",
 					"ve.DiffTreeNode",
+					"ve.DiffMatchPatch",
+					"ve.dm.VisualDiff",
 					"ve.ui.DiffDialog",
 					"ve.ui.DiffElement"
 				]
@@ -302,6 +303,12 @@
 					"treeDiffer.Differ",
 					"treeDiffer.Tree",
 					"treeDiffer.TreeNode"
+				]
+			},
+			{
+				"name": "DiffMatchPatch",
+				"classes": [
+					"diff_match_patch"
 				]
 			},
 			{
