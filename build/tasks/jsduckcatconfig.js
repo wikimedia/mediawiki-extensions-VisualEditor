@@ -2,7 +2,7 @@
  * Merge jsduck configuration files with a downstream one
  */
 
-/* eslint-env node */
+/* eslint-env node, es6 */
 module.exports = function ( grunt ) {
 	var _ = grunt.util._;
 

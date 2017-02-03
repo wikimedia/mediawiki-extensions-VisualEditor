@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* eslint-env node, es6 */
 /* global seleniumUtils, langs */
 var i, l, clientSize,
 	accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
