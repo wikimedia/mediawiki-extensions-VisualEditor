@@ -47,8 +47,9 @@
 				],
 				"name": "Visual Diffing",
 				"classes": [
-					"ve.dm.VisualDiff",
 					"ve.DiffTreeNode",
+					"ve.DiffMatchPatch",
+					"ve.dm.VisualDiff",
 					"ve.ui.DiffDialog",
 					"ve.ui.DiffElement"
 				]
