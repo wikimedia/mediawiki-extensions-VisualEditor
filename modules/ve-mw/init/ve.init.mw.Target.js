@@ -52,7 +52,6 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{
 		classes: [ 've-test-toolbar-format' ],
 		type: 'menu',
-		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
 		include: [ { group: 'format' } ],
 		promote: [ 'paragraph' ],
@@ -63,7 +62,6 @@ ve.init.mw.Target.static.toolbarGroups = [
 		classes: [ 've-test-toolbar-style' ],
 		type: 'list',
 		icon: 'textStyle',
-		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
 		forceExpand: [ 'bold', 'italic', 'clear' ],
@@ -77,7 +75,6 @@ ve.init.mw.Target.static.toolbarGroups = [
 		classes: [ 've-test-toolbar-structure' ],
 		type: 'list',
 		icon: 'listBullet',
-		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
 		include: [ { group: 'structure' } ],
 		demote: [ 'outdent', 'indent' ]
@@ -86,7 +83,6 @@ ve.init.mw.Target.static.toolbarGroups = [
 	{
 		classes: [ 've-test-toolbar-insert' ],
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		include: '*',
 		forceExpand: [ 'media', 'transclusion', 'insertTable' ],

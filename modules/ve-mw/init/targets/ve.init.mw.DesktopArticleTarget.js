@@ -108,6 +108,7 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 	{
 		type: 'list',
 		icon: 'menu',
+		indicator: null,
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 		include: [ 'meta', 'categories', 'settings', 'advancedSettings', 'languages', 'templatesUsed', 'findAndReplace' ]
 	},
