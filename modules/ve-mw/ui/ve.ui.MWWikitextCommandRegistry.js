@@ -233,10 +233,3 @@ ve.ui.wikitextCommandRegistry.register(
 		}
 	)
 );
-
-ve.ui.wikitextCommandRegistry.register(
-	new ve.ui.Command( 'mwSignature', 'content', 'insert', {
-		args: [ '~~~~', false, true /* collaseToEnd */ ],
-		supportedSelections: [ 'linear' ]
-	} )
-);

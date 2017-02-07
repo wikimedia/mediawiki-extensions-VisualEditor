@@ -90,8 +90,7 @@ ve.ui.commandRegistry.register(
 	)
 );
 if ( mw.libs.ve.isWikitextAvailable ) {
-	// wikitextCommandRegistry has been requested already, but hasn't
-	// loaded yet.
+	// Ensure wikitextCommandRegistry has finished loading
 	mw.loader.using( 'ext.visualEditor.mwwikitext' ).then( function () {
 		ve.ui.wikitextCommandRegistry.register(
 			new ve.ui.Command(
