@@ -350,6 +350,7 @@
 	"visualeditor-quick-access-characters.json": "JSON object mapping character labels to actual characters that can be inserted using the special character inserter.\n{{Identical|Null}}",
 	"visualeditor-recreate": "Text shown when the editor fails to save the page due to it having been deleted since they opened VE. $1 is the message {{msg-mw|ooui-dialog-process-continue}}.",
 	"visualeditor-redirect-description": "Title shown as the description of redirect nodes.\n\nParameters:\n* $1 - Target title of redirect",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "Message shown when the user tried to submit the Save dialog using the Enter key, advising them to use Ctrl+Enter/Cmd+Enter (depending on the platform) instead.\n\nParameters:\n* $1 - either Ctrl+Enter or Cmd+Enter",
 	"visualeditor-savedialog-error-badtoken": "Error displayed in the save dialog if saving the edit failed due to an invalid edit token (likely due to the user having logged out in a separate window, or logged in again)",
 	"visualeditor-savedialog-identify-anon": "Displayed in the save dialog if saving failed because the session expired and the session is now an anonymous user. Warning about IP address being recorded is based on {{msg-mw|anoneditwarning}}.\n\n{{format|jquerymsg}}",
 	"visualeditor-savedialog-identify-trylogin": "Displayed in the save dialog if saving failed because the session expired and we also encountered an error while trying to figure out for which user the current session. This is usually due to the user getting logged out on a private wiki.",

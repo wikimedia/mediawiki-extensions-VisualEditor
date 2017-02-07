@@ -431,6 +431,15 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.editSummaryInput.$input.on( 'keypress', function ( e ) {
 		if ( e.which === OO.ui.Keys.ENTER ) {
 			e.preventDefault();
+
+			dialog.showMessage(
+				'keyboard-shortcut-submit',
+				$( '<p>' ).msg(
+					'visualeditor-savedialog-keyboard-shortcut-submit',
+					new ve.ui.Trigger( ve.ui.commandHelpRegistry.lookup( 'dialogConfirm' ).shortcuts[ 0 ] ).getMessage()
+				),
+				{ wrap: false }
+			);
 		}
 	} );
 	// Limit byte length, and display the remaining bytes
@@ -616,6 +625,7 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'save' ) {
 		return new OO.ui.Process( function () {
 			var saveDeferred = $.Deferred();
+			this.clearMessage( 'keyboard-shortcut-submit' );
 			this.swapPanel( 'save' );
 			this.emit( 'save', saveDeferred );
 			return saveDeferred.promise();
