@@ -33,7 +33,7 @@
 	"apihelp-visualeditoredit-param-captchaid": "Αναγνωριστικό captcha (κατά την αποθήκευση με μία απάντηση captcha).",
 	"apihelp-visualeditoredit-param-captchaword": "Απάντηση στο captcha (κατά την αποθήκευση με μία απάντηση captcha).",
 	"apihelp-visualeditoredit-param-html": "Ο κώδικας HTML που αποστέλλεται στο Parsoid για να επιστρέψει κώδικα wiki.",
-	"apihelp-visualeditoredit-param-minor": "Σήμανση για μικρή τροποποίηση.",
+	"apihelp-visualeditoredit-param-minor": "Σήμανση για μικροεπεξεργασία.",
 	"apihelp-visualeditoredit-param-needcheck": "Κατά την αποθήκευση, ορίστε αυτήν την παράμετρο εάν η αναθεώρηση μπορεί να έχει προβλήματα μεταφοράς. Αυτό θα έχει ως αποτέλεσμα να προστεθεί ετικέτα στην επεξεργασία.",
 	"apihelp-visualeditoredit-param-oldid": "Αριθμός αναθεώρησης που θα χρησιμοποιηθεί. Η προεπιλογή είναι η πιο πρόσφατη αναθεώρηση. Χρησιμοποιήστε το 0 για νέα σελίδα.",
 	"apihelp-visualeditoredit-param-page": "Η σελίδα στην οποία θα εκτελέσετε ενέργειες.",
