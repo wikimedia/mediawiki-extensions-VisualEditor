@@ -553,7 +553,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
  * @param {Object|null} data API response data
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, status, data ) {
-	var api, editApi,
+	var editApi,
 		target = this;
 
 	this.saving = false;
@@ -582,53 +582,18 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 
 	// Handle token errors
 	if ( data.error && data.error.code === 'badtoken' ) {
-		api = new mw.Api();
-		api.get( {
-			action: 'query',
-			meta: 'tokens|userinfo',
-			type: 'csrf'
-		} )
-			.done( function ( data ) {
-				var
-					userInfo = data.query && data.query.userinfo,
-					editToken = data.query && data.query.tokens && data.query.tokens.csrftoken,
-					isAnon = mw.user.isAnon();
-
-				if ( userInfo && editToken ) {
-					target.editToken = editToken;
-
-					if (
-						( isAnon && userInfo.anon !== undefined ) ||
-							// Comparing id instead of name to protect against possible
-							// normalisation and against case where the user got renamed.
-							mw.config.get( 'wgUserId' ) === userInfo.id
-					) {
-						// New session is the same user still; retry
-						target.emit( 'saveErrorBadToken', true );
-						target.save( doc, saveData );
-					} else {
-						// The now current session is a different user
-						if ( userInfo.anon !== undefined ) {
-							// New session is an anonymous user
-							mw.config.set( {
-								// wgUserId is unset for anonymous users, not set to null
-								wgUserId: undefined,
-								// wgUserName is explicitly set to null for anonymous users,
-								// functions like mw.user.isAnon rely on this.
-								wgUserName: null
-							} );
-							target.saveErrorBadToken( null, false );
-						} else {
-							// New session is a different user
-							mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
-							target.saveErrorBadToken( userInfo.name, false );
-						}
-					}
-				}
-			} )
-			.fail( function () {
-				target.saveErrorBadToken( null, true );
-			} );
+		this.refreshEditToken().done( function ( userChanged ) {
+			// target.editToken has been refreshed
+			if ( userChanged ) {
+				target.saveErrorBadToken( mw.user.isAnon() ? null : mw.user.getName(), false );
+			} else {
+				// New session is the same user still; retry
+				target.emit( 'saveErrorBadToken', true );
+				target.save( doc, saveData );
+			}
+		} ).fail( function () {
+			target.saveErrorBadToken( null, true );
+		} );
 		return;
 	} else if ( data.error && data.error.code === 'editconflict' ) {
 		this.editConflict();
@@ -667,6 +632,68 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 
 	// Handle (other) unknown and/or unrecoverable errors
 	this.saveErrorUnknown( editApi, data );
+};
+
+/**
+ * Refresh our stored edit/csrf token
+ *
+ * This should be called in response to a badtoken error, to resolve whether the
+ * token was expired / the user changed. If the user did change, this updates
+ * the current user.
+ *
+ * @return {jQuery.Promise} Promise resolved with whether we switched users
+ */
+ve.init.mw.ArticleTarget.prototype.refreshEditToken = function () {
+	var api = new mw.Api(),
+		deferred = $.Deferred(),
+		target = this;
+	api.get( {
+		action: 'query',
+		meta: 'tokens|userinfo',
+		type: 'csrf'
+	} )
+		.done( function ( data ) {
+			var
+				userInfo = data.query && data.query.userinfo,
+				editToken = data.query && data.query.tokens && data.query.tokens.csrftoken,
+				isAnon = mw.user.isAnon();
+
+			if ( userInfo && editToken ) {
+				target.editToken = editToken;
+
+				if (
+					( isAnon && userInfo.anon !== undefined ) ||
+						// Comparing id instead of name to protect against possible
+						// normalisation and against case where the user got renamed.
+						mw.config.get( 'wgUserId' ) === userInfo.id
+				) {
+					// New session is the same user still
+					deferred.resolve( false );
+				} else {
+					// The now current session is a different user
+					if ( userInfo.anon !== undefined ) {
+						// New session is an anonymous user
+						mw.config.set( {
+							// wgUserId is unset for anonymous users, not set to null
+							wgUserId: undefined,
+							// wgUserName is explicitly set to null for anonymous users,
+							// functions like mw.user.isAnon rely on this.
+							wgUserName: null
+						} );
+					} else {
+						// New session is a different user
+						mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
+					}
+					deferred.resolve( true );
+				}
+			} else {
+				deferred.reject();
+			}
+		} )
+		.fail( function () {
+			deferred.reject();
+		} );
+	return deferred.promise();
 };
 
 /**
@@ -2149,10 +2176,12 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
  *
  * @param {ve.dm.Document} doc Document
  * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
+ * @param {boolean} [isRetry=false] Whether this call is retrying a prior call
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
-ve.init.mw.ArticleTarget.prototype.getWikitextFragment = function ( doc, useRevision ) {
+ve.init.mw.ArticleTarget.prototype.getWikitextFragment = function ( doc, useRevision, isRetry ) {
 	var promise, xhr,
+		target = this,
 		params = {
 			action: 'visualeditoredit',
 			token: this.editToken,
@@ -2176,6 +2205,12 @@ ve.init.mw.ArticleTarget.prototype.getWikitextFragment = function ( doc, useRevi
 			return response.visualeditoredit.content;
 		}
 		return $.Deferred().reject();
+	}, function ( error ) {
+		if ( error === 'badtoken' && !isRetry ) {
+			return target.refreshEditToken().then( function () {
+				return target.getWikitextFragment( doc, useRevision, true );
+			} );
+		}
 	} );
 
 	promise.abort = function () {
