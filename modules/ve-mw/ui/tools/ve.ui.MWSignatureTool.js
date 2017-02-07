@@ -60,6 +60,17 @@ if ( allowsSignatures ) {
 		sequences: [ 'wikitextSignature' ],
 		label: OO.ui.deferMsg( 'visualeditor-mwsignature-tool' )
 	} );
+	if ( mw.libs.ve.isWikitextAvailable ) {
+		// Ensure wikitextCommandRegistry has finished loading
+		mw.loader.using( 'ext.visualEditor.mwwikitext' ).then( function () {
+			ve.ui.wikitextCommandRegistry.register(
+				new ve.ui.Command( 'mwSignature', 'content', 'insert', {
+					args: [ '~~~~', false, true /* collaseToEnd */ ],
+					supportedSelections: [ 'linear' ]
+				} )
+			);
+		} );
+	}
 } else {
 	// No-op command that is never executable
 	ve.ui.commandRegistry.register(
