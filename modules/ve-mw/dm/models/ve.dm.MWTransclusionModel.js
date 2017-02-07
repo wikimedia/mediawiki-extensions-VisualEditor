@@ -62,10 +62,11 @@
 	ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment, forceType ) {
 		var model = this,
 			deferred = $.Deferred(),
-			nodeClass = ve.dm.MWTransclusionNode;
+			baseNodeClass = ve.dm.MWTransclusionNode;
 
-		function insertNode( isInline ) {
-			var type = isInline ? nodeClass.static.inlineType : nodeClass.static.blockType,
+		function insertNode( isInline, generatedContents ) {
+			var hash, store, nodeClass,
+				type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType,
 				range = surfaceFragment.getSelection().getCoveringRange(),
 				data = [
 					{
@@ -76,6 +77,15 @@
 					},
 					{ type: '/' + type }
 				];
+
+			// If we just fetched the generated contents, put them in the store
+			// so we don't do a duplicate API call later.
+			if ( generatedContents ) {
+				nodeClass = ve.dm.modelRegistry.lookup( type );
+				store = surfaceFragment.getDocument().getStore();
+				hash = OO.getHash( [ nodeClass.static.getHashObjectForRendering( data[ 0 ] ), undefined ] );
+				store.index( generatedContents, hash );
+			}
 
 			if ( range.isCollapsed() ) {
 				surfaceFragment.insertContent( data );
@@ -97,7 +107,7 @@
 				action: 'visualeditor',
 				paction: 'parsefragment',
 				page: mw.config.get( 'wgRelevantPageName' ),
-				wikitext: nodeClass.static.getWikitext( this.getPlainObject() ),
+				wikitext: baseNodeClass.static.getWikitext( this.getPlainObject() ),
 				pst: 1
 			} )
 			.then( function ( response ) {
@@ -107,7 +117,8 @@
 					contentNodes = $.parseHTML( response.visualeditor.content, surfaceFragment.getDocument().getHtmlDocument() ) || [];
 					contentNodes = ve.ce.MWTransclusionNode.static.filterRendering( contentNodes );
 					insertNode(
-						nodeClass.static.isHybridInline( contentNodes, ve.dm.converter )
+						baseNodeClass.static.isHybridInline( contentNodes, ve.dm.converter ),
+						contentNodes
 					);
 				} else {
 					// Request failed - just assume inline
