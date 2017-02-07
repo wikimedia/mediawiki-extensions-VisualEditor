@@ -176,6 +176,8 @@ OO.inheritClass( ve.dm.MWInlineExtensionNode, ve.dm.MWExtensionNode );
 
 ve.dm.MWInlineExtensionNode.static.isContent = true;
 
+ve.dm.MWInlineExtensionNode.static.tagName = 'span';
+
 /**
  * DataModel MediaWiki block extension node.
  *
@@ -195,3 +197,7 @@ ve.dm.MWBlockExtensionNode = function VeDmMWBlockExtensionNode() {
 /* Inheritance */
 
 OO.inheritClass( ve.dm.MWBlockExtensionNode, ve.dm.MWExtensionNode );
+
+/* Static members */
+
+ve.dm.MWBlockExtensionNode.static.tagName = 'div';
