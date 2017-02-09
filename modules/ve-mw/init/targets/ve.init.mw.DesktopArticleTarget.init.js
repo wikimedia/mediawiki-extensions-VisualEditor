@@ -685,7 +685,7 @@
 				uri = new mw.Uri( e.target.href ),
 				title = mw.Title.newFromText( uri.query.title || '' );
 
-			if ( !init.isUnmodifiedLeftClick( e ) || !( 'action' in uri.query ) ) {
+			if ( !init.isUnmodifiedLeftClick( e ) || !( 'action' in uri.query || 'veaction' in uri.query ) ) {
 				return;
 			}
 			if ( title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText() ) {
