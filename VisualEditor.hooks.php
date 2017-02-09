@@ -824,7 +824,6 @@ class VisualEditorHooks {
 				'modules/ve-mw/tests/dm/nodes/ve.dm.MWTransclusionNode.test.js',
 				'lib/ve/tests/dm/ve.dm.Document.test.js',
 				'modules/ve-mw/tests/dm/ve.dm.Document.test.js',
-				'lib/ve/tests/dm/ve.dm.DocumentSynchronizer.test.js',
 				'lib/ve/tests/dm/ve.dm.IndexValueStore.test.js',
 				'lib/ve/tests/dm/ve.dm.InternalList.test.js',
 				'lib/ve/tests/dm/ve.dm.Transaction.test.js',
