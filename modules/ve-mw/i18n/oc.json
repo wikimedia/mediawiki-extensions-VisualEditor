@@ -245,7 +245,7 @@
 	"visualeditor-savedialog-warning-dirty": "Vòstra modificacion poiriá èsser gastada - repassatz abans d'enregistrar.",
 	"visualeditor-saveerror": "Error al moment de l'enregistrament de las donadas sul servidor : $1.",
 	"visualeditor-saveerror-titleblacklist": "Error al moment de l’enregistrament de la pagina : lo títol d'aquesta pagina es dins la lista negra.",
-	"visualeditor-section-body-placeholder": "New seccion",
+	"visualeditor-section-body-placeholder": "Seccion novèla",
 	"visualeditor-section-title-placeholder": "Subjècte",
 	"visualeditor-serializeerror": "Error al moment del cargament de las donadas del servidor : $1.",
 	"visualeditor-settings-tool": "Paramètres de la pagina",
