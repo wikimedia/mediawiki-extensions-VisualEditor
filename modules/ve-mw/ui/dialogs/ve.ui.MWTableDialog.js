@@ -29,6 +29,10 @@ ve.ui.MWTableDialog.static.actions = [
 		action: 'done',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-done' ),
 		flags: [ 'primary', 'progressive' ]
+	},
+	{
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
+		flags: [ 'safe', 'back' ]
 	}
 ];
 
