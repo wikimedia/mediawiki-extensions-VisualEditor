@@ -27,6 +27,18 @@ OO.inheritClass( ve.ui.MWTableDialog, ve.ui.TableDialog );
 /**
  * @inheritdoc
  */
+ve.ui.MWTableDialog.prototype.getValues = function () {
+	// Parent method
+	var values = ve.ui.MWTableDialog.super.prototype.getValues.call( this );
+	return ve.extendObject( values, {
+		wikitable: this.wikitableToggle.getValue(),
+		sortable: this.sortableToggle.getValue()
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTableDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWTableDialog.super.prototype.initialize.call( this );
@@ -37,11 +49,15 @@ ve.ui.MWTableDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-table-wikitable' )
 	} );
 
+	this.wikitableToggle.connect( this, { change: 'updateActions' } );
+
 	this.sortableToggle = new OO.ui.ToggleSwitchWidget();
 	this.sortableField = new OO.ui.FieldLayout( this.sortableToggle, {
 		align: 'left',
 		label: ve.msg( 'visualeditor-dialog-table-sortable' )
 	} );
+
+	this.sortableToggle.connect( this, { change: 'updateActions' } );
 
 	this.panel.$element.prepend( this.wikitableField.$element, this.sortableField.$element );
 };
@@ -52,10 +68,19 @@ ve.ui.MWTableDialog.prototype.initialize = function () {
 ve.ui.MWTableDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTableDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var tableNode = this.getFragment().getSelection().getTableNode();
+			var tableNode = this.getFragment().getSelection().getTableNode(),
+				wikitable = !!tableNode.getAttribute( 'wikitable' ),
+				sortable = !!tableNode.getAttribute( 'sortable' );
 
-			this.wikitableToggle.setValue( !!tableNode.getAttribute( 'wikitable' ) );
-			this.sortableToggle.setValue( !!tableNode.getAttribute( 'sortable' ) );
+			this.wikitableToggle.setValue( wikitable );
+			this.sortableToggle.setValue( sortable );
+
+			ve.extendObject( this.initialValues, {
+				wikitable: wikitable,
+				sortable: sortable
+			} );
+
+			this.updateActions();
 		}, this );
 };
 
