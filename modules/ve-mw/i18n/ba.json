@@ -51,7 +51,7 @@
 	"visualeditor-advancedsettings-tool": "Өҫтәмә көйләүҙәр",
 	"visualeditor-backbutton-tooltip": "Кире ҡайтырға",
 	"visualeditor-beta-label": "бета",
-	"visualeditor-beta-warning": "Күҙләгес мөхәррир 'beta' хәлендә. Һеҙ программаны тәьмин итеүҙә ҡыйынлыҡтар тояһығыҙ, һәм текстың айырым өлөштәрен мөхәррирләй алмайһығыҙ.Викитесҡа күсеү өсөн \"{{int:visualeditor-ca-editsource}}\" төймәһенә баҫығыҙ – һаҡланмаған үҙгәрештәр юғаласаҡ.",
+	"visualeditor-beta-warning": "Мөхәррирләү барышында техник ҡыйынһыҙлыҡтар килеп сыҡһа, беҙгә хәбәр итегеҙ.",
 	"visualeditor-browserwarning": "Һеҙ Күҙләгес мөхәррирҙе рәсми танымаған браузерҙа ҡулланаһығыҙ.",
 	"visualeditor-ca-createlocaldescriptionsource": "Локалль тасурилама сығанағын өҫтәргә",
 	"visualeditor-ca-createsource": "Сығанаҡ код булдырырға",

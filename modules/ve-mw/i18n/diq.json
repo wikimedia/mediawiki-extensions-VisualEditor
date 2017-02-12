@@ -10,7 +10,8 @@
 			"Kumkumuk",
 			"Gırd",
 			"1917 Ekim Devrimi",
-			"Gambollar"
+			"Gambollar",
+			"Asmen"
 		]
 	},
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
@@ -338,7 +339,7 @@
 	"visualeditor-savedialog-title-preview": "Verasayena vurriyayış da to",
 	"visualeditor-savedialog-title-review": "Vurnayışanê xo çım ra raviyarne",
 	"visualeditor-savedialog-title-save": "Vurnayışanê xo qeyd ke",
-	"visualeditor-savedialog-warning-dirty": "Vurnayışê şıma belki zi alızya yo. Verdê qetd kerdışi çımra ravyarnê.",
+	"visualeditor-savedialog-warning-dirty": "Beno ke vırnayışê şıma de xeta esta - şıma rê zehmet, hewna ke qeyd nêkerd, çım ra raviyarnên.",
 	"visualeditor-saveerror": "Ardoği de data qeyd kerdışi dı xeta:$1",
 	"visualeditor-saveerror-titleblacklist": "Xetay qeyd kerdışi:ena per çebya ya lista da siya miyan.",
 	"visualeditor-section-body-placeholder": "Leteyo newe",
