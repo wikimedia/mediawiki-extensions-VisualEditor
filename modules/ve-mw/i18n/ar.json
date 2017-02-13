@@ -22,7 +22,8 @@
 			"PhiberOptik",
 			"Shbib Al-Subaie",
 			"Maroen1990",
-			"Moud hosny"
+			"Moud hosny",
+			"Aboulouei1"
 		]
 	},
 	"apihelp-visualeditor-description": "يرجع HTML5 لصفحة من الخدمة بارسويد (Parsoid).",
@@ -331,7 +332,7 @@
 	"visualeditor-preference-tabs-remember-last": "تذكر آخر محرر عدلت به",
 	"visualeditor-recreate": "لقد تم حذف هذه الصفحة بعد أن بدأت بتحريرها. اضغط على «$1» لإعادة إنشائها.",
 	"visualeditor-redirect-description": "تحويل إلى $1",
-	"visualeditor-savedialog-keyboard-shortcut-submit": "أنت يمكنك الضغط على $1 لحفظ تعديلك.",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "يمكنك الضغط على $1 لحفظ تعديلك.",
 	"visualeditor-savedialog-error-badtoken": "لم نتمكن من حفظ تعديلك لأن الجلسة لم تعد صالحة.",
 	"visualeditor-savedialog-identify-anon": "هل تود عوضا عن ذلك حفظ هذه الصفحة على أنك مستخدم مجهول؟ سيتم تسجيل عنوان الآي بي الخاص بك في تاريخ تعديلات الصفحة.",
 	"visualeditor-savedialog-identify-trylogin": "انت لم تسجل دخولك. الرجاء تسجيل الدخول مرة أخرى من علامة تبويب مختلفة وحاول مرة أخرى.",
