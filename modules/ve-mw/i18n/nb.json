@@ -324,6 +324,7 @@
 	"visualeditor-preference-tabs-remember-last": "Husk min sist brukte editor",
 	"visualeditor-recreate": "Siden har blitt slettet etter at du begynte å redigere. Trykk \"$1\" for å gjenopprette den.",
 	"visualeditor-redirect-description": "Omdiriger til $1",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "Du kan trykke $1 for å lagre redigeringen din.",
 	"visualeditor-savedialog-error-badtoken": "Vi kunne ikke lagre redigeringen din fordi sesjonen ikke lenger er gyldig.",
 	"visualeditor-savedialog-identify-anon": "Ønsker du å lagre siden som en anonym bruker i stedet? IP-adressen din vil bli lagret i sidens redigeringshistorikk.",
 	"visualeditor-savedialog-identify-trylogin": "Du er ikke lenger innlogget. Logg inn igjen fra en annen fane og prøv igjen.",

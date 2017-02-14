@@ -11,7 +11,8 @@
 			"Aftabuzzaman",
 			"RYasmeen (WMF)",
 			"Sayma Jahan",
-			"NahidSultan"
+			"NahidSultan",
+			"Elias Ahmmad"
 		]
 	},
 	"apihelp-visualeditor-description": "পারসয়েড পরিষেবা হতে কোন পাতার জন্য এইচটিএমএল৫-এ ফিরে যান।",
@@ -293,6 +294,7 @@
 	"visualeditor-preference-tabs-remember-last": "আমার সর্বশেষ সম্পাদক মনে রেখো",
 	"visualeditor-recreate": "আপনি সম্পাদনা শুরু করার পর পাতাটি অপসারণ করা হয়েছে। এটি পুনঃতৈরি করতে \"$1\" চাপুন।",
 	"visualeditor-redirect-description": "$1-এ পুনঃনির্দেশিত",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "আপনি আপনার সম্পাদনা $1 চেপে সংরক্ষণ করতে পারেন।",
 	"visualeditor-savedialog-error-badtoken": "সেশনের মেয়াদ শেষ হয়ে যাওয়ার কারণে আমরা আপনার সম্পাদনাটি সংরক্ষণ করতে পারিনি।",
 	"visualeditor-savedialog-identify-anon": "আপনি কি অনিবন্ধীকৃত ব্যবহারকারী হিসেবে এই পাতাটি সংরক্ষণ করতে চান? আপনার আইপি ঠিকানা এই পাতার সম্পাদনা ইতিহাসে রেকর্ড করা হবে।",
 	"visualeditor-savedialog-identify-trylogin": "আপনি আর প্রবেশ করা নেই। দয়া করে একটি ভিন্ন ট্যাব থেকে প্রবেশ করুন ও আবার চেষ্টা করুন।",
