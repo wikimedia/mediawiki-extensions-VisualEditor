@@ -120,9 +120,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	protected function tryDeflate( $content ) {
 		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
 			$deflated = base64_decode( substr( $content, 11 ) );
-			wfSuppressWarnings();
+			MediaWiki\suppressWarnings();
 			$inflated = gzinflate( $deflated );
-			wfRestoreWarnings();
+			MediaWiki\restoreWarnings();
 			if ( $deflated === $inflated || $inflated === false ) {
 				$this->dieWithError( 'apierror-visualeditor-invaliddeflate', 'invaliddeflate' );
 			}
