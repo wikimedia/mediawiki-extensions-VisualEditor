@@ -946,7 +946,7 @@
 					// with accesskey 'v' so create one
 					$( 'body' ).append(
 						$( '<a>' )
-							.attr( { accesskey: 'v', href: veEditUri } )
+							.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUri } )
 							// Accesskey fires a click event
 							.on( 'click', init.onEditTabClick.bind( init, 'visual' ) )
 							.hide()
