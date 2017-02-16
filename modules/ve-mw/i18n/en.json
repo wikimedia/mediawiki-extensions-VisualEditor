@@ -191,6 +191,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Show the Table of Contents",
 	"visualeditor-dialog-meta-templatesused-noresults": "No templates found.",
 	"visualeditor-dialog-meta-title": "Options",
+	"visualeditor-dialog-table-collapsed": "Collapsed initially",
+	"visualeditor-dialog-table-collapsible": "Collapsible",
 	"visualeditor-dialog-table-sortable": "Sortable",
 	"visualeditor-dialog-table-wikitable": "Styled (wikitable)",
 	"visualeditor-dialog-template-title": "Template",

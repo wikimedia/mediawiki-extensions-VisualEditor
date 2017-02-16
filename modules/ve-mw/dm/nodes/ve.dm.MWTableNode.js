@@ -36,7 +36,9 @@ ve.dm.MWTableNode.static.name = 'mwTable';
 
 ve.dm.MWTableNode.static.classAttributes = {
 	wikitable: { wikitable: true },
-	sortable: { sortable: true }
+	sortable: { sortable: true },
+	'mw-collapsible': { collapsible: true },
+	'mw-collapsed': { collapsed: true }
 };
 
 // HACK: users of parentNodeTypes should be fixed to check for inherited classes.
