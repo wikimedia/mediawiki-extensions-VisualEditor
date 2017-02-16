@@ -57,6 +57,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			] )
 			.connect( this, { select: 'onTableOfContentsFieldChange' } ),
 		{
+			$overlay: config.$overlay,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-toc-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-toc-help' )
@@ -68,6 +69,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.enableRedirectField = new OO.ui.FieldLayout(
 		this.enableRedirectInput,
 		{
+			$overlay: config.$overlay,
 			classes: [ 've-test-page-settings-enable-redirect' ],
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-label' ),
@@ -86,6 +88,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.enableStaticRedirectField = new OO.ui.FieldLayout(
 		this.enableStaticRedirectInput,
 		{
+			$overlay: config.$overlay,
 			classes: [ 've-test-page-settings-prevent-redirect' ],
 			align: 'inline',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-redirect-staticlabel' ),
@@ -131,6 +134,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
 			{
+				$overlay: config.$overlay,
 				classes: this.classes,
 				align: 'inline',
 				label: this.label,

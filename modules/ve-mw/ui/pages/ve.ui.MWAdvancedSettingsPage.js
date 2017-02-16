@@ -14,8 +14,9 @@
  * @constructor
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
-ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
+ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config ) {
 	var advancedSettingsPage = this;
 
 	// Parent constructor
@@ -52,6 +53,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
 			] )
 			.connect( this, { select: 'onIndexingOptionChange' } ),
 		{
+			$overlay: config.$overlay,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-index-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-index-help' )
@@ -77,6 +79,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
 			] )
 			.connect( this, { select: 'onNewSectionEditLinkOptionChange' } ),
 		{
+			$overlay: config.$overlay,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-help', $( '#ca-edit' ).text() )
@@ -89,6 +92,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
 	this.displayTitleField = new OO.ui.FieldLayout(
 		this.displayTitleInput,
 		{
+			$overlay: config.$overlay,
 			align: 'top',
 			label: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-displaytitle-help' )
@@ -117,6 +121,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
 		this.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
 			{
+				$overlay: config.$overlay,
 				align: 'inline',
 				label: this.label,
 				help: this.help
