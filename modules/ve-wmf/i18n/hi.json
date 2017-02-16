@@ -6,13 +6,16 @@
 			"Rajesh",
 			"Siddhartha Ghai",
 			"संजीव कुमार",
-			"Sfic"
+			"Sfic",
+			"Jayprakash12345"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका]] के प्रयोग से किया गया सम्पादन",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका: जाँचें]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका]] के प्रयोग से किये गए सम्पादन जिनमें सिस्टम ने पाया है कि विकिपाठ में अनपेक्षित बदलाव हो सकते हैं।",
+	"tag-visualeditor-wikitext": "2017 स्रोत संपादन",
+	"tag-visualeditor-wikitext-description": "संपादन 2017 विकिटेक्स्ट संपादक के उपयोग द्वारा किया गया",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|यथादृश्य संपादिका: अंतरित किया]]",
 	"tag-visualeditor-switched-description": "सदस्य ने यथादृश्य संपादिका की सहायता से सम्पादन कार्य आरम्भ किया और उसके बाद स्रोत सम्पादित करने के विकल्प को चुना।",
 	"visualeditor-feedback-link": "Project:विज़ुअल सम्पादक/प्रतिक्रिया",
@@ -23,5 +26,6 @@
 	"visualeditor-welcomedialog-content": "कोई भी लिख सकता है और कोई भी इसे अच्छा करने में सहायता कर सकता है।",
 	"visualeditor-welcomedialog-content-thanks": "सहायता करने के लिए धन्यवाद!",
 	"visualeditor-welcomedialog-switch": "स्रोत संपादक में जाएँ",
+	"visualeditor-welcomedialog-switch-ve": "दृश्य संपादक में जाएँ",
 	"visualeditor-welcomedialog-title": "$2 में {{GENDER:$1|स्वागत}} है"
 }

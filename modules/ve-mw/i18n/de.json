@@ -182,6 +182,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Inhaltsverzeichnis anzeigen",
 	"visualeditor-dialog-meta-templatesused-noresults": "Keine Vorlagen gefunden.",
 	"visualeditor-dialog-meta-title": "Optionen",
+	"visualeditor-dialog-table-collapsed": "Zunächst eingeklappt",
+	"visualeditor-dialog-table-collapsible": "Einklappbar",
 	"visualeditor-dialog-table-sortable": "Sortierbar",
 	"visualeditor-dialog-table-wikitable": "Stilisiert (wikitable)",
 	"visualeditor-dialog-template-title": "Vorlage",

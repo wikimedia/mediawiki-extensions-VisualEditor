@@ -186,6 +186,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Visa innehållsförteckningen",
 	"visualeditor-dialog-meta-templatesused-noresults": "Inga mallar hittades.",
 	"visualeditor-dialog-meta-title": "Alternativ",
+	"visualeditor-dialog-table-collapsed": "Hopfälld som standard",
+	"visualeditor-dialog-table-collapsible": "Hopfällbar",
 	"visualeditor-dialog-table-sortable": "Sorterbar",
 	"visualeditor-dialog-table-wikitable": "Stil (wikitable)",
 	"visualeditor-dialog-template-title": "Mall",
@@ -368,6 +370,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Fortsätt redigera",
 	"visualeditor-viewpage-savewarning-title": "Är du säker?",
 	"visualeditor-wikitext-progress": "Konverterar wikitext",
-	"visualeditor-wikitext-warning": "Du använder den visuella redigeraren - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] fungerar inte här. Klicka på strömbrytarknappen för att växla till redigering i wikitext-läge utan att förlora dina ändringar.",
+	"visualeditor-wikitext-warning": "Du använder den visuella redigeraren - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] fungerar inte här. För att när som helst växla till wikitext-läge utan att förlora dina ändringar, klicka på växla-knappen.",
 	"visualeditor-wikitext-warning-title": "Wikitext upptäckt"
 }
