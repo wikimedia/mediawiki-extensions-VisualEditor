@@ -317,6 +317,8 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 			progress: this.updateSize.bind( this )
 		} );
 
+		this.swapPanel( 'save' );
+
 		this.messages[ name ] = $message;
 	}
 };
@@ -626,7 +628,6 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 		return new OO.ui.Process( function () {
 			var saveDeferred = $.Deferred();
 			this.clearMessage( 'keyboard-shortcut-submit' );
-			this.swapPanel( 'save' );
 			this.emit( 'save', saveDeferred );
 			return saveDeferred.promise();
 		}, this );
