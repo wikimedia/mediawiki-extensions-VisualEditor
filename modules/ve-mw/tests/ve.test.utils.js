@@ -7,7 +7,7 @@
 
 ve.test.utils.createSurfaceFromDocument = function ( doc ) {
 	// eslint-disable-next-line no-unused-vars
-	var target, mwTarget;
+	var target, mwTarget, surface;
 
 	// Prevent the target from setting up the surface immediately
 	ve.init.platform.initialized = $.Deferred();
@@ -22,7 +22,11 @@ ve.test.utils.createSurfaceFromDocument = function ( doc ) {
 
 	ve.init.platform.initialized.resolve();
 	mwTarget = null;
-	return target.addSurface( doc );
+	surface = target.addSurface( doc );
+	// HACK HACK HACK: The target fuckery above results in the surface not being attached to the DOM.
+	// I'm not debugging that, screw it. Let's add another hack on top, surely that won't be a problem.
+	$( '#qunit-fixture' ).append( surface.$element );
+	return surface;
 };
 
 // Unregister MW override nodes.
