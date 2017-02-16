@@ -118,7 +118,8 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage() {
 			new OO.ui.CheckboxInputWidget(),
 			{
 				align: 'inline',
-				label: this.label
+				label: this.label,
+				help: this.help
 			}
 		);
 		advancedSettingsPage.advancedSettingsFieldset.addItems( [ this.fieldLayout ] );
