@@ -218,6 +218,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Afficher le sommaire",
 	"visualeditor-dialog-meta-templatesused-noresults": "Pas de modèles trouvés.",
 	"visualeditor-dialog-meta-title": "Options",
+	"visualeditor-dialog-table-collapsed": "Initialement replié",
+	"visualeditor-dialog-table-collapsible": "Repliable",
 	"visualeditor-dialog-table-sortable": "Triable",
 	"visualeditor-dialog-table-wikitable": "Stylé (wikitable)",
 	"visualeditor-dialog-template-title": "Modèle",

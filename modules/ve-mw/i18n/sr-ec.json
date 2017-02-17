@@ -157,7 +157,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Поље је обавезно.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Назад",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Ипак настави",
-	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Обавезни {{PLURAL:$1|параметри}} недостају",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Обавезно поље недостаје|Обавезна поља недостају}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Јесте ли сигурни да желите да наставите? {{PLURAL:$2|Следећи}} параметри нису попуњени $1.",
 	"visualeditor-dialog-transclusion-single-mode": "Сакриј опције",
 	"visualeditor-dialog-transclusion-title": "Укључивање",

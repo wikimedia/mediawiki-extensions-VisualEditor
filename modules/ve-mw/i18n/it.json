@@ -191,6 +191,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Mostra l'indice",
 	"visualeditor-dialog-meta-templatesused-noresults": "Nessun template trovato.",
 	"visualeditor-dialog-meta-title": "Opzioni",
+	"visualeditor-dialog-table-collapsed": "Inizialmente compresso",
+	"visualeditor-dialog-table-collapsible": "Comprimibile",
 	"visualeditor-dialog-table-sortable": "Ordinabile",
 	"visualeditor-dialog-table-wikitable": "Stile (wikitable)",
 	"visualeditor-dialog-template-title": "Template",

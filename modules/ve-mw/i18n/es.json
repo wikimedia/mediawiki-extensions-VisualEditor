@@ -195,6 +195,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "Mostrar tabla de contenidos",
 	"visualeditor-dialog-meta-templatesused-noresults": "No se encontraron plantillas.",
 	"visualeditor-dialog-meta-title": "Opciones",
+	"visualeditor-dialog-table-collapsed": "Inicialmente plegado",
+	"visualeditor-dialog-table-collapsible": "Plegable",
 	"visualeditor-dialog-table-sortable": "Ordenable",
 	"visualeditor-dialog-table-wikitable": "De estilo (wikitable)",
 	"visualeditor-dialog-template-title": "Plantilla",

@@ -197,6 +197,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "显示目录",
 	"visualeditor-dialog-meta-templatesused-noresults": "找不到模板。",
 	"visualeditor-dialog-meta-title": "选项",
+	"visualeditor-dialog-table-collapsed": "初始折叠",
+	"visualeditor-dialog-table-collapsible": "可折叠",
 	"visualeditor-dialog-table-sortable": "可排序",
 	"visualeditor-dialog-table-wikitable": "风格化（wiki表格）",
 	"visualeditor-dialog-template-title": "模板",
