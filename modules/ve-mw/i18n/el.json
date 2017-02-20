@@ -168,6 +168,7 @@
 	"visualeditor-dialog-meta-settings-toc-help": "Μπορείτε να επιβάλλετε ένας πίνακα περιεχομένων που παραθέτει κάθε επικεφαλίδα της σελίδας να εμφανίζεται σε σελίδες με λιγότερες από τρεις επικεφαλίδες, ή να επιβάλλετε να μην εμφανίζεται καθόλου. Από προεπιλογή, αυτός θα εμφανιστεί μόνο αν η σελίδα έχει τρεις ή περισσότερες επικεφαλίδες.",
 	"visualeditor-dialog-meta-settings-toc-label": "Προβολή του Πίνακα Περιεχομένων",
 	"visualeditor-dialog-meta-title": "Επιλογές",
+	"visualeditor-dialog-table-collapsible": "Πτυσσόμενο",
 	"visualeditor-dialog-table-sortable": "Ταξινομήσημο",
 	"visualeditor-dialog-table-wikitable": "Μορφοποιημένος (wikitable)",
 	"visualeditor-dialog-template-title": "Πρότυπο",

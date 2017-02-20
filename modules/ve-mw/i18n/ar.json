@@ -191,6 +191,8 @@
 	"visualeditor-dialog-meta-settings-toc-label": "أظهر فهرس المحتويات",
 	"visualeditor-dialog-meta-templatesused-noresults": "لم يتم العثور على قوالب.",
 	"visualeditor-dialog-meta-title": "خيارات",
+	"visualeditor-dialog-table-collapsed": "مطوي ابتداء",
+	"visualeditor-dialog-table-collapsible": "قابل للطي",
 	"visualeditor-dialog-table-sortable": "قابل للترتيب",
 	"visualeditor-dialog-table-wikitable": "مطرزة (wikitable)",
 	"visualeditor-dialog-template-title": "قالب",

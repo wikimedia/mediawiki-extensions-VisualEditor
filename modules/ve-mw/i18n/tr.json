@@ -23,7 +23,8 @@
 			"JackUKElliott",
 			"Hbseren",
 			"Sadrettin",
-			"Alikaan"
+			"Alikaan",
+			"Katpatuka"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -166,6 +167,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Her zaman",
 	"visualeditor-dialog-meta-settings-toc-label": "İçindekiler Tablosunu Göster",
 	"visualeditor-dialog-meta-title": "Seçenekler",
+	"visualeditor-dialog-table-collapsible": "Daralabilir",
 	"visualeditor-dialog-template-title": "Şablon",
 	"visualeditor-dialog-transclusion-add-content": "İçerik ekle",
 	"visualeditor-dialog-transclusion-add-param": "Daha fazla bilgi ekleyin",
