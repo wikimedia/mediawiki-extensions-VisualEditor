@@ -122,9 +122,9 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	} );
 	if ( this.autocompleteWordList ) {
 		completer = {
-			getCompletions: function( editor, session, pos, prefix, callback ) {
+			getCompletions: function ( editor, session, pos, prefix, callback ) {
 				var wordList = widget.autocompleteWordList;
-				callback( null, wordList.map( function( word ) {
+				callback( null, wordList.map( function ( word ) {
 					return {
 						caption: word,
 						value: word,
