@@ -298,6 +298,7 @@
 	"visualeditor-mweditmodeve-showagain": "Label for the checkboxes to not show one of the 'switched to visual mode' or 'switched to source mode' popups again",
 	"visualeditor-mweditmodeve-title": "Title of dialog to confirm switching to visual mode.",
 	"visualeditor-mweditmodeve-tool": "Label for tool that changes edit mode to visual editing.",
+	"visualeditor-mweditmodeve-tool-unavailable": "Label for tool that changes edit mode to visual editing when it is not available.",
 	"visualeditor-mweditmodeve-warning": "Warning message show before changing edit mode to visual editing. It may allow the user to keep the changes using the message {{msg-mw|Visualeditor-mweditmodesource-warning-switch}}, or instaed that they'd need to start source editing from scratch using {{msg-mw|Visualeditor-mweditmodesource-warning-switch-discard}}.",
 	"visualeditor-mweditmodewt-popup-body": "Body text of popup shown after switching to visual mode from source mode",
 	"visualeditor-mweditmodewt-popup-title": "Title of popup shown after switching to visual mode from source mode",

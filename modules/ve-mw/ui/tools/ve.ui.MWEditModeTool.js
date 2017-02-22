@@ -131,9 +131,21 @@ ve.ui.MWEditModeVisualTool.prototype.onSelect = function () {
  * @inheritdoc
  */
 ve.ui.MWEditModeVisualTool.prototype.onUpdateState = function () {
+	var isVisualModeNowAvailable = ve.init.target.isModeAvailable( 'visual' );
+
 	// Parent method
 	ve.ui.MWEditModeVisualTool.super.prototype.onUpdateState.apply( this, arguments );
 
-	this.setDisabled( !ve.init.target.isModeAvailable( 'visual' ) );
+	// Cached for performance
+	if ( this.isVisualModeAvailable !== isVisualModeNowAvailable ) {
+		this.isVisualModeAvailable = isVisualModeNowAvailable;
+
+		this.setDisabled( !isVisualModeNowAvailable );
+		this.setTitle( OO.ui.msg(
+			isVisualModeNowAvailable ?
+				'visualeditor-mweditmodeve-tool' :
+				'visualeditor-mweditmodeve-tool-unavailable'
+		) );
+	}
 };
 ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
