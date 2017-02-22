@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Khalid Mahmood"
+			"Khalid Mahmood",
+			"Abbas dhothar"
 		]
 	},
 	"tooltip-ca-ve-edit": "ایس صفے تے لکھو",
@@ -9,5 +10,6 @@
 	"visualeditor-ca-createsource": "مڈھ بناؤ",
 	"visualeditor-ca-editsource": "سورس وچ لکھو",
 	"visualeditor-ca-editsource-section": "سورس وچ لکھو",
-	"visualeditor-descriptionpagelink": "Project: ویول ایڈیٹر"
+	"visualeditor-descriptionpagelink": "Project: ویول ایڈیٹر",
+	"visualeditor-dialog-media-position-right": "سجے"
 }
