@@ -7,26 +7,34 @@
 
 .ve-init-mw-editSwitch {
 	float: right;
-	margin: 0;
 }
 
-.ve-init-mw-editSwitch .oo-ui-iconElement-icon {
-	opacity: 0.8;
+.ve-init-mw-editSwitch .oo-ui-toolbar-bar {
+	background: transparent;
+	box-shadow: none;
+	border: 0;
+}
+
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup {
+	height: 32px;
+	border: 0;
+	margin: 0;
+	border-radius: 0;
+}
+
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle {
+	height: 24px;
+}
+
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon,
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle .oo-ui-indicatorElement-indicator {
+	height: auto;
+}
+
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup .oo-ui-toolGroup-tools {
+	top: 32px;
 }
 
 .ve-init-mw-editSwitch .oo-ui-popupWidget-head {
 	font-weight: bold;
-}
-
-.ve-init-mw-editSwitch .oo-ui-popupWidget-body > :first-child {
-	margin-top: 0;
-}
-
-.ve-init-mw-editSwitch .oo-ui-popupWidget-body > :last-child {
-	margin-bottom: 1em;
-}
-
-.oo-ui-tool-name-editModeSource .ve-init-mw-editSwitch {
-	padding: 0.5em 1em 0;
-	line-height: 1.6;
 }

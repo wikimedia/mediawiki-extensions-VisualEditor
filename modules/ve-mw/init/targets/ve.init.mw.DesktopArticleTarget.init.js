@@ -962,59 +962,37 @@
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
 					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
-						var $content, windowManager, editingTabDialog, showAgainCheckbox, showAgainLayout, switchButton,
-							showPopup = uri.query.veswitched && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' );
+						var windowManager, editingTabDialog, switchToolbar, popup,
+							showPopup = !!uri.query.veswitched && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' ),
+							toolFactory = new OO.ui.ToolFactory(),
+							toolGroupFactory = new OO.ui.ToolGroupFactory();
 
-						if ( showPopup ) {
-							$content = $( '<p>' ).text( mw.msg( 'visualeditor-mweditmodeve-popup-body' ) );
+						toolFactory.register( mw.libs.ve.MWEditModeVisualTool );
+						toolFactory.register( mw.libs.ve.MWEditModeSourceTool );
+						switchToolbar = new OO.ui.Toolbar( toolFactory, toolGroupFactory, {
+							classes: [ 've-init-mw-editSwitch' ]
+						} );
 
-							if ( !mw.user.isAnon() ) {
-								showAgainCheckbox = new OO.ui.CheckboxInputWidget()
-									.on( 'change', function ( value ) {
-										var configValue = value ? '1' : '';
-										new mw.Api().saveOption( 'visualeditor-hidesourceswitchpopup', configValue );
-										mw.user.options.set( 'visualeditor-hidesourceswitchpopup', configValue );
-									} );
-
-								showAgainLayout = new OO.ui.FieldLayout( showAgainCheckbox, {
-									align: 'inline',
-									label: mw.msg( 'visualeditor-mweditmodeve-showagain' )
-								} );
-								$content = $content.add( showAgainLayout.$element );
+						switchToolbar.on( 'switch', function ( mode ) {
+							if ( mode === 'visual' ) {
+								init.activateVe( 'visual' );
 							}
+						} );
 
-							switchButton = new OO.ui.PopupButtonWidget( {
-								framed: false,
-								icon: 'edit',
-								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-								classes: [ 've-init-mw-editSwitch' ],
-								popup: {
-									label: mw.msg( 'visualeditor-mweditmodeve-popup-title' ),
-									$content: $content,
-									padded: true,
-									head: true
-								}
-							} );
+						switchToolbar.setup( [ {
+							type: 'list',
+							icon: 'wikiText',
+							title: mw.msg( 'visualeditor-mweditmode-tooltip' ),
+							include: [ 'editModeVisual', 'editModeSource' ]
+						} ] );
 
-							// HACK: Disable the toggle behaviour
-							switchButton.disconnect( switchButton, { click: 'onAction' } );
-						} else {
-							switchButton = new OO.ui.ButtonWidget( {
-								framed: false,
-								icon: 'edit',
-								title: mw.msg( 'visualeditor-mweditmodeve-tool' ),
-								classes: [ 've-init-mw-editSwitch' ]
-							} );
-						}
+						popup = new mw.libs.ve.SwitchPopupWidget( 'source' );
 
-						switchButton.on( 'click', init.activateVe.bind( this, 'visual' ) );
+						switchToolbar.tools.editModeVisual.toolGroup.$element.append( popup.$element );
+						switchToolbar.emit( 'updateState' );
 
-						$( '.wikiEditor-ui-toolbar' ).prepend( switchButton.$element );
-
-						if ( showPopup ) {
-							// Show the popup after appending
-							switchButton.getPopup().toggle( true );
-						}
+						$( '.wikiEditor-ui-toolbar' ).prepend( switchToolbar.$element );
+						popup.toggle( showPopup );
 
 						// Duplicate of this code in ve.init.mw.DesktopArticleTarget.js
 						if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {

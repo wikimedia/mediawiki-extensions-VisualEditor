@@ -318,9 +318,7 @@
 				"tooltip-ca-edit",
 				"tooltip-ca-editsource",
 				"tooltip-ca-ve-edit",
-				"visualeditor-ca-editsource-section",
-				"visualeditor-mweditmodeve-tool",
-				"visualeditor-mweditmodeve-tool-unavailable"
+				"visualeditor-ca-editsource-section"
 			],
 			"position": "top"
 		},
@@ -1117,9 +1115,14 @@
 		"ext.visualEditor.switching": {
 			"scripts": [
 				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js",
-				"modules/ve-mw/init/ve.init.MWEditingTabDialog.js"
+				"modules/ve-mw/init/ve.init.MWVESwitchPopupWidget.js",
+				"modules/ve-mw/init/ve.init.MWEditingTabDialog.js",
+				"modules/ve-mw/init/ve.init.MWEditModeTool.js"
 			],
-			"styles": "modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog.css",
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog.css",
+				"modules/ve-mw/init/styles/ve.init.MWVESwitchPopupWidget.css"
+			],
 			"skinStyles": {
 				"vector": [
 					"modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog-vector.css"
@@ -1131,12 +1134,16 @@
 			"dependencies": [
 				"oojs",
 				"oojs-ui",
-				"oojs-ui.styles.icons-editing-core"
+				"oojs-ui.styles.icons-editing-core",
+				"oojs-ui.styles.icons-editing-advanced"
 			],
 			"messages": [
 				"visualeditor-editingtabdialog-body",
 				"visualeditor-editingtabdialog-ok",
 				"visualeditor-editingtabdialog-title",
+				"visualeditor-mweditmode-tooltip",
+				"visualeditor-mweditmodesource-tool",
+				"visualeditor-mweditmodesource-tool-unavailable",
 				"visualeditor-mweditmodesource-warning-cancel",
 				"visualeditor-mweditmodesource-warning-switch",
 				"visualeditor-mweditmodesource-warning-switch-discard",
@@ -1262,7 +1269,6 @@
 				"visualeditor-help-title",
 				"visualeditor-mweditmodesource-progress",
 				"visualeditor-mweditmodesource-title",
-				"visualeditor-mweditmodesource-tool",
 				"visualeditor-mweditmodesource-warning",
 				"visualeditor-mweditmodesource-warning-cancel",
 				"visualeditor-mweditmodesource-warning-switch",

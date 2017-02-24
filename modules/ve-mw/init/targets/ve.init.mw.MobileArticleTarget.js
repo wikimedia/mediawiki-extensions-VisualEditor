@@ -152,10 +152,9 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 		{ include: [ 'back' ] },
 		{
 			type: 'list',
-			icon: 'advanced',
-			indicator: 'down',
-			title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
-			include: [ 'editModeSource' ]
+			icon: 'wikiText',
+			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+			include: [ 'editModeVisual', 'editModeSource' ]
 		}
 	], this.getSurface() );
 
