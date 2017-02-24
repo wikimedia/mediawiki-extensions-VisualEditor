@@ -319,7 +319,8 @@
 				"tooltip-ca-editsource",
 				"tooltip-ca-ve-edit",
 				"visualeditor-ca-editsource-section",
-				"visualeditor-mweditmodeve-tool"
+				"visualeditor-mweditmodeve-tool",
+				"visualeditor-mweditmodeve-tool-unavailable"
 			],
 			"position": "top"
 		},
@@ -1144,6 +1145,7 @@
 				"visualeditor-mweditmodeve-showagain",
 				"visualeditor-mweditmodeve-title",
 				"visualeditor-mweditmodeve-tool",
+				"visualeditor-mweditmodeve-tool-unavailable",
 				"visualeditor-mweditmodeve-warning",
 				"visualeditor-mweditmodewt-popup-body",
 				"visualeditor-mweditmodewt-popup-title",

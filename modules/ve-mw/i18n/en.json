@@ -285,6 +285,7 @@
 	"visualeditor-mweditmodeve-showagain": "Don't show this message again",
 	"visualeditor-mweditmodeve-title": "Switch to visual editing?",
 	"visualeditor-mweditmodeve-tool": "Switch to visual editing",
+	"visualeditor-mweditmodeve-tool-unavailable": "Visual editing is not available here",
 	"visualeditor-mweditmodeve-warning": "You are switching to visual editing.\nDo you want to continue?",
 	"visualeditor-mweditmodewt-popup-body": "You can switch back to source editing at any time by clicking on this icon.",
 	"visualeditor-mweditmodewt-popup-title": "You have switched to visual editing",
