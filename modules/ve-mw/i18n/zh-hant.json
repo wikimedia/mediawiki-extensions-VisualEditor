@@ -24,7 +24,8 @@
 			"578985s",
 			"A2093064",
 			"Kanashimi",
-			"Jdforrester"
+			"Jdforrester",
+			"烈羽"
 		]
 	},
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
@@ -185,6 +186,7 @@
 	"visualeditor-dialog-meta-settings-toc-label": "顯示目錄",
 	"visualeditor-dialog-meta-templatesused-noresults": "找不到模板。",
 	"visualeditor-dialog-meta-title": "選項",
+	"visualeditor-dialog-table-collapsible": "可摺疊",
 	"visualeditor-dialog-table-sortable": "可排序",
 	"visualeditor-dialog-table-wikitable": "風格化 (wikitable)",
 	"visualeditor-dialog-template-title": "模板",
@@ -277,6 +279,7 @@
 	"visualeditor-mweditmodeve-showagain": "不要再顯示此訊息",
 	"visualeditor-mweditmodeve-title": "切換至視覺編輯？",
 	"visualeditor-mweditmodeve-tool": "切換至視覺編輯",
+	"visualeditor-mweditmodeve-tool-unavailable": "視覺化編輯器無法在此使用",
 	"visualeditor-mweditmodeve-warning": "您正要切換至視覺化編輯。\n您是否要繼續？",
 	"visualeditor-mweditmodewt-popup-body": "您可於任何時間點選此圖示切換回原始碼編輯。",
 	"visualeditor-mweditmodewt-popup-title": "您已切換至視覺編輯",
@@ -326,6 +329,7 @@
 	"visualeditor-preference-tabs-remember-last": "記住我最後使用的編輯器",
 	"visualeditor-recreate": "此頁面在您編輯的這段期間已被刪除，請點選 \"$1\" 重新建立頁面。",
 	"visualeditor-redirect-description": "重新導向至 $1",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以點擊$1來儲存您的編輯。",
 	"visualeditor-savedialog-error-badtoken": "工作階段失效，我們無法儲存您的編輯。",
 	"visualeditor-savedialog-identify-anon": "您是否要以匿名使用者的身份來儲存頁面？ 您的 IP 位址將記錄於本頁面的編輯歷史中。",
 	"visualeditor-savedialog-identify-trylogin": "您已登出，請在其他頁籤登入後再試一次。",

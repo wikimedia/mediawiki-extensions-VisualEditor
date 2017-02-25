@@ -291,6 +291,7 @@
 	"visualeditor-mweditmodeve-showagain": "不要再次显示这条消息",
 	"visualeditor-mweditmodeve-title": "切换为可视化编辑么？",
 	"visualeditor-mweditmodeve-tool": "切换为可视化编辑",
+	"visualeditor-mweditmodeve-tool-unavailable": "可视化编辑在此不可用",
 	"visualeditor-mweditmodeve-warning": "您正在切换至可视化编辑。您是否希望继续？",
 	"visualeditor-mweditmodewt-popup-body": "您可以随时通过点击该图标切换回源代码编辑。",
 	"visualeditor-mweditmodewt-popup-title": "您已切换至可视化编辑",

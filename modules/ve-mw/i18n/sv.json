@@ -280,6 +280,7 @@
 	"visualeditor-mweditmodeve-showagain": "Visa inte det här meddelandet igen",
 	"visualeditor-mweditmodeve-title": "Växla till visuell redigering?",
 	"visualeditor-mweditmodeve-tool": "Växla till visuell redigering",
+	"visualeditor-mweditmodeve-tool-unavailable": "Visuell redigering är inte tillgänglig här",
 	"visualeditor-mweditmodeve-warning": "Du växlar till visuell redigering.\nVill du fortsätta?",
 	"visualeditor-mweditmodewt-popup-body": "Du kan växla tillbaka till källredigering när som helst genom att klicka på denna ikon.",
 	"visualeditor-mweditmodewt-popup-title": "Du har växlat till visuell redigering",

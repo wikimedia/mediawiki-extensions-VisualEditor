@@ -206,7 +206,7 @@
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} odsad pamti koji uređivač preferirate. Možete promijeniti način uređivanja u bilo kojem trenutku, a svoj preferirani način možete promijeniti u postavkama.",
 	"visualeditor-editingtabdialog-ok": "Koristi uređivač koji sam koristio/-la prilikom posljednjeg uređivanja",
 	"visualeditor-editingtabdialog-title": "Kartice za uređivanje",
-	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|napomena|napomene}}",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|napomena|napomene|napomena}}",
 	"visualeditor-editnotices-tooltip": "Napomene",
 	"visualeditor-editsummary": "Opišite Vaše izmjene",
 	"visualeditor-editsummary-bytes-remaining": "Preostalo bajtova",

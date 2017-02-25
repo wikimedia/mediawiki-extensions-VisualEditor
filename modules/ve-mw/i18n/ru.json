@@ -37,7 +37,8 @@
 			"Irus",
 			"Kareyac",
 			"Julia kotlyarker",
-			"INS Pirat"
+			"INS Pirat",
+			"Redredsonia"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
@@ -287,6 +288,7 @@
 	"visualeditor-mweditmodeve-showagain": "Не показывать это сообщение повторно",
 	"visualeditor-mweditmodeve-title": "Перейти к визуальному редактированию?",
 	"visualeditor-mweditmodeve-tool": "Перейти к визуальному редактированию",
+	"visualeditor-mweditmodeve-tool-unavailable": "Визуальное редактирование недоступно",
 	"visualeditor-mweditmodeve-warning": "Вы переходите к визуальному редактированию.\nВы хотите продолжить?",
 	"visualeditor-mweditmodewt-popup-body": "В любое время вы можете переключиться обратно в редактирование исходного текста, щёлкнув по этому значку.",
 	"visualeditor-mweditmodewt-popup-title": "Вы переключились в режим визуального редактирования",
