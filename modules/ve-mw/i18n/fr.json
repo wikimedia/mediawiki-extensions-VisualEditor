@@ -312,6 +312,7 @@
 	"visualeditor-mweditmodeve-showagain": "Ne plus afficher ce message",
 	"visualeditor-mweditmodeve-title": "Basculer vers l’éditeur visuel ?",
 	"visualeditor-mweditmodeve-tool": "Basculer vers l’éditeur visuel",
+	"visualeditor-mweditmodeve-tool-unavailable": "L'édition visuelle n'est pas possible ici",
 	"visualeditor-mweditmodeve-warning": "Vous êtes sur le point de basculer vers l’éditeur visuel.\nVoulez-vous continuer ?",
 	"visualeditor-mweditmodewt-popup-body": "Vous pouvez revenir à l’édition de la source à tout moment en cliquant sur cette icône.",
 	"visualeditor-mweditmodewt-popup-title": "Vous êtes passé à l'édition visuelle",

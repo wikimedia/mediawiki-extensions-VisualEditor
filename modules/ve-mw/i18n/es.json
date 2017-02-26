@@ -289,6 +289,7 @@
 	"visualeditor-mweditmodeve-showagain": "No volver a mostrar este mensaje",
 	"visualeditor-mweditmodeve-title": "¿Cambiar al editor visual?",
 	"visualeditor-mweditmodeve-tool": "Cambiar a la edición visual",
+	"visualeditor-mweditmodeve-tool-unavailable": "La edición visual no está disponible aquí",
 	"visualeditor-mweditmodeve-warning": "Estás por cambiar a la edición visual.\n¿Quieres continuar?",
 	"visualeditor-mweditmodewt-popup-body": "Puedes volver a la edición de código en cualquier momento haciendo clic en este icono.",
 	"visualeditor-mweditmodewt-popup-title": "Has cambiado a la edición visual",

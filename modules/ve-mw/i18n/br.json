@@ -163,7 +163,7 @@
 	"visualeditor-dialogbutton-template-tooltip": "Patrom",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Treuzklozadur",
 	"visualeditor-donebutton-tooltip": "Echuet kemmañ",
-	"visualeditor-editnotices-tool": "$1 kemenn{{PLURAL:$1|}}",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|c'hemenn|kemenn}}",
 	"visualeditor-editnotices-tooltip": "Kemmañ an alioù",
 	"visualeditor-editsummary": "Deskrivit ar pezh hoc'h eus cheñchet",
 	"visualeditor-educationpopup-dismiss": "Mat eo, deomp dezhi",

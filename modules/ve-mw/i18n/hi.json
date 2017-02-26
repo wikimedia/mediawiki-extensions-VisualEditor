@@ -16,7 +16,8 @@
 			"Sahilrathod",
 			"Hindustanilanguage",
 			"Sfic",
-			"Jayprakash12345"
+			"Jayprakash12345",
+			"Shyamal"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid सेवा से एक पेज के लिए HTML5 वापस करता है।",
@@ -268,6 +269,7 @@
 	"visualeditor-mweditmodeve-showagain": "इस संदेश को दुबारा न दिखाएँ",
 	"visualeditor-mweditmodeve-title": "यथादृश्य सम्पादन करें?",
 	"visualeditor-mweditmodeve-tool": "यथादृश्य सम्पादन करें",
+	"visualeditor-mweditmodeve-tool-unavailable": "प्रकट संपादक यहां उपलब्ध नहीं है",
 	"visualeditor-mweditmodeve-warning": "आप यथादृश्य सम्पादन में जाने लगे हैं।\nक्या आप जारी रखना चाहते हैं?",
 	"visualeditor-mweditmodewt-popup-body": "आप इस आइकन पर क्लिक करके किसी भी समय स्रोत संपादन के लिए वापस स्विच कर सकते हैं।",
 	"visualeditor-mweditmodewt-popup-title": "आपको दृश्य संपादन के लिए बदल दिया गया है",
