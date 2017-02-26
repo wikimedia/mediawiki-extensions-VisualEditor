@@ -564,6 +564,7 @@ class VisualEditorHooks {
 		$preferences['visualeditor-hidesourceswitchpopup'] = $api;
 		$preferences['visualeditor-hidevisualswitchpopup'] = $api;
 		$preferences['visualeditor-hideusered'] = $api;
+		$preferences['visualeditor-findAndReplace-diacritic'] = $api;
 		$preferences['visualeditor-findAndReplace-findText'] = $api;
 		$preferences['visualeditor-findAndReplace-replaceText'] = $api;
 		$preferences['visualeditor-findAndReplace-regex'] = $api;

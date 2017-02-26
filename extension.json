@@ -960,6 +960,8 @@
 				"visualeditor-dialog-table-title",
 				"visualeditor-dimensionswidget-px",
 				"visualeditor-dimensionswidget-times",
+				"visualeditor-find-and-replace-diacritic",
+				"visualeditor-find-and-replace-diacritic-unavailable",
 				"visualeditor-find-and-replace-done",
 				"visualeditor-find-and-replace-find-text",
 				"visualeditor-find-and-replace-invalid-regex",
