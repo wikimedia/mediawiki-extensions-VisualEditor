@@ -141,13 +141,10 @@
 					// and mobile are already added by TargetLoader)
 					// Note: it's safe to use .forEach() (ES5) here, because this code will
 					// never be called if the browser doesn't support ES5
-					[
-						'ext.visualEditor.desktopArticleTarget',
-						'ext.visualEditor.mwimage',
-						'ext.visualEditor.mwmeta'
-					].forEach( mw.libs.ve.targetLoader.addPlugin );
-					// Add requested plugins
-					plugins.forEach( mw.libs.ve.targetLoader.addPlugin );
+					[ 'ext.visualEditor.desktopArticleTarget' ]
+						// Add requested plugins
+						.concat( plugins )
+						.forEach( mw.libs.ve.targetLoader.addPlugin );
 					plugins = [];
 					return mw.libs.ve.targetLoader.loadModules();
 				} )

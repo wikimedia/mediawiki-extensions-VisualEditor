@@ -380,6 +380,7 @@
 				"ext.visualEditor.core.desktop",
 				"ext.visualEditor.articleTarget",
 				"ext.visualEditor.desktopTarget",
+				"ext.visualEditor.mwextensions.desktop",
 				"jquery.cookie",
 				"mediawiki.jqueryMsg",
 				"mediawiki.util"
@@ -405,17 +406,21 @@
 		},
 		"ext.visualEditor.mobileArticleTarget": {
 			"scripts": [
-				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js"
+				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js",
+				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.base",
-				"ext.visualEditor.mediawiki.mobile",
+				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.mobile",
 				"ext.visualEditor.articleTarget",
-				"ext.visualEditor.mwimage.core"
+				"ext.visualEditor.mwextensions",
+				"ext.visualEditor.mwimage.core",
+				"ext.visualEditor.mwlink"
 			],
 			"messages" : [
 				"visualeditor-backbutton-tooltip",
@@ -514,7 +519,8 @@
 			"dependencies": [
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core",
-				"ext.visualEditor.mwcore"
+				"ext.visualEditor.mwcore",
+				"ext.visualEditor.mwextensions"
 			],
 			"messages": [
 				"accesskey-diff",
@@ -528,21 +534,6 @@
 			],
 			"targets": [
 				"desktop",
-				"mobile"
-			]
-		},
-		"ext.visualEditor.mediawiki.mobile": {
-			"scripts": [
-				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
-			],
-			"dependencies": [
-				"ext.visualEditor.mediawiki",
-				"ext.visualEditor.mwcore",
-				"ext.visualEditor.mwlink",
-				"ext.visualEditor.core.mobile"
-			],
-			"targets": [
 				"mobile"
 			]
 		},
@@ -1307,6 +1298,29 @@
 			"targets": [
 				"desktop",
 				"mobile"
+			]
+		},
+		"ext.visualEditor.mwextensions": {
+			"dependencies": [
+				"ext.visualEditor.mwlink",
+				"ext.visualEditor.mwformatting",
+				"ext.visualEditor.data",
+				"ext.visualEditor.mwtransclusion",
+				"ext.visualEditor.mwgallery",
+				"ext.visualEditor.mwalienextension",
+				"ext.visualEditor.language",
+				"ext.visualEditor.icons"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.mwextensions.desktop": {
+			"dependencies": [
+				"ext.visualEditor.mwextensions",
+				"ext.visualEditor.mwimage",
+				"ext.visualEditor.mwmeta"
 			]
 		},
 		"ext.visualEditor.mwformatting": {

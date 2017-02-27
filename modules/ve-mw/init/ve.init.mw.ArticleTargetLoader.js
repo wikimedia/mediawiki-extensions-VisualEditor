@@ -19,17 +19,7 @@
 		uri = new mw.Uri(),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
-		modules = [
-			'ext.visualEditor.mwcore',
-			'ext.visualEditor.mwlink',
-			'ext.visualEditor.mwformatting',
-			'ext.visualEditor.data',
-			'ext.visualEditor.mwtransclusion',
-			'ext.visualEditor.mwgallery',
-			'ext.visualEditor.mwalienextension',
-			'ext.visualEditor.language',
-			'ext.visualEditor.icons'
-		]
+		modules = [ 'ext.visualEditor.articleTarget' ]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
