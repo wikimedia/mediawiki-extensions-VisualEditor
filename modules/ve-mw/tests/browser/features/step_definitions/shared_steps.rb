@@ -24,7 +24,7 @@ end
 Given(/^I make the text "(.*?)" be selected$/) do |select_text|
   on(VisualEditorPage) do |page|
     page.content_element.when_present.click
-    require 'watir-webdriver/extensions/select_text'
+    require 'watir/extensions/select_text'
     page.content_element.when_present.select_text select_text
   end
 end
