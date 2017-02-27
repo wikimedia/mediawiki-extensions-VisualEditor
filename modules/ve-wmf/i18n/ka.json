@@ -10,13 +10,16 @@
 			"Pras",
 			"Amire80",
 			"아라",
-			"Otogi"
+			"Otogi",
+			"OpusDEI"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტირება]]",
 	"tag-visualeditor-description": "რედაქტირება შესრულებულია [[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორის]] საშუალებით",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორი: შემოწმება]]",
 	"tag-visualeditor-needcheck-description": "რედაქტირება შესრულებულია [[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორის]] საშუალებით, რომელშიც სისტემამ აღმოაჩინა, შესაძლოა უნებლიეთ შეცვლილი ვიკი-ტექსტი.",
+	"tag-visualeditor-wikitext": "წყაროს რედაქტორი 2017",
+	"tag-visualeditor-wikitext-description": "რედაქტირება გაკეთებულია ვიკიტექსტის რედაქტორი 2017-ის გამოყენებით",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ვიზუალური რედაქტორი: გადართულია]]",
 	"tag-visualeditor-switched-description": "მომხმარებელმა დაიწყო ვიზუალური რედაქტორის გამოყენება, ხოლო შემდეგ ვიკიტექსტის რედაქტორით შეცვალა.",
 	"visualeditor-feedback-link": "Project:ვიზუალური რედაქტორი/შეფასება",

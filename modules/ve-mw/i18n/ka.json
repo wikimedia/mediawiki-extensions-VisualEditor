@@ -11,7 +11,8 @@
 			"Tokoko",
 			"Otogi",
 			"Arystanbek",
-			"Silovan"
+			"Silovan",
+			"OpusDEI"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5-ის დაბრუნება გვერდისთვის parsoid სერვისიდან.",
@@ -172,6 +173,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "მუდამ",
 	"visualeditor-dialog-meta-settings-toc-help": "თქვენ შეგიძლიათ ისე გააკეთოთ, რომ სარჩევი სადაც ნაჩვენებია ყველა ქვესათაური მაშინაც კი გამოჩნდეს თუ იგი სამზე ნაკლებ ქვესათაურს შეიცავს ან საერთოდ არ გამოჩნდეს. საწყისად სარჩევი ჩნდება როდესაც სულ მცირე სამი ქვესათაური არსებობს.",
 	"visualeditor-dialog-meta-settings-toc-label": "აჩვენე სექციების სია",
+	"visualeditor-dialog-meta-templatesused-noresults": "საბლონები ვერ მოიძებნა.",
 	"visualeditor-dialog-meta-title": "პარამეტრები",
 	"visualeditor-dialog-table-sortable": "სორტირებადი",
 	"visualeditor-dialog-table-wikitable": "სტილიზებური (ვიკიმაგიდა)",
