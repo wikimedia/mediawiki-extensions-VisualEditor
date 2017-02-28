@@ -701,7 +701,7 @@ class VisualEditorHooks {
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
 			'signatureNamespaces' => array_values(
-				array_filter( $availableNamespaces, 'MWNamespace::wantSignatures' )
+				array_filter( MWNamespace::getValidNamespaces(), 'MWNamespace::wantSignatures' )
 			),
 			'pluginModules' => array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
