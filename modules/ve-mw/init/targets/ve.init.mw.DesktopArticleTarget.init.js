@@ -970,7 +970,7 @@
 							classes: [ 've-init-mw-editSwitch' ]
 						} );
 
-						switchToolbar.on( 'switch', function ( mode ) {
+						switchToolbar.on( 'switchEditor', function ( mode ) {
 							if ( mode === 'visual' ) {
 								init.activateVe( 'visual' );
 							}

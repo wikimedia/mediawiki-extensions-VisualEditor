@@ -49,7 +49,7 @@ mw.libs.ve.MWEditModeTool.static.unavailableTooltip = null;
  * @abstract
  */
 mw.libs.ve.MWEditModeTool.prototype.switch = function () {
-	this.toolbar.emit( 'switch', this.constructor.static.editMode );
+	this.toolbar.emit( 'switchEditor', this.constructor.static.editMode );
 };
 
 /**
