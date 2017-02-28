@@ -112,7 +112,12 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 		include: [ 'meta', 'categories', 'settings', 'advancedSettings', 'languages', 'templatesUsed', 'findAndReplace' ]
 	},
-	{ include: [ 'editModeSource' ] }
+	{
+		type: 'list',
+		icon: 'wikiText',
+		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+		include: [ 'editModeVisual', 'editModeSource' ]
+	}
 ];
 
 /**
@@ -240,7 +245,7 @@ ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState )
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
-	var toolbar, actionGroups,
+	var toolbar,
 		wasSetup = !!this.toolbar,
 		target = this;
 
@@ -278,14 +283,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 				ve.track( 'trace.activate.exit' );
 			}
 		} );
-	}
-
-	if ( surface.getMode() === 'source' ) {
-		// HACK: Replace source button with VE button. This should be via the registry,
-		// or we should have a toggle tool.
-		actionGroups = ve.copy( this.constructor.static.actionGroups );
-		actionGroups[ 2 ].include[ 0 ] = 'editModeVisual';
-		this.getActions().setup( actionGroups, surface );
 	}
 };
 
@@ -1596,13 +1593,15 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 	if ( this.welcomeDialogPromise ) {
 		this.welcomeDialogPromise
 			.always( function () {
-				var noticesTool;
+				var noticesTool, popup;
 				// Pop out the notices when the welcome dialog is closed
 				if (
 					target.switched &&
 					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
 				) {
-					target.actionsToolbar.tools.editModeSource.getPopup().toggle( true );
+					popup = new mw.libs.ve.SwitchPopupWidget( 'visual' );
+					target.actionsToolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
+					popup.toggle( true );
 				} else {
 					noticesTool = target.actionsToolbar.tools.notices;
 					noticesTool.setNotices( target.getEditNotices() );

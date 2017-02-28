@@ -5,6 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-mwPopupTool {
+	white-space: normal;
+}
+
 .ve-ui-mwPopupTool .oo-ui-popupWidget-head {
 	font-weight: bold;
 }
