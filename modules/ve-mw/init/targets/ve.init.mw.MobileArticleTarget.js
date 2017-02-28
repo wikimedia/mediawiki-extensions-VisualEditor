@@ -48,7 +48,6 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		classes: [ 've-test-toolbar-style' ],
 		type: 'list',
 		icon: 'textStyle',
-		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
 		forceExpand: [ 'bold', 'italic', 'clear' ],
