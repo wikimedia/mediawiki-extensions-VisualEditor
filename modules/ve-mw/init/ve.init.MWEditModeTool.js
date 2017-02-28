@@ -139,7 +139,7 @@ mw.libs.ve.MWEditModeVisualTool = function VeUiMWEditModeVisualTool() {
 OO.inheritClass( mw.libs.ve.MWEditModeVisualTool, mw.libs.ve.MWEditModeTool );
 mw.libs.ve.MWEditModeVisualTool.static.editMode = 'visual';
 mw.libs.ve.MWEditModeVisualTool.static.name = 'editModeVisual';
-mw.libs.ve.MWEditModeVisualTool.static.icon = 'edit';
+mw.libs.ve.MWEditModeVisualTool.static.icon = 'eye';
 mw.libs.ve.MWEditModeVisualTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool' );
 mw.libs.ve.MWEditModeVisualTool.static.unavailableTooltip =

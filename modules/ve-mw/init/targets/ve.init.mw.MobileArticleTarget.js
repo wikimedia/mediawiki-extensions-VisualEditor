@@ -155,7 +155,7 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 		{ include: [ 'back' ] },
 		{
 			type: 'list',
-			icon: 'wikiText',
+			icon: 'edit',
 			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
 			include: [ surface.getMode() === 'visual' ? 'editModeSource' : 'editModeVisual' ]
 		}

@@ -114,7 +114,7 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 	},
 	{
 		type: 'list',
-		icon: 'wikiText',
+		icon: 'edit',
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
 		include: [ 'editModeVisual', 'editModeSource' ]
 	}

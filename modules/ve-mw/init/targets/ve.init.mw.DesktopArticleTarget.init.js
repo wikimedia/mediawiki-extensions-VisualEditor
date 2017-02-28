@@ -978,7 +978,7 @@
 
 						switchToolbar.setup( [ {
 							type: 'list',
-							icon: 'wikiText',
+							icon: 'edit',
 							title: mw.msg( 'visualeditor-mweditmode-tooltip' ),
 							include: [ 'editModeVisual', 'editModeSource' ]
 						} ] );

@@ -1126,7 +1126,8 @@
 				"oojs",
 				"oojs-ui",
 				"oojs-ui.styles.icons-editing-core",
-				"oojs-ui.styles.icons-editing-advanced"
+				"oojs-ui.styles.icons-editing-advanced",
+				"oojs-ui.styles.icons-alerts"
 			],
 			"messages": [
 				"visualeditor-editingtabdialog-body",
