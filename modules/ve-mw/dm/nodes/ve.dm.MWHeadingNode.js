@@ -28,6 +28,7 @@ OO.inheritClass( ve.dm.MWHeadingNode, ve.dm.HeadingNode );
 
 ve.dm.MWHeadingNode.static.name = 'mwHeading';
 
+// Headings in wikitext only work in some contexts, they're impossible e.g. in list items
 ve.dm.MWHeadingNode.static.suggestedParentNodeTypes = [ 'document', 'tableCell' ];
 
 ve.dm.MWHeadingNode.static.handlesOwnChildren = true;
