@@ -244,6 +244,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		importRules: this.constructor.static.getImportRules()
 	} );
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
+		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		icon: 'parameter',
@@ -253,6 +254,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Alt text
 	altTextFieldset = new OO.ui.FieldsetLayout( {
+		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' ),
 		icon: 'parameter'
@@ -273,12 +275,14 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget();
 	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
+		$overlay: this.$overlay,
 		align: 'inline',
 		label: ve.msg( 'visualeditor-dialog-media-position-checkbox' ),
 		help: ve.msg( 'visualeditor-dialog-media-position-checkbox-help' )
 	} );
 
 	positionFieldset = new OO.ui.FieldsetLayout( {
+		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-position-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-position-section-help' ),
 		icon: 'parameter'
@@ -292,6 +296,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Type
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
+		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-type-section-help' ),
 		icon: 'parameter'
@@ -337,6 +342,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Size
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
+		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-size-section' ),
 		icon: 'parameter',
 		help: ve.msg( 'visualeditor-dialog-media-size-section-help' )
