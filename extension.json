@@ -508,7 +508,8 @@
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
-				"modules/ve-mw/ui/actions/ve.ui.MWSaveDialogAction.js"
+				"modules/ve-mw/ui/actions/ve.ui.MWSaveDialogAction.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css",
@@ -1187,7 +1188,6 @@
 				"modules/ve-mw/ui/elements/ve.ui.MWExpandableErrorElement.js",
 				"modules/ve-mw/ui/elements/ve.ui.MWPreviewElement.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",
