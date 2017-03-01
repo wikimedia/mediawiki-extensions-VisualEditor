@@ -5,18 +5,19 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-init-mw-desktopArticleTarget-toolbar,
-.ve-init-mw-desktopArticleTarget > .ve-ui-debugBar,
+/* All debug bars (includes target widgets) */
+.ve-ui-debugBar {
+	border-top: 1px solid #ccc;
+	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
+}
+
+.ve-ui-debugBar ol {
+	margin-left: 0;
+}
+
 .ve-ui-overlay-global {
 	/* Enforce different font-size for all UI elements of VisualEditor */
 	font-size: 0.8em;
-}
-
-/* Fix font styles for overlays inside mw-body-content */
-.mw-body-content .ve-ui-overlay,
-.mw-body-content .ve-ui-debugBar {
-	font-size: 0.914286em; /* 0.8/0.875 */
-	line-height: normal;
 }
 
 /* Slug animation needs more specific rules and skin-specific target margins */
@@ -37,9 +38,14 @@
 	opacity: 0.5;
 }
 
-.ve-ui-init-desktopArticleTarget-sectionTitle {
-	font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
-	line-height: 1.3;
-	font-size: 1.5em;
-	border-bottom: 1px solid #aaa;
+.ve-ui-overlay .mw-body-content {
+	/* Fix font-size for surfaces inside UI overlays */
+	font-size: 1.09375em; /* 0.875/0.8 */
+}
+
+/* Fix font styles for overlays inside mw-body-content */
+.mw-body-content .ve-ui-overlay,
+.mw-body-content .ve-ui-debugBar {
+	font-size: 0.914286em; /* 0.8/0.875 */
+	line-height: normal;
 }

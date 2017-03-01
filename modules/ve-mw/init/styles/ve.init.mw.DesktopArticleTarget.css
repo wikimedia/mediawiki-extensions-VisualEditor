@@ -51,10 +51,6 @@
 	text-decoration: none;
 }
 
-.ve-init-target-source .catlinks {
-	display: none;
-}
-
 /*!
  * Increase z-index of surface container so it appears above the debug bar
  */
