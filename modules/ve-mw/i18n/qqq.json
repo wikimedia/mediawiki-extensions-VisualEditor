@@ -289,7 +289,7 @@
 	"visualeditor-mweditmodesource-progress": "Title of progress bar shown while switching to source mode.",
 	"visualeditor-mweditmodesource-title": "Title of dialog to confirm switching to source mode.",
 	"visualeditor-mweditmodesource-tool": "Label for tool that changes edit mode to source editing.",
-	"visualeditor-mweditmodesource-tool-unavailable": "Label for tool that changes edit mode to source editing when it is not available.",
+	"visualeditor-mweditmodesource-tool-unavailable": "'''Please translate \"Source\" as meaning \"Source codes\", not source of references.''' Label for tool that changes edit mode to source editing when it is not available.",
 	"visualeditor-mweditmodesource-warning": "Warning message show before changing edit mode to source editing. It may allow the user to keep the changes using the message {{msg-mw|Visualeditor-mweditmodesource-warning-switch}} or cancel.",
 	"visualeditor-mweditmodesource-warning-cancel": "Label for the button on the confirmation dialog for switching to source editing to cancel and return to editing.\n{{Identical|Cancel}}",
 	"visualeditor-mweditmodesource-warning-switch": "Label for the button on the confirmation dialog for switching to source editing to continue and switch editors.\n{{Identical|Switch}}",
