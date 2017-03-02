@@ -317,6 +317,8 @@
 	"visualeditor-mwgallerydialog-title": "Gallery",
 	"visualeditor-mwgallerydialog-widths-field-label": "Image width",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Default width: $1 px",
+	"visualeditor-mwpredialog-title": "Preformatted plain text",
+	"visualeditor-mwpredialog-convert": "Allow text styling",
 	"visualeditor-mwsignature-tool": "Your signature",
 	"visualeditor-pagemenu-tooltip": "Page options",
 	"visualeditor-pagetranslationwarning": "You are editing a translatable page. Editing these in this editor is not yet officially supported.",

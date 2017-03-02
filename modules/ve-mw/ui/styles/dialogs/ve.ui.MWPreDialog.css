@@ -1,0 +1,19 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWPreDialog styles.
+ *
+ * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwPreDialog .oo-ui-textInputWidget {
+	width: 100%;
+	max-width: none;
+	/* Don't allow the widget to force the dialog to have scrollbars */
+	height: 100%;
+	/* Specify a valid second value to fix size in Chrome/FF */
+	font-family: monospace, 'Courier';
+}
+
+.ve-ui-mwPreDialog .oo-ui-textInputWidget textarea {
+	max-height: 100%;
+}
