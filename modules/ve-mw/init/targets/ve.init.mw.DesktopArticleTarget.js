@@ -1485,7 +1485,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		// Otherwise, put it on the editsection-visualeditor links
 		$veSectionLinks = $content.find( 'a.mw-editsection-visualeditor' );
 	}
-	$veSectionLinks.on( 'click', mw.libs.ve.onEditSectionLinkClick );
+	$veSectionLinks.on( 'click', mw.libs.ve.onEditSectionLinkClick.bind( mw.libs.ve, 'visual' ) );
 
 	mw.hook( 'wikipage.content' ).fire( this.$editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
