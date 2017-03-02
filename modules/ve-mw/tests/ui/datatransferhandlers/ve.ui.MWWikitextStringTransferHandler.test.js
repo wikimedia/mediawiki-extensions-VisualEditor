@@ -20,7 +20,7 @@ function runWikitextStringHandlerTest( assert, server, string, mimeType, expecte
 	var handler, i, j, name,
 		done = assert.async(),
 		item = ve.ui.DataTransferItem.static.newFromString( string, mimeType ),
-		doc = new ve.dm.Document( [] ),
+		doc = ve.dm.Document.static.newBlankDocument(),
 		mockSurface = {
 			getModel: function () {
 				return {
