@@ -271,6 +271,7 @@
 	"visualeditor-mweditmodesource-progress": "Przełączanie do edycji kodu źródłowego...",
 	"visualeditor-mweditmodesource-title": "Przełączyć na edycję kodu źródłowego?",
 	"visualeditor-mweditmodesource-tool": "Przełącz na edycję kodu źródłowego",
+	"visualeditor-mweditmodesource-tool-unavailable": "Edycja kodu źródłowego jest tutaj niedostępna",
 	"visualeditor-mweditmodesource-warning": "Przełączasz się na edytor kodu źródłowego.\nCzy chcesz kontynuować?",
 	"visualeditor-mweditmodesource-warning-cancel": "Anuluj",
 	"visualeditor-mweditmodesource-warning-switch": "Przełącz",
