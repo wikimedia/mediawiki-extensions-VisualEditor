@@ -2334,6 +2334,11 @@ ve.init.mw.ArticleTarget.prototype.getWikitextFragment = function ( doc, useRevi
 			page: this.pageName
 		};
 
+	// Optimise as a no-op
+	if ( params.html === '' ) {
+		return '';
+	}
+
 	if ( useRevision === undefined || useRevision ) {
 		params.oldid = this.revid;
 		params.etag = this.etag;
