@@ -9,7 +9,7 @@
 	box-shadow: inset 0 -1px 0 #a7d7f9;
 }
 
-.ve-init-mw-target-surface {
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
 	/*
 	In order to allow placing the text cursor to the start or end of the text by
 	clicking in the margin area, we expand the outer boundary of the surface
@@ -28,59 +28,43 @@
 	padding-top: 1em;
 }
 
-.ve-init-mw-target-surface .ve-ce-documentNode,
-.ve-init-mw-target-surface .ve-ui-surface-placeholder {
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-documentNode,
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	padding: 0 1.14286em; /* 1/0.875 */
 }
 
-.mw-body .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
+.mw-body .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
 	/* Fix margin overlap */
 	margin-top: 0;
 	/* Placeholder doesn't need a border as well */
 	border: 0;
 }
 
-.ve-ui-overlay .mw-body-content {
-	/* Fix font-size for surfaces inside UI overlays */
-	font-size: 1.09375em; /* 0.875/0.8 */
-}
-
 .ve-init-mw-desktopArticleTarget-toolbar {
+	font-size: 0.8em;
 	/* 1/0.8 */
 	margin: -1.25em -1.25em 0 -1.25em;
 	position: relative;
 }
 
-/* All debug bars (includes target widgets) */
-.ve-ui-debugBar {
-	border-top: 1px solid #ccc;
-	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
-}
-
-.ve-ui-debugBar ol {
-	margin-left: 0;
-}
-
-.oo-ui-actionWidget a:hover {
-	text-decoration: none;
-}
-
 /* Main document debug bar */
-.ve-init-mw-target-surface > .ve-ui-debugBar {
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
 	/* 1/0.8 */
 	padding: 1.25em;
 	padding-bottom: 0;
 	margin-top: 1.25em;
 }
 
-/* ve.ce.TableCellnode.css's margin replaced by more specific rule in Vector (div#content p) */
-#content .ve-ce-tableCellNode .ve-ce-paragraphNode { /* stylelint-disable-line selector-no-id */
-	margin: 0;
+.ve-ui-init-desktopArticleTarget-sectionTitle {
+	font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+	line-height: 1.3;
+	font-size: 1.5em;
+	border-bottom: 1px solid #aaa;
 }
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
-	.ve-init-mw-target-surface {
+	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
 		/* 1.5/0.875 */
 		margin: 0 -1.71429em;
 	}
@@ -90,8 +74,8 @@
 		padding-top: 1.25em;
 	}
 
-	.ve-init-mw-target-surface .ve-ce-documentNode,
-	.ve-init-mw-target-surface .ve-ui-surface-placeholder {
+	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-documentNode,
+	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 		padding: 0 1.71429em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
 	}
 
@@ -101,7 +85,7 @@
 	}
 
 	/* Main document debug bar */
-	.ve-init-mw-target-surface > .ve-ui-debugBar {
+	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
 		/* 1/0.8, 1.5/0.8 */
 		padding: 1.875em;
 		padding-bottom: 0;
