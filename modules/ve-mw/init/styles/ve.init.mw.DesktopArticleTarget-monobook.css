@@ -43,8 +43,3 @@
 	/* Placeholder doesn't need a border as well */
 	border: 0;
 }
-
-.ve-ui-init-desktopArticleTarget-sectionTitle {
-	font-size: 150%;
-	border-bottom: 1px solid #aaa;
-}

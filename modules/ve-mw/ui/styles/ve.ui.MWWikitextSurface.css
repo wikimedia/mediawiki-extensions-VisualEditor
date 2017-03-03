@@ -5,8 +5,12 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwWikitextSurface .ve-ce-documentNode {
+.ve-ui-mwWikitextSurface .ve-ce-documentNode,
+.ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
 	font-size: 1.17216em; /*(13.3333/11.375)*/
+}
+
+.ve-ui-mwWikitextSurface .ve-ce-documentNode {
 	/* Inherit mw-editfont setting instead of default source mode setting */
 	font-family: inherit;
 }

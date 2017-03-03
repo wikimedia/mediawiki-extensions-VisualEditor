@@ -25,7 +25,9 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	// * mw-editfont-monospace
 	// * mw-editfont-sans-serif
 	// * mw-editfont-serif
-	this.getView().$element.addClass( 've-ui-mwWikitextSurface mw-editfont-' + mw.user.options.get( 'editfont' ) );
+	this.$element.addClass( 've-ui-mwWikitextSurface' );
+	this.getView().$element.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
+	this.$placeholder.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 };
 
 /* Inheritance */
