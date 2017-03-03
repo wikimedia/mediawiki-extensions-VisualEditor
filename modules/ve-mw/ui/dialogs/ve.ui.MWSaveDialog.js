@@ -134,6 +134,8 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( content ) {
 ve.ui.MWSaveDialog.prototype.showPreview = function ( content ) {
 	this.$previewViewer.empty().append( content );
 	mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
+	// TODO: Remove when fixed upstream in Parsoid (T58756)
+	this.$previewViewer.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
 	this.actions.setAbilities( { approve: true } );
 	this.popPending();
 	this.swapPanel( 'preview' );
