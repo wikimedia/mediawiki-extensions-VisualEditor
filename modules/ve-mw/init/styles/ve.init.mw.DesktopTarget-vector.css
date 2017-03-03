@@ -34,8 +34,9 @@
 	margin-right: 0;
 }
 
-.ve-ui-surface-placeholder {
-	opacity: 0.5;
+.ve-ui-surface .ve-ui-surface-placeholder {
+	opacity: 1;
+	color: #72777d;
 }
 
 .ve-ui-overlay .mw-body-content {

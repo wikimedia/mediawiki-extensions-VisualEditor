@@ -55,13 +55,6 @@
 	margin-top: 1.25em;
 }
 
-.ve-ui-init-desktopArticleTarget-sectionTitle {
-	font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
-	line-height: 1.3;
-	font-size: 1.5em;
-	border-bottom: 1px solid #aaa;
-}
-
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {

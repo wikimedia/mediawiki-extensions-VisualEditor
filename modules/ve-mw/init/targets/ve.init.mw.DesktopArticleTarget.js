@@ -503,6 +503,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 	if ( surface.getMode() === 'source' && this.section === 'new' ) {
 		if ( !this.sectionTitle ) {
 			this.sectionTitle = new OO.ui.TextInputWidget( {
+				$element: $( '<h2>' ),
 				classes: [ 've-ui-init-desktopArticleTarget-sectionTitle' ],
 				maxLength: 255,
 				placeholder: ve.msg( 'visualeditor-section-title-placeholder' )
