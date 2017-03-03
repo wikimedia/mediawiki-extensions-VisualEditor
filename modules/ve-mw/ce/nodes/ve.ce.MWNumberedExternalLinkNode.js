@@ -41,6 +41,7 @@ ve.ce.MWNumberedExternalLinkNode = function VeCeMWNumberedExternalLinkNode() {
 	this.$link = $( '<a>' )
 		// CSS for numbering needs rel=mw:ExtLink
 		.attr( 'rel', 'mw:ExtLink' )
+		// TODO: Remove when fixed upstream in Parsoid (T58756)
 		.addClass( 'external' )
 		.appendTo( this.$element );
 

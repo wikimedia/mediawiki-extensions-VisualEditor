@@ -20,6 +20,7 @@ ve.ce.MWExternalLinkAnnotation = function VeCeMWExternalLinkAnnotation() {
 	ve.ce.MWExternalLinkAnnotation.super.apply( this, arguments );
 
 	// DOM changes
+	// TODO: Remove when fixed upstream in Parsoid (T58756)
 	this.$anchor.addClass( 'external' );
 };
 
