@@ -21,6 +21,8 @@
 	"tag-visualeditor-description": "ویرایش توسط [[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداری]] انجام شده‌است.",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداری: بررسی]]",
 	"tag-visualeditor-needcheck-description": "ویرایش انجام‌شده با [[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداری]] که در آن سامانه احتمال وقوع تغییرات ناخواسته در ویکی‌متن را شناسایی کرد.",
+	"tag-visualeditor-wikitext": "ویرایش مبدأ ۲۰۱۷",
+	"tag-visualeditor-wikitext-description": "ویرایش توسط ویرایشگر متنی نسخهٔ ۲۰۱۷",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویرایشگر دیداریːبه ویرایش منبع تغییر داده شده]]",
 	"tag-visualeditor-switched-description": "کاربر شروع به ویرایش با استفاده از ویرایشگر دیداری کرد سپس به ویرایشگر متن ویکی تغییر داده شد.",
 	"visualeditor-feedback-link": "Project:ویرایشگر دیداری/بازخورد",

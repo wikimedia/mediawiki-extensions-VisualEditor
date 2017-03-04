@@ -163,7 +163,7 @@
 	"visualeditor-parameter-input-placeholder": "Feltnavn",
 	"visualeditor-parameter-search-no-unused": "Ingen ubrugte felter",
 	"visualeditor-parameter-search-unknown": "Ukendt feldt",
-	"visualeditor-preference-betatempdisable": "Midlertidig deaktiver VisualEditor mens den er i beta",
+	"visualeditor-preference-betatempdisable": "Deaktiver VisualEditor midlertidigt, mens den er i beta",
 	"visualeditor-preference-core-description": "Aktiver VisualEditor. Den vil ikke være aktiv for diskussionssider og for nogle andre navnerum.",
 	"visualeditor-preference-core-label": "Visuel redigering",
 	"visualeditor-preference-enable": "Aktiver visuel redigering. Det vil være tilgængelig i følgende {{PLURAL:$2|navnerum}}: $1",
