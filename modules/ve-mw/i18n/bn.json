@@ -241,6 +241,7 @@
 	"visualeditor-mweditmodesource-progress": "উৎস সম্পাদনায় যাওয়া হচ্ছে...",
 	"visualeditor-mweditmodesource-title": "উৎস সম্পাদনায় যাবেন?",
 	"visualeditor-mweditmodesource-tool": "উৎস সম্পাদনায় যান",
+	"visualeditor-mweditmodesource-tool-unavailable": "উৎস সম্পাদনা এখানে উপলব্ধ নয়",
 	"visualeditor-mweditmodesource-warning": "আপনি উৎস সম্পাদনায় যাচ্ছেন।\nআপনি কি চালিয়ে যেতে চান?",
 	"visualeditor-mweditmodesource-warning-cancel": "বাতিল",
 	"visualeditor-mweditmodesource-warning-switch": "পরিবর্তন",
