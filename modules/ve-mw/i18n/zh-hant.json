@@ -25,7 +25,8 @@
 			"A2093064",
 			"Kanashimi",
 			"Jdforrester",
-			"烈羽"
+			"烈羽",
+			"和平奮鬥救地球"
 		]
 	},
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
@@ -266,9 +267,11 @@
 	"visualeditor-mainnamespacepagelink": "Project:主命名空間",
 	"visualeditor-media-input-placeholder": "搜尋媒體",
 	"visualeditor-meta-tool": "選項",
+	"visualeditor-mweditmode-tooltip": "切換編輯器",
 	"visualeditor-mweditmodesource-progress": "切換為原始碼編輯...",
 	"visualeditor-mweditmodesource-title": "切換為原始碼編輯?",
 	"visualeditor-mweditmodesource-tool": "切換為原始碼編輯",
+	"visualeditor-mweditmodesource-tool-unavailable": "原始碼編輯器無法在此使用",
 	"visualeditor-mweditmodesource-warning": "您正切換回原始碼編輯模式。\n您是否要繼續？",
 	"visualeditor-mweditmodesource-warning-cancel": "取消",
 	"visualeditor-mweditmodesource-warning-switch": "切換",

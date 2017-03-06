@@ -276,6 +276,7 @@
 	"visualeditor-mweditmodesource-progress": "جارٍ التبديل إلى محرر المصدر...",
 	"visualeditor-mweditmodesource-title": "التبديل إلى تعديل المصدر؟",
 	"visualeditor-mweditmodesource-tool": "التبديل إلى تعديل المصدر",
+	"visualeditor-mweditmodesource-tool-unavailable": "تعديل المصدر غير متوفر هنا",
 	"visualeditor-mweditmodesource-warning": "ستنتقل إلى المحرر النصي. أتستمر؟",
 	"visualeditor-mweditmodesource-warning-cancel": "ألغ",
 	"visualeditor-mweditmodesource-warning-switch": "حول",
