@@ -29,10 +29,10 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Autolink valid RFC',
 				html: '<p><b>RFC 1234 xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 10 ),
+				rangeOrSelection: new ve.Range( 1, 9 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 4 ),
-				expectedOriginalRangeOrSelection: new ve.Range( 10 ),
+				expectedRangeOrSelection: new ve.Range( 3 ),
+				expectedOriginalRangeOrSelection: new ve.Range( 9 ),
 				expectedData: function ( data ) {
 					data.splice( 1, 8, {
 						type: 'link/mwMagic',
@@ -50,9 +50,9 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Don\'t autolink invalid RFC',
 				html: '<p><b>RFC 123x xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 10 ),
+				rangeOrSelection: new ve.Range( 1, 9 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 1, 10 ),
+				expectedRangeOrSelection: new ve.Range( 1, 9 ),
 				expectedData: function () {
 					/* no change, no link */
 				}
@@ -60,10 +60,10 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Autolink valid PMID',
 				html: '<p><b>PMID 1234 xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 11 ),
+				rangeOrSelection: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 4 ),
-				expectedOriginalRangeOrSelection: new ve.Range( 11 ),
+				expectedRangeOrSelection: new ve.Range( 3 ),
+				expectedOriginalRangeOrSelection: new ve.Range( 10 ),
 				expectedData: function ( data ) {
 					data.splice( 1, 9, {
 						type: 'link/mwMagic',
@@ -81,9 +81,9 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Don\'t autolink invalid PMID',
 				html: '<p><b>PMID 123x xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 11 ),
+				rangeOrSelection: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 1, 11 ),
+				expectedRangeOrSelection: new ve.Range( 1, 10 ),
 				expectedData: function () {
 					/* no change, no link */
 				}
@@ -91,10 +91,10 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Autolink valid ISBN',
 				html: '<p><b>ISBN 978-0596517748 xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 21 ),
+				rangeOrSelection: new ve.Range( 1, 20 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 4 ),
-				expectedOriginalRangeOrSelection: new ve.Range( 21 ),
+				expectedRangeOrSelection: new ve.Range( 3 ),
+				expectedOriginalRangeOrSelection: new ve.Range( 20 ),
 				expectedData: function ( data ) {
 					data.splice( 1, 19, {
 						type: 'link/mwMagic',
@@ -112,9 +112,9 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Don\'t autolink invalid ISBN',
 				html: '<p><b>ISBN 978-059651774 xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 20 ),
+				rangeOrSelection: new ve.Range( 1, 19 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 1, 20 ),
+				expectedRangeOrSelection: new ve.Range( 1, 19 ),
 				expectedData: function () {
 					/* no change, no link */
 				}
