@@ -14,9 +14,27 @@
 	font-size: 0.8em;
 }
 
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-documentNode,
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
+	padding: 0;
+}
+
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
+	/* Fix margin overlap */
+	margin-top: 0;
+}
+
 .ve-init-mw-desktopArticleTarget-toolbar {
-	margin: -0.6em -3em 0.8em -3em;
+	/* 3*(16/12.8) */
+	margin: -0.75em -3.75em 1em -3.75em;
 	position: relative;
+}
+
+@media screen and ( max-width: 700px ) {
+	/* 1.5*(16/12.8) */
+	.ve-init-mw-desktopArticleTarget-toolbar {
+		margin: -0.75em -1.875em 1em -1.875em;
+	}
 }
 
 .ve-init-mw-desktopArticleTarget-toolbar .oo-ui-toolbar-bar {
