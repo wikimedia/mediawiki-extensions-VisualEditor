@@ -6,7 +6,8 @@
 			"Sudo77(new)",
 			"TomášPolonec",
 			"Kusavica",
-			"Helix84"
+			"Helix84",
+			"Lexected"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Zhrnutie úprav.",
@@ -176,6 +177,7 @@
 	"visualeditor-mainnamespacepagelink": "Project:Hlavný menný priestor",
 	"visualeditor-media-input-placeholder": "Hľadať obrázky (zvuky, videá)",
 	"visualeditor-meta-tool": "Nastavenia",
+	"visualeditor-mweditmode-tooltip": "Prepnúť editor",
 	"visualeditor-mweditmodesource-title": "Prepnúť na úpravu zdrojového kódu?",
 	"visualeditor-mweditmodesource-tool": "Prepnúť na úpravu zdrojového kódu",
 	"visualeditor-mweditmodesource-warning": "Chystáte sa prepnúť na úpravu zdrojového kódu.\nVykonané zmeny zostanú zachované, bez uloženia alebo znovunačítania stránky sa však už nebudete môcť vrátiť späť do VisualEditoru.\nChcete pokračovať?",
