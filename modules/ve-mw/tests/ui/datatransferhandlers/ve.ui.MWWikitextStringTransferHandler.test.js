@@ -52,18 +52,25 @@ function runWikitextStringHandlerTest( assert, server, string, mimeType, expecte
 	// Invoke the handler
 	handler = ve.ui.dataTransferHandlerFactory.create( 'wikitextString', mockSurface, item );
 
-	handler.getInsertableData().done( function ( doc2 ) {
-		var actualData = doc2.getData();
-		ve.dm.example.postprocessAnnotations( actualData, doc2.getStore() );
+	handler.getInsertableData().done( function ( docOrData ) {
+		var actualData, store;
+		if ( docOrData instanceof ve.dm.Document ) {
+			actualData = docOrData.getData();
+			store = docOrData.getStore();
+		} else {
+			actualData = docOrData;
+			store = new ve.dm.IndexValueStore();
+		}
+		ve.dm.example.postprocessAnnotations( actualData, store );
 		if ( assertDom ) {
-			assert.equalLinearDataWithDom( doc2.getStore(), actualData, expectedData, msg + ': data match (with DOM)' );
+			assert.equalLinearDataWithDom( store, actualData, expectedData, msg + ': data match (with DOM)' );
 		} else {
 			assert.equalLinearData( actualData, expectedData, msg + ': data match' );
 		}
 		done();
 	} );
 
-	if ( server ) {
+	if ( server && expectedResponse ) {
 		server.respond( [ 200, { 'Content-Type': 'application/json' }, JSON.stringify( {
 			visualeditor: {
 				result: 'success',
@@ -171,66 +178,54 @@ QUnit.test( 'convert', function ( assert ) {
 				msg: 'Magic link (RFC)',
 				pasteString: 'RFC 1234',
 				pasteType: 'text/plain',
-				parsoidResponse: '<p><a href="//tools.ietf.org/html/rfc1234" rel="mw:ExtLink">RFC 1234</a></p>',
+				parsoidResponse: false,
 				annotations: [],
 				expectedData: [
 					{
 						type: 'link/mwMagic',
 						attributes: {
-							content: 'RFC 1234',
-							origText: 'RFC 1234',
-							origHtml: 'RFC 1234'
+							content: 'RFC 1234'
 						}
 					},
 					{
 						type: '/link/mwMagic'
-					},
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					}
 				]
 			},
 			{
 				msg: 'Magic link (PMID)',
 				pasteString: 'PMID 1234',
 				pasteType: 'text/plain',
-				parsoidResponse: '<p><a href="//www.ncbi.nlm.nih.gov/pubmed/1234?dopt=Abstract" rel="mw:ExtLink">PMID 1234</a></p>',
+				parsoidResponse: false,
 				annotations: [],
 				expectedData: [
 					{
 						type: 'link/mwMagic',
 						attributes: {
-							content: 'PMID 1234',
-							origText: 'PMID 1234',
-							origHtml: 'PMID 1234'
+							content: 'PMID 1234'
 						}
 					},
 					{
 						type: '/link/mwMagic'
-					},
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					}
 				]
 			},
 			{
 				msg: 'Magic link (ISBN)',
 				pasteString: 'ISBN 123456789X',
 				pasteType: 'text/plain',
-				parsoidResponse: '<p><a href="./Special:BookSources/123456789X" rel="mw:ExtLink">ISBN 123456789X</a></p>',
+				parsoidResponse: false,
 				annotations: [],
 				expectedData: [
 					{
 						type: 'link/mwMagic',
 						attributes: {
-							content: 'ISBN 123456789X',
-							origText: 'ISBN 123456789X',
-							origHtml: 'ISBN 123456789X'
+							content: 'ISBN 123456789X'
 						}
 					},
 					{
 						type: '/link/mwMagic'
-					},
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					}
 				]
 			},
 			{
