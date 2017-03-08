@@ -786,7 +786,6 @@
 				"lib/ve/src/ui/contextitems/ve.ui.AlienContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.AlignableContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.CommentContextItem.js",
-				"lib/ve/src/ui/contextitems/ve.ui.LanguageContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.LinkContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.ToolContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.TableContextItem.js",
@@ -1735,6 +1734,7 @@
 			"scripts": [
 				"lib/ve/src/dm/annotations/ve.dm.LanguageAnnotation.js",
 				"lib/ve/src/ce/annotations/ve.ce.LanguageAnnotation.js",
+				"lib/ve/src/ui/contextitems/ve.ui.LanguageContextItem.js",
 				"lib/ve/src/ui/widgets/ve.ui.LanguageResultWidget.js",
 				"lib/ve/src/ui/widgets/ve.ui.LanguageSearchWidget.js",
 				"lib/ve/src/ui/dialogs/ve.ui.LanguageSearchDialog.js",
