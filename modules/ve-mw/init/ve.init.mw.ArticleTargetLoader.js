@@ -173,18 +173,21 @@
 				}
 
 				if (
-					conf.fullRestbaseUrl &&
 					// wikitext can be an empty string
 					wikitext !== undefined &&
 					!$( '[name=wpSection]' ).val()
 				) {
+					if ( conf.fullRestbaseUrl ) {
+						pageHtmlUrl = conf.fullRestbaseUrl + 'v1/transform/wikitext/to/html/';
+					} else {
+						pageHtmlUrl = conf.restbaseUrl.replace( 'v1/page/html/', 'v1/transform/wikitext/to/html/' );
+					}
 					switched = true;
 					fromEditedState = modified;
 					window.onbeforeunload = null;
 					$( window ).off( 'beforeunload' );
 					restbaseXhr = $.ajax( {
-						url: conf.fullRestbaseUrl + 'v1/transform/wikitext/to/html/' +
-							encodeURIComponent( pageName ) +
+						url: pageHtmlUrl + encodeURIComponent( pageName ) +
 							( oldid === undefined ? '' : '/' + oldid ),
 						type: 'POST',
 						data: {
