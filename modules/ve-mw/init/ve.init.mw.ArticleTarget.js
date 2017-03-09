@@ -41,6 +41,8 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.section = null;
 	this.sectionTitle = null;
+	this.editSummaryValue = null;
+	this.initialEditSummary = null;
 
 	this.$templatesUsed = null;
 	this.checkboxFields = null;
@@ -538,6 +540,9 @@ ve.init.mw.ArticleTarget.prototype.saveSuccess = function ( doc, saveData, respo
  * @fires save
  */
 ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
+	this.editSummaryValue = null;
+	this.initialEditSummary = null;
+
 	this.saveDeferred.resolve();
 	this.emit( 'save' );
 };
