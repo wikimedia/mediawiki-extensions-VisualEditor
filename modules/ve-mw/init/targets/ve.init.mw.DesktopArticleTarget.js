@@ -33,6 +33,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 	// Properties
 	this.onBeforeUnloadFallback = null;
+	this.onBeforeUnload = this.onBeforeUnload.bind( this );
 	this.onUnloadHandler = this.onUnload.bind( this );
 	this.activating = false;
 	this.deactivating = false;
@@ -1566,11 +1567,13 @@ ve.init.mw.DesktopArticleTarget.prototype.saveEditSection = function ( heading )
  * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
-	// Remember any already set beforeunload handler
-	this.onBeforeUnloadFallback = window.onbeforeunload;
-	// Attach our handlers
-	window.onbeforeunload = this.onBeforeUnload.bind( this );
-	window.addEventListener( 'unload', this.onUnloadHandler );
+	if ( window.onbeforeunload !== this.onBeforeUnload ) {
+		// Remember any already set beforeunload handler
+		this.onBeforeUnloadFallback = window.onbeforeunload;
+		// Attach our handlers
+		window.onbeforeunload = this.onBeforeUnload;
+		window.addEventListener( 'unload', this.onUnloadHandler );
+	}
 };
 /**
  * Remove onunload and onbeforunload handlers.
