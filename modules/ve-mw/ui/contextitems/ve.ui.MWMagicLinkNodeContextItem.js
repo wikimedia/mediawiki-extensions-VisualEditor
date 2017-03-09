@@ -35,6 +35,8 @@ ve.ui.MWMagicLinkNodeContextItem.static.label = null; // see #setup()
 
 ve.ui.MWMagicLinkNodeContextItem.static.modelClasses = [ ve.dm.MWMagicLinkNode ];
 
+ve.ui.MWMagicLinkNodeContextItem.static.clearable = false;
+
 /* Methods */
 
 ve.ui.MWMagicLinkNodeContextItem.prototype.setup = function () {
