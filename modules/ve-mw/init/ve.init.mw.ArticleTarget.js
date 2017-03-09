@@ -1578,7 +1578,7 @@ ve.init.mw.ArticleTarget.prototype.startSave = function ( saveOptions ) {
 ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
 	var name,
 		fields = {
-			wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
+			wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : ( this.editSummaryValue || this.initialEditSummary ),
 			wpCaptchaId: this.captcha && this.captcha.id,
 			wpCaptchaWord: this.captcha && this.captcha.input.getValue()
 		};
@@ -1822,7 +1822,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 	this.attachToolbarSaveButton();
 
 	if ( this.saveDialog ) {
-		this.initialEditSummary = this.initialEditSummary || this.saveDialog.editSummaryInput.getValue();
+		this.editSummaryValue = this.saveDialog.editSummaryInput.getValue();
 		this.saveDialog.disconnect( this );
 		this.saveDialog = null;
 	}

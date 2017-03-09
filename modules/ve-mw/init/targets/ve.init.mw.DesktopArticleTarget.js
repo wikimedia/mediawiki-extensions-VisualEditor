@@ -1170,7 +1170,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () 
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
 	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
-	data.editSummary = this.initialEditSummary;
+	data.editSummary = this.editSummaryValue || this.initialEditSummary;
 	return data;
 };
 
