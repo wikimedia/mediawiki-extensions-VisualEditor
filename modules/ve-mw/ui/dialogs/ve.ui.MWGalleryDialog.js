@@ -144,27 +144,27 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.modeDropdown = new OO.ui.DropdownWidget( {
 		menu: {
 			items: [
-				new OO.ui.OptionWidget( {
+				new OO.ui.MenuOptionWidget( {
 					data: 'traditional',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-traditional' )
 				} ),
-				new OO.ui.OptionWidget( {
+				new OO.ui.MenuOptionWidget( {
 					data: 'nolines',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-nolines' )
 				} ),
-				new OO.ui.OptionWidget( {
+				new OO.ui.MenuOptionWidget( {
 					data: 'packed',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed' )
 				} ),
-				new OO.ui.OptionWidget( {
+				new OO.ui.MenuOptionWidget( {
 					data: 'packed-overlay',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay' )
 				} ),
-				new OO.ui.OptionWidget( {
+				new OO.ui.MenuOptionWidget( {
 					data: 'packed-hover',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover' )
 				} ),
-				new OO.ui.OptionWidget( {
+				new OO.ui.MenuOptionWidget( {
 					data: 'slideshow',
 					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-slideshow' )
 				} )
