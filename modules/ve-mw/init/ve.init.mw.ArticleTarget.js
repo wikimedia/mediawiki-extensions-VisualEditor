@@ -2240,9 +2240,13 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 	var dataPromise, windowManager, switchWindow,
 		target = this;
 
-	if ( this.section !== null ) {
-		// WT -> VE switching is not yet supported in sections, so
-		// show a discard-only confirm dialog, then reload the whole page.
+	// Show a discard-only confirm dialog, and then reload the whole page, if:
+	if (
+		// * section editing in WT, as WT -> VE is not yet supported, or
+		this.section !== null ||
+		// * the server can't switch for us because that's not supported.
+		!mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl
+	) {
 		windowManager = new OO.ui.WindowManager();
 		switchWindow = new mw.libs.ve.SwitchConfirmDialog();
 		$( 'body' ).append( windowManager.$element );
