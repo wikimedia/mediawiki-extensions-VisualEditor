@@ -82,7 +82,7 @@ ve.ui.MWGalleryItemWidget.prototype.onItemKeyPress = function ( e ) {
  * @param {string} caption The caption
  */
 ve.ui.MWGalleryItemWidget.prototype.setCaption = function ( caption ) {
-	this.caption = caption;
+	this.caption = caption.replace( '\n', ' ' );
 };
 
 /**
