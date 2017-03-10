@@ -332,7 +332,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				this.toggleEmptyGalleryMessage( true );
 				this.showSearchPanelButton.toggle( false );
 				this.toggleSearchPanel( true );
-				this.updateActions();
 			}
 
 			// Options card
@@ -362,11 +361,20 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 
 			// Add event handlers
 			this.indexLayout.connect( this, { set: 'updateDialogSize' } );
+			this.highlightedCaptionInput.connect( this, { change: 'updateActions' } );
 			this.searchWidget.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 			this.showSearchPanelButton.connect( this, { click: 'onShowSearchPanelButtonClick' } );
 			this.galleryGroup.connect( this, { editItem: 'onHighlightItem' } );
+			this.galleryGroup.connect( this, { itemDragEnd: 'updateActions' } );
 			this.removeButton.connect( this, { click: 'onRemoveItem' } );
 			this.modeDropdown.getMenu().connect( this, { choose: 'onModeDropdownChange' } );
+			this.captionInput.connect( this, { change: 'updateActions' } );
+			this.widthsInput.connect( this, { change: 'updateActions' } );
+			this.heightsInput.connect( this, { change: 'updateActions' } );
+			this.perrowInput.connect( this, { change: 'updateActions' } );
+			this.showFilenameCheckbox.connect( this, { change: 'updateActions' } );
+			this.classesInput.connect( this, { change: 'updateActions' } );
+			this.stylesInput.connect( this, { change: 'updateActions' } );
 
 			// Hack: Give the input a value so that this.insertOrUpdateNode gets called
 			this.input.setValue( 'gallery' );
@@ -398,11 +406,19 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 
 			// Disconnect events
 			this.indexLayout.disconnect( this );
+			this.highlightedCaptionInput.disconnect( this );
 			this.searchWidget.getResults().disconnect( this );
 			this.showSearchPanelButton.disconnect( this );
 			this.galleryGroup.disconnect( this );
 			this.removeButton.disconnect( this );
 			this.modeDropdown.disconnect( this );
+			this.captionInput.disconnect( this );
+			this.widthsInput.disconnect( this );
+			this.heightsInput.disconnect( this );
+			this.perrowInput.disconnect( this );
+			this.showFilenameCheckbox.disconnect( this );
+			this.classesInput.disconnect( this );
+			this.stylesInput.disconnect( this );
 		}, this );
 };
 
@@ -508,6 +524,8 @@ ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
 	if ( !Object.prototype.hasOwnProperty( this.selectedFilenames, title ) ) {
 		this.addNewImage( title );
 	}
+
+	this.updateActions();
 };
 
 /**
@@ -577,6 +595,8 @@ ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
 
 	// heights is only ignored in slideshow mode
 	this.heightsInput.setDisabled( mode === 'slideshow' );
+
+	this.updateActions();
 };
 
 /**
@@ -661,50 +681,65 @@ ve.ui.MWGalleryDialog.prototype.toggleEmptyGalleryMessage = function ( empty ) {
  * Disable the "Done" button if the gallery is empty, otherwise enable it
  */
 ve.ui.MWGalleryDialog.prototype.updateActions = function () {
-	this.actions.setAbilities( { done: this.galleryGroup.items.length > 0 } );
+	this.actions.setAbilities( { done: this.galleryGroup.items.length > 0 && this.isModified() } );
+};
+
+/**
+ * Get the current images and options data
+ *
+ * @return {Object} Images and options data
+ */
+ve.ui.MWGalleryDialog.prototype.getCurrentData = function () {
+	var i, ilen,
+		data = {},
+		items = this.galleryGroup.items;
+
+	// Get data from options card
+	data.mode = this.modeDropdown.getMenu().getSelectedItem().getData();
+	data.caption = this.captionInput.getValue() || undefined;
+	data.widths = this.widthsInput.getValue() || undefined;
+	data.heights = this.heightsInput.getValue() || undefined;
+	data.perrow = this.perrowInput.getValue() || undefined;
+	data.showFilename = this.showFilenameCheckbox.isSelected() ? 'yes' : undefined;
+	data.classes = this.classesInput.getValue() || undefined;
+	data.styles = this.stylesInput.getValue() || undefined;
+
+	// Unset mode attribute if it is the same as the default
+	data.mode = data.mode === this.defaults.mode ? undefined : data.mode;
+
+	// Get titles and captions from gallery group
+	data.extsrc = '';
+	if ( this.highlightedItem ) {
+		this.highlightedItem.setCaption( this.highlightedCaptionInput.getValue() );
+	}
+	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
+		data.extsrc += '\n' + items[ i ].imageTitle + '|' + items[ i ].caption;
+	}
+	data.extsrc += '\n';
+
+	return data;
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
-	var i, ilen, mode, caption, widths, heights, perrow,
-		showFilename, classes, styles,
-		extsrc = '',
-		items = this.galleryGroup.items;
+	var data;
 
 	// Parent method
 	ve.ui.MWGalleryDialog.super.prototype.updateMwData.call( this, mwData );
 
-	// Get titles and captions from gallery group
-	this.highlightedItem.setCaption( this.highlightedCaptionInput.getValue() );
-	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
-		extsrc += '\n' + items[ i ].imageTitle + ( items[ i ].caption ? '|' + items[ i ].caption : '' );
-	}
+	data = this.getCurrentData();
 
-	// Get data from options card
-	mode = this.modeDropdown.getMenu().getSelectedItem().getData();
-	caption = this.captionInput.getValue();
-	widths = this.widthsInput.getValue();
-	heights = this.heightsInput.getValue();
-	perrow = this.perrowInput.getValue();
-	showFilename = this.showFilenameCheckbox.isSelected();
-	classes = this.classesInput.getValue();
-	styles = this.stylesInput.getValue();
-
-	// Update extsrc and attributes
-	mwData.body.extsrc = extsrc + '\n';
-	mwData.attrs.mode = mode || undefined;
-	mwData.attrs.caption = caption || undefined;
-	mwData.attrs.widths = widths || undefined;
-	mwData.attrs.heights = heights || undefined;
-	mwData.attrs.perrow = perrow || undefined;
-	mwData.attrs.showfilename = showFilename ? 'yes' : undefined;
-	mwData.attrs.class = classes || undefined;
-	mwData.attrs.style = styles || undefined;
-
-	// Unset mode attribute if it is the same as the default
-	mwData.attrs.mode = mode === this.defaults.mode ? undefined : mode;
+	mwData.body.extsrc = data.extsrc;
+	mwData.attrs.mode = data.mode;
+	mwData.attrs.caption = data.caption;
+	mwData.attrs.widths = data.widths;
+	mwData.attrs.heights = data.heights;
+	mwData.attrs.perrow = data.perrow;
+	mwData.attrs.showfilename = data.showFilename;
+	mwData.attrs.classes = data.classes;
+	mwData.attrs.styles = data.styles;
 };
 
 /* Registration */
