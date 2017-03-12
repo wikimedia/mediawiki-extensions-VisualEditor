@@ -173,7 +173,10 @@
 	"visualeditor-dialog-meta-settings-toc-help": "見出しの数が3個よりも少ないページにおいても、ページの上部へ強制的に目次（見出しの一覧）を表示、もしくは強制的に非表示にできます。既定の設定では、3個以上の見出しがあるページにおいて、目次を表示しています。",
 	"visualeditor-dialog-meta-settings-toc-label": "目次の表示",
 	"visualeditor-dialog-meta-title": "オプション",
+	"visualeditor-dialog-table-collapsed": "最初から折りたたむ",
+	"visualeditor-dialog-table-collapsible": "折りたたみ可能",
 	"visualeditor-dialog-table-sortable": "ソート可能にする",
+	"visualeditor-dialog-table-wikitable": "スタイルの適用（wikitable）",
 	"visualeditor-dialog-template-title": "テンプレート",
 	"visualeditor-dialog-transclusion-add-content": "本文を追加",
 	"visualeditor-dialog-transclusion-add-param": "詳細情報を追加",
@@ -183,6 +186,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "非推奨のフィールド",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "以下の理由によりこのフィールドは推奨されません。$1",
 	"visualeditor-dialog-transclusion-loading": "読み込み中...",
+	"visualeditor-dialog-transclusion-more-template-description": "[[{{ns:template}}:$1|このページ]]に\"$1\"テンプレートに関する追加情報があるかもしれません。",
 	"visualeditor-dialog-transclusion-multiple-mode": "オプションを表示",
 	"visualeditor-dialog-transclusion-no-template-description": "「$1」テンプレートにはまだ説明がありませんが、[[$1|テンプレートのページ]]には何か情報があるかもしれません。",
 	"visualeditor-dialog-transclusion-options": "オプション",
@@ -334,6 +338,6 @@
 	"visualeditor-viewpage-savewarning-keep": "編集を続行",
 	"visualeditor-viewpage-savewarning-title": "本当によろしいですか?",
 	"visualeditor-wikitext-progress": "ウィキテキストを変換中",
-	"visualeditor-wikitext-warning": "ビジュアルエディターを使用中です。[[{{MediaWiki:visualeditor-wikitext-warning-link}}|ウィキテキスト]]はここでは使用できません。「{{int:visualeditor-toolbar-savedialog}}」の隣のドロップダウン メニューを開いて「{{int:visualeditor-mweditmodesource-title}}」を選択することで、編集内容を保持したままいつでもソース編集に切り替えられます。",
+	"visualeditor-wikitext-warning": "ビジュアルエディターを使用中です。[[{{MediaWiki:visualeditor-wikitext-warning-link}}|ウィキテキスト]]はここでは使用できません。スイッチボタンをクリックすることで、編集内容を保持したままいつでもソース編集に切り替えられます。",
 	"visualeditor-wikitext-warning-title": "ウィキテキスト記法を検出しました"
 }
