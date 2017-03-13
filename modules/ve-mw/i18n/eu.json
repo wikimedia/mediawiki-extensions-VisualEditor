@@ -277,6 +277,7 @@
 	"visualeditor-preference-tabs-remember-last": "Gogoratu nire azken editorea",
 	"visualeditor-recreate": "Orria ezabatua izan da aldatzen hasi zinenetik. Sakatu \"$1\" berriro sortzeko.",
 	"visualeditor-redirect-description": "$1ra birzuzendu",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "$1 sakatu dezakezu zure aldaketa gordetzeko.",
 	"visualeditor-savedialog-error-badtoken": "Ezin izan dugu zure edizioa gorde, saioa dagoeneko ez zelako baliozkoa.",
 	"visualeditor-savedialog-identify-anon": "Orria lankide anonimo bezala gorde nahi al duzu? Zure IP helbidea orriaren aldaketa historian gordeko da.",
 	"visualeditor-savedialog-identify-user": "Une honetan [[User:$1|$1]] bezala zaude izena emanda. Aldaketa hau gordetzen baduzu, zure aldaketa kontu horri lotuta geratuko da.",
