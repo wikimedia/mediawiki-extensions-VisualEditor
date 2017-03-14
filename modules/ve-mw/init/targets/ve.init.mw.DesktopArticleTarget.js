@@ -652,6 +652,7 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 
 		target.clearState();
 		target.initialEditSummary = new mw.Uri().query.summary;
+		target.editSummaryValue = null;
 
 		target.deactivating = false;
 		$( 'html' ).removeClass( 've-deactivating' );
