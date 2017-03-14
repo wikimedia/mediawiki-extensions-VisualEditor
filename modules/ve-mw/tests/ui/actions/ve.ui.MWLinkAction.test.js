@@ -15,9 +15,9 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			{
 				msg: 'Strip trailing punctuation (but not matched parens)',
 				html: '<p><b>https://en.wikipedia.org/wiki/Red_(disambiguation) xyz</b></p>',
-				rangeOrSelection: new ve.Range( 1, 52 ),
+				rangeOrSelection: new ve.Range( 1, 51 ),
 				method: 'autolinkUrl',
-				expectedRangeOrSelection: new ve.Range( 52 ),
+				expectedRangeOrSelection: new ve.Range( 51 ),
 				expectedData: function ( data, action ) {
 					var i,
 						a = action.getLinkAnnotation( 'https://en.wikipedia.org/wiki/Red_(disambiguation)' );
@@ -31,7 +31,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 				html: '<p><b>RFC 1234 xyz</b></p>',
 				rangeOrSelection: new ve.Range( 1, 10 ),
 				method: 'autolinkMagicLink',
-				expectedRangeOrSelection: new ve.Range( 4, 4 ),
+				expectedRangeOrSelection: new ve.Range( 4 ),
 				expectedOriginalRangeOrSelection: new ve.Range( 10 ),
 				expectedData: function ( data ) {
 					data.splice( 1, 8, {
