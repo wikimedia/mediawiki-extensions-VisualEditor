@@ -9,7 +9,8 @@
 			"Teoo3",
 			"Srdjan m",
 			"Ex13",
-			"Ivi104"
+			"Ivi104",
+			"Bugoslav"
 		]
 	},
 	"tooltip-ca-createsource": "Napravi izvorni kod ove stranice",
@@ -45,7 +46,7 @@
 	"visualeditor-dialog-media-info-created": "Stvoreno: $1",
 	"visualeditor-dialog-media-info-dateformat": "$2. $1 $3.",
 	"visualeditor-dialog-media-info-imagedescription": "Puni opis",
-	"visualeditor-dialog-media-info-licenseshortname": "Licenca",
+	"visualeditor-dialog-media-info-licenseshortname": "Licencija",
 	"visualeditor-dialog-media-info-meta-artist": "Autor: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Više informacija",
 	"visualeditor-dialog-media-info-readmore": "Pročitajte više",
