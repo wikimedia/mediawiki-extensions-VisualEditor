@@ -11,7 +11,8 @@
 			"Gırd",
 			"1917 Ekim Devrimi",
 			"Gambollar",
-			"Asmen"
+			"Asmen",
+			"Archaeodontosaurus"
 		]
 	},
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
@@ -122,7 +123,7 @@
 	"visualeditor-dialog-media-upload": "Bar ke",
 	"visualeditor-dialog-meta-advancedsettings-label": "Parametreyê ilawey",
 	"visualeditor-dialog-meta-advancedsettings-section": "Parametreyê ilawey",
-	"visualeditor-dialog-meta-categories-category": "Kategoriye",
+	"visualeditor-dialog-meta-categories-category": "Kategori",
 	"visualeditor-dialog-meta-categories-data-label": "Kategoriy",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Şıma şenê babetna indeksa perran rêz kerê yana ju kategori tede dı eyara bıvurnê sexırabin cıcêna. Peynamey insana na rêz bıyaye perri karênê,  lakin vername ya zi name benê.",
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Na perer hesıbyayi deyne réz ke",
