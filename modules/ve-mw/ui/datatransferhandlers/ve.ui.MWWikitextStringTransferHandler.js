@@ -80,6 +80,22 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 		handler = this,
 		wikitext = this.item.getAsString();
 
+	// We already know how to handle wikitext magic links, no need for the API call
+	if ( ve.dm.MWMagicLinkNode.static.validateContent( wikitext.trim() ) ) {
+		handler.resolve( [
+			{
+				type: 'link/mwMagic',
+				attributes: {
+					content: wikitext.trim()
+				}
+			},
+			{
+				type: '/link/mwMagic'
+			}
+		] );
+		return;
+	}
+
 	function failure() {
 		// There's no DTH fallback handling for failures, so just paste
 		// the raw wikitext if things go wrong.
