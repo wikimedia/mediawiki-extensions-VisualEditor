@@ -19,7 +19,7 @@ ve.ui.MWExtensionWindow = function VeUiMWExtensionWindow() {
 	this.input = null;
 	this.originalMwData = null;
 
-	this.onChangeHandler = ve.debounce( this.onChange.bind( this ), 0 );
+	this.onChangeHandler = ve.debounce( this.onChange.bind( this ) );
 };
 
 /* Inheritance */
