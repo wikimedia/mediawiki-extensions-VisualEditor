@@ -14,7 +14,9 @@
 }
 
 .ve-ui-mwMediaInfoFieldWidget-text {
+	word-break: break-word;
 	word-wrap: break-word;
+	overflow-wrap: break-word;
 	overflow: hidden;
 	/* stylelint-disable no-unsupported-browser-features */
 	-webkit-transition: max-height 0.5s ease-in;
