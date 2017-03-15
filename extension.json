@@ -58,12 +58,6 @@
 		"VisualEditorShowBetaWelcome": true,
 		"VisualEditorParsoidHTTPProxy": false,
 		"VisualEditorBrowserBlacklist": {
-			"msie": [
-				[
-					"<=",
-					8
-				]
-			],
 			"android": [
 				[
 					"<",

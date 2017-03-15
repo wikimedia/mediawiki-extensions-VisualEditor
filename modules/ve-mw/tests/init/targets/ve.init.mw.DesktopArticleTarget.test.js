@@ -16,16 +16,6 @@ QUnit.test( 'compatibility', function ( assert ) {
 				matches: []
 			},
 			{
-				msg: 'IE7',
-				userAgent: 'Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)',
-				matches: [ 'blacklist' ]
-			},
-			{
-				msg: 'IE8',
-				userAgent: 'Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.2; Trident/4.0)',
-				matches: [ 'blacklist' ]
-			},
-			{
 				msg: 'IE9',
 				userAgent: 'Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)',
 				matches: []
