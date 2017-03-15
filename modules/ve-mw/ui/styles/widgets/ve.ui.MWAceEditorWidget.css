@@ -12,6 +12,17 @@
 	font-family: monospace, 'Courier';
 	font-size: inherit;
 	line-height: 1.5;
+	/* Allow tooptip outside of editor */
+	overflow: visible;
+}
+
+.ve-ui-mwAceEditorWidget .ace_tooltip {
+	/* Make tooltip into status bar, as position is broken in Ace */
+	top: auto !important; /* stylelint-disable-line declaration-no-important */
+	bottom: -23px !important; /* stylelint-disable-line declaration-no-important */
+	left: 0 !important; /* stylelint-disable-line declaration-no-important */
+	white-space: pre-wrap;
+	position: absolute;
 }
 
 .ve-ui-mwAceEditorWidget .ace_focus {
