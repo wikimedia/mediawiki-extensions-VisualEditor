@@ -156,6 +156,7 @@ class VisualEditorHooks {
 			isset( $params['preload'] ) ||
 			isset( $params['preloadtitle'] ) ||
 			isset( $params['preloadparams'] ) ||
+			isset( $params['lintid'] ) ||
 			isset( $params['veswitched'] );
 			// Known-good parameters: edit, veaction, section
 
