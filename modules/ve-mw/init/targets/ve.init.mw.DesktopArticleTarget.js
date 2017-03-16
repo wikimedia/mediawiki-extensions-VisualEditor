@@ -1598,7 +1598,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 	if ( this.welcomeDialogPromise ) {
 		this.welcomeDialogPromise
 			.always( function () {
-				var noticesTool, popup, notices;
+				var popup;
 				// Pop out the notices when the welcome dialog is closed
 				if (
 					target.switched &&
@@ -1608,12 +1608,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 					target.actionsToolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
 					popup.toggle( true );
 				} else {
-					notices = target.getEditNotices();
-					if ( notices.length ) {
-						noticesTool = target.actionsToolbar.tools.notices;
-						noticesTool.setNotices( notices );
-						noticesTool.getPopup().toggle( true );
-					}
+					target.actionsToolbar.tools.notices.setNotices( target.getEditNotices() );
 				}
 			} );
 	}
