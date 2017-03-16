@@ -403,7 +403,8 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.css"
+				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.css",
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMobileSaveDialog.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.base",
@@ -513,7 +514,8 @@
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
-				"ext.visualEditor.mwextensions"
+				"ext.visualEditor.mwextensions",
+				"oojs-ui.styles.icons-alerts"
 			],
 			"messages": [
 				"accesskey-diff",
@@ -1287,6 +1289,9 @@
 				"visualeditor-savedialog-label-review-good",
 				"visualeditor-savedialog-label-save-short",
 				"visualeditor-savedialog-label-warning",
+				"visualeditor-savedialog-review-nosummary",
+				"visualeditor-savedialog-review-visual",
+				"visualeditor-savedialog-review-wikitext",
 				"visualeditor-savedialog-title-conflict",
 				"visualeditor-savedialog-title-nochanges",
 				"visualeditor-savedialog-title-preview",
@@ -1322,6 +1327,7 @@
 				"ext.visualEditor.mwtransclusion",
 				"ext.visualEditor.mwgallery",
 				"ext.visualEditor.mwalienextension",
+				"ext.visualEditor.diffing",
 				"ext.visualEditor.language",
 				"ext.visualEditor.icons"
 			],
@@ -1730,6 +1736,56 @@
 				"visualeditor-parameter-search-more",
 				"visualeditor-parameter-search-no-unused",
 				"visualeditor-parameter-search-unknown"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"treeDiffer": {
+			"scripts": [
+				"lib/ve/lib/treeDiffer/treeDiffer-dist.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"diffMatchPatch": {
+			"scripts": [
+				"lib/ve/lib/diff-match-patch/diff_match_patch_uncompressed.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.diffing": {
+			"debugScripts": [
+				"lib/ve/src/ve.DiffTreeNode.js",
+				"lib/ve/src/ve.DiffMatchPatch.js",
+				"lib/ve/src/dm/ve.dm.VisualDiff.js",
+				"lib/ve/src/ui/elements/ve.ui.DiffElement.js",
+				"lib/ve/src/ui/widgets/ve.ui.ChangeDescriptionsSelectWidget.js"
+			],
+			"styles": [
+				"lib/ve/src/ui/styles/elements/ve.ui.DiffElement.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.core",
+				"treeDiffer",
+				"diffMatchPatch"
+			],
+			"messages": [
+				"visualeditor-changedesc-changed",
+				"visualeditor-changedesc-image-size",
+				"visualeditor-changedesc-language",
+				"visualeditor-changedesc-link-href",
+				"visualeditor-changedesc-no-key",
+				"visualeditor-changedesc-set",
+				"visualeditor-changedesc-unknown",
+				"visualeditor-changedesc-unset",
+				"visualeditor-diff-no-changes"
 			],
 			"targets": [
 				"desktop",

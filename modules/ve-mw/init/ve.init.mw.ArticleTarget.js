@@ -35,6 +35,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.saveDeferred = null;
 	this.captcha = null;
 	this.docToSave = null;
+	this.originalDmDoc = null;
 	this.toolbarSaveButton = null;
 	this.pageName = pageName;
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
@@ -743,7 +744,7 @@ ve.init.mw.ArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
 	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
 	);
-	this.saveDialog.setDiffAndReview( diffHtml );
+	this.saveDialog.setDiffAndReview( diffHtml, this.getVisualDiff() );
 };
 
 /**
@@ -1066,7 +1067,7 @@ ve.init.mw.ArticleTarget.prototype.serializeFail = function () {
  * @fires saveReview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
-	if ( !this.saveDialog.$reviewViewer.find( 'table, pre' ).length ) {
+	if ( !this.saveDialog.hasDiff ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.getActions().setAbilities( { approve: false } );
 		this.saveDialog.pushPending();
@@ -1153,7 +1154,24 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	this.bindSaveDialogClearDiff();
-	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ) );
+	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ), this.getVisualDiff() );
+};
+
+/**
+ * Get a visual diff object for the current document state
+ *
+ * @return {ve.dm.VisualDiff|null} Visual diff, or null if not known
+ */
+ve.init.mw.ArticleTarget.prototype.getVisualDiff = function () {
+	if ( this.getSurface().getMode() === 'source' ) {
+		return null;
+	}
+	if ( !this.originalDmDoc ) {
+		// TODO: If switching from source - we need to fetch the original doc
+		// from the server.
+		this.originalDmDoc = this.createModelFromDom( this.doc, 'visual' );
+	}
+	return new ve.dm.VisualDiff( this.originalDmDoc, this.getSurface().getModel().getDocument() );
 };
 
 /**
@@ -1250,6 +1268,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.startTimeStamp = null;
 	this.checkboxes = null;
 	this.doc = null;
+	this.originalDmDoc = null;
 	this.originalHtml = null;
 	this.section = null;
 	this.editNotices = [];
