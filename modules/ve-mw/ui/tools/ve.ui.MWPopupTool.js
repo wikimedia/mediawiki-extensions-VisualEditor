@@ -75,6 +75,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 
 	if ( !count ) {
 		this.destroy();
+		return;
 	}
 
 	this.popup.setLabel( ve.msg(
