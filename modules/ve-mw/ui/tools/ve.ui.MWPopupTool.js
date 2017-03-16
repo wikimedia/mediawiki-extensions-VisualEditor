@@ -78,6 +78,10 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 		mw.language.convertNumber( count )
 	) );
 
+	if ( this.$items ) {
+		this.$items.remove();
+	}
+
 	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
 
 	notices.forEach( function ( itemHtml ) {
