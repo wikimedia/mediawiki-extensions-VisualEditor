@@ -141,6 +141,19 @@ ve.dm.MWExtensionNode.static.getExtensionName = function () {
 	return this.extensionName;
 };
 
+ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, change, element ) {
+	// HACK: Try to generate an '<Extension> has changed' message using associated tool's title
+	// Extensions should provide more detailed change descriptions
+	var tools = ve.ui.toolFactory.getRelatedItems( [ ve.dm.nodeFactory.createFromElement( element ) ] );
+	if ( tools.length ) {
+		return [ ve.msg( 'visualeditor-changedesc-unknown',
+			OO.ui.resolveMsg( ve.ui.toolFactory.lookup( tools[ 0 ].name ).static.title )
+		) ];
+	}
+	// Parent method
+	ve.dm.MWExtensionNode.super.static.describeChange.apply( this, arguments );
+};
+
 /* Methods */
 
 /**

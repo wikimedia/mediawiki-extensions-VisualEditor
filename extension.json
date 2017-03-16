@@ -1327,7 +1327,7 @@
 				"ext.visualEditor.mwtransclusion",
 				"ext.visualEditor.mwgallery",
 				"ext.visualEditor.mwalienextension",
-				"ext.visualEditor.diffing",
+				"ext.visualEditor.mwdiffing",
 				"ext.visualEditor.language",
 				"ext.visualEditor.icons"
 			],
@@ -1754,6 +1754,18 @@
 		"diffMatchPatch": {
 			"scripts": [
 				"lib/ve/lib/diff-match-patch/diff_match_patch_uncompressed.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.mwdiffing": {
+			"dependencies": [
+				"ext.visualEditor.diffing"
+			],
+			"messages": [
+				"visualeditor-changedesc-mwtransclusion"
 			],
 			"targets": [
 				"desktop",

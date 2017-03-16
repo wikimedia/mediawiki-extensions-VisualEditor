@@ -192,6 +192,11 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 	return els;
 };
 
+ve.dm.MWTransclusionNode.static.describeChanges = function () {
+	// TODO: Provide a more detailed description of template changes
+	return [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
+};
+
 /** */
 ve.dm.MWTransclusionNode.static.cloneElement = function () {
 	// Parent method

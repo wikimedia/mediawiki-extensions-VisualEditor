@@ -76,6 +76,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Categories",
+	"visualeditor-changedesc-mwtransclusion": "Template parameters changed",
 	"visualeditor-desc": "Visual editor for MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Alternative text",

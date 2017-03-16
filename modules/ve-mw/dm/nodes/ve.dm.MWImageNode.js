@@ -60,6 +60,55 @@ ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
 	};
 };
 
+ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attributes ) {
+	var key, sizeFrom, sizeTo, change,
+		customKeys = [ 'width', 'height', 'defaultSize', 'src', 'href' ],
+		descriptions = [];
+
+	function describeSize( width, height ) {
+		return width + ve.msg( 'visualeditor-dimensionswidget-times' ) + height + ve.msg( 'visualeditor-dimensionswidget-px' );
+	}
+
+	if ( 'width' in attributeChanges || 'height' in attributeChanges ) {
+		if ( attributeChanges.defaultSize && attributeChanges.defaultSize.from === true ) {
+			sizeFrom = ve.msg( 'visualeditor-mediasizewidget-sizeoptions-default' );
+		} else {
+			sizeFrom = describeSize(
+				'width' in attributeChanges ? attributeChanges.width.from : attributes.width,
+				'height' in attributeChanges ? attributeChanges.height.from : attributes.height
+			);
+		}
+		if ( attributeChanges.defaultSize && attributeChanges.defaultSize.to === true ) {
+			sizeTo = ve.msg( 'visualeditor-mediasizewidget-sizeoptions-default' );
+		} else {
+			sizeTo = describeSize(
+				'width' in attributeChanges ? attributeChanges.width.to : attributes.width,
+				'height' in attributeChanges ? attributeChanges.height.to : attributes.height
+			);
+		}
+
+		descriptions.push( ve.msg( 'visualeditor-changedesc-image-size', sizeFrom, sizeTo ) );
+	}
+	for ( key in attributeChanges ) {
+		if ( customKeys.indexOf( key ) === -1 ) {
+			change = this.describeChange( key, attributeChanges[ key ] );
+			descriptions.push( change );
+		}
+	}
+	return descriptions;
+};
+
+ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
+	if ( key === 'align' ) {
+		return ve.msg( 'visualeditor-changedesc-align',
+			ve.msg( 'visualeditor-align-widget-' + change.from ),
+			ve.msg( 'visualeditor-align-widget-' + change.to )
+		);
+	}
+	// Parent method
+	return ve.dm.Node.static.describeChange.apply( this, arguments );
+};
+
 /**
  * Take the given dimensions and scale them to thumbnail size.
  *

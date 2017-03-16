@@ -64,6 +64,13 @@ ve.dm.MWExternalLinkAnnotation.static.toDomElements = function ( dataElement ) {
 	return domElements;
 };
 
+ve.dm.MWExternalLinkAnnotation.static.describeChange = function ( key, change ) {
+	if ( key === 'href' ) {
+		return ve.msg( 'visualeditor-changedesc-link-href', change.from, change.to );
+	}
+	return null;
+};
+
 /* Methods */
 
 /**
