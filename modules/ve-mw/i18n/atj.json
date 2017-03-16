@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Benoit Rochon"
+			"Benoit Rochon",
+			"Jean-paul echaquan"
 		]
 	},
 	"tooltip-ca-ve-edit": "Mecikotona owe",
+	"visualeditor-ca-editsource": "Meckotcita ka itactek",
 	"visualeditor-ca-editsource-section": "Meckotcita ka itactek"
 }

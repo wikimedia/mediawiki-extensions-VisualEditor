@@ -323,6 +323,8 @@
 	"visualeditor-mwgallerydialog-title": "图库",
 	"visualeditor-mwgallerydialog-widths-field-label": "图像宽度",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "默认宽度：$1 px",
+	"visualeditor-mwpredialog-title": "预格式化纯文本",
+	"visualeditor-mwpredialog-convert": "允许文本样式",
 	"visualeditor-mwsignature-tool": "您的签名",
 	"visualeditor-pagemenu-tooltip": "页面选项",
 	"visualeditor-pagetranslationwarning": "您正在编辑可翻译页面。此编辑器尚不支持编辑此类型页面。",

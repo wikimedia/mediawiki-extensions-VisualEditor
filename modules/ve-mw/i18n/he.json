@@ -310,6 +310,8 @@
 	"visualeditor-mwgallerydialog-title": "גלריה",
 	"visualeditor-mwgallerydialog-widths-field-label": "רוחב התמונה",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "רוחב ברירת המחדל: {{PLURAL:$1|פיקסל אחד|$1 פיקסלים}}",
+	"visualeditor-mwpredialog-title": "טקסט רגיל מעוצב מראש",
+	"visualeditor-mwpredialog-convert": "לאפשר עיצוב טקסט",
 	"visualeditor-mwsignature-tool": "החתימה שלך",
 	"visualeditor-pagemenu-tooltip": "אפשרויות דף",
 	"visualeditor-pagetranslationwarning": "זהו דף לתרגום. עריכה של דפים כאלה אינה נתמכת בעורך הזה.",

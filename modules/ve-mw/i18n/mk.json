@@ -300,6 +300,8 @@
 	"visualeditor-mwgallerydialog-title": "Галерија",
 	"visualeditor-mwgallerydialog-widths-field-label": "Ширина на сликата",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Основна ширина: $1 px",
+	"visualeditor-mwpredialog-title": "Претформатиран прост текст",
+	"visualeditor-mwpredialog-convert": "Допушти обликување на текстот",
 	"visualeditor-mwsignature-tool": "Ваш потпис",
 	"visualeditor-pagemenu-tooltip": "Поставки за страница",
 	"visualeditor-pagetranslationwarning": "Уредувате преводлива страница. Овој уредник сè уште не поддржува работа со вакви страници.",

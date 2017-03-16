@@ -308,6 +308,8 @@
 	"visualeditor-mwgallerydialog-title": "Galerie",
 	"visualeditor-mwgallerydialog-widths-field-label": "Bildbreite",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Standardbreite: $1 Pixel",
+	"visualeditor-mwpredialog-title": "Vorformatierter Klartext",
+	"visualeditor-mwpredialog-convert": "Textgestaltung erlauben",
 	"visualeditor-mwsignature-tool": "Deine Unterschrift",
 	"visualeditor-pagemenu-tooltip": "Seitenoptionen",
 	"visualeditor-pagetranslationwarning": "Du bearbeitest eine übersetzbare Seite. Das Bearbeiten solcher Seiten in diesem Editor wird noch nicht offiziell unterstützt.",

@@ -344,6 +344,8 @@
 	"visualeditor-mwgallerydialog-title": "Galerie",
 	"visualeditor-mwgallerydialog-widths-field-label": "Largeur de l’image",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Largeur par défaut : $1 px",
+	"visualeditor-mwpredialog-title": "Texte simple préformaté",
+	"visualeditor-mwpredialog-convert": "Permettre l’application de styles au texte",
 	"visualeditor-mwsignature-tool": "Votre signature",
 	"visualeditor-pagemenu-tooltip": "Options de page",
 	"visualeditor-pagetranslationwarning": "Vous êtes en train de modifier une page qui peut être traduite. Les modifications faites dans cet éditeur ne sont pas encore officiellement prises en charge.",
