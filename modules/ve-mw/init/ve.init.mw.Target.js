@@ -261,7 +261,7 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
  * @inheritdoc
  */
 ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
-	var importRules, surface, surfaceView, $documentNode;
+	var importRules, surface, documentView;
 
 	if ( config && config.mode === 'source' ) {
 		importRules = ve.copy( this.constructor.static.importRules );
@@ -280,15 +280,19 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 	// Parent method
 	surface = ve.init.mw.Target.super.prototype.createSurface.apply( this, arguments );
 
-	surfaceView = surface.getView();
-	$documentNode = surfaceView.getDocument().getDocumentNode().$element;
-
 	surface.$element.addClass( this.protectedClasses );
 
-	$documentNode.addClass(
+	documentView = surface.getView().getDocument();
+
+	function onLangChange() {
 		// Add appropriately mw-content-ltr or mw-content-rtl class
-		'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir
-	);
+		documentView.getDocumentNode().$element
+			.removeClass( 'mw-content-ltr mw-content-rtl' )
+			.addClass( 'mw-content-' + documentView.getDir() );
+	}
+
+	documentView.on( 'langChange', onLangChange );
+	onLangChange();
 
 	return surface;
 };
