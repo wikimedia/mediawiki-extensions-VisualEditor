@@ -89,6 +89,7 @@
 	"visualeditor-ca-ve-edit": "Link text of the dedicated VisualEditor {{msg-mw|Edit}} tab.\n{{Identical|VisualEditor}}",
 	"visualeditor-ca-ve-edit-section": "{{Identical|VisualEditor}}",
 	"visualeditor-categories-tool": "Tool for opening the categories section of the meta dialog.\n{{Identical|Category}}",
+	"visualeditor-changedesc-mwtransclusion": "Generic description of a template that has had some parameters changed",
 	"visualeditor-desc": "{{desc|name=VisualEditor|url=https://www.mediawiki.org/wiki/Extension:VisualEditor}}",
 	"visualeditor-descriptionpagelink": "{{doc-important|Do not translate \"Project\"; it is automatically converted to the wiki's project namespace.}}\nName of a page describing the use of VisualEditor in this project.\n\nUsed in:\n* {{msg-mw|Tag-visualeditor}}\n* {{msg-mw|Tag-visualeditor-description}}\n* {{msg-mw|Tag-visualeditor-needcheck}}\n* {{msg-mw|Tag-visualeditor-needcheck-description}}",
 	"visualeditor-dialog-media-alttext-section": "Label for the image alternative text sub-section.",

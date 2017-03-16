@@ -193,6 +193,13 @@ ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
 	return title.getPrefixedText();
 };
 
+ve.dm.MWInternalLinkAnnotation.static.describeChange = function ( key, change ) {
+	if ( key === 'title' ) {
+		return ve.msg( 'visualeditor-changedesc-link-href', change.from, change.to );
+	}
+	return null;
+};
+
 /* Methods */
 
 /**
