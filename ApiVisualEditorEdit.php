@@ -9,6 +9,7 @@
  */
 
 use \MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditorEdit extends ApiVisualEditor {
 
@@ -176,7 +177,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$logger = LoggerFactory::getInstance( 'StashEdit' );
 			$logger->debug( "Cached parser output for VE content key '$key'." );
 		}
-		$this->getStats()->increment( "editstash.ve_cache_stores.$status" );
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			"editstash.ve_cache_stores.$status"
+		);
 
 		return $hash;
 	}
