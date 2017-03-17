@@ -1773,7 +1773,7 @@
 			]
 		},
 		"ext.visualEditor.diffing": {
-			"debugScripts": [
+			"scripts": [
 				"lib/ve/src/ve.DiffTreeNode.js",
 				"lib/ve/src/ve.DiffMatchPatch.js",
 				"lib/ve/src/dm/ve.dm.VisualDiff.js",
