@@ -312,6 +312,8 @@
 	"visualeditor-mwgallerydialog-title": "Galleri",
 	"visualeditor-mwgallerydialog-widths-field-label": "Bildbredd",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Standardbredd: $1 px",
+	"visualeditor-mwpredialog-title": "Förformaterad vanlig text",
+	"visualeditor-mwpredialog-convert": "Tillåt textformatering",
 	"visualeditor-mwsignature-tool": "Din signatur",
 	"visualeditor-pagemenu-tooltip": "Sidalternativ",
 	"visualeditor-pagetranslationwarning": "Du redigerar en översättbar sida. Redigering av dessa i denna redigerare stöds ännu inte officiellt.",

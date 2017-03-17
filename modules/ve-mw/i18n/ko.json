@@ -308,6 +308,7 @@
 	"visualeditor-mwgallerydialog-title": "갤러리",
 	"visualeditor-mwgallerydialog-widths-field-label": "그림 너비",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "기본 너비: $1 px",
+	"visualeditor-mwpredialog-convert": "텍스트 서식 허용",
 	"visualeditor-mwsignature-tool": "당신의 서명",
 	"visualeditor-pagemenu-tooltip": "문서 옵션",
 	"visualeditor-pagetranslationwarning": "번역할 수 있는 문서를 편집하고 있습니다. 이 편집에서의 이러한 편집은 아직 공식적으로 지원되지 않습니다.",
