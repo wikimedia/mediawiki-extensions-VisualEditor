@@ -172,7 +172,7 @@
 	"visualeditor-dialog-meta-settings-toc-disable": "Nunca",
 	"visualeditor-dialog-meta-settings-toc-force": "Sempre",
 	"visualeditor-dialog-meta-settings-toc-help": "Pode forzar a visualización do índice de contidos nas páxinas con menos de tres seccións; tamén pode facer que non apareza. Por defecto, o índice móstrase se a páxina ten tres ou máis seccións.",
-	"visualeditor-dialog-meta-settings-toc-label": "Mostrar o táboa de contidos",
+	"visualeditor-dialog-meta-settings-toc-label": "Mostrar a táboa de contidos",
 	"visualeditor-dialog-meta-title": "Opcións",
 	"visualeditor-dialog-table-sortable": "Ordenable",
 	"visualeditor-dialog-table-wikitable": "Estilo (wikitable)",

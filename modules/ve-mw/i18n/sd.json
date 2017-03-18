@@ -3,7 +3,8 @@
 		"authors": [
 			"Sindhu",
 			"Aursani",
-			"Mehtab ahmed"
+			"Mehtab ahmed",
+			"Indus Asia"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "پيش ڪرڻ لاءِ عمل.",
@@ -202,6 +203,9 @@
 	"visualeditor-savedialog-label-review": "پنهنجين تبديلين تي نظرثاني ڪريو",
 	"visualeditor-savedialog-label-save-short": "سانڍيو",
 	"visualeditor-savedialog-label-warning": "چتاءُ",
+	"visualeditor-savedialog-review-nosummary": "سُڌارُن (ايڊٽ) جو تت ڪونهي",
+	"visualeditor-savedialog-review-visual": "ڏيک",
+	"visualeditor-savedialog-review-wikitext": "وڪي ٽيڪسٽ",
 	"visualeditor-savedialog-title-conflict": "تڪرار",
 	"visualeditor-savedialog-title-nochanges": "نظرثاني ڪرڻ لاءِ ڪي بہ تبديليون نہ آهن",
 	"visualeditor-savedialog-title-review": "پنهنجي تبديلين تي نظرثاني ڪريو",
