@@ -765,6 +765,8 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		surface.$element.before( surface.mwTocWidget.$element );
 	}
 
+	this.transformCategoryLinks( $( '.catlinks' ) );
+
 	// Track how long it takes for the first transaction to happen
 	surface.getModel().getDocument().once( 'transact', function () {
 		ve.track( 'mwtiming.behavior.firstTransaction', {
@@ -1265,8 +1267,6 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content = $content.parent();
 	}
 
-	this.transformCategoryLinks( $( '.catlinks' ) );
-
 	this.disableUneditableContent();
 
 	this.updateHistoryState();
@@ -1281,13 +1281,17 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $catlinks ) {
 	var target = this;
 	// Un-disable the catlinks wrapper, but not the links
-	$catlinks.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
-		.on( 'click.ve-target', function () {
-			var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
-			windowAction.open( 'meta', { page: 'categories' } );
-			return false;
-		} )
-		.find( 'a' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+	if ( this.getSurface() && this.getSurface().getMode() === 'visual' ) {
+		$catlinks.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
+			.on( 'click.ve-target', function () {
+				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+				windowAction.open( 'meta', { page: 'categories' } );
+				return false;
+			} )
+			.find( 'a' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+	} else {
+		$catlinks.addClass( 've-init-mw-desktopArticleTarget-uneditableContent' ).off( '.ve-target' );
+	}
 };
 
 /**
