@@ -1,12 +1,12 @@
 /*!
- * VisualEditor ContentEditable ListItemNode class.
+ * VisualEditor ContentEditable ImageCaptionNode class.
  *
  * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
 /**
- * ContentEditable image caption item node.
+ * ContentEditable image caption node.
  *
  * @class
  * @extends ve.ce.BranchNode
