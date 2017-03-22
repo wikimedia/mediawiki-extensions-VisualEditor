@@ -139,7 +139,7 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
 		if ( !this.$caption ) {
 			model = this.model.children[ 0 ];
 			view = ve.ce.nodeFactory.create( model.getType(), model );
-			model.connect( this, { update: 'onModelUpdate' } );
+			model.connect( view, { update: 'onModelUpdate' } );
 			this.children.push( view );
 			view.attach( this );
 			if ( this.live !== view.isLive() ) {
