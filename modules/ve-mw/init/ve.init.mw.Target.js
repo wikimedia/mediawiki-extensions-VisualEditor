@@ -177,7 +177,7 @@ ve.init.mw.Target.prototype.documentReady = function ( doc ) {
 };
 
 /**
- * Once surface is ready ready, initialize the UI
+ * Once surface is ready, initialize the UI
  *
  * @method
  * @fires surfaceReady
