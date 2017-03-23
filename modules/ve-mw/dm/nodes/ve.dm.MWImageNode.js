@@ -91,6 +91,10 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 	}
 	for ( key in attributeChanges ) {
 		if ( customKeys.indexOf( key ) === -1 ) {
+			if ( key === 'borderImage' && !attributeChanges.borderImage.from && !attributeChanges.borderImage.to ) {
+				// Skip noise from the data model
+				continue;
+			}
 			change = this.describeChange( key, attributeChanges[ key ] );
 			descriptions.push( change );
 		}
@@ -101,6 +105,9 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
 	if ( key === 'align' ) {
 		return ve.msg( 'visualeditor-changedesc-align',
+			// Messages used:
+			// visualeditor-align-widget-left, visualeditor-align-widget-right,
+			// visualeditor-align-widget-center, visualeditor-align-widget-default
 			ve.msg( 'visualeditor-align-widget-' + change.from ),
 			ve.msg( 'visualeditor-align-widget-' + change.to )
 		);
