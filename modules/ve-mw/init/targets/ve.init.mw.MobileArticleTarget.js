@@ -16,8 +16,6 @@
  * @cfg {number} [section] Number of the section target should scroll to
  */
 ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) {
-	var currentUri = new mw.Uri();
-
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		actions: false
@@ -25,7 +23,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 
 	// Parent constructor
 	ve.init.mw.MobileArticleTarget.super.call(
-		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid, config
+		this, mw.config.get( 'wgRelevantPageName' ), mw.config.get( 'wgRevisionId' ), config
 	);
 
 	this.section = config.section;

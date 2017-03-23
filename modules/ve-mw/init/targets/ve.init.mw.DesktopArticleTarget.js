@@ -22,7 +22,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 
 	// Parent constructor
 	ve.init.mw.DesktopArticleTarget.super.call(
-		this, mw.config.get( 'wgRelevantPageName' ), currentUri.query.oldid, config
+		this, mw.config.get( 'wgRelevantPageName' ), mw.config.get( 'wgRevisionId' ), config
 	);
 
 	// Parent constructor bound key event handlers, but we don't want them bound until
@@ -1677,7 +1677,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 	var uri, oldid, prefPromise,
 		target = this;
 
-	oldid = this.currentUri.query.oldid || $( 'input[name=parentRevId]' ).val();
+	oldid = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
 	prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( discardChanges ) {
