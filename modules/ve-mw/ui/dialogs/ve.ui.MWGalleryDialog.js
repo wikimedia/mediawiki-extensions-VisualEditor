@@ -695,7 +695,6 @@ ve.ui.MWGalleryDialog.prototype.getCurrentData = function () {
 		items = this.galleryGroup.items;
 
 	// Get data from options card
-	data.mode = this.modeDropdown.getMenu().getSelectedItem().getData();
 	data.caption = this.captionInput.getValue() || undefined;
 	data.widths = this.widthsInput.getValue() || undefined;
 	data.heights = this.heightsInput.getValue() || undefined;
@@ -703,6 +702,9 @@ ve.ui.MWGalleryDialog.prototype.getCurrentData = function () {
 	data.showFilename = this.showFilenameCheckbox.isSelected() ? 'yes' : undefined;
 	data.classes = this.classesInput.getValue() || undefined;
 	data.styles = this.stylesInput.getValue() || undefined;
+	if ( this.modeDropdown.getMenu().getSelectedItem() ) {
+		data.mode = this.modeDropdown.getMenu().getSelectedItem().getData();
+	}
 
 	// Unset mode attribute if it is the same as the default
 	data.mode = data.mode === this.defaults.mode ? undefined : data.mode;
