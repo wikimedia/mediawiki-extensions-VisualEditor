@@ -1790,6 +1790,7 @@
 				"diffMatchPatch"
 			],
 			"messages": [
+				"visualeditor-changedesc-align",
 				"visualeditor-changedesc-changed",
 				"visualeditor-changedesc-image-size",
 				"visualeditor-changedesc-language",
