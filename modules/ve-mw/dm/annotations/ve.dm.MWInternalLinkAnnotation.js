@@ -54,10 +54,12 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
  * Build a ve.dm.MWInternalLinkAnnotation from a given mw.Title.
  *
  * @param {mw.Title} title The title to link to.
+ * @param {string} [rawTitle] String from which the title was created
  * @return {ve.dm.MWInternalLinkAnnotation} The annotation.
  */
-ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title ) {
-	var target = title.toText(),
+ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle ) {
+	var element,
+		target = title.toText(),
 		namespaceIds = mw.config.get( 'wgNamespaceIds' );
 
 	if ( title.getNamespaceId() === namespaceIds.file || title.getNamespaceId() === namespaceIds.category ) {
@@ -70,14 +72,18 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title ) {
 		target += '#' + title.getFragment();
 	}
 
-	return new ve.dm.MWInternalLinkAnnotation( {
+	element = {
 		type: 'link/mwInternal',
 		attributes: {
 			title: target,
 			normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( title ),
 			lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( title )
 		}
-	} );
+	};
+	if ( rawTitle ) {
+		element.attributes.origTitle = rawTitle;
+	}
+	return new ve.dm.MWInternalLinkAnnotation( element );
 };
 
 /**

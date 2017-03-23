@@ -29,19 +29,20 @@ OO.inheritClass( ve.ui.MWInternalLinkAnnotationWidget, ve.ui.LinkAnnotationWidge
  * @inheritdoc
  */
 ve.ui.MWInternalLinkAnnotationWidget.static.getAnnotationFromText = function ( value ) {
-	var title = mw.Title.newFromText( value.trim() );
+	var trimmed = value.trim(),
+		title = mw.Title.newFromText( trimmed );
 
 	if ( !title ) {
 		return null;
 	}
-	return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
+	return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title, trimmed );
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( annotation ) {
-	return annotation ? annotation.getAttribute( 'title' ) : '';
+	return annotation ? annotation.getAttribute( 'origTitle' ) || annotation.getAttribute( 'normalizedTitle' ) : '';
 };
 
 /* Methods */
