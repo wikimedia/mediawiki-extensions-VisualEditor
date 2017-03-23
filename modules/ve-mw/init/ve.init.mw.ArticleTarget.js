@@ -2028,7 +2028,9 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 			headingNode = $section.data( 'view' );
 
 			if ( $section.length && new mw.Uri().query.summary === undefined ) {
-				headingText = $section.text();
+				// Due to interactions with Translate, strip out mw-
+				// editsection from the heading.
+				headingText = $section.clone().find( 'span.mw-editsection' ).remove().end().text();
 			}
 
 			if ( headingNode ) {
