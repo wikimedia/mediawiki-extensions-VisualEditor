@@ -26,3 +26,16 @@ ve.ui.MWPreviewElement = function VeUiMwPreviewElement() {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWPreviewElement, ve.ui.PreviewElement );
+
+/* Method */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWPreviewElement.prototype.replaceWithModelDom = function () {
+	// Parent method
+	ve.ui.MWPreviewElement.super.prototype.replaceWithModelDom.apply( this, arguments );
+
+	// TODO: Remove when fixed upstream in Parsoid (T58756)
+	this.$element.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
+};
