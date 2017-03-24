@@ -376,7 +376,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 			}
 			if ( $label ) {
 				title = $label.attr( 'title' );
-				$label.find( 'a' ).attr( 'target', '_blank' );
+				ve.targetLinksToNewWindow( $label[ 0 ] );
 			}
 			checkbox = new OO.ui.CheckboxInputWidget( {
 				value: $this.attr( 'value' ),
@@ -1116,10 +1116,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 				document.adoptNode( body );
 				// TODO: This code is very similar to ve.ui.PreviewElement
 				ve.resolveAttributes( body, doc, ve.dm.Converter.static.computedAttributes );
-				// Make all links open in a new window (sync view)
-				Array.prototype.forEach.call( body.querySelectorAll( 'a[href]' ), function ( el ) {
-					el.setAttribute( 'target', '_blank' );
-				} );
+				ve.targetLinksToNewWindow( body );
 				target.saveDialog.showPreview( $( body ).contents() );
 			} else {
 				target.saveDialog.showPreview( $( '<em>' ).text(
