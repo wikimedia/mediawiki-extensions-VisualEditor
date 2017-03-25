@@ -124,11 +124,11 @@ ve.ui.MWSaveDialog.static.actions = [
 ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiff ) {
 	this.$reviewVisualDiff.empty();
 	if ( visualDiff ) {
-		this.diffElement = new ve.ui.DiffElement( visualDiff );
-		this.diffElement.$document.addClass( 'mw-body-content' );
-		// TODO: Remove when fixed upstream in Parsoid (T58756)
-		this.diffElement.$element.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
-		this.$reviewVisualDiff.append( this.diffElement.$element );
+		if ( this.diffElement ) {
+			this.diffElement.destroy();
+			this.diffElement = null;
+		}
+		this.visualDiff = visualDiff;
 		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( false );
 	} else {
 		// TODO: Support visual diffs in source mode (epic)
@@ -184,6 +184,10 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
 	this.$reviewWikitextDiff.empty();
 	this.$previewViewer.empty();
 	this.hasDiff = false;
+	if ( this.diffElement ) {
+		this.diffElement.destroy();
+		this.diffElement = null;
+	}
 };
 
 /**
@@ -590,9 +594,17 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	var isVisual = this.reviewModeButtonSelect.getSelectedItem().getData() === 'visual';
 	this.$reviewVisualDiff.toggleClass( 'oo-ui-element-hidden', !isVisual );
 	this.$reviewWikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
-	this.updateSize();
 	if ( isVisual ) {
+		if ( !this.diffElement ) {
+			this.diffElement = new ve.ui.DiffElement( this.visualDiff );
+			this.diffElement.$document.addClass( 'mw-body-content' );
+			// TODO: Remove when fixed upstream in Parsoid (T58756)
+			this.diffElement.$element.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
+			this.$reviewVisualDiff.append( this.diffElement.$element );
+		}
 		this.diffElement.positionDescriptions();
+		this.updateSize();
+	} else {
 		this.updateSize();
 	}
 };
@@ -663,6 +675,10 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
+			if ( this.diffElement ) {
+				this.diffElement.destroy();
+				this.diffElement = null;
+			}
 			this.emit( 'close' );
 		}, this );
 };
