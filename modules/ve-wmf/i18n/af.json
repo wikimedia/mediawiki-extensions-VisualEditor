@@ -11,8 +11,11 @@
 	"visualeditor-feedback-link": "Project:Visuele teksverwerker/Terugvoer",
 	"visualeditor-feedback-tool": "Laat terugvoer",
 	"visualeditor-help-label": "Lees die gebruikershandleiding",
-	"visualeditor-help-title": "Gebruikershandleiding vir die teksverwerker",
+	"visualeditor-help-title": "Handleiding vir gebruik van die redigeerder",
 	"visualeditor-welcomedialog-action": "Begin redigeer",
 	"visualeditor-welcomedialog-content": "Enigeen kan redigeer, en elke verbetering help.",
+	"visualeditor-welcomedialog-content-thanks": "Dankie vir u hulp om meer inligting aan die wêreld te bring!",
+	"visualeditor-welcomedialog-switch": "Skakel oor na bronredigeerder",
+	"visualeditor-welcomedialog-switch-ve": "Skakel oor na die visuele redigeerder",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Welkom}} by $2"
 }
