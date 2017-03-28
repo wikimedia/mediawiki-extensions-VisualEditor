@@ -16,6 +16,7 @@ composer.lock
 vendor
 screenshots/*.png
 .eslintcache
+tests/selenium/log
 
 # OS
 .DS_Store

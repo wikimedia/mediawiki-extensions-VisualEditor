@@ -7,9 +7,17 @@
 		"test": "grunt test",
 		"doc": "jsduck",
 		"postdoc": "grunt copy:jsduck",
-		"screenshots-all": "grunt screenshots-all"
+		"screenshots-all": "grunt screenshots-all",
+		"selenium-daily": "npm run selenium-test",
+		"selenium-test": "wdio tests/selenium/wdio.conf.js"
 	},
 	"devDependencies": {
+		"@wdio/cli": "7.4.6",
+		"@wdio/dot-reporter": "7.4.2",
+		"@wdio/junit-reporter": "7.4.2",
+		"@wdio/local-runner": "7.4.6",
+		"@wdio/mocha-framework": "7.4.6",
+		"@wdio/sync": "7.4.6",
 		"eslint-config-wikimedia": "0.20.0",
 		"grunt": "1.4.0",
 		"grunt-banana-checker": "0.9.0",
@@ -24,6 +32,8 @@
 		"mocha": "5.2.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
-		"stylelint-config-wikimedia": "0.11.1"
+		"stylelint-config-wikimedia": "0.11.1",
+		"wdio-mediawiki": "1.1.1",
+		"webdriverio": "7.4.6"
 	}
 }
