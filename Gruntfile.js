@@ -67,7 +67,7 @@ module.exports = function ( grunt ) {
 						}
 					]
 				},
-				src: [ 'build/screenshots.js' ]
+				src: [ 'build/screenshots.userGuide.js' ]
 			},
 			'screenshots-all': {
 				options: {
@@ -80,7 +80,7 @@ module.exports = function ( grunt ) {
 						}
 					]
 				},
-				src: [ 'build/screenshots.js' ]
+				src: [ 'build/screenshots.userGuide.js' ]
 			}
 		},
 		image: {
