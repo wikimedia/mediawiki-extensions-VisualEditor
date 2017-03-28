@@ -766,7 +766,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		surface.$element.before( surface.mwTocWidget.$element );
 	}
 
-	this.transformCategoryLinks( $( '.catlinks' ) );
+	this.transformCategoryLinks( $( '#catlinks' ) );
 
 	// Track how long it takes for the first transaction to happen
 	surface.getModel().getDocument().once( 'transact', function () {

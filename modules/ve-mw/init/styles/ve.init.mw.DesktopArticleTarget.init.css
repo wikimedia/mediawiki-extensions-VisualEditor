@@ -55,11 +55,11 @@
 	opacity: 0.5;
 }
 
-.ve-activated .catlinks {
+.ve-activated #catlinks {
 	cursor: pointer;
 }
 
-.ve-activated .catlinks a {
+.ve-activated #catlinks a {
 	opacity: 1;
 }
 
