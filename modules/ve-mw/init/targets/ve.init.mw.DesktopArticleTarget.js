@@ -1360,7 +1360,6 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// Remove any VE-added redirectMsg
 	if ( $( '.mw-body-content > .ve-redirect-header' ).length ) {
 		$( '.mw-body-content > .ve-redirect-header' ).remove();
-		$( '#contentSub #redirectSub, #contentSub #redirectSub + br' ).remove();
 	}
 
 	// Restore any previous redirectMsg/redirectsub
