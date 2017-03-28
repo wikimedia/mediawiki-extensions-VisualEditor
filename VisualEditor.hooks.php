@@ -699,6 +699,7 @@ class VisualEditorHooks {
 
 		$vars['wgVisualEditorConfig'] = [
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
+			'preloadModules' => $veConfig->get( 'VisualEditorPreloadModules' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
