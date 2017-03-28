@@ -749,7 +749,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	var surface = this.getSurface(),
 		surfaceReadyTime = ve.now(),
-		target = this;
+		target = this,
+		redirectMetaItems;
 
 	if ( !this.activating ) {
 		// Activation was aborted before we got here. Do nothing
@@ -791,6 +792,13 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
+	redirectMetaItems = this.getSurface().getModel().getMetaList().getItemsInGroup( 'mwRedirect' );
+	if ( redirectMetaItems.length ) {
+		this.setFakeRedirectInterface( redirectMetaItems[ 0 ].getAttribute( 'title' ) );
+	} else {
+		this.setFakeRedirectInterface( null );
+	}
+
 	this.setupUnloadHandlers();
 	if ( !this.suppressNormalStartupDialogs ) {
 		this.maybeShowWelcomeDialog();
@@ -804,53 +812,15 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 };
 
 /**
- * Add the redirect header when a redirect is inserted into the page.
+ * Update the redirect and category interfaces when a meta item is inserted into the page.
  *
  * @param {ve.dm.MetaItem} metaItem Item that was inserted
- * @param {boolean} [loading=false] Whether VE is loading.
  */
-ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem, loading ) {
-	var title, target, $link,
-		metaList = this.surface.getModel().getMetaList();
+ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem ) {
+	var metaList = this.surface.getModel().getMetaList();
 	switch ( metaItem.getType() ) {
 		case 'mwRedirect':
-			target = this;
-			title = metaItem.getAttribute( 'title' );
-			$link = $( '<a>' )
-				.attr( 'title', mw.msg( 'visualeditor-redirect-description', title ) )
-				.text( title );
-			ve.init.platform.linkCache.styleElement( title, $link );
-
-			if ( loading ) {
-				this.$originalRedirectMsg = $( '.redirectMsg' ).clone();
-				this.$originalRedirectSub = $( '#redirectsub, #redirectsub + br' ).clone();
-			}
-			// Add redirect target header
-			if ( !$( '#redirectsub' ).length ) {
-				$( '#contentSub' ).append(
-					$( '<span>' )
-						.text( mw.msg( 'redirectpagesub' ) )
-						.attr( 'id', 'redirectsub' ),
-					$( '<br>' )
-				);
-			}
-			$( '<div>' )
-				// Bit of a hack: Make sure any redirect note is styled
-				.addClass( 'redirectMsg mw-content-' + $( 'html' ).attr( 'dir' ) )
-
-				.addClass( 've-redirect-header' )
-				.append(
-					$( '<p>' ).text( mw.msg( 'redirectto' ) ),
-					$( '<ul>' )
-						.addClass( 'redirectText' )
-						.append( $( '<li>' ).append( $link ) )
-				)
-				.click( function ( e ) {
-					var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
-					windowAction.open( 'meta', { page: 'settings' } );
-					e.preventDefault();
-				} )
-				.insertAfter( $( '.mw-jump' ) );
+			this.setFakeRedirectInterface( metaItem.getAttribute( 'title' ) );
 			break;
 		case 'mwCategory':
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
@@ -859,7 +829,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 };
 
 /**
- * Remove the redirect header when a redirect is removed from the page.
+ * Update the redirect and category interfaces when a meta item is removed from the page.
  *
  * @param {ve.dm.MetaItem} metaItem Item that was removed
  * @param {number} offset Linear model offset that the item was at
@@ -869,8 +839,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
 	var metaList = this.surface.getModel().getMetaList();
 	switch ( metaItem.getType() ) {
 		case 'mwRedirect':
-			this.$originalContent.find( '.redirectMsg' ).remove();
-			$( '#contentSub #redirectsub, #contentSub #redirectsub + br' ).remove();
+			this.setFakeRedirectInterface( null );
 			break;
 		case 'mwCategory':
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
@@ -1010,14 +979,17 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		mw.config.set( jsconfigvars );
 		mw.loader.load( modules );
 
+		mw.config.set( {
+			wgIsRedirect: !!isRedirect
+		} );
+
 		this.saveDialog.reset();
 		this.replacePageContent(
 			html,
 			categoriesHtml,
 			displayTitle,
 			lastModified,
-			contentSub,
-			!!isRedirect
+			contentSub
 		);
 
 		if ( newid !== undefined ) {
@@ -1357,19 +1329,8 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// In skins having #ca-view (like Vector), select that.
 	this.updateTabs( false );
 
-	// Remove any VE-added redirectMsg
-	if ( $( '.mw-body-content > .ve-redirect-header' ).length ) {
-		$( '.mw-body-content > .ve-redirect-header' ).remove();
-		$( '#contentSub #redirectsub, #contentSub #redirectsub + br' ).remove();
-	}
-
 	// Restore any previous redirectMsg/redirectsub
-	if ( this.$originalRedirectMsg ) {
-		this.$originalRedirectMsg.prependTo( $( '#mw-content-text' ) );
-		this.$originalRedirectSub.prependTo( $( '#contentSub' ) );
-		this.$originalRedirectMsg = undefined;
-		this.$originalRedirectSub = undefined;
-	}
+	this.setRealRedirectInterface();
 	if ( this.$originalCategories ) {
 		$( '#catlinks' ).replaceWith( this.$originalCategories );
 	}
@@ -1451,10 +1412,9 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
  * @param {Object} lastModified Object containing user-formatted date
  *  and time strings, or undefined if we made no change.
  * @param {string} contentSub HTML to show as the content subtitle
- * @param {boolean} isRedirect Whether the page is a redirect or not.
  */
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, displayTitle, lastModified, contentSub, isRedirect
+	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
 	var $content = $( $.parseHTML( html ) ),
 		$veSectionLinks, $categories, $sections, editedSectionHeader;
@@ -1475,10 +1435,6 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 			lastModified.time
 		) );
 	}
-	// Remove any VE-added ve-redirect-header
-	$( '.redirectMsg' ).removeClass( 've-redirect-header' );
-	this.$originalRedirectMsg = undefined;
-	this.$originalRedirectSub = undefined;
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	if (
@@ -1505,20 +1461,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	this.$originalCategories = null;
 
 	$( '#contentSub' ).html( contentSub );
-
-	if ( isRedirect ) {
-		$( '#contentSub' ).append(
-			$( '<span>' )
-				.text( mw.msg( 'redirectpagesub' ) )
-				.attr( 'id', 'redirectsub' ),
-			$( '<br>' )
-		);
-	}
-
-	// Bit of a hack: Make sure any redirect note is styled
-	$( '.redirectMsg' )
-		.addClass( 'mw-content-' + $( 'html' ).attr( 'dir' ) )
-		.addClass( 've-redirect-header' );
+	this.setRealRedirectInterface();
 
 	// Scroll the page to the edited section, if any
 	if ( this.section !== null ) {
@@ -1619,10 +1562,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 
 	redirectMetaItems = this.getSurface().getModel().getMetaList().getItemsInGroup( 'mwRedirect' );
 	if ( redirectMetaItems.length ) {
-		this.onMetaItemInserted( redirectMetaItems[ 0 ], true );
-
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
-
 		windowAction.open( 'meta', { page: 'settings' } );
 	}
 };
@@ -1733,6 +1673,117 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.resetDocumentOpacity = function () {
 	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
+};
+
+/**
+ * Return DOM for the redirect page subtitle (#redirectsub).
+ *
+ * @return {jQuery}
+ */
+ve.init.mw.DesktopArticleTarget.prototype.buildRedirectSub = function () {
+	// Page subtitle
+	// Compare: Article::view()
+	return $( '<span>' )
+		.attr( 'id', 'redirectsub' )
+		.append( mw.message( 'redirectpagesub' ).parseDom() );
+};
+
+/**
+ * Return DOM for the redirect page content header (.redirectMsg).
+ *
+ * @param {string} title Redirect target
+ * @return {jQuery}
+ */
+ve.init.mw.DesktopArticleTarget.prototype.buildRedirectMsg = function ( title ) {
+	var target = this,
+		$link;
+
+	$link = $( '<a>' )
+		.attr( 'title', mw.msg( 'visualeditor-redirect-description', title ) )
+		.text( title );
+	ve.init.platform.linkCache.styleElement( title, $link );
+
+	// Page content header
+	// Compare: Article::getRedirectHeaderHtml()
+	return $( '<div>' )
+		.addClass( 'redirectMsg' )
+		// We need to be able to tell apart the real one and our fake one
+		.addClass( 've-redirect-header' )
+		// Hack: This is normally inside #mw-content-text, but we insert it before, so we need this.
+		.addClass( 'mw-content-' + $( 'html' ).attr( 'dir' ) )
+		.append(
+			$( '<p>' ).text( mw.msg( 'redirectto' ) ),
+			$( '<ul>' )
+				.addClass( 'redirectText' )
+				.append( $( '<li>' ).append( $link ) )
+		)
+		.click( function ( e ) {
+			var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+			windowAction.open( 'meta', { page: 'settings' } );
+			e.preventDefault();
+		} );
+};
+
+/**
+ * Display the given redirect subtitle and redirect page content header on the page.
+ *
+ * @param {jQuery} $sub Redirect subtitle, see #buildRedirectSub
+ * @param {jQuery} $msg Redirect page content header, see #buildRedirectMsg
+ */
+ve.init.mw.DesktopArticleTarget.prototype.updateRedirectInterface = function ( $sub, $msg ) {
+	var $currentSub, $currentMsg, $subtitle;
+
+	// For the subtitle, replace the real one with ours.
+	// This is more complicated than it should be because we have to fiddle with the <br>.
+	$currentSub = $( '#redirectsub' );
+	if ( $currentSub.length ) {
+		if ( $sub.length ) {
+			$currentSub.replaceWith( $sub );
+		} else {
+			$currentSub.prev().filter( 'br' ).remove();
+			$currentSub.remove();
+		}
+	} else {
+		$subtitle = $( '#contentSub' );
+		if ( $sub.length ) {
+			if ( $subtitle.children().length ) {
+				$subtitle.append( $( '<br>' ) );
+			}
+			$subtitle.append( $sub );
+		}
+	}
+
+	// For the content header, the real one is hidden, insert ours before it.
+	$currentMsg = $( '.ve-redirect-header' );
+	if ( $currentMsg.length ) {
+		$currentMsg.replaceWith( $msg );
+	} else {
+		// Hack: This is normally inside #mw-content-text, but that's hidden while editing.
+		$( '#mw-content-text' ).before( $msg );
+	}
+};
+
+/**
+ * Set temporary redirect interface to match the current state of redirection in the editor.
+ *
+ * @param {string|null} title Current redirect target, or null if none
+ */
+ve.init.mw.DesktopArticleTarget.prototype.setFakeRedirectInterface = function ( title ) {
+	this.updateRedirectInterface(
+		title ? this.buildRedirectSub() : $(),
+		title ? this.buildRedirectMsg( title ) : $()
+	);
+};
+
+/**
+ * Set the redirect interface to match the page's redirect state.
+ */
+ve.init.mw.DesktopArticleTarget.prototype.setRealRedirectInterface = function () {
+	this.updateRedirectInterface(
+		mw.config.get( 'wgIsRedirect' ) ? this.buildRedirectSub() : $(),
+		// Remove our custom content header - the original one in #mw-content-text will be shown
+		$()
+	);
 };
 
 /* Registration */
