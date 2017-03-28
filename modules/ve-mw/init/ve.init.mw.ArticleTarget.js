@@ -343,7 +343,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	this.checkboxesByName = {};
 	this.$otherFields = $( [] );
 	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
-		$( '#content #firstHeading' ).text(
+		$( '#firstHeading' ).text(
 			mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText()
 		);
 	}
