@@ -1452,7 +1452,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 
 	mw.hook( 'wikipage.content' ).fire( this.$editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
-		$( '#content #firstHeading' ).html( displayTitle );
+		$( '#firstHeading' ).html( displayTitle );
 	}
 
 	$categories = $( $.parseHTML( categoriesHtml ) );
