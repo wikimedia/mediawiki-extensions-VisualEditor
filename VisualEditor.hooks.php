@@ -592,7 +592,6 @@ class VisualEditorHooks {
 			'requirements' => [
 				'javascript' => true,
 				'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
-				'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			]
 		];
 
@@ -610,7 +609,6 @@ class VisualEditorHooks {
 				'requirements' => [
 					'javascript' => true,
 					'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
-					'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 				],
 				'exempt-from-auto-enrollment' => true
 			];
@@ -715,7 +713,6 @@ class VisualEditorHooks {
 			],
 			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
 			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
-			'skins' => $veConfig->get( 'VisualEditorSupportedSkins' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),

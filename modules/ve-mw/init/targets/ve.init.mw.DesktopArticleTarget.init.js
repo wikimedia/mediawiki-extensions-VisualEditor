@@ -21,7 +21,7 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
-		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
+		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable, requiredSkinElements,
 		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
 		isLoading,
 		editModes = {
@@ -755,6 +755,18 @@
 		veEditUri.extend( { oldid: oldid } );
 	}
 
+	requiredSkinElements =
+		$( '#content' ).length &&
+		$( '#mw-content-text' ).length &&
+		$( '#ca-edit' ).length;
+
+	if ( pageCanLoadEditor && !requiredSkinElements ) {
+		mw.log.warn(
+			'Your skin is incompatible with VisualEditor. ' +
+			'See <https://www.mediawiki.org/wiki/VisualEditor/Skin_requirements> for the requirements.'
+		);
+	}
+
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
 	init.isAvailable = (
@@ -764,7 +776,7 @@
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
 
 		// Only in supported skins
-		conf.skins.indexOf( mw.config.get( 'skin' ) ) !== -1 &&
+		requiredSkinElements &&
 
 		// Not on pages which are outputs of the Translate extensions
 		// TODO: Allow the Translate extension to do this itself

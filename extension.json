@@ -37,13 +37,6 @@
 		"VisualEditorFeedbackTitle": false,
 		"VisualEditorSerializationCacheTimeout": 3600,
 		"VisualEditorUseChangeTagging": true,
-		"VisualEditorSupportedSkins": [
-			"vector",
-			"apex",
-			"monobook",
-			"minerva",
-			"blueprint"
-		],
 		"VisualEditorParsoidPrefix": "localhost",
 		"VisualEditorParsoidDomain": "localhost",
 		"VisualEditorDisableForAnons": false,
