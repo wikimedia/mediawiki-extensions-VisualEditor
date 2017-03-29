@@ -1177,10 +1177,15 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiff = function () {
  * @method
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogResolveConflict = function () {
+	var fields = { wpSave: 1 };
+
+	if ( this.getSurface().getMode() === 'source' && this.section !== null ) {
+		fields.section = this.section;
+	}
 	// Get Wikitext from the DOM, and set up a submit call when it's done
 	this.serialize(
 		this.getDocToSave(),
-		this.submitWithSaveFields.bind( this, { wpSave: 1 } )
+		this.submitWithSaveFields.bind( this, fields )
 	);
 };
 
