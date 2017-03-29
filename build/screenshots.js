@@ -10,7 +10,7 @@
 		username = process.env.SAUCE_ONDEMAND_USERNAME,
 		webdriver = require( 'selenium-webdriver' );
 
-	function createScreenshotEnvironment( test, lang ) {
+	function createScreenshotEnvironment( test, lang, beforeEach ) {
 		var clientSize, driver;
 
 		test.beforeEach( function () {
@@ -133,6 +133,9 @@
 					clientSize = cs;
 				} )
 			);
+			if ( beforeEach ) {
+				driver.wait( driver.executeAsyncScript( beforeEach ) );
+			}
 		} );
 
 		test.afterEach( function () {

@@ -8,7 +8,27 @@ require( 'babel-polyfill' );
 
 /* eslint-env node, es6 */
 module.exports = function ( grunt ) {
-	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' );
+	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
+		screenshotOptions = {
+			reporter: 'spec',
+			timeout: 40000,
+			require: [
+				function () {
+					// eslint-disable-next-line no-undef
+					langs = [ 'en' ];
+				}
+			]
+		},
+		screenshotOptionsAll = {
+			reporter: 'spec',
+			timeout: 40000,
+			require: [
+				function () {
+					// eslint-disable-next-line no-undef
+					langs = require( './build/tasks/screenshotLangs.json' ).langs;
+				}
+			]
+		};
 
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
@@ -57,30 +77,20 @@ module.exports = function ( grunt ) {
 		},
 		mochaTest: {
 			'screenshots-en': {
-				options: {
-					reporter: 'spec',
-					timeout: 40000,
-					require: [
-						function () {
-							// eslint-disable-next-line no-undef
-							langs = [ 'en' ];
-						}
-					]
-				},
+				options: screenshotOptions,
 				src: [ 'build/screenshots.userGuide.js' ]
 			},
 			'screenshots-all': {
-				options: {
-					reporter: 'spec',
-					timeout: 40000,
-					require: [
-						function () {
-							// eslint-disable-next-line no-undef
-							langs = require( './build/tasks/screenshotLangs.json' ).langs;
-						}
-					]
-				},
+				options: screenshotOptionsAll,
 				src: [ 'build/screenshots.userGuide.js' ]
+			},
+			'diff-screenshots-en': {
+				options: screenshotOptions,
+				src: [ 'build/screenshots.diffs.js' ]
+			},
+			'diff-screenshots-all': {
+				options: screenshotOptionsAll,
+				src: [ 'build/screenshots.diffs.js' ]
 			}
 		},
 		image: {
