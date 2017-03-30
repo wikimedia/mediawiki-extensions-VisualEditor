@@ -69,6 +69,7 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
  */
 ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
 	var promise,
+		cache = this,
 		cachedMissingData = this.getCached( '_missing/' + title );
 
 	// Use the synchronous missing link cache data if it exists
@@ -79,13 +80,11 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
 	}
 
 	promise.done( function ( data ) {
-		var thisPage = ve.init.mw.ApiResponseCache.static.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) );
-
 		if ( data.missing && !data.known ) {
 			$element.addClass( 'new' );
 		} else {
 			// Provided by core MediaWiki, styled like a <strong> element by default.
-			if ( data.title === thisPage ) {
+			if ( cache.constructor.static.normalizeTitle( title ) === cache.constructor.static.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) ) ) {
 				$element.addClass( 'mw-selflink' );
 			}
 			// Provided by core MediaWiki, no styles by default.
