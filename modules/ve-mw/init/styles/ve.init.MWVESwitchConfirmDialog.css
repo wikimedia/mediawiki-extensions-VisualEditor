@@ -26,8 +26,7 @@
 	height: 24px;
 }
 
-.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon,
-.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle .oo-ui-indicatorElement-indicator {
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon {
 	height: auto;
 }
 
