@@ -120,15 +120,25 @@ ve.ui.MWSaveDialog.static.actions = [
  *
  * @param {string} wikitextDiff Diff HTML or wikitext
  * @param {ve.dm.VisualDiff} [visualDiff] Visual diff
+ * @param {HTMLDocument} [baseDoc] Base document against which to normalise links when rendering visualDiff
  */
-ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiff ) {
+ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiff, baseDoc ) {
 	this.$reviewVisualDiff.empty();
 	if ( visualDiff ) {
 		if ( this.diffElement ) {
 			this.diffElement.destroy();
 			this.diffElement = null;
 		}
+		// Don't generate the DiffElement until the tab is switched to
+		this.deferredDiffElement = function () {
+			var diffElement = new ve.ui.DiffElement( this.visualDiff );
+			diffElement.$document.addClass( 'mw-body-content' );
+			// Run styles so links render with their appropriate classes
+			ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
+			return diffElement;
+		};
 		this.visualDiff = visualDiff;
+		this.baseDoc = baseDoc;
 		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( false );
 	} else {
 		// TODO: Support visual diffs in source mode (epic)
@@ -147,12 +157,14 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualD
  * Set preview content and show preview panel.
  *
  * @param {jQuery} content Preview content
+ * @param {HTMLDocument} baseDoc Base document against which to normalise links
  */
-ve.ui.MWSaveDialog.prototype.showPreview = function ( content ) {
+ve.ui.MWSaveDialog.prototype.showPreview = function ( content, baseDoc ) {
 	this.$previewViewer.empty().append( content );
+	// Run styles so links render with their appropriate classes
+	ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
+	// Run hooks so other things can alter the document
 	mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
-	// TODO: Remove when fixed upstream in Parsoid (T58756)
-	this.$previewViewer.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
 	this.actions.setAbilities( { approve: true } );
 	this.popPending();
 	this.swapPanel( 'preview' );
@@ -596,17 +608,12 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	this.$reviewWikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
 	if ( isVisual ) {
 		if ( !this.diffElement ) {
-			this.diffElement = new ve.ui.DiffElement( this.visualDiff );
-			this.diffElement.$document.addClass( 'mw-body-content' );
-			// TODO: Remove when fixed upstream in Parsoid (T58756)
-			this.diffElement.$element.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
+			this.diffElement = this.deferredDiffElement();
 			this.$reviewVisualDiff.append( this.diffElement.$element );
 		}
 		this.diffElement.positionDescriptions();
-		this.updateSize();
-	} else {
-		this.updateSize();
 	}
+	this.updateSize();
 };
 
 /**

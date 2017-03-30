@@ -100,6 +100,43 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element ) {
 };
 
 /**
+ * Given a chunk of Parsoid HTML, requests information about each link's title, then adds classes
+ * to each such element as appropriate.
+ *
+ * TODO: Most/all of this code should be done upstream, either by Parsoid itself or by an
+ * intermediary service – see T64803 and others.
+ *
+ * @chainable
+ * @param {jQuery} $element Elements to style
+ * @param {HTMLDocument} doc Base document to use for normalisation
+ * @return {jQuery} The elements, now styled
+ */
+ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc ) {
+	// TODO: Remove when fixed upstream in Parsoid (T58756)
+	$elements
+		.find( 'a[rel="mw:ExtLink"]' ).addBack( 'a[rel="mw:ExtLink"]' )
+		.addClass( 'external' );
+
+	// TODO: Remove when moved upstream into Parsoid or another service (T64803)
+	// If the element isn't attached, doc will be null, so we don't know how to normalise titles
+	if ( doc ) {
+		$elements
+			.find( 'a[rel="mw:WikiLink"]' ).addBack( 'a[rel="mw:WikiLink"]' )
+			.each( function () {
+				var title,
+					href = this.href || mw.config.get( 'wgArticlePath' );
+
+				title = ve.init.platform.linkCache.constructor.static.normalizeTitle(
+					ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, doc ).title
+				);
+				ve.init.platform.linkCache.styleElement( title, $( this ) );
+			} );
+	}
+
+	return $elements;
+};
+
+/**
  * Enable or disable automatic assumption of existence.
  *
  * While enabled, any get() for a title that's not already in the cache will return

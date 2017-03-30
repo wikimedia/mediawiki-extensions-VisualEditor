@@ -86,6 +86,22 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ce.MWExtensionNode.prototype.getRenderedDomElements = function () {
+	// Parent method
+	var elements = ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.apply( this, arguments );
+
+	if ( this.getModelHtmlDocument() ) {
+		ve.init.platform.linkCache.styleParsoidElements(
+			$( elements ),
+			this.getModelHtmlDocument()
+		);
+	}
+	return elements;
+};
+
+/**
  * Handle a successful response from the parser for the wikitext fragment.
  *
  * @param {jQuery.Deferred} deferred The Deferred object created by generateContents
