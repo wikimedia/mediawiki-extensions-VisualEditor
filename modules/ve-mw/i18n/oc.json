@@ -23,7 +23,7 @@
 	"visualeditor-advancedsettings-tool": "Paramètres avançats",
 	"visualeditor-backbutton-tooltip": "Tornar en arrièr",
 	"visualeditor-beta-label": "bèta",
-	"visualeditor-beta-warning": "Podètz tornar a tot moment a l’editor de wikicòde sens pèrdre vòstras modificacions, en clicant sus « $1 ». Se rencontratz un problèma, senhalatz-lo çaijós.",
+	"visualeditor-beta-warning": "Se rencontratz de problèmas tecnics en cors d'edicion, senhalatz-los.",
 	"visualeditor-browserwarning": "Utilizatz un navigador qu'es pas oficialament suportat per aqueste editor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Apondre una descripcion locala",
 	"visualeditor-ca-createsource": "Crear la font",
