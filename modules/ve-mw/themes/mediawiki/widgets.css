@@ -15,3 +15,8 @@
 	border-bottom-right-radius: 0.1em;
 	border-bottom-left-radius: 0.1em;
 }
+
+.ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
+	border-radius: 0.1em;
+	border: 1px solid #a2a9b1;
+}
