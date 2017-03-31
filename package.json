@@ -1,29 +1,29 @@
 {
-  "name": "visualeditor",
-  "version": "0.0.0",
-  "private": true,
-  "description": "Build tools for the VisualEditor-MediaWiki extension.",
-  "scripts": {
-    "test": "grunt test",
-    "doc": "jsduck",
-    "postdoc": "grunt copy:jsduck"
-  },
-  "devDependencies": {
-    "babel-polyfill": "6.9.1",
-    "eslint-config-wikimedia": "0.3.0",
-    "grunt": "1.0.1",
-    "grunt-banana-checker": "0.5.0",
-    "grunt-contrib-copy": "1.0.0",
-    "grunt-contrib-watch": "1.0.0",
-    "grunt-eslint": "19.0.0",
-    "grunt-jsonlint": "1.1.0",
-    "grunt-image": "2.2.3",
-    "grunt-mocha-test": "0.12.7",
-    "grunt-stylelint": "0.7.0",
-    "grunt-tyops": "0.1.0",
-    "jimp": "0.2.24",
-    "mocha": "2.5.3",
-    "selenium-webdriver": "2.53.2",
-    "stylelint-config-wikimedia": "0.4.1"
-  }
+	"name": "visualeditor",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Build tools for the VisualEditor-MediaWiki extension.",
+	"scripts": {
+		"test": "grunt test",
+		"doc": "jsduck",
+		"postdoc": "grunt copy:jsduck"
+	},
+	"devDependencies": {
+		"babel-polyfill": "6.9.1",
+		"eslint-config-wikimedia": "0.3.0",
+		"grunt": "1.0.1",
+		"grunt-banana-checker": "0.5.0",
+		"grunt-contrib-copy": "1.0.0",
+		"grunt-contrib-watch": "1.0.0",
+		"grunt-eslint": "19.0.0",
+		"grunt-jsonlint": "1.1.0",
+		"grunt-image": "2.2.3",
+		"grunt-mocha-test": "0.12.7",
+		"grunt-stylelint": "0.7.0",
+		"grunt-tyops": "0.1.0",
+		"jimp": "0.2.24",
+		"mocha": "2.5.3",
+		"selenium-webdriver": "2.53.2",
+		"stylelint-config-wikimedia": "0.4.1"
+	}
 }
