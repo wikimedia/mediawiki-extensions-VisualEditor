@@ -744,7 +744,11 @@ ve.init.mw.ArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
 	this.getSurface().getModel().getDocument().once( 'transact',
 		this.saveDialog.clearDiff.bind( this.saveDialog )
 	);
-	this.saveDialog.setDiffAndReview( diffHtml, this.getVisualDiff() );
+	this.saveDialog.setDiffAndReview(
+		diffHtml,
+		this.getVisualDiff(),
+		this.getSurface().getModel().getDocument().getHtmlDocument()
+	);
 };
 
 /**
@@ -1091,6 +1095,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 	var wikitext,
 		target = this;
+
 	if ( !this.saveDialog.$previewViewer.children().length ) {
 		this.emit( 'savePreview' );
 		this.saveDialog.getActions().setAbilities( { approve: false } );
@@ -1108,7 +1113,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {
-			var doc, body;
+			var doc, body,
+				baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
+
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
 				doc = target.parseDocument( response.visualeditor.content, 'visual' );
 				body = doc.body;
@@ -1117,11 +1124,16 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 				// TODO: This code is very similar to ve.ui.PreviewElement
 				ve.resolveAttributes( body, doc, ve.dm.Converter.static.computedAttributes );
 				ve.targetLinksToNewWindow( body );
-				target.saveDialog.showPreview( $( body ).contents() );
+				target.saveDialog.showPreview( $( body ).contents(), baseDoc );
+
 			} else {
-				target.saveDialog.showPreview( $( '<em>' ).text(
-					ve.msg( 'visualeditor-loaderror-message', ve.getProp( details, 'error', 'info' ) || 'Failed to connect' )
-				) );
+				target.saveDialog.showPreview(
+					$( '<em>' ).text( ve.msg(
+						'visualeditor-loaderror-message',
+						ve.getProp( details, 'error', 'info' ) || 'Failed to connect'
+					) ),
+					baseDoc
+				);
 			}
 			target.bindSaveDialogClearDiff();
 		} );
@@ -1151,7 +1163,11 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	this.bindSaveDialogClearDiff();
-	this.saveDialog.setDiffAndReview( $( '<pre>' ).text( wikitext ), this.getVisualDiff() );
+	this.saveDialog.setDiffAndReview(
+		$( '<pre>' ).text( wikitext ),
+		this.getVisualDiff(),
+		this.getSurface().getModel().getDocument().getHtmlDocument()
+	);
 };
 
 /**

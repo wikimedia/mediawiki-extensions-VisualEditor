@@ -36,6 +36,9 @@ ve.ui.MWPreviewElement.prototype.replaceWithModelDom = function () {
 	// Parent method
 	ve.ui.MWPreviewElement.super.prototype.replaceWithModelDom.apply( this, arguments );
 
-	// TODO: Remove when fixed upstream in Parsoid (T58756)
-	this.$element.find( 'a[rel="mw:ExtLink"]' ).addClass( 'external' );
+	ve.init.platform.linkCache.styleParsoidElements(
+		this.$element,
+		// The DM node should be attached, but check just in case.
+		this.model.getDocument() && this.model.getDocument().getHtmlDocument()
+	);
 };

@@ -191,24 +191,17 @@ ve.ce.MWTransclusionNode.prototype.onSetup = function () {
 /**
  * @inheritdoc
  */
-ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function ( domElements ) {
-	var $elements = $( ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.call( this, domElements ) ),
-		transclusionNode = this;
+ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function () {
+	// Parent method
+	var elements = ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.apply( this, arguments );
+
 	if ( this.getModelHtmlDocument() ) {
-		$elements
-			.find( 'a[href][rel="mw:WikiLink"]' ).addBack( 'a[href][rel="mw:WikiLink"]' )
-			.each( function () {
-				var targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
-						this.href, transclusionNode.getModelHtmlDocument()
-					),
-					normalisedHref = targetData.title;
-				if ( mw.Title.newFromText( normalisedHref ) ) {
-					normalisedHref = mw.Title.newFromText( normalisedHref ).getPrefixedText();
-				}
-				ve.init.platform.linkCache.styleElement( normalisedHref, $( this ) );
-			} );
+		ve.init.platform.linkCache.styleParsoidElements(
+			$( elements ),
+			this.getModelHtmlDocument()
+		);
 	}
-	return $elements.toArray();
+	return elements;
 };
 
 /**
