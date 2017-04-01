@@ -14,7 +14,8 @@
 			"Stam.nikos",
 			"Macofe",
 			"SucreRouge",
-			"Ανώνυμος Βικιπαιδιστής"
+			"Ανώνυμος Βικιπαιδιστής",
+			"GR"
 		]
 	},
 	"apihelp-visualeditor-description": "Επιστρέφει HTML5 για μια σελίδα από την υπηρεσία Parsoid.",
@@ -57,6 +58,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Κατηγορίες",
+	"visualeditor-changedesc-mwtransclusion": "Οι παράμετροι προτύπου άλλαξαν",
 	"visualeditor-desc": "Visual editor για το MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Εναλλακτικό κείμενο",
@@ -323,6 +325,8 @@
 	"visualeditor-savedialog-label-review-good": "Επιστροφή στη φόρμα αποθήκευσης",
 	"visualeditor-savedialog-label-save-short": "Αποθήκευση",
 	"visualeditor-savedialog-label-warning": "Προσοχή",
+	"visualeditor-savedialog-review-nosummary": "Καμία επεξεργασία σύνοψης",
+	"visualeditor-savedialog-review-visual": "Οπτικός",
 	"visualeditor-savedialog-title-conflict": "Σύγκρουση",
 	"visualeditor-savedialog-title-nochanges": "Καμία αλλαγή για επανέλεγχο",
 	"visualeditor-savedialog-title-preview": "Προεπισκόπηση των αλλαγών σας",
