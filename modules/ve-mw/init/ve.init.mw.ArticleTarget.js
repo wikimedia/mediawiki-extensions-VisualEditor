@@ -2055,10 +2055,21 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 				this.goToHeading( headingNode );
 			}
 		} else if ( mode === 'source' ) {
+			// With elements of extractSectionTitle + stripSectionName TODO:
+			// Arguably, we should just throw this through the API and then do
+			// the same extract-text pass we do in visual mode. Would save us
+			// having to think about wikitext here.
 			headingText = surface.getModel().getDocument().data.getText(
 				false,
 				surface.getModel().getDocument().getDocumentNode().children[ 0 ].getRange()
-			).replace( /^\s*=+\s*(.*?)\s*=+\s*$/, '$1' );
+			)
+				// Extract the title
+				.replace( /^\s*=+\s*(.*?)\s*=+\s*$/, '$1' )
+				// Remove links
+				.replace( /\[\[:?([^[|]+)\|([^[]+)\]\]/, '$2' )
+				.replace( /\[\[:?([^[]+)\|?\]\]/, '$1' )
+				.replace( new RegExp( '\\[(?:' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + ')([^ ]+?) ([^\\[]+)\\]', 'i' ), '$3' )
+				;
 		}
 		if ( headingText ) {
 			this.initialEditSummary =
