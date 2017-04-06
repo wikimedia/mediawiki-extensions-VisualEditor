@@ -3,13 +3,11 @@
  *
  * This file must remain as widely compatible as the base compatibility
  * for MediaWiki itself (see mediawiki/core:/resources/startup.js).
- * Avoid use of: ES5, SVG, HTML5 DOM, ContentEditable etc.
+ * Avoid use of: SVG, HTML5 DOM, ContentEditable etc.
  *
  * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-
-/* eslint-ecmaVersion 3 */
 
 /**
  * Platform preparation for the MediaWiki view page. This loads (when user needs it) the
@@ -138,8 +136,6 @@
 					} );
 					// Add modules specific to desktop (modules shared between desktop
 					// and mobile are already added by TargetLoader)
-					// Note: it's safe to use .forEach() (ES5) here, because this code will
-					// never be called if the browser doesn't support ES5
 					[ 'ext.visualEditor.desktopArticleTarget' ]
 						// Add requested plugins
 						.concat( plugins )
