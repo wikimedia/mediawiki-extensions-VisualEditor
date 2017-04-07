@@ -43,7 +43,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		} )
 			.addItems( [
 				new OO.ui.ButtonOptionWidget( {
-					data: 'mwTOCForce',
+					data: 'mw:PageProp/forcetoc',
 					label: ve.msg( 'visualeditor-dialog-meta-settings-toc-force' )
 				} ),
 				new OO.ui.ButtonOptionWidget( {
@@ -51,7 +51,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 					label: ve.msg( 'visualeditor-dialog-meta-settings-toc-default' )
 				} ),
 				new OO.ui.ButtonOptionWidget( {
-					data: 'mwTOCDisable',
+					data: 'mw:PageProp/notoc',
 					label: ve.msg( 'visualeditor-dialog-meta-settings-toc-disable' )
 				} )
 			] )
@@ -264,8 +264,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	// Table of Contents items
 	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
 	tableOfContentsField = this.tableOfContents.getField();
-	tableOfContentsMode = tableOfContentsMetaItem &&
-		tableOfContentsMetaItem.getType() || 'default';
+	tableOfContentsMode = tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
 	tableOfContentsField.selectItemByData( tableOfContentsMode );
 	this.tableOfContentsTouched = false;
 
@@ -293,7 +292,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
-	var tableOfContentsMetaItem, tableOfContentsSelectedItem, tableOfContentsValue,
+	var currentTableOfContents, newTableOfContentsData, newTableOfContentsItem,
 		currentRedirectTargetItem, newRedirectData, newRedirectItemData,
 		currentStaticRedirectItem, newStaticRedirectState,
 		settingsPage = this;
@@ -305,9 +304,8 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	}
 
 	// Table of Contents items
-	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
-	tableOfContentsSelectedItem = this.tableOfContents.getField().getSelectedItem();
-	tableOfContentsValue = tableOfContentsSelectedItem && tableOfContentsSelectedItem.getData();
+	currentTableOfContents = this.getMetaItem( 'mwTOC' );
+	newTableOfContentsData = this.tableOfContents.getField().getSelectedItem();
 
 	// Redirect items
 	currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
@@ -319,19 +317,18 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 	// Alter the TOC option flag iff it's been touched & is actually different
 	if ( this.tableOfContentsTouched ) {
-		if ( tableOfContentsValue === 'default' ) {
-			if ( tableOfContentsMetaItem ) {
-				tableOfContentsMetaItem.remove();
+		if ( newTableOfContentsData.data === 'default' ) {
+			if ( currentTableOfContents ) {
+				currentTableOfContents.remove();
 			}
 		} else {
-			if ( !tableOfContentsMetaItem ) {
-				this.metaList.insertMeta( { type: tableOfContentsValue } );
-			} else if ( tableOfContentsMetaItem.getType() !== tableOfContentsValue ) {
-				tableOfContentsMetaItem.replaceWith(
-					ve.extendObject( true, {},
-						tableOfContentsMetaItem.getElement(),
-						{ type: tableOfContentsValue }
-					)
+			newTableOfContentsItem = { type: 'mwTOC', attributes: { property: newTableOfContentsData.data } };
+
+			if ( !currentTableOfContents ) {
+				this.metaList.insertMeta( newTableOfContentsItem );
+			} else if ( currentTableOfContents.getAttribute( 'property' ) !== newTableOfContentsData.data ) {
+				currentTableOfContents.replaceWith(
+					ve.extendObject( true, {}, currentTableOfContents.getElement(), newTableOfContentsItem )
 				);
 			}
 		}
