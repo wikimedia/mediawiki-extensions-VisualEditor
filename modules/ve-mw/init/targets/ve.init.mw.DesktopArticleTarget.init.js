@@ -357,6 +357,9 @@
 	// T156998: Don't trust uri.query.oldid, it'll be wrong if uri.query.diff or uri.query.direction
 	// is set to 'next' or 'prev'.
 	oldid = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	if ( oldid === mw.config.get( 'wgCurRevisionId' ) ) {
+		oldid = undefined;
+	}
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
 	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
