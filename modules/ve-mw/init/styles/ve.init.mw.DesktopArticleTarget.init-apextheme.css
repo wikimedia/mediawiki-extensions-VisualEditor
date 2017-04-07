@@ -15,11 +15,9 @@
 .ve-init-mw-desktopArticleTarget-progress-bar {
 	border-right: 1px solid #ccc;
 	background: #cde7f4;
-	/* stylelint-disable no-unsupported-browser-features */
 	filter: progid:DXImageTransform.Microsoft.gradient( GradientType=0, startColorstr='#eaf4fa', endColorstr='#b0d9ee' );
 	background-image: -webkit-gradient( linear, right top, right bottom, color-stop( 0%, #eaf4fa ), color-stop( 100%, #b0d9ee ) );
 	background-image: -webkit-linear-gradient( top, #eaf4fa 0%, #b0d9ee 100% );
 	background-image: -moz-linear-gradient( top, #eaf4fa 0%, #b0d9ee 100% );
 	background-image: linear-gradient( to bottom, #eaf4fa 0%, #b0d9ee 100% );
-	/* stylelint-enable no-unsupported-browser-features */
 }

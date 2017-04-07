@@ -16,9 +16,7 @@
 	 * word-break: break-word; (which is not documented in any standard at all). So we just use
 	 * all three.
 	 */
-	/* stylelint-disable no-unsupported-browser-features */
 	word-break: break-word;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	/* stylelint-enable no-unsupported-browser-features */
 }
