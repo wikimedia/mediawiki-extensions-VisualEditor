@@ -746,7 +746,7 @@ ve.init.mw.ArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
 	);
 	this.saveDialog.setDiffAndReview(
 		diffHtml,
-		this.getVisualDiff(),
+		this.getVisualDiffPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
 };
@@ -1165,7 +1165,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 	this.bindSaveDialogClearDiff();
 	this.saveDialog.setDiffAndReview(
 		$( '<pre>' ).text( wikitext ),
-		this.getVisualDiff(),
+		this.getVisualDiffPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
 };
@@ -1173,18 +1173,21 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 /**
  * Get a visual diff object for the current document state
  *
- * @return {ve.dm.VisualDiff|null} Visual diff, or null if not known
+ * @return {jQuery.Promise|null} Promise resolving with a ve.dm.VisualDiff visual diff, or null if not known
  */
-ve.init.mw.ArticleTarget.prototype.getVisualDiff = function () {
+ve.init.mw.ArticleTarget.prototype.getVisualDiffPromise = function () {
+	var deferred;
 	if ( this.getSurface().getMode() === 'source' ) {
 		return null;
 	}
+	deferred = $.Deferred();
 	if ( !this.originalDmDoc ) {
 		// TODO: If switching from source - we need to fetch the original doc
 		// from the server.
 		this.originalDmDoc = this.createModelFromDom( this.doc, 'visual' );
 	}
-	return new ve.dm.VisualDiff( this.originalDmDoc, this.getSurface().getModel().getDocument() );
+	deferred.resolve( new ve.dm.VisualDiff( this.originalDmDoc, this.getSurface().getModel().getDocument() ) );
+	return deferred.promise();
 };
 
 /**

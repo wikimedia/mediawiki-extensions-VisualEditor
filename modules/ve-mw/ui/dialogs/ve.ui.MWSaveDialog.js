@@ -31,6 +31,9 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.canReview = false;
 	this.canPreview = false;
 	this.hasDiff = false;
+	this.diffElement = null;
+	this.diffElementPromise = null;
+	this.getDiffElementPromise = null;
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwSaveDialog' );
@@ -119,25 +122,23 @@ ve.ui.MWSaveDialog.static.actions = [
  * Set review content and show review panel.
  *
  * @param {string} wikitextDiff Diff HTML or wikitext
- * @param {ve.dm.VisualDiff} [visualDiff] Visual diff
+ * @param {jQuery.Promise} [visualDiffPromise] Visual diff promise
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links when rendering visualDiff
  */
-ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiff, baseDoc ) {
+ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiffPromise, baseDoc ) {
 	this.$reviewVisualDiff.empty();
-	if ( visualDiff ) {
-		if ( this.diffElement ) {
-			this.diffElement.destroy();
-			this.diffElement = null;
-		}
+	if ( visualDiffPromise ) {
+		this.clearVisualDiff();
 		// Don't generate the DiffElement until the tab is switched to
-		this.deferredDiffElement = function () {
-			var diffElement = new ve.ui.DiffElement( this.visualDiff );
-			diffElement.$document.addClass( 'mw-body-content' );
-			// Run styles so links render with their appropriate classes
-			ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
-			return diffElement;
+		this.getDiffElementPromise = function () {
+			return visualDiffPromise.then( function ( visualDiff ) {
+				var diffElement = new ve.ui.DiffElement( visualDiff );
+				diffElement.$document.addClass( 'mw-body-content' );
+				// Run styles so links render with their appropriate classes
+				ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
+				return diffElement;
+			} );
 		};
-		this.visualDiff = visualDiff;
 		this.baseDoc = baseDoc;
 		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( false );
 	} else {
@@ -196,9 +197,18 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
 	this.$reviewWikitextDiff.empty();
 	this.$previewViewer.empty();
 	this.hasDiff = false;
+	this.clearVisualDiff();
+};
+
+/**
+ * Clear the visual diff
+ */
+ve.ui.MWSaveDialog.prototype.clearVisualDiff = function () {
 	if ( this.diffElement ) {
 		this.diffElement.destroy();
 		this.diffElement = null;
+		this.diffElementPromise = null;
+		this.getDiffElementPromise = null;
 	}
 };
 
@@ -603,13 +613,21 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 };
 
 ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
-	var isVisual = this.reviewModeButtonSelect.getSelectedItem().getData() === 'visual';
+	var dialog = this,
+		isVisual = this.reviewModeButtonSelect.getSelectedItem().getData() === 'visual';
 	this.$reviewVisualDiff.toggleClass( 'oo-ui-element-hidden', !isVisual );
 	this.$reviewWikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
 	if ( isVisual ) {
 		if ( !this.diffElement ) {
-			this.diffElement = this.deferredDiffElement();
-			this.$reviewVisualDiff.append( this.diffElement.$element );
+			if ( !this.diffElementPromise ) {
+				this.diffElementPromise = this.getDiffElementPromise().then( function( diffElement ) {
+					dialog.diffElement = diffElement;
+					dialog.$reviewVisualDiff.append( diffElement.$element );
+					diffElement.positionDescriptions();
+					dialog.updateSize();
+				} );
+			}
+			return;
 		}
 		this.diffElement.positionDescriptions();
 	}
@@ -682,10 +700,7 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
-			if ( this.diffElement ) {
-				this.diffElement.destroy();
-				this.diffElement = null;
-			}
+			this.clearVisualDiff();
 			this.emit( 'close' );
 		}, this );
 };
