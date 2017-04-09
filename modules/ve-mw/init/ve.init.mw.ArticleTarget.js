@@ -1176,17 +1176,36 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
  * @return {jQuery.Promise|null} Promise resolving with a ve.dm.VisualDiff visual diff, or null if not known
  */
 ve.init.mw.ArticleTarget.prototype.getVisualDiffPromise = function () {
-	var deferred;
+	var deferred, dmDoc,
+		target = this;
+
 	if ( this.getSurface().getMode() === 'source' ) {
 		return null;
 	}
 	deferred = $.Deferred();
+	dmDoc = this.getSurface().getModel().getDocument();
+
 	if ( !this.originalDmDoc ) {
-		// TODO: If switching from source - we need to fetch the original doc
-		// from the server.
-		this.originalDmDoc = this.createModelFromDom( this.doc, 'visual' );
+		if ( !this.fromEditedState ) {
+			this.originalDmDoc = this.createModelFromDom( this.doc, 'visual' );
+		} else {
+			mw.libs.ve.targetLoader.requestParsoidData(
+				this.pageName,
+				this.revid,
+				this.constructor.name
+			).then( function ( response ) {
+				var doc, data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
+				if ( data && typeof data.content === 'string' ) {
+					doc = target.parseDocument( data.content, 'visual' );
+					target.originalDmDoc = target.createModelFromDom( doc, 'visual' );
+					deferred.resolve( new ve.dm.VisualDiff( target.originalDmDoc, dmDoc ) );
+				}
+			} );
+		}
 	}
-	deferred.resolve( new ve.dm.VisualDiff( this.originalDmDoc, this.getSurface().getModel().getDocument() ) );
+	if ( this.originalDmDoc ) {
+		deferred.resolve( new ve.dm.VisualDiff( this.originalDmDoc, dmDoc ) );
+	}
 	return deferred.promise();
 };
 
