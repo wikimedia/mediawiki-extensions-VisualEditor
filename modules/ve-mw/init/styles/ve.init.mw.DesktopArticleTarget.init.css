@@ -45,13 +45,11 @@
 /* Once activated, all uneditable content except catlinks */
 .ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent {
 	/* IE9 is supported with JS events */
-	/* stylelint-disable no-unsupported-browser-features */
 	pointer-events: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	/* stylelint-enable no-unsupported-browser-features */
 	opacity: 0.5;
 }
 

@@ -6,13 +6,13 @@
  */
 .visualeditor-welcomedialog-content {
 	background: url( images/welcomeSplash-ltr.png ) 50% 100% no-repeat;
-	background-size: 50%; /* stylelint-disable-line no-unsupported-browser-features */
+	background-size: 50%;
 	height: 200px;
 	text-align: center;
 }
 
 .ve-ui-mobileWindowManager .visualeditor-welcomedialog-content {
-	background-size: 11em; /* stylelint-disable-line no-unsupported-browser-features */
+	background-size: 11em;
 }
 
 .visualeditor-welcomedialog-content-text {

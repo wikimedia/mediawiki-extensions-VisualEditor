@@ -13,12 +13,10 @@
 	border: 1px solid #ccc;
 	margin-bottom: 0.5em;
 	cursor: pointer;
-	/* stylelint-disable no-unsupported-browser-features */
 	background-size: contain;
 	-webkit-transition: border 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 ), box-shadow 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 );
 	-moz-transition: border 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 ), box-shadow 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 );
 	transition: border 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 ), box-shadow 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 );
-	/* stylelint-enable no-unsupported-browser-features */
 }
 
 .ve-ui-mwGalleryDialog .ve-ui-mwGalleryDialog-image-container-highlighted {
@@ -33,7 +31,7 @@
 	height: 200px;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
-	background-size: contain; /* stylelint-disable-line no-unsupported-browser-features */
+	background-size: contain;
 	margin-bottom: 0.5em;
 }
 
@@ -59,6 +57,6 @@
 .ve-ui-mwGalleryDialog-innerMenuLayout > .oo-ui-menuLayout-menu {
 	height: 5em;
 	border-top: 1px solid #e6e6e6;
-	box-shadow: 0 -1px 0 0 rgba( 0, 0, 0, 0.05 ); /* stylelint-disable-line no-unsupported-browser-features */
+	box-shadow: 0 -1px 0 0 rgba( 0, 0, 0, 0.05 );
 	text-align: center;
 }
