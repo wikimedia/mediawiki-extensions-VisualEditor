@@ -193,7 +193,9 @@
 					"ve.QUnit",
 					"ve.QUnit.assert",
 					"ve.ce.TestOffset",
-					"ve.ce.TestRunner"
+					"ve.ce.TestRunner",
+					"ve.dm.TestRebaseClient",
+					"ve.dm.TestRebaseServer"
 				]
 			}
 		]

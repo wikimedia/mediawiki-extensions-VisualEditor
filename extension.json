@@ -79,6 +79,12 @@
 					12
 				]
 			],
+			"msie": [
+				[
+					"<",
+					10
+				]
+			],
 			"blackberry": null,
 			"silk": null
 		},

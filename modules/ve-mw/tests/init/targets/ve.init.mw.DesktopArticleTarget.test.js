@@ -18,7 +18,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'IE9',
 				userAgent: 'Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)',
-				matches: []
+				matches: [ 'blacklist' ]
 			},
 			{
 				msg: 'IE10',
@@ -146,7 +146,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 				matches: [ 'blacklist' ]
 			},
 			{
-				msg: 'Opera 12',
+				msg: 'Opera 12.16',
 				userAgent: 'Opera/9.80 (Windows NT 5.1) Presto/2.12.388 Version/12.16',
 				matches: []
 			},
