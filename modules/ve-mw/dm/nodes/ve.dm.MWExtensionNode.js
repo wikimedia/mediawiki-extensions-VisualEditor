@@ -151,6 +151,14 @@ ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, chan
 		) ];
 	}
 	// Parent method
+	return ve.dm.MWExtensionNode.super.static.describeChanges.apply( this, arguments );
+};
+
+ve.dm.MWExtensionNode.static.describeChange = function ( key ) {
+	if ( key === 'originalMw' ) {
+		return null;
+	}
+	// Parent method
 	return ve.dm.MWExtensionNode.super.static.describeChange.apply( this, arguments );
 };
 
