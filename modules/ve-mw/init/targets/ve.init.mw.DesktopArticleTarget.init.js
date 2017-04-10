@@ -252,7 +252,9 @@
 						section,
 						oldid,
 						'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
-						modified
+						modified,
+						// If switching to visual, check if we have wikitext to convert
+						mode === 'visual' ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					);
 				} )
 				.done( incrementLoadingProgress );

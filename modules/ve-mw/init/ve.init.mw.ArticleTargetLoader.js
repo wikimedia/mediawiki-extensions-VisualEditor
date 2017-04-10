@@ -103,13 +103,14 @@
 		 * @param {string} [oldid] Old revision ID, current if omitted
 		 * @param {string} [targetName] Optional target name for tracking
 		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
+		 * @param {string} [wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestPageData: function ( mode, pageName, section, oldid, targetName, modified ) {
+		requestPageData: function ( mode, pageName, section, oldid, targetName, modified, wikitext ) {
 			if ( mode === 'source' ) {
 				return this.requestWikitext( pageName, section, oldid, targetName, modified );
 			} else {
-				return this.requestParsoidData( pageName, oldid, targetName, modified );
+				return this.requestParsoidData( pageName, oldid, targetName, modified, wikitext );
 			}
 		},
 
@@ -167,10 +168,6 @@
 					Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.2.0"',
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
-
-				if ( wikitext === undefined ) {
-					wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
-				}
 
 				if (
 					// wikitext can be an empty string
