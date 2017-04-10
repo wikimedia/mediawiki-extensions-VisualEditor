@@ -878,7 +878,6 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 		}
 		$categories = $( $.parseHTML( response.parse.categorieshtml ) );
 		target.transformCategoryLinks( $categories );
-		target.disableUneditableContent( $categories );
 		mw.hook( 'wikipage.categories' ).fire( $categories );
 		$( '#catlinks' ).replaceWith( $categories );
 	} );
@@ -1239,8 +1238,6 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content = $content.parent();
 	}
 
-	this.disableUneditableContent();
-
 	this.updateHistoryState();
 };
 
@@ -1264,18 +1261,6 @@ ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $c
 	} else {
 		$catlinks.addClass( 've-init-mw-desktopArticleTarget-uneditableContent' ).off( '.ve-target' );
 	}
-};
-
-/**
- * Disabling of non-editable content, in a given context
- *
- * @param {jQuery|string} [context] Context to disable in
- */
-ve.init.mw.DesktopArticleTarget.prototype.disableUneditableContent = function ( context ) {
-	$( '.ve-init-mw-desktopArticleTarget-uneditableContent', context ).on( 'click.ve-target', function ( e ) {
-		// Support IE9: Prevent default, but don't stop propagation
-		e.preventDefault();
-	} );
 };
 
 /**
