@@ -84,3 +84,8 @@
 	margin-top: 1em;
 	clear: both;
 }
+
+.ve-ui-mwSaveDialog-no-changes {
+	color: #72777d;
+	font-style: italic;
+}

@@ -529,9 +529,10 @@
 				"accesskey-save",
 				"accesskey-minoredit",
 				"accesskey-watch",
+				"newsectionsummary",
 				"tooltip-minoredit",
 				"tooltip-watch",
-				"newsectionsummary"
+				"visualeditor-diff-no-changes"
 			],
 			"targets": [
 				"desktop",
@@ -1262,7 +1263,6 @@
 				"visualeditor-dialog-table-wikitable",
 				"visualeditor-mwpredialog-title",
 				"visualeditor-mwpredialog-convert",
-				"visualeditor-diff-nochanges",
 				"visualeditor-differror",
 				"visualeditor-editconflict",
 				"visualeditor-editnotices-tool",
@@ -1300,7 +1300,6 @@
 				"visualeditor-savedialog-review-visual",
 				"visualeditor-savedialog-review-wikitext",
 				"visualeditor-savedialog-title-conflict",
-				"visualeditor-savedialog-title-nochanges",
 				"visualeditor-savedialog-title-preview",
 				"visualeditor-savedialog-title-review",
 				"visualeditor-savedialog-title-save",

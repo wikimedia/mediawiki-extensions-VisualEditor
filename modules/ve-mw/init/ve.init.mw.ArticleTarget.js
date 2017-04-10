@@ -703,74 +703,6 @@ ve.init.mw.ArticleTarget.prototype.refreshEditToken = function () {
 };
 
 /**
- * Handle a successful show changes request.
- *
- * @method
- * @param {Object} response API response data
- * @param {string} status Text status message
- */
-ve.init.mw.ArticleTarget.prototype.showChangesSuccess = function ( response ) {
-	var data = response.visualeditoredit;
-	this.diffing = false;
-	if ( !data && !response.error ) {
-		this.showChangesFail( null, 'Invalid response from server', null );
-	} else if ( response.error ) {
-		this.showChangesFail(
-			null, 'Unsuccessful request: ' + response.error.info, null
-		);
-	} else if ( data.result === 'nochanges' ) {
-		this.noChanges();
-	} else if ( data.result !== 'success' ) {
-		this.showChangesFail( null, 'Failed request: ' + data.result, null );
-	} else if ( typeof data.diff !== 'string' ) {
-		this.showChangesFail(
-			null, 'Invalid HTML content in response from server', null
-		);
-	} else {
-		this.showChangesDiff( data.diff );
-	}
-};
-
-/**
- * Show changes diff HTML
- *
- * @param {string} diffHtml Diff HTML
- * @fires showChanges
- */
-ve.init.mw.ArticleTarget.prototype.showChangesDiff = function ( diffHtml ) {
-	this.emit( 'showChanges' );
-
-	// Invalidate the viewer diff on next change
-	this.getSurface().getModel().getDocument().once( 'transact',
-		this.saveDialog.clearDiff.bind( this.saveDialog )
-	);
-	this.saveDialog.setDiffAndReview(
-		diffHtml,
-		this.getVisualDiffPromise(),
-		this.getSurface().getModel().getDocument().getHtmlDocument()
-	);
-};
-
-/**
- * Handle errors during showChanges action.
- *
- * @method
- * @this ve.init.mw.ArticleTarget
- * @param {Object} jqXHR
- * @param {string} status Text status message
- * @param {Mixed} error HTTP status text
- * @fires showChangesError
- */
-ve.init.mw.ArticleTarget.prototype.showChangesFail = function ( jqXHR, status ) {
-	this.diffing = false;
-	this.emit( 'showChangesError' );
-
-	OO.ui.alert( ve.msg( 'visualeditor-differror', status ) );
-
-	this.saveDialog.popPending();
-};
-
-/**
  * Show an save process error message
  *
  * @method
@@ -1001,19 +933,6 @@ ve.init.mw.ArticleTarget.prototype.editConflict = function () {
 };
 
 /**
- * Handle no changes in diff
- *
- * @method
- * @fires noChanges
- */
-ve.init.mw.ArticleTarget.prototype.noChanges = function () {
-	this.emit( 'noChanges' );
-	this.saveDialog.popPending();
-	this.saveDialog.swapPanel( 'nochanges' );
-	this.saveDialog.getActions().setAbilities( { approve: true } );
-};
-
-/**
  * Handle a successful serialize request.
  *
  * This method is called within the context of a target instance.
@@ -1073,7 +992,6 @@ ve.init.mw.ArticleTarget.prototype.serializeFail = function () {
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 	if ( !this.saveDialog.hasDiff ) {
 		this.emit( 'saveReview' );
-		this.saveDialog.getActions().setAbilities( { approve: false } );
 		this.saveDialog.pushPending();
 		if ( this.pageExists ) {
 			// Has no callback, handled via target.showChangesDiff
@@ -1098,7 +1016,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 
 	if ( !this.saveDialog.$previewViewer.children().length ) {
 		this.emit( 'savePreview' );
-		this.saveDialog.getActions().setAbilities( { approve: false } );
 		this.saveDialog.pushPending();
 
 		wikitext = this.getDocToSave();
@@ -1164,7 +1081,7 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	this.bindSaveDialogClearDiff();
 	this.saveDialog.setDiffAndReview(
-		$( '<pre>' ).text( wikitext ),
+		$.Deferred().resolve( $( '<pre>' ).text( wikitext ) ).promise(),
 		this.getVisualDiffPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
@@ -1301,7 +1218,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.clearPreparedCacheKey();
 	this.loading = false;
 	this.saving = false;
-	this.diffing = false;
+	this.wikitextDiffPromise = null;
 	this.serializing = false;
 	this.submitting = false;
 	this.baseTimeStamp = null;
@@ -1745,27 +1662,64 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 };
 
 /**
+ * Show changes in the save dialog
+ *
+ * @param {Object} doc Document
+ */
+ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
+	var target = this;
+	// Invalidate the viewer diff on next change
+	this.getSurface().getModel().getDocument().once( 'transact', function () {
+		target.saveDialog.clearDiff();
+		target.wikitextDiffPromise = null;
+	} );
+	this.saveDialog.setDiffAndReview(
+		this.getWikitextDiffPromise( doc ),
+		this.getVisualDiffPromise(),
+		this.getSurface().getModel().getDocument().getHtmlDocument()
+	);
+};
+
+/**
  * Post DOM data to the Parsoid API to retrieve wikitext diff.
  *
  * @method
  * @param {HTMLDocument} doc Document to compare against (via wikitext)
- * @return {boolean} Diffing has been started
+ * @return {jQuery.Promise} Promise which resolves with the wikitext diff, or rejects with an error
+ * @fires showChanges
+ * @fires showChangesError
 */
-ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
-	if ( this.diffing ) {
-		return false;
+ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
+	var target = this;
+	if ( !this.wikitextDiffPromise ) {
+		this.wikitextDiffPromise = this.tryWithPreparedCacheKey( doc, {
+			action: 'visualeditoredit',
+			paction: 'diff',
+			page: this.pageName,
+			oldid: this.revid,
+			etag: this.etag
+		}, 'diff' ).then( function ( response ) {
+			var data = response.visualeditoredit;
+			if ( !data && !response.error ) {
+				return $.Deferred().reject( 'Invalid response from server' ).promise();
+			} else if ( response.error ) {
+				return $.Deferred().reject( response.error.info ).promise();
+			} else if ( data.result === 'nochanges' ) {
+				target.emit( 'noChanges' );
+				return null;
+			} else if ( data.result !== 'success' ) {
+				return $.Deferred().reject( 'Failed request: ' + data.result ).promise();
+			} else if ( typeof data.diff !== 'string' ) {
+				return $.Deferred().reject( 'Invalid HTML content in response from server' ).promise();
+			} else {
+				return data.diff;
+			}
+		} );
+		this.wikitextDiffPromise
+			.done( this.emit.bind( this, 'showChanges' ) )
+			.fail( this.emit.bind( this, 'showChangesError' ) );
 	}
-	this.diffing = this.tryWithPreparedCacheKey( doc, {
-		action: 'visualeditoredit',
-		paction: 'diff',
-		page: this.pageName,
-		oldid: this.revid,
-		etag: this.etag
-	}, 'diff' )
-		.done( this.showChangesSuccess.bind( this ) )
-		.fail( this.showChangesFail.bind( this ) );
-
-	return true;
+	return this.wikitextDiffPromise;
 };
 
 /**

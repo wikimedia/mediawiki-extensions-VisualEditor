@@ -125,10 +125,14 @@ ve.ui.MWSaveDialog.static.actions = [
  * @param {jQuery.Promise} [visualDiffPromise] Visual diff promise
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links when rendering visualDiff
  */
-ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualDiffPromise, baseDoc ) {
-	this.$reviewVisualDiff.empty();
+ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, visualDiffPromise, baseDoc ) {
+	var dialog = this;
+
+	this.clearDiff();
+
+	// Visual diff
+	this.$reviewVisualDiff.append( new OO.ui.ProgressBarWidget().$element );
 	if ( visualDiffPromise ) {
-		this.clearVisualDiff();
 		// Don't generate the DiffElement until the tab is switched to
 		this.getDiffElementPromise = function () {
 			return visualDiffPromise.then( function ( visualDiff ) {
@@ -147,8 +151,22 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiff, visualD
 		this.reviewModeButtonSelect.selectItemByData( 'source' );
 	}
 
-	this.$reviewWikitextDiff.empty().append( wikitextDiff );
-	this.actions.setAbilities( { approve: true } );
+	// Wikitext diff
+	this.$reviewWikitextDiff.append( new OO.ui.ProgressBarWidget().$element );
+	wikitextDiffPromise.then( function ( wikitextDiff ) {
+		if ( wikitextDiff ) {
+			dialog.$reviewWikitextDiff.empty().append( wikitextDiff );
+		} else {
+			dialog.$reviewWikitextDiff.empty().append(
+				$( '<div>' ).addClass( 've-ui-mwSaveDialog-no-changes' ).text( ve.msg( 'visualeditor-diff-no-changes' ) )
+			);
+		}
+	}, function ( error ) {
+		dialog.$reviewWikitextDiff.empty().append( error );
+	} ).always( function () {
+		dialog.updateSize();
+	} );
+
 	this.hasDiff = true;
 	this.popPending();
 	this.swapPanel( 'review' );
@@ -166,7 +184,6 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( content, baseDoc ) {
 	ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
 	// Run hooks so other things can alter the document
 	mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
-	this.actions.setAbilities( { approve: true } );
 	this.popPending();
 	this.swapPanel( 'preview' );
 };
@@ -195,26 +212,18 @@ ve.ui.MWSaveDialog.prototype.popPending = function () {
  */
 ve.ui.MWSaveDialog.prototype.clearDiff = function () {
 	this.$reviewWikitextDiff.empty();
+	this.$reviewVisualDiff.empty();
 	this.$previewViewer.empty();
 	this.hasDiff = false;
-	this.clearVisualDiff();
-};
-
-/**
- * Clear the visual diff
- */
-ve.ui.MWSaveDialog.prototype.clearVisualDiff = function () {
-	if ( this.diffElement ) {
-		this.diffElement = null;
-		this.diffElementPromise = null;
-		this.getDiffElementPromise = null;
-	}
+	this.diffElement = null;
+	this.diffElementPromise = null;
+	this.getDiffElementPromise = null;
 };
 
 /**
  * Swap state in the save dialog.
  *
- * @param {string} panel One of 'save', 'review', 'conflict' or 'nochanges'
+ * @param {string} panel One of 'save', 'review' or 'conflict'
  * @param {boolean} [noFocus] Don't attempt to focus anything (e.g. while setting up)
  * @throws {Error} Unknown saveDialog panel
  */
@@ -225,14 +234,13 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		dialog = this,
 		panelObj = dialog[ panel + 'Panel' ];
 
-	if ( ( [ 'save', 'review', 'preview', 'conflict', 'nochanges' ].indexOf( panel ) ) === -1 ) {
+	if ( ( [ 'save', 'review', 'preview', 'conflict' ].indexOf( panel ) ) === -1 ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
 
 	// Update the window title
 	// The following messages can be used here:
 	// visualeditor-savedialog-title-conflict
-	// visualeditor-savedialog-title-nochanges
 	// visualeditor-savedialog-title-preview
 	// visualeditor-savedialog-title-review
 	// visualeditor-savedialog-title-save
@@ -301,9 +309,6 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 			setTimeout( function () {
 				dialog.updateReviewMode();
 			} );
-			break;
-		case 'nochanges':
-			mode = 'review';
 			break;
 	}
 
@@ -577,24 +582,12 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		.find( 'a' ).attr( 'target', '_blank' ).end();
 	this.conflictPanel.$element.append( this.$conflict );
 
-	// No changes panel
-	this.nochangesPanel = new OO.ui.PanelLayout( {
-		expanded: false,
-		scrollable: true,
-		padded: true
-	} );
-	this.$noChanges = $( '<div>' ).addClass( 've-ui-mwSaveDialog-nochanges' )
-		.html( ve.init.platform.getParsedMessage( 'visualeditor-diff-nochanges' ) )
-		.find( 'a' ).attr( 'target', '_blank' ).end();
-	this.nochangesPanel.$element.append( this.$noChanges );
-
 	// Panel stack
 	this.panels.addItems( [
 		this.savePanel,
 		this.reviewPanel,
 		this.previewPanel,
-		this.conflictPanel,
-		this.nochangesPanel
+		this.conflictPanel
 	] );
 
 	// Save button for "save" panel
@@ -725,7 +718,6 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
-			this.clearVisualDiff();
 			this.emit( 'close' );
 		}, this );
 };
