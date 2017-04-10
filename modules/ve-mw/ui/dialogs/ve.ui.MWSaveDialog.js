@@ -205,7 +205,6 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  */
 ve.ui.MWSaveDialog.prototype.clearVisualDiff = function () {
 	if ( this.diffElement ) {
-		this.diffElement.destroy();
 		this.diffElement = null;
 		this.diffElementPromise = null;
 		this.getDiffElementPromise = null;
@@ -620,18 +619,44 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	if ( isVisual ) {
 		if ( !this.diffElement ) {
 			if ( !this.diffElementPromise ) {
-				this.diffElementPromise = this.getDiffElementPromise().then( function( diffElement ) {
+				this.diffElementPromise = this.getDiffElementPromise().then( function ( diffElement ) {
 					dialog.diffElement = diffElement;
-					dialog.$reviewVisualDiff.append( diffElement.$element );
-					diffElement.positionDescriptions();
-					dialog.updateSize();
+					dialog.$reviewVisualDiff.empty().append( diffElement.$element );
+					dialog.positionDiffElement();
 				} );
 			}
 			return;
 		}
-		this.diffElement.positionDescriptions();
+		this.positionDiffElement();
 	}
 	this.updateSize();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWSaveDialog.prototype.setDimensions = function () {
+	// Parent method
+	ve.ui.MWSaveDialog.parent.prototype.setDimensions.apply( this, arguments );
+
+	this.positionDiffElement();
+};
+
+/**
+ * Re-position elements within the diff element
+ *
+ * Should be called whenever the diff element's container has changed width.
+ */
+ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
+	var dialog = this;
+	if ( this.diffElement && this.panels.getCurrentItem() === this.reviewPanel ) {
+		setTimeout( function () {
+			dialog.withoutSizeTransitions( function () {
+				dialog.diffElement.positionDescriptions();
+				dialog.updateSize();
+			} );
+		}, OO.ui.theme.getDialogTransitionDuration() );
+	}
 };
 
 /**
