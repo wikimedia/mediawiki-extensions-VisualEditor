@@ -62,6 +62,8 @@ ve.ui.MWInternalLinkContextItem.prototype.renderBody = function () {
 
 	// Style based on link cache information
 	ve.init.platform.linkCache.styleElement( title, $link, this.model.getFragment() );
+	// Don't style as a self-link in the context menu (but do elsewhere)
+	$link.removeClass( 'mw-selflink' );
 
 	if ( usePageImages ) {
 		icon = new OO.ui.IconWidget( { icon: 'page-existing' } );
