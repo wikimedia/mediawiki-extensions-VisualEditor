@@ -31,7 +31,7 @@
 			driver.manage().timeouts().setScriptTimeout( 40000 );
 			driver.manage().window().setSize( 1200, 1000 );
 
-			driver.get( 'https://en.wikipedia.org/wiki/PageDoesNotExist?veaction=edit&uselang=' + lang );
+			driver.get( 'https://en.wikipedia.org/wiki/Help:Sample_page?veaction=edit&uselang=' + lang );
 			driver.wait(
 				driver.executeAsyncScript(
 					// This function is converted to a string and executed in the browser

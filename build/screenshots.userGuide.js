@@ -18,7 +18,7 @@
 						done(
 							seleniumUtils.getBoundingRect( [
 								ve.init.target.toolbar.$element[ 0 ],
-								$( '#ca-nstab-main' )[ 0 ]
+								$( '#p-namespaces' )[ 0 ]
 							] )
 						);
 					},
