@@ -24,7 +24,7 @@ ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation() {
 	this.$anchor.addClass( 've-ce-mwInternalLinkAnnotation' );
 
 	// Style based on link cache information
-	ve.init.platform.linkCache.styleElement( this.model.getAttribute( 'lookupTitle' ), annotation.$anchor );
+	ve.init.platform.linkCache.styleElement( this.model.getAttribute( 'lookupTitle' ), annotation.$anchor, this.model.getFragment() );
 };
 
 /* Inheritance */

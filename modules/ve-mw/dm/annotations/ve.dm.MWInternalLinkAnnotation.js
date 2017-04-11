@@ -199,6 +199,21 @@ ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
 	return title.getPrefixedText();
 };
 
+/**
+ * Get the fragment for a title
+ *
+ * @static
+ * @param {string|mw.Title} original Original title
+ * @return {string} Fragment for the title, or an empty string if it was invalid
+ */
+ve.dm.MWInternalLinkAnnotation.static.getFragment = function ( original ) {
+	var title = original instanceof mw.Title ? original : mw.Title.newFromText( original );
+	if ( !title ) {
+		return '';
+	}
+	return title.getFragment();
+};
+
 ve.dm.MWInternalLinkAnnotation.static.describeChange = function ( key, change ) {
 	if ( key === 'title' ) {
 		return ve.msg( 'visualeditor-changedesc-link-href', change.from, change.to );
@@ -232,6 +247,16 @@ ve.dm.MWInternalLinkAnnotation.prototype.getComparableHtmlAttributes = function 
  */
 ve.dm.MWInternalLinkAnnotation.prototype.getDisplayTitle = function () {
 	return this.getAttribute( 'normalizedTitle' );
+};
+
+/**
+ * Convenience wrapper for .getFragment() on the current element.
+ *
+ * @see #static-getFragment
+ * @return {string} Fragment for the title, or an empty string if it was invalid
+ */
+ve.dm.MWInternalLinkAnnotation.prototype.getFragment = function () {
+	return this.constructor.static.getFragment( this.getAttribute( 'normalizedTitle' ) );
 };
 
 /* Registration */
