@@ -3,7 +3,8 @@
 		"authors": [
 			"Jeblad",
 			"Njardarlogar",
-			"Ranveig"
+			"Ranveig",
+			"Jon Harald Søby"
 		]
 	},
 	"tooltip-ca-createsource": "Opprett kjeldekoden til sida",
@@ -24,6 +25,7 @@
 	"visualeditor-desc": "Visuell endring for MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Visuell endring",
 	"visualeditor-dialog-media-alttext-section": "Alternativ tekst",
+	"visualeditor-dialog-media-choose-image": "Bruk dette biletet",
 	"visualeditor-dialog-media-content-section": "Bilettekst",
 	"visualeditor-dialog-media-noresults": "Fann ingen resultat.",
 	"visualeditor-dialog-media-page-advanced": "Avanserte innstillingar",
@@ -114,7 +116,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Sideinnstillingar",
 	"visualeditor-dialogbutton-template-tooltip": "Mal",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Malinkludering",
-	"visualeditor-diff-nochanges": "Kunne ikkje byrja oversjåinga sidan versjonen din samsvarar med den siste versjonen av sida.",
 	"visualeditor-differror": "Det oppstod ein feil under datalasting frå tenaren: $1.",
 	"visualeditor-editconflict": "Endringane dine kunne ikkje lagrast grunna ein endringskonflikt. Ynskjer {{GENDER:|du}} å løysa konflikten manuelt?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|melding|meldingar}}",
@@ -163,7 +164,6 @@
 	"visualeditor-savedialog-label-save-short": "Lagra",
 	"visualeditor-savedialog-label-warning": "Åtvaring",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
-	"visualeditor-savedialog-title-nochanges": "Ingen endringar å sjå over",
 	"visualeditor-savedialog-title-review": "Sjå over endringane dine",
 	"visualeditor-savedialog-title-save": "Lagra endringane dine",
 	"visualeditor-savedialog-warning-dirty": "Endringa di kan ha vorte skada - gjer vel å sjå over henne før du lagrar.",
