@@ -39,7 +39,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		new OO.ui.ButtonSelectWidget()
 			.addItems( [
 				new OO.ui.ButtonOptionWidget( {
-					data: 'mwIndexForce',
+					data: 'mw:PageProp/index',
 					label: ve.msg( 'visualeditor-dialog-meta-settings-index-force' )
 				} ),
 				new OO.ui.ButtonOptionWidget( {
@@ -47,7 +47,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 					label: ve.msg( 'visualeditor-dialog-meta-settings-index-default' )
 				} ),
 				new OO.ui.ButtonOptionWidget( {
-					data: 'mwIndexDisable',
+					data: 'mw:PageProp/noindex',
 					label: ve.msg( 'visualeditor-dialog-meta-settings-index-disable' )
 				} )
 			] )
@@ -65,7 +65,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		new OO.ui.ButtonSelectWidget()
 			.addItems( [
 				new OO.ui.ButtonOptionWidget( {
-					data: 'mwNewSectionEditForce',
+					data: 'mw:PageProp/newsectionlink',
 					label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-force' )
 				} ),
 				new OO.ui.ButtonOptionWidget( {
@@ -73,7 +73,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 					label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-default' )
 				} ),
 				new OO.ui.ButtonOptionWidget( {
-					data: 'mwNewSectionEditDisable',
+					data: 'mw:PageProp/nonewsectionlink',
 					label: ve.msg( 'visualeditor-dialog-meta-settings-newsectioneditlink-disable' )
 				} )
 			] )
@@ -207,14 +207,14 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	// Indexing items
 	indexingField = this.indexing.getField();
 	indexingOption = this.getMetaItem( 'mwIndex' );
-	indexingType = indexingOption && indexingOption.element.type || 'default';
+	indexingType = indexingOption.getAttribute( 'property' ) || 'default';
 	indexingField.selectItemByData( indexingType );
 	this.indexingOptionTouched = false;
 
 	// New section edit link items
 	newSectionEditField = this.newEditSectionLink.getField();
 	newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' );
-	newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.element.type || 'default';
+	newSectionEditLinkType = newSectionEditLinkOption.getAttribute( 'property' ) || 'default';
 	newSectionEditField.selectItemByData( newSectionEditLinkType );
 	this.newSectionEditLinkOptionTouched = false;
 
@@ -240,9 +240,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
-	var currentIndexingItem, newIndexingData,
-		currentNewSectionEditLinkItem, newNewSectionEditLinkOptionData,
-		currentDisplayTitleItem, newDisplayTitle, newDisplayTitleItemData,
+	var currentIndexingItem, newIndexingData, newIndexingItem,
+		currentNewSectionEditLinkItem, newNewSectionEditLinkData, newNewSectionEditLinkItem,
+		currentDisplayTitleItem, newDisplayTitle, newDisplayTitleItem,
 		advancedSettingsPage = this;
 
 	// Data initialization
@@ -262,14 +262,13 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 				currentIndexingItem.remove();
 			}
 		} else {
+			newIndexingItem = { type: 'mwIndex', attributes: { property: newIndexingData.data } };
+
 			if ( !currentIndexingItem ) {
-				this.metaList.insertMeta( { type: newIndexingData.data } );
-			} else if ( currentIndexingItem.element.type !== newIndexingData.data ) {
+				this.metaList.insertMeta( newIndexingItem );
+			} else if ( currentIndexingItem.getAttribute( 'property' ) !== newIndexingData.data ) {
 				currentIndexingItem.replaceWith(
-					ve.extendObject( true, {},
-						currentIndexingItem.getElement(),
-						{ type: newIndexingData.data }
-					)
+					ve.extendObject( true, {}, currentIndexingItem.getElement(), newIndexingItem )
 				);
 			}
 		}
@@ -277,23 +276,22 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	// New section edit link items
 	currentNewSectionEditLinkItem = this.getMetaItem( 'mwNewSectionEdit' );
-	newNewSectionEditLinkOptionData = this.newEditSectionLink.getField().getSelectedItem();
+	newNewSectionEditLinkData = this.newEditSectionLink.getField().getSelectedItem();
 
 	// Alter the new section edit option flag iff it's been touched & is actually different
 	if ( this.newSectionEditLinkOptionTouched ) {
-		if ( newNewSectionEditLinkOptionData.data === 'default' ) {
+		if ( newNewSectionEditLinkData.data === 'default' ) {
 			if ( currentNewSectionEditLinkItem ) {
 				currentNewSectionEditLinkItem.remove();
 			}
 		} else {
+			newNewSectionEditLinkItem = { type: 'mwNewSectionEdit', attributes: { property: newNewSectionEditLinkData.data } };
+
 			if ( !currentNewSectionEditLinkItem ) {
-				this.metaList.insertMeta( { type: newNewSectionEditLinkOptionData.data } );
-			} else if ( currentNewSectionEditLinkItem.element.type !== newNewSectionEditLinkOptionData.data ) {
+				this.metaList.insertMeta( newNewSectionEditLinkItem );
+			} else if ( currentNewSectionEditLinkItem.getAttribute( 'property' ) !== newNewSectionEditLinkData.data ) {
 				currentNewSectionEditLinkItem.replaceWith(
-					ve.extendObject( true, {},
-						currentNewSectionEditLinkItem.getElement(),
-						{ type: newNewSectionEditLinkOptionData.data }
-					)
+					ve.extendObject( true, {}, currentNewSectionEditLinkItem.getElement(), newNewSectionEditLinkItem )
 				);
 			}
 		}
@@ -305,7 +303,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 	if ( newDisplayTitle === mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText() ) {
 		newDisplayTitle = '';
 	}
-	newDisplayTitleItemData = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } };
+	newDisplayTitleItem = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } };
 
 	// Alter the display title flag iff it's been touched & is actually different
 	if ( this.displayTitleTouched ) {
@@ -316,7 +314,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 					currentDisplayTitleItem.replaceWith(
 						ve.extendObject( true, {},
 							currentDisplayTitleItem.getElement(),
-							newDisplayTitleItemData
+							newDisplayTitleItem
 					) );
 				}
 			} else {
@@ -327,7 +325,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 			if ( newDisplayTitle ) {
 				// There's no existing display title but there is a new one, so create
 				// HACK: Putting this at index 0, offset 0 so that it works – bug 61862
-				this.metaList.insertMeta( newDisplayTitleItemData, 0, 0 );
+				this.metaList.insertMeta( newDisplayTitleItem, 0, 0 );
 			}
 		}
 	}
