@@ -260,12 +260,6 @@
 				.done( incrementLoadingProgress );
 		}
 
-		if ( mode === 'visual' ) {
-			setEditorPreference( 'visualeditor' );
-		} else {
-			setEditorPreference( 'wikitext' );
-		}
-
 		showLoading();
 		incrementLoadingProgress();
 		active = true;
