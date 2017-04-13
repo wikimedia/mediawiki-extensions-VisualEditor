@@ -207,14 +207,14 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	// Indexing items
 	indexingField = this.indexing.getField();
 	indexingOption = this.getMetaItem( 'mwIndex' );
-	indexingType = indexingOption.getAttribute( 'property' ) || 'default';
+	indexingType = indexingOption && indexingOption.getAttribute( 'property' ) || 'default';
 	indexingField.selectItemByData( indexingType );
 	this.indexingOptionTouched = false;
 
 	// New section edit link items
 	newSectionEditField = this.newEditSectionLink.getField();
 	newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' );
-	newSectionEditLinkType = newSectionEditLinkOption.getAttribute( 'property' ) || 'default';
+	newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.getAttribute( 'property' ) || 'default';
 	newSectionEditField.selectItemByData( newSectionEditLinkType );
 	this.newSectionEditLinkOptionTouched = false;
 

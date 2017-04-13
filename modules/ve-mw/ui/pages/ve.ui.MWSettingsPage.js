@@ -262,9 +262,9 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.metaList = metaList;
 
 	// Table of Contents items
-	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
 	tableOfContentsField = this.tableOfContents.getField();
-	tableOfContentsMode = tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
+	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
+	tableOfContentsMode = tableOfContentsMetaItem && tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
 	tableOfContentsField.selectItemByData( tableOfContentsMode );
 	this.tableOfContentsTouched = false;
 
