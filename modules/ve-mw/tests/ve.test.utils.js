@@ -15,7 +15,18 @@ ve.test.utils.createSurfaceFromDocument = function ( doc ) {
 	// HACK: MW targets are async and heavy, use a DummyTarget
 	// but override the global registration
 	target = new ve.test.utils.DummyTarget();
-	mwTarget = new ve.init.mw.ArticleTarget();
+
+	// HACK: Mock setDefaultMode() because it causes untracked
+	// ajax requests (T162810)
+	// HACK: Has to be a subclass instead of assignment to mwTarget
+	// because it is called in the constructor
+	function SubMwArticleTarget() {
+		SubMwArticleTarget.super.call( this );
+	}
+	OO.inheritClass( SubMwArticleTarget, ve.init.mw.ArticleTarget );
+	SubMwArticleTarget.prototype.setDefaultMode = function () {};
+
+	mwTarget = new SubMwArticleTarget();
 
 	$( '#qunit-fixture' ).append( target.$element );
 	target.addSurface( doc );
