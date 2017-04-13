@@ -21,8 +21,9 @@ ve.dm.MWImageNode = function VeDmMWImageNode() {
 	ve.dm.GeneratedContentNode.call( this );
 
 	// Mixin constructors
-	ve.dm.ResizableNode.call( this );
 	ve.dm.FocusableNode.call( this );
+	// ve.dm.MWResizableNode doesn't exist
+	ve.dm.ResizableNode.call( this );
 
 	this.scalablePromise = null;
 

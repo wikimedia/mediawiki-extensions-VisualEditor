@@ -30,7 +30,7 @@ ve.dm.MWBlockImageNode = function VeDmMWBlockImageNode() {
 
 OO.inheritClass( ve.dm.MWBlockImageNode, ve.dm.BranchNode );
 
-// Need to mixin base class as well
+// Need to mixin base class as well (T92540)
 OO.mixinClass( ve.dm.MWBlockImageNode, ve.dm.GeneratedContentNode );
 
 OO.mixinClass( ve.dm.MWBlockImageNode, ve.dm.MWImageNode );

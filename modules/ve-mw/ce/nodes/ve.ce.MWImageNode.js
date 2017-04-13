@@ -49,7 +49,7 @@ OO.inheritClass( ve.ce.MWImageNode, ve.ce.GeneratedContentNode );
 
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.FocusableNode );
 
-// Need to mixin base class as well
+// Need to mixin base class as well (T92540)
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.ResizableNode );
 
 OO.mixinClass( ve.ce.MWImageNode, ve.ce.MWResizableNode );

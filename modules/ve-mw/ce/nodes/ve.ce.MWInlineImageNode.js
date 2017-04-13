@@ -61,7 +61,7 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode() {
 
 OO.inheritClass( ve.ce.MWInlineImageNode, ve.ce.LeafNode );
 
-// Need to mixin base class as well
+// Need to mixin base class as well (T92540)
 OO.mixinClass( ve.ce.MWInlineImageNode, ve.ce.GeneratedContentNode );
 
 OO.mixinClass( ve.ce.MWInlineImageNode, ve.ce.MWImageNode );

@@ -75,7 +75,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 
 OO.inheritClass( ve.ce.MWBlockImageNode, ve.ce.BranchNode );
 
-// Need to mixin base class as well
+// Need to mixin base class as well (T92540)
 OO.mixinClass( ve.ce.MWBlockImageNode, ve.ce.GeneratedContentNode );
 
 OO.mixinClass( ve.ce.MWBlockImageNode, ve.ce.MWImageNode );
