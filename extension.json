@@ -1236,6 +1236,7 @@
 				"mediawiki.jqueryMsg",
 				"jquery.cookie",
 				"jquery.byteLimit",
+				"mediawiki.notify",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.widgets",
 				"ext.visualEditor.switching",
