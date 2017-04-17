@@ -25,7 +25,8 @@
 			"TheGabrielZaum",
 			"Macofe",
 			"Jdforrester",
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"Felipe L. Ewald"
 		]
 	},
 	"apihelp-visualeditor-description": "Retorna código HTML5 a uma página através do serviço Parsoid.",
@@ -51,6 +52,7 @@
 	"apihelp-visualeditoredit-param-page": "A página na qual se realizam ações.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Ao salvar, define isto à data e hora de quando a página foi carregada. Usado para detectar conflitos de edição.",
 	"apihelp-visualeditoredit-param-summary": "Sumário de edição.",
+	"apierror-visualeditor-difffailed": "Diff falhou",
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
 	"tooltip-ca-edit": "Editar esta página usando wikitexto",
 	"tooltip-ca-editsource": "Editar o código-fonte desta página",
@@ -211,7 +213,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Configurações da página",
 	"visualeditor-dialogbutton-template-tooltip": "Predefinição",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusão",
-	"visualeditor-diff-nochanges": "Sua revisão não pode ser iniciada porque é idêntica a última versão desta página.",
 	"visualeditor-differror": "Erro ao carregar dados do servidor: $1.",
 	"visualeditor-donebutton-tooltip": "Edição concluída",
 	"visualeditor-editconflict": "Suas alterações não puderam ser salvas por causa de um conflito de edição. {{GENDER:|Você}} gostaria de resolver o conflito manualmente?",
@@ -280,7 +281,6 @@
 	"visualeditor-savedialog-label-save-short": "Salvar",
 	"visualeditor-savedialog-label-warning": "Aviso",
 	"visualeditor-savedialog-title-conflict": "Conflito",
-	"visualeditor-savedialog-title-nochanges": "Não há mudanças para revisar",
 	"visualeditor-savedialog-title-review": "Revisar suas alterações",
 	"visualeditor-savedialog-title-save": "Salvar as suas alterações",
 	"visualeditor-savedialog-warning-dirty": "Sua edição pode ter sido corrompida – por favor revise antes de salvar.",

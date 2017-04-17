@@ -284,7 +284,7 @@
 	"visualeditor-preference-betatempdisable": "Temporario nga ibaldado ti bisual a panagurnos bayat a daytoy ket adda iti beta",
 	"visualeditor-preference-core-description": "Pakabaelan ti bisual a panagurnos. Saanto a magun-od dagiti tungtungan a panid ken dagiti dadduma a nagan ti espasio.",
 	"visualeditor-preference-core-label": "Bisual a panagurnos",
-	"visualeditor-preference-newwikitexteditor-description": "Pakabaelan ti editor ti wikitext. Addaan daytoy iti maipada a desinio ken adu kadagiti adda a ramramit iti bisual a panagurnos, ken mangpalubos iti nasaysayaat a panagiyallatiw kadagita a dua.",
+	"visualeditor-preference-newwikitexteditor-description": "Pakabaelan ti baro nga editor ti wikitext iti uneg ti bisual nga editor. Addaan daytoy kadagiti adu a ramit nga adda iti bisual nga editor, agusar iti kapada a desinio, ken mangipalubos iti nasaysayaat a panangiyallatiw kadagita a dua.",
 	"visualeditor-preference-newwikitexteditor-label": "Baro nga editor ti wikitext",
 	"visualeditor-preference-enable": "Pakabaelan ti bisual a panagurnos. Mabalinto a magun-od {{PLURAL:$2|iti sumaganad a nagan ti espasio|kadagiti sumaganad a nagan ti espasio}}: $1",
 	"visualeditor-preference-tabs": "Moda ti panagurnos:",

@@ -18,5 +18,7 @@
 	"visualeditor-welcomedialog-action": "সম্পাদনা আৰম্ভ কৰক",
 	"visualeditor-welcomedialog-content": "যিকোনো লোকেই সম্পাদনা কৰিব পাৰে, আৰু প্ৰত্যেক অগ্ৰগতিয়েই সহায় কৰে।",
 	"visualeditor-welcomedialog-content-thanks": "অধিক আৱিষ্কাৰ কৰিবলৈ বিশ্ববাসীক সহায় কৰাৰ বাবে ধন্যবাদ!",
+	"visualeditor-welcomedialog-switch": "উৎস সম্পাদকলৈ যাওক",
+	"visualeditor-welcomedialog-switch-ve": "ভিজুৱেল সম্পাদকলৈ যাওক",
 	"visualeditor-welcomedialog-title": "$2 লৈ {{GENDER:$1|স্বাগতম}}"
 }
