@@ -15,12 +15,17 @@
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
-						done(
-							seleniumUtils.getBoundingRect( [
-								ve.init.target.toolbar.$element[ 0 ],
-								$( '#p-namespaces' )[ 0 ]
-							] )
-						);
+						// HACK: The test page is on the help namespace, so overwrite the
+						// read tab with the nstab-main message.
+						new mw.Api().loadMessagesIfMissing( [ 'nstab-main' ], { amenableparser: true } ).then( function () {
+							$( '#ca-nstab-help a' ).text( mw.msg( 'nstab-main' ) );
+							done(
+								seleniumUtils.getBoundingRect( [
+									ve.init.target.toolbar.$element[ 0 ],
+									$( '#p-namespaces' )[ 0 ]
+								] )
+							);
+						} );
 					},
 					0
 				);
