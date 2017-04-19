@@ -8,6 +8,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+use MediaWiki\MediaWikiServices;
+
 class VisualEditorHooks {
 	/**
 	 * Initialise the 'VisualEditorAvailableNamespaces' setting, and add content
@@ -1024,10 +1026,15 @@ class VisualEditorHooks {
 	public static function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
 		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
+			$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 			DeferredUpdates::addUpdate( new AtomicSectionUpdate(
-				wfGetDB( DB_MASTER ),
+				$lb->getLazyConnectionRef( DB_MASTER ),
 				__METHOD__,
 				function () use ( $user, $cookie ) {
+					if ( wfReadOnly() ) {
+						return;
+					}
+
 					$uLatest = $user->getInstanceForUpdate();
 					$uLatest->setOption( 'visualeditor-editor', $cookie );
 					$uLatest->saveSettings();
