@@ -747,10 +747,12 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
-	var surface = this.getSurface(),
+	var redirectMetaItems,
+		editNotices = this.getEditNotices(),
+		actionTools = this.actionsToolbar.tools,
+		surface = this.getSurface(),
 		surfaceReadyTime = ve.now(),
-		target = this,
-		redirectMetaItems;
+		target = this;
 
 	if ( !this.activating ) {
 		// Activation was aborted before we got here. Do nothing
@@ -797,6 +799,14 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		this.setFakeRedirectInterface( redirectMetaItems[ 0 ].getAttribute( 'title' ) );
 	} else {
 		this.setFakeRedirectInterface( null );
+	}
+
+	// Set edit notices, will be shown after meta dialog.
+	if ( editNotices.length ) {
+		actionTools.notices.setNotices( this.getEditNotices() );
+	} else {
+		actionTools.notices.destroy();
+		actionTools.notices = null;
 	}
 
 	this.setupUnloadHandlers();
@@ -1543,19 +1553,21 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 		target = this;
 
 	if ( this.welcomeDialogPromise ) {
+		// Pop out the notices when the welcome dialog is closed
 		this.welcomeDialogPromise
 			.always( function () {
 				var popup;
-				// Pop out the notices when the welcome dialog is closed
 				if (
 					target.switched &&
 					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
 				) {
+					// Show "switched" popup
 					popup = new mw.libs.ve.SwitchPopupWidget( 'visual' );
 					target.actionsToolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
 					popup.toggle( true );
-				} else {
-					target.actionsToolbar.tools.notices.setNotices( target.getEditNotices() );
+				} else if ( target.actionsToolbar.tools.notices ) {
+					// Show notices
+					target.actionsToolbar.tools.notices.getPopup().toggle( true );
 				}
 			} );
 	}
