@@ -133,8 +133,7 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'*.js',
-				'{build,modules}/**/*.js',
-				'!modules/ve-mw/init/classListSkipFunction.js'
+				'{build,modules}/**/*.js'
 			]
 		},
 		stylelint: {

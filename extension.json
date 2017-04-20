@@ -243,14 +243,6 @@
 				"mobile"
 			]
 		},
-		"dom-classlist-shim": {
-			"scripts": "lib/ve/lib/classList/classList.js",
-			"targets": [
-				"desktop",
-				"mobile"
-			],
-			"skipFunction": "modules/ve-mw/init/classListSkipFunction.js"
-		},
 		"rangefix": {
 			"scripts": "lib/ve/lib/rangefix/rangefix.js",
 			"targets": [
@@ -910,7 +902,6 @@
 				"rangefix",
 				"spark-md5",
 				"papaparse",
-				"dom-classlist-shim",
 				"jquery.client",
 				"ext.visualEditor.base",
 				"ext.visualEditor.supportCheck"
