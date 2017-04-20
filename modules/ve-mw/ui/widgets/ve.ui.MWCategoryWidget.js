@@ -249,10 +249,11 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
  */
 ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames ) {
 	var widget = this,
+		promises = [], index = 0, batchSize = 50,
 		categoryNamesToQuery = [];
 
 	// Get rid of any we already know the hidden status of, or have an entry
-	// if noramlizedTitles (i.e. have been fetched before)
+	// if normalizedTitles (i.e. have been fetched before)
 	categoryNamesToQuery = categoryNames.filter( function ( name ) {
 		var cacheEntry;
 		if ( widget.normalizedTitles[ name ] ) {
@@ -271,41 +272,47 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 		return $.Deferred().resolve( {} ).promise();
 	}
 
-	return new mw.Api().get( {
-		action: 'query',
-		prop: 'pageprops',
-		titles: categoryNamesToQuery,
-		ppprop: 'hiddencat',
-		redirects: ''
-	} ).then( function ( result ) {
-		var linkCacheUpdate = {},
-			normalizedTitles = {};
-		if ( result && result.query && result.query.pages ) {
-			$.each( result.query.pages, function ( index, pageInfo ) {
-				linkCacheUpdate[ pageInfo.title ] = {
-					missing: Object.prototype.hasOwnProperty.call( pageInfo, 'missing' ),
-					hidden: pageInfo.pageprops &&
-						Object.prototype.hasOwnProperty.call( pageInfo.pageprops, 'hiddencat' )
-				};
-			} );
-		}
-		if ( result && result.query && result.query.redirects ) {
-			$.each( result.query.redirects, function ( index, redirectInfo ) {
-				widget.categoryRedirects[ redirectInfo.from ] = redirectInfo.to;
-			} );
-		}
-		ve.init.platform.linkCache.set( linkCacheUpdate );
+	// Batch this up into groups of 50
+	while ( index < categoryNamesToQuery.length ) {
+		promises.push( new mw.Api().get( {
+			action: 'query',
+			prop: 'pageprops',
+			titles: categoryNamesToQuery.slice( index, index + batchSize ),
+			ppprop: 'hiddencat',
+			redirects: ''
+		} ).then( function ( result ) {
+			var linkCacheUpdate = {},
+				normalizedTitles = {};
+			if ( result && result.query && result.query.pages ) {
+				$.each( result.query.pages, function ( index, pageInfo ) {
+					linkCacheUpdate[ pageInfo.title ] = {
+						missing: Object.prototype.hasOwnProperty.call( pageInfo, 'missing' ),
+						hidden: pageInfo.pageprops &&
+							Object.prototype.hasOwnProperty.call( pageInfo.pageprops, 'hiddencat' )
+					};
+				} );
+			}
+			if ( result && result.query && result.query.redirects ) {
+				$.each( result.query.redirects, function ( index, redirectInfo ) {
+					widget.categoryRedirects[ redirectInfo.from ] = redirectInfo.to;
+				} );
+			}
+			ve.init.platform.linkCache.set( linkCacheUpdate );
 
-		if ( result.query && result.query.normalized ) {
-			$.each( result.query.normalized, function ( index, normalisation ) {
-				normalizedTitles[ normalisation.from ] = normalisation.to;
-			} );
-		}
+			if ( result.query && result.query.normalized ) {
+				$.each( result.query.normalized, function ( index, normalisation ) {
+					normalizedTitles[ normalisation.from ] = normalisation.to;
+				} );
+			}
 
-		categoryNames.forEach( function ( name ) {
-			widget.normalizedTitles[ name ] = normalizedTitles[ name ] || name;
-		} );
-	} );
+			categoryNames.forEach( function ( name ) {
+				widget.normalizedTitles[ name ] = normalizedTitles[ name ] || name;
+			} );
+		} ) );
+		index += batchSize;
+	}
+
+	return $.when.apply( $, promises );
 };
 
 /**
