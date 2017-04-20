@@ -614,7 +614,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 		this.saveErrorHookAborted();
 		return;
 	} else if ( data.error && data.error.code === 'readonly' ) {
-		this.saveErrorReadOnly( data.error.readonlyreason );
+		this.saveErrorReadOnly();
 		return;
 	}
 
@@ -912,11 +912,10 @@ ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
  * Handle read only error
  *
  * @method
- * @param {string} reason The reason given by the system administrator.
  * @fires saveErrorReadOnly
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function ( reason ) {
-	this.showSaveError( $( $.parseHTML( mw.message( 'readonlywarning', reason ).parse() ) ), true, true );
+ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function () {
+	this.showSaveError( $( $.parseHTML( mw.message( 'apierror-readonly' ).parse() ) ), true, true );
 	this.emit( 'saveErrorReadOnly' );
 };
 
