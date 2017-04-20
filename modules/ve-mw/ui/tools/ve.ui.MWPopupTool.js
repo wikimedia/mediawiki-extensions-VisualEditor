@@ -65,18 +65,13 @@ ve.ui.MWNoticesPopupTool.static.autoAddToGroup = false;
 /* Methods */
 
 /**
- * Set notices to display, and either destroy the tool (if none to display) or open the popup.
+ * Set notices to display
  *
- * @param {string[]} notices
+ * @param {string[]} notices A (non-empty) list of notices
  */
 ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	var tool = this,
 		count = notices.length;
-
-	if ( !count ) {
-		this.destroy();
-		return;
-	}
 
 	this.popup.setLabel( ve.msg(
 		'visualeditor-editnotices-tool',
@@ -101,8 +96,6 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	} );
 
 	this.popup.$body.append( this.$items );
-
-	this.popup.toggle( true );
 };
 
 /**
