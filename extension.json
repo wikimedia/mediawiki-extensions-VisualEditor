@@ -381,7 +381,7 @@
 				"editing",
 				"lastmodifiedat",
 				"parentheses",
-				"readonlywarning",
+				"apierror-readonly",
 				"redirectpagesub",
 				"subject",
 				"visualeditor-loadwarning",
