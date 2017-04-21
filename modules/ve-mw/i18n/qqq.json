@@ -221,6 +221,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "Message to user that additional template information might be available for a template.\n\nParameters:\n* $1 - the title of the template",
 	"visualeditor-dialog-transclusion-multiple-mode": "Label for button that shows advanced options in transclusion dialog",
 	"visualeditor-dialog-transclusion-no-template-description": "Message to user that no template information is available for the template.\n\nParameters:\n* $1 - the title of the template",
+	"visualeditor-dialog-transclusion-absent-template": "Message to user that the template they have selected does not exist on this wiki.\n\nParameters:\n* $1 - the title of the template",
 	"visualeditor-dialog-transclusion-options": "Label for section with options for templates, content or parameters.\n{{Identical|Options}}",
 	"visualeditor-dialog-transclusion-param-default": "Label for parameter's default value in the template dialog. $1 - Parameter's default value.\n{{Identical|Default}}",
 	"visualeditor-dialog-transclusion-param-example": "Label for parameter's example value in the template dialog. $1 - Parameter's example value.",
