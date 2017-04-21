@@ -230,7 +230,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Page settings",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusion",
-	"visualeditor-differror": "Error loading data from server: $1.",
 	"visualeditor-donebutton-tooltip": "Done editing",
 	"visualeditor-editconflict": "Your changes could not be saved because of an edit conflict. Would {{GENDER:|you}} like to resolve the conflict manually?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} now remembers which editor you prefer. You can switch edit modes as you edit, and change your preference later.",

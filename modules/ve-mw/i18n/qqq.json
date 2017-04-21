@@ -243,7 +243,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
 	"visualeditor-dialogbutton-template-tooltip": "{{Identical|Template}}",
 	"visualeditor-dialogbutton-transclusion-tooltip": "{{Identical|Transclusion}}",
-	"visualeditor-differror": "Text shown when the editor fails to load the diff.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-donebutton-tooltip": "Tooltip text for done editing button in mobile, closing the edit toolbar and blurring the surface.",
 	"visualeditor-editconflict": "Alert message when saving a page causes an edit conflict",
 	"visualeditor-editingtabdialog-body": "Text shown to users to explain the single edit tab and give them the option to change. You can use <nowiki>{{GENDER:}}</nowiki> to refer to the current user.",
