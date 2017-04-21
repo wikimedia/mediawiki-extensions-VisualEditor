@@ -159,7 +159,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Lapas iestatījumi",
 	"visualeditor-dialogbutton-template-tooltip": "Veidne",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Iekļāvums",
-	"visualeditor-differror": "Kļūda datu ielādē no servera: $1.",
 	"visualeditor-donebutton-tooltip": "Labošana pabeigta",
 	"visualeditor-editconflict": "Tavas veiktās izmaiņas nevar saglabāt, jo tās konfliktē ar citu pašlaik veiktu labojumu. Vai vēlies labot šo konfliktu manuāli?",
 	"visualeditor-editingtabdialog-ok": "Izmantot pēdējā labojumā lietoto redaktoru",

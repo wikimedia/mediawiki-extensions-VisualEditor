@@ -234,7 +234,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "تنظیمات صفحه",
 	"visualeditor-dialogbutton-template-tooltip": "الگو",
 	"visualeditor-dialogbutton-transclusion-tooltip": "تراگنجانش",
-	"visualeditor-differror": "خطای بارگیری داده‌ها از کارساز: $1.",
 	"visualeditor-donebutton-tooltip": "ویرایش انجام شد",
 	"visualeditor-editconflict": "امکان ذخیره‌سازی تغییرات {{GENDER:|شما}} نبود زیرا تعارض ویرایشی رخ داد. آیا می‌خواهید تعارض را به صورت دستی حل کنید؟",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} به خاطر دارد که شما کدام ویرایشگر را ترجیح می‌دهید. می‌توانید بین حالت ویرایش متنی و ویرایشگر دیداری تغییر حالت دهید و ترجیحاتتان را بعداً تغییر دهید.",

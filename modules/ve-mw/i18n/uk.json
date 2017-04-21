@@ -231,7 +231,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Налаштування сторінки",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Включення",
-	"visualeditor-differror": "Помилка при завантаженні даних із сервера: $1.",
 	"visualeditor-donebutton-tooltip": "Редагування завершено",
 	"visualeditor-editconflict": "Ваші зміни не вдалось зберегти через конфлікт редагувань. Чи хочете {{GENDER:|Ви}} вирішити конфлікт власноруч?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} тепер пам'ятає, якому редактору Ви віддаєте перевагу. Ви можете перемикати режим редагування під час редагування, і змінити свої налаштування пізніше.",

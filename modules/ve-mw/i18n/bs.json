@@ -202,7 +202,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Postavke stranice",
 	"visualeditor-dialogbutton-template-tooltip": "Šablon",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Uključivanje",
-	"visualeditor-differror": "Greška prilikom učitavanja podataka sa servera: $1.",
 	"visualeditor-donebutton-tooltip": "Uređivanje završeno",
 	"visualeditor-editconflict": "Vaše izmjene se nisu mogle sačuvati zbog sukoba uređivanja. Da li bi ste sukob {{GENDER:|mogli}} razriješiti ručno?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} odsad pamti koji uređivač preferirate. Možete promijeniti način uređivanja u bilo kojem trenutku, a svoj preferirani način možete promijeniti u postavkama.",
