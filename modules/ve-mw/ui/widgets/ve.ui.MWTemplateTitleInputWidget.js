@@ -37,6 +37,7 @@ ve.ui.MWTemplateTitleInputWidget = function VeUiMWTemplateTitleInputWidget( conf
 
 /* Inheritance */
 
+// FIXME: This should extend mw.widgets.TitleSearchWidget instead
 OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, mw.widgets.TitleInputWidget );
 
 /* Methods */
@@ -52,7 +53,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	if ( this.showTemplateDescriptions ) {
 		return promise
 			.then( function ( response ) {
-				var xhr, pageId, index, params, redirIndex,
+				var xhr, pageId, index, redirIndex,
 					redirects = ( response.query && response.query.redirects ) || {},
 					origPages = ( response.query && response.query.pages ) || {},
 					newPages = [],
@@ -84,27 +85,36 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				originalResponse = response; // lie!
 
 				// Also get descriptions
+				// FIXME: This should go through MWTransclusionModel rather than duplicate.
 				if ( titles.length > 0 ) {
-					params = {
+					xhr = widget.getApi().get( {
 						action: 'templatedata',
+						format: 'json',
+						formatversion: '2',
 						titles: titles,
+						redirects: !!widget.showRedirects,
+						doNotIgnoreMissingTitles: '1',
 						lang: mw.config.get( 'wgUserLanguage' )
-					};
-					if ( widget.showRedirects ) {
-						params.redirects = '1';
-					}
-					xhr = widget.getApi().get( params );
+					} );
 					return xhr.promise( { abort: xhr.abort } );
 				}
 			} )
 			.then( function ( templateDataResponse ) {
-				var index, page,
+				var index, page, missingTitle,
 					pages = ( templateDataResponse && templateDataResponse.pages ) || {};
 				// Look for descriptions and cache them
 				for ( index in pages ) {
 					page = pages[ index ];
-					// Cache descriptions
-					widget.descriptions[ page.title ] = page.description;
+					if ( page.missing ) {
+						// Remmeber templates that don't exist in the link cache
+						// { title: { missing: true|false }
+						missingTitle = {};
+						missingTitle[ page.title ] = { missing: true };
+						ve.init.platform.linkCache.setMissing( missingTitle );
+					} else if ( !page.notemplatedata ) {
+						// Cache descriptions
+						widget.descriptions[ page.title ] = page.description;
+					}
 				}
 				// Return the original response
 				return originalResponse;
