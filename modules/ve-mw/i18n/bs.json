@@ -209,7 +209,7 @@
 	"visualeditor-editingtabdialog-title": "Kartice za uređivanje",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|napomena|napomene|napomena}}",
 	"visualeditor-editnotices-tooltip": "Napomene",
-	"visualeditor-editsummary": "Opišite Vaše izmjene",
+	"visualeditor-editsummary": "Opišite šta ste izmijenili",
 	"visualeditor-editsummary-bytes-remaining": "Preostalo bajtova",
 	"visualeditor-educationpopup-dismiss": "U redu, shvatam",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

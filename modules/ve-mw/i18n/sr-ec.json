@@ -7,7 +7,8 @@
 			"Rancher",
 			"Amire80",
 			"Srdjan m",
-			"Сербијана"
+			"Сербијана",
+			"Obsuser"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Опис измене.",
@@ -165,8 +166,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Подешавања странице",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Укључивање",
-	"visualeditor-diff-nochanges": "Преглед измена није могућ јер је страница непромењена.",
-	"visualeditor-differror": "Грешка приликом учитавања података са сервера: $1.",
 	"visualeditor-donebutton-tooltip": "Уређивање завршено",
 	"visualeditor-editconflict": "Промене не могу бити сачуване због сукоба измена. Да ли {{GENDER:|желите}} да ручно решите проблем?",
 	"visualeditor-editingtabdialog-ok": "Користи уређивач који сам користио у последњој измени",
@@ -200,6 +199,7 @@
 	"visualeditor-mweditmodesource-progress": "Пребацивање на изворно уређивање...",
 	"visualeditor-mweditmodesource-title": "Пребацивање на изворно уређивање.",
 	"visualeditor-mweditmodesource-tool": "Изворно уређивање",
+	"visualeditor-mweditmodesource-tool-current": "Уређивач кода",
 	"visualeditor-mweditmodesource-warning": "Пребацујете се на изворно уређивање.\nЖелите ли да наставите?",
 	"visualeditor-mweditmodesource-warning-cancel": "Откажи",
 	"visualeditor-mweditmodesource-warning-switch": "Пребаци",
@@ -210,6 +210,7 @@
 	"visualeditor-mweditmodeve-showagain": "Не приказуј поново",
 	"visualeditor-mweditmodeve-title": "Пребацивање на Визуелни уређивач.",
 	"visualeditor-mweditmodeve-tool": "Пребаци ме на Визуелни уређивач",
+	"visualeditor-mweditmodeve-tool-current": "Визуелни уређивач",
 	"visualeditor-mweditmodeve-warning": "Пребацујете се на Визуелни уређивач.\nЖелите ли да наставите?",
 	"visualeditor-mweditmodewt-popup-body": "У сваком тренутку се можете вратити на уређивање викитекста кликом на ову икону.",
 	"visualeditor-mweditmodewt-popup-title": "Пребацили сте се на Визуелни уређивач",
@@ -247,7 +248,6 @@
 	"visualeditor-savedialog-label-save-short": "Сачувај",
 	"visualeditor-savedialog-label-warning": "Упозорење",
 	"visualeditor-savedialog-title-conflict": "Сукоб",
-	"visualeditor-savedialog-title-nochanges": "Нема измена",
 	"visualeditor-savedialog-title-preview": "Преглед ваших измена",
 	"visualeditor-savedialog-title-review": "Преглед ваших измена",
 	"visualeditor-savedialog-title-save": "Чување измена",
