@@ -311,6 +311,9 @@
 			action: 'templatedata',
 			titles: titles,
 			lang: mw.config.get( 'wgUserLanguage' ),
+			format: 'json',
+			formatversion: '2',
+			doNotIgnoreMissingTitles: '1',
 			redirects: '1'
 		} ).done( this.fetchRequestDone.bind( this, titles, specs ) );
 		xhr.always( this.fetchRequestAlways.bind( this, queue, xhr ) );
@@ -318,12 +321,25 @@
 	};
 
 	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( titles, specs, data ) {
-		var i, len, id, title, aliasMap = [];
+		var i, len, id, title, missingTitle, aliasMap = [];
 
 		if ( data && data.pages ) {
 			// Keep spec data on hand for future use
 			for ( id in data.pages ) {
-				specs[ data.pages[ id ].title ] = data.pages[ id ];
+				title = data.pages[ id ].title;
+
+				if ( data.pages[ id ].missing ) {
+					// Remmeber templates that don't exist in the link cache
+					// { title: { missing: true|false }
+					missingTitle = {};
+					missingTitle[ title ] = { missing: true };
+					ve.init.platform.linkCache.setMissing( missingTitle );
+				} else if ( data.pages[ id ].notemplatedata ) {
+					// Prevent asking again for templates that have no specs
+					specs[ title ] = null;
+				} else {
+					specs[ title ] = data.pages[ id ];
+				}
 			}
 			// Follow redirects
 			if ( data.redirects ) {
@@ -339,14 +355,6 @@
 				// we create a new property with an invalid "undefined" value.
 				if ( hasOwn.call( specs, aliasMap[ i ].to ) ) {
 					specs[ aliasMap[ i ].from ] = specs[ aliasMap[ i ].to ];
-				}
-			}
-
-			// Prevent asking again for templates that have no specs
-			for ( i = 0, len = titles.length; i < len; i++ ) {
-				title = titles[ i ];
-				if ( !specs[ title ] ) {
-					specs[ title ] = null;
 				}
 			}
 
