@@ -642,11 +642,13 @@ ve.ui.MWSaveDialog.prototype.setDimensions = function () {
  */
 ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 	var dialog = this;
-	if ( this.diffElement && this.panels.getCurrentItem() === this.reviewPanel ) {
+	if ( this.panels.getCurrentItem() === this.reviewPanel ) {
 		setTimeout( function () {
 			dialog.withoutSizeTransitions( function () {
-				dialog.diffElement.positionDescriptions();
-				dialog.updateSize();
+				if ( dialog.diffElement ) {
+					dialog.diffElement.positionDescriptions();
+					dialog.updateSize();
+				}
 			} );
 		}, OO.ui.theme.getDialogTransitionDuration() );
 	}
