@@ -554,11 +554,12 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
  * @method
  * @param {HTMLDocument} doc HTML document we tried to save
  * @param {Object} saveData Options that were used
+ * @param {boolean} wasRetry Whether this was a retry after a 'badtoken' error
  * @param {Object} jqXHR
  * @param {string} status Text status message
  * @param {Object|null} data API response data
  */
-ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, status, data ) {
+ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
 	var editApi,
 		target = this;
 
@@ -588,6 +589,10 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 
 	// Handle token errors
 	if ( data.error && data.error.code === 'badtoken' ) {
+		if ( wasRetry ) {
+			this.saveErrorBadToken( null, true );
+			return;
+		}
 		this.refreshEditToken().done( function ( userChanged ) {
 			// target.editToken has been refreshed
 			if ( userChanged ) {
@@ -595,7 +600,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, jqXHR, s
 			} else {
 				// New session is the same user still; retry
 				target.emit( 'saveErrorBadToken', true );
-				target.save( doc, saveData );
+				target.save( doc, saveData, true );
 			}
 		} ).fail( function () {
 			target.saveErrorBadToken( null, true );
@@ -1632,9 +1637,10 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
  *  - {string} summary Edit summary
  *  - {boolean} minor Edit is a minor edit
  *  - {boolean} watch Watch the page
+ * @param {boolean} [isRetry=false] Whether this is a retry after a 'badtoken' error
  * @return {boolean} Saving has been started
 */
-ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
+ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 	var data;
 	// Prevent duplicate requests
 	if ( this.saving ) {
@@ -1655,7 +1661,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 
 	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
 		.done( this.saveSuccess.bind( this, doc, data ) )
-		.fail( this.saveFail.bind( this, doc, data ) );
+		.fail( this.saveFail.bind( this, doc, data, !!isRetry ) );
 
 	return true;
 };
