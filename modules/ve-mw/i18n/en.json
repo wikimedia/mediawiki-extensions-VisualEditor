@@ -208,6 +208,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "There might be some additional information about the \"$1\" template on [[{{ns:template}}:$1|its page]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "Show options",
 	"visualeditor-dialog-transclusion-no-template-description": "The \"$1\" template doesn't yet have a description, but there might be some information on the [[$1|template's page]].",
+	"visualeditor-dialog-transclusion-absent-template": "The \"$1\" template doesn't yet exist.",
 	"visualeditor-dialog-transclusion-options": "Options",
 	"visualeditor-dialog-transclusion-param-default": "Default: $1",
 	"visualeditor-dialog-transclusion-param-example": "e.g. $1",

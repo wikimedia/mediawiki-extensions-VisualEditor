@@ -17,7 +17,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null;
+	var linkData, messageKey,
+		title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null;
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -71,15 +72,18 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		}
 	} else {
 		// The transcluded page may be dynamically generated or unspecified in the DOM
-		// for other reasons (bug 66724). In that case we can't tell the user what
-		// the template is called nor link to the template page.
+		// for other reasons (T68724). In that case we can't tell the user what the
+		// template is called, nor link to the template page. However, if we know for
+		// certain that the template doesn't exist, be explicit about it (T162694).
 		if ( title ) {
+			linkData = ve.init.platform.linkCache.getCached( '_missing/' + title );
+			messageKey = linkData && linkData.missing ?
+				'visualeditor-dialog-transclusion-absent-template' :
+				'visualeditor-dialog-transclusion-no-template-description';
+
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.append( mw.message(
-					'visualeditor-dialog-transclusion-no-template-description',
-					title.getPrefixedText()
-				).parseDom() )
+				.append( mw.message( messageKey, title.getPrefixedText() ).parseDom() )
 				.find( 'a' ).attr( 'target', '_blank' );
 		}
 	}
