@@ -152,7 +152,7 @@ class VisualEditorHooks {
 			!ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) ||
 			!ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() ) ||
 			// Known parameters that VE does not handle
-			// TODO: Other params too? See identical list in ve.init.mw.DesktopArticleTarget.init.js
+			// TODO: Other params too? Expose this in JS for ve.init.mw.DesktopArticleTarget.init.js
 			isset( $params['undo'] ) ||
 			isset( $params['undoafter'] ) ||
 			isset( $params['preload'] ) ||

@@ -20,7 +20,7 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
 		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable, requiredSkinElements,
-		tabPreference, userPrefEnabled, userPrefPreferShow, initialWikitext, oldid,
+		tabPreference, enabledForUser, initialWikitext, oldid,
 		isLoading,
 		editModes = {
 			edit: 'visual'
@@ -478,7 +478,7 @@
 			}
 
 			// If the edit tab is hidden, remove it.
-			if ( !( init.isVisualAvailable && userPrefPreferShow ) ) {
+			if ( !( init.isVisualAvailable && enabledForUser ) ) {
 				$caVeEdit.remove();
 			} else if ( pageCanLoadEditor ) {
 				// Allow instant switching to edit mode, without refresh
@@ -720,9 +720,9 @@
 	};
 
 	// Cast "0" (T89513)
-	enable = +mw.user.options.get( 'visualeditor-enable' );
-	tempdisable = +mw.user.options.get( 'visualeditor-betatempdisable' );
-	autodisable = +mw.user.options.get( 'visualeditor-autodisable' );
+	enable = !!+mw.user.options.get( 'visualeditor-enable' );
+	tempdisable = !!+mw.user.options.get( 'visualeditor-betatempdisable' );
+	autodisable = !!+mw.user.options.get( 'visualeditor-autodisable' );
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
 	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
@@ -812,7 +812,7 @@
 		editModes.editsource = 'source';
 	}
 
-	userPrefEnabled = (
+	enabledForUser = (
 		// Allow disabling for anonymous users separately from changing the
 		// default preference (bug 50000)
 		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
@@ -820,10 +820,7 @@
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable
-	);
-	userPrefPreferShow = (
-		userPrefEnabled &&
+		enable && !tempdisable && !autodisable &&
 
 		// Except when single edit tab for old wikitext
 		!( conf.singleEditTab && tabPreference === 'prefer-wt' && !init.isWikitextAvailable )
@@ -844,7 +841,7 @@
 	// on this page. See above for why it may be false.
 	mw.libs.ve = $.extend( mw.libs.ve || {}, init );
 
-	if ( init.isVisualAvailable && userPrefPreferShow ) {
+	if ( init.isVisualAvailable && enabledForUser ) {
 		$( 'html' ).addClass( 've-available' );
 	} else {
 		$( 'html' ).addClass( 've-not-available' );
@@ -865,99 +862,79 @@
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 		}
 
-		if ( init.isAvailable ) {
-			// Load the editor …
-			if (
-				uri.query.undo === undefined &&
-				uri.query.undoafter === undefined &&
-				uri.query.preload === undefined &&
-				uri.query.preloadtitle === undefined &&
-				uri.query.preloadparams === undefined &&
-				uri.query.lintid === undefined &&
-				uri.query.veswitched === undefined
-				// Known-good parameters: edit, veaction, section
-				// TODO: other params too? See identical list in VisualEditor.hooks.php)
-			) {
-				if (
-					// … if on a ?veaction=edit/editsource page
-					(
-						isViewPage &&
-						uri.query.veaction in editModes &&
-						(
-							uri.query.veaction === 'editsource' ||
-							init.isVisualAvailable
-						)
-					) ||
-					// … or if on ?action=edit in single edit mode and the user wants it
-					(
-						isEditPage &&
-						(
-							uri.query.wteswitched === '1' ||
-							(
-								tabPreference !== 'multi-tab' &&
-								userPrefPreferShow &&
-								// If it's a view-source situation, we don't want to show VE on-load
-								!$( '#ca-viewsource' ).length &&
-								(
-									(
-										tabPreference === 'prefer-ve' &&
-										mw.config.get( 'wgAction' ) !== 'submit' &&
-										init.isVisualAvailable
-									) ||
-									(
-										tabPreference === 'prefer-wt' &&
-										init.isWikitextAvailable
-									) ||
-									(
-										tabPreference === 'remember-last' &&
-										(
-											(
-												getLastEditor() !== 'wikitext' &&
-												init.isVisualAvailable
-											) ||
-											init.isWikitextAvailable
-										)
-									)
-								)
-							)
-						)
-					)
-				) {
-					showWikitextWelcome = false;
-					trackActivateStart( {
-						type: section === null ? 'page' : 'section',
-						mechanism: 'url'
-					} );
-					if ( isViewPage && uri.query.veaction in editModes ) {
-						mode = editModes[ uri.query.veaction ];
-					} else {
-						if ( init.isWikitextAvailable && (
-							getPreferredEditor() === 'wikitext' || (
-								!init.isVisualAvailable &&
-								[ 'edit', 'submit' ].indexOf( uri.query.action ) !== -1
-							)
-						) ) {
-							mode = 'source';
-						} else {
-							mode = 'visual';
-						}
-					}
-					activateTarget( mode, section );
-				} else if (
-					init.isVisualAvailable &&
-					pageCanLoadEditor &&
-					init.isSingleEditTab
-				) {
-					// In single edit tab mode we never have an edit tab
-					// with accesskey 'v' so create one
-					$( 'body' ).append(
-						$( '<a>' )
-							.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUri } )
-							// Accesskey fires a click event
-							.on( 'click', init.onEditTabClick.bind( init, 'visual' ) )
-							.hide()
-					);
+		function isSupportedEditPage() {
+			// Known-good parameters: edit, veaction, section
+			// TODO: Expose this from VisualEditor.hooks.php
+			var unsupportedParams = [
+				'lintid',
+				'preload',
+				'preloadparams',
+				'preloadtitle',
+				'undo',
+				'undoafter',
+				'veswitched'
+			];
+
+			return unsupportedParams.every( function ( param ) {
+				return uri.query[ param ] === undefined;
+			} );
+		}
+
+		function getInitialEditMode() {
+			// On view pages if veaction is correctly set
+			if ( isViewPage && init.isVisualAvailable && uri.query.veaction in editModes ) {
+				return editModes[ uri.query.veaction ];
+			}
+			// Edit pages
+			if ( isEditPage && isSupportedEditPage() ) {
+				// Just did a discard-switch from wikitext editor to VE (in no RESTBase mode)
+				if ( uri.query.wteswitched === '1' ) {
+					return init.isVisualAvailable ? 'visual' : null;
 				}
+				// User has disabled VE, or we are in view source only mode, or we have landed here with posted data
+				if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
+					return null;
+				}
+				switch ( getPreferredEditor() ) {
+					case 'visualeditor':
+						if ( init.isVisualAvailable ) {
+							return 'visual';
+						}
+						if ( init.isWikitextAvailable ) {
+							return 'source';
+						}
+						return null;
+
+					case 'wikitext':
+						return init.isWikitextAvailable ? 'source' : null;
+				}
+			}
+			return null;
+		}
+
+		if ( init.isAvailable ) {
+			mode = getInitialEditMode();
+			if ( mode ) {
+				showWikitextWelcome = false;
+				trackActivateStart( {
+					type: section === null ? 'page' : 'section',
+					mechanism: 'url'
+				} );
+				activateTarget( mode, section );
+			} else if (
+				init.isVisualAvailable &&
+				pageCanLoadEditor &&
+				init.isSingleEditTab
+			) {
+				// In single edit tab mode we never have an edit tab
+				// with accesskey 'v' so create one
+				$( 'body' ).append(
+					$( '<a>' )
+						.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUri } )
+						// Accesskey fires a click event
+						.on( 'click', init.onEditTabClick.bind( init, 'visual' ) )
+						.hide()
+				);
 			}
 
 			// Add the switch button to wikitext ?action=edit or ?action=submit pages
@@ -1049,7 +1026,7 @@
 			}
 
 			// Set up the tabs appropriately if the user has VE on
-			if ( init.isAvailable && userPrefPreferShow ) {
+			if ( init.isAvailable && enabledForUser ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
 				if ( !init.isSingleEditTab ) {
 					// … set the skin up with both tabs and both section edit links.
