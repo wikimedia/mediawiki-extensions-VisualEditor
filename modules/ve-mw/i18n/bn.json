@@ -173,6 +173,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "\"$1\" টেমপ্লেট সম্পর্কে [[{{ns:template}}:$1|এটির পাতায়]] কিছু অতিরিক্ত তথ্য থাকতে পারে।",
 	"visualeditor-dialog-transclusion-multiple-mode": "বিকল্প দেখাও",
 	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" টেমপ্লেটে এখনো কোন বিবরণ নেই, কিন্তু [[$1|টেমপ্লেটের পাতায়]] কিছু তথ্য হয়তো থাকতে পারে।",
+	"visualeditor-dialog-transclusion-absent-template": "\"$1\" টেমপ্লেটির অস্তিত্ব এখনো নেই।",
 	"visualeditor-dialog-transclusion-options": "অপশন",
 	"visualeditor-dialog-transclusion-param-default": "পূর্বনির্ধারিত: $1",
 	"visualeditor-dialog-transclusion-param-example": "উদা: $1",

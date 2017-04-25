@@ -201,6 +201,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "ייתכן שיש מידע נוסף על התבנית \"$1\" ב[[{{ns:template}}:$1|דף התיעוד שלה]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "הצגת אפשרויות",
 	"visualeditor-dialog-transclusion-no-template-description": "לתבנית \"$1\" עדיין אין תיאור, אבל ייתכן שאפשר למצוא מידע כלשהו ב[[$1|דף של התבנית]].",
+	"visualeditor-dialog-transclusion-absent-template": "התבנית \"$1\" עדיין לא קיימת.",
 	"visualeditor-dialog-transclusion-options": "אפשרויות",
 	"visualeditor-dialog-transclusion-param-default": "בררת מחדל: $1",
 	"visualeditor-dialog-transclusion-param-example": "דוגמה: $1",

@@ -199,6 +199,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "Es könnten einige zusätzliche Informationen über die Vorlage „$1“ auf [[{{ns:template}}:$1|ihrer Seite]] vorhanden sein.",
 	"visualeditor-dialog-transclusion-multiple-mode": "Optionen anzeigen",
 	"visualeditor-dialog-transclusion-no-template-description": "Die Vorlage „$1“ hat noch keine Beschreibung, aber vielleicht gibt es einige Informationen auf der [[$1|Vorlagenseite]].",
+	"visualeditor-dialog-transclusion-absent-template": "Die Vorlage „$1“ ist noch nicht vorhanden.",
 	"visualeditor-dialog-transclusion-options": "Optionen",
 	"visualeditor-dialog-transclusion-param-default": "Standard: $1",
 	"visualeditor-dialog-transclusion-param-example": "z.&nbsp;B. $1",

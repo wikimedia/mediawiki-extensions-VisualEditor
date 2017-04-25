@@ -140,6 +140,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Novecojis lauks",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Lauks ir novecojis. $1",
 	"visualeditor-dialog-transclusion-loading": "Ielādē…",
+	"visualeditor-dialog-transclusion-absent-template": "Veidne \"$1\" vēl nepastāv.",
 	"visualeditor-dialog-transclusion-options": "Iespējas",
 	"visualeditor-dialog-transclusion-param-example": "piemēram, $1",
 	"visualeditor-dialog-transclusion-param-info": "Lauka apraksts",
