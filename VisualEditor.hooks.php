@@ -14,9 +14,8 @@ class VisualEditorHooks {
 
 	// Known parameters that VE does not handle
 	// TODO: Other params too?
-	// Known-good parameters: edit, veaction, section
+	// Known-good parameters: edit, veaction, section, oldid, lintid
 	private static $unsupportedEditParams = [
-		'lintid',
 		'preload',
 		'preloadparams',
 		'preloadtitle',
