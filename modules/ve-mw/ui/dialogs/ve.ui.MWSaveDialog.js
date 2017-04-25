@@ -581,7 +581,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$editSummaryLabel = $( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )
 		.html( ve.init.platform.getParsedMessage( 'summary' ) );
 	ve.targetLinksToNewWindow( this.$editSummaryLabel[ 0 ] );
-	this.editSummaryInput = new OO.ui.MultilineTextInputWidget( {
+	this.editSummaryInput = new ve.ui.MWEditSummaryWidget( {
+		$overlay: this.$overlay,
 		placeholder: ve.msg( 'visualeditor-editsummary' ),
 		classes: [ 've-ui-mwSaveDialog-summary' ],
 		inputFilter: function ( value ) {
