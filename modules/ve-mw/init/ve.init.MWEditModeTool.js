@@ -38,8 +38,6 @@ mw.libs.ve.MWEditModeTool.static.autoAddToCatchall = false;
 
 mw.libs.ve.MWEditModeTool.static.autoAddToGroup = false;
 
-mw.libs.ve.MWEditModeTool.static.currentTitle = null;
-
 mw.libs.ve.MWEditModeTool.static.unavailableTooltip = null;
 
 /* Methods */
@@ -82,32 +80,25 @@ mw.libs.ve.MWEditModeTool.prototype.onSelect = function () {
 	if ( this.getMode() !== this.constructor.static.editMode ) {
 		this.switch();
 	}
+	this.setActive( this.getMode() === this.constructor.static.editMode );
 };
 
 /**
  * @inheritdoc
  */
 mw.libs.ve.MWEditModeTool.prototype.onUpdateState = function () {
-	var titleKey,
-		modeAvailable = this.isModeAvailable( this.constructor.static.editMode ),
-		isCurrent = this.getMode() === this.constructor.static.editMode;
+	var modeAvailable = this.isModeAvailable( this.constructor.static.editMode );
 
 	// Change title if state has changed
-	if ( this.isCurrent !== isCurrent || this.modeAvailable !== modeAvailable ) {
-		titleKey = isCurrent ?
-			this.constructor.static.currentTitle :
-			this.constructor.static.title;
-		this.setTitle( OO.ui.resolveMsg( titleKey ) );
-		// Change tooltip if mode is unavailable
-		if ( !modeAvailable ) {
-			this.$link.attr( 'title', OO.ui.resolveMsg( this.constructor.static.unavailableTooltip ) );
-		}
+	if ( this.modeAvailable !== modeAvailable ) {
+		this.$link.attr( 'title', modeAvailable ?
+			OO.ui.resolveMsg( this.constructor.static.title ) :
+			OO.ui.resolveMsg( this.constructor.static.unavailableTooltip )
+		);
+		this.setDisabled( !modeAvailable );
 		this.modeAvailable = modeAvailable;
-		this.isCurrent = isCurrent;
 	}
-	// Update disabled and active state
-	this.setDisabled( !modeAvailable );
-	this.setActive( isCurrent );
+	this.setActive( this.getMode() === this.constructor.static.editMode );
 };
 
 /**
@@ -128,8 +119,6 @@ mw.libs.ve.MWEditModeSourceTool.static.editMode = 'source';
 mw.libs.ve.MWEditModeSourceTool.static.name = 'editModeSource';
 mw.libs.ve.MWEditModeSourceTool.static.icon = 'wikiText';
 mw.libs.ve.MWEditModeSourceTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-mweditmodesource-tool' );
-mw.libs.ve.MWEditModeSourceTool.static.currentTitle =
 	OO.ui.deferMsg( 'visualeditor-mweditmodesource-tool-current' );
 mw.libs.ve.MWEditModeSourceTool.static.unavailableTooltip =
 	OO.ui.deferMsg( 'visualeditor-mweditmodesource-tool-unavailable' );
@@ -152,8 +141,6 @@ mw.libs.ve.MWEditModeVisualTool.static.editMode = 'visual';
 mw.libs.ve.MWEditModeVisualTool.static.name = 'editModeVisual';
 mw.libs.ve.MWEditModeVisualTool.static.icon = 'eye';
 mw.libs.ve.MWEditModeVisualTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool' );
-mw.libs.ve.MWEditModeVisualTool.static.currentTitle =
 	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool-current' );
 mw.libs.ve.MWEditModeVisualTool.static.unavailableTooltip =
 	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool-unavailable' );
