@@ -41,6 +41,9 @@ ve.dm.MWTableNode.static.classAttributes = {
 	'mw-collapsed': { collapsed: true }
 };
 
+// Tables in wikitext only work in some contexts, they're impossible e.g. in list items
+ve.dm.MWTableNode.static.suggestedParentNodeTypes = [ 'document', 'div', 'tableCell', 'tableCaption', 'mwImageCaption' ];
+
 // HACK: users of parentNodeTypes should be fixed to check for inherited classes.
 ve.dm.TableSectionNode.static.parentNodeTypes.push( 'mwTable' );
 ve.dm.TableCaptionNode.static.parentNodeTypes.push( 'mwTable' );
