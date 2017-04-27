@@ -313,7 +313,7 @@
 	}
 
 	function getLastEditor() {
-		// This logic matches VisualEditorHooks::getUserEditor
+		// This logic matches VisualEditorHooks::getLastEditor
 		var editor = $.cookie( 'VEE' );
 		// Set editor to user's preference or site's default if …
 		if (
@@ -337,10 +337,12 @@
 				return 'visualeditor';
 			case 'prefer-wt':
 				return 'wikitext';
-			default:
-				// Two tabs, no preference
-				return null;
+			case 'multi-tab':
+				// 'multi-tab'
+				// TODO: See VisualEditor.hooks.php
+				return 'wikitext';
 		}
+		return null;
 	}
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
@@ -785,6 +787,7 @@
 		mw.config.get( 'wgNamespaceNumber' ) !== -1
 	);
 
+	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
 	init.isVisualAvailable = (
 		init.isAvailable &&
 
@@ -795,6 +798,7 @@
 		conf.contentModels.hasOwnProperty( mw.config.get( 'wgPageContentModel' ) )
 	);
 
+	// Duplicated in VisualEditor.hooks.php#isWikitextAvailable()
 	init.isWikitextAvailable = (
 		init.isAvailable &&
 
@@ -863,19 +867,7 @@
 		}
 
 		function isSupportedEditPage() {
-			// Known-good parameters: edit, veaction, section
-			// TODO: Expose this from VisualEditor.hooks.php
-			var unsupportedParams = [
-				'lintid',
-				'preload',
-				'preloadparams',
-				'preloadtitle',
-				'undo',
-				'undoafter',
-				'veswitched'
-			];
-
-			return unsupportedParams.every( function ( param ) {
+			return mw.config.get( 'wgVisualEditorUnsupportedEditParams' ).every( function ( param ) {
 				return uri.query[ param ] === undefined;
 			} );
 		}

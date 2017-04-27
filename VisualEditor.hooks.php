@@ -11,6 +11,20 @@
 use MediaWiki\MediaWikiServices;
 
 class VisualEditorHooks {
+
+	// Known parameters that VE does not handle
+	// TODO: Other params too?
+	// Known-good parameters: edit, veaction, section
+	private static $unsupportedEditParams = [
+		'lintid',
+		'preload',
+		'preloadparams',
+		'preloadtitle',
+		'undo',
+		'undoafter',
+		'veswitched'
+	];
+
 	/**
 	 * Initialise the 'VisualEditorAvailableNamespaces' setting, and add content
 	 * namespaces to it. This will run after LocalSettings.php is processed.
@@ -56,6 +70,7 @@ class VisualEditorHooks {
 			$toolbarScrollOffset = $skinsToolbarScrollOffset[$skinName];
 		}
 		$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
+		$output->addJsConfigVars( 'wgVisualEditorUnsupportedEditParams', self::$unsupportedEditParams );
 
 		$output->addJsConfigVars(
 			'wgEditSubmitButtonLabelPublish',
@@ -108,6 +123,43 @@ class VisualEditorHooks {
 		return false;
 	}
 
+	private static function isSupportedEditPage( Title $title, User $user, WebRequest $req ) {
+		if ( $req->getVal( 'action' ) !== 'edit' || !$title->quickUserCan( 'edit' ) ) {
+			return false;
+		}
+
+		foreach ( self::$unsupportedEditParams as $param ) {
+			if ( $req->getVal( $param ) !== null ) {
+				return false;
+			}
+		}
+
+		if ( $req->getVal( 'wteswitched' ) ) {
+			return self::isVisualAvailable( $title );
+		}
+
+		switch ( self::getPreferredEditor( $user, $req ) ) {
+			case 'visualeditor':
+				return self::isVisualAvailable( $title ) || self::isWikitextAvailable( $title, $user );
+			case 'wikitext':
+				return self::isWikitextAvailable( $title, $user );
+		}
+		return false;
+	}
+
+	private static function isVisualAvailable( $title ) {
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		return ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) &&
+			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() );
+	}
+
+	private static function isWikitextAvailable( $title, $user ) {
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		return $veConfig->get( 'VisualEditorEnableWikitext' ) &&
+			$user->getOption( 'visualeditor-newwikitext' ) &&
+			$title->getContentModel() === 'wikitext';
+	}
+
 	/**
 	 * Decide whether to bother showing the wikitext editor at all.
 	 * If not, we expect the VE initialisation JS to activate.
@@ -123,8 +175,6 @@ class VisualEditorHooks {
 			!$user->getOption( 'visualeditor-enable' ) ||
 			$user->getOption( 'visualeditor-betatempdisable' ) ||
 			$user->getOption( 'visualeditor-autodisable' ) ||
-			$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt' ||
-			$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
 			( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() ) ||
 			self::isUABlacklisted( $req, $veConfig )
 		) {
@@ -132,9 +182,8 @@ class VisualEditorHooks {
 		}
 
 		$title = $article->getTitle();
-		$params = $req->getValues();
 
-		if ( isset( $params['venoscript'] ) ) {
+		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			$user->setOption( 'visualeditor-editor', 'wikitext' );
 			if ( !wfReadOnly() && !$user->isAnon() ) {
@@ -145,36 +194,23 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$ret = $req->getVal( 'action' ) !== 'edit' ||
-			!$veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
-			self::getUserEditor( $user, $req ) === 'wikitext' ||
-			!$title->quickUserCan( 'edit' ) ||
-			!ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) ||
-			!ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() ) ||
-			// Known parameters that VE does not handle
-			// TODO: Other params too? Expose this in JS for ve.init.mw.DesktopArticleTarget.init.js
-			isset( $params['undo'] ) ||
-			isset( $params['undoafter'] ) ||
-			isset( $params['preload'] ) ||
-			isset( $params['preloadtitle'] ) ||
-			isset( $params['preloadparams'] ) ||
-			isset( $params['lintid'] ) ||
-			isset( $params['veswitched'] );
-			// Known-good parameters: edit, veaction, section
-
-		$params['venoscript'] = '1';
-		$url = wfScript() . '?' . wfArrayToCgi( $params );
-		$out = $article->getContext()->getOutput();
-		if ( !$ret ) {
+		if ( self::isSupportedEditPage( $title, $user, $req ) ) {
+			$params = $req->getValues();
+			$params['venoscript'] = '1';
+			$url = wfScript() . '?' . wfArrayToCgi( $params );
 			$escapedUrl = htmlspecialchars( $url );
+
+			$out = $article->getContext()->getOutput();
+			$titleMsg = $title->exists() ? 'editing' : 'creating';
+			$out->setPageTitle( wfMessage( $titleMsg, $title->getPrefixedText() ) );
+			$out->addWikiMsg( 'visualeditor-toload', wfExpandUrl( $url ) );
+
+			// Redirect if the user has no JS (<noscript>)
 			$out->addHeadItem(
 				've-noscript-fallback',
 				"<noscript><meta http-equiv=\"refresh\" content=\"0; url=$escapedUrl\"></noscript>"
 			);
-
-			$titleMsg = $title->exists() ? 'editing' : 'creating';
-			$out->setPageTitle( wfMessage( $titleMsg, $title->getPrefixedText() ) );
-			$out->addWikiMsg( 'visualeditor-toload', wfExpandUrl( $url ) );
+			// Redirect if the user has no ResourceLoader
 			$out->addScript( Html::inlineScript(
 				"(window.NORLQ=window.NORLQ||[]).push(" .
 					"function(){" .
@@ -182,11 +218,29 @@ class VisualEditorHooks {
 					"}" .
 				");"
 			) );
+			return false;
 		}
-		return $ret;
+		return true;
 	}
 
-	private static function getUserEditor( User $user, WebRequest $req ) {
+	private static function getPreferredEditor( User $user, WebRequest $req ) {
+		switch ( $user->getOption( 'visualeditor-tabs' ) ) {
+			case 'prefer-ve':
+				return 'visualeditor';
+			case 'prefer-wt':
+				return 'wikitext';
+			case 'remember-last':
+				return self::getLastEditor( $user, $req );
+			case 'multi-tab':
+				// May have got here by switching from VE
+				// TODO: Make such an action explicitly request wikitext
+				// so we can use getLastEditor here instead.
+				return 'wikitext';
+		}
+		return null;
+	}
+
+	private static function getLastEditor( User $user, WebRequest $req ) {
 		// This logic matches getLastEditor in:
 		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
 		$editor = $req->getCookie( 'VEE', '' );
@@ -318,7 +372,7 @@ class VisualEditorHooks {
 					$editTab['text'] = $skin->msg( $editTabMessage )->text();
 				}
 
-				$editor = self::getUserEditor( $user, $skin->getRequest() );
+				$editor = self::getLastEditor( $user, $skin->getRequest() );
 				if (
 					$isAvailable &&
 					$config->get( 'VisualEditorUseSingleEditTab' ) &&
@@ -446,7 +500,7 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$editor = self::getUserEditor( $user, RequestContext::getMain()->getRequest() );
+		$editor = self::getLastEditor( $user, RequestContext::getMain()->getRequest() );
 		if (
 			!$config->get( 'VisualEditorUseSingleEditTab' ) ||
 			$user->getOption( 'visualeditor-tabs' ) === 'multi-tab' ||
