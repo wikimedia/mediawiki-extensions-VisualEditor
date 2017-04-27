@@ -645,7 +645,7 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 	if ( this.panels.getCurrentItem() === this.reviewPanel ) {
 		setTimeout( function () {
 			dialog.withoutSizeTransitions( function () {
-				if ( dialog.diffElement ) {
+				if ( dialog.diffElement && dialog.isVisible() ) {
 					dialog.diffElement.positionDescriptions();
 					dialog.updateSize();
 				}
