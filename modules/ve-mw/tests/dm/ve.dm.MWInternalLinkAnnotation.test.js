@@ -61,3 +61,50 @@ QUnit.test( 'toDataElement', function ( assert ) {
 		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element ], converter ), cases[ i ].expected, cases[ i ].msg );
 	}
 } );
+
+QUnit.test( 'getFragment', function ( assert ) {
+	var	i, l,
+		cases = [
+			{
+				msg: 'No fragment returns null',
+				original: 'Foo',
+				expected: null
+			},
+			{
+				msg: 'Invalid title returns null',
+				original: 'A%20B',
+				expected: null
+			},
+			{
+				msg: 'Blank fragment returns empty string',
+				original: 'Foo#',
+				expected: ''
+			},
+			{
+				msg: 'Extant fragment returns same string',
+				original: 'Foo#bar',
+				expected: 'bar'
+			},
+			{
+				msg: 'Hash-bang works returns full string',
+				original: 'Foo#!bar',
+				expected: '!bar'
+			},
+			{
+				msg: 'Double-hash returns everything after the first hash',
+				original: 'Foo##bar',
+				expected: '#bar'
+			},
+			{
+				msg: 'Multi-fragment returns everything after the first hash',
+				original: 'Foo#bar#baz#bat',
+				expected: 'bar#baz#bat'
+			}
+		];
+
+	QUnit.expect( cases.length );
+
+	for ( i = 0, l = cases.length; i < l; i++ ) {
+		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( cases[ i ].original ), cases[ i ].expected, cases[ i ].msg );
+	}
+} );

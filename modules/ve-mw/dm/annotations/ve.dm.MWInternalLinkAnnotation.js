@@ -204,12 +204,12 @@ ve.dm.MWInternalLinkAnnotation.static.getLookupTitle = function ( original ) {
  *
  * @static
  * @param {string|mw.Title} original Original title
- * @return {string} Fragment for the title, or an empty string if it was invalid
+ * @return {string|null} Fragment for the title, or null if it was invalid or missing
  */
 ve.dm.MWInternalLinkAnnotation.static.getFragment = function ( original ) {
 	var title = original instanceof mw.Title ? original : mw.Title.newFromText( original );
 	if ( !title ) {
-		return '';
+		return null;
 	}
 	return title.getFragment();
 };
