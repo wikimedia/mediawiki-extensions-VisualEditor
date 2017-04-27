@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kandar",
-			"Uchup19"
+			"Uchup19",
+			"Dipusparaga"
 		]
 	},
 	"apihelp-visualeditor-description": "Balikkeun HTML5 pikeun kaca ti layanan Parsoid.",
@@ -12,6 +13,10 @@
 	"visualeditor-ca-editsource": "Édit sumber",
 	"visualeditor-ca-editsource-section": "édit sumber",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-transclusion-absent-template": "Citakan \"$1\" geus euweuh.",
+	"visualeditor-educationpopup-dismiss": "Okéh, ngarti",
+	"visualeditor-mweditmodesource-tool-current": "Édit sumber",
+	"visualeditor-mweditmodesource-warning-cancel": "Bolay",
 	"visualeditor-savedialog-label-create": "Jieun kaca",
 	"visualeditor-savedialog-label-error": "Kasalahan",
 	"visualeditor-savedialog-label-publish-short": "Pedalkeun",

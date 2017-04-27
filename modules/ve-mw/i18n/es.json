@@ -28,7 +28,8 @@
 			"Ncontinanza",
 			"Guillermo2149",
 			"Lemondoge",
-			"Dgstranz"
+			"Dgstranz",
+			"Luzcaru"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -278,8 +279,7 @@
 	"visualeditor-mweditmode-tooltip": "Cambiar de editor",
 	"visualeditor-mweditmodesource-progress": "Cambiando a la edición del código...",
 	"visualeditor-mweditmodesource-title": "¿Cambiar a edición de código?",
-	"visualeditor-mweditmodesource-tool": "Cambiar a la edición del código",
-	"visualeditor-mweditmodesource-tool-current": "Edición de código",
+	"visualeditor-mweditmodesource-tool-current": "Edición de código fuente",
 	"visualeditor-mweditmodesource-warning": "Estás por cambiar a la edición de fuente.\n¿Quieres continuar?",
 	"visualeditor-mweditmodesource-warning-cancel": "Cancelar",
 	"visualeditor-mweditmodesource-warning-switch": "Cambiar",
@@ -289,7 +289,6 @@
 	"visualeditor-mweditmodeve-progress": "Cambiando a la edición visual...",
 	"visualeditor-mweditmodeve-showagain": "No volver a mostrar este mensaje",
 	"visualeditor-mweditmodeve-title": "¿Cambiar al editor visual?",
-	"visualeditor-mweditmodeve-tool": "Cambiar a la edición visual",
 	"visualeditor-mweditmodeve-tool-current": "Edición visual",
 	"visualeditor-mweditmodeve-tool-unavailable": "La edición visual no está disponible aquí",
 	"visualeditor-mweditmodeve-warning": "Estás por cambiar a la edición visual.\n¿Quieres continuar?",
