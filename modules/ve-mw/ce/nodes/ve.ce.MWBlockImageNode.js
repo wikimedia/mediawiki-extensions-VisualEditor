@@ -27,7 +27,6 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 
 	// Properties
 	this.captionVisible = false;
-	this.typeToRdfa = this.getTypeToRdfa();
 
 	// DOM Hierarchy for MWBlockImageNode:
 	//   <figure> this.$element (ve-ce-mwBlockImageNode-{type})
@@ -61,7 +60,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 		.addClass( 've-ce-mwBlockImageNode ve-ce-mwBlockImageNode-type-' + type )
 		// 'typeof' should appear with the proper Parsoid-generated
 		// type. The model deals with converting it
-		.attr( 'typeof', this.typeToRdfa[ type ] );
+		.attr( 'typeof', this.model.getRdfa() );
 
 	// Mixin constructors
 	ve.ce.MWImageNode.call( this, this.$element, $image );
@@ -106,21 +105,6 @@ ve.ce.MWBlockImageNode.static.cssClasses = {
 };
 
 /* Methods */
-
-/**
- * Set up an object that converts from the type to rdfa, based
- *  on the rdfaToType object in the model.
- *
- * @return {Object.<string,string>} A type to Rdfa conversion object
- */
-ve.ce.MWBlockImageNode.prototype.getTypeToRdfa = function () {
-	var rdfa, obj = {};
-
-	for ( rdfa in this.model.constructor.static.rdfaToType ) {
-		obj[ this.model.constructor.static.rdfaToType[ rdfa ] ] = rdfa;
-	}
-	return obj;
-};
 
 /**
  * Update the caption based on the current model state
@@ -296,7 +280,7 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 				this.$element
 					.removeClass( 've-ce-mwBlockImageNode-type-' + from )
 					.addClass( 've-ce-mwBlockImageNode-type-' + to )
-					.attr( 'typeof', this.typeToRdfa[ to ] );
+					.attr( 'typeof', this.model.getRdfa() );
 
 				this.updateClasses();
 				this.updateCaption();

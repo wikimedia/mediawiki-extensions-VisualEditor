@@ -34,11 +34,6 @@ OO.mixinClass( ve.dm.MWInlineImageNode, ve.dm.MWImageNode );
 
 /* Static Properties */
 
-ve.dm.MWInlineImageNode.static.rdfaToType = {
-	'mw:Image': 'none',
-	'mw:Image/Frameless': 'frameless'
-};
-
 ve.dm.MWInlineImageNode.static.isContent = true;
 
 ve.dm.MWInlineImageNode.static.name = 'mwInlineImage';
@@ -52,14 +47,8 @@ ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span' ];
 
 ve.dm.MWInlineImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
-ve.dm.MWInlineImageNode.static.getMatchRdfaTypes = function () {
-	return Object.keys( this.rdfaToType );
-};
-
-ve.dm.MWInlineImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
-
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
-	var dataElement, attributes,
+	var dataElement, attributes, types,
 		$span = $( domElements[ 0 ] ),
 		$firstChild = $span.children().first(), // could be <span> or <a>
 		$img = $firstChild.children().first(),
@@ -74,8 +63,11 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		typeofAttrs.splice( errorIndex, 1 );
 	}
 
+	types = this.rdfaToTypes[ typeofAttrs[ 0 ] ],
+
 	attributes = {
-		type: this.rdfaToType[ typeofAttrs[ 0 ] ],
+		mediaClass: types.mediaClass,
+		type: types.frameType,
 		src: $img.attr( 'src' ),
 		resource: $img.attr( 'resource' ),
 		originalClasses: classes
@@ -154,22 +146,17 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 
 ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	var firstChild,
+		mediaClass = data.attributes.mediaClass,
 		span = doc.createElement( 'span' ),
-		img = doc.createElement( 'img' ),
+		img = doc.createElement( mediaClass === 'Image' ? 'img' : 'video' ),
 		classes = [],
-		originalClasses = data.attributes.originalClasses,
-		rdfa;
+		originalClasses = data.attributes.originalClasses;
 
-	ve.setDomAttributes( img, data.attributes, [ 'src', 'width', 'height', 'resource' ] );
+	ve.setDomAttributes( img, data.attributes, [ 'width', 'height', 'resource' ] );
+	img.setAttribute( mediaClass === 'Image' ? 'src' : 'poster', data.attributes.src );
 
-	if ( !this.typeToRdfa ) {
-		this.typeToRdfa = {};
-		for ( rdfa in this.rdfaToType ) {
-			this.typeToRdfa[ this.rdfaToType[ rdfa ] ] = rdfa;
-		}
-	}
-
-	span.setAttribute( 'typeof', this.typeToRdfa[ data.attributes.type ] );
+	// RDFa type
+	span.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
 
 	if ( data.attributes.defaultSize ) {
 		classes.push( 'mw-default-size' );

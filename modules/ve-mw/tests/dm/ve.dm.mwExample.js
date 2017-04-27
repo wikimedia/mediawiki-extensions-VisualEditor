@@ -263,6 +263,7 @@ ve.dm.mwExample.MWBlockImage = {
 				type: 'thumb',
 				align: 'right',
 				href: 'Foo',
+				mediaClass: 'Image',
 				src: ve.ce.minImgDataUri,
 				width: 1,
 				height: 2,
@@ -295,6 +296,7 @@ ve.dm.mwExample.MWInlineImage = {
 		attributes: {
 			src: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png',
 			href: './File:Wiki.png',
+			mediaClass: 'Image',
 			width: 135,
 			height: 155,
 			isLinked: true,
@@ -1352,6 +1354,7 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'thumb',
 					align: 'default',
 					href: 'Foo',
+					mediaClass: 'Image',
 					src: ve.ce.minImgDataUri,
 					width: 1,
 					height: 2,

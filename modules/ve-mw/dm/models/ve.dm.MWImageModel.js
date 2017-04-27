@@ -126,6 +126,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
 
 	attrs = ve.extendObject( {
+		mediaClass: 'Image',
 		type: 'thumb',
 		align: 'default',
 		width: defaultThumbSize,
@@ -537,6 +538,7 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 	}
 
 	attrs = {
+		mediaClass: this.getMediaClass(),
 		type: this.getType(),
 		width: currentDimensions.width,
 		height: currentDimensions.height,
@@ -769,6 +771,21 @@ ve.dm.MWImageModel.prototype.getSizeType = function () {
  */
 ve.dm.MWImageModel.prototype.getMediaType = function () {
 	return this.mediaType;
+};
+
+/**
+ * Get Parsoid media class: Image, Video or Audio
+ */
+ve.dm.MWImageModel.prototype.getMediaClass = function () {
+	var mediaType = this.getMediaType();
+
+	if ( mediaType === 'VIDEO' ) {
+		return 'Video';
+	}
+	if ( mediaType === 'AUDIO' ) {
+		return 'Audio';
+	}
+	return 'Image';
 };
 
 /**
