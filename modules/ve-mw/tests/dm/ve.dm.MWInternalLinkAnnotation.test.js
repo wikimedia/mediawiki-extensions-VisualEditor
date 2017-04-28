@@ -55,8 +55,6 @@ QUnit.test( 'toDataElement', function ( assert ) {
 	converter.internalList = doc.getInternalList();
 	converter.contextStack = [];
 
-	QUnit.expect( cases.length );
-
 	for ( i = 0, l = cases.length; i < l; i++ ) {
 		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element ], converter ), cases[ i ].expected, cases[ i ].msg );
 	}
@@ -101,8 +99,6 @@ QUnit.test( 'getFragment', function ( assert ) {
 				expected: 'bar#baz#bat'
 			}
 		];
-
-	QUnit.expect( cases.length );
 
 	for ( i = 0, l = cases.length; i < l; i++ ) {
 		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( cases[ i ].original ), cases[ i ].expected, cases[ i ].msg );

@@ -11,7 +11,6 @@ QUnit.module( 've.dm.MWImageModel', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 	var i, imageType, imageModel, value, result, expected, expectedAlignment, method, dir, dummyDoc,
-		expect = 0,
 		imageNode = {},
 		images = {
 			mwInlineImage: {
@@ -115,21 +114,6 @@ QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
 				]
 			}
 		};
-
-	for ( imageType in images ) {
-		// Type test
-		expect++;
-		for ( i = 0; i < images[ imageType ].tests.length; i++ ) {
-			// Method tests
-			expect += Object.keys( images[ imageType ].tests[ i ].results.expect ).length;
-			if ( images[ imageType ].tests[ i ].results.position ) {
-				// Position test
-				expect++;
-			}
-		}
-	}
-
-	QUnit.expect( expect );
 
 	for ( imageType in images ) {
 		// Create the node

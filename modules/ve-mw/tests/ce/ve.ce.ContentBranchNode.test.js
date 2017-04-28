@@ -39,7 +39,7 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 					'd<span rel="ve:Alien" class="ve-ce-focusableNode" contenteditable="false">e</span>' +
 				'</b>'
 		} ];
-	QUnit.expect( cases.length );
+
 	for ( i = 0, len = cases.length; i < len; i++ ) {
 		doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( cases[ i ].data ) );
 		$wrapper = $( new ve.ce.ParagraphNode( doc.getDocumentNode().getChildren()[ 0 ] ).getRenderedContents() );

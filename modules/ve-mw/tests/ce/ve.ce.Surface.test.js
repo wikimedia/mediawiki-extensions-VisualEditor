@@ -53,8 +53,6 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 			}
 		];
 
-	QUnit.expect( cases.length * 2 );
-
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
 			assert, cases[ i ].htmlOrDoc, cases[ i ].rangeOrSelection, cases[ i ].keys,
@@ -64,7 +62,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 } );
 
 QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
-	var i, expected = 0,
+	var i,
 		cases = [
 			{
 				documentHtml: '<p></p>',
@@ -76,19 +74,6 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 				msg: 'RESTBase IDs stripped'
 			}
 		];
-
-	for ( i = 0; i < cases.length; i++ ) {
-		if ( cases[ i ].expectedOps ) {
-			expected++;
-		}
-		if ( cases[ i ].expectedRangeOrSelection ) {
-			expected++;
-		}
-		if ( cases[ i ].expectedHtml ) {
-			expected++;
-		}
-	}
-	QUnit.expect( expected );
 
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfacePasteTest(
