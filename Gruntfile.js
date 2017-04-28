@@ -123,14 +123,6 @@ module.exports = function ( grunt ) {
 			]
 		},
 		eslint: {
-			fix: {
-				options: {
-					fix: true
-				},
-				src: [
-					'<%= eslint.all %>'
-				]
-			},
 			all: [
 				'*.js',
 				'{build,modules}/**/*.js'
@@ -198,8 +190,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'tyops', 'eslint:all', 'stylelint', 'jsonlint', 'banana' ] );
-	grunt.registerTask( 'fix', [ 'eslint:fix' ] );
+	grunt.registerTask( 'lint', [ 'tyops', 'eslint', 'stylelint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
 	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en', 'image:screenshots-en' ] );
