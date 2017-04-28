@@ -52,6 +52,30 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 
 /* Static methods */
 
+ve.dm.MWImageNode.static.rdfaToTypes = ( function () {
+	var rdfaToType = {};
+
+	[ 'Image', 'Video', 'Audio' ].forEach( function ( mediaClass ) {
+		rdfaToType[ 'mw:' + mediaClass ] = { mediaClass: mediaClass, frameType: 'none' };
+		rdfaToType[ 'mw:' + mediaClass + '/Frameless' ] = { mediaClass: mediaClass, frameType: 'frameless' };
+		// Block image only:
+		rdfaToType[ 'mw:' + mediaClass + '/Thumb' ] = { mediaClass: mediaClass, frameType: 'thumb' };
+		rdfaToType[ 'mw:' + mediaClass + '/Frame' ] = { mediaClass: mediaClass, frameType: 'frame' };
+	} );
+
+	return rdfaToType;
+}() );
+
+ve.dm.MWImageNode.static.getRdfa = function ( mediaClass, frameType ) {
+	return 'mw:' + mediaClass + {
+		none: '',
+		frameless: '/Frameless',
+		// Block image only:
+		thumb: '/Thumb',
+		frame: '/Frame'
+	}[ frameType ];
+};
+
 ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
 	return {
 		type: dataElement.type,
@@ -60,6 +84,12 @@ ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
 		height: dataElement.attributes.height
 	};
 };
+
+ve.dm.MWImageNode.static.getMatchRdfaTypes = function () {
+	return Object.keys( this.rdfaToTypes );
+};
+
+ve.dm.MWImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
 
 ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attributes ) {
 	var key, sizeFrom, sizeTo, change,
@@ -326,4 +356,13 @@ ve.dm.MWImageNode.prototype.createScalable = function () {
  */
 ve.dm.MWImageNode.prototype.getMediaType = function () {
 	return this.mediaType;
+};
+
+/**
+ * Get RDFa type
+ *
+ * @return {string} RDFa type
+ */
+ve.dm.MWImageNode.prototype.getRdfa = function () {
+	return this.constructor.static.getRdfa( this.getAttribute( 'mediaClass' ), this.getAttribute( 'type' ) );
 };
