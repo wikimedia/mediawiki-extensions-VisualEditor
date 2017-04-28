@@ -230,7 +230,6 @@ QUnit.test( 'convert', function ( assert ) {
 			}
 		];
 
-	QUnit.expect( cases.length * 2 );
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runWikitextStringHandlerTest(
 			assert, this.server, cases[ i ].pasteString, cases[ i ].pasteType, cases[ i ].parsoidResponse,
