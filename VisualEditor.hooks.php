@@ -876,6 +876,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/dm/ve.dm.BranchNode.test.js',
 				'lib/ve/tests/dm/ve.dm.LeafNode.test.js',
 				'lib/ve/tests/dm/ve.dm.LinearData.test.js',
+				'lib/ve/tests/dm/ve.dm.LinkAnnotation.test.js',
 				'lib/ve/tests/dm/nodes/ve.dm.TextNode.test.js',
 				'modules/ve-mw/tests/dm/nodes/ve.dm.MWTransclusionNode.test.js',
 				'lib/ve/tests/dm/ve.dm.Document.test.js',
