@@ -3,12 +3,13 @@
  *
  * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
  */
-var MWWIKITEXT_MOCK_API = true;
+
+window.MWWIKITEXT_MOCK_API = true;
 
 QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
 	setup: function () {
 		// Mock XHR for mw.Api()
-		this.server = MWWIKITEXT_MOCK_API ? this.sandbox.useFakeServer() : null;
+		this.server = window.MWWIKITEXT_MOCK_API ? this.sandbox.useFakeServer() : null;
 		ve.test.utils.mwEnvironment.setup.call( this );
 	},
 	teardown: ve.test.utils.mwEnvironment.teardown
