@@ -1424,7 +1424,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 		return new mw.Api().postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
 	}
 
-	preparedCacheKey = this.getPreparedCacheKey( doc ),
+	preparedCacheKey = this.getPreparedCacheKey( doc );
 	data = ve.extendObject( {}, options, { format: 'json' } );
 
 	function ajaxRequest( cachekey, isRetried ) {
