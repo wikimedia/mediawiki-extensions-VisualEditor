@@ -5,23 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-// Update the timestamp on inserted signatures every minute.
-var liveSignatures = [];
-setInterval( function () {
-	var updatedSignatures, i, sig;
-	updatedSignatures = [];
-	for ( i = 0; i < liveSignatures.length; i++ ) {
-		sig = liveSignatures[ i ];
-		try {
-			sig.forceUpdate();
-			updatedSignatures.push( sig );
-		} catch ( er ) {
-			// Do nothing
-		}
-	}
-	liveSignatures = updatedSignatures;
-}, 60 * 1000 );
-
 /**
  * ContentEditable MediaWiki signature node. This defines the behavior of the signature node
  * inserted into the ContentEditable document.
@@ -45,9 +28,6 @@ ve.ce.MWSignatureNode = function VeCeMWSignatureNode() {
 		// the width changing when using the Sequence.
 		this.$element.text( '~~~~' );
 	}
-
-	// Keep track for magical text updating
-	liveSignatures.push( this );
 };
 
 /* Inheritance */
@@ -62,7 +42,55 @@ ve.ce.MWSignatureNode.static.tagName = 'span';
 
 ve.ce.MWSignatureNode.static.primaryCommandName = 'mwSignature';
 
+ve.ce.MWSignatureNode.static.liveSignatures = [];
+
+// Update the timestamp on inserted signatures every minute.
+setInterval( function () {
+	var updatedSignatures, i, sig,
+		liveSignatures = ve.ce.MWSignatureNode.static.liveSignatures;
+
+	updatedSignatures = [];
+	for ( i = 0; i < liveSignatures.length; i++ ) {
+		sig = liveSignatures[ i ];
+		try {
+			sig.forceUpdate();
+			updatedSignatures.push( sig );
+		} catch ( er ) {
+			// Do nothing
+		}
+	}
+	liveSignatures = updatedSignatures;
+}, 60 * 1000 );
+
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWSignatureNode.prototype.onSetup = function () {
+	// Parent method
+	ve.ce.MWSignatureNode.super.prototype.onSetup.call( this );
+
+	// Keep track for regular updating of timestamp
+	this.constructor.static.liveSignatures.push( this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWSignatureNode.prototype.onTeardown = function () {
+	var index,
+		liveSignatures = this.constructor.static.liveSignatures;
+
+	// Parent method
+	ve.ce.MWSignatureNode.super.prototype.onTeardown.call( this );
+
+	// Stop tracking
+	index = liveSignatures.indexOf( this );
+	if ( index !== -1 ) {
+		liveSignatures.splice( index, 1 );
+	}
+};
 
 /**
  * @inheritdoc
