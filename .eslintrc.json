@@ -16,7 +16,6 @@
 	},
 	"rules": {
 		"dot-notation": [ "error", { "allowKeywords": true } ],
-		"valid-jsdoc": 0,
-		"no-alert": "error"
+		"valid-jsdoc": 0
 	}
 }
