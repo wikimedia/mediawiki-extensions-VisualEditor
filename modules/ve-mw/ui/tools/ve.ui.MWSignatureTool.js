@@ -5,11 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-var allowsSignatures = $.inArray(
-	new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId(),
-	mw.config.get( 'wgVisualEditorConfig' ).signatureNamespaces
-) !== -1;
-
 /**
  * MediaWiki UserInterface signature tool. This defines the menu button and its action.
  *
@@ -36,7 +31,12 @@ ve.ui.MWSignatureTool.static.commandName = 'mwSignature';
 
 ve.ui.toolFactory.register( ve.ui.MWSignatureTool );
 
-if ( allowsSignatures ) {
+if (
+	$.inArray(
+		new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId(),
+		mw.config.get( 'wgVisualEditorConfig' ).signatureNamespaces
+	) !== -1
+) {
 	// Command to insert signature node.
 	ve.ui.commandRegistry.register(
 		new ve.ui.Command( 'mwSignature', 'content', 'insert', {
