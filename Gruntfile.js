@@ -14,7 +14,7 @@ module.exports = function ( grunt ) {
 			timeout: 40000,
 			require: [
 				function () {
-					// eslint-disable-next-line no-undef
+					// eslint-disable-next-line no-undef, no-implicit-globals
 					langs = [ 'en' ];
 				}
 			]
@@ -24,7 +24,7 @@ module.exports = function ( grunt ) {
 			timeout: 40000,
 			require: [
 				function () {
-					// eslint-disable-next-line no-undef
+					// eslint-disable-next-line no-undef, no-implicit-globals
 					langs = require( './build/tasks/screenshotLangs.json' ).langs;
 				}
 			]
