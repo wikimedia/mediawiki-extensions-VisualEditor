@@ -93,7 +93,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		typeofAttrs.splice( errorIndex, 1 );
 	}
 
-	types = this.rdfaToTypes[ typeofAttrs[ 0 ] ],
+	types = this.rdfaToTypes[ typeofAttrs[ 0 ] ];
 
 	attributes = {
 		mediaClass: types.mediaClass,

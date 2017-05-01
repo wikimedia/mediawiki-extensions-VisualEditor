@@ -157,7 +157,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 	var contentNodes;
 
 	if ( ve.getProp( response, 'visualeditor', 'result' ) !== 'success' ) {
-		return this.onParseError.call( this, deferred );
+		return this.onParseError( deferred );
 	}
 
 	// Work around https://github.com/jquery/jquery/issues/1997
