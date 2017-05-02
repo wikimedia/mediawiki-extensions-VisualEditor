@@ -503,12 +503,12 @@ ve.init.mw.ArticleTarget.prototype.saveSuccess = function ( doc, saveData, respo
 	var data = response.visualeditoredit;
 	this.saving = false;
 	if ( !data ) {
-		this.saveFail( doc, saveData, null, 'Invalid response from server', response );
+		this.saveFail( doc, saveData, false, null, 'Invalid response from server', response );
 	} else if ( data.result !== 'success' ) {
 		// Note, this could be any of db failure, hookabort, badtoken or even a captcha
-		this.saveFail( doc, saveData, null, 'Save failure', response );
+		this.saveFail( doc, saveData, false, null, 'Save failure', response );
 	} else if ( typeof data.content !== 'string' ) {
-		this.saveFail( doc, saveData, null, 'Invalid HTML content in response from server', response );
+		this.saveFail( doc, saveData, false, null, 'Invalid HTML content in response from server', response );
 	} else {
 		this.saveComplete(
 			data.content,
