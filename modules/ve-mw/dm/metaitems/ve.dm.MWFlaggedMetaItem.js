@@ -30,26 +30,26 @@ OO.inheritClass( ve.dm.MWFlaggedMetaItem, ve.dm.MetaItem );
 ve.dm.MWFlaggedMetaItem.static.matchTagNames = [ 'meta' ];
 
 ve.dm.MWFlaggedMetaItem.static.toDataElement = function ( domElements ) {
-	var type = domElements[ 0 ].getAttribute( 'property' );
+	var property = domElements[ 0 ].getAttribute( 'property' );
 
-	if ( !type || this.matchRdfaTypes.indexOf( type ) === -1 ) {
+	if ( !property || this.matchRdfaTypes.indexOf( property ) === -1 ) {
 		// Fallback to first match if somehow unset
-		type = this.matchRdfaTypes[ 0 ];
+		property = this.matchRdfaTypes[ 0 ];
 	}
 
-	return { type: this.name, attributes: { type: type } };
+	return { type: this.name, attributes: { property: property } };
 };
 
 ve.dm.MWFlaggedMetaItem.static.toDomElements = function ( dataElement, doc ) {
 	var meta = doc.createElement( 'meta' ),
-		type = OO.getProp( dataElement, 'attributes', 'property' );
+		property = OO.getProp( dataElement, 'attributes', 'property' );
 
-	if ( !type || this.matchRdfaTypes.indexOf( type ) === -1 ) {
+	if ( !property || this.matchRdfaTypes.indexOf( property ) === -1 ) {
 		// Fallback to first item if somehow unset
-		type = this.matchRdfaTypes[ 0 ];
+		property = this.matchRdfaTypes[ 0 ];
 	}
 
-	meta.setAttribute( 'property', type );
+	meta.setAttribute( 'property', property );
 
 	return [ meta ];
 };
