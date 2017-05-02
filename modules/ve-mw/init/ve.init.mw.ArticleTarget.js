@@ -844,19 +844,35 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data )
  * @fires saveErrorCaptcha
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
-	var $captchaDiv = $( '<div>' ),
-		$captchaParagraph = $( '<p>' );
+	var $captchaImg, msg, question,
+		captchaData = editApi.captcha,
+		captchaInput = new OO.ui.TextInputWidget( { classes: [ 've-ui-saveDialog-captchaInput' ] } ),
+		$captchaDiv = $( '<div>' ),
+		$captchaParagraph = $( '<p>' ),
+		target = this;
+
+	function onCaptchaLoad() {
+		target.saveDialog.updateSize();
+		captchaInput.focus();
+		captchaInput.scrollElementIntoView();
+	}
+
+	// Save when pressing 'Enter' in captcha field as it is single line.
+	captchaInput.on( 'enter', function () {
+		target.saveDialog.executeAction( 'save' );
+	} );
 
 	this.captcha = {
-		input: new OO.ui.TextInputWidget(),
-		id: editApi.captcha.id
+		input: captchaInput,
+		id: captchaData.id
 	};
 	$captchaDiv.append( $captchaParagraph );
 	$captchaParagraph.append(
 		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
 		document.createTextNode( mw.msg( 'colon-separator' ) )
 	);
-	if ( editApi.captcha.url ) {
+
+	if ( captchaData.url ) {
 		// FancyCaptcha
 		// Based on FancyCaptcha::getFormInformation() (https://git.io/v6mml) and
 		// ext.confirmEdit.fancyCaptcha.js in the ConfirmEdit extension.
@@ -866,37 +882,46 @@ ve.init.mw.ArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
 			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
 				.filter( 'a' ).attr( 'target', '_blank' ).end()
 		);
+		$captchaImg = $( '<img>' )
+			.attr( 'src', captchaData.url )
+			.addClass( 'fancycaptcha-image' )
+			.on( 'load', onCaptchaLoad );
 		$captchaDiv.append(
-			$( '<img>' ).attr( 'src', editApi.captcha.url ).addClass( 'fancycaptcha-image' ),
+			$captchaImg,
 			' ',
 			$( '<a>' ).addClass( 'fancycaptcha-reload' ).text( mw.msg( 'fancycaptcha-reload-text' ) )
 		);
-	} else if ( editApi.captcha.type === 'simple' || editApi.captcha.type === 'math' ) {
-		// SimpleCaptcha and MathCaptcha
-		$captchaParagraph.append(
-			mw.message( 'captcha-edit' ).parse(),
-			'<br>',
-			document.createTextNode( editApi.captcha.question )
-		);
-	} else if ( editApi.captcha.type === 'question' ) {
-		// QuestyCaptcha
-		$captchaParagraph.append(
-			mw.message( 'questycaptcha-edit' ).parse(),
-			'<br>',
-			editApi.captcha.question
-		);
+	} else {
+		if ( captchaData.type === 'simple' || captchaData.type === 'math' ) {
+			// SimpleCaptcha and MathCaptcha
+			msg = 'captcha-edit';
+		} else if ( captchaData.type === 'question' ) {
+			// QuestyCaptcha
+			msg = 'questycaptcha-edit';
+		}
+
+		if ( msg ) {
+			switch ( captchaData.mime ) {
+				case 'text/html':
+					question = $.parseHTML( captchaData.question );
+					// TODO: Search for images and wait for them to load
+					setTimeout( onCaptchaLoad );
+					break;
+				case 'text/plain':
+					question = document.createTextNode( captchaData.question );
+					setTimeout( onCaptchaLoad );
+					break;
+			}
+			$captchaParagraph.append( mw.message( msg ).parse(), '<br>', question );
+		}
 	}
 
-	$captchaDiv.append( this.captcha.input.$element );
+	$captchaDiv.append( captchaInput.$element );
 
 	// ProcessDialog's error system isn't great for this yet.
 	this.saveDialog.clearMessage( 'api-save-error' );
 	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
 	this.saveDialog.popPending();
-
-	this.saveDialog.updateSize();
-
-	this.captcha.input.focus();
 
 	this.emit( 'saveErrorCaptcha' );
 };

@@ -89,3 +89,7 @@
 	color: #72777d;
 	font-style: italic;
 }
+
+.ve-ui-saveDialog-captchaInput {
+	margin-top: 0.5em;
+}

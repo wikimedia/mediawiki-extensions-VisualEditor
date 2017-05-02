@@ -257,7 +257,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 
 	switch ( panel ) {
 		case 'save':
-			if ( !noFocus ) {
+			if ( !noFocus && this.panels.getCurrentItem() !== this.savePanel ) {
 				// HACK: FF needs *another* defer
 				setTimeout( function () {
 					dialog.editSummaryInput.moveCursorToEnd();
