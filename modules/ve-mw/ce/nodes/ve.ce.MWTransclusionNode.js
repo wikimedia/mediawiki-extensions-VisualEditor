@@ -13,7 +13,6 @@
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.GeneratedContentNode
  * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.TableCellableNode
  *
  * @constructor
  * @param {ve.dm.MWTransclusionNode} model Model to observe
@@ -26,7 +25,6 @@ ve.ce.MWTransclusionNode = function VeCeMWTransclusionNode( model, config ) {
 	// Mixin constructors
 	ve.ce.GeneratedContentNode.call( this );
 	ve.ce.FocusableNode.call( this );
-	ve.ce.TableCellableNode.call( this );
 };
 
 /* Inheritance */
@@ -35,7 +33,6 @@ OO.inheritClass( ve.ce.MWTransclusionNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.GeneratedContentNode );
 OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
-OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.TableCellableNode );
 
 /* Static Properties */
 
@@ -262,8 +259,36 @@ ve.ce.MWTransclusionInlineNode.static.name = 'mwTransclusionInline';
 
 ve.ce.MWTransclusionInlineNode.static.tagName = 'span';
 
+/**
+ * ContentEditable MediaWiki transclusion table cell node.
+ *
+ * @class
+ * @extends ve.ce.MWTransclusionNode
+ * @constructor
+ * @mixins ve.ce.TableCellableNode
+ * @param {ve.dm.MWTransclusionTableCellNode} model Model to observe
+ */
+ve.ce.MWTransclusionTableCellNode = function VeCeMWTransclusionTableCellNode( model ) {
+	// Parent constructor
+	ve.ce.MWTransclusionTableCellNode.super.call( this, model );
+
+	// Mixin constructors
+	ve.ce.TableCellableNode.call( this );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ce.MWTransclusionTableCellNode, ve.ce.MWTransclusionNode );
+
+OO.mixinClass( ve.ce.MWTransclusionTableCellNode, ve.ce.TableCellableNode );
+
+/* Static Properties */
+
+ve.ce.MWTransclusionTableCellNode.static.name = 'mwTransclusionTableCell';
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWTransclusionNode );
 ve.ce.nodeFactory.register( ve.ce.MWTransclusionBlockNode );
 ve.ce.nodeFactory.register( ve.ce.MWTransclusionInlineNode );
+ve.ce.nodeFactory.register( ve.ce.MWTransclusionTableCellNode );
