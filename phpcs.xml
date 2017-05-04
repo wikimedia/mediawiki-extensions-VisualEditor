@@ -11,9 +11,6 @@
 	<rule ref="MediaWiki.Commenting.FunctionComment.Missing.Protected">
 		<severity>0</severity>
 	</rule>
-	<rule ref="MediaWiki.Commenting.FunctionComment.MissingParamTag">
-		<severity>0</severity>
-	</rule>
 	<rule ref="MediaWiki.Commenting.FunctionComment.MissingParamComment">
 		<severity>0</severity>
 	</rule>

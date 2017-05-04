@@ -722,6 +722,8 @@ class VisualEditorHooks {
 	/**
 	 * Adds extra variables to the page config.
 	 *
+	 * @param array &$vars
+	 * @param OutputPage $out
 	 * @return bool Always true
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
@@ -740,6 +742,7 @@ class VisualEditorHooks {
 	/**
 	 * Adds extra variables to the global config
 	 *
+	 * @param array &$vars
 	 * @return bool Always true
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
@@ -1013,6 +1016,8 @@ class VisualEditorHooks {
 
 	/**
 	 * Ensures that we know whether we're running inside a parser test.
+	 *
+	 * @param array &$settings
 	 */
 	public static function onParserTestGlobals( array &$settings ) {
 		$settings['wgVisualEditorInParserTests'] = true;
@@ -1063,6 +1068,8 @@ class VisualEditorHooks {
 	 *
 	 * To be removed once no longer needed.
 	 *
+	 * @param User $user
+	 * @param bool $autocreated
 	 * @return bool Always true
 	 */
 	public static function onLocalUserCreated( $user, $autocreated ) {

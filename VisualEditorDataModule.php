@@ -18,6 +18,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	/* Methods */
 
 	/**
+	 * @param ResourceLoaderContext $context
 	 * @return string JavaScipt code
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
