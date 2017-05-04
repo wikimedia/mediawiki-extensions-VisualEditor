@@ -49,8 +49,8 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'BeforePageDisplay' hook.
 	 *
-	 * @param OutputPage $output
-	 * @param Skin $skin
+	 * @param OutputPage &$output
+	 * @param Skin &$skin
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
@@ -261,8 +261,8 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'SkinTemplateNavigation' hook.
 	 *
-	 * @param SkinTemplate $skin
-	 * @param array $links Navigation links
+	 * @param SkinTemplate &$skin
+	 * @param array &$links Navigation links
 	 * @return boolean
 	 */
 	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
@@ -705,7 +705,7 @@ class VisualEditorHooks {
 	 * Implements the ListDefinedTags and ChangeTagsListActive hooks, to populate
 	 * core Special:Tags with the change tags in use by VisualEditor.
 	 *
-	 * @param array $tags
+	 * @param array &$tags
 	 * @return bool true
 	 */
 	public static function onListDefinedTags( &$tags ) {
@@ -788,7 +788,7 @@ class VisualEditorHooks {
 	 * Conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
 	 * been registered by the UniversalLanguageSelector extension or the TemplateData extension.
 	 *
-	 * @param ResourceLoader $resourceLoader
+	 * @param ResourceLoader &$resourceLoader
 	 * @return boolean true
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
@@ -1011,7 +1011,7 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * @param Array $redirectParams Parameters preserved on special page redirects
+	 * @param Array &$redirectParams Parameters preserved on special page redirects
 	 *   to wiki pages
 	 * @return bool Always true
 	 */
