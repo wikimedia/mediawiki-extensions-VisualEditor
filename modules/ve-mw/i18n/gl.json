@@ -197,6 +197,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "Pode que haxa información adicional sobre o modelo «$1» na [[{{ns:template}}:$1|súa páxina]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostrar as opcións",
 	"visualeditor-dialog-transclusion-no-template-description": "O modelo \"$1\" índa non ten descrición, pero poida que haxa algo de información na [[$1|páxina do modelo]].",
+	"visualeditor-dialog-transclusion-absent-template": "Aínda non existe o modelo \"$1\".",
 	"visualeditor-dialog-transclusion-options": "Opcións",
 	"visualeditor-dialog-transclusion-param-default": "Por defecto: $1",
 	"visualeditor-dialog-transclusion-param-example": "Exemplo: $1",

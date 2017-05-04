@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Tkalyn",
-			"Dicto23456"
+			"Dicto23456",
+			"KHMELNYTSKYIA"
 		]
 	},
+	"tooltip-ca-ve-edit": "Редагувати цю сторінку",
 	"visualeditor-ca-editsource": "Едітовати жрідло",
 	"visualeditor-ca-editsource-section": "едітовати жрідло",
 	"visualeditor-dialog-meta-languages-link-label": "Звязана сторінка",
