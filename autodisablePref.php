@@ -10,9 +10,11 @@
  * @ingroup Maintenance
  */
 
-require_once ( getenv( 'MW_INSTALL_PATH' ) !== false
+$maintenancePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' ) . '/maintenance/Maintenance.php'
-	: __DIR__ . '/../../../maintenance/Maintenance.php' );
+	: __DIR__ . '/../../../maintenance/Maintenance.php';
+
+require_once $maintenancePath;
 
 class VEAutodisablePref extends Maintenance {
 	public function __construct() {

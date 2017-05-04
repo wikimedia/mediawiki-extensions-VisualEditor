@@ -36,7 +36,6 @@ class VisualEditorHooks {
 				$wgVisualEditorAvailableNamespaces[$contentNamespace] = true;
 			}
 		}
-
 	}
 
 	public static function VisualEditorApiFactory( $main, $name ) {
@@ -668,7 +667,6 @@ class VisualEditorHooks {
 				'exempt-from-auto-enrollment' => true
 			];
 		}
-
 	}
 
 	/**

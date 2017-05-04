@@ -5,4 +5,31 @@
 	<arg name="extensions" value="php,php5,inc"/>
 	<arg name="encoding" value="utf8"/>
 	<exclude-pattern>vendor</exclude-pattern>
+	<rule ref="MediaWiki.Commenting.FunctionComment.Missing.Public">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionComment.Missing.Protected">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionComment.MissingParamTag">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionComment.MissingParamComment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionComment.MissingParamName">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionComment.MissingReturn">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName">
+		<severity>0</severity>
+	</rule>
 </ruleset>
