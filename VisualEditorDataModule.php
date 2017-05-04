@@ -18,6 +18,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	/* Methods */
 
 	/**
+	 * @return string JavaScipt code
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
 		$msgInfo = $this->getMessageInfo( $context );
