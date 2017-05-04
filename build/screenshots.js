@@ -1,4 +1,3 @@
-/* eslint-env node, es6 */
 /* global seleniumUtils */
 
 ( function () {
