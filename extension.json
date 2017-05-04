@@ -113,11 +113,11 @@
 	"APIModules": {
 		"visualeditor": {
 			"class": "ApiVisualEditor",
-			"factory": "VisualEditorHooks::VisualEditorApiFactory"
+			"factory": "VisualEditorHooks::getVisualEditorApiFactory"
 		},
 		"visualeditoredit": {
 			"class": "ApiVisualEditorEdit",
-			"factory": "VisualEditorHooks::VisualEditorApiFactory"
+			"factory": "VisualEditorHooks::getVisualEditorApiFactory"
 		}
 	},
 	"MessagesDirs": {
@@ -174,7 +174,7 @@
 			"VisualEditorHooks::onEditPageShowEditFormFields"
 		],
 		"RecentChange_save": [
-			"VisualEditorHooks::onRecentChange_save"
+			"VisualEditorHooks::onRecentChangeSave"
 		],
 		"BeforeInitialize": [
 			"VisualEditorHooks::onBeforeInitialize"
