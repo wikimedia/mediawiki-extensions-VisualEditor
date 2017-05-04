@@ -50,9 +50,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			new DerivativeRequest(
 				$this->getRequest(),
 				$apiParams + $this->getRequest()->getValues(),
-				true // was posted
+				/* was posted? */ true
 			),
-			true // enable write
+			/* enable write? */ true
 		);
 
 		$api->execute();
@@ -70,16 +70,16 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			new DerivativeRequest(
 				$this->getRequest(),
 				$apiParams,
-				false // was posted?
+				/* was posted? */ false
 			),
-			true // enable write?
+			/* enable write? */ true
 		);
 
 		$api->execute();
 		$result = $api->getResult()->getResultData( null, [
-			'BC' => [], // Transform content nodes to '*'
-			'Types' => [], // Add back-compat subelements
-			'Strip' => 'all', // Remove any metadata keys from the links array
+			/* Transform content nodes to '*' */ 'BC' => [],
+			/* Add back-compat subelements */ 'Types' => [],
+			/* Remove any metadata keys from the links array */ 'Strip' => 'all',
 		] );
 		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
 		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
@@ -221,14 +221,14 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			new DerivativeRequest(
 				$this->getRequest(),
 				$apiParams,
-				false // was posted?
+				/* was posted? */ false
 			),
-			false // enable write?
+			/* enable write? */ false
 		);
 		$api->execute();
 		$result = $api->getResult()->getResultData( null, [
-			'BC' => [], // Transform content nodes to '*'
-			'Types' => [], // Add back-compat subelements
+			/* Transform content nodes to '*' */ 'BC' => [],
+			/* Add back-compat subelements */ 'Types' => [],
 		] );
 		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
 			return [ 'result' => 'fail' ];

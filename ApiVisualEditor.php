@@ -48,7 +48,8 @@ class ApiVisualEditor extends ApiBase {
 		if ( isset( $vrs['modules'] ) && isset( $vrs['modules']['restbase'] ) ) {
 			// if restbase is available, use it
 			$params = $vrs['modules']['restbase'];
-			$params['parsoidCompat'] = false; // backward compatibility
+			// backward compatibility
+			$params['parsoidCompat'] = false;
 			$class = RestbaseVirtualRESTService::class;
 		} elseif ( isset( $vrs['modules'] ) && isset( $vrs['modules']['parsoid'] ) ) {
 			// there's a global parsoid config, use it next
@@ -114,7 +115,8 @@ class ApiVisualEditor extends ApiBase {
 				[ 'apierror-visualeditor-docserver-http-error', wfEscapeWikiText( $response['error'] ) ],
 				'apierror-visualeditor-docserver-http-error'
 			);
-		} else { // error null, code not 200
+		} else {
+			// error null, code not 200
 			$this->dieWithError(
 				[ 'apierror-visualeditor-docserver-http', $response['code'] ],
 				'apierror-visualeditor-docserver-http'
@@ -155,9 +157,9 @@ class ApiVisualEditor extends ApiBase {
 			new DerivativeRequest(
 				$this->getRequest(),
 				$apiParams,
-				false // was posted?
+				/* was posted? */ false
 			),
-			true // enable write?
+			/* enable write? */ true
 		);
 
 		$api->execute();
@@ -201,7 +203,8 @@ class ApiVisualEditor extends ApiBase {
 			case 'wikitext':
 			case 'metadata':
 				// Dirty hack to provide the correct context for edit notices
-				global $wgTitle; // FIXME NOOOOOOOOES
+				// FIXME Don't write to globals! Eww.
+				global $wgTitle;
 				$wgTitle = $title;
 				RequestContext::getMain()->setTitle( $title );
 
@@ -255,9 +258,9 @@ class ApiVisualEditor extends ApiBase {
 								new DerivativeRequest(
 									$this->getRequest(),
 									$apiParams,
-									false // was posted?
+									/* was posted? */ false
 								),
-								true // enable write?
+								/* enable write? */ true
 							);
 							$api->execute();
 							$result = $api->getResult()->getResultData();
@@ -389,12 +392,16 @@ class ApiVisualEditor extends ApiBase {
 				if ( $title->getNamespace() == NS_USER || $title->getNamespace() == NS_USER_TALK ) {
 					$parts = explode( '/', $title->getText(), 2 );
 					$targetUsername = $parts[0];
-					$targetUser = User::newFromName( $targetUsername, false /* allow IP users*/ );
+					$targetUser = User::newFromName(
+						$targetUsername,
+						/* allow IP users*/ false
+					);
 
 					if (
 						!( $targetUser && $targetUser->isLoggedIn() ) &&
 						!User::isIP( $targetUsername )
-					) { // User does not exist
+					) {
+						// User does not exist
 						$notices[] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) ) .
 							"\n</div>";
@@ -402,7 +409,8 @@ class ApiVisualEditor extends ApiBase {
 						// Show log extract if the user is currently blocked
 						$notices[] = $this->msg(
 							'blocked-notice-logextract',
-							$targetUser->getName() // Support GENDER in notice
+							// Support GENDER in notice
+							$targetUser->getName()
 						)->parseAsBlock() . $this->getLastLogEntry( $targetUser->getUserPage(), 'block' );
 					}
 				}
@@ -427,11 +435,13 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
-				$article = new Article( $title ); // Deliberately omitting ,0 so oldid comes from request
+				// Deliberately omitting ,0 so oldid comes from request
+				$article = new Article( $title );
 				$editPage = new EditPage( $article );
 				$req = $this->getRequest();
 				$req->setVal( 'format', $editPage->contentFormat );
-				$editPage->importFormData( $req ); // By reference for some reason (bug 52466)
+				// By reference for some reason (T54466)
+				$editPage->importFormData( $req );
 				$tabindex = 0;
 				$states = [
 					'minor' => $user->getOption( 'minordefault' ) && $title->exists(),
