@@ -9,10 +9,12 @@
 		username = process.env.SAUCE_ONDEMAND_USERNAME,
 		webdriver = require( 'selenium-webdriver' );
 
-	function createScreenshotEnvironment( test, lang, beforeEach ) {
+	function createScreenshotEnvironment( test, beforeEach ) {
 		var clientSize, driver;
 
 		test.beforeEach( function () {
+			var lang = this.currentTest.parent.lang || 'en';
+
 			// Use Sauce Labs when running on Jenins
 			if ( process.env.JENKINS_URL ) {
 				driver = new webdriver.Builder().withCapabilities( {
@@ -160,7 +162,7 @@
 			} );
 		}
 
-		function runScreenshotTest( name, clientScript, padding ) {
+		function runScreenshotTest( name, lang, clientScript, padding ) {
 			var filename = './screenshots/' + name + '-' + lang + '.png';
 
 			driver.wait(

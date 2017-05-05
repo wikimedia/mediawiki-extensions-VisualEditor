@@ -3,14 +3,15 @@
 ( function () {
 	'use strict';
 	var createScreenshotEnvironment = require( './screenshots.js' ).createScreenshotEnvironment,
-		test = require( 'selenium-webdriver/testing' );
+		test = require( 'selenium-webdriver/testing' ),
+		runScreenshotTest = createScreenshotEnvironment( test );
 
 	function runTests( lang ) {
-		var runScreenshotTest = createScreenshotEnvironment( test, lang );
 
 		test.describe( 'Screenshots: ' + lang, function () {
+			this.lang = lang;
 			test.it( 'Toolbar & action tools', function () {
-				runScreenshotTest( 'VisualEditor_toolbar',
+				runScreenshotTest( 'VisualEditor_toolbar', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
@@ -28,7 +29,7 @@
 					},
 					0
 				);
-				runScreenshotTest( 'VisualEditor_toolbar_actions',
+				runScreenshotTest( 'VisualEditor_toolbar_actions', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
@@ -42,7 +43,7 @@
 				);
 			} );
 			test.it( 'Citoid inspector', function () {
-				runScreenshotTest( 'VisualEditor_Citoid_Inspector',
+				runScreenshotTest( 'VisualEditor_Citoid_Inspector', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ],
@@ -60,61 +61,61 @@
 				);
 			} );
 			test.it( 'Tool groups (headings/text style/indentation/insert/page settings)', function () {
-				runScreenshotTest( 'VisualEditor_Toolbar_Headings',
+				runScreenshotTest( 'VisualEditor_Toolbar_Headings', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.paragraph );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_Toolbar_Formatting',
+				runScreenshotTest( 'VisualEditor_Toolbar_Formatting', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.bold, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_Toolbar_Lists_and_indentation',
+				runScreenshotTest( 'VisualEditor_Toolbar_Lists_and_indentation', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.bullet );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_Insert_Menu',
+				runScreenshotTest( 'VisualEditor_Insert_Menu', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.media, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_Media_Insert_Menu',
+				runScreenshotTest( 'VisualEditor_Media_Insert_Menu', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.media, false, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_Template_Insert_Menu',
+				runScreenshotTest( 'VisualEditor_Template_Insert_Menu', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.transclusion, false, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_insert_table',
+				runScreenshotTest( 'VisualEditor_insert_table', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.insertTable, false, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_Formula_Insert_Menu',
+				runScreenshotTest( 'VisualEditor_Formula_Insert_Menu', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.math, true, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_References_List_Insert_Menu',
+				runScreenshotTest( 'VisualEditor_References_List_Insert_Menu', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.referencesList, true, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_More_Settings',
+				runScreenshotTest( 'VisualEditor_More_Settings', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.advancedSettings, false, false,
@@ -122,13 +123,13 @@
 						);
 					}
 				);
-				runScreenshotTest( 'VisualEditor_page_settings_item',
+				runScreenshotTest( 'VisualEditor_page_settings_item', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.settings, false, true );
 					}
 				);
-				runScreenshotTest( 'VisualEditor_category_item',
+				runScreenshotTest( 'VisualEditor_category_item', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.categories, false, true );
@@ -136,7 +137,7 @@
 				);
 			} );
 			test.it( 'Save dialog', function () {
-				runScreenshotTest( 'VisualEditor_save_dialog',
+				runScreenshotTest( 'VisualEditor_save_dialog', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
@@ -152,7 +153,7 @@
 				);
 			} );
 			test.it( 'Special character inserter', function () {
-				runScreenshotTest( 'VisualEditor_Toolbar_SpecialCharacters',
+				runScreenshotTest( 'VisualEditor_Toolbar_SpecialCharacters', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
@@ -169,7 +170,7 @@
 				);
 			} );
 			test.it( 'Math dialog', function () {
-				runScreenshotTest( 'VisualEditor_formula',
+				runScreenshotTest( 'VisualEditor_formula', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ],
@@ -194,7 +195,7 @@
 				);
 			} );
 			test.it( 'Reference list dialog', function () {
-				runScreenshotTest( 'VisualEditor_references_list',
+				runScreenshotTest( 'VisualEditor_references_list', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ],
@@ -218,7 +219,7 @@
 				);
 			} );
 			test.it( 'Cite button', function () {
-				runScreenshotTest( 'VisualEditor_citoid_Cite_button',
+				runScreenshotTest( 'VisualEditor_citoid_Cite_button', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
@@ -236,7 +237,7 @@
 				);
 			} );
 			test.it( 'Link inspector', function () {
-				runScreenshotTest( 'VisualEditor-link_tool-search_results',
+				runScreenshotTest( 'VisualEditor-link_tool-search_results', lang,
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ],
