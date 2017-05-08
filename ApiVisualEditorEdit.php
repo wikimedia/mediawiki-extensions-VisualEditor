@@ -253,6 +253,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	}
 
 	public function execute() {
+		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
+
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 		$title = Title::newFromText( $params['page'] );
