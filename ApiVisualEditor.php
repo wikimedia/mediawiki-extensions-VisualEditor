@@ -25,7 +25,6 @@ class ApiVisualEditor extends ApiBase {
 		parent::__construct( $main, $name );
 		$this->veConfig = $config;
 		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( [] ) );
-		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
 	}
 
 	/**
@@ -181,6 +180,8 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	public function execute() {
+		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
+
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 
