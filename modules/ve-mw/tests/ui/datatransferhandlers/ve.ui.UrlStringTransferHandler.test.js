@@ -4,8 +4,6 @@
  * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global runUrlStringHandlerTest */
-
 QUnit.module( 've.ui.UrlStringTransferHandler (MW)' );
 
 /* Tests */
@@ -37,6 +35,6 @@ QUnit.test( 'paste', function ( assert ) {
 		];
 
 	for ( i = 0; i < cases.length; i++ ) {
-		runUrlStringHandlerTest( assert, cases[ i ].pasteString, cases[ i ].pasteHtml, cases[ i ].pasteType, cases[ i ].expectedData, cases[ i ].msg );
+		ve.test.utils.runUrlStringHandlerTest( assert, cases[ i ].pasteString, cases[ i ].pasteHtml, cases[ i ].pasteType, cases[ i ].expectedData, cases[ i ].msg );
 	}
 } );
