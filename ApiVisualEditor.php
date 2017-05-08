@@ -37,7 +37,7 @@ class ApiVisualEditor extends ApiBase {
 	 *
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
-	private function getVRSObject() {
+	protected function getVRSObject() {
 		// the params array to create the service object with
 		$params = [];
 		// the VRS class to use, defaults to Parsoid
