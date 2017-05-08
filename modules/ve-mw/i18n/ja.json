@@ -19,7 +19,8 @@
 			"Suchichi02",
 			"Kanashimi",
 			"ネイ",
-			"Darklanlan"
+			"Darklanlan",
+			"Mirinano"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -261,6 +262,7 @@
 	"visualeditor-mweditmodeve-popup-title": "ソース編集に切り替えました",
 	"visualeditor-mweditmodeve-showagain": "今後このメッセージを表示しない",
 	"visualeditor-mweditmodeve-title": "ビジュアルエディターに切り替えますか？",
+	"visualeditor-mweditmodeve-tool-current": "ビジュアルエディター",
 	"visualeditor-mweditmodeve-warning": "あなたはビジュアルエディターの編集に切り替えようとしています。続けますか？",
 	"visualeditor-mweditmodewt-popup-body": "このアイコンをクリックすることで、いつでもソース編集モードに戻ることができます。",
 	"visualeditor-mweditmodewt-popup-title": "ビジュアル編集に切り替えました",

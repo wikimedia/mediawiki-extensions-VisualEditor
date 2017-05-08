@@ -176,7 +176,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "להפנות את הדף הזה אל הדף",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "דף היעד להפניה",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "אפשר למנוע מההפניה מלהתעדכן אוטומטית כאשר הדף שהיא מפנה אליו מועבר, במקרים הנדירים שבהם זה נחוץ.",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "לא לאפשר להפניה הזאת להתעדכן כשהדף היעד מועבר.",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "לא לאפשר להפניה הזאת להתעדכן כשדף היעד מועבר.",
 	"visualeditor-dialog-meta-settings-section": "הגדרות דף",
 	"visualeditor-dialog-meta-settings-toc-default": "אם צריך",
 	"visualeditor-dialog-meta-settings-toc-disable": "לעולם לא",
