@@ -1111,7 +1111,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 	this.bindSaveDialogClearDiff();
 	this.saveDialog.setDiffAndReview(
 		$.Deferred().resolve( $( '<pre>' ).text( wikitext ) ).promise(),
-		this.getVisualDiffPromise(),
+		this.getVisualDiffGeneratorPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
 };
@@ -1119,9 +1119,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 /**
  * Get a visual diff object for the current document state
  *
- * @return {jQuery.Promise|null} Promise resolving with a ve.dm.VisualDiff visual diff, or null if not known
+ * @return {jQuery.Promise|null} Promise resolving with a generator for a ve.dm.VisualDiff visual diff, or null if not known
  */
-ve.init.mw.ArticleTarget.prototype.getVisualDiffPromise = function () {
+ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 	var deferred, dmDoc,
 		target = this;
 
@@ -1144,13 +1144,17 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffPromise = function () {
 				if ( data && typeof data.content === 'string' ) {
 					doc = target.parseDocument( data.content, 'visual' );
 					target.originalDmDoc = target.createModelFromDom( doc, 'visual' );
-					deferred.resolve( new ve.dm.VisualDiff( target.originalDmDoc, dmDoc ) );
+					deferred.resolve( function () {
+						return new ve.dm.VisualDiff( target.originalDmDoc, dmDoc );
+					} );
 				}
 			} );
 		}
 	}
 	if ( this.originalDmDoc ) {
-		deferred.resolve( new ve.dm.VisualDiff( this.originalDmDoc, dmDoc ) );
+		deferred.resolve( function () {
+			return new ve.dm.VisualDiff( target.originalDmDoc, dmDoc );
+		} );
 	}
 	return deferred.promise();
 };
@@ -1705,7 +1709,7 @@ ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
 	} );
 	this.saveDialog.setDiffAndReview(
 		this.getWikitextDiffPromise( doc ),
-		this.getVisualDiffPromise(),
+		this.getVisualDiffGeneratorPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
 };
