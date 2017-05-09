@@ -47,6 +47,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 	}
 
 	handler.resolve = function ( dataOrDoc ) {
+		var annotations, text;
 		if ( typeof dataOrDoc === 'string' || ( Array.isArray( dataOrDoc ) && dataOrDoc.every( isPlain ) ) ) {
 			resolve( dataOrDoc );
 		} else {
@@ -54,6 +55,18 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 				dataOrDoc :
 				// The handler may have also written items to the store
 				new ve.dm.Document( new ve.dm.ElementLinearData( handler.surface.getModel().getDocument().getStore(), dataOrDoc ) );
+
+			// Optimization: we can skip a server hit if this is a plain link,
+			// with no title, whose href is equal to the contained text. This
+			// avoids a stutter in the common case of pasting a link into the
+			// document.
+			annotations = doc.data.getAnnotationsFromRange( new ve.Range( 0, doc.data.getLength() ) );
+			if ( annotations.getLength() === 1 ) {
+				text = doc.getData().reduce( function ( acc, val ) { return ( Array.isArray( acc ) ? acc[ 0 ] : acc ) + val[ 0 ]; } );
+				if ( annotations.get( 0 ).getAttribute( 'href' ) === text ) {
+					return resolve( text );
+				}
+			}
 
 			ve.init.target.getWikitextFragment( doc, false )
 				.done( resolve )
