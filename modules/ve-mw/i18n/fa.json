@@ -212,6 +212,7 @@
 	"visualeditor-dialog-transclusion-more-template-description": "ممکن است تعدادی اطلاعات در مورد الگوی \"$1\" در [[{{ns:template}}:$1|صفحه‌اش]] موجود باشد.",
 	"visualeditor-dialog-transclusion-multiple-mode": "نمایش گزینه‌ها",
 	"visualeditor-dialog-transclusion-no-template-description": "الگوی «$1» هنوز توضیحاتی ندارد، اما ممکن است برخی اطلاعات در [[$1|صفحهٔ الگو]] وجود داشته باشد.",
+	"visualeditor-dialog-transclusion-absent-template": "الگوی «$1» هنوز وجود ندارد.",
 	"visualeditor-dialog-transclusion-options": "گزینه‌ها",
 	"visualeditor-dialog-transclusion-param-default": "پیش‌فرض: $1",
 	"visualeditor-dialog-transclusion-param-example": "مثلا: $1",

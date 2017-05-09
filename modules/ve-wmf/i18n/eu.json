@@ -5,7 +5,8 @@
 			"Unai Fdz. de Betoño",
 			"Xabier Armendaritz",
 			"Sator",
-			"Theklan"
+			"Theklan",
+			"Subi"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Ikusizko edizioa]]",
@@ -14,7 +15,7 @@
 	"tag-visualeditor-needcheck-description": "Edizio hau egiteko, [[{{MediaWiki:visualeditor-descriptionpagelink}}|ikusizko editorea]] erabili da. Sistemak detektatu du edizio honetan wikitestuan egindako zenbait aldaketa beharbada nahi gabe egin direla.",
 	"tag-visualeditor-wikitext": "2017 iturburu edizioa",
 	"tag-visualeditor-wikitext-description": "2017 wikitestu editorearekin egindako aldaketa",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Ikusizko Editorea: Konmutatua]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Ikusizko Editorea: Kommutatua]]",
 	"tag-visualeditor-switched-description": "Lankidea Ikusizko Editorearekin hasi eta gero wikitestu editorera aldatua.",
 	"visualeditor-feedback-link": "Project:Ikusizko editorea/Oharrak",
 	"visualeditor-feedback-tool": "Oharrak",
