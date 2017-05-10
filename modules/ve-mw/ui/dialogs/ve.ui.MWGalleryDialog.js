@@ -42,7 +42,7 @@ ve.ui.MWGalleryDialog.static.modelClasses = [ ve.dm.MWGalleryNode ];
  * @inheritdoc
  */
 ve.ui.MWGalleryDialog.prototype.initialize = function () {
-	var imagesCard, optionsCard, menuLayout,
+	var imagesTabPanel, optionsTabPanel, menuLayout,
 		innerMenuLayout, innerMenuPanel, innerContentPanel,
 		modeField, captionField, widthsField, heightsField,
 		perrowField, showFilenameField, classesField, stylesField;
@@ -59,25 +59,25 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// Default settings
 	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
 
-	// Images and options cards
+	// Images and options tab panels
 	this.indexLayout = new OO.ui.IndexLayout( {
 		scrollable: false,
 		expanded: true
 	} );
-	imagesCard = new OO.ui.CardLayout( 'images', {
+	imagesTabPanel = new OO.ui.TabPanelLayout( 'images', {
 		label: ve.msg( 'visualeditor-mwgallerydialog-card-images' ),
 		expandable: false,
 		scrollable: false,
 		padded: true
 	} );
-	optionsCard = new OO.ui.CardLayout( 'options', {
+	optionsTabPanel = new OO.ui.TabPanelLayout( 'options', {
 		label: ve.msg( 'visualeditor-mwgallerydialog-card-options' ),
 		expandable: false,
 		scrollable: false,
 		padded: true
 	} );
 
-	// Images card
+	// Images tab panel
 
 	// General layout
 	menuLayout = new OO.ui.MenuLayout( {
@@ -138,7 +138,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		rowHeight: 150
 	} );
 
-	// Options card
+	// Options tab panel
 
 	// Input widgets
 	this.modeDropdown = new OO.ui.DropdownWidget( {
@@ -253,10 +253,10 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 			this.searchWidget.$element
 		)
 	);
-	imagesCard.$element.append(
+	imagesTabPanel.$element.append(
 		menuLayout.$element
 	);
-	optionsCard.$element.append(
+	optionsTabPanel.$element.append(
 		modeField.$element,
 		captionField.$element,
 		widthsField.$element,
@@ -266,9 +266,9 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		classesField.$element,
 		stylesField.$element
 	);
-	this.indexLayout.addCards( [
-		imagesCard,
-		optionsCard
+	this.indexLayout.addTabPanels( [
+		imagesTabPanel,
+		optionsTabPanel
 	] );
 	this.$body.append( this.indexLayout.$element );
 };
@@ -286,7 +286,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				dialog = this,
 				attributes = this.selectedNode && this.selectedNode.getAttribute( 'mw' ).attrs;
 
-			// Images card
+			// Images tab panel
 			// If editing an existing gallery, populate with the images...
 			if ( this.selectedNode ) {
 				imageTitles = [];
@@ -334,7 +334,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				this.toggleSearchPanel( true );
 			}
 
-			// Options card
+			// Options tab panel
 
 			// Set options
 			mode = attributes && attributes.mode || this.defaults.mode;
@@ -430,7 +430,7 @@ ve.ui.MWGalleryDialog.prototype.getBodyHeight = function () {
 };
 
 /**
- * Request the images for the images card menu
+ * Request the images for the images tab panel menu
  *
  * @param {Object} options Options for the request
  */
@@ -657,7 +657,7 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
  * Resize the dialog according to which panel is focused
  */
 ve.ui.MWGalleryDialog.prototype.updateDialogSize = function () {
-	if ( this.searchPanelVisible && this.indexLayout.currentCardName === 'images' ) {
+	if ( this.searchPanelVisible && this.indexLayout.currentTabPanelName === 'images' ) {
 		this.setSize( 'larger' );
 	} else {
 		this.setSize( 'large' );
@@ -694,7 +694,7 @@ ve.ui.MWGalleryDialog.prototype.getCurrentData = function () {
 		data = {},
 		items = this.galleryGroup.items;
 
-	// Get data from options card
+	// Get data from options tab panel
 	data.caption = this.captionInput.getValue() || undefined;
 	data.widths = this.widthsInput.getValue() || undefined;
 	data.heights = this.heightsInput.getValue() || undefined;

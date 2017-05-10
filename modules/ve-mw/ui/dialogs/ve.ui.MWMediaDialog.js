@@ -215,11 +215,11 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	// Define the media search page
 	this.searchTabs = new OO.ui.IndexLayout();
 
-	this.searchTabs.addCards( [
-		new OO.ui.CardLayout( 'search', {
+	this.searchTabs.addTabPanels( [
+		new OO.ui.TabPanelLayout( 'search', {
 			label: ve.msg( 'visualeditor-dialog-media-search-tab-search' )
 		} ),
-		new OO.ui.CardLayout( 'upload', {
+		new OO.ui.TabPanelLayout( 'upload', {
 			label: ve.msg( 'visualeditor-dialog-media-search-tab-upload' ),
 			content: [ this.mediaUploadBooklet ]
 		} )
@@ -381,7 +381,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	} );
 
 	// Initialization
-	this.searchTabs.getCard( 'search' ).$element.append( this.search.$element );
+	this.searchTabs.getTabPanel( 'search' ).$element.append( this.search.$element );
 	this.mediaSearchPanel.$element.append( this.searchTabs.$element );
 	this.generalSettingsPage.$element.append(
 		this.filenameFieldset.$element,
@@ -407,10 +407,10 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 /**
  * Handle set events from the search tabs
  *
- * @param {OO.ui.CardLayout} card Current card
+ * @param {OO.ui.TabPanelLayout} tabPanel Current tabPanel
  */
-ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( card ) {
-	var name = card.getName();
+ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( tabPanel ) {
+	var name = tabPanel.getName();
 
 	this.actions.setMode( name );
 
@@ -1129,7 +1129,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.switchPanels( dialog.selectedNode ? 'edit' : 'search' );
 
 				if ( data.file ) {
-					dialog.searchTabs.setCard( 'upload' );
+					dialog.searchTabs.setTabPanel( 'upload' );
 					dialog.mediaUploadBooklet.setFile( data.file );
 				}
 			} );
@@ -1165,7 +1165,7 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			}
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
-			this.searchTabs.setCard( 'search' );
+			this.searchTabs.setTabPanel( 'search' );
 			this.searchTabs.toggleMenu( true );
 			this.actions.setMode( this.imageModel ? 'change' : 'select' );
 			// Layout pending items
@@ -1364,7 +1364,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 			break;
 		case 'cancelupload':
 			handler = function () {
-				this.searchTabs.setCard( 'upload' );
+				this.searchTabs.setTabPanel( 'upload' );
 				this.searchTabs.toggleMenu( true );
 				return this.mediaUploadBooklet.initialize();
 			};
