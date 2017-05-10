@@ -62,7 +62,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 			// document.
 			annotations = doc.data.getAnnotationsFromRange( new ve.Range( 0, doc.data.getLength() ) );
 			if ( annotations.getLength() === 1 ) {
-				text = doc.getData().reduce( function ( acc, val ) { return ( Array.isArray( acc ) ? acc[ 0 ] : acc ) + val[ 0 ]; } );
+				text = doc.data.getText();
 				if ( annotations.get( 0 ).getAttribute( 'href' ) === text ) {
 					return resolve( text );
 				}
