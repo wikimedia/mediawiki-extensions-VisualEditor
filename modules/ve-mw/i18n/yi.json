@@ -3,7 +3,8 @@
 		"authors": [
 			"Malafaya",
 			"פוילישער",
-			"十弌"
+			"十弌",
+			"Sol lemon"
 		]
 	},
 	"apihelp-visualeditor-description": "גיט צוריק HTML5 פאר א בלאט פונעם  Parsoid דינסט.",
@@ -262,13 +263,14 @@
 	"visualeditor-savedialog-title-save": "אויפֿהיטן אייערע ענדערונגען",
 	"visualeditor-savedialog-warning-dirty": "אײַער רעדאקטירונג איז מעגלעך געווארן געשעדיקט – זײַט אזוי גוט רעצענזירט איידער איר היט אויף.",
 	"visualeditor-saveerror": "פֿעלער ביים אויפֿהיטן דאַטן צום סערווער: $1.",
-	"visualeditor-section-body-placeholder": "נייער אפטייל",
+	"visualeditor-section-body-placeholder": "נייער אפטיילונג",
 	"visualeditor-section-title-placeholder": "טעמע",
 	"visualeditor-serializeerror": "פֿעלער ביים אָנלאָדן דאַטן פֿון סערווער: $1.",
 	"visualeditor-settings-tool": "בלאט שטעלונגען",
 	"visualeditor-shortcuts-insert": "צולייגן",
 	"visualeditor-special-characters-group-other": "אפט געניצט",
 	"visualeditor-templatesused-tool": "געניצטע מוסטערן",
+	"visualeditor-toload": "דער רעדאַקטירער ווערט יעצט געלאָדן. טאמער איר זעט נאך די מעלדונג נאָך עטלעכע סעקונדעס, זייט אזוי גוט און [$1 לאָדט ווידער דעם בלאַט].",
 	"visualeditor-toolbar-savedialog": "אױפֿהיטן בלאַט",
 	"visualeditor-toolbar-savedialog-short": "אויפֿהיטן",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
