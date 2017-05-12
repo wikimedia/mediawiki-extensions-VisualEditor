@@ -34,7 +34,8 @@ class VEAutodisablePref extends Maintenance {
 				'user_id',
 				[
 					'user_id > ' . $dbr->addQuotes( $lastUserId ),
-					'up_value IS NULL', // only select users with no entry in user_properties
+					// only select users with no entry in user_properties
+					'up_value IS NULL',
 					'user_editcount > 0'
 				],
 				__METHOD__,

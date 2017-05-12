@@ -342,8 +342,10 @@ class VisualEditorHooks {
 				);
 				$action = $existing ? 'edit' : 'create';
 				$veParams = $skin->editUrlOptions();
-				unset( $veParams['action'] ); // Remove action=edit
-				$veParams['veaction'] = 'edit'; // Set veaction=edit
+				// Remove action=edit
+				unset( $veParams['action'] );
+				// Set veaction=edit
+				$veParams['veaction'] = 'edit';
 				$veTabMessage = $tabMessages[$action];
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					$skin->msg( $veTabMessage )->text();
@@ -710,7 +712,8 @@ class VisualEditorHooks {
 	 */
 	public static function onListDefinedTags( &$tags ) {
 		$tags[] = 'visualeditor';
-		$tags[] = 'visualeditor-needcheck'; // No longer in active use
+		// No longer in active use:
+		$tags[] = 'visualeditor-needcheck';
 		$tags[] = 'visualeditor-switched';
 		$tags[] = 'visualeditor-wikitext';
 		return true;
@@ -763,7 +766,8 @@ class VisualEditorHooks {
 			),
 			'pluginModules' => array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
-				$veConfig->get( 'VisualEditorPluginModules' ) // @todo deprecate the global setting
+				// @todo deprecate the global setting
+				$veConfig->get( 'VisualEditorPluginModules' )
 			),
 			'defaultUserOptions' => [
 				'defaultthumbsize' => $thumbLimits[ $defaultUserOptions['thumbsize'] ]
