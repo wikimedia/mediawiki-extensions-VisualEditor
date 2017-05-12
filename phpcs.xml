@@ -23,9 +23,6 @@
 	<rule ref="MediaWiki.Commenting.FunctionComment.MissingReturn">
 		<severity>0</severity>
 	</rule>
-	<rule ref="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch">
-		<severity>0</severity>
-	</rule>
 	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment">
 		<severity>0</severity>
 	</rule>
