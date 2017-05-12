@@ -161,8 +161,8 @@ class VisualEditorHooks {
 	/**
 	 * Decide whether to bother showing the wikitext editor at all.
 	 * If not, we expect the VE initialisation JS to activate.
-	 * @param $article Article
-	 * @param $user User
+	 * @param Article $article
+	 * @param User $user
 	 * @return bool Whether to show the wikitext editor or not.
 	 */
 	public static function onCustomEditor( Article $article, User $user ) {
@@ -430,8 +430,8 @@ class VisualEditorHooks {
 	 * Called when the normal wikitext editor is shown.
 	 * Inserts a 'veswitched' hidden field if requested by the client
 	 *
-	 * @param $editPage EditPage
-	 * @param $output OutputPage
+	 * @param EditPage $editPage
+	 * @param OutputPage $output
 	 * @return boolean true
 	 */
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
@@ -462,12 +462,12 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'SkinEditSectionLinks' hook.
 	 *
-	 * @param $skin Skin
-	 * @param $title Title
-	 * @param $section string
-	 * @param $tooltip string
-	 * @param $result array
-	 * @param $lang Language
+	 * @param Skin $skin
+	 * @param Title $title
+	 * @param string $section
+	 * @param string $tooltip
+	 * @param array &$result
+	 * @param Language $lang
 	 * @return bool true
 	 */
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
@@ -1098,7 +1098,8 @@ class VisualEditorHooks {
 
 	/**
 	 * On login, if user has a VEE cookie, set their preference equal to it.
-	 * @param $user User
+	 *
+	 * @param User $user
 	 * @return bool true
 	 */
 	public static function onUserLoggedIn( $user ) {
