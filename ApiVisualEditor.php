@@ -550,8 +550,8 @@ class ApiVisualEditor extends ApiBase {
 	public static function getAvailableNamespaceIds( Config $config ) {
 		$availableNamespaces =
 			// Note: existing numeric keys might exist, and so array_merge cannot be used
-			(array) $config->get( 'VisualEditorAvailableNamespaces' ) +
-			(array) ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
+			(array)$config->get( 'VisualEditorAvailableNamespaces' ) +
+			(array)ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
 		return array_values( array_unique( array_map( function ( $namespace ) {
 			// Convert canonical namespace names to IDs
 			return is_numeric( $namespace ) ?

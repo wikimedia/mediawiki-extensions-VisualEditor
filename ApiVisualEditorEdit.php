@@ -329,7 +329,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				}
 
-				$result['isRedirect'] = (string) $title->isRedirect();
+				$result['isRedirect'] = (string)$title->isRedirect();
 
 				if ( class_exists( 'FlaggablePageView' ) ) {
 					$view = FlaggablePageView::singleton();

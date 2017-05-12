@@ -17,6 +17,8 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 	/* Methods */
 
+	/**
+	 */
 	public function getScript( ResourceLoaderContext $context ) {
 		$msgInfo = $this->getMessageInfo( $context );
 		$parsedMessages = $msgInfo['parsed'];
