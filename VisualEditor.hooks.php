@@ -718,6 +718,8 @@ class VisualEditorHooks {
 
 	/**
 	 * Adds extra variables to the page config.
+	 *
+	 * @return bool Always true
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$pageLanguage = $out->getTitle()->getPageLanguage();
@@ -734,6 +736,8 @@ class VisualEditorHooks {
 
 	/**
 	 * Adds extra variables to the global config
+	 *
+	 * @return bool Always true
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
@@ -1054,6 +1058,8 @@ class VisualEditorHooks {
 	 * 5% would, and so on.
 	 *
 	 * To be removed once no longer needed.
+	 *
+	 * @return bool Always true
 	 */
 	public static function onLocalUserCreated( $user, $autocreated ) {
 		$config = RequestContext::getMain()->getConfig();
