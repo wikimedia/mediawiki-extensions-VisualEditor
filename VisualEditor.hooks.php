@@ -49,9 +49,9 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'BeforePageDisplay' hook.
 	 *
-	 * @param OutputPage &$output
-	 * @param Skin &$skin
-	 * @return boolean
+	 * @param OutputPage &$output The page view.
+	 * @param Skin &$skin The skin that's going to build the UI.
+	 * @return boolean Always true.
 	 */
 	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
 		$output->addModules( [
@@ -82,8 +82,7 @@ class VisualEditorHooks {
 	 *
 	 * @param WebRequest $req The web request to check the details of
 	 * @param Config $config VE config object
-	 * @param boolean
-	 * @return boolean
+	 * @return boolean True if the User Agent is blacklisted
 	 */
 	private static function isUABlacklisted( WebRequest $req, $config ) {
 		if ( $req->getVal( 'vewhitelist' ) ) {
@@ -161,9 +160,10 @@ class VisualEditorHooks {
 	/**
 	 * Decide whether to bother showing the wikitext editor at all.
 	 * If not, we expect the VE initialisation JS to activate.
-	 * @param Article $article
-	 * @param User $user
-	 * @return bool Whether to show the wikitext editor or not.
+	 *
+	 * @param Article $article The article being viewed.
+	 * @param User $user The user-specific settings.
+	 * @return boolean Whether to show the wikitext editor or not.
 	 */
 	public static function onCustomEditor( Article $article, User $user ) {
 		$req = $article->getContext()->getRequest();
@@ -261,9 +261,9 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'SkinTemplateNavigation' hook.
 	 *
-	 * @param SkinTemplate &$skin
-	 * @param array &$links Navigation links
-	 * @return boolean
+	 * @param SkinTemplate &$skin The skin template on which the UI is built.
+	 * @param array &$links Navigation links.
+	 * @return boolean Always true.
 	 */
 	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
@@ -430,9 +430,9 @@ class VisualEditorHooks {
 	 * Called when the normal wikitext editor is shown.
 	 * Inserts a 'veswitched' hidden field if requested by the client
 	 *
-	 * @param EditPage $editPage
-	 * @param OutputPage $output
-	 * @return boolean true
+	 * @param EditPage $editPage The edit page view.
+	 * @param OutputPage $output The page view.
+	 * @return boolean Always true.
 	 */
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
 		$request = $output->getRequest();
@@ -446,8 +446,8 @@ class VisualEditorHooks {
 	 * Called when an edit is saved
 	 * Adds 'visualeditor-switched' tag to the edit if requested
 	 *
-	 * @param RecentChange $rc
-	 * @return boolean true
+	 * @param RecentChange $rc The new RC entry.
+	 * @return boolean Always true.
 	 */
 	public static function onRecentChangeSave( RecentChange $rc ) {
 		$request = RequestContext::getMain()->getRequest();
@@ -462,13 +462,13 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'SkinEditSectionLinks' hook.
 	 *
-	 * @param Skin $skin
-	 * @param Title $title
-	 * @param string $section
-	 * @param string $tooltip
-	 * @param array &$result
-	 * @param Language $lang
-	 * @return bool true
+	 * @param Skin $skin Skin being used to render the UI
+	 * @param Title $title Title being used for request
+	 * @param string $section The name of the section being pointed to.
+	 * @param string $tooltip The default tooltip.
+	 * @param array &$result All link detail arrays.
+	 * @param Language $lang The user interface language.
+	 * @return boolean Always true.
 	 */
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
 		$tooltip, &$result, $lang
@@ -674,10 +674,11 @@ class VisualEditorHooks {
 	/**
 	 * Implements the PreferencesFormPreSave hook, to remove the 'autodisable' flag
 	 * when the user it was set on explicitly enables VE.
+	 *
 	 * @param array $data User-submitted data
 	 * @param PreferencesForm $form A ContextSource
 	 * @param User $user User with new preferences already set
-	 * @param bool &$result Success or failure
+	 * @param boolean &$result Success or failure
 	 */
 	public static function onPreferencesFormPreSave( $data, $form, $user, &$result ) {
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
@@ -707,8 +708,8 @@ class VisualEditorHooks {
 	 * Implements the ListDefinedTags and ChangeTagsListActive hooks, to populate
 	 * core Special:Tags with the change tags in use by VisualEditor.
 	 *
-	 * @param array &$tags
-	 * @return bool true
+	 * @param array &$tags Available change tags.
+	 * @return boolean Always true.
 	 */
 	public static function onListDefinedTags( &$tags ) {
 		$tags[] = 'visualeditor';
@@ -722,9 +723,9 @@ class VisualEditorHooks {
 	/**
 	 * Adds extra variables to the page config.
 	 *
-	 * @param array &$vars
-	 * @param OutputPage $out
-	 * @return bool Always true
+	 * @param array &$vars Global variables object
+	 * @param OutputPage $out The page view.
+	 * @return boolean Always true
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$pageLanguage = $out->getTitle()->getPageLanguage();
@@ -742,8 +743,8 @@ class VisualEditorHooks {
 	/**
 	 * Adds extra variables to the global config
 	 *
-	 * @param array &$vars
-	 * @return bool Always true
+	 * @param array &$vars Global variables object
+	 * @return boolean Always true
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
@@ -799,8 +800,8 @@ class VisualEditorHooks {
 	 * Conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
 	 * been registered by the UniversalLanguageSelector extension or the TemplateData extension.
 	 *
-	 * @param ResourceLoader &$resourceLoader
-	 * @return boolean true
+	 * @param ResourceLoader &$resourceLoader Client-side code and assets to be loaded.
+	 * @return boolean Always true.
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
@@ -1017,7 +1018,7 @@ class VisualEditorHooks {
 	/**
 	 * Ensures that we know whether we're running inside a parser test.
 	 *
-	 * @param array &$settings
+	 * @param array &$settings The settings with which MediaWiki is being run.
 	 */
 	public static function onParserTestGlobals( array &$settings ) {
 		$settings['wgVisualEditorInParserTests'] = true;
@@ -1026,7 +1027,7 @@ class VisualEditorHooks {
 	/**
 	 * @param Array &$redirectParams Parameters preserved on special page redirects
 	 *   to wiki pages
-	 * @return bool Always true
+	 * @return boolean Always true
 	 */
 	public static function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
 		array_push( $redirectParams, 'veaction' );
@@ -1036,13 +1037,14 @@ class VisualEditorHooks {
 
 	/**
 	 * If the user has specified that they want to edit the page with VE, suppress any redirect.
+	 *
 	 * @param Title $title Title being used for request
-	 * @param Article|null $article
-	 * @param OutputPage $output
-	 * @param User $user
-	 * @param WebRequest $request
-	 * @param MediaWiki $mediaWiki
-	 * @return bool Always true
+	 * @param Article|null $article The page being viewed.
+	 * @param OutputPage $output The page view.
+	 * @param User $user The user-specific settings.
+	 * @param WebRequest $request The request.
+	 * @param MediaWiki $mediaWiki Helper class.
+	 * @return boolean Always true
 	 */
 	public static function onBeforeInitialize(
 		Title $title, $article, OutputPage $output,
@@ -1068,9 +1070,9 @@ class VisualEditorHooks {
 	 *
 	 * To be removed once no longer needed.
 	 *
-	 * @param User $user
-	 * @param bool $autocreated
-	 * @return bool Always true
+	 * @param User $user The user-specific settings.
+	 * @param boolean $autocreated True if the user was auto-created (not a new global user).
+	 * @return boolean Always true
 	 */
 	public static function onLocalUserCreated( $user, $autocreated ) {
 		$config = RequestContext::getMain()->getConfig();
@@ -1106,8 +1108,8 @@ class VisualEditorHooks {
 	/**
 	 * On login, if user has a VEE cookie, set their preference equal to it.
 	 *
-	 * @param User $user
-	 * @return bool true
+	 * @param User $user The user-specific settings.
+	 * @return boolean Always true.
 	 */
 	public static function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
