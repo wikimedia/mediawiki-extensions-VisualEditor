@@ -38,7 +38,7 @@ class VisualEditorHooks {
 		}
 	}
 
-	public static function VisualEditorApiFactory( $main, $name ) {
+	public static function getVisualEditorApiFactory( $main, $name ) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$class = $name === 'visualeditor' ? 'ApiVisualEditor' : 'ApiVisualEditorEdit';
 		return new $class( $main, $name, $config );
@@ -447,7 +447,7 @@ class VisualEditorHooks {
 	 * @param RecentChange $rc
 	 * @return boolean true
 	 */
-	public static function onRecentChange_save( RecentChange $rc ) {
+	public static function onRecentChangeSave( RecentChange $rc ) {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getBool( 'veswitched' ) && $rc->mAttribs['rc_this_oldid'] ) {
 			$rc->addTags( 'visualeditor-switched' );

@@ -23,7 +23,4 @@
 	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment">
 		<severity>0</severity>
 	</rule>
-	<rule ref="MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName">
-		<severity>0</severity>
-	</rule>
 </ruleset>
