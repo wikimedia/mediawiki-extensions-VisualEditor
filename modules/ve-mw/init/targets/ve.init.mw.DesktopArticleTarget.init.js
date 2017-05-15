@@ -362,7 +362,7 @@
 		mw.config.get( 'wgAction' ) === 'edit' ||
 		mw.config.get( 'wgAction' ) === 'submit'
 	);
-	isEditPage = conf.singleEditTab && (
+	isEditPage = (
 		uri.query.action === 'edit' ||
 		uri.query.action === 'submit'
 	);
