@@ -761,7 +761,7 @@
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
 
 		// Not on protected pages, or if the user doesn't have permission to edit
-		mw.config.get( 'wgIsProbablyEditable' ) &&
+		( mw.config.get( 'wgIsProbablyEditable' ) || mw.config.get( 'wgRelevantPageIsProbablyEditable' ) ) &&
 
 		// Not on pages which are outputs of the Translate extensions
 		// TODO: Allow the Translate extension to do this itself
@@ -769,10 +769,7 @@
 
 		// Not on the edit conflict page of the TwoColumnConflict extension see T156251
 		// TODO: Allow the TwoColumnConflict extension to do this itself
-		mw.config.get( 'wgTwoColConflict' ) !== 'true' &&
-
-		// Not on pages like Special:RevisionDelete
-		mw.config.get( 'wgNamespaceNumber' ) !== -1
+		mw.config.get( 'wgTwoColConflict' ) !== 'true'
 	);
 
 	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
