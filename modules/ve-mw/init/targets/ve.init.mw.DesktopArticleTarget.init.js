@@ -330,6 +330,11 @@
 	}
 
 	function getPreferredEditor() {
+		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext
+		if ( !mw.config.get( 'wgVisualEditorConfig' ).singleEditTab ) {
+			return 'wikitext';
+		}
+
 		switch ( tabPreference ) {
 			case 'remember-last':
 				return getLastEditor();

@@ -222,6 +222,11 @@ class VisualEditorHooks {
 	}
 
 	private static function getPreferredEditor( User $user, WebRequest $req ) {
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext
+		if ( !$config->get( 'VisualEditorUseSingleEditTab' ) ) {
+			return 'wikitext';
+		}
 		switch ( $user->getOption( 'visualeditor-tabs' ) ) {
 			case 'prefer-ve':
 				return 'visualeditor';
