@@ -25,7 +25,6 @@ ve.dm.MWTransclusionNode = function VeDmMWTransclusionNode() {
 	// Mixin constructors
 	ve.dm.GeneratedContentNode.call( this );
 	ve.dm.FocusableNode.call( this );
-	ve.dm.TableCellableNode.call( this );
 
 	// Properties
 	this.partsList = null;
@@ -89,6 +88,15 @@ ve.dm.MWTransclusionNode.static.inlineType = 'mwTransclusionInline';
  */
 ve.dm.MWTransclusionNode.static.blockType = 'mwTransclusionBlock';
 
+/**
+ * Node type to use when the transclusion is cellable
+ *
+ * @static
+ * @property {string}
+ * @inheritable
+ */
+ve.dm.MWTransclusionNode.static.cellType = 'mwTransclusionTableCell';
+
 ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement,
 		mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
@@ -105,7 +113,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 	};
 
 	if ( domElements.length === 1 && [ 'td', 'th' ].indexOf( domElements[ 0 ].nodeName.toLowerCase() ) !== -1 ) {
-		dataElement.attributes.cellable = true;
+		dataElement.type = this.cellType;
 		ve.dm.TableCellableNode.static.setAttributes( dataElement.attributes, domElements );
 	}
 
@@ -152,6 +160,8 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			els[ 0 ] = wrapTextNode( els[ 0 ] );
 		} else if ( originalDomElements ) {
 			els = [ doc.createElement( originalDomElements[ 0 ].nodeName ) ];
+		} else if ( dataElement.type === this.cellType ) {
+			els = [ doc.createElement( dataElement.attributes.style === 'header' ? 'th' : 'td' ) ];
 		} else {
 			els = [ doc.createElement( 'span' ) ];
 		}
@@ -326,13 +336,6 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
 };
 
 /**
- * @inheritdoc
- */
-ve.dm.MWTransclusionNode.prototype.isCellable = function () {
-	return !!this.getAttribute( 'cellable' );
-};
-
-/**
  * Check if transclusion contains only a single template.
  *
  * @param {string|string[]} [templates] Names of templates to allow, omit to allow any template name
@@ -444,8 +447,36 @@ ve.dm.MWTransclusionInlineNode.static.name = 'mwTransclusionInline';
 
 ve.dm.MWTransclusionInlineNode.static.isContent = true;
 
+/**
+ * DataModel MediaWiki transclusion table cell node.
+ *
+ * @class
+ * @extends ve.dm.MWTransclusionNode
+ *
+ * @constructor
+ * @param {Object} [element] Reference to element in linear model
+ */
+ve.dm.MWTransclusionTableCellNode = function VeDmMWTransclusionTableCellNode() {
+	// Parent constructor
+	ve.dm.MWTransclusionTableCellNode.super.apply( this, arguments );
+
+	// Mixin constructors
+	ve.dm.TableCellableNode.call( this );
+};
+
+OO.inheritClass( ve.dm.MWTransclusionTableCellNode, ve.dm.MWTransclusionNode );
+
+OO.mixinClass( ve.dm.MWTransclusionTableCellNode, ve.dm.TableCellableNode );
+
+ve.dm.MWTransclusionTableCellNode.static.matchTagNames = [];
+
+ve.dm.MWTransclusionTableCellNode.static.name = 'mwTransclusionTableCell';
+
+ve.dm.MWTransclusionTableCellNode.static.isCellable = true;
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWTransclusionNode );
 ve.dm.modelRegistry.register( ve.dm.MWTransclusionBlockNode );
 ve.dm.modelRegistry.register( ve.dm.MWTransclusionInlineNode );
+ve.dm.modelRegistry.register( ve.dm.MWTransclusionTableCellNode );
