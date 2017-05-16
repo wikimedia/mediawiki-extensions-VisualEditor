@@ -55,14 +55,14 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 		expanded: false
 	} );
 
-	this.linkTypeIndex.addCards( [
-		new OO.ui.CardLayout( 'internal', {
+	this.linkTypeIndex.addTabPanels( [
+		new OO.ui.TabPanelLayout( 'internal', {
 			label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ),
 			expanded: false,
 			scrollable: false,
 			padded: true
 		} ),
-		new OO.ui.CardLayout( 'external', {
+		new OO.ui.TabPanelLayout( 'external', {
 			label: ve.msg( 'visualeditor-linkinspector-button-link-external' ),
 			expanded: false,
 			scrollable: false,
@@ -92,8 +92,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	// Initialization
 	// HACK: IndexLayout is absolutely positioned, so place actions inside it
 	this.linkTypeIndex.$content.append( this.$otherActions );
-	this.linkTypeIndex.getCard( 'internal' ).$element.append( this.internalAnnotationInput.$element );
-	this.linkTypeIndex.getCard( 'external' ).$element.append( this.externalAnnotationInput.$element );
+	this.linkTypeIndex.getTabPanel( 'internal' ).$element.append( this.internalAnnotationInput.$element );
+	this.linkTypeIndex.getTabPanel( 'external' ).$element.append( this.externalAnnotationInput.$element );
 	this.form.$element.append( this.linkTypeIndex.$element );
 };
 
@@ -103,7 +103,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
  * @return {boolean} Input mode is for external links
  */
 ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
-	return this.linkTypeIndex.getCurrentCardName() === 'external';
+	return this.linkTypeIndex.getCurrentTabPanelName() === 'external';
 };
 
 /**
@@ -172,7 +172,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
  * @param {string} value Current value of input widget
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function ( value ) {
-	// If this looks like an external link, switch to the correct card.
+	// If this looks like an external link, switch to the correct tabPanel.
 	// Note: We don't care here if it's a *valid* link, so we just
 	// check whether it looks like a URI -- i.e. whether it starts with
 	// something that appears to be a schema per RFC1630. Later the external
@@ -189,8 +189,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 		!this.allowProtocolInInternal &&
 		/^(?:[a-z][a-z0-9\$\-_@\.&!\*"'\(\),]*:)?\/\//i.test( value.trim() )
 	) {
-		this.linkTypeIndex.setCard( 'external' );
-		// Changing card focuses and selects the input, so collapse the cursor back to the end.
+		this.linkTypeIndex.setTabPanel( 'external' );
+		// Changing tabPanel focuses and selects the input, so collapse the cursor back to the end.
 		this.externalAnnotationInput.getTextInputWidget().moveCursorToEnd();
 	}
 };
@@ -208,7 +208,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
 ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			this.linkTypeIndex.setCard(
+			this.linkTypeIndex.setTabPanel(
 				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
@@ -276,7 +276,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 /**
  * Handle set events from the linkTypeIndex layout
  *
- * @param {OO.ui.CardLayout} card Current card
+ * @param {OO.ui.TabPanelLayout} tabPanel Current tabPanel
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	var text = this.annotationInput.getTextInputWidget().getValue(),
