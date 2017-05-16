@@ -872,7 +872,7 @@
 
 		function getInitialEditMode() {
 			// On view pages if veaction is correctly set
-			if ( isViewPage && init.isVisualAvailable && uri.query.veaction in editModes ) {
+			if ( isViewPage && init.isAvailable && uri.query.veaction in editModes ) {
 				return editModes[ uri.query.veaction ];
 			}
 			// Edit pages
