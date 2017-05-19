@@ -225,8 +225,6 @@
 	"visualeditor-preference-betatempdisable": "Привремено онемогући Визуелни уређивач док је у бета верзији",
 	"visualeditor-preference-core-description": "Укључује Визуелни уређивач. Неће бити доступан на страницама за разговор и још неким именским просторима.",
 	"visualeditor-preference-core-label": "Визуелни уређивач",
-	"visualeditor-preference-newwikitexteditor-description": "Омогућава нови режим уређивања викитекста унутар визуелног уређивача. Даје много алатки које су доступне у визуелном уређивачу, користи сличан дизајн и омогућава боље измењивање режима.",
-	"visualeditor-preference-newwikitexteditor-label": "Нови режим уређивања викитекста",
 	"visualeditor-preference-enable": "Укључује Визуелни уређивач. Биће доступан у следећим {{PLURAL:$2|именским просторима}}: $1",
 	"visualeditor-preference-tabs": "Режим уређивања:",
 	"visualeditor-preference-tabs-multi-tab": "Прикажи језичке за оба режима",
