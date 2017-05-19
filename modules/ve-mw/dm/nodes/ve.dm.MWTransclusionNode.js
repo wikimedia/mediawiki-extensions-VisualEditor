@@ -41,8 +41,6 @@ OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.GeneratedContentNode );
 
 OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.FocusableNode );
 
-OO.mixinClass( ve.dm.MWTransclusionNode, ve.dm.TableCellableNode );
-
 /* Static members */
 
 ve.dm.MWTransclusionNode.static.name = 'mwTransclusion';
