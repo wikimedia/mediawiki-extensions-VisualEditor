@@ -238,7 +238,7 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 		optionWidget, labelText;
 	if ( cachedData && cachedData.redirectFrom ) {
 		labelText = mw.Title.newFromText( cachedData.redirectFrom[ 0 ] ).getMainText();
-		optionWidget = OO.ui.MenuOptionWidget( {
+		optionWidget = new OO.ui.MenuOptionWidget( {
 			data: name,
 			autoFitLabel: false,
 			label: $( '<span>' )
