@@ -59,13 +59,19 @@ ve.dm.MWExtensionNode.static.getMatchRdfaTypes = function () {
 	return [ 'mw:Extension/' + this.extensionName ];
 };
 
-ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter ) {
+/**
+ * @inheritdoc
+ * @param {Node[]} domElements
+ * @param {ve.dm.Converter} converter
+ * @param {string} [type] Type to give dataElement, defaults to static.name
+ */
+ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter, type ) {
 	var dataElement,
 		mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 
 	dataElement = {
-		type: this.name,
+		type: type || this.name,
 		attributes: {
 			mw: mwData,
 			originalMw: mwDataJSON
@@ -73,6 +79,7 @@ ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter )
 	};
 
 	this.storeGeneratedContents( dataElement, domElements, converter.getStore() );
+	// Sub-classes should not modify dataElement beyond this point as it will invalidate the cache
 
 	return dataElement;
 };
