@@ -573,6 +573,8 @@
 				"lib/ve/src/dm/ve.dm.TransactionProcessor.js",
 				"lib/ve/src/dm/ve.dm.Transaction.js",
 				"lib/ve/src/dm/ve.dm.TransactionBuilder.js",
+				"lib/ve/src/dm/ve.dm.TreeCursor.js",
+				"lib/ve/src/dm/ve.dm.TreeModifier.js",
 				"lib/ve/src/dm/ve.dm.Selection.js",
 				"lib/ve/src/dm/ve.dm.Surface.js",
 				"lib/ve/src/dm/ve.dm.SurfaceFragment.js",
