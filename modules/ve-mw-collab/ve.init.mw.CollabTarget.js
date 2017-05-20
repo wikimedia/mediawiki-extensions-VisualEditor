@@ -12,15 +12,20 @@
  * @extends ve.init.mw.Target
  *
  * @constructor
+ * @param {mw.Title} title Page sub-title
+ * @param {rebaserUrl} string Rebaser server URL
  * @param {Object} [config] Configuration options
  */
-ve.init.mw.CollabTarget = function VeInitMwCollabTarget( config ) {
+ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, config ) {
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		shadow: true,
 		actions: true,
 		floatable: true
 	}, config.toolbarConfig );
+
+	this.title = title;
+	this.rebaserUrl = rebaserUrl;
 
 	// Parent constructor
 	ve.init.mw.CollabTarget.super.call( this, config );
@@ -56,6 +61,28 @@ ve.init.mw.CollabTarget.prototype.transformPage = function () {
  */
 ve.init.mw.CollabTarget.prototype.restorePage = function () {
 	this.$element.parent().append( this.$originalContent.children() );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
+	var synchronizer, authorList,
+		surfaceView = this.getSurface().getView();
+
+	// Parent method
+	ve.init.mw.CollabTarget.super.prototype.surfaceReady.apply( this, arguments );
+
+	synchronizer = new ve.dm.SurfaceSynchronizer(
+		this.getSurface().getModel(),
+		this.title.toString(),
+		{ server: this.rebaserUrl }
+	);
+	authorList = new ve.ui.AuthorListWidget( synchronizer );
+
+	this.getToolbar().$actions.append( authorList.$element );
+	surfaceView.setSynchronizer( synchronizer );
+	surfaceView.focus();
 };
 
 /**

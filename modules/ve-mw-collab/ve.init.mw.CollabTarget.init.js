@@ -35,7 +35,7 @@
 		documentNameField.toggle( false );
 
 		loadingPromise.done( function () {
-			target = ve.init.mw.targetFactory.create( 'collab' );
+			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl );
 
 			$( 'body' ).addClass( 've-activated ve-active' );
 
@@ -45,18 +45,6 @@
 			$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
 			target.documentReady( ve.createDocumentFromHtml( '' ) );
-			target.once( 'surfaceReady', function () {
-				var synchronizer = new ve.dm.SurfaceSynchronizer(
-						target.getSurface().getModel(),
-						title.toString(),
-						{ server: conf.rebaserUrl }
-					),
-					authorList = new ve.ui.AuthorListWidget( synchronizer );
-
-				target.getToolbar().$actions.append( authorList.$element );
-				target.getSurface().getView().setSynchronizer( synchronizer );
-				target.getSurface().getView().focus();
-			} );
 		} ).always( function () {
 			documentNameField.toggle( false );
 			progressBar.toggle( false );
