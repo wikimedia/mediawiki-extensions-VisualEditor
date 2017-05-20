@@ -43,33 +43,40 @@ class SpecialCollabPad extends SpecialPage {
 		$output->addModules( 'ext.visualEditor.collabTarget.init' );
 
 		$output->enableOOUI();
+
+		$documentNameField = new OOUI\ActionFieldLayout(
+			new OOUI\TextInputWidget( [
+				'classes' => [ 've-init-mw-collabTarget-nameInput' ],
+				'placeholder' => $this->msg( 'visualeditor-rebase-client-document-name' )->text(),
+				'autofocus' => true,
+				'infusable' => true
+			] ),
+			new OOUI\ButtonWidget( [
+				'classes' => [ 've-init-mw-collabTarget-nameButton' ],
+				'label' => $this->msg( 'visualeditor-rebase-client-document-create-edit' )->text(),
+				// Only enable once JS has loaded
+				'disabled' => true,
+				'infusable' => true
+			] ),
+			[
+				'classes' => [ 've-init-mw-collabTarget-nameField' ],
+				'infusable' => true
+			]
+		);
+		$progressBar = new OOUI\ProgressBarWidget( [
+			'classes' => [ 've-init-mw-collabTarget-loading' ],
+			'infusable' => true
+		] );
+
 		if ( $par ) {
 			$title = Title::newFromText( $par );
 			$output->setPageTitle( 'CollabPad: ' . $title->getPrefixedText() );
-			$output->addHTML( new OOUI\ProgressBarWidget( [
-				'classes' => [ 've-init-mw-collabTarget-loading' ]
-			] ) );
+			$documentNameField->addClasses( [ 'oo-ui-element-hidden' ] );
 		} else {
 			// Scripts only, styles already added above
 			$output->addModules( 'ext.visualEditor.collabTarget' );
-			// TODO: Output this "form" unconditionally so the user can
-			// navigate back to it without reloading the page.
-			$output->addHTML( new OOUI\ActionFieldLayout(
-				new OOUI\TextInputWidget( [
-					'classes' => [ 've-init-mw-collabTarget-nameInput' ],
-					'placeholder' => $this->msg( 'visualeditor-rebase-client-document-name' )->text(),
-					'autofocus' => true,
-					'infusable' => true
-				] ),
-				new OOUI\ButtonWidget( [
-					'classes' => [ 've-init-mw-collabTarget-nameButton' ],
-					'label' => $this->msg( 'visualeditor-rebase-client-document-create-edit' )->text(),
-					// Only enable once JS has loaded
-					'disabled' => true,
-					'infusable' => true
-				] ),
-				[ 'classes' => [ 've-init-mw-collabTarget-nameField' ] ] )
-			);
+			$progressBar->addClasses( [ 'oo-ui-element-hidden' ] );
 		}
+		$output->addHTML( $progressBar . $documentNameField );
 	}
 }

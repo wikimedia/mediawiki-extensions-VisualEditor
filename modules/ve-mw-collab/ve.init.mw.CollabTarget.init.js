@@ -10,13 +10,18 @@
  */
 
 ( function () {
-	var $content = $( '#mw-content-text' ),
+	var target,
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
-		pageTitle = mw.Title.newFromText( mw.config.get( 'collabPadPageName' ) || '' ),
+		pageName = mw.config.get( 'collabPadPageName' ) || '',
+		pageTitle = mw.Title.newFromText( pageName ),
 		modules = [ 'ext.visualEditor.collabTarget' ]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) ),
-		loadingPromise = mw.loader.using( modules );
+		loadingPromise = mw.loader.using( modules ),
+		progressBar = OO.ui.infuse( $( '.ve-init-mw-collabTarget-loading' ) ),
+		documentNameField = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameField' ) ),
+		documentNameInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameInput' ) ),
+		submitButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) );
 
 	if ( !VisualEditorSupportCheck() ) {
 		// VE not supported - say something?
@@ -25,24 +30,22 @@
 
 	function showPage( title ) {
 		$( '#firstHeading' ).text( 'CollabPad: ' + title.getPrefixedText() ); // TODO: i18n
-		$content.empty().append(
-			new OO.ui.ProgressBarWidget( {
-				classes: [ 've-init-mw-collabTarget-loading' ]
-			} ).$element
-		);
-		loadingPromise.then( function () {
-			var target = ve.init.mw.targetFactory.create( 'collab' );
+
+		progressBar.toggle( true );
+		documentNameField.toggle( false );
+
+		loadingPromise.done( function () {
+			target = ve.init.mw.targetFactory.create( 'collab' );
 
 			$( 'body' ).addClass( 've-activated ve-active' );
 
-			$content.empty();
 			$( '#content' ).append( target.$element );
 
 			target.transformPage();
 			$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
 			target.documentReady( ve.createDocumentFromHtml( '' ) );
-			target.on( 'surfaceReady', function () {
+			target.once( 'surfaceReady', function () {
 				var synchronizer = new ve.dm.SurfaceSynchronizer(
 						target.getSurface().getModel(),
 						title.toString(),
@@ -54,45 +57,75 @@
 				target.getSurface().getView().setSynchronizer( synchronizer );
 				target.getSurface().getView().focus();
 			} );
+		} ).always( function () {
+			documentNameField.toggle( false );
+			progressBar.toggle( false );
+		} ).fail( function () {
+			// eslint-disable-next-line no-use-before-define
+			showForm();
 		} );
 	}
 
 	function showForm() {
-		var documentNameInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameInput' ) ),
-			submitButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) );
+		$( '#firstHeading' ).text( 'CollabPad' ); // TODO: i18n
 
-		documentNameInput.setValidation( function ( value ) {
-			var title = mw.Title.newFromText( value );
-			return !!title;
-		} );
+		if ( target ) {
+			$( '#firstHeading' ).removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+			target.restorePage();
+			target.destroy();
 
-		function onSubmit() {
-			var href,
-				title = mw.Title.newFromText( documentNameInput.getValue() );
+			$( 'body' ).removeClass( 've-activated ve-active' );
+		}
+
+		progressBar.toggle( false );
+		documentNameField.toggle( true );
+	}
+
+	function onSubmit() {
+		documentNameInput.getValidity().then( function () {
+			var title = mw.Title.newFromText( documentNameInput.getValue() ),
+				specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
 
 			if ( title ) {
-				href = window.location.href + '/' + encodeURIComponent( title.toString() );
 				if ( history.pushState ) {
 					// TODO: Handle popstate
-					history.pushState( null, title.getMain(), href );
+					history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl() );
 					showPage( title );
 				} else {
-					window.location.href = href;
+					location.href = specialTitle.getUrl();
 				}
 			} else {
 				documentNameInput.focus();
 			}
-		}
-
-		submitButton.on( 'click', onSubmit );
-		documentNameInput.on( 'enter', onSubmit );
-
-		submitButton.setDisabled( false );
+		} );
 	}
+
+	documentNameInput.setValidation( function ( value ) {
+		var title = mw.Title.newFromText( value );
+		return !!title;
+	} );
+	submitButton.setDisabled( false );
+
+	documentNameInput.on( 'enter', onSubmit );
+	submitButton.on( 'click', onSubmit );
 
 	if ( pageTitle ) {
 		showPage( pageTitle );
 	} else {
 		showForm();
 	}
+
+	// Tag current state
+	if ( history.replaceState ) {
+		history.replaceState( { tag: 'collabTarget', title: pageName }, document.title, location.href );
+	}
+	window.addEventListener( 'popstate', function ( e ) {
+		if ( e.state && e.state.tag === 'collabTarget' ) {
+			if ( e.state.title ) {
+				showPage( mw.Title.newFromText( e.state.title ) );
+			} else {
+				showForm();
+			}
+		}
+	} );
 }() );

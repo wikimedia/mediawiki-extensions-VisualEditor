@@ -52,6 +52,13 @@ ve.init.mw.CollabTarget.prototype.transformPage = function () {
 };
 
 /**
+ * Page modifications after editor teardown.
+ */
+ve.init.mw.CollabTarget.prototype.restorePage = function () {
+	this.$element.parent().append( this.$originalContent.children() );
+};
+
+/**
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
