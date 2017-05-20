@@ -102,10 +102,35 @@ ve.init.mw.CollabTarget.prototype.restorePage = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
+	var exportButton,
+		surfaceView = this.getSurface().getView(),
+		toolbar = this.getToolbar();
+
 	// Parent method
 	ve.init.mw.CollabTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	this.getSurface().getView().focus();
+
+	exportButton = new OO.ui.ButtonWidget( {
+		icon: 'wikiText',
+		label: ve.msg( 'visualeditor-savedialog-review-wikitext' ),
+		flags: [ 'progressive', 'primary' ]
+	} );
+	exportButton.connect( this, { click: 'onExportButtonClick' } );
+
+	toolbar.$actions.append( exportButton.$element );
+	toolbar.initialize();
+
+	surfaceView.focus();
+};
+
+/**
+ * Handle click events from the export button
+ */
+ve.init.mw.CollabTarget.prototype.onExportButtonClick = function () {
+	var surface = this.getSurface(),
+		windowAction = ve.ui.actionFactory.create( 'window', surface );
+	windowAction.open( 'mwExportWikitext', { surface: surface } );
 };
 
 /**
