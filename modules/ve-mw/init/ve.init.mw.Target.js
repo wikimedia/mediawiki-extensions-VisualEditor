@@ -19,6 +19,8 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 	ve.init.mw.Target.super.call( this, config );
 
 	this.active = false;
+	this.pageName = mw.config.get( 'wgRelevantPageName' );
+	this.editToken = mw.user.tokens.get( 'editToken' );
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-target' );
@@ -393,4 +395,120 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 
 	// Parent method
 	ve.init.mw.Target.super.prototype.setSurface.apply( this, arguments );
+};
+
+/**
+ * Refresh our stored edit/csrf token
+ *
+ * This should be called in response to a badtoken error, to resolve whether the
+ * token was expired / the user changed. If the user did change, this updates
+ * the current user.
+ *
+ * @return {jQuery.Promise} Promise resolved with whether we switched users
+ */
+ve.init.mw.Target.prototype.refreshEditToken = function () {
+	var api = new mw.Api(),
+		deferred = $.Deferred(),
+		target = this;
+	api.get( {
+		action: 'query',
+		meta: 'tokens|userinfo',
+		type: 'csrf'
+	} )
+		.done( function ( data ) {
+			var
+				userInfo = data.query && data.query.userinfo,
+				editToken = data.query && data.query.tokens && data.query.tokens.csrftoken,
+				isAnon = mw.user.isAnon();
+
+			if ( userInfo && editToken ) {
+				target.editToken = editToken;
+
+				if (
+					( isAnon && userInfo.anon !== undefined ) ||
+						// Comparing id instead of name to protect against possible
+						// normalisation and against case where the user got renamed.
+						mw.config.get( 'wgUserId' ) === userInfo.id
+				) {
+					// New session is the same user still
+					deferred.resolve( false );
+				} else {
+					// The now current session is a different user
+					if ( userInfo.anon !== undefined ) {
+						// New session is an anonymous user
+						mw.config.set( {
+							// wgUserId is unset for anonymous users, not set to null
+							wgUserId: undefined,
+							// wgUserName is explicitly set to null for anonymous users,
+							// functions like mw.user.isAnon rely on this.
+							wgUserName: null
+						} );
+					} else {
+						// New session is a different user
+						mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
+					}
+					deferred.resolve( true );
+				}
+			} else {
+				deferred.reject();
+			}
+		} )
+		.fail( function () {
+			deferred.reject();
+		} );
+	return deferred.promise();
+};
+
+/**
+ * Get a wikitext fragment from a document
+ *
+ * @param {ve.dm.Document} doc Document
+ * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
+ * @param {boolean} [isRetry=false] Whether this call is retrying a prior call
+ * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
+ */
+ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, isRetry ) {
+	var promise, xhr,
+		target = this,
+		params = {
+			action: 'visualeditoredit',
+			token: this.editToken,
+			paction: 'serialize',
+			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+			page: this.pageName
+		};
+
+	// Optimise as a no-op
+	if ( params.html === '' ) {
+		return '';
+	}
+
+	if ( useRevision === undefined || useRevision ) {
+		params.oldid = this.revid;
+		params.etag = this.etag;
+	}
+
+	xhr = new mw.Api().post(
+		params,
+		{ contentType: 'multipart/form-data' }
+	);
+
+	promise = xhr.then( function ( response ) {
+		if ( response.visualeditoredit ) {
+			return response.visualeditoredit.content;
+		}
+		return $.Deferred().reject();
+	}, function ( error ) {
+		if ( error === 'badtoken' && !isRetry ) {
+			return target.refreshEditToken().then( function () {
+				return target.getWikitextFragment( doc, useRevision, true );
+			} );
+		}
+	} );
+
+	promise.abort = function () {
+		xhr.abort();
+	};
+
+	return promise;
 };
