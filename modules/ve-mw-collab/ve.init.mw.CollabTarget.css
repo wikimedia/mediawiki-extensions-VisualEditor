@@ -1,0 +1,28 @@
+/*!
+ * VisualEditor MediaWiki Initialization CollabTarget styles.
+ *
+ * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-collabTarget-loading,
+.ve-init-mw-collabTarget-nameField {
+	margin: 0 auto;
+	width: 40em;
+	margin-top: 2em !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.ve-init-mw-collabTarget .ve-ui-authorListWidget {
+	display: inline-block;
+	margin: 0.3125em;
+}
+
+/* MW theme hack */
+.ve-init-mw-collabTarget .ve-ui-authorListWidget-author.oo-ui-iconElement .oo-ui-iconElement-icon {
+	left: 0;
+}
+
+/* Hack for T165794 */
+.ve-init-mw-collabTarget .ve-ui-authorListWidget-editName > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-header > .oo-ui-labelElement-label {
+	padding-top: 0.6em !important; /* stylelint-disable-line declaration-no-important */
+}

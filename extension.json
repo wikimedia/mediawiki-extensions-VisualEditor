@@ -31,6 +31,7 @@
 			"site",
 			"user"
 		],
+		"VisualEditorRebaserURL": false,
 		"VisualEditorRestbaseURL": false,
 		"VisualEditorFullRestbaseURL": false,
 		"VisualEditorFeedbackAPIURL": false,
@@ -127,6 +128,9 @@
 			"modules/ve-wmf/i18n"
 		]
 	},
+	"ExtensionMessagesFiles": {
+		"VisualEditorAlias": "VisualEditor.i18n.alias.php"
+	},
 	"Hooks": {
 		"BeforePageDisplay": [
 			"VisualEditorHooks::onBeforePageDisplay"
@@ -222,6 +226,16 @@
 			"targets": [
 				"desktop",
 				"mobile"
+			]
+		},
+		"socket.io": {
+			"scripts": [
+				"lib/ve/lib/socket.io-client/socket.io.min.js"
+			]
+		},
+		"dompurify": {
+			"scripts": [
+				"lib/ve/lib/dompurify/purify.js"
 			]
 		},
 		"unicodejs": {
@@ -419,6 +433,32 @@
 			],
 			"targets": [
 				"mobile"
+			]
+		},
+		"ext.visualEditor.collabTarget": {
+			"scripts": [
+				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.base",
+				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.core.desktop",
+				"ext.visualEditor.mwextensions.desktop",
+				"ext.visualEditor.desktopArticleTarget"
+			],
+			"messages" : []
+		},
+		"ext.visualEditor.collabTarget.init": {
+			"scripts": [
+				"modules/ve-mw-collab/ve.init.mw.CollabTarget.init.js"
+			],
+			"dependencies": [
+				"oojs-ui"
+			]
+		},
+		"ext.visualEditor.collabTarget.init.styles": {
+			"styles": [
+				"modules/ve-mw-collab/ve.init.mw.CollabTarget.css"
 			]
 		},
 		"ext.visualEditor.ve": {
@@ -1049,6 +1089,26 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.rebase": {
+			"scripts": [
+				"lib/ve/src/dm/ve.dm.Change.js",
+				"lib/ve/src/dm/ve.dm.RebaseClient.js",
+				"lib/ve/src/dm/ve.dm.SurfaceSynchronizer.js",
+				"lib/ve/src/ui/widgets/ve.ui.AuthorListWidget.js"
+			],
+			"styles": [
+				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorListWidget.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.core",
+				"dompurify",
+				"socket.io",
+				"oojs-ui.styles.icons-alerts"
+			],
+			"messages": [
+				"visualeditor-rebase-client-author-name"
+			]
+		},
 		"ext.visualEditor.core.desktop": {
 			"scripts": [
 				"lib/ve/src/ui/contexts/ve.ui.DesktopContext.js",
@@ -1058,7 +1118,8 @@
 				"lib/ve/src/ui/styles/ve.ui.DesktopContext.css"
 			],
 			"dependencies": [
-				"ext.visualEditor.core"
+				"ext.visualEditor.core",
+				"ext.visualEditor.rebase"
 			],
 			"targets": [
 				"desktop"
@@ -2020,9 +2081,13 @@
 		"visualeditor-editor": "wikitext",
 		"visualeditor-hidetabdialog": 0
 	},
+	"SpecialPages": {
+		"CollabPad": "SpecialCollabPad"
+	},
 	"AutoloadClasses": {
 		"ApiVisualEditor": "ApiVisualEditor.php",
 		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
+		"SpecialCollabPad": "modules/ve-mw-collab/SpecialCollabPad.php",
 		"VisualEditorHooks": "VisualEditor.hooks.php",
 		"VisualEditorDataModule": "VisualEditorDataModule.php",
 		"VisualEditorDesktopArticleTargetInitModule": "VisualEditorDesktopArticleTargetInitModule.php"

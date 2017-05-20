@@ -792,6 +792,7 @@ class VisualEditorHooks {
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
+			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
 			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
 			'fullRestbaseUrl' => $coreConfig->get( 'VisualEditorFullRestbaseURL' ),
 			'feedbackApiUrl' =>  $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
