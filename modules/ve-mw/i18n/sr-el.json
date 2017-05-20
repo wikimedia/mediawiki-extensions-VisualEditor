@@ -208,6 +208,8 @@
 	"visualeditor-preference-betatempdisable": "Privremeno onemogući Vizuelni uređivač dok je u beta verziji",
 	"visualeditor-preference-core-description": "Uključuje Vizuelni uređivač. Neće biti dostupan na stranicama za razgovor i još nekim imenskim prostorima.",
 	"visualeditor-preference-core-label": "Vizuelni uređivač",
+	"visualeditor-preference-newwikitexteditor-description": "Omogućava novi režim uređivanja vikiteksta unutar vizuelnog uređivača. Daje mnogo alatki koje su dostupne u vizuelnom uređivaču, koristi sličan dizajn i omogućava bolje izmenjivanje režima.",
+	"visualeditor-preference-newwikitexteditor-label": "Novi režim uređivanja vikiteksta",
 	"visualeditor-preference-enable": "Uključuje Vizuelni uređivač. Biće dostupan u sledećim {{PLURAL:$2|imenskim prostorima}}: $1",
 	"visualeditor-recreate": "Stranica je u međuvremenu obrisana. Pritisnite „$1“ da je ponovo napravite.",
 	"visualeditor-savedialog-error-badtoken": "Nismo mogli obraditi vašu izmenu zato što sesija više nije važeća.",
