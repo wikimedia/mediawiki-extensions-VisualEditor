@@ -36,7 +36,7 @@ QUnit.test( 'getRenderedContents', function ( assert ) {
 			html:
 				'a<b>b' +
 					'<span class="ve-ce-leafNode ve-ce-mwEntityNode" contenteditable="false">c</span>' +
-					'd<span rel="ve:Alien" class="ve-ce-focusableNode" contenteditable="false">e</span>' +
+					'd<span rel="ve:Alien" class="ve-ce-focusableNode ve-ce-leafNode" contenteditable="false">e</span>' +
 				'</b>'
 		} ];
 
