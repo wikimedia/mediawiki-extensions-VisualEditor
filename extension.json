@@ -987,6 +987,7 @@
 				"visualeditor-debugbar-inputdebug",
 				"visualeditor-debugbar-logrange",
 				"visualeditor-debugbar-showmodel",
+				"visualeditor-debugbar-showtransactions",
 				"visualeditor-debugbar-startfilibuster",
 				"visualeditor-debugbar-stopfilibuster",
 				"visualeditor-debugbar-updatemodel",
