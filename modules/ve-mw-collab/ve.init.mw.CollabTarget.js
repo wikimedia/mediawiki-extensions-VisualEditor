@@ -68,7 +68,8 @@ ve.init.mw.CollabTarget.prototype.restorePage = function () {
  */
 ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
 	var synchronizer, authorList,
-		surfaceView = this.getSurface().getView();
+		surfaceView = this.getSurface().getView(),
+		toolbar = this.getToolbar();
 
 	// Parent method
 	ve.init.mw.CollabTarget.super.prototype.surfaceReady.apply( this, arguments );
@@ -80,7 +81,8 @@ ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
 	);
 	authorList = new ve.ui.AuthorListWidget( synchronizer );
 
-	this.getToolbar().$actions.append( authorList.$element );
+	toolbar.$actions.append( authorList.$element );
+	toolbar.initialize();
 	surfaceView.setSynchronizer( synchronizer );
 	surfaceView.focus();
 };
