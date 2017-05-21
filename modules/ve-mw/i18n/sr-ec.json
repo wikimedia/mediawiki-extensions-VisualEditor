@@ -145,6 +145,7 @@
 	"visualeditor-dialog-transclusion-loading": "Учитавање…",
 	"visualeditor-dialog-transclusion-multiple-mode": "Прикажи опције",
 	"visualeditor-dialog-transclusion-no-template-description": "Шаблон „$1“ још увек нема опис, али је могуће да постоје неке информације на [[$1|страници шаблона]].",
+	"visualeditor-dialog-transclusion-absent-template": "Шаблон „$1” још увек не постоји.",
 	"visualeditor-dialog-transclusion-options": "Опције",
 	"visualeditor-dialog-transclusion-param-default": "Подразумевано: $1",
 	"visualeditor-dialog-transclusion-param-example": "Пример: $1",
