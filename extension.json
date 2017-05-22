@@ -56,12 +56,6 @@
 		"VisualEditorShowBetaWelcome": true,
 		"VisualEditorParsoidHTTPProxy": false,
 		"VisualEditorBrowserBlacklist": {
-			"android": [
-				[
-					"<",
-					3
-				]
-			],
 			"firefox": [
 				[
 					"<=",
@@ -85,9 +79,7 @@
 					"<",
 					10
 				]
-			],
-			"blackberry": null,
-			"silk": null
+			]
 		},
 		"VisualEditorTabPosition": "before",
 		"VisualEditorParsoidURL": "http://localhost:8000",
