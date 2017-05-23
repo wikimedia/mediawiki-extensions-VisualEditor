@@ -912,8 +912,8 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"lib/ve/src/themes/mediawiki/dialogs.css",
-					"lib/ve/src/themes/mediawiki/widgets.css"
+					"lib/ve/src/themes/wikimediaui/dialogs.css",
+					"lib/ve/src/themes/wikimediaui/widgets.css"
 				],
 				"apex": [
 					"lib/ve/src/themes/apex/dialogs.css",
@@ -1080,16 +1080,17 @@
 				"lib/ve/src/dm/ve.dm.Change.js",
 				"lib/ve/src/dm/ve.dm.RebaseClient.js",
 				"lib/ve/src/dm/ve.dm.SurfaceSynchronizer.js",
-				"lib/ve/src/ui/widgets/ve.ui.AuthorListWidget.js"
+				"lib/ve/src/ui/widgets/ve.ui.AuthorItemWidget.js",
+				"lib/ve/src/ui/tools/ve.ui.AuthorListPopupTool.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorListWidget.css"
+				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorItemWidget.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
 				"dompurify",
 				"socket.io",
-				"oojs-ui.styles.icons-alerts"
+				"oojs-ui.styles.icons-user"
 			],
 			"messages": [
 				"visualeditor-rebase-client-author-name"
@@ -1261,7 +1262,7 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/themes/mediawiki/widgets.css"
+					"modules/ve-mw/themes/wikimediaui/widgets.css"
 				],
 				"monobook": [
 					"modules/ve-mw/themes/apex/widgets.css"
