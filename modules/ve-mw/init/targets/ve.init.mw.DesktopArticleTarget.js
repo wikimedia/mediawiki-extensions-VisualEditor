@@ -940,7 +940,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub, modules, jsconfigvars
 ) {
-	var newUrlParams, watchChecked;
+	var newUrlParams, watchChecked, watch;
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
@@ -957,11 +957,10 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 	} else {
 		// Update watch link to match 'watch checkbox' in save dialog.
 		// User logged in if module loaded.
-		// Just checking for mw.page.watch is not enough because in Firefox
-		// there is Object.prototype.watch...
-		if ( mw.page.hasOwnProperty( 'watch' ) ) {
+		if ( mw.loader.getState( 'mediawiki.page.watch.ajax' ) === 'ready' ) {
+			watch = require( 'mediawiki.page.watch.ajax' );
 			watchChecked = this.checkboxesByName.wpWatchthis && this.checkboxesByName.wpWatchthis.isSelected();
-			mw.page.watch.updateWatchLink(
+			watch.updateWatchLink(
 				$( '#ca-watch a, #ca-unwatch a' ),
 				watchChecked ? 'unwatch' : 'watch'
 			);

@@ -12,7 +12,8 @@
 		"unicodeJS": false,
 		"RangeFix": false,
 		"Papa": false,
-		"mw": false
+		"mw": false,
+		"require": false
 	},
 	"rules": {
 		"dot-notation": [ "error", { "allowKeywords": true } ],
