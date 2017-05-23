@@ -64,6 +64,7 @@
 	"apierror-visualeditor-docserver": "连接Parsoid/RESTbase服务器时出错",
 	"apierror-visualeditor-invaliddeflate": "提供的内容未被适当缩小",
 	"apierror-visualeditor-latestnotfound": "找不到标题的最近修订版本",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "创建本页面的源代码",
 	"tooltip-ca-edit": "使用wiki文本编辑本页",
 	"tooltip-ca-editsource": "编辑本页面的源代码",

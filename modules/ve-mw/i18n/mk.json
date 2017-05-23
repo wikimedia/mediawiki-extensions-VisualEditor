@@ -41,6 +41,7 @@
 	"apierror-visualeditor-docserver": "Грешка при поврзувањето со опслжувачот Parsoid/RESTbas",
 	"apierror-visualeditor-invaliddeflate": "Содржината не е соодветно прочистена",
 	"apierror-visualeditor-latestnotfound": "Не можев да ја најдам последната преработка за насловот",
+	"collabpad": "Соработна тетратка",
 	"tooltip-ca-createsource": "Создајте го изворниот код на страницава",
 	"tooltip-ca-edit": "Уредете ја страницава со викитекст",
 	"tooltip-ca-editsource": "Уредување на изворниот код на страницава",
