@@ -56,6 +56,7 @@
 	"apierror-visualeditor-docserver": "Fel uppstod när Parsoid/RESTbase-servern kontaktades",
 	"apierror-visualeditor-invaliddeflate": "Tillhandahållit innehåll är inte helt komprimerat",
 	"apierror-visualeditor-latestnotfound": "Kunde inte hitta den senaste sidversionen för titeln",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Skapa den här sidan med wikitext",
 	"tooltip-ca-edit": "Redigera denna sida med wikitext",
 	"tooltip-ca-editsource": "Redigera wikitexten för den här sidan",
