@@ -24,22 +24,32 @@
 	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
-		"VisualEditorPreferenceModules": {
-			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
-		},
+		"VisualEditorPluginModules": [],
 		"VisualEditorPreloadModules": [
 			"site",
 			"user"
 		],
-		"VisualEditorRebaserURL": false,
+		"VisualEditorPreferenceModules": {
+			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
+		},
 		"VisualEditorRestbaseURL": false,
 		"VisualEditorFullRestbaseURL": false,
-		"VisualEditorFeedbackAPIURL": false,
-		"VisualEditorFeedbackTitle": false,
 		"VisualEditorSerializationCacheTimeout": 3600,
+		"VisualEditorAvailableNamespaces": {
+			"User": true,
+			"File": true,
+			"Category": true,
+			"_merge_strategy": "array_plus"
+		},
+		"VisualEditorAvailableContentModels": {
+			"wikitext": "article",
+			"_merge_strategy": "array_plus"
+		},
 		"VisualEditorUseChangeTagging": true,
-		"VisualEditorDisableForAnons": false,
-		"VisualEditorPluginModules": [],
+		"VisualEditorEnableWikitext": false,
+		"VisualEditorUseSingleEditTab": false,
+		"VisualEditorSingleEditTabSwitchTime": 20160101000000,
+		"VisualEditorTabPosition": "before",
 		"VisualEditorTabMessages": {
 			"edit": null,
 			"editsource": "visualeditor-ca-editsource",
@@ -50,7 +60,15 @@
 			"editsection": null,
 			"editsectionsource": "visualeditor-ca-editsource-section"
 		},
+		"VisualEditorAutoAccountEnable": false,
+		"VisualEditorDisableForAnons": false,
+		"VisualEditorTransitionDefault": false,
 		"VisualEditorShowBetaWelcome": true,
+
+		"VisualEditorNewAccountEnableProportion": false,
+		"VisualEditorFeedbackTitle": false,
+		"VisualEditorFeedbackAPIURL": false,
+		"VisualEditorSkinToolbarScrollOffset": [],
 		"VisualEditorBrowserBlacklist": {
 			"firefox": [
 				[
@@ -77,25 +95,8 @@
 				]
 			]
 		},
-		"VisualEditorTabPosition": "before",
-		"VisualEditorNewAccountEnableProportion": false,
 		"VisualEditorEnableTocWidget": false,
-		"VisualEditorEnableWikitext": false,
-		"VisualEditorAutoAccountEnable": false,
-		"VisualEditorTransitionDefault": false,
-		"VisualEditorAvailableNamespaces": {
-			"User": true,
-			"File": true,
-			"Category": true,
-			"_merge_strategy": "array_plus"
-		},
-		"VisualEditorAvailableContentModels": {
-			"wikitext": "article",
-			"_merge_strategy": "array_plus"
-		},
-		"VisualEditorSkinToolbarScrollOffset": [],
-		"VisualEditorUseSingleEditTab": false,
-		"VisualEditorSingleEditTabSwitchTime": 20160101000000
+		"VisualEditorRebaserURL": false
 	},
 	"APIModules": {
 		"visualeditor": {
