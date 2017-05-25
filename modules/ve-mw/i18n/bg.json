@@ -24,6 +24,7 @@
 	"apihelp-visualeditoredit-param-section": "Раздел, върху който да се извършат действията.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Заглавие на новия раздел.",
 	"apihelp-visualeditoredit-param-summary": "Резюме на редакцията.",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Създаване на изходния код на страницата",
 	"tooltip-ca-edit": "Редактиране на страницата с помощта на уикитекст",
 	"tooltip-ca-editsource": "Редактиране на изходния код на страницата",

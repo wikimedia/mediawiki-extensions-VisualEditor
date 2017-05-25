@@ -62,6 +62,7 @@
 	"apierror-visualeditor-docserver": "خطا در اتصال به سرور Parsoid/RESTbase",
 	"apierror-visualeditor-invaliddeflate": "محتوی تهیه شده به صورت درست خالی نشده‌است",
 	"apierror-visualeditor-latestnotfound": "آخرین نسخه برای عنوان یافت نشد",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "ساخت کد متن این صفحه.",
 	"tooltip-ca-edit": "این صفحه را با استفاده از ویکی‌متن ویرایش کنید",
 	"tooltip-ca-editsource": "ویرایش کد متن این صفحه.",
