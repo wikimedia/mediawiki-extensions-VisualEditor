@@ -54,6 +54,7 @@
 	"apierror-visualeditor-docserver": "שגיאה ביצירת קשר עם שרת Parsoid/RESTbase",
 	"apierror-visualeditor-invaliddeflate": "התוכן שסופק לא כווץ בהלכה",
 	"apierror-visualeditor-latestnotfound": "לא נמצאה הגרסה האחרונה של הכותרת",
+	"collabpad": "פנקס שיתופי",
 	"tooltip-ca-createsource": "יצירת קוד המקור של הדף הזה",
 	"tooltip-ca-edit": "עריכת הדף הזה באמצעות קוד ויקי",
 	"tooltip-ca-editsource": "עריכת קוד המקור של הדף הזה",
