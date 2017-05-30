@@ -53,7 +53,7 @@
 	"visualeditor-welcomedialog-action": "Commencer à modifier",
 	"visualeditor-welcomedialog-content": "Tout le monde peut participer, et chaque amélioration est utile.",
 	"visualeditor-welcomedialog-content-thanks": "Merci d'aider le monde à découvrir de nouvelles choses !",
-	"visualeditor-welcomedialog-switch": "Basculer vers l'éditeur de code",
+	"visualeditor-welcomedialog-switch": "Basculer vers l’éditeur de wikicode",
 	"visualeditor-welcomedialog-switch-ve": "Basculer vers l’éditeur visuel",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bienvenue}} sur $2"
 }
