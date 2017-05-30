@@ -44,10 +44,14 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	}
 
 	protected function getMessageInfo( ResourceLoaderContext $context ) {
+		global $wgEditSubmitButtonLabelPublish;
+		$saveButtonLabelKey = $wgEditSubmitButtonLabelPublish ? 'publishpage' : 'savearticle';
+		$saveButtonLabel = $context->msg( $saveButtonLabelKey )->text();
+
 		// Messages to be exported as parsed html
 		$parseMsgs = [
 			'minoredit' => $context->msg( 'minoredit' ),
-			'missingsummary' => $context->msg( 'missingsummary' ),
+			'missingsummary' => $context->msg( 'missingsummary', $saveButtonLabel ),
 			'summary' => $context->msg( 'summary' ),
 			'watchthis' => $context->msg( 'watchthis' ),
 			'visualeditor-browserwarning' => $context->msg( 'visualeditor-browserwarning' ),
