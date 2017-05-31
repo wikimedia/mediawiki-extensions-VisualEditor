@@ -29,7 +29,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	this.$menu = $( '<div>' );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
-		icon: 'remove',
+		icon: 'trash',
 		title: ve.msg( 'visualeditor-inspector-remove-tooltip' )
 	} );
 	this.sortKeyInput = new OO.ui.TextInputWidget();
