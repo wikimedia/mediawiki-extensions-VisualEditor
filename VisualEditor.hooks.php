@@ -784,10 +784,14 @@ class VisualEditorHooks {
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$pageLanguage = $out->getTitle()->getPageLanguage();
+		$fallbacks = $pageLanguage->getConverter()->getVariantFallbacks(
+			$pageLanguage->getPreferredVariant()
+		);
 
 		$vars['wgVisualEditor'] = [
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
+			'pageVariantFallbacks' => $fallbacks,
 			'usePageImages' => defined( 'PAGE_IMAGES_INSTALLED' ),
 			'usePageDescriptions' => defined( 'WBC_VERSION' ),
 		];

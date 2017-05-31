@@ -13,6 +13,7 @@
 		"Rob Moen",
 		"Timo Tijhof",
 		"Trevor Parscal",
+		"C. Scott Ananian",
 		"..."
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:VisualEditor",
@@ -1387,6 +1388,7 @@
 				"ext.visualEditor.mwalienextension",
 				"ext.visualEditor.mwdiffing",
 				"ext.visualEditor.language",
+				"ext.visualEditor.mwlanguage",
 				"ext.visualEditor.icons"
 			],
 			"targets": [
@@ -1915,6 +1917,31 @@
 				"visualeditor-languageinspector-widget-label-direction",
 				"visualeditor-languageinspector-widget-label-langcode",
 				"visualeditor-languageinspector-widget-label-language"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.mwlanguage": {
+			"scripts": [
+				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantNode.js"
+			],
+			"styles": [
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWLanguageVariantNode.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.core"
+			],
+			"messages": [
+				"visualeditor-changedesc-mwlanguagevariant",
+				"visualeditor-mwlanguagevariant-bidir",
+				"visualeditor-mwlanguagevariant-disabled",
+				"visualeditor-mwlanguagevariant-filter",
+				"visualeditor-mwlanguagevariant-name",
+				"visualeditor-mwlanguagevariant-unidir",
+				"visualeditor-mwlanguagevariant-unknown"
 			],
 			"targets": [
 				"desktop",

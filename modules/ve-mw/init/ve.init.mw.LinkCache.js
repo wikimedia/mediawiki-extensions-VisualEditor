@@ -111,6 +111,11 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
  * @param {HTMLDocument} doc Base document to use for normalisation
  */
 ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc ) {
+	if ( ve.dm.MWLanguageVariantNode ) {
+		// Render the user's preferred variant in language converter markup
+		ve.dm.MWLanguageVariantNode.static.processVariants( $elements );
+	}
+
 	// TODO: Remove when fixed upstream in Parsoid (T58756)
 	$elements
 		.find( 'a[rel="mw:ExtLink"]' ).addBack( 'a[rel="mw:ExtLink"]' )
