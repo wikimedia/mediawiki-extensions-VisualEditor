@@ -55,7 +55,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 	var xhr, attr, wikitext,
 		deferred = $.Deferred(),
 		mwData = ve.copy( this.getModel().getAttribute( 'mw' ) ),
-		extsrc = config && config.extsrc !== undefined ? config.extsrc : mwData.body.extsrc,
+		extsrc = config && config.extsrc !== undefined ? config.extsrc : ( ve.getProp( mwData, 'body', 'extsrc' ) || '' ),
 		attrs = config && config.attrs || mwData.attrs,
 		tagName = this.getModel().getExtensionName();
 
