@@ -342,9 +342,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 		this.editingTabDialog = new mw.libs.ve.EditingTabDialog();
 		windowManager.addWindows( [ this.editingTabDialog ] );
 		windowManager.openWindow( this.editingTabDialog )
-			.then( function ( opened ) { return opened; } )
-			.then( function ( closing ) { return closing; } )
-			.then( function ( data ) {
+			.closed.then( function ( data ) {
 				// Detach the temporary window manager
 				windowManager.destroy();
 
@@ -570,16 +568,13 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 		this.emit( 'deactivate' );
 		this.cancel( trackMechanism );
 	} else {
-		this.getSurface().dialogs.openWindow( 'cancelconfirm' ).then( function ( opened ) {
-			opened.then( function ( closing ) {
-				closing.then( function ( data ) {
-					if ( data && data.action === 'discard' ) {
-						target.emit( 'deactivate' );
-						target.cancel( trackMechanism );
-					}
-				} );
+		this.getSurface().dialogs.openWindow( 'cancelconfirm' )
+			.closed.then( function ( data ) {
+				if ( data && data.action === 'discard' ) {
+					target.emit( 'deactivate' );
+					target.cancel( trackMechanism );
+				}
 			} );
-		} );
 	}
 };
 
@@ -1089,7 +1084,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 	if ( this.saveDialog ) {
 		if ( this.saveDialog.isOpened() ) {
 			// If the save dialog is still open (from saving) close it
-			promises.push( this.saveDialog.close() );
+			promises.push( this.saveDialog.close().closed );
 		}
 		// Release the reference
 		this.saveDialog = null;

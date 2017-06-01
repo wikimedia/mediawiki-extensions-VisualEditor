@@ -2131,13 +2131,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 					editor: this.getDefaultMode()
 				}
 			)
-				.then( function ( opened ) {
-					return opened;
-				} )
-				.then( function ( closing ) {
-					return closing;
-				} )
-				.then( function ( data ) {
+				.closed.then( function ( data ) {
 					target.welcomeDialogPromise.resolve();
 					target.welcomeDialog = null;
 					// switchToWikitextEditor and switchToVisualEditor are actually
@@ -2254,11 +2248,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 		$( 'body' ).append( windowManager.$element );
 		windowManager.addWindows( [ switchWindow ] );
 		windowManager.openWindow( switchWindow, { mode: 'simple' } )
-			.then( function ( opened ) {
-				return opened;
-			} )
-			.then( function ( closing ) { return closing; } )
-			.then( function ( data ) {
+			.closed.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
 					target.section = null;
 					target.reloadSurface( 'visual' );

@@ -390,16 +390,12 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 				'visualeditor-dialog-transclusion-required-parameter-dialog-title',
 				blankRequired.length
 			)
-		} ).then( function ( opened ) {
-			opened.then( function ( closing ) {
-				closing.then( function ( data ) {
-					if ( data.action === 'ok' ) {
-						deferred.resolve();
-					} else {
-						deferred.reject();
-					}
-				} );
-			} );
+		} ).closed.then( function ( data ) {
+			if ( data.action === 'ok' ) {
+				deferred.resolve();
+			} else {
+				deferred.reject();
+			}
 		} );
 	} else {
 		deferred.resolve();
@@ -433,7 +429,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				}
 
 				return modelPromise.then( function () {
-					dialog.close( { action: action } ).always( dialog.popPending.bind( dialog ) );
+					dialog.close( { action: action } ).closed.always( dialog.popPending.bind( dialog ) );
 				} );
 			} ).always( deferred.resolve );
 
