@@ -63,11 +63,11 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 /**
  * @inheritdoc
  */
-ve.ui.MWTransclusionDialog.prototype.onTransclusionReady = function () {
-	// Parent method
-	ve.ui.MWTransclusionDialog.super.prototype.onTransclusionReady.call( this );
-
-	this.setMode( 'auto' );
+ve.ui.MWTransclusionDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWTransclusionDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			this.setMode( 'auto' );
+		}, this );
 };
 
 /**

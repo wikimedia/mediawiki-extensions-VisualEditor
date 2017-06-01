@@ -75,16 +75,18 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
 /* Methods */
 
 /**
- * Handle the transclusion being ready to use.
+ * @inheritdoc
  */
-ve.ui.MWTemplateDialog.prototype.onTransclusionReady = function () {
-	// Add missing required and suggested parameters to each transclusion.
-	this.transclusionModel.addPromptedParameters();
-	this.loaded = true;
-	this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
-	this.$body.append( this.bookletLayout.$element );
-	this.popPending();
-	this.bookletLayout.focus( 1 );
+ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			// Add missing required and suggested parameters to each transclusion.
+			this.transclusionModel.addPromptedParameters();
+			this.loaded = true;
+			this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+			this.$body.append( this.bookletLayout.$element );
+			this.bookletLayout.focus( 1 );
+		}, this );
 };
 
 /**
@@ -354,7 +356,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );
-	// bookletLayout is appended after the form has been built in onTransclusionReady for performance
+	// bookletLayout is appended after the form has been built in getReadyProcess for performance
 };
 
 /**
@@ -475,7 +477,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					template = ve.dm.MWTemplateModel.newFromName(
 						this.transclusionModel, data.template
 					);
-					promise = this.transclusionModel.addPart( template ).done(
+					promise = this.transclusionModel.addPart( template ).then(
 						this.initializeNewTemplateParameters.bind( this )
 					);
 				} else {
@@ -489,11 +491,10 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				// Load existing template
 				promise = this.transclusionModel
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) )
-					.done( this.initializeTemplateParameters.bind( this ) );
+					.then( this.initializeTemplateParameters.bind( this ) );
 			}
 			this.actions.setAbilities( { apply: false, insert: false } );
-			this.pushPending();
-			promise.always( this.onTransclusionReady.bind( this ) );
+			return promise;
 		}, this );
 };
 
