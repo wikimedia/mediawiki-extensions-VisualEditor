@@ -237,5 +237,6 @@ ve.ui.MWExtensionWindow.prototype.updateMwData = function ( mwData ) {
 	// Prevent that by escaping the first angle bracket '<' to '&lt;'. (bug 57429)
 	value = value.replace( new RegExp( '<(/' + tagName + '\\s*>)', 'gi' ), '&lt;$1' );
 
+	mwData.body = mwData.body || {};
 	mwData.body.extsrc = value;
 };
