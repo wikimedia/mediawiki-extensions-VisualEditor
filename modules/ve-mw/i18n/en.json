@@ -189,7 +189,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "If needed",
 	"visualeditor-dialog-meta-settings-toc-disable": "Never",
 	"visualeditor-dialog-meta-settings-toc-force": "Always",
-	"visualeditor-dialog-meta-settings-toc-help": "You can force a table of contents that lists each heading on the page to appear on pages with fewer than three headings, or force it to not appear at all. By default, it will appear if the page has three or more headings.",
+	"visualeditor-dialog-meta-settings-toc-help": "You can force a table of contents that lists each heading on the page to appear on pages with fewer than four headings, or force it to not appear at all. By default, it will appear if the page has four or more headings.",
 	"visualeditor-dialog-meta-settings-toc-label": "Show the Table of Contents",
 	"visualeditor-dialog-meta-templatesused-noresults": "No templates found.",
 	"visualeditor-dialog-meta-title": "Options",
