@@ -29,7 +29,8 @@
 			"Guillermo2149",
 			"Lemondoge",
 			"Dgstranz",
-			"Luzcaru"
+			"Luzcaru",
+			"Javiersanp"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -193,7 +194,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Si es necesario",
 	"visualeditor-dialog-meta-settings-toc-disable": "Nunca",
 	"visualeditor-dialog-meta-settings-toc-force": "Siempre",
-	"visualeditor-dialog-meta-settings-toc-help": "Fuerza que la tabla de contenidos que incluye todos los títulos de la página aparezca en las páginas que tienen menos de tres títulos, o para que no aparezca en absoluto. Por defecto, aparecerá si la página tiene tres o más de títulos.",
+	"visualeditor-dialog-meta-settings-toc-help": "Puedes forzar que aparezca en las páginas que tienen menos de cuatro títulos una tabla de contenidos que incluye todos los títulos de la página, o que no aparezca en absoluto. Por defecto, aparecerá si la página tiene cuatro o más títulos.",
 	"visualeditor-dialog-meta-settings-toc-label": "Mostrar el sumario",
 	"visualeditor-dialog-meta-templatesused-noresults": "No se encontraron plantillas.",
 	"visualeditor-dialog-meta-title": "Opciones",
