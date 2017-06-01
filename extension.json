@@ -540,6 +540,7 @@
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mwextensions",
+				"oojs-ui.styles.icons-layout",
 				"oojs-ui.styles.icons-alerts"
 			],
 			"messages": [
