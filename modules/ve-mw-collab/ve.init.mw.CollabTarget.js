@@ -47,6 +47,10 @@ ve.init.mw.CollabTarget.static.name = 'collab';
 
 ve.init.mw.CollabTarget.static.trackingName = 'collab';
 
+ve.init.mw.CollabTarget.static.actionGroups = [
+	{ include: [ 'authorList' ] }
+];
+
 /* Methods */
 
 /**
@@ -67,24 +71,10 @@ ve.init.mw.CollabTarget.prototype.restorePage = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
-	var synchronizer, authorList,
-		surfaceView = this.getSurface().getView(),
-		toolbar = this.getToolbar();
-
 	// Parent method
 	ve.init.mw.CollabTarget.super.prototype.surfaceReady.apply( this, arguments );
 
-	synchronizer = new ve.dm.SurfaceSynchronizer(
-		this.getSurface().getModel(),
-		this.title.toString(),
-		{ server: this.rebaserUrl }
-	);
-	authorList = new ve.ui.AuthorListWidget( synchronizer );
-
-	toolbar.$actions.append( authorList.$element );
-	toolbar.initialize();
-	surfaceView.setSynchronizer( synchronizer );
-	surfaceView.focus();
+	this.getSurface().getView().focus();
 };
 
 /**
@@ -99,8 +89,22 @@ ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
+	var synchronizer, surfaceView, toolbar;
+
 	if ( surface !== this.surface ) {
 		this.$editableContent.after( surface.$element );
+
+		surfaceView = surface.getView();
+		toolbar = this.getToolbar();
+
+		synchronizer = new ve.dm.SurfaceSynchronizer(
+			surface.getModel(),
+			this.title.toString(),
+			{ server: this.rebaserUrl }
+		);
+
+		toolbar.initialize();
+		surfaceView.setSynchronizer( synchronizer );
 	}
 
 	// Parent method
