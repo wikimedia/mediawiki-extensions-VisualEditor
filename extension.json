@@ -540,8 +540,7 @@
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mwextensions",
-				"oojs-ui.styles.icons-layout",
-				"oojs-ui.styles.icons-alerts"
+				"oojs-ui.styles.icons-layout"
 			],
 			"messages": [
 				"accesskey-diff",
@@ -1461,7 +1460,6 @@
 			"dependencies": [
 				"ext.visualEditor.mwimage.core",
 				"mediawiki.widgets.MediaSearch",
-				"oojs-ui.styles.icons-interactions",
 				"oojs-ui.styles.icons-media",
 				"oojs-ui.styles.icons-wikimedia",
 				"mediawiki.ForeignStructuredUpload.BookletLayout",
@@ -1999,8 +1997,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwtransclusion",
-				"mediawiki.api",
-				"oojs-ui.styles.icons-alerts"
+				"mediawiki.api"
 			],
 			"messages": [
 				"visualeditor-mwsignature-tool"
@@ -2018,10 +2015,13 @@
 		},
 		"ext.visualEditor.icons": {
 			"dependencies": [
+				"oojs-ui.styles.icons-alerts",
+				"oojs-ui.styles.icons-content",
 				"oojs-ui.styles.icons-editing-advanced",
 				"oojs-ui.styles.icons-editing-core",
 				"oojs-ui.styles.icons-editing-styling",
 				"oojs-ui.styles.icons-editing-list",
+				"oojs-ui.styles.icons-interactions",
 				"oojs-ui.styles.icons-moderation",
 				"oojs-ui.styles.icons-movement",
 				"oojs-ui.styles.indicators",
