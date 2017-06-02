@@ -653,9 +653,7 @@
 					$( 'body' ).append( windowManager.$element );
 					windowManager.addWindows( [ switchWindow ] );
 					windowManager.openWindow( switchWindow )
-						.then( function ( opened ) { return opened; } )
-						.then( function ( closing ) { return closing; } )
-						.then( function ( data ) {
+						.closed.then( function ( data ) {
 							var oldUri;
 							// TODO: windowManager.destroy()?
 							if ( data && data.action === 'keep' ) {
@@ -978,9 +976,7 @@
 							editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
 							windowManager.openWindow( editingTabDialog )
-								.then( function ( opened ) { return opened; } )
-								.then( function ( closing ) { return closing; } )
-								.then( function ( data ) {
+								.closed.then( function ( data ) {
 									// Detach the temporary window manager
 									windowManager.destroy();
 
@@ -1072,9 +1068,7 @@
 						editor: 'source'
 					}
 				)
-					.then( function ( opened ) { return opened; } )
-					.then( function ( closing ) { return closing; } )
-					.then( function ( data ) {
+					.closed.then( function ( data ) {
 						windowManager.destroy();
 						if ( data && data.action === 'switch-ve' ) {
 							init.activateVe( 'visual' );
