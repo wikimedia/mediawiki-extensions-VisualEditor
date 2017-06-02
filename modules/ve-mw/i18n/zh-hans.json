@@ -195,7 +195,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "需要时",
 	"visualeditor-dialog-meta-settings-toc-disable": "从不",
 	"visualeditor-dialog-meta-settings-toc-force": "始终",
-	"visualeditor-dialog-meta-settings-toc-help": "您可以使列出每个标题的目录强制在少于三个标题的页面出现，或强制它在所有页面不出现。默认将出现在拥有超过三个标题的页面。",
+	"visualeditor-dialog-meta-settings-toc-help": "您可以使列出每个标题的目录强制在少于四个标题的页面出现，或强制它在所有页面不出现。默认将出现在拥有超过四个标题的页面。",
 	"visualeditor-dialog-meta-settings-toc-label": "显示目录",
 	"visualeditor-dialog-meta-templatesused-noresults": "找不到模板。",
 	"visualeditor-dialog-meta-title": "选项",

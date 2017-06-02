@@ -216,7 +216,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Si nécessaire",
 	"visualeditor-dialog-meta-settings-toc-disable": "Jamais",
 	"visualeditor-dialog-meta-settings-toc-force": "Toujours",
-	"visualeditor-dialog-meta-settings-toc-help": "Vous pouvez forcer l’ajout d’une table des matières qui liste tous les titres de la page sur les pages avec moins de trois chapitres ou l’empêcher d’apparaître quoi qu’il en soit. Par défaut, elle sera affichée si la page a trois chapitres ou plus.",
+	"visualeditor-dialog-meta-settings-toc-help": "Vous pouvez forcer l’ajout d’une table des matières qui liste tous les titres de la page sur les pages avec moins de quatre chapitres ou l’empêcher d’apparaître quoi qu’il en soit. Par défaut, elle sera affichée si la page a quatre chapitres ou plus.",
 	"visualeditor-dialog-meta-settings-toc-label": "Afficher le sommaire",
 	"visualeditor-dialog-meta-templatesused-noresults": "Pas de modèles trouvés.",
 	"visualeditor-dialog-meta-title": "Options",
