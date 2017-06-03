@@ -194,7 +194,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Si es necesario",
 	"visualeditor-dialog-meta-settings-toc-disable": "Nunca",
 	"visualeditor-dialog-meta-settings-toc-force": "Siempre",
-	"visualeditor-dialog-meta-settings-toc-help": "Puedes forzar que aparezca en las páginas que tienen menos de cuatro títulos una tabla de contenidos que incluye todos los títulos de la página, o que no aparezca en absoluto. Por defecto, aparecerá si la página tiene cuatro o más títulos.",
+	"visualeditor-dialog-meta-settings-toc-help": "Es posible forzar la aparición de un sumario en las páginas con menos de cuatro títulos de sección, o bien, que este no aparezca en absoluto. De manera predeterminada, el sumario aparecerá si la página contiene cuatro o más títulos.",
 	"visualeditor-dialog-meta-settings-toc-label": "Mostrar el sumario",
 	"visualeditor-dialog-meta-templatesused-noresults": "No se encontraron plantillas.",
 	"visualeditor-dialog-meta-title": "Opciones",
