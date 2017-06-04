@@ -185,7 +185,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "필요하다면",
 	"visualeditor-dialog-meta-settings-toc-disable": "전혀 없음",
 	"visualeditor-dialog-meta-settings-toc-force": "항상",
-	"visualeditor-dialog-meta-settings-toc-help": "문서에 세 개 미만의 문단이 있을 경우 각 문단을 나열하는 목차를 보여주거나 아예 보여주지 않도록 강제합니다. 기본적으로는 문서에 세 개 이상의 문단이 있으면 목차를 보여줍니다.",
+	"visualeditor-dialog-meta-settings-toc-help": "문서에 네 개 미만의 문단이 있을 경우 각 문단을 나열하는 목차를 보여주거나 아예 보여주지 않도록 강제합니다. 기본적으로는 문서에 네 개 이상의 문단이 있으면 목차를 보여줍니다.",
 	"visualeditor-dialog-meta-settings-toc-label": "목차 보이기",
 	"visualeditor-dialog-meta-templatesused-noresults": "틀이 없습니다.",
 	"visualeditor-dialog-meta-title": "옵션",

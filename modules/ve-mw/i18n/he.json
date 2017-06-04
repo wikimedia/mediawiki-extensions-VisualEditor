@@ -182,7 +182,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "אם צריך",
 	"visualeditor-dialog-meta-settings-toc-disable": "לעולם לא",
 	"visualeditor-dialog-meta-settings-toc-force": "תמיד",
-	"visualeditor-dialog-meta-settings-toc-help": "אפשר לכפות הופעה של תוכן עניינים שמראה את כל הכותרות בדפים שבהם יש פחות משלוש כותרות, או לגרום לו לא להופיע בכלל. ללא הגדרות אחרות תוכן העניינים יופיע בדף שיש שלוש כותרות או יותר.",
+	"visualeditor-dialog-meta-settings-toc-help": "באפשרותך לכפות הופעה של תוכן עניינים שמראה את כל הכותרות בדפים שיש בהם פחות מארבע כותרות, או לגרום לו לא להופיע בכלל. ללא הגדרות מפורשות אחרות תוכן העניינים יופיע בדף שיש בו ארבע כותרות או יותר.",
 	"visualeditor-dialog-meta-settings-toc-label": "להציג את תוכן העניינים",
 	"visualeditor-dialog-meta-templatesused-noresults": "לא נמצאו תבניות.",
 	"visualeditor-dialog-meta-title": "אפשרויות",
