@@ -188,7 +188,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Se necessario",
 	"visualeditor-dialog-meta-settings-toc-disable": "Mai",
 	"visualeditor-dialog-meta-settings-toc-force": "Sempre",
-	"visualeditor-dialog-meta-settings-toc-help": "Puoi forzare un indice che elenchi tutte le intestazioni nella pagina su pagine con meno di tre sezioni, o forzare che non appaia mai. Per impostazione predefinita, viene visualizzato se la pagina ha tre o più intestazioni.",
+	"visualeditor-dialog-meta-settings-toc-help": "Puoi forzare un indice che elenchi tutte le intestazioni nella pagina su pagine con meno di quattro sezioni, o forzare che non appaia mai. Per impostazione predefinita, viene visualizzato se la pagina ha quattro o più intestazioni.",
 	"visualeditor-dialog-meta-settings-toc-label": "Mostra l'indice",
 	"visualeditor-dialog-meta-templatesused-noresults": "Nessun template trovato.",
 	"visualeditor-dialog-meta-title": "Opzioni",
