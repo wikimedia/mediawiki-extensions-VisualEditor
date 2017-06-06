@@ -184,7 +184,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Vid behov",
 	"visualeditor-dialog-meta-settings-toc-disable": "Aldrig",
 	"visualeditor-dialog-meta-settings-toc-force": "Alltid",
-	"visualeditor-dialog-meta-settings-toc-help": "Du kan tvinga en innehållsförteckning, som visar varje rubrik på sidan, att visas på sidor med färre än tre rubriker eller tvinga den att inte visas alls. Som standard visas den om sidan har tre eller fler rubriker.",
+	"visualeditor-dialog-meta-settings-toc-help": "Du kan tvinga en innehållsförteckning, som visar varje rubrik på sidan, att visas på sidor med färre än fyra rubriker eller tvinga den att inte visas alls. Som standard visas den om sidan har fyra eller fler rubriker.",
 	"visualeditor-dialog-meta-settings-toc-label": "Visa innehållsförteckningen",
 	"visualeditor-dialog-meta-templatesused-noresults": "Inga mallar hittades.",
 	"visualeditor-dialog-meta-title": "Alternativ",
