@@ -13,7 +13,6 @@
  * @extends ve.dm.LeafNode
  * @mixins ve.dm.GeneratedContentNode
  * @mixins ve.dm.FocusableNode
- * @mixins ve.dm.TableCellableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -450,6 +449,7 @@ ve.dm.MWTransclusionInlineNode.static.isContent = true;
  *
  * @class
  * @extends ve.dm.MWTransclusionNode
+ * @mixins ve.dm.TableCellableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -469,8 +469,6 @@ OO.mixinClass( ve.dm.MWTransclusionTableCellNode, ve.dm.TableCellableNode );
 ve.dm.MWTransclusionTableCellNode.static.matchTagNames = [];
 
 ve.dm.MWTransclusionTableCellNode.static.name = 'mwTransclusionTableCell';
-
-ve.dm.MWTransclusionTableCellNode.static.isCellable = true;
 
 /* Registration */
 
