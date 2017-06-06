@@ -197,7 +197,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( function () {
 		var characters = {},
 			otherGroupName = mw.msg( 'visualeditor-special-characters-group-other' ),
-			otherMsg = mw.msg( 'visualeditor-quick-access-characters.json' ),
+			otherMsg = mw.message( 'visualeditor-quick-access-characters.json' ).plain(),
 			other, groupObject;
 
 		try {
