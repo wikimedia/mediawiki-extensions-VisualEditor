@@ -1070,7 +1070,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 
 	if ( !this.originalDmDoc ) {
 		if ( !this.fromEditedState ) {
-			this.originalDmDoc = this.createModelFromDom( this.doc, 'visual' );
+			this.originalDmDoc = this.constructor.static.createModelFromDom( this.doc, 'visual' );
 		} else {
 			mw.libs.ve.targetLoader.requestParsoidData(
 				this.pageName,
@@ -1080,7 +1080,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				var doc, data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 				if ( data && typeof data.content === 'string' ) {
 					doc = target.parseDocument( data.content, 'visual' );
-					target.originalDmDoc = target.createModelFromDom( doc, 'visual' );
+					target.originalDmDoc = target.constructor.static.createModelFromDom( doc, 'visual' );
 					deferred.resolve( function () {
 						return new ve.dm.VisualDiff( target.originalDmDoc, dmDoc );
 					} );

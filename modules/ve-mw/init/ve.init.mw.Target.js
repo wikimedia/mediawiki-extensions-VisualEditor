@@ -149,6 +149,42 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
 	) );
 };
 
+/**
+ * Create a document model from an HTML document.
+ *
+ * @param {HTMLDocument} doc HTML document
+ * @param {string} mode Editing mode
+ * @return {ve.dm.Document} Document model
+ */
+ve.init.mw.Target.static.createModelFromDom = function ( doc, mode ) {
+	var i, l, children, data,
+		conf = mw.config.get( 'wgVisualEditor' );
+
+	if ( mode === 'source' ) {
+		children = doc.body.children;
+		data = [];
+
+		// Wikitext documents are just plain text paragraphs, so we can just do a simple manual conversion.
+		for ( i = 0, l = children.length; i < l; i++ ) {
+			data.push( { type: 'paragraph' } );
+			ve.batchPush( data, children[ i ].textContent.split( '' ) );
+			data.push( { type: '/paragraph' } );
+		}
+		data.push( { type: 'internalList' }, { type: '/internalList' } );
+		return new ve.dm.Document( data, doc, null, null, null, conf.pageLanguageCode, conf.pageLanguageDir );
+	} else {
+		return ve.dm.converter.getModelFromDom( doc, {
+			lang: conf.pageLanguageCode,
+			dir: conf.pageLanguageDir
+		} );
+	}
+};
+
+// Deprecated alias
+ve.init.mw.Target.prototype.createModelFromDom = function () {
+	return this.constructor.static.createModelFromDom.apply( this.constructor.static, arguments );
+};
+
 /* Methods */
 
 /**
@@ -300,37 +336,6 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 };
 
 /**
- * Create a document model from an HTML document.
- *
- * @param {HTMLDocument} doc HTML document
- * @param {string} mode Editing mode
- * @return {ve.dm.Document} Document model
- */
-ve.init.mw.Target.prototype.createModelFromDom = function ( doc, mode ) {
-	var i, l, children, data,
-		conf = mw.config.get( 'wgVisualEditor' );
-
-	if ( mode === 'source' ) {
-		children = doc.body.children;
-		data = [];
-
-		// Wikitext documents are just plain text paragraphs, so we can just do a simple manual conversion.
-		for ( i = 0, l = children.length; i < l; i++ ) {
-			data.push( { type: 'paragraph' } );
-			ve.batchPush( data, children[ i ].textContent.split( '' ) );
-			data.push( { type: '/paragraph' } );
-		}
-		data.push( { type: 'internalList' }, { type: '/internalList' } );
-		return new ve.dm.Document( data, doc, null, null, null, conf.pageLanguageCode, conf.pageLanguageDir );
-	} else {
-		return ve.dm.converter.getModelFromDom( doc, {
-			lang: conf.pageLanguageCode,
-			dir: conf.pageLanguageDir
-		} );
-	}
-};
-
-/**
  * Switch to editing mode.
  *
  * @method
@@ -344,7 +349,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		var dmDoc;
 
 		target.track( 'trace.convertModelFromDom.enter' );
-		dmDoc = target.createModelFromDom( doc, target.getDefaultMode() );
+		dmDoc = target.constructor.static.createModelFromDom( doc, target.getDefaultMode() );
 		target.track( 'trace.convertModelFromDom.exit' );
 
 		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
