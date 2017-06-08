@@ -185,25 +185,25 @@ ve.init.mw.Target.prototype.createModelFromDom = function () {
 	return this.constructor.static.createModelFromDom.apply( this.constructor.static, arguments );
 };
 
-/* Methods */
-
 /**
  * @inheritdoc
  */
-ve.init.mw.Target.prototype.parseDocument = function ( documentString, mode ) {
+ve.init.mw.Target.static.parseDocument = function ( documentString, mode ) {
 	var doc;
 	if ( mode === 'source' ) {
 		// Parent method
-		doc = ve.init.mw.Target.super.prototype.parseDocument.apply( this, arguments );
+		doc = ve.init.mw.Target.super.static.parseDocument.apply( this, arguments );
 	} else {
 		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
 	}
 	// Fix relative or missing base URL if needed
-	this.constructor.static.fixBase( doc );
+	this.fixBase( doc );
 
 	return doc;
 };
+
+/* Methods */
 
 /**
  * Handle both DOM and modules being loaded and ready.

@@ -21,12 +21,12 @@
 				}
 			}
 
-			target.originalDmDoc = target.constructor.static.createModelFromDom( target.parseDocument( oldHtml ), 'visual' );
+			target.originalDmDoc = target.constructor.static.createModelFromDom( target.constructor.static.parseDocument( oldHtml ), 'visual' );
 
 			surface.getModel().getDocument().getStore().merge( target.originalDmDoc.getStore() );
 
 			surface.getModel().getLinearFragment( new ve.Range( 0 ) ).insertDocument(
-				target.constructor.static.createModelFromDom( target.parseDocument( newHtml ), 'visual' )
+				target.constructor.static.createModelFromDom( target.constructor.static.parseDocument( newHtml ), 'visual' )
 			).collapseToEnd().adjustLinearSelection( 0, 3 ).removeContent();
 
 			target.once( 'saveReview', function () {
