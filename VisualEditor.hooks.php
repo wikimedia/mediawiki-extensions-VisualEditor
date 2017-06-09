@@ -77,6 +77,51 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	public static function onDiffViewHeader(
+		DifferenceEngine $diff,
+		Revision $oldRev,
+		Revision $newRev
+	) {
+		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$output = RequestContext::getMain()->getOutput();
+
+		if (
+			!$config->get( 'VisualEditorEnableDiffPage' ) &&
+			$output->getRequest()->getVal( 'visualdiff' ) === null
+		) {
+			return;
+		}
+
+		$output->addModuleStyles( [
+			'ext.visualEditor.diffPage.init.styles',
+			'oojs-ui.styles.icons-alerts',
+			'oojs-ui.styles.icons-editing-advanced'
+		] );
+		$output->addModules( 'ext.visualEditor.diffPage.init' );
+		$output->enableOOUI();
+		$output->addHtml(
+			'<div class="ve-init-mw-diffPage-diffMode">' .
+			// Will be replaced by a ButtonSelectWidget in JS
+			new OOUI\ButtonGroupWidget( [
+				'items' => [
+					new \OOUI\ButtonWidget( [
+						'data' => 'visual',
+						'icon' => 'eye',
+						'disabled' => true,
+						'label' => $output->msg( 'visualeditor-savedialog-review-visual' )->plain()
+					] ),
+					new \OOUI\ButtonWidget( [
+						'data' => 'source',
+						'icon' => 'wikiText',
+						'active' => true,
+						'label' => $output->msg( 'visualeditor-savedialog-review-wikitext' )->plain()
+					] )
+				]
+			] ) .
+			'</div>'
+		);
+	}
+
 	/**
 	 * Detect incompatibile browsers which we can't expect to load VE
 	 *
