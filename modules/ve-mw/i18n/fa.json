@@ -193,7 +193,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "در صورت نیاز",
 	"visualeditor-dialog-meta-settings-toc-disable": "هرگز",
 	"visualeditor-dialog-meta-settings-toc-force": "همیشه",
-	"visualeditor-dialog-meta-settings-toc-help": "شما می‌توانید یک جدول محتویات که فهرست هر عنوان در صفحه را می‌دهد در این صفحهٔ با کمتر ۳ عنوان مجبور به نمایش کنید، یا مجبور کنید که اصلاً دیده نشود. در حالت عادی، هنگامی که صفحه سه عنوان یا بیشتر نمایش داده خواهد شد.",
+	"visualeditor-dialog-meta-settings-toc-help": "شما می‌توانید یک جدول محتویات که فهرست هر عنوان در صفحه را می‌دهد در این صفحهٔ با کمتر چهار عنوان مجبور به نمایش کنید، یا مجبور کنید که اصلاً دیده نشود. در حالت عادی، هنگامی که صفحه چهار عنوان یا بیشتر نمایش داده خواهد شد.",
 	"visualeditor-dialog-meta-settings-toc-label": "نمایش جدول محتویات",
 	"visualeditor-dialog-meta-templatesused-noresults": "الگویی یافت نشد.",
 	"visualeditor-dialog-meta-title": "گزینه‌ها",
