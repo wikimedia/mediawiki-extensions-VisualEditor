@@ -1,11 +1,7 @@
 /*!
- * VisualEditor MediaWiki DesktopArticleTarget init.
+ * VisualEditor MediaWiki CollabTarget init.
  *
- * This file must remain as widely compatible as the base compatibility
- * for MediaWiki itself (see mediawiki/core:/resources/startup.js).
- * Avoid use of: ES5, SVG, HTML5 DOM, ContentEditable etc.
- *
- * @copyright 2011-2016 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -28,8 +24,13 @@
 		return;
 	}
 
+	function setTitle( title ) {
+		$( '#firstHeading' ).text( title );
+		document.title = title;
+	}
+
 	function showPage( title ) {
-		$( '#firstHeading' ).text( 'CollabPad: ' + title.getPrefixedText() ); // TODO: i18n
+		setTitle( mw.msg( 'collabpad-doctitle', title.getPrefixedText() ) );
 
 		progressBar.toggle( true );
 		documentNameField.toggle( false );
@@ -55,7 +56,7 @@
 	}
 
 	function showForm() {
-		$( '#firstHeading' ).text( 'CollabPad' ); // TODO: i18n
+		setTitle( mw.msg( 'collabpad' ) );
 
 		if ( target ) {
 			$( '#firstHeading' ).removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
