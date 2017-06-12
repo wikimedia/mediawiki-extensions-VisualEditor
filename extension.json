@@ -432,8 +432,7 @@
 				"ext.visualEditor.core.desktop",
 				"ext.visualEditor.mwextensions.desktop",
 				"ext.visualEditor.desktopArticleTarget"
-			],
-			"messages" : []
+			]
 		},
 		"ext.visualEditor.collabTarget.init": {
 			"scripts": [
@@ -441,6 +440,10 @@
 			],
 			"dependencies": [
 				"oojs-ui"
+			],
+			"messages" : [
+				"collabpad",
+				"collabpad-doctitle"
 			]
 		},
 		"ext.visualEditor.collabTarget.init.styles": {
