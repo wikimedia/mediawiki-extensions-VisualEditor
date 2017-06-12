@@ -119,6 +119,10 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 
 	// Edit panel
+	this.filenameFieldset = new OO.ui.FieldsetLayout( {
+		label: ve.msg( 'visualeditor-dialog-media-content-filename' ),
+		icon: 'image'
+	} );
 	this.$highlightedImage = $( '<div>' )
 		.addClass( 've-ui-mwGalleryDialog-highlighted-image' );
 	// TODO: make into a ve.ui.MWTargetWidget once Parsoid handles galleries
@@ -127,6 +131,12 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		multiline: true,
 		autosize: true
 	} );
+	this.highlightedCaptionFieldset = new OO.ui.FieldsetLayout( {
+		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
+		icon: 'parameter',
+		classes: [ 've-ui-mwGalleryDialog-caption-fieldset' ]
+	} );
+	this.highlightedCaptionFieldset.$element.append( this.highlightedCaptionInput.$element );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-mwgallerydialog-remove-button-label' ),
 		flags: [ 'destructive' ],
@@ -246,7 +256,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	menuLayout.$content.append(
 		this.editPanel.$element.append(
 			this.$highlightedImage,
-			this.highlightedCaptionInput.$element,
+			this.filenameFieldset.$element,
+			this.highlightedCaptionFieldset.$element,
 			this.removeButton.$element
 		),
 		this.searchPanel.$element.append(
@@ -555,6 +566,8 @@ ve.ui.MWGalleryDialog.prototype.onRemoveItem = function () {
  * @param {ve.ui.MWGalleryItemWidget} item The item that was clicked on
  */
 ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
+	var title;
+
 	// Unhighlight previous item
 	if ( this.highlightedItem ) {
 		this.highlightedItem.toggleHighlighted( false );
@@ -572,6 +585,17 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	OO.ui.Element.static.scrollIntoView( item.$element[ 0 ] );
 
 	// Populate edit panel
+	title = mw.Title.newFromText( item.imageTitle );
+	this.filenameFieldset.setLabel(
+		$( '<span>' ).append(
+			document.createTextNode( title.getMainText() + ' ' ),
+			$( '<a>' )
+				.addClass( 'visualeditor-dialog-media-content-description-link' )
+				.attr( 'href', title.getUrl() )
+				.attr( 'target', '_blank' )
+				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
+		)
+	);
 	this.$highlightedImage
 		.css( 'background-image', 'url(' + item.thumbUrl + ')' );
 	this.highlightedCaptionInput

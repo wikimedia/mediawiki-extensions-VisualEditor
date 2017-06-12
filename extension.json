@@ -1956,6 +1956,8 @@
 				"mediawiki.page.gallery.styles"
 			],
 			"messages": [
+				"visualeditor-dialog-media-content-filename",
+				"visualeditor-dialog-media-content-section",
 				"visualeditor-mwgallerydialog-caption-field-label",
 				"visualeditor-mwgallerydialog-caption-input-placeholder",
 				"visualeditor-mwgallerydialog-card-images",
