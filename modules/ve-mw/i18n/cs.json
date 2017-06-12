@@ -178,7 +178,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "V případě potřeby",
 	"visualeditor-dialog-meta-settings-toc-disable": "Nikdy",
 	"visualeditor-dialog-meta-settings-toc-force": "Vždy",
-	"visualeditor-dialog-meta-settings-toc-help": "Můžete vynutit zobrazení tabulky s obsahem, která uvádí seznam nadpisů ve stránce, i na stránkách s méně než třemi nadpisy, nebo naopak její zobrazení zakázat. Implicitně se obsah zobrazí, pokud má stránka tři nebo více nadpisů.",
+	"visualeditor-dialog-meta-settings-toc-help": "Můžete vynutit zobrazení tabulky s obsahem, která uvádí seznam nadpisů ve stránce, i na stránkách s méně než čtyřmi nadpisy, nebo naopak její zobrazení zakázat. Implicitně se obsah zobrazí, pokud má stránka čtyři nebo více nadpisů.",
 	"visualeditor-dialog-meta-settings-toc-label": "Zobrazování tabulky obsahu",
 	"visualeditor-dialog-meta-templatesused-noresults": "Nenalezeny žádné šablony.",
 	"visualeditor-dialog-meta-title": "Nastavení",
