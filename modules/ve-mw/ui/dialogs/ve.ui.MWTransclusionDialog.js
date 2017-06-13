@@ -273,6 +273,9 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionLabel = function () {
 				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
 		);
 	} );
+	// The label change may need a layout change (most likely the height of
+	// the footer), so reattach the actions to trigger this.
+	this.attachActions();
 };
 
 /**
