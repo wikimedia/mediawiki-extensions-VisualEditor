@@ -58,6 +58,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "저장할 때, 문서를 불러왔을 때의 타임스탬프로 설정합니다. 편집 충돌을 감지하는 데 사용됩니다.",
 	"apihelp-visualeditoredit-param-summary": "편집 요약입니다.",
 	"apierror-visualeditor-difffailed": "차이 생성 실패",
+	"collabpad-doctitle": "CollabPad: $1",
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
 	"tooltip-ca-edit": "위키텍스트를 사용하여 이 문서 편집",
 	"tooltip-ca-editsource": "이 문서의 원본 코드를 편집",

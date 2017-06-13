@@ -65,6 +65,7 @@
 	"apierror-visualeditor-api-langlinks-error": "Error al consultar la API de MediaWiki",
 	"apierror-visualeditor-latestnotfound": "No se pudo encontrar la última revisión para ese título",
 	"collabpad": "CollabPad",
+	"collabpad-doctitle": "CollabPad: $1",
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
 	"tooltip-ca-edit": "Editar esta página usando wikitexto",
 	"tooltip-ca-editsource": "Editar el código fuente de esta página",

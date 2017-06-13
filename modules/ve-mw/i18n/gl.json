@@ -47,6 +47,8 @@
 	"apierror-visualeditor-difffailed": "Erro no dif",
 	"apierror-visualeditor-docserver": "Erro de acceso ó servidor Parsoid/RESTbase",
 	"apierror-visualeditor-latestnotfound": "Non se puido atopar a última revisión para ese título",
+	"collabpad": "CollabPad",
+	"collabpad-doctitle": "CollabPad: $1",
 	"tooltip-ca-createsource": "Crear o código fonte desta páxina",
 	"tooltip-ca-edit": "Editar esta páxina mediante texto wiki",
 	"tooltip-ca-editsource": "Editar o código fonte desta páxina",

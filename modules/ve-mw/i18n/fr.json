@@ -86,6 +86,7 @@
 	"apierror-visualeditor-invaliddeflate": "Le contenu fourni n'a pas été développé proprement",
 	"apierror-visualeditor-latestnotfound": "Ne pouvait pas trouver la dernière révision pour le titre",
 	"collabpad": "CollabPad",
+	"collabpad-doctitle": "CollabPad : $1",
 	"tooltip-ca-createsource": "Créer le wikicode de cette page",
 	"tooltip-ca-edit": "Modifier cette page en utilisant le wikitexte",
 	"tooltip-ca-editsource": "Modifier le wikicode de cette page",
