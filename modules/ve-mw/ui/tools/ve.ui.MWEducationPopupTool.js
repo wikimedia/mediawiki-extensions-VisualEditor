@@ -55,6 +55,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	);
 
 	this.popup = new OO.ui.PopupWidget( {
+		$floatableContainer: this.$element,
 		$content: $popupContent,
 		padded: true,
 		width: 300
@@ -79,10 +80,6 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			tool.$pulsatingDot.hide();
 			tool.$stillDot.hide();
 			tool.popup.toggle( true );
-			tool.popup.$element.css( {
-				left: tool.$element.width() / 2,
-				top: tool.$element.height()
-			} );
 			$shield.remove();
 		}
 	} );
