@@ -50,17 +50,22 @@ ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'template';
  * Get a list of descriptions of template parts in a transclusion node
  *
  * @static
- * @param {ve.dm.Node} model Node model
+ * @param {ve.dm.MWTransclusionNode} model Node model
  * @return {string[]} List of template part descriptions
  */
 ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions = function ( model ) {
-	var i, len, part,
+	var i, len, part, title,
 		parts = model.getPartsList(),
 		words = [];
 
 	for ( i = 0, len = parts.length; i < len; i++ ) {
 		part = parts[ i ];
-		if ( part.template ) {
+		// Ignore parts that are just content
+		if ( part.templatePage ) {
+			title = mw.Title.newFromText( part.templatePage );
+			words.push( title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template ) );
+		} else if ( part.template ) {
+			// Not actually a template, but e.g. a parser function
 			words.push( part.template );
 		}
 	}
@@ -73,14 +78,6 @@ ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions = function ( model )
  */
 ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 	return this.getTemplatePartDescriptions( model )
-		.map( function ( template ) {
-			var title = mw.Title.newFromText( template, mw.config.get( 'wgNamespaceIds' ).template );
-			if ( title ) {
-				return title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
-			} else {
-				return template;
-			}
-		} )
 		.join( ve.msg( 'comma-separator' ) );
 };
 

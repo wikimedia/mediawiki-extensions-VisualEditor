@@ -357,8 +357,8 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
 	}
 	for ( i = 0, len = templates.length; i < len; i++ ) {
 		if (
-			partsList[ 0 ].template &&
-			normalizeTitle( partsList[ 0 ].template ) === normalizeTitle( templates[ i ] )
+			partsList[ 0 ].templatePage &&
+			partsList[ 0 ].templatePage === normalizeTitle( templates[ i ] )
 		) {
 			return true;
 		}
@@ -372,18 +372,23 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
  * @return {Object[]} List of objects with either template or content properties
  */
 ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
-	var i, len, part, content;
+	var i, len, href, page, part, content;
 
 	if ( !this.partsList ) {
 		this.partsList = [];
 		content = this.getAttribute( 'mw' );
 		for ( i = 0, len = content.parts.length; i < len; i++ ) {
 			part = content.parts[ i ];
-			this.partsList.push(
-				part.template ?
-					{ template: part.template.target.wt } :
-					{ content: part }
-			);
+			if ( part.template ) {
+				href = part.template.target.href;
+				page = href ? ve.decodeURIComponentIntoArticleTitle( href.replace( /^(\.+\/)*/, '' ) ) : null;
+				this.partsList.push( {
+					template: part.template.target.wt,
+					templatePage: page
+				} );
+			} else {
+				this.partsList.push( { content: part } );
+			}
 		}
 	}
 
