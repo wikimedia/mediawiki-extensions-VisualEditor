@@ -36,7 +36,10 @@ ve.ui.MWTransclusionDialog.static.title =
 ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.actions.concat( [
 	{
 		action: 'mode',
-		modes: [ 'edit', 'insert' ]
+		modes: [ 'edit', 'insert' ],
+		// HACK: Will be set later, but we want measurements to be accurate in the mean time, this
+		// will not be needed when T93290 is resolved
+		label: $( document.createTextNode( '\u00a0' ) )
 	}
 ] );
 
@@ -273,9 +276,6 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionLabel = function () {
 				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
 		);
 	} );
-	// The label change may need a layout change (most likely the height of
-	// the footer), so reattach the actions to trigger this.
-	this.attachActions();
 };
 
 /**
