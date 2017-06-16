@@ -271,7 +271,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.etag = data.etag;
 		this.fromEditedState = data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
-		this.doc = this.parseDocument( this.originalHtml, this.getDefaultMode() );
+		this.doc = this.constructor.static.parseDocument( this.originalHtml, this.getDefaultMode() );
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
@@ -1000,7 +1000,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 				baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
 
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
-				doc = target.parseDocument( response.visualeditor.content, 'visual' );
+				doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
 				body = doc.body;
 				// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
 				document.adoptNode( body );
@@ -1079,7 +1079,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 			).then( function ( response ) {
 				var doc, data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 				if ( data && typeof data.content === 'string' ) {
-					doc = target.parseDocument( data.content, 'visual' );
+					doc = target.constructor.static.parseDocument( data.content, 'visual' );
 					target.originalDmDoc = target.constructor.static.createModelFromDom( doc, 'visual' );
 					deferred.resolve( function () {
 						return new ve.dm.VisualDiff( target.originalDmDoc, dmDoc );
