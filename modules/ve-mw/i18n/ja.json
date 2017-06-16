@@ -20,7 +20,8 @@
 			"Kanashimi",
 			"ネイ",
 			"Darklanlan",
-			"Mirinano"
+			"Mirinano",
+			"Iwai.masaharu"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -173,6 +174,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "常に表示",
 	"visualeditor-dialog-meta-settings-toc-help": "見出しの数が3個よりも少ないページにおいても、ページの上部へ強制的に目次（見出しの一覧）を表示、もしくは強制的に非表示にできます。既定の設定では、3個以上の見出しがあるページにおいて、目次を表示しています。",
 	"visualeditor-dialog-meta-settings-toc-label": "目次の表示",
+	"visualeditor-dialog-meta-templatesused-noresults": "テンプレートは使用されていません。",
 	"visualeditor-dialog-meta-title": "オプション",
 	"visualeditor-dialog-table-collapsed": "最初から折りたたむ",
 	"visualeditor-dialog-table-collapsible": "折りたたみ可能",
@@ -236,7 +238,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "ISBN リンクに変換",
 	"visualeditor-linkinspector-convert-link-pmid": "PMID リンクに変換",
 	"visualeditor-linkinspector-convert-link-rfc": "RFC リンクに変換",
-	"visualeditor-linkinspector-educationpopup-text": "重要な単語をリンクで他のウィキ記事または他のウェブサイトにさえリンクできます。リンクは読者の文脈理解に役立つでしょう。",
+	"visualeditor-linkinspector-educationpopup-text": "ウィキ内の他の記事や外部のウェブサイトを重要な単語にリンクします。読者が内容を理解する手助けになるでしょう。",
 	"visualeditor-linkinspector-educationpopup-title": "リンク",
 	"visualeditor-linkinspector-illegal-title": "無効なページ名",
 	"visualeditor-linknodeinspector-add-label": "ラベルを追加",
@@ -326,6 +328,7 @@
 	"visualeditor-settings-tool": "ページの設定",
 	"visualeditor-shortcuts-insert": "挿入",
 	"visualeditor-special-characters-group-other": "よく使われるもの",
+	"visualeditor-templatesused-tool": "テンプレート一覧",
 	"visualeditor-toload": "エディターがロードされます。数秒たっても画面が変わらない場合、[$1 キャッシュを破棄]してください。.",
 	"visualeditor-toolbar-savedialog": "ページを保存",
 	"visualeditor-toolbar-savedialog-short": "保存",

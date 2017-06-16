@@ -51,6 +51,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
+	"apihelp-visualeditor-summary": "Renvoie une page HTML5 du service Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Lors de l’enregistrement, règlez ceci avec l’horodatage de la version éditée de la page. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditor-param-cachekey": "Pour le serialize ou le diff, utiliser le résultat d’une précédente requête serializeforcache  avec cette clé. Réécrase $1html.",
 	"apihelp-visualeditor-param-editintro": "Modifier l’intro pour ajouter des notifications.",
@@ -64,6 +65,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "Lors de l’enregistrement, initialise ceci avec l’horodatage du moment où la page a été chargée. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditor-param-wikitext": "Wikicode à envoyer à Parsoid pour être converti en HTML (paction=parsefragment).",
 	"apihelp-visualeditoredit-description": "Enregistre une page HTML 5 vers Mediawiki (convertie en wikicode ''via'' le service Parsoid).",
+	"apihelp-visualeditoredit-summary": "Enregistrer une page HTML5 dans Médiawiki (convertie en wikitexte via le service Parsoid).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Lors de l’enregistrement, initialise ceci avec l’horodatage de la version éditée de la page. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditoredit-param-cachekey": "Utilise le résultat d’une précédente requête serializeforcache  avec cette clé. Outrepasse $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Identifiant Captcha (lors d’un enregistrement avec une réponse Captcha).",

@@ -22,6 +22,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
+	"apihelp-visualeditor-summary": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
 	"apihelp-visualeditor-param-basetimestamp": "När du sparar, ställ in denna till tidsstämpel för versionen som redigerades. Används för att upptäcka redigeringskonflikter.",
 	"apihelp-visualeditor-param-cachekey": "För serialisering eller diff, använd resultatet av en tidigare serializeforcache-begäran med denna nyckel. Åsidosätter $1html.",
 	"apihelp-visualeditor-param-editintro": "Redigera intro till att lägga till notiser.",
@@ -35,6 +36,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "När du sparar, ställ in denna till tidsstämpel för när sidan laddades. Används för att upptäcka redigeringskonflikter.",
 	"apihelp-visualeditor-param-wikitext": "Wikitext att skicka till Parsoid att konvertera till HTML (paction=parsefragment).",
 	"apihelp-visualeditoredit-description": "Spara en HTML5-sida till MediaWiki (konverterad till wikitext via Parsoid-tjänsten).",
+	"apihelp-visualeditoredit-summary": "Spara en HTML5-sida till MediaWiki (konverterad till wikitext via Parsoid-tjänsten).",
 	"apihelp-visualeditoredit-param-basetimestamp": "När du sparar, ställ in denna till tidsstämpel för versionen som redigerades. Används för att upptäcka redigeringskonflikter.",
 	"apihelp-visualeditoredit-param-cachekey": "Använd resultatet från en tidigare serializeforcache-begäran med denna nyckel. Åsidosätter $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Captcha-ID (vid sparning med ett captcha-svar).",
@@ -57,6 +59,7 @@
 	"apierror-visualeditor-invaliddeflate": "Tillhandahållit innehåll är inte helt komprimerat",
 	"apierror-visualeditor-latestnotfound": "Kunde inte hitta den senaste sidversionen för titeln",
 	"collabpad": "CollabPad",
+	"collabpad-doctitle": "CollabPad: $1",
 	"tooltip-ca-createsource": "Skapa den här sidan med wikitext",
 	"tooltip-ca-edit": "Redigera denna sida med wikitext",
 	"tooltip-ca-editsource": "Redigera wikitexten för den här sidan",

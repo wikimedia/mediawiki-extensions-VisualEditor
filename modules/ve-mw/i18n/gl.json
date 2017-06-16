@@ -15,6 +15,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Devolve o código HTML5 para unha páxina do servizo Parsoid.",
+	"apihelp-visualeditor-summary": "Devolve o código HTML5 para unha páxina do servizo Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Ao gardar, definir coa data e hora da revisión que foi editada. Úsase para detectar conflitos de edición.",
 	"apihelp-visualeditor-param-cachekey": "Para a seriación ou as diferenzas, utilícese o resultado dunha petición serializeforcache anterior con esta clave. Invalida $1html.",
 	"apihelp-visualeditor-param-editintro": "Editar a intro para engadir ós avisos.",
@@ -28,6 +29,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "Ao gardar, definir coa data e hora de cando se cargou a páxina. Úsase para detectar conflitos de edición.",
 	"apihelp-visualeditor-param-wikitext": "Texto wiki que enviar ao Parsoid para converter en HTML (paction=parsefragment).",
 	"apihelp-visualeditoredit-description": "Gardar unha páxina HTML5 en MediaWiki (convertida en texto wiki mediante o servizo do Parsoid).",
+	"apihelp-visualeditoredit-summary": "Gardar unha páxina HTML5 en MediaWiki (convertida en texto wiki mediante o servizo do Parsoid).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Ao gardar, definir coa data e hora da revisión que foi editada. Úsase para detectar conflitos de edición.",
 	"apihelp-visualeditoredit-param-cachekey": "Utilícese o resultado dunha petición serializeforcache anterior con esta clave. Invalida $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Identificador do captcha (ao gardar cunha resposta do captcha).",

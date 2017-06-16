@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robin0van0der0vliet"
+			"Robin0van0der0vliet",
+			"Pahles",
+			"Robin van der Vliet"
 		]
 	},
-	"visualeditor-ca-editsource-section": "brón bewèrke",
-	"visualeditor-cite-tool-name-news": "Nuujs"
+	"visualeditor-ca-editsource": "Brónteks bewirke",
+	"visualeditor-ca-editsource-section": "brón bewèrke"
 }
