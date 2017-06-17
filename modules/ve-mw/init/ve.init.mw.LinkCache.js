@@ -107,10 +107,8 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
  * TODO: Most/all of this code should be done upstream, either by Parsoid itself or by an
  * intermediary service – see T64803 and others.
  *
- * @chainable
  * @param {jQuery} $element Elements to style
  * @param {HTMLDocument} doc Base document to use for normalisation
- * @return {jQuery} The elements, now styled
  */
 ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc ) {
 	// TODO: Remove when fixed upstream in Parsoid (T58756)
@@ -133,8 +131,6 @@ ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc 
 				ve.init.platform.linkCache.styleElement( title, $( this ) );
 			} );
 	}
-
-	return $elements;
 };
 
 /**
