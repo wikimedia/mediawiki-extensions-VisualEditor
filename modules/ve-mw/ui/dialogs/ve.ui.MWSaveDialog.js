@@ -179,10 +179,15 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
-	var body, contents;
+	var body, contents,
+		categories = [];
 
 	if ( docOrMsg instanceof HTMLDocument ) {
 		body = docOrMsg.body;
+		// Take a snapshot of all categories
+		body.querySelectorAll( 'link[rel="mw:PageProp/Category"]' ).forEach( function ( element ) {
+			categories.push( ve.dm.MWCategoryMetaItem.static.toDataElement( [ element ] ).attributes.category );
+		} );
 		// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
 		document.adoptNode( body );
 
@@ -200,6 +205,19 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				contents
 			)
 		);
+
+		if ( categories.length ) {
+			// Simple category list rendering
+			this.$previewViewer.append(
+				$( '<div>' ).addClass( 'catlinks' ).append(
+					document.createTextNode( ve.msg( 'pagecategories', categories.length ) + ve.msg( 'colon-separator' ) ),
+					$( '<ul>' ).append( categories.map( function ( category ) {
+						var title = mw.Title.newFromText( category );
+						return $( '<li>' ).append( $( '<a>' ).attr( 'href', title.getUrl() ).text( title.getMainText() ) );
+					} ) )
+				)
+			);
+		}
 
 		// Run hooks so other things can alter the document
 		mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
