@@ -175,15 +175,40 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 /**
  * Set preview content and show preview panel.
  *
- * @param {jQuery} content Preview content
- * @param {HTMLDocument} baseDoc Base document against which to normalise links
+ * @param {HTMLDocument|string} docOrMsg Document to preview, or error message
+ * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
-ve.ui.MWSaveDialog.prototype.showPreview = function ( content, baseDoc ) {
-	this.$previewViewer.empty().append( content );
-	// Run styles so links render with their appropriate classes
-	ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
-	// Run hooks so other things can alter the document
-	mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
+ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
+	var body, contents;
+
+	if ( docOrMsg instanceof HTMLDocument ) {
+		body = docOrMsg.body;
+		// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
+		document.adoptNode( body );
+
+		// TODO: This code is very similar to ve.ui.PreviewElement+ve.ui.MWPreviewElement
+		ve.resolveAttributes( body, docOrMsg, ve.dm.Converter.static.computedAttributes );
+		ve.targetLinksToNewWindow( body );
+		// Add styles so links render with their appropriate classes
+		ve.init.platform.linkCache.styleParsoidElements( $( body ), baseDoc );
+
+		// Remove metadata
+		contents = ve.filterMetaElements( Array.prototype.slice.call( body.childNodes ) );
+
+		this.$previewViewer.empty().append(
+			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
+				contents
+			)
+		);
+
+		// Run hooks so other things can alter the document
+		mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
+	} else {
+		this.$previewViewer.empty().append(
+			$( '<em>' ).text( docOrMsg )
+		);
+	}
+
 	this.popPending();
 	this.swapPanel( 'preview' );
 };
@@ -565,7 +590,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		scrollable: true,
 		padded: true
 	} );
-	this.$previewViewer = $( '<div>' ).addClass( 'mw-body-content mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir );
+	this.$previewViewer = $( '<div>' ).addClass( 'mw-body-content' );
 	this.previewPanel.$element
 		// Make focusable for keyboard accessible scrolling
 		.prop( 'tabIndex', 0 )

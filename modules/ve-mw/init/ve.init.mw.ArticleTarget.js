@@ -996,26 +996,19 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {
-			var doc, body,
+			var doc,
 				baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
 
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
 				doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
-				body = doc.body;
-				// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
-				document.adoptNode( body );
-				// TODO: This code is very similar to ve.ui.PreviewElement
-				ve.resolveAttributes( body, doc, ve.dm.Converter.static.computedAttributes );
-				ve.targetLinksToNewWindow( body );
-				target.saveDialog.showPreview( $( body ).contents(), baseDoc );
+				target.saveDialog.showPreview( doc, baseDoc );
 
 			} else {
 				target.saveDialog.showPreview(
-					$( '<em>' ).text( ve.msg(
+					ve.msg(
 						'visualeditor-loaderror-message',
 						ve.getProp( details, 'error', 'info' ) || 'Failed to connect'
-					) ),
-					baseDoc
+					)
 				);
 			}
 			target.bindSaveDialogClearDiff();
