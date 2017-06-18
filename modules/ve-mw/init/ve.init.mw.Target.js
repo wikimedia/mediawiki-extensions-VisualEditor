@@ -485,7 +485,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 
 	// Optimise as a no-op
 	if ( params.html === '' ) {
-		return '';
+		return $.Deferred().resolve( '' );
 	}
 
 	if ( useRevision === undefined || useRevision ) {
