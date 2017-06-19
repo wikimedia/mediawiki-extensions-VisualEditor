@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Kening Aldgilles",
-			"Robin0van0der0vliet"
+			"Robin0van0der0vliet",
+			"Robin van der Vliet",
+			"Sjoerddebruin"
 		]
 	},
-	"tooltip-ca-ve-edit": "Dizze side mei fisuele tekstferwurker bewurkje",
-	"visualeditor-beta-appendix": "bêta",
+	"tooltip-ca-ve-edit": "Dizze side bewurkje",
 	"visualeditor-beta-label": "bêta",
 	"visualeditor-ca-createsource": "Boarnekoade oanmeitsje",
 	"visualeditor-ca-editsource": "Boarne bewurkje",
@@ -32,23 +33,17 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nee",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ja",
 	"visualeditor-dialog-meta-title": "Opsjes",
-	"visualeditor-dialog-reference-options-section": "Opsjes",
-	"visualeditor-dialog-referenceslist-title": "List mei referinsjes",
 	"visualeditor-dialog-transclusion-title": "Transklúzje",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
 	"visualeditor-dialogbutton-meta-tooltip": "Side ynstellingen",
-	"visualeditor-dialogbutton-reference-tooltip": "Basis",
-	"visualeditor-dialogbutton-referenceslist-tooltip": "List mei referinsjes",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transklúzje",
 	"visualeditor-formatdropdown-format-mw-heading1": "Namme fan side",
 	"visualeditor-languages-tool": "Talen",
 	"visualeditor-meta-tool": "Opsjes",
 	"visualeditor-mweditmodesource-warning-cancel": "Annulearje",
 	"visualeditor-savedialog-label-error": "Flater",
-	"visualeditor-savedialog-label-save": "Side bewarje",
 	"visualeditor-savedialog-label-warning": "Warskôging",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
-	"visualeditor-savedialog-title-nochanges": "Gjin feroaringen sjen litte",
 	"visualeditor-toolbar-savedialog": "Side bewarje",
 	"visualeditor-version-label": "Ferzje"
 }
