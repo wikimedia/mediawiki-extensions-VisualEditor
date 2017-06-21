@@ -551,7 +551,9 @@
 				"accesskey-save",
 				"accesskey-minoredit",
 				"accesskey-watch",
+				"colon-separator",
 				"newsectionsummary",
+				"pagecategories",
 				"tooltip-minoredit",
 				"tooltip-watch",
 				"visualeditor-diff-no-changes"
