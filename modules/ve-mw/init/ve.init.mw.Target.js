@@ -191,8 +191,11 @@ ve.init.mw.Target.prototype.createModelFromDom = function () {
 ve.init.mw.Target.static.parseDocument = function ( documentString, mode ) {
 	var doc;
 	if ( mode === 'source' ) {
+		// Add trailing linebreak to wikitext documents for consistency
+		// with old editor and usability. Will be stripped on save. T156609
+		documentString += '\n';
 		// Parent method
-		doc = ve.init.mw.Target.super.static.parseDocument.apply( this, arguments );
+		doc = ve.init.mw.Target.super.static.parseDocument.call( this, documentString, mode );
 	} else {
 		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
