@@ -62,13 +62,15 @@ OO.inheritClass( ve.ui.MWTocWidget, OO.ui.Widget );
  * @param {ve.dm.MetaItem} metaItem
  */
 ve.ui.MWTocWidget.prototype.onMetaListInsert = function ( metaItem ) {
+	var property;
 	// Responsible for adding UI components
-	if ( metaItem instanceof ve.dm.MWTOCForceMetaItem ) {
-		// show
-		this.mwTOCForce = true;
-	} else if ( metaItem instanceof ve.dm.MWTOCDisableMetaItem ) {
-		// hide
-		this.mwTOCDisable = true;
+	if ( metaItem instanceof ve.dm.MWTOCMetaItem ) {
+		property = metaItem.getAttribute( 'property' );
+		if ( property === 'mw:PageProp/forcetoc' ) {
+			this.mwTOCForce = true;
+		} else if ( property === 'mw:PageProp/notoc' ) {
+			this.mwTOCDisable = true;
+		}
 	}
 	this.updateVisibility();
 };
@@ -79,10 +81,14 @@ ve.ui.MWTocWidget.prototype.onMetaListInsert = function ( metaItem ) {
  * @param {ve.dm.MetaItem} metaItem
  */
 ve.ui.MWTocWidget.prototype.onMetaListRemove = function ( metaItem ) {
-	if ( metaItem instanceof ve.dm.MWTOCForceMetaItem ) {
-		this.mwTOCForce = false;
-	} else if ( metaItem instanceof ve.dm.MWTOCDisableMetaItem ) {
-		this.mwTOCDisable = false;
+	var property;
+	if ( metaItem instanceof ve.dm.MWTOCMetaItem ) {
+		property = metaItem.getAttribute( 'property' );
+		if ( property === 'mw:PageProp/forcetoc' ) {
+			this.mwTOCForce = false;
+		} else if ( property === 'mw:PageProp/notoc' ) {
+			this.mwTOCDisable = false;
+		}
 	}
 	this.updateVisibility();
 };
