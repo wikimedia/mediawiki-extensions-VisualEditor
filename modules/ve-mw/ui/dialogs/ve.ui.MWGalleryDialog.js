@@ -125,6 +125,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 	this.$highlightedImage = $( '<div>' )
 		.addClass( 've-ui-mwGalleryDialog-highlighted-image' );
+	this.filenameFieldset.$element.append( this.$highlightedImage );
 	// TODO: make into a ve.ui.MWTargetWidget once Parsoid handles galleries
 	this.highlightedCaptionInput = new OO.ui.TextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-mwgallerydialog-image-caption-placeholder' ),
@@ -133,8 +134,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 	this.highlightedCaptionFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
-		icon: 'parameter',
-		classes: [ 've-ui-mwGalleryDialog-caption-fieldset' ]
+		icon: 'parameter'
 	} );
 	this.highlightedCaptionFieldset.$element.append( this.highlightedCaptionInput.$element );
 	this.removeButton = new OO.ui.ButtonWidget( {
@@ -255,7 +255,6 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	);
 	menuLayout.$content.append(
 		this.editPanel.$element.append(
-			this.$highlightedImage,
 			this.filenameFieldset.$element,
 			this.highlightedCaptionFieldset.$element,
 			this.removeButton.$element

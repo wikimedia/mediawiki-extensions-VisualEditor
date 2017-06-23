@@ -27,9 +27,9 @@
 	box-shadow: inset 0 0 0 0.1em #36c;
 }
 
-/* HACK: Override ooui specific 2em top margin */
-.ve-ui-mwGalleryDialog-caption-fieldset.oo-ui-labelElement.oo-ui-fieldsetLayout {
-	margin-top: 0;
+.ve-ui-mwGalleryDialog .oo-ui-fieldsetLayout + .oo-ui-fieldsetLayout,
+.ve-ui-mwGalleryDialog-remove-button {
+	margin-top: 1em;
 }
 
 .ve-ui-mwGalleryDialog-highlighted-image {
@@ -40,11 +40,6 @@
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	background-size: contain;
-	margin-bottom: 0.5em;
-}
-
-.ve-ui-mwGalleryDialog-remove-button {
-	margin-top: 0.5em;
 }
 
 .ve-ui-mwGalleryDialog-menuLayout > .oo-ui-menuLayout-menu {
