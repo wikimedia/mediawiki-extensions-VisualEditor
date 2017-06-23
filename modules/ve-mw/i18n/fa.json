@@ -28,6 +28,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
+	"apihelp-visualeditor-summary": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
 	"apihelp-visualeditor-param-basetimestamp": "هنگام ذخیره کردن، زمان نسخهٔ ویرایش شده را برای این مورد تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditor-param-cachekey": "برای پیوند تفاوت، از نتیجه درخواست تفاوت پیشین به کمک این کلید استفاده کنید. بازنویسی $1html.",
 	"apihelp-visualeditor-param-editintro": "ویرایش بخش ابتدایی برای افزودن هشدارها.",
@@ -41,6 +42,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "در زمان ذخیره کردن، این را برای زمان بارگیری نسخه تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditor-param-wikitext": "متن ویکی برای ارسال به پارسوید برای تبدیل به اچ‌تی‌ام‌ال (paction=parsefragment).",
 	"apihelp-visualeditoredit-description": "ذخیره صفحه HTML5 به مدیاویکی (تبدیل به متن ویکی با سرویس پارسوید)",
+	"apihelp-visualeditoredit-summary": "ذخیره صفحه HTML5 به مدیاویکی (تبدیل به متن ویکی با سرویس پارسوید)",
 	"apihelp-visualeditoredit-param-basetimestamp": "در زمان ذخیره کردن، این را برای زمان نسخهٔ ویرایش تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditoredit-param-cachekey": "از نتیجه درخواست تفاوت پیشین به کمک این کلید استفاده کنید. بازنویسی $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "ID تصویر امنیتی (زمان ذخیره با پاسخ یک تصویر امنیتی)",
@@ -63,6 +65,7 @@
 	"apierror-visualeditor-invaliddeflate": "محتوی تهیه شده به صورت درست خالی نشده‌است",
 	"apierror-visualeditor-latestnotfound": "آخرین نسخه برای عنوان یافت نشد",
 	"collabpad": "CollabPad",
+	"collabpad-doctitle": "CollabPad: $1",
 	"tooltip-ca-createsource": "ساخت کد متن این صفحه.",
 	"tooltip-ca-edit": "این صفحه را با استفاده از ویکی‌متن ویرایش کنید",
 	"tooltip-ca-editsource": "ویرایش کد متن این صفحه.",
