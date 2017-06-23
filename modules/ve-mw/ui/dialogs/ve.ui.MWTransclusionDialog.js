@@ -244,7 +244,7 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 		this.setSize( single ? 'medium' : 'large' );
 		this.bookletLayout.toggleOutline( !single );
 		this.updateTitle();
-		this.updateModeActionLabel();
+		this.updateModeActionState();
 
 		// HACK blur any active input so that its dropdown will be hidden and won't end
 		// up being mispositioned
@@ -265,10 +265,11 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
 };
 
 /**
- * Update the label for the 'mode' action
+ * Update the state of the 'mode' action
  */
-ve.ui.MWTransclusionDialog.prototype.updateModeActionLabel = function () {
-	var mode = this.mode;
+ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
+	var parts = this.transclusionModel && this.transclusionModel.getParts(),
+		mode = this.mode;
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
 		action.setLabel(
 			mode === 'single' ?
@@ -276,6 +277,26 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionLabel = function () {
 				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
 		);
 	} );
+
+	// Decide whether the button should be enabled or not. It needs to be:
+	// * disabled when we're in the initial add-new-template phase, because it's
+	//   meaningless
+	// * disabled if we're in a multi-part transclusion, because the sidebar's
+	//   forced open
+	// * enabled if we're in a single-part transclusion, because the sidebar's
+	//   closed but can be opened to add more parts
+	if ( parts ) {
+		if ( parts.length === 1 && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) {
+			// Initial new-template phase: button is meaningless
+			this.actions.setAbilities( { mode: false } );
+		} else if ( !this.isSingleTemplateTransclusion() ) {
+			// Multi-part transclusion: button disabled because sidebar forced-open
+			this.actions.setAbilities( { mode: false } );
+		} else {
+			// Single-part transclusion: button enabled because sidebar is optional
+			this.actions.setAbilities( { mode: true } );
+		}
+	}
 };
 
 /**
@@ -358,8 +379,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			this.setMode( 'single' );
-			this.updateModeActionLabel();
-			this.actions.setAbilities( { mode: false } );
+			this.updateModeActionState();
 		}, this );
 };
 
