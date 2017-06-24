@@ -1181,7 +1181,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.clearPreparedCacheKey();
 	this.loading = false;
 	this.saving = false;
-	this.wikitextDiffPromise = null;
+	this.clearDiff();
 	this.serializing = false;
 	this.submitting = false;
 	this.baseTimeStamp = null;
@@ -1634,14 +1634,23 @@ ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
 	var target = this;
 	// Invalidate the viewer diff on next change
 	this.getSurface().getModel().getDocument().once( 'transact', function () {
-		target.saveDialog.clearDiff();
-		target.wikitextDiffPromise = null;
+		target.clearDiff();
 	} );
 	this.saveDialog.setDiffAndReview(
 		this.getWikitextDiffPromise( doc ),
 		this.getVisualDiffGeneratorPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
+};
+
+/**
+ * Clear all state associated with the diff
+ */
+ve.init.mw.ArticleTarget.prototype.clearDiff = function () {
+	if ( this.saveDialog ) {
+		this.saveDialog.clearDiff();
+	}
+	this.wikitextDiffPromise = null;
 };
 
 /**
@@ -2295,6 +2304,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
  */
 ve.init.mw.ArticleTarget.prototype.reloadSurface = function ( newMode, dataPromise ) {
 	this.setDefaultMode( newMode );
+	this.clearDiff();
 	// Create progress - will be discarded when surface is destroyed.
 	this.getSurface().createProgress(
 		$.Deferred().promise(),
