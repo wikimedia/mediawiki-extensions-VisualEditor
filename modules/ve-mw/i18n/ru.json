@@ -39,7 +39,8 @@
 			"Julia kotlyarker",
 			"INS Pirat",
 			"Redredsonia",
-			"Facenapalm"
+			"Facenapalm",
+			"Jack who built the house"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
@@ -202,7 +203,7 @@
 	"visualeditor-dialog-table-wikitable": "С использованием стилей (wikitable)",
 	"visualeditor-dialog-template-title": "Шаблон",
 	"visualeditor-dialog-transclusion-add-content": "Добавить содержимое",
-	"visualeditor-dialog-transclusion-add-param": "Добавить ещё информации",
+	"visualeditor-dialog-transclusion-add-param": "Добавить ещё информацию",
 	"visualeditor-dialog-transclusion-add-template": "Добавить шаблон",
 	"visualeditor-dialog-transclusion-content": "Содержимое",
 	"visualeditor-dialog-transclusion-contextitem-description": "Сгенерировано из: $1",
@@ -242,8 +243,8 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сообщение|сообщения|сообщений}}",
 	"visualeditor-editnotices-tooltip": "Заметки по редактированию",
 	"visualeditor-editsummary": "Опишите внесённые изменения",
-	"visualeditor-editsummary-bytes-remaining": "Количество оставшихся байт",
-	"visualeditor-educationpopup-dismiss": "Ок, понятно",
+	"visualeditor-editsummary-bytes-remaining": "Количество оставшихся байтов",
+	"visualeditor-educationpopup-dismiss": "Окей, понятно",
 	"visualeditor-feedback-defaultmessage": "URL-адрес: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Заголовок страницы",
 	"visualeditor-formatdropdown-format-mw-heading2": "Заголовок",
@@ -278,6 +279,7 @@
 	"visualeditor-mweditmode-tooltip": "Переключить редактор",
 	"visualeditor-mweditmodesource-progress": "Переход к редактированию исходного текста…",
 	"visualeditor-mweditmodesource-title": "Перейти к редактированию исходного текста?",
+	"visualeditor-mweditmodesource-tool-current": "Редактирование вики-текста",
 	"visualeditor-mweditmodesource-tool-unavailable": "Редактирование источника не разрешено",
 	"visualeditor-mweditmodesource-warning": "Вы переходите к редактированию исходного текста.\nВы хотите продолжить?",
 	"visualeditor-mweditmodesource-warning-cancel": "Отмена",
