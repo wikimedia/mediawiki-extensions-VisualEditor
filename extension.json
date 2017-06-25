@@ -47,6 +47,7 @@
 		},
 		"VisualEditorUseChangeTagging": true,
 		"VisualEditorEnableWikitext": false,
+		"VisualEditorEnableDiffPage": false,
 		"VisualEditorUseSingleEditTab": false,
 		"VisualEditorSingleEditTabSwitchTime": 20160101000000,
 		"VisualEditorTabPosition": "before",
@@ -124,6 +125,9 @@
 		],
 		"SkinEditSectionLinks": [
 			"VisualEditorHooks::onSkinEditSectionLinks"
+		],
+		"DiffViewHeader": [
+			"VisualEditorHooks::onDiffViewHeader"
 		],
 		"GetBetaFeaturePreferences": [
 			"VisualEditorHooks::onGetBetaPreferences"
@@ -1855,6 +1859,25 @@
 			"targets": [
 				"desktop",
 				"mobile"
+			]
+		},
+		"ext.visualEditor.diffPage.init.styles": {
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.DiffPage.less"
+			]
+		},
+		"ext.visualEditor.diffPage.init": {
+			"scripts": [
+				"modules/ve-mw/init/ve.init.mw.DiffPage.init.js"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"oojs-ui.styles.icons-alerts",
+				"oojs-ui.styles.icons-editing-advanced"
+			],
+			"messages": [
+				"visualeditor-savedialog-review-visual",
+				"visualeditor-savedialog-review-wikitext"
 			]
 		},
 		"ext.visualEditor.language": {
