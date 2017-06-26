@@ -25,15 +25,6 @@
 	transform: translateY( 0 );
 }
 
-.ve-init-mw-desktopArticleTarget-toolbar-opened > .oo-ui-toolbar-bar {
-	/* Reset trasnform once open to avoid breaking z-index */
-	transform: none;
-}
-
-.ve-ui-toolbar-floating > .oo-ui-toolbar-bar {
-	z-index: 4;
-}
-
 /*!
  * ve-redirect-header is added just outside of the surface, which has its own
  * hiding style during activation.
