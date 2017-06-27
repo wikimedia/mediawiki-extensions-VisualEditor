@@ -1847,6 +1847,7 @@
 			"messages": [
 				"visualeditor-changedesc-align",
 				"visualeditor-changedesc-changed",
+				"visualeditor-changedesc-comment",
 				"visualeditor-changedesc-image-size",
 				"visualeditor-changedesc-language",
 				"visualeditor-changedesc-link-href",
