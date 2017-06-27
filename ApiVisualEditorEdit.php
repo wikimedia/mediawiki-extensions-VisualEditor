@@ -314,7 +314,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 						// Defer till after the RC row is inserted
 						// @TODO: doEditContent should let callers specify desired tags
 						$tag = $params['wikitext'] ? 'visualeditor-wikitext' : 'visualeditor';
-						DeferredUpdates::addCallableUpdate( function() use ( $tag, $newRevId ) {
+						DeferredUpdates::addCallableUpdate( function () use ( $tag, $newRevId ) {
 							ChangeTags::addTags( $tag, null, $newRevId, null );
 						} );
 					}
