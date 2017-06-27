@@ -16,26 +16,27 @@
  * @param {ve.dm.MWInlineImageNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode() {
-	var isError, $image;
-	// Parent constructor
-	ve.ce.MWInlineImageNode.super.apply( this, arguments );
+ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
+	var $image;
 
-	isError = this.model.getAttribute( 'isError' );
-
-	if ( isError ) {
+	if ( model.getAttribute( 'isError' ) ) {
 		this.$element = $( '<a>' )
 			.addClass( 'new' )
-			.text( this.model.getFilename() );
+			.text( model.getFilename() );
 		$image = $( [] );
 	} else {
-		if ( this.model.getAttribute( 'isLinked' ) ) {
+		if ( model.getAttribute( 'isLinked' ) ) {
 			this.$element = $( '<a>' ).addClass( 'image' );
 			$image = $( '<img>' ).appendTo( this.$element );
 		} else {
 			this.$element = $image = $( '<img>' ).appendTo( this.$element );
 		}
 	}
+
+	// Parent constructor
+	// this.$element has already been created and styled, so pass through as config.$element
+	// The constructor will add more classes to this.$element, such as ve-ce-leafNode
+	ve.ce.MWInlineImageNode.super.call( this, model, ve.extendObject( {}, config, { $element: this.$element } ) );
 
 	// Mixin constructors
 	ve.ce.MWImageNode.call( this, this.$element, $image );

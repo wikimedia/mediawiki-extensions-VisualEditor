@@ -650,6 +650,13 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
+		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
+			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
+			'<a class="image ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false">' +
+				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
+			'</a>' +
+			ve.dm.example.inlineSlug +
+			'</p>',
 		storeItems: ve.dm.mwExample.MWInlineImage.storeItems
 	},
 	'mwHeading and mwPreformatted nodes': {

@@ -971,6 +971,7 @@ class VisualEditorHooks {
 				// VisualEditor ContentEditable Tests
 				'lib/ve/tests/ce/ve.ce.test.js',
 				'lib/ve/tests/ce/ve.ce.Document.test.js',
+				'modules/ve-mw/tests/ce/ve.ce.Document.test.js',
 				'lib/ve/tests/ce/ve.ce.Surface.test.js',
 				'modules/ve-mw/tests/ce/ve.ce.Surface.test.js',
 				'lib/ve/tests/ce/ve.ce.RangeState.test.js',
