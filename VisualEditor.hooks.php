@@ -79,8 +79,8 @@ class VisualEditorHooks {
 
 	public static function onDiffViewHeader(
 		DifferenceEngine $diff,
-		Revision $oldRev,
-		Revision $newRev
+		/* Revision */ $oldRev,
+		/* Revision */ $newRev
 	) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$output = RequestContext::getMain()->getOutput();
