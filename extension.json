@@ -1617,6 +1617,7 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryItemWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryWidget.css",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMetaDialog.css"
 			],
 			"dependencies": [
