@@ -1973,7 +1973,8 @@
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantNode.js",
-				"modules/ve-mw/ui/contextitems/ve.ui.MWLanguageVariantNodeContextItem.js"
+				"modules/ve-mw/ui/contextitems/ve.ui.MWLanguageVariantNodeContextItem.js",
+				"modules/ve-mw/ui/inspectors/ve.ui.MWLanguageVariantInspector.js"
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWLanguageVariantNodeContextItem.css",
@@ -2004,7 +2005,24 @@
 				"visualeditor-mwlanguagevariantcontextitem-title-name",
 				"visualeditor-mwlanguagevariantcontextitem-title-oneway",
 				"visualeditor-mwlanguagevariantcontextitem-title-twoway",
-				"visualeditor-mwlanguagevariantcontextitem-title-unknown"
+				"visualeditor-mwlanguagevariantcontextitem-title-unknown",
+				"visualeditor-mwlanguagevariantinspector-disabled-placeholder",
+				"visualeditor-mwlanguagevariantinspector-filter-langs-label",
+				"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder",
+				"visualeditor-mwlanguagevariantinspector-filter-text-label",
+				"visualeditor-mwlanguagevariantinspector-filter-text-placeholder",
+				"visualeditor-mwlanguagevariantinspector-oneway-add-button",
+				"visualeditor-mwlanguagevariantinspector-oneway-clear-button",
+				"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder",
+				"visualeditor-mwlanguagevariantinspector-oneway-to-text-placeholder",
+				"visualeditor-mwlanguagevariantinspector-title-disabled",
+				"visualeditor-mwlanguagevariantinspector-title-filter",
+				"visualeditor-mwlanguagevariantinspector-title-name",
+				"visualeditor-mwlanguagevariantinspector-title-oneway",
+				"visualeditor-mwlanguagevariantinspector-title-twoway",
+				"visualeditor-mwlanguagevariantinspector-twoway-add-button",
+				"visualeditor-mwlanguagevariantinspector-twoway-clear-button",
+				"visualeditor-mwlanguagevariantinspector-twoway-text-placeholder"
 			],
 			"targets": [
 				"desktop",
