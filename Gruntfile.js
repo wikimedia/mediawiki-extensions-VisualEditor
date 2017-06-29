@@ -131,6 +131,7 @@ module.exports = function ( grunt ) {
 		stylelint: {
 			all: [
 				'**/*.css',
+				'**/*.less',
 				'!coverage/**',
 				'!dist/**',
 				'!docs/**',
