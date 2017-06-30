@@ -28,6 +28,8 @@ OO.inheritClass( ve.init.mw.ImageInfoCache, ve.init.mw.ApiResponseCache );
 ve.init.mw.ImageInfoCache.static.processPage = function ( page ) {
 	if ( page.imageinfo ) {
 		return page.imageinfo[ 0 ];
+	} else if ( 'missing' in page ) {
+		return { missing: true };
 	}
 };
 

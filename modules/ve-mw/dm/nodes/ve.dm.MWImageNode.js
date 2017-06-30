@@ -260,7 +260,7 @@ ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
 	// original dimensions from the API.
 	if ( ve.init.platform.imageInfoCache ) {
 		return ve.init.platform.imageInfoCache.get( filename ).then( function ( info ) {
-			if ( !info ) {
+			if ( !info || info.missing ) {
 				return $.Deferred().reject().promise();
 			}
 			return info;

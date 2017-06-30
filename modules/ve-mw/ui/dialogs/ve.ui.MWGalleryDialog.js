@@ -448,6 +448,7 @@ ve.ui.MWGalleryDialog.prototype.getBodyHeight = function () {
  * Request the images for the images tab panel menu
  *
  * @param {Object} options Options for the request
+ * @return {jQuery.Promise} Promise which resolves when image data has been fetched
  */
 ve.ui.MWGalleryDialog.prototype.requestImages = function ( options ) {
 	var i, len,
