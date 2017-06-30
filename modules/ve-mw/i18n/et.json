@@ -138,7 +138,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Kui vaja",
 	"visualeditor-dialog-meta-settings-toc-disable": "Mitte kunagi",
 	"visualeditor-dialog-meta-settings-toc-force": "Alati",
-	"visualeditor-dialog-meta-settings-toc-help": "Saad teha nii, et kõiki selle lehekülje pealkirju sisaldavat sisukorda näidatakse ka siis, kui pealkirju on alla kolme, või nii, et sisukorda ei näidata üldse. Vaikimisi on sisukord nähtav, kui leheküljel on vähemalt kolm pealkirja.",
+	"visualeditor-dialog-meta-settings-toc-help": "Saad teha nii, et kõiki selle lehekülje pealkirju sisaldavat sisukorda näidatakse ka siis, kui pealkirju on alla nelja, või nii, et sisukorda ei näidata üldse. Vaikimisi on sisukord nähtav, kui leheküljel on vähemalt neli pealkirja.",
 	"visualeditor-dialog-meta-settings-toc-label": "Sisukorra näitamine",
 	"visualeditor-dialog-meta-templatesused-noresults": "Ei leitud ühtegi malli.",
 	"visualeditor-dialog-meta-title": "Suvandid",
