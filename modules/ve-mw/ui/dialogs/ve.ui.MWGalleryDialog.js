@@ -408,11 +408,16 @@ ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
+			// Widgets
 			this.galleryGroup.clearItems();
-			this.highlightedItem = null;
 			this.searchWidget.getQuery().setValue( '' );
 			this.searchWidget.teardown();
+
+			// States
+			this.highlightedItem = null;
 			this.searchPanelVisible = false;
+			this.selectedFilenames = {};
+			this.initialImageData = [];
 
 			// Disconnect events
 			this.indexLayout.disconnect( this );
