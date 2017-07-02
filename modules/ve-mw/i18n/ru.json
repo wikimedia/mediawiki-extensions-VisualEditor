@@ -305,6 +305,7 @@
 	"visualeditor-mwgallerydialog-heights-input-placeholder": "Высота по умолчанию: $1 px",
 	"visualeditor-mwgallerydialog-image-caption-placeholder": "Заголовок изображения",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "Слайд-шоу",
+	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "Традиционный",
 	"visualeditor-mwgallerydialog-mode-field-label": "Режим отображения",
 	"visualeditor-mwgallerydialog-remove-button-label": "Удалить изображения",
 	"visualeditor-mwgallerydialog-perrow-field-label": "Изображений в строке",
