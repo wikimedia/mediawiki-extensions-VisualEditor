@@ -19,7 +19,7 @@ ve.ce.MWWikitextSurface = function VeCeMwWikitextSurface() {
 	// Parent constructors
 	ve.ce.MWWikitextSurface.super.apply( this, arguments );
 
-	this.pasteTargetInput = new OO.ui.TextInputWidget( { multiline: true } );
+	this.pasteTargetInput = new OO.ui.MultilineTextInputWidget();
 };
 
 /* Inheritance */
