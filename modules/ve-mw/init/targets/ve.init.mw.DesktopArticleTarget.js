@@ -66,8 +66,8 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		currentUri.query.diff === undefined
 	);
 
-	if ( $( '#wpTextbox1' ).length ) {
-		// We're loading on top of the classic wikitext editor, so we don't
+	if ( !this.isViewPage ) {
+		// We're loading on top of a non-view page so we don't
 		// know the "proper" page title. But we can fake it with information
 		// we have.
 		this.originalDocumentTitle = ve.msg( 'pagetitle', mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText() );
