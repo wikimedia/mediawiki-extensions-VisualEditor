@@ -339,10 +339,12 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
  * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
 ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
-	var i, len, partsList = this.getPartsList();
+	var i, len,
+		templateNS = mw.config.get( 'wgNamespaceIds' ).template,
+		partsList = this.getPartsList();
 
-	function normalizeTitle( name ) {
-		var title = mw.Title.newFromText( name );
+	function normalizeTemplateTitle( name ) {
+		var title = mw.Title.newFromText( name, templateNS );
 		return title ? title.getPrefixedText() : name;
 	}
 
@@ -358,7 +360,7 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
 	for ( i = 0, len = templates.length; i < len; i++ ) {
 		if (
 			partsList[ 0 ].templatePage &&
-			partsList[ 0 ].templatePage === normalizeTitle( templates[ i ] )
+			partsList[ 0 ].templatePage === normalizeTemplateTitle( templates[ i ] )
 		) {
 			return true;
 		}
