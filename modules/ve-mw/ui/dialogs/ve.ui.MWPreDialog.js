@@ -58,7 +58,6 @@ ve.ui.MWPreDialog.prototype.initialize = function () {
 	} );
 	// Note that this overrides this.input from ve.ui.MWExtensionWindow
 	this.input = new ve.ui.MWPreTextInputWidget( {
-		multiline: true,
 		// This number doesn't really matter, it just needs to be large.
 		// The real height is enforced by #getBodyHeight and max-height in CSS.
 		rows: 100,
