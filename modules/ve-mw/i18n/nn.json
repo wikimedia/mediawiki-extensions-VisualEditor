@@ -179,6 +179,7 @@
 	"visualeditor-saveerror": "Det oppstod ein feil under datalagring til tenaren: $1",
 	"visualeditor-serializeerror": "Det oppstod ein feil under datalasting frå tenaren: $1",
 	"visualeditor-settings-tool": "Sideinnstillingar",
+	"visualeditor-special-characters-group-other": "Utval",
 	"visualeditor-templatesused-tool": "Malar brukt",
 	"visualeditor-toolbar-savedialog": "Lagra sida",
 	"visualeditor-toolbar-savedialog-short": "Lagra",

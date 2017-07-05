@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kirsan"
+			"Kirsan",
+			"Kaszeba"
 		]
 	},
-	"tooltip-ca-ve-edit": "Edituj nã starnã.",
-	"visualeditor-ca-createsource": "Ùsadzë zdrzódłowi kòd",
-	"visualeditor-ca-editsource": "Edituj zdrzódłowi kòd"
+	"tooltip-ca-ve-edit": "Editëjë nã starnã.",
+	"visualeditor-ca-createlocaldescriptionsource": "Ùsôdzë zdrojowi kòd lokalnegò òpisënka",
+	"visualeditor-ca-createsource": "Ùsôdzë zdrojowi kòd",
+	"visualeditor-ca-editsource": "Editëjë zdrojowi kòd",
+	"visualeditor-ca-editsource-section": "editëjë zdrój",
+	"visualeditor-descriptionpagelink": "Project:Wizualny Editora"
 }
