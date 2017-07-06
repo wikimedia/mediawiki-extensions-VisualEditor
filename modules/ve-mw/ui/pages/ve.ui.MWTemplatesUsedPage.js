@@ -22,7 +22,7 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 	// Properties
 	this.templatesUsedFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-templatesused-tool' ),
-		icon: 'template'
+		icon: 'puzzle'
 	} );
 
 	if ( ve.init.target.$templatesUsed && ve.init.target.$templatesUsed.find( 'li' ).length ) {
@@ -56,7 +56,7 @@ ve.ui.MWTemplatesUsedPage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'template' )
+			.setIcon( 'puzzle' )
 			.setLabel( ve.msg( 'visualeditor-templatesused-tool' ) );
 	}
 };

@@ -43,7 +43,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.connect( this, { click: 'onRemoveButtonClick' } );
 	this.infoFieldset = new OO.ui.FieldsetLayout( {
 		label: this.spec.getLabel(),
-		icon: 'template'
+		icon: 'puzzle'
 	} );
 	this.addButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -112,7 +112,7 @@ ve.ui.MWTemplatePage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'template' )
+			.setIcon( 'puzzle' )
 			.setMovable( true )
 			.setRemovable( true )
 			.setLabel( this.spec.getLabel() );

@@ -345,7 +345,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	// Properties
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
 		framed: false,
-		icon: 'template',
+		icon: 'puzzle',
 		title: ve.msg( 'visualeditor-dialog-transclusion-add-template' )
 	} );
 	this.addContentButton = new OO.ui.ButtonWidget( {

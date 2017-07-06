@@ -21,9 +21,6 @@
 		"parameter-set": {
 			"file": "../images/icons/parameter-set-ltr.svg"
 		},
-		"template": {
-			"file": "../images/icons/template.svg"
-		},
 		"public-domain": {
 			"file": "../images/icons/public-domain.svg"
 		},

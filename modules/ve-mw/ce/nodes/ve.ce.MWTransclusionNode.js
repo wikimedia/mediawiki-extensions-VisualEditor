@@ -42,7 +42,7 @@ ve.ce.MWTransclusionNode.static.renderHtmlAttributes = false;
 
 ve.ce.MWTransclusionNode.static.primaryCommandName = 'transclusion';
 
-ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'template';
+ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'puzzle';
 
 /* Static Methods */
 

@@ -67,7 +67,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-placeholder' ),
-		icon: 'template',
+		icon: 'puzzle',
 		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
 		items: [ addTemplateActionFieldLayout ]
 	} );
@@ -93,7 +93,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'template' )
+			.setIcon( 'puzzle' )
 			.setMovable( true )
 			.setRemovable( true )
 			.setFlags( [ 'placeholder' ] )
