@@ -83,22 +83,6 @@ ve.ui.MWWikitextSwitchConfirmDialog.prototype.setup = function ( data ) {
 	return ve.ui.MWWikitextSwitchConfirmDialog.super.prototype.setup.call( this, data );
 };
 
-/**
- * @inheritdoc
- */
-ve.ui.MWWikitextSwitchConfirmDialog.prototype.getTeardownProcess = function ( data ) {
-	data = data || {};
-	return ve.ui.MWWikitextSwitchConfirmDialog.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
-			// EVIL HACK - we shouldn't be reaching into the manager for these promises
-			if ( data.action === 'switch' ) {
-				this.manager.closing.resolve( data );
-			} else {
-				this.manager.closing.reject( data );
-			}
-		}, this );
-};
-
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWWikitextSwitchConfirmDialog );
