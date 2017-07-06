@@ -5,10 +5,10 @@
 			"Cgboeree"
 		]
 	},
-	"tooltip-ca-ve-edit": "Cambia esta paje",
-	"visualeditor-ca-createlocaldescriptionsource": "Ajunta fonte local de descrive",
+	"tooltip-ca-ve-edit": "Edita esta paje",
+	"visualeditor-ca-createlocaldescriptionsource": "Ajunta un descrive local (en codigo)",
 	"visualeditor-ca-createsource": "Crea fonte",
-	"visualeditor-ca-editsource": "Edita fonte",
-	"visualeditor-ca-editsource-section": "Edita la fonte",
+	"visualeditor-ca-editsource": "Edita la fonte",
+	"visualeditor-ca-editsource-section": "edita la fonte",
 	"visualeditor-descriptionpagelink": "Project:EditadorVidal"
 }
