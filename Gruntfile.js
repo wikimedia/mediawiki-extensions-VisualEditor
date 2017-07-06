@@ -136,7 +136,8 @@ module.exports = function ( grunt ) {
 				'!dist/**',
 				'!docs/**',
 				'!lib/**',
-				'!node_modules/**'
+				'!node_modules/**',
+				'!vendor/**'
 			]
 		},
 		banana: {
