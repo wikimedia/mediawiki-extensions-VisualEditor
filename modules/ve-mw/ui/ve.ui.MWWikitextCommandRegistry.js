@@ -219,16 +219,20 @@ ve.ui.wikitextCommandRegistry.register(
 	new ve.ui.Command(
 		'insertTable', 'mwWikitext', 'toggleWrapSelection',
 		{
-			args: [ '{| class="wikitable"\n', '\n|}', function () {
-				return '' +
-					'|+ ' + ve.msg( 'visualeditor-table-caption' ) +
-					'\n' +
-					'! ' + ve.msg( 'visualeditor-table-format-header' ) + ' !! ' + ve.msg( 'visualeditor-table-format-header' ) +
-					'\n' +
-					'|-' +
-					'\n' +
-					'| ' + ve.msg( 'visualeditor-table-format-data' ) + ' || ' + ve.msg( 'visualeditor-table-format-data' );
-			} ],
+			args: [
+				[ { type: 'paragraph' } ].concat( '{| class="wikitable"'.split( '' ) ).concat( { type: '/paragraph' } ),
+				[ { type: 'paragraph' } ].concat( '|}'.split( '' ) ).concat( { type: '/paragraph' } ),
+				function () {
+					return '' +
+						'|+ ' + ve.msg( 'visualeditor-table-caption' ) +
+						'\n' +
+						'! ' + ve.msg( 'visualeditor-table-format-header' ) + ' !! ' + ve.msg( 'visualeditor-table-format-header' ) +
+						'\n' +
+						'|-' +
+						'\n' +
+						'| ' + ve.msg( 'visualeditor-table-format-data' ) + ' || ' + ve.msg( 'visualeditor-table-format-data' );
+				}
+			],
 			supportedSelections: [ 'linear' ]
 		}
 	)
