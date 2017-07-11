@@ -30,6 +30,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "从Parsoid服务返回页面的HTML5。",
+	"apihelp-visualeditor-summary": "从Parsoid服务返回页面的HTML5。",
 	"apihelp-visualeditor-param-basetimestamp": "在保存时，将此设置为编辑该修订版本时的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditor-param-cachekey": "对于序列化或版本差异，使用之前的serializeforcache请求与此密钥产生的结果。覆盖$1html。",
 	"apihelp-visualeditor-param-editintro": "编辑介绍以添加至通知中。",
@@ -43,6 +44,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "当保存时，设置它作为页面加载时的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditor-param-wikitext": "要发送至Parsoid以转换成HTML的Wiki文本（paction=parsefragment）。",
 	"apihelp-visualeditoredit-description": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。",
+	"apihelp-visualeditoredit-summary": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。",
 	"apihelp-visualeditoredit-param-basetimestamp": "当保存时，设置它作为编辑的修订的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditoredit-param-cachekey": "使用之前的serializeforcache请求的结果带此密钥。覆盖$1html。",
 	"apihelp-visualeditoredit-param-captchaid": "验证码ID（当带验证码保存时）。",
