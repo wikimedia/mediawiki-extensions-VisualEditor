@@ -1043,6 +1043,7 @@
 			welcomeDialogLocalStorageValue = localStorage.getItem( 've-beta-welcome-dialog' );
 		} catch ( e ) {}
 		if (
+			pageCanLoadEditor &&
 			showWikitextWelcome &&
 			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
 			[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
