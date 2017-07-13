@@ -143,6 +143,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "פארעלטערט פעלד",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "פעלד איז פארעלטערט. $1",
 	"visualeditor-dialog-transclusion-loading": "לאָדט…",
+	"visualeditor-dialog-transclusion-more-template-description": "עס קען זיין נאך עפעס אינפֿארמאַציע וועגן דעם \"$1\" אויף [[{{ns:template}}:$1|זיין בלאַט]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "ווײַזן אפציעס",
 	"visualeditor-dialog-transclusion-no-template-description": "דער \"$1\" מוסטער האט נאך נישט קיין באשרײַבונג, ס׳איז אבער מעגלעך  פאראן אינפארמאציע אויפן [[$1|מוסטער-בלאט]].",
 	"visualeditor-dialog-transclusion-absent-template": "דער \"$1\" מוסטער עקזיסטירט נאך נישט.",

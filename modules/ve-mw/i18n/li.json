@@ -3,9 +3,14 @@
 		"authors": [
 			"Robin0van0der0vliet",
 			"Pahles",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Ooswesthoesbes"
 		]
 	},
+	"tooltip-ca-ve-edit": "Bewirk dees pagina",
+	"visualeditor-ca-createlocaldescriptionsource": "Veug lokaal besjrieving toe (via brón)",
+	"visualeditor-ca-createsource": "Maak bróncode aan",
 	"visualeditor-ca-editsource": "Brónteks bewirke",
-	"visualeditor-ca-editsource-section": "brón bewèrke"
+	"visualeditor-ca-editsource-section": "brón bewèrke",
+	"visualeditor-descriptionpagelink": "Project:Visuelen teksverwirker"
 }
