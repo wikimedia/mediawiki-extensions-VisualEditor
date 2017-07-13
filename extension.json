@@ -1870,11 +1870,20 @@
 				"modules/ve-mw/init/styles/ve.init.mw.DiffPage.less"
 			]
 		},
+		"ext.visualEditor.diffLoader": {
+			"scripts": [
+				"modules/ve-mw/init/ve.init.mw.DiffLoader.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.targetLoader"
+			]
+		},
 		"ext.visualEditor.diffPage.init": {
 			"scripts": [
 				"modules/ve-mw/init/ve.init.mw.DiffPage.init.js"
 			],
 			"dependencies": [
+				"ext.visualEditor.diffLoader",
 				"oojs-ui",
 				"oojs-ui.styles.icons-alerts",
 				"oojs-ui.styles.icons-editing-advanced",
