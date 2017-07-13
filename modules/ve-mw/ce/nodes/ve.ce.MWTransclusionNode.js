@@ -155,7 +155,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 	}
 
 	// Work around https://github.com/jquery/jquery/issues/1997
-	contentNodes = $.parseHTML( response.visualeditor.content, this.getModelHtmlDocument() ) || [];
+	contentNodes = $.parseHTML( response.visualeditor.content, this.model && this.getModelHtmlDocument() ) || [];
 	deferred.resolve( this.constructor.static.filterRendering( contentNodes ) );
 };
 
