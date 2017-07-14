@@ -185,7 +185,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 	if ( docOrMsg instanceof HTMLDocument ) {
 		body = docOrMsg.body;
 		// Take a snapshot of all categories
-		body.querySelectorAll( 'link[rel="mw:PageProp/Category"]' ).forEach( function ( element ) {
+		Array.prototype.forEach.call( body.querySelectorAll( 'link[rel="mw:PageProp/Category"]' ), function ( element ) {
 			categories.push( ve.dm.MWCategoryMetaItem.static.toDataElement( [ element ] ).attributes.category );
 		} );
 		// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
