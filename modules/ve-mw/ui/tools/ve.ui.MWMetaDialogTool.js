@@ -190,7 +190,7 @@ ve.ui.MWTemplatesUsedDialogTool = function VeUiMWTemplatesUsedDialogTool() {
 OO.inheritClass( ve.ui.MWTemplatesUsedDialogTool, ve.ui.WindowTool );
 ve.ui.MWTemplatesUsedDialogTool.static.name = 'templatesUsed';
 ve.ui.MWTemplatesUsedDialogTool.static.group = 'utility';
-ve.ui.MWTemplatesUsedDialogTool.static.icon = 'template';
+ve.ui.MWTemplatesUsedDialogTool.static.icon = 'puzzle';
 ve.ui.MWTemplatesUsedDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-templatesused-tool' );
 ve.ui.MWTemplatesUsedDialogTool.static.commandName = 'meta/templatesUsed';

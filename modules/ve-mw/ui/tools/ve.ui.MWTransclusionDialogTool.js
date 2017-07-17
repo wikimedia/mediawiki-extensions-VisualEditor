@@ -28,7 +28,7 @@ ve.ui.MWTransclusionDialogTool.static.name = 'transclusion';
 
 ve.ui.MWTransclusionDialogTool.static.group = 'object';
 
-ve.ui.MWTransclusionDialogTool.static.icon = 'template';
+ve.ui.MWTransclusionDialogTool.static.icon = 'puzzle';
 
 ve.ui.MWTransclusionDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-template-tooltip' );
