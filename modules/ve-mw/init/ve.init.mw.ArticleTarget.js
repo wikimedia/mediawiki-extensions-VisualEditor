@@ -32,7 +32,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.saveDeferred = null;
 	this.captcha = null;
 	this.docToSave = null;
-	this.originalDmDoc = null;
+	this.originalDmDocPromise = null;
 	this.originalHtml = null;
 	this.toolbarSaveButton = null;
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
@@ -1047,43 +1047,45 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 /**
  * Get a visual diff object for the current document state
  *
- * @return {jQuery.Promise|null} Promise resolving with a generator for a ve.dm.VisualDiff visual diff, or null if not known
+ * @return {jQuery.Promise} Promise resolving with a generator for a ve.dm.VisualDiff visual diff
  */
 ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
-	var deferred, dmDoc,
-		target = this;
+	var target = this;
 
-	if ( this.getSurface().getMode() === 'source' ) {
-		return null;
-	}
-	deferred = $.Deferred();
-	dmDoc = this.getSurface().getModel().getDocument();
+	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( function () {
+		var newRevPromise;
 
-	if ( !this.originalDmDoc ) {
-		if ( !this.fromEditedState ) {
-			this.originalDmDoc = this.constructor.static.createModelFromDom( this.doc, 'visual' );
-		} else {
-			mw.libs.ve.targetLoader.requestParsoidData( this.pageName, {
-				oldId: this.revid,
-				targetName: 'diff'
-			} ).then( function ( response ) {
-				var doc, data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
-				if ( data && typeof data.content === 'string' ) {
-					doc = target.constructor.static.parseDocument( data.content, 'visual' );
-					target.originalDmDoc = target.constructor.static.createModelFromDom( doc, 'visual' );
-					deferred.resolve( function () {
-						return new ve.dm.VisualDiff( target.originalDmDoc, dmDoc );
-					} );
+		if ( !target.originalDmDocPromise ) {
+			if ( !target.fromEditedState && target.getSurface().getMode() === 'visual' ) {
+				// If this.doc was loaded from an un-edited state and in visual mode,
+				// then just parse it to get originalDmDoc, otherwise we need to
+				// re-fetch the HTML
+				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( target.doc, 'visual' ) ).promise();
+			} else {
+				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.pageName );
+			}
+		}
+
+		if ( target.getSurface().getMode() === 'source' ) {
+			newRevPromise = mw.libs.ve.targetLoader.requestParsoidData(
+				mw.config.get( 'wgRelevantPageName' ),
+				{
+					oldId: target.revid,
+					targetName: 'diff',
+					modified: true,
+					wikitext: ve.init.target.getSurface().getDom()
 				}
+			).then( mw.libs.ve.diffLoader.getModelFromResponse );
+
+			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
+		} else {
+			return target.originalDmDocPromise.then( function ( originalDmDoc ) {
+				return function () {
+					return new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getDocument() );
+				};
 			} );
 		}
-	}
-	if ( this.originalDmDoc ) {
-		deferred.resolve( function () {
-			return new ve.dm.VisualDiff( target.originalDmDoc, dmDoc );
-		} );
-	}
-	return deferred.promise();
+	} );
 };
 
 /**
@@ -1183,7 +1185,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.startTimeStamp = null;
 	this.checkboxes = null;
 	this.doc = null;
-	this.originalDmDoc = null;
+	this.originalDmDocPromise = null;
 	this.originalHtml = null;
 	this.toolbarSaveButton = null;
 	this.section = null;

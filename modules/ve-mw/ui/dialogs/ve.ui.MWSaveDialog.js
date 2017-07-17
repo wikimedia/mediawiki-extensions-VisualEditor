@@ -134,7 +134,7 @@ ve.ui.MWSaveDialog.static.actions = [
  * Set review content and show review panel.
  *
  * @param {jQuery.Promise} wikitextDiffPromise Wikitext diff HTML promise
- * @param {jQuery.Promise} [visualDiffGeneratorPromise] Visual diff promise
+ * @param {jQuery.Promise} visualDiffGeneratorPromise Visual diff promise
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links when rendering visualDiff
  */
 ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, visualDiffGeneratorPromise, baseDoc ) {
@@ -142,26 +142,24 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 
 	this.clearDiff();
 
+	function createDiffElement( visualDiff ) {
+		var diffElement = new ve.ui.DiffElement( visualDiff );
+		diffElement.$document.addClass( 'mw-body-content' );
+		// Run styles so links render with their appropriate classes
+		ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
+		return diffElement;
+	}
+
 	// Visual diff
 	this.$reviewVisualDiff.append( new OO.ui.ProgressBarWidget().$element );
-	if ( visualDiffGeneratorPromise ) {
-		// Don't generate the DiffElement until the tab is switched to
-		this.getDiffElementPromise = function () {
-			return visualDiffGeneratorPromise.then( function ( visualDiff ) {
-				var diffElement = new ve.ui.DiffElement( visualDiff() );
-				diffElement.$document.addClass( 'mw-body-content' );
-				// Run styles so links render with their appropriate classes
-				ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
-				return diffElement;
-			} );
-		};
-		this.baseDoc = baseDoc;
-		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( false );
-	} else {
-		// TODO: Support visual diffs in source mode (epic)
-		this.reviewModeButtonSelect.getItemFromData( 'visual' ).setDisabled( true );
-		this.reviewModeButtonSelect.selectItemByData( 'source' );
-	}
+	// Don't generate the DiffElement until the tab is switched to
+	this.getDiffElementPromise = function () {
+		return visualDiffGeneratorPromise.then( function ( visualDiffGenerator ) {
+			return createDiffElement( visualDiffGenerator() );
+		} );
+	};
+
+	this.baseDoc = baseDoc;
 
 	// Wikitext diff
 	this.$reviewWikitextDiff.append( new OO.ui.ProgressBarWidget().$element );
