@@ -325,6 +325,9 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 
 	documentView = surface.getView().getDocument();
 
+	// T164790
+	documentView.getDocumentNode().$element.addClass( 'mw-parser-output' );
+
 	function onLangChange() {
 		// Add appropriately mw-content-ltr or mw-content-rtl class
 		documentView.getDocumentNode().$element
