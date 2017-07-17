@@ -1055,6 +1055,11 @@
 					welcomeDialogLocalStorageValue === null &&
 					$.cookie( 've-beta-welcome-dialog' ) === null
 				)
+			) &&
+			(
+				// Not on protected pages
+				mw.config.get( 'wgIsProbablyEditable' ) ||
+				mw.config.get( 'wgRelevantPageIsProbablyEditable' )
 			)
 		) {
 			mw.loader.using( 'ext.visualEditor.welcome' ).done( function () {
