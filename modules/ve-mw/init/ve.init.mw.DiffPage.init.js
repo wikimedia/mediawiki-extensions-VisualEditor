@@ -36,8 +36,8 @@
 		var oldRevPromise, newRevPromise, modulePromise, progress,
 			$revSlider = $( '.mw-revslider-container' ),
 			$wikitextDiff = $( 'table.diff[data-mw="interface"]' ),
-			oldId = +( new mw.Uri() ).query.oldid,
-			newId = mw.config.get( 'wgRevisionId' );
+			oldId = mw.config.get( 'wgDiffOldId' ),
+			newId = mw.config.get( 'wgDiffNewId' );
 
 		mode = item.getData();
 
