@@ -92,6 +92,11 @@ class VisualEditorHooks {
 			return;
 		}
 
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $diff->getTitle()->getContentModel() ) ) {
+			return;
+		}
+
 		$output->addModuleStyles( [
 			'ext.visualEditor.diffPage.init.styles',
 			'oojs-ui.styles.icons-alerts',
