@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ibrahim",
-			"AryanSogd"
+			"AryanSogd",
+			"ToJack"
 		]
 	},
 	"tooltip-ca-createsource": "Эҷоди манбаъ ба ин саҳифа",
@@ -59,6 +60,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Забон",
 	"visualeditor-dialog-meta-languages-readonlynote": "Ин як феҳристи саҳифаҳо дар дигар забонҳо мебошад ба ин саҳифа пайвастаанд. Дар ин ҳол, инро танҳо дар матни манбаъ ва ё дар Викидодаҳо вироиш кардан мумкин аст",
 	"visualeditor-dialog-meta-languages-section": "Забонҳо",
+	"visualeditor-dialog-meta-settings-displaytitle": "Сарлавҳаи намоишӣ",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "Сарлавҳаи намоиширо фаъол кардан",
 	"visualeditor-dialog-meta-settings-index-default": "Пешфарз",
 	"visualeditor-dialog-meta-settings-index-disable": "На",
 	"visualeditor-dialog-meta-settings-index-force": "Бале",
@@ -90,8 +93,8 @@
 	"visualeditor-preference-enable": "Дарҷи [[Википедиа:Вироишгари муоинашаванда|вироишгари муоинашаванда]] (танҳо дар фазои аслӣ ва шахсӣ)",
 	"visualeditor-savedialog-label-error": "Хато",
 	"visualeditor-savedialog-label-warning": "Ҳушдор",
+	"visualeditor-savedialog-review-wikitext": "Вики-матн",
 	"visualeditor-savedialog-title-conflict": "Бархурд",
-	"visualeditor-savedialog-title-nochanges": "Ҳеҷ тағийрот барои баррасӣ",
 	"visualeditor-savedialog-title-review": "Тағийроти худро баррасӣ кунед",
 	"visualeditor-savedialog-title-save": "Захираи тағийроти худ",
 	"visualeditor-settings-tool": "Танзимоти саҳифа",

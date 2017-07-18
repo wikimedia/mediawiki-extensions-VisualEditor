@@ -15,7 +15,8 @@
 			"아라",
 			"TheEduGobi",
 			"TheGabrielZaum",
-			"!Silent"
+			"!Silent",
+			"Felipe L. Ewald"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edição visual]]",
@@ -35,6 +36,6 @@
 	"visualeditor-welcomedialog-content": "Todos podem editar, cada ajuda conta.",
 	"visualeditor-welcomedialog-content-thanks": "Obrigado por ajudar o mundo a saber mais!",
 	"visualeditor-welcomedialog-switch": "Alternar para o editor de código-fonte",
-	"visualeditor-welcomedialog-switch-ve": "Alternar para o editor visual",
+	"visualeditor-welcomedialog-switch-ve": "Alternar para o Editor Visual",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bem-vindo|Bem-vinda}} ao site $2"
 }
