@@ -67,7 +67,7 @@
 		var action = topic.split( '.' )[ 1 ],
 			event;
 
-		timeStamp = timeStamp || this.timeStamp;  // I8e82acc12 back-compat
+		timeStamp = timeStamp || this.timeStamp; // I8e82acc12 back-compat
 
 		if ( action === 'init' ) {
 			// Regenerate editingSessionId

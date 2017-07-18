@@ -326,8 +326,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 								} );
 							}
 						}
-					}
-				);
+					} );
 
 				// Populate menu and edit panels
 				this.imagesPromise = this.requestImages( {

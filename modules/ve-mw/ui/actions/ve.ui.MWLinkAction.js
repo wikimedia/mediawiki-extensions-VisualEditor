@@ -84,9 +84,13 @@ ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
 	// * extended with characters banned by EXT_LINK_URL_CLASS: []<>"
 	// * further extended with international close quotes: "'”’›»“‘‹«」』
 	//   https://en.wikipedia.org/wiki/Quotation_mark
+
+	// We could unescape '\[' but better to keep it balanced with '\]'
+	/* eslint-disable no-useless-escape */
 	return /\(/.test( candidate ) ?
-		/[,;.:!?\[\]<>\"\'”’›»“‘‹«」』]+$/ :
-		/[,;.:!?\[\]<>\"\'”’›»“‘‹«」』)]+$/;
+		/[,;.:!?\[\]<>"'”’›»“‘‹«」』]+$/ :
+		/[,;.:!?\[\]<>"'”’›»“‘‹«」』)]+$/;
+	/* eslint-enable no-useless-escape */
 };
 
 /**

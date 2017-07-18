@@ -187,7 +187,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 	}
 	if (
 		!this.allowProtocolInInternal &&
-		/^(?:[a-z][a-z0-9\$\-_@\.&!\*"'\(\),]*:)?\/\//i.test( value.trim() )
+		/^(?:[a-z][a-z0-9$\-_@.&!*"'(),]*:)?\/\//i.test( value.trim() )
 	) {
 		this.linkTypeIndex.setTabPanel( 'external' );
 		// Changing tabPanel focuses and selects the input, so collapse the cursor back to the end.

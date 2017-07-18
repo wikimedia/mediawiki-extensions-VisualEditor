@@ -1226,11 +1226,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	} );
 
 	// Initialize size
-	this.sizeWidget.setSizeType(
-		this.imageModel.isDefaultSize() ?
-		'default' :
-		'custom'
-	);
+	this.sizeWidget.setSizeType( this.imageModel.isDefaultSize() ? 'default' : 'custom' );
 	this.sizeWidget.setDisabled( this.imageModel.getType() === 'frame' );
 
 	// Update default dimensions

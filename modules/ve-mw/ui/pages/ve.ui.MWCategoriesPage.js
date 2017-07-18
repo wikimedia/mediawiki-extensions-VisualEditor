@@ -298,7 +298,8 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 						ve.extendObject( true, {},
 							currentDefaultSortKeyItem.getElement(),
 							newDefaultSortKeyData
-					) );
+						)
+					);
 				}
 			}
 		}

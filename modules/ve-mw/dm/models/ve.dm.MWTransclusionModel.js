@@ -109,8 +109,7 @@
 				page: mw.config.get( 'wgRelevantPageName' ),
 				wikitext: baseNodeClass.static.getWikitext( this.getPlainObject() ),
 				pst: 1
-			} )
-			.then( function ( response ) {
+			} ).then( function ( response ) {
 				var contentNodes;
 
 				if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {

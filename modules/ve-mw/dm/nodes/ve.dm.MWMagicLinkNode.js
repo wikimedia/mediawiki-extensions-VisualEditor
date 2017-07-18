@@ -352,19 +352,19 @@ ve.dm.MWMagicLinkIsbnType.prototype.getHref = function () {
  * @inheritdoc
  */
 ve.dm.MWMagicLinkIsbnType.prototype.matchHref = function ( href ) {
-	var conf, m, normalized;
+	var normalized,
+		conf = mw.config.get( 'wgVisualEditorConfig' ),
+		matches = /^(?:[.]+\/)*([^/]+)\/(\d+[Xx]?)$/.exec( href );
 
-	conf = mw.config.get( 'wgVisualEditorConfig' );
-	m = /^(?:[.]+\/)*([^\/]+)\/(\d+[Xx]?)$/.exec( href );
-	if ( !m ) {
+	if ( !matches ) {
 		return false;
 	}
 	// conf.specialBooksources has localized name for Special:Booksources
-	normalized = ve.decodeURIComponentIntoArticleTitle( m[ 1 ], true ).replace( ' ', '_' );
+	normalized = ve.decodeURIComponentIntoArticleTitle( matches[ 1 ], true ).replace( ' ', '_' );
 	if ( normalized !== 'Special:BookSources' && normalized !== conf.specialBooksources ) {
 		return false;
 	}
-	if ( m[ 2 ] !== this.code ) {
+	if ( matches[ 2 ] !== this.code ) {
 		return false;
 	}
 	return true;

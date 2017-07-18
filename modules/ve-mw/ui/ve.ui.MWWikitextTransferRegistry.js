@@ -27,11 +27,11 @@ ve.ui.mwWikitextTransferRegistry.register(
 ve.init.platform.getInitializedPromise().done( function () {
 	ve.ui.mwWikitextTransferRegistry.register(
 		'externalLink',
-			// [url label]
-			new RegExp(
-				'\\[' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + '\\S+ [^\\]]+\\]',
-				'i'
-			)
+		// [url label]
+		new RegExp(
+			'\\[' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + '\\S+ [^\\]]+\\]',
+			'i'
+		)
 	);
 } );
 

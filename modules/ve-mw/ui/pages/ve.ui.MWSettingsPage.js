@@ -344,7 +344,8 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 						ve.extendObject( true, {},
 							currentRedirectTargetItem.getElement(),
 							newRedirectItemData
-					) );
+						)
+					);
 				}
 			} else {
 				// There was a redirect and is no new one, so remove

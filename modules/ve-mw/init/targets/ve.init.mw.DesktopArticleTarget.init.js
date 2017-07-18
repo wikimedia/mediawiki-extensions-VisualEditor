@@ -568,14 +568,12 @@
 				// when on a diff against the latest version of a page. In that case we mustn't
 				// init without refresh as that'd initialise for the wrong rev id (bug 50925)
 				// and would preserve the wrong DOM with a diff on top.
-				$editsections
-					.find( '.mw-editsection-visualeditor' )
-						.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) );
+				$editsections.find( '.mw-editsection-visualeditor' )
+					.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) );
 				if ( init.isWikitextAvailable ) {
-					$editsections
-						// TOOD: Make this less fragile
-						.find( 'a:not( .mw-editsection-visualeditor )' )
-							.on( 'click', init.onEditSectionLinkClick.bind( init, 'source' ) );
+					// TOOD: Make this less fragile
+					$editsections.find( 'a:not( .mw-editsection-visualeditor )' )
+						.on( 'click', init.onEditSectionLinkClick.bind( init, 'source' ) );
 				}
 			}
 		},

@@ -62,8 +62,8 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 						// without http(s) prefix, we will add that prefix
 						// ourselves
 						!config.href.match( /^(https?:)?\/\// ) ?
-								'//' + config.href :
-								config.href
+							'//' + config.href :
+							config.href
 					)
 					.append( content )
 			);

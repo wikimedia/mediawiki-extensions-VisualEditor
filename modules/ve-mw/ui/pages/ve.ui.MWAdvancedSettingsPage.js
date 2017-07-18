@@ -315,7 +315,8 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 						ve.extendObject( true, {},
 							currentDisplayTitleItem.getElement(),
 							newDisplayTitleItem
-					) );
+						)
+					);
 				}
 			} else {
 				// There was a display title and is no new one, so remove

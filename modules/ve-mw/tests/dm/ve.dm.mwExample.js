@@ -120,14 +120,14 @@ ve.dm.mwExample.MWTransclusion = {
 		'<span about="#mwt1" data-parsoid="{}">\n</span>' +
 		'<link rel="mw:PageProp/Category" href="./Category:Book" about="#mwt1">',
 	metaFromData:
-		'<span typeof=\"mw:Transclusion\"' +
-		' data-mw=\"{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;' +
-			'[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}\"></span>',
+		'<span typeof="mw:Transclusion"' +
+		' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;' +
+			'[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}"></span>',
 	metaClipboard:
-		'<span typeof=\"mw:Transclusion\"' +
-		' data-mw=\"{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;' +
-			'[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}\"' +
-		' data-ve-no-generated-contents=\"true\">&nbsp;</span>'
+		'<span typeof="mw:Transclusion"' +
+		' data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;Template:Echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;' +
+			'[[Category:Page]]\\n[[Category:Book]]&quot;}},&quot;i&quot;:0}}]}"' +
+		' data-ve-no-generated-contents="true">&nbsp;</span>'
 };
 ve.dm.mwExample.MWTransclusion.blockData = {
 	type: 'mwTransclusionBlock',
@@ -858,7 +858,7 @@ ve.dm.mwExample.domToDataCases = {
 							}
 						} ]
 					},
-					originalMw: '{\"parts\":[{\"template\":{\"target\":{\"wt\":\"Template:Echo\",\"href\":\"./Template:Echo\"},\"params\":{\"1\":{\"wt\":\"[[Category:Page]]\\n[[Category:Book]]\"}},\"i\":0}}]}'
+					originalMw: '{"parts":[{"template":{"target":{"wt":"Template:Echo","href":"./Template:Echo"},"params":{"1":{"wt":"[[Category:Page]]\\n[[Category:Book]]"}},"i":0}}]}'
 				}
 			},
 			{ type: '/mwTransclusionInline' },

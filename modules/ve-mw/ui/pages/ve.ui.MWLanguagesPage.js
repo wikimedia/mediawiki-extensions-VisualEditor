@@ -86,15 +86,16 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 			languages[ i ].safelang = $.uls.data.isRedirect( languages[ i ].lang ) || languages[ i ].lang;
 			languages[ i ].dir = ve.init.platform.getLanguageDirection( languages[ i ].safelang );
 		}
-		$languagesTable
-			.append( $( '<tr>' )
-				.append( $( '<td>' ).text( languages[ i ].lang ) )
-				.append( $( '<td>' ).text( languages[ i ].langname ).add(
-						$( '<td>' ).text( languages[ i ].title )
-					)
-					.attr( 'lang', languages[ i ].safelang )
-					.attr( 'dir', languages[ i ].dir ) )
-			);
+		$languagesTable.append(
+			$( '<tr>' ).append(
+				$( '<td>' ).text( languages[ i ].lang ),
+				$( '<td>' ).text( languages[ i ].langname ).add( $( '<td>' ).text( languages[ i ].title ) )
+					.attr( {
+						lang: languages[ i ].safelang,
+						dir: languages[ i ].dir
+					} )
+			)
+		);
 	}
 
 	this.languagesFieldset.$element.append( $languagesTable );

@@ -247,8 +247,7 @@ ve.ui.MWHelpPopupTool.prototype.onSelect = function () {
 			meta: 'siteinfo',
 			format: 'json',
 			siprop: 'extensions'
-		} )
-		.then( function ( response ) {
+		} ).then( function ( response ) {
 			var extension = response.query.extensions.filter( function ( ext ) {
 				return ext.name === 'VisualEditor';
 			} )[ 0 ];

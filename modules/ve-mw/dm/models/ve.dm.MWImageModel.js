@@ -205,11 +205,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc )
 
 	// TODO: When scale/upright is available, set the size
 	// type accordingly
-	imgModel.setSizeType(
-		imgModel.isDefaultSize() ?
-		'default' :
-		'custom'
-	);
+	imgModel.setSizeType( imgModel.isDefaultSize() ? 'default' : 'custom' );
 
 	return imgModel;
 };

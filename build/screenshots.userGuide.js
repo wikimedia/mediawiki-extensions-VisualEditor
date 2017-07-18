@@ -163,8 +163,8 @@
 								seleniumUtils.getBoundingRect( [
 									ve.init.target.toolbar.tools.specialCharacter.$element[ 0 ],
 									ve.init.target.surface.toolbarDialogs.$element[ 0 ]
-								]
-							) );
+								] )
+							);
 						}, 1000 );
 					}
 				);
@@ -183,8 +183,8 @@
 										done(
 											seleniumUtils.getBoundingRect( [
 												win.$frame[ 0 ]
-											]
-										) );
+											] )
+										);
 									} );
 								} );
 								win.input.setValue( 'E = mc^2' ).moveCursorToEnd();
@@ -207,8 +207,8 @@
 									done(
 										seleniumUtils.getBoundingRect( [
 											win.$frame[ 0 ]
-										]
-									) );
+										] )
+									);
 								}, 500 );
 							} );
 						} );
