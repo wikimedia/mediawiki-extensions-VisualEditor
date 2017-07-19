@@ -128,7 +128,7 @@ ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc 
 				title = ve.init.platform.linkCache.constructor.static.normalizeTitle(
 					ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, doc ).title
 				);
-				ve.init.platform.linkCache.styleElement( title, $( this ) );
+				ve.init.platform.linkCache.styleElement( title, $( this ), href.indexOf( '#' ) !== -1 );
 			} );
 	}
 };
