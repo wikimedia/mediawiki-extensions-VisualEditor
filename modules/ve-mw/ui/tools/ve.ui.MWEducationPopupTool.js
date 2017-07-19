@@ -41,6 +41,12 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 		return;
 	}
 
+	if ( !( this.toolGroup instanceof OO.ui.BarToolGroup ) ) {
+		// The popup gets hideously deformed in other cases. Getting it to work would probably be
+		// difficult. Let's just not show it. (T170919)
+		return;
+	}
+
 	popupCloseButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-educationpopup-dismiss' ),
 		flags: [ 'progressive', 'primary' ],
