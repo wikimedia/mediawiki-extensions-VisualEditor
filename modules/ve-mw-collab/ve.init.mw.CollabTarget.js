@@ -81,7 +81,9 @@ ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
-	this.toolbar.$element.addClass( 've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-opened' );
+	this.toolbar.$element.addClass(
+		've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-open ve-init-mw-desktopArticleTarget-toolbar-opened'
+	);
 	this.$element.prepend( this.toolbar.$element );
 };
 
