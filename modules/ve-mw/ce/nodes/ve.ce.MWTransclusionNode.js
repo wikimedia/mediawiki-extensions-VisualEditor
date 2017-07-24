@@ -189,7 +189,7 @@ ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function () {
 	// Parent method
 	var elements = ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.apply( this, arguments );
 
-	if ( this.getModelHtmlDocument() ) {
+	if ( this.model && this.getModelHtmlDocument() ) {
 		ve.init.platform.linkCache.styleParsoidElements(
 			$( elements ),
 			this.getModelHtmlDocument()
