@@ -544,7 +544,7 @@ class ApiVisualEditor extends ApiBase {
 	 *
 	 * @param Config $config Configuration object
 	 * @param int $namespaceId Namespace ID
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function isAllowedNamespace( Config $config, $namespaceId ) {
 		$availableNamespaces = self::getAvailableNamespaceIds( $config );
@@ -575,7 +575,7 @@ class ApiVisualEditor extends ApiBase {
 	 *
 	 * @param Config $config Configuration object
 	 * @param string $contentModel Content model ID
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function isAllowedContentType( Config $config, $contentModel ) {
 		$availableContentModels = array_merge(
