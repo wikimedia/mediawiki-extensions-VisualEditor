@@ -79,6 +79,7 @@
 	"visualeditor-dialog-media-type-none": "সাধাৰণ",
 	"visualeditor-dialog-media-type-section": "চিত্ৰ প্ৰকাৰ",
 	"visualeditor-dialog-media-type-thumb": "ক্ষুদ্ৰ প্ৰতিকৃতি",
+	"visualeditor-dialog-media-upload": "আপল’ড কৰক",
 	"visualeditor-dialog-meta-advancedsettings-label": "উচ্চতৰ ছেটিং",
 	"visualeditor-dialog-meta-advancedsettings-section": "উচ্চতৰ ছেটিং",
 	"visualeditor-dialog-meta-categories-category": "শ্ৰেণী",
@@ -288,6 +289,6 @@
 	"visualeditor-viewpage-savewarning-keep": "সম্পাদনা অব্যাহত ৰাখক",
 	"visualeditor-viewpage-savewarning-title": "আপুনি নিশ্চিতনে?",
 	"visualeditor-wikitext-progress": "ৱিকিপাঠলৈ সলনি কৰি থকা হৈছে",
-	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌ এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। আপোনাৰ সালসমনিসমূহ হেৰাই নোযোৱাকৈ উৎস সম্পাদনালৈ ঘূৰি যাবৰ বাবে \"{{int:visualeditor-toolbar-savedialog}}\"ৰ কাষত থকা ড্ৰপ্‌ডাউন মেনু খোলক আৰু \"{{int:visualeditor-mweditmodesource-title}}\" নিৰ্বাচন কৰক।",
+	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌ এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। আপোনাৰ সালসমনিসমূহ হেৰাই নোযোৱাকৈ উৎস সম্পাদনালৈ ঘূৰি যাবৰ বাবে সলনি বুটামটো টিপক।",
 	"visualeditor-wikitext-warning-title": "ৱিকিপাঠ্য মাৰ্কআপ চিনাক্ত কৰা হৈছে"
 }

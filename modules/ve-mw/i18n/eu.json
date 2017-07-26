@@ -6,7 +6,8 @@
 			"Xabier Armendaritz",
 			"Subi",
 			"Sator",
-			"Macofe"
+			"Macofe",
+			"Mikel Ibaiba"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 orri baterako itzultzen du Parsoid zerbitzutik.",
@@ -50,6 +51,7 @@
 	"visualeditor-ca-ve-edit": "Ikusizko editorea",
 	"visualeditor-ca-ve-edit-section": "Ikusizko editorea",
 	"visualeditor-categories-tool": "Kategoriak",
+	"visualeditor-changedesc-mwlanguagevariant": "Aldatu da hizkuntzaren aldaerako oharra",
 	"visualeditor-desc": "MediaWikirako ikusizko editorea",
 	"visualeditor-descriptionpagelink": "Project:Ikusizko editorea",
 	"visualeditor-dialog-media-alttext-section": "Testu alternatiboa",
@@ -259,6 +261,11 @@
 	"visualeditor-mwgallerydialog-title": "Galeria",
 	"visualeditor-mwgallerydialog-widths-field-label": "Irudiaren zabalera",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Zabalara lehenetsia:$1 px",
+	"visualeditor-mwlanguagevariant-bidir": "Bi noranzkoko konbertsioa",
+	"visualeditor-mwlanguagevariant-filter": "Aldaerak $1ra hautatu dira",
+	"visualeditor-mwlanguagevariant-name": "Hizkuntzaren izena: $1",
+	"visualeditor-mwlanguagevariant-unidir": "Norabide bakarreko konbertsioa: $1",
+	"visualeditor-mwlanguagevariant-unknown": "Hizkuntza aldaera",
 	"visualeditor-mwsignature-tool": "Zure sinadura",
 	"visualeditor-pagemenu-tooltip": "Orriaren aukerak",
 	"visualeditor-pagetranslationwarning": "Itzulgarria den orri bat aldatzen ari zara. Editore honek ofizialki ez du onartzen mota honetako orriak.",
