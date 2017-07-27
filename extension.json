@@ -1877,7 +1877,8 @@
 			"dependencies": [
 				"oojs-ui",
 				"oojs-ui.styles.icons-alerts",
-				"oojs-ui.styles.icons-editing-advanced"
+				"oojs-ui.styles.icons-editing-advanced",
+				"mediawiki.Uri"
 			],
 			"messages": [
 				"visualeditor-savedialog-review-visual",
