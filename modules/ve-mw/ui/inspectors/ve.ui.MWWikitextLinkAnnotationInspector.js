@@ -37,6 +37,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.static.handlesSource = true;
  * @inheritdoc
  */
 ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
+	// Call grand-parent
 	return ve.ui.FragmentInspector.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var fragment = this.getFragment();
@@ -66,6 +67,9 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 			this.actions.setMode( this.getMode() );
 
 			this.initialAnnotation = this.getAnnotationFromFragment( fragment );
+			this.linkTypeIndex.setTabPanel(
+				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
+			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
 			this.updateActions();
 		}, this );
@@ -76,6 +80,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
  */
 ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 	data = data || {};
+	// Call grand-parent
 	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			var insertion,
@@ -99,6 +104,11 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 			// Reset state
 			this.initialSelection = null;
 			this.initialAnnotation = null;
+
+			// Parent resets
+			this.allowProtocolInInternal = false;
+			this.internalAnnotationInput.setAnnotation( null );
+			this.externalAnnotationInput.setAnnotation( null );
 		}, this );
 };
 
