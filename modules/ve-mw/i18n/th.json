@@ -5,7 +5,8 @@
 			"Taweetham",
 			"Horus",
 			"Pon44695",
-			"Ans"
+			"Ans",
+			"Aefgh39622"
 		]
 	},
 	"tooltip-ca-createsource": "สร้างรหัสต้นฉบับของหน้านี้",
@@ -48,6 +49,7 @@
 	"visualeditor-dialog-meta-languages-readonlynote": "นี่คือรายการของหน้าในภาษาอื่นที่ลิงก์มาที่หน้านี้ สำหรับตอนนี้สามารถแก้ไขได้เฉพาะในโหมดต้นฉบับ",
 	"visualeditor-dialog-meta-languages-section": "ภาษา",
 	"visualeditor-dialog-meta-settings-label": "การตั้งค่าหน้า",
+	"visualeditor-dialog-template-title": "แม่แบบ",
 	"visualeditor-dialog-transclusion-add-content": "เพิ่มเนื้อหา",
 	"visualeditor-dialog-transclusion-add-param": "เพิ่มพารามิเตอร์",
 	"visualeditor-dialog-transclusion-add-template": "เพิ่มแม่แบบ",
