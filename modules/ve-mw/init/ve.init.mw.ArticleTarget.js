@@ -2159,6 +2159,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 
 		if ( prefSaysShow ) {
 			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 
 			// No need to set a cookie every time for logged-in users that have already
 			// set the hidebetawelcome=1 preference, but only if this isn't a one-off

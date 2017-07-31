@@ -362,6 +362,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 			}
 		} else {
 			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 		}
 		this.suppressNormalStartupDialogs = true;
 	}
