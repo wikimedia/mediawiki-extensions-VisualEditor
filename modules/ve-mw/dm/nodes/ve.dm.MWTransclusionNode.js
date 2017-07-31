@@ -67,6 +67,17 @@ ve.dm.MWTransclusionNode.static.getHashObject = function ( dataElement ) {
 	};
 };
 
+ve.dm.MWTransclusionNode.static.isDiffComparable = function ( element, other ) {
+	function getTemplateNames( parts ) {
+		return parts.map( function ( part ) {
+			return part.template ? part.template.target.wt : '';
+		} ).join( '|' );
+	}
+
+	return ve.dm.MWTransclusionNode.super.static.isDiffComparable.call( this, element, other ) &&
+		getTemplateNames( element.attributes.mw.parts ) === getTemplateNames( other.attributes.mw.parts );
+};
+
 /**
  * Node type to use when the transclusion is inline
  *
