@@ -314,6 +314,8 @@
 	"visualeditor-mwlanguagevariant-disabled": "Conversión de variante desactivada",
 	"visualeditor-mwlanguagevariant-filter": "Variantes filtradas a $1",
 	"visualeditor-mwlanguagevariant-name": "Nome da linguaː $1",
+	"visualeditor-mwlanguagevariant-unidir": "Conversión unidireccionalː $1",
+	"visualeditor-mwlanguagevariant-unknown": "Variante da lingua",
 	"visualeditor-mwpredialog-title": "Texto simple preformatado",
 	"visualeditor-mwpredialog-convert": "Permite a aplicación de estilos ó texto",
 	"visualeditor-mwsignature-tool": "A súa sinatura",
