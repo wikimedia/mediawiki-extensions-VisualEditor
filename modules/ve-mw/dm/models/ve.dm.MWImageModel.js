@@ -179,7 +179,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc )
 	imgModel.cacheOriginalImageAttributes( attrs );
 
 	imgModel.setImageSource( attrs.src );
-	imgModel.setFilename( new mw.Title( attrs.resource.replace( /^(\.+\/)*/, '' ) ).getMainText() );
+	imgModel.setFilename( new mw.Title( attrs.resource.replace( /^(\.\.?\/)*/, '' ) ).getMainText() );
 	imgModel.setImageHref( attrs.href );
 
 	// Set bounding box
@@ -283,7 +283,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 	}
 	if ( attrs.resource ) {
 		this.setImageResourceName( attrs.resource );
-		this.setFilename( new mw.Title( attrs.resource.replace( /^(\.+\/)*/, '' ) ).getMainText() );
+		this.setFilename( new mw.Title( attrs.resource.replace( /^(\.\.?\/)*/, '' ) ).getMainText() );
 	}
 
 	if ( attrs.src ) {
@@ -1118,7 +1118,7 @@ ve.dm.MWImageModel.prototype.getImageHref = function () {
  * @param {ve.dm.Scalable} scalable Scalable object
  */
 ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
-	var imageName = this.getResourceName().replace( /^(\.+\/)*/, '' ),
+	var imageName = this.getResourceName().replace( /^(\.\.?\/)*/, '' ),
 		imageModel = this;
 
 	if ( this.scalable instanceof ve.dm.Scalable ) {
