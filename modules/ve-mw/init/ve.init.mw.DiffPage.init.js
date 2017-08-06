@@ -9,7 +9,7 @@
 	var $visualDiff,
 		reviewModeButtonSelect,
 		revCache = {},
-		pageName = mw.config.get( 'wgRelevantPageName' ),
+		uri = new mw.Uri(),
 		mode = 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
@@ -25,19 +25,28 @@
 		return null;
 	}
 
-	function fetchRevision( revId ) {
-		if ( !revCache[ revId ] ) {
-			revCache[ revId ] = mw.libs.ve.targetLoader.requestParsoidData( pageName, revId, 'diff' );
+	function fetchRevision( pageName, revId ) {
+		revCache[ pageName ] = revCache[ pageName ] || {};
+		if ( !revCache[ pageName ][ revId ] ) {
+			revCache[ pageName ][ revId ] = mw.libs.ve.targetLoader.requestParsoidData( pageName, revId, 'diff' );
 		}
-		return revCache[ revId ];
+		return revCache[ pageName ][ revId ];
 	}
 
 	function onReviewModeButtonSelectSelect( item ) {
 		var oldRevPromise, newRevPromise, modulePromise, progress,
+			oldPageName, newPageName,
 			$revSlider = $( '.mw-revslider-container' ),
 			$wikitextDiff = $( 'table.diff[data-mw="interface"]' ),
 			oldId = mw.config.get( 'wgDiffOldId' ),
 			newId = mw.config.get( 'wgDiffNewId' );
+
+		if ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ComparePages' ) {
+			oldPageName = newPageName = mw.config.get( 'wgRelevantPageName' );
+		} else {
+			oldPageName = uri.query.page1;
+			newPageName = uri.query.page2;
+		}
 
 		mode = item.getData();
 
@@ -45,8 +54,8 @@
 			progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } );
 			$wikitextDiff.addClass( 'oo-ui-element-hidden' );
 			$wikitextDiff.before( progress.$element );
-			oldRevPromise = fetchRevision( oldId );
-			newRevPromise = fetchRevision( newId );
+			oldRevPromise = fetchRevision( oldPageName, oldId );
+			newRevPromise = fetchRevision( newPageName, newId );
 			// TODO: Load a smaller subset of VE for computing the visual diff
 			modulePromise = mw.loader.using( [ 'ext.visualEditor.desktopArticleTarget' ].concat( pluginModules ) );
 			$.when( oldRevPromise, newRevPromise, modulePromise ).then( function ( oldResponse, newResponse ) {
