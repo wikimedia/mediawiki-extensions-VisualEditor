@@ -156,7 +156,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Yeni bir bölüm eklemek için bu sayfada sekme göster",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Bu sayfanın içeriğini otomatik olarak diğer komut dönüştürülmesini engelleyebilirsiniz.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Dil çeşitleri arasında içerik dönüştürmeyin",
-	"visualeditor-dialog-meta-settings-noeditsection-help": "Uygun olduğu her bölüm için bir sonraki olağan dışı durumda görünen bağlantıları Düzenle durdurabilirsiniz.",
+	"visualeditor-dialog-meta-settings-noeditsection-help": "Uygun olduğu her bölüm için bir sonraki olağan dışı durumda görünen bağlantıları değiştirmeyi durdurabilirsiniz.",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Bu sayfada her başlığın yanındaki düzenle bağlantısını devre dışı bırak.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Galeriyi devre dışı bırak",
 	"visualeditor-dialog-meta-settings-redirect-label": "Bu sayfaya yönlendirir",
