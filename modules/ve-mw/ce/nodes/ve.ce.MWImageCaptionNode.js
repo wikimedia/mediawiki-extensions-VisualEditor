@@ -36,39 +36,6 @@ ve.ce.MWImageCaptionNode.static.name = 'mwImageCaption';
 
 ve.ce.MWImageCaptionNode.static.tagName = 'figcaption';
 
-/* Methods */
-
-/**
- * Reset the magnify button if the structure of the caption changed,
- * so it is always rendered in the right place.
- *
- * The magnify icon will always be attached to the caption; we
- * handle hiding and showing it per block image type in the CSS rules.
- */
-ve.ce.MWImageCaptionNode.prototype.onSplice = function () {
-	if ( this.$magnify ) {
-		this.$magnify.detach();
-	} else {
-		this.buildMagnify();
-	}
-
-	// Parent method
-	ve.ce.MWImageCaptionNode.super.prototype.onSplice.apply( this, arguments );
-
-	// Reset the magnify icon, prepend it to the caption
-	this.$magnify.prependTo( this.$element );
-};
-
-/** */
-ve.ce.MWImageCaptionNode.prototype.buildMagnify = function () {
-	this.$magnify = $( '<div>' )
-		.addClass( 'magnify' )
-		.prop( 'contentEditable', 'false' );
-	this.$a = $( '<a>' )
-		.addClass( 'internal' )
-		.appendTo( this.$magnify );
-};
-
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWImageCaptionNode );
