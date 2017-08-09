@@ -63,12 +63,12 @@ ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 		languageCodes = [ variantInfo.name.t ];
 	} else if ( variantInfo.filter ) {
 		languageCodes = variantInfo.filter.l;
-	} else if ( variantInfo.bidir ) {
-		languageCodes = variantInfo.bidir.map( function ( item ) {
+	} else if ( variantInfo.twoway ) {
+		languageCodes = variantInfo.twoway.map( function ( item ) {
 			return item.l;
 		} );
-	} else if ( variantInfo.unidir ) {
-		languageCodes = variantInfo.unidir.map( function ( item ) {
+	} else if ( variantInfo.oneway ) {
+		languageCodes = variantInfo.oneway.map( function ( item ) {
 			return item.l;
 		} );
 	}
