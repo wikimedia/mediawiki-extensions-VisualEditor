@@ -23,7 +23,8 @@
 			"Shbib Al-Subaie",
 			"Maroen1990",
 			"Moud hosny",
-			"Aboulouei1"
+			"Aboulouei1",
+			"ديفيد"
 		]
 	},
 	"apihelp-visualeditor-description": "يرجع HTML5 لصفحة من الخدمة بارسويد (Parsoid).",
@@ -188,7 +189,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "أظهر إن لزم الأمر",
 	"visualeditor-dialog-meta-settings-toc-disable": "لا تظهر مطلقا",
 	"visualeditor-dialog-meta-settings-toc-force": "أظهر دائما",
-	"visualeditor-dialog-meta-settings-toc-help": "يمكن إظهار فهرس المحتويات عند وجود عنوان قسم واحد أو أكثر، إو إخفاء الفهرس كليا. بدون هذه العلامة، يظهر الفهرس تلقائيا عند وجود ثلاثة عناوين أقسام أو أكثر.",
+	"visualeditor-dialog-meta-settings-toc-help": "يمكنك فرض جدول محتويات يسرد كل عنوان على الصفحة ليظهر على الصفحات ذات أقل من أربعة عناوين، أو إجباره على ألا يظهر على الإطلاق. افتراضيًا، سوف يظهر إذا كانت الصفحة تحتوي على أربعة عناوين أو أكثر.",
 	"visualeditor-dialog-meta-settings-toc-label": "أظهر فهرس المحتويات",
 	"visualeditor-dialog-meta-templatesused-noresults": "لم يتم العثور على قوالب.",
 	"visualeditor-dialog-meta-title": "خيارات",

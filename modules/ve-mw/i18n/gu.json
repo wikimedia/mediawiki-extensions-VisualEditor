@@ -35,7 +35,7 @@
 	"visualeditor-beta-label": "બીટા",
 	"visualeditor-beta-warning": "વિઝ્યુલસંપાદ 'બીટા' માં છે. તમને કદાચ સોફ્ટવેર મુશ્કેલીઓનો સામનો કરવો પડશે, અને તમે કદાચ પાનાંના ભાગોમાં ફેરફાર નહી કરી શકો. તમારા ફેરફારો ગુમાવ્યા વગર સાચવવા માટે, કોઇ પણ સમયે  \"{{int:visualeditor-toolbar-savedialog}}\" ની બાજુમાં રહેલા ડ્રોપડાઉન મેનુ ખોલો અને \"{{int:visualeditor-mweditmodesource-tool}}\" પસંદ કરો.",
 	"visualeditor-browserwarning": "તમે વિઝ્યુલસંપાદક વડે આધારિત ન હોય એવું બ્રાઉઝર વાપરી રહ્યા છો.",
-	"visualeditor-ca-createlocaldescriptionsource": "સ્થાનિક વર્ણન ઉમેરો",
+	"visualeditor-ca-createlocaldescriptionsource": "સ્થાનિક વર્ણન સ્ત્રોત ઉમેરો",
 	"visualeditor-ca-createsource": "સ્રોત બનાવો",
 	"visualeditor-ca-editsource": "મૂળમાં ફેરફાર કરો",
 	"visualeditor-ca-editsource-section": "મૂળમાં ફેરફાર કરો",
