@@ -10,7 +10,7 @@
 		reviewModeButtonSelect,
 		revCache = {},
 		uri = new mw.Uri(),
-		mode = 'source',
+		mode = uri.query.diffmode || 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 
@@ -83,6 +83,12 @@
 			$wikitextDiff.removeClass( 'oo-ui-element-hidden' );
 			$revSlider.removeClass( 've-init-mw-diffPage-revSlider-visual' );
 		}
+
+		if ( history.replaceState ) {
+			uri.query.diffmode = mode;
+			history.replaceState( '', document.title, uri );
+		}
+
 	}
 
 	mw.hook( 'wikipage.diff' ).add( function () {
