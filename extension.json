@@ -1927,9 +1927,11 @@
 		"ext.visualEditor.mwlanguage": {
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantNode.js",
-				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantNode.js"
+				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantNode.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWLanguageVariantNodeContextItem.js"
 			],
 			"styles": [
+				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWLanguageVariantNodeContextItem.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWLanguageVariantNode.css"
 			],
 			"dependencies": [
@@ -1942,7 +1944,22 @@
 				"visualeditor-mwlanguagevariant-name",
 				"visualeditor-mwlanguagevariant-oneway",
 				"visualeditor-mwlanguagevariant-twoway",
-				"visualeditor-mwlanguagevariant-unknown"
+				"visualeditor-mwlanguagevariant-unknown",
+				"visualeditor-mwlanguagevariantcontextitem-flag-describe",
+				"visualeditor-mwlanguagevariantcontextitem-flag-hidden",
+				"visualeditor-mwlanguagevariantcontextitem-flag-title",
+				"visualeditor-mwlanguagevariantcontextitem-rule-code-label",
+				"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label",
+				"visualeditor-mwlanguagevariantcontextitem-rule-name-label",
+				"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label",
+				"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label",
+				"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label",
+				"visualeditor-mwlanguagevariantcontextitem-title-disabled",
+				"visualeditor-mwlanguagevariantcontextitem-title-filter",
+				"visualeditor-mwlanguagevariantcontextitem-title-name",
+				"visualeditor-mwlanguagevariantcontextitem-title-oneway",
+				"visualeditor-mwlanguagevariantcontextitem-title-twoway",
+				"visualeditor-mwlanguagevariantcontextitem-title-unknown"
 			],
 			"targets": [
 				"desktop",

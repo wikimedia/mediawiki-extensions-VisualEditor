@@ -1,0 +1,31 @@
+/*!
+ * VisualEditor MediaWiki UserInterface alien extension inspector styles.
+ *
+ * @copyright 2011-2017 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwLanguageVariantNodeContextItem-rule-table {
+	width: 100%;
+	border: 0;
+	border-collapse: collapse;
+}
+
+.ve-ui-mwLanguageVariantNodeContextItem-rule-table th {
+	border-bottom: solid 1px #ddd;
+	text-align: left;
+}
+
+.ve-ui-mwLanguageVariantNodeContextItem-rule-table th,
+.ve-ui-mwLanguageVariantNodeContextItem-rule-table td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #fff;
+}
+
+.ve-ui-mwLanguageVariantNodeContextItem-rule-table tr:nth-child( odd ) td {
+	background: #f0f0f0;
+}
+
+.ve-ui-mwLanguageVariantNodeContextItem-rule-table tr:nth-child( even ) td {
+	background: #f8f8f8;
+}
