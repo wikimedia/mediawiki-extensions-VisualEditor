@@ -1937,11 +1937,11 @@
 			],
 			"messages": [
 				"visualeditor-changedesc-mwlanguagevariant",
-				"visualeditor-mwlanguagevariant-bidir",
 				"visualeditor-mwlanguagevariant-disabled",
 				"visualeditor-mwlanguagevariant-filter",
 				"visualeditor-mwlanguagevariant-name",
-				"visualeditor-mwlanguagevariant-unidir",
+				"visualeditor-mwlanguagevariant-oneway",
+				"visualeditor-mwlanguagevariant-twoway",
 				"visualeditor-mwlanguagevariant-unknown"
 			],
 			"targets": [

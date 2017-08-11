@@ -73,6 +73,27 @@ ve.dm.MWLanguageVariantNode.static.blockType = 'mwLanguageVariantBlock';
 ve.dm.MWLanguageVariantNode.static.hiddenType = 'mwLanguageVariantHidden';
 
 /**
+ * Migrate field names from old Parsoid spec to new field names.
+ * This method will go away after the next Parsoid flag day.
+ * @static
+ * @method
+ * @private
+ */
+ve.dm.MWLanguageVariantNode.static.migrateFieldNames = function ( dataMwv ) {
+	// Field name migration: `bidir`=>`twoway`; `unidir`=>`oneway`
+	// This will go away eventually.
+	if ( dataMwv.bidir ) {
+		dataMwv.twoway = dataMwv.bidir;
+		delete dataMwv.bidir;
+	}
+	if ( dataMwv.unidir ) {
+		dataMwv.oneway = dataMwv.unidir;
+		delete dataMwv.unidir;
+	}
+	return dataMwv;
+};
+
+/**
  * @inheritdoc
  */
 ve.dm.MWLanguageVariantNode.static.toDataElement = function ( domElements, converter ) {
@@ -81,6 +102,8 @@ ve.dm.MWLanguageVariantNode.static.toDataElement = function ( domElements, conve
 		firstElement = domElements[ 0 ],
 		dataMwvJSON = firstElement.getAttribute( 'data-mw-variant' ),
 		dataMwv = dataMwvJSON ? JSON.parse( dataMwvJSON ) : {};
+
+	this.migrateFieldNames( dataMwv );
 
 	dataElement = {
 		attributes: {
@@ -112,7 +135,9 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
 	// Preserve exact equality of this attribute for selser.
 	if ( dataElement.attributes.originalVariantInfo ) {
 		if ( OO.compare(
-			JSON.parse( dataElement.attributes.originalVariantInfo ),
+			this.migrateFieldNames(
+				JSON.parse( dataElement.attributes.originalVariantInfo )
+			),
 			variantInfo
 		) ) {
 			dataMwvJSON = dataElement.attributes.originalVariantInfo;
@@ -206,8 +231,8 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 		return variantInfo.filter.t;
 	} else if ( variantInfo.describe || ( opts && opts.describeAll ) ) {
 		$holder = $( '<body>' );
-		if ( variantInfo.bidir && variantInfo.bidir.length ) {
-			variantInfo.bidir.forEach( function ( item ) {
+		if ( variantInfo.twoway && variantInfo.twoway.length ) {
+			variantInfo.twoway.forEach( function ( item ) {
 				$holder.append(
 					ve.init.platform.getLanguageName( item.l.toLowerCase() )
 				);
@@ -215,8 +240,8 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 				$holder.append( $.parseHTML( item.t ) );
 				$holder.append( ';' );
 			} );
-		} else if ( variantInfo.unidir && variantInfo.unidir.length ) {
-			variantInfo.unidir.forEach( function ( item ) {
+		} else if ( variantInfo.oneway && variantInfo.oneway.length ) {
+			variantInfo.oneway.forEach( function ( item ) {
 				$holder.append( $.parseHTML( item.f ) );
 				$holder.append( '⇒' );
 				$holder.append(
@@ -229,12 +254,12 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 		}
 		return $holder.html();
 	} else {
-		if ( variantInfo.bidir && variantInfo.bidir.length ) {
-			languageIndex = this.matchLanguage( variantInfo.bidir );
-			return variantInfo.bidir[ languageIndex ].t;
-		} else if ( variantInfo.unidir && variantInfo.unidir.length ) {
-			languageIndex = this.matchLanguage( variantInfo.unidir );
-			return variantInfo.unidir[ languageIndex ].t;
+		if ( variantInfo.twoway && variantInfo.twoway.length ) {
+			languageIndex = this.matchLanguage( variantInfo.twoway );
+			return variantInfo.twoway[ languageIndex ].t;
+		} else if ( variantInfo.oneway && variantInfo.oneway.length ) {
+			languageIndex = this.matchLanguage( variantInfo.oneway );
+			return variantInfo.oneway[ languageIndex ].t;
 		}
 	}
 	return '';
@@ -337,8 +362,8 @@ ve.dm.MWLanguageVariantNode.static.getRuleType = function ( variantInfo ) {
 	if ( variantInfo.disabled ) { return 'disabled'; }
 	if ( variantInfo.filter ) { return 'filter'; }
 	if ( variantInfo.name ) { return 'name'; }
-	if ( variantInfo.bidir ) { return 'bidir'; }
-	if ( variantInfo.unidir ) { return 'unidir'; }
+	if ( variantInfo.twoway ) { return 'twoway'; }
+	if ( variantInfo.oneway ) { return 'oneway'; }
 	return 'unknown'; // should never happen
 };
 
