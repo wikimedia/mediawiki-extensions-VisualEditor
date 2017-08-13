@@ -1005,19 +1005,16 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 
 		new mw.Api().post( {
 			action: 'visualeditor',
-			paction: 'parsefragment',
+			paction: 'parsedoc',
 			page: this.pageName,
 			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {
-			var html, doc,
+			var doc,
 				baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
 
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
-				// Support: IE 11
-				// Wrap in a complete document for parseDocument() to not explode
-				html = '<!DOCTYPE html><html><body>' + response.visualeditor.content + '</body></html>';
-				doc = target.constructor.static.parseDocument( html, 'visual' );
+				doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
 				target.saveDialog.showPreview( doc, baseDoc );
 
 			} else {

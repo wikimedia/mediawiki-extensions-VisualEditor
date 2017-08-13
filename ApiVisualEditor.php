@@ -131,13 +131,13 @@ class ApiVisualEditor extends ApiBase {
 			->serialize( 'text/x-wiki' );
 	}
 
-	protected function parseWikitextFragment( $title, $wikitext ) {
+	protected function parseWikitextFragment( $title, $wikitext, $bodyOnly ) {
 		return $this->requestRestbase(
 			'POST',
 			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
 			[
 				'wikitext' => $wikitext,
-				'body_only' => 1,
+				'body_only' => $bodyOnly ? 1 : 0,
 			]
 		);
 	}
@@ -323,7 +323,7 @@ class ApiVisualEditor extends ApiBase {
 					$content = '';
 					Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
 					if ( $content !== '' ) {
-						$content = $this->parseWikitextFragment( $title, $content );
+						$content = $this->parseWikitextFragment( $title, $content, true );
 					}
 					if ( $content === '' && !empty( $params['preload'] ) ) {
 						$content = $this->getPreloadContent(
@@ -600,12 +600,16 @@ class ApiVisualEditor extends ApiBase {
 				}
 				break;
 
+			case 'parsedoc':
 			case 'parsefragment':
 				$wikitext = $params['wikitext'];
+				$bodyOnly = ( $params['paction'] === 'parsefragment' );
 				if ( $params['pst'] ) {
 					$wikitext = $this->pstWikitext( $title, $wikitext );
 				}
-				$content = $this->parseWikitextFragment( $title, $wikitext );
+				$content = $this->parseWikitextFragment(
+					$title, $wikitext, $bodyOnly
+				);
 				if ( $content === false ) {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				} else {
@@ -719,6 +723,7 @@ class ApiVisualEditor extends ApiBase {
 					'metadata',
 					'wikitext',
 					'parsefragment',
+					'parsedoc',
 					'getlanglinks',
 				],
 			],
