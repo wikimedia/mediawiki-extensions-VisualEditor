@@ -261,7 +261,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 					}
 				] );
 				data.setAnnotationsAtOffset( 0, annotations );
-				data.setAnnotationsAtOffset( 1, annotations );
 				fragment.insertContent( data.getData(), true );
 			}
 

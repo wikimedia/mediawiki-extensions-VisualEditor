@@ -132,7 +132,6 @@ ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
 		// Before we get here #autolink has guaranteed that the annotations
 		// do not contain any link annotations.
 		data.setAnnotationsAtOffset( 0, annotations );
-		data.setAnnotationsAtOffset( 1, annotations );
 		return ve.dm.TransactionBuilder.static.newFromReplacement(
 			doc, range, data.getData()
 		);

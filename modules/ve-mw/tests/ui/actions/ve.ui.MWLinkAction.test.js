@@ -41,8 +41,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						},
 						annotations: data[ 1 ][ 1 ]
 					}, {
-						type: '/link/mwMagic',
-						annotations: data[ 1 ][ 1 ]
+						type: '/link/mwMagic'
 					} );
 				},
 				undo: true
@@ -72,8 +71,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						},
 						annotations: data[ 1 ][ 1 ]
 					}, {
-						type: '/link/mwMagic',
-						annotations: data[ 1 ][ 1 ]
+						type: '/link/mwMagic'
 					} );
 				},
 				undo: true
@@ -103,8 +101,7 @@ QUnit.test( 'MW autolink', function ( assert ) {
 						},
 						annotations: data[ 1 ][ 1 ]
 					}, {
-						type: '/link/mwMagic',
-						annotations: data[ 1 ][ 1 ]
+						type: '/link/mwMagic'
 					} );
 				},
 				undo: true
