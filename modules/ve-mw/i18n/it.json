@@ -31,7 +31,8 @@
 			"Elitre (WMF)",
 			"Einreiher",
 			"Saracrovetto",
-			"Samuele2002"
+			"Samuele2002",
+			"Greis"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -311,6 +312,8 @@
 	"visualeditor-mwgallerydialog-title": "Galleria",
 	"visualeditor-mwgallerydialog-widths-field-label": "Larghezza immagine",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Larghezza predefinita: $1 px",
+	"visualeditor-mwlanguagevariant-name": "Nome lingua:",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Sorgente",
 	"visualeditor-mwsignature-tool": "La tua firma",
 	"visualeditor-pagemenu-tooltip": "Opzioni pagina",
 	"visualeditor-pagetranslationwarning": "Stai modificando una pagina traducibile. La modifica di queste pagine con questo editor non è ancora ufficialmente supportata.",

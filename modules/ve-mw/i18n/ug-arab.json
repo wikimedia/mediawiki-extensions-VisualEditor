@@ -3,17 +3,20 @@
 		"authors": [
 			"Sahran",
 			"Tel'et",
-			"Tifinaghes"
+			"Tifinaghes",
+			"Uzdil"
 		]
 	},
 	"tooltip-ca-ve-edit": "بۇ بەتنى تەھرىرلە",
 	"visualeditor-backbutton-tooltip": "قايت",
+	"visualeditor-ca-createsource": "مەنبە كود قۇرۇش",
 	"visualeditor-ca-editsource": "مەنبە تەھرىر",
 	"visualeditor-ca-editsource-section": "مەنبە تەھرىر",
 	"visualeditor-ca-ve-create": "كۆرۈنمە تەھرىرلىگۈچ",
 	"visualeditor-ca-ve-edit": "كۆرۈنمە تەھرىرلىگۈچ",
 	"visualeditor-ca-ve-edit-section": "كۆرۈنمە تەھرىرلىگۈچ",
 	"visualeditor-categories-tool": "تۈرلەر",
+	"visualeditor-descriptionpagelink": "Project:كۆرۈنمە تەھرىرلىگۈچ",
 	"visualeditor-dialog-media-change-image": "رەسىم ئۆزگەرت",
 	"visualeditor-dialog-media-choose-image": "بۇ رەسىمنى ئىشلەت",
 	"visualeditor-dialog-media-content-filename": "ھۆججەت ئىسمى",
@@ -45,7 +48,13 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "ياق",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "ھەئە",
 	"visualeditor-dialog-meta-settings-toc-disable": "ھەرگىز",
+	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<ئىناۋەتسىز>",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "تىل",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "مەنبە كود",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "نىشان",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "تېكىست",
+	"visualeditor-mwlanguagevariantcontextitem-title-name": "تىل نامى",
+	"visualeditor-mwlanguagevariantcontextitem-title-unknown": "تىل ۋارىيانتى",
 	"visualeditor-savedialog-label-create": "بەت قۇر",
-	"visualeditor-savedialog-label-save": "بەت ساقلا",
 	"visualeditor-savedialog-title-save": "ئۆزگەرتىشىڭىزنى ساقلاڭ"
 }

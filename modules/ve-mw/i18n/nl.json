@@ -323,6 +323,7 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Afbeeldingsbreedte",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Standaardbreedte: $1 px",
 	"visualeditor-mwlanguagevariant-name": "Taalnaam: $1",
+	"visualeditor-mwlanguagevariant-unknown": "Taalvariant",
 	"visualeditor-mwpredialog-title": "Voorgeformatteerde platte tekst",
 	"visualeditor-mwpredialog-convert": "Tekst opmaak toestaan",
 	"visualeditor-mwsignature-tool": "Uw handtekening",
