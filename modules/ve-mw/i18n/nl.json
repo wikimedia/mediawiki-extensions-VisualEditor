@@ -35,7 +35,8 @@
 			"MrLeopold",
 			"Hex",
 			"Mainframe98",
-			"Huhbakker"
+			"Huhbakker",
+			"Festina90"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -362,7 +363,7 @@
 	"visualeditor-savedialog-label-save-short": "Opslaan",
 	"visualeditor-savedialog-label-warning": "Waarschuwing",
 	"visualeditor-savedialog-review-nosummary": "Geen bewerkingssamenvatting",
-	"visualeditor-savedialog-review-visual": "Visueel",
+	"visualeditor-savedialog-review-visual": "Visueel (beta)",
 	"visualeditor-savedialog-review-wikitext": "Wikitekst",
 	"visualeditor-savedialog-title-conflict": "Conflict",
 	"visualeditor-savedialog-title-preview": "Wijzigingen controleren",
