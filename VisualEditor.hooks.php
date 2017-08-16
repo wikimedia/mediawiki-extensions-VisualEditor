@@ -849,8 +849,8 @@ class VisualEditorHooks {
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
 			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
 			'fullRestbaseUrl' => $coreConfig->get( 'VisualEditorFullRestbaseURL' ),
-			'feedbackApiUrl' =>  $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
-			'feedbackTitle' =>  $veConfig->get( 'VisualEditorFeedbackTitle' ),
+			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
+			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 		];
 
 		return true;
