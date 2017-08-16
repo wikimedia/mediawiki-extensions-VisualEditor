@@ -15,8 +15,8 @@
 	width: 3.75em;
 	height: 3.75em;
 	left: -3.75em;
-	background-color: #ccc;
-	border: 0.5em solid #ccc;
+	background-color: #c8ccd1;
+	border: 0.5em solid #c8ccd1;
 	opacity: 0.4;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .ve-ui-mwInternalLinkContextItem-description {
-	color: #888;
+	color: #72777d;
 	margin-top: 0.5em;
 }
 

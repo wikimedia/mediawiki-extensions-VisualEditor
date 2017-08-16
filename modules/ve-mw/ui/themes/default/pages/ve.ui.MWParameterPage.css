@@ -16,7 +16,7 @@
 }
 
 .ve-ui-mwParameterPage.oo-ui-pageLayout-active .ve-ui-mwParameterPage {
-	background-color: #f3f3f3;
+	background-color: #f8f9fa;
 }
 
 .ve-ui-mwParameterPage-info {
@@ -63,7 +63,7 @@
 .ve-ui-mwParameterPage-description-required,
 .ve-ui-mwParameterPage-description-deprecated {
 	font-style: italic;
-	color: #555;
+	color: #54595d;
 }
 
 .ve-ui-mwParameterPage-infoButton,

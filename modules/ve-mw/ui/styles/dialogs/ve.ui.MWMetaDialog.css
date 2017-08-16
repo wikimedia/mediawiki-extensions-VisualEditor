@@ -16,7 +16,7 @@
 }
 
 .ve-ui-mwLanguagesPage-languages-table th {
-	border-bottom: solid 1px #ddd;
+	border-bottom: solid 1px #c8ccd1;
 	text-align: left;
 }
 
@@ -31,9 +31,9 @@
 }
 
 .ve-ui-mwLanguagesPage-languages-table tr:nth-child( odd ) td {
-	background: #f0f0f0;
+	background: #eaecf0;
 }
 
 .ve-ui-mwLanguagesPage-languages-table tr:nth-child( even ) td {
-	background: #f8f8f8;
+	background: #f8f9fa;
 }

@@ -29,7 +29,7 @@
 
 .ve-ui-debugBar {
 	padding: 0.8em 16px;
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #c8ccd1;
 	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
 }
 
@@ -46,7 +46,7 @@
 .ve-init-mw-mobileArticleTarget-title-container {
 	width: 100%;
 	position: relative;
-	border-right: 1px solid #ddd;
+	border-right: 1px solid #c8ccd1;
 }
 
 .ve-init-mw-mobileArticleTarget-title {
