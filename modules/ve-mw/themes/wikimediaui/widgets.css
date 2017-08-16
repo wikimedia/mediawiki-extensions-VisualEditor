@@ -12,11 +12,11 @@
 }
 
 .ve-ui-mwSaveDialog-options {
-	border-bottom-right-radius: 0.1em;
-	border-bottom-left-radius: 0.1em;
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
-	border-radius: 0.1em;
+	border-radius: 2px;
 	border: 1px solid #a2a9b1;
 }
