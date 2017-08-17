@@ -35,12 +35,12 @@
 }
 
 .ve-ui-mwParameterResultWidget-name {
-	border-radius: 0.3em;
 	padding: 0.125em 0.25em;
 	margin-left: 0.5em;
 	color: #54595d;
 	background-color: #eaecf0;
-	border: solid 1px #c8ccd1;
+	border: 1px solid #c8ccd1;
+	border-radius: 2px;
 }
 
 .ve-ui-mwParameterResultWidget-name:first-child {

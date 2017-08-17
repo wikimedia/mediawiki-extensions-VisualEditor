@@ -21,7 +21,7 @@
 
 .ve-ui-mwNoticesPopupTool-items > div:not( :first-child ),
 .ve-ui-mwHelpPopupTool-item:not( :first-child ) {
-	border-top: solid 1px #c8ccd1;
+	border-top: 1px solid #c8ccd1;
 	padding-top: 0.8em;
 	margin-top: 0.8em;
 }
