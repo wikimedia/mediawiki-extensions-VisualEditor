@@ -233,6 +233,7 @@
 	"visualeditor-preference-tabs-multi-tab": "Прикажи језичке за оба режима",
 	"visualeditor-preference-tabs-prefer-ve": "Само Визуелни уређивач (где год је могуће)",
 	"visualeditor-preference-tabs-prefer-wt": "Само уређивач викитекста",
+	"visualeditor-preference-tabs-remember-last": "Запамти мој последњи уређивач",
 	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
 	"visualeditor-redirect-description": "Преусмерено на $1",
 	"visualeditor-savedialog-error-badtoken": "Нисмо могли обрадити вашу измену зато што сесија више није важећа.",

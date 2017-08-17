@@ -13,6 +13,8 @@
 	"visualeditor-ca-editsource": "Édit sumber",
 	"visualeditor-ca-editsource-section": "édit sumber",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-meta-settings-index-force": "Nya",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Nya",
 	"visualeditor-dialog-transclusion-absent-template": "Citakan \"$1\" geus euweuh.",
 	"visualeditor-educationpopup-dismiss": "Okéh, ngarti",
 	"visualeditor-mweditmodesource-tool-current": "Édit sumber",
@@ -24,5 +26,6 @@
 	"visualeditor-savedialog-label-report": "Laporkeun masalah",
 	"visualeditor-savedialog-label-save-short": "Simpen",
 	"visualeditor-savedialog-label-warning": "Kahadé",
+	"visualeditor-savedialog-review-visual": "Visual (béta)",
 	"visualeditor-savedialog-review-wikitext": "Téks wiki"
 }
