@@ -38,9 +38,9 @@
 	border-radius: 0.3em;
 	padding: 0.125em 0.25em;
 	margin-left: 0.5em;
-	color: #999;
-	background-color: #eee;
-	border: solid 1px #ddd;
+	color: #54595d;
+	background-color: #eaecf0;
+	border: solid 1px #c8ccd1;
 }
 
 .ve-ui-mwParameterResultWidget-name:first-child {
@@ -49,5 +49,5 @@
 
 .ve-ui-mwParameterResultWidget-description {
 	clear: both;
-	color: #555;
+	color: #54595d;
 }

@@ -6,7 +6,7 @@
  */
 
 .ve-ui-mwAceEditorWidget .ace_editor {
-	border: 1px solid #ccc;
+	border: 1px solid #c8ccd1;
 	margin: 1px;
 	/* Specify a valid second value to fix size in Chrome/FF */
 	font-family: monospace, 'Courier';
@@ -34,5 +34,5 @@
 }
 
 .ve-ui-mwAceEditorWidget.oo-ui-widget-enabled.oo-ui-flaggedElement-invalid .ace_editor {
-	border-color: #f00;
+	border-color: #d33;
 }

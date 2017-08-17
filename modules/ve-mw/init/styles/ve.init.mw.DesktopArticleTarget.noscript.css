@@ -27,12 +27,12 @@
 .client-js .mw-content-ltr .mw-editsection-bracket:first-of-type,
 .client-js .mw-content-rtl .mw-editsection-bracket:not( :first-of-type ) {
 	margin-right: 0.25em;
-	color: #555;
+	color: #54595d;
 }
 
 /* @noflip */
 .client-js .mw-content-rtl .mw-editsection-bracket:first-of-type,
 .client-js .mw-content-ltr .mw-editsection-bracket:not( :first-of-type ) {
 	margin-left: 0.25em;
-	color: #555;
+	color: #54595d;
 }
