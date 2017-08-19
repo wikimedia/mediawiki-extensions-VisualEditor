@@ -148,10 +148,11 @@ module.exports = function ( grunt ) {
 		jsonlint: {
 			all: [
 				'*.json',
-				'.eslintrc.json',
+				'.{stylelintrc,eslintrc}.json',
 				'**/*.json',
 				'!**/node_modules/**',
-				'!lib/**'
+				'!lib/**',
+				'!vendor/**'
 			]
 		},
 		copy: {
@@ -163,7 +164,7 @@ module.exports = function ( grunt ) {
 		},
 		watch: {
 			files: [
-				'.{stylelintrc,eslintrc.json}',
+				'.{stylelintrc,eslintrc}.json',
 				'<%= eslint.all %>',
 				'<%= stylelint.all %>'
 			],
