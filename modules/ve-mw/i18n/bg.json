@@ -10,7 +10,8 @@
 			"Spiritia",
 			"Лорд Бъмбъри",
 			"Vodnokon4e",
-			"Termininja"
+			"Termininja",
+			"ShockD"
 		]
 	},
 	"apihelp-visualeditor-description": "Връща HTML5 за страница от услугата Parsoid.",
@@ -176,6 +177,7 @@
 	"visualeditor-mweditmode-tooltip": "Превключване на редактора",
 	"visualeditor-mweditmodesource-progress": "Преминаване към редактиране на кода?",
 	"visualeditor-mweditmodesource-title": "Превключване към редактиране на кода?",
+	"visualeditor-mweditmodesource-tool-current": "Редактиране на кода",
 	"visualeditor-mweditmodesource-warning": "Превключвате към редактиране на кода. Искате ли да продължите?",
 	"visualeditor-mweditmodesource-warning-cancel": "Отказване",
 	"visualeditor-mweditmodesource-warning-switch": "Превключване",
@@ -184,6 +186,7 @@
 	"visualeditor-mweditmodeve-popup-title": "Превключили сте на режим редактиране на кода",
 	"visualeditor-mweditmodeve-showagain": "Не искам това съобщение да се показва отново",
 	"visualeditor-mweditmodeve-title": "Преминаване към визуалния редактор?",
+	"visualeditor-mweditmodeve-tool-current": "Визуален редактор",
 	"visualeditor-mweditmodeve-warning": "Преминавате към редактиране с визуалния редактор.\nИскате ли да продължите?",
 	"visualeditor-mweditmodewt-popup-body": "Можете във всеки момент да се върнете отново към редактиране на кода, като щракнете на тази икона.",
 	"visualeditor-mweditmodewt-popup-title": "Превключили сте на режим визуално редактиране",
@@ -201,6 +204,7 @@
 	"visualeditor-mwgallerydialog-show-filename-field-label": "Покажи имената на файловете",
 	"visualeditor-mwgallerydialog-title": "Галерия",
 	"visualeditor-mwgallerydialog-widths-field-label": "Ширина на изображението",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Език",
 	"visualeditor-mwsignature-tool": "Вашият подпис",
 	"visualeditor-pagemenu-tooltip": "Настройки на страницата",
 	"visualeditor-parameter-search-more": "Показване на {{PLURAL:$1|още едно поле|още $1 полета}}",

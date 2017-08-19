@@ -287,6 +287,8 @@
 	"visualeditor-mwlanguagevariant-disabled": "বৈকল্পিক রূপান্তর নিষ্ক্রিয় করা",
 	"visualeditor-mwlanguagevariant-name": "ভাষার নাম: $1",
 	"visualeditor-mwlanguagevariant-unknown": "ভাষা বৈকল্পিক",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "ভাষা&nbsp;কোড",
+	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<অবৈধ>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "ভাষা",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "উৎস",
 	"visualeditor-mwlanguagevariantcontextitem-title-name": "ভাষার নাম",
