@@ -3,7 +3,7 @@
 Thank you for helping us develop VisualEditor!
 
 We inherit the contribution guidelines from VisualEditor core. Be sure to read the
-[Contribution guidelines](https://git.wikimedia.org/blob/VisualEditor%2FVisualEditor.git/master/CONTRIBUTING.md)
+[Contribution guidelines](https://phabricator.wikimedia.org/diffusion/GVED/browse/master/CONTRIBUTING.md)
 in the VisualEditor repository.
 
 
