@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bunukwiki"
+			"Bunukwiki",
+			"Benel"
 		]
 	},
 	"tooltip-ca-ve-edit": "mikawaway tu kalumyiti uyni kasabelih",
+	"visualeditor-ca-createlocaldescriptionsource": "micunus itiniay a patahkalay sakatineng bangu",
+	"visualeditor-ca-createsource": "tapang sakatizeng bangu",
 	"visualeditor-ca-editsource": "mikawaway tu kalumyiti sakatizeng bangu",
-	"visualeditor-ca-editsource-section": "mikawaway tu kalumyiti sakatizeng bangu"
+	"visualeditor-ca-editsource-section": "mikawaway tu kalumyiti sakatizeng bangu",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }

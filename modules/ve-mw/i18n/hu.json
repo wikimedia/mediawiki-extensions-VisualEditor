@@ -11,7 +11,8 @@
 			"Macofe",
 			"Nyuszika7H",
 			"Tgr",
-			"R-Joe"
+			"R-Joe",
+			"Bencemac"
 		]
 	},
 	"apihelp-visualeditor-description": "A Parsoid szolgáltatástól kapott oldalból HTML5 oldalt készít.",
@@ -336,7 +337,7 @@
 	"visualeditor-savedialog-label-save-short": "Mentés",
 	"visualeditor-savedialog-label-warning": "Figyelmeztetés",
 	"visualeditor-savedialog-review-nosummary": "Nincs szerkesztési összefoglaló",
-	"visualeditor-savedialog-review-visual": "Vizuális",
+	"visualeditor-savedialog-review-visual": "Vizuális (béta)",
 	"visualeditor-savedialog-review-wikitext": "Wikiszöveges",
 	"visualeditor-savedialog-title-conflict": "Ütközés",
 	"visualeditor-savedialog-title-preview": "Változtatásaid megtekintése",

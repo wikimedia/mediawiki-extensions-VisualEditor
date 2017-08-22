@@ -16,6 +16,7 @@
 	"visualeditor-dialog-meta-settings-index-force": "Nya",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Nya",
 	"visualeditor-dialog-transclusion-absent-template": "Citakan \"$1\" geus euweuh.",
+	"visualeditor-editsummary": "Émbarkeun naon nu geus dirobah ku anjeun",
 	"visualeditor-educationpopup-dismiss": "Okéh, ngarti",
 	"visualeditor-mweditmodesource-tool-current": "Édit sumber",
 	"visualeditor-mweditmodesource-warning-cancel": "Bolay",
@@ -27,5 +28,6 @@
 	"visualeditor-savedialog-label-save-short": "Simpen",
 	"visualeditor-savedialog-label-warning": "Kahadé",
 	"visualeditor-savedialog-review-visual": "Visual (béta)",
-	"visualeditor-savedialog-review-wikitext": "Téks wiki"
+	"visualeditor-savedialog-review-wikitext": "Téks wiki",
+	"visualeditor-savedialog-title-save": "Simpen parobahan anjeun"
 }
