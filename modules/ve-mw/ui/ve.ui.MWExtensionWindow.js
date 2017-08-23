@@ -75,14 +75,16 @@ ve.ui.MWExtensionWindow.prototype.getInputPlaceholder = function () {
 ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 	data = data || {};
 	return process.next( function () {
-		var dir;
+		var dir, mwData;
 
 		// Initialization
 		this.whitespace = [ '', '' ];
 
 		if ( this.selectedNode ) {
-			this.input.setValueAndWhitespace( this.selectedNode.getAttribute( 'mw' ).body.extsrc );
-			this.originalMwData = this.selectedNode.getAttribute( 'mw' );
+			mwData = this.selectedNode.getAttribute( 'mw' );
+			// mwData.body can be null in <selfclosing/> extensions
+			this.input.setValueAndWhitespace( mwData.body && mwData.body.extsrc );
+			this.originalMwData = mwData;
 		} else {
 			if ( !this.constructor.static.modelClasses[ 0 ].static.isContent ) {
 				// New nodes should use linebreaks for blocks
