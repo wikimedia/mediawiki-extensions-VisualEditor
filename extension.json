@@ -523,7 +523,6 @@
 				"jquery.uls.data"
 			],
 			"messages": [
-				"visualeditor-quick-access-characters.json",
 				"visualeditor-special-characters-group-other"
 			],
 			"targets": [

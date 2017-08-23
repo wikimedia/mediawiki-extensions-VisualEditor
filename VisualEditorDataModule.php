@@ -25,12 +25,12 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		$msgInfo = $this->getMessageInfo( $context );
 		$parsedMessages = $msgInfo['parsed'];
-		$textMessages = [];
+		$plainMessages = [];
 		foreach ( $msgInfo['parse'] as $msgKey => $msgObj ) {
 			$parsedMessages[ $msgKey ] = $msgObj->parse();
 		}
-		foreach ( $msgInfo['text'] as $msgKey => $msgObj ) {
-			$textMessages[ $msgKey ] = $msgObj->text();
+		foreach ( $msgInfo['plain'] as $msgKey => $msgObj ) {
+			$plainMessages[ $msgKey ] = $msgObj->plain();
 		}
 
 		return 've.init.platform.addParsedMessages(' . FormatJson::encode(
@@ -38,7 +38,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 				ResourceLoader::inDebugMode()
 			) . ');'.
 			've.init.platform.addMessages(' . FormatJson::encode(
-				$textMessages,
+				$plainMessages,
 				ResourceLoader::inDebugMode()
 			) . ');';
 	}
@@ -68,8 +68,8 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			),
 		];
 
-		// Messages to be exported as text
-		$textMsgs = [
+		// Messages to be exported as plain text
+		$plainMsgs = [
 			'visualeditor-feedback-link' =>
 				$context->msg( 'visualeditor-feedback-link' )
 				->inContentLanguage(),
@@ -82,7 +82,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			'parse' => $parseMsgs,
 			// Already parsed
 			'parsed' => $parsedMsgs,
-			'text' => $textMsgs,
+			'plain' => $plainMsgs,
 		];
 	}
 
