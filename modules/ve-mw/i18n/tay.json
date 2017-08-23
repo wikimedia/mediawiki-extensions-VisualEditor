@@ -7,10 +7,19 @@
 			"Translatealcd"
 		]
 	},
-	"tooltip-ca-ve-edit": "Sr’zyut squw gnyahan lpgan tay sqani",
+	"tooltip-ca-ve-edit": "Sr’zyut squw zzngayan tay sqaniy",
+	"visualeditor-backbutton-tooltip": "’bzinah",
 	"visualeditor-ca-createlocaldescriptionsource": "Twangiy miru’ sqaniy quw minmyawsu’ banggo’ puqing na rhzyal sqaniy",
 	"visualeditor-ca-editsource": "Smr’zyut sa sniyan lalu’ na llpgan sa aring ’ringan.",
 	"visualeditor-ca-editsource-section": "Smr’zyut miru’ Yuensma’",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
-	"visualeditor-dialog-media-search-tab-search": "Hhkangi’"
+	"visualeditor-dialog-media-goback": "’bzinah",
+	"visualeditor-dialog-media-save": "Cucun",
+	"visualeditor-dialog-media-search-tab-search": "Hhkangi’",
+	"visualeditor-dialog-meta-settings-index-disable": "Iyat",
+	"visualeditor-dialog-meta-settings-index-force": "Aw’",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Iyat",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Aw’",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "’bzinah",
+	"visualeditor-savedialog-label-warning": "Cingkaw"
 }
