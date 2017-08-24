@@ -8,34 +8,13 @@
 ( function () {
 	var $visualDiff,
 		reviewModeButtonSelect,
-		revCache = {},
 		uri = new mw.Uri(),
 		mode = uri.query.diffmode || 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 
-	function getModelFromResponse( response ) {
-		var doc,
-			targetClass = ve.init.mw.DesktopArticleTarget,
-			data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
-		if ( data && typeof data.content === 'string' ) {
-			doc = targetClass.static.parseDocument( data.content, 'visual' );
-			return targetClass.static.createModelFromDom( doc, 'visual' );
-		}
-		return null;
-	}
-
-	function fetchRevision( pageName, revId ) {
-		revCache[ pageName ] = revCache[ pageName ] || {};
-		if ( !revCache[ pageName ][ revId ] ) {
-			revCache[ pageName ][ revId ] = mw.libs.ve.targetLoader.requestParsoidData( pageName, revId, 'diff' );
-		}
-		return revCache[ pageName ][ revId ];
-	}
-
 	function onReviewModeButtonSelectSelect( item ) {
-		var oldRevPromise, newRevPromise, modulePromise, progress,
-			oldPageName, newPageName,
+		var modulePromise, progress, oldPageName, newPageName,
 			$revSlider = $( '.mw-revslider-container' ),
 			$wikitextDiff = $( 'table.diff[data-mw="interface"]' ),
 			oldId = mw.config.get( 'wgDiffOldId' ),
@@ -52,22 +31,11 @@
 
 		if ( mode === 'visual' ) {
 			progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } );
-			$wikitextDiff.addClass( 'oo-ui-element-hidden' );
-			$wikitextDiff.before( progress.$element );
-			oldRevPromise = fetchRevision( oldPageName, oldId );
-			newRevPromise = fetchRevision( newPageName, newId );
+			$wikitextDiff.addClass( 'oo-ui-element-hidden' ).before( progress.$element );
 			// TODO: Load a smaller subset of VE for computing the visual diff
 			modulePromise = mw.loader.using( [ 'ext.visualEditor.desktopArticleTarget' ].concat( pluginModules ) );
-			$.when( oldRevPromise, newRevPromise, modulePromise ).then( function ( oldResponse, newResponse ) {
-				var visualDiff, diffElement,
-					oldDoc = getModelFromResponse( oldResponse ),
-					newDoc = getModelFromResponse( newResponse );
-
-				// TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.
-				// We may want to remove that assumption from the differ?
-				newDoc.getStore().merge( oldDoc.getStore() );
-				visualDiff = new ve.dm.VisualDiff( oldDoc, newDoc );
-				diffElement = new ve.ui.DiffElement( visualDiff, { classes: [ 've-init-mw-diffPage-diff' ] } );
+			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( function ( visualDiffGenerator ) {
+				var diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
 
 				progress.$element.remove();
 				$wikitextDiff.before( diffElement.$element );
