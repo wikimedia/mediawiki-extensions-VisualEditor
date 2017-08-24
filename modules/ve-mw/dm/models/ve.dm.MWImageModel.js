@@ -438,7 +438,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
  * @throws {Error} Unknown image node type
  */
 ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
-	var captionDoc, offset, contentToInsert,
+	var captionDoc, offset, contentToInsert, selectedNode,
 		nodeType = this.getImageNodeType(),
 		surfaceModel = fragment.getSurface();
 
@@ -446,12 +446,26 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 		return fragment;
 	}
 
+	selectedNode = fragment.getSelectedNode();
+
+	// If there was a previous node, remove it first
+	if ( selectedNode ) {
+		// Remove the old image
+		fragment.removeContent();
+	}
+
 	contentToInsert = this.getData();
 
 	switch ( nodeType ) {
 		case 'mwInlineImage':
-			// Try to put the image inside the nearest content node
-			offset = fragment.getDocument().data.getNearestContentOffset( fragment.getSelection().getRange().start );
+			if ( selectedNode.type === 'mwBlockImage' ) {
+				// If converting from a block image, create a wrapper paragraph for the inline image to go in.
+				fragment.insertContent( [ { type: 'paragraph', internal: { generated: 'wrapper' } }, { type: '/paragraph' } ] );
+				offset = fragment.getSelection().getRange().start + 1;
+			} else {
+				// Try to put the image inside the nearest content node
+				offset = fragment.getDocument().data.getNearestContentOffset( fragment.getSelection().getRange().start );
+			}
 			if ( offset > -1 ) {
 				fragment = fragment.clone( new ve.dm.LinearSelection( fragment.getDocument(), new ve.Range( offset ) ) );
 			}

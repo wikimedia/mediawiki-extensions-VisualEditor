@@ -1393,16 +1393,6 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 					this.imageModel.updateImageNode( this.selectedNode, surfaceModel );
 				} else {
 					// Replacing an image or inserting a brand new one
-
-					// If there was a previous node, remove it first
-					if ( this.selectedNode ) {
-						// Remove the old image
-						this.fragment = this.getFragment().clone(
-							new ve.dm.LinearSelection( this.fragment.getDocument(), this.selectedNode.getOuterRange() )
-						);
-						this.fragment.removeContent();
-					}
-					// Insert the new image
 					this.fragment = this.imageModel.insertImageNode( this.getFragment() );
 				}
 
