@@ -1126,8 +1126,6 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			return this.mediaUploadBooklet.initialize().then( function () {
 				dialog.actions.setAbilities( { upload: false, save: false, insert: false, apply: false } );
 
-				dialog.switchPanels( dialog.selectedNode ? 'edit' : 'search' );
-
 				if ( data.file ) {
 					dialog.searchTabs.setTabPanel( 'upload' );
 					dialog.mediaUploadBooklet.setFile( data.file );
@@ -1298,13 +1296,8 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			if ( this.currentPanel === 'search' ) {
-				// Focus the search input
-				this.search.getQuery().focus().select();
-			} else {
-				// Focus the caption surface
-				this.captionTarget.focus();
-			}
+			// #switchPanels triggers field focus, so do this in the ready process
+			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 			// Revalidate size
 			this.sizeWidget.validateDimensions();
 		}, this );
