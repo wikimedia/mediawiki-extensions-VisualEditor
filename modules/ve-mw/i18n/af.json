@@ -4,7 +4,8 @@
 			"Naudefj",
 			"Neil P. Quinn",
 			"Oesjaar",
-			"Fwolff"
+			"Fwolff",
+			"Biggs ZA"
 		]
 	},
 	"apihelp-visualeditoredit-param-minor": "Merk as 'n klein wysiging.",
@@ -212,6 +213,7 @@
 	"visualeditor-mwgallerydialog-search-button-label": "Voeg nuwe beeld by",
 	"visualeditor-mwgallerydialog-show-filename-field-label": "Wys lêername",
 	"visualeditor-mwgallerydialog-title": "Galery",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Bestemming",
 	"visualeditor-mwsignature-tool": "U handtekening",
 	"visualeditor-pagemenu-tooltip": "Bladsy-instellings",
 	"visualeditor-parameter-input-placeholder": "Veldnaam",
@@ -236,7 +238,7 @@
 	"visualeditor-savedialog-label-save-short": "Stoor",
 	"visualeditor-savedialog-label-warning": "Waarskuwing",
 	"visualeditor-savedialog-review-nosummary": "Geen wysigingsopsomming nie",
-	"visualeditor-savedialog-review-visual": "Visueel",
+	"visualeditor-savedialog-review-visual": "Visueel (beta)",
 	"visualeditor-savedialog-review-wikitext": "Wikiteks",
 	"visualeditor-savedialog-title-conflict": "Konflik",
 	"visualeditor-savedialog-title-preview": "Voorskou van wysigings",
