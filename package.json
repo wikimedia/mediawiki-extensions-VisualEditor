@@ -10,7 +10,7 @@
 	},
 	"devDependencies": {
 		"babel-polyfill": "6.9.1",
-		"eslint-config-wikimedia": "0.4.0",
+		"eslint-config-wikimedia": "0.5.0",
 		"grunt": "1.0.1",
 		"grunt-banana-checker": "0.6.0",
 		"grunt-contrib-copy": "1.0.0",
