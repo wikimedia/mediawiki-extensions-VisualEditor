@@ -12,6 +12,7 @@
 }
 
 .ve-ui-mwLanguageVariantNodeContextItem-rule-table th {
+	white-space: nowrap;
 	border-bottom: 1px solid #c8ccd1;
 	text-align: left;
 }
