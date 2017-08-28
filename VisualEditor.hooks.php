@@ -266,6 +266,7 @@ class VisualEditorHooks {
 					"}" .
 				");"
 			) );
+			$out->setRevisionId( $article->getRevIdFetched() );
 			return false;
 		}
 		return true;
