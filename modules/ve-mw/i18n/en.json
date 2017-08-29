@@ -384,6 +384,7 @@
 	"visualeditor-savedialog-label-review": "Review your changes",
 	"visualeditor-savedialog-label-review-good": "Return to save form",
 	"visualeditor-savedialog-label-save-short": "Save",
+	"visualeditor-savedialog-label-visual-diff-report": "Report incorrect display for this change",
 	"visualeditor-savedialog-label-warning": "Warning",
 	"visualeditor-savedialog-review-nosummary": "No edit summary",
 	"visualeditor-savedialog-review-visual": "Visual (beta)",
