@@ -5,12 +5,21 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-pulsatingDot,
+.ve-ui-stillDot {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	z-index: 1;
+	border-radius: 50%;
+	background-color: #36c;
+}
+
 .ve-ui-pulsatingDot {
 	width: 2.5em;
 	height: 2.5em;
-	border-radius: 50%;
-	background-color: #36c;
-	position: absolute;
+	margin-bottom: -1.25em;
+	margin-left: -1.25em;
 	opacity: 0;
 	-webkit-animation: pulse 3s ease-out;
 	-moz-animation: pulse 3s ease-out;
@@ -23,9 +32,8 @@
 .ve-ui-stillDot {
 	width: 0.8em;
 	height: 0.8em;
-	border-radius: 50%;
-	background-color: #36c;
-	position: absolute;
+	margin-bottom: -0.4em;
+	margin-left: -0.4em;
 }
 
 .ve-ui-educationPopup-shield {
