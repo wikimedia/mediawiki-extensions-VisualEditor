@@ -299,6 +299,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	// 2. User clicks external link tab (unnecessary, because we'd auto-switch, but the user doesn't know that)
 	// 3. User pastes a link, intending to replace the existing prefilled link
 	this.annotationInput.getTextInputWidget().$input[ 0 ].setSelectionRange( 0, end );
+	// Focusing a TextInputWidget normally unsets validity. However, because
+	// we're kind of pretending this is the same input, just in a different
+	// mode, it doesn't make sense to the user that the focus behavior occurs.
+	this.annotationInput.getTextInputWidget().setValidityFlag();
 
 	this.updateActions();
 };
