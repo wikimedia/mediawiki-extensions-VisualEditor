@@ -161,7 +161,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 		default:
 			break;
 	}
-	if ( $table.children().size() > 1 ) {
+	if ( $table.find( 'tr' ).size() > 1 ) {
 		// Don't put $table in $body if the table is empty; this allows
 		// CSS :empty rules to have their proper effect.
 		ve.dm.MWLanguageVariantNode.static.processVariants(
