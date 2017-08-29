@@ -2027,6 +2027,8 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 				.replace( /\[\[:?([^[|]+)\|([^[]+)\]\]/, '$2' )
 				.replace( /\[\[:?([^[]+)\|?\]\]/, '$1' )
 				.replace( new RegExp( '\\[(?:' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + ')([^ ]+?) ([^\\[]+)\\]', 'i' ), '$3' )
+				// Cheap HTML removal
+				.replace( /<[^>]+?>/g, '' )
 			;
 		}
 		if ( headingText ) {
