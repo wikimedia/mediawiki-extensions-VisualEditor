@@ -173,7 +173,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "必要であれば表示",
 	"visualeditor-dialog-meta-settings-toc-disable": "常に非表示",
 	"visualeditor-dialog-meta-settings-toc-force": "常に表示",
-	"visualeditor-dialog-meta-settings-toc-help": "見出しの数が3個よりも少ないページにおいても、ページの上部へ強制的に目次（見出しの一覧）を表示、もしくは強制的に非表示にできます。既定の設定では、3個以上の見出しがあるページにおいて、目次を表示しています。",
+	"visualeditor-dialog-meta-settings-toc-help": "見出しの数が4個よりも少ないページにおいても、ページの上部へ強制的に目次（見出しの一覧）を表示、もしくは強制的に非表示にできます。既定の設定では、4個以上の見出しがあるページにおいて、目次を表示しています。",
 	"visualeditor-dialog-meta-settings-toc-label": "目次の表示",
 	"visualeditor-dialog-meta-templatesused-noresults": "テンプレートは使用されていません。",
 	"visualeditor-dialog-meta-title": "オプション",
