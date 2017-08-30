@@ -5,6 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-educationPopup {
+	cursor: pointer;
+}
+
 .ve-ui-pulsatingDot,
 .ve-ui-stillDot {
 	position: absolute;
