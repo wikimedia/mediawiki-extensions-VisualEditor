@@ -89,18 +89,6 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			$shield.remove();
 		}
 	} );
-
-	setTimeout( function () {
-		var radius = tool.$pulsatingDot.width() / 2;
-		tool.$pulsatingDot.css( {
-			left: tool.$element.width() / 2 - radius,
-			top: tool.$element.height() - radius
-		} );
-		tool.$stillDot.css( {
-			left: tool.$element.width() / 2 - radius / 3,
-			top: tool.$element.height() - radius / 3
-		} );
-	}, 0 );
 };
 
 /* Inheritance */
