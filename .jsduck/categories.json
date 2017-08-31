@@ -133,7 +133,6 @@
 					"ve.dm.TableNodeCellIterator",
 					"ve.dm.Change",
 					"ve.dm.RebaseDocState",
-					"ve.dm.RebaseServer",
 					"ve.dm.RebaseClient",
 					"ve.dm.SurfaceSynchronizer"
 				]
@@ -193,9 +192,7 @@
 					"ve.QUnit",
 					"ve.QUnit.assert",
 					"ve.ce.TestOffset",
-					"ve.ce.TestRunner",
-					"ve.dm.TestRebaseClient",
-					"ve.dm.TestRebaseServer"
+					"ve.ce.TestRunner"
 				]
 			}
 		]

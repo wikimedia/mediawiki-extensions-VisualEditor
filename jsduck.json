@@ -24,5 +24,12 @@
 		"lib/ve/src",
 		"lib/ve/tests",
 		"modules/ve-mw"
+	],
+	"--exclude": [
+		"lib/ve/src/dm/ve.dm.RebaseServer.js",
+		"lib/ve/src/ve.utils-es6.js",
+		"lib/ve/tests/dm/ve.dm.RebaseServer.test.js",
+		"lib/ve/tests/dm/ve.dm.TestRebaseClient.js",
+		"lib/ve/tests/dm/ve.dm.TestRebaseServer.js"
 	]
 }
