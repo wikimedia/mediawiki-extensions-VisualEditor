@@ -442,15 +442,12 @@ class ApiVisualEditor extends ApiBase {
 				$req->setVal( 'format', $editPage->contentFormat );
 				// By reference for some reason (T54466)
 				$editPage->importFormData( $req );
-				$tabindex = 0;
 				$states = [
 					'minor' => $user->getOption( 'minordefault' ) && $title->exists(),
 					'watch' => $user->getOption( 'watchdefault' ) ||
 						( $user->getOption( 'watchcreations' ) && !$title->exists() ) ||
 						$user->isWatched( $title ),
 				];
-				$checkboxes = method_exists( $editPage, 'getCheckboxes' )
-					? $editPage->getCheckboxes( $tabindex, $states ) : '';
 				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
 				$checkboxesMessages = [];
 				foreach ( $checkboxesDef as $name => $options ) {
@@ -517,7 +514,6 @@ class ApiVisualEditor extends ApiBase {
 				$result = [
 					'result' => 'success',
 					'notices' => $notices,
-					'checkboxes' => $checkboxes,
 					'checkboxesDef' => $checkboxesDef,
 					'checkboxesMessages' => $checkboxesMessages,
 					'templates' => $templates,
