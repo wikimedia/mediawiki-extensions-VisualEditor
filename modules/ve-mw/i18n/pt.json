@@ -19,7 +19,8 @@
 			"Amire80",
 			"Imperadeiro90",
 			"Macofe",
-			"Diniscoelho"
+			"Diniscoelho",
+			"MokaAkashiyaPT"
 		]
 	},
 	"apihelp-visualeditor-description": "Devolve o HTML5 para uma página a partir do serviço Parsoid.",
@@ -51,7 +52,7 @@
 	"apihelp-visualeditoredit-param-paction": "Operação a executar.",
 	"apihelp-visualeditoredit-param-page": "A página na qual serão realizadas as operações.",
 	"apihelp-visualeditoredit-param-section": "A secção na qual serão realizadas as operações.",
-	"apihelp-visualeditoredit-param-sectiontitle": "Título para a nova seção.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Título para a nova secção.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Ao gravar, defina aqui a data e hora em que a página foi carregada. Usado para detetar conflitos de edição.",
 	"apihelp-visualeditoredit-param-summary": "Resumo da edição.",
 	"apihelp-visualeditoredit-param-watch": "Adicionar a página às páginas vigiadas do utilizador atual.",
@@ -393,7 +394,7 @@
 	"visualeditor-saveerror": "Erro ao gravar dados no servidor: $1.",
 	"visualeditor-saveerror-hookaborted": "Erro ao gravar a página: Uma extensão no servidor impediu a gravação.",
 	"visualeditor-saveerror-titleblacklist": "Erro ao gravar a página: O título da página encontra-se na lista negra",
-	"visualeditor-section-body-placeholder": "Nova seção",
+	"visualeditor-section-body-placeholder": "Nova secção",
 	"visualeditor-section-title-placeholder": "Assunto",
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
 	"visualeditor-settings-tool": "Configurações da página",

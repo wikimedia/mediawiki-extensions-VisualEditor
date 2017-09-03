@@ -48,7 +48,8 @@
 			"Litlok",
 			"Pols12",
 			"The RedBurn",
-			"Thibaut120094"
+			"Thibaut120094",
+			"DePlusJean"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -106,7 +107,7 @@
 	"visualeditor-ca-createsource": "Créer le wikicode",
 	"visualeditor-ca-editlocaldescriptionsource": "Modifier la description locale (wikicode)",
 	"visualeditor-ca-editsource": "Modifier le wikicode",
-	"visualeditor-ca-editsource-section": "modifier le wikicode",
+	"visualeditor-ca-editsource-section": "Modifier le wikicode",
 	"visualeditor-ca-ve-create": "ÉditeurVisuel",
 	"visualeditor-ca-ve-edit": "ÉditeurVisuel",
 	"visualeditor-ca-ve-edit-section": "ÉditeurVisuel",

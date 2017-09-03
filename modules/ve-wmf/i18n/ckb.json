@@ -3,11 +3,14 @@
 		"authors": [
 			"Calak",
 			"Muhammed taha",
-			"Asoxor"
+			"Asoxor",
+			"Lost Whispers"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|دەستکاریی دیداری]]",
 	"tag-visualeditor-description": "دەستکاری بە [[{{MediaWiki:visualeditor-descriptionpagelink}}|دەستکاریکەری دیداری]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|دەستکاریکەری دیداری: تاوتوێ]]",
-	"visualeditor-help-label": "ڕێنوێنیی بەکارھێنەر بخوێنەرەوە"
+	"visualeditor-help-label": "ڕێنوێنیی بەکارھێنەر بخوێنەرەوە",
+	"visualeditor-welcomedialog-content": "ھەمووکەسێک دەتوانێت دەستکاری بکات، و ھەر چاکسازییەکیش یارمەتی دەدات.",
+	"visualeditor-welcomedialog-content-thanks": "بۆ ھەر چاکسازییەک، خزمەتی زمانی کوردی و کردستان دەکەیت. سپاس!"
 }

@@ -26,7 +26,8 @@
 			"Kanashimi",
 			"Jdforrester",
 			"烈羽",
-			"和平奮鬥救地球"
+			"和平奮鬥救地球",
+			"Wwycheuk"
 		]
 	},
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
@@ -86,13 +87,13 @@
 	"visualeditor-desc": "MediaWiki 的視覺化編輯器",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "替代文字",
-	"visualeditor-dialog-media-alttext-section-help": "您可以使用此設定撰寫當使用者無法看到該項目時的文字描述。 描述的內容應要足夠讓人可以了解媒體的目的與資訊。此設定對盲人以及其他使用螢幕閱讀器與文字瀏覽器的人相當重要。",
+	"visualeditor-dialog-media-alttext-section-help": "可以使用此設定撰寫當使用者無法看到該項目時的文字說明。說明的內容應要足夠讓人可以了解媒體的目的與資訊。此設定對盲人以及其他使用螢幕閱讀器與文字瀏覽器的人相當重要。",
 	"visualeditor-dialog-media-change-image": "變更圖片",
 	"visualeditor-dialog-media-choose-image": "使用此圖片",
 	"visualeditor-dialog-media-content-filename": "檔案名稱",
 	"visualeditor-dialog-media-content-description-link": "(描述頁面)",
 	"visualeditor-dialog-media-content-section": "標題",
-	"visualeditor-dialog-media-content-section-help": "你可以使用此設定於媒體的下方顯示標籤給所有讀者。 此設定通常用來說明媒體與文章上下文的關係，應要簡明扼要。",
+	"visualeditor-dialog-media-content-section-help": "可以使用此設定於媒體的下方顯示標籤給所有讀者。此設定通常用來說明媒體與文章脈絡的關係，應要簡明扼要。",
 	"visualeditor-dialog-media-goback": "返回",
 	"visualeditor-dialog-media-info-artist": "由 $1 上傳",
 	"visualeditor-dialog-media-info-audiofile": "音訊檔案",
