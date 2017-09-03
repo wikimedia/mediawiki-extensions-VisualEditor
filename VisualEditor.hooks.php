@@ -493,7 +493,7 @@ class VisualEditorHooks {
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
 		$request = $output->getRequest();
 		if ( $request->getBool( 'veswitched' ) ) {
-			$output->addHTML( Xml::input( 'veswitched', false, '1', [ 'type' => 'hidden' ] ) );
+			$output->addHTML( Html::hidden( 'veswitched', '1' ) );
 		}
 		return true;
 	}
