@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bunukwiki",
-			"Benel"
+			"Benel",
+			"Tokoabibi"
 		]
 	},
 	"tooltip-ca-ve-edit": "mikawaway tu kalumyiti uyni kasabelih",
@@ -13,7 +14,7 @@
 	"visualeditor-ca-editsource-section": "mikawaway tu kalumyiti sakatizeng bangu",
 	"visualeditor-categories-tool": "kakuniza",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
-	"visualeditor-dialog-media-content-section": "pyawti",
+	"visualeditor-dialog-media-content-section": "satangahan",
 	"visualeditor-dialog-media-goback": "tatiku",
 	"visualeditor-dialog-media-info-meta-artist": "misacudaday: $1",
 	"visualeditor-dialog-media-position-center": "pateban",
@@ -27,9 +28,11 @@
 	"visualeditor-dialog-media-searchselect": "mipili’",
 	"visualeditor-dialog-media-type-border": "nikatatapal",
 	"visualeditor-dialog-media-type-frame": "misabacu",
+	"visualeditor-dialog-media-type-frameless": "inayi’ ku nikatatapal",
 	"visualeditor-dialog-media-type-none": "angangan",
 	"visualeditor-dialog-media-upload": "patapabaw",
 	"visualeditor-dialog-meta-categories-data-label": "kakuniza",
+	"visualeditor-dialog-meta-categories-input-newcategorylabel": "baluhay a kakuniza",
 	"visualeditor-dialog-meta-categories-options": "mapili’ay",
 	"visualeditor-dialog-meta-categories-section": "kakuniza",
 	"visualeditor-dialog-meta-languages-label": "kamu",
@@ -63,6 +66,7 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "kamu",
 	"visualeditor-savedialog-label-warning": "patalaw",
 	"visualeditor-savedialog-title-conflict": "sasula’cus",
+	"visualeditor-section-body-placeholder": "baluhay a tusil",
 	"visualeditor-section-title-placeholder": "taazihan tu kawaw",
 	"visualeditor-shortcuts-insert": "pacucuk",
 	"visualeditor-version-label": "baziyong"
