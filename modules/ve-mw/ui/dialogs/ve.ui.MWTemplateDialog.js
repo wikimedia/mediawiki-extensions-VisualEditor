@@ -121,7 +121,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			removed.disconnect( this );
 		}
 		if ( this.loaded && !this.preventReselection && partPage.isActive() ) {
-			reselect = this.bookletLayout.getClosestPage( partPage );
+			reselect = this.bookletLayout.findClosestPage( partPage );
 		}
 		removePages.push( partPage );
 		this.bookletLayout.removePages( removePages );
@@ -232,7 +232,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameterBeforeLoad = function () {};
  */
 ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 	var page = this.bookletLayout.getPage( param.getId() ),
-		reselect = this.bookletLayout.getClosestPage( page );
+		reselect = this.bookletLayout.findClosestPage( page );
 
 	this.bookletLayout.removePages( [ page ] );
 	if ( this.loaded ) {
