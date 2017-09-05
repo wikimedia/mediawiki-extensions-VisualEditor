@@ -449,7 +449,24 @@ class ApiVisualEditor extends ApiBase {
 						( $user->getOption( 'watchcreations' ) && !$title->exists() ) ||
 						$user->isWatched( $title ),
 				];
-				$checkboxes = $editPage->getCheckboxes( $tabindex, $states );
+				$checkboxes = method_exists( $editPage, 'getCheckboxes' )
+					? $editPage->getCheckboxes( $tabindex, $states ) : '';
+				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
+				$checkboxesMessages = [];
+				foreach ( $checkboxesDef as $name => $options ) {
+					if ( isset( $options['tooltip'] ) ) {
+						$checkboxesMessages[ "accesskey-{$options['tooltip']}" ] =
+							$this->msg( "accesskey-{$options['tooltip']}" )->plain();
+						$checkboxesMessages[ "tooltip-{$options['tooltip']}" ] =
+							$this->msg( "tooltip-{$options['tooltip']}" )->plain();
+					}
+					if ( isset( $options['title-message'] ) ) {
+						$checkboxesMessages[ $options['title-message'] ] =
+							$this->msg( $options['title-message'] )->plain();
+					}
+					$checkboxesMessages[ $options['label-message'] ] =
+						$this->msg( $options['label-message'] )->plain();
+				}
 				$templates = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 
 				// HACK: Find out which red links are on the page
@@ -493,10 +510,16 @@ class ApiVisualEditor extends ApiBase {
 
 				// On parser cache miss, just don't bother populating red link data
 
+				foreach ( $checkboxesDef as &$value ) {
+					// Don't convert the boolean to empty string with formatversion=1
+					$value[ApiResult::META_BC_BOOLS] = [ 'default' ];
+				}
 				$result = [
 					'result' => 'success',
 					'notices' => $notices,
 					'checkboxes' => $checkboxes,
+					'checkboxesDef' => $checkboxesDef,
+					'checkboxesMessages' => $checkboxesMessages,
 					'templates' => $templates,
 					'links' => $links,
 					'protectedClasses' => implode( ' ', $protectedClasses ),
