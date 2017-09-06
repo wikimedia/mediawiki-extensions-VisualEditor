@@ -959,6 +959,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/dm/ve.dm.LinearData.test.js',
 				'lib/ve/tests/dm/ve.dm.Transaction.test.js',
 				'lib/ve/tests/dm/ve.dm.TransactionBuilder.test.js',
+				'lib/ve/tests/dm/ve.dm.TreeModifier.test.js',
 				'lib/ve/tests/dm/ve.dm.TransactionProcessor.test.js',
 				'lib/ve/tests/dm/ve.dm.APIResultsQueue.test.js',
 				'lib/ve/tests/dm/ve.dm.Surface.test.js',
