@@ -431,12 +431,27 @@
 			"scripts": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js"
 			],
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css",
+				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
+			],
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
+				],
+				"apex": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-apex.css"
+				],
+				"monobook": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
+				]
+			},
 			"dependencies": [
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
 				"ext.visualEditor.mwextensions.desktop",
-				"ext.visualEditor.desktopArticleTarget"
+				"ext.visualEditor.desktopTarget"
 			]
 		},
 		"ext.visualEditor.collabTarget.init": {
