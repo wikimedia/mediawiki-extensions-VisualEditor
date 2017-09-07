@@ -114,7 +114,10 @@ ve.ui.MWExtensionWindow.prototype.getReadyProcess = function ( data, process ) {
  * @inheritdoc OO.ui.Window
  */
 ve.ui.MWExtensionWindow.prototype.getTeardownProcess = function ( data, process ) {
-	return process;
+	return process.next( function () {
+		// Don't hold on to the original data, it's only refreshed on setup for existing nodes
+		this.originalMwData = null;
+	}, this );
 };
 
 /**
