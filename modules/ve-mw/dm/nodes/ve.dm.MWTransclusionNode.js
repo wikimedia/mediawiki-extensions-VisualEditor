@@ -203,9 +203,6 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			els[ i ] = wrapTextNode( els[ i ] );
 			els[ i ].setAttribute( 'data-ve-ignore', 'true' );
 		}
-
-		// Resolve attributes
-		ve.resolveAttributes( $( els ), doc, ve.dm.Converter.static.computedAttributes );
 	}
 	return els;
 };
