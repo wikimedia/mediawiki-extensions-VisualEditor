@@ -17,6 +17,7 @@
 	"visualeditor-dialog-media-content-section": "satangahan",
 	"visualeditor-dialog-media-goback": "tatiku",
 	"visualeditor-dialog-media-info-meta-artist": "misacudaday: $1",
+	"visualeditor-dialog-media-info-uploaded": "patapabaw tuway: $1",
 	"visualeditor-dialog-media-position-center": "pateban",
 	"visualeditor-dialog-media-position-left": "kawili",
 	"visualeditor-dialog-media-position-none": "nayi’",
@@ -46,11 +47,13 @@
 	"visualeditor-dialog-meta-settings-toc-disable": "caaytu",
 	"visualeditor-dialog-meta-settings-toc-force": "mahizatuay",
 	"visualeditor-dialog-meta-title": "mapili’ay",
+	"visualeditor-dialog-table-sortable": "taneng misilsil",
 	"visualeditor-dialog-transclusion-content": "lacul",
 	"visualeditor-dialog-transclusion-param-default": "pataayaw tu kawaw: $1",
 	"visualeditor-dialog-transclusion-title": "nicaliwan",
 	"visualeditor-dialogbutton-media-tooltip": "myiti",
 	"visualeditor-dialogbutton-transclusion-tooltip": "nicaliwan",
+	"visualeditor-editnotices-tooltip": "mikawaway-kalumyiti buhci tu kamu",
 	"visualeditor-educationpopup-dismiss": "maalatu",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading2": "satangahan",
@@ -69,5 +72,6 @@
 	"visualeditor-section-body-placeholder": "baluhay a tusil",
 	"visualeditor-section-title-placeholder": "taazihan tu kawaw",
 	"visualeditor-shortcuts-insert": "pacucuk",
+	"visualeditor-toolbar-savedialog": "misuped kasabelih",
 	"visualeditor-version-label": "baziyong"
 }
