@@ -48,6 +48,14 @@ ve.init.mw.CollabTarget.static.name = 'collab';
 ve.init.mw.CollabTarget.static.trackingName = 'collab';
 
 ve.init.mw.CollabTarget.static.actionGroups = [
+	{ include: [ 'help' ] },
+	{
+		type: 'list',
+		icon: 'menu',
+		indicator: null,
+		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+		include: [ 'changeDirectionality', 'findAndReplace' ]
+	},
 	{ include: [ 'authorList' ] }
 ];
 
@@ -85,19 +93,19 @@ ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
 		've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-open ve-init-mw-desktopArticleTarget-toolbar-opened'
 	);
 	this.$element.prepend( this.toolbar.$element );
+	this.toolbar.initialize();
 };
 
 /**
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
-	var synchronizer, surfaceView, toolbar;
+	var synchronizer, surfaceView;
 
 	if ( surface !== this.surface ) {
 		this.$editableContent.after( surface.$element );
 
 		surfaceView = surface.getView();
-		toolbar = this.getToolbar();
 
 		synchronizer = new ve.dm.SurfaceSynchronizer(
 			surface.getModel(),
@@ -105,7 +113,6 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			{ server: this.rebaserUrl }
 		);
 
-		toolbar.initialize();
 		surfaceView.setSynchronizer( synchronizer );
 	}
 
