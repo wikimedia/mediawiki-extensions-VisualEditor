@@ -480,7 +480,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( $params['paction'] !== 'wikitext' ) {
 					$wikipage = WikiPage::factory( $title );
 					$popts = $wikipage->makeParserOptions( 'canonical' );
-					$cached = ParserCache::singleton()->get( $article, $popts, true );
+					$cached = MediaWikiServices::getInstance()->getParserCache()->get( $article, $popts, true );
 					$links = [
 						// Array of linked pages that are missing
 						'missing' => [],
