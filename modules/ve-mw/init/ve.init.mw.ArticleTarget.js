@@ -197,6 +197,18 @@ ve.init.mw.ArticleTarget.static.integrationType = 'page';
  */
 ve.init.mw.ArticleTarget.static.platformType = 'other';
 
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.super.static.documentCommands.concat( [
+	// Make save commands triggerable from anywhere
+	'showSave',
+	'showChanges',
+	'showPreview',
+	'showMinoredit',
+	'showWatchthis'
+] );
+
 /* Methods */
 
 /**
