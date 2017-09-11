@@ -79,14 +79,12 @@ ve.ui.actionFactory.register( ve.ui.MWSaveDialogAction );
 
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'showSave', 'mwSaveDialog', 'save',
-		{ supportedSelections: [ 'linear', 'table' ] }
+		'showSave', 'mwSaveDialog', 'save'
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'showChanges', 'mwSaveDialog', 'review',
-		{ supportedSelections: [ 'linear', 'table' ] }
+		'showChanges', 'mwSaveDialog', 'review'
 	)
 );
 if ( mw.libs.ve.isWikitextAvailable ) {
@@ -94,8 +92,7 @@ if ( mw.libs.ve.isWikitextAvailable ) {
 	mw.loader.using( 'ext.visualEditor.mwwikitext' ).then( function () {
 		ve.ui.wikitextCommandRegistry.register(
 			new ve.ui.Command(
-				'showPreview', 'mwSaveDialog', 'preview',
-				{ supportedSelections: [ 'linear', 'table' ] }
+				'showPreview', 'mwSaveDialog', 'preview'
 			)
 		);
 	} );
@@ -103,13 +100,13 @@ if ( mw.libs.ve.isWikitextAvailable ) {
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'saveMinoredit', 'mwSaveDialog', 'save',
-		{ args: [ 'wpMinoredit' ], supportedSelections: [ 'linear', 'table' ] }
+		{ args: [ 'wpMinoredit' ] }
 	)
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
 		'saveWatchthis', 'mwSaveDialog', 'save',
-		{ args: [ 'wpWatchthis' ], supportedSelections: [ 'linear', 'table' ] }
+		{ args: [ 'wpWatchthis' ] }
 	)
 );
 
