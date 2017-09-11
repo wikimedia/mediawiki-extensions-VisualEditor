@@ -14,12 +14,9 @@
  * @extends ve.init.mw.Target
  *
  * @constructor
- * @param {string} pageName Name of target page
- * @param {string} [revisionId] If the editor should load a revision of the page, pass the
- *  revision id here. Defaults to loading the latest version (see #load).
  * @param {Object} [config] Configuration options
  */
-ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId, config ) {
+ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		shadow: true,
@@ -37,9 +34,11 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 	this.docToSave = null;
 	this.originalDmDoc = null;
 	this.toolbarSaveButton = null;
-	this.pageName = pageName;
+	this.pageName = mw.config.get( 'wgRelevantPageName' );
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
+	// A workaround, as default URI does not get updated after pushState (bug 72334)
+	this.currentUri = new mw.Uri( location.href );
 	this.section = null;
 	this.sectionTitle = null;
 	this.editSummaryValue = null;
@@ -51,7 +50,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( pageName, revisionId,
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
-	this.requestedRevId = revisionId && parseInt( revisionId );
+	this.requestedRevId = mw.config.get( 'wgRevisionId' );
 	this.currentRevisionId = mw.config.get( 'wgCurRevisionId' );
 	this.revid = this.requestedRevId || this.currentRevisionId;
 
