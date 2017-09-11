@@ -246,16 +246,14 @@
 			// requested already but it might not have finished loading yet
 			dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
 				.then( function () {
-					return mw.libs.ve.targetLoader.requestPageData(
-						mode,
-						mw.config.get( 'wgRelevantPageName' ),
-						section,
-						oldid,
-						'mwTarget', // ve.init.mw.DesktopArticleTarget.static.name
-						modified,
+					return mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
+						section: section,
+						oldId: oldid,
+						targetName: 'article', // ve.init.mw.DesktopArticleTarget.static.name
+						modified: modified,
 						// If switching to visual, check if we have wikitext to convert
-						mode === 'visual' ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
-					);
+						wikitext: mode === 'visual' ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
+					} );
 				} )
 				.done( incrementLoadingProgress );
 		}

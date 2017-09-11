@@ -1051,11 +1051,10 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 		if ( !this.fromEditedState ) {
 			this.originalDmDoc = this.constructor.static.createModelFromDom( this.doc, 'visual' );
 		} else {
-			mw.libs.ve.targetLoader.requestParsoidData(
-				this.pageName,
-				this.revid,
-				this.constructor.name
-			).then( function ( response ) {
+			mw.libs.ve.targetLoader.requestParsoidData( this.pageName, {
+				oldId: this.revid,
+				targetName: 'diff'
+			} ).then( function ( response ) {
 				var doc, data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 				if ( data && typeof data.content === 'string' ) {
 					doc = target.constructor.static.parseDocument( data.content, 'visual' );
@@ -1145,13 +1144,11 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	this.events.trackActivationStart( mw.libs.ve.activationStart );
 	mw.libs.ve.activationStart = null;
 
-	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData(
-		this.getDefaultMode(),
-		this.pageName,
-		this.section,
-		this.requestedRevId,
-		this.constructor.name
-	);
+	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.pageName, {
+		section: this.section,
+		oldId: this.requestedRevId,
+		targetName: this.constructor.static.name
+	} );
 	this.loading
 		.done( this.loadSuccess.bind( this ) )
 		.fail( this.loadFail.bind( this ) );
@@ -2173,13 +2170,11 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 
 	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
 		if ( discardChanges ) {
-			dataPromise = mw.libs.ve.targetLoader.requestPageData(
-				'source',
-				this.pageName,
-				this.section,
-				this.requestedRevId,
-				this.constructor.name
-			).then(
+			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.pageName, {
+				section: this.section,
+				oldId: this.requestedRevId,
+				targetName: this.constructor.static.name
+			} ).then(
 				function ( response ) { return response; },
 				function () {
 					// TODO: Some sort of progress bar?
@@ -2246,13 +2241,12 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 				windowManager.destroy();
 			} );
 	} else {
-		dataPromise = mw.libs.ve.targetLoader.requestParsoidData(
-			this.pageName,
-			this.revid,
-			this.constructor.name,
-			this.edited,
-			this.getDocToSave()
-		);
+		dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.pageName, {
+			oldId: this.revid,
+			targetName: this.constructor.static.name,
+			modified: this.edited,
+			wikitext: this.getDocToSave()
+		} );
 
 		this.reloadSurface( 'visual', dataPromise );
 	}
