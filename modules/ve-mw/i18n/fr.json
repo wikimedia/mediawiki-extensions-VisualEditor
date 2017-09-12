@@ -411,6 +411,7 @@
 	"visualeditor-savedialog-label-review": "Relire vos modifications",
 	"visualeditor-savedialog-label-review-good": "Retour",
 	"visualeditor-savedialog-label-save-short": "Enregistrer",
+	"visualeditor-savedialog-label-visual-diff-report": "Signaler l’affichage incorrect pour cette modification",
 	"visualeditor-savedialog-label-warning": "Avertissement",
 	"visualeditor-savedialog-review-nosummary": "Aucun résumé de modification",
 	"visualeditor-savedialog-review-visual": "Visuel (bêta)",

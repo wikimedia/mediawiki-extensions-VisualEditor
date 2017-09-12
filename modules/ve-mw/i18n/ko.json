@@ -363,6 +363,7 @@
 	"visualeditor-savedialog-label-review": "바뀐 내용 검토",
 	"visualeditor-savedialog-label-review-good": "저장 양식으로 돌아가기",
 	"visualeditor-savedialog-label-save-short": "저장",
+	"visualeditor-savedialog-label-visual-diff-report": "이 변경사항에 대한 잘못된 표시 보고하기",
 	"visualeditor-savedialog-label-warning": "경고",
 	"visualeditor-savedialog-review-nosummary": "편집 요약 없음",
 	"visualeditor-savedialog-review-visual": "시각 (베타)",

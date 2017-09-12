@@ -388,6 +388,7 @@
 	"visualeditor-savedialog-label-review": "检查您的更改",
 	"visualeditor-savedialog-label-review-good": "返回到保存表单",
 	"visualeditor-savedialog-label-save-short": "保存",
+	"visualeditor-savedialog-label-visual-diff-report": "报告此次更改的不正确显示",
 	"visualeditor-savedialog-label-warning": "警告",
 	"visualeditor-savedialog-review-nosummary": "无编辑摘要",
 	"visualeditor-savedialog-review-visual": "可视化（测试）",
