@@ -959,6 +959,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/dm/ve.dm.LinearData.test.js',
 				'lib/ve/tests/dm/ve.dm.Transaction.test.js',
 				'lib/ve/tests/dm/ve.dm.TransactionBuilder.test.js',
+				'lib/ve/tests/dm/ve.dm.Change.test.js',
 				'lib/ve/tests/dm/ve.dm.TreeModifier.test.js',
 				'lib/ve/tests/dm/ve.dm.TransactionProcessor.test.js',
 				'lib/ve/tests/dm/ve.dm.APIResultsQueue.test.js',
@@ -1070,6 +1071,7 @@ class VisualEditorHooks {
 				'ext.visualEditor.experimental',
 				'ext.visualEditor.desktopArticleTarget.init',
 				'ext.visualEditor.desktopArticleTarget',
+				'ext.visualEditor.rebase'
 			],
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'VisualEditor',

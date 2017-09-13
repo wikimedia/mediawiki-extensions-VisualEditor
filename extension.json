@@ -451,7 +451,8 @@
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
 				"ext.visualEditor.mwextensions.desktop",
-				"ext.visualEditor.desktopTarget"
+				"ext.visualEditor.desktopTarget",
+				"ext.visualEditor.rebase"
 			]
 		},
 		"ext.visualEditor.collabTarget.init": {
@@ -624,6 +625,7 @@
 				"lib/ve/src/dm/ve.dm.TransactionProcessor.js",
 				"lib/ve/src/dm/ve.dm.Transaction.js",
 				"lib/ve/src/dm/ve.dm.TransactionBuilder.js",
+				"lib/ve/src/dm/ve.dm.Change.js",
 				"lib/ve/src/dm/ve.dm.TreeCursor.js",
 				"lib/ve/src/dm/ve.dm.TreeModifier.js",
 				"lib/ve/src/dm/ve.dm.Selection.js",
@@ -1122,10 +1124,7 @@
 		},
 		"ext.visualEditor.rebase": {
 			"scripts": [
-				"lib/ve/src/ve.utils-es6.js",
-				"lib/ve/src/dm/ve.dm.Change.js",
 				"lib/ve/src/dm/ve.dm.RebaseClient.js",
-				"lib/ve/src/dm/ve.dm.RebaseDocState.js",
 				"lib/ve/src/dm/ve.dm.SurfaceSynchronizer.js",
 				"lib/ve/src/ui/widgets/ve.ui.AuthorItemWidget.js",
 				"lib/ve/src/ui/tools/ve.ui.AuthorListPopupTool.js"
@@ -1152,8 +1151,7 @@
 				"lib/ve/src/ui/styles/ve.ui.DesktopContext.css"
 			],
 			"dependencies": [
-				"ext.visualEditor.core",
-				"ext.visualEditor.rebase"
+				"ext.visualEditor.core"
 			],
 			"targets": [
 				"desktop"
