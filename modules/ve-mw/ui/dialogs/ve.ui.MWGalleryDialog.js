@@ -314,6 +314,11 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 							// The "File:" prefix is optional in wikitext galleries. This will add
 							// the prefix if there is no prefix, but won't change an existing
 							// prefix (e.g. "Category:")
+
+							if ( matches[ 1 ].indexOf( '%' ) !== -1 ) {
+								matches[ 1 ] = decodeURIComponent( matches[ 1 ] );
+							}
+
 							title = mw.Title.newFromText( matches[ 1 ], namespaceIds.file );
 							// Ignore any invalid titles
 							// (which will result in title being null)
