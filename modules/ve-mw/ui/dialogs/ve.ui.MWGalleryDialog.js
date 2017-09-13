@@ -767,8 +767,8 @@ ve.ui.MWGalleryDialog.prototype.updateMwData = function ( mwData ) {
 	mwData.attrs.heights = data.heights;
 	mwData.attrs.perrow = data.perrow;
 	mwData.attrs.showfilename = data.showFilename;
-	mwData.attrs.classes = data.classes;
-	mwData.attrs.styles = data.styles;
+	mwData.attrs.class = data.classes;
+	mwData.attrs.style = data.styles;
 };
 
 /* Registration */
