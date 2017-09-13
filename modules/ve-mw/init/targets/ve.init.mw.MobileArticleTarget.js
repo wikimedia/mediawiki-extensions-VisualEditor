@@ -22,9 +22,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) 
 	}, config.toolbarConfig );
 
 	// Parent constructor
-	ve.init.mw.MobileArticleTarget.super.call(
-		this, mw.config.get( 'wgRelevantPageName' ), mw.config.get( 'wgRevisionId' ), config
-	);
+	ve.init.mw.MobileArticleTarget.super.call( this, config );
 
 	this.section = config.section;
 

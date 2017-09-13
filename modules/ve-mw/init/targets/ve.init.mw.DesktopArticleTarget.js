@@ -17,13 +17,8 @@
  * @param {Object} config Configuration options
  */
 ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config ) {
-	// A workaround, as default URI does not get updated after pushState (bug 72334)
-	var currentUri = new mw.Uri( location.href );
-
 	// Parent constructor
-	ve.init.mw.DesktopArticleTarget.super.call(
-		this, mw.config.get( 'wgRelevantPageName' ), mw.config.get( 'wgRevisionId' ), config
-	);
+	ve.init.mw.DesktopArticleTarget.super.call( this, config );
 
 	// Parent constructor bound key event handlers, but we don't want them bound until
 	// we activate; so unbind them again
@@ -52,18 +47,17 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		tag: 'visualeditor'
 	};
 	this.scrollTop = null;
-	this.currentUri = currentUri;
 	this.section = null;
 	if ( $( '#wpSummary' ).length ) {
 		this.initialEditSummary = $( '#wpSummary' ).val();
 	} else {
-		this.initialEditSummary = currentUri.query.summary;
+		this.initialEditSummary = this.currentUri.query.summary;
 	}
 	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
-		currentUri.query.diff === undefined
+		this.currentUri.query.diff === undefined
 	);
 
 	if ( !this.isViewPage ) {
@@ -90,7 +84,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		// use the Back button to exit the editor we can restore Read mode. This is because we want
 		// to ignore foreign states in onWindowPopState. Without this, the Read state is foreign.
 		// FIXME: There should be a much better solution than this.
-		history.replaceState( this.popState, document.title, currentUri );
+		history.replaceState( this.popState, document.title, this.currentUri );
 	}
 
 	this.setupSkinTabs();
