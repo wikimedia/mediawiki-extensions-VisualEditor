@@ -20,7 +20,7 @@
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
 		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
-		tabPreference, enabledForUser, initialWikitext, oldid,
+		tabPreference, enabledForUser, initialWikitext, oldId,
 		isLoading,
 		editModes = {
 			edit: 'visual'
@@ -248,7 +248,7 @@
 				.then( function () {
 					return mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
 						section: section,
-						oldId: oldid,
+						oldId: oldId,
 						targetName: 'article', // ve.init.mw.DesktopArticleTarget.static.name
 						modified: modified,
 						// If switching to visual, check if we have wikitext to convert
@@ -353,9 +353,9 @@
 	uri = new mw.Uri();
 	// T156998: Don't trust uri.query.oldid, it'll be wrong if uri.query.diff or uri.query.direction
 	// is set to 'next' or 'prev'.
-	oldid = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
-	if ( oldid === mw.config.get( 'wgCurRevisionId' ) ) {
-		oldid = undefined;
+	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	if ( oldId === mw.config.get( 'wgCurRevisionId' ) ) {
+		oldId = undefined;
 	}
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
@@ -747,8 +747,8 @@
 		delete veEditUri.query.action;
 		delete veEditSourceUri.query.action;
 	}
-	if ( oldid ) {
-		veEditUri.extend( { oldid: oldid } );
+	if ( oldId ) {
+		veEditUri.extend( { oldid: oldId } );
 	}
 
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,

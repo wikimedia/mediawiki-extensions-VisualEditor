@@ -1616,10 +1616,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( discardChanges, modified ) {
-	var uri, oldid, prefPromise,
+	var uri, oldId, prefPromise,
 		target = this;
 
-	oldid = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
 	prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( discardChanges ) {
@@ -1634,8 +1634,8 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 				action: 'edit',
 				veswitched: 1
 			} );
-			if ( oldid ) {
-				uri.extend( { oldid: oldid } );
+			if ( oldId ) {
+				uri.extend( { oldid: oldId } );
 			}
 			location.href = uri.toString();
 		} );
