@@ -99,18 +99,19 @@
 		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {string} pageName Page name to request
-		 * @param {number|string} [section] Section to edit, number or 'new' (currently just source mode)
-		 * @param {string} [oldid] Old revision ID, current if omitted
-		 * @param {string} [targetName] Optional target name for tracking
-		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
-		 * @param {string} [wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
+		 * @param {Object} [options] Options
+		 * @param {number|string} [options.section] Section to edit, number or 'new' (currently just source mode)
+		 * @param {number} [options.oldId] Old revision ID. Current if omitted.
+		 * @param {string} [options.targetName] Optional target name for tracking
+		 * @param {boolean} [options.modified] The page was been modified before loading (e.g. in source mode)
+		 * @param {string} [options.wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestPageData: function ( mode, pageName, section, oldid, targetName, modified, wikitext ) {
+		requestPageData: function ( mode, pageName, options ) {
 			if ( mode === 'source' ) {
-				return this.requestWikitext( pageName, section, oldid, targetName, modified );
+				return this.requestWikitext( pageName, options );
 			} else {
-				return this.requestParsoidData( pageName, oldid, targetName, modified, wikitext );
+				return this.requestParsoidData( pageName, options );
 			}
 		},
 
@@ -118,14 +119,11 @@
 		 * Request the page HTML and various metadata from the MediaWiki API (which will use
 		 * Parsoid or RESTBase).
 		 *
-		 * @param {string} pageName Page name to request
-		 * @param {string} [oldid] Old revision ID, current if omitted
-		 * @param {string} [targetName] Optional target name for tracking
-		 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
-		 * @param {string} [wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
+		 * @param {string} pageName See #requestPageData
+		 * @param {Object} [options] See #requestPageData
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestParsoidData: function ( pageName, oldid, targetName, modified, wikitext ) {
+		requestParsoidData: function ( pageName, options ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers,
 				switched = false,
 				fromEditedState = false,
@@ -137,12 +135,14 @@
 					editintro: uri.query.editintro
 				};
 
+			options = options || {};
+
 			// Only request the API to explicitly load the currently visible revision if we're restoring
 			// from oldid. Otherwise we should load the latest version. This prevents us from editing an
 			// old version if an edit was made while the user was viewing the page and/or the user is
 			// seeing (slightly) stale cache.
-			if ( oldid !== undefined ) {
-				data.oldid = oldid;
+			if ( options.oldId !== undefined ) {
+				data.oldid = options.oldId;
 			}
 			// Load DOM
 			start = ve.now();
@@ -155,7 +155,7 @@
 					bytes: $.byteLength( jqxhr.responseText ),
 					duration: ve.now() - start,
 					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-					targetName: targetName
+					targetName: options.targetName
 				} );
 				return data;
 			} );
@@ -169,9 +169,10 @@
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
 
+				// Convert specified Wikitext to HTML
 				if (
 					// wikitext can be an empty string
-					wikitext !== undefined &&
+					options.wikitext !== undefined &&
 					!$( '[name=wpSection]' ).val()
 				) {
 					if ( conf.fullRestbaseUrl ) {
@@ -180,23 +181,24 @@
 						pageHtmlUrl = conf.restbaseUrl.replace( 'v1/page/html/', 'v1/transform/wikitext/to/html/' );
 					}
 					switched = true;
-					fromEditedState = modified;
+					fromEditedState = options.modified;
 					window.onbeforeunload = null;
 					$( window ).off( 'beforeunload' );
 					restbaseXhr = $.ajax( {
 						url: pageHtmlUrl + encodeURIComponent( pageName ) +
-							( oldid === undefined ? '' : '/' + oldid ),
+							( data.oldid === undefined ? '' : '/' + data.oldid ),
 						type: 'POST',
 						data: {
 							title: pageName,
-							oldid: oldid,
-							wikitext: wikitext,
+							oldid: data.oldid,
+							wikitext: options.wikitext,
 							stash: 'true'
 						},
 						headers: headers,
 						dataType: 'text'
 					} );
 				} else {
+					// Fetch revision
 					if ( conf.fullRestbaseUrl ) {
 						pageHtmlUrl = conf.fullRestbaseUrl + 'v1/page/html/';
 					} else {
@@ -204,7 +206,7 @@
 					}
 					restbaseXhr = $.ajax( {
 						url: pageHtmlUrl + encodeURIComponent( pageName ) +
-							( oldid === undefined ? '' : '/' + oldid ) + '?redirect=false',
+							( data.oldid === undefined ? '' : '/' + data.oldid ) + '?redirect=false',
 						type: 'GET',
 						headers: headers,
 						dataType: 'text'
@@ -216,7 +218,7 @@
 						ve.track( 'mwtiming.performance.system.restbaseLoad', {
 							bytes: $.byteLength( jqxhr.responseText ),
 							duration: ve.now() - start,
-							targetName: targetName
+							targetName: options.targetName
 						} );
 						return [ data, jqxhr.getResponseHeader( 'etag' ) ];
 					},
@@ -255,14 +257,11 @@
 		/**
 		 * Request the page wikitext and various metadata from the MediaWiki API.
 		 *
-		 * @param {string} pageName Page name to request
-		 * @param {number|string} [section] Section to edit, number or 'new' (currently just source mode)
-		 * @param {string} [oldid] Old revision ID, current if omitted
-		 * @param {string} [targetName] Optional target name for tracking
-		 * @param {boolean} [modified] The page was been modified before loading
+		 * @param {string} pageName See #requestPageData
+		 * @param {Object} [options] See #requestPageData
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestWikitext: function ( pageName, section, oldid ) {
+		requestWikitext: function ( pageName, options ) {
 			var data = {
 				action: 'visualeditor',
 				paction: 'wikitext',
@@ -272,12 +271,12 @@
 			};
 
 			// section should never really be undefined, but check just in case
-			if ( section !== null && section !== undefined ) {
-				data.section = section;
+			if ( options.section !== null && options.section !== undefined ) {
+				data.section = options.section;
 			}
 
-			if ( oldid !== undefined ) {
-				data.oldid = oldid;
+			if ( options.oldId !== undefined ) {
+				data.oldid = options.oldId;
 			}
 
 			return new mw.Api().get( data );

@@ -50,7 +50,7 @@
 			revCache[ pageName ] = revCache[ pageName ] || {};
 			revCache[ pageName ][ revId ] =
 				revCache[ pageName ][ revId ] ||
-				mw.libs.ve.targetLoader.requestParsoidData( pageName, revId, 'diff' ).then( function ( response ) {
+				mw.libs.ve.targetLoader.requestParsoidData( pageName, { oldId: revId, targetName: 'diff' } ).then( function ( response ) {
 					return parseDocumentModulePromise.then( function () {
 						return mw.libs.ve.diffLoader.getModelFromResponse( response );
 					} );
