@@ -251,6 +251,8 @@
 						oldId: oldId,
 						targetName: 'article', // ve.init.mw.DesktopArticleTarget.static.name
 						modified: modified,
+						preload: uri.query.preload,
+						preloadparams: uri.query.preloadparams,
 						// If switching to visual, check if we have wikitext to convert
 						wikitext: mode === 'visual' ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					} );

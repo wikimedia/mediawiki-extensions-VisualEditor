@@ -105,6 +105,8 @@
 		 * @param {string} [options.targetName] Optional target name for tracking
 		 * @param {boolean} [options.modified] The page was been modified before loading (e.g. in source mode)
 		 * @param {string} [options.wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
+		 * @param {string} [preload] Name of a page to use as preloaded content if pageName is empty
+		 * @param {Array} [preloadparams] Parameters to substitute into preload if it's used
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
@@ -132,7 +134,9 @@
 					paction: ( conf.fullRestbaseUrl || conf.restbaseUrl ) ? 'metadata' : 'parse',
 					page: pageName,
 					uselang: mw.config.get( 'wgUserLanguage' ),
-					editintro: uri.query.editintro
+					editintro: uri.query.editintro,
+					preload: options.preload,
+					preloadparams: options.preloadparams
 				};
 
 			options = options || {};
@@ -236,8 +240,14 @@
 				dataPromise = $.when( apiPromise, restbasePromise )
 					.then( function ( apiData, restbaseData ) {
 						if ( apiData.visualeditor ) {
-							apiData.visualeditor.content = restbaseData[ 0 ];
-							apiData.visualeditor.etag = restbaseData[ 1 ];
+							if ( restbaseData[ 0 ] || !apiData.visualeditor.content ) {
+								// If we have actual content loaded, use it.
+								// Otherwise, allow fallback content if present.
+								// If no fallback content, this will give us an empty string for
+								// content, which is desirable.
+								apiData.visualeditor.content = restbaseData[ 0 ];
+								apiData.visualeditor.etag = restbaseData[ 1 ];
+							}
 							apiData.visualeditor.switched = switched;
 							apiData.visualeditor.fromEditedState = fromEditedState;
 						}
@@ -267,7 +277,9 @@
 				paction: 'wikitext',
 				page: pageName,
 				uselang: mw.config.get( 'wgUserLanguage' ),
-				editintro: uri.query.editintro
+				editintro: uri.query.editintro,
+				preload: options.preload,
+				preloadparams: options.preloadparams
 			};
 
 			// section should never really be undefined, but check just in case

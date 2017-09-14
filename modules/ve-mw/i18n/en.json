@@ -29,6 +29,8 @@
 	"apihelp-visualeditor-param-oldid": "The revision number to use (defaults to latest revision).",
 	"apihelp-visualeditor-param-paction": "Action to perform.",
 	"apihelp-visualeditor-param-page": "The page to perform actions on.",
+	"apihelp-visualeditor-param-preload": "The page to use content from if the fetched page has no content yet.",
+	"apihelp-visualeditor-param-preloadparams": "Parameters to substitute into the preload page, if present.",
 	"apihelp-visualeditor-param-pst": "Pre-save transform wikitext before sending it to Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "The section on which to act.",
 	"apihelp-visualeditor-param-starttimestamp": "When saving, set this to the timestamp of when the page was loaded. Used to detect edit conflicts.",

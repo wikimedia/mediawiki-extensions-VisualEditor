@@ -42,6 +42,8 @@
 	"apihelp-visualeditor-param-oldid": "{{doc-apihelp-param|visualeditor|oldid}}",
 	"apihelp-visualeditor-param-paction": "{{doc-apihelp-param|visualeditor|paction}}",
 	"apihelp-visualeditor-param-page": "{{doc-apihelp-param|visualeditor|page}}",
+	"apihelp-visualeditor-param-preload": "{{doc-apihelp-param|visualeditor|preload}}",
+	"apihelp-visualeditor-param-preloadparams": "{{doc-apihelp-param|visualeditor|preloadparams}}",
 	"apihelp-visualeditor-param-pst": "{{doc-apihelp-param|visualeditor|pst}}",
 	"apihelp-visualeditor-param-section": "{{doc-apihelp-param|visualeditor|section}}",
 	"apihelp-visualeditor-param-starttimestamp": "{{doc-apihelp-param|visualeditor|starttimestamp}}",
