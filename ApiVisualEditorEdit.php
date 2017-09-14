@@ -118,14 +118,19 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		];
 	}
 
-	protected function tryDeflate( $content ) {
+	public static function tryDeflate( $content ) {
 		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
 			$deflated = base64_decode( substr( $content, 11 ) );
 			MediaWiki\suppressWarnings();
 			$inflated = gzinflate( $deflated );
 			MediaWiki\restoreWarnings();
 			if ( $deflated === $inflated || $inflated === false ) {
-				$this->dieWithError( 'apierror-visualeditor-invaliddeflate', 'invaliddeflate' );
+				// Static equivalent of $this->dieWithError
+				throw ApiUsageException::newWithMessage(
+					null,
+					'apierror-visualeditor-invaliddeflate',
+					'invaliddeflate'
+				);
 			}
 			return $inflated;
 		}
@@ -147,7 +152,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	protected function getWikitextNoCache( $title, $params, $parserParams ) {
 		$this->requireOnlyOneParameter( $params, 'html' );
 		$wikitext = $this->postHTML(
-			$title, $this->tryDeflate( $params['html'] ), $parserParams, $params['etag']
+			$title, self::tryDeflate( $params['html'] ), $parserParams, $params['etag']
 		);
 		if ( $wikitext === false ) {
 			$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
