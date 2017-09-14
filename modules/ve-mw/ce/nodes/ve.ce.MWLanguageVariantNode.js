@@ -163,6 +163,16 @@ ve.ce.MWLanguageVariantNode.prototype.createInvisibleIcon = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ce.MWLanguageVariantNode.prototype.hasRendering = function () {
+	// Efficiency improvement: the superclass implementation does a bunch
+	// of DOM measurement to determine if the node is empty.
+	// Instead consult the model for a definitive answer.
+	return !this.model.isHidden();
+};
+
+/**
  * ContentEditable MediaWiki language variant block node.
  *
  * @class
