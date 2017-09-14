@@ -70,6 +70,14 @@
 		documentNameField.toggle( true );
 	}
 
+	function onChange() {
+		documentNameInput.getValidity().then( function () {
+			submitButton.setDisabled( false );
+		}, function () {
+			submitButton.setDisabled( true );
+		} );
+	}
+
 	function onSubmit() {
 		documentNameInput.getValidity().then( function () {
 			var title = mw.Title.newFromText( documentNameInput.getValue() ),
@@ -95,8 +103,10 @@
 	} );
 	submitButton.setDisabled( false );
 
+	documentNameInput.on( 'change', onChange );
 	documentNameInput.on( 'enter', onSubmit );
 	submitButton.on( 'click', onSubmit );
+	onChange();
 
 	if ( pageTitle ) {
 		showPage( pageTitle );
