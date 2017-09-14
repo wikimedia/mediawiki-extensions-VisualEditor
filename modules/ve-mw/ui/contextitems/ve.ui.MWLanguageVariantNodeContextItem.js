@@ -5,7 +5,7 @@
  */
 
 /**
- * Context item for a MWLanguageVariantNode.
+ * Context item for a ve.dm.MWLanguageVariantNode.
  *
  * @class
  * @extends ve.ui.LinearContextItem
