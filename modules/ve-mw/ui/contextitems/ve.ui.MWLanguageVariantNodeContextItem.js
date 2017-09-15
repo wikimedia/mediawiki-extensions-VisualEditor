@@ -41,7 +41,7 @@ ve.ui.MWLanguageVariantNodeContextItem.static.modelClasses = [
 	ve.dm.MWLanguageVariantHiddenNode
 ];
 
-ve.ui.MWLanguageVariantNodeContextItem.static.editable = false;
+ve.ui.MWLanguageVariantNodeContextItem.static.commandName = 'mwLanguageVariant';
 
 /* Methods */
 
@@ -180,6 +180,27 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 	} );
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.MWLanguageVariantNodeContextItem.prototype.getCommand = function () {
+	var type = this.model.getRuleType(),
+		cmdName = this.constructor.static.commandName + '-' + type;
+	return this.context.getSurface().commandRegistry.lookup( cmdName );
+};
+
 /* Registration */
 
 ve.ui.contextItemFactory.register( ve.ui.MWLanguageVariantNodeContextItem );
+
+[ 'disabled', 'filter', 'name', 'twoway', 'oneway' ].forEach( function ( type ) {
+	ve.ui.commandRegistry.register(
+		new ve.ui.Command(
+			'mwLanguageVariant-' + type, 'window', 'open',
+			{
+				args: [ 'mwLanguageVariant-' + type ],
+				supportedSelections: [ 'linear' ]
+			}
+		)
+	);
+} );
