@@ -186,22 +186,9 @@
 		]
 	},
 	"ResourceModules": {
-		"Base64.js": {
-			"scripts": [
-				"lib/Base64.js/base64.js"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
 		"easy-deflate.core": {
 			"scripts": [
-				"lib/Easy-Deflate/easydeflate.js",
-				"lib/Easy-Deflate/typedarrays.js"
-			],
-			"dependencies": [
-				"Base64.js"
+				"lib/Easy-Deflate/easydeflate.js"
 			],
 			"targets": [
 				"desktop",
