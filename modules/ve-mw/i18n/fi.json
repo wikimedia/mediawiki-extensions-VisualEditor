@@ -21,7 +21,8 @@
 			"Pitke",
 			"Pyscowicz",
 			"Olimar",
-			"01miki10"
+			"01miki10",
+			"Hopea"
 		]
 	},
 	"apihelp-visualeditor-description": "Hakee sivun HTML5-lähdekoodin Parsoid-palvelusta.",
@@ -285,6 +286,13 @@
 	"visualeditor-mwgallerydialog-title": "Galleria",
 	"visualeditor-mwgallerydialog-widths-field-label": "Kuvan leveys",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Oletusleveys: $1 pikseliä",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kielet",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Kielikoodi",
+	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Sisältö",
+	"visualeditor-mwlanguagevariantinspector-filter-text-placeholder": "Suodatettu teksti",
+	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "Lähdeteksti",
+	"visualeditor-mwlanguagevariantinspector-title-name": "Kielen nimi",
+	"visualeditor-mwlanguagevariantinspector-title-oneway": "Yksisuuntainen konversiosääntö",
 	"visualeditor-mwsignature-tool": "Allekirjoituksesi",
 	"visualeditor-pagemenu-tooltip": "Sivun valinnat",
 	"visualeditor-pagetranslationwarning": "Olet muokkaamassa käännettävää sivua. Näiden muokkaaminen tällä muokkaimella ei ole vielä virallisesti tuettu.",
