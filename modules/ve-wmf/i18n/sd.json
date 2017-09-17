@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mehtab ahmed"
+			"Mehtab ahmed",
+			"Indus Asia"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|وزيوئل ترميم]]",
 	"visualeditor-feedback-link": "رٿا:وزيوئل ايڊيٽر/پذيرائي",
 	"visualeditor-feedback-tool": "ھن سافٽويئر بابت پذيرائي ڇڏيو",
-	"visualeditor-help-label": "واھپ رھنما پڙھو",
+	"visualeditor-help-label": "واپرائيندڙ لاءِ هدايتون پڙھو",
 	"visualeditor-help-title": "ايڊيٽر ڪيئن استعمال ڪجي لاءِ رھنما",
 	"visualeditor-welcomedialog-action": "سڌارڻ شروع ڪريو",
 	"visualeditor-welcomedialog-content": "هر ڪوئي سنواري سگھي ٿو، ۽ هر بهتري مدد ڪري ٿي.",
