@@ -1860,6 +1860,11 @@ ve.init.mw.ArticleTarget.prototype.attachToolbarSaveButton = function () {
 ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
 	var isDisabled;
 
+	if ( !this.getSurface() ) {
+		// Called before we're attached, so meaningless; abandon for now
+		return;
+	}
+
 	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState;
 	if ( this.sectionTitle ) {
 		this.edited = this.edited || this.sectionTitle.getValue() !== '';

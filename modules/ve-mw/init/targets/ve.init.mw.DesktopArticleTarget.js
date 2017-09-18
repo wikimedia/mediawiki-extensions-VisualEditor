@@ -506,6 +506,10 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 		}
 		surface.setPlaceholder( ve.msg( 'visualeditor-section-body-placeholder' ) );
 		this.$editableContent.before( this.sectionTitle.$element );
+
+		if ( this.currentUri.query.preloadtitle ) {
+			this.sectionTitle.setValue( this.currentUri.query.preloadtitle );
+		}
 	}
 };
 
