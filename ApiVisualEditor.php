@@ -287,7 +287,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 					if ( $content === '' && $params['preload'] ) {
 						$preloadTitle = Title::newFromText( $params['preload'] );
-						# Check for existence to avoid getting MediaWiki:Noarticletext
+						// Check for existence to avoid getting MediaWiki:Noarticletext
 						if ( $preloadTitle instanceof Title &&
 							 $preloadTitle->exists() &&
 							 $preloadTitle->userCan( 'read' )
@@ -373,7 +373,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( MWNamespace::getRestrictionLevels( $title->getNamespace() ) !== [ '' ] ) {
 					// Page protected from editing
 					if ( $title->isProtected( 'edit' ) ) {
-						# Is the title semi-protected?
+						// Is the title semi-protected?
 						if ( $title->isSemiProtected() ) {
 							$protectedClasses[] = 'mw-textarea-sprotected';
 
@@ -381,7 +381,7 @@ class ApiVisualEditor extends ApiBase {
 						} else {
 							$protectedClasses[] = 'mw-textarea-protected';
 
-							# Then it must be protected based on static groups (regular)
+							// Then it must be protected based on static groups (regular)
 							$noticeMsg = 'protectedpagewarning';
 						}
 						$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
