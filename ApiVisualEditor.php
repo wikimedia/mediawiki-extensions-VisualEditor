@@ -285,6 +285,34 @@ class ApiVisualEditor extends ApiBase {
 					if ( $content !== '' ) {
 						$content = $this->parseWikitextFragment( $title, $content );
 					}
+					if ( $content === '' && $params['preload'] ) {
+						$preloadTitle = Title::newFromText( $params['preload'] );
+						# Check for existence to avoid getting MediaWiki:Noarticletext
+						if ( $preloadTitle instanceof Title &&
+							 $preloadTitle->exists() &&
+							 $preloadTitle->userCan( 'read' )
+						) {
+							$preloadPage = WikiPage::factory( $preloadTitle );
+							if ( $preloadPage->isRedirect() ) {
+								$preloadTitle = $preloadPage->getRedirectTarget();
+								$preloadPage = WikiPage::factory( $preloadTitle );
+							}
+
+							$content = $preloadPage->getContent( Revision::RAW );
+							$parserOptions = ParserOptions::newFromUser( $wgUser );
+
+							$content = $content->preloadTransform(
+								$preloadTitle,
+								$parserOptions,
+								$params['preloadparams']
+							)->serialize();
+
+							if ( $params['paction'] !== 'wikitext' ) {
+								// We need to turn this transformed wikitext into parsoid html
+								$content = $this->parseWikitextFragment( $title, $content );
+							}
+						}
+					}
 					$baseTimestamp = wfTimestampNow();
 					$oldid = 0;
 					$restoring = false;
@@ -524,7 +552,10 @@ class ApiVisualEditor extends ApiBase {
 					'oldid' => $oldid,
 
 				];
-				if ( $params['paction'] === 'parse' || $params['paction'] === 'wikitext' ) {
+				if ( $params['paction'] === 'parse' ||
+					 $params['paction'] === 'wikitext' ||
+					 $params['preload']
+				) {
 					$result['content'] = $content;
 				}
 				break;
@@ -657,6 +688,8 @@ class ApiVisualEditor extends ApiBase {
 			'oldid' => null,
 			'editintro' => null,
 			'pst' => false,
+			'preload' => null,
+			'preloadparams' => null,
 		];
 	}
 

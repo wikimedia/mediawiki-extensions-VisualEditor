@@ -16,8 +16,6 @@ class VisualEditorHooks {
 	// TODO: Other params too?
 	// Known-good parameters: edit, veaction, section, oldid, lintid
 	private static $unsupportedEditParams = [
-		'preload',
-		'preloadparams',
 		'preloadtitle',
 		'undo',
 		'undoafter',
