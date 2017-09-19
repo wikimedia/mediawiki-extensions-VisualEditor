@@ -477,20 +477,32 @@ class ApiVisualEditor extends ApiBase {
 						$user->isWatched( $title ),
 				];
 				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
-				$checkboxesMessages = [];
-				foreach ( $checkboxesDef as $name => $options ) {
+				$checkboxesMessagesList = [];
+				foreach ( $checkboxesDef as $name => &$options ) {
 					if ( isset( $options['tooltip'] ) ) {
-						$checkboxesMessages[ "accesskey-{$options['tooltip']}" ] =
-							$this->msg( "accesskey-{$options['tooltip']}" )->plain();
-						$checkboxesMessages[ "tooltip-{$options['tooltip']}" ] =
-							$this->msg( "tooltip-{$options['tooltip']}" )->plain();
+						$checkboxesMessagesList[] = "accesskey-{$options['tooltip']}";
+						$checkboxesMessagesList[] = "tooltip-{$options['tooltip']}";
 					}
 					if ( isset( $options['title-message'] ) ) {
-						$checkboxesMessages[ $options['title-message'] ] =
-							$this->msg( $options['title-message'] )->plain();
+						$checkboxesMessagesList[] = $options['title-message'];
+						if ( !is_string( $options['title-message'] ) ) {
+							// Extract only the key. Any parameters are included in the fake message definition
+							// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)
+							$options['title-message'] = $this->msg( $options['title-message'] )->getKey();
+						}
 					}
-					$checkboxesMessages[ $options['label-message'] ] =
-						$this->msg( $options['label-message'] )->plain();
+					$checkboxesMessagesList[] = $options['label-message'];
+					if ( !is_string( $options['label-message'] ) ) {
+						// Extract only the key. Any parameters are included in the fake message definition
+						// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)
+						$options['label-message'] = $this->msg( $options['label-message'] )->getKey();
+					}
+				}
+				$checkboxesMessages = [];
+				foreach ( $checkboxesMessagesList as $messageSpecifier ) {
+					// $messageSpecifier may be a string or a Message object
+					$message = $this->msg( $messageSpecifier );
+					$checkboxesMessages[ $message->getKey() ] = $message->plain();
 				}
 				$templates = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 
