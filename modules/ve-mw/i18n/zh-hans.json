@@ -40,6 +40,8 @@
 	"apihelp-visualeditor-param-oldid": "所要使用的修订版本号（默认为最新修订版本）。",
 	"apihelp-visualeditor-param-paction": "要执行的操作。",
 	"apihelp-visualeditor-param-page": "要执行操作的页面。",
+	"apihelp-visualeditor-param-preload": "要使用内容的页面，如果检索的页面尚无内容的话。",
+	"apihelp-visualeditor-param-preloadparams": "要替代到预加载页面的参数（如有）。",
 	"apihelp-visualeditor-param-pst": "在发送至Parsoid前预保存转换的wiki文本（paction=parsefragment）。",
 	"apihelp-visualeditor-param-section": "起作用的章节。",
 	"apihelp-visualeditor-param-starttimestamp": "当保存时，设置它作为页面加载时的时间戳。用于检测编辑冲突。",
