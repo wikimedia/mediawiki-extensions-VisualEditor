@@ -286,11 +286,11 @@ ve.dm.mwExample.MWBlockImage = {
 
 ve.dm.mwExample.MWInlineImage = {
 	html:
-		'<span typeof="mw:Image" class="foo mw-valign-text-top">' +
+		'<figure-inline typeof="mw:Image" class="foo mw-valign-text-top">' +
 			'<a href="./File:Wiki.png">' +
 				'<img resource="./File:Wiki.png" src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" height="155" width="135">' +
 			'</a>' +
-		'</span>',
+		'</figure-inline>',
 	data: {
 		type: 'mwInlineImage',
 		attributes: {
