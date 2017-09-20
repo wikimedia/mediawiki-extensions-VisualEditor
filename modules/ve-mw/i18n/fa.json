@@ -38,6 +38,8 @@
 	"apihelp-visualeditor-param-oldid": "تعداد نسخه‌ها برای استفاده (آخرین نسخه به عنوان پیش‌فرض)",
 	"apihelp-visualeditor-param-paction": "عمل برای انجام‌دادن.",
 	"apihelp-visualeditor-param-page": "صفحه برای اعمال عمل بر روی آن.",
+	"apihelp-visualeditor-param-preload": "صفحه‌ای که باید از محتوایش استفاده شود اگر دریافت صفحه هنوز محتوایی نداشت.",
+	"apihelp-visualeditor-param-preloadparams": "متغییرهایی که جایگزین پیش‌بارگیری صفحه قرار می‌گیرند، اگر موجود باشند.",
 	"apihelp-visualeditor-param-pst": "پیش-ذخیره متن ویکی تبدیل شده پیش از ارسال آن به پارسوید (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "بخشی که برای انجم‌دادن است.",
 	"apihelp-visualeditor-param-starttimestamp": "در زمان ذخیره کردن، این را برای زمان بارگیری نسخه تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",

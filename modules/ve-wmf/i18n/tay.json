@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Translatealcd"
+			"Translatealcd",
+			"Hitaypayan"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}| Kblayun sa ktan na rawziq smr’zyut miru’ ]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}| Kblayun sa ktan na rawziq smr’zyut miru’ ]]",
+	"visualeditor-welcomedialog-action": "T’aring smr’zyut miru’"
 }
