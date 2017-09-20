@@ -17,7 +17,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
-	var type, isError, $image, $focusable;
+	var type, isError, $image, $focusable,
+		node = this;
 
 	// Parent constructor
 	ve.ce.MWBlockImageNode.super.apply( this, arguments );
@@ -67,9 +68,11 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	// Mixin constructors
 	ve.ce.MWImageNode.call( this, $focusable, $image );
 
-	this.updateCaption();
-
 	this.updateSize();
+	// Wait for tree to finish building before checking for caption
+	setTimeout( function () {
+		node.updateCaption();
+	} );
 };
 
 /* Inheritance */
