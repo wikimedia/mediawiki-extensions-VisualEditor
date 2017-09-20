@@ -609,9 +609,11 @@
 					if ( mode === 'visual' && target.getDefaultMode() === 'source' ) {
 						target.switchToVisualEditor();
 					} else if (
-						mode === 'source' && target.getDefaultMode() === 'source'
+						mode === 'source'
 					) {
-						// Requetsed section may have changed
+						// Requested section may have changed, or we may need
+						// to switch from visual mode to source mode with a
+						// section.
 						target.switchToWikitextSection( section );
 					}
 				} );
