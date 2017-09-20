@@ -719,8 +719,7 @@ class VisualEditorHooks {
 				'requirements' => [
 					'javascript' => true,
 					'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
-				],
-				'exempt-from-auto-enrollment' => true
+				]
 			];
 		}
 	}
