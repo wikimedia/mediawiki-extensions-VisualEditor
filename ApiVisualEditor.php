@@ -299,7 +299,7 @@ class ApiVisualEditor extends ApiBase {
 							}
 
 							$content = $preloadPage->getContent( Revision::RAW );
-							$parserOptions = ParserOptions::newFromUser( $wgUser );
+							$parserOptions = ParserOptions::newFromUser( $user );
 
 							$content = $content->preloadTransform(
 								$preloadTitle,
