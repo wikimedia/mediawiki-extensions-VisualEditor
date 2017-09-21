@@ -30,3 +30,8 @@
 	/* Fix font-size for surfaces inside UI overlays */
 	font-size: 0.9921875em; /* 1/ ( 0.8em / x-small / 127% ) */
 }
+
+.ve-ui-overlay-local {
+	/* Fix font-size for overlays inside surfaces */
+	font-size: 1.007874em; /* 12.8/12.7 */
+}
