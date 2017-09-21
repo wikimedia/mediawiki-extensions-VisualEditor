@@ -4,7 +4,8 @@
 			"George Animal",
 			"Purodha",
 			"Bikarhêner",
-			"Ghybu"
+			"Ghybu",
+			"Cûndûllah el-Kurdî"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "Kurteya guherandinê.",
@@ -138,6 +139,9 @@
 	"visualeditor-mwgallerydialog-heights-field-label": "Dirêjiya wêneyî",
 	"visualeditor-mwgallerydialog-search-button-label": "Wêneyê nû lê zêde bike",
 	"visualeditor-mwgallerydialog-title": "Galerî",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Ziman",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Koda zimanê",
+	"visualeditor-mwlanguagevariantinspector-title-name": "Navê ziman",
 	"visualeditor-pagemenu-tooltip": "Vebijarkên rûpelê",
 	"visualeditor-parameter-search-unknown": "Qada nenas",
 	"visualeditor-preference-core-label": "Guherandina dîtbarî",

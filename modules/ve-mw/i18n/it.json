@@ -313,6 +313,7 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Larghezza immagine",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Larghezza predefinita: $1 px",
 	"visualeditor-mwlanguagevariant-name": "Nome della lingua: $1",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Codice lingua",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Sorgente",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Lingue",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Codice lingua",
