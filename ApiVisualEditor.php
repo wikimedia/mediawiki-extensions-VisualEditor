@@ -566,7 +566,7 @@ class ApiVisualEditor extends ApiBase {
 				];
 				if ( $params['paction'] === 'parse' ||
 					 $params['paction'] === 'wikitext' ||
-					 $params['preload']
+					 ( $params['preload'] && $content )
 				) {
 					$result['content'] = $content;
 				}
