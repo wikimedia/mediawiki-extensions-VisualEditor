@@ -35,6 +35,8 @@
 	"apihelp-visualeditor-param-oldid": "Номер версії (за замовчуванням — остання версія).",
 	"apihelp-visualeditor-param-paction": "Дія, яку потрібно виконати.",
 	"apihelp-visualeditor-param-page": "Сторінки, на якій виконувати дії.",
+	"apihelp-visualeditor-param-preload": "Сторінка, з якої слід використовувати контент, якщо отримана сторінка ще не має контенту.",
+	"apihelp-visualeditor-param-preloadparams": "Параметри, які слід підставити у попередньо завантажену сторінку, якщо такі наявні.",
 	"apihelp-visualeditor-param-pst": "Попередньо збережіть зміни Вікі-тексту перед відправкою його до Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Розділ, над яким вчинити дію.",
 	"apihelp-visualeditor-param-starttimestamp": "При збереженні, встановіть мітку часу, коли сторінка була завантажена. Використовується для виявлення конфліктів редагування.",
