@@ -330,6 +330,7 @@
 	"visualeditor-mwlanguagevariantcontextitem-flag-describe": "Esta es una regla descrita.",
 	"visualeditor-mwlanguagevariantcontextitem-flag-hidden": "Esta es una regla oculta.",
 	"visualeditor-mwlanguagevariantcontextitem-flag-title": "Esta regla afecta el título de la página.",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Código de idioma",
 	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<No válido>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Idioma",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Fuente",

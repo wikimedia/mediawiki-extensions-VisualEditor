@@ -22,6 +22,7 @@
 	"apihelp-visualeditor-param-cachekey": "Zum Anordnen oder Unterscheiden, verwende das Ergebnis einer früheren serializeforcache-Anfrage mit diesem Schlüssel. Überschreibt $1html.",
 	"apihelp-visualeditor-param-editintro": "Den Anmerkungen hinzuzufügender Bearbeitungsintro.",
 	"apihelp-visualeditor-param-etag": "Zu sendendes ETag.",
+	"apihelp-visualeditor-param-format": "Das Format der Ausgabe.",
 	"apihelp-visualeditor-param-html": "HTML, das an Parsoid zur Konvertierung in Wikitext gesendet werden soll.",
 	"apihelp-visualeditor-param-oldid": "Die zu verwendende Versionsnummer (Standard: Aktuellste Version).",
 	"apihelp-visualeditor-param-paction": "Die auszuführende Aktion.",
