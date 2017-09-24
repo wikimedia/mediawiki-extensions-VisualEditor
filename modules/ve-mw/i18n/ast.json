@@ -19,6 +19,8 @@
 	"apihelp-visualeditor-param-oldid": "El númberu de revisión a usar (de mou predetermináu la última revisión).",
 	"apihelp-visualeditor-param-paction": "Aición a facer.",
 	"apihelp-visualeditor-param-page": "La páxina onde facer les aiciones.",
+	"apihelp-visualeditor-param-preload": "La páxina de la qu'usar el conteníu si la páxina llograda entá nun lu tien.",
+	"apihelp-visualeditor-param-preloadparams": "Parámetros a sustituir na páxina de precarga, si tán presentes.",
 	"apihelp-visualeditor-param-pst": "El guardáu previu tresforma'l testu wiki antes d'unvialu a Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "La sección onde actuar.",
 	"apihelp-visualeditor-param-starttimestamp": "Al guardar,establez esto como la marca horaria de cuando se cargó la páxina. Utilizao pa detectar conflictos d'edición.",
