@@ -142,6 +142,37 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
+	protected function getPreloadContent( $preload, $params, $contextTitle, $parse = false ) {
+		$content = '';
+		$preloadTitle = Title::newFromText( $preload );
+		// Check for existence to avoid getting MediaWiki:Noarticletext
+		if ( $preloadTitle instanceof Title &&
+			 $preloadTitle->exists() &&
+			 $preloadTitle->userCan( 'read' )
+		) {
+			$preloadPage = WikiPage::factory( $preloadTitle );
+			if ( $preloadPage->isRedirect() ) {
+				$preloadTitle = $preloadPage->getRedirectTarget();
+				$preloadPage = WikiPage::factory( $preloadTitle );
+			}
+
+			$content = $preloadPage->getContent( Revision::RAW );
+			$parserOptions = ParserOptions::newFromUser( $this->getUser() );
+
+			$content = $content->preloadTransform(
+				$preloadTitle,
+				$parserOptions,
+				$params['preloadparams']
+			)->serialize();
+
+			if ( $parse ) {
+				// We need to turn this transformed wikitext into parsoid html
+				$content = $this->parseWikitextFragment( $contextTitle, $content );
+			}
+		}
+		return $content;
+	}
+
 	protected function getLangLinks( $title ) {
 		$apiParams = [
 			'action' => 'query',
@@ -251,6 +282,12 @@ class ApiVisualEditor extends ApiBase {
 
 						if ( $section === 'new' ) {
 							$content = '';
+							if ( $params['preload'] ) {
+								$content = $this->getPreloadContent(
+									$params['preload'], $params['preloadparams'], $title,
+									$params['paction'] !== 'wikitext'
+								);
+							}
 						} else {
 							$apiParams['rvsection'] = $section;
 
@@ -286,32 +323,10 @@ class ApiVisualEditor extends ApiBase {
 						$content = $this->parseWikitextFragment( $title, $content );
 					}
 					if ( $content === '' && $params['preload'] ) {
-						$preloadTitle = Title::newFromText( $params['preload'] );
-						// Check for existence to avoid getting MediaWiki:Noarticletext
-						if ( $preloadTitle instanceof Title &&
-							 $preloadTitle->exists() &&
-							 $preloadTitle->userCan( 'read' )
-						) {
-							$preloadPage = WikiPage::factory( $preloadTitle );
-							if ( $preloadPage->isRedirect() ) {
-								$preloadTitle = $preloadPage->getRedirectTarget();
-								$preloadPage = WikiPage::factory( $preloadTitle );
-							}
-
-							$content = $preloadPage->getContent( Revision::RAW );
-							$parserOptions = ParserOptions::newFromUser( $user );
-
-							$content = $content->preloadTransform(
-								$preloadTitle,
-								$parserOptions,
-								$params['preloadparams']
-							)->serialize();
-
-							if ( $params['paction'] !== 'wikitext' ) {
-								// We need to turn this transformed wikitext into parsoid html
-								$content = $this->parseWikitextFragment( $title, $content );
-							}
-						}
+						$content = $this->getPreloadContent(
+							$params['preload'], $params['preloadparams'], $title,
+							$params['paction'] !== 'wikitext'
+						);
 					}
 					$baseTimestamp = wfTimestampNow();
 					$oldid = 0;
