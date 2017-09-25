@@ -162,7 +162,7 @@ class ApiVisualEditor extends ApiBase {
 			$content = $content->preloadTransform(
 				$preloadTitle,
 				$parserOptions,
-				$params['preloadparams']
+				(array)$params
 			)->serialize();
 
 			if ( $parse ) {
@@ -716,7 +716,9 @@ class ApiVisualEditor extends ApiBase {
 			'editintro' => null,
 			'pst' => false,
 			'preload' => null,
-			'preloadparams' => null,
+			'preloadparams' => [
+				ApiBase::PARAM_ISMULTI => true,
+			],
 		];
 	}
 
