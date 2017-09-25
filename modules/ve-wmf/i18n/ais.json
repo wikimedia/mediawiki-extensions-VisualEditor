@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Benel"
+			"Benel",
+			"Bunukwiki"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|palakuliten ku aazihen mikawaway tu kalumyiti]]",
 	"tag-visualeditor-wikitext": "2017 yuensma-kodo mikawaway-kalumyiti",
 	"visualeditor-feedback-tool": "hwidubaku mahizaay tina zwanti a nabalucu’",
 	"visualeditor-welcomedialog-action": "miteka mikawaway-kalumyiti",
+	"visualeditor-welcomedialog-content-thanks": "mikukay nu misuay a edap sisa maazih ku binawlan tu kitakit!",
 	"visualeditor-welcomedialog-switch-ve": "ketun mibalic ta palakuliten ku aazihen sakawaw-kalumyiti"
 }

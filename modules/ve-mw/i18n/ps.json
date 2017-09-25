@@ -3,7 +3,8 @@
 		"authors": [
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
 			"عثمان منصور انصاري",
-			"Irus"
+			"Irus",
+			"Baloch Khan"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "د ترسره کولو کړنه.",
@@ -164,7 +165,6 @@
 	"visualeditor-linkinspector-illegal-title": "ناسم سرليک",
 	"visualeditor-linknodeinspector-add-label": "لېبل ورگډول",
 	"visualeditor-linknodeinspector-title": "ساده تړنه",
-	"visualeditor-loaderror-message-noconnect": "تېروتنه: پالنگر سره اړيکه جوړه نه شوه.",
 	"visualeditor-loadwarning": "د پالنگر څخه د اومتوک د رابرسېرولو ستونزه: $1. آيا بيا پرې هڅه کوئ؟",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN تړنه",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID تړنه",
@@ -179,7 +179,6 @@
 	"visualeditor-mweditmodeve-popup-title": "تاسې سرچينې سمونې ته اليش کړ",
 	"visualeditor-mweditmodeve-showagain": "همدا پيغام بيا مه راښکاره کوه",
 	"visualeditor-mweditmodeve-title": "ايا ليدنيز سمونگر ته يې وراړوئ؟",
-	"visualeditor-mweditmodeve-tool": "ليدنيز سمونگر ته اليشول",
 	"visualeditor-mweditmodeve-warning": "تاسې ليدنيزسمونگر ته د اليشولو په حالت کې ياست.\nايا غواړئ پرله پورې مخ ته لاړ شئ؟",
 	"visualeditor-mweditmodewt-popup-body": "د دې نښې په کېښکاږلو سره تاسې هر وخت کولای شئ چې بيا سرچينې سمونې ته ور واوړئ.",
 	"visualeditor-mweditmodewt-popup-title": "تاسې ليدنيز سمونگر ته اليش کړ",
@@ -201,6 +200,9 @@
 	"visualeditor-mwgallerydialog-show-filename-field-label": "د دوتنو نومونه ښکاره کول",
 	"visualeditor-mwgallerydialog-title": "انځورتون",
 	"visualeditor-mwgallerydialog-widths-field-label": "د انځور سور",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "ژبې",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "د ژبې کوډ",
+	"visualeditor-mwlanguagevariantinspector-filter-text-label": "منځپانگې",
 	"visualeditor-mwsignature-tool": "ستاسې لاسليک",
 	"visualeditor-pagemenu-tooltip": "د مخ خوښنې",
 	"visualeditor-parameter-input-placeholder": "د ډاگي نوم",
@@ -220,7 +222,6 @@
 	"visualeditor-savedialog-label-save-short": "خوندي کول",
 	"visualeditor-savedialog-label-warning": "گواښنه",
 	"visualeditor-savedialog-title-conflict": "کړکېچ",
-	"visualeditor-savedialog-title-nochanges": "بدلونونه نشته چې مخليدنه يې وشي",
 	"visualeditor-savedialog-title-review": "خپل بدلونونه بياکتل",
 	"visualeditor-savedialog-title-save": "بدلونونه مو خوندي کړئ",
 	"visualeditor-settings-tool": "مخ امستنې",
