@@ -33,7 +33,7 @@ ve.ui.toolFactory.register( ve.ui.MWSignatureTool );
 
 if (
 	$.inArray(
-		new mw.Title( ve.init.target.pageName ).getNamespaceId(),
+		new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId(),
 		mw.config.get( 'wgVisualEditorConfig' ).signatureNamespaces
 	) !== -1
 ) {
