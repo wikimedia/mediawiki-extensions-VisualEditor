@@ -47,7 +47,7 @@ ve.ui.MWExtensionDialog.static.actions = ve.ui.MWExtensionDialog.super.static.ac
 	{
 		action: 'done',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		flags: [ 'constructive', 'primary' ],
+		flags: [ 'progressive', 'primary' ],
 		modes: 'insert'
 	}
 ] );
