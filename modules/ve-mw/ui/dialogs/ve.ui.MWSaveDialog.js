@@ -57,7 +57,7 @@ ve.ui.MWSaveDialog.static.actions = [
 		action: 'save',
 		// May be overridden by config.saveButtonLabel
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
-		flags: [ 'primary', 'constructive' ],
+		flags: [ 'primary', 'progressive' ],
 		modes: [ 'save', 'review', 'preview' ],
 		accessKey: 's'
 	},
@@ -84,7 +84,7 @@ ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'resolve',
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resolve-conflict' ),
-		flags: [ 'primary', 'constructive' ],
+		flags: [ 'primary', 'progressive' ],
 		modes: 'conflict'
 	},
 	{

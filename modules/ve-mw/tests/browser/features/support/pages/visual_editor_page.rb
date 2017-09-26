@@ -105,7 +105,7 @@ class VisualEditorPage
   div(:media_select, class: 'mw-widget-mediaResultWidget-overlay')
   div(:medium_dialog, class: 'oo-ui-window oo-ui-dialog oo-ui-dialog-open oo-ui-dialog-medium')
   span(:use_image_button, css: '.oo-ui-processDialog-actions-primary > div:nth-child(1) > a:nth-child(1) > span:nth-child(2)')
-  span(:media_insert_button, css: '.oo-ui-flaggedElement-constructive > a:nth-child(1) > span:nth-child(2)')
+  span(:media_insert_button, css: '.oo-ui-flaggedElement-progressive > a:nth-child(1) > span:nth-child(2)')
   div(:caption, css: 'div.ve-ui-surface:nth-child(2) > div:nth-child(1) > div.ve-ce-documentNode.ve-ce-branchNode')
   text_field(:alternative_text, css: '.oo-ui-textInputWidget.ve-ui-mwMediaDialog-altText > input')
   checkbox(:minor_edit, id: 'wpMinoredit')
