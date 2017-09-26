@@ -131,7 +131,7 @@ ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	xhr = new mw.Api().post( {
 		action: 'visualeditor',
 		paction: 'parsefragment',
-		page: mw.config.get( 'wgRelevantPageName' ),
+		page: ve.init.target.pageName,
 		wikitext: ( config && config.wikitext ) || this.model.getWikitext(),
 		pst: 1
 	} )

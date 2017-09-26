@@ -34,7 +34,6 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.docToSave = null;
 	this.originalDmDoc = null;
 	this.toolbarSaveButton = null;
-	this.pageName = mw.config.get( 'wgRelevantPageName' );
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	// A workaround, as default URI does not get updated after pushState (bug 72334)
@@ -353,7 +352,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	this.checkboxesByName = {};
 	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
 		$( '#firstHeading' ).text(
-			mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText()
+			mw.Title.newFromText( this.pageName ).getPrefixedText()
 		);
 	}
 
@@ -986,7 +985,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 		new mw.Api().post( {
 			action: 'visualeditor',
 			paction: 'parsefragment',
-			page: mw.config.get( 'wgRelevantPageName' ),
+			page: this.pageName,
 			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {

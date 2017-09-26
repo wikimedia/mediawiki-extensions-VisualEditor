@@ -64,7 +64,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		// We're loading on top of a non-view page so we don't
 		// know the "proper" page title. But we can fake it with information
 		// we have.
-		this.originalDocumentTitle = ve.msg( 'pagetitle', mw.Title.newFromText( mw.config.get( 'wgPageName' ) ).getPrefixedText() );
+		this.originalDocumentTitle = ve.msg( 'pagetitle', mw.Title.newFromText( this.pageName ).getPrefixedText() );
 	} else {
 		this.originalDocumentTitle = document.title;
 	}

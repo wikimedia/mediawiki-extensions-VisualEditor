@@ -75,7 +75,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 		xhr = new mw.Api().post( {
 			action: 'visualeditor',
 			paction: 'parsefragment',
-			page: mw.config.get( 'wgRelevantPageName' ),
+			page: ve.init.target.pageName,
 			wikitext: wikitext
 		} )
 			.done( this.onParseSuccess.bind( this, deferred ) )

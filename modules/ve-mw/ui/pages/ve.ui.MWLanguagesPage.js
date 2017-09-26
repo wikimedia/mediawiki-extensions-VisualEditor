@@ -169,7 +169,7 @@ ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 	new mw.Api().get( {
 		action: 'visualeditor',
 		paction: 'getlanglinks',
-		page: mw.config.get( 'wgPageName' )
+		page: ve.init.target.pageName
 	} )
 		.done( this.onAllLanguageItemsSuccess.bind( this, deferred ) )
 		.fail( this.onAllLanguageItemsError.bind( this, deferred ) );

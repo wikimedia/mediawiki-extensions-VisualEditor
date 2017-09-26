@@ -161,7 +161,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 		parsePromise = new mw.Api().post( {
 			action: 'visualeditor',
 			paction: 'parsefragment',
-			page: mw.config.get( 'wgRelevantPageName' ),
+			page: ve.init.target.pageName,
 			wikitext: source
 		} ).then( function ( response ) {
 			return ve.dm.converter.getModelFromDom(

@@ -106,7 +106,7 @@
 			new mw.Api().post( {
 				action: 'visualeditor',
 				paction: 'parsefragment',
-				page: mw.config.get( 'wgRelevantPageName' ),
+				page: ve.init.target.pageName,
 				wikitext: baseNodeClass.static.getWikitext( this.getPlainObject() ),
 				pst: 1
 			} ).then( function ( response ) {
