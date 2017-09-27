@@ -1232,7 +1232,8 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	mw.hook( 've.activate' ).fire();
 
 	// Move all native content inside the target
-	this.$originalContent.append( this.$element.siblings() );
+	// Exclude notification area to work around T143837
+	this.$originalContent.append( this.$element.siblings().not( '.mw-notification-area' ) );
 	this.$originalCategories = $( '#catlinks' ).clone( true );
 
 	// Mark every non-direct ancestor between editableContent and the container as uneditable
