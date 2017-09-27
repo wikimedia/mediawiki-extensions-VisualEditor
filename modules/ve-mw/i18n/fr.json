@@ -49,7 +49,8 @@
 			"Pols12",
 			"The RedBurn",
 			"Thibaut120094",
-			"DePlusJean"
+			"DePlusJean",
+			"Trizek (WMF)"
 		]
 	},
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
@@ -325,7 +326,7 @@
 	"visualeditor-mweditmodeve-progress": "Basculer vers l’éditeur visuel...",
 	"visualeditor-mweditmodeve-showagain": "Ne plus afficher ce message",
 	"visualeditor-mweditmodeve-title": "Basculer vers l’éditeur visuel ?",
-	"visualeditor-mweditmodeve-tool-current": "ÉditeurVisuel",
+	"visualeditor-mweditmodeve-tool-current": "Éditeur visuel",
 	"visualeditor-mweditmodeve-tool-unavailable": "L'édition visuelle n'est pas possible ici",
 	"visualeditor-mweditmodeve-warning": "Vous êtes sur le point de basculer vers l’éditeur visuel.\nVoulez-vous continuer ?",
 	"visualeditor-mweditmodewt-popup-body": "Vous pouvez revenir à l’édition de la source à tout moment en cliquant sur cette icône.",
