@@ -10,8 +10,9 @@
 	max-width: none;
 	/* Don't allow the widget to force the dialog to have scrollbars */
 	height: 100%;
-	/* Specify a valid second value to fix size in Chrome/FF */
-	font-family: monospace, 'Courier';
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
 }
 
 .ve-ui-mwPreDialog .oo-ui-textInputWidget textarea {

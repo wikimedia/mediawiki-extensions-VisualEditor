@@ -8,8 +8,9 @@
 .ve-ui-mwAceEditorWidget .ace_editor {
 	border: 1px solid #c8ccd1;
 	margin: 1px;
-	/* Specify a valid second value to fix size in Chrome/FF */
-	font-family: monospace, 'Courier';
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
 	font-size: inherit;
 	line-height: 1.5;
 	/* Allow tooptip outside of editor */
