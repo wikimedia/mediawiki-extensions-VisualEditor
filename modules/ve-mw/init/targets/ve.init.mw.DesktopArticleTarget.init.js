@@ -467,15 +467,14 @@
 			} else if ( $caEdit.length && $caVeEdit.length ) {
 				// Make the state of the page consistent with the config if needed
 				if ( conf.tabPosition === 'before' ) {
-					if ( $caEdit[ 0 ].nextSibling === $caVeEdit[ 0 ] ) {
+					if ( $caEdit.next()[ 0 ] === $caVeEdit[ 0 ] ) {
 						$caVeEdit.after( $caEdit );
 					}
 				} else {
-					if ( $caVeEdit[ 0 ].nextSibling === $caEdit[ 0 ] ) {
+					if ( $caVeEdit.next()[ 0 ] === $caEdit[ 0 ] ) {
 						$caEdit.after( $caVeEdit );
 					}
 				}
-				// eslint-enable no-bitwise
 				if ( tabMessages[ action ] !== null ) {
 					$caVeEditLink.text( mw.msg( tabMessages[ action ] ) );
 				}
