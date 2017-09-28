@@ -426,10 +426,8 @@
 				$caVeEdit = $( '#ca-ve-edit' ),
 				$caEditLink = $caEdit.find( 'a' ),
 				$caVeEditLink = $caVeEdit.find( 'a' ),
-				reverseTabOrder = $( 'body' ).hasClass( 'rtl' ) && pTabsId === 'p-views',
 				caVeEditNextnode =
-					// eslint-disable-next-line no-bitwise
-					( reverseTabOrder ^ conf.tabPosition === 'before' ) ?
+					( conf.tabPosition === 'before' ) ?
 						$caEdit.get( 0 ) :
 						$caEdit.next().get( 0 );
 
@@ -468,8 +466,7 @@
 				}
 			} else if ( $caEdit.length && $caVeEdit.length ) {
 				// Make the state of the page consistent with the config if needed
-				// eslint-disable-next-line no-bitwise
-				if ( reverseTabOrder ^ conf.tabPosition === 'before' ) {
+				if ( conf.tabPosition === 'before' ) {
 					if ( $caEdit[ 0 ].nextSibling === $caVeEdit[ 0 ] ) {
 						$caVeEdit.after( $caEdit );
 					}
