@@ -16,7 +16,7 @@
  */
 ve.ui.MWLinkAnnotationInspector = function VeUiMWLinkAnnotationInspector( config ) {
 	// Parent constructor
-	ve.ui.MWLinkAnnotationInspector.super.call( this, config );
+	ve.ui.MWLinkAnnotationInspector.super.call( this, ve.extendObject( { padded: false }, config ) );
 };
 
 /* Inheritance */
