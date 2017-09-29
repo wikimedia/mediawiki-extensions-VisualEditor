@@ -21,7 +21,7 @@
 	"license-name": "MIT",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.30.0"
+		"MediaWiki": ">= 1.31.0"
 	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
@@ -2153,8 +2153,7 @@
 				"oojs-ui.styles.icons-movement",
 				"oojs-ui.styles.indicators",
 				"oojs-ui.styles.textures",
-				"ext.visualEditor.moduleIcons",
-				"ext.visualEditor.hackyIcons"
+				"ext.visualEditor.moduleIcons"
 			],
 			"targets": [
 				"desktop",
@@ -2167,15 +2166,6 @@
 			"rootPath": "modules/ve-mw/ui/styles",
 			"selectorWithoutVariant": ".oo-ui-icon-{name}",
 			"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
-		"ext.visualEditor.hackyIcons": {
-			"styles": [
-				"modules/ve-mw/ui/styles/ve.ui.Icons.css"
-			],
 			"targets": [
 				"desktop",
 				"mobile"
