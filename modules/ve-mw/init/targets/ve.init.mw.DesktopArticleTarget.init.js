@@ -249,7 +249,10 @@
 					return mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
 						section: section,
 						oldId: oldId,
-						targetName: 'article', // ve.init.mw.DesktopArticleTarget.static.name
+						// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
+						// class hasn't loaded yet.
+						// This is used for stats tracking, so do not change!
+						targetName: 'mwTarget',
 						modified: modified,
 						preload: uri.query.preload,
 						preloadparams: uri.query[ 'preloadparams[]' ],
