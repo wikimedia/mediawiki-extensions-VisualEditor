@@ -31,6 +31,8 @@ OO.inheritClass( ve.ui.MWAlienExtensionInspector, ve.ui.MWExtensionInspector );
 
 ve.ui.MWAlienExtensionInspector.static.name = 'alienExtension';
 
+ve.ui.MWAlienExtensionInspector.static.allowedEmpty = true;
+
 ve.ui.MWAlienExtensionInspector.static.modelClasses = [
 	ve.dm.MWAlienInlineExtensionNode,
 	ve.dm.MWAlienBlockExtensionNode
@@ -63,6 +65,7 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 					attributeInput = new OO.ui.TextInputWidget( {
 						value: attributes[ key ]
 					} );
+					attributeInput.connect( this, { change: 'onChangeHandler' } );
 					this.attributeInputs[ key ] = attributeInput;
 					field = new OO.ui.FieldLayout(
 						attributeInput,

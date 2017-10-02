@@ -117,6 +117,7 @@ ve.ui.MWExtensionWindow.prototype.getTeardownProcess = function ( data, process 
 	return process.next( function () {
 		// Don't hold on to the original data, it's only refreshed on setup for existing nodes
 		this.originalMwData = null;
+		this.input.disconnect( this, { change: 'onChangeHandler' } );
 	}, this );
 };
 

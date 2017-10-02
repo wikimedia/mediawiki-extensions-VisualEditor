@@ -26,6 +26,8 @@ ve.ce.MWAlienExtensionNode.static.primaryCommandName = 'alienExtension';
 
 ve.ce.MWAlienExtensionNode.static.iconWhenInvisible = 'alienextension';
 
+ve.ce.MWAlienExtensionNode.static.rendersEmpty = true;
+
 /* Methods */
 
 /* Static methods */
