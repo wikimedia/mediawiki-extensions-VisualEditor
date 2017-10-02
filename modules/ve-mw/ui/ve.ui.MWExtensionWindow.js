@@ -38,6 +38,17 @@ OO.initClass( ve.ui.MWExtensionWindow );
 ve.ui.MWExtensionWindow.static.allowedEmpty = false;
 
 /**
+ * Tell Parsoid to self-close tags when the body is empty
+ *
+ * i.e. `<foo></foo>` -> `<foo/>`
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.ui.MWExtensionWindow.static.selfCloseEmptyBody = false;
+
+/**
  * Inspector's directionality, 'ltr' or 'rtl'
  *
  * Leave as null to use the directionality of the current fragment.
@@ -242,6 +253,10 @@ ve.ui.MWExtensionWindow.prototype.updateMwData = function ( mwData ) {
 	// Prevent that by escaping the first angle bracket '<' to '&lt;'. (bug 57429)
 	value = value.replace( new RegExp( '<(/' + tagName + '\\s*>)', 'gi' ), '&lt;$1' );
 
-	mwData.body = mwData.body || {};
-	mwData.body.extsrc = value;
+	if ( value.trim() === '' && this.constructor.static.selfCloseEmptyBody ) {
+		mwData.body = null;
+	} else {
+		mwData.body = mwData.body || {};
+		mwData.body.extsrc = value;
+	}
 };
