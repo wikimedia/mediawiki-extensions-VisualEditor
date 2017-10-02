@@ -83,7 +83,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 		if ( this.selectedNode ) {
 			mwData = this.selectedNode.getAttribute( 'mw' );
 			// mwData.body can be null in <selfclosing/> extensions
-			this.input.setValueAndWhitespace( mwData.body && mwData.body.extsrc );
+			this.input.setValueAndWhitespace( ( mwData.body && mwData.body.extsrc ) || '' );
 			this.originalMwData = mwData;
 		} else {
 			if ( !this.constructor.static.modelClasses[ 0 ].static.isContent ) {
