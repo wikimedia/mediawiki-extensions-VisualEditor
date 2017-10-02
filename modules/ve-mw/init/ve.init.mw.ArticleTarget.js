@@ -1157,7 +1157,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.pageName, {
 		section: this.section,
 		oldId: this.requestedRevId,
-		targetName: this.constructor.static.name
+		targetName: this.constructor.static.trackingName
 	} );
 	this.loading
 		.done( this.loadSuccess.bind( this ) )
@@ -2189,7 +2189,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.pageName, {
 				section: this.section,
 				oldId: this.requestedRevId,
-				targetName: this.constructor.static.name
+				targetName: this.constructor.static.trackingName
 			} ).then(
 				function ( response ) { return response; },
 				function () {
@@ -2259,7 +2259,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 	} else {
 		dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.pageName, {
 			oldId: this.revid,
-			targetName: this.constructor.static.name,
+			targetName: this.constructor.static.trackingName,
 			modified: this.edited,
 			wikitext: this.getDocToSave()
 		} );
