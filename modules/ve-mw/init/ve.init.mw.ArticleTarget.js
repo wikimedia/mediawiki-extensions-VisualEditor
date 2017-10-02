@@ -1711,6 +1711,7 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 		wpStarttime: this.startTimeStamp,
 		wpEdittime: this.baseTimeStamp,
 		wpTextbox1: wikitext,
+		wpUnicodeCheck: 'ℳ𝒲♥𝓊𝓃𝒾𝒸ℴ𝒹ℯ',
 		wpEditToken: this.editToken
 	}, fields );
 	// Add params as hidden fields
