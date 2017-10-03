@@ -21,7 +21,6 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 
 	// Initialization
 	// The following classes can be used here:
-	// * mw-editfont-default
 	// * mw-editfont-monospace
 	// * mw-editfont-sans-serif
 	// * mw-editfont-serif
