@@ -40,7 +40,8 @@
 			"INS Pirat",
 			"Redredsonia",
 			"Facenapalm",
-			"Jack who built the house"
+			"Jack who built the house",
+			"Helpau"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
@@ -319,7 +320,7 @@
 	"visualeditor-mwlanguagevariant-name": "Название языка: $1",
 	"visualeditor-mwlanguagevariantcontextitem-flag-describe": "Это описанное правило.",
 	"visualeditor-mwlanguagevariantcontextitem-flag-hidden": "Это скрытое правило.",
-	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Код&nbsp;языка",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Код языка",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Язык",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Текст",
 	"visualeditor-mwlanguagevariantcontextitem-title-name": "Название языка",
