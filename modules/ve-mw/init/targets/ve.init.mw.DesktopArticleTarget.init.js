@@ -55,6 +55,8 @@
 				'</div>'
 			);
 		}
+		// eslint-disable-next-line no-use-before-define
+		$( document ).on( 'keydown', onDocumentKeyDown );
 
 		// Center within visible part of the target
 		$content = $( '#content' );
@@ -86,16 +88,32 @@
 		}
 	}
 
-	function resetLoadingProgress() {
+	function clearLoading() {
 		progressStep = 0;
 		setLoadingProgress( 0, 0 );
-	}
-
-	function hideLoading() {
 		isLoading = false;
+		// eslint-disable-next-line no-use-before-define
+		$( document ).off( 'keydown', onDocumentKeyDown );
 		$( 'html' ).removeClass( 've-loading' );
 		if ( init.$loading ) {
 			init.$loading.detach();
+		}
+	}
+
+	function abortLoading() {
+		$( 'html' ).removeClass( 've-activated' );
+		active = false;
+		// Push read tab URL to history
+		if ( history.pushState && $( '#ca-view a' ).length ) {
+			history.pushState( { tag: 'visualeditor' }, document.title, new mw.Uri( $( '#ca-view a' ).attr( 'href' ) ) );
+		}
+		clearLoading();
+	}
+
+	function onDocumentKeyDown( e ) {
+		if ( e.which === 27 /* OO.ui.Keys.ESCAPE */ ) {
+			abortLoading();
+			e.preventDefault();
 		}
 	}
 
@@ -146,6 +164,13 @@
 				.then( function () {
 					var target,
 						modes = [];
+
+					if ( !active ) {
+						// Loading was aborted
+						// TODO: Make loaders abortable instead of waiting
+						targetPromise = null;
+						return $.Deferred().reject().promise();
+					}
 
 					if ( init.isVisualAvailable ) {
 						modes.push( 'visual' );
@@ -287,10 +312,7 @@
 			.then( function () {
 				ve.track( 'mwedit.ready' );
 			} )
-			.always( function () {
-				hideLoading();
-				resetLoadingProgress();
-			} );
+			.always( clearLoading );
 	}
 
 	function activatePageTarget( mode, modified ) {
