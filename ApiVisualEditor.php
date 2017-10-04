@@ -282,7 +282,7 @@ class ApiVisualEditor extends ApiBase {
 
 						if ( $section === 'new' ) {
 							$content = '';
-							if ( $params['preload'] ) {
+							if ( !empty( $params['preload'] ) ) {
 								$content = $this->getPreloadContent(
 									$params['preload'], $params['preloadparams'], $title,
 									$params['paction'] !== 'wikitext'
@@ -322,7 +322,7 @@ class ApiVisualEditor extends ApiBase {
 					if ( $content !== '' ) {
 						$content = $this->parseWikitextFragment( $title, $content );
 					}
-					if ( $content === '' && $params['preload'] ) {
+					if ( $content === '' && !empty( $params['preload'] ) ) {
 						$content = $this->getPreloadContent(
 							$params['preload'], $params['preloadparams'], $title,
 							$params['paction'] !== 'wikitext'
@@ -581,7 +581,7 @@ class ApiVisualEditor extends ApiBase {
 				];
 				if ( $params['paction'] === 'parse' ||
 					 $params['paction'] === 'wikitext' ||
-					 ( $params['preload'] && $content )
+					 ( !empty( $params['preload'] ) && $content )
 				) {
 					$result['content'] = $content;
 				}
