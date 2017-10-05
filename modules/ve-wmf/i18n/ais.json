@@ -12,5 +12,6 @@
 	"visualeditor-welcomedialog-action": "miteka mikawaway-kalumyiti",
 	"visualeditor-welcomedialog-content": "amahicahica a tademawkapah mikawaway-kalumyiti, sacacacacay misakapah kapah tu miedap tamiyan.",
 	"visualeditor-welcomedialog-content-thanks": "mikukay nu misuay a edap sisa maazih ku binawlan tu kitakit!",
-	"visualeditor-welcomedialog-switch-ve": "ketun mibalic ta palakuliten ku aazihen sakawaw-kalumyiti"
+	"visualeditor-welcomedialog-switch-ve": "ketun mibalic ta palakuliten ku aazihen sakawaw-kalumyiti",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|manamuh kamu tayniay}} $2"
 }

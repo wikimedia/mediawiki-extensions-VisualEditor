@@ -323,7 +323,7 @@
 	"visualeditor-preference-tabs-remember-last": "Muista viimeksi käyttämäni muokkain",
 	"visualeditor-recreate": "Sivu on poistettu sillä aikaa, kun muokkasit sitä. Napsauta \"$1\" luodaksesi sivun uudelleen.",
 	"visualeditor-redirect-description": "Uudelleenohjaus sivulle $1",
-	"visualeditor-savedialog-keyboard-shortcut-submit": "Voit painaa $1 tallentaaksesi muutoksesi.",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "Tallenna muutokset painamalla $1.",
 	"visualeditor-savedialog-error-badtoken": "Emme voineet tallentaa muokkaustasi, koska istunto ei ole enää voimassa.",
 	"visualeditor-savedialog-identify-anon": "Haluatko tallentaa sivun kirjautumattomana käyttäjänä? IP-osoitteesi kirjataan tämän sivun muutoshistoriaan.",
 	"visualeditor-savedialog-identify-trylogin": "Et ole enää sisäänkirjautuneena. Ole hyvä ja kirjaudu sisään toisen välilehden kautta ja yritä uudelleen.",
