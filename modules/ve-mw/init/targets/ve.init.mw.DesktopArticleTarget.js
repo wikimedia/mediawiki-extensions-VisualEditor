@@ -489,7 +489,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
 };
 
 /**
- * Setup new section inputs if required
+ * Setup new section input for a surface, if required
  *
  * @param {ve.ui.Surface} surface Surface
  */
@@ -510,30 +510,19 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 		if ( this.currentUri.query.preloadtitle ) {
 			this.sectionTitle.setValue( this.currentUri.query.preloadtitle );
 		}
+		surface.once( 'destroy', this.teardownNewSection.bind( this, surface ) );
 	}
 };
 
 /**
  * Teardown new section inputs
  */
-ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function () {
-	if ( this.getSurface() ) {
-		this.getSurface().setPlaceholder( '' );
-	}
+ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surface ) {
+	surface.setPlaceholder( '' );
 	if ( this.sectionTitle ) {
 		this.sectionTitle.$element.remove();
 		this.sectionTitle = null;
 	}
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.clearSurfaces = function () {
-	this.teardownNewSection();
-
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.clearSurfaces.apply( this, arguments );
 };
 
 /**
@@ -560,7 +549,6 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 	if ( this.editingTabDialog ) {
 		this.editingTabDialog.close();
 	}
-	this.teardownNewSection();
 	this.editingTabDialog = null;
 
 	if ( noDialog || this.activating || !this.edited ) {
