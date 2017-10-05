@@ -27,9 +27,16 @@
 		getModelFromResponse: function ( response ) {
 			var doc,
 				targetClass = ve.init.mw.DesktopArticleTarget,
+				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
 				doc = targetClass.static.parseDocument( data.content, 'visual' );
+				// Strip RESTBase IDs
+				Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
+					if ( element.id.match( metadataIdRegExp ) ) {
+						element.removeAttribute( 'id' );
+					}
+				} );
 				return targetClass.static.createModelFromDom( doc, 'visual' );
 			}
 			return null;
