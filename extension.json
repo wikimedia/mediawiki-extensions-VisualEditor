@@ -373,7 +373,6 @@
 				"creating",
 				"editing",
 				"lastmodifiedat",
-				"parentheses",
 				"apierror-readonly",
 				"redirectpagesub",
 				"subject",
@@ -561,6 +560,7 @@
 				"colon-separator",
 				"newsectionsummary",
 				"pagecategories",
+				"parentheses",
 				"tooltip-minoredit",
 				"tooltip-watch",
 				"visualeditor-diff-no-changes"
