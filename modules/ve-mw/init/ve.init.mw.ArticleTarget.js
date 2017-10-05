@@ -33,6 +33,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.captcha = null;
 	this.docToSave = null;
 	this.originalDmDoc = null;
+	this.originalHtml = null;
 	this.toolbarSaveButton = null;
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
@@ -46,6 +47,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.$templatesUsed = null;
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
+	this.$saveAccessKeyElements = null;
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
@@ -1183,6 +1185,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.doc = null;
 	this.originalDmDoc = null;
 	this.originalHtml = null;
+	this.toolbarSaveButton = null;
 	this.section = null;
 	this.editNotices = [];
 	this.remoteNotices = [];
@@ -1792,6 +1795,18 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.ArticleTarget.prototype.teardown = function () {
+	// Restore access keys
+	if ( this.$saveAccessKeyElements ) {
+		this.$saveAccessKeyElements.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+		this.$saveAccessKeyElements = null;
+	}
+	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.setupToolbar.apply( this, arguments );
@@ -1838,7 +1853,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = function ( config ) 
 
 		if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
 			// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
-			this.elementsThatHadOurAccessKey = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
+			this.$saveAccessKeyElements = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
 			this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
 		}
 

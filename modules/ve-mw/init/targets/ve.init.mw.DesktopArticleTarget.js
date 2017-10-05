@@ -60,15 +60,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		this.currentUri.query.diff === undefined
 	);
 
-	if ( !this.isViewPage ) {
-		// We're loading on top of a non-view page so we don't
-		// know the "proper" page title. But we can fake it with information
-		// we have.
-		this.originalDocumentTitle = ve.msg( 'pagetitle', mw.Title.newFromText( this.pageName ).getPrefixedText() );
-	} else {
-		this.originalDocumentTitle = document.title;
-	}
-
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
@@ -424,6 +415,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
 
+		// Handlers were unbound in constructor. Will be unbound again in teardown.
 		this.bindHandlers();
 
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
@@ -526,17 +518,18 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surfac
 };
 
 /**
- * Determines whether we want to switch to view mode or not (displaying a dialog if necessary)
- * Then, if we do, actually switches to view mode.
+ * Try to de-activate the target, but leave ready for re-activation later
  *
- * A dialog will not be shown if deactivate() is called while activation is still in progress,
- * or if the noDialog parameter is set to true. If deactivate() is called while the target
+ * Will first prompt the user if required, then call #deactivate.
+ *
+ * A dialog will not be shown if tryDeactivate() is called while activation is still in progress,
+ * or if the noDialog parameter is set to true. If tryDeactivate() is called while the target
  * is deactivating, or while it's not active and not activating, nothing happens.
  *
  * @param {boolean} [noDialog] Do not display a dialog
  * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
  */
-ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trackMechanism ) {
+ve.init.mw.DesktopArticleTarget.prototype.tryDeactivate = function ( noDialog, trackMechanism ) {
 	var target = this;
 	if ( this.deactivating || ( !this.active && !this.activating ) ) {
 		return;
@@ -552,28 +545,29 @@ ve.init.mw.DesktopArticleTarget.prototype.deactivate = function ( noDialog, trac
 	this.editingTabDialog = null;
 
 	if ( noDialog || this.activating || !this.edited ) {
-		this.emit( 'deactivate' );
-		this.cancel( trackMechanism );
+		this.teardown( trackMechanism );
 	} else {
 		this.getSurface().dialogs.openWindow( 'cancelconfirm' )
 			.closed.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
-					target.emit( 'deactivate' );
-					target.cancel( trackMechanism );
+					target.teardown( trackMechanism );
 				}
 			} );
 	}
 };
 
 /**
- * Switch to view mode
+ * @inheritdoc
  *
- * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
+ * @param {string} [trackMechanism]
+ * @fires deactivate
  */
-ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
+ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
 	var abortType,
-		target = this,
-		promises = [];
+		saveDialogPromise = $.Deferred().resolve().promise(),
+		target = this;
+
+	this.emit( 'deactivate' );
 
 	// Event tracking
 	if ( trackMechanism ) {
@@ -601,51 +595,54 @@ ve.init.mw.DesktopArticleTarget.prototype.cancel = function ( trackMechanism ) {
 	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active' );
 
 	// User interface changes
-	if ( this.elementsThatHadOurAccessKey ) {
-		this.elementsThatHadOurAccessKey.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
-	}
 	this.restorePage();
-
-	this.unbindHandlers();
 
 	mw.user.options.set( 'editondblclick', this.originalEditondbclick );
 	this.originalEditondbclick = undefined;
 
-	if ( this.toolbarSaveButton ) {
-		this.toolbarSaveButton = null;
-	}
-
-	// Check we got as far as setting up the surface
+	// TODO: Use better checks to see if these restorations are required.
 	if ( this.getSurface() ) {
+		this.restoreDocumentTitle();
 		if ( this.active ) {
 			this.teardownUnloadHandlers();
 		}
-		promises.push( this.teardownSurface() );
-	} else if ( this.toolbar ) {
-		// If a dummy toolbar was created, destroy it
-		this.toolbar.destroy();
 	}
 
-	$.when.apply( null, promises ).done( function () {
-		// If there is a load in progress, abort it
-		if ( target.loading ) {
-			target.loading.abort();
+	if ( this.saveDialog ) {
+		if ( this.saveDialog.isOpened() ) {
+			// If the save dialog is still open (from saving) close it
+			saveDialogPromise = this.saveDialog.close().closed;
 		}
+		// Release the reference
+		this.saveDialog = null;
+	}
 
-		target.clearState();
-		target.initialEditSummary = new mw.Uri().query.summary;
-		target.editSummaryValue = null;
+	saveDialogPromise.then( function () {
+		// Parent method
+		ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( target ).then( function () {
+			// After teardown
+			target.active = false;
 
-		target.deactivating = false;
-		$( 'html' ).removeClass( 've-deactivating' );
+			// If there is a load in progress, abort it
+			if ( target.loading ) {
+				target.loading.abort();
+			}
 
-		// Move original content back out of the target
-		target.$element.parent().append( target.$originalContent.children() );
-		$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
-			.off( '.ve-target' )
-			.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+			target.clearState();
+			target.initialEditSummary = new mw.Uri().query.summary;
+			target.editSummaryValue = null;
 
-		mw.hook( 've.deactivationComplete' ).fire( target.edited );
+			target.deactivating = false;
+			$( 'html' ).removeClass( 've-deactivating' );
+
+			// Move original content back out of the target
+			target.$element.parent().append( target.$originalContent.children() );
+			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
+				.off( '.ve-target' )
+				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+
+			mw.hook( 've.deactivationComplete' ).fire( target.edited );
+		} );
 	} );
 };
 
@@ -710,7 +707,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			} else if ( $( '#wpTextbox1' ).length && !ve.init.target.isModeAvailable( 'source' ) ) {
 				// If we're switching from the wikitext editor, just deactivate
 				// don't try to switch back to it fully, that'd discard changes.
-				target.deactivate( true );
+				target.tryDeactivate( true );
 			} else {
 				// TODO: Some sort of progress bar?
 				target.wikitextFallbackLoading = true;
@@ -721,7 +718,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		if ( errorDetails.statusText !== 'abort' ) {
 			mw.log.warn( 'Failed to find error message', code, errorDetails );
 		}
-		this.deactivate( true );
+		this.tryDeactivate( true );
 	}
 };
 
@@ -897,7 +894,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 			// also check they didn't fire after this event, as would be the case if
 			// they were bound to the document.
 			if ( !e.isPropagationStopped() ) {
-				target.deactivate( false, 'navigate-read' );
+				target.tryDeactivate( false, 'navigate-read' );
 			}
 		} );
 		e.preventDefault();
@@ -914,7 +911,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 	if ( !ve.isUnmodifiedLeftClick( e ) ) {
 		return;
 	}
-	this.deactivate( false, 'navigate-read' );
+	this.tryDeactivate( false, 'navigate-read' );
 	e.preventDefault();
 };
 
@@ -997,7 +994,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 
 		// Tear down the target now that we're done saving
 		// Not passing trackMechanism because this isn't an abort action
-		this.deactivate( true );
+		this.tryDeactivate( true );
 		if ( newid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
 				message: ve.msg( 'postedit-confirmation-saved', mw.user )
@@ -1055,34 +1052,6 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 		ve.ui.actionFactory.create( 'window', this.getSurface() )
 			.open( 'wikitextswitchconfirm', { target: this } );
 	}
-};
-
-/**
- * Switch to viewing mode.
- *
- * @return {jQuery.Promise} Promise resolved when surface is torn down
- */
-ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
-	var target = this,
-		promises = [];
-
-	// Update UI
-	promises.push( this.teardownToolbar() );
-	this.restoreDocumentTitle();
-
-	if ( this.saveDialog ) {
-		if ( this.saveDialog.isOpened() ) {
-			// If the save dialog is still open (from saving) close it
-			promises.push( this.saveDialog.close().closed );
-		}
-		// Release the reference
-		this.saveDialog = null;
-	}
-
-	return $.when.apply( null, promises ).then( function () {
-		target.clearSurfaces();
-		target.active = false;
-	} );
 };
 
 /**
@@ -1159,13 +1128,16 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreScrollPosition = function () {
 };
 
 /**
- * Hide the toolbar.
- *
- * @return {jQuery.Promise} Promise which resolves when toolbar is hidden
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 	var target = this,
 		deferred = $.Deferred();
+
+	if ( !this.toolbar ) {
+		return deferred.resolve().promise();
+	}
+
 	this.toolbar.$element.css( 'height', this.toolbar.$bar.outerHeight() );
 	setTimeout( function () {
 		target.toolbar.$element
@@ -1185,15 +1157,18 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
  * Change the document title to state that we are now editing.
  */
 ve.init.mw.DesktopArticleTarget.prototype.changeDocumentTitle = function () {
-	var pageName = mw.config.get( 'wgPageName' ),
-		title = mw.Title.newFromText( pageName );
-	if ( title ) {
-		pageName = title.getPrefixedText();
-	}
-	document.title = ve.msg(
-		this.pageExists ? 'editing' : 'creating',
-		pageName
-	) + ' - ' + mw.config.get( 'wgSiteName' );
+	var title = mw.Title.newFromText( this.pageName );
+
+	// Use the real title if we loaded a view page, otherwise reconstruct it
+	this.originalDocumentTitle = this.isViewPage ? document.title : ve.msg( 'pagetitle', title.getPrefixedText() );
+
+	// Reconstruct an edit title
+	document.title = ve.msg( 'pagetitle',
+		ve.msg(
+			this.pageExists ? 'editing' : 'creating',
+			title.getPrefixedText()
+		)
+	);
 };
 
 /**
@@ -1386,7 +1361,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	}
 	if ( this.active && veaction !== 'edit' && veaction !== 'editsource' ) {
 		this.actFromPopState = true;
-		this.deactivate( false, 'navigate-back' );
+		this.tryDeactivate( false, 'navigate-back' );
 	}
 };
 
