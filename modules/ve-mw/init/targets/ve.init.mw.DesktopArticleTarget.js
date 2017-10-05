@@ -759,6 +759,9 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
 		surface.mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
+		surface.once( 'destroy', function () {
+			surface.mwTocWidget.$element.remove();
+		} );
 	}
 
 	this.transformCategoryLinks( $( '#catlinks' ) );
@@ -1089,15 +1092,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownSurface = function () {
 	}
 
 	return $.when.apply( null, promises ).then( function () {
-		var surface;
-		// Destroy surface
-		while ( target.surfaces.length ) {
-			surface = target.surfaces.pop();
-			surface.destroy();
-			if ( surface.mwTocWidget ) {
-				surface.mwTocWidget.$element.remove();
-			}
-		}
+		target.clearSurfaces();
 		target.active = false;
 	} );
 };
