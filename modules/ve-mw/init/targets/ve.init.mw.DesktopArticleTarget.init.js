@@ -1119,6 +1119,9 @@
 		}
 
 		if ( uri.query.venotify ) {
+			// Load postEdit code to execute the queued event below, which will handle it once it arrives
+			mw.loader.load( 'mediawiki.action.view.postEdit' );
+
 			// The following messages can be used here:
 			// postedit-confirmation-saved
 			// postedit-confirmation-created

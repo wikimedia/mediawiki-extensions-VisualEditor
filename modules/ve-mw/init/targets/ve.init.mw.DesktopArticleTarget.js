@@ -969,7 +969,8 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		// Update module JS config values and notify ResourceLoader of any new
 		// modules needed to be added to the page
 		mw.config.set( jsconfigvars );
-		mw.loader.load( modules );
+		// Also load postEdit in case it's needed, below.
+		mw.loader.load( modules.concat( [ 'mediawiki.action.view.postEdit' ] ) );
 
 		mw.config.set( {
 			wgIsRedirect: !!isRedirect
