@@ -22,7 +22,8 @@
 			"Darklanlan",
 			"Mirinano",
 			"Iwai.masaharu",
-			"Translatealcd"
+			"Translatealcd",
+			"Hinaloe"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -304,6 +305,8 @@
 	"visualeditor-mwlanguagevariant-name": "言語名: $1",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "言語コード",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "言語",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "言語",
+	"visualeditor-mwlanguagevariantinspector-title-name": "言語名",
 	"visualeditor-mwsignature-tool": "あなたの署名",
 	"visualeditor-pagemenu-tooltip": "ページ設定",
 	"visualeditor-pagetranslationwarning": "翻訳対象ページを編集しています。このエディターによる編集は、まだ公式には対応していません。",

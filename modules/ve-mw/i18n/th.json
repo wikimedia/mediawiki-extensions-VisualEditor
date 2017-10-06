@@ -82,6 +82,8 @@
 	"visualeditor-parameter-search-no-unused": "ไม่มีพารามิเตอร์ที่ไม่ได้ใช้",
 	"visualeditor-parameter-search-unknown": "พารามิเตอร์ที่ไม่รู้จัก",
 	"visualeditor-preference-betatempdisable": "ปิดใช้งาน VisualEditor ชั่วคราวขณะที่อยู่ในรุ่นเบต้า",
+	"visualeditor-preference-newwikitexteditor-description": "เปิดใช้งานโหมดข้อความวิกิแบบใหม่ใน VisualEditor ซึ่งมีเครื่องมือหลายอย่างอยู่ใน VisualEditor และใช้ดีไซน์ที่คล้ายกัน รวมทั้งสามารถสลับไปมาระหว่างโหมดแก้ไขทั้งสองโหมดได้",
+	"visualeditor-preference-newwikitexteditor-label": "โหมดข้อความวิกิแบบใหม่",
 	"visualeditor-preference-enable": "เปิดใช้งาน VisualEditor (เฉพาะใน [[{{MediaWiki:visualeditor-mainnamespacepagelink}}|เนมสเปซหลัก]] และ [[{{MediaWiki:visualeditor-usernamespacepagelink}}|เนมสเปซผู้ใช้]])",
 	"visualeditor-savedialog-error-badtoken": "เราไม่สามารถประมวลผลการแก้ไขเนื่องจากเซสชันนี้ใช้ไม่ได้แล้ว",
 	"visualeditor-savedialog-identify-anon": "คุณต้องบันทึกเพจนี้เป็นผู้ใช้ที่ไม่ระบุชื่อหรือไม่ ? ที่อยู่ IP ของคุณจะถูกบันทึกไว้ในประวัติการแก้ไขของหน้านี้",
