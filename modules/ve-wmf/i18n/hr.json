@@ -11,7 +11,7 @@
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Uređivanje napravljeno [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditorom]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje: provjera]]",
-	"tag-visualeditor-needcheck-description": "Uređivanje učinjeno [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditorom]] pri kojem je sustav označio wikitekst kao mogućom nenamjernom izmjenom.",
+	"tag-visualeditor-needcheck-description": "Uređivanje učinjeno [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditorom]] pri čemu je sustav označio wikitekst kao mogućom nenamjernom izmjenom.",
 	"tag-visualeditor-wikitext": "uređivač wikiteksta (2017.)",
 	"tag-visualeditor-wikitext-description": "Uređivanje učinjeno uređivačem wikiteksta (2017.)",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje: prebačeno na klasično uređivanje]]",
