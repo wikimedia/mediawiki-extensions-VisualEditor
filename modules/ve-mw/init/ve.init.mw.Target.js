@@ -310,9 +310,6 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 		// Preserve empty linebreaks on paste in source editor
 		importRules.all.keepEmptyContentBranches = true;
 		config = this.getSurfaceConfig( ve.extendObject( {}, config, {
-			commandRegistry: ve.ui.wikitextCommandRegistry,
-			sequenceRegistry: ve.ui.wikitextSequenceRegistry,
-			dataTransferHandlerFactory: ve.ui.wikitextDataTransferHandlerFactory,
 			importRules: importRules
 		} ) );
 		return new ve.ui.MWWikitextSurface( dmDoc, config );
@@ -339,6 +336,20 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 	onLangChange();
 
 	return surface;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
+	// If we're not asking for a specific mode's config, use the default mode.
+	config = ve.extendObject( { mode: this.defaultMode }, config );
+	return ve.init.mw.Target.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
+		// Provide the wikitext versions of the registries, if we're using source mode
+		commandRegistry: config.mode === 'source' ? ve.ui.wikitextCommandRegistry : ve.ui.commandRegistry,
+		sequenceRegistry: config.mode === 'source' ? ve.ui.wikitextSequenceRegistry : ve.ui.sequenceRegistry,
+		dataTransferHandlerFactory: config.mode === 'source' ? ve.ui.wikitextDataTransferHandlerFactory : ve.ui.dataTransferHandlerFactory
+	}, config ) );
 };
 
 /**
