@@ -174,7 +174,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Ha szükséges",
 	"visualeditor-dialog-meta-settings-toc-disable": "Soha",
 	"visualeditor-dialog-meta-settings-toc-force": "Mindig",
-	"visualeditor-dialog-meta-settings-toc-help": "Megadhatod, hogy a tartalomjegyzék megjelenjen-e azokban a szócikkekben, amelyek kevesebb mint 3 címsort tartalmaznak, vagy egyáltalán ne jelenjen meg. Alapértelmezés szerint akkor jelenik meg, ha a szócikknek 3 vagy annál több címsora van.",
+	"visualeditor-dialog-meta-settings-toc-help": "Megadhatod, hogy a tartalomjegyzék megjelenjen azokban a szócikkekben, amelyek kevesebb mint 4 címsort tartalmaznak, vagy hogy egyáltalán ne jelenjen meg. Alapértelmezés szerint akkor jelenik meg, ha a szócikknek 4 vagy annál több címsora van.",
 	"visualeditor-dialog-meta-settings-toc-label": "Tartalomjegyzék mutatása",
 	"visualeditor-dialog-meta-templatesused-noresults": "Nem találhatók sablonok.",
 	"visualeditor-dialog-meta-title": "Beállítások",
