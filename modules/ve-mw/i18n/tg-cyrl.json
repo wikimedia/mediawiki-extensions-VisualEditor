@@ -3,7 +3,8 @@
 		"authors": [
 			"Ibrahim",
 			"AryanSogd",
-			"ToJack"
+			"ToJack",
+			"Vashgird"
 		]
 	},
 	"tooltip-ca-createsource": "Эҷоди манбаъ ба ин саҳифа",
@@ -76,7 +77,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Доимо",
 	"visualeditor-dialog-meta-settings-toc-label": "Намоиши Мундариҷа",
 	"visualeditor-dialog-meta-title": "Ихтиёрот",
-	"visualeditor-dialog-transclusion-add-content": "Иловаи мӯҳтаво",
+	"visualeditor-dialog-transclusion-add-content": "Иловаи муҳтаво",
 	"visualeditor-dialog-transclusion-content": "Мундариҷа",
 	"visualeditor-dialog-transclusion-loading": "Дар ҳоли кушодашавӣ...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Намоиши ихтиёрот",
