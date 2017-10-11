@@ -22,18 +22,10 @@
 	border-radius: 0;
 }
 
-.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle {
-	height: 24px;
-}
-
-.ve-init-mw-editSwitch .oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon {
-	height: auto;
+.ve-init-mw-editSwitch .oo-ui-popupToolGroup.oo-ui-iconElement .oo-ui-popupToolGroup-handle {
+	padding-top: 32px;
 }
 
 .ve-init-mw-editSwitch .oo-ui-popupToolGroup .oo-ui-toolGroup-tools {
 	top: 32px;
-}
-
-.ve-init-mw-editSwitch .oo-ui-popupWidget-head {
-	font-weight: bold;
 }
