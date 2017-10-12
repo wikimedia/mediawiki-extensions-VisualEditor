@@ -8,7 +8,7 @@
 QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'compatibility', function ( assert ) {
-	var i, profile, list, matches, compatibility,
+	var i, profile, matches, compatibility,
 		cases = [
 			{
 				msg: 'Unidentified browser',
@@ -151,6 +151,11 @@ QUnit.test( 'compatibility', function ( assert ) {
 				matches: []
 			},
 			{
+				msg: 'Opera 15.0',
+				userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36 OPR/15.0.1147.100',
+				matches: [ 'whitelist' ]
+			},
+			{
 				msg: 'BlackBerry',
 				userAgent: 'Mozilla/5.0 (BlackBerry; U; BlackBerry 9900; en) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.1.0.346 Mobile Safari/534.11+',
 				matches: []
@@ -176,11 +181,15 @@ QUnit.test( 'compatibility', function ( assert ) {
 	for ( i = 0; i < cases.length; i++ ) {
 		profile = $.client.profile( { userAgent: cases[ i ].userAgent, platform: '' } );
 		matches = [];
-		for ( list in compatibility ) {
+		// eslint-disable-next-line no-loop-func
+		[ 'blacklist', 'whitelist' ].every( function ( list ) {
 			if ( $.client.test( compatibility[ list ], profile, true ) ) {
 				matches.push( list );
+				// Don't check whitelist if on blacklist
+				return false;
 			}
-		}
+			return true;
+		} );
 		assert.deepEqual( matches, cases[ i ].matches,
 			cases[ i ].msg + ': ' + ( cases[ i ].matches.length ? cases[ i ].matches.join() : 'greylist (no matches)' ) );
 	}
