@@ -107,7 +107,8 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 ];
 
 /**
- * Compatibility map used with jQuery.client to black-list incompatible browsers.
+ * Compatibility map used with jQuery.client to decide if a browser should
+ * receive a compatibility warning. Blacklisting is handled in DesktopArticleTarget.init.
  *
  * @static
  * @property
@@ -117,13 +118,14 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	// The value is either null (match all versions) or a list of tuples
 	// containing an inequality (<,>,<=,>=) and a version number
 	whitelist: {
-		firefox: [ [ '>=', 12 ] ],
-		iceweasel: [ [ '>=', 10 ] ],
-		safari: [ [ '>=', 7 ] ],
 		chrome: [ [ '>=', 19 ] ],
-		msie: [ [ '>=', 10 ] ],
-		edge: [ [ '>=', 12 ] ],
-		opera: [ [ '>=', 15 ] ]
+		iceweasel: [ [ '>=', 10 ] ],
+		opera: [ [ '>=', 15 ] ],
+		// All non-blacklisted versions are whitelisted:
+		firefox: null,
+		safari: null,
+		msie: null,
+		edge: null
 	}
 };
 
