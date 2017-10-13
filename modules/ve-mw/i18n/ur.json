@@ -131,6 +131,7 @@
 	"visualeditor-section-title-placeholder": "موضوع",
 	"visualeditor-serializeerror": "نقص ہے ڈیٹا اثقال کرنے میں :  $1 ۔",
 	"visualeditor-shortcuts-insert": "درج کریں",
+	"visualeditor-toload": "خانہ ترمیم لوڈ ہو رہا ہے۔ اگر کچھ سیکنڈ تک یہی پیغام دکھائی دے تو براہ کرم [$1 صفحہ دوبارہ لوڈ کریں]۔",
 	"visualeditor-toolbar-savedialog": "صفحہ محفوظ کریں",
 	"visualeditor-toolbar-savedialog-short": "محفوظ کریں",
 	"visualeditor-usernamespacepagelink": "Project:صارف نام فضا",
