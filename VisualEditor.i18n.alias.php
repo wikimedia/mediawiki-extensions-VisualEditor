@@ -21,3 +21,9 @@ $specialPageAliases['en'] = [
 $specialPageAliases['cy'] = [
 	'CollabPad' => [ 'PadCydweithredu', 'Pad Cydweithredu' ],
 ];
+
+/** Urdu
+ */
+$specialPageAliases['ur'] = [
+	'CollabPad' => [ 'مشترکہ_پیڈ' ],
+];
