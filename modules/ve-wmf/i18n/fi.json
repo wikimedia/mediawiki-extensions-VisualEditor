@@ -23,7 +23,7 @@
 	"tag-visualeditor-description": "Muutos tehtiin [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaalisella muokkaimella]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalinen muokkaus: Tarkista]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalisella muokkaimella]] tehty muokkaus, jossa järjestelmä havaitsi wikitekstissä mahdollisesti olevan tahattomia muutoksia.",
-	"tag-visualeditor-wikitext": "2017 lähdekoodin muokkaus",
+	"tag-visualeditor-wikitext": "2017 wikitekstin muokkaus",
 	"tag-visualeditor-wikitext-description": "Muokattu wikitekstin muokkausohjelmalla 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalinen muokkaus: vaihdettu]]",
 	"tag-visualeditor-switched-description": "Käyttäjä aloitti muokkaamisen visuaalisella muokkaimella, ja vaihtoi sitten wikitekstin muokkaustilaan.",

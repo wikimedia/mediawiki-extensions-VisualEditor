@@ -25,7 +25,7 @@
 			"Hopea"
 		]
 	},
-	"apihelp-visualeditor-description": "Hakee sivun HTML5-lähdekoodin Parsoid-palvelusta.",
+	"apihelp-visualeditor-description": "Hakee sivun HTML5-muodossa Parsoid-palvelusta.",
 	"apihelp-visualeditor-param-basetimestamp": "Tallentaessa aseta tämän arvoksi muokatun version aikaleima. Käytetään muokkausristiriitojen havaitsemiseen.",
 	"apihelp-visualeditor-param-etag": "Lähetettävä ETag.",
 	"apihelp-visualeditor-param-html": "HTML joka muutetaan wikitekstiksi Parsoid-palvelulla.",
@@ -249,10 +249,10 @@
 	"visualeditor-media-input-placeholder": "Etsi sisältöä",
 	"visualeditor-meta-tool": "Valinnat",
 	"visualeditor-mweditmode-tooltip": "Vaihda muokkainta",
-	"visualeditor-mweditmodesource-progress": "Vaihdetaan lähdekoodin muokkaustilaan...",
+	"visualeditor-mweditmodesource-progress": "Vaihdetaan wikitekstin muokkaustilaan...",
 	"visualeditor-mweditmodesource-title": "Vaihdetaanko wikitekstin muokkaustilaan?",
 	"visualeditor-mweditmodesource-tool-current": "Wikitekstin muokkaustila",
-	"visualeditor-mweditmodesource-tool-unavailable": "Lähdekoodin muokkaaminen ei ole mahdollista",
+	"visualeditor-mweditmodesource-tool-unavailable": "Wikitekstin muokkaaminen ei ole mahdollista",
 	"visualeditor-mweditmodesource-warning": "Olet vaihtamassa wikitekstin muokkaustilaan.\nHaluatko jatkaa?",
 	"visualeditor-mweditmodesource-warning-cancel": "Peruuta",
 	"visualeditor-mweditmodesource-warning-switch": "Vaihda",
@@ -265,7 +265,7 @@
 	"visualeditor-mweditmodeve-tool-current": "Visuaalinen muokkaus",
 	"visualeditor-mweditmodeve-tool-unavailable": "Visuaalinen muokkaus ei ole mahdollista",
 	"visualeditor-mweditmodeve-warning": "Olet vaihtamassa visuaaliseen muokkaamiseen.\nHaluatko jatkaa?",
-	"visualeditor-mweditmodewt-popup-body": "Palaa takaisin lähdekoodin muokkaustilaan napsauttamalla tätä painiketta.",
+	"visualeditor-mweditmodewt-popup-body": "Palaa takaisin wikitekstin muokkaustilaan napsauttamalla tätä painiketta.",
 	"visualeditor-mweditmodewt-popup-title": "Siirryttiin visuaaliseen muokkaustilaan",
 	"visualeditor-mwgallerydialog-caption-field-label": "Gallerian kuvateksti",
 	"visualeditor-mwgallerydialog-card-images": "Kuvat",
@@ -319,7 +319,7 @@
 	"visualeditor-preference-tabs": "Muokkaustila:",
 	"visualeditor-preference-tabs-multi-tab": "Näytä minulle molemmat muokkausvälilehdet",
 	"visualeditor-preference-tabs-prefer-ve": "Käytä aina visuaalista muokkainta, jos mahdollista",
-	"visualeditor-preference-tabs-prefer-wt": "Käytä aina lähdekoodin muokkaustilaa",
+	"visualeditor-preference-tabs-prefer-wt": "Käytä aina wikitekstin muokkaustilaa",
 	"visualeditor-preference-tabs-remember-last": "Muista viimeksi käyttämäni muokkain",
 	"visualeditor-recreate": "Sivu on poistettu sillä aikaa, kun muokkasit sitä. Napsauta \"$1\" luodaksesi sivun uudelleen.",
 	"visualeditor-redirect-description": "Uudelleenohjaus sivulle $1",
@@ -366,6 +366,6 @@
 	"visualeditor-viewpage-savewarning-keep": "Jatka muokkaamista",
 	"visualeditor-viewpage-savewarning-title": "Oletko varma?",
 	"visualeditor-wikitext-progress": "Muunnetaan wikitekstiä",
-	"visualeditor-wikitext-warning": "Käytät visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Vaihtaaksesi lähdekoodin muokkaustilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia, paina vaihtopainiketta.",
+	"visualeditor-wikitext-warning": "Käytät visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Napsauta \"vaihda\"-painiketta vaihtaaksesi wikitekstin muokkaustilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia.",
 	"visualeditor-wikitext-warning-title": "Wikikoodia havaittu"
 }
