@@ -397,6 +397,20 @@
 		uri.query.action === 'submit'
 	);
 
+	// Cast "0" (T89513)
+	enable = !!+mw.user.options.get( 'visualeditor-enable' );
+	tempdisable = !!+mw.user.options.get( 'visualeditor-betatempdisable' );
+	autodisable = !!+mw.user.options.get( 'visualeditor-autodisable' );
+	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
+
+	function isOnlyTabVE() {
+		return conf.singleEditTab && getPreferredEditor() === 'visualeditor';
+	}
+
+	function isOnlyTabWikitext() {
+		return conf.singleEditTab && getPreferredEditor() === 'wikitext';
+	}
+
 	init = {
 		blacklist: conf.blacklist,
 
@@ -435,6 +449,60 @@
 		 */
 		addPlugin: function ( plugin ) {
 			plugins.push( plugin );
+		},
+
+		/**
+		 * Adjust edit page links in the current document
+		 *
+		 * This will run multiple times in a page lifecycle, notably when the
+		 * page first loads and after post-save content replacement occurs. It
+		 * needs to avoid doing anything which will cause problems if it's run
+		 * twice or more.
+		 */
+		setupEditLinks: function () {
+			// NWE
+			if ( init.isWikitextAvailable && !isOnlyTabVE() ) {
+				$(
+					// Edit section links, except VE ones when both editors visible
+					'.mw-editsection a:not( .mw-editsection-visualeditor ),' +
+					// Edit tab
+					'#ca-edit a,' +
+					// Add section is currently a wikitext-only feature
+					'#ca-addsection a'
+				).each( function () {
+					var uri = new mw.Uri( this.href );
+					if ( 'action' in uri.query ) {
+						delete uri.query.action;
+						uri.query.veaction = 'editsource';
+						$( this ).attr( 'href', uri.toString() );
+					}
+				} );
+			}
+
+			// Set up the tabs appropriately if the user has VE on
+			if ( init.isAvailable && enabledForUser ) {
+				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
+				if ( !init.isSingleEditTab ) {
+					// … set the skin up with both tabs and both section edit links.
+					init.setupMultiTabSkin();
+				} else if (
+					pageCanLoadEditor && (
+						( init.isVisualAvailable && isOnlyTabVE() ) ||
+						( init.isWikitextAvailable && isOnlyTabWikitext() )
+					)
+				) {
+					// … on single-edit-tab wikis, where VE is the user's preferred editor
+					// Handle section edit link clicks
+					$( '.mw-editsection a' ).off( '.ve-target' ).on( 'click.ve-target', function ( e ) {
+						// isOnlyTabVE is computed on click as it may have changed since load
+						init.onEditSectionLinkClick( isOnlyTabVE() ? 'visual' : 'source', e );
+					} );
+					// Allow instant switching to edit mode, without refresh
+					$( '#ca-edit' ).off( '.ve-target' ).on( 'click.ve-target', function ( e ) {
+						init.onEditTabClick( isOnlyTabVE() ? 'visual' : 'source', e );
+					} );
+				}
+			}
 		},
 
 		setupMultiTabSkin: function () {
@@ -510,10 +578,10 @@
 				$caVeEdit.remove();
 			} else if ( pageCanLoadEditor ) {
 				// Allow instant switching to edit mode, without refresh
-				$caVeEdit.on( 'click', init.onEditTabClick.bind( init, 'visual' ) );
+				$caVeEdit.off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'visual' ) );
 			}
 			if ( pageCanLoadEditor && init.isWikitextAvailable ) {
-				$caEdit.add( '#ca-addsection' ).on( 'click', init.onEditTabClick.bind( init, 'source' ) );
+				$caEdit.add( '#ca-addsection' ).off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -745,21 +813,7 @@
 		}
 	};
 
-	// Cast "0" (T89513)
-	enable = !!+mw.user.options.get( 'visualeditor-enable' );
-	tempdisable = !!+mw.user.options.get( 'visualeditor-betatempdisable' );
-	autodisable = !!+mw.user.options.get( 'visualeditor-autodisable' );
-	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
-
 	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
-
-	function isOnlyTabVE() {
-		return conf.singleEditTab && getPreferredEditor() === 'visualeditor';
-	}
-
-	function isOnlyTabWikitext() {
-		return conf.singleEditTab && getPreferredEditor() === 'wikitext';
-	}
 
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
@@ -946,7 +1000,7 @@
 					$( '<a>' )
 						.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUri } )
 						// Accesskey fires a click event
-						.on( 'click', init.onEditTabClick.bind( init, 'visual' ) )
+						.on( 'click.ve-target', init.onEditTabClick.bind( init, 'visual' ) )
 						.hide()
 				);
 			}
@@ -1018,49 +1072,7 @@
 				mw.libs.ve.setEditorPreference( 'wikitext' );
 			}
 
-			// NWE
-			if ( init.isWikitextAvailable && !isOnlyTabVE() ) {
-				$(
-					// Edit section links, except VE ones when both editors visible
-					'.mw-editsection a:not( .mw-editsection-visualeditor ),' +
-					// Edit tab
-					'#ca-edit a,' +
-					// Add section is currently a wikitext-only feature
-					'#ca-addsection a'
-				).each( function () {
-					var uri = new mw.Uri( this.href );
-					if ( 'action' in uri.query ) {
-						delete uri.query.action;
-						uri.query.veaction = 'editsource';
-						$( this ).attr( 'href', uri.toString() );
-					}
-				} );
-			}
-
-			// Set up the tabs appropriately if the user has VE on
-			if ( init.isAvailable && enabledForUser ) {
-				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
-				if ( !init.isSingleEditTab ) {
-					// … set the skin up with both tabs and both section edit links.
-					init.setupMultiTabSkin();
-				} else if (
-					pageCanLoadEditor && (
-						( init.isVisualAvailable && isOnlyTabVE() ) ||
-						( init.isWikitextAvailable && isOnlyTabWikitext() )
-					)
-				) {
-					// … on single-edit-tab wikis, where VE is the user's preferred editor
-					// Handle section edit link clicks
-					$( '.mw-editsection a' ).on( 'click', function ( e ) {
-						// isOnlyTabVE is computed on click as it may have changed since load
-						init.onEditSectionLinkClick( isOnlyTabVE() ? 'visual' : 'source', e );
-					} );
-					// Allow instant switching to edit mode, without refresh
-					$( '#ca-edit' ).on( 'click', function ( e ) {
-						init.onEditTabClick( isOnlyTabVE() ? 'visual' : 'source', e );
-					} );
-				}
-			}
+			init.setupEditLinks();
 		}
 
 		try {
