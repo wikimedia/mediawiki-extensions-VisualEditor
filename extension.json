@@ -1898,6 +1898,10 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.targetLoader"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.diffPage.init": {
