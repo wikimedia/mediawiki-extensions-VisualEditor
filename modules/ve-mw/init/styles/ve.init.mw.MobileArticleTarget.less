@@ -76,55 +76,46 @@
 .ve-init-mw-mobileArticleTarget-editTools {
 	width: 100%;
 
-	> .oo-ui-toolGroup {
-		text-align: center;
+	> .oo-ui-popupToolGroup > .oo-ui-popupToolGroup-handle {
+		> .oo-ui-iconElement-icon,
+		> .oo-ui-indicatorElement-indicator {
+			left: 50%;
+		}
+		> .oo-ui-iconElement-icon {
+			margin-left: -1.875em;
+		}
 	}
 
-	.oo-ui-barToolGroup {
-		.oo-ui-iconElement-icon {
-			left: 50%;
-			margin-left: -0.9375em;
-		}
+	> .oo-ui-barToolGroup {
+		text-align: center;
 
-		@media ( max-width: 479px ) {
-			> .oo-ui-toolGroup-tools > .oo-ui-tool.oo-ui-iconElement.oo-ui-tool-with-label > .oo-ui-tool-link {
-				.oo-ui-tool-title {
-					display: none;
+		> .oo-ui-toolGroup-tools > .oo-ui-tool {
+			width: 100%;
+			> .oo-ui-tool-link {
+				padding: 0.85em;
+				> .oo-ui-iconElement-icon {
+					position: static;
+					display: inline-block;
+					vertical-align: middle;
+					margin-right: 0.25em;
 				}
-
-				.oo-ui-iconElement-icon {
-					margin-left: -0.9375em;
+				> .oo-ui-tool-title {
+					vertical-align: middle;
 				}
-
 			}
 		}
 	}
 
-	.oo-ui-tool-with-label .oo-ui-iconElement-icon,
-	.oo-ui-popupToolGroup-handle .oo-ui-iconElement-icon {
-		left: 50%;
-		margin-left: -1.875em;
+	> .oo-ui-toolGroup {
+		&-empty {
+			display: none;
+		}
+
+		&:last-child {
+			border-right: 0;
+		}
 	}
 
-	.oo-ui-popupToolGroup-handle .oo-ui-indicatorElement-indicator {
-		left: 50%;
-	}
-
-	.oo-ui-popupToolGroup .oo-ui-toolGroup-tools {
-		text-align: left;
-	}
-
-	> .oo-ui-toolGroup-empty {
-		display: none;
-	}
-
-	> .oo-ui-toolGroup:last-child {
-		border-right: 0;
-	}
-
-	> .oo-ui-toolGroup > .oo-ui-toolGroup-tools > .oo-ui-tool {
-		width: 100%;
-	}
 }
 
 .ve-init-mw-mobileArticleTarget-editTools-hidden,
