@@ -152,7 +152,14 @@
 			start = ve.now();
 			ve.track( 'trace.apiLoad.enter' );
 
-			apiXhr = new mw.Api().get( data );
+			if ( data.paction === 'parse' && options.wikitext !== undefined ) {
+				// Non-RESTBase custom wikitext parse
+				data.paction = 'parsefragment';
+				data.wikitext = options.wikitext;
+				apiXhr = new mw.Api().post( data );
+			} else {
+				apiXhr = new mw.Api().get( data );
+			}
 			apiPromise = apiXhr.then( function ( data, jqxhr ) {
 				ve.track( 'trace.apiLoad.exit' );
 				ve.track( 'mwtiming.performance.system.apiLoad', {
