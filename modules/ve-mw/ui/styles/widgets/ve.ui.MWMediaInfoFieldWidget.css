@@ -10,6 +10,7 @@
 	margin: 0.05em;
 	height: 1.9em;
 	position: absolute;
+	top: auto;
 	opacity: 0.5;
 }
 
