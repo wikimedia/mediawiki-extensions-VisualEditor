@@ -1383,7 +1383,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
 	var $content = $( $.parseHTML( html ) ),
-		$veSectionLinks, $categories, $sections, editedSectionHeader;
+		$categories, $sections, editedSectionHeader;
 
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
@@ -1402,20 +1402,6 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	// Re-set any edit section handlers now that the page content has been replaced
-	if (
-		// editsection but no editsection-visualeditor:
-		// whole editsection triggers VE
-		$content.find( '.mw-editsection' ).length &&
-		!$content.find( '.mw-editsection-visualeditor' ).length
-	) {
-		$veSectionLinks = $content.find( '.mw-editsection a' );
-	} else {
-		// Otherwise, put it on the editsection-visualeditor links
-		$veSectionLinks = $content.find( 'a.mw-editsection-visualeditor' );
-	}
-	$veSectionLinks.on( 'click', mw.libs.ve.onEditSectionLinkClick.bind( mw.libs.ve, 'visual' ) );
-
 	mw.hook( 'wikipage.content' ).fire( this.$editableContent.empty().append( $content ) );
 	if ( displayTitle ) {
 		$( '#firstHeading' ).html( displayTitle );
@@ -1428,6 +1414,9 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 
 	$( '#contentSub' ).html( contentSub );
 	this.setRealRedirectInterface();
+
+	// Re-set any edit section handlers now that the page content has been replaced
+	mw.libs.ve.setupEditLinks();
 
 	// Scroll the page to the edited section, if any
 	if ( this.section !== null ) {
