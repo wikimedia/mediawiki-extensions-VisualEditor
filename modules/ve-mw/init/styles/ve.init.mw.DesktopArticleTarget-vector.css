@@ -23,14 +23,14 @@
 	margin: 0 -1.14286em;
 }
 
-.ve-deactivating .ve-init-mw-desktopArticleTarget-originalContent,
-.ve-activated .ve-init-mw-desktopArticleTarget-originalContent {
-	padding-top: 1em;
-}
-
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-documentNode,
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	padding: 0 1.14286em; /* 1/0.875 */
+}
+
+.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ce-documentNode,
+.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
+	padding: 0 1.2em; /* 1/ 16/13.3333 */
 }
 
 .mw-body .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
@@ -38,12 +38,6 @@
 	margin-top: 0;
 	/* Placeholder doesn't need a border as well */
 	border: 0;
-}
-
-.ve-init-mw-desktopArticleTarget-toolbar {
-	font-size: 0.8em;
-	/* 1/0.8 */
-	margin: -1.25em -1.25em 0 -1.25em;
 }
 
 /* Main document debug bar */
@@ -61,19 +55,14 @@
 		margin: 0 -1.71429em;
 	}
 
-	.ve-deactivating .ve-init-mw-desktopArticleTarget-originalContent,
-	.ve-activated .ve-init-mw-desktopArticleTarget-originalContent {
-		padding-top: 1.25em;
-	}
-
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-documentNode,
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 		padding: 0 1.71429em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
 	}
 
-	.ve-init-mw-desktopArticleTarget-toolbar {
-		/* 1.25/0.8, 1.5/0.8 */
-		margin: -1.5625em -1.875em 0 -1.875em;
+	.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ce-documentNode,
+	.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
+		padding: 0 1.8em; /* surface-margin-left (1.5em) / 16/13.3333 */
 	}
 
 	/* Main document debug bar */

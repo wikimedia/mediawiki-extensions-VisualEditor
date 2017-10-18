@@ -23,6 +23,17 @@
 
 .ve-init-mw-desktopArticleTarget-toolbar-open > .oo-ui-toolbar-bar {
 	transform: translateY( 0 );
+	opacity: 1;
+}
+
+.ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar,
+.ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
+	transition: none;
+}
+
+.ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar {
+	margin-bottom: -3.125em;
+	transition: opacity 2s ease;
 }
 
 /*!

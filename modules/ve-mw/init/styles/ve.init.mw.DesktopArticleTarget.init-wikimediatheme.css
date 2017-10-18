@@ -17,3 +17,28 @@
 	height: 0.75em;
 	background: #36c;
 }
+
+.ve-init-mw-desktopArticleTarget-toolbar,
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+	font-size: 0.8em;
+	/* 1/0.8 */
+	margin: -1.25em -1.25em 1.25em -1.25em;
+	/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
+}
+
+@media screen and ( min-width: 982px ) {
+	.ve-init-mw-desktopArticleTarget-toolbar,
+	.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+		/* 1.25/0.8, 1.5/0.8 */
+		margin: -1.5625em -1.875em 1.5265em -1.875em;
+	}
+}
+
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+	border-bottom: 1px solid #c8ccd1;
+	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+}
+
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-open {
+	height: 40px;
+}

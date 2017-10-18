@@ -27,7 +27,8 @@
 .ve-activated #p-coll-print_export,
 .ve-activated #t-cite,
 .ve-deactivating .ve-ui-surface,
-.ve-active .ve-init-mw-desktopArticleTarget-editableContent {
+.ve-active .ve-init-mw-desktopArticleTarget-editableContent,
+.ve-active .ve-init-mw-tempWikitextEditorWidget {
 	display: none;
 }
 
@@ -70,6 +71,7 @@
 
 .ve-init-mw-desktopArticleTarget-loading-overlay {
 	position: absolute;
+	top: 1.25em;
 	left: 0;
 	right: 0;
 	z-index: 1;
@@ -85,6 +87,17 @@
 .ve-init-mw-desktopArticleTarget-progress-bar {
 	height: 1em;
 	width: 0;
+}
+
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+	transition: height 250ms ease;
+	height: 0;
+	/* Toolbar placeholder is styled in theme files */
+}
+
+/* OOUI may not have loaded yet */
+.oo-ui-element-hidden {
+	display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* Section edit links */
