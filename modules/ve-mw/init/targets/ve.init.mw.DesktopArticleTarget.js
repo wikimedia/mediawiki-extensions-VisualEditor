@@ -256,7 +256,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 					.css( 'height', '' )
 					.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
 				target.toolbarSetupDeferred.resolve();
-			}, 400 );
+			}, 250 );
 		} );
 
 		this.toolbarSetupDeferred.done( function () {
@@ -1151,7 +1151,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 			// Parent method
 			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( target );
 			deferred.resolve();
-		}, 400 );
+		}, 250 );
 	} );
 	return deferred.promise();
 };
