@@ -548,6 +548,8 @@
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mwextensions",
+				"oojs-ui.styles.icons-accessibility",
+				"oojs-ui.styles.icons-editing-advanced",
 				"oojs-ui.styles.icons-layout"
 			],
 			"messages": [
@@ -1911,7 +1913,7 @@
 			"dependencies": [
 				"ext.visualEditor.diffLoader",
 				"oojs-ui",
-				"oojs-ui.styles.icons-alerts",
+				"oojs-ui.styles.icons-accessibility",
 				"oojs-ui.styles.icons-editing-advanced",
 				"mediawiki.Uri"
 			],
