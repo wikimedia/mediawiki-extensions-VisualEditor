@@ -26,12 +26,12 @@
 	margin-top: 0.8em;
 }
 
-.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement-frameless {
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement-frameless.oo-ui-labelElement.oo-ui-iconElement {
 	display: block;
 	margin: 0.5em 0;
 }
 
-.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement-frameless:first-child {
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement-frameless.oo-ui-labelElement.oo-ui-iconElement:first-child {
 	margin-top: 0;
 }
 
