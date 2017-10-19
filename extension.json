@@ -1212,7 +1212,7 @@
 				"oojs-ui",
 				"oojs-ui.styles.icons-editing-core",
 				"oojs-ui.styles.icons-editing-advanced",
-				"oojs-ui.styles.icons-alerts"
+				"oojs-ui.styles.icons-accessibility"
 			],
 			"messages": [
 				"visualeditor-editingtabdialog-body",
