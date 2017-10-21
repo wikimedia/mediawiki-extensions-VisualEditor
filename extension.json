@@ -282,7 +282,6 @@
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.api.options",
-				"user.options",
 				"ext.visualEditor.supportCheck",
 				"ext.visualEditor.track"
 			],
@@ -317,7 +316,7 @@
 				"jquery.textSelection",
 				"mediawiki.api",
 				"mediawiki.Uri",
-				"user.options"
+				"mediawiki.user"
 			],
 			"messages": [
 				"visualeditor-loaderror-message",
@@ -516,8 +515,6 @@
 				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
-				"user.options",
-				"user.tokens",
 				"ext.visualEditor.base",
 				"ext.visualEditor.track",
 				"ext.visualEditor.targetLoader",
