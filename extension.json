@@ -263,7 +263,7 @@
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init.css",
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-mediawikitheme.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css"
 				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
