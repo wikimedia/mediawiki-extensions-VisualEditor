@@ -206,7 +206,7 @@
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Label for the checkbox to let the user stop the redirect being updated on page moves.\n\nPreceded by \"Target page for redirection\" search box.",
 	"visualeditor-dialog-meta-settings-section": "Label for the page settings dialog section.\n{{Identical|Page settings}}",
 	"visualeditor-dialog-meta-settings-toc-default": "Label for the default TOC behavior option.\n{{Related|Visualeditor-dialog-meta-settings-toc}}",
-	"visualeditor-dialog-meta-settings-toc-disable": "Label for the TOC behavior option to never show.\n{{Related|Visualeditor-dialog-meta-settings-toc}}",
+	"visualeditor-dialog-meta-settings-toc-disable": "Label for the TOC behavior option to never show.\n{{Related|Visualeditor-dialog-meta-settings-toc}}\n{{Identical|Never}}",
 	"visualeditor-dialog-meta-settings-toc-force": "Label for the TOC behavior option to always show.\n{{Related|Visualeditor-dialog-meta-settings-toc}}\n{{Identical|Always}}",
 	"visualeditor-dialog-meta-settings-toc-help": "Message displayed as contextual help about the <nowiki>__FORCETOC__</nowiki> and <nowiki>__NOTOC__</nowiki> tags to editors in the page settings panel.",
 	"visualeditor-dialog-meta-settings-toc-label": "Prompt to let the user set the Table Of Contents (TOC) behaviour.",
