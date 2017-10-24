@@ -10,7 +10,7 @@
 	white-space: normal;
 }
 
-.ve-ui-mwInternalLinkContextItem-withImage .oo-ui-iconElement-icon {
+.ve-ui-mwInternalLinkContextItem-withImage > .oo-ui-iconElement.oo-ui-iconElement-icon {
 	float: left;
 	width: 3.75em;
 	height: 3.75em;
@@ -25,7 +25,7 @@
 	background-size: cover;
 }
 
-.ve-ui-mwInternalLinkContextItem-withImage .ve-ui-mwInternalLinkContextItem-hasImage {
+.ve-ui-mwInternalLinkContextItem-withImage > .ve-ui-mwInternalLinkContextItem-hasImage.oo-ui-iconElement-icon {
 	border: 0;
 	background-size: cover;
 	opacity: 1;
