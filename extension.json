@@ -2052,6 +2052,7 @@
 				"modules/ve-mw/ui/styles/ve.ui.MWWikitextSurface.css"
 			],
 			"dependencies": [
+				"mediawiki.editfont.styles",
 				"ext.visualEditor.mwlink",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.articleTarget"
