@@ -283,6 +283,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.fromEditedState = data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, this.getDefaultMode() );
+		this.preloaded = data.preloaded;
 
 		this.remoteNotices = ve.getObjectValues( data.notices );
 		this.protectedClasses = data.protectedClasses;
@@ -1882,7 +1883,7 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
 		return;
 	}
 
-	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState;
+	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState || this.preloaded;
 	if ( this.sectionTitle ) {
 		this.edited = this.edited || this.sectionTitle.getValue() !== '';
 	}
