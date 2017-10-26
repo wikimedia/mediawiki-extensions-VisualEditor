@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* stylelint-disable selector-no-id */
+/* stylelint-disable selector-max-id */
 
 /* Hide VE edit tab and section edit things for noscript users.
  * For script users they're always visible unless and until ve-not-available is added.
@@ -19,7 +19,7 @@
 	display: none;
 }
 
-/* stylelint-enable selector-no-id */
+/* stylelint-enable selector-max-id */
 
 /* For script users, expand brackets by default, unless and until ve-not-available is added */
 

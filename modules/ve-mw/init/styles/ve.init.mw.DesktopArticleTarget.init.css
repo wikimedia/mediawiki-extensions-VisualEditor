@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* stylelint-disable selector-no-id */
+/* stylelint-disable selector-max-id */
 
 /*!
  * State                | <html> classes
@@ -66,7 +66,7 @@
 .ve-activated #content {
 	position: relative;
 }
-/* stylelint-enable selector-no-id */
+/* stylelint-enable selector-max-id */
 
 .ve-init-mw-desktopArticleTarget-loading-overlay {
 	position: absolute;

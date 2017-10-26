@@ -24,7 +24,7 @@
 		"jimp": "0.2.24",
 		"mocha": "2.5.3",
 		"selenium-webdriver": "2.53.2",
-		"stylelint": "7.8.0",
-		"stylelint-config-wikimedia": "0.4.1"
+		"stylelint": "8.2.0",
+		"stylelint-config-wikimedia": "0.4.2"
 	}
 }

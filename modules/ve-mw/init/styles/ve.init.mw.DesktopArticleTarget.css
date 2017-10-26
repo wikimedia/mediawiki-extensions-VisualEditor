@@ -45,7 +45,7 @@
 /*!
  * Increase z-index of surface container so it appears above the debug bar
  */
-.ve-init-mw-desktopArticleTarget #bodyContent { /* stylelint-disable-line selector-no-id */
+.ve-init-mw-desktopArticleTarget #bodyContent { /* stylelint-disable-line selector-max-id */
 	z-index: 1;
 }
 
