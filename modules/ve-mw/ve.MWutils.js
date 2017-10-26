@@ -29,3 +29,18 @@ ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscores ) {
 	}
 	return s.replace( /_/g, ' ' );
 };
+
+/**
+ * Unwrap Parsoid sections
+ *
+ * @param {HTMLElement} element Parent element, e.g. document body
+ */
+ve.unwrapParsoidSections = function ( element ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'section[data-mw-section-id]' ), function ( section ) {
+		var parent = section.parentNode;
+		while ( section.firstChild ) {
+			parent.insertBefore( section.firstChild, section );
+		}
+		parent.removeChild( section );
+	} );
+};
