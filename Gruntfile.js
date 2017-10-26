@@ -116,6 +116,7 @@ module.exports = function ( grunt ) {
 			},
 			src: [
 				'**/*.{js,json,less,css,txt}',
+				'!package-lock.json',
 				'!build/typos.json',
 				'!lib/**',
 				'!{docs,node_modules,vendor}/**',
