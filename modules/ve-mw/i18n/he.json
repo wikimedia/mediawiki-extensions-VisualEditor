@@ -30,6 +30,7 @@
 	"apihelp-visualeditor-param-oldid": "באיזה מספר גרסה להשתמש (בררת המחדל היא הגרסה האחרונה).",
 	"apihelp-visualeditor-param-paction": "איזו פעולה לבצע.",
 	"apihelp-visualeditor-param-page": "על איזה דף לבצע את הפעולות.",
+	"apihelp-visualeditor-param-preload": "הדף שממנו יילקח התוכן אם בדף המאוחזר עדיין אין תוכן.",
 	"apihelp-visualeditor-param-pst": "ביצוע התמרה לפני שמירה (pre-save transform) על קוד ויקי לפני שליחתו לפרסואיד (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "על איזו פסקה לפעול.",
 	"apihelp-visualeditor-param-starttimestamp": "בעת שמירה, להגדיר את זה בתור חותם־הזמן של הגרסה שנטענת. זה משמש לזיהוי התנגשויות.",
