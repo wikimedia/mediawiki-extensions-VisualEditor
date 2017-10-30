@@ -239,6 +239,8 @@ class ApiVisualEditor extends ApiBase {
 				$wgTitle = $title;
 				RequestContext::getMain()->setTitle( $title );
 
+				$preloaded = false;
+
 				// Get information about current revision
 				if ( $title->exists() ) {
 					$latestRevision = Revision::newFromTitle( $title );
@@ -287,6 +289,7 @@ class ApiVisualEditor extends ApiBase {
 									$params['preload'], $params['preloadparams'], $title,
 									$params['paction'] !== 'wikitext'
 								);
+								$preloaded = true;
 							}
 						} else {
 							$apiParams['rvsection'] = $section;
@@ -327,6 +330,7 @@ class ApiVisualEditor extends ApiBase {
 							$params['preload'], $params['preloadparams'], $title,
 							$params['paction'] !== 'wikitext'
 						);
+						$preloaded = true;
 					}
 					$baseTimestamp = wfTimestampNow();
 					$oldid = 0;
@@ -584,6 +588,15 @@ class ApiVisualEditor extends ApiBase {
 					 ( !empty( $params['preload'] ) && isset( $content ) )
 				) {
 					$result['content'] = $content;
+					if ( $preloaded ) {
+						// If the preload param was actually used, pass it
+						// back so the caller knows. (It's not obvious to the
+						// caller, because in some situations it'll depend on
+						// whether the page has been created. They can work it
+						// out from some of the other returns, but this is
+						// simpler.)
+						$result['preloaded'] = $params['preload'];
+					}
 				}
 				break;
 
