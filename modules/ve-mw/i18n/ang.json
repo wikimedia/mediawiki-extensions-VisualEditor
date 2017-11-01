@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gott wisst",
-			"JJohnson1701"
+			"JJohnson1701",
+			"Hogweard"
 		]
 	},
 	"tooltip-ca-ve-edit": "Adihtan þisne tramet mid VisualEditor",
@@ -10,5 +11,7 @@
 	"visualeditor-ca-createsource": "Scippan fruman",
 	"visualeditor-ca-editsource": "Ādihtan fruman",
 	"visualeditor-ca-editsource-section": "ādihtan fruman",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor"
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-linkinspector-convert-link-isbn": "Onwendaþ to ISBN hlenc",
+	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN hlenc"
 }

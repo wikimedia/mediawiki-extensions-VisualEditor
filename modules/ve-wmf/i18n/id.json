@@ -20,7 +20,7 @@
 	"tag-visualeditor-needcheck-description": "Penyuntingan yang menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] pada sistem yang mendeteksi adanya teks wiki mungkin mengalami perubahan yang tidak diinginkan.",
 	"tag-visualeditor-wikitext": "Suntingan sumber 2017",
 	"tag-visualeditor-wikitext-description": "Suntingan menggunakan penyunting teks wiki 2017",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Beralih]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Beralih]]",
 	"tag-visualeditor-switched-description": "Pengguna mulai menyunting dengan editor visual lalu mengubahnya menjadi editor teks wiki.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Umpan balik",
 	"visualeditor-feedback-tool": "Tinggalkan umpan balik untuk peranti lunak ini",
@@ -29,6 +29,7 @@
 	"visualeditor-help-title": "Panduan menggunakan VisualEditor",
 	"visualeditor-welcomedialog-action": "Mulai menyunting",
 	"visualeditor-welcomedialog-content": "Siapapun dapat menyunting, dan tiap perbaikan akan membantu.",
+	"visualeditor-welcomedialog-content-thanks": "Terima kasih telah membantu pengguna lain menemukan hal baru!",
 	"visualeditor-welcomedialog-switch": "Ganti ke penyunting kode sumber",
 	"visualeditor-welcomedialog-switch-ve": "Ganti ke penyunting visual",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Selamat datang}} ke $2"
