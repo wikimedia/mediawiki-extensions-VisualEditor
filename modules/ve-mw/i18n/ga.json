@@ -4,7 +4,8 @@
 			"Alison",
 			"Kscanne",
 			"Tem",
-			"Moilleadóir"
+			"Moilleadóir",
+			"Nmacu"
 		]
 	},
 	"tooltip-ca-ve-edit": "Athraigh an lch seo",
@@ -20,8 +21,11 @@
 	"visualeditor-dialog-meta-languages-label": "Teangacha",
 	"visualeditor-dialog-transclusion-options": "Roghanna",
 	"visualeditor-dialogbutton-media-tooltip": "Meáin",
+	"visualeditor-formatdropdown-format-mw-heading4": "Fotheideal 2",
+	"visualeditor-formatdropdown-format-mw-heading6": "Fotheideal 4",
 	"visualeditor-preference-core-label": "EagarthóirAmhairc",
 	"visualeditor-savedialog-label-publish-short": "Foilsigh",
 	"visualeditor-savedialog-label-warning": "Rabhadh",
+	"visualeditor-shortcuts-insert": "Ionsáigh",
 	"visualeditor-version-label": "Leagan"
 }
