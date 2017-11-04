@@ -2,15 +2,18 @@
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "0.9.2",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
-		"mediawiki/mediawiki-codesniffer": "14.1.0"
+		"mediawiki/mediawiki-codesniffer": "14.1.0",
+		"mediawiki/minus-x": "0.2.0"
 	},
 	"scripts": {
 		"test": [
 			"parallel-lint . --exclude vendor --exclude node_modules",
-			"phpcs -p -s"
+			"phpcs -p -s",
+			"minus-x check ."
 		],
 		"fix": [
-			"phpcbf"
+			"phpcbf",
+			"minus-x fix ."
 		]
 	}
 }
