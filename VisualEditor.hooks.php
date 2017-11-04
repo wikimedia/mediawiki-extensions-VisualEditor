@@ -669,6 +669,10 @@ class VisualEditorHooks {
 
 		$api = [ 'type' => 'api' ];
 		$preferences['visualeditor-autodisable'] = $api;
+		// The diff mode is persisted for each editor mode separately,
+		// e.g. use visual diffs for visual mode only.
+		$preferences['visualeditor-diffmode-source'] = $api;
+		$preferences['visualeditor-diffmode-visual'] = $api;
 		$preferences['visualeditor-editor'] = $api;
 		$preferences['visualeditor-hidebetawelcome'] = $api;
 		$preferences['visualeditor-hidetabdialog'] = $api;
