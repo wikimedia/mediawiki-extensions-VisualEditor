@@ -131,7 +131,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	var wikitextPromise;
 
 	if ( !doc.data.hasContent() ) {
-		return $.Deferred().reject().promise();
+		return $.Deferred().resolve( '' ).promise();
 	}
 
 	wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
