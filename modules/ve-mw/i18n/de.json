@@ -49,6 +49,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titel für den neuen Abschnitt.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Legt dies beim Speichern auf den Zeitstempel des Zeitpunkts der geladenen Seite fest. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",
 	"apihelp-visualeditoredit-param-summary": "Bearbeitungszusammenfassung.",
+	"apihelp-visualeditoredit-param-watch": "Fügt die Seite zur Beobachtungsliste des aktuellen Benutzers hinzu.",
 	"apierror-visualeditor-api-langlinks-error": "Fehler bei der Abfrage der MediaWiki-API",
 	"apierror-visualeditor-badcachekey": "Keine gecachte Serialisierung mit diesem Schlüssel gefunden",
 	"apierror-visualeditor-difffailed": "Unterschied fehlgeschlagen",
