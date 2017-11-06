@@ -42,6 +42,12 @@ ve.ce.MWGalleryNode.prototype.getFocusableElement = function () {
 	return $gallery.length ? $gallery.children() : this.$element;
 };
 
+/**
+ * @inheritdoc ve.ce.GeneratedContentNode
+ * @method
+ */
+ve.ce.MWGalleryNode.prototype.getBoundingElement = ve.ce.MWGalleryNode.prototype.getFocusableElement;
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWGalleryNode );
