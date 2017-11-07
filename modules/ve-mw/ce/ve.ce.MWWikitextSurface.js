@@ -35,6 +35,10 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		clipboardData = e.originalEvent.clipboardData,
 		text = this.getModel().getFragment().getText( true ).replace( /\n\n/g, '\n' );
 
+	if ( !text ) {
+		return;
+	}
+
 	if ( clipboardData ) {
 		// Disable the default event so we can override the data
 		e.preventDefault();
