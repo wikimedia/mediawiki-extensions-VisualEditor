@@ -264,7 +264,7 @@ class VisualEditorHooks {
 					"}" .
 				");"
 			) );
-			$out->setRevisionId( $article->getRevIdFetched() );
+			$out->setRevisionId( $req->getInt( 'oldid', $article->getRevIdFetched() ) );
 			return false;
 		}
 		return true;
