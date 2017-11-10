@@ -20,7 +20,7 @@ ve.ui.MWPreviewElement = function VeUiMwPreviewElement() {
 	ve.ui.MWPreviewElement.super.apply( this, arguments );
 
 	// Initialize
-	this.$element.addClass( 've-ui-mwPreviewElement mw-body-content' );
+	this.$element.addClass( 've-ui-mwPreviewElement mw-body-content mw-parser-output' );
 };
 
 /* Inheritance */
