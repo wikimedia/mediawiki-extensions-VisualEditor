@@ -5,7 +5,8 @@
 			"Msannakoval",
 			"Srdjan m",
 			"Сербијана",
-			"Obsuser"
+			"Obsuser",
+			"Prevodim"
 		]
 	},
 	"tooltip-ca-createsource": "Napravite izvorni kod ove stranice",
@@ -125,6 +126,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Uvek",
 	"visualeditor-dialog-meta-settings-toc-help": "Možete uključiti prikazivanje spiska odeljaka kada članak ima manje od tri odeljka, takođe možete onemogućiti prikazivanje spiska odeljaka nezavisno od broja odeljaka. Spisak odeljaka se automatski prikazuje ako stranica ima tri ili više odeljaka.",
 	"visualeditor-dialog-meta-settings-toc-label": "Prikaži spisak odeljaka",
+	"visualeditor-dialog-meta-templatesused-noresults": "Nema pronađenih šablona.",
 	"visualeditor-dialog-meta-title": "Opcije",
 	"visualeditor-dialog-template-title": "Šablon",
 	"visualeditor-dialog-transclusion-add-content": "Dodaj sadržinu",
@@ -236,6 +238,7 @@
 	"visualeditor-serializeerror": "Greška prilikom učitavanja podataka sa servera: $1.",
 	"visualeditor-settings-tool": "Podešavanje stranice",
 	"visualeditor-shortcuts-insert": "Ubaci",
+	"visualeditor-templatesused-tool": "Korišćeni šabloni",
 	"visualeditor-toolbar-savedialog": "Pretpregled/Čuvanje",
 	"visualeditor-toolbar-savedialog-short": "Sačuvaj",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
