@@ -59,6 +59,38 @@
 						}, 500 );
 					}
 				);
+				runScreenshotTest( 'VisualEditor_Citoid_Inspector_Manual', lang,
+					// This function is converted to a string and executed in the browser
+					function () {
+						var done = arguments[ arguments.length - 1 ],
+							surface = ve.init.target.surface;
+						ve.init.target.surface.context.inspectors.currentWindow.setModePanel( 'manual' );
+						setTimeout( function () {
+							done(
+								seleniumUtils.getBoundingRect( [
+									surface.$element.find( '.ve-ce-mwReferenceNode' )[ 0 ],
+									surface.context.inspectors.currentWindow.$element[ 0 ]
+								] )
+							);
+						} );
+					}
+				);
+				runScreenshotTest( 'VisualEditor_Citoid_Inspector_Reuse', lang,
+					// This function is converted to a string and executed in the browser
+					function () {
+						var done = arguments[ arguments.length - 1 ],
+							surface = ve.init.target.surface;
+						ve.init.target.surface.context.inspectors.currentWindow.setModePanel( 'reuse' );
+						setTimeout( function () {
+							done(
+								seleniumUtils.getBoundingRect( [
+									surface.$element.find( '.ve-ce-mwReferenceNode' )[ 0 ],
+									surface.context.inspectors.currentWindow.$element[ 0 ]
+								] )
+							);
+						} );
+					}
+				);
 			} );
 			test.it( 'Tool groups (headings/text style/indentation/insert/page settings)', function () {
 				runScreenshotTest( 'VisualEditor_Toolbar_Headings', lang,
