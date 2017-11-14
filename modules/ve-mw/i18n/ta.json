@@ -12,7 +12,8 @@
 			"Dineshkumar Ponnusamy",
 			"Maathavan",
 			"AntanO",
-			"Rakeshonwiki"
+			"Rakeshonwiki",
+			"Balajijagadesh"
 		]
 	},
 	"apihelp-visualeditor-param-cachekey": "வரிசைப்படுத்த / வேறுபடுத்த, இவ்விசையால் முன் பதுக்ககவரிசையால் வேண்டிய முடிவைப் பயன்படுத்து.$1html கட்டுப்பாடு நீங்குகிறது.",
@@ -70,6 +71,7 @@
 	"visualeditor-savedialog-label-error": "பிழை",
 	"visualeditor-savedialog-label-publish-short": "வெளியிடு",
 	"visualeditor-savedialog-label-warning": "எச்சரிக்கை",
+	"visualeditor-special-characters-group-other": "அடிக்கடி பயன்படுத்தப்பட்டது",
 	"visualeditor-toolbar-savedialog": "பக்கத்தைச் சேமி",
 	"visualeditor-viewpage-savewarning-title": "உறுதியாகவா?"
 }
