@@ -494,7 +494,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 				$element: $( '<h2>' ),
 				classes: [ 've-ui-init-desktopArticleTarget-sectionTitle' ],
 				maxLength: 255,
-				placeholder: ve.msg( 'visualeditor-section-title-placeholder' )
+				placeholder: ve.msg( 'visualeditor-section-title-placeholder' ),
+				spellcheck: true
 			} );
 			this.sectionTitle.connect( this, { change: 'updateToolbarSaveButtonState' } );
 		}
