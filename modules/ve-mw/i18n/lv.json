@@ -158,6 +158,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Atpakaļ",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Turpināt tāpat",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Trūkst {{PLURAL:$1|obligātie lauki|obligātais lauks|obligātie lauki}}",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Vai tiešām vēlies turpināt, neaizpildot {{PLURAL:$2|laukus|lauku|laukus}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Paslēpt iespējas",
 	"visualeditor-dialog-transclusion-title": "Iekļāvums",
 	"visualeditor-dialogbutton-media-tooltip": "Medijs",
