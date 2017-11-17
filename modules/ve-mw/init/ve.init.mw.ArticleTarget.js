@@ -209,6 +209,22 @@ ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.supe
 	'showWatchthis'
 ] );
 
+/* Static methods */
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode ) {
+	// Add trailing linebreak to wikitext documents for consistency
+	// with old editor and usability. Will be stripped on save. T156609
+	if ( mode === 'source' ) {
+		documentString += '\n';
+	}
+
+	// Parent method
+	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode );
+};
+
 /* Methods */
 
 /**
