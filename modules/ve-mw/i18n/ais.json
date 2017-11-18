@@ -63,6 +63,7 @@
 	"visualeditor-desc": "MediaWiki a palakuliten ku aazihen sakawaw-kalumyiti",
 	"visualeditor-descriptionpagelink": "Project:palakuliten ku aazihen sakawaw-kalumyiti-sakaluk",
 	"visualeditor-dialog-media-alttext-section": "paliyuh tu sulit",
+	"visualeditor-dialog-media-alttext-section-help": "anu misaungayay la’cus maazih kya kasacacay a sulit sapuelac sa, kapah kisu pisaungay tina setin a sulit. sapuelac a lacul kanca taneng tu tademaw kapah matineng myiti a patusukan atu cesyun。tina setin tadamaan sakay mamenu’ay atu zuma pisaungay munitel miasip-sakulak atu sulit saazihay-sakaluk.",
 	"visualeditor-dialog-media-change-image": "misumad tu zunga",
 	"visualeditor-dialog-media-choose-image": "pisaungay tina zunga",
 	"visualeditor-dialog-media-content-description-link": "(sapuelac kasabelih)",
@@ -100,6 +101,7 @@
 	"visualeditor-dialog-media-size-choosefull": "setin sapi saayaway a tabaki",
 	"visualeditor-dialog-media-size-originalsize-error": "la’cus mala hacica-tabaki nu saayaway a tangan.",
 	"visualeditor-dialog-media-size-section": "zunga nu hacica-tabaki",
+	"visualeditor-dialog-media-size-section-help": "kapah kisu misetin myiti i kasabelih patahkal hacica tabaki. tina setin kanca misetin habutud tabaki, amahica pakuniza misanga’ ku tabaki amalawilaw miasipay maazihay a kasabelih maazihan, zumasatu caykalecad ku tabaki nu myiti.",
 	"visualeditor-dialog-media-thumbdimensions": "sukep tu zunga a ditek",
 	"visualeditor-dialog-media-title": "setin nu myiti",
 	"visualeditor-dialog-media-type-border": "nikatatapal",
@@ -151,6 +153,7 @@
 	"visualeditor-dialog-meta-settings-nogallery-label": "mapasatezep tu sulu nu zunga",
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "kapah kisu miliyas tina kasabelih satangahan lunuk maliyaw tu zuma kamu a sulit",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "caay piliyaw kamu masumad-kidu masazumaay a lacul",
+	"visualeditor-dialog-meta-settings-redirect-help": "kapah kisu misetin tina kasabelih tu miliyaw patatuzu’ kasabelih, amalunuk miketun tu miasipay mibalic tayza itiniay a wiki zuma kasabelih. tina setin sakay pasasuala tu sulit mungangaw atu paliyuh kalungangan saca nizatengan tatenga’ izaw ku lahici. amahica kisu mahinian misetin, caay kaazih ku miasipay tu tina bellih lacul.",
 	"visualeditor-dialog-meta-settings-redirect-label": "miliyaw patatuzu’ tina belih patayza i",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "miliyaw patatuzu’ nu papatuzu’an a kasabelih",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "kapah kisu sakacaay kapiliyaw patatuzau’an tu kasabelih i kakatukuhan lunuk sa milimad misabaluh,tina a setin tada masazumaay azihen a kawaw sa a maydih misaungay.",
@@ -294,6 +297,7 @@
 	"visualeditor-preference-betatempdisable": "i palakuliten ku aazihen sakawaw-kalumyiti mitanam a demmiad nanunuz mapasatezep",
 	"visualeditor-preference-core-description": "miwawah palakuliten ku aazihen mikawaway-kalumyitiay, ayza caay henay midama  sasukamu kasabelih atu zuma pangangananay a salaedan",
 	"visualeditor-preference-core-label": "palakuliten ku aazihen  mikawaway-kalumyiti",
+	"visualeditor-preference-newwikitexteditor-description": "i taneng-maazihay a sakawaw-kalumyiti miwawah baluhay wiki sulit muse. izaw taneng-maazihay sakawaw-kalumyiti nipabeli yadah ku sakaluk, pisaungay kalahizaan a tekel, zumasatu mahasa sakapah ilaed nu tusa sakawaw-kalumyiti miketun atu mibalic.",
 	"visualeditor-preference-enable": "miwawah palakuliten ku aazihen sakawaw-kalumyiti-sakaluk, a kapah isasa’ {{PLURAL:$2| pangangananay a salaedan}} misaungay: $1",
 	"visualeditor-preference-tabs": "mikawaway-kalumyiti a muse:",
 	"visualeditor-preference-tabs-multi-tab": "imahini paazih tinatusa sakawaw- kalumyiti kasabelih-paya",
@@ -339,5 +343,6 @@
 	"visualeditor-viewpage-savewarning-keep": "palalid mikawaway-kalumyiti",
 	"visualeditor-viewpage-savewarning-title": "malucekay kisu haw?",
 	"visualeditor-wikitext-progress": "wikitext miliyaw henay",
+	"visualeditor-wikitext-warning": "imahini kisu pisaungay palakuliten ku aazihen sakawaw-kalumyiti-tina sakawaw-kalumyiti caay midama ayza [[{{MediaWiki:visualeditor-wikitext-warning-link}}|WikiText]]. amahica maydih hizantu nu misu ayzaay a kalunasulitan zumasatu miketun mibalic tatiku yuensma-kodo sakawaw-kalumyiti, pipecec ketun mibalic pipenecan.",
 	"visualeditor-wikitext-warning-title": "masedap Wiki silusi kamu"
 }
