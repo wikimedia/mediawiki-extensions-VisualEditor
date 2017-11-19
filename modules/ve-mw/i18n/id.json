@@ -49,6 +49,8 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Judul untuk bagian baru.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat halaman ini dimuat. Digunakan untuk mendeteksi konflik penyuntingan.",
 	"apihelp-visualeditoredit-param-summary": "Ringkasan suntingan",
+	"collabpad": "CollabPad",
+	"collabpad-doctitle": "CollabPad: $1",
 	"tooltip-ca-createsource": "Buat kode sumber halaman ini",
 	"tooltip-ca-edit": "Sunting halaman ini menggunakan teks wiki",
 	"tooltip-ca-editsource": "Sunting kode sumber halaman ini",
