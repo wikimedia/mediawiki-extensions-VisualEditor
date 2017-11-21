@@ -215,9 +215,9 @@ ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.supe
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode ) {
-	// Add trailing linebreak to wikitext documents for consistency
+	// Add trailing linebreak to non-empty wikitext documents for consistency
 	// with old editor and usability. Will be stripped on save. T156609
-	if ( mode === 'source' ) {
+	if ( mode === 'source' && documentString ) {
 		documentString += '\n';
 	}
 
