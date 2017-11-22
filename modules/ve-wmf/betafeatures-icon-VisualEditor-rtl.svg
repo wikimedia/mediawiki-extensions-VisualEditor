@@ -7,10 +7,10 @@
 	</defs>
 	<g id="screenshot" transform="matrix(-1 0 0 1 264 0)" clip-path="url(#jagged-edge)">
 		<path id="background" fill="#fff" d="M263.5 162.25l-263-.5V.5h263z"/>
-		<path id="article" fill="#e5e5e5" d="M252 162.496V29H48v133.496z"/>
-		<path id="logo" fill="#e5e5e5" d="M11 22c0-7.732 6.268-14 14-14s14 6.268 14 14-6.268 14-14 14-14-6.268-14-14z"/>
-		<path id="sidebar" fill="#e5e5e5" d="M38 163.807V58H13v105.807h25z"/>
-		<g id="personal-tools" fill="#e5e5e5">
+		<path id="article" fill="#eaecf0" d="M252 162.496V29H48v133.496z"/>
+		<path id="logo" fill="#eaecf0" d="M11 22c0-7.732 6.268-14 14-14s14 6.268 14 14-6.268 14-14 14-14-6.268-14-14z"/>
+		<path id="sidebar" fill="#eaecf0" d="M38 163.807V58H13v105.807h25z"/>
+		<g id="personal-tools" fill="#eaecf0">
 			<path d="M233 5h26v6h-26V5z"/>
 			<path d="M209 5h22v6h-22z"/>
 			<path d="M185 5h22v6h-22z"/>
@@ -18,18 +18,18 @@
 			<path d="M177 5h6v6h-6z"/>
 			<path d="M154 5h6v6h-6z"/>
 		</g>
-		<g id="search" fill="#e5e5e5">
+		<g id="search" fill="#eaecf0">
 			<path d="M258 16v4h-92v-4h92m1-1h-94v6h94v-6z"/>
 			<path id="icon" d="M168 17h2v2h-2z"/>
 		</g>
-		<path id="sitename" fill="#e5e5e5" d="M38 45v-5H13v5h25z"/>
-		<path id="border" fill="#e5e5e5" d="M0 0v162h264V0zm1 1h262v150.533l-11 9.166-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-11-9.167z"/>
+		<path id="sitename" fill="#eaecf0" d="M38 45v-5H13v5h25z"/>
+		<path id="border" fill="#eaecf0" d="M0 0v162h264V0zm1 1h262v150.533l-11 9.166-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-11-9.167z"/>
 		<path fill="#36c" d="M48.083 29h204.084v20.75H48.083z"/>
-		<path fill="#cdcccc" d="M59 58.333h54v6H59z"/>
+		<path fill="#c8ccd1" d="M59 58.333h54v6H59z"/>
 		<g opacity=".412">
-			<path fill="#9c9c9d" d="M240 70.334h-39v30h39zm-26.348 13.043h1.403l8.7 8.604 4.725-2.833 7.117 5.943v.025H204.45z"/>
+			<path fill="#a2a9b1" d="M240 70.334h-39v30h39zm-26.348 13.043h1.403l8.7 8.604 4.725-2.833 7.117 5.943v.025H204.45z"/>
 		</g>
-		<g fill="#cdcccc">
+		<g fill="#c8ccd1">
 			<path d="M59 109.334h181v3H59z"/>
 			<path d="M59 129.334h104v3H59z"/>
 			<path d="M59 75.334h134v3H59z"/>
@@ -42,6 +42,6 @@
 			<path d="M109.5 34.333h10v10h-10z"/>
 		</g>
 		<path fill="#36c" d="M100.012 90.834v2h1.457v7h-1.49v2h4.916v-2h-1.427v-7h1.458v-2z"/>
-		<path fill="#cdcccc" d="M59 119.334h181v3H59z"/>
+		<path fill="#c8ccd1" d="M59 119.334h181v3H59z"/>
 	</g>
 </svg>
