@@ -217,7 +217,7 @@
 	"visualeditor-dialog-transclusion-loading": "A carregar...",
 	"visualeditor-dialog-transclusion-more-template-description": "Pode haver alguma informação adicional acerca da predefinição \"$1\" [[{{ns:template}}:$1|nesta página]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "Mostrar opções",
-	"visualeditor-dialog-transclusion-no-template-description": "A predefinição \"$1\" não possui ainda nenhuma descrição, mas poderá encontrar alguma informação na [[$1|documentação da predefinição]].",
+	"visualeditor-dialog-transclusion-no-template-description": "A predefinição \"$1\" não tem ainda nenhuma descrição, mas talvez encontre alguma informação na [[$1|documentação da predefinição]].",
 	"visualeditor-dialog-transclusion-absent-template": "A predefinição \"$1\" ainda não existe.",
 	"visualeditor-dialog-transclusion-options": "Opções",
 	"visualeditor-dialog-transclusion-param-default": "Padrão: $1",

@@ -46,7 +46,7 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel : basculé]]",
 	"tag-visualeditor-switched-description": "L’utilisateur a commencé à modifier en utilisant l’éditeur visuel puis est passé sur l’éditeur de wikicode.",
 	"visualeditor-feedback-link": "Project:ÉditeurVisuel/Avis",
-	"visualeditor-feedback-tool": "Laisser un avis à propos du logiciel d'édition",
+	"visualeditor-feedback-tool": "Laisser un avis à propos de ce logiciel",
 	"visualeditor-help-label": "Lire le guide utilisateur",
 	"visualeditor-help-link": "mw:Special:MyLanguage/Help:VisualEditor/User guide",
 	"visualeditor-help-title": "Guide d’utilisation de l’éditeur",
