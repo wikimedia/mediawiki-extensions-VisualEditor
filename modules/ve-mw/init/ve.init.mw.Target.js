@@ -196,6 +196,8 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode ) {
 	} else {
 		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
+		// Strip Parsoid sections
+		ve.unwrapParsoidSections( doc.body );
 	}
 	// Fix relative or missing base URL if needed
 	this.fixBase( doc );
