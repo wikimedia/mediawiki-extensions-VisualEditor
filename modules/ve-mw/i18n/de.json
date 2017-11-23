@@ -18,6 +18,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Gibt HTML5 für eine Seite von dem Parsoid-Dienst zurück.",
+	"apihelp-visualeditor-summary": "Gibt das HTML5 für eine Seite vom Parsoid-Dienst zurück.",
 	"apihelp-visualeditor-param-basetimestamp": "Lege dies beim Speichern auf den Zeitstempel der Version fest, die bearbeitet wurde. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",
 	"apihelp-visualeditor-param-cachekey": "Zum Anordnen oder Unterscheiden, verwende das Ergebnis einer früheren serializeforcache-Anfrage mit diesem Schlüssel. Überschreibt $1html.",
 	"apihelp-visualeditor-param-editintro": "Den Anmerkungen hinzuzufügender Bearbeitungsintro.",
