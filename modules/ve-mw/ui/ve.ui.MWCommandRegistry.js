@@ -11,6 +11,7 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'insertTable', 'table', 'create',
 		{
 			args: [ {
+				caption: true,
 				header: true,
 				rows: 3,
 				cols: 4,
