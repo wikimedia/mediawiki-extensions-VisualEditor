@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Albinus",
-			"Ramjit Tudu"
+			"Ramjit Tudu",
+			"Manik Soren"
 		]
 	},
-	"tooltip-ca-ve-edit": "Noa sakam joṛaome",
+	"tooltip-ca-ve-edit": "ᱱᱚᱭᱟ ᱥᱟᱦᱴᱟ ᱥᱟᱯᱲᱟᱣᱢᱮ",
 	"visualeditor-ca-createlocaldescriptionsource": "ᱞᱚᱠᱟᱞ ᱥᱚᱛ ᱵᱤᱵᱚᱨᱚᱱ ᱥᱮᱞᱮᱫᱽᱢᱮ",
 	"visualeditor-ca-createsource": "Source tearme",
-	"visualeditor-ca-editsource": "oṛ beḱnao",
-	"visualeditor-ca-editsource-section": "oṛ beḱnao",
+	"visualeditor-ca-editsource": "ᱯᱷᱮᱰᱟᱛ ᱦᱚᱨ ᱥᱟᱯᱲᱟᱣ",
+	"visualeditor-ca-editsource-section": "ᱥᱚᱞᱦᱮ ᱯᱷᱮᱰᱟᱛ ᱦᱚᱨ",
 	"visualeditor-descriptionpagelink": "Project:ᱧᱮᱱᱮᱞᱚᱢ ᱥᱟᱯᱲᱟᱣ"
 }
