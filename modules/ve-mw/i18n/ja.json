@@ -242,7 +242,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "ISBN リンクに変換",
 	"visualeditor-linkinspector-convert-link-pmid": "PMID リンクに変換",
 	"visualeditor-linkinspector-convert-link-rfc": "RFC リンクに変換",
-	"visualeditor-linkinspector-educationpopup-text": "ウィキ内の他の記事や外部のウェブサイトを重要な単語にリンクします。読者が内容を理解する手助けになるでしょう。",
+	"visualeditor-linkinspector-educationpopup-text": "重要な単語は他のウィキ項目にリンクしましょう。他のウェブサイトにもリンクできます。これは読者が文脈を理解する助けになります。",
 	"visualeditor-linkinspector-educationpopup-title": "リンク",
 	"visualeditor-linkinspector-illegal-title": "無効なページ名",
 	"visualeditor-linknodeinspector-add-label": "ラベルを追加",
