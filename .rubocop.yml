@@ -2,10 +2,17 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   StyleGuideCopsOnly: true
+  Include:
+    - 'Gemfile'
+    - 'Rakefile'
+    - '.jsduck/CustomTags.rb'
+  Exclude:
+      - 'node_modules/**/*'
+      - 'vendor/**/*'
+      - 'lib/ve/**/*'
 
-# uncomment when the offense is fixed
-# Metrics/LineLength:
-#   Max: 100
+Metrics/LineLength:
+  Max: 100
 
 Metrics/MethodLength:
   Enabled: false
