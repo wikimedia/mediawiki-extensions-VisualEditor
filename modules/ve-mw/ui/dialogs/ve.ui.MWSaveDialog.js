@@ -203,9 +203,6 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 
 		// TODO: This code is very similar to ve.ui.PreviewElement+ve.ui.MWPreviewElement
 		ve.resolveAttributes( body, docOrMsg, ve.dm.Converter.static.computedAttributes );
-		ve.targetLinksToNewWindow( body );
-		// Add styles so links render with their appropriate classes
-		ve.init.platform.linkCache.styleParsoidElements( $( body ), baseDoc );
 
 		// Remove metadata
 		contents = ve.filterMetaElements( Array.prototype.slice.call( body.childNodes ) );
@@ -223,11 +220,15 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 					document.createTextNode( ve.msg( 'pagecategories', categories.length ) + ve.msg( 'colon-separator' ) ),
 					$( '<ul>' ).append( categories.map( function ( category ) {
 						var title = mw.Title.newFromText( category );
-						return $( '<li>' ).append( $( '<a>' ).attr( 'href', title.getUrl() ).text( title.getMainText() ) );
+						return $( '<li>' ).append( $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() ) );
 					} ) )
 				)
 			);
 		}
+
+		ve.targetLinksToNewWindow( this.$previewViewer[ 0 ] );
+		// Add styles so links render with their appropriate classes
+		ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
 
 		// Run hooks so other things can alter the document
 		mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
