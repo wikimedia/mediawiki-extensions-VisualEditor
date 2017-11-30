@@ -648,7 +648,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 		);
 
 	// Make sure all links open in a new window
-	$info.find( 'a' ).prop( 'target', '_blank' );
+	$info.find( 'a' ).prop( 'target', '_blank' ).attr( 'rel', 'noopener' );
 
 	// Initialize thumb container
 	$thumbContainer
@@ -903,6 +903,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 						.addClass( 'visualeditor-dialog-media-content-description-link' )
 						.attr( 'href', mw.util.getUrl( title ) )
 						.attr( 'target', '_blank' )
+						.attr( 'rel', 'noopener' )
 						.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
 				)
 			);
@@ -1210,6 +1211,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 				.addClass( 'visualeditor-dialog-media-content-description-link' )
 				.attr( 'href', mw.util.getUrl( this.imageModel.getResourceName() ) )
 				.attr( 'target', '_blank' )
+				.attr( 'rel', 'noopener' )
 				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
 		)
 	);

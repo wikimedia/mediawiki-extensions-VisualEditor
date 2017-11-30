@@ -57,7 +57,8 @@ ve.ui.MWInternalLinkContextItem.static.generateBody = function ( linkCache, mode
 			.text( description )
 			.attr( {
 				href: ve.resolveUrl( href, htmlDoc ),
-				target: '_blank'
+				target: '_blank',
+				rel: 'noopener'
 			} );
 
 	// Style based on link cache information
