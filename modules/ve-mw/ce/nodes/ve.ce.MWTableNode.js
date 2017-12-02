@@ -54,6 +54,18 @@ OO.mixinClass( ve.ce.MWTableNode, ve.ce.ClassAttributeNode );
 
 ve.ce.MWTableNode.static.name = 'mwTable';
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWTableNode.prototype.destroy = function () {
+	this.model.getMatrix().disconnect( this );
+
+	// Parent method
+	ve.ce.MWTableNode.super.prototype.destroy.apply( this, arguments );
+};
+
 /**
  * Update sortable headers (if the table is sortable).
  *
@@ -63,6 +75,11 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
 	var
 		view = this,
 		cellModels, cellViews;
+
+	if ( !this.model ) {
+		// Fired after teardown due to debounce
+		return;
+	}
 
 	this.$element.toggleClass( 'jquery-tablesorter', this.model.getAttribute( 'sortable' ) );
 
