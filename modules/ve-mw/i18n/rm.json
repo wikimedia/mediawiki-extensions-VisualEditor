@@ -69,8 +69,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Medias",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuraziun da la pagina",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Integraziun da models",
-	"visualeditor-diff-nochanges": "I n'è betg stà pussaivel da cumenzar la repassada perquai che tia revisiun correspunda la davosa versiun da questa pagina.",
-	"visualeditor-differror": "Errur cun chargiar las datas dal server: $1.",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avertiment|avertiments}}",
 	"visualeditor-editsummary": "Descriva che ti has modifitga",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titel da la pagina",

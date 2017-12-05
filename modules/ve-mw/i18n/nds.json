@@ -51,8 +51,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Medien",
 	"visualeditor-dialogbutton-meta-tooltip": "Siedeninstellen",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Vörlaaginbinnen",
-	"visualeditor-diff-nochanges": "De Överpröven kunn nich start warrn, wiel dien Verschoon de lieke is as de aktuelle Siedenverschoon.",
-	"visualeditor-differror": "Fehler bi't Laden vun de Daten vun'n Server: $1.",
 	"visualeditor-editconflict": "Dien Ännern kunnen vunwegen een Ännernskunflikt ni spiekert warrn. Wullt du den Kunflikt manuell lösen?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Een Notiz|$1 Notizen}}",
 	"visualeditor-editsummary": "Beschriev, wat du ännert hest",

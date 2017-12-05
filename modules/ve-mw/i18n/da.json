@@ -12,7 +12,8 @@
 			"McDutchie",
 			"Macofe",
 			"Ribewiki",
-			"Peter Alberti"
+			"Peter Alberti",
+			"SimmeD"
 		]
 	},
 	"tooltip-ca-createsource": "Opret kildekoden til denne side",
@@ -128,8 +129,6 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Sideindstillinger",
 	"visualeditor-dialogbutton-template-tooltip": "Skabelon",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Indlejring",
-	"visualeditor-diff-nochanges": "Kunne ikke starte gennemgangen, fordi din version svarer til den seneste version af denne side.",
-	"visualeditor-differror": "Fejl ved indlæsning af data fra server: $1.",
 	"visualeditor-editconflict": "Dine ændringer kunne ikke gemmes på grund af en redigeringskonflikt. Vil {{GENDER|du}} løse konflikten manuelt?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|en meddelelse|$1 meddelelser}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsbemærkninger",
@@ -182,7 +181,6 @@
 	"visualeditor-savedialog-label-save-short": "Gem",
 	"visualeditor-savedialog-label-warning": "Advarsel",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
-	"visualeditor-savedialog-title-nochanges": "Ingen ændringer at korrekturlæse",
 	"visualeditor-savedialog-title-review": "Gennemse dine ændringer",
 	"visualeditor-savedialog-title-save": "Gem dine ændringer",
 	"visualeditor-savedialog-warning-dirty": "Din redigering kan være beskadiget - du bør gennemgå den før du gemmer.",
