@@ -198,6 +198,8 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode ) {
 		doc = ve.parseXhtml( documentString );
 		// Strip Parsoid sections
 		ve.unwrapParsoidSections( doc.body );
+		// Strip legacy IDs, for example in section headings
+		ve.stripParsoidFallbackIds( doc.body );
 	}
 	// Fix relative or missing base URL if needed
 	this.fixBase( doc );

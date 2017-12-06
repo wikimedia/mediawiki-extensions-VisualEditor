@@ -44,3 +44,15 @@ ve.unwrapParsoidSections = function ( element ) {
 		parent.removeChild( section );
 	} );
 };
+
+/**
+ * Strip legacy (non-HTML5) IDs; typically found as section IDs inside
+ * headings.
+ *
+ * @param {HTMLElement} element Parent element, e.g. document body
+ */
+ve.stripParsoidFallbackIds = function ( element ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'span[typeof="mw:FallbackId"][id]:empty' ), function ( legacySpan ) {
+		legacySpan.parentNode.removeChild( legacySpan );
+	} );
+};
