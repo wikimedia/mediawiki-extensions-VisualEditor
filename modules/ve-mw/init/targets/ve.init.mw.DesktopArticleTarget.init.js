@@ -311,6 +311,7 @@
 			} )
 			.then( function () {
 				ve.track( 'mwedit.ready' );
+				ve.track( 'mwedit.loaded' );
 			} )
 			.always( clearLoading );
 	}
