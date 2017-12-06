@@ -28,7 +28,7 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 	if ( ve.init.target.$templatesUsed && ve.init.target.$templatesUsed.find( 'li' ).length ) {
 		this.templatesUsedFieldset.$element.append(
 			ve.init.target.$templatesUsed.clone().find( 'a' ).each( function () {
-				$( this ).attr( 'target', '_blank' );
+				$( this ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
 			} ).end()
 		);
 	} else {

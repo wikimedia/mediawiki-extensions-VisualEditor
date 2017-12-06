@@ -523,7 +523,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Save panel
 	this.$editSummaryLabel = $( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )
 		.html( ve.init.platform.getParsedMessage( 'summary' ) )
-		.find( 'a' ).attr( 'target', '_blank' ).end();
+		.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' ).end();
 	this.editSummaryInput = new OO.ui.MultilineTextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-editsummary' ),
 		classes: [ 've-ui-mwSaveDialog-summary' ],
@@ -568,7 +568,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append(
 		$( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
 			.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) )
-			.find( 'a' ).attr( 'target', '_blank' ).end()
+			.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' ).end()
 	);
 	this.savePanel.$element.append(
 		this.$editSummaryLabel,
@@ -632,7 +632,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	} );
 	this.$conflict = $( '<div>' ).addClass( 've-ui-mwSaveDialog-conflict' )
 		.html( ve.init.platform.getParsedMessage( 'visualeditor-editconflict' ) )
-		.find( 'a' ).attr( 'target', '_blank' ).end();
+		.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' ).end();
 	this.conflictPanel.$element.append( this.$conflict );
 
 	// Panel stack

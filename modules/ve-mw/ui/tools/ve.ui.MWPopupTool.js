@@ -90,7 +90,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 			.append( $.parseHTML( itemHtml ) );
 
 		// Ensure that any links in the notices open in a new tab/window
-		$node.find( 'a' ).attr( 'target', '_blank' );
+		$node.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
 
 		tool.$items.append( $node );
 	} );
@@ -169,7 +169,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 				.append( this.keyboardShortcutsButton.$element )
 				.append( this.feedbackButton.$element )
 		);
-	this.$items.find( 'a' ).attr( 'target', '_blank' );
+	this.$items.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
 	this.popup.$body.append( this.$items );
 };
 
@@ -266,6 +266,7 @@ ve.ui.MWHelpPopupTool.prototype.onSelect = function () {
 					.append( $( '<a>' )
 						.addClass( 've-ui-mwHelpPopupTool-version-link' )
 						.attr( 'target', '_blank' )
+						.attr( 'rel', 'noopener' )
 						.attr( 'href', extension[ 'vcs-url' ] )
 						.text( extension[ 'vcs-version' ].slice( 0, 7 ) )
 					)

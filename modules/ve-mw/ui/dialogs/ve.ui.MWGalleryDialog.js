@@ -601,6 +601,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 				.addClass( 'visualeditor-dialog-media-content-description-link' )
 				.attr( 'href', title.getUrl() )
 				.attr( 'target', '_blank' )
+				.attr( 'rel', 'noopener' )
 				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
 		)
 	);
