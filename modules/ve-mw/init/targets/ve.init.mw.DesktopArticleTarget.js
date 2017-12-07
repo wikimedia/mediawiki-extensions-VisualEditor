@@ -234,17 +234,18 @@ ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState )
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var toolbar,
+		mode = surface.getMode(),
 		wasSetup = !!this.toolbar,
 		target = this;
 
-	ve.track( 'trace.setupToolbar.enter' );
+	ve.track( 'trace.setupToolbar.enter', { mode: mode } );
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
 	toolbar = this.getToolbar();
 
-	ve.track( 'trace.setupToolbar.exit' );
+	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
 	if ( !wasSetup ) {
 		setTimeout( function () {
 			toolbar.$element
@@ -263,12 +264,12 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 			var surface = target.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( surface ) {
-				ve.track( 'trace.initializeToolbar.enter' );
+				ve.track( 'trace.initializeToolbar.enter', { mode: mode } );
 				target.getToolbar().initialize();
 				surface.getView().emit( 'position' );
 				surface.getContext().updateDimensions();
-				ve.track( 'trace.initializeToolbar.exit' );
-				ve.track( 'trace.activate.exit' );
+				ve.track( 'trace.initializeToolbar.exit', { mode: mode } );
+				ve.track( 'trace.activate.exit', { mode: mode } );
 			}
 		} );
 	}
@@ -587,7 +588,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 		}
 		ve.track( 'mwedit.abort', {
 			type: abortType,
-			mechanism: trackMechanism
+			mechanism: trackMechanism,
+			mode: this.surface ? this.surface.getMode() : this.getDefaultMode()
 		} );
 	}
 
@@ -758,7 +760,8 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	surface.getModel().getDocument().once( 'transact', function () {
 		ve.track( 'mwtiming.behavior.firstTransaction', {
 			duration: ve.now() - surfaceReadyTime,
-			targetName: target.constructor.static.trackingName
+			targetName: target.constructor.static.trackingName,
+			mode: surface.getMode()
 		} );
 	} );
 
@@ -1563,7 +1566,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
 	if ( !this.submitting ) {
 		ve.track( 'mwedit.abort', {
 			type: this.edited ? 'unknown-edited' : 'unknown',
-			mechanism: 'navigate'
+			mechanism: 'navigate',
+			mode: this.surface ? this.surface.getMode() : this.getDefaultMode()
 		} );
 	}
 };
@@ -1580,9 +1584,9 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 
 	if ( discardChanges ) {
 		if ( modified ) {
-			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate' } );
+			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate', mode: 'visual' } );
 		} else {
-			ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate' } );
+			ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate', mode: 'visual' } );
 		}
 		this.submitting = true;
 		prefPromise.done( function () {
@@ -1599,7 +1603,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 		this.serialize(
 			this.getDocToSave(),
 			function ( wikitext ) {
-				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate' } );
+				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
 				target.submitWithSaveFields( { wpDiff: 1, wpAutoSummary: '' }, wikitext );
 			}
 		);
