@@ -5,6 +5,8 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "wallak nidja bibol",
+	"visualeditor-ca-createlocaldescriptionsource": "ngatti nidja waagnkin birnup",
+	"visualeditor-ca-createsource": "wallakiny birnup",
 	"visualeditor-ca-editsource": "wallak birnup",
 	"visualeditor-ca-editsource-section": "wallak birnup",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"

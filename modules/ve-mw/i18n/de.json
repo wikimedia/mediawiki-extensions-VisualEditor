@@ -35,6 +35,7 @@
 	"apihelp-visualeditor-param-starttimestamp": "Legt dies beim Speichern auf den Zeitstempel des Zeitpunkts der geladenen Seite fest. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",
 	"apihelp-visualeditor-param-wikitext": "Wikitext, der an Parsoid zur Konvertierung in HTML gesendet werden soll (paction=parsefragment).",
 	"apihelp-visualeditoredit-description": "Speichert eine HTML5-Seite als MediaWiki (konvertiert als Wikitext über den Parsoid-Dienst).",
+	"apihelp-visualeditoredit-summary": "Speichert eine HTML5-Seite zu MediaWiki (konvertiert zu Wikitext mithilfe des Parsoid-Dienstes).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Legt dies beim Speichern auf den Zeitstempel der Version, die bearbeitet wurde, fest. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",
 	"apihelp-visualeditoredit-param-cachekey": "Verwende das Ergebnis einer früheren serializeforcache-Anfrage mit diesem Schlüssel. Überschreibt $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Kennung des Captchas (beim Speichern mit einer Captcha-Antwort).",

@@ -358,7 +358,7 @@
 	"visualeditor-parameter-search-no-unused": "Нема неискористени полиња",
 	"visualeditor-parameter-search-unknown": "Непознато поле",
 	"visualeditor-preference-betatempdisable": "Привремено исклучи го визуелниот уредник додека е во бета",
-	"visualeditor-preference-core-description": "Овозможи го визуелниот уредник. Нема да се појавува во страници за разговор и некои други именски простори.",
+	"visualeditor-preference-core-description": "Овозможи го визуелниот уредник. Нема да се појавува во разговорни страници и некои други именски простори.",
 	"visualeditor-preference-core-label": "Визуелно уредување",
 	"visualeditor-preference-newwikitexteditor-description": "Вклучи го новиот режим на викитекст. Има сличен изглед и алатки како Визуелниот уредник, но дава полесно префрлање од едниот на другиот режим.",
 	"visualeditor-preference-newwikitexteditor-label": "Нов режим на викитекст",

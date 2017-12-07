@@ -20,7 +20,8 @@
 			"F3RaN",
 			"SenyorFontal",
 			"Eduardo Martinez",
-			"Ssola"
+			"Ssola",
+			"Paucabot"
 		]
 	},
 	"apihelp-visualeditor-description": "Torna a HTML5 per a una pàgina des del servei Parsoid.",
@@ -309,9 +310,9 @@
 	"visualeditor-preference-newwikitexteditor-label": "Nou mode wikitext",
 	"visualeditor-preference-enable": "Activar l'editor visual. Estarà disponible en {{PLURAL:$2|l'espai de noms següent|els espais de noms següents}}: $1",
 	"visualeditor-preference-tabs": "Pestanyes d'edició:",
-	"visualeditor-preference-tabs-multi-tab": "Mostra'm les dues opcions d'editor",
-	"visualeditor-preference-tabs-prefer-ve": "Sempre fes servir l'editor visual si és possible",
-	"visualeditor-preference-tabs-prefer-wt": "Fes servir sempre l'editor de codi",
+	"visualeditor-preference-tabs-multi-tab": "Mostra’m les dues opcions d’editor",
+	"visualeditor-preference-tabs-prefer-ve": "Sempre fes servir l’editor visual si és possible",
+	"visualeditor-preference-tabs-prefer-wt": "Fes servir sempre l’editor de codi",
 	"visualeditor-preference-tabs-remember-last": "Recorda el meu darrer editor",
 	"visualeditor-recreate": "La pàgina ha estat suprimida des de que vau començar a editar. Premeu \"$1\" per recrear-la.",
 	"visualeditor-redirect-description": "redirigeix a $1",
