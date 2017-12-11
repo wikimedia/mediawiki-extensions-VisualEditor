@@ -8,7 +8,8 @@
 			"Vahe Gharakhanyan",
 			"Աշոտ1997",
 			"Aram1985",
-			"Kareyac"
+			"Kareyac",
+			"23artashes"
 		]
 	},
 	"apihelp-visualeditor-description": "Էջի համար Parsoid-ի համակարգից վերադարձնում է HTML5-ը:",
@@ -111,7 +112,7 @@
 	"visualeditor-dialog-meta-categories-category": "Կատեգորիա",
 	"visualeditor-dialog-meta-categories-data-label": "Կատեգորիաներ",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Դուք կարող եք կարգավորել այս էջի տեղը կատեգորիայում` ընտրելով այլ ինդեքս:",
-	"visualeditor-dialog-meta-categories-defaultsort-label": "Էջը լռելայն դասավորել որպես",
+	"visualeditor-dialog-meta-categories-defaultsort-label": "Էջը լռելյայն դասավորել որպես",
 	"visualeditor-dialog-meta-categories-hidden": "Կատեգորիան չի երևում այն էջերում, որտեղ ավելացվել է:",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Թաքնված կատեգորիաներ",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Համապատասխանող կատեգորիաներ",

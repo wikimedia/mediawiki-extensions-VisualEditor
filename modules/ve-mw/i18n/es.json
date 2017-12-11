@@ -58,7 +58,7 @@
 	"apihelp-visualeditoredit-param-html": "HTML para enviar a Parsoid en lugar del wikitexto.",
 	"apihelp-visualeditoredit-param-minor": "Marca de edición menor.",
 	"apihelp-visualeditoredit-param-needcheck": "Al guardar, establece este parámetro si la revisión puede tener problemas de \"roundtrip\". Esto hará que se etiquete la edición.",
-	"apihelp-visualeditoredit-param-oldid": "El número de edición a ser utilizado. Por defecto la última revisión. Utilizar 0 para una página nueva.",
+	"apihelp-visualeditoredit-param-oldid": "El número de revisión que utilizar. De manera predeterminada corresponde a la más reciente. Utiliza 0 para una página nueva.",
 	"apihelp-visualeditoredit-param-paction": "Acción que realizar.",
 	"apihelp-visualeditoredit-param-page": "La página en la que se realizarán acciones.",
 	"apihelp-visualeditoredit-param-section": "La sección donde actuar.",
