@@ -94,6 +94,12 @@
 			}
 		}
 
+		// Convert mode=source/visual to editor name
+		if ( data.mode ) {
+			data.editor = data.mode === 'source' ? 'wikitext-2017' : 'visualeditor';
+			delete data.mode;
+		}
+
 		event = $.extend( {
 			version: 1,
 			action: action,

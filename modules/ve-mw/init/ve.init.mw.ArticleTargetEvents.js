@@ -52,6 +52,7 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
  */
 ve.init.mw.ArticleTargetEvents.prototype.track = function ( topic, data ) {
 	data.targetName = this.target.constructor.static.trackingName;
+	data.mode = this.target.surface ? this.target.surface.getMode() : this.target.getDefaultMode();
 	ve.track( 'mwtiming.' + topic, data );
 
 	if ( topic.indexOf( 'performance.system.serializeforcache' ) === 0 ) {

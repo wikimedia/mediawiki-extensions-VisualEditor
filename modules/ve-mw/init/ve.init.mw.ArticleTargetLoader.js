@@ -78,13 +78,14 @@
 		 * Once those are loaded, any registered plugin callbacks are executed,
 		 * and we wait for all promises returned by those callbacks to resolve.
 		 *
+		 * @param {string} mode Initial editor mode, for tracking
 		 * @return {jQuery.Promise} Promise resolved when the loading process is complete
 		 */
-		loadModules: function () {
-			ve.track( 'trace.moduleLoad.enter' );
+		loadModules: function ( mode ) {
+			ve.track( 'trace.moduleLoad.enter', { mode: mode } );
 			return mw.loader.using( modules )
 				.then( function () {
-					ve.track( 'trace.moduleLoad.exit' );
+					ve.track( 'trace.moduleLoad.exit', { mode: mode } );
 					pluginCallbacks.push( ve.init.platform.getInitializedPromise.bind( ve.init.platform ) );
 					// Execute plugin callbacks and collect promises
 					return $.when.apply( $, pluginCallbacks.map( function ( callback ) {
@@ -150,7 +151,7 @@
 			}
 			// Load DOM
 			start = ve.now();
-			ve.track( 'trace.apiLoad.enter' );
+			ve.track( 'trace.apiLoad.enter', { mode: 'visual' } );
 
 			if ( data.paction === 'parse' && options.wikitext !== undefined ) {
 				// Non-RESTBase custom wikitext parse
@@ -161,18 +162,19 @@
 				apiXhr = new mw.Api().get( data );
 			}
 			apiPromise = apiXhr.then( function ( data, jqxhr ) {
-				ve.track( 'trace.apiLoad.exit' );
+				ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
 				ve.track( 'mwtiming.performance.system.apiLoad', {
 					bytes: $.byteLength( jqxhr.responseText ),
 					duration: ve.now() - start,
 					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-					targetName: options.targetName
+					targetName: options.targetName,
+					mode: 'visual'
 				} );
 				return data;
 			} );
 
 			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
-				ve.track( 'trace.restbaseLoad.enter' );
+				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );
 
 				// Should be synchronised with ApiVisualEditor.php
 				headers = {
@@ -225,11 +227,12 @@
 				}
 				restbasePromise = restbaseXhr.then(
 					function ( data, status, jqxhr ) {
-						ve.track( 'trace.restbaseLoad.exit' );
+						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
 						ve.track( 'mwtiming.performance.system.restbaseLoad', {
 							bytes: $.byteLength( jqxhr.responseText ),
 							duration: ve.now() - start,
-							targetName: options.targetName
+							targetName: options.targetName,
+							mode: 'visual'
 						} );
 						return [ data, jqxhr.getResponseHeader( 'etag' ) ];
 					},

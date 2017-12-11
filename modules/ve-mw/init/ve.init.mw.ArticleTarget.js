@@ -293,7 +293,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	if ( !data || typeof data.content !== 'string' ) {
 		this.loadFail( 've-api', 'No HTML content in response from server' );
 	} else {
-		ve.track( 'trace.parseResponse.enter' );
+		this.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
 		this.etag = data.etag;
 		this.fromEditedState = data.fromEditedState;
@@ -362,7 +362,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 			ve.init.platform.linkCache.setMissing( linkData );
 		}
 
-		ve.track( 'trace.parseResponse.exit' );
+		this.track( 'trace.parseResponse.exit' );
 		// Everything worked, the page was loaded, continue initializing the editor
 		this.documentReady( this.doc );
 	}
@@ -1796,7 +1796,8 @@ ve.init.mw.ArticleTarget.prototype.getEditNotices = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.track = function ( name ) {
-	ve.track( name );
+	var mode = this.surface ? this.surface.getMode() : this.getDefaultMode();
+	ve.track( name, { mode: mode } );
 };
 
 /**

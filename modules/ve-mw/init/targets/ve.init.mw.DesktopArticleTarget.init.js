@@ -159,7 +159,7 @@
 						.concat( plugins )
 						.forEach( mw.libs.ve.targetLoader.addPlugin );
 					plugins = [];
-					return mw.libs.ve.targetLoader.loadModules();
+					return mw.libs.ve.targetLoader.loadModules( mode );
 				} )
 				.then( function () {
 					var target,
@@ -207,7 +207,7 @@
 	}
 
 	function trackActivateStart( initData ) {
-		ve.track( 'trace.activate.enter' );
+		ve.track( 'trace.activate.enter', { mode: initData.mode } );
 		ve.track( 'mwedit.init', initData );
 		mw.libs.ve.activationStart = ve.now();
 	}
@@ -310,14 +310,14 @@
 				return activatePromise;
 			} )
 			.then( function () {
-				ve.track( 'mwedit.ready' );
-				ve.track( 'mwedit.loaded' );
+				ve.track( 'mwedit.ready', { mode: mode } );
+				ve.track( 'mwedit.loaded', { mode: mode } );
 			} )
 			.always( clearLoading );
 	}
 
 	function activatePageTarget( mode, modified ) {
-		trackActivateStart( { type: 'page', mechanism: 'click' } );
+		trackActivateStart( { type: 'page', mechanism: 'click', mode: mode } );
 
 		if ( !active ) {
 			if ( uri.query.action !== 'edit' && !( uri.query.veaction in editModes ) ) {
@@ -785,7 +785,7 @@
 				return;
 			}
 
-			trackActivateStart( { type: 'section', mechanism: 'click' } );
+			trackActivateStart( { type: 'section', mechanism: 'click', mode: mode } );
 
 			if ( history.pushState && !( uri.query.veaction in editModes ) ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
@@ -987,7 +987,8 @@
 				showWikitextWelcome = false;
 				trackActivateStart( {
 					type: section === null ? 'page' : 'section',
-					mechanism: 'url'
+					mechanism: 'url',
+					mode: mode
 				} );
 				activateTarget( mode, section );
 			} else if (
