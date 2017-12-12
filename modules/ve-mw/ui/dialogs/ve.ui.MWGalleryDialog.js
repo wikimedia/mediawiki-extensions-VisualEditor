@@ -129,7 +129,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// TODO: make into a ve.ui.MWTargetWidget once Parsoid handles galleries
 	this.highlightedCaptionInput = new OO.ui.MultilineTextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-mwgallerydialog-image-caption-placeholder' ),
-		autosize: true
+		autosize: true,
+		spellcheck: true
 	} );
 	this.highlightedCaptionFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
@@ -181,7 +182,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		}
 	} );
 	this.captionInput = new OO.ui.TextInputWidget( {
-		placeholder: ve.msg( 'visualeditor-mwgallerydialog-caption-input-placeholder' )
+		placeholder: ve.msg( 'visualeditor-mwgallerydialog-caption-input-placeholder' ),
+		spellcheck: true
 	} );
 	this.widthsInput = new OO.ui.NumberInputWidget( {
 		min: 0,
