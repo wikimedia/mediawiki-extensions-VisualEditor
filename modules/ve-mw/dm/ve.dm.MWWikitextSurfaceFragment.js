@@ -128,7 +128,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.unwrapText = function ( before, after 
  * @inheritdoc
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
-	var wikitextPromise;
+	var wikitextPromise, progressPromise;
 
 	if ( !doc.data.hasContent() ) {
 		return $.Deferred().resolve( '' ).promise();
@@ -137,15 +137,21 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
 
 	// TODO: Emit an event to trigger the progress bar
-	ve.init.target.getSurface().createProgress(
+	progressPromise = ve.init.target.getSurface().createProgress(
 		wikitextPromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
-	).done( function ( progressBar, cancelPromise ) {
+	).then( function ( progressBar, cancelPromise ) {
 		cancelPromise.fail( function () {
 			wikitextPromise.abort();
 		} );
 	} );
 
-	return wikitextPromise;
+	return $.when( wikitextPromise, progressPromise ).then( function ( wikitext ) {
+		var deferred = $.Deferred();
+		setTimeout( function () {
+			deferred.resolve( wikitext );
+		}, ve.init.target.getSurface().dialogs.getTeardownDelay() );
+		return deferred.promise();
+	} );
 };
 
 /**
