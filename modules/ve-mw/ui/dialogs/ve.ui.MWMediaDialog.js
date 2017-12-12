@@ -261,7 +261,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		icon: 'parameter'
 	} );
 
-	this.altTextInput = new OO.ui.TextInputWidget();
+	this.altTextInput = new OO.ui.TextInputWidget( { spellcheck: true } );
 
 	this.altTextInput.$element.addClass( 've-ui-mwMediaDialog-altText' );
 
