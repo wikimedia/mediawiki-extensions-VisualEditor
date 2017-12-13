@@ -34,6 +34,8 @@
 				);
 			case 'ready':
 				return timeStamp - timing.init;
+			case 'loaded':
+				return timeStamp - timing.init;
 			case 'saveIntent':
 				return timeStamp - timing.ready;
 			case 'saveAttempt':
