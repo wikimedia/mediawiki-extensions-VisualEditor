@@ -1292,7 +1292,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
  * Page modifications for switching back to view mode.
  */
 ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
-	var uri, keys;
+	var uri, keys, section, $section;
 
 	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
 	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
@@ -1316,6 +1316,24 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			delete uri.query.veaction;
 		}
 		if ( 'section' in uri.query ) {
+			// Translate into a fragment for the new URI:
+			// This should be after replacePageContent if this is post-save, so we can just look
+			// at the headers on the page.
+			section = uri.query.section.toString().indexOf( 'T-' ) === 0 ? +uri.query.section.slice( 2 ) : uri.query.section;
+			$section = this.$editableContent.find( 'h1, h2, h3, h4, h5, h6' )
+				// Ignore headings inside TOC
+				.filter( function () {
+					return $( this ).closest( '#toc' ).length === 0;
+				} );
+			if ( section === 'new' ) {
+				// A new section is appended to the end, so take the last one.
+				section = $section.length;
+			}
+			$section = $section.eq( section - 1 ).find( '.mw-headline' );
+
+			if ( $section.length && $section.attr( 'id' ) ) {
+				uri.fragment = $section.attr( 'id' );
+			}
 			delete uri.query.section;
 		}
 		if ( 'action' in uri.query && $( '#wpTextbox1' ).length === 0 ) {
