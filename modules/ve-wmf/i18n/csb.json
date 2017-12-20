@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kaszeba"
+			"Kaszeba",
+			"Kirsan"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Wizualny editora]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Wizualny editora]]",
+	"tag-visualeditor-wikitext": "editor zdrojowégò kòdu 2017"
 }

@@ -79,7 +79,7 @@
 	"visualeditor-beta-label": "бета-версия",
 	"visualeditor-beta-warning": "Если при редактировании у вас возникают какие-либо технические проблемы, пожалуйста, сообщите нам о них.",
 	"visualeditor-browserwarning": "Вы используете браузер, официально не поддерживаемый этим редактором.",
-	"visualeditor-ca-createlocaldescriptionsource": "Создать локально как вики-текст",
+	"visualeditor-ca-createlocaldescriptionsource": "Создать локально как код",
 	"visualeditor-ca-createsource": "Создать код",
 	"visualeditor-ca-editlocaldescriptionsource": "Редактировать источник локального описания",
 	"visualeditor-ca-editsource": "Править код",
