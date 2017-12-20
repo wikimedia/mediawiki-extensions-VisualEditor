@@ -2055,7 +2055,7 @@
 				"mediawiki.editfont.styles",
 				"ext.visualEditor.mwlink",
 				"ext.visualEditor.mwcore",
-				"ext.visualEditor.articleTarget"
+				"ext.visualEditor.mediawiki"
 			],
 			"messages": [
 				"visualeditor-generating-wikitext-progress"
