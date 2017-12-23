@@ -45,6 +45,7 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
+	"apihelp-visualeditor-summary": "Возвращает HTML5 для страницы с сервиса Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
 	"apihelp-visualeditor-param-cachekey": "Для сериализации или просмотра различий, использовать результат предыдущего запроса serializeforcache с этим ключом. Пренебрегает $1html.",
 	"apihelp-visualeditor-param-etag": "ETag для отправки.",
