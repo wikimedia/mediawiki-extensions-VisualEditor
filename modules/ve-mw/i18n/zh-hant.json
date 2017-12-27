@@ -321,6 +321,8 @@
 	"visualeditor-mwgallerydialog-title": "圖庫",
 	"visualeditor-mwgallerydialog-widths-field-label": "圖片寬度",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "預設寬度：$1 px",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "語言",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "語言",
 	"visualeditor-mwpredialog-title": "預排格式純文字",
 	"visualeditor-mwpredialog-convert": "允許文字樣式",
 	"visualeditor-mwsignature-tool": "您的簽名",
