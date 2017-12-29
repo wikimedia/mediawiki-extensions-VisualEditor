@@ -11,7 +11,8 @@
 			"Hugo.arg",
 			"Pofka",
 			"Albertas",
-			"Zygimantus"
+			"Zygimantus",
+			"Manvydasz"
 		]
 	},
 	"apihelp-visualeditor-description": "Grąžina puslapio HTML5 iš Parsoid paslaugos.",
@@ -317,7 +318,7 @@
 	"visualeditor-savedialog-label-save-short": "Išsaugoti",
 	"visualeditor-savedialog-label-warning": "Įspėjimas",
 	"visualeditor-savedialog-review-nosummary": "Nėra keitimo santraukos",
-	"visualeditor-savedialog-review-visual": "Vizualus",
+	"visualeditor-savedialog-review-visual": "Vizualus (beta)",
 	"visualeditor-savedialog-review-wikitext": "Vikitekstas",
 	"visualeditor-savedialog-title-conflict": "Konfliktas",
 	"visualeditor-savedialog-title-preview": "Peržiūrėti savo pakeitimus",
