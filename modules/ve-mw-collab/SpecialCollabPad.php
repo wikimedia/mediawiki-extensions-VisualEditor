@@ -12,7 +12,7 @@ class SpecialCollabPad extends SpecialPage {
 	 */
 	private $output = null;
 
-	function __construct() {
+	public function __construct() {
 		parent::__construct( 'CollabPad' );
 	}
 
@@ -25,12 +25,12 @@ class SpecialCollabPad extends SpecialPage {
 		return !!$wgVisualEditorRebaserURL && parent::userCanExecute( $user );
 	}
 
-	function isListed() {
+	protected function isListed() {
 		global $wgVisualEditorRebaserURL;
 		return !!$wgVisualEditorRebaserURL;
 	}
 
-	function execute( $par ) {
+	public function execute( $par ) {
 		$this->setHeaders();
 		$this->checkPermissions();
 

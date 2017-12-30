@@ -672,9 +672,8 @@ class ApiVisualEditor extends ApiBase {
 			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
 			$config->get( 'VisualEditorAvailableContentModels' )
 		);
-		return
-			isset( $availableContentModels[ $contentModel ] ) &&
-			$availableContentModels[ $contentModel ];
+		return isset( $availableContentModels[$contentModel] ) &&
+			$availableContentModels[$contentModel];
 	}
 
 	/**
