@@ -118,6 +118,21 @@ ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.MobileArticleTarget.prototype.createTargetWidget = function ( config ) {
+	// Parent method
+	var targetWidget = ve.init.mw.MobileArticleTarget.super.prototype.createTargetWidget.call( this, config );
+
+	targetWidget.once( 'setup', function () {
+		// Append the context to the toolbar
+		targetWidget.getToolbar().$bar.append( targetWidget.getSurface().getContext().$element );
+	} );
+
+	return targetWidget;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
