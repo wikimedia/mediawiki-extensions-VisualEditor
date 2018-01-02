@@ -113,8 +113,8 @@
 	"MessagesDirs": {
 		"VisualEditor": [
 			"lib/ve/i18n",
-			"modules/ve-mw/i18n",
-			"modules/ve-wmf/i18n"
+			"i18n/ve-mw",
+			"i18n/ve-wmf"
 		]
 	},
 	"ExtensionMessagesFiles": {
@@ -2197,7 +2197,7 @@
 	"AutoloadClasses": {
 		"ApiVisualEditor": "ApiVisualEditor.php",
 		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
-		"SpecialCollabPad": "modules/ve-mw-collab/SpecialCollabPad.php",
+		"SpecialCollabPad": "SpecialCollabPad.php",
 		"VisualEditorHooks": "VisualEditor.hooks.php",
 		"VisualEditorDataModule": "VisualEditorDataModule.php",
 		"VisualEditorDesktopArticleTargetInitModule": "VisualEditorDesktopArticleTargetInitModule.php"

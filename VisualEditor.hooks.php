@@ -686,7 +686,7 @@ class VisualEditorHooks {
 
 	public static function onGetBetaPreferences( User $user, array &$preferences ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
-		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor/modules/ve-wmf";
+		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor/images";
 
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$preferences['visualeditor-enable'] = [
