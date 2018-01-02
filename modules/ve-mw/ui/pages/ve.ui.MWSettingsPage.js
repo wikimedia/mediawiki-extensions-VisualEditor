@@ -14,7 +14,7 @@
  * @constructor
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
- * @param {jQuery} [$overlay] Overlay to render dropdowns in
+ * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	var settingsPage = this;
