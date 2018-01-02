@@ -25,7 +25,7 @@ class SpecialCollabPad extends SpecialPage {
 		return !!$wgVisualEditorRebaserURL && parent::userCanExecute( $user );
 	}
 
-	protected function isListed() {
+	public function isListed() {
 		global $wgVisualEditorRebaserURL;
 		return !!$wgVisualEditorRebaserURL;
 	}
