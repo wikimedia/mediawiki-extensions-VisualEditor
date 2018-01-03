@@ -3,6 +3,7 @@ Principal Authors (major contributors, alphabetically)
 Alex Monk <krenair@gmail.com>
 Bartosz Dziewoński <matma.rex@gmail.com>
 Christian Williams <orbit@framezero.com>
+David Lynch <dlynch@wikimedia.org>
 Ed Sanders <esanders@wikimedia.org>
 Inez Korczyński <inez@wikia-inc.com>
 James D. Forrester <jforrester@wikimedia.org>
@@ -24,17 +25,23 @@ Andrew Garrett <agarrett@wikimedia.org>
 Andrew Green <andrew.green.df@gmail.com>
 ankita-ks <kumariankita002@gmail.com>
 Antoine Musso <hashar@free.fr>
+Arlo Breault <abreault@wikimedia.org>
 Audrey Tang <audreyt@audreyt.org>
 Brad Jorsch <bjorsch@wikimedia.org>
 Brion Vibber <brion@wikimedia.org>
 C. Scott Ananian <cscott@cscott.net>
 Carl Fürstenberg <azatoth@gmail.com>
+cenarium <cenarium.sysop@gmail.com>
+Chad Horohoe <chadh@wikimedia.org>
+Chris McMahon <cmcmahon@wikimedia.org>
 Dan Duvall <dduvall@wikimedia.org>
 David Chan <david@troi.org>
-David Lynch <dlynch@wikimedia.org>
 Derk-Jan Hartman <hartman.wiki@gmail.com>
+Deskana <dgarry@wikimedia.org>
 Douglas Gardner <douglas@chippy.ch>
+Ebrahim Byagowi <ebrahim@gnu.org>
 ecotg <ecokpo@gmail.com>
+Egbe Eugene <agboreugene@gmail.com>
 Elena Tonkovidova <etonkovidova@wikimedia.org>
 eranroz <eranroz89@gmail.com>
 Erick Guan <fantasticfears@gmail.com>
@@ -42,30 +49,43 @@ Erik Moeller <erik@wikimedia.org>
 Federico Leva <federicoleva@tiscali.it>
 Florian <florian.schmidt.stargatewissen@gmail.com>
 Frédéric Bolduc <bolducfrederic@gmail.com>
+Gabriel Wicke <gwicke@wikimedia.org>
+Gergő Tisza <tgr.huwiki@gmail.com>
 Gilles Dubuc <gdubuc@wikimedia.org>
 Glaisher <glaisher.wiki@gmail.com>
 Helder <he7d3r@gmail.com>
+IvanFon <ivanfonseca55@gmail.com>
 Jamison Lofthouse <jamison.lofthouse@gmail.com>
 Jeff Hall <jeffreyehall@gmail.com>
 Jiabao <jiabao.foss@gmail.com>
+jo12bar <johann.b@telus.net>
 John Du Hart <johnduhart@users.mediawiki.org>
 Jon Robson <jrobson@wikimedia.org>
 Juliusz Gonera <jgonera@gmail.com>
+Justin Du <justin.d128@gmail.com>
 Kaity Hammerstein <khammerstein@wikimedia.org>
 Kunal Mehta <legoktm@gmail.com>
 Kyle Florence <kyle.florence@gmail.com>
+Legoktm <legoktm.wikipedia@gmail.com>
+Leszek Manicki <leszek.manicki@wikimedia.de>
 lokal-profil <lokal.profil@gmail.com>
 Marc Ordinas i Llopis <marcoil@wikimedia.org>
 Marielle Volz <marielle.volz@gmail.com>
+Mark A. Hershberger <mah@everybody.org>
 Mark Holmquist <mtraceur@member.fsf.org>
 Marko Obrovac <mobrovac@wikimedia.org>
 Matthew Flaschen <mflaschen@wikimedia.org>
 Matthias Mullie <git@mullie.eu>
 maurelio <strigiwm@gmail.com>
+Max Semenik <maxsem.wiki@gmail.com>
 mayankmadan <maddiemadan@gmail.com>
+Mukunda Modell <mmodell@wikimedia.org>
 Neil Kandalgaonkar <neilk@users.mediawiki.org>
+Nemo bis <federicoleva@tiscali.it>
 Niklas Laxström <niklas.laxstrom@gmail.com>
+Obaid Raza <obaidraza2526@gmail.com>
 Ori Livneh <ori@wikimedia.org>
+Paladox <thomasmulhall410@yahoo.com>
 palerdot <palerdot@gmail.com>
 Pavel Selitskas <p.selitskas@gmail.com>
 Peter Coti <petercoti@gmail.com>
@@ -73,6 +93,7 @@ Prateek Saxena <prtksxna@gmail.com>
 Quim Gil <quimgil@gmail.com>
 rachel99 <rachelqa99@gmail.com>
 Raimond Spekking <raimond.spekking@gmail.com>
+Ricordisamoa <ricordisamoa@openmailbox.org>
 Ritsyy <richarupela95@gmail.com>
 Robert Vogel <vogel@hallowelt.biz>
 Rummana Yasmeen <ryasmeen@wikimedia.org>
@@ -83,12 +104,18 @@ Seb35 <seb35wikipedia@gmail.com>
 shirayuki <shirayuking@gmail.com>
 Siebrand Mazeland <s.mazeland@xs4all.nl>
 Steven Zhang <cro0016@gmail.com>
+Subramanya Sastry <ssastry@wikimedia.org>
 Sucheta Ghoshal <sghoshal@wikimedia.org>
 Thalia Chan <thalia.e.chan@googlemail.com>
 This, that and the other <at.light@live.com.au>
 Tim Starling <tstarling@wikimedia.org>
 Tongbo Sui <beanixster@gmail.com>
+Tpt <thomaspt@hotmail.fr>
+Umherirrender <umherirrender_de.wp@web.de>
 Vikas S Yaligar <vikasyaligar.it@gmail.com>
+Volker E <volker.e@wikimedia.org>
+wctaiwan <wctaiwan@gmail.com>
+WMDE-Fisch <christoph.jauera@wikimedia.de>
 Yuki Shira <shirayuking@gmail.com>
 Željko Filipin <zeljko.filipin@gmail.com>
 
