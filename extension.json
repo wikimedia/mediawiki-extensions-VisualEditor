@@ -227,9 +227,6 @@
 				"mobile"
 			]
 		},
-		"unicodejs.wordbreak": {
-			"dependencies": "unicodejs"
-		},
 		"papaparse": {
 			"scripts": "lib/ve/lib/papaparse/papaparse.js",
 			"targets": [
