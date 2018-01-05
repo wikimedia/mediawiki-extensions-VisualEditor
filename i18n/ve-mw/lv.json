@@ -13,7 +13,9 @@
 		]
 	},
 	"apihelp-visualeditor-description": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
+	"apihelp-visualeditor-summary": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
 	"apihelp-visualeditor-param-etag": "Nosūtāmais ETag.",
+	"apihelp-visualeditor-param-format": "Izvades formāts.",
 	"apihelp-visualeditor-param-paction": "Veicamā darbība",
 	"apihelp-visualeditor-param-page": "Lapa, kurā veikt darbības.",
 	"apihelp-visualeditor-param-section": "Sadaļa, kurā darboties.",

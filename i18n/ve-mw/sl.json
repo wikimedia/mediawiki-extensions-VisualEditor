@@ -5,7 +5,8 @@
 			"Eleassar",
 			"Pinky sl",
 			"Yerpo",
-			"HairyFotr"
+			"HairyFotr",
+			"Janezdrilc"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrne HTML5 za stran iz storitve Parsoid.",
@@ -204,7 +205,9 @@
 	"visualeditor-mainnamespacepagelink": "Project:Glavni imenski prostor",
 	"visualeditor-media-input-placeholder": "Iskanje predstavnosti",
 	"visualeditor-meta-tool": "Možnosti",
+	"visualeditor-mweditmode-tooltip": "Preklopi urejevalnik",
 	"visualeditor-mweditmodesource-title": "Preklopim na urejanje vira?",
+	"visualeditor-mweditmodesource-tool-current": "Kodno urejanje",
 	"visualeditor-mweditmodesource-warning": "Preklapljate na urejanje izvorne kode.\nŽelite nadaljevati?",
 	"visualeditor-mweditmodesource-warning-cancel": "Prekliči",
 	"visualeditor-mweditmodesource-warning-switch": "Preklopi",
@@ -213,6 +216,7 @@
 	"visualeditor-mweditmodeve-popup-title": "Preklopili ste na urejanje izvorne kode",
 	"visualeditor-mweditmodeve-showagain": "Tega sporočila ne prikaži več",
 	"visualeditor-mweditmodeve-title": "Preklopim na vizualno urejanje?",
+	"visualeditor-mweditmodeve-tool-current": "Vizualno urejanje",
 	"visualeditor-mweditmodeve-warning": "Preklapljate na vizualno urejanje.\nŽelite nadaljevati?",
 	"visualeditor-mwgallerydialog-title": "Galerija",
 	"visualeditor-mwlanguagevariant-name": "Ime jezika: $1",

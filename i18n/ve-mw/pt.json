@@ -190,7 +190,7 @@
 	"visualeditor-dialog-meta-settings-nogallery-label": "Desativar galeria",
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "Pode impedir que o título desta página seja automaticamente convertido noutra variante da língua.",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "Não converter o título entre variantes da língua",
-	"visualeditor-dialog-meta-settings-redirect-help": "Pode tornar esta página num redirecionamento para os leitores, direcionando-os para outra página nesta wiki. Esta medida é útil para erros ortográficos e nomes ou conceitos alternativos. Se fizer isto, os leitores não visualizarão o conteúdo da página.",
+	"visualeditor-dialog-meta-settings-redirect-help": "Pode tornar esta página num redirecionamento para os leitores, direcionando-os para outra página nesta wiki. Esta medida é útil para erros ortográficos e nomes ou conceitos alternativos. Se fizer isto, os leitores não verão o conteúdo da página.",
 	"visualeditor-dialog-meta-settings-redirect-label": "Redirecionar esta página para",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Página de destino para redirecionamento",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Pode evitar que este redirecionamento seja atualizado automaticamente quando a página para a qual ele redireciona é movida, num caso muito raro em que seja necessário.",
