@@ -1333,6 +1333,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 
 			if ( $section.length && $section.attr( 'id' ) ) {
 				uri.fragment = $section.attr( 'id' );
+				this.viewUri.fragment = uri.fragment;
 			}
 			delete uri.query.section;
 		}
