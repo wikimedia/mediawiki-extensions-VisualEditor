@@ -363,6 +363,7 @@
 	"visualeditor-savedialog-label-review": "Skontroluj swoje zmiany",
 	"visualeditor-savedialog-label-review-good": "Powrót do zapisywania",
 	"visualeditor-savedialog-label-save-short": "Zapisz",
+	"visualeditor-savedialog-label-visual-diff-report": "Zgłoś nieprawidłowe wyświetlanie tej zmiany",
 	"visualeditor-savedialog-label-warning": "Ostrzeżenie",
 	"visualeditor-savedialog-review-nosummary": "Nie podano opisu zmian",
 	"visualeditor-savedialog-review-visual": "Wizualnie (beta)",
