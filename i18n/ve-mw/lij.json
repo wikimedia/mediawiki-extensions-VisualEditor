@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Giromin Cangiaxo"
+			"Giromin Cangiaxo",
+			"S4b1nuz E.656"
 		]
 	},
-	"tooltip-ca-ve-edit": "Modiffica sta paggina.",
+	"tooltip-ca-ve-edit": "Modìfica quésta pàgina",
 	"visualeditor-ca-createlocaldescriptionsource": "Azonzi descrission locale con sorgente",
 	"visualeditor-ca-createsource": "Crea sorgente",
 	"visualeditor-ca-editsource": "modiffica wikitesto",
-	"visualeditor-ca-editsource-section": "modifica wikitesto",
+	"visualeditor-ca-editsource-section": "modìfica wikitèsto",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-preference-betatempdisable": "Disattiva tempoanniamente l'editor vixuâ mentr'o l'è in beta"
 }
