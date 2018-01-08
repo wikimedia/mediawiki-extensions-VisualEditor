@@ -1926,10 +1926,20 @@ ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxName ) {
-	var checkbox,
+	var checkbox, currentWindow,
 		target = this;
 
 	if ( !( this.edited || this.restoring ) ) {
+		return;
+	}
+
+	currentWindow = this.getSurface().getDialogs().getCurrentWindow();
+	if ( currentWindow && currentWindow.constructor.static.name === 'mwSave' && ( action === 'save' || action === null ) ) {
+		// The current window is the save dialog, and we've gotten here via
+		// the save action. Trigger a save. We're doing this here instead of
+		// relying on an accesskey on the save button, because that has some
+		// cross-browser issues that makes it not work in Firefox.
+		currentWindow.executeAction( 'save' );
 		return;
 	}
 
