@@ -458,7 +458,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 
 	switch ( nodeType ) {
 		case 'mwInlineImage':
-			if ( selectedNode.type === 'mwBlockImage' ) {
+			if ( selectedNode && selectedNode.type === 'mwBlockImage' ) {
 				// If converting from a block image, create a wrapper paragraph for the inline image to go in.
 				fragment.insertContent( [ { type: 'paragraph', internal: { generated: 'wrapper' } }, { type: '/paragraph' } ] );
 				offset = fragment.getSelection().getRange().start + 1;
