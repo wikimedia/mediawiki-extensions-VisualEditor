@@ -113,7 +113,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 				isSource = ve.init.target.getSurface().getMode() === 'source';
 
 			visualOnlyPages.forEach( function ( page ) {
-				selectWidget.getItemFromData( page ).setDisabled( isSource );
+				selectWidget.findItemFromData( page ).setDisabled( isSource );
 			} );
 
 			if ( isSource && visualOnlyPages.indexOf( data.page || 'categories' ) !== -1 ) {
