@@ -18,12 +18,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	var popupCloseButton, $popupContent, $shield,
 		usePrefs = !mw.user.isAnon(),
 		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' ),
-		tool = this,
-		localStorageHidePref = null;
-
-	try {
-		localStorageHidePref = localStorage.getItem( 've-hideusered' );
-	} catch ( e ) {}
+		tool = this;
 
 	config = config || {};
 
@@ -33,7 +28,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			!prefSaysShow &&
 			!(
 				!usePrefs &&
-				localStorageHidePref === null &&
+				mw.storage.get( 've-hideusered' ) === null &&
 				$.cookie( 've-hideusered' ) === null
 			)
 		)
@@ -113,9 +108,7 @@ ve.ui.MWEducationPopupTool.prototype.onPopupCloseButtonClick = function () {
 		new mw.Api().saveOption( 'visualeditor-hideusered', 1 );
 		mw.user.options.set( 'visualeditor-hideusered', 1 );
 	} else if ( !usePrefs ) {
-		try {
-			localStorage.setItem( 've-hideusered', 1 );
-		} catch ( e ) {
+		if ( !mw.storage.set( 've-hideusered', 1 ) ) {
 			$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
 		}
 	}

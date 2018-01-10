@@ -2128,12 +2128,7 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 	var usePrefs, prefSaysShow, urlSaysHide,
 		windowManager = this.getSurface().dialogs,
-		target = this,
-		welcomeDialogLocalStorageValue = null;
-
-	try {
-		welcomeDialogLocalStorageValue = localStorage.getItem( 've-beta-welcome-dialog' );
-	} catch ( e ) {}
+		target = this;
 
 	this.welcomeDialogPromise = $.Deferred();
 
@@ -2154,7 +2149,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				prefSaysShow ||
 				(
 					!usePrefs &&
-					welcomeDialogLocalStorageValue === null &&
+					mw.storage.get( 've-beta-welcome-dialog' ) === null &&
 					$.cookie( 've-beta-welcome-dialog' ) === null
 				)
 			)
@@ -2194,9 +2189,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 			// set the hidebetawelcome=1 preference, but only if this isn't a one-off
 			// view of the page via the hiding GET parameter.
 		} else if ( !usePrefs && !urlSaysHide ) {
-			try {
-				localStorage.setItem( 've-beta-welcome-dialog', 1 );
-			} catch ( e ) {
+			if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
 				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 			}
 		}

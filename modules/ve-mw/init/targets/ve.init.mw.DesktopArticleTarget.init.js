@@ -926,8 +926,7 @@
 			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null,
 			isLoggedIn = !mw.user.isAnon(),
 			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
-			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query,
-			welcomeDialogLocalStorageValue = null;
+			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query;
 
 		requiredSkinElements =
 			$( '#content' ).length &&
@@ -1077,9 +1076,6 @@
 			init.setupEditLinks();
 		}
 
-		try {
-			welcomeDialogLocalStorageValue = localStorage.getItem( 've-beta-welcome-dialog' );
-		} catch ( e ) {}
 		if (
 			pageCanLoadEditor &&
 			showWikitextWelcome &&
@@ -1090,7 +1086,7 @@
 				prefSaysShowWelcome ||
 				(
 					!isLoggedIn &&
-					welcomeDialogLocalStorageValue === null &&
+					mw.storage.get( 've-beta-welcome-dialog' ) === null &&
 					$.cookie( 've-beta-welcome-dialog' ) === null
 				)
 			) &&
@@ -1123,9 +1119,7 @@
 					new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
 					mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 				} else if ( !isLoggedIn && !urlSaysHideWelcome ) {
-					try {
-						localStorage.setItem( 've-beta-welcome-dialog', 1 );
-					} catch ( e ) {
+					if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
 						$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 					}
 				}

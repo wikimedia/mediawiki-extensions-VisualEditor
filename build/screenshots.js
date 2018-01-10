@@ -111,9 +111,9 @@
 						};
 
 						// Suppress welcome dialog
-						localStorage.setItem( 've-beta-welcome-dialog', 1 );
+						mw.storage.set( 've-beta-welcome-dialog', 1 );
 						// Suppress user education indicators
-						localStorage.setItem( 've-hideusered', 1 );
+						mw.storage.set( 've-hideusered', 1 );
 						mw.hook( 've.activationComplete' ).add( function () {
 							var target = ve.init.target,
 								surfaceView = target.getSurface().getView();

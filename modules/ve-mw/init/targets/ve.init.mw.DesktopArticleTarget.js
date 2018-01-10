@@ -343,9 +343,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 
 		// Pretend the user saw the welcome dialog before suppressing it.
 		if ( mw.user.isAnon() ) {
-			try {
-				localStorage.setItem( 've-beta-welcome-dialog', 1 );
-			} catch ( e ) {
+			if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
 				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 			}
 		} else {

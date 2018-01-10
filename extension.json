@@ -1304,6 +1304,7 @@
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
+				"mediawiki.storage",
 				"jquery.cookie",
 				"jquery.byteLimit",
 				"mediawiki.notify",
