@@ -58,8 +58,7 @@ ve.ui.MWSaveDialog.static.actions = [
 		// May be overridden by config.saveButtonLabel
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
 		flags: [ 'primary', 'progressive' ],
-		modes: [ 'save', 'review', 'preview' ],
-		accessKey: 's'
+		modes: [ 'save', 'review', 'preview' ]
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resume-editing' ),
@@ -498,8 +497,7 @@ ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.initialize = function () {
-	var saveAccessKey,
-		dialog = this;
+	var dialog = this;
 
 	// Parent method
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
@@ -642,14 +640,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.previewPanel,
 		this.conflictPanel
 	] );
-
-	// Save button for "save" panel
-	saveAccessKey = ve.msg( 'accesskey-save' );
-	if ( saveAccessKey !== '-' && saveAccessKey !== '' ) {
-		this.actions.forEach( { actions: 'save' }, function ( action ) {
-			action.setAccessKey( saveAccessKey );
-		} );
-	}
 
 	// Initialization
 	this.$body.append( this.panels.$element );
