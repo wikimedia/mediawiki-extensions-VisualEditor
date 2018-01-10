@@ -345,7 +345,7 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "语言代码",
 	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<无效>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "语言",
-	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "源代码",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "来源",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "目标",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "文本",
 	"visualeditor-mwlanguagevariantcontextitem-title-disabled": "变体转换已禁用",
