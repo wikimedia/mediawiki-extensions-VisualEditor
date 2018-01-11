@@ -1,5 +1,7 @@
 /* global seleniumUtils */
 
+/* eslint-disable no-console */
+
 ( function () {
 	'use strict';
 	var accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
@@ -7,7 +9,8 @@
 		fs = require( 'fs' ),
 		Jimp = require( 'jimp' ),
 		username = process.env.SAUCE_ONDEMAND_USERNAME,
-		webdriver = require( 'selenium-webdriver' );
+		webdriver = require( 'selenium-webdriver' ),
+		TIMEOUT = 40 * 1000;
 
 	function createScreenshotEnvironment( test, beforeEach ) {
 		var clientSize, driver;
@@ -29,7 +32,7 @@
 				driver = new chrome.Driver();
 			}
 
-			driver.manage().timeouts().setScriptTimeout( 40000 );
+			driver.manage().timeouts().setScriptTimeout( TIMEOUT );
 			driver.manage().window().setSize( 1200, 1000 );
 
 			driver.get( 'https://en.wikipedia.org/wiki/Help:Sample_page?veaction=edit&uselang=' + lang );
@@ -132,10 +135,22 @@
 					}
 				).then( function ( cs ) {
 					clientSize = cs;
+				}, function ( e ) {
+					// Log error (timeout)
+					console.error( e.message );
 				} )
 			);
 			if ( beforeEach ) {
-				driver.wait( driver.executeAsyncScript( beforeEach ) );
+				driver.manage().timeouts().setScriptTimeout( TIMEOUT );
+				driver.wait(
+					driver.executeAsyncScript( beforeEach ).then(
+						function () {},
+						function ( e ) {
+							// Log error (timeout)
+							console.error( e.message );
+						}
+					)
+				);
 			}
 		} );
 
@@ -165,6 +180,7 @@
 		function runScreenshotTest( name, lang, clientScript, padding ) {
 			var filename = './screenshots/' + name + '-' + lang + '.png';
 
+			driver.manage().timeouts().setScriptTimeout( TIMEOUT );
 			driver.wait(
 				driver.executeAsyncScript( clientScript ).then( function ( rect ) {
 					return driver.takeScreenshot().then( function ( base64Image ) {
@@ -176,8 +192,10 @@
 							fs.writeFile( filename, base64Image, 'base64' );
 						}
 					} );
-				} ),
-				40000
+				}, function ( e ) {
+					// Log error (timeout)
+					console.error( e );
+				} )
 			);
 		}
 

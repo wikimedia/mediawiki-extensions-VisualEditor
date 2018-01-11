@@ -11,7 +11,9 @@ module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
 		screenshotOptions = {
 			reporter: 'spec',
-			timeout: 40000,
+			// TODO: Work out how to catch this timeout and continue.
+			// For now just make it very long.
+			timeout: 5 * 60 * 1000,
 			require: [
 				function () {
 					// eslint-disable-next-line no-undef, no-implicit-globals
@@ -21,7 +23,9 @@ module.exports = function ( grunt ) {
 		},
 		screenshotOptionsAll = {
 			reporter: 'spec',
-			timeout: 40000,
+			// TODO: Work out how to catch this timeout and continue.
+			// For now just make it very long.
+			timeout: 5 * 60 * 1000,
 			require: [
 				function () {
 					// eslint-disable-next-line no-undef, no-implicit-globals
