@@ -281,8 +281,8 @@
 						modified: modified,
 						preload: uri.query.preload,
 						preloadparams: uri.query[ 'preloadparams[]' ],
-						// If switching to visual, check if we have wikitext to convert
-						wikitext: mode === 'visual' ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
+						// If switching to visual with modifications, check if we have wikitext to convert
+						wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					} );
 				} )
 				.done( incrementLoadingProgress );
