@@ -21,7 +21,7 @@
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
 		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, enabledForUser, initialWikitext, oldId,
-		isLoading,
+		isLoading, tempWikitextEditor, $toolbarPlaceholder,
 		editModes = {
 			edit: 'visual'
 		},
@@ -35,8 +35,8 @@
 		],
 		plugins = [];
 
-	function showLoading() {
-		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle;
+	function showLoading( mode ) {
+		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle, loadingTop;
 
 		if ( isLoading ) {
 			return;
@@ -58,16 +58,18 @@
 		// eslint-disable-next-line no-use-before-define
 		$( document ).on( 'keydown', onDocumentKeyDown );
 
-		// Center within visible part of the target
 		$content = $( '#content' );
-		contentRect = $content[ 0 ].getBoundingClientRect();
-		windowHeight = $( window ).height();
-		top = Math.max( contentRect.top, 0 );
-		bottom = Math.min( contentRect.bottom, windowHeight );
-		middle = ( bottom - top ) / 2;
-		offsetTop = Math.max( -contentRect.top, 0 );
-
-		init.$loading.css( 'top', middle + offsetTop );
+		if ( mode !== 'source' ) {
+			// Center within visible part of the target
+			contentRect = $content[ 0 ].getBoundingClientRect();
+			windowHeight = $( window ).height();
+			top = Math.max( contentRect.top, 0 );
+			bottom = Math.min( contentRect.bottom, windowHeight );
+			middle = ( bottom - top ) / 2;
+			offsetTop = Math.max( -contentRect.top, 0 );
+			loadingTop = middle + offsetTop;
+			init.$loading.css( 'top', loadingTop );
+		}
 
 		$content.prepend( init.$loading );
 	}
@@ -98,6 +100,66 @@
 		if ( init.$loading ) {
 			init.$loading.detach();
 		}
+		if ( tempWikitextEditor ) {
+			// eslint-disable-next-line no-use-before-define
+			ve.init.target.toolbarSetupDeferred.then( teardownTempWikitextEditor );
+		}
+	}
+
+	function setupTempWikitextEditor( data ) {
+		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( {
+			value: data.content,
+			onChange: function () {
+				// Write changes back to response data object,
+				// which will be used to construct the surface.
+				data.content = tempWikitextEditor.getValue();
+				// TODO: Consider writing changes using a
+				// transaction so they can be undone.
+				// For now, just mark surface as pre-modified
+				data.fromEditedState = true;
+			}
+		} );
+
+		// Create an equal-height placeholder for the toolbar to avoid vertical jump
+		// when the real toolbar is ready.
+		$toolbarPlaceholder = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder' );
+		$( '#content' ).prepend( $toolbarPlaceholder );
+
+		// Add class for transition after first render
+		setTimeout( function () {
+			$toolbarPlaceholder.addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
+		} );
+
+		// Bring forward some transformations that show the editor is now ready
+		$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		$( '#mw-content-text' )
+			.before( tempWikitextEditor.$element )
+			.addClass( 'oo-ui-element-hidden' );
+		$( 'html' ).addClass( 've-tempSourceEditing' ).removeClass( 've-loading' );
+
+		// Resize the textarea to fit content. We could do this more often (e.g. on change)
+		// but hopefully this temporary textarea won't be visible for too long.
+		tempWikitextEditor.adjustSize().focus();
+		ve.track( 'mwedit.ready', { mode: 'source' } );
+	}
+
+	function teardownTempWikitextEditor() {
+		var range,
+			nativeRange = tempWikitextEditor.getRange(),
+			surfaceModel = ve.init.target.getSurface().getModel();
+
+		// Transfer the last-seen selection to the VE surface
+		range = surfaceModel.getRangeFromSourceOffsets( nativeRange.from, nativeRange.to );
+		surfaceModel.setLinearSelection( range );
+
+		// Destroy widget and placeholder
+		tempWikitextEditor.$element.remove();
+		tempWikitextEditor = null;
+		$toolbarPlaceholder.remove();
+		$toolbarPlaceholder = null;
+
+		$( '#mw-content-text' ).removeClass( 'oo-ui-element-hidden' );
+		$( 'html' ).removeClass( 've-tempSourceEditing' );
 	}
 
 	function abortLoading() {
@@ -285,10 +347,15 @@
 						wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					} );
 				} )
+				.done( function ( response ) {
+					if ( mode === 'source' ) {
+						setupTempWikitextEditor( response.visualeditor );
+					}
+				} )
 				.done( incrementLoadingProgress );
 		}
 
-		showLoading();
+		showLoading( mode );
 		incrementLoadingProgress();
 		active = true;
 
@@ -310,7 +377,10 @@
 				return activatePromise;
 			} )
 			.then( function () {
-				ve.track( 'mwedit.ready', { mode: mode } );
+				if ( mode === 'visual' ) {
+					// 'mwedit.ready' has already been fired for source mode in setupTempWikitextEditor
+					ve.track( 'mwedit.ready', { mode: mode } );
+				}
 				ve.track( 'mwedit.loaded', { mode: mode } );
 			} )
 			.always( clearLoading );
@@ -1002,7 +1072,7 @@
 						.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUri } )
 						// Accesskey fires a click event
 						.on( 'click.ve-target', init.onEditTabClick.bind( init, 'visual' ) )
-						.hide()
+						.addClass( 'oo-ui-element-hidden' )
 				);
 			}
 

@@ -255,6 +255,18 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.tempWikitextEditorWidget": {
+			"scripts": "modules/ve-mw/init/ve.init.mw.TempWikitextEditorWidget.js",
+			"styles": "modules/ve-mw/init/styles/ve.init.mw.TempWikitextEditorWidget.less",
+			"dependencies": [
+				"mediawiki.editfont.styles",
+				"mediawiki.user"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.desktopArticleTarget.init": {
 			"class": "VisualEditorDesktopArticleTargetInitModule",
 			"scripts": "modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
@@ -281,7 +293,8 @@
 				"mediawiki.util",
 				"mediawiki.api.options",
 				"ext.visualEditor.supportCheck",
-				"ext.visualEditor.track"
+				"ext.visualEditor.track",
+				"ext.visualEditor.tempWikitextEditorWidget"
 			],
 			"messages": [
 				"accesskey-ca-editsource",

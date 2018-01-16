@@ -247,18 +247,26 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
 	if ( !wasSetup ) {
-		setTimeout( function () {
+		if ( $( 'html' ).hasClass( 've-tempSourceEditing' ) ) {
 			toolbar.$element
-				.css( 'height', toolbar.$bar.outerHeight() )
-				.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
+				.css( 'height', '' )
+				.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
+				.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
+			this.toolbarSetupDeferred.resolve();
+		} else {
 			setTimeout( function () {
-				// Clear to allow growth during use and when resizing window
 				toolbar.$element
-					.css( 'height', '' )
-					.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
-				target.toolbarSetupDeferred.resolve();
-			}, 250 );
-		} );
+					.css( 'height', toolbar.$bar.outerHeight() )
+					.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
+				setTimeout( function () {
+					// Clear to allow growth during use and when resizing window
+					toolbar.$element
+						.css( 'height', '' )
+						.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
+					target.toolbarSetupDeferred.resolve();
+				}, 250 );
+			} );
+		}
 
 		this.toolbarSetupDeferred.done( function () {
 			var surface = target.getSurface();
@@ -1202,8 +1210,8 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// Mark every non-direct ancestor between editableContent and the container as uneditable
 	$content = this.$editableContent;
 	while ( $content && $content.length && !$content.parent().is( this.$container ) ) {
-		$content.prevAll().addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
-		$content.nextAll().addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		$content.prevAll( ':not( .ve-init-mw-tempWikitextEditorWidget )' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		$content.nextAll( ':not( .ve-init-mw-tempWikitextEditorWidget )' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 		$content = $content.parent();
 	}
 
