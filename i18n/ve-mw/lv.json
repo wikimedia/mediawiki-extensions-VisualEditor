@@ -28,6 +28,7 @@
 	"apihelp-visualeditoredit-param-section": "Sadaļa, kurā darboties.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Jaunās sadaļas nosaukums.",
 	"apihelp-visualeditoredit-param-summary": "Izmaiņu kopsavilkums.",
+	"apihelp-visualeditoredit-param-wikitext": "Vikiteksts, ar ko strādāt.",
 	"tooltip-ca-createsource": "Izveidot šīs lapas pirmkodu",
 	"tooltip-ca-edit": "Labot šo lapu, izmantojot vikitekstu",
 	"tooltip-ca-editsource": "Labot šīs lapas pirmkodu",
