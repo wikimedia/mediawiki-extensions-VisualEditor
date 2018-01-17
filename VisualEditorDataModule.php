@@ -44,8 +44,9 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	}
 
 	protected function getMessageInfo( ResourceLoaderContext $context ) {
-		global $wgEditSubmitButtonLabelPublish;
-		$saveButtonLabelKey = $wgEditSubmitButtonLabelPublish ? 'publishpage' : 'savearticle';
+		$editSubmitButtonLabelPublish = $context->getResourceLoader()->getConfig()
+			->get( 'EditSubmitButtonLabelPublish' );
+		$saveButtonLabelKey = $editSubmitButtonLabelPublish ? 'publishpage' : 'savearticle';
 		$saveButtonLabel = $context->msg( $saveButtonLabelKey )->text();
 
 		// Messages to be exported as parsed html
