@@ -81,7 +81,7 @@ ve.ui.MWTransclusionDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
 	var part, promise,
 		parts = this.transclusionModel.getParts(),
-		item = this.bookletLayout.getOutline().getSelectedItem();
+		item = this.bookletLayout.getOutline().findSelectedItem();
 
 	if ( item ) {
 		part = this.transclusionModel.getPartFromId( item.getData() );
@@ -98,7 +98,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 	var id, part, param,
-		item = this.bookletLayout.getOutline().getSelectedItem();
+		item = this.bookletLayout.getOutline().findSelectedItem();
 
 	if ( item ) {
 		id = item.getData();
@@ -134,7 +134,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 	var part, param,
-		item = this.bookletLayout.getOutline().getSelectedItem();
+		item = this.bookletLayout.getOutline().findSelectedItem();
 
 	if ( item ) {
 		part = this.transclusionModel.getPartFromId( item.getData() );
@@ -307,7 +307,7 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	var index, promise,
 		parts = this.transclusionModel.getParts(),
-		item = this.bookletLayout.getOutline().getSelectedItem();
+		item = this.bookletLayout.getOutline().findSelectedItem();
 
 	if ( part ) {
 		// Insert after selected part, or at the end if nothing is selected

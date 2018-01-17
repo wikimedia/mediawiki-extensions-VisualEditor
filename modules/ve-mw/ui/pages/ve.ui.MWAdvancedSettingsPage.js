@@ -253,7 +253,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	// Indexing items
 	currentIndexingItem = this.getMetaItem( 'mwIndex' );
-	newIndexingData = this.indexing.getField().getSelectedItem();
+	newIndexingData = this.indexing.getField().findSelectedItem();
 
 	// Alter the indexing option flag iff it's been touched & is actually different
 	if ( this.indexingOptionTouched ) {
@@ -276,7 +276,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	// New section edit link items
 	currentNewSectionEditLinkItem = this.getMetaItem( 'mwNewSectionEdit' );
-	newNewSectionEditLinkData = this.newEditSectionLink.getField().getSelectedItem();
+	newNewSectionEditLinkData = this.newEditSectionLink.getField().findSelectedItem();
 
 	// Alter the new section edit option flag iff it's been touched & is actually different
 	if ( this.newSectionEditLinkOptionTouched ) {
