@@ -107,7 +107,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 		menu = this.addTemplateInput.getLookupMenu();
 
 	if ( menu.isVisible() ) {
-		menu.chooseItem( menu.getSelectedItem() );
+		menu.chooseItem( menu.findSelectedItem() );
 	}
 	name = this.addTemplateInput.getTitle();
 	if ( !name ) {

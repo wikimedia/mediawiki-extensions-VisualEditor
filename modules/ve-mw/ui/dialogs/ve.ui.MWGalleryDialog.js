@@ -617,7 +617,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
  * Handle change event for this.modeDropdown
  */
 ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
-	var mode = this.modeDropdown.getMenu().getSelectedItem().getData(),
+	var mode = this.modeDropdown.getMenu().findSelectedItem().getData(),
 		disabled = (
 			mode === 'packed' ||
 			mode === 'packed-overlay' ||
@@ -737,8 +737,8 @@ ve.ui.MWGalleryDialog.prototype.getCurrentData = function () {
 	data.showFilename = this.showFilenameCheckbox.isSelected() ? 'yes' : undefined;
 	data.classes = this.classesInput.getValue() || undefined;
 	data.styles = this.stylesInput.getValue() || undefined;
-	if ( this.modeDropdown.getMenu().getSelectedItem() ) {
-		data.mode = this.modeDropdown.getMenu().getSelectedItem().getData();
+	if ( this.modeDropdown.getMenu().findSelectedItem() ) {
+		data.mode = this.modeDropdown.getMenu().findSelectedItem().getData();
 	}
 
 	// Unset mode attribute if it is the same as the default

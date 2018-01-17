@@ -305,7 +305,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 	// Table of Contents items
 	currentTableOfContents = this.getMetaItem( 'mwTOC' );
-	newTableOfContentsData = this.tableOfContents.getField().getSelectedItem();
+	newTableOfContentsData = this.tableOfContents.getField().findSelectedItem();
 
 	// Redirect items
 	currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
