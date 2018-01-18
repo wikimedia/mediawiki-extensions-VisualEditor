@@ -593,8 +593,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		],
 		classes: [ 've-ui-mwSaveDialog-reviewMode' ]
 	} );
-	// TODO: Make 'visual' the default
-	this.reviewModeButtonSelect.selectItemByData( 'source' );
 	this.reviewModeButtonSelect.connect( this, { select: 'updateReviewMode' } );
 
 	this.$reviewEditSummary = $( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
@@ -649,7 +647,18 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	var dialog = this,
-		isVisual = this.reviewModeButtonSelect.getSelectedItem().getData() === 'visual';
+		diffMode = this.reviewModeButtonSelect.findSelectedItem().getData(),
+		surfaceMode = ve.init.target.getSurface().getMode(),
+		isVisual = diffMode === 'visual';
+
+	if ( !this.hasDiff ) {
+		return;
+	}
+
+	// Config values used here:
+	// * visualeditor-diffmode-visual
+	// * visualeditor-diffmode-source
+	ve.userConfig( 'visualeditor-diffmode-' + surfaceMode, diffMode );
 
 	// Hack: cache report action so it is getable even when hidden (see T174497)
 	if ( !this.report ) {
@@ -721,6 +730,7 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var surfaceMode = ve.init.target.getSurface().getMode();
 			this.canReview = !!data.canReview;
 			this.canPreview = !!data.canPreview;
 			this.setupCheckboxes( data.checkboxFields || [] );
@@ -735,6 +745,14 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 					this.setEditSummary( data.editSummary );
 				}
 			}
+
+			// Config values used here:
+			// * visualeditor-diffmode-visual
+			// * visualeditor-diffmode-source
+			// TODO: Make 'visual' the default for visual mode (T178248)
+			this.reviewModeButtonSelect.selectItemByData(
+				ve.userConfig( 'visualeditor-diffmode-' + surfaceMode ) || 'source'
+			);
 
 			// Old messages should not persist
 			this.clearAllMessages();
