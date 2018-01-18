@@ -109,7 +109,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	if ( menu.isVisible() ) {
 		menu.chooseItem( menu.findSelectedItem() );
 	}
-	name = this.addTemplateInput.getTitle();
+	name = this.addTemplateInput.getMWTitle();
 	if ( !name ) {
 		// Invalid titles return null, so abort here.
 		return;
@@ -124,7 +124,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onTemplateInputChange = function () {
-	this.addTemplateButton.setDisabled( this.addTemplateInput.getTitle() === null );
+	this.addTemplateButton.setDisabled( this.addTemplateInput.getMWTitle() === null );
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onRemoveButtonClick = function () {
