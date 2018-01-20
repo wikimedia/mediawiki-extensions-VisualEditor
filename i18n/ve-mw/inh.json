@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Adam-Yourist",
-			"Умар"
+			"Умар",
+			"ElizaMag"
 		]
 	},
 	"tooltip-ca-ve-edit": "Ху́вца ер оагIув",
@@ -16,5 +17,5 @@
 	"visualeditor-dialog-template-title": "Ло",
 	"visualeditor-dialog-transclusion-content": "Чудар",
 	"visualeditor-dialogbutton-template-tooltip": "Ло",
-	"visualeditor-linkinspector-educationpopup-title": "ТIахьожаяргаш"
+	"visualeditor-linkinspector-educationpopup-title": "Тӏатовжамаш"
 }
