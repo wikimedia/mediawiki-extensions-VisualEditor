@@ -369,7 +369,7 @@
 	"visualeditor-preference-core-label": "Visuelles Bearbeiten",
 	"visualeditor-preference-newwikitexteditor-description": "Aktiviere den neuen Wikitext-Modus innerhalb des visuellen Editors. Er hat viele der Werkzeuge, die auch im visuellen Editor vorhanden sind, er verwendet eine ähnliche Aufmachung und ermöglicht ein besseres Wechseln zwischen den beiden Modi.",
 	"visualeditor-preference-newwikitexteditor-label": "Neuer Wikitext-Modus",
-	"visualeditor-preference-enable": "Den visuellen Editor aktivieren. Der Editor ist verfügbar {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}}: $1",
+	"visualeditor-preference-enable": "Visuellen Editor aktivieren. Er ist {{PLURAL:$2|im folgenden Namensraum|in den folgenden Namensräumen}} verfügbar: $1",
 	"visualeditor-preference-tabs": "Bearbeitungsmodus:",
 	"visualeditor-preference-tabs-multi-tab": "Beide Editoren anbieten",
 	"visualeditor-preference-tabs-prefer-ve": "Den visuellen Editor anbieten, falls möglich",

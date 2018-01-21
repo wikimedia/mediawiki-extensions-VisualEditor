@@ -13,13 +13,15 @@
 			"Meelo",
 			"McAang",
 			"Coolland",
-			"Kumkumuk"
+			"Kumkumuk",
+			"Diyapazon"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici]] kullanarak düzenleyin",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici: Doğrula]]",
 	"tag-visualeditor-needcheck-description": "Sistem [[{{MediaWiki:visualeditor-descriptionpagelink}}|görsel düzenleyici]] ile düzenleyemeyeceğiniz, ancak kaynağı değiştir bağlantısıyla editör ile yapabileceğiniz değişiklik yaptığınızı tespit etti.",
+	"tag-visualeditor-wikitext": "2017 kaynak düzenleyici",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici: Değiştirildi]]",
 	"tag-visualeditor-switched-description": "Kullanıcı görsel düzenleyici ile düzenlemeye başladı, daha sonra kaynak düzenleyiciye geçti.",
 	"visualeditor-feedback-link": "Project:Görsel Düzenleyici/Geri bildirim",
