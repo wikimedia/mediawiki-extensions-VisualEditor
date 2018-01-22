@@ -165,10 +165,10 @@ QUnit.test( 'convert', function ( assert ) {
 				annotations: [],
 				assertDom: true,
 				expectedData: [
-					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2>foo</h2>' ).toArray() },
+					{ type: 'mwHeading', attributes: { level: 2 }, internal: { changesSinceLoad: 0, metaItems: [] }, originalDomElements: $( '<h2>foo</h2>' ).toArray() },
 					'f', 'o', 'o',
 					{ type: '/mwHeading' },
-					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2 id="mw-meaningful-id">bar</h2>' ).toArray() },
+					{ type: 'mwHeading', attributes: { level: 2 }, internal: { changesSinceLoad: 0, metaItems: [] }, originalDomElements: $( '<h2 id="mw-meaningful-id">bar</h2>' ).toArray() },
 					'b', 'a', 'r',
 					{ type: '/mwHeading' },
 					{ type: 'internalList' },
@@ -183,7 +183,7 @@ QUnit.test( 'convert', function ( assert ) {
 				annotations: [],
 				assertDom: true,
 				expectedData: [
-					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2 id="Tudnivalók"> Tudnivalók </h2>' ).toArray() },
+					{ type: 'mwHeading', attributes: { level: 2 }, internal: { changesSinceLoad: 0, metaItems: [] }, originalDomElements: $( '<h2 id="Tudnivalók"> Tudnivalók </h2>' ).toArray() },
 					'T', 'u', 'd', 'n', 'i', 'v', 'a', 'l', 'ó', 'k',
 					{ type: '/mwHeading' },
 					{ type: 'internalList' },
