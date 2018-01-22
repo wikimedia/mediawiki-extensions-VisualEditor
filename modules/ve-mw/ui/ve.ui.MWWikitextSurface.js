@@ -16,6 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
+	var surface = this;
+
 	// Parent constructor
 	ve.ui.MWWikitextSurface.super.apply( this, arguments );
 
@@ -27,6 +29,46 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	this.$element.addClass( 've-ui-mwWikitextSurface' );
 	this.getView().$element.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 	this.$placeholder.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
+	this.$textbox = $( '#wpTextbox1' );
+
+	if ( !this.$textbox.length ) {
+		this.$textbox = $( '<textarea>' )
+			.attr( 'id', 'wpTextbox1' )
+			.addClass( 've-dummyTextbox oo-ui-element-hidden' );
+		// Append a dummy textbox to the surface, so it gets destroyed with it
+		this.$element.append( this.$textbox );
+	}
+
+	// Backwards support for the textSelection API
+	this.$textbox.textSelection( 'register', {
+		getContents: function () {
+			return surface.getDom();
+		},
+		setContents: function ( content ) {
+			surface.getModel().getLinearFragment( new ve.Range( 0 ), true ).expandLinearSelection( 'root' ).insertContent( content );
+		},
+		getSelection: function () {
+			var range = surface.getModel().getSelection().getCoveringRange();
+			if ( !range ) {
+				return '';
+			}
+			return surface.getModel().getDocument().data.getSourceText( range );
+		},
+		setSelection: function ( options ) {
+			surface.getModel().setLinearSelection(
+				surface.getModel().getRangeFromSourceOffsets( options.start, options.end )
+			);
+		},
+		getCaretPosition: function () {
+			// TODO
+		},
+		encapsulateSelection: function () {
+			// TODO
+		},
+		scrollToCaretPosition: function () {
+			surface.scrollCursorIntoView();
+		}
+	} );
 };
 
 /* Inheritance */
@@ -47,4 +89,13 @@ ve.ui.MWWikitextSurface.prototype.createModel = function ( doc ) {
  */
 ve.ui.MWWikitextSurface.prototype.createView = function ( model ) {
 	return new ve.ce.MWWikitextSurface( model, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWWikitextSurface.prototype.destroy = function () {
+	this.$textbox.textSelection( 'unregister' );
+	// Parent method
+	return ve.ui.MWWikitextSurface.super.prototype.destroy.apply( this, arguments );
 };
