@@ -139,7 +139,8 @@
 
 		// Resize the textarea to fit content. We could do this more often (e.g. on change)
 		// but hopefully this temporary textarea won't be visible for too long.
-		tempWikitextEditor.adjustSize().focus();
+		// Support: Firefox =< 52
+		tempWikitextEditor.adjustSize().moveCursorToStart();
 		ve.track( 'mwedit.ready', { mode: 'source' } );
 	}
 

@@ -34,9 +34,18 @@ mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget(
 		} )
 		.val( config.value )
 		.on( 'input', config.onChange );
+};
 
+/**
+ * Focus the input and move the cursor to the start.
+ *
+ * @chainable
+ */
+mw.libs.ve.MWTempWikitextEditorWidget.prototype.moveCursorToStart = function () {
 	// Move cursor to start
 	this.$element[ 0 ].setSelectionRange( 0, 0 );
+	this.focus();
+	return this;
 };
 
 /**
