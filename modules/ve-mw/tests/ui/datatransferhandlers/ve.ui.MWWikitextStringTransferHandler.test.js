@@ -176,6 +176,21 @@ QUnit.test( 'convert', function ( assert ) {
 				]
 			},
 			{
+				msg: 'Headings, parsoid fallback ids don\'t interfere with whitespace stripping',
+				pasteString: '== Tudnivalók ==',
+				pasteType: 'text/plain',
+				parsoidResponse: '<h2 id="Tudnivalók"><span id="Tudnival.C3.B3k" typeof="mw:FallbackId"></span> Tudnivalók </h2>',
+				annotations: [],
+				assertDom: true,
+				expectedData: [
+					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2 id="Tudnivalók"> Tudnivalók </h2>' ).toArray() },
+					'T', 'u', 'd', 'n', 'i', 'v', 'a', 'l', 'ó', 'k',
+					{ type: '/mwHeading' },
+					{ type: 'internalList' },
+					{ type: '/internalList' }
+				]
+			},
+			{
 				msg: 'Magic link (RFC)',
 				pasteString: 'RFC 1234',
 				pasteType: 'text/plain',

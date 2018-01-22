@@ -128,6 +128,9 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 			}
 		}
 
+		// Strip legacy IDs, for example in section headings
+		ve.stripParsoidFallbackIds( htmlDoc.body );
+
 		// Pass an empty object for the second argument (importRules) so that clipboard mode is used
 		// TODO: Fix that API
 		doc = handler.surface.getModel().getDocument().newFromHtml( htmlDoc, {} );
