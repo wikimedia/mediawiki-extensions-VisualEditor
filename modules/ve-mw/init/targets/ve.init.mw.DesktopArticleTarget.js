@@ -462,6 +462,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
  * Edit mode has finished activating
  */
 ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
+	var surfaceModel, range;
 	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
 	if ( !this.editingTabDialog ) {
 		if ( this.sectionTitle ) {
@@ -472,6 +473,12 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 			// 'focus' scrolled the screen down.
 			// Support: Firefox
 			this.getSurface().getView().focus();
+		}
+		// Transfer and initial source range to the surface (e.g. from tempWikitextEditor)
+		if ( this.initialSourceRange && this.getSurface().getMode() === 'source' ) {
+			surfaceModel = ve.init.target.getSurface().getModel();
+			range = surfaceModel.getRangeFromSourceOffsets( this.initialSourceRange.from, this.initialSourceRange.to );
+			surfaceModel.setLinearSelection( range );
 		}
 	}
 };

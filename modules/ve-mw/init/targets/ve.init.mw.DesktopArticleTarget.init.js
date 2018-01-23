@@ -21,7 +21,7 @@
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
 		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, enabledForUser, initialWikitext, oldId,
-		isLoading, tempWikitextEditor, $toolbarPlaceholder,
+		isLoading, tempWikitextEditor, tempWikitextEditorData, $toolbarPlaceholder,
 		editModes = {
 			edit: 'visual'
 		},
@@ -101,24 +101,20 @@
 			init.$loading.detach();
 		}
 		if ( tempWikitextEditor ) {
-			// eslint-disable-next-line no-use-before-define
-			ve.init.target.toolbarSetupDeferred.then( teardownTempWikitextEditor );
+			if ( ve.init && ve.init.target ) {
+				// eslint-disable-next-line no-use-before-define
+				ve.init.target.toolbarSetupDeferred.then( teardownTempWikitextEditor );
+			} else {
+				// Target didn't get created. Teardown editor anyway.
+				// eslint-disable-next-line no-use-before-define
+				teardownTempWikitextEditor();
+			}
 		}
 	}
 
 	function setupTempWikitextEditor( data ) {
-		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( {
-			value: data.content,
-			onChange: function () {
-				// Write changes back to response data object,
-				// which will be used to construct the surface.
-				data.content = tempWikitextEditor.getValue();
-				// TODO: Consider writing changes using a
-				// transaction so they can be undone.
-				// For now, just mark surface as pre-modified
-				data.fromEditedState = true;
-			}
-		} );
+		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( { value: data.content } );
+		tempWikitextEditorData = data;
 
 		// Create an equal-height placeholder for the toolbar to avoid vertical jump
 		// when the real toolbar is ready.
@@ -143,18 +139,30 @@
 		ve.track( 'mwedit.ready', { mode: 'source' } );
 	}
 
+	function syncTempWikitextEditor() {
+		var newContent = tempWikitextEditor.getValue();
+
+		if ( newContent !== tempWikitextEditorData.content ) {
+			// Write changes back to response data object,
+			// which will be used to construct the surface.
+			tempWikitextEditorData.content = newContent;
+			// TODO: Consider writing changes using a
+			// transaction so they can be undone.
+			// For now, just mark surface as pre-modified
+			tempWikitextEditorData.fromEditedState = true;
+		}
+
+		// Store the last-seen selection and pass to the target
+		tempWikitextEditorData.initialSourceRange = tempWikitextEditor.getRange();
+
+		tempWikitextEditor.$element.prop( 'readonly', true );
+	}
+
 	function teardownTempWikitextEditor() {
-		var range,
-			nativeRange = tempWikitextEditor.getRange(),
-			surfaceModel = ve.init.target.getSurface().getModel();
-
-		// Transfer the last-seen selection to the VE surface
-		range = surfaceModel.getRangeFromSourceOffsets( nativeRange.from, nativeRange.to );
-		surfaceModel.setLinearSelection( range );
-
 		// Destroy widget and placeholder
 		tempWikitextEditor.$element.remove();
 		tempWikitextEditor = null;
+		tempWikitextEditorData = null;
 		$toolbarPlaceholder.remove();
 		$toolbarPlaceholder = null;
 
@@ -348,7 +356,8 @@
 					} );
 				} )
 				.done( function ( response ) {
-					if ( mode === 'source' ) {
+					// Check target promise hasn't already failed (isLoading=false)
+					if ( mode === 'source' && isLoading ) {
 						setupTempWikitextEditor( response.visualeditor );
 					}
 				} )
@@ -372,6 +381,9 @@
 				init.$loading.detach();
 				// If target was already loaded, ensure the mode is correct
 				target.setDefaultMode( mode );
+				if ( tempWikitextEditor ) {
+					syncTempWikitextEditor();
+				}
 				activatePromise = target.activate( dataPromise );
 				$( '#content' ).prepend( init.$loading );
 				return activatePromise;
