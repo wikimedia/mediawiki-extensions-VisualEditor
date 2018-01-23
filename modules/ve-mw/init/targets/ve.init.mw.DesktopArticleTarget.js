@@ -256,7 +256,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		} else {
 			setTimeout( function () {
 				toolbar.$element
-					.css( 'height', toolbar.$bar.outerHeight() )
+					// Avoid $bar[ 0 ].offsetHeight as this returns null in IE9 when $bar is position:fixed
+					.css( 'height', toolbar.$bar[ 0 ].clientHeight )
 					.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
 				setTimeout( function () {
 					// Clear to allow growth during use and when resizing window
@@ -1151,7 +1152,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 		return deferred.resolve().promise();
 	}
 
-	this.toolbar.$element.css( 'height', this.toolbar.$bar.outerHeight() );
+	// Avoid $bar[ 0 ].offsetHeight as this returns null in IE9 when $bar is position:fixed
+	this.toolbar.$element.css( 'height', this.toolbar.$bar[ 0 ].clientHeight );
 	setTimeout( function () {
 		target.toolbar.$element
 			.css( 'height', '0' )
