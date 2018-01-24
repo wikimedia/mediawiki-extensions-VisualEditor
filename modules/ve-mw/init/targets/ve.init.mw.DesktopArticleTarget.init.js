@@ -207,8 +207,7 @@
 					mw.libs.ve.targetLoader.addPlugin( function () {
 						// Run VisualEditorPreloadModules, but if they fail, we still want to continue
 						// loading, so convert failure to success
-						return mw.loader.using( conf.preloadModules ).then(
-							null,
+						return mw.loader.using( conf.preloadModules ).catch(
 							function () {
 								return $.Deferred().resolve();
 							}
