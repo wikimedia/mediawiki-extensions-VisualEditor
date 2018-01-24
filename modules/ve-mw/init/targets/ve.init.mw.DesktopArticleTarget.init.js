@@ -137,6 +137,8 @@
 		// but hopefully this temporary textarea won't be visible for too long.
 		tempWikitextEditor.adjustSize().moveCursorToStart();
 		ve.track( 'mwedit.ready', { mode: 'source' } );
+		mw.libs.ve.tempWikitextEditor = tempWikitextEditor;
+		mw.hook( 've.wikitextInteractive' ).fire();
 	}
 
 	function syncTempWikitextEditor() {
@@ -161,7 +163,7 @@
 	function teardownTempWikitextEditor() {
 		// Destroy widget and placeholder
 		tempWikitextEditor.$element.remove();
-		tempWikitextEditor = null;
+		mw.libs.ve.tempWikitextEditor = tempWikitextEditor = null;
 		tempWikitextEditorData = null;
 		$toolbarPlaceholder.remove();
 		$toolbarPlaceholder = null;
@@ -391,6 +393,8 @@
 				if ( mode === 'visual' ) {
 					// 'mwedit.ready' has already been fired for source mode in setupTempWikitextEditor
 					ve.track( 'mwedit.ready', { mode: mode } );
+				} else if ( !tempWikitextEditor ) {
+					mw.hook( 've.wikitextInteractive' ).fire();
 				}
 				ve.track( 'mwedit.loaded', { mode: mode } );
 			} )
