@@ -32,8 +32,7 @@ mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget(
 			lang: lang,
 			dir: dir
 		} )
-		.val( config.value )
-		.on( 'input', config.onChange );
+		.val( config.value );
 };
 
 /**

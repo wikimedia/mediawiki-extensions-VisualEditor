@@ -312,6 +312,8 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		mw.messages.set( data.checkboxesMessages );
 		this.$templatesUsed = $( data.templates );
 
+		this.initialSourceRange = data.initialSourceRange;
+
 		aboutDoc = this.doc.documentElement.getAttribute( 'about' );
 		if ( aboutDoc ) {
 			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
@@ -1201,6 +1203,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.baseTimeStamp = null;
 	this.startTimeStamp = null;
 	this.checkboxes = null;
+	this.initialSourceRange = null;
 	this.doc = null;
 	this.originalDmDocPromise = null;
 	this.originalHtml = null;
