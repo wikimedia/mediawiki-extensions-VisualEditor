@@ -78,11 +78,16 @@ class VisualEditorHooks {
 	) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$output = RequestContext::getMain()->getOutput();
+		$user = RequestContext::getMain()->getUser();
 
-		if (
-			!$config->get( 'VisualEditorEnableDiffPage' ) &&
-			$output->getRequest()->getVal( 'visualdiff' ) === null
-		) {
+		if ( !(
+			// Enabled globally on wiki
+			$config->get( 'VisualEditorEnableDiffPage' ) ||
+			// Enabled as user beta feature
+			$user->getOption( 'visualeditor-visualdiffpage' ) ||
+			// Enabled by query param
+			$output->getRequest()->getVal( 'visualdiff' ) !== null
+		) ) {
 			return;
 		}
 
@@ -716,6 +721,24 @@ class VisualEditorHooks {
 				],
 				'info-message' => 'visualeditor-preference-newwikitexteditor-info-link',
 				'discussion-message' => 'visualeditor-preference-newwikitexteditor-discussion-link',
+				'requirements' => [
+					'javascript' => true,
+					'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+				]
+			];
+		}
+
+		if ( $veConfig->get( 'VisualEditorEnableDiffPageBetaFeature' ) ) {
+			$preferences['visualeditor-visualdiffpage'] = [
+				'version' => '1.0',
+				'label-message' => 'visualeditor-preference-visualdiffpage-label',
+				'desc-message' => 'visualeditor-preference-visualdiffpage-description',
+				'screenshot' => [
+					'ltr' => "$iconpath/betafeatures-icon-VisualDiffPage-ltr.svg",
+					'rtl' => "$iconpath/betafeatures-icon-VisualDiffPage-rtl.svg",
+				],
+				'info-message' => 'visualeditor-preference-visualdiffpage-info-link',
+				'discussion-message' => 'visualeditor-preference-visualdiffpage-discussion-link',
 				'requirements' => [
 					'javascript' => true,
 					'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
