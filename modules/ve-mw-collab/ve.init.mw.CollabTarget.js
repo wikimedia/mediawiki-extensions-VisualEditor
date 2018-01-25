@@ -30,6 +30,10 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	// Parent constructor
 	ve.init.mw.CollabTarget.super.call( this, config );
 
+	// HACK: Disable history commands until supported (T185706)
+	ve.ui.commandRegistry.unregister( 'undo' );
+	ve.ui.commandRegistry.unregister( 'redo' );
+
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
 	this.$editableContent = $( '#mw-content-text' );
 
