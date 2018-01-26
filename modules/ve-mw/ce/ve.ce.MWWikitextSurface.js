@@ -30,7 +30,7 @@ OO.inheritClass( ve.ce.MWWikitextSurface, ve.ce.Surface );
  * @inheritdoc
  */
 ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
-	var originalSelection, scrollTop,
+	var originalSelection, scrollTop, slice, clipboardKey,
 		view = this,
 		clipboardData = e.originalEvent.clipboardData,
 		text = this.getModel().getFragment().getText( true ).replace( /\n\n/g, '\n' );
@@ -43,6 +43,16 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		// Disable the default event so we can override the data
 		e.preventDefault();
 		clipboardData.setData( 'text/plain', text );
+		// We're not going to set HTML, but for browsers that support custom data, set a clipboard key
+		if ( ve.isClipboardDataFormatsSupported( e, true ) ) {
+			slice = this.model.documentModel.shallowCloneFromSelection( this.getModel().getSelection() );
+			this.clipboardIndex++;
+			clipboardKey = this.clipboardId + '-' + this.clipboardIndex;
+			this.clipboard = { slice: slice, hash: null };
+			// Clone the elements in the slice
+			slice.data.cloneElements( true );
+			clipboardData.setData( 'text/xcustom', clipboardKey );
+		}
 	} else {
 		originalSelection = new ve.SelectionState( this.nativeSelection );
 
