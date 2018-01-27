@@ -59,8 +59,14 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 				surface.getModel().getRangeFromSourceOffsets( options.start, options.end )
 			);
 		},
-		getCaretPosition: function () {
-			// TODO
+		getCaretPosition: function ( options ) {
+			var range = surface.getModel().getSelection().getCoveringRange(),
+				surfaceModel = surface.getModel(),
+				caretPos = surfaceModel.getSourceOffsetFromOffset( range.start );
+
+			return options.startAndEnd ?
+				[ caretPos, surfaceModel.getSourceOffsetFromOffset( range.end ) ] :
+				caretPos;
 		},
 		encapsulateSelection: function () {
 			// TODO
