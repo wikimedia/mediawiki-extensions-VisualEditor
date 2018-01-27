@@ -749,9 +749,8 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			// Config values used here:
 			// * visualeditor-diffmode-visual
 			// * visualeditor-diffmode-source
-			// TODO: Make 'visual' the default for visual mode (T178248)
 			this.reviewModeButtonSelect.selectItemByData(
-				ve.userConfig( 'visualeditor-diffmode-' + surfaceMode ) || 'source'
+				ve.userConfig( 'visualeditor-diffmode-' + surfaceMode ) || surfaceMode
 			);
 
 			// Old messages should not persist
