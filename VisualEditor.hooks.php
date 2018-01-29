@@ -976,7 +976,6 @@ class VisualEditorHooks {
 				'lib/ve/tests/dm/selections/ve.dm.TableSelection.test.js',
 				'lib/ve/tests/dm/lineardata/ve.dm.FlatLinearData.test.js',
 				'lib/ve/tests/dm/lineardata/ve.dm.ElementLinearData.test.js',
-				'lib/ve/tests/dm/lineardata/ve.dm.MetaLinearData.test.js',
 				'modules/ve-mw/tests/dm/ve.dm.mwExample.js',
 				'modules/ve-mw/tests/dm/ve.dm.Converter.test.js',
 				'modules/ve-mw/tests/dm/ve.dm.MWImageModel.test.js',
