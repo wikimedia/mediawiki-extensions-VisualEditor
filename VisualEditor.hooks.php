@@ -68,10 +68,6 @@ class VisualEditorHooks {
 		$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
 		$output->addJsConfigVars( 'wgVisualEditorUnsupportedEditParams', self::$unsupportedEditParams );
 
-		$output->addJsConfigVars(
-			'wgEditSubmitButtonLabelPublish',
-			$veConfig->get( 'EditSubmitButtonLabelPublish' )
-		);
 		return true;
 	}
 
