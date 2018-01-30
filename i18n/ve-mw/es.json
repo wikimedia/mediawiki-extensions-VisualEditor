@@ -30,7 +30,8 @@
 			"Lemondoge",
 			"Dgstranz",
 			"Luzcaru",
-			"Javiersanp"
+			"Javiersanp",
+			"MarcoAurelio"
 		]
 	},
 	"apihelp-visualeditor-description": "Devuelve HTML5 para una página desde el servicio Parsoid.",
@@ -393,7 +394,7 @@
 	"visualeditor-savedialog-label-visual-diff-report": "Informar de visualización incorrecta de este cambio",
 	"visualeditor-savedialog-label-warning": "Advertencia",
 	"visualeditor-savedialog-review-nosummary": "Sin resumen de edición",
-	"visualeditor-savedialog-review-visual": "Visual (beta)",
+	"visualeditor-savedialog-review-visual": "Visual",
 	"visualeditor-savedialog-review-wikitext": "Wikitexto",
 	"visualeditor-savedialog-title-conflict": "Conflicto",
 	"visualeditor-savedialog-title-preview": "Vista previa de los cambios",
