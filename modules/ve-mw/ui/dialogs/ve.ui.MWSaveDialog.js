@@ -189,9 +189,18 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 	var body, contents,
-		categories = [];
+		categories = [],
+		modules = [];
 
 	if ( docOrMsg instanceof HTMLDocument ) {
+		// Extract required modules for stylesheet tags (avoids re-loading styles)
+		Array.prototype.forEach.call( docOrMsg.head.querySelectorAll( 'link[rel=stylesheet]' ), function ( link ) {
+			var uri = new mw.Uri( link.href );
+			if ( uri.query.modules ) {
+				modules = modules.concat( ve.expandModuleNames( uri.query.modules ) );
+			}
+		} );
+		mw.loader.using( modules );
 		body = docOrMsg.body;
 		// Take a snapshot of all categories
 		Array.prototype.forEach.call( body.querySelectorAll( 'link[rel="mw:PageProp/Category"]' ), function ( element ) {

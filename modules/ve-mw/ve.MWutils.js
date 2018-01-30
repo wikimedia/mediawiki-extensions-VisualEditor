@@ -56,3 +56,42 @@ ve.stripParsoidFallbackIds = function ( element ) {
 		legacySpan.parentNode.removeChild( legacySpan );
 	} );
 };
+
+/**
+ * Expand a string of the form jquery.foo,bar|jquery.ui.baz,quux to
+ * an array of module names like [ 'jquery.foo', 'jquery.bar',
+ * 'jquery.ui.baz', 'jquery.ui.quux' ]
+ *
+ * Implementation of ResourceLoaderContext::expandModuleNames
+ * TODO: Consider upstreaming this to MW core.
+ *
+ * @param {string} moduleNames Packed module name list
+ * @return {string[]} Array of module names
+ */
+ve.expandModuleNames = function ( moduleNames ) {
+	var modules = [];
+
+	moduleNames.split( '|' ).forEach( function ( group ) {
+		var matches, prefix, suffixes;
+		if ( group.indexOf( ',' ) === -1 ) {
+			// This is not a set of modules in foo.bar,baz notation
+			// but a single module
+			modules.push( group );
+		} else {
+			// This is a set of modules in foo.bar,baz notation
+			matches = group.match( /(.*)\.([^.]*)/ );
+			if ( !matches ) {
+				// Prefixless modules, i.e. without dots
+				modules = modules.concat( group.split( ',' ) );
+			} else {
+				// We have a prefix and a bunch of suffixes
+				prefix = matches[ 1 ];
+				suffixes = matches[ 2 ].split( ',' ); // [ 'bar', 'baz' ]
+				suffixes.forEach( function ( suffix ) {
+					modules.push( prefix + '.' + suffix );
+				} );
+			}
+		}
+	} );
+	return modules;
+};
