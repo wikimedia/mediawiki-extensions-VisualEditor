@@ -5,10 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwNoParametersResultWidget.oo-ui-widget-disabled {
-	opacity: 0.5;
-}
-
 .ve-ui-mwNoParametersResultWidget-label {
 	text-align: center;
 	white-space: nowrap;
