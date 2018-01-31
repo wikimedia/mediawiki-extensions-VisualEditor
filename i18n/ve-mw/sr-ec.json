@@ -211,7 +211,7 @@
 	"visualeditor-linknodeinspector-add-label": "Додај ознаку",
 	"visualeditor-linknodeinspector-title": "Обична веза",
 	"visualeditor-loaderror-message": "Грешка приликом учитавања података са сервера: $1.",
-	"visualeditor-loaderror-title": "Учитавање уређивача није успело",
+	"visualeditor-loaderror-title": "Нисам могао да учитам уређивач",
 	"visualeditor-loadwarning": "Грешка приликом учитавања података са сервера: $1. Да ли желите да покушате поново?",
 	"visualeditor-loadwarning-noconnect": "Не могу да се повежем са сервером",
 	"visualeditor-loadwarning-token": "Грешка приликом учитавања жетона са сервера: $1. Да ли желите да покушате поново?",

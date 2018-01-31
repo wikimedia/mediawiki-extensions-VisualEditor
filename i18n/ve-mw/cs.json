@@ -21,7 +21,8 @@
 			"Walter Klosse",
 			"Marek Pavlica",
 			"Teslaton",
-			"Martin Urbanec"
+			"Martin Urbanec",
+			"Ilimanaq29"
 		]
 	},
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
@@ -343,7 +344,7 @@
 	"visualeditor-savedialog-label-save-short": "Uložit",
 	"visualeditor-savedialog-label-warning": "Upozornění",
 	"visualeditor-savedialog-review-nosummary": "Bez shrnutí editace",
-	"visualeditor-savedialog-review-visual": "Vizuální (beta)",
+	"visualeditor-savedialog-review-visual": "Vizuální",
 	"visualeditor-savedialog-review-wikitext": "Wikitext",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
 	"visualeditor-savedialog-title-preview": "Zobrazit náhled vašich změn",
