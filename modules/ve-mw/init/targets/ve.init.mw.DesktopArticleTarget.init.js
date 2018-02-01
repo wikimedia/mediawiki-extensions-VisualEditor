@@ -113,7 +113,13 @@
 	}
 
 	function setupTempWikitextEditor( data ) {
-		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( { value: data.content } );
+		var content = data.content;
+		// Add trailing linebreak to non-empty wikitext documents for consistency
+		// with old editor and usability. Will be stripped on save. T156609
+		if ( content ) {
+			content += '\n';
+		}
+		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( { value: content } );
 		tempWikitextEditorData = data;
 
 		// Create an equal-height placeholder for the toolbar to avoid vertical jump
@@ -143,6 +149,11 @@
 
 	function syncTempWikitextEditor() {
 		var newContent = tempWikitextEditor.getValue();
+
+		// Strip trailing linebreak. Will get re-added in ArticleTarget#parseDocument.
+		if ( newContent.slice( -1 ) === '\n' ) {
+			newContent = newContent.slice( 0, -1 );
+		}
 
 		if ( newContent !== tempWikitextEditorData.content ) {
 			// Write changes back to response data object,
