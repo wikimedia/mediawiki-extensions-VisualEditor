@@ -4,7 +4,8 @@
 			"Sahran",
 			"Tel'et",
 			"Tifinaghes",
-			"Uzdil"
+			"Uzdil",
+			"چۈشكۈن"
 		]
 	},
 	"tooltip-ca-ve-edit": "بۇ بەتنى تەھرىرلە",
@@ -56,5 +57,6 @@
 	"visualeditor-mwlanguagevariantcontextitem-title-name": "تىل نامى",
 	"visualeditor-mwlanguagevariantcontextitem-title-unknown": "تىل ۋارىيانتى",
 	"visualeditor-savedialog-label-create": "بەت قۇر",
+	"visualeditor-savedialog-review-visual": "كۆرۈنىدىغان قىلىش",
 	"visualeditor-savedialog-title-save": "ئۆزگەرتىشىڭىزنى ساقلاڭ"
 }

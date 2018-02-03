@@ -36,7 +36,8 @@
 			"Hex",
 			"Mainframe98",
 			"Huhbakker",
-			"Festina90"
+			"Festina90",
+			"Dinosaur918"
 		]
 	},
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
@@ -283,6 +284,7 @@
 	"visualeditor-mweditmode-tooltip": "Van tekstverwerker omschakelen",
 	"visualeditor-mweditmodesource-progress": "Overschakelen naar broncodemodus...",
 	"visualeditor-mweditmodesource-title": "Naar broncodemodus schakelen?",
+	"visualeditor-mweditmodesource-tool-current": "Broncode bewerken",
 	"visualeditor-mweditmodesource-tool-unavailable": "Bron bewerken is niet beschikbaar hier",
 	"visualeditor-mweditmodesource-warning": "U schakelt over naar broncodebewerking.\nWilt u doorgaan?",
 	"visualeditor-mweditmodesource-warning-cancel": "Annuleren",
