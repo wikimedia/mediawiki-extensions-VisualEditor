@@ -313,11 +313,9 @@
 				"tooltip-ca-editsource",
 				"tooltip-ca-ve-edit",
 				"visualeditor-ca-editsource-section"
-			],
-			"position": "top"
+			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
-			"position": "top",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.css"
 		},
 		"ext.visualEditor.targetLoader": {
