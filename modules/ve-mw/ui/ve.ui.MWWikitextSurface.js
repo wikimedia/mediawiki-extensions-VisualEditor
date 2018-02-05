@@ -70,9 +70,11 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 				[ caretPos, surfaceModel.getSourceOffsetFromOffset( range.end ) ] :
 				caretPos;
 		},
-		encapsulateSelection: function () {
-			// TODO
+		replaceSelection: function ( value ) {
+			surface.getModel().getFragment().insertContent( value );
+			return this;
 		},
+		// encapsulateSelection works automatically when we implement the overrides above
 		scrollToCaretPosition: function () {
 			surface.scrollCursorIntoView();
 			return this;
