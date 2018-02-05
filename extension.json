@@ -322,6 +322,7 @@
 			"scripts": "modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js",
 			"dependencies": [
 				"ext.visualEditor.track",
+				"jquery.byteLength",
 				"jquery.textSelection",
 				"mediawiki.api",
 				"mediawiki.Uri",
@@ -550,6 +551,8 @@
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css"
 			],
 			"dependencies": [
+				"jquery.byteLength",
+				"jquery.byteLimit",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
@@ -1316,7 +1319,6 @@
 				"mediawiki.jqueryMsg",
 				"mediawiki.storage",
 				"jquery.cookie",
-				"jquery.byteLimit",
 				"mediawiki.notify",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.widgets",
