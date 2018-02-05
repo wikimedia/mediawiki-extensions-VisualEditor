@@ -1096,7 +1096,7 @@ class VisualEditorHooks {
 				'ext.visualEditor.desktopArticleTarget',
 				'ext.visualEditor.rebase'
 			],
-			'localBasePath' => __DIR__,
+			'localBasePath' => __DIR__ . '/..',
 			'remoteExtPath' => 'VisualEditor',
 		];
 
