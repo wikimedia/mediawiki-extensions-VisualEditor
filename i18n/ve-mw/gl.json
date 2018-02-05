@@ -25,6 +25,7 @@
 	"apihelp-visualeditor-param-oldid": "O número de revisión a usar (por defecto, a última revisión).",
 	"apihelp-visualeditor-param-paction": "Acción a realizar.",
 	"apihelp-visualeditor-param-page": "A páxina na que realizar as accións.",
+	"apihelp-visualeditor-param-preload": "A páxina da que se collerá o contido se a páxina consultada aínda non ten contido.",
 	"apihelp-visualeditor-param-preloadparams": "Parámetros a substituír na páxina precargada, se están presentes.",
 	"apihelp-visualeditor-param-pst": "O gardado previo transforma o texto wiki antes de envialo ao Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Sección na cal actuar.",
