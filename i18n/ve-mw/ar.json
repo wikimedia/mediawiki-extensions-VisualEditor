@@ -386,6 +386,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "أظهر المحرر المرئي كلما أمكن",
 	"visualeditor-preference-tabs-prefer-wt": "أعطني محرر المصدر دائمًا",
 	"visualeditor-preference-tabs-remember-last": "تذكر آخر محرر عدلت به",
+	"visualeditor-preference-visualdiffpage-description": "تفعيل النمط المرئي الجديد على صفحات فروقات المراجعات.",
+	"visualeditor-preference-visualdiffpage-label": "فروقات مرئية",
 	"visualeditor-recreate": "لقد تم حذف هذه الصفحة بعد أن بدأت بتحريرها. اضغط على «$1» لإعادة إنشائها.",
 	"visualeditor-redirect-description": "تحويل إلى $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "يمكنك الضغط على $1 لحفظ تعديلك.",

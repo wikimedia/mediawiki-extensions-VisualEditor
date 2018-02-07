@@ -14,6 +14,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualus redagavimas: Tikrinti]]",
 	"tag-visualeditor-needcheck-description": "Redaguota su [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualiu redaktoriumi]], kai sistema aptiko galimai nenorėtų vikiteksto pakeitimų.",
 	"tag-visualeditor-wikitext": "2017 kodo redagavimas",
+	"tag-visualeditor-wikitext-description": "Keitimas atliktas su 2017 vikiteksto redaktoriumi",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualus redaktorius: Įjungtas]]",
 	"tag-visualeditor-switched-description": "Naudotojas pradėjo redaguoti su vizualiu redaktoriumi, po to persijungė į vikiteksto redaktorių.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Atsiliepimai",

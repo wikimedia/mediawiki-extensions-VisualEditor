@@ -386,6 +386,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Usar sempre que possível o editor visual",
 	"visualeditor-preference-tabs-prefer-wt": "Usar sempre o editor de código-fonte",
 	"visualeditor-preference-tabs-remember-last": "Relembrar o meu último editor",
+	"visualeditor-preference-visualdiffpage-description": "Ativa o novo modo visual na revisão das diferenças entre páginas.",
+	"visualeditor-preference-visualdiffpage-label": "Diferenças visuais",
 	"visualeditor-recreate": "A página que começou a editar foi eliminada entretanto. Pressione \"$1\" para recriá-la.",
 	"visualeditor-redirect-description": "Redirecionar para $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Pode premir $1 para gravar a sua edição.",
