@@ -37,6 +37,9 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 			.addClass( 've-dummyTextbox oo-ui-element-hidden' );
 		// Append a dummy textbox to the surface, so it gets destroyed with it
 		this.$element.append( this.$textbox );
+	} else {
+		// Existing textbox may have an API registered
+		this.$textbox.textSelection( 'unregister' );
 	}
 
 	// Backwards support for the textSelection API
