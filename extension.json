@@ -2208,12 +2208,12 @@
 		"CollabPad": "SpecialCollabPad"
 	},
 	"AutoloadClasses": {
-		"ApiVisualEditor": "ApiVisualEditor.php",
-		"ApiVisualEditorEdit": "ApiVisualEditorEdit.php",
-		"SpecialCollabPad": "SpecialCollabPad.php",
-		"VisualEditorHooks": "VisualEditor.hooks.php",
-		"VisualEditorDataModule": "VisualEditorDataModule.php",
-		"VisualEditorDesktopArticleTargetInitModule": "VisualEditorDesktopArticleTargetInitModule.php"
+		"ApiVisualEditor": "includes/ApiVisualEditor.php",
+		"ApiVisualEditorEdit": "includes/ApiVisualEditorEdit.php",
+		"SpecialCollabPad": "includes/SpecialCollabPad.php",
+		"VisualEditorHooks": "includes/VisualEditorHooks.php",
+		"VisualEditorDataModule": "includes/VisualEditorDataModule.php",
+		"VisualEditorDesktopArticleTargetInitModule": "includes/VisualEditorDesktopArticleTargetInitModule.php"
 	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
