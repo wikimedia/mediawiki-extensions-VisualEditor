@@ -49,6 +49,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 		},
 		setContents: function ( content ) {
 			surface.getModel().getLinearFragment( new ve.Range( 0 ), true ).expandLinearSelection( 'root' ).insertContent( content );
+			return this;
 		},
 		getSelection: function () {
 			var range = surface.getModel().getSelection().getCoveringRange();
@@ -61,6 +62,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 			surface.getModel().setLinearSelection(
 				surface.getModel().getRangeFromSourceOffsets( options.start, options.end )
 			);
+			return this;
 		},
 		getCaretPosition: function ( options ) {
 			var range = surface.getModel().getSelection().getCoveringRange(),
@@ -76,6 +78,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 		},
 		scrollToCaretPosition: function () {
 			surface.scrollCursorIntoView();
+			return this;
 		}
 	} );
 };
