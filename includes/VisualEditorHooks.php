@@ -905,8 +905,8 @@ class VisualEditorHooks {
 			$resourceLoader->register( [
 				'jquery.uls.data' => $veResourceTemplate + [
 					'scripts' => [
-						'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
-						'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
+						'../lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
+						'../lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
 					],
 					'targets' => [ 'desktop', 'mobile' ],
 			] ] );
