@@ -167,7 +167,7 @@ class ApiVisualEditor extends ApiBase {
 
 			if ( $parse ) {
 				// We need to turn this transformed wikitext into parsoid html
-				$content = $this->parseWikitextFragment( $contextTitle, $content );
+				$content = $this->parseWikitextFragment( $contextTitle, $content, true );
 			}
 		}
 		return $content;
