@@ -314,6 +314,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "Sempre fes servir l’editor visual si és possible",
 	"visualeditor-preference-tabs-prefer-wt": "Fes servir sempre l’editor de codi",
 	"visualeditor-preference-tabs-remember-last": "Recorda el meu darrer editor",
+	"visualeditor-preference-visualdiffpage-label": "Diferències visuals",
 	"visualeditor-recreate": "La pàgina ha estat suprimida des de que vau començar a editar. Premeu \"$1\" per recrear-la.",
 	"visualeditor-redirect-description": "redirigeix a $1",
 	"visualeditor-savedialog-error-badtoken": "No hem pogut processar la vostra edició perquè la sessió ha caducat.",

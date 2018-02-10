@@ -14,7 +14,8 @@
 			"Ribewiki",
 			"Peter Alberti",
 			"SimmeD",
-			"Kenn.jensen"
+			"Kenn.jensen",
+			"Jorn Ari"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -194,6 +195,7 @@
 	"visualeditor-preference-core-label": "Visuel redigering",
 	"visualeditor-preference-enable": "Aktiver visuel redigering. Det vil være tilgængelig i følgende {{PLURAL:$2|navnerum}}: $1",
 	"visualeditor-preference-tabs-multi-tab": "Vis mig begge redigeringsfaneblade",
+	"visualeditor-preference-visualdiffpage-label": "Visuelle forskelle",
 	"visualeditor-redirect-description": "Omdiriger til $1",
 	"visualeditor-savedialog-error-badtoken": "Vi kunne ikke behandle din redigering, fordi sessionen ikke længere er gyldig.",
 	"visualeditor-savedialog-identify-anon": "Vil du gemme siden som en anonym bruger i stedet? Din IP adresse vil blive registreret i denne sides versionshistorik.",
