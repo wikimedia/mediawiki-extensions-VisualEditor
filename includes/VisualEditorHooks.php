@@ -892,7 +892,7 @@ class VisualEditorHooks {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
 
 		$veResourceTemplate = [
-			'localBasePath' => __DIR__,
+			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
 		];
 
@@ -905,8 +905,8 @@ class VisualEditorHooks {
 			$resourceLoader->register( [
 				'jquery.uls.data' => $veResourceTemplate + [
 					'scripts' => [
-						'../lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
-						'../lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
+						'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
+						'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
 					],
 					'targets' => [ 'desktop', 'mobile' ],
 			] ] );
@@ -1096,7 +1096,7 @@ class VisualEditorHooks {
 				'ext.visualEditor.desktopArticleTarget',
 				'ext.visualEditor.rebase'
 			],
-			'localBasePath' => __DIR__ . '/..',
+			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
 		];
 
