@@ -121,9 +121,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	public static function tryDeflate( $content ) {
 		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
 			$deflated = base64_decode( substr( $content, 11 ) );
-			MediaWiki\suppressWarnings();
+			Wikimedia\suppressWarnings();
 			$inflated = gzinflate( $deflated );
-			MediaWiki\restoreWarnings();
+			Wikimedia\restoreWarnings();
 			if ( $deflated === $inflated || $inflated === false ) {
 				// Static equivalent of $this->dieWithError
 				throw ApiUsageException::newWithMessage(
