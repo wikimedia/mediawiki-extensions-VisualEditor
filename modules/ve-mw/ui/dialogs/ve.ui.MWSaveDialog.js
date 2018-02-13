@@ -200,6 +200,10 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				modules = modules.concat( ve.expandModuleNames( uri.query.modules ) );
 			}
 		} );
+		// Remove skin-specific modules (T187075)
+		modules = modules.filter( function ( module ) {
+			return module.indexOf( 'skins.' ) !== 0;
+		} );
 		mw.loader.using( modules );
 		body = docOrMsg.body;
 		// Take a snapshot of all categories
