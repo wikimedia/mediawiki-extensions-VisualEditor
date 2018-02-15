@@ -381,6 +381,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Ge mig alltid den visuella redigeraren om möjligt",
 	"visualeditor-preference-tabs-prefer-wt": "Ge mig alltid källtextredigeraren",
 	"visualeditor-preference-tabs-remember-last": "Kom ihåg min senaste redigerare",
+	"visualeditor-preference-visualdiffpage-description": "Aktivera det nya visuella läget på sidor med sidversionsskillnader.",
+	"visualeditor-preference-visualdiffpage-label": "Visuella skillnader",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",
 	"visualeditor-redirect-description": "Omdirigerar till $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Du kan trycka $1 för att spara din redigering.",

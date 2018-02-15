@@ -24,7 +24,8 @@
 			"Devwebtel",
 			"Jdforrester",
 			"The Polish",
-			"Doctore"
+			"Doctore",
+			"Anwar2"
 		]
 	},
 	"apihelp-visualeditor-description": "Zwraca kod HTML5 strony za pośrednictwem usługi Parsoid.",
@@ -347,6 +348,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "Zawsze uruchamiaj edytor wizualny, gdy to możliwe",
 	"visualeditor-preference-tabs-prefer-wt": "Zawsze uruchamiaj edytor kodu źródłowego",
 	"visualeditor-preference-tabs-remember-last": "Zapamiętaj ostatnio używany edytor",
+	"visualeditor-preference-visualdiffpage-label": "Różnice wizualne",
 	"visualeditor-recreate": "Strona została usunięta od czasu rozpoczęcia twojej edycji. Naciśnij „$1”, aby ją powtórnie utworzyć.",
 	"visualeditor-redirect-description": "Przekierowanie do $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Możesz nacisnąć $1, aby zapisać swoją edycję.",
