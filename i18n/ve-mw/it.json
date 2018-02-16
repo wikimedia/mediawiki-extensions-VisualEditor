@@ -32,7 +32,8 @@
 			"Einreiher",
 			"Saracrovetto",
 			"Samuele2002",
-			"Greis"
+			"Greis",
+			"Segaz3"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -341,6 +342,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Usa sempre l'editor visuale, se possibile",
 	"visualeditor-preference-tabs-prefer-wt": "Usa sempre l'editor sorgente",
 	"visualeditor-preference-tabs-remember-last": "Ricorda il mio ultimo editor",
+	"visualeditor-preference-visualdiffpage-description": "Abilita la nuova modalità visuale nella revisione delle pagine delle differenze.",
+	"visualeditor-preference-visualdiffpage-label": "Differenze visuali",
 	"visualeditor-recreate": "Questa pagina è stata eliminata dopo che hai iniziato a modificarla. Premi \"$1\" per ricrearla.",
 	"visualeditor-redirect-description": "Reindirizzamento a $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Puoi premere $1 per salvare la tua modifica.",

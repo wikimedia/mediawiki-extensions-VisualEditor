@@ -303,6 +303,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Само Визуелни уређивач (где год је могуће)",
 	"visualeditor-preference-tabs-prefer-wt": "Само уређивач викитекста",
 	"visualeditor-preference-tabs-remember-last": "Запамти мој последњи уређивач",
+	"visualeditor-preference-visualdiffpage-description": "Нови визуелни режим разлике измена страница.",
+	"visualeditor-preference-visualdiffpage-label": "Визуелне разлике",
 	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
 	"visualeditor-redirect-description": "Преусмерава на $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Можете притисните $1 да бисте сачували измену.",
