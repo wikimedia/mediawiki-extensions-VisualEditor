@@ -219,6 +219,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Когато имам избор, искам винаги визуалния редактор",
 	"visualeditor-preference-tabs-prefer-wt": "Искам винаги редактора на кода",
 	"visualeditor-preference-tabs-remember-last": "Запомни последно използвания режим на редактиране",
+	"visualeditor-preference-visualdiffpage-description": "Включване на новия визуален режим на страниците за сравняване на версии.",
+	"visualeditor-preference-visualdiffpage-label": "Визуално сравнение на версиите",
 	"visualeditor-recreate": "Тази страница е била изтрита, откакто започнахте да я редактирате. Натиснете „$1“, за да я създадете наново.",
 	"visualeditor-redirect-description": "Пренасочване към $1",
 	"visualeditor-savedialog-label-create": "Създаване на страница",
