@@ -1725,7 +1725,7 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 	}
 	// Save DOM
 	this.submitting = true;
-	$form = $( '<form method="post" enctype="multipart/form-data" style="display: none;"></form>' );
+	$form = $( '<form>' ).attr( { method: 'post', enctype: 'multipart/form-data' } ).addClass( 'oo-ui-element-hidden' );
 	params = ve.extendObject( {
 		format: 'text/x-wiki',
 		model: 'wikitext',

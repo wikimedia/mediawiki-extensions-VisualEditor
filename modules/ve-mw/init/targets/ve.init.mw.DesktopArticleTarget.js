@@ -186,7 +186,7 @@ ve.init.mw.DesktopArticleTarget.prototype.getEditableContent = function () {
 				$editableContent = $( '#mw-imagepage-content' );
 				if ( !$editableContent.length ) {
 					// No image content, file doesn't exist, or is on Commons?
-					$editableContent = $( '<div id="mw-imagepage-content">' );
+					$editableContent = $( '<div>' ).attr( 'id', 'mw-imagepage-content' );
 					$before = $( '.sharedUploadNotice, #mw-imagepage-nofile' );
 					if ( $before.length ) {
 						$before.first().after( $editableContent );

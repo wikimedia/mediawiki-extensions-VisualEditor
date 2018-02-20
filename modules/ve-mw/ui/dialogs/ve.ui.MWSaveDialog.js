@@ -415,7 +415,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 		if ( options.wrap === undefined ) {
 			options.wrap = 'warning';
 		}
-		$message = $( '<div class="ve-ui-mwSaveDialog-message"></div>' );
+		$message = $( '<div>' ).addClass( 've-ui-mwSaveDialog-message' );
 		if ( options.wrap !== false ) {
 			$message.append( $( '<p>' ).append(
 				// visualeditor-savedialog-label-error
