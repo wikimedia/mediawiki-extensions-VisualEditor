@@ -19,7 +19,8 @@
  * Deactivated          | ve-available
  */
 
-.ve-activated #toc,
+/* Only hide the #toc inside the original article, not generated ones in VE (T187636) */
+.ve-activated .ve-init-mw-desktopArticleTarget-editableContent #toc,
 .ve-activated #siteNotice,
 .ve-activated .mw-indicators,
 .ve-activated #t-print,
