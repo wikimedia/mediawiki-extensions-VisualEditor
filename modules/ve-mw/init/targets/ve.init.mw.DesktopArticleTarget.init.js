@@ -369,7 +369,8 @@
 				} )
 				.done( function ( response ) {
 					// Check target promise hasn't already failed (isLoading=false)
-					if ( mode === 'source' && isLoading ) {
+					// TODO: Support tempWikitextEditor when section=new (T185633)
+					if ( mode === 'source' && section !== 'new' && isLoading ) {
 						setupTempWikitextEditor( response.visualeditor );
 					}
 				} )
