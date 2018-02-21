@@ -327,7 +327,8 @@
 				"jquery.textSelection",
 				"mediawiki.api",
 				"mediawiki.Uri",
-				"mediawiki.user"
+				"mediawiki.user",
+				"mediawiki.storage"
 			],
 			"messages": [
 				"visualeditor-loaderror-message",
@@ -522,6 +523,7 @@
 				"mediawiki.api",
 				"mediawiki.api.options",
 				"mediawiki.language",
+				"mediawiki.storage",
 				"mediawiki.Title",
 				"mediawiki.Uri",
 				"mediawiki.user",

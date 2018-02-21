@@ -307,10 +307,12 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.baseTimeStamp = data.basetimestamp;
 		this.startTimeStamp = data.starttimestamp;
 		this.revid = data.oldid;
+		this.recovered = data.recovered;
 
 		this.checkboxesDef = data.checkboxesDef;
 		mw.messages.set( data.checkboxesMessages );
 		this.$templatesUsed = $( data.templates );
+		this.links = data.links;
 
 		this.initialSourceRange = data.initialSourceRange;
 
@@ -346,25 +348,26 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		}
 
 		// Populate link cache
-		if ( data.links ) {
+		if ( this.links ) {
 			// Format from the API: { missing: [titles], known: 1|[titles] }
 			// Format expected by LinkCache: { title: { missing: true|false } }
 			linkData = {};
-			for ( i = 0, len = data.links.missing.length; i < len; i++ ) {
-				linkData[ data.links.missing[ i ] ] = { missing: true };
+			for ( i = 0, len = this.links.missing.length; i < len; i++ ) {
+				linkData[ this.links.missing[ i ] ] = { missing: true };
 			}
-			if ( data.links.known === 1 ) {
+			if ( this.links.known === 1 ) {
 				// Set back to false by surfaceReady()
 				ve.init.platform.linkCache.setAssumeExistence( true );
 			} else {
-				for ( i = 0, len = data.links.known.length; i < len; i++ ) {
-					linkData[ data.links.known[ i ] ] = { missing: false };
+				for ( i = 0, len = this.links.known.length; i < len; i++ ) {
+					linkData[ this.links.known[ i ] ] = { missing: false };
 				}
 			}
 			ve.init.platform.linkCache.setMissing( linkData );
 		}
 
 		this.track( 'trace.parseResponse.exit' );
+
 		// Everything worked, the page was loaded, continue initializing the editor
 		this.documentReady( this.doc );
 	}
@@ -433,13 +436,14 @@ ve.init.mw.ArticleTarget.prototype.documentReady = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
-	var name, i, triggers,
+	var name, i, triggers, changes,
 		accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
-		accessKeyModifiers = new ve.ui.Trigger( accessKeyPrefix + '-' ).modifiers;
+		accessKeyModifiers = new ve.ui.Trigger( accessKeyPrefix + '-' ).modifiers,
+		surfaceModel = this.getSurface().getModel();
 
 	// loadSuccess() may have called setAssumeExistence( true );
 	ve.init.platform.linkCache.setAssumeExistence( false );
-	this.getSurface().getModel().connect( this, {
+	surfaceModel.connect( this, {
 		history: 'updateToolbarSaveButtonState'
 	} );
 	this.restoreEditSection();
@@ -454,8 +458,101 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		}
 	}
 
+	// Auto-save
+	if ( this.recovered ) {
+		// Restore auto-saved transactions if document state was recovered
+		changes = ve.init.platform.getSessionList( 've-changes' );
+		try {
+			changes.forEach( function ( changeString ) {
+				var data = JSON.parse( changeString ),
+					change = ve.dm.Change.static.unsafeDeserialize( data, surfaceModel.getDocument() );
+				change.applyTo( surfaceModel );
+				surfaceModel.breakpoint();
+			} );
+		} catch ( e ) {
+			// TODO: Something went wrong re-applying the transactions - tell the user
+			mw.log.warn( 'Failed to restore auto-saved session: ' + e );
+		}
+	} else {
+		// ...otherwise store this document state for later recovery
+		this.storeDocState( this.originalHtml );
+	}
+	this.lastStoredChange = surfaceModel.getDocument().getCompleteHistoryLength();
+	// Start auto-saving transactions
+	surfaceModel.connect( this, { undoStackChange: 'storeChanges' } );
+
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
+};
+
+/**
+ * Store a snapshot of the current document state.
+ *
+ * @param {string} [html] Document HTML, will generate from current state if not provided
+ */
+ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
+	var mode = this.getSurface().getMode();
+	ve.init.platform.setSession( 've-docstate', JSON.stringify( {
+		request: {
+			pageName: this.pageName,
+			mode: mode,
+			// Only source mode fetches data by section
+			section: mode === 'source' ? this.section : null
+		},
+		response: {
+			etag: this.etag,
+			fromEditedState: this.fromEditedState,
+			switched: this.switched,
+			preloaded: this.preloaded,
+			notices: this.remoteNotices,
+			protectedClasses: this.protectedClasses,
+			basetimestamp: this.baseTimeStamp,
+			starttimestamp: this.startTimeStamp,
+			oldid: this.revid,
+			checkboxesDef: this.checkboxesDef,
+			// Use $.prop as $templatesUsed may be empty
+			templates: this.$templatesUsed.prop( 'outerHTML' ) || '',
+			links: this.links
+		}
+	} ) );
+	// Store HTML separately to avoid wasteful JSON encoding
+	ve.init.platform.setSession( 've-dochtml', html || this.getSurface().getHtml() );
+	// Clear any changes that may have stored up to this point
+	ve.init.platform.removeSessionList( 've-changes' );
+};
+
+/**
+ * Remove the auto-saved document state and stashed changes
+ */
+ve.init.mw.ArticleTarget.prototype.removeDocStateAndChanges = function () {
+	ve.init.platform.removeSession( 've-docstate' );
+	ve.init.platform.removeSession( 've-dochtml' );
+	ve.init.platform.removeSessionList( 've-changes' );
+};
+
+/**
+ * Store latest transactions into session storage
+ */
+ve.init.mw.ArticleTarget.prototype.storeChanges = function () {
+	var dmDoc, change;
+
+	if ( this.autosaveFailed ) {
+		return;
+	}
+
+	dmDoc = this.getSurface().getModel().getDocument();
+	change = dmDoc.getChangeSince( this.lastStoredChange );
+	if ( !change.isEmpty() ) {
+		if ( ve.init.platform.appendToSessionList( 've-changes', JSON.stringify( change.serialize() ) ) ) {
+			this.lastStoredChange = dmDoc.getCompleteHistoryLength();
+		} else {
+			// Auto-save failed probably because of memory limits
+			// so flag it so we don't keep trying in vain.
+			// TODO: Warn the user?
+			this.autosaveFailed = true;
+			mw.log.warn( 'Auto-save failed to write to session storage.' );
+		}
+	}
 };
 
 /**
@@ -1175,6 +1272,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	mw.libs.ve.activationStart = null;
 
 	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.pageName, {
+		sessionStore: true,
 		section: this.section,
 		oldId: this.requestedRevId,
 		targetName: this.constructor.static.trackingName
@@ -1209,6 +1307,9 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.editNotices = [];
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
+	this.lastStoredChange = 0;
+	this.autosaveFailed = false;
+	this.recovered = false;
 };
 
 /**
@@ -1821,6 +1922,8 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 		this.$saveAccessKeyElements.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
 		this.$saveAccessKeyElements = null;
 	}
+	// If target is closed cleanly (after save or deliberate close) then remove autosave state
+	this.removeDocStateAndChanges();
 	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
 };
 
@@ -2225,6 +2328,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
 		if ( discardChanges ) {
 			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.pageName, {
+				sessionStore: true,
 				section: this.section,
 				oldId: this.requestedRevId,
 				targetName: this.constructor.static.trackingName

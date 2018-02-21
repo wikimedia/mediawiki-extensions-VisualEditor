@@ -354,6 +354,7 @@
 			dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
 				.then( function () {
 					return mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
+						sessionStore: true,
 						section: section,
 						oldId: oldId,
 						// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
@@ -366,15 +367,22 @@
 						// If switching to visual with modifications, check if we have wikitext to convert
 						wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					} );
-				} )
-				.done( function ( response ) {
-					// Check target promise hasn't already failed (isLoading=false)
-					// TODO: Support tempWikitextEditor when section=new (T185633)
-					if ( mode === 'source' && section !== 'new' && isLoading ) {
+				} );
+
+			dataPromise
+				.then( function ( response ) {
+					if (
+						// Check target promise hasn't already failed (isLoading=false)
+						isLoading &&
+						// TODO: Support tempWikitextEditor when section=new (T185633)
+						mode === 'source' && section !== 'new' &&
+						// Can't use temp editor when recovering an autosave
+						!( response.visualeditor && response.visualeditor.recovered )
+					) {
 						setupTempWikitextEditor( response.visualeditor );
 					}
 				} )
-				.done( incrementLoadingProgress );
+				.then( incrementLoadingProgress );
 		}
 
 		showLoading( mode );

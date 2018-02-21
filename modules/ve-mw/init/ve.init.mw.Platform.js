@@ -133,7 +133,30 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 	}
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.getSession = function ( key ) {
+	return mw.storage.session.get( key );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.setSession = function ( key, value ) {
+	return mw.storage.session.set( key, value );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.removeSession = function ( key ) {
+	return mw.storage.session.remove( key );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
 	var key;
 	for ( key in messages ) {
