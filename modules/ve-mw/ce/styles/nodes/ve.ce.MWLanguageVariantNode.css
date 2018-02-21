@@ -5,7 +5,7 @@
  */
 
 /* This is just for the icon label text */
-.ve-ce-mwLanguageVariantNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement {
+.ve-ce-mwLanguageVariantNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconWidget.oo-ui-iconElement {
 	font-size: 0.8125em;
 	width: auto;
 }
@@ -14,12 +14,12 @@
 	width: auto;
 }
 
-.ve-ce-mwLanguageVariantNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement .oo-ui-labelElement-label {
+.ve-ce-mwLanguageVariantNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconWidget.oo-ui-iconElement .oo-ui-labelElement-label {
 	margin-left: 0;
 	margin-right: 0.25em;
 }
 
 /* This keeps the icon small (regardless of label height) */
-.ve-ce-mwLanguageVariantNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement .oo-ui-iconElement-icon {
+.ve-ce-mwLanguageVariantNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconWidget.oo-ui-iconElement .oo-ui-iconElement-icon {
 	height: auto;
 }
