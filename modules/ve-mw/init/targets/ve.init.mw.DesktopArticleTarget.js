@@ -654,7 +654,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			// Move original content back out of the target
 			target.$element.parent().append( target.$originalContent.children() );
 			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
-				.off( '.ve-target' )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
 			mw.hook( 've.deactivationComplete' ).fire( target.edited );
@@ -888,7 +887,6 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 		}
 		$categories = $( $.parseHTML( response.parse.categorieshtml ) );
 		target.transformCategoryLinks( $categories );
-		target.disableUneditableContent( $categories );
 		mw.hook( 'wikipage.categories' ).fire( $categories );
 		$( '#catlinks' ).replaceWith( $categories );
 	} );
@@ -1220,8 +1218,6 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content = $content.parent();
 	}
 
-	this.disableUneditableContent();
-
 	this.updateHistoryState();
 };
 
@@ -1243,20 +1239,8 @@ ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $c
 			} )
 			.find( 'a' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 	} else {
-		$catlinks.addClass( 've-init-mw-desktopArticleTarget-uneditableContent' ).off( '.ve-target' );
+		$catlinks.addClass( 've-init-mw-desktopArticleTarget-uneditableContent' ).off( 'click.ve-target' );
 	}
-};
-
-/**
- * Disabling of non-editable content, in a given context
- *
- * @param {jQuery|string} [context] Context to disable in
- */
-ve.init.mw.DesktopArticleTarget.prototype.disableUneditableContent = function ( context ) {
-	$( '.ve-init-mw-desktopArticleTarget-uneditableContent', context ).on( 'click.ve-target', function ( e ) {
-		// Support IE10: Prevent default, but don't stop propagation
-		e.preventDefault();
-	} );
 };
 
 /**
