@@ -80,10 +80,13 @@
 
 	function onSubmit() {
 		documentNameInput.getValidity().then( function () {
-			var title = mw.Title.newFromText( documentNameInput.getValue() ),
-				specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
+			var specialTitle,
+				title = mw.Title.newFromText(
+					documentNameInput.getValue().trim() || Math.random().toString( 36 ).slice( 2 )
+				);
 
 			if ( title ) {
+				specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
 				if ( history.pushState ) {
 					// TODO: Handle popstate
 					history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl() );
@@ -98,8 +101,8 @@
 	}
 
 	documentNameInput.setValidation( function ( value ) {
-		var title = mw.Title.newFromText( value );
-		return !!title;
+		// Empty input will create a random document name, otherwise must be valid
+		return value === '' || !!mw.Title.newFromText( value );
 	} );
 	submitButton.setDisabled( false );
 
