@@ -38,8 +38,8 @@ ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
  * @inheritdoc ve.ce.GeneratedContentNode
  */
 ve.ce.MWGalleryNode.prototype.getFocusableElement = function () {
-	var $gallery = this.$element.find( '.gallery' ).addBack( '.gallery' );
-	return $gallery.length ? $gallery.children() : this.$element;
+	var $gallery = this.$element.find( '.gallery' ).addBack( '.gallery' ).children();
+	return $gallery.length ? $gallery : this.$element;
 };
 
 /**
