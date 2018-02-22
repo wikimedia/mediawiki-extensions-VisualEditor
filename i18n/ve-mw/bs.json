@@ -311,6 +311,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Otvori vizualni uređivač kad god je moguće",
 	"visualeditor-preference-tabs-prefer-wt": "Uvijek otvori uređivač izvornog kôda",
 	"visualeditor-preference-tabs-remember-last": "Zapamti moj posljednji uređivač",
+	"visualeditor-preference-visualdiffpage-description": "Omogući novi vizualni režim prikaza razlika izmjena.",
+	"visualeditor-preference-visualdiffpage-label": "Vizualne razlike",
 	"visualeditor-recreate": "Stranica je obrisana otkad ste počeli uređivati. Pritisnite \"$1\" da biste je ponovo napravili.",
 	"visualeditor-redirect-description": "Preusmjerava na $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Možete pritisnuti $1 da biste sačuvali izmjenu.",
