@@ -553,27 +553,19 @@ ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
  * Handle click event for the remove button
  */
 ve.ui.MWGalleryDialog.prototype.onRemoveItem = function () {
-
 	// Remove the highlighted item
 	this.galleryGroup.removeItems( [ this.highlightedItem ] );
 
-	// Show the search panel if the gallery is now empty...
-	if ( this.galleryGroup.items.length === 0 ) {
-		this.toggleEmptyGalleryMessage( true );
-		this.showSearchPanelButton.toggle( false );
-		this.toggleSearchPanel( true );
+	// Highlight another item, or show the search panel if the gallery is now empty
+	this.onHighlightItem();
 
-	// ...Otherwise highlight the first item in the gallery
-	} else {
-		this.onHighlightItem();
-	}
 	this.updateActions();
 };
 
 /**
  * Handle clicking on an image in the menu
  *
- * @param {ve.ui.MWGalleryItemWidget} item The item that was clicked on
+ * @param {ve.ui.MWGalleryItemWidget} [item] The item that was clicked on
  */
 ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	var title;
@@ -586,8 +578,18 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	// Show edit panel
 	this.toggleSearchPanel( false );
 
-	// Highlight new item
+	// Highlight new item.
+	// If no item was given, highlight the first item in the gallery.
 	item = item || this.galleryGroup.items[ 0 ];
+
+	if ( !item ) {
+		// Show the search panel if the gallery is empty
+		this.toggleEmptyGalleryMessage( true );
+		this.showSearchPanelButton.toggle( false );
+		this.toggleSearchPanel( true );
+		return;
+	}
+
 	item.toggleHighlighted( true );
 	this.highlightedItem = item;
 
