@@ -13,6 +13,11 @@
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 
+	if ( mode !== 'visual' ) {
+		// Enforce a valid mode, to avoid visual glitches in button-selection.
+		mode = 'source';
+	}
+
 	function onReviewModeButtonSelectSelect( item ) {
 		var modulePromise, progress, oldPageName, newPageName,
 			$revSlider = $( '.mw-revslider-container' ),
