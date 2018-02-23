@@ -657,6 +657,15 @@ class VisualEditorHooks {
 				$user->getOption( 'visualeditor-autodisable' )
 		];
 
+		// Config option for wikitext editing "deployed" state (opt-out)
+		if ( $config->get( 'VisualEditorEnableWikitext' ) ) {
+			$preferences['visualeditor-newwikitext'] = [
+				'type' => 'toggle',
+				'label-message' => 'visualeditor-preference-newwikitexteditor-enable',
+				'section' => 'editing/editor'
+			];
+		}
+
 		// Config option for Single Edit Tab
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
