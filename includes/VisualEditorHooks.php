@@ -205,8 +205,7 @@ class VisualEditorHooks {
 
 	private static function isWikitextAvailable( $title, $user ) {
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
-		return $veConfig->get( 'VisualEditorEnableWikitext' ) &&
-			$user->getOption( 'visualeditor-newwikitext' ) &&
+		return $user->getOption( 'visualeditor-newwikitext' ) &&
 			$title->getContentModel() === 'wikitext';
 	}
 
@@ -626,10 +625,12 @@ class VisualEditorHooks {
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+
 		if ( !class_exists( 'BetaFeatures' ) ) {
+			// Config option for visual editing "alpha" state (no Beta Feature)
 			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $config );
 
-			$enablePreference = [
+			$visualEnablePreference = [
 				'type' => 'toggle',
 				'label-message' => [
 					'visualeditor-preference-enable',
@@ -642,10 +643,12 @@ class VisualEditorHooks {
 				'section' => 'editing/editor'
 			];
 			if ( $user->getOption( 'visualeditor-autodisable' ) ) {
-				$enablePreference['default'] = false;
+				$visualEnablePreference['default'] = false;
 			}
-			$preferences['visualeditor-enable'] = $enablePreference;
+			$preferences['visualeditor-enable'] = $visualEnablePreference;
 		}
+
+		// Config option for visual editing "deployed" state (opt-out)
 		$preferences['visualeditor-betatempdisable'] = [
 			'type' => 'toggle',
 			'label-message' => 'visualeditor-preference-betatempdisable',
@@ -654,6 +657,7 @@ class VisualEditorHooks {
 				$user->getOption( 'visualeditor-autodisable' )
 		];
 
+		// Config option for Single Edit Tab
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			!$user->getOption( 'visualeditor-autodisable' ) &&
@@ -714,7 +718,7 @@ class VisualEditorHooks {
 			]
 		];
 
-		if ( $veConfig->get( 'VisualEditorEnableWikitext' ) ) {
+		if ( $veConfig->get( 'VisualEditorEnableWikitextBetaFeature' ) ) {
 			$preferences['visualeditor-newwikitext'] = [
 				'version' => '1.0',
 				'label-message' => 'visualeditor-preference-newwikitexteditor-label',
@@ -867,7 +871,10 @@ class VisualEditorHooks {
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
-			'enableWikitext' => $veConfig->get( 'VisualEditorEnableWikitext' ),
+			'enableWikitext' => (
+				$veConfig->get( 'VisualEditorEnableWikitext' ) ||
+				$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
+			),
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
