@@ -33,7 +33,8 @@
 			"Saracrovetto",
 			"Samuele2002",
 			"Greis",
-			"Segaz3"
+			"Segaz3",
+			"S4b1nuz E.656"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -315,7 +316,11 @@
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Larghezza predefinita: $1 px",
 	"visualeditor-mwlanguagevariant-name": "Nome della lingua: $1",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Codice lingua",
+	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<Invalido>",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Lingua",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Sorgente",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Destinazione",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Testo",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Lingue",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Codice lingua",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Contenuti",
@@ -372,6 +377,7 @@
 	"visualeditor-saveerror": "Errore durante il salvataggio dei dati sul server: $1.",
 	"visualeditor-saveerror-titleblacklist": "Errore nel salvataggio della pagina: il titolo della pagina è stato inserito in una lista nera",
 	"visualeditor-section-body-placeholder": "Nuova sezione",
+	"visualeditor-section-title-placeholder": "Soggetto",
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-settings-tool": "Impostazioni pagina",
 	"visualeditor-shortcuts-insert": "Inserisci",
