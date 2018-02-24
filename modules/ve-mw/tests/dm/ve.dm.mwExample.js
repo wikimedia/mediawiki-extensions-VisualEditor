@@ -280,7 +280,7 @@ ve.dm.mwExample.MWBlockImage = {
 		{ type: '/mwBlockImage' }
 	],
 	storeItems: {
-		heedc6ea02e1424e1: ve.ce.minImgDataUri
+		h5ca4c84da870e58f: ve.ce.minImgDataUri
 	}
 };
 
@@ -308,7 +308,7 @@ ve.dm.mwExample.MWInlineImage = {
 		}
 	},
 	storeItems: {
-		h9e4c46abce8374a6: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
+		hbb0aeb2b8e907b74: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
 	}
 };
 
