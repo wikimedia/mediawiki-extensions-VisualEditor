@@ -76,9 +76,14 @@ ve.dm.MWImageNode.static.getRdfa = function ( mediaClass, frameType ) {
 	}[ frameType ];
 };
 
-ve.dm.MWImageNode.static.getHashObject = function ( dataElement ) {
+/**
+ * @inheritdoc ve.dm.GeneratedContentNode
+ */
+ve.dm.MWImageNode.static.getHashObjectForRendering = function ( dataElement ) {
+	// "Rendering" is just the URL of the thumbnail, so we only
+	// care about src & dimensions
 	return {
-		type: dataElement.type,
+		type: 'mwImage',
 		resource: dataElement.attributes.resource,
 		width: dataElement.attributes.width,
 		height: dataElement.attributes.height
