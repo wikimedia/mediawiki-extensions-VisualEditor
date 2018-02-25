@@ -6,6 +6,7 @@
 			"Manik Soren"
 		]
 	},
+	"apihelp-visualeditor-param-editintro": "ᱤᱱᱴᱨᱚ ᱥᱟᱯᱲᱟᱣ ᱢᱮ ᱧᱮᱛᱮᱞ ᱨᱮ ᱥᱮᱞᱮᱫ ᱞᱟᱹᱜᱤᱫ",
 	"tooltip-ca-ve-edit": "ᱱᱚᱭᱟ ᱥᱟᱦᱴᱟ ᱥᱟᱯᱲᱟᱣᱢᱮ",
 	"visualeditor-beta-label": "ᱵᱮᱴᱟ",
 	"visualeditor-ca-createlocaldescriptionsource": "ᱞᱚᱠᱟᱞ ᱥᱚᱛ ᱵᱤᱵᱚᱨᱚᱱ ᱥᱮᱞᱮᱫᱽᱢᱮ",
@@ -17,6 +18,7 @@
 	"visualeditor-dialog-media-content-filename": "ᱨᱮᱫ ᱧᱩᱛᱩᱢ",
 	"visualeditor-dialog-media-size-section": "ᱪᱤᱛᱟᱹᱨ ᱱᱟᱯ",
 	"visualeditor-dialog-media-type-section": "ᱪᱤᱛᱟᱹᱨ ᱞᱮᱠᱟᱱ",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ᱧᱮᱛᱮᱞ|ᱧᱮᱛᱮᱞᱠᱚ}}",
 	"visualeditor-mwgallerydialog-card-images": "ᱪᱤᱛᱟᱹᱨ ᱠᱚ",
 	"visualeditor-mwgallerydialog-heights-field-label": "ᱪᱤᱛᱟᱹᱨ ᱩᱥᱩᱞ",
 	"visualeditor-mwgallerydialog-image-caption-placeholder": "ᱪᱤᱛᱟᱹᱨ ᱠᱮᱯᱥᱚᱱ",

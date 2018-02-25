@@ -366,6 +366,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "如果可以，讓我使用視覺化編輯器",
 	"visualeditor-preference-tabs-prefer-wt": "總是讓我使用原始碼編輯器",
 	"visualeditor-preference-tabs-remember-last": "記住我最後使用的編輯器",
+	"visualeditor-preference-visualdiffpage-description": "在修訂差異頁面啟用新的視覺化模式。",
+	"visualeditor-preference-visualdiffpage-label": "視覺化差異",
 	"visualeditor-recreate": "此頁面在您編輯的這段期間已被刪除，請點選 \"$1\" 重新建立頁面。",
 	"visualeditor-redirect-description": "重新導向至 $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以點選 $1 來儲存您的編輯。",

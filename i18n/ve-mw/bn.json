@@ -12,7 +12,8 @@
 			"RYasmeen (WMF)",
 			"Sayma Jahan",
 			"NahidSultan",
-			"Elias Ahmmad"
+			"Elias Ahmmad",
+			"Ahm masum"
 		]
 	},
 	"apihelp-visualeditor-description": "পারসয়েড পরিষেবা হতে কোন পাতার জন্য এইচটিএমএল৫-এ ফিরে যান।",
@@ -306,6 +307,7 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "ভাষাসমূহ",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "ভাষার কোড",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "বিষয়বস্তু",
+	"visualeditor-mwlanguagevariantinspector-filter-text-placeholder": "ফিল্টার করা পাঠ্য",
 	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "উত্স পাঠ্য",
 	"visualeditor-mwlanguagevariantinspector-title-disabled": "বৈকল্পিক রূপান্তর নিষ্ক্রিয় করা",
 	"visualeditor-mwlanguagevariantinspector-title-name": "ভাষার নাম",
