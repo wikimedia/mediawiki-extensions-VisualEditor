@@ -576,6 +576,10 @@
 				"parentheses",
 				"tooltip-minoredit",
 				"tooltip-watch",
+				"visualeditor-autosave-not-recovered-text",
+				"visualeditor-autosave-not-recovered-title",
+				"visualeditor-autosave-recovered-text",
+				"visualeditor-autosave-recovered-title",
 				"visualeditor-diff-no-changes"
 			],
 			"targets": [
