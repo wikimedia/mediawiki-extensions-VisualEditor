@@ -658,7 +658,11 @@ class VisualEditorHooks {
 		];
 
 		// Config option for wikitext editing "deployed" state (opt-out)
-		if ( $config->get( 'VisualEditorEnableWikitext' ) ) {
+		if (
+			$config->get( 'VisualEditorEnableWikitext' ) &&
+			// TEMP Don't graduate if the Beta Feature switch is true.
+			!$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
+		) {
 			$preferences['visualeditor-newwikitext'] = [
 				'type' => 'toggle',
 				'label-message' => 'visualeditor-preference-newwikitexteditor-enable',
