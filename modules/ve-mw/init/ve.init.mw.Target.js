@@ -264,7 +264,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 			'script, ' + // T54884, T65229, T96533, T103430
 			'noscript, ' + // T144891
 			'object, ' + // T65229
-			'style, ' + // T55252
+			'style:not( [ data-mw ] ), ' + // T55252, but allow <style data-mw/> e.g. TemplateStyles T188143
 			'embed, ' + // T53521, T54791, T65121
 			'div[id="myEventWatcherDiv"], ' + // T53423
 			'div[id="sendToInstapaperResults"], ' + // T63776
