@@ -49,6 +49,7 @@
 		},
 		"VisualEditorUseChangeTagging": true,
 		"VisualEditorEnableWikitext": false,
+		"VisualEditorEnableWikitextBetaFeature": false,
 		"VisualEditorEnableDiffPage": false,
 		"VisualEditorEnableDiffPageBetaFeature": false,
 		"VisualEditorUseSingleEditTab": false,
