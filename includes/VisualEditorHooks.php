@@ -624,11 +624,11 @@ class VisualEditorHooks {
 
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
 		if ( !class_exists( 'BetaFeatures' ) ) {
 			// Config option for visual editing "alpha" state (no Beta Feature)
-			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $config );
+			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 
 			$visualEnablePreference = [
 				'type' => 'toggle',
@@ -659,7 +659,7 @@ class VisualEditorHooks {
 
 		// Config option for wikitext editing "deployed" state (opt-out)
 		if (
-			$config->get( 'VisualEditorEnableWikitext' ) &&
+			$veConfig->get( 'VisualEditorEnableWikitext' ) &&
 			// TEMP Don't graduate if the Beta Feature switch is true.
 			!$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
 		) {
@@ -672,7 +672,7 @@ class VisualEditorHooks {
 
 		// Config option for Single Edit Tab
 		if (
-			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			$veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
 			!$user->getOption( 'visualeditor-autodisable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' )
 		) {
