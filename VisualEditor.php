@@ -18,8 +18,8 @@ if ( function_exists( 'wfLoadExtension' ) ) {
 	// Keep i18n globals so mergeMessageFileList.php doesn't break
 	$wgMessagesDirs['VisualEditor'] = [
 		__DIR__ . '/lib/ve/i18n',
-		__DIR__ . '/modules/ve-mw/i18n',
-		__DIR__ . '/modules/ve-wmf/i18n'
+		__DIR__ . '/i18n/ve-mw',
+		__DIR__ . '/i18n/ve-wmf'
 	];
 
 	/* wfWarn(
