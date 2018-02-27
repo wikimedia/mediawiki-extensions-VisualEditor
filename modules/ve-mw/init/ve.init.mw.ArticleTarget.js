@@ -436,7 +436,7 @@ ve.init.mw.ArticleTarget.prototype.documentReady = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
-	var name, i, triggers, changes,
+	var name, i, triggers,
 		accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
 		accessKeyModifiers = new ve.ui.Trigger( accessKeyPrefix + '-' ).modifiers,
 		surfaceModel = this.getSurface().getModel();
@@ -461,19 +461,14 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	// Auto-save
 	if ( this.recovered ) {
 		// Restore auto-saved transactions if document state was recovered
-		changes = ve.init.platform.getSessionList( 've-changes' );
 		try {
-			changes.forEach( function ( changeString ) {
-				var data = JSON.parse( changeString ),
-					change = ve.dm.Change.static.unsafeDeserialize( data, surfaceModel.getDocument() );
-				change.applyTo( surfaceModel );
-				surfaceModel.breakpoint();
-			} );
-			mw.notify( ve.msg( 'visualeditor-autosave-recovered-text' ), {
-				title: ve.msg( 'visualeditor-autosave-recovered-title' )
-			} );
+			if ( surfaceModel.restoreChanges() ) {
+				mw.notify( ve.msg( 'visualeditor-autosave-recovered-text' ), {
+					title: ve.msg( 'visualeditor-autosave-recovered-title' )
+				} );
+			}
 		} catch ( e ) {
-			mw.log.warn( 'Failed to restore auto-saved session: ' + e );
+			mw.log.warn( e );
 			mw.notify( ve.msg( 'visualeditor-autosave-not-recovered-text' ), {
 				title: ve.msg( 'visualeditor-autosave-not-recovered-title' ),
 				type: 'error'
@@ -483,9 +478,9 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		// ...otherwise store this document state for later recovery
 		this.storeDocState( this.originalHtml );
 	}
-	this.lastStoredChange = surfaceModel.getDocument().getCompleteHistoryLength();
 	// Start auto-saving transactions
-	surfaceModel.connect( this, { undoStackChange: 'storeChanges' } );
+	surfaceModel.startStoringChanges();
+	// TODO: Listen to autosaveFailed event
 
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
@@ -498,7 +493,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
  */
 ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 	var mode = this.getSurface().getMode();
-	ve.init.platform.setSession( 've-docstate', JSON.stringify( {
+	this.getSurface().getModel().storeDocState( {
 		request: {
 			pageName: this.pageName,
 			mode: mode,
@@ -520,45 +515,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			templates: this.$templatesUsed.prop( 'outerHTML' ) || '',
 			links: this.links
 		}
-	} ) );
-	// Store HTML separately to avoid wasteful JSON encoding
-	ve.init.platform.setSession( 've-dochtml', html || this.getSurface().getHtml() );
-	// Clear any changes that may have stored up to this point
-	ve.init.platform.removeSessionList( 've-changes' );
-};
-
-/**
- * Remove the auto-saved document state and stashed changes
- */
-ve.init.mw.ArticleTarget.prototype.removeDocStateAndChanges = function () {
-	ve.init.platform.removeSession( 've-docstate' );
-	ve.init.platform.removeSession( 've-dochtml' );
-	ve.init.platform.removeSessionList( 've-changes' );
-};
-
-/**
- * Store latest transactions into session storage
- */
-ve.init.mw.ArticleTarget.prototype.storeChanges = function () {
-	var dmDoc, change;
-
-	if ( this.autosaveFailed ) {
-		return;
-	}
-
-	dmDoc = this.getSurface().getModel().getDocument();
-	change = dmDoc.getChangeSince( this.lastStoredChange );
-	if ( !change.isEmpty() ) {
-		if ( ve.init.platform.appendToSessionList( 've-changes', JSON.stringify( change.serialize() ) ) ) {
-			this.lastStoredChange = dmDoc.getCompleteHistoryLength();
-		} else {
-			// Auto-save failed probably because of memory limits
-			// so flag it so we don't keep trying in vain.
-			// TODO: Warn the user?
-			this.autosaveFailed = true;
-			mw.log.warn( 'Auto-save failed to write to session storage.' );
-		}
-	}
+	}, html );
 };
 
 /**
@@ -1313,8 +1270,6 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.editNotices = [];
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
-	this.lastStoredChange = 0;
-	this.autosaveFailed = false;
 	this.recovered = false;
 };
 
@@ -1929,7 +1884,7 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 		this.$saveAccessKeyElements = null;
 	}
 	// If target is closed cleanly (after save or deliberate close) then remove autosave state
-	this.removeDocStateAndChanges();
+	this.getSurface().getModel().removeDocStateAndChanges();
 	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
 };
 
