@@ -101,6 +101,7 @@
 		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {string} pageName Page name to request
 		 * @param {Object} [options] Options
+		 * @param {boolean} [options.sessionStore] Store result in session storage (by page+mode+section) for auto-save
 		 * @param {number|string} [options.section] Section to edit, number or 'new' (currently just source mode)
 		 * @param {number} [options.oldId] Old revision ID. Current if omitted.
 		 * @param {string} [options.targetName] Optional target name for tracking
@@ -111,6 +112,36 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
+			var sessionState, request;
+
+			if ( options.sessionStore ) {
+				try {
+					// ve.init.platform.getSession is not available yet
+					sessionState = JSON.parse( mw.storage.session.get( 've-docstate' ) );
+				} catch ( e ) {}
+
+				if ( sessionState ) {
+					request = sessionState.request;
+					// Check the requested page, mode and section match the stored one
+					if (
+						request.pageName === pageName &&
+						request.mode === mode &&
+						// Only check sections in source mode
+						( request.mode !== 'source' || request.section === options.section )
+						// NB we don't cache by oldid so that cached results can be recovered
+						// even if the page has been since edited
+					) {
+						return $.Deferred().resolve( {
+							visualeditor: $.extend(
+								{ content: mw.storage.session.get( 've-dochtml' ) },
+								sessionState.response,
+								{ recovered: true }
+							)
+						} ).promise();
+					}
+				}
+			}
+
 			if ( mode === 'source' ) {
 				return this.requestWikitext( pageName, options );
 			} else {
