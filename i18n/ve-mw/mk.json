@@ -361,6 +361,7 @@
 	"visualeditor-preference-core-description": "Овозможи го нагледниот уредник. Нема да се појавува во разговорни страници и некои други именски простори.",
 	"visualeditor-preference-core-label": "Нагледно уредување",
 	"visualeditor-preference-enable": "Овозможи го нагледниот уредник. Ќе биде достапен во {{PLURAL:$2|следниов именски простор|следниве именски простори}}: $1",
+	"visualeditor-preference-newwikitexteditor-enable": "Користи викитекстуален режим во нагледниот уредник намсто различен урендик на викитекст.",
 	"visualeditor-preference-newwikitexteditor-description": "Вклучи го новиот режим на викитекст. Има сличен изглед и алатки како нагледниот уредник, но дава полесно префрлање од едниот на другиот режим.",
 	"visualeditor-preference-newwikitexteditor-label": "Нов режим на викитекст",
 	"visualeditor-preference-tabs": "Режим на уредување:",
