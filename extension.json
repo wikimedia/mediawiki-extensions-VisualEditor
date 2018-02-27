@@ -324,7 +324,7 @@
 			"scripts": "modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js",
 			"dependencies": [
 				"ext.visualEditor.track",
-				"jquery.byteLength",
+				"mediawiki.String",
 				"jquery.textSelection",
 				"mediawiki.api",
 				"mediawiki.Uri",
@@ -519,7 +519,7 @@
 				"modules/ve-mw/init/ve.init.mw.trackSubscriber.js"
 			],
 			"dependencies": [
-				"jquery.byteLength",
+				"mediawiki.String",
 				"jquery.client",
 				"mediawiki.api",
 				"mediawiki.api.options",

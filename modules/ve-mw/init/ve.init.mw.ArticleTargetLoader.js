@@ -195,7 +195,7 @@
 			apiPromise = apiXhr.then( function ( data, jqxhr ) {
 				ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
 				ve.track( 'mwtiming.performance.system.apiLoad', {
-					bytes: $.byteLength( jqxhr.responseText ),
+					bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
 					duration: ve.now() - start,
 					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
 					targetName: options.targetName,
@@ -260,7 +260,7 @@
 					function ( data, status, jqxhr ) {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
 						ve.track( 'mwtiming.performance.system.restbaseLoad', {
-							bytes: $.byteLength( jqxhr.responseText ),
+							bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
 							duration: ve.now() - start,
 							targetName: options.targetName,
 							mode: 'visual'

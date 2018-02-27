@@ -1491,7 +1491,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 			.then(
 				function ( response, jqxhr ) {
 					var eventData = {
-						bytes: $.byteLength( jqxhr.responseText ),
+						bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
 						duration: ve.now() - start
 					};
 
@@ -1508,7 +1508,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 						eventData;
 					if ( responseText ) {
 						eventData = {
-							bytes: $.byteLength( responseText ),
+							bytes: require( 'mediawiki.String' ).byteLength( responseText ),
 							duration: ve.now() - start
 						};
 
