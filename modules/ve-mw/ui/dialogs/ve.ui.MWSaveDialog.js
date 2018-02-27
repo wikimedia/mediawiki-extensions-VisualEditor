@@ -22,7 +22,8 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	ve.ui.MWSaveDialog.super.call( this, config );
 
 	// Properties
-	this.editSummaryByteLimit = 255;
+	this.editSummaryByteLimit = mw.config.get( 'wgCommentByteLimit' );
+	this.editSummaryCodePointLimit = mw.config.get( 'wgCommentCodePointLimit' );
 	this.restoring = false;
 	this.messages = {};
 	this.setupDeferred = $.Deferred();
@@ -510,7 +511,8 @@ ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.initialize = function () {
-	var dialog = this;
+	var dialog = this,
+		mwString = require( 'mediawiki.String' );
 
 	// Parent method
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
@@ -527,8 +529,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Byte counter in edit summary
 	this.editSummaryCountLabel = new OO.ui.LabelWidget( {
 		classes: [ 've-ui-mwSaveDialog-editSummary-count' ],
-		label: String( this.editSummaryByteLimit ),
-		title: ve.msg( 'visualeditor-editsummary-bytes-remaining' )
+		label: String( this.editSummaryCodePointLimit || this.editSummaryByteLimit ),
+		title: ve.msg( this.editSummaryCodePointLimit ?
+			'visualeditor-editsummary-characters-remaining' : 'visualeditor-editsummary-bytes-remaining' )
 	} );
 
 	// Save panel
@@ -558,17 +561,29 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 			);
 		}
 	} );
-	// Limit byte length, and display the remaining bytes
-	this.editSummaryInput.$input.byteLimit( this.editSummaryByteLimit );
-	this.editSummaryInput.on( 'change', function () {
-		dialog.changedEditSummary = true;
-		// TODO: This looks a bit weird, there is no unit in the UI, just numbers
-		// Users likely assume characters but then it seems to count down quicker
-		// than expected. Facing users with the word "byte" is bad? (bug 40035)
-		dialog.editSummaryCountLabel.setLabel(
-			String( dialog.editSummaryByteLimit - $.byteLength( dialog.editSummaryInput.getValue() ) )
-		);
-	} );
+	// Limit length, and display the remaining bytes/characters
+	if ( this.editSummaryCodePointLimit ) {
+		this.editSummaryInput.$input.codePointLimit( this.editSummaryCodePointLimit );
+		this.editSummaryInput.on( 'change', function () {
+			dialog.changedEditSummary = true;
+			dialog.editSummaryCountLabel.setLabel(
+				String( dialog.editSummaryCodePointLimit -
+					mwString.codePointLength( dialog.editSummaryInput.getValue() ) )
+			);
+		} );
+	} else {
+		this.editSummaryInput.$input.byteLimit( this.editSummaryByteLimit );
+		this.editSummaryInput.on( 'change', function () {
+			// TODO: This looks a bit weird, there is no unit in the UI, just numbers
+			// Users likely assume characters but then it seems to count down quicker
+			// than expected. Facing users with the word "byte" is bad? (bug 40035)
+			dialog.changedEditSummary = true;
+			dialog.editSummaryCountLabel.setLabel(
+				String( dialog.editSummaryByteLimit -
+					mwString.byteLength( dialog.editSummaryInput.getValue() ) )
+			);
+		} );
+	}
 
 	this.$saveCheckboxes = $( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' );
 	this.$saveOptions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(

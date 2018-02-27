@@ -250,6 +250,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notice|notices}}",
 	"visualeditor-editnotices-tooltip": "Edit notices",
 	"visualeditor-editsummary": "Describe what you changed",
+	"visualeditor-editsummary-characters-remaining": "The number of characters remaining",
 	"visualeditor-editsummary-bytes-remaining": "The number of bytes remaining",
 	"visualeditor-educationpopup-dismiss": "Okay, got it",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

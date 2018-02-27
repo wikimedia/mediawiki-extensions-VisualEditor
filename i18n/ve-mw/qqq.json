@@ -263,6 +263,7 @@
 	"visualeditor-editnotices-tool": "Text of tool in the toolbar that shows edit notices (such as [[MediaWiki:Editnotice-0]] and [[MediaWiki:Editnotice-8/en]]) as a pop-up.\n\nParameters:\n* $1 - the number of notices\n{{Identical|Notice}}",
 	"visualeditor-editnotices-tooltip": "Text of tooltip for the tool in the toolbar that shows edit notices (i.e. “messages about the editing”), e.g. the “you are not currently logged in” notice",
 	"visualeditor-editsummary": "Label for the edit summary box",
+	"visualeditor-editsummary-characters-remaining": "Tooltip for the number of characters remaining in the edit summary",
 	"visualeditor-editsummary-bytes-remaining": "Tooltip for the number of bytes remaining in the edit summary",
 	"visualeditor-educationpopup-dismiss": "Text on dismiss button shown on the educational popups drawing user attention to specific tools.",
 	"visualeditor-feedback-defaultmessage": "Default message text for the feedback dialog.\nParameters:\n\n* $1 - URL of the page\n{{Identical|URL}}",
