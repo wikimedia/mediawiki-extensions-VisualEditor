@@ -469,9 +469,15 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 				change.applyTo( surfaceModel );
 				surfaceModel.breakpoint();
 			} );
+			mw.notify( ve.msg( 'visualeditor-autosave-recovered-text' ), {
+				title: ve.msg( 'visualeditor-autosave-recovered-title' )
+			} );
 		} catch ( e ) {
-			// TODO: Something went wrong re-applying the transactions - tell the user
 			mw.log.warn( 'Failed to restore auto-saved session: ' + e );
+			mw.notify( ve.msg( 'visualeditor-autosave-not-recovered-text' ), {
+				title: ve.msg( 'visualeditor-autosave-not-recovered-title' ),
+				type: 'error'
+			} );
 		}
 	} else {
 		// ...otherwise store this document state for later recovery
