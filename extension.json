@@ -555,8 +555,8 @@
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css"
 			],
 			"dependencies": [
-				"jquery.byteLength",
-				"jquery.byteLimit",
+				"mediawiki.String",
+				"jquery.lengthLimit",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
@@ -1355,6 +1355,7 @@
 				"visualeditor-editnotices-tool",
 				"visualeditor-editnotices-tooltip",
 				"visualeditor-editsummary",
+				"visualeditor-editsummary-characters-remaining",
 				"visualeditor-editsummary-bytes-remaining",
 				"visualeditor-educationpopup-dismiss",
 				"visualeditor-feedback-defaultmessage",
