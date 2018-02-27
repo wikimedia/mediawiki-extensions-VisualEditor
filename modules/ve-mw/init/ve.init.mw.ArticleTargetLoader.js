@@ -121,7 +121,7 @@
 				} catch ( e ) {}
 
 				if ( sessionState ) {
-					request = sessionState.request;
+					request = sessionState.request || {};
 					// Check the requested page, mode and section match the stored one
 					if (
 						request.pageName === pageName &&
