@@ -480,7 +480,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	}
 	// Start auto-saving transactions
 	surfaceModel.startStoringChanges();
-	// TODO: Listen to autosaveFailed event
+	// TODO: Listen to autosaveFailed event to notify user
 
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
