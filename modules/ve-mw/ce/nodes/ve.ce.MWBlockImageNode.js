@@ -17,8 +17,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
-	var type, isError, $image, $focusable,
-		node = this;
+	var type, isError, $image, $focusable;
 
 	// Parent constructor
 	ve.ce.MWBlockImageNode.super.apply( this, arguments );
@@ -26,14 +25,11 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	type = this.model.getAttribute( 'type' );
 	isError = this.model.getAttribute( 'isError' );
 
-	// Properties
-	this.captionVisible = false;
-
 	// DOM Hierarchy for MWBlockImageNode:
 	//   <figure> this.$element (ve-ce-mwBlockImageNode-{type})
 	//     <a> this.$a
 	//       <img> this.$image
-	//     <figcaption> this.$caption
+	//     <figcaption> ve.ce.MWImageCaptionNode
 
 	// Build DOM:
 	if ( isError ) {
@@ -53,7 +49,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	}
 
 	this.$element
-		.append( this.$a )
+		.prepend( this.$a )
 		// The following classes can be used here:
 		// ve-ce-mwBlockImageNode-type-thumb
 		// ve-ce-mwBlockImageNode-type-frame
@@ -68,10 +64,6 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	ve.ce.MWImageNode.call( this, $focusable, $image );
 
 	this.updateSize();
-	// Wait for tree to finish building before checking for caption
-	setTimeout( function () {
-		node.updateCaption();
-	} );
 };
 
 /* Inheritance */
@@ -109,37 +101,6 @@ ve.ce.MWBlockImageNode.static.cssClasses = {
 };
 
 /* Methods */
-
-/**
- * Update the caption based on the current model state
- */
-ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
-	var model, view,
-		type = this.model.getAttribute( 'type' );
-
-	this.captionVisible = type !== 'none' &&
-		type !== 'frameless' &&
-		this.model.children.length === 1;
-
-	if ( this.captionVisible ) {
-		// Only create a caption if we need it
-		if ( !this.$caption ) {
-			model = this.model.children[ 0 ];
-			view = ve.ce.nodeFactory.create( model.getType(), model );
-			model.connect( view, { update: 'onModelUpdate' } );
-			this.children.push( view );
-			view.attach( this );
-			if ( this.live !== view.isLive() ) {
-				view.setLive( this.live );
-			}
-			this.$caption = view.$element;
-			this.$element.append( this.$caption );
-		}
-	}
-	if ( this.$caption ) {
-		this.$caption.toggleClass( 'oo-ui-element-hidden', !this.captionVisible );
-	}
-};
 
 /**
  * Update CSS classes based on alignment and type
@@ -194,7 +155,10 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
  * @param {Object} [dimensions] Dimension object containing width & height
  */
 ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
-	var hasBorderOrFrame = this.captionVisible || this.model.getAttribute( 'borderImage' );
+	var
+		type = this.model.getAttribute( 'type' ),
+		borderImage = this.model.getAttribute( 'borderImage' ),
+		hasBorderOrFrame = ( type !== 'none' && type !== 'frameless' ) || borderImage;
 
 	if ( !dimensions ) {
 		dimensions = {
@@ -286,7 +250,6 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 					.attr( 'typeof', this.model.getRdfa() );
 
 				this.updateClasses();
-				this.updateCaption();
 				this.updateSize();
 				break;
 			case 'borderImage':
@@ -319,9 +282,16 @@ ve.ce.MWBlockImageNode.prototype.onResizableResizing = function ( dimensions ) {
 	}
 };
 
-/** */
-ve.ce.MWBlockImageNode.prototype.onSplice = function () {
-	// Intentionally empty
+ve.ce.MWBlockImageNode.prototype.getDomPosition = function () {
+	// We need to override this because this.$element can have children other than renderings of child
+	// CE nodes (specifically, the image itself, this.$a), which throws the calculations out of whack.
+	// Luckily, MWBlockImageNode is very simple and can contain at most one other node: its caption,
+	// which is always inserted at the end.
+	var domNode = this.$element.last()[ 0 ];
+	return {
+		node: domNode,
+		offset: domNode.childNodes.length
+	};
 };
 
 /* Registration */
