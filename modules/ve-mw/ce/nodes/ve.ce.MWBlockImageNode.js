@@ -58,7 +58,6 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 		// ve-ce-mwBlockImageNode-type-thumb
 		// ve-ce-mwBlockImageNode-type-frame
 		// ve-ce-mwBlockImageNode-type-frameless
-		// ve-ce-mwBlockImageNode-type-border
 		// ve-ce-mwBlockImageNode-type-none
 		.addClass( 've-ce-mwBlockImageNode ve-ce-mwBlockImageNode-type-' + type )
 		// 'typeof' should appear with the proper Parsoid-generated
@@ -120,7 +119,6 @@ ve.ce.MWBlockImageNode.prototype.updateCaption = function () {
 
 	this.captionVisible = type !== 'none' &&
 		type !== 'frameless' &&
-		type !== 'border' &&
 		this.model.children.length === 1;
 
 	if ( this.captionVisible ) {
@@ -163,11 +161,9 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 	if ( type !== 'none' && type !== 'frameless' ) {
 		alignClass = this.getCssClass( 'default', align );
 		this.$image.addClass( 've-ce-mwBlockImageNode-thumbimage' );
-		this.$element.addClass( 've-ce-mwBlockImageNode-borderwrap' );
 	} else {
 		alignClass = this.getCssClass( 'none', align );
 		this.$image.removeClass( 've-ce-mwBlockImageNode-thumbimage' );
-		this.$element.removeClass( 've-ce-mwBlockImageNode-borderwrap' );
 	}
 	this.$element.addClass( alignClass );
 
@@ -198,6 +194,8 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
  * @param {Object} [dimensions] Dimension object containing width & height
  */
 ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
+	var hasBorderOrFrame = this.captionVisible || this.model.getAttribute( 'borderImage' );
+
 	if ( !dimensions ) {
 		dimensions = {
 			width: this.model.getAttribute( 'width' ),
@@ -210,8 +208,8 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 	// Make sure $element is sharing the dimensions, otherwise 'middle' and 'none'
 	// positions don't work properly
 	this.$element.css( {
-		width: dimensions.width + ( this.captionVisible ? 2 : 0 ),
-		height: this.captionVisible ? 'auto' : dimensions.height
+		width: dimensions.width + ( hasBorderOrFrame ? 2 : 0 ),
+		height: hasBorderOrFrame ? 'auto' : dimensions.height
 	} );
 	this.$element.toggleClass( 'mw-default-size', !!this.model.getAttribute( 'defaultSize' ) );
 };
@@ -289,6 +287,11 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 
 				this.updateClasses();
 				this.updateCaption();
+				this.updateSize();
+				break;
+			case 'borderImage':
+				this.updateClasses();
+				this.updateSize();
 				break;
 			// Other image attributes if they exist
 			case 'alt':
