@@ -391,7 +391,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 			part = content.parts[ i ];
 			if ( part.template ) {
 				href = part.template.target.href;
-				page = href ? ve.decodeURIComponentIntoArticleTitle( href.replace( /^(\.\.?\/)*/, '' ) ) : null;
+				page = href ? ve.normalizeParsoidResourceName( href ) : null;
 				this.partsList.push( {
 					template: part.template.target.wt,
 					templatePage: page
