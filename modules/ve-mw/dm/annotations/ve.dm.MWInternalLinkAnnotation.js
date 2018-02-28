@@ -102,7 +102,7 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle 
  *    True if the href pointed to the local wiki, false if href is external
  */
 ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, doc ) {
-	var relativeBase, relativeBaseRegex, relativeHref, isInternal, matches;
+	var relativeBase, relativeBaseRegex, relativeHref, isInternal, matches, data;
 
 	function regexEscape( str ) {
 		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
@@ -124,18 +124,14 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 		isInternal = true;
 	}
 
-	// The href is simply the title, unless we're dealing with a page that has slashes in its name
-	// in which case it's preceded by one or more instances of "./" or "../", so strip those
-	matches = href.match( /^((?:\.\.?\/)*)(.*)$/ );
+	// This href doesn't necessarily come from Parsoid (and it might not have the "./" prefix), but
+	// this method will work fine.
+	data = ve.parseParsoidResourceName( href );
 
-	// Percent-encoded characters are forbidden in titles... but if we're
-	// copy/pasting URLs around, they're likely to wind up encoded at this
-	// point. So decode them, otherwise this is going to cause failures
-	// elsewhere.
 	return {
-		title: ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] ),
-		rawTitle: matches[ 2 ],
-		hrefPrefix: matches[ 1 ],
+		title: data.title,
+		rawTitle: data.rawTitle,
+		hrefPrefix: data.hrefPrefix,
 		isInternal: isInternal
 	};
 };

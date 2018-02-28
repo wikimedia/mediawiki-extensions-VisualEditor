@@ -296,14 +296,10 @@ ve.dm.MWImageNode.prototype.onAttributeChange = function ( key, from, to ) {
 /**
  * Get the normalised filename of the image
  *
- * @return {string} Filename
+ * @return {string} Filename (including namespace)
  */
 ve.dm.MWImageNode.prototype.getFilename = function () {
-	// Strip ./ stuff and decode URI encoding
-	var resource = this.getAttribute( 'resource' ) || '',
-		filename = resource.replace( /^(\.\.?\/)*/, '' );
-
-	return ve.decodeURIComponentIntoArticleTitle( filename, true );
+	return ve.normalizeParsoidResourceName( this.getAttribute( 'resource' ) || '' );
 };
 
 /**
