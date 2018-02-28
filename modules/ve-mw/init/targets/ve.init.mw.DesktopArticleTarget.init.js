@@ -948,11 +948,11 @@
 		( mw.config.get( 'wgIsProbablyEditable' ) || mw.config.get( 'wgRelevantPageIsProbablyEditable' ) ) &&
 
 		// Not on pages which are outputs of the Translate extensions
-		// TODO: Allow the Translate extension to do this itself
+		// TODO: Allow the Translate extension to do this itself (T174180)
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
-		// Not on the edit conflict page of the TwoColumnConflict extension see T156251
-		// TODO: Allow the TwoColumnConflict extension to do this itself
+		// Not on the edit conflict page of the TwoColumnConflict extension (T156251)
+		// TODO: Allow the TwoColumnConflict extension to do this itself (T174180)
 		mw.config.get( 'wgTwoColConflict' ) !== 'true' &&
 
 		// Not on Special:Undelete (T173154)
