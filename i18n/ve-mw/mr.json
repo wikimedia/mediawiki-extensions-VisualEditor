@@ -10,7 +10,8 @@
 			"अभय नातू",
 			"NehalDaveND",
 			"Cherishsantosh",
-			"Sureshkhole"
+			"Sureshkhole",
+			"Susheelkasab"
 		]
 	},
 	"apihelp-visualeditor-description": "पार्सोईड सेवांकडून HTML5 पान तयार करते",
@@ -61,6 +62,10 @@
 	"tooltip-ca-editsource": "लेखपान मूळस्वरूपात संपादीत करा,तेथे मराठी टायपींगसाठी युएलएस कार्यान्वित करू शकता.",
 	"tooltip-ca-ve-edit": "या पानाचे संपादन करा",
 	"visualeditor-advancedsettings-tool": "प्रगत मांडण्या",
+	"visualeditor-autosave-not-recovered-text": "तुमचे असंपादित बदल पुनर्स्थापित करण्यात अयशस्वी.",
+	"visualeditor-autosave-not-recovered-title": "बदलांचे पुनर्स्थापन अयशस्वी झाले",
+	"visualeditor-autosave-recovered-text": "तुमचे असंपादित बदल यशस्वीपणे पुनर्स्थापित करण्यात आले आहेत.",
+	"visualeditor-autosave-recovered-title": "सर्व बदल पुर्नस्थापित केले",
 	"visualeditor-backbutton-tooltip": "परत जा",
 	"visualeditor-beta-label": "'चाचणी स्थिती'(बीटा)",
 	"visualeditor-beta-warning": "संपादनादरम्यान आपणास काही तांत्रिक समस्या आल्यास त्याचा अहवाल कृपया द्या.",
@@ -222,6 +227,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|सजगता संदेश}}",
 	"visualeditor-editnotices-tooltip": "सुचना संपादित करा",
 	"visualeditor-editsummary": "आपण केलेल्या बदलाचे वर्णन लिहा",
+	"visualeditor-editsummary-characters-remaining": "उर्वरित अक्षरांची संख्या",
 	"visualeditor-editsummary-bytes-remaining": "शेषा बाईट्सचा आकडा",
 	"visualeditor-educationpopup-dismiss": "होय, समजले",
 	"visualeditor-feedback-defaultmessage": "यूआरएल: $1",
@@ -351,6 +357,7 @@
 	"visualeditor-preference-core-description": "हा यथादृश्यसंपादक सक्षम करा. तो चर्चा-पानांवर व काही इतर नामविश्वात उपलब्ध राहणार नाही.",
 	"visualeditor-preference-core-label": "दृश्य संपादन",
 	"visualeditor-preference-enable": "या दृश्यसंपादकास कार्यान्वित करा.तो खालील {{PLURAL:$2|नामविश्वात}} उपलब्ध असेल: $1",
+	"visualeditor-preference-newwikitexteditor-enable": "इतर विकीटेक्स्ट संपादकाऐवजी दृश्यमान संपादकामध्ये विकीटेक्स्ट वापरा",
 	"visualeditor-preference-newwikitexteditor-description": "यथादृश्यसंपादकात नविन विकिमजकूर पद्धती सक्षम करा. यात यथादृश्यसंपादकात असणारी पुष्कळ साधने आहेत, त्याचे आरेखनही सारखेच आहे व त्या दोघांत अदला-बदली करणे सोपे आहे.",
 	"visualeditor-preference-newwikitexteditor-label": "नविन विकिमजकूर पद्धती",
 	"visualeditor-preference-tabs": "संपादन पद्धती:",
