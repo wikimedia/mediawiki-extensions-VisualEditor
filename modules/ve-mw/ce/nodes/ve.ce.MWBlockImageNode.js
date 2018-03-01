@@ -317,11 +317,6 @@ ve.ce.MWBlockImageNode.prototype.onResizableResizing = function ( dimensions ) {
 };
 
 /** */
-ve.ce.MWBlockImageNode.prototype.setupSlugs = function () {
-	// Intentionally empty
-};
-
-/** */
 ve.ce.MWBlockImageNode.prototype.onSplice = function () {
 	// Intentionally empty
 };
