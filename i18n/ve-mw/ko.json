@@ -241,6 +241,7 @@
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|알림}} $1개",
 	"visualeditor-editnotices-tooltip": "편집 알림",
 	"visualeditor-editsummary": "바꾼 내용 설명",
+	"visualeditor-editsummary-characters-remaining": "남은 문자 수",
 	"visualeditor-editsummary-bytes-remaining": "남은 바이트 수",
 	"visualeditor-educationpopup-dismiss": "알겠습니다",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

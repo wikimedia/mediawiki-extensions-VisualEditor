@@ -387,7 +387,7 @@
 	"visualeditor-preference-tabs-prefer-wt": "Завжди відкривати редактор коду",
 	"visualeditor-preference-tabs-remember-last": "Пам'ятати мій останній редактор",
 	"visualeditor-preference-visualdiffpage-description": "Увімкнути новий візуальний режим на сторінках перегляду відмінностей між версіями.",
-	"visualeditor-preference-visualdiffpage-label": "Візуальні відмінності",
+	"visualeditor-preference-visualdiffpage-label": "Візуальна різниця версій",
 	"visualeditor-recreate": "Сторінка, яку Ви редагуєте, була вилучена в процесі редагування. Натисніть \"$1\" для того, аби створити її ще раз.",
 	"visualeditor-redirect-description": "Перенаправлення на $1",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Можете натиснути $1, щоб зберегти своє редагування.",
