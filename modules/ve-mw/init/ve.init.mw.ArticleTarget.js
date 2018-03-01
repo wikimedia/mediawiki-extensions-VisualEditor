@@ -437,6 +437,7 @@ ve.init.mw.ArticleTarget.prototype.documentReady = function () {
  */
 ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	var name, i, triggers,
+		target = this,
 		accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
 		accessKeyModifiers = new ve.ui.Trigger( accessKeyPrefix + '-' ).modifiers,
 		surfaceModel = this.getSurface().getModel();
@@ -476,7 +477,10 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		}
 	} else {
 		// ...otherwise store this document state for later recovery
-		this.storeDocState( this.originalHtml );
+		// Wait for the first change before doing this.
+		surfaceModel.once( 'undoStackChange', function () {
+			target.storeDocState( target.originalHtml );
+		} );
 	}
 	// Start auto-saving transactions
 	surfaceModel.startStoringChanges();
