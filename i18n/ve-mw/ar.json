@@ -384,6 +384,7 @@
 	"visualeditor-preference-core-description": "تمكين المحرر المرئي. لن يكون متوفرًا في صفحات النقاش ونطاقات أخرى.",
 	"visualeditor-preference-core-label": "التحرير المرئي",
 	"visualeditor-preference-enable": "تمكين المحرر المرئي. متوفر في {{PLURAL:$2|النطاق التالي|النطاقات التالية}}: $1",
+	"visualeditor-preference-newwikitexteditor-enable": "استخدم نمط نص الويكي داخل المحرر المرئي، بدلا من محرر نص ويكي مختلف.",
 	"visualeditor-preference-newwikitexteditor-description": "فعل نمط نص الويكي الجديد داخل المحرر المرئي. لديه الكثير من الأدوات الموجودة في المحرر المرئي، ويستخدم تصميما مماثلا، ويسمح بتبديل أفضل بين الاثنين.",
 	"visualeditor-preference-newwikitexteditor-label": "نمط نص الويكي الجديد",
 	"visualeditor-preference-tabs": "وضع التحرير:",
