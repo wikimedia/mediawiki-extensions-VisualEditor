@@ -721,7 +721,9 @@ ve.ui.MWSaveDialog.prototype.setDimensions = function () {
 	// Parent method
 	ve.ui.MWSaveDialog.parent.prototype.setDimensions.apply( this, arguments );
 
-	this.positionDiffElement();
+	if ( !this.positioning ) {
+		this.positionDiffElement();
+	}
 };
 
 /**
@@ -737,7 +739,9 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 				// This is delayed, so check the visual diff is still visible
 				if ( dialog.diffElement && dialog.isVisible() && dialog.reviewModeButtonSelect.findSelectedItem().getData() === 'visual' ) {
 					dialog.diffElement.positionDescriptions();
+					dialog.positioning = true;
 					dialog.updateSize();
+					dialog.positioning = false;
 				}
 			} );
 		}, OO.ui.theme.getDialogTransitionDuration() );
