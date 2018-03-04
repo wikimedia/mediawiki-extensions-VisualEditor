@@ -9,6 +9,7 @@
 	var reviewModeButtonSelect, diffElement, lastDiff, $wikitextDiff,
 		$visualDiffContainer = $( '<div>' ),
 		$visualDiff = $( '<div>' ),
+		$revisionInfo = $( '<table>' ).addClass( 'diff' ),
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		uri = new mw.Uri(),
 		mode = uri.query.diffmode || 'source',
@@ -21,6 +22,7 @@
 	}
 
 	$visualDiffContainer.append(
+		$revisionInfo,
 		progress.$element.addClass( 'oo-ui-element-hidden' ),
 		$visualDiff
 	);
@@ -79,6 +81,15 @@
 	mw.hook( 'wikipage.diff' ).add( function () {
 		$wikitextDiff = $( 'table.diff[data-mw="interface"]' );
 		$wikitextDiff.before( $visualDiffContainer );
+		$revisionInfo.empty().append(
+			// Clone with `true, true` to also deep clone event handlers, e.g. for the "thanks" link.
+			$( 'tr.diff-title' ).clone( true, true )
+		);
+		// Highlight the headers using the same styles as the diff, to better indicate
+		// the meaning of headers when not using two-column diff.
+		$revisionInfo.find( '#mw-diff-otitle1' ).attr( 'data-diff-action', 'remove' );
+		$revisionInfo.find( '#mw-diff-ntitle1' ).attr( 'data-diff-action', 'insert' );
+
 		// The PHP widget was a ButtonGroupWidget, so replace with a
 		// ButtonSelectWidget instead of infusing.
 		reviewModeButtonSelect = new OO.ui.ButtonSelectWidget( {
