@@ -463,11 +463,10 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	if ( this.recovered ) {
 		// Restore auto-saved transactions if document state was recovered
 		try {
-			if ( surfaceModel.restoreChanges() ) {
-				mw.notify( ve.msg( 'visualeditor-autosave-recovered-text' ), {
-					title: ve.msg( 'visualeditor-autosave-recovered-title' )
-				} );
-			}
+			surfaceModel.restoreChanges();
+			mw.notify( ve.msg( 'visualeditor-autosave-recovered-text' ), {
+				title: ve.msg( 'visualeditor-autosave-recovered-title' )
+			} );
 		} catch ( e ) {
 			mw.log.warn( e );
 			mw.notify( ve.msg( 'visualeditor-autosave-not-recovered-text' ), {
@@ -477,10 +476,19 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		}
 	} else {
 		// ...otherwise store this document state for later recovery
-		// Wait for the first change before doing this.
-		surfaceModel.once( 'undoStackChange', function () {
-			target.storeDocState( target.originalHtml );
-		} );
+		if ( !this.fromEditedState ) {
+			// Store immediately if the document was previously edited
+			// (e.g. in a different mode)
+			this.storeDocState( this.originalHtml );
+		} else {
+			// Only store after the first change if this is an unmodified document
+			surfaceModel.once( 'undoStackChange', function () {
+				// Check the surface hasn't been destroyed
+				if ( target.getSurface() ) {
+					target.storeDocState( target.originalHtml );
+				}
+			} );
+		}
 	}
 	// Start auto-saving transactions
 	surfaceModel.startStoringChanges();
