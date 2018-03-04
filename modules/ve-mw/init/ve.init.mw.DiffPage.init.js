@@ -6,8 +6,10 @@
  */
 
 ( function () {
-	var $visualDiff,
-		reviewModeButtonSelect,
+	var reviewModeButtonSelect, diffElement, lastDiff, $wikitextDiff,
+		$visualDiffContainer = $( '<div>' ),
+		$visualDiff = $( '<div>' ),
+		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		uri = new mw.Uri(),
 		mode = uri.query.diffmode || 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
@@ -18,10 +20,14 @@
 		mode = 'source';
 	}
 
+	$visualDiffContainer.append(
+		progress.$element.addClass( 'oo-ui-element-hidden' ),
+		$visualDiff
+	);
+
 	function onReviewModeButtonSelectSelect( item ) {
-		var modulePromise, progress, oldPageName, newPageName,
+		var modulePromise, oldPageName, newPageName, isVisual,
 			$revSlider = $( '.mw-revslider-container' ),
-			$wikitextDiff = $( 'table.diff[data-mw="interface"]' ),
 			oldId = mw.config.get( 'wgDiffOldId' ),
 			newId = mw.config.get( 'wgDiffNewId' );
 
@@ -33,28 +39,34 @@
 		}
 
 		mode = item.getData();
+		isVisual = mode === 'visual';
 
-		if ( mode === 'visual' ) {
-			progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } );
-			$wikitextDiff.addClass( 'oo-ui-element-hidden' ).before( progress.$element );
+		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
+		$wikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
+		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
+
+		if ( isVisual && !(
+			lastDiff && lastDiff.oldId === oldId && lastDiff.newId === newId &&
+			lastDiff.oldPageName === oldPageName && lastDiff.newPageName === newPageName
+		) ) {
+			$visualDiff.empty();
+			progress.$element.removeClass( 'oo-ui-element-hidden' );
 			// TODO: Load a smaller subset of VE for computing the visual diff
 			modulePromise = mw.loader.using( [ 'ext.visualEditor.desktopArticleTarget' ].concat( pluginModules ) );
 			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( function ( visualDiffGenerator ) {
-				var diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
+				diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
 
-				progress.$element.remove();
-				$wikitextDiff.before( diffElement.$element );
-				$visualDiff = diffElement.$element;
-				$revSlider.addClass( 've-init-mw-diffPage-revSlider-visual' );
+				progress.$element.addClass( 'oo-ui-element-hidden' );
+				$visualDiff.append( diffElement.$element );
+				lastDiff = {
+					oldId: oldId,
+					newId: newId,
+					oldPageName: oldPageName,
+					newPageName: newPageName
+				};
 
 				diffElement.positionDescriptions();
 			} );
-		} else {
-			if ( $visualDiff ) {
-				$visualDiff.addClass( 'oo-ui-element-hidden' );
-			}
-			$wikitextDiff.removeClass( 'oo-ui-element-hidden' );
-			$revSlider.removeClass( 've-init-mw-diffPage-revSlider-visual' );
 		}
 
 		if ( history.replaceState ) {
@@ -65,6 +77,8 @@
 	}
 
 	mw.hook( 'wikipage.diff' ).add( function () {
+		$wikitextDiff = $( 'table.diff[data-mw="interface"]' );
+		$wikitextDiff.before( $visualDiffContainer );
 		// The PHP widget was a ButtonGroupWidget, so replace with a
 		// ButtonSelectWidget instead of infusing.
 		reviewModeButtonSelect = new OO.ui.ButtonSelectWidget( {
