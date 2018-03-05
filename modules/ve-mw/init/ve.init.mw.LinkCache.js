@@ -118,7 +118,7 @@ ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc 
 
 	// TODO: Remove when fixed upstream in Parsoid (T58756)
 	$elements
-		.find( 'a[rel="mw:ExtLink"]' ).addBack( 'a[rel="mw:ExtLink"]' )
+		.find( 'a[rel~="mw:ExtLink"]' ).addBack( 'a[rel~="mw:ExtLink"]' )
 		.addClass( 'external' );
 
 	// TODO: Remove when moved upstream into Parsoid or another service (T64803)
