@@ -1127,6 +1127,26 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		clipboardBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>'
 	},
+	'numbered external link (non-empty mw:Extlink as cross-document paste)': {
+		body: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>',
+		data: [
+			{ type: 'paragraph' },
+			'F', 'o', 'o',
+			{
+				type: 'link/mwNumberedExternal',
+				attributes: {
+					href: 'http://www.example.com'
+				}
+			},
+			{ type: '/link/mwNumberedExternal' },
+			'B', 'a', 'r',
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		clipboardBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>',
+		normalizedBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com"></a>Bar</p>'
+	},
 	'URL link': {
 		body: '<p><a rel="mw:ExtLink" href="http://www.mediawiki.org/">mw</a></p>',
 		data: [
