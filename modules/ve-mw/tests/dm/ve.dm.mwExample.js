@@ -205,17 +205,17 @@ ve.dm.mwExample.MWTransclusion.mixedDataClose = { type: '/mwTransclusionInline' 
 
 ve.dm.mwExample.MWTransclusion.blockParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.blockData ), undefined ] );
 ve.dm.mwExample.MWTransclusion.blockStoreItems = {};
-ve.dm.mwExample.MWTransclusion.blockStoreItems[ ve.dm.IndexValueStore.prototype.indexOfValue( null, ve.dm.mwExample.MWTransclusion.blockParamsHash ) ] =
+ve.dm.mwExample.MWTransclusion.blockStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.blockParamsHash ) ] =
 	$( ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent ).toArray();
 
 ve.dm.mwExample.MWTransclusion.inlineParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.inlineData ), undefined ] );
 ve.dm.mwExample.MWTransclusion.inlineStoreItems = {};
-ve.dm.mwExample.MWTransclusion.inlineStoreItems[ ve.dm.IndexValueStore.prototype.indexOfValue( null, ve.dm.mwExample.MWTransclusion.inlineParamsHash ) ] =
+ve.dm.mwExample.MWTransclusion.inlineStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.inlineParamsHash ) ] =
 	$( ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose ).toArray();
 
 ve.dm.mwExample.MWTransclusion.mixedParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.mixedDataOpen ), undefined ] );
 ve.dm.mwExample.MWTransclusion.mixedStoreItems = {};
-ve.dm.mwExample.MWTransclusion.mixedStoreItems[ ve.dm.IndexValueStore.prototype.indexOfValue( null, ve.dm.mwExample.MWTransclusion.mixedParamsHash ) ] =
+ve.dm.mwExample.MWTransclusion.mixedStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.mixedParamsHash ) ] =
 	$( ve.dm.mwExample.MWTransclusion.mixed ).toArray();
 
 ve.dm.mwExample.MWInternalLink = {
@@ -1187,24 +1187,24 @@ ve.dm.mwExample.domToDataCases = {
 					generated: 'wrapper',
 					metaItems: [
 						{
-							originalDomElementsIndex: 'h188ab6af88887790',
+							originalDomElementsHash: 'h188ab6af88887790',
 							type: 'mwLanguage',
 							attributes: {
 								href: 'http://de.wikipedia.org/wiki/Foo'
 							},
 							internal: {
-								loadMetaParentIndex: 'hbc66e1df10d058e6',
+								loadMetaParentHash: 'hbc66e1df10d058e6',
 								loadMetaParentOffset: 3
 							}
 						},
 						{
-							originalDomElementsIndex: 'h188ab6ff88887790',
+							originalDomElementsHash: 'h188ab6ff88887790',
 							type: 'mwLanguage',
 							attributes: {
 								href: 'http://fr.wikipedia.org/wiki/Foo'
 							},
 							internal: {
-								loadMetaParentIndex: 'h4e7ce2a82b7ce627',
+								loadMetaParentHash: 'h4e7ce2a82b7ce627',
 								loadMetaParentOffset: 6
 							}
 						}
@@ -1481,7 +1481,7 @@ ve.dm.mwExample.domToDataCases = {
 	'mw:Nowiki unwraps when annotations modified': {
 		data: ve.dm.mwExample.mwNowiki,
 		modify: function ( model ) {
-			model.data.data[ 7 ][ 1 ].push( model.getStore().index( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
+			model.data.data[ 7 ][ 1 ].push( model.getStore().hash( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	},

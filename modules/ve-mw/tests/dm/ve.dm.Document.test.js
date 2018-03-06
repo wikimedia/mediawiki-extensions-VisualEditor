@@ -12,7 +12,7 @@ QUnit.module( 've.dm.Document (MW)', ve.test.utils.mwEnvironment );
 // FIXME runner copypasted from core, use data provider
 QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert ) {
 	var documentModel, i, j,
-		store = new ve.dm.IndexValueStore(),
+		store = new ve.dm.HashValueStore(),
 		storeItems = [
 			ve.dm.mwExample.MWBlockImage.storeItems,
 			ve.dm.mwExample.MWInlineImage.storeItems
@@ -230,7 +230,7 @@ QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert
 
 	for ( i = 0; i < storeItems.length; i++ ) {
 		for ( j = 0; j < storeItems[ i ].length; j++ ) {
-			store.index( storeItems[ i ][ j ].value, storeItems[ i ][ j ].hash );
+			store.hash( storeItems[ i ][ j ].value, storeItems[ i ][ j ].hash );
 		}
 	}
 	for ( i = 0; i < tests.length; i++ ) {

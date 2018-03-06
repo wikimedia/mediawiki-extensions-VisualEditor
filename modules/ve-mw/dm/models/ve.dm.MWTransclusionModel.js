@@ -84,7 +84,7 @@
 				nodeClass = ve.dm.modelRegistry.lookup( type );
 				store = surfaceFragment.getDocument().getStore();
 				hash = OO.getHash( [ nodeClass.static.getHashObjectForRendering( data[ 0 ] ), undefined ] );
-				store.index( generatedContents, hash );
+				store.hash( generatedContents, hash );
 			}
 
 			if ( range.isCollapsed() ) {
