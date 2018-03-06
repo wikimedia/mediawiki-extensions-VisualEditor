@@ -60,7 +60,7 @@ ve.test.utils.runWikitextStringHandlerTest = function ( assert, server, string, 
 			store = docOrData.getStore();
 		} else {
 			actualData = docOrData;
-			store = new ve.dm.IndexValueStore();
+			store = new ve.dm.HashValueStore();
 		}
 		ve.dm.example.postprocessAnnotations( actualData, store );
 		if ( assertDom ) {

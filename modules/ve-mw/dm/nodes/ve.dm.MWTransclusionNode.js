@@ -136,7 +136,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 	var els, i, len, span, value,
 		store = converter.getStore(),
 		originalMw = dataElement.attributes.originalMw,
-		originalDomElements = store.value( dataElement.originalDomElementsIndex );
+		originalDomElements = store.value( dataElement.originalDomElementsHash );
 
 	function wrapTextNode( node ) {
 		var wrapper;
@@ -160,7 +160,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		if (
 			converter.isForClipboard() &&
 			// Use getHashObjectForRendering to get the rendering from the store
-			( value = store.value( store.indexOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
+			( value = store.value( store.hashOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
 		) {
 			// For the clipboard use the current DOM contents so the user has something
 			// meaningful to paste into external applications

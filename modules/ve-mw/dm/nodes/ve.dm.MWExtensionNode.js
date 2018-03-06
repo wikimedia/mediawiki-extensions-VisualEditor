@@ -100,16 +100,16 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
 	if (
-		dataElement.originalDomElementsIndex &&
+		dataElement.originalDomElementsHash &&
 		originalMw && ve.compare( dataElement.attributes.mw, JSON.parse( originalMw ) )
 	) {
 		// originalDomElements is also used for CE rendering so return a copy
-		els = ve.copyDomElements( converter.getStore().value( dataElement.originalDomElementsIndex ), doc );
+		els = ve.copyDomElements( converter.getStore().value( dataElement.originalDomElementsHash ), doc );
 	} else {
 		if (
 			converter.isForClipboard() &&
 			// Use getHashObjectForRendering to get the rendering from the store
-			( value = store.value( store.indexOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
+			( value = store.value( store.hashOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
 		) {
 			// For the clipboard use the current DOM contents so the user has something
 			// meaningful to paste into external applications

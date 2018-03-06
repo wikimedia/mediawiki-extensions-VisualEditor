@@ -33,7 +33,7 @@ ve.dm.MWNowikiAnnotation.static.matchRdfaTypes = [ 'mw:Nowiki' ];
 
 ve.dm.MWNowikiAnnotation.static.toDomElements = function ( dataElement, doc, converter, childDomElements ) {
 	var i, len,
-		originalDomElements = converter.getStore().value( dataElement.originalDomElementsIndex ),
+		originalDomElements = converter.getStore().value( dataElement.originalDomElementsHash ),
 		originalChildren = originalDomElements && originalDomElements[ 0 ] && originalDomElements[ 0 ].childNodes,
 		contentsChanged = false,
 		domElement = document.createElement( 'span' );
