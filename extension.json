@@ -220,6 +220,14 @@
 				"lib/ve/lib/dompurify/purify.js"
 			]
 		},
+		"color-picker": {
+			"scripts": [
+				"lib/ve/lib/color-picker/color-picker.js"
+			],
+			"styles": [
+				"lib/ve/lib/color-picker/color-picker.css"
+			]
+		},
 		"unicodejs": {
 			"scripts": [
 				"lib/ve/lib/unicodejs/unicodejs.js"
@@ -1140,6 +1148,7 @@
 				"ext.visualEditor.core",
 				"dompurify",
 				"socket.io",
+				"color-picker",
 				"oojs-ui.styles.icons-user"
 			],
 			"messages": [
