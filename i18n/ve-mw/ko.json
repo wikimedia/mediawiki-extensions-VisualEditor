@@ -25,7 +25,8 @@
 			"Namoroka",
 			"HDNua",
 			"Ykhwong",
-			"Ellif"
+			"Ellif",
+			"Nuevo Paso"
 		]
 	},
 	"apihelp-visualeditor-description": "Parsoid 서비스에서 문서를 위해 HTML5를 반환합니다.",
@@ -234,7 +235,7 @@
 	"visualeditor-dialogbutton-template-tooltip": "틀",
 	"visualeditor-dialogbutton-transclusion-tooltip": "틀",
 	"visualeditor-donebutton-tooltip": "편집 완료",
-	"visualeditor-editconflict": "편집 충돌 때문에 바뀜을 저장할 수 없습니다. 수동으로 충돌을 해결하겠습니까?",
+	"visualeditor-editconflict": "편집 충돌 때문에 변경 사항을 저장할 수 없습니다. 수동으로 충돌을 해결하겠습니까?",
 	"visualeditor-editingtabdialog-body": "이제 {{SITENAME}}에서는 당신이 선호하는 편집기를 기억합니다. 당신은 편집할 때마다 편집 모드를 전환할 수 있고 이후 설정을 변경할 수도 있습니다.",
 	"visualeditor-editingtabdialog-ok": "마지막 편집 때 사용한 편집기 사용",
 	"visualeditor-editingtabdialog-title": "탭 편집",
