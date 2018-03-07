@@ -15,7 +15,8 @@
 			"Macofe",
 			"SucreRouge",
 			"Ανώνυμος Βικιπαιδιστής",
-			"GR"
+			"GR",
+			"Nikosgranturismogt"
 		]
 	},
 	"apihelp-visualeditor-description": "Επιστρέφει HTML5 για μια σελίδα από την υπηρεσία Parsoid.",
@@ -297,9 +298,11 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Πλάτος εικόνων",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Προεπιλεγμένο πλάτος: $1 px",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Κωδικός γλώσσας",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Γλώσσα",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Πηγή",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Προορισμός",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Κείμενο",
+	"visualeditor-mwlanguagevariantcontextitem-title-name": "Όνομα γλώσσας",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Γλώσσες",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Κωδικός γλώσσας",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Περιεχόμενα",

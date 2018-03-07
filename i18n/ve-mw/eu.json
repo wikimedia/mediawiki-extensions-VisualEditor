@@ -7,7 +7,8 @@
 			"Subi",
 			"Sator",
 			"Macofe",
-			"Mikel Ibaiba"
+			"Mikel Ibaiba",
+			"Iñaki LL"
 		]
 	},
 	"apihelp-visualeditor-description": "HTML5 orri baterako itzultzen du Parsoid zerbitzutik.",
@@ -198,10 +199,10 @@
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Orrialde-izenburua",
 	"visualeditor-formatdropdown-format-mw-heading2": "Izenburua",
-	"visualeditor-formatdropdown-format-mw-heading3": "1. azpiizenburua",
-	"visualeditor-formatdropdown-format-mw-heading4": "2. azpiizenburua",
-	"visualeditor-formatdropdown-format-mw-heading5": "3. azpiizenburua",
-	"visualeditor-formatdropdown-format-mw-heading6": "4. azpiizenburua",
+	"visualeditor-formatdropdown-format-mw-heading3": "Azpiatalburua",
+	"visualeditor-formatdropdown-format-mw-heading4": "1. azpiatalburua",
+	"visualeditor-formatdropdown-format-mw-heading5": "2. azpiatalburua",
+	"visualeditor-formatdropdown-format-mw-heading6": "3. azpiatalburua",
 	"visualeditor-generating-wikitext-progress": "Wikitestu bihurtzen",
 	"visualeditor-languages-tool": "Hizkuntzak",
 	"visualeditor-linkinspector-button-link-external": "Kanpo lotura",
