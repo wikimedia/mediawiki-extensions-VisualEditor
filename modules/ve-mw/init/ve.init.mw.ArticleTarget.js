@@ -476,7 +476,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		}
 	} else {
 		// ...otherwise store this document state for later recovery
-		if ( !this.fromEditedState ) {
+		if ( this.fromEditedState ) {
 			// Store immediately if the document was previously edited
 			// (e.g. in a different mode)
 			this.storeDocState( this.originalHtml );
