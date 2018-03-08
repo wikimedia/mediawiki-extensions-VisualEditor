@@ -729,7 +729,11 @@ class VisualEditorHooks {
 			]
 		];
 
-		if ( $veConfig->get( 'VisualEditorEnableWikitextBetaFeature' ) ) {
+		if (
+			$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' ) &&
+			// Don't try to register as a beta feature if enabled by default
+			!$veConfig->get( 'VisualEditorEnableWikitext' )
+		) {
 			$preferences['visualeditor-newwikitext'] = [
 				'version' => '1.0',
 				'label-message' => 'visualeditor-preference-newwikitexteditor-label',
@@ -747,7 +751,11 @@ class VisualEditorHooks {
 			];
 		}
 
-		if ( $veConfig->get( 'VisualEditorEnableDiffPageBetaFeature' ) ) {
+		if (
+			$veConfig->get( 'VisualEditorEnableDiffPageBetaFeature' ) &&
+			// Don't try to register as a beta feature if enabled by default
+			!$veConfig->get( 'VisualEditorEnableDiffPage' )
+		) {
 			$preferences['visualeditor-visualdiffpage'] = [
 				'version' => '1.0',
 				'label-message' => 'visualeditor-preference-visualdiffpage-label',
