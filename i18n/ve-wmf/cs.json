@@ -26,6 +26,7 @@
 	"tag-visualeditor-needcheck": "možná chyba ve [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-needcheck-description": "Editace provedená za použití [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuálního editoru]], u které systém detekoval možné nezamýšlené změny wikitextu.",
 	"tag-visualeditor-wikitext": "editor wikitextu 2017",
+	"tag-visualeditor-wikitext-description": "Editace provedená pomocí editoru wikitextu 2017",
 	"tag-visualeditor-switched": "přepnuto z [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditoru]]",
 	"tag-visualeditor-switched-description": "Uživatel začal editovat pomocí vizuálního editoru, načež se přepnul do editoru wikitextu.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Názory",
