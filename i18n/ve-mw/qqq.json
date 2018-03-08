@@ -36,6 +36,7 @@
 	"apierror-visualeditor-difffailed": "{{doc-apierror}}",
 	"apierror-visualeditor-docserver-http-error": "{{doc-apierror}}\n\nParameters:\n* $1 - Error message, probably in English",
 	"apierror-visualeditor-docserver-http": "{{doc-apierror}}\n\nParameters:\n* $1 - HTTP status code (numeric)",
+	"apierror-visualeditor-docserver-unconfigured": "{{doc-apierror}}",
 	"apierror-visualeditor-docserver": "{{doc-apierror}}",
 	"apierror-visualeditor-invaliddeflate": "{{doc-apierror}}",
 	"apierror-visualeditor-latestnotfound": "{{doc-apierror}}",

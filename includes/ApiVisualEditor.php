@@ -57,11 +57,7 @@ class ApiVisualEditor extends ApiBase {
 			$params['restbaseCompat'] = true;
 		} else {
 			// No global modules defined, so no way to contact the document server.
-			$this->dieUsage(
-				'The VirtualRESTService for the document server is not defined; see ' .
-					'https://www.mediawiki.org/wiki/Extension:VisualEditor',
-				'no_vrs'
-			);
+			$this->dieWithError( 'apierror-visualeditor-docserver-unconfigured', 'no_vrs' );
 		}
 		// merge the global and service-specific params
 		if ( isset( $vrs['global'] ) ) {
