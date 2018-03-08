@@ -269,7 +269,8 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 			'div[id="myEventWatcherDiv"], ' + // T53423
 			'div[id="sendToInstapaperResults"], ' + // T63776
 			'div[id="kloutify"], ' + // T69006
-			'div[id^="mittoHidden"]' // T70900
+			'div[id^="mittoHidden"], ' + // T70900
+			'div.donut-container' // Web of Trust (T189148)
 		)
 		.remove();
 	// Add doctype manually
