@@ -5,6 +5,7 @@
 			"David1010"
 		]
 	},
+	"apierror-visualeditor-api-langlinks-error": "MediaWiki API-შ მოთხირიშ ჩლათა",
 	"apihelp-visualeditor-description": "HTML5-იშ დორთინაფა ხასჷლაშო parsoid სერვისშე.",
 	"apihelp-visualeditor-param-basetimestamp": "მუჟამსჷთ დოჩუანთჷნ, ქიგიორინეთ თე დორედაქტირაფილი გინომორსებაშ ნიშანო. გჷმირინუაფუ რედაქტირაფაშ კონფლიქტიშ გიოგორაფალო.",
 	"apihelp-visualeditor-param-cachekey": "დოფორმატირაფაშ ვარდა გიშაკერძაფეფშო, გიმირინეთ ქეშიშ წიმოხიანი დოფორმატაფაშ მოთხირიშ მოღალი თე კილაწკმა ართო. $1html-იშ მიოჯინშა ვემეღებათ.",
@@ -31,7 +32,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "დუდჯოხო ახალი სექციაშო",
 	"apihelp-visualeditoredit-param-starttimestamp": "ჩუალაშ ბორჯის, ქიგიორინეთ ხასჷლაშ დინოხარგუაშ მალობას. გჷმირინუაფუ რედაქტირაფაშ კონფლიქტიშ გიოგორაფალო.",
 	"apihelp-visualeditoredit-param-summary": "რედაქტირაფაშ რეზიუმე",
-	"apierror-visualeditor-api-langlinks-error": "MediaWiki API-შ მოთხირიშ ჩლათა",
 	"tooltip-ca-createsource": "თე ხასჷლას წყუშ კოდიშ აკოქიმინუა",
 	"tooltip-ca-edit": "თე ხასჷლაშ ვიკიტექსტიშ გიმორონაფათ რედაქტირაფა",
 	"tooltip-ca-editsource": "თე ხასჷლაშ წყუშ კოდიშ რედაქტირაფა",
@@ -56,8 +56,8 @@
 	"visualeditor-dialog-media-alttext-section-help": "თეშ გჷმორინაფა თქვა შეილებუნა, ტექსტური ეჭარუაშ ოჭარალო, თი კათაშო, ნამუეფსჷთ დეტალეფიშ ძირაფა ვეშულებუნ. ეჭარუა ძალამი ინფორმაციული ოკო რდას, თიშენ, ნამჷ—და თინეფქ მეჭირინაფილი ინფორმაცია დო ღანკი ქიგეგანი. თის ოთელარე შანულობა უღუ თოსლინთე დინაფილეფშო დო შხვა მახვარებუეფშო, ნამუეფსჷთ ეკრანშე კითხირიშ პროგრამულ უნარღელჸოფას ვარდა ხვალე ტექსტურ ბრაუზერეფს გჷმირინუანან.",
 	"visualeditor-dialog-media-change-image": "სურათის შეცვლა",
 	"visualeditor-dialog-media-choose-image": "გამოიყენე ეს სურათი",
-	"visualeditor-dialog-media-content-filename": "ფაილის სახელი",
 	"visualeditor-dialog-media-content-description-link": "(ეჭარუაშ ხასჷლა)",
+	"visualeditor-dialog-media-content-filename": "ფაილის სახელი",
 	"visualeditor-dialog-media-content-section": "წარწერა",
 	"visualeditor-dialog-media-content-section-help": "თქვა თე ვეშ გიმორინაფა ელემენტიშ მუკნაჭარაშო შეილებუნა, ნამუთ არძა მაკითხირეშო იჸუაფუ ოძირაფე. თეშნერი მუკნაჭარა შხირას გჷმირინუაფუ თიშ მიოწურაფალო თუ თუ მუ რსხუ უღუ თე ელემენტის ეშანილი სტატიაშ თემაწკჷმა. მუკნაჭარა ოკო რდას კუნტა დო ინფორმაციული.",
 	"visualeditor-dialog-media-goback": "უკან",
