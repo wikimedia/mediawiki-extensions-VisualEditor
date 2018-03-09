@@ -35,10 +35,14 @@ ve.dm.MWExternalLinkAnnotation.static.name = 'link/mwExternal';
 
 ve.dm.MWExternalLinkAnnotation.static.matchFunction = function ( domElement ) {
 	var type = domElement.getAttribute( 'rel' ) || domElement.getAttribute( 'typeof' ) || domElement.getAttribute( 'property' );
-	// Match explicity mw:ExtLink (external links), mw:WikiLink/Interwiki
+	// Match explicitly mw:ExtLink (external links), mw:WikiLink/Interwiki
 	// (interwiki links), or plain RDFa-less links with an href
 	// (e.g. from external paste)
-	return ( !type && domElement.hasAttribute( 'href' ) ) || type === 'mw:ExtLink' || type === 'mw:WikiLink/Interwiki';
+	if ( type ) {
+		type = type.split( ' ' );
+		return type.indexOf( 'mw:ExtLink' ) !== -1 || type.indexOf( 'mw:WikiLink/Interwiki' ) !== -1;
+	}
+	return domElement.hasAttribute( 'href' );
 };
 
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
