@@ -125,7 +125,7 @@ ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc 
 	// If the element isn't attached, doc will be null, so we don't know how to normalise titles
 	if ( doc ) {
 		$elements
-			.find( 'a[rel="mw:WikiLink"]' ).addBack( 'a[rel="mw:WikiLink"]' )
+			.find( 'a[rel~="mw:WikiLink"]' ).addBack( 'a[rel~="mw:WikiLink"]' )
 			.each( function () {
 				var title,
 					href = this.href || mw.config.get( 'wgArticlePath' );
