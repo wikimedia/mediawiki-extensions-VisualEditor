@@ -51,7 +51,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	} else {
 		this.initialEditSummary = this.currentUri.query.summary;
 	}
-	this.namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
@@ -1079,10 +1078,16 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
  * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
-	var target = this;
+	var namespaceKey,
+		target = this;
 	if ( this.isViewPage ) {
+		// Mimics getNamespaceKey in Title.php
+		namespaceKey = mw.config.get( 'wgCanonicalNamespace' ).toLowerCase() || 'main';
+		if ( namespaceKey === 'file' ) {
+			namespaceKey = 'image';
+		}
 		// Allow instant switching back to view mode, without refresh
-		$( '#ca-view a, #ca-nstab-visualeditor a' )
+		$( '#ca-view a, #ca-nstab-' + namespaceKey + ' a' )
 			.on( 'click', this.onViewTabClick.bind( this ) );
 
 	}
