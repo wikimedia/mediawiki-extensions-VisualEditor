@@ -5,7 +5,8 @@
 			"KWiki",
 			"Srdjan m",
 			"Semso98",
-			"Palapa"
+			"Palapa",
+			"Obsuser"
 		]
 	},
 	"apihelp-visualeditor-description": "Prikazuje HTML5 za stranicu koristeći uslugu Parsoid.",
@@ -245,7 +246,7 @@
 	"visualeditor-mainnamespacepagelink": "Project:Imenski prostori",
 	"visualeditor-media-input-placeholder": "Pretraži medijske datoteke",
 	"visualeditor-meta-tool": "Opcije",
-	"visualeditor-mweditmode-tooltip": "Zamijeni uređivač",
+	"visualeditor-mweditmode-tooltip": "Promijeni uređivač",
 	"visualeditor-mweditmodesource-progress": "Prebacivanje na uređivanje kôda...",
 	"visualeditor-mweditmodesource-title": "Da Vas prebacim na uređivanje izvornog kôda?",
 	"visualeditor-mweditmodesource-tool-current": "Uređivanje izvornog kôda",

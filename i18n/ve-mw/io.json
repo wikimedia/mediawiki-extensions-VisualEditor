@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Idojc"
+			"Idojc",
+			"Joao Xavier"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Eroro dum questionar MediaWiki API",
@@ -154,7 +155,7 @@
 	"visualeditor-donebutton-tooltip": "Me finis redaktar",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} nun memoras qua redaktilon vu preferas. Vu povas swichar redaktili dum redaktar, e chanjar vua prefero plu tarde.",
 	"visualeditor-editingtabdialog-ok": "Uzar la redaktilo quan me uzis lor mea lasta redakto",
-	"visualeditor-editnotices-tool": "$1{{PLURAL:$1|notico|notici}}",
+	"visualeditor-editnotices-tool": "$1{{PLURAL:$1| notico| notici}}",
 	"visualeditor-editnotices-tooltip": "Redakto-notici",
 	"visualeditor-editsummary": "Deskriptez vua chanji",
 	"visualeditor-educationpopup-dismiss": "Me komprenas, celez",

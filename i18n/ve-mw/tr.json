@@ -25,7 +25,8 @@
 			"Sadrettin",
 			"Alikaan",
 			"Katpatuka",
-			"Bulgu"
+			"Bulgu",
+			"Diyapazon"
 		]
 	},
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
@@ -66,6 +67,7 @@
 	"visualeditor-ca-ve-edit": "Görsel Düzenleyici",
 	"visualeditor-ca-ve-edit-section": "Görsel Düzenleyici",
 	"visualeditor-categories-tool": "Kategoriler",
+	"visualeditor-changedesc-mwtransclusion": "Şablon parametreleri değiştirildi",
 	"visualeditor-desc": "MediaWiki için Görsel düzenleyici",
 	"visualeditor-descriptionpagelink": "Project:Görsel Düzenleyici",
 	"visualeditor-dialog-media-alttext-section": "Alternatif metin",

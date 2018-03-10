@@ -190,6 +190,7 @@
 	"visualeditor-mainnamespacepagelink": "Project:Main namespace",
 	"visualeditor-media-input-placeholder": "Pretraži datoteke",
 	"visualeditor-meta-tool": "Opcije",
+	"visualeditor-mweditmode-tooltip": "Promeni uređivač",
 	"visualeditor-mweditmodesource-title": "Prebacivanje na izvorno uređivanje.",
 	"visualeditor-mweditmodesource-warning": "Prebacujete se na izvorno uređivanje.\nSve izmene koje ste načinili mogu biti zadržane, ali povratak u Vizuelni uređivač neće biti moguć bez čuvanja izmena ili osvežavanja stranice.\nŽelite li da nastavite?",
 	"visualeditor-mweditmodesource-warning-cancel": "Otkaži",

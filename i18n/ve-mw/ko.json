@@ -69,6 +69,8 @@
 	"tooltip-ca-editsource": "이 문서의 원본 코드를 편집",
 	"tooltip-ca-ve-edit": "이 문서 편집",
 	"visualeditor-advancedsettings-tool": "고급 설정",
+	"visualeditor-autosave-not-recovered-text": "저장되지 않은 변경은 복구되지 못했습니다.",
+	"visualeditor-autosave-recovered-text": "저장되지 않은 변경사항은 자동으로 복구되었습니다.",
 	"visualeditor-backbutton-tooltip": "돌아가기",
 	"visualeditor-beta-label": "베타",
 	"visualeditor-beta-warning": "편집할 때 기술적인 문제가 발생했다면 보고해 주세요.",
