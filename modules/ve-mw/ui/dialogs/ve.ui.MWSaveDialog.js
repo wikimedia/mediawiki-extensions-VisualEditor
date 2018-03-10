@@ -763,7 +763,11 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var surfaceMode = ve.init.target.getSurface().getMode();
+			var surfaceMode = ve.init.target.getSurface().getMode(),
+				section = ve.init.target.section,
+				// Can't do visual diffs for source mode section edits yet
+				canReviewVisual = !( surfaceMode === 'source' && section !== null );
+
 			this.canReview = !!data.canReview;
 			this.canPreview = !!data.canPreview;
 			this.setupCheckboxes( data.checkboxFields || [] );
@@ -779,11 +783,14 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 				}
 			}
 
+			this.reviewModeButtonSelect.findItemFromData( 'visual' ).setDisabled( !canReviewVisual );
+
 			// Config values used here:
 			// * visualeditor-diffmode-visual
 			// * visualeditor-diffmode-source
 			this.reviewModeButtonSelect.selectItemByData(
-				ve.userConfig( 'visualeditor-diffmode-' + surfaceMode ) || surfaceMode
+				!canReviewVisual ? 'source' :
+					ve.userConfig( 'visualeditor-diffmode-' + surfaceMode ) || surfaceMode
 			);
 
 			// Old messages should not persist
