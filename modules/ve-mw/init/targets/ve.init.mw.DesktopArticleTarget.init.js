@@ -1111,10 +1111,11 @@
 				);
 			}
 
-			// Add the switch button to wikitext ?action=edit or ?action=submit pages
+			// Add the switch button to WikiEditor on ?action=edit or ?action=submit pages
 			if (
 				init.isVisualAvailable &&
-				[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1
+				[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
+				$( '#wpTextbox1' ).length
 			) {
 				mw.loader.load( 'ext.visualEditor.switching' );
 				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
@@ -1176,6 +1177,12 @@
 
 				// Remember that the user wanted wikitext, at least this time
 				mw.libs.ve.setEditorPreference( 'wikitext' );
+
+				// If the user has loaded WikiEditor, clear any auto-save state they
+				// may have from a previous VE session
+				// We don't have access to the VE session storage methods, but invalidating
+				// the docstate is sufficient to prevent the data from being used.
+				mw.storage.session.remove( 've-docstate' );
 			}
 
 			init.setupEditLinks();
