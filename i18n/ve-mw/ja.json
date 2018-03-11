@@ -24,7 +24,8 @@
 			"Iwai.masaharu",
 			"Translatealcd",
 			"Hinaloe",
-			"Rxy"
+			"Rxy",
+			"Yusuke1109"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -211,7 +212,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "このフィールドは必須です。",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "戻る",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "続行",
-	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "必須の{{PLURAL:$1|パラメーター}}が不足しています",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "必須の{{PLURAL:$1|フィールド}}が不足しています",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "{{PLURAL:$2|パラメーター}} $1 を指定していませんが、本当に続行しますか?",
 	"visualeditor-dialog-transclusion-single-mode": "オプションを隠す",
 	"visualeditor-dialog-transclusion-title": "参照読み込み",
