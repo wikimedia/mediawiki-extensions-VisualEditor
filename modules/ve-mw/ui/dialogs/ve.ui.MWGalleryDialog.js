@@ -535,6 +535,16 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 };
 
 /**
+ * Update the image currently being edited (ve.ui.MWGalleryItemWidget) with the values from inputs
+ * in this dialog (currently only the image caption).
+ */
+ve.ui.MWGalleryDialog.prototype.updateHighlightedItem = function () {
+	if ( this.highlightedItem ) {
+		this.highlightedItem.setCaption( this.highlightedCaptionInput.getValue() );
+	}
+};
+
+/**
  * Handle search results choose event.
  *
  * @param {mw.widgets.MediaResultWidget} item Chosen item
@@ -576,6 +586,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	}
 
 	// Show edit panel
+	// (This also calls updateHighlightedItem() to save the input values.)
 	this.toggleSearchPanel( false );
 
 	// Highlight new item.
@@ -653,11 +664,9 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 
 	visible = visible !== undefined ? visible : !this.searchPanelVisible;
 
-	// If currently visible panel is an edit panel, store the caption
-	if ( !this.searchPanelVisible && this.highlightedItem ) {
-		this.highlightedItem.setCaption(
-			this.highlightedCaptionInput.getValue()
-		);
+	// If currently visible panel is an edit panel, save the input values for the highlighted item
+	if ( !this.searchPanelVisible ) {
+		this.updateHighlightedItem();
 	}
 
 	// Record the state of the search panel
@@ -746,11 +755,11 @@ ve.ui.MWGalleryDialog.prototype.getCurrentData = function () {
 	// Unset mode attribute if it is the same as the default
 	data.mode = data.mode === this.defaults.mode ? undefined : data.mode;
 
+	// Save the input values for the highlighted item
+	this.updateHighlightedItem();
+
 	// Get titles and captions from gallery group
 	data.extsrc = '';
-	if ( this.highlightedItem ) {
-		this.highlightedItem.setCaption( this.highlightedCaptionInput.getValue() );
-	}
 	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
 		data.extsrc += '\n' + items[ i ].imageTitle + '|' + items[ i ].caption;
 	}
