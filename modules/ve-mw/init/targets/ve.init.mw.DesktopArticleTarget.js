@@ -509,7 +509,12 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 				placeholder: ve.msg( 'visualeditor-section-title-placeholder' ),
 				spellcheck: true
 			} );
-			this.sectionTitle.connect( this, { change: 'updateToolbarSaveButtonState' } );
+			if ( this.recovered ) {
+				this.sectionTitle.setValue(
+					ve.init.platform.getSession( 've-docsectiontitle' ) || ''
+				);
+			}
+			this.sectionTitle.connect( this, { change: 'onSectionTitleChange' } );
 		}
 		surface.setPlaceholder( ve.msg( 'visualeditor-section-body-placeholder' ) );
 		this.$editableContent.before( this.sectionTitle.$element );
@@ -518,7 +523,17 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 			this.sectionTitle.setValue( this.currentUri.query.preloadtitle );
 		}
 		surface.once( 'destroy', this.teardownNewSection.bind( this, surface ) );
+	} else {
+		ve.init.platform.removeSession( 've-docsectiontitle' );
 	}
+};
+
+/**
+ * Handle section title changes
+ */
+ve.init.mw.DesktopArticleTarget.prototype.onSectionTitleChange = function () {
+	ve.init.platform.setSession( 've-docsectiontitle', this.sectionTitle.getValue() );
+	this.updateToolbarSaveButtonState();
 };
 
 /**
