@@ -215,7 +215,7 @@ ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.supe
 /**
  * @inheritdoc
  */
-ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode ) {
+ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode, section ) {
 	// Add trailing linebreak to non-empty wikitext documents for consistency
 	// with old editor and usability. Will be stripped on save. T156609
 	if ( mode === 'source' && documentString ) {
@@ -223,7 +223,7 @@ ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode 
 	}
 
 	// Parent method
-	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode );
+	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode, section );
 };
 
 /* Methods */
@@ -1153,7 +1153,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				// re-fetch the HTML
 				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( target.doc, 'visual' ) ).promise();
 			} else {
-				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.pageName );
+				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.pageName, undefined, target.section !== null ? target.section : undefined );
 			}
 		}
 

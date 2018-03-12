@@ -187,15 +187,23 @@ ve.init.mw.Target.prototype.createModelFromDom = function () {
 
 /**
  * @inheritdoc
+ * @param {number} [section] Section
  */
-ve.init.mw.Target.static.parseDocument = function ( documentString, mode ) {
-	var doc;
+ve.init.mw.Target.static.parseDocument = function ( documentString, mode, section ) {
+	var doc, sectionNode;
 	if ( mode === 'source' ) {
 		// Parent method
 		doc = ve.init.mw.Target.super.static.parseDocument.call( this, documentString, mode );
 	} else {
 		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
+		if ( section !== undefined ) {
+			sectionNode = doc.body.querySelector( '[data-mw-section-id="' + section + '"]' );
+			doc.body.innerHTML = '';
+			if ( sectionNode ) {
+				doc.body.appendChild( sectionNode );
+			}
+		}
 		// Strip Parsoid sections
 		ve.unwrapParsoidSections( doc.body );
 		// Strip legacy IDs, for example in section headings
