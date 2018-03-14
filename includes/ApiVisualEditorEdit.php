@@ -213,13 +213,14 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		);
 	}
 
-	protected function diffWikitext( $title, $wikitext, $section = null ) {
+	protected function diffWikitext( $title, $fromId, $wikitext, $section = null ) {
 		$apiParams = [
-			'action' => 'query',
-			'prop' => 'revisions',
-			'titles' => $title->getPrefixedDBkey(),
-			'rvdifftotext' => $this->pstWikitext( $title, $wikitext ),
-			'rvsection' => $section
+			'action' => 'compare',
+			'prop' => 'diff',
+			'fromtitle' => $title->getPrefixedDBkey(),
+			'fromrev' => $fromId,
+			'fromsection' => $section,
+			'totext' => $this->pstWikitext( $title, $wikitext )
 		];
 
 		$api = new ApiMain(
@@ -235,10 +236,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			/* Transform content nodes to '*' */ 'BC' => [],
 			/* Add back-compat subelements */ 'Types' => [],
 		] );
-		if ( !isset( $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'] ) ) {
+
+		if ( !isset( $result['compare']['*'] ) ) {
 			return [ 'result' => 'fail' ];
 		}
-		$diffRows = $result['query']['pages'][$title->getArticleID()]['revisions'][0]['diff']['*'];
+		$diffRows = $result['compare']['*'];
 
 		if ( $diffRows !== '' ) {
 			$context = new DerivativeContext( $this->getContext() );
@@ -288,7 +290,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$result = [ 'result' => 'success', 'cachekey' => $key ];
 		} elseif ( $params['paction'] === 'diff' ) {
 			$section = isset( $params['section'] ) ? $params['section'] : null;
-			$diff = $this->diffWikitext( $title, $wikitext, $section );
+			$diff = $this->diffWikitext( $title, $params['oldid'], $wikitext, $section );
 			if ( $diff['result'] === 'fail' ) {
 				$this->dieWithError( 'apierror-visualeditor-difffailed', 'difffailed' );
 			}
