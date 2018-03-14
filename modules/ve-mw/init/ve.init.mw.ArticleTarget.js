@@ -2343,6 +2343,10 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
  * @param {boolean} [modified] Whether there were any changes at all.
  */
 ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {
+	// Assume the fallback editor won't support VE auto-save. Changes need to
+	// be wiped in case the user makes changes in the other editor then comes
+	// back to VE.
+	this.getSurface().getModel().removeDocStateAndChanges();
 };
 
 /**

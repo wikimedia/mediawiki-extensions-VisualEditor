@@ -1598,6 +1598,9 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 	var uri, oldId, prefPromise,
 		target = this;
 
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.switchToFallbackWikitextEditor.apply( this, arguments );
+
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
 	prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
