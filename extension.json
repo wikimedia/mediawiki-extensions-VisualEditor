@@ -1909,7 +1909,8 @@
 				"visualeditor-changedesc-set",
 				"visualeditor-changedesc-unknown",
 				"visualeditor-changedesc-unset",
-				"visualeditor-diff-no-changes"
+				"visualeditor-diff-no-changes",
+				"visualeditor-diff-timed-out"
 			],
 			"targets": [
 				"desktop",
