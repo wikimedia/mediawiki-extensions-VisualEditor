@@ -1890,13 +1890,16 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.teardown = function () {
+	var surface = this.getSurface();
 	// Restore access keys
 	if ( this.$saveAccessKeyElements ) {
 		this.$saveAccessKeyElements.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
 		this.$saveAccessKeyElements = null;
 	}
-	// If target is closed cleanly (after save or deliberate close) then remove autosave state
-	this.getSurface().getModel().removeDocStateAndChanges();
+	if ( surface ) {
+		// If target is closed cleanly (after save or deliberate close) then remove autosave state
+		surface.getModel().removeDocStateAndChanges();
+	}
 	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
 };
 
