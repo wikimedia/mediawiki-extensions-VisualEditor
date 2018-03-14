@@ -8,3 +8,9 @@
 .ve-ui-mwMobileSaveDialog .content {
 	margin: 0;
 }
+
+.ve-ui-mwSaveDialog-visualDiffFeedback {
+	max-width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
