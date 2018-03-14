@@ -25,6 +25,7 @@
 			"Ilimanaq29"
 		]
 	},
+	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService pro server dokumentu není definováno; vizte https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Při ukládání toto nastavte na časové razítko revize, která se editovala. Slouží k detekci editačních konfliktů.",
 	"apihelp-visualeditor-param-cachekey": "Při serializaci nebo porovnání použít výsledek předchozího požadavku serializeforcache s tímto klíčem. Přepíše $1html.",

@@ -32,6 +32,7 @@
 	"apierror-visualeditor-api-langlinks-error": "查询MediaWiki API时出错",
 	"apierror-visualeditor-badcachekey": "找不到带有该关键词的已缓存序列化内容",
 	"apierror-visualeditor-difffailed": "差异失败",
+	"apierror-visualeditor-docserver-unconfigured": "文档服务器的虚拟REST服务未定义；参见https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "连接Parsoid/RESTbase服务器时出错",
 	"apierror-visualeditor-invaliddeflate": "提供的内容未被适当缩小",
 	"apierror-visualeditor-latestnotfound": "找不到标题的最近修订版本",

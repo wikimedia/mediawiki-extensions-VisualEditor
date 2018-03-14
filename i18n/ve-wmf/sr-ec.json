@@ -6,7 +6,8 @@
 			"Милан Јелисавчић",
 			"Srdjan m",
 			"Сербијана",
-			"Acamicamacaraca"
+			"Acamicamacaraca",
+			"BadDog"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелно уређивање]]",
@@ -25,6 +26,6 @@
 	"visualeditor-welcomedialog-content": "Сви могу да уређују и свако унапређење помаже.",
 	"visualeditor-welcomedialog-content-thanks": "Хвала на помоћи!",
 	"visualeditor-welcomedialog-switch": "Пребаци ме на изворно уређивање",
-	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на Визуелни уређивач",
+	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на визуелно уређивање",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на $2"
 }
