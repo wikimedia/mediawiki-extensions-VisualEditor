@@ -297,6 +297,7 @@
 				"jquery.cookie",
 				"jquery.textSelection",
 				"mediawiki.page.startup",
+				"mediawiki.storage",
 				"mediawiki.Title",
 				"mediawiki.Uri",
 				"mediawiki.user",
