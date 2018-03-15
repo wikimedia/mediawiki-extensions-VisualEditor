@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'commons_upload', '~> 1.0', '>= 1.0.1'
+gem 'commons_upload', '~> 1.2'
 gem 'rake', '~> 10.4', '>= 10.4.2'
 gem 'rubocop', '~> 0.51', :require => false

@@ -2,11 +2,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.3.0)
-    commons_upload (1.0.1)
-      mediawiki_api (~> 0.7.0)
+    commons_upload (1.2.0)
+      mediawiki_api (~> 0.7.1)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
-    faraday (0.13.1)
+    faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
     faraday-cookie_jar (0.0.6)
       faraday (>= 0.7.4)
@@ -37,16 +37,16 @@ GEM
     ruby-progressbar (1.9.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.4)
+    unf_ext (0.0.7.5)
     unicode-display_width (1.3.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  commons_upload (~> 1.0, >= 1.0.1)
+  commons_upload (~> 1.2)
   rake (~> 10.4, >= 10.4.2)
   rubocop (~> 0.51)
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
