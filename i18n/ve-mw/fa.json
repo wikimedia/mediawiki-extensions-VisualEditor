@@ -30,6 +30,7 @@
 	"apierror-visualeditor-api-langlinks-error": "خطا در پرسمان از رابط برنامه‌نویسی مدیاویکی",
 	"apierror-visualeditor-badcachekey": "کپچا برای آن کلید یافت نشد",
 	"apierror-visualeditor-difffailed": "تفاوت دارای خطا",
+	"apierror-visualeditor-docserver-unconfigured": "خدمات VirtualRESTService برای سرور مطالب تعریف نشده‌است. https://www.mediawiki.org/wiki/Extension:VisualEditor را مشاهده کنید.",
 	"apierror-visualeditor-docserver": "خطا در اتصال به سرور Parsoid/RESTbase",
 	"apierror-visualeditor-invaliddeflate": "محتوی تهیه شده به صورت درست خالی نشده‌است",
 	"apierror-visualeditor-latestnotfound": "آخرین نسخه برای عنوان یافت نشد",

@@ -27,6 +27,7 @@
 	"apierror-visualeditor-api-langlinks-error": "Erro ao consultar a API do MediaWiki",
 	"apierror-visualeditor-badcachekey": "Não foi encontrada nenhuma seriação em cache com essa chave",
 	"apierror-visualeditor-difffailed": "A lista de diferenças falhou",
+	"apierror-visualeditor-docserver-unconfigured": "O VirtualRESTService para o servidor de documentos não está definido; consulte https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Erro detetado ao contactar o servidor Parsoid/RESTbase",
 	"apierror-visualeditor-invaliddeflate": "O conteúdo fornecido não está devidamente comprimido",
 	"apierror-visualeditor-latestnotfound": "Não foi possível encontrar a última revisão para o título",
