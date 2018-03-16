@@ -46,13 +46,12 @@
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
 		if ( !init.$loading ) {
-			init.$loading = $(
-				'<div class="ve-init-mw-desktopArticleTarget-loading-overlay">' +
-					'<div class="ve-init-mw-desktopArticleTarget-progress">' +
-						// Stylesheets might not have processed yet, so manually set starting width to 0
-						'<div class="ve-init-mw-desktopArticleTarget-progress-bar" style="width: 0;"></div>' +
-					'</div>' +
-				'</div>'
+			init.$loading = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-loading-overlay' ).append(
+				// Can't use OO.ui.ProgressBarWidget yet
+				$( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-progress' ).append(
+					// Stylesheets might not have processed yet, so manually set starting width to 0
+					$( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-progress-bar' ).css( 'width', 0 )
+				)
 			);
 		}
 		// eslint-disable-next-line no-use-before-define
