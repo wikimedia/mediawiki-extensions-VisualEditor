@@ -51,10 +51,8 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 		// Messages to be exported as parsed html
 		$parseMsgs = [
-			'minoredit' => $context->msg( 'minoredit' ),
 			'missingsummary' => $context->msg( 'missingsummary', $saveButtonLabel ),
 			'summary' => $context->msg( 'summary' ),
-			'watchthis' => $context->msg( 'watchthis' ),
 			'visualeditor-browserwarning' => $context->msg( 'visualeditor-browserwarning' ),
 			'visualeditor-wikitext-warning' => $context->msg( 'visualeditor-wikitext-warning' ),
 		];
