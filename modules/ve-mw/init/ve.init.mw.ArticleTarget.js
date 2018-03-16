@@ -310,6 +310,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.recovered = data.recovered;
 
 		this.checkboxesDef = data.checkboxesDef;
+		this.checkboxesMessages = data.checkboxesMessages;
 		mw.messages.set( data.checkboxesMessages );
 		this.$templatesUsed = $( data.templates );
 		this.links = data.links;
@@ -523,6 +524,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			starttimestamp: this.startTimeStamp,
 			oldid: this.revid,
 			checkboxesDef: this.checkboxesDef,
+			checkboxesMessages: this.checkboxesMessages,
 			// Use $.prop as $templatesUsed may be empty
 			templates: this.$templatesUsed.prop( 'outerHTML' ) || '',
 			links: this.links
