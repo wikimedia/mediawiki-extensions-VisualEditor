@@ -1,4 +1,9 @@
 /**
+ * @class mw.Api
+ * @source <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api>
+ */
+
+/**
  * @class mw.Title
  * @source <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title>
  */
