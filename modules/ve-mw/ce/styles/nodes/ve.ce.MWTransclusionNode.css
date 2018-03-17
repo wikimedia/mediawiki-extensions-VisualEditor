@@ -5,11 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ce-mwTransclusionNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement {
-	font-size: 0.914286em;
-	width: auto;
-}
-
+.ve-ce-mwTransclusionNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement,
 .ve-ce-mwTransclusionNode.ve-ce-focusableNode-invisible {
 	width: auto;
 }

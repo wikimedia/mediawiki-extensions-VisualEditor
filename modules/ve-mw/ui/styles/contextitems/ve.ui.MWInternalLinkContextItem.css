@@ -12,9 +12,7 @@
 
 .ve-ui-mwInternalLinkContextItem-withImage > .oo-ui-iconElement.oo-ui-iconElement-icon {
 	float: left;
-	width: 3.75em;
-	height: 3.75em;
-	left: -3.75em;
+	font-size: 2em; /* double-size icon */
 	background-color: #c8ccd1;
 	border: 0.5em solid #c8ccd1;
 	opacity: 0.4;
@@ -45,7 +43,7 @@
 
 .ve-ui-mwInternalLinkContextItem-withImage .ve-ui-mwInternalLinkContextItem-link,
 .ve-ui-mwInternalLinkContextItem-withImage .ve-ui-mwInternalLinkContextItem-description {
-	margin-left: 5.75em;
+	margin-left: 5.5em;
 }
 
 .ve-ui-mwInternalLinkContextItem-withDescription .ve-ui-mwInternalLinkContextItem-link {

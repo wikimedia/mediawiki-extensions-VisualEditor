@@ -20,17 +20,17 @@
 
 .ve-init-mw-desktopArticleTarget-toolbar,
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
-	font-size: 0.8em;
-	/* 1/0.8 */
-	margin: -1.25em -1.25em 1.25em -1.25em;
+	font-size: 0.875em;
+	/* 1/0.875 */
+	margin: -1.14em -1.14em 1.14em -1.14em;
 	/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 }
 
 @media screen and ( min-width: 982px ) {
 	.ve-init-mw-desktopArticleTarget-toolbar,
 	.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
-		/* 1.25/0.8, 1.5/0.8 */
-		margin: -1.5625em -1.875em 1.5265em -1.875em;
+		/* 1.25/0.875, 1.5/0.875 */
+		margin: -1.43em -1.71em 1.43em -1.71em;
 	}
 }
 
