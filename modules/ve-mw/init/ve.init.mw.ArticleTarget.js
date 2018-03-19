@@ -1925,14 +1925,25 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 /**
  * Getting the message for the toolbar / save dialog save / publish button
  *
+ * @param {boolean} [startProcess] Use version of the label for starting that process, i.e. with an ellipsis after it
  * @return {Function|string} An i18n message or resolveable function
  */
-ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function () {
+ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess ) {
+	var suffix = startProcess ? '-start' : '';
+	// The following messages can be used here
+	// * publishpage
+	// * pubishhpage-start
+	// * publishchanges
+	// * pubishhchanges-start
+	// * savearticle
+	// * savearticle-start
+	// * savechanges
+	// * savechanges-start
 	if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
-		return OO.ui.deferMsg( !this.pageExists ? 'publishpage' : 'publishchanges' );
+		return OO.ui.deferMsg( ( !this.pageExists ? 'publishpage' : 'publishchanges' ) + suffix );
 	}
 
-	return OO.ui.deferMsg( !this.pageExists ? 'savearticle' : 'savechanges' );
+	return OO.ui.deferMsg( ( !this.pageExists ? 'savearticle' : 'savechanges' ) + suffix );
 };
 
 /**
@@ -1943,7 +1954,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function () {
 ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = function ( config ) {
 	if ( !this.toolbarSaveButton ) {
 		this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
-			label: this.getSaveButtonLabel(),
+			label: this.getSaveButtonLabel( true ),
 			flags: [ 'progressive', 'primary' ],
 			disabled: !this.restoring
 		}, config ) );
