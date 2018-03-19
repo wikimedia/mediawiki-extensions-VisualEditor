@@ -222,7 +222,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 
 		this.$previewViewer.empty().append(
 			// TODO: This won't work with formatted titles (T122976)
-			$( '<h1>' ).addClass( 'firstHeading' ).text( docOrMsg.title ),
+			$( '<h1>' ).addClass( 'firstHeading' ).text( docOrMsg.title || mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText() ),
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
 				contents
 			)
