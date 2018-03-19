@@ -9,7 +9,8 @@
  * DataModel MediaWiki gallery node.
  *
  * @class
- * @extends ve.dm.MWBlockExtensionNode
+ * @extends ve.dm.BranchNode
+ * @mixins ve.dm.FocusableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -17,19 +18,92 @@
 ve.dm.MWGalleryNode = function VeDmMWGalleryNode() {
 	// Parent constructor
 	ve.dm.MWGalleryNode.super.apply( this, arguments );
+
+	// Mixin constructors
+	ve.dm.FocusableNode.call( this );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWGalleryNode, ve.dm.MWBlockExtensionNode );
+OO.inheritClass( ve.dm.MWGalleryNode, ve.dm.BranchNode );
+
+OO.mixinClass( ve.dm.MWGalleryNode, ve.dm.FocusableNode );
 
 /* Static members */
 
 ve.dm.MWGalleryNode.static.name = 'mwGallery';
 
-ve.dm.MWGalleryNode.static.extensionName = 'gallery';
+ve.dm.MWGalleryNode.static.matchRdfaTypes = [ 'mw:Extension/gallery' ];
 
-ve.dm.MWGalleryNode.static.tagName = 'ul';
+ve.dm.MWGalleryNode.static.matchTagNames = [ 'ul' ];
+
+ve.dm.MWGalleryNode.static.childNodeTypes = [ 'mwGalleryCaption', 'mwGalleryImage' ];
+
+ve.dm.MWGalleryNode.static.blacklistedAnnotationTypes = [ 'link' ];
+
+ve.dm.MWGalleryNode.static.cloneElement = function () {
+	// Parent method
+	var clone = ve.dm.LeafNode.static.cloneElement.apply( this, arguments );
+	delete clone.attributes.originalMw;
+	return clone;
+};
+
+ve.dm.MWGalleryNode.static.getHashObject = function ( dataElement ) {
+	return {
+		type: dataElement.type,
+		mw: ve.copy( dataElement.attributes.mw )
+	};
+};
+
+ve.dm.MWGalleryNode.static.toDataElement = function ( domElements ) {
+	var mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
+		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
+
+	return {
+		type: this.name,
+		attributes: {
+			mw: mwData,
+			originalMw: mwDataJSON
+		}
+	};
+};
+
+ve.dm.MWGalleryNode.static.toDomElements = function ( data, doc ) {
+	var ul = doc.createElement( 'ul' );
+
+	// Build ul
+	ul.classList.add( 'gallery' );
+	ul.setAttribute( 'typeof', 'mw:Extension/gallery' );
+	ul.setAttribute( 'data-mw', JSON.stringify( data.attributes.mw ) );
+
+	return [ ul ];
+};
+
+/* Methods */
+
+/**
+ * Get the gallery's caption node.
+ *
+ * @method
+ * @return {ve.dm.MWImageCaptionNode|null} Caption node, if present
+ */
+ve.dm.MWGalleryNode.prototype.getCaptionNode = function () {
+	var node = this.children[ 0 ];
+	return node instanceof ve.dm.MWGalleryCaptionNode ? node : null;
+};
+
+/**
+ * Get the gallery's image nodes.
+ *
+ * @method
+ * @return {ve.dm.MWGalleryImageNode[]} Gallery image nodes (may be empty if none are present)
+ */
+ve.dm.MWGalleryNode.prototype.getImageNodes = function () {
+	var images = this.children.filter( function ( child ) {
+		return child instanceof ve.dm.MWGalleryImageNode;
+	} );
+	return images;
+};
 
 /* Registration */
 
