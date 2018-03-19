@@ -11,6 +11,7 @@
 	"apierror-visualeditor-api-langlinks-error": "Error al consultar la API de MediaWiki",
 	"apierror-visualeditor-badcachekey": "Nun s'alcontró nenguna serialización na caché con esa clave",
 	"apierror-visualeditor-difffailed": "Falló diff",
+	"apierror-visualeditor-docserver-unconfigured": "El VirtualRESTService pal sirvidor de documentos nun ta definíu; visita https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Error al comunicase col sirvidor Parsoid/RESTbase",
 	"apierror-visualeditor-invaliddeflate": "El conteníu dau nun ta descomprimíu correutamente",
 	"apierror-visualeditor-latestnotfound": "Nun s'alcontró la cabera revisión del títulu",
