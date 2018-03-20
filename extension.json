@@ -1513,7 +1513,8 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaInfoFieldWidget.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWMediaTransferHandler.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMediaDialog.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWMediaDialogTool.js"
+				"modules/ve-mw/ui/tools/ve.ui.MWMediaDialogTool.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWMediaContextItem.js"
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.css",
@@ -1578,7 +1579,10 @@
 				"visualeditor-dialog-media-type-section-help",
 				"visualeditor-dialog-media-type-thumb",
 				"visualeditor-dialog-media-upload",
-				"visualeditor-dialogbutton-media-tooltip"
+				"visualeditor-dialogbutton-media-tooltip",
+				"visualeditor-media-title-audio",
+				"visualeditor-media-title-image",
+				"visualeditor-media-title-video"
 			],
 			"targets": [
 				"desktop"
