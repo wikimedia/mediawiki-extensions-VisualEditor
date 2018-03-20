@@ -1971,24 +1971,39 @@ ve.init.mw.ArticleTarget.prototype.attachToolbarSaveButton = function () {
 };
 
 /**
- * Re-evaluate whether the toolbar save button should be disabled or not.
+ * Re-evaluate whether the article can be saved
+ *
+ * @return {boolean} The article can be saved
+ */
+ve.init.mw.ArticleTarget.prototype.isSaveable = function () {
+	var surface = this.getSurface();
+	if ( !surface ) {
+		// Called before we're attached, so meaningless; abandon for now
+		return false;
+	}
+
+	this.edited =
+		// Document was edited before loading
+		this.fromEditedState || this.preloaded ||
+		// Document was edited
+		surface.getModel().hasBeenModified() ||
+		// Section title (if it exists) was edited
+		( this.sectionTitle && this.sectionTitle.getValue() !== '' );
+
+	return this.edited || this.restoring;
+};
+
+/**
+ * Update the toolbar save button to reflect if the article can be saved
  */
 ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
-	var isDisabled;
-
-	if ( !this.getSurface() ) {
-		// Called before we're attached, so meaningless; abandon for now
-		return;
+	// Disable the save button if we can't save
+	var wasDisabled = this.toolbarSaveButton.isDisabled(),
+		isDisabled = !this.isSaveable();
+	if ( wasDisabled !== isDisabled ) {
+		this.toolbarSaveButton.setDisabled( isDisabled );
+		mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
 	}
-
-	this.edited = this.getSurface().getModel().hasBeenModified() || this.fromEditedState || this.preloaded;
-	if ( this.sectionTitle ) {
-		this.edited = this.edited || this.sectionTitle.getValue() !== '';
-	}
-	// Disable the save button if we have no history
-	isDisabled = !this.edited && !this.restoring;
-	this.toolbarSaveButton.setDisabled( isDisabled );
-	mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
 };
 
 /**
@@ -2010,7 +2025,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 	var checkbox, currentWindow,
 		target = this;
 
-	if ( !( this.edited || this.restoring ) ) {
+	if ( !this.isSaveable() ) {
 		return;
 	}
 
