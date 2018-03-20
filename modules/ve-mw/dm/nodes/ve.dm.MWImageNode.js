@@ -66,6 +66,14 @@ ve.dm.MWImageNode.static.rdfaToTypes = ( function () {
 	return rdfaToType;
 }() );
 
+/**
+ * Get RDFa type
+ *
+ * @static
+ * @param {string} mediaClass Media class, one of 'Image', 'Video' or 'Audio'
+ * @param {string} frameType Frame type, one of 'none', 'frameless', 'thumb' or 'frame'
+ * @return {string} RDFa type
+ */
 ve.dm.MWImageNode.static.getRdfa = function ( mediaClass, frameType ) {
 	return 'mw:' + mediaClass + {
 		none: '',
