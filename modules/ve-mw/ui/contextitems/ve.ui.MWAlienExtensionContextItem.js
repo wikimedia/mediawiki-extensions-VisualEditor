@@ -33,7 +33,7 @@ OO.inheritClass( ve.ui.MWAlienExtensionContextItem, ve.ui.LinearContextItem );
 
 ve.ui.MWAlienExtensionContextItem.static.name = 'alienExtension';
 
-ve.ui.MWAlienExtensionContextItem.static.icon = 'alienextension';
+ve.ui.MWAlienExtensionContextItem.static.icon = 'markup';
 
 ve.ui.MWAlienExtensionContextItem.static.modelClasses = [
 	ve.dm.MWAlienInlineExtensionNode,

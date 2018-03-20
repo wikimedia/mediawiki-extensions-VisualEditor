@@ -1342,7 +1342,8 @@
 				"mediawiki.widgets",
 				"ext.visualEditor.switching",
 				"ext.visualEditor.welcome",
-				"ext.visualEditor.mwextensionmessages"
+				"ext.visualEditor.mwextensionmessages",
+				"oojs-ui.styles.icons-editing-advanced"
 			],
 			"messages": [
 				"colon-separator",
@@ -2060,7 +2061,8 @@
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css"
 			],
 			"dependencies": [
-				"ext.visualEditor.mwcore"
+				"ext.visualEditor.mwcore",
+				"oojs-ui.styles.icons-editing-advanced"
 			],
 			"targets": [
 				"desktop",
