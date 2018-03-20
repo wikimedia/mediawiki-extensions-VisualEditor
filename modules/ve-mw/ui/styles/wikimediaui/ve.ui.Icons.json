@@ -10,9 +10,6 @@
 		}
 	},
 	"images": {
-		"alienextension": {
-			"file": "../images/icons/alienextension.svg"
-		},
 		"image-none": {
 			"file": "../images/icons/image-none.svg"
 		},
