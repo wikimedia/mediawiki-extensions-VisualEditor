@@ -36,7 +36,7 @@
 		plugins = [];
 
 	function showLoading( mode ) {
-		var $content, contentRect, offsetTop, windowHeight, top, bottom, middle, loadingTop;
+		var $content, windowHeight, clientTop, top, bottom, middle;
 
 		if ( isLoading ) {
 			return;
@@ -61,14 +61,12 @@
 		$content = $( '#content' );
 		if ( mode !== 'source' ) {
 			// Center within visible part of the target
-			contentRect = $content[ 0 ].getBoundingClientRect();
-			windowHeight = $( window ).height();
-			top = Math.max( contentRect.top, 0 );
-			bottom = Math.min( contentRect.bottom, windowHeight );
+			windowHeight = window.innerHeight;
+			clientTop = $content[ 0 ].offsetTop - window.pageYOffset;
+			top = Math.max( clientTop, 0 );
+			bottom = Math.min( clientTop + $content[ 0 ].offsetHeight, windowHeight );
 			middle = ( bottom - top ) / 2;
-			offsetTop = Math.max( -contentRect.top, 0 );
-			loadingTop = middle + offsetTop;
-			init.$loading.css( 'top', loadingTop );
+			init.$loading.css( 'top', middle + Math.max( -clientTop, 0 ) );
 		}
 
 		$content.prepend( init.$loading );
