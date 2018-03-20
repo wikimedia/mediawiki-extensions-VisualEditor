@@ -1113,13 +1113,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.attachToolbarSaveButton = function () {
-	this.toolbar.$actions.append( this.toolbarSaveButton.$element );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
 	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
 	data.editSummary = this.editSummaryValue || this.initialEditSummary;
