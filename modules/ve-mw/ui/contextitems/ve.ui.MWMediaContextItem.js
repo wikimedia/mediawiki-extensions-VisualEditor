@@ -65,6 +65,21 @@ ve.ui.MWMediaContextItem.prototype.getDescription = function () {
 	return ve.ce.nodeFactory.getDescription( this.model );
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMediaContextItem.prototype.renderBody = function () {
+	this.$body.append(
+		$( '<a>' )
+			.text( this.getDescription() )
+			.attr( {
+				href: mw.util.getUrl( this.model.getAttribute( 'resource' ) ),
+				target: '_blank',
+				rel: 'noopener'
+			} )
+	);
+};
+
 /* Registration */
 
 ve.ui.contextItemFactory.register( ve.ui.MWMediaContextItem );
