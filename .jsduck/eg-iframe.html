@@ -4,19 +4,6 @@
 		<meta charset="utf-8">
 		<title>VisualEditor Example</title>
 
-		<!-- oojs-ui-apex -->
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-alerts.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-interactions.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-layout.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-moderation.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-movement.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-user.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-core.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-advanced.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-styling.css">
-		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-list.css">
-
 		<!-- visualEditor.core.build -->
 		<link rel=stylesheet href="lib/ve/src/ce/styles/nodes/ve.ce.FocusableNode.css" class="stylesheet-ve">
 		<link rel=stylesheet href="lib/ve/src/ce/styles/nodes/ve.ce.ActiveNode.css" class="stylesheet-ve">
@@ -64,15 +51,28 @@
 		<link rel=stylesheet href="lib/ve/src/ui/styles/ve.ui.TableLineContext.css" class="stylesheet-ve">
 		<link rel=stylesheet href="lib/ve/src/ui/styles/ve.ui.Toolbar.css" class="stylesheet-ve">
 
+		<!-- visualEditor.diffing -->
+		<link rel=stylesheet href="lib/ve/src/ui/styles/elements/ve.ui.DiffElement.css">
+
+		<!-- oojs-ui-apex -->
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-alerts.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-interactions.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-layout.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-moderation.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-movement.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-user.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-core.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-advanced.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-styling.css">
+		<link rel=stylesheet href="lib/ve/lib/oojs-ui/oojs-ui-apex-icons-editing-list.css">
+
 		<!-- visualEditor.desktop.build -->
 		<link rel=stylesheet href="lib/ve/src/ui/styles/ve.ui.DesktopContext.css">
 
 		<!-- visualEditor.theme.apex -->
 		<link rel=stylesheet href="lib/ve/src/themes/apex/dialogs.css">
 		<link rel=stylesheet href="lib/ve/src/themes/apex/widgets.css">
-
-		<!-- visualEditor.diffing -->
-		<link rel=stylesheet href="lib/ve/src/ui/styles/elements/ve.ui.DiffElement.css">
 
 		<!-- example styles -->
 		<style>
@@ -154,14 +154,6 @@
 		<script src="lib/ve/src/init/ve.init.js"></script>
 		<script src="lib/ve/src/init/ve.init.Platform.js"></script>
 		<script src="lib/ve/src/init/ve.init.Target.js"></script>
-
-		<!-- visualEditor.standalone.build -->
-		<script src="lib/ve/src/init/sa/ve.init.sa.js"></script>
-		<script src="lib/ve/src/init/sa/ve.init.sa.Platform.js"></script>
-		<script src="lib/ve/src/init/sa/ve.init.sa.Target.js"></script>
-
-		<!-- oojs-ui-apex -->
-		<script src="lib/ve/lib/oojs-ui/oojs-ui-apex.js"></script>
 
 		<!-- visualEditor.core.build -->
 		<script src="lib/ve/src/ve.Range.js"></script>
@@ -473,10 +465,6 @@
 		<script src="lib/ve/src/ui/inspectors/ve.ui.LanguageInspector.js"></script>
 		<script src="lib/ve/src/ui/pages/ve.ui.SpecialCharacterPage.js"></script>
 
-		<!-- visualEditor.desktop.build -->
-		<script src="lib/ve/src/ui/contexts/ve.ui.DesktopContext.js"></script>
-		<script src="lib/ve/src/ui/windowmanagers/ve.ui.DesktopInspectorWindowManager.js"></script>
-
 		<!-- treeDiffer -->
 		<script src="lib/ve/lib/treeDiffer/treeDiffer-dist.js"></script>
 
@@ -492,6 +480,18 @@
 
 		<!-- visualEditor.diffing.standalone -->
 		<script src="lib/ve/src/ui/dialogs/ve.ui.DiffDialog.js"></script>
+
+		<!-- visualEditor.standalone.build -->
+		<script src="lib/ve/src/init/sa/ve.init.sa.js"></script>
+		<script src="lib/ve/src/init/sa/ve.init.sa.Platform.js"></script>
+		<script src="lib/ve/src/init/sa/ve.init.sa.Target.js"></script>
+
+		<!-- oojs-ui-apex -->
+		<script src="lib/ve/lib/oojs-ui/oojs-ui-apex.js"></script>
+
+		<!-- visualEditor.desktop.build -->
+		<script src="lib/ve/src/ui/contexts/ve.ui.DesktopContext.js"></script>
+		<script src="lib/ve/src/ui/windowmanagers/ve.ui.DesktopInspectorWindowManager.js"></script>
 
 		<!-- visualEditor.desktop.standalone -->
 		<script src="lib/ve/src/init/sa/ve.init.sa.DesktopTarget.js"></script>

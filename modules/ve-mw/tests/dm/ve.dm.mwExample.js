@@ -429,7 +429,26 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/internalList' }
 ];
 
-ve.dm.mwExample.withMetaPlainData = [
+ve.dm.mwExample.withMetaRealData = [
+	{
+		type: 'paragraph',
+		internal: {
+			generated: 'wrapper'
+		}
+	},
+	{
+		type: 'comment',
+		attributes: {
+			text: ' No content conversion '
+		}
+	},
+	{ type: '/comment' },
+	{ type: '/paragraph' },
+	{
+		type: 'mwAlienMeta',
+		originalDomElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
+	},
+	{ type: '/mwAlienMeta' },
 	{ type: 'paragraph' },
 	'F',
 	'o',
@@ -439,8 +458,66 @@ ve.dm.mwExample.withMetaPlainData = [
 	'r',
 	'B',
 	'a',
+	{
+		type: 'comment',
+		attributes: {
+			text: ' inline '
+		}
+	},
+	{ type: '/comment' },
 	'z',
 	{ type: '/paragraph' },
+	{
+		type: 'mwCategory',
+		attributes: {
+			hrefPrefix: './',
+			category: 'Category:Bar',
+			origCategory: 'Category:Bar',
+			sortkey: '',
+			origSortkey: ''
+		}
+	},
+	{ type: '/mwCategory' },
+	{
+		type: 'mwAlienMeta',
+		originalDomElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
+	},
+	{ type: '/mwAlienMeta' },
+	{
+		type: 'mwAlienMeta',
+		originalDomElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
+	},
+	{ type: '/mwAlienMeta' },
+	{
+		type: 'paragraph',
+		internal: {
+			generated: 'wrapper'
+		}
+	},
+	{
+		type: 'comment',
+		attributes: {
+			text: 'barbaz'
+		}
+	},
+	{ type: '/comment' },
+	{ type: '/paragraph' },
+	{
+		type: 'mwCategory',
+		attributes: {
+			hrefPrefix: './',
+			category: 'Category:Foo foo',
+			origCategory: 'Category:Foo_foo',
+			sortkey: 'Bar baz#quux',
+			origSortkey: 'Bar baz%23quux'
+		}
+	},
+	{ type: '/mwCategory' },
+	{
+		type: 'mwAlienMeta',
+		originalDomElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
+	},
+	{ type: '/mwAlienMeta' },
 	{ type: 'internalList' },
 	{ type: '/internalList' }
 ];
@@ -1254,7 +1331,8 @@ ve.dm.mwExample.domToDataCases = {
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		head: '<base href="http://example.com" />',
-		data: ve.dm.mwExample.withMeta
+		data: ve.dm.mwExample.withMeta,
+		realData: ve.dm.mwExample.withMetaRealData
 	},
 	'RDFa types spread across two attributes, about grouping is forced': {
 		body: ve.dm.mwExample.MWTransclusion.mixed,
