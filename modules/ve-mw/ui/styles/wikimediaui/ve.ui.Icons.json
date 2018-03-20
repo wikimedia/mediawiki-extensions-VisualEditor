@@ -1,5 +1,9 @@
 {
 	"variants": {
+		"invert": {
+			"color": "#fff",
+			"global": true
+		},
 		"progressive": {
 			"color": "#36c",
 			"global": true
