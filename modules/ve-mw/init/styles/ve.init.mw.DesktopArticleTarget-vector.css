@@ -42,10 +42,10 @@
 
 /* Main document debug bar */
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
-	/* 1/0.8 */
-	padding: 1.25em;
+	/* 1/0.875 */
+	padding: 1.14286em;
 	padding-bottom: 0;
-	margin-top: 1.25em;
+	margin-top: 1.14286em;
 }
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
@@ -67,10 +67,10 @@
 
 	/* Main document debug bar */
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
-		/* 1/0.8, 1.5/0.8 */
-		padding: 1.875em;
+		/* 1.5/0.875 */
+		padding: 1.71429em;
 		padding-bottom: 0;
-		margin-top: 1.875em;
+		margin-top: 1.71429em;
 	}
 }
 
