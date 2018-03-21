@@ -207,8 +207,61 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 	return els;
 };
 
-ve.dm.MWTransclusionNode.static.describeChanges = function () {
-	// TODO: Provide a more detailed description of template changes
+ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) {
+	var change, params, param, $descriptions;
+
+	// This method assumes that the behavior of isDiffComparable above remains
+	// the same, so it doesn't have to consider whether the actual template
+	// involved has changed.
+
+	function getLabel( param ) {
+		// If a parameter is an object with a wt key, we just want the value of that.
+		if ( param && param.wt !== undefined ) {
+			// Can be `''`, and we're okay with that
+			return param.wt;
+		}
+		return param;
+	}
+
+	if ( attributeChanges.mw.from.parts.length === 1 && attributeChanges.mw.to.parts.length === 1 ) {
+		// Single-template transclusion, before and after. Relatively easy to summarize.
+		// TODO: expand this to well-represent transclusions that contain multiple templates.
+
+		// The bits of a template we care about are deeply-nested inside an
+		// attribute. We'll restructure this so that we can pretend template
+		// params are the direct attributes of the template.
+		params = {};
+		for ( param in attributeChanges.mw.from.parts[ 0 ].template.params ) {
+			params[ param ] = { from: getLabel( attributeChanges.mw.from.parts[ 0 ].template.params[ param ] ) };
+		}
+		for ( param in attributeChanges.mw.to.parts[ 0 ].template.params ) {
+			params[ param ] = ve.extendObject(
+				{ to: getLabel( attributeChanges.mw.to.parts[ 0 ].template.params[ param ] ) },
+				params[ param ]
+			);
+		}
+		for ( param in params ) {
+			// All we know is that *something* changed, without the normal
+			// helpful just-being-given-the-changed-bits, so we have to filter
+			// this ourselves.
+			if ( params[ param ].from !== params[ param ].to ) {
+				change = this.describeChange( param, params[ param ] );
+				if ( change ) {
+					if ( !$descriptions ) {
+						$descriptions = $( '<ul>' );
+					}
+					if ( change instanceof jQuery ) {
+						$descriptions.append( $( '<li>' ).append( change ) );
+					} else {
+						$descriptions.append( $( '<li>' ).text( change ) );
+					}
+				}
+			}
+		}
+		if ( $descriptions ) {
+			return [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ), $descriptions ];
+		}
+	}
 	return [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
 };
 
