@@ -11,7 +11,7 @@
 		$visualDiff = $( '<div>' ),
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		uri = new mw.Uri(),
-		mode = uri.query.diffmode || 'source',
+		mode = uri.query.diffmode || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 
@@ -40,6 +40,9 @@
 
 		mode = item.getData();
 		isVisual = mode === 'visual';
+
+		mw.user.options.set( 'visualeditor-diffmode-historical', mode );
+		new mw.Api().saveOption( 'visualeditor-diffmode-historical', mode );
 
 		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
 		$wikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );

@@ -693,6 +693,7 @@ class VisualEditorHooks {
 		// e.g. use visual diffs for visual mode only.
 		$preferences['visualeditor-diffmode-source'] = $api;
 		$preferences['visualeditor-diffmode-visual'] = $api;
+		$preferences['visualeditor-diffmode-historical'] = $api;
 		$preferences['visualeditor-editor'] = $api;
 		$preferences['visualeditor-hidebetawelcome'] = $api;
 		$preferences['visualeditor-hidetabdialog'] = $api;
