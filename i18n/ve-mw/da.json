@@ -15,7 +15,8 @@
 			"Peter Alberti",
 			"SimmeD",
 			"Kenn.jensen",
-			"Jorn Ari"
+			"Jorn Ari",
+			"Joedalton"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -177,6 +178,9 @@
 	"visualeditor-loadwarning-token": "Fejl under indlæsning af data fra serveren: $1. Vil du gerne prøve igen?",
 	"visualeditor-mainnamespacepagelink": "Project:Artikelnavnerummet",
 	"visualeditor-media-input-placeholder": "Søg efter medier",
+	"visualeditor-media-title-audio": "Lyd",
+	"visualeditor-media-title-image": "Billede",
+	"visualeditor-media-title-video": "Video",
 	"visualeditor-meta-tool": "Indstillinger",
 	"visualeditor-mweditmodesource-title": "Skift til redigering af kilde?",
 	"visualeditor-mweditmodesource-warning": "Du er ved at skifte til redigering af kilde.\nVil du fortsætte?",
@@ -208,6 +212,7 @@
 	"visualeditor-savedialog-label-review": "Gennemse dine ændringer",
 	"visualeditor-savedialog-label-review-good": "Tilbage til gemmeformularen",
 	"visualeditor-savedialog-label-save-short": "Gem",
+	"visualeditor-savedialog-label-save-short-start": "Gem ...",
 	"visualeditor-savedialog-label-warning": "Advarsel",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
 	"visualeditor-savedialog-title-review": "Gennemse dine ændringer",
