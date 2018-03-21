@@ -339,28 +339,37 @@ class VisualEditorHooks {
 			return true;
 		}
 
-		$dbr = wfGetDB( DB_REPLICA );
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			!$user->isAnon() &&
 			!$user->getOption( 'visualeditor-autodisable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' ) &&
 			!$user->getOption( 'visualeditor-hidetabdialog' ) &&
-			$user->getOption( 'visualeditor-tabs' ) === 'remember-last' &&
-			$dbr->select(
-				'revision',
-				'1',
-				[
-					'rev_user' => $user->getId(),
-					'rev_timestamp < ' . $dbr->addQuotes(
-						$config->get( 'VisualEditorSingleEditTabSwitchTime' )
-					)
-				],
-				__METHOD__,
-				[ 'LIMIT' => 1 ]
-			)->numRows() === 1
+			$user->getOption( 'visualeditor-tabs' ) === 'remember-last'
 		) {
-			$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
+			$dbr = wfGetDB( DB_REPLICA );
+			$revWhere = ActorMigration::newMigration()->getWhere( $dbr, 'rev_user', $user );
+			foreach ( $revWhere['orconds'] as $key => $cond ) {
+				$tsField = $key === 'actor' ? 'revactor_timestamp' : 'rev_timestamp';
+				if (
+					$dbr->select(
+						[ 'revision' ] + $revWhere['tables'],
+						'1',
+						[
+							$cond,
+							$tsField . ' < ' . $dbr->addQuotes(
+								$config->get( 'VisualEditorSingleEditTabSwitchTime' )
+							)
+						],
+						__METHOD__,
+						[ 'LIMIT' => 1 ],
+						$revWhere['joins']
+					)->numRows() === 1
+				) {
+					$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
+					break;
+				}
+			}
 		}
 
 		// Exit if the user doesn't have VE enabled
