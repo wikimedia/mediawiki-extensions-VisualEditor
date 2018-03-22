@@ -77,13 +77,39 @@ ve.ui.MWSaveDialogAction.prototype.preview = function () {
 
 ve.ui.actionFactory.register( ve.ui.MWSaveDialogAction );
 
+/* Commands */
+
+/**
+ * Command which can only execute when the document is saveable
+ *
+ * @class
+ * @extends ve.ui.Command
+ *
+ * @constructor
+ */
+ve.ui.MWSaveCommand = function VeUiMwSaveCommand() {
+	// Parent constructor
+	ve.ui.MWSaveCommand.super.apply( this, arguments );
+};
+
+OO.inheritClass( ve.ui.MWSaveCommand, ve.ui.Command );
+
+/**
+ * @inheritdoc ve.ui.Command
+ */
+ve.ui.MWSaveCommand.prototype.isExecutable = function () {
+	// Parent method
+	return ve.ui.MWSaveCommand.super.prototype.isExecutable.apply( this, arguments ) &&
+		ve.init.target.isSaveable();
+};
+
 ve.ui.commandRegistry.register(
-	new ve.ui.Command(
+	new ve.ui.MWSaveCommand(
 		'showSave', 'mwSaveDialog', 'save'
 	)
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command(
+	new ve.ui.MWSaveCommand(
 		'showChanges', 'mwSaveDialog', 'review'
 	)
 );
@@ -91,24 +117,26 @@ if ( mw.libs.ve.isWikitextAvailable ) {
 	// Ensure wikitextCommandRegistry has finished loading
 	mw.loader.using( 'ext.visualEditor.mwwikitext' ).then( function () {
 		ve.ui.wikitextCommandRegistry.register(
-			new ve.ui.Command(
+			new ve.ui.MWSaveCommand(
 				'showPreview', 'mwSaveDialog', 'preview'
 			)
 		);
 	} );
 }
 ve.ui.commandRegistry.register(
-	new ve.ui.Command(
+	new ve.ui.MWSaveCommand(
 		'saveMinoredit', 'mwSaveDialog', 'save',
 		{ args: [ 'wpMinoredit' ] }
 	)
 );
 ve.ui.commandRegistry.register(
-	new ve.ui.Command(
+	new ve.ui.MWSaveCommand(
 		'saveWatchthis', 'mwSaveDialog', 'save',
 		{ args: [ 'wpWatchthis' ] }
 	)
 );
+
+/* Triggers & command help */
 
 ( function () {
 	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
