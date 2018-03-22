@@ -5,6 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ui-mwMediaInfoFieldWidget {
+	position: relative;
+}
+
 .ve-ui-mwMediaInfoFieldWidget.oo-ui-iconElement .ve-ui-mwMediaInfoFieldWidget-icon {
 	margin: 0.05em;
 	position: absolute;
