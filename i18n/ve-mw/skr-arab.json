@@ -54,10 +54,15 @@
 	"visualeditor-dialog-transclusion-options": "اختیارات",
 	"visualeditor-dialog-transclusion-param-default": "پہلے کنوں طے تھیا ہویا:$1",
 	"visualeditor-dialog-transclusion-param-example": "مثال دے طور تے:$1",
+	"visualeditor-media-title-audio": "آڈیو",
+	"visualeditor-media-title-image": "تصویر",
+	"visualeditor-media-title-video": "وڈیو",
 	"visualeditor-meta-tool": "اختیارات",
 	"visualeditor-mwlanguagevariant-name": "زبان دا ناں:$1",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "زبان",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "ماخذ",
 	"visualeditor-mwlanguagevariantcontextitem-title-name": "زبان دا ناں",
+	"visualeditor-savedialog-label-publish-short-start": "شائع کرو۔۔۔",
+	"visualeditor-savedialog-label-save-short-start": "بچاؤ۔۔۔",
 	"visualeditor-savedialog-review-visual": "بصری"
 }
