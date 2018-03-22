@@ -242,7 +242,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
-		inDialog: this.constructor.static.name
+		inDialog: this.constructor.static.name,
+		multiline: false
 	} );
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
