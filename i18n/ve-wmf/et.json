@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Avjoska",
-			"Pikne"
+			"Pikne",
+			"Cumbril"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus]]",
 	"tag-visualeditor-description": "Muudatus tehtud [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaaltoimetiga]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus: Kontrollida]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaaltoimetiga]] tehtud muudatus, mille tõttu võis vikitekst muutuda ettekavatsemata viisil.",
-	"tag-visualeditor-wikitext": "lähteteksti muudatus (2017)",
+	"tag-visualeditor-wikitext": "Lähteteksti muudatus (2017)",
 	"tag-visualeditor-wikitext-description": "Muudatus tehti lähteteksti redaktori 2017. aasta versiooniga.",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus: Ümberlülitus]]",
 	"tag-visualeditor-switched-description": "Kasutaja alustas redigeerimist visuaaltoimetiga, aga läks seejärel üle vikiteksti redaktorile.",

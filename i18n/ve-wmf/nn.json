@@ -10,6 +10,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring: Kontroller]]",
 	"tag-visualeditor-needcheck-description": "Endring gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuell endring]] der systemet fann at wikiteksten kan ha umeinte endringar.",
 	"tag-visualeditor-wikitext": "2017-kjeldeendring",
+	"tag-visualeditor-wikitext-description": "Endring gjord med 2017-tekstendraren",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring: Bytte]]",
 	"tag-visualeditor-switched-description": "Brukaren byrja endra med visuell endring, men bytte så til wikitekstendring.",
 	"visualeditor-feedback-tool": "Gje attendemelding på programvara",

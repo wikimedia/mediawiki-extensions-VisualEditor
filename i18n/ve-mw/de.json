@@ -14,7 +14,8 @@
 			"Tomabrafix",
 			"Umherirrender",
 			"Kurt Jansson",
-			"Saehrimnir"
+			"Saehrimnir",
+			"ToBeFree"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Fehler bei der Abfrage der MediaWiki-API",
@@ -58,6 +59,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Legt dies beim Speichern auf den Zeitstempel des Zeitpunkts der geladenen Seite fest. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",
 	"apihelp-visualeditoredit-param-summary": "Bearbeitungszusammenfassung.",
 	"apihelp-visualeditoredit-param-watch": "Fügt die Seite zur Beobachtungsliste des aktuellen Benutzers hinzu.",
+	"apihelp-visualeditoredit-param-wikitext": "Der Wikitext, mit dem gearbeitet werden soll.",
 	"apihelp-visualeditoredit-summary": "Speichert eine HTML5-Seite zu MediaWiki (konvertiert zu Wikitext mithilfe des Parsoid-Dienstes).",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad": "CollabPad",
