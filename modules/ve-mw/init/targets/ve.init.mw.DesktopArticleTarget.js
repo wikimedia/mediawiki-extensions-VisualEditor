@@ -30,7 +30,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.onUnloadHandler = this.onUnload.bind( this );
 	this.activating = false;
 	this.deactivating = false;
-	this.edited = false;
 	this.recreating = false;
 	this.activatingDeferred = null;
 	this.toolbarSetupDeferred = null;
@@ -532,19 +531,13 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surfac
 };
 
 /**
- * Try to de-activate the target, but leave ready for re-activation later
+ * @inheritdoc
  *
- * Will first prompt the user if required, then call #deactivate.
- *
- * A dialog will not be shown if tryDeactivate() is called while activation is still in progress,
- * or if the noDialog parameter is set to true. If tryDeactivate() is called while the target
- * is deactivating, or while it's not active and not activating, nothing happens.
- *
- * @param {boolean} [noDialog] Do not display a dialog
- * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
+ * A prompt will not be shown if tryTeardown() is called while activation is still in progress.
+ * If tryTeardown() is called while the target is deactivating, or while it's not active and
+ * not activating, nothing happens.
  */
-ve.init.mw.DesktopArticleTarget.prototype.tryDeactivate = function ( noDialog, trackMechanism ) {
-	var target = this;
+ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
 	if ( this.deactivating || ( !this.active && !this.activating ) ) {
 		return;
 	}
@@ -558,16 +551,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tryDeactivate = function ( noDialog, t
 	}
 	this.editingTabDialog = null;
 
-	if ( noDialog || this.activating || !this.edited ) {
-		this.teardown( trackMechanism );
-	} else {
-		this.getSurface().dialogs.openWindow( 'cancelconfirm' )
-			.closed.then( function ( data ) {
-				if ( data && data.action === 'discard' ) {
-					target.teardown( trackMechanism );
-				}
-			} );
-	}
+	return ve.init.mw.DesktopArticleTarget.super.prototype.tryTeardown.call( this, noPrompt || this.activating, trackMechanism );
 };
 
 /**
@@ -721,7 +705,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			} else if ( $( '#wpTextbox1' ).length && !ve.init.target.isModeAvailable( 'source' ) ) {
 				// If we're switching from the wikitext editor, just deactivate
 				// don't try to switch back to it fully, that'd discard changes.
-				target.tryDeactivate( true );
+				target.tryTeardown( true );
 			} else {
 				// TODO: Some sort of progress bar?
 				target.wikitextFallbackLoading = true;
@@ -732,7 +716,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		if ( errorDetails.statusText !== 'abort' ) {
 			mw.log.warn( 'Failed to find error message', code, errorDetails );
 		}
-		this.tryDeactivate( true );
+		this.tryTeardown( true );
 	}
 };
 
@@ -908,7 +892,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 			// also check they didn't fire after this event, as would be the case if
 			// they were bound to the document.
 			if ( !e.isPropagationStopped() ) {
-				target.tryDeactivate( false, 'navigate-read' );
+				target.tryTeardown( false, 'navigate-read' );
 			}
 		} );
 		e.preventDefault();
@@ -925,7 +909,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 	if ( !ve.isUnmodifiedLeftClick( e ) ) {
 		return;
 	}
-	this.tryDeactivate( false, 'navigate-read' );
+	this.tryTeardown( false, 'navigate-read' );
 	e.preventDefault();
 };
 
@@ -1009,7 +993,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 
 		// Tear down the target now that we're done saving
 		// Not passing trackMechanism because this isn't an abort action
-		this.tryDeactivate( true );
+		this.tryTeardown( true );
 		if ( newid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
 				message: ve.msg( 'postedit-confirmation-saved', mw.user )
@@ -1380,7 +1364,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	}
 	if ( this.active && veaction !== 'edit' && veaction !== 'editsource' ) {
 		this.actFromPopState = true;
-		this.tryDeactivate( false, 'navigate-back' );
+		this.tryTeardown( false, 'navigate-back' );
 	}
 };
 

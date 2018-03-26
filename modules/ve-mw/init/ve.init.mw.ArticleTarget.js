@@ -55,6 +55,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.currentRevisionId = mw.config.get( 'wgCurRevisionId' );
 	this.revid = this.requestedRevId || this.currentRevisionId;
 
+	this.edited = false;
 	this.restoring = !!this.requestedRevId && this.requestedRevId !== this.currentRevisionId;
 	this.pageDeletedWarning = false;
 	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
@@ -1903,6 +1904,31 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 		surface.getModel().removeDocStateAndChanges();
 	}
 	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
+};
+
+/**
+ * Try to tear down the target, but leave ready for re-activation later
+ *
+ * Will first prompt the user if required, then call #teardown.
+ *
+ * @param {boolean} [noPrompt] Do not display a prompt to the user
+ * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
+ * @return {jQuery.Promise} Promise which resolves when the target has been torn down
+ */
+ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
+	var target = this;
+
+	if ( noPrompt || !this.edited ) {
+		return this.teardown( trackMechanism );
+	} else {
+		return this.getSurface().dialogs.openWindow( 'cancelconfirm' )
+			.closed.then( function ( data ) {
+				if ( data && data.action === 'discard' ) {
+					return target.teardown( trackMechanism );
+				}
+				return $.Deferred().reject().promise();
+			} );
+	}
 };
 
 /**
