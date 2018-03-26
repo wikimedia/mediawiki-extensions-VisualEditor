@@ -222,12 +222,6 @@ ve.init.mw.MobileArticleTarget.prototype.scrollToHeading = function ( headingNod
 };
 
 /**
- * Close the mobile editor
- */
-ve.init.mw.MobileArticleTarget.prototype.close = function () {
-};
-
-/**
  * Done with the editing toolbar
  */
 ve.init.mw.MobileArticleTarget.prototype.done = function () {
@@ -273,7 +267,7 @@ ve.ui.MWBackCommand = function VeUiMWBackCommand() {
 };
 OO.inheritClass( ve.ui.MWBackCommand, ve.ui.Command );
 ve.ui.MWBackCommand.prototype.execute = function () {
-	ve.init.target.close();
+	ve.init.target.tryTeardown();
 };
 ve.ui.commandRegistry.register( new ve.ui.MWBackCommand() );
 
