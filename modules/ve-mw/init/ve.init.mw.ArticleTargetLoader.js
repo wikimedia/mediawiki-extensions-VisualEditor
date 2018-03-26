@@ -112,7 +112,10 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
-			var sessionState, request;
+			var sessionState, request, dataPromise,
+				apiRequest = mode === 'source' ?
+					this.requestWikitext.bind( this, pageName, options ) :
+					this.requestParsoidData.bind( this, pageName, options );
 
 			if ( options.sessionStore ) {
 				try {
@@ -131,22 +134,46 @@
 						// NB we don't cache by oldid so that cached results can be recovered
 						// even if the page has been since edited
 					) {
-						return $.Deferred().resolve( {
+						dataPromise = $.Deferred().resolve( {
 							visualeditor: $.extend(
 								{ content: mw.storage.session.get( 've-dochtml' ) },
 								sessionState.response,
 								{ recovered: true }
 							)
 						} ).promise();
+						// If the document hasn't been edited since the user first loaded it, recover
+						// their changes automatically.
+						if ( sessionState.response.oldid === mw.config.get( 'wgCurRevisionId' ) ) {
+							return dataPromise;
+						} else {
+							// Otherwise, prompt them if they want to recover, or reload the document
+							// to see the latest version
+							// This prompt will throw off all of our timing data, so just disable tracking
+							// for this session
+							ve.track = function () {};
+							return mw.loader.using( 'oojs-ui-windows' ).then( function () {
+								return OO.ui.confirm( mw.msg( 'visualeditor-autosave-modified-prompt-message' ), {
+									title: mw.msg( 'visualeditor-autosave-modified-prompt-title' ),
+									actions: [
+										{ action: 'accept', label: mw.msg( 'visualeditor-autosave-modified-prompt-accept' ), flags: [ 'primary', 'progressive' ] },
+										{ action: 'reject', label: mw.msg( 'visualeditor-autosave-modified-prompt-reject' ), flags: 'destructive' }
+									] }
+								).then( function ( confirmed ) {
+									if ( confirmed ) {
+										return dataPromise;
+									} else {
+										// If they requested the latest version, invalidate the autosave state
+										mw.storage.session.remove( 've-docstate' );
+										return apiRequest();
+									}
+								} );
+							} );
+						}
 					}
 				}
 			}
 
-			if ( mode === 'source' ) {
-				return this.requestWikitext( pageName, options );
-			} else {
-				return this.requestParsoidData( pageName, options );
-			}
+			return apiRequest();
 		},
 
 		/**
