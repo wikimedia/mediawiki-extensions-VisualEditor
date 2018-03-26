@@ -27,8 +27,6 @@ OO.inheritClass( ve.ui.MWWikitextSwitchConfirmDialog, OO.ui.MessageDialog );
 
 ve.ui.MWWikitextSwitchConfirmDialog.static.name = 'wikitextswitchconfirm';
 
-ve.ui.MWWikitextSwitchConfirmDialog.static.verbose = true;
-
 ve.ui.MWWikitextSwitchConfirmDialog.static.size = 'small';
 
 ve.ui.MWWikitextSwitchConfirmDialog.static.title =

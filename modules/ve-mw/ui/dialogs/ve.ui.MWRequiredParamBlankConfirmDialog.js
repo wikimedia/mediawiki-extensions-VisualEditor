@@ -27,8 +27,6 @@ OO.inheritClass( ve.ui.MWRequiredParamBlankConfirmDialog, OO.ui.MessageDialog );
 
 ve.ui.MWRequiredParamBlankConfirmDialog.static.name = 'requiredparamblankconfirm';
 
-ve.ui.MWRequiredParamBlankConfirmDialog.static.verbose = true;
-
 ve.ui.MWRequiredParamBlankConfirmDialog.static.size = 'medium';
 
 ve.ui.MWRequiredParamBlankConfirmDialog.static.actions = [
