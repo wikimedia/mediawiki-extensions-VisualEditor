@@ -28,8 +28,6 @@ OO.inheritClass( mw.libs.ve.SwitchConfirmDialog, OO.ui.MessageDialog );
 
 mw.libs.ve.SwitchConfirmDialog.static.name = 'veswitchconfirm';
 
-mw.libs.ve.SwitchConfirmDialog.static.verbose = true;
-
 mw.libs.ve.SwitchConfirmDialog.static.size = 'small';
 
 mw.libs.ve.SwitchConfirmDialog.static.title =

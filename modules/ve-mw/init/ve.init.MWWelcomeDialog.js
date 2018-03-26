@@ -34,8 +34,6 @@ mw.libs.ve.WelcomeDialog.static.name = 'welcome';
 
 mw.libs.ve.WelcomeDialog.static.size = 'medium';
 
-mw.libs.ve.WelcomeDialog.static.verbose = true;
-
 mw.libs.ve.WelcomeDialog.static.actions = [
 	{
 		action: 'switch-wte',

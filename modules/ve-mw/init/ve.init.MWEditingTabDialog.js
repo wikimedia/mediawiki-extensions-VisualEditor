@@ -30,8 +30,6 @@ mw.libs.ve.EditingTabDialog.static.name = 'editingtab';
 
 mw.libs.ve.EditingTabDialog.static.size = 'medium';
 
-mw.libs.ve.EditingTabDialog.static.verbose = true;
-
 mw.libs.ve.EditingTabDialog.static.title = mw.msg( 'visualeditor-editingtabdialog-title' );
 
 mw.libs.ve.EditingTabDialog.static.message = mw.msg( 'visualeditor-editingtabdialog-body' );
