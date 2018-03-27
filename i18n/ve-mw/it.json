@@ -70,6 +70,7 @@
 	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
+	"visualeditor-autosave-modified-prompt-reject": "Inizia una nuovo modifica",
 	"visualeditor-backbutton-tooltip": "Indietro",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Se incontri qualche problema tecnico quando modifichi, segnalalo qui sotto.",
