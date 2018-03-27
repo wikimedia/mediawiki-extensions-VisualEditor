@@ -147,7 +147,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 	} );
 	this.feedbackButton = new OO.ui.ButtonWidget( {
 		framed: false,
-		icon: 'comment',
+		icon: 'speechBubble',
 		label: ve.msg( 'visualeditor-feedback-tool' )
 	} );
 
