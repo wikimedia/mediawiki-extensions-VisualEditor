@@ -15,11 +15,10 @@
  * @param {string} title Title
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config]
- * @cfg {number} [width] Popup width. Upstream default is 320.
  */
 ve.ui.MWPopupTool = function VeUiMWPopupTool( title, toolGroup, config ) {
 	// Configuration initialization
-	config = ve.extendObject( { popup: { head: true, label: title, width: config && config.width } }, config );
+	config = ve.extendObject( { popup: { head: true, label: title } }, config );
 
 	// Parent constructor
 	ve.ui.MWPopupTool.super.call( this, toolGroup, config );
@@ -46,7 +45,7 @@ ve.ui.MWNoticesPopupTool = function VeUiMWNoticesPopupTool( toolGroup, config ) 
 		this,
 		ve.msg( 'visualeditor-editnotices-tooltip' ),
 		toolGroup,
-		ve.extendObject( config, { width: 450 } )
+		config
 	);
 };
 
