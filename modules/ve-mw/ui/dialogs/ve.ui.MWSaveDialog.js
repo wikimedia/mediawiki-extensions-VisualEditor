@@ -189,7 +189,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
-	var body, contents,
+	var body, contents, $heading,
 		categories = [],
 		modules = [];
 
@@ -220,9 +220,26 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		// Remove metadata
 		contents = ve.filterMetaElements( Array.prototype.slice.call( body.childNodes ) );
 
+		$heading = $( '<h1>' ).addClass( 'firstHeading' );
+
+		// Document title will only be set if wikitext contains {{DISPLAYTITLE}}
+		if ( docOrMsg.title ) {
+			// HACK: Parse title as it can contain basic wikitext (T122976)
+			new mw.Api().post( {
+				action: 'parse',
+				title: ve.init.target.pageName,
+				prop: 'displaytitle',
+				text: '{{DISPLAYTITLE:' + docOrMsg.title + '}}\n'
+			} ).then( function ( response ) {
+				if ( ve.getProp( response, 'parse', 'displaytitle' ) ) {
+					$heading.html( response.parse.displaytitle );
+				}
+			} );
+		}
+
 		this.$previewViewer.empty().append(
 			// TODO: This won't work with formatted titles (T122976)
-			$( '<h1>' ).addClass( 'firstHeading' ).text( docOrMsg.title || mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText() ),
+			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText() ),
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
 				contents
 			)
