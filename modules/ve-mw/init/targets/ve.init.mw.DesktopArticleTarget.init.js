@@ -1023,7 +1023,7 @@
 	}
 
 	$( function () {
-		var mode, requiredSkinElements,
+		var mode, requiredSkinElements, notify,
 			showWikitextWelcome = true,
 			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null,
 			isLoggedIn = !mw.user.isAnon(),
@@ -1240,11 +1240,16 @@
 			mw.loader.load( 'mediawiki.action.view.postEdit' );
 
 			// The following messages can be used here:
+			// postedit-confirmation-published
 			// postedit-confirmation-saved
 			// postedit-confirmation-created
 			// postedit-confirmation-restored
+			notify = uri.query.venotify;
+			if ( notify === 'saved' ) {
+				notify = mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? 'published' : 'saved';
+			}
 			mw.hook( 'postEdit' ).fire( {
-				message: mw.msg( 'postedit-confirmation-' + uri.query.venotify, mw.user )
+				message: mw.msg( 'postedit-confirmation-' + notify, mw.user )
 			} );
 
 			delete uri.query.venotify;
