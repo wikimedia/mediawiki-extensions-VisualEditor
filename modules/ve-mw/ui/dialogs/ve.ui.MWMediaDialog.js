@@ -304,25 +304,26 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		icon: 'parameter'
 	} );
 
-	this.typeSelect = new OO.ui.ButtonSelectWidget();
+	this.typeSelectDropdown = new OO.ui.DropdownWidget( { $overlay: this.$overlay } );
+	this.typeSelect = this.typeSelectDropdown.getMenu();
 	this.typeSelect.addItems( [
 		// TODO: Inline images require a bit of further work, will be coming soon
-		new OO.ui.ButtonOptionWidget( {
+		new OO.ui.MenuOptionWidget( {
 			data: 'thumb',
 			icon: 'image-thumbnail',
 			label: ve.msg( 'visualeditor-dialog-media-type-thumb' )
 		} ),
-		new OO.ui.ButtonOptionWidget( {
+		new OO.ui.MenuOptionWidget( {
 			data: 'frameless',
 			icon: 'image-frameless',
 			label: ve.msg( 'visualeditor-dialog-media-type-frameless' )
 		} ),
-		new OO.ui.ButtonOptionWidget( {
+		new OO.ui.MenuOptionWidget( {
 			data: 'frame',
 			icon: 'image-frame',
 			label: ve.msg( 'visualeditor-dialog-media-type-frame' )
 		} ),
-		new OO.ui.ButtonOptionWidget( {
+		new OO.ui.MenuOptionWidget( {
 			data: 'none',
 			icon: 'image-none',
 			label: ve.msg( 'visualeditor-dialog-media-type-none' )
@@ -338,7 +339,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Build type fieldset
 	this.typeFieldset.$element.append(
-		this.typeSelect.$element,
+		this.typeSelectDropdown.$element,
 		borderField.$element
 	);
 
@@ -1023,7 +1024,7 @@ ve.ui.MWMediaDialog.prototype.onPositionSelectChoose = function ( item ) {
 /**
  * Handle change event on the typeSelect element.
  *
- * @param {OO.ui.ButtonOptionWidget} item Selected item
+ * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWMediaDialog.prototype.onTypeSelectChoose = function ( item ) {
 	var type = item.getData();
