@@ -47,6 +47,8 @@
 	"tooltip-ca-editsource": "Επεξεργασία του πηγαίου κώδικα της σελίδας",
 	"tooltip-ca-ve-edit": "Επεξεργασία αυτής της σελίδας",
 	"visualeditor-advancedsettings-tool": "Ρυθμίσεις για προχωρημένους",
+	"visualeditor-autosave-modified-prompt-accept": "Συνέχιση της επεξεργασίας",
+	"visualeditor-autosave-modified-prompt-reject": "Εκκίνηση νέας επεξεργασίας",
 	"visualeditor-backbutton-tooltip": "Πήγαινε πίσω",
 	"visualeditor-beta-label": "Δοκιμαστική έκδοση",
 	"visualeditor-beta-warning": "Αν συναντήσετε προβλήματα, παρακαλούμε αναφέρετέ τα παρακάτω.",

@@ -6,7 +6,8 @@
 			"Fitoschido",
 			"McDutchie",
 			"Macofe",
-			"Nicolas Eynaud"
+			"Nicolas Eynaud",
+			"Unuaiga"
 		]
 	},
 	"apihelp-visualeditor-param-etag": "ETag de mandar.",
@@ -21,6 +22,10 @@
 	"tooltip-ca-editsource": "Modificar lo còdi font d'aquela pagina",
 	"tooltip-ca-ve-edit": "Modificar aquesta pagina",
 	"visualeditor-advancedsettings-tool": "Paramètres avançats",
+	"visualeditor-autosave-modified-prompt-accept": "Tornar editar",
+	"visualeditor-autosave-modified-prompt-message": "Aquesta pagina es estada editada après que l'ajatz cargada. Volètz reprene l'edicion de l'anciana version, o començar de novèlas modificacions de la darrièra version ?",
+	"visualeditor-autosave-modified-prompt-reject": "Començar una novèla modificacion",
+	"visualeditor-autosave-modified-prompt-title": "Reprene vòstra edicion ?",
 	"visualeditor-backbutton-tooltip": "Tornar en arrièr",
 	"visualeditor-beta-label": "bèta",
 	"visualeditor-beta-warning": "Se rencontratz de problèmas tecnics en cors d'edicion, senhalatz-los.",

@@ -75,6 +75,7 @@
 	"tooltip-ca-ve-edit": "Editar esta página",
 	"visualeditor-advancedsettings-tool": "Configurações avançadas",
 	"visualeditor-autosave-modified-prompt-accept": "Continuar a edição",
+	"visualeditor-autosave-modified-prompt-message": "Esta página foi editada desde a última vez que a carregou. {{GENDER:|Deseja}} continuar a {{GENDER:|sua}} edição da versão antiga, ou começar uma nova edição com a versão mais recente?",
 	"visualeditor-autosave-modified-prompt-reject": "Começar uma nova edição",
 	"visualeditor-autosave-modified-prompt-title": "Continuar {{GENDER:|a sua}} edição?",
 	"visualeditor-autosave-not-recovered-text": "Não foi possível recuperar as suas mudanças ainda não gravadas.",
