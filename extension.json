@@ -958,16 +958,13 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"lib/ve/src/themes/wikimediaui/dialogs.css",
-					"lib/ve/src/themes/wikimediaui/widgets.css"
+					"lib/ve/src/themes/wikimediaui.css"
 				],
 				"apex": [
-					"lib/ve/src/themes/apex/dialogs.css",
-					"lib/ve/src/themes/apex/widgets.css"
+					"lib/ve/src/themes/apex.css"
 				],
 				"monobook": [
-					"lib/ve/src/themes/apex/dialogs.css",
-					"lib/ve/src/themes/apex/widgets.css"
+					"lib/ve/src/themes/apex.css"
 				]
 			},
 			"dependencies": [
@@ -1326,10 +1323,10 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/themes/wikimediaui/widgets.css"
+					"modules/ve-mw/themes/wikimediaui.css"
 				],
 				"monobook": [
-					"modules/ve-mw/themes/apex/widgets.css"
+					"modules/ve-mw/themes/apex.css"
 				]
 			},
 			"dependencies": [
