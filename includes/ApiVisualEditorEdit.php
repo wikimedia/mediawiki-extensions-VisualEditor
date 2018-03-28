@@ -409,7 +409,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					'diff',
 					'save',
 				],
-				ApiBase::PARAM_DFLT => 'save',
 			],
 			'page' => [
 				ApiBase::PARAM_REQUIRED => true,
