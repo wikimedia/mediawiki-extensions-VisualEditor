@@ -9,7 +9,7 @@
  * @file
  * @ingroup Extensions
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  */
 
 if ( function_exists( 'wfLoadExtension' ) ) {
