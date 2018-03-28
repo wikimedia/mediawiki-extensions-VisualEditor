@@ -1617,7 +1617,8 @@
 			"styles": [
 				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.css",
-				"modules/ve-mw/ui/styles/tools/ve.ui.MWLinkInspectorTool.css"
+				"modules/ve-mw/ui/styles/tools/ve.ui.MWLinkInspectorTool.css",
+				"modules/ve-mw/ce/styles/annotations/ve.ce.MWExternalLinkAnnotation.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
