@@ -61,7 +61,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 
 		// Prevent surface observation due to native range changing
 		this.surfaceObserver.disable();
-		this.$pasteTarget.append( this.pasteTargetInput.$element );
+		this.$pasteTarget.empty().append( this.pasteTargetInput.$element );
 		this.pasteTargetInput.setValue( text ).select();
 
 		// Restore scroll position after changing focus
@@ -77,7 +77,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 			view.surfaceObserver.clear();
 			view.surfaceObserver.enable();
 			// Detach input
-			this.pasteTargetInput.$element.detach();
+			view.pasteTargetInput.$element.detach();
 		} );
 	}
 };
