@@ -274,6 +274,7 @@
 	"visualeditor-preference-core-label": "Visuaaltoimeti",
 	"visualeditor-preference-enable": "Kasuta visuaaltoimetit. See on saadaval {{PLURAL:$2|järgmises nimeruumis|järgmistes nimeruumides}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Kasuta uut visuaaltoimeti juurde kuuluvat vikiteksti režiimi. See sisaldab suurt osa visuaaltoimetis olemasolevatest tööriistadest, sel on sarnane väljanägemine ning see võimaldab toimetamisrežiime paremini vahetada.",
+	"visualeditor-preference-newwikitexteditor-enable": "Kasuta visuaaltoimeti vikiteksti režiimi, mitte eraldi vikiteksti toimetit",
 	"visualeditor-preference-newwikitexteditor-label": "Uus vikiteksti režiim",
 	"visualeditor-preference-tabs": "Redigeerimisrežiim:",
 	"visualeditor-preference-tabs-multi-tab": "Näita mõlemat redigeerimiskaarti",

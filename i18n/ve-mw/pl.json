@@ -63,6 +63,8 @@
 	"tooltip-ca-editsource": "Edycja kodu źródłowego strony",
 	"tooltip-ca-ve-edit": "Edytuj tę stronę",
 	"visualeditor-advancedsettings-tool": "Zaawansowane",
+	"visualeditor-autosave-modified-prompt-accept": "Wznów edycję",
+	"visualeditor-autosave-modified-prompt-reject": "Rozpocznij nową edycję",
 	"visualeditor-backbutton-tooltip": "Wróć",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Jeśli napotkasz problemy techniczne podczas edycji, zgłoś je.",
