@@ -7,7 +7,8 @@
 			"Syedalinaqinaqvi",
 			"عرفان ارشد",
 			"Obaid Raza",
-			"Muhammad Shuaib"
+			"Muhammad Shuaib",
+			"Abdulq"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "خلاصہ ترمیم۔",
@@ -18,6 +19,7 @@
 	"tooltip-ca-editsource": "اس صفحے کے سورس کوڈ میں ترمیم کریں",
 	"tooltip-ca-ve-edit": "صفحہ میں ترمیم کریں",
 	"visualeditor-advancedsettings-tool": "پیشرفتہ ترتیبات",
+	"visualeditor-autosave-modified-prompt-reject": "نئی ترمیم شروع کریں",
 	"visualeditor-backbutton-tooltip": "پیچھے جائیں",
 	"visualeditor-beta-label": "آزمائشی",
 	"visualeditor-beta-warning": "ترمیم کے دوران میں آپ کو کوئی تکنیکی مشکل پیش آتی ہے تو براہ کرم اس کی شکایت درج کریں۔",
@@ -114,6 +116,7 @@
 	"visualeditor-linkinspector-button-link-external": "بیرونی ربط",
 	"visualeditor-linkinspector-button-link-internal": "صفحے کی تلاش",
 	"visualeditor-media-input-placeholder": "میڈیا کی تلاش",
+	"visualeditor-media-title-audio": "صوتی",
 	"visualeditor-meta-tool": "اختیارات",
 	"visualeditor-mwgallerydialog-caption-field-label": "نگارخانے کا عنوان",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "پورے نگارخانہ کا عنوان",
@@ -162,6 +165,7 @@
 	"visualeditor-savedialog-label-resume-editing": "ترمیم دوبارہ شروع کریں",
 	"visualeditor-savedialog-label-review": "اپنی تبدیلیوں پر نظر ثانی کریں",
 	"visualeditor-savedialog-label-save-short": "محفوظ",
+	"visualeditor-savedialog-label-save-short-start": "محفوظ کریں",
 	"visualeditor-savedialog-label-warning": "انتباہ",
 	"visualeditor-savedialog-review-nosummary": "کوئی ترمیمی خلاصہ نہیں",
 	"visualeditor-savedialog-review-visual": "بصری (تجرباتی)",

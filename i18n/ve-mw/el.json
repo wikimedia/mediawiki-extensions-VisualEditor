@@ -49,6 +49,7 @@
 	"visualeditor-advancedsettings-tool": "Ρυθμίσεις για προχωρημένους",
 	"visualeditor-autosave-modified-prompt-accept": "Συνέχιση της επεξεργασίας",
 	"visualeditor-autosave-modified-prompt-reject": "Εκκίνηση νέας επεξεργασίας",
+	"visualeditor-autosave-modified-prompt-title": "Συνέχιση της {{GENDER:|δικής σας}} επεξεργασίας?",
 	"visualeditor-backbutton-tooltip": "Πήγαινε πίσω",
 	"visualeditor-beta-label": "Δοκιμαστική έκδοση",
 	"visualeditor-beta-warning": "Αν συναντήσετε προβλήματα, παρακαλούμε αναφέρετέ τα παρακάτω.",
