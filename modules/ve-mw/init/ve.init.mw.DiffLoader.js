@@ -22,15 +22,16 @@
 		 * Get a ve.dm.Document model from a Parsoid response
 		 *
 		 * @param {Object} response Parsoid response from the VisualEditor API
+		 * @param {number} [section] Section
 		 * @return {ve.dm.Document|null} Document, or null if an invalid response
 		 */
-		getModelFromResponse: function ( response ) {
+		getModelFromResponse: function ( response, section ) {
 			var doc,
 				targetClass = ve.init.mw.DesktopArticleTarget,
 				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
-				doc = targetClass.static.parseDocument( data.content, 'visual' );
+				doc = targetClass.static.parseDocument( data.content, 'visual', section );
 				// Strip RESTBase IDs
 				Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
 					if ( element.id.match( metadataIdRegExp ) ) {
@@ -48,22 +49,23 @@
 		 * @param {number} revId Revision ID
 		 * @param {string} [pageName] Page name, defaults to wgRelevantPageName
 		 * @param {jQuery.Promise} [parseDocumentModulePromise] Promise which resolves when Target#parseDocument is available
+		 * @param {number} [section] Section
 		 * @return {jQuery.Promise} Promise which resolves with a document model
 		 */
-		fetchRevision: function ( revId, pageName, parseDocumentModulePromise ) {
+		fetchRevision: function ( revId, pageName, parseDocumentModulePromise, section ) {
+			var cacheKey = revId + ( section !== undefined ? '/' + section : '' );
+
 			parseDocumentModulePromise = parseDocumentModulePromise || $.Deferred().resolve().promise();
 			pageName = pageName || mw.config.get( 'wgRelevantPageName' );
 
-			revCache[ pageName ] = revCache[ pageName ] || {};
-			revCache[ pageName ][ revId ] =
-				revCache[ pageName ][ revId ] ||
+			revCache[ cacheKey ] = revCache[ cacheKey ] ||
 				mw.libs.ve.targetLoader.requestParsoidData( pageName, { oldId: revId, targetName: 'diff' } ).then( function ( response ) {
 					return parseDocumentModulePromise.then( function () {
-						return mw.libs.ve.diffLoader.getModelFromResponse( response );
+						return mw.libs.ve.diffLoader.getModelFromResponse( response, section );
 					} );
 				} );
 
-			return revCache[ pageName ][ revId ];
+			return revCache[ cacheKey ];
 		},
 
 		/**
