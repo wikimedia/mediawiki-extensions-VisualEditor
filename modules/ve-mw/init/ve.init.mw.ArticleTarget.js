@@ -226,6 +226,50 @@ ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode 
 	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode );
 };
 
+/**
+ * Build DOM for the redirect page subtitle (#redirectsub).
+ *
+ * @return {jQuery}
+ */
+ve.init.mw.ArticleTarget.static.buildRedirectSub = function () {
+	// Page subtitle
+	// Compare: Article::view()
+	return $( '<span>' )
+		.attr( 'id', 'redirectsub' )
+		.append( mw.message( 'redirectpagesub' ).parseDom() );
+};
+
+/**
+ * Build DOM for the redirect page content header (.redirectMsg).
+ *
+ * @param {string} title Redirect target
+ * @return {jQuery}
+ */
+ve.init.mw.ArticleTarget.static.buildRedirectMsg = function ( title ) {
+	var $link;
+
+	$link = $( '<a>' )
+		.attr( {
+			href: mw.Title.newFromText( title ).getUrl(),
+			title: mw.msg( 'visualeditor-redirect-description', title )
+		} )
+		.text( title );
+	ve.init.platform.linkCache.styleElement( title, $link );
+
+	// Page content header
+	// Compare: Article::getRedirectHeaderHtml()
+	return $( '<div>' )
+		.addClass( 'redirectMsg' )
+		// Hack: This is normally inside #mw-content-text, but we may insert it before, so we need this.
+		.addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir )
+		.append(
+			$( '<p>' ).text( mw.msg( 'redirectto' ) ),
+			$( '<ul>' )
+				.addClass( 'redirectText' )
+				.append( $( '<li>' ).append( $link ) )
+		);
+};
+
 /* Methods */
 
 /**
@@ -2475,4 +2519,77 @@ ve.init.mw.ArticleTarget.prototype.reloadSurface = function ( newMode, dataPromi
 		true /* non-cancellable */
 	);
 	this.load( dataPromise );
+};
+
+/**
+ * Display the given redirect subtitle and redirect page content header on the page.
+ *
+ * @param {jQuery} $sub Redirect subtitle, see #buildRedirectSub
+ * @param {jQuery} $msg Redirect page content header, see #buildRedirectMsg
+ */
+ve.init.mw.ArticleTarget.prototype.updateRedirectInterface = function ( $sub, $msg ) {
+	var $currentSub, $currentMsg, $subtitle,
+		target = this;
+
+	// For the subtitle, replace the real one with ours.
+	// This is more complicated than it should be because we have to fiddle with the <br>.
+	$currentSub = $( '#redirectsub' );
+	if ( $currentSub.length ) {
+		if ( $sub.length ) {
+			$currentSub.replaceWith( $sub );
+		} else {
+			$currentSub.prev().filter( 'br' ).remove();
+			$currentSub.remove();
+		}
+	} else {
+		$subtitle = $( '#contentSub' );
+		if ( $sub.length ) {
+			if ( $subtitle.children().length ) {
+				$subtitle.append( $( '<br>' ) );
+			}
+			$subtitle.append( $sub );
+		}
+	}
+
+	if ( $msg.length ) {
+		$msg
+			// We need to be able to tell apart the real one and our fake one
+			.addClass( 've-redirect-header' )
+			.on( 'click', function ( e ) {
+				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+				windowAction.open( 'meta', { page: 'settings' } );
+				e.preventDefault();
+			} );
+	}
+	// For the content header, the real one is hidden, insert ours before it.
+	$currentMsg = $( '.ve-redirect-header' );
+	if ( $currentMsg.length ) {
+		$currentMsg.replaceWith( $msg );
+	} else {
+		// Hack: This is normally inside #mw-content-text, but that's hidden while editing.
+		$( '#mw-content-text' ).before( $msg );
+	}
+};
+
+/**
+ * Set temporary redirect interface to match the current state of redirection in the editor.
+ *
+ * @param {string|null} title Current redirect target, or null if none
+ */
+ve.init.mw.ArticleTarget.prototype.setFakeRedirectInterface = function ( title ) {
+	this.updateRedirectInterface(
+		title ? this.constructor.static.buildRedirectSub() : $(),
+		title ? this.constructor.static.buildRedirectMsg( title ) : $()
+	);
+};
+
+/**
+ * Set the redirect interface to match the page's redirect state.
+ */
+ve.init.mw.ArticleTarget.prototype.setRealRedirectInterface = function () {
+	this.updateRedirectInterface(
+		mw.config.get( 'wgIsRedirect' ) ? this.buildRedirectSub() : $(),
+		// Remove our custom content header - the original one in #mw-content-text will be shown
+		$()
+	);
 };

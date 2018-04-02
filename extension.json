@@ -589,13 +589,15 @@
 				"newsectionsummary",
 				"pagecategories",
 				"parentheses",
+				"redirectto",
 				"tooltip-minoredit",
 				"tooltip-watch",
 				"visualeditor-autosave-not-recovered-text",
 				"visualeditor-autosave-not-recovered-title",
 				"visualeditor-autosave-recovered-text",
 				"visualeditor-autosave-recovered-title",
-				"visualeditor-diff-no-changes"
+				"visualeditor-diff-no-changes",
+				"visualeditor-redirect-description"
 			],
 			"targets": [
 				"desktop",
@@ -1686,8 +1688,6 @@
 				"mediawiki.action.view.redirectPage"
 			],
 			"messages": [
-				"redirectto",
-
 				"visualeditor-advancedsettings-tool",
 				"visualeditor-categories-tool",
 				"visualeditor-dialog-meta-advancedsettings-label",
@@ -1752,7 +1752,6 @@
 				"visualeditor-dialogbutton-meta-tooltip",
 				"visualeditor-languages-tool",
 				"visualeditor-meta-tool",
-				"visualeditor-redirect-description",
 				"visualeditor-settings-tool",
 				"visualeditor-templatesused-tool"
 			],
