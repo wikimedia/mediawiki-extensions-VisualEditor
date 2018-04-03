@@ -189,7 +189,8 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
-	var body, contents, $heading,
+	var body, contents, $heading, redirectMeta,
+		$redirect = $(),
 		categories = [],
 		modules = [];
 
@@ -237,9 +238,21 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			} );
 		}
 
+		// Redirect
+		redirectMeta = body.querySelector( 'link[rel="mw:PageProp/redirect"]' );
+		if ( redirectMeta ) {
+			$redirect = ve.init.mw.ArticleTarget.static.buildRedirectMsg(
+				ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+					redirectMeta.getAttribute( 'href' ),
+					document
+				).title
+			);
+		}
+
 		this.$previewViewer.empty().append(
 			// TODO: This won't work with formatted titles (T122976)
 			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText() ),
+			$redirect,
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
 				contents
 			)
