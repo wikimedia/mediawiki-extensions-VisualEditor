@@ -65,7 +65,7 @@ class ApiVisualEditor extends ApiBase {
 		}
 		// set up cookie forwarding
 		if ( $params['forwardCookies'] ) {
-			$params['forwardCookies'] = RequestContext::getMain()->getRequest()->getHeader( 'Cookie' );
+			$params['forwardCookies'] = $this->getRequest()->getHeader( 'Cookie' );
 		} else {
 			$params['forwardCookies'] = false;
 		}
