@@ -45,7 +45,6 @@ class ApiVisualEditor extends ApiBase {
 		$params = [];
 		// the VRS class to use, defaults to Parsoid
 		$class = ParsoidVirtualRESTService::class;
-		$config = $this->veConfig;
 		// The global virtual rest service config object, if any
 		$vrs = $this->getConfig()->get( 'VirtualRestConfig' );
 		if ( isset( $vrs['modules'] ) && isset( $vrs['modules']['restbase'] ) ) {
@@ -149,12 +148,12 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Provide the RESTbase-parsed HTML of a given fragment of wikitext
 	 *
-	 * @param string $title The title of the page to use as the parsing context
+	 * @param Title $title The title of the page to use as the parsing context
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
 	 * @return string The parsed content HTML
 	 */
-	protected function parseWikitextFragment( $title, $wikitext, $bodyOnly ) {
+	protected function parseWikitextFragment( Title $title, $wikitext, $bodyOnly ) {
 		return $this->requestRestbase(
 			'POST',
 			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
@@ -208,10 +207,10 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Provide the current language links for a given page title
 	 *
-	 * @param string $title The page title for which to get the current language links
+	 * @param Title $title The page title for which to get the current language links
 	 * @return string[] The language links
 	 */
-	protected function getLangLinks( $title ) {
+	protected function getLangLinks( Title $title ) {
 		$apiParams = [
 			'action' => 'query',
 			'prop' => 'langlinks',
