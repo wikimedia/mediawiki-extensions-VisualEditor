@@ -30,6 +30,8 @@ ve.dm.MWGalleryImageNode.static.name = 'mwGalleryImage';
 
 ve.dm.MWGalleryImageNode.static.matchTagNames = [ 'li' ];
 
+ve.dm.MWGalleryImageNode.static.childNodeTypes = [ 'mwGalleryImageCaption' ];
+
 ve.dm.MWGalleryImageNode.static.matchFunction = function ( element ) {
 	var parentTypeof = ( element.parentNode && element.parentNode.getAttribute( 'typeof' ) ) || '';
 	return element.getAttribute( 'class' ) === 'gallerybox' &&
