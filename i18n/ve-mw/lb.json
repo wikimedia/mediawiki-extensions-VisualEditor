@@ -36,6 +36,7 @@
 	"visualeditor-advancedsettings-tool": "Erweidert Astellungen",
 	"visualeditor-autosave-modified-prompt-accept": "mat der Ännerung virufueren",
 	"visualeditor-autosave-modified-prompt-reject": "Eng nei Ännerung ufänken",
+	"visualeditor-autosave-modified-prompt-title": "Mat {{GENDER:|Ärer}} Ännerung virufueren?",
 	"visualeditor-autosave-not-recovered-text": "Är net gespäichert Ännerunge konnten net restauréiert ginn.",
 	"visualeditor-autosave-recovered-text": "Är net gespäichert Ännerunge goufen automatesch restauréiert.",
 	"visualeditor-autosave-recovered-title": "Ännerunge restauréiert",
