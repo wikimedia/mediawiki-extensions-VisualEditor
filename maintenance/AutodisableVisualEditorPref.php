@@ -3,7 +3,7 @@
  * Sets the VisualEditor autodisable preference on appropriate users.
  *
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  * @author Alex Monk <amonk@wikimedia.org>
  * @file
  * @ingroup Extensions
@@ -16,7 +16,10 @@ $maintenancePath = getenv( 'MW_INSTALL_PATH' ) !== false
 
 require_once $maintenancePath;
 
-class VEAutodisablePref extends Maintenance {
+class AutodisableVisualEditorPref extends Maintenance {
+	/**
+	 * @inheritDoc
+	 */
 	public function __construct() {
 		parent::__construct();
 		$this->requireExtension( 'VisualEditor' );
@@ -24,6 +27,9 @@ class VEAutodisablePref extends Maintenance {
 		$this->setBatchSize( 500 );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function execute() {
 		$dbr = wfGetDB( DB_REPLICA );
 
@@ -64,5 +70,5 @@ class VEAutodisablePref extends Maintenance {
 	}
 }
 
-$maintClass = "VEAutodisablePref";
+$maintClass = "AutodisableVisualEditorPref";
 require_once RUN_MAINTENANCE_IF_MAIN;

@@ -1,4 +1,13 @@
 <?php
+/**
+ * CollabPad special page
+ *
+ * @file
+ * @ingroup Extensions
+ * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
+ * @license MIT
+ */
+
 class SpecialCollabPad extends SpecialPage {
 	private $prefixes = [];
 
@@ -16,20 +25,32 @@ class SpecialCollabPad extends SpecialPage {
 		parent::__construct( 'CollabPad' );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function getGroupName() {
 		return 'wiki';
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function userCanExecute( User $user ) {
 		global $wgVisualEditorRebaserURL;
 		return !!$wgVisualEditorRebaserURL && parent::userCanExecute( $user );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isListed() {
 		global $wgVisualEditorRebaserURL;
 		return !!$wgVisualEditorRebaserURL;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function execute( $par ) {
 		$this->setHeaders();
 		$this->checkPermissions();

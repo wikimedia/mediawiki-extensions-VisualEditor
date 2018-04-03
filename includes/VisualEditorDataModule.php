@@ -5,7 +5,7 @@
  * @file
  * @ingroup Extensions
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  */
 
 class VisualEditorDataModule extends ResourceLoaderModule {
@@ -43,6 +43,11 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			) . ');';
 	}
 
+	/**
+	 * @param ResourceLoaderContext $context Object containing information about the state of this
+	 *   specific loader request.
+	 * @return string[] Messages in various states of parsing
+	 */
 	protected function getMessageInfo( ResourceLoaderContext $context ) {
 		$editSubmitButtonLabelPublish = $context->getResourceLoader()->getConfig()
 			->get( 'EditSubmitButtonLabelPublish' );
@@ -85,10 +90,18 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		];
 	}
 
+	/**
+	 * @inheritDoc
+	 *
+	 * Always true.
+	 */
 	public function enableModuleContentVersion() {
 		return true;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getDependencies( ResourceLoaderContext $context = null ) {
 		return [
 			'ext.visualEditor.base',

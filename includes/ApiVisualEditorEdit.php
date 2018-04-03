@@ -5,7 +5,7 @@
  * @file
  * @ingroup Extensions
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  */
 
 use \MediaWiki\Logger\LoggerFactory;
@@ -13,10 +13,21 @@ use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditorEdit extends ApiVisualEditor {
 
+	/**
+	 * @inheritDoc
+	 */
 	public function __construct( ApiMain $main, $name, Config $config ) {
 		parent::__construct( $main, $name, $config );
 	}
 
+	/**
+	 * Attempt to save a given page's wikitext to MediaWiki's storage layer via its API
+	 *
+	 * @param string $title The title of the page to write
+	 * @param string $wikitext The wikitext to write
+	 * @param array $params The edit parameters
+	 * @return Status The result of the save attempt
+	 */
 	protected function saveWikitext( $title, $wikitext, $params ) {
 		$apiParams = [
 			'action' => 'edit',
@@ -60,6 +71,12 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $api->getResult()->getResultData();
 	}
 
+	/**
+	 * Load into an array the output of MediaWiki's parser for a given revision
+	 *
+	 * @param int $newRevId The revision to load
+	 * @return array The parsed of the save attempt
+	 */
 	protected function parseWikitext( $newRevId ) {
 		$apiParams = [
 			'action' => 'parse',
@@ -118,6 +135,12 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		];
 	}
 
+	/**
+	 * Attempt to compress a given text string via deflate
+	 *
+	 * @param string $content The string to compress
+	 * @return string The compressed string, or the original if deflating failed
+	 */
 	public static function tryDeflate( $content ) {
 		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
 			$deflated = base64_decode( substr( $content, 11 ) );
@@ -137,6 +160,14 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $content;
 	}
 
+	/**
+	 * Create and load the parsed wikitext of an edit, or from the serialisation cache if available.
+	 *
+	 * @param string $title The title of the page
+	 * @param array $params The edit parameters
+	 * @param array $parserParams The parser parameters
+	 * @return string The wikitext of the edit
+	 */
 	protected function getWikitext( $title, $params, $parserParams ) {
 		if ( $params['cachekey'] !== null ) {
 			$wikitext = $this->trySerializationCache( $params['cachekey'] );
@@ -149,6 +180,14 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $wikitext;
 	}
 
+	/**
+	 * Create and load the parsed wikitext of an edit, ignoring the serialisation cache.
+	 *
+	 * @param string $title The title of the page
+	 * @param array $params The edit parameters
+	 * @param array $parserParams The parser parameters
+	 * @return string The wikitext of the edit
+	 */
 	protected function getWikitextNoCache( $title, $params, $parserParams ) {
 		$this->requireOnlyOneParameter( $params, 'html' );
 		$wikitext = $this->postHTML(
@@ -160,6 +199,13 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $wikitext;
 	}
 
+	/**
+	 * Load the parsed wikitext of an edit into the serialisation cache.
+	 *
+	 * @param string $title The title of the page
+	 * @param string $wikitext The wikitext of the edit
+	 * @return string The key of the wikitext in the serialisation cache
+	 */
 	protected function storeInSerializationCache( $title, $wikitext ) {
 		global $wgMemc;
 
@@ -189,12 +235,28 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return $hash;
 	}
 
+	/**
+	 * Load some parsed wikitext of an edit from the serialisation cache.
+	 *
+	 * @param string $hash The key of the wikitext in the serialisation cache
+	 * @return string|null The wikitext
+	 */
 	protected function trySerializationCache( $hash ) {
 		global $wgMemc;
 		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
 		return $wgMemc->get( $key );
 	}
 
+	/**
+	 * Transform HTML to wikitext via Parsoid through RESTbase.
+	 *
+	 * @param string $path The RESTbase path of the transform endpoint
+	 * @param string $title The title of the page
+	 * @param array $data An array of the HTML and the 'scrub_wikitext' option
+	 * @param array $parserParams Parsoid parser paramters to pass in
+	 * @param string $etag The ETag to set in the HTTP request header
+	 * @return string Body of the RESTbase server's response
+	 */
 	protected function postData( $path, $title, $data, $parserParams, $etag ) {
 		$path .= urlencode( $title->getPrefixedDBkey() );
 		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
@@ -206,6 +268,15 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		);
 	}
 
+	/**
+	 * Transform HTML to wikitext via Parsoid through RESTbase. Wrapper for ::postData().
+	 *
+	 * @param string $title The title of the page
+	 * @param string $html The HTML of the page to be transformed
+	 * @param array $parserParams Parsoid parser paramters to pass in
+	 * @param string $etag The ETag to set in the HTTP request header
+	 * @return string Body of the RESTbase server's response
+	 */
 	protected function postHTML( $title, $html, $parserParams, $etag ) {
 		return $this->postData(
 			'transform/html/to/wikitext/', $title,
@@ -213,6 +284,15 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		);
 	}
 
+	/**
+	 * Calculate the different between the wikitext of an edit and an existing revision.
+	 *
+	 * @param string $title The title of the page
+	 * @param int $fromId The existing revision of the page to compare with
+	 * @param string $wikitext The wikitext to compare against
+	 * @param int|null $section Whether the wikitext refers to a given section or the whole page
+	 * @return array The comparison, or `[ 'result' => 'nochanges' ]` if there are none
+	 */
 	protected function diffWikitext( $title, $fromId, $wikitext, $section = null ) {
 		$apiParams = [
 			'action' => 'compare',
@@ -259,6 +339,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function execute() {
 		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
 
@@ -399,6 +482,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getAllowedParams() {
 		return [
 			'paction' => [
@@ -433,14 +519,23 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		];
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function needsToken() {
 		return 'csrf';
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function mustBePosted() {
 		return true;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isWriteMode() {
 		return true;
 	}

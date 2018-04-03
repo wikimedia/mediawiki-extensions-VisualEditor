@@ -5,7 +5,7 @@
  * @file
  * @ingroup Extensions
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  */
 
 use MediaWiki\MediaWikiServices;
@@ -36,6 +36,13 @@ class VisualEditorHooks {
 		}
 	}
 
+	/**
+	 * Factory to return the relevant API class
+	 *
+	 * @param ApiMain $main The ApiMain instance
+	 * @param string $name The api request name
+	 * @return ApiVisualEditor|ApiVisualEditorEdit API class
+	 */
 	public static function getVisualEditorApiFactory( $main, $name ) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$class = $name === 'visualeditor' ? 'ApiVisualEditor' : 'ApiVisualEditorEdit';
@@ -75,6 +82,14 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	/**
+	 * Handler for the DiffViewHeader hook, to add visual diffs code as configured
+	 *
+	 * @param DifferenceEngine $diff The difference engine
+	 * @param Revision $oldRev The old revision
+	 * @param Revision $newRev The new revision
+	 * @return bool Always true
+	 */
 	public static function onDiffViewHeader(
 		DifferenceEngine $diff,
 		Revision $oldRev = null,
@@ -631,6 +646,13 @@ class VisualEditorHooks {
 		}
 	}
 
+	/**
+	 * Handler for the GetPreferences hook, to add and hide user preferences as configured
+	 *
+	 * @param User $user The user object
+	 * @param array &$preferences Their preferences object
+	 * @return bool Always true
+	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
@@ -717,6 +739,12 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	/**
+	 * Handler for the GetBetaPreferences hook, to add and hide user beta preferences as configured
+	 *
+	 * @param User $user The user object
+	 * @param array &$preferences Their preferences object
+	 */
 	public static function onGetBetaPreferences( User $user, array &$preferences ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
 		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor/images";
@@ -971,6 +999,13 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	/**
+	 * Handler for the ResourceLoaderTestModules hook given we can't do this statically yet.
+	 *
+	 * @param array &$testModules The ResourceLoader test modules array
+	 * @param ResourceLoader &$resourceLoader The ResourceLoader controller
+	 * @return bool Always true
+	 */
 	public static function onResourceLoaderTestModules(
 		array &$testModules,
 		ResourceLoader &$resourceLoader

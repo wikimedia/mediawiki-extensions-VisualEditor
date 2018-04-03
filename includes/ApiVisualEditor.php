@@ -5,7 +5,7 @@
  * @file
  * @ingroup Extensions
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  */
 
 use MediaWiki\MediaWikiServices;
@@ -21,6 +21,9 @@ class ApiVisualEditor extends ApiBase {
 	 */
 	protected $serviceClient;
 
+	/**
+	 * @inheritDoc
+	 */
 	public function __construct( ApiMain $main, $name, Config $config ) {
 		parent::__construct( $main, $name );
 		$this->veConfig = $config;
@@ -73,6 +76,15 @@ class ApiVisualEditor extends ApiBase {
 		return new $class( $params );
 	}
 
+	/**
+	 * Accessor function for all RESTbase requests
+	 *
+	 * @param string $method The HTTP method, either 'GET' or 'POST'
+	 * @param string $path The RESTbase api path
+	 * @param Array $params Request parameters
+	 * @param Array $reqheaders Request headers
+	 * @return string Body of the RESTbase server's response
+	 */
 	protected function requestRestbase( $method, $path, $params, $reqheaders = [] ) {
 		global $wgVersion;
 		$request = [
@@ -117,6 +129,13 @@ class ApiVisualEditor extends ApiBase {
 		return $response['body'];
 	}
 
+	/**
+	 * Run wikitext through the parser's Pre-Save-Transform
+	 *
+	 * @param string $title The title of the page to use as the parsing context
+	 * @param string $wikitext The wikitext to transform
+	 * @return string The transformed wikitext
+	 */
 	protected function pstWikitext( $title, $wikitext ) {
 		return ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT )
 			->preSaveTransform(
@@ -127,6 +146,14 @@ class ApiVisualEditor extends ApiBase {
 			->serialize( 'text/x-wiki' );
 	}
 
+	/**
+	 * Provide the RESTbase-parsed HTML of a given fragment of wikitext
+	 *
+	 * @param string $title The title of the page to use as the parsing context
+	 * @param string $wikitext The wikitext fragment to parse
+	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
+	 * @return string The parsed content HTML
+	 */
 	protected function parseWikitextFragment( $title, $wikitext, $bodyOnly ) {
 		return $this->requestRestbase(
 			'POST',
@@ -138,6 +165,15 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
+	/**
+	 * Provide the preload content for a page being created from another page
+	 *
+	 * @param string $preload The title of the page to use as the preload content
+	 * @param string[] $params The preloadTransform parameters to pass in, if any
+	 * @param string $contextTitle The contextual page title against which to parse the preload
+	 * @param bool $parse Whether to parse the preload content
+	 * @return string The parsed content
+	 */
 	protected function getPreloadContent( $preload, $params, $contextTitle, $parse = false ) {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
@@ -169,6 +205,12 @@ class ApiVisualEditor extends ApiBase {
 		return $content;
 	}
 
+	/**
+	 * Provide the current language links for a given page title
+	 *
+	 * @param string $title The page title for which to get the current language links
+	 * @return string[] The language links
+	 */
 	protected function getLangLinks( $title ) {
 		$apiParams = [
 			'action' => 'query',
@@ -204,6 +246,9 @@ class ApiVisualEditor extends ApiBase {
 		return $langlinks;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function execute() {
 		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
 
@@ -703,6 +748,9 @@ class ApiVisualEditor extends ApiBase {
 		);
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getAllowedParams() {
 		return [
 			'page' => [
@@ -735,18 +783,30 @@ class ApiVisualEditor extends ApiBase {
 		];
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function needsToken() {
 		return false;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function mustBePosted() {
 		return false;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isInternal() {
 		return true;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isWriteMode() {
 		return false;
 	}
