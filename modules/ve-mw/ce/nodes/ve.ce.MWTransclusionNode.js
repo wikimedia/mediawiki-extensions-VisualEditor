@@ -89,20 +89,15 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
  * @return {HTMLElement[]} Filtered rendered nodes
  */
 ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
-	var whitespaceRegex, wrapper;
+	var whitespaceRegex;
 
 	if ( !contentNodes.length ) {
 		return;
 	}
 
 	whitespaceRegex = new RegExp( '^[' + ve.dm.Converter.static.whitespaceList + ']+$' );
-	wrapper = contentNodes[ 0 ].ownerDocument.createElement( 'div' );
 
-	// Unwrap Parsoid sections (which probably shouldn't exist: T181226)
-	contentNodes.forEach( function ( node ) { wrapper.appendChild( node ); } );
-	ve.unwrapParsoidSections( wrapper );
-	ve.stripParsoidFallbackIds( wrapper );
-	contentNodes = Array.prototype.slice.call( wrapper.childNodes );
+	contentNodes.forEach( ve.stripParsoidFallbackIds );
 
 	// Filter out auto-generated items, e.g. reference lists
 	contentNodes = contentNodes.filter( function ( node ) {
