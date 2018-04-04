@@ -29,7 +29,7 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 			this.$element = $( '<a>' ).addClass( 'image' );
 			$image = $( '<img>' ).appendTo( this.$element );
 		} else {
-			this.$element = $image = $( '<img>' ).appendTo( this.$element );
+			this.$element = $image = $( '<img>' );
 		}
 	}
 
