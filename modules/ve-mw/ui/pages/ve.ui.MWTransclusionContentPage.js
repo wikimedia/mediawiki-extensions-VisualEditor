@@ -15,6 +15,7 @@
  * @param {ve.dm.MWTransclusionContentModel} content Transclusion content
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( content, name, config ) {
 	// Configuration initialization

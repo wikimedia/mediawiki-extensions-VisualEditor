@@ -15,7 +15,7 @@
  * @param {ve.dm.MWTemplatePlaceholderModel} placeholder Template placeholder
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
- * @cfg {jQuery} [$overlay] Overlay for dropdowns
+ * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
 	var addTemplateActionFieldLayout;

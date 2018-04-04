@@ -15,6 +15,7 @@
  * @param {ve.dm.MWTemplateModel} parameter Template
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( parameter, name, config ) {
 	// Configuration initialization
