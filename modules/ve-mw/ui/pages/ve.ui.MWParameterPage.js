@@ -15,6 +15,7 @@
  * @param {ve.dm.MWParameterModel} parameter Template parameter
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
 	var paramName = parameter.getName();
@@ -131,6 +132,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		} );
 	} else {
 		this.infoButton = new OO.ui.PopupButtonWidget( {
+			$overlay: config.$overlay,
 			popup: {
 				$content: this.$description
 			},

@@ -66,8 +66,8 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	this.categoriesPage = new ve.ui.MWCategoriesPage( 'categories', { $overlay: this.$overlay } );
 	this.settingsPage = new ve.ui.MWSettingsPage( 'settings', { $overlay: this.$overlay } );
 	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage( 'advancedSettings', { $overlay: this.$overlay } );
-	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages' );
-	this.templatesUsedPage = new ve.ui.MWTemplatesUsedPage( 'templatesUsed' );
+	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages', { $overlay: this.$overlay } );
+	this.templatesUsedPage = new ve.ui.MWTemplatesUsedPage( 'templatesUsed', { $overlay: this.$overlay } );
 
 	// Initialization
 	this.$body.append( this.panels.$element );
