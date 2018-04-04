@@ -144,21 +144,44 @@ ve.dm.MWExtensionNode.static.getExtensionName = function () {
 	return this.extensionName;
 };
 
-ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, change, element ) {
-	// HACK: Try to generate an '<Extension> has changed' message using associated tool's title
-	// Extensions should provide more detailed change descriptions
-	var tools = ve.ui.toolFactory.getRelatedItems( [ ve.dm.nodeFactory.createFromElement( element ) ] );
-	if ( tools.length ) {
-		return [ ve.msg( 'visualeditor-changedesc-unknown',
-			OO.ui.resolveMsg( ve.ui.toolFactory.lookup( tools[ 0 ].name ).static.title )
-		) ];
+ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, attributes, element ) {
+	var tools, change,
+		descriptions = [];
+
+	if ( attributeChanges.mw ) {
+		// HACK: Try to generate an '<Extension> has changed' message using the associated tool's title
+		tools = ve.ui.toolFactory.getRelatedItems( [ ve.dm.nodeFactory.createFromElement( element ) ] );
+		if ( tools.length ) {
+			descriptions.push( ve.msg( 'visualeditor-changedesc-unknown',
+				OO.ui.resolveMsg( ve.ui.toolFactory.lookup( tools[ 0 ].name ).static.title )
+			) );
+		}
+		// Compare body - default behaviour in #describeChange does nothing
+		if ( !ve.compare( attributeChanges.mw.from.body, attributeChanges.mw.to.body ) ) {
+			change = this.describeChange( 'body', {
+				from: attributeChanges.mw.from.body.extsrc,
+				to: attributeChanges.mw.to.body.extsrc
+			} );
+			if ( change ) {
+				descriptions.push( change );
+			}
+		}
+		// Append attribute changes
+		// Parent method
+		Array.prototype.push.apply( descriptions, ve.dm.MWExtensionNode.super.static.describeChanges.call(
+			this,
+			ve.ui.DiffElement.static.compareAttributes( attributeChanges.mw.from.attrs || {}, attributeChanges.mw.to.attrs || {} ),
+			attributes
+		) );
+		return descriptions;
 	}
-	// Parent method
-	return ve.dm.MWExtensionNode.super.static.describeChanges.apply( this, arguments );
+	// 'mw' should be the only attribute that changes...
+	return [];
 };
 
 ve.dm.MWExtensionNode.static.describeChange = function ( key ) {
-	if ( key === 'originalMw' ) {
+	if ( key === 'body' ) {
+		// TODO: Produce a diff of the body, suitable to display in the sidebar.
 		return null;
 	}
 	// Parent method
