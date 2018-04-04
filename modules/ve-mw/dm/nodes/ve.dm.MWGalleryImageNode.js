@@ -120,6 +120,15 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	return [ li ];
 };
 
+ve.dm.MWGalleryImageNode.static.describeChange = function ( key ) {
+	// These attributes are computed
+	if ( key === 'src' || key === 'width' || key === 'height' ) {
+		return null;
+	}
+	// Parent method
+	return ve.dm.MWGalleryImageNode.super.static.describeChange.apply( this, arguments );
+};
+
 /* Methods */
 
 /**

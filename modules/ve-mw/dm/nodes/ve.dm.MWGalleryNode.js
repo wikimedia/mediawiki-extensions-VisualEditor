@@ -79,6 +79,27 @@ ve.dm.MWGalleryNode.static.toDomElements = function ( data, doc ) {
 	return [ ul ];
 };
 
+ve.dm.MWGalleryNode.static.describeChanges = function ( attributeChanges, attributes ) {
+	// Only do a comparison on the 'mw.attrs' attribute
+	if ( attributeChanges.mw ) {
+		return ve.dm.MWGalleryNode.super.static.describeChanges.call(
+			this,
+			ve.ui.DiffElement.static.compareAttributes( attributeChanges.mw.from.attrs || {}, attributeChanges.mw.to.attrs || {} ),
+			attributes
+		);
+	}
+	return [];
+};
+
+ve.dm.MWGalleryNode.static.describeChange = function ( key ) {
+	// Caption diff is shown in the DOM
+	if ( key === 'caption' ) {
+		return null;
+	}
+	// Parent method
+	return ve.dm.MWGalleryNode.super.static.describeChange.apply( this, arguments );
+};
+
 /* Methods */
 
 /**
