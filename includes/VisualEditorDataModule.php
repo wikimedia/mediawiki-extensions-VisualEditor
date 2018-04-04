@@ -77,6 +77,9 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			'visualeditor-feedback-link' =>
 				$context->msg( 'visualeditor-feedback-link' )
 				->inContentLanguage(),
+			'visualeditor-feedback-source-link' =>
+				$context->msg( 'visualeditor-feedback-source-link' )
+				->inContentLanguage(),
 			'visualeditor-quick-access-characters.json' =>
 				$context->msg( 'visualeditor-quick-access-characters.json' )
 				->inContentLanguage(),

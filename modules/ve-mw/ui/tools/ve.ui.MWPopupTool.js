@@ -196,7 +196,8 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 	this.popup.toggle( false );
 	if ( !this.feedbackPromise ) {
 		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( function () {
-			var feedbackConfig, veConfig;
+			var feedbackConfig, veConfig,
+				mode = this.toolbar.getSurface().getMode();
 
 			// This can't be constructed until the editor has loaded as it uses special messages
 			feedbackConfig = {
@@ -210,9 +211,15 @@ ve.ui.MWHelpPopupTool.prototype.onFeedbackClick = function () {
 			veConfig = mw.config.get( 'wgVisualEditorConfig' );
 			if ( veConfig.feedbackApiUrl ) {
 				feedbackConfig.apiUrl = veConfig.feedbackApiUrl;
-				feedbackConfig.title = new mw.Title( veConfig.feedbackTitle );
+				feedbackConfig.title = new mw.Title(
+					mode === 'source' ?
+						veConfig.sourceFeedbackTitle : veConfig.feedbackTitle
+				);
 			} else {
-				feedbackConfig.title = new mw.Title( ve.msg( 'visualeditor-feedback-link' ) );
+				feedbackConfig.title = new mw.Title(
+					mode === 'source' ?
+						ve.msg( 'visualeditor-feedback-source-link' ) : ve.msg( 'visualeditor-feedback-link' )
+				);
 			}
 
 			return new mw.Feedback( feedbackConfig );

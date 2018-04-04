@@ -71,8 +71,9 @@
 		"VisualEditorShowBetaWelcome": true,
 
 		"VisualEditorNewAccountEnableProportion": false,
-		"VisualEditorFeedbackTitle": false,
 		"VisualEditorFeedbackAPIURL": false,
+		"VisualEditorFeedbackTitle": false,
+		"VisualEditorSourceFeedbackTitle": false,
 		"VisualEditorSkinToolbarScrollOffset": [],
 		"VisualEditorBrowserBlacklist": {
 			"firefox": [
