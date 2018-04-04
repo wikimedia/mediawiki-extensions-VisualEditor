@@ -79,13 +79,14 @@ ve.dm.MWGalleryNode.static.toDomElements = function ( data, doc ) {
 	return [ ul ];
 };
 
-ve.dm.MWGalleryNode.static.describeChanges = function ( attributeChanges, attributes ) {
+ve.dm.MWGalleryNode.static.describeChanges = function ( attributeChanges, attributes, element ) {
 	// Only do a comparison on the 'mw.attrs' attribute
 	if ( attributeChanges.mw ) {
 		return ve.dm.MWGalleryNode.super.static.describeChanges.call(
 			this,
 			ve.ui.DiffElement.static.compareAttributes( attributeChanges.mw.from.attrs || {}, attributeChanges.mw.to.attrs || {} ),
-			attributes
+			attributes,
+			element
 		);
 	}
 	return [];
