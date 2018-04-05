@@ -77,11 +77,13 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfacePasteTest(
-			assert, cases[ i ].documentHtml,
-			cases[ i ].pasteHtml, cases[ i ].internalSourceRangeOrSelection, cases[ i ].fromVe, cases[ i ].useClipboardData,
+			assert, cases[ i ].documentHtml, {
+				'text/html': cases[ i ].pasteHtml,
+				'text/plain': cases[ i ].pasteText
+			}, cases[ i ].internalSourceRangeOrSelection, cases[ i ].fromVe, cases[ i ].useClipboardData,
 			cases[ i ].pasteTargetHtml, cases[ i ].rangeOrSelection, cases[ i ].pasteSpecial,
 			cases[ i ].expectedOps, cases[ i ].expectedRangeOrSelection, cases[ i ].expectedHtml,
-			cases[ i ].store, false, cases[ i ].msg
+			cases[ i ].expectedDefaultPrevented, cases[ i ].store, false, cases[ i ].msg
 		);
 	}
 } );
