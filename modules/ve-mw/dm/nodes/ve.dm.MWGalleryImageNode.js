@@ -107,6 +107,7 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	// a.setAttribute( 'href', model.attributes.src );
 
 	img.setAttribute( 'resource', model.attributes.resource );
+	img.setAttribute( 'src', model.attributes.src );
 	if ( alt ) {
 		img.setAttribute( 'alt', alt );
 	}
