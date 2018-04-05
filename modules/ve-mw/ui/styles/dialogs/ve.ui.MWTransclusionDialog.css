@@ -5,10 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwTransclusionDialog-addTemplateFieldset {
-	margin-left: 3.5em;
-}
-
 .ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-widget {
 	display: inline-block;
 }
@@ -18,7 +14,7 @@
 }
 
 .ve-ui-mwTransclusionDialog-addTemplateFieldset .mw-widget-titleInputWidget {
-	width: 20em;
+	min-width: 10em;
 }
 
 .ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
