@@ -1563,7 +1563,7 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	},
-	'Plain external links (e.g. on paste) are converted to link/mwExternal': {
+	'plain external links (e.g. on paste) are converted to link/mwExternal': {
 		body: '<a href="http://www.mediawiki.org/">ab</a>',
 		data: [
 			{
@@ -1602,7 +1602,7 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		normalizedBody: '<a href="http://www.mediawiki.org/" rel="mw:ExtLink">ab</a>'
 	},
-	'Plain internal links (e.g. on paste) are converted to link/mwInternal': {
+	'plain internal links (e.g. on paste) are converted to link/mwInternal': {
 		body: '<a href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">ab</a>',
 		data: [
 			{
@@ -1647,5 +1647,40 @@ ve.dm.mwExample.domToDataCases = {
 		mwConfig: {
 			wgArticlePath: '/wiki/$1'
 		}
+	},
+	'plain href-less anchors (e.g. on paste) are converted to spans': {
+		body: '<a name="foo">ab</a>',
+		data: [
+			{
+				type: 'paragraph',
+				internal: {
+					generated: 'wrapper'
+				}
+			},
+			[
+				'a',
+				[ {
+					type: 'textStyle/span',
+					attributes: { nodeName: 'a' }
+				} ]
+			],
+			[
+				'b',
+				[ {
+					type: 'textStyle/span',
+					attributes: { nodeName: 'a' }
+				} ]
+			],
+			{
+				type: '/paragraph'
+			},
+			{
+				type: 'internalList'
+			},
+			{
+				type: '/internalList'
+			}
+		],
+		fromDataBody: '<a>ab</a>'
 	}
 };

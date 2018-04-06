@@ -33,32 +33,27 @@ OO.inheritClass( ve.dm.MWExternalLinkAnnotation, ve.dm.LinkAnnotation );
 
 ve.dm.MWExternalLinkAnnotation.static.name = 'link/mwExternal';
 
-ve.dm.MWExternalLinkAnnotation.static.matchFunction = function ( domElement ) {
-	var type = domElement.getAttribute( 'rel' ) || domElement.getAttribute( 'typeof' ) || domElement.getAttribute( 'property' );
-	// Match explicitly mw:ExtLink (external links), mw:WikiLink/Interwiki
-	// (interwiki links), or plain RDFa-less links with an href
-	// (e.g. from external paste)
-	if ( type ) {
-		type = type.split( ' ' );
-		return type.indexOf( 'mw:ExtLink' ) !== -1 || type.indexOf( 'mw:WikiLink/Interwiki' ) !== -1;
-	}
-	return domElement.hasAttribute( 'href' );
-};
-
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, annotation,
-		rel = domElements[ 0 ].getAttribute( 'rel' );
+		domElement = domElements[ 0 ],
+		type = domElement.getAttribute( 'rel' ) || domElement.getAttribute( 'typeof' ) || domElement.getAttribute( 'property' ) || '',
+		types = type.split( ' ' );
 
-	// If a plain link is pasted, auto-convert it to the correct type (internal/external)
-	if ( !rel ) {
-		annotation = ve.ui.MWLinkAction.static.getLinkAnnotation( domElements[ 0 ].getAttribute( 'href' ), converter.getHtmlDocument() );
-		return annotation.element;
+	// If the link doesn't have a known RDFa type, auto-convert it to the correct type (internal/external/span)
+	if ( types.indexOf( 'mw:ExtLink' ) === -1 && types.indexOf( 'mw:WikiLink/Interwiki' ) === -1 ) {
+		if ( domElement.hasAttribute( 'href' ) ) {
+			annotation = ve.ui.MWLinkAction.static.getLinkAnnotation( domElement.getAttribute( 'href' ), converter.getHtmlDocument() );
+			return annotation.element;
+		} else {
+			// Convert href-less links to a plain span, which will get stripped by sanitization
+			return ve.dm.SpanAnnotation.static.toDataElement.apply( ve.dm.SpanAnnotation.static, arguments );
+		}
 	}
 
 	// Parent method
 	dataElement = ve.dm.MWExternalLinkAnnotation.super.static.toDataElement.apply( this, arguments );
 
-	dataElement.attributes.rel = rel;
+	dataElement.attributes.rel = type;
 	return dataElement;
 };
 
