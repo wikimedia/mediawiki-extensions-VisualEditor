@@ -103,13 +103,11 @@
 		if ( forceType ) {
 			insertNode( forceType === 'inline' );
 		} else {
-			new mw.Api().post( {
-				action: 'visualeditor',
-				paction: 'parsefragment',
-				page: ve.init.target.pageName,
-				wikitext: baseNodeClass.static.getWikitext( this.getPlainObject() ),
-				pst: 1
-			} ).then( function ( response ) {
+			ve.init.target.parseWikitextFragment(
+				baseNodeClass.static.getWikitext( this.getPlainObject() ),
+				true,
+				surfaceFragment.getDocument()
+			).then( function ( response ) {
 				var contentNodes;
 
 				if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {

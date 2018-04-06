@@ -148,13 +148,11 @@ ve.ce.MWTransclusionNode.prototype.createInvisibleIcon = function () {
  */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
-	xhr = new mw.Api().post( {
-		action: 'visualeditor',
-		paction: 'parsefragment',
-		page: ve.init.target.pageName,
-		wikitext: ( config && config.wikitext ) || this.model.getWikitext(),
-		pst: 1
-	} )
+	xhr = ve.init.target.parseWikitextFragment(
+		( config && config.wikitext ) || this.model.getWikitext(),
+		true,
+		this.getModel().getDocument()
+	)
 		.done( this.onParseSuccess.bind( this, deferred ) )
 		.fail( this.onParseError.bind( this, deferred ) );
 

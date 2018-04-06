@@ -158,12 +158,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 			ve.dm.Document.static.newBlankDocument()
 		).promise();
 	} else {
-		parsePromise = new mw.Api().post( {
-			action: 'visualeditor',
-			paction: 'parsefragment',
-			page: ve.init.target.pageName,
-			wikitext: source
-		} ).then( function ( response ) {
+		parsePromise = ve.init.target.parseWikitextFragment( source, false, this.getDocument() ).then( function ( response ) {
 			return ve.dm.converter.getModelFromDom(
 				ve.createDocumentFromHtml( response.visualeditor.content )
 			);
