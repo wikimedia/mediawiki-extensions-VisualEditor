@@ -26,7 +26,7 @@ ve.ui.MWMediaContextItem = function VeUiMWMediaContextItem( context, model ) {
 
 	mediaClass = model.getAttribute( 'mediaClass' ) || 'Image';
 
-	this.setIcon( {
+	this.setIcon( model.getAttribute( 'isError' ) ? 'imageBroken' : {
 		Image: 'image',
 		// TODO: Better icons for audio/video
 		Audio: 'play',
