@@ -11,7 +11,8 @@
 			"Agremon",
 			"Vivaelcelta",
 			"Banjo",
-			"Macofe"
+			"Macofe",
+			"Navhy"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Erro ó consultar a API de MediaWiki",
@@ -272,6 +273,8 @@
 	"visualeditor-magiclinknodeinspector-title-rfc": "Ligazón de RFC",
 	"visualeditor-mainnamespacepagelink": "Project:Espazo de nomes principal",
 	"visualeditor-media-input-placeholder": "Procurar ficheiros multimedia",
+	"visualeditor-media-title-image": "Imaxe",
+	"visualeditor-media-title-video": "Vídeo",
 	"visualeditor-meta-tool": "Opcións",
 	"visualeditor-mweditmode-tooltip": "Cambiar de editor",
 	"visualeditor-mweditmodesource-progress": "Cambiando ó editor de código...",
@@ -386,12 +389,14 @@
 	"visualeditor-savedialog-label-create": "Crear a páxina",
 	"visualeditor-savedialog-label-error": "Erro",
 	"visualeditor-savedialog-label-publish-short": "Publicar",
+	"visualeditor-savedialog-label-publish-short-start": "Publicar...",
 	"visualeditor-savedialog-label-report": "Informar sobre un problema",
 	"visualeditor-savedialog-label-resolve-conflict": "Resolver o conflito",
 	"visualeditor-savedialog-label-resume-editing": "Continuar a edición",
 	"visualeditor-savedialog-label-review": "Revisar os seus cambios",
 	"visualeditor-savedialog-label-review-good": "Volver ao formulario para gardar",
 	"visualeditor-savedialog-label-save-short": "Gardar",
+	"visualeditor-savedialog-label-save-short-start": "Gardar...",
 	"visualeditor-savedialog-label-visual-diff-report": "Informar de presentación incoreccta desta modificación",
 	"visualeditor-savedialog-label-warning": "Aviso",
 	"visualeditor-savedialog-review-nosummary": "Sen resumo de edición",
