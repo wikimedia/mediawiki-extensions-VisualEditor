@@ -103,12 +103,7 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 	}
 
 	// Convert wikitext to html using Parsoid.
-	this.parsoidRequest = new mw.Api().post( {
-		action: 'visualeditor',
-		paction: 'parsefragment',
-		page: ve.init.target.pageName,
-		wikitext: wikitext
-	} );
+	this.parsoidRequest = ve.init.target.parseWikitextFragment( wikitext, false, this.surface.getModel().getDocument() );
 
 	// Don't immediately chain, as this.parsoidRequest must be abortable
 	this.parsoidRequest.then( function ( response ) {

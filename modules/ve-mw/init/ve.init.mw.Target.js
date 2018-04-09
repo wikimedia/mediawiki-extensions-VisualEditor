@@ -544,3 +544,21 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 
 	return promise;
 };
+
+/**
+ * Parse a fragment of wikitext into HTML
+ *
+ * @param {string} wikitext Wikitext
+ * @param {boolean} pst Perform pre-save transform
+ * @param {ve.dm.Document} [doc] Parse for a specific document
+ * @return {jQuery.Promise} Abortable promise
+ */
+ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst ) {
+	return new mw.Api().post( {
+		action: 'visualeditor',
+		paction: 'parsefragment',
+		page: this.pageName,
+		wikitext: wikitext,
+		pst: pst
+	} );
+};
