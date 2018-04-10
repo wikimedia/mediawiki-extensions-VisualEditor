@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Waldir"
+			"Waldir",
+			"Quintino Lopes Castro Tavares"
 		]
 	},
+	"tooltip-ca-ve-edit": "Muda es pájina li",
+	"visualeditor-ca-editsource": "Muda kódigu",
 	"visualeditor-ca-editsource-section": "muda kódigu"
 }

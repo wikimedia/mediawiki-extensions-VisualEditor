@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Botuzhaleny-sodamo"
+			"Botuzhaleny-sodamo",
+			"Rueter"
 		]
 	},
 	"tooltip-ca-ve-edit": "Витнемс-петнемс те лопанть",
+	"visualeditor-ca-createsource": "Шкамс викитекст",
 	"visualeditor-ca-editsource": "Витнемс-петнемс лисьмапрянзо",
 	"visualeditor-ca-editsource-section": "витнемс-петнемс лисьмапрянзо"
 }
