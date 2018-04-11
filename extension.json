@@ -952,7 +952,6 @@
 				"lib/ve/src/ui/styles/contextitems/ve.ui.LanguageContextItem.css",
 				"lib/ve/src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
 				"lib/ve/src/ui/styles/contextitems/ve.ui.ToolContextItem.css",
-				"lib/ve/src/ui/styles/ve.ui.Icons.css",
 				"lib/ve/src/ui/styles/ve.ui.Overlay.css",
 				"lib/ve/src/ui/styles/ve.ui.Surface.css",
 				"lib/ve/src/ui/styles/ve.ui.Toolbar.css",
