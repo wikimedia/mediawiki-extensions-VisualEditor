@@ -86,3 +86,35 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		} );
 	}
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targetFragment, pastedDocumentModel, contextRange ) {
+	var view = this;
+
+	if ( !pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ) ) {
+		// Not plaintext. We need to ask whether we should convert it to
+		// wikitext, or just strip the formatting out.
+		return this.getSurface().dialogs.openWindow( 'wikitextconvertconfirm' )
+			.closed.then( function ( data ) {
+				if ( data && data.action === 'plain' ) {
+					pastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
+					pastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
+					// We just turned this into plaintext, which probably
+					// affected the content-length. Luckily, because of
+					// the earlier clone, we know we just want the whole
+					// document, and because of the major change to
+					// plaintext, the difference between originalRange and
+					// balancedRange don't really apply. As such, clear
+					// out newDocRange. (Can't just make it undefined;
+					// need to exclude the internal list, and since we're
+					// from a paste we also have to exclude the
+					// opening/closing paragraph.)
+					contextRange = new ve.Range( pastedDocumentModel.getDocumentRange().from + 1, pastedDocumentModel.getDocumentRange().to - 1 );
+				}
+				return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( view, targetFragment, pastedDocumentModel, contextRange );
+			} );
+	}
+	return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, pastedDocumentModel, contextRange );
+};

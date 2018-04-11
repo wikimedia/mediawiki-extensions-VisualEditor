@@ -473,5 +473,9 @@
 	"visualeditor-wikitext-progress": "Label for progress bar shown while converting pasted wikitext.",
 	"visualeditor-wikitext-warning": "Contents of notification displayed when Wikitext has been detected.\n\nRefers to:\n* {{msg-mw|Visualeditor-wikitext-warning-link}}\n* {{msg-mw|Visualeditor-toolbar-cancel}}\n* {{msg-mw|Visualeditor-mweditmodesource-title}}\nSee also:\n* {{msg-mw|Visualeditor-beta-warning}}",
 	"visualeditor-wikitext-warning-link": "Link to page describing what Wikitext is.\n\nUsed in:\n* {{msg-mw|Visualeditor-wikitext-warning}}.\n\nTranslate to a title where most wikis in the language you're translating to have one such help page; if they don't have one, you can use [[mw:Special:MyLanguage/Help:Formatting]] as target.",
-	"visualeditor-wikitext-warning-title": "Title of notification displayed when Wikitext has been detected"
+	"visualeditor-wikitext-warning-title": "Title of notification displayed when Wikitext has been detected",
+	"visualeditor-wikitextconvert-title": "Title of prompt displayed when rich markup is pasted into a source mode editor.",
+	"visualeditor-wikitextconvert-message": "Message displayed when asking whether to convert rich markup to wikitext or use just the plain text content of the markup.",
+	"visualeditor-wikitextconvert-plain": "Label text for button to paste just plain text",
+	"visualeditor-wikitextconvert-convert": "Label text for button to convert pasted content to wikitext"
 }
