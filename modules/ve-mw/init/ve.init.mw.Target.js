@@ -328,8 +328,6 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 	// Parent method
 	surface = ve.init.mw.Target.super.prototype.createSurface.apply( this, arguments );
 
-	surface.$element.addClass( this.protectedClasses );
-
 	documentView = surface.getView().getDocument();
 
 	// T164790
