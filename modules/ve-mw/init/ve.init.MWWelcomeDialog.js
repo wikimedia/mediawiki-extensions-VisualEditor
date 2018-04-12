@@ -60,15 +60,12 @@ mw.libs.ve.WelcomeDialog.prototype.getSetupProcess = function ( data ) {
 	// Provide default title and message
 	data = $.extend( {
 		title: mw.msg( 'visualeditor-welcomedialog-title', mw.user, mw.config.get( 'wgSiteName' ) ),
-		message: $( '<div>' ).addClass( 'visualeditor-welcomedialog-content' )
+		message: $( '<span>' )
+			.addClass( 'visualeditor-welcomedialog-content' )
 			.append(
-				$( '<span>' )
-					.addClass( 'visualeditor-welcomedialog-content-text' )
-					.append(
-						document.createTextNode( mw.msg( 'visualeditor-welcomedialog-content' ) ),
-						$( '<br>' ),
-						document.createTextNode( mw.msg( 'visualeditor-welcomedialog-content-thanks' ) )
-					)
+				document.createTextNode( mw.msg( 'visualeditor-welcomedialog-content' ) ),
+				$( '<br>' ),
+				document.createTextNode( mw.msg( 'visualeditor-welcomedialog-content-thanks' ) )
 			)
 	}, data );
 
