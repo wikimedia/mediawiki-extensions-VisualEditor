@@ -208,7 +208,8 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 };
 
 ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) {
-	var change, params, param, $descriptions;
+	var change, params, param, $paramChanges,
+		descriptions = [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
 
 	// This method assumes that the behavior of isDiffComparable above remains
 	// the same, so it doesn't have to consider whether the actual template
@@ -247,22 +248,20 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 			if ( params[ param ].from !== params[ param ].to ) {
 				change = this.describeChange( param, params[ param ] );
 				if ( change ) {
-					if ( !$descriptions ) {
-						$descriptions = $( '<ul>' );
+					if ( !$paramChanges ) {
+						$paramChanges = $( '<ul>' );
+						descriptions.push( $paramChanges );
 					}
 					if ( change instanceof jQuery ) {
-						$descriptions.append( $( '<li>' ).append( change ) );
+						$paramChanges.append( $( '<li>' ).append( change ) );
 					} else {
-						$descriptions.append( $( '<li>' ).text( change ) );
+						$paramChanges.append( $( '<li>' ).text( change ) );
 					}
 				}
 			}
 		}
-		if ( $descriptions ) {
-			return [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ), $descriptions ];
-		}
 	}
-	return [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
+	return descriptions;
 };
 
 /** */
