@@ -18,7 +18,7 @@
 	}
 }
 
-@media ( max-width: 767px ) {
+@media screen and ( max-width: 767px ) {
 	.ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
 		/* Fix margin overlap */
 		margin-top: 0;
@@ -101,6 +101,11 @@
 				}
 				> .oo-ui-tool-title {
 					vertical-align: middle;
+
+					@media screen and ( max-width: 767px ) {
+						// stylelint-disable-next-line declaration-no-important
+						display: none !important;
+					}
 				}
 			}
 		}
