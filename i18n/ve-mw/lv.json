@@ -34,6 +34,8 @@
 	"tooltip-ca-editsource": "Labot šīs lapas pirmkodu",
 	"tooltip-ca-ve-edit": "Labot šo lapu",
 	"visualeditor-advancedsettings-tool": "Papildu iestatījumi",
+	"visualeditor-autosave-modified-prompt-accept": "Turpināt labošanu",
+	"visualeditor-autosave-modified-prompt-reject": "Sākt jaunu labojumu",
 	"visualeditor-autosave-not-recovered-text": "Tavas nesaglabātās izmaiņas nevarēja atgūt.",
 	"visualeditor-autosave-not-recovered-title": "Izmaiņu atgūšana neizdevās",
 	"visualeditor-autosave-recovered-text": "Tavas nesaglabātās izmaiņas tika automātiski atgūtas.",
