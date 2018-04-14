@@ -20,7 +20,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"descriptionmsg": "visualeditor-desc",
 	"license-name": "MIT",
-	"type": "other",
+	"type": "editor",
 	"requires": {
 		"MediaWiki": ">= 1.31.0"
 	},
