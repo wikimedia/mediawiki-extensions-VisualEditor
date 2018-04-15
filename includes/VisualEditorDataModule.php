@@ -20,7 +20,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	/**
 	 * @param ResourceLoaderContext $context Object containing information about the state of this
 	 *   specific loader request.
-	 * @return string JavaScipt code
+	 * @return string JavaScript code
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
 		$msgInfo = $this->getMessageInfo( $context );
