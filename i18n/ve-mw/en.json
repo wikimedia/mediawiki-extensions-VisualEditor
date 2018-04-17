@@ -151,6 +151,7 @@
 	"visualeditor-dialog-media-upload": "Upload",
 	"visualeditor-dialog-meta-advancedsettings-label": "Advanced settings",
 	"visualeditor-dialog-meta-advancedsettings-section": "Advanced settings",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Add a category to this page",
 	"visualeditor-dialog-meta-categories-category": "Category",
 	"visualeditor-dialog-meta-categories-data-label": "Categories",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "You can override how this page is sorted when displayed within a category by setting a different index to sort with instead. This is often used to make pages about people show by last name, but be named with their first name shown first.",
