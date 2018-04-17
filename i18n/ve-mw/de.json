@@ -146,6 +146,7 @@
 	"visualeditor-dialog-media-upload": "Hochladen",
 	"visualeditor-dialog-meta-advancedsettings-label": "Erweiterte Einstellungen",
 	"visualeditor-dialog-meta-advancedsettings-section": "Erweiterte Einstellungen",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Eine Kategorie zu dieser Seite hinzufügen",
 	"visualeditor-dialog-meta-categories-category": "Kategorie",
 	"visualeditor-dialog-meta-categories-data-label": "Kategorien",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Du kannst überschreiben, wie diese Seite innerhalb einer Kategorie sortiert wird durch Festlegen eines anderen zu sortierenden Indexes. Dies wird oft verwendet, um Seiten über Personen bei ihrem Nachnamen anzuzeigen, jedoch wird der Vorname zuerst angezeigt.",

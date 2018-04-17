@@ -43,7 +43,8 @@
 			"Jack who built the house",
 			"Helpau",
 			"Smigles",
-			"Happy13241"
+			"Happy13241",
+			"Movses"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
@@ -81,7 +82,7 @@
 	"visualeditor-autosave-modified-prompt-accept": "Продолжить правку",
 	"visualeditor-autosave-modified-prompt-message": "Эта страница была отредактирована с момента последней загрузки. {{GENDER:|вы}} хотел бы возобновить {{GENDER:|ваши}} редактирование старой версии или начать новое редактирование последней версии?",
 	"visualeditor-autosave-modified-prompt-reject": "Начать новую правку",
-	"visualeditor-autosave-modified-prompt-title": "Резюме {{GENDER:|ваш}} изменить?",
+	"visualeditor-autosave-modified-prompt-title": "Возобновить вашу правку?",
 	"visualeditor-backbutton-tooltip": "Вернуться назад",
 	"visualeditor-beta-label": "бета-версия",
 	"visualeditor-beta-warning": "Если при редактировании у вас возникают какие-либо технические проблемы, пожалуйста, сообщите нам о них.",
