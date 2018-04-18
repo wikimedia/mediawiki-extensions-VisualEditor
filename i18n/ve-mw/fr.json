@@ -50,7 +50,8 @@
 			"The RedBurn",
 			"Thibaut120094",
 			"DePlusJean",
-			"Trizek (WMF)"
+			"Trizek (WMF)",
+			"Od1n"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Erreur de l'interrogation de l'API MediaWiki",
@@ -184,6 +185,7 @@
 	"visualeditor-dialog-media-upload": "Téléverser",
 	"visualeditor-dialog-meta-advancedsettings-label": "Paramètres avancés",
 	"visualeditor-dialog-meta-advancedsettings-section": "Paramètres avancés",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Ajouter une catégorie à cette page",
 	"visualeditor-dialog-meta-categories-category": "Catégorie",
 	"visualeditor-dialog-meta-categories-data-label": "Catégories",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Vous pouvez changer la manière dont cette page est triée lorsqu’elle est affichée dans une catégorie en positionnant un index de tri différent. Ceci est souvent utilisé pour afficher les pages sur les personnes par leur nom, mais les écrire avec leur prénom en premier.",
@@ -417,7 +419,7 @@
 	"visualeditor-parameter-search-more": "Afficher {{PLURAL:$1|un autre champ|$1 autres champs}}",
 	"visualeditor-parameter-search-no-unused": "Aucun champ inutilisé",
 	"visualeditor-parameter-search-unknown": "Champ inconnu",
-	"visualeditor-preference-betatempdisable": "Désactiver temporairement l'ÉditeurVisuel tant qu’il est en version bêta",
+	"visualeditor-preference-betatempdisable": "Désactiver temporairement l’éditeur visuel tant qu’il est en version bêta",
 	"visualeditor-preference-core-description": "Activer l’éditeur visuel. Il ne sera pas disponible sur les pages de discussion et quelques autres espaces de noms.",
 	"visualeditor-preference-core-label": "Édition visuelle",
 	"visualeditor-preference-enable": "Activer l’éditeur visuel. Il sera disponible pour {{PLURAL:$2|l’espace de nom suivant|les espaces de nom suivants}} : $1",

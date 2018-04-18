@@ -160,6 +160,7 @@
 	"visualeditor-dialog-media-upload": "上传",
 	"visualeditor-dialog-meta-advancedsettings-label": "高级设置",
 	"visualeditor-dialog-meta-advancedsettings-section": "高级设置",
+	"visualeditor-dialog-meta-categories-addcategory-label": "添加分类至此页面",
 	"visualeditor-dialog-meta-categories-category": "分类",
 	"visualeditor-dialog-meta-categories-data-label": "分类",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "您可以设置不同的索引覆盖此页面排序以与在分类中显示的一致。这经常用于按姓氏显示有关人的页面，但先显示他们名字的页面。",

@@ -137,6 +137,7 @@
 	"visualeditor-dialog-media-upload": "Подигни",
 	"visualeditor-dialog-meta-advancedsettings-label": "Напредни нагодувања",
 	"visualeditor-dialog-meta-advancedsettings-section": "Напредни нагодувања",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Додај категорија во страницава",
 	"visualeditor-dialog-meta-categories-category": "Категорија",
 	"visualeditor-dialog-meta-categories-data-label": "Категории",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Можете да го смените начинот на подредување на страниците во категоријата задавајќи поинаков клуч. Ова често се користи за статии за личности, кои се прикажуваат во актегориајт нормално, но се заведени азбучно според презимето.",
