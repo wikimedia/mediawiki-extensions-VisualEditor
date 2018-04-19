@@ -148,6 +148,7 @@
 	"visualeditor-dialog-media-upload": "올리기",
 	"visualeditor-dialog-meta-advancedsettings-label": "고급 설정",
 	"visualeditor-dialog-meta-advancedsettings-section": "고급 설정",
+	"visualeditor-dialog-meta-categories-addcategory-label": "이 문서에 분류 추가",
 	"visualeditor-dialog-meta-categories-category": "분류",
 	"visualeditor-dialog-meta-categories-data-label": "분류",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "대신 정렬할 다른 색인을 설정하여 분류 안에 보이는 정렬을 덮어쓸 수 있습니다. 사람을 성으로 분류할 때 종종 사용되지만, 표시되는 이름은 사람의 이름을 우선합니다.",

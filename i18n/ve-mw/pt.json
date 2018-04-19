@@ -155,6 +155,7 @@
 	"visualeditor-dialog-media-upload": "Carregar",
 	"visualeditor-dialog-meta-advancedsettings-label": "Configurações avançadas",
 	"visualeditor-dialog-meta-advancedsettings-section": "Configurações avançadas",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Acrescentar uma categoria a esta página",
 	"visualeditor-dialog-meta-categories-category": "Categoria",
 	"visualeditor-dialog-meta-categories-data-label": "Categorias",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Pode redefinir o modo como esta página é ordenada na apresentação de uma categoria através da definição de um índice diferente. Isto é utilizado muitas vezes para ordenar as páginas sobre pessoas pelo seu apelido, uma vez que por definição é o primeiro a chave de ordenação.",

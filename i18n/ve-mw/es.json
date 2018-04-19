@@ -159,6 +159,7 @@
 	"visualeditor-dialog-media-upload": "Subir",
 	"visualeditor-dialog-meta-advancedsettings-label": "Configuraciones avanzadas",
 	"visualeditor-dialog-meta-advancedsettings-section": "Configuraciones avanzadas",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Añadir una categoría a esta página",
 	"visualeditor-dialog-meta-categories-category": "Categoría",
 	"visualeditor-dialog-meta-categories-data-label": "Categorías",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Cambia el orden en que la página aparece cuando se muestra en una categoría, estableciendo un índice diferente en su lugar. Esto se utiliza por lo general para que las páginas sobre personas se muestren por el apellido, y se nombren utilizando antes el primer nombre.",
