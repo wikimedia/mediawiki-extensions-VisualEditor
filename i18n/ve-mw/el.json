@@ -119,6 +119,7 @@
 	"visualeditor-dialog-media-upload": "Ανέβασμα",
 	"visualeditor-dialog-meta-advancedsettings-label": "Προχωρημένες ρυθμίσεις",
 	"visualeditor-dialog-meta-advancedsettings-section": "Προχωρημένες ρυθμίσεις",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Προσθήκη μιας κατηγορίας στη σελίδα",
 	"visualeditor-dialog-meta-categories-category": "Κατηγορία",
 	"visualeditor-dialog-meta-categories-data-label": "Κατηγορίες",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Μπορείτε να παρακάμψετε το πως ταξινομείται αυτή η σελίδα όταν εμφανίζεται μέσα σε μια κατηγορία ορίζοντας ένα διαφορετικό κλειδί ταξινόμησης. Αυτό συχνά χρησιμοποιείται για να κάνουμε σελίδες για ανθρώπους να εμφανίζονται σύμφωνα με το επώνυμο, αλλά να ονομάζονται με το μικρό όνομα μπροστά.",

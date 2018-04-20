@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Krol111",
-			"Uostofchuodnego"
+			"Uostofchuodnego",
+			"Przem(1)s"
 		]
 	},
 	"tooltip-ca-ve-edit": "Edytuj tã zajtã",
 	"visualeditor-ca-createlocaldescriptionsource": "Bajstlůj kod lokalnygo uopisu",
 	"visualeditor-ca-createsource": "Bajstlůj kod",
-	"visualeditor-ca-editsource": "Sprowjej zdrzůdłowy tekst",
-	"visualeditor-ca-editsource-section": "sprowjej zdrzůdło",
+	"visualeditor-ca-editsource": "Edytuj tekst zdrzōdłowy",
+	"visualeditor-ca-editsource-section": "Edytuj zdrzōdło",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
