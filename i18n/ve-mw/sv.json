@@ -150,6 +150,7 @@
 	"visualeditor-dialog-media-upload": "Ladda upp",
 	"visualeditor-dialog-meta-advancedsettings-label": "Avancerade inställningar",
 	"visualeditor-dialog-meta-advancedsettings-section": "Avancerade inställningar",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Lägg till en kategori på denna sida",
 	"visualeditor-dialog-meta-categories-category": "Kategori",
 	"visualeditor-dialog-meta-categories-data-label": "Kategorier",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Du kan åsidosätta hur sidan sorteras när den visas i en kategori genom att ange ett annat index för att sortera på istället. Detta används ofta för att sidor om människor ska sorteras på efternamn, men namnges med att deras förnamn visas först.",
