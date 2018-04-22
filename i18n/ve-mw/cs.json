@@ -135,6 +135,7 @@
 	"visualeditor-dialog-media-upload": "Načíst",
 	"visualeditor-dialog-meta-advancedsettings-label": "Pokročilá nastavení",
 	"visualeditor-dialog-meta-advancedsettings-section": "Pokročilá nastavení",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Zařadit tuto stránku do kategorie",
 	"visualeditor-dialog-meta-categories-category": "Kategorie",
 	"visualeditor-dialog-meta-categories-data-label": "Kategorie",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Můžete přenastavit, jak se má tato stránka řadit v rámci kategorie, tím, že zvolíte odlišný klíč, podle kterého se řadí. To se často používá k tomu, aby se lidé řadili podle příjmení, přestože je první uvedeno křestní jméno.",
