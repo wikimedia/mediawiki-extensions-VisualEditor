@@ -160,6 +160,7 @@
 	"visualeditor-dialog-media-upload": "Enviar",
 	"visualeditor-dialog-meta-advancedsettings-label": "Configurações avançadas",
 	"visualeditor-dialog-meta-advancedsettings-section": "Configurações avançadas",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Acrescentar uma categoria a esta página",
 	"visualeditor-dialog-meta-categories-category": "Categoria",
 	"visualeditor-dialog-meta-categories-data-label": "Categorias",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Você pode alterar a forma como esta página é ordenada ao ser exibida numa categoria definindo um índice diferente para ordená-la. Frequentemente, isto é feito para que páginas sobre pessoas sejam ordenadas pelo sobrenome, ainda que o primeiro nome seja mostrado no início do título.",

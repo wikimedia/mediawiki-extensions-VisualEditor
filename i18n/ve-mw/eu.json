@@ -339,6 +339,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "Aukeran, eman beti ikusizko editorea",
 	"visualeditor-preference-tabs-prefer-wt": "Eman beti iturburu kode editorea",
 	"visualeditor-preference-tabs-remember-last": "Gogoratu nire azken editorea",
+	"visualeditor-preference-visualdiffpage-label": "Ikusizko desberdintasunak",
 	"visualeditor-recreate": "Orria ezabatua izan da aldatzen hasi zinenetik. Sakatu \"$1\" berriro sortzeko.",
 	"visualeditor-redirect-description": "$1ra birzuzendu",
 	"visualeditor-savedialog-error-badtoken": "Ezin izan dugu zure edizioa gorde, saioa dagoeneko ez zelako baliozkoa.",
