@@ -566,6 +566,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
 	}
 	this.editingTabDialog = null;
 
+	// Parent method
 	return ve.init.mw.DesktopArticleTarget.super.prototype.tryTeardown.call( this, noPrompt || this.activating, trackMechanism );
 };
 
@@ -631,9 +632,9 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 		this.saveDialog = null;
 	}
 
-	saveDialogPromise.then( function () {
+	return saveDialogPromise.then( function () {
 		// Parent method
-		ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( target ).then( function () {
+		return ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( target ).then( function () {
 			// After teardown
 			target.active = false;
 
@@ -934,20 +935,24 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub, modules, jsconfigvars
 ) {
-	var newUrlParams, watchChecked, watch;
+	var newUrlParams, watchChecked, watch,
+		target = this;
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
 	if ( !this.pageExists || this.restoring ) {
-		// This is a page creation or restoration, refresh the page
-		this.teardownUnloadHandlers();
-		newUrlParams = newid === undefined ? {} : { venotify: this.restoring ? 'restored' : 'created' };
+		// Teardown the target, ensuring auto-save data is cleared
+		this.teardown().then( function () {
 
-		if ( isRedirect ) {
-			newUrlParams.redirect = 'no';
-		}
-		location.href = this.viewUri.extend( newUrlParams );
+			// This is a page creation or restoration, refresh the page
+			newUrlParams = newid === undefined ? {} : { venotify: this.restoring ? 'restored' : 'created' };
+
+			if ( isRedirect ) {
+				newUrlParams.redirect = 'no';
+			}
+			location.href = target.viewUri.extend( newUrlParams );
+		} );
 	} else {
 		// Update watch link to match 'watch checkbox' in save dialog.
 		// User logged in if module loaded.
