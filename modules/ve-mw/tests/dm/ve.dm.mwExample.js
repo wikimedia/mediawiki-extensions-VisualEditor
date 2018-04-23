@@ -1225,7 +1225,7 @@ ve.dm.mwExample.domToDataCases = {
 		normalizedBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com"></a>Bar</p>'
 	},
 	'URL link': {
-		body: '<p><a rel="mw:ExtLink" href="http://www.mediawiki.org/">mw</a></p>',
+		body: '<p><a rel="mw:ExtLink" href="https://www.mediawiki.org/">mw</a></p>',
 		data: [
 			{ type: 'paragraph' },
 			[
@@ -1233,7 +1233,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'link/mwExternal',
 					attributes: {
-						href: 'http://www.mediawiki.org/',
+						href: 'https://www.mediawiki.org/',
 						rel: 'mw:ExtLink'
 					}
 				} ]
@@ -1243,7 +1243,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'link/mwExternal',
 					attributes: {
-						href: 'http://www.mediawiki.org/',
+						href: 'https://www.mediawiki.org/',
 						rel: 'mw:ExtLink'
 					}
 				} ]
@@ -1564,7 +1564,7 @@ ve.dm.mwExample.domToDataCases = {
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	},
 	'plain external links (e.g. on paste) are converted to link/mwExternal': {
-		body: '<a href="http://www.mediawiki.org/">ab</a>',
+		body: '<a href="https://www.mediawiki.org/">ab</a>',
 		data: [
 			{
 				type: 'paragraph',
@@ -1577,7 +1577,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'link/mwExternal',
 					attributes: {
-						href: 'http://www.mediawiki.org/'
+						href: 'https://www.mediawiki.org/'
 					}
 				} ]
 			],
@@ -1586,7 +1586,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'link/mwExternal',
 					attributes: {
-						href: 'http://www.mediawiki.org/'
+						href: 'https://www.mediawiki.org/'
 					}
 				} ]
 			],
@@ -1600,7 +1600,7 @@ ve.dm.mwExample.domToDataCases = {
 				type: '/internalList'
 			}
 		],
-		normalizedBody: '<a href="http://www.mediawiki.org/" rel="mw:ExtLink">ab</a>'
+		normalizedBody: '<a href="https://www.mediawiki.org/" rel="mw:ExtLink">ab</a>'
 	},
 	'plain internal links (e.g. on paste) are converted to link/mwInternal': {
 		body: '<a href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">ab</a>',
