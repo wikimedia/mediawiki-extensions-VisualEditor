@@ -52,6 +52,11 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 			// Clone the elements in the slice
 			slice.data.cloneElements( true );
 			clipboardData.setData( 'text/xcustom', clipboardKey );
+
+			// Explicitly store wikitext as text/x-wiki, so that wikitext-aware paste
+			// contexts can accept it without having to do any content-
+			// sniffing.
+			clipboardData.setData( 'text/x-wiki', text );
 		}
 	} else {
 		originalSelection = new ve.SelectionState( this.nativeSelection );
