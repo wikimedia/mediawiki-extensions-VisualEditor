@@ -25,13 +25,6 @@
 		}
 
 		switch ( action ) {
-			case 'init':
-				// Account for second opening
-				return timeStamp - Math.max(
-					window.mediaWikiLoadStart,
-					timing.saveSuccess || 0,
-					timing.abort || 0
-				);
 			case 'ready':
 				return timeStamp - timing.init;
 			case 'loaded':
@@ -124,7 +117,9 @@
 
 		event[ 'action.' + action + '.type' ] = event.type;
 		event[ 'action.' + action + '.mechanism' ] = event.mechanism;
-		event[ 'action.' + action + '.timing' ] = Math.round( computeDuration( action, event, timeStamp ) );
+		if ( action !== 'init' ) {
+			event[ 'action.' + action + '.timing' ] = Math.round( computeDuration( action, event, timeStamp ) );
+		}
 		event[ 'action.' + action + '.message' ] = event.message;
 
 		// Remove renamed properties
