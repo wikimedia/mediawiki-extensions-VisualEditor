@@ -483,13 +483,18 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
-	if ( surface !== this.surface ) {
-		this.setupNewSection( surface );
+	var resetSurface = surface !== this.surface;
+
+	if ( resetSurface ) {
 		this.$editableContent.after( surface.$element );
 	}
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.setSurface.apply( this, arguments );
+
+	if ( resetSurface ) {
+		this.setupNewSection( surface );
+	}
 };
 
 /**
