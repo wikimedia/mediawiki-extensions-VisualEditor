@@ -157,7 +157,7 @@
 	"visualeditor-dialog-media-title": "Title for the editing dialog to set how a media item is displayed on the page",
 	"visualeditor-dialog-media-type-border": "Label for the image type option for bordered image.\n{{Identical|Border}}",
 	"visualeditor-dialog-media-type-frame": "Label for the image type option for framed image.\n{{Identical|Frame}}",
-	"visualeditor-dialog-media-type-frameless": "Label for the image type option for frameless.",
+	"visualeditor-dialog-media-type-frameless": "Label for the image type option for frameless.\n{{identical|Frameless}}",
 	"visualeditor-dialog-media-type-none": "Label for the image type option for basic image.\n{{Identical|Basic}}",
 	"visualeditor-dialog-media-type-section": "Label for the image type sub-section.\n\nFollowed by the following buttons:\n* {{msg-mw|Visualeditor-dialog-media-type-thumb}}\n* {{msg-mw|Visualeditor-dialog-media-type-frame}}\n* {{msg-mw|Visualeditor-dialog-media-type-frameless}}\n* {{msg-mw|Visualeditor-dialog-media-type-border}}",
 	"visualeditor-dialog-media-type-section-help": "Message displayed as contextual help about the controls for display type (<code>thumb</code>, <code>frameless</code>, etc.) to editors in the media editing dialog.",

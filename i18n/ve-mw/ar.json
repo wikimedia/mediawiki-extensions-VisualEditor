@@ -155,6 +155,7 @@
 	"visualeditor-dialog-media-upload": "ارفع",
 	"visualeditor-dialog-meta-advancedsettings-label": "إعدادات متقدمة",
 	"visualeditor-dialog-meta-advancedsettings-section": "إعدادات متقدمة",
+	"visualeditor-dialog-meta-categories-addcategory-label": "أضف تصنيفا لهذه الصفحة",
 	"visualeditor-dialog-meta-categories-category": "تصنيف",
 	"visualeditor-dialog-meta-categories-data-label": "تصنيفات",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "عند عرض أحد تصنيفات الصفحة، يظهر عنوان الصفحة في قسم الحرف الأول من العنوان. لتغيير الحرف المراد إظهار الصفحة تحته (مثلا لإظهار صفحة عن شخص في قسم الحرف الأول من اسمه الثاني عوض اسمه الأول) يمكن كتابة الحرف في هذا الوسم.",

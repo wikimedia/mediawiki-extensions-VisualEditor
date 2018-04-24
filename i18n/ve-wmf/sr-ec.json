@@ -10,13 +10,13 @@
 			"BadDog"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелно уређивање]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелно уређивање]]",
 	"tag-visualeditor-description": "Измена начињена [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелним уређивачем]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелно уређивање: провера]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелно уређивање: проверити]]",
 	"tag-visualeditor-needcheck-description": "Измена начињена [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелним уређивачем]] где је систем детектовао викитекст с могућим нежељеним изменама.",
-	"tag-visualeditor-wikitext": "Изворно уређивање (2017)",
+	"tag-visualeditor-wikitext": "уређивање кôда (2017)",
 	"tag-visualeditor-wikitext-description": "Измена направљена уређивачем викитекста  (2017)",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелно уређивање: пребачено]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелно уређивање: пребачено]]",
 	"tag-visualeditor-switched-description": "Уређивање започето Визуелним уређивачем, па настављено уређивачем викитекста.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-tool": "Оставите повратну информацију",
