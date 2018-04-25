@@ -10,7 +10,6 @@
 		"screenshots-all": "grunt screenshots-all"
 	},
 	"devDependencies": {
-		"babel-polyfill": "6.9.1",
 		"eslint-config-wikimedia": "0.5.0",
 		"grunt": "1.0.2",
 		"grunt-banana-checker": "0.6.0",
