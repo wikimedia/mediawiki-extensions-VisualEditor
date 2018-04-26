@@ -4,8 +4,6 @@
  * @package VisualEditor
  */
 
-require( 'babel-polyfill' );
-
 /* eslint-env node, es6 */
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
