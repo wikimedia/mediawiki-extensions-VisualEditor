@@ -164,6 +164,15 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
 /* Methods */
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.getSurfaceConfig = function ( config ) {
+	return ve.init.mw.DesktopArticleTarget.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
+		$overlayContainer: $( '#content' )
+	}, config ) );
+};
+
+/**
  * Get the editable part of the page
  *
  * @return {jQuery} Editable DOM selection
