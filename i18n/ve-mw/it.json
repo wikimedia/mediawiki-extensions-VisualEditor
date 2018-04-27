@@ -34,7 +34,8 @@
 			"Samuele2002",
 			"Greis",
 			"Segaz3",
-			"S4b1nuz E.656"
+			"S4b1nuz E.656",
+			"Sarah Bernabei"
 		]
 	},
 	"apihelp-visualeditor-description": "Ritorna il codice HTML5 per una pagina del servizio Parsoid.",
@@ -139,6 +140,7 @@
 	"visualeditor-dialog-media-upload": "Carica",
 	"visualeditor-dialog-meta-advancedsettings-label": "Impostazioni avanzate",
 	"visualeditor-dialog-meta-advancedsettings-section": "Impostazioni avanzate",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Aggiungi una categoria a questa pagina",
 	"visualeditor-dialog-meta-categories-category": "Categoria",
 	"visualeditor-dialog-meta-categories-data-label": "Categorie",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Puoi sostituire il modo in cui questa pagina è ordinata quando viene visualizzata all'interno di una categoria impostando un indice diverso di ordinamento. Questo è spesso usato con persone per ordinarle per cognome, ma mostrando il nome prima.",
