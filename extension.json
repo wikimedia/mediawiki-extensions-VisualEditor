@@ -1697,6 +1697,7 @@
 			"messages": [
 				"visualeditor-advancedsettings-tool",
 				"visualeditor-categories-tool",
+				"visualeditor-changedesc-mwredirect",
 				"visualeditor-dialog-meta-advancedsettings-label",
 				"visualeditor-dialog-meta-advancedsettings-section",
 				"visualeditor-dialog-meta-categories-addcategory-label",
