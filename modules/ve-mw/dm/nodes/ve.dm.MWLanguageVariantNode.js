@@ -146,7 +146,7 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
 
 	domElement.setAttribute( 'typeof', rdfaType );
 	domElement.setAttribute( 'data-mw-variant', dataMwvJSON );
-	if ( converter.isForClipboard() && tagName !== 'META' ) {
+	if ( converter.doesModeNeedRendering() && tagName !== 'META' ) {
 		// Fill in contents of span for diff/cut-and-paste/etc.
 		this.insertPreviewElements( domElement, variantInfo );
 	}

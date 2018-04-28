@@ -190,7 +190,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getHtmlForDoc = function ( doc ) {
 		// That's okay: ignore the error and use what we've got.
 	}
 	// XXX return a flag to indicate whether contents are now inline or block?
-	targetHtmlDoc = ve.dm.converter.getDomFromModel( doc, false );
+	targetHtmlDoc = ve.dm.converter.getDomFromModel( doc );
 	return ve.properInnerHtml( targetHtmlDoc.body );
 };
 

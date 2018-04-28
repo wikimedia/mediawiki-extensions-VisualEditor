@@ -158,7 +158,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		els = ve.copyDomElements( originalDomElements, doc );
 	} else {
 		if (
-			converter.isForClipboard() &&
+			converter.doesModeNeedRendering() &&
 			// Use getHashObjectForRendering to get the rendering from the store
 			( value = store.value( store.hashOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
 		) {

@@ -66,7 +66,7 @@ ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, 
 	// Ensure there is a text version of the counter in the clipboard
 	// as external documents may not have the same stylesheet - and Firefox
 	// discards empty tags on copy.
-	if ( converter.isForClipboard() ) {
+	if ( converter.doesModeNeedRendering() ) {
 		counter = 1;
 		offset = converter.documentData.indexOf( dataElement );
 

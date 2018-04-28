@@ -107,7 +107,7 @@ ve.dm.MWExtensionNode.static.toDomElements = function ( dataElement, doc, conver
 		els = ve.copyDomElements( converter.getStore().value( dataElement.originalDomElementsHash ), doc );
 	} else {
 		if (
-			converter.isForClipboard() &&
+			converter.doesModeNeedRendering() &&
 			// Use getHashObjectForRendering to get the rendering from the store
 			( value = store.value( store.hashOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
 		) {
