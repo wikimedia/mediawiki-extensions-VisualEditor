@@ -90,6 +90,7 @@
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Kategorien",
 	"visualeditor-changedesc-mwlanguagevariant": "Sprachvarianten-Markup geändert",
+	"visualeditor-changedesc-mwredirect": "Weiterleitungsziel geändert von $1 nach $2",
 	"visualeditor-changedesc-mwtransclusion": "Vorlagenparameter geändert",
 	"visualeditor-desc": "Stellt einen modernen Editor mit Echtbilddarstellung (WYSIWYG) bereit",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",

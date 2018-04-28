@@ -101,6 +101,7 @@
 	"visualeditor-ca-ve-edit-section": "可视化编辑器",
 	"visualeditor-categories-tool": "分类",
 	"visualeditor-changedesc-mwlanguagevariant": "语言变体标记已更改",
+	"visualeditor-changedesc-mwredirect": "已将重定向目标从$1更改为$2",
 	"visualeditor-changedesc-mwtransclusion": "模板参数已更改",
 	"visualeditor-desc": "MediaWiki的可视化编辑器",
 	"visualeditor-descriptionpagelink": "Project:可视化编辑器",

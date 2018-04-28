@@ -63,6 +63,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Κατηγορίες",
+	"visualeditor-changedesc-mwredirect": "Ο στόχος ανακατεύθυνσης άλλαξε από $1 σε $2",
 	"visualeditor-changedesc-mwtransclusion": "Οι παράμετροι προτύπου άλλαξαν",
 	"visualeditor-desc": "Visual editor για το MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
