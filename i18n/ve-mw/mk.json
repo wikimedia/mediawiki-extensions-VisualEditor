@@ -78,6 +78,7 @@
 	"visualeditor-ca-ve-edit-section": "Нагледен уредник",
 	"visualeditor-categories-tool": "Категории",
 	"visualeditor-changedesc-mwlanguagevariant": "Означувањето на јазичната варијанта е сменето",
+	"visualeditor-changedesc-mwredirect": "Целната страница на пренасочувањето сменета од $1 во $2",
 	"visualeditor-changedesc-mwtransclusion": "Променети шаблонските параметри",
 	"visualeditor-desc": "Нагледен уредник за МедијаВики",
 	"visualeditor-descriptionpagelink": "Project:Визуелен уредник",
