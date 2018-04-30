@@ -12,7 +12,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 	/* Protected Members */
 
-	protected $origin = self::ORIGIN_USER_SITEWIDE;
 	protected $targets = [ 'desktop', 'mobile' ];
 
 	/* Methods */
