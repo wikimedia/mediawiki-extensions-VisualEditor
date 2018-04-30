@@ -875,12 +875,17 @@
 				uri = new mw.Uri( e.target.href ),
 				title = mw.Title.newFromText( uri.query.title || '' );
 
-			if ( !init.isUnmodifiedLeftClick( e ) || !( 'action' in uri.query || 'veaction' in uri.query ) ) {
+			if (
+				// Modified click (e.g. ctrl+click)
+				!init.isUnmodifiedLeftClick( e ) ||
+				// Not an edit action
+				!( 'action' in uri.query || 'veaction' in uri.query ) ||
+				// Edit target is on another host (e.g. commons file)
+				uri.host !== location.host ||
+				// Title param doesn't match current page
+				title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText()
+			) {
 				return;
-			}
-			if ( title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText() ) {
-				// title param doesn't match current page, let default event happen (navigate to other page)
-				return true;
 			}
 			e.preventDefault();
 			if ( isLoading ) {
