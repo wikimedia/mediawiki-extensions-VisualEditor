@@ -6,10 +6,10 @@
  */
 
 ( function () {
-	var reviewModeButtonSelect, diffElement, lastDiff, $wikitextDiff,
+	var reviewModeButtonSelect, diffElement, lastDiff,
+		$wikitextDiffContainer, $wikitextDiffHeader, $wikitextDiffBody,
 		$visualDiffContainer = $( '<div>' ),
 		$visualDiff = $( '<div>' ),
-		$revisionInfo = $( '<table>' ).addClass( 'diff' ),
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		uri = new mw.Uri(),
 		mode = uri.query.diffmode || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
@@ -22,7 +22,6 @@
 	}
 
 	$visualDiffContainer.append(
-		$revisionInfo,
 		progress.$element.addClass( 'oo-ui-element-hidden' ),
 		$visualDiff
 	);
@@ -45,10 +44,18 @@
 
 		mw.user.options.set( 'visualeditor-diffmode-historical', mode );
 		new mw.Api().saveOption( 'visualeditor-diffmode-historical', mode );
-
 		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
-		$wikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
+		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
 		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
+		if ( isVisual ) {
+			// Highlight the headers using the same styles as the diff, to better indicate
+			// the meaning of headers when not using two-column diff.
+			$wikitextDiffHeader.find( '#mw-diff-otitle1' ).attr( 'data-diff-action', 'remove' );
+			$wikitextDiffHeader.find( '#mw-diff-ntitle1' ).attr( 'data-diff-action', 'insert' );
+		} else {
+			$wikitextDiffHeader.find( '#mw-diff-otitle1' ).removeAttr( 'data-diff-action' );
+			$wikitextDiffHeader.find( '#mw-diff-ntitle1' ).removeAttr( 'data-diff-action' );
+		}
 
 		if ( isVisual && !(
 			lastDiff && lastDiff.oldId === oldId && lastDiff.newId === newId &&
@@ -82,16 +89,10 @@
 	}
 
 	mw.hook( 'wikipage.diff' ).add( function () {
-		$wikitextDiff = $( 'table.diff[data-mw="interface"]' );
-		$wikitextDiff.before( $visualDiffContainer );
-		$revisionInfo.empty().append(
-			// Clone with `true, true` to also deep clone event handlers, e.g. for the "thanks" link.
-			$( 'tr.diff-title' ).clone( true, true )
-		);
-		// Highlight the headers using the same styles as the diff, to better indicate
-		// the meaning of headers when not using two-column diff.
-		$revisionInfo.find( '#mw-diff-otitle1' ).attr( 'data-diff-action', 'remove' );
-		$revisionInfo.find( '#mw-diff-ntitle1' ).attr( 'data-diff-action', 'insert' );
+		$wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
+		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' );
+		$wikitextDiffBody = $wikitextDiffContainer.find( 'tr' ).not( $wikitextDiffHeader );
+		$wikitextDiffContainer.after( $visualDiffContainer );
 
 		// The PHP widget was a ButtonGroupWidget, so replace with a
 		// ButtonSelectWidget instead of infusing.
