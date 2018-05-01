@@ -3,7 +3,8 @@
 		"authors": [
 			"Bjankuloski06",
 			"Brest",
-			"Iwan Novirion"
+			"Iwan Novirion",
+			"Ed g2s"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Грешка при побарувањето од приложникот на МедијаВики",
@@ -49,7 +50,7 @@
 	"apihelp-visualeditoredit-param-watch": "Додај ја страницата во набљудуваните на тековниот корисник.",
 	"apihelp-visualeditoredit-param-wikitext": "Со кој викитекст да се делува.",
 	"apihelp-visualeditoredit-summary": "Зачувајте HTML5-страница во МедијаВики (се претвора во викитекст преку службата Parsoid).",
-	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-doctitle": "Соработна тетратка: $1",
 	"collabpad": "Соработна тетратка",
 	"tooltip-ca-createsource": "Создајте го изворниот код на страницава",
 	"tooltip-ca-edit": "Уредете ја страницава со викитекст",
