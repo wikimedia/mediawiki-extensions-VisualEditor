@@ -51,7 +51,7 @@ class SpecialCollabPad extends SpecialPage {
 	/**
 	 * @inheritDoc
 	 */
-	public function execute( $par ) {
+	public function execute( $subPage ) {
 		$this->setHeaders();
 		$this->checkPermissions();
 
@@ -59,7 +59,7 @@ class SpecialCollabPad extends SpecialPage {
 
 		$output = $this->getOutput();
 
-		$output->addJsConfigVars( 'collabPadPageName', $par );
+		$output->addJsConfigVars( 'collabPadPageName', $subPage );
 		$output->addModuleStyles( 'ext.visualEditor.collabTarget.init.styles' );
 		$output->addModules( 'ext.visualEditor.collabTarget.init' );
 
@@ -89,9 +89,9 @@ class SpecialCollabPad extends SpecialPage {
 			'infusable' => true
 		] );
 
-		if ( $par ) {
-			$title = Title::newFromText( $par );
-			$output->setPageTitle( 'CollabPad: ' . $title->getPrefixedText() );
+		if ( $subPage ) {
+			$title = Title::newFromText( $subPage );
+			$output->setPageTitle( $this->msg( 'collabpad-doctitle', $title->getPrefixedText() ) );
 			$documentNameField->addClasses( [ 'oo-ui-element-hidden' ] );
 		} else {
 			// Scripts only, styles already added above
