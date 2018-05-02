@@ -9,3 +9,8 @@
 .ve-ce-mwBlockImageNode > figcaption p {
 	margin: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
+
+/* Disable zoom link */
+.ve-ce-mwBlockImageNode > a:after {
+	pointer-events: none;
+}
