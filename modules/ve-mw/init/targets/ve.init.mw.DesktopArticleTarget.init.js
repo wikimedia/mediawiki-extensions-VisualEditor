@@ -411,6 +411,10 @@
 					// 'mwedit.ready' has already been fired for source mode in setupTempWikitextEditor
 					ve.track( 'mwedit.ready', { mode: mode } );
 				} else if ( !tempWikitextEditor ) {
+					// We're in source mode, but skipped the
+					// tempWikitextEditor, so make sure we do relevant
+					// tracking / hooks:
+					ve.track( 'mwedit.ready', { mode: mode } );
 					mw.hook( 've.wikitextInteractive' ).fire();
 				}
 				ve.track( 'mwedit.loaded', { mode: mode } );
