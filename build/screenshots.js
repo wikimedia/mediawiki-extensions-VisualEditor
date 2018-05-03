@@ -40,8 +40,7 @@
 				driver.executeAsyncScript(
 					// This function is converted to a string and executed in the browser
 					function () {
-						var $lastHighlighted,
-							done = arguments[ arguments.length - 1 ];
+						var done = arguments[ arguments.length - 1 ];
 
 						window.seleniumUtils = {
 							getBoundingRect: function ( elements ) {
@@ -80,14 +79,6 @@
 									}
 								} );
 							},
-							highlight: function ( element ) {
-								var $element = $( element );
-								if ( $lastHighlighted ) {
-									$lastHighlighted.css( 'outline', '' );
-								}
-								$element.css( 'outline', '2px solid #36c' );
-								$lastHighlighted = $element;
-							},
 							runMenuTask: function ( done, tool, expanded, highlight, extraElements ) {
 								var toolGroup = tool.toolGroup;
 
@@ -99,7 +90,7 @@
 								}
 
 								if ( highlight ) {
-									seleniumUtils.highlight( tool.$element[ 0 ] );
+									tool.$link.focus();
 								}
 
 								setTimeout( function () {
