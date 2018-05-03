@@ -6,12 +6,13 @@
 			"Jduranboger",
 			"Eminn",
 			"Wertuose",
-			"Dağlı95"
+			"Dağlı95",
+			"AZISS"
 		]
 	},
 	"tooltip-ca-createsource": "Cari kod redaktorunda səhifəni yarat",
 	"tooltip-ca-editsource": "Səhifənin cari kodunu redaktə et",
-	"tooltip-ca-ve-edit": "Vizual redaktorun köməyi ilə bu səhifəni redaktə et",
+	"tooltip-ca-ve-edit": "Bu səhifəni redaktə et",
 	"visualeditor-advancedsettings-tool": "Əlavə parametrlər",
 	"visualeditor-beta-label": "Beta versiya",
 	"visualeditor-beta-warning": "Vizual redaktor beta-versiyadadır. Proqram təminatı ilə bağlı problemlər üzə çıxa bilər və siz səhifənin bəzi hissələrini redaktə edə bilməzsiniz. İstənilən vaxt etdiyiniz dəyişiklikləri itirmədən \"Əsas redaktə\" rejiminə keçmək üçün \"{{int:visualeditor-toolbar-savedialog}}\" bölməsinin yanındakı siyahını açın və \"{{int:visualeditor-mweditmodesource-tool}}\" düyməsini vurun.",

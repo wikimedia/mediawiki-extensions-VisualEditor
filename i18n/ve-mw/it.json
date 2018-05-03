@@ -85,6 +85,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Categorie",
+	"visualeditor-changedesc-mwredirect": "Destinazione del reindirizzamento modificata da $1 a $2",
 	"visualeditor-desc": "Editor visivo per MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Testo alternativo",

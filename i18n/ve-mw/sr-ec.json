@@ -111,6 +111,7 @@
 	"visualeditor-dialog-media-upload": "Отпреми",
 	"visualeditor-dialog-meta-advancedsettings-label": "Напредна подешавања",
 	"visualeditor-dialog-meta-advancedsettings-section": "Напредна подешавања",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Додај категорију на овој страници",
 	"visualeditor-dialog-meta-categories-category": "Категорија",
 	"visualeditor-dialog-meta-categories-data-label": "Категорије",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Користи се за сортирање странице у оквиру категорија. Обично се користи код чланака о особама када се врши сортирање по презимену особе, а не имену.",

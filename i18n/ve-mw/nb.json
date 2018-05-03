@@ -14,7 +14,8 @@
 			"Emilbk",
 			"Cocu",
 			"Tarjeimo",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"Orf3us"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Feil under spørring mot MediaWikis API",
@@ -63,7 +64,7 @@
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Opprett kildekoden for denne siden",
-	"tooltip-ca-edit": "Redigere denne siden som wikitekst",
+	"tooltip-ca-edit": "Rediger denne siden som wikitekst",
 	"tooltip-ca-editsource": "Rediger kildekoden for denne siden",
 	"tooltip-ca-ve-edit": "Rediger siden",
 	"visualeditor-advancedsettings-tool": "Avanserte innstillinger",
@@ -423,11 +424,11 @@
 	"visualeditor-savedialog-title-save": "Lagre endringene dine",
 	"visualeditor-savedialog-warning-dirty": "Redigeringen din kan ha blitt skadet – vennligst gjennomgå endringene før lagring.",
 	"visualeditor-saveerror": "Det oppsto et problem ved lagring av data til serveren: $1.",
-	"visualeditor-saveerror-hookaborted": "Feil under lagring av siden: En utvidelse på tjeneren forhindret deg i å lagre.",
+	"visualeditor-saveerror-hookaborted": "Feil under lagring av siden: En utvidelse på serveren forhindret deg i å lagre.",
 	"visualeditor-saveerror-titleblacklist": "Kunne ikke lagre siden: Denne sidens tittel er svartelistet",
 	"visualeditor-section-body-placeholder": "Nytt avsnitt",
 	"visualeditor-section-title-placeholder": "Emne",
-	"visualeditor-serializeerror": "Feil ved henting av data fra tjeneren: $1.",
+	"visualeditor-serializeerror": "Feil ved henting av data fra serveren: $1.",
 	"visualeditor-settings-tool": "Sideinnstillinger",
 	"visualeditor-shortcuts-insert": "Sett inn",
 	"visualeditor-special-characters-group-other": "Ofte brukt",

@@ -85,6 +85,7 @@
 	"visualeditor-ca-ve-edit-section": "Editor visual",
 	"visualeditor-categories-tool": "Categorías",
 	"visualeditor-changedesc-mwlanguagevariant": "Marca da variante da lingua modificada",
+	"visualeditor-changedesc-mwredirect": "O destino da redirección cambiou de $1 a $2",
 	"visualeditor-changedesc-mwtransclusion": "Parámetros de modelo cambiados",
 	"visualeditor-desc": "Editor visual para MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Editor visual",
