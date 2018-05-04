@@ -60,6 +60,7 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 		excludeCurrentPage: true,
 		showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
 		showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
+		api: ve.init.target.getContentApi(),
 		cache: ve.init.platform.linkCache
 	}, config ) );
 

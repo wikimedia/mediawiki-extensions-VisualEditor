@@ -96,7 +96,7 @@ ve.ce.MWSignatureNode.prototype.onTeardown = function () {
  * @inheritdoc
  */
 ve.ce.MWSignatureNode.prototype.generateContents = function () {
-	var wikitext, signatureNode, api, deferred, xhr;
+	var wikitext, signatureNode, deferred, xhr;
 	// Parsoid doesn't support pre-save transforms. PHP parser doesn't support Parsoid's
 	// meta attributes (that may or may not be required).
 
@@ -107,9 +107,8 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 	wikitext = '<span>~~~~</span>';
 	signatureNode = this;
 
-	api = new mw.Api();
 	deferred = $.Deferred();
-	xhr = api.post( {
+	xhr = ve.init.target.getContentApi( this.getModel().getDocument() ).post( {
 		action: 'parse',
 		text: wikitext,
 		contentmodel: 'wikitext',

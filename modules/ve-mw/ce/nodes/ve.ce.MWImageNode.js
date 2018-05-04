@@ -106,7 +106,7 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 		return deferred.reject().promise();
 	}
 
-	xhr = new mw.Api().get( {
+	xhr = ve.init.target.getContentApi( this.getModel().getDocument() ).get( {
 		action: 'query',
 		prop: 'imageinfo',
 		iiprop: 'url',

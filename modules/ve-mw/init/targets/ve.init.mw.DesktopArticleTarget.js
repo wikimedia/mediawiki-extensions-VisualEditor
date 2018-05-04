@@ -50,7 +50,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	} else {
 		this.initialEditSummary = this.currentUri.query.summary;
 	}
-	this.viewUri = new mw.Uri( mw.util.getUrl( this.pageName ) );
+	this.viewUri = new mw.Uri( mw.util.getUrl( this.getPageName() ) );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
 		this.currentUri.query.diff === undefined
@@ -360,7 +360,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 			}
 		} else {
-			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+			ve.init.target.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
 			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 		}
 		this.suppressNormalStartupDialogs = true;
@@ -839,7 +839,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
  * @param {ve.dm.MetaItem} metaItem Item that was inserted
  */
 ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaItem ) {
-	var metaList = this.surface.getModel().getMetaList();
+	var metaList = this.getSurface().getModel().getMetaList();
 	switch ( metaItem.getType() ) {
 		case 'mwRedirect':
 			this.setFakeRedirectInterface( metaItem.getAttribute( 'title' ) );
@@ -858,7 +858,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
  * @param {number} index Index within that offset the item was at
  */
 ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaItem ) {
-	var metaList = this.surface.getModel().getMetaList();
+	var metaList = this.getSurface().getModel().getMetaList();
 	switch ( metaItem.getType() ) {
 		case 'mwRedirect':
 			this.setFakeRedirectInterface( null );
@@ -878,7 +878,7 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 	var target = this;
 	// We need to fetch this from the API because the category list is skin-
 	// dependent, so the HTML output could be absolutely anything.
-	new mw.Api().post( {
+	this.getContentApi().post( {
 		formatversion: 2,
 		action: 'parse',
 		contentmodel: 'wikitext',
@@ -1192,7 +1192,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
  * Change the document title to state that we are now editing.
  */
 ve.init.mw.DesktopArticleTarget.prototype.changeDocumentTitle = function () {
-	var title = mw.Title.newFromText( this.pageName );
+	var title = mw.Title.newFromText( this.getPageName() );
 
 	// Use the real title if we loaded a view page, otherwise reconstruct it
 	this.originalDocumentTitle = this.isViewPage ? document.title : ve.msg( 'pagetitle', title.getPrefixedText() );

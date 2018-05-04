@@ -226,9 +226,9 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		// Document title will only be set if wikitext contains {{DISPLAYTITLE}}
 		if ( docOrMsg.title ) {
 			// HACK: Parse title as it can contain basic wikitext (T122976)
-			new mw.Api().post( {
+			ve.init.target.getContentApi().post( {
 				action: 'parse',
-				title: ve.init.target.pageName,
+				title: ve.init.target.getPageName(),
 				prop: 'displaytitle',
 				text: '{{DISPLAYTITLE:' + docOrMsg.title + '}}\n'
 			} ).then( function ( response ) {
@@ -251,7 +251,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 
 		this.$previewViewer.empty().append(
 			// TODO: This won't work with formatted titles (T122976)
-			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText() ),
+			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText() ),
 			$redirect,
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
 				contents
@@ -387,7 +387,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 					this.$reviewEditSummary.parent()
 						.removeClass( 'oo-ui-element-hidden' )
 						.addClass( 'mw-ajax-loader' );
-					this.editSummaryXhr = new mw.Api().post( {
+					this.editSummaryXhr = ve.init.target.getContentApi().post( {
 						action: 'parse',
 						summary: currentEditSummaryWikitext
 					} ).done( function ( result ) {

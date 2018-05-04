@@ -455,7 +455,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// Properties
 			this.loaded = false;
 			this.altered = false;
-			this.transclusionModel = new ve.dm.MWTransclusionModel();
+			this.transclusionModel = new ve.dm.MWTransclusionModel( this.getFragment().getDocument() );
 
 			// Events
 			this.transclusionModel.connect( this, {

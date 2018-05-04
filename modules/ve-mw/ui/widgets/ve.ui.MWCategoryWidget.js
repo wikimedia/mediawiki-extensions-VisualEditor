@@ -274,7 +274,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 
 	// Batch this up into groups of 50
 	while ( index < categoryNamesToQuery.length ) {
-		promises.push( new mw.Api().get( {
+		promises.push( ve.init.target.getContentApi().get( {
 			action: 'query',
 			prop: 'pageprops',
 			titles: categoryNamesToQuery.slice( index, index + batchSize ),

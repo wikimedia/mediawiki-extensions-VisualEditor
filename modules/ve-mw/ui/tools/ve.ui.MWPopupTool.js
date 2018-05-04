@@ -253,7 +253,7 @@ ve.ui.MWHelpPopupTool.prototype.onSelect = function () {
 	if ( !this.versionPromise && this.popup.isVisible() ) {
 		$version = $( '<div>' ).addClass( 've-ui-mwHelpPopupTool-item oo-ui-pendingElement-pending' ).text( '\u00a0' );
 		this.$items.append( $version );
-		this.versionPromise = new mw.Api().get( {
+		this.versionPromise = ve.init.target.getLocalApi( {
 			action: 'query',
 			meta: 'siteinfo',
 			format: 'json',

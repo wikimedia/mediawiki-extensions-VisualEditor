@@ -250,7 +250,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		type === 'wiki-page-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		return new mw.widgets.TitleInputWidget( valueInputConfig );
+		return new mw.widgets.TitleInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
 	} else if (
 		type === 'wiki-user-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
@@ -260,13 +260,14 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 			// TODO: Check against unicode blacklist regex from MW core's User::isValidUserName
 			return !!mw.Title.newFromText( value );
 		};
-		return new mw.widgets.UserInputWidget( valueInputConfig );
+		return new mw.widgets.UserInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
 	} else if (
 		type === 'wiki-template-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
 		return new mw.widgets.TitleInputWidget( $.extend( {}, valueInputConfig, {
-			namespace: mw.config.get( 'wgNamespaceIds' ).template
+			namespace: mw.config.get( 'wgNamespaceIds' ).template,
+			api: ve.init.target.getContentApi()
 		} ) );
 	} else if ( type === 'boolean' && ( value === '1' || value === '0' ) ) {
 		return new ve.ui.MWParameterCheckboxInputWidget( valueInputConfig );

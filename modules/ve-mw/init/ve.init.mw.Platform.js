@@ -120,7 +120,7 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 		Object.keys( keyOrValueMap ).forEach( function ( key ) {
 			jsonValues[ key ] = JSON.stringify( keyOrValueMap[ key ] );
 		} );
-		new mw.Api().saveOptions( jsonValues );
+		ve.init.target.getLocalApi().saveOptions( jsonValues );
 		return mw.user.options.set( jsonValues );
 	} else {
 		if ( value === this.getUserConfig( keyOrValueMap ) ) {
@@ -128,7 +128,7 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 		}
 		// JSON encode the value for API storage
 		jsonValue = JSON.stringify( value );
-		new mw.Api().saveOption( keyOrValueMap, jsonValue );
+		ve.init.target.getLocalApi().saveOption( keyOrValueMap, jsonValue );
 		return mw.user.options.set( keyOrValueMap, jsonValue );
 	}
 };
