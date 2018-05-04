@@ -1061,12 +1061,13 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 		captionChanged = !!this.captionTarget && this.captionTarget.hasBeenModified();
 
 		if (
+			this.imageModel &&
 			// Activate or deactivate the apply/insert buttons
 			// Make sure sizes are valid first
 			this.sizeWidget.isValid() &&
 			(
 				// Check that the model or caption changed
-				this.isInsertion && this.imageModel ||
+				this.isInsertion ||
 				captionChanged ||
 				this.imageModel.hasBeenModified()
 			)
