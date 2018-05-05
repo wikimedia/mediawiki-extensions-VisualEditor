@@ -361,13 +361,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
 	}
 };
 
-/**
- * ve.ui.MWInternalLinkAnnotationWidget.prototype.getHref will try to return an href, obviously,
- * but we don't want this to go into the text and can just call its parent instead.
- */
-ve.ui.MWLinkAnnotationInspector.prototype.getInsertionText = function () {
-	return this.annotationInput.constructor.super.prototype.getHref.call( this.annotationInput );
-};
+// #getInsertionText call annotationInput#getHref, which returns the link title,
+// so no custmisation is needed.
 
 /* Registration */
 
