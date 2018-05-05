@@ -11,9 +11,11 @@
  * @class
  * @extends ve.init.mw.ApiResponseCache
  * @constructor
+ * @param {mw.Api} [api]
  */
 ve.init.mw.ImageInfoCache = function VeInitMwImageInfoCache() {
-	ve.init.mw.ImageInfoCache.super.call( this );
+	// Parent constructor
+	ve.init.mw.ImageInfoCache.super.apply( this, arguments );
 };
 
 /* Inheritance */
@@ -41,7 +43,7 @@ ve.init.mw.ImageInfoCache.static.processPage = function ( page ) {
 ve.init.mw.ImageInfoCache.prototype.getRequestPromise = function ( subqueue ) {
 	// If you change what `iiprop`s are being fetched, update
 	// ve.ui.MWMediaDialog to add the same ones to the cache.
-	return new mw.Api().get(
+	return this.api.get(
 		{
 			action: 'query',
 			prop: 'imageinfo',
