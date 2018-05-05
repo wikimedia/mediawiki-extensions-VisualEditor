@@ -84,7 +84,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWWikitextSurface, ve.ui.Surface );
+OO.inheritClass( ve.ui.MWWikitextSurface, ve.ui.MWSurface );
 
 /* Methods */
 
