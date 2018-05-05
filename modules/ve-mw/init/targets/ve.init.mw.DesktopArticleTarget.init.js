@@ -488,7 +488,10 @@
 	// T156998: Don't trust uri.query.oldid, it'll be wrong if uri.query.diff or uri.query.direction
 	// is set to 'next' or 'prev'.
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
-	if ( oldId === mw.config.get( 'wgCurRevisionId' ) ) {
+	// wgFlaggedRevsEditLatestRevision is set by FlaggedRevs extension when viewing a stable revision
+	if ( oldId === mw.config.get( 'wgCurRevisionId' ) || mw.config.get( 'wgFlaggedRevsEditLatestRevision' ) ) {
+		// The page may have been edited by someone else after we loaded it, setting this to "undefined"
+		// indicates that we should load the actual latest revision.
 		oldId = undefined;
 	}
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
