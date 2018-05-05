@@ -1,11 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Artsiom91"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальны рэдактар]]",
 	"tag-visualeditor-description": "Праўка зроблена з выкарыстаннем [[{{MediaWiki:Visualeditor-descriptionpagelink}}|візуальнага рэдактара]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальная праўка: Праверыць]]",
+	"tag-visualeditor-needcheck-description": "Праўка была зроблена з дапамогай [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуальнага рэдактара]], і сістэма заўважыла патэнцыйна непажаданыя змены ў вікітэксце.",
+	"tag-visualeditor-wikitext": "рэдактар вікітэксту 2017",
+	"tag-visualeditor-wikitext-description": "Праўка зроблена з дапамогай рэдактара вікітэксту 2017",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальная праўка: Пераключана]]",
+	"tag-visualeditor-switched-description": "Удзельнік пачаў правіць з дапамогай візуальнага рэдактара, а потым пераключыўся на рэдактар вікітэксту.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Водгукі",
 	"visualeditor-feedback-tool": "Пакінуць водгук"
 }

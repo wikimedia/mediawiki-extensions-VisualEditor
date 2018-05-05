@@ -90,6 +90,7 @@
 	"visualeditor-dialog-media-upload": "Postavi",
 	"visualeditor-dialog-meta-advancedsettings-label": "Napredne postavke",
 	"visualeditor-dialog-meta-advancedsettings-section": "Napredne postavke",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Dodaj kategoriju ovoj stranici",
 	"visualeditor-dialog-meta-categories-category": "Kategorija",
 	"visualeditor-dialog-meta-categories-data-label": "Kategorije",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Možete postaviti ime po kojem će se stranica sortirati unutar kategorije. Obično se koristi kod članaka o osobama kada se sortiranje postavlja po prezimenu osobe.",
