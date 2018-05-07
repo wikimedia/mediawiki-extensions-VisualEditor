@@ -43,7 +43,8 @@
 		isVisual = mode === 'visual';
 
 		mw.user.options.set( 'visualeditor-diffmode-historical', mode );
-		ve.init.target.getLocalApi().saveOption( 'visualeditor-diffmode-historical', mode );
+		// Same as ve.init.target.getLocalApi()
+		new mw.Api().saveOption( 'visualeditor-diffmode-historical', mode );
 		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
 		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
 		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
