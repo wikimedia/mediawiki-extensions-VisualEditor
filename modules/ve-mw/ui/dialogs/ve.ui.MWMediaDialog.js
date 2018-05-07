@@ -903,7 +903,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 					document.createTextNode( this.imageModel.getFilename() + ' ' ),
 					$( '<a>' )
 						.addClass( 'visualeditor-dialog-media-content-description-link' )
-						.attr( 'href', mw.util.getUrl( title ) )
+						.attr( 'href', ve.resolveUrl( title, this.getFragment().getDocument().getHtmlDocument() ) )
 						.attr( 'target', '_blank' )
 						.attr( 'rel', 'noopener' )
 						.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
@@ -1212,7 +1212,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 			document.createTextNode( this.imageModel.getFilename() + ' ' ),
 			$( '<a>' )
 				.addClass( 'visualeditor-dialog-media-content-description-link' )
-				.attr( 'href', mw.util.getUrl( this.imageModel.getResourceName() ) )
+				.attr( 'href', ve.resolveUrl( this.imageModel.getResourceName(), this.getFragment().getDocument().getHtmlDocument() ) )
 				.attr( 'target', '_blank' )
 				.attr( 'rel', 'noopener' )
 				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )

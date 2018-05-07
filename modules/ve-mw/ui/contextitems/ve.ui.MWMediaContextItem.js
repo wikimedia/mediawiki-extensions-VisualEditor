@@ -69,11 +69,12 @@ ve.ui.MWMediaContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaContextItem.prototype.renderBody = function () {
+	var htmlDoc = this.context.getSurface().getModel().getDocument().getHtmlDocument();
 	this.$body.append(
 		$( '<a>' )
 			.text( this.getDescription() )
 			.attr( {
-				href: mw.util.getUrl( this.model.getAttribute( 'resource' ) ),
+				href: ve.resolveUrl( this.model.getAttribute( 'resource' ), htmlDoc ),
 				target: '_blank',
 				rel: 'noopener'
 			} )
