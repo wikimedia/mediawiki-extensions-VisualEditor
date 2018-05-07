@@ -103,6 +103,7 @@ ve.init.mw.Target.static.importRules = {
 			'article', 'section', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
 		htmlBlacklist: {
+			// Remove reference numbers copied from MW read mode (T150418)
 			remove: [ 'sup.reference:not( [typeof] )' ],
 			unwrap: [ 'fieldset', 'legend' ]
 		},
