@@ -313,7 +313,7 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
  * @inheritdoc
  */
 ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
-	var importRules, surface, documentView;
+	var importRules;
 
 	if ( config && config.mode === 'source' ) {
 		importRules = ve.copy( this.constructor.static.importRules );
@@ -326,25 +326,7 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 		return new ve.ui.MWWikitextSurface( dmDoc, config );
 	}
 
-	// Parent method
-	surface = ve.init.mw.Target.super.prototype.createSurface.apply( this, arguments );
-
-	documentView = surface.getView().getDocument();
-
-	// T164790
-	documentView.getDocumentNode().$element.addClass( 'mw-parser-output' );
-
-	function onLangChange() {
-		// Add appropriately mw-content-ltr or mw-content-rtl class
-		documentView.getDocumentNode().$element
-			.removeClass( 'mw-content-ltr mw-content-rtl' )
-			.addClass( 'mw-content-' + documentView.getDir() );
-	}
-
-	documentView.on( 'langChange', onLangChange );
-	onLangChange();
-
-	return surface;
+	return new ve.ui.MWSurface( dmDoc, this.getSurfaceConfig( config ) );
 };
 
 /**

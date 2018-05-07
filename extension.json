@@ -1288,6 +1288,7 @@
 				"modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js",
 				"modules/ve-mw/ui/ve.ui.MWCommandRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWSequenceRegistry.js",
+				"modules/ve-mw/ui/ve.ui.MWSurface.js",
 				"modules/ve-mw/ui/ve.ui.MWExtensionWindow.js",
 				"modules/ve-mw/ui/ve.ui.MWWikitextTransferRegistry.js",
 				"modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js",
