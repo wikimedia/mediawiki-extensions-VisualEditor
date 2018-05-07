@@ -111,6 +111,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
  * @param {HTMLDocument} doc Base document to use for normalisation
  */
 ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc ) {
+	var cache = this;
 	if ( ve.dm.MWLanguageVariantNode ) {
 		// Render the user's preferred variant in language converter markup
 		ve.dm.MWLanguageVariantNode.static.processVariants( $elements );
@@ -130,10 +131,10 @@ ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc 
 				var title,
 					href = this.href || mw.config.get( 'wgArticlePath' );
 
-				title = ve.init.platform.linkCache.constructor.static.normalizeTitle(
+				title = cache.constructor.static.normalizeTitle(
 					ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, doc ).title
 				);
-				ve.init.platform.linkCache.styleElement( title, $( this ), href.indexOf( '#' ) !== -1 );
+				cache.styleElement( title, $( this ), href.indexOf( '#' ) !== -1 );
 			} );
 	}
 };
