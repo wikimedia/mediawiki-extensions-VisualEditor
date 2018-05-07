@@ -55,7 +55,7 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
 		redirect: page.redirect !== undefined,
 		disambiguation: ve.getProp( page, 'pageprops', 'disambiguation' ) !== undefined,
 		imageUrl: ve.getProp( page, 'thumbnail', 'source' ),
-		description: ve.getProp( page, 'terms', 'description' )
+		description: page.description
 	};
 };
 
@@ -185,10 +185,9 @@ ve.init.mw.LinkCache.prototype.get = function ( title ) {
 ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
 	return new mw.Api().get( {
 		action: 'query',
-		prop: 'info|pageprops|pageimages|pageterms',
+		prop: 'info|pageprops|pageimages|description',
 		pithumbsize: 80,
 		pilimit: subqueue.length,
-		wbptterms: 'description',
 		ppprop: 'disambiguation',
 		titles: subqueue,
 		'continue': ''
