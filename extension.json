@@ -1230,9 +1230,6 @@
 				"modules/ve-mw/init/styles/ve.init.MWVESwitchPopupWidget.css"
 			],
 			"skinStyles": {
-				"vector": [
-					"modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog-vector.css"
-				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.MWVESwitchConfirmDialog-monobook.css"
 				]
