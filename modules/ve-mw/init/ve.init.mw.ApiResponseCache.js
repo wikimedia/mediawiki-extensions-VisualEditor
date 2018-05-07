@@ -14,10 +14,13 @@
  * @class
  * @extends OO.EventEmitter
  * @constructor
+ * @param {mw.Api} [api] API object to use. Defaults to new mw.Api()
  */
-ve.init.mw.ApiResponseCache = function VeInitMwApiResponseCache() {
+ve.init.mw.ApiResponseCache = function VeInitMwApiResponseCache( api ) {
 	// Mixin constructor
 	OO.EventEmitter.call( this );
+
+	this.api = api || new mw.Api();
 
 	// Keys are titles, values are deferreds
 	this.deferreds = {};

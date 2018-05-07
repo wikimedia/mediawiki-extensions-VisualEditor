@@ -11,9 +11,11 @@
  * @class
  * @extends ve.init.mw.ApiResponseCache
  * @constructor
+ * @param {mw.Api} [api]
  */
 ve.init.mw.LinkCache = function VeInitMwLinkCache() {
-	ve.init.mw.LinkCache.super.call( this );
+	// Parent constructor
+	ve.init.mw.LinkCache.super.apply( this, arguments );
 
 	// Keys are page names, values are link data objects
 	// This is kept for synchronous retrieval of cached values via #getCached
@@ -184,7 +186,7 @@ ve.init.mw.LinkCache.prototype.get = function ( title ) {
  * @inheritdoc
  */
 ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
-	return new mw.Api().get( {
+	return this.api.get( {
 		action: 'query',
 		prop: 'info|pageprops|pageimages|description',
 		pithumbsize: 80,
