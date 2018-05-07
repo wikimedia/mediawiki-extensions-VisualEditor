@@ -77,13 +77,10 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.getTextInputWidget = function () 
 	return this.input.query;
 };
 
-/**
- * @inheritdoc
- */
-ve.ui.MWInternalLinkAnnotationWidget.prototype.getHref = function () {
-	var title = ve.ui.MWInternalLinkAnnotationWidget.super.prototype.getHref.call( this );
-	return mw.util.getUrl( title );
-};
+// #getHref returns the link title, not a fully resolved URL, however the only
+// use case of widget.getHref is for link insertion text, which expects a title.
+//
+// Callers needing the full resolved URL should use ve.resolveUrl
 
 /**
  * @inheritdoc
