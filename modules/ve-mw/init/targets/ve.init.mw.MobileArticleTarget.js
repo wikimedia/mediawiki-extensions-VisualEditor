@@ -183,7 +183,7 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 	if ( !this.$title ) {
 		this.$title = $( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
 			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
-				new mw.Title( ve.init.target.pageName ).getMainText()
+				new mw.Title( ve.init.target.getPageName() ).getMainText()
 			)
 		);
 	}

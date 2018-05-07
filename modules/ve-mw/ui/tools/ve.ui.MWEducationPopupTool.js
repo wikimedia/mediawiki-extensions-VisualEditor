@@ -105,7 +105,7 @@ ve.ui.MWEducationPopupTool.prototype.onPopupCloseButtonClick = function () {
 	ve.init.target.openEducationPopupTool = undefined;
 
 	if ( prefSaysShow ) {
-		new mw.Api().saveOption( 'visualeditor-hideusered', 1 );
+		ve.init.target.getLocalApi().saveOption( 'visualeditor-hideusered', 1 );
 		mw.user.options.set( 'visualeditor-hideusered', 1 );
 	} else if ( !usePrefs ) {
 		if ( !mw.storage.set( 've-hideusered', 1 ) ) {

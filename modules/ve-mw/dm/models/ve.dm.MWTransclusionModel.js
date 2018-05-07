@@ -16,17 +16,20 @@
 	 * @mixins OO.EventEmitter
 	 *
 	 * @constructor
+	 * @param {ve.dm.Document} doc Document to use associate with API requests
 	 */
-	ve.dm.MWTransclusionModel = function VeDmMWTransclusionModel() {
+	ve.dm.MWTransclusionModel = function VeDmMWTransclusionModel( doc ) {
 		// Mixin constructors
 		OO.EventEmitter.call( this );
 
 		// Properties
+		this.doc = doc;
 		this.parts = [];
 		this.uid = 0;
 		this.requests = [];
 		this.queue = [];
 		this.specCache = specCache;
+
 	};
 
 	/* Inheritance */
@@ -304,7 +307,7 @@
 	};
 
 	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, specs, queue ) {
-		var xhr = new mw.Api().get( {
+		var xhr = ve.init.target.getContentApi( this.doc ).get( {
 			action: 'templatedata',
 			titles: titles,
 			lang: mw.config.get( 'wgUserLanguage' ),

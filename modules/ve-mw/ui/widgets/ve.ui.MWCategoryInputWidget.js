@@ -15,7 +15,7 @@
  * @constructor
  * @param {ve.ui.MWCategoryWidget} categoryWidget
  * @param {Object} [config] Configuration options
- * @cfg {mw.Api} [api] API object to use, creates a default mw.Api instance if not specified
+ * @cfg {mw.Api} [api] API object to use, uses Target#getContentApi if not specified
  */
 ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget, config ) {
 	// Config initialization
@@ -31,7 +31,7 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 
 	// Properties
 	this.categoryWidget = categoryWidget;
-	this.api = config.api || new mw.Api();
+	this.api = config.api || ve.init.target.getContentApi();
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwCategoryInputWidget' );

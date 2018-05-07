@@ -58,7 +58,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.edited = false;
 	this.restoring = !!this.requestedRevId && this.requestedRevId !== this.currentRevisionId;
 	this.pageDeletedWarning = false;
-	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.pageName ) ) )
+	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.getPageName() ) ) )
 		.extend( {
 			action: 'submit',
 			veswitched: 1
@@ -422,7 +422,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	this.checkboxesByName = {};
 	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
 		$( '#firstHeading' ).text(
-			mw.Title.newFromText( this.pageName ).getPrefixedText()
+			mw.Title.newFromText( this.getPageName() ).getPrefixedText()
 		);
 	}
 
@@ -553,7 +553,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 	var mode = this.getSurface().getMode();
 	this.getSurface().getModel().storeDocState( {
 		request: {
-			pageName: this.pageName,
+			pageName: this.getPageName(),
 			mode: mode,
 			// Only source mode fetches data by section
 			section: mode === 'source' ? this.section : null
@@ -1122,10 +1122,10 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			wikitext = '== ' + this.sectionTitle.getValue() + ' ==\n\n' + wikitext;
 		}
 
-		new mw.Api().post( {
+		this.getContentApi().post( {
 			action: 'visualeditor',
 			paction: 'parsedoc',
-			page: this.pageName,
+			page: this.getPageName(),
 			wikitext: wikitext,
 			pst: true
 		} ).always( function ( response, details ) {
@@ -1197,7 +1197,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				// re-fetch the HTML
 				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( target.doc, 'visual' ) ).promise();
 			} else {
-				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.pageName, undefined, target.section !== null ? target.section : undefined );
+				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), undefined, target.section !== null ? target.section : undefined );
 			}
 		}
 
@@ -1293,7 +1293,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	this.events.trackActivationStart( mw.libs.ve.activationStart );
 	mw.libs.ve.activationStart = null;
 
-	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.pageName, {
+	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.getPageName(), {
 		sessionStore: true,
 		section: this.section,
 		oldId: this.requestedRevId,
@@ -1411,12 +1411,12 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 			if ( aborted ) {
 				return $.Deferred().reject();
 			}
-			xhr = new mw.Api().postWithToken( 'csrf',
+			xhr = target.getContentApi().postWithToken( 'csrf',
 				{
 					action: 'visualeditoredit',
 					paction: 'serializeforcache',
 					html: deflatedHtml,
-					page: target.pageName,
+					page: target.getPageName(),
 					oldid: target.revid,
 					etag: target.etag
 				},
@@ -1497,7 +1497,7 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * @return {jQuery.Promise}
  */
 ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
-	var data, postData, preparedCacheKey,
+	var data, postData, preparedCacheKey, api,
 		target = this;
 
 	if ( this.getSurface().getMode() === 'source' ) {
@@ -1513,10 +1513,11 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 			postData.sectiontitle = this.sectionTitle.getValue();
 			postData.summary = undefined;
 		}
+		api = this.getContentApi();
 		if ( postData.token ) {
-			return new mw.Api().post( postData, { contentType: 'multipart/form-data' } );
+			return api.post( postData, { contentType: 'multipart/form-data' } );
 		}
-		return new mw.Api().postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
+		return api.postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
 	}
 
 	preparedCacheKey = this.getPreparedCacheKey( doc );
@@ -1542,10 +1543,11 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, opt
 		}
 		return deflatePromise
 			.then( function () {
+				var api = target.getContentApi();
 				if ( data.token ) {
-					return new mw.Api().post( data, { contentType: 'multipart/form-data' } );
+					return api.post( data, { contentType: 'multipart/form-data' } );
 				}
-				return new mw.Api().postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
+				return api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
 			} )
 			.then(
 				function ( response, jqxhr ) {
@@ -1738,7 +1740,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 	data = ve.extendObject( {}, options, {
 		action: 'visualeditoredit',
 		paction: 'save',
-		page: this.pageName,
+		page: this.getPageName(),
 		oldid: this.revid,
 		basetimestamp: this.baseTimeStamp,
 		starttimestamp: this.startTimeStamp,
@@ -1797,7 +1799,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 		this.wikitextDiffPromise = this.tryWithPreparedCacheKey( doc, {
 			action: 'visualeditoredit',
 			paction: 'diff',
-			page: this.pageName,
+			page: this.getPageName(),
 			oldid: this.revid,
 			etag: this.etag
 		}, 'diff' ).then( function ( response ) {
@@ -1893,7 +1895,7 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 	this.serializing = this.tryWithPreparedCacheKey( doc, {
 		action: 'visualeditoredit',
 		paction: 'serialize',
-		page: this.pageName,
+		page: this.getPageName(),
 		oldid: this.revid,
 		etag: this.etag
 	}, 'serialize' )
@@ -2369,7 +2371,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		}
 
 		if ( prefSaysShow ) {
-			new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+			ve.init.target.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
 			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 
 			// No need to set a cookie every time for logged-in users that have already
@@ -2401,7 +2403,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 
 	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
 		if ( discardChanges ) {
-			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.pageName, {
+			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.getPageName(), {
 				sessionStore: true,
 				section: this.section,
 				oldId: this.requestedRevId,
@@ -2477,7 +2479,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 				windowManager.destroy();
 			} );
 	} else {
-		dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.pageName, {
+		dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.getPageName(), {
 			oldId: this.revid,
 			targetName: this.constructor.static.trackingName,
 			modified: this.edited,

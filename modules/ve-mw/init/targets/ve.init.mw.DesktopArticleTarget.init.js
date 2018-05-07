@@ -322,7 +322,7 @@
 		if ( mw.user.options.get( 'visualeditor-editor' ) === editor ) {
 			return $.Deferred().resolve();
 		}
-		return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
+		return ve.init.target.getLocalApi().saveOption( 'visualeditor-editor', editor ).then( function () {
 			mw.user.options.set( 'visualeditor-editor', editor );
 		} );
 	}
@@ -1237,7 +1237,7 @@
 					} );
 
 				if ( prefSaysShowWelcome ) {
-					new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+					ve.init.target.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
 					mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 				} else if ( !isLoggedIn && !urlSaysHideWelcome ) {
 					if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {

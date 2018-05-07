@@ -435,10 +435,11 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
  * token was expired / the user changed. If the user did change, this updates
  * the current user.
  *
+ * @param {ve.dm.Document} [doc] Document to associate with the API request
  * @return {jQuery.Promise} Promise resolved with whether we switched users
  */
-ve.init.mw.Target.prototype.refreshEditToken = function () {
-	var api = new mw.Api(),
+ve.init.mw.Target.prototype.refreshEditToken = function ( doc ) {
+	var api = this.getContentApi( doc ),
 		deferred = $.Deferred(),
 		target = this;
 	api.get( {
@@ -506,7 +507,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 			token: this.editToken,
 			paction: 'serialize',
 			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
-			page: this.pageName
+			page: this.getPageName()
 		};
 
 	// Optimise as a no-op
@@ -519,7 +520,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 		params.etag = this.etag;
 	}
 
-	xhr = new mw.Api().post(
+	xhr = this.getContentApi( doc ).post(
 		params,
 		{ contentType: 'multipart/form-data' }
 	);
@@ -531,7 +532,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 		return $.Deferred().reject();
 	}, function ( error ) {
 		if ( error === 'badtoken' && !isRetry ) {
-			return target.refreshEditToken().then( function () {
+			return target.refreshEditToken( doc ).then( function () {
 				return target.getWikitextFragment( doc, useRevision, true );
 			} );
 		}
@@ -549,15 +550,52 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
  *
  * @param {string} wikitext Wikitext
  * @param {boolean} pst Perform pre-save transform
- * @param {ve.dm.Document} [doc] Parse for a specific document
+ * @param {ve.dm.Document} [doc] Parse for a specific document, defaults to current surface's
  * @return {jQuery.Promise} Abortable promise
  */
-ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst ) {
-	return new mw.Api().post( {
+ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, doc ) {
+	return this.getContentApi( doc ).post( {
 		action: 'visualeditor',
 		paction: 'parsefragment',
-		page: this.pageName,
+		page: this.getPageName( doc ),
 		wikitext: wikitext,
 		pst: pst
 	} );
+};
+
+/**
+ * Get the page name associated with a specific document
+ *
+ * @param {ve.dm.Document} [doc] Document, defaults to current surface's
+ * @return {string} Page name
+ */
+ve.init.mw.Target.prototype.getPageName = function () {
+	return this.pageName;
+};
+
+/**
+ * Get an API object associated with the wiki where the document
+ * content is hosted.
+ *
+ * This would be overridden if editing content on another wiki.
+ *
+ * @param {ve.dm.Document} [doc] API for a specific document, should default to document of current surface.
+ * @param {Object} [options] API options
+ * @return {mw.Api} API object
+ */
+ve.init.mw.Target.prototype.getContentApi = function ( doc, options ) {
+	return new mw.Api( options );
+};
+
+/**
+ * Get an API object associated with the local wiki.
+ *
+ * For example you would always use getLocalApi for actions
+ * associated with the current user.
+ *
+ * @param {Object} [options] API options
+ * @return {mw.Api} API object
+ */
+ve.init.mw.Target.prototype.getLocalApi = function ( options ) {
+	return new mw.Api( options );
 };

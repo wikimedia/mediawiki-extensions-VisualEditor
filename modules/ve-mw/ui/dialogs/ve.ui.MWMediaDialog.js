@@ -745,7 +745,7 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 	if ( dimensions.height ) {
 		apiObj.iiurlheight = dimensions.height;
 	}
-	return new mw.Api().get( apiObj )
+	return ve.init.target.getContentApi( this.getFragment().getDocument() ).get( apiObj )
 		.then( function ( response ) {
 			var thumburl = ve.getProp(
 				response.query.pages[ response.query.pageids[ 0 ] ],

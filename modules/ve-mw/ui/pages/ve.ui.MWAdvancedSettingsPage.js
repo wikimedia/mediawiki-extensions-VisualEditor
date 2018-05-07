@@ -222,7 +222,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	displayTitleItem = this.getMetaItem( 'mwDisplayTitle' );
 	displayTitle = displayTitleItem && displayTitleItem.getAttribute( 'content' ) || '';
 	if ( !displayTitle ) {
-		displayTitle = mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText();
+		displayTitle = mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText();
 	}
 	this.displayTitleInput.setValue( displayTitle );
 	this.displayTitleTouched = false;
@@ -300,7 +300,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 	// Display title items
 	currentDisplayTitleItem = this.getMetaItem( 'mwDisplayTitle' );
 	newDisplayTitle = this.displayTitleInput.getValue();
-	if ( newDisplayTitle === mw.Title.newFromText( ve.init.target.pageName ).getPrefixedText() ) {
+	if ( newDisplayTitle === mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText() ) {
 		newDisplayTitle = '';
 	}
 	newDisplayTitleItem = { type: 'mwDisplayTitle', attributes: { content: newDisplayTitle } };
