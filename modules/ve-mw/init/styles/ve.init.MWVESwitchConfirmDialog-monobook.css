@@ -6,9 +6,6 @@
  */
 
 .wikiEditor-ui-toolbar .ve-init-mw-editSwitch {
-	font-size: 1.0079em;
-}
-
-.ve-init-mw-editSwitch .oo-ui-buttonElement-button {
-	padding: 0.35em;
+	/* 12.8/12.7 */
+	font-size: 1.00787em;
 }
