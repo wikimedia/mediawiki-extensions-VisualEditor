@@ -2583,3 +2583,78 @@ ve.init.mw.ArticleTarget.prototype.updateRedirectInterface = function ( $sub, $m
 		$( '#mw-content-text' ).before( $msg );
 	}
 };
+
+/**
+ * Render a list of categories
+ *
+ * @param {ve.dm.MetaItem[]} categoryItems Array of category metaitems to display
+ * @return {jQuery.Promise} A promise which will be resolved with the rendered categories
+ */
+ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems ) {
+	var $normal, $hidden,
+		promises = [],
+		categories = { hidden: [], normal: [] };
+	categoryItems.forEach( function ( categoryItem ) {
+		var attributes = ve.cloneObject( ve.getProp( categoryItem, 'element', 'attributes' ) );
+		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( function ( result ) {
+			if ( result.hidden ) {
+				categories.hidden.push( attributes );
+			} else {
+				categories.normal.push( attributes );
+			}
+		} ) );
+	} );
+	return $.when.apply( $, promises ).then( function () {
+		var $output = $( '<div class="catlinks" />' );
+		function renderPageLink( page ) {
+			var title = mw.Title.newFromText( page.category || page );
+			return $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() );
+		}
+		function renderPageLinks( pages ) {
+			var i, $list = $( '<ul />' );
+			for ( i = 0; i < pages.length; i++ ) {
+				$list.append( $( '<li />' ).append( renderPageLink( pages[ i ] ) ) );
+			}
+			return $list;
+		}
+		function categorySort( a, b ) {
+			var sortA = a.sortkey || a.category,
+				sortB = b.sortkey || b.category;
+			if ( sortA < sortB ) {
+				return -1;
+			}
+			if ( sortA > sortB ) {
+				return 1;
+			}
+			return 0;
+		}
+		if ( categories.normal.length ) {
+			categories.normal.sort( categorySort );
+			$normal = $( '<div class="mw-normal-catlinks" />' );
+			$normal.append(
+				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categories.normal.length ) ),
+				ve.msg( 'colon-separator' ),
+				renderPageLinks( categories.normal )
+			);
+			$output.append( $normal );
+		}
+		if ( categories.hidden.length ) {
+			categories.hidden.sort( categorySort );
+			$hidden = $( '<div class="mw-hidden-catlinks" />' );
+			if ( mw.user.options.get( 'showhiddencats' ) ) {
+				$hidden.addClass( 'mw-hidden-cats-user-shown' );
+			} else if ( mw.config.get( 'wgNamespaceIds' ).category === mw.config.get( 'wgNamespaceNumber' ) ) {
+				$hidden.addClass( 'mw-hidden-cats-ns-shown' );
+			} else {
+				$hidden.addClass( 'mw-hidden-cats-hidden' );
+			}
+			$hidden.append(
+				ve.msg( 'hidden-categories', categories.hidden.length ),
+				ve.msg( 'colon-separator' ),
+				renderPageLinks( categories.hidden )
+			);
+			$output.append( $hidden );
+		}
+		return $output;
+	} );
+};

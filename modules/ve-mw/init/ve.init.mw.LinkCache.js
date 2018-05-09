@@ -56,6 +56,7 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
 		known: page.known !== undefined,
 		redirect: page.redirect !== undefined,
 		disambiguation: ve.getProp( page, 'pageprops', 'disambiguation' ) !== undefined,
+		hidden: ve.getProp( page, 'pageprops', 'hiddencat' ) !== undefined,
 		imageUrl: ve.getProp( page, 'thumbnail', 'source' ),
 		description: page.description
 	};
@@ -191,7 +192,7 @@ ve.init.mw.LinkCache.prototype.getRequestPromise = function ( subqueue ) {
 		prop: 'info|pageprops|pageimages|description',
 		pithumbsize: 80,
 		pilimit: subqueue.length,
-		ppprop: 'disambiguation',
+		ppprop: 'disambiguation|hiddencat',
 		titles: subqueue,
 		'continue': ''
 	} );

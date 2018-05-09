@@ -189,10 +189,11 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
-	var body, contents, $heading, redirectMeta,
+	var body, contents, $heading, redirectMeta, deferred,
 		$redirect = $(),
 		categories = [],
-		modules = [];
+		modules = [],
+		dialog = this;
 
 	if ( docOrMsg instanceof HTMLDocument ) {
 		// Extract required modules for stylesheet tags (avoids re-loading styles)
@@ -210,7 +211,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		body = docOrMsg.body;
 		// Take a snapshot of all categories
 		Array.prototype.forEach.call( body.querySelectorAll( 'link[rel~="mw:PageProp/Category"]' ), function ( element ) {
-			categories.push( ve.dm.MWCategoryMetaItem.static.toDataElement( [ element ] ).attributes.category );
+			categories.push( ve.dm.nodeFactory.createFromElement( ve.dm.MWCategoryMetaItem.static.toDataElement( [ element ] ) ) );
 		} );
 		// Import body to current document, then resolve attributes against original document (parseDocument called #fixBase)
 		document.adoptNode( body );
@@ -258,25 +259,27 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			)
 		);
 
-		if ( categories.length ) {
-			// Simple category list rendering
-			this.$previewViewer.append(
-				$( '<div>' ).addClass( 'catlinks' ).append(
-					document.createTextNode( ve.msg( 'pagecategories', categories.length ) + ve.msg( 'colon-separator' ) ),
-					$( '<ul>' ).append( categories.map( function ( category ) {
-						var title = mw.Title.newFromText( category );
-						return $( '<li>' ).append( $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() ) );
-					} ) )
-				)
-			);
-		}
-
 		ve.targetLinksToNewWindow( this.$previewViewer[ 0 ] );
 		// Add styles so links render with their appropriate classes
 		ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
 
-		// Run hooks so other things can alter the document
-		mw.hook( 'wikipage.content' ).fire( this.$previewViewer );
+		if ( categories.length ) {
+			// If there are categories, we need to render them. This involves
+			// a delay, since they might be hidden categories.
+			deferred = ve.init.target.renderCategories( categories ).done( function ( $categories ) {
+				dialog.$previewViewer.append( $categories );
+
+				ve.targetLinksToNewWindow( $categories[ 0 ] );
+				// Add styles so links render with their appropriate classes
+				ve.init.platform.linkCache.styleParsoidElements( $categories, baseDoc );
+			} );
+		} else {
+			deferred = $.Deferred.resolve();
+		}
+		deferred.done( function () {
+			// Run hooks so other things can alter the document
+			mw.hook( 'wikipage.content' ).fire( dialog.$previewViewer );
+		} );
 	} else {
 		this.$previewViewer.empty().append(
 			$( '<em>' ).text( docOrMsg )
