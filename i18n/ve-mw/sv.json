@@ -19,7 +19,8 @@
 			"Rockyfelle",
 			"Warrakkk",
 			"Thurs",
-			"Bengtsson96"
+			"Bengtsson96",
+			"Rotsee"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Fel uppstod när förfrågan skickades till MediaWiki API",
@@ -437,7 +438,7 @@
 	"visualeditor-shortcuts-insert": "Infoga",
 	"visualeditor-special-characters-group-other": "Används ofta",
 	"visualeditor-templatesused-tool": "Mallar som används",
-	"visualeditor-toload": "Editorn kommer nu ladda. Om du fortfarande ser det här meddelandat efter några sekunder, snälla [$1 ladda om sidan].",
+	"visualeditor-toload": "Editorn kommer nu laddas. Prova att [$1 ladda om sidan] om du fortfarande ser det här meddelandet efter några sekunder.",
 	"visualeditor-toolbar-savedialog": "Spara sidan",
 	"visualeditor-toolbar-savedialog-short": "Spara",
 	"visualeditor-usernamespacepagelink": "Project:Användarsidor",
