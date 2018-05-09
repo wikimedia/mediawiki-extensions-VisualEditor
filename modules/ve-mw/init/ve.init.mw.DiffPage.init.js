@@ -91,7 +91,8 @@
 
 	mw.hook( 'wikipage.diff' ).add( function () {
 		$wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
-		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' );
+		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' )
+			.add( $wikitextDiffContainer.find( 'td.diff-multi, td.diff-notice' ).parent() );
 		$wikitextDiffBody = $wikitextDiffContainer.find( 'tr' ).not( $wikitextDiffHeader );
 		$wikitextDiffContainer.after( $visualDiffContainer );
 
