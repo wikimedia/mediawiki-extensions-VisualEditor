@@ -31,13 +31,24 @@
 
 .ve-init-mw-diffPage-revSlider-visual {
 
-	.mw-revslider-pointer-line,
-	.mw-revslider-revision-border-box {
-		display: none !important; /* stylelint-disable-line declaration-no-important */
-	}
-
 	@new: #39b79c;
 	@old: #d73c34;
+
+	.mw-revslider-pointer-line  {
+		.mw-revslider-upper-color {
+			border-color: @new;
+		}
+		.mw-revslider-lower-color {
+			border-color: @old;
+		}
+	}
+
+	.mw-revslider-revision-new .mw-revslider-revision-border-box {
+		border-bottom-color: @new;
+	}
+	.mw-revslider-revision-old .mw-revslider-revision-border-box {
+		border-bottom-color: @old;
+	}
 
 	.mw-revslider-revision-hovered {
 		&.mw-revslider-revision-wrapper-up .mw-revslider-pointer-ghost  {
