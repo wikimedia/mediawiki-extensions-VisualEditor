@@ -81,6 +81,10 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
 		return;
 	}
 
+	if ( this.model.getAttribute( 'collapsible' ) ) {
+		mw.loader.load( 'jquery.makeCollapsible.styles' );
+	}
+
 	this.$element.toggleClass( 'jquery-tablesorter', this.model.getAttribute( 'sortable' ) );
 
 	this.$sortableHeaders.removeClass( 'headerSort' );

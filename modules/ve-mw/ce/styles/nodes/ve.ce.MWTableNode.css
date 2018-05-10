@@ -13,3 +13,24 @@
 .ve-ce-mwTableNode.jquery-tablesorter th.ve-ce-tableCellNode-header.ve-ce-tableCellNode-editing.headerSort {
 	cursor: text;
 }
+
+/* Prevent jQuery.makeCollapsible from hiding the rows, even if collapsed by default */
+.client-js .ve-ce-mwTableNode.mw-collapsed:not( .mw-made-collapsible ) tr:not( :first-child ) {
+	display: table-row;
+}
+
+.client-js .ve-ce-mwTableNode.mw-collapsed:not( .mw-made-collapsible ) > thead + tbody {
+	display: table-row-group;
+}
+
+/* Allow jQuery.makeCollapsible fake toggle buttons to float around the text */
+.ve-ce-mwTableNode .ve-ce-tableCaptionNode .ve-ce-paragraphNode:only-child,
+.ve-ce-mwTableNode .ve-ce-tableCellNode .ve-ce-paragraphNode:only-child {
+	display: inline;
+}
+
+/* Grey out the fake toggles to make it more obvious they are not interactive */
+.ve-ce-mwTableNode.mw-collapsible :first-child tr:first-child th:last-child:before,
+.ve-ce-mwTableNode.mw-collapsible > caption:first-child:after {
+	color: #999;
+}
