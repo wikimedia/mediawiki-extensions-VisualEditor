@@ -32,6 +32,16 @@ OO.inheritClass( ve.ui.MWPreviewElement, ve.ui.PreviewElement );
 /**
  * @inheritdoc
  */
+ve.ui.MWPreviewElement.prototype.setModel = function ( model ) {
+	// Parent method
+	ve.ui.MWPreviewElement.super.prototype.setModel.call( this, model );
+
+	this.$element.addClass( 'mw-content-' + this.model.getDocument().getDir() );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWPreviewElement.prototype.replaceWithModelDom = function () {
 	// Parent method
 	ve.ui.MWPreviewElement.super.prototype.replaceWithModelDom.apply( this, arguments );
