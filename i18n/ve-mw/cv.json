@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Chuvash2014",
-			"Chavash"
+			"Chavash",
+			"Chuvash"
 		]
 	},
-	"tooltip-ca-ve-edit": "Эле тӳрлет",
+	"tooltip-ca-ve-edit": "Кăна тӳрлет",
 	"visualeditor-ca-editsource": "Кодне тӳрлет",
 	"visualeditor-ca-editsource-section": "кодне тӳрлет",
 	"visualeditor-categories-tool": "Категорисем",
