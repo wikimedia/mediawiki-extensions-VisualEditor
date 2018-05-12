@@ -52,15 +52,22 @@ ve.init.mw.CollabTarget.static.name = 'collab';
 ve.init.mw.CollabTarget.static.trackingName = 'collab';
 
 ve.init.mw.CollabTarget.static.actionGroups = [
-	{ include: [ 'help' ] },
 	{
+		name: 'help',
+		include: [ 'help' ]
+	},
+	{
+		name: 'pageMenu',
 		type: 'list',
 		icon: 'menu',
 		indicator: null,
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 		include: [ 'changeDirectionality', 'findAndReplace' ]
 	},
-	{ include: [ 'authorList' ] }
+	{
+		name: 'authorList',
+		include: [ 'authorList' ]
+	}
 ];
 
 /* Methods */

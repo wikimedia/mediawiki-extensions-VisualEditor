@@ -86,8 +86,12 @@ OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.ArticleTarget );
 /* Static Properties */
 
 ve.init.mw.DesktopArticleTarget.static.actionGroups = [
-	{ include: [ 'help', 'notices' ] },
 	{
+		name: 'help',
+		include: [ 'help', 'notices' ]
+	},
+	{
+		name: 'pageMenu',
 		type: 'list',
 		icon: 'menu',
 		indicator: null,
@@ -95,6 +99,7 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		include: [ 'meta', 'categories', 'settings', 'advancedSettings', 'languages', 'templatesUsed', 'changeDirectionality', 'findAndReplace' ]
 	},
 	{
+		name: 'editMode',
 		type: 'list',
 		icon: 'edit',
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),

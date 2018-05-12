@@ -48,20 +48,20 @@ OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 ve.init.mw.Target.static.name = null;
 
 ve.init.mw.Target.static.toolbarGroups = [
-	// History
-	{ include: [ 'undo', 'redo' ] },
-	// Format
 	{
-		classes: [ 've-test-toolbar-format' ],
+		name: 'history',
+		include: [ 'undo', 'redo' ]
+	},
+	{
+		name: 'format',
 		type: 'menu',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
 		include: [ { group: 'format' } ],
 		promote: [ 'paragraph' ],
 		demote: [ 'preformatted', 'blockquote', 'heading1' ]
 	},
-	// Style
 	{
-		classes: [ 've-test-toolbar-style' ],
+		name: 'style',
 		type: 'list',
 		icon: 'textStyle',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
@@ -70,28 +70,34 @@ ve.init.mw.Target.static.toolbarGroups = [
 		promote: [ 'bold', 'italic' ],
 		demote: [ 'strikethrough', 'code', 'underline', 'language', 'big', 'small', 'clear' ]
 	},
-	// Link
-	{ include: [ 'link' ] },
-	// Structure
 	{
-		classes: [ 've-test-toolbar-structure' ],
+		name: 'link',
+		include: [ 'link' ]
+	},
+	// Placeholder for reference tools (e.g. Cite and/or Citoid)
+	{
+		name: 'reference'
+	},
+	{
+		name: 'structure',
 		type: 'list',
 		icon: 'listBullet',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
 		include: [ { group: 'structure' } ],
 		demote: [ 'outdent', 'indent' ]
 	},
-	// Insert
 	{
-		classes: [ 've-test-toolbar-insert' ],
+		name: 'insert',
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		include: '*',
 		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
 		promote: [ 'media', 'transclusion', 'insertTable' ]
 	},
-	// SpecialCharacter
-	{ include: [ 'specialCharacter' ] }
+	{
+		name: 'specialCharacter',
+		include: [ 'specialCharacter' ]
+	}
 ];
 
 ve.init.mw.Target.static.importRules = {
