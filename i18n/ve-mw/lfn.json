@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Katxis",
-			"Cgboeree"
+			"Cgboeree",
+			"Robin van der Vliet"
 		]
 	},
 	"tooltip-ca-ve-edit": "Edita esta paje",
@@ -10,5 +11,11 @@
 	"visualeditor-ca-createsource": "Crea fonte",
 	"visualeditor-ca-editsource": "Edita la fonte",
 	"visualeditor-ca-editsource-section": "edita la fonte",
-	"visualeditor-descriptionpagelink": "Project:EditadorVidal"
+	"visualeditor-descriptionpagelink": "Project:EditadorVidal",
+	"visualeditor-dialog-meta-languages-label": "Linguas",
+	"visualeditor-dialog-meta-languages-name-label": "Lingua",
+	"visualeditor-dialog-meta-languages-section": "Linguas",
+	"visualeditor-languages-tool": "Linguas",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Lingua",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Linguas"
 }

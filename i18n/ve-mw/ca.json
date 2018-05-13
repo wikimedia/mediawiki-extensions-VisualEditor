@@ -153,7 +153,7 @@
 	"visualeditor-dialog-meta-settings-index-disable": "No",
 	"visualeditor-dialog-meta-settings-index-force": "Sí­",
 	"visualeditor-dialog-meta-settings-index-help": "Pots obligar als motors de cerca a llistar aquesta pàgina en els seus resultats rellevants, o obligar-los a no fer-ho.",
-	"visualeditor-dialog-meta-settings-index-label": "Permet que aquesta pàgina sigui indexada pels motors de cerca",
+	"visualeditor-dialog-meta-settings-index-label": "Permet que els cercadors indexin aquesta pàgina",
 	"visualeditor-dialog-meta-settings-label": "Configuració de la pàgina",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Per defecte",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "No",
