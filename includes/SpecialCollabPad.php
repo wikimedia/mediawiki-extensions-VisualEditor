@@ -80,6 +80,7 @@ class SpecialCollabPad extends SpecialPage {
 				'infusable' => true
 			] ),
 			[
+				'align' => 'top',
 				'classes' => [ 've-init-mw-collabTarget-nameField' ],
 				'infusable' => true
 			]
