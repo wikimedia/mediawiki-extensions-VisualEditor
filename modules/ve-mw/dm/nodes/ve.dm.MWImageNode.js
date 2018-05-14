@@ -147,14 +147,20 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 };
 
 ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
-	if ( key === 'align' ) {
-		return ve.msg( 'visualeditor-changedesc-align',
-			// Messages used:
-			// visualeditor-align-widget-left, visualeditor-align-widget-right,
-			// visualeditor-align-widget-center, visualeditor-align-widget-default
-			ve.msg( 'visualeditor-align-widget-' + change.from ),
-			ve.msg( 'visualeditor-align-widget-' + change.to )
-		);
+	switch ( key ) {
+		case 'align':
+			return ve.msg( 'visualeditor-changedesc-align',
+				// Messages used:
+				// visualeditor-align-desc-left, visualeditor-align-desc-right,
+				// visualeditor-align-desc-center, visualeditor-align-desc-default,
+				// visualeditor-align-desc-none
+				ve.msg( 'visualeditor-align-desc-' + change.from ),
+				ve.msg( 'visualeditor-align-desc-' + change.to )
+			);
+		case 'originalClasses':
+		case 'unrecognizedClasses':
+			return;
+		// TODO: Handle valign
 	}
 	// Parent method
 	return ve.dm.Node.static.describeChange.apply( this, arguments );
