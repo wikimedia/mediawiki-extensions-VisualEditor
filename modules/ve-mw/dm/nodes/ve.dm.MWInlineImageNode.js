@@ -96,34 +96,17 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		attributes.borderImage = true;
 		recognizedClasses.push( 'mw-image-border' );
 	}
+
 	// Vertical alignment
-	if ( classes.indexOf( 'mw-valign-middle' ) !== -1 ) {
-		attributes.valign = 'middle';
-		recognizedClasses.push( 'mw-valign-middle' );
-	} else if ( classes.indexOf( 'mw-valign-baseline' ) !== -1 ) {
-		attributes.valign = 'baseline';
-		recognizedClasses.push( 'mw-valign-baseline' );
-	} else if ( classes.indexOf( 'mw-valign-sub' ) !== -1 ) {
-		attributes.valign = 'sub';
-		recognizedClasses.push( 'mw-valign-sub' );
-	} else if ( classes.indexOf( 'mw-valign-super' ) !== -1 ) {
-		attributes.valign = 'super';
-		recognizedClasses.push( 'mw-valign-super' );
-	} else if ( classes.indexOf( 'mw-valign-top' ) !== -1 ) {
-		attributes.valign = 'top';
-		recognizedClasses.push( 'mw-valign-top' );
-	} else if ( classes.indexOf( 'mw-valign-text-top' ) !== -1 ) {
-		attributes.valign = 'text-top';
-		recognizedClasses.push( 'mw-valign-text-top' );
-	} else if ( classes.indexOf( 'mw-valign-bottom' ) !== -1 ) {
-		attributes.valign = 'bottom';
-		recognizedClasses.push( 'mw-valign-bottom' );
-	} else if ( classes.indexOf( 'mw-valign-text-bottom' ) !== -1 ) {
-		attributes.valign = 'text-bottom';
-		recognizedClasses.push( 'mw-valign-text-bottom' );
-	} else {
-		attributes.valign = 'default';
-	}
+	attributes.valign = 'default';
+	[ 'midde', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' ].some( function ( valign ) {
+		var className = 'mw-valign-' + valign;
+		if ( classes.indexOf( className ) !== -1 ) {
+			attributes.valign = valign;
+			recognizedClasses.push( className );
+			return true;
+		}
+	} );
 
 	// Border
 	if ( classes.indexOf( 'mw-image-border' ) !== -1 ) {
